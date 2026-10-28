@@ -204,6 +204,7 @@ document.addEventListener('click', e => {
     else if (act === 'unit') { e.preventDefault(); selectUnit(el.dataset.id); }
     else if (act === 'play') { e.preventDefault(); playUnit(); }
     else if (act === 'home') { e.preventDefault(); stopPlay(); window.location.href = 'index.html'; }
+    else if (act === 'idioms') { e.preventDefault(); stopPlay(); window.location.href = 'idioms.html'; }
   } catch (err) {
     console.error('[单词本] 操作出错:', err);
   }
