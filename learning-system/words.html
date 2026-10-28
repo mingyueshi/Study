@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="乐学堂 · 单词本：按单元学习英语单词，大示意图、中文注释、音标、拆分记忆与相关词，全部可点读。">
+  <title>单词本 · 乐学堂</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E📘%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="words.css">
+</head>
+<body>
+  <div id="app">
+    <header>
+      <button class="logo" data-act="home">📘 单词本</button>
+      <span class="stats-pill" id="stats"></span>
+      <span class="spacer"></span>
+      <button class="back-btn" data-act="home">⬅ 返回乐学堂</button>
+    </header>
+
+    <nav id="chips" aria-label="单元切换"></nav>
+
+    <section class="toolbar">
+      <div class="search-box">
+        <span>🔎</span>
+        <input id="search" type="search" placeholder="搜索单词、中文或单元名…" autocomplete="off">
+      </div>
+      <select id="voiceSel" class="voice-sel" title="选择英语发音人"></select>
+      <button class="play-btn" id="playBtn" data-act="play">▶️ 连读本单元</button>
+    </section>
+
+    <main id="cards"></main>
+  </div>
+
+  <script src="speech.js"></script>
+  <script src="words-data.js"></script>
+  <script src="words-app.js"></script>
+</body>
+</html>

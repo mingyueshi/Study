@@ -1,0 +1,4 @@
+# 本地工具产物
+.mimosa/
+.video_agent/
+.DS_Store
