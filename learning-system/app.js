@@ -343,6 +343,7 @@ function viewHome() {
     '<footer class="footer-row">' +
     '<button class="mini-btn" data-act="words">📘 单词本</button>' +
     '<button class="mini-btn" data-act="idioms">🏮 成语本</button>' +
+    '<button class="mini-btn" data-act="writing">✏️ 作文坊</button>' +
     '<button class="mini-btn" data-act="wrong">📕 错题本（' + wrongTotal + '）</button>' +
     '<button class="mini-btn" data-act="settings">🏅 我的成就</button>' +
     '</footer>';
@@ -601,6 +602,7 @@ const ACTIONS = {
   home() { clearSession(); view = 'home'; render(); },
   words() { window.location.href = 'words.html'; },
   idioms() { window.location.href = 'idioms.html'; },
+  writing() { window.location.href = 'writing.html'; },
   subject(d) { curSubject = d.id; clearSession(); view = 'subject'; render(); },
   mode(d) {
     const m = modeById(curSubject, d.mid);

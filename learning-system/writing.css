@@ -1,0 +1,102 @@
+/* ============================================================
+   乐学堂 · 作文坊 —— 专属样式（卡片复用 words.css 的 .wcard 体系）
+   ============================================================ */
+
+/* 结构锦囊步骤 */
+.step-text {
+  font-size: 15px; font-weight: 600; color: #4a4560; line-height: 1.7;
+  cursor: pointer; border: none; background: none; text-align: left;
+  padding: 2px 4px; font-family: inherit; flex: 1;
+}
+.step-text:active { background: #f3ecdc; border-radius: 8px; }
+.step-text b { color: var(--c); }
+
+/* 好句 */
+.good-sent {
+  display: block; width: 100%; border: none; background: none; text-align: left;
+  font-size: 15px; color: #4a4560; font-weight: 600; line-height: 1.7;
+  cursor: pointer; padding: 3px 4px; font-family: inherit;
+}
+.good-sent:active { background: #f3ecdc; border-radius: 8px; }
+
+/* 范文与点评 */
+.model-box { margin-top: 10px; }
+.model-essay {
+  background: #fbf6e9; border-radius: 12px; padding: 12px 14px;
+  font-size: 15px; line-height: 1.9; color: #4a4560; font-weight: 600;
+  white-space: pre-wrap; cursor: pointer; border: none; text-align: left;
+  width: 100%; font-family: inherit;
+}
+.model-essay:active { transform: scale(.995); }
+.comment {
+  margin-top: 8px; background: #eef7f0; border-radius: 10px;
+  padding: 9px 12px; font-size: 14px; color: #1f7a4d; font-weight: 600;
+  line-height: 1.7; cursor: pointer; border: none; text-align: left; width: 100%;
+  font-family: inherit;
+}
+.comment:active { transform: scale(.995); }
+.toggle-btn {
+  border: 2px solid #e5decd; background: #faf7f0; border-radius: 12px;
+  padding: 8px 14px; font-size: 15px; font-weight: 800; color: #7a7466;
+}
+.toggle-btn:active { transform: translateY(2px); }
+
+/* 小练笔 */
+.task-line { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.task-text { flex: 1; font-size: 15px; font-weight: 600; color: #4a4560; line-height: 1.6; min-width: 180px; }
+
+/* ---------- 我的作文本 ---------- */
+.draft-btn { background: linear-gradient(135deg, #74c0fc, #3b7dd8); box-shadow: 0 4px 0 #2b5fa8; }
+.draft-btn:active { box-shadow: 0 1px 0 #2b5fa8; }
+.draft-title {
+  width: 100%; font-size: 19px; font-weight: 800; padding: 10px 14px;
+  border: 2px solid #eee2cf; border-radius: 14px; background: #fffdf7;
+  outline: none; font-family: inherit; color: var(--ink); margin-bottom: 10px;
+}
+.draft-title:focus { border-color: var(--blue, #4d96ff); }
+.draft-textarea {
+  width: 100%; min-height: 300px; font-family: inherit; font-size: 17px;
+  line-height: 2; padding: 14px; border: 2px solid #eee2cf; border-radius: 16px;
+  background: #fffdf7; outline: none; resize: vertical; color: var(--ink);
+}
+.draft-textarea:focus { border-color: #4d96ff; }
+.stat-line { font-size: 14px; color: #8a8498; font-weight: 700; margin: 10px 0 6px; }
+.hint-box {
+  background: #fff7e8; border-radius: 12px; padding: 10px 14px;
+  font-size: 14px; color: #a06a00; font-weight: 600; line-height: 1.8;
+}
+.hint-box b { color: #c96f00; }
+.draft-item {
+  display: flex; align-items: center; gap: 10px; padding: 11px 4px;
+  border-bottom: 2px dashed #f0e9da; flex-wrap: wrap;
+}
+.draft-item:last-child { border-bottom: none; }
+.draft-item .di-title { font-weight: 800; font-size: 16px; }
+.draft-item .di-meta { color: #9a94a8; font-size: 13px; font-weight: 600; }
+.draft-item .spacer { flex: 1; }
+.di-btn {
+  border: 2px solid #eee2cf; background: #faf7f0; border-radius: 10px;
+  padding: 6px 12px; font-size: 14px; font-weight: 700;
+}
+.di-btn:active { transform: translateY(2px); }
+.di-btn.ghost { color: #b04a4a; }
+
+/* ---------- 灵感抽签弹窗 ---------- */
+.modal-mask {
+  position: fixed; inset: 0; background: rgba(40, 36, 55, .45);
+  display: grid; place-items: center; z-index: 60; padding: 16px;
+}
+.modal {
+  background: #fff; border-radius: 26px; padding: 26px;
+  max-width: 520px; width: 100%; max-height: 86vh; overflow: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, .3); text-align: center;
+}
+.lottery-emoji { font-size: 64px; line-height: 1.2; }
+.modal h3 { font-size: 24px; font-weight: 900; margin: 8px 0 6px; }
+.modal .lottery-goal { color: #7a7688; font-size: 16px; font-weight: 600; line-height: 1.7; }
+.modal .row-center { display: flex; gap: 12px; justify-content: center; margin-top: 18px; flex-wrap: wrap; }
+
+/* 小屏适配 */
+@media (max-width: 560px) {
+  .draft-textarea { min-height: 240px; font-size: 16px; }
+}
