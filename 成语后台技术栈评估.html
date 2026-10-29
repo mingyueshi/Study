@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>成语系统数据库化与后台管理 · 技术栈评估</title>
+<style>
+  :root {
+    --bg: #f4f6f5;
+    --paper: #fafbfb;
+    --paper-2: #eff3f2;
+    --ink: #1b2220;
+    --muted: #5f6c68;
+    --line: #d8dedc;
+    --line-soft: #e4e9e7;
+    --accent: #0c6b60;
+    --accent-dim: rgba(12, 107, 96, 0.12);
+    --warn: #96432f;
+    --display: "Avenir Next", "PingFang SC", "Noto Sans SC", "Helvetica Neue", sans-serif;
+    --body-f: "PingFang SC", "Noto Sans SC", "Helvetica Neue", sans-serif;
+    --mono: "SF Mono", ui-monospace, Menlo, Consolas, monospace;
+    --nav-w: clamp(200px, 18vw, 244px);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: var(--body-f); font-size: 15px; line-height: 1.7;
+  }
+  .layout {
+    display: grid; grid-template-columns: var(--nav-w) minmax(0, 1fr);
+    max-width: 1280px; margin: 0 auto; min-height: 100vh;
+  }
+
+  /* ---------- 侧栏：只放导航 ---------- */
+  .sidebar {
+    position: sticky; top: 0; align-self: start; height: 100vh;
+    overflow-y: auto; border-right: 1px solid var(--line);
+    padding: 28px 20px 24px; display: flex; flex-direction: column;
+  }
+  .side-kicker {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--muted); line-height: 1.8;
+    padding-bottom: 18px; border-bottom: 1px solid var(--line-soft); margin-bottom: 18px;
+  }
+  .sidebar nav { display: flex; flex-direction: column; gap: 2px; }
+  .sidebar nav a {
+    font-family: var(--mono); font-size: 12px; color: var(--muted);
+    text-decoration: none; padding: 5px 8px; border-radius: 3px;
+  }
+  .sidebar nav a:hover { color: var(--ink); background: var(--paper-2); }
+  .side-meta {
+    margin-top: auto; padding-top: 18px; border-top: 1px solid var(--line-soft);
+    font-family: var(--mono); font-size: 10.5px; color: var(--muted); line-height: 1.9;
+  }
+
+  /* ---------- 主栏 ---------- */
+  main { padding: 40px clamp(20px, 4vw, 56px) 56px; }
+  .prose-block { max-width: 68ch; }
+  header.doc { border-bottom: 1px solid var(--line); padding-bottom: 26px; }
+  .crumb {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--muted);
+  }
+  h1 {
+    font-family: var(--display); font-weight: 600; font-size: 33px;
+    line-height: 1.25; letter-spacing: -0.02em; margin: 10px 0 12px;
+  }
+  .doc-meta { font-family: var(--mono); font-size: 11.5px; color: var(--muted); }
+  .doc-meta em { font-style: normal; color: var(--ink); }
+
+  section { margin-top: 46px; }
+  h2 {
+    font-family: var(--display); font-weight: 600; font-size: 20.5px;
+    letter-spacing: -0.01em; margin: 0 0 16px; display: flex; align-items: baseline; gap: 12px;
+  }
+  h2 .idx { font-family: var(--mono); font-size: 12px; color: var(--muted); font-weight: 400; }
+  h3 { font-family: var(--display); font-weight: 600; font-size: 15.5px; margin: 26px 0 10px; }
+  p { margin: 0 0 12px; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  code {
+    font-family: var(--mono); font-size: 0.86em; background: var(--paper-2);
+    border: 1px solid var(--line-soft); border-radius: 3px; padding: 1px 5px;
+  }
+  strong { font-weight: 600; }
+
+  /* ---------- 结论块 ---------- */
+  .verdict { border: 1px solid var(--line); background: var(--paper); padding: 22px 26px; }
+  .verdict .tag {
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 10px;
+  }
+  .verdict .stack {
+    font-family: var(--mono); font-size: 13px; color: var(--ink);
+    border-top: 1px solid var(--line-soft); border-bottom: 1px solid var(--line-soft);
+    padding: 10px 0; margin: 14px 0;
+  }
+  .verdict .why { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-top: 14px; }
+  .verdict .why div { font-size: 13px; color: var(--muted); line-height: 1.65; }
+  .verdict .why b { display: block; color: var(--ink); font-weight: 600; margin-bottom: 3px; font-size: 13px; }
+
+  /* ---------- 表格 ---------- */
+  table { width: 100%; border-collapse: collapse; background: var(--paper); border: 1px solid var(--line); }
+  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line-soft); vertical-align: top; font-size: 13.5px; }
+  th {
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.07em;
+    text-transform: uppercase; color: var(--muted); background: var(--paper-2); font-weight: 500;
+  }
+  tr:last-child td { border-bottom: none; }
+  td.mono, .mono { font-family: var(--mono); font-size: 12.5px; }
+  .pill {
+    display: inline-block; font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.06em;
+    color: var(--accent); border: 1px solid var(--accent); border-radius: 3px;
+    padding: 1px 7px; white-space: nowrap;
+  }
+  .pill.dim { color: var(--muted); border-color: var(--line); }
+
+  /* ---------- 需求清单 / 决策点 ---------- */
+  ol.needs { list-style: none; margin: 0; padding: 0; counter-reset: need; }
+  ol.needs li {
+    counter-increment: need; display: flex; gap: 16px; align-items: baseline;
+    padding: 12px 2px; border-bottom: 1px solid var(--line-soft); max-width: 68ch;
+  }
+  ol.needs li::before {
+    content: counter(need, decimal-leading-zero); font-family: var(--mono);
+    font-size: 12px; color: var(--muted); flex: 0 0 26px;
+  }
+  .decision { border: 1px solid var(--line); background: var(--paper); margin-top: 20px; }
+  .decision .q { display: flex; gap: 16px; padding: 16px 20px; }
+  .decision .q + .q { border-top: 1px solid var(--line-soft); }
+  .decision .qn { font-family: var(--mono); font-size: 12px; color: var(--accent); flex: 0 0 26px; padding-top: 2px; }
+  .decision .qb { font-size: 13.5px; }
+  .decision .qb small { display: block; color: var(--muted); font-size: 12.5px; margin-top: 3px; }
+
+  /* ---------- 架构流 ---------- */
+  .flow { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 10px; margin: 12px 0 6px; }
+  .flow .node {
+    font-family: var(--mono); font-size: 12px; color: var(--ink);
+    border: 1px solid var(--line); background: var(--paper); padding: 8px 12px; white-space: nowrap;
+  }
+  .flow .node small { display: block; font-size: 10px; color: var(--muted); letter-spacing: 0.04em; }
+  .flow .arr { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+  .flow .arr.acc { color: var(--accent); }
+  .flow-caption { font-family: var(--mono); font-size: 11px; color: var(--muted); margin: 0 0 8px; letter-spacing: 0.04em; }
+  .flow-row { margin-bottom: 18px; }
+
+  /* ---------- 代码 ---------- */
+  pre {
+    background: var(--paper-2); border: 1px solid var(--line); border-radius: 4px;
+    padding: 14px 18px; overflow-x: auto; font-family: var(--mono);
+    font-size: 12.5px; line-height: 1.65; color: var(--ink); margin: 12px 0;
+  }
+  pre .c { color: var(--muted); }
+
+  /* ---------- 迁移步骤 ---------- */
+  ol.steps { list-style: none; margin: 0; padding: 0; }
+  ol.steps li { display: flex; gap: 18px; padding: 14px 2px; border-bottom: 1px solid var(--line-soft); }
+  ol.steps li:last-child { border-bottom: none; }
+  .step-no { font-family: var(--mono); font-size: 12px; color: var(--muted); flex: 0 0 88px; padding-top: 2px; }
+  .step-body { max-width: 62ch; }
+  .step-body b { font-weight: 600; }
+  .step-body small { color: var(--muted); font-size: 12.5px; display: block; margin-top: 2px; }
+
+  /* ---------- 双列清单 ---------- */
+  .twocol { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+  ul.plain { list-style: none; margin: 0; padding: 0; }
+  ul.plain li { padding: 9px 0; border-bottom: 1px solid var(--line-soft); font-size: 13.5px; }
+  ul.plain li:last-child { border-bottom: none; }
+  ul.plain li b { font-weight: 600; }
+  .list-h {
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--muted); margin: 0 0 8px; font-weight: 500;
+  }
+
+  footer {
+    margin-top: 56px; border-top: 1px solid var(--line); padding-top: 16px;
+    font-family: var(--mono); font-size: 11px; color: var(--muted); line-height: 1.9;
+  }
+
+  @media (max-width: 980px) {
+    .layout { grid-template-columns: 1fr; }
+    .sidebar { display: none; }
+    .verdict .why { grid-template-columns: 1fr; }
+    .twocol { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="side-kicker">Study / primary<br />技术选型评估</div>
+    <nav>
+      <a href="#s0">00 · 结论</a>
+      <a href="#s1">01 · 现状盘点</a>
+      <a href="#s2">02 · 要解决的问题</a>
+      <a href="#s3">03 · 候选方案对比</a>
+      <a href="#s4">04 · 推荐方案与选型</a>
+      <a href="#s5">05 · 数据模型与迁移</a>
+      <a href="#s6">06 · 风险与不做的事</a>
+    </nav>
+    <div class="side-meta">2026-10-29<br />基于仓库实测数据</div>
+  </aside>
+
+  <main>
+    <header class="doc">
+      <div class="crumb">Study · primary / 成语本 + 成语接龙</div>
+      <h1>成语系统数据库化与后台管理<br />技术栈评估</h1>
+      <div class="doc-meta">评估对象 <em>primary/idioms-* · chain-*</em> &nbsp;·&nbsp; 基线 <em>纯静态离线站</em> &nbsp;·&nbsp; 日期 <em>2026-10-29</em></div>
+    </header>
+
+    <section id="s0">
+      <h2><span class="idx">00</span>结论</h2>
+      <div class="verdict prose-block" style="max-width:none;">
+        <span class="tag">推荐方案</span>
+        <p style="margin-bottom:0;">在现有仓库旁边加一个<strong>轻量自托管服务</strong>：数据从手编 JS 迁入 SQLite，管理后台自建单页，孩子端前端只把数据来源从「JS 变量」换成「API + 离线快照」。不引入重型框架，不牺牲「双击即开」。</p>
+        <div class="stack">Node.js 24 + Hono（或 Express） + SQLite（better-sqlite3） + Drizzle ORM + 自建轻管理页</div>
+        <div class="why">
+          <div><b>复用现有资产</b>数据测试本就是 Node 脚本，校验逻辑直接下沉为写入时约束；现有 JS 数据可被导入脚本直接加载。</div>
+          <div><b>零运维负担</b>SQLite 单文件、备份即拷文件，家庭规模（几百到几千条）毫无压力，不值得上 Postgres。</div>
+          <div><b>保住离线底线</b>加一条 DB → JSON 快照导出，静态页离线打开的能力原样保留。</div>
+        </div>
+      </div>
+      <div class="prose-block" style="margin-top:14px;">
+        <p style="margin-bottom:0;">若「零运维、随时随地可访问」的优先级高于「数据完全在自己手里」，备选 <strong>Supabase</strong>（Postgres + 自带后台）——见 §03。桌壳方案（Tauri / Electron）因 iPad 无法使用，不推荐。</p>
+      </div>
+    </section>
+
+    <section id="s1">
+      <h2><span class="idx">01</span>现状盘点</h2>
+      <div class="prose-block">
+        <p>成语相关功能目前是两块：<strong>成语本</strong>（<code>idioms.html</code>，15 类 257 条，含拼音、释义、逐字点读、典故、例句、近反义）和<strong>成语接龙</strong>（<code>chain.html</code>，复用成语本词库并合并补充词，共 719 条校验词库）。全部数据以手编 JS 数组形式存放在 <code>idioms-data.js</code> 与 <code>chain-data.js</code>，由家长按文件头注释手工维护。</p>
+      </div>
+      <table style="margin-top:16px;">
+        <thead><tr><th style="width:18%;">维度</th><th>现状</th><th style="width:30%;">实测依据</th></tr></thead>
+        <tbody>
+          <tr><td>数据规模</td><td>15 类 257 条成语；接龙词库 719 条（含补充词）</td><td class="mono">idioms-data.js · 1,722 行；primary/README.md</td></tr>
+          <tr><td>数据载体</td><td>手编 JS 数组，无数据库；改动全靠手工，漏逗号页面即异常</td><td class="mono">文件头「添加新成语怎么填」注释</td></tr>
+          <tr><td>质量保障</td><td>5 个 Node 数据测试：格式、逐字对位、近反义解释覆盖等</td><td class="mono">test/test-idioms.js · test-chain.js 等</td></tr>
+          <tr><td>运行形态</td><td>纯静态页面，双击即开、完全离线；无服务器、无构建链、无账号</td><td class="mono">README「无账号无联网」</td></tr>
+          <tr><td>进度存储</td><td>localStorage 存本机；换浏览器 / 清缓存即重置</td><td class="mono">idioms-app.js 等</td></tr>
+          <tr><td>使用终端</td><td>Mac 与 iPad Safari；跨设备靠拷文件夹 / AirDrop</td><td class="mono">primary/README.md</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="s2">
+      <h2><span class="idx">02</span>上数据库和后台，实际要解决什么</h2>
+      <div class="prose-block">
+        <p>「加个数据库和后台」翻译成具体需求，是下面四件事——其中前两件是当下的真实痛点，后两件顺带解锁：</p>
+      </div>
+      <ol class="needs">
+        <li><span><strong>内容维护</strong>：从手编 1,722 行 JS 变成表单增删改查；逐字对位、近反义覆盖等规则在<strong>写入时</strong>校验，不再依赖「记得跑一遍 node test」。</span></li>
+        <li><span><strong>词库扩容</strong>：接龙校验依赖 719 条内置词库，收录不足是体验瓶颈；入库后可批量导入外部成语词典，接龙引擎按首字查库即可，词库扩到数千条无感。</span></li>
+        <li><span><strong>一处数据、多端读取</strong>：iPad 不再靠拷文件夹同步，改版内容所有设备即时一致。</span></li>
+        <li><span><strong>进度同步（二期）</strong>：掌握记录、错题本迁入数据库，跨设备续学。建议一期不做，控制改动面。</span></li>
+      </ol>
+      <div class="decision">
+        <div class="q">
+          <span class="qn">Q1</span>
+          <div class="qb"><strong>服务部署在哪里？</strong>
+            <small>家里常开的 Mac / NAS（配 Tailscale 内网访问，数据不出门），或一台小 VPS。家庭自用不建议为此买云数据库。</small></div>
+        </div>
+        <div class="q">
+          <span class="qn">Q2</span>
+          <div class="qb"><strong>「双击即开、完全离线」要不要保住？</strong>
+            <small>本评估默认保留（这是仓库的立身之本）。保留则必须加「DB → 静态 JSON 快照」导出链路，见 §04 架构。</small></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="s3">
+      <h2><span class="idx">03</span>候选方案对比</h2>
+      <table>
+        <thead>
+          <tr><th style="width:21%;">方案</th><th>构成</th><th style="width:11%;">契合现有资产</th><th style="width:9%;">运维</th><th style="width:9%;">多设备</th><th style="width:9%;">保离线</th><th style="width:22%;">主要代价</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>A · Node 自托管</strong> <span class="pill">推荐</span></td>
+            <td class="mono">Node 24 + Hono + SQLite + Drizzle + 自建管理页</td>
+            <td>高：测试逻辑与数据直接复用</td>
+            <td>低</td><td>有</td><td>有</td>
+            <td>管理页要自己写（约 1 天，估）</td>
+          </tr>
+          <tr>
+            <td><strong>B · Supabase</strong> <span class="pill dim">备选</span></td>
+            <td class="mono">托管 Postgres + 自动 REST + Studio 后台</td>
+            <td>低：校验需改写为 DB 触发器 / 边缘函数</td>
+            <td>极低</td><td>有</td><td>弱</td>
+            <td>数据在外部服务；离线快照需另做；免费档限额随用随看</td>
+          </tr>
+          <tr>
+            <td><strong>C · Python 栈</strong> <span class="pill dim">备选</span></td>
+            <td class="mono">FastAPI + SQLModel + SQLite + SQLAdmin</td>
+            <td>低：5 个数据测试需用 Python 重写</td>
+            <td>低</td><td>有</td><td>有</td>
+            <td>现有校验资产全部重写一遍</td>
+          </tr>
+          <tr>
+            <td><strong>D · 桌面壳</strong> <span class="pill dim">不推荐</span></td>
+            <td class="mono">Tauri / Electron + SQLite</td>
+            <td>中</td>
+            <td>低</td><td>无</td><td>有</td>
+            <td>iPad Safari 用不了；多设备诉求直接落空</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="prose-block" style="margin-top:18px;">
+        <p><strong>A 为什么推荐</strong>：这个项目的独特资产是「数据校验已经是 Node 代码」。选 Node，<code>test-idioms.js</code> 的断言几乎原样搬进写入校验；选 SQLite，是因为数据量级（几百到几千条）下 Postgres 只带来运维成本、不带来收益，而单文件库的备份、迁移、调试成本趋近于零。框架层面 Hono 与 Express 功能等价，取其轻；团队更熟哪个用哪个，不影响结论。</p>
+        <p><strong>B 什么时候选</strong>：如果完全不想碰服务器，Supabase 的免费档（Postgres + 自动生成的 REST API + 自带管理台）开箱即用，iPad 在任何网络下都能访问。代价是数据与可用性绑在外部服务上，且「逐字对位」这类规则要么写成数据库触发器、要么放边缘函数，调试不如本地顺手。</p>
+        <p><strong>C 什么时候选</strong>：仅当维护者更想借机转向 Python。功能上完全可行，SQLAdmin 也能快速出后台，但等于把现有最值钱的校验资产推倒重写。</p>
+        <p style="margin-bottom:0;"><strong>D 为什么出局</strong>：主要使用终端是 iPad Safari，桌面壳无法覆盖；它保住离线的代价是放弃多设备。除非某天产品收敛为「只在一台电脑上用」，否则不值得重看。</p>
+      </div>
+    </section>
+
+    <section id="s4">
+      <h2><span class="idx">04</span>推荐方案与选型</h2>
+      <table>
+        <thead><tr><th style="width:16%;">层</th><th style="width:30%;">选择</th><th>理由</th></tr></thead>
+        <tbody>
+          <tr><td>运行时</td><td class="mono">Node.js 24</td><td>机器已有；现有数据测试即 Node，校验逻辑可平移。</td></tr>
+          <tr><td>Web 框架</td><td class="mono">Hono（Express 等价可换）</td><td>轻量、中间件够用；这个规模不需要 Nest 这类全家桶。</td></tr>
+          <tr><td>数据库</td><td class="mono">SQLite · better-sqlite3</td><td>单文件零配置，备份即拷文件；同步 API 性能远超需求。</td></tr>
+          <tr><td>数据访问</td><td class="mono">Drizzle ORM</td><td>schema 即代码、内置迁移、贴近 SQL；比 Prisma 轻。</td></tr>
+          <tr><td>管理后台</td><td class="mono">自建单页（备选 AdminJS）</td><td>逐字四行、近反义选择这类专属校验做成内联表单更顺手；AdminJS 可半天出全功能 CRUD 但样式与校验受限。</td></tr>
+          <tr><td>写入校验</td><td class="mono">shared/validate 模块</td><td>test-idioms.js 断言下沉共享，导入脚本与写 API 共用同一套。</td></tr>
+          <tr><td>认证</td><td class="mono">单管理员 + session</td><td>管理接口一个口令；孩子端只读公开。不上多用户体系。</td></tr>
+          <tr><td>部署</td><td class="mono">家里 Mac/NAS + Tailscale，或小 VPS</td><td>数据不出门优先；进程用 launchd 或 pm2 拉起。</td></tr>
+        </tbody>
+      </table>
+
+      <h3>架构</h3>
+      <div class="flow-row">
+        <p class="flow-caption">链路一 · 服务化（在线时）</p>
+        <div class="flow">
+          <span class="node">孩子端 idioms.html<small>现有前端小改</small></span>
+          <span class="arr">+</span>
+          <span class="node">管理页 admin<small>新写</small></span>
+          <span class="arr">→</span>
+          <span class="node">Hono API<small>读写 · 校验</small></span>
+          <span class="arr">→</span>
+          <span class="node">SQLite · study.db<small>单文件</small></span>
+        </div>
+      </div>
+      <div class="flow-row">
+        <p class="flow-caption">链路二 · 离线兜底（保住双击即开）</p>
+        <div class="flow">
+          <span class="node">SQLite</span>
+          <span class="arr acc">-- npm run export --&gt;</span>
+          <span class="node">idioms-snapshot.json<small>构建产物</small></span>
+          <span class="arr">→</span>
+          <span class="node">静态页离线打开<small>行为不变</small></span>
+        </div>
+      </div>
+      <div class="prose-block">
+        <p>前端改动收敛在一处：<code>idioms-app.js</code> 现在直接读 <code>IDIOM_UNITS</code> 全局变量，改为「优先 fetch API，失败则读快照 JSON」。接龙引擎查词库改为调 API 的按首字查询接口，离线时退回快照内置词库。</p>
+      </div>
+
+      <h3>schema 示意（Drizzle）</h3>
+<pre><span class="c">// drizzle/schema.ts —— 完整表清单见 §05</span>
+export const idioms = sqliteTable('idioms', {
+  id:          integer('id').primaryKey({ autoIncrement: true }),
+  text:        text('text').notNull().unique(),   <span class="c">// 唯一约束替代「全书不能重复」的人工约定</span>
+  pinyin:      text('pinyin').notNull(),
+  zh:          text('zh').notNull(),
+  story:       text('story'),
+  source:      text('source'),
+  example:     text('example').notNull(),
+  categoryId:  integer('category_id').references(() => categories.id),
+});
+
+export const idiomChars = sqliteTable('idiom_chars', {
+  idiomId:  integer('idiom_id').notNull().references(() => idioms.id),
+  pos:      integer('pos').notNull(),            <span class="c">// 1–4，逐字点读按位取</span>
+  char:     text('char').notNull(),              <span class="c">// 「t 与位置对位」由结构本身保证</span>
+  meaning:  text('meaning').notNull(),
+});</pre>
+    </section>
+
+    <section id="s5">
+      <h2><span class="idx">05</span>数据模型与迁移路径</h2>
+      <table>
+        <thead><tr><th style="width:20%;">表</th><th style="width:42%;">关键列</th><th>对应现状</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">categories</td><td class="mono">id, name, emoji, color, sort</td><td>IDIOM_UNITS 的分类外层</td></tr>
+          <tr><td class="mono">idioms</td><td class="mono">text UNIQUE, pinyin, zh, emoji, story, source, example, category_id</td><td>成语主表；text 唯一约束顶替人工查重</td></tr>
+          <tr><td class="mono">idiom_chars</td><td class="mono">idiom_id, pos, char, meaning</td><td>逐字拆分，按位存储</td></tr>
+          <tr><td class="mono">idiom_relations</td><td class="mono">idiom_id, related_text, kind(syn/ant)</td><td>近义 / 反义；related_text 允许不在库内</td></tr>
+          <tr><td class="mono">term_zh</td><td class="mono">term PK, zh</td><td>底部 IDIOM_ZH：书外近反义词的中文解释</td></tr>
+          <tr><td class="mono">chain_words</td><td class="mono">text PK, source</td><td>chain-data.js 补充词；与 idioms.text 合并成接龙校验词库</td></tr>
+          <tr><td class="mono">progress <span class="pill dim">二期</span></td><td class="mono">device_id, idiom_id, status, updated_at</td><td>掌握记录 / 错题本迁库时再建</td></tr>
+        </tbody>
+      </table>
+
+      <h3>迁移四步（估）</h3>
+      <ol class="steps">
+        <li><span class="step-no">step 1 · 0.5 天</span><span class="step-body"><b>建库导入</b><small>一次性脚本直接 require 现有 idioms-data.js / chain-data.js 灌入 SQLite；test-idioms.js 断言搬进 shared 校验模块，导入时全量跑一遍，257 条数据当作第一次验收。</small></span></li>
+        <li><span class="step-no">step 2 · 0.5–1 天</span><span class="step-body"><b>读 API</b><small>分类列表、成语详情、接龙词库按首字查询（建索引）。孩子端前端切到 fetch + 快照兜底。</small></span></li>
+        <li><span class="step-no">step 3 · 0.5 天</span><span class="step-body"><b>写 API</b><small>成语 / 分类 CRUD；写入前跑同一套共享校验，错误按字段返回给表单。</small></span></li>
+        <li><span class="step-no">step 4 · 1 天</span><span class="step-body"><b>管理页</b><small>分类侧栏 + 成语表单：四字逐字行、近反义搜索选择、拼音与必填项内联提示，保存即校验。顺手做 npm run export 快照导出。</small></span></li>
+      </ol>
+      <p class="mono" style="color:var(--muted); font-size:12px; margin-top:12px;">合计约 3 天（估计值，非实测；前端已高度模块化，改动面集中在数据加载一处）。</p>
+    </section>
+
+    <section id="s6">
+      <h2><span class="idx">06</span>风险与不做的事</h2>
+      <div class="twocol">
+        <div>
+          <p class="list-h">风险与对策</p>
+          <ul class="plain">
+            <li><b>离线能力退化</b> —— 快照导出必须进发布流程（一条 <code>npm run export</code>），并给静态页加「快照版本号」显示，可发现数据过期。</li>
+            <li><b>范围蔓延到进度同步</b> —— localStorage 逻辑一期原样不动；它和内容管理是两条独立链路。</li>
+            <li><b>SQLite 文件备份</b> —— 定时 <code>sqlite3 .dump</code> 成 SQL 文本进 git，diff 友好；二进制文件不进库。</li>
+            <li><b>服务无人值守</b> —— launchd / pm2 自动拉起；服务挂了静态页照常离线可用，故障不阻塞孩子使用。</li>
+          </ul>
+        </div>
+        <div>
+          <p class="list-h">明确不做</p>
+          <ul class="plain">
+            <li><b>PostgreSQL / MongoDB</b> —— 几百到几千条的数据量，纯增运维成本；Mongo 还会丢掉 schema 约束。</li>
+            <li><b>Docker / 微服务</b> —— 单进程单文件，物理上无法更简单。</li>
+            <li><b>多用户与权限体系</b> —— 一个管理口令够用；孩子端只读。</li>
+            <li><b>进度同步（一期）</b> —— 二期另立方案再议。</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      事实来源：本仓库 primary/ 目录实测 —— idioms-data.js 1,722 行 / 15 类 257 条；接龙词库 719 条；test/ 下 5 个数据测试。<br />
+      工作量数字均为估计值，已标注；其余数据无虚构。
+    </footer>
+  </main>
+</div>
+</body>
+</html>
