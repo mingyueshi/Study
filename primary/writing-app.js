@@ -253,7 +253,6 @@ document.addEventListener('click', e => {
     if (act === 'say') { e.preventDefault(); speak(el.dataset.t); }
     else if (act === 'unit') { e.preventDefault(); selectUnit(el.dataset.id); }
     else if (act === 'home') { e.preventDefault(); window.location.href = 'index.html'; }
-    else if (act === 'words') { e.preventDefault(); window.location.href = 'words.html'; }
     else if (act === 'idioms') { e.preventDefault(); window.location.href = 'idioms.html'; }
     else if (act === 'toggle') {
       e.preventDefault();

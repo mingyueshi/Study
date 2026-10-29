@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="乐学堂 · 教材同步单词：外研版新标准三起新课标四年级上下册，按单元点读单词，拆分记忆并记录掌握进度。">
+  <title>教材同步单词 · 乐学堂</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E📣%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="layout.css">
+  <link rel="stylesheet" href="books.css">
+  <link rel="stylesheet" href="english.css">
+</head>
+<body>
+  <a class="skip-link" href="#cards">跳到学习内容</a>
+  <div id="app">
+    <header>
+      <button class="logo" data-act="home">📣 教材同步单词</button>
+      <span class="stats-pill" id="stats"></span>
+      <span class="spacer"></span>
+      <nav class="header-links" aria-label="学习导航">
+        <a class="back-btn" href="index.html">← 乐学堂</a>
+      </nav>
+    </header>
+
+    <div class="study-shell">
+      <aside class="sidebar">
+        <p class="sidebar-label">教材单元 <span class="nav-count"></span></p>
+        <details class="category-nav" open>
+          <summary>切换单元 <span class="nav-current"></span></summary>
+          <nav id="chips" aria-label="教材单元切换"></nav>
+        </details>
+        <p class="sidebar-note">外研版新标准三起（新课标）<br>四年级上下册 · 点图听发音</p>
+      </aside>
+      <div class="study-content">
+        <div class="textbook-banner">
+          <span>📖 外研版《英语（新标准）》</span>
+          <strong>三年级起点 · 新课标 · 四年级</strong>
+        </div>
+        <section class="toolbar" aria-label="学习工具">
+          <div class="search-box">
+            <span>🔎</span>
+            <input id="search" type="search" aria-label="搜索全部教材单元" placeholder="搜索单词、中文、单元或册别…" autocomplete="off">
+          </div>
+          <select id="voiceSel" class="voice-sel" title="选择英语发音人" aria-label="选择英语发音人"></select>
+          <button class="play-btn" id="playBtn" data-act="play">▶️ 连读本单元</button>
+        </section>
+        <main id="cards" tabindex="-1"></main>
+      </div>
+    </div>
+  </div>
+
+  <script src="speech.js"></script>
+  <script src="english-data.js"></script>
+  <script src="english-app.js"></script>
+  <script src="layout.js"></script>
+</body>
+</html>

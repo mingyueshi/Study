@@ -1,0 +1,26 @@
+/* 教材同步单词：在词卡样式上增加教材标识。 */
+.textbook-banner {
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;
+  gap: 4px 18px; margin: 0 0 16px; padding: 11px 16px;
+  border: 1px solid #dce8df; border-radius: 14px; background: #f2faf5;
+  color: #397155; font-size: 13px; font-weight: 700;
+}
+.textbook-banner strong { color: #246343; font-size: 14px; }
+.book-label {
+  padding: 15px 10px 5px; color: var(--muted); font-size: 12px; font-weight: 900;
+  letter-spacing: .04em;
+}
+.book-label:first-child { padding-top: 4px; }
+.unit-head .unit-main { min-width: 0; }
+.unit-head .unit-subtitle { margin-top: 2px; }
+.textbook-source {
+  margin: 22px 2px 0; color: var(--muted); font-size: 12px; line-height: 1.7;
+}
+
+@media (max-width: 999px) {
+  .book-label { grid-column: 1 / -1; padding-bottom: 0; }
+}
+@media (max-width: 560px) {
+  .textbook-banner { align-items: flex-start; flex-direction: column; gap: 0; }
+  .textbook-banner strong { font-size: 13px; }
+}
