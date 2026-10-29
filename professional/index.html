@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="TechLex · 计算机英语学习系统：面向开发、运营、运维的术语本，音标/缩写、构词拆解、双语例句与关联术语，全部可点读。">
+  <title>TechLex · 计算机英语学习系统</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E⌨️%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="tech.css">
+</head>
+<body>
+  <div id="app">
+    <header>
+      <button class="logo" data-act="home"><span class="logo-t">Tech</span><span class="logo-l">Lex</span></button>
+      <span class="logo-sub">计算机英语 · 开发 / 运维 / 运营</span>
+      <span class="spacer"></span>
+      <span class="stats-pill" id="stats"></span>
+      <button class="icon-btn" data-act="toggleSound" id="soundBtn" title="声音">🔊</button>
+    </header>
+
+    <nav id="chips" aria-label="分类切换"></nav>
+
+    <section class="toolbar">
+      <div class="search-box">
+        <span>⌕</span>
+        <input id="search" type="search" placeholder="搜索术语、中文释义或例句…" autocomplete="off">
+      </div>
+      <button class="play-btn" id="playBtn" data-act="play">▶ 连读本单元</button>
+    </section>
+
+    <main id="cards"></main>
+
+    <footer class="foot">
+      <span>TechLex 属于 Study 多学段学习系统的专业人员（professional）部分</span>
+      <button class="foot-link" data-act="primary">→ 乐学堂（小学版）</button>
+    </footer>
+  </div>
+
+  <script src="speech.js"></script>
+  <script src="tech-data.js"></script>
+  <script src="tech-app.js"></script>
+</body>
+</html>

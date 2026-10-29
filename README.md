@@ -10,7 +10,7 @@
 | `junior/` | 初中 | 🚧 规划中 | 待定 |
 | `senior/` | 高中 | 🚧 规划中 | 待定 |
 | `university/` | 大学 | 🚧 规划中 | 待定 |
-| `professional/` | 专业人员 | 🚧 规划中 | 待定 |
+| [`professional/`](professional/) | 专业人员 | ✅ 使用中（计算机英语） | TechLex |
 
 > 命名约定：目录名 = 学段英文（primary / junior / senior / university / professional），新增学段请沿用。
 
@@ -22,6 +22,16 @@
 - **作文坊** `writing.html`：写作锦囊、带点评的范文、素材百宝箱、灵感抽签、可动笔的作文本。
 
 快速开始：双击 [`primary/index.html`](primary/index.html)，详见 [`primary/README.md`](primary/README.md)。
+
+## ⌨️ 专业人员系统（professional）当前功能
+
+**TechLex · 计算机英语**：面向开发 / 运营 / 运维的术语本，深色专业界面。
+
+- **8 大分类 86 个术语**：开发通用、前端、后端、运维 CI/CD、网络与安全、运营与增长、云与基础设施、协作与敏捷；
+- 每个术语：音标或缩写全称（DNS = Domain Name System）、中文释义、构词拆解（可点读）、双语例句（可点读）、关联术语（带中文解释）；
+- 缩写术语逐字母朗读、连读本单元、已掌握标记、中英文混合搜索。
+
+快速开始：双击 [`professional/index.html`](professional/index.html)，详见 [`professional/README.md`](professional/README.md)。
 
 ## 🧭 新学段的建议做法
 

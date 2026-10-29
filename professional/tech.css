@@ -1,0 +1,193 @@
+/* ============================================================
+   TechLex · 计算机英语 —— 专业深色样式
+   ============================================================ */
+:root {
+  --bg: #0b1220;
+  --panel: #111a2c;
+  --panel-2: #16233c;
+  --line: #1f2a44;
+  --ink: #e2e8f0;
+  --muted: #94a3b8;
+  --accent: #22d3ee;
+  --mono: "SF Mono", "Menlo", "Consolas", "JetBrains Mono", monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+body {
+  font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+  background:
+    radial-gradient(circle at 85% -5%, rgba(34, 211, 238, .07) 0 320px, transparent 330px),
+    radial-gradient(circle at -5% 40%, rgba(167, 139, 250, .06) 0 280px, transparent 290px),
+    var(--bg);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.55;
+}
+button { font-family: inherit; color: inherit; cursor: pointer; }
+b { font-weight: 700; }
+
+#app { max-width: 1060px; margin: 0 auto; padding: 16px 18px 70px; }
+
+/* ---------- 顶栏 ---------- */
+header { display: flex; align-items: baseline; gap: 12px; padding: 8px 2px 16px; flex-wrap: wrap; }
+.logo { background: none; border: none; font-family: var(--mono); font-size: 24px; font-weight: 800; letter-spacing: .5px; }
+.logo-t { color: var(--accent); }
+.logo-l { color: var(--ink); }
+.logo-sub { color: var(--muted); font-size: 13.5px; }
+.spacer { flex: 1; }
+.stats-pill {
+  background: var(--panel); border: 1px solid var(--line); border-radius: 8px;
+  padding: 5px 12px; font-weight: 600; font-size: 13.5px; color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+.icon-btn { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; width: 34px; height: 34px; font-size: 15px; }
+
+/* ---------- 分类切换（换行平铺，无裁剪） ---------- */
+#chips { display: flex; flex-wrap: wrap; gap: 8px; padding: 2px 0 14px; }
+.chip {
+  --c: var(--accent);
+  flex: 0 0 auto; display: flex; align-items: center; gap: 7px;
+  background: var(--panel); border: 1px solid var(--line); border-radius: 8px;
+  padding: 7px 12px; font-size: 14px; font-weight: 600; color: var(--muted);
+  transition: border-color .1s, color .1s;
+}
+.chip:hover { color: var(--ink); }
+.chip.on { border-color: var(--c); color: var(--c); background: rgba(255, 255, 255, .03); }
+.chip-emoji { font-family: var(--mono); font-size: 13px; }
+.chip-num {
+  background: var(--panel-2); color: var(--muted); border-radius: 5px;
+  padding: 1px 7px; font-size: 12px; font-family: var(--mono);
+}
+.chip-num.full { background: #14532d; color: #86efac; }
+
+/* ---------- 工具栏 ---------- */
+.toolbar { display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
+.search-box {
+  flex: 1; min-width: 220px; display: flex; align-items: center; gap: 6px;
+  background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 2px 12px;
+}
+.search-box span { color: var(--muted); font-size: 18px; }
+.search-box input {
+  flex: 1; border: none; outline: none; font-size: 15px; padding: 10px 4px;
+  font-family: inherit; background: none; color: var(--ink); min-width: 0;
+}
+.play-btn {
+  background: #0e7490; color: #fff; border: none; border-radius: 8px;
+  padding: 10px 18px; font-size: 14.5px; font-weight: 700; white-space: nowrap;
+}
+.play-btn:active { filter: brightness(1.15); }
+
+/* ---------- 单元标题 ---------- */
+.unit-head {
+  display: flex; align-items: center; gap: 14px; margin: 2px 0 14px;
+  border-left: 3px solid var(--c); padding: 10px 16px;
+  background: var(--panel); border-radius: 10px; border-top: none;
+}
+.unit-emoji { font-family: var(--mono); font-size: 20px; color: var(--c); }
+.unit-head h2 { font-size: 19px; font-weight: 800; color: var(--ink); }
+.unit-head p { color: var(--muted); font-size: 13.5px; }
+
+/* ---------- 卡片网格 ---------- */
+.wgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 14px; }
+.wcard {
+  --c: var(--accent);
+  position: relative;
+  background: var(--panel); border: 1px solid var(--line); border-top: 2px solid var(--c);
+  border-radius: 12px; padding: 16px 16px 14px;
+}
+.wcard.learned { border-color: #14532d; }
+.wcard.playing { outline: 2px solid var(--c); outline-offset: 1px; }
+.unit-tag {
+  position: absolute; top: -10px; left: 12px;
+  background: var(--c); color: #0b1220; font-size: 11.5px; font-weight: 700;
+  border-radius: 4px; padding: 2px 8px; font-family: var(--mono);
+}
+
+/* 已掌握按钮 */
+.learn-btn {
+  position: absolute; top: 12px; right: 12px;
+  width: 30px; height: 30px; border-radius: 6px;
+  border: 1px solid var(--line); background: var(--panel-2);
+  font-size: 14px; font-weight: 700; color: transparent; line-height: 1;
+}
+.learn-btn.on { background: #14532d; border-color: #166534; color: #86efac; }
+
+/* 术语主体 */
+.wtop { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 8px; }
+.winfo { min-width: 0; flex: 1; }
+.wline { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.word {
+  font-family: var(--mono); font-size: 21px; font-weight: 700;
+  color: var(--c); letter-spacing: -.2px; word-break: break-word;
+}
+.say {
+  border: 1px solid var(--line); background: var(--panel-2);
+  width: 30px; height: 30px; border-radius: 6px; font-size: 13px; color: var(--muted);
+}
+.say:active { color: var(--accent); }
+.meta { font-family: var(--mono); font-size: 12.5px; color: var(--muted); margin-top: 3px; word-break: break-all; }
+.zh { font-size: 15px; color: var(--ink); margin-top: 4px; }
+
+/* 构词拆解 */
+.wsec { display: flex; align-items: flex-start; gap: 8px; margin-top: 9px; }
+.seclabel {
+  flex: 0 0 auto; height: 22px; padding: 0 6px; margin-top: 2px;
+  background: var(--panel-2); color: var(--muted); border-radius: 4px;
+  font-size: 11.5px; font-weight: 700; display: grid; place-items: center;
+  font-family: var(--mono);
+}
+.parts { display: flex; align-items: center; flex-wrap: wrap; gap: 5px; }
+.part {
+  border: 1px solid var(--line); background: var(--panel-2);
+  border-radius: 6px; padding: 3px 8px;
+  display: flex; flex-direction: column; align-items: center; gap: 0;
+}
+.part b { font-size: 13.5px; font-weight: 700; color: var(--c); font-family: var(--mono); }
+.part i { font-style: normal; font-size: 11px; color: var(--muted); }
+.part:active { border-color: var(--c); }
+.plus { color: #475569; font-size: 12px; font-family: var(--mono); }
+
+/* 例句 */
+.example-line { display: flex; flex-direction: column; gap: 2px; flex: 1; }
+.example {
+  display: block; width: 100%; border: none; background: none; text-align: left;
+  font-family: var(--mono); font-size: 13px; color: #cbd5e1; line-height: 1.6;
+  cursor: pointer; padding: 2px 4px; border-radius: 4px;
+}
+.example:hover { background: var(--panel-2); }
+.example-zh { font-size: 12.5px; color: var(--muted); font-family: inherit; padding: 0 4px; }
+
+/* 关联术语 */
+.rels { display: flex; flex-wrap: wrap; gap: 5px; }
+.rel {
+  border: 1px solid var(--line); background: var(--panel-2); border-radius: 6px;
+  padding: 3px 8px; display: flex; flex-direction: column; align-items: center;
+}
+.rel b { font-size: 12.5px; font-weight: 600; color: #cbd5e1; font-family: var(--mono); }
+.rel i { font-style: normal; font-size: 11px; color: var(--muted); }
+.rel:active { border-color: var(--c); }
+.rel.inbook { border-color: #155e75; }
+.rel.inbook b { color: var(--accent); }
+.rel-book { font-size: 10px; }
+
+/* 搜索结果 */
+.search-head { font-weight: 600; margin: 2px 0 12px; color: var(--muted); font-size: 14px; }
+.empty {
+  background: var(--panel); border: 1px solid var(--line); border-radius: 10px;
+  padding: 36px 20px; text-align: center; color: var(--muted); font-size: 15px;
+}
+
+/* 页脚 */
+.foot {
+  margin-top: 26px; padding-top: 14px; border-top: 1px solid var(--line);
+  display: flex; gap: 14px; align-items: center; flex-wrap: wrap;
+  color: #64748b; font-size: 13px;
+}
+.foot-link { background: none; border: none; color: var(--accent); font-size: 13px; }
+.foot-link:hover { text-decoration: underline; }
+
+/* 小屏 */
+@media (max-width: 560px) {
+  .wgrid { grid-template-columns: 1fr; }
+  .word { font-size: 19px; }
+}
