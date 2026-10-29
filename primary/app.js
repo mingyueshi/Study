@@ -354,6 +354,8 @@ function viewHome() {
         '<h3>成语本 <span>↗</span></h3><p>听典故故事，学会用成语</p><span class="book-tag">语文积累</span></a>' +
         '<a class="book-card" href="writing.html" style="--bc:#8b65c9"><span class="book-icon">✏️</span>' +
         '<h3>作文坊 <span>↗</span></h3><p>看写作锦囊，写自己的故事</p><span class="book-tag">表达创作</span></a>' +
+        '<a class="book-card" href="chain.html" style="--bc:#157d73"><span class="book-icon">🐉</span>' +
+        '<h3>成语接龙 <span>↗</span></h3><p>首尾接一接，边玩边记成语</p><span class="book-tag">趣味挑战</span></a>' +
       '</div></section>' +
     '</div>' +
     '<aside class="home-aside" aria-label="我的学习进度">' +

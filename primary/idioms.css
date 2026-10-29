@@ -3,6 +3,8 @@
    ============================================================ */
 
 /* 印章式图章：显示成语首字，点按朗读整个成语 */
+.chain-entry { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; border: 1px solid #b8dacd; border-radius: 14px; padding: 10px 16px; color: #157d73; background: #ecf8f2; font-size: 15px; font-weight: 800; text-decoration: none; white-space: nowrap; }
+.chain-entry:hover { background: #dff2e8; }
 .pic.seal {
   background: #d0483c;
   color: #fff;
@@ -38,6 +40,7 @@
 
 /* 小屏适配 */
 @media (max-width: 560px) {
+  .chain-entry { flex: 1; }
   .idiom { font-size: 26px; letter-spacing: 3px; }
   .seal-char { font-size: 38px; }
 }

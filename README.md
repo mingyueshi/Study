@@ -14,6 +14,7 @@
 快速开始：
 
 - 小学版：双击 [`primary/index.html`](primary/index.html)，详见 [`primary/README.md`](primary/README.md)
+- 成语接龙：双击 [`primary/chain.html`](primary/chain.html)，支持自己接龙、小龙陪练、释义提示与本地续玩。
 - TechLex：双击 [`techlex/index.html`](techlex/index.html)，详见 [`techlex/README.md`](techlex/README.md)
 
 ## 🚧 学段规划

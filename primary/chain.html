@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="乐学堂 · 成语接龙：自己接龙或和小龙轮流接，首尾同字、不重复，带释义提示、点读与本地续玩。">
+  <title>成语接龙 · 乐学堂</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🐉%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="layout.css">
+  <link rel="stylesheet" href="chain.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">跳到接龙游戏</a>
+  <div id="app">
+    <header>
+      <a class="logo" href="chain.html">🐉 成语接龙</a>
+      <span class="header-context">把认识的成语接起来</span>
+      <span class="spacer"></span>
+      <button class="icon-btn" id="soundButton" type="button" aria-label="关闭自动朗读" aria-pressed="true" title="自动朗读">🔊</button>
+      <nav class="header-links" aria-label="学习导航">
+        <a class="back-btn" href="idioms.html">🏮 成语本</a>
+        <a class="back-btn" href="index.html">← 乐学堂</a>
+      </nav>
+    </header>
+
+    <main class="chain-page" id="main-content" tabindex="-1">
+      <div class="chain-heading">
+        <div><p class="chain-eyebrow">语文小游戏 · 不限时</p><h1>把成语接成一条龙</h1><p>首尾同字，不重复，看看你能接多长。</p></div>
+        <button class="chain-button secondary" type="button" data-action="new">↻ 换个开头</button>
+      </div>
+
+      <div class="chain-layout">
+        <section class="game-panel panel" aria-label="接龙游戏">
+          <div class="play-modes" role="group" aria-label="切换玩法，开始新一轮">
+            <button type="button" data-action="mode" data-mode="solo" aria-pressed="true">🙋 自己接龙</button>
+            <button type="button" data-action="mode" data-mode="partner" aria-pressed="false">🐉 小龙陪练</button>
+            <span>切换玩法会新开一轮</span>
+          </div>
+          <div class="round-meta"><span class="turn-label" id="turnLabel">轮到你啦</span><span id="poolCount"></span></div>
+          <div class="current-row">
+            <div class="current-info">
+              <p class="small-label" id="currentLabel">从这个成语开始</p>
+              <button class="current-word" type="button" id="readCurrent" aria-label="朗读当前成语"><span id="currentWord"></span><span class="read-icon" aria-hidden="true">🔊</span></button>
+              <p class="current-pinyin" id="currentPinyin"></p>
+            </div>
+            <div class="next-target"><span>接这个字</span><strong id="nextChar"></strong><span>开头 ↓</span></div>
+          </div>
+          <p class="current-meaning" id="currentMeaning"></p>
+
+          <form id="answerForm" novalidate>
+            <label class="answer-label" for="answer">你的成语</label>
+            <div class="answer-row">
+              <input id="answer" name="idiom" type="text" maxlength="16" autocomplete="off" spellcheck="false" aria-describedby="feedback inputRule" placeholder="输入四字成语">
+              <button class="chain-button primary" id="submitButton" type="submit">接上它 →</button>
+            </div>
+            <p id="feedback" class="feedback" role="status" aria-live="polite" aria-atomic="true">想一想，再把你的成语写下来。</p>
+            <div class="answer-tools"><button type="button" class="hint-button" id="hintButton" aria-expanded="false" aria-controls="hintPanel">💡 给我一点提示</button><span id="inputRule">四个汉字 · 只接相同的字</span></div>
+          </form>
+
+          <section class="hint-panel" id="hintPanel" aria-labelledby="hintTitle" hidden>
+            <div class="hint-heading"><h2 id="hintTitle">这些成语可以接</h2><button type="button" data-action="hide-hints">收起 ↑</button></div>
+            <p>点一个填入，读懂释义后再点「接上它」。</p>
+            <div class="hint-options" id="hintOptions"></div>
+          </section>
+
+          <div class="round-end" id="roundEnd" hidden>
+            <h2>🎉 这条龙暂时接到底啦！</h2>
+            <p id="endMessage"></p>
+            <button class="chain-button primary" type="button" data-action="new">换个开头，继续玩 →</button>
+          </div>
+        </section>
+
+        <aside class="chain-aside" aria-label="接龙记录与规则">
+          <section class="panel record-panel">
+            <h2>🌱 我的接龙记录</h2>
+            <div class="round-score"><strong id="roundScore">0</strong><span>本轮我接</span></div>
+            <dl class="record-grid"><div><dt id="bestLabel">自己接龙最佳</dt><dd id="bestScore">0</dd></div><div><dt>累计接对</dt><dd id="totalScore">0</dd></div></dl>
+            <p class="record-caption">开头和小龙接的成语不计入成绩。提示也能帮你学会新成语。</p>
+          </section>
+          <section class="panel rules-panel">
+            <h2>怎么玩？</h2>
+            <ol><li>下个成语的第一个字，要和上个成语的最后一个字相同。</li><li>一轮中，每个成语只能用一次。</li><li>想不起来就看提示，点成语还能听读音。</li></ol>
+            <div class="rule-example"><span>学以致<b>用</b></span><span aria-hidden="true">↓</span><span><b>用</b>之不竭</span></div>
+            <p class="dictionary-note">本页按内置词库校验；同音不同字不算接上。未收录的成语可换一个再试。</p>
+          </section>
+          <p class="storage-note" id="storageNote">本轮进度与纪录自动保存在当前浏览器</p>
+        </aside>
+
+        <section class="panel trail-panel" aria-labelledby="trailTitle">
+          <div class="trail-heading"><div><h2 id="trailTitle">这条成语龙</h2><p>最新接上的排在前面，点成语可以听读音。</p></div><span id="trailCount"></span></div>
+          <ol class="trail-list" id="trailList" reversed aria-label="接龙轨迹，从最新到最早"></ol>
+        </section>
+      </div>
+    </main>
+  </div>
+  <noscript><p class="no-script">请开启浏览器的 JavaScript 后再玩成语接龙。</p></noscript>
+  <script src="speech.js"></script>
+  <script src="idioms-data.js"></script>
+  <script src="chain-data.js"></script>
+  <script src="chain-engine.js"></script>
+  <script src="chain-app.js"></script>
+</body>
+</html>
