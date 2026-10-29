@@ -9,11 +9,14 @@
 | [`primary/`](primary/) | 🎒 乐学堂 | 小学（当前：四年级） | ✅ 使用中 |
 | [`techlex/`](techlex/) | ⌨️ TechLex · 计算机英语 | 开发 / 运营 / 运维专业人员 | ✅ 使用中 |
 
-**TechLex 亮点**：9 大分类 116 个术语（含 38 个缩写），其中「开发常用缩写」单元收录 fn、param、ctx、env、TODO、FIXME、WIP、LGTM、DRY、YAGNI、OOP 等代码里的高频缩写；每个术语含音标或缩写全称、中文释义、构词拆解、双语例句、关联术语，全部可点读（缩写逐字母朗读）。
+**TechLex 亮点**：9 大分类 169 个术语（含 54 个缩写），其中「开发常用缩写」单元收录 fn、param、ctx、env、TODO、FIXME、WIP、LGTM、DRY、YAGNI、OOP 等代码里的高频缩写；每个术语含音标或缩写全称、中文释义、构词拆解、双语例句、关联术语，全部可点读（缩写逐字母朗读）。
 
 快速开始：
 
 - 小学版：双击 [`primary/index.html`](primary/index.html)，详见 [`primary/README.md`](primary/README.md)
+- 语文知识点：双击 [`primary/knowledge.html`](primary/knowledge.html)，人教版（统编版·新课标）四年级上册单元知识点总结，配课文图示，可点读、可搜索、可打印。
+- 数学知识点：双击 [`primary/math.html`](primary/math.html)，北师大版（新课标）四年级上册单元知识点总结，含例题、图示与互动演示（转角认角、竖式逐步算、行程小车等）、公式速查与易错诊所。
+- 教材同步单词：双击 [`primary/english.html`](primary/english.html)，外研版新标准三起（新课标）四年级上下册，含 12 单元 306 条词卡点读。
 - 成语接龙：双击 [`primary/chain.html`](primary/chain.html)，支持自己接龙、小龙陪练、释义提示与本地续玩。
 - TechLex：双击 [`techlex/index.html`](techlex/index.html)，详见 [`techlex/README.md`](techlex/README.md)
 

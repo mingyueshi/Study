@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="乐学堂 · 数学知识点：北师大版（新课标）四年级上册单元知识点总结，知识要点、例题、易错提醒、公式速查，可点读、可搜索、可打印。">
+  <title>数学知识点 · 乐学堂</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🔢%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="layout.css">
+  <link rel="stylesheet" href="books.css">
+  <link rel="stylesheet" href="figures.css">
+  <link rel="stylesheet" href="math.css">
+</head>
+<body>
+  <a class="skip-link" href="#cards">跳到学习内容</a>
+  <div id="app">
+    <header>
+      <button class="logo" data-act="home">🔢 数学知识点</button>
+      <span class="stats-pill" id="stats"></span>
+      <span class="spacer"></span>
+      <nav class="header-links" aria-label="学习导航">
+        <a class="back-btn" href="knowledge.html">📖 语文知识点</a>
+        <a class="back-btn" href="index.html">← 乐学堂</a>
+      </nav>
+    </header>
+
+    <div class="study-shell">
+      <aside class="sidebar">
+        <p class="sidebar-label">教材单元 <span class="nav-count"></span></p>
+        <details class="category-nav" open>
+          <summary>切换单元 <span class="nav-current"></span></summary>
+          <nav id="chips" aria-label="单元切换"></nav>
+        </details>
+        <p class="sidebar-note">北师大版（新课标）四年级上册<br>看要点 · 读例题 · 打印复习</p>
+      </aside>
+      <div class="study-content">
+        <div class="textbook-banner">
+          <span>🔢 北师大版（新课标）数学</span>
+          <strong>四年级上册 · 知识点总结</strong>
+        </div>
+        <section class="toolbar" aria-label="学习工具">
+          <div class="search-box">
+            <span>🔎</span>
+            <input id="search" type="search" aria-label="搜索全部知识点" placeholder="搜索知识点、公式、易错点…" autocomplete="off">
+          </div>
+          <button class="play-btn" data-act="print">🖨️ 打印本单元</button>
+        </section>
+        <main id="cards" tabindex="-1"></main>
+      </div>
+    </div>
+  </div>
+
+  <script src="speech.js"></script>
+  <script src="math-data.js?v=4"></script>
+  <script src="figures.js?v=4"></script>
+  <script src="math-app.js?v=4"></script>
+  <script src="layout.js"></script>
+</body>
+</html>
