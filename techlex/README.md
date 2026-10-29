@@ -10,7 +10,7 @@
 
 ## 📚 当前内容
 
-8 大分类 86 个术语（其中缩写 8 个），每个术语卡片包含：
+9 大分类 116 个术语（其中缩写 38 个），每个术语卡片包含：
 
 - **音标**（普通单词）或 **缩写全称**（如 DNS = Domain Name System）；
 - **中文释义**；
@@ -21,6 +21,7 @@
 | 分类 | 例词 |
 |---|---|
 | 开发通用 | repository、commit、branch、merge、refactor、debug、compile、framework、dependency、asynchronous |
+| 开发常用缩写 | fn、param、ctx、env、TODO、FIXME、WIP、LGTM、DRY、YAGNI、OOP |
 | 前端 | component、render、state、router、responsive、viewport、stylesheet、bundle、accessibility、hot reload |
 | 后端 | endpoint、payload、schema、query、index、transaction、migration、middleware、authentication、cache、queue |
 | 运维 · CI/CD | deploy、release、rollback、pipeline、CI/CD、container、orchestration、scaling、monitoring、incident、postmortem、uptime |
@@ -31,7 +32,8 @@
 
 ## ✨ 功能
 
-- 分类切换（平铺不裁剪）、连读本单元（读术语 + 中文释义）、已掌握标记、中英文混合搜索；
+- 宽屏分类侧栏、自适应多列卡片；1000px 以下使用可展开的分类目录，选完自动收起；
+- 全分类搜索、连读本单元（读术语 + 中文释义）、已掌握标记；
 - 缩写术语逐字母朗读（DNS → "D N S"），点卡片上的 🔊 即可；
 - 进度保存在本机浏览器。
 

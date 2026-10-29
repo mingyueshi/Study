@@ -78,11 +78,11 @@ function cardHTML(w, u, showUnitTag) {
 
   return '<article class="tcard wcard' + (learned ? ' learned' : '') + '" style="--c:' + u.color + '" data-term="' + esc(w.term) + '">' +
     (showUnitTag ? '<span class="unit-tag">' + esc(u.name) + '</span>' : '') +
-    '<button class="learn-btn' + (learned ? ' on' : '') + '" data-act="learn" data-term="' + esc(w.term) + '" title="标记已掌握">✓</button>' +
+    '<button class="learn-btn' + (learned ? ' on' : '') + '" data-act="learn" data-term="' + esc(w.term) + '" title="标记已掌握" aria-label="已掌握 ' + esc(w.term) + '" aria-pressed="' + learned + '">✓</button>' +
     '<div class="wtop">' +
       '<div class="winfo">' +
         '<div class="wline"><span class="word">' + esc(w.term) + '</span>' +
-        '<button class="say" data-act="sayTerm" data-term="' + esc(w.term) + '">🔊</button>' +
+        '<button class="say" data-act="sayTerm" data-term="' + esc(w.term) + '" aria-label="朗读 ' + esc(w.term) + '">🔊</button>' +
         (w.abbr ? '<span class="chip-tag">缩写</span>' : '') + '</div>' +
         metaLine(w) +
         '<div class="zh">' + esc(w.zh) + '</div>' +
@@ -119,8 +119,8 @@ function renderCards() {
   box.innerHTML =
     '<div class="unit-head" style="--c:' + u.color + '">' +
       '<span class="unit-emoji">' + esc(u.emoji) + '</span>' +
-      '<div><h2>' + esc(u.name) + '</h2>' +
-      '<p>' + unitLearned(u) + ' / ' + u.terms.length + ' 已掌握 · 点术语或 🔊 听发音，构词、例句、关联术语都能点读</p></div>' +
+      '<div><h1>' + esc(u.name) + '</h1>' +
+      '<p>' + unitLearned(u) + ' / ' + u.terms.length + ' 已掌握 · 术语、构词与例句均可点读</p></div>' +
     '</div>' +
     '<div class="wgrid">' + u.terms.map(w => cardHTML(w, u, false)).join('') + '</div>';
 }
@@ -137,7 +137,10 @@ function render() {
   const playBtn = document.getElementById('playBtn');
   if (playBtn) playBtn.textContent = playing ? '■ 停止连读' : '▶ 连读本单元';
   const sb = document.getElementById('soundBtn');
-  if (sb) sb.textContent = tlState.sound ? '🔊' : '🔇';
+  if (sb) {
+    sb.textContent = tlState.sound ? '🔊' : '🔇';
+    sb.setAttribute('aria-label', tlState.sound ? '关闭声音' : '开启声音');
+  }
 }
 
 /* ---------- 交互 ---------- */
@@ -200,7 +203,8 @@ document.addEventListener('click', e => {
   if (!el) return;
   const act = el.dataset.act;
   try {
-    if (act === 'say') { e.preventDefault(); speak(el.dataset.t, 0.88); }
+    if (act === 'home') { e.preventDefault(); selectUnit(TECH_UNITS[0].id); }
+    else if (act === 'say') { e.preventDefault(); speak(el.dataset.t, 0.88); }
     else if (act === 'sayTerm') { e.preventDefault(); sayTerm(TECH_INDEX[el.dataset.term]); }
     else if (act === 'learn') { e.preventDefault(); toggleLearn(el.dataset.term); }
     else if (act === 'unit') { e.preventDefault(); selectUnit(el.dataset.id); }
@@ -215,6 +219,7 @@ document.addEventListener('click', e => {
 document.addEventListener('input', e => {
   if (e.target && e.target.id === 'search') {
     query = e.target.value.trim();
+    renderChips();
     renderCards();
   }
 });

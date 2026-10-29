@@ -85,7 +85,7 @@ function cardHTML(w, u, showUnitTag) {
 
   return '<article class="wcard' + (learned ? ' learned' : '') + '" style="--c:' + u.color + '" data-id="' + esc(w.idiom) + '">' +
     (showUnitTag ? '<span class="unit-tag" style="background:' + u.color + '">' + u.emoji + ' ' + esc(u.name) + '</span>' : '') +
-    '<button class="learn-btn' + (learned ? ' on' : '') + '" data-act="learn" data-id="' + esc(w.idiom) + '" title="标记已掌握">' + (learned ? '✓' : '') + '</button>' +
+    '<button class="learn-btn' + (learned ? ' on' : '') + '" data-act="learn" data-id="' + esc(w.idiom) + '" title="标记已掌握" aria-label="已掌握 ' + esc(w.idiom) + '" aria-pressed="' + learned + '">' + (learned ? '✓' : '') + '</button>' +
     '<div class="wtop">' +
       '<button class="pic seal" data-act="say" data-t="' + esc(w.idiom) + '"><span class="seal-char">' + esc(w.idiom[0]) + '</span></button>' +
       '<div class="winfo">' +
@@ -124,8 +124,8 @@ function renderCards() {
   box.innerHTML =
     '<div class="unit-head" style="--c:' + u.color + '">' +
       '<span class="unit-emoji">' + u.emoji + '</span>' +
-      '<div><h2>' + esc(u.name) + '</h2>' +
-      '<p>已掌握 ' + unitLearned(u) + ' / ' + u.idioms.length + ' 条 · 点印章或 🔊 听读音，逐字、典故、例句都能点读</p></div>' +
+      '<div><h1>' + esc(u.name) + '</h1>' +
+      '<p>已掌握 ' + unitLearned(u) + ' / ' + u.idioms.length + ' 条 · 点读典故与例句</p></div>' +
     '</div>' +
     '<div class="wgrid">' + u.idioms.map(w => cardHTML(w, u, false)).join('') + '</div>';
 }
@@ -216,6 +216,7 @@ document.addEventListener('click', e => {
 document.addEventListener('input', e => {
   if (e.target && e.target.id === 'search') {
     query = e.target.value.trim();
+    renderChips();
     renderCards();
   }
 });

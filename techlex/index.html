@@ -9,35 +9,46 @@
   <link rel="stylesheet" href="tech.css">
 </head>
 <body>
+  <a class="skip-link" href="#cards">跳到学习内容</a>
   <div id="app">
     <header>
       <button class="logo" data-act="home"><span class="logo-t">Tech</span><span class="logo-l">Lex</span></button>
-      <span class="logo-sub">计算机英语 · 开发 / 运维 / 运营</span>
+      <span class="logo-sub">计算机英语 · 在工作中学会使用</span>
       <span class="spacer"></span>
       <span class="stats-pill" id="stats"></span>
-      <button class="icon-btn" data-act="toggleSound" id="soundBtn" title="声音">🔊</button>
+      <button class="icon-btn" data-act="toggleSound" id="soundBtn" title="声音" aria-label="切换声音">🔊</button>
     </header>
 
-    <nav id="chips" aria-label="分类切换"></nav>
+    <div class="study-shell">
+      <aside class="sidebar">
+        <p class="sidebar-label">学习分类 <span class="nav-count"></span></p>
+        <details class="category-nav" open>
+          <summary>切换分类 <span class="nav-current"></span></summary>
+          <nav id="chips" aria-label="分类切换"></nav>
+        </details>
+        <div class="sidebar-foot">
+          <p>点读术语与例句，点 ✓ 标记掌握</p>
+          <a href="../primary/index.html">← 乐学堂 · 小学版</a>
+        </div>
+      </aside>
+      <div class="study-content">
+        <section class="toolbar">
+          <div class="search-box">
+            <span>⌕</span>
+            <input id="search" type="search" aria-label="搜索全部术语" placeholder="搜索术语、中文释义或例句…" autocomplete="off">
+          </div>
+          <button class="play-btn" id="playBtn" data-act="play">▶ 连读本单元</button>
+        </section>
 
-    <section class="toolbar">
-      <div class="search-box">
-        <span>⌕</span>
-        <input id="search" type="search" placeholder="搜索术语、中文释义或例句…" autocomplete="off">
+        <main id="cards" tabindex="-1"></main>
       </div>
-      <button class="play-btn" id="playBtn" data-act="play">▶ 连读本单元</button>
-    </section>
-
-    <main id="cards"></main>
-
-    <footer class="foot">
-      <span>TechLex · Study 多学段学习仓库的独立系统（面向开发 / 运营 / 运维专业人员）</span>
-      <button class="foot-link" data-act="primary">→ 乐学堂（小学版）</button>
-    </footer>
+    </div>
+    <footer class="foot"><span>TechLex · 进度保存在当前浏览器</span><a href="../primary/index.html">乐学堂 · 小学版 ↗</a></footer>
   </div>
 
   <script src="speech.js"></script>
   <script src="tech-data.js"></script>
   <script src="tech-app.js"></script>
+  <script src="layout.js"></script>
 </body>
 </html>

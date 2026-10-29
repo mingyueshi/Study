@@ -82,12 +82,12 @@ function cardHTML(w, u, showUnitTag) {
   }).join('');
   return '<article class="wcard' + (learned ? ' learned' : '') + '" style="--c:' + u.color + '" data-en="' + esc(w.en) + '">' +
     (showUnitTag ? '<span class="unit-tag" style="background:' + u.color + '">' + u.emoji + ' ' + esc(u.zh) + '</span>' : '') +
-    '<button class="learn-btn' + (learned ? ' on' : '') + '" data-act="learn" data-en="' + esc(w.en) + '" title="标记已掌握">' + (learned ? '✓' : '') + '</button>' +
+    '<button class="learn-btn' + (learned ? ' on' : '') + '" data-act="learn" data-en="' + esc(w.en) + '" title="标记已掌握" aria-label="已掌握 ' + esc(w.en) + '" aria-pressed="' + learned + '">' + (learned ? '✓' : '') + '</button>' +
     '<div class="wtop">' +
-      '<button class="pic" data-act="say" data-t="' + esc(w.en) + '">' + picHTML(w) + '</button>' +
+      '<button class="pic" data-act="say" data-t="' + esc(w.en) + '" aria-label="朗读 ' + esc(w.en) + '">' + picHTML(w) + '</button>' +
       '<div class="winfo">' +
         '<div class="wline"><span class="word">' + esc(w.en) + '</span>' +
-        '<button class="say" data-act="say" data-t="' + esc(w.en) + '">🔊</button></div>' +
+        '<button class="say" data-act="say" data-t="' + esc(w.en) + '" aria-label="朗读 ' + esc(w.en) + '">🔊</button></div>' +
         '<div class="ipa">' + esc(w.ipa) + '</div>' +
         '<div class="zh">' + esc(w.zh) + '</div>' +
       '</div>' +
@@ -121,8 +121,8 @@ function renderCards() {
   box.innerHTML =
     '<div class="unit-head" style="--c:' + u.color + '">' +
       '<span class="unit-emoji">' + u.emoji + '</span>' +
-      '<div><h2>' + esc(u.name) + ' · ' + esc(u.zh) + '</h2>' +
-      '<p>已掌握 ' + unitLearned(u) + ' / ' + u.words.length + ' 词 · 点图或 🔊 听发音，点拆分和相关词也能读</p></div>' +
+      '<div><h1>' + esc(u.name) + ' · ' + esc(u.zh) + '</h1>' +
+      '<p>已掌握 ' + unitLearned(u) + ' / ' + u.words.length + ' 词 · 点读发音，拆分记忆</p></div>' +
     '</div>' +
     '<div class="wgrid">' + u.words.map(w => cardHTML(w, u, false)).join('') + '</div>';
 }
@@ -213,6 +213,7 @@ document.addEventListener('click', e => {
 document.addEventListener('input', e => {
   if (e.target && e.target.id === 'search') {
     query = e.target.value.trim();
+    renderChips();
     renderCards();
   }
 });

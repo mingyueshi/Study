@@ -3,6 +3,7 @@
    ============================================================ */
 
 /* 结构锦囊步骤 */
+.writing-content .wgrid { grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr)); }
 .step-text {
   font-size: 15px; font-weight: 600; color: #4a4560; line-height: 1.7;
   cursor: pointer; border: none; background: none; text-align: left;
@@ -20,7 +21,7 @@
 .good-sent:active { background: #f3ecdc; border-radius: 8px; }
 
 /* 范文与点评 */
-.model-box { margin-top: 10px; }
+.model-box { margin-top: 10px; max-width: 72ch; }
 .model-essay {
   background: #fbf6e9; border-radius: 12px; padding: 12px 14px;
   font-size: 15px; line-height: 1.9; color: #4a4560; font-weight: 600;
@@ -46,6 +47,12 @@
 .task-text { flex: 1; font-size: 15px; font-weight: 600; color: #4a4560; line-height: 1.6; min-width: 180px; }
 
 /* ---------- 我的作文本 ---------- */
+.draft-layout { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 20px; align-items: start; }
+.draft-editor > * { max-width: 960px; margin-inline: auto; }
+.editor-heading { font-size: 23px; margin-bottom: 18px; }
+.library-heading { display: flex; gap: 8px; align-items: center; font-size: 17px; margin-bottom: 14px; }
+.library-heading span { background: #edf4ff; color: #3868ad; padding: 1px 8px; border-radius: 6px; font-size: 12px; }
+.draft-library { position: sticky; top: 104px; }
 .draft-btn { background: linear-gradient(135deg, #74c0fc, #3b7dd8); box-shadow: 0 4px 0 #2b5fa8; }
 .draft-btn:active { box-shadow: 0 1px 0 #2b5fa8; }
 .draft-title {
@@ -55,7 +62,7 @@
 }
 .draft-title:focus { border-color: var(--blue, #4d96ff); }
 .draft-textarea {
-  width: 100%; min-height: 300px; font-family: inherit; font-size: 17px;
+  width: 100%; min-height: 48vh; min-height: 48dvh; font-family: inherit; font-size: 18px;
   line-height: 2; padding: 14px; border: 2px solid #eee2cf; border-radius: 16px;
   background: #fffdf7; outline: none; resize: vertical; color: var(--ink);
 }
@@ -88,7 +95,7 @@
 }
 .modal {
   background: #fff; border-radius: 26px; padding: 26px;
-  max-width: 520px; width: 100%; max-height: 86vh; overflow: auto;
+  max-width: 520px; width: 100%; max-height: calc(100vh - 32px); max-height: calc(100dvh - 32px); overflow: auto;
   box-shadow: 0 20px 60px rgba(0, 0, 0, .3); text-align: center;
 }
 .lottery-emoji { font-size: 64px; line-height: 1.2; }
@@ -97,6 +104,12 @@
 .modal .row-center { display: flex; gap: 12px; justify-content: center; margin-top: 18px; flex-wrap: wrap; }
 
 /* 小屏适配 */
+@media (max-width: 1199px) {
+  .draft-layout { grid-template-columns: minmax(0, 1fr); }
+  .draft-library { position: static; }
+}
 @media (max-width: 560px) {
   .draft-textarea { min-height: 240px; font-size: 16px; }
+  .draft-layout .row-center > button { flex: 1 1 auto; }
+  .modal { padding: 22px 18px; }
 }

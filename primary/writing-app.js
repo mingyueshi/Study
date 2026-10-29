@@ -47,7 +47,7 @@ function renderChips() {
   document.getElementById('chips').innerHTML = unitList().map(u => {
     const n = u.id === BOX_UNIT_ID ? '' :
       '<span class="chip-num">' + u.topics.length + ' 题</span>';
-    return '<button class="chip' + (u.id === curUnit && !query && view === 'unit' ? ' on' : '') + '" style="--c:' + u.color + '" data-act="unit" data-id="' + u.id + '">' +
+    return '<button class="chip' + (u.id === curUnit && !query && view !== 'drafts' ? ' on' : '') + '" style="--c:' + u.color + '" data-act="unit" data-id="' + u.id + '">' +
       '<span class="chip-emoji">' + u.emoji + '</span><span class="chip-name">' + u.name + '</span>' + n + '</button>';
   }).join('');
 }
@@ -91,8 +91,8 @@ function renderUnit() {
   if (u.id === BOX_UNIT_ID) return renderBox();
   return '<div class="unit-head" style="--c:' + u.color + '">' +
     '<span class="unit-emoji">' + u.emoji + '</span>' +
-    '<div><h2>' + esc(u.name) + '写作锦囊</h2>' +
-    '<p>共 ' + u.topics.length + ' 个题目 · 看锦囊、读好词好句和范文，然后动笔试一试</p></div></div>' +
+    '<div><h1>' + esc(u.name) + '写作锦囊</h1>' +
+    '<p>' + u.topics.length + ' 个题目 · 看锦囊，读范文，动笔试一试</p></div></div>' +
     '<div class="wgrid">' + u.topics.map(t => topicCard(t, false, u.color)).join('') + '</div>';
 }
 
@@ -113,7 +113,7 @@ function renderBox() {
 
   return '<div class="unit-head" style="--c:#f59f00">' +
     '<span class="unit-emoji">🎁</span>' +
-    '<div><h2>素材百宝箱</h2><p>好开头、好结尾、好词、好句——写作卡住的时候来翻一翻，点一下就能听</p></div></div>' +
+    '<div><h1>素材百宝箱</h1><p>好开头、好结尾、好词与好句，点一下就能听</p></div></div>' +
     '<div class="wgrid">' +
     '<article class="wcard" style="--c:#f59f00"><div class="wline"><span class="word">🚪 好开头</span></div>' + starts + '</article>' +
     '<article class="wcard" style="--c:#f59f00"><div class="wline"><span class="word">🏁 好结尾</span></div>' + ends + '</article>' +
@@ -154,18 +154,18 @@ function renderDrafts() {
       '<button class="di-btn ghost" data-act="delDraft" data-i="' + realIdx + '">删除</button></div>';
   }).join('');
 
-  return '<div class="wgrid" style="grid-template-columns:1fr">' +
-    '<article class="wcard" style="--c:#3b7dd8">' +
-    '<div class="wline"><span class="word">📓 我的作文本</span></div>' +
-    '<input id="draftTitle" class="draft-title" placeholder="作文题目（比如：记一次游戏）" value="' + esc(editor.title) + '">' +
-    '<textarea id="draftContent" class="draft-textarea" placeholder="在这里开始写作文……写完记得点「保存」">' + esc(editor.content) + '</textarea>' +
+  return '<div class="draft-layout">' +
+    '<article class="wcard draft-editor" style="--c:#3b7dd8">' +
+    '<h1 class="editor-heading">📓 我的作文本</h1>' +
+    '<input id="draftTitle" class="draft-title" aria-label="作文题目" placeholder="作文题目（比如：记一次游戏）" value="' + esc(editor.title) + '">' +
+    '<textarea id="draftContent" class="draft-textarea" aria-label="作文正文" placeholder="在这里开始写作文……写完记得点「保存」">' + esc(editor.content) + '</textarea>' +
     '<div id="draftStats">' + draftStatsHTML() + '</div>' +
     '<div class="row-center" style="display:flex;gap:12px;justify-content:center;margin-top:16px;flex-wrap:wrap">' +
     '<button class="ok-btn" data-act="saveDraft">💾 保存</button>' +
     '<button class="mini-btn" data-act="readMine">🔊 读一读我的作文</button>' +
     '<button class="mini-btn ghost" data-act="clearEditor">🧹 重新写</button></div>' +
     '</article>' +
-    '<article class="wcard" style="--c:#3b7dd8"><div class="wline"><span class="word">📚 已保存的作文（' + wrState.drafts.length + '）</span></div>' +
+    '<article class="wcard draft-library" style="--c:#3b7dd8"><h2 class="library-heading">📚 已保存的作文 <span>' + wrState.drafts.length + '</span></h2>' +
     (list || '<p class="dim" style="padding:10px 0">还没有保存过作文，写一篇试试吧！</p>') +
     '</article></div>';
 }
@@ -208,6 +208,9 @@ function selectUnit(id) {
 
 function openDrafts(title) {
   view = 'drafts';
+  query = '';
+  const search = document.getElementById('search');
+  if (search) search.value = '';
   if (title !== undefined) { editor = { title: title || '', content: '', index: null }; }
   render();
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -295,6 +298,7 @@ document.addEventListener('click', e => {
 document.addEventListener('input', e => {
   if (e.target && e.target.id === 'search') {
     query = e.target.value.trim();
+    if (view === 'drafts' && query) view = 'unit';
     render();
     return;
   }

@@ -308,10 +308,11 @@ function buildSheet() {
 function headerHTML() {
   return '<header>' +
     '<button class="logo" data-act="home">🎒 乐学堂</button>' +
+    '<span class="header-context">四年级 · 每天进步一点点</span>' +
     '<span class="spacer"></span>' +
     '<span class="stat-pill" title="我的星星">⭐ ' + state.stars + '</span>' +
     '<span class="stat-pill" title="连续打卡">🔥 ' + state.streak + ' 天</span>' +
-    '<button class="icon-btn" data-act="toggleSound" title="声音">' + (state.sound ? '🔊' : '🔇') + '</button>' +
+    '<button class="icon-btn" data-act="toggleSound" title="声音" aria-label="' + (state.sound ? '关闭声音' : '开启声音') + '">' + (state.sound ? '🔊' : '🔇') + '</button>' +
     '<button class="icon-btn" data-act="settings" title="设置">⚙️</button>' +
     '</header>';
 }
@@ -335,18 +336,37 @@ function viewHome() {
   ).join('');
 
   const wrongTotal = SUBJECTS.reduce((n, s) => n + (state.wrong[s.id] || []).length, 0);
+  const earned = badges().filter(b => b.ok).length;
 
-  return headerHTML() +
-    '<section class="daily-card"><div class="daily-title">📅 今日任务（每科 ' + DAILY_GOAL + ' 题）</div>' +
-    '<div class="rings-row">' + rings + '</div>' + claim + '</section>' +
-    '<section class="subject-grid">' + cards + '</section>' +
-    '<footer class="footer-row">' +
-    '<button class="mini-btn" data-act="words">📘 单词本</button>' +
-    '<button class="mini-btn" data-act="idioms">🏮 成语本</button>' +
-    '<button class="mini-btn" data-act="writing">✏️ 作文坊</button>' +
-    '<button class="mini-btn" data-act="wrong">📕 错题本（' + wrongTotal + '）</button>' +
-    '<button class="mini-btn" data-act="settings">🏅 我的成就</button>' +
-    '</footer>';
+  return '<main id="main-content" class="home-layout" tabindex="-1">' +
+    '<div class="home-main">' +
+      '<div class="page-heading"><p class="eyebrow">我的学习空间</p>' +
+      '<h1>今天，想学点什么？</h1><p>每天一小步，收获新本领。</p></div>' +
+      '<section aria-labelledby="practice-title"><div class="section-heading">' +
+      '<h2 id="practice-title">每日练习</h2><span>每科 ' + DAILY_GOAL + ' 题</span></div>' +
+      '<div class="subject-grid">' + cards + '</div></section>' +
+      '<section aria-labelledby="books-title"><div class="section-heading">' +
+      '<h2 id="books-title">学习百宝箱</h2><span>听一听 · 记一记 · 写一写</span></div>' +
+      '<div class="book-grid">' +
+        '<a class="book-card" href="words.html" style="--bc:#4d96ff"><span class="book-icon">📘</span>' +
+        '<h3>单词本 <span>↗</span></h3><p>按主题点读，拆分记单词</p><span class="book-tag">英语积累</span></a>' +
+        '<a class="book-card" href="idioms.html" style="--bc:#d97745"><span class="book-icon">🏮</span>' +
+        '<h3>成语本 <span>↗</span></h3><p>听典故故事，学会用成语</p><span class="book-tag">语文积累</span></a>' +
+        '<a class="book-card" href="writing.html" style="--bc:#8b65c9"><span class="book-icon">✏️</span>' +
+        '<h3>作文坊 <span>↗</span></h3><p>看写作锦囊，写自己的故事</p><span class="book-tag">表达创作</span></a>' +
+      '</div></section>' +
+    '</div>' +
+    '<aside class="home-aside" aria-label="我的学习进度">' +
+      '<section class="daily-card"><div class="aside-heading"><h2>📅 今日小目标</h2><span>每天坚持</span></div>' +
+      '<div class="rings-row">' + rings + '</div>' +
+      '<p class="goal-note">三科各完成 ' + DAILY_GOAL + ' 题，可领取 ⭐ +10</p>' + claim + '</section>' +
+      '<section class="review-card"><span class="review-icon">📕</span><div><h2>错题再练一练</h2>' +
+      '<p>' + (wrongTotal ? '还有 ' + wrongTotal + ' 道错题等你攻克' : '暂时没有错题，继续保持！') + '</p></div>' +
+      '<button class="mini-btn" data-act="wrong">打开错题本 <span>→</span></button></section>' +
+      '<button class="achievement-card" data-act="settings"><span>🏅</span><div><b>我的成就</b>' +
+      '<p>已点亮 ' + earned + ' / ' + badges().length + ' 枚徽章</p></div><span class="achievement-arrow">→</span></button>' +
+      '<p class="storage-note">学习进度自动保存在当前浏览器</p>' +
+    '</aside></main>';
 }
 
 function viewSubject() {
@@ -358,9 +378,8 @@ function viewSubject() {
     '<span class="mode-name">' + m.name + '</span>' +
     '<span class="mode-desc">' + m.desc + '</span></button>'
   ).join('');
-  return headerHTML() +
-    '<div class="back-row"><button class="mini-btn" data-act="home">⬅ 首页</button></div>' +
-    '<h2 class="subject-title" style="color:' + s.color + '">' + s.emoji + ' ' + s.name + '，今天练什么？</h2>' +
+  return '<div class="back-row"><button class="mini-btn" data-act="home">⬅ 首页</button></div>' +
+    '<h1 class="subject-title" style="color:' + s.color + '">' + s.emoji + ' ' + s.name + '，今天练什么？</h1>' +
     '<section class="mode-list">' + modes + '</section>';
 }
 
@@ -432,8 +451,7 @@ function viewResult() {
   ).join('');
   const dailyHint = dailyAllDone() && !state.daily.bonus
     ? '<div class="daily-hint">🎁 今日任务全部完成！回首页领取奖励</div>' : '';
-  return headerHTML() +
-    '<div class="result-card">' +
+  return '<div class="result-card">' +
     '<div class="result-emoji">' + emoji + '</div>' +
     '<div class="result-msg">' + msg + '</div>' +
     '<div class="result-stat">' + s.emoji + ' ' + esc(r.modeName) + '：答对 <b>' + r.ok + '</b> / ' + r.total + ' 题（' + r.acc + '%）</div>' +
@@ -462,14 +480,13 @@ function viewWrong() {
         : '<span class="dim">太棒了，没有错题！🎉</span>') +
       '</div>' + (book.length ? '<div class="wrong-list">' + list + '</div>' : '') + '</div>';
   }).join('');
-  return headerHTML() +
-    '<div class="back-row"><button class="mini-btn" data-act="home">⬅ 首页</button></div>' +
-    '<h2 class="subject-title">📕 错题本 · 答对 2 次自动消灭</h2>' + rows;
+  return '<div class="back-row"><button class="mini-btn" data-act="home">⬅ 首页</button></div>' +
+    '<h1 class="subject-title">📕 错题本</h1><p class="page-description">再答对 2 次，就能消灭一道错题。</p>' +
+    '<div class="wrong-grid">' + rows + '</div>';
 }
 
 function viewSheet() {
-  return headerHTML() +
-    '<div class="back-row"><button class="mini-btn" data-act="subject" data-id="math">⬅ 返回数学</button></div>' +
+  return '<div class="back-row"><button class="mini-btn" data-act="subject" data-id="math">⬅ 返回数学</button></div>' +
     '<h2 class="subject-title" style="color:#4d96ff">🖨️ 口算打印卡（40 道 + 答案页）</h2>' +
     '<p class="hint">点击"打印"后会打印出练习卷：第一页是题目，第二页是答案（家长核对用）。也可以让孩子直接在屏幕预览中作答。</p>' +
     '<div class="sheet-preview">' + sheetHTML + '</div>' +
@@ -492,8 +509,7 @@ function viewFlash() {
       '<div class="flash-word">' + esc(w.zh) + '</div>' +
       '<div class="flash-tip">' + esc(w.en) + '</div></div>';
   }
-  return headerHTML() +
-    '<div class="back-row"><button class="mini-btn" data-act="subject" data-id="english">⬅ 返回英语</button></div>' +
+  return '<div class="back-row"><button class="mini-btn" data-act="subject" data-id="english">⬅ 返回英语</button></div>' +
     '<div class="quiz-top"><div class="q-progress"><span style="width:' + (flash.i / flash.list.length * 100) + '%;background:#2fbf71"></span></div>' +
     '<span class="q-count">' + (flash.i + 1) + ' / ' + flash.list.length + '</span></div>' +
     card +
@@ -506,8 +522,7 @@ function viewFlash() {
 }
 
 function viewFlashEnd() {
-  return headerHTML() +
-    '<div class="result-card">' +
+  return '<div class="result-card">' +
     '<div class="result-emoji">🃏</div>' +
     '<div class="result-msg">单词卡翻完啦！认识 ' + flash.known + ' / ' + flash.list.length + ' 个</div>' +
     '<div class="result-stat">奖励 ⭐ + 3（没记住的已自动放进错题本）</div>' +
@@ -581,7 +596,10 @@ function render() {
   else if (view === 'sheet') html = viewSheet();
   else if (view === 'flash') html = viewFlash();
   else if (view === 'flashEnd') html = viewFlashEnd();
-  el.innerHTML = html;
+  el.dataset.view = view;
+  const focused = ['quiz', 'result', 'flash', 'flashEnd'].includes(view);
+  el.innerHTML = headerHTML() + (view === 'home' ? html :
+    '<main id="main-content" class="page-content' + (focused ? ' focus-page' : '') + '" tabindex="-1">' + html + '</main>');
 
   /* 自动朗读英语题干 / 聚焦输入框 */
   if (view === 'quiz' && session) {
