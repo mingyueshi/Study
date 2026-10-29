@@ -113,7 +113,20 @@
 | `memo` | 拆分解释：一句话记忆故事 | ✅ |
 | `related` | 相关词数组（**点击可读**）。中文解释自动生成：书内词取它自己的 `zh`，书外拓展词查文件底部的 `WORD_ZH` 词典——**用了新的拓展词时记得在那里补一条**（`test/test-words.js` 会检查覆盖） | ✅ |
 
-新增一个单元：复制一个单元对象，改 `id`（不重复）、`name`、`zh`、`emoji`、`color` 即可，首页单元条自动出现。当前示例共 **17 个单元 205 词**：教室、文具、朋友、家、食物、家庭、星期、季节天气、动物、身体、颜色、数字、学校场所、服装、时间作息、水果、常用动作——星期含完整 7 天、季节含完整四季、数字含 1–12，相关词互相串联。
+新增一个单元：复制一个单元对象，改 `id`（不重复）、`name`、`zh`、`emoji`、`color` 即可，首页单元条自动出现。当前示例共 **25 个单元 305 词**：教室、文具、朋友、家、食物、家庭、星期、季节天气、动物、身体、颜色、数字、学校场所、服装、时间作息、水果、常用动作、**农场、社区场所、交通出行、运动、课程表、心情与感受、节日、方位与问路**——星期含完整 7 天、季节含完整四季、数字含 1–12，相关词互相串联。
+
+后 8 个场景单元是「走出教室」的日常场景，覆盖孩子真实会遇到的情景：
+
+| 单元 | 场景 | 代表词 |
+|---|---|---|
+| 🚜 农场 | 田里长什么、谁在种地 | farm、farmer、tractor、corn、tomato、potato、carrot、pumpkin |
+| 🏙️ 社区场所 | 出门能去的地方 | hospital、park、supermarket、bookstore、cinema、museum、zoo、bank |
+| 🚗 交通出行 | 怎么去、坐什么去 | bus、car、train、plane、ship、subway、bike、on foot、traffic lights |
+| ⚽ 运动 | 体育课与课后活动 | football、basketball、ping-pong、badminton、team、race、win、skate |
+| 📚 课程表 | 今天上什么课 | Chinese、English、maths、music、art、PE、science、homework、timetable |
+| 😊 心情与感受 | 说出自己的感觉 | happy、sad、angry、tired、hungry、thirsty、scared、excited、proud |
+| 🎉 节日 | 中外重要节日 | birthday、Spring Festival、Mid-Autumn Festival、Christmas、Halloween、National Day |
+| 🧭 方位与问路 | 指路、问路、找地方 | left、right、turn、straight、crossing、near、behind、between、map |
 
 ### 练习题库（data.js）
 
