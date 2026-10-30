@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from django.utils.crypto import get_random_string
 from django.test import Client
 from catalog.tests import PlatformFixture
 from catalog.models import ContentItem
@@ -47,8 +48,8 @@ class ProgressTests(PlatformFixture):
     @classmethod
     def setUpTestData(cls):
         super().setUpTestData()
-        cls.alice = get_user_model().objects.create_user('alice', password='Strong-local-test-2026!')
-        cls.bob = get_user_model().objects.create_user('bob', password='Strong-local-test-2026!')
+        cls.alice = get_user_model().objects.create_user('alice', password=get_random_string(24))
+        cls.bob = get_user_model().objects.create_user('bob', password=get_random_string(24))
 
     def setUp(self):
         self.url = f'/api/v1/me/progress/{self.item.pk}/'

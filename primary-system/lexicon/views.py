@@ -19,7 +19,17 @@ def record_payload(record):
     if pronunciation and pronunciation.is_reviewed:
         value = pronunciation.editorial_value or record.pronunciation_value
     definition = sense.editorial_definition.strip() or record.definition.strip()
-    properties = {key: record.properties[key] for key in ('codepoint', 'strokes', 'radical_strokes', 'radicals', 'traditional', 'simplified', 'examples', 'synset', 'source_entry') if key in record.properties}
+    properties = {}
+    for key in ('codepoint', 'strokes', 'radical_strokes', 'radicals', 'traditional', 'simplified', 'oldword', 'more',
+                'derivation', 'example', 'abbreviation', 'examples', 'synset', 'source_entry'):
+        if key not in record.properties:
+            continue
+        item = record.properties[key]
+        if isinstance(item, str):
+            item = item.strip()
+            if not item or item == '无':
+                continue
+        properties[key] = item
     if pronunciation and pronunciation.is_reviewed and 'readings' in record.properties:
         properties['readings'] = record.properties['readings']
     return {

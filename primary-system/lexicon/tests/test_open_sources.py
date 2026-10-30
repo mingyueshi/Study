@@ -135,6 +135,33 @@ class DictionaryPageTests(TestCase):
         self.assertContains(self.client.get('/dictionary/sources/'), self.source.attribution)
         self.assertIn('no-store', detail.headers['Cache-Control'])
 
+    def test_idiom_source_fields_render_and_placeholders_stay_hidden(self):
+        raw = {'word': '阿鼻地狱', 'explanation': '即痛苦无有间断之意。', 'pinyin': 'ā bí dì yù',
+               'derivation': '语出《法华经》。', 'example': '无', 'abbreviation': 'abdy'}
+        data = row('abdy', word='阿鼻地狱', meaning=raw['explanation'], reading=raw['pinyin'], language='zh', kind='idiom',
+                   pronunciation={'value': raw['pinyin'], 'system': 'pinyin', 'region': ''}, raw=raw,
+                   properties={'derivation': raw['derivation'], 'example': '无', 'abbreviation': 'abdy'},
+                   field_paths={'headword': '/word', 'definition': '/explanation', 'pronunciation': '/pinyin',
+                                'properties.derivation': '/derivation', 'properties.example': '/example',
+                                'properties.abbreviation': '/abbreviation'})
+        release, _ = stage_manifest(manifest([data], source='xinhua-page-test'))
+        allow_public(release.source)
+        activate_release(release.pk, expected_current='', reason='测试成语来源')
+        review_objects(LexicalEntry.objects.all(), publish=True)
+        review_objects(Sense.objects.all(), publish=True)
+        review_objects(Pronunciation.objects.all(), publish=True)
+        entry = LexicalEntry.objects.get(headword='阿鼻地狱')
+        detail = self.client.get(f'/dictionary/{entry.pk}/')
+        self.assertContains(detail, '出处')
+        self.assertContains(detail, '语出《法华经》。')
+        self.assertContains(detail, '拼音缩写：abdy')
+        self.assertContains(detail, 'ā bí dì yù')
+        self.assertNotContains(detail, '例句')
+        payload = self.client.get(f'/api/v1/lexicon/{entry.pk}/').json()['definitions'][0]
+        self.assertEqual(payload['properties']['derivation'], '语出《法华经》。')
+        self.assertEqual(payload['properties']['abbreviation'], 'abdy')
+        self.assertNotIn('example', payload['properties'])
+
     def test_private_data_never_appears_in_pages_and_withdrawal_is_immediate(self):
         stage_manifest(manifest([row('secret', 'bank-secret', '<script>private-secret</script>')], source='private'))
         self.assertNotContains(self.client.get('/dictionary/?q=bank'), 'private-secret')

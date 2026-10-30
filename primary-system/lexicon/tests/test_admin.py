@@ -4,6 +4,7 @@ from django.contrib.auth.models import Group
 from django.core.exceptions import PermissionDenied
 from django.core.management import call_command
 from django.test import Client, TestCase
+from django.utils.crypto import get_random_string
 from lexicon.importing import stage_manifest
 from lexicon.models import (ContentEntryLink, EntryMatch, LexicalEntry, LexiconAudit, LexiconSource,
                             Pronunciation, Sense, SourceBinding, SourceRecord, SourceRelease)
@@ -18,7 +19,7 @@ class AdminTests(TestCase):
         cls.record = cls.release.records.get()
         cls.sense = cls.record.binding.sense
         call_command('seed_lexicon_roles', stdout=io.StringIO())
-        cls.admin = get_user_model().objects.create_superuser('lex-admin', password='local-test-only-2026!')
+        cls.admin = get_user_model().objects.create_superuser('lex-admin', password=get_random_string(24))
         cls.editor = get_user_model().objects.create_user('lex-editor', is_staff=True)
         cls.publisher = get_user_model().objects.create_user('lex-publisher', is_staff=True)
         cls.editor.groups.add(Group.objects.get(name='词库编辑'))

@@ -2,7 +2,7 @@ import json
 from pathlib import Path
 from django.core.exceptions import ValidationError
 from django.core.management.base import BaseCommand, CommandError
-from lexicon.adapters import primary_manifest, xinhua_manifest
+from lexicon.adapters import primary_manifest, xinhua_manifest, xinhua_chars_manifest, xinhua_words_manifest
 from lexicon.importing import ImportProblem, stage_manifest
 from lexicon.services import build_matches, link_primary_records
 from lexicon.open_sources import unihan_manifest, oewn_manifest
@@ -12,7 +12,7 @@ class Command(BaseCommand):
     help = '暂存词库版本并建立来源追溯；不自动启用或公开。支持断点续跑。'
 
     def add_arguments(self, parser):
-        parser.add_argument('--adapter', required=True, choices=['primary', 'xinhua', 'json', 'unihan', 'oewn'])
+        parser.add_argument('--adapter', required=True, choices=['primary', 'xinhua', 'xinhua-chars', 'xinhua-words', 'json', 'unihan', 'oewn'])
         parser.add_argument('--input', type=Path)
         parser.add_argument('--selection', type=Path, help='Wordnet 的固定词形范围清单')
         parser.add_argument('--module', choices=['all', 'english', 'words', 'idioms'], default='all')
@@ -37,7 +37,9 @@ class Command(BaseCommand):
                 elif options['adapter'] == 'unihan':
                     manifests = [unihan_manifest(options['input'])]
                 else:
-                    manifests = [xinhua_manifest(options['input']) if options['adapter'] == 'xinhua' else json.loads(options['input'].read_text(encoding='utf-8'))]
+                    adapters = {'xinhua': xinhua_manifest, 'xinhua-chars': xinhua_chars_manifest, 'xinhua-words': xinhua_words_manifest}
+                    builder = adapters.get(options['adapter'])
+                    manifests = [builder(options['input']) if builder else json.loads(options['input'].read_text(encoding='utf-8'))]
             results = []
             for manifest in manifests:
                 release, report = stage_manifest(manifest, dry_run=options['dry_run'], batch_size=options['batch_size'], exact_reuse=options['adapter'] == 'primary')

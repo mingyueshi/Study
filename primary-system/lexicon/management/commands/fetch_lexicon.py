@@ -2,6 +2,7 @@ import hashlib
 import os
 import tempfile
 from pathlib import Path
+from urllib.parse import urlsplit
 from urllib.request import Request, urlopen
 from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
@@ -10,6 +11,9 @@ from lexicon.open_sources import registry
 
 class Command(BaseCommand):
     help = '下载登记的官方固定快照并检查 SHA256；不导入或发布。'
+
+    # 下载只允许登记表里的官方主机；registry.json 虽是仓库内受信文件，白名单兜底防篡改。
+    ALLOWED_DOWNLOAD_HOSTS = ('www.unicode.org', 'en-word.net', 'github.com', 'raw.githubusercontent.com')
 
     def add_arguments(self, parser):
         parser.add_argument('adapter', choices=['unihan', 'oewn'])
@@ -30,6 +34,10 @@ class Command(BaseCommand):
             return
         temporary = None
         try:
+            # URL 只来自仓库内受信的 registry.json；https + 域名白名单双底线。
+            parsed = urlsplit(spec['url'])
+            if parsed.scheme != 'https' or parsed.hostname not in self.ALLOWED_DOWNLOAD_HOSTS:
+                raise CommandError('登记的下载地址不在允许的官方主机清单内。')
             with tempfile.NamedTemporaryFile(dir=folder, delete=False) as output:
                 temporary = Path(output.name)
                 with urlopen(Request(spec['url'], headers={'User-Agent': 'Study-lexicon/1.0'}), timeout=30) as response:

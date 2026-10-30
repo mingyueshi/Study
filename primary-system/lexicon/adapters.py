@@ -7,6 +7,19 @@ from .importing import ImportProblem, digest
 
 XINHUA_SHA256 = '1d4b4f454ce1c416d6a1ab2369d6e66c0ff99e04390172eef70790499e21ce19'
 XINHUA_VERSION = '8de1001aa499cd65fb97ef8712550188c0297a08'
+# 上游 data/word.json 是汉字字典（部首/笔画/异体），data/ci.json 是词语词典；文件名与内容相反。
+XINHUA_CHARS_SHA256 = '8ae3453eacc5b0f3fdfba47eac8bb686cd73914d278e8b851ae6ef81082f80e7'
+XINHUA_WORDS_SHA256 = '739e086d61dc9b95cd1df92095720e6391f952a41c476d3281ef95ebed869a09'
+
+XINHUA_RIGHTS = {
+    'url': 'https://github.com/pwxcoo/chinese-xinhua', 'code_license': 'MIT',
+    'attribution': 'pwxcoo/chinese-xinhua；Copyright (c) 2018 PWXCOO。',
+    'rights_evidence': '上游说明为网络采集；仓库代码许可不能替代第三方释义内容的使用依据。尚未核准公开展示。',
+}
+
+
+def xinhua_source(code, name):
+    return {'code': code, 'name': name, **XINHUA_RIGHTS}
 
 
 def primary_manifest(module):
@@ -65,10 +78,65 @@ def xinhua_manifest(filename):
             'raw': row, 'field_paths': {'headword': '/word', 'definition': '/explanation', 'pronunciation': '/pinyin',
                                       'properties.derivation': '/derivation', 'properties.example': '/example', 'properties.abbreviation': '/abbreviation'},
         })
-    return {'schema_version': 1, 'source': {
-        'code': 'chinese-xinhua-idioms', 'name': 'chinese-xinhua 成语（内部评估）',
-        'url': 'https://github.com/pwxcoo/chinese-xinhua', 'code_license': 'MIT',
-        'attribution': 'pwxcoo/chinese-xinhua；Copyright (c) 2018 PWXCOO。',
-        'rights_evidence': '上游说明为网络采集；仓库代码许可不能替代第三方释义内容的使用依据。尚未核准公开展示。',
-    }, 'version': XINHUA_VERSION, 'adapter': 'chinese-xinhua-v1',
+    return {'schema_version': 1, 'source': xinhua_source('chinese-xinhua-idioms', 'chinese-xinhua 成语（内部评估）'),
+            'version': XINHUA_VERSION, 'adapter': 'chinese-xinhua-v1',
             'source_files': {'idiom.json': [XINHUA_SHA256]}, 'records': records}
+
+
+def xinhua_chars_manifest(filename):
+    """data/word.json：汉字字典。多音字按行拆分，同字头编为一个词条的多个义项。"""
+    data = Path(filename).read_bytes()
+    if hashlib.sha256(data).hexdigest() != XINHUA_CHARS_SHA256:
+        raise ImportProblem('仅接受当前仓库固定的 chinese-xinhua 快照，摘要不符。')
+    records, seen = [], {}
+    for row in json.loads(data):
+        headword, pinyin = row['word'], row.get('pinyin', '')
+        key = f'{headword}:{pinyin}' if pinyin else headword
+        seen[key] = seen.get(key, 0) + 1
+        if seen[key] > 1:
+            key = f'{key}#{seen[key]}'
+        paths = {'headword': '/word', 'definition': '/explanation'}
+        properties = {k: row[k] for k in ('oldword', 'strokes', 'radicals', 'more') if k in row}
+        paths.update({f'properties.{k}': f'/{k}' for k in properties})
+        forms = []
+        if row.get('oldword') and row['oldword'] != headword:
+            forms.append({'text': row['oldword'], 'role': 'variant', 'source_path': '/oldword'})
+        if pinyin:
+            paths['pronunciation'] = '/pinyin'
+        records.append({
+            'key': key, 'entry_key': headword, 'language': 'zh',
+            'kind': 'character' if len(headword) == 1 else 'word', 'headword': headword,
+            'definition': row.get('explanation', ''), 'gloss_language': 'zh', 'pos': '',
+            'pronunciation': {'value': pinyin, 'system': 'pinyin', 'region': ''},
+            'properties': properties, 'forms': forms, 'raw': row, 'field_paths': paths,
+        })
+    return {'schema_version': 1, 'source': xinhua_source('chinese-xinhua-characters', 'chinese-xinhua 汉字（内部评估）'),
+            'version': XINHUA_VERSION, 'adapter': 'chinese-xinhua-chars-v1',
+            'source_files': {'word.json': [XINHUA_CHARS_SHA256]}, 'records': records}
+
+
+def xinhua_words_manifest(filename):
+    """data/ci.json：词语词典，仅词头与释义。同词头多释义编为一个词条的多个义项。"""
+    data = Path(filename).read_bytes()
+    if hashlib.sha256(data).hexdigest() != XINHUA_WORDS_SHA256:
+        raise ImportProblem('仅接受当前仓库固定的 chinese-xinhua 快照，摘要不符。')
+    records, fingerprints, used_heads, used_keys = [], set(), set(), set()
+    for row in json.loads(data):
+        headword, explanation = row['ci'], row.get('explanation', '')
+        fingerprint = (headword, explanation)
+        if fingerprint in fingerprints:
+            continue  # 上游数组内完全相同的重复行；固定快照下跳过即可复现。
+        fingerprints.add(fingerprint)
+        key = headword if headword not in used_heads else headword + ':' + digest(explanation)[:10]
+        while key in used_keys:
+            key += '#'
+        used_keys.add(key)
+        used_heads.add(headword)
+        records.append({
+            'key': key, 'entry_key': headword, 'language': 'zh', 'kind': 'word', 'headword': headword,
+            'definition': explanation, 'gloss_language': 'zh', 'pos': '',
+            'raw': row, 'field_paths': {'headword': '/ci', 'definition': '/explanation'},
+        })
+    return {'schema_version': 1, 'source': xinhua_source('chinese-xinhua-words', 'chinese-xinhua 词语（内部评估）'),
+            'version': XINHUA_VERSION, 'adapter': 'chinese-xinhua-words-v1',
+            'source_files': {'ci.json': [XINHUA_WORDS_SHA256]}, 'records': records}

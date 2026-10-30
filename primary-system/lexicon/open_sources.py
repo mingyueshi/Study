@@ -150,9 +150,10 @@ def element_data(element):
 def parse_oewn(filename, *, version, headwords):
     with gzip.open(filename, 'rb') as stream:
         data = stream.read(140_000_001)
-    if len(data) > 140_000_000 or b'<!ENTITY' in data:
-        raise ImportProblem('Wordnet XML 大小超限或含实体声明。')
-    # ElementTree does not fetch the external WN-LMF DTD. Input is SHA-pinned.
+    # 实体扩展攻击需要字面的 <!ENTITY 声明；连同 <!DOCTYPE 一起在字节层拒绝，
+    # expat 因此只在无 DTD 的纯标签流上解析，网络来源另经 SHA256 固定。
+    if len(data) > 140_000_000 or b'<!DOCTYPE' in data or b'<!ENTITY' in data:
+        raise ImportProblem('Wordnet XML 大小超限或含 DTD／实体声明。')
     lexicon = ET.fromstring(data).find('Lexicon')
     if lexicon is None or lexicon.get('version') != version or lexicon.get('language') != 'en':
         raise ImportProblem('Wordnet 内部版本或语言不符。')
