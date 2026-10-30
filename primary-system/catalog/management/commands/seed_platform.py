@@ -15,7 +15,7 @@ MODULES = [
     ('history', '历史长廊', 'history', 'history', '沿着时间的脚步，认识过去。'),
     ('lit', '文学常识', 'chinese', 'literature', '走近作家、作品和传统文化。'),
     ('sci', '科学实验室', 'science', 'science', '带着问题观察世界，寻找证据。'),
-    ('chain', '成语接龙', 'chinese', 'dragon', '统一账号下的接龙玩法正在接入。'),
+    ('chain', '成语接龙', 'chinese', 'dragon', '和小龙陪练轮流接龙，词语取自统一词库。'),
 ]
 
 
@@ -60,4 +60,8 @@ class Command(BaseCommand):
         # Grant catalog editing, never account administration or private progress access.
         permissions = Permission.objects.filter(content_type__app_label='catalog').exclude(codename__startswith='delete_')
         group.permissions.add(*permissions)
-        self.stdout.write(self.style.SUCCESS('基础目录与内容编辑权限组已就绪；已有记录保持不变。'))
+        game_group, _ = Group.objects.get_or_create(name='游戏管理')
+        # Full control of the game word pool; still no accounts or private progress.
+        game_permissions = Permission.objects.filter(content_type__app_label='games')
+        game_group.permissions.add(*game_permissions)
+        self.stdout.write(self.style.SUCCESS('基础目录、内容编辑与游戏管理权限组已就绪；已有记录保持不变。'))

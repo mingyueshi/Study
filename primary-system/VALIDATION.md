@@ -122,3 +122,43 @@ Playwright 在独立数据库副本中验证：桌面查词首页、汉字详情
 浏览器使用 Django RequestFactory 渲染的真实页面和本地静态资源，由 Playwright 路由响应提供；没有启动服务。预览账号与学习记录只存在于内存中；渲染期间 SQLite 连接设置为只读查询，交付数据库 SHA256 前后相同。浏览器本次核验布局和控件交互，真实数据保存由现有后端回归覆盖。
 
 截图与检查结果位于 `output/playwright/primary-system-responsive/`（已忽略）：`home-wide.png`、`home-desktop.png`、`home-mobile.png`、`reader-desktop.png`、`reader-mobile.png`、`lookup-wide.png`、`lookup-mobile.png`、`character-mobile.png`、`english-desktop.png`、`collection-tablet.png`、`login-mobile.png`、`layout-report.json`。
+
+## 后台导航与接龙词池增量验证（2026-10-31）
+
+本次新增 `games` 接龙词池（词池旁表 + 后台注册）并启用 Nova 导航扩展（分组、图标、常用模型、收藏、计数徽标）。未改动 lexicon 模型与导入流程。
+
+| 检查 | 实际结果 |
+|---|---|
+| SQLite 全套回归 | 82 项：80 通过，2 项 PostgreSQL 专用并发测试按条件跳过（原 73 项 + 新增 games 9 项） |
+| `manage.py check` | 无问题（含 nova_admin 导航扩展自检：徽标 provider、图标名、分组 key 均通过） |
+| `manage.py makemigrations --check --dry-run` | 无模型与迁移漂移；`games.0001_initial` 已应用 |
+| `collectstatic --noinput` | 成功，165 个文件 |
+| `seed_platform` 幂等 | 建立 `游戏管理` 组（games 全部权限）；既有目录与组保持不变 |
+| PostgreSQL 回归 | 本轮未运行 |
+
+浏览器验证在独立 SQLite 副本（`PRIMARY_SQLITE_PATH=output/admin-check.sqlite3`）进行，未向交付库写任何测试数据：
+
+- 登录页品牌标识与滑块拼图渲染正常，完成滑块验证后登录进入站点总览。
+- 侧边栏按「课程内容／基础词库／游戏中心／学习记录／账号与权限」五个分组折叠展示；常用模型快捷方式带图标与计数徽标（学习内容 1219 草稿、接龙词池 0）。
+- 接龙词池新增表单：基础词条自动补全列出启用成语，勾选可接龙并留空首尾字保存「守株待兔」→ 自动派生 守／兔，成功消息与侧边栏徽标 0→1。
+- 批量动作「移出接龙／设为可接龙」经界面往返执行生效；可接龙过滤器（是／否）、按词头搜索、收藏星标与当前页高亮正常。
+- 截图位于 `output/playwright/primary-system/`（已忽略）：`admin-login-captcha.png`、`admin-nav-groups.png`、`admin-chainword-list.png`。检查用数据库与临时服务（8013 端口）验收后已删除和停止。
+
+边界：对局与计分尚未建模；取词范围经测试确认只含生效版本且不要求公开准入，30,895 条成语快照仍仅暂存未启用；演示成语来源只存在于检查库，未进交付库。
+
+## chinese-xinhua 三数据集与查词性能验证（2026-10-31）
+
+- 本地库在 2026-10-30 后重建；成语 30,895 条幂等重导确认，新增汉字 16,142（多音字按行拆为 14,810 个词条的多个义项）、词语 264,431（跳过 3 条上游完全重复行）暂存并激活。适配器只接受固定 commit `8de1001a` 的 SHA256。
+- Unihan／OEWN 经 `fetch_lexicon`＋`publish_lexicon`（registry 校验）重新发布；chinese-xinhua 三来源经 `activate_lexicon` 启用、补许可表述与带日期使用依据（`source_policy` 审计）后由新命令 `review_lexicon` 批量审核发布。
+- 读音分级核对：成语 30,291 通过、604 未核对（四字格内逗号等，与 idiom-chain 导入证据的 608 口径一致，差额为 U+0261 手写体 g 变体归一）；汉字 16,132 通过、10 条格式异常未核对；词语来源未提供读音。空释义词义不批量发布，已发布的 28 条退回待审（含审计）。
+- 字段展示：成语详情页渲染出处／例句／拼音缩写，`无` 占位与纯空白不显示；汉字属性块新增异体字形。新增测试覆盖渲染、占位隐藏、批量命令的读音分级与未准入拒绝，`manage.py test` 85 项通过。
+- 查词性能：32.5 万来源记录规模下，`matching_entries` 由跨 join 的 OR（触发 SQLite 全表扫描、单查询 8–10 秒）重构为按索引前缀的三分支并集＋主键字面量两阶段查询；隔离副本实测搜索 130–370ms（此前 6–18 秒）。空查询浏览全集改走审核状态快路径，与逐记录精确扫描的计数一致（320,722 条）；任一公开来源被禁用或回退时自动退回精确路径，保证撤回立即生效。
+- 报告与证据：`output/lexicon-validation/`（xinhua-{idioms,chars,words}-stage.json、*-review.json、unihan/oewn-stage.json）。主库实时性能测量受本机 Navicat 打开同一数据库的 I/O 干扰存在波动，以隔离副本数据为准。
+
+## 成语接龙对局与陪练增量验证（2026-10-31）
+
+- 在既有接龙词池旁表（`games.ChainWord`，取词只消费词库生效版本、不要求公开准入）上新增玩家侧对局：`games.GameRound`（统一账号 FK、链 JSON、revision 乐观锁）、`games/urls.py`（`games/` 与 `games/api/state|play|hint|restart/`，config 路由改 include）、服务层内存词池缓存与 depth-3 前瞻陪练（移植 idiom-chain 规则：四字纯汉字、严格同字不谐音、+10/−5 计分、待接方无候选自动终局）。
+- `seed_chain_pool` 从词库生效版本填充词池：29,502 条四字纯汉字成语（1,393 条非四字不进池），幂等、bulk_create 显式派生首尾字；后台「游戏管理」组可继续人工勾选与改首尾字。
+- 端到端实测（真实词池）：页面 448ms、state 15ms、出招含陪练前瞻 34ms、提示 33ms、重开 55ms；陪练正常回应、提示返回 3 个候选并扣分、重开排除上一局起点。
+- 「成语本」模块软下架（`is_active=False`，数据/关联/进度全保留可恢复）：入口从学习广场消失，257 张成语教学卡随 `published_items()` 过滤从查词页教学卡区移除（单词卡不受影响）；接龙模块占位页改为进入入口，主导航新增「成语接龙」。
+- 测试：games 套件 24 项（词池命令幂等/干跑、对局 API 全链路、四种 400 拒绝、revision 409、跨用户 409、未登录 401、hint 扣分、自动终局两种、重开与历史）；全库 100 项通过，全链路测试 10 连跑稳定。

@@ -1,0 +1,41 @@
+/* 成语接龙：对局板与链展示。配色沿用 platform.css 的变量。 */
+.chain-layout { display: grid; grid-template-columns: minmax(0, 2fr) minmax(240px, 1fr); gap: 24px; align-items: start; max-width: 1280px; }
+.chain-board, .chain-aside { background: var(--surface, #fff); border: 1px solid var(--line, #dfe5f0); border-radius: 20px; padding: 22px; }
+.chain-stats { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: baseline; justify-content: space-between; margin-bottom: 14px; }
+.chain-score { display: flex; gap: 18px; list-style: none; margin: 0; padding: 0; font-size: 17px; }
+.chain-score strong { font-size: 22px; }
+
+.chain-list { list-style: none; margin: 0 0 14px; padding: 0; max-height: 320px; overflow-y: auto; }
+.chain-list li { display: flex; align-items: baseline; gap: 10px; padding: 7px 10px; border-radius: 10px; }
+.chain-list li:nth-child(odd) { background: rgba(77, 150, 255, .06); }
+.chain-list li.is-partner { background: rgba(255, 176, 32, .12); }
+.chain-no { flex: 0 0 2em; text-align: right; color: var(--muted, #73788b); font-variant-numeric: tabular-nums; }
+.chain-word { font-size: 22px; font-weight: 700; letter-spacing: .12em; }
+.chain-meta { color: var(--muted, #73788b); font-size: 15px; }
+
+.chain-current { border: 1px dashed var(--line, #dfe5f0); border-radius: 16px; padding: 14px 18px; margin-bottom: 14px; }
+.chain-bigword { font-size: clamp(34px, 6vw, 48px); font-weight: 800; letter-spacing: .1em; margin: 0; }
+.chain-bigword b { color: var(--blue, #4d96ff); }
+.chain-meaning { margin: 8px 0 0; color: var(--muted, #73788b); }
+
+.chain-form label { display: block; margin-bottom: 8px; font-size: 17px; }
+.chain-input-row { display: flex; gap: 10px; }
+.chain-input-row input { flex: 1; font-size: 22px; letter-spacing: .3em; text-align: center; }
+.chain-error { color: #b42318; font-size: 16px; margin: 8px 0 0; }
+.chain-actions { display: flex; gap: 12px; margin-top: 14px; align-items: center; flex-wrap: wrap; }
+
+.chain-hints { margin-top: 14px; border: 1px solid var(--line, #dfe5f0); border-radius: 14px; padding: 12px 16px; }
+.chain-hints h3 { margin: 0 0 8px; font-size: 17px; }
+.chain-hint { padding: 8px 0; border-top: 1px solid var(--line, #dfe5f0); font-size: 16px; }
+.chain-hint:first-of-type { border-top: 0; }
+
+.chain-aside h2 { font-size: 19px; margin: 18px 0 8px; }
+.chain-aside h2:first-child { margin-top: 0; }
+.chain-aside p { margin: 0 0 10px; line-height: 1.8; }
+.chain-history { list-style: none; margin: 0; padding: 0; font-size: 16px; }
+.chain-history li { display: flex; justify-content: space-between; gap: 8px; padding: 7px 0; border-top: 1px solid var(--line, #dfe5f0); color: var(--muted, #73788b); }
+
+@media (max-width: 899px) {
+  .chain-layout { grid-template-columns: minmax(0, 1fr); }
+  .chain-word { font-size: 19px; }
+}

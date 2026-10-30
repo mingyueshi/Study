@@ -26,7 +26,7 @@ INSTALLED_APPS = [
     'nova_admin', 'nova_slider_captcha',
     'django.contrib.admin', 'django.contrib.auth', 'django.contrib.contenttypes',
     'django.contrib.sessions', 'django.contrib.messages', 'django.contrib.staticfiles',
-    'accounts', 'catalog', 'learning', 'lexicon',
+    'accounts', 'catalog', 'learning', 'lexicon', 'games',
 ]
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware', 'django.contrib.sessions.middleware.SessionMiddleware',
@@ -96,6 +96,49 @@ NOVA_ADMIN_DEFAULT_MODE = 'light'
 NOVA_ADMIN_BRANDING = {'name': '乐学堂 · 学习管理'}
 NOVA_ADMIN_CAPTCHA_POLICY = 'always'
 NOVA_SLIDER_PURPOSES = ['login']
+# 导航扩展：只重排 AdminSite 已按权限过滤的应用，不新增页面或查询。
+NOVA_ADMIN_NAVIGATION = True
+NOVA_ADMIN_NAV_FAVORITES = True
+NOVA_ADMIN_NAV_GROUPS = [
+    {'key': 'catalog', 'label': '课程内容', 'apps': ['catalog']},
+    {'key': 'lexicon', 'label': '基础词库', 'apps': ['lexicon']},
+    {'key': 'games', 'label': '游戏中心', 'apps': ['games']},
+    {'key': 'learning', 'label': '学习记录', 'apps': ['learning']},
+    {'key': 'people', 'label': '账号与权限', 'apps': ['accounts', 'auth']},
+]
+NOVA_ADMIN_NAV_COMMON_MODELS = ['catalog.contentitem', 'catalog.collection', 'lexicon.lexicalentry', 'games.chainword']
+NOVA_ADMIN_NAV_ICONS = {
+    'catalog': 'heroicons:building-library',
+    'catalog.stage': 'tag', 'catalog.grade': 'tag', 'catalog.subject': 'tag',
+    'catalog.textbookedition': 'tabler:building-bank',
+    'catalog.textbook': 'heroicons:document-text',
+    'catalog.module': 'lucide:package',
+    'catalog.collection': 'bootstrap:box-seam',
+    'catalog.unit': 'heroicons:document-duplicate',
+    'catalog.contentitem': 'lucide:file-text',
+    'catalog.placement': 'lucide:link',
+    'lexicon': 'heroicons:circle-stack',
+    'lexicon.lexiconsource': 'lucide:landmark',
+    'lexicon.sourcerelease': 'heroicons:arrow-path',
+    'lexicon.lexicalentry': 'tabler:file-text',
+    'lexicon.sense': 'lucide:message-square',
+    'lexicon.pronunciation': 'lucide:headset',
+    'lexicon.sourcebinding': 'lucide:link',
+    'lexicon.sourcerecord': 'lucide:database',
+    'lexicon.entryform': 'lucide:copy',
+    'lexicon.contententrylink': 'heroicons:link',
+    'lexicon.entrymatch': 'heroicons:document-duplicate',
+    'lexicon.lexiconaudit': 'lucide:clipboard-list',
+    'games': 'bootstrap:diagram-3',
+    'games.chainword': 'tabler:link',
+    'learning': 'tabler:chart-line',
+    'learning.progress': 'heroicons:chart-bar',
+    'accounts': 'lucide:users',
+    'accounts.user': 'lucide:user',
+    'auth': 'lucide:shield-check',
+    'auth.group': 'iconoir:group',
+}
+NOVA_ADMIN_NAV_BADGE_PROVIDER = 'config.admin_navigation.badges'
 if PRODUCTION:
     if DEBUG or len(SECRET_KEY) < 50 or '*' in ALLOWED_HOSTS:
         raise ImproperlyConfigured('Production requires DEBUG=0, a strong secret and explicit hosts.')

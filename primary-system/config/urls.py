@@ -26,6 +26,7 @@ urlpatterns = [
     path('books/<slug:code>/', catalog.collection_detail, name='collection'),
     path('items/<uuid:pk>/', learning.item_detail, name='item'),
     path('me/', learning.my_learning, name='my-learning'),
+    path('games/', include('games.urls')),
     path('accounts/profile/', profile, name='profile'),
     path('accounts/login/', auth_views.LoginView.as_view(template_name='accounts/login.html', authentication_form=LearnerAuthenticationForm), name='login'),
     path('accounts/logout/', auth_views.LogoutView.as_view(), name='logout'),
