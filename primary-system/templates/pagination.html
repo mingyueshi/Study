@@ -1,0 +1,1 @@
+{% if page.paginator.num_pages > 1 %}<nav class="pagination" aria-label="翻页">{% if page.has_previous %}<a href="{% querystring page=page.previous_page_number %}">← 上一页</a>{% endif %}<span>第 {{ page.number }} / {{ page.paginator.num_pages }} 页</span>{% if page.has_next %}<a href="{% querystring page=page.next_page_number %}">下一页 →</a>{% endif %}</nav>{% endif %}

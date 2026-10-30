@@ -1,0 +1,2 @@
+{% extends 'base.html' %}{% block title %}登录 · 乐学堂{% endblock %}
+{% block content %}<section class="auth-card"><p class="eyebrow">欢迎回来</p><h1>开启今天的学习</h1><p>使用自己的账号，让每一次积累都有记录。</p><form method="post" class="stack-form">{% csrf_token %}{{ form.as_p }}<input type="hidden" name="next" value="{{ next }}"><button class="button" type="submit">登录</button></form><p class="muted">账号由管理员创建；忘记密码时请联系管理员。</p><a class="muted" href="{% url 'admin:login' %}">管理后台入口 →</a></section>{% endblock %}

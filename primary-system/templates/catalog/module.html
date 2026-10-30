@@ -1,0 +1,3 @@
+{% extends 'base.html' %}{% block title %}{{ module.name }} · 乐学堂{% endblock %}
+{% block content %}<a class="back" href="{% url 'home' %}">← 学习广场</a><div class="page-heading"><p class="eyebrow">{{ module.subject }}</p><h1>{{ module.name }}</h1><p class="lead">{{ module.description }}</p></div>
+{% if module.code == 'chain' %}<div class="empty"><h2>小龙正在准备新的旅程</h2><p>成语接龙已纳入统一目录。账号对局、计分和陪练将在后续接入；现在可以先去成语本读读故事。</p><a class="button" href="{% url 'module' 'idioms' %}">去读成语本</a></div>{% else %}{% include 'catalog/filters.html' %}{% include 'catalog/book_list.html' %}{% endif %}{% endblock %}

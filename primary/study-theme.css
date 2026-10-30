@@ -1,0 +1,389 @@
+/* 首页视觉体系的学习页主题。只覆盖呈现，沿用原有页面结构、交互和存档。 */
+@media screen {
+  .study-page {
+    --subject-accent: #dd8250;
+    --subject-soft: #ffe3d0;
+    --subject-line: #efc4a8;
+    --subject-ink: #91482a;
+    --bg: #fffaf2;
+    --ink: #293b4a;
+    --card: #fffefb;
+    --muted: #596879;
+    --line: #e9e2d6;
+    --gutter: clamp(20px, 3.2vw, 76px);
+    --chain: #276f55;
+    --chain-soft: #e1f5e9;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "PingFang SC", "Microsoft YaHei UI", "Microsoft YaHei", "Hiragino Sans GB", sans-serif;
+    font-size: 18px;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+  .study-page[data-subject="math"] { --subject-accent: #628fcb; --subject-soft: #dceaff; --subject-line: #b9d1f1; --subject-ink: #355c93; }
+  .study-page[data-subject="english"] { --subject-accent: #5e9f7a; --subject-soft: #ddf1e3; --subject-line: #b7d9c2; --subject-ink: #376b4e; }
+  .study-page[data-subject="words"] { --subject-accent: #609cbd; --subject-soft: #e0f1fb; --subject-line: #c3ddeb; --subject-ink: #397493; }
+  .study-page[data-subject="idioms"] { --subject-accent: #bd8d3b; --subject-soft: #fff0c9; --subject-line: #ead5aa; --subject-ink: #8e692a; }
+  .study-page[data-subject="writing"] { --subject-accent: #9570c0; --subject-soft: #f0e5ff; --subject-line: #ded0ec; --subject-ink: #7b549e; }
+  .study-page[data-subject="chain"] { --subject-accent: #64a387; --subject-soft: #e1f5e9; --subject-line: #bfdfd1; --subject-ink: #39785d; }
+  .study-page[data-subject="geo"] { --subject-accent: #609cbd; --subject-soft: #dff1ff; --subject-line: #c3ddeb; --subject-ink: #397493; }
+  .study-page[data-subject="astro"] { --subject-accent: #977cc1; --subject-soft: #ede7ff; --subject-line: #d8cfed; --subject-ink: #77589c; }
+  .study-page[data-subject="history"] { --subject-accent: #b68c50; --subject-soft: #fff0d7; --subject-line: #e8d5b9; --subject-ink: #886431; }
+  .study-page[data-subject="lit"] { --subject-accent: #c28097; --subject-soft: #ffe8ed; --subject-line: #ebcfd7; --subject-ink: #a25470; }
+  .study-page[data-subject="sci"] { --subject-accent: #59a99a; --subject-soft: #dff5ef; --subject-line: #b8dfd8; --subject-ink: #2f7c70; }
+  .study-page :focus-visible { outline: 3px solid #315faa; outline-offset: 4px; }
+
+  /* 顶栏和首页采用同一组矢量图标与字体。 */
+  .study-page #app > header { min-height: 96px; gap: 14px 22px; padding: 16px var(--gutter); background: #fffefb; border-bottom-color: var(--line); }
+  .study-page .logo { display: inline-flex; align-items: center; gap: 13px; max-width: 100%; font-size: inherit; line-height: 1.3; }
+  .study-logo-icon { display: grid; place-items: center; flex-shrink: 0; width: 64px; height: 64px; background: var(--subject-soft); border: 1px solid var(--subject-line); border-radius: 20px; transform: rotate(-4deg); }
+  .study-logo-icon img { display: block; width: 54px; height: 54px; }
+  .study-logo-copy { display: flex; flex-direction: column; gap: 4px; text-align: left; min-width: 0; }
+  .study-brand-caption { color: var(--muted); font-size: 12px; font-weight: 550; letter-spacing: .8px; }
+  .study-logo-title { color: var(--ink); font-size: 27px; font-weight: 800; letter-spacing: .5px; }
+  .study-page .header-context { font-size: 15px; }
+  .study-page .header-links { gap: 8px; }
+  .study-page .back-btn { min-height: 44px; padding: 9px 13px; border: 1px solid var(--line); border-radius: 12px; background: #fffefb; color: #526171; font-size: 15px; font-weight: 650; }
+  .study-page .back-btn:hover { border-color: var(--subject-line); background: var(--subject-soft); color: var(--subject-ink); }
+  .study-page :is(.stat-pill, .stats-pill) { min-height: 40px; padding: 6px 14px; border-color: var(--subject-line); border-radius: 12px; background: var(--subject-soft); color: var(--subject-ink); font-size: 15px; font-weight: 650; }
+  .study-page .icon-btn { width: 46px; height: 46px; font-size: 23px; border-radius: 14px; background: var(--subject-soft); border-color: var(--subject-line); }
+
+  /* 宽屏铺满，目录和正文各有清楚的阅读层级。 */
+  .study-page .study-shell { grid-template-columns: 280px minmax(0, 1fr); gap: clamp(24px, 2.2vw, 42px); padding-top: 30px; padding-bottom: 52px; }
+  .study-page .sidebar { top: 120px; max-height: calc(100vh - 144px); max-height: calc(100dvh - 144px); padding: 20px 12px 16px; border-color: var(--subject-line); border-radius: 23px; background: var(--card); box-shadow: 0 3px 0 var(--subject-line); }
+  .study-page .sidebar-label { padding: 0 12px 16px; font-size: 16px; color: var(--subject-ink); }
+  .study-page .nav-count { padding: 1px 8px; font-size: 13px; background: var(--subject-soft); color: var(--subject-ink); }
+  .study-page .sidebar-note { margin-top: 14px; padding: 16px 12px 0; color: var(--muted); font-size: 13px; line-height: 1.8; }
+  .study-page .category-nav { scrollbar-color: var(--subject-line) transparent; }
+  .study-page #chips { gap: 7px; padding-inline: 2px; }
+  .study-page .chip { min-height: 64px; gap: 11px; padding: 9px 10px; border-radius: 15px; font-size: 16px; font-weight: 650; line-height: 1.5; }
+  .study-page .chip:hover { background: #f8f4eb; }
+  .study-page .chip.on { background: color-mix(in srgb, var(--c) 14%, #fffdf6); border-color: color-mix(in srgb, var(--c) 40%, #eee3cf); color: var(--ink); }
+  .study-page .chip-emoji { display: grid; place-items: center; width: 38px; height: 40px; background: color-mix(in srgb, var(--c) 12%, #fffdf6); border-radius: 11px; font-size: 28px; }
+  .study-page .chip-num { padding: 3px 7px; font-size: 12px; color: #596879; background: #f2f0e8; }
+  .study-page .chip-num.full { color: #276f55; background: #dff3e7; }
+  .study-page .book-label { padding: 18px 12px 8px; color: var(--subject-ink); font-size: 15px; }
+
+  .study-page .textbook-banner { min-height: 58px; gap: 8px 20px; padding: 14px 22px; margin-bottom: 22px; border: 1px solid var(--subject-line); border-radius: 18px; background: var(--subject-soft); color: var(--subject-ink); font-size: 16px; }
+  .study-page .textbook-banner strong { font-size: 17px; color: var(--subject-ink); }
+  .study-page .toolbar { gap: 12px; margin-bottom: 24px; }
+  .study-page .search-box { min-height: 56px; padding: 4px 16px; border-color: #dedace; border-radius: 16px; background: var(--card); }
+  .study-page .search-box > span { font-size: 23px; }
+  .study-page .search-box input { padding-block: 11px; font-size: 18px; }
+  .study-page .search-box input::placeholder { color: #69736f; }
+  .study-page .search-box:focus-within { border-color: var(--subject-accent); box-shadow: 0 0 0 3px var(--subject-soft); }
+  .study-page :is(.play-btn, .ok-btn) { min-height: 54px; border: 1px solid var(--subject-ink); padding: 12px 20px; border-radius: 15px; background: var(--subject-ink); color: #fff; font-size: 17px; font-weight: 700; box-shadow: 0 3px 0 color-mix(in srgb, var(--subject-ink) 80%, #293b4a); }
+  .study-page .draft-btn { color: var(--subject-ink); border-color: var(--subject-line); background: var(--subject-soft); box-shadow: 0 3px 0 var(--subject-line); }
+  .study-page :is(.mini-btn, .toggle-btn, .di-btn, .fig-btn, .chain-entry) { min-height: 44px; border: 1px solid var(--subject-line); border-radius: 12px; padding: 9px 14px; background: #fff9ec; color: var(--subject-ink); font-size: 16px; }
+  .study-page .mini-btn.ghost, .study-page .di-btn.ghost { color: #a4453f; }
+  .study-page .voice-sel { min-height: 54px; width: 220px; border-color: #dedace; border-radius: 15px; background: var(--card); font-size: 16px; }
+
+  /* 单元标题使用首页的大色块，正文卡片留足空间。 */
+  .study-page .unit-head { gap: 22px; padding: 26px 28px; margin-bottom: 24px; border: 1px solid var(--subject-line); border-radius: 24px; background: var(--subject-soft); box-shadow: 0 3px 0 var(--subject-line); }
+  .study-page .unit-head > div { min-width: 0; }
+  .study-page .unit-emoji { display: grid; place-items: center; flex: 0 0 80px; height: 86px; border-radius: 22px; background: #ffffff94; font-size: 52px; line-height: 1; }
+  .study-page .unit-head h1 { font-size: clamp(27px, 2.1vw, 38px); font-weight: 800; line-height: 1.5; color: var(--ink); text-wrap: balance; }
+  .study-page .unit-head p { margin-top: 6px; color: #516172; font-size: 17px; line-height: 1.8; font-weight: 500; text-wrap: balance; }
+  .study-page .goal-tags { gap: 8px; margin-top: 14px; }
+  .study-page .goal-tags span { padding: 5px 12px; border-color: var(--subject-line); border-radius: 10px; background: #ffffffb0; color: #465765; font-size: 14px; }
+  .study-page .wgrid { grid-template-columns: repeat(auto-fill, minmax(min(100%, 400px), 1fr)); gap: 24px; }
+  .study-page .writing-content .wgrid { grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr)); }
+  .study-page :is(.wcard, .kcard, .poem-card, .formula-card, .mistake-card, .saying-card, .poly-card, .similar-card, .ublock) { padding: 26px; border-color: var(--subject-line); border-radius: 22px; background: var(--card); box-shadow: 0 3px 0 var(--subject-line); }
+  .study-page :is(.wcard, .kcard, .poem-card, .mistake-card, .poly-card, .similar-card) { border-top: 4px solid var(--c); }
+  .study-page #cards > :is(.kcard, .formula-card, .saying-card) { margin-bottom: 24px; }
+  .study-page :is(.wcard, .kcard).learned { background: #f0f9ed; border-color: #bfd8b7; }
+  .study-page .khead { gap: 10px; padding-right: 54px; }
+  .study-page .ktitle { font-size: clamp(25px, 1.7vw, 31px); line-height: 1.5; font-weight: 800; }
+  .study-page :is(.kno, .ktag, .kauthor, .pkind, .pmeta) { font-size: 14px; }
+  .study-page .k-overview { margin-top: 18px; max-width: 82ch; font-size: 18px; font-weight: 500; line-height: 1.9; }
+  .study-page :is(.ksec, .wsec) { gap: 14px; margin-top: 18px; }
+  .study-page .seclabel { flex-basis: 32px; height: 32px; margin-top: 4px; border-radius: 10px; background: var(--subject-soft); color: var(--subject-ink); font-size: 16px; }
+  .study-page .klist { gap: 8px; }
+  .study-page :is(.kli, .pline, .sitem, .good-sent, .example, .step-text, .sim-row, .poly-half, .sa-row) { min-height: 44px; }
+  .study-page :is(.kli, .ktheme, .kcraft, .mex-q, .mex-steps, .mex-a, .mist-row, .step-text, .good-sent, .task-text, .story, .example, .model-essay, .comment), .study-page .ublock li { font-size: 18px; line-height: 1.9; font-weight: 500; }
+  .study-page :is(.mex-q, .mex-steps, .mex-a, .ktheme, .kcraft, .krecite, .pnote, .model-essay, .story) { padding: 14px 16px; border-radius: 15px; }
+  .study-page :is(.krecite, .pnote, .comment, .pnote-row, .poly-py, .poly-w, .sim-row i, .sa-n, .sa-a) { font-size: 16px; }
+  .study-page :is(.ublock h3, .phead h3, .shead h3, .wsub) { font-size: 23px; line-height: 1.6; }
+  .study-page :is(.pline, .sitem) { padding: 7px 10px; font-size: 20px; line-height: 1.8; }
+  .study-page .frow { padding: 12px 16px; border-radius: 13px; }
+  .study-page :is(.frow b, .frow span, .sa-row b) { font-size: 18px; }
+  .study-page .wpill { padding: 7px 11px; border-radius: 12px; }
+  .study-page .wpill b { font-size: 18px; color: color-mix(in srgb, var(--c) 65%, #293b4a); }
+  .study-page .wpill i { font-size: 14px; }
+  .study-page .fw { min-height: 44px; padding: 7px 12px; font-size: 16px; }
+  .study-page :is(.poly-char, .big-char) { background: var(--subject-soft); color: var(--subject-ink); }
+
+  /* 词卡把掌握操作放在独立的卡片底部，给大图标与文字让出空间。 */
+  .study-page .wtop { gap: 18px; padding-right: 0; margin-bottom: 20px; }
+  .study-page .pic { flex-basis: 86px; width: 86px; height: 96px; border-radius: 22px; background: color-mix(in srgb, var(--c) 14%, #fffdf6); }
+  .study-page .pic-emoji { font-size: 54px; }
+  .study-page .pic-img { width: 74px; height: 84px; }
+  .study-page .pic-fallback { font-size: 40px; }
+  .study-page .word { font-size: 30px; line-height: 1.4; font-weight: 800; }
+  .study-page .idiom { font-size: 32px; letter-spacing: 3px; line-height: 1.5; }
+  .study-page .pic.seal { background: #c65442; }
+  .study-page .seal-char { font-size: 54px; }
+  .study-page :is(.ipa, .pinyin) { font-size: 17px; font-weight: 550; line-height: 1.6; }
+  .study-page .zh { margin-top: 6px; font-size: 18px; line-height: 1.75; font-weight: 550; }
+  .study-page .say, .study-page .kcard .say { width: 44px; height: 44px; border: 1px solid var(--subject-line); border-radius: 50%; background: var(--subject-soft); font-size: 20px; }
+  .study-page .learn-btn { top: 16px; right: 16px; width: 44px; height: 44px; border-width: 2px; border-color: #d6cbb7; background: #fffaf0; font-size: 22px; }
+  .study-page .learn-btn.on { color: #fff; background: #2e8055; border-color: #2e8055; }
+  .study-page:is([data-subject="words"], [data-subject="english"], [data-subject="idioms"]) .wcard { padding-bottom: 80px; }
+  .study-page .wcard > .learn-btn { top: auto; bottom: 18px; right: 22px; }
+  .study-page .wcard > .learn-btn::before { content: '标记掌握'; position: absolute; right: 52px; top: 50%; transform: translateY(-50%); width: 5em; color: #596879; font-size: 14px; font-weight: 650; }
+  .study-page .wcard > .learn-btn.on::before { content: '已经掌握'; color: #276f55; }
+  .study-page :is(.parts, .rels, .pills) { gap: 8px; }
+  .study-page :is(.part, .rel) { padding: 7px 11px; border-width: 1px; border-radius: 12px; }
+  .study-page .part b { font-size: 19px; color: color-mix(in srgb, var(--c) 65%, #293b4a); }
+  .study-page .rel b { font-size: 17px; }
+  .study-page :is(.part i, .rel i) { font-size: 14px; font-weight: 500; }
+  .study-page .memo { padding: 14px 16px; border-radius: 15px; background: #fff3d8; color: #66563d; font-size: 17px; font-weight: 500; line-height: 1.8; }
+  .study-page .unit-tag { color: var(--subject-ink); background: var(--subject-soft) !important; border: 1px solid var(--subject-line); border-radius: 9px; padding: 4px 12px; font-size: 13px; box-shadow: none; }
+  .study-page .search-head { margin-block: 4px 20px; font-size: 19px; color: var(--subject-ink); }
+  .study-page .empty { padding: 42px 24px; border: 1px solid var(--subject-line); border-radius: 24px; background: #fff5df; font-size: 20px; box-shadow: 0 3px 0 var(--subject-line); }
+}
+
+@media screen {
+  /* 图示和操作说明使用清楚的字号；保留原有 SVG 与互动控件。 */
+  .study-page .fig { margin-block: 20px 8px; padding: 18px; border-color: #e3dccd; border-radius: 18px; background: #fffaf0; }
+  .study-page :is(.fig-cap, .fig-stop i) { font-size: 14px; color: #596879; }
+  .study-page :is(.fig-note, .fig-label, .fig-stop b) { font-size: 17px; }
+  .study-page .fig-stop { padding: 14px 10px; border-color: var(--subject-line); border-radius: 15px; }
+  .study-page .fig-stop-ico { font-size: 32px; }
+  .study-page .fig-table { font-size: 16px; }
+  .study-page .fig-table th, .study-page .fig-table td { padding: 9px 10px; }
+  .study-page .fig-ctrl { gap: 10px; margin-top: 14px; }
+  .study-page .fig-btn.fig-primary { background: var(--subject-ink); border-color: var(--subject-ink); color: #fff; }
+  .study-page .fig-btn.fig-on { border-color: var(--subject-accent); background: var(--subject-soft); color: var(--subject-ink); }
+  .study-page .fig-range { min-height: 44px; accent-color: var(--subject-ink); }
+  .study-page .unit-banner { margin-bottom: 24px; }
+  .study-page .unit-banner svg { border-color: var(--subject-line); border-radius: 20px; }
+  .study-page .textbook-source { font-size: 14px; }
+
+  /* 作文锦囊、范文、素材和作文本。 */
+  .study-page .hint-box { padding: 14px 16px; border: 1px solid #ecd8b1; border-radius: 15px; background: #fff2d3; color: #806122; font-size: 17px; font-weight: 500; }
+  .study-page .model-box { margin-top: 18px; }
+  .study-page .model-essay { background: #fff5e2; font-size: 19px; line-height: 2; }
+  .study-page .comment { margin-top: 12px; padding: 14px 16px; background: #edf6e8; color: #386747; }
+  .study-page .draft-layout { gap: 24px; grid-template-columns: minmax(0, 1fr) minmax(260px, 320px); }
+  .study-page .draft-library { top: 120px; }
+  .study-page .editor-heading { font-size: 29px; }
+  .study-page .library-heading { flex-wrap: wrap; font-size: 22px; }
+  .study-page .library-heading span { padding: 3px 9px; font-size: 14px; color: var(--subject-ink); background: var(--subject-soft); }
+  .study-page .draft-title { min-height: 56px; padding: 13px 16px; border: 1px solid var(--subject-line); border-radius: 15px; font-size: 22px; background: #fffaf0; }
+  .study-page .draft-textarea { padding: 18px; border: 1px solid var(--subject-line); border-radius: 18px; font-size: 20px; line-height: 2; background: #fffaf0; }
+  .study-page :is(.draft-title, .draft-textarea):focus { border-color: var(--subject-accent); box-shadow: 0 0 0 3px var(--subject-soft); }
+  .study-page .stat-line { margin-block: 16px 10px; font-size: 16px; color: #596879; }
+  .study-page .draft-item { gap: 10px; padding-block: 18px; border-bottom: 1px dashed var(--subject-line); }
+  .study-page .draft-item .di-title { font-size: 19px; overflow-wrap: anywhere; }
+  .study-page .draft-item .di-meta { font-size: 14px; color: #596879; }
+  .study-page .modal { border: 1px solid var(--subject-line); background: #fffaf2; border-radius: 28px; box-shadow: 0 16px 50px #293b4a24; }
+  .study-page .modal h3 { margin-block: 12px; font-size: 30px; }
+  .study-page .modal .lottery-goal { color: #596879; font-size: 18px; }
+
+  /* 接龙游戏沿用首页的绿色、杏色和大字卡片。 */
+  .study-page .chain-page { padding-top: 30px; }
+  .study-page .chain-heading { padding: 28px 32px; margin-bottom: 28px; border: 1px solid var(--subject-line); border-radius: 26px; background: var(--subject-soft); }
+  .study-page .chain-eyebrow { margin-bottom: 8px; color: var(--subject-ink); font-size: 15px; }
+  .study-page .chain-heading h1 { font-size: clamp(30px, 2.5vw, 46px); font-weight: 800; line-height: 1.5; }
+  .study-page .chain-heading p:last-child { font-size: 18px; color: #516172; }
+  .study-page .chain-layout { grid-template-columns: minmax(0, 1fr) 340px; gap: 26px; }
+  .study-page .panel { border-color: var(--subject-line); border-radius: 24px; background: var(--card); box-shadow: 0 3px 0 var(--subject-line); }
+  .study-page .game-panel { border-top: 4px solid var(--subject-accent); padding: clamp(24px, 2.5vw, 42px); }
+  .study-page .chain-button { min-height: 54px; padding: 12px 20px; border-radius: 15px; font-size: 18px; }
+  .study-page .chain-button.primary { background: var(--subject-ink); box-shadow: 0 3px 0 #285c46; }
+  .study-page .chain-button.secondary { border-color: var(--subject-line); background: #fffefb; color: var(--subject-ink); }
+  .study-page .play-modes { gap: 12px; padding-bottom: 24px; }
+  .study-page .play-modes button { min-height: 50px; border-radius: 14px; padding: 10px 18px; background: #fff9ed; font-size: 17px; }
+  .study-page .play-modes button[aria-pressed="true"] { background: var(--subject-soft); border-color: var(--subject-accent); color: var(--subject-ink); }
+  .study-page .play-modes > span { font-size: 14px; }
+  .study-page .round-meta { font-size: 15px; }
+  .study-page .turn-label { padding: 6px 12px; border-radius: 9px; font-size: 16px; }
+  .study-page .small-label { font-size: 16px; }
+  .study-page #currentWord { font-size: clamp(42px, 3.5vw, 64px); letter-spacing: 4px; }
+  .study-page .read-icon { width: 46px; height: 46px; font-size: 22px; background: var(--subject-soft); }
+  .study-page .current-pinyin { font-size: 19px; }
+  .study-page .next-target { flex-basis: 110px; padding: 14px 18px; border-color: var(--subject-line); border-radius: 20px; background: #ffedc8; color: #806122; }
+  .study-page .next-target strong { font-size: 52px; }
+  .study-page .next-target span { font-size: 14px; }
+  .study-page .current-meaning { margin-block: 24px; padding: 18px 20px; border-radius: 16px; background: #fff4df; color: #66563d; font-size: 18px; }
+  .study-page .answer-label { font-size: 18px; }
+  .study-page #answer { min-height: 60px; border-color: #d5dccd; border-radius: 16px; background: #fffefb; font-size: 25px; }
+  .study-page .feedback { min-height: 32px; font-size: 17px; }
+  .study-page .hint-button { min-height: 48px; padding: 11px 16px; border-radius: 14px; font-size: 17px; }
+  .study-page #inputRule { font-size: 14px; }
+  .study-page .hint-panel { border-color: #ecd8b1; border-radius: 20px; background: #fff4dc; }
+  .study-page .hint-heading h2 { font-size: 22px; }
+  .study-page .hint-heading button { min-height: 44px; font-size: 16px; }
+  .study-page .hint-panel > p { font-size: 16px; }
+  .study-page .hint-choice { padding: 18px; border-radius: 16px; background: #fffefb; }
+  .study-page .hint-choice strong { font-size: 24px; }
+  .study-page .hint-choice .hint-meaning { font-size: 16px; }
+  .study-page .hint-fill { font-size: 15px; }
+  .study-page .chain-aside { top: 120px; gap: 24px; }
+  .study-page .record-panel { background: #fff1d7; border-color: #e7d2ad; }
+  .study-page .chain-aside h2 { font-size: 22px; }
+  .study-page .round-score strong { font-size: 64px; }
+  .study-page .round-score > span { font-size: 16px; }
+  .study-page .record-grid dt { font-size: 14px; }
+  .study-page .record-grid dd { font-size: 29px; }
+  .study-page :is(.record-caption, .dictionary-note, .storage-note) { font-size: 14px; }
+  .study-page .rules-panel ol { padding-left: 24px; color: #516172; font-size: 16px; line-height: 1.8; }
+  .study-page .rule-example { padding: 18px; border-radius: 16px; background: var(--subject-soft); font-size: 23px; }
+  .study-page .trail-panel { padding: 28px; }
+  .study-page .trail-heading h2 { font-size: 25px; }
+  .study-page :is(.trail-heading p, #trailCount, .entry-top, .trail-pinyin) { font-size: 14px; }
+  .study-page .trail-entry { padding: 20px; background: #fffaf0; border-color: #eadfc9; border-radius: 17px; }
+  .study-page .trail-entry.latest { border-color: var(--subject-line); background: var(--subject-soft); }
+  .study-page .trail-word { font-size: 28px; }
+  .study-page .trail-meaning { font-size: 16px; }
+  .study-page .round-end { padding: 24px; border-radius: 20px; }
+  .study-page .round-end h2 { font-size: 25px; }
+  .study-page .round-end p { font-size: 17px; }
+}
+
+@media screen and (max-width: 1399px) {
+  .study-page .study-shell { grid-template-columns: 260px minmax(0, 1fr); gap: 24px; }
+  .study-page .draft-layout { grid-template-columns: minmax(0, 1fr); }
+  .study-page .draft-library { position: static; }
+  .study-page .chain-layout { grid-template-columns: minmax(0, 1fr) 300px; gap: 22px; }
+  .study-page .header-context { display: none; }
+}
+@media screen and (max-width: 1199px) {
+  .study-page #app > header { position: relative; }
+  .study-page .header-links { flex-basis: 100%; order: 3; padding-top: 12px; border-top: 1px solid var(--line); }
+  .study-page .sidebar { top: 24px; max-height: calc(100vh - 48px); max-height: calc(100dvh - 48px); }
+  .study-page .unit-head { gap: 18px; padding: 24px; }
+  .study-page .unit-emoji { flex-basis: 70px; height: 76px; font-size: 46px; }
+  .study-page .chain-layout { grid-template-columns: minmax(0, 1fr); grid-template-areas: 'game' 'side' 'trail'; }
+  .study-page .chain-aside { position: static; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .study-page .storage-note { grid-column: 1 / -1; }
+}
+@media screen and (max-width: 999px) {
+  .study-page .study-shell { grid-template-columns: minmax(0, 1fr); gap: 24px; padding-top: 24px; }
+  .study-page .sidebar { position: static; max-height: none; padding: 0; border-radius: 18px; }
+  .study-page .category-nav > summary { min-height: 64px; gap: 14px; padding: 15px 20px; color: var(--subject-ink); font-size: 17px; }
+  .study-page .category-nav > summary::after { color: var(--subject-ink); font-size: 24px; }
+  .study-page .nav-current { color: var(--subject-ink); }
+  .study-page #chips { gap: 8px; padding: 0 12px 14px; }
+  .study-page .chip { min-height: 60px; }
+  .study-page .textbook-banner { margin-bottom: 20px; }
+  .study-page .wgrid { grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); }
+  .study-page .unit-head h1 { font-size: 28px; }
+  .study-page .unit-head p { font-size: 17px; }
+  .study-page .pic { flex-basis: 76px; width: 76px; height: 86px; }
+  .study-page .pic-emoji, .study-page .seal-char { font-size: 48px; }
+  .study-page .word { font-size: 28px; }
+  .study-page .idiom { font-size: 29px; letter-spacing: 2px; }
+}
+@media screen and (max-width: 600px) {
+  .study-page { --gutter: 18px; }
+  .study-page #app > header { min-height: 88px; gap: 12px; padding-block: 16px; }
+  .study-page .logo { gap: 10px; flex: 1 1 170px; }
+  .study-logo-icon { width: 52px; height: 56px; border-radius: 17px; }
+  .study-logo-icon img { width: 46px; height: 46px; }
+  .study-logo-title { font-size: 23px; letter-spacing: 0; }
+  .study-brand-caption { font-size: 11px; letter-spacing: .4px; }
+  .study-page :is(.stat-pill, .stats-pill) { padding: 6px 10px; min-height: 36px; font-size: 13px; margin-left: auto; }
+  .study-page .header-links { gap: 8px; padding-top: 12px; }
+  .study-page .header-links .back-btn { flex: 0 1 auto; padding: 8px 11px; font-size: 14px; }
+  .study-page .study-shell { gap: 22px; padding-top: 22px; padding-bottom: 36px; }
+  .study-page #chips { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .study-page .chip { gap: 8px; padding-inline: 8px; font-size: 15px; }
+  .study-page .chip-emoji { width: 30px; height: 36px; font-size: 24px; }
+  .study-page .chip-num { padding: 3px 5px; font-size: 11px; }
+  .study-page .textbook-banner { padding: 14px 18px; gap: 5px; font-size: 15px; }
+  .study-page .textbook-banner strong { font-size: 16px; }
+  .study-page .toolbar { gap: 12px; }
+  .study-page .search-box { flex-basis: 100%; }
+  .study-page .search-box input { font-size: 17px; }
+  .study-page .toolbar .voice-sel { flex: 1 1 120px; width: 0; font-size: 16px; }
+  .study-page .toolbar .play-btn { flex: 1 1 auto; padding-inline: 14px; font-size: 16px; }
+  .study-page .unit-head { align-items: flex-start; gap: 15px; padding: 22px 20px; border-radius: 22px; }
+  .study-page .unit-emoji { flex-basis: 56px; height: 64px; border-radius: 17px; font-size: 38px; }
+  .study-page .unit-head h1 { font-size: 25px; line-height: 1.6; }
+  .study-page .unit-head p { font-size: 16px; }
+  .study-page .goal-tags { gap: 7px; margin-top: 12px; }
+  .study-page .goal-tags span { padding: 4px 9px; font-size: 13px; }
+  .study-page :is(.wgrid, .writing-content .wgrid) { grid-template-columns: minmax(0, 1fr); gap: 22px; }
+  .study-page :is(.wcard, .kcard, .poem-card, .formula-card, .mistake-card, .saying-card, .poly-card, .similar-card, .ublock) { padding: 22px 18px; border-radius: 20px; }
+  .study-page .khead { gap: 9px; padding-right: 42px; }
+  .study-page .ktitle { font-size: 25px; }
+  .study-page .k-overview { font-size: 17px; }
+  .study-page :is(.kli, .ktheme, .kcraft, .mex-q, .mex-steps, .mex-a, .mist-row, .step-text, .good-sent, .task-text, .story, .example, .comment), .study-page .ublock li { font-size: 17px; }
+  .study-page :is(.ksec, .wsec) { gap: 10px; margin-top: 16px; }
+  .study-page .seclabel { flex-basis: 28px; height: 30px; font-size: 15px; }
+  .study-page :is(.mex-q, .mex-steps, .mex-a, .ktheme, .kcraft, .krecite, .pnote, .model-essay, .story) { padding: 12px 14px; }
+  .study-page .learn-btn { right: 13px; top: 15px; width: 44px; height: 44px; }
+  .study-page .wtop { gap: 14px; }
+  .study-page .pic { flex-basis: 68px; width: 68px; height: 80px; border-radius: 18px; }
+  .study-page .pic-emoji, .study-page .seal-char { font-size: 44px; }
+  .study-page .pic-img { width: 60px; height: 70px; }
+  .study-page .word { font-size: 27px; }
+  .study-page .idiom { font-size: 28px; letter-spacing: 1px; }
+  .study-page .zh { font-size: 17px; }
+  .study-page :is(.ipa, .pinyin) { font-size: 16px; }
+  .study-page .part b { font-size: 18px; }
+  .study-page :is(.part i, .rel i) { font-size: 13px; }
+  .study-page .memo { padding: 12px 14px; font-size: 16px; }
+  .study-page .fig { padding: 12px; border-radius: 16px; }
+  .study-page .fig-table { font-size: 14px; }
+  .study-page .fig-table th, .study-page .fig-table td { padding: 7px 5px; }
+  .study-page .fig-btn { font-size: 15px; }
+  .study-page .fig-note { font-size: 16px; }
+  .study-page .editor-heading { font-size: 26px; }
+  .study-page .draft-title { font-size: 21px; }
+  .study-page .draft-textarea { min-height: 320px; font-size: 19px; padding: 14px; }
+  .study-page .model-essay { font-size: 18px; }
+  .study-page .chain-page { padding-top: 22px; }
+  .study-page .chain-heading { display: flex; flex-direction: column; align-items: flex-start; gap: 18px; padding: 24px 20px; margin-bottom: 22px; }
+  .study-page .chain-heading h1 { font-size: 29px; }
+  .study-page .chain-heading p:last-child { font-size: 16px; }
+  .study-page .chain-heading > .chain-button { min-height: 44px; padding: 9px 14px; font-size: 16px; }
+  .study-page .game-panel { padding: 22px 18px; }
+  .study-page .play-modes { gap: 8px; padding-bottom: 18px; }
+  .study-page .play-modes button { min-height: 48px; padding-inline: 9px; font-size: 16px; }
+  .study-page .play-modes > span { font-size: 13px; }
+  .study-page .round-meta { font-size: 13px; }
+  .study-page .turn-label { font-size: 14px; }
+  .study-page .small-label { font-size: 14px; }
+  .study-page .current-row { gap: 10px; }
+  .study-page #currentWord { font-size: clamp(26px, 8vw, 34px); letter-spacing: 1px; }
+  .study-page .current-word { gap: 6px; }
+  .study-page .read-icon { width: 32px; height: 32px; font-size: 16px; }
+  .study-page .current-pinyin { font-size: 16px; }
+  .study-page .next-target { flex-basis: 64px; padding: 10px 7px; border-radius: 16px; }
+  .study-page .next-target strong { font-size: 36px; }
+  .study-page .next-target span { font-size: 11px; }
+  .study-page .current-meaning { padding: 14px; font-size: 17px; }
+  .study-page .chain-aside { grid-template-columns: minmax(0, 1fr); }
+  .study-page .chain-button { min-height: 52px; font-size: 17px; }
+  .study-page .answer-row > .chain-button { font-size: 17px; }
+  .study-page .feedback { font-size: 16px; }
+  .study-page .record-panel { padding: 22px; }
+  .study-page .trail-panel { padding: 24px 18px; }
+  .study-page .trail-heading h2 { font-size: 24px; }
+}
+@media screen and (max-width: 379px) {
+  .study-page { --gutter: 14px; }
+  .study-page .study-logo-title { font-size: 21px; }
+  .study-page .category-nav > summary { padding-inline: 16px; font-size: 16px; }
+  .study-page #chips { grid-template-columns: minmax(0, 1fr); }
+  .study-page .unit-head { flex-direction: column; }
+  .study-page .unit-emoji { flex-basis: auto; width: 64px; height: 64px; }
+  .study-page .wtop { gap: 12px; }
+  .study-page .pic { flex-basis: 60px; width: 60px; height: 72px; }
+  .study-page .pic-emoji, .study-page .seal-char { font-size: 40px; }
+  .study-page .word { font-size: 25px; }
+  .study-page .idiom { font-size: 26px; }
+  .study-page .task-text { min-width: 0; flex-basis: 100%; }
+  .study-page .answer-row { flex-direction: column; }
+  .study-page .answer-row > .chain-button { width: 100%; }
+  .study-page .next-target { flex-basis: 58px; }
+  .study-page .current-pinyin { font-size: 14px; }
+  .study-page .game-panel { padding: 20px 16px; }
+}
+@media print {
+  /* 各册自己的打印样式仍然生效，装饰图标不占用复习纸空间。 */
+  .study-logo-icon { display: none; }
+}

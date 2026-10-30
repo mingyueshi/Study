@@ -1,0 +1,5 @@
+<form class="filters" method="get">
+  {% for field in form %}<div class="filter-field">{{ field.label_tag }}{{ field }}{{ field.errors }}</div>{% endfor %}
+  <button class="button" type="submit">查找内容</button>
+  <a class="reset" href="?grade=">查看全部</a>
+</form>

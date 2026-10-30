@@ -34,6 +34,8 @@
   syncMode();
   syncSelection();
   compact.addEventListener('change', syncMode);
+  /* 软刷新时浏览器可能恢复折叠前的目录状态，重新按屏宽归位 */
+  window.addEventListener('pageshow', syncMode);
   new MutationObserver(syncSelection).observe(chips, { childList: true });
   document.addEventListener('click', event => {
     // 学习脚本先重绘了 chips，原按钮此时已从父节点移除。

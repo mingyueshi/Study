@@ -1,0 +1,144 @@
+.lookup-heading { display: grid; grid-template-columns: 1.3fr 1fr; align-items: center; gap: 32px; padding: 44px; margin: 28px 0 24px; border: 1px solid #dce7d2; border-radius: 30px; background: radial-gradient(ellipse at 90% 0, #fff1d2, transparent 55%), #edf4e5; }
+.lookup-heading > div { min-width: 0; }
+.lookup-heading h1 { margin-bottom: 20px; font-size: clamp(36px, 3.3vw, 60px); }
+.lookup-heading h1 span { color: var(--green); }
+.lookup-heading .lead { margin-bottom: 0; }
+.letter-art { position: relative; justify-self: center; width: min(100%, 420px); height: 260px; }
+.letter-art > span { position: absolute; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 2px solid #fffc; border-radius: 30px; box-shadow: 0 12px 0 #263d3807; }
+.han-letter { top: 30px; left: 20px; width: 170px; height: 200px; background: #dceaca; color: #27543c; font-size: 90px; line-height: 1.4; transform: rotate(-8deg); }
+.en-letter { top: 15px; left: 190px; width: 170px; height: 185px; background: #ffe8bd; font-family: Georgia, serif; font-size: 72px; transform: rotate(9deg); }
+.letter-art small { font: 15px/1.8 system-ui, sans-serif; letter-spacing: .06em; }
+.letter-art i { position: absolute; right: 20px; bottom: 0; color: #a66a2c; font-size: 44px; font-style: normal; }
+.lookup-search { display: flex; flex-wrap: wrap; align-items: end; gap: 18px; padding: 26px; border: 2px solid #baceab; border-radius: 22px; background: var(--white); box-shadow: 0 5px 0 #e1ebd9; }
+.lookup-search label { display: block; margin-bottom: 10px; color: var(--muted); font-size: 17px; font-weight: 600; }
+.lookup-query { flex: 1 1 300px; min-width: 0; }
+.lookup-search input { font-size: 21px; }
+.lookup-search select { min-width: 180px; }
+.lookup-search .button { min-height: 60px; }
+.lookup-search > .errorlist { flex-basis: 100%; }
+.lookup-hints { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding: 20px 4px 40px; font-size: 16px; }
+.lookup-hints > span { margin-right: 6px; color: var(--muted); }
+.lookup-hints > a:not(.source-link) { display: inline-flex; align-items: center; justify-content: center; min-width: 48px; min-height: 48px; padding: 6px 17px; border: 1px solid var(--line); border-radius: 14px; background: var(--soft); color: var(--green-dark); font-size: 18px; }
+.lookup-hints > a:hover { background: #dce9ce; }
+.source-link { display: inline-flex; align-items: center; min-height: 48px; padding-inline: 8px; margin-left: auto; color: var(--green); }
+.lookup-results-heading h2 { overflow-wrap: anywhere; }
+.dictionary-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
+.dictionary-card { display: flex; flex-direction: column; min-width: 0; padding: 28px; border: 1px solid var(--line); border-bottom: 4px solid #d6e4c8; border-radius: 24px; background: var(--white); overflow-wrap: anywhere; transition: border-color .18s, transform .18s; }
+.dictionary-card:hover { border-color: #8faa79; transform: translateY(-3px); }
+.dictionary-card-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; color: var(--green); }
+.dictionary-card-top > span[aria-hidden] { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: var(--soft); font-size: 24px; }
+.dictionary-card h3 { margin: 22px 0 10px; font-size: 36px; line-height: 1.4; }
+.character-card h3 { font-size: 64px; }
+.reading { margin-bottom: 18px; color: var(--green); font-size: 21px; line-height: 1.8; overflow-wrap: anywhere; }
+.reading > span { display: inline-block; padding: 3px 9px; margin-left: 12px; border-radius: 8px; background: var(--soft); font-size: 15px; }
+.gloss-label { margin: 0 0 8px; color: var(--muted); font-size: 15px; }
+.dictionary-excerpt { flex: 1; margin-bottom: 24px; font-size: 18px; line-height: 1.9; }
+.dictionary-card-source { padding-top: 16px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; line-height: 1.8; }
+.lookup-footnote { margin: 28px 0; color: var(--muted); font-size: 15px; line-height: 1.9; overflow-wrap: anywhere; }
+.lookup-footnote a, .dictionary-evidence a, .dictionary-aside > a, .character-facts a, .dictionary-source a { color: var(--green); text-decoration: underline; text-underline-offset: 5px; }
+.dictionary-teaching { margin-top: 48px; }
+.dictionary-reader-layout { display: grid; grid-template-columns: minmax(0, 1fr) clamp(320px, 23vw, 400px); gap: 32px; align-items: start; max-width: 1800px; margin-inline: auto; }
+.dictionary-reader { min-width: 0; padding: clamp(28px, 3vw, 56px); border: 1px solid var(--line); border-radius: 26px; background: var(--white); overflow-wrap: anywhere; }
+.entry-heading { padding-bottom: 24px; }
+.entry-heading h1 { margin-bottom: 16px; font-size: 54px; }
+.entry-heading .character-heading { font-size: 112px; line-height: 1.3; }
+.character-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; padding: 26px; margin: 0; border-radius: 20px; background: #edf3e3; }
+.character-facts dt { margin-bottom: 8px; color: var(--muted); font-size: 16px; }
+.character-facts dd { margin: 0; font-size: 24px; line-height: 1.7; }
+.character-facts a { display: inline-flex; align-items: center; min-width: 44px; min-height: 44px; }
+.dictionary-sense { padding: 30px 0 22px; border-top: 1px solid var(--line); }
+.sense-heading { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-bottom: 20px; }
+.sense-number { display: grid; place-items: center; min-width: 42px; height: 42px; padding-inline: 6px; border-radius: 13px; background: var(--soft); color: var(--green); font-size: 20px; font-weight: 750; }
+.pos { color: var(--muted); font-size: 16px; }
+.dictionary-definition { max-width: 52rem; font-size: 22px; line-height: 1.95; }
+.dictionary-examples { padding-left: 22px; margin: 24px 0; border-left: 4px solid #c8dcb8; }
+.dictionary-examples h3 { margin-bottom: 12px; color: var(--muted); font-size: 17px; }
+.dictionary-examples ul { padding-left: 20px; font-size: 20px; line-height: 1.9; }
+.dictionary-examples li + li { margin-top: 10px; }
+.dictionary-evidence { margin-top: 24px; color: var(--muted); font-size: 15px; line-height: 1.9; }
+.dictionary-evidence summary { min-height: 48px; padding: 10px 0; color: var(--green); cursor: pointer; }
+.dictionary-evidence p { margin: 10px 0; }
+.dictionary-evidence pre { padding: 22px; border-radius: 16px; background: #f0f3ea; font: 14px/1.85 ui-monospace, monospace; white-space: pre-wrap; overflow-wrap: anywhere; }
+.dictionary-aside { position: sticky; top: 24px; padding: 28px; border: 1px solid #d5e3c9; border-radius: 24px; background: #eaf2df; }
+.dictionary-aside h2 { font-size: 28px; }
+.dictionary-aside p:not(.eyebrow) { margin-top: 28px; color: var(--muted); font-size: 17px; }
+.dictionary-aside > a { display: inline-flex; align-items: center; min-height: 48px; font-size: 16px; }
+.dictionary-source { margin-bottom: 28px; }
+.dictionary-source dl { display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 18px; font-size: 18px; line-height: 1.9; }
+.dictionary-source dt { color: var(--muted); }
+.dictionary-source dd { margin: 0; }
+
+@media (min-width: 1680px) {
+  .dictionary-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+@media (max-width: 1199px) {
+  .lookup-heading { padding: 36px; }
+  .dictionary-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .dictionary-reader-layout { grid-template-columns: minmax(0, 1fr) 310px; gap: 22px; }
+  .dictionary-reader { padding: 28px; }
+  .dictionary-aside { padding: 24px; }
+}
+
+@media (max-width: 899px) {
+  .lookup-heading { grid-template-columns: 1fr .8fr; gap: 20px; padding: 32px 24px; }
+  .lookup-heading h1 { font-size: 38px; }
+  .lookup-heading .lead br { display: none; }
+  .letter-art { height: 220px; }
+  .han-letter { left: 0; width: 125px; height: 160px; font-size: 72px; }
+  .en-letter { left: 125px; width: 120px; height: 145px; font-size: 54px; }
+  .letter-art small { font-size: 12px; }
+  .letter-art i { right: 0; }
+  .dictionary-reader-layout { grid-template-columns: minmax(0, 1fr); }
+  .dictionary-aside { position: static; }
+  .source-link { flex-basis: 100%; margin-left: 0; }
+}
+
+@media (max-width: 759px) {
+  .lookup-heading { grid-template-columns: minmax(0, 1fr); }
+  .letter-art { display: none; }
+}
+
+@media (max-width: 599px) {
+  .lookup-heading { grid-template-columns: minmax(0, 1fr); padding: 28px 24px; margin-top: 20px; border-radius: 24px; }
+  .lookup-heading h1 { font-size: clamp(30px, 7.5vw, 40px); }
+  .letter-art { display: none; }
+  .lookup-search { gap: 14px; padding: 20px; border-radius: 20px; }
+  .lookup-query { flex-basis: 100%; }
+  .lookup-search > div:not(.lookup-query) { flex: 1; min-width: 0; }
+  .lookup-search select { min-width: 0; }
+  .lookup-search .button { min-height: 56px; gap: 10px; padding-inline: 18px; }
+  .lookup-search input { font-size: 20px; }
+  .lookup-search label { font-size: 16px; }
+  .lookup-hints { gap: 10px; padding: 18px 0 30px; font-size: 15px; }
+  .lookup-hints > span { flex-basis: 100%; }
+  .lookup-hints > a:not(.source-link) { min-height: 48px; }
+  .dictionary-grid { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  .dictionary-card { padding: 24px; border-radius: 22px; }
+  .dictionary-card h3 { margin-top: 18px; font-size: 34px; }
+  .dictionary-card.character-card h3 { font-size: 60px; }
+  .dictionary-excerpt { font-size: 18px; }
+  .dictionary-reader { padding: 26px 22px; border-radius: 22px; }
+  .dictionary-aside { padding: 24px; }
+  .entry-heading h1 { font-size: 42px; }
+  .entry-heading .character-heading { font-size: 96px; }
+  .dictionary-definition { font-size: 21px; }
+  .character-facts { gap: 18px; padding: 20px; border-radius: 16px; }
+  .character-facts dt { font-size: 15px; }
+  .character-facts dd { font-size: 22px; }
+  .dictionary-source dl { grid-template-columns: minmax(0, 1fr); gap: 6px; font-size: 17px; }
+  .dictionary-source dd { margin-bottom: 14px; }
+  .dictionary-evidence pre { padding: 16px; }
+  .lookup-results-heading > p { width: 100%; margin-top: 8px; }
+}
+
+@media (max-width: 359px) {
+  .lookup-search .button { flex: 1 0 100%; }
+  .lookup-heading { padding-inline: 20px; }
+  .character-facts { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dictionary-card { transition: none; }
+  .dictionary-card:hover { transform: none; }
+}

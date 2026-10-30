@@ -1,0 +1,26 @@
+{% extends 'base.html' %}{% load static %}
+{% block title %}查字查词 · 乐学堂{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'dictionary.css' %}">
+<section class="lookup-heading">
+  <div><p class="eyebrow">从一个字，认识更大的世界</p><h1>不懂的字词，<br><span>在这里找到线索。</span></h1><p class="lead">查汉字、读拼音，也看看英文单词的不同意思。<br>词典原文与教材讲解，各有清楚的出处。</p></div>
+  <div class="letter-art" aria-hidden="true"><span class="han-letter">字<small>zì</small></span><span class="en-letter">Aa<small>word by word</small></span><i>✦</i></div>
+</section>
+<form class="lookup-search" method="get" action="{% url 'dictionary' %}" role="search" aria-label="查字查词">
+  <div class="lookup-query">{{ form.q.label_tag }}{{ form.q }}{{ form.q.errors }}</div><div>{{ form.scope.label_tag }}{{ form.scope }}</div><button class="button" type="submit">查一查 <span aria-hidden="true">→</span></button>
+  {{ form.non_field_errors }}{{ form.scope.errors }}
+</form>
+<div class="lookup-hints"><span>可以这样查</span><a href="?q=学&amp;scope=character">学</a><a href="?q=xue&amp;scope=character">xue</a><a href="?q=apple&amp;scope=english">apple</a><a href="?q=bank&amp;scope=english">bank</a><a class="source-link" href="{% url 'dictionary-sources' %}">词库范围与来源 ↗</a></div>
+<section aria-labelledby="lookup-results">
+  <div class="section-heading lookup-results-heading"><div><p class="eyebrow">{% if q %}找到的词典资料{% else %}随手翻一页{% endif %}</p><h2 id="lookup-results">{% if q %}“{{ q }}”的查询结果{% else %}字词小书架{% endif %}</h2></div><p>{{ page.paginator.count }} 个词条 · 第 {{ page.number }} / {{ page.paginator.num_pages }} 页</p></div>
+  <div class="dictionary-grid">{% for card in cards %}<a class="dictionary-card {% if card.entry.kind == 'character' %}character-card{% endif %}" href="{% url 'dictionary-entry' card.entry.pk %}">
+    <div class="dictionary-card-top"><span class="tag">{{ card.entry.get_kind_display }}</span><span aria-hidden="true">↗</span></div>
+    <h3>{{ card.entry.headword }}</h3><p class="reading">{% if card.preview.pronunciation %}{{ card.preview.pronunciation.value }}{% else %}读音暂缺{% endif %}{% if card.preview.part_of_speech %}<span>{{ card.preview.part_of_speech_label }}</span>{% endif %}</p>
+    <p class="gloss-label">{% if card.preview.gloss_language == 'en' %}英文参考释义{% else %}中文释义{% endif %}</p><p class="dictionary-excerpt">{{ card.preview.definition|default:'暂无释义，可查看已收录的字形资料。'|truncatechars:150 }}</p>
+    <div class="dictionary-card-source">{{ card.preview.source.name }}</div>
+  </a>{% empty %}<div class="empty"><h3>暂时没有找到已发布的词条</h3><p>可以试试完整单词、单个汉字或不带声调的拼音。<br>未收录的释义会保持空缺；有相关教材内容时，会列在下方。</p></div>{% endfor %}</div>
+  {% include 'lexicon/pagination.html' %}
+</section>
+{% include 'lexicon/teaching.html' %}
+<p class="lookup-footnote">汉字资料首批采用 Unihan IICore 字集；英文首批围绕现有教材词形收录。常用读音不代表全部多音字读法，英英释义可结合教学卡片理解。<a href="{% url 'dictionary-sources' %}">查看收录说明</a></p>
+{% endblock %}

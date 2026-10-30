@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="乐学堂 · 天文探索：适合小学生的天文宇宙知识学习，太阳系、月球、恒星星座、银河宇宙、航天探索，可点读、可搜索、可打印。">
+  <title>天文探索 · 乐学堂</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🔭%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="layout.css">
+  <link rel="stylesheet" href="books.css">
+  <link rel="stylesheet" href="figures.css">
+  <link rel="stylesheet" href="astro.css">
+  <link rel="stylesheet" href="study-theme.css">
+</head>
+<body class="study-page" data-subject="astro">
+  <a class="skip-link" href="#cards">跳到学习内容</a>
+  <div id="app">
+    <header>
+      <button class="logo" data-act="home"><span class="study-logo-icon" aria-hidden="true"><img src="icons/astro.svg" alt="" width="64" height="64"></span><span class="study-logo-copy"><span class="study-brand-caption">乐学堂 · 快乐学习</span><span class="study-logo-title">天文探索</span></span></button>
+      <span class="stats-pill" id="stats"></span>
+      <span class="spacer"></span>
+      <nav class="header-links" aria-label="学习导航">
+        <a class="back-btn" href="geo.html">🌍 地理探索</a>
+        <a class="back-btn" href="index.html">← 乐学堂</a>
+      </nav>
+    </header>
+
+    <div class="study-shell">
+      <aside class="sidebar">
+        <p class="sidebar-label">太空基地 <span class="nav-count"></span></p>
+        <details class="category-nav" open>
+          <summary>切换基地 <span class="nav-current"></span></summary>
+          <nav id="chips" aria-label="基地切换"></nav>
+        </details>
+        <p class="sidebar-note">小学天文启蒙 · 主题式学习<br>看要点 · 读图示 · 打印复习</p>
+      </aside>
+      <div class="study-content">
+        <div class="textbook-banner">
+          <span>🔭 小学天文启蒙</span>
+          <strong>八大太空基地 · 知识点总结</strong>
+        </div>
+        <section class="toolbar" aria-label="学习工具">
+          <div class="search-box">
+            <span>🔎</span>
+            <input id="search" type="search" aria-label="搜索全部知识点" placeholder="搜索知识点、数据、易错点…" autocomplete="off">
+          </div>
+          <button class="play-btn" data-act="print">🖨️ 打印本站</button>
+        </section>
+        <main id="cards" tabindex="-1"></main>
+      </div>
+    </div>
+  </div>
+
+  <script src="speech.js"></script>
+  <script src="astro-data.js?v=1"></script>
+  <script src="astro-figures.js?v=1"></script>
+  <script src="astro-app.js?v=1"></script>
+  <script src="layout.js?v=2"></script>
+</body>
+</html>

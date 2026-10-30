@@ -1,51 +1,264 @@
-/* ============================================================
-   乐学堂 · 四年级 —— 首页样式（学习导航）
-   ============================================================ */
-.home-page {
-  flex: 1; width: 100%; max-width: 1080px; margin-inline: auto;
-  padding: 32px var(--gutter) 48px;
+/* 乐学堂首页：样式仅由 index.html 引用，不影响学习子页面。 */
+.learning-home {
+  --home-ink: #293b4a;
+  --home-muted: #596879;
+  --home-gutter: clamp(20px, 3.2vw, 76px);
+  background: #fffaf2;
+  color: var(--home-ink);
+  font-family: "PingFang SC", "Microsoft YaHei UI", "Microsoft YaHei", "Hiragino Sans GB", sans-serif;
+  font-size: 18px;
+  -webkit-font-smoothing: antialiased;
 }
-.page-heading { margin-bottom: 26px; }
-.eyebrow { color: #5980bc; font-size: 13px; font-weight: 800; letter-spacing: 2px; margin-bottom: 6px; }
-.page-heading h1 { font-size: clamp(26px, 2.3vw, 38px); font-weight: 900; letter-spacing: .5px; }
-.page-heading > p:last-child { color: var(--muted); font-size: 15px; margin-top: 6px; }
-.section-heading { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 6px 14px; margin: 26px 0 14px; }
-.section-heading h2 { font-size: 19px; font-weight: 900; }
-.section-heading > span { font-size: 13px; color: var(--muted); }
+.home-icons { position: absolute; width: 0; height: 0; overflow: hidden; pointer-events: none; }
+.learning-home :where(svg) { display: block; }
+.learning-home :focus-visible { outline: 3px solid #315faa; outline-offset: 5px; }
+.learning-home section[id] { scroll-margin-top: 20px; }
 
-.book-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
-.book-card { min-width: 0; display: block; text-decoration: none; padding: 22px; background: #fff; border: 1px solid var(--line); border-radius: 20px; transition: border-color .15s, transform .15s; }
-.book-card:hover { border-color: var(--bc); transform: translateY(-3px); }
-.book-icon { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 16px; background: color-mix(in srgb, var(--bc) 10%, white); font-size: 30px; margin-bottom: 16px; }
-.book-card h3 { display: flex; justify-content: space-between; align-items: center; gap: 10px; font-size: 20px; }
-.book-card h3 span { color: #9ca6b9; font-size: 17px; }
-.book-card p { color: var(--muted); font-size: 13px; margin-top: 6px; }
-.book-tag { display: inline-block; margin-top: 18px; padding: 3px 9px; border-radius: 6px; background: color-mix(in srgb, var(--bc) 9%, white); color: #626a80; font-size: 11px; font-weight: 700; }
+.learning-home #app > .home-header {
+  min-height: 96px;
+  padding: 16px var(--home-gutter);
+  flex-wrap: nowrap;
+  gap: 24px;
+  background: #fffefb;
+  border-bottom: 1px solid #eee8dd;
+}
+.home-brand { display: flex; align-items: center; gap: 12px; flex-shrink: 0; text-decoration: none; }
+.brand-mark { display: grid; place-items: center; width: 58px; height: 58px; background: #fff0d6; border-radius: 18px; transform: rotate(-5deg); }
+.brand-mark svg { width: 45px; height: 45px; }
+.brand-name { font-size: 28px; font-weight: 850; line-height: 1.2; letter-spacing: 2px; }
+.brand-name > span { display: block; margin-top: 5px; font-size: 12px; font-weight: 500; letter-spacing: 1px; color: var(--home-muted); }
+.grade-badge { font-size: 15px; font-weight: 650; color: #8d6331; padding: 7px 14px; border: 1px solid #eedcbd; border-radius: 10px; white-space: nowrap; }
+.home-nav { display: flex; align-items: center; gap: 10px; margin-left: auto; }
+.home-nav a { padding: 11px 16px; color: #526171; text-decoration: none; font-size: 17px; font-weight: 650; border-radius: 12px; }
+.home-nav a:hover { color: #a34d25; background: #fff1dc; }
+.offline-badge { display: flex; align-items: center; gap: 8px; padding-left: 23px; border-left: 1px solid #e8e5df; color: #4a6b59; font-size: 14px; white-space: nowrap; }
+.offline-badge > span { width: 8px; height: 8px; border-radius: 50%; background: #3e9a6f; box-shadow: 0 0 0 4px #e6f4ea; }
 
-.tip-list {
-  list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px;
+.home-page { flex: 1; width: 100%; min-width: 0; padding: 30px var(--home-gutter) 22px; }
+.welcome-banner {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  min-height: 208px;
+  padding: 26px clamp(26px, 3vw, 58px);
+  background: #fff0d7;
+  border: 1px solid #f3dcb5;
+  border-radius: 28px;
+  overflow: hidden;
 }
-.tip-list li {
-  display: flex; align-items: flex-start; gap: 12px;
-  background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 14px 16px;
-  font-size: 14px; font-weight: 600; color: #4a4f63; line-height: 1.65;
-}
-.tip-list li span { flex-shrink: 0; font-size: 20px; }
-.storage-note { color: var(--muted); font-size: 12px; text-align: center; margin-top: 34px; }
+.welcome-copy { position: relative; z-index: 1; }
+.eyebrow { display: flex; align-items: center; gap: 8px; margin-bottom: 9px; color: #986124; font-size: 15px; font-weight: 700; letter-spacing: 1px; }
+.eyebrow > span { color: #c58329; font-size: 22px; line-height: 1; }
+.welcome-copy h1 { font-size: clamp(32px, 3.1vw, 62px); font-weight: 850; letter-spacing: 1px; line-height: 1.4; }
+.welcome-copy h1 > span { position: relative; display: inline-block; color: #c1582a; white-space: nowrap; }
+.welcome-copy h1 svg { position: absolute; left: 0; bottom: -2px; width: 100%; height: 12px; overflow: visible; }
+.welcome-copy h1 path { fill: none; stroke: #f7bc65; stroke-width: 6; stroke-linecap: round; }
+.welcome-description { margin-top: 13px; color: #725e47; font-size: clamp(17px, 1.15vw, 22px); line-height: 1.65; }
+.welcome-art { flex: 0 0 32%; width: 32%; max-width: 430px; height: 180px; align-self: center; }
 
-@media (max-width: 999px) {
-  .book-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .tip-list { grid-template-columns: 1fr; }
-  .home-page { padding-top: 24px; }
+.learning-section { margin-top: 28px; }
+.section-heading { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px 18px; margin-bottom: 16px; }
+.section-title { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; }
+.section-marker { width: 10px; height: 25px; border-radius: 5px; }
+.marker-orange { background: #ed9650; }
+.marker-purple { background: #9c88cc; }
+.section-heading h2 { font-size: clamp(23px, 1.6vw, 31px); font-weight: 800; letter-spacing: .5px; line-height: 1.4; }
+.section-subtitle, .section-note { color: var(--home-muted); font-size: 15px; }
+.section-subtitle { margin-left: 2px; }
+.textbook-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.explore-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.book-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  min-width: 0;
+  padding: 26px;
+  text-decoration: none;
+  border: 1px solid var(--card-line);
+  border-radius: 22px;
+  background: var(--card-bg);
+  box-shadow: 0 3px 0 var(--card-line);
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
 }
-@media (max-width: 600px) {
-  .page-heading { margin-bottom: 20px; }
-  .section-heading { margin-top: 22px; }
-  .section-heading > span { font-size: 11px; }
-  .book-grid { grid-template-columns: minmax(0, 1fr); gap: 12px; }
-  .book-card { display: grid; grid-template-columns: 48px minmax(0, 1fr); gap: 2px 14px; padding: 18px; }
-  .book-icon { grid-row: span 2; width: 48px; height: 48px; margin-bottom: 0; align-self: center; }
-  .book-card h3 { font-size: 18px; }
-  .book-card p { font-size: 12px; margin: 0; }
-  .book-tag { display: none; }
+.book-card:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: 0 7px 0 var(--card-line), 0 14px 25px -15px var(--accent); }
+.book-card:active { transform: translateY(0); box-shadow: 0 1px 0 var(--card-line); }
+.book-icon { display: grid; place-items: center; flex: 0 0 auto; width: 88px; height: 88px; border-radius: 23px; background: var(--icon-bg); }
+.book-icon > svg { width: 72px; height: 72px; transition: transform .18s ease; }
+.book-card:hover .book-icon > svg { transform: rotate(-5deg) scale(1.05); }
+.book-copy { flex: 1; min-width: 0; }
+.book-copy h3 { font-size: clamp(24px, 1.6vw, 32px); font-weight: 800; line-height: 1.4; letter-spacing: .3px; }
+.book-copy p { margin-top: 8px; color: #516172; font-size: clamp(16px, 1vw, 19px); line-height: 1.65; overflow-wrap: break-word; }
+.book-tag { display: block; color: var(--tag-ink); font-size: 14px; font-weight: 650; line-height: 1.5; margin-bottom: 6px; }
+.card-arrow { display: grid; place-items: center; flex: 0 0 auto; width: 34px; height: 34px; border: 1px solid var(--card-line); border-radius: 50%; color: var(--tag-ink); background: #ffffffa6; }
+.card-arrow > svg { width: 20px; height: 20px; }
+.textbook-card { min-height: 184px; padding-right: 54px; }
+.textbook-card .book-icon { width: 92px; height: 100px; background: #ffffff80; border-radius: 22px; }
+.textbook-card .book-icon > svg { width: 82px; height: 82px; }
+.textbook-card .card-arrow { position: absolute; right: 16px; top: 16px; }
+.textbook-card .book-tag { font-size: 13px; }
+.explore-card { min-height: 166px; gap: 16px; padding: 22px; background: #fffefb; }
+.explore-card .book-icon { width: 76px; height: 84px; border-radius: 20px; }
+.explore-card .book-icon > svg { width: 66px; height: 66px; }
+.explore-card .book-copy h3 { font-size: clamp(23px, 1.45vw, 29px); }
+.explore-card .book-copy p { font-size: 16px; margin-top: 5px; }
+.explore-card .card-arrow { position: absolute; right: 16px; top: 16px; width: 26px; height: 26px; border: none; background: transparent; opacity: .75; }
+.explore-card .card-arrow > svg { width: 18px; height: 18px; }
+.explore-card .book-tag { margin-right: 18px; font-size: 13px; }
+
+.subject-chinese { --card-bg: #ffe3d0; --card-line: #efc4a8; --icon-bg: #fff2e2; --accent: #dd8250; --tag-ink: #91482a; }
+.subject-math { --card-bg: #dceaff; --card-line: #b9d1f1; --icon-bg: #e9f2ff; --accent: #628fcb; --tag-ink: #355c93; }
+.subject-english { --card-bg: #ddf1e3; --card-line: #b7d9c2; --icon-bg: #e9f9e9; --accent: #5e9f7a; --tag-ink: #376b4e; }
+.subject-scenes { --card-line: #c3ddeb; --icon-bg: #e4f3ff; --accent: #609cbd; --tag-ink: #397493; }
+.subject-idioms { --card-line: #ead5aa; --icon-bg: #fff0c9; --accent: #bd8d3b; --tag-ink: #8e692a; }
+.subject-writing { --card-line: #ded0ec; --icon-bg: #f0e5ff; --accent: #9570c0; --tag-ink: #7b549e; }
+.subject-chain { --card-line: #bfdfd1; --icon-bg: #e1f5e9; --accent: #64a387; --tag-ink: #39785d; }
+.subject-geo { --card-line: #c3ddeb; --icon-bg: #dff1ff; --accent: #609cbd; --tag-ink: #397493; }
+.subject-astro { --card-line: #d8cfed; --icon-bg: #ede7ff; --accent: #977cc1; --tag-ink: #77589c; }
+.subject-history { --card-line: #e8d5b9; --icon-bg: #fff0d7; --accent: #b68c50; --tag-ink: #886431; }
+.subject-literature { --card-line: #ebcfd7; --icon-bg: #ffe8ed; --accent: #c28097; --tag-ink: #a25470; }
+.subject-science { --card-line: #b8dfd8; --icon-bg: #dff5ef; --accent: #59a99a; --tag-ink: #2f7c70; }
+
+.home-help { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px 24px; margin-top: 32px; padding: 20px 24px; background: #f2f0e8; border: 1px solid #e7e3d5; border-radius: 18px; }
+.help-intro { display: flex; align-items: center; gap: 15px; }
+.help-spark { color: #c19441; font-size: 36px; }
+.help-intro strong { font-size: 17px; font-weight: 700; }
+.help-intro p > span { display: block; margin-top: 2px; color: #626c70; font-size: 14px; }
+.learning-tips { font-size: 15px; color: #566258; }
+.learning-tips summary { display: flex; align-items: center; gap: 12px; min-height: 44px; cursor: pointer; list-style: none; font-weight: 650; border-radius: 6px; }
+.learning-tips summary::-webkit-details-marker { display: none; }
+.tip-chevron { font-family: sans-serif; font-size: 23px; line-height: 1; }
+.learning-tips[open] { flex: 1 0 100%; }
+.learning-tips[open] .tip-chevron { transform: rotate(180deg); }
+.tip-list { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; list-style: none; margin-top: 16px; padding-top: 20px; border-top: 1px solid #dcded0; }
+.tip-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 15px; line-height: 1.7; }
+.tip-list li > svg { flex-shrink: 0; width: 24px; height: 24px; margin-top: 2px; color: #667d5f; }
+.tip-list strong { display: block; color: #374c3f; margin-bottom: 4px; }
+.home-footer { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px 24px; margin-top: 22px; color: #69736f; font-size: 13px; }
+
+@media (min-width: 1800px) {
+  .home-page { padding-top: 36px; }
+  .welcome-banner { min-height: 230px; }
+  .learning-section { margin-top: 32px; }
+  .textbook-card { min-height: 205px; gap: 28px; }
+  .textbook-card .book-icon { width: 112px; height: 120px; }
+  .textbook-card .book-icon > svg { width: 96px; height: 96px; }
+  .textbook-card .book-tag { font-size: 16px; }
+  .explore-card { min-height: 184px; gap: 26px; padding: 28px; }
+  .explore-card .book-icon { width: 94px; height: 102px; }
+  .explore-card .book-icon > svg { width: 80px; height: 80px; }
+  .explore-card .book-tag { font-size: 15px; }
+  .explore-card .book-copy p { font-size: 18px; }
+}
+@media (max-width: 1399px) {
+  .textbook-card { gap: 14px; padding: 22px 44px 22px 20px; }
+  .textbook-card .book-icon { width: 74px; height: 86px; }
+  .textbook-card .book-icon > svg { width: 66px; height: 66px; }
+  .textbook-card .book-copy h3 { font-size: 25px; }
+  .textbook-card .book-tag { font-size: 12px; }
+  .explore-grid { gap: 16px; }
+  .explore-card { gap: 14px; padding: 22px; }
+  .explore-card .book-icon { width: 78px; height: 78px; }
+  .explore-card .book-tag { font-size: 13px; }
+  .explore-card .book-copy h3 { font-size: 25px; }
+}
+@media (max-width: 1099px) {
+  .learning-home #app > .home-header { gap: 18px; }
+  .home-nav { gap: 2px; }
+  .home-nav a { padding-inline: 12px; }
+  .offline-badge { display: none; }
+  .welcome-art { flex-basis: 31%; width: 31%; height: 165px; }
+  .welcome-copy h1 { font-size: 36px; }
+  .textbook-card { flex-direction: column; align-items: flex-start; gap: 16px; padding: 22px; }
+  .textbook-card .book-icon { width: 84px; height: 84px; }
+  .textbook-card .book-icon > svg { width: 74px; height: 74px; }
+  .textbook-card .book-tag { font-size: 13px; }
+  .explore-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+  .explore-card { flex-direction: row; align-items: center; gap: 20px; min-height: 158px; }
+  .section-subtitle { font-size: 14px; }
+  .section-note { font-size: 13px; }
+  .tip-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 759px) {
+  .learning-home { --home-gutter: 20px; }
+  .learning-home #app > .home-header { min-height: 86px; gap: 16px; padding-block: 14px; }
+  .brand-mark { width: 50px; height: 50px; border-radius: 15px; }
+  .brand-mark svg { width: 40px; height: 40px; }
+  .brand-name { font-size: 25px; }
+  .brand-name > span { font-size: 10px; letter-spacing: .5px; }
+  .grade-badge { margin-left: auto; padding: 6px 10px; font-size: 13px; }
+  .home-nav { display: none; }
+  .home-page { padding-top: 20px; }
+  .welcome-banner { min-height: 180px; padding: 24px; border-radius: 22px; }
+  .welcome-copy h1 { font-size: 33px; letter-spacing: 0; }
+  .welcome-description { max-width: 25em; font-size: 16px; }
+  .welcome-art { display: none; }
+  .section-heading { align-items: flex-start; }
+  .section-title { gap: 10px; }
+  .section-heading h2 { font-size: 24px; }
+  .section-subtitle { flex-basis: 100%; margin-left: 20px; font-size: 14px; }
+  .section-note { display: none; }
+  .textbook-grid { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  .textbook-card { flex-direction: row; align-items: center; min-height: 154px; gap: 20px; padding: 22px 58px 22px 22px; }
+  .textbook-card .book-icon { width: 84px; height: 90px; }
+  .textbook-card .book-copy h3 { font-size: 27px; }
+  .textbook-card .card-arrow { top: 50%; transform: translateY(-50%); right: 16px; }
+  .textbook-card .book-tag { font-size: 13px; }
+  .explore-card { flex-direction: column; align-items: flex-start; gap: 13px; padding: 22px 20px; }
+  .explore-card .book-icon { width: 76px; height: 76px; }
+  .explore-card .book-copy h3 { font-size: 24px; }
+  .explore-card:last-child:nth-child(odd) { grid-column: 1 / -1; flex-direction: row; align-items: center; }
+  .home-help { padding: 18px 20px; }
+  .home-footer { justify-content: center; text-align: center; font-size: 12px; }
+}
+@media (max-width: 479px) {
+  .learning-home { --home-gutter: 16px; }
+  .learning-home #app > .home-header { gap: 10px; }
+  .home-brand { gap: 9px; }
+  .brand-name { font-size: 24px; }
+  .brand-name > span { font-size: 10px; letter-spacing: 0; }
+  .grade-badge { font-size: 12px; padding-inline: 9px; }
+  .welcome-banner { padding: 22px 20px; min-height: 196px; }
+  .eyebrow { font-size: 13px; margin-bottom: 11px; }
+  .welcome-copy h1 { font-size: clamp(26px, 7.1vw, 34px); }
+  .welcome-description { max-width: 19em; margin-top: 17px; font-size: 16px; }
+  .learning-section { margin-top: 26px; }
+  .textbook-card { gap: 15px; min-height: 160px; padding: 22px 40px 22px 16px; border-radius: 19px; }
+  .textbook-card .book-icon { width: 72px; height: 84px; border-radius: 18px; }
+  .textbook-card .book-icon > svg { width: 66px; height: 66px; }
+  .textbook-card .book-copy h3 { font-size: 26px; }
+  .textbook-card .book-tag { font-size: 12px; }
+  .textbook-card .book-copy p { font-size: 16px; }
+  .textbook-card .card-arrow { right: 9px; width: 25px; height: 25px; }
+  .textbook-card .card-arrow > svg { width: 16px; height: 16px; }
+  .explore-grid { gap: 14px; }
+  .explore-card { padding: 20px 16px; gap: 14px; border-radius: 19px; }
+  .explore-card .book-icon { width: 72px; height: 72px; border-radius: 18px; }
+  .explore-card .book-icon > svg { width: 62px; height: 62px; }
+  .explore-card .book-copy h3 { font-size: clamp(21px, 6vw, 23px); }
+  .explore-card .book-copy p { font-size: 15px; }
+  .explore-card .card-arrow { top: 16px; right: 11px; }
+  .home-help { margin-top: 28px; }
+  .help-intro { gap: 12px; }
+  .help-intro strong { font-size: 16px; }
+  .help-intro p > span { font-size: 13px; }
+  .help-spark { font-size: 30px; }
+  .learning-tips { width: 100%; font-size: 14px; }
+  .learning-tips summary { justify-content: space-between; }
+  .tip-list { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+}
+@media (max-width: 359px) {
+  .brand-name > span { display: none; }
+  .grade-badge { font-size: 11px; }
+  .explore-grid { grid-template-columns: minmax(0, 1fr); }
+  .explore-card { flex-direction: row; align-items: center; gap: 16px; }
+  .textbook-card .book-copy h3 { font-size: 23px; }
+  .textbook-card .book-tag { font-size: 11px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .book-card:hover { transform: none; }
+  .book-card:hover .book-icon > svg { transform: none; }
 }

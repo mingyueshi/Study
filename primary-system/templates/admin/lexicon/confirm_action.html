@@ -1,0 +1,15 @@
+{% extends 'admin/base_site.html' %}
+{% block content %}
+<h2>{{ object_label }}</h2>
+<p>{{ description }}</p>
+{% if comparison %}{{ comparison }}{% endif %}
+{% if impact %}<ul><li>新增：{{ impact.added }}</li><li>修改：{{ impact.changed }}</li><li>新版缺失：{{ impact.removed }}</li><li>未变：{{ impact.unchanged }}</li><li>需要检查的教学关联：{{ impact.affected_links }}</li></ul>{% endif %}
+<form method="post">{% csrf_token %}
+  <input type="hidden" name="action" value="{{ action_name }}">
+  <input type="hidden" name="_selected_action" value="{{ selected }}">
+  <input type="hidden" name="confirm" value="yes">
+  <input type="hidden" name="expected_current" value="{{ expected_current }}">
+  <p><label for="reason">审核依据／操作说明</label><br><textarea id="reason" name="reason" rows="4" cols="70" required></textarea></p>
+  <div class="submit-row"><input type="submit" value="确认操作"><a href="." class="button cancel-link">返回</a></div>
+</form>
+{% endblock %}

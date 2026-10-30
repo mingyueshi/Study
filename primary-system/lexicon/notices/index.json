@@ -1,0 +1,22 @@
+{
+  "unicode-unihan": {
+    "4c93ea9c1f636451729a840978f1667a53886af37ba854fdcce109721c63d43e": [
+      {
+        "file": "unicode-3.0.txt",
+        "sha256": "e7a93b009565cfce55919a381437ac4db883e9da2126fa28b91d12732bc53d96"
+      }
+    ]
+  },
+  "open-english-wordnet": {
+    "9ca6d1dcb75f822fdd66617f7d9da48142ace38dd544d6ad5e2feca1674ad3fe": [
+      {
+        "file": "oewn-2025.txt",
+        "sha256": "672cc8b5663e8dc74c4b07a9dcf477193853575b119908fd3dc0aeeb60a9dbbb"
+      },
+      {
+        "file": "princeton-wordnet.txt",
+        "sha256": "df30ec18fbabcdaf031b79ea026d3e6b959010cffe6dd7be9ac137822175b904"
+      }
+    ]
+  }
+}

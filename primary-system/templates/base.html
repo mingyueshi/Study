@@ -1,0 +1,31 @@
+{% load static %}
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7faf5">
+  <title>{% block title %}乐学堂 · 一起把世界读懂{% endblock %}</title>
+  <link rel="icon" href="{% static 'icons/book.svg' %}" type="image/svg+xml">
+  <link rel="stylesheet" href="{% static 'platform.css' %}">
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="{% url 'home' %}"><img src="{% static 'icons/book.svg' %}" alt="" width="60" height="60"><span>乐学堂<small>每一点好奇，都有回响</small></span></a>
+    {% with current=request.resolver_match.url_name %}
+    <nav aria-label="主导航">
+      <a href="{% url 'home' %}" {% if current == 'home' or current == 'module' or current == 'collection' or current == 'item' %}aria-current="location"{% endif %}><img src="{% static 'icons/book.svg' %}" alt="" width="32" height="32"><span>学习广场</span></a>
+      <a href="{% url 'dictionary' %}" {% if current == 'dictionary' or current == 'dictionary-entry' or current == 'dictionary-sources' %}aria-current="location"{% endif %}><img src="{% static 'icons/english.svg' %}" alt="" width="32" height="32"><span>查字查词</span></a>
+      <a href="{% url 'my-learning' %}" {% if current == 'my-learning' %}aria-current="page"{% endif %}><img src="{% static 'icons/scenes.svg' %}" alt="" width="32" height="32"><span>我的学习</span></a>
+      {% if user.is_staff %}<a href="{% url 'admin:index' %}">管理后台 ↗</a>{% endif %}
+    </nav>
+    <div class="account">{% if user.is_authenticated %}<a class="account-profile" href="{% url 'profile' %}" {% if current == 'profile' or current == 'password_change' or current == 'password_change_done' %}aria-current="location"{% endif %}><span class="account-avatar" aria-hidden="true">{{ user|stringformat:'s'|slice:':1' }}</span><span class="account-name">{{ user }}</span></a><form method="post" action="{% url 'logout' %}">{% csrf_token %}<button class="text-button" type="submit">退出</button></form>{% else %}<a class="button small" href="{% url 'login' %}">登录学习 <span aria-hidden="true">→</span></a>{% endif %}</div>
+    {% endwith %}
+  </header>
+  <main id="main" class="shell" tabindex="-1">
+    {% for message in messages %}<div class="notice" role="status">{{ message }}</div>{% endfor %}
+    {% block content %}{% endblock %}
+  </main>
+  <footer class="site-footer"><span>乐学堂 · 让知识慢慢长成自己的力量</span><span>语文 / 数学 / 英语 / 更大的世界</span></footer>
+</body>
+</html>

@@ -1,0 +1,2 @@
+{% extends 'base.html' %}{% block title %}学习偏好 · 乐学堂{% endblock %}
+{% block content %}<section class="auth-card"><p class="eyebrow">我的账号 · {{ user.username }}</p><h1>学习偏好</h1><p>设置当前年级，学习广场会优先展示适合你的内容。</p><form method="post" class="stack-form">{% csrf_token %}{{ form.as_p }}<button class="button" type="submit">保存偏好</button></form><a class="back" href="{% url 'password_change' %}">修改密码 →</a></section>{% endblock %}

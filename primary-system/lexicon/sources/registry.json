@@ -1,0 +1,49 @@
+{
+  "unihan": {
+    "source": {
+      "code": "unicode-unihan",
+      "name": "Unicode Unihan 汉字资料",
+      "url": "https://www.unicode.org/reports/tr38/tr38-41.html",
+      "attribution": "© 1991–2026 Unicode, Inc.",
+      "data_license": "Unicode-3.0",
+      "license_url": "https://www.unicode.org/license.txt",
+      "rights_evidence": "2026-10-30 核对官方 Unicode License v3 与 UAX #38；保留许可原文和署名。",
+      "changes": "提取固定版本的 IICore 字集；按码位和原字段解析，部首字形引用同版 CJKRadicals 映射。英文简释不翻译，常用音不等于完整多音字词典。"
+    },
+    "version": "18.0.0",
+    "file": "unihan-18.0.0.zip",
+    "url": "https://www.unicode.org/Public/18.0.0/ucd/Unihan.zip",
+    "sha256": "4c93ea9c1f636451729a840978f1667a53886af37ba854fdcce109721c63d43e",
+    "notices": [
+      "unicode-3.0.txt"
+    ],
+    "auxiliary": [
+      {
+        "file": "CJKRadicals-18.0.0.txt",
+        "url": "https://www.unicode.org/Public/18.0.0/ucd/CJKRadicals.txt",
+        "sha256": "689e2e5852699e7115823dc0b6d3e615eb767c7f477b615678f4f989d1f06105"
+      }
+    ]
+  },
+  "oewn": {
+    "source": {
+      "code": "open-english-wordnet",
+      "name": "Open English Wordnet 英英词典",
+      "url": "https://en-word.net/",
+      "attribution": "Princeton WordNet and the Open English Wordnet team / contributors.",
+      "data_license": "CC-BY-4.0; Princeton WordNet underlying data notice",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "rights_evidence": "2026-10-30 核对官方 2025-edition 发布说明、LICENSE.md 及 WNDB_License.txt；保留双重署名、许可与加工说明。",
+      "changes": "从 2025 XML 中选取现有教材词形及其原有义项；保留英文定义、词性、例句与词形，不生成中文翻译，不将不同义项自动对齐到教学释义。"
+    },
+    "version": "2025",
+    "file": "english-wordnet-2025.xml.gz",
+    "url": "https://en-word.net/static/english-wordnet-2025.xml.gz",
+    "sha256": "9ca6d1dcb75f822fdd66617f7d9da48142ace38dd544d6ad5e2feca1674ad3fe",
+    "notices": [
+      "oewn-2025.txt",
+      "princeton-wordnet.txt"
+    ],
+    "upstream_tag": "2025-edition"
+  }
+}

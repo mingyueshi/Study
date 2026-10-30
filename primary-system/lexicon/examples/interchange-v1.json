@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "source": {
+    "code": "example-authored",
+    "name": "自编格式示例（非正式词典）",
+    "attribution": "本项目导入格式演示",
+    "data_license": "仅为自编演示记录，尚未申请公开准入",
+    "rights_evidence": "用于验证导入结构，不表示词典内容已审校。"
+  },
+  "version": "example-v1",
+  "adapter": "interchange-v1",
+  "source_files": {},
+  "records": [
+    {
+      "key": "demo-apple-fruit",
+      "language": "en",
+      "kind": "word",
+      "headword": "apple",
+      "gloss_language": "zh",
+      "definition": "一种水果；此处用于演示导入结构。",
+      "pronunciation": {"value": "", "system": "ipa", "region": ""},
+      "forms": [{"text": "apples", "role": "inflection", "source_path": "/plural"}],
+      "raw": {"word": "apple", "meaning": "一种水果；此处用于演示导入结构。", "plural": "apples"},
+      "field_paths": {"headword": "/word", "definition": "/meaning"}
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+Django==6.1.2
+asgiref==3.13.0
+sqlparse==0.6.0
+nova-django-admin-theme @ git+https://github.com/mingyueshi/django-nova-admin.git@7c9eff945cc4d8ce28366790304eb8574a115531#subdirectory=django-theme
+nova-slider-captcha @ git+https://github.com/mingyueshi/django-nova-slider-captcha.git@691d36f1d2319d0c83c382d40ce29390a5e2b324
+Pillow==12.2.0

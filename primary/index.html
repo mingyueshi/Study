@@ -3,86 +3,279 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="乐学堂 · 四年级学习系统：语文、数学知识点总结、教材同步单词、成语本、作文坊与成语接龙，离线可用。">
+  <meta name="description" content="乐学堂 · 四年级学习系统：语文、数学知识点总结、教材同步单词、场景单词、成语本、作文坊、成语接龙、地理探索、天文探索、历史长廊、文学常识与科学实验室，离线可用。">
+  <meta name="theme-color" content="#fffaf2">
   <title>乐学堂 · 四年级学习系统</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🎒%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="layout.css">
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="learning-home">
   <a class="skip-link" href="#main-content">跳到学习内容</a>
+
+  <!-- 内置矢量图标，放大依然清晰，也可以完全离线使用。 -->
+  <svg class="home-icons" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+    <defs>
+      <symbol id="icon-bag" viewBox="0 0 96 96">
+        <g stroke="#77401d" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M34 22v-5a14 14 0 0 1 28 0v5" fill="none"/>
+          <rect x="18" y="23" width="60" height="63" rx="17" fill="#ffae45"/>
+          <path d="M18 43h60M30 43v9m36-9v9" fill="none"/>
+          <rect x="30" y="59" width="36" height="18" rx="7" fill="#fff5d7"/>
+          <path d="M43 31h10" stroke="#fff5d7"/>
+        </g>
+      </symbol>
+      <symbol id="icon-book" viewBox="0 0 96 96">
+        <g stroke="#a84328" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M8 25q20-8 40 3 20-11 40-3v55q-20-8-40 2-20-10-40-2Z" fill="#ff865f"/>
+          <path d="M13 17q18-5 35 6 17-11 35-6v55q-18-5-35 6-17-11-35-6Z" fill="#fffdf1"/>
+          <path d="M48 23v55M23 33q8 0 15 4m-15 9q8 0 15 4m-15 9q8 0 15 4m20-26q7-4 15-4m-15 17q7-4 15-4m-15 17q7-4 15-4" fill="none"/>
+          <path d="M65 17v28l7-5 7 2V16" fill="#ffbf49" stroke="none"/>
+        </g>
+      </symbol>
+      <symbol id="icon-math" viewBox="0 0 96 96">
+        <g stroke="#26549a" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="19" y="9" width="58" height="78" rx="12" fill="#629fff"/>
+          <rect x="29" y="19" width="38" height="20" rx="5" fill="#f4fbff"/>
+          <path d="M51 26h8m-8 6h8"/>
+          <rect x="29" y="49" width="14" height="12" rx="3" fill="#e4f0ff" stroke="none"/>
+          <rect x="53" y="49" width="14" height="12" rx="3" fill="#e4f0ff" stroke="none"/>
+          <rect x="29" y="68" width="14" height="12" rx="3" fill="#e4f0ff" stroke="none"/>
+          <rect x="53" y="68" width="14" height="12" rx="3" fill="#ffdc76" stroke="none"/>
+          <path d="M33 55h6m-3-3v6m21-3h6M33 74h6m18-2h6m-6 4h6" stroke-width="2.5"/>
+        </g>
+      </symbol>
+      <symbol id="icon-english" viewBox="0 0 96 96">
+        <g stroke-width="3.5" stroke-linejoin="round">
+          <rect x="8" y="12" width="44" height="48" rx="10" fill="#ffce67" stroke="#a47320" transform="rotate(-9 30 36)"/>
+          <rect x="43" y="33" width="44" height="48" rx="10" fill="#68cfab" stroke="#287957" transform="rotate(9 65 57)"/>
+          <path d="m20 47 9-23 9 23m-15-7h12" stroke="#895718" stroke-linecap="round" fill="none"/>
+          <path d="M59 45v24h8a6 6 0 0 0 0-12h-8m0 0h7a6 6 0 0 0 0-12Z" stroke="#206748" stroke-linecap="round" fill="none" transform="rotate(9 65 57)"/>
+          <path d="m71 14 3 5 6 1-4 4 1 6-6-3-5 3 1-6-4-4 6-1Z" fill="#ff9d6d" stroke="none"/>
+        </g>
+      </symbol>
+      <symbol id="icon-scenes" viewBox="0 0 96 96">
+        <g stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M13 42h47v42H13Z" fill="#ffdf9a" stroke="#a77932"/>
+          <path d="m7 44 29-26 29 26Z" fill="#ffae75" stroke="#a77932"/>
+          <path d="M31 84V61h14v23" fill="#fff8e8" stroke="#a77932"/>
+          <path d="M58 10h24q8 0 8 8v24q0 8-8 8H70L57 60V50q-7 0-7-8V18q0-8 8-8Z" fill="#8dc8ef" stroke="#3c769f"/>
+          <path d="m61 39 9-20 9 20m-14-7h10" fill="none" stroke="#3c769f"/>
+        </g>
+      </symbol>
+      <symbol id="icon-idioms" viewBox="0 0 96 96">
+        <g stroke="#a26721" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M23 15h51v57q0 11-12 11H22V26" fill="#fff0b5"/>
+          <path d="M23 15q-11 0-11 11v9h22v-9q0-11-11-11Zm39 68q-11 0-11-11v-4h32v4q0 11-10 11Z" fill="#ffc459"/>
+          <path d="M43 29h19m-19 9h19m-19 10h19m-19 9h12"/>
+        </g>
+      </symbol>
+      <symbol id="icon-writing" viewBox="0 0 96 96">
+        <g stroke="#73509b" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="14" y="15" width="52" height="67" rx="9" fill="#f8edff"/>
+          <path d="M26 30h26M26 42h20M26 54h15M26 66h12"/>
+          <path d="m47 59 23-35q3-5 8-2l7 5q4 3 1 8L63 70l-17 7Z" fill="#b58af0"/>
+          <path d="m70 24 15 10m-35 24 14 10m-18 9 17-7-13-12Z" fill="#ffdf9b"/>
+          <path d="m46 77 7-3-6-4Z" fill="#73509b" stroke="none"/>
+        </g>
+      </symbol>
+      <symbol id="icon-dragon" viewBox="0 0 96 96">
+        <g stroke="#277960" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M23 44c-21 14-6 38 13 31s20-2 18 9c30-3 34-25 18-36" fill="#6bd6a9"/>
+          <path d="m52 23-5-13m21 12 6-12" fill="none"/>
+          <path d="M44 25q13-13 29 0l7 10 7 4v15q-7 11-22 4l-9-7-16-5q-9-11 4-21Z" fill="#81e2b6"/>
+          <path d="m39 31-10-4 5 12m31 19-3 10-8-6" fill="#ffcc69"/>
+          <path d="M69 35v3m11 6h1M66 50q5 4 10 1" fill="none"/>
+          <path d="m19 65 8 3m6 7 6-6" stroke="#fff5cc"/>
+        </g>
+      </symbol>
+      <symbol id="icon-globe" viewBox="0 0 96 96">
+        <g stroke="#276891" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M48 75v11M30 87h36M73 13a39 39 0 0 1-51 59" fill="none"/>
+          <circle cx="45" cy="42" r="31" fill="#75caff"/>
+          <path d="m27 18 13 1 2 10 11 2-3 11-10 1-1 12-9-3-4-12-9-4m43-13-3 12 12 6 6-2M47 58l12-7 8 6-6 11-10 3Z" fill="#79d6a0" stroke-width="2.5"/>
+          <path d="m20 13 5-5m48 68 5-5"/>
+        </g>
+      </symbol>
+      <symbol id="icon-astro" viewBox="0 0 96 96">
+        <g stroke="#7652ab" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="49" cy="47" r="25" fill="#b69bea"/>
+          <path d="M32 29q7 7 21 7m-27 8q12 12 35 10m-20 16 15-2" fill="none" stroke="#e8d6ff"/>
+          <path d="M72 31q12-1 14 4c4 8-10 21-32 30S12 76 9 68q-3-6 13-18l3 11q-7 5-5 6c4 3 19 0 33-6s25-14 25-17q0-2-5-1Z" fill="#ffda75"/>
+          <path d="M19 14v10m-5-5h10m53 53v10m-5-5h10" stroke="#b48b38"/>
+          <circle cx="72" cy="13" r="3" fill="#b69bea" stroke="none"/>
+        </g>
+      </symbol>
+      <symbol id="icon-history" viewBox="0 0 96 96">
+        <g stroke="#a46b28" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m9 32 39-21 39 21v7H9Z" fill="#ffc475"/>
+          <path d="M18 39h60v37H18Z" fill="#fff0ca"/>
+          <path d="M21 41v34m18-34v34m18-34v34m18-34v34" stroke-width="7"/>
+          <path d="M14 76h68v9H14Z" fill="#ffc475"/>
+          <circle cx="48" cy="27" r="4" fill="#fff0ca" stroke="none"/>
+        </g>
+      </symbol>
+      <symbol id="icon-literature" viewBox="0 0 96 96">
+        <g stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 14h15v68H15V20q0-6 6-6Z" fill="#f59cae" stroke="#ae526e"/>
+          <path d="M36 9h23v73H36Z" fill="#a6b2ed" stroke="#5967a4"/>
+          <path d="m59 23 19-5 16 59-20 5Z" fill="#ffd181" stroke="#a8803b"/>
+          <path d="M22 28h7m-7 39h7m14-42h9m-9 42h9m14-30 8-2m0 28 8-2" stroke="#fff9f0"/>
+        </g>
+      </symbol>
+      <symbol id="icon-science" viewBox="0 0 96 96">
+        <g stroke="#207f7b" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M35 13h26M39 13v28L15 76q-5 9 7 9h52q12 0 7-9L57 41V13" fill="#f0fff9"/>
+          <path d="m29 57-13 20q-3 5 6 5h52q9 0 6-5L67 57q-10-7-19 0t-19 0Z" fill="#55cdb8" stroke="none"/>
+          <path d="M25 72h8m26-24 6 9"/>
+          <circle cx="44" cy="67" r="4" fill="#e2fff3" stroke="none"/>
+          <circle cx="60" cy="74" r="3" fill="#e2fff3" stroke="none"/>
+          <circle cx="75" cy="25" r="7" fill="#ffc86b" stroke="#b28a33"/>
+          <circle cx="23" cy="37" r="4" fill="#7bd9c6" stroke="none"/>
+        </g>
+      </symbol>
+      <symbol id="icon-arrow" viewBox="0 0 24 24">
+        <path d="M5 12h14m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+      </symbol>
+      <symbol id="icon-sound" viewBox="0 0 24 24">
+        <path d="m11 4-6 5H2v6h3l6 5Zm5 4a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </symbol>
+      <symbol id="icon-check" viewBox="0 0 24 24">
+        <path d="m6 12 4 4 8-9" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </symbol>
+      <symbol id="icon-print" viewBox="0 0 24 24">
+        <g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8V3h12v5M6 17H3V9h18v8h-3M6 14h12v7H6Z"/><path d="M17 11h1"/></g>
+      </symbol>
+      <symbol id="icon-calendar" viewBox="0 0 24 24">
+        <g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M7 3v5m10-5v5M3 11h18m-13 5h2m4 0h2"/></g>
+      </symbol>
+    </defs>
+  </svg>
+
   <div id="app">
-    <header>
-      <span class="logo">🎒 乐学堂</span>
-      <span class="header-context">四年级 · 每天进步一点点</span>
+    <header class="home-header">
+      <a class="home-brand" href="index.html" aria-label="乐学堂首页">
+        <span class="brand-mark"><svg aria-hidden="true"><use href="#icon-bag"/></svg></span>
+        <span class="brand-name">乐学堂<span>快乐学习，慢慢长大</span></span>
+      </a>
+      <span class="grade-badge">小学 · 四年级</span>
+      <nav class="home-nav" aria-label="首页导航"><a href="#textbooks">课本同步</a><a href="#explore">兴趣探索</a></nav>
+      <span class="offline-badge"><span aria-hidden="true"></span>离线也能学</span>
     </header>
 
     <main id="main-content" class="home-page" tabindex="-1">
-      <div class="page-heading">
-        <p class="eyebrow">我的学习空间</p>
-        <h1>今天，想学点什么？</h1>
-        <p>语文、数学都有知识点总结，还有成语、写作和单词，点开就能学。</p>
-      </div>
-
-      <section aria-labelledby="books-title">
-        <div class="section-heading">
-          <h2 id="books-title">我的学习册</h2>
-          <span>读一读 · 记一记 · 写一写</span>
+      <section class="welcome-banner" aria-labelledby="welcome-title">
+        <div class="welcome-copy">
+          <p class="eyebrow"><span aria-hidden="true">✦</span> 每天进步一点点</p>
+          <h1 id="welcome-title">今天，想<span>学点什么？<svg viewBox="0 0 340 15" aria-hidden="true"><path d="M4 10Q166-2 336 9"/></svg></span></h1>
+          <p class="welcome-description">选一本喜欢的学习册，开始今天的小小探索。</p>
         </div>
-        <div class="book-grid">
-          <a class="book-card" href="knowledge.html" style="--bc:#e25563">
-            <span class="book-icon">📖</span>
-            <h3>语文知识点 <span>↗</span></h3>
-            <p>人教版新课标四上，单元知识点总结</p>
-            <span class="book-tag">同步教材</span>
+        <svg class="welcome-art" viewBox="0 0 400 200" aria-hidden="true">
+          <ellipse cx="224" cy="177" rx="135" ry="10" fill="#f1d4a9" opacity=".45"/>
+          <path d="M48 116C75 27 271 20 354 112" fill="none" stroke="#e8b466" stroke-width="2" stroke-dasharray="5 8"/>
+          <circle cx="316" cy="45" r="21" fill="#ffcd5f"/>
+          <g stroke="#c18c34" stroke-width="2.5" stroke-linecap="round"><path d="M307 43h1m14 0h1m-13 9q6 4 11-1M316 13V7m0 76v-6m31-32h6m-69 0h-6m60-23 5-5m-49 50-5 5" fill="none"/></g>
+          <path d="m66 134 4-12 5 12 13 1-10 8 3 12-11-7-11 7 3-12-10-8Z" fill="#7dbfa1"/>
+          <path d="m345 141 3-9 4 9 10 1-8 6 2 9-8-5-8 5 3-9-8-6Z" fill="#b0a0db"/>
+          <use href="#icon-book" x="108" y="70" width="155" height="128" transform="rotate(-10 180 135)"/>
+          <use href="#icon-math" x="226" y="82" width="86" height="105" transform="rotate(13 268 134)"/>
+          <g transform="translate(98 25) rotate(-20 20 35)" stroke="#6c5c96" stroke-width="2.5" stroke-linejoin="round"><path d="m10 45-9 9 2-21 11-7m15 19 10 9-2-21-11-7" fill="#bba6e9"/><path d="M10 45C1 20 12 4 20 0c8 4 19 20 10 45Z" fill="#fffdf4"/><circle cx="20" cy="23" r="6" fill="#82c8e8"/><path d="m14 49 6 15 6-15" fill="#ffaf64" stroke="#ce8242"/></g>
+          <path d="M214 30v13m-6-7h12" stroke="#e29454" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="49" cy="63" r="4" fill="#a9bfe0"/>
+        </svg>
+      </section>
+
+      <section id="textbooks" class="learning-section" aria-labelledby="textbooks-title">
+        <div class="section-heading">
+          <div class="section-title"><span class="section-marker marker-orange" aria-hidden="true"></span><h2 id="textbooks-title">课本同步</h2><span class="section-subtitle">跟着课本，学得更扎实</span></div>
+          <span class="section-note">读一读 · 记一记 · 练一练</span>
+        </div>
+        <div class="textbook-grid">
+          <a class="book-card textbook-card subject-chinese" href="knowledge.html">
+            <span class="book-icon"><svg aria-hidden="true"><use href="#icon-book"/></svg></span>
+            <div class="book-copy"><span class="book-tag">人教版 · 四年级上册</span><h3>语文知识点</h3><p>课文、古诗、字词，一起读懂</p></div>
+            <span class="card-arrow" aria-hidden="true"><svg><use href="#icon-arrow"/></svg></span>
           </a>
-          <a class="book-card" href="math.html" style="--bc:#4d96ff">
-            <span class="book-icon">🔢</span>
-            <h3>数学知识点 <span>↗</span></h3>
-            <p>北师大版新课标四上，单元知识点总结</p>
-            <span class="book-tag">同步教材</span>
+          <a class="book-card textbook-card subject-math" href="math.html">
+            <span class="book-icon"><svg aria-hidden="true"><use href="#icon-math"/></svg></span>
+            <div class="book-copy"><span class="book-tag">北师大版 · 四年级上册</span><h3>数学知识点</h3><p>图解知识点，解题有方法</p></div>
+            <span class="card-arrow" aria-hidden="true"><svg><use href="#icon-arrow"/></svg></span>
           </a>
-          <a class="book-card" href="english.html" style="--bc:#2fbf71">
-            <span class="book-icon">📣</span>
-            <h3>同步单词 <span>↗</span></h3>
-            <p>外研版新标准三起，教材单词点读</p>
-            <span class="book-tag">四年级上下册</span>
-          </a>
-          <a class="book-card" href="idioms.html" style="--bc:#d97745">
-            <span class="book-icon">🏮</span>
-            <h3>成语本 <span>↗</span></h3>
-            <p>听典故故事，学会用成语</p>
-            <span class="book-tag">语文积累</span>
-          </a>
-          <a class="book-card" href="writing.html" style="--bc:#8b65c9">
-            <span class="book-icon">✏️</span>
-            <h3>作文坊 <span>↗</span></h3>
-            <p>看写作锦囊，写自己的故事</p>
-            <span class="book-tag">表达创作</span>
-          </a>
-          <a class="book-card" href="chain.html" style="--bc:#157d73">
-            <span class="book-icon">🐉</span>
-            <h3>成语接龙 <span>↗</span></h3>
-            <p>首尾接一接，边玩边记成语</p>
-            <span class="book-tag">趣味挑战</span>
+          <a class="book-card textbook-card subject-english" href="english.html">
+            <span class="book-icon"><svg aria-hidden="true"><use href="#icon-english"/></svg></span>
+            <div class="book-copy"><span class="book-tag">外研版三起 · 四年级上下册</span><h3>同步单词</h3><p>点一点、听一听，开口说英语</p></div>
+            <span class="card-arrow" aria-hidden="true"><svg><use href="#icon-arrow"/></svg></span>
           </a>
         </div>
       </section>
 
-      <section aria-labelledby="tips-title">
+      <section id="explore" class="learning-section" aria-labelledby="explore-title">
         <div class="section-heading">
-          <h2 id="tips-title">使用小贴士</h2>
-          <span>给小朋友和家长</span>
+          <div class="section-title"><span class="section-marker marker-purple" aria-hidden="true"></span><h2 id="explore-title">兴趣探索</h2><span class="section-subtitle">小小好奇心，大大的世界</span></div>
+          <span class="section-note">9 本学习册，等你来发现</span>
         </div>
-        <ul class="tip-list">
-          <li><span>🔊</span>知识点里的课文、词语、诗句都能点读，听一听更好记。</li>
-          <li><span>✓</span>学完一课点一下"已复习"，进度会自动保存在当前浏览器。</li>
-          <li><span>🖨️</span>知识点页面可以按单元打印成复习纸，考前过一遍很方便。</li>
-          <li><span>📅</span>每天翻一个单元，比一次学很多更管用——贵在坚持。</li>
-        </ul>
+        <div class="explore-grid">
+          <a class="book-card explore-card subject-scenes" href="words.html">
+            <span class="book-icon"><svg aria-hidden="true"><use href="#icon-scenes"/></svg></span>
+            <div class="book-copy"><span class="book-tag">生活英语 · 25 个场景</span><h3>场景单词</h3><p>教室、食物、交通，在生活里记单词</p></div>
+            <span class="card-arrow" aria-hidden="true"><svg><use href="#icon-arrow"/></svg></span>
+          </a>
+          <a class="book-card explore-card subject-idioms" href="idioms.html">
+            <span class="book-icon"><svg aria-hidden="true"><use href="#icon-idioms"/></svg></span>
+            <div class="book-copy"><span class="book-tag">语文积累</span><h3>成语本</h3><p>听典故故事，学会用成语</p></div>
+            <span class="card-arrow" aria-hidden="true"><svg><use href="#icon-arrow"/></svg></span>
+          </a>
+          <a class="book-card explore-card subject-writing" href="writing.html">
+            <span class="book-icon"><svg aria-hidden="true"><use href="#icon-writing"/></svg></span>
+            <div class="book-copy"><span class="book-tag">表达创作</span><h3>作文坊</h3><p>打开写作锦囊，写自己的故事</p></div>
+            <span class="card-arrow" aria-hidden="true"><svg><use href="#icon-arrow"/></svg></span>
+          </a>
+          <a class="book-card explore-card subject-chain" href="chain.html">
+            <span class="book-icon"><svg aria-hidden="true"><use href="#icon-dragon"/></svg></span>
+            <div class="book-copy"><span class="book-tag">趣味挑战</span><h3>成语接龙</h3><p>和小龙接一接，边玩边记</p></div>
+            <span class="card-arrow" aria-hidden="true"><svg><use href="#icon-arrow"/></svg></span>
+          </a>
+          <a class="book-card explore-card subject-geo" href="geo.html">
+            <span class="book-icon"><svg aria-hidden="true"><use href="#icon-globe"/></svg></span>
+            <div class="book-copy"><span class="book-tag">认识世界</span><h3>地理探索</h3><p>看山川河流，环游我们的地球</p></div>
+            <span class="card-arrow" aria-hidden="true"><svg><use href="#icon-arrow"/></svg></span>
+          </a>
+          <a class="book-card explore-card subject-astro" href="astro.html">
+            <span class="book-icon"><svg aria-hidden="true"><use href="#icon-astro"/></svg></span>
+            <div class="book-copy"><span class="book-tag">仰望星空</span><h3>天文探索</h3><p>飞向太阳系，发现宇宙的秘密</p></div>
+            <span class="card-arrow" aria-hidden="true"><svg><use href="#icon-arrow"/></svg></span>
+          </a>
+          <a class="book-card explore-card subject-history" href="history.html">
+            <span class="book-icon"><svg aria-hidden="true"><use href="#icon-history"/></svg></span>
+            <div class="book-copy"><span class="book-tag">人文视野</span><h3>历史长廊</h3><p>从上古到明清，听中华故事</p></div>
+            <span class="card-arrow" aria-hidden="true"><svg><use href="#icon-arrow"/></svg></span>
+          </a>
+          <a class="book-card explore-card subject-literature" href="lit.html">
+            <span class="book-icon"><svg aria-hidden="true"><use href="#icon-literature"/></svg></span>
+            <div class="book-copy"><span class="book-tag">阅读积累</span><h3>文学常识</h3><p>认识作家名著，走进诗文世界</p></div>
+            <span class="card-arrow" aria-hidden="true"><svg><use href="#icon-arrow"/></svg></span>
+          </a>
+          <a class="book-card explore-card subject-science" href="sci.html">
+            <span class="book-icon"><svg aria-hidden="true"><use href="#icon-science"/></svg></span>
+            <div class="book-copy"><span class="book-tag">动手发现</span><h3>科学实验室</h3><p>探索身边的光、声音和小奥秘</p></div>
+            <span class="card-arrow" aria-hidden="true"><svg><use href="#icon-arrow"/></svg></span>
+          </a>
+        </div>
       </section>
 
-      <p class="storage-note">无需联网、无需安装，把整个文件夹拷走也能用；学习进度保存在本机浏览器中。</p>
+      <aside class="home-help" aria-label="学习小贴士">
+        <div class="help-intro"><span class="help-spark" aria-hidden="true">✦</span><p><strong>学习不着急，每天一点点。</strong><span>读一课、记几个词，今天也有新收获。</span></p></div>
+        <details class="learning-tips">
+          <summary>给小朋友和家长的小贴士<span class="tip-chevron" aria-hidden="true">⌄</span></summary>
+          <ul class="tip-list">
+            <li><svg aria-hidden="true"><use href="#icon-sound"/></svg><span><strong>点一点，听一听</strong>课文、词语、诗句都能点读，听一听更好记。</span></li>
+            <li><svg aria-hidden="true"><use href="#icon-check"/></svg><span><strong>学过就打个勾</strong>点一下“已复习”或“已掌握”，进度保存在当前浏览器。</span></li>
+            <li><svg aria-hidden="true"><use href="#icon-print"/></svg><span><strong>也能打印出来学</strong>知识点页面可按单元打印成复习纸。</span></li>
+            <li><svg aria-hidden="true"><use href="#icon-calendar"/></svg><span><strong>每天都有小进步</strong>每天翻一个单元，慢慢积累，贵在坚持。</span></li>
+          </ul>
+        </details>
+      </aside>
+      <footer class="home-footer"><span>乐学堂 · 陪伴每一次小小成长</span><p>无需联网或安装 · 学习进度保存在本机浏览器</p></footer>
     </main>
   </div>
 </body>

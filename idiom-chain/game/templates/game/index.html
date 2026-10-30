@@ -1,0 +1,95 @@
+{% load static %}
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="字字相承：读懂成语的释义、出处与例句，再用四字接龙巩固积累。">
+  <meta name="theme-color" content="#fffaf2">
+  <title>字字相承 · 成语学习与接龙</title>
+  <link rel="icon" href="{% static 'game/icons/dragon.svg' %}">
+  <link rel="stylesheet" href="{% static 'game/app.css' %}?v=20261030">
+  <script src="{% static 'game/app.js' %}?v=20261030" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">跳到学习内容</a>
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="字字相承首页">
+      <span class="brand-mark"><img src="{% static 'game/icons/dragon.svg' %}" width="54" height="54" alt=""></span>
+      <span>字字相承<small>每天进步一点点</small></span>
+    </a>
+    <nav class="mode-tabs" role="tablist" aria-label="选择学习方式">
+      <button id="learn-tab" type="button" role="tab" aria-selected="true" aria-pressed="true" aria-controls="learning">📖 成语词典</button>
+      <button id="game-tab" type="button" role="tab" aria-selected="false" aria-pressed="false" aria-controls="game-mode" tabindex="-1">🐉 成语接龙</button>
+    </nav>
+    <span class="edition"><span class="live-dot" aria-hidden="true"></span>家庭学习小天地</span>
+  </header>
+
+  <main id="main-content" tabindex="-1">
+    <section class="welcome-banner" aria-labelledby="welcome-title">
+      <div><p class="eyebrow">✦ 读一读，记一记，接一接</p><h1 id="welcome-title">让好奇心，<span>多接一程。</span></h1><p>读懂一个成语，再把新知识接进你的成语龙。</p></div>
+      <div class="welcome-art" aria-hidden="true"><span class="art-star">✦</span><img src="{% static 'game/icons/idioms.svg' %}" width="112" height="112" alt=""><img src="{% static 'game/icons/dragon.svg' %}" width="120" height="120" alt=""><span class="art-spark">✧</span></div>
+    </section>
+
+    <section id="learning" class="learning-layout" role="tabpanel" aria-labelledby="learn-tab">
+      <aside class="dictionary-panel panel" aria-label="查找与浏览成语">
+        <div class="section-heading"><h2>找个成语读一读</h2><span class="count-badge"><strong id="dictionary-total">—</strong> 条</span></div>
+        <form id="search-form" class="search-form" role="search">
+          <label for="dictionary-search">成语、拼音或拼音首字母</label>
+          <div class="search-row"><input id="dictionary-search" type="search" placeholder="试试“一心一意”或 yxyy" maxlength="64" autocomplete="off"><button type="submit" class="primary">查一查</button></div>
+          <button id="clear-search" type="button" class="text-button" hidden>清空搜索，浏览全部</button>
+        </form>
+        <p id="search-feedback" class="search-feedback" role="status" aria-live="polite">正在打开成语词典…</p>
+        <details id="results-disclosure" class="results-disclosure" open>
+          <summary>本页成语 <span id="results-count" class="count-badge">—</span></summary>
+          <div id="dictionary-results" class="dictionary-results" aria-label="搜索结果"></div>
+          <div class="page-nav"><button id="previous-page" type="button" disabled aria-label="上一页搜索结果">←</button><span id="page-label">正在载入</span><button id="next-page" type="button" disabled aria-label="下一页搜索结果">→</button></div>
+        </details>
+        <p class="panel-note">点一个词条，读一读它的意思。非四字词条也能查阅。</p>
+      </aside>
+
+      <article id="reading-card" class="reading-card panel" aria-label="当前词条" aria-busy="true">
+        <div class="reading-topline"><span id="reading-position" class="status-badge">成语阅读</span><button id="back-to-results" type="button" class="text-button" hidden>返回搜索结果</button></div>
+        <div class="word-heading"><span class="word-seal" aria-hidden="true">文</span><div><h2 id="reading-word" tabindex="-1">一起读成语</h2><p id="reading-pinyin"></p></div></div>
+        <p id="reading-warning" class="reading-warning"></p>
+        <div class="reading-actions"><button id="speak" type="button" class="secondary" disabled>🔊 朗读词条</button><button id="stop-speak" type="button" class="quiet-button" disabled>停止朗读</button><span id="voice-note">正在检查中文朗读支持…</span></div>
+        <section class="meaning-block" aria-labelledby="meaning-title"><div class="section-heading"><h3 id="meaning-title">这个成语是什么意思？</h3><span id="reading-source-status" class="source-status"></span></div><p id="reading-meaning">搜索一个成语，或从左侧选择你想认识的词条。</p></section>
+        <details id="reading-summary" class="reading-details" hidden><summary>保留简释 · 补充阅读</summary><p id="reading-summary-text"></p></details>
+        <details id="reading-more" class="reading-details"><summary>再读一点：出处与例句</summary><div class="context-grid"><section><h3>📜 它从哪里来</h3><p id="reading-derivation"></p></section><section><h3>✏️ 试着这样用</h3><p id="reading-example"></p></section></div></details>
+        <div id="game-return-bar" class="game-return-bar" hidden><p>读懂以后，回到刚才那一局继续接。</p><div class="bridge-actions"><button id="return-to-game" type="button" class="secondary">← 返回这局接龙</button><button id="use-word" type="button" class="primary" disabled>填入并返回接龙</button></div><p id="use-word-note" class="panel-note"></p></div>
+        <div class="reading-nav"><button id="previous-word" type="button" class="secondary" disabled>← 上一个</button><span id="reading-count">正在载入</span><button id="next-word" type="button" class="secondary" disabled>下一个 →</button></div>
+        <div class="reader-invite"><span>读一读，也来接一接。</span><button id="read-to-game" type="button" class="text-button">去接龙练一练 →</button></div>
+        <details class="source-details"><summary>词条资料与来源</summary><p id="reading-abbreviation" class="source-meta"></p><p id="reading-source" class="source-meta"></p><a id="reading-source-link" target="_blank" rel="noopener noreferrer" hidden>查看原文来源 ↗</a><details id="reading-raw"><summary>查看原始来源记录</summary><pre id="reading-raw-text"></pre></details></details>
+      </article>
+    </section>
+
+    <section id="game-mode" role="tabpanel" aria-labelledby="game-tab" hidden>
+      <div class="game-heading"><div><h2>把成语接成一条龙</h2><p>首尾同字，不重复。不赶时间，慢慢想。</p></div><span class="round-label" id="round-status">正在连接对局…</span></div>
+      <div class="game-layout">
+        <section class="game-panel panel" aria-labelledby="game-title">
+          <div class="play-modes"><h3 id="game-title">🙋 自己接龙</h3><button type="button" class="reserved-button" disabled aria-describedby="companion-note">🐉 小龙陪练 · 准备中</button></div>
+          <p id="companion-note" class="panel-note">先把这一条成语龙接起来，陪练模式会在后续开放。</p>
+          <div class="current-wrap"><div class="current-copy"><p class="eyebrow">从这个成语接下去</p><h3 id="current-word" class="current-word">正在载入</h3><p id="current-pinyin"></p><div class="current-actions"><button id="speak-current" type="button" class="quiet-button" disabled>🔊 读一读</button><button id="stop-current-speak" type="button" class="quiet-button" disabled>停止朗读</button><button id="current-detail" type="button" class="text-button" disabled>读懂这个成语 ↗</button><span id="game-voice-note" class="panel-note"></span></div></div><div class="next-target"><span>接这个字</span><strong id="next-char">—</strong><span>开头 ↓</span></div></div>
+          <p id="current-meaning" class="current-meaning">正在为你准备一场文字接力…</p>
+          <form id="play-form" autocomplete="off" novalidate>{% csrf_token %}<label for="word-input" class="input-label">你的成语 <span>以“<b id="input-next-char">—</b>”字开头</span></label><div class="input-row"><input id="word-input" name="word" type="text" maxlength="16" placeholder="输入四字成语" spellcheck="false" required aria-describedby="feedback input-rule" disabled><button id="play-button" class="primary" type="submit" disabled>接上它 →</button></div></form>
+          <p id="feedback" class="feedback" role="status" aria-live="polite">切换到接龙时，将自动续上你的当前对局。</p>
+          <button id="retry-game" type="button" class="secondary" hidden>重新读取对局</button>
+          <div class="game-actions"><button id="hint-button" class="hint-button" type="button" disabled>💡 给我一点提示 <small>−5 分</small></button><button id="restart-button" class="text-button" type="button" disabled>↻ 重新开始</button></div>
+          <p id="input-rule" class="panel-note">四个汉字 · 首尾同字 · 本局不重复</p>
+          <section id="hint-card" class="hint-card" aria-labelledby="hint-title" hidden><span id="hint-title" class="hint-label">给你一点小灵感</span><strong id="hint-word"></strong><p id="hint-meaning"></p><div class="bridge-actions"><button id="fill-hint" type="button" class="secondary">填入输入框</button><button id="read-hint" type="button" class="text-button">先读懂这个成语 ↗</button></div><small>填入不会自动提交，想好后再点“接上它”。</small></section>
+          <section class="chain-section" aria-labelledby="trail-title"><div class="section-heading"><h3 id="trail-title">这条成语龙</h3><span>点成语，查看完整词条</span></div><ol id="chain" class="chain"><li class="empty">第一步，即将开始。</li></ol></section>
+        </section>
+        <aside class="game-sidebar" aria-label="接龙记录和玩法">
+          <section class="score-card panel"><div class="section-heading"><h3>🌱 这一局的收获</h3><span class="status-badge">答对 +10 分</span></div><div class="stats"><div><strong id="score">—</strong><span>当前得分</span></div><div><strong id="length">—</strong><span>已接成语</span></div></div><p class="panel-note">开头不计入已接数量。提示扣 5 分，最低为 0 分。</p></section>
+          <section class="rules panel"><h3>怎么玩？</h3><ol><li><strong>首尾同字</strong><span>后一个成语的首字，接住前一个的尾字；同音不同字不算。</span></li><li><strong>每个成语只用一次</strong><span>使用本词库中可接龙的四字成语。本局已经用过的，要换一个。</span></li><li><strong>想不起来就看提示</strong><span>先读懂，再填入，最后自己确认提交。</span></li></ol><div class="rule-example">一心一<b>意</b><span aria-hidden="true">→</span><b>意</b>气风发</div><p class="dictionary-note">可接龙词条 <strong id="dictionary-count">—</strong> 条</p></section>
+          <section class="record panel"><div class="section-heading"><h3>最近几局</h3><span>最多 5 局</span></div><ul id="history" class="history"><li class="empty">完成一局后，成绩会留在这里。</li></ul><p class="panel-note">刷新可继续当前对局。游客记录依赖本浏览器 Cookie，清除后将无法找回。</p></section>
+        </aside>
+      </div>
+    </section>
+
+    <details class="feature-roadmap"><summary><span>✦ 还有这些学习小帮手，正在准备</span><span class="roadmap-count">后续开放</span></summary><div class="feature-grid"><div><strong>近义词与反义词</strong><p>关联词资料整理中</p></div><div><strong>逐字理解与记忆</strong><p>逐字释义资料整理中</p></div><div><strong>成语故事</strong><p>适合孩子阅读的故事待整理</p></div><div><strong>小龙陪练与成长记录</strong><p>陪练和长期学习记录后续统一开放</p></div></div><p class="panel-note">这些功能暂未开放，不会用自动生成的内容代替词典原文。</p></details>
+    <footer><p>字字相承 · 在小小的积累里，遇见大大的世界。</p><details><summary>家长与管理入口</summary><p>家庭学习词典 · chinese-xinhua。未收录不等于不是成语；资料和合成朗读可能有误，可结合权威词典核对。</p><a href="/admin/">词库管理 ↗</a><span>仅供授权管理员使用</span></details></footer>
+  </main>
+  <noscript><p class="no-script">请开启浏览器的 JavaScript，以使用词典查询和接龙功能。</p></noscript>
+</body>
+</html>
