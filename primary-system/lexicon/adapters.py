@@ -140,3 +140,42 @@ def xinhua_words_manifest(filename):
     return {'schema_version': 1, 'source': xinhua_source('chinese-xinhua-words', 'chinese-xinhua 词语（内部评估）'),
             'version': XINHUA_VERSION, 'adapter': 'chinese-xinhua-words-v1',
             'source_files': {'ci.json': [XINHUA_WORDS_SHA256]}, 'records': records}
+
+
+def words_scenario_manifest(filename):
+    """场景单词全量投影（46 场景 577 词，en 全局唯一）：音标/释义入规范化列，
+    emoji/拆分/记忆提示/关联词入 properties 并各带证据路径；与旧词卡来源共用
+    primary-words 来源（新版本共存，激活后旧版本自动退位）。"""
+    data = Path(filename).read_bytes()
+    checksum = hashlib.sha256(data).hexdigest()
+    snapshot = json.loads(data)
+    if snapshot.get('schema_version') != 1:
+        raise ImportProblem('不支持的场景单词快照结构。')
+    source_file = snapshot.get('source_file', '')
+    records = []
+    for unit in snapshot['units']:
+        for row in unit['words']:
+            properties, paths = {}, {}
+            for field in ('emoji', 'parts', 'memo', 'related'):
+                if field in row and row[field] not in ('', []):
+                    properties[field] = row[field]
+                    paths[f'properties.{field}'] = f'/{field}'
+            paths['properties.unit'] = '/__unit__'
+            properties['unit'] = {'id': unit['id'], 'name': unit['name'], 'zh': unit['zh']}
+            raw = dict(row)
+            raw['__unit__'] = {'id': unit['id'], 'name': unit['name'], 'zh': unit['zh']}
+            records.append({
+                'key': row['en'], 'language': 'en', 'kind': 'phrase' if ' ' in row['en'] else 'word',
+                'headword': row['en'], 'definition': row.get('zh', ''), 'gloss_language': 'zh', 'pos': '',
+                'pronunciation': {'value': row.get('ipa', ''), 'system': 'ipa', 'region': ''},
+                'properties': properties, 'raw': raw,
+                'field_paths': {'headword': '/en', 'definition': '/zh', 'pronunciation': '/ipa', **paths},
+            })
+    manifest_source = {
+        'code': 'primary-words', 'name': '现有场景英语词卡（场景单词全量）',
+        'attribution': 'Study / primary 原教学资料及后台人工修订。',
+        'rights_evidence': '来源为现有项目教学内容；待逐项补全公开使用依据，当前仅内部整理。',
+    }
+    return {'schema_version': 1, 'source': manifest_source,
+            'version': 'scenario-' + checksum[:24], 'adapter': 'primary-scenario-v1',
+            'source_files': {source_file or 'words-data.js': [checksum]}, 'records': records}

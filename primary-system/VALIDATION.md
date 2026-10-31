@@ -226,3 +226,12 @@ Playwright 在独立数据库副本中验证：桌面查词首页、汉字详情
 - 数据删除（源头可恢复）：8 本专题册、94 专题单元、825 专题编排、825 内容卡（words 306/idioms 258/lit 51/astro 51/sci 49/geo 47/history 47/writing 16）、562 词卡教学关联、8 个专题模块行。**源头完好**：legacy 各 *-data.js、primary.json、词典 5 来源（primary-words/english 保持激活，609 音标核对保留）、接龙词池、图示库——场景单词等玩法 app 可随时从源头重取数据。
 - importing：非目录模块的快照数据改为跳过并记录 skipped_modules（primary.json 保持全量导出）；首页只剩教材书架与接龙入口（模块卡 4 张）。
 - 词卡词典驱动测试迁移至 english 教材卡（fixture 用 seed 的 fltrp-english-4a 教材册），关联词解析修正为同模块词卡（原写死 words 模块的 bug 被新测试抓住）。全库 120 项测试通过；实测教材册页/词卡/接龙/词典 200，专题册 URL 404。
+
+## 场景单词玩法应用验证（2026-11-01）
+
+- 新应用 `words`（路由 `/words/`）：`Scenario`（46 场景）＋`ScenarioWord`（577 词位，entry 必挂词典词条、教学标注留卡上）＋`WordProgress`（双轨归属互斥约束，与接龙同模式）。
+- 词典全量补入：`scripts/export_words_scenario.cjs` 从 legacy words-data.js 导出校验快照（en 唯一/音标包裹/拆分齐全），`words_scenario_manifest` 适配器投影 577 词进 primary-words 新版本（exact_reuse 复用 316 个既有义项），激活后 `review_primary_readings` 核对新读音——**577 词 IPA/释义全部已核对可展示**。
+- 导入命令 `import_scenarios`：46 场景/577 词位、entry 匹配 100%、幂等重跑（修正了按未挂接过滤导致的重跑失配）。
+- API/页面：全量 state 下发（约 300KB，一次查询批量组装修正了 N+1）、learn 幂等切换、游客/账号隔离、CSRF 回归用例（`ensure_csrf_cookie`＋enforce_csrf_checks——chain 教训防复发）、word_id 数字校验防 500。
+- 入口：seed MODULES 加回 words 模块卡（module.html 特判）；首页模块卡 5 张。前端 words.js/words.css 按 legacy words-app 体验移植（chips 进度/词卡网格/搜索/连读/掌握标记走 API）。
+- 全库 126 项测试通过；实测 /words/ 200、46 场景 577 词 IPA+释义覆盖 100%。

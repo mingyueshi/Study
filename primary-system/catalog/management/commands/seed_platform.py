@@ -4,12 +4,13 @@ from django.db import transaction
 from catalog.models import Stage, Grade, Subject, Module, TextbookEdition, Textbook
 
 MODULES = [
-    # 教材内容管线走固定结构的目录编排；专题内容各自成为独立玩法应用（如 chain），
-    # 不再以模块/册形式进入目录。
+    # 教材内容管线走固定结构的目录编排；专题内容各自成为独立玩法应用（如 chain/words），
+    # 以模块卡作为入口，页面由各玩法应用自己渲染。
     ('knowledge', '语文知识', 'chinese', 'book', '顺着课文和单元，理解语言的美。'),
     ('math', '数学思维', 'math', 'math', '读知识、看例题，把方法想明白。'),
     ('english', '教材同步单词', 'english', 'english', '按教材册次，积累每天用得到的英语。'),
     ('chain', '成语接龙', 'chinese', 'dragon', '和小龙陪练轮流接龙，词语取自统一词库。'),
+    ('words', '场景单词', 'english', 'scenes', '从生活场景出发，认识身边的英文。'),
 ]
 
 

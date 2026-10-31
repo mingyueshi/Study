@@ -26,7 +26,7 @@ INSTALLED_APPS = [
     'nova_admin', 'nova_slider_captcha',
     'django.contrib.admin', 'django.contrib.auth', 'django.contrib.contenttypes',
     'django.contrib.sessions', 'django.contrib.messages', 'django.contrib.staticfiles',
-    'accounts', 'catalog', 'learning', 'lexicon', 'chain',
+    'accounts', 'catalog', 'learning', 'lexicon', 'chain', 'words',
 ]
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware', 'django.contrib.sessions.middleware.SessionMiddleware',
