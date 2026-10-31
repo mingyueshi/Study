@@ -186,3 +186,9 @@ Playwright 在独立数据库副本中验证：桌面查词首页、汉字详情
 - 迁移史 surgery：`django_migrations` 与 `django_content_type` 的 app 标签 UPDATE（权限经 content_type 外键自动跟随，`游戏管理` 组权限无感）；迁移文件 dependency 改 `('chain', ...)`；存量数据表 `games_chainword`/`games_gameround` 重命名为 `chain_chainword`/`chain_gameround`（表名手术为一次性维护操作，不进迁移历史——从零建库按 0001–0003 直接得到新表名）。索引与约束名保留 `games_` 前缀（无语义冲突，省一次 DDL）。
 - 过程中纠正一处自查错误：0004 RunSQL 表名误写 `chain_chainround`（`GameRound` 默认表名应为 `chain_gameround`），已撤销该迁移并按正确名对齐存量库。
 - 全库 112 项测试通过、`makemigrations --check` 无漂移、`/chain/` 200 且 `/games/` 404；`游戏管理` 权限组、导航徽标、seed_platform 幂等均验证正常。
+
+## 接龙提示 403 修复（2026-10-31）
+
+- 症状：游客点提示无反应。根因双重——重写对局模板时 `{% csrf_token %}` 丢失（页面不种 CSRF cookie、POST 全线 403），且前端把非 JSON 的 403 响应吞成「没反应」；测试未抓到是因为 test client 默认关闭 CSRF 校验。
+- 修复：模板恢复 csrf_token 并对页面视图显式 `@ensure_csrf_cookie`；前端对 403 给出「安全校验过期，请刷新」反馈。
+- 回归锁定：新增 `enforce_csrf_checks=True` 的游客全链路用例（真实浏览器路径：种 cookie → 带 token 出招 200 → 无 token 403）。全库 113 项通过。

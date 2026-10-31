@@ -28,6 +28,7 @@
   }).then(async (response) => {
     const data = await response.json().catch(() => ({}));
     if (response.status === 409) { await refresh(); return null; }
+    if (response.status === 403) { showFeedback('页面停留太久安全校验过期了，刷新页面后再试。', 'error'); return null; }
     if (!response.ok) { showFeedback(data.error || '操作未成功，请重试。', 'error'); return null; }
     return data;
   });

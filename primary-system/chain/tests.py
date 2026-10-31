@@ -221,6 +221,29 @@ class ChainPlayTests(TestCase):
         return self.client.post('/chain/api/play/', data=json.dumps(
             {'round_id': state['id'], 'revision': state['revision'], 'word': word}), content_type='application/json')
 
+    def test_guest_flow_survives_real_csrf_enforcement(self):
+        # test client 默认关闭 CSRF 校验；本用例显式开启，守住「页面必须种 cookie、
+        # POST 必须携带 token」的真实浏览器路径（曾因模板丢 csrf_token 而全线 403）。
+        from django.test import Client
+        self.client.logout()
+        enforced = Client(enforce_csrf_checks=True)
+        page = enforced.get('/chain/')
+        self.assertEqual(page.status_code, 200)
+        token = enforced.cookies['primary_csrftoken'].value
+        state = enforced.get('/chain/api/state/').json()
+        tail = state['next_char']
+        word = next(w for w in self.CHAIN_WORDS if w[0] == tail)
+        response = enforced.post('/chain/api/play/', data=json.dumps(
+            {'round_id': state['id'], 'revision': state['revision'], 'word': word}),
+            content_type='application/json', HTTP_X_CSRFTOKEN=token)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json()['score'], 10)
+        # 无 token 的请求仍被拒绝。
+        rejected = enforced.post('/chain/api/play/', data=json.dumps(
+            {'round_id': state['id'], 'revision': state['revision'], 'word': word}),
+            content_type='application/json')
+        self.assertEqual(rejected.status_code, 403)
+
     def test_guest_plays_without_account(self):
         self.client.logout()
         self.assertEqual(self.client.get('/chain/').status_code, 200)

@@ -12,7 +12,7 @@
     </div>
     <p class="current-meaning" id="chain-current-meaning"></p>
     <form id="chain-form" novalidate>
-      <label class="answer-label" for="chain-word">你的成语</label>
+      {% csrf_token %}<label class="answer-label" for="chain-word">你的成语</label>
       <div class="answer-row"><input id="chain-word" name="word" maxlength="4" autocomplete="off" spellcheck="false" aria-describedby="chain-feedback chain-rule" placeholder="输入四字成语"><button class="chain-button primary" type="submit" id="chain-submit">接上它 →</button></div>
       <p id="chain-feedback" class="feedback" role="status" aria-live="polite" aria-atomic="true">想一想，再把你的成语写下来。</p>
       <div class="answer-tools"><button type="button" class="hint-button" id="chain-hint-btn" aria-expanded="false" aria-controls="chain-hints">💡 给我一点提示（−5 分）</button><span id="chain-rule">四个汉字 · 只接相同的字 · 不使用谐音</span></div>

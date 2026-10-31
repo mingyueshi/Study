@@ -6,6 +6,7 @@ import json
 import secrets
 
 from django.db import OperationalError
+from django.views.decorators.csrf import ensure_csrf_cookie
 from django.http import JsonResponse
 from django.shortcuts import render
 from django.views.decorators.cache import never_cache
@@ -46,6 +47,7 @@ def _payload(request, round, *, hint=None):
     return payload
 
 
+@ensure_csrf_cookie
 @never_cache
 @require_GET
 def page(request):
