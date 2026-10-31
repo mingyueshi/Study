@@ -3,6 +3,7 @@ import uuid
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.db.models import Q
 
 
 class ChainWord(models.Model):
@@ -50,7 +51,7 @@ class ChainWord(models.Model):
 
 
 class GameRound(models.Model):
-    """统一账号下的接龙对局；链上每一手都是词池中的成语，首尾字以词池登记为准。"""
+    """接龙对局：登录玩家挂账号，游客挂浏览器会话键；链上每一手都是词池中的成语。"""
 
     class Status(models.TextChoices):
         PLAYING = 'playing', '进行中'
@@ -61,8 +62,10 @@ class GameRound(models.Model):
         PLAYER_STUCK = 'player_stuck', '玩家无词可接，本局结束'
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='玩家', on_delete=models.CASCADE,
-                             related_name='chain_rounds')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='玩家', null=True, blank=True,
+                             on_delete=models.CASCADE, related_name='chain_rounds')
+    guest_key = models.CharField('游客会话键', max_length=64, blank=True, db_index=True,
+                                 help_text='未登录对局的归属标识；随浏览器会话过期失效。')
     chain = models.JSONField('接龙链', default=list)
     score = models.PositiveIntegerField('得分', default=0)
     hints = models.PositiveIntegerField('提示次数', default=0)
@@ -78,6 +81,10 @@ class GameRound(models.Model):
         verbose_name_plural = '成语接龙对局'
         ordering = ('-created_at',)
         indexes = [models.Index(fields=('user', 'status', '-updated_at'), name='games_round_user_status')]
+        constraints = [models.CheckConstraint(
+            condition=(Q(user__isnull=False) & Q(guest_key='')) | (Q(user__isnull=True) & ~Q(guest_key='')),
+            name='games_round_owner_exclusive')]
 
     def __str__(self):
-        return f'{self.user} · {len(self.chain)} 手 · {self.get_status_display()}'
+        owner = self.user or '游客'
+        return f'{owner} · {len(self.chain)} 手 · {self.get_status_display()}'

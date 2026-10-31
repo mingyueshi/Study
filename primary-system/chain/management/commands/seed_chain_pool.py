@@ -9,7 +9,7 @@ from django.core.management.base import BaseCommand
 from django.db import transaction
 from lexicon.models import active_records
 
-from games.models import ChainWord
+from chain.models import ChainWord
 
 
 def is_playable(headword):

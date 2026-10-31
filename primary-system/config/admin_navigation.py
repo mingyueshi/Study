@@ -15,7 +15,7 @@ def badges(request, available_apps):
     if user.has_perm('lexicon.view_sourcerelease'):
         from lexicon.models import SourceRelease
         counts['lexicon.sourcerelease'] = SourceRelease.objects.filter(status='importing').count()
-    if user.has_perm('games.view_chainword'):
-        from games.models import ChainWord
-        counts['games.chainword'] = ChainWord.objects.filter(game_eligible=True).count()
+    if user.has_perm('chain.view_chainword'):
+        from chain.models import ChainWord
+        counts['chain.chainword'] = ChainWord.objects.filter(game_eligible=True).count()
     return counts

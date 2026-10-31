@@ -62,6 +62,6 @@ class Command(BaseCommand):
         group.permissions.add(*permissions)
         game_group, _ = Group.objects.get_or_create(name='游戏管理')
         # Full control of the game word pool; still no accounts or private progress.
-        game_permissions = Permission.objects.filter(content_type__app_label='games')
+        game_permissions = Permission.objects.filter(content_type__app_label='chain')
         game_group.permissions.add(*game_permissions)
         self.stdout.write(self.style.SUCCESS('基础目录、内容编辑与游戏管理权限组已就绪；已有记录保持不变。'))

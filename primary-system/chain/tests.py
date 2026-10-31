@@ -121,22 +121,22 @@ class ChainAdminTests(TestCase):
 
     def test_admin_lists_and_forms_render(self):
         self.client.force_login(self.admin)
-        for path in ('/admin/games/chainword/', '/admin/games/chainword/add/'):
+        for path in ('/admin/chain/chainword/', '/admin/chain/chainword/add/'):
             self.assertEqual(self.client.get(path).status_code, 200, path)
         pk = ChainWord.objects.get().pk
-        self.assertEqual(self.client.get(f'/admin/games/chainword/{pk}/change/').status_code, 200)
+        self.assertEqual(self.client.get(f'/admin/chain/chainword/{pk}/change/').status_code, 200)
 
     def test_bulk_actions_toggle_eligibility(self):
         self.client.force_login(self.admin)
         pk = str(ChainWord.objects.get().pk)
-        self.client.post('/admin/games/chainword/', {'action': 'mark_eligible', '_selected_action': pk})
+        self.client.post('/admin/chain/chainword/', {'action': 'mark_eligible', '_selected_action': pk})
         self.assertTrue(ChainWord.objects.get(pk=pk).game_eligible)
-        self.client.post('/admin/games/chainword/', {'action': 'mark_ineligible', '_selected_action': pk})
+        self.client.post('/admin/chain/chainword/', {'action': 'mark_ineligible', '_selected_action': pk})
         self.assertFalse(ChainWord.objects.get(pk=pk).game_eligible)
 
     def test_game_group_curates_but_content_editor_cannot(self):
         self.client.force_login(self.curator)
-        response = self.client.post('/admin/games/chainword/add/', {
+        response = self.client.post('/admin/chain/chainword/add/', {
             'entry': str(self.free_entry.pk), 'game_eligible': 'on',
             'first_char': '', 'last_char': '', 'note': '开学第一周用',
         })
@@ -144,7 +144,7 @@ class ChainAdminTests(TestCase):
         word = ChainWord.objects.get(entry=self.free_entry)
         self.assertEqual((word.first_char, word.last_char), ('画', '足'))
         self.client.force_login(self.editor)
-        self.assertEqual(self.client.get('/admin/games/chainword/').status_code, 403)
+        self.assertEqual(self.client.get('/admin/chain/chainword/').status_code, 403)
 
 
 class SeedChainPoolTests(TestCase):
@@ -185,7 +185,7 @@ class SeedChainPoolTests(TestCase):
 class ChainPlayTests(TestCase):
     """对局全链路：固定小词池走开局、接龙、陪练、提示、终局与并发防护。"""
 
-    CHAIN_WORDS = ['一心一意', '意气风发', '发扬光大', '大功告成', '表里如一']
+    CHAIN_WORDS = ['一心一意', '意气风发', '发扬光大', '大功告成', '大快人心', '表里如一']
 
     @classmethod
     def setUpTestData(cls):
@@ -212,23 +212,49 @@ class ChainPlayTests(TestCase):
         self.client.force_login(self.user)
 
     def state(self):
-        response = self.client.get('/games/api/state/')
+        response = self.client.get('/chain/api/state/')
         self.assertEqual(response.status_code, 200)
         return response.json()
 
     def play(self, word, state=None):
         state = state or self.state()
-        return self.client.post('/games/api/play/', data=json.dumps(
+        return self.client.post('/chain/api/play/', data=json.dumps(
             {'round_id': state['id'], 'revision': state['revision'], 'word': word}), content_type='application/json')
 
-    def test_requires_login(self):
+    def test_guest_plays_without_account(self):
         self.client.logout()
-        self.assertEqual(self.client.get('/games/api/state/').status_code, 401)
-        self.assertEqual(self.client.post('/games/api/play/', data='{}', content_type='application/json').status_code, 401)
-        self.assertEqual(self.client.get('/games/').status_code, 302)
+        self.assertEqual(self.client.get('/chain/').status_code, 200)
+        state = self.client.get('/chain/api/state/').json()
+        self.assertEqual(state['status'], 'playing')
+        round = GameRound.objects.get(pk=state['id'])
+        self.assertIsNone(round.user)
+        self.assertTrue(round.guest_key)
+        # 游客可出招、提示、重开。
+        tail = state['next_char']
+        word = next(w for w in self.CHAIN_WORDS if w[0] == tail)
+        response = self.client.post('/chain/api/play/', data=json.dumps(
+            {'round_id': state['id'], 'revision': state['revision'], 'word': word}), content_type='application/json')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json()['score'], 10)
+
+    def test_guest_cannot_touch_account_round(self):
+        state = self.state()
+        self.client.logout()
+        response = self.client.post('/chain/api/play/', data=json.dumps(
+            {'round_id': state['id'], 'revision': state['revision'], 'word': '一心一意'}),
+            content_type='application/json')
+        self.assertEqual(response.status_code, 409)
+
+    def test_guest_rounds_are_isolated_per_browser(self):
+        self.client.logout()
+        first = self.client.get('/chain/api/state/').json()
+        self.client.logout()  # 清空会话 = 另一位游客
+        second = self.client.get('/chain/api/state/').json()
+        self.assertNotEqual(first['id'], second['id'])
+        self.assertEqual(GameRound.objects.filter(status=GameRound.Status.PLAYING).count(), 2)
 
     def test_page_renders_with_state(self):
-        response = self.client.get('/games/')
+        response = self.client.get('/chain/')
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'chain-state')
 
@@ -300,29 +326,30 @@ class ChainPlayTests(TestCase):
         tail = state['next_char']
         word = next(w for w in self.CHAIN_WORDS if w[0] == tail)
         stale = json.dumps({'round_id': state['id'], 'revision': state['revision'] - 1, 'word': word})
-        response = self.client.post('/games/api/play/', data=stale, content_type='application/json')
+        response = self.client.post('/chain/api/play/', data=stale, content_type='application/json')
         self.assertEqual(response.status_code, 409)
 
     def test_other_user_cannot_touch_round(self):
         state = self.state()
         self.client.force_login(self.other)
-        response = self.client.post('/games/api/play/', data=json.dumps(
+        response = self.client.post('/chain/api/play/', data=json.dumps(
             {'round_id': state['id'], 'revision': state['revision'], 'word': '一心一意'}),
             content_type='application/json')
         self.assertEqual(response.status_code, 409)
 
-    def test_hint_costs_five_and_returns_up_to_three(self):
+    def test_hint_costs_five_and_lists_all_candidates(self):
+        # 固定开局：尾字「大」在词池中有两个可接成语，提示必须全部列出。
+        self.fixed_round('发扬光大')
         state = self.state()
-        opener = state['chain'][0]['word']
-        response = self.client.post('/games/api/hint/', data=json.dumps(
+        response = self.client.post('/chain/api/hint/', data=json.dumps(
             {'round_id': state['id'], 'revision': state['revision']}), content_type='application/json')
         self.assertEqual(response.status_code, 200)
         data = response.json()
         self.assertEqual(data['score'], max(0, state['score'] - 5))
         self.assertEqual(data['hints'], 1)
-        self.assertTrue(1 <= len(data['hint']) <= 3)
+        self.assertEqual({item['word'] for item in data['hint']}, {'大功告成', '大快人心'})
         for item in data['hint']:
-            self.assertEqual(item['word'][0], opener[-1])
+            self.assertEqual(item['word'][0], '大')
             self.assertNotIn(item['word'], {c['word'] for c in state['chain']})
 
     def test_partner_dead_end_finishes_round(self):
@@ -336,7 +363,7 @@ class ChainPlayTests(TestCase):
 
     def test_restart_finishes_and_starts_new_round(self):
         state = self.state()
-        response = self.client.post('/games/api/restart/', data=json.dumps(
+        response = self.client.post('/chain/api/restart/', data=json.dumps(
             {'round_id': state['id'], 'revision': state['revision']}), content_type='application/json')
         self.assertEqual(response.status_code, 200)
         fresh = response.json()

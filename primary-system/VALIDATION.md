@@ -125,13 +125,13 @@ Playwright 在独立数据库副本中验证：桌面查词首页、汉字详情
 
 ## 后台导航与接龙词池增量验证（2026-10-31）
 
-本次新增 `games` 接龙词池（词池旁表 + 后台注册）并启用 Nova 导航扩展（分组、图标、常用模型、收藏、计数徽标）。未改动 lexicon 模型与导入流程。
+本次新增 `games`（现 `chain`）接龙词池（词池旁表 + 后台注册）并启用 Nova 导航扩展（分组、图标、常用模型、收藏、计数徽标）。未改动 lexicon 模型与导入流程。
 
 | 检查 | 实际结果 |
 |---|---|
 | SQLite 全套回归 | 82 项：80 通过，2 项 PostgreSQL 专用并发测试按条件跳过（原 73 项 + 新增 games 9 项） |
 | `manage.py check` | 无问题（含 nova_admin 导航扩展自检：徽标 provider、图标名、分组 key 均通过） |
-| `manage.py makemigrations --check --dry-run` | 无模型与迁移漂移；`games.0001_initial` 已应用 |
+| `manage.py makemigrations --check --dry-run` | 无模型与迁移漂移；`games.0001_initial` 已应用（现属 `chain`） |
 | `collectstatic --noinput` | 成功，165 个文件 |
 | `seed_platform` 幂等 | 建立 `游戏管理` 组（games 全部权限）；既有目录与组保持不变 |
 | PostgreSQL 回归 | 本轮未运行 |
@@ -157,7 +157,7 @@ Playwright 在独立数据库副本中验证：桌面查词首页、汉字详情
 
 ## 成语接龙对局与陪练增量验证（2026-10-31）
 
-- 在既有接龙词池旁表（`games.ChainWord`，取词只消费词库生效版本、不要求公开准入）上新增玩家侧对局：`games.GameRound`（统一账号 FK、链 JSON、revision 乐观锁）、`games/urls.py`（`games/` 与 `games/api/state|play|hint|restart/`，config 路由改 include）、服务层内存词池缓存与 depth-3 前瞻陪练（移植 idiom-chain 规则：四字纯汉字、严格同字不谐音、+10/−5 计分、待接方无候选自动终局）。
+- 在既有接龙词池旁表（`games.ChainWord`（现 `chain.ChainWord`），取词只消费词库生效版本、不要求公开准入）上新增玩家侧对局：`games.GameRound`（现 `chain.GameRound`）（统一账号 FK、链 JSON、revision 乐观锁）、`games/urls.py`（现路由 `/chain/` 与 `/chain/api/state|play|hint|restart/`，config 路由改 include）、服务层内存词池缓存与 depth-3 前瞻陪练（移植 idiom-chain 规则：四字纯汉字、严格同字不谐音、+10/−5 计分、待接方无候选自动终局）。
 - `seed_chain_pool` 从词库生效版本填充词池：29,502 条四字纯汉字成语（1,393 条非四字不进池），幂等、bulk_create 显式派生首尾字；后台「游戏管理」组可继续人工勾选与改首尾字。
 - 端到端实测（真实词池）：页面 448ms、state 15ms、出招含陪练前瞻 34ms、提示 33ms、重开 55ms；陪练正常回应、提示返回 3 个候选并扣分、重开排除上一局起点。
 - 「成语本」模块软下架（`is_active=False`，数据/关联/进度全保留可恢复）：入口从学习广场消失，257 张成语教学卡随 `published_items()` 过滤从查词页教学卡区移除（单词卡不受影响）；接龙模块占位页改为进入入口，主导航新增「成语接龙」。
@@ -172,3 +172,17 @@ Playwright 在独立数据库副本中验证：桌面查词首页、汉字详情
 - 点读完整移植：`speech.js` 引擎原样复用；`tts.js` 提供 `[data-say]` 单点朗读、`[data-tts-sequence]` 连读（2200ms 步进＋高亮滚动）、英语发音人偏好（与 legacy 共用 localStorage 键）；接线 item 页逐节朗读、english 词卡整词＋音节段按钮（parts 取自 source_payload 只读投影）、english 册子连读条、profile 页发音人选择；打印隐藏朗读控件。
 - 测试：catalog 新增块校验/schema_version/占位渲染转义/convert 命令测试；lexicon 新增 v2 显式 text 块下音标证据路径不破坏；全库 110 项通过。
 - 手动验证：math 图示页占位与脚本标记齐全（44ms）、v1 词卡不加载图示资产、english 词卡点读按钮渲染。浏览器端互动演示与 TTS 实听按「本地使用」清单在 runserver 下核对（loader 注入后 demo 由库内 MutationObserver 自动初始化）。
+
+## 接龙游客免登录验证（2026-10-31）
+
+- `GameRound` 归属双轨化：登录玩家挂账号 FK，游客挂浏览器会话内随机键 `guest_key`（数据库 CheckConstraint 强制两者互斥），迁移 `games.0003`（现属 `chain`）。
+- 服务层改为 owner 过滤字典；账号对局保留账号行锁串行化首写，游客无行锁（同浏览器请求天然串行）；`current_round` 原子内重查防并发重复开局。
+- 页面与全部 API 去登录门；模板加游客模式提示（登录后记录跟随账号）；游客对局随会话过期失效，与账号对局天然隔离（越界操作 409）。
+- 测试：新增游客免登录全链路（页面 200/开局/出招计分）、游客不可触账号对局（409）、双游客隔离；全库 112 项通过。实测：游客打开接龙页直接开局（opener=因陋守旧，词池 29,502）。
+
+## games 应用更名 chain 验证（2026-10-31）
+
+- 应用户对玩法命名的要求，应用 `games` 更名 `chain`（app 即玩法；路由同步 `/games/`→`/chain/`，旧路由 404）；后台「游戏中心」分组、常用模型与徽标引用同步更新。
+- 迁移史 surgery：`django_migrations` 与 `django_content_type` 的 app 标签 UPDATE（权限经 content_type 外键自动跟随，`游戏管理` 组权限无感）；迁移文件 dependency 改 `('chain', ...)`；存量数据表 `games_chainword`/`games_gameround` 重命名为 `chain_chainword`/`chain_gameround`（表名手术为一次性维护操作，不进迁移历史——从零建库按 0001–0003 直接得到新表名）。索引与约束名保留 `games_` 前缀（无语义冲突，省一次 DDL）。
+- 过程中纠正一处自查错误：0004 RunSQL 表名误写 `chain_chainround`（`GameRound` 默认表名应为 `chain_gameround`），已撤销该迁移并按正确名对齐存量库。
+- 全库 112 项测试通过、`makemigrations --check` 无漂移、`/chain/` 200 且 `/games/` 404；`游戏管理` 权限组、导航徽标、seed_platform 幂等均验证正常。

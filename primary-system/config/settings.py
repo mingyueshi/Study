@@ -26,7 +26,7 @@ INSTALLED_APPS = [
     'nova_admin', 'nova_slider_captcha',
     'django.contrib.admin', 'django.contrib.auth', 'django.contrib.contenttypes',
     'django.contrib.sessions', 'django.contrib.messages', 'django.contrib.staticfiles',
-    'accounts', 'catalog', 'learning', 'lexicon', 'games',
+    'accounts', 'catalog', 'learning', 'lexicon', 'chain',
 ]
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware', 'django.contrib.sessions.middleware.SessionMiddleware',
@@ -102,11 +102,11 @@ NOVA_ADMIN_NAV_FAVORITES = True
 NOVA_ADMIN_NAV_GROUPS = [
     {'key': 'catalog', 'label': '课程内容', 'apps': ['catalog']},
     {'key': 'lexicon', 'label': '基础词库', 'apps': ['lexicon']},
-    {'key': 'games', 'label': '游戏中心', 'apps': ['games']},
+    {'key': 'chain', 'label': '游戏中心', 'apps': ['chain']},
     {'key': 'learning', 'label': '学习记录', 'apps': ['learning']},
     {'key': 'people', 'label': '账号与权限', 'apps': ['accounts', 'auth']},
 ]
-NOVA_ADMIN_NAV_COMMON_MODELS = ['catalog.contentitem', 'catalog.collection', 'lexicon.lexicalentry', 'games.chainword']
+NOVA_ADMIN_NAV_COMMON_MODELS = ['catalog.contentitem', 'catalog.collection', 'lexicon.lexicalentry', 'chain.chainword']
 NOVA_ADMIN_NAV_ICONS = {
     'catalog': 'heroicons:building-library',
     'catalog.stage': 'tag', 'catalog.grade': 'tag', 'catalog.subject': 'tag',
@@ -129,8 +129,8 @@ NOVA_ADMIN_NAV_ICONS = {
     'lexicon.contententrylink': 'heroicons:link',
     'lexicon.entrymatch': 'heroicons:document-duplicate',
     'lexicon.lexiconaudit': 'lucide:clipboard-list',
-    'games': 'bootstrap:diagram-3',
-    'games.chainword': 'tabler:link',
+    'chain': 'bootstrap:diagram-3',
+    'chain.chainword': 'tabler:link',
     'learning': 'tabler:chart-line',
     'learning.progress': 'heroicons:chart-bar',
     'accounts': 'lucide:users',

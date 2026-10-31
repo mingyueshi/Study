@@ -104,8 +104,9 @@ def partner_reply(index, tail, used_ids):
     return SYSTEM_RANDOM.choice(best)
 
 
-def hint_candidates(index, tail, used_ids, limit=3):
-    return [row for _, row in _ranked(index, tail, used_ids)[:limit]]
+def hint_candidates(index, tail, used_ids):
+    """全部可接候选，按延续深度降序；提示面板整列展示。"""
+    return [row for _, row in _ranked(index, tail, used_ids)]
 
 
 # ---- 链卡展示信息 ----
@@ -136,16 +137,20 @@ def _chain_item(row, info, by):
 
 
 # ---- 对局流程 ----
+# owner 是归属过滤字典：登录玩家 {'user': <User>}，游客 {'guest_key': <会话键>}。
 
-def current_round(user, *, exclude_headword=None):
-    """返回进行中的对局；没有则开新局（与 legacy 一致，重查避免并发重复开局）。"""
-    round = GameRound.objects.filter(user=user, status=GameRound.Status.PLAYING).order_by('-updated_at').first()
+
+@transaction.atomic
+def current_round(owner, *, exclude_headword=None):
+    """返回进行中的对局；没有则开新局（原子内重查，避免并发重复开局）。"""
+    round = GameRound.objects.select_for_update().filter(
+        **owner, status=GameRound.Status.PLAYING).order_by('-updated_at').first()
     if round is not None:
         return round
-    return start_round(user, exclude_headword=exclude_headword)
+    return start_round(owner, exclude_headword=exclude_headword)
 
 
-def start_round(user, *, exclude_headword=None):
+def start_round(owner, *, exclude_headword=None):
     pool = chain_pool()
     if not pool:
         raise ChainError('接龙词池还是空的，请先在后台填充词池。')
@@ -154,12 +159,12 @@ def start_round(user, *, exclude_headword=None):
     starters = [row for row in starters if row[1] != exclude_headword] or starters or pool
     row = SYSTEM_RANDOM.choice(starters)
     info = chain_entry_info([row[0]]).get(row[0], {'word': row[1], 'pinyin': '', 'meaning': ''})
-    return GameRound.objects.create(user=user, chain=[_chain_item(row, info, 'start')])
+    return GameRound.objects.create(**owner, chain=[_chain_item(row, info, 'start')])
 
 
 @transaction.atomic
-def restart_round(user, round_id, revision):
-    round = _locked_round(user, round_id, revision)
+def restart_round(owner, round_id, revision):
+    round = _locked_round(owner, round_id, revision)
     if round.status == GameRound.Status.PLAYING:
         round.status = GameRound.Status.FINISHED
         round.ended_reason = ''
@@ -170,9 +175,9 @@ def restart_round(user, round_id, revision):
 
 
 @transaction.atomic
-def play(user, round_id, revision, word):
+def play(owner, round_id, revision, word):
     word = (word or '').strip()
-    round = _locked_round(user, round_id, revision, expect_playing=True)
+    round = _locked_round(owner, round_id, revision, expect_playing=True)
     if len(word) != 4 or not all('\u3400' <= char <= '\u9fff' for char in word):
         raise ChainError('请输入四字成语。')
     if any(item['word'] == word for item in round.chain):
@@ -209,8 +214,8 @@ def play(user, round_id, revision, word):
 
 
 @transaction.atomic
-def take_hint(user, round_id, revision):
-    round = _locked_round(user, round_id, revision, expect_playing=True)
+def take_hint(owner, round_id, revision):
+    round = _locked_round(owner, round_id, revision, expect_playing=True)
     index = _by_first(chain_pool())
     used_ids = {item['entry_id'] for item in round.chain}
     candidates = hint_candidates(index, round.chain[-1]['last_char'], used_ids)
@@ -219,7 +224,7 @@ def take_hint(user, round_id, revision):
     infos = chain_entry_info([row[0] for row in candidates])
     hints = [{'entry_id': row[0], 'word': row[1],
               'pinyin': infos.get(row[0], {}).get('pinyin', ''), 'meaning': infos.get(row[0], {}).get('meaning', '')}
-             for row in candidates]
+             for row in candidates]  # 全部可接候选，前端整列滚动展示。
     round.score = max(0, round.score - 5)
     round.hints += 1
     round.revision += 1
@@ -227,9 +232,11 @@ def take_hint(user, round_id, revision):
     return round, hints
 
 
-def _locked_round(user, round_id, revision, *, expect_playing=False):
-    get_user_model().objects.select_for_update().get(pk=user.pk)
-    round = GameRound.objects.select_for_update().filter(pk=round_id, user=user).first()
+def _locked_round(owner, round_id, revision, *, expect_playing=False):
+    if 'user' in owner:
+        # 账号对局用账号行锁串行化首写；游客没有可锁行，同浏览器请求本身是串行的。
+        get_user_model().objects.select_for_update().get(pk=owner['user'].pk)
+    round = GameRound.objects.select_for_update().filter(pk=round_id, **owner).first()
     if round is None:
         raise ChainConflict('对局不存在或已重开，请刷新后重试。')
     if expect_playing and round.status != GameRound.Status.PLAYING:
@@ -239,8 +246,8 @@ def _locked_round(user, round_id, revision, *, expect_playing=False):
     return round
 
 
-def round_history(user, limit=5):
-    return list(GameRound.objects.filter(user=user, status=GameRound.Status.FINISHED)
+def round_history(owner, limit=5):
+    return list(GameRound.objects.filter(**owner, status=GameRound.Status.FINISHED)
                 .order_by('-finished_at')[:limit])
 
 
