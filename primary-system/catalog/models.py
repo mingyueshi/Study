@@ -1,6 +1,7 @@
 import uuid
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.db.models import Q
 
 
 class NamedModel(models.Model):
@@ -68,8 +69,13 @@ class Textbook(NamedModel):
         constraints = [models.UniqueConstraint(fields=('edition', 'grade', 'term', 'revision'), name='textbook_version_unique')]
 
     def clean(self):
-        if self.pk and self.edition_id and self.collections.exclude(module__subject_id=self.edition.subject_id).exists():
+        if self.pk and self.edition_id and self.books.exclude(module__subject_id=self.edition.subject_id).exists():
             raise ValidationError({'edition': '该册次的学习册与新版本学科不一致。'})
+
+    @property
+    def books(self):
+        """该册次下的学习册（教材同步册，跨两种表聚合）。"""
+        return TextbookBook.objects.filter(textbook=self)
 
 
 class Module(NamedModel):
@@ -85,22 +91,38 @@ class Module(NamedModel):
 
     def clean(self):
         if self.pk and Module.objects.filter(pk=self.pk).exclude(subject_id=self.subject_id).exists():
-            if self.collections.exists() or self.items.exists():
+            if self.textbook_books.exists() or self.topic_books.exists() or self.items.exists():
                 raise ValidationError({'subject': '已有内容，请新建模块以更换学科。'})
 
 
-class Collection(NamedModel):
-    module = models.ForeignKey(Module, verbose_name='学习模块', on_delete=models.PROTECT, related_name='collections')
-    textbook = models.ForeignKey(Textbook, verbose_name='同步教材（专题可不填）', null=True, blank=True,
-                                 on_delete=models.PROTECT, related_name='collections')
-    grades = models.ManyToManyField(Grade, verbose_name='专题适用年级', blank=True,
-                                    help_text='仅无教材的专题使用；留空表示全年级。教材学习册以教材年级为准。')
+class TextbookBook(NamedModel):
+    """教材同步册：跟课本走，单元对齐教材册次；题库与学习计划的教材锚点。"""
+
+    module = models.ForeignKey(Module, verbose_name='学习模块', on_delete=models.PROTECT, related_name='textbook_books')
+    textbook = models.ForeignKey(Textbook, verbose_name='同步教材', on_delete=models.PROTECT, related_name='books')
     description = models.TextField('介绍', blank=True)
     is_published = models.BooleanField('发布', default=False)
 
     class Meta(NamedModel.Meta):
-        verbose_name = '学习册'
-        verbose_name_plural = '学习册'
+        verbose_name = '教材同步册'
+        verbose_name_plural = '教材同步册'
+        constraints = [models.UniqueConstraint(fields=('textbook',), name='textbook_book_unique',
+                                               condition=Q(textbook__isnull=False))]
+
+    def __str__(self):
+        return str(self.textbook)
+
+    @property
+    def kind(self):
+        return 'textbook'
+
+    @property
+    def subject(self):
+        return self.module.subject
+
+    @property
+    def subtitle(self):
+        return f'{self.textbook.grade} · {self.textbook.get_term_display()} · {self.textbook.edition.publisher}'
 
     def clean(self):
         if self.textbook_id and self.module_id and self.textbook.edition.subject_id != self.module.subject_id:
@@ -108,19 +130,45 @@ class Collection(NamedModel):
         if self.pk and self.module_id and self.units.filter(placements__item__isnull=False).exclude(placements__item__module_id=self.module_id).exists():
             raise ValidationError({'module': '已有单元内容属于其他模块，请先调整内容编排。'})
 
-    @property
-    def is_textbook(self):
-        """教材同步册：跟课本走，单元语义受教材册次约束；题库与学习计划以此为锚点。"""
-        return self.textbook_id is not None
+
+class TopicBook(NamedModel):
+    """主题探索册：自由专题，不依赖教材；适用年级由 grades 表达（空为全年级）。"""
+
+    module = models.ForeignKey(Module, verbose_name='学习模块', on_delete=models.PROTECT, related_name='topic_books')
+    grades = models.ManyToManyField(Grade, verbose_name='适用年级', blank=True,
+                                    help_text='留空表示全年级。')
+    description = models.TextField('介绍', blank=True)
+    is_published = models.BooleanField('发布', default=False)
+
+    class Meta(NamedModel.Meta):
+        verbose_name = '主题探索册'
+        verbose_name_plural = '主题探索册'
+
+    def __str__(self):
+        return self.name
 
     @property
-    def is_topic(self):
-        """主题探索册：自由专题，适用年级由 grades 表达（空为全年级）。"""
-        return self.textbook_id is None
+    def kind(self):
+        return 'topic'
+
+    @property
+    def subject(self):
+        return self.module.subject
+
+    @property
+    def subtitle(self):
+        return '主题学习'
+
+    def clean(self):
+        if self.pk and self.module_id and self.units.filter(placements__item__isnull=False).exclude(placements__item__module_id=self.module_id).exists():
+            raise ValidationError({'module': '已有单元内容属于其他模块，请先调整内容编排。'})
 
 
 class Unit(models.Model):
-    collection = models.ForeignKey(Collection, verbose_name='学习册', on_delete=models.PROTECT, related_name='units')
+    textbook_book = models.ForeignKey(TextbookBook, verbose_name='教材同步册', null=True, blank=True,
+                                      on_delete=models.PROTECT, related_name='units')
+    topic_book = models.ForeignKey(TopicBook, verbose_name='主题探索册', null=True, blank=True,
+                                   on_delete=models.PROTECT, related_name='units')
     code = models.SlugField('单元标识', max_length=80)
     title = models.CharField('单元名称', max_length=200)
     description = models.TextField('单元介绍', blank=True)
@@ -130,14 +178,37 @@ class Unit(models.Model):
         ordering = ('order', 'pk')
         verbose_name = '单元'
         verbose_name_plural = '单元'
-        constraints = [models.UniqueConstraint(fields=('collection', 'code'), name='unit_collection_code_unique')]
+        constraints = [
+            models.UniqueConstraint(fields=('textbook_book', 'code'), condition=Q(textbook_book__isnull=False),
+                                    name='unit_textbook_code_unique'),
+            models.UniqueConstraint(fields=('topic_book', 'code'), condition=Q(topic_book__isnull=False),
+                                    name='unit_topic_code_unique'),
+            models.CheckConstraint(
+                condition=(Q(textbook_book__isnull=False) & Q(topic_book__isnull=True))
+                          | (Q(textbook_book__isnull=True) & Q(topic_book__isnull=False)),
+                name='unit_book_exclusive'),
+        ]
 
     def __str__(self):
-        return f'{self.collection} / {self.title}'
+        return f'{self.book.name} / {self.title}'
+
+    @property
+    def book(self):
+        """归属册（教材同步或主题探索，恰好一个非空）。"""
+        return self.textbook_book or self.topic_book
+
+    @property
+    def book_kind(self):
+        return 'textbook' if self.textbook_book_id else 'topic'
+
+    @property
+    def book_module_id(self):
+        return self.textbook_book.module_id if self.textbook_book_id else self.topic_book.module_id
 
     def clean(self):
-        if self.pk and self.collection_id and self.placements.exclude(item__module_id=self.collection.module_id).exists():
-            raise ValidationError({'collection': '已有内容与目标学习册的模块不一致。'})
+        book = self.book
+        if self.pk and book and self.placements.exclude(item__module_id=book.module_id).exists():
+            raise ValidationError({'textbook_book': '已有单元内容属于其他模块的学习册，请先调整内容编排。'})
 
 
 class ContentItem(models.Model):
@@ -201,7 +272,9 @@ class ContentItem(models.Model):
                     raise ValidationError({'sections': 'figure 块的 caption 必须是不超过 200 字符的字符串。'})
             else:
                 raise ValidationError({'sections': f'未知分节类型：{section["type"]}'})
-        if self.pk and self.module_id and self.placements.exclude(unit__collection__module_id=self.module_id).exists():
+        if self.pk and self.module_id and self.placements.exclude(
+            Q(unit__textbook_book__module_id=self.module_id) | Q(unit__topic_book__module_id=self.module_id)
+        ).exists():
             raise ValidationError({'module': '内容已被其他模块的学习册引用。'})
 
     def save(self, *args, **kwargs):
@@ -227,26 +300,27 @@ class Placement(models.Model):
         return f'{self.unit.title} / {self.item.title}'
 
     def clean(self):
-        if self.unit_id and self.item_id and self.unit.collection.module_id != self.item.module_id:
+        if self.unit_id and self.item_id and self.unit.book_module_id != self.item.module_id:
             raise ValidationError({'item': '内容与学习册必须属于同一个模块。'})
 
 
-def published_collections():
-    return Collection.objects.filter(is_published=True, module__is_active=True)
+def published_textbook_books():
+    return TextbookBook.objects.filter(is_published=True, module__is_active=True)
 
 
-def published_textbook_collections():
-    """教材同步册：跟课本进度走，学习计划与教材题库的默认锚点。"""
-    return published_collections().filter(textbook__isnull=False)
+def published_topic_books():
+    return TopicBook.objects.filter(is_published=True, module__is_active=True)
 
 
-def published_topic_collections():
-    """主题探索册：自由专题，按适用年级（或全年级）匹配。"""
-    return published_collections().filter(textbook__isnull=True)
+def published_units():
+    """全部已发布学习册下的单元（两种册语义并用）。"""
+    return Unit.objects.filter(
+        Q(textbook_book__is_published=True, textbook_book__module__is_active=True)
+        | Q(topic_book__is_published=True, topic_book__module__is_active=True))
 
 
 def published_items():
     return ContentItem.objects.filter(
         status=ContentItem.Status.PUBLISHED, module__is_active=True,
-        placements__unit__collection__in=published_collections(),
+        placements__unit__in=published_units(),
     ).distinct()

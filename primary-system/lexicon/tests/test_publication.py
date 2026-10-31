@@ -3,7 +3,7 @@ from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 from django.core.management import call_command
 from django.test import TestCase
-from catalog.models import Collection, ContentItem, Module, Placement, Unit
+from catalog.models import ContentItem, Module, Placement, TopicBook, Unit
 from learning.models import Progress
 from lexicon.adapters import primary_manifest
 from lexicon.importing import stage_manifest
@@ -112,8 +112,8 @@ class ExistingContentTests(TestCase):
     def setUp(self):
         call_command('seed_platform', stdout=io.StringIO())
         module = Module.objects.get(code='words')
-        collection = Collection.objects.create(code='test-words', name='词卡测试', module=module, is_published=True)
-        unit = Unit.objects.create(collection=collection, code='u1', title='测试单元')
+        collection = TopicBook.objects.create(code='test-words', name='词卡测试', module=module, is_published=True)
+        unit = Unit.objects.create(topic_book=collection, code='u1', title='测试单元')
         self.content = ContentItem.objects.create(module=module, kind='word', title='bank', summary='人工教学简释',
             sections=[{'title': '音标', 'text': '/bæŋk/'}], source_key='primary:words:u1:bank',
             source_payload={'en': 'bank', 'zh': '原教学释义', 'ipa': '/old/'}, source_hash='a' * 64,

@@ -9,8 +9,8 @@ from django.core.exceptions import ValidationError
 from django.core.management import call_command
 from django.test import TestCase
 from .importing import import_snapshot
-from .models import Collection, ContentItem, Grade, Module, Placement, Stage, Subject, Textbook, TextbookEdition, Unit, \
-    published_textbook_collections, published_topic_collections
+from .models import ContentItem, Grade, Module, Placement, Stage, Subject, Textbook, TextbookBook, TextbookEdition, TopicBook, Unit, \
+    published_textbook_books, published_topic_books
 
 
 def minimal_snapshot():
@@ -28,7 +28,7 @@ class PlatformFixture(TestCase):
         call_command('seed_platform', stdout=io.StringIO())
         import_snapshot(minimal_snapshot(), publish=True)
         cls.item = ContentItem.objects.get(title='认识数字')
-        cls.collection = Collection.objects.get(code='primary-math-all')
+        cls.collection = TextbookBook.objects.get(code='primary-math-all')
         cls.unit = cls.collection.units.get(code='test-unit')
 
 
@@ -50,7 +50,7 @@ class CatalogTests(PlatformFixture):
         self.assertEqual(self.client.get('/api/v1/items/?q=数字').json()['total'], 1)
 
     def test_module_count_groups_multiple_collections(self):
-        Collection.objects.create(code='math-second', name='第二本数学', module=self.item.module, is_published=True)
+        TopicBook.objects.create(code='math-second', name='第二本数学', module=self.item.module, is_published=True)
         response = self.client.get('/')
         module = next(m for m in response.context['modules'] if m.code == 'math')
         self.assertEqual(module.available_count, 2)
@@ -82,8 +82,8 @@ class CatalogTests(PlatformFixture):
         self.collection.textbook = Textbook.objects.get(code='pep-chinese-4a-2026')
         with self.assertRaises(ValidationError):
             self.collection.full_clean()
-        other = Collection.objects.create(code='another', name='另一本', module=self.item.module, is_published=True)
-        unit = Unit.objects.create(collection=other, code='u1', title='复习')
+        other = TopicBook.objects.create(code='another', name='另一本', module=self.item.module, is_published=True)
+        unit = Unit.objects.create(topic_book=other, code='u1', title='复习')
         Placement(unit=unit, item=self.item).full_clean()
         invalid = ContentItem.objects.create(module=Module.objects.get(code='knowledge'), title='语文')
         with self.assertRaises(ValidationError):
@@ -118,9 +118,9 @@ class CatalogTests(PlatformFixture):
         edition = TextbookEdition.objects.create(code='physics-example', name='测试版本', subject=subject, publisher='测试', version='v1')
         textbook = Textbook.objects.create(code='physics-7', name='物理七年级', edition=edition, grade=grade, term='full')
         module = Module.objects.create(code='physics', name='物理模块', subject=subject)
-        collection = Collection(code='physics-7', name='七年级物理', module=module, textbook=textbook, is_published=True)
-        collection.full_clean()
-        collection.save()
+        book = TextbookBook(code='physics-7', name='七年级物理', module=module, textbook=textbook, is_published=True)
+        book.full_clean()
+        book.save()
         self.assertEqual(self.client.get('/api/v1/catalog/?grade=junior-1&subject=physics').json()['total'], 1)
 
 
@@ -131,17 +131,17 @@ class ShelfPartitionTests(PlatformFixture):
     def setUpTestData(cls):
         super().setUpTestData()
         # 同一模块内允许并存两种语义的册（english 场景）：math 模块加一本主题探索册。
-        cls.topic_book = Collection.objects.create(code='math-topic', name='数学思维专题',
+        cls.topic_book = TopicBook.objects.create(code='math-topic', name='数学思维专题',
             module=cls.item.module, is_published=True)
 
     def test_collection_semantics_are_explicit(self):
-        self.assertTrue(self.collection.is_textbook)
-        self.assertFalse(self.collection.is_topic)
-        self.assertTrue(self.topic_book.is_topic)
-        self.assertFalse(self.topic_book.is_textbook)
-        self.assertIn(self.collection, published_textbook_collections())
-        self.assertIn(self.topic_book, published_topic_collections())
-        self.assertNotIn(self.topic_book, published_textbook_collections())
+        self.assertIsInstance(self.collection, TextbookBook)
+        self.assertEqual(self.collection.kind, 'textbook')
+        self.assertIsInstance(self.topic_book, TopicBook)
+        self.assertEqual(self.topic_book.kind, 'topic')
+        self.assertIn(self.collection, published_textbook_books())
+        self.assertIn(self.topic_book, published_topic_books())
+        self.assertNotIn(self.topic_book, list(published_textbook_books()))
 
     def test_home_shelves_render_both_sections(self):
         response = self.client.get('/')

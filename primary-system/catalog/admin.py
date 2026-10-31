@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Stage, Grade, Subject, TextbookEdition, Textbook, Module, Collection, Unit, ContentItem, Placement
+from .models import Stage, Grade, Subject, TextbookEdition, Textbook, Module, TextbookBook, TopicBook, Unit, ContentItem, Placement
 from lexicon.models import ContentEntryLink
 
 
@@ -64,11 +64,18 @@ class UnitInline(admin.TabularInline):
     show_change_link = True
 
 
-@admin.register(Collection)
-class CollectionAdmin(NamedAdmin):
+@admin.register(TextbookBook)
+class TextbookBookAdmin(NamedAdmin):
     list_display = ('name', 'module', 'textbook', 'is_published')
     list_filter = ('module', 'textbook__grade', 'is_published')
     autocomplete_fields = ('textbook',)
+    inlines = (UnitInline,)
+
+
+@admin.register(TopicBook)
+class TopicBookAdmin(NamedAdmin):
+    list_display = ('name', 'module', 'is_published')
+    list_filter = ('module', 'is_published')
     filter_horizontal = ('grades',)
     inlines = (UnitInline,)
 
@@ -81,11 +88,18 @@ class PlacementInline(admin.TabularInline):
 
 @admin.register(Unit)
 class UnitAdmin(admin.ModelAdmin):
-    list_display = ('title', 'collection', 'order')
-    search_fields = ('title', 'collection__name')
-    list_filter = ('collection__module', 'collection')
-    autocomplete_fields = ('collection',)
+    list_display = ('title', 'book_kind', 'book_name', 'order')
+    search_fields = ('title',)
+    list_filter = ('textbook_book__module', 'topic_book__module', 'textbook_book', 'topic_book')
     inlines = (PlacementInline,)
+
+    @admin.display(description='册类型')
+    def book_kind(self, obj):
+        return '教材同步' if obj.book_kind == 'textbook' else '主题探索'
+
+    @admin.display(description='所属学习册', ordering='textbook_book__name')
+    def book_name(self, obj):
+        return str(obj.book)
 
 
 @admin.register(ContentItem)
@@ -113,5 +127,5 @@ class ContentAdmin(admin.ModelAdmin):
 class PlacementAdmin(admin.ModelAdmin):
     list_display = ('unit', 'item', 'order')
     search_fields = ('unit__title', 'item__title')
-    list_filter = ('unit__collection',)
+    list_filter = ('unit__textbook_book', 'unit__topic_book')
     autocomplete_fields = ('unit', 'item')

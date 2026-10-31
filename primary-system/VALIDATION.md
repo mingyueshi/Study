@@ -211,3 +211,11 @@ Playwright 在独立数据库副本中验证：桌面查词首页、汉字详情
 - 阅读页打印版式：单栏展开（隐藏导航/进度面板/朗读控件/返回链接），阅读节与词卡防断页，图示保留而互动控件隐藏（figures.css 内建规则），字体降密适配纸面。
 - 查词页 zh 教学卡区核实：`teaching.html` 以 `{% if teaching %}` 包裹，成语本下架后中文查询**本就干净地不渲染**，无空壳区域，无需补位改动。
 - Mimosa 深度安全扫描（deep，`scan-2026-10-31T16-18-27.644Z-32fb3029a12d`，封印 sha256:4da726ce…）：**发现数 0**；依赖扫描 8 包，离线告警比对无命中。此前提交时的「扫描覆盖不完整」提示就此收尾。
+
+## 教材与主题分表验证（2026-11-01）
+
+- 应用户决策（当前数据为 legacy 静态页临时导入、结构可能大调整，长远分表避免技术债）：`Collection` 拆分为 `TextbookBook`（教材同步册，textbook 必填，一教材一册）与 `TopicBook`（主题探索册，grades 表达适用年级）；`Unit` 双 FK（textbook_book/topic_book）＋互斥 CheckConstraint＋分表唯一约束。
+- 重导路径而非存量迁移：编排层（册/单元/编排）删除重建，**内容 1,219 条、进度、868 词卡关联、29,502 词池全部不动**（均挂模块或内容 UUID）；`importing.py` 按模块语义建双表册（knowledge/math/english→教材册，english 沿用 book 字段拆 4a/4b），重导后 12 本册（4+8）、126 单元、1,219 编排与拆分前一致。
+- 消费面适配：admin 双 ModelAdmin、views 合并鸭子接口（published_books/kind/subject/subtitle）、首页书架分区、`catalog_api` kind 标记与 `?kind=` 参数、册页 `/books/<code>/` 双表先后查询；Nova 导航图标/常用模型键同步（topicbook 图标换用 nova 支持的 `lucide:map-pin`）。
+- 教训两笔：①迁移生成顺序会把 `unit_book_exclusive` 约束放在存量行仍违反的位置——迁移前先清编排层（重导路径下无损失）；②表名重命名这类「存量手术」不进迁移历史（同 chain 更名先例）。
+- 全库 121 项测试通过、check 无问题、无迁移漂移；实测首页双架/textbook 4 本/topic 7 本（成语册随模块下架暂隐）/教材册页/词卡词典驱动/接龙/词典全部 200。

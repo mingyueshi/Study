@@ -126,12 +126,12 @@ class ScenarioWordCardTests(PlatformFixture):
     @classmethod
     def setUpTestData(cls):
         super().setUpTestData()
-        from catalog.models import Collection, Module, Placement, Unit
+        from catalog.models import Module, Placement, TopicBook, Unit
         from lexicon.adapters import primary_manifest
         from lexicon.services import activate_release, link_primary_records
         words = Module.objects.get(code='words')
-        cls.collection = Collection.objects.create(code='words-test', name='场景单词测试', module=words, is_published=True)
-        cls.unit = Unit.objects.create(collection=cls.collection, code='u-actions', title='Action Words')
+        cls.collection = TopicBook.objects.create(code='words-test', name='场景单词测试', module=words, is_published=True)
+        cls.unit = Unit.objects.create(topic_book=cls.collection, code='u-actions', title='Action Words')
         payload = {'en': 'dance', 'ipa': '/dɑːns/', 'zh': 'v. 跳舞', 'emoji': '💃',
                    'parts': [{'t': 'dan', 'd': '/dɑːn/'}, {'t': 'ce', 'd': 'ce 读 /s/'}],
                    'memo': 'ce 结尾读 /s/。', 'related': ['sing', 'June']}
@@ -194,12 +194,12 @@ class ScenarioWordCardTests(PlatformFixture):
 
     def test_english_module_word_card_is_dictionary_driven_too(self):
         # 教材单词同构：english 模块词卡同样经教学关联获得词典视图。
-        from catalog.models import Collection, Placement, Unit
+        from catalog.models import Module, Placement, TopicBook, Unit
         from lexicon.adapters import primary_manifest
         from lexicon.services import activate_release, link_primary_records
         english = Module.objects.get(code='english')
-        collection = Collection.objects.create(code='english-test', name='教材英语测试', module=english, is_published=True)
-        unit = Unit.objects.create(collection=collection, code='4a-u1', title='Unit 1')
+        collection = TopicBook.objects.create(code='english-test', name='教材英语测试', module=english, is_published=True)
+        unit = Unit.objects.create(topic_book=collection, code='4a-u1', title='Unit 1')
         payload = {'en': 'ability', 'ipa': '/əˈbɪləti/', 'zh': 'n. 能力', 'emoji': '💪',
                    'parts': [{'t': 'a', 'd': '第 1段'}], 'memo': '相关联：ability。', 'related': []}
         card = ContentItem.objects.create(module=english, kind='word', title='ability', summary='n. 能力',
