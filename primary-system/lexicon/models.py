@@ -216,6 +216,7 @@ class SourceRecord(ImmutableModel):
     part_of_speech = models.CharField('来源词性', max_length=80, blank=True)
     pronunciation_value = models.CharField('来源读音', max_length=300, blank=True)
     pronunciation_key = models.CharField('读音检索键', max_length=300, blank=True, db_index=True)
+    pronunciation_key_compact = models.CharField('无空格读音键（连写拼音检索）', max_length=300, blank=True, db_index=True)
     properties = models.JSONField('来源属性', default=dict, blank=True)
     field_paths = models.JSONField('规范化字段对应的原文路径', default=dict)
 

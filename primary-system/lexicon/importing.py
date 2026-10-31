@@ -278,10 +278,13 @@ def stage_batch(release, rows, *, exact_reuse):
             new_bindings.append(binding)
             stats['bindings_created'] += 1
             matches.setdefault(row['lexical_hash'], binding)
+        pronunciation_key_value = (pinyin_key if row['pronunciation']['system'] == 'pinyin' else search_key)(row['pronunciation']['value'])
         record = SourceRecord(release=release, binding=binding, raw=row['raw'], raw_hash=row['raw_hash'],
                               lexical_hash=row['lexical_hash'], headword=row['headword'], definition=row['definition'],
                               part_of_speech=row['pos'], pronunciation_value=row['pronunciation']['value'],
-                              pronunciation_key=(pinyin_key if row['pronunciation']['system'] == 'pinyin' else search_key)(row['pronunciation']['value']), properties=row['properties'], field_paths=row['field_paths'])
+                              pronunciation_key=pronunciation_key_value,
+                              pronunciation_key_compact=pronunciation_key_value.replace(' ', ''),
+                              properties=row['properties'], field_paths=row['field_paths'])
         records.append(record)
         all_forms = [{'text': row['headword'], 'role': 'headword', 'source_path': row['field_paths']['headword']}] + row['forms']
         seen = set()

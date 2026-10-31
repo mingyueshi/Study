@@ -46,11 +46,13 @@ def matching_entries(q='', language='', kind=''):
             public_records().filter(forms__lookup_key__startswith=normalized),
             public_records().filter(binding__pronunciation__is_reviewed=True, pronunciation_key__startswith=normalized),
         ]
-        pinyin = pinyin_key(text)
-        if pinyin != normalized:
+        # 无空格紧缩键同时覆盖分写（'a bi di yu'→'abidiyu'）与连写（'abidiyu'）两种输入，
+        # 恒定尝试：英文输入在此分支自然空匹配，无副作用。
+        compact = pinyin_key(text).replace(' ', '')
+        if compact:
             branches.append(public_records().filter(
                 binding__pronunciation__is_reviewed=True, binding__pronunciation__system='pinyin',
-                pronunciation_key__startswith=pinyin))
+                pronunciation_key_compact__startswith=compact))
         entry_ids = set()
         for branch in branches:
             entry_ids.update(branch.values_list('binding__sense__entry_id', flat=True))
