@@ -150,7 +150,7 @@ class ContentItem(models.Model):
     summary = models.TextField('概要', blank=True)
     body = models.TextField('正文', blank=True, help_text='纯文本；支持换行。')
     sections = models.JSONField('内容分节', default=list, blank=True,
-        help_text='格式：[{"title": "知识要点", "text": "正文"}]；纯文本，不执行 HTML。')
+        help_text='v1：[{"title": "知识要点", "text": "正文"}]；v2 类型化块：{"type": "text", "title": "...", "text": "..."} 或 {"type": "figure", "fig": "图示标识", "caption": "可选说明"}。纯文本，不执行 HTML。')
     schema_version = models.PositiveSmallIntegerField('内容结构版本', default=1, editable=False)
     status = models.CharField('发布状态', max_length=12, choices=Status.choices, default=Status.DRAFT)
     source_key = models.CharField('来源唯一标识', max_length=240, unique=True, null=True, blank=True, editable=False)
@@ -171,13 +171,35 @@ class ContentItem(models.Model):
         return self.title
 
     def clean(self):
-        if not isinstance(self.sections, list) or any(
-            not isinstance(s, dict) or set(s) != {'title', 'text'} or
-            not isinstance(s['title'], str) or not isinstance(s['text'], str) for s in self.sections
-        ):
-            raise ValidationError({'sections': '分节必须是只包含 title、text 字符串的对象列表。'})
+        if not isinstance(self.sections, list):
+            raise ValidationError({'sections': '分节必须是块对象列表。'})
+        for section in self.sections:
+            if not isinstance(section, dict):
+                raise ValidationError({'sections': '每个分节必须是对象。'})
+            if 'type' not in section:
+                # v1 兼容：纯文本分节，1,219 条既有内容零迁移读取。
+                if set(section) != {'title', 'text'} or not isinstance(section['title'], str) or not isinstance(section['text'], str):
+                    raise ValidationError({'sections': 'v1 分节必须是只包含 title、text 字符串的对象。'})
+            elif section['type'] == 'text':
+                if set(section) != {'type', 'title', 'text'} or not isinstance(section['title'], str) or not isinstance(section['text'], str):
+                    raise ValidationError({'sections': 'text 块必须是只包含 type、title、text 字符串的对象。'})
+            elif section['type'] == 'figure':
+                if set(section) - {'type', 'fig', 'caption'} or not isinstance(section.get('fig'), str) \
+                        or not section['fig'].strip() or len(section['fig']) > 120:
+                    raise ValidationError({'sections': 'figure 块需要不超过 120 字符的 fig 标识。'})
+                if 'caption' in section and (not isinstance(section['caption'], str) or len(section['caption']) > 200):
+                    raise ValidationError({'sections': 'figure 块的 caption 必须是不超过 200 字符的字符串。'})
+            else:
+                raise ValidationError({'sections': f'未知分节类型：{section["type"]}'})
         if self.pk and self.module_id and self.placements.exclude(unit__collection__module_id=self.module_id).exists():
             raise ValidationError({'module': '内容已被其他模块的学习册引用。'})
+
+    def save(self, *args, **kwargs):
+        # schema_version 跟随 sections 实际形状：含类型化块即为 2，纯 v1 分节为 1。
+        self.schema_version = 2 if any(isinstance(s, dict) and s.get('type') for s in self.sections or []) else 1
+        if kwargs.get('update_fields') is not None:
+            kwargs['update_fields'] = set(kwargs['update_fields']) | {'schema_version'}
+        return super().save(*args, **kwargs)
 
 
 class Placement(models.Model):

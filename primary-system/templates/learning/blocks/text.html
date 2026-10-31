@@ -1,0 +1,1 @@
+{% comment %}文本块：v1 分节与 v2 {"type":"text"} 共用此渲染{% endcomment %}<section class="reading-section"><h2>{{ block.title }}{% if block.text %} <button class="text-button" type="button" data-say="{{ block.text }}" aria-label="朗读{{ block.title }}">🔊</button>{% endif %}</h2><div class="prose">{{ block.text|linebreaksbr }}</div></section>

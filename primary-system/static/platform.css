@@ -411,3 +411,17 @@ textarea { resize: vertical; line-height: 1.9; }
   .module-card, .book-card { transition: none; }
   .module-card:hover, .button:active { transform: none; }
 }
+
+/* 点读（浏览器 TTS）与连读 */
+.tts-parts { display: flex; flex-wrap: wrap; gap: 10px; margin: 6px 0 14px; }
+.tts-parts .part { display: inline-flex; flex-direction: column; align-items: center; gap: 2px; min-width: 96px; min-height: 60px; padding: 8px 14px; border: 1px solid var(--line); border-radius: 14px; background: #fff; cursor: pointer; }
+.tts-parts .part b { font-size: 20px; }
+.tts-parts .part i { font-style: normal; font-size: 13px; color: var(--muted); }
+.tts-parts .part:active { transform: scale(.97); }
+.tts-bar { display: flex; align-items: center; gap: 14px; margin: 10px 0; padding: 10px 14px; border: 1px dashed var(--line); border-radius: 14px; }
+.tts-bar p { margin: 0; font-size: 15px; }
+.tts-active { background: var(--orange-soft, #fff4e0); }
+.tts-playing { outline: 3px solid var(--orange); outline-offset: 2px; border-radius: 8px; background: var(--soft, #f2f5fa); }
+@media print {
+  .tts-parts, .tts-bar, [data-say] { display: none !important; }
+}

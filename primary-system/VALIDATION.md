@@ -162,3 +162,13 @@ Playwright 在独立数据库副本中验证：桌面查词首页、汉字详情
 - 端到端实测（真实词池）：页面 448ms、state 15ms、出招含陪练前瞻 34ms、提示 33ms、重开 55ms；陪练正常回应、提示返回 3 个候选并扣分、重开排除上一局起点。
 - 「成语本」模块软下架（`is_active=False`，数据/关联/进度全保留可恢复）：入口从学习广场消失，257 张成语教学卡随 `published_items()` 过滤从查词页教学卡区移除（单词卡不受影响）；接龙模块占位页改为进入入口，主导航新增「成语接龙」。
 - 测试：games 套件 24 项（词池命令幂等/干跑、对局 API 全链路、四种 400 拒绝、revision 409、跨用户 409、未登录 401、hint 扣分、自动终局两种、重开与历史）；全库 100 项通过，全链路测试 10 连跑稳定。
+
+## 内容块 schema v2、图示复用与点读验证（2026-10-31）
+
+- `sections` 升级为类型化块（v1 `{title,text}` 兼容读取、v2 `{"type":"text"}`／`{"type":"figure","fig","caption"?}`），`clean()` 分类型严格校验（未知 type/键、超长 fig/caption 拒绝），`save()` 自动派生 `schema_version`（含 typed 块为 2）。
+- 六个 legacy 图示库（106 个图示，含互动演示）＋figures.css 以逐字节 SHA256 校验复制进 `static/figures/`（`scripts/sync_legacy_assets.py`，`--check` 回归）；`loader.js` 按占位符注入，图示缺失有空态兜底；模块→库映射固定（knowledge/math→Figures、sci/geo/astro/history/lit→各自库）。
+- 导入管线升级：`item_defaults` 生成显式 text 块，`raw.fig` 置首位 figure 块；`convert_figures` 幂等迁移 98 条既有内容（astro 14/geo 16/history 12/knowledge 8/lit 17/math 16/sci 15，import_locked 跳过，重跑 0 变更）。
+- 完整性校验：`scripts/verify_figure_refs.cjs` 对 primary.json 全量扫描，98 个 fig id 全部命中对应图示库（missing=0）。
+- 点读完整移植：`speech.js` 引擎原样复用；`tts.js` 提供 `[data-say]` 单点朗读、`[data-tts-sequence]` 连读（2200ms 步进＋高亮滚动）、英语发音人偏好（与 legacy 共用 localStorage 键）；接线 item 页逐节朗读、english 词卡整词＋音节段按钮（parts 取自 source_payload 只读投影）、english 册子连读条、profile 页发音人选择；打印隐藏朗读控件。
+- 测试：catalog 新增块校验/schema_version/占位渲染转义/convert 命令测试；lexicon 新增 v2 显式 text 块下音标证据路径不破坏；全库 110 项通过。
+- 手动验证：math 图示页占位与脚本标记齐全（44ms）、v1 词卡不加载图示资产、english 词卡点读按钮渲染。浏览器端互动演示与 TTS 实听按「本地使用」清单在 runserver 下核对（loader 注入后 demo 由库内 MutationObserver 自动初始化）。

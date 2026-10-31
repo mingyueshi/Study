@@ -12,6 +12,27 @@ from .forms import ProgressForm
 from .models import Progress
 from .services import ProgressConflict, progress_data, save_progress
 
+# 图示库按模块分配：六个 legacy 自包含库，loader.js 按全局名注入。
+FIGURE_LIBS = {
+    'knowledge': 'Figures', 'math': 'Figures', 'sci': 'SciFigures', 'geo': 'GeoFigures',
+    'astro': 'AstroFigures', 'history': 'HistoryFigures', 'lit': 'LitFigures',
+}
+FIGURE_SCRIPTS = {
+    'Figures': 'figures/figures.js', 'SciFigures': 'figures/sci-figures.js',
+    'GeoFigures': 'figures/geo-figures.js', 'AstroFigures': 'figures/astro-figures.js',
+    'HistoryFigures': 'figures/history-figures.js', 'LitFigures': 'figures/lit-figures.js',
+}
+
+
+def figure_context(item):
+    """内容含图示块时返回对应图示库与脚本路径；其余情况不加载图示资产。"""
+    sections = item.sections if isinstance(item.sections, list) else []
+    if not any(isinstance(s, dict) and s.get('type') == 'figure' for s in sections):
+        return {}
+    lib = FIGURE_LIBS.get(item.module.code)
+    script = FIGURE_SCRIPTS.get(lib) if lib else None
+    return {'figure_lib': lib, 'figure_script': script} if script else {}
+
 
 @never_cache
 @require_http_methods(['GET', 'POST'])
@@ -40,7 +61,8 @@ def item_detail(request, pk):
         else:
             status = 400
     lookup_term = item.source_payload.get('en' if item.kind == 'word' else 'idiom', item.title) if isinstance(item.source_payload, dict) else item.title
-    return render(request, 'learning/item.html', {'item': item, 'form': form, 'progress': progress, 'lookup_term': lookup_term}, status=status)
+    return render(request, 'learning/item.html', {'item': item, 'form': form, 'progress': progress,
+                                                  'lookup_term': lookup_term, **figure_context(item)}, status=status)
 
 
 @never_cache

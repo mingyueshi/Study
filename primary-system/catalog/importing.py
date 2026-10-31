@@ -36,8 +36,12 @@ def plain(value):
 
 def item_defaults(raw, module, source, kind, title):
     summary = raw.get('zh') or raw.get('overview') or raw.get('goal') or ''
-    sections = [{'title': LABELS.get(k, k), 'text': plain(v)} for k, v in raw.items()
+    sections = [{'type': 'text', 'title': LABELS.get(k, k), 'text': plain(v)} for k, v in raw.items()
                 if k not in SKIP | {'title', 'en', 'idiom', 'zh', 'overview', 'goal'} and v]
+    fig = raw.get('fig')
+    if isinstance(fig, str) and fig.strip():
+        # 图示块置首位，贴近 legacy 卡片的视觉顺序；说明文字由图示库内置默认图注补齐。
+        sections.insert(0, {'type': 'figure', 'fig': fig.strip()})
     return {
         'module': module, 'kind': kind, 'title': title, 'summary': summary,
         'sections': sections, 'source_file': source['source_file'],

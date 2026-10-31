@@ -123,6 +123,109 @@ class CatalogTests(PlatformFixture):
         self.assertEqual(self.client.get('/api/v1/catalog/?grade=junior-1&subject=physics').json()['total'], 1)
 
 
+class ContentBlockTests(PlatformFixture):
+    def test_imported_fig_becomes_leading_figure_block(self):
+        self.assertEqual(self.item.schema_version, 2)
+        self.assertEqual(self.item.sections[0], {'type': 'figure', 'fig': 'figure-reference'})
+        self.assertTrue(all(s.get('type') == 'text' for s in self.item.sections[1:]))
+
+    def test_v1_sections_stay_valid_at_version_1(self):
+        self.item.sections = [{'title': '旧分节', 'text': '正文'}]
+        self.item.save()
+        self.item.refresh_from_db()
+        self.assertEqual(self.item.schema_version, 1)
+
+    def test_v2_blocks_and_validation_rules(self):
+        self.item.sections = [
+            {'type': 'figure', 'fig': 'demo-angle', 'caption': '角的测量'},
+            {'type': 'text', 'title': '要点', 'text': '正文'},
+        ]
+        self.item.full_clean()
+        self.item.save()
+        self.item.refresh_from_db()
+        self.assertEqual(self.item.schema_version, 2)
+        for bad in [
+            [{'type': 'quote', 'fig': 'x'}],
+            [{'type': 'figure', 'fig': '  '}],
+            [{'type': 'figure', 'fig': 'x' * 121}],
+            [{'type': 'figure', 'fig': 'x', 'extra': 1}],
+            [{'type': 'figure', 'fig': 'x', 'caption': '长' * 201}],
+            [{'type': 'text', 'title': 't'}],
+            [{'type': 'text', 'title': 't', 'text': 'x', 'extra': 1}],
+        ]:
+            self.item.sections = bad
+            with self.assertRaises(ValidationError):
+                self.item.full_clean()
+
+    def test_figure_block_renders_placeholder_with_escaped_caption(self):
+        self.item.sections = [{'type': 'figure', 'fig': 'pv-table', 'caption': '数<b>位</b>'},
+                              {'type': 'text', 'title': '要点', 'text': '正文'}]
+        self.item.save()
+        response = self.client.get(f'/items/{self.item.pk}/')
+        self.assertContains(response, 'data-fig-placeholder')
+        self.assertContains(response, 'data-fig-lib="Figures"')
+        self.assertContains(response, 'data-fig-fig="pv-table"')
+        self.assertContains(response, '数&lt;b&gt;位&lt;/b&gt;')
+        self.assertContains(response, 'figures/loader.js')
+
+    def test_v1_item_does_not_load_figure_assets(self):
+        self.item.sections = [{'title': '纯文本', 'text': '正文'}]
+        self.item.save()
+        response = self.client.get(f'/items/{self.item.pk}/')
+        self.assertNotContains(response, 'data-fig-placeholder')
+        self.assertNotContains(response, 'figures/figures.js')
+
+    def test_item_api_reports_schema_version(self):
+        data = self.client.get(f'/api/v1/items/{self.item.pk}/').json()
+        self.assertEqual(data['schema_version'], 2)
+        self.assertEqual(data['sections'][0]['type'], 'figure')
+
+
+class ConvertFiguresTests(PlatformFixture):
+    @staticmethod
+    def make_legacy_item(fixture):
+        return ContentItem.objects.create(
+            module=fixture.item.module, kind='knowledge', title='旧版图示内容',
+            sections=[{'title': '要点', 'text': '正文'}], source_payload={'fig': 'demo-angle', 'id': 'x'},
+            status='published', source_file='primary/math-data.js', source_hash='a' * 64)
+
+    def test_convert_adds_block_and_is_idempotent(self):
+        legacy = self.make_legacy_item(self)
+        out = io.StringIO()
+        call_command('convert_figures', stdout=out)
+        legacy.refresh_from_db()
+        self.assertEqual(legacy.sections[0], {'type': 'figure', 'fig': 'demo-angle'})
+        self.assertEqual(legacy.sections[1], {'type': 'text', 'title': '要点', 'text': '正文'})
+        self.assertEqual(legacy.schema_version, 2)
+        stats = json.loads(out.getvalue())
+        self.assertEqual(stats['converted'], 1)
+        self.assertEqual(stats['already_v2'], 1)
+        second = io.StringIO()
+        call_command('convert_figures', stdout=second)
+        stats2 = json.loads(second.getvalue())
+        self.assertEqual(stats2['converted'], 0)
+        self.assertEqual(stats2['already_v2'], 2)
+
+    def test_dry_run_writes_nothing(self):
+        legacy = self.make_legacy_item(self)
+        call_command('convert_figures', '--dry-run', stdout=io.StringIO())
+        legacy.refresh_from_db()
+        self.assertEqual(legacy.schema_version, 1)
+        self.assertNotIn('type', legacy.sections[0])
+
+    def test_locked_item_is_skipped(self):
+        legacy = self.make_legacy_item(self)
+        legacy.import_locked = True
+        legacy.save()
+        out = io.StringIO()
+        call_command('convert_figures', stdout=out)
+        stats = json.loads(out.getvalue())
+        self.assertEqual(stats['import_locked'], 1)
+        self.assertEqual(stats['converted'], 0)
+        legacy.refresh_from_db()
+        self.assertEqual(legacy.schema_version, 1)
+
+
 class ImportTests(PlatformFixture):
     def test_repeat_import_keeps_ids_and_preserves_archival_state(self):
         before = set(ContentItem.objects.values_list('id', flat=True))

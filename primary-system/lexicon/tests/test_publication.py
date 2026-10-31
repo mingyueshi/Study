@@ -136,6 +136,15 @@ class ExistingContentTests(TestCase):
         self.assertEqual(record.pronunciation_value, '/bæŋk/')
         self.assertEqual(record.raw['source_payload']['zh'], '原教学释义')
 
+    def test_v2_typed_sections_keep_pronunciation_evidence_path(self):
+        # v2 显式 text 块不得破坏词库适配器按「音标」标题定位读音的约定。
+        self.content.sections = [{'type': 'text', 'title': '音标', 'text': '/bæŋk/'}]
+        self.content.save()
+        release, _ = stage_manifest(primary_manifest('words'), exact_reuse=True)
+        record = release.records.get()
+        self.assertEqual(record.pronunciation_value, '/bæŋk/')
+        self.assertEqual(record.field_paths['pronunciation'], '/sections/0/text')
+
     def test_version_change_does_not_silently_retarget_teaching_meaning(self):
         release, _ = stage_manifest(primary_manifest('words'), exact_reuse=True)
         link_primary_records(release)
