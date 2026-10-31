@@ -1,6 +1,10 @@
 # 本地工具产物
 .mimosa/
 .video_agent/
+.screenshots/
+.trae-html-share-packages/
+.zcode/
+.zwork/
 .DS_Store
 .playwright-cli/
 output/
