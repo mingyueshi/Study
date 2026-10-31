@@ -28,7 +28,7 @@
     <section class="panel record-panel">
       <h2>🌱 我的接龙记录</h2>
       <div class="round-score"><strong id="chain-score">0</strong><span>本轮得分</span></div>
-      <dl class="record-grid"><div><dt>已接成语</dt><dd id="chain-length">0</dd></div><div><dt>提示次数</dt><dd id="chain-hints">0</dd></div></dl>
+      <dl class="record-grid"><div><dt>已接成语</dt><dd id="chain-length">0</dd></div><div><dt>提示次数</dt><dd id="chain-hints-count">0</dd></div></dl>
       <p class="record-caption">开头和小龙接的成语不计入成绩；提示每次 −5 分，帮你学会新成语。</p>
       {% if not user.is_authenticated %}<p class="record-caption">游客模式：对局保存在本浏览器，<a href="{% url 'login' %}?next={{ request.path|urlencode }}">登录后</a>记录跟随账号。</p>{% endif %}
     </section>
@@ -42,7 +42,7 @@
   </aside>
   <section class="panel trail-panel" aria-labelledby="chain-trail-title">
     <div class="trail-heading"><div><h2 id="chain-trail-title">这条成语龙</h2><p>最新接上的排在前面，点成语可以听读音。</p></div><span id="chain-trail-count"></span></div>
-    <ol class="trail-list" id="chain" reversed aria-label="接龙轨迹，从最新到最早"></ol>
+    <ol class="trail-list" id="chain-trail" reversed aria-label="接龙轨迹，从最新到最早"></ol>
   </section>
 </div>
 <script src="{% static 'chain/chain.js' %}" defer></script>

@@ -16,8 +16,8 @@
     next: $('chain-next'), form: $('chain-form'), input: $('chain-word'),
     feedback: $('chain-feedback'), hints: $('chain-hints'), hintOptions: $('chain-hint-options'),
     hintButton: $('chain-hint-btn'), ended: $('chain-ended'), score: $('chain-score'),
-    length: $('chain-length'), hintsCount: $('chain-hints'), history: $('chain-history'),
-    trail: $('chain'), trailCount: $('chain-trail-count'),
+    length: $('chain-length'), hintsCount: $('chain-hints-count'), history: $('chain-history'),
+    trail: $('chain-trail'), trailCount: $('chain-trail-count'),
   };
 
   const csrf = () => decodeURIComponent((document.cookie.match(/(?:^|;\s*)primary_csrftoken=([^;]*)/) || [])[1] || '');
