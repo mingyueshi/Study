@@ -108,6 +108,16 @@ class Collection(NamedModel):
         if self.pk and self.module_id and self.units.filter(placements__item__isnull=False).exclude(placements__item__module_id=self.module_id).exists():
             raise ValidationError({'module': '已有单元内容属于其他模块，请先调整内容编排。'})
 
+    @property
+    def is_textbook(self):
+        """教材同步册：跟课本走，单元语义受教材册次约束；题库与学习计划以此为锚点。"""
+        return self.textbook_id is not None
+
+    @property
+    def is_topic(self):
+        """主题探索册：自由专题，适用年级由 grades 表达（空为全年级）。"""
+        return self.textbook_id is None
+
 
 class Unit(models.Model):
     collection = models.ForeignKey(Collection, verbose_name='学习册', on_delete=models.PROTECT, related_name='units')
@@ -223,6 +233,16 @@ class Placement(models.Model):
 
 def published_collections():
     return Collection.objects.filter(is_published=True, module__is_active=True)
+
+
+def published_textbook_collections():
+    """教材同步册：跟课本进度走，学习计划与教材题库的默认锚点。"""
+    return published_collections().filter(textbook__isnull=False)
+
+
+def published_topic_collections():
+    """主题探索册：自由专题，按适用年级（或全年级）匹配。"""
+    return published_collections().filter(textbook__isnull=True)
 
 
 def published_items():

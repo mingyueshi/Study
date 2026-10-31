@@ -9,7 +9,8 @@ from django.core.exceptions import ValidationError
 from django.core.management import call_command
 from django.test import TestCase
 from .importing import import_snapshot
-from .models import Collection, ContentItem, Grade, Module, Placement, Stage, Subject, Textbook, TextbookEdition, Unit
+from .models import Collection, ContentItem, Grade, Module, Placement, Stage, Subject, Textbook, TextbookEdition, Unit, \
+    published_textbook_collections, published_topic_collections
 
 
 def minimal_snapshot():
@@ -121,6 +122,43 @@ class CatalogTests(PlatformFixture):
         collection.full_clean()
         collection.save()
         self.assertEqual(self.client.get('/api/v1/catalog/?grade=junior-1&subject=physics').json()['total'], 1)
+
+
+class ShelfPartitionTests(PlatformFixture):
+    """教材同步与主题探索分区：语义显式、展示分区、锚点清晰。"""
+
+    @classmethod
+    def setUpTestData(cls):
+        super().setUpTestData()
+        # 同一模块内允许并存两种语义的册（english 场景）：math 模块加一本主题探索册。
+        cls.topic_book = Collection.objects.create(code='math-topic', name='数学思维专题',
+            module=cls.item.module, is_published=True)
+
+    def test_collection_semantics_are_explicit(self):
+        self.assertTrue(self.collection.is_textbook)
+        self.assertFalse(self.collection.is_topic)
+        self.assertTrue(self.topic_book.is_topic)
+        self.assertFalse(self.topic_book.is_textbook)
+        self.assertIn(self.collection, published_textbook_collections())
+        self.assertIn(self.topic_book, published_topic_collections())
+        self.assertNotIn(self.topic_book, published_textbook_collections())
+
+    def test_home_shelves_render_both_sections(self):
+        response = self.client.get('/')
+        self.assertContains(response, '教材同步')
+        self.assertContains(response, '主题探索')
+        # 教材册落在教材架，专题册落在探索架（书架列册名）。
+        self.assertContains(response, '北师大版数学 · 四年级上册')
+        self.assertContains(response, '数学思维专题')
+
+    def test_api_kind_partition(self):
+        textbook = self.client.get('/api/v1/catalog/?kind=textbook').json()
+        topic = self.client.get('/api/v1/catalog/?kind=topic').json()
+        self.assertEqual({c['kind'] for c in textbook['collections']}, {'textbook'})
+        self.assertEqual({c['kind'] for c in topic['collections']}, {'topic'})
+        self.assertEqual(textbook['collections'][0]['code'], 'primary-math-all')
+        self.assertEqual(topic['collections'][0]['code'], 'math-topic')
+        self.assertEqual(self.client.get('/api/v1/catalog/?kind=other').status_code, 400)
 
 
 class ContentBlockTests(PlatformFixture):

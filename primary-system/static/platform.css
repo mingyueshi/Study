@@ -458,3 +458,9 @@ textarea { resize: vertical; line-height: 1.9; }
   .book-card, .content-row { border: 1px solid #ccc; margin-bottom: 8px; }
   a[href^="http"]::after { content: ''; }
 }
+
+/* 首页书架分区：教材同步 / 主题探索 */
+.shelf { margin-top: 26px; }
+.shelf-heading { display: flex; align-items: baseline; gap: 14px; margin-bottom: 14px; }
+.shelf-heading h3 { font-size: 20px; margin: 0; }
+.shelf-heading p { margin: 0; color: var(--muted); font-size: 14px; }

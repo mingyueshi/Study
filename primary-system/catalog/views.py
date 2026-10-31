@@ -5,20 +5,27 @@ from django.shortcuts import render, get_object_or_404
 from django.views.decorators.cache import never_cache
 from django.views.decorators.http import require_GET
 from .forms import CatalogFilter
-from .models import Grade, Module, Subject, TextbookEdition, ContentItem, published_collections, published_items
+from .models import Grade, Module, Subject, TextbookEdition, ContentItem, published_collections, published_items, \
+    published_textbook_collections, published_topic_collections
 
 
-def filter_catalog(request):
+def filter_catalog(request, *, kind=None):
+    """目录筛选；kind='textbook'/'topic' 时只看对应分区的学习册。"""
     params = request.GET.copy()
     if 'grade' not in params and request.user.is_authenticated and request.user.grade_id:
         params['grade'] = request.user.grade.code
     form = CatalogFilter(params)
     collections = published_collections().select_related('module__subject', 'textbook__edition', 'textbook__grade')
+    if kind == 'textbook':
+        collections = collections.filter(textbook__isnull=False)
+    elif kind == 'topic':
+        collections = collections.filter(textbook__isnull=True)
     if not form.is_valid():
         return form, collections.none()
     grade, subject, edition, q = (form.cleaned_data[k] for k in ('grade', 'subject', 'edition', 'q'))
     if grade:
-        collections = collections.filter(Q(textbook__grade=grade) | Q(textbook__isnull=True, grades=grade) | Q(textbook__isnull=True, grades__isnull=True))
+        collections = collections.filter(
+            Q(textbook__grade=grade) | Q(textbook__isnull=True, grades=grade) | Q(textbook__isnull=True, grades__isnull=True))
     if subject:
         collections = collections.filter(module__subject=subject)
     if edition:
@@ -37,6 +44,9 @@ def home(request):
     counts = dict(collections.order_by().values('module_id').annotate(total=Count('pk', distinct=True)).values_list('module_id', 'total'))
     for module in modules:
         module.available_count = counts.get(module.pk, 0)
+    # 学习册按语义分区：教材同步（跟课本走）与主题探索（自由专题）分别成架。
+    textbook_shelf = [c for c in collections if c.is_textbook]
+    topic_shelf = [c for c in collections if c.is_topic]
     progress = None
     if request.user.is_authenticated:
         from learning.models import Progress
@@ -46,6 +56,7 @@ def home(request):
         )
     return render(request, 'catalog/home.html', {
         'form': form, 'modules': modules, 'collections': collections, 'progress': progress,
+        'textbook_shelf': textbook_shelf, 'topic_shelf': topic_shelf,
         'item_count': published_items().filter(placements__unit__collection__in=collections).count(),
     }, status=200 if form.is_valid() else 400)
 
@@ -75,7 +86,10 @@ def collection_detail(request, code):
 @never_cache
 @require_GET
 def catalog_api(request):
-    form, collections = filter_catalog(request)
+    kind = request.GET.get('kind', '').strip()
+    if kind not in ('', 'textbook', 'topic'):
+        return JsonResponse({'errors': {'kind': ['kind 仅支持 textbook 或 topic。']}}, status=400)
+    form, collections = filter_catalog(request, kind=kind)
     if not form.is_valid():
         return JsonResponse({'errors': form.errors.get_json_data()}, status=400)
     page = Paginator(collections, 30).get_page(request.GET.get('page'))
@@ -85,7 +99,8 @@ def catalog_api(request):
         'subjects': list(Subject.objects.values('code', 'name')),
         'editions': list(TextbookEdition.objects.values('code', 'name', 'subject__code', 'publisher', 'version')),
         'modules': list(Module.objects.filter(is_active=True).values('code', 'name', 'subject__code', 'interactive_ready')),
-        'collections': [{'code': c.code, 'name': c.name, 'module': c.module.code, 'textbook': c.textbook.code if c.textbook else None} for c in page],
+        'collections': [{'code': c.code, 'name': c.name, 'module': c.module.code, 'kind': 'textbook' if c.is_textbook else 'topic',
+                         'textbook': c.textbook.code if c.textbook else None} for c in page],
         'page': page.number, 'pages': page.paginator.num_pages, 'total': page.paginator.count,
     })
 
