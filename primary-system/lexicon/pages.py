@@ -15,7 +15,8 @@ from .views import record_payload, safe_url
 
 class LookupForm(forms.Form):
     q = forms.CharField(max_length=200, required=False, label='汉字、拼音或英文', widget=forms.TextInput(attrs={'placeholder': '试试「学」、xue 或 apple', 'autocomplete': 'off'}))
-    scope = forms.ChoiceField(required=False, label='查询范围', choices=[('', '全部词典'), ('character', '汉字'), ('english', '英文'), ('idiom', '成语')])
+    scope = forms.ChoiceField(required=False, label='查询范围', widget=forms.RadioSelect,
+                              choices=[('', '全部词典'), ('character', '汉字'), ('english', '英文'), ('idiom', '成语')])
 
 
 def teaching_items(text, *, language='', limit=8):

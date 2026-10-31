@@ -142,3 +142,13 @@
   .dictionary-card { transition: none; }
   .dictionary-card:hover { transform: none; }
 }
+
+/* 查询范围单选组：一键点选，替代下拉 */
+.scope-group { border: none; margin: 0; padding: 0; }
+.scope-legend { font-size: 14px; font-weight: 700; color: var(--muted, #73788b); margin-bottom: 6px; padding: 0; }
+.scope-radios { display: flex; flex-wrap: wrap; gap: 8px; }
+.scope-radios label { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 8px 16px; border: 1px solid var(--line, #dfe5f0); border-radius: 12px; background: #fff; cursor: pointer; font-size: 15px; font-weight: 700; }
+.scope-radios label:has(input:checked) { background: var(--chain, #157d73); border-color: var(--chain, #157d73); color: #fff; }
+.scope-radios input { width: 16px; height: 16px; accent-color: var(--chain, #157d73); }
+.scope-radios label:has(input:checked) input { accent-color: #fff; }
+.scope-radios label:has(input:focus-visible) { outline: 3px solid var(--orange, #ffa630); outline-offset: 2px; }

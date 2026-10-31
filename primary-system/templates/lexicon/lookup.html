@@ -7,7 +7,9 @@
   <div class="letter-art" aria-hidden="true"><span class="han-letter">字<small>zì</small></span><span class="en-letter">Aa<small>word by word</small></span><i>✦</i></div>
 </section>
 <form class="lookup-search" method="get" action="{% url 'dictionary' %}" role="search" aria-label="查字查词">
-  <div class="lookup-query">{{ form.q.label_tag }}{{ form.q }}{{ form.q.errors }}</div><div>{{ form.scope.label_tag }}{{ form.scope }}</div><button class="button" type="submit">查一查 <span aria-hidden="true">→</span></button>
+  <div class="lookup-query">{{ form.q.label_tag }}{{ form.q }}{{ form.q.errors }}</div>
+  <fieldset class="scope-group"><legend class="scope-legend">{{ form.scope.label }}</legend><div class="scope-radios">{{ form.scope }}</div></fieldset>
+  <button class="button" type="submit">查一查 <span aria-hidden="true">→</span></button>
   {{ form.non_field_errors }}{{ form.scope.errors }}
 </form>
 <div class="lookup-hints"><span>可以这样查</span><a href="?q=学&amp;scope=character">学</a><a href="?q=xue&amp;scope=character">xue</a><a href="?q=apple&amp;scope=english">apple</a><a href="?q=bank&amp;scope=english">bank</a><a class="source-link" href="{% url 'dictionary-sources' %}">词库范围与来源 ↗</a></div>
