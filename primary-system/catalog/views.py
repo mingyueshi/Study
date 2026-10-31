@@ -1,7 +1,7 @@
 from django.core.paginator import Paginator
 from django.db.models import Q, Count
 from django.http import Http404, JsonResponse
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, reverse
 from django.views.decorators.cache import never_cache
 from django.views.decorators.http import require_GET
 from .forms import CatalogFilter
@@ -45,6 +45,10 @@ def units_of_books(books):
     return published_units().filter(textbook_book__in=[b.pk for b in books])
 
 
+# 玩法模块的入口是各自应用的页面；首页卡片一次直达（不经过目录中转页）。
+GAME_ROUTES = {'chain': 'chain', 'words': 'scenario-words'}
+
+
 @never_cache
 @require_GET
 def home(request):
@@ -55,6 +59,8 @@ def home(request):
         counts[book.module_id] = counts.get(book.module_id, 0) + 1
     for module in modules:
         module.available_count = counts.get(module.pk, 0)
+        route = GAME_ROUTES.get(module.code)
+        module.entry_url = reverse(route) if route else reverse('module', args=[module.code])
     textbook_shelf = books
     progress = None
     if request.user.is_authenticated:
