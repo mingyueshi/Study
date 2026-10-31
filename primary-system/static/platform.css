@@ -438,3 +438,23 @@ textarea { resize: vertical; line-height: 1.9; }
 .word-related { display: flex; flex-wrap: wrap; gap: 10px; }
 .word-related .tag { display: inline-block; padding: 8px 14px; font-size: 16px; }
 .word-pills { display: flex; flex-wrap: wrap; gap: 10px; }
+
+/* 打印版式：阅读页单栏、去交互装饰、防断页（图示控件隐藏见 figures.css）。 */
+@media print {
+  :root { --line: #ccc; }
+  body { background: #fff; font-size: 13px; }
+  .site-header, .site-footer, .skip-link, .progress-panel, .back,
+  .tts-parts, .tts-bar, [data-say], .chain-page, .account, .notice { display: none !important; }
+  .shell { padding: 0; max-width: none; }
+  .reader-layout { display: block; }
+  .reader, .word-card, .reading-section { box-shadow: none; border-color: #ccc; break-inside: avoid; page-break-inside: avoid; }
+  .reader h1 { font-size: 22px; }
+  .word-en { font-size: 30px; color: #000; }
+  .word-emoji { font-size: 36px; }
+  .prose { font-size: 13px; line-height: 1.8; }
+  .reading-section { margin-top: 14px; }
+  .source-note { font-size: 11px; }
+  .book-grid, .content-list { display: block; }
+  .book-card, .content-row { border: 1px solid #ccc; margin-bottom: 8px; }
+  a[href^="http"]::after { content: ''; }
+}
