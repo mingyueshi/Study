@@ -2,7 +2,8 @@ from django.contrib.auth import get_user_model
 from django.utils.crypto import get_random_string
 from django.test import Client
 from catalog.tests import PlatformFixture
-from catalog.models import ContentItem
+from catalog.models import ContentItem, Module
+from lexicon.importing import stage_manifest
 from .models import Progress
 
 
@@ -117,3 +118,76 @@ class ProgressTests(PlatformFixture):
         self.assertEqual(self.client.post(url, self.data).status_code, 302)
         self.assertContains(self.client.get(url), self.data['note'])
         self.assertEqual(self.client.post(url, self.data).status_code, 409)
+
+
+class ScenarioWordCardTests(PlatformFixture):
+    """场景词卡词典驱动：词典为内容源，教学标注与关联词留在卡上。"""
+
+    @classmethod
+    def setUpTestData(cls):
+        super().setUpTestData()
+        from catalog.models import Collection, Module, Placement, Unit
+        from lexicon.adapters import primary_manifest
+        from lexicon.services import activate_release, link_primary_records
+        words = Module.objects.get(code='words')
+        cls.collection = Collection.objects.create(code='words-test', name='场景单词测试', module=words, is_published=True)
+        cls.unit = Unit.objects.create(collection=cls.collection, code='u-actions', title='Action Words')
+        payload = {'en': 'dance', 'ipa': '/dɑːns/', 'zh': 'v. 跳舞', 'emoji': '💃',
+                   'parts': [{'t': 'dan', 'd': '/dɑːn/'}, {'t': 'ce', 'd': 'ce 读 /s/'}],
+                   'memo': 'ce 结尾读 /s/。', 'related': ['sing', 'June']}
+        cls.item = ContentItem.objects.create(module=words, kind='word', title='dance', summary='v. 跳舞',
+            sections=[{'title': '音标', 'text': '/dɑːns/'}], source_key='primary:words:u-actions:dance',
+            source_payload=payload, source_hash='a' * 64, source_file='primary/words-data.js', status='published')
+        cls.sibling = ContentItem.objects.create(module=words, kind='word', title='sing', summary='v. 唱歌',
+            source_key='primary:words:u-actions:sing', source_payload={'en': 'sing'}, source_hash='a' * 64,
+            source_file='primary/words-data.js', status='published')
+        Placement.objects.create(unit=cls.unit, item=cls.item)
+        Placement.objects.create(unit=cls.unit, item=cls.sibling)
+        release, _ = stage_manifest(primary_manifest('words'), exact_reuse=True)
+        cls.release = release
+        activate_release(release.pk, expected_current='', reason='测试启用场景词源')
+        link_primary_records(release)
+        call_command('review_primary_readings', stdout=io.StringIO())
+
+    def test_word_card_renders_dictionary_driven_content(self):
+        response = self.client.get(f'/items/{self.item.pk}/')
+        self.assertEqual(response.status_code, 200)
+        html = response.content.decode()
+        for mark in ('word-card', '/dɑːns/', 'v. 跳舞', '💃', '整体认读', 'ce 读 /s/',
+                     '记忆提示', '关联词', '同场景单词', 'Action Words'):
+            self.assertIn(mark, html)
+        # 关联词三成分：sing 有卡 → 卡链接；June 无卡 → 词典兜底。
+        self.assertIn(f'/items/{self.sibling.pk}/', html)
+        self.assertIn('June', html)
+        self.assertIn('查词典', html)
+        # 词典驱动后旧扁平「音标」「拆分记忆」节不再渲染（IPA 大字与拆分按钮替代）。
+        self.assertNotIn('<h2>音标</h2>', html)
+        self.assertNotIn('<h2>拆分记忆</h2>', html)
+
+    def test_sibling_word_also_gets_dictionary_view(self):
+        # link_primary_records 给全部 words 卡 1:1 建关联：sing 同样获得词典视图与同场景词。
+        response = self.client.get(f'/items/{self.sibling.pk}/')
+        self.assertEqual(response.status_code, 200)
+        html = response.content.decode()
+        self.assertIn('word-card', html)
+        self.assertIn('v. 唱歌', html)
+        self.assertIn('data-say="dance"', html)
+
+    def test_card_without_source_key_falls_back_to_annotations(self):
+        # 无来源键的卡没有教学关联：降级为旧分节渲染，仍然完整可读。
+        from catalog.models import Placement
+        fallback = ContentItem.objects.create(module=Module.objects.get(code='words'), kind='word',
+            title='orphan', summary='v. 孤卡', sections=[{'title': '音标', 'text': '/ɔːrfən/'}],
+            source_payload={'en': 'orphan'}, source_hash='a' * 64,
+            source_file='primary/words-data.js', status='published')
+        Placement.objects.create(unit=self.unit, item=fallback)
+        response = self.client.get(f'/items/{fallback.pk}/')
+        self.assertEqual(response.status_code, 200)
+        html = response.content.decode()
+        self.assertIn('orphan', html)
+        self.assertIn('<h2>音标 <button', html)
+        self.assertNotIn('word-card', html)
+
+    def test_word_card_api_schema(self):
+        data = self.client.get(f'/api/v1/items/{self.item.pk}/').json()
+        self.assertEqual(data['kind'], 'word')

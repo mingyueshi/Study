@@ -192,3 +192,11 @@ Playwright 在独立数据库副本中验证：桌面查词首页、汉字详情
 - 症状：游客点提示无反应。根因双重——重写对局模板时 `{% csrf_token %}` 丢失（页面不种 CSRF cookie、POST 全线 403），且前端把非 JSON 的 403 响应吞成「没反应」；测试未抓到是因为 test client 默认关闭 CSRF 校验。
 - 修复：模板恢复 csrf_token 并对页面视图显式 `@ensure_csrf_cookie`；前端对 403 给出「安全校验过期，请刷新」反馈。
 - 回归锁定：新增 `enforce_csrf_checks=True` 的游客全链路用例（真实浏览器路径：种 cookie → 带 token 出招 200 → 无 token 403）。全库 113 项通过。
+
+## 场景单词词典驱动验证（2026-11-01）
+
+- primary-words / primary-english 来源激活为内部词库源（active_release 就位，公开准入保持关闭，与接龙词池同边界）；`review_primary_readings` 批量核对 609 条教学卡音标（words 305 + english 304，2 条英文卡无读音值；幂等重跑 0 变更，审计写明沿用教学卡原值）。
+- 词卡词典驱动：words 模块词卡经 ContentEntryLink 在 active release 中定位来源记录（link_state 模式，来源变更可感知），复用 record_payload 渲染 IPA／释义／词性；教学标注（记忆提示、拆分跟读按钮）保留在卡上；旧扁平 sections（音标/拆分/关联词）停止渲染，数据保留可回滚。
+- 关联词双层管理落地：人工策划关联（source_payload.related）解析为卡内跳转（同/跨场景卡）或词典查询兜底；同场景词按兄弟 Placement 派生（零存储），点读 pills。
+- 降级路径：关联缺失、来源停用或来源更新未对上时，词卡回退教学标注渲染（view 判定，空壳词卡不出现）。
+- 实测 dance 卡 52ms：IPA／释义／emoji／拆分跟读／关联词（sing、music room 均有卡链接）／同场景 pills／来源状态全部呈现；测试新增场景词卡 4 项（词典驱动渲染、双卡词典视图、无来源键降级、API），全库 117 项通过。

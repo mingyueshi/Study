@@ -7,7 +7,10 @@ from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.cache import never_cache
 from django.views.decorators.http import require_GET, require_http_methods
-from catalog.models import published_items
+from catalog.models import Placement, published_items
+from lexicon.models import ContentEntryLink, SourceRecord
+from lexicon.services import link_state
+from lexicon.views import record_payload
 from .forms import ProgressForm
 from .models import Progress
 from .services import ProgressConflict, progress_data, save_progress
@@ -32,6 +35,40 @@ def figure_context(item):
     lib = FIGURE_LIBS.get(item.module.code)
     script = FIGURE_SCRIPTS.get(lib) if lib else None
     return {'figure_lib': lib, 'figure_script': script} if script else {}
+
+
+def word_card_context(item):
+    """场景词卡：词典为内容源（经教学关联选定），教学标注与关联词仍在卡上。
+
+    来源未激活、关联缺失或来源更新后未对上时返回空字典，页面降级为教学标注渲染。
+    """
+    link = ContentEntryLink.objects.filter(content=item, slot='main').select_related(
+        'sense__entry', 'evidence__release__source').first()
+    if not link:
+        return {}
+    source = link.evidence.release.source
+    if not source.enabled or not source.active_release_id:
+        return {}
+    record = SourceRecord.objects.filter(
+        release_id=source.active_release_id, binding_id=link.evidence.binding_id,
+        lexical_hash=link.evidence.lexical_hash).select_related(
+        'binding__sense__entry', 'binding__pronunciation', 'release__source').first()
+    context = {'lexicon_state': link_state(link)}
+    if record:
+        context['word_lexicon'] = record_payload(record)
+    payload = item.source_payload if isinstance(item.source_payload, dict) else {}
+    related = [w for w in payload.get('related', []) if isinstance(w, str) and w.strip()]
+    if related:
+        cards = {card.title: card for card in published_items().filter(
+            module__code='words', title__in=related).select_related('module')}
+        context['related_links'] = [{'word': word, 'item': cards.get(word)} for word in related]
+    placement = item.placements.select_related('unit').first()
+    if placement:
+        context['scenario_unit'] = placement.unit.title
+        context['scenario_siblings'] = [p.item for p in Placement.objects.filter(
+            unit=placement.unit, item__status='published', item__kind='word'
+        ).exclude(item_id=item.pk).select_related('item').order_by('order', 'pk')]
+    return context
 
 
 @never_cache
@@ -61,8 +98,15 @@ def item_detail(request, pk):
         else:
             status = 400
     lookup_term = item.source_payload.get('en' if item.kind == 'word' else 'idiom', item.title) if isinstance(item.source_payload, dict) else item.title
-    return render(request, 'learning/item.html', {'item': item, 'form': form, 'progress': progress,
-                                                  'lookup_term': lookup_term, **figure_context(item)}, status=status)
+    context = {'item': item, 'form': form, 'progress': progress, 'lookup_term': lookup_term,
+               **figure_context(item)}
+    if item.module.code == 'words' and item.kind == 'word':
+        card = word_card_context(item)
+        if card.get('word_lexicon'):
+            # 词典数据可用才走词典驱动；关联缺失或来源异常时降级为教学标注渲染。
+            context['is_scenario_word'] = True
+            context.update(card)
+    return render(request, 'learning/item.html', context, status=status)
 
 
 @never_cache
