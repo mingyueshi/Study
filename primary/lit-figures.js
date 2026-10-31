@@ -568,8 +568,510 @@ const LitFigures = (() => {
     fig.querySelectorAll('[data-fig-act="lit-zodiac"]').forEach(b => b.classList.toggle('fig-on', b === btn));
   }
 
+  /* ================= 文学苑横幅 ================= */
+  const litBanner = (e1, mid, e2, color) => {
+    let s = `<svg viewBox="0 0 900 96" preserveAspectRatio="xMidYMid slice">`;
+    s += `<rect width="900" height="96" rx="12" fill="${color}14"/>`;
+    s += `<circle cx="80" cy="48" r="34" fill="${color}22"/><circle cx="820" cy="48" r="34" fill="${color}22"/>`;
+    s += `<line x1="130" y1="48" x2="770" y2="48" stroke="${color}" stroke-opacity=".25" stroke-width="2" stroke-dasharray="10 8"/>`;
+    s += `<text x="80" y="58" font-size="30" text-anchor="middle">${e1}</text>`;
+    s += `<text x="820" y="58" font-size="30" text-anchor="middle">${e2}</text>`;
+    s += `<text x="450" y="58" font-size="24" text-anchor="middle" font-weight="800" fill="${color}">${mid}</text>`;
+    return s + '</svg>';
+  };
+  const litBanners = {
+    'lit-bn-lu1': () => litBanner('📚', '🖋️📖✒️', '🎭', '#8b65c9'),
+    'lit-bn-lu2': () => litBanner('🖌️', '🌙🍶🏔️', '🎐', '#e25563'),
+    'lit-bn-lu3': () => litBanner('🎭', '🐒⚔️🏯', '📜', '#d97745'),
+    'lit-bn-lu4': () => litBanner('✒️', '👴🎋🗿', '📜', '#b5893a'),
+    'lit-bn-lu5': () => litBanner('🌏', '🖊️📗🌊', '✏️', '#2f9bd6'),
+    'lit-bn-lu6': () => litBanner('🏮', '🎋🐉⏳', '🥮', '#2fbf71'),
+    'lit-bn-lu7': () => litBanner('💬', '📝🔖💡', '🗣️', '#157d73'),
+    'lit-bn-lu8': () => litBanner('❓', '🖌️🧧🎴', '🔍', '#c2557d'),
+  };
+
+  /* ================= 补充知识点图示 ================= */
+
+  /* 什么是文学 */
+  const whatIsLit = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 150">`;
+    s += `<rect width="640" height="150" fill="#faf8fd"/>`;
+    const items = [
+      { x: 90, icon: '📖', label: '诗歌', desc: '分行押韵' },
+      { x: 220, icon: '📰', label: '散文', desc: '形散神聚' },
+      { x: 350, icon: '📚', label: '小说', desc: '人物故事' },
+      { x: 480, icon: '🎭', label: '戏剧', desc: '对话演出' },
+      { x: 570, icon: '📝', label: '…', desc: '更多' },
+    ];
+    items.forEach(it => {
+      s += `<rect x="${it.x - 48}" y="36" width="96" height="80" rx="12" fill="#fff" stroke="${PURPLE}" stroke-width="1.5"/>`;
+      s += `<text x="${it.x}" y="68" font-size="28" text-anchor="middle">${it.icon}</text>`;
+      s += txt(it.x, 90, it.label, { fill: PURPLE, fs: 14, fw: 900 });
+      s += txt(it.x, 106, it.desc, { fill: MUT, fs: 11 });
+    });
+    s += txt(320, 140, '文学用语言文字创造美，把我们带进另一个世界', { fs: 13, fill: MUT });
+    return s + '</svg>';
+  };
+
+  /* 寓言与成语故事 */
+  const fable = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 150">`;
+    s += `<rect width="640" height="150" fill="#f4f8ec"/>`;
+    const cards = [
+      { x: 80, emoji: '🐢', title: '寓言', desc: '守株待兔·龟兔赛跑', c: GREEN },
+      { x: 240, emoji: '🦁', title: '动物', desc: '狐假虎威·亡羊补牢', c: ORANGE },
+      { x: 400, emoji: '🐸', title: '道理', desc: '井底之蛙·画蛇添足', c: BLUE },
+      { x: 560, emoji: '📖', title: '成语', desc: '短小精悍有出处', c: RED },
+    ];
+    cards.forEach(c => {
+      s += `<rect x="${c.x - 56}" y="30" width="112" height="86" rx="12" fill="#fff" stroke="${c.c}" stroke-width="2"/>`;
+      s += `<text x="${c.x}" y="64" font-size="30" text-anchor="middle">${c.emoji}</text>`;
+      s += txt(c.x, 86, c.title, { fill: c.c, fs: 15, fw: 900 });
+      s += txt(c.x, 104, c.desc, { fill: MUT, fs: 10.5 });
+    });
+    s += txt(320, 140, '寓言用故事讲道理，成语多从寓言和历史中来', { fs: 13, fill: MUT });
+    return s + '</svg>';
+  };
+
+  /* 绝句与律诗格律 */
+  const juejuLushi = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 160">`;
+    s += `<rect width="640" height="160" fill="#fdf6f6"/>`;
+    /* 绝句：四句 */
+    s += `<rect x="30" y="24" width="270" height="112" rx="12" fill="#fff" stroke="${RED}" stroke-width="2"/>`;
+    s += txt(165, 46, '绝句 · 四句', { fill: RED, fs: 15, fw: 900 });
+    for (let i = 0; i < 4; i++) {
+      s += `<rect x="60" y="${58 + i * 18}" width="210" height="13" rx="4" fill="${RED}" opacity="${0.25 + (i % 2) * 0.15}"/>`;
+    }
+    s += txt(165, 128, '五言·七言两种', { fill: MUT, fs: 11.5 });
+    /* 律诗：八句 + 颔联颈联对仗 */
+    s += `<rect x="340" y="24" width="270" height="112" rx="12" fill="#fff" stroke="${BLUE}" stroke-width="2"/>`;
+    s += txt(475, 46, '律诗 · 八句', { fill: BLUE, fs: 15, fw: 900 });
+    const labels = ['首联', '颔联（对仗）', '颈联（对仗）', '尾联'];
+    labels.forEach((lb, i) => {
+      s += `<rect x="370" y="${58 + i * 18}" width="210" height="13" rx="4" fill="${BLUE}" opacity="${0.2 + (i % 2) * 0.15}"/>`;
+      s += txt(378, 68 + i * 18, lb, { anchor: 'start', fs: 10, fill: i === 1 || i === 2 ? BLUE : MUT, fw: i === 1 || i === 2 ? 800 : 600 });
+    });
+    s += txt(475, 128, '中间两联必须对仗', { fill: MUT, fs: 11.5 });
+    s += txt(320, 152, '绝句四句、律诗八句；律诗的颔联和颈联要对仗', { fs: 13, fill: MUT });
+    return s + '</svg>';
+  };
+
+  /* 诗经与楚辞 */
+  const shijingChuci = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 150">`;
+    s += `<rect width="640" height="150" fill="#f4f0e8"/>`;
+    /* 诗经 */
+    s += `<rect x="40" y="24" width="260" height="100" rx="12" fill="#fdf9f2" stroke="${GOLD}" stroke-width="2"/>`;
+    s += txt(170, 50, '《诗经》', { fill: GOLD, fs: 18, fw: 900 });
+    s += txt(170, 72, '我国最早的诗歌总集', { fs: 12, fill: MUT });
+    s += txt(170, 92, '风·雅·颂 · 赋比兴', { fs: 13, fill: INK, fw: 700 });
+    s += txt(170, 110, '「关关雎鸠，在河之洲」', { fs: 11, fill: MUT });
+    /* 楚辞 */
+    s += `<rect x="340" y="24" width="260" height="100" rx="12" fill="#fbf7fc" stroke="${PURPLE}" stroke-width="2"/>`;
+    s += txt(470, 50, '《楚辞》', { fill: PURPLE, fs: 18, fw: 900 });
+    s += txt(470, 72, '战国·屈原等人创作', { fs: 12, fill: MUT });
+    s += txt(470, 92, '浪漫主义源头 · 骚体', { fs: 13, fill: INK, fw: 700 });
+    s += txt(470, 110, '「路漫漫其修远兮」', { fs: 11, fill: MUT });
+    s += txt(320, 142, '《诗经》现实朴实，《楚辞》浪漫奔放——并称「风骚」', { fs: 13, fill: MUT });
+    return s + '</svg>';
+  };
+
+  /* 唐诗宋词元曲 */
+  const tangSongYuan = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 150">`;
+    s += `<rect width="640" height="150" fill="#f0f4fc"/>`;
+    const dyns = [
+      { x: 130, name: '唐诗', desc: '李白·杜甫·白居易', c: RED, icon: '🌙' },
+      { x: 320, name: '宋词', desc: '苏轼·李清照·辛弃疾', c: BLUE, icon: '🎐' },
+      { x: 510, name: '元曲', desc: '关汉卿·马致远', c: PURPLE, icon: '🎭' },
+    ];
+    dyns.forEach(d => {
+      s += `<rect x="${d.x - 80}" y="28" width="160" height="96" rx="12" fill="#fff" stroke="${d.c}" stroke-width="2"/>`;
+      s += `<text x="${d.x}" y="58" font-size="28" text-anchor="middle">${d.icon}</text>`;
+      s += txt(d.x, 80, d.name, { fill: d.c, fs: 18, fw: 900 });
+      s += txt(d.x, 100, d.desc, { fill: MUT, fs: 11 });
+    });
+    s += txt(320, 142, '一代有一代之文学：唐之诗、宋之词、元之曲', { fs: 13, fill: MUT });
+    return s + '</svg>';
+  };
+
+  /* 西游记 */
+  const xiyou = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 150">`;
+    s += `<rect width="640" height="150" fill="#fdf3f3"/>`;
+    const chars = [
+      { x: 90, icon: '🐵', name: '孙悟空', desc: '齐天大圣·七十二变', c: RED },
+      { x: 230, icon: '🐷', name: '猪八戒', desc: '天蓬元帅·好吃懒做', c: ORANGE },
+      { x: 370, icon: '🧔', name: '沙和尚', desc: '卷帘大将·忠厚老实', c: GOLD },
+      { x: 510, icon: '👨‍🦲', name: '唐僧', desc: '金蝉子·取经人', c: PURPLE },
+    ];
+    chars.forEach(c => {
+      s += `<circle cx="${c.x}" cy="56" r="26" fill="${c.c}22" stroke="${c.c}" stroke-width="2"/>`;
+      s += `<text x="${c.x}" y="66" font-size="28" text-anchor="middle">${c.icon}</text>`;
+      s += txt(c.x, 100, c.name, { fill: c.c, fs: 14, fw: 900 });
+      s += txt(c.x, 118, c.desc, { fill: MUT, fs: 10.5 });
+    });
+    s += txt(320, 142, '师徒四人历经九九八十一难，西天取经', { fs: 13, fill: MUT });
+    return s + '</svg>';
+  };
+
+  /* 三国演义 */
+  const sanguo = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 150">`;
+    s += `<rect width="640" height="150" fill="#f0f4fc"/>`;
+    const kingdoms = [
+      { x: 130, name: '魏', desc: '曹操·挟天子以令诸侯', c: BLUE },
+      { x: 320, name: '蜀', desc: '刘备·关羽·张飞桃园结义', c: RED },
+      { x: 510, name: '吴', desc: '孙权·周瑜火烧赤壁', c: GREEN },
+    ];
+    kingdoms.forEach(k => {
+      s += `<rect x="${k.x - 70}" y="28" width="140" height="90" rx="12" fill="#fff" stroke="${k.c}" stroke-width="2"/>`;
+      s += txt(k.x, 60, k.name, { fill: k.c, fs: 26, fw: 900 });
+      s += txt(k.x, 88, k.desc, { fill: MUT, fs: 11 });
+    });
+    s += `<path d="M 200 73 L 440 73" stroke="${MUT}" stroke-width="2" stroke-dasharray="6 4"/>`;
+    s += txt(320, 142, '魏蜀吴三分天下，最终归于晋', { fs: 13, fill: MUT });
+    return s + '</svg>';
+  };
+
+  /* 水浒传 */
+  const shuihu = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 150">`;
+    s += `<rect width="640" height="150" fill="#f4f8ec"/>`;
+    s += `<text x="320" y="40" font-size="32" text-anchor="middle">🏔️</text>`;
+    s += txt(320, 30, '梁山泊', { fill: GREEN, fs: 15, fw: 900 });
+    const heroes = [
+      { x: 110, icon: '🐯', name: '武松', desc: '打虎英雄' },
+      { x: 230, icon: '⚔️', name: '林冲', desc: '豹子头' },
+      { x: 350, icon: '🌊', name: '鲁智深', desc: '倒拔垂杨柳' },
+      { x: 470, icon: '🏹', name: '花荣', desc: '小李广' },
+      { x: 570, icon: '🦁', name: '宋江', desc: '及时雨' },
+    ];
+    heroes.forEach(h => {
+      s += `<circle cx="${h.x}" cy="78" r="22" fill="#fff" stroke="${GREEN}" stroke-width="2"/>`;
+      s += `<text x="${h.x}" y="86" font-size="22" text-anchor="middle">${h.icon}</text>`;
+      s += txt(h.x, 114, h.name, { fill: GREEN, fs: 13, fw: 800 });
+      s += txt(h.x, 130, h.desc, { fill: MUT, fs: 10 });
+    });
+    s += txt(320, 146, '一百零八位好汉聚义梁山泊，替天行道', { fs: 13, fill: MUT });
+    return s + '</svg>';
+  };
+
+  /* 红楼梦 */
+  const honglou = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 150">`;
+    s += `<rect width="640" height="150" fill="#fbf7fc"/>`;
+    s += `<text x="320" y="44" font-size="34" text-anchor="middle">🏯</text>`;
+    s += txt(320, 34, '大观园·贾府', { fill: PURPLE, fs: 15, fw: 900 });
+    const chars = [
+      { x: 130, icon: '💎', name: '贾宝玉', desc: '衔玉而生' },
+      { x: 260, icon: '🌸', name: '林黛玉', desc: '多愁善感' },
+      { x: 390, icon: '👑', name: '薛宝钗', desc: '端庄贤淑' },
+      { x: 520, icon: '🔥', name: '王熙凤', desc: '机关算尽' },
+    ];
+    chars.forEach(c => {
+      s += `<rect x="${c.x - 50}" y="58" width="100" height="62" rx="10" fill="#fff" stroke="${PURPLE}" stroke-width="1.5"/>`;
+      s += `<text x="${c.x}" y="84" font-size="24" text-anchor="middle">${c.icon}</text>`;
+      s += txt(c.x, 104, c.name, { fill: PURPLE, fs: 13, fw: 800 });
+      s += txt(c.x, 118, c.desc, { fill: MUT, fs: 10.5 });
+    });
+    s += txt(320, 142, '曹雪芹写贾府兴衰，又名《石头记》', { fs: 13, fill: MUT });
+    return s + '</svg>';
+  };
+
+  /* 三苏 */
+  const sansu = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 150">`;
+    s += `<rect width="640" height="150" fill="#f4f0e8"/>`;
+    const sus = [
+      { x: 160, name: '苏洵', desc: '父亲·老苏', c: GOLD },
+      { x: 320, name: '苏轼', desc: '长子·大苏', c: RED },
+      { x: 480, name: '苏辙', desc: '次子·小苏', c: BLUE },
+    ];
+    sus.forEach((su, i) => {
+      s += `<circle cx="${su.x}" cy="60" r="30" fill="${su.c}22" stroke="${su.c}" stroke-width="2"/>`;
+      s += txt(su.x, 66, su.name, { fill: su.c, fs: 18, fw: 900 });
+      s += txt(su.x, 108, su.desc, { fill: MUT, fs: 12 });
+    });
+    s += txt(320, 142, '父子三人都在「唐宋八大家」之列，合称「三苏」', { fs: 13, fill: MUT });
+    return s + '</svg>';
+  };
+
+  /* 唐宋八大家 */
+  const tangsongBada = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 160">`;
+    s += `<rect width="640" height="160" fill="#f8f9fc"/>`;
+    s += txt(90, 26, '唐 2 位', { fill: RED, fs: 14, fw: 900 });
+    s += txt(430, 26, '宋 6 位', { fill: BLUE, fs: 14, fw: 900 });
+    s += `<line x1="250" y1="18" x2="250" y2="148" stroke="${LINE}" stroke-width="2" stroke-dasharray="6 4"/>`;
+    const tang = [['韩愈', '文起八代之衰'], ['柳宗元', '永州八记']];
+    const song = [['欧阳修', '醉翁亭记'], ['苏洵', '六国论'], ['苏轼', '赤壁赋'], ['苏辙', '黄州快哉亭记'], ['王安石', '游褒禅山记'], ['曾巩', '墨池记']];
+    tang.forEach((p, i) => {
+      s += `<rect x="40" y="${42 + i * 44}" width="180" height="34" rx="8" fill="#fff" stroke="${RED}" stroke-width="1.5"/>`;
+      s += txt(70, 64 + i * 44, p[0], { anchor: 'start', fs: 14, fw: 900, fill: RED });
+      s += txt(150, 64 + i * 44, p[1], { anchor: 'start', fs: 11, fill: MUT });
+    });
+    song.forEach((p, i) => {
+      const col = i % 2, row = Math.floor(i / 2);
+      const x = 280 + col * 170, y = 42 + row * 44;
+      s += `<rect x="${x}" y="${y}" width="160" height="34" rx="8" fill="#fff" stroke="${BLUE}" stroke-width="1.5"/>`;
+      s += txt(x + 16, y + 22, p[0], { anchor: 'start', fs: 13, fw: 900, fill: BLUE });
+      s += txt(x + 72, y + 22, p[1], { anchor: 'start', fs: 10.5, fill: MUT });
+    });
+    s += txt(320, 152, '唐宋八大家以散文著称，韩愈柳宗元是唐代的', { fs: 12.5, fill: MUT });
+    return s + '</svg>';
+  };
+
+  /* 四书五经 */
+  const sishuWujing = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 160">`;
+    s += `<rect width="640" height="160" fill="#fdf9f2"/>`;
+    s += `<rect x="30" y="24" width="260" height="112" rx="12" fill="#fff" stroke="${GOLD}" stroke-width="2"/>`;
+    s += txt(160, 48, '四书', { fill: GOLD, fs: 18, fw: 900 });
+    ['《大学》', '《中庸》', '《论语》', '《孟子》'].forEach((b, i) => {
+      s += `<rect x="56" y="${58 + i * 18}" width="208" height="13" rx="4" fill="${GOLD}" opacity="${0.2 + (i % 2) * 0.12}"/>`;
+      s += txt(160, 68 + i * 18, b, { fs: 11.5, fill: INK, fw: 700 });
+    });
+    s += `<rect x="350" y="24" width="260" height="112" rx="12" fill="#fff" stroke="${RED}" stroke-width="2"/>`;
+    s += txt(480, 48, '五经', { fill: RED, fs: 18, fw: 900 });
+    ['《诗》《书》《礼》', '《易》《春秋》', '（诗=诗经）', '古代儒家经典'].forEach((b, i) => {
+      s += txt(480, 68 + i * 18, b, { fs: 12, fill: i < 2 ? INK : MUT, fw: i < 2 ? 800 : 600 });
+    });
+    s += txt(320, 152, '四书五经是古代读书人的必读书', { fs: 13, fill: MUT });
+    return s + '</svg>';
+  };
+
+  /* 古人勤学的故事 */
+  const diligence = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 160">`;
+    s += `<rect width="640" height="160" fill="#fdf6e9"/>`;
+    const stories = [
+      { x: 90, icon: '💡', name: '凿壁偷光', desc: '匡衡·借光读书', c: GOLD },
+      { x: 230, icon: '🦶', name: '悬梁刺股', desc: '孙敬·苏秦', c: RED },
+      { x: 370, icon: '🦝', name: '囊萤映雪', desc: '车胤·孙康', c: BLUE },
+      { x: 510, icon: '🐂', name: '牛角挂书', desc: '李密·骑牛读书', c: GREEN },
+    ];
+    stories.forEach(st => {
+      s += `<rect x="${st.x - 54}" y="28" width="108" height="96" rx="12" fill="#fff" stroke="${st.c}" stroke-width="2"/>`;
+      s += `<text x="${st.x}" y="62" font-size="28" text-anchor="middle">${st.icon}</text>`;
+      s += txt(st.x, 86, st.name, { fill: st.c, fs: 13.5, fw: 900 });
+      s += txt(st.x, 106, st.desc, { fill: MUT, fs: 10.5 });
+    });
+    s += txt(320, 146, '古人勤学的故事，激励后人刻苦读书', { fs: 13, fill: MUT });
+    return s + '</svg>';
+  };
+
+  /* 谦称与敬称 */
+  const qianJing = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 150">`;
+    s += `<rect width="640" height="150" fill="#f4f8fd"/>`;
+    s += `<rect x="30" y="24" width="270" height="102" rx="12" fill="#fff" stroke="${BLUE}" stroke-width="2"/>`;
+    s += txt(165, 48, '谦称（说自己）', { fill: BLUE, fs: 15, fw: 900 });
+    s += txt(165, 72, '我 → 愚、鄙人、敝人', { fs: 12.5, fill: INK });
+    s += txt(165, 92, '学生 → 弟子、门生', { fs: 12.5, fill: INK });
+    s += txt(165, 112, '自己的家 → 寒舍、敝舍', { fs: 12.5, fill: INK });
+    s += `<rect x="340" y="24" width="270" height="102" rx="12" fill="#fff" stroke="${RED}" stroke-width="2"/>`;
+    s += txt(475, 48, '敬称（说对方）', { fill: RED, fs: 15, fw: 900 });
+    s += txt(475, 72, '你 → 君、阁下、足下', { fs: 12.5, fill: INK });
+    s += txt(475, 92, '对方的父亲 → 令尊', { fs: 12.5, fill: INK });
+    s += txt(475, 112, '对方的家 → 贵府、府上', { fs: 12.5, fill: INK });
+    s += txt(320, 142, '说自己用谦称（贬低），说别人用敬称（抬高）', { fs: 13, fill: MUT });
+    return s + '</svg>';
+  };
+
+  /* 诗文里的意象 */
+  const imagery = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 150">`;
+    s += `<rect width="640" height="150" fill="#faf8fd"/>`;
+    const items = [
+      { x: 90, icon: '🌙', name: '月亮', desc: '思乡·团圆', c: BLUE },
+      { x: 220, icon: '🍂', name: '落叶', desc: '悲秋·飘零', c: ORANGE },
+      { x: 350, icon: '🕊️', name: '鸿雁', desc: '传书·思乡', c: GREEN },
+      { x: 480, icon: '🌸', name: '落花', desc: '伤春·惜时', c: RED },
+      { x: 580, icon: '🌿', name: '杨柳', desc: '送别·留恋', c: TEAL },
+    ];
+    items.forEach(it => {
+      s += `<rect x="${it.x - 48}" y="30" width="96" height="84" rx="10" fill="#fff" stroke="${it.c}" stroke-width="1.5"/>`;
+      s += `<text x="${it.x}" y="62" font-size="26" text-anchor="middle">${it.icon}</text>`;
+      s += txt(it.x, 84, it.name, { fill: it.c, fs: 13, fw: 900 });
+      s += txt(it.x, 102, it.desc, { fill: MUT, fs: 10.5 });
+    });
+    s += txt(320, 140, '诗人借物抒情，特定景物有固定的情感含义', { fs: 13, fill: MUT });
+    return s + '</svg>';
+  };
+
+  /* 诗文里的数字 */
+  const poetryNumbers = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 150">`;
+    s += `<rect width="640" height="150" fill="#f0f4fc"/>`;
+    const nums = [
+      { n: '一', desc: '一行白鹭上青天', c: RED },
+      { n: '三', desc: '三人行必有我师', c: ORANGE },
+      { n: '九', desc: '九曲黄河万里沙', c: GOLD },
+      { n: '千', desc: '千山鸟飞绝', c: GREEN },
+      { n: '万', desc: '万里长征人未还', c: BLUE },
+    ];
+    nums.forEach((nm, i) => {
+      const x = 80 + i * 124;
+      s += `<rect x="${x - 48}" y="28" width="96" height="90" rx="12" fill="#fff" stroke="${nm.c}" stroke-width="2"/>`;
+      s += txt(x, 62, nm.n, { fill: nm.c, fs: 30, fw: 900 });
+      s += txt(x, 90, nm.desc, { fill: MUT, fs: 10.5 });
+    });
+    s += txt(320, 140, '古诗里的数字多是虚指，表示「多」或「少」', { fs: 13, fill: MUT });
+    return s + '</svg>';
+  };
+
+  /* 成语里的典故 */
+  const idiomStory = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 150">`;
+    s += `<rect width="640" height="150" fill="#fdf3f3"/>`;
+    const idioms = [
+      { x: 110, idiom: '卧薪尝胆', from: '越王勾践', c: RED },
+      { x: 260, idiom: '破釜沉舟', from: '项羽', c: ORANGE },
+      { x: 410, idiom: '完璧归赵', from: '蔺相如', c: BLUE },
+      { x: 550, idiom: '负荆请罪', from: '廉颇', c: PURPLE },
+    ];
+    idioms.forEach(idm => {
+      s += `<rect x="${idm.x - 60}" y="30" width="120" height="84" rx="10" fill="#fff" stroke="${idm.c}" stroke-width="2"/>`;
+      s += txt(idm.x, 60, idm.idiom, { fill: idm.c, fs: 16, fw: 900 });
+      s += txt(idm.x, 86, '出自', { fill: MUT, fs: 11 });
+      s += txt(idm.x, 102, idm.from, { fill: INK, fs: 12.5, fw: 700 });
+    });
+    s += txt(320, 140, '很多成语背后都有一段历史故事', { fs: 13, fill: MUT });
+    return s + '</svg>';
+  };
+
+  /* 歇后语 */
+  const xiehouyu = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 150">`;
+    s += `<rect width="640" height="150" fill="#f4faf6"/>`;
+    const rows = [
+      { x: 110, front: '黄鼠狼给鸡拜年', back: '没安好心', c: RED },
+      { x: 320, front: '竹篮打水', back: '一场空', c: BLUE },
+      { x: 530, front: '哑巴吃黄连', back: '有苦说不出', c: GOLD },
+    ];
+    rows.forEach(r => {
+      s += `<rect x="${r.x - 90}" y="30" width="180" height="88" rx="12" fill="#fff" stroke="${r.c}" stroke-width="2"/>`;
+      s += txt(r.x, 58, r.front, { fs: 13.5, fw: 800, fill: INK });
+      s += txt(r.x, 78, '⬇', { fs: 16, fill: r.c });
+      s += txt(r.x, 100, r.back, { fs: 14, fw: 900, fill: r.c });
+    });
+    s += txt(320, 142, '歇后语分两部分：前半是谜面，后半是谜底', { fs: 13, fill: MUT });
+    return s + '</svg>';
+  };
+
+  /* 俗语与谚语 */
+  const suyuYanyu = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 150">`;
+    s += `<rect width="640" height="150" fill="#fdf9f2"/>`;
+    const sayings = [
+      { x: 130, icon: '🌱', text: '瑞雪兆丰年', c: GREEN },
+      { x: 320, icon: '🐜', text: '蚂蚁搬家蛇过道', c: ORANGE },
+      { x: 510, icon: '☔', text: '大雨不久要来到', c: BLUE },
+    ];
+    sayings.forEach(sy => {
+      s += `<rect x="${sy.x - 80}" y="32" width="160" height="84" rx="12" fill="#fff" stroke="${sy.c}" stroke-width="2"/>`;
+      s += `<text x="${sy.x}" y="64" font-size="28" text-anchor="middle">${sy.icon}</text>`;
+      s += txt(sy.x, 92, sy.text, { fs: 13, fw: 800, fill: INK });
+    });
+    s += txt(320, 142, '谚语来自生活经验，朗朗上口又实用', { fs: 13, fill: MUT });
+    return s + '</svg>';
+  };
+
+  /* 名句和作者对对号 */
+  const mingjuAuthor = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 160">`;
+    s += `<rect width="640" height="160" fill="#f8f9fc"/>`;
+    const pairs = [
+      { x: 120, line: '海内存知己', author: '王勃', c: RED },
+      { x: 320, line: '春眠不觉晓', author: '孟浩然', c: GREEN },
+      { x: 520, line: '举头望明月', author: '李白', c: BLUE },
+    ];
+    pairs.forEach(p => {
+      s += `<rect x="${p.x - 80}" y="26" width="160" height="108" rx="12" fill="#fff" stroke="${p.c}" stroke-width="2"/>`;
+      s += txt(p.x, 54, '「' + p.line + '」', { fs: 14, fw: 800, fill: INK });
+      s += `<line x1="${p.x - 40}" y1="72" x2="${p.x + 40}" y2="72" stroke="${p.c}" stroke-width="1.5" stroke-dasharray="4 3"/>`;
+      s += txt(p.x, 96, '——', { fs: 14, fill: MUT });
+      s += txt(p.x, 118, p.author, { fs: 15, fw: 900, fill: p.c });
+    });
+    s += txt(320, 152, '读名句要记住作者，考试常考连线题', { fs: 13, fill: MUT });
+    return s + '</svg>';
+  };
+
+  /* 现代作家：老舍 */
+  const laoshe = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 150">`;
+    s += `<rect width="640" height="150" fill="#fdf9f2"/>`;
+    s += `<circle cx="120" cy="60" r="36" fill="${GOLD}22" stroke="${GOLD}" stroke-width="2"/>`;
+    s += txt(120, 66, '舒', { fill: GOLD, fs: 22, fw: 900 });
+    s += txt(120, 108, '老舍', { fs: 16, fw: 900 });
+    s += txt(120, 126, '原名舒庆春', { fs: 11, fill: MUT });
+    const works = [['《骆驼祥子》', '人力车夫的悲剧'], ['《茶馆》', '北京裕泰茶馆'], ['《四世同堂》', '抗战北平百姓']];
+    works.forEach((w, i) => {
+      s += `<rect x="240" y="${32 + i * 36}" width="360" height="28" rx="8" fill="#fff" stroke="${GOLD}" stroke-width="1.5"/>`;
+      s += txt(256, 52 + i * 36, w[0], { anchor: 'start', fs: 13.5, fw: 900, fill: GOLD });
+      s += txt(420, 52 + i * 36, w[1], { anchor: 'start', fs: 12, fill: MUT });
+    });
+    s += txt(320, 142, '「人民艺术家」，作品多写北京普通市民生活', { fs: 13, fill: MUT });
+    return s + '</svg>';
+  };
+
+  /* 现代作家：冰心 */
+  const bingxin = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 150">`;
+    s += `<rect width="640" height="150" fill="#f4f8fd"/>`;
+    s += `<circle cx="120" cy="60" r="36" fill="${BLUE}22" stroke="${BLUE}" stroke-width="2"/>`;
+    s += `<text x="120" y="70" font-size="28" text-anchor="middle">💙</text>`;
+    s += txt(120, 108, '冰心', { fs: 16, fw: 900, fill: BLUE });
+    s += txt(120, 126, '原名谢婉莹', { fs: 11, fill: MUT });
+    const works = [['《繁星》《春水》', '小诗·歌颂母爱自然'], ['《寄小读者》', '写给小朋友的通讯'], ['《小桔灯》', '小姑娘的镇定勇敢']];
+    works.forEach((w, i) => {
+      s += `<rect x="240" y="${32 + i * 36}" width="360" height="28" rx="8" fill="#fff" stroke="${BLUE}" stroke-width="1.5"/>`;
+      s += txt(256, 52 + i * 36, w[0], { anchor: 'start', fs: 13.5, fw: 900, fill: BLUE });
+      s += txt(430, 52 + i * 36, w[1], { anchor: 'start', fs: 12, fill: MUT });
+    });
+    s += txt(320, 142, '冰心的作品充满「爱的哲学」：爱母亲、爱儿童、爱自然', { fs: 13, fill: MUT });
+    return s + '</svg>';
+  };
+
+  /* 现代作家：叶圣陶 */
+  const yeshengtao = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 150">`;
+    s += `<rect width="640" height="150" fill="#f4f8ec"/>`;
+    s += `<circle cx="120" cy="60" r="36" fill="${GREEN}22" stroke="${GREEN}" stroke-width="2"/>`;
+    s += txt(120, 66, '叶', { fill: GREEN, fs: 22, fw: 900 });
+    s += txt(120, 108, '叶圣陶', { fs: 16, fw: 900, fill: GREEN });
+    s += txt(120, 126, '作家·教育家', { fs: 11, fill: MUT });
+    const works = [['《稻草人》', '中国第一部童话集'], ['《荷花》', '入选小学语文课本'], ['《倪焕之》', '长篇小说·教育']];
+    works.forEach((w, i) => {
+      s += `<rect x="240" y="${32 + i * 36}" width="360" height="28" rx="8" fill="#fff" stroke="${GREEN}" stroke-width="1.5"/>`;
+      s += txt(256, 52 + i * 36, w[0], { anchor: 'start', fs: 13.5, fw: 900, fill: GREEN });
+      s += txt(420, 52 + i * 36, w[1], { anchor: 'start', fs: 12, fill: MUT });
+    });
+    s += txt(320, 142, '叶圣陶也是语文教育家，编写过很多语文教材', { fs: 13, fill: MUT });
+    return s + '</svg>';
+  };
+
+  /* 安徒生与格林童话 */
+  const andersenGrimm = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 150">`;
+    s += `<rect width="640" height="150" fill="#fbf7fc"/>`;
+    s += `<rect x="30" y="24" width="270" height="100" rx="12" fill="#fff" stroke="${PURPLE}" stroke-width="2"/>`;
+    s += txt(165, 48, '安徒生〔丹麦〕', { fill: PURPLE, fs: 15, fw: 900 });
+    ['《卖火柴的小女孩》', '《丑小鸭》', '《海的女儿》'].forEach((w, i) =>
+      s += txt(165, 70 + i * 18, '📖 ' + w, { fs: 12.5, fill: INK }));
+    s += `<rect x="340" y="24" width="270" height="100" rx="12" fill="#fff" stroke="${RED}" stroke-width="2"/>`;
+    s += txt(475, 48, '格林兄弟〔德国〕', { fill: RED, fs: 15, fw: 900 });
+    ['《白雪公主》', '《小红帽》', '《灰姑娘》'].forEach((w, i) =>
+      s += txt(475, 70 + i * 18, '📖 ' + w, { fs: 12.5, fill: INK }));
+    s += txt(320, 142, '安徒生原创童话，格林兄弟收集整理民间童话', { fs: 13, fill: MUT });
+    return s + '</svg>';
+  };
+
   /* ---------- 注册表 ---------- */
   const REG = {
+    /* 原有图示 */
     'lit-genres': genres,
     'lit-myths': myths,
     'lit-duilian': duilian,
@@ -587,6 +1089,40 @@ const LitFigures = (() => {
     'lit-aliases': aliases,
     'lit-four-treasures': fourTreasures,
     'demo-lit-zodiac': demoZodiac,
+    /* 文学苑横幅 */
+    'lit-bn-lu1': litBanners['lit-bn-lu1'],
+    'lit-bn-lu2': litBanners['lit-bn-lu2'],
+    'lit-bn-lu3': litBanners['lit-bn-lu3'],
+    'lit-bn-lu4': litBanners['lit-bn-lu4'],
+    'lit-bn-lu5': litBanners['lit-bn-lu5'],
+    'lit-bn-lu6': litBanners['lit-bn-lu6'],
+    'lit-bn-lu7': litBanners['lit-bn-lu7'],
+    'lit-bn-lu8': litBanners['lit-bn-lu8'],
+    /* 补充知识点图示 */
+    'lit-what-is-lit': whatIsLit,
+    'lit-fable': fable,
+    'lit-jueju-lushi': juejuLushi,
+    'lit-shijing-chuci': shijingChuci,
+    'lit-tang-song-yuan': tangSongYuan,
+    'lit-xiyou': xiyou,
+    'lit-sanguo': sanguo,
+    'lit-shuihu': shuihu,
+    'lit-honglou': honglou,
+    'lit-sansu': sansu,
+    'lit-tangsong-bada': tangsongBada,
+    'lit-laoshe': laoshe,
+    'lit-bingxin': bingxin,
+    'lit-yeshengtao': yeshengtao,
+    'lit-andersen-grimm': andersenGrimm,
+    'lit-qian-jing': qianJing,
+    'lit-mingju-author': mingjuAuthor,
+    'lit-idiom-story': idiomStory,
+    'lit-suyu-yanyu': suyuYanyu,
+    'lit-xiehouyu': xiehouyu,
+    'lit-poetry-numbers': poetryNumbers,
+    'lit-diligence': diligence,
+    'lit-sishu-wujing': sishuWujing,
+    'lit-imagery': imagery,
   };
 
   const DEFAULT_CAPS = {
@@ -607,6 +1143,34 @@ const LitFigures = (() => {
     'lit-aliases': '美好的代称：杏林、杏坛、梨园、桑梓、桃李',
     'lit-four-treasures': '文房四宝：湖笔、徽墨、宣纸、端砚最有名',
     'demo-lit-zodiac': '互动演示：点生肖，看它的地支和对应的时辰',
+    /* 横幅不需要说明 */
+    'lit-bn-lu1': '', 'lit-bn-lu2': '', 'lit-bn-lu3': '', 'lit-bn-lu4': '',
+    'lit-bn-lu5': '', 'lit-bn-lu6': '', 'lit-bn-lu7': '', 'lit-bn-lu8': '',
+    /* 补充知识点说明 */
+    'lit-what-is-lit': '文学用语言文字创造美，诗歌、散文、小说、戏剧是四大体裁',
+    'lit-fable': '寓言用故事讲道理，很多成语就来自寓言和历史故事',
+    'lit-jueju-lushi': '绝句四句、律诗八句；律诗的颔联和颈联必须对仗',
+    'lit-shijing-chuci': '《诗经》是最早的诗歌总集，《楚辞》开创浪漫主义，并称「风骚」',
+    'lit-tang-song-yuan': '一代有一代之文学：唐之诗、宋之词、元之曲',
+    'lit-xiyou': '《西游记》：师徒四人历经九九八十一难，西天取经',
+    'lit-sanguo': '《三国演义》：魏蜀吴三分天下，最终归于晋',
+    'lit-shuihu': '《水浒传》：一百零八位好汉聚义梁山泊，替天行道',
+    'lit-honglou': '《红楼梦》：曹雪芹写贾府兴衰，又名《石头记》',
+    'lit-sansu': '苏洵、苏轼、苏辙父子三人，合称「三苏」，都在唐宋八大家之列',
+    'lit-tangsong-bada': '唐宋八大家：唐有韩愈、柳宗元，宋有欧阳修、三苏、王安石、曾巩',
+    'lit-laoshe': '老舍原名舒庆春，「人民艺术家」，代表作《骆驼祥子》《茶馆》',
+    'lit-bingxin': '冰心原名谢婉莹，作品歌颂母爱、童心和自然',
+    'lit-yeshengtao': '叶圣陶是作家也是语文教育家，《稻草人》是第一部童话集',
+    'lit-andersen-grimm': '丹麦安徒生原创童话，德国格林兄弟收集整理民间童话',
+    'lit-qian-jing': '说自己用谦称（愚、鄙人），说别人用敬称（君、阁下）',
+    'lit-mingju-author': '读名句要记住作者，考试常考名句与作者的连线题',
+    'lit-idiom-story': '很多成语背后都有一段历史故事，如卧薪尝胆、完璧归赵',
+    'lit-suyu-yanyu': '谚语来自生活经验，朗朗上口又实用，如「瑞雪兆丰年」',
+    'lit-xiehouyu': '歇后语分两部分：前半是谜面，后半是谜底',
+    'lit-poetry-numbers': '古诗里的数字多是虚指，用来表示「多」或「少」',
+    'lit-diligence': '古人勤学的故事：凿壁偷光、悬梁刺股、囊萤映雪、牛角挂书',
+    'lit-sishu-wujing': '四书：《大学》《中庸》《论语》《孟子》；五经：诗书礼易春秋',
+    'lit-imagery': '诗人借物抒情：月亮思乡、落叶悲秋、鸿雁传书、落花伤春、杨柳送别',
   };
 
   function figHTML(id, cap) {

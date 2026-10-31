@@ -336,6 +336,325 @@ const HistoryFigures = (() => {
     return s + '</svg>';
   };
 
+  /* ================= 走进历史：公元与世纪 ================= */
+  /* 公元前倒着数，公元顺着数；百年一世纪 */
+  const adEra = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 210">`;
+    /* 轴线 */
+    s += `<line x1="40" y1="110" x2="600" y2="110" stroke="${MUT}" stroke-width="2.5"/>`;
+    s += `<polygon points="600,110 588,104 588,116" fill="${MUT}"/>`;
+    s += `<line x1="320" y1="100" x2="320" y2="120" stroke="${RED}" stroke-width="3"/>`;
+    s += txt(320, 92, '公元元年', { fs: 13, fill: RED, fw: 900 });
+    s += txt(320, 138, '（没有公元 0 年）', { fs: 11.5, fill: MUT });
+    /* 公元前刻度（倒着数） */
+    const bcYears = [['前300', 80], ['前221', 140], ['前200', 190], ['前100', 260]];
+    bcYears.forEach(([label, x]) => {
+      s += `<line x1="${x}" y1="104" x2="${x}" y2="116" stroke="${MUT}" stroke-width="2"/>`;
+      s += txt(x, 152, label, { fs: 12.5, fill: '#c45a4a' });
+    });
+    s += arrow(190, 100, 80, 100, '#c45a4a');
+    s += txt(130, 70, '公元前：数字越大越早', { fs: 13, fill: '#c45a4a', fw: 700 });
+    /* 公元刻度（顺着数） */
+    const adYears = [['100', 380], ['618', 470], ['1405', 540], ['2024', 590]];
+    adYears.forEach(([label, x]) => {
+      s += `<line x1="${x}" y1="104" x2="${x}" y2="116" stroke="${MUT}" stroke-width="2"/>`;
+      s += txt(x, 152, label, { fs: 12.5, fill: '#2a7a52' });
+    });
+    s += arrow(450, 100, 560, 100, '#2a7a52');
+    s += txt(505, 70, '公元：数字越大越晚', { fs: 13, fill: '#2a7a52', fw: 700 });
+    /* 世纪说明 */
+    s += `<rect x="40" y="172" width="560" height="28" rx="14" fill="#f6efe2" stroke="${GOLD}" stroke-width="1.5"/>`;
+    s += txt(320, 191, '💡 一百年 = 一个世纪：618 年是 7 世纪，2024 年是 21 世纪', { fs: 14, fill: BRONZE, fw: 700 });
+    return s + '</svg>';
+  };
+
+  /* ================= 上古传说：大禹治水（堵 vs 疏导） ================= */
+  const yuFlood = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 210">`;
+    /* 左：鲧用堵 */
+    s += `<rect x="20" y="20" width="280" height="150" rx="14" fill="#fdecea" stroke="#e4b6b2" stroke-width="1.5"/>`;
+    s += txt(160, 48, '鲧：围堵（失败）', { fs: 16, fw: 900, fill: '#a4453f' });
+    /* 堤坝 */
+    s += `<rect x="50" y="120" width="220" height="14" fill="#a89e8c" stroke="#857c6c" stroke-width="2"/>`;
+    for (let i = 0; i < 6; i++) s += `<rect x="${60 + i * 36}" y="108" width="22" height="14" fill="#857c6c"/>`;
+    /* 水涨高 */
+    s += `<path d="M50,120 Q90,110 130,120 T210,120 T270,120 L270,100 Q230,90 190,100 T110,100 T50,100 Z" fill="#9cc8e8" opacity=".85"/>`;
+    s += `<path d="M50,100 Q90,90 130,100 T210,100 T270,100 L270,80 Q230,72 190,80 T110,80 T50,80 Z" fill="#7fb6dd" opacity=".8"/>`;
+    s += txt(160, 70, '水越堵越高', { fs: 13, fill: '#a4453f', fw: 700 });
+    /* 右：禹用疏导 */
+    s += `<rect x="340" y="20" width="280" height="150" rx="14" fill="#e9f9f0" stroke="#bfe5cc" stroke-width="1.5"/>`;
+    s += txt(480, 48, '禹：疏导（成功）', { fs: 16, fw: 900, fill: '#187749' });
+    /* 河道 */
+    s += `<path d="M360,130 Q400,110 440,130 T520,130 T600,130" fill="none" stroke="#4d96ff" stroke-width="10" stroke-linecap="round"/>`;
+    s += `<path d="M360,130 Q400,110 440,130 T520,130 T600,130" fill="none" stroke="#7fb6dd" stroke-width="5" stroke-linecap="round"/>`;
+    s += `<path d="M360,130 Q400,110 440,130 T520,130 T600,130" fill="none" stroke="#bfe0f5" stroke-width="2" stroke-linecap="round" stroke-dasharray="6 8"/>`;
+    /* 流向海的箭头 */
+    s += arrow(560, 110, 596, 110, '#2a7a52');
+    s += txt(580, 98, '海', { fs: 14, fw: 900, fill: '#187749' });
+    s += txt(480, 70, '挖渠引水入大海', { fs: 13, fill: '#187749', fw: 700 });
+    s += txt(320, 196, '治水要顺着水性：堵不如疏', { fs: 14, fill: MUT, fw: 700 });
+    return s + '</svg>';
+  };
+
+  /* ================= 夏商西周：分封制金字塔 ================= */
+  const enfeoffment = () => {
+    const levels = [
+      { name: '天子', sub: '周王', color: '#c2557d', y: 30, w: 120 },
+      { name: '诸侯', sub: '分封亲属、功臣', color: '#e2a63a', y: 78, w: 240 },
+      { name: '卿大夫', sub: '诸侯再分封', color: '#2f9bd6', y: 126, w: 360 },
+      { name: '士', sub: '最低贵族阶层', color: '#2fbf71', y: 174, w: 480 },
+    ];
+    let s = `<svg class="fig-svg" viewBox="0 0 640 230">`;
+    levels.forEach(l => {
+      const x = 320 - l.w / 2;
+      s += `<rect x="${x}" y="${l.y}" width="${l.w}" height="40" rx="8" fill="${l.color}" opacity=".15"/>`;
+      s += `<rect x="${x}" y="${l.y}" width="${l.w}" height="40" rx="8" fill="none" stroke="${l.color}" stroke-width="2.5"/>`;
+      s += txt(320, l.y + 26, l.name, { fs: 18, fw: 900, fill: l.color });
+      s += txt(x + l.w - 70, l.y + 26, l.sub, { fs: 11.5, fill: MUT, anchor: 'end' });
+    });
+    s += `<line x1="320" y1="70" x2="320" y2="78" stroke="${MUT}" stroke-width="2"/>`;
+    s += `<line x1="320" y1="118" x2="320" y2="126" stroke="${MUT}" stroke-width="2"/>`;
+    s += `<line x1="320" y1="166" x2="320" y2="174" stroke="${MUT}" stroke-width="2"/>`;
+    s += txt(320, 222, '分封制：层层分封，靠血缘和忠诚维系（「封建」本义）', { fs: 13.5, fill: MUT, fw: 700 });
+    return s + '</svg>';
+  };
+
+  /* ================= 春秋战国：都江堰结构 ================= */
+  const dujiangyan = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 210">`;
+    /* 岷江 */
+    s += `<path d="M0,100 Q120,80 240,100 T480,100 T640,100 L640,210 L0,210 Z" fill="#d9edf8"/>`;
+    s += `<path d="M0,100 Q120,80 240,100 T480,100 T640,100" fill="none" stroke="#7fb6dd" stroke-width="3"/>`;
+    s += txt(20, 92, '岷江', { fs: 13, fill: '#2f6fa3', fw: 700, anchor: 'start' });
+    /* 鱼嘴分水堤 */
+    s += `<path d="M160,100 Q200,80 260,100" fill="none" stroke="#a89e8c" stroke-width="10" stroke-linecap="round"/>`;
+    s += `<path d="M160,100 Q200,80 260,100" fill="none" stroke="#c3bbab" stroke-width="5" stroke-linecap="round"/>`;
+    s += txt(210, 74, '鱼嘴', { fs: 13, fw: 900, fill: '#6d6252' });
+    s += arrow(210, 80, 210, 92, '#6d6252');
+    /* 内江（灌溉）与外江（排洪） */
+    s += txt(120, 130, '外江（排洪）', { fs: 11.5, fill: '#2f6fa3' });
+    s += txt(300, 130, '内江（灌溉）', { fs: 11.5, fill: '#2a7a52' });
+    s += arrow(120, 118, 200, 118, '#2f6fa3');
+    s += arrow(300, 118, 420, 118, '#2a7a52');
+    /* 飞沙堰 */
+    s += `<rect x="340" y="100" width="70" height="10" rx="3" fill="#c98a3d" stroke="#a3722e" stroke-width="2"/>`;
+    s += txt(375, 92, '飞沙堰', { fs: 11.5, fw: 700, fill: '#a3722e' });
+    s += txt(375, 150, '溢洪排沙', { fs: 11, fill: MUT });
+    /* 宝瓶口 */
+    s += `<rect x="500" y="96" width="10" height="20" fill="#8a6a33"/>`;
+    s += `<rect x="500" y="96" width="10" height="20" fill="none" stroke="#6d4520" stroke-width="1.5"/>`;
+    s += txt(540, 108, '宝瓶口', { fs: 12, fw: 900, fill: '#6d4520', anchor: 'start' });
+    s += txt(540, 126, '引水入成都平原', { fs: 11, fill: MUT, anchor: 'start' });
+    s += arrow(510, 140, 540, 160, '#2a7a52');
+    s += txt(320, 192, '无坝引水：鱼嘴分水、飞沙堰排沙、宝瓶口控水', { fs: 13.5, fill: MUT, fw: 700 });
+    return s + '</svg>';
+  };
+
+  /* ================= 秦汉：秦始皇统一 ================= */
+  const qinUnify = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 210">`;
+    const items = [
+      { label: '文字', before: '馬 馬 馬', after: '小篆「馬」', color: '#c2557d' },
+      { label: '货币', before: '刀币·布币·圜钱', after: '半两钱', color: '#e2a63a' },
+      { label: '度量衡', before: '各地长短不一', after: '统一标准', color: '#2f9bd6' },
+    ];
+    items.forEach((it, i) => {
+      const y = 18 + i * 64;
+      s += `<rect x="20" y="${y}" width="600" height="54" rx="12" fill="#fafbfe" stroke="${it.color}" stroke-width="1.5"/>`;
+      s += `<rect x="20" y="${y}" width="6" height="54" rx="3" fill="${it.color}"/>`;
+      s += txt(48, y + 34, it.label, { fs: 17, fw: 900, fill: it.color, anchor: 'start' });
+      /* before */
+      s += `<rect x="120" y="${y + 12}" width="200" height="30" rx="8" fill="#fdecea"/>`;
+      s += txt(220, y + 32, it.before, { fs: 13, fill: '#a4453f' });
+      /* arrow */
+      s += arrow(330, y + 27, 380, y + 27, it.color);
+      s += txt(355, y + 16, '统一', { fs: 11, fill: it.color });
+      /* after */
+      s += `<rect x="396" y="${y + 12}" width="210" height="30" rx="8" fill="#e9f9f0"/>`;
+      s += txt(501, y + 32, it.after, { fs: 13, fill: '#187749', fw: 700 });
+    });
+    s += txt(320, 198, '书同文、车同轨、统一度量衡——全国政令畅通', { fs: 13.5, fill: MUT, fw: 700 });
+    return s + '</svg>';
+  };
+
+  /* ================= 秦汉：蔡伦造纸流程 ================= */
+  const papermaking = () => {
+    const steps = [
+      { icon: '🌲', name: '原料', sub: '树皮·麻头·破布·旧渔网', color: '#7ba05b' },
+      { icon: '💧', name: '浸泡·舂捣', sub: '加水捣烂成浆', color: '#2f9bd6' },
+      { icon: '🪵', name: '抄纸', sub: '竹帘捞出薄层', color: '#8a6a33' },
+      { icon: '☀️', name: '晾晒', sub: '揭下烘干即成纸', color: '#e2a63a' },
+    ];
+    let s = `<svg class="fig-svg" viewBox="0 0 640 200">`;
+    steps.forEach((st, i) => {
+      const x = 20 + i * 154;
+      s += `<rect x="${x}" y="20" width="138" height="120" rx="14" fill="#fafbfe" stroke="${st.color}" stroke-width="2"/>`;
+      s += txt(x + 69, 62, st.icon, { fs: 34 });
+      s += txt(x + 69, 92, st.name, { fs: 15, fw: 900, fill: st.color });
+      s += txt(x + 69, 114, st.sub, { fs: 11, fill: MUT });
+      if (i < 3) s += arrow(x + 140, 80, x + 150, 80, st.color);
+    });
+    s += txt(320, 166, '蔡伦造纸（105 年）：又轻又便宜，取代竹简和丝帛', { fs: 14, fill: MUT, fw: 700 });
+    s += txt(320, 188, '造纸术外传阿拉伯、欧洲，推动世界文化传播', { fs: 12, fill: MUT });
+    return s + '</svg>';
+  };
+
+  /* ================= 三国两晋：祖冲之与圆周率 ================= */
+  const piCircle = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 200">`;
+    /* 圆 */
+    s += `<circle cx="140" cy="100" r="72" fill="none" stroke="#2f9bd6" stroke-width="3"/>`;
+    /* 内接正多边形示意（虚线） */
+    const pts = [];
+    for (let i = 0; i < 12; i++) {
+      const a = (i / 12) * Math.PI * 2 - Math.PI / 2;
+      pts.push(`${140 + 72 * Math.cos(a)},${100 + 72 * Math.sin(a)}`);
+    }
+    s += `<polygon points="${pts.join(' ')}" fill="none" stroke="#7ba05b" stroke-width="1.5" stroke-dasharray="4 4" opacity=".7"/>`;
+    /* 直径 */
+    s += `<line x1="68" y1="100" x2="212" y2="100" stroke="${RED}" stroke-width="2.5"/>`;
+    s += txt(140, 92, '直径 d', { fs: 12, fill: RED });
+    s += txt(140, 188, '割圆术：多边形边数越多，越接近圆', { fs: 12.5, fill: MUT });
+    /* 右侧说明 */
+    s += txt(340, 50, '圆周率 π = 周长 ÷ 直径', { fs: 16, fw: 900, anchor: 'start' });
+    s += txt(340, 80, '祖冲之算出：', { fs: 14, fill: MUT, anchor: 'start' });
+    s += `<rect x="340" y="92" width="270" height="32" rx="8" fill="#e9f9f0" stroke="#2fbf71" stroke-width="1.5"/>`;
+    s += txt(475, 113, '3.1415926 ～ 3.1415927', { fs: 16, fw: 900, fill: '#187749' });
+    s += txt(340, 144, '领先世界近 1000 年！', { fs: 14, fill: GOLD, fw: 800, anchor: 'start' });
+    s += txt(340, 168, '密率 355/113，约率 22/7', { fs: 12.5, fill: MUT, anchor: 'start' });
+    return s + '</svg>';
+  };
+
+  /* ================= 隋唐：玄奘西行 vs 鉴真东渡 ================= */
+  const xuanzangJianzhen = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 200">`;
+    /* 中央：唐朝 */
+    s += `<circle cx="320" cy="100" r="44" fill="#fff3d8" stroke="#e2a63a" stroke-width="2.5"/>`;
+    s += txt(320, 96, '唐朝', { fs: 20, fw: 900, fill: '#8a6a33' });
+    s += txt(320, 116, '长安', { fs: 13, fill: MUT });
+    /* 左：天竺 */
+    s += `<circle cx="90" cy="100" r="40" fill="#ede7ff" stroke="#9b5de5" stroke-width="2"/>`;
+    s += txt(90, 96, '天竺', { fs: 16, fw: 900, fill: '#77589c' });
+    s += txt(90, 114, '今印度', { fs: 11.5, fill: MUT });
+    /* 右：日本 */
+    s += `<circle cx="550" cy="100" r="40" fill="#ffe8ed" stroke="#c28097" stroke-width="2"/>`;
+    s += txt(550, 96, '日本', { fs: 16, fw: 900, fill: '#a25470' });
+    s += txt(550, 114, '奈良', { fs: 11.5, fill: MUT });
+    /* 玄奘西行 */
+    s += arrow(130, 78, 276, 78, '#9b5de5');
+    s += txt(203, 64, '玄奘西行求法', { fs: 13, fw: 700, fill: '#77589c' });
+    s += txt(203, 84, '《大唐西域记》', { fs: 11, fill: MUT });
+    /* 鉴真东渡 */
+    s += arrow(364, 122, 510, 122, '#c28097');
+    s += txt(437, 116, '鉴真东渡传法', { fs: 13, fw: 700, fill: '#a25470' });
+    s += txt(437, 138, '六次东渡·双目失明', { fs: 11, fill: MUT });
+    s += txt(320, 178, '一去一回，都是中外文化交流的佳话', { fs: 13.5, fill: MUT, fw: 700 });
+    return s + '</svg>';
+  };
+
+  /* ================= 宋元：岳飞精忠报国 ================= */
+  const yuefei = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 200">`;
+    /* 岳飞跪坐背影 */
+    s += `<ellipse cx="220" cy="150" rx="70" ry="20" fill="#ede7ff" opacity=".6"/>`;
+    /* 身体 */
+    s += `<path d="M170,150 L170,90 Q220,70 270,90 L270,150 Z" fill="#5a6b8a" stroke="#3d4a63" stroke-width="2"/>`;
+    /* 头 */
+    s += `<circle cx="220" cy="64" r="22" fill="#f0d9b5" stroke="#c9a96e" stroke-width="2"/>`;
+    /* 发髻 */
+    s += `<path d="M206,46 Q220,34 234,46" fill="none" stroke="#3d4a63" stroke-width="5" stroke-linecap="round"/>`;
+    /* 背上刺字 */
+    s += txt(220, 118, '精忠', { fs: 16, fw: 900, fill: RED });
+    s += txt(220, 138, '报国', { fs: 16, fw: 900, fill: RED });
+    /* 岳母持针 */
+    s += `<circle cx="360" cy="90" r="18" fill="#f0d9b5" stroke="#c9a96e" stroke-width="2"/>`;
+    s += `<path d="M352,72 Q360,60 368,72" fill="none" stroke="#7a5b18" stroke-width="4" stroke-linecap="round"/>`;
+    s += `<line x1="342" y1="90" x2="290" y2="110" stroke="#7a5b18" stroke-width="3" stroke-linecap="round"/>`;
+    s += `<circle cx="290" cy="110" r="3" fill="#7a5b18"/>`;
+    /* 右侧文字 */
+    s += txt(460, 56, '岳母刺字', { fs: 18, fw: 900, anchor: 'start' });
+    s += txt(460, 82, '「尽忠报国」', { fs: 15, fill: RED, fw: 700, anchor: 'start' });
+    [['郾城大败金军', INK], ['冻死不拆屋，饿死不掳掠', MUT], ['「莫须有」冤狱', RED], ['杭州岳王庙纪念', MUT]].forEach((it, i) => {
+      s += `<circle cx="468" cy="${104 + i * 20}" r="3" fill="${it[1]}"/>`;
+      s += txt(478, 108 + i * 20, it[0], { fs: 12.5, fill: it[1], anchor: 'start' });
+    });
+    s += txt(320, 190, '「青山有幸埋忠骨，白铁无辜铸佞臣」', { fs: 13, fill: MUT, fw: 700 });
+    return s + '</svg>';
+  };
+
+  /* ================= 宋元：元朝行省制度 ================= */
+  const province = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 200">`;
+    /* 中央 */
+    s += `<rect x="260" y="20" width="120" height="48" rx="10" fill="#8b65c9" opacity=".15"/>`;
+    s += `<rect x="260" y="20" width="120" height="48" rx="10" fill="none" stroke="#8b65c9" stroke-width="2.5"/>`;
+    s += txt(320, 42, '中书省', { fs: 16, fw: 900, fill: '#77589c' });
+    s += txt(320, 60, '中央', { fs: 11, fill: MUT });
+    /* 行省 */
+    const provinces = ['岭北', '辽阳', '甘肃', '陕西', '河南', '四川', '云南', '湖广', '江浙', '江西'];
+    provinces.forEach((p, i) => {
+      const row = Math.floor(i / 5);
+      const col = i % 5;
+      const x = 40 + col * 120;
+      const y = 110 + row * 48;
+      s += `<rect x="${x}" y="${y}" width="104" height="36" rx="8" fill="#dff1fb" stroke="#2f9bd6" stroke-width="1.5"/>`;
+      s += txt(x + 52, y + 23, p, { fs: 14, fw: 700, fill: '#2767a8' });
+      s += arrow(320, 68, x + 52, 108, '#9bb8d8');
+    });
+    s += txt(320, 188, '行省制度：中央派官管理地方，「省」的名称沿用至今', { fs: 13.5, fill: MUT, fw: 700 });
+    return s + '</svg>';
+  };
+
+  /* ================= 秦汉：司马迁与《史记》 ================= */
+  const shiji = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 200">`;
+    /* 卷轴 */
+    s += `<rect x="100" y="60" width="300" height="100" rx="4" fill="#f5ecd7" stroke="#c9b98a" stroke-width="2"/>`;
+    /* 卷轴两端 */
+    s += `<rect x="92" y="52" width="16" height="116" rx="4" fill="#8a6a33" stroke="#6d4520" stroke-width="1.5"/>`;
+    s += `<rect x="392" y="52" width="16" height="116" rx="4" fill="#8a6a33" stroke="#6d4520" stroke-width="1.5"/>`;
+    /* 文字行 */
+    for (let i = 0; i < 5; i++) {
+      s += `<line x1="116" y1="${80 + i * 16}" x2="384" y2="${80 + i * 16}" stroke="#8a6a33" stroke-width="2" opacity=".5"/>`;
+    }
+    s += txt(250, 118, '《史记》', { fs: 24, fw: 900, fill: '#8a6a33' });
+    s += txt(250, 142, '司马迁 · 纪传体通史', { fs: 13, fill: MUT });
+    /* 右侧要点 */
+    s += txt(470, 56, '史家之绝唱', { fs: 16, fw: 900, fill: '#c2557d', anchor: 'start' });
+    s += txt(470, 76, '无韵之《离骚》', { fs: 13, fill: MUT, anchor: 'start' });
+    [['黄帝 → 汉武帝，约三千年', INK], ['共 130 篇', INK], ['以人物传记为中心', INK], ['鲁迅评语', MUT]].forEach((it, i) => {
+      s += `<circle cx="478" cy="${98 + i * 20}" r="3" fill="${it[1]}"/>`;
+      s += txt(488, 102 + i * 20, it[0], { fs: 12, fill: it[1], anchor: 'start' });
+    });
+    s += txt(320, 188, '「人固有一死，或重于泰山，或轻于鸿毛」', { fs: 13, fill: MUT, fw: 700 });
+    return s + '</svg>';
+  };
+
+  /* ================= 三国两晋：王羲之与墨池 ================= */
+  const wangxizhi = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 200">`;
+    /* 墨池 */
+    s += `<ellipse cx="150" cy="140" rx="110" ry="36" fill="#2a2a3a" opacity=".85"/>`;
+    s += `<ellipse cx="150" cy="136" rx="110" ry="36" fill="#1a1a2a" opacity=".7"/>`;
+    s += txt(150, 140, '墨池', { fs: 18, fw: 900, fill: '#fff' });
+    s += txt(150, 176, '洗笔把池水染黑', { fs: 12, fill: MUT });
+    /* 笔 */
+    s += `<line x1="100" y1="100" x2="200" y2="120" stroke="#8a6a33" stroke-width="6" stroke-linecap="round"/>`;
+    s += `<path d="M200,120 L216,128 L200,136 Z" fill="#1a1a2a"/>`;
+    /* 右侧：兰亭集序 */
+    s += `<rect x="320" y="30" width="280" height="140" rx="8" fill="#faf6ec" stroke="#c9b98a" stroke-width="2"/>`;
+    s += txt(460, 60, '《兰亭集序》', { fs: 18, fw: 900, fill: '#8a6a33' });
+    s += txt(460, 82, '天下第一行书', { fs: 13, fill: MUT });
+    /* 之字各不相同 */
+    s += txt(380, 118, '之', { fs: 22, fw: 900, fill: '#34384d' });
+    s += txt(430, 118, '之', { fs: 22, fw: 900, fill: '#34384d' });
+    s += txt(480, 118, '之', { fs: 22, fw: 900, fill: '#34384d' });
+    s += txt(530, 118, '之', { fs: 22, fw: 900, fill: '#34384d' });
+    s += txt(460, 148, '二十多个「之」字写法各不相同', { fs: 11.5, fill: MUT });
+    s += txt(320, 188, '入木三分：笔力遒劲，形容见解深刻', { fs: 13.5, fill: MUT, fw: 700 });
+    return s + '</svg>';
+  };
+
   /* ================= 互动演示：朝代长河 ================= */
   const DYN = {
     xia:   { name: '夏', years: '约前 2070—前 1600', note: '我国第一个王朝，世袭制开始', color: '#c98a3d' },
@@ -393,6 +712,18 @@ const HistoryFigures = (() => {
     'history-four-inventions': fourInventions,
     'history-zhenghe': zhenghe,
     'history-palace': palace,
+    'history-ad-era': adEra,
+    'history-yu-flood': yuFlood,
+    'history-enfeoffment': enfeoffment,
+    'history-dujiangyan': dujiangyan,
+    'history-qin-unify': qinUnify,
+    'history-papermaking': papermaking,
+    'history-pi': piCircle,
+    'history-xuanzang-jianzhen': xuanzangJianzhen,
+    'history-yuefei': yuefei,
+    'history-province': province,
+    'history-shiji': shiji,
+    'history-wangxizhi': wangxizhi,
     'demo-history-timeline': demoTimeline,
   };
 
@@ -409,7 +740,41 @@ const HistoryFigures = (() => {
     'history-four-inventions': '四大发明在宋元走向成熟与应用',
     'history-zhenghe': '郑和宝船 vs 哥伦布船队：早了近一个世纪，规模大得多',
     'history-palace': '故宫太和殿：黄琉璃瓦、红墙、汉白玉台基',
+    'history-ad-era': '公元纪年数轴：公元前倒着数，公元顺着数；百年一个世纪',
+    'history-yu-flood': '大禹治水：父亲鲧用「堵」失败，禹用「疏导」成功——堵不如疏',
+    'history-enfeoffment': '西周分封制：天子→诸侯→卿大夫→士，层层分封',
+    'history-dujiangyan': '都江堰：鱼嘴分水、飞沙堰排沙、宝瓶口控水，无坝引水两千多年',
+    'history-qin-unify': '秦始皇统一：书同文、统一货币、统一度量衡',
+    'history-papermaking': '蔡伦造纸四步：原料→舂捣→抄纸→晾晒，又轻又便宜',
+    'history-pi': '祖冲之把圆周率算到小数点后第七位，领先世界近千年',
+    'history-xuanzang-jianzhen': '玄奘西行求法、鉴真东渡传法——一去一回的文化交流',
+    'history-yuefei': '岳母刺「尽忠报国」，岳飞「冻死不拆屋，饿死不掳掠」',
+    'history-province': '元朝行省制度：中书省管中央，行中书省管地方，「省」沿用至今',
+    'history-shiji': '司马迁《史记》：我国第一部纪传体通史，鲁迅赞「史家之绝唱」',
+    'history-wangxizhi': '王羲之墨池练字，《兰亭集序》被誉为「天下第一行书」',
   };
+
+  /* ---------- 真实照片图库（Wikimedia Commons 公版/CC，已下载到本地） ---------- */
+  const PHOTOS = {
+    'photo-houmuwu':     { src: 'images/history/houmuwu-ding.jpg',    cap: '后母戊鼎：我国出土最重的青铜器，重约 832.84 千克（中国国家博物馆藏）' },
+    'photo-oracle':      { src: 'images/history/oracle-bone.jpg',     cap: '商代甲骨文：刻在龟甲兽骨上的占卜记录，是已知最早的成熟汉字' },
+    'photo-greatwall':   { src: 'images/history/great-wall.jpg',      cap: '万里长城：今天保存完好的长城多为明代修建，蜿蜒于群山之巅' },
+    'photo-terracotta':  { src: 'images/history/terracotta-army.jpg', cap: '秦始皇陵兵马俑：千人千面，被誉为「世界第八大奇迹」' },
+    'photo-palace':      { src: 'images/history/forbidden-city.jpg',  cap: '北京故宫（紫禁城）：明清两代皇宫，世界现存最大木结构宫殿群' },
+    'photo-canal':       { src: 'images/history/grand-canal.jpg',     cap: '京杭大运河：古代世界最长的运河，沟通南北五大水系' },
+    'photo-dujiangyan':  { src: 'images/history/dujiangyan.jpg',      cap: '都江堰：战国李冰父子修建，无坝引水两千多年仍在使用' },
+    'photo-silkroad':    { src: 'images/history/silk-road-camel.jpg', cap: '丝绸之路：驼队沿河西走廊西行，把丝绸、瓷器带向中亚和欧洲' },
+    'photo-lanting':     { src: 'images/history/lanting-xu.jpg',      cap: '《兰亭集序》（摹本）：王羲之「天下第一行书」，二十多个「之」字各不相同' },
+    'photo-ship':        { src: 'images/history/ancient-ship.jpg',    cap: '中国古代帆船：郑和宝船长一百五十多米，是当时世界最大的海船' },
+  };
+
+  function photoHTML(id) {
+    const p = PHOTOS[id];
+    if (!p) return '';
+    return `<figure class="fig fig-photo" data-photo="${id}">` +
+      `<img class="fig-img" src="${p.src}" alt="${p.cap}" loading="lazy" onerror="this.parentElement.style.display='none'">` +
+      `<figcaption class="fig-cap">${p.cap}</figcaption></figure>`;
+  }
 
   function figHTML(id, cap) {
     const fn = REG[id];
@@ -456,13 +821,16 @@ const HistoryFigures = (() => {
 
   return {
     figHTML,
+    photoHTML,
     get FIG_IDS() { return Object.keys(REG); },
+    get PHOTO_IDS() { return Object.keys(PHOTOS); },
     has(id) { return Object.prototype.hasOwnProperty.call(REG, id); },
+    hasPhoto(id) { return Object.prototype.hasOwnProperty.call(PHOTOS, id); },
   };
 })();
 
 if (typeof module !== 'undefined' && module.exports) {
-  module.exports = { FIG_IDS: HistoryFigures.FIG_IDS, has: HistoryFigures.has };
+  module.exports = { FIG_IDS: HistoryFigures.FIG_IDS, PHOTO_IDS: HistoryFigures.PHOTO_IDS, has: HistoryFigures.has, hasPhoto: HistoryFigures.hasPhoto };
 }
 if (typeof window !== 'undefined') {
   window.HistoryFigures = HistoryFigures;

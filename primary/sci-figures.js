@@ -428,6 +428,621 @@ const SciFigures = (() => {
     return s + '</svg>';
   };
 
+  /* ================= 单元横幅 ================= */
+
+  const bnCommon = (bg1, bg2, deco) =>
+    `<svg class="fig-svg" viewBox="0 0 720 160" xmlns="http://www.w3.org/2000/svg">` +
+    `<defs><linearGradient id="bng" x1="0" y1="0" x2="1" y2="1">` +
+    `<stop offset="0%" stop-color="${bg1}"/><stop offset="100%" stop-color="${bg2}"/>` +
+    `</linearGradient></defs>` +
+    `<rect x="0" y="0" width="720" height="160" rx="14" fill="url(#bng)"/>` + deco + `</svg>`;
+
+  const bannerSu1 = () => bnCommon('#eaf4ff', '#f0faf4',
+    `<g opacity=".9">` +
+    `<circle cx="90" cy="80" r="30" fill="#fff" opacity=".25"/>` +
+    `<circle cx="90" cy="80" r="18" fill="none" stroke="#fff" stroke-width="4"/>` +
+    `<line x1="103" y1="93" x2="118" y2="108" stroke="#fff" stroke-width="5" stroke-linecap="round"/>` +
+    `<text x="150" y="70" fill="#fff" font-size="26" font-weight="900">走进科学</text>` +
+    `<text x="150" y="100" fill="#fff" font-size="14" font-weight="600" opacity=".9">观察 · 提问 · 实验 · 求证</text>` +
+    `<g font-size="22">` +
+    `<text x="560" y="60">🔬</text><text x="610" y="110">🧪</text><text x="500" y="120">📏</text>` +
+    `</g></g>` +
+    `<circle class="bn-float" cx="660" cy="40" r="4" fill="#fff" opacity=".7"/>` +
+    `<circle class="bn-float bn-d2" cx="540" cy="30" r="3" fill="#fff" opacity=".6"/>` +
+    `<circle class="bn-float bn-d3" cx="680" cy="120" r="3.5" fill="#fff" opacity=".6"/>`
+  );
+
+  const bannerSu2 = () => bnCommon('#fff2e8', '#eaf6fd',
+    `<g opacity=".9">` +
+    `<path d="M70,40 L70,110 Q70,120 80,120 L110,120 Q120,120 120,110 L120,40" fill="none" stroke="#d97745" stroke-width="4"/>` +
+    `<rect x="74" y="60" width="42" height="56" fill="#ffd9a8" opacity=".7"/>` +
+    `<circle cx="95" cy="74" r="4" fill="#fff" opacity=".8"/><circle cx="106" cy="90" r="3" fill="#fff" opacity=".7"/>` +
+    `<path d="M150,30 L150,120 L175,120 L175,40 Z" fill="none" stroke="#4d96ff" stroke-width="3.5"/>` +
+    `<rect x="153" y="70" width="20" height="48" fill="#b3d9ff" opacity=".7"/>` +
+    `<text x="210" y="70" fill="#7a3f1f" font-size="26" font-weight="900">物质与变化</text>` +
+    `<text x="210" y="100" fill="#7a3f1f" font-size="14" font-weight="600" opacity=".85">三态 · 溶解 · 物理与化学变化</text>` +
+    `<g font-size="22"><text x="560" y="60">🧊</text><text x="610" y="110">💧</text><text x="500" y="120">🔥</text></g></g>` +
+    `<circle class="bn-float" cx="660" cy="40" r="4" fill="#d97745" opacity=".5"/>` +
+    `<circle class="bn-float bn-d2" cx="540" cy="30" r="3" fill="#4d96ff" opacity=".5"/>`
+  );
+
+  const bannerSu3 = () => bnCommon('#ffeef0', '#fff5e8',
+    `<g opacity=".9">` +
+    `<line x1="60" y1="110" x2="170" y2="95" stroke="#e25563" stroke-width="6" stroke-linecap="round"/>` +
+    `<path d="M112,110 l-8,16 h16 Z" fill="#e25563"/>` +
+    `<rect x="50" y="86" width="22" height="14" rx="3" fill="#8b65c9"/>` +
+    `<rect x="160" y="76" width="20" height="20" rx="3" fill="#4d96ff"/>` +
+    `<text x="210" y="70" fill="#8a2a35" font-size="26" font-weight="900">力与运动</text>` +
+    `<text x="210" y="100" fill="#8a2a35" font-size="14" font-weight="600" opacity=".85">重力 · 浮力 · 摩擦 · 简单机械</text>` +
+    `<g font-size="22"><text x="560" y="60">⚽</text><text x="610" y="110">🎯</text><text x="500" y="120">🚴</text></g></g>` +
+    `<circle class="bn-float" cx="660" cy="40" r="4" fill="#e25563" opacity=".5"/>` +
+    `<circle class="bn-float bn-d3" cx="520" cy="130" r="3" fill="#8b65c9" opacity=".5"/>`
+  );
+
+  const bannerSu4 = () => bnCommon('#fffbe8', '#f0faff',
+    `<g opacity=".9">` +
+    `<polygon points="70,40 90,40 120,110 60,110" fill="#fff" opacity=".6" stroke="#e6b23c" stroke-width="2.5"/>` +
+    `<path d="M120,75 Q200,75 240,40 M120,82 Q200,82 240,60 M120,90 Q200,90 240,82 M120,98 Q200,98 240,104" fill="none" stroke-width="3" stroke-linecap="round">` +
+    `<animate attributeName="stroke" values="#e25563;#e6b23c;#2fbf71;#4d96ff;#8b65c9;#e25563" dur="4s" repeatCount="indefinite"/>` +
+    `</path>` +
+    `<path d="M120,75 Q200,75 240,40" stroke="#e25563" stroke-width="3" fill="none" stroke-linecap="round" opacity=".9"/>` +
+    `<path d="M120,98 Q200,98 240,104" stroke="#8b65c9" stroke-width="3" fill="none" stroke-linecap="round" opacity=".9"/>` +
+    `<text x="270" y="70" fill="#7a5e12" font-size="26" font-weight="900">光与声</text>` +
+    `<text x="270" y="100" fill="#7a5e12" font-size="14" font-weight="600" opacity=".85">直线传播 · 反射折射 · 振动传声</text>` +
+    `<g font-size="22"><text x="560" y="60">🌈</text><text x="610" y="110">🔊</text><text x="500" y="120">💡</text></g></g>` +
+    `<circle class="bn-float" cx="660" cy="40" r="4" fill="#e6b23c" opacity=".5"/>`
+  );
+
+  const bannerSu5 = () => bnCommon('#f3eeff', '#eef9ff',
+    `<g opacity=".9">` +
+    `<path d="M80,30 L80,120 L110,120 L110,30 Z" fill="#e25563"/>` +
+    `<path d="M110,30 L110,120 L140,120 L140,30 Z" fill="#4d96ff"/>` +
+    `<text x="95" y="82" fill="#fff" font-size="18" font-weight="900">N</text>` +
+    `<text x="125" y="82" fill="#fff" font-size="18" font-weight="900">S</text>` +
+    `<path d="M200,60 L180,110 L210,110 L185,140" fill="#e6b23c" stroke="#c99a1f" stroke-width="1.5"/>` +
+    `<text x="240" y="70" fill="#5a3d8a" font-size="26" font-weight="900">电与磁</text>` +
+    `<text x="240" y="100" fill="#5a3d8a" font-size="14" font-weight="600" opacity=".85">电路 · 导体 · 磁极 · 电磁铁</text>` +
+    `<g font-size="22"><text x="560" y="60">⚡</text><text x="610" y="110">🧲</text><text x="500" y="120">💡</text></g></g>` +
+    `<circle class="bn-float" cx="660" cy="40" r="4" fill="#8b65c9" opacity=".5"/>` +
+    `<circle class="bn-float bn-d2" cx="540" cy="30" r="3" fill="#e6b23c" opacity=".5"/>`
+  );
+
+  const bannerSu6 = () => bnCommon('#eafaf0', '#fff8e8',
+    `<g opacity=".9">` +
+    `<path d="M80,120 L80,70 M70,90 Q90,60 110,80 Q130,100 90,90" fill="none" stroke="#2fbf71" stroke-width="3.5" stroke-linecap="round"/>` +
+    `<circle cx="80" cy="60" r="6" fill="#2fbf71"/>` +
+    `<path d="M150,110 Q150,70 170,70 Q190,70 190,110" fill="#f5c6c6" stroke="#e25563" stroke-width="2"/>` +
+    `<circle cx="170" cy="85" r="4" fill="#fff"/>` +
+    `<text x="220" y="70" fill="#1c6b3f" font-size="26" font-weight="900">生命世界</text>` +
+    `<text x="220" y="100" fill="#1c6b3f" font-size="14" font-weight="600" opacity=".85">光合 · 食物链 · 身体系统</text>` +
+    `<g font-size="22"><text x="560" y="60">🌱</text><text x="610" y="110">🐸</text><text x="500" y="120">🧬</text></g></g>` +
+    `<circle class="bn-float" cx="660" cy="40" r="4" fill="#2fbf71" opacity=".5"/>` +
+    `<circle class="bn-float bn-d3" cx="520" cy="130" r="3" fill="#e25563" opacity=".5"/>`
+  );
+
+  const bannerSu7 = () => bnCommon('#e6f7f4', '#eaf4ff',
+    `<g opacity=".9">` +
+    `<circle cx="95" cy="80" r="38" fill="#4d96ff" opacity=".25"/>` +
+    `<path d="M60,80 Q75,55 95,60 Q115,55 130,80 Q120,105 95,110 Q70,105 60,80 Z" fill="#2fbf71" opacity=".7"/>` +
+    `<path d="M80,70 Q90,65 100,72 M100,90 Q110,95 118,88" fill="none" stroke="#1d6f8f" stroke-width="2"/>` +
+    `<text x="160" y="70" fill="#0f5c54" font-size="26" font-weight="900">地球家园</text>` +
+    `<text x="160" y="100" fill="#0f5c54" font-size="14" font-weight="600" opacity=".85">圈层 · 水循环 · 天气 · 环保</text>` +
+    `<g font-size="22"><text x="560" y="60">🌏</text><text x="610" y="110">💧</text><text x="500" y="120">☁️</text></g></g>` +
+    `<circle class="bn-float" cx="660" cy="40" r="4" fill="#157d73" opacity=".5"/>` +
+    `<circle class="bn-float bn-d2" cx="540" cy="30" r="3" fill="#4d96ff" opacity=".5"/>`
+  );
+
+  const bannerSu8 = () => bnCommon('#e8f4ff', '#f0f0fa',
+    `<g opacity=".9">` +
+    `<g transform="translate(70,80)">` +
+    `<circle r="22" fill="none" stroke="#2f9bd6" stroke-width="4"/>` +
+    `<circle r="6" fill="#2f9bd6"/>` +
+    `<g class="bn-gear"><circle r="22" fill="none" stroke="#2f9bd6" stroke-width="4" transform="translate(34,0)"/><circle r="6" fill="#2f9bd6" transform="translate(34,0)"/></g>` +
+    `</g>` +
+    `<path d="M160,120 L200,120 L180,90 Z" fill="#8b65c9" opacity=".6"/>` +
+    `<text x="230" y="70" fill="#1f5f8f" font-size="26" font-weight="900">技术与工程</text>` +
+    `<text x="230" y="100" fill="#1f5f8f" font-size="14" font-weight="600" opacity=".85">设计 · 材料 · 结构 · 超级工程</text>` +
+    `<g font-size="22"><text x="560" y="60">🛠️</text><text x="610" y="110">🚄</text><text x="500" y="120">🌉</text></g></g>` +
+    `<circle class="bn-float" cx="660" cy="40" r="4" fill="#2f9bd6" opacity=".5"/>` +
+    `<circle class="bn-float bn-d3" cx="520" cy="130" r="3" fill="#8b65c9" opacity=".5"/>`
+  );
+
+  /* ================= 新增知识点图示 ================= */
+
+  /* 实验安全守则 */
+  const safety = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 200">`;
+    const rules = [
+      { ico: '👂', t: '听清再动手', d: '先懂步骤再操作' },
+      { ico: '🚫', t: '不尝不闻', d: '扇闻气味，绝不入口' },
+      { ico: '🔥', t: '加热要小心', d: '大人在场，轻拿轻放' },
+      { ico: '🧼', t: '实验后洗手', d: '器材归位，意外报告' },
+    ];
+    rules.forEach((r, i) => {
+      const x = 20 + i * 155;
+      s += `<rect x="${x}" y="20" width="140" height="120" rx="14" fill="#fafbfe" stroke="#e3e7f2" stroke-width="2"/>`;
+      s += `<circle cx="${x + 70}" cy="62" r="26" fill="#eef3fb"/>`;
+      s += txt(x + 70, 72, r.ico, { fs: 28 });
+      s += txt(x + 70, 108, r.t, { fs: 14, fw: 900 });
+      s += txt(x + 70, 128, r.d, { fs: 11.5, fill: MUT });
+    });
+    s += txt(320, 176, '安全是实验的第一条规则——宁可慢一点，不可冒险一次', { fs: 13, fill: MUT });
+    return s + '</svg>';
+  };
+
+  /* 物质的性质 */
+  const properties = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 210">`;
+    const items = [
+      { ico: '🎨', t: '颜色', d: '金是黄的，铜是红的' },
+      { ico: '👃', t: '气味', d: '水无味，醋有酸味' },
+      { ico: '💎', t: '软硬', d: '铁硬，棉花软' },
+      { ico: '🌊', t: '溶解性', d: '盐溶水，沙不溶' },
+      { ico: '🔍', t: '透明度', d: '玻璃透明，木头不透明' },
+    ];
+    items.forEach((it, i) => {
+      const x = 16 + i * 124;
+      s += `<rect x="${x}" y="24" width="112" height="100" rx="12" fill="#fafbfe" stroke="${ORANGE}" stroke-width="1.8"/>`;
+      s += txt(x + 56, 64, it.ico, { fs: 28 });
+      s += txt(x + 56, 90, it.t, { fs: 14, fw: 900, fill: ORANGE });
+      s += txt(x + 56, 110, it.d, { fs: 11, fill: MUT });
+    });
+    s += txt(320, 150, '同是无色液体：水和白醋闻起来不同——性质是区分物质的「身份证」', { fs: 12.5, fill: MUT });
+    s += txt(320, 176, '物体 ≠ 物质：木桌是物体，木头是组成它的物质', { fs: 12.5, fw: 700, fill: TEAL });
+    return s + '</svg>';
+  };
+
+  /* 重力与浮力 */
+  const gravity = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 210">`;
+    /* 左：重力 */
+    s += `<circle cx="120" cy="60" r="18" fill="#8b65c9"/>`;
+    s += arrow(120, 78, 120, 140, RED);
+    s += txt(120, 156, '重力向下拉', { fs: 12.5, fw: 900, fill: RED });
+    s += txt(120, 174, '方向竖直向下', { fs: 11.5, fill: MUT });
+    /* 中：浮力 */
+    s += `<rect x="220" y="100" width="200" height="80" rx="6" fill="#eaf6fd" stroke="${SKY}" stroke-width="2"/>`;
+    s += `<rect x="222" y="120" width="196" height="58" fill="#c9e8f8"/>`;
+    s += `<path d="M260,110 L300,110 L290,140 L270,140 Z" fill="#e6b23c" stroke="#c99a1f" stroke-width="1.5"/>`;
+    s += arrow(280, 100, 280, 70, GREEN);
+    s += arrow(280, 150, 280, 172, RED);
+    s += txt(280, 62, '浮力 ↑', { fs: 12.5, fw: 900, fill: GREEN });
+    s += txt(280, 188, '重力 ↓', { fs: 11.5, fill: RED });
+    /* 右：沉浮对比 */
+    s += `<rect x="450" y="100" width="170" height="80" rx="6" fill="#eaf6fd" stroke="${SKY}" stroke-width="2"/>`;
+    s += `<rect x="452" y="120" width="166" height="58" fill="#c9e8f8"/>`;
+    s += `<circle cx="480" cy="110" r="10" fill="#2fbf71"/><text x="480" y="114" text-anchor="middle" font-size="11" fill="#fff" font-weight="900">浮</text>`;
+    s += `<circle cx="560" cy="150" r="10" fill="#e25563"/><text x="560" y="154" text-anchor="middle" font-size="11" fill="#fff" font-weight="900">沉</text>`;
+    s += txt(535, 194, '浮力 > 重力 → 浮', { fs: 11, fill: GREEN });
+    s += txt(320, 200, '排开的水越多，浮力越大——钢铁轮船做成空心大壳，排开很多水所以能浮', { fs: 12, fill: MUT });
+    return s + '</svg>';
+  };
+
+  /* 摩擦力与弹力 */
+  const friction = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 200">`;
+    /* 左：摩擦 */
+    s += `<rect x="40" y="110" width="140" height="40" rx="5" fill="#a97c50"/>`;
+    for (let i = 0; i < 12; i++) s += `<line x1="${50 + i * 11}" y1="110" x2="${50 + i * 11}" y2="150" stroke="#7a5b3a" stroke-width="1.2"/>`;
+    s += `<rect x="80" y="70" width="50" height="40" rx="4" fill="#8b65c9"/>`;
+    s += arrow(105, 90, 60, 90, BLUE);
+    s += arrow(105, 90, 150, 90, ORANGE);
+    s += txt(105, 60, '推 →', { fs: 12, fill: BLUE });
+    s += txt(105, 140, '← 摩擦', { fs: 12, fill: ORANGE });
+    s += txt(105, 172, '接触面越粗糙，摩擦越大', { fs: 11.5, fill: MUT });
+    /* 中：花纹增摩擦 */
+    s += `<circle cx="320" cy="100" r="34" fill="#34384d"/>`;
+    for (let i = 0; i < 16; i++) {
+      const a = i * 22.5 * Math.PI / 180;
+      s += `<line x1="${320 + 22 * Math.cos(a)}" y1="${100 + 22 * Math.sin(a)}" x2="${320 + 32 * Math.cos(a)}" y2="${100 + 32 * Math.sin(a)}" stroke="#5a5f73" stroke-width="3"/>`;
+    }
+    s += txt(320, 172, '轮胎花纹 · 增大摩擦', { fs: 12, fill: MUT });
+    /* 右：弹力 */
+    s += `<path d="M510,60 q6,12 0,24 q-6,12 0,24 q6,12 0,24 q-6,12 0,24" fill="none" stroke="#e25563" stroke-width="4"/>`;
+    s += arrow(540, 90, 560, 90, GREEN);
+    s += arrow(480, 140, 460, 140, GREEN);
+    s += txt(550, 84, '拉', { fs: 12, fill: GREEN });
+    s += txt(470, 156, '缩', { fs: 12, fill: GREEN });
+    s += txt(510, 172, '橡皮筋 · 弹力', { fs: 12, fill: MUT });
+    s += txt(320, 192, '摩擦并非总是坏家伙：走路、握笔都靠它；弹簧、蹦床靠弹力', { fs: 12, fill: MUT });
+    return s + '</svg>';
+  };
+
+  /* 光的反射与折射 */
+  const reflect = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 210">`;
+    /* 左：反射 */
+    s += txt(150, 30, '反射（照镜子）', { fs: 13, fw: 900, fill: BLUE });
+    s += `<line x1="40" y1="150" x2="260" y2="150" stroke="#b0b6c8" stroke-width="6"/>`;
+    s += `<line x1="40" y1="150" x2="260" y2="150" stroke="#e3e7f2" stroke-width="2"/>`;
+    s += arrow(60, 70, 150, 148, GOLD);
+    s += arrow(150, 148, 240, 70, GOLD);
+    s += `<line x1="150" y1="150" x2="150" y2="50" stroke="${MUT}" stroke-width="1.5" stroke-dasharray="4 3"/>`;
+    s += txt(150, 46, '法线', { fs: 11, fill: MUT });
+    s += txt(90, 96, '入射', { fs: 11, fill: GOLD });
+    s += txt(210, 96, '反射', { fs: 11, fill: GOLD });
+    s += txt(150, 174, '反射角 = 入射角', { fs: 12, fw: 700, fill: BLUE });
+    /* 右：折射 */
+    s += txt(470, 30, '折射（筷子折了）', { fs: 13, fw: 900, fill: TEAL });
+    s += `<line x1="360" y1="120" x2="580" y2="120" stroke="#b0b6c8" stroke-width="3"/>`;
+    s += `<rect x="362" y="120" width="216" height="60" fill="#eaf6fd" opacity=".8"/>`;
+    s += arrow(400, 50, 470, 118, GOLD);
+    s += arrow(470, 118, 500, 178, GOLD);
+    s += `<line x1="470" y1="120" x2="470" y2="40" stroke="${MUT}" stroke-width="1.5" stroke-dasharray="4 3"/>`;
+    s += txt(430, 80, '空气', { fs: 11, fill: MUT });
+    s += txt(510, 150, '水', { fs: 11, fill: SKY });
+    s += txt(470, 196, '光入水偏折，池水看起来更浅', { fs: 12, fw: 700, fill: TEAL });
+    return s + '</svg>';
+  };
+
+  /* 彩虹与颜色 */
+  const rainbow = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 190">`;
+    const colors = ['#e25563', '#d97745', '#e6b23c', '#2fbf71', '#2f9bd6', '#4d96ff', '#8b65c9'];
+    const names = ['红', '橙', '黄', '绿', '蓝', '靛', '紫'];
+    /* 三棱镜 */
+    s += `<polygon points="80,40 110,40 150,140 60,140" fill="#fff" opacity=".5" stroke="#b0b6c8" stroke-width="2"/>`;
+    s += txt(95, 100, '三棱镜', { fs: 11, fill: MUT });
+    /* 白光入射 */
+    s += arrow(20, 90, 78, 90, INK);
+    s += txt(20, 80, '白光', { fs: 12, fill: INK });
+    /* 七色光出射 */
+    colors.forEach((c, i) => {
+      const y = 60 + i * 12;
+      s += `<line x1="150" y1="90" x2="400" y2="${y}" stroke="${c}" stroke-width="3" stroke-linecap="round"/>`;
+      s += `<circle cx="420" cy="${y}" r="8" fill="${c}"/>`;
+      s += txt(446, y + 4, names[i], { anchor: 'start', fs: 12, fw: 900, fill: c });
+    });
+    /* 彩虹弧 */
+    colors.forEach((c, i) => {
+      s += `<path d="M490,150 A${90 - i * 8},${90 - i * 8} 0 0 1 ${670 - i * 8},150" fill="none" stroke="${c}" stroke-width="6" opacity=".85"/>`;
+    });
+    s += txt(580, 172, '雨后彩虹', { fs: 12, fill: MUT });
+    s += txt(320, 182, '白光由七色组成；不透明物体颜色由它反射的色光决定——红布只反射红光', { fs: 12, fill: MUT });
+    return s + '</svg>';
+  };
+
+  /* 音调响度与噪声 */
+  const soundProps = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 200">`;
+    s += txt(160, 28, '音调：振动快慢（频率）', { fs: 13, fw: 900, fill: BLUE });
+    s += `<line x1="40" y1="70" x2="280" y2="70" stroke="${LINE}" stroke-width="1.5"/>`;
+    s += `<path d="M40,70 q8,-22 16,0 q8,22 16,0 q8,-22 16,0 q8,22 16,0 q8,-22 16,0 q8,22 16,0 q8,-22 16,0 q8,22 16,0 q8,-22 16,0 q8,22 16,0 q8,-22 16,0 q8,22 16,0 q8,-22 16,0 q8,22 16,0" fill="none" stroke="${BLUE}" stroke-width="2.6"/>`;
+    s += txt(160, 96, '振动快 → 音调高（尖锐）', { fs: 12, fill: MUT });
+    s += `<line x1="40" y1="140" x2="280" y2="140" stroke="${LINE}" stroke-width="1.5"/>`;
+    s += `<path d="M40,140 q20,-22 40,0 q20,22 40,0 q20,-22 40,0 q20,22 40,0 q20,-22 40,0 q20,22 40,0" fill="none" stroke="${GREEN}" stroke-width="2.6"/>`;
+    s += txt(160, 166, '振动慢 → 音调低（低沉）', { fs: 12, fill: MUT });
+    s += txt(470, 28, '响度：振动幅度', { fs: 13, fw: 900, fill: ORANGE });
+    s += `<line x1="360" y1="70" x2="580" y2="70" stroke="${LINE}" stroke-width="1.5"/>`;
+    s += `<path d="M360,70 q18,-30 36,0 q18,30 36,0 q18,-30 36,0 q18,30 36,0 q18,-30 36,0 q18,30 36,0" fill="none" stroke="${ORANGE}" stroke-width="2.6"/>`;
+    s += txt(470, 96, '振幅大 → 声音响', { fs: 12, fill: MUT });
+    s += `<line x1="360" y1="140" x2="580" y2="140" stroke="${LINE}" stroke-width="1.5"/>`;
+    s += `<path d="M360,140 q18,-10 36,0 q18,10 36,0 q18,-10 36,0 q18,10 36,0 q18,-10 36,0 q18,10 36,0" fill="none" stroke="${PURPLE}" stroke-width="2.6"/>`;
+    s += txt(470, 166, '振幅小 → 声音轻', { fs: 12, fill: MUT });
+    s += txt(320, 190, '音色是声音的「指纹」——闭眼也能分清钢琴和小提琴', { fs: 12, fill: MUT });
+    return s + '</svg>';
+  };
+
+  /* 静电小魔术 */
+  const staticElec = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 190">`;
+    /* 梳子吸纸 */
+    s += `<path d="M80,40 L140,40 L130,110 L90,110 Z" fill="#d97745" stroke="#a85a2e" stroke-width="2"/>`;
+    s += `<rect x="100" y="30" width="20" height="12" rx="3" fill="#a85a2e"/>`;
+    for (let i = 0; i < 4; i++) s += `<line x1="${92 + i * 12}" y1="110" x2="${92 + i * 12}" y2="124" stroke="#a85a2e" stroke-width="2"/>`;
+    s += `<rect x="70" y="150" width="10" height="10" fill="#eaf6fd" stroke="${SKY}"/>` +
+      `<rect x="100" y="156" width="10" height="10" fill="#eaf6fd" stroke="${SKY}"/>` +
+      `<rect x="130" y="150" width="10" height="10" fill="#eaf6fd" stroke="${SKY}"/>`;
+    s += arrow(110, 130, 110, 150, ORANGE);
+    s += txt(110, 36, '梳子', { fs: 12, fill: MUT });
+    s += txt(110, 180, '摩擦起电，吸起小纸屑', { fs: 12, fill: MUT });
+    /* 电荷 */
+    s += txt(320, 30, '同种电荷相斥，异种电荷相吸', { fs: 13, fw: 900, fill: PURPLE });
+    s += `<circle cx="280" cy="100" r="22" fill="#e25563"/><text x="280" y="106" text-anchor="middle" fill="#fff" font-size="18" font-weight="900">−</text>` +
+      `<circle cx="360" cy="100" r="22" fill="#4d96ff"/><text x="360" y="106" text-anchor="middle" fill="#fff" font-size="18" font-weight="900">+</text>`;
+    s += arrow(302, 100, 338, 100, GREEN);
+    s += txt(320, 140, '异名相吸', { fs: 12, fill: GREEN });
+    s += `<circle cx="460" cy="100" r="22" fill="#e25563"/><text x="460" y="106" text-anchor="middle" fill="#fff" font-size="18" font-weight="900">−</text>` +
+      `<circle cx="540" cy="100" r="22" fill="#e25563"/><text x="540" y="106" text-anchor="middle" fill="#fff" font-size="18" font-weight="900">−</text>`;
+    s += arrow(482, 100, 460, 100, RED);
+    s += arrow(518, 100, 540, 100, RED);
+    s += txt(500, 140, '同名相斥', { fs: 12, fill: RED });
+    s += txt(320, 170, '脱毛衣的噼啪声、冬天碰门把被电——都是小小的放电', { fs: 12, fill: MUT });
+    return s + '</svg>';
+  };
+
+  /* 导体绝缘体与安全用电 */
+  const conductor = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 210">`;
+    /* 导体 */
+    s += txt(160, 26, '导体（易导电）', { fs: 13, fw: 900, fill: GREEN });
+    const cond = ['🔩 金属', '🧍 人体', '🌊 不纯净水', '⛰️ 大地'];
+    cond.forEach((c, i) => {
+      const y = 44 + i * 26;
+      s += `<rect x="40" y="${y - 16}" width="240" height="22" rx="8" fill="#e9f9f0" stroke="#2fbf71" stroke-width="1.5"/>`;
+      s += txt(60, y, c, { anchor: 'start', fs: 12.5, fw: 700, fill: '#187749' });
+    });
+    /* 绝缘体 */
+    s += txt(480, 26, '绝缘体（难导电）', { fs: 13, fw: 900, fill: BLUE });
+    const insu = ['🧴 塑料', '🖤 橡胶', '🪟 玻璃', '🪵 干木头'];
+    insu.forEach((c, i) => {
+      const y = 44 + i * 26;
+      s += `<rect x="360" y="${y - 16}" width="240" height="22" rx="8" fill="#eaf4fb" stroke="#4d96ff" stroke-width="1.5"/>`;
+      s += txt(380, y, c, { anchor: 'start', fs: 12.5, fw: 700, fill: '#2767a8' });
+    });
+    /* 安全用电 */
+    s += `<rect x="40" y="156" width="560" height="44" rx="10" fill="#fff5f5" stroke="#e25563" stroke-width="1.5"/>`;
+    s += txt(320, 176, '⚠️ 安全用电：湿手不碰电器 · 不捅插座 · 高压线下不放风筝 · 冒烟先断电', { fs: 12.5, fw: 700, fill: '#a4453f' });
+    return s + '</svg>';
+  };
+
+  /* 电磁铁 */
+  const electromagnet = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 200">`;
+    /* 铁钉 + 线圈 */
+    s += `<rect x="100" y="80" width="180" height="28" rx="14" fill="#8a6a33" stroke="#5a4422" stroke-width="2"/>`;
+    s += txt(190, 99, '铁芯', { fs: 12, fill: '#fff', fw: 900 });
+    for (let i = 0; i < 10; i++) {
+      const x = 112 + i * 16;
+      s += `<path d="M${x},74 q8,6 0,40 q-8,-6 0,-40" fill="none" stroke="#e25563" stroke-width="3"/>`;
+    }
+    s += `<line x1="112" y1="108" x2="112" y2="140" stroke="#e25563" stroke-width="3"/>`;
+    s += `<line x1="268" y1="108" x2="268" y2="140" stroke="#e25563" stroke-width="3"/>`;
+    /* 电池 */
+    s += `<line x1="112" y1="140" x2="112" y2="170" stroke="#34384d" stroke-width="2.5"/>`;
+    s += `<line x1="268" y1="140" x2="268" y2="170" stroke="#34384d" stroke-width="2.5"/>`;
+    s += `<line x1="112" y1="170" x2="180" y2="170" stroke="#34384d" stroke-width="2.5"/>`;
+    s += `<line x1="268" y1="170" x2="200" y2="170" stroke="#34384d" stroke-width="2.5"/>`;
+    s += `<line x1="192" y1="162" x2="192" y2="178" stroke="#34384d" stroke-width="3"/>`;
+    s += `<line x1="200" y1="158" x2="200" y2="182" stroke="#34384d" stroke-width="7"/>`;
+    s += txt(196, 196, '电池', { fs: 11, fill: MUT });
+    s += txt(190, 60, '通电 → 有磁性', { fs: 12, fw: 900, fill: GREEN });
+    /* 吸铁 */
+    s += `<circle cx="100" cy="130" r="6" fill="#b0b6c8"/><circle cx="86" cy="136" r="5" fill="#b0b6c8"/>`;
+    s += txt(100, 150, '吸起回形针', { fs: 11, fill: MUT });
+    /* 应用 */
+    s += txt(470, 30, '电磁铁的应用', { fs: 13, fw: 900, fill: PURPLE });
+    const apps = [
+      { ico: '🏗️', t: '电磁起重机' },
+      { ico: '🔔', t: '电铃' },
+      { ico: '🚄', t: '磁悬浮列车' },
+    ];
+    apps.forEach((a, i) => {
+      const x = 370 + i * 86;
+      s += `<rect x="${x}" y="56" width="74" height="60" rx="10" fill="#f3eeff" stroke="#8b65c9" stroke-width="1.5"/>`;
+      s += txt(x + 37, 84, a.ico, { fs: 24 });
+      s += txt(x + 37, 108, a.t, { fs: 10.5, fw: 700, fill: PURPLE });
+    });
+    s += txt(470, 140, '断电 → 磁性消失', { fs: 12, fw: 900, fill: RED });
+    s += txt(320, 178, '电磁铁 = 铁芯 + 线圈 + 电源；电流越大、线圈越多，磁性越强', { fs: 12, fill: MUT });
+    return s + '</svg>';
+  };
+
+  /* 光合作用 */
+  const photosynthesis = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 210">`;
+    /* 太阳 */
+    s += `<circle cx="80" cy="60" r="22" fill="${GOLD}"/>`;
+    [0, 45, 90, 135, 180, 225, 270, 315].forEach(a => {
+      const r = a * Math.PI / 180;
+      s += `<line x1="${80 + 26 * Math.cos(r)}" y1="${60 + 26 * Math.sin(r)}" x2="${80 + 34 * Math.cos(r)}" y2="${60 + 34 * Math.sin(r)}" stroke="${GOLD}" stroke-width="2.5"/>`;
+    });
+    s += txt(80, 110, '阳光 ☀️', { fs: 12, fill: ORANGE, fw: 700 });
+    /* 叶子 */
+    s += `<path d="M300,110 Q260,70 300,50 Q360,50 380,90 Q360,140 300,110 Z" fill="#2fbf71" stroke="#1c6b3f" stroke-width="2"/>`;
+    s += `<line x1="300" y1="110" x2="370" y2="70" stroke="#1c6b3f" stroke-width="2"/>`;
+    s += txt(320, 96, '叶绿体', { fs: 11, fill: '#fff', fw: 900 });
+    /* 根 */
+    s += `<line x1="320" y1="110" x2="320" y2="180" stroke="#7a5b3a" stroke-width="4"/>`;
+    s += `<path d="M320,150 q-14,8 -24,18 M320,160 q14,8 24,18 M320,170 q-10,6 -18,12" stroke="#7a5b3a" stroke-width="2.5" fill="none"/>`;
+    /* 箭头 */
+    s += arrow(130, 60, 250, 80, GOLD);
+    s += txt(190, 56, '光能', { fs: 11, fill: ORANGE });
+    s += arrow(320, 170, 320, 130, SKY);
+    s += txt(340, 150, '水+无机盐', { fs: 11, fill: SKY });
+    s += arrow(420, 70, 500, 60, GREEN);
+    s += txt(470, 52, '氧气 →', { fs: 11, fill: GREEN });
+    s += arrow(420, 100, 500, 110, GOLD);
+    s += txt(470, 124, '← 养料', { fs: 11, fill: ORANGE });
+    /* 公式 */
+    s += `<rect x="380" y="140" width="240" height="46" rx="8" fill="#eaf6fd" stroke="${SKY}" stroke-width="1.5"/>`;
+    s += txt(500, 158, '阳光 + 水 + 二氧化碳', { fs: 12, fw: 700 });
+    s += txt(500, 176, '→ 养料 + 氧气', { fs: 12, fw: 900, fill: GREEN });
+    s += txt(320, 200, '光合作用养活植物自己，也（直接或间接）养活了几乎所有生物', { fs: 12, fill: MUT });
+    return s + '</svg>';
+  };
+
+  /* 动物大家族 */
+  const animalClass = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 220">`;
+    s += txt(160, 24, '脊椎动物（有脊柱）', { fs: 13, fw: 900, fill: BLUE });
+    const vert = [
+      { ico: '🐟', t: '鱼类', d: '水中·鳃·鳞' },
+      { ico: '🐸', t: '两栖', d: '幼时水·鳃' },
+      { ico: '🐢', t: '爬行', d: '鳞片·甲' },
+      { ico: '🐦', t: '鸟类', d: '羽毛·卵生' },
+      { ico: '🐳', t: '哺乳', d: '胎生·哺乳' },
+    ];
+    vert.forEach((v, i) => {
+      const x = 20 + i * 122;
+      s += `<rect x="${x}" y="36" width="112" height="74" rx="12" fill="#eaf4fb" stroke="${BLUE}" stroke-width="1.5"/>`;
+      s += txt(x + 56, 66, v.ico, { fs: 26 });
+      s += txt(x + 56, 88, v.t, { fs: 13, fw: 900, fill: BLUE });
+      s += txt(x + 56, 104, v.d, { fs: 10.5, fill: MUT });
+    });
+    s += txt(480, 24, '无脊椎动物', { fs: 13, fw: 900, fill: PURPLE });
+    const invert = [
+      { ico: '🦋', t: '昆虫', d: '3对足·分头胸腹' },
+      { ico: '🐌', t: '软体', d: '蜗牛·贝壳' },
+      { ico: '🦀', t: '节肢', d: '虾蟹·蜘蛛' },
+    ];
+    invert.forEach((v, i) => {
+      const x = 380 + i * 84;
+      s += `<rect x="${x}" y="36" width="76" height="74" rx="12" fill="#f3eeff" stroke="${PURPLE}" stroke-width="1.5"/>`;
+      s += txt(x + 38, 66, v.ico, { fs: 24 });
+      s += txt(x + 38, 88, v.t, { fs: 12, fw: 900, fill: PURPLE });
+      s += txt(x + 38, 104, v.d, { fs: 9.5, fill: MUT });
+    });
+    /* 易错 */
+    s += `<rect x="20" y="134" width="600" height="72" rx="12" fill="#fff8e8" stroke="${GOLD}" stroke-width="1.5"/>`;
+    s += txt(320, 158, '⚠️ 易错：蝙蝠会飞但不是鸟（胎生哺乳）；蜘蛛有 4 对足不是昆虫', { fs: 13, fw: 700, fill: '#7a5e12' });
+    s += txt(320, 182, '鲸鱼生活在海里却是哺乳动物；鸵鸟不会飞却是鸟', { fs: 12.5, fill: MUT });
+    return s + '</svg>';
+  };
+
+  /* 我们的身体 */
+  const body = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 210">`;
+    const systems = [
+      { ico: '🦷', t: '消化', d: '切碎·搅拌·吸收', color: ORANGE },
+      { ico: '🫁', t: '呼吸', d: '吸氧·呼二氧化碳', color: SKY },
+      { ico: '❤️', t: '循环', d: '心脏·血管运输', color: RED },
+      { ico: '🦴', t: '运动', d: '骨骼·肌肉', color: PURPLE },
+      { ico: '🧠', t: '神经', d: '脑是总司令部', color: TEAL },
+    ];
+    systems.forEach((sys, i) => {
+      const x = 20 + i * 122;
+      s += `<rect x="${x}" y="24" width="112" height="100" rx="14" fill="#fafbfe" stroke="${sys.color}" stroke-width="1.8"/>`;
+      s += txt(x + 56, 62, sys.ico, { fs: 30 });
+      s += txt(x + 56, 88, sys.t + '系统', { fs: 13.5, fw: 900, fill: sys.color });
+      s += txt(x + 56, 108, sys.d, { fs: 11, fill: MUT });
+    });
+    s += txt(320, 148, '身体是一台超级机器，各系统分工又合作', { fs: 13, fw: 700, fill: INK });
+    s += txt(320, 172, '心脏一天跳约十万次；饭后别立刻剧烈运动，血液要支援肠胃', { fs: 12, fill: MUT });
+    s += txt(320, 194, '运动时呼吸、心跳加快——身体加急送氧气和养料', { fs: 12, fw: 700, fill: TEAL });
+    return s + '</svg>';
+  };
+
+  /* 地球四大圈层 */
+  const earthLayers = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 210">`;
+    /* 地球截面 */
+    s += `<circle cx="160" cy="110" r="78" fill="#a97c50"/>`;
+    s += `<circle cx="160" cy="110" r="56" fill="#4d96ff" opacity=".4"/>`;
+    s += `<circle cx="160" cy="110" r="40" fill="#e6b23c" opacity=".6"/>`;
+    s += `<circle cx="160" cy="110" r="20" fill="#e25563"/>`;
+    /* 大气圈 */
+    s += `<circle cx="160" cy="110" r="92" fill="none" stroke="#8fb0d8" stroke-width="8" opacity=".4"/>`;
+    /* 标注 */
+    s += arrow(250, 50, 170, 60, BLUE);
+    s += txt(260, 46, '大气圈', { anchor: 'start', fs: 12, fw: 900, fill: BLUE });
+    s += txt(260, 64, '空气的海洋', { anchor: 'start', fs: 10.5, fill: MUT });
+    s += arrow(250, 86, 200, 86, SKY);
+    s += txt(260, 90, '水圈', { anchor: 'start', fs: 12, fw: 900, fill: SKY });
+    s += txt(260, 106, '江河湖海冰川', { anchor: 'start', fs: 10.5, fill: MUT });
+    s += arrow(250, 120, 190, 120, ORANGE);
+    s += txt(260, 124, '岩石圈', { anchor: 'start', fs: 12, fw: 900, fill: ORANGE });
+    s += txt(260, 140, '山脉土壤矿产', { anchor: 'start', fs: 10.5, fill: MUT });
+    s += arrow(250, 156, 170, 140, GREEN);
+    s += txt(260, 160, '生物圈', { anchor: 'start', fs: 12, fw: 900, fill: GREEN });
+    s += txt(260, 176, '所有生物+家园', { anchor: 'start', fs: 10.5, fill: MUT });
+    /* 右侧小图 */
+    s += txt(490, 36, '四大圈层互相依存', { fs: 13, fw: 900, fill: TEAL });
+    s += `<circle cx="440" cy="120" r="22" fill="#8fb0d8" opacity=".5"/><text x="440" y="124" text-anchor="middle" font-size="11">大气</text>`;
+    s += `<circle cx="500" cy="100" r="22" fill="#4d96ff" opacity=".4"/><text x="500" y="104" text-anchor="middle" font-size="11">水</text>`;
+    s += `<circle cx="470" cy="150" r="22" fill="#a97c50" opacity=".5"/><text x="470" y="154" text-anchor="middle" font-size="11">岩石</text>`;
+    s += `<circle cx="540" cy="150" r="22" fill="#2fbf71" opacity=".5"/><text x="540" y="154" text-anchor="middle" font-size="11">生物</text>`;
+    s += txt(320, 200, '生物圈渗透在大气圈底部、水圈和岩石圈上层，四大圈层环环相扣', { fs: 12, fill: MUT });
+    return s + '</svg>';
+  };
+
+  /* 水循环 */
+  const waterCycle = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 210">`;
+    /* 太阳 */
+    s += `<circle cx="80" cy="50" r="18" fill="${GOLD}"/>`;
+    [0, 60, 120, 180, 240, 300].forEach(a => {
+      const r = a * Math.PI / 180;
+      s += `<line x1="${80 + 22 * Math.cos(r)}" y1="${50 + 22 * Math.sin(r)}" x2="${80 + 28 * Math.cos(r)}" y2="${50 + 28 * Math.sin(r)}" stroke="${GOLD}" stroke-width="2.5"/>`;
+    });
+    s += txt(80, 92, '太阳', { fs: 11, fill: ORANGE });
+    /* 海洋 */
+    s += `<rect x="20" y="150" width="600" height="46" rx="6" fill="#eaf6fd" stroke="${SKY}" stroke-width="2"/>`;
+    s += `<path d="M20,160 q20,8 40,0 q20,-8 40,0 q20,8 40,0 q20,-8 40,0 q20,8 40,0 q20,-8 40,0 q20,8 40,0 q20,-8 40,0 q20,8 40,0 q20,-8 40,0 q20,8 40,0 q20,-8 40,0 q20,8 40,0 q20,-8 40,0 q20,8 40,0 q20,-8 40,0" fill="none" stroke="${SKY}" stroke-width="1.5"/>`;
+    s += txt(320, 184, '海洋 / 江河', { fs: 12, fill: SKY });
+    /* 蒸发 */
+    for (let i = 0; i < 4; i++) {
+      const x = 140 + i * 100;
+      s += `<path d="M${x},150 q-6,-14 0,-28 q6,-14 0,-28" fill="none" stroke="${SKY}" stroke-width="2" stroke-linecap="round" opacity=".7"/>`;
+    }
+    s += txt(320, 100, '蒸发 ↑', { fs: 12, fill: SKY });
+    /* 云 */
+    s += `<ellipse cx="320" cy="50" rx="60" ry="16" fill="#fff" stroke="#c9cdd9" stroke-width="1.5"/>`;
+    s += `<ellipse cx="290" cy="44" rx="28" ry="14" fill="#fff"/>`;
+    s += `<ellipse cx="350" cy="44" rx="26" ry="13" fill="#fff"/>`;
+    s += txt(320, 78, '云（凝结）', { fs: 11, fill: MUT });
+    /* 降水 */
+    for (let i = 0; i < 5; i++) {
+      const x = 280 + i * 20;
+      s += `<line x1="${x}" y1="66" x2="${x - 4}" y2="86" stroke="${BLUE}" stroke-width="2" stroke-linecap="round"/>`;
+    }
+    s += arrow(420, 86, 560, 140, BLUE);
+    s += txt(500, 108, '降水 ↓', { fs: 12, fill: BLUE });
+    /* 径流 */
+    s += arrow(560, 170, 200, 170, SKY);
+    s += txt(380, 196, '径流（流回海洋）', { fs: 11, fill: MUT });
+    s += txt(320, 204, '水在海洋、天空、陆地间循环；淡水只占约 2.5%，要节约', { fs: 12, fill: MUT });
+    return s + '</svg>';
+  };
+
+  /* 天气观测与灾害 */
+  const weather = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 210">`;
+    const tools = [
+      { ico: '🌡️', t: '气温计', d: '测温度' },
+      { ico: '🌧️', t: '雨量器', d: '测降水' },
+      { ico: '🌬️', t: '风向标', d: '测风向' },
+      { ico: '💨', t: '风速仪', d: '测风速' },
+    ];
+    tools.forEach((t, i) => {
+      const x = 20 + i * 110;
+      s += `<rect x="${x}" y="20" width="100" height="78" rx="12" fill="#fafbfe" stroke="#2f9bd6" stroke-width="1.5"/>`;
+      s += txt(x + 50, 54, t.ico, { fs: 26 });
+      s += txt(x + 50, 78, t.t, { fs: 12.5, fw: 900, fill: '#2767a8' });
+      s += txt(x + 50, 94, t.d, { fs: 10.5, fill: MUT });
+    });
+    /* 预警颜色 */
+    s += txt(320, 124, '预警信号颜色', { fs: 13, fw: 900 });
+    const warn = [
+      { c: '#4d96ff', t: '蓝', d: '一般' },
+      { c: '#e6b23c', t: '黄', d: '较重' },
+      { c: '#d97745', t: '橙', d: '严重' },
+      { c: '#e25563', t: '红', d: '特别严重' },
+    ];
+    warn.forEach((w, i) => {
+      const x = 470 + i * 42;
+      s += `<circle cx="${x}" cy="148" r="14" fill="${w.c}"/>`;
+      s += txt(x, 152, w.t, { fs: 12, fw: 900, fill: '#fff' });
+      s += txt(x, 178, w.d, { fs: 10.5, fill: MUT });
+    });
+    /* 自护 */
+    s += `<rect x="20" y="160" width="420" height="38" rx="10" fill="#fff5f5" stroke="#e25563" stroke-width="1.5"/>`;
+    s += txt(230, 184, '雷雨不站树下 · 台风天不出门 · 暴雨往高处走 · 地震先躲后撤护头颈', { fs: 12, fw: 700, fill: '#a4453f' });
+    return s + '</svg>';
+  };
+
+  /* 三角形的稳定性 */
+  const triangle = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 210">`;
+    /* 左：四边形易变形 */
+    s += txt(120, 26, '四边形 · 会变形', { fs: 13, fw: 900, fill: RED });
+    s += `<rect x="40" y="60" width="160" height="100" fill="none" stroke="#e25563" stroke-width="3" stroke-dasharray="6 4"/>`;
+    s += `<path d="M40,60 L200,160" stroke="#e25563" stroke-width="1.5" stroke-dasharray="4 3"/>`;
+    s += `<path d="M50,70 L170,70 L190,150 L70,150 Z" fill="none" stroke="#e25563" stroke-width="3"/>`;
+    s += txt(120, 186, '一推就歪', { fs: 12, fill: MUT });
+    /* 中：加斜杆变三角 */
+    s += arrow(210, 110, 260, 110, TEAL);
+    s += txt(235, 104, '加斜杆', { fs: 11, fill: TEAL });
+    /* 右：三角形稳定 */
+    s += txt(440, 26, '三角形 · 不变形', { fs: 13, fw: 900, fill: GREEN });
+    s += `<path d="M360,160 L440,60 L520,160 Z" fill="#e9f9f0" stroke="#2fbf71" stroke-width="3"/>`;
+    s += txt(440, 124, '稳！', { fs: 16, fw: 900, fill: GREEN });
+    s += txt(440, 186, '三条边定死，形状不变', { fs: 12, fill: MUT });
+    /* 应用 */
+    s += txt(320, 202, '铁塔、自行车架、塔吊都用三角形；上小下大、上轻下重也更稳', { fs: 12, fill: MUT });
+    return s + '</svg>';
+  };
+
   /* ================= 互动演示：水的三态变化 ================= */
   const STATES = {
     ice: {
@@ -614,6 +1229,33 @@ const SciFigures = (() => {
     'sci-china-build': chinaBuild,
     'demo-sci-states': demoStates,
     'demo-sci-circuit': demoCircuit,
+    /* 单元横幅 */
+    'sci-bn-su1': bannerSu1,
+    'sci-bn-su2': bannerSu2,
+    'sci-bn-su3': bannerSu3,
+    'sci-bn-su4': bannerSu4,
+    'sci-bn-su5': bannerSu5,
+    'sci-bn-su6': bannerSu6,
+    'sci-bn-su7': bannerSu7,
+    'sci-bn-su8': bannerSu8,
+    /* 新增知识点图示 */
+    'sci-safety': safety,
+    'sci-properties': properties,
+    'sci-gravity': gravity,
+    'sci-friction': friction,
+    'sci-reflect': reflect,
+    'sci-rainbow': rainbow,
+    'sci-sound-props': soundProps,
+    'sci-static': staticElec,
+    'sci-conductor': conductor,
+    'sci-electromagnet': electromagnet,
+    'sci-photo': photosynthesis,
+    'sci-animal-class': animalClass,
+    'sci-body': body,
+    'sci-earth-layers': earthLayers,
+    'sci-water-cycle': waterCycle,
+    'sci-weather': weather,
+    'sci-triangle': triangle,
   };
 
   const DEMO_INIT = {
@@ -637,6 +1279,24 @@ const SciFigures = (() => {
     'sci-rock-soil': '岩石与土壤分层：表层土最肥沃，毁掉容易恢复难',
     'sci-engineer': '工程设计六步曲：测试改进一轮又一轮',
     'sci-china-build': '中国超级工程：高铁、跨海大桥、天眼与北斗',
+    /* 新增知识点图示说明 */
+    'sci-safety': '实验安全四守则：听清再动手、不尝不闻、加热要小心、实验后洗手',
+    'sci-properties': '物质的性质：颜色、气味、软硬、溶解性、透明度——区分物质的身份证',
+    'sci-gravity': '重力竖直向下，浮力向上托；排开水越多浮力越大',
+    'sci-friction': '摩擦力可大可小：花纹增摩擦，润滑油减摩擦；弹簧皮筋靠弹力',
+    'sci-reflect': '光遇镜面反射（反射角=入射角），入水偏折（折射）使池水看起来更浅',
+    'sci-rainbow': '白光经三棱镜色散成七色；物体颜色由它反射的色光决定',
+    'sci-sound-props': '音调看振动频率（快慢），响度看振动幅度（大小），音色是声音指纹',
+    'sci-static': '摩擦起电：同种电荷相斥，异种电荷相吸；脱毛衣噼啪是放电',
+    'sci-conductor': '金属、人体、水是导体；塑料、橡胶、玻璃是绝缘体；安全用电记心中',
+    'sci-electromagnet': '电磁铁=铁芯+线圈+电源：通电有磁、断电消磁，应用广泛',
+    'sci-photo': '光合作用：阳光+水+二氧化碳 → 养料+氧气，养活了几乎所有生物',
+    'sci-animal-class': '动物分脊椎与无脊椎：鱼两栖爬鸟哺乳；蝙蝠是哺乳不是鸟',
+    'sci-body': '人体五大系统：消化供能、呼吸供氧、循环运输、运动支撑、神经指挥',
+    'sci-earth-layers': '地球四大圈层：大气圈、水圈、岩石圈、生物圈互相依存',
+    'sci-water-cycle': '水循环：蒸发→凝结→降水→径流，淡水珍贵要节约',
+    'sci-weather': '观测天气四工具 + 预警四色（蓝黄橙红）+ 灾害自护口诀',
+    'sci-triangle': '三角形最稳定：铁塔、自行车架都靠它；上轻下重也更稳',
   };
 
   function figHTML(id, cap) {

@@ -135,4 +135,111 @@
   .kcard, .formula-card, .mistake-card { box-shadow: none; break-inside: avoid; page-break-inside: avoid; }
   .wgrid { grid-template-columns: 1fr; display: block; }
   .kcard, .mistake-card { margin-bottom: 12px; }
+  .unit-banner, .fig { break-inside: avoid; page-break-inside: avoid; }
+}
+
+/* ============================================================
+   动画与视觉增强（科学实验室专属）
+   ============================================================ */
+
+/* ---------- 单元横幅 ---------- */
+.unit-banner { margin: 4px 0 14px; border-radius: 14px; overflow: hidden; }
+.unit-banner svg { width: 100%; height: auto; display: block; }
+.unit-banner:hover svg { transform: translateY(-1px); transition: transform .3s ease; }
+
+/* 横幅装饰粒子漂浮 */
+@keyframes bnFloat {
+  0%, 100% { transform: translateY(0); opacity: .6; }
+  50% { transform: translateY(-10px); opacity: .9; }
+}
+.bn-float { animation: bnFloat 3.2s ease-in-out infinite; transform-origin: center; }
+.bn-float.bn-d2 { animation-duration: 4.1s; animation-delay: .6s; }
+.bn-float.bn-d3 { animation-duration: 5s; animation-delay: 1.2s; }
+
+/* 横幅齿轮旋转 */
+@keyframes bnSpin { to { transform: rotate(360deg); } }
+.bn-gear { transform-origin: center; animation: bnSpin 8s linear infinite; }
+
+/* ---------- 知识点卡入场动画 ---------- */
+@keyframes kFadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.kcard, .formula-card, .mistake-card, .unit-head {
+  animation: kFadeUp .42s ease both;
+}
+.kcard:nth-child(2) { animation-delay: .04s; }
+.kcard:nth-child(3) { animation-delay: .08s; }
+.kcard:nth-child(4) { animation-delay: .12s; }
+.kcard:nth-child(5) { animation-delay: .16s; }
+.kcard:nth-child(6) { animation-delay: .20s; }
+
+/* ---------- 图示悬浮效果 ---------- */
+.fig {
+  transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease;
+}
+.fig:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(40, 54, 85, .08);
+  border-color: #c7d4ec;
+}
+.fig:hover .fig-svg { transform: scale(1.005); transition: transform .35s ease; }
+
+/* ---------- 图示内元素微动画 ---------- */
+/* 太阳光芒旋转 */
+@keyframes sunPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .7; }
+}
+.fig-svg [data-anim="sun"] circle,
+.fig-svg [data-anim="sun"] line { animation: sunPulse 2.4s ease-in-out infinite; }
+
+/* 水波流动 */
+@keyframes waveMove {
+  from { transform: translateX(0); }
+  to { transform: translateX(-40px); }
+}
+
+/* 蒸发水汽上升 */
+@keyframes vaporRise {
+  0% { opacity: 0; transform: translateY(6px); }
+  40% { opacity: .8; }
+  100% { opacity: 0; transform: translateY(-14px); }
+}
+
+/* 口诀框脉冲提示 */
+.krecite {
+  background: linear-gradient(90deg, #eaf6fd, #eef7ee, #eaf6fd);
+  background-size: 200% 100%;
+  animation: kreciteShine 5s ease infinite;
+}
+@keyframes kreciteShine {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* ---------- 想一想区块悬浮 ---------- */
+.mex-q:hover { background: #d9ecf7; }
+.mex-a:hover { background: #d6f3e2; }
+.mex-steps:hover { background: #eef0f7; }
+
+/* ---------- 已掌握卡片微光 ---------- */
+.kcard.learned {
+  background: linear-gradient(180deg, #f4fcf7, #fff);
+  border-top-color: #2fbf71;
+}
+.kcard.learned::after {
+  content: '✓ 已掌握';
+  position: absolute; top: 12px; right: 56px;
+  font-size: 11.5px; font-weight: 800; color: #2fbf71;
+  background: #e9f9f0; border-radius: 999px; padding: 2px 9px;
+}
+
+/* ---------- 减少动画偏好 ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .kcard, .formula-card, .mistake-card, .unit-head,
+  .bn-float, .bn-gear, .krecite, .fig {
+    animation: none !important;
+    transition: none !important;
+  }
 }

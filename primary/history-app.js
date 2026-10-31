@@ -84,6 +84,10 @@ function pointCard(u, p) {
     '<button class="learn-btn' + (learned ? ' on' : '') + '" data-act="learn" data-unit="' + u.id + '" data-id="' + esc(p.id) + '" title="标记已掌握" aria-pressed="' + learned + '" aria-label="已掌握 ' + esc(p.title) + '">' + (learned ? '✓' : '') + '</button></div>');
   parts.push('<p class="k-overview">' + esc(p.overview) + '</p>');
   if (p.fig && window.HistoryFigures) parts.push(HistoryFigures.figHTML(p.fig));
+  if (p.photo && window.HistoryFigures) {
+    const photos = Array.isArray(p.photo) ? p.photo : [p.photo];
+    photos.forEach(pid => parts.push(HistoryFigures.photoHTML(pid)));
+  }
 
   if (p.items && p.items.length) {
     parts.push(msec('纲', '<ul class="klist">' + p.items.map(m =>

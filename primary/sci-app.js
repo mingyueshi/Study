@@ -108,11 +108,18 @@ function pointCard(u, p) {
 }
 
 function renderUnit(u) {
+  const bannerSvg = u.banner && window.SciFigures
+    ? SciFigures.figHTML(u.banner)
+    : '';
+  const banner = bannerSvg
+    ? '<div class="unit-banner">' + bannerSvg + '</div>'
+    : '';
   return '<div class="unit-head" style="--c:' + u.color + '">' +
     '<span class="unit-emoji">' + u.emoji + '</span>' +
     '<div><h1>' + esc(u.no) + ' · ' + esc(u.name) + '</h1>' +
     '<p>' + esc(u.intro) + '</p>' +
     '<div class="goal-tags">' + u.goals.map(g => '<span>🎯 ' + esc(g) + '</span>').join('') + '</div></div></div>' +
+    banner +
     u.points.map(p => pointCard(u, p)).join('');
 }
 

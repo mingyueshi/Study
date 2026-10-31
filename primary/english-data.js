@@ -381,9 +381,228 @@ const ENGLISH_UNITS = [
   },
 ];
 
-/* 自动补齐词卡的拆分、记忆提示和单元内关联词。 */
+/* ============================================================
+   关联词：相反 / 相近 / 同类 / 同根 / 组词
+   ------------------------------------------------------------
+   opp    相反：意思相对或相反   high ↔ low
+   near   相近：意思接近、可以互相联想   gift ↔ present
+   group  同类：属于同一主题     bus / train / plane
+   family 同根：词根相同、加前后缀构成   rain → rainy
+   phrase 组词：本册里由该词组成的短语   give → give up
+   课内词直接写英文字符串；课外拓展词用 out('单词', '中文') 写上释义。
+   ============================================================ */
+const RELATION_META = {
+  opp: { tag: '反', name: '相反', color: '#d2544f' },
+  near: { tag: '近', name: '相近', color: '#3d7ddb' },
+  family: { tag: '根', name: '同根', color: '#8b5cf6' },
+  phrase: { tag: '组', name: '组词', color: '#d9822b' },
+  group: { tag: '类', name: '同类', color: '#2f9e5f' },
+};
+const RELATION_ORDER = ['opp', 'near', 'family', 'phrase', 'group'];
+const RELATION_CAP = { opp: 2, near: 2, family: 2, phrase: 2, group: 3 };
+const RELATION_TOTAL = 5;
+const RELATION_MIN = 3;
+
+const OUT_ZH = {};
+function out(en, zh) { OUT_ZH[en] = zh; return { en, zh }; }
+
+/* ---------- 相反：意思相对或相反 ---------- */
+const ENGLISH_OPP = {
+  'high': [out('low', '低的')],
+  'far': ['near', 'away'],
+  'away': ['near'],
+  'first': [out('last', '最后的')],
+  'next': [out('last', '上一个的')],
+  'lose': ['win'],
+  'fail': [out('succeed', '成功')],
+  'hard': ['easy'],
+  'keep': ['give up'],
+  'try': ['give up'],
+  'ill': ['better'],
+  'better': [out('worse', '更糟的')],
+  'remember': [out('forget', '忘记')],
+  'never': [out('always', '总是')],
+  'often': ['never'],
+  'clean': ['dirty'],
+  'tidy': ['dirty', out('messy', '乱糟糟的')],
+  'outside': [out('inside', '在里面')],
+  'finish': [out('start', '开始')],
+  'end': [out('start', '开始')],
+  'warm': ['cold'],
+  'cold': [out('hot', '热的')],
+  'sunny': ['rainy'],
+  'cloudy': ['sunny'],
+  'rainy': ['sunny'],
+  'turn on': [out('turn off', '关掉')],
+  'special': [out('usual', '平常的')],
+  'fly': ['fall'],
+  'left': [out('right', '右边')],
+  'tomorrow': [out('yesterday', '昨天')],
+  'later': [out('earlier', '更早')],
+  'true': ['wrong', out('false', '假的')],
+  'wrong': ['true', out('correct', '正确的')],
+  'real': [out('fake', '假的')],
+  'night': [out('day', '白天')],
+  'safe': [out('dangerous', '危险的')],
+  'same': [out('different', '不同的')],
+  'the same': [out('different', '不同的')],
+  'light': [out('dark', '黑暗的')],
+  'join': [out('leave', '离开')],
+  'give': [out('take', '拿走')],
+  'laugh': ['cry'],
+  'sad': ['excited', out('happy', '快乐的')],
+  'angry': [out('calm', '平静的')],
+  'frown': [out('smile', '微笑')],
+  'scared': [out('brave', '勇敢的')],
+  'shout': [out('whisper', '小声说')],
+  'break': [out('fix', '修理')],
+  'huge': [out('small', '小的')],
+  'slowly': [out('fast', '快地')],
+  'sleep': [out('wake', '醒来')],
+  'thin': [out('fat', '胖的')],
+  'more': [out('less', '更少的')],
+  'off': [out('on', '在上面；开着')],
+  'write': [out('read', '读')],
+  'those': [out('these', '这些')],
+  'clever': [out('silly', '傻的')],
+  'whole': [out('part', '部分')],
+  'Mr': [out('Mrs', '夫人；太太')],
+  'student': ['teacher'],
+  'aunt': ['uncle'],
+  'woman': [out('man', '男人')],
+  'boy': [out('girl', '女孩')],
+  'enjoy': [out('hate', '讨厌')],
+  'worried': [out('relaxed', '放松的')],
+};
+
+/* ---------- 相近：意思接近、可以互相联想 ---------- */
+const ENGLISH_NEAR = {
+  'hope': ['wish'],
+  'wish': ['dream'],
+  'gift': ['present'],
+  'huge': [out('big', '大的')],
+  'easy': [out('simple', '简单的')],
+  'hard': [out('difficult', '困难的')],
+  'clean': ['tidy'],
+  'job': ['chore'],
+  'finish': ['end'],
+  'warm': [out('hot', '热的')],
+  'enjoy': [out('like', '喜欢')],
+  'coat': ['jacket'],
+  'shirt': ['T-shirt'],
+  'true': ['real'],
+  'city': ['town'],
+  'trip': ['travel'],
+  'way': ['street'],
+  'scared': ['worried'],
+  'fail': ['lose'],
+  'ability': [out('skill', '技能')],
+  'cook': ['bake'],
+  'pick': ['collect'],
+  'sea': ['beach'],
+  'often': ['sometimes'],
+  'anything': ['everything'],
+  'hit': ['break'],
+  'kind': ['helpful'],
+  'tired': ['sleep'],
+  'across': ['cross'],
+  'practise': ['try'],
+  'centre': [out('middle', '中间')],
+  'round': [out('around', '围绕')],
+  'should': [out('must', '必须')],
+  'may': [out('can', '可以；能')],
+  'just': [out('only', '仅仅')],
+  'quite': [out('very', '非常')],
+  'also': [out('too', '也')],
+  'hunt': [out('look for', '寻找')],
+  'own': [out('self', '自己')],
+  'light': [out('lamp', '灯'), 'sunshine'],
+  'those': [out('that', '那个')],
+  'clever': [out('smart', '聪明的')],
+  'wear': [out('put on', '穿上')],
+  'come true': ['dream'],
+  'money': [out('coin', '硬币')],
+  'TV': [out('television', '电视')],
+  'miss': [out('love', '爱；想念')],
+};
+
+/* ---------- 同根：课内没有词根词时，补上常见的词根 ---------- */
+const ENGLISH_FAMILY_EXTRA = {
+  'sunny': [out('sun', '太阳')],
+  'sunshine': [out('sun', '太阳')],
+  'sunflower': [out('sun', '太阳')],
+  'teacher': [out('teach', '教')],
+  'player': [out('play', '玩；参加运动')],
+  'worker': [out('work', '工作')],
+  'driver': [out('drive', '驾驶')],
+  'dancer': [out('dance', '跳舞')],
+  'painter': [out('paint', '绘画')],
+  'farmer': [out('farm', '农场')],
+  'scientist': [out('science', '科学')],
+  'fireman': [out('fire', '火')],
+  'postman': [out('post', '邮件')],
+  'lovely': [out('love', '爱；喜欢')],
+  'careful': [out('care', '关心；留意')],
+  'helper': [out('help', '帮助'), 'helpful'],
+  'helpful': [out('help', '帮助'), 'helper'],
+  'slowly': [out('slow', '慢的')],
+  'surprised': ['surprise'],
+  'worried': [out('worry', '担心')],
+  'airport': [out('air', '航空；空气')],
+  'underground': [out('ground', '地面')],
+  'ice cream': [out('ice', '冰')],
+  'everything': [out('every', '每个')],
+  'sometimes': [out('some', '一些')],
+  'birthday': [out('birth', '出生')],
+  'life': ['live'],
+  'write': ['writer'],
+  'writer': ['write'],
+  'hometown': ['town'],
+};
+
+/* ---------- 同类：同一主题下的词 ---------- */
+const ENGLISH_GROUPS = {
+  '运动与比赛': ['sport', 'jump', 'high', 'far', 'ping-pong', 'volleyball', 'player', 'win', 'lose', 'try', 'ability', 'keep', 'first', 'warm up', 'join'],
+  '家务劳动': ['wash', 'dish', 'feed', 'sweep', 'floor', 'rubbish', 'chore', 'to-do list', 'tidy', 'clean', 'dirty', 'desk', 'wall', 'water', 'yard', 'helper', 'pick', 'cut', 'grass', 'collect', 'job', 'finish'],
+  '天气': ['weather', 'sunny', 'cloud', 'cloudy', 'wind', 'blow', 'windy', 'rain', 'rainy', 'snow', 'cold', 'snowstorm', 'raindrop', 'report', 'sunshine'],
+  '季节': ['season', 'spring', 'summer', 'autumn', 'winter', 'favourite', 'beach', 'sea', 'equator', 'fly kites'],
+  '交通工具': ['bus', 'car', 'train', 'plane', 'ship', 'bike', 'truck', 'subway', 'tram', 'airport', 'taxi', 'travel', 'underground', 'by', 'wheel'],
+  '公共场所': ['library', 'centre', 'cinema', 'hospital', 'supermarket', 'museum', 'station', 'police station', 'airport', 'place', 'city', 'town', 'hometown'],
+  '方向与路线': ['left', 'straight', 'cross', 'underground', 'way', 'street', 'near', 'away', 'round', 'step', 'excuse me', 'excuse', 'outside', 'turn'],
+  '职业': ['doctor', 'fireman', 'farmer', 'cook', 'police', 'police officer', 'painter', 'scientist', 'writer', 'worker', 'driver', 'nurse', 'postman', 'teacher', 'player', 'dancer', 'keeper', 'helper', 'dressmaker', 'student'],
+  '家人与称呼': ['aunt', 'uncle', 'woman', 'boy', 'Mr'],
+  '情绪感受': ['laugh', 'sad', 'cry', 'angry', 'frown', 'scared', 'shake', 'excited', 'surprised', 'worried', 'feeling', 'tired', 'feel', 'miss', 'enjoy'],
+  '身体健康': ['ill', 'better', 'cough', 'hospital', 'doctor', 'nurse', 'sleep', 'cancer'],
+  '植物': ['seed', 'earth', 'root', 'stem', 'leaf', 'dig', 'sunflower', 'wheat', 'cotton', 'plant', 'grain', 'bamboo', 'grass', 'thin'],
+  '衣物': ['T-shirt', 'skirt', 'shorts', 'shirt', 'trousers', 'scarf', 'sweater', 'dress', 'coat', 'jacket', 'hat', 'robe', 'uniform', 'wear'],
+  '时间': ['month', 'year', 'minute', 'hour', 'tomorrow', 'night', 'later', 'again', 'sometimes', 'often', 'never', 'next', 'end', 'first', 'birthday'],
+  '动物': ['pig', 'cow', 'duck', 'mouse', 'bee', 'owl', 'whale', 'night owl', 'horn'],
+  '校园活动': ['event', 'drama', 'trip', 'fair', 'festival', 'student', 'note', 'vote', 'design', 'culture', 'hunt', 'picnic'],
+  '才艺': ['talent', 'act', 'magic', 'shine', 'puzzle', 'dancer', 'win', 'just', 'opera'],
+  '声音与拟声': ['sound', 'ring', 'beep', 'whoosh', 'chug', 'bang', 'woof', 'cock-a-doodle-doo', 'phew', 'shout'],
+  '自然风景': ['forest', 'nature', 'mountain', 'sea', 'sky', 'earth', 'grass', 'bamboo', 'field', 'beach', 'water'],
+  '频率与程度': ['often', 'sometimes', 'never', 'again', 'quite', 'just', 'more', 'also', 'enough', 'slowly'],
+  '食物': ['ice cream', 'cabbage', 'bake', 'cook', 'taste', 'water'],
+  '学习记录': ['paper', 'note', 'diary', 'report', 'to-do list', 'design', 'write', 'practise', 'student', 'remember', 'problem'],
+  '礼物与节日': ['gift', 'present', 'birthday', 'Christmas', 'party', 'festival', 'surprise', 'special'],
+  '情态词与连词': ['may', 'should', 'will', 'because', 'because of', 'or', 'any'],
+  '画画与手工': ['painter', 'brush', 'design', 'model', 'puzzle', 'magic', 'paper', 'use'],
+  '形状与大小': ['dot', 'round', 'straight', 'cross', 'centre', 'thin', 'huge'],
+  '人物特点': ['clever', 'kind', 'helpful', 'tired', 'warm', 'lovely'],
+  '安全出行': ['safe', 'careful', 'be careful', 'cross', 'underground', 'left', 'light'],
+  '指示与不定代词': ['those', 'any', 'anything', 'everything', 'the same', 'own'],
+  '作息与睡眠': ['sleep', 'dream', 'night', 'tired'],
+  '心愿': ['hope', 'wish', 'dream', 'come true', 'true'],
+};
+
+/* ---------- 关联词表的组装 ---------- */
+/* 同根自动识别：课内词 + 常见后缀（rain → rainy / help → helper）。 */
+const FAMILY_SUFFIXES = ['y', 'ny', 'ey', 'er', 'ers', 'ed', 'ing', 'ful', 'ly', 'man', 'men', 'day', 'thing',
+  'times', 'shine', 'flower', 'port', 'ground', 'way', 'storm', 'drop', 'town', 'maker', 'ball', 'light'];
+
+/* 第一步：补齐单词的拆分、记忆提示、单元归属和唯一标识。 */
 ENGLISH_UNITS.forEach(unit => {
-  unit.words.forEach((word, index) => {
+  unit.words.forEach(word => {
     const bits = word.segments ? word.segments.split('|').filter(Boolean) : [word.en];
     word.parts = bits.map((text, i) => ({
       t: text,
@@ -394,26 +613,140 @@ ENGLISH_UNITS.forEach(unit => {
         ? '按 ' + bits.join(' · ') + ' 分段跟读，再连起来读一读。'
         : '先听整词，再跟读两遍，把发音和中文意思连起来。';
     }
-    const nearby = [];
-    for (let offset = 1; nearby.length < 3 && offset < unit.words.length; offset++) {
-      const candidate = unit.words[(index + offset) % unit.words.length].en;
-      if (candidate !== word.en && !nearby.includes(candidate)) nearby.push(candidate);
-    }
-    word.related = nearby;
+    word.unitId = unit.id;
     word.key = unit.id + ':' + word.en;
     delete word.segments;
+  });
+});
+
+const EN_ALL_WORDS = ENGLISH_UNITS.reduce((list, unit) => list.concat(unit.words), []);
+const EN_INDEX = new Map();
+EN_ALL_WORDS.forEach(word => {
+  const bucket = EN_INDEX.get(word.en) || [];
+  bucket.push(word);
+  EN_INDEX.set(word.en, bucket);
+});
+
+const EN_SEEDS = [];
+function seedLink(a, b, type) {
+  if (!a || !b || a === b) return;
+  EN_SEEDS.push({ a: a, b: b, type: type });
+}
+function addPairMap(map, type) {
+  Object.keys(map).forEach(a => {
+    map[a].forEach(item => {
+      const b = typeof item === 'string' ? item : item.en;
+      seedLink(a, b, type);
+      seedLink(b, a, type);
+    });
+  });
+}
+addPairMap(ENGLISH_OPP, 'opp');
+addPairMap(ENGLISH_NEAR, 'near');
+addPairMap(ENGLISH_FAMILY_EXTRA, 'family');
+
+/* 同根：词根 + 常见后缀 */
+EN_ALL_WORDS.forEach(root => {
+  EN_ALL_WORDS.forEach(derived => {
+    if (root.en === derived.en || root.en.length < 3) return;
+    if (derived.en.indexOf(root.en) !== 0) return;
+    if (FAMILY_SUFFIXES.indexOf(derived.en.slice(root.en.length)) < 0) return;
+    seedLink(root.en, derived.en, 'family');
+    seedLink(derived.en, root.en, 'family');
+  });
+});
+
+/* 组词：本册里由该词组成的短语或合成词 */
+EN_ALL_WORDS.forEach(phrase => {
+  if (phrase.en.indexOf(' ') < 0) return;
+  phrase.en.split(/\s+/).forEach(token => {
+    if (!EN_INDEX.has(token)) return;
+    seedLink(token, phrase.en, 'phrase');
+    seedLink(phrase.en, token, 'phrase');
+  });
+});
+
+/* 同类：同一主题内互相认识 */
+Object.keys(ENGLISH_GROUPS).forEach(name => {
+  const list = ENGLISH_GROUPS[name];
+  list.forEach(a => list.forEach(b => { if (a !== b) seedLink(a, b, 'group'); }));
+});
+
+/* 汇总：同一个词对只保留优先级最高的关系（反 > 近 > 根 > 组 > 类）。 */
+const EN_LINKS = new Map();
+EN_SEEDS.forEach(item => {
+  let bucket = EN_LINKS.get(item.a);
+  if (!bucket) { bucket = new Map(); EN_LINKS.set(item.a, bucket); }
+  const old = bucket.get(item.b);
+  if (old === undefined || RELATION_ORDER.indexOf(item.type) < RELATION_ORDER.indexOf(old)) {
+    bucket.set(item.b, item.type);
+  }
+});
+
+const POS_RE = /^(?:modal v|interj|n|v|adj|adv|prep|conj|det|pron)\.(?:\s*&\s*(?:modal v|interj|n|v|adj|adv|prep|conj|det|pron)\.)?\s*/i;
+function plainZh(zh) {
+  return String(zh || '')
+    .replace(POS_RE, '')
+    .replace(/；(?:modal v|interj|n|v|adj|adv|prep|conj|det|pron)\.\s*/g, '；')
+    .replace(/，(?:modal v|interj|n|v|adj|adv|prep|conj|det|pron)\.\s*/g, '，');
+}
+function resolveLink(source, en) {
+  const bucket = EN_INDEX.get(en);
+  if (bucket && bucket.length) {
+    const same = bucket.filter(word => word.unitId === source.unitId);
+    const target = same.length ? same[0] : bucket[0];
+    return { en: target.en, zh: plainZh(target.zh), inBook: true, key: target.key };
+  }
+  return { en: en, zh: OUT_ZH[en] || '拓展词', inBook: false, key: '' };
+}
+
+/* 第二步：给每个词挂上关联词，不够 3 条时用同单元的词补齐。 */
+ENGLISH_UNITS.forEach(unit => {
+  unit.words.forEach((word, index) => {
+    const bucket = EN_LINKS.get(word.en) || new Map();
+    const buckets = {};
+    bucket.forEach((type, en) => {
+      if (en === word.en) return;
+      (buckets[type] = buckets[type] || []).push(en);
+    });
+    /* 同类词较多时，先排本单元的词，再排其他单元的词。 */
+    if (buckets.group) {
+      buckets.group.sort((a, b) => {
+        const inA = (EN_INDEX.get(a) || []).some(item => item.unitId === word.unitId) ? 0 : 1;
+        const inB = (EN_INDEX.get(b) || []).some(item => item.unitId === word.unitId) ? 0 : 1;
+        return inA - inB;
+      });
+    }
+    const links = [];
+    RELATION_ORDER.forEach(type => {
+      const cap = RELATION_CAP[type] || 2;
+      (buckets[type] || []).slice(0, cap).forEach(en => {
+        if (links.length >= RELATION_TOTAL) return;
+        links.push(Object.assign({ type: type }, resolveLink(word, en)));
+      });
+    });
+    if (links.length < RELATION_MIN) {
+      const seen = links.map(link => link.en).concat([word.en]);
+      for (let offset = 1; links.length < RELATION_MIN && offset < unit.words.length; offset++) {
+        const en = unit.words[(index + offset) % unit.words.length].en;
+        if (seen.indexOf(en) >= 0) continue;
+        seen.push(en);
+        links.push(Object.assign({ type: 'group' }, resolveLink(word, en)));
+      }
+    }
+    word.links = links;
   });
 });
 
 const ENGLISH_BOOKS = [...new Set(ENGLISH_UNITS.map(unit => unit.book))];
 const ENGLISH_WORDS = ENGLISH_UNITS.flatMap(unit => unit.words.map(word => ({
   en: word.en,
-  zh: word.zh.replace(/^(n|v|adj|adv|prep|conj|det|pron|modal v|interj)\.\s*/i, ''),
+  zh: plainZh(word.zh),
   unitId: unit.id,
   unitName: unit.name,
   book: unit.book,
 })));
 
 if (typeof module !== 'undefined' && module.exports) {
-  module.exports = { ENGLISH_UNITS, ENGLISH_BOOKS, ENGLISH_WORDS };
+  module.exports = { ENGLISH_UNITS, ENGLISH_BOOKS, ENGLISH_WORDS, RELATION_META, RELATION_ORDER };
 }

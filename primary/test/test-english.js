@@ -3,7 +3,7 @@
    运行：node test/test-english.js
    ============================================================ */
 'use strict';
-const { ENGLISH_UNITS, ENGLISH_BOOKS, ENGLISH_WORDS } = require('../english-data.js');
+const { ENGLISH_UNITS, ENGLISH_BOOKS, ENGLISH_WORDS, RELATION_ORDER } = require('../english-data.js');
 
 let fails = 0;
 let checked = 0;
@@ -12,6 +12,8 @@ const ok = (condition, message) => {
   if (!condition) { fails++; console.error('  ❌ ' + message); }
 };
 const normalize = text => text.toLowerCase().replace(/[^a-z]/g, '');
+const allWords = new Set(ENGLISH_UNITS.flatMap(unit => unit.words.map(word => word.en)));
+const allKeys = new Set(ENGLISH_UNITS.flatMap(unit => unit.words.map(word => word.key)));
 
 console.log('— 教材结构 —');
 ok(ENGLISH_UNITS.length === 12, '四年级上下册应有 12 个单元，实际 ' + ENGLISH_UNITS.length);
@@ -50,8 +52,18 @@ for (const unit of ENGLISH_UNITS) {
     ok(normalize(word.parts.map(part => part.t).join('')) === normalize(word.en), tag + ' 拆分后不能还原原词');
     for (const part of word.parts) ok(part.t && part.d, tag + ' 拆分段缺少文本或说明');
     ok(word.memo && word.memo.length >= 4, tag + ' 缺少记忆提示');
-    ok(Array.isArray(word.related) && word.related.length >= 3, tag + ' 至少 3 个单元内关联词');
-    for (const related of word.related) ok(localWords.has(related), tag + ' 关联词不在本单元：' + related);
+    ok(Array.isArray(word.links) && word.links.length >= 3, tag + ' 至少 3 条关联词');
+    ok(word.links.filter(link => link.inBook).length >= 2, tag + ' 至少 2 条课内关联词');
+    for (const link of word.links) {
+      ok(link.en && link.en !== word.en, tag + ' 关联词不能是自己');
+      ok(RELATION_ORDER.includes(link.type), tag + ' 关联类型未知：' + link.type);
+      ok(link.zh && link.zh.length > 0, tag + ' 关联词缺少中文：' + link.en);
+      ok(/^[A-Za-z][A-Za-z \-']*$/.test(link.en), tag + ' 关联词应为英文单词：' + link.en);
+      if (link.inBook) {
+        ok(allWords.has(link.en), tag + ' 课内关联词不在教材中：' + link.en);
+        ok(allKeys.has(link.key), tag + ' 课内关联词缺少词卡定位：' + link.en);
+      }
+    }
   }
 }
 ok(total === 306, '总词数应为 306，实际 ' + total);

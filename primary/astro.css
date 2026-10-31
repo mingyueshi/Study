@@ -125,11 +125,122 @@
 .wrong-row-text { color: #a4453f; text-decoration: line-through; text-decoration-color: #e4b6b2; text-decoration-thickness: 2px; }
 .right-row-text { color: #187749; font-weight: 700; }
 
+/* ============================================================
+   动画与装饰：入场、悬浮、星光闪烁、太阳脉动、行星旋转
+   ============================================================ */
+
+/* ---------- 关键帧 ---------- */
+@keyframes af-fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes af-twinkle {
+  0%, 100% { opacity: 0.3; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.15); }
+}
+@keyframes af-sun-pulse {
+  0%, 100% { filter: drop-shadow(0 0 6px rgba(246, 185, 59, 0.5)); }
+  50% { filter: drop-shadow(0 0 18px rgba(246, 185, 59, 0.85)); }
+}
+@keyframes af-orbit {
+  from { transform: rotate(0deg) translateX(0) rotate(0deg); }
+  to { transform: rotate(360deg) translateX(0) rotate(-360deg); }
+}
+@keyframes af-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+@keyframes af-spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes af-shimmer {
+  0% { opacity: 0.4; }
+  50% { opacity: 0.9; }
+  100% { opacity: 0.4; }
+}
+
+/* ---------- 图示入场动画（仅屏幕） ---------- */
+@media screen {
+  .fig {
+    animation: af-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .fig:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(40, 54, 85, 0.12);
+  }
+  .fig, .fig * {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  /* 太阳脉动 */
+  .fig[data-fig="astro-sun-facts"] svg circle:first-of-type,
+  .fig[data-fig="astro-asteroid-belt"] svg circle:first-child {
+    animation: af-sun-pulse 3s ease-in-out infinite;
+    transform-origin: center;
+  }
+  /* 星光闪烁：所有星星小点 */
+  .fig-svg circle[fill="#c9c2f2"],
+  .fig-svg circle[fill="#c9c2f2"] {
+    animation: af-twinkle 2.4s ease-in-out infinite;
+  }
+  /* 行星小点悬浮 */
+  .planet-dot {
+    cursor: pointer;
+    transition: r 0.3s ease, stroke-width 0.3s ease;
+  }
+  .planet-dot:hover {
+    filter: drop-shadow(0 0 6px rgba(40, 54, 85, 0.4));
+  }
+  /* 空间站悬浮 */
+  .fig[data-fig="astro-space-station"] svg {
+    animation: af-float 5s ease-in-out infinite;
+  }
+  /* 北斗连线高亮 */
+  .fig[data-fig="astro-constellations"] svg line {
+    transition: stroke-width 0.3s ease;
+  }
+}
+
+/* ---------- 背景星空装饰 ---------- */
+@media screen {
+  .study-page[data-subject="astro"] .study-content {
+    position: relative;
+  }
+  .astro-starfield {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .astro-starfield::before,
+  .astro-starfield::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(1.5px 1.5px at 10% 20%, rgba(155, 145, 200, 0.8), transparent),
+      radial-gradient(1px 1px at 25% 60%, rgba(155, 145, 200, 0.6), transparent),
+      radial-gradient(1.8px 1.8px at 45% 15%, rgba(155, 145, 200, 0.7), transparent),
+      radial-gradient(1px 1px at 60% 75%, rgba(155, 145, 200, 0.5), transparent),
+      radial-gradient(1.5px 1.5px at 75% 35%, rgba(155, 145, 200, 0.7), transparent),
+      radial-gradient(1px 1px at 88% 55%, rgba(155, 145, 200, 0.6), transparent),
+      radial-gradient(1.4px 1.4px at 35% 85%, rgba(155, 145, 200, 0.5), transparent),
+      radial-gradient(1px 1px at 92% 10%, rgba(155, 145, 200, 0.6), transparent);
+    animation: af-twinkle 4s ease-in-out infinite;
+  }
+  .astro-starfield::after {
+    animation-delay: 2s;
+    opacity: 0.6;
+  }
+  #app { position: relative; z-index: 1; }
+}
+
 /* ---------- 打印 ---------- */
 @media print {
   body { background: #fff; font-size: 13px; }
   #app > header, .sidebar, .toolbar, .textbook-banner, .skip-link,
-  .say, .learn-btn, .goal-tags { display: none !important; }
+  .say, .learn-btn, .goal-tags, .astro-starfield { display: none !important; }
   .study-shell { display: block; padding: 0; }
   .study-content { padding: 0; }
   .unit-head { border: 1px solid #ccc; box-shadow: none; }

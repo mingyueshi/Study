@@ -6,6 +6,8 @@
 'use strict';
 const MKB = require('../math-data.js');
 const FIGS = require('../figures.js');
+const MFIGS = require('../math-figures.js');
+const hasFig = id => FIGS.has(id) || MFIGS.has(id);
 
 let fails = 0;
 let checked = 0;
@@ -30,6 +32,7 @@ MKB.units.forEach((u, i) => {
   check(typeof u.emoji === 'string' && u.emoji.length > 0, tag + ' 缺少 emoji');
   check(/^#[0-9a-f]{6}$/i.test(u.color), tag + ' 颜色格式: ' + u.color);
   check(isStr(u.intro), tag + ' 缺少单元导语');
+  check(!u.banner || MFIGS.has(u.banner), tag + ' 单元横幅未注册: ' + u.banner);
   check(Array.isArray(u.goals) && u.goals.length >= 1 && u.goals.every(isStr), tag + ' 学习重点至少 1 条');
   check(Array.isArray(u.points) && u.points.length >= 1, tag + ' 至少 1 个知识点');
 
@@ -39,7 +42,8 @@ MKB.units.forEach((u, i) => {
     seenPoints.add(p.id);
     check(new RegExp('^' + u.id + '-').test(p.id), t + ' id 应以单元 id 为前缀');
     check(isStr(p.title), t + ' 缺少标题');
-    if (p.fig) check(FIGS.has(p.fig), t + ' 图示未注册: ' + p.fig);
+    check(isStr(p.fig), t + ' 缺少图示（每个知识点都要有一张图）');
+    if (p.fig) check(hasFig(p.fig), t + ' 图示未注册: ' + p.fig);
     check(isStr(p.overview), t + ' 缺少概述');
     check(Array.isArray(p.items) && p.items.length >= 2 && p.items.every(isStr), t + ' 知识要点至少 2 条');
     check(p.example && isStr(p.example.q) && isStr(p.example.a) && isStr(p.example.steps), t + ' 例题不完整（q/a/steps）');
@@ -81,6 +85,6 @@ walk(MKB.formulas, 'formulas');
 walk(MKB.mistakes, 'mistakes');
 
 console.log(fails === 0
-  ? '\n✅ 全部通过（共断言 ' + checked + ' 项：10 板块 37 知识点 + 公式 + 易错）'
+  ? '\n✅ 全部通过（共断言 ' + checked + ' 项：10 板块 37 知识点 + 图示 ' + MFIGS.FIG_IDS.length + ' 张 + 公式 + 易错）'
   : '\n❌ 共 ' + fails + ' / ' + checked + ' 项失败');
 process.exit(fails === 0 ? 0 : 1);

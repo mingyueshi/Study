@@ -36,7 +36,7 @@ const HIS = {
           recall: '历史是过去的真事，古书文物是证人。',
         },
         {
-          id: 'hu1-2', title: '公元与世纪',
+          id: 'hu1-2', title: '公元与世纪', fig: 'history-ad-era',
           overview: '说历史离不开年代。全世界通用的纪年方法叫「公元」，公元前要倒着数。',
           items: [
             '公元纪年把传说中耶稣诞生的那一年定为公元元年，之前叫公元前，之后叫公元，比如公元 2024 年。',
@@ -122,7 +122,7 @@ const HIS = {
           recall: '尧舜禹，禅让制，选贤与能天下公。',
         },
         {
-          id: 'hu2-4', title: '大禹治水',
+          id: 'hu2-4', title: '大禹治水', fig: 'history-yu-flood',
           overview: '洪水泛滥，禹改变父亲一味围堵的办法，用疏导的方式治水十三年，三过家门而不入。',
           items: [
             '禹的父亲鲧用「堵」的办法治水多年没有成功；禹改用疏导，把洪水引入大海。',
@@ -169,7 +169,7 @@ const HIS = {
           recall: '大禹建夏家天下，世袭从此代代传。',
         },
         {
-          id: 'hu3-2', title: '商朝与甲骨文', fig: 'history-oracle',
+          id: 'hu3-2', title: '商朝与甲骨文', fig: 'history-oracle', photo: 'photo-oracle',
           overview: '商朝人用龟甲兽骨占卜，把结果刻在上面——这些「甲骨文」是我国目前已知最早的成熟文字。',
           items: [
             '约公元前 1600 年商汤灭夏建商，商朝历时五百多年，是我国目前有文字直接证实的最早王朝。',
@@ -182,7 +182,7 @@ const HIS = {
           recall: '龟甲兽骨刻卜辞，最早文字叫甲骨。',
         },
         {
-          id: 'hu3-3', title: '辉煌的青铜文明', fig: 'history-bronze',
+          id: 'hu3-3', title: '辉煌的青铜文明', fig: 'history-bronze', photo: 'photo-houmuwu',
           overview: '商周时期，青铜铸造技术登峰造极：巨大的鼎、精美的尊，被称为「青铜时代」。',
           items: [
             '青铜是铜和锡等的合金，比纯铜坚硬，商周用它铸造礼器、兵器和工具。',
@@ -195,7 +195,7 @@ const HIS = {
           recall: '后母戊鼎八百千克，青铜时代真辉煌。',
         },
         {
-          id: 'hu3-4', title: '西周分封与礼乐',
+          id: 'hu3-4', title: '西周分封与礼乐', fig: 'history-enfeoffment',
           overview: '公元前 1046 年，武王伐纣建立西周。周王把土地分给诸侯，用礼乐规范天下。',
           items: [
             '公元前 1046 年牧野之战，周武王打败商纣王，建立周朝，定都镐京，史称西周。',
@@ -242,7 +242,7 @@ const HIS = {
           recall: '孔孟讲仁老庄道，墨家兼爱法家法。',
         },
         {
-          id: 'hu4-3', title: '都江堰',
+          id: 'hu4-3', title: '都江堰', fig: 'history-dujiangyan', photo: 'photo-dujiangyan',
           overview: '战国时秦国蜀郡太守李冰父子在岷江上修建都江堰，两千多年来一直灌溉着成都平原。',
           items: [
             '都江堰位于四川岷江上，由分水鱼嘴、飞沙堰、宝瓶口等部分组成。',
@@ -276,7 +276,7 @@ const HIS = {
       goals: ['记住秦统一的时间和意义', '了解丝绸之路、造纸术与《史记》'],
       points: [
         {
-          id: 'hu5-1', title: '秦始皇统一中国',
+          id: 'hu5-1', title: '秦始皇统一中国', fig: 'history-qin-unify',
           overview: '秦王嬴政先后灭掉六国，建立秦朝，自称「始皇帝」。统一文字、货币和度量衡，车同轨、书同文。',
           items: [
             '从公元前 230 年到前 221 年，秦国依次灭掉韩、赵、魏、楚、燕、齐，结束割据。',
@@ -289,7 +289,7 @@ const HIS = {
           recall: '六王毕，四海一；书同文，车同轨。',
         },
         {
-          id: 'hu5-2', title: '万里长城与兵马俑', fig: 'history-greatwall',
+          id: 'hu5-2', title: '万里长城与兵马俑', fig: 'history-greatwall', photo: ['photo-greatwall', 'photo-terracotta'],
           overview: '为了抵御北方游牧民族，秦朝连接各国旧长城，修成西起临洮、东到辽东的万里长城；秦始皇陵的兵马俑被誉为「世界第八大奇迹」。',
           items: [
             '秦长城是在燕、赵、秦三国旧长城的基础上连接扩建的，并非从零新建。',
@@ -302,7 +302,7 @@ const HIS = {
           recall: '孟姜女哭城是传说，今日长城明代造。',
         },
         {
-          id: 'hu5-3', title: '张骞与丝绸之路', fig: 'history-silkroad',
+          id: 'hu5-3', title: '张骞与丝绸之路', fig: 'history-silkroad', photo: 'photo-silkroad',
           overview: '汉武帝派张骞出使西域，开辟了从长安通往中亚、欧洲的丝绸之路，中国的丝绸由此走向世界。',
           items: [
             '公元前 138 年和前 119 年，张骞两次出使西域，历尽艰险，加强了汉朝与西域各国的联系。',
@@ -315,7 +315,7 @@ const HIS = {
           recall: '张骞西行通西域，丝绸路上驼铃响。',
         },
         {
-          id: 'hu5-4', title: '蔡伦与造纸术',
+          id: 'hu5-4', title: '蔡伦与造纸术', fig: 'history-papermaking',
           overview: '纸是我国古代的伟大发明。东汉蔡伦改进造纸术，让书写材料变得又轻便又便宜。',
           items: [
             '西汉时期已经有了麻纸，但质地粗糙；西安出土过西汉灞桥纸。',
@@ -328,7 +328,7 @@ const HIS = {
           recall: '蔡伦造纸传天下，文化插上轻翅膀。',
         },
         {
-          id: 'hu5-5', title: '司马迁与《史记》',
+          id: 'hu5-5', title: '司马迁与《史记》', fig: 'history-shiji',
           overview: '西汉史官司马迁忍辱负重，用十多年写成《史记》——我国第一部纪传体通史。',
           items: [
             '《史记》记载了从黄帝到汉武帝约三千年的历史，共一百三十篇。',
@@ -362,7 +362,7 @@ const HIS = {
           recall: '官渡曹操胜袁绍，赤壁孙刘破曹船。',
         },
         {
-          id: 'hu6-2', title: '书圣王羲之',
+          id: 'hu6-2', title: '书圣王羲之', fig: 'history-wangxizhi', photo: 'photo-lanting',
           overview: '东晋王羲之把汉字书写变成艺术，《兰亭集序》被誉为「天下第一行书」。',
           items: [
             '王羲之自幼练字，据说洗笔把一池水都染黑了，「墨池」由此得名。',
@@ -375,7 +375,7 @@ const HIS = {
           recall: '墨池染黑功不负，入木三分书圣笔。',
         },
         {
-          id: 'hu6-3', title: '祖冲之与圆周率',
+          id: 'hu6-3', title: '祖冲之与圆周率', fig: 'history-pi',
           overview: '南朝祖冲之把圆周率精确到小数点后第七位，领先世界近千年，月球上还有一座以他命名的环形山。',
           items: [
             '圆周率是圆的周长与直径的比值，约等于 3.14，越精确越利于精密计算。',
@@ -409,7 +409,7 @@ const HIS = {
       goals: ['了解大运河与科举制', '知道唐朝的开放气象与代表人物'],
       points: [
         {
-          id: 'hu7-1', title: '大运河', fig: 'history-canal',
+          id: 'hu7-1', title: '大运河', fig: 'history-canal', photo: 'photo-canal',
           overview: '隋炀帝下令开凿大运河，以洛阳为中心，北达涿郡、南至余杭，是古代世界上最长的运河。',
           items: [
             '大运河分永济渠、通济渠、邗沟、江南河四段，沟通海河、黄河、淮河、长江、钱塘江五大水系。',
@@ -448,7 +448,7 @@ const HIS = {
           recall: '水能载舟亦覆舟，以人为镜明得失。',
         },
         {
-          id: 'hu7-4', title: '玄奘西行与鉴真东渡',
+          id: 'hu7-4', title: '玄奘西行与鉴真东渡', fig: 'history-xuanzang-jianzhen',
           overview: '贞观年间，玄奘西行天竺求取佛经；稍后鉴真六次东渡日本传法。一去一来，都是文化的交流。',
           items: [
             '玄奘历经艰险到达天竺（今印度一带），带回大量佛经，还把沿途见闻写成《大唐西域记》。',
@@ -508,7 +508,7 @@ const HIS = {
           recall: '泥活字，指南针，火药开路纸传文。',
         },
         {
-          id: 'hu8-2', title: '岳飞精忠报国',
+          id: 'hu8-2', title: '岳飞精忠报国', fig: 'history-yuefei',
           overview: '南宋初年，岳飞率「岳家军」北伐金军，「撼山易，撼岳家军难」，却被以「莫须有」的罪名害死。',
           items: [
             '岳飞的母亲在他背上刺「尽忠报国」四字（后世流传为「精忠报国」），激励他保家卫国。',
@@ -521,7 +521,7 @@ const HIS = {
           recall: '冻死不拆屋，饿死不掳掠；精忠报国，还我河山。',
         },
         {
-          id: 'hu8-3', title: '元朝大一统',
+          id: 'hu8-3', title: '元朝大一统', fig: 'history-province',
           overview: '蒙古铁骑横扫欧亚，1271 年忽必烈建立元朝，1279 年统一全国，是版图空前辽阔的大一统王朝。',
           items: [
             '1206 年铁木真统一蒙古草原，被尊称为成吉思汗。',
@@ -534,7 +534,7 @@ const HIS = {
           recall: '成吉思汗统草原，忽必烈建元行省传。',
         },
         {
-          id: 'hu8-4', title: '郑和下西洋', fig: 'history-zhenghe',
+          id: 'hu8-4', title: '郑和下西洋', fig: 'history-zhenghe', photo: 'photo-ship',
           overview: '1405—1433 年，郑和七次下西洋，宝船队最远到达非洲东海岸，比哥伦布首航早了近一个世纪。',
           items: [
             '郑和本名马和，人称「三宝太监」，是明朝的航海家，因战功受赐郑姓。',
@@ -547,7 +547,7 @@ const HIS = {
           recall: '宝船七下西洋去，海上丝路谱新篇。',
         },
         {
-          id: 'hu8-5', title: '故宫与明清小说', fig: 'history-palace',
+          id: 'hu8-5', title: '故宫与明清小说', fig: 'history-palace', photo: 'photo-palace',
           overview: '明清两代的紫禁城至今矗立在北京中轴线上；四大名著也诞生于这个时代。之后不久，中国被炮声惊醒。',
           items: [
             '北京故宫 1406 年动工、1420 年建成，是明清两代皇宫，也是世界上现存规模最大的木结构宫殿群。',

@@ -177,9 +177,11 @@ function renderUnit(u) {
 /* ---------- 必背古诗文 ---------- */
 function poemCard(p) {
   const meta = p.kind === '文言文' ? esc(p.dynasty) : esc(p.dynasty + ' · ' + p.author);
+  const fig = (p.fig && window.Figures) ? Figures.figHTML(p.fig) : '';
   return '<article class="poem-card" style="--c:#8b65c9">' +
     '<div class="phead"><h3>' + esc(p.title) + '</h3><span class="pmeta">' + meta +
     '<span class="pkind">' + esc(p.kind) + '</span></span>' + sayBtn(p.title + '。' + p.lines.join('')) + '</div>' +
+    fig +
     '<div class="plines">' + p.lines.map(line =>
       '<button class="pline" data-act="say" data-t="' + esc(line) + '">' + esc(line) + '</button>').join('') + '</div>' +
     '<p class="pnote">' + esc(p.note) + '</p>' +

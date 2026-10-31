@@ -125,6 +125,95 @@
 .wrong-row-text { color: #a4453f; text-decoration: line-through; text-decoration-color: #e4b6b2; text-decoration-thickness: 2px; }
 .right-row-text { color: #187749; font-weight: 700; }
 
+/* ---------- 屏幕动画（打印不受影响） ---------- */
+@media screen {
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes floatY {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+  @keyframes pulseGlow {
+    0%, 100% { box-shadow: 0 4px 16px rgba(40, 54, 85, .035); }
+    50% { box-shadow: 0 8px 28px rgba(40, 54, 85, .12); }
+  }
+
+  /* 知识卡 / 速查 / 小诊所入场 */
+  .kcard, .formula-card, .mistake-card {
+    animation: fadeInUp .55s cubic-bezier(.2,.7,.2,1) both;
+  }
+  .kcard:nth-child(2) { animation-delay: .05s; }
+  .kcard:nth-child(3) { animation-delay: .1s; }
+  .kcard:nth-child(4) { animation-delay: .15s; }
+  .kcard:nth-child(5) { animation-delay: .2s; }
+
+  /* 卡片悬浮抬升 */
+  .kcard, .formula-card, .mistake-card {
+    transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease;
+  }
+  .kcard:hover, .formula-card:hover, .mistake-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(40, 54, 85, .12);
+  }
+
+  /* 单元 emoji 浮动 */
+  .unit-emoji { animation: floatY 3.2s ease-in-out infinite; }
+
+  /* 学习重点标签悬浮 */
+  .goal-tags span { transition: transform .2s ease, background .2s ease; }
+  .goal-tags span:hover { transform: translateY(-2px) scale(1.04); }
+
+  /* 已复习按钮呼吸 */
+  .learn-btn.on { animation: pulseGlow 2.4s ease-in-out infinite; }
+  .learn-btn { transition: transform .15s ease, background .2s ease, border-color .2s ease; }
+  .learn-btn:hover { transform: scale(1.1); }
+
+  /* 图示悬浮微动 */
+  .fig { transition: transform .3s ease, box-shadow .3s ease; }
+  .fig:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(40, 54, 85, .06); }
+  .fig-svg { transition: transform .4s ease; }
+  .fig:hover .fig-svg { transform: scale(1.01); }
+
+  /* 横幅装饰圆缓慢浮动 */
+  .unit-banner svg circle { animation: floatY 4s ease-in-out infinite; }
+  .unit-banner svg circle:nth-child(2) { animation-delay: .6s; }
+
+  /* 单元封面图 */
+  .unit-hero {
+    display: block; width: 100%; max-height: 280px; object-fit: cover;
+    border-radius: 16px; margin-bottom: 12px;
+    box-shadow: 0 8px 24px rgba(40, 54, 85, .1);
+    transition: transform .4s ease, box-shadow .4s ease;
+  }
+  .unit-hero:hover { transform: scale(1.01); box-shadow: 0 14px 34px rgba(40, 54, 85, .16); }
+
+  /* 知识点卡片内的真实配图 */
+  .point-photo img {
+    display: block; width: 100%; max-height: 240px; object-fit: cover;
+    border-radius: 12px;
+    transition: transform .35s ease;
+  }
+  .point-photo:hover img { transform: scale(1.02); }
+
+  /* 朗读按钮反馈 */
+  .say { transition: transform .15s ease, background .2s ease; }
+  .say:hover { transform: scale(1.08); }
+
+  /* 减弱动画（尊重系统偏好） */
+  @media (prefers-reduced-motion: reduce) {
+    .kcard, .formula-card, .mistake-card,
+    .unit-emoji, .learn-btn.on, .unit-banner svg circle {
+      animation: none !important;
+    }
+    .kcard:hover, .formula-card:hover, .mistake-card:hover,
+    .fig:hover, .learn-btn:hover, .say:hover {
+      transform: none;
+    }
+  }
+}
+
 /* ---------- 打印 ---------- */
 @media print {
   body { background: #fff; font-size: 13px; }

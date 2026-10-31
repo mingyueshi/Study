@@ -17,7 +17,7 @@
 - **文学常识**：双击 `lit.html`，按八大文学苑学习文学常识；
 - **科学实验室**：双击 `sci.html`，按八大科学实验室学习科学知识；
 - **教材同步单词**：双击 `english.html`，按外研版新标准三起（新课标）四年级上下册单元学习；
-- **场景单词**：双击 `words.html`，按教室、食物、农场、社区、交通等 25 个生活场景学习 305 个单词，与教材同步单词分别记录掌握进度；
+- **场景单词**：双击 `words.html`，按教室、食物、农场、社区、交通、海洋、太空等 38 个生活场景学习 480 个单词，与教材同步单词分别记录掌握进度；
 - **成语本**：双击 `idioms.html`；**作文坊**：双击 `writing.html`；**成语接龙**：双击 `chain.html`。
 
 - 不需要安装任何软件，不需要联网；
@@ -328,7 +328,7 @@
 
 ### 场景单词（words-data.js）
 
-按生活场景组织，共 25 类 305 词，支持音标、中文释义、拆分点读、记忆提示与相关词点读。词库保留在 `words-data.js`，界面逻辑为 `words-app.js`，复用 `books.css`；修改词库后运行 `node test/test-words.js`。掌握记录沿用原来的 `wordbook_v1` 存档，和教材同步单词的进度分别保存。
+按生活场景组织，共 38 类 480 词（教室、书包文具、身体、天气、海洋、太空、职业、乐器、购物、看病、露营、反义词、礼貌问候等），支持音标、中文释义、拆分点读、记忆提示与相关词点读（相关词共 1900+ 组，书内的会显示 📖 角标）。词库保留在 `words-data.js`，界面逻辑为 `words-app.js`，复用 `books.css`；修改词库后运行 `node test/test-words.js`。掌握记录沿用原来的 `wordbook_v1` 存档，和教材同步单词的进度分别保存。
 
 ### 教材同步单词（english-data.js）
 
@@ -384,7 +384,7 @@ primary/
 ├── sci.css                 科学实验室专属样式
 ├── english.html            教材同步单词入口（外研版新标准三起）
 ├── english.css / english-data.js / english-app.js   同步单词（家长改 data）
-├── words.html              场景单词入口（25 个生活场景）
+├── words.html              场景单词入口（38 个生活场景 · 480 词）
 ├── words-data.js / words-app.js   场景单词词库与学习逻辑（复用 books.css）
 ├── idioms.html             成语本入口
 ├── idioms.css / idioms-data.js / idioms-app.js      成语本（家长改 data）

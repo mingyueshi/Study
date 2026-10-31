@@ -108,11 +108,13 @@ function pointCard(u, p) {
 }
 
 function renderUnit(u) {
+  const banner = window.AstroFigures ? AstroFigures.unitBanner(u.id) : '';
   return '<div class="unit-head" style="--c:' + u.color + '">' +
     '<span class="unit-emoji">' + u.emoji + '</span>' +
     '<div><h1>' + esc(u.no) + ' · ' + esc(u.name) + '</h1>' +
     '<p>' + esc(u.intro) + '</p>' +
     '<div class="goal-tags">' + u.goals.map(g => '<span>🎯 ' + esc(g) + '</span>').join('') + '</div></div></div>' +
+    banner +
     u.points.map(p => pointCard(u, p)).join('');
 }
 

@@ -17,6 +17,49 @@
   margin: 22px 2px 0; color: var(--muted); font-size: 12px; line-height: 1.7;
 }
 
+/* ---------- 关联词：相反 / 相近 / 同根 / 组词 / 同类 ---------- */
+.rel-legend {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 6px;
+  margin-top: 12px; font-size: 13px; font-weight: 600; color: #6b7480;
+}
+.rel-legend > b { color: #465765; font-weight: 800; }
+.rel-legend .lg {
+  display: inline-flex; align-items: center; gap: 4px; padding: 3px 9px;
+  border: 1px solid color-mix(in srgb, var(--rc) 35%, #fff); border-radius: 9px;
+  background: color-mix(in srgb, var(--rc) 10%, #fff);
+  color: color-mix(in srgb, var(--rc) 72%, #33404d);
+}
+.rel-legend .lg em {
+  display: grid; place-items: center; width: 16px; height: 16px;
+  border-radius: 5px; background: var(--rc); color: #fff;
+  font-style: normal; font-size: 11px; font-weight: 800;
+}
+.rel-legend .lg-tip { color: var(--muted); font-weight: 500; }
+
+.study-page .rel[class*="t-"] {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--rc) 38%, #fff);
+  background: color-mix(in srgb, var(--rc) 8%, #fff);
+}
+.study-page .rel[class*="t-"] b { color: color-mix(in srgb, var(--rc) 68%, #33404d); }
+.study-page .rel .rel-tag {
+  display: inline-grid; place-items: center; min-width: 16px; height: 16px;
+  margin-right: 4px; padding: 0 3px; border-radius: 5px;
+  background: var(--rc); color: #fff; font-size: 11px; font-weight: 800; line-height: 1;
+}
+.study-page .rel .rel-book { margin-left: 3px; font-size: 11px; }
+
+/* 从关联词跳转过来时，让目标词卡闪一下。 */
+@keyframes wcardFlash {
+  0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--c) 55%, #fff), 0 3px 0 var(--subject-line); }
+  35% { box-shadow: 0 0 0 7px color-mix(in srgb, var(--c) 40%, #fff), 0 3px 0 var(--subject-line); }
+  100% { box-shadow: 0 0 0 0 transparent, 0 3px 0 var(--subject-line); }
+}
+.study-page .wcard.flash { animation: wcardFlash 1.5s ease; }
+@media (prefers-reduced-motion: reduce) {
+  .study-page .wcard.flash { animation: none; }
+}
+
 @media (max-width: 999px) {
   .book-label { grid-column: 1 / -1; padding-bottom: 0; }
 }

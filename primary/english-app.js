@@ -29,9 +29,6 @@ function esc(value) {
 function speak(text, rate) {
   if (window.SpeechKit) SpeechKit.speak(text, { rate: rate || 0.82 });
 }
-function shortZh(zh) {
-  return String(zh || '').replace(/^(n|v|adj|adv|prep|conj|det|pron|modal v|interj)\.\s*/i, '');
-}
 
 function renderChips() {
   let book = '';
@@ -51,23 +48,29 @@ function picHTML(word) {
   const letters = esc(word.en.split(' ')[0].slice(0, 2));
   return '<span class="pic-fallback">' + letters + '</span>';
 }
-function relatedZh(unit, en) {
-  const local = unit.words.find(word => word.en === en);
-  if (local) return shortZh(local.zh);
-  for (const item of ENGLISH_UNITS) {
-    const found = item.words.find(word => word.en === en);
-    if (found) return shortZh(found.zh);
+function relChipHTML(link) {
+  const meta = RELATION_META[link.type] || RELATION_META.group;
+  const tag = '<span class="rel-tag">' + meta.tag + '</span>';
+  const style = ' style="--rc:' + meta.color + '"';
+  if (link.inBook) {
+    return '<button class="rel t-' + link.type + '"' + style + ' data-act="rel" data-key="' + esc(link.key) + '" data-t="' + esc(link.en) +
+      '" title="' + meta.name + '：点一下跳到这张词卡"><b>' + esc(link.en) + '</b><i>' + tag + esc(link.zh) + '<span class="rel-book">📖</span></i></button>';
   }
-  return '拓展词';
+  return '<button class="rel t-' + link.type + '"' + style + ' data-act="say" data-t="' + esc(link.en) +
+    '" title="' + meta.name + '：课外拓展词，点一下听发音"><b>' + esc(link.en) + '</b><i>' + tag + esc(link.zh) + '</i></button>';
+}
+function relLegendHTML() {
+  return '<div class="rel-legend"><b>关联词</b>' + RELATION_ORDER.map(type => {
+    const meta = RELATION_META[type];
+    return '<span class="lg t-' + type + '" style="--rc:' + meta.color + '"><em>' + meta.tag + '</em>' + meta.name + '</span>';
+  }).join('') + '<span class="lg-tip">📖 课内词，点一下跳到对应词卡</span></div>';
 }
 function cardHTML(word, unit, showUnitTag) {
   const learned = !!enState.learned[word.key];
   const parts = word.parts.map(part =>
     '<button class="part" data-act="say" data-t="' + esc(part.t) + '" aria-label="跟读 ' + esc(part.t) + '"><b>' + esc(part.t) + '</b><i>' + esc(part.d) + '</i></button>'
   ).join('<span class="plus">＋</span>');
-  const related = word.related.map(en =>
-    '<button class="rel inbook" data-act="say" data-t="' + esc(en) + '"><b>' + esc(en) + '</b><i>' + esc(relatedZh(unit, en)) + ' <span class="rel-book">📖</span></i></button>'
-  ).join('');
+  const related = (word.links || []).map(relChipHTML).join('');
   return '<article class="wcard' + (learned ? ' learned' : '') + '" style="--c:' + unit.color + '" data-key="' + esc(word.key) + '">' +
     (showUnitTag ? '<span class="unit-tag" style="background:' + unit.color + '">' + esc(unit.book + ' · ' + unit.zh) + '</span>' : '') +
     '<button class="learn-btn' + (learned ? ' on' : '') + '" data-act="learn" data-key="' + esc(word.key) + '" title="标记已掌握" aria-label="已掌握 ' + esc(word.en) + '" aria-pressed="' + learned + '">' + (learned ? '✓' : '') + '</button>' +
@@ -77,12 +80,12 @@ function cardHTML(word, unit, showUnitTag) {
     '<div class="ipa">' + esc(word.ipa) + '</div><div class="zh">' + esc(word.zh) + '</div></div></div>' +
     '<div class="wsec"><span class="seclabel">记</span><div class="parts">' + parts + '</div></div>' +
     '<div class="memo">💡 ' + esc(word.memo) + '</div>' +
-    '<div class="wsec"><span class="seclabel">联</span><div class="rels">' + related + '</div></div></article>';
+    '<div class="wsec"><span class="seclabel" title="关联词：相反 / 相近 / 同根 / 组词 / 同类">联</span><div class="rels">' + related + '</div></div></article>';
 }
 function unitHeadHTML(unit) {
   return '<div class="unit-head" style="--c:' + unit.color + '"><span class="unit-emoji">' + unit.emoji + '</span>' +
     '<div class="unit-main"><h1>' + esc(unit.name) + '</h1><p class="unit-subtitle">' + esc(unit.book + ' · ' + unit.zh) + '</p>' +
-    '<p>已掌握 ' + unitLearned(unit) + ' / ' + unit.words.length + ' 条 · 点读发音，拆分记忆</p></div></div>';
+    '<p>已掌握 ' + unitLearned(unit) + ' / ' + unit.words.length + ' 条 · 点读发音，拆分记忆</p>' + relLegendHTML() + '</div></div>';
 }
 function renderCards() {
   const box = document.getElementById('cards');
@@ -95,7 +98,8 @@ function renderCards() {
       }
     }));
     box.innerHTML = hits.length
-      ? '<div class="search-head">🔎 找到 ' + hits.length + ' 条词汇或短语</div><div class="wgrid">' + hits.map(hit => cardHTML(hit.word, hit.unit, true)).join('') + '</div>'
+      ? '<div class="search-head">🔎 找到 ' + hits.length + ' 条词汇或短语</div>' + relLegendHTML() +
+        '<div class="wgrid">' + hits.map(hit => cardHTML(hit.word, hit.unit, true)).join('') + '</div>'
       : '<div class="empty">🐣 没有找到「' + esc(query) + '」，检查一下拼写，或换个词试试～</div>';
     return;
   }
@@ -151,6 +155,32 @@ function playUnit() {
   };
   step();
 }
+/* 点关联词：课内词跳到对应词卡并朗读，跨单元时自动切换单元。 */
+function gotoWord(key) {
+  const unitId = String(key || '').split(':')[0];
+  const unit = unitById(unitId);
+  if (!unit) return;
+  if (curUnit !== unitId || query) {
+    curUnit = unitId;
+    enState.lastUnit = unitId;
+    enSave();
+    query = '';
+    const input = document.getElementById('search');
+    if (input) input.value = '';
+    stopPlay();
+    render();
+  }
+  const word = unit.words.find(item => item.key === key);
+  const card = Array.from(document.querySelectorAll('.wcard')).find(el => el.dataset.key === key);
+  if (card) {
+    card.classList.remove('flash');
+    void card.offsetWidth;
+    card.classList.add('flash');
+    setTimeout(() => card.classList.remove('flash'), 1600);
+    card.scrollIntoView({ block: 'center', behavior: 'smooth' });
+  }
+  if (word) speak(word.en);
+}
 function selectUnit(id) {
   if (!unitById(id)) return;
   curUnit = id;
@@ -172,6 +202,7 @@ document.addEventListener('click', event => {
     else if (action === 'learn') { event.preventDefault(); toggleLearn(el.dataset.key); }
     else if (action === 'unit') { event.preventDefault(); selectUnit(el.dataset.id); }
     else if (action === 'play') { event.preventDefault(); playUnit(); }
+    else if (action === 'rel') { event.preventDefault(); gotoWord(el.dataset.key); }
     else if (action === 'home') { event.preventDefault(); stopPlay(); window.location.href = 'index.html'; }
   } catch (error) { console.error('[教材同步英语] 操作出错:', error); }
 });
@@ -210,7 +241,7 @@ window.English = {
   get unit() { return curUnit; },
   get query() { return query; },
   units: ENGLISH_UNITS,
-  render, selectUnit, toggleLearn, playUnit, stopPlay, populateVoices,
+  render, selectUnit, toggleLearn, playUnit, stopPlay, populateVoices, gotoWord,
 };
 populateVoices();
 render();

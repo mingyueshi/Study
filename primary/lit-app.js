@@ -84,6 +84,7 @@ function pointCard(u, p) {
     '<button class="learn-btn' + (learned ? ' on' : '') + '" data-act="learn" data-unit="' + u.id + '" data-id="' + esc(p.id) + '" title="标记已掌握" aria-pressed="' + learned + '" aria-label="已掌握 ' + esc(p.title) + '">' + (learned ? '✓' : '') + '</button></div>');
   parts.push('<p class="k-overview">' + esc(p.overview) + '</p>');
   if (p.fig && window.LitFigures) parts.push(LitFigures.figHTML(p.fig));
+  if (p.img) parts.push('<figure class="fig point-photo"><img src="' + esc(p.img) + '" alt="' + esc(p.title) + '配图" loading="lazy"></figure>');
 
   if (p.items && p.items.length) {
     parts.push(msec('纲', '<ul class="klist">' + p.items.map(m =>
@@ -108,11 +109,21 @@ function pointCard(u, p) {
 }
 
 function renderUnit(u) {
+  const bannerSvg = u.banner && window.LitFigures
+    ? LitFigures.figHTML(u.banner)
+    : '';
+  const hero = u.hero
+    ? '<img class="unit-hero" src="' + esc(u.hero) + '" alt="' + esc(u.name) + '配图" loading="lazy">'
+    : '';
+  const banner = (bannerSvg || hero)
+    ? '<div class="unit-banner">' + hero + bannerSvg + '</div>'
+    : '';
   return '<div class="unit-head" style="--c:' + u.color + '">' +
     '<span class="unit-emoji">' + u.emoji + '</span>' +
     '<div><h1>' + esc(u.no) + ' · ' + esc(u.name) + '</h1>' +
     '<p>' + esc(u.intro) + '</p>' +
     '<div class="goal-tags">' + u.goals.map(g => '<span>🎯 ' + esc(g) + '</span>').join('') + '</div></div></div>' +
+    banner +
     u.points.map(p => pointCard(u, p)).join('');
 }
 

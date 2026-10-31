@@ -474,6 +474,719 @@ const GeoFigures = (() => {
     fig.querySelectorAll('[data-fig-act="geo-season"]').forEach(b => b.classList.toggle('fig-on', b === btn));
   }
 
+  /* ================= 单元横幅（八大学习站点） ================= */
+
+  /* 通用横幅底色 + 圆角矩形 */
+  const banner = (bg, inner) =>
+    `<svg class="fig-svg" viewBox="0 0 720 120" preserveAspectRatio="xMidYMid slice">` +
+    `<rect x="0" y="0" width="720" height="120" rx="14" fill="${bg}"/>${inner}</svg>`;
+
+  /* 第一站：认识地球 —— 旋转的地球 + 经纬线 */
+  const bnEarth = () => banner('#e6f3fb',
+    `<g transform="translate(360 60)">` +
+    `<g class="anim-spin-slow"><circle r="46" fill="#2f9bd6" opacity=".18"/>` +
+    `<ellipse rx="46" ry="12" fill="none" stroke="#2f9bd6" stroke-width="1.6"/>` +
+    `<ellipse rx="46" ry="28" fill="none" stroke="#2f9bd6" stroke-width="1.2" opacity=".6"/>` +
+    `<ellipse rx="14" ry="46" fill="none" stroke="#2f9bd6" stroke-width="1.2" opacity=".6"/>` +
+    `<ellipse rx="30" ry="46" fill="none" stroke="#2f9bd6" stroke-width="1.2" opacity=".5"/>` +
+    `</g>` +
+    `<circle r="42" fill="#7ec9ee" opacity=".35" stroke="#2f9bd6" stroke-width="2"/>` +
+    `<path d="M -28 -10 Q -14 -26 6 -18 Q 22 -8 18 10 Q 4 24 -16 14 Q -32 4 -28 -10 Z" fill="#7ba05b" opacity=".8"/>` +
+    `<path d="M 14 18 Q 28 14 30 26 Q 20 30 14 24 Z" fill="#7ba05b" opacity=".7"/>` +
+    `</g>` +
+    txt(120, 64, '🌍 认识地球', { fs: 22, fw: 900, fill: '#1d5e8c', anchor: 'start' }) +
+    txt(120, 90, '地球仪 · 经纬线 · 七大洲四大洋', { fs: 13.5, fill: '#3d7aa8', anchor: 'start' })
+  );
+
+  /* 第二站：方向与地图 —— 罗盘 + 地图 */
+  const bnMap = () => banner('#e8f6ef',
+    `<g transform="translate(600 60)">` +
+    `<circle r="42" fill="#fff" stroke="#2fbf71" stroke-width="2"/>` +
+    `<polygon points="0,-34 7,0 0,34 -7,0" fill="#e25563"/>` +
+    `<polygon points="0,-34 7,0 0,0" fill="#c2414d"/>` +
+    `<text x="0" y="-46" text-anchor="middle" font-size="14" font-weight="900" fill="#2fbf71">北</text>` +
+    `<text x="0" y="56" text-anchor="middle" font-size="14" font-weight="900" fill="#73788b">南</text>` +
+    `<text x="-52" y="5" text-anchor="middle" font-size="14" font-weight="900" fill="#73788b">西</text>` +
+    `<text x="52" y="5" text-anchor="middle" font-size="14" font-weight="900" fill="#73788b">东</text>` +
+    `</g>` +
+    txt(120, 64, '🧭 方向与地图', { fs: 22, fw: 900, fill: '#1d7d4e', anchor: 'start' }) +
+    txt(120, 90, '八向定位 · 比例尺 · 图例', { fs: 13.5, fill: '#3d9d6e', anchor: 'start' })
+  );
+
+  /* 第三站：地形地貌 —— 山脉 + 阶梯 */
+  const bnLand = () => banner('#f5efe2',
+    `<g transform="translate(560 70)">` +
+    `<path d="M -120 40 L -70 -20 L -40 10 L 0 -40 L 40 5 L 80 -25 L 120 40 Z" fill="#c9a26b" stroke="#a5713c" stroke-width="2"/>` +
+    `<path d="M -70 -20 L -58 -6 L -46 -16 Z M 0 -40 L -12 -18 L 8 -22 Z M 80 -25 L 68 -4 L 92 -8 Z" fill="#fff" stroke="#a5713c" stroke-width="1.2"/>` +
+    `</g>` +
+    txt(120, 64, '🏔️ 地形地貌', { fs: 22, fw: 900, fill: '#7a5327', anchor: 'start' }) +
+    txt(120, 90, '五种地形 · 三级阶梯 · 沙漠绿洲', { fs: 13.5, fill: '#9a7340', anchor: 'start' })
+  );
+
+  /* 第四站：天气与气候 —— 太阳 + 云 + 雨 */
+  const bnWeather = () => banner('#fdeef0',
+    `<g transform="translate(600 56)">` +
+    `<g class="anim-sun-rays"><circle r="22" fill="#f6b93b"/>` +
+    `<g stroke="#f6b93b" stroke-width="3">` +
+    `<line x1="0" y1="-30" x2="0" y2="-38"/><line x1="0" y1="30" x2="0" y2="38"/>` +
+    `<line x1="-30" y1="0" x2="-38" y2="0"/><line x1="30" y1="0" x2="38" y2="0"/>` +
+    `<line x1="-21" y1="-21" x2="-27" y2="-27"/><line x1="21" y1="21" x2="27" y2="27"/>` +
+    `<line x1="-21" y1="21" x2="-27" y2="27"/><line x1="21" y1="-21" x2="27" y2="-27"/>` +
+    `</g></g>` +
+    `</g>` +
+    `<g transform="translate(470 78)" class="anim-float">` +
+    `<ellipse cx="0" cy="0" rx="34" ry="14" fill="#e7ecf5" stroke="#b9c7de" stroke-width="1.5"/>` +
+    `<ellipse cx="22" cy="-6" rx="18" ry="11" fill="#f2f5fa" stroke="#b9c7de" stroke-width="1.5"/>` +
+    `</g>` +
+    txt(120, 64, '🌦️ 天气与气候', { fs: 22, fw: 900, fill: '#a8354a', anchor: 'start' }) +
+    txt(120, 90, '天气预报 · 四季成因 · 气温降水', { fs: 13.5, fill: '#c8556a', anchor: 'start' })
+  );
+
+  /* 第五站：江河湖海 —— 河流 + 波浪 */
+  const bnRiver = () => banner('#e3f4f1',
+    `<g transform="translate(560 60)">` +
+    `<path d="M -140 30 Q -80 -10 -20 10 Q 40 30 120 -6" fill="none" stroke="#157d73" stroke-width="5" stroke-linecap="round" class="anim-flow"/>` +
+    `<circle cx="-140" cy="30" r="5" fill="#157d73"/>` +
+    `<path d="M 120 -6 L 132 -12 M 120 -6 L 128 4" stroke="#157d73" stroke-width="3" fill="none"/>` +
+    `<g class="anim-wave" opacity=".5">` +
+    `<path d="M -120 50 Q -90 44 -60 50 Q -30 56 0 50 Q 30 44 60 50" fill="none" stroke="#6fa8c9" stroke-width="2.5"/>` +
+    `</g>` +
+    `</g>` +
+    txt(120, 64, '🌊 江河湖海', { fs: 22, fw: 900, fill: '#0f5f57', anchor: 'start' }) +
+    txt(120, 90, '水循环 · 长江黄河 · 湖泊海域', { fs: 13.5, fill: '#2f8a80', anchor: 'start' })
+  );
+
+  /* 第六站：我们的祖国 —— 中国轮廓 + 五星 */
+  const bnChina = () => banner('#fbeee4',
+    `<g transform="translate(580 60) scale(0.62)">` +
+    `<path d="M -120 -40 Q -80 -60 -30 -50 Q 0 -55 30 -40 Q 70 -50 110 -30 Q 140 -10 130 20 Q 120 50 80 55 Q 40 60 0 50 Q -50 60 -90 40 Q -130 20 -120 -40 Z" fill="#e8a87c" stroke="#d97745" stroke-width="2.5"/>` +
+    `<path d="M -100 -20 L -80 -30 L -70 -10 L -90 0 Z" fill="#d97745" opacity=".5"/>` +
+    `<text x="-30" y="10" font-size="28">🇨🇳</text>` +
+    `</g>` +
+    txt(120, 64, '🇨🇳 我们的祖国', { fs: 22, fw: 900, fill: '#9c5a2c', anchor: 'start' }) +
+    txt(120, 90, '疆域 · 34省区 · 56民族 · 邻国', { fs: 13.5, fill: '#b97a48', anchor: 'start' })
+  );
+
+  /* 第七站：环游世界 —— 地球 + 飞机 */
+  const bnWorld = () => banner('#efeafb',
+    `<g transform="translate(590 60)">` +
+    `<circle r="40" fill="#8b65c9" opacity=".15" stroke="#8b65c9" stroke-width="2"/>` +
+    `<path d="M -30 -8 Q -16 -20 0 -14 Q 16 -6 12 8 Q 0 18 -16 10 Q -30 2 -30 -8 Z" fill="#7ba05b" opacity=".7"/>` +
+    `<path d="M 10 12 Q 24 8 26 20 Q 14 24 10 18 Z" fill="#7ba05b" opacity=".6"/>` +
+    `<line x1="-40" y1="0" x2="40" y2="0" stroke="#8b65c9" stroke-width="1" stroke-dasharray="3 3"/>` +
+    `</g>` +
+    `<g transform="translate(470 40)" class="anim-bob">` +
+    `<text font-size="28">✈️</text>` +
+    `</g>` +
+    txt(120, 64, '🌏 环游世界', { fs: 22, fw: 900, fill: '#5e3fa0', anchor: 'start' }) +
+    txt(120, 90, '国家地区 · 世界之最 · 时差地标', { fs: 13.5, fill: '#7c5cc0', anchor: 'start' })
+  );
+
+  /* 第八站：生活与地理 —— 房屋 + 树 + 回收标志 */
+  const bnLife = () => banner('#fbe9f0',
+    `<g transform="translate(590 64)">` +
+    `<rect x="-40" y="-10" width="80" height="40" fill="#e8b8c8" stroke="#c2557d" stroke-width="2" rx="3"/>` +
+    `<polygon points="-46,-10 0,-40 46,-10" fill="#c2557d"/>` +
+    `<rect x="-12" y="6" width="14" height="24" fill="#a8456a"/>` +
+    `<rect x="14" y="2" width="16" height="14" fill="#fdeef0" stroke="#c2557d" stroke-width="1.5"/>` +
+    `</g>` +
+    `<g transform="translate(470 70)" class="anim-bob">` +
+    `<text font-size="26">🌳</text>` +
+    `</g>` +
+    `<g transform="translate(520 30)" class="anim-pulse">` +
+    `<text font-size="22">♻️</text>` +
+    `</g>` +
+    txt(120, 64, '🏙️ 生活与地理', { fs: 22, fw: 900, fill: '#9c3a62', anchor: 'start' }) +
+    txt(120, 90, '衣食住行 · 资源灾害 · 环保', { fs: 13.5, fill: '#bc5a82', anchor: 'start' })
+  );
+
+  /* ================= 新增知识点图示 ================= */
+
+  /* 地球的形状：天圆地方 vs 球体 + 麦哲伦航线 */
+  const earthShape = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 180">`;
+    /* 左：天圆地方 */
+    s += `<g transform="translate(130 80)">`;
+    s += `<path d="M -70 -30 A 70 70 0 0 1 70 -30" fill="none" stroke="#b5893a" stroke-width="2.5"/>`;
+    s += `<rect x="-60" y="-30" width="120" height="22" fill="#e8dcc4" stroke="#a5713c" stroke-width="2"/>`;
+    s += `<line x1="-60" y1="-30" x2="60" y2="-30" stroke="#a5713c" stroke-width="2"/>`;
+    s += `<text x="0" y="-44" text-anchor="middle" font-size="13" font-weight="800" fill="#7a5327">古人：天圆地方</text>`;
+    s += `</g>`;
+    s += arrow(220, 80, 290, 80, '#e25563');
+    /* 右：蓝色星球 + 帆船 */
+    s += `<g transform="translate(440 80)">`;
+    s += `<circle r="52" fill="#7ec9ee" opacity=".4" stroke="#2f9bd6" stroke-width="2.5" class="anim-spin-slow"/>`;
+    s += `<circle r="52" fill="#2f9bd6" opacity=".12"/>`;
+    s += `<path d="M -28 -14 Q -12 -28 8 -18 Q 24 -8 18 12 Q 4 26 -18 16 Q -34 4 -28 -14 Z" fill="#7ba05b" opacity=".8"/>`;
+    s += `<path d="M 16 16 Q 30 12 32 26 Q 20 30 14 22 Z" fill="#7ba05b" opacity=".7"/>`;
+    /* 帆船在弧面上 */
+    s += `<g transform="translate(38 14)" class="anim-bob">`;
+    s += `<path d="M -10 0 L 10 0 L 6 8 L -6 8 Z" fill="#a5713c"/>`;
+    s += `<line x1="0" y1="0" x2="0" y2="-18" stroke="#5a4020" stroke-width="1.5"/>`;
+    s += `<path d="M 0 -18 L 10 -4 L 0 -4 Z" fill="#f3d3b5" stroke="#5a4020" stroke-width="1"/>`;
+    s += `</g>`;
+    s += `</g>`;
+    s += txt(440, 156, '今天：蓝色星球（两极稍扁、赤道略鼓）', { fs: 13, fill: MUT });
+    s += txt(320, 24, '麦哲伦船队环球航行（1519—1522）证明地球是球体', { fs: 13.5, fill: INK });
+    return s + '</svg>';
+  };
+
+  /* 画平面图与路线 */
+  const floorplan = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 200">`;
+    s += txt(320, 18, '画平面图四步：定方向 → 定地点 → 画路线 → 加图例', { fs: 13.5, fill: MUT });
+    /* 指向标 */
+    s += `<g transform="translate(70 70)">`;
+    s += `<circle r="26" fill="#fff" stroke="#2fbf71" stroke-width="2"/>`;
+    s += `<polygon points="0,-20 5,0 0,20 -5,0" fill="#e25563"/>`;
+    s += `<text x="0" y="-30" text-anchor="middle" font-size="13" font-weight="800" fill="#2fbf71">北</text>`;
+    s += `</g>`;
+    /* 平面图主体 */
+    s += `<g transform="translate(250 50)">`;
+    s += `<rect x="0" y="0" width="300" height="120" fill="#fafbfe" stroke="#b9c7de" stroke-width="1.5" stroke-dasharray="4 3"/>`;
+    /* 家 */
+    s += `<rect x="20" y="20" width="50" height="40" fill="#eef7f3" stroke="#2fbf71" stroke-width="2"/>`;
+    s += txt(45, 44, '家', { fs: 13, fill: '#2c6e54' });
+    /* 商店 */
+    s += `<rect x="140" y="20" width="50" height="40" fill="#fff3e0" stroke="#d97745" stroke-width="2"/>`;
+    s += txt(165, 44, '商店', { fs: 12, fill: '#9c5a2c' });
+    /* 学校 */
+    s += `<rect x="230" y="60" width="50" height="40" fill="#e8f0fd" stroke="#2f9bd6" stroke-width="2"/>`;
+    s += txt(255, 84, '学校', { fs: 13, fill: '#1d5e8c' });
+    /* 路线箭头：先向东再向北 */
+    s += `<path d="M 70 40 L 140 40" fill="none" stroke="#e25563" stroke-width="3" marker-end="url(#gfig-arrow)" class="anim-flow"/>`;
+    s += txt(105, 32, '东 200 米', { fs: 11.5, fill: '#e25563' });
+    s += `<path d="M 165 60 L 165 80 L 230 80" fill="none" stroke="#2f9bd6" stroke-width="3" marker-end="url(#gfig-arrow)" class="anim-flow2"/>`;
+    s += txt(200, 74, '北 100 米', { fs: 11.5, fill: '#2f9bd6' });
+    s += `</g>`;
+    /* 图例 */
+    s += txt(70, 140, '图例', { fs: 13, fw: 800, anchor: 'start' });
+    s += `<rect x="70" y="150" width="14" height="10" fill="#eef7f3" stroke="#2fbf71"/>` + txt(90, 160, '家', { fs: 12, anchor: 'start', fill: MUT });
+    s += `<rect x="130" y="150" width="14" height="10" fill="#fff3e0" stroke="#d97745"/>` + txt(150, 160, '商店', { fs: 12, anchor: 'start', fill: MUT });
+    s += `<rect x="200" y="150" width="14" height="10" fill="#e8f0fd" stroke="#2f9bd6"/>` + txt(220, 160, '学校', { fs: 12, anchor: 'start', fill: MUT });
+    s += `<line x1="280" y1="155" x2="310" y2="155" stroke="#e25563" stroke-width="3"/>` + txt(316, 160, '路线', { fs: 12, anchor: 'start', fill: MUT });
+    return s + '</svg>';
+  };
+
+  /* 名山、高原和平原 */
+  const chinaLandscape = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 180">`;
+    /* 左：珠峰 */
+    s += `<g transform="translate(110 90)">`;
+    s += `<path d="M -70 50 L -10 -50 L 20 -10 L 50 -38 L 80 50 Z" fill="#e5dccb" stroke="#a5713c" stroke-width="2"/>`;
+    s += `<path d="M -10 -50 L -26 -22 L 6 -28 Z M 50 -38 L 36 -14 L 60 -18 Z" fill="#fff" stroke="#a5713c" stroke-width="1.4"/>`;
+    s += txt(0, 70, '珠穆朗玛峰', { fs: 13, fill: '#7a5327' });
+    s += txt(0, 86, '约 8848.86 米', { fs: 11.5, fill: MUT });
+    s += `</g>`;
+    /* 中：青藏高原 */
+    s += `<g transform="translate(320 90)">`;
+    s += `<rect x="-80" y="-10" width="160" height="50" fill="#e8dcc4" stroke="#a5713c" stroke-width="2"/>`;
+    s += `<path d="M -60 -10 L -44 -34 L -28 -10 Z M -10 -10 L 6 -38 L 22 -10 Z M 36 -10 L 52 -28 L 68 -10 Z" fill="#fff" stroke="#a5713c" stroke-width="1.3"/>`;
+    s += txt(0, 64, '青藏高原', { fs: 13, fill: '#7a5327' });
+    s += txt(0, 80, '世界屋脊 · 4000 米以上', { fs: 11.5, fill: MUT });
+    s += `</g>`;
+    /* 右：东北平原 */
+    s += `<g transform="translate(530 90)">`;
+    s += `<path d="M -80 40 L -70 20 L 70 20 L 80 40 Z" fill="#cfe8c8" stroke="#5da05b" stroke-width="2"/>`;
+    s += `<path d="M -70 20 Q -40 14 -10 20 Q 20 26 50 18 Q 70 14 70 20" fill="none" stroke="#5da05b" stroke-width="1.5"/>`;
+    s += txt(0, 60, '东北平原', { fs: 13, fill: '#3d7a3d' });
+    s += txt(0, 76, '我国最大平原', { fs: 11.5, fill: MUT });
+    s += `</g>`;
+    s += txt(320, 168, '四大高原：青藏、内蒙古、黄土、云贵　三大平原：东北、华北、长江中下游', { fs: 12.5, fill: MUT });
+    return s + '</svg>';
+  };
+
+  /* 沙漠与绿洲 */
+  const desertOasis = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 180">`;
+    /* 沙漠 */
+    s += `<path d="M 0 140 Q 120 110 240 130 Q 360 150 480 120 Q 560 105 640 125 L 640 170 L 0 170 Z" fill="#f0d9a8" stroke="#d9a13c" stroke-width="2"/>`;
+    s += `<path d="M 0 150 Q 160 130 320 145 Q 480 160 640 140" fill="none" stroke="#d9a13c" stroke-width="1.5" opacity=".6"/>`;
+    /* 太阳 */
+    s += `<circle cx="540" cy="40" r="20" fill="#f6b93b" class="anim-pulse"/>`;
+    /* 仙人掌 */
+    s += `<g transform="translate(80 110)">`;
+    s += `<rect x="-6" y="-40" width="12" height="44" rx="6" fill="#5da05b"/>`;
+    s += `<rect x="-20" y="-26" width="10" height="20" rx="5" fill="#5da05b"/>`;
+    s += `<rect x="10" y="-32" width="10" height="24" rx="5" fill="#5da05b"/>`;
+    s += `</g>`;
+    /* 绿洲 */
+    s += `<g transform="translate(400 120)">`;
+    s += `<ellipse cx="0" cy="10" rx="70" ry="20" fill="#7ec9ee" opacity=".6" stroke="#2f9bd6" stroke-width="1.5"/>`;
+    s += `<ellipse cx="0" cy="6" rx="70" ry="20" fill="#2f9bd6" opacity=".15"/>`;
+    s += txt(0, 14, '绿洲', { fs: 13, fill: '#1d5e8c' });
+    /* 棕榈树 */
+    s += `<g transform="translate(-50 -10)">`;
+    s += `<line x1="0" y1="0" x2="0" y2="-36" stroke="#8b5a2b" stroke-width="3"/>`;
+    s += `<path d="M 0 -36 Q -16 -44 -22 -32 M 0 -36 Q 16 -44 22 -32 M 0 -36 Q -10 -50 -2 -52 M 0 -36 Q 10 -50 2 -52" fill="none" stroke="#5da05b" stroke-width="3"/>`;
+    s += `</g>`;
+    s += `<g transform="translate(46 -8)">`;
+    s += `<line x1="0" y1="0" x2="0" y2="-30" stroke="#8b5a2b" stroke-width="2.5"/>`;
+    s += `<path d="M 0 -30 Q -14 -38 -18 -26 M 0 -30 Q 14 -38 18 -26" fill="none" stroke="#5da05b" stroke-width="2.5"/>`;
+    s += `</g>`;
+    s += `</g>`;
+    s += txt(320, 30, '沙漠昼夜温差大，绿洲靠高山冰雪融水滋养', { fs: 13, fill: MUT });
+    s += arrow(170, 130, 330, 130, '#2f9bd6');
+    s += txt(250, 120, '冰雪融水', { fs: 12, fill: '#2f9bd6' });
+    return s + '</svg>';
+  };
+
+  /* 天气与气候对比 */
+  const weatherClimate = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 170">`;
+    /* 左：天气 */
+    s += `<g transform="translate(160 80)">`;
+    s += `<rect x="-120" y="-56" width="240" height="100" rx="14" fill="#eef7f3" stroke="#2fbf71" stroke-width="2"/>`;
+    s += txt(0, -36, '天气（短时间）', { fs: 15, fw: 900, fill: '#2c6e54' });
+    s += `<text x="-60" y="0" font-size="30">☀️</text><text x="-20" y="4" font-size="13" fill="#4a4f63">今天晴</text>`;
+    s += `<text x="20" y="0" font-size="30">🌧️</text><text x="60" y="4" font-size="13" fill="#4a4f63">明天雨</text>`;
+    s += txt(0, 28, '变化快 · 出门带不带伞', { fs: 12.5, fill: MUT });
+    s += `</g>`;
+    /* 右：气候 */
+    s += `<g transform="translate(480 80)">`;
+    s += `<rect x="-120" y="-56" width="240" height="100" rx="14" fill="#e8f0fd" stroke="#2f9bd6" stroke-width="2"/>`;
+    s += txt(0, -36, '气候（多年规律）', { fs: 15, fw: 900, fill: '#1d5e8c' });
+    s += `<text x="-70" y="2" font-size="26">🌸</text><text x="-30" y="4" font-size="12" fill="#4a4f63">春</text>`;
+    s += `<text x="0" y="2" font-size="26">☀️</text><text x="38" y="4" font-size="12" fill="#4a4f63">夏</text>`;
+    s += `<text x="-70" y="30" font-size="26">🍂</text><text x="-30" y="32" font-size="12" fill="#4a4f63">秋</text>`;
+    s += `<text x="0" y="30" font-size="26">❄️</text><text x="38" y="32" font-size="12" fill="#4a4f63">冬</text>`;
+    s += txt(0, 28, '昆明四季如春 · 海南长夏无冬', { fs: 12.5, fill: MUT });
+    s += `</g>`;
+    return s + '</svg>';
+  };
+
+  /* 我国气温差异 */
+  const tempDiff = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 170">`;
+    s += txt(320, 18, '冬季南北温差大（1 月），夏季普遍高温', { fs: 14 });
+    /* 温度计对比 */
+    const temps = [
+      ['漠河', '-30℃', '#9db4d6', -30],
+      ['北京', '0℃ 左右', '#b9c7de', 0],
+      ['广州', '15℃ 左右', '#f6b93b', 15],
+      ['海南', '20℃ 以上', '#e25563', 20],
+    ];
+    temps.forEach((t, i) => {
+      const x = 80 + i * 150;
+      s += `<g transform="translate(${x} 100)">`;
+      s += `<rect x="-8" y="-60" width="16" height="80" rx="8" fill="#f0f2f7" stroke="#b9c7de" stroke-width="1.5"/>`;
+      const h = Math.max(6, (t[3] + 32) / 52 * 70);
+      s += `<rect x="-6" y="${20 - h}" width="12" height="${h}" rx="6" fill="${t[2]}"/>`;
+      s += `<circle cx="0" cy="20" r="9" fill="${t[2]}"/>`;
+      s += txt(0, -68, t[1], { fs: 12.5, fw: 800, fill: t[2] });
+      s += txt(0, 44, t[0], { fs: 12.5, fill: INK });
+      s += `</g>`;
+    });
+    s += txt(320, 162, '秦岭—淮河一线大致是一月 0℃ 等温线，以北河流冬季结冰', { fs: 12.5, fill: MUT });
+    return s + '</svg>';
+  };
+
+  /* 降水与干湿差异 */
+  const rainfall = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 180">`;
+    s += txt(320, 18, '降水从东南沿海向西北内陆递减', { fs: 14 });
+    /* 中国轮廓简化 */
+    s += `<path d="M 120 70 Q 160 50 220 56 Q 280 48 340 60 Q 420 50 500 70 Q 560 86 550 120 Q 520 150 440 148 Q 360 156 280 148 Q 200 154 140 138 Q 100 118 120 70 Z" fill="#fafbfe" stroke="#b9c7de" stroke-width="2"/>`;
+    /* 降水区：东南多雨（蓝）→ 西北少雨（黄） */
+    s += `<path d="M 440 70 Q 500 64 540 90 Q 555 118 520 140 Q 470 150 430 142 Q 400 110 440 70 Z" fill="#2f9bd6" opacity=".35"/>`;
+    s += `<path d="M 320 70 Q 380 60 440 70 Q 430 110 380 140 Q 320 150 280 138 Q 260 100 320 70 Z" fill="#2f9bd6" opacity=".22"/>`;
+    s += `<path d="M 180 70 Q 240 56 320 70 Q 260 100 200 130 Q 150 130 140 108 Q 150 80 180 70 Z" fill="#f6b93b" opacity=".3"/>`;
+    /* 降雨动画点 */
+    for (let i = 0; i < 6; i++) {
+      const rx = 420 + Math.random() * 100, ry = 60 + Math.random() * 70;
+      s += `<line x1="${rx}" y1="${ry}" x2="${rx - 3}" y2="${ry + 8}" stroke="#2f9bd6" stroke-width="2" class="anim-rain" style="animation-delay:${i * 0.18}s"/>`;
+    }
+    s += txt(480, 100, '东南', { fs: 13, fill: '#1d5e8c' });
+    s += txt(480, 116, '多雨', { fs: 12, fill: '#1d5e8c' });
+    s += txt(200, 104, '西北', { fs: 13, fill: '#9c7320' });
+    s += txt(200, 120, '少雨', { fs: 12, fill: '#9c7320' });
+    s += arrow(540, 110, 160, 110, '#e2943a');
+    s += txt(350, 104, '降水递减 →', { fs: 12.5, fill: '#9c7320' });
+    s += txt(320, 170, '800 毫米等降水量线大致经过秦岭—淮河一线', { fs: 12.5, fill: MUT });
+    return s + '</svg>';
+  };
+
+  /* 湖泊：咸水湖与淡水湖 */
+  const lakes = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 170">`;
+    /* 左：咸水湖（只进不出） */
+    s += `<g transform="translate(180 90)">`;
+    s += `<ellipse cx="0" cy="10" rx="90" ry="34" fill="#e8dcc4" stroke="#a5713c" stroke-width="2"/>`;
+    s += `<ellipse cx="0" cy="6" rx="80" ry="28" fill="#7ec9ee" opacity=".5"/>`;
+    s += txt(0, 12, '咸水湖', { fs: 14, fill: '#7a5327', fw: 800 });
+    s += txt(0, 30, '青海湖（最大）', { fs: 11.5, fill: MUT });
+    /* 河流只进 */
+    s += `<path d="M -60 -30 Q -30 -10 -10 0" fill="none" stroke="#2f9bd6" stroke-width="3" marker-end="url(#gfig-arrow)" class="anim-flow"/>`;
+    s += txt(-60, -36, '河流流入', { fs: 11, fill: SEA });
+    s += txt(0, -24, '无流出河道', { fs: 11, fill: '#a4453f' });
+    s += `</g>`;
+    /* 右：淡水湖（有进有出） */
+    s += `<g transform="translate(470 90)">`;
+    s += `<ellipse cx="0" cy="10" rx="90" ry="34" fill="#e3f0dd" stroke="#5da05b" stroke-width="2"/>`;
+    s += `<ellipse cx="0" cy="6" rx="80" ry="28" fill="#7ec9ee" opacity=".6"/>`;
+    s += txt(0, 12, '淡水湖', { fs: 14, fill: '#3d7a3d', fw: 800 });
+    s += txt(0, 30, '鄱阳湖（最大淡水湖）', { fs: 11.5, fill: MUT });
+    s += `<path d="M -60 -30 Q -30 -10 -10 0" fill="none" stroke="#2f9bd6" stroke-width="3" marker-end="url(#gfig-arrow)" class="anim-flow"/>`;
+    s += `<path d="M 10 6 Q 40 14 70 6" fill="none" stroke="#2f9bd6" stroke-width="3" marker-end="url(#gfig-arrow)" class="anim-flow2"/>`;
+    s += txt(-60, -36, '流入', { fs: 11, fill: SEA });
+    s += txt(60, -2, '流出', { fs: 11, fill: SEA });
+    s += `</g>`;
+    s += txt(320, 162, '咸水湖「只进不出」盐分积累；淡水湖「有进有出」盐分随水带走', { fs: 12.5, fill: MUT });
+    return s + '</svg>';
+  };
+
+  /* 我国的海域与岛屿 */
+  const chinaSeas = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 180">`;
+    /* 简化中国东部海岸线 */
+    s += `<path d="M 60 60 Q 120 50 180 70 Q 220 90 240 120 Q 250 140 220 160 L 60 160 Z" fill="#f5efe2" stroke="#a5713c" stroke-width="2"/>`;
+    s += txt(120, 110, '中国大陆', { fs: 12, fill: '#7a5327' });
+    /* 四大海域 */
+    const seas = [
+      ['渤海', 250, 70, '#9db4d6'],
+      ['黄海', 320, 90, '#b9c7de'],
+      ['东海', 410, 110, '#6fa8c9'],
+      ['南海', 470, 150, '#2f9bd6'],
+    ];
+    seas.forEach(se => {
+      s += `<g transform="translate(${se[1]} ${se[2]})">`;
+      s += `<ellipse cx="0" cy="0" rx="44" ry="22" fill="${se[3]}" opacity=".5" stroke="${se[3]}" stroke-width="1.5"/>`;
+      s += txt(0, 4, se[0], { fs: 12.5, fw: 800, fill: '#1d4e7c' });
+      s += `</g>`;
+    });
+    /* 台湾岛 */
+    s += `<ellipse cx="540" cy="120" rx="14" ry="26" fill="#e8a87c" stroke="#d97745" stroke-width="1.5"/>`;
+    s += txt(560, 116, '台湾岛', { fs: 11, fill: '#9c5a2c', anchor: 'start' });
+    /* 海南岛 */
+    s += `<ellipse cx="300" cy="155" rx="12" ry="14" fill="#e8a87c" stroke="#d97745" stroke-width="1.5"/>`;
+    s += txt(320, 158, '海南岛', { fs: 11, fill: '#9c5a2c', anchor: 'start' });
+    /* 南海诸岛点 */
+    s += `<circle cx="450" cy="165" r="3" fill="#d97745"/><circle cx="480" cy="168" r="3" fill="#d97745"/><circle cx="510" cy="162" r="3" fill="#d97745"/>`;
+    s += txt(490, 176, '南海诸岛', { fs: 10.5, fill: '#9c5a2c' });
+    s += txt(320, 30, '从北到南：渤海 → 黄海 → 东海 → 南海', { fs: 13.5, fill: INK });
+    arrow(260, 60, 470, 150, SEA);
+    return s + '</svg>';
+  };
+
+  /* 我国的位置与疆域 */
+  const chinaTerritory = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 180">`;
+    /* 简化中国轮廓 */
+    s += `<path d="M 140 50 Q 200 36 280 42 Q 360 34 440 48 Q 520 60 540 96 Q 548 130 500 150 Q 420 162 340 156 Q 260 164 190 150 Q 130 132 120 100 Q 116 72 140 50 Z" fill="#fbeee4" stroke="#d97745" stroke-width="2.5"/>`;
+    /* 四至点 */
+    s += `<circle cx="540" cy="96" r="5" fill="#e25563" class="anim-pulse"/>`;
+    s += txt(556, 100, '最东：乌苏里江', { fs: 11, fill: '#a4453f', anchor: 'start' });
+    s += `<circle cx="120" cy="100" r="5" fill="#e25563" class="anim-pulse"/>`;
+    s += txt(70, 100, '最西：帕米尔高原', { fs: 11, fill: '#a4453f', anchor: 'end' });
+    s += `<circle cx="260" cy="42" r="5" fill="#e25563" class="anim-pulse"/>`;
+    s += txt(260, 32, '最北：漠河', { fs: 11, fill: '#a4453f' });
+    s += `<circle cx="430" cy="156" r="5" fill="#e25563" class="anim-pulse"/>`;
+    s += txt(430, 172, '最南：曾母暗沙', { fs: 11, fill: '#a4453f' });
+    /* 面积标注 */
+    s += txt(330, 96, '960 万', { fs: 22, fw: 900, fill: '#d97745' });
+    s += txt(330, 116, '平方千米', { fs: 12, fill: MUT });
+    s += txt(320, 178, '陆地面积世界第三（俄、加、中），既是陆地大国也是海洋大国', { fs: 12, fill: MUT });
+    return s + '</svg>';
+  };
+
+  /* 34 个省级行政区分类 */
+  const provinces = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 170">`;
+    const groups = [
+      ['23 个省', '#2f9bd6', ['河北', '山西', '辽宁', '吉林', '黑龙江', '江苏', '浙江', '安徽', '福建', '江西', '山东', '河南', '湖北', '湖南', '广东', '海南', '四川', '贵州', '云南', '陕西', '甘肃', '青海', '台湾']],
+      ['5 个自治区', '#2fbf71', ['内蒙古', '广西', '西藏', '宁夏', '新疆']],
+      ['4 个直辖市', '#e25563', ['北京', '天津', '上海', '重庆']],
+      ['2 个特别行政区', '#b5893a', ['香港', '澳门']],
+    ];
+    let y = 24;
+    groups.forEach(g => {
+      s += txt(40, y, g[0], { fs: 13.5, fw: 800, fill: g[1], anchor: 'start' });
+      s += `<line x1="40" y1="${y + 4}" x2="150" y2="${y + 4}" stroke="${g[1]}" stroke-width="2"/>`;
+      g[2].forEach((name, i) => {
+        const x = 160 + (i % 12) * 38;
+        const yy = y - 4 + Math.floor(i / 12) * 18;
+        s += `<rect x="${x - 16}" y="${yy - 11}" width="32" height="16" rx="4" fill="${g[1]}18" stroke="${g[1]}" stroke-width="1"/>`;
+        s += txt(x, yy, name, { fs: 10.5, fill: INK, fw: 700 });
+      });
+      y += 36;
+    });
+    s += txt(320, 164, '23 ＋ 5 ＋ 4 ＋ 2 ＝ 34 个省级行政区', { fs: 13, fw: 800, fill: MUT });
+    return s + '</svg>';
+  };
+
+  /* 56 个民族大家庭 */
+  const ethnic = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 160">`;
+    /* 石榴 */
+    s += `<g transform="translate(130 80)">`;
+    s += `<circle r="48" fill="#e8707a" opacity=".25" stroke="#c2557d" stroke-width="2"/>`;
+    s += `<circle cx="0" cy="0" r="48" fill="#c2557d" opacity=".12"/>`;
+    /* 石榴籽 */
+    const seeds = [[-18,-10],[-6,-22],[8,-14],[20,-4],[-10,6],[4,16],[18,8],[-24,14],[-14,24],[10,28],[-26,-4],[-30,6]];
+    seeds.forEach((p, i) => {
+      s += `<circle cx="${p[0]}" cy="${p[1]}" r="6" fill="#e8707a" stroke="#c2557d" stroke-width="1" class="anim-pulse" style="animation-delay:${i * 0.15}s"/>`;
+    });
+    s += `<path d="M -6 -44 L 0 -52 L 6 -44" fill="#5da05b" stroke="#3d7a3d" stroke-width="1.5"/>`;
+    s += `</g>`;
+    s += txt(130, 148, '56 个民族像石榴籽', { fs: 13, fill: '#9c3a62' });
+    /* 民族分布 */
+    s += txt(340, 36, '民族分布特点', { fs: 14, fw: 800, fill: INK, anchor: 'start' });
+    s += txt(340, 60, '大杂居 · 小聚居 · 交错居住', { fs: 13.5, fill: '#c2557d', anchor: 'start' });
+    s += txt(340, 88, '汉族人口最多', { fs: 13, fill: MUT, anchor: 'start' });
+    s += txt(340, 108, '壮族是人口最多的少数民族（广西）', { fs: 13, fill: MUT, anchor: 'start' });
+    s += txt(340, 130, '那达慕 · 泼水节 · 火把节 · 雪顿节', { fs: 12.5, fill: '#8b65c9', anchor: 'start' });
+    return s + '</svg>';
+  };
+
+  /* 邻国与海上相望 */
+  const neighbors = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 180">`;
+    /* 中国居中 */
+    s += `<rect x="270" y="60" width="100" height="70" rx="8" fill="#fbeee4" stroke="#d97745" stroke-width="2.5"/>`;
+    s += txt(320, 92, '中国', { fs: 16, fw: 900, fill: '#9c5a2c' });
+    s += txt(320, 112, '🇨🇳', { fs: 20 });
+    /* 陆上邻国（简化） */
+    const land = [
+      ['朝鲜', 400, 40], ['俄罗斯', 470, 70], ['蒙古', 460, 110],
+      ['哈萨克', 200, 40], ['吉尔吉斯', 170, 70], ['塔吉克', 160, 100],
+      ['阿富汗', 180, 130], ['巴基斯坦', 240, 150], ['印度', 320, 158],
+      ['尼泊尔', 380, 152], ['不丹', 430, 148], ['缅甸', 460, 130],
+      ['老挝', 470, 100], ['越南', 460, 70],
+    ];
+    land.forEach(n => {
+      s += `<circle cx="${n[1]}" cy="${n[2]}" r="11" fill="#fff" stroke="#2fbf71" stroke-width="1.5"/>`;
+    });
+    s += txt(120, 30, '陆上邻国 14 个', { fs: 13, fw: 800, fill: '#2c6e54', anchor: 'start' });
+    /* 海上邻国 */
+    const sea = [['韩国', 560, 50], ['日本', 590, 80], ['菲律宾', 580, 120], ['马来西亚', 540, 150], ['文莱', 510, 160], ['印尼', 470, 168]];
+    sea.forEach(n => {
+      s += `<circle cx="${n[1]}" cy="${n[2]}" r="9" fill="#e8f0fd" stroke="#2f9bd6" stroke-width="1.5"/>`;
+    });
+    s += txt(510, 30, '隔海相望 6 国', { fs: 13, fw: 800, fill: '#1d5e8c', anchor: 'start' });
+    s += txt(320, 176, '世界上邻国最多的国家之一', { fs: 12.5, fill: MUT });
+    return s + '</svg>';
+  };
+
+  /* 首都北京 */
+  const beijing = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 160">`;
+    /* 天安门 */
+    s += `<g transform="translate(120 110)">`;
+    s += `<rect x="-50" y="-20" width="100" height="30" fill="#c2557d" stroke="#9c3a62" stroke-width="2"/>`;
+    s += `<rect x="-56" y="-32" width="112" height="14" fill="#a4453f"/>`;
+    s += `<polygon points="-56,-32 0,-52 56,-32" fill="#8b3030"/>`;
+    for (let i = -1; i <= 1; i++) {
+      s += `<rect x="${i * 20 - 5}" y="-10" width="10" height="20" fill="#5a2020"/>`;
+    }
+    s += txt(0, 30, '天安门', { fs: 13, fill: '#9c3a62' });
+    s += `</g>`;
+    /* 故宫 */
+    s += `<g transform="translate(300 110)">`;
+    s += `<rect x="-44" y="-14" width="88" height="24" fill="#e8a87c" stroke="#a5713c" stroke-width="2"/>`;
+    s += `<polygon points="-50,-14 0,-36 50,-14" fill="#c2557d"/>`;
+    s += `<rect x="-8" y="-4" width="16" height="14" fill="#7a3b1a"/>`;
+    s += txt(0, 30, '故宫', { fs: 13, fill: '#7a5327' });
+    s += `</g>`;
+    /* 长城 */
+    s += `<g transform="translate(490 110)">`;
+    s += `<path d="M -50 10 L -30 -14 L -10 -10 L 10 -24 L 30 -16 L 50 6" fill="none" stroke="#a5713c" stroke-width="5"/>`;
+    s += `<path d="M -50 10 L -30 -14 L -10 -10 L 10 -24 L 30 -16 L 50 6 L 50 14 L 30 -8 L 10 0 L -10 -2 L -30 -6 L -50 18 Z" fill="#c9a26b" stroke="#a5713c" stroke-width="2"/>`;
+    s += txt(0, 30, '长城', { fs: 13, fill: '#7a5327' });
+    s += `</g>`;
+    s += txt(320, 22, '北京：首都 · 政治文化中心 · 历史古都', { fs: 14, fw: 800, fill: INK });
+    s += txt(320, 160, '上海是我国最大城市；深圳是经济特区', { fs: 12.5, fill: MUT });
+    return s + '</svg>';
+  };
+
+  /* 世界的国家和地区 */
+  const worldCountries = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 170">`;
+    /* 简化世界地图 */
+    s += `<ellipse cx="320" cy="85" rx="280" ry="70" fill="#cfe8f7" stroke="#2f9bd6" stroke-width="1.5"/>`;
+    /* 大洲色块 */
+    s += `<path d="M 120 50 Q 180 40 240 50 Q 260 70 220 80 Q 160 78 120 70 Z" fill="#e8a87c" opacity=".7"/>`;
+    s += txt(180, 64, '北美洲', { fs: 11, fill: '#7a5327' });
+    s += `<path d="M 220 90 Q 250 80 270 100 Q 260 130 230 130 Q 210 115 220 90 Z" fill="#5da05b" opacity=".7"/>`;
+    s += txt(240, 112, '南美', { fs: 10.5, fill: '#3d7a3d' });
+    s += `<path d="M 300 40 Q 380 32 440 50 Q 460 80 420 90 Q 340 88 300 70 Z" fill="#e25563" opacity=".5"/>`;
+    s += txt(370, 64, '欧洲', { fs: 11, fill: '#a4453f' });
+    s += `<path d="M 360 70 Q 440 60 500 80 Q 510 110 460 120 Q 380 118 360 95 Z" fill="#f6b93b" opacity=".6"/>`;
+    s += txt(430, 96, '非洲', { fs: 11, fill: '#9c7320' });
+    s += `<path d="M 460 40 Q 540 36 580 56 Q 590 80 540 86 Q 480 80 460 60 Z" fill="#8b65c9" opacity=".6"/>`;
+    s += txt(520, 64, '亚洲', { fs: 11, fill: '#5e3fa0' });
+    s += `<path d="M 500 120 Q 560 116 580 130 Q 570 148 520 148 Q 490 140 500 120 Z" fill="#9db4d6" opacity=".7"/>`;
+    s += txt(540, 138, '大洋洲', { fs: 10, fill: '#3d5a8c' });
+    s += `<path d="M 100 130 Q 160 126 200 138 Q 190 152 140 152 Q 100 146 100 130 Z" fill="#cdd6e4" opacity=".8"/>`;
+    s += txt(150, 144, '南极洲', { fs: 10, fill: '#5a6577' });
+    s += txt(320, 20, '世界 200 多个国家和地区 · 190 多个联合国会员国', { fs: 13.5, fill: INK });
+    s += txt(320, 166, '面积最大：俄罗斯　人口最多：中国、印度　最小：梵蒂冈', { fs: 12.5, fill: MUT });
+    return s + '</svg>';
+  };
+
+  /* 世界之最 */
+  const worldRecords = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 180">`;
+    const items = [
+      ['🏔️', '最高峰', '珠穆朗玛峰', '#a5713c'],
+      ['🌊', '最长河', '尼罗河', '#2f9bd6'],
+      ['🏜️', '最大沙漠', '撒哈拉', '#d9a13c'],
+      ['🌲', '最大平原', '亚马孙', '#5da05b'],
+      ['⛰️', '最大高原', '巴西高原', '#8b65c9'],
+      ['🗻', '最高高原', '青藏高原', '#e25563'],
+    ];
+    items.forEach((it, i) => {
+      const x = 60 + (i % 3) * 200;
+      const y = 40 + Math.floor(i / 3) * 70;
+      s += `<g transform="translate(${x} ${y})">`;
+      s += `<circle cx="0" cy="0" r="26" fill="${it[3]}18" stroke="${it[3]}" stroke-width="2"/>`;
+      s += `<text x="0" y="8" text-anchor="middle" font-size="24">${it[0]}</text>`;
+      s += txt(0, 42, it[1], { fs: 12.5, fw: 800, fill: it[3] });
+      s += txt(0, 58, it[2], { fs: 11.5, fill: INK });
+      s += `</g>`;
+    });
+    s += txt(320, 172, '「最高」看海拔，「最大」看面积——别弄反啦', { fs: 12.5, fill: MUT });
+    return s + '</svg>';
+  };
+
+  /* 一方水土养一方人 */
+  const localLife = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 170">`;
+    /* 南 */
+    s += `<g transform="translate(160 80)">`;
+    s += `<rect x="-100" y="-50" width="200" height="100" rx="12" fill="#e8f0fd" stroke="#2f9bd6" stroke-width="2"/>`;
+    s += txt(0, -34, '南方', { fs: 16, fw: 900, fill: '#1d5e8c' });
+    s += `<text x="-70" y="0" font-size="22">🍚</text>`;
+    s += txt(-40, 4, '米饭', { fs: 12.5, anchor: 'start', fill: MUT });
+    s += `<text x="10" y="0" font-size="22">🏠</text>`;
+    s += txt(40, 4, '斜顶房', { fs: 12.5, anchor: 'start', fill: MUT });
+    s += `<text x="-70" y="28" font-size="22">🚣</text>`;
+    s += txt(-40, 32, '船多', { fs: 12.5, anchor: 'start', fill: MUT });
+    s += `<text x="10" y="28" font-size="22">🐉</text>`;
+    s += txt(40, 32, '赛龙舟', { fs: 12.5, anchor: 'start', fill: MUT });
+    s += `</g>`;
+    /* 北 */
+    s += `<g transform="translate(480 80)">`;
+    s += `<rect x="-100" y="-50" width="200" height="100" rx="12" fill="#fdf6e9" stroke="#d97745" stroke-width="2"/>`;
+    s += txt(0, -34, '北方', { fs: 16, fw: 900, fill: '#9c5a2c' });
+    s += `<text x="-70" y="0" font-size="22">🍜</text>`;
+    s += txt(-40, 4, '面食', { fs: 12.5, anchor: 'start', fill: MUT });
+    s += `<text x="10" y="0" font-size="22">🏘️</text>`;
+    s += txt(40, 4, '平顶房', { fs: 12.5, anchor: 'start', fill: MUT });
+    s += `<text x="-70" y="28" font-size="22">🐴</text>`;
+    s += txt(-40, 32, '车马', { fs: 12.5, anchor: 'start', fill: MUT });
+    s += `<text x="10" y="28" font-size="22">⛷️</text>`;
+    s += txt(40, 32, '滑冰', { fs: 12.5, anchor: 'start', fill: MUT });
+    s += `</g>`;
+    s += txt(320, 162, '南稻北麦 · 南船北马 · 南斜北平 —— 自然环境决定生活方式', { fs: 12.5, fill: MUT });
+    return s + '</svg>';
+  };
+
+  /* 自然资源与节约 */
+  const resources = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 170">`;
+    /* 不可再生 */
+    s += `<g transform="translate(160 85)">`;
+    s += `<rect x="-120" y="-54" width="240" height="96" rx="12" fill="#f8f0e0" stroke="#b5893a" stroke-width="2"/>`;
+    s += txt(0, -34, '不可再生（用一点少一点）', { fs: 14, fw: 800, fill: '#7a5b18' });
+    [`⛏️煤`, `🛢️石油`, `🔥天然气`].forEach((t, i) => {
+      s += `<text x="${-70 + i * 70}" y="8" font-size="22">${t[0]}</text>`;
+      s += txt(-70 + i * 70, 28, t.slice(1), { fs: 12.5, fill: MUT });
+    });
+    s += `</g>`;
+    /* 可再生 */
+    s += `<g transform="translate(480 85)">`;
+    s += `<rect x="-120" y="-54" width="240" height="96" rx="12" fill="#eef7f3" stroke="#2fbf71" stroke-width="2"/>`;
+    s += txt(0, -34, '可再生（绿色能源）', { fs: 14, fw: 800, fill: '#2c6e54' });
+    [`☀️太阳能`, `💨风能`, `💧水能`].forEach((t, i) => {
+      s += `<text x="${-70 + i * 70}" y="8" font-size="22">${t[0]}</text>`;
+      s += txt(-70 + i * 70, 28, t.slice(1), { fs: 12.5, fill: MUT });
+    });
+    s += `</g>`;
+    s += txt(320, 162, '随手关灯 · 双面用纸 · 绿色出行 · 光盘行动', { fs: 12.5, fill: MUT });
+    return s + '</svg>';
+  };
+
+  /* 自然灾害与自护 */
+  const disasters = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 180">`;
+    const items = [
+      ['🌋', '地震', '蹲下·掩护·抓牢', '#a5713c'],
+      ['🌀', '台风', '不出门·关门窗', '#2f9bd6'],
+      ['🌧️', '暴雨', '远离低洼河道', '#6fa8c9'],
+      ['⚡', '雷电', '不站树下', '#f6b93b'],
+    ];
+    items.forEach((it, i) => {
+      const x = 80 + i * 150;
+      s += `<g transform="translate(${x} 80)">`;
+      s += `<circle r="34" fill="${it[3]}18" stroke="${it[3]}" stroke-width="2"/>`;
+      s += `<text x="0" y="8" text-anchor="middle" font-size="28">${it[0]}</text>`;
+      s += txt(0, 54, it[1], { fs: 14, fw: 800, fill: it[3] });
+      s += txt(0, 72, it[2], { fs: 11.5, fill: MUT });
+      s += `</g>`;
+    });
+    s += txt(320, 168, '预警信号：蓝 → 黄 → 橙 → 红，颜色越深级别越高', { fs: 13, fill: MUT });
+    return s + '</svg>';
+  };
+
+  /* 环保小卫士 */
+  const environment = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 170">`;
+    /* 地球 */
+    s += `<g transform="translate(110 85)">`;
+    s += `<circle r="40" fill="#7ec9ee" opacity=".4" stroke="#2f9bd6" stroke-width="2"/>`;
+    s += `<path d="M -22 -10 Q -10 -20 4 -14 Q 18 -6 12 10 Q 2 20 -14 12 Q -26 4 -22 -10 Z" fill="#5da05b" opacity=".8"/>`;
+    s += `<path d="M 10 12 Q 22 8 24 22 Q 12 26 8 18 Z" fill="#5da05b" opacity=".7"/>`;
+    s += `</g>`;
+    /* 四个行动 */
+    const acts = [
+      ['♻️', '垃圾分类', '#2fbf71'],
+      ['💧', '节约用水', '#2f9bd6'],
+      ['🚲', '低碳出行', '#8b65c9'],
+      ['🌳', '植树造林', '#5da05b'],
+    ];
+    acts.forEach((a, i) => {
+      const x = 250 + (i % 2) * 170;
+      const y = 50 + Math.floor(i / 2) * 60;
+      s += `<g transform="translate(${x} ${y})">`;
+      s += `<circle r="22" fill="${a[2]}18" stroke="${a[2]}" stroke-width="2" class="anim-pulse" style="animation-delay:${i * 0.3}s"/>`;
+      s += `<text x="0" y="7" text-anchor="middle" font-size="22">${a[0]}</text>`;
+      s += txt(34, 4, a[1], { fs: 13, fw: 700, fill: INK, anchor: 'start' });
+      s += `</g>`;
+    });
+    s += txt(320, 162, '6 月 5 日世界环境日 · 3 月 12 日植树节 · 绿水青山就是金山银山', { fs: 12.5, fill: MUT });
+    return s + '</svg>';
+  };
+
+  /* 黄河——母亲河：几字形 + 泥沙 + 地上河 */
+  const yellowRiver = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 190">`;
+    /* 几字形河道 */
+    s += txt(320, 18, '黄河：「几」字形河道 · 含沙量大 · 下游「地上河」', { fs: 13.5, fill: INK });
+    s += `<path d="M 60 56 L 150 56 L 150 30 L 360 30 L 360 60 L 540 60" fill="none" stroke="#d9a13c" stroke-width="6" stroke-linejoin="round" stroke-linecap="round" class="anim-flow"/>`;
+    s += `<circle cx="60" cy="56" r="6" fill="#d9a13c"/>`;
+    s += txt(60, 44, '发源：巴颜喀拉山', { fs: 11, fill: '#a97b22', anchor: 'start' });
+    s += txt(560, 56, '渤海', { fs: 13, fill: '#a97b22', anchor: 'start' });
+    /* 黄土高原段泥沙标注 */
+    s += `<g transform="translate(255 30)">`;
+    s += `<path d="M 0 14 Q -10 30 0 44 Q 10 30 0 14 Z" fill="#d9a13c" opacity=".5"/>`;
+    s += txt(0, 62, '流经黄土高原', { fs: 11.5, fill: '#a97b22' });
+    s += txt(0, 76, '带走大量泥沙', { fs: 11, fill: MUT });
+    s += `</g>`;
+    /* 下游地上河示意 */
+    s += `<g transform="translate(440 120)">`;
+    s += `<rect x="-90" y="0" width="180" height="36" fill="#e8dcc4" stroke="#a5713c" stroke-width="1.5"/>`;
+    s += txt(0, -8, '下游「地上河」', { fs: 12.5, fill: '#7a5327', fw: 800 });
+    /* 河床高出两岸 */
+    s += `<rect x="-70" y="8" width="140" height="10" fill="#d9a13c" opacity=".6"/>`;
+    s += `<path d="M -70 8 L -70 -2 M 70 8 L 70 -2" stroke="#a5713c" stroke-width="1.5" stroke-dasharray="3 2"/>`;
+    s += txt(-78, 4, '地面', { fs: 10, fill: MUT, anchor: 'end' });
+    s += txt(78, 4, '地面', { fs: 10, fill: MUT });
+    s += txt(0, 30, '泥沙淤积，河床高出两岸', { fs: 11, fill: MUT });
+    s += `</g>`;
+    s += txt(320, 180, '黄河是世界含沙量最大的河流，宁夏一带有「塞上江南」美称', { fs: 12.5, fill: MUT });
+    return s + '</svg>';
+  };
+
   /* ---------- 注册表 ---------- */
   const REG = {
     'geo-earth-size': earthSize,
@@ -488,10 +1201,41 @@ const GeoFigures = (() => {
     'geo-weather': weather,
     'geo-watercycle': watercycle,
     'geo-rivers': rivers,
+    'geo-yellow-river': yellowRiver,
     'geo-day-night': dayNight,
     'geo-landmarks': landmarks,
     'demo-geo-compass': demoCompass,
     'demo-geo-seasons': demoSeasons,
+    /* 单元横幅 */
+    'geo-bn-earth': bnEarth,
+    'geo-bn-map': bnMap,
+    'geo-bn-land': bnLand,
+    'geo-bn-weather': bnWeather,
+    'geo-bn-river': bnRiver,
+    'geo-bn-china': bnChina,
+    'geo-bn-world': bnWorld,
+    'geo-bn-life': bnLife,
+    /* 新增知识点图示 */
+    'geo-earth-shape': earthShape,
+    'geo-floorplan': floorplan,
+    'geo-china-landscape': chinaLandscape,
+    'geo-desert-oasis': desertOasis,
+    'geo-weather-climate': weatherClimate,
+    'geo-temp-diff': tempDiff,
+    'geo-rainfall': rainfall,
+    'geo-lakes': lakes,
+    'geo-china-seas': chinaSeas,
+    'geo-china-territory': chinaTerritory,
+    'geo-provinces': provinces,
+    'geo-ethnic': ethnic,
+    'geo-neighbors': neighbors,
+    'geo-beijing': beijing,
+    'geo-world-countries': worldCountries,
+    'geo-world-records': worldRecords,
+    'geo-local-life': localLife,
+    'geo-resources': resources,
+    'geo-disasters': disasters,
+    'geo-environment': environment,
   };
 
   const DEFAULT_CAPS = {
@@ -503,6 +1247,7 @@ const GeoFigures = (() => {
     'geo-stairs': '我国地势西高东低，像三级大台阶',
     'geo-watercycle': '水循环：蒸发 → 成云 → 降水 → 汇流，循环不息',
     'geo-rivers': '长江、黄河都发源于青藏高原，自西向东奔流入海',
+    'geo-yellow-river': '黄河「几」字形，流经黄土高原含沙量大，下游形成「地上河」',
     'geo-day-night': '地球自转产生昼夜交替，东边的城市先看到日出',
     'geo-sun-compass': '早晨面向太阳：前面是东，背后是西，左臂是北，右臂是南',
     'geo-scale': '比例尺 1:100000：图上 1 厘米代表实际 1 千米',
@@ -510,6 +1255,27 @@ const GeoFigures = (() => {
     'geo-weather': '常用天气符号',
     'geo-continent-bars': '七大洲按面积排行',
     'geo-ocean-bars': '四大洋按面积排行',
+    /* 新增图示说明 */
+    'geo-earth-shape': '从「天圆地方」到蓝色星球：麦哲伦环球航行证明地球是球体',
+    'geo-floorplan': '画平面图四步法：定方向 → 定地点 → 画路线 → 加图例',
+    'geo-china-landscape': '珠峰世界最高峰，青藏高原有「世界屋脊」之称，三大平原是粮仓',
+    'geo-desert-oasis': '沙漠里昼夜温差大，绿洲靠高山冰雪融水滋养',
+    'geo-weather-climate': '天气是短时间的大气状况，气候是多年的天气规律',
+    'geo-temp-diff': '冬季南北温差大（秦岭—淮河是一月 0℃ 等温线），夏季普遍高温',
+    'geo-rainfall': '降水从东南沿海向西北内陆递减（800 毫米线过秦岭—淮河）',
+    'geo-lakes': '咸水湖「只进不出」（青海湖），淡水湖「有进有出」（鄱阳湖）',
+    'geo-china-seas': '四大海域从北到南：渤海、黄海、东海、南海；台湾岛是第一大岛',
+    'geo-china-territory': '我国陆地面积约 960 万平方千米，世界第三；东西南北四至点',
+    'geo-provinces': '23 省 ＋ 5 自治区 ＋ 4 直辖市 ＋ 2 特别行政区 ＝ 34 个省级行政区',
+    'geo-ethnic': '56 个民族像石榴籽紧紧抱在一起：大杂居、小聚居、交错居住',
+    'geo-neighbors': '陆上邻国 14 个，隔海相望 6 国，是世界上邻国最多的国家之一',
+    'geo-beijing': '北京是首都：天安门、故宫、长城；上海是最大城市',
+    'geo-world-countries': '世界 200 多个国家和地区，面积最大俄罗斯，人口最多中印',
+    'geo-world-records': '世界之最：「最高」看海拔，「最大」看面积，别弄反',
+    'geo-local-life': '南稻北麦、南船北马、南斜北平——自然环境决定生活方式',
+    'geo-resources': '煤石油天然气不可再生；太阳风、水是可再生的绿色能源',
+    'geo-disasters': '地震蹲下掩护抓牢；台风暴雨雷电要远离危险，预警颜色越深越严重',
+    'geo-environment': '垃圾分类、节约用水、低碳出行、植树造林——人人都是环保小卫士',
   };
 
   function figHTML(id, cap) {
