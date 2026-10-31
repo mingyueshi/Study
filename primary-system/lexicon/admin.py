@@ -1,9 +1,11 @@
 from django.contrib import admin, messages
 from django.core.exceptions import ValidationError
 from django.db import transaction
+from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.template.response import TemplateResponse
 from django.urls import reverse
+from django.utils.html import format_html, format_html_join
 from django.utils.html import format_html, format_html_join
 from .forms import SenseForm, PronunciationForm
 from .models import (ContentEntryLink, EntryForm, EntryMatch, LexicalEntry, LexiconAudit, LexiconSource,
@@ -119,11 +121,20 @@ class ReviewAdmin(NoDeleteAdmin):
 
 @admin.register(LexicalEntry)
 class EntryAdmin(ReviewAdmin):
-    list_display = ('headword', 'language', 'kind', 'status', 'id')
+    list_display = ('headword', 'language', 'kind', 'status', 'pending_matches_link', 'id')
     search_fields = ('headword', 'lookup_key')
     list_filter = ('language', 'kind', 'status')
     readonly_fields = ('id', 'language', 'headword', 'lookup_key', 'kind', 'status', 'merged_into', 'created_at')
     fields = readonly_fields + ('notes',)
+
+    @admin.display(description='待判定同形词')
+    def pending_matches_link(self, obj):
+        count = (EntryMatch.objects.filter(status='pending')
+                 .filter(Q(left_id=obj.pk) | Q(right_id=obj.pk)).count())
+        if not count:
+            return '—'
+        return format_html('<a href="{}?q={}">{} 对待判定 →</a>',
+                           reverse('admin:lexicon_entrymatch_changelist'), obj.headword, count)
 
 
 class EditorialAdmin(ReviewAdmin):
@@ -228,8 +239,8 @@ class LinkAdmin(NoDeleteAdmin):
 
 @admin.register(EntryMatch)
 class MatchAdmin(NoDeleteAdmin):
-    list_display = ('left', 'right', 'status', 'note')
-    list_filter = ('status', 'left__language', 'left__kind')
+    list_display = ('left_headword', 'right_headword', 'left_source', 'right_source', 'status', 'note')
+    list_filter = ('status', 'left__language', 'left__kind', 'right__kind')
     search_fields = ('left__headword', 'right__headword')
     list_select_related = ('left', 'right')
     readonly_fields = ('left', 'right', 'status', 'comparison')
@@ -237,6 +248,26 @@ class MatchAdmin(NoDeleteAdmin):
 
     def has_add_permission(self, request):
         return False
+
+    @admin.display(description='保留词条', ordering='left__headword')
+    def left_headword(self, obj):
+        return obj.left.headword
+
+    @admin.display(description='候选词条', ordering='right__headword')
+    def right_headword(self, obj):
+        return obj.right.headword
+
+    @admin.display(description='保留来源')
+    def left_source(self, obj):
+        return '; '.join(dict.fromkeys(
+            SourceRecord.objects.filter(binding__sense__entry_id=obj.left_id)
+            .values_list('release__source__code', flat=True))) or '—'
+
+    @admin.display(description='候选来源')
+    def right_source(self, obj):
+        return '; '.join(dict.fromkeys(
+            SourceRecord.objects.filter(binding__sense__entry_id=obj.right_id)
+            .values_list('release__source__code', flat=True))) or '—'
 
     @admin.display(description='双方来源与义项（每方最近 20 条证据）')
     def comparison(self, obj):

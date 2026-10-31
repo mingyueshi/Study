@@ -96,8 +96,12 @@
       const who = item.by === 'partner' ? '小龙' : (item.by === 'start' ? '开局' : '你');
       const li = document.createElement('li');
       li.className = 'trail-entry' + (index === 0 ? ' latest' : '');
+      // 已公开词条的成语点文字跳词典详情（新标签，不影响对局）；未公开的仅朗读。
+      const wordEl = item.public
+        ? `<a class="trail-word" href="/dictionary/${escapeHtml(item.entry_id)}/" target="_blank" rel="noopener noreferrer" title="查看词典详情">${escapeHtml(head2)}<span class="tail">${escapeHtml(tail2)}</span></a>`
+        : `<button class="trail-word" type="button" data-say="${escapeHtml(item.word)}" aria-label="朗读 ${escapeHtml(item.word)}">${escapeHtml(head2)}<span class="tail">${escapeHtml(tail2)}</span></button>`;
       li.innerHTML = `<div class="entry-top"><span class="${item.by === 'partner' ? 'entry-partner' : 'entry-player'}">${who}</span><span>${escapeHtml(item.pinyin || '')}</span></div>` +
-        `<button class="trail-word" type="button" data-say="${escapeHtml(item.word)}" aria-label="朗读 ${escapeHtml(item.word)}">${escapeHtml(head2)}<span class="tail">${escapeHtml(tail2)}</span></button>` +
+        wordEl +
         `<p class="trail-meaning">${escapeHtml(item.meaning || '')}</p>`;
       els.trail.append(li);
     });
@@ -136,11 +140,14 @@
       hintsShown = true;
       els.hintButton.setAttribute('aria-expanded', 'true');
       els.hints.hidden = false;
-      els.hintOptions.innerHTML = (data.hint || []).map((item) =>
-        `<div class="hint-choice"><strong>${escapeHtml(item.word)}</strong>` +
+      els.hintOptions.innerHTML = (data.hint || []).map((item) => {
+        const dictLink = item.public
+          ? `<a class="hint-dict" href="/dictionary/${escapeHtml(item.entry_id)}/" target="_blank" rel="noopener noreferrer">词典 ↗</a>` : '';
+        return `<div class="hint-choice"><strong>${escapeHtml(item.word)}</strong>${dictLink}` +
         `<span class="hint-pinyin">${escapeHtml(item.pinyin || '')}</span>` +
         `<span class="hint-meaning">${escapeHtml(item.meaning || '暂无释义')}</span>` +
-        `<button class="hint-fill" type="button" data-fill="${escapeHtml(item.word)}">填入输入框</button></div>`).join('');
+        `<button class="hint-fill" type="button" data-fill="${escapeHtml(item.word)}">填入输入框</button></div>`;
+      }).join('');
       if ((data.hint || []).length > 24) {
         els.hintOptions.insertAdjacentHTML('beforebegin', '<p class="hint-total">共 ' + data.hint.length + ' 个候选，往下滚动查看。</p>');
       }

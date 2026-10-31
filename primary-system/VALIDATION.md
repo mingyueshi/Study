@@ -235,3 +235,8 @@ Playwright 在独立数据库副本中验证：桌面查词首页、汉字详情
 - API/页面：全量 state 下发（约 300KB，一次查询批量组装修正了 N+1）、learn 幂等切换、游客/账号隔离、CSRF 回归用例（`ensure_csrf_cookie`＋enforce_csrf_checks——chain 教训防复发）、word_id 数字校验防 500。
 - 入口：seed MODULES 加回 words 模块卡（module.html 特判）；首页模块卡 5 张。前端 words.js/words.css 按 legacy words-app 体验移植（chips 进度/词卡网格/搜索/连读/掌握标记走 API）。
 - 全库 126 项测试通过；实测 /words/ 200、46 场景 577 词 IPA+释义覆盖 100%。
+
+## 接龙词典桥接与同形词判定辅助（2026-11-01）
+
+- 接龙链上词条的词典桥接：`chain_entry_info` 附带 public 标记（来源公开准入＋义项/词条已发布），链迹与提示里**已公开成语**（如 xinhua 快照 30,895 条）点文字新标签跳词典详情；内部来源（教学成语卡）保持仅点读，避免 404。
+- 同形词判定辅助：MatchAdmin 列表加保留/候选词头列与双方来源列（按来源快速识别 xinhua↔unihan 等组合）；EntryAdmin 详情加「待判定同形词」直达链接（带词头搜索跳转）。约 9,800 对积压的后台人工判定效率提升。

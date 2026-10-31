@@ -112,9 +112,13 @@ def hint_candidates(index, tail, used_ids):
 # ---- 链卡展示信息 ----
 
 def chain_entry_info(entry_ids):
-    """按来源优先级取每个词条的展示信息：词头、已核读音、义项释义（人工修订优先）。"""
+    """按来源优先级取每个词条的展示信息：词头、已核读音、义项释义（人工修订优先）。
+
+    public 标记决定链上词卡是否给词典详情链接——词典页只展示已公开词条，
+    内部来源（如教学成语卡）不给链接避免 404。
+    """
     records = (active_records().filter(binding__sense__entry_id__in=list(entry_ids))
-               .select_related('binding__sense__entry', 'binding__pronunciation')
+               .select_related('binding__sense__entry', 'binding__pronunciation', 'release__source')
                .order_by('release__source__priority', 'binding__external_key'))
     info = {}
     for record in records:
@@ -127,13 +131,18 @@ def chain_entry_info(entry_ids):
         if pronunciation and pronunciation.is_reviewed:
             pinyin = pronunciation.editorial_value or record.pronunciation_value
         meaning = record.binding.sense.editorial_definition.strip() or record.definition.strip()
-        info[key] = {'word': entry.headword, 'pinyin': pinyin, 'meaning': '' if meaning == '无' else meaning}
+        source = record.release.source
+        public = bool(source.public_allowed and source.enabled
+                      and record.binding.sense.status == 'published'
+                      and entry.status == 'published')
+        info[key] = {'word': entry.headword, 'pinyin': pinyin,
+                     'meaning': '' if meaning == '无' else meaning, 'public': public}
     return info
 
 
 def _chain_item(row, info, by):
     return {'entry_id': row[0], 'word': row[1], 'pinyin': info['pinyin'], 'meaning': info['meaning'],
-            'by': by, 'last_char': row[3]}
+            'by': by, 'last_char': row[3], 'public': bool(info.get('public'))}
 
 
 # ---- 对局流程 ----
@@ -223,7 +232,8 @@ def take_hint(owner, round_id, revision):
         raise ChainError('当前词池没有可接的成语，本局已走到尽头；可以重新开始。')
     infos = chain_entry_info([row[0] for row in candidates])
     hints = [{'entry_id': row[0], 'word': row[1],
-              'pinyin': infos.get(row[0], {}).get('pinyin', ''), 'meaning': infos.get(row[0], {}).get('meaning', '')}
+              'pinyin': infos.get(row[0], {}).get('pinyin', ''), 'meaning': infos.get(row[0], {}).get('meaning', ''),
+              'public': bool(infos.get(row[0], {}).get('public'))}
              for row in candidates]  # 全部可接候选，前端整列滚动展示。
     round.score = max(0, round.score - 5)
     round.hints += 1
