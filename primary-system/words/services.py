@@ -3,7 +3,7 @@ import secrets
 
 from django.db import transaction
 from lexicon.models import LexiconSource, SourceRecord
-from words.models import Scenario, ScenarioWord, WordProgress
+from words.models import RelatedGloss, Scenario, ScenarioWord, WordProgress
 
 GUEST_KEY = 'words_guest'
 
@@ -32,8 +32,8 @@ def _scenario_records():
     return {record.binding.sense.entry_id: record for record in records}
 
 
-def word_payload(word, record, learned_ids):
-    """词卡展示数据：读音/释义来自词典生效记录，教学标注来自词位。"""
+def word_payload(word, record, learned_ids, related_lookup):
+    """词卡展示数据：读音/释义来自词典生效记录，教学标注与关联词来自词位。"""
     pronunciation = ''
     definition = ''
     if record:
@@ -41,22 +41,40 @@ def word_payload(word, record, learned_ids):
         if pronunciation_row and pronunciation_row.is_reviewed:
             pronunciation = pronunciation_row.editorial_value or record.pronunciation_value
         definition = record.definition
+    related = []
+    for en in word.related or []:
+        info = related_lookup.get(en.lower(), {})
+        related.append({'en': en, 'zh': info.get('zh', ''), 'ipa': info.get('ipa', '')})
     return {
         'id': str(word.pk), 'en': word.en, 'emoji': word.emoji,
         'ipa': pronunciation, 'zh': definition,
         'segments': word.segments or [], 'memo': word.memo or '',
-        'related': word.related or [],
+        'related': related,
         'scenario': str(word.scenario_id),
         'learned': word.pk in learned_ids,
     }
 
 
 def state_payload(owner):
-    """全量 state（46 场景 577 词，约 300KB）：与 legacy 全量 JS 数据同构，前端本地切换。"""
+    """全量 state（46 场景 577 词，约 400KB）：与 legacy 全量 JS 数据同构，前端本地切换。"""
     words = list(ScenarioWord.objects.select_related('scenario').order_by('scenario__order', 'pk'))
     records = _scenario_records()
     learned_ids = set(WordProgress.objects.filter(
         word_id__in=[w.pk for w in words], learned=True, **owner).values_list('word_id', flat=True))
+    # 关联词双语查询：库内词取其词典读音/释义，拓展词取 WORD_ZH 释义表。
+    related_en = {en.lower() for word in words for en in (word.related or [])}
+    related_lookup = {}
+    by_en = {}
+    for record in records.values():
+        en = record.headword.lower()
+        pronunciation_row = record.binding.pronunciation
+        ipa = ''
+        if pronunciation_row and pronunciation_row.is_reviewed:
+            ipa = pronunciation_row.editorial_value or record.pronunciation_value
+        by_en[en] = {'zh': record.definition, 'ipa': ipa}
+    related_lookup.update({en: info for en, info in by_en.items() if en in related_en})
+    for gloss in RelatedGloss.objects.filter(en__in=related_en):
+        related_lookup.setdefault(gloss.en.lower(), {'zh': gloss.zh, 'ipa': ''})
     scenarios = list(Scenario.objects.order_by('order', 'pk'))
     by_scenario = {}
     for word in words:
@@ -67,7 +85,7 @@ def state_payload(owner):
             'total': len(by_scenario.get(s.pk, [])),
             'learned': sum(1 for w in by_scenario.get(s.pk, []) if w.pk in learned_ids),
         } for s in scenarios],
-        'words': [word_payload(w, records.get(w.entry_id), learned_ids) for w in words],
+        'words': [word_payload(w, records.get(w.entry_id), learned_ids, related_lookup) for w in words],
         'guest': 'guest_key' in owner,
     }
 

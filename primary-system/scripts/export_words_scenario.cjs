@@ -17,6 +17,7 @@ const payload = {
   source_file: path.relative(path.dirname(target), source).split(path.sep).join('/'),
   sha256: crypto.createHash('sha256').update(raw).digest('hex'),
   units: units,
+  glossary: data.WORD_ZH || {},
 };
 
 const errors = [];

@@ -44,6 +44,20 @@ class ScenarioWord(models.Model):
         return self.en
 
 
+class RelatedGloss(models.Model):
+    """拓展词中文释义（legacy WORD_ZH 词典）：关联词不在场景库时的中文翻译来源。"""
+
+    en = models.CharField('拓展词', max_length=80, unique=True)
+    zh = models.CharField('中文释义', max_length=120)
+
+    class Meta:
+        verbose_name = '拓展词释义'
+        verbose_name_plural = '拓展词释义'
+
+    def __str__(self):
+        return f'{self.en} = {self.zh}'
+
+
 class WordProgress(models.Model):
     """掌握标记：登录玩家挂账号，游客挂浏览器会话键（与接龙对局同双轨）。"""
 

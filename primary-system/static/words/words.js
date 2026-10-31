@@ -48,7 +48,9 @@
     const parts = (word.segments || []).map((part) =>
       `<button class="part" type="button" data-say="${escapeHtml(part.say || part.t)}" aria-label="跟读 ${escapeHtml(part.t)}"><b>${escapeHtml(part.t)}</b><i>${escapeHtml(part.d)}</i></button>`).join('<span class="plus">＋</span>');
     const related = (word.related || []).map((r) =>
-      `<button class="rel" type="button" data-say="${escapeHtml(r)}" aria-label="朗读 ${escapeHtml(r)}">${escapeHtml(r)}</button>`).join('');
+      `<button class="rel" type="button" data-say="${escapeHtml(r.en)}" aria-label="朗读 ${escapeHtml(r.en)}">` +
+      `<b>${escapeHtml(r.en)}</b>${r.ipa ? `<i class="rel-ipa">${escapeHtml(r.ipa)}</i>` : ''}` +
+      `${r.zh ? `<i class="rel-zh">${escapeHtml(r.zh)}</i>` : '<i class="rel-zh">拓展词</i>'}</button>`).join('');
     const unitTag = showUnitTag && unit.zh
       ? `<span class="unit-tag">${escapeHtml(unit.emoji || '')} ${escapeHtml(unit.zh)}</span>` : '';
     return `<article class="wcard${word.learned ? ' learned' : ''}" data-word="${escapeHtml(word.id)}" style="--c:${escapeHtml(unit.color || '#4d96ff')}">${unitTag}` +

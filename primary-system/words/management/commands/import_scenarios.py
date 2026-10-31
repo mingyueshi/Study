@@ -8,7 +8,7 @@ import json
 from django.core.management.base import BaseCommand, CommandError
 from django.db import transaction
 from lexicon.models import LexicalEntry
-from words.models import Scenario, ScenarioWord
+from words.models import RelatedGloss, Scenario, ScenarioWord
 
 
 class Command(BaseCommand):
@@ -28,9 +28,12 @@ class Command(BaseCommand):
             language='en',
             senses__bindings__records__release__source__code='primary-words',
             senses__bindings__records__release_id__in=self.active_release_ids()).distinct()}
-        scenario_count = word_count = unmatched = 0
+        scenario_count = word_count = unmatched = gloss_count = 0
         if not options['dry_run']:
             with transaction.atomic():
+                for en, zh in (snapshot.get('glossary') or {}).items():
+                    _, created = RelatedGloss.objects.update_or_create(en=en, defaults={'zh': zh})
+                    gloss_count += 1 if created else 0
                 for order, unit in enumerate(snapshot['units']):
                     scenario, _ = Scenario.objects.update_or_create(
                         code=unit['id'],
@@ -49,7 +52,7 @@ class Command(BaseCommand):
                                       'related': word.get('related', [])})
                         word_count += 1
         result = {'units': len(snapshot['units']), 'words': sum(len(u['words']) for u in snapshot['units']),
-                  'scenarios': scenario_count, 'scenario_words': word_count,
+                  'scenarios': scenario_count, 'scenario_words': word_count, 'glossary_new': gloss_count,
                   'unmatched_no_entry': unmatched, 'sha256': sha[:16], 'dry_run': options['dry_run']}
         self.stdout.write(json.dumps(result, ensure_ascii=False))
 
