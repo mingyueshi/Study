@@ -121,7 +121,7 @@ class ProgressTests(PlatformFixture):
 
 
 class ScenarioWordCardTests(PlatformFixture):
-    """场景词卡词典驱动：词典为内容源，教学标注与关联词留在卡上。"""
+    """词卡词典驱动：词典为内容源，教学标注与关联词留在卡上；words 与 english 模块同构。"""
 
     @classmethod
     def setUpTestData(cls):
@@ -191,3 +191,32 @@ class ScenarioWordCardTests(PlatformFixture):
     def test_word_card_api_schema(self):
         data = self.client.get(f'/api/v1/items/{self.item.pk}/').json()
         self.assertEqual(data['kind'], 'word')
+
+    def test_english_module_word_card_is_dictionary_driven_too(self):
+        # 教材单词同构：english 模块词卡同样经教学关联获得词典视图。
+        from catalog.models import Collection, Placement, Unit
+        from lexicon.adapters import primary_manifest
+        from lexicon.services import activate_release, link_primary_records
+        english = Module.objects.get(code='english')
+        collection = Collection.objects.create(code='english-test', name='教材英语测试', module=english, is_published=True)
+        unit = Unit.objects.create(collection=collection, code='4a-u1', title='Unit 1')
+        payload = {'en': 'ability', 'ipa': '/əˈbɪləti/', 'zh': 'n. 能力', 'emoji': '💪',
+                   'parts': [{'t': 'a', 'd': '第 1段'}], 'memo': '相关联：ability。', 'related': []}
+        card = ContentItem.objects.create(module=english, kind='word', title='ability', summary='n. 能力',
+            sections=[{'title': '音标', 'text': '/əˈbɪləti/'}], source_key='primary:english:4a-u1:ability',
+            source_payload=payload, source_hash='a' * 64, source_file='primary/english-data.js', status='published')
+        Placement.objects.create(unit=unit, item=card)
+        sibling = ContentItem.objects.create(module=english, kind='word', title='able', summary='adj. 能够',
+            source_key='primary:english:4a-u1:able', source_payload={'en': 'able'}, source_hash='a' * 64,
+            source_file='primary/english-data.js', status='published')
+        Placement.objects.create(unit=unit, item=sibling)
+        release, _ = stage_manifest(primary_manifest('english'), exact_reuse=True)
+        activate_release(release.pk, expected_current='', reason='测试启用教材词源')
+        link_primary_records(release)
+        call_command('review_primary_readings', stdout=io.StringIO())
+        response = self.client.get(f'/items/{card.pk}/')
+        self.assertEqual(response.status_code, 200)
+        html = response.content.decode()
+        for mark in ('word-card', '/əˈbɪləti/', 'n. 能力', '💪', 'Unit 1', 'data-say="able"'):
+            self.assertIn(mark, html)
+        self.assertNotIn('<h2>音标</h2>', html)

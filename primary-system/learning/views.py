@@ -100,11 +100,11 @@ def item_detail(request, pk):
     lookup_term = item.source_payload.get('en' if item.kind == 'word' else 'idiom', item.title) if isinstance(item.source_payload, dict) else item.title
     context = {'item': item, 'form': form, 'progress': progress, 'lookup_term': lookup_term,
                **figure_context(item)}
-    if item.module.code == 'words' and item.kind == 'word':
+    if item.kind == 'word':
         card = word_card_context(item)
         if card.get('word_lexicon'):
             # 词典数据可用才走词典驱动；关联缺失或来源异常时降级为教学标注渲染。
-            context['is_scenario_word'] = True
+            context['is_dictionary_word'] = True
             context.update(card)
     return render(request, 'learning/item.html', context, status=status)
 
