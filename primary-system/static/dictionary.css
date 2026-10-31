@@ -146,6 +146,9 @@
 .scope-group { border: none; margin: 0; padding: 0; }
 .scope-legend { font-size: 14px; font-weight: 700; color: var(--muted, #73788b); margin-bottom: 6px; padding: 0; }
 .scope-radios { display: flex; flex-wrap: wrap; gap: 8px; }
+/* Django RadioSelect 会包两层 div（外层 field + 每选项一个块级 div）；
+   contents 化后选项 label 直接参与本层的横向排布。 */
+.scope-radios div { display: contents; }
 .scope-radios label { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 8px 16px; margin-bottom: 0; border: 1px solid var(--line, #dfe5f0); border-radius: 12px; background: #fff; cursor: pointer; font-size: 15px; font-weight: 700; }
 .scope-radios label:has(input:checked) { background: var(--chain, #157d73); border-color: var(--chain, #157d73); color: #fff; }
 .scope-radios input { width: 16px; height: 16px; accent-color: var(--chain, #157d73); }
