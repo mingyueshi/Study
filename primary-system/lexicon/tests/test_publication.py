@@ -3,7 +3,7 @@ from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 from django.core.management import call_command
 from django.test import TestCase
-from catalog.models import ContentItem, Module, Placement, TopicBook, Unit
+from catalog.models import ContentItem, Module, Placement, Textbook, TextbookBook, Unit
 from learning.models import Progress
 from lexicon.adapters import primary_manifest
 from lexicon.importing import stage_manifest
@@ -111,13 +111,15 @@ class PublicationTests(TestCase):
 class ExistingContentTests(TestCase):
     def setUp(self):
         call_command('seed_platform', stdout=io.StringIO())
-        module = Module.objects.get(code='words')
-        collection = TopicBook.objects.create(code='test-words', name='词卡测试', module=module, is_published=True)
-        unit = Unit.objects.create(topic_book=collection, code='u1', title='测试单元')
+        module = Module.objects.get(code='english')
+        textbook = Textbook.objects.get(code='fltrp-english-4a-2026')
+        book = TextbookBook.objects.create(code='test-english', name='教材英语测试', module=module,
+                                           textbook=textbook, is_published=True)
+        unit = Unit.objects.create(textbook_book=book, code='4a-u1', title='Unit 1')
         self.content = ContentItem.objects.create(module=module, kind='word', title='bank', summary='人工教学简释',
-            sections=[{'title': '音标', 'text': '/bæŋk/'}], source_key='primary:words:u1:bank',
+            sections=[{'title': '音标', 'text': '/bæŋk/'}], source_key='primary:english:4a-u1:bank',
             source_payload={'en': 'bank', 'zh': '原教学释义', 'ipa': '/old/'}, source_hash='a' * 64,
-            source_file='primary/words-data.js', status='published', import_locked=True)
+            source_file='primary/english-data.js', status='published', import_locked=True)
         Placement.objects.create(unit=unit, item=self.content)
         self.user = get_user_model().objects.create_user('learner')
         self.progress = Progress.objects.create(user=self.user, item=self.content, status='mastered', note='我的笔记', revision=3)
@@ -125,7 +127,7 @@ class ExistingContentTests(TestCase):
     def test_existing_manual_content_and_progress_remain_identical(self):
         before = ContentItem.objects.values().get(pk=self.content.pk)
         progress = Progress.objects.values().get(pk=self.progress.pk)
-        release, _ = stage_manifest(primary_manifest('words'), exact_reuse=True)
+        release, _ = stage_manifest(primary_manifest('english'), exact_reuse=True)
         result = link_primary_records(release)
         self.assertEqual(result['created'], 1)
         self.assertEqual(link_primary_records(release)['preserved'], 1)
@@ -140,13 +142,13 @@ class ExistingContentTests(TestCase):
         # v2 显式 text 块不得破坏词库适配器按「音标」标题定位读音的约定。
         self.content.sections = [{'type': 'text', 'title': '音标', 'text': '/bæŋk/'}]
         self.content.save()
-        release, _ = stage_manifest(primary_manifest('words'), exact_reuse=True)
+        release, _ = stage_manifest(primary_manifest('english'), exact_reuse=True)
         record = release.records.get()
         self.assertEqual(record.pronunciation_value, '/bæŋk/')
         self.assertEqual(record.field_paths['pronunciation'], '/sections/0/text')
 
     def test_version_change_does_not_silently_retarget_teaching_meaning(self):
-        release, _ = stage_manifest(primary_manifest('words'), exact_reuse=True)
+        release, _ = stage_manifest(primary_manifest('english'), exact_reuse=True)
         link_primary_records(release)
         link = ContentEntryLink.objects.get()
         allow_public(release.source)
@@ -157,7 +159,7 @@ class ExistingContentTests(TestCase):
         self.assertEqual(len(self.client.get(url).json()['links']), 1)
         self.content.summary = '修改后的教学解释'
         self.content.save()
-        new, _ = stage_manifest(primary_manifest('words'), exact_reuse=True)
+        new, _ = stage_manifest(primary_manifest('english'), exact_reuse=True)
         link_primary_records(new)
         self.assertEqual(ContentEntryLink.objects.get().evidence_id, link.evidence_id)
         activate_release(new.pk, expected_current=release.pk, reason='更新来源')
@@ -166,7 +168,7 @@ class ExistingContentTests(TestCase):
         self.assertEqual(self.client.get(url).json()['links'], [])
 
     def test_private_sources_and_draft_cards_have_no_public_link_leak(self):
-        release, _ = stage_manifest(primary_manifest('words'))
+        release, _ = stage_manifest(primary_manifest('english'))
         link_primary_records(release)
         url = f'/api/v1/items/{self.content.pk}/lexicon/'
         self.assertEqual(self.client.get(url).json()['links'], [])

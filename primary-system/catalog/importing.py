@@ -2,7 +2,7 @@
 import hashlib
 import json
 from django.core.management.base import CommandError
-from catalog.models import ContentItem, Grade, Module, Placement, Textbook, TextbookBook, TopicBook, Unit
+from catalog.models import ContentItem, Module, Placement, Textbook, TextbookBook, Unit
 
 LABELS = {
     'overview': '内容概览', 'main': '内容梳理', 'theme': '主题感悟', 'words': '重点词语',
@@ -61,8 +61,10 @@ def import_snapshot(snapshot, publish=False):
         seen.add(code)
         try:
             module = Module.objects.get(code=code)
-        except Module.DoesNotExist as exc:
-            raise CommandError('先运行 seed_platform，或检查模块标识。') from exc
+        except Module.DoesNotExist:
+            # primary.json 是全量 legacy 导出；目录只收教材模块，专题内容由各自玩法应用承载。
+            report.setdefault('skipped_modules', []).append(code)
+            continue
         data = source['data']
         if not isinstance(data, dict) or len(source.get('sha256', '')) != 64:
             raise CommandError(f'{code} 的数据或来源摘要不正确。')
@@ -78,30 +80,19 @@ def import_snapshot(snapshot, publish=False):
             textbook_code = {'knowledge': 'pep-chinese-4a-2026', 'math': 'bnu-math-4a-2026'}.get(code)
             if code == 'english':
                 textbook_code = f'fltrp-english-4{"a" if term == "first" else "b"}-2026'
-            textbook = Textbook.objects.get(code=textbook_code) if textbook_code else None
-            if textbook:
-                book, created = TextbookBook.objects.get_or_create(code=f'primary-{code}-{term}', defaults={
-                    'name': str(textbook), 'module': module, 'textbook': textbook, 'is_published': publish,
-                    'description': '单元知识与复习资料；教材对应范围请结合手中的课本核对。',
-                })
-            else:
-                book, created = TopicBook.objects.get_or_create(code=f'primary-{code}-{term}', defaults={
-                    'name': module.name, 'module': module, 'is_published': publish,
-                    'description': '单元知识与复习资料；教材对应范围请结合手中的课本核对。',
-                })
+            textbook = Textbook.objects.get(code=textbook_code)
+            book, created = TextbookBook.objects.get_or_create(code=f'primary-{code}-{term}', defaults={
+                'name': str(textbook), 'module': module, 'textbook': textbook, 'is_published': publish,
+                'description': '单元知识与复习资料；教材对应范围请结合手中的课本核对。',
+            })
             book.full_clean()
-            if book.module_id != module.pk or getattr(book, 'textbook_id', None) != (textbook.pk if textbook else None):
+            if book.module_id != module.pk or book.textbook_id != textbook.pk:
                 raise CommandError(f'{book.code} 的目录归属已人工调整，请检查导入映射。')
             if created:
                 report['collections'] += 1
-                if not textbook:
-                    book.grades.set(Grade.objects.filter(code__in=['primary-3', 'primary-4', 'primary-5', 'primary-6']))
             for order, raw_unit in enumerate(grouped_units):
                 unit_defaults = {'title': raw_unit['name'], 'description': raw_unit.get('intro', raw_unit.get('zh', '')), 'order': order}
-                if textbook:
-                    unit, _ = Unit.objects.get_or_create(textbook_book=book, code=raw_unit['id'], defaults=unit_defaults)
-                else:
-                    unit, _ = Unit.objects.get_or_create(topic_book=book, code=raw_unit['id'], defaults=unit_defaults)
+                unit, _ = Unit.objects.get_or_create(textbook_book=book, code=raw_unit['id'], defaults=unit_defaults)
                 child_key = {'knowledge': 'lessons', 'english': 'words', 'words': 'words', 'idioms': 'idioms', 'writing': 'topics'}.get(code, 'points')
                 kind = {'english': 'word', 'words': 'word', 'idioms': 'idiom', 'writing': 'writing'}.get(code, 'knowledge')
                 for index, raw in enumerate(raw_unit[child_key]):
@@ -117,10 +108,7 @@ def import_snapshot(snapshot, publish=False):
             # Keep every ancillary dataset, rather than silently dropping poems or related definitions.
             extras = {k: v for k, v in data.items() if k not in {units_key, 'textbook', 'edition', 'ENGLISH_BOOKS', 'ENGLISH_WORDS'}}
             if extras:
-                if textbook:
-                    reference, _ = Unit.objects.get_or_create(textbook_book=book, code='reference', defaults={'title': '复习与资料', 'order': 10000})
-                else:
-                    reference, _ = Unit.objects.get_or_create(topic_book=book, code='reference', defaults={'title': '复习与资料', 'order': 10000})
+                reference, _ = Unit.objects.get_or_create(textbook_book=book, code='reference', defaults={'title': '复习与资料', 'order': 10000})
                 for index, (key, value) in enumerate(extras.items()):
                     upsert_item(f'primary:{code}:reference:{key}', {key: value}, module, source, 'reference',
                                 LABELS.get(key, key), reference, index, publish, report)

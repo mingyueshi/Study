@@ -9,8 +9,8 @@ from django.core.exceptions import ValidationError
 from django.core.management import call_command
 from django.test import TestCase
 from .importing import import_snapshot
-from .models import ContentItem, Grade, Module, Placement, Stage, Subject, Textbook, TextbookBook, TextbookEdition, TopicBook, Unit, \
-    published_textbook_books, published_topic_books
+from .models import ContentItem, Grade, Module, Placement, Stage, Subject, Textbook, TextbookBook, TextbookEdition, Unit, \
+    published_textbook_books
 
 
 def minimal_snapshot():
@@ -36,7 +36,7 @@ class CatalogTests(PlatformFixture):
     def test_seed_is_idempotent_and_preserves_changes(self):
         Module.objects.filter(code='math').update(name='我的数学')
         call_command('seed_platform', stdout=io.StringIO())
-        self.assertEqual(Module.objects.count(), 12)
+        self.assertEqual(Module.objects.count(), 4)
         self.assertEqual(Grade.objects.count(), 6)
         self.assertEqual(Module.objects.get(code='math').name, '我的数学')
         self.assertFalse(Group.objects.get(name='内容编辑').permissions.exclude(content_type__app_label='catalog').exists())
@@ -49,8 +49,14 @@ class CatalogTests(PlatformFixture):
         self.assertEqual(self.client.get('/api/v1/catalog/?grade=unknown').status_code, 400)
         self.assertEqual(self.client.get('/api/v1/items/?q=数字').json()['total'], 1)
 
-    def test_module_count_groups_multiple_collections(self):
-        TopicBook.objects.create(code='math-second', name='第二本数学', module=self.item.module, is_published=True)
+    def test_module_count_groups_multiple_books(self):
+        # 同一模块可并存多本教材册（如 english 上/下册场景）：换一套教材再建一本。
+        edition = TextbookEdition.objects.create(code='bnu-math-4b', name='北师大版数学四下', subject=self.item.module.subject,
+                                                 publisher='北京师范大学出版社', version='v1')
+        textbook = Textbook.objects.create(code='bnu-math-4b-2026', name='北师大版数学 · 四年级下册',
+                                           edition=edition, grade=self.collection.textbook.grade, term='second')
+        TextbookBook.objects.create(code='math-second', name='第二本数学', module=self.item.module,
+                                    textbook=textbook, is_published=True)
         response = self.client.get('/')
         module = next(m for m in response.context['modules'] if m.code == 'math')
         self.assertEqual(module.available_count, 2)
@@ -82,8 +88,14 @@ class CatalogTests(PlatformFixture):
         self.collection.textbook = Textbook.objects.get(code='pep-chinese-4a-2026')
         with self.assertRaises(ValidationError):
             self.collection.full_clean()
-        other = TopicBook.objects.create(code='another', name='另一本', module=self.item.module, is_published=True)
-        unit = Unit.objects.create(topic_book=other, code='u1', title='复习')
+        # 同模块的另一本教材册（如 english 上/下册场景）：内容可复用编入。
+        edition = TextbookEdition.objects.create(code='bnu-math-4b', name='北师大版数学四下', subject=self.item.module.subject,
+                                                 publisher='北京师范大学出版社', version='v1')
+        textbook = Textbook.objects.create(code='bnu-math-4b-2026', name='北师大版数学 · 四年级下册',
+                                           edition=edition, grade=self.collection.textbook.grade, term='second')
+        other = TextbookBook.objects.create(code='math-second', name='第二本数学',
+            module=self.item.module, textbook=textbook, is_published=True)
+        unit = Unit.objects.create(textbook_book=other, code='u1', title='复习')
         Placement(unit=unit, item=self.item).full_clean()
         invalid = ContentItem.objects.create(module=Module.objects.get(code='knowledge'), title='语文')
         with self.assertRaises(ValidationError):
@@ -125,40 +137,23 @@ class CatalogTests(PlatformFixture):
 
 
 class ShelfPartitionTests(PlatformFixture):
-    """教材同步与主题探索分区：语义显式、展示分区、锚点清晰。"""
+    """教材同步书架：目录只承载教材管线，专题由独立玩法应用承载。"""
 
-    @classmethod
-    def setUpTestData(cls):
-        super().setUpTestData()
-        # 同一模块内允许并存两种语义的册（english 场景）：math 模块加一本主题探索册。
-        cls.topic_book = TopicBook.objects.create(code='math-topic', name='数学思维专题',
-            module=cls.item.module, is_published=True)
-
-    def test_collection_semantics_are_explicit(self):
+    def test_book_semantics_are_explicit(self):
         self.assertIsInstance(self.collection, TextbookBook)
         self.assertEqual(self.collection.kind, 'textbook')
-        self.assertIsInstance(self.topic_book, TopicBook)
-        self.assertEqual(self.topic_book.kind, 'topic')
         self.assertIn(self.collection, published_textbook_books())
-        self.assertIn(self.topic_book, published_topic_books())
-        self.assertNotIn(self.topic_book, list(published_textbook_books()))
 
-    def test_home_shelves_render_both_sections(self):
+    def test_home_shelf_renders_textbook_section_only(self):
         response = self.client.get('/')
         self.assertContains(response, '教材同步')
-        self.assertContains(response, '主题探索')
-        # 教材册落在教材架，专题册落在探索架（书架列册名）。
+        self.assertNotContains(response, '主题探索')
         self.assertContains(response, '北师大版数学 · 四年级上册')
-        self.assertContains(response, '数学思维专题')
 
-    def test_api_kind_partition(self):
-        textbook = self.client.get('/api/v1/catalog/?kind=textbook').json()
-        topic = self.client.get('/api/v1/catalog/?kind=topic').json()
-        self.assertEqual({c['kind'] for c in textbook['collections']}, {'textbook'})
-        self.assertEqual({c['kind'] for c in topic['collections']}, {'topic'})
-        self.assertEqual(textbook['collections'][0]['code'], 'primary-math-all')
-        self.assertEqual(topic['collections'][0]['code'], 'math-topic')
-        self.assertEqual(self.client.get('/api/v1/catalog/?kind=other').status_code, 400)
+    def test_api_reports_textbook_kind(self):
+        data = self.client.get('/api/v1/catalog/').json()
+        self.assertEqual({c['kind'] for c in data['collections']}, {'textbook'})
+        self.assertEqual(data['collections'][0]['code'], 'primary-math-all')
 
 
 class ContentBlockTests(PlatformFixture):

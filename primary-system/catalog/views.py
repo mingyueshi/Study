@@ -6,44 +6,32 @@ from django.views.decorators.cache import never_cache
 from django.views.decorators.http import require_GET
 from .forms import CatalogFilter
 from .models import Grade, Module, Subject, TextbookEdition, TextbookBook, ContentItem, published_items, \
-    published_textbook_books, published_topic_books, published_units
+    published_textbook_books, published_units
 
 
-def published_books(kind=None):
-    """两种学习册的合并视图（鸭子接口：code/name/kind/subject/subtitle）。"""
+def published_books():
+    """已发布教材同步册（鸭子接口：code/name/kind/subject/subtitle）。"""
     books = list(published_textbook_books().select_related('module__subject', 'textbook__grade', 'textbook__edition'))
-    books += list(published_topic_books().select_related('module__subject'))
     books.sort(key=lambda b: (b.order, b.name))
-    if kind in ('textbook', 'topic'):
-        books = [b for b in books if b.kind == kind]
     return books
 
 
-def filter_books(request, *, kind=None):
+def filter_books(request):
     """目录筛选（Python 侧按对象属性过滤；册数量级小，清晰优先）。"""
     params = request.GET.copy()
     if 'grade' not in params and request.user.is_authenticated and request.user.grade_id:
         params['grade'] = request.user.grade.code
     form = CatalogFilter(params)
-    books = published_books(kind=kind)
+    books = published_books()
     if not form.is_valid():
         return form, []
     grade, subject, edition, q = (form.cleaned_data[k] for k in ('grade', 'subject', 'edition', 'q'))
     if grade:
-        matched = []
-        for book in books:
-            if book.kind == 'textbook':
-                keep = book.textbook.grade_id == grade.pk
-            else:
-                grades = list(book.grades.all())
-                keep = not grades or grade in grades
-            if keep:
-                matched.append(book)
-        books = matched
+        books = [b for b in books if b.textbook.grade_id == grade.pk]
     if subject:
         books = [b for b in books if b.subject.code == subject.code]
     if edition:
-        books = [b for b in books if b.kind == 'textbook' and b.textbook.edition_id == edition.pk]
+        books = [b for b in books if b.textbook.edition_id == edition.pk]
     if q:
         matching = published_items().filter(Q(title__icontains=q) | Q(summary__icontains=q) | Q(body__icontains=q))
         matched_units = set(published_units().filter(placements__item__in=matching).values_list('pk', flat=True))
@@ -54,10 +42,7 @@ def filter_books(request, *, kind=None):
 
 def units_of_books(books):
     """筛选后册集合覆盖的单元查询集。"""
-    textbook_ids = [b.pk for b in books if b.kind == 'textbook']
-    topic_ids = [b.pk for b in books if b.kind == 'topic']
-    return published_units().filter(
-        Q(textbook_book_id__in=textbook_ids) | Q(topic_book_id__in=topic_ids))
+    return published_units().filter(textbook_book__in=[b.pk for b in books])
 
 
 @never_cache
@@ -70,9 +55,7 @@ def home(request):
         counts[book.module_id] = counts.get(book.module_id, 0) + 1
     for module in modules:
         module.available_count = counts.get(module.pk, 0)
-    # 学习册按语义分区：教材同步（跟课本走）与主题探索（自由专题）分别成架。
-    textbook_shelf = [b for b in books if b.kind == 'textbook']
-    topic_shelf = [b for b in books if b.kind == 'topic']
+    textbook_shelf = books
     progress = None
     if request.user.is_authenticated:
         from learning.models import Progress
@@ -82,7 +65,7 @@ def home(request):
         )
     return render(request, 'catalog/home.html', {
         'form': form, 'modules': modules, 'progress': progress,
-        'textbook_shelf': textbook_shelf, 'topic_shelf': topic_shelf,
+        'textbook_shelf': textbook_shelf,
         'item_count': published_items().filter(placements__unit__in=units_of_books(books)).count(),
     }, status=200 if form.is_valid() else 400)
 
@@ -101,8 +84,8 @@ def module_detail(request, code):
 @never_cache
 @require_GET
 def collection_detail(request, code):
-    book = (published_textbook_books().filter(code=code).first()
-            or published_topic_books().filter(code=code).first())
+    book = published_textbook_books().filter(code=code).select_related(
+        'module', 'textbook__grade', 'textbook__edition').first()
     if not book:
         raise Http404('学习册不存在或未发布。')
     units = book.units.all()
@@ -116,10 +99,7 @@ def collection_detail(request, code):
 @never_cache
 @require_GET
 def catalog_api(request):
-    kind = request.GET.get('kind', '').strip()
-    if kind not in ('', 'textbook', 'topic'):
-        return JsonResponse({'errors': {'kind': ['kind 仅支持 textbook 或 topic。']}}, status=400)
-    form, books = filter_books(request, kind=kind)
+    form, books = filter_books(request)
     if not form.is_valid():
         return JsonResponse({'errors': form.errors.get_json_data()}, status=400)
     page = Paginator(books, 30).get_page(request.GET.get('page'))
@@ -130,7 +110,7 @@ def catalog_api(request):
         'editions': list(TextbookEdition.objects.values('code', 'name', 'subject__code', 'publisher', 'version')),
         'modules': list(Module.objects.filter(is_active=True).values('code', 'name', 'subject__code', 'interactive_ready')),
         'collections': [{'code': b.code, 'name': b.name, 'module': b.module.code, 'kind': b.kind,
-                         'textbook': b.textbook.code if b.kind == 'textbook' else None} for b in page],
+                         'textbook': b.textbook.code} for b in page],
         'page': page.number, 'pages': page.paginator.num_pages, 'total': page.paginator.count,
     })
 

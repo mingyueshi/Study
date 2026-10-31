@@ -106,14 +106,14 @@ NOVA_ADMIN_NAV_GROUPS = [
     {'key': 'learning', 'label': '学习记录', 'apps': ['learning']},
     {'key': 'people', 'label': '账号与权限', 'apps': ['accounts', 'auth']},
 ]
-NOVA_ADMIN_NAV_COMMON_MODELS = ['catalog.contentitem', 'catalog.textbookbook', 'catalog.topicbook', 'lexicon.lexicalentry', 'chain.chainword']
+NOVA_ADMIN_NAV_COMMON_MODELS = ['catalog.contentitem', 'catalog.textbookbook', 'lexicon.lexicalentry', 'chain.chainword']
 NOVA_ADMIN_NAV_ICONS = {
     'catalog': 'heroicons:building-library',
     'catalog.stage': 'tag', 'catalog.grade': 'tag', 'catalog.subject': 'tag',
     'catalog.textbookedition': 'tabler:building-bank',
     'catalog.textbook': 'heroicons:document-text',
     'catalog.module': 'lucide:package',
-    'catalog.textbookbook': 'bootstrap:box-seam', 'catalog.topicbook': 'lucide:map-pin',
+    'catalog.textbookbook': 'bootstrap:box-seam',
     'catalog.unit': 'heroicons:document-duplicate',
     'catalog.contentitem': 'lucide:file-text',
     'catalog.placement': 'lucide:link',

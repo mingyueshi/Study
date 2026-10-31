@@ -4,23 +4,17 @@ from django.db import transaction
 from catalog.models import Stage, Grade, Subject, Module, TextbookEdition, Textbook
 
 MODULES = [
+    # 教材内容管线走固定结构的目录编排；专题内容各自成为独立玩法应用（如 chain），
+    # 不再以模块/册形式进入目录。
     ('knowledge', '语文知识', 'chinese', 'book', '顺着课文和单元，理解语言的美。'),
     ('math', '数学思维', 'math', 'math', '读知识、看例题，把方法想明白。'),
     ('english', '教材同步单词', 'english', 'english', '按教材册次，积累每天用得到的英语。'),
-    ('words', '场景单词', 'english', 'scenes', '从生活场景出发，认识身边的英文。'),
-    ('idioms', '成语本', 'chinese', 'idioms', '读懂四个字背后的意思与故事。'),
-    ('writing', '作文坊', 'chinese', 'writing', '从好词好句到提纲，让想法变成文字。'),
-    ('geo', '地理探索', 'geography', 'globe', '认识地球、山川与我们生活的地方。'),
-    ('astro', '天文探索', 'science', 'astro', '从月亮出发，探索更远的宇宙。'),
-    ('history', '历史长廊', 'history', 'history', '沿着时间的脚步，认识过去。'),
-    ('lit', '文学常识', 'chinese', 'literature', '走近作家、作品和传统文化。'),
-    ('sci', '科学实验室', 'science', 'science', '带着问题观察世界，寻找证据。'),
     ('chain', '成语接龙', 'chinese', 'dragon', '和小龙陪练轮流接龙，词语取自统一词库。'),
 ]
 
 
 class Command(BaseCommand):
-    help = '幂等建立学段、年级、学科、12 个模块及教材目录；不创建用户、不重置已有设置。'
+    help = '幂等建立学段、年级、学科、教材模块与接龙入口；不创建用户、不重置已有设置。'
 
     @transaction.atomic
     def handle(self, *args, **options):

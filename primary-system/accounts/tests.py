@@ -42,7 +42,7 @@ class AccountTests(PlatformFixture):
     def test_all_admin_lists_and_add_forms_render(self):
         admin = get_user_model().objects.create_superuser('local-admin', password=self.admin_password)
         self.client.force_login(admin)
-        for model in ['stage', 'grade', 'subject', 'textbookedition', 'textbook', 'module', 'textbookbook', 'topicbook', 'unit', 'contentitem', 'placement']:
+        for model in ['stage', 'grade', 'subject', 'textbookedition', 'textbook', 'module', 'textbookbook', 'unit', 'contentitem', 'placement']:
             self.assertEqual(self.client.get(f'/admin/catalog/{model}/').status_code, 200, model)
             self.assertEqual(self.client.get(f'/admin/catalog/{model}/add/').status_code, 200, model)
         self.assertEqual(self.client.get('/admin/accounts/user/add/').status_code, 200)

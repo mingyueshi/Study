@@ -60,7 +60,7 @@ def word_card_context(item):
     related = [w for w in payload.get('related', []) if isinstance(w, str) and w.strip()]
     if related:
         cards = {card.title: card for card in published_items().filter(
-            module__code='words', title__in=related).select_related('module')}
+            module__code=item.module.code, title__in=related).select_related('module')}
         context['related_links'] = [{'word': word, 'item': cards.get(word)} for word in related]
     placement = item.placements.select_related('unit').first()
     if placement:

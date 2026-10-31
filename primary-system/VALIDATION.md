@@ -219,3 +219,10 @@ Playwright 在独立数据库副本中验证：桌面查词首页、汉字详情
 - 消费面适配：admin 双 ModelAdmin、views 合并鸭子接口（published_books/kind/subject/subtitle）、首页书架分区、`catalog_api` kind 标记与 `?kind=` 参数、册页 `/books/<code>/` 双表先后查询；Nova 导航图标/常用模型键同步（topicbook 图标换用 nova 支持的 `lucide:map-pin`）。
 - 教训两笔：①迁移生成顺序会把 `unit_book_exclusive` 约束放在存量行仍违反的位置——迁移前先清编排层（重导路径下无损失）；②表名重命名这类「存量手术」不进迁移历史（同 chain 更名先例）。
 - 全库 121 项测试通过、check 无问题、无迁移漂移；实测首页双架/textbook 4 本/topic 7 本（成语册随模块下架暂隐）/教材册页/词卡词典驱动/接龙/词典全部 200。
+
+## 专题内容退场与目录教材专用化验证（2026-11-01）
+
+- 领域决策：**教材 = 固定结构的目录编排管线；专题 = 独立玩法应用**（各自带模型/服务/前端，如 chain）。TopicBook 模型、Unit.topic_book、主题书架、API kind 参数全部退场（迁移 0005/0006，SQLite 删列须先删引用约束的顺序教训入档）；seed_platform MODULES 缩减为教材三模块＋接龙入口。
+- 数据删除（源头可恢复）：8 本专题册、94 专题单元、825 专题编排、825 内容卡（words 306/idioms 258/lit 51/astro 51/sci 49/geo 47/history 47/writing 16）、562 词卡教学关联、8 个专题模块行。**源头完好**：legacy 各 *-data.js、primary.json、词典 5 来源（primary-words/english 保持激活，609 音标核对保留）、接龙词池、图示库——场景单词等玩法 app 可随时从源头重取数据。
+- importing：非目录模块的快照数据改为跳过并记录 skipped_modules（primary.json 保持全量导出）；首页只剩教材书架与接龙入口（模块卡 4 张）。
+- 词卡词典驱动测试迁移至 english 教材卡（fixture 用 seed 的 fltrp-english-4a 教材册），关联词解析修正为同模块词卡（原写死 words 模块的 bug 被新测试抓住）。全库 120 项测试通过；实测教材册页/词卡/接龙/词典 200，专题册 URL 404。
