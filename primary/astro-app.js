@@ -73,6 +73,11 @@ function msec(label, inner) {
   return '<div class="ksec"><span class="seclabel">' + label + '</span>' + inner + '</div>';
 }
 
+/* 单元/特殊视图横幅照片，无则 '' */
+function abanner(id) {
+  return (window.ASTRO_PHOTOS && ASTRO_PHOTOS.banner(id)) || '';
+}
+
 function pointCard(u, p) {
   const key = pointKey(u, p);
   const learned = !!akState.learned[key];
@@ -82,7 +87,15 @@ function pointCard(u, p) {
   parts.push('<div class="khead"><h3 class="ktitle">' + esc(p.title) + '</h3>' +
     '<span class="khead-gap"></span>' + sayBtn(p.title + '。' + p.overview) +
     '<button class="learn-btn' + (learned ? ' on' : '') + '" data-act="learn" data-unit="' + u.id + '" data-id="' + esc(p.id) + '" title="标记已掌握" aria-pressed="' + learned + '" aria-label="已掌握 ' + esc(p.title) + '">' + (learned ? '✓' : '') + '</button></div>');
-  parts.push('<p class="k-overview">' + esc(p.overview) + '</p>');
+  const pp = (window.ASTRO_PHOTOS && ASTRO_PHOTOS.point(p.id)) || null;
+  if (pp) {
+    parts.push('<div class="k-overview has-photo">' +
+      '<img class="ov-photo" src="' + pp.img + '" alt="" loading="lazy">' +
+      '<div class="ov-txt"><div class="ov-main">' + esc(p.overview) + '</div>' +
+      '<div class="ov-life">🔭 ' + esc(pp.life) + '</div></div></div>');
+  } else {
+    parts.push('<p class="k-overview">' + esc(p.overview) + '</p>');
+  }
   if (p.fig && window.AstroFigures) parts.push(AstroFigures.figHTML(p.fig));
 
   if (p.items && p.items.length) {
@@ -108,8 +121,10 @@ function pointCard(u, p) {
 }
 
 function renderUnit(u) {
-  const banner = window.AstroFigures ? AstroFigures.unitBanner(u.id) : '';
-  return '<div class="unit-head" style="--c:' + u.color + '">' +
+  const photo = abanner(u.id);
+  const banner = !photo && window.AstroFigures ? AstroFigures.unitBanner(u.id) : '';
+  return '<div class="unit-head' + (photo ? ' has-photo' : '') + '" style="--c:' + u.color +
+    (photo ? ';background-image:url(' + photo + ')' : '') + '">' +
     '<span class="unit-emoji">' + u.emoji + '</span>' +
     '<div><h1>' + esc(u.no) + ' · ' + esc(u.name) + '</h1>' +
     '<p>' + esc(u.intro) + '</p>' +
@@ -128,7 +143,9 @@ function factCard(f) {
 }
 
 function renderFacts() {
-  return '<div class="unit-head" style="--c:#b5893a">' +
+  const photo = abanner('facts');
+  return '<div class="unit-head' + (photo ? ' has-photo' : '') + '" style="--c:#b5893a' +
+    (photo ? ';background-image:url(' + photo + ')' : '') + '">' +
     '<span class="unit-emoji">🏆</span><div><h1>宇宙数据速查</h1>' +
     '<p>' + ASTRO.facts.length + ' 组 · 点一行读一行</p></div></div>' +
     ASTRO.facts.map(factCard).join('');
@@ -136,7 +153,9 @@ function renderFacts() {
 
 /* ---------- 天文小诊所 ---------- */
 function renderClinic() {
-  return '<div class="unit-head" style="--c:#c2557d">' +
+  const photo = abanner('clinic');
+  return '<div class="unit-head' + (photo ? ' has-photo' : '') + '" style="--c:#c2557d' +
+    (photo ? ';background-image:url(' + photo + ')' : '') + '">' +
     '<span class="unit-emoji">🩺</span><div><h1>天文小诊所</h1>' +
     '<p>考前把这张「错处清单」过一遍</p></div></div>' +
     '<div class="wgrid">' + ASTRO.mistakes.map(m =>

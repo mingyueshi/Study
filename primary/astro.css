@@ -23,6 +23,43 @@
   font-size: 12.5px; font-weight: 700;
 }
 
+/* ---------- 单元头 · 实景照片横幅 ---------- */
+.study-page[data-subject="astro"] .unit-head.has-photo {
+  position: relative; overflow: hidden;
+  background-size: cover; background-position: center;
+  border-left: none; border-block: none; border-right: none;
+}
+.study-page[data-subject="astro"] .unit-head.has-photo::before {
+  content: ''; position: absolute; inset: 0; z-index: 0;
+  background: linear-gradient(102deg, rgba(24, 27, 46, .86) 0%, rgba(24, 27, 46, .58) 48%, rgba(24, 27, 46, .28) 100%);
+}
+.study-page[data-subject="astro"] .unit-head.has-photo::after {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 5px;
+  background: var(--c); z-index: 2;
+}
+.study-page[data-subject="astro"] .unit-head.has-photo > * { position: relative; z-index: 1; }
+.study-page[data-subject="astro"] .unit-head.has-photo .unit-emoji { filter: drop-shadow(0 2px 8px rgba(0, 0, 0, .4)); }
+.study-page[data-subject="astro"] .unit-head.has-photo h1 { color: #fff; text-shadow: 0 2px 14px rgba(0, 0, 0, .45); }
+.study-page[data-subject="astro"] .unit-head.has-photo p { color: rgba(255, 255, 255, .93); text-shadow: 0 1px 8px rgba(0, 0, 0, .35); }
+.study-page[data-subject="astro"] .unit-head.has-photo .goal-tags span {
+  background: rgba(255, 255, 255, .16); border-color: rgba(255, 255, 255, .34);
+  color: #fff; backdrop-filter: blur(3px);
+}
+
+/* ---------- 知识点卡 · 「宇宙真面目」实景照片 ---------- */
+.k-overview.has-photo { display: flex; align-items: center; gap: 13px; }
+.k-overview .ov-photo {
+  flex: 0 0 auto; width: 72px; height: 72px; border-radius: 14px;
+  object-fit: cover; border: 2px solid #fff;
+  box-shadow: 0 3px 10px rgba(30, 38, 60, .18);
+}
+.k-overview .ov-txt { flex: 1; min-width: 0; }
+.k-overview .ov-main { font-size: 15.5px; line-height: 1.72; color: #45495e; font-weight: 600; }
+.k-overview .ov-life {
+  margin-top: 5px; font-size: 12.5px; line-height: 1.6;
+  color: #6a71a0; font-weight: 700;
+}
+
 /* ---------- 知识点卡 ---------- */
 .kcard {
   --c: #6b7fb3;
@@ -244,6 +281,13 @@
   .study-shell { display: block; padding: 0; }
   .study-content { padding: 0; }
   .unit-head { border: 1px solid #ccc; box-shadow: none; }
+  .study-page[data-subject="astro"] .unit-head.has-photo { background-image: none !important; background: #fff; }
+  .study-page[data-subject="astro"] .unit-head.has-photo::before,
+  .study-page[data-subject="astro"] .unit-head.has-photo::after { display: none !important; }
+  .study-page[data-subject="astro"] .unit-head.has-photo h1,
+  .study-page[data-subject="astro"] .unit-head.has-photo p { color: #1c1f2a; text-shadow: none; }
+  .study-page[data-subject="astro"] .unit-head.has-photo .goal-tags span { background: #fff; border-color: #ccc; color: #333; }
+  .ov-photo { display: none !important; }
   .kcard, .formula-card, .mistake-card { box-shadow: none; break-inside: avoid; page-break-inside: avoid; }
   .wgrid { grid-template-columns: 1fr; display: block; }
   .kcard, .mistake-card { margin-bottom: 12px; }
