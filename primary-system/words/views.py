@@ -35,14 +35,29 @@ def learn(request):
         data = json.loads(request.body)
     except (ValueError, UnicodeDecodeError):
         return JsonResponse({'error': '请求格式不正确。'}, status=400)
-    if not isinstance(data, dict) or not isinstance(data.get('word_id'), str) \
-            or not data['word_id'].isdigit() or not isinstance(data.get('learned'), bool):
-        return JsonResponse({'error': '需要 word_id 与 learned。'}, status=400)
+    if not isinstance(data, dict) or data.get('schema_version') != 3:
+        return JsonResponse({'error': '词卡接口已升级，请刷新页面。', 'schema_version': 3}, status=409)
+    import uuid
     try:
-        from words.models import ScenarioWord
-        if not ScenarioWord.objects.filter(pk=data['word_id']).exists():
-            return JsonResponse({'error': '单词不存在。'}, status=404)
-        row = services.set_learned(services.owner_filter(request), data['word_id'], data['learned'])
+        target_id = uuid.UUID(data.get('target_id', ''))
+    except (ValueError, TypeError, AttributeError):
+        return JsonResponse({'error': '需要有效 target_id。'}, status=400)
+    if not isinstance(data.get('learned'), bool) or type(data.get('revision')) is not int or not 0 <= data['revision'] < 2147483647:
+        return JsonResponse({'error': '需要 learned 与非负 revision。'}, status=400)
+    if type(data.get('presentation_revision')) is not int or data['presentation_revision'] < 0 or 'chinese_version_id' not in data:
+        return JsonResponse({'error': '中文呈现信息缺失，请刷新页面。'}, status=409)
+    try:
+        if data['chinese_version_id'] is not None:
+            uuid.UUID(data['chinese_version_id'])
+    except (ValueError, TypeError, AttributeError):
+        return JsonResponse({'error': '呈现版本无效。'}, status=400)
+    from words.models import LearningTarget
+    try:
+        row = services.set_learned(services.owner_filter(request), target_id, data['learned'], data['revision'], chinese_version_id=data['chinese_version_id'], presentation_revision=data['presentation_revision'])
+    except LearningTarget.DoesNotExist:
+        return JsonResponse({'error': '学习目标不存在。'}, status=404)
+    except services.ProgressConflict as error:
+        return JsonResponse({'error': str(error)}, status=409)
     except OperationalError:
         return JsonResponse({'error': '数据库暂忙，请重试。'}, status=503)
-    return JsonResponse({'word_id': str(row.word_id), 'learned': row.learned})
+    return JsonResponse({'schema_version': 3, 'target_id': str(row.target_id), 'learned': row.learned, 'revision': row.revision})

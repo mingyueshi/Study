@@ -7,10 +7,11 @@
 | 目录 | 系统 | 面向 | 状态 |
 |---|---|---|---|
 | [`primary/`](primary/) | 🎒 乐学堂 | 小学（当前：四年级） | ✅ 使用中 |
+| [`history-explorer/`](history-explorer/) | 历史漫游 · 时光手册 | 小学中高年级历史启蒙 | 独立多媒体编排演示 |
 | [`primary-system/`](primary-system/) | 乐学堂统一系统 | 多年级、多账号、多教材、多学科 | 数据库、Nova 后台、个人进度、开放词库接入与统一查字查词 |
-| [`techlex/`](techlex/) | ⌨️ TechLex · 计算机英语 | 开发 / 运营 / 运维专业人员 | ✅ 使用中 |
+| [`personal-learning/`](personal-learning/) | 个人学习系统 | 个人知识与实践积累 | 英文学习（TechLex）可用，AI 基础篇可学习 |
 
-**TechLex 亮点**：9 大分类 169 个术语（含 54 个缩写），其中「开发常用缩写」单元收录 fn、param、ctx、env、TODO、FIXME、WIP、LGTM、DRY、YAGNI、OOP 等代码里的高频缩写；每个术语含音标或缩写全称、中文释义、构词拆解、双语例句、关联术语，全部可点读（缩写逐字母朗读）。
+**个人学习系统**：独立目录与总导航，当前包含英文学习和 AI 基础篇（6 阶段、24 个概念、自检与练习）。英文目录中的 TechLex 已有 12 大分类、205 个术语（含 57 个缩写）、24 条双语工作表达，支持点读、搜索、学习状态筛选与本机进度；以桌面宽屏和竖屏阅读为主。
 
 快速开始：
 
@@ -23,9 +24,10 @@
 - 地理探索：双击 [`primary/geo.html`](primary/geo.html)，适合小学生的地理知识学习，八大站点 37 个知识点，配罗盘、四季互动演示与图示，可点读、可搜索、可打印。
 - 天文探索：双击 [`primary/astro.html`](primary/astro.html)，适合小学生的天文宇宙知识学习，八大基地 41 个知识点，配行星档案、月相变化互动演示与图示，可点读、可搜索、可打印。
 - 历史长廊：双击 [`primary/history.html`](primary/history.html)，适合小学生的中华历史启蒙，八大长廊 37 个知识点，配甲骨文、丝绸之路、郑和宝船等图示与朝代长河互动演示，可点读、可搜索、可打印。
+- 历史漫游：双击 [`history-explorer/index.html`](history-explorer/index.html)，独立重编的多媒体历史演示，包含真实文物观察、丝路/汉字/造纸互动、遗址短片、37条知识口袋与时光护照；详见 [`history-explorer/README.md`](history-explorer/README.md)。
 - 文学常识：双击 [`primary/lit.html`](primary/lit.html)，适合小学生的文学常识学习，八大文学苑 41 个知识点，涵盖四大名著、古今作家、文化常识与名句典故，配名著档案、生肖档案互动演示与图示，可点读、可搜索、可打印。
 - 科学实验室：双击 [`primary/sci.html`](primary/sci.html)，适合小学生的科学知识学习，八大实验室 39 个知识点，涵盖物质、力、光声、电磁、生命、地球与技术工程，配三态变化、电路串联并联互动演示与图示，可点读、可搜索、可打印。
-- TechLex：双击 [`techlex/index.html`](techlex/index.html)，详见 [`techlex/README.md`](techlex/README.md)
+- 个人学习：双击 [`personal-learning/index.html`](personal-learning/index.html)，从总导航进入英文学习或 AI 基础篇；详见 [`personal-learning/README.md`](personal-learning/README.md)。旧 [`techlex/index.html`](techlex/index.html) 会转到新的英文学习模块。
 
 ## 🚧 学段规划
 
@@ -35,7 +37,7 @@
 | `senior/` | 高中 | 🚧 规划中 |
 | `university/` | 大学 | 🚧 规划中 |
 
-> 命名约定：每个系统一个顶层目录，目录名用系统标识（如 primary、techlex）；面向某学段的系统可在根 README 的表格登记。专业人员方向已有 TechLex，更多专业系统可作为新目录并列加入。
+> 命名约定：每个系统一个顶层目录，目录名用系统标识（如 primary、personal-learning）；面向某学段的系统可在根 README 的表格登记。个人学习方向统一放在 `personal-learning/`，英文、AI 等大类分别使用子目录，TechLex 位于 `personal-learning/english/techlex/`。
 
 ## 🧭 新系统的建议做法
 

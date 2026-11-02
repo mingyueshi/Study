@@ -32,12 +32,12 @@ def _owner(request):
     return {'guest_key': key}
 
 
-def _payload(request, round, *, hint=None):
+def _payload(request, round, *, pool, hint=None):
     payload = {
         'id': str(round.pk), 'revision': round.revision, 'score': round.score, 'hints': round.hints,
         'chain': round.chain, 'status': round.status, 'ended_reason': round.get_ended_reason_display() if round.ended_reason else '',
         'next_char': round.chain[-1]['last_char'] if round.status == GameRound.Status.PLAYING else '',
-        **services.pool_stats(),
+        **services.pool_stats(pool),
         'history': [{'score': item.score, 'hints': item.hints, 'length': len(item.chain) - 1,
                      'ended_reason': item.get_ended_reason_display() or '手动重开',
                      'finished_at': item.finished_at.strftime('%Y-%m-%d %H:%M')} for item in services.round_history(_owner(request))],
@@ -51,17 +51,25 @@ def _payload(request, round, *, hint=None):
 @never_cache
 @require_GET
 def page(request):
-    round = services.current_round(_owner(request), exclude_headword=request.session.get('chain_last_starter'))
+    try:
+        pool = services.chain_pool()
+        round = services.current_round(_owner(request), exclude_headword=request.session.get('chain_last_starter'), pool=pool)
+    except services.ChainError:
+        return render(request, 'chain/unavailable.html')
     request.session['chain_last_starter'] = round.chain[0]['word']
-    return render(request, 'chain/play.html', {'state': _payload(request, round)})
+    return render(request, 'chain/play.html', {'state': _payload(request, round, pool=pool)})
 
 
 @never_cache
 @require_GET
 def state(request):
-    round = services.current_round(_owner(request), exclude_headword=request.session.get('chain_last_starter'))
+    try:
+        pool = services.chain_pool()
+        round = services.current_round(_owner(request), exclude_headword=request.session.get('chain_last_starter'), pool=pool)
+    except services.ChainError:
+        return JsonResponse({'error': '暂时没有可用成语，请稍后再来。', 'status': 'unavailable'}, status=503)
     request.session['chain_last_starter'] = round.chain[0]['word']
-    return JsonResponse(_payload(request, round))
+    return JsonResponse(_payload(request, round, pool=pool))
 
 
 def _body(request):
@@ -81,15 +89,16 @@ def _mutate(request, action):
     owner = _owner(request)
     try:
         data = _body(request)
+        pool = services.chain_pool()
         if action == 'play':
-            round, hint = services.play(owner, data['round_id'], data['revision'], data.get('word', '')), None
+            round, hint = services.play(owner, data['round_id'], data['revision'], data.get('word', ''), pool=pool), None
         elif action == 'hint':
-            round, hint = services.take_hint(owner, data['round_id'], data['revision'])
+            round, hint = services.take_hint(owner, data['round_id'], data['revision'], pool=pool)
         else:
             finished = services.restart_round(owner, data['round_id'], data['revision'])
             hint = None
             request.session['chain_last_starter'] = finished.chain[0]['word']
-            round = services.current_round(owner, exclude_headword=finished.chain[0]['word'])
+            round = services.current_round(owner, exclude_headword=finished.chain[0]['word'], pool=pool)
             request.session['chain_last_starter'] = round.chain[0]['word']
     except services.ChainConflict as exc:
         return JsonResponse({'error': str(exc)}, status=409)
@@ -97,7 +106,7 @@ def _mutate(request, action):
         return JsonResponse({'error': str(exc)}, status=400)
     except OperationalError:
         return JsonResponse({'error': '数据库暂忙，请重新读取状态后再操作。'}, status=503)
-    return JsonResponse(_payload(request, round, hint=hint))
+    return JsonResponse(_payload(request, round, pool=pool, hint=hint))
 
 
 @never_cache

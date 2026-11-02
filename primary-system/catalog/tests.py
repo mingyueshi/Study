@@ -260,6 +260,47 @@ class ConvertFiguresTests(PlatformFixture):
 
 
 class ImportTests(PlatformFixture):
+    def test_english_relation_ui_metadata_is_skipped_and_teaching_extras_are_preserved(self):
+        snapshot = {'schema_version': 1, 'modules': [{
+            'code': 'english', 'source_file': 'primary/english-data.js', 'sha256': 'a' * 64,
+            'data': {
+                'ENGLISH_UNITS': [{'id': '4a-u1', 'name': 'Unit 1', 'book': '四年级上册',
+                                   'words': [{'en': 'apple', 'zh': '苹果'}]}],
+                'RELATION_META': {'synonym': {'label': '近义词', 'color': '#345678'}},
+                'RELATION_ORDER': ['synonym'],
+                'WORD_ZH': {'pear': '梨'},
+            },
+        }]}
+        import_snapshot(snapshot, publish=True)
+        items = ContentItem.objects.filter(module__code='english')
+        self.assertEqual(set(items.values_list('title', flat=True)), {'apple', '关联词释义'})
+        reference = items.get(source_key='primary:english:reference:WORD_ZH')
+        self.assertEqual(reference.source_payload, {'WORD_ZH': {'pear': '梨'}})
+        self.assertIn('梨', reference.sections[0]['text'])
+
+    def test_command_skips_non_textbook_sources_even_when_module_exists(self):
+        # seed_platform 已创建 words；旧库还可能保留其他专题模块。
+        self.assertTrue(Module.objects.filter(code='words').exists())
+        Module.objects.create(code='geo', name='地理专题', subject=self.item.module.subject)
+        snapshot = minimal_snapshot()
+        snapshot['modules'][0]['data']['units'][0]['points'][0]['title'] = '教材正常更新'
+        for code, units_key in [('words', 'WORD_UNITS'), ('geo', 'units'), ('future-topic', 'units')]:
+            snapshot['modules'].append({
+                'code': code, 'source_file': f'primary/{code}-data.js', 'sha256': 'b' * 64,
+                'data': {units_key: []},
+            })
+        before = set(ContentItem.objects.values_list('pk', flat=True))
+        with tempfile.TemporaryDirectory() as temp:
+            file = Path(temp) / 'snapshot.json'
+            file.write_text(json.dumps(snapshot))
+            output = io.StringIO()
+            call_command('import_primary', str(file), publish=True, stdout=output)
+        self.assertEqual(json.loads(output.getvalue())['skipped_modules'], ['words', 'geo', 'future-topic'])
+        self.assertEqual(set(ContentItem.objects.values_list('pk', flat=True)), before)
+        self.assertEqual(TextbookBook.objects.count(), 1)
+        self.item.refresh_from_db()
+        self.assertEqual(self.item.title, '教材正常更新')
+
     def test_repeat_import_keeps_ids_and_preserves_archival_state(self):
         before = set(ContentItem.objects.values_list('id', flat=True))
         self.item.status = 'archived'
@@ -289,6 +330,10 @@ class ImportTests(PlatformFixture):
     def test_command_dry_run_and_atomic_failure(self):
         snapshot = minimal_snapshot()
         snapshot['modules'][0]['data']['units'][0]['points'][0]['title'] = '新标题'
+        snapshot['modules'].append({
+            'code': 'words', 'source_file': 'primary/words-data.js', 'sha256': 'b' * 64,
+            'data': {'WORD_UNITS': []},
+        })
         with tempfile.TemporaryDirectory() as temp:
             file = Path(temp) / 'snapshot.json'
             file.write_text(json.dumps(snapshot))

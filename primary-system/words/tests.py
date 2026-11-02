@@ -10,9 +10,7 @@ from lexicon.importing import stage_manifest
 from lexicon.services import activate_release
 from lexicon.tests.helpers import row
 
-from .models import Scenario, ScenarioWord, WordProgress
-
-from .models import Scenario, ScenarioWord, WordProgress
+from .models import LearningTarget, Scenario, ScenarioWord, WordProgress
 
 
 def word_row(en, ipa, zh):
@@ -120,10 +118,16 @@ class ScenarioPlayTests(TestCase):
         activate_release(cls.release.pk, expected_current='', reason='测试启用场景词源')
         cls.scenario = Scenario.objects.create(code='u-actions', name='Action Words', zh='动作', emoji='🏃',
                                                color='#f15bb5', order=0)
-        entry_ids = [r.binding.sense.entry_id for r in cls.release.records.order_by('pk')]
-        cls.word_a = ScenarioWord.objects.create(en='dance', entry_id=entry_ids[0], scenario=cls.scenario, emoji='💃')
-        cls.word_b = ScenarioWord.objects.create(en='sing', entry_id=entry_ids[1], scenario=cls.scenario, emoji='🎤')
+        records = {r.headword: r for r in cls.release.records.select_related('binding__sense')}
+        entries = {en: r.binding.sense.entry_id for en, r in records.items()}
+        targets = {en: LearningTarget.objects.create(label=en, sense=r.binding.sense, pronunciation=r.binding.pronunciation, evidence=r) for en, r in records.items()}
+        cls.word_a = ScenarioWord.objects.create(en='dance', target=targets['dance'], entry_id=entries['dance'], scenario=cls.scenario, emoji='💃')
+        cls.word_b = ScenarioWord.objects.create(en='sing', target=targets['sing'], entry_id=entries['sing'], scenario=cls.scenario, emoji='🎤')
         cls.user = get_user_model().objects.create_user('words-player', password=get_random_string(24))
+
+    def write_data(self, word_id, learned, client=None):
+        word = next(w for w in (client or self.client).get('/words/api/state/').json()['words'] if w['id'] == word_id)
+        return {'schema_version': 3, 'target_id': word['target_id'], 'revision': word['revision'], 'learned': learned, 'chinese_version_id': word['chinese_version_id'], 'presentation_revision': word['presentation_revision']}
 
     def setUp(self):
         self.client = Client()
@@ -135,16 +139,61 @@ class ScenarioPlayTests(TestCase):
         self.assertTrue(state['guest'])
         self.assertFalse(any(w['learned'] for w in state['words']))
 
+    def test_internal_source_shows_editorial_definition_in_card_and_related_word(self):
+        from lexicon.services import revise
+        record = self.release.records.get(headword='sing')
+        revise(record.binding.sense, value='唱歌；歌唱', note='家庭教学纠正', expected_revision=0)
+        # 显式选用修订后的新词卡目标，旧掌握目标不能被改写。
+        self.word_b.target = LearningTarget.objects.create(label='sing', sense=record.binding.sense,
+            pronunciation=record.binding.pronunciation, evidence=record)
+        self.word_b.save(update_fields=['target'])
+        self.word_a.related = ['sing']
+        self.word_a.save(update_fields=['related'])
+        self.assertFalse(self.release.source.public_allowed)
+        words = {w['en']: w for w in self.client.get('/words/api/state/').json()['words']}
+        self.assertEqual(words['sing']['zh'], '唱歌；歌唱')
+        self.assertEqual(words['dance']['related'][0]['zh'], '唱歌；歌唱')
+
+    def test_disabled_source_hides_dictionary_fields_but_keeps_learning_progress(self):
+        from lexicon.models import Pronunciation
+        from .models import RelatedGloss
+        Pronunciation.objects.update(is_reviewed=True)
+        RelatedGloss.objects.create(en='sing', zh='旧拓展词表的唱歌释义')
+        self.client.force_login(self.user)
+        WordProgress.objects.create(user=self.user, word=self.word_a, target=self.word_a.target, learned=True)
+        self.word_a.related = ['sing']
+        self.word_a.save(update_fields=['related'])
+        before = {w['en']: w for w in self.client.get('/words/api/state/').json()['words']}
+        self.assertEqual(before['dance']['ipa'], '/dɑːns/')
+        source = self.release.source
+        source.enabled = False
+        source.save(update_fields=['enabled'])
+        words = {w['en']: w for w in self.client.get('/words/api/state/').json()['words']}
+        self.assertEqual((words['dance']['ipa'], words['dance']['zh']), ('', ''))
+        self.assertEqual((words['dance']['related'][0]['ipa'], words['dance']['related'][0]['zh']), ('', ''))
+        self.assertTrue(words['dance']['learned'])
+        self.assertEqual(WordProgress.objects.get(user=self.user, word=self.word_a).learned, True)
+
+    def test_archived_entry_and_unready_release_do_not_supply_word_fields(self):
+        from lexicon.models import LexicalEntry
+        LexicalEntry.objects.filter(pk=self.word_a.entry_id).update(status='archived')
+        words = {w['en']: w for w in self.client.get('/words/api/state/').json()['words']}
+        self.assertEqual(words['dance']['zh'], '')
+        self.assertEqual(words['sing']['zh'], 'v. 唱歌')
+        self.release.status = 'failed'
+        self.release.save(update_fields=['status'])
+        self.assertFalse(any(w['zh'] for w in self.client.get('/words/api/state/').json()['words']))
+
     def test_learn_roundtrip_guest_and_account_isolation(self):
         # 游客标记掌握：API 生效、状态可见。
         state = self.client.get('/words/api/state/').json()
         word_id = state['words'][0]['id']
         response = self.client.post('/words/api/learn/', data=json.dumps(
-            {'word_id': word_id, 'learned': True}), content_type='application/json')
+            self.write_data(word_id, True)), content_type='application/json')
         self.assertEqual(response.status_code, 200)
         state = self.client.get('/words/api/state/').json()
         self.assertTrue(next(w for w in state['words'] if w['id'] == word_id)['learned'])
-        guest_row = WordProgress.objects.get(word_id=word_id)
+        guest_row = WordProgress.objects.get(target_id=self.write_data(word_id, True)['target_id'])
         self.assertIsNone(guest_row.user)
         self.assertTrue(guest_row.guest_key)
         # 登录用户的 state 与游客互不可见。
@@ -154,22 +203,22 @@ class ScenarioPlayTests(TestCase):
         self.assertFalse(any(w['learned'] for w in state['words']))
         # 账号标记后游客会话仍保持自己的标记。
         response = self.client.post('/words/api/learn/', data=json.dumps(
-            {'word_id': word_id, 'learned': True}), content_type='application/json')
+            self.write_data(word_id, True)), content_type='application/json')
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(WordProgress.objects.filter(word_id=word_id, learned=True).count(), 2)
+        self.assertEqual(WordProgress.objects.filter(target_id=self.write_data(word_id, True)['target_id'], learned=True).count(), 2)
 
     def test_learn_toggle_and_invalid_word(self):
         state = self.client.get('/words/api/state/').json()
         word_id = state['words'][0]['id']
         for expected in (True, False):
             response = self.client.post('/words/api/learn/', data=json.dumps(
-                {'word_id': word_id, 'learned': expected}), content_type='application/json')
+                self.write_data(word_id, expected)), content_type='application/json')
             self.assertEqual(response.json()['learned'], expected)
         response = self.client.post('/words/api/learn/', data=json.dumps(
-            {'word_id': '999999', 'learned': True}), content_type='application/json')
+            {'schema_version': 3, 'target_id': '00000000-0000-0000-0000-000000000000', 'revision': 0, 'learned': True, 'chinese_version_id': None, 'presentation_revision': 0}), content_type='application/json')
         self.assertEqual(response.status_code, 404)
         response = self.client.post('/words/api/learn/', data='{"word_id": 3}', content_type='application/json')
-        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.status_code, 409)
 
     def test_page_renders_state_and_csrf_path(self):
         from django.test import Client
@@ -181,6 +230,6 @@ class ScenarioPlayTests(TestCase):
         token = enforced.cookies['primary_csrftoken'].value
         state = enforced.get('/words/api/state/').json()
         response = enforced.post('/words/api/learn/', data=json.dumps(
-            {'word_id': state['words'][0]['id'], 'learned': True}),
+            self.write_data(state['words'][0]['id'], True, client=enforced)),
             content_type='application/json', HTTP_X_CSRFTOKEN=token)
         self.assertEqual(response.status_code, 200)

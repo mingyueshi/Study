@@ -1,0 +1,76 @@
+/* 柔和背景与稳定的语义色：正文中性，例子蓝色，练习紫色，提醒暖色。 */
+:root {
+  color-scheme: dark;
+  --bg: #141b20;
+  --panel: #1d272d;
+  --panel-2: #263239;
+  --line: #3d4d55;
+  --ink: #edf2f3;
+  --text: #d9e2e6;
+  --muted: #afbdc5;
+  --accent: #aedcc4;
+  --accent-solid: #aedcc4;
+  --on-accent: #19372c;
+  --accent-soft: #223b34;
+  --accent-border: #5d8775;
+  --blue: #aed0f6;
+  --blue-soft: #223444;
+  --blue-border: #5d7e9c;
+  --purple: #d0bff0;
+  --purple-soft: #302d42;
+  --purple-border: #7c6e99;
+  --warm: #eac998;
+  --warm-soft: #393329;
+  --warm-border: #96805c;
+  --control: #19242a;
+  --control-border: #60747d;
+  --header-bg: #141b20f5;
+  --highlight-bg: #665438;
+  --highlight-text: #ffe0ae;
+  --track: #35454c;
+  --hover: #2b3a42;
+}
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg: #f4f3ef;
+  --panel: #fefefb;
+  --panel-2: #eaeef0;
+  --line: #cdd5d8;
+  --ink: #24323b;
+  --text: #344550;
+  --muted: #566771;
+  --accent: #24674f;
+  --accent-solid: #2b7158;
+  --on-accent: #ffffff;
+  --accent-soft: #e5f1e9;
+  --accent-border: #7fa58e;
+  --blue: #285e91;
+  --blue-soft: #eaf1f9;
+  --blue-border: #90abc5;
+  --purple: #6a4d91;
+  --purple-soft: #f0ebf7;
+  --purple-border: #b3a1cc;
+  --warm: #805b26;
+  --warm-soft: #faf0dd;
+  --warm-border: #c6a66f;
+  --control: #fbfcfa;
+  --control-border: #9baeb5;
+  --header-bg: #f4f3eff5;
+  --highlight-bg: #f2dba9;
+  --highlight-text: #684912;
+  --track: #dbe3e4;
+  --hover: #e8eef1;
+}
+.theme-toggle {
+  display: inline-flex; align-items: center; justify-content: center; gap: 7px;
+  flex-shrink: 0; min-height: 36px; padding: 5px 11px;
+  border: 1px solid var(--control-border); border-radius: 7px;
+  color: var(--text); background: var(--panel); font: 500 .875rem/1.5 system-ui, sans-serif;
+  cursor: pointer; white-space: nowrap;
+}
+.theme-toggle:hover { background: var(--hover); border-color: var(--blue-border); }
+.theme-toggle [data-theme-icon] { font-size: 1.125rem; line-height: 1; color: var(--warm); }
+.portal-header nav { margin-left: auto; }
+.portal-header { column-gap: 24px; }
+::selection { background: var(--blue); color: var(--bg); }
+@media (max-width: 880px) { .portal-header { column-gap: 16px; } .portal-header nav { margin-left: 0; } .portal-header .theme-toggle { margin-left: auto; } }

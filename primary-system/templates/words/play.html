@@ -9,8 +9,9 @@
   <div class="study-content">
     <div class="toolbar">
       <div class="search-box"><input id="words-search" type="search" placeholder="搜索单词、中文或场景" autocomplete="off"></div>
-      <button class="play-btn" type="button" id="words-play-btn" data-tts-sequence="#words-cards" data-tts-interval="2100" data-tts-rate="0.78">▶️ 连读本组</button>
+      <button class="play-btn" type="button" id="words-play-btn" data-tts-sequence="#words-cards" data-tts-rate="0.78">▶️ 连读本组</button>
     </div>
+    <p id="words-feedback" class="words-feedback" role="status" aria-live="polite" aria-atomic="true"></p>
     <main id="words-cards" tabindex="-1"></main>
   </div>
 </div>

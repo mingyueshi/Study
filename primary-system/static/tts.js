@@ -1,4 +1,4 @@
-/* 点读接线：把 legacy 的 SpeechKit 引擎接到服务端渲染页面上。
+/* 点读接线：把本项目的 SpeechKit 引擎接到服务端渲染页面上。
    - [data-say]：点击即朗读该属性文本（可选 data-rate 语速）
    - [data-tts-sequence]：连读按钮，按选择器取 [data-say-seq] 序列逐个朗读并高亮
    - #tts-voice：英语发音人偏好（记忆在 localStorage，与 legacy 共用同一键） */
@@ -13,19 +13,21 @@
     const target = event.target.closest('[data-say]');
     if (!target) return;
     event.preventDefault();
+    stopSequence();
     const rate = parseFloat(target.dataset.rate);
     kit.speak(target.dataset.say, { rate: Number.isFinite(rate) ? rate : undefined });
   });
 
   /* 连读：步进高亮 + 滚动跟随；再次点击停止 */
-  let timer = null;
+  let activeSequence = null;
 
   function clearPlaying() {
     document.querySelectorAll('.tts-playing').forEach((el) => el.classList.remove('tts-playing'));
   }
 
   function stopSequence() {
-    if (timer) { clearInterval(timer); timer = null; }
+    // 先使旧回调失效；浏览器 cancel 可能同步或异步触发 end/error。
+    activeSequence = null;
     clearPlaying();
     document.querySelectorAll('[data-tts-sequence].tts-active').forEach((button) => {
       button.classList.remove('tts-active');
@@ -42,30 +44,35 @@
       .filter((item) => item.text.trim());
     if (!items.length) return;
     stopSequence();
-    const interval = parseInt(button.dataset.ttsInterval, 10) || 2200;
     const rate = parseFloat(button.dataset.ttsRate) || 0.78;
+    const sequence = { button };
+    activeSequence = sequence;
     button.dataset.ttsLabel = button.textContent;
     button.classList.add('tts-active');
     button.textContent = '⏹ 停止连读';
     let index = 0;
     const step = () => {
+      if (activeSequence !== sequence) return;
       if (index >= items.length) { stopSequence(); return; }
       clearPlaying();
       const item = items[index];
       item.el.classList.add('tts-playing');
-      item.el.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-      kit.speak(item.text, { rate });
+      item.el.scrollIntoView({ block: 'nearest', behavior: window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
       index += 1;
+      kit.speak(item.text, {
+        rate,
+        onend: step,
+        onerror: () => { if (activeSequence === sequence) stopSequence(); },
+      });
     };
     step();
-    timer = setInterval(step, interval);
   }
 
   document.addEventListener('click', (event) => {
     const button = event.target.closest('[data-tts-sequence]');
     if (!button) return;
     event.preventDefault();
-    if (timer) stopSequence();
+    if (activeSequence?.button === button) stopSequence();
     else playSequence(button);
   });
 

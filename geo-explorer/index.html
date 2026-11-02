@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7faf5">
+  <meta name="description" content="给小学生的地理启蒙：八个探索站、真实自然景观、地图观察、水循环与四季互动。看见身边的地理，慢慢读懂我们的地球。">
+  <title>地理漫游 · 给小小探索家的地球手册</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="platform-theme.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="lab.css">
+  <script src="content.js" defer></script>
+  <script src="media.js" defer></script>
+  <script src="app.js" defer></script>
+  <script src="lab.js" defer></script>
+</head>
+<body class="geo-demo">
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="#top"><img src="assets/icons/book.svg" alt="" width="60" height="60"><span>乐学堂<small>每一点好奇，都有回响</small></span></a>
+    <nav aria-label="地理专题导航">
+      <a href="#top" aria-current="location"><img src="assets/icons/book.svg" alt="" width="32" height="32"><span>专题概览</span></a>
+      <a href="#fieldwork"><img src="assets/icons/globe.svg" alt="" width="32" height="32"><span>风景观察</span></a>
+      <a href="#geo-lab"><img src="assets/icons/science.svg" alt="" width="32" height="32"><span>动手实验</span></a>
+      <a href="#cinema"><img src="assets/icons/globe.svg" alt="" width="32" height="32"><span>地理放映</span></a>
+    </nav>
+    <div class="account"><span class="tag">地理探索</span></div>
+  </header>
+  <main id="main" class="shell" tabindex="-1">
+  <div class="geography-topic color-geography" id="top">
+    <div class="page-heading topic-heading">
+      <div><p class="eyebrow">专题学习 / 地理知识启蒙</p><h1>地理漫游</h1><p>从身边的一朵云，到远方的一座山，一起读懂我们的地球。</p></div>
+      <div class="topic-tools"><button class="topic-search" id="open-search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><span>搜索知识</span></button><button class="passport-button" id="open-passport"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><circle cx="12" cy="10" r="3"/><path d="M9 17h6"/></svg><span>我的足迹</span><b id="stamp-count">0</b></button></div>
+    </div>
+    <section class="hero geo-hero" aria-labelledby="hero-title">
+      <div class="hero-copy"><p class="eyebrow"><span class="little-star">✳</span> 给小小探索家的地球手册</p><h2 id="hero-title">带上好奇，<br>读懂<span>地球。</span></h2><p class="lead hero-description">从一朵云、一条河、一座山开始。<br>看懂风景，也看懂每天的生活。</p><div class="hero-actions"><a class="button primary" href="#story">开启地理漫游 <span aria-hidden="true">↗</span></a><span class="hero-aside">不用一口气学完<br>每次发现一点点</span></div><div class="hero-facts"><span><strong>08</strong> 个探索站点</span><i></i><span><strong>37</strong> 条地理线索</span><i></i><span>看 · 听 · 玩 · 想</span></div></div>
+      <div class="hero-visual"><div class="orbit-seal" aria-hidden="true"><span>保持好奇</span><svg viewBox="0 0 40 40"><path d="m20 2 4 12 12-4-8 10 8 10-12-4-4 12-4-12-12 4 8-10-8-10 12 4Z" fill="currentColor"/></svg><span>出发吧！</span></div><figure class="hero-photo"><img id="hero-image" alt="从太空拍摄的地球影像" fetchpriority="high" width="1100" height="900"><figcaption><span class="photo-coordinate">OUR HOME · 蓝色星球</span><span>换个角度，看看我们共同的家</span></figcaption></figure><div class="hero-note"><span class="note-pin" aria-hidden="true"></span><span class="hand-label">今天的第一个问号</span><strong>从太空看，<br>地球为什么这么蓝？</strong><a href="#story">一起去找线索 <span aria-hidden="true">→</span></a></div><span class="vertical-label" aria-hidden="true">A LITTLE JOURNEY AROUND OUR PLANET</span></div>
+    </section>
+
+
+    <div class="library-layout geo-layout">
+      <aside class="unit-nav geo-directory" id="journey" aria-label="地理学习目录">
+        <details open>
+          <summary><span>学习目录</span><span class="directory-count">08 个探索站点</span></summary>
+          <p class="directory-intro">选一个主题，观察身边与远方。</p>
+          <div class="station-nav" id="station-nav" aria-label="选择地理主题"></div>
+          <p class="timeline-note">从地球出发，学会看地图，再观察地形、天气、水与生活。不必一次学完，也可以挑最感兴趣的一站。</p>
+        </details>
+      </aside>
+      <div class="geo-content">
+        <nav class="tabs geo-section-nav" aria-label="本章学习环节"><a href="#story">读一读</a><a href="#fieldwork">看风景</a><a href="#geo-lab">做实验</a><a href="#cinema">看短片</a><a href="#recap">想一想</a></nav>
+    <section id="story" class="story-section geo-panel" aria-labelledby="story-title"><div class="section-heading"><p class="eyebrow"><span id="story-number">01 / 08</span> · <span id="story-tag">这一站，认识地球</span></p><div class="story-top-actions"><button class="text-button" id="read-story"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m11 5-5 4H2v6h4l5 4V5Zm4 3c2 2 2 6 0 8m3-11c4 4 4 10 0 14"/></svg><span>听本章讲解</span></button><button class="text-button" id="open-chapter-cards">本章知识口袋 <span aria-hidden="true">↗</span></button></div></div><div class="story-layout"><figure class="story-image"><img id="story-image" alt="" width="1200" height="850" loading="lazy"><figcaption><span class="image-label" id="story-image-label"></span><span id="story-image-caption"></span><a id="story-image-source" target="_blank" rel="noopener noreferrer" aria-label="查看本章图片来源">图片来源 ↗</a></figcaption></figure><div class="story-copy"><span class="period-tag" id="story-period"></span><h2 id="story-title"></h2><p class="story-intro" id="story-intro"></p><ol class="takeaways" id="takeaways"></ol></div></div><div class="mission-bar"><span class="mission-mark" aria-hidden="true">?</span><div><strong>带着问题看地理</strong><p id="story-mission"></p></div><a href="#fieldwork" aria-label="去风景观察站找线索">往下找线索 <span aria-hidden="true">↓</span></a></div></section>
+
+    <section id="fieldwork" class="fieldwork-section geo-panel" aria-labelledby="fieldwork-title"><div class="section-width"><div class="section-heading"><div><p class="eyebrow">LOOK CLOSER / 风景观察站</p><h2 id="fieldwork-title">一处风景，<span class="serif-italic">好多线索。</span></h2></div><p>先看，再猜，最后揭晓。<br>试着做一次小小地理观察员。</p></div><div class="fieldwork-layout"><div class="scene-display"><button class="scene-zoom" id="zoom-scene" aria-label="放大查看风景"><img id="scene-image" width="1000" height="800" loading="lazy" alt=""><span class="zoom-hint"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/></svg>点一下，放大看</span></button><p class="scene-caption"><span id="scene-title"></span><span id="scene-date"></span></p></div><div class="observation-notebook"><div class="notebook-number">观察笔记 <span>FIELD NOTES / 01</span></div><h3>别急着看答案，<br>你发现了什么？</h3><p class="observation-prompt" id="scene-look"></p><button class="clue-button" id="reveal-clue" aria-expanded="false" aria-controls="scene-clue"><span class="clue-icon" aria-hidden="true">＋</span><span>打开风景里的线索</span></button><div class="scene-clue" id="scene-clue" hidden><p id="scene-fact"></p><a id="scene-source" target="_blank" rel="noopener noreferrer">去看看图片原始记录 ↗</a></div><p class="notebook-tip">观察三件事：形状、颜色和位置。<br>先说看见了什么，再提出你的问题。</p><div class="scene-mini-gallery" id="scene-mini-gallery" aria-label="换个地方看看"></div></div></div></div></section>
+
+    <section class="lab-section geo-panel" aria-labelledby="lab-title"><div class="section-heading"><div><p class="eyebrow">LEARN BY DOING / 动手实验室</p><h2 id="lab-title">地理，也可以玩着懂。</h2></div><p>手指动一动，<br>地球的秘密就有了画面。</p></div><div id="geo-lab"></div></section>
+
+    <section id="cinema" class="cinema-section geo-panel" aria-labelledby="cinema-title"><div class="section-width"><div class="section-heading"><div><p class="eyebrow">THE LITTLE CINEMA / 地理放映室</p><h2 id="cinema-title">让镜头带你，<span>观察地球。</span></h2></div><span class="cinema-badge"><span aria-hidden="true">●</span> 真实观测 · 亲眼看看</span></div><div class="cinema-layout"><div class="main-film"><div id="film-container"></div><div class="film-description"><div><h3 id="film-title">看看云是怎样变化的</h3><p id="film-caption"></p></div><a id="film-source" target="_blank" rel="noopener noreferrer">影片来源 ↗</a></div></div><aside class="film-guide"><p class="eyebrow">再看一小段</p><h3>看之前，先带上一个问题。</h3><div id="film-links"></div><p class="external-note">拓展影片在来源网站打开，需要联网。<br>看完一段，说说你发现了什么。</p></aside></div><div class="cinema-question"><span>看后想一想</span><p>云的位置和形状，在短片里发生了什么变化？<small>这段短片把一段时间的观测加速展示，云并不是平时看起来那么快。</small></p></div></div></section>
+
+    <section class="recap-section geo-panel" id="recap" aria-labelledby="recap-title"><div class="section-heading"><div><p class="eyebrow">ONE LAST DISCOVERY / 带走今天的发现</p><h2 id="recap-title">合上书，也记得住。</h2></div><p>答一题，收下一枚探索印章。<br>下次回来，接着探索。</p></div><div class="recap-layout"><div class="quiz-block"><span class="quiz-label">给好奇心的小挑战</span><h3 id="quiz-question"></h3><div id="quiz-options" class="quiz-options"></div><div id="quiz-feedback" class="quiz-feedback" aria-live="polite"></div><button class="button primary collect-button" id="collect-stamp" hidden>收下这一站的印章 <span aria-hidden="true">✳</span></button></div><div class="pocket-block"><span class="pocket-number" aria-hidden="true">知</span><p class="eyebrow">我的知识口袋</p><h3>一口一口，<br>装下地理小知识。</h3><p>这一站的知识，已经帮你整理好。<br>点开读一读，也可以搜索别的主题。</p><button class="text-button" id="open-pocket">打开本章知识口袋 <span aria-hidden="true">→</span></button><div class="pocket-tags" id="pocket-tags"></div></div></div><button class="next-chapter" id="next-chapter">下一站，继续出发 <span id="next-chapter-name"></span><span aria-hidden="true">↗</span></button></section>
+
+      </div>
+    </div>
+    <div class="topic-footnote"><span>先观察，再提问。你身边的世界，就是地理课堂。</span><span><button class="text-button" id="open-sources">内容与素材来源 ↗</button><a class="text-button" href="../primary/geo.html">原版地理探索 ↗</a></span></div>
+  <dialog id="pocket-dialog" class="app-dialog pocket-dialog"><div class="dialog-header"><div><p class="eyebrow">GEOGRAPHY IN YOUR POCKET</p><h2>地理知识口袋</h2></div><button class="icon-button close-dialog" aria-label="关闭知识口袋">✕</button></div><div class="search-field"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="10" r="6"/><path d="m15 15 6 6"/></svg><input id="knowledge-search" type="search" placeholder="试试“比例尺”“四季”“水循环”" aria-label="搜索地理知识"></div><div class="pocket-filter" id="pocket-filter" aria-label="知识主题筛选"></div><p class="result-count" id="result-count" aria-live="polite"></p><div id="knowledge-results" class="knowledge-results"></div></dialog>
+  <dialog id="passport-dialog" class="app-dialog passport-dialog"><div class="dialog-header"><div><p class="eyebrow">MY EARTH EXPLORER PASSPORT</p><h2>我的地球护照</h2></div><button class="icon-button close-dialog" aria-label="关闭地球护照">✕</button></div><p class="passport-intro">学一个主题，答一道题，收下一站的印章。</p><div class="passport-progress"><span id="passport-progress-text"></span><progress id="passport-progress" max="8" value="0"></progress></div><div id="passport-grid" class="passport-grid"></div><p class="storage-note" id="storage-note">足迹保存在这个浏览器里。下次还可以接着探索。</p></dialog>
+  <dialog id="zoom-dialog" class="zoom-dialog"><button class="icon-button close-dialog" aria-label="关闭风景大图">✕</button><figure><img id="zoom-image" alt=""><figcaption id="zoom-caption"></figcaption></figure><p>可使用浏览器缩放，观察更多细节。</p></dialog>
+  <dialog id="sources-dialog" class="app-dialog sources-dialog"><div class="dialog-header"><div><p class="eyebrow">FOLLOW THE EVIDENCE</p><h2>每一次发现，都有线索。</h2></div><button class="icon-button close-dialog" aria-label="关闭来源说明">✕</button></div><p>自然景观照片、卫星影像和观测短片来自公开的科学机构与 Wikimedia Commons。图片保存在本目录中；点击各处的“来源”可查原始记录。</p><div id="source-list" class="source-list"></div><div class="source-docs"><a href="CONTENT-SOURCES.md" target="_blank" rel="noopener noreferrer">内容核对说明 ↗</a><a href="MEDIA-SOURCES.md" target="_blank" rel="noopener noreferrer">完整素材记录 ↗</a></div><p class="storage-note">互动地图是校园教学示意，不代表真实地点。四季图的大小、距离不按比例；卫星短片是过去的加速观测，不是实时天气预报。</p></dialog>
+  <div class="toast" id="toast" role="status"></div>
+  <noscript><p class="noscript-note">请启用 JavaScript，以浏览八个主题的互动内容。内容原文可查看本目录的 CONTENT-SOURCES.md。</p></noscript>
+
+  </div>
+  </main>
+  <footer class="site-footer"><span>乐学堂 · 让知识慢慢长成自己的力量</span><span>学习足迹保存在当前浏览器 · <a href="#top">回到顶部 ↑</a></span></footer>
+</body>
+</html>

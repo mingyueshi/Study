@@ -1,6 +1,6 @@
 import uuid
 from django.core.exceptions import ValidationError
-from django.db import models
+from django.db import models, transaction
 from django.db.models import Q
 
 
@@ -261,6 +261,14 @@ class Placement(models.Model):
     def clean(self):
         if self.unit_id and self.item_id and self.unit.book_module_id != self.item.module_id:
             raise ValidationError({'item': '内容与学习册必须属于同一个模块。'})
+
+
+    @transaction.atomic
+    def save(self, *args, **kwargs):
+        from lexicon.models import ContentEntryLink
+        ContentItem.objects.select_for_update().get(pk=self.item_id)
+        ContentEntryLink.objects.filter(content_id=self.item_id).update(semantic_established=True)
+        return super().save(*args, **kwargs)
 
 
 def published_textbook_books():

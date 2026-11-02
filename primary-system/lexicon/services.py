@@ -164,14 +164,5 @@ def link_primary_records(release):
 
 
 def link_state(link):
-    source = link.evidence.release.source
-    if not source.enabled:
-        return '来源已停用'
-    if not source.active_release_id:
-        return '来源尚未启用'
-    current = SourceRecord.objects.filter(release_id=source.active_release_id, binding_id=link.evidence.binding_id).first()
-    if not current:
-        return '新版缺少该词条，需复核'
-    if current.lexical_hash != link.evidence.lexical_hash:
-        return '释义或读音已变化，需复核'
-    return '来源一致（沿用原关联）'
+    from .chinese import selected_payload
+    return selected_payload(link)[1]

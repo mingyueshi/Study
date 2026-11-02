@@ -11,7 +11,7 @@
 
   const $ = (id) => document.getElementById(id);
   const chipsEl = $('words-chips'), cardsEl = $('words-cards'), navCountEl = $('words-nav-count'),
-        searchEl = $('words-search'), playBtn = $('words-play-btn');
+        searchEl = $('words-search'), playBtn = $('words-play-btn'), feedbackEl = $('words-feedback');
 
   const WORDS_BY_ID = new Map(state.words.map((w) => [w.id, w]));
   const scenarioOf = (word) => word.scenario;
@@ -20,22 +20,42 @@
 
   const csrf = () => decodeURIComponent((document.cookie.match(/(?:^|;\s*)primary_csrftoken=([^;]*)/) || [])[1] || '');
 
-  function markWord(wordId, learned) {
-    return fetch('/words/api/learn/', {
-      method: 'POST', headers: {'Content-Type': 'application/json', 'X-CSRFToken': csrf()},
-      body: JSON.stringify({word_id: wordId, learned}),
-    }).then(async (response) => {
-      const data = await response.json().catch(() => ({}));
-      if (!response.ok) { console.warn('标记失败', data.error); return null; }
-      const word = WORDS_BY_ID.get(wordId);
-      if (word) word.learned = data.learned;
-      for (const scenario of state.scenarios) {
-        scenario.learned = state.words.filter((w) => w.scenario === scenario.id && w.learned).length;
-      }
-      render();
-      if (learned && window.SpeechKit) window.SpeechKit.speak('Great!', { rate: 0.9 });
-      return data;
-    });
+  function showFeedback(message, failed = false) {
+    feedbackEl.textContent = message;
+    feedbackEl.classList.toggle('error', failed);
+  }
+
+  async function markWord(wordId, learned) {
+    showFeedback('正在保存掌握状态……');
+    const selected = WORDS_BY_ID.get(wordId);
+    let response, data;
+    try {
+      response = await fetch('/words/api/learn/', {
+        method: 'POST', headers: {'Content-Type': 'application/json', 'X-CSRFToken': csrf()},
+        body: JSON.stringify({schema_version: 3, chinese_version_id: selected.chinese_version_id, presentation_revision: selected.presentation_revision, target_id: selected.target_id, revision: selected.revision, learned}),
+      });
+      data = await response.json().catch(() => ({}));
+    } catch (error) {
+      showFeedback('连接中断，尚未确认是否保存。请刷新页面核对后再试。', true);
+      return;
+    }
+    if (!response.ok || typeof data?.learned !== 'boolean' || data?.target_id !== selected.target_id || !Number.isInteger(data?.revision)) {
+      showFeedback(response.status === 403
+        ? '登录状态或安全校验已变化，请刷新页面后重新标记。'
+        : data?.error || '保存未成功，请刷新页面核对后再试。', true);
+      return;
+    }
+    const word = WORDS_BY_ID.get(wordId);
+    for (const item of state.words) {
+      if (item.target_id === data.target_id) { item.learned = data.learned; item.revision = data.revision; }
+    }
+    for (const scenario of state.scenarios) {
+      scenario.learned = state.words.filter((w) => w.scenario === scenario.id && w.learned).length;
+    }
+    if (window.TTS) window.TTS.stopSequence();
+    render();
+    showFeedback(`${word?.en || '单词'}：${data.learned ? '已标记掌握' : '已取消掌握'}。`);
+    if (data.learned && window.SpeechKit) window.SpeechKit.speak('Great!', { rate: 0.9 });
   }
 
   function picHTML(word) {
@@ -53,11 +73,12 @@
       `${r.zh ? `<i class="rel-zh">${escapeHtml(r.zh)}</i>` : '<i class="rel-zh">拓展词</i>'}</button>`).join('');
     const unitTag = showUnitTag && unit.zh
       ? `<span class="unit-tag">${escapeHtml(unit.emoji || '')} ${escapeHtml(unit.zh)}</span>` : '';
-    return `<article class="wcard${word.learned ? ' learned' : ''}" data-word="${escapeHtml(word.id)}" style="--c:${escapeHtml(unit.color || '#4d96ff')}">${unitTag}` +
-      `<button class="learn-btn${word.learned ? ' on' : ''}" type="button" data-learn="${escapeHtml(word.id)}" aria-pressed="${word.learned}">✓</button>` +
+    return `<article class="wcard${word.learned ? ' learned' : ''}" data-word="${escapeHtml(word.id)}" data-say-seq="${escapeHtml(word.en)}" style="--c:${escapeHtml(unit.color || '#4d96ff')}">${unitTag}` +
+      `<button class="learn-btn${word.learned ? ' on' : ''}" type="button" data-learn="${escapeHtml(word.id)}" aria-pressed="${word.learned}" aria-label="${escapeHtml(word.en)}：${word.learned ? '取消掌握' : '标记掌握'}">✓</button>` +
       `<div class="wtop"><button class="pic" type="button" data-say="${escapeHtml(word.en)}" aria-label="朗读 ${escapeHtml(word.en)}">${picHTML(word)}</button>` +
       `<div class="winfo"><p class="wline"><span class="word">${escapeHtml(word.en)}</span> <button class="say" type="button" data-say="${escapeHtml(word.en)}" aria-label="朗读">🔊</button></p>` +
-      `<p class="ipa">${escapeHtml(word.ipa)}</p><p class="zh">${escapeHtml(word.zh)}</p></div></div>` +
+      `<p class="ipa">${escapeHtml(word.ipa)}</p><p class="zh">${escapeHtml(word.zh || word.source_status || '')}</p></div></div>` +
+      (word.chinese_example ? `<p class="memo">例：${escapeHtml(word.chinese_example)}</p>` : '') +
       (parts ? `<div class="wsec"><span class="seclabel">记</span><span class="parts">${parts}</span></div>` : '') +
       (word.memo ? `<p class="memo">💡 ${escapeHtml(word.memo)}</p>` : '') +
       (related ? `<div class="wsec"><span class="seclabel">联</span><span class="rels">${related}</span></div>` : '') +

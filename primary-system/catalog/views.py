@@ -5,6 +5,7 @@ from django.shortcuts import render, get_object_or_404, reverse
 from django.views.decorators.cache import never_cache
 from django.views.decorators.http import require_GET
 from .forms import CatalogFilter
+from lexicon.chinese import safe_word_item, safe_search, request_resolver, LessonResolver
 from .models import Grade, Module, Subject, TextbookEdition, TextbookBook, ContentItem, published_items, \
     published_textbook_books, published_units
 
@@ -33,7 +34,7 @@ def filter_books(request):
     if edition:
         books = [b for b in books if b.textbook.edition_id == edition.pk]
     if q:
-        matching = published_items().filter(Q(title__icontains=q) | Q(summary__icontains=q) | Q(body__icontains=q))
+        matching = safe_search(published_items(), q, request_resolver(request))
         matched_units = set(published_units().filter(placements__item__in=matching).values_list('pk', flat=True))
         books = [b for b in books if q.lower() in b.name.lower()
                  or matched_units & set(b.units.values_list('pk', flat=True))]
@@ -65,10 +66,12 @@ def home(request):
     progress = None
     if request.user.is_authenticated:
         from learning.models import Progress
-        progress = Progress.objects.filter(user=request.user, item__in=published_items()).aggregate(
-            started=Count('pk', filter=~Q(status='new')), mastered=Count('pk', filter=Q(status='mastered')),
-            bookmarked=Count('pk', filter=Q(bookmarked=True)),
-        )
+        from learning.services import effective_status
+        rows = list(Progress.objects.filter(user=request.user, item__in=published_items()).select_related('item'))
+        resolver = LessonResolver([p.item for p in rows])
+        progress = {'started': sum(p.status != 'new' for p in rows),
+                    'mastered': sum(effective_status(p, resolver) == 'mastered' for p in rows),
+                    'bookmarked': sum(p.bookmarked for p in rows)}
     return render(request, 'catalog/home.html', {
         'form': form, 'modules': modules, 'progress': progress,
         'textbook_shelf': textbook_shelf,
@@ -99,6 +102,9 @@ def collection_detail(request, code):
     selected_unit = get_object_or_404(units, code=unit_code) if unit_code else units.first()
     placements = selected_unit.placements.select_related('item').filter(item__status='published', item__module=book.module) if selected_unit else []
     page = Paginator(placements, 30).get_page(request.GET.get('page'))
+    resolver = LessonResolver([p.item for p in page])
+    for placement in page:
+        safe_word_item(placement.item, resolver)
     return render(request, 'catalog/collection.html', {'book': book, 'units': units, 'selected_unit': selected_unit, 'page': page})
 
 
@@ -136,9 +142,10 @@ def items_api(request):
         items = items.filter(placements__unit__in=book.units.all())
     q = form.cleaned_data['q']
     if q:
-        items = items.filter(Q(title__icontains=q) | Q(summary__icontains=q) | Q(body__icontains=q))
+        items = safe_search(items, q, request_resolver(request))
     page = Paginator(items.distinct(), 30).get_page(request.GET.get('page'))
-    return JsonResponse({'results': [{'id': str(i.pk), 'title': i.title, 'summary': i.summary, 'kind': i.kind, 'module': i.module.code} for i in page],
+    resolver = request_resolver(request) if q else LessonResolver(list(page))
+    return JsonResponse({'results': [{'id': str(i.pk), 'title': i.title, 'summary': i.summary, 'kind': i.kind, 'module': i.module.code} for i in [safe_word_item(x, resolver) for x in page]],
                          'page': page.number, 'pages': page.paginator.num_pages, 'total': page.paginator.count})
 
 
@@ -146,5 +153,8 @@ def items_api(request):
 @require_GET
 def item_api(request, pk):
     item = get_object_or_404(published_items().select_related('module'), pk=pk)
-    return JsonResponse({'id': str(item.pk), 'title': item.title, 'summary': item.summary, 'body': item.body,
+    resolver = LessonResolver([item])
+    safe_word_item(item, resolver)
+    references = [resolver.payloads[l.pk] for l in resolver.by_content.get(item.pk, [])]
+    return JsonResponse({'lexical_references': references, 'lexicon_schema_version': 2, 'word_selections': getattr(item, 'word_selections', []), 'word_selection': getattr(item, 'word_selection', None), 'id': str(item.pk), 'title': item.title, 'summary': item.summary, 'body': item.body,
                          'sections': item.sections, 'kind': item.kind, 'module': item.module.code, 'schema_version': item.schema_version})

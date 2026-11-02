@@ -2,7 +2,7 @@ import uuid
 import unicodedata
 from django.conf import settings
 from django.core.exceptions import ValidationError
-from django.db import models
+from django.db import models, transaction
 from django.db.models import F, Q
 
 
@@ -14,6 +14,25 @@ def search_key(text):
 def pinyin_key(text):
     text = unicodedata.normalize('NFD', search_key(text)).replace('u\u0308', 'v')
     return ''.join(c for c in text if not unicodedata.combining(c))
+
+
+def editorial_values(sense, pronunciation):
+    return {'sense_revision': sense.revision if sense else None,
+            'definition': sense.editorial_definition if sense else '',
+            'pronunciation_revision': pronunciation.revision if pronunciation else None,
+            'pronunciation': pronunciation.editorial_value if pronunciation else ''}
+
+
+def same_snapshot(left, right):
+    import json
+    return json.dumps(left, sort_keys=True, ensure_ascii=False) == json.dumps(right, sort_keys=True, ensure_ascii=False)
+
+
+def validate_selection(sense, pronunciation, evidence):
+    if pronunciation and pronunciation.entry_id != sense.entry_id:
+        raise ValidationError('读音与义项必须属于同一词条。')
+    if (evidence.binding.sense_id, evidence.binding.pronunciation_id) != (sense.pk, pronunciation.pk if pronunciation else None):
+        raise ValidationError('义项／读音必须与证据一致。')
 
 
 class UUIDModel(models.Model):
@@ -248,6 +267,12 @@ class ContentEntryLink(models.Model):
     sense = models.ForeignKey(Sense, verbose_name='选用义项', on_delete=models.PROTECT, related_name='content_links')
     pronunciation = models.ForeignKey(Pronunciation, verbose_name='选用读音', on_delete=models.PROTECT, null=True, blank=True)
     evidence = models.ForeignKey(SourceRecord, verbose_name='关联时来源快照', on_delete=models.PROTECT)
+    editorial_snapshot = models.JSONField(default=dict, blank=True, editable=False)
+    selected_headword = models.CharField(max_length=200, blank=True, editable=False)
+    selection_revision = models.PositiveIntegerField(default=1, editable=False)
+    semantic_established = models.BooleanField(default=False, editable=False)
+    chinese_version = models.ForeignKey('ChineseSenseVersion', null=True, blank=True, on_delete=models.PROTECT, editable=False)
+    presentation_revision = models.PositiveIntegerField(default=0, editable=False)
     method = models.CharField('关联依据', max_length=24, choices=[('inherited', '沿用原教学记录'), ('exact', '核心字段完全一致'), ('manual', '人工确认')], default='inherited')
     review_note = models.TextField('关联说明', blank=True)
     updated_at = models.DateTimeField('关联时间', auto_now=True)
@@ -265,6 +290,35 @@ class ContentEntryLink(models.Model):
             raise ValidationError('读音与义项必须属于同一词条。')
         if self.evidence_id and (self.evidence.binding.sense_id != self.sense_id or self.evidence.binding.pronunciation_id != self.pronunciation_id):
             raise ValidationError('关联必须选用证据记录对应的义项和读音。')
+
+
+    @transaction.atomic
+    def save(self, *args, **kwargs):
+        adding = self._state.adding
+        if adding:
+            from .chinese import lock_selection
+            self.sense, self.pronunciation = lock_selection(self.sense_id, self.pronunciation_id, self.evidence_id)
+            self.editorial_snapshot = editorial_values(self.sense, self.pronunciation)
+            from catalog.models import ContentItem
+            ContentItem.objects.select_for_update().get(pk=self.content_id)
+            self.selected_headword = self.evidence.headword
+            self.semantic_established = self.content.placements.exists() or self.content.progress_set.exists()
+            if self.chinese_version_id or self.presentation_revision or self.selection_revision != 1:
+                raise ValidationError('新关联先固定选择，再通过采用服务选中文。')
+        else:
+            old = type(self).objects.get(pk=self.pk)
+            for field in ('content_id', 'slot', 'sense_id', 'pronunciation_id', 'evidence_id', 'editorial_snapshot', 'selected_headword', 'selection_revision', 'chinese_version_id', 'presentation_revision', 'semantic_established'):
+                if getattr(old, field) != getattr(self, field):
+                    raise ValidationError('固定选择只能经显式确认服务更新；变义须新内容身份。')
+        self.full_clean()
+        result = super().save(*args, **kwargs)
+        if adding:
+            from .chinese import link_snapshot
+            ContentLinkSelection.objects.create(link=self, revision=1, selection=link_snapshot(self), reason='首次明确选择／继承教学关联')
+        return result
+
+    def delete(self, *args, **kwargs):
+        raise ValidationError('教学选择保留历史，不可删除。')
 
 
 class EntryMatch(models.Model):
@@ -304,3 +358,100 @@ def active_records(public=False):
         records = records.filter(release__source__public_allowed=True,
                                  binding__sense__status='published', binding__sense__entry__status='published')
     return records
+
+
+class ChineseSenseVersion(ImmutableModel):
+    """独立中文正文，从创建起不可变；状态由显式核对服务更新并留审计。"""
+    sense = models.ForeignKey(Sense, on_delete=models.PROTECT)
+    pronunciation = models.ForeignKey(Pronunciation, null=True, blank=True, on_delete=models.PROTECT)
+    evidence = models.ForeignKey(SourceRecord, on_delete=models.PROTECT)
+    editorial_snapshot = models.JSONField(default=dict, editable=False)
+    locale = models.CharField(max_length=20, default='zh-Hans-CN', editable=False)
+    kind = models.CharField(max_length=16, choices=[('translation', '忠实翻译'), ('teaching', '教学解释'), ('correction', '纠错')])
+    text = models.TextField('中文解释', max_length=4000)
+    example = models.TextField('中文例句', blank=True, max_length=2000)
+    origin = models.CharField(max_length=12, choices=[('human', '人工'), ('source', '来源自带'), ('ai', 'AI草稿')], default='human')
+    generation_tool = models.CharField(max_length=200, blank=True)
+    terminology_version = models.CharField(max_length=200, blank=True)
+    provenance = models.TextField('中文来源与对齐依据')
+    author_label = models.CharField('编写者', max_length=120)
+    previous = models.ForeignKey('self', null=True, blank=True, on_delete=models.PROTECT)
+    learning_effect = models.CharField('学习含义变化', max_length=12, choices=[('same', '确认同义呈现'), ('changed', '纠错变义'), ('unknown', '待判定')], default='unknown')
+    change_reason = models.TextField('变更依据')
+    status = models.CharField(max_length=12, choices=[('draft', '待核对'), ('confirmed', '已确认'), ('withdrawn', '已撤回')], default='draft', editable=False)
+    review_revision = models.PositiveIntegerField(default=0, editable=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = '中文义项版本'
+        verbose_name_plural = '中文义项版本'
+        constraints = [models.CheckConstraint(condition=Q(locale='zh-Hans-CN'), name='lex_chinese_locale'),
+                       models.CheckConstraint(condition=Q(status__in=['draft', 'confirmed', 'withdrawn']), name='lex_chinese_status')]
+
+    def __str__(self):
+        return f'{self.sense.entry.headword} / {self.text[:25]} / {str(self.pk)[:8]}'
+
+    def clean(self):
+        validate_selection(self.sense, self.pronunciation, self.evidence)
+        if self.previous_id and (self.previous.sense_id, self.previous.pronunciation_id, self.previous.evidence_id) != (self.sense_id, self.pronunciation_id, self.evidence_id):
+            raise ValidationError('上版必须具有相同义项、读音和固定证据；换证据须独立建版。')
+        if self.origin == 'ai' and not self.generation_tool.strip():
+            raise ValidationError('AI草稿必须记录生成工具与版本。')
+        if not any('\u3400' <= c <= '\u9fff' for c in self.text):
+            raise ValidationError('中文解释必须包含中文，不得把英文原文冒充中文。')
+
+    @transaction.atomic
+    def save(self, *args, **kwargs):
+        if self._state.adding:
+            from .chinese import lock_selection
+            self.sense, self.pronunciation = lock_selection(self.sense_id, self.pronunciation_id, self.evidence_id)
+            live_snapshot = editorial_values(self.sense, self.pronunciation)
+            if not self.editorial_snapshot or not same_snapshot(self.editorial_snapshot, live_snapshot):
+                raise ValidationError('所见原文修订已变化或未提交固定快照，请重新核对。')
+            if self.status != 'draft' or self.review_revision:
+                raise ValidationError('新版本先保存待核对草稿，再显式确认。')
+            self.full_clean()
+        return super().save(*args, **kwargs)
+
+
+class ChineseReview(ImmutableModel):
+    version = models.ForeignKey(ChineseSenseVersion, on_delete=models.PROTECT, related_name='reviews')
+    revision = models.PositiveIntegerField()
+    decision = models.CharField(max_length=12, choices=[('confirmed', '确认'), ('withdrawn', '撤回')])
+    reviewer = models.CharField(max_length=120)
+    note = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        constraints = [models.UniqueConstraint(fields=('version', 'revision'), name='lex_chinese_review_revision')]
+
+
+class ContentLinkSelection(ImmutableModel):
+    link = models.ForeignKey(ContentEntryLink, on_delete=models.PROTECT, related_name='selection_history')
+    revision = models.PositiveIntegerField()
+    selection = models.JSONField()
+    reason = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        constraints = [models.UniqueConstraint(fields=('link', 'revision'), name='lex_link_selection_revision')]
+
+
+class ChineseBatchReceipt(models.Model):
+    batch_id = models.SlugField(primary_key=True, max_length=100)
+    digest = models.CharField(max_length=64)
+    manifest = models.JSONField()
+    outcome = models.JSONField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def save(self, *args, **kwargs):
+        if not self._state.adding:
+            raise ValidationError('批次回执不可改写。')
+        return super().save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        raise ValidationError('批次回执不可删除。')
+
+
+# Source candidates remain separate from curated Sense identities.
+from .reference_models import CedictRecord, CmuPronunciation

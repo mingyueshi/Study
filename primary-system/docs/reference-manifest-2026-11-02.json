@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "verified_date": "2026-11-02",
+  "status": "verified_input_only_not_imported_or_teaching_reviewed",
+  "path_base": "Study repository root; input paths only, not runtime dependencies",
+  "archive_count": 9,
+  "payload_occurrences": 260,
+  "unique_payload_paths": 181,
+  "shared_path_conflicts": [],
+  "archives": [
+    {
+      "archive": "references/01a_cc_cedict_2026-11-02.zip",
+      "bytes": 13046395,
+      "sha256": "af26852227ee53fc95da58111cd04650452fe608673bd532e42f243e684d9930",
+      "outer_sha_matches": true,
+      "crc_ok": true,
+      "manifest_ok": true,
+      "checked_payloads": 14
+    },
+    {
+      "archive": "references/01b_hanzi_strokes_2026-11-02.zip",
+      "bytes": 12861445,
+      "sha256": "a4a7dcd1caa29a055de5f81d45d4300007a2ed8cffdc96791608509270cccf01",
+      "outer_sha_matches": true,
+      "crc_ok": true,
+      "manifest_ok": true,
+      "checked_payloads": 18
+    },
+    {
+      "archive": "references/01c_unihan_17_2026-11-02.zip",
+      "bytes": 10180057,
+      "sha256": "293e29e0d7eb5158fda4d182927bd6adeaf7eebad8cbac17a19d169ed9a50306",
+      "outer_sha_matches": true,
+      "crc_ok": true,
+      "manifest_ok": true,
+      "checked_payloads": 14
+    },
+    {
+      "archive": "references/01d_classical_poetry_2026-11-02.zip",
+      "bytes": 12016793,
+      "sha256": "12122bfc6e2f8bbc33ca4c80f2785f16583333b251d251e6630dd641d0c9079a",
+      "outer_sha_matches": true,
+      "crc_ok": true,
+      "manifest_ok": true,
+      "checked_payloads": 104
+    },
+    {
+      "archive": "references/02a_geography_english_elements_math_2026-11-02.zip",
+      "bytes": 2485319,
+      "sha256": "04870c025abc27d778368a710c7a5ca71bb553b8a4ba6760c15344277c9bea72",
+      "outer_sha_matches": true,
+      "crc_ok": true,
+      "manifest_ok": true,
+      "checked_payloads": 34
+    },
+    {
+      "archive": "references/02b_hyg_stars_2026-11-02.zip",
+      "bytes": 13758119,
+      "sha256": "0fa4d85d0a70f67477732b5d0812b5ee5dc08669d9fc3dd1bd52b51f3cc4bab3",
+      "outer_sha_matches": true,
+      "crc_ok": true,
+      "manifest_ok": true,
+      "checked_payloads": 16
+    },
+    {
+      "archive": "references/03a_science_epub_part001_2026-11-02.zip",
+      "bytes": 14061469,
+      "sha256": "74f7b6fe46e980a94cefaf5b742daf4934ebc881fb0c6dbd3c0137448e49f51c",
+      "outer_sha_matches": true,
+      "crc_ok": true,
+      "manifest_ok": true,
+      "checked_payloads": 20
+    },
+    {
+      "archive": "references/03b_science_epub_part002_2026-11-02.zip",
+      "bytes": 14061372,
+      "sha256": "a3354bf571d5a3ca621c62b95b29655da28a79fee595ca7e377e4a3fb1642f99",
+      "outer_sha_matches": true,
+      "crc_ok": true,
+      "manifest_ok": true,
+      "checked_payloads": 20
+    },
+    {
+      "archive": "references/03c_science_epub_part003_2026-11-02.zip",
+      "bytes": 12963909,
+      "sha256": "dcb8d3e87c45c86551b41b8c9b57fd5683014c5b5cd1dbb5ece07f17beba2e06",
+      "outer_sha_matches": true,
+      "crc_ok": true,
+      "manifest_ok": true,
+      "checked_payloads": 20
+    }
+  ],
+  "assembled_science_epub": {
+    "parts_in_order": [
+      "03a_science_epub_part001_2026-11-02.zip",
+      "03b_science_epub_part002_2026-11-02.zip",
+      "03c_science_epub_part003_2026-11-02.zip"
+    ],
+    "bytes": 40926007,
+    "sha256": "48f0d1027ea9e12abceb1aeca17372c9ddd7357c35e23f0d8c001a0a7901322a",
+    "book_count": 1,
+    "source_curriculum": "South Africa CAPS Grade 4",
+    "source_content_modified": "2013-11-20T16:10:01Z",
+    "china_curriculum_mapping": null,
+    "epub3_nav_nodes": 120,
+    "packaged_index_nodes": 47,
+    "packaged_index_accepted": false
+  },
+  "full_local_evidence": "output/reference-audit/2026-11-02/archive-integrity.json",
+  "plan": "foundation-data-plan.md"
+}

@@ -1,8 +1,9 @@
 """把 legacy primary 的前端资产同步进本项目的 static 目录。
 
-图示库（六个自包含 IIFE）与点读引擎 speech.js 以「只复制不改写」的方式复用：
+图示库（六个自包含 IIFE）与 figures.css 以「只复制不改写」的方式复用：
 legacy 目录将来退役时，本脚本的产物已在本项目内独立存在。每次同步校验
 SHA256 与来源一致，防止手工改动造成静默漂移。
+点读引擎 static/speech.js 已由本项目独立维护（支持结束/失败回调），不再同步。
 
 用法：.venv/bin/python scripts/sync_legacy_assets.py [--check]
 --check 只校验不复制，用于回归。
@@ -22,7 +23,6 @@ ASSETS = {
     'astro-figures.js': 'figures/astro-figures.js',
     'history-figures.js': 'figures/history-figures.js',
     'figures.css': 'figures/figures.css',
-    'speech.js': 'speech.js',
 }
 
 
@@ -31,7 +31,7 @@ def digest(path):
 
 
 def main():
-    parser = argparse.ArgumentParser(description='同步 legacy 图示与点读资产到 static/')
+    parser = argparse.ArgumentParser(description='同步 legacy 图示资产到 static/figures/')
     parser.add_argument('--check', action='store_true', help='只校验已有副本一致，不复制')
     args = parser.parse_args()
     failures = []
@@ -53,7 +53,7 @@ def main():
             failures.append(target_rel)
     if failures:
         raise SystemExit('同步校验失败：' + '; '.join(failures))
-    print('全部资产与 legacy 来源逐字节一致。' if not args.check else '校验通过：全部副本与来源一致。')
+    print('全部图示资产与 legacy 来源逐字节一致。' if not args.check else '校验通过：全部图示副本与来源一致。')
 
 
 if __name__ == '__main__':

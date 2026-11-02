@@ -96,11 +96,12 @@ def entry_detail(request, pk):
 @require_GET
 def content_links(request, pk):
     content = get_object_or_404(published_items(), pk=pk)
-    results = []
-    records = public_records()
-    for link in ContentEntryLink.objects.filter(content=content).select_related('evidence', 'sense__entry'):
-        # A changed/replaced source never silently changes a lesson's selected meaning.
-        record = records.filter(binding_id=link.evidence.binding_id, lexical_hash=link.evidence.lexical_hash).first()
-        if record:
-            results.append({'entry_id': str(link.sense.entry_id), 'slot': link.slot, **record_payload(record)})
-    return JsonResponse({'content_id': str(content.pk), 'links': results})
+    from .chinese import link_payload
+    links = list(ContentEntryLink.objects.filter(content=content).order_by('pk'))
+    results, states = [], []
+    for link in links:
+        data = link_payload(link)
+        states.append({k: v for k, v in data.items() if k in ('link_id', 'slot', 'state', 'available', 'presentation_revision', 'chinese_version_id', 'selection_revision')})
+        if data['available'] and (link.chinese_version_id or public_records().filter(binding_id=link.evidence.binding_id).exists()):
+            results.append(data)
+    return JsonResponse({'content_id': str(content.pk), 'schema_version': 2, 'links': results, 'states': states})

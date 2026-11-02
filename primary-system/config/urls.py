@@ -19,6 +19,13 @@ admin.site.login_template = 'nova_admin/slider_login.html'
 urlpatterns = [
     path('favicon.ico', RedirectView.as_view(url='/static/icons/book.svg', permanent=False)),
     path('', catalog.home, name='home'),
+    path('references/', include('reference_library.urls')),
+    path('references/lexicon/', include('lexicon.reference_urls')),
+    path('hanzi/', include('hanzi.urls')),
+    path('poetry/', include('poetry.urls')),
+    path('geography/', include('geography.urls')),
+    path('astronomy/', include('astronomy.urls')),
+    path('science/', include('science.urls')),
     path('dictionary/', dictionary.lookup, name='dictionary'),
     path('dictionary/sources/', dictionary.sources, name='dictionary-sources'),
     path('dictionary/<uuid:pk>/', dictionary.detail, name='dictionary-entry'),

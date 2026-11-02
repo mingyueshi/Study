@@ -3,6 +3,7 @@
    - 自动挑选系统中质量较好的英语/中文发音人
    - 支持手动选择发音人并记住（localStorage）
    - 中英文自动分流：中文文本自动用中文发音人
+   本文件由 primary-system 独立维护，不再由 legacy 同步覆盖。
    ============================================================ */
 'use strict';
 
@@ -66,13 +67,17 @@ function pickVoice(kind) {
   return list.slice().sort((a, b) => voiceScore(b, likes) - voiceScore(a, likes))[0];
 }
 
-/* 朗读：opts = { rate, lang }；中文文本自动使用中文发音人 */
+/* 朗读：opts = { rate, lang, onend, onerror }；回调可选，旧调用保持兼容。 */
 function speak(text, opts) {
   opts = opts || {};
-  if (!('speechSynthesis' in window)) return;
+  const fail = (error) => {
+    if (typeof opts.onerror === 'function') opts.onerror({ error });
+    return null;
+  };
+  if (!('speechSynthesis' in window)) return fail('not-supported');
   try {
     const textStr = String(text);
-    if (!textStr.trim()) return;
+    if (!textStr.trim()) return fail('empty-text');
     const isZh = /[\u4e00-\u9fff]/.test(textStr) || opts.lang === 'zh-CN';
     const v = pickVoice(isZh ? 'zh' : 'en');
     if (window.speechSynthesis.speaking || window.speechSynthesis.pending) window.speechSynthesis.cancel();
@@ -81,8 +86,11 @@ function speak(text, opts) {
     else u.lang = isZh ? 'zh-CN' : (opts.lang || 'en-US');
     u.rate = opts.rate != null ? opts.rate : 0.85;
     u.pitch = 1;
+    if (typeof opts.onend === 'function') u.onend = opts.onend;
+    if (typeof opts.onerror === 'function') u.onerror = opts.onerror;
     window.speechSynthesis.speak(u);
-  } catch (e) { /* 朗读失败不影响页面 */ }
+    return u;
+  } catch (e) { return fail('speech-failed'); }
 }
 
 function setVoicePref(name) {

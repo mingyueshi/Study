@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.db import models
+from django.db import models, transaction
 
 class Progress(models.Model):
     class Status(models.TextChoices):
@@ -13,6 +13,7 @@ class Progress(models.Model):
     bookmarked = models.BooleanField('已收藏', default=False)
     note = models.TextField('个人笔记', blank=True, max_length=4000)
     revision = models.PositiveIntegerField('版本', default=0)
+    seen_lexicon = models.JSONField(null=True, blank=True, editable=False)
     updated_at = models.DateTimeField('更新时间', auto_now=True)
 
     class Meta:
@@ -24,3 +25,12 @@ class Progress(models.Model):
             models.CheckConstraint(condition=models.Q(status__in=['new', 'learning', 'mastered']), name='progress_valid_status'),
         ]
         indexes = [models.Index(fields=('user', 'status'), name='progress_user_status')]
+
+
+    @transaction.atomic
+    def save(self, *args, **kwargs):
+        from lexicon.models import ContentEntryLink
+        from catalog.models import ContentItem
+        ContentItem.objects.select_for_update().get(pk=self.item_id)
+        ContentEntryLink.objects.filter(content_id=self.item_id).update(semantic_established=True)
+        return super().save(*args, **kwargs)

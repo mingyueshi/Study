@@ -1,11 +1,11 @@
 """专题探索册退场：专题内容各自成为独立玩法应用（如 chain）。
 
-TopicBook 及 Unit.topic_book 删除；存量编排已在更名窗口清理并按教材管线重导，
-Unit.textbook_book 现有行全部非空，直接收紧为 NOT NULL 安全。
+用户已确认清理旧专题阅读；先清理其专属编排、内容及阅读关联，再删除表和字段。
+教材内容、学习记录、词库及独立玩法数据保留。数据清理不可逆，升级前需备份。
 """
-import catalog.models
 from django.db import migrations, models
 from django.db.models import PROTECT
+from ._retire_topic_reading import retire_topic_reading
 
 
 def textbook_book_field():
@@ -20,6 +20,7 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
+        migrations.RunPython(retire_topic_reading),
         # SQLite 删列会重建整表：必须先移除引用 topic_book 的约束，再删列。
         migrations.RemoveConstraint(
             model_name='unit',

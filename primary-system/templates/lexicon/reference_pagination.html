@@ -1,0 +1,2 @@
+<p class="lookup-footnote">本来源找到{{ section.page.paginator.count }}条记录{% if section.page.has_other_pages %} · 第{{ section.page.number }}/{{ section.page.paginator.num_pages }}页{% endif %}</p>
+{% if section.page.has_other_pages %}<nav class="pagination" aria-label="{{ section.title }}分页">{% if section.previous_url %}<a href="{{ section.previous_url }}">← 本来源上一页</a>{% endif %}{% if section.next_url %}<a href="{{ section.next_url }}">本来源下一页 →</a>{% endif %}</nav>{% endif %}

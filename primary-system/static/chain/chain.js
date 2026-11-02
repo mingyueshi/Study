@@ -35,11 +35,19 @@
 
   const refresh = () => fetch('/chain/api/state/', {headers: {'Accept': 'application/json'}})
     .then((r) => (r.ok ? r.json() : null))
-    .then((data) => { if (data) { state = data; render(); } });
+    .then((data) => { if (data) { clearHints(); state = data; render(); } });
 
   function showFeedback(message, kind) {
     els.feedback.textContent = message;
     els.feedback.className = 'feedback' + (kind ? ' ' + kind : '');
+  }
+
+  function clearHints() {
+    hintsShown = false;
+    els.hints.hidden = true;
+    els.hintButton.setAttribute('aria-expanded', 'false');
+    els.hintOptions.innerHTML = '';
+    els.hints.querySelectorAll('.hint-total').forEach((node) => node.remove());
   }
 
   /* 客户端预校验只做即时反馈，服务端仍是唯一裁判。 */
@@ -82,8 +90,7 @@
         '<button class="chain-button primary" type="button" id="chain-again">换个开头，继续玩 →</button>';
       const again = document.getElementById('chain-again');
       if (again) again.addEventListener('click', restart);
-      els.hints.hidden = true;
-      hintsShown = false;
+      clearHints();
     }
 
     els.history.innerHTML = (state.history || []).map((item) =>
@@ -120,6 +127,7 @@
     api('/chain/api/play/', {word}).then((data) => {
       if (!data) return;
       const gained = data.score - state.score;
+      clearHints();
       state = data;
       els.input.value = '';
       showFeedback(`接上了！${gained > 0 ? '+' + gained + ' 分。' : ''}轮到小龙想一想……`, 'success');
@@ -133,7 +141,7 @@
   els.input.addEventListener('compositionend', () => { delete els.input.dataset.composing; });
 
   els.hintButton.addEventListener('click', () => {
-    if (hintsShown) { els.hints.hidden = true; hintsShown = false; els.hintButton.setAttribute('aria-expanded', 'false'); return; }
+    if (hintsShown) { clearHints(); return; }
     api('/chain/api/hint/', {}).then((data) => {
       if (!data) return;
       state = data;
@@ -160,12 +168,13 @@
     });
   });
   document.querySelectorAll('[data-hints-hide]').forEach((button) => button.addEventListener('click', () => {
-    els.hints.hidden = true; hintsShown = false; els.hintButton.setAttribute('aria-expanded', 'false');
+    clearHints();
   }));
 
   function restart() {
     api('/chain/api/restart/', {}).then((data) => {
       if (!data) return;
+      clearHints();
       state = data;
       showFeedback('新的一局开始啦。', 'success');
       render();

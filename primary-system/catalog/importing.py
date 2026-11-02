@@ -23,6 +23,16 @@ LABELS = {
 }
 SKIP = {'id', 'key', 'fig', 'banner', 'emoji', 'color', 'demo', 'interactive', 'tag'}
 
+# 导入能力由适配器决定。Module 还承载独立玩法和历史专题入口，存在并不代表有教材映射。
+TEXTBOOK_ADAPTERS = {
+    'knowledge': {'units': 'units', 'children': 'lessons', 'kind': 'knowledge',
+                  'textbooks': {'all': 'pep-chinese-4a-2026'}},
+    'math': {'units': 'units', 'children': 'points', 'kind': 'knowledge',
+             'textbooks': {'all': 'bnu-math-4a-2026'}},
+    'english': {'units': 'ENGLISH_UNITS', 'children': 'words', 'kind': 'word',
+                'textbooks': {'first': 'fltrp-english-4a-2026', 'second': 'fltrp-english-4b-2026'}},
+}
+
 
 def plain(value):
     if isinstance(value, dict):
@@ -59,16 +69,19 @@ def import_snapshot(snapshot, publish=False):
         if code in seen:
             raise CommandError(f'重复模块：{code}')
         seen.add(code)
-        try:
-            module = Module.objects.get(code=code)
-        except Module.DoesNotExist:
-            # primary.json 是全量 legacy 导出；目录只收教材模块，专题内容由各自玩法应用承载。
+        adapter = TEXTBOOK_ADAPTERS.get(code)
+        if adapter is None:
+            # primary.json 是全量 legacy 导出；只导入有明确教材适配器的模块。
             report.setdefault('skipped_modules', []).append(code)
             continue
+        try:
+            module = Module.objects.get(code=code)
+        except Module.DoesNotExist as exc:
+            raise CommandError(f'教材模块 {code} 尚未初始化，请先运行 seed_platform。') from exc
         data = source['data']
         if not isinstance(data, dict) or len(source.get('sha256', '')) != 64:
             raise CommandError(f'{code} 的数据或来源摘要不正确。')
-        units_key = {'english': 'ENGLISH_UNITS', 'words': 'WORD_UNITS', 'idioms': 'IDIOM_UNITS', 'writing': 'WRITING_UNITS'}.get(code, 'units')
+        units_key = adapter['units']
         units = data[units_key]
         groups = [('all', units)] if code != 'english' else [
             ('first', [u for u in units if u['book'] == '四年级上册']),
@@ -77,10 +90,11 @@ def import_snapshot(snapshot, publish=False):
         if code == 'english' and sum(len(group) for _, group in groups) != len(units):
             raise CommandError('英语包含未知册次，请扩展映射后导入。')
         for term, grouped_units in groups:
-            textbook_code = {'knowledge': 'pep-chinese-4a-2026', 'math': 'bnu-math-4a-2026'}.get(code)
-            if code == 'english':
-                textbook_code = f'fltrp-english-4{"a" if term == "first" else "b"}-2026'
-            textbook = Textbook.objects.get(code=textbook_code)
+            textbook_code = adapter['textbooks'][term]
+            try:
+                textbook = Textbook.objects.get(code=textbook_code)
+            except Textbook.DoesNotExist as exc:
+                raise CommandError(f'教材册次 {textbook_code} 尚未初始化，请先运行 seed_platform。') from exc
             book, created = TextbookBook.objects.get_or_create(code=f'primary-{code}-{term}', defaults={
                 'name': str(textbook), 'module': module, 'textbook': textbook, 'is_published': publish,
                 'description': '单元知识与复习资料；教材对应范围请结合手中的课本核对。',
@@ -93,8 +107,8 @@ def import_snapshot(snapshot, publish=False):
             for order, raw_unit in enumerate(grouped_units):
                 unit_defaults = {'title': raw_unit['name'], 'description': raw_unit.get('intro', raw_unit.get('zh', '')), 'order': order}
                 unit, _ = Unit.objects.get_or_create(textbook_book=book, code=raw_unit['id'], defaults=unit_defaults)
-                child_key = {'knowledge': 'lessons', 'english': 'words', 'words': 'words', 'idioms': 'idioms', 'writing': 'topics'}.get(code, 'points')
-                kind = {'english': 'word', 'words': 'word', 'idioms': 'idiom', 'writing': 'writing'}.get(code, 'knowledge')
+                child_key = adapter['children']
+                kind = adapter['kind']
                 for index, raw in enumerate(raw_unit[child_key]):
                     title = raw.get('title') or raw.get('en') or raw.get('idiom')
                     identity = raw.get('key') or raw.get('id') or title
@@ -106,7 +120,11 @@ def import_snapshot(snapshot, publish=False):
                     upsert_item(f'primary:{code}:{raw_unit["id"]}:__overview', extra, module, source,
                                 'reference', '单元学习指南', unit, 10000, publish, report)
             # Keep every ancillary dataset, rather than silently dropping poems or related definitions.
-            extras = {k: v for k, v in data.items() if k not in {units_key, 'textbook', 'edition', 'ENGLISH_BOOKS', 'ENGLISH_WORDS'}}
+            metadata_keys = {units_key, 'textbook', 'edition', 'ENGLISH_BOOKS', 'ENGLISH_WORDS'}
+            if code == 'english':
+                # Relationship label/style/order settings drive the legacy UI, not learning cards.
+                metadata_keys.update({'RELATION_META', 'RELATION_ORDER'})
+            extras = {k: v for k, v in data.items() if k not in metadata_keys}
             if extras:
                 reference, _ = Unit.objects.get_or_create(textbook_book=book, code='reference', defaults={'title': '复习与资料', 'order': 10000})
                 for index, (key, value) in enumerate(extras.items()):

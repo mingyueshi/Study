@@ -8,3 +8,5 @@ staticfiles/
 .coverage
 data/*.json
 data/lexicon/
+
+.reference-assets/

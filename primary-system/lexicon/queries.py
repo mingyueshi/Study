@@ -1,7 +1,7 @@
 import re
 from django.db.models import Case, IntegerField, Q, Value, When
 from django.db.models.functions import Trim
-from .models import LexicalEntry, LexiconSource, active_records, pinyin_key, search_key
+from .models import LexicalEntry, active_records, pinyin_key, search_key
 
 
 def public_records():
@@ -22,22 +22,13 @@ def query_text(text):
     return text
 
 
-def public_sources_healthy():
-    """任一公开来源被禁用或失去生效版本时返回 False，浏览全集必须退回逐记录校验。"""
-    return not LexiconSource.objects.filter(public_allowed=True).exclude(
-        enabled=True, active_release__status='ready').exists()
-
-
 def matching_entries(q='', language='', kind=''):
     text = query_text(q)
     normalized = search_key(text)
     if not text:
-        # 浏览全集：审核状态是发布操作的直接结果，无需逐记录 join；
-        # 但来源被禁用或回退时不改状态，必须退回精确路径保证撤回立即生效。
-        if public_sources_healthy():
-            items = LexicalEntry.objects.filter(status='published', senses__status='published').distinct()
-        else:
-            items = LexicalEntry.objects.filter(pk__in=active_records(public=True).values('binding__sense__entry_id'))
+        # 浏览与搜索、详情共用展示条件；词条审核状态不能代替来源当前版本。
+        items = LexicalEntry.objects.filter(
+            pk__in=public_records().order_by().values('binding__sense__entry_id'))
     else:
         # 三个检索分支分别走各自的索引前缀，再在 Python 侧并集：
         # 跨 join 的 OR（词形 join OR 读音 join）会让 SQLite 放弃索引、

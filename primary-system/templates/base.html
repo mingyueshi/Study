@@ -15,7 +15,7 @@
     {% with current=request.resolver_match.url_name %}
     <nav aria-label="主导航">
       <a href="{% url 'home' %}" {% if current == 'home' or current == 'module' or current == 'collection' or current == 'item' %}aria-current="location"{% endif %}><img src="{% static 'icons/book.svg' %}" alt="" width="32" height="32"><span>学习广场</span></a>
-      <a href="{% url 'dictionary' %}" {% if current == 'dictionary' or current == 'dictionary-entry' or current == 'dictionary-sources' %}aria-current="location"{% endif %}><img src="{% static 'icons/english.svg' %}" alt="" width="32" height="32"><span>查字查词</span></a>
+      <a href="{% url 'dictionary' %}" {% if current == 'dictionary' or current == 'dictionary-entry' or current == 'dictionary-sources' or current == 'reference-cedict-detail' or current == 'reference-cmu-detail' or current == 'hanzi-detail' %}aria-current="location"{% endif %}><img src="{% static 'icons/english.svg' %}" alt="" width="32" height="32"><span>查字查词</span></a>
       <a href="{% url 'chain' %}" {% if current == 'chain' %}aria-current="page"{% endif %}><img src="{% static 'icons/dragon.svg' %}" alt="" width="32" height="32"><span>成语接龙</span></a>
       <a href="{% url 'my-learning' %}" {% if current == 'my-learning' %}aria-current="page"{% endif %}><img src="{% static 'icons/scenes.svg' %}" alt="" width="32" height="32"><span>我的学习</span></a>
       {% if user.is_staff %}<a href="{% url 'admin:index' %}">管理后台 ↗</a>{% endif %}

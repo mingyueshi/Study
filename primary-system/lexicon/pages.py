@@ -9,27 +9,51 @@ from django.views.decorators.http import require_GET
 from catalog.models import published_items
 from .models import LexicalEntry, LexiconSource
 from .open_sources import release_notices
-from .queries import matching_entries, public_records, query_text, record_order
+from .queries import public_records, query_text, record_order
 from .views import record_payload, safe_url
+from .lookup_sources import formal_query, ready_sources, reference_results
 
 
 class LookupForm(forms.Form):
-    q = forms.CharField(max_length=200, required=False, label='汉字、拼音或英文', widget=forms.TextInput(attrs={'placeholder': '试试「学」、xue 或 apple', 'autocomplete': 'off'}))
-    scope = forms.ChoiceField(required=False, label='查询范围', widget=forms.RadioSelect,
-                              choices=[('', '全部词典'), ('character', '汉字'), ('english', '英文'), ('idiom', '成语')])
+    q = forms.CharField(
+        max_length=200,
+        required=False,
+        label="汉字、拼音或英文",
+        widget=forms.TextInput(
+            attrs={"placeholder": "试试「学」、xue 或 apple", "autocomplete": "off"}
+        ),
+    )
+    scope = forms.ChoiceField(
+        required=False,
+        label="查询范围",
+        widget=forms.RadioSelect,
+        choices=[
+            ("", "全部字词"),
+            ("character", "汉字"),
+            ("chinese", "汉语字词"),
+            ("english", "英语"),
+            ("idiom", "成语"),
+        ],
+    )
 
 
-def teaching_items(text, *, language='', limit=8):
+def teaching_items(text, *, language="", limit=8):
     # Independent teaching material; spelling relevance is not a semantic alignment.
     if not text:
         return []
-    result = published_items().filter(kind__in=['word', 'idiom'])
-    if language == 'en':
-        result = result.filter(kind='word')
-    elif language == 'zh':
-        result = result.filter(kind='idiom')
-    result = result.filter(Q(title__icontains=text) | Q(source_payload__en__iexact=text)).select_related('module')
-    return list(result.order_by('title', 'id')[:limit])
+    result = published_items().filter(kind__in=["word", "idiom"])
+    if language == "en":
+        result = result.filter(kind="word")
+    elif language == "zh":
+        result = result.filter(kind="idiom")
+    result = result.filter(
+        Q(title__icontains=text) | Q(source_payload__en__iexact=text)
+    ).select_related("module")
+    from .chinese import LessonResolver
+
+    items = list(result.order_by("title", "id")[:limit])
+    resolver = LessonResolver(items)
+    return [resolver.project(item) for item in items]
 
 
 @never_cache
@@ -38,20 +62,63 @@ def lookup(request):
     form = LookupForm(request.GET)
     valid = form.is_valid()
     data = form.cleaned_data if valid else {}
-    q, scope = data.get('q', ''), data.get('scope', '')
-    language, kind = ('en', '') if scope == 'english' else ('', scope)
-    queryset = matching_entries(q, language, kind) if valid else LexicalEntry.objects.none()
-    page = Paginator(queryset, 24).get_page(request.GET.get('page'))
+    q, scope = data.get("q", ""), data.get("scope", "")
+    language = (
+        "en"
+        if scope == "english"
+        else "zh" if scope in ("chinese", "character", "idiom") else ""
+    )
+    text = query_text(q)
+    browse = (
+        request.GET.get("browse", "")
+        if request.GET.get("browse", "")
+        in ("published", "cedict", "cmu", "hanzi", "strokes")
+        else ""
+    )
+    queryset = (
+        formal_query(text, scope)
+        if valid and (text or browse == "published")
+        else LexicalEntry.objects.none()
+    )
+    page = Paginator(queryset, 24).get_page(request.GET.get("page"))
     # Bound previews to the current page; private records never enter this query.
-    records = public_records().filter(binding__sense__entry_id__in=[e.pk for e in page]).order_by('release__source__priority', 'binding__external_key')
+    records = (
+        public_records()
+        .filter(binding__sense__entry_id__in=[e.pk for e in page])
+        .order_by("release__source__priority", "binding__external_key")
+    )
     previews = {}
     for record in sorted(records, key=record_order):
         previews.setdefault(record.binding.sense.entry_id, record_payload(record))
-    cards = [{'entry': entry, 'preview': previews.get(entry.pk)} for entry in page]
-    return render(request, 'lexicon/lookup.html', {'form': form, 'q': q, 'page': page, 'cards': cards,
-        'teaching': teaching_items(query_text(q), language=language) if valid else [],
-        'sources': LexiconSource.objects.filter(enabled=True, public_allowed=True, active_release__status='ready'),
-    }, status=200 if valid else 400)
+    cards = [{"entry": entry, "preview": previews.get(entry.pk)} for entry in page]
+    ready = ready_sources()
+    refs = reference_results(text, scope, request.GET, ready=ready) if valid else {}
+    has_reference_results = any(
+        value and value["page"].paginator.count
+        for value in (refs.get("cedict"), refs.get("cmu"), refs.get("hanzi"))
+    ) or bool(refs.get("stroke_asset"))
+    return render(
+        request,
+        "lexicon/lookup.html",
+        {
+            "form": form,
+            "q": q,
+            "page": page,
+            "cards": cards,
+            "teaching": (
+                teaching_items(text, language=language) if valid and text else []
+            ),
+            "refs": refs,
+            "reference_sources": ready.values(),
+            "browse": browse,
+            "searched": bool(text or browse),
+            "has_results": bool(cards) or has_reference_results,
+            "sources": LexiconSource.objects.filter(
+                enabled=True, public_allowed=True, active_release__status="ready"
+            ),
+        },
+        status=200 if valid else 400,
+    )
 
 
 @never_cache
@@ -59,33 +126,83 @@ def lookup(request):
 def detail(request, pk):
     entry = get_object_or_404(LexicalEntry, pk=pk)
     seen = set()
-    while entry.status == 'merged' and entry.merged_into_id:
+    while entry.status == "merged" and entry.merged_into_id:
         if entry.pk in seen:
             raise Http404
-        seen.add(entry.pk); entry = entry.merged_into
-    records = public_records().filter(binding__sense__entry=entry).order_by('release__source__priority', 'binding__external_key')
+        seen.add(entry.pk)
+        entry = entry.merged_into
+    records = (
+        public_records()
+        .filter(binding__sense__entry=entry)
+        .order_by("release__source__priority", "binding__external_key")
+    )
     if not records.exists():
         raise Http404
     if seen:
-        return HttpResponseRedirect(reverse('dictionary-entry', args=[entry.pk]))
+        return HttpResponseRedirect(reverse("dictionary-entry", args=[entry.pk]))
     # Full pagination rather than silently cutting off a polysemous entry.
-    page = Paginator(sorted(records, key=record_order), 20).get_page(request.GET.get('page'))
+    page = Paginator(sorted(records, key=record_order), 20).get_page(
+        request.GET.get("page")
+    )
     definitions = [record_payload(record) for record in page]
-    return render(request, 'lexicon/detail.html', {'entry': entry, 'page': page, 'definitions': definitions,
-        'character': definitions[0]['properties'] if entry.kind == 'character' and definitions else None,
-        'teaching': teaching_items(entry.headword, language=entry.language),
-    })
+    return render(
+        request,
+        "lexicon/detail.html",
+        {
+            "entry": entry,
+            "page": page,
+            "definitions": definitions,
+            "character": (
+                definitions[0]["properties"]
+                if entry.kind == "character" and definitions
+                else None
+            ),
+            "teaching": teaching_items(entry.headword, language=entry.language),
+            "refs": reference_results(
+                entry.headword,
+                (
+                    "character"
+                    if entry.kind == "character"
+                    else "chinese" if entry.language == "zh" else "english"
+                ),
+                request.GET,
+                exact=True,
+            ),
+        },
+    )
 
 
 @never_cache
 @require_GET
 def sources(request):
     values = []
-    for source in LexiconSource.objects.filter(enabled=True, public_allowed=True, active_release__status='ready').select_related('active_release'):
+    for source in LexiconSource.objects.filter(
+        enabled=True, public_allowed=True, active_release__status="ready"
+    ).select_related("active_release"):
         release = source.active_release
-        metadata = {field: release.source_snapshot.get(field, getattr(source, field))
-                    for field in ('code', 'name', 'url', 'attribution', 'data_license', 'license_url', 'changes')}
-        metadata['url'] = safe_url(metadata['url'])
-        metadata['license_url'] = safe_url(metadata['license_url'])
-        values.append({'source': metadata, 'release': release, 'notices': release_notices(release)})
-    return render(request, 'lexicon/sources.html', {'sources': values})
+        metadata = {
+            field: release.source_snapshot.get(field, getattr(source, field))
+            for field in (
+                "code",
+                "name",
+                "url",
+                "attribution",
+                "data_license",
+                "license_url",
+                "changes",
+            )
+        }
+        metadata["url"] = safe_url(metadata["url"])
+        metadata["license_url"] = safe_url(metadata["license_url"])
+        values.append(
+            {
+                "source": metadata,
+                "release": release,
+                "notices": release_notices(release),
+            }
+        )
+    return render(
+        request,
+        "lexicon/sources.html",
+        {"sources": values, "reference_sources": ready_sources().values()},
+    )

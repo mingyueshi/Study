@@ -1,5 +1,6 @@
 import io
 import json
+from unittest.mock import patch
 
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
@@ -99,6 +100,58 @@ class ChainPoolTests(TestCase):
         # 版本已就绪但来源从未启用，记录不得进入取词范围。
         self.assertIsNone(self.staged.source.active_release_id)
         self.assertEqual(eligible_chain_records().count(), 1)
+
+    def test_actual_game_pool_excludes_staged_and_manually_disabled_words(self):
+        self.assertEqual({r[1] for r in services.chain_pool()}, {'守株待兔'})
+
+    def test_actual_pool_immediately_follows_source_and_entry_state(self):
+        self.assertEqual(len(services.chain_pool()), 1)
+        source = self.release.source
+        source.enabled = False
+        source.save(update_fields=['enabled'])
+        self.assertEqual(services.chain_pool(), [])
+        source.enabled = True
+        source.save(update_fields=['enabled'])
+        self.assertEqual(len(services.chain_pool()), 1)
+        entry = self.release.records.get(headword='守株待兔').binding.sense.entry
+        for status in ('archived', 'merged'):
+            entry.status = status
+            entry.save(update_fields=['status'])
+            self.assertEqual(services.chain_pool(), [])
+            entry.status = 'draft'
+            entry.save(update_fields=['status'])
+            self.assertEqual(len(services.chain_pool()), 1)
+
+    def test_actual_pool_follows_release_switch_and_rollback(self):
+        self.assertEqual({r[1] for r in services.chain_pool()}, {'守株待兔'})
+        second, _ = stage_manifest(idiom_manifest(
+            [idiom_row('b', '画蛇添足', 'huà shé tiān zú')], version='v2'))
+        activate_release(second.pk, expected_current=self.release.pk, reason='新版删除原可接龙词')
+        self.assertEqual(services.chain_pool(), [])
+        activate_release(self.release.pk, expected_current=second.pk, reason='回退')
+        self.assertEqual({r[1] for r in services.chain_pool()}, {'守株待兔'})
+
+    def test_equal_size_bulk_flag_swap_changes_actual_pool(self):
+        self.assertEqual({r[1] for r in services.chain_pool()}, {'守株待兔'})
+        ChainWord.objects.filter(entry__headword='守株待兔').update(game_eligible=False)
+        ChainWord.objects.filter(entry__headword='画蛇添足').update(game_eligible=True)
+        self.assertEqual({r[1] for r in services.chain_pool()}, {'画蛇添足'})
+
+    def test_homographs_use_one_eligible_entry_by_source_priority(self):
+        preferred = stage_active(
+            [idiom_row('same', '守株待兔', 'shǒu zhū dài tù')], source='preferred-idioms')
+        source = preferred.source
+        source.priority = 1
+        source.save(update_fields=['priority'])
+        entry = preferred.records.get().binding.sense.entry
+        word = make_chain(entry, game_eligible=True)
+        self.assertEqual([(r[0], r[1]) for r in services.chain_pool()], [(str(entry.pk), '守株待兔')])
+        # 禁用首选词位后仍可使用其它已启用来源的同形成语，词库实体不合并。
+        word.game_eligible = False
+        word.save(update_fields=['game_eligible'])
+        self.assertEqual(len(services.chain_pool()), 1)
+        self.assertNotEqual(services.chain_pool()[0][0], str(entry.pk))
+        self.assertEqual(LexicalEntry.objects.filter(headword='守株待兔').count(), 2)
 
 
 class ChainAdminTests(TestCase):
@@ -208,7 +261,6 @@ class ChainPlayTests(TestCase):
         }])
 
     def setUp(self):
-        services._POOL_CACHE.update(key=None, rows=None)
         self.client.force_login(self.user)
 
     def state(self):
@@ -400,5 +452,75 @@ class ChainPlayTests(TestCase):
         state = self.state()
         self.assertEqual(len(state['history']), 1)
         self.assertEqual(state['history'][0]['length'], 0)
+
+    def switched_release_round(self, *, complete_loop):
+        """旧链已使用的词在新版更换来源键和 UUID，游戏仍须按词形判重。"""
+        words = ['一心一意', '意气风发', '发扬光大', '大快人心']
+        round = self.fixed_round(words[0])
+        for headword in words[1:]:
+            entry = self.entries[headword]
+            word = ChainWord.objects.get(entry=entry)
+            round.chain.append({'entry_id': str(entry.pk), 'word': headword, 'pinyin': '', 'meaning': '',
+                                'by': 'partner', 'last_char': word.last_char})
+        rows = [idiom_row('replacement' if i == 0 else str(i), word, f'{word} pinyin')
+                for i, word in enumerate(self.CHAIN_WORDS)]
+        rows += [idiom_row('dead', '一鸣惊人', '一鸣惊人 pinyin'), idiom_row('loop', '心口如一', '心口如一 pinyin')]
+        replacement, _ = stage_manifest(idiom_manifest(rows, version='v2'))
+        activate_release(replacement.pk, expected_current=self.release.pk, reason='新版更换第一词的来源身份')
+        entries = entries_of(replacement)
+        make_chain(entries['一心一意'], game_eligible=True)
+        make_chain(entries['心口如一'], game_eligible=True)
+        if complete_loop:
+            round.chain.append({'entry_id': str(entries['心口如一'].pk), 'word': '心口如一', 'pinyin': '', 'meaning': '',
+                                'by': 'partner', 'last_char': '一'})
+        round.save()
+        return round
+
+    def test_hint_excludes_used_spelling_after_entry_identity_changes(self):
+        round = self.switched_release_round(complete_loop=True)
+        response = self.client.post('/chain/api/hint/', data=json.dumps(
+            {'round_id': str(round.pk), 'revision': round.revision}), content_type='application/json')
+        self.assertEqual(response.status_code, 200)
+        state = response.json()
+        self.assertEqual([item['word'] for item in state['hint']], ['一鸣惊人'])
+        response = self.play('一心一意', state)
+        self.assertEqual(response.status_code, 400)
+        self.assertIn('已经用过', response.json()['error'])
+
+    def test_partner_does_not_repeat_spelling_after_entry_identity_changes(self):
+        self.switched_release_round(complete_loop=False)
+        ChainWord.objects.filter(entry__headword='一鸣惊人').update(game_eligible=False)
+        response = self.play('心口如一')
+        self.assertEqual(response.status_code, 200)
+        state = response.json()
+        self.assertEqual(state['status'], 'finished')
+        self.assertEqual(state['ended_reason'], GameRound.EndedReason.PARTNER_STUCK.label)
+        self.assertEqual(len(state['chain']), 5)
+        self.assertEqual(len({item['word'] for item in state['chain']}), 5)
+
+    def test_hint_and_play_reuse_their_pool_for_response_statistics(self):
+        self.fixed_round('发扬光大')
+        state = self.state()
+        with patch('chain.services.chain_pool', wraps=services.chain_pool) as load_pool:
+            response = self.client.post('/chain/api/hint/', data=json.dumps(
+                {'round_id': state['id'], 'revision': state['revision']}), content_type='application/json')
+            self.assertEqual(response.status_code, 200)
+            self.assertEqual(load_pool.call_count, 1)
+        with patch('chain.services.chain_pool', wraps=services.chain_pool) as load_pool:
+            response = self.play('大快人心', response.json())
+            self.assertEqual(response.status_code, 200)
+            self.assertEqual(load_pool.call_count, 1)
+
+
+class EmptyChainTests(TestCase):
+    def test_empty_pool_has_page_empty_state_and_explicit_api_error(self):
+        response = self.client.get('/chain/')
+        self.assertContains(response, '成语接龙正在准备中')
+        self.assertNotContains(response, 'chain-state')
+        self.assertEqual(GameRound.objects.count(), 0)
+        response = self.client.get('/chain/api/state/')
+        self.assertEqual(response.status_code, 503)
+        self.assertEqual(response.json()['status'], 'unavailable')
+        self.assertIn('no-store', response.headers['Cache-Control'])
 
 

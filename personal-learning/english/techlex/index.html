@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="TechLex 计算机英语：从开发、运维到 AI、测试和数据分析，用双语例句、构词记忆与工作表达学习技术英语，记录自己的掌握进度。">
+  <meta name="theme-color" content="#101515">
+  <title>TechLex · 计算机英语学习系统</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E⌨️%3C/text%3E%3C/svg%3E">
+<script src="../../assets/theme.js"></script><link rel="stylesheet" href="../../assets/theme.css">
+  <link rel="stylesheet" href="tech.css">
+</head>
+<body>
+  <a class="skip-link" href="#cards">跳到学习内容</a>
+  <div id="app">
+    <header>
+      <button class="logo" data-act="home" aria-label="TechLex 首页"><span class="logo-mark" aria-hidden="true">&gt;_</span><span class="logo-t">Tech</span><span class="logo-l">Lex</span><span class="logo-dot">.</span></button>
+      <nav class="system-links" aria-label="学习系统导航">
+        <a class="system-link" href="../../index.html">学习首页</a>
+        <a class="system-link" href="../index.html" aria-current="location">英文学习</a>
+        <a class="system-link" href="../../ai/index.html">AI 学习 <small>基础篇</small></a>
+      </nav>
+      <span class="spacer"></span>
+      <button class="header-link" data-act="guide">工作表达 <span aria-hidden="true">↗</span></button>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="切换阅读主题"><span data-theme-icon aria-hidden="true">☀</span><span data-theme-label>主题</span></button>
+      <span class="header-divider" aria-hidden="true"></span>
+      <button class="icon-btn" data-act="toggleSound" id="soundBtn" title="声音" aria-label="切换声音"></button>
+    </header>
+
+    <div class="study-shell">
+      <aside class="sidebar">
+        <p class="sidebar-label">学习目录 <span class="nav-count"></span></p>
+        <details class="category-nav" open>
+          <summary>切换分类 <span class="nav-current"></span></summary>
+          <nav id="chips" aria-label="分类切换"></nav>
+        </details>
+        <div class="sidebar-progress">
+          <div><span>我的学习进度</span><strong id="progressPercent">0%</strong></div>
+          <progress id="totalProgress" max="100" value="0" aria-label="全部术语掌握进度"></progress>
+          <p id="stats"></p>
+        </div>
+        <div class="sidebar-foot">
+          <span class="local-dot" aria-hidden="true"></span> 学习进度自动保存在本机
+          <a href="../index.html">← 英文学习目录</a>
+        </div>
+      </aside>
+      <div class="study-content">
+        <section class="intro" aria-labelledby="introTitle">
+          <div class="intro-copy">
+            <p class="eyebrow"><span aria-hidden="true"></span> A LITTLE ENGLISH. EVERY DAY.</p>
+            <h1 id="introTitle">技术英语，<em>学了就能用。</em></h1>
+            <p class="intro-description">读懂文档、说清想法、轻松参与代码评审。</p>
+          </div>
+          <div class="intro-stats" id="libraryStats"></div>
+        </section>
+
+        <section class="toolbar" aria-label="搜索与朗读">
+          <div class="search-box">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
+            <input id="search" type="search" aria-label="搜索全部术语" placeholder="搜索术语、中文释义或例句…" autocomplete="off">
+            <button class="clear-search" id="clearSearch" data-act="clearSearch" aria-label="清空搜索" hidden>×</button>
+            <kbd class="search-shortcut" aria-hidden="true">/</kbd>
+          </div>
+          <button class="play-btn" id="playBtn" data-act="play">▶ 连读当前列表</button>
+        </section>
+        <details class="voice-settings" id="voiceSettings">
+          <summary><span class="voice-settings-title">系统发音</span><span id="voiceSummary">自动推荐发音人</span><span class="voice-settings-toggle" aria-hidden="true">⌄</span></summary>
+          <div class="voice-settings-body">
+            <div class="voice-controls">
+              <label for="englishVoice">英语发音人<select id="englishVoice"><option value="">自动推荐</option></select></label>
+              <label for="chineseVoice">中文发音人<select id="chineseVoice"><option value="">自动推荐</option></select></label>
+              <label for="speechRate">朗读语速<select id="speechRate"><option value="0.85">轻缓 · 0.85×</option><option value="1">标准 · 1×</option><option value="1.15">稍快 · 1.15×</option></select></label>
+            </div>
+            <div class="voice-actions"><button data-act="previewVoice" data-lang="en">▷ 试听英语</button><button data-act="previewVoice" data-lang="zh">▷ 试听中文</button><button data-act="refreshVoices">刷新语音列表</button></div>
+            <p id="voiceAvailability">发音人由当前系统和浏览器提供，设置会自动保存在本机。</p>
+            <p id="voiceStatus" role="status" aria-live="polite"></p>
+          </div>
+        </details>
+        <div class="quick-searches" aria-label="快捷搜索"><span>试试这些</span><button data-act="search" data-query="API">API</button><button data-act="search" data-query="部署">部署</button><button data-act="search" data-query="LLM">LLM</button><button data-act="search" data-query="测试">测试</button><span class="search-tip">支持全词库中英文搜索</span></div>
+
+        <section class="unit-head" aria-labelledby="viewHeading">
+          <div class="unit-title"><span id="unitIcon" class="unit-emoji" aria-hidden="true"></span><div><p class="section-kicker" id="viewKicker">THE COLLECTION</p><h2 id="viewHeading"></h2></div></div>
+          <p id="viewDescription"></p>
+          <div id="unitProgress" class="unit-progress"></div>
+        </section>
+
+        <details class="unit-guide" id="unitGuide">
+          <summary><span class="guide-symbol" aria-hidden="true">↳</span><span id="guideTitle">工作中这样说</span><span class="guide-toggle">展开学习 <span aria-hidden="true">＋</span></span></summary>
+          <div id="guideContent" class="guide-content"></div>
+        </details>
+
+        <section class="filter-row" aria-label="术语筛选">
+          <div class="filter-tabs" role="group" aria-label="学习状态"><button class="filter-tab on" data-act="filter" data-filter="all" aria-pressed="true">全部术语 <span id="countAll"></span></button><button class="filter-tab" data-act="filter" data-filter="unlearned" aria-pressed="false">待学习 <span id="countUnlearned"></span></button><button class="filter-tab" data-act="filter" data-filter="learned" aria-pressed="false">已掌握 <span id="countLearned"></span></button></div>
+          <label class="sort-label"><span class="sr-only">术语排序</span><select id="sort"><option value="default">推荐顺序</option><option value="alpha">字母 A–Z</option></select></label>
+        </section>
+        <p class="result-status sr-only" id="resultStatus" role="status" aria-live="polite" aria-atomic="true"></p>
+        <main id="cards" tabindex="-1" aria-label="术语学习卡片"></main>
+        <p class="list-foot" id="listFoot"></p>
+      </div>
+    </div>
+    <footer class="foot"><span><b>TechLex.</b> 个人学习 · 英文学习</span><span>点读依赖浏览器语音 · 进度保存在当前浏览器</span><a href="../index.html">返回英文学习目录 ↗</a></footer>
+  </div>
+
+  <script src="speech.js"></script>
+  <script src="tech-data.js"></script>
+  <script src="progress.js"></script>
+  <script src="tech-app.js"></script>
+  <script src="layout.js"></script>
+</body>
+</html>

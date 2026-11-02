@@ -1,0 +1,19 @@
+{% if refs.cedict.page.paginator.count %}
+<section class="dictionary-reference" id="reference-cedict" aria-labelledby="cedict-title">
+  <h2 id="cedict-title">汉英参考词义</h2><p>{{ refs.cedict.description }} <span class="muted">版本 {{ refs.cedict.version }}</span></p>
+  <div class="dictionary-grid">{% for row in refs.cedict.page %}<a class="dictionary-card" href="{% url 'reference-cedict-detail' row.pk %}"><span class="tag">CC-CEDICT · 英文原释义</span><h3>{{ row.simplified }}</h3>{% if row.traditional != row.simplified %}<p>繁体：{{ row.traditional }}</p>{% endif %}<p class="reading">{{ row.pinyin_numbered }}</p><ul lang="en" class="reference-definitions">{% for definition in row.definitions_en|slice:':3' %}<li>{{ definition|truncatechars:180 }}</li>{% endfor %}</ul><small>来源第{{ row.source_line }}行 · 查看完整释义 →</small></a>{% endfor %}</div>
+  {% include 'lexicon/reference_pagination.html' with section=refs.cedict %}
+</section>{% endif %}
+{% if refs.cmu.page.paginator.count %}
+<section class="dictionary-reference" id="reference-cmu" aria-labelledby="cmu-title">
+  <h2 id="cmu-title">英语读音</h2><p>{{ refs.cmu.description }} </p>
+  <div class="dictionary-grid">{% for row in refs.cmu.page %}<a class="dictionary-card" href="{% url 'reference-cmu-detail' row.word %}"><span class="tag">CMU · 美式ARPAbet</span><h3>{{ row.word }}</h3><p class="reading" lang="en">{{ row.phonemes }}</p><p>来源变体 {{ row.variant }} · {{ row.entry }}</p><small>来源第{{ row.source_row }}行 · 查看全部读音 →</small></a>{% endfor %}</div>
+  {% include 'lexicon/reference_pagination.html' with section=refs.cmu %}<details class="dictionary-evidence"><summary>CMU来源与版本</summary><p>CMU Pronouncing Dictionary · {{ refs.cmu.version }}</p></details>
+</section>{% endif %}
+{% if refs.hanzi.page.paginator.count or refs.asset_only or refs.stroke_asset %}
+<section class="dictionary-reference" id="reference-hanzi" aria-labelledby="hanzi-title">
+  <h2 id="hanzi-title">汉字、属性与笔顺</h2><p>同一字形的资料按来源版本分别展示，此处属性来自Unihan 17。</p>
+  <div class="dictionary-grid">{% for row in refs.hanzi.page %}<a class="dictionary-card character-card" href="{% url 'hanzi-detail' row.character %}"><span class="tag">{% if refs.hanzi.kind == 'strokes' %}Make Me a Hanzi{% else %}Unihan {{ row.version }}{% endif %}</span><h3>{{ row.character }}</h3><p class="reading">{% if refs.hanzi.kind == 'strokes' %}{{ row.pinyin|join:'、' }}{% else %}{{ row.mandarin|default:'来源读音暂缺' }}{% endif %}</p>{% if row.codepoint %}<p>{{ row.codepoint }} · 来源笔画 {{ row.total_strokes|default:'暂缺' }}</p>{% endif %}{% if row.definition_en %}<p lang="en">{{ row.definition_en|truncatechars:140 }}</p>{% endif %}<small>查看字形和完整属性 →</small></a>{% endfor %}{% if refs.asset_only %}<a class="dictionary-card character-card" href="{% url 'hanzi-detail' refs.asset_only.character %}"><span class="tag">Make Me a Hanzi · 部件</span><h3>{{ refs.asset_only.character }}</h3><p>{{ refs.asset_only.pinyin|join:'、' }}</p><p>此部件在笔顺字典中收录。</p><small>查看完整字形资料 →</small></a>{% endif %}</div>
+  {% if refs.hanzi %}{% include 'lexicon/reference_pagination.html' with section=refs.hanzi %}{% endif %}
+  {% if refs.stroke_asset %}{% include 'hanzi/strokes.html' with asset=refs.stroke_asset %}{% endif %}
+</section>{% endif %}

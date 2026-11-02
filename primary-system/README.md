@@ -1,93 +1,79 @@
-# 乐学堂 · 统一学习系统基座
+# 乐学堂 · 家庭学习系统
 
-把 `primary` 的多个离线学习页面纳入同一个账号、课程目录、数据库和后台。本轮按**每个人独立账号、独立学习记录**实现，不引入家长绑定或班级权限。
+用于辅导孩子学习的 Django 单体项目。`primary-system/` 是主项目，其他目录保留为资料、原型或研究。
 
-技术栈沿用 `idiom-chain`：Python 3.12+、Django 6.1.2、Nova Admin、Nova 滑块验证码、服务端模板。默认独立 SQLite，提供 PostgreSQL 配置与真实数据库回归测试。运行时不需要 Node；迁移现有 JavaScript 数据时需要 Node。
+设计基线见 [系统设计与开发基线](docs/system-design.md)。当前明确区分两条管线：**教材按册次、单元和内容编排；学科功能拥有独立页面、数据模型和学习流程。** 旧专题学习册已退出，科学、地理、历史等后续按学科逐个开发，不放回通用专题阅读器。
 
-共享词库已有独立 `lexicon` 数据层、Nova 后台和版本化导入流程，868 张现有词卡已建立关联。新增统一查字查词页面，首批公开来源为 Unicode Unihan 18.0.0 的 9,810 个汉字和 Open English Wordnet 2025 的 861 个英文词条／3,700 个义项。已有 30,895 条成语快照仍仅暂存。来源筛选、范围和操作见 [首批公开词库与查词页](docs/public-dictionaries.md)，底层维护见 [词库维护手册](docs/lexicon-operations.md)。
+`references/` 新资料的 [基础数据与中文教学规划](docs/foundation-data-plan.md) 已完成，另有 [文件与内容核验](docs/reference-audit-2026-11-02.md)。当前保留六包中的七类资料，南非教材及算术事实已按用户要求删除，提供中文界面、可靠短名称和字段对照及独立浏览入口；长篇英文释义仍保留原文并标明中文待补。字词资料已整合到[查字查词](http://127.0.0.1:8012/dictionary/)，见[统一展示实施](docs/dictionary-unification-implementation.md)；历史[全量资料库实施](docs/reference-library-implementation.md)与[独立验收](docs/reference-library-acceptance.md)。当前退役范围和维护流程见[退役报告](docs/reference-library-removal-implementation.md)。
 
-## 现在可以使用
+## 当前功能
 
-- 统一学习广场：按年级、学科、教材筛选；进入学习册、单元和内容详情。
-- 12 个学习模块目录；11 个内容模块导入为 12 本学习册、1,219 条内容（含单元指南和复习资料，不等同于 1,219 个知识点）。英语上下册分别管理。
-- 账号登录、退出、修改密码、显示名称与年级偏好；每条内容的掌握状态、收藏和私人笔记持久化到数据库。
-- Nova 后台管理学段、年级、学科、教材版本、册次、模块、学习册、单元和内容编排。
-- 内容草稿／发布／归档、学习册发布开关、模块入口开关。下架内容在前台、接口、个人列表中统一隐藏；已有进度保留。
-- `内容编辑`权限组只管理课程内容；账号创建和权限调整由超级管理员操作。个人记录在后台仅对超级管理员只读展示。
-- 幂等导入、预演回滚、来源留档、人工修改保护；进度写入有 CSRF 和 revision 冲突校验。
-- 词库来源与固定版本、原始记录及字段证据、词条／义项／读音、教学关联和同形词核对；人工修订与来源原文分开保存。
-- 词库导入预演、分批续跑、版本差异与原子启用／回退；独立的词库编辑与来源发布权限。词典接口只返回来源与内容均已审核的数据。
-- 统一查字查词：汉字／拼音／英文词形查询，独立义项、部首笔画、简繁关联、来源例句、许可与版本展示；相关教学卡片单独呈现。
-- 后台导航按「课程内容／基础词库／游戏中心／学习记录／账号与权限」分组，配图标、常用模型快捷方式、收藏和待办计数徽标。
-- 成语接龙对局已接入（应用 `chain`，路由 `/chain/`），游客免登录可直接玩（对局保存在浏览器会话，过期失效），登录后对局跟随账号：词池 29,502 条四字成语（后台「游戏中心」维护可接龙标记与首尾字，取词始终来自词库生效版本、不要求公开准入），和小龙陪练轮流接龙、+10/−5 计分、提示与自动终局。
-- 内容块 schema v2 与图示复用：分节升级为类型化块（text／figure），旧数据零迁移读取兼容；98 条课文图示（含数学、科学互动演示）整体复用 legacy 自包含图示库，服务端输出占位、客户端注入，互动演示开箱即用。
-- 点读完整接入：浏览器 TTS（零服务器音频资产），英语词卡整词与音节跟读、册子页连读（步进高亮）、中文内容逐节朗读、账号页选择英语发音人（偏好存本机）。
-- 场景单词玩法已接入（独立 `words` 应用，路由 `/words/`）：46 个生活场景、577 个单词全部词典驱动——primary-words 来源全量投影（`words_scenario_manifest` 适配器，577 条已核对音标），页内 IPA/释义取自生效版本，教学标注（emoji/拆分跟读/记忆提示/关联词）保留在词位上；场景浏览＋点读＋连读＋标记掌握（游客挂会话、登录挂账号，双轨隔离）＋全量搜索。
-- 教材单词词典驱动：english 模块 306 张词卡与场景单词同构接入，页内 IPA/释义取自生效版本（经教学关联选定，来源变更可感知）。
+- 教材目录：语文、数学、英语三个模块，4 本教材同步册、394 条内容（包括单元指南与复习资料）；按年级、学科、教材筛选。
+- 统一账号、个人年级偏好；教材内容的掌握、收藏、私人笔记及并发修改冲突提示。
+- 教材阅读支持纯文本、类型化图示块、互动图示、点读、连读及打印；浏览器语音按朗读结束推进，实际发音依赖设备。
+- 共享词库：字词、义项、读音、原始证据、人工修订、版本化导入、审核、启用与回退；统一查字查词页面。
+- 成语接龙：游客／登录账号隔离、服务端计分、提示、陪练、终局；词池来自当前生效词库，后台可禁用词条。
+- 场景单词：独立 `words` 应用，46 个生活场景、577 个词位；稳定词卡目标固定义项、读音和版本证据，可在多个场景复用。教学标注留在词位上，支持点读、连读和词卡掌握。
+- 查字查词统一查询：已发布词义、CC-CEDICT汉英参考、CMU美式读音、汉字属性和笔顺在同一页展示；正式词条详情也显示同形补充资料，来源和版本分别保留。
+- 资料探索：查字查词、古诗文、国家地区、元素及HYG星表五个入口，不自动生成学习记录。
+- Nova 后台分组管理课程、词库、玩法、学习记录与账号；普通学习账号不具有管理权限。
 
-**本轮边界**：内容已进入数据库并提供类型化块阅读（图示与点读已接入）。原 `primary` 的打印版式尚未迁入新阅读器。成语接龙已在统一账号下接入；原「成语本」模块已下架，成语学习经由查词词典与接龙承载。首批汉字为通用字集属性和英文简释，英文为教材词形范围内的英英词典，尚无完整中文词典译文、全部读音或音频；缺失数据明确提示。游客对局与浏览器本地进度未迁移，两个旧目录照常保留。
+以上内容规模是当前资料范围，不表示所有内容均已完成教学审校。场景词已支持多场景／多义项引用；跨学科学习总览及新的学科教学玩法尚待实现，见设计基线的后续顺序。
 
-## 前台界面与屏幕适配
+## 本地运行
 
-- 内容区随屏幕扩展，最大宽度 2,240px；宽屏首页展示 6 列课程入口、4 列学习册，平板和手机逐级减少列数。窄手机使用大图标配文字的横向课程卡片。
-- 基础字号 18px，学习正文 20–21px，词典释义 21–22px；使用系统中文字体，增加行距、文字对比度和段落留白。
-- 课程图标最大 88px，书架图标 60px；导航同时显示图标与文字，并标出当前栏目。不同学科采用柔和的独立配色。
-- 主要按钮与输入框高度约 54–60px；保留键盘焦点、跳到正文和减少动态效果支持。阅读目录与记录面板在桌面显示为侧栏，小屏改为上下排列。
-
-样式由 `static/platform.css` 与 `static/dictionary.css` 统一维护，不依赖在线字体或新增前端框架。屏幕与回归检查结果见 [VALIDATION.md](VALIDATION.md)。
-
-## 本地使用
-
-在仓库根目录执行：
+Python 3.12+；依赖版本固定于 `requirements.txt`。运行不需要 Node，首次导出现有 `primary/` 资料需要 Node。
 
 ```sh
 cd primary-system
 python3.12 bootstrap.py
-.venv/bin/python manage.py createsuperuser
 PRIMARY_DEBUG=1 .venv/bin/python manage.py runserver 127.0.0.1:8012
 ```
 
-首次初始化会建立 `.venv`、安装依赖、迁移独立数据库、建立目录与词库权限组，再导入现有资料并建立词库关联。词库导入仅暂存，不自动启用或公开；已有成语大库需另行执行维护手册中的命令。默认不启动服务，不创建默认用户或默认密码。也可 `python3.12 bootstrap.py --serve` 一并启动；已有依赖可加 `--skip-install`，只需要空基座可加 `--skip-content`。
+已有环境先用 SQLite backup API 保存新的恢复点，再执行 `.venv/bin/python manage.py migrate`。2026-11-02 的升级包括专题退出与场景学习目标迁移：词位原主键和标注保留，旧进度逐条映射为词卡掌握，不按拼写合并。详情见 [场景学习对象与迁移](docs/scenario-learning.md)；需要保留旧专题阅读的副本不可直接升级。
 
-- 前台：<http://127.0.0.1:8012/>
-- 后台：<http://127.0.0.1:8012/admin/>
-- 查字查词：<http://127.0.0.1:8012/dictionary/>；首次在空库安装需按 [公开词库手册](docs/public-dictionaries.md) 下载、导入并审查，bootstrap 不自动下载或批准新来源。
-- 普通账号：管理员在“账号与权限 → 学习账号”中添加，保持“职员状态”和“超级用户状态”关闭。
-- 内容编辑：为账号开启“职员状态”，添加 `内容编辑`组，通过后台入口登录。管理账号不能从普通登录页绕过后台滑块验证；后台登录后可返回前台。
-- 游戏管理：为账号开启“职员状态”，添加 `游戏管理`组，可维护接龙词池；不能管理课程内容、词库或账号。
-- Windows：用 `py -3.12 bootstrap.py`；Python 入口为 `.venv\Scripts\python.exe`，PowerShell 可用 `$env:PRIMARY_DEBUG='1'` 设置本地调试模式。
+- [学习广场](http://127.0.0.1:8012/)
+- [查字查词](http://127.0.0.1:8012/dictionary/)
+- [资料探索](http://127.0.0.1:8012/references/)
+- [场景单词](http://127.0.0.1:8012/words/)
+- [成语接龙](http://127.0.0.1:8012/chain/)
+- [管理后台](http://127.0.0.1:8012/admin/)
 
-数据库默认在本目录 `db.sqlite3`，会话与 CSRF Cookie 使用独立的 `primary_` 前缀，不复用 `idiom-chain` 的数据库或游客身份。本地随机密钥保存于权限为 0600 的 `.local-secret`。数据库、密钥、虚拟环境和数据导出快照不进 Git。
+首次初始化会暂存教材英语与场景英语词库，不自动切换来源版本。启用词库、导入场景词位、填充接龙词池、创建账号及隔离数据库验证，详见 [本地开发与数据准备](docs/local-development.md)。初始化不会创建默认密码。
 
-## 扩展模型
+默认数据库为 `db.sqlite3`，用 `PRIMARY_SQLITE_PATH` 可指定独立文件。会话和 CSRF Cookie 使用 `primary_` 前缀；本地随机密钥在权限 0600 的 `.local-secret`。数据库、密钥、虚拟环境和快照不进 Git。
+
+## 数据模型与扩展
 
 ```mermaid
 flowchart LR
   Stage[学段] --> Grade[年级]
-  Subject[学科] --> Edition[教材版本 / 出版社 / 课程标准]
-  Edition --> Textbook[册次 / 年级 / 修订标识]
+  Subject[学科] --> Edition[教材版本]
+  Edition --> Textbook[册次 / 修订标识]
   Grade --> Textbook
-  Subject --> Module[学习模块]
-  Module --> Collection[学习册]
-  Textbook --> Collection
-  Collection --> Unit[单元]
-  Unit --> Placement[内容编排]
-  Content[内容 UUID / 类型 / 发布状态] --> Placement
-  User[独立账号] --> Progress[掌握 / 收藏 / 笔记 / revision]
+  Subject --> Module[模块入口]
+  Textbook --> Book[教材同步册]
+  Module --> Book
+  Book --> Unit[单元]
+  Unit --> Placement[编排]
+  Content[内容 UUID] --> Placement
+  Account[统一账号] --> Progress[教材掌握 / 收藏 / 笔记]
   Content --> Progress
+  Lexicon[共享词库 / 义项 / 读音] --> Teaching[教材教学关联]
+  Content --> Teaching
+  Lexicon --> Target[词卡目标 UUID / 义项 / 读音 / 证据]
+  Target --> Words[场景编排]
+  Target --> WordProgress[词卡掌握 / revision]
+  Lexicon --> Chain[成语接龙]
+  Account --> Words
+  Account --> Chain
 ```
 
-新增年级、学科、教材、普通知识内容可直接在后台配置，不必修改前端代码。教材学习册按教材年级筛选；无教材的专题使用“专题适用年级”，留空表示全部年级。种子中的专题初始分配三至六年级，可后台调整。当前只有四年级同步教材内容，其他年级目录留待补充，不伪造教材内容。
+教材内容使用稳定 UUID。复用同一内容时共享其学习状态；需要不同教材或年份各自记录时，应创建不同内容。学科专属数据、实验步骤、游戏回合等放在各自领域模型，不能堆进教材 `sections`。
 
-教材版本与修订册次分别建模：同一年级可并存不同出版社、教材版本和修订年份。种子中的出版社及版本标签来自现有 `primary` 标注，尚未进行实物教材核验。
+`sections` 支持 v1 纯文本和 v2 `text/figure` 块，原始领域字段保留于只读 `source_payload`。目录跨学科／跨模块约束由模型及表单校验，直接 ORM 写入须调用 `full_clean()`；批量更新会绕过模型校验。
 
-内容以稳定 UUID 定位，通过 `Placement` 可编入同一模块的多个单元／学习册。进度唯一键是 `(账号, 内容 UUID)`：复用同一内容时共享掌握状态；需要分别记录不同教材或年份学习时，应创建不同内容。账号当前年级只影响默认筛选，不影响历史记录的归属。
-
-结构化分节采用 `sections=[{"title":"知识要点","text":"正文"}]` 和 `schema_version=1`，模板始终按纯文本转义；原始领域字段保留于只读 `source_payload`。后续词卡、成语、题目、实验等专门交互可新增领域模型并关联内容 UUID；通用内容表不承担对局或答题计分。
-
-目录跨学科／跨模块引用在 Django 模型与后台表单校验，唯一键和进度状态由数据库约束。直接 ORM 脚本更改目录时必须调用 `full_clean()`；`bulk_update()` / `QuerySet.update()` 会绕过模型关联校验。
-
-## 数据导入与维护
+## 内容与词库维护
 
 ```sh
 node scripts/export_primary.cjs
@@ -95,65 +81,61 @@ node scripts/export_primary.cjs
 .venv/bin/python manage.py import_primary data/primary.json --publish
 ```
 
-导出器只读取仓库中固定的 11 个受信任 `*-data.js` 模块，不能用来运行用户上传的 JS。导入以一个事务处理完整 JSON，失败全部回滚。SHA256 是来源文件的版本指纹，不是外部签名；原始记录、来源路径、摘要在后台可查。源文件没有独立 ID 的内容，以模块、单元、标题／词条作为来源键；改名可能产生新内容，需人工确认关联后归档旧项。
+导出器只运行仓库固定的受信任静态数据模块；导入器仅接收教材模块，其他部分记录为跳过。导入在事务内执行，支持预演、重复运行和人工修改保护，不删除缺失记录、不覆盖受保护内容、不清空教材进度。`--publish` 只决定新增记录的发布状态。
 
-`--publish` 只决定新建记录的发布状态，不重新发布已有草稿或归档项。不加该参数时，新建学习册与内容默认为草稿。重复导入不删除缺失项、不重排人工编排、不清空进度、不覆盖已锁定内容。后台保存内容自动开启人工修改保护；明确取消保护后才允许下一次导入更新该项。
+词库按来源版本维护，教材通过稳定 UUID 与来源快照关联：词库原文、人工修订、教学简释分开保存；同形词不能只凭拼写合并；版本变化不能静默改绑教材词义。内部来源启用与词典页面展示审核是不同状态。
 
-`primary` 是初次导入来源，之后可以直接在后台维护。导入仅沿“静态数据 → 数据库”单向进行，后台修改不会写回 JS。不要把重新导入当作同步删除功能。
+- [词库模型与分期设计](docs/lexicon-foundation.md)
+- [词库导入、启用、回退与维护](docs/lexicon-operations.md)
+- [首批词典来源与缺失范围](docs/public-dictionaries.md)
 
-## 接口
+图示副本已在本项目内；它们目前与研究目录存在差异，不能无审查覆盖同步。`speech.js` 由本项目独立维护。
+
+## 接口与记录
 
 | 接口 | 用途 |
 |---|---|
-| `GET /api/v1/catalog/` | 学段年级、学科、教材版本、模块和已发布学习册 |
-| `GET /api/v1/items/` | 分页读取内容摘要，支持 `collection`、`grade`、`subject`、`edition`、`q` |
-| `GET /api/v1/items/<uuid>/` | 已发布内容详情 |
-| `GET /api/v1/lexicon/` | 已准入、启用并审核的词条；支持 `q`、`language`、`kind` |
-| `GET /api/v1/lexicon/<uuid>/` | 词条义项、已审读音、来源与版本；归并后旧 UUID 保留跳转 |
-| `GET /api/v1/items/<uuid>/lexicon/` | 教学卡片关联的已审核词义；来源有实质变更时等待复核 |
-| `GET /api/v1/me/progress/<uuid>/` | 当前账号进度；未保存时返回 revision 0，不创建记录 |
-| `POST /api/v1/me/progress/<uuid>/` | 保存当前账号进度；要求会话与 CSRF |
+| `GET /api/v1/catalog/` | 目录与已发布教材册 |
+| `GET /api/v1/items/` | 教材内容摘要，支持 `collection/grade/subject/edition/q` |
+| `GET /api/v1/items/<uuid>/` | 已发布教材内容 |
+| `GET /api/v1/lexicon/` | 可展示词条，支持词形／拼音查询及语言／类型筛选 |
+| `GET /api/v1/lexicon/<uuid>/` | 独立义项、读音、来源与版本 |
+| `GET /api/v1/items/<uuid>/lexicon/` | 教材的教学词义关联 |
+| `GET/POST /api/v1/me/progress/<uuid>/` | 当前账号教材学习记录 |
+| `/words/api/state/`、`/words/api/learn/` | schema v3：场景编排、显式中文呈现与目标词卡掌握 |
+| `/chain/api/state/`、`play/`、`hint/`、`restart/` | 接龙状态与动作 |
 
-列表每页 30 条，返回 `page/pages/total`，筛选值使用目录 `code`，`q` 搜索标题／概要／正文。未传 `grade` 时使用账号偏好，传 `grade=` 表示全部。内容读接口仅返回已发布资料；原始来源快照由后台管理。
-
-进度 POST 的完整 JSON：
+教材进度 POST 使用完整 JSON：
 
 ```json
 {"revision": 0, "status": "learning", "bookmarked": true, "note": "今天的新理解"}
 ```
 
-允许的状态为 `new / learning / mastered`，笔记最多 4,000 字。不能指定其他账号的 ID。版本过期返回 409，客户端应重新读取再由用户决定保存；不自动重试写入。PostgreSQL 锁定当前账号行以处理并发首次创建；SQLite 使用 IMMEDIATE 事务。个人页面和进度响应禁止缓存。
+状态为 `new/learning/mastered`，笔记最多 4,000 字。进度必须归属当前登录用户，写入要求 CSRF；过期 revision 返回 409，需要重新读取后由用户决定保存。个人页面禁止缓存。
 
-## PostgreSQL 与配置
+场景单词写入使用目标 UUID，布局词位 ID 不作为学习身份：
 
-按实际目标设置环境变量；项目不自动加载 `.env`：
-
-```sh
-.venv/bin/python -m pip install -r requirements-postgres.txt
-export PRIMARY_DB_ENGINE=postgres
-export PRIMARY_DB_NAME=primary_system
-export PRIMARY_DB_USER=your_user
-export PRIMARY_DB_HOST=127.0.0.1
-export PRIMARY_DB_PORT=5432
-# PRIMARY_DB_PASSWORD 从本机或部署环境安全注入
-.venv/bin/python manage.py migrate
-.venv/bin/python manage.py seed_platform
+```json
+{"schema_version": 3, "target_id": "目标UUID", "revision": 0, "learned": true, "chinese_version_id": null, "presentation_revision": 0}
 ```
 
-切换配置不会自动搬运 SQLite 的数据。本轮未做生产数据库迁移或发布。多用户并发部署应使用 PostgreSQL；生产启用 `PRIMARY_PRODUCTION=1`，设置 `PRIMARY_SECRET_KEY`（至少 50 字符）、`PRIMARY_ALLOWED_HOSTS`、`PRIMARY_CSRF_TRUSTED_ORIGINS`，并保持 `PRIMARY_DEBUG=0`。使用 WSGI/ASGI 服务与 HTTPS 反向代理、静态文件服务及登录限流；不得将本地 `runserver` 公开运行。生产开关未替你配置托管、代理、限流或备份。
+同目标跨场景共享词卡掌握，不扩张为同拼写所有义项或其他能力。过期 revision 和旧 word_id 请求返回 409，必须刷新；游客和账号不自动合并。变义、删词、来源停用或人工修订变化时保留目标与进度，暂停显示对应释义，不自动换义。详细约束、导入选择和备份见 [场景学习对象](docs/scenario-learning.md)。
 
-其他变量：`PRIMARY_SQLITE_PATH` 可指定独立 SQLite 文件。`bootstrap.py` 固定为本机 SQLite 初始化；PostgreSQL 请使用上面的管理命令。
+中文翻译／教学解释独立版本化，目标及教材关联显式选版；同义升级保留学习身份，改义须新身份且不转移旧进度。来源或中文失效会暂停正文与依赖标注。当前首批39个固定绑定（26场景目标＋13教材关联）已复用来源中文并经AI核对采用，剩余844引用仍是未经本批核对的legacy呈现；不代表全库或所有memo质量通过。见[覆盖清点](docs/chinese-coverage-inventory.md)及[批次报告](docs/chinese-batch-01-implementation.md)。
 
-## 验证与后续
+教材有关联词义时，保存须携带GET返回的presentation及update_learning；仅改收藏／笔记不重写学习依据。旧mastered依据未知时保留原值并显示待确认，不计入当前已确认掌握。维护命令、版本链规则、迁移保护和实测见 [中文义项实施报告](docs/chinese-sense-implementation.md)。
+
+## 验证与数据库配置
 
 ```sh
 .venv/bin/python manage.py test --noinput
 .venv/bin/python manage.py check
 .venv/bin/python manage.py makemigrations --check --dry-run
+node --test scripts/test_frontend.cjs
 ```
 
-在 `primary-system/` 目录运行；实际结果见 [VALIDATION.md](VALIDATION.md)。数据库迁移、账号隔离、内容发布边界、跨教材关联、导入保护与并发冲突都属于基座回归范围。
+最新实测见 [VALIDATION.md](VALIDATION.md)，较早章节只代表当时状态。
 
-下一阶段补齐未匹配教材词形、可靠中文释义、多音字与教学适宜性审查，并继续复核教学义项关联。具体顺序见 [词库分期规划](docs/lexicon-foundation.md#9-分期实施与验收)。随后接入点读、图示和互动演示、统一账号的成语接龙、题库与学习计划。需要班级或家长协作时，再扩展独立授权关系，不能仅靠前端隐藏他人数据。
+PostgreSQL 使用 `requirements-postgres.txt`，设置 `PRIMARY_DB_ENGINE=postgres` 及 `PRIMARY_DB_NAME/USER/HOST/PORT/PASSWORD`；切换配置不会自动搬运 SQLite 数据。本机默认 SQLite；`bootstrap.py --database` 只支持 SQLite 初始化。
 
-框架参考：[Django 自定义用户](https://docs.djangoproject.com/en/6.0/topics/auth/customizing/)、[数据库支持](https://docs.djangoproject.com/en/6.0/ref/databases/)。
+本次范围为本地开发。生产配置需启用 `PRIMARY_PRODUCTION=1`、关闭 DEBUG，并设置独立密钥、主机与 CSRF 域名，使用正式应用服务和 HTTPS 代理。开发服务器仅监听回环地址。

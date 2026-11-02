@@ -30,8 +30,10 @@ class PublicationTests(TestCase):
         self.assertEqual(self.client.get('/api/v1/lexicon/').json()['total'], 0)
         review_objects(LexicalEntry.objects.all(), publish=True)
         review_objects(Sense.objects.all(), publish=True)
+        self.assertEqual(self.client.get('/api/v1/lexicon/').json()['total'], 0)
         self.assertEqual(self.client.get(path).status_code, 404)
         activate_release(self.release.pk, expected_current='', reason='内部启用')
+        self.assertEqual(self.client.get('/api/v1/lexicon/').json()['total'], 0)
         self.assertEqual(self.client.get(path).status_code, 404)
         allow_public(self.source)
         response = self.client.get(path)
@@ -49,10 +51,30 @@ class PublicationTests(TestCase):
             self.source.refresh_from_db()
             setattr(self.source, field, False)
             self.source.save(update_fields=[field])
+            self.assertEqual(self.client.get('/api/v1/lexicon/').json()['total'], 0)
             self.assertEqual(self.client.get('/api/v1/lexicon/?q=ban').json()['total'], 0)
             self.assertEqual(self.client.get(f'/api/v1/lexicon/{self.entry.pk}/').status_code, 404)
             setattr(self.source, field, True)
             self.source.save(update_fields=[field])
+
+    def test_browse_tracks_release_removal_and_rollback(self):
+        self.publish()
+        second, _ = stage_manifest(manifest([row(key='river', word='river', meaning='河流')], version='v2'))
+        review_objects(LexicalEntry.objects.all(), publish=True)
+        review_objects(Sense.objects.all(), publish=True)
+        # 暂存的新词不应提前出现在浏览列表。
+        self.assertEqual([r['headword'] for r in self.client.get('/api/v1/lexicon/').json()['results']], ['bank'])
+        activate_release(second.pk, expected_current=self.release.pk, reason='切换到仅含 river 的版本')
+        self.assertEqual([r['headword'] for r in self.client.get('/api/v1/lexicon/').json()['results']], ['river'])
+        activate_release(self.release.pk, expected_current=second.pk, reason='回退')
+        self.assertEqual([r['headword'] for r in self.client.get('/api/v1/lexicon/').json()['results']], ['bank'])
+
+    def test_browse_does_not_list_words_without_a_displayable_definition(self):
+        second, _ = stage_manifest(manifest([row(meaning='无')], version='v2'))
+        self.publish()
+        activate_release(second.pk, expected_current=self.release.pk, reason='来源不再提供释义')
+        self.assertEqual(self.client.get('/api/v1/lexicon/').json()['total'], 0)
+        self.assertEqual(self.client.get(f'/api/v1/lexicon/{self.entry.pk}/').status_code, 404)
 
     def test_unreviewed_reading_is_not_public_and_revision_requires_review(self):
         self.publish()

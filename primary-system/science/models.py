@@ -1,0 +1,25 @@
+from django.db import models
+
+
+class Element(models.Model):
+    number = models.PositiveIntegerField(primary_key=True)
+    symbol = models.CharField(max_length=8, db_index=True)
+    name = models.CharField(max_length=80, db_index=True)
+    chinese_name = models.CharField(max_length=20, blank=True, db_index=True)
+    category = models.CharField(max_length=80, db_index=True)
+    category_zh = models.CharField(max_length=80)
+    phase = models.CharField(max_length=30)
+    phase_zh = models.CharField(max_length=30)
+    period = models.PositiveIntegerField(null=True)
+    group = models.PositiveIntegerField(null=True)
+    atomic_mass = models.FloatField(null=True)
+    density_original = models.FloatField(null=True)
+    density_unit = models.CharField(max_length=40, blank=True)
+    density_g_cm3 = models.FloatField(null=True)
+    melt_k = models.FloatField(null=True)
+    boil_k = models.FloatField(null=True)
+    summary_en = models.TextField(blank=True)
+    raw = models.JSONField()
+    valid = models.BooleanField(default=True, db_index=True)
+    source_checksum = models.CharField(max_length=64)
+    source_locator = models.CharField(max_length=200)

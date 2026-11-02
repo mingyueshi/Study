@@ -4,6 +4,29 @@ import django.db.models.deletion
 from django.db import migrations, models
 
 
+def move_collections(apps, schema_editor):
+    """Copy book metadata before dropping Collection, retaining every Unit and content identity."""
+    alias = schema_editor.connection.alias
+    Collection = apps.get_model('catalog', 'Collection')
+    TextbookBook = apps.get_model('catalog', 'TextbookBook')
+    TopicBook = apps.get_model('catalog', 'TopicBook')
+    Unit = apps.get_model('catalog', 'Unit')
+    duplicates = Collection.objects.using(alias).exclude(textbook_id=None).values('textbook_id').annotate(
+        total=models.Count('pk')).filter(total__gt=1)
+    if duplicates.exists():
+        raise RuntimeError('同一教材存在多本旧学习册，请先核对编排；迁移未删除旧数据。')
+    for collection in Collection.objects.using(alias).all().iterator():
+        values = {field: getattr(collection, field) for field in
+                  ('code', 'name', 'order', 'description', 'is_published', 'module_id')}
+        if collection.textbook_id is not None:
+            book = TextbookBook.objects.using(alias).create(**values, textbook_id=collection.textbook_id)
+            Unit.objects.using(alias).filter(collection_id=collection.pk).update(textbook_book_id=book.pk)
+        else:
+            book = TopicBook.objects.using(alias).create(**values)
+            book.grades.set(collection.grades.using(alias).all())
+            Unit.objects.using(alias).filter(collection_id=collection.pk).update(topic_book_id=book.pk)
+
+
 class Migration(migrations.Migration):
 
     dependencies = [
@@ -45,18 +68,6 @@ class Migration(migrations.Migration):
                 'abstract': False,
             },
         ),
-        migrations.RemoveField(
-            model_name='collection',
-            name='grades',
-        ),
-        migrations.RemoveField(
-            model_name='collection',
-            name='module',
-        ),
-        migrations.RemoveField(
-            model_name='collection',
-            name='textbook',
-        ),
         migrations.RemoveConstraint(
             model_name='unit',
             name='unit_collection_code_unique',
@@ -90,6 +101,19 @@ class Migration(migrations.Migration):
             model_name='unit',
             name='topic_book',
             field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.PROTECT, related_name='units', to='catalog.topicbook', verbose_name='主题探索册'),
+        ),
+        migrations.RunPython(move_collections),
+        migrations.RemoveField(
+            model_name='collection',
+            name='grades',
+        ),
+        migrations.RemoveField(
+            model_name='collection',
+            name='module',
+        ),
+        migrations.RemoveField(
+            model_name='collection',
+            name='textbook',
         ),
         migrations.AddConstraint(
             model_name='unit',

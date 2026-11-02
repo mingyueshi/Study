@@ -216,7 +216,7 @@ class FormAdmin(ReadOnlyAdmin):
 
 
 @admin.register(ContentEntryLink)
-class LinkAdmin(NoDeleteAdmin):
+class LinkAdmin(ReadOnlyAdmin):
     list_display = ('content', 'sense', 'method', 'source_state')
     list_select_related = ('content', 'sense__entry', 'evidence__release__source', 'evidence__binding')
     list_filter = ('method', 'evidence__release__source')
@@ -330,3 +330,15 @@ class AuditAdmin(ReadOnlyAdmin):
     list_filter = ('action', 'source')
     search_fields = ('reason',)
     list_select_related = ('source', 'actor')
+
+
+from .models import ChineseSenseVersion, ChineseReview, ContentLinkSelection
+
+@admin.register(ChineseSenseVersion)
+class ChineseVersionAdmin(ReadOnlyAdmin):
+    list_display = ('sense', 'kind', 'text', 'learning_effect', 'status', 'review_revision')
+    search_fields = ('text', 'sense__entry__headword')
+    list_filter = ('status', 'kind', 'learning_effect')
+
+admin.site.register(ChineseReview, ReadOnlyAdmin)
+admin.site.register(ContentLinkSelection, ReadOnlyAdmin)

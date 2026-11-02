@@ -19,6 +19,8 @@
 .play-btn { min-height: 50px; padding: 10px 18px; border: none; border-radius: 14px; background: var(--w-accent); color: #fff; font-weight: 800; font-size: 15px; cursor: pointer; }
 .play-btn:active { transform: translateY(2px); }
 .play-btn[hidden] { display: none; }
+.words-feedback { min-height: 1.6em; margin: 0 0 12px; color: #187451; font-size: 16px; }
+.words-feedback.error { color: #a3332a; }
 
 .unit-head { margin: 4px 0 16px; }
 .unit-emoji { font-size: 34px; }
