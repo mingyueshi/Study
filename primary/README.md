@@ -256,6 +256,8 @@
 
 - `fig` 引用 `history-figures.js` 里注册的图示 id（如 `history-oracle`、`demo-history-timeline`），不需要插图就删掉这一行；
 - 速查按 `[名称, 内容]` 成对填写；小诊所每条包含 `unit`（长廊名）、`wrong`（错误说法）、`right`（正确说法）；
+- 知识点小照片与长廊横幅照片在 `history-photos.js` 里按知识点 id（如 `hu1-1`）和长廊 id 配置，照片文件放在 `images/history/`；
+- 历史小影院的片单在 `history-videos.js` 里维护（B站视频，点封面在线播放，需联网）；
 - 字符串里请用中文标点（「」、，、：），不要用英文双引号和换行（测试会拦截）。修改后运行 `node test/test-history.js`。
 
 ### 文学常识（lit-data.js）
@@ -369,7 +371,9 @@ primary/
 ├── astro.css               天文探索专属样式
 ├── history.html            历史长廊入口（小学历史启蒙 · 八大长廊）
 ├── history-data.js         8 长廊 37 知识点 + 速查 + 易错（家长改这里）
-├── history-figures.js      历史图示库（SVG 插图 + 朝代长河互动演示）
+├── history-figures.js      历史图示库（SVG 插图 + 朝代长河互动演示，含动画）
+├── history-photos.js       历史配图库（长廊横幅 + 知识点「文物真面目」小照片）
+├── history-videos.js       历史小影院（B站视频清单，点封面在线看）
 ├── history-app.js          历史长廊逻辑
 ├── history.css             历史长廊专属样式
 ├── lit.html                文学常识入口（小学文学启蒙 · 八大文学苑）

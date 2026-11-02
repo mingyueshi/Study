@@ -142,6 +142,13 @@ const HistoryFigures = (() => {
       s += `<rect x="${x - 17}" y="${y - 43}" width="8" height="9" fill="#857c6c"/><rect x="${x - 4}" y="${y - 43}" width="8" height="9" fill="#857c6c"/><rect x="${x + 9}" y="${y - 43}" width="8" height="9" fill="#857c6c"/>`;
       s += `<rect x="${x - 4}" y="${y - 18}" width="8" height="11" fill="#6b6252"/>`;
     });
+    /* 烽烟：左边的烽火台升起袅袅狼烟 */
+    s += `<g fill="#b9b2a4" opacity=".8">` +
+      [0, .8, 1.6].map(d =>
+        `<circle cx="90" cy="66" r="3.5"><animate attributeName="cy" values="66;26" dur="2.4s" begin="${d}s" repeatCount="indefinite"/>` +
+        `<animate attributeName="opacity" values=".8;0" dur="2.4s" begin="${d}s" repeatCount="indefinite"/>` +
+        `<animate attributeName="cx" values="90;96" dur="2.4s" begin="${d}s" repeatCount="indefinite"/></circle>`).join('') +
+      `</g>`;
     s += txt(300, 34, '烽火台：白天冒烟、晚上点火，一站传一站', { fs: 12.5, fill: MUT });
     s += arrow(300, 40, 300, 56, MUT);
     s += txt(475, 66, '垛口', { fs: 12.5, fill: MUT });
@@ -154,14 +161,16 @@ const HistoryFigures = (() => {
     let s = `<svg class="fig-svg" viewBox="0 0 640 200">`;
     /* 群山 */
     s += `<path d="M336,100 L352,72 L368,100 Z" fill="#cfc8ba"/><path d="M360,102 L378,68 L396,102 Z" fill="#c2bba9"/>`;
-    /* 路线 */
-    s += `<path d="M70,150 C160,138 200,124 260,114 S400,84 570,58" fill="none" stroke="${GOLD}" stroke-width="3" stroke-dasharray="8 6"/>`;
-    /* 骆驼 */
-    s += `<g stroke="#a3722e" stroke-width="3" fill="none" stroke-linecap="round">` +
+    /* 路线：虚线缓缓流动，像驼队在赶路 */
+    s += `<path d="M70,150 C160,138 200,124 260,114 S400,84 570,58" fill="none" stroke="${GOLD}" stroke-width="3" stroke-dasharray="8 6">` +
+      `<animate attributeName="stroke-dashoffset" from="28" to="0" dur="1.6s" repeatCount="indefinite"/></path>`;
+    /* 骆驼：轻轻上下颠簸 */
+    s += `<g><animateTransform attributeName="transform" type="translate" values="0 0; 0 -2.5; 0 0" dur="1.5s" repeatCount="indefinite"/>` +
+      `<g stroke="#a3722e" stroke-width="3" fill="none" stroke-linecap="round">` +
       `<line x1="236" y1="146" x2="236" y2="158"/><line x1="242" y1="146" x2="242" y2="158"/><line x1="250" y1="146" x2="250" y2="158"/><line x1="256" y1="146" x2="256" y2="158"/>` +
       `<path d="M234,140 Q238,128 244,138 Q249,128 256,140"/></g>`;
     s += `<ellipse cx="246" cy="140" rx="16" ry="7" fill="#c98a3d"/>`;
-    s += `<path d="M259,138 Q266,128 264,118" fill="none" stroke="#c98a3d" stroke-width="4" stroke-linecap="round"/><circle cx="264" cy="116" r="4" fill="#c98a3d"/>`;
+    s += `<path d="M259,138 Q266,128 264,118" fill="none" stroke="#c98a3d" stroke-width="4" stroke-linecap="round"/><circle cx="264" cy="116" r="4" fill="#c98a3d"/></g>`;
     /* 站点 */
     [[70, 150, '长安', '（今西安）'], [190, 128, '河西走廊', ''], [310, 104, '西域·今新疆', ''], [430, 82, '中亚', ''], [570, 58, '大秦·古罗马', '']].forEach((p, i) => {
       s += `<circle cx="${p[0]}" cy="${p[1]}" r="6" fill="${GOLD}" stroke="#fff" stroke-width="2"/>`;
@@ -213,14 +222,19 @@ const HistoryFigures = (() => {
       s += txt(52, y + 4, name, { anchor: 'end', fs: 12, fill: SEA });
     });
     /* 运河四段 */
-    s += `<path d="M300,92 C300,70 305,48 308,30" fill="none" stroke="#4d96ff" stroke-width="4.5"/>`;
-    s += `<path d="M300,92 C320,100 330,106 338,112" fill="none" stroke="#4d96ff" stroke-width="4.5"/>`;
-    s += `<path d="M338,112 C342,124 344,134 346,145" fill="none" stroke="#4d96ff" stroke-width="4.5"/>`;
-    s += `<path d="M346,145 C352,158 360,172 368,185" fill="none" stroke="#4d96ff" stroke-width="4.5"/>`;
-    s += txt(314, 58, '永济渠', { anchor: 'start', fs: 12, fill: '#4d96ff' });
-    s += txt(312, 110, '通济渠', { anchor: 'start', fs: 12, fill: '#4d96ff' });
-    s += txt(350, 130, '邗沟', { anchor: 'start', fs: 12, fill: '#4d96ff' });
-    s += txt(320, 168, '江南河', { anchor: 'start', fs: 12, fill: '#4d96ff' });
+    const canalSegs = [
+      ['M300,92 C300,70 305,48 308,30', '永济渠', 314, 58],
+      ['M300,92 C320,100 330,106 338,112', '通济渠', 312, 110],
+      ['M338,112 C342,124 344,134 346,145', '邗沟', 350, 130],
+      ['M346,145 C352,158 360,172 368,185', '江南河', 320, 168],
+    ];
+    canalSegs.forEach(([d, name, lx, ly]) => {
+      s += `<path d="${d}" fill="none" stroke="#4d96ff" stroke-width="4.5"/>`;
+      /* 水流：亮色虚线向前跑，表示运河在流动 */
+      s += `<path d="${d}" fill="none" stroke="#eaf6ff" stroke-width="1.8" stroke-linecap="round" stroke-dasharray="5 9">` +
+        `<animate attributeName="stroke-dashoffset" from="28" to="0" dur="1.2s" repeatCount="indefinite"/></path>`;
+      s += txt(lx, ly, name, { anchor: 'start', fs: 12, fill: '#4d96ff' });
+    });
     /* 城市 */
     s += `<circle cx="308" cy="28" r="5.5" fill="${RED}" stroke="#fff" stroke-width="2"/>`;
     s += `<circle cx="300" cy="92" r="6.5" fill="${RED}" stroke="#fff" stroke-width="2"/>`;
@@ -253,6 +267,13 @@ const HistoryFigures = (() => {
       if (i < 3) s += arrow(st.x + 138, st.y + 30, st.x + 158, st.y + 12, MUT);
     });
     s += txt(495, 32, '★ 金榜题名', { fs: 14, fill: GOLD, anchor: 'start' });
+    /* 小书生一级一级往上走 */
+    s += `<text font-size="21" text-anchor="middle">🚶` +
+      `<animate attributeName="x" values="105;235;365;495" calcMode="discrete" dur="4.8s" repeatCount="indefinite"/>` +
+      `<animate attributeName="y" values="124;94;64;34" calcMode="discrete" dur="4.8s" repeatCount="indefinite"/></text>` +
+      `<circle cx="495" cy="44" r="5" fill="${GOLD}" opacity=".85">` +
+      `<animate attributeName="r" values="4;7;4" dur="1.6s" repeatCount="indefinite"/>` +
+      `<animate attributeName="opacity" values=".85;.3;.85" dur="1.6s" repeatCount="indefinite"/></circle>`;
     s += txt(320, 192, '「朝为田舍郎，暮登天子堂」——科举让平民也能凭才学做官', { fs: 13, fill: MUT });
     return s + '</svg>';
   };
@@ -270,11 +291,14 @@ const HistoryFigures = (() => {
     let s = `<svg class="fig-svg" viewBox="0 0 640 200">`;
     cards.forEach((c, i) => {
       const x = 20 + (i % 2) * 302, y = 16 + Math.floor(i / 2) * 88;
+      /* 每张卡轻轻浮动，错开节奏 */
+      s += `<g><animateTransform attributeName="transform" type="translate" values="0 0; 0 -3; 0 0" dur="2.6s" begin="${(i * 0.4).toFixed(1)}s" repeatCount="indefinite"/>`;
       s += `<rect x="${x}" y="${y}" width="298" height="76" rx="14" fill="#fafbfe" stroke="#e3e7f2" stroke-width="1.5"/>`;
       s += `<rect x="${x}" y="${y}" width="6" height="76" rx="3" fill="${c.color}"/>`;
       s += txt(x + 40, y + 50, c.emoji, { fs: 30 });
       s += txt(x + 72, y + 34, c.title, { anchor: 'start', fs: 16.5, fw: 900 });
       s += txt(x + 72, y + 58, c.sub, { anchor: 'start', fs: 12.5, fill: MUT });
+      s += `</g>`;
     });
     s += txt(320, 194, '四大发明先后传向世界，推动了人类文明的发展', { fs: 13, fill: MUT });
     return s + '</svg>';
@@ -284,8 +308,13 @@ const HistoryFigures = (() => {
   const zhenghe = () => {
     let s = `<svg class="fig-svg" viewBox="0 0 640 212">`;
     s += `<rect x="0" y="150" width="640" height="62" fill="#d9edf8"/>`;
-    s += `<path d="M0,168 q20,-6 40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0" fill="none" stroke="#b7dcef" stroke-width="2.5"/>`;
-    /* 郑和宝船 */
+    /* 两层海浪：向左缓缓漂移（波峰周期 40px，循环无缝） */
+    s += `<path d="M0,168 q20,-6 40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0" fill="none" stroke="#b7dcef" stroke-width="2.5">` +
+      `<animateTransform attributeName="transform" type="translate" values="0 0; -40 0" dur="2.2s" repeatCount="indefinite"/></path>`;
+    s += `<path d="M0,182 q20,-5 40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0" fill="none" stroke="#c9e6f5" stroke-width="2">` +
+      `<animateTransform attributeName="transform" type="translate" values="-40 0; 0 0" dur="2.8s" repeatCount="indefinite"/></path>`;
+    /* 郑和宝船：随浪轻轻起伏 */
+    s += `<g><animateTransform attributeName="transform" type="translate" values="0 0; 0 -2.5; 0 0" dur="3s" repeatCount="indefinite"/>`;
     s += `<path d="M60,150 L330,150 L316,172 Q195,184 74,172 Z" fill="#8a5a2b" stroke="#6d4520" stroke-width="2.5"/>`;
     [120, 195, 270].forEach(x => {
       s += `<line x1="${x}" y1="150" x2="${x}" y2="68" stroke="#6d4520" stroke-width="4"/>`;
@@ -294,13 +323,16 @@ const HistoryFigures = (() => {
       s += `<line x1="${x - 26}" y1="93" x2="${x + 26}" y2="93" stroke="#c9b98a" stroke-width="1.5"/><line x1="${x - 22}" y1="129" x2="${x + 22}" y2="129" stroke="#c9b98a" stroke-width="1.5"/>`;
     });
     s += `<path d="M120,68 L140,72 L120,77 Z" fill="#c8442e"/>`;
-    /* 哥伦布旗舰（小很多） */
+    s += `</g>`;
+    /* 哥伦布旗舰（小很多）：起伏节奏错开 */
+    s += `<g><animateTransform attributeName="transform" type="translate" values="0 0; 0 2; 0 0" dur="2.6s" repeatCount="indefinite"/>`;
     s += `<path d="M420,150 L540,150 L530,166 Q480,172 430,166 Z" fill="#94663c" stroke="#7a5230" stroke-width="2"/>`;
     [[455, 100], [505, 92]].forEach(([x, top]) => {
       s += `<line x1="${x}" y1="150" x2="${x}" y2="${top}" stroke="#7a5230" stroke-width="3"/>`;
       s += `<rect x="${x - 13}" y="${top + 4}" width="26" height="26" rx="2" fill="#f3e6c8" stroke="#c9b98a" stroke-width="1.5"/>`;
     });
     s += `<path d="M455,100 L469,103 L455,107 Z" fill="#c8442e"/>`;
+    s += `</g>`;
     /* 说明 */
     s += txt(195, 40, '郑和宝船（1405 年）', { fs: 14.5, fw: 900 });
     s += txt(195, 58, '长约 150 米 · 两百多艘 · 两万七千多人', { fs: 12, fill: MUT });
@@ -377,9 +409,10 @@ const HistoryFigures = (() => {
     /* 堤坝 */
     s += `<rect x="50" y="120" width="220" height="14" fill="#a89e8c" stroke="#857c6c" stroke-width="2"/>`;
     for (let i = 0; i < 6; i++) s += `<rect x="${60 + i * 36}" y="108" width="22" height="14" fill="#857c6c"/>`;
-    /* 水涨高 */
+    /* 水越堵越高：上层水面轻轻晃动 */
     s += `<path d="M50,120 Q90,110 130,120 T210,120 T270,120 L270,100 Q230,90 190,100 T110,100 T50,100 Z" fill="#9cc8e8" opacity=".85"/>`;
-    s += `<path d="M50,100 Q90,90 130,100 T210,100 T270,100 L270,80 Q230,72 190,80 T110,80 T50,80 Z" fill="#7fb6dd" opacity=".8"/>`;
+    s += `<path d="M50,100 Q90,90 130,100 T210,100 T270,100 L270,80 Q230,72 190,80 T110,80 T50,80 Z" fill="#7fb6dd" opacity=".8">` +
+      `<animate attributeName="opacity" values=".8;.5;.8" dur="1.8s" repeatCount="indefinite"/></path>`;
     s += txt(160, 70, '水越堵越高', { fs: 13, fill: '#a4453f', fw: 700 });
     /* 右：禹用疏导 */
     s += `<rect x="340" y="20" width="280" height="150" rx="14" fill="#e9f9f0" stroke="#bfe5cc" stroke-width="1.5"/>`;
@@ -387,7 +420,8 @@ const HistoryFigures = (() => {
     /* 河道 */
     s += `<path d="M360,130 Q400,110 440,130 T520,130 T600,130" fill="none" stroke="#4d96ff" stroke-width="10" stroke-linecap="round"/>`;
     s += `<path d="M360,130 Q400,110 440,130 T520,130 T600,130" fill="none" stroke="#7fb6dd" stroke-width="5" stroke-linecap="round"/>`;
-    s += `<path d="M360,130 Q400,110 440,130 T520,130 T600,130" fill="none" stroke="#bfe0f5" stroke-width="2" stroke-linecap="round" stroke-dasharray="6 8"/>`;
+    s += `<path d="M360,130 Q400,110 440,130 T520,130 T600,130" fill="none" stroke="#bfe0f5" stroke-width="2" stroke-linecap="round" stroke-dasharray="6 8">` +
+      `<animate attributeName="stroke-dashoffset" from="28" to="0" dur="1.1s" repeatCount="indefinite"/></path>`;
     /* 流向海的箭头 */
     s += arrow(560, 110, 596, 110, '#2a7a52');
     s += txt(580, 98, '海', { fs: 14, fw: 900, fill: '#187749' });
@@ -436,6 +470,11 @@ const HistoryFigures = (() => {
     s += txt(300, 130, '内江（灌溉）', { fs: 11.5, fill: '#2a7a52' });
     s += arrow(120, 118, 200, 118, '#2f6fa3');
     s += arrow(300, 118, 420, 118, '#2a7a52');
+    /* 流动的水珠：从鱼嘴经内江流向宝瓶口 */
+    s += `<g fill="#7fc4ee">` +
+      [0, .9, 1.8].map(d =>
+        `<circle r="4" cx="0" cy="0"><animateMotion path="M262,102 Q340,98 420,100 Q466,100 500,106" dur="2.7s" begin="${d}s" repeatCount="indefinite"/></circle>`).join('') +
+      `</g>`;
     /* 飞沙堰 */
     s += `<rect x="340" y="100" width="70" height="10" rx="3" fill="#c98a3d" stroke="#a3722e" stroke-width="2"/>`;
     s += txt(375, 92, '飞沙堰', { fs: 11.5, fw: 700, fill: '#a3722e' });
@@ -494,6 +533,9 @@ const HistoryFigures = (() => {
       s += txt(x + 69, 114, st.sub, { fs: 11, fill: MUT });
       if (i < 3) s += arrow(x + 140, 80, x + 150, 80, st.color);
     });
+    /* 巡回高亮框：按 原料→舂捣→抄纸→晾晒 顺序逐个点亮 */
+    s += `<rect x="20" y="20" width="138" height="120" rx="14" fill="none" stroke="${GOLD}" stroke-width="3" opacity=".9">` +
+      `<animate attributeName="x" values="20;174;328;482" calcMode="discrete" dur="4.8s" repeatCount="indefinite"/></rect>`;
     s += txt(320, 166, '蔡伦造纸（105 年）：又轻又便宜，取代竹简和丝帛', { fs: 14, fill: MUT, fw: 700 });
     s += txt(320, 188, '造纸术外传阿拉伯、欧洲，推动世界文化传播', { fs: 12, fill: MUT });
     return s + '</svg>';
@@ -683,6 +725,7 @@ const HistoryFigures = (() => {
     return s + '</svg>' +
       `<div class="fig-ctrl">` +
       keys.map(k => `<button class="fig-btn" data-fig-act="history-dynasty" data-v="${k}">${DYN[k].name}</button>`).join('') +
+      `<button class="fig-btn fig-primary" data-fig-act="history-dynasty-play">▶ 自动播放</button>` +
       `</div>`;
   };
   function dynastyApply(fig, key, btn) {
@@ -697,6 +740,30 @@ const HistoryFigures = (() => {
       r.setAttribute('stroke-width', on ? 3.5 : 2);
     });
     fig.querySelectorAll('[data-fig-act="history-dynasty"]').forEach(b => b.classList.toggle('fig-on', b === btn));
+  }
+
+  /* 自动播放：像放小电影一样，从夏讲到清 */
+  let autoTimer = null;
+  function dynastyAuto(fig, btn) {
+    const stop = () => {
+      if (autoTimer) { clearInterval(autoTimer); autoTimer = null; }
+      delete fig.dataset.auto;
+      if (btn) btn.textContent = '▶ 自动播放';
+    };
+    if (fig.dataset.auto) { stop(); return; }
+    fig.dataset.auto = '1';
+    if (btn) btn.textContent = '⏸ 暂停';
+    const keys = Object.keys(DYN);
+    let i = 0;
+    const step = () => {
+      const k = keys[i];
+      dynastyApply(fig, k, fig.querySelector('[data-fig-act="history-dynasty"][data-v="' + k + '"]'));
+      if (window.SpeechKit) SpeechKit.speak(DYN[k].name + '，' + DYN[k].years + '。' + DYN[k].note, { rate: 0.9 });
+      i++;
+      if (i >= keys.length) stop();
+    };
+    step();
+    autoTimer = setInterval(step, 3200);
   }
 
   /* ---------- 注册表 ---------- */
@@ -728,7 +795,7 @@ const HistoryFigures = (() => {
   };
 
   const DEFAULT_CAPS = {
-    'demo-history-timeline': '互动演示：点一个朝代，看它的起讫年代和代表大事',
+    'demo-history-timeline': '互动演示：点一个朝代看年代大事，或点「自动播放」从夏讲到清',
     'history-oracle': '甲骨文对照：三千年前的字，今天还认得出',
     'history-bronze': '后母戊鼎：我国出土最重的青铜器，重约 832.84 千克',
     'history-sages': '诸子百家：儒、道、墨、法各开一剂药方',
@@ -791,7 +858,18 @@ const HistoryFigures = (() => {
       const fig = b.closest('.fig');
       if (!fig) return;
       const act = b.dataset.figAct;
-      if (act === 'history-dynasty') dynastyApply(fig, b.dataset.v, b);
+      if (act === 'history-dynasty') {
+        /* 手动点击时停掉自动播放 */
+        const fig0 = b.closest('.fig');
+        if (fig0 && fig0.dataset.auto) {
+          if (autoTimer) { clearInterval(autoTimer); autoTimer = null; }
+          delete fig0.dataset.auto;
+          const pb = fig0.querySelector('[data-fig-act="history-dynasty-play"]');
+          if (pb) pb.textContent = '▶ 自动播放';
+        }
+        dynastyApply(fig, b.dataset.v, b);
+      }
+      else if (act === 'history-dynasty-play') dynastyAuto(fig, b);
     });
   }
 

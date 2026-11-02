@@ -1,7 +1,8 @@
 /* ============================================================
    乐学堂 · 历史长廊 —— 界面逻辑
-   长廊切换 / 知识点卡（要点·想一想·易错·口诀）/ 历史速查 / 历史小诊所
-   搜索 / 点读 / 已掌握标记 / 打印
+   长廊切换 / 知识点卡（要点·想一想·易错·口诀）/ 历史速查 /
+   历史小影院（B站点播）/ 历史小诊所
+   搜索 / 点读 / 已掌握标记 / 撒花 / 滚动渐现 / 进度条 / 打印
    ============================================================ */
 'use strict';
 
@@ -21,8 +22,17 @@ HIS.units.forEach(u => { HUNIT_BY_ID[u.id] = u; });
 const TOTAL_POINTS = HIS.units.reduce((n, u) => n + u.points.length, 0);
 const HEXTRA_VIEWS = [
   { id: 'facts', name: '历史速查', emoji: '🗂️', color: '#b5893a', count: HIS.facts.reduce((n, f) => n + f.items.length, 0) },
+  { id: 'cinema', name: '历史小影院', emoji: '🎬', color: '#2f6fb3', count: (window.HISTORY_VIDEOS && HISTORY_VIDEOS.list.length) || 0 },
   { id: 'clinic', name: '历史小诊所', emoji: '🩺', color: '#c2557d', count: HIS.mistakes.length },
 ];
+
+/* ---------- 配图（单元横幅 + 知识点小照片） ---------- */
+function hbanner(id) {
+  return (window.HISTORY_PHOTOS && HISTORY_PHOTOS.banner(id)) || '';
+}
+function hpointPhoto(pid) {
+  return (window.HISTORY_PHOTOS && HISTORY_PHOTOS.point(pid)) || null;
+}
 
 let curView = HUNIT_BY_ID[hkState.last] ? hkState.last : 'hu1';
 let query = '';
@@ -82,7 +92,16 @@ function pointCard(u, p) {
   parts.push('<div class="khead"><h3 class="ktitle">' + esc(p.title) + '</h3>' +
     '<span class="khead-gap"></span>' + sayBtn(p.title + '。' + p.overview) +
     '<button class="learn-btn' + (learned ? ' on' : '') + '" data-act="learn" data-unit="' + u.id + '" data-id="' + esc(p.id) + '" title="标记已掌握" aria-pressed="' + learned + '" aria-label="已掌握 ' + esc(p.title) + '">' + (learned ? '✓' : '') + '</button></div>');
-  parts.push('<p class="k-overview">' + esc(p.overview) + '</p>');
+  /* 概述 + 「文物真面目」实景小照片 */
+  const pp = hpointPhoto(p.id);
+  if (pp) {
+    parts.push('<div class="k-overview has-photo">' +
+      '<img class="ov-photo" src="' + pp.img + '" alt="" loading="lazy" onerror="this.style.display=\'none\'">' +
+      '<div class="ov-txt"><div class="ov-main">' + esc(p.overview) + '</div>' +
+      '<div class="ov-life">🏛️ ' + esc(pp.life) + '</div></div></div>');
+  } else {
+    parts.push('<p class="k-overview">' + esc(p.overview) + '</p>');
+  }
   if (p.fig && window.HistoryFigures) parts.push(HistoryFigures.figHTML(p.fig));
   if (p.photo && window.HistoryFigures) {
     const photos = Array.isArray(p.photo) ? p.photo : [p.photo];
@@ -90,18 +109,18 @@ function pointCard(u, p) {
   }
 
   if (p.items && p.items.length) {
-    parts.push(msec('纲', '<ul class="klist">' + p.items.map(m =>
+    parts.push(msec('📖 要点', '<ul class="klist">' + p.items.map(m =>
       '<li><button class="kli" data-act="say" data-t="' + esc(m) + '">' + esc(m) + '</button></li>').join('') + '</ul>'));
   }
   if (p.example) {
-    parts.push(msec('想', '<div class="mex">' +
+    parts.push(msec('🤔 想一想', '<div class="mex">' +
       '<button class="mex-q" data-act="say" data-t="' + esc(p.example.q) + '">📌 ' + esc(p.example.q) + '</button>' +
       '<button class="mex-steps" data-act="say" data-t="' + esc(p.example.steps) + '">' + esc(p.example.steps) + '</button>' +
       '<button class="mex-a" data-act="say" data-t="' + esc(p.example.a) + '">✅ ' + esc(p.example.a) + '</button>' +
       '</div>'));
   }
   if (p.mistakes && p.mistakes.length) {
-    parts.push(msec('错', '<ul class="klist mis">' + p.mistakes.map(m =>
+    parts.push(msec('⚠️ 易错', '<ul class="klist mis">' + p.mistakes.map(m =>
       '<li><button class="kli" data-act="say" data-t="' + esc(m) + '">⚠️ ' + esc(m) + '</button></li>').join('') + '</ul>'));
   }
   if (p.recall) {
@@ -112,7 +131,9 @@ function pointCard(u, p) {
 }
 
 function renderUnit(u) {
-  return '<div class="unit-head" style="--c:' + u.color + '">' +
+  const photo = hbanner(u.id);
+  return '<div class="unit-head' + (photo ? ' has-photo' : '') + '" style="--c:' + u.color +
+    (photo ? ';background-image:url(' + photo + ')' : '') + '">' +
     '<span class="unit-emoji">' + u.emoji + '</span>' +
     '<div><h1>' + esc(u.no) + ' · ' + esc(u.name) + '</h1>' +
     '<p>' + esc(u.intro) + '</p>' +
@@ -130,15 +151,62 @@ function factCard(f) {
 }
 
 function renderFacts() {
-  return '<div class="unit-head" style="--c:#b5893a">' +
+  const photo = hbanner('facts');
+  return '<div class="unit-head' + (photo ? ' has-photo' : '') + '" style="--c:#b5893a' +
+    (photo ? ';background-image:url(' + photo + ')' : '') + '">' +
     '<span class="unit-emoji">🗂️</span><div><h1>历史速查</h1>' +
     '<p>' + HIS.facts.length + ' 组 · 点一行读一行</p></div></div>' +
     HIS.facts.map(factCard).join('');
 }
 
+/* ---------- 历史小影院 ---------- */
+function durText(sec) {
+  const m = Math.round(sec / 60);
+  return m >= 60 ? Math.floor(m / 60) + ' 小时 ' + (m % 60) + ' 分' : m + ' 分钟';
+}
+
+function vidScreen(v) {
+  return '<button class="vid-screen" data-act="play-video" data-vid="' + esc(v.id) + '" aria-label="播放：' + esc(v.title) + '">' +
+    '<img class="vid-cover" src="' + esc(v.cover) + '" alt="" loading="lazy" onerror="this.style.opacity=\'0\'">' +
+    '<span class="vid-shade"></span><span class="vid-play">▶</span>' +
+    '<span class="vid-dur">⏱ ' + durText(v.dur) + '</span></button>';
+}
+
+function vidCard(v) {
+  return '<article class="vid-card" style="--c:' + (v.color || '#2f6fb3') + '">' +
+    vidScreen(v) +
+    '<div class="vid-meta"><h4>' + esc(v.title) + '</h4>' +
+    '<p>' + esc(v.up) + ' · ' + esc(v.note || '') + '</p>' +
+    '<a class="vid-link" href="https://www.bilibili.com/video/' + esc(v.bvid) + '" target="_blank" rel="noopener">↗ 去B站看高清</a></div>' +
+    '</article>';
+}
+
+function renderCinema() {
+  if (!window.HISTORY_VIDEOS || !HISTORY_VIDEOS.list.length) {
+    return '<div class="empty">🎬 视频整理中，先去别的长廊逛逛吧～</div>';
+  }
+  const photo = hbanner('cinema');
+  let s = '<div class="unit-head' + (photo ? ' has-photo' : '') + '" style="--c:#2f6fb3' +
+    (photo ? ';background-image:url(' + photo + ')' : '') + '">' +
+    '<span class="unit-emoji">🎬</span><div><h1>历史小影院</h1>' +
+    '<p>' + HISTORY_VIDEOS.list.length + ' 部好片 · 点封面在线看（需要联网），只挑适合小朋友的</p></div></div>';
+  HISTORY_VIDEOS.groups.forEach(g => {
+    const items = HISTORY_VIDEOS.list.filter(v => v.group === g.id);
+    if (!items.length) return;
+    s += '<h2 class="cinema-group">' + g.emoji + ' ' + esc(g.name) + '<span>' + esc(g.desc) + '</span></h2>' +
+      '<div class="vid-grid">' + items.map(vidCard).join('') + '</div>';
+  });
+  /* 打印时用片名清单代替视频卡片 */
+  s += '<ul class="cinema-print-list">' + HISTORY_VIDEOS.list.map(v =>
+    '<li>《' + esc(v.title) + '》— ' + esc(v.up) + '（' + durText(v.dur) + '，B站搜标题或 BV' + esc(v.bvid.replace(/^BV/, '')) + '）</li>').join('') + '</ul>';
+  return s;
+}
+
 /* ---------- 历史小诊所 ---------- */
 function renderClinic() {
-  return '<div class="unit-head" style="--c:#c2557d">' +
+  const photo = hbanner('clinic');
+  return '<div class="unit-head' + (photo ? ' has-photo' : '') + '" style="--c:#c2557d' +
+    (photo ? ';background-image:url(' + photo + ')' : '') + '">' +
     '<span class="unit-emoji">🩺</span><div><h1>历史小诊所</h1>' +
     '<p>考前把这张「错处清单」过一遍</p></div></div>' +
     '<div class="wgrid">' + HIS.mistakes.map(m =>
@@ -199,15 +267,69 @@ function renderMain() {
     return;
   }
   if (curView === 'facts') { box.innerHTML = renderFacts(); return; }
+  if (curView === 'cinema') { box.innerHTML = renderCinema(); return; }
   if (curView === 'clinic') { box.innerHTML = renderClinic(); return; }
   const u = hunitById(curView);
   box.innerHTML = u ? renderUnit(u) : '';
+}
+
+/* ---------- 滚动渐现：内容像画卷一样展开 ---------- */
+let revealIO = null;
+function setupReveal() {
+  const els = document.querySelectorAll('#cards .kcard, #cards .formula-card, #cards .mistake-card, #cards .vid-card, #cards .unit-head');
+  if (!('IntersectionObserver' in window)) {
+    els.forEach(el => el.classList.add('in-view'));
+    return;
+  }
+  if (revealIO) revealIO.disconnect();
+  revealIO = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (en.isIntersecting) {
+        en.target.classList.add('in-view');
+        revealIO.unobserve(en.target);
+      }
+    });
+  }, { rootMargin: '0px 0px -4% 0px', threshold: .04 });
+  els.forEach(el => {
+    el.classList.add('reveal');
+    revealIO.observe(el);
+  });
+}
+
+/* ---------- 顶部进度条 ---------- */
+function updateProgress() {
+  const bar = document.getElementById('progress-bar');
+  if (!bar) return;
+  const pct = TOTAL_POINTS ? Math.round(totalLearned() / TOTAL_POINTS * 100) : 0;
+  bar.style.width = pct + '%';
+}
+
+/* ---------- 掌握撒花 ---------- */
+function confettiBurst(x, y) {
+  const bits = ['⭐', '🎉', '✨', '🎊', '🏆'];
+  const colors = ['#f6b93b', '#e25563', '#2fbf71', '#2f9bd6', '#8b65c9'];
+  for (let i = 0; i < 18; i++) {
+    const s = document.createElement('span');
+    s.className = 'confetti';
+    s.textContent = i % 2 ? bits[i % bits.length] : '●';
+    if (!(i % 2)) s.style.color = colors[i % colors.length];
+    s.style.left = x + 'px';
+    s.style.top = y + 'px';
+    s.style.setProperty('--dx', (Math.random() * 220 - 110).toFixed(0) + 'px');
+    s.style.setProperty('--dy', (-70 - Math.random() * 150).toFixed(0) + 'px');
+    s.style.setProperty('--rot', (Math.random() * 340 - 170).toFixed(0) + 'deg');
+    s.style.animationDelay = (Math.random() * .12).toFixed(2) + 's';
+    document.body.appendChild(s);
+    setTimeout(() => s.remove(), 1200);
+  }
 }
 
 function render() {
   renderChips();
   renderMain();
   renderStats();
+  setupReveal();
+  updateProgress();
 }
 
 /* ---------- 交互 ---------- */
@@ -224,10 +346,37 @@ function selectView(id) {
 
 function toggleLearn(unitId, pointId) {
   const key = unitId + '-' + pointId;
-  if (hkState.learned[key]) delete hkState.learned[key];
-  else hkState.learned[key] = true;
+  const wasLearned = !!hkState.learned[key];
+  let cx = window.innerWidth / 2, cy = window.innerHeight / 3;
+  const btn = document.querySelector('[data-act="learn"][data-unit="' + unitId + '"][data-id="' + pointId + '"]');
+  if (btn) {
+    const r = btn.getBoundingClientRect();
+    cx = r.left + r.width / 2;
+    cy = r.top + r.height / 2;
+  }
+  if (wasLearned) delete hkState.learned[key];
+  else { hkState.learned[key] = true; confettiBurst(cx, cy); }
   hkSave();
   render();
+}
+
+function playVideo(id) {
+  const v = (window.HISTORY_VIDEOS && HISTORY_VIDEOS.byId(id)) || null;
+  const screen = document.querySelector('.vid-screen[data-vid="' + id + '"]');
+  if (!v || !screen || screen.dataset.playing) return;
+  screen.dataset.playing = '1';
+  screen.innerHTML = '<iframe class="vid-iframe" src="' + HISTORY_VIDEOS.embedUrl(v.bvid) +
+    '" scrolling="no" frameborder="0" allowfullscreen="true" title="' + esc(v.title) + '" allow="autoplay; fullscreen"></iframe>' +
+    '<span class="vid-close" title="收起视频">✕</span>';
+}
+
+function closeVideo(screen) {
+  const v = (window.HISTORY_VIDEOS && HISTORY_VIDEOS.byId(screen.dataset.vid)) || null;
+  if (!v || !screen) return;
+  delete screen.dataset.playing;
+  screen.innerHTML = '<img class="vid-cover" src="' + esc(v.cover) + '" alt="" loading="lazy" onerror="this.style.opacity=\'0\'">' +
+    '<span class="vid-shade"></span><span class="vid-play">▶</span>' +
+    '<span class="vid-dur">⏱ ' + durText(v.dur) + '</span>';
 }
 
 document.addEventListener('click', e => {
@@ -238,6 +387,11 @@ document.addEventListener('click', e => {
     if (act === 'say') { e.preventDefault(); speak(el.dataset.t); }
     else if (act === 'learn') { e.preventDefault(); toggleLearn(el.dataset.unit, el.dataset.id); }
     else if (act === 'unit') { e.preventDefault(); selectView(el.dataset.id); }
+    else if (act === 'play-video') {
+      e.preventDefault();
+      if (e.target.classList.contains('vid-close')) { closeVideo(el); return; }
+      playVideo(el.dataset.vid);
+    }
     else if (act === 'print') { e.preventDefault(); window.print(); }
     else if (act === 'home') { e.preventDefault(); window.location.href = 'index.html'; }
   } catch (err) {
@@ -260,7 +414,7 @@ window.HistoryExplore = {
   get query() { return query; },
   data: HIS,
   units: HIS.units,
-  render, selectView, toggleLearn, searchResults,
+  render, selectView, toggleLearn, searchResults, playVideo, renderCinema,
 };
 
 render();

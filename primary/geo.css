@@ -22,6 +22,45 @@
   font-size: 12.5px; font-weight: 700;
 }
 
+/* ---------- 站点头 · 实景照片横幅 ---------- */
+.study-page[data-subject="geo"] .unit-head.has-photo {
+  position: relative; overflow: hidden;
+  background-size: cover; background-position: center;
+  border-left: none; border-block: none; border-right: none;
+}
+.study-page[data-subject="geo"] .unit-head.has-photo::before {
+  content: ''; position: absolute; inset: 0; z-index: 0;
+  background: linear-gradient(102deg, rgba(16, 42, 38, .88) 0%, rgba(16, 42, 38, .6) 48%, rgba(16, 42, 38, .28) 100%);
+}
+.study-page[data-subject="geo"] .unit-head.has-photo::after {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 5px;
+  background: var(--c); z-index: 2;
+}
+.study-page[data-subject="geo"] .unit-head.has-photo > * { position: relative; z-index: 1; }
+.study-page[data-subject="geo"] .unit-head.has-photo .unit-emoji { filter: drop-shadow(0 2px 8px rgba(0, 0, 0, .4)); }
+.study-page[data-subject="geo"] .unit-head.has-photo h1 { color: #fff; text-shadow: 0 2px 14px rgba(0, 0, 0, .5); }
+.study-page[data-subject="geo"] .unit-head.has-photo p { color: rgba(255, 255, 255, .94); text-shadow: 0 1px 8px rgba(0, 0, 0, .4); }
+.study-page[data-subject="geo"] .unit-head.has-photo .goal-tags span {
+  background: rgba(255, 255, 255, .16); border-color: rgba(255, 255, 255, .34);
+  color: #fff; backdrop-filter: blur(3px);
+}
+
+/* ---------- 知识点卡 · 「世界真面目」实景小照片 ---------- */
+.k-overview.has-photo { display: flex; align-items: center; gap: 13px; }
+.k-overview .ov-photo {
+  flex: 0 0 auto; width: 76px; height: 76px; border-radius: 14px;
+  object-fit: cover; border: 2px solid #fff;
+  box-shadow: 0 3px 10px rgba(20, 50, 40, .2);
+  transition: transform .3s ease;
+}
+.k-overview .ov-photo:hover { transform: scale(1.5) rotate(-1.5deg); }
+.k-overview .ov-txt { flex: 1; min-width: 0; }
+.k-overview .ov-main { font-size: 15.5px; line-height: 1.72; color: #45495e; font-weight: 600; }
+.k-overview .ov-life {
+  margin-top: 5px; font-size: 12.5px; line-height: 1.6;
+  color: #2c6e54; font-weight: 700;
+}
+
 /* ---------- 知识点卡 ---------- */
 .kcard {
   --c: #2f9bd6;
@@ -45,17 +84,32 @@
 .learn-btn.on { background: #2fbf71; border-color: #2fbf71; }
 .k-overview { margin-top: 12px; font-size: 15.5px; line-height: 1.75; color: #4a4f63; }
 
-/* ---------- 小节 ---------- */
-.ksec { display: flex; align-items: flex-start; gap: 10px; margin-top: 12px; }
+/* ---------- 小节：更适合小朋友的图标标签 ---------- */
+.ksec { display: flex; align-items: flex-start; gap: 10px; margin-top: 14px; }
 .ksec > :last-child { min-width: 0; flex: 1; }
 .seclabel {
-  flex: 0 0 26px; height: 26px; margin-top: 2px;
-  background: #e2ecdf; color: #5d7a5e; border-radius: 8px;
-  font-size: 13px; font-weight: 900; display: grid; place-items: center;
+  flex: 0 0 auto; height: 30px; margin-top: 2px; padding: 0 11px;
+  background: linear-gradient(135deg, #e6f5ef, #eef8f3);
+  color: #2c6e54; border: 1.5px solid #cdeadd; border-radius: 999px;
+  font-size: 13px; font-weight: 900; display: inline-flex; align-items: center; gap: 4px;
+  white-space: nowrap;
 }
-.klist { list-style: none; display: grid; gap: 5px; }
+/* 要点：彩色序号，一眼看清有几条 */
+.klist { list-style: none; display: grid; gap: 6px; counter-reset: kitem; }
+.klist:not(.mis) li { counter-increment: kitem; }
+.klist li { display: flex; gap: 8px; align-items: flex-start; }
+.klist:not(.mis) li::before {
+  content: counter(kitem);
+  flex: 0 0 22px; height: 22px; margin-top: 2px;
+  background: color-mix(in srgb, var(--c, #2f9bd6) 16%, white);
+  border: 1.5px solid color-mix(in srgb, var(--c, #2f9bd6) 42%, white);
+  color: color-mix(in srgb, var(--c, #2f9bd6) 78%, black);
+  border-radius: 50%; font-size: 12.5px; font-weight: 900;
+  display: grid; place-items: center;
+}
+.klist.mis li { gap: 0; }
 .kli {
-  display: block; width: 100%; text-align: left;
+  display: block; min-width: 0; text-align: left;
   border: none; background: none; padding: 2px 0;
   font-size: 14.5px; line-height: 1.7; color: #4a4f63; font-weight: 600;
 }
@@ -73,10 +127,62 @@
 .mex-steps { background: #f8f9fc; color: #5a5570; }
 .mex-a { background: #e9f9f0; color: #187749; font-weight: 800; }
 
+/* 口诀：奖状绶带样式 */
 .krecite {
-  margin-top: 12px; background: #fdf6e9; border-radius: 12px;
-  padding: 9px 12px; font-size: 14px; font-weight: 800; color: #7a5b18;
+  margin-top: 12px; background: repeating-linear-gradient(135deg, #fdf6e9, #fdf6e9 14px, #fbf1dd 14px, #fbf1dd 28px);
+  border: 1.5px dashed #d9c48f; border-radius: 12px;
+  padding: 10px 13px; font-size: 14px; font-weight: 800; color: #7a5b18;
 }
+
+/* ---------- 地理小影院 ---------- */
+.cinema-group {
+  margin: 22px 2px 12px; font-size: 18px; font-weight: 900; color: #3c4257;
+  display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap;
+}
+.cinema-group span { font-size: 12.5px; font-weight: 700; color: #8b93a7; }
+.vid-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 14px; }
+.vid-card {
+  background: var(--card); border: 1px solid var(--line); border-radius: 16px;
+  overflow: hidden; box-shadow: 0 4px 16px rgba(40, 54, 85, .05);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.vid-card:hover { transform: translateY(-3px); box-shadow: 0 10px 26px rgba(40, 54, 85, .12); }
+.vid-screen {
+  position: relative; display: block; width: 100%; aspect-ratio: 16 / 9;
+  border: none; padding: 0; background: #10141d; cursor: pointer; overflow: hidden;
+}
+.vid-cover { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .4s ease; }
+.vid-screen:hover .vid-cover { transform: scale(1.05); }
+.vid-shade {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(10, 14, 22, 0) 45%, rgba(10, 14, 22, .55) 100%);
+}
+.vid-play {
+  position: absolute; left: 50%; top: 50%; translate: -50% -50%;
+  width: 46px; height: 46px; border-radius: 50%;
+  background: rgba(255, 255, 255, .92); color: #1d2333;
+  font-size: 17px; font-weight: 900; display: grid; place-items: center;
+  padding-left: 4px; box-shadow: 0 4px 14px rgba(0, 0, 0, .35);
+  transition: transform .25s ease, background .25s ease;
+}
+.vid-screen:hover .vid-play { transform: scale(1.12); background: #7fd8c8; }
+.vid-dur {
+  position: absolute; left: 9px; bottom: 8px;
+  background: rgba(12, 16, 26, .78); color: #fff;
+  font-size: 11.5px; font-weight: 700; border-radius: 999px; padding: 2px 9px;
+}
+.vid-iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.vid-close {
+  position: absolute; top: 7px; right: 8px; z-index: 2;
+  width: 26px; height: 26px; border-radius: 50%;
+  background: rgba(12, 16, 26, .72); color: #fff;
+  font-size: 13px; font-weight: 900; display: grid; place-items: center;
+}
+.vid-meta { padding: 11px 13px 12px; }
+.vid-meta h4 { font-size: 14.5px; font-weight: 800; line-height: 1.5; color: #333a4e; }
+.vid-meta p { margin-top: 3px; font-size: 12px; line-height: 1.6; color: #798093; font-weight: 600; }
+.vid-link { display: inline-block; margin-top: 6px; font-size: 12px; font-weight: 800; color: #0e7a8a; text-decoration: none; }
+.vid-link:hover { text-decoration: underline; }
 
 /* ---------- 之最速查 ---------- */
 .formula-card {
@@ -124,15 +230,122 @@
 .wrong-row-text { color: #a4453f; text-decoration: line-through; text-decoration-color: #e4b6b2; text-decoration-thickness: 2px; }
 .right-row-text { color: #187749; font-weight: 700; }
 
+/* ---------- 动画与交互增强 ---------- */
+@keyframes gkFadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes gkFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+@keyframes gkPulse {
+  0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--c) 30%, transparent); }
+  50% { box-shadow: 0 0 0 6px color-mix(in srgb, var(--c) 0%, transparent); }
+}
+
+/* 滚动渐现：进入视口时淡入上浮（由 geo-app.js 的 IntersectionObserver 驱动） */
+.reveal { opacity: 0; transform: translateY(18px) scale(.985); }
+.reveal.in-view {
+  opacity: 1; transform: none;
+  transition: opacity .55s cubic-bezier(.2, .7, .3, 1), transform .55s cubic-bezier(.2, .7, .3, 1);
+}
+
+/* 掌握撒花 */
+.confetti {
+  position: fixed; z-index: 999; pointer-events: none;
+  width: 15px; height: 15px; font-size: 14px; line-height: 15px;
+  text-align: center;
+  animation: gkConfetti .95s cubic-bezier(.16, .6, .45, 1) forwards;
+}
+@keyframes gkConfetti {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(.4) rotate(0deg); }
+  12% { opacity: 1; }
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(1.05) rotate(var(--rot));
+  }
+}
+
+/* 顶部学习进度条 */
+.progress-track {
+  position: fixed; top: 0; left: 0; right: 0; height: 4px; z-index: 60;
+  background: transparent; pointer-events: none;
+}
+#progress-bar {
+  height: 100%; width: 0;
+  background: linear-gradient(90deg, #2f9bd6, #2fbf71, #7fd8c8);
+  border-radius: 0 3px 3px 0;
+  transition: width .5s ease;
+  box-shadow: 0 1px 6px rgba(47, 155, 214, .5);
+}
+
+/* 知识点卡淡入（首屏无滚动时的兜底观感） */
+.kcard { animation: gkFadeUp .5s cubic-bezier(.2,.7,.3,1) both; }
+
+/* 卡片悬停：轻微上浮 + 阴影加深 */
+.kcard, .formula-card, .mistake-card { transition: transform .25s ease, box-shadow .25s ease, background .25s ease; }
+.kcard:hover, .formula-card:hover, .mistake-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(40, 54, 85, .10);
+}
+
+/* 单元 emoji 轻微浮动 */
+.unit-emoji { animation: gkFloat 3.2s ease-in-out infinite; }
+
+/* 图示悬停：边框高亮 + 轻微放大 */
+.fig { transition: box-shadow .3s ease, transform .3s ease, border-color .3s ease; }
+.fig:hover { box-shadow: 0 6px 20px rgba(40, 54, 85, .08); border-color: color-mix(in srgb, var(--subject-accent, #2f9bd6) 40%, var(--line)); }
+.fig-svg { transition: transform .35s ease; }
+.fig:hover .fig-svg { transform: scale(1.015); }
+
+/* 口诀条 */
+.krecite { position: relative; overflow: hidden; transition: transform .2s ease; }
+.krecite:hover { transform: translateY(-1px); }
+
+/* 想一想答案：悬停弹起 */
+.mex-a { transition: transform .2s ease, box-shadow .2s ease; }
+.mex-a:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(24, 119, 73, .18); }
+
+/* 速查行悬停高亮 */
+.frow { transition: background .2s ease, transform .15s ease, border-color .2s ease; }
+.frow:hover { background: #f0faf5; border-color: color-mix(in srgb, #2fbf71 40%, var(--line)); }
+
+/* 易错点：错误项悬停摇晃提示 */
+@keyframes gkShake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-3px); }
+  75% { transform: translateX(3px); }
+}
+.mistake-card:hover .wrong-row-text { animation: gkShake .35s ease; }
+
+/* 已掌握卡片：绿色边框呼吸 */
+.kcard.learned { animation: gkFadeUp .5s ease both, gkPulse 2.4s ease-in-out 1; }
+
 /* ---------- 打印 ---------- */
 @media print {
   body { background: #fff; font-size: 13px; }
   #app > header, .sidebar, .toolbar, .textbook-banner, .skip-link,
-  .say, .learn-btn, .goal-tags { display: none !important; }
+  .say, .learn-btn, .goal-tags, .progress-track, .vid-close { display: none !important; }
   .study-shell { display: block; padding: 0; }
   .study-content { padding: 0; }
   .unit-head { border: 1px solid #ccc; box-shadow: none; }
-  .kcard, .formula-card, .mistake-card { box-shadow: none; break-inside: avoid; page-break-inside: avoid; }
+  .unit-head.has-photo { background-image: none !important; }
+  .unit-head.has-photo::before { display: none; }
+  .unit-head.has-photo h1, .unit-head.has-photo p { color: inherit; text-shadow: none; }
+  .unit-head.has-photo .goal-tags span { background: none; border-color: #ccc; color: #4a4f63; }
+  .kcard, .formula-card, .mistake-card { box-shadow: none; break-inside: avoid; page-break-inside: avoid; animation: none !important; transform: none !important; }
+  .unit-emoji { animation: none !important; }
+  .fig { animation: none !important; }
+  .fig:hover .fig-svg { transform: none; }
+  /* 影院只打印片名清单 */
+  .vid-grid { display: none; }
+  .cinema-print-list { display: block !important; }
   .wgrid { grid-template-columns: 1fr; display: block; }
   .kcard, .mistake-card { margin-bottom: 12px; }
+  /* 滚动渐现不影响打印 */
+  .reveal { opacity: 1 !important; transform: none !important; }
 }
+/* 影院的打印版片名清单（屏幕上隐藏） */
+.cinema-print-list { display: none; margin: 8px 0 16px; padding-left: 1.4em; font-size: 13px; }
+.cinema-print-list li { margin-bottom: 3px; }

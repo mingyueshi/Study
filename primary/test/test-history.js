@@ -97,7 +97,56 @@ console.log('— 历史图示库 —');
 check(FIGS.FIG_IDS.length >= 12, '图示库应有 12 个以上图示，实际 ' + FIGS.FIG_IDS.length);
 check(FIGS.has('demo-history-timeline'), '缺少朝代互动演示图示');
 
+/* ---------- 配图库（横幅 + 知识点小照片） ---------- */
+console.log('— 配图库 —');
+const fs = require('fs');
+const path = require('path');
+let HPHOTOS = null;
+try { HPHOTOS = require('../history-photos.js'); } catch (e) { /* 文件尚不存在 */ }
+check(!!HPHOTOS, '缺少 history-photos.js 配图库');
+if (HPHOTOS) {
+  check(HPHOTOS.BANNER_IDS.length >= 8, '至少 8 张长廊横幅照片，实际 ' + HPHOTOS.BANNER_IDS.length);
+  HPHOTOS.BANNER_IDS.forEach(id => {
+    const rel = HPHOTOS.banner(id);
+    check(!!rel && fs.existsSync(path.join(__dirname, '..', rel)), '横幅照片文件缺失: ' + id + ' → ' + rel);
+  });
+  check(HPHOTOS.POINT_IDS.length >= 12, '知识点小照片应不少于 12 张，实际 ' + HPHOTOS.POINT_IDS.length);
+  HPHOTOS.POINT_IDS.forEach(pid => {
+    const meta = HPHOTOS.point(pid);
+    check(seenPoints.has(pid), '知识点小照片引用了不存在的知识点: ' + pid);
+    check(!!meta && !!meta.life && meta.img && fs.existsSync(path.join(__dirname, '..', meta.img)),
+      '知识点照片文件缺失: ' + pid + ' → ' + (meta && meta.img));
+  });
+}
+
+/* ---------- 历史小影院视频库 ---------- */
+console.log('— 历史小影院 —');
+let VIDEOS = null;
+try { VIDEOS = require('../history-videos.js'); } catch (e) { /* 文件尚不存在 */ }
+check(!!VIDEOS, '缺少 history-videos.js 视频库');
+if (VIDEOS) {
+  check(Array.isArray(VIDEOS.list) && VIDEOS.list.length >= 8, '影院至少 8 部视频，实际 ' + (VIDEOS.list || []).length);
+  const seenVids = new Set();
+  (VIDEOS.list || []).forEach(v => {
+    check(isStr(v.id) && !seenVids.has(v.id), '视频 id 缺失或重复: ' + v.id);
+    seenVids.add(v.id);
+    check(/^BV[0-9A-Za-z]{8,12}$/.test(v.bvid || ''), 'bvid 格式可疑: ' + v.bvid);
+    check(isStr(v.title), '视频缺少标题: ' + v.id);
+    check(isStr(v.up), '视频缺少UP主: ' + v.id);
+    check(Number.isFinite(v.dur) && v.dur > 60, '视频时长可疑: ' + v.id + ' = ' + v.dur);
+    check(isStr(v.cover) && fs.existsSync(path.join(__dirname, '..', v.cover)), '封面文件缺失: ' + v.cover);
+    check(!!v.group, '视频缺少分组: ' + v.id);
+  });
+  const groupIds = new Set((VIDEOS.groups || []).map(g => g.id));
+  (VIDEOS.groups || []).forEach(g => {
+    check(isStr(g.id) && isStr(g.name) && isStr(g.emoji) && isStr(g.desc), '视频分组字段不完整: ' + g.id);
+  });
+  (VIDEOS.list || []).forEach(v => {
+    check(groupIds.has(v.group), '视频分组未注册: ' + v.id + ' → ' + v.group);
+  });
+}
+
 console.log(fails === 0
-  ? '\n✅ 全部通过（共断言 ' + checked + ' 项：8 长廊 37 知识点 + 速查 + 小诊所 + 图示库）'
+  ? '\n✅ 全部通过（共断言 ' + checked + ' 项：8 长廊 37 知识点 + 速查 + 小诊所 + 图示库 + 配图 + 影院）'
   : '\n❌ 共 ' + fails + ' / ' + checked + ' 项失败');
 process.exit(fails === 0 ? 0 : 1);
