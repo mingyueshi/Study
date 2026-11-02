@@ -1,0 +1,110 @@
+/* Reference portal and subject pages only; dictionary and learning pages keep their styles. */
+.reference-page { max-width: 1400px; min-width: 0; margin-inline: auto; padding-top: 16px; }
+.reference-page a:focus-visible, .reference-page summary:focus-visible { outline: 3px solid var(--orange); outline-offset: 4px; }
+.reference-page p { margin-bottom: 12px; }
+.ref-breadcrumbs { display: flex; flex-wrap: wrap; align-items: center; gap: 9px; margin-bottom: 20px; color: var(--muted); font-size: 14px; overflow-wrap: anywhere; }
+.ref-breadcrumbs a { color: var(--green); min-height: 32px; display: inline-flex; align-items: center; }
+.ref-header { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-bottom: 22px; }
+.ref-header > div { min-width: 0; }
+.ref-header h1 { margin: 0 0 6px; font-size: clamp(30px, 2.7vw, 40px); }
+.ref-header p { max-width: 58rem; margin: 0; color: var(--muted); font-size: 17px; }
+.ref-kicker { color: var(--green); font-size: 14px; font-weight: 650; letter-spacing: .08em; margin-bottom: 8px; }
+.ref-toolbar { display: flex; flex-wrap: wrap; align-items: end; gap: 12px; padding: 18px 20px; margin-bottom: 20px; border: 1px solid #cfddc8; border-radius: 18px; background: #edf3e8; }
+.ref-field { display: flex; flex: 0 1 220px; flex-direction: column; gap: 6px; min-width: 0; color: var(--muted); font-size: 14px; font-weight: 600; }
+.ref-field.ref-search { flex: 1 1 260px; }
+.reference-page .ref-field input, .reference-page .ref-field select { width: 100%; min-height: 50px; padding: 9px 12px; font-size: 17px; }
+.ref-actions { display: flex; align-items: center; gap: 12px; }
+.reference-page .ref-actions .button { min-height: 50px; padding: 10px 22px; }
+.ref-clear { min-height: 44px; display: inline-flex; align-items: center; color: var(--green); font-size: 15px; white-space: nowrap; text-decoration: underline; text-underline-offset: 4px; }
+.ref-results-bar { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; margin: 0 2px 14px; color: var(--muted); font-size: 15px; }
+.ref-results-bar p { margin: 0; }
+.ref-results-bar strong { color: var(--ink); font-weight: 700; }
+.ref-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.ref-card { display: block; min-width: 0; padding: 20px 22px; border: 1px solid var(--line); border-radius: 16px; background: var(--white); overflow-wrap: anywhere; }
+.ref-card-link { transition: border-color .15s, box-shadow .15s; }
+.ref-card-link:hover { border-color: #87a583; box-shadow: 0 5px 15px #233e370b; }
+.ref-card h2, .ref-card h3 { margin: 0 0 6px; font-size: 22px; line-height: 1.5; }
+.ref-card p:last-child { margin-bottom: 0; }
+.ref-meta { color: var(--muted); font-size: 14px; line-height: 1.8; }
+.ref-excerpt { margin: 12px 0 0; font-size: 17px; line-height: 1.9; }
+.ref-label { display: inline-block; padding: 3px 9px; margin-bottom: 10px; border-radius: 7px; background: var(--soft); color: var(--green-dark); font-size: 13px; }
+.ref-empty, .ref-error { padding: 28px; border: 1px solid var(--line); border-radius: 16px; background: var(--white); }
+.ref-empty h2 { font-size: 23px; margin-bottom: 8px; }
+.ref-error { border-color: #d7b78b; margin-bottom: 18px; }
+.ref-source { margin-top: 24px; padding: 16px 20px; border: 1px solid var(--line); border-radius: 16px; color: var(--muted); background: #f0f4eb; font-size: 15px; overflow-wrap: anywhere; }
+.ref-source summary { min-height: 32px; color: var(--green); font-weight: 650; cursor: pointer; }
+.ref-source > p:first-of-type { margin-top: 14px; }
+.ref-source a { color: var(--green); text-decoration: underline; text-underline-offset: 4px; }
+.ref-facts { display: grid; grid-template-columns: minmax(120px, .42fr) minmax(0, 1fr); gap: 0 22px; margin: 0; }
+.ref-facts dt, .ref-facts dd { padding: 12px 0; margin: 0; border-bottom: 1px solid var(--line); overflow-wrap: anywhere; }
+.ref-facts dt { color: var(--muted); font-size: 15px; }
+.ref-facts dd { font-size: 17px; line-height: 1.85; min-width: 0; }
+.ref-facts dd p { margin: 0 0 6px; }
+.ref-detail-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; align-items: start; }
+.ref-panel { min-width: 0; padding: 24px; border: 1px solid var(--line); border-radius: 18px; background: var(--white); }
+.ref-panel h2 { font-size: 23px; margin-bottom: 16px; }
+.ref-span { grid-column: 1 / -1; }
+.ref-inline-links { display: flex; flex-wrap: wrap; gap: 8px; }
+.ref-inline-links a { display: inline-flex; min-height: 40px; align-items: center; padding: 6px 12px; border: 1px solid var(--line); border-radius: 9px; color: var(--green); background: var(--white); font-size: 15px; }
+.ref-poem { max-width: 920px; margin-inline: auto; padding: 32px 48px; border: 1px solid var(--line); border-radius: 20px; background: var(--white); }
+.ref-poem .ref-header h1 { font-size: clamp(26px, 2.4vw, 34px); line-height: 1.6; }
+.ref-poem-text { max-width: 36em; margin: 26px auto; }
+.ref-poem-text p { margin: 0 0 18px; font-size: 23px; line-height: 2.1; overflow-wrap: anywhere; white-space: pre-wrap; }
+.ref-poem-text small { display: block; font-size: 15px; line-height: 1.9; color: var(--muted); white-space: normal; }
+.ref-reading-note { color: var(--muted); font-size: 14px; line-height: 1.8; }
+.ref-related { margin-top: 28px; }
+.ref-related h2 { font-size: 22px; }
+.ref-elements { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px; }
+.ref-element { position: relative; padding: 16px; border-top: 3px solid #a8c0a0; }
+.ref-element-number { font-size: 14px; color: var(--muted); }
+.ref-element-symbol { display: block; margin: 8px 0; font-size: 42px; font-weight: 750; line-height: 1.2; color: var(--green); }
+.ref-element h2 { font-size: 23px; }
+.ref-element-identity { display: flex; align-items: center; gap: 22px; }
+.ref-element-badge { display: grid; place-items: center; width: 110px; min-height: 110px; padding: 10px; border: 1px solid #b6cdb0; border-radius: 18px; background: #e7f0df; flex-shrink: 0; }
+.ref-element-badge strong { font-size: 44px; line-height: 1.1; color: var(--green); }
+.ref-table-wrap { max-width: 100%; overflow-x: auto; border: 1px solid var(--line); border-radius: 16px; background: var(--white); }
+.ref-table { width: 100%; min-width: 760px; border-collapse: collapse; text-align: left; font-size: 16px; }
+.ref-table th { padding: 13px 18px; background: #edf3e7; color: var(--muted); font-size: 14px; font-weight: 650; }
+.ref-table td { padding: 13px 18px; border-top: 1px solid var(--line); vertical-align: top; overflow-wrap: anywhere; }
+.ref-table tbody tr:hover { background: #f4f8ef; }
+.ref-table td:first-child { width: 42%; }
+.ref-table a { color: var(--green-dark); font-size: 18px; font-weight: 650; }
+.ref-table .ref-meta { display: block; margin-top: 3px; }
+.ref-portal-header { padding: 24px 30px; border: 1px solid #d3e0c9; border-radius: 22px; background: radial-gradient(ellipse at 95% 0, #fff0d6, transparent 55%), #eaf2e2; }
+.ref-portal-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.ref-portal-grid .book-card { display: flex; flex-direction: column; align-items: start; min-height: 225px; padding: 24px; border-top: 4px solid var(--ref-accent, #87a47b); }
+.ref-portal-grid .book-card img { width: 46px; height: 46px; margin-bottom: 14px; padding: 7px; border-radius: 12px; background: var(--ref-tint, #eaf1e2); }
+.ref-portal-grid .book-card h2 { font-size: 25px; }
+.ref-portal-grid .book-card p { color: var(--muted); font-size: 16px; }
+.ref-portal-action { margin-top: auto; color: var(--green); font-size: 15px; font-weight: 650; }
+.ref-portal-grid [data-tone="poetry"] { --ref-accent: #b99e6c; --ref-tint: #f6eddb; }
+.ref-portal-grid [data-tone="geography"] { --ref-accent: #76a7b2; --ref-tint: #e5f1f3; }
+.ref-portal-grid [data-tone="elements"] { --ref-accent: #7ea486; --ref-tint: #e5f0e5; }
+.ref-portal-grid [data-tone="astronomy"] { --ref-accent: #9299bb; --ref-tint: #eaecf5; }
+.reference-page .pagination { margin-block: 24px; }
+@media (max-width: 1099px) {
+  .ref-grid, .ref-portal-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ref-elements { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .ref-field { flex-basis: 180px; }
+}
+@media (max-width: 699px) {
+  .reference-page { padding-top: 8px; }
+  .ref-breadcrumbs { margin-bottom: 12px; }
+  .ref-header { align-items: start; gap: 12px; margin-bottom: 18px; }
+  .ref-header h1 { font-size: 29px; }
+  .ref-header p { font-size: 16px; }
+  .ref-toolbar { padding: 16px; }
+  .ref-field, .ref-field.ref-search { flex: 1 1 100%; }
+  .ref-grid, .ref-portal-grid, .ref-detail-grid { grid-template-columns: minmax(0, 1fr); }
+  .ref-elements { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ref-card { padding: 18px; }
+  .ref-panel { padding: 20px; }
+  .ref-facts { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .ref-facts dt { padding: 12px 0 2px; border: 0; }
+  .ref-facts dd { padding: 0 0 12px; }
+  .ref-poem { padding: 22px; }
+  .ref-poem-text p { font-size: 21px; }
+  .ref-element-badge { width: 78px; min-height: 90px; }
+  .ref-element-badge strong { font-size: 34px; }
+}
+@media (prefers-reduced-motion: reduce) { .ref-card-link { transition: none; } }

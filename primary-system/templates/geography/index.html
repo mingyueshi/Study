@@ -1,4 +1,25 @@
-{% extends 'base.html' %}{% block title %}国家与地区 · 乐学堂{% endblock %}{% block content %}
-<a class="back" href="{% url 'home' %}">← 学习广场</a><div class="page-heading"><h1>国家与地区</h1><p class="lead">认识世界上的地方。共 {{ total }} 条来源记录，包括国家、地区与属地，不是“250个国家”。</p><p>一起认识区域、首都、语言和货币。少数地名的中文对照暂缺时，会同时标出原名。</p></div>
-<form method="get" class="filter-form"><label>名称或来源代码 <input name="q" value="{{ q }}" maxlength="150" placeholder="中国、CHN、Japan"></label><label>区域 <select name="region"><option value="">所有区域</option>{% for code,label in regions %}<option value="{{ code }}" {% if region == code %}selected{% endif %}>{{ label }}</option>{% endfor %}</select></label><button class="button" type="submit">查找</button></form>
-{% if error %}<p role="alert">{{ error }}</p>{% endif %}<div class="content-list">{% for country in page %}<a class="content-row" href="{% url 'geography-detail' country.code %}"><div><span class="tag">{{ country.region_zh }}</span><h2>{{ country.display_name }}</h2><p>{{ country.name_en }} · 来源代码 {{ country.code }}</p><p>{{ country.independence_label }}</p></div><span aria-hidden="true">→</span></a>{% empty %}<p class="empty">没有找到记录，请试试其他名称。</p>{% endfor %}</div>{% include 'pagination.html' %}{% endblock %}
+{% extends 'reference_library/layout.html' %}
+{% load reference_ui %}
+{% block title %}国家与地区 · 乐学堂{% endblock %}
+{% block reference_content %}
+{% include 'reference_library/breadcrumbs.html' with subject_title='国家与地区' %}
+<header class="ref-header"><div><p class="ref-kicker">认识世界上的地方</p>
+<h1>国家与地区</h1><p>查找所属区域、首都、语言和货币。来源包含国家、地区与属地。</p></div>
+</header>
+<form method="get" class="ref-toolbar" role="search" aria-label="查找国家与地区">
+  <label class="ref-field ref-search">名称或来源代码<input name="q" value="{{ q }}" maxlength="150" placeholder="中国、CHN、Japan">
+</label>
+  <label class="ref-field">区域<select name="region"><option value="">所有区域</option>{% for code,label in regions %}<option value="{{ code }}" {% if region == code %}selected{% endif %}>{{ label }}</option>{% endfor %}</select>
+</label>
+  <div class="ref-actions"><button class="button" type="submit">查找</button><a class="ref-clear" href="{% url 'geography-index' %}">清除筛选</a></div>
+</form>
+{% if error %}<div class="ref-error" role="alert">{{ error }} <a href="{% url 'geography-index' %}">清除筛选</a></div>{% else %}
+{% include 'reference_library/result_count.html' %}
+<div class="ref-grid">{% for country in page %}<a class="ref-card ref-card-link" href="{% url 'geography-detail' country.code %}{% reference_query %}"><span class="ref-label">{{ country.region_zh }}</span>
+<h2>{{ country.display_name }}</h2><p class="ref-meta" lang="en">{{ country.name_en }}</p><p class="ref-excerpt">{{ country.subregion_zh }}</p><p class="ref-meta">{{ country.independence_label }} · {{ country.code }}</p></a>{% empty %}<div class="ref-empty ref-span">
+<h2>没有找到记录</h2><p>请尝试其他中文名、原名或来源代码。</p></div>{% endfor %}</div>
+{% include 'pagination.html' %}{% endif %}
+<details class="ref-source">
+<summary>来源分类与收录说明</summary><p>共{{ total|default_if_none:'0' }}条来源记录，包括国家、地区与属地，不是“250个国家”。来源名称和事实不等于中国教材审定口径；少数中文名暂缺时保留原名。来源自定义代码不能全部视作正式ISO代码。</p>
+</details>
+{% endblock %}

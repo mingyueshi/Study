@@ -1,1 +1,23 @@
-{% extends 'base.html' %}{% block title %}化学元素 · 乐学堂{% endblock %}{% block content %}<a href="{% url 'reference-library' %}">← 资料探索</a><h1>化学元素资料</h1><p>有效原子序数1—118。保留来源条件、未知值及预测标记，未将未知当成0。元素长篇英文解释的中文翻译待补；外部图片链接不是已导入媒体。</p><form method="get"><label>名称、符号或原子序数 <input name="q" value="{{ q }}" maxlength="100"></label><label>分类 <select name="category"><option value="">全部分类</option>{% for code,label in categories %}<option value="{{ code }}" {% if category == code %}selected{% endif %}>{{ label }}</option>{% endfor %}</select></label><button>搜索</button></form><p>找到{{ page.paginator.count }}种元素</p><div class="book-grid">{% for row in page %}<a class="book-card" href="{% url 'science-element' row.number %}"><span class="tag">{{ row.number }} · {{ row.symbol }}</span><h2>{% if row.chinese_name %}{{ row.chinese_name }}{% else %}{{ row.name }}{% endif %}</h2><p>{{ row.name }} · {{ row.category_zh }}</p>{% if not row.chinese_name %}<p>中文专名暂缺，保留原名和编号</p>{% endif %}</a>{% endfor %}</div>{% include 'pagination.html' %}{% endblock %}
+{% extends 'reference_library/layout.html' %}
+{% load reference_ui %}
+{% block title %}化学元素 · 乐学堂{% endblock %}
+{% block reference_content %}
+{% include 'reference_library/breadcrumbs.html' with subject_title='化学元素' %}
+<header class="ref-header"><div><p class="ref-kicker">从符号认识物质</p>
+<h1>化学元素</h1><p>按中文名、英文名、符号或原子序数查找118种元素。</p></div>
+</header>
+<form method="get" class="ref-toolbar" role="search" aria-label="查找元素">
+<label class="ref-field ref-search">名称、符号或原子序数<input name="q" value="{{ q }}" maxlength="100" placeholder="氢、H、1">
+</label>
+<label class="ref-field">分类<select name="category"><option value="">全部分类</option>{% for code,label in categories %}<option value="{{ code }}" {% if category == code %}selected{% endif %}>{{ label }}</option>{% endfor %}</select>
+</label><div class="ref-actions"><button class="button" type="submit">查找</button><a class="ref-clear" href="{% url 'science-elements' %}">清除筛选</a></div>
+</form>
+{% include 'reference_library/result_count.html' with result_unit='种元素' result_note='按原子序数排列' %}
+<div class="ref-grid ref-elements">{% for row in page %}<a class="ref-card ref-card-link ref-element" href="{% url 'science-element' row.number %}{% reference_query %}"><span class="ref-element-number">原子序数 {{ row.number }}</span><strong class="ref-element-symbol">{{ row.symbol }}</strong>
+<h2>{{ row.chinese_name|default:row.name }}</h2><p class="ref-meta" lang="en">{{ row.name }}</p><p class="ref-meta">{{ row.category_zh }}</p>{% if not row.chinese_name %}<p class="ref-meta">中文专名暂缺</p>{% endif %}</a>{% empty %}<div class="ref-empty ref-span">
+<h2>没有匹配的元素</h2><p>请尝试其他名称、符号或清除分类。</p></div>{% endfor %}</div>
+{% include 'pagination.html' %}
+<details class="ref-source">
+<summary>数值、单位与来源说明</summary><p>此处是资料卡列表，不是周期表位置图。未知值没有当成0；预测值和来源条件保留。长篇英文解释的中文翻译待补，外部图片链接不是已导入媒体。</p>
+</details>
+{% endblock %}

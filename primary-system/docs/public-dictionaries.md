@@ -1,5 +1,7 @@
 # 首批公开词库与统一查词页
 
+> 当前新机通过 `python3.12 bootstrap.py` 恢复完整基础包与公开状态；无需重新下载／导入／发布。三个固定来源载荷随 Git 保存于 `data/lexicon/`，许可归档仍在 `lexicon/notices/`。以下是 2026-10-30 首批接入的历史规模及可选来源维护流程，不代表当前全量词典规模。当前启动步骤见 [本地开发](local-development.md)。
+
 > 当前领域边界与开发顺序以 [系统设计基线](system-design.md) 为准。下文包含历史阶段规模和计划；接龙、场景单词、点读已实现，通用专题阅读已退出。当前数据库实测见 [最新验证记录](../VALIDATION.md)。
 
 核对日期：2026-10-30。这里的“公开”指本地应用已允许匿名读取已审范围；本轮没有部署网站、开放远程服务或提供整库下载。
@@ -28,7 +30,7 @@ Unihan 的 `kMandarin` 是用于特定字音场景的常用音，官方说明明
 
 ## 固定版本与下载
 
-所有路径以 `primary-system/` 为当前目录。登记表 [`registry.json`](../lexicon/sources/registry.json) 固定网址、版本、SHA256、署名、许可、加工说明与许可文件名。下载到被 Git 忽略的 `data/lexicon/`，不会随服务启动自动联网。
+所有路径以 `primary-system/` 为当前目录。登记表 [`registry.json`](../lexicon/sources/registry.json) 固定网址、版本、SHA256、署名、许可、加工说明与许可文件名。三个固定载荷保存于 `data/lexicon/` 并随 Git 跟踪；其余下载缓存仍忽略。下列下载命令只用于可选来源维护，不会随初始化或服务启动自动联网。
 
 ```sh
 .venv/bin/python manage.py migrate

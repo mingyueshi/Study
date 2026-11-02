@@ -1,1 +1,29 @@
-{% extends 'base.html' %}{% block content %}<h1>古诗文原文资料</h1><p>{{ document_count }} 份来源文件，当前筛选 {{ page.paginator.count }} 个文本入口。总集、选集、章与韵部是不同粒度，不能称为同样数量的唯一作品。选集与总集重叠、异文各自保留；不自动标作教材标准版本。现代中文解释与全文注音待分批补充。</p><form><label>题名或作者 <input name="q" value="{{ q }}" maxlength="120"></label><label>来源子集 <select name="collection"><option value="">全部</option>{% for value in collections %}<option {% if selected_collection == value %}selected{% endif %}>{{ value }}</option>{% endfor %}</select></label><label>文本层 <select name="layer"><option value="">全部</option><option value="raw" {% if layer == 'raw' %}selected{% endif %}>原始选集</option><option value="derived" {% if layer == 'derived' %}selected{% endif %}>保守筛选来源</option></select></label><button>查找</button></form><p><a href="{% url 'poetry-exclusions' %}">查看 {{ excluded_count }} 条来源排除记录与原因</a></p><div class="content-list">{% for row in page %}<a class="content-row" href="{% url 'poetry-detail' row.pk %}"><div><h2>{{ row.title }}</h2><p>{{ row.author|default:'来源未署作者' }} · {{ row.document.collection }} · {% if row.document.layer == 'raw' %}原始选集{% else %}筛选文本{% endif %}</p><p>{{ row.body|truncatechars:100 }}</p></div></a>{% empty %}<p>没有匹配的来源文本。</p>{% endfor %}</div>{% include 'pagination.html' %}{% endblock %}
+{% extends 'reference_library/layout.html' %}
+{% load reference_ui %}
+{% block title %}古诗文 · 乐学堂{% endblock %}
+{% block reference_content %}
+{% include 'reference_library/breadcrumbs.html' with subject_title='古诗文' %}
+<header class="ref-header"><div><p class="ref-kicker">读原文，寻出处</p>
+<h1>古诗文</h1><p>按题名、作者或选集查找，保留各来源的字形和异文。</p></div>
+</header>
+<form method="get" class="ref-toolbar" role="search" aria-label="查找古诗文">
+  <label class="ref-field ref-search">题名或作者<input name="q" value="{{ q }}" maxlength="120" placeholder="李白、杜甫">
+</label>
+  <label class="ref-field">来源子集<select name="collection"><option value="">全部子集</option>{% for value in collections %}<option {% if selected_collection == value %}selected{% endif %}>{{ value }}</option>{% endfor %}</select>
+</label>
+  <label class="ref-field">文本层<select name="layer"><option value="">全部文本</option><option value="raw" {% if layer == 'raw' %}selected{% endif %}>原始选集</option><option value="derived" {% if layer == 'derived' %}selected{% endif %}>保守筛选来源</option></select>
+</label>
+  <div class="ref-actions"><button class="button" type="submit">查找</button><a class="ref-clear" href="{% url 'poetry-index' %}">清除筛选</a></div>
+</form>
+{% include 'reference_library/result_count.html' with result_unit='个文本入口' result_note='总集、选集及章节各自保留' %}
+<div class="ref-grid">
+  {% for row in page %}<a class="ref-card ref-card-link" href="{% url 'poetry-detail' row.pk %}{% reference_query %}"><p class="ref-meta">{{ row.document.collection }}</p>
+<h2 title="{{ row.title }}">{{ row.title|truncatechars:90 }}</h2><p class="ref-meta">{{ row.author|default:'来源未署作者' }} · {% if row.document.layer == 'raw' %}原始选集{% else %}筛选文本{% endif %}</p><p class="ref-excerpt">{{ row.body|truncatechars:80 }}</p></a>
+  {% empty %}<div class="ref-empty ref-span">
+<h2>没有找到匹配诗文</h2><p>请尝试原题名或作者名，也可以清除筛选后翻阅。</p></div>{% endfor %}
+</div>
+{% include 'pagination.html' %}
+<details class="ref-source">
+<summary>选集、版本与收录说明</summary><p>{{ document_count }}份来源文件。总集、选集、章与韵部粒度不同，文本入口数不等于唯一作品数；重叠与异文分别保留，未自动标作教材标准版。现代中文解释和全文注音待补。</p><a href="{% url 'poetry-exclusions' %}">查看{{ excluded_count }}条来源排除记录与原因 →</a>
+</details>
+{% endblock %}

@@ -13,7 +13,7 @@ class Command(BaseCommand):
     help = '导入场景编排；多义时指定 evidence_id 或 target_id；dry-run 完整预演后回滚。'
 
     def add_arguments(self, parser):
-        parser.add_argument('--input', default='data/words-scenario.json')
+        parser.add_argument('--input', required=True, help='显式提供已核对的场景JSON；启动不依赖旧导出文件。')
         parser.add_argument('--dry-run', action='store_true')
 
     def handle(self, *args, **options):

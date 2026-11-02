@@ -1,1 +1,32 @@
-{% extends 'base.html' %}{% block content %}<a href="{% url 'poetry-index' %}">← 古诗文资料</a><article class="reader"><h1>{{ record.title }}</h1><p>{{ record.author|default:'来源未署作者' }}</p>{% if record.heading_path %}<p>原层级：{{ record.heading_path|join:' / ' }}</p>{% endif %}<p>这是指定来源版本的原文，不是已经选定的中国教材标准版；保留原题名、字形及异文。现代中文解释／全文注音待补。</p><div class="prose">{% for line in line_rows %}<p style="overflow-wrap:anywhere">{{ line.text }}{% if line.pinyin %}<br><small>来源拼音：{{ line.pinyin }}</small>{% endif %}</p>{% endfor %}</div><section><h2>来源字段与层级</h2><dl>{% for field in metadata %}<dt>{{ field.label }}</dt><dd style="overflow-wrap:anywhere">{{ field.value }}</dd>{% endfor %}</dl>{% if origins %}<h3>来源姓氏与郡望</h3><ul>{% for origin in origins %}<li>{{ origin.surname }} · {{ origin.place }}</li>{% endfor %}</ul>{% endif %}</section><section><h2>出处与版本</h2><p style="overflow-wrap:anywhere">{{ record.document.path }}#{{ record.locator }}</p><p>来源commit：{{ record.document.version }}</p>{% if record.original_index != None %}<p>原记录索引：{{ record.original_index }}（筛选文件中的索引与原索引分开保留）</p>{% endif %}<p>文件SHA256：<span style="overflow-wrap:anywhere">{{ record.document.sha256 }}</span></p></section></article><h2>同一来源文件的其他文本</h2><ul>{% for item in siblings %}<li><a href="{% url 'poetry-detail' item.pk %}">{{ item.title }}</a></li>{% endfor %}</ul>{% endblock %}
+{% extends 'reference_library/layout.html' %}
+{% load reference_ui %}
+{% block title %}{{ record.title }} · 古诗文{% endblock %}
+{% block reference_content %}
+{% url 'poetry-index' as list_url %}
+{% include 'reference_library/breadcrumbs.html' with subject_title='古诗文' subject_url=list_url current_title=record.title %}
+<article class="ref-poem">
+  <header class="ref-header"><div><p class="ref-kicker">{{ record.document.collection }}</p>
+<h1>{{ record.title }}</h1><p>{{ record.author|default:'来源未署作者' }}</p></div>
+</header>
+  <div class="ref-poem-text">{% for line in line_rows %}<p>{{ line.text }}{% if line.pinyin %}<small>来源拼音：{{ line.pinyin }}</small>{% endif %}</p>{% endfor %}</div>
+  <p class="ref-reading-note">保留来源原文、字形及异文；现代中文解释和全文注音待补。</p>
+  {% if origins %}<section class="ref-related">
+<h2>来源姓氏与郡望</h2><ul>{% for origin in origins %}<li>{{ origin.surname }} · {{ origin.place }}</li>{% endfor %}</ul>
+</section>{% endif %}
+  <details class="ref-source">
+<summary>来源、原始字段与版本</summary><p>这是指定来源版本的原文，不是已经选定的中国教材标准版。</p>
+<dl class="ref-facts">{% if record.heading_path %}<dt>原层级</dt>
+<dd>{{ record.heading_path|join:' / ' }}</dd>{% endif %}{% for field in metadata %}<dt>{{ field.label }}</dt>
+<dd>{{ field.value }}</dd>{% endfor %}<dt>来源位置</dt>
+<dd>{{ record.document.path }}#{{ record.locator }}</dd>
+<dt>来源版本</dt>
+<dd>{{ record.document.version }}</dd>{% if record.original_index != None %}<dt>原记录索引</dt>
+<dd>{{ record.original_index }}（筛选文件中的索引与原索引分开保留）</dd>{% endif %}<dt>文件SHA256</dt>
+<dd>{{ record.document.sha256 }}</dd>
+</dl>
+</details>
+</article>
+<section class="ref-related">
+<h2>同一来源文件的其他篇目</h2><div class="ref-inline-links">{% for item in siblings %}<a href="{% url 'poetry-detail' item.pk %}{% reference_query %}">{{ item.title }}</a>{% empty %}<p class="ref-meta">本来源没有其他篇目。</p>{% endfor %}</div>
+</section>
+{% endblock %}

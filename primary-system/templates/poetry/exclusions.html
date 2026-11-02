@@ -1,1 +1,23 @@
-{% extends 'base.html' %}{% block content %}<a href="{% url 'poetry-index' %}">← 古诗文资料</a><h1>来源排除记录</h1><p>共{{ page.paginator.count }}条，保留源位置与筛选原因；被排除不等于作品错误或不存在，不在此补造包内未提供的正文。</p><form><label>题名／作者 <input name="q" value="{{ q }}"></label><button>查找</button></form>{% for row in page %}<section class="reading-section"><h2>{{ row.title|default:'未提供题名' }}</h2><p>{{ row.author }}</p><p style="overflow-wrap:anywhere">{{ row.source_path }}#{{ row.source_locator }}</p><p>筛选原因：{{ row.reasons }}</p></section>{% empty %}<p>没有匹配记录。</p>{% endfor %}{% include 'pagination.html' %}{% endblock %}
+{% extends 'reference_library/layout.html' %}
+{% load reference_ui %}
+{% block title %}来源排除记录 · 古诗文{% endblock %}
+{% block reference_content %}
+{% url 'poetry-index' as list_url %}
+{% include 'reference_library/breadcrumbs.html' with subject_title='古诗文' subject_url=list_url current_title='来源排除记录' %}
+<header class="ref-header"><div>
+<h1>来源排除记录</h1><p>保留来源筛选原因；被排除不等于作品错误或不存在，此处不补造未提供的正文。</p></div>
+</header>
+<form method="get" class="ref-toolbar" role="search" aria-label="查找来源排除记录">
+<label class="ref-field ref-search">题名或作者<input name="q" value="{{ q }}" maxlength="120">
+</label><div class="ref-actions"><button class="button" type="submit">查找</button><a class="ref-clear" href="{% url 'poetry-exclusions' %}">清除筛选</a></div>
+</form>
+{% include 'reference_library/result_count.html' %}
+<div class="ref-grid">{% for row in page %}<section class="ref-card">
+<h2>{{ row.title|default:'未提供题名' }}</h2><p class="ref-meta">{{ row.author|default:'来源未署作者' }}</p><p>筛选原因：{{ row.reasons }}</p>
+<details class="ref-meta">
+<summary>原始来源位置</summary><p>{{ row.source_path }}#{{ row.source_locator }}</p>
+</details>
+</section>{% empty %}<div class="ref-empty ref-span">
+<h2>没有匹配记录</h2><p>请更换题名、作者，或清除筛选。</p></div>{% endfor %}</div>
+{% include 'pagination.html' %}
+{% endblock %}

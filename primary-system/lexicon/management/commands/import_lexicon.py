@@ -16,7 +16,7 @@ class Command(BaseCommand):
                             choices=['primary', 'words-data', 'xinhua', 'xinhua-chars', 'xinhua-words', 'json', 'unihan', 'oewn'])
         parser.add_argument('--input', type=Path)
         parser.add_argument('--selection', type=Path, help='Wordnet 的固定词形范围清单')
-        parser.add_argument('--module', choices=['all', 'english', 'words', 'idioms'], default='all')
+        parser.add_argument('--module', choices=['all', 'english', 'words', 'idioms'], default='english')
         parser.add_argument('--dry-run', action='store_true')
         parser.add_argument('--batch-size', type=int, default=500)
         parser.add_argument('--report', type=Path)

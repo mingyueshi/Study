@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'reference.css' %}">
+<div class="reference-page">{% block reference_content %}{% endblock %}</div>
+{% endblock %}

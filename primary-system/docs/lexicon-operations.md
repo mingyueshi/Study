@@ -4,18 +4,13 @@
 
 同日已继续完成首批 Unihan／Wordnet 接入与统一查词页面，当前数据及新命令见 [公开词库与查词页手册](public-dictionaries.md)。下文第 1 节表格记录 P0/P1 初始化时的数据，保留用于追溯。
 
-## 1. 本地初始化与当前数据
+## 1. 当前初始化与历史数据
 
-在 `primary-system/` 运行：
+当前新机只运行 `python3.12 bootstrap.py`：从随 Git 保存的 `data/baseline/` 完整恢复来源、版本、生效指针、公开准入、已审状态、稳定 UUID 和中文采用历史；不需要重新导入或逐个启用来源。已有库的校验／显式刷新和保护边界见 [本地开发](local-development.md)。不创建默认账号；首次使用后台仍须自行 `createsuperuser`。
 
-```sh
-.venv/bin/python manage.py migrate
-.venv/bin/python manage.py seed_lexicon_roles
-.venv/bin/python manage.py import_lexicon --adapter primary --dry-run
-.venv/bin/python manage.py import_lexicon --adapter primary --report ../output/lexicon-validation/primary-import.json
-```
+当前包包含六个词库来源：`primary-english`、`primary-words`、`primary-idioms`、`chinese-xinhua-idioms`、`unicode-unihan`、`open-english-wordnet`。具体版本与状态以基础包记录为准。`import_lexicon --adapter primary` 默认仅处理教材英语；旧 words／idioms／all 组合只保留为显式历史维护选项，不是当前恢复步骤。
 
-需要先有现有教学内容；首次初始化可直接运行 `python3.12 bootstrap.py`。它会完成上述迁移、权限与 primary 词卡暂存。导入命令不自动启用来源、不授予公开权限、不发布词条。首次使用后台仍须自行 `createsuperuser`。
+下面的数据表与操作记录是 2026-10-30／31 的阶段历史，不能据此给当前环境补导来源或批准公开。
 
 本次已在本地交付库实际执行：
 
@@ -29,7 +24,7 @@
 
 24 处记录因语言、词头、类型、释义语言、释义、词性与读音全部一致而复用义项，原始证据各自保留。另有 299 对同形词候选，尚未人工判定。所有词条、义项和读音均未批量审核发布；“非空”检查不代表内容正确。
 
-上表为 2026-10-30 交付库的记录。本地库其后被重建（`db.sqlite3` 不进 Git），2026-10-31 已按上述命令在新库恢复全部数据并完成公开准入与批量审核：当前库含 7 个来源、6 个已启用版本，公开显示的为 Unihan／OEWN（registry 发布）与 chinese-xinhua 三个数据集（`review_lexicon` 批量审核），当前快照见第 4a 节。
+上表为 2026-10-30 交付库的记录。本地库其后被重建（`db.sqlite3` 不进 Git），2026-10-31 曾在另一阶段重建库执行恢复与公开操作，形成当时的 7 个来源、6 个已启用版本及 xinhua 三数据集；此状态是历史记录，见第 4a 节，不能描述当前六来源基础包。
 
 交付前备份为仓库 `output/lexicon-validation/before-lexicon-20261030.sqlite3`，权限 0600。逐行核验结果见同目录 `preservation-check.json`；1,219 条内容、1,219 处编排、126 单元、12 学习册、用户和学习进度完全一致。不要用旧备份覆盖之后产生的新用户数据。
 
@@ -69,19 +64,23 @@
 
 候选生成按语言、检索键和类型分组；单组超过 50 个条目时跳过自动两两生成，需先专项核对。没有自动语义判断或全量去重。
 
-## 4. 导入已有成语快照
+## 4. 导入已有成语快照（可选维护）
+
+当前基础包已包含该来源；仅在明确维护来源时使用。`INPUT_JSON` 必须由维护者提供符合固定摘要的原始 JSON，不依赖仓库外已不存在的路径。
 
 ```sh
 .venv/bin/python manage.py import_lexicon --adapter xinhua \
-  --input ../idiom-chain/data/chinese-xinhua/idiom.json --dry-run
+  --input INPUT_JSON --dry-run
 .venv/bin/python manage.py import_lexicon --adapter xinhua \
-  --input ../idiom-chain/data/chinese-xinhua/idiom.json \
+  --input INPUT_JSON \
   --batch-size 500 --report ../output/lexicon-validation/xinhua-stage.json
 ```
 
 适配器只接受已核对的固定文件：上游提交 `8de1001aa499cd65fb97ef8712550188c0297a08`，SHA256 `1d4b4f454ce1c416d6a1ab2369d6e66c0ff99e04390172eef70790499e21ce19`。保留释义、拼音、出处、例句、缩写及原字段路径。上游新版本要先核对来源和结构，再新增适配版本或转换为通用清单，不能只替换文件绕过摘要校验。
 
-## 4a. chinese-xinhua 三数据集与公开准入（2026-10-31）
+## 4a. chinese-xinhua 三数据集与公开准入（历史：2026-10-31）
+
+以下是当时环境的操作归档。当前基线仅包含 xinhua 成语来源，不包含 xinhua 汉字／词语两个来源；新机不执行下面的历史恢复序列。
 
 同一上游 commit `8de1001a` 的三个数据集已全部接入，均为独立来源与独立版本：
 
@@ -103,8 +102,6 @@
 6. 发布后同形词候选池约 9,800 对（xinhua 汉字对 Unihan、成语对教学成语），待人工判定，未做自动归并。
 
 `review_lexicon` 要求来源先在后台完成公开准入（`manage_sources`）；准入决策与批量审核分别留痕。
-
-## 5. 新来源与通用导入清单
 
 ## 5. 新来源与通用导入清单
 

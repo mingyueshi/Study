@@ -1,1 +1,27 @@
-{% extends 'base.html' %}{% block title %}资料探索 · 乐学堂{% endblock %}{% block content %}<div class="page-heading"><p class="eyebrow">读一读，查一查</p><h1>资料探索</h1><p>中文界面与字段对照已提供；英文长释义保留原文，中文翻译分批补齐。资料浏览不自动出题或记录掌握。</p></div><div class="book-grid"><a class="book-card" href="{% url 'dictionary' %}"><h2>查字查词</h2><p>一起查词义、英语读音、汉字属性与笔顺，保留各来源的解释和版本。</p></a><a class="book-card" href="/poetry/"><h2>古诗文</h2><p>原文、选集与异文，保留各来源版本。</p></a><a class="book-card" href="/geography/"><h2>国家与地区</h2><p>中文名称、首都与来源字段说明。</p></a><a class="book-card" href="/science/elements/"><h2>元素</h2><p>118种元素、中文名称、单位与未知标记。</p></a><a class="book-card" href="/astronomy/"><h2>天文星表</h2><p>全星表及具名天体，坐标、单位和异常距离说明。</p></a></div><details class="reading-section" style="overflow-wrap:anywhere"><summary>资料来源版本</summary>{% for dataset in datasets %}<p>{{ dataset.title }} · 来源版本 {{ dataset.version }}</p>{% empty %}<p>资料尚未导入，请由维护者执行全量导入命令。</p>{% endfor %}</details>{% endblock %}
+{% extends 'reference_library/layout.html' %}
+{% load static %}
+{% block title %}资料探索 · 乐学堂{% endblock %}
+{% block reference_content %}
+<header class="ref-header ref-portal-header">
+  <div><p class="ref-kicker">读一读，查一查</p>
+<h1>资料探索</h1><p>从一个字、一首诗，到世界与星空。选一个方向开始探索。</p></div>
+</header>
+<div class="ref-portal-grid">
+  <a class="book-card" href="{% url 'dictionary' %}"><img src="{% static 'icons/english.svg' %}" alt="">
+<h2>查字查词</h2><p>词义、英语读音、汉字属性和笔顺，一起查找。</p><span class="ref-portal-action">打开字词工具 →</span></a>
+  <a class="book-card" data-tone="poetry" href="{% url 'poetry-index' %}"><img src="{% static 'icons/literature.svg' %}" alt="">
+<h2>古诗文</h2><p>读原文，认识作者，对照不同选集与版本。</p><span class="ref-portal-action">翻阅诗文 →</span></a>
+  <a class="book-card" data-tone="geography" href="{% url 'geography-index' %}"><img src="{% static 'icons/globe.svg' %}" alt="">
+<h2>国家与地区</h2><p>认识各地的区域、首都、语言和货币。</p><span class="ref-portal-action">看看世界 →</span></a>
+  <a class="book-card" data-tone="elements" href="{% url 'science-elements' %}"><img src="{% static 'icons/science.svg' %}" alt="">
+<h2>化学元素</h2><p>从符号和原子序数开始，查阅118种元素。</p><span class="ref-portal-action">查找元素 →</span></a>
+  <a class="book-card" data-tone="astronomy" href="{% url 'astronomy-index' %}"><img src="{% static 'icons/astro.svg' %}" alt="">
+<h2>天文星表</h2><p>比较天体名称、星座、距离和星表坐标。</p><span class="ref-portal-action">翻阅星表 →</span></a>
+</div>
+<details class="ref-source">
+<summary>资料来源与版本</summary><p>资料按各自来源保留，英文长释义仍为原文。浏览不会自动生成学习记录。</p>
+<dl class="ref-facts">{% for dataset in datasets %}<dt>{{ dataset.title }}</dt>
+<dd>{{ dataset.version }}</dd>{% empty %}<dt>资料状态</dt>
+<dd>资料正在准备中。</dd>{% endfor %}</dl>
+</details>
+{% endblock %}

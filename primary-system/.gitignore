@@ -7,6 +7,10 @@ __pycache__/
 staticfiles/
 .coverage
 data/*.json
-data/lexicon/
+data/lexicon/*
+!data/lexicon/unihan-18.0.0.zip
+!data/lexicon/CJKRadicals-18.0.0.txt
+!data/lexicon/english-wordnet-2025.xml.gz
+.backups/
 
 .reference-assets/

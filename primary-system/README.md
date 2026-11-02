@@ -22,7 +22,7 @@
 
 ## 本地运行
 
-Python 3.12+；依赖版本固定于 `requirements.txt`。运行不需要 Node，首次导出现有 `primary/` 资料需要 Node。
+Python 3.12+；依赖版本固定于 `requirements.txt`。初始化与运行都不需要 Node、兄弟目录 `primary/` 或历史 `output/`。完整基础内容及固定来源载荷随仓库保存，内容恢复不联网；首次安装 Python 依赖可能需要网络。
 
 ```sh
 cd primary-system
@@ -30,7 +30,7 @@ python3.12 bootstrap.py
 PRIMARY_DEBUG=1 .venv/bin/python manage.py runserver 127.0.0.1:8012
 ```
 
-已有环境先用 SQLite backup API 保存新的恢复点，再执行 `.venv/bin/python manage.py migrate`。2026-11-02 的升级包括专题退出与场景学习目标迁移：词位原主键和标注保留，旧进度逐条映射为词卡掌握，不按拼写合并。详情见 [场景学习对象与迁移](docs/scenario-learning.md)；需要保留旧专题阅读的副本不可直接升级。
+已有数据库默认只校验，不重置内容、用户或学习记录。旧初始化只导入部分教材／暂存词库时，先停止目标服务，再运行 `python3.12 bootstrap.py --refresh-data`：脚本在迁移前建立 SQLite backup 恢复点；需替换且含个人记录或人工修订时拒绝，并给出独立 `--database` 路径。迁移待应用且有个人记录时，在迁移前直接拒绝。详见 [本地开发与数据准备](docs/local-development.md)。
 
 - [学习广场](http://127.0.0.1:8012/)
 - [查字查词](http://127.0.0.1:8012/dictionary/)
@@ -39,9 +39,9 @@ PRIMARY_DEBUG=1 .venv/bin/python manage.py runserver 127.0.0.1:8012
 - [成语接龙](http://127.0.0.1:8012/chain/)
 - [管理后台](http://127.0.0.1:8012/admin/)
 
-首次初始化会暂存教材英语与场景英语词库，不自动切换来源版本。启用词库、导入场景词位、填充接龙词池、创建账号及隔离数据库验证，详见 [本地开发与数据准备](docs/local-development.md)。初始化不会创建默认密码。
+首次初始化从 `data/baseline/` 恢复当前教材编排、固定内容／词义 UUID、已选中文版本、词库生效与公开状态、接龙词池及八个资料数据集，并从当前六个 ZIP 恢复 205 个资料文件。它不重跑旧领域导入，不创建默认账号，也不需要手工启用词库。
 
-默认数据库为 `db.sqlite3`，用 `PRIMARY_SQLITE_PATH` 可指定独立文件。会话和 CSRF Cookie 使用 `primary_` 前缀；本地随机密钥在权限 0600 的 `.local-secret`。数据库、密钥、虚拟环境和快照不进 Git。
+默认数据库为 `db.sqlite3`，用 `PRIMARY_SQLITE_PATH` 可指定独立文件。会话和 CSRF Cookie 使用 `primary_` 前缀；本地随机密钥在权限 0600 的 `.local-secret`。日常数据库、密钥、虚拟环境、备份和解压缓存不进 Git；可复现的基础数据包及三个固定词典来源文件进 Git。
 
 ## 数据模型与扩展
 
@@ -74,6 +74,8 @@ flowchart LR
 `sections` 支持 v1 纯文本和 v2 `text/figure` 块，原始领域字段保留于只读 `source_payload`。目录跨学科／跨模块约束由模型及表单校验，直接 ORM 写入须调用 `full_clean()`；批量更新会绕过模型校验。
 
 ## 内容与词库维护
+
+日常通过当前后台及维护命令更新；需要把核对后的当前内容带到另一台电脑时，重新导出基础包，见 [基础包维护](docs/local-development.md#基础包维护)。下列 Node 导出仅是可选的旧教材维护入口，限定语文／数学／英语三个教材模块，不参与初始化，也不能代替当前数据库编排与完整基础包。
 
 ```sh
 node scripts/export_primary.cjs
@@ -128,6 +130,7 @@ node scripts/export_primary.cjs
 ## 验证与数据库配置
 
 ```sh
+.venv/bin/python -m unittest config.test_base_data
 .venv/bin/python manage.py test --noinput
 .venv/bin/python manage.py check
 .venv/bin/python manage.py makemigrations --check --dry-run

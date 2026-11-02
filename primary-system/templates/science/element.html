@@ -1,1 +1,34 @@
-{% extends 'base.html' %}{% block title %}{{ element.chinese_name|default:element.name }} · 元素资料{% endblock %}{% block content %}<a href="{% url 'science-elements' %}">← 元素列表</a><article class="reader"><h1>{{ element.chinese_name|default:element.name }} {{ element.symbol }}</h1><p>{{ element.name }} · 原子序数{{ element.number }} · {{ element.category_zh }}</p>{% if not element.chinese_name %}<p>中文专名暂缺；不以自动音译冒充规范名称。</p>{% endif %}{% if name_components %}<p>罕用字构字参考：{{ name_components }}（{{ element.symbol }}）</p>{% endif %}<p><a href="{{ name_source }}" target="_blank" rel="noopener">中文名核对：中国化学会元素周期表</a></p><dl><dt>物态</dt><dd>{{ element.phase_zh }}</dd><dt>周期／族</dt><dd>{{ element.period }}／{{ element.group|default_if_none:'未知' }}</dd>{% for label,value,unit in fields %}<dt>{{ label }}</dt><dd>{% if value is None %}未知（来源未给出）{% else %}{{ value }} {{ unit }}{% endif %}</dd>{% endfor %}</dl><p>数值来自固定来源，有的超重元素属性为预测值；使用时需结合来源条件核对，不能当作已审实验值。氢原始气体密度单位与归一化单位不同，均保留展示。</p><h2>英文来源解释（中文翻译待补）</h2><p lang="en">{{ element.summary_en }}</p><small>{{ element.source_locator }} · 原记录摘要{{ element.source_checksum }}</small></article>{% endblock %}
+{% extends 'reference_library/layout.html' %}
+{% block title %}{{ element.chinese_name|default:element.name }} · 元素资料{% endblock %}
+{% block reference_content %}
+{% url 'science-elements' as list_url %}
+{% include 'reference_library/breadcrumbs.html' with subject_title='化学元素' subject_url=list_url current_title=element.chinese_name|default:element.name %}
+<header class="ref-header"><div class="ref-element-identity"><div class="ref-element-badge"><span>{{ element.number }}</span><strong>{{ element.symbol }}</strong></div><div><p class="ref-kicker">{{ element.category_zh }}</p>
+<h1>{{ element.chinese_name|default:element.name }} {{ element.symbol }}</h1><p lang="en">{{ element.name }}</p></div></div>
+</header>
+{% if not element.chinese_name %}<p class="ref-reading-note">中文专名暂缺；不以自动音译冒充规范名称。</p>{% endif %}
+{% if name_components %}<p class="ref-reading-note">罕用字构字参考：{{ name_components }}（{{ element.symbol }}）</p>{% endif %}
+<div class="ref-detail-grid">
+  <section class="ref-panel">
+<h2>物态与数值</h2>
+<dl class="ref-facts">
+<dt>物态</dt>
+<dd>{{ element.phase_zh }}</dd>
+<dt>周期／族</dt>
+<dd>{{ element.period|default_if_none:'未知' }}／{{ element.group|default_if_none:'未知' }}</dd>{% for label,value,unit in fields %}<dt>{{ label }}</dt>
+<dd>{% if value is None %}未知（来源未给出）{% else %}{{ value }} {{ unit }}{% endif %}</dd>{% endfor %}</dl><p class="ref-reading-note">部分超重元素属性为预测值，不能当作已审实验值。氢原始气体密度单位与归一化单位不同，均保留展示。</p>
+</section>
+  <section class="ref-panel">
+<h2>英文来源解释</h2><p class="ref-reading-note">中文翻译待补。</p><p lang="en">{{ element.summary_en|default:'来源未提供英文解释。' }}</p>
+</section>
+</div>
+<details class="ref-source">
+<summary>出处、中文名称与原始字段</summary><p><a href="{{ name_source }}" target="_blank" rel="noopener">中文名核对：中国化学会元素周期表</a></p>
+<dl class="ref-facts">
+<dt>来源位置</dt>
+<dd>{{ element.source_locator }}</dd>
+<dt>原记录摘要</dt>
+<dd>{{ element.source_checksum }}</dd>{% for key,value in element.raw.items %}<dt>{{ key }}</dt>
+<dd>{{ value|default_if_none:'未知' }}</dd>{% endfor %}</dl>
+</details>
+{% endblock %}

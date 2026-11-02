@@ -1,0 +1,5 @@
+{% load reference_ui %}
+<nav class="ref-breadcrumbs" aria-label="资料导航">
+  <a href="{% url 'reference-library' %}">资料探索</a>
+  {% if subject_title %}<span aria-hidden="true">/</span>{% if current_title %}<a href="{{ subject_url }}{% reference_query %}">{{ subject_title }}</a><span aria-hidden="true">/</span><span aria-current="page" title="{{ current_title }}">{{ current_title|truncatechars:48 }}</span>{% else %}<span aria-current="page">{{ subject_title }}</span>{% endif %}{% endif %}
+</nav>
