@@ -1,16 +1,17 @@
 {% extends 'base.html' %}{% load static %}{% block title %}场景单词 · 乐学堂{% endblock %}
 {% block content %}<link rel="stylesheet" href="{% static 'words/words.css' %}"><script src="{% static 'speech.js' %}" defer></script><script src="{% static 'tts.js' %}" defer></script>{{ state|json_script:"words-state" }}
 <div class="study-shell words-shell">
-  <aside class="sidebar">
+  <aside class="sidebar" aria-label="场景选择">
     <div class="sidebar-label">切换场景 <span class="nav-count" id="words-nav-count"></span></div>
     <details class="category-nav" open><summary>场景列表</summary><nav id="words-chips"></nav></details>
     <p class="sidebar-note">点场景换一组词；点单词听发音；记不住就看拆分和提示。</p>
   </aside>
   <div class="study-content">
     <div class="toolbar">
-      <div class="search-box"><input id="words-search" type="search" placeholder="搜索单词、中文或场景" autocomplete="off"></div>
-      <button class="play-btn" type="button" id="words-play-btn" data-tts-sequence="#words-cards" data-tts-rate="0.78">▶️ 连读本组</button>
+      <div class="search-box"><label class="sr-only" for="words-search">搜索单词、中文或场景</label><input id="words-search" type="search" placeholder="搜索单词、中文或场景" autocomplete="off"></div>
+      <button class="play-btn" type="button" id="words-play-btn" data-tts-sequence="#words-cards" data-tts-rate="0.78"><span aria-hidden="true">▶</span> 连读本组</button>
     </div>
+    {% include 'includes/tts_controls.html' %}
     <p id="words-feedback" class="words-feedback" role="status" aria-live="polite" aria-atomic="true"></p>
     <main id="words-cards" tabindex="-1"></main>
   </div>

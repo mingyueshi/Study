@@ -1,0 +1,110 @@
+{% extends 'idioms/layout.html' %}{% load static %}
+{% block title %}场景成语 · 乐学堂{% endblock %}
+{% block idiom_content %}
+<header class="idiom-hero">
+  <div class="idiom-hero-copy">
+    <span class="idiom-hero-icon"><img src="{% static 'icons/idioms.svg' %}" alt="" width="56" height="56"></span>
+    <div>
+      <p class="eyebrow">语文 · {{ scene_count }} 个生活场景</p>
+      <h1>场景成语</h1>
+      <p>先想一想生活里的小故事，再找一个用得上的成语。</p>
+    </div>
+  </div>
+  <form class="idiom-search" method="get" action="{% url 'idiom-scenes' %}" role="search" aria-label="成语词典">
+    <input type="hidden" name="scene" value="{{ scene.code }}">
+    <label for="idiom-query">搜索成语词典</label>
+    <div class="idiom-search-field">
+      <input type="search" id="idiom-query" name="q" value="{{ q }}" maxlength="100" required
+             placeholder="例如：兴高采烈"{% if invalid %} aria-invalid="true" aria-describedby="idiom-query-error"{% endif %}>
+      <button class="button" type="submit">查成语</button>
+    </div>
+    {% if invalid %}<p id="idiom-query-error">请输入 100 字以内的有效查询。</p>{% endif %}
+  </form>
+</header>
+{% if searched %}
+<section class="idiom-search-results" aria-labelledby="idiom-results">
+  <div class="idiom-section-heading">
+    <h2 id="idiom-results">词典搜索结果</h2>
+    <p>「{{ q }}」共找到 {{ page.paginator.count }} 个词条</p>
+  </div>
+  {% if page.object_list %}
+    <ul class="idiom-result-list">
+      {% for entry in page.object_list %}
+      <li><a href="{% url 'idiom-entry' entry.pk %}">{{ entry.headword }} <span aria-hidden="true">↗</span></a></li>
+      {% endfor %}
+    </ul>
+    {% if page.has_other_pages %}
+    <nav class="idiom-pagination" aria-label="词典结果分页">
+      {% if page.has_previous %}<a href="?scene={{ scene.code }}&amp;q={{ q|urlencode }}&amp;page={{ page.previous_page_number }}#idiom-results">← 上一页</a>{% endif %}
+      <span>第 {{ page.number }} / {{ page.paginator.num_pages }} 页</span>
+      {% if page.has_next %}<a href="?scene={{ scene.code }}&amp;q={{ q|urlencode }}&amp;page={{ page.next_page_number }}#idiom-results">下一页 →</a>{% endif %}
+    </nav>
+    {% endif %}
+  {% else %}
+    <p>暂时没有找到匹配的词条。可以试着只输入其中一两个字。</p>
+  {% endif %}
+</section>
+{% endif %}
+<div class="idiom-workspace">
+  <nav id="idiom-scenes" class="idiom-scene-nav" aria-label="切换成语场景">
+    <div class="idiom-nav-title"><h2>切换场景</h2><span>{{ scene_count }} 个</span></div>
+    {% for group in groups %}
+    <section class="idiom-nav-group" data-group="{{ group.code }}" aria-labelledby="group-{{ group.code }}">
+      <h3 id="group-{{ group.code }}">{{ group.title }}</h3>
+      <ul>{% for item in group.scenes %}
+        <li><a href="{% url 'idiom-scenes' %}?scene={{ item.code }}#idiom-practice"{% if item.code == scene.code %} aria-current="true"{% endif %}>{{ item.title }}{% if item.code == scene.code %}<span aria-hidden="true">✓</span>{% endif %}</a></li>
+      {% endfor %}</ul>
+    </section>
+    {% endfor %}
+  </nav>
+  <section class="idiom-scene-content" id="idiom-practice" aria-labelledby="idiom-practice-title">
+    <header class="idiom-situation">
+      <div>
+        <p class="idiom-kicker">当前场景</p>
+        <h2 id="idiom-practice-title">{{ scene.title }}</h2>
+        <p>{{ scene.description }}</p>
+      </div>
+      <div class="idiom-prompt"><strong>想象一下</strong><p>{{ scene.prompt }}</p></div>
+      <a class="idiom-return-nav idiom-text-link" href="#idiom-scenes">切换场景 ↑</a>
+    </header>
+    <div class="idiom-card-toolbar">
+      <p><strong>本组成语</strong></p>
+      <p class="idiom-meta">本组可读 {{ available_count }} / {{ cards|length }} 个成语</p>
+    </div>
+    <div class="idiom-cards">
+      {% for card in cards %}
+      <article class="idiom-reader" id="word-{{ card.id }}">
+        {% with reading=card.reading %}
+        <header class="idiom-card-heading">
+          <span class="idiom-card-number" aria-hidden="true">{{ forloop.counter|stringformat:"02d" }}</span>
+          <h3>{{ card.headword }}</h3>
+          {% include 'idioms/pinyin.html' %}
+        </header>
+        <div class="idiom-card-body">
+        {% if reading %}
+          <dl class="idiom-practice">
+            <div><dt>场景例句</dt><dd>{{ card.example }}</dd></div>
+            <div><dt>用法提示</dt><dd>{{ card.note }}</dd></div>
+          </dl>
+          <dl class="idiom-definition">{% include 'idioms/gloss.html' %}</dl>
+          <div class="idiom-card-footer">
+            {% if reading.properties.derivation or reading.properties.example %}
+            <details class="idiom-extras">
+              <summary>词典出处与原例句</summary>
+              <dl class="idiom-definition">{% include 'idioms/source_examples.html' %}</dl>
+            </details>
+            {% endif %}
+            <a class="idiom-text-link" href="{% url 'idiom-entry' card.entry_id %}#record-{{ reading.record_id }}">查看词典详情 <span aria-hidden="true">↗</span></a>
+          </div>
+        {% else %}
+          <p class="idiom-paused">场景词卡待核对</p>
+          <p>当前词典来源或词条内容发生了变化。</p>
+        {% endif %}
+        </div>
+        {% endwith %}
+      </article>
+      {% endfor %}
+    </div>
+  </section>
+</div>
+{% endblock %}

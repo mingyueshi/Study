@@ -1,12 +1,27 @@
 {% extends 'base.html' %}{% load static %}
-{% block content %}<section class="study-strip"><div><strong>资料探索</strong><span>词典、读音、汉字、诗文、地理、元素与天文</span></div><a class="button" href="/references/">进入资料库 →</a></section>
+{% block content %}
 <section class="hero">
   <div class="hero-copy"><p class="eyebrow">你的日常学习小天地</p><h1>今天，想探索<br><span>哪一种精彩？</span></h1><p class="lead">从课本里的一个知识点，到世界里的一个小问号。<br>选一本学习册，用自己的节奏慢慢读懂。</p><a class="button" href="#books">挑选学习册 <span aria-hidden="true">↗</span></a></div>
   <div class="hero-art" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="art-bubble art-book"><img src="{% static 'icons/book.svg' %}" alt=""></div><div class="art-bubble art-globe"><img src="{% static 'icons/globe.svg' %}" alt=""></div><div class="art-bubble art-math"><img src="{% static 'icons/math.svg' %}" alt=""></div><span class="spark spark-one">✦</span><span class="spark spark-two">✧</span><span class="art-note">保持好奇，天天有新发现</span></div>
 </section>
-<section class="study-strip" aria-label="学习概况">{% if progress %}<div><strong>{{ progress.started }}</strong><span>开始学习</span></div><div><strong>{{ progress.mastered }}</strong><span>已经掌握</span></div><div><strong>{{ progress.bookmarked }}</strong><span>我的收藏</span></div><a href="{% url 'my-learning' %}">继续我的学习 →</a>{% else %}<div><strong>{{ modules|length }}</strong><span>探索方向</span></div><div><strong>{{ item_count }}</strong><span>当前可读内容</span></div><p>登录后，收藏、笔记和掌握记录会跟着你的账号走。</p>{% endif %}</section>
-<section aria-labelledby="modules-title"><div class="section-heading"><div><p class="eyebrow">跟着兴趣出发</p><h2 id="modules-title">每一科，都有新发现</h2></div><p>教材同步之外，还有成语接龙这样的玩法</p></div>
-<div class="module-grid">{% for module in modules %}<a class="module-card color-{{ module.subject.code }}" href="{{ module.entry_url }}{% if module.code != 'chain' and module.code != 'words' %}{% querystring %}{% endif %}"><img src="{% static 'icons/' %}{{ module.icon }}.svg" alt="" width="88" height="88"><span class="module-meta">{{ module.subject.name }} <span aria-hidden="true">↗</span></span><h3>{{ module.name }}</h3><p>{{ module.description }}</p><span class="tag">{% if module.available_count %}{{ module.available_count }} 本学习册{% elif module.code == 'chain' %}去接龙 →{% elif module.code == 'words' %}开始认词 →{% else %}暂无匹配学习册{% endif %}</span></a>{% endfor %}</div></section>
+<section class="study-strip" aria-label="学习概况">{% if progress %}<div><strong>{{ progress.started }}</strong><span>开始学习</span></div><div><strong>{{ progress.mastered }}</strong><span>已经掌握</span></div><div><strong>{{ progress.bookmarked }}</strong><span>我的收藏</span></div><a href="{% url 'my-learning' %}">继续我的学习 →</a>{% else %}<div><strong>{{ modules|length|add:"2" }}</strong><span>探索方向</span></div><div><strong>{{ item_count }}</strong><span>当前可读内容</span></div><p>登录后，收藏、笔记和掌握记录会跟着你的账号走。</p>{% endif %}</section>
+<section aria-labelledby="modules-title"><div class="section-heading"><div><p class="eyebrow">跟着兴趣出发</p><h2 id="modules-title">每一科，都有新发现</h2></div><p>读课本、学成语，也可以用诗句接飞花令。</p></div>
+<div class="module-grid">{% for module in modules %}<a class="module-card color-{{ module.subject.code }}" href="{{ module.entry_url }}{% if module.code != 'chain' and module.code != 'words' %}{% querystring %}{% endif %}"><img src="{% static 'icons/' %}{{ module.icon }}.svg" alt="" width="88" height="88"><span class="module-meta">{{ module.subject.name }} <span aria-hidden="true">↗</span></span><h3>{{ module.name }}</h3><p>{{ module.description }}</p><span class="tag">{% if module.available_count %}{{ module.available_count }} 本学习册{% elif module.code == 'chain' %}去接龙 →{% elif module.code == 'words' %}开始认词 →{% else %}暂无匹配学习册{% endif %}</span></a>{% endfor %}
+  <a class="module-card color-chinese" href="{% url 'feihualing' %}">
+    <img src="{% static 'icons/literature.svg' %}" alt="" width="88" height="88">
+    <span class="module-meta">古诗词 <span aria-hidden="true">↗</span></span>
+    <h3>飞花令</h3>
+    <p>选一个令字，想一句含这个字的诗，集满五句写成自己的诗单。</p>
+    <span class="tag">开始练诗 →</span>
+  </a>
+  <a class="module-card color-chinese" href="{% url 'idiom-scenes' %}">
+    <img src="{% static 'icons/idioms.svg' %}" alt="" width="88" height="88">
+    <span class="module-meta">语文 <span aria-hidden="true">↗</span></span>
+    <h3>场景成语</h3>
+    <p>从学习、心情和身边的小事出发，读懂成语，学会在一句话里用它。</p>
+    <span class="tag">看看生活里的成语 →</span>
+  </a>
+</div></section>
 <section id="books" aria-labelledby="books-title"><div class="section-heading"><div><p class="eyebrow">找到适合自己的那一本</p><h2 id="books-title">我的学习书架</h2></div><p>跟着课本的进度走</p></div>{% include 'catalog/filters.html' %}
 <section class="shelf" aria-labelledby="shelf-textbook"><div class="shelf-heading"><h3 id="shelf-textbook">📘 教材同步</h3><p>单元与册次对应手里的教材。</p></div>{% include 'catalog/book_list.html' with collections=textbook_shelf %}</section>
 </section>

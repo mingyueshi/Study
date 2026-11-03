@@ -7,6 +7,7 @@
   <div>{% if not searched %}<p class="eyebrow">从一个字，认识更大的世界</p>{% endif %}<h1>查字查词</h1><p class="lead">词义、读音、笔顺与字形，在这里一起查。</p></div>
   {% if not searched %}<div class="letter-art" aria-hidden="true"><span class="han-letter">字<small>zì</small></span><span class="en-letter">Aa<small>word by word</small></span><i>✦</i></div>{% endif %}
 </section>
+<p><a class="tag" href="{% url 'idiom-scenes' %}">场景成语 <span aria-hidden="true">↗</span></a></p>
 <form class="lookup-search" method="get" action="{% url 'dictionary' %}" role="search" aria-label="查字查词">
   <div class="lookup-query">{{ form.q.label_tag }}{{ form.q }}{{ form.q.errors }}</div>
   <button class="button" type="submit">查一查 <span aria-hidden="true">→</span></button>

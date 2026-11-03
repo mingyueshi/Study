@@ -1,0 +1,46 @@
+{% extends 'base.html' %}{% load static %}
+{% block title %}飞花令 · 乐学堂{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'poetry/feihualing.css' %}">
+{{ state|json_script:'feihualing-state' }}
+<div class="fh-page" id="feihualing" data-api="{% url 'feihualing-action' %}">
+  <div class="fh-topline"><a class="back" href="{% url 'poetry-index' %}">← 古诗文</a><span>诗词里的小小相逢</span></div>
+  <header class="fh-header"><div><h1>飞花令<span class="fh-seal" aria-hidden="true">诗</span></h1><p>拈一个字，想一句诗。用五句诗，收好这一页风景。</p></div><span class="fh-edition">单字令 · 五句练习</span></header>
+  <div class="fh-layout">
+    <aside class="fh-panel fh-choices" aria-label="选择令字">
+      <h2>今日，拈什么字？</h2><p class="fh-muted">字在句中哪里都可以。</p>
+      <div class="fh-keywords" id="fh-keywords"></div>
+      <div class="fh-rules"><h3>一起来玩</h3><ol><li>写一句含令字的诗。</li><li>每次换一句，不重复。</li><li>答满五次，收成诗单。</li></ol><p>想不起来，可以借张提示笺。揭晓的诗句会单独标为“提示学习”。</p></div>
+      <details class="fh-details"><summary>查看完整规则</summary><p>可以答完整一句，也可以答含令字的半句。答中后会显示完整一句；其中含令字的分句不可再拆开重复答。</p><p>繁简体均可，常用标点和空格不影响。错别字请先改一改，再接下一句。</p><p>暂未收录的诗句可以换一句。练习不限令字位置，也没有倒计时。</p></details>
+      <a class="fh-source-link" href="{% url 'poetry-index' %}">翻阅古诗文 →</a>
+    </aside>
+    <div class="fh-workspace">
+      <section class="fh-confirm" id="fh-confirm" hidden aria-labelledby="fh-confirm-title"><h2 id="fh-confirm-title">开启新局？</h2><p id="fh-confirm-copy"></p><div><button type="button" class="fh-button" id="fh-confirm-yes">换字，开启新局</button><button type="button" class="fh-button fh-secondary" id="fh-confirm-no">继续这一局</button></div></section>
+      <section class="fh-panel fh-writing" aria-labelledby="fh-writing-title">
+        <div class="fh-order">
+          <div><p>本局令字</p><h2 id="fh-keyword" aria-label="本局令字">月</h2></div>
+          <div class="fh-order-copy"><h3 id="fh-writing-title">写一句含“月”的诗</h3><p>不急，给记忆一点时间。</p><div id="fh-dots" class="fh-dots" aria-label="练习进度"></div></div>
+          <svg class="fh-blossom" viewBox="0 0 160 120" aria-hidden="true"><path d="M150 108Q99 78 98 9M140 102Q98 48 38 31M113 77Q70 78 30 62" fill="none" stroke="currentColor" stroke-width="2"/><g fill="#b85c4a"><circle cx="96" cy="20" r="8"/><circle cx="108" cy="25" r="8"/><circle cx="105" cy="38" r="8"/><circle cx="91" cy="39" r="8"/><circle cx="85" cy="27" r="8"/><circle cx="45" cy="29" r="6"/><circle cx="54" cy="35" r="6"/><circle cx="48" cy="45" r="6"/><circle cx="37" cy="42" r="6"/><circle cx="35" cy="32" r="6"/></g><g fill="#e9c274"><circle cx="97" cy="29" r="4"/><circle cx="44" cy="37" r="3"/></g></svg>
+        </div>
+        <div id="fh-unavailable" class="fh-unavailable" hidden><h3>诗句正在准备中</h3><p id="fh-unavailable-copy"></p><a href="{% url 'poetry-index' %}">先去读一首诗 →</a></div>
+        <form id="fh-form" autocomplete="off">
+          <div class="fh-input-heading"><label for="fh-answer">接下一句</label><span id="fh-count">0 / 5</span></div>
+          <textarea id="fh-answer" name="answer" rows="2" maxlength="100" placeholder="写一句含“月”的诗" aria-describedby="fh-input-note" disabled></textarea>
+          <div class="fh-form-actions"><span id="fh-input-note">Enter 提交 · Shift + Enter 换行</span><button class="fh-button" id="fh-submit" type="submit" disabled>提交诗句 <span aria-hidden="true">↗</span></button></div>
+        </form>
+        <p class="fh-feedback" id="fh-feedback" role="status" aria-live="polite" aria-atomic="true"></p>
+        <div class="fh-complete" id="fh-complete" hidden><p class="fh-complete-label">本局小结</p><h3 id="fh-complete-title">五句完成，真不错！</h3><p id="fh-complete-copy"></p><div><button type="button" class="fh-button" id="fh-again">再练同字</button><button type="button" class="fh-button fh-secondary" id="fh-change">换个令字</button></div></div>
+        <div class="fh-reset-row"><span>本页临时练习 · 刷新开启新局</span><button type="button" id="fh-reset" class="fh-text-button">重新练习</button></div>
+      </section>
+      <section class="fh-panel fh-hint-panel" id="fh-hint-panel" aria-labelledby="fh-hint-title">
+        <div class="fh-hint-heading"><div><h2 id="fh-hint-title">给记忆，一点线索</h2><p>先看诗题与掩字句，再试着回想。</p></div><button type="button" class="fh-button fh-secondary" id="fh-hint-button" disabled>借张提示笺</button></div>
+        <div class="fh-hint" id="fh-hint" hidden><p id="fh-hint-source"></p><p class="fh-masked" id="fh-masked"></p><button type="button" class="fh-text-button" id="fh-reveal">揭晓一句，提示学习 →</button><small>揭晓后收入诗单，不计为独立作答。</small></div>
+      </section>
+      <p class="fh-footnote" id="fh-corpus-note">本次练习选用唐诗、宋词、诗经、楚辞和千家诗；暂未收录的句子可以换一句。练习不写入掌握记录。</p>
+      <noscript><p>请开启 JavaScript 后开始互动练习；也可以先从古诗文页面阅读原诗。</p></noscript>
+    </div>
+    <aside class="fh-panel fh-notebook" aria-labelledby="fh-notebook-title"><div class="fh-notebook-heading"><h2 id="fh-notebook-title">本局诗单</h2><span id="fh-history-count">0 / 5</span></div><p class="fh-notebook-note">把想起的诗句，留在这里。</p><div id="fh-history-empty" class="fh-history-empty"><span aria-hidden="true">笺</span><p>每接住一句诗，<br>这里就多一片风景。</p></div><ol id="fh-history"></ol><p class="fh-notebook-bottom">一字有景，句句有来处。</p></aside>
+  </div>
+</div>
+<script src="{% static 'poetry/feihualing.js' %}" defer></script>
+{% endblock %}

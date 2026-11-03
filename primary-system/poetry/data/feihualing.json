@@ -1,0 +1,727 @@
+{
+  "schema_version": 1,
+  "version": "feihualing-preferred-20261103-v2",
+  "keywords": [
+    "月",
+    "花",
+    "春",
+    "山",
+    "水",
+    "风"
+  ],
+  "note": "已核对的常见版本、简体展示与提示优先清单；飞花令从入库诗词扩充，此清单不是全部准入范围。保留来源题名、署名与原文，人工采用差异另有说明。",
+  "poems": [
+    {
+      "id": "chunxiao",
+      "title": "春晓",
+      "author": "孟浩然",
+      "source_title": "春曉",
+      "source_author": "孟浩然",
+      "source": {
+        "version": "b8594f81a89752241442f2ce267d6f66f96704ee",
+        "path": "poetry/derived/全唐诗/唐诗三百首.json",
+        "locator": "/116",
+        "sha256": "71d56dd74e0f0ea4dc05b71a950aa8b3f840250eef479dcb58a0bf1e123e2d6e"
+      },
+      "paragraphs": [
+        {
+          "text": "春眠不觉晓，处处闻啼鸟。",
+          "source_text": "春眠不覺曉，處處聞啼鳥。"
+        },
+        {
+          "text": "夜来风雨声，花落知多少。",
+          "source_text": "夜來風雨聲，花落知多少。"
+        }
+      ]
+    },
+    {
+      "id": "jingyesi",
+      "title": "静夜思",
+      "author": "李白",
+      "source_title": "靜夜思",
+      "source_author": "（唐）李白",
+      "source": {
+        "version": "b8594f81a89752241442f2ce267d6f66f96704ee",
+        "path": "poetry/raw/蒙学/qianjiashi.json",
+        "locator": "/content/0/content/28",
+        "sha256": "cf34d01ed29528052da5d96543e725ab67814a6cb093183808c889400ff62417"
+      },
+      "paragraphs": [
+        {
+          "text": "床前明月光，疑是地上霜。",
+          "source_text": "牀前明月光，疑是地上霜。"
+        },
+        {
+          "text": "举头望明月，低头思故乡。",
+          "source_text": "舉頭望明月，低頭思故鄉。"
+        }
+      ]
+    },
+    {
+      "id": "dengguanquelou",
+      "title": "登鹳雀楼",
+      "author": "王之涣",
+      "source_title": "登鸛雀樓",
+      "source_author": "（唐）王之渙",
+      "source": {
+        "version": "b8594f81a89752241442f2ce267d6f66f96704ee",
+        "path": "poetry/raw/蒙学/qianjiashi.json",
+        "locator": "/content/0/content/5",
+        "sha256": "cf34d01ed29528052da5d96543e725ab67814a6cb093183808c889400ff62417"
+      },
+      "paragraphs": [
+        {
+          "text": "白日依山尽，黄河入海流。",
+          "source_text": "白日依山盡，黃河入海流。"
+        },
+        {
+          "text": "欲穷千里目，更上一层楼。",
+          "source_text": "欲窮千里目，更上一層樓。"
+        }
+      ]
+    },
+    {
+      "id": "jingtingshan",
+      "title": "独坐敬亭山",
+      "author": "李白",
+      "source_title": "獨坐敬亭山",
+      "source_author": "（唐）李白",
+      "source": {
+        "version": "b8594f81a89752241442f2ce267d6f66f96704ee",
+        "path": "poetry/raw/蒙学/qianjiashi.json",
+        "locator": "/content/0/content/4",
+        "sha256": "cf34d01ed29528052da5d96543e725ab67814a6cb093183808c889400ff62417"
+      },
+      "paragraphs": [
+        {
+          "text": "众鸟高飞尽，孤云独去闲。",
+          "source_text": "衆鳥高飛盡，孤雲獨去閒。"
+        },
+        {
+          "text": "相看两不厌，只有敬亭山。",
+          "source_text": "相看兩不厭，只有敬亭山。"
+        }
+      ]
+    },
+    {
+      "id": "zhuliguan",
+      "title": "竹里馆",
+      "author": "王维",
+      "source_title": "竹裏館",
+      "source_author": "（唐）王維",
+      "source": {
+        "version": "b8594f81a89752241442f2ce267d6f66f96704ee",
+        "path": "poetry/raw/蒙学/qianjiashi.json",
+        "locator": "/content/0/content/12",
+        "sha256": "cf34d01ed29528052da5d96543e725ab67814a6cb093183808c889400ff62417"
+      },
+      "paragraphs": [
+        {
+          "text": "独坐幽篁里，弹琴复长啸。",
+          "source_text": "獨坐幽篁裏，彈琴復長嘯。"
+        },
+        {
+          "text": "深林人不知，明月来相照。",
+          "source_text": "深林人不知，明月來相照。"
+        }
+      ]
+    },
+    {
+      "id": "xunyinzhe",
+      "title": "寻隐者不遇",
+      "author": "贾岛",
+      "source_title": "尋隱者不遇",
+      "source_author": "（唐）賈島",
+      "source": {
+        "version": "b8594f81a89752241442f2ce267d6f66f96704ee",
+        "path": "poetry/raw/蒙学/qianjiashi.json",
+        "locator": "/content/0/content/26",
+        "sha256": "cf34d01ed29528052da5d96543e725ab67814a6cb093183808c889400ff62417"
+      },
+      "paragraphs": [
+        {
+          "text": "松下问童子，言师采药去。",
+          "source_text": "松下問童子，言師採藥去。"
+        },
+        {
+          "text": "只在此山中，云深不知处。",
+          "source_text": "只在此山中，雲深不知處。"
+        }
+      ]
+    },
+    {
+      "id": "chunyexiyu",
+      "title": "春夜喜雨",
+      "author": "杜甫",
+      "source_title": "春夜喜雨",
+      "source_author": "杜甫",
+      "source": {
+        "version": "b8594f81a89752241442f2ce267d6f66f96704ee",
+        "path": "poetry/derived/全唐诗/poet.tang.11000.json",
+        "locator": "/219",
+        "sha256": "84798d4c3ea6e7a4a085c3cf61bd8859fc5db8999d768ba7aa519403b0e28b98"
+      },
+      "paragraphs": [
+        {
+          "text": "好雨知时节，当春乃发生。",
+          "source_text": "好雨知時節，當春乃發生。"
+        },
+        {
+          "text": "随风潜入夜，润物细无声。",
+          "source_text": "隨風潛入夜，潤物細無聲。"
+        },
+        {
+          "text": "野径云俱黑，江船火独明。",
+          "source_text": "野徑雲俱黑，江船火獨明。"
+        },
+        {
+          "text": "晓看红湿处，花重锦官城。",
+          "source_text": "曉看紅濕處，花重錦官城。"
+        }
+      ]
+    },
+    {
+      "id": "chunwang",
+      "title": "春望",
+      "author": "杜甫",
+      "source_title": "春望",
+      "source_author": "杜甫",
+      "source": {
+        "version": "b8594f81a89752241442f2ce267d6f66f96704ee",
+        "path": "poetry/derived/全唐诗/唐诗三百首.json",
+        "locator": "/201",
+        "sha256": "71d56dd74e0f0ea4dc05b71a950aa8b3f840250eef479dcb58a0bf1e123e2d6e"
+      },
+      "paragraphs": [
+        {
+          "text": "国破山河在，城春草木深。",
+          "source_text": "國破山河在，城春草木深。"
+        },
+        {
+          "text": "感时花溅泪，恨别鸟惊心。",
+          "source_text": "感時花濺淚，恨別鳥驚心。"
+        },
+        {
+          "text": "烽火连三月，家书抵万金。",
+          "source_text": "烽火連三月，家書抵萬金。"
+        },
+        {
+          "text": "白头搔更短，浑欲不胜簪。",
+          "source_text": "白頭搔更短，渾欲不勝簪。"
+        }
+      ]
+    },
+    {
+      "id": "sujiandejiang",
+      "title": "宿建德江",
+      "author": "孟浩然",
+      "source_title": "宿建德江",
+      "source_author": "孟浩然",
+      "source": {
+        "version": "b8594f81a89752241442f2ce267d6f66f96704ee",
+        "path": "poetry/derived/全唐诗/唐诗三百首.json",
+        "locator": "/117",
+        "sha256": "71d56dd74e0f0ea4dc05b71a950aa8b3f840250eef479dcb58a0bf1e123e2d6e"
+      },
+      "paragraphs": [
+        {
+          "text": "移舟泊烟渚，日暮客愁新。",
+          "source_text": "移舟泊煙渚，日暮客愁新。"
+        },
+        {
+          "text": "野旷天低树，江清月近人。",
+          "source_text": "野曠天低樹，江清月近人。"
+        }
+      ]
+    },
+    {
+      "id": "wangyuehuaiyuan",
+      "title": "望月怀远",
+      "author": "张九龄",
+      "source_title": "望月懷遠",
+      "source_author": "張九齡",
+      "source": {
+        "version": "b8594f81a89752241442f2ce267d6f66f96704ee",
+        "path": "poetry/derived/全唐诗/唐诗三百首.json",
+        "locator": "/226",
+        "sha256": "71d56dd74e0f0ea4dc05b71a950aa8b3f840250eef479dcb58a0bf1e123e2d6e"
+      },
+      "paragraphs": [
+        {
+          "text": "海上生明月，天涯共此时。",
+          "source_text": "海上生明月，天涯共此時。"
+        },
+        {
+          "text": "情人怨遥夜，竟夕起相思。",
+          "source_text": "情人怨遙夜，竟夕起相思。"
+        },
+        {
+          "text": "灭烛怜光满，披衣觉露滋。",
+          "source_text": "滅燭憐光滿，披衣覺露滋。"
+        },
+        {
+          "text": "不堪盈手赠，还寝梦佳期。",
+          "source_text": "不堪盈手贈，還寢夢佳期。"
+        }
+      ]
+    },
+    {
+      "id": "songyouren",
+      "title": "送友人",
+      "author": "李白",
+      "source_title": "送友人",
+      "source_author": "李白",
+      "source": {
+        "version": "b8594f81a89752241442f2ce267d6f66f96704ee",
+        "path": "poetry/derived/全唐诗/唐诗三百首.json",
+        "locator": "/314",
+        "sha256": "71d56dd74e0f0ea4dc05b71a950aa8b3f840250eef479dcb58a0bf1e123e2d6e"
+      },
+      "paragraphs": [
+        {
+          "text": "青山横北郭，白水绕东城。",
+          "source_text": "青山橫北郭，白水遶東城。"
+        },
+        {
+          "text": "此地一为别，孤蓬万里征。",
+          "source_text": "此地一爲別，孤蓬萬里征。"
+        },
+        {
+          "text": "浮云游子意，落日故人情。",
+          "source_text": "浮雲遊子意，落日故人情。"
+        },
+        {
+          "text": "挥手自兹去，萧萧班马鸣。",
+          "source_text": "揮手自茲去，蕭蕭班馬鳴。"
+        }
+      ]
+    },
+    {
+      "id": "cibeigushanxia",
+      "title": "次北固山下",
+      "author": "王湾",
+      "source_title": "次北固山下",
+      "source_author": "（唐）王灣",
+      "source": {
+        "version": "b8594f81a89752241442f2ce267d6f66f96704ee",
+        "path": "poetry/raw/蒙学/qianjiashi.json",
+        "locator": "/content/1/content/8",
+        "sha256": "cf34d01ed29528052da5d96543e725ab67814a6cb093183808c889400ff62417"
+      },
+      "paragraphs": [
+        {
+          "text": "客路青山外，行舟绿水前。",
+          "source_text": "客路青山外，行舟綠水前。"
+        },
+        {
+          "text": "潮平两岸阔，风正一帆悬。",
+          "source_text": "潮平兩岸闊，風正一帆懸。"
+        },
+        {
+          "text": "海日生残夜，江春入旧年。",
+          "source_text": "海日生殘夜，江春入舊年。"
+        },
+        {
+          "text": "乡书何处达，归雁洛阳边。",
+          "source_text": "鄉書何處達，歸雁洛陽邊。"
+        }
+      ]
+    },
+    {
+      "id": "chunri",
+      "title": "春日",
+      "author": "朱熹",
+      "source_title": "春日",
+      "source_author": "（宋）朱熹",
+      "source": {
+        "version": "b8594f81a89752241442f2ce267d6f66f96704ee",
+        "path": "poetry/raw/蒙学/qianjiashi.json",
+        "locator": "/content/2/content/1",
+        "sha256": "cf34d01ed29528052da5d96543e725ab67814a6cb093183808c889400ff62417"
+      },
+      "paragraphs": [
+        {
+          "text": "胜日寻芳泗水滨，无边光景一时新。",
+          "source_text": "勝日尋芳泗水濱，無邊光景一時新。"
+        },
+        {
+          "text": "等闲识得东风面，万紫千红总是春。",
+          "source_text": "等閒識得東風面，萬紫千紅總是春。"
+        }
+      ]
+    },
+    {
+      "id": "yuanri",
+      "title": "元日",
+      "author": "王安石",
+      "source_title": "元日",
+      "source_author": "（宋）王安石",
+      "source": {
+        "version": "b8594f81a89752241442f2ce267d6f66f96704ee",
+        "path": "poetry/raw/蒙学/qianjiashi.json",
+        "locator": "/content/2/content/6",
+        "sha256": "cf34d01ed29528052da5d96543e725ab67814a6cb093183808c889400ff62417"
+      },
+      "paragraphs": [
+        {
+          "text": "爆竹声中一岁除，春风送暖入屠苏。",
+          "source_text": "爆竹聲中一歲除，春風送暖入屠蘇。"
+        },
+        {
+          "text": "千门万户曈曈日，总把新桃换旧符。",
+          "source_text": "千門萬戶曈曈日，總把新桃換舊符。"
+        }
+      ]
+    },
+    {
+      "id": "qingming",
+      "title": "清明",
+      "author": "杜牧",
+      "source_title": "清明",
+      "source_author": "（唐）杜牧",
+      "source": {
+        "version": "b8594f81a89752241442f2ce267d6f66f96704ee",
+        "path": "poetry/raw/蒙学/qianjiashi.json",
+        "locator": "/content/2/content/17",
+        "sha256": "cf34d01ed29528052da5d96543e725ab67814a6cb093183808c889400ff62417"
+      },
+      "paragraphs": [
+        {
+          "text": "清明时节雨纷纷，路上行人欲断魂。",
+          "source_text": "清明時節雨紛紛，路上行人慾斷魂。"
+        },
+        {
+          "text": "借问酒家何处有，牧童遥指杏花村。",
+          "source_text": "借問酒家何處有，牧童遙指杏花村。"
+        }
+      ]
+    },
+    {
+      "id": "jiangnanchun",
+      "title": "江南春",
+      "author": "杜牧",
+      "source_title": "江南春",
+      "source_author": "（唐）杜牧",
+      "source": {
+        "version": "b8594f81a89752241442f2ce267d6f66f96704ee",
+        "path": "poetry/raw/蒙学/qianjiashi.json",
+        "locator": "/content/2/content/20",
+        "sha256": "cf34d01ed29528052da5d96543e725ab67814a6cb093183808c889400ff62417"
+      },
+      "paragraphs": [
+        {
+          "text": "千里莺啼绿映红，水村山郭酒旗风。",
+          "source_text": "千里鶯啼綠映紅，水村山郭酒旗風。"
+        },
+        {
+          "text": "南朝四百八十寺，多少楼台烟雨中。",
+          "source_text": "南朝四百八十寺，多少樓臺煙雨中。"
+        }
+      ]
+    },
+    {
+      "id": "yinhu",
+      "title": "饮湖上初晴后雨",
+      "author": "苏轼",
+      "source_title": "飲湖上初晴後雨",
+      "source_author": "（宋）蘇軾",
+      "source": {
+        "version": "b8594f81a89752241442f2ce267d6f66f96704ee",
+        "path": "poetry/raw/蒙学/qianjiashi.json",
+        "locator": "/content/2/content/72",
+        "sha256": "cf34d01ed29528052da5d96543e725ab67814a6cb093183808c889400ff62417"
+      },
+      "paragraphs": [
+        {
+          "text": "水光潋滟晴方好，山色空蒙雨亦奇。",
+          "source_text": "水光瀲灩晴方好，山色空濛雨亦奇。"
+        },
+        {
+          "text": "欲把西湖比西子，淡妆浓抹总相宜。",
+          "source_text": "欲把西湖比西子，淡妝濃抹總相宜。"
+        }
+      ]
+    },
+    {
+      "id": "fengqiaoyebo",
+      "title": "枫桥夜泊",
+      "author": "张继",
+      "source_title": "楓橋夜泊",
+      "source_author": "（唐）張繼",
+      "source": {
+        "version": "b8594f81a89752241442f2ce267d6f66f96704ee",
+        "path": "poetry/raw/蒙学/qianjiashi.json",
+        "locator": "/content/2/content/82",
+        "sha256": "cf34d01ed29528052da5d96543e725ab67814a6cb093183808c889400ff62417"
+      },
+      "paragraphs": [
+        {
+          "text": "月落乌啼霜满天，江枫渔火对愁眠。",
+          "source_text": "月落烏啼霜滿天，江楓漁火對愁眠。"
+        },
+        {
+          "text": "姑苏城外寒山寺，夜半钟声到客船。",
+          "source_text": "姑蘇城外寒山寺，夜半鐘聲到客船。"
+        }
+      ]
+    },
+    {
+      "id": "shanxing",
+      "title": "山行",
+      "author": "杜牧",
+      "source_title": "山行",
+      "source_author": "杜牧",
+      "source": {
+        "version": "b8594f81a89752241442f2ce267d6f66f96704ee",
+        "path": "poetry/derived/全唐诗/poet.tang.28000.json",
+        "locator": "/557",
+        "sha256": "5c85bec601fc48acbbd375ad3554d1f8e4b7deaa87de9d4a27704d2239ec8df7"
+      },
+      "paragraphs": [
+        {
+          "text": "远上寒山石径斜，白云生处有人家。",
+          "source_text": "遠上寒山石徑斜，白雲生處有人家。"
+        },
+        {
+          "text": "停车坐爱枫林晚，霜叶红于二月花。",
+          "source_text": "停車坐愛楓林晚，霜葉紅於二月花。"
+        }
+      ]
+    },
+    {
+      "id": "zaofabaidicheng",
+      "title": "早发白帝城",
+      "author": "李白",
+      "source_title": "早發白帝城",
+      "source_author": "李白",
+      "source": {
+        "version": "b8594f81a89752241442f2ce267d6f66f96704ee",
+        "path": "poetry/derived/全唐诗/唐诗三百首.json",
+        "locator": "/318",
+        "sha256": "71d56dd74e0f0ea4dc05b71a950aa8b3f840250eef479dcb58a0bf1e123e2d6e"
+      },
+      "paragraphs": [
+        {
+          "text": "朝辞白帝彩云间，千里江陵一日还。",
+          "source_text": "朝辭白帝彩雲間，千里江陵一日還。"
+        },
+        {
+          "text": "两岸猿声啼不尽，轻舟已过万重山。",
+          "source_text": "兩岸猨聲啼不盡，輕舟已過萬重山。"
+        }
+      ]
+    },
+    {
+      "id": "zengwanglun",
+      "title": "赠汪伦",
+      "author": "李白",
+      "source_title": "贈汪倫",
+      "source_author": "李白",
+      "source": {
+        "version": "b8594f81a89752241442f2ce267d6f66f96704ee",
+        "path": "poetry/derived/全唐诗/poet.tang.8000.json",
+        "locator": "/341",
+        "sha256": "cfa89bee8b94585e6d137cb3a01fa3f5d2c5f37380486de187f630a61e09530d"
+      },
+      "paragraphs": [
+        {
+          "text": "李白乘舟将欲行，忽闻岸上踏歌声。",
+          "source_text": "李白乘舟將欲行，忽聞岸上踏歌聲。"
+        },
+        {
+          "text": "桃花潭水深千尺，不及汪伦送我情。",
+          "source_text": "桃花潭水深千尺，不及汪倫送我情。"
+        }
+      ]
+    },
+    {
+      "id": "niaomingjian",
+      "title": "鸟鸣涧",
+      "author": "王维",
+      "source_title": "皇甫嶽雲溪雜題五首 鳥鳴澗",
+      "source_author": "王維",
+      "source": {
+        "version": "b8594f81a89752241442f2ce267d6f66f96704ee",
+        "path": "poetry/derived/全唐诗/poet.tang.6000.json",
+        "locator": "/141",
+        "sha256": "d23fb95285058d22c03352bcfcf891699ef61683aa2375f08d2996ae7732ad29"
+      },
+      "paragraphs": [
+        {
+          "text": "人闲桂花落，夜静春山空。",
+          "source_text": "人閑桂花落，夜靜春山空。"
+        },
+        {
+          "text": "月出惊山鸟，时鸣春涧中。",
+          "source_text": "月出驚山鳥，時鳴春澗中。"
+        }
+      ]
+    },
+    {
+      "id": "xunhua-six",
+      "title": "江畔独步寻花·其六",
+      "author": "杜甫",
+      "source_title": "江畔獨步尋花七絕句 六",
+      "source_author": "杜甫",
+      "source": {
+        "version": "b8594f81a89752241442f2ce267d6f66f96704ee",
+        "path": "poetry/derived/全唐诗/poet.tang.11000.json",
+        "locator": "/298",
+        "sha256": "84798d4c3ea6e7a4a085c3cf61bd8859fc5db8999d768ba7aa519403b0e28b98"
+      },
+      "paragraphs": [
+        {
+          "text": "黄四娘家花满蹊，千朵万朵压枝低。",
+          "source_text": "黃四娘家花滿蹊，千朵萬朵壓枝低。"
+        },
+        {
+          "text": "留连戏蝶时时舞，自在娇莺恰恰啼。",
+          "source_text": "留連戲蝶時時舞，自在嬌鶯恰恰啼。"
+        }
+      ]
+    },
+    {
+      "id": "yonge",
+      "title": "咏鹅",
+      "author": "骆宾王",
+      "source_title": "詠鵝",
+      "source_author": "駱賓王",
+      "source": {
+        "version": "b8594f81a89752241442f2ce267d6f66f96704ee",
+        "path": "poetry/derived/全唐诗/poet.tang.4000.json",
+        "locator": "/282",
+        "sha256": "778d9a5120c82848ee1a0c6d6f78e3cc3f9e3e7fca3d45a1f033e3b092558dee"
+      },
+      "paragraphs": [
+        {
+          "text": "鹅，鹅，鹅，曲项向天歌。",
+          "source_text": "鵝，鵝，鵝，曲項向天歌。"
+        },
+        {
+          "text": "白毛浮绿水，红掌拨清波。",
+          "source_text": "白毛浮綠水，紅掌撥清波。"
+        }
+      ]
+    },
+    {
+      "id": "feng",
+      "title": "风",
+      "author": "李峤",
+      "source_title": "風",
+      "source_author": "李嶠",
+      "source": {
+        "version": "b8594f81a89752241442f2ce267d6f66f96704ee",
+        "path": "poetry/derived/全唐诗/poet.tang.3000.json",
+        "locator": "/739",
+        "sha256": "749bc29f4c276718e0556d5f871dcdeb834d218079f873bce7c9b2c728a10cf4"
+      },
+      "paragraphs": [
+        {
+          "text": "解落三秋叶，能开二月花。",
+          "source_text": "解落三秋葉，能開二月花。"
+        },
+        {
+          "text": "过江千尺浪，入竹万竿斜。",
+          "source_text": "過江千尺浪，入竹萬竿斜。"
+        }
+      ]
+    },
+    {
+      "id": "yugezi",
+      "title": "渔歌子·西塞山前白鹭飞",
+      "author": "张志和",
+      "source_title": "漁父 一",
+      "source_author": "張志和",
+      "source": {
+        "version": "b8594f81a89752241442f2ce267d6f66f96704ee",
+        "path": "poetry/derived/全唐诗/poet.tang.49000.json",
+        "locator": "/125",
+        "sha256": "d38f18238da7bf88a4942496ecbc0823f0f24c99dbd4455b61dc228162bb9ffb"
+      },
+      "paragraphs": [
+        {
+          "text": "西塞山前白鹭飞，桃花流水鳜鱼肥。",
+          "source_text": "西塞山前白鷺飛，桃花流水鱖魚肥。"
+        },
+        {
+          "text": "青箬笠，绿蓑衣，斜风细雨不须归。",
+          "source_text": "青箬笠，綠蓑衣，斜風細雨不須歸。"
+        }
+      ]
+    },
+    {
+      "id": "yijiangnan",
+      "title": "忆江南·江南好",
+      "author": "白居易",
+      "source_title": "憶江南 一",
+      "source_author": "白居易",
+      "source": {
+        "version": "b8594f81a89752241442f2ce267d6f66f96704ee",
+        "path": "poetry/derived/全唐诗/poet.tang.49000.json",
+        "locator": "/156",
+        "sha256": "d38f18238da7bf88a4942496ecbc0823f0f24c99dbd4455b61dc228162bb9ffb"
+      },
+      "paragraphs": [
+        {
+          "text": "江南好，风景旧曾谙。",
+          "source_text": "江南好，風景舊曾諳。"
+        },
+        {
+          "text": "日出江花红胜火，春来江水绿如蓝，能不忆江南。",
+          "source_text": "日出江花紅勝火，春來江水綠如藍，能不憶江南。"
+        }
+      ]
+    },
+    {
+      "id": "jiangxue",
+      "title": "江雪",
+      "author": "柳宗元",
+      "source_title": "江雪",
+      "source_author": "柳宗元",
+      "source": {
+        "version": "b8594f81a89752241442f2ce267d6f66f96704ee",
+        "path": "poetry/derived/全唐诗/poet.tang.18000.json",
+        "locator": "/662",
+        "sha256": "aa89fb956033ebfe92b4e8ade69ddbd24e98b4c2eab4086c33d3b8fb4f1091da"
+      },
+      "paragraphs": [
+        {
+          "text": "千山鸟飞绝，万径人踪灭。",
+          "source_text": "千山鳥飛絕，萬逕人蹤滅。"
+        },
+        {
+          "text": "孤舟蓑笠翁，独钓寒江雪。",
+          "source_text": "孤舟蓑笠翁，獨釣寒江雪。"
+        }
+      ]
+    },
+    {
+      "id": "xiaochu-jingcisi",
+      "title": "晓出净慈寺送林子方",
+      "author": "杨万里",
+      "source_title": "西湖",
+      "source_author": "（宋）蘇軾",
+      "source": {
+        "version": "b8594f81a89752241442f2ce267d6f66f96704ee",
+        "path": "poetry/raw/蒙学/qianjiashi.json",
+        "locator": "/content/2/content/71",
+        "sha256": "cf34d01ed29528052da5d96543e725ab67814a6cb093183808c889400ff62417"
+      },
+      "paragraphs": [
+        {
+          "text": "毕竟西湖六月中，风光不与四时同。",
+          "source_text": "畢竟西湖六月中，風光不與四時同。"
+        },
+        {
+          "text": "接天莲叶无穷碧，映日荷花别样红。",
+          "source_text": "接天蓮葉無窮碧，映日荷花別樣紅。"
+        }
+      ],
+      "editorial_note": "练习采用教学常用题名与署名；原选本题为《西湖》，署苏轼，保留该版本记录。",
+      "editorial_sources": [
+        "https://www.lanshan.gov.cn/lsxjyj/0400/201911/ec503057e89045b2b66346c2b0b0e5e5.shtml",
+        "https://zh.wikisource.org/w/index.php?title=曉出淨慈寺送林子方&oldid=2391475"
+      ]
+    }
+  ]
+}

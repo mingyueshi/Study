@@ -40,3 +40,17 @@
 ## 文件核验
 
 所有 11 张独立照片与视频封面均由 `file` 和 `sips` 验证为有效 JPEG；短片由 `file` 验证为 WebM。来源页给出的片长、分辨率与文件字节数已核对。其余人物、路线与文字演变互动由页面自行绘制，只用于学习示意，不作为文物照片或精确古地图。
+
+
+## 精讲版新增复习音频（2026-11-03）
+
+四段音频为本页自主编写的知识摘要，使用 macOS Tingting 中文语音合成；不是博物馆或纪录片的原始配音。已保存 AAC/M4A 文件与同名文字稿，播放不依赖联网或设备语音库。
+
+| 文件 | 对应知识点 | 核对边界 |
+| --- | --- | --- |
+| `assets/audio/chronology.m4a` | hu1-2 公元与世纪 | 无0年；跨公元间隔需要减1 |
+| `assets/audio/qin-system.m4a` | hu5-1 秦统一与郡县制 | 统一文字不等于统一口语 |
+| `assets/audio/silk-road.m4a` | hu5-3 丝路 | 路网逐渐形成；双向与分段交流 |
+| `assets/audio/inventions.m4a` | hu8-1 四大发明 | 区分出现、改进、应用与传播；司南为复原模型 |
+
+内容依据见 `FOUNDATIONS-SOURCES.md`、`DYNASTIES-SOURCES.md`。生成方法见 `scripts/generate_audio.py`，清单见 `assets/audio/manifest.json`。原有11张不同实景/文物照片、汉长城短片与3条央视外链继续使用。国博唐三彩照片与央视陕西历史博物馆节目展示的是不同藏品，不能作同一器物辨识。

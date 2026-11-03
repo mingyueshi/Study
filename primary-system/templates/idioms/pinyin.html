@@ -1,0 +1,5 @@
+{% if reading.pronunciation %}
+<p class="idiom-pinyin"><span>{{ reading.pronunciation.value }}</span><small>已核对读音</small></p>
+{% elif reading.dictionary_pinyin %}
+<p class="idiom-pinyin"><span>{{ reading.dictionary_pinyin }}</span><small>词典拼音</small></p>
+{% endif %}

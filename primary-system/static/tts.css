@@ -1,0 +1,18 @@
+/* 教材与场景单词共用的朗读设置。 */
+.tts-settings { container: tts-settings / inline-size; min-width: 0; margin: 0 0 18px; padding: 14px 18px; border: 1px solid var(--w-line, #c3ddeb); border-radius: 16px; background: #fff; }
+.tts-settings legend { padding: 0 7px; font-size: 17px; font-weight: 800; }
+.tts-controls-grid { display: grid; grid-template-columns: minmax(0, 2fr) repeat(2, minmax(130px, 1fr)) auto; gap: 18px; align-items: end; }
+.tts-controls-grid label { display: block; font-size: 15px; font-weight: 700; }
+.tts-voice-control select { margin-top: 6px; min-height: 46px; padding: 8px 10px; font-size: 15px; text-overflow: ellipsis; }
+.tts-control-slider label { display: flex; justify-content: space-between; gap: 8px; }
+.tts-control-slider output { color: #365f77; font-variant-numeric: tabular-nums; }
+.tts-control-slider input[type="range"] { display: block; min-height: 46px; padding: 0; border: 0; margin: 6px 0 0; background: transparent; accent-color: #487e9c; cursor: pointer; }
+.tts-controls-grid button { min-height: 46px; }
+.tts-controls-note { margin: 10px 0 0; font-size: 13px; color: var(--muted); line-height: 1.7; }
+
+@container tts-settings (max-width: 700px) {
+  .tts-controls-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 18px; }
+  .tts-voice-control { grid-column: 1 / -1; }
+  .tts-controls-grid button { justify-self: start; }
+}
+@media print { .tts-settings { display: none !important; } }

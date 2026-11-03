@@ -55,7 +55,7 @@
     if (window.TTS) window.TTS.stopSequence();
     render();
     showFeedback(`${word?.en || '单词'}：${data.learned ? '已标记掌握' : '已取消掌握'}。`);
-    if (data.learned && window.SpeechKit) window.SpeechKit.speak('Great!', { rate: 0.9 });
+    if (data.learned && window.TTS) window.TTS.speak('Great!', { rate: 0.9 });
   }
 
   function picHTML(word) {
@@ -74,14 +74,14 @@
     const unitTag = showUnitTag && unit.zh
       ? `<span class="unit-tag">${escapeHtml(unit.emoji || '')} ${escapeHtml(unit.zh)}</span>` : '';
     return `<article class="wcard${word.learned ? ' learned' : ''}" data-word="${escapeHtml(word.id)}" data-say-seq="${escapeHtml(word.en)}" style="--c:${escapeHtml(unit.color || '#4d96ff')}">${unitTag}` +
-      `<button class="learn-btn${word.learned ? ' on' : ''}" type="button" data-learn="${escapeHtml(word.id)}" aria-pressed="${word.learned}" aria-label="${escapeHtml(word.en)}：${word.learned ? '取消掌握' : '标记掌握'}">✓</button>` +
       `<div class="wtop"><button class="pic" type="button" data-say="${escapeHtml(word.en)}" aria-label="朗读 ${escapeHtml(word.en)}">${picHTML(word)}</button>` +
-      `<div class="winfo"><p class="wline"><span class="word">${escapeHtml(word.en)}</span> <button class="say" type="button" data-say="${escapeHtml(word.en)}" aria-label="朗读">🔊</button></p>` +
-      `<p class="ipa">${escapeHtml(word.ipa)}</p><p class="zh">${escapeHtml(word.zh || word.source_status || '')}</p></div></div>` +
+      `<div class="winfo"><div class="wline"><h2 class="word">${escapeHtml(word.en)}</h2><button class="say" type="button" data-say="${escapeHtml(word.en)}" aria-label="朗读 ${escapeHtml(word.en)}">🔊</button></div>` +
+      `<div class="wmeta"><span class="ipa">${escapeHtml(word.ipa)}</span><span class="zh">${escapeHtml(word.zh || word.source_status || '')}</span></div></div></div>` +
       (word.chinese_example ? `<p class="memo">例：${escapeHtml(word.chinese_example)}</p>` : '') +
       (parts ? `<div class="wsec"><span class="seclabel">记</span><span class="parts">${parts}</span></div>` : '') +
       (word.memo ? `<p class="memo">💡 ${escapeHtml(word.memo)}</p>` : '') +
       (related ? `<div class="wsec"><span class="seclabel">联</span><span class="rels">${related}</span></div>` : '') +
+      `<div class="wcard-footer"><button class="learn-btn${word.learned ? ' on' : ''}" type="button" data-learn="${escapeHtml(word.id)}" aria-pressed="${word.learned}" aria-label="${escapeHtml(word.en)}：${word.learned ? '取消掌握' : '标记掌握'}"><span aria-hidden="true">✓</span> ${word.learned ? '已掌握' : '标记掌握'}</button></div>` +
       '</article>';
   }
 
@@ -93,14 +93,20 @@
   }
 
   function render() {
+    const navScroll = chipsEl.scrollTop;
+    const focusedUnit = document.activeElement?.closest?.('[data-unit]')?.dataset.unit;
     const searching = Boolean(query);
     const shown = state.words.filter(matchSearch);
     const unit = state.scenarios.find((s) => s.id === curUnit) || state.scenarios[0];
 
     chipsEl.innerHTML = state.scenarios.map((s) =>
-      `<button class="chip${s.id === curUnit && !searching ? ' on' : ''}" type="button" data-unit="${s.id}" style="--c:${escapeHtml(s.color)}">` +
+      `<button class="chip${s.id === curUnit && !searching ? ' on' : ''}" type="button" data-unit="${s.id}" aria-pressed="${s.id === curUnit && !searching}" style="--c:${escapeHtml(s.color)}">` +
       `<span class="chip-emoji">${escapeHtml(s.emoji)}</span><span class="chip-name">${escapeHtml(s.zh)}</span>` +
       `<span class="chip-num${s.total && s.learned === s.total ? ' full' : ''}">${s.learned}/${s.total}</span></button>`).join('');
+    chipsEl.scrollTop = navScroll;
+    if (focusedUnit) {
+      Array.from(chipsEl.querySelectorAll('[data-unit]')).find((chip) => chip.dataset.unit === focusedUnit)?.focus({ preventScroll: true });
+    }
     navCountEl.textContent = `${state.scenarios.length} 个场景 · ${state.words.length} 词`;
 
     if (searching) {
@@ -110,8 +116,8 @@
         : '<div class="empty">🐤 没找到，换个词试试？</div>';
     } else if (unit) {
       const learned = state.words.filter((w) => w.scenario === unit.id && w.learned).length;
-      cardsEl.innerHTML = `<div class="unit-head"><span class="unit-emoji">${escapeHtml(unit.emoji)}</span>` +
-        `<h1>${escapeHtml(unit.name)} · ${escapeHtml(unit.zh)}</h1><p>已掌握 ${learned} / ${unit.total} 词</p></div>` +
+      cardsEl.innerHTML = `<div class="unit-head"><span class="unit-emoji" aria-hidden="true">${escapeHtml(unit.emoji)}</span>` +
+        `<h1>${escapeHtml(unit.name)} <span class="unit-cn">${escapeHtml(unit.zh)}</span></h1><p class="unit-progress">已掌握 <strong>${learned}</strong> / ${unit.total} 词</p></div>` +
         `<div class="wgrid">${state.words.filter((w) => w.scenario === unit.id).map((w) => cardHTML(w, false)).join('')}</div>`;
     } else {
       cardsEl.innerHTML = '<div class="empty">场景正在准备中。</div>';

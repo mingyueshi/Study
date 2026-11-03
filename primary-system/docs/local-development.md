@@ -16,6 +16,7 @@ python3.12 bootstrap.py --serve
 - 资料探索：<http://127.0.0.1:8012/references/>
 - 查字查词：<http://127.0.0.1:8012/dictionary/>
 - 场景单词：<http://127.0.0.1:8012/words/>
+- 场景成语：<http://127.0.0.1:8012/idioms/>
 - 管理后台：<http://127.0.0.1:8012/admin/>
 
 指定独立数据库验证新机效果：
@@ -73,6 +74,8 @@ python3.12 bootstrap.py --skip-install --refresh-data
 `data/lexicon/` 跟踪 `unihan-18.0.0.zip`、`CJKRadicals-18.0.0.txt`、`english-wordnet-2025.xml.gz`，许可原文和摘要索引保留在 `lexicon/notices/`。这些来源用于明确的后续维护；日常恢复使用完整基础包，不现场重建已发布状态。
 
 日常数据库、私有数据、密钥、虚拟环境、`.backups/` 和 `.reference-assets/` 缓存不进 Git。
+
+场景成语编排独立保存在 `idioms/data/scenarios.json`，随代码同步；词条、义项和原始词典证据已包含在完整基础包中。它不需要新增导入命令或迁移，也不依赖审计用的 `output/`。例句与用法提示的维护、来源变化后的复核见 [场景清单说明](../idioms/data/README.md)。
 
 ## 基础包维护
 

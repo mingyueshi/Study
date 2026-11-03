@@ -1,0 +1,37 @@
+{% extends 'idioms/layout.html' %}
+{% block title %}{{ entry.headword }} · 成语词典 · 乐学堂{% endblock %}
+{% block idiom_crumb %}
+<a href="{% url 'idiom-scenes' %}">场景成语</a><span aria-hidden="true">›</span><span aria-current="page">{{ entry.headword }}</span>
+{% endblock %}
+{% block idiom_content %}
+<header class="idiom-hero">
+  <div>
+    <p class="eyebrow">成语词典</p>
+    <h1>{{ entry.headword }}</h1>
+  </div>
+  <a class="idiom-text-link" href="{% url 'idiom-scenes' %}">返回场景与词典搜索 →</a>
+</header>
+<div class="idiom-entry-layout">
+  <div>
+    {% for reading in readings %}
+    <article class="idiom-reader" id="record-{{ reading.record_id }}">
+      <h2>{% if readings|length > 1 %}义项 {{ forloop.counter }}{% else %}查释义{% endif %}</h2>
+      {% include 'idioms/pinyin.html' %}
+      <dl class="idiom-definition">{% include 'idioms/gloss.html' %}{% include 'idioms/source_examples.html' %}</dl>
+      <footer class="idiom-source">
+        <p>词典来源 <strong>{{ reading.source.name }}</strong>{% if reading.source.url %} · <a href="{{ reading.source.url }}">来源网站 ↗</a>{% endif %}</p>
+        <p>版本 <code>{{ reading.source.version }}</code></p>
+      </footer>
+    </article>
+    {% endfor %}
+  </div>
+  {% if related %}
+  <aside class="idiom-scene-nav" aria-labelledby="idiom-related">
+    <h2 id="idiom-related">在哪些场景能用？</h2>
+    <ul>{% for item in related %}
+      <li><a href="{% url 'idiom-scenes' %}?scene={{ item.scene.code }}#word-{{ item.idiom_id }}">{{ item.scene.title }} <span aria-hidden="true">↗</span></a></li>
+    {% endfor %}</ul>
+  </aside>
+  {% endif %}
+</div>
+{% endblock %}

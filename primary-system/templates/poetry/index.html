@@ -5,6 +5,7 @@
 {% include 'reference_library/breadcrumbs.html' with subject_title='古诗文' %}
 <header class="ref-header"><div><p class="ref-kicker">读原文，寻出处</p>
 <h1>古诗文</h1><p>按题名、作者或选集查找，保留各来源的字形和异文。</p></div>
+<a class="button small" href="{% url 'feihualing' %}">飞花令 · 练五句诗 →</a>
 </header>
 <form method="get" class="ref-toolbar" role="search" aria-label="查找古诗文">
   <label class="ref-field ref-search">题名或作者<input name="q" value="{{ q }}" maxlength="120" placeholder="李白、杜甫">

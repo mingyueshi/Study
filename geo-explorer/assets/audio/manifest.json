@@ -1,0 +1,26 @@
+{
+  "scale": {
+    "title": "比例尺与单位换算",
+    "file": "scale.m4a",
+    "transcript": "scale.txt",
+    "credit": "macOS Tingting 中文语音合成；知识摘要由本页编写"
+  },
+  "seasons": {
+    "title": "地轴倾斜与四季",
+    "file": "seasons.m4a",
+    "transcript": "seasons.txt",
+    "credit": "macOS Tingting 中文语音合成；知识摘要由本页编写"
+  },
+  "water-cycle": {
+    "title": "水循环的主要过程",
+    "file": "water-cycle.m4a",
+    "transcript": "water-cycle.txt",
+    "credit": "macOS Tingting 中文语音合成；知识摘要由本页编写"
+  },
+  "longitude": {
+    "title": "经度与地方时计算",
+    "file": "longitude.m4a",
+    "transcript": "longitude.txt",
+    "credit": "macOS Tingting 中文语音合成；知识摘要由本页编写"
+  }
+}

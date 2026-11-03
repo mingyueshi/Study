@@ -67,7 +67,7 @@ function pickVoice(kind) {
   return list.slice().sort((a, b) => voiceScore(b, likes) - voiceScore(a, likes))[0];
 }
 
-/* 朗读：opts = { rate, lang, onend, onerror }；回调可选，旧调用保持兼容。 */
+/* 朗读：opts = { rate, volume, lang, onend, onerror }；回调可选，旧调用保持兼容。 */
 function speak(text, opts) {
   opts = opts || {};
   const fail = (error) => {
@@ -85,6 +85,7 @@ function speak(text, opts) {
     if (v) { u.voice = v; u.lang = v.lang; }
     else u.lang = isZh ? 'zh-CN' : (opts.lang || 'en-US');
     u.rate = opts.rate != null ? opts.rate : 0.85;
+    u.volume = Number.isFinite(opts.volume) ? Math.max(0, Math.min(1, opts.volume)) : 1;
     u.pitch = 1;
     if (typeof opts.onend === 'function') u.onend = opts.onend;
     if (typeof opts.onerror === 'function') u.onerror = opts.onerror;

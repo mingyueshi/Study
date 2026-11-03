@@ -25,15 +25,22 @@ function run(file, context) {
   vm.runInContext(fs.readFileSync(path.join(__dirname, '..', 'static', file), 'utf8'), context);
 }
 
-function speechPage({ supported = true, throws = false } = {}) {
+function speechPage({ supported = true, throws = false, controls = false, stored = {}, voices = [] } = {}) {
   const button = element(), items = [element(), element()], clicks = [], spoken = [];
   button.textContent = '连读';
   button.dataset = { ttsSequence: '#cards', ttsRate: '0.78' };
   items[0].dataset.saySeq = 'A long sentence that must finish before the next word.';
   items[1].dataset.saySeq = 'apple';
   let current = null;
+  const storage = { ...stored };
+  const fields = controls ? {
+    'tts-rate': Object.assign(element(), { id: 'tts-rate', min: '0.5', max: '1.5', value: '0.8' }),
+    'tts-volume': Object.assign(element(), { id: 'tts-volume', min: '0', max: '1', value: '1' }),
+    'tts-rate-value': element(), 'tts-volume-value': element(), 'tts-voice': element(),
+    'tts-status': element(), 'tts-preview': element(),
+  } : {};
   const synth = {
-    getVoices: () => [], addEventListener() {},
+    getVoices: () => voices, addEventListener() {},
     get speaking() { return current !== null; }, pending: false,
     cancel() {
       const old = current;
@@ -48,10 +55,11 @@ function speechPage({ supported = true, throws = false } = {}) {
   };
   const context = vm.createContext({
     window: supported ? { speechSynthesis: synth } : {},
-    localStorage: { getItem: () => null },
+    localStorage: { getItem: (key) => storage[key] || null, setItem: (key, value) => { storage[key] = value; } },
     SpeechSynthesisUtterance: function (text) { this.text = text; },
     document: {
-      addEventListener: (event, fn) => clicks.push(fn), getElementById: () => null,
+      addEventListener: (event, fn) => clicks.push(fn), getElementById: (id) => fields[id] || null,
+      createElement: () => element(),
       querySelector: () => ({ querySelectorAll: () => items }),
       querySelectorAll: (selector) => selector === '.tts-playing'
         ? items.filter((item) => item.classList.contains('tts-playing'))
@@ -65,7 +73,9 @@ function speechPage({ supported = true, throws = false } = {}) {
     preventDefault() {}, target: { closest: (value) => value === selector ? target : null },
   }));
   return {
-    button, spoken, items, click: () => click(button, '[data-tts-sequence]'),
+    button, spoken, items, fields, storage, click: () => click(button, '[data-tts-sequence]'),
+    adjust(name, value) { fields['tts-' + name].value = String(value); fields['tts-' + name].handlers.input(); },
+    chooseVoice(name) { fields['tts-voice'].value = name; fields['tts-voice'].handlers.change(); },
     say(text) { click({ dataset: { say: text } }, '[data-say]'); },
     finish() { const old = current; current = null; old.onend(); },
     fail() { const old = current; current = null; old.onerror({ error: 'audio-busy' }); },
@@ -120,6 +130,59 @@ test('speech errors, missing API and synchronous failures all exit the sequence'
     assert.equal(unavailable.button.textContent, '连读');
     assert.ok(!unavailable.button.classList.contains('tts-active'));
   }
+});
+
+test('words playback settings apply to taps, silence and the next item in a sequence', () => {
+  const page = speechPage({ controls: true });
+  page.adjust('rate', 0.6);
+  page.adjust('volume', 0);
+  page.say('pear');
+  assert.equal(page.spoken.at(-1).rate, 0.6);
+  assert.equal(page.spoken.at(-1).volume, 0);
+  page.click();
+  page.adjust('rate', 1.25);
+  page.adjust('volume', 0.35);
+  page.finish();
+  assert.equal(page.spoken.at(-1).text, 'apple');
+  assert.equal(page.spoken.at(-1).rate, 1.25);
+  assert.equal(page.spoken.at(-1).volume, 0.35);
+  assert.equal(page.fields['tts-volume-value'].textContent, '35%');
+  const restored = speechPage({ controls: true, stored: page.storage });
+  restored.say('again');
+  assert.equal(restored.spoken[0].rate, 1.25);
+  assert.equal(restored.spoken[0].volume, 0.35);
+});
+
+test('voice changes stop a sequence and preview with the selected voice and playback settings', () => {
+  const voices = [{ name: 'English US', lang: 'en-US', localService: true }, { name: 'English UK', lang: 'en-GB', localService: true }];
+  const page = speechPage({ controls: true, voices });
+  page.adjust('rate', 0.7);
+  page.adjust('volume', 0.5);
+  page.click();
+  const canceled = page.spoken[0];
+  page.chooseVoice('English UK');
+  assert.equal(page.button.textContent, '连读');
+  assert.equal(page.spoken.at(-1).voice.name, 'English UK');
+  assert.equal(page.spoken.at(-1).rate, 0.7);
+  assert.equal(page.spoken.at(-1).volume, 0.5);
+  canceled.onend();
+  assert.equal(page.spoken.length, 2);
+  const restored = speechPage({ controls: true, stored: page.storage, voices });
+  restored.say('hello');
+  assert.equal(restored.spoken[0].voice.name, 'English UK');
+});
+
+test('invalid saved playback settings fall back safely and unsupported controls are disabled', () => {
+  for (const saved of ['broken JSON', '{"rate":999,"volume":-1}', 'null']) {
+    const page = speechPage({ controls: true, stored: { words_tts_pref_v1: saved } });
+    page.say('hello');
+    assert.equal(page.spoken[0].rate, 0.8);
+    assert.equal(page.spoken[0].volume, 1);
+  }
+  const unsupported = speechPage({ controls: true, supported: false });
+  assert.equal(unsupported.fields['tts-rate'].disabled, true);
+  assert.equal(unsupported.fields['tts-preview'].disabled, true);
+  assert.match(unsupported.fields['tts-status'].textContent, /不支持/);
 });
 
 function wordsPage(fetch, extraWords = []) {
