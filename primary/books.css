@@ -123,8 +123,8 @@
   padding: 4px 9px; max-width: 100%; display: flex; flex-direction: column; align-items: center; gap: 1px;
 }
 .rel:active { transform: scale(.94); }
-.rel b { font-size: 15.5px; font-weight: 800; color: #5a5570; }
-.rel i { font-style: normal; font-size: 11.5px; color: var(--muted); font-weight: 600; }
+.rel b { font-size: 18px; font-weight: 800; color: #5a5570; }
+.rel i { font-style: normal; font-size: 14px; color: var(--muted); font-weight: 600; }
 .rel.inbook { border-style: solid; border-color: #bcd9c8; background: #f2faf5; }
 .rel.inbook b { color: #1f7a4d; }
 .rel-book { font-size: 11px; }

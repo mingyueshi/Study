@@ -36,6 +36,8 @@ urlpatterns = [
     path('chain/', include('chain.urls')),
     path('words/', include('words.urls')),
     path('idioms/', include('idioms.urls')),
+    path('phonetics/', include('phonetics.urls')),
+    path('writing/', include('writing.urls')),
     path('accounts/profile/', profile, name='profile'),
     path('accounts/login/', auth_views.LoginView.as_view(template_name='accounts/login.html', authentication_form=LearnerAuthenticationForm), name='login'),
     path('accounts/logout/', auth_views.LogoutView.as_view(), name='logout'),

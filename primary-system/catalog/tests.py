@@ -36,7 +36,7 @@ class CatalogTests(PlatformFixture):
     def test_seed_is_idempotent_and_preserves_changes(self):
         Module.objects.filter(code='math').update(name='我的数学')
         call_command('seed_platform', stdout=io.StringIO())
-        self.assertEqual(Module.objects.count(), 5)
+        self.assertEqual(Module.objects.count(), 7)
         self.assertEqual(Grade.objects.count(), 6)
         self.assertEqual(Module.objects.get(code='math').name, '我的数学')
         self.assertFalse(Group.objects.get(name='内容编辑').permissions.exclude(content_type__app_label='catalog').exists())

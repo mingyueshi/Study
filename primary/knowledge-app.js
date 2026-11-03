@@ -113,6 +113,7 @@ function lessonCard(u, l) {
     '<span class="khead-gap"></span>' + sayBtn(l.title + '。' + l.overview) +
     '<button class="learn-btn' + (learned ? ' on' : '') + '" data-act="learn" data-unit="' + u.id + '" data-id="' + esc(l.id) + '" title="标记已复习" aria-pressed="' + learned + '" aria-label="已复习 ' + esc(l.title) + '">' + (learned ? '✓' : '') + '</button></div>');
   parts.push('<p class="k-overview">' + esc(l.overview) + '</p>');
+  if (l.img) parts.push('<img class="kimg" src="' + esc(l.img) + '" alt="' + esc(l.title) + ' 插图" loading="lazy" onerror="this.style.display=\'none\'">');
   if (l.fig && window.Figures) parts.push(Figures.figHTML(l.fig));
 
   if (l.main && l.main.length) {
@@ -140,7 +141,29 @@ function lessonCard(u, l) {
   return parts.join('');
 }
 
-/* ---------- 单元板块（口语交际 / 习作 / 园地 / 快乐读书吧） ---------- */
+/* ---------- 单元板块（口语交际 / 习作 / 习作例文 / 园地 / 快乐读书吧） ---------- */
+function exampleCards(items, color) {
+  return items.map(ex => {
+    const parts = [];
+    parts.push('<article class="ex-card" style="--c:' + color + '">');
+    parts.push('<h4 class="ex-title">' + esc(ex.name) + '</h4>');
+    if (ex.overview) parts.push('<p class="k-overview">' + esc(ex.overview) + '</p>');
+    if (ex.main && ex.main.length) {
+      parts.push(ksec('梳', '<ul class="klist">' + ex.main.map(m =>
+        '<li><button class="kli" data-act="say" data-t="' + esc(m) + '">' + esc(m) + '</button></li>').join('') + '</ul>'));
+    }
+    if (ex.craft) {
+      parts.push(ksec('法', '<button class="kcraft" data-act="say" data-t="' + esc(ex.craft) + '">' + esc(ex.craft) + '</button>'));
+    }
+    if (ex.tips && ex.tips.length) {
+      parts.push(ksec('考', '<ul class="klist tips">' + ex.tips.map(t =>
+        '<li><button class="kli" data-act="say" data-t="' + esc(t) + '">⭐ ' + esc(t) + '</button></li>').join('') + '</ul>'));
+    }
+    parts.push('</article>');
+    return parts.join('');
+  }).join('');
+}
+
 function unitBlocks(u) {
   const blocks = [];
   if (u.oral) {
@@ -150,6 +173,10 @@ function unitBlocks(u) {
   if (u.writing) {
     blocks.push('<section class="ublock writing" style="--c:' + u.color + '"><h3>✏️ 习作：' + esc(u.writing.title) + '</h3><ul>' +
       u.writing.points.map(p => '<li>' + esc(p) + '</li>').join('') + '</ul></section>');
+  }
+  if (u.examples && u.examples.items && u.examples.items.length) {
+    blocks.push('<section class="ublock examples" style="--c:' + u.color + '"><h3>📖 ' + esc(u.examples.title || '习作例文') + '</h3>' +
+      '<div class="ex-grid">' + exampleCards(u.examples.items, u.color) + '</div></section>');
   }
   if (u.garden) {
     blocks.push('<section class="ublock garden" style="--c:' + u.color + '"><h3>🏡 语文园地</h3><ul>' +
@@ -178,9 +205,11 @@ function renderUnit(u) {
 function poemCard(p) {
   const meta = p.kind === '文言文' ? esc(p.dynasty) : esc(p.dynasty + ' · ' + p.author);
   const fig = (p.fig && window.Figures) ? Figures.figHTML(p.fig) : '';
+  const img = p.img ? '<img class="pimg" src="' + esc(p.img) + '" alt="' + esc(p.title) + ' 意境图" loading="lazy" onerror="this.style.display=\'none\'">' : '';
   return '<article class="poem-card" style="--c:#8b65c9">' +
     '<div class="phead"><h3>' + esc(p.title) + '</h3><span class="pmeta">' + meta +
     '<span class="pkind">' + esc(p.kind) + '</span></span>' + sayBtn(p.title + '。' + p.lines.join('')) + '</div>' +
+    img +
     fig +
     '<div class="plines">' + p.lines.map(line =>
       '<button class="pline" data-act="say" data-t="' + esc(line) + '">' + esc(line) + '</button>').join('') + '</div>' +
@@ -246,6 +275,15 @@ function searchResults(q) {
   const polyHits = KB.polyphonic.filter(r => r.join(' ').toLowerCase().includes(ql));
   const simHits = KB.similar.filter(group =>
     group.some(p => (p[0] + p[1]).toLowerCase().includes(ql)));
+  const exampleHits = [];
+  KB.units.forEach(u => {
+    if (u.examples && u.examples.items) {
+      u.examples.items.forEach(ex => {
+        const hay = [ex.name, ex.overview, ex.craft, (ex.main || []).join(''), (ex.tips || []).join('')].join(' ').toLowerCase();
+        if (hay.includes(ql)) exampleHits.push({ u, ex });
+      });
+    }
+  });
 
   const out = [];
   if (lessonHits.length) {
@@ -253,6 +291,13 @@ function searchResults(q) {
     KB.units.forEach(u => {
       const hits = lessonHits.filter(h => h.u === u);
       if (hits.length) out.push(hits.map(h => lessonCard(u, h.l)).join(''));
+    });
+  }
+  if (exampleHits.length) {
+    out.push('<div class="search-head">📖 匹配的习作例文 ' + exampleHits.length + ' 篇</div>');
+    KB.units.forEach(u => {
+      const hits = exampleHits.filter(h => h.u === u);
+      if (hits.length) out.push('<div class="ex-grid">' + exampleCards(hits.map(h => h.ex), u.color) + '</div>');
     });
   }
   if (poemHits.length) {

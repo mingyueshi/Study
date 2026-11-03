@@ -132,11 +132,12 @@
   .study-page .wcard > .learn-btn { top: auto; bottom: 18px; right: 22px; }
   .study-page .wcard > .learn-btn::before { content: '标记掌握'; position: absolute; right: 52px; top: 50%; transform: translateY(-50%); width: 5em; color: #596879; font-size: 14px; font-weight: 650; }
   .study-page .wcard > .learn-btn.on::before { content: '已经掌握'; color: #276f55; }
-  .study-page :is(.parts, .rels, .pills) { gap: 8px; }
-  .study-page :is(.part, .rel) { padding: 7px 11px; border-width: 1px; border-radius: 12px; }
+  .study-page :is(.parts, .rels, .phrases, .pills) { gap: 8px; }
+  .study-page :is(.part, .rel, .phrase) { padding: 7px 11px; border-width: 1px; border-radius: 12px; }
   .study-page .part b { font-size: 19px; color: color-mix(in srgb, var(--c) 65%, #293b4a); }
-  .study-page .rel b { font-size: 17px; }
-  .study-page :is(.part i, .rel i) { font-size: 14px; font-weight: 500; }
+  .study-page .rel b { font-size: 20px; }
+  .study-page .phrase b { font-size: 20px; color: #2c5f86; }
+  .study-page :is(.part i, .rel i, .phrase i) { font-size: 16px; font-weight: 500; }
   .study-page .memo { padding: 14px 16px; border-radius: 15px; background: #fff3d8; color: #66563d; font-size: 17px; font-weight: 500; line-height: 1.8; }
   .study-page .unit-tag { color: var(--subject-ink); background: var(--subject-soft) !important; border: 1px solid var(--subject-line); border-radius: 9px; padding: 4px 12px; font-size: 13px; box-shadow: none; }
   .study-page .search-head { margin-block: 4px 20px; font-size: 19px; color: var(--subject-ink); }
@@ -324,7 +325,7 @@
   .study-page .zh { font-size: 17px; }
   .study-page :is(.ipa, .pinyin) { font-size: 16px; }
   .study-page .part b { font-size: 18px; }
-  .study-page :is(.part i, .rel i) { font-size: 13px; }
+  .study-page :is(.part i, .rel i, .phrase i) { font-size: 15px; }
   .study-page .memo { padding: 12px 14px; font-size: 16px; }
   .study-page .fig { padding: 12px; border-radius: 16px; }
   .study-page .fig-table { font-size: 14px; }

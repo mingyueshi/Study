@@ -39,6 +39,18 @@ KB.units.forEach((u, i) => {
   if (u.oral) check(isStr(u.oral.title) && u.oral.points.every(isStr), tag + ' 口语交际板块不完整');
   if (u.garden) check(Array.isArray(u.garden) && u.garden.every(isStr), tag + ' 园地板块不完整');
   if (u.book) check(isStr(u.book.title) && u.book.points.every(isStr), tag + ' 快乐读书吧板块不完整');
+  if (u.examples) {
+    check(isStr(u.examples.title), tag + ' 习作例文缺少标题');
+    check(Array.isArray(u.examples.items) && u.examples.items.length >= 1, tag + ' 习作例文至少 1 篇');
+    u.examples.items.forEach(ex => {
+      const et = tag + ' 例文《' + ex.name + '》';
+      check(isStr(ex.name), et + ' 缺少篇名');
+      check(isStr(ex.overview), et + ' 缺少概览');
+      check(Array.isArray(ex.main) && ex.main.length >= 2 && ex.main.every(isStr), et + ' 内容梳理至少 2 条');
+      check(isStr(ex.craft), et + ' 缺少写法点睛');
+      check(Array.isArray(ex.tips) && ex.tips.length >= 2 && ex.tips.every(isStr), et + ' 考点提示至少 2 条');
+    });
+  }
 
   if (u.banner) check(FIGS.has(u.banner), tag + ' 横幅图示未注册: ' + u.banner);
   check(u.lessons.length === PER_UNIT[i], tag + ' 课数应为 ' + PER_UNIT[i] + '，实际 ' + u.lessons.length);
@@ -81,6 +93,7 @@ KB.poems.forEach(p => {
   check(Array.isArray(p.lines) && p.lines.length >= 2 && p.lines.every(isStr), t + ' 诗句不完整');
   if (p.kind === '古诗') check(isStr(p.author), t + ' 古诗缺少作者');
   if (p.notes) check(p.notes.every(n => Array.isArray(n) && n.length === 2 && n.every(isStr)), t + ' 注释格式应为 [字, 释义]');
+  if (p.img) check(isStr(p.img) && p.img.startsWith('images/'), t + ' 意境图应为本地 images/ 路径');
 });
 ['暮江吟', '题西林壁', '雪梅', '凉州词', '出塞', '夏日绝句', '鹿柴', '嫦娥', '别董大'].forEach(t =>
   check(seenPoems.has(t), '缺少必背古诗《' + t + '》'));

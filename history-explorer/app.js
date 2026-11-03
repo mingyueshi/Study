@@ -21,6 +21,12 @@
     $('lessons').innerHTML = '<p class="notice">知识文件尚未完整加载。请确认已保存整个目录，并重新打开页面。</p>';
     return;
   }
+  // Pre-compute a lowercase searchable text blob per lesson so search input does not
+  // re-serialize 37 objects on every keystroke.
+  const searchIndex = new Map(ordered.map(l => [l.id,
+    [l.title, l.definition, l.essentials.join(' '), l.formula || '',
+      JSON.stringify(l.comparison), JSON.stringify(l.example), JSON.stringify(l.misconception)]
+      .join(' ').toLocaleLowerCase()]));
   const chapterOf = id => chapters.find(c => c.lessonIds.includes(id));
   const key = 'history-knowledge-progress-v1';
   let completed = new Set(), storageOK = true;
@@ -161,7 +167,7 @@
   });
   function renderSearch() {
     const query=$('knowledge-search').value.trim().toLocaleLowerCase();
-    const results=ordered.filter(l=>!query||JSON.stringify([l.title,l.definition,l.essentials,l.formula,l.comparison,l.example,l.misconception]).toLocaleLowerCase().includes(query));
+    const results=ordered.filter(l=>!query||searchIndex.get(l.id).includes(query));
     $('search-count').textContent=`共找到 ${results.length} 个知识点`;
     $('search-results').innerHTML=results.length?results.map(l=>`<button class="search-result" data-jump="${l.id}"><small>${esc(chapterOf(l.id).title)} · ${numberOf(l.id)}</small><strong>${esc(l.title)}</strong><p>${esc(l.definition)}</p></button>`).join(''):'<p class="empty-results">没有匹配的知识点，请试试更短的关键词。</p>';
   }

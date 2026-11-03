@@ -53,8 +53,8 @@ function relChipHTML(link) {
   const tag = '<span class="rel-tag">' + meta.tag + '</span>';
   const style = ' style="--rc:' + meta.color + '"';
   if (link.inBook) {
-    return '<button class="rel t-' + link.type + '"' + style + ' data-act="rel" data-key="' + esc(link.key) + '" data-t="' + esc(link.en) +
-      '" title="' + meta.name + '：点一下跳到这张词卡"><b>' + esc(link.en) + '</b><i>' + tag + esc(link.zh) + '<span class="rel-book">📖</span></i></button>';
+    return '<button class="rel t-' + link.type + '"' + style + ' data-act="rel" data-t="' + esc(link.en) +
+      '" title="' + meta.name + '：课内词，点一下听发音"><b>' + esc(link.en) + '</b><i>' + tag + esc(link.zh) + '<span class="rel-book">📖</span></i></button>';
   }
   return '<button class="rel t-' + link.type + '"' + style + ' data-act="say" data-t="' + esc(link.en) +
     '" title="' + meta.name + '：课外拓展词，点一下听发音"><b>' + esc(link.en) + '</b><i>' + tag + esc(link.zh) + '</i></button>';
@@ -63,7 +63,16 @@ function relLegendHTML() {
   return '<div class="rel-legend"><b>关联词</b>' + RELATION_ORDER.map(type => {
     const meta = RELATION_META[type];
     return '<span class="lg t-' + type + '" style="--rc:' + meta.color + '"><em>' + meta.tag + '</em>' + meta.name + '</span>';
-  }).join('') + '<span class="lg-tip">📖 课内词，点一下跳到对应词卡</span></div>';
+  }).join('') + '<span class="lg-tip">📖 课内词，点一下听发音</span></div>';
+}
+function phraseHTML(word) {
+  const list = word.phrases || [];
+  if (!list.length) return '';
+  const items = list.map(p =>
+    '<button class="phrase" data-act="say" data-t="' + esc(p.en) + '" aria-label="朗读 ' + esc(p.en) + '" title="点一下朗读英文">' +
+    '<b>' + esc(p.en) + '</b><i>' + esc(p.zh) + '</i></button>'
+  ).join('');
+  return '<div class="wsec"><span class="seclabel" title="常见短语与句式，点一下听发音">例</span><div class="phrases">' + items + '</div></div>';
 }
 function cardHTML(word, unit, showUnitTag) {
   const learned = !!enState.learned[word.key];
@@ -80,6 +89,7 @@ function cardHTML(word, unit, showUnitTag) {
     '<div class="ipa">' + esc(word.ipa) + '</div><div class="zh">' + esc(word.zh) + '</div></div></div>' +
     '<div class="wsec"><span class="seclabel">记</span><div class="parts">' + parts + '</div></div>' +
     '<div class="memo">💡 ' + esc(word.memo) + '</div>' +
+    phraseHTML(word) +
     '<div class="wsec"><span class="seclabel" title="关联词：相反 / 相近 / 同根 / 组词 / 同类">联</span><div class="rels">' + related + '</div></div></article>';
 }
 function unitHeadHTML(unit) {
@@ -202,7 +212,7 @@ document.addEventListener('click', event => {
     else if (action === 'learn') { event.preventDefault(); toggleLearn(el.dataset.key); }
     else if (action === 'unit') { event.preventDefault(); selectUnit(el.dataset.id); }
     else if (action === 'play') { event.preventDefault(); playUnit(); }
-    else if (action === 'rel') { event.preventDefault(); gotoWord(el.dataset.key); }
+    else if (action === 'rel') { event.preventDefault(); speak(el.dataset.t); }
     else if (action === 'home') { event.preventDefault(); stopPlay(); window.location.href = 'index.html'; }
   } catch (error) { console.error('[教材同步英语] 操作出错:', error); }
 });

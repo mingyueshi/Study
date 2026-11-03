@@ -1,5 +1,5 @@
 /* Reference portal and subject pages only; dictionary and learning pages keep their styles. */
-.reference-page { max-width: 1400px; min-width: 0; margin-inline: auto; padding-top: 16px; }
+.reference-page { min-width: 0; padding-top: 16px; }
 .reference-page a:focus-visible, .reference-page summary:focus-visible { outline: 3px solid var(--orange); outline-offset: 4px; }
 .reference-page p { margin-bottom: 12px; }
 .ref-breadcrumbs { display: flex; flex-wrap: wrap; align-items: center; gap: 9px; margin-bottom: 20px; color: var(--muted); font-size: 14px; overflow-wrap: anywhere; }

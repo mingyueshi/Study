@@ -1,0 +1,53 @@
+/* 英语音标专题：44 音素卡，浅绿英语系配色；点卡上的喇叭/例词即发音。 */
+
+.ph-board { min-width: 0; }
+.ph-group { margin-bottom: 34px; scroll-margin-top: 24px; }
+
+.ph-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); align-items: stretch; gap: 16px; }
+
+.ph-card { display: flex; flex-direction: column; min-width: 0; padding: 16px 18px; border: 1px solid #e0e7e0; border-top: 4px solid color-mix(in srgb, var(--c, #2f9e5f) 55%, #fffefa); border-radius: 18px; background: var(--white, #fff); box-shadow: 0 3px 0 #233e3704; }
+
+/* 大音标 + 试听键：点大音标或喇叭都播放音素原声 */
+.ph-symbol { display: flex; align-items: center; gap: 12px; }
+.ph-symbol-text { min-width: 0; padding: 0; border: 0; background: none; font-size: 40px; font-weight: 900; letter-spacing: 1px; color: #234b38; overflow-wrap: anywhere; cursor: pointer; }
+.ph-symbol-text:hover { color: var(--green, #2f7d4f); }
+.ph-hear { display: grid; place-items: center; flex: 0 0 44px; width: 44px; height: 44px; margin-left: auto; padding: 0; border: 0; border-radius: 12px; background: #e7f2e2; font-size: 20px; cursor: pointer; }
+.ph-hear:active { transform: translateY(1px); }
+
+/* 发音要领与拼读 */
+.ph-tip { margin: 10px 0 0; color: #4d5c54; font-size: 15px; line-height: 1.75; }
+.ph-spell { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; margin: 10px 0 0; color: var(--muted, #6b7480); font-size: 14px; }
+.ph-spell code { padding: 2px 8px; border: 1px solid #d9e4d4; border-radius: 8px; background: #f4f9f1; color: #2f6d4f; font-size: 14px; }
+
+/* 例词 chips */
+.ph-examples { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.ph-word { display: inline-flex; flex-direction: column; align-items: flex-start; gap: 1px; max-width: 100%; min-height: 44px; padding: 7px 11px; border: 1px solid #d9e1cf; border-radius: 11px; background: #f9fbf5; color: var(--ink, #22303c); overflow-wrap: anywhere; text-align: left; cursor: pointer; }
+.ph-word:hover { border-color: #a8c28c; background: #eff5e5; }
+.ph-word b { font-size: 17px; font-weight: 750; }
+.ph-word i { font-style: normal; font-size: 14px; color: #68608d; }
+.ph-word i + i { color: var(--muted, #6b7480); }
+.ph-word em { font-style: normal; padding: 1px 6px; margin-top: 2px; border-radius: 6px; background: #f0e4c3; color: #655638; font-size: 12px; font-weight: 700; }
+.ph-word.extended { border-style: dashed; background: #fffdf4; }
+.ph-word.extended b { color: #655638; }
+
+/* 分组强调色 */
+.ph-group-short .ph-card { --c: #f15bb5; }
+.ph-group-long .ph-card { --c: #4d96ff; }
+.ph-group-diphthong .ph-card { --c: #9b5de5; }
+.ph-group-paired .ph-card { --c: #d9822b; }
+.ph-group-other .ph-card { --c: #2f9e5f; }
+.ph-group .button.small { border: 1px solid var(--green, #2f7d4f); }
+
+/* 侧栏 emoji 点 */
+.unit-nav .unit-dot { background: none; }
+
+@media (max-width: 640px) {
+  .ph-grid { grid-template-columns: minmax(0, 1fr); }
+  .ph-symbol-text { font-size: 34px; }
+  .ph-card { padding: 14px 15px; }
+}
+@media print {
+  .unit-nav, .tts-bar, .tts-settings, .ph-hear, .section-heading .button { display: none !important; }
+  .ph-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ph-card { break-inside: avoid; box-shadow: none; }
+}

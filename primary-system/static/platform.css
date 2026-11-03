@@ -437,6 +437,7 @@ textarea { resize: vertical; line-height: 1.9; }
 .word-source-state { font-size: 13px; margin: 10px 0 0; }
 .word-related { display: flex; flex-wrap: wrap; gap: 10px; }
 .word-related .tag { display: inline-block; padding: 8px 14px; font-size: 16px; }
+.word-related .rel-tag { display: inline-grid; place-items: center; min-width: 17px; height: 17px; padding: 0 3px; margin-right: 2px; border-radius: 5px; background: #4c6252; color: #fff; font-size: 12px; font-weight: 800; line-height: 1; vertical-align: 2px; }
 .word-pills { display: flex; flex-wrap: wrap; gap: 10px; }
 
 /* 打印版式：阅读页单栏、去交互装饰、防断页（图示控件隐藏见 figures.css）。 */

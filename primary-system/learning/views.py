@@ -7,7 +7,7 @@ from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.cache import never_cache
 from django.views.decorators.http import require_GET, require_http_methods
-from catalog.models import Placement, published_items
+from catalog.models import ENGLISH_RELATION_TAGS, Placement, published_items
 from lexicon.models import ContentEntryLink, SourceRecord
 from lexicon.services import link_state
 from lexicon.views import record_payload
@@ -52,11 +52,20 @@ def word_card_context(item, resolver=None):
     context = {'lexicon_state': data['state'], 'word_lexicon': data,
                'secondary_selections': [resolver.payloads[l.pk] for l in links if l.pk != link.pk]}
     payload = item.source_payload if isinstance(item.source_payload, dict) else {}
+    # 场景单词的关联词是英文字符串列表；教材英语词的 links 是带类型的对象列表，
+    # 归一化成 {word, item, zh, tag} 后共用一套关联词模板。
     related = [w for w in payload.get('related', []) if isinstance(w, str) and w.strip()]
+    related += [link['en'] for link in payload.get('links', []) if isinstance(link, dict) and str(link.get('en') or '').strip()]
     if related:
         cards = {card.title: card for card in published_items().filter(
             module__code=item.module.code, title__in=related).select_related('module')}
-        context['related_links'] = [{'word': word, 'item': cards.get(word)} for word in related]
+        links_by_word = {link['en']: link for link in payload.get('links', [])
+                         if isinstance(link, dict) and link.get('en') in related}
+        context['related_links'] = [{
+            'word': word, 'item': cards.get(word),
+            'zh': links_by_word.get(word, {}).get('zh', ''),
+            'tag': ENGLISH_RELATION_TAGS.get(links_by_word.get(word, {}).get('type'), ''),
+        } for word in related]
     placement = item.placements.select_related('unit').first()
     if placement:
         context['scenario_unit'] = placement.unit.title

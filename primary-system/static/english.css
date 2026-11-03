@@ -1,0 +1,105 @@
+/* 教材同步单词：单元词卡栅格（对齐 primary/english.html 原型）。
+   仅在英语教材册页加载；类名与场景单词词卡保持同族，样式独立避免相互影响。 */
+
+/* 单元导航：色点 + 词数 */
+.unit-nav .unit-dot { display: inline-block; width: 10px; height: 10px; margin-right: 8px; border-radius: 50%; background: var(--c, #609cbd); vertical-align: baseline; }
+.unit-nav .unit-count { float: right; color: var(--muted, #6b7480); font-size: 14px; font-variant-numeric: tabular-nums; }
+.unit-nav .unit-title-text { display: inline; }
+.unit-nav .unit-zh { margin-left: 6px; color: var(--muted, #6b7480); font-size: 15px; font-weight: 500; }
+.unit-nav a[aria-current="page"] .unit-zh { color: var(--ink, #22303c); }
+.unit-nav a[aria-current="page"] .unit-count { color: var(--ink, #22303c); font-weight: 700; }
+
+/* 关联词图例：反/近/根/组/类 */
+.rel-legend { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; margin: 0 0 16px; font-size: 13px; font-weight: 600; color: #6b7480; }
+.rel-legend > b { color: #465765; font-weight: 800; }
+.rel-legend .lg { display: inline-flex; align-items: center; gap: 4px; padding: 3px 9px; border: 1px solid color-mix(in srgb, var(--rc) 35%, #fff); border-radius: 9px; background: color-mix(in srgb, var(--rc) 10%, #fff); color: color-mix(in srgb, var(--rc) 72%, #33404d); }
+.rel-legend .lg em { display: grid; place-items: center; width: 16px; height: 16px; border-radius: 5px; background: var(--rc); color: #fff; font-style: normal; font-size: 11px; font-weight: 800; }
+.rel-legend .lg-tip { color: var(--muted, #6b7480); font-weight: 500; }
+
+/* 词卡栅格 */
+#english-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 430px), 1fr)); align-items: stretch; gap: 18px; }
+#english-cards .wcard { display: flex; flex-direction: column; min-width: 0; padding: 20px 22px; border: 1px solid #e3e7ee; border-top: 5px solid color-mix(in srgb, var(--c, #609cbd) 60%, #fffefa); border-radius: 22px; background: var(--white, #fff); box-shadow: 0 3px 0 #233e3706; scroll-margin-top: 24px; transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease; }
+#english-cards .wcard:hover { transform: translateY(-4px); box-shadow: 0 12px 26px #233e3710; border-color: color-mix(in srgb, var(--c, #609cbd) 35%, #e3e7ee); }
+#english-cards .wtop { display: flex; gap: 14px; align-items: center; }
+#english-cards .pic { display: grid; place-items: center; flex: 0 0 66px; width: 66px; height: 66px; padding: 0; border: 1px solid color-mix(in srgb, var(--c, #609cbd) 25%, #fffefa); border-radius: 18px; background: color-mix(in srgb, var(--c, #609cbd) 10%, #fffefa); font-size: 36px; cursor: pointer; transition: transform .15s ease, box-shadow .15s ease; }
+#english-cards .pic:hover { transform: scale(1.08) rotate(-3deg); box-shadow: 0 6px 16px color-mix(in srgb, var(--c, #609cbd) 22%, transparent); }
+#english-cards .pic:active { transform: scale(.95); }
+#english-cards .pic-fallback { color: var(--green, #2f7d4f); font-size: 26px; font-weight: 800; text-transform: uppercase; }
+#english-cards .winfo { flex: 1; min-width: 0; }
+#english-cards .wline { display: flex; align-items: center; gap: 10px; margin: 0; }
+#english-cards .word { min-width: 0; margin: 0; font-size: 32px; font-weight: 800; line-height: 1.3; overflow-wrap: anywhere; letter-spacing: -.01em; }
+#english-cards .say { display: grid; place-items: center; flex: 0 0 46px; width: 46px; height: 46px; padding: 0; border: 0; border-radius: 14px; background: #eef3f9; font-size: 22px; cursor: pointer; transition: transform .15s ease, background .15s ease; }
+#english-cards .say:hover { background: #e0eaf5; transform: scale(1.08); }
+#english-cards .say:active { transform: scale(.92); }
+#english-cards .wmeta { display: flex; align-items: baseline; flex-wrap: wrap; gap: 2px 14px; margin-top: 5px; }
+#english-cards .ipa { color: #68608d; font-size: 19px; overflow-wrap: anywhere; }
+#english-cards .zh { font-size: 19px; font-weight: 500; overflow-wrap: anywhere; }
+#english-cards .wsec { display: flex; align-items: flex-start; gap: 10px; margin-top: 16px; }
+#english-cards .seclabel { flex-shrink: 0; margin-top: 4px; padding: 4px 10px; border-radius: 9px; background: #edf3e5; color: var(--green, #2f7d4f); font-size: 16px; font-weight: 750; }
+#english-cards .parts, #english-cards .rels { display: flex; align-items: flex-start; flex-wrap: wrap; gap: 8px; min-width: 0; }
+#english-cards .plus { align-self: center; color: var(--muted, #6b7480); font-size: 16px; }
+#english-cards .part { display: inline-flex; flex-direction: column; align-items: flex-start; gap: 2px; max-width: 100%; min-height: 46px; padding: 8px 13px; border: 1px solid #d9e1cf; border-radius: 12px; background: #f9fbf5; color: var(--ink, #22303c); overflow-wrap: anywhere; text-align: left; cursor: pointer; transition: transform .12s ease, border-color .12s ease, background .12s ease; }
+#english-cards .part:hover { border-color: #a8c28c; background: #eff5e5; transform: translateY(-2px); }
+#english-cards .part:active { transform: scale(.97); }
+#english-cards .part b { font-size: 18px; font-weight: 750; }
+#english-cards .part i { font-style: normal; font-size: 15px; color: var(--muted, #6b7480); }
+#english-cards .memo { margin: 16px 0 0; padding: 12px 15px; border: 1px solid #f0e4c3; border-radius: 14px; background: #fff8e8; color: #655638; font-size: 17px; line-height: 1.85; }
+
+/* 常见短语与句式（例） */
+#english-cards .phrases { display: flex; flex-wrap: wrap; gap: 8px; min-width: 0; }
+#english-cards .phrase { display: inline-flex; flex-direction: column; align-items: flex-start; gap: 2px; max-width: 100%; min-height: 46px; padding: 8px 13px; border: 1px solid #b9d8ee; border-radius: 13px; background: #eef6fc; color: var(--ink, #22303c); overflow-wrap: anywhere; text-align: left; cursor: pointer; transition: transform .12s ease, background .12s ease, box-shadow .12s ease; }
+#english-cards .phrase:hover { background: #e0effb; transform: translateY(-2px); box-shadow: 0 5px 12px #2c5f8618; }
+#english-cards .phrase:active { transform: scale(.97); }
+#english-cards .phrase b { font-size: 18px; font-weight: 800; color: #2c5f86; }
+#english-cards .phrase i { font-style: normal; font-size: 15px; color: #5a7285; font-weight: 600; }
+#english-cards .wcard-footer { display: flex; justify-content: flex-end; margin-top: auto; padding-top: 14px; }
+#english-cards .card-link { color: var(--muted, #6b7480); font-size: 16px; transition: color .12s ease; }
+#english-cards .card-link:hover { color: var(--green, #2f7d4f); }
+
+/* 关联词芯片：类型着色，点击即发音 */
+#english-cards .rel { display: inline-flex; flex-direction: column; align-items: flex-start; gap: 2px; max-width: 100%; min-height: 46px; padding: 8px 12px; border: 1px solid #dfe5ee; border-radius: 12px; background: #fafbfd; color: var(--ink, #22303c); overflow-wrap: anywhere; text-align: left; cursor: pointer; transition: transform .12s ease, border-color .12s ease, background .12s ease; }
+#english-cards .rel:hover { border-color: #b9c8dd; background: #f0f5fb; transform: translateY(-2px); }
+#english-cards .rel:active { transform: scale(.97); }
+#english-cards .rel b { font-size: 18px; font-weight: 750; }
+#english-cards .rel i { display: inline-flex; align-items: center; gap: 4px; font-style: normal; font-size: 15px; color: var(--muted, #6b7480); }
+#english-cards .rel[class*="t-"] { border-style: solid; border-color: color-mix(in srgb, var(--rc) 38%, #fff); background: color-mix(in srgb, var(--rc) 8%, #fff); }
+#english-cards .rel[class*="t-"] b { color: color-mix(in srgb, var(--rc) 68%, #33404d); }
+#english-cards .rel .rel-tag { display: inline-grid; place-items: center; min-width: 16px; height: 16px; padding: 0 3px; border-radius: 5px; background: var(--rc); color: #fff; font-size: 11px; font-weight: 800; line-height: 1; }
+#english-cards .rel .rel-book { font-size: 11px; }
+
+/* 连读高亮在 platform.css 基础上加强词卡轮廓 */
+#english-cards .wcard.tts-playing { outline: 3px solid var(--orange, #e8833a); outline-offset: 2px; }
+
+/* 从关联词跳转过来时，目标词卡闪一下 */
+@keyframes wcardFlash { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--c, #609cbd) 55%, #fff); } 35% { box-shadow: 0 0 0 7px color-mix(in srgb, var(--c, #609cbd) 40%, #fff); } 100% { box-shadow: 0 0 0 0 transparent; } }
+#english-cards .wcard.flash { animation: wcardFlash 1.5s ease; }
+
+.textbook-source { margin: 22px 2px 0; color: var(--muted, #6b7480); font-size: 13px; line-height: 1.7; }
+
+@media (max-width: 640px) {
+  #english-cards { grid-template-columns: minmax(0, 1fr); }
+  #english-cards .wcard { padding: 16px 18px; }
+  #english-cards .pic { flex-basis: 54px; width: 54px; height: 54px; font-size: 28px; }
+  #english-cards .word { font-size: 28px; }
+  #english-cards .say { flex-basis: 42px; width: 42px; height: 42px; font-size: 20px; }
+  #english-cards .ipa { font-size: 17px; }
+  #english-cards .zh { font-size: 17px; }
+  #english-cards .part b, #english-cards .phrase b, #english-cards .rel b { font-size: 16px; }
+  #english-cards .part i, #english-cards .phrase i, #english-cards .rel i { font-size: 14px; }
+  #english-cards .memo { font-size: 15px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #english-cards .wcard, #english-cards .pic, #english-cards .say,
+  #english-cards .part, #english-cards .phrase, #english-cards .rel { transition: none; }
+  #english-cards .wcard:hover, #english-cards .pic:hover, #english-cards .pic:active,
+  #english-cards .say:hover, #english-cards .say:active,
+  #english-cards .part:hover, #english-cards .part:active,
+  #english-cards .phrase:hover, #english-cards .phrase:active,
+  #english-cards .rel:hover, #english-cards .rel:active { transform: none; }
+  #english-cards .wcard.flash { animation: none; }
+}
+@media print {
+  .unit-nav, .tts-bar, .tts-settings, #english-cards .say, #english-cards .card-link { display: none !important; }
+  #english-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  #english-cards .wcard { break-inside: avoid; box-shadow: none; }
+}

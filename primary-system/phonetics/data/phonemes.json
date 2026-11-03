@@ -1,0 +1,1477 @@
+{
+ "schema_version": 1,
+ "source_code": "primary-phonetics",
+ "groups": [
+  {
+   "code": "short",
+   "name": "单元音 · 短",
+   "hint": "短促有力，不拖长",
+   "emoji": "⚡"
+  },
+  {
+   "code": "long",
+   "name": "单元音 · 长",
+   "hint": "把音拉长，口型保持不变",
+   "emoji": "➡️"
+  },
+  {
+   "code": "diphthong",
+   "name": "双元音",
+   "hint": "从一个音滑到另一个音，口型要动起来",
+   "emoji": "🎢"
+  },
+  {
+   "code": "paired",
+   "name": "辅音 · 清浊成对",
+   "hint": "成对的两个音口型一样，一个声带不振动（清），一个振动（浊）",
+   "emoji": "👯"
+  },
+  {
+   "code": "other",
+   "name": "辅音 · 其他",
+   "hint": "鼻音、边音、半元音和 /h/",
+   "emoji": "🎵"
+  }
+ ],
+ "phonemes": [
+  {
+   "id": "01-i",
+   "symbol": "/ɪ/",
+   "group": "short",
+   "tip": "短促的「衣」，嘴巴半开，比 /iː/ 松弛，不拖长。",
+   "spellings": [
+    "i",
+    "y"
+   ],
+   "examples": [
+    {
+     "en": "ship",
+     "ipa": "/ʃɪp/",
+     "zh": "n. 大船；轮船",
+     "emoji": "🚢",
+     "extended": false
+    },
+    {
+     "en": "big",
+     "ipa": "/bɪɡ/",
+     "zh": "adj. 大的",
+     "emoji": "🐘",
+     "extended": false
+    },
+    {
+     "en": "fish",
+     "ipa": "/fɪʃ/",
+     "zh": "n. 鱼；鱼肉",
+     "emoji": "🐟",
+     "extended": false
+    }
+   ]
+  },
+  {
+   "id": "02-e",
+   "symbol": "/e/",
+   "group": "short",
+   "tip": "嘴巴半开向两边咧，像「哎」的一半，短促。",
+   "spellings": [
+    "e",
+    "ea"
+   ],
+   "examples": [
+    {
+     "en": "bed",
+     "ipa": "/bed/",
+     "zh": "n. 床",
+     "emoji": "🛏️",
+     "extended": false
+    },
+    {
+     "en": "egg",
+     "ipa": "/eɡ/",
+     "zh": "n. 鸡蛋",
+     "emoji": "🥚",
+     "extended": false
+    },
+    {
+     "en": "leg",
+     "ipa": "/leɡ/",
+     "zh": "n. 腿",
+     "emoji": "🦵",
+     "extended": false
+    }
+   ]
+  },
+  {
+   "id": "03-ae",
+   "symbol": "/æ/",
+   "group": "short",
+   "tip": "嘴巴张大，舌头压平，像被挤了一下「啊」。",
+   "spellings": [
+    "a"
+   ],
+   "examples": [
+    {
+     "en": "cat",
+     "ipa": "/kæt/",
+     "zh": "n. 猫",
+     "emoji": "🐱",
+     "extended": false
+    },
+    {
+     "en": "hat",
+     "ipa": "/hæt/",
+     "zh": "n. 帽子（有帽檐）",
+     "emoji": "👒",
+     "extended": false
+    },
+    {
+     "en": "map",
+     "ipa": "/mæp/",
+     "zh": "n. 地图",
+     "emoji": "🗺️",
+     "extended": false
+    }
+   ]
+  },
+  {
+   "id": "04-u",
+   "symbol": "/ʌ/",
+   "group": "short",
+   "tip": "嘴巴放松半开，短促的「阿」，不圆唇。",
+   "spellings": [
+    "u",
+    "o"
+   ],
+   "examples": [
+    {
+     "en": "sun",
+     "ipa": "/sʌn/",
+     "zh": "n. 太阳",
+     "emoji": "☀️",
+     "extended": false
+    },
+    {
+     "en": "bus",
+     "ipa": "/bʌs/",
+     "zh": "n. 公共汽车",
+     "emoji": "🚌",
+     "extended": false
+    },
+    {
+     "en": "duck",
+     "ipa": "/dʌk/",
+     "zh": "n. 鸭子",
+     "emoji": "🦆",
+     "extended": false
+    }
+   ]
+  },
+  {
+   "id": "05-o",
+   "symbol": "/ɒ/",
+   "group": "short",
+   "tip": "嘴巴圆而短促的「奥」，不拖长。",
+   "spellings": [
+    "o",
+    "a"
+   ],
+   "examples": [
+    {
+     "en": "dog",
+     "ipa": "/dɒɡ/",
+     "zh": "n. 狗",
+     "emoji": "🐶",
+     "extended": false
+    },
+    {
+     "en": "job",
+     "ipa": "/dʒɒb/",
+     "zh": "n. 工作；职业",
+     "emoji": "💼",
+     "extended": false
+    },
+    {
+     "en": "wash",
+     "ipa": "/wɒʃ/",
+     "zh": "v. 洗；冲洗",
+     "emoji": "🧽",
+     "extended": false
+    }
+   ]
+  },
+  {
+   "id": "06-uu",
+   "symbol": "/ʊ/",
+   "group": "short",
+   "tip": "嘴巴微微收圆，短促的「乌」，比 /uː/ 松。",
+   "spellings": [
+    "oo",
+    "u"
+   ],
+   "examples": [
+    {
+     "en": "book",
+     "ipa": "/bʊk/",
+     "zh": "n. 书",
+     "emoji": "📖",
+     "extended": false
+    },
+    {
+     "en": "cook",
+     "ipa": "/kʊk/",
+     "zh": "n. 厨师；v. 做饭",
+     "emoji": "🍳",
+     "extended": false
+    },
+    {
+     "en": "football",
+     "ipa": "/ˈfʊtbɔːl/",
+     "zh": "n. 足球",
+     "emoji": "⚽",
+     "extended": false
+    }
+   ]
+  },
+  {
+   "id": "07-schwa",
+   "symbol": "/ə/",
+   "group": "short",
+   "tip": "轻读的「呃」，嘴巴自然放松，常在词尾或弱读音节。",
+   "spellings": [
+    "a",
+    "er",
+    "o"
+   ],
+   "examples": [
+    {
+     "en": "Christmas",
+     "ipa": "/ˈkrɪsməs/",
+     "zh": "n. 圣诞节",
+     "emoji": "🎄",
+     "extended": false
+    },
+    {
+     "en": "teacher",
+     "ipa": "/ˈtiːtʃə/",
+     "zh": "n. 老师",
+     "emoji": "👩‍🏫",
+     "extended": false
+    },
+    {
+     "en": "April",
+     "ipa": "/ˈeɪprəl/",
+     "zh": "n. 四月",
+     "emoji": "🌧️",
+     "extended": false
+    }
+   ]
+  },
+  {
+   "id": "08-ee",
+   "symbol": "/iː/",
+   "group": "long",
+   "tip": "嘴角向两边拉开像微笑，音拉长，「衣——」。",
+   "spellings": [
+    "ee",
+    "ea",
+    "e"
+   ],
+   "examples": [
+    {
+     "en": "bee",
+     "ipa": "/biː/",
+     "zh": "n. 蜜蜂",
+     "emoji": "🐝",
+     "extended": false
+    },
+    {
+     "en": "tree",
+     "ipa": "/triː/",
+     "zh": "n. 树",
+     "emoji": "🌳",
+     "extended": false
+    },
+    {
+     "en": "sea",
+     "ipa": "/siː/",
+     "zh": "n. 海；海水",
+     "emoji": "🏖️",
+     "extended": false
+    }
+   ]
+  },
+  {
+   "id": "09-ar",
+   "symbol": "/ɑː/",
+   "group": "long",
+   "tip": "嘴巴张大，舌头压低拉长，「啊——」。",
+   "spellings": [
+    "ar",
+    "a"
+   ],
+   "examples": [
+    {
+     "en": "car",
+     "ipa": "/kɑː/",
+     "zh": "n. 小汽车",
+     "emoji": "🚗",
+     "extended": false
+    },
+    {
+     "en": "farm",
+     "ipa": "/fɑːm/",
+     "zh": "n. 农场",
+     "emoji": "🚜",
+     "extended": false
+    },
+    {
+     "en": "star",
+     "ipa": "/stɑː/",
+     "zh": "n. 星星",
+     "emoji": "⭐",
+     "extended": false
+    }
+   ]
+  },
+  {
+   "id": "10-or",
+   "symbol": "/ɔː/",
+   "group": "long",
+   "tip": "嘴巴收圆再拉长，「奥——」。",
+   "spellings": [
+    "or",
+    "al",
+    "aw"
+   ],
+   "examples": [
+    {
+     "en": "fork",
+     "ipa": "/fɔːk/",
+     "zh": "n. 叉子",
+     "emoji": "🍴",
+     "extended": false
+    },
+    {
+     "en": "door",
+     "ipa": "/dɔː/",
+     "zh": "n. 门",
+     "emoji": "🚪",
+     "extended": false
+    },
+    {
+     "en": "four",
+     "ipa": "/fɔː/",
+     "zh": "num. 四",
+     "emoji": "4️⃣",
+     "extended": false
+    }
+   ]
+  },
+  {
+   "id": "11-oo",
+   "symbol": "/uː/",
+   "group": "long",
+   "tip": "嘴巴收圆突出，音拉长，「乌——」。",
+   "spellings": [
+    "oo",
+    "u",
+    "ew"
+   ],
+   "examples": [
+    {
+     "en": "zoo",
+     "ipa": "/zuː/",
+     "zh": "n. 动物园",
+     "emoji": "🦁",
+     "extended": false
+    },
+    {
+     "en": "blue",
+     "ipa": "/bluː/",
+     "zh": "adj. 蓝色的",
+     "emoji": "🔵",
+     "extended": false
+    },
+    {
+     "en": "moon",
+     "ipa": "/muːn/",
+     "zh": "n. 月亮",
+     "emoji": "🌙",
+     "extended": false
+    }
+   ]
+  },
+  {
+   "id": "12-ir",
+   "symbol": "/ɜː/",
+   "group": "long",
+   "tip": "嘴巴半开，舌位居中，卷着发「呃——」。",
+   "spellings": [
+    "ir",
+    "ur",
+    "er"
+   ],
+   "examples": [
+    {
+     "en": "bird",
+     "ipa": "/bɜːd/",
+     "zh": "n. 鸟",
+     "emoji": "🐦",
+     "extended": false
+    },
+    {
+     "en": "girl",
+     "ipa": "/ɡɜːl/",
+     "zh": "n. 女孩",
+     "emoji": "👧",
+     "extended": false
+    },
+    {
+     "en": "T-shirt",
+     "ipa": "/ˈtiː ʃɜːt/",
+     "zh": "n. T 恤衫",
+     "emoji": "👕",
+     "extended": false
+    }
+   ]
+  },
+  {
+   "id": "13-ay",
+   "symbol": "/eɪ/",
+   "group": "diphthong",
+   "tip": "从 /e/ 滑向 /ɪ/，像喊「诶——」时嘴角收拢。",
+   "spellings": [
+    "a_e",
+    "ai",
+    "ay"
+   ],
+   "examples": [
+    {
+     "en": "cake",
+     "ipa": "/keɪk/",
+     "zh": "n. 蛋糕",
+     "emoji": "🍰",
+     "extended": false
+    },
+    {
+     "en": "day",
+     "ipa": "/deɪ/",
+     "zh": "n. 天；一日",
+     "emoji": "📆",
+     "extended": false
+    },
+    {
+     "en": "plane",
+     "ipa": "/pleɪn/",
+     "zh": "n. 飞机",
+     "emoji": "✈️",
+     "extended": false
+    }
+   ]
+  },
+  {
+   "id": "14-igh",
+   "symbol": "/aɪ/",
+   "group": "diphthong",
+   "tip": "从 /a/ 滑向 /ɪ/，像喊「爱——」。",
+   "spellings": [
+    "i_e",
+    "y",
+    "igh"
+   ],
+   "examples": [
+    {
+     "en": "bike",
+     "ipa": "/baɪk/",
+     "zh": "n. 自行车",
+     "emoji": "🚲",
+     "extended": false
+    },
+    {
+     "en": "kite",
+     "ipa": "/kaɪt/",
+     "zh": "n. 风筝",
+     "emoji": "🪁",
+     "extended": false
+    },
+    {
+     "en": "sky",
+     "ipa": "/skaɪ/",
+     "zh": "n. 天空",
+     "emoji": "🌤️",
+     "extended": false
+    }
+   ]
+  },
+  {
+   "id": "15-oy",
+   "symbol": "/ɔɪ/",
+   "group": "diphthong",
+   "tip": "从 /ɔ/ 滑向 /ɪ/，像「奥伊」连起来。",
+   "spellings": [
+    "oi",
+    "oy"
+   ],
+   "examples": [
+    {
+     "en": "toy",
+     "ipa": "/tɔɪ/",
+     "zh": "n. 玩具",
+     "emoji": "🧸",
+     "extended": false
+    },
+    {
+     "en": "boy",
+     "ipa": "/bɔɪ/",
+     "zh": "n. 男孩",
+     "emoji": "👦",
+     "extended": false
+    },
+    {
+     "en": "enjoy",
+     "ipa": "/ɪnˈdʒɔɪ/",
+     "zh": "v. 享受……的乐趣",
+     "emoji": "😄",
+     "extended": false
+    }
+   ]
+  },
+  {
+   "id": "16-ou",
+   "symbol": "/əʊ/",
+   "group": "diphthong",
+   "tip": "从 /ə/ 滑向 /ʊ/，圆唇慢慢收小，像「欧」。",
+   "spellings": [
+    "o_e",
+    "oa",
+    "ow"
+   ],
+   "examples": [
+    {
+     "en": "boat",
+     "ipa": "/bəʊt/",
+     "zh": "n. 小船",
+     "emoji": "🛶",
+     "extended": false
+    },
+    {
+     "en": "coat",
+     "ipa": "/kəʊt/",
+     "zh": "n. 大衣；外套",
+     "emoji": "🧥",
+     "extended": false
+    },
+    {
+     "en": "snow",
+     "ipa": "/snəʊ/",
+     "zh": "n. 雪；v. 下雪",
+     "emoji": "❄️",
+     "extended": false
+    }
+   ]
+  },
+  {
+   "id": "17-ow",
+   "symbol": "/aʊ/",
+   "group": "diphthong",
+   "tip": "从 /a/ 滑向 /ʊ/，像吃惊时喊「奥乌」。",
+   "spellings": [
+    "ou",
+    "ow"
+   ],
+   "examples": [
+    {
+     "en": "cow",
+     "ipa": "/kaʊ/",
+     "zh": "n. 奶牛；母牛",
+     "emoji": "🐄",
+     "extended": false
+    },
+    {
+     "en": "mouse",
+     "ipa": "/maʊs/",
+     "zh": "n. 老鼠",
+     "emoji": "🐁",
+     "extended": false
+    },
+    {
+     "en": "flower",
+     "ipa": "/ˈflaʊə/",
+     "zh": "n. 花",
+     "emoji": "🌸",
+     "extended": false
+    }
+   ]
+  },
+  {
+   "id": "18-ear",
+   "symbol": "/ɪə/",
+   "group": "diphthong",
+   "tip": "从 /ɪ/ 滑向 /ə/，像「衣呃」连起来。",
+   "spellings": [
+    "ear",
+    "eer"
+   ],
+   "examples": [
+    {
+     "en": "ear",
+     "ipa": "/ɪə/",
+     "zh": "n. 耳朵",
+     "emoji": "👂",
+     "extended": false
+    },
+    {
+     "en": "near",
+     "ipa": "/nɪə/",
+     "zh": "prep. 在……附近",
+     "emoji": "📍",
+     "extended": false
+    },
+    {
+     "en": "year",
+     "ipa": "/jɪə/",
+     "zh": "n. 年；年度",
+     "emoji": "🗓️",
+     "extended": false
+    }
+   ]
+  },
+  {
+   "id": "19-air",
+   "symbol": "/eə/",
+   "group": "diphthong",
+   "tip": "从 /e/ 滑向 /ə/，像「诶呃」连起来。",
+   "spellings": [
+    "air",
+    "are",
+    "ear"
+   ],
+   "examples": [
+    {
+     "en": "chair",
+     "ipa": "/tʃeə/",
+     "zh": "n. 椅子",
+     "emoji": "🪑",
+     "extended": false
+    },
+    {
+     "en": "hair",
+     "ipa": "/heə/",
+     "zh": "n. 头发",
+     "emoji": "🧑‍🦱",
+     "extended": false
+    },
+    {
+     "en": "pear",
+     "ipa": "/peə/",
+     "zh": "n. 梨",
+     "emoji": "🍐",
+     "extended": false
+    }
+   ]
+  },
+  {
+   "id": "20-oor",
+   "symbol": "/ʊə/",
+   "group": "diphthong",
+   "tip": "从 /ʊ/ 滑向 /ə/，像「乌呃」连起来，课本里少见。",
+   "spellings": [
+    "ure",
+    "our"
+   ],
+   "examples": [
+    {
+     "en": "sure",
+     "ipa": "/ʃʊə/",
+     "zh": "",
+     "emoji": "",
+     "extended": true
+    },
+    {
+     "en": "tour",
+     "ipa": "/tʊə/",
+     "zh": "",
+     "emoji": "",
+     "extended": true
+    }
+   ]
+  },
+  {
+   "id": "21-p",
+   "symbol": "/p/",
+   "group": "paired",
+   "tip": "双唇憋住气再突然打开，声带不振动，像吹灭蜡烛。",
+   "spellings": [
+    "p"
+   ],
+   "examples": [
+    {
+     "en": "pig",
+     "ipa": "/pɪɡ/",
+     "zh": "n. 猪",
+     "emoji": "🐷",
+     "extended": false
+    },
+    {
+     "en": "cap",
+     "ipa": "/kæp/",
+     "zh": "n. 鸭舌帽",
+     "emoji": "🧢",
+     "extended": false
+    },
+    {
+     "en": "pet",
+     "ipa": "/pet/",
+     "zh": "n. 宠物",
+     "emoji": "🐾",
+     "extended": false
+    }
+   ]
+  },
+  {
+   "id": "22-b",
+   "symbol": "/b/",
+   "group": "paired",
+   "tip": "口型和 /p/ 一样，但声带要振动，摸喉咙有震感。",
+   "spellings": [
+    "b"
+   ],
+   "examples": [
+    {
+     "en": "bus",
+     "ipa": "/bʌs/",
+     "zh": "n. 公共汽车",
+     "emoji": "🚌",
+     "extended": false
+    },
+    {
+     "en": "bee",
+     "ipa": "/biː/",
+     "zh": "n. 蜜蜂",
+     "emoji": "🐝",
+     "extended": false
+    },
+    {
+     "en": "bed",
+     "ipa": "/bed/",
+     "zh": "n. 床",
+     "emoji": "🛏️",
+     "extended": false
+    }
+   ]
+  },
+  {
+   "id": "23-t",
+   "symbol": "/t/",
+   "group": "paired",
+   "tip": "舌尖抵住上齿龈憋气再弹开，声带不振动。",
+   "spellings": [
+    "t"
+   ],
+   "examples": [
+    {
+     "en": "TV",
+     "ipa": "/ˌtiː ˈviː/",
+     "zh": "n. 电视",
+     "emoji": "📺",
+     "extended": false
+    },
+    {
+     "en": "cat",
+     "ipa": "/kæt/",
+     "zh": "n. 猫",
+     "emoji": "🐱",
+     "extended": false
+    },
+    {
+     "en": "ten",
+     "ipa": "/ten/",
+     "zh": "num. 十",
+     "emoji": "🔟",
+     "extended": false
+    }
+   ]
+  },
+  {
+   "id": "24-d",
+   "symbol": "/d/",
+   "group": "paired",
+   "tip": "口型和 /t/ 一样，但声带振动。",
+   "spellings": [
+    "d"
+   ],
+   "examples": [
+    {
+     "en": "day",
+     "ipa": "/deɪ/",
+     "zh": "n. 天；一日",
+     "emoji": "📆",
+     "extended": false
+    },
+    {
+     "en": "bed",
+     "ipa": "/bed/",
+     "zh": "n. 床",
+     "emoji": "🛏️",
+     "extended": false
+    },
+    {
+     "en": "duck",
+     "ipa": "/dʌk/",
+     "zh": "n. 鸭子",
+     "emoji": "🦆",
+     "extended": false
+    }
+   ]
+  },
+  {
+   "id": "25-k",
+   "symbol": "/k/",
+   "group": "paired",
+   "tip": "舌根抵住软腭憋气再弹开，声带不振动。",
+   "spellings": [
+    "k",
+    "c",
+    "ck"
+   ],
+   "examples": [
+    {
+     "en": "cat",
+     "ipa": "/kæt/",
+     "zh": "n. 猫",
+     "emoji": "🐱",
+     "extended": false
+    },
+    {
+     "en": "kite",
+     "ipa": "/kaɪt/",
+     "zh": "n. 风筝",
+     "emoji": "🪁",
+     "extended": false
+    },
+    {
+     "en": "cook",
+     "ipa": "/kʊk/",
+     "zh": "n. 厨师；v. 做饭",
+     "emoji": "🍳",
+     "extended": false
+    }
+   ]
+  },
+  {
+   "id": "26-g",
+   "symbol": "/ɡ/",
+   "group": "paired",
+   "tip": "口型和 /k/ 一样，但声带振动。",
+   "spellings": [
+    "g",
+    "gg"
+   ],
+   "examples": [
+    {
+     "en": "girl",
+     "ipa": "/ɡɜːl/",
+     "zh": "n. 女孩",
+     "emoji": "👧",
+     "extended": false
+    },
+    {
+     "en": "big",
+     "ipa": "/bɪɡ/",
+     "zh": "adj. 大的",
+     "emoji": "🐘",
+     "extended": false
+    },
+    {
+     "en": "egg",
+     "ipa": "/eɡ/",
+     "zh": "n. 鸡蛋",
+     "emoji": "🥚",
+     "extended": false
+    }
+   ]
+  },
+  {
+   "id": "27-f",
+   "symbol": "/f/",
+   "group": "paired",
+   "tip": "上齿轻咬下唇吹气，声带不振动。",
+   "spellings": [
+    "f",
+    "ff"
+   ],
+   "examples": [
+    {
+     "en": "fish",
+     "ipa": "/fɪʃ/",
+     "zh": "n. 鱼；鱼肉",
+     "emoji": "🐟",
+     "extended": false
+    },
+    {
+     "en": "four",
+     "ipa": "/fɔː/",
+     "zh": "num. 四",
+     "emoji": "4️⃣",
+     "extended": false
+    },
+    {
+     "en": "family",
+     "ipa": "/ˈfæməli/",
+     "zh": "n. 家庭；家人",
+     "emoji": "👨‍👩‍👧‍👦",
+     "extended": false
+    }
+   ]
+  },
+  {
+   "id": "28-v",
+   "symbol": "/v/",
+   "group": "paired",
+   "tip": "口型和 /f/ 一样，但声带振动。",
+   "spellings": [
+    "v"
+   ],
+   "examples": [
+    {
+     "en": "five",
+     "ipa": "/faɪv/",
+     "zh": "num. 五",
+     "emoji": "5️⃣",
+     "extended": false
+    },
+    {
+     "en": "TV",
+     "ipa": "/ˌtiː ˈviː/",
+     "zh": "n. 电视",
+     "emoji": "📺",
+     "extended": false
+    },
+    {
+     "en": "wave",
+     "ipa": "/weɪv/",
+     "zh": "n. 海浪；波浪",
+     "emoji": "🌊",
+     "extended": false
+    }
+   ]
+  },
+  {
+   "id": "29-th",
+   "symbol": "/θ/",
+   "group": "paired",
+   "tip": "舌尖轻轻放在上下齿之间吹气，声带不振动。",
+   "spellings": [
+    "th"
+   ],
+   "examples": [
+    {
+     "en": "thank you",
+     "ipa": "/ˈθæŋk juː/",
+     "zh": "phr. 谢谢你",
+     "emoji": "🙇",
+     "extended": false
+    },
+    {
+     "en": "mouth",
+     "ipa": "/maʊθ/",
+     "zh": "n. 嘴",
+     "emoji": "👄",
+     "extended": false
+    },
+    {
+     "en": "maths",
+     "ipa": "/mæθs/",
+     "zh": "n. 数学",
+     "emoji": "➕",
+     "extended": false
+    }
+   ]
+  },
+  {
+   "id": "30-dh",
+   "symbol": "/ð/",
+   "group": "paired",
+   "tip": "口型和 /θ/ 一样，但声带振动。",
+   "spellings": [
+    "th"
+   ],
+   "examples": [
+    {
+     "en": "mother",
+     "ipa": "/ˈmʌðə/",
+     "zh": "n. 妈妈",
+     "emoji": "👩",
+     "extended": false
+    },
+    {
+     "en": "brother",
+     "ipa": "/ˈbrʌðə/",
+     "zh": "n. 兄弟",
+     "emoji": "🧒",
+     "extended": false
+    },
+    {
+     "en": "weather",
+     "ipa": "/ˈweðə/",
+     "zh": "n. 天气",
+     "emoji": "⛅",
+     "extended": false
+    }
+   ]
+  },
+  {
+   "id": "31-s",
+   "symbol": "/s/",
+   "group": "paired",
+   "tip": "上下齿接近，气流从缝隙挤出，像蛇叫「嘶」，声带不振动。",
+   "spellings": [
+    "s",
+    "c"
+   ],
+   "examples": [
+    {
+     "en": "six",
+     "ipa": "/sɪks/",
+     "zh": "num. 六",
+     "emoji": "6️⃣",
+     "extended": false
+    },
+    {
+     "en": "sea",
+     "ipa": "/siː/",
+     "zh": "n. 海；海水",
+     "emoji": "🏖️",
+     "extended": false
+    },
+    {
+     "en": "sun",
+     "ipa": "/sʌn/",
+     "zh": "n. 太阳",
+     "emoji": "☀️",
+     "extended": false
+    }
+   ]
+  },
+  {
+   "id": "32-z",
+   "symbol": "/z/",
+   "group": "paired",
+   "tip": "口型和 /s/ 一样，但声带振动，像蜜蜂「嗡」。",
+   "spellings": [
+    "z",
+    "s"
+   ],
+   "examples": [
+    {
+     "en": "zoo",
+     "ipa": "/zuː/",
+     "zh": "n. 动物园",
+     "emoji": "🦁",
+     "extended": false
+    },
+    {
+     "en": "nose",
+     "ipa": "/nəʊz/",
+     "zh": "n. 鼻子",
+     "emoji": "👃",
+     "extended": false
+    },
+    {
+     "en": "music",
+     "ipa": "/ˈmjuːzɪk/",
+     "zh": "n. 音乐",
+     "emoji": "🎼",
+     "extended": false
+    }
+   ]
+  },
+  {
+   "id": "33-sh",
+   "symbol": "/ʃ/",
+   "group": "paired",
+   "tip": "嘴唇略突出，舌面抬近上腭，像「嘘——」，声带不振动。",
+   "spellings": [
+    "sh",
+    "ti"
+   ],
+   "examples": [
+    {
+     "en": "ship",
+     "ipa": "/ʃɪp/",
+     "zh": "n. 大船；轮船",
+     "emoji": "🚢",
+     "extended": false
+    },
+    {
+     "en": "shoe",
+     "ipa": "/ʃuː/",
+     "zh": "n. 鞋",
+     "emoji": "👟",
+     "extended": false
+    },
+    {
+     "en": "dish",
+     "ipa": "/dɪʃ/",
+     "zh": "n. 盘子；碟子",
+     "emoji": "🍽️",
+     "extended": false
+    }
+   ]
+  },
+  {
+   "id": "34-zh",
+   "symbol": "/ʒ/",
+   "group": "paired",
+   "tip": "口型和 /ʃ/ 一样，但声带振动，小学课本里很少见。",
+   "spellings": [
+    "s",
+    "ge"
+   ],
+   "examples": [
+    {
+     "en": "television",
+     "ipa": "/ˈtelɪvɪʒn/",
+     "zh": "",
+     "emoji": "",
+     "extended": true
+    },
+    {
+     "en": "usually",
+     "ipa": "/ˈjuːʒʊəli/",
+     "zh": "",
+     "emoji": "",
+     "extended": true
+    }
+   ]
+  },
+  {
+   "id": "35-ch",
+   "symbol": "/tʃ/",
+   "group": "paired",
+   "tip": "先憋住 /ʃ/ 的口型再弹开，像打喷嚏「嚓」，声带不振动。",
+   "spellings": [
+    "ch",
+    "tch"
+   ],
+   "examples": [
+    {
+     "en": "chair",
+     "ipa": "/tʃeə/",
+     "zh": "n. 椅子",
+     "emoji": "🪑",
+     "extended": false
+    },
+    {
+     "en": "lunch",
+     "ipa": "/lʌntʃ/",
+     "zh": "n. 午餐",
+     "emoji": "🥪",
+     "extended": false
+    },
+    {
+     "en": "teacher",
+     "ipa": "/ˈtiːtʃə/",
+     "zh": "n. 老师",
+     "emoji": "👩‍🏫",
+     "extended": false
+    }
+   ]
+  },
+  {
+   "id": "36-dg",
+   "symbol": "/dʒ/",
+   "group": "paired",
+   "tip": "口型和 /tʃ/ 一样，但声带振动。",
+   "spellings": [
+    "j",
+    "g_e",
+    "dge"
+   ],
+   "examples": [
+    {
+     "en": "jump",
+     "ipa": "/dʒʌmp/",
+     "zh": "v. 跳",
+     "emoji": "🦘",
+     "extended": false
+    },
+    {
+     "en": "juice",
+     "ipa": "/dʒuːs/",
+     "zh": "n. 果汁",
+     "emoji": "🧃",
+     "extended": false
+    },
+    {
+     "en": "June",
+     "ipa": "/dʒuːn/",
+     "zh": "n. 六月",
+     "emoji": "🎈",
+     "extended": false
+    }
+   ]
+  },
+  {
+   "id": "37-m",
+   "symbol": "/m/",
+   "group": "other",
+   "tip": "双唇闭上，声音从鼻子出来，摸嘴唇有振动。",
+   "spellings": [
+    "m"
+   ],
+   "examples": [
+    {
+     "en": "moon",
+     "ipa": "/muːn/",
+     "zh": "n. 月亮",
+     "emoji": "🌙",
+     "extended": false
+    },
+    {
+     "en": "milk",
+     "ipa": "/mɪlk/",
+     "zh": "n. 牛奶",
+     "emoji": "🥛",
+     "extended": false
+    },
+    {
+     "en": "camp",
+     "ipa": "/kæmp/",
+     "zh": "n. 营地；v. 露营",
+     "emoji": "🏕️",
+     "extended": false
+    }
+   ]
+  },
+  {
+   "id": "38-n",
+   "symbol": "/n/",
+   "group": "other",
+   "tip": "舌尖抵住上齿龈，声音从鼻子出来。",
+   "spellings": [
+    "n",
+    "kn"
+   ],
+   "examples": [
+    {
+     "en": "nose",
+     "ipa": "/nəʊz/",
+     "zh": "n. 鼻子",
+     "emoji": "👃",
+     "extended": false
+    },
+    {
+     "en": "nine",
+     "ipa": "/naɪn/",
+     "zh": "num. 九",
+     "emoji": "9️⃣",
+     "extended": false
+    },
+    {
+     "en": "nurse",
+     "ipa": "/nɜːs/",
+     "zh": "n. 护士",
+     "emoji": "👩‍⚕️",
+     "extended": false
+    }
+   ]
+  },
+  {
+   "id": "39-ng",
+   "symbol": "/ŋ/",
+   "group": "other",
+   "tip": "嘴微张，舌根抵住软腭，声音从鼻子出来，像感冒说话。",
+   "spellings": [
+    "ng",
+    "nk"
+   ],
+   "examples": [
+    {
+     "en": "ring",
+     "ipa": "/rɪŋ/",
+     "zh": "v. （钟、铃）鸣响",
+     "emoji": "🔔",
+     "extended": false
+    },
+    {
+     "en": "sing",
+     "ipa": "/sɪŋ/",
+     "zh": "v. 唱歌",
+     "emoji": "🎤",
+     "extended": false
+    },
+    {
+     "en": "pink",
+     "ipa": "/pɪŋk/",
+     "zh": "adj. 粉色的",
+     "emoji": "🎀",
+     "extended": false
+    }
+   ]
+  },
+  {
+   "id": "40-h",
+   "symbol": "/h/",
+   "group": "other",
+   "tip": "像哈气一样从喉咙轻轻送气，别太用力。",
+   "spellings": [
+    "h"
+   ],
+   "examples": [
+    {
+     "en": "hand",
+     "ipa": "/hænd/",
+     "zh": "n. 手",
+     "emoji": "✋",
+     "extended": false
+    },
+    {
+     "en": "hair",
+     "ipa": "/heə/",
+     "zh": "n. 头发",
+     "emoji": "🧑‍🦱",
+     "extended": false
+    },
+    {
+     "en": "hot",
+     "ipa": "/hɒt/",
+     "zh": "adj. 炎热的",
+     "emoji": "🔥",
+     "extended": false
+    }
+   ]
+  },
+  {
+   "id": "41-l",
+   "symbol": "/l/",
+   "group": "other",
+   "tip": "舌尖抵住上齿龈，声音从两边流出；词尾时舌位略后。",
+   "spellings": [
+    "l",
+    "ll",
+    "le"
+   ],
+   "examples": [
+    {
+     "en": "leg",
+     "ipa": "/leɡ/",
+     "zh": "n. 腿",
+     "emoji": "🦵",
+     "extended": false
+    },
+    {
+     "en": "fly",
+     "ipa": "/flaɪ/",
+     "zh": "v. 飞；放（风筝）",
+     "emoji": "🦋",
+     "extended": false
+    },
+    {
+     "en": "old",
+     "ipa": "/əʊld/",
+     "zh": "adj. 年老的；旧的",
+     "emoji": "👴",
+     "extended": false
+    }
+   ]
+  },
+  {
+   "id": "42-r",
+   "symbol": "/r/",
+   "group": "other",
+   "tip": "舌尖卷起不碰上腭，嘴唇略圆，像「若」。",
+   "spellings": [
+    "r",
+    "rr"
+   ],
+   "examples": [
+    {
+     "en": "red",
+     "ipa": "/red/",
+     "zh": "adj. 红色的",
+     "emoji": "🟥",
+     "extended": false
+    },
+    {
+     "en": "rain",
+     "ipa": "/reɪn/",
+     "zh": "n. 雨；v. 下雨",
+     "emoji": "🌧️",
+     "extended": false
+    },
+    {
+     "en": "run",
+     "ipa": "/rʌn/",
+     "zh": "v. 跑",
+     "emoji": "🏃",
+     "extended": false
+    }
+   ]
+  },
+  {
+   "id": "43-w",
+   "symbol": "/w/",
+   "group": "other",
+   "tip": "嘴巴收圆再快速打开，像「乌」轻轻滑过。",
+   "spellings": [
+    "w",
+    "wh"
+   ],
+   "examples": [
+    {
+     "en": "water",
+     "ipa": "/ˈwɔːtə/",
+     "zh": "n. 水",
+     "emoji": "💧",
+     "extended": false
+    },
+    {
+     "en": "window",
+     "ipa": "/ˈwɪndəʊ/",
+     "zh": "n. 窗户",
+     "emoji": "🪟",
+     "extended": false
+    },
+    {
+     "en": "week",
+     "ipa": "/wiːk/",
+     "zh": "n. 星期；周",
+     "emoji": "🗓️",
+     "extended": false
+    }
+   ]
+  },
+  {
+   "id": "44-y",
+   "symbol": "/j/",
+   "group": "other",
+   "tip": "嘴角拉开像 /iː/，快速滑向后面的音，像「衣」。",
+   "spellings": [
+    "y"
+   ],
+   "examples": [
+    {
+     "en": "year",
+     "ipa": "/jɪə/",
+     "zh": "n. 年；年度",
+     "emoji": "🗓️",
+     "extended": false
+    },
+    {
+     "en": "yard",
+     "ipa": "/jɑːd/",
+     "zh": "n. 庭院",
+     "emoji": "🏡",
+     "extended": false
+    },
+    {
+     "en": "yogurt",
+     "ipa": "/ˈjɒɡət/",
+     "zh": "n. 酸奶",
+     "emoji": "🥣",
+     "extended": false
+    }
+   ]
+  }
+ ]
+}

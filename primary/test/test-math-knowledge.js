@@ -7,6 +7,7 @@
 const MKB = require('../math-data.js');
 const FIGS = require('../figures.js');
 const MFIGS = require('../math-figures.js');
+const MATH_VIDEOS = require('../math-videos.js');
 const hasFig = id => FIGS.has(id) || MFIGS.has(id);
 
 let fails = 0;
@@ -19,11 +20,20 @@ function isStr(v) { return typeof v === 'string' && v.trim().length > 0; }
 
 /* ---------- 总体结构 ---------- */
 console.log('— 单元与知识点结构 —');
-check(Array.isArray(MKB.units) && MKB.units.length === 10, '应有 10 个板块（8 单元 + 编码 + 数学好玩），实际 ' + (MKB.units || []).length);
+check(Array.isArray(MKB.units) && MKB.units.length === 11, '应有 11 个板块（8 单元 + 编码 + 数学好玩 + 导航给的时间准吗），实际 ' + (MKB.units || []).length);
 check(isStr(MKB.textbook), '缺少 textbook');
 check(isStr(MKB.edition), '缺少 edition');
 
-const EXPECT_IDS = ['mu1', 'mcode', 'mu2', 'mu3', 'mu4', 'mu5', 'mplay', 'mu6', 'mu7', 'mu8'];
+/* meta：模板化元信息（驱动页头/侧栏/存储键） */
+check(MKB.meta && typeof MKB.meta === 'object', '缺少 meta 对象');
+if (MKB.meta) {
+  check(isStr(MKB.meta.subject), 'meta.subject 缺失');
+  check(isStr(MKB.meta.textbook), 'meta.textbook 缺失');
+  check(isStr(MKB.meta.grade), 'meta.grade 缺失');
+  check(isStr(MKB.meta.volume), 'meta.volume 缺失');
+}
+
+const EXPECT_IDS = ['mu1', 'mcode', 'mu2', 'mu3', 'mu4', 'mu5', 'mplay', 'mu6', 'mu7', 'mu8', 'mnav'];
 const seenPoints = new Set();
 MKB.units.forEach((u, i) => {
   const tag = '[' + (u.id || 'u?') + ']';
@@ -51,7 +61,7 @@ MKB.units.forEach((u, i) => {
     if (p.recall) check(isStr(p.recall), t + ' 口诀应为字符串');
   });
 });
-check(seenPoints.size === 37, '全册应为 37 个知识点，实际 ' + seenPoints.size);
+check(seenPoints.size === 43, '全册应为 43 个知识点，实际 ' + seenPoints.size);
 
 /* ---------- 公式与易错 ---------- */
 console.log('— 公式法则与易错诊所 —');
@@ -84,7 +94,28 @@ walk(MKB.units, 'units');
 walk(MKB.formulas, 'formulas');
 walk(MKB.mistakes, 'mistakes');
 
+/* ---------- 教学视频 ---------- */
+console.log('— 教学视频 —');
+check(Array.isArray(MATH_VIDEOS.list) && MATH_VIDEOS.list.length > 0, '视频清单为空');
+const vidIds = new Set();
+MATH_VIDEOS.list.forEach(v => {
+  const t = '[vid ' + (v.id || '?') + ']';
+  check(isStr(v.id), t + ' 缺少 id');
+  check(!vidIds.has(v.id), t + ' id 重复');
+  vidIds.add(v.id);
+  check(isStr(v.bvid) && /^BV[a-zA-Z0-9]+$/.test(v.bvid), t + ' bvid 格式错误: ' + v.bvid);
+  check(isStr(v.title), t + ' 缺少标题');
+  check(isStr(v.up), t + ' 缺少 UP 主');
+  check(typeof v.dur === 'number' && v.dur > 0, t + ' 时长应为正数');
+  check(isStr(v.cover), t + ' 缺少封面');
+  check(isStr(v.group) && MATH_VIDEOS.groups.some(g => g.id === v.group), t + ' 分组不存在: ' + v.group);
+});
+/* 知识点引用的 video 必须在视频清单中存在 */
+MKB.units.forEach(u => u.points.forEach(p => {
+  if (p.video) check(vidIds.has(p.video), '[' + p.id + '] 关联视频不存在: ' + p.video);
+}));
+
 console.log(fails === 0
-  ? '\n✅ 全部通过（共断言 ' + checked + ' 项：10 板块 37 知识点 + 图示 ' + MFIGS.FIG_IDS.length + ' 张 + 公式 + 易错）'
+  ? '\n✅ 全部通过（共断言 ' + checked + ' 项：11 板块 43 知识点 + 图示 ' + MFIGS.FIG_IDS.length + ' 张 + 视频 ' + MATH_VIDEOS.list.length + ' 部 + 公式 + 易错）'
   : '\n❌ 共 ' + fails + ' / ' + checked + ' 项失败');
 process.exit(fails === 0 ? 0 : 1);

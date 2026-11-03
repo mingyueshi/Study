@@ -1,0 +1,74 @@
+/* 作文坊：写作锦囊 + 素材百宝箱 + 我的作文本；紫笔绿纸的语文色系。 */
+
+.wr-board { min-width: 0; }
+.wr-group { margin-bottom: 30px; scroll-margin-top: 24px; }
+.wr-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 18px; }
+.wr-toolbar input[type="search"] { flex: 1; min-width: 200px; min-height: 46px; border: 1.5px solid #d5cbe6; border-radius: 12px; padding: 8px 14px; font-size: 16px; background: var(--white, #fff); }
+.wr-toolbar input[type="search"]:focus { border-color: #73509b; }
+
+.wr-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 430px), 1fr)); align-items: stretch; gap: 18px; }
+.wr-card { display: flex; flex-direction: column; min-width: 0; padding: 18px 20px; border: 1px solid #e6e0ee; border-top: 4px solid color-mix(in srgb, var(--c, #73509b) 55%, #fffefa); border-radius: 20px; background: var(--white, #fff); box-shadow: 0 3px 0 #2a1a3806; }
+.wr-card-head { display: flex; align-items: center; gap: 10px; }
+.wr-card-head h3 { min-width: 0; margin: 0; font-size: 23px; font-weight: 800; overflow-wrap: anywhere; }
+.wr-say { display: grid; place-items: center; flex: 0 0 40px; width: 40px; height: 40px; margin-left: auto; padding: 0; border: 0; border-radius: 11px; background: #f1ecf8; font-size: 19px; cursor: pointer; }
+.wr-say:hover { background: #e6ddf3; }
+
+.wr-goal { margin: 12px 0 0; padding: 9px 12px; border-radius: 11px; background: #faf7ff; color: #4a3a63; font-size: 15px; line-height: 1.75; }
+.wr-goal b { display: inline-block; margin-right: 8px; padding: 1px 8px; border-radius: 7px; background: #73509b; color: #fff; font-size: 13px; }
+
+.wr-seclabel { flex-shrink: 0; margin-top: 3px; padding: 3px 8px; border-radius: 8px; background: #f1ecf8; color: #73509b; font-size: 14px; font-weight: 750; }
+.wr-outline { display: flex; align-items: flex-start; gap: 10px; margin-top: 14px; }
+.wr-outline ol { flex: 1; min-width: 0; margin: 0; padding-left: 20px; color: #3d4750; font-size: 15px; line-height: 1.8; }
+.wr-outline li b { color: #73509b; margin-right: 6px; }
+
+.wr-chips { display: flex; align-items: flex-start; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.wr-chip { display: inline-block; max-width: 100%; min-height: 40px; padding: 6px 11px; border: 1px solid #ddd4ea; border-radius: 10px; background: #fbfaff; color: var(--ink, #22303c); overflow-wrap: anywhere; text-align: left; font-size: 15px; cursor: pointer; }
+.wr-chip:hover { border-color: #b8a6d8; background: #f3edfc; }
+.wr-chip.wr-sentence { min-height: 0; color: #4a3a63; }
+
+.wr-model { margin-top: 14px; border: 1px solid #eee4d2; border-radius: 13px; background: #fffaf0; padding: 10px 14px; }
+.wr-model summary { cursor: pointer; font-weight: 700; color: #8a6d1f; }
+.wr-model summary em { margin-left: 8px; font-style: normal; color: var(--muted, #6b7480); font-size: 13px; font-weight: 500; }
+.wr-model-text { margin: 10px 0 0; color: #44403a; font-size: 15px; line-height: 1.95; }
+.wr-model .button { margin-top: 10px; }
+.wr-comment { margin: 10px 0 0; padding: 9px 12px; border-radius: 10px; background: #edf6e8; color: #35602c; font-size: 15px; line-height: 1.8; }
+
+.wr-task { display: flex; align-items: flex-start; gap: 10px; margin-top: 14px; }
+.wr-task p { flex: 1; min-width: 0; margin: 0; color: #3d4750; font-size: 15px; line-height: 1.75; }
+.wr-task .button { flex-shrink: 0; align-self: center; }
+
+/* 作文本 */
+.wr-editor { display: flex; flex-direction: column; gap: 10px; padding: 16px; border: 1px solid #dcead2; border-radius: 16px; background: var(--white, #fff); }
+.wr-editor input[type="text"] { min-height: 46px; border: 1.5px solid #cfe0c2; border-radius: 11px; padding: 8px 12px; font-size: 17px; font-weight: 700; }
+.wr-editor textarea { border: 1.5px solid #cfe0c2; border-radius: 11px; padding: 10px 12px; font-size: 16px; line-height: 1.9; min-height: 240px; resize: vertical; background: #fbfdf9; }
+.wr-editor input:focus, .wr-editor textarea:focus { border-color: var(--green, #2f7d4f); outline: none; }
+.wr-stats { margin: 0; color: var(--muted, #6b7480); font-size: 14px; font-variant-numeric: tabular-nums; }
+.wr-hints { margin: 0; color: #35602c; font-size: 15px; min-height: 1.4em; }
+.wr-feedback { margin: 0; color: #2f6d4f; font-size: 15px; min-height: 1.3em; }
+.wr-feedback.error { color: #a3332a; }
+.wr-feedback:empty { display: none; }
+.wr-editor-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+
+.wr-drafts { margin-top: 18px; }
+.wr-drafts h3 { margin: 0 0 10px; font-size: 18px; }
+.wr-draft-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 12px; }
+.wr-draft { display: flex; flex-direction: column; gap: 6px; padding: 12px 14px; border: 1px solid #dcead2; border-radius: 13px; background: #fbfdf9; }
+.wr-draft b { font-size: 16px; overflow-wrap: anywhere; }
+.wr-draft .wr-draft-meta { color: var(--muted, #6b7480); font-size: 13px; }
+.wr-draft .wr-draft-preview { margin: 0; color: #4d5c54; font-size: 14px; line-height: 1.7; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.wr-draft-actions { display: flex; gap: 8px; margin-top: 4px; }
+.wr-draft-actions button { min-height: 34px; padding: 4px 10px; border: 1px solid #cfe0c2; border-radius: 9px; background: #fff; font-size: 14px; cursor: pointer; }
+.wr-draft-actions button:hover { background: #eef6e6; }
+.wr-draft-actions .wr-draft-delete:hover { background: #fbeae8; border-color: #e0b1ab; }
+.wr-empty { padding: 18px; border: 2px dashed #dcead2; border-radius: 13px; color: var(--muted, #6b7480); font-size: 15px; text-align: center; }
+
+@media (max-width: 640px) {
+  .wr-grid { grid-template-columns: minmax(0, 1fr); }
+  .wr-card { padding: 15px 16px; }
+  .wr-task { flex-wrap: wrap; }
+}
+@media print {
+  .unit-nav, .wr-toolbar, .wr-say, #notebook, .wr-model .button { display: none !important; }
+  .wr-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .wr-card { break-inside: avoid; box-shadow: none; }
+}

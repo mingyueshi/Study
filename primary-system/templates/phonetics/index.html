@@ -1,0 +1,17 @@
+{% extends 'base.html' %}{% load static %}{% block title %}英语音标 · 乐学堂{% endblock %}
+{% block content %}<link rel="stylesheet" href="{% static 'phonetics/phonetics.css' %}"><script src="{% static 'speech.js' %}" defer></script><script src="{% static 'tts.js' %}" defer></script><script src="{% static 'phonetics/phonetics.js' %}" defer></script>{% include 'includes/tts_controls.html' %}
+<a class="back" href="{% url 'home' %}">← 学习广场</a>
+<div class="page-heading"><p class="eyebrow">英语 · 44 个音</p><h1>英语音标</h1><p>点大音标或喇叭听音素原声，点例词听整词，看着口型要点把每个音读准。</p></div>
+<div class="library-layout"><aside class="unit-nav" aria-label="音标分组导航"><h2>音标分组</h2>{% for group in groups %}<a href="#group-{{ group.code }}">{% if group.emoji %}<span class="unit-dot">{{ group.emoji }}</span>{% endif %}{{ group.name }}<span class="unit-count">{{ group.phonemes|length }}</span></a>{% endfor %}</aside>
+<section class="ph-board">
+{% for group in groups %}<section class="ph-group" id="group-{{ group.code }}">
+  <div class="section-heading"><div><h2>{{ group.emoji }} {{ group.name }}</h2><p>{{ group.hint }}</p></div><button class="button small" type="button" data-tts-sequence="#group-{{ group.code }}" data-tts-rate="0.78">▶ 连读本组</button></div>
+  <div class="ph-grid">{% for card in group.phonemes %}<article class="ph-card" id="ph-{{ card.id }}">
+    <div class="ph-symbol"><button class="ph-symbol-text" type="button" data-audio="{% static card.audio %}" data-fallback="{{ card.key_word }}" aria-label="听音标 {{ card.symbol }}">{{ card.symbol }}</button><button class="ph-hear" type="button" data-audio="{% static card.audio %}" data-fallback="{{ card.key_word }}" aria-label="听音标 {{ card.symbol }}，读不准时听例词 {{ card.key_word }}">🔊</button></div>
+    <p class="ph-tip">{{ card.tip }}</p>
+    {% if card.spellings %}<p class="ph-spell">常见拼读：{% for spelling in card.spellings %}<code>{{ spelling }}</code> {% endfor %}</p>{% endif %}
+    <div class="ph-examples">{% for ex in card.examples %}<button class="ph-word{% if not ex.resolved %} extended{% endif %}" type="button" data-say="{{ ex.en }}" data-say-seq="{{ ex.en }}" title="{% if ex.resolved %}来源：{{ ex.source_name }}；点一下听发音{% else %}拓展例词，待词库核对；点一下听发音{% endif %}"><b>{% if ex.emoji %}{{ ex.emoji }} {% endif %}{{ ex.en }}</b><i>{{ ex.reading }}</i>{% if ex.zh %}<i>{{ ex.zh }}</i>{% endif %}{% if not ex.resolved %}<em>拓展词</em>{% endif %}</button>{% endfor %}</div>
+  </article>{% endfor %}</div>
+</section>{% endfor %}
+</section></div>
+{% endblock %}

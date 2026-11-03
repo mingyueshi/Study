@@ -240,7 +240,8 @@ class LessonResolver:
         item.summary = payload.get('definition', '')
         item.body = ''
         item.sections = []
-        item.source_payload = {k: raw[k] for k in ('en', 'emoji', 'memo', 'related') if k in raw}
+        # links 是教材英语词的关联词载荷（近/反/根/组/类），与 related 字符串列表并存。
+        item.source_payload = {k: raw[k] for k in ('en', 'emoji', 'ipa', 'memo', 'related', 'links', 'phrases') if k in raw}
         item.source_payload['parts'] = raw.get('parts', []) if payload['available'] else []
         if not payload['available']:
             item.source_payload['memo'] = ''

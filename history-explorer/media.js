@@ -72,6 +72,48 @@ window.HISTORY_MEDIA = {
     source: 'https://commons.wikimedia.org/wiki/File:Antic_chinese_Compass.jpg',
     credit: 'Yug / Wikimedia Commons · Public domain'
   },
+  houmuwu: {
+    src: 'assets/houmuwu-ding.jpg', alt: '后母戊鼎方鼎的全貌，四足两耳，器身厚重',
+    caption: '后母戊鼎（司母戊鼎）· 商代晚期最重青铜器，中国国家博物馆',
+    source: 'https://commons.wikimedia.org/wiki/File:HouMuWuDingFullView.jpg',
+    credit: 'Mlogic / Wikimedia Commons · CC BY-SA 3.0'
+  },
+  erlitou: {
+    src: 'assets/erlitou-jue.jpg', alt: '二里头遗址博物馆展出的青铜爵，有三足和流口',
+    caption: '二里头文化青铜爵 · 二里头夏都遗址博物馆展品',
+    source: 'https://commons.wikimedia.org/wiki/File:20250529_Bronze_jue_with_nipples_in_the_Erlitou_Site_Museum_of_the_Xia_Capital.jpg',
+    credit: 'Yumeto / Wikimedia Commons · CC BY-SA 4.0'
+  },
+  pagoda: {
+    src: 'assets/wild-goose-pagoda.jpg', alt: '西安大慈恩寺的大雁塔，七层方形砖塔',
+    caption: '大雁塔（大慈恩寺）· 唐代建筑，玄奘曾在此译经',
+    source: 'https://commons.wikimedia.org/wiki/File:Wild_goose_pagoda_xian_china.jpg',
+    credit: 'Tuxnduke / Wikimedia Commons · CC BY-SA 3.0'
+  },
+  potala: {
+    src: 'assets/potala-palace.jpg', alt: '拉萨布达拉宫，红白相间的宫殿建在红山上',
+    caption: '布达拉宫 · 拉萨，现存建筑主要为清代重建',
+    source: 'https://commons.wikimedia.org/wiki/File:Potala_Palace_in_Lhasa,_Tibet.jpg',
+    credit: 'Jan Kranendonk / Wikimedia Commons · CC BY-SA 4.0'
+  },
+  zhenghe: {
+    src: 'assets/zhenghe-ship.jpg', alt: '中国国家博物馆展出的郑和宝船模型',
+    caption: '郑和宝船模型 · 中国国家博物馆，模型比例不代表确切尺寸',
+    source: 'https://commons.wikimedia.org/wiki/File:Zheng_He_Treasure_Ship_Model_(15829289311).jpg',
+    credit: 'Gary Todd / Wikimedia Commons · CC0 1.0'
+  },
+  shiji: {
+    src: 'assets/shiji.jpg', alt: '《史记》刻本的首页，竖排繁体文字',
+    caption: '《史记》书影 · 后世刻本，不是司马迁手稿',
+    source: 'https://commons.wikimedia.org/wiki/File:Shiji.jpg',
+    credit: 'Wikimedia Commons · Public domain'
+  },
+  exam: {
+    src: 'assets/jiangnan-exam-hall.jpg', alt: '南京江南贡院的大门，门额上有江南贡院字样',
+    caption: '江南贡院大门 · 南京，明清时期最大的科举考场之一',
+    source: 'https://commons.wikimedia.org/wiki/File:Gate_of_Jiangnan_Examination_Hall_near_Nanjing_Fuzi_Temple.jpg',
+    credit: 'そらみみ / Wikimedia Commons · CC BY-SA 4.0'
+  },
   video: {
     src: 'assets/video.webm', poster: 'assets/video-poster.jpg',
     title: '15 秒，看看真正的汉长城遗址', duration: '15 秒',

@@ -17,6 +17,13 @@
 | `palace.jpg` / `palace` | 从景山俯瞰故宫。 | [Nikolaj Potanin · Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Forbidden_City_-_view_from_Jingshan_(7879179658).jpg) | [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/) |
 | `pottery.jpg` / `pottery` | 仰韶文化半坡类型人面鱼纹彩陶盆。原图片说明对陈列地点存在不一致，本页只标器物类型，不据图认定具体馆藏编号。 | [Rosemania，Ismoon 调色 · Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Banpo_bowl.jpg) | [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/) |
 | `compass.jpg` / `compass` | 开封拍摄的勺形司南复原展示模型。现代制作，不是出土文物，也不表示古代指南针都采用这一形状。 | [Yug · Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Antic_chinese_Compass.jpg) | Public domain，作者声明放弃版权 |
+| `houmuwu-ding.jpg` / `houmuwu` | 后母戊鼎（曾称司母戊鼎），商代晚期最重青铜器，中国国家博物馆藏品。名称“后母戊”与“司母戊”的释读仍有学术讨论。 | [Mlogic · Wikimedia Commons](https://commons.wikimedia.org/wiki/File:HouMuWuDingFullView.jpg) | [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/) |
+| `erlitou-jue.jpg` / `erlitou` | 二里头夏都遗址博物馆展出的青铜爵，二里头文化典型礼器。照片用于认识器物形态，不据此认定具体使用者。 | [Yumeto · Wikimedia Commons](https://commons.wikimedia.org/wiki/File:20250529_Bronze_jue_with_nipples_in_the_Erlitou_Site_Museum_of_the_Xia_Capital.jpg) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) |
+| `wild-goose-pagoda.jpg` / `pagoda` | 西安大慈恩寺大雁塔。玄奘曾在此译经；现存塔身经历代修缮，不是初建原样。 | [Tuxnduke · Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Wild_goose_pagoda_xian_china.jpg) | [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/) |
+| `potala-palace.jpg` / `potala` | 拉萨布达拉宫。与文成公主入藏传说相关；现存建筑主要为清代重建，不能当作唐代原物。 | [Jan Kranendonk · Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Potala_Palace_in_Lhasa,_Tibet.jpg) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) |
+| `zhenghe-ship.jpg` / `zhenghe` | 中国国家博物馆展出的郑和宝船模型。模型比例不代表古船的确切尺寸，最大宝船尺度仍有学术讨论。 | [Gary Todd · Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Zheng_He_Treasure_Ship_Model_(15829289311).jpg) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `shiji.jpg` / `shiji` | 《史记》后世刻本书影。不是司马迁手稿，不同版本之间文字也可能有差异。 | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Shiji.jpg) | [Public domain](https://commons.wikimedia.org/wiki/Commons:Reuse_of_PD-Art_photographs) |
+| `jiangnan-exam-hall.jpg` / `exam` | 南京江南贡院大门。江南贡院是明清时期最大的科举考场之一；不同朝代的考场制度并不完全相同。 | [そらみみ · Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Gate_of_Jiangnan_Examination_Hall_near_Nanjing_Fuzi_Temple.jpg) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) |
 
 ## 页内实拍短片
 
@@ -39,7 +46,11 @@
 
 ## 文件核验
 
-所有 11 张独立照片与视频封面均由 `file` 和 `sips` 验证为有效 JPEG；短片由 `file` 验证为 WebM。来源页给出的片长、分辨率与文件字节数已核对。其余人物、路线与文字演变互动由页面自行绘制，只用于学习示意，不作为文物照片或精确古地图。
+所有 18 张独立照片与视频封面均由 `file` 和 `sips` 验证为有效 JPEG；短片由 `file` 验证为 WebM。来源页给出的片长、分辨率与文件字节数已核对。其余人物、路线与文字演变互动由页面自行绘制，只用于学习示意，不作为文物照片或精确古地图。
+
+### 2026-11-04 新增图片（自用系统素材扩展）
+
+新增 7 张公开图片，均来自 Wikimedia Commons（CC0 / CC BY-SA 系列），已下载到 `assets/` 并改为本地引用。对应知识点：后母戊鼎（hu3-3）、二里头青铜爵（hu3-1）、大雁塔（hu7-4）、布达拉宫（hu7-5）、郑和宝船模型（hu8-4）、《史记》书影（hu5-5）、江南贡院（hu7-2）。
 
 
 ## 精讲版新增复习音频（2026-11-03）

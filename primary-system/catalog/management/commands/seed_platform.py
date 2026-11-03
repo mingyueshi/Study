@@ -11,6 +11,8 @@ MODULES = [
     ('english', '教材同步单词', 'english', 'english', '按教材册次，积累每天用得到的英语。'),
     ('chain', '成语接龙', 'chinese', 'dragon', '和小龙陪练轮流接龙，词语取自统一词库。'),
     ('words', '场景单词', 'english', 'scenes', '从生活场景出发，认识身边的英文。'),
+    ('phonetics', '英语音标', 'english', 'phonetics', '看口型要点，听例词，把 44 个音读准。'),
+    ('writing', '作文坊', 'chinese', 'writing', '打开写作锦囊，写自己的故事。'),
 ]
 
 

@@ -17,6 +17,10 @@ class NamedModel(models.Model):
         return self.name
 
 
+# 教材英语词关联词类型：徽标字与中文说明（列表词卡与详情词卡共用）。
+ENGLISH_RELATION_TAGS = {'opp': '反', 'near': '近', 'family': '根', 'phrase': '组', 'group': '类'}
+
+
 class Stage(NamedModel):
     class Meta(NamedModel.Meta):
         verbose_name = '学段'

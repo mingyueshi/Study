@@ -6,8 +6,8 @@ from django.views.decorators.cache import never_cache
 from django.views.decorators.http import require_GET
 from .forms import CatalogFilter
 from lexicon.chinese import safe_word_item, safe_search, request_resolver, LessonResolver
-from .models import Grade, Module, Subject, TextbookEdition, TextbookBook, ContentItem, published_items, \
-    published_textbook_books, published_units
+from .models import ENGLISH_RELATION_TAGS, Grade, Module, Placement, Subject, TextbookEdition, TextbookBook, \
+    ContentItem, published_items, published_textbook_books, published_units
 
 
 def published_books():
@@ -47,7 +47,7 @@ def units_of_books(books):
 
 
 # 玩法模块的入口是各自应用的页面；首页卡片一次直达（不经过目录中转页）。
-GAME_ROUTES = {'chain': 'chain', 'words': 'scenario-words'}
+GAME_ROUTES = {'chain': 'chain', 'words': 'scenario-words', 'phonetics': 'phonetics', 'writing': 'writing'}
 
 
 @never_cache
@@ -90,6 +90,28 @@ def module_detail(request, code):
     }, status=200 if form.is_valid() else 400)
 
 
+# 教材单元词卡按单元顺序取一组明快底色，跨册循环使用。
+UNIT_CARD_COLORS = ('#4d96ff', '#9b5de5', '#00a8a8', '#f15bb5', '#fee440', '#43aa8b')
+
+
+def attach_english_link_chips(placements):
+    """解析教材英语词的关联词（相反/相近/同根/组词/同类），点击即发音。"""
+    for placement in placements:
+        raw = placement.item.source_payload if isinstance(placement.item.source_payload, dict) else {}
+        links = raw.get('links') if isinstance(raw.get('links'), list) else []
+        chips = []
+        for link in links:
+            if not isinstance(link, dict) or not str(link.get('en') or '').strip():
+                continue
+            chips.append({
+                'type': link.get('type') if link.get('type') in ENGLISH_RELATION_TAGS else 'group',
+                'tag': ENGLISH_RELATION_TAGS.get(link.get('type'), ENGLISH_RELATION_TAGS['group']),
+                'en': link['en'], 'zh': link.get('zh') or '',
+            })
+        placement.link_chips = chips
+    return placements
+
+
 @never_cache
 @require_GET
 def collection_detail(request, code):
@@ -97,15 +119,27 @@ def collection_detail(request, code):
         'module', 'textbook__grade', 'textbook__edition').first()
     if not book:
         raise Http404('学习册不存在或未发布。')
-    units = book.units.all()
+    units = list(book.units.annotate(word_count=Count('placements', filter=Q(placements__item__status='published'))))
     unit_code = request.GET.get('unit')
-    selected_unit = get_object_or_404(units, code=unit_code) if unit_code else units.first()
+    # 模板里的单元与选中单元共用同一批实例（英语分支要在单元对象上挂词卡底色）。
+    for index, unit in enumerate(units):
+        unit.color = UNIT_CARD_COLORS[index % len(UNIT_CARD_COLORS)]
+    selected_unit = next((u for u in units if u.code == unit_code), None) if unit_code else (units[0] if units else None)
+    if unit_code and selected_unit is None:
+        raise Http404('单元不存在。')
     placements = selected_unit.placements.select_related('item').filter(item__status='published', item__module=book.module) if selected_unit else []
-    page = Paginator(placements, 30).get_page(request.GET.get('page'))
+    is_english = book.module.code == 'english'
+    # 英语单元整页呈现词卡（最大单元 40 词），一屏可连读；其余模块保持 30 条分页。
+    page = Paginator(placements, 60 if is_english else 30).get_page(request.GET.get('page'))
     resolver = LessonResolver([p.item for p in page])
     for placement in page:
         safe_word_item(placement.item, resolver)
-    return render(request, 'catalog/collection.html', {'book': book, 'units': units, 'selected_unit': selected_unit, 'page': page})
+    if is_english:
+        attach_english_link_chips(list(page))
+    return render(request, 'catalog/collection.html', {
+        'book': book, 'units': units, 'selected_unit': selected_unit, 'page': page,
+        'is_english': is_english,
+    })
 
 
 @never_cache

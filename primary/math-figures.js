@@ -740,6 +740,196 @@ const MathFigures = (() => {
     return s + '</svg>' + replayBtn();
   };
 
+  /* ================= 新增图示（教材同步优化） ================= */
+
+  /* 十万有多大 */
+  const m100k = () => {
+    let s = '<svg class="fig-svg" viewBox="0 0 640 180">';
+    s += seq(0, txt(80, 36, '1 万', { fs: 18, fill: BLUE, fw: 900 }));
+    for (let i = 0; i < 10; i++) {
+      s += seq(0.1 + i * 0.08, `<rect x="${130 + i * 40}" y="22" width="34" height="30" rx="6" fill="${BLUE}22" stroke="${BLUE}" stroke-width="1.6"/>` +
+        txt(147 + i * 40, 43, '1万', { fs: 11, fill: BLUE, fw: 800 }));
+    }
+    s += seq(1, `<line x1="130" y1="64" x2="530" y2="64" stroke="${BLUE}" stroke-width="2" marker-end="url(#mfig-arrow-b)"/>`);
+    s += seq(1.1, txt(330, 84, '10 个一万 = 十万（100000）', { fs: 16, fill: INK, fw: 900 }));
+    s += seq(1.25, block(40, 104, 280, 56, { fill: BLUE + '12', stroke: BLUE, title: '十万张纸', sub: '大约厚 10 米（约 3 层楼高）', fs: 14 }));
+    s += seq(1.4, block(340, 104, 270, 56, { fill: GREEN + '12', stroke: GREEN, title: '十万名学生', sub: '大约组成 2000 个班级', fs: 14 }));
+    s += seq(1.6, txt(320, 174, '把大数和熟悉的事物比一比，更容易感受它有多大', { fs: 12.5, fill: MUT }));
+    return s + '</svg>' + replayBtn();
+  };
+
+  /* 从结绳计数说起 · 自然数 */
+  const mNatural = () => {
+    let s = '<svg class="fig-svg" viewBox="0 0 640 180">';
+    s += seq(0, txt(80, 40, '远古', { fs: 13, fill: MUT, fw: 800 }));
+    s += seq(0.1, txt(140, 40, '结绳 · 刻痕', { fs: 14, fill: '#8a6a3a' }));
+    for (let i = 0; i < 5; i++) s += seq(0.15 + i * 0.05, `<line x1="${120 + i * 10}" y1="52" x2="${120 + i * 10}" y2="${58 + (i % 2) * 4}" stroke="#8a6a3a" stroke-width="3"/>`);
+    s += seq(0.5, arrow(230, 46, 270, 46, 'gray'));
+    s += seq(0.55, txt(320, 40, '进位制数字', { fs: 14, fill: '#3a6a9a' }));
+    s += seq(0.6, txt(320, 60, '0  1  2  3  4  5 ……', { fs: 16, fill: '#3a6a9a', fw: 900, mono: true }));
+    s += seq(0.8, arrow(430, 46, 470, 46, 'gray'));
+    s += seq(0.85, txt(540, 40, '自然数', { fs: 14, fill: GREEN, fw: 900 }));
+    s += seq(1, block(60, 84, 520, 48, { fill: GREEN + '12', stroke: GREEN, title: '自然数：0、1、2、3、4 ……', sub: '最小的自然数是 0，没有最大的自然数，个数无限', fs: 14 }));
+    s += seq(1.3, txt(320, 158, '一个物体也没有，用 0 表示；0 也是自然数', { fs: 12.5, fill: MUT }));
+    return s + '</svg>' + replayBtn();
+  };
+
+  /* 天安门广场 · 判断拍摄点 */
+  const mTiananmen = () => {
+    let s = '<svg class="fig-svg" viewBox="0 0 640 190">';
+    s += seq(0, txt(120, 30, '广场俯视图', { fs: 14, fill: MUT }));
+    s += seq(0.1, `<rect x="60" y="50" width="120" height="60" rx="4" fill="${GOLD}33" stroke="${GOLD}" stroke-width="1.8"/>` + txt(120, 84, '天安门', { fs: 12, fill: '#8a6a1a', fw: 800 }));
+    s += seq(0.2, `<rect x="270" y="44" width="80" height="72" rx="4" fill="${SKY}33" stroke="${SKY}" stroke-width="1.8"/>` + txt(310, 84, '纪念碑', { fs: 11, fill: '#1a5a8a', fw: 800 }));
+    s += seq(0.3, `<rect x="440" y="50" width="140" height="60" rx="4" fill="${RED}22" stroke="${RED}" stroke-width="1.8"/>` + txt(510, 84, '纪念堂', { fs: 12, fill: '#8a1a2a', fw: 800 }));
+    s += seq(0.4, `<circle cx="120" cy="130" r="7" fill="${BLUE}"/>` + txt(120, 150, '①', { fs: 12, fill: BLUE, fw: 900 }));
+    s += seq(0.45, `<circle cx="510" cy="130" r="7" fill="${GREEN}"/>` + txt(510, 150, '②', { fs: 12, fill: GREEN, fw: 900 }));
+    s += seq(0.6, arrow(120, 124, 270, 80, 'blue'));
+    s += seq(0.7, arrow(510, 124, 350, 80, 'green'));
+    s += seq(0.9, `<rect x="60" y="158" width="250" height="26" rx="13" fill="${BLUE}12" stroke="${BLUE}"/>` +
+      txt(185, 176, '从①拍：纪念碑在纪念堂左边', { fs: 12, fill: BLUE, fw: 800 }));
+    s += seq(1.05, `<rect x="330" y="158" width="250" height="26" rx="13" fill="${GREEN}12" stroke="${GREEN}"/>` +
+      txt(455, 176, '从②拍：纪念碑在纪念堂右边', { fs: 12, fill: GREEN, fw: 800 }));
+    s += seq(1.25, txt(320, 200, '左右关系相反 → 拍摄者在广场两侧', { fs: 12.5, fill: MUT }));
+    return s + '</svg>' + replayBtn();
+  };
+
+  /* 翻滚正方体 */
+  const mRollCube = () => {
+    let s = '<svg class="fig-svg" viewBox="0 0 640 190">';
+    const face = (x, y, label, c, d) => seq(d, `<rect x="${x}" y="${y}" width="56" height="56" rx="8" fill="${c}22" stroke="${c}" stroke-width="2"/>` +
+      txt(x + 28, y + 36, label, { fs: 20, fill: c, fw: 900 }));
+    s += seq(0, txt(60, 28, '原来', { fs: 13, fill: MUT, fw: 800 }));
+    s += face(40, 40, '上', BLUE, 0.05);
+    s += face(40, 100, '前', GREEN, 0.1);
+    s += seq(0.3, arrow(110, 68, 180, 68, 'blue') + txt(145, 56, '向前翻', { fs: 12, fill: BLUE }));
+    s += seq(0.45, txt(240, 28, '翻一次后', { fs: 13, fill: MUT, fw: 800 }));
+    s += face(220, 40, '前', GREEN, 0.5);
+    s += face(220, 100, '下', '#8a8a8a', 0.55);
+    s += seq(0.8, arrow(290, 68, 360, 68, 'blue'));
+    s += face(400, 40, '下', '#8a8a8a', 0.85);
+    s += face(400, 100, '后', RED, 0.9);
+    s += seq(1.1, txt(500, 40, '…继续翻', { fs: 12, fill: MUT }));
+    s += seq(1.25, `<rect x="60" y="164" width="520" height="20" rx="10" fill="${BLUE}0e"/>` +
+      txt(320, 178, '向前翻：前→下，上→前，后→上，下→后', { fs: 12.5, fill: BLUE, fw: 800 }));
+    return s + '</svg>' + replayBtn();
+  };
+
+  /* 总量与分量 */
+  const mTotalPart = () => {
+    let s = '<svg class="fig-svg" viewBox="0 0 640 180">';
+    s += seq(0, block(220, 18, 200, 48, { fill: ORANGE + '22', stroke: ORANGE, title: '总量 25 千克', sub: '一箱苹果连箱', fs: 14 }));
+    s += seq(0.3, `<line x1="320" y1="66" x2="320" y2="86" stroke="${MUT}" stroke-width="2"/>`);
+    s += seq(0.35, `<path d="M 320 86 L 160 86 L 160 100" fill="none" stroke="${MUT}" stroke-width="2" marker-end="url(#mfig-arrow)"/>`);
+    s += seq(0.35, `<path d="M 320 86 L 480 86 L 480 100" fill="none" stroke="${MUT}" stroke-width="2" marker-end="url(#mfig-arrow)"/>`);
+    s += seq(0.5, block(70, 100, 180, 48, { fill: SKY + '22', stroke: SKY, title: '分量 1：苹果', sub: '25 − 1 = 24 千克', fs: 13 }));
+    s += seq(0.6, block(390, 100, 180, 48, { fill: GREEN + '22', stroke: GREEN, title: '分量 2：箱子', sub: '1 千克', fs: 13 }));
+    s += seq(0.9, txt(320, 166, '总量 = 分量 + 分量；未知分量 = 总量 − 已知分量', { fs: 13, fill: INK, fw: 800 }));
+    return s + '</svg>' + replayBtn();
+  };
+
+  /* 相遇问题 */
+  const mMeet = () => {
+    let s = '<svg class="fig-svg" viewBox="0 0 640 176">';
+    s += seq(0, `<line x1="60" y1="90" x2="580" y2="90" stroke="${LINE}" stroke-width="3"/>`);
+    s += seq(0.1, txt(60, 76, 'A 地', { fs: 13, fill: BLUE, fw: 800 }));
+    s += seq(0.1, txt(580, 76, 'B 地', { fs: 13, fill: GREEN, fw: 800 }));
+    s += seq(0.2, `<circle cx="60" cy="90" r="6" fill="${BLUE}"/>`);
+    s += seq(0.2, `<circle cx="580" cy="90" r="6" fill="${GREEN}"/>`);
+    s += seq(0.4, arrow(66, 90, 290, 90, 'blue') + txt(178, 78, '甲 60 千米/时', { fs: 12, fill: BLUE }));
+    s += seq(0.5, arrow(574, 90, 350, 90, 'green') + txt(462, 78, '乙 40 千米/时', { fs: 12, fill: GREEN }));
+    s += seq(0.7, `<circle cx="320" cy="90" r="9" fill="${ORANGE}" stroke="#fff" stroke-width="3"/>`);
+    s += seq(0.75, txt(320, 64, '相遇点', { fs: 12, fill: ORANGE, fw: 900 }));
+    s += seq(0.9, txt(320, 120, '速度和 = 60 + 40 = 100 千米/时', { fs: 13, fill: INK, fw: 800 }));
+    s += seq(1.05, txt(320, 142, '总路程 300 千米 ÷ 100 = 3 时相遇', { fs: 13, fill: INK, fw: 800 }));
+    s += seq(1.2, `<rect x="150" y="154" width="340" height="18" rx="9" fill="${ORANGE}14"/>` +
+      txt(320, 167, '总路程 = 速度和 × 相遇时间', { fs: 11.5, fill: '#a05020', fw: 800 }));
+    return s + '</svg>' + replayBtn();
+  };
+
+  /* 平均数 */
+  const mAverage = () => {
+    let s = '<svg class="fig-svg" viewBox="0 0 640 188">';
+    const data = [['130', 52], ['135', 67], ['140', 82], ['131', 55]];
+    const baseY = 130;
+    s += seq(0, txt(320, 24, '4 名同学身高（厘米）', { fs: 14, fw: 900 }));
+    s += seq(0.1, `<line x1="60" y1="${baseY}" x2="580" y2="${baseY}" stroke="${LINE}" stroke-width="2"/>`);
+    data.forEach((d, i) => {
+      const x = 110 + i * 120;
+      s += `<g class="mf-bar" style="animation-delay:${0.2 + i * 0.1}s">` +
+        `<rect x="${x}" y="${baseY - d[1]}" width="60" height="${d[1]}" rx="5" fill="${SKY}"/>` +
+        txt(x + 30, baseY - d[1] - 8, d[0], { fs: 13, fill: SKY, fw: 900 }) + '</g>';
+    });
+    s += seq(0.8, `<line x1="60" y1="${baseY - 65}" x2="580" y2="${baseY - 65}" stroke="${ORANGE}" stroke-width="2.5" stroke-dasharray="7 5"/>`);
+    s += seq(0.9, txt(560, baseY - 69, '平均 134', { fs: 13, fill: ORANGE, fw: 900, anchor: 'end' }));
+    s += seq(1.1, `<rect x="60" y="150" width="520" height="30" rx="15" fill="${ORANGE}12" stroke="${ORANGE}"/>` +
+      txt(320, 170, '平均数 =（130+135+140+131）÷ 4 = 536 ÷ 4 = 134', { fs: 13, fill: '#a05020', fw: 800 }));
+    return s + '</svg>' + replayBtn();
+  };
+
+  /* 出行导航 */
+  const mNav = () => {
+    let s = '<svg class="fig-svg" viewBox="0 0 640 168">';
+    s += seq(0, `<rect x="240" y="14" width="160" height="100" rx="14" fill="#222" stroke="#444" stroke-width="2"/>`);
+    s += seq(0.1, `<path d="M 270 40 L 370 40 L 360 60 L 380 70 L 300 100 L 280 70 Z" fill="${GREEN}33" stroke="${GREEN}" stroke-width="1.8"/>`);
+    s += seq(0.2, `<circle cx="280" cy="70" r="5" fill="${BLUE}"/>`);
+    s += seq(0.2, `<circle cx="370" cy="40" r="5" fill="${RED}"/>`);
+    s += seq(0.3, txt(320, 92, '预计 15 分钟', { fs: 14, fill: '#fff', fw: 900 }));
+    s += seq(0.4, txt(320, 14, '🧭 导航', { fs: 16, fill: '#fff', fw: 900 }));
+    s += seq(0.6, block(40, 30, 160, 56, { fill: BLUE + '10', stroke: BLUE, title: '① 提问题', sub: '准吗？影响因素？', fs: 13 }));
+    s += seq(0.7, block(40, 96, 160, 56, { fill: GREEN + '10', stroke: GREEN, title: '② 订计划', sub: '路线 · 方式 · 记录', fs: 13 }));
+    s += seq(0.8, block(440, 30, 160, 56, { fill: ORANGE + '10', stroke: ORANGE, title: '③ 记录对比', sub: '预计 vs 实际', fs: 13 }));
+    s += seq(0.9, block(440, 96, 160, 56, { fill: PURPLE + '10', stroke: PURPLE, title: '④ 分析原因', sub: '红绿灯 · 拥堵', fs: 13 }));
+    s += seq(1.1, txt(320, 158, '带着问题做研究，用数据回答「准不准」', { fs: 12.5, fill: MUT }));
+    return s + '</svg>' + replayBtn();
+  };
+
+  /* 模拟实验 */
+  const mSimulate = () => {
+    let s = '<svg class="fig-svg" viewBox="0 0 640 180">';
+    s += seq(0, block(60, 20, 170, 56, { fill: GREEN + '14', stroke: GREEN, title: '正常', sub: '15 分钟', fs: 14 }));
+    s += seq(0.2, block(235, 20, 170, 56, { fill: GOLD + '18', stroke: GOLD, title: '遇 2 个红灯', sub: '+2 分钟 → 17 分钟', fs: 13 }));
+    s += seq(0.4, block(410, 20, 170, 56, { fill: RED + '16', stroke: RED, title: '遇拥堵', sub: '+5 分钟 → 20 分钟', fs: 13 }));
+    s += seq(0.7, `<line x1="60" y1="96" x2="580" y2="96" stroke="${LINE}" stroke-width="2"/>`);
+    s += seq(0.8, txt(60, 118, '步行 950 米', { fs: 13, fill: MUT }));
+    s += seq(0.9, txt(320, 118, '不同路况，时间不同', { fs: 14, fill: INK, fw: 900 }));
+    s += seq(1.05, `<rect x="60" y="130" width="520" height="36" rx="10" fill="${BLUE}0e"/>` +
+      txt(320, 153, '模拟实验可重复多次 → 结果更可靠；初步发现影响时间的因素', { fs: 12.5, fill: '#2a5080' }));
+    return s + '</svg>' + replayBtn();
+  };
+
+  /* 实地研究 */
+  const mField = () => {
+    let s = '<svg class="fig-svg" viewBox="0 0 640 176">';
+    s += seq(0, block(60, 18, 240, 64, { fill: BLUE + '12', stroke: BLUE, title: '导航预计', sub: '15 分钟', fs: 15 }));
+    s += seq(0.2, block(340, 18, 240, 64, { fill: RED + '12', stroke: RED, title: '实际用时', sub: '17 分钟', fs: 15 }));
+    s += seq(0.4, txt(320, 100, '差 2 分钟', { fs: 16, fill: ORANGE, fw: 900 }));
+    s += seq(0.6, block(60, 112, 520, 50, { fill: GREEN + '08', stroke: GREEN, title: '分析原因', sub: '路上遇到 2 个红灯，每个等约 1 分钟', fs: 13 }));
+    s += seq(1, txt(320, 170, '记录实际时间和路上发生的事，才能解释为什么不准', { fs: 12.5, fill: MUT }));
+    return s + '</svg>' + replayBtn();
+  };
+
+  /* 研究分享会 */
+  const mShare = () => {
+    let s = '<svg class="fig-svg" viewBox="0 0 640 170">';
+    s += seq(0, block(40, 20, 180, 60, { fill: SKY + '12', stroke: SKY, title: '整理结果', sub: '表格 / 统计图', fs: 13 }));
+    s += seq(0.15, arrow(226, 50, 270, 50, 'gray'));
+    s += seq(0.2, block(280, 20, 180, 60, { fill: ORANGE + '12', stroke: ORANGE, title: '分析原因', sub: '红绿灯 · 拥堵', fs: 13 }));
+    s += seq(0.35, arrow(466, 50, 510, 50, 'gray'));
+    s += seq(0.4, block(500, 20, 100, 60, { fill: GREEN + '12', stroke: GREEN, title: '分享', sub: '交流收获', fs: 13 }));
+    s += seq(0.7, `<rect x="60" y="100" width="520" height="56" rx="12" fill="${PURPLE}0e" stroke="${PURPLE}"/>`);
+    s += seq(0.8, txt(320, 122, '用数据说话', { fs: 15, fill: PURPLE, fw: 900 }));
+    s += seq(0.95, txt(320, 144, '列出预计时间和实际时间的对比，算出平均差异', { fs: 12, fill: '#5a3a8a' }));
+    return s + '</svg>' + replayBtn();
+  };
+
+  /* 导航横幅装饰 */
+  const decNav = c => {
+    let s = `<path d="M 420 40 L 560 40 L 548 62 L 580 78 L 440 98 L 420 72 Z" fill="${c}" fill-opacity=".18" stroke="${c}" stroke-width="2"/>`;
+    s += `<circle cx="438" cy="66" r="5" fill="${c}"/>`;
+    s += `<circle cx="558" cy="40" r="5" fill="${RED}"/>`;
+    return s + txt(500, 32, '预计 15 分', { fs: 12.5, fill: c, fw: 800 });
+  };
+
   /* ================= 单元横幅 ================= */
   const bannerSVG = (o, id) => {
     let s = `<svg class="fig-svg" viewBox="0 0 640 110" role="img" aria-label="${o.title}">`;
@@ -851,11 +1041,13 @@ const MathFigures = (() => {
     'mban-mu4': { emoji: '🏙️', title: '我们生活的空间（二）', sub: '换个方向看一看', color: PURPLE, decor: decBlocks },
     'mban-mu5': { emoji: '➕', title: '运算律', sub: '交换、结合、分配', color: RED, decor: decOps },
     'mban-mplay': { emoji: '🧩', title: '数图形的学问', sub: '按顺序数，不重复不遗漏', color: '#d96c2f', decor: decSeg },
-    'mban-mu6': { emoji: '🧊', title: '图形的奥秘', sub: '切开、搭建、转一转', color: TEAL, decor: decCube },
-    'mban-mu7': { emoji: '🚗', title: '运用数量关系解决问题', sub: '单价、速度、归一与归总', color: SKY, decor: decCar },
+    'mban-mu6': { emoji: '🧊', title: '图形的奥秘', sub: '切开、搭建、翻滚', color: TEAL, decor: decCube },
+    'mban-mu7': { emoji: '🚗', title: '运用数量关系解决问题', sub: '总量分量、单价速度、相遇', color: SKY, decor: decCar },
     'mban-mu8': { emoji: '📊', title: '数据的表示和分析（一）', sub: '用图说话', color: VIOLET, decor: decBar },
+    'mban-mnav': { emoji: '🧭', title: '导航给的时间准吗', sub: '做实验 · 去实地 · 用数据说话', color: SKY, decor: decNav },
     'mban-formulas': { emoji: '📐', title: '公式法则速查', sub: '点一行，读一行', color: SKY, decor: decFormula },
     'mban-mistakes': { emoji: '⚠️', title: '易错诊所', sub: '错一次，记一辈子', color: PINK, decor: decWarn },
+    'mban-videos': { emoji: '🎬', title: '教学视频', sub: '看动画，学数学', color: '#e25563', decor: decFormula },
   };
   const bannerFn = id => () => bannerSVG(BANNERS[id], id);
 
@@ -882,6 +1074,17 @@ const MathFigures = (() => {
     'm-4steps': m4Steps,
     'm-tally': mTally,
     'm-read-chart': mReadChart,
+    'm-100k': m100k,
+    'm-natural': mNatural,
+    'm-tiananmen': mTiananmen,
+    'm-roll-cube': mRollCube,
+    'm-total-part': mTotalPart,
+    'm-meet': mMeet,
+    'm-average': mAverage,
+    'm-nav': mNav,
+    'm-simulate': mSimulate,
+    'm-field': mField,
+    'm-share': mShare,
   };
   Object.keys(BANNERS).forEach(id => { REG[id] = bannerFn(id); });
 
@@ -914,6 +1117,17 @@ const MathFigures = (() => {
     'm-4steps': '读 → 画 → 算 → 验，四步一个都不能少',
     'm-tally': '画「正」字记录：一个「正」字 5 画，好数又好查',
     'm-read-chart': '比直条高矮，说出「谁比谁多多少」，再提建议',
+    'm-100k': '10 个一万是十万，把它和熟悉的事物比一比',
+    'm-natural': '0 也是自然数，最小的自然数是 0，没有最大的自然数',
+    'm-tiananmen': '看两个物体的左右关系，反过来判断拍摄点',
+    'm-roll-cube': '向前翻：前变下、上变前、后变上、下变后',
+    'm-total-part': '总量 = 分量 + 分量；未知分量 = 总量 − 已知分量',
+    'm-meet': '相向而行：总路程 = 速度和 × 相遇时间',
+    'm-average': '平均数 = 总数量 ÷ 总份数，它反映一组数据的整体水平',
+    'm-nav': '先提问题、订计划，再记录对比、分析原因',
+    'm-simulate': '模拟不同路况，多次实验找影响时间的因素',
+    'm-field': '记录实际时间和路上发生的事，解释为什么不准',
+    'm-share': '用数据说话，列出预计与实际的对比再分享',
   };
 
   function figHTML(id, cap) {

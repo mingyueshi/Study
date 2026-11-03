@@ -137,8 +137,22 @@
 .ublock ul { display: grid; gap: 4px; padding-left: 22px; }
 .ublock li { font-size: 14.5px; line-height: 1.7; color: #4a4f63; font-weight: 600; }
 .ublock.writing { border-left-color: #8b65c9; }
+.ublock.examples { border-left-color: #e25563; }
 .ublock.garden { border-left-color: #2f9bd6; }
 .ublock.book { border-left-color: #d97745; }
+
+/* ---------- 习作例文 ---------- */
+.ex-grid {
+  display: grid; gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr));
+  margin-top: 4px;
+}
+.ex-card {
+  background: #fff; border: 1px solid var(--line); border-top: 4px solid var(--c);
+  border-radius: 14px; padding: 16px;
+  box-shadow: 0 4px 14px rgba(40, 54, 85, .04);
+}
+.ex-title { font-size: 18px; font-weight: 900; color: var(--c); margin-bottom: 6px; }
 
 /* ---------- 古诗文卡 ---------- */
 .poem-card {
@@ -153,6 +167,17 @@
 .pkind {
   background: #f0e9fa; color: #7c5cc4; border-radius: 999px;
   padding: 1px 9px; font-size: 12px; font-weight: 800;
+}
+.pimg {
+  display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover;
+  border-radius: 14px; margin: 12px 0 4px;
+  box-shadow: 0 6px 20px rgba(40, 54, 85, .12);
+}
+/* 课文插图 */
+.kimg {
+  display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover;
+  border-radius: 12px; margin: 10px 0 4px;
+  box-shadow: 0 4px 14px rgba(40, 54, 85, .1);
 }
 .plines { display: grid; gap: 2px; margin-top: 10px; }
 .pline {
@@ -255,7 +280,7 @@
   }
 
   /* ---------- 知识卡入场 ---------- */
-  .kcard, .poem-card, .saying-card, .poly-card, .similar-card, .ublock {
+  .kcard, .poem-card, .saying-card, .poly-card, .similar-card, .ublock, .ex-card {
     animation: fadeInUp .55s cubic-bezier(.2,.7,.2,1) both;
   }
   .kcard:nth-child(2) { animation-delay: .05s; }
@@ -266,12 +291,22 @@
   .wgrid > .poem-card:nth-child(3) { animation-delay: .12s; }
   .wgrid > .poem-card:nth-child(4) { animation-delay: .18s; }
 
+  /* ---------- 诗文/课文插图加载动画 ---------- */
+  .pimg, .kimg {
+    background: linear-gradient(90deg, #f0f0f5 25%, #e8e8f0 50%, #f0f0f5 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s ease infinite;
+  }
+  .pimg[src]:not([src=""]), .kimg[src]:not([src=""]) {
+    animation: fadeIn .6s ease both;
+  }
+
   /* ---------- 卡片悬浮抬升 ---------- */
-  .kcard, .poem-card, .saying-card, .poly-card, .similar-card {
+  .kcard, .poem-card, .saying-card, .poly-card, .similar-card, .ex-card {
     transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease;
   }
   .kcard:hover, .poem-card:hover, .saying-card:hover,
-  .poly-card:hover, .similar-card:hover {
+  .poly-card:hover, .similar-card:hover, .ex-card:hover {
     transform: translateY(-4px);
     box-shadow: 0 12px 30px rgba(40, 54, 85, .12);
   }
@@ -341,12 +376,12 @@
 
   /* ---------- 减弱动画（尊重系统偏好） ---------- */
   @media (prefers-reduced-motion: reduce) {
-    .kcard, .poem-card, .saying-card, .poly-card, .similar-card, .ublock,
+    .kcard, .poem-card, .saying-card, .poly-card, .similar-card, .ublock, .ex-card,
     .unit-emoji, .learn-btn.on, .textbook-banner, .unit-banner svg circle {
       animation: none !important;
     }
     .kcard:hover, .poem-card:hover, .saying-card:hover,
-    .poly-card:hover, .similar-card:hover, .fig:hover {
+    .poly-card:hover, .similar-card:hover, .ex-card:hover, .fig:hover {
       transform: none;
     }
   }
@@ -360,7 +395,7 @@
   .study-shell { display: block; padding: 0; }
   .study-content { padding: 0; }
   .unit-head { border: 1px solid #ccc; box-shadow: none; }
-  .kcard, .poem-card, .saying-card, .poly-card, .similar-card, .ublock {
+  .kcard, .poem-card, .saying-card, .poly-card, .similar-card, .ublock, .ex-card {
     box-shadow: none; break-inside: avoid; page-break-inside: avoid;
   }
   .kgrid, .wgrid, .polygrid { grid-template-columns: 1fr; display: block; }

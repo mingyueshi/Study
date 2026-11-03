@@ -5,9 +5,13 @@
    ============================================================ */
 'use strict';
 
-const MATH_STORE_KEY = 'mathbook_v2';
-
-/* ---------- 学习档案 ---------- */
+/* ---------- 学习档案 ----------
+   存储键从教材名派生，不同册次（四年级上/下册……）互不覆盖。 */
+function mkStoreKey() {
+  const base = (MKB.textbook || 'math').replace(/[^\u4e00-\u9fa5a-zA-Z0-9]/g, '');
+  return 'mathbook_' + (base || 'v2');
+}
+const MATH_STORE_KEY = mkStoreKey();
 let mkState = { last: 'mu1', learned: {}, pane: {} };
 try {
   const raw = localStorage.getItem(MATH_STORE_KEY);
@@ -23,6 +27,7 @@ const TOTAL_POINTS = MKB.units.reduce((n, u) => n + u.points.length, 0);
 const MEXTRA_VIEWS = [
   { id: 'formulas', name: '公式法则', emoji: '📐', color: '#2f9bd6', banner: 'mban-formulas', count: MKB.formulas.reduce((n, f) => n + f.items.length, 0) },
   { id: 'mistakes', name: '易错诊所', emoji: '⚠️', color: '#c2557d', banner: 'mban-mistakes', count: MKB.mistakes.length },
+  { id: 'videos', name: '教学视频', emoji: '🎬', color: '#e25563', banner: 'mban-videos', count: (window.MATH_VIDEOS && MATH_VIDEOS.list.length) || 0 },
 ];
 const MEXTRA_BY_ID = {};
 MEXTRA_VIEWS.forEach(v => { MEXTRA_BY_ID[v.id] = v; });
@@ -75,6 +80,19 @@ function pointPhoto(pid) {
   return (window.MATH_PHOTOS && MATH_PHOTOS.point(pid)) || null;
 }
 
+/* ---------- 公开教学视频（MATH_VIDEOS） ---------- */
+function videoById(id) {
+  return (window.MATH_VIDEOS && MATH_VIDEOS.byId(id)) || null;
+}
+function vidEmbedUrl(id) {
+  const v = videoById(id);
+  return v ? MATH_VIDEOS.embedUrl(v.bvid) : '';
+}
+function durText(sec) {
+  const m = Math.round(sec / 60);
+  return m >= 60 ? Math.floor(m / 60) + ' 小时 ' + (m % 60) + ' 分' : m + ' 分钟';
+}
+
 /* ---------- 侧栏目录 ---------- */
 function renderChips() {
   const unitChips = MKB.units.map(u => {
@@ -97,13 +115,20 @@ function renderStats() {
   if (el) el.textContent = '已掌握 ' + totalLearned() + ' / ' + TOTAL_POINTS + ' 个知识点';
 }
 
-/* ---------- 知识点编号 ---------- */
-const NO_SHORT = {
-  '第一单元': '一', '第二单元': '二', '第三单元': '三', '第四单元': '四',
-  '第五单元': '五', '第六单元': '六', '第七单元': '七', '第八单元': '八',
-  '综合实践': '实践', '数学好玩': '好玩',
-};
-function unitShort(u) { return NO_SHORT[u.no] || u.no; }
+/* ---------- 知识点编号 ----------
+   通用单元简称：第一单元→一，第十二单元→十二；非「第X单元」原样返回。 */
+const CN_DIGITS = { '一': 1, '二': 2, '三': 3, '四': 4, '五': 5, '六': 6, '七': 7, '八': 8, '九': 9, '十': 10 };
+function unitShort(u) {
+  const m = /^第(.+?)单元$/.exec(u.no);
+  if (m) {
+    const cn = m[1];
+    if (cn.length === 1) return cn;
+    if (/^十/.test(cn)) return '十' + (cn.length > 1 ? cn.slice(1) : '');
+    if (/十$/.test(cn)) return cn;
+    return cn;
+  }
+  return u.no;
+}
 function pointSeq(u, p) { return u.points.indexOf(p) + 1; }
 
 /* ---------- 知识点卡 ----------
@@ -181,6 +206,16 @@ function pointCard(u, p, idx) {
   /* 记忆锚：口诀 */
   if (p.recall) out.push('<div class="krecite"><span class="kr-ico">💡</span><span class="kr-text">' + esc(p.recall) + '</span>' + sayBtn(p.recall) + '</div>');
 
+  /* 关联教学视频（可选） */
+  if (p.video) {
+    const v = videoById(p.video);
+    if (v) {
+      out.push('<button class="k-video" data-act="play-video" data-vid="' + esc(p.video) + '" aria-label="看动画：' + esc(v.title) + '">' +
+        '<span class="kv-ico">🎬</span><span class="kv-txt">看动画 · ' + esc(v.title) + '</span>' +
+        '<span class="kv-dur">⏱ ' + durText(v.dur) + '</span></button>');
+    }
+  }
+
   out.push('</article>');
   return out.join('');
 }
@@ -250,6 +285,71 @@ function renderMistakes() {
       '</article>').join('') + '</div>';
 }
 
+/* ---------- 教学视频（数学小影院） ---------- */
+function vidCard(v) {
+  return '<article class="vid-card" style="--c:' + (v.color || '#e25563') + '">' +
+    '<button class="vid-screen" data-act="play-video" data-vid="' + esc(v.id) + '" aria-label="播放：' + esc(v.title) + '">' +
+    '<img class="vid-cover" src="' + esc(v.cover) + '" alt="" loading="lazy" onerror="this.style.opacity=\'0\'">' +
+    '<span class="vid-shade"></span><span class="vid-play">▶</span>' +
+    '<span class="vid-dur">⏱ ' + durText(v.dur) + '</span></button>' +
+    '<div class="vid-meta"><h4>' + esc(v.title) + '</h4>' +
+    '<p>' + esc(v.up) + ' · ' + esc(v.note || '') + '</p>' +
+    '<a class="vid-link" href="https://www.bilibili.com/video/' + esc(v.bvid) + '" target="_blank" rel="noopener">↗ 去B站看高清</a></div>' +
+    '</article>';
+}
+
+function renderVideos() {
+  if (!window.MATH_VIDEOS || !MATH_VIDEOS.list.length) {
+    return '<div class="empty">🎬 视频整理中，先去别的单元逛逛吧～</div>';
+  }
+  const v = MEXTRA_BY_ID.videos;
+  const photo = unitPhoto('videos');
+  let s = '<div class="unit-head' + (photo ? ' has-photo' : '') + '" style="--c:' + v.color +
+    (photo ? ';background-image:url(' + photo + ')' : '') + '">' +
+    '<div class="unit-head-main"><div class="unit-title-row"><span class="unit-emoji">' + v.emoji + '</span><h1>教学视频</h1></div>' +
+    '<p>' + MATH_VIDEOS.list.length + ' 部好片 · 点封面在线看（需要联网），只挑适合小朋友的</p></div>' +
+    (photo ? '' : '<div class="unit-head-fig">' + bannerFor(v.banner) + '</div>') + '</div>';
+  MATH_VIDEOS.groups.forEach(g => {
+    const items = MATH_VIDEOS.list.filter(it => it.group === g.id);
+    if (!items.length) return;
+    s += '<h2 class="cinema-group">' + g.emoji + ' ' + esc(g.name) + '<span>' + esc(g.desc) + '</span></h2>' +
+      '<div class="vid-grid">' + items.map(vidCard).join('') + '</div>';
+  });
+  s += '<ul class="cinema-print-list">' + MATH_VIDEOS.list.map(it =>
+    '<li>《' + esc(it.title) + '》— ' + esc(it.up) + '（' + durText(it.dur) + '，B站搜标题或 BV' + esc(it.bvid.replace(/^BV/, '')) + '）</li>').join('') + '</ul>';
+  return s;
+}
+
+/* ---------- 视频播放 / 收起 ---------- */
+function playVideo(id) {
+  const v = videoById(id);
+  const screen = document.querySelector('.vid-screen[data-vid="' + id + '"], .k-video[data-vid="' + id + '"]');
+  if (!v || !screen || screen.dataset.playing) return;
+  screen.dataset.playing = '1';
+  if (screen.classList.contains('k-video')) {
+    screen.innerHTML = '<iframe class="vid-iframe" src="' + vidEmbedUrl(id) +
+      '" scrolling="no" frameborder="0" allowfullscreen="true" title="' + esc(v.title) + '" allow="autoplay; fullscreen"></iframe>' +
+      '<span class="vid-close" title="收起视频">✕</span>';
+  } else {
+    screen.innerHTML = '<iframe class="vid-iframe" src="' + vidEmbedUrl(id) +
+      '" scrolling="no" frameborder="0" allowfullscreen="true" title="' + esc(v.title) + '" allow="autoplay; fullscreen"></iframe>' +
+      '<span class="vid-close" title="收起视频">✕</span>';
+  }
+}
+function closeVideo(screen) {
+  const v = videoById(screen.dataset.vid);
+  if (!v || !screen) return;
+  delete screen.dataset.playing;
+  if (screen.classList.contains('k-video')) {
+    screen.innerHTML = '<span class="kv-ico">🎬</span><span class="kv-txt">看动画 · ' + esc(v.title) + '</span>' +
+      '<span class="kv-dur">⏱ ' + durText(v.dur) + '</span>';
+  } else {
+    screen.innerHTML = '<img class="vid-cover" src="' + esc(v.cover) + '" alt="" loading="lazy" onerror="this.style.opacity=\'0\'">' +
+      '<span class="vid-shade"></span><span class="vid-play">▶</span>' +
+      '<span class="vid-dur">⏱ ' + durText(v.dur) + '</span>';
+  }
+}
+
 /* ---------- 搜索 ---------- */
 function searchResults(q) {
   const ql = q.toLowerCase();
@@ -302,6 +402,7 @@ function renderMain() {
   }
   if (curView === 'formulas') { box.innerHTML = renderFormulas(); return; }
   if (curView === 'mistakes') { box.innerHTML = renderMistakes(); return; }
+  if (curView === 'videos') { box.innerHTML = renderVideos(); return; }
   const u = munitById(curView);
   box.innerHTML = u ? renderUnit(u) : '';
 }
@@ -310,6 +411,17 @@ function render() {
   renderChips();
   renderMain();
   renderStats();
+}
+
+/* ---------- 页头 / 侧栏文案（由 MKB.meta 驱动，换 data 文件即换文案） ---------- */
+function applyMeta() {
+  const meta = MKB.meta || {};
+  const vol = (meta.grade || '') + (meta.volume || '');
+  const set = (id, txt) => { const el = document.getElementById(id); if (el) el.textContent = txt; };
+  set('mk-banner-textbook', (meta.textbook ? meta.textbook + ' ' : '') + (meta.subject || '数学'));
+  set('mk-banner-vol', vol || MKB.textbook);
+  set('mk-edition', MKB.textbook);
+  document.title = (meta.subject || '数学') + '知识点 · ' + (vol || MKB.textbook);
 }
 
 /* ---------- 交互 ---------- */
@@ -378,6 +490,11 @@ document.addEventListener('click', e => {
     else if (act === 'unit') { e.preventDefault(); selectView(el.dataset.id); }
     else if (act === 'kpane') { e.preventDefault(); setPane(el); }
     else if (act === 'allpane') { e.preventDefault(); setAllPanes(el.dataset.p); }
+    else if (act === 'play-video') {
+      e.preventDefault();
+      if (e.target.classList.contains('vid-close')) { closeVideo(el); return; }
+      playVideo(el.dataset.vid);
+    }
     else if (act === 'print') { e.preventDefault(); window.print(); }
     else if (act === 'home') { e.preventDefault(); window.location.href = 'index.html'; }
   } catch (err) {
@@ -403,4 +520,5 @@ window.MathPoints = {
   render, selectView, toggleLearn, searchResults, setPane, setAllPanes,
 };
 
+applyMeta();
 render();

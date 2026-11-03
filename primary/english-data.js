@@ -595,6 +595,1245 @@ const ENGLISH_GROUPS = {
   '心愿': ['hope', 'wish', 'dream', 'come true', 'true'],
 };
 
+/* ============================================================
+   常见短语与句式：每条 { en, zh }，点一下朗读英文，中文释义同步显示。
+   优先收录本册教材中出现、或与该词强相关的常用搭配与短句。
+   ============================================================ */
+const ENGLISH_PHRASES = {
+  /* ---------------- 4A Unit 1 I love sports ---------------- */
+  'sport': [
+    { en: 'play sports', zh: '做运动' },
+    { en: 'I love sports.', zh: '我热爱运动。' },
+  ],
+  'jump': [
+    { en: 'jump high', zh: '跳得高' },
+    { en: 'Let\'s jump together.', zh: '我们一起跳吧。' },
+  ],
+  'high': [
+    { en: 'jump high', zh: '跳得高' },
+    { en: 'How high can you jump?', zh: '你能跳多高？' },
+  ],
+  'far': [
+    { en: 'jump far', zh: '跳得远' },
+    { en: 'He can jump far.', zh: '他能跳得很远。' },
+  ],
+  'ping-pong': [
+    { en: 'play ping-pong', zh: '打乒乓球' },
+    { en: 'I like playing ping-pong.', zh: '我喜欢打乒乓球。' },
+  ],
+  'volleyball': [
+    { en: 'play volleyball', zh: '打排球' },
+    { en: 'We play volleyball after school.', zh: '我们放学后打排球。' },
+  ],
+  'first': [
+    { en: 'at first', zh: '起初；首先' },
+    { en: 'First, let\'s warm up.', zh: '首先，我们来热身。' },
+  ],
+  'at first': [
+    { en: 'At first I was scared.', zh: '起初我很害怕。' },
+    { en: 'At first, he didn\'t like it.', zh: '一开始他不喜欢。' },
+  ],
+  'hope': [
+    { en: 'I hope you win.', zh: '我希望你赢。' },
+    { en: 'Hope to see you again.', zh: '希望能再见到你。' },
+  ],
+  'lose': [
+    { en: 'lose the game', zh: '输掉比赛' },
+    { en: 'Don\'t lose hope.', zh: '不要失去希望。' },
+  ],
+  'because': [
+    { en: 'I like it because it\'s fun.', zh: '我喜欢它因为它很有趣。' },
+    { en: 'because of the rain', zh: '因为下雨' },
+  ],
+  'because of': [
+    { en: 'because of the rain', zh: '因为下雨' },
+    { en: 'We stayed home because of the rain.', zh: '因为下雨我们待在家里。' },
+  ],
+  'cancer': [
+    { en: 'fight cancer', zh: '与癌症作斗争' },
+    { en: 'He is ill with cancer.', zh: '他患了癌症。' },
+  ],
+  'across': [
+    { en: 'run across the field', zh: '跑过田野' },
+    { en: 'walk across the street', zh: '穿过街道' },
+  ],
+  'money': [
+    { en: 'save money', zh: '存钱' },
+    { en: 'I have no money.', zh: '我没有钱。' },
+  ],
+  'hard': [
+    { en: 'work hard', zh: '努力学习/工作' },
+    { en: 'It\'s hard to learn English.', zh: '学英语很难。' },
+  ],
+  'kind': [
+    { en: 'be kind to others', zh: '对别人友善' },
+    { en: 'She is a kind girl.', zh: '她是个友善的女孩。' },
+  ],
+  'keep': [
+    { en: 'keep going', zh: '继续前进' },
+    { en: 'keep warm', zh: '保暖' },
+  ],
+  'month': [
+    { en: 'last month', zh: '上个月' },
+    { en: 'this month', zh: '这个月' },
+  ],
+  'ill': [
+    { en: 'feel ill', zh: '觉得不舒服' },
+    { en: 'be ill in bed', zh: '卧病在床' },
+  ],
+  'year': [
+    { en: 'this year', zh: '今年' },
+    { en: 'one year ago', zh: '一年前' },
+  ],
+  'remember': [
+    { en: 'remember me', zh: '记得我' },
+    { en: 'I remember your name.', zh: '我记得你的名字。' },
+  ],
+  'fail': [
+    { en: 'fail the test', zh: '考试不及格' },
+    { en: 'Never fail to try.', zh: '永远不要放弃尝试。' },
+  ],
+  'give': [
+    { en: 'give up', zh: '放弃' },
+    { en: 'give me a hand', zh: '帮我一把' },
+  ],
+  'give up': [
+    { en: 'Don\'t give up.', zh: '不要放弃。' },
+    { en: 'He gave up smoking.', zh: '他戒了烟。' },
+  ],
+  'never': [
+    { en: 'never give up', zh: '永不放弃' },
+    { en: 'I never tell lies.', zh: '我从不说谎。' },
+  ],
+  'try': [
+    { en: 'try again', zh: '再试一次' },
+    { en: 'try your best', zh: '尽你最大的努力' },
+  ],
+  'player': [
+    { en: 'a good player', zh: '一名优秀的运动员' },
+    { en: 'football player', zh: '足球运动员' },
+  ],
+  'ability': [
+    { en: 'have the ability to', zh: '有能力做……' },
+    { en: 'ability to learn', zh: '学习能力' },
+  ],
+
+  /* ---------------- 4A Unit 2 Helping at home ---------------- */
+  'phew': [
+    { en: 'Phew! It\'s hot.', zh: '唷！好热啊。' },
+    { en: 'Phew, I\'m tired.', zh: '唉，我累了。' },
+  ],
+  'wash': [
+    { en: 'wash the dishes', zh: '洗碗' },
+    { en: 'wash your hands', zh: '洗手' },
+  ],
+  'dish': [
+    { en: 'wash the dishes', zh: '洗碗' },
+    { en: 'a dish of rice', zh: '一盘米饭' },
+  ],
+  'feed': [
+    { en: 'feed the dog', zh: '喂狗' },
+    { en: 'feed the baby', zh: '喂婴儿' },
+  ],
+  'sweep': [
+    { en: 'sweep the floor', zh: '扫地' },
+    { en: 'sweep away the rubbish', zh: '扫走垃圾' },
+  ],
+  'floor': [
+    { en: 'on the floor', zh: '在地板上' },
+    { en: 'sweep the floor', zh: '扫地' },
+  ],
+  'rubbish': [
+    { en: 'take out the rubbish', zh: '倒垃圾' },
+    { en: 'a bag of rubbish', zh: '一袋垃圾' },
+  ],
+  'chore': [
+    { en: 'do chores', zh: '做家务' },
+    { en: 'household chores', zh: '家务杂事' },
+  ],
+  'to-do list': [
+    { en: 'make a to-do list', zh: '列一张待办清单' },
+    { en: 'check the to-do list', zh: '查看待办清单' },
+  ],
+  'may': [
+    { en: 'May I come in?', zh: '我可以进来吗？' },
+    { en: 'You may go now.', zh: '你现在可以走了。' },
+  ],
+  'outside': [
+    { en: 'play outside', zh: '在外面玩' },
+    { en: 'go outside', zh: '出去' },
+  ],
+  'tidy': [
+    { en: 'tidy the room', zh: '整理房间' },
+    { en: 'keep it tidy', zh: '保持整洁' },
+  ],
+  'easy': [
+    { en: 'It\'s easy.', zh: '这很容易。' },
+    { en: 'easy to use', zh: '容易使用' },
+  ],
+  'clean': [
+    { en: 'clean the room', zh: '打扫房间' },
+    { en: 'keep clean', zh: '保持清洁' },
+  ],
+  'woof': [
+    { en: 'Woof! Woof!', zh: '汪！汪！' },
+    { en: 'The dog says woof.', zh: '狗汪汪叫。' },
+  ],
+  'job': [
+    { en: 'good job', zh: '干得好' },
+    { en: 'do a good job', zh: '做得好' },
+  ],
+  'good job': [
+    { en: 'Good job!', zh: '干得好！' },
+    { en: 'You did a good job.', zh: '你做得很好。' },
+  ],
+  'dirty': [
+    { en: 'dirty hands', zh: '脏手' },
+    { en: 'The floor is dirty.', zh: '地板脏了。' },
+  ],
+  'desk': [
+    { en: 'clean the desk', zh: '擦书桌' },
+    { en: 'on the desk', zh: '在书桌上' },
+  ],
+  'wall': [
+    { en: 'on the wall', zh: '在墙上' },
+    { en: 'paint the wall', zh: '刷墙' },
+  ],
+  'again': [
+    { en: 'try again', zh: '再试一次' },
+    { en: 'See you again.', zh: '再见。' },
+  ],
+  'also': [
+    { en: 'I also like it.', zh: '我也喜欢它。' },
+    { en: 'He is also tall.', zh: '他也很高。' },
+  ],
+  'problem': [
+    { en: 'No problem.', zh: '没问题。' },
+    { en: 'solve a problem', zh: '解决问题' },
+  ],
+  'finish': [
+    { en: 'finish the homework', zh: '完成作业' },
+    { en: 'I finished my work.', zh: '我完成了工作。' },
+  ],
+  'sunshine': [
+    { en: 'in the sunshine', zh: '在阳光下' },
+    { en: 'enjoy the sunshine', zh: '享受阳光' },
+  ],
+  'sometimes': [
+    { en: 'Sometimes I read books.', zh: '有时我看书。' },
+    { en: 'sometimes go shopping', zh: '有时去购物' },
+  ],
+  'feel': [
+    { en: 'feel happy', zh: '感到开心' },
+    { en: 'How do you feel?', zh: '你感觉怎么样？' },
+  ],
+  'tired': [
+    { en: 'feel tired', zh: '感到疲倦' },
+    { en: 'I\'m tired.', zh: '我累了。' },
+  ],
+  'helpful': [
+    { en: 'a helpful boy', zh: '一个乐于助人的男孩' },
+    { en: 'be helpful at home', zh: '在家里帮忙' },
+  ],
+  'warm': [
+    { en: 'warm up', zh: '热身；变暖' },
+    { en: 'It\'s warm today.', zh: '今天很暖和。' },
+  ],
+  'warm up': [
+    { en: 'warm up before running', zh: '跑步前热身' },
+    { en: 'The room warms up.', zh: '房间变暖和了。' },
+  ],
+  'water': [
+    { en: 'water the flowers', zh: '浇花' },
+    { en: 'drink water', zh: '喝水' },
+  ],
+  'yard': [
+    { en: 'in the yard', zh: '在院子里' },
+    { en: 'clean the yard', zh: '打扫院子' },
+  ],
+  'helper': [
+    { en: 'a good helper', zh: '好帮手' },
+    { en: 'Mom\'s little helper', zh: '妈妈的小帮手' },
+  ],
+  'pick': [
+    { en: 'pick apples', zh: '摘苹果' },
+    { en: 'pick up the pen', zh: '捡起钢笔' },
+  ],
+  'pig': [
+    { en: 'a little pig', zh: '一只小猪' },
+    { en: 'The pig is fat.', zh: '这头猪很胖。' },
+  ],
+  'cow': [
+    { en: 'a black cow', zh: '一头黑牛' },
+    { en: 'The cow gives milk.', zh: '奶牛产奶。' },
+  ],
+  'collect': [
+    { en: 'collect stamps', zh: '集邮' },
+    { en: 'collect rubbish', zh: '收垃圾' },
+  ],
+  'cut': [
+    { en: 'cut the grass', zh: '割草' },
+    { en: 'cut with scissors', zh: '用剪刀剪' },
+  ],
+  'grass': [
+    { en: 'cut the grass', zh: '割草' },
+    { en: 'green grass', zh: '青草' },
+  ],
+
+  /* ---------------- 4A Unit 3 Weather ---------------- */
+  'weather': [
+    { en: 'What\'s the weather like?', zh: '天气怎么样？' },
+    { en: 'nice weather', zh: '好天气' },
+  ],
+  'sunny': [
+    { en: 'a sunny day', zh: '晴朗的一天' },
+    { en: 'It\'s sunny today.', zh: '今天阳光明媚。' },
+  ],
+  'cloud': [
+    { en: 'a white cloud', zh: '一朵白云' },
+    { en: 'in the clouds', zh: '在云层里' },
+  ],
+  'by': [
+    { en: 'by bus', zh: '乘公交车' },
+    { en: 'by the window', zh: '在窗边' },
+  ],
+  'cloudy': [
+    { en: 'a cloudy sky', zh: '多云的天空' },
+    { en: 'It\'s cloudy today.', zh: '今天多云。' },
+  ],
+  'wind': [
+    { en: 'strong wind', zh: '大风' },
+    { en: 'The wind blows.', zh: '风吹着。' },
+  ],
+  'blow': [
+    { en: 'blow in the wind', zh: '在风中吹' },
+    { en: 'The wind blows hard.', zh: '风刮得很大。' },
+  ],
+  'windy': [
+    { en: 'a windy day', zh: '刮风的一天' },
+    { en: 'It\'s windy outside.', zh: '外面风很大。' },
+  ],
+  'rain': [
+    { en: 'heavy rain', zh: '大雨' },
+    { en: 'It is raining.', zh: '正在下雨。' },
+  ],
+  'rainy': [
+    { en: 'a rainy day', zh: '雨天' },
+    { en: 'It\'s rainy today.', zh: '今天下雨。' },
+  ],
+  'snow': [
+    { en: 'play in the snow', zh: '在雪地里玩' },
+    { en: 'It is snowing.', zh: '正在下雪。' },
+  ],
+  'any': [
+    { en: 'any questions', zh: '任何问题' },
+    { en: 'Do you have any water?', zh: '你有水吗？' },
+  ],
+  'cold': [
+    { en: 'feel cold', zh: '觉得冷' },
+    { en: 'It\'s very cold.', zh: '天气很冷。' },
+  ],
+  'or': [
+    { en: 'tea or coffee', zh: '茶还是咖啡' },
+    { en: 'yes or no', zh: '是或否' },
+  ],
+  'enjoy': [
+    { en: 'enjoy the sunshine', zh: '享受阳光' },
+    { en: 'I enjoy reading.', zh: '我喜欢阅读。' },
+  ],
+  'diary': [
+    { en: 'write a diary', zh: '写日记' },
+    { en: 'keep a diary', zh: '坚持写日记' },
+  ],
+  'special': [
+    { en: 'a special day', zh: '特别的一天' },
+    { en: 'something special', zh: '特别的东西' },
+  ],
+  'teacher': [
+    { en: 'my English teacher', zh: '我的英语老师' },
+    { en: 'a kind teacher', zh: '一位友善的老师' },
+  ],
+  'taste': [
+    { en: 'taste good', zh: '尝起来不错' },
+    { en: 'Have a taste.', zh: '尝一尝。' },
+  ],
+  'ice cream': [
+    { en: 'eat ice cream', zh: '吃冰激凌' },
+    { en: 'an ice cream', zh: '一个冰激凌' },
+  ],
+  'real': [
+    { en: 'a real story', zh: '真实的故事' },
+    { en: 'Is it real?', zh: '这是真的吗？' },
+  ],
+  'later': [
+    { en: 'see you later', zh: '回头见' },
+    { en: 'later on', zh: '稍后' },
+  ],
+  'surprise': [
+    { en: 'a big surprise', zh: '一个大惊喜' },
+    { en: 'What a surprise!', zh: '真令人惊讶！' },
+  ],
+  'coat': [
+    { en: 'put on a coat', zh: '穿上外套' },
+    { en: 'a warm coat', zh: '一件暖和的外套' },
+  ],
+  'turn': [
+    { en: 'turn on the TV', zh: '打开电视' },
+    { en: 'turn around', zh: '转身' },
+  ],
+  'turn on': [
+    { en: 'turn on the light', zh: '开灯' },
+    { en: 'turn on the TV', zh: '打开电视' },
+  ],
+  'TV': [
+    { en: 'watch TV', zh: '看电视' },
+    { en: 'turn on the TV', zh: '打开电视' },
+  ],
+  'report': [
+    { en: 'weather report', zh: '天气预报' },
+    { en: 'a news report', zh: '新闻报道' },
+  ],
+
+  /* ---------------- 4A Unit 4 Seasons ---------------- */
+  'season': [
+    { en: 'four seasons', zh: '四季' },
+    { en: 'favourite season', zh: '最喜欢的季节' },
+  ],
+  'spring': [
+    { en: 'in spring', zh: '在春天' },
+    { en: 'Spring is warm.', zh: '春天很暖和。' },
+  ],
+  'summer': [
+    { en: 'in summer', zh: '在夏天' },
+    { en: 'Summer is hot.', zh: '夏天很热。' },
+  ],
+  'autumn': [
+    { en: 'in autumn', zh: '在秋天' },
+    { en: 'Autumn is cool.', zh: '秋天很凉爽。' },
+  ],
+  'winter': [
+    { en: 'in winter', zh: '在冬天' },
+    { en: 'Winter is cold.', zh: '冬天很冷。' },
+  ],
+  'favourite': [
+    { en: 'my favourite season', zh: '我最喜欢的季节' },
+    { en: 'What\'s your favourite colour?', zh: '你最喜欢的颜色是什么？' },
+  ],
+  'birthday': [
+    { en: 'happy birthday', zh: '生日快乐' },
+    { en: 'birthday party', zh: '生日聚会' },
+  ],
+  'fly': [
+    { en: 'fly kites', zh: '放风筝' },
+    { en: 'The bird can fly.', zh: '鸟会飞。' },
+  ],
+  'fly kites': [
+    { en: 'fly kites in spring', zh: '在春天放风筝' },
+    { en: 'Let\'s fly kites.', zh: '我们去放风筝吧。' },
+  ],
+  'snowstorm': [
+    { en: 'a heavy snowstorm', zh: '一场暴风雪' },
+    { en: 'The snowstorm is coming.', zh: '暴风雪要来了。' },
+  ],
+  'beach': [
+    { en: 'go to the beach', zh: '去海滩' },
+    { en: 'on the beach', zh: '在海滩上' },
+  ],
+  'sea': [
+    { en: 'by the sea', zh: '在海边' },
+    { en: 'swim in the sea', zh: '在海里游泳' },
+  ],
+  'equator': [
+    { en: 'near the equator', zh: '靠近赤道' },
+    { en: 'hot near the equator', zh: '赤道附近很热' },
+  ],
+  'round': [
+    { en: 'go round the tree', zh: '绕着树走' },
+    { en: 'all year round', zh: '一年到头' },
+  ],
+  'quite': [
+    { en: 'quite good', zh: '相当好' },
+    { en: 'quite hot', zh: '相当热' },
+  ],
+  'join': [
+    { en: 'join the club', zh: '加入俱乐部' },
+    { en: 'join us', zh: '加入我们' },
+  ],
+
+  /* ---------------- 4A Unit 5 Let's go ---------------- */
+  'bus': [
+    { en: 'by bus', zh: '乘公交车' },
+    { en: 'take a bus', zh: '坐公交车' },
+  ],
+  'car': [
+    { en: 'by car', zh: '开车' },
+    { en: 'a red car', zh: '一辆红色的车' },
+  ],
+  'train': [
+    { en: 'by train', zh: '乘火车' },
+    { en: 'take the train', zh: '坐火车' },
+  ],
+  'city': [
+    { en: 'a big city', zh: '一座大城市' },
+    { en: 'in the city', zh: '在城市里' },
+  ],
+  'town': [
+    { en: 'a small town', zh: '一座小镇' },
+    { en: 'in town', zh: '在镇上' },
+  ],
+  'plane': [
+    { en: 'by plane', zh: '乘飞机' },
+    { en: 'take a plane', zh: '坐飞机' },
+  ],
+  'sky': [
+    { en: 'in the sky', zh: '在天空中' },
+    { en: 'blue sky', zh: '蓝天' },
+  ],
+  'ship': [
+    { en: 'by ship', zh: '乘船' },
+    { en: 'a big ship', zh: '一艘大船' },
+  ],
+  'place': [
+    { en: 'a good place', zh: '一个好地方' },
+    { en: 'travel to a place', zh: '去某地旅行' },
+  ],
+  'near': [
+    { en: 'near the school', zh: '在学校附近' },
+    { en: 'near here', zh: '在这附近' },
+  ],
+  'travel': [
+    { en: 'travel by train', zh: '乘火车旅行' },
+    { en: 'I love to travel.', zh: '我喜欢旅行。' },
+  ],
+  'way': [
+    { en: 'on the way', zh: '在路上' },
+    { en: 'the way to school', zh: '去学校的路' },
+  ],
+  'picnic': [
+    { en: 'have a picnic', zh: '去野餐' },
+    { en: 'go for a picnic', zh: '去野餐' },
+  ],
+  'minute': [
+    { en: 'wait a minute', zh: '等一会儿' },
+    { en: 'in a minute', zh: '马上' },
+  ],
+  'wear': [
+    { en: 'wear a coat', zh: '穿外套' },
+    { en: 'wear a hat', zh: '戴帽子' },
+  ],
+  'live': [
+    { en: 'live in China', zh: '住在中国' },
+    { en: 'Where do you live?', zh: '你住在哪里？' },
+  ],
+  'away': [
+    { en: 'go away', zh: '走开' },
+    { en: 'far away', zh: '遥远' },
+  ],
+  'truck': [
+    { en: 'a big truck', zh: '一辆大卡车' },
+    { en: 'by truck', zh: '用卡车' },
+  ],
+  'bamboo': [
+    { en: 'green bamboo', zh: '绿竹' },
+    { en: 'a bamboo forest', zh: '竹林' },
+  ],
+  'airport': [
+    { en: 'at the airport', zh: '在机场' },
+    { en: 'go to the airport', zh: '去机场' },
+  ],
+  'bike': [
+    { en: 'by bike', zh: '骑自行车' },
+    { en: 'ride a bike', zh: '骑自行车' },
+  ],
+  'ring': [
+    { en: 'the bell rings', zh: '铃响了' },
+    { en: 'ring the bell', zh: '按铃' },
+  ],
+  'beep': [
+    { en: 'the car beeps', zh: '汽车鸣笛' },
+    { en: 'Beep! Beep!', zh: '嘀！嘀！' },
+  ],
+  'subway': [
+    { en: 'by subway', zh: '乘地铁' },
+    { en: 'take the subway', zh: '坐地铁' },
+  ],
+  'whoosh': [
+    { en: 'Whoosh! The train goes by.', zh: '呼！火车呼啸而过。' },
+  ],
+  'tram': [
+    { en: 'by tram', zh: '乘有轨电车' },
+    { en: 'take a tram', zh: '坐有轨电车' },
+  ],
+  'chug': [
+    { en: 'The train chugs along.', zh: '火车突突地前进。' },
+  ],
+
+  /* ---------------- 4A Unit 6 Find your way ---------------- */
+  'wheel': [
+    { en: 'a car wheel', zh: '车轮' },
+    { en: 'the wheel of a bike', zh: '自行车的轮子' },
+  ],
+  'left': [
+    { en: 'turn left', zh: '向左转' },
+    { en: 'on the left', zh: '在左边' },
+  ],
+  'straight': [
+    { en: 'go straight', zh: '直走' },
+    { en: 'walk straight on', zh: '一直往前走' },
+  ],
+  'library': [
+    { en: 'go to the library', zh: '去图书馆' },
+    { en: 'in the library', zh: '在图书馆里' },
+  ],
+  'centre': [
+    { en: 'city centre', zh: '市中心' },
+    { en: 'in the centre', zh: '在中心' },
+  ],
+  'cinema': [
+    { en: 'go to the cinema', zh: '去看电影' },
+    { en: 'at the cinema', zh: '在电影院' },
+  ],
+  'hospital': [
+    { en: 'go to the hospital', zh: '去医院' },
+    { en: 'in the hospital', zh: '在医院里' },
+  ],
+  'supermarket': [
+    { en: 'go to the supermarket', zh: '去超市' },
+    { en: 'at the supermarket', zh: '在超市' },
+  ],
+  'museum': [
+    { en: 'visit the museum', zh: '参观博物馆' },
+    { en: 'in the museum', zh: '在博物馆里' },
+  ],
+  'tomorrow': [
+    { en: 'see you tomorrow', zh: '明天见' },
+    { en: 'Tomorrow is Sunday.', zh: '明天是星期天。' },
+  ],
+  'woman': [
+    { en: 'a kind woman', zh: '一位善良的女士' },
+    { en: 'the woman in red', zh: '穿红衣服的女士' },
+  ],
+  'excuse': [
+    { en: 'excuse me', zh: '劳驾；对不起' },
+    { en: 'Excuse me, where is...?', zh: '打扰一下，……在哪里？' },
+  ],
+  'excuse me': [
+    { en: 'Excuse me, can you help me?', zh: '打扰一下，你能帮我吗？' },
+    { en: 'Excuse me, I\'m sorry.', zh: '对不起，不好意思。' },
+  ],
+  'wish': [
+    { en: 'make a wish', zh: '许个愿' },
+    { en: 'I wish you happiness.', zh: '祝你幸福。' },
+  ],
+  'true': [
+    { en: 'come true', zh: '实现' },
+    { en: 'Is it true?', zh: '这是真的吗？' },
+  ],
+  'step': [
+    { en: 'the first step', zh: '第一步' },
+    { en: 'step by step', zh: '一步一步地' },
+  ],
+  'own': [
+    { en: 'my own room', zh: '我自己的房间' },
+    { en: 'on your own', zh: '独自' },
+  ],
+  'cross': [
+    { en: 'cross the street', zh: '过马路' },
+    { en: 'cross the road', zh: '过马路' },
+  ],
+  'careful': [
+    { en: 'be careful', zh: '当心' },
+    { en: 'Be careful!', zh: '小心！' },
+  ],
+  'be careful': [
+    { en: 'Be careful on the road.', zh: '路上小心。' },
+    { en: 'Be careful with fire.', zh: '小心火。' },
+  ],
+  'underground': [
+    { en: 'by underground', zh: '乘地铁' },
+    { en: 'take the underground', zh: '坐地铁' },
+  ],
+
+  /* ---------------- 4B Unit 1 People at work ---------------- */
+  'doctor': [
+    { en: 'see a doctor', zh: '看医生' },
+    { en: 'a kind doctor', zh: '一位友善的医生' },
+  ],
+  'fireman': [
+    { en: 'a brave fireman', zh: '一名勇敢的消防员' },
+    { en: 'The fireman puts out fires.', zh: '消防员灭火。' },
+  ],
+  'farmer': [
+    { en: 'a busy farmer', zh: '一位忙碌的农民' },
+    { en: 'The farmer grows rice.', zh: '农民种稻子。' },
+  ],
+  'cook': [
+    { en: 'cook dinner', zh: '做晚饭' },
+    { en: 'a great cook', zh: '一位很棒的厨师' },
+  ],
+  'police': [
+    { en: 'call the police', zh: '报警' },
+    { en: 'the police station', zh: '警察局' },
+  ],
+  'police officer': [
+    { en: 'a police officer', zh: '一名警察' },
+    { en: 'The police officer helps us.', zh: '警察帮助我们。' },
+  ],
+  'station': [
+    { en: 'police station', zh: '警察局' },
+    { en: 'train station', zh: '火车站' },
+  ],
+  'police station': [
+    { en: 'go to the police station', zh: '去警察局' },
+    { en: 'near the police station', zh: '在警察局附近' },
+  ],
+  'often': [
+    { en: 'I often read books.', zh: '我经常看书。' },
+    { en: 'How often do you...?', zh: '你多久……一次？' },
+  ],
+  'field': [
+    { en: 'in the field', zh: '在田野里' },
+    { en: 'a green field', zh: '一片绿色的田野' },
+  ],
+  'painter': [
+    { en: 'a famous painter', zh: '一位著名的画家' },
+    { en: 'The painter paints well.', zh: '这位画家画得很好。' },
+  ],
+  'use': [
+    { en: 'use a pen', zh: '使用钢笔' },
+    { en: 'Can I use your phone?', zh: '我能用一下你的电话吗？' },
+  ],
+  'brush': [
+    { en: 'a paint brush', zh: '画笔' },
+    { en: 'brush your teeth', zh: '刷牙' },
+  ],
+  'scientist': [
+    { en: 'a great scientist', zh: '一位伟大的科学家' },
+    { en: 'The scientist studies stars.', zh: '科学家研究星星。' },
+  ],
+  'writer': [
+    { en: 'a famous writer', zh: '一位著名的作家' },
+    { en: 'The writer writes books.', zh: '作家写书。' },
+  ],
+  'worker': [
+    { en: 'a factory worker', zh: '一名工厂工人' },
+    { en: 'The worker works hard.', zh: '工人工作努力。' },
+  ],
+  'aunt': [
+    { en: 'my aunt', zh: '我的姑姑/阿姨' },
+    { en: 'Aunt Mary', zh: '玛丽阿姨' },
+  ],
+  'night': [
+    { en: 'at night', zh: '在夜里' },
+    { en: 'good night', zh: '晚安' },
+  ],
+  'owl': [
+    { en: 'a wise owl', zh: '一只聪明的猫头鹰' },
+    { en: 'The owl flies at night.', zh: '猫头鹰在夜间飞行。' },
+  ],
+  'night owl': [
+    { en: 'He is a night owl.', zh: '他是个夜猫子。' },
+    { en: 'become a night owl', zh: '变成夜猫子' },
+  ],
+  'driver': [
+    { en: 'a bus driver', zh: '一名公交车司机' },
+    { en: 'a careful driver', zh: '一位谨慎的司机' },
+  ],
+  'taxi': [
+    { en: 'by taxi', zh: '乘出租车' },
+    { en: 'take a taxi', zh: '坐出租车' },
+  ],
+  'safe': [
+    { en: 'keep safe', zh: '保证安全' },
+    { en: 'Is it safe?', zh: '安全吗？' },
+  ],
+  'nurse': [
+    { en: 'a kind nurse', zh: '一位友善的护士' },
+    { en: 'The nurse helps the doctor.', zh: '护士协助医生。' },
+  ],
+  'light': [
+    { en: 'turn on the light', zh: '开灯' },
+    { en: 'a bright light', zh: '明亮的光' },
+  ],
+  'uncle': [
+    { en: 'my uncle', zh: '我的叔叔/伯伯' },
+    { en: 'Uncle Tom', zh: '汤姆叔叔' },
+  ],
+  'bake': [
+    { en: 'bake a cake', zh: '烤蛋糕' },
+    { en: 'bake bread', zh: '烤面包' },
+  ],
+  'bee': [
+    { en: 'a busy bee', zh: '一只忙碌的蜜蜂' },
+    { en: 'The bee makes honey.', zh: '蜜蜂酿蜜。' },
+  ],
+  'same': [
+    { en: 'the same as', zh: '与……相同' },
+    { en: 'We are the same age.', zh: '我们同岁。' },
+  ],
+  'sound': [
+    { en: 'a loud sound', zh: '很大的声音' },
+    { en: 'That sounds good.', zh: '听起来不错。' },
+  ],
+  'postman': [
+    { en: 'a postman', zh: '一名邮递员' },
+    { en: 'The postman brings letters.', zh: '邮递员送信。' },
+  ],
+  'life': [
+    { en: 'daily life', zh: '日常生活' },
+    { en: 'enjoy life', zh: '享受生活' },
+  ],
+  'mountain': [
+    { en: 'a high mountain', zh: '一座高山' },
+    { en: 'climb a mountain', zh: '爬山' },
+  ],
+
+  /* ---------------- 4B Unit 2 How do you feel ---------------- */
+  'laugh': [
+    { en: 'laugh loudly', zh: '大声笑' },
+    { en: 'The children laugh.', zh: '孩子们在笑。' },
+  ],
+  'sad': [
+    { en: 'feel sad', zh: '感到难过' },
+    { en: 'Why are you sad?', zh: '你为什么难过？' },
+  ],
+  'cry': [
+    { en: 'cry for help', zh: '呼救' },
+    { en: 'Don\'t cry.', zh: '别哭。' },
+  ],
+  'angry': [
+    { en: 'feel angry', zh: '感到生气' },
+    { en: 'He is angry.', zh: '他很生气。' },
+  ],
+  'frown': [
+    { en: 'frown at me', zh: '对我皱眉' },
+    { en: 'Don\'t frown.', zh: '别皱眉。' },
+  ],
+  'scared': [
+    { en: 'feel scared', zh: '感到害怕' },
+    { en: 'I\'m scared of dogs.', zh: '我怕狗。' },
+  ],
+  'shake': [
+    { en: 'shake hands', zh: '握手' },
+    { en: 'shake with fear', zh: '吓得发抖' },
+  ],
+  'excited': [
+    { en: 'feel excited', zh: '感到兴奋' },
+    { en: 'I\'m excited about the trip.', zh: '我对这次旅行感到兴奋。' },
+  ],
+  'opera': [
+    { en: 'go to the opera', zh: '去看歌剧' },
+    { en: 'a Beijing opera', zh: '京剧' },
+  ],
+  'next': [
+    { en: 'next time', zh: '下次' },
+    { en: 'next week', zh: '下周' },
+  ],
+  'cough': [
+    { en: 'have a cough', zh: '咳嗽' },
+    { en: 'He coughed all night.', zh: '他咳了一整夜。' },
+  ],
+  'better': [
+    { en: 'feel better', zh: '感觉好些了' },
+    { en: 'Get better soon.', zh: '早日康复。' },
+  ],
+  'practise': [
+    { en: 'practise English', zh: '练习英语' },
+    { en: 'practise every day', zh: '每天练习' },
+  ],
+  'gift': [
+    { en: 'a birthday gift', zh: '一份生日礼物' },
+    { en: 'give a gift', zh: '送礼物' },
+  ],
+  'surprised': [
+    { en: 'feel surprised', zh: '感到惊讶' },
+    { en: 'I\'m surprised to see you.', zh: '见到你我很惊讶。' },
+  ],
+  'model': [
+    { en: 'a model ship', zh: '一艘模型船' },
+    { en: 'make a model', zh: '做模型' },
+  ],
+  'bang': [
+    { en: 'Bang! The door closes.', zh: '砰！门关上了。' },
+    { en: 'a loud bang', zh: '砰的一声巨响' },
+  ],
+  'shout': [
+    { en: 'shout for help', zh: '大声呼救' },
+    { en: 'Don\'t shout.', zh: '别大喊大叫。' },
+  ],
+  'should': [
+    { en: 'You should rest.', zh: '你应该休息。' },
+    { en: 'We should help others.', zh: '我们应该帮助别人。' },
+  ],
+  'break': [
+    { en: 'break a cup', zh: '打碎杯子' },
+    { en: 'have a break', zh: '休息一下' },
+  ],
+  'feeling': [
+    { en: 'a good feeling', zh: '一种好感觉' },
+    { en: 'How is your feeling?', zh: '你感觉怎么样？' },
+  ],
+  'huge': [
+    { en: 'a huge elephant', zh: '一头巨大的象' },
+    { en: 'a huge house', zh: '一座大房子' },
+  ],
+  'worried': [
+    { en: 'feel worried', zh: '感到担心' },
+    { en: 'Don\'t be worried.', zh: '别担心。' },
+  ],
+  'street': [
+    { en: 'in the street', zh: '在街上' },
+    { en: 'cross the street', zh: '过马路' },
+  ],
+  'hit': [
+    { en: 'hit the ball', zh: '击球' },
+    { en: 'hit the wall', zh: '撞到墙' },
+  ],
+
+  /* ---------------- 4B Unit 3 Everyone's got talent ---------------- */
+  'talent': [
+    { en: 'have a talent', zh: '有天赋' },
+    { en: 'a talent show', zh: '才艺表演' },
+  ],
+  'act': [
+    { en: 'act in a play', zh: '在剧中表演' },
+    { en: 'act well', zh: '演得好' },
+  ],
+  'magic': [
+    { en: 'magic tricks', zh: '魔术' },
+    { en: 'do magic', zh: '变魔术' },
+  ],
+  'shine': [
+    { en: 'the sun shines', zh: '阳光照耀' },
+    { en: 'shine bright', zh: '闪闪发光' },
+  ],
+  'puzzle': [
+    { en: 'do a puzzle', zh: '做拼图' },
+    { en: 'a jigsaw puzzle', zh: '拼图游戏' },
+  ],
+  'dancer': [
+    { en: 'a good dancer', zh: '一位优秀的舞者' },
+    { en: 'The dancer dances well.', zh: '这位舞者跳得很好。' },
+  ],
+  'win': [
+    { en: 'win the game', zh: '赢得比赛' },
+    { en: 'We win!', zh: '我们赢了！' },
+  ],
+  'just': [
+    { en: 'just a minute', zh: '稍等一下' },
+    { en: 'just now', zh: '刚才' },
+  ],
+  'duck': [
+    { en: 'a little duck', zh: '一只小鸭子' },
+    { en: 'The duck swims.', zh: '鸭子在游泳。' },
+  ],
+  'boy': [
+    { en: 'a clever boy', zh: '一个聪明的男孩' },
+    { en: 'a little boy', zh: '一个小男孩' },
+  ],
+  'anything': [
+    { en: 'anything else', zh: '还有别的吗' },
+    { en: 'Do you need anything?', zh: '你需要什么吗？' },
+  ],
+  'cock-a-doodle-doo': [
+    { en: 'Cock-a-doodle-doo!', zh: '喔喔喔！（公鸡叫）' },
+  ],
+  'enough': [
+    { en: 'enough water', zh: '足够的水' },
+    { en: 'I have enough time.', zh: '我有足够的时间。' },
+  ],
+  'slowly': [
+    { en: 'walk slowly', zh: '慢慢地走' },
+    { en: 'Please speak slowly.', zh: '请说慢一点。' },
+  ],
+
+  /* ---------------- 4B Unit 4 Plant life ---------------- */
+  'seed': [
+    { en: 'plant a seed', zh: '种下一颗种子' },
+    { en: 'a sunflower seed', zh: '一颗向日葵种子' },
+  ],
+  'earth': [
+    { en: 'plant in the earth', zh: '种在泥土里' },
+    { en: 'the Earth', zh: '地球' },
+  ],
+  'root': [
+    { en: 'tree roots', zh: '树根' },
+    { en: 'the root of a plant', zh: '植物的根' },
+  ],
+  'stem': [
+    { en: 'a plant stem', zh: '植物的茎' },
+    { en: 'a long stem', zh: '长长的茎' },
+  ],
+  'thin': [
+    { en: 'a thin stem', zh: '细细的茎' },
+    { en: 'a thin boy', zh: '瘦瘦的男孩' },
+  ],
+  'leaf': [
+    { en: 'green leaves', zh: '绿叶' },
+    { en: 'a leaf falls', zh: '一片叶子落下' },
+  ],
+  'dig': [
+    { en: 'dig a hole', zh: '挖一个坑' },
+    { en: 'dig in the earth', zh: '在泥土里挖' },
+  ],
+  'sunflower': [
+    { en: 'a tall sunflower', zh: '一棵高高的向日葵' },
+    { en: 'sunflowers face the sun', zh: '向日葵朝向太阳' },
+  ],
+  'wheat': [
+    { en: 'a field of wheat', zh: '一片麦田' },
+    { en: 'wheat bread', zh: '全麦面包' },
+  ],
+  'cotton': [
+    { en: 'cotton clothes', zh: '棉质衣服' },
+    { en: 'white cotton', zh: '白色的棉花' },
+  ],
+  'plant': [
+    { en: 'plant trees', zh: '种树' },
+    { en: 'a green plant', zh: '一株绿色的植物' },
+  ],
+  'dream': [
+    { en: 'have a dream', zh: '有一个梦想' },
+    { en: 'dream come true', zh: '梦想成真' },
+  ],
+  'sleep': [
+    { en: 'go to sleep', zh: '入睡' },
+    { en: 'sleep well', zh: '睡得好' },
+  ],
+  'mouse': [
+    { en: 'a little mouse', zh: '一只小老鼠' },
+    { en: 'The mouse runs fast.', zh: '老鼠跑得很快。' },
+  ],
+  'grain': [
+    { en: 'a grain of rice', zh: '一粒米' },
+    { en: 'wheat grain', zh: '麦粒' },
+  ],
+  'miss': [
+    { en: 'miss my family', zh: '想念家人' },
+    { en: 'I miss you.', zh: '我想你。' },
+  ],
+  'will': [
+    { en: 'I will go.', zh: '我会去的。' },
+    { en: 'Will you come?', zh: '你会来吗？' },
+  ],
+  'everything': [
+    { en: 'everything is fine', zh: '一切都好' },
+    { en: 'Thank you for everything.', zh: '谢谢你所做的一切。' },
+  ],
+  'cabbage': [
+    { en: 'a green cabbage', zh: '一颗卷心菜' },
+    { en: 'eat cabbage', zh: '吃卷心菜' },
+  ],
+  'come true': [
+    { en: 'My dream comes true.', zh: '我的梦想实现了。' },
+    { en: 'wish come true', zh: '愿望成真' },
+  ],
+  'paper': [
+    { en: 'a piece of paper', zh: '一张纸' },
+    { en: 'write on paper', zh: '在纸上写字' },
+  ],
+
+  /* ---------------- 4B Unit 5 School activities ---------------- */
+  'event': [
+    { en: 'a school event', zh: '一项学校活动' },
+    { en: 'a sports event', zh: '一场体育赛事' },
+  ],
+  'drama': [
+    { en: 'a drama club', zh: '戏剧社' },
+    { en: 'act in a drama', zh: '在剧中表演' },
+  ],
+  'trip': [
+    { en: 'a school trip', zh: '学校旅行' },
+    { en: 'go on a trip', zh: '去旅行' },
+  ],
+  'fair': [
+    { en: 'a book fair', zh: '书展' },
+    { en: 'go to the fair', zh: '去集市' },
+  ],
+  'festival': [
+    { en: 'a music festival', zh: '音乐节' },
+    { en: 'Spring Festival', zh: '春节' },
+  ],
+  'horn': [
+    { en: 'a cow\'s horn', zh: '牛角' },
+    { en: 'blow the horn', zh: '吹号角' },
+  ],
+  'dot': [
+    { en: 'a red dot', zh: '一个红点' },
+    { en: 'join the dots', zh: '把点连起来' },
+  ],
+  'raindrop': [
+    { en: 'a little raindrop', zh: '一滴小雨滴' },
+    { en: 'raindrops fall', zh: '雨滴落下' },
+  ],
+  'more': [
+    { en: 'more water', zh: '更多的水' },
+    { en: 'one more time', zh: '再来一次' },
+  ],
+  'write': [
+    { en: 'write a letter', zh: '写信' },
+    { en: 'write your name', zh: '写下你的名字' },
+  ],
+  'those': [
+    { en: 'those books', zh: '那些书' },
+    { en: 'What are those?', zh: '那些是什么？' },
+  ],
+  'forest': [
+    { en: 'a big forest', zh: '一片大森林' },
+    { en: 'in the forest', zh: '在森林里' },
+  ],
+  'nature': [
+    { en: 'enjoy nature', zh: '享受大自然' },
+    { en: 'nature park', zh: '自然公园' },
+  ],
+  'hunt': [
+    { en: 'hunt for food', zh: '寻找食物' },
+    { en: 'hunt for treasure', zh: '寻宝' },
+  ],
+  'keeper': [
+    { en: 'a zoo keeper', zh: '动物园饲养员' },
+    { en: 'a shop keeper', zh: '店主' },
+  ],
+  'lovely': [
+    { en: 'a lovely day', zh: '美好的一天' },
+    { en: 'a lovely girl', zh: '可爱的女孩' },
+  ],
+  'student': [
+    { en: 'a good student', zh: '一名好学生' },
+    { en: 'a new student', zh: '一名新学生' },
+  ],
+  'fall': [
+    { en: 'fall down', zh: '摔倒' },
+    { en: 'leaves fall', zh: '树叶落下' },
+  ],
+  'off': [
+    { en: 'take off the coat', zh: '脱下外套' },
+    { en: 'turn off the light', zh: '关灯' },
+  ],
+  'fall off': [
+    { en: 'fall off the bike', zh: '从自行车上摔下来' },
+    { en: 'The leaves fall off.', zh: '树叶脱落了。' },
+  ],
+  'hour': [
+    { en: 'half an hour', zh: '半小时' },
+    { en: 'an hour ago', zh: '一小时前' },
+  ],
+  'culture': [
+    { en: 'Chinese culture', zh: '中国文化' },
+    { en: 'learn about culture', zh: '了解文化' },
+  ],
+  'note': [
+    { en: 'take notes', zh: '做笔记' },
+    { en: 'write a note', zh: '写一张便条' },
+  ],
+  'vote': [
+    { en: 'vote for me', zh: '投我一票' },
+    { en: 'cast a vote', zh: '投票' },
+  ],
+  'design': [
+    { en: 'design a poster', zh: '设计海报' },
+    { en: 'a new design', zh: '一个新设计' },
+  ],
+  'hometown': [
+    { en: 'my hometown', zh: '我的家乡' },
+    { en: 'go back to hometown', zh: '回到家乡' },
+  ],
+
+  /* ---------------- 4B Unit 6 Cool clothes ---------------- */
+  'T-shirt': [
+    { en: 'a white T-shirt', zh: '一件白色T恤' },
+    { en: 'wear a T-shirt', zh: '穿T恤' },
+  ],
+  'skirt': [
+    { en: 'a red skirt', zh: '一条红裙子' },
+    { en: 'wear a skirt', zh: '穿裙子' },
+  ],
+  'shorts': [
+    { en: 'a pair of shorts', zh: '一条短裤' },
+    { en: 'wear shorts', zh: '穿短裤' },
+  ],
+  'shirt': [
+    { en: 'a blue shirt', zh: '一件蓝色衬衫' },
+    { en: 'wear a shirt', zh: '穿衬衫' },
+  ],
+  'trousers': [
+    { en: 'a pair of trousers', zh: '一条裤子' },
+    { en: 'wear trousers', zh: '穿裤子' },
+  ],
+  'scarf': [
+    { en: 'a warm scarf', zh: '一条暖和的围巾' },
+    { en: 'wear a scarf', zh: '戴围巾' },
+  ],
+  'sweater': [
+    { en: 'a wool sweater', zh: '一件羊毛衫' },
+    { en: 'wear a sweater', zh: '穿毛衣' },
+  ],
+  'dress': [
+    { en: 'a nice dress', zh: '一条漂亮的连衣裙' },
+    { en: 'wear a dress', zh: '穿连衣裙' },
+  ],
+  'party': [
+    { en: 'a birthday party', zh: '生日聚会' },
+    { en: 'go to a party', zh: '去参加聚会' },
+  ],
+  'end': [
+    { en: 'at the end of', zh: '在……的末尾' },
+    { en: 'in the end', zh: '最后' },
+  ],
+  'dressmaker': [
+    { en: 'a dressmaker', zh: '一位裁缝' },
+    { en: 'The dressmaker makes dresses.', zh: '裁缝做衣服。' },
+  ],
+  'Christmas': [
+    { en: 'Merry Christmas!', zh: '圣诞快乐！' },
+    { en: 'Christmas Day', zh: '圣诞节' },
+  ],
+  'the same': [
+    { en: 'look the same', zh: '看起来一样' },
+    { en: 'We are the same.', zh: '我们一样。' },
+  ],
+  'wrong': [
+    { en: 'a wrong answer', zh: '错误的答案' },
+    { en: 'What\'s wrong?', zh: '怎么了？' },
+  ],
+  'clever': [
+    { en: 'a clever boy', zh: '一个聪明的男孩' },
+    { en: 'How clever!', zh: '真聪明！' },
+  ],
+  'Mr': [
+    { en: 'Mr Brown', zh: '布朗先生' },
+    { en: 'Mr and Mrs', zh: '先生和夫人' },
+  ],
+  'present': [
+    { en: 'a birthday present', zh: '一份生日礼物' },
+    { en: 'give a present', zh: '送礼物' },
+  ],
+  'whole': [
+    { en: 'the whole day', zh: '一整天' },
+    { en: 'the whole class', zh: '全班' },
+  ],
+  'whale': [
+    { en: 'a big whale', zh: '一头大鲸鱼' },
+    { en: 'whales live in the sea', zh: '鲸鱼生活在海里' },
+  ],
+  'uniform': [
+    { en: 'school uniform', zh: '校服' },
+    { en: 'wear a uniform', zh: '穿制服' },
+  ],
+  'robe': [
+    { en: 'a long robe', zh: '一件长袍' },
+    { en: 'wear a robe', zh: '穿长袍' },
+  ],
+  'jacket': [
+    { en: 'a warm jacket', zh: '一件暖和的夹克' },
+    { en: 'wear a jacket', zh: '穿夹克' },
+  ],
+  'hat': [
+    { en: 'a funny hat', zh: '一顶有趣的帽子' },
+    { en: 'wear a hat', zh: '戴帽子' },
+  ],
+};
+
 /* ---------- 关联词表的组装 ---------- */
 /* 同根自动识别：课内词 + 常见后缀（rain → rainy / help → helper）。 */
 const FAMILY_SUFFIXES = ['y', 'ny', 'ey', 'er', 'ers', 'ed', 'ing', 'ful', 'ly', 'man', 'men', 'day', 'thing',
@@ -735,6 +1974,7 @@ ENGLISH_UNITS.forEach(unit => {
       }
     }
     word.links = links;
+    word.phrases = ENGLISH_PHRASES[word.en] || [];
   });
 });
 

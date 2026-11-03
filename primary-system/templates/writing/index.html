@@ -1,0 +1,36 @@
+{% extends 'base.html' %}{% load static %}{% block title %}作文坊 · 乐学堂{% endblock %}
+{% block content %}<link rel="stylesheet" href="{% static 'writing/writing.css' %}"><script src="{% static 'speech.js' %}" defer></script><script src="{% static 'tts.js' %}" defer></script><script src="{% static 'writing/writing.js' %}" defer></script>
+<a class="back" href="{% url 'home' %}">← 学习广场</a>
+<div class="page-heading"><p class="eyebrow">语文 · 表达创作</p><h1>作文坊</h1><p>打开写作锦囊，用素材和范文搭把手，写自己的故事；写好的作文存在作文本里。</p></div>
+<div class="library-layout"><aside class="unit-nav" aria-label="写作分类导航"><h2>写作分类</h2>{% for group in groups %}<a href="#cat-{{ group.id }}"><span class="unit-dot" style="--c: {{ group.color }}">{{ group.emoji }}</span>{{ group.name }}<span class="unit-count">{{ group.topics|length }}</span></a>{% endfor %}<a href="#materials"><span class="unit-dot" style="--c: #b58af0">🧰</span>素材百宝箱</a><a href="#notebook"><span class="unit-dot" style="--c: #2f7d4f">📓</span>我的作文本</a></aside>
+<section class="wr-board">
+  <div class="wr-toolbar"><input id="wr-search" type="search" placeholder="搜索题目或写作目标…" aria-label="搜索题目"><button class="button small" id="wr-lottery" type="button">🎲 灵感抽签</button><button class="button small" id="wr-goto-notebook" type="button">📓 去写作文</button></div>
+  {% for group in groups %}<section class="wr-group" id="cat-{{ group.id }}" style="--c: {{ group.color }}">
+    <div class="section-heading"><div><h2>{{ group.emoji }} {{ group.name }}</h2><p>共 {{ group.topics|length }} 个题目</p></div></div>
+    <div class="wr-grid" data-category="{{ group.name }}">{% for topic in group.topics %}<article class="wr-card" data-title="{{ topic.title }}" data-goal="{{ topic.goal }}" data-category="{{ group.name }}">
+      <div class="wr-card-head"><h3>{{ topic.title }}</h3><button class="wr-say" type="button" data-say="{{ topic.title }}" aria-label="朗读题目 {{ topic.title }}">🔊</button></div>
+      <p class="wr-goal"><b>写作目标</b>{{ topic.goal }}</p>
+      <div class="wr-outline"><span class="wr-seclabel">结构锦囊</span><ol>{% for step in topic.outline %}<li><b>{{ step.label }}</b><span>{{ step.text }}</span></li>{% endfor %}</ol></div>
+      <div class="wr-chips"><span class="wr-seclabel">好词</span>{% for word in topic.words %}<button class="wr-chip" type="button" data-say="{{ word }}" aria-label="朗读 {{ word }}">{{ word }}</button>{% endfor %}</div>
+      <div class="wr-chips"><span class="wr-seclabel">好句</span>{% for sentence in topic.sentences %}<button class="wr-chip wr-sentence" type="button" data-say="{{ sentence }}" aria-label="朗读好句">{{ sentence }}</button>{% endfor %}</div>
+      <details class="wr-model"><summary>▸ 范文赏析<em>点开看范文和点评</em></summary><p class="wr-model-text">{{ topic.model|linebreaksbr }}</p><button class="button small" type="button" data-say="{{ topic.model }}" aria-label="朗读范文">🔊 读范文</button><p class="wr-comment">{{ topic.comment }}</p></details>
+      <div class="wr-task"><span class="wr-seclabel">小练笔</span><p>{{ topic.task }}</p><button class="button small wr-write" type="button" data-topic="{{ topic.title }}" data-goal="{{ topic.goal }}">去写 ➜</button></div>
+    </article>{% endfor %}</div>
+  </section>{% endfor %}
+  <section class="wr-group" id="materials" style="--c: #b58af0">
+    <div class="section-heading"><div><h2>🧰 素材百宝箱</h2><p>写不出来的时刻，来这里捡几句就用</p></div></div>
+    {% for start in materials.starts %}{% if forloop.first %}<div class="wr-chips"><span class="wr-seclabel">好开头</span>{% endif %}<button class="wr-chip wr-sentence" type="button" data-say="{{ start.text }}" title="{{ start.type }}" aria-label="朗读好开头（{{ start.type }}）">{{ start.text }}</button>{% if forloop.last %}</div>{% endif %}{% endfor %}
+    {% for end in materials.ends %}{% if forloop.first %}<div class="wr-chips"><span class="wr-seclabel">好结尾</span>{% endif %}<button class="wr-chip wr-sentence" type="button" data-say="{{ end.text }}" title="{{ end.type }}" aria-label="朗读好结尾（{{ end.type }}）">{{ end.text }}</button>{% if forloop.last %}</div>{% endif %}{% endfor %}
+    {% for wg in materials.wordGroups %}{% if forloop.first %}<div class="wr-material-groups">{% endif %}<div class="wr-chips"><span class="wr-seclabel">{{ wg.name }}</span>{% for word in wg.words %}<button class="wr-chip" type="button" data-say="{{ word }}" aria-label="朗读 {{ word }}">{{ word }}</button>{% endfor %}</div>{% if forloop.last %}</div>{% endif %}{% endfor %}
+    {% for sentence in materials.sentences %}{% if forloop.first %}<div class="wr-chips"><span class="wr-seclabel">比喻拟人句</span>{% endif %}<button class="wr-chip wr-sentence" type="button" data-say="{{ sentence }}" aria-label="朗读比喻句">{{ sentence }}</button>{% if forloop.last %}</div>{% endif %}{% endfor %}
+  </section>
+  <section class="wr-group" id="notebook" style="--c: #2f7d4f">
+    <div class="section-heading"><div><h2>📓 我的作文本</h2><p>写完点保存，草稿就存进作文本；游客保存在本浏览器，登录后跟着账号走。</p></div><span class="tag" id="wr-draft-count"></span></div>
+    <div class="wr-editor"><input id="wr-title" type="text" maxlength="120" placeholder="作文标题…" aria-label="作文标题"><textarea id="wr-content" rows="12" placeholder="从这里开始写……写完点下面的保存。" aria-label="作文正文"></textarea>
+      <p class="wr-stats" id="wr-stats" aria-live="polite"></p><p class="wr-hints" id="wr-hints" aria-live="polite"></p>
+      <p class="wr-feedback" id="wr-feedback" role="status" aria-live="polite"></p>
+      <div class="wr-editor-actions"><button class="button" id="wr-save" type="button">💾 保存到作文本</button><button class="button small" id="wr-clear" type="button">清空</button><button class="button small" id="wr-read" type="button">🔊 读一读</button></div></div>
+    <div class="wr-drafts"><h3>已保存的作文</h3><div id="wr-draft-list" class="wr-draft-list"></div></div>
+  </section>
+</section></div>
+{% endblock %}
