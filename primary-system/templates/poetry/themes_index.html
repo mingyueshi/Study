@@ -1,0 +1,61 @@
+{% extends 'reference_library/layout.html' %}
+{% load static %}
+{% block title %}诗词题材分类 · 乐学堂{% endblock %}
+{% block reference_content %}
+<link rel="stylesheet" href="{% static 'poetry/themes.css' %}">
+<nav class="ref-breadcrumbs" aria-label="专题路径">
+  <a href="{% url 'home' %}">学习广场</a><span aria-hidden="true">›</span>
+  <a href="{% url 'poetry-index' %}">古诗文</a><span aria-hidden="true">›</span>
+  <span aria-current="page">题材分类</span>
+</nav>
+<header class="theme-hero">
+  <p class="ref-kicker">读诗 · 按题材</p>
+  <h1>诗词题材分类</h1>
+  <p class="theme-hero-lead">把唐诗与宋词按题材归档：先看人间的离合，再看关山与风物，最后回到历史与心里。每个题材都分开标注「精选篇目」和「关键词自动归档」，读的时候心里有数。</p>
+  <div class="theme-hero-stats">
+    <span><strong>{{ groups|length }}</strong> 组</span>
+    <span><strong>{{ theme_total }}</strong> 个题材</span>
+    <span><strong>{{ total }}</strong> 首当前浏览</span>
+  </div>
+</header>
+<nav class="theme-dynasty" aria-label="按朝代浏览">
+  {% for code, label in dynasty_labels.items %}
+  <a class="theme-pill{% if dynasty == code %} is-active{% endif %}" href="{% if code == 'all' %}{% url 'poetry-themes' %}{% else %}?dynasty={{ code }}{% endif %}">{{ label }}</a>
+  {% endfor %}
+</nav>
+<div class="theme-workspace">
+  <nav class="theme-nav" aria-label="题材分组">
+    {% for group in groups %}
+    <a href="#group-{{ group.code }}">
+      <strong>{{ group.title }}</strong>
+      <small>{{ group.themes|length }} 个题材</small>
+    </a>
+    {% endfor %}
+  </nav>
+  <div class="theme-groups">
+    {% for group in groups %}
+    <section class="theme-group" id="group-{{ group.code }}">
+      <header class="theme-group-head">
+        <p class="ref-kicker">第 {{ forloop.counter }} 组 · 共 {{ groups|length }} 组</p>
+        <h2>{{ group.title }}</h2>
+        <p>{{ group.description }}</p>
+      </header>
+      <div class="theme-cards">
+        {% for item in group.themes %}
+        <a class="theme-card" href="{% url 'poetry-theme' item.meta.code %}?dynasty={{ dynasty }}">
+          <p class="theme-card-kicker">{{ item.meta.subtitle }}</p>
+          <h3>{{ item.meta.title }}<span class="theme-card-arrow" aria-hidden="true">→</span></h3>
+          <p class="theme-card-desc">{{ item.meta.description }}</p>
+          <p class="theme-card-count">
+            {% if dynasty == 'all' %}共 {{ item.counts.all }} 首<span>唐 {{ item.counts.tang }} · 宋 {{ item.counts.song }}</span>
+            {% elif dynasty == 'tang' %}唐 · {{ item.counts.tang }} 首
+            {% else %}宋 · {{ item.counts.song }} 首{% endif %}
+          </p>
+        </a>
+        {% endfor %}
+      </div>
+    </section>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

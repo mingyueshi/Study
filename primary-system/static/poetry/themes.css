@@ -1,0 +1,319 @@
+/* 诗词题材分类专题页；沿用 reference.css 与系统的绿色纸感基线。 */
+.theme-hero {
+  padding: 30px 34px;
+  margin-bottom: 22px;
+  border: 1px solid #d3e0c9;
+  border-radius: 22px;
+  background: radial-gradient(ellipse at 92% 0, #fff0d6, transparent 58%),
+    radial-gradient(ellipse at 0 100%, #e4f0dc, transparent 62%), #eef5e7;
+}
+.theme-hero h1 {
+  margin: 0 0 8px;
+  font-size: clamp(32px, 3vw, 46px);
+  letter-spacing: .02em;
+}
+.theme-hero-sub {
+  margin: 0 0 10px;
+  color: var(--green-dark);
+  font-size: 20px;
+  letter-spacing: .06em;
+}
+.theme-hero-lead {
+  max-width: 46rem;
+  margin: 0;
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.85;
+}
+.theme-hero-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+  color: var(--muted);
+  font-size: 15px;
+}
+.theme-hero-stats span {
+  padding: 6px 12px;
+  border: 1px solid #cfe0c6;
+  border-radius: 999px;
+  background: #fffefa;
+}
+.theme-hero-stats strong {
+  color: var(--green);
+  font-size: 17px;
+}
+.theme-prompt {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin: 18px 0 0;
+  padding: 12px 16px;
+  border-left: 4px solid #b99e6c;
+  border-radius: 0 12px 12px 0;
+  background: #fff4e1;
+  color: #6b4a2a;
+  font-size: 15.5px;
+  line-height: 1.8;
+}
+.theme-prompt span {
+  flex: none;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #854521;
+  color: #fff;
+  font-size: 12px;
+  letter-spacing: .08em;
+}
+.theme-dynasty {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.theme-pill {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 6px 20px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--white);
+  color: var(--green);
+  font-size: 15px;
+  font-weight: 650;
+}
+.theme-pill.is-active {
+  border-color: var(--green);
+  background: var(--green);
+  color: #fff;
+}
+.theme-workspace {
+  display: grid;
+  grid-template-columns: minmax(10rem, 13rem) minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+.theme-nav {
+  position: sticky;
+  top: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 14px;
+  border: 1px solid #dbe6d3;
+  border-radius: 18px;
+  background: #f4f8ef;
+}
+.theme-nav a {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  color: var(--ink);
+}
+.theme-nav a:hover {
+  background: #e7f0df;
+}
+.theme-nav strong {
+  font-size: 15px;
+}
+.theme-nav small {
+  color: var(--muted);
+  font-size: 13px;
+}
+.theme-groups {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  min-width: 0;
+}
+.theme-group {
+  scroll-margin-top: 20px;
+}
+.theme-group-head h2 {
+  margin: 2px 0 6px;
+  font-size: 26px;
+}
+.theme-group-head p:last-child {
+  margin: 0 0 16px;
+  color: var(--muted);
+  font-size: 16px;
+}
+.theme-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  gap: 14px;
+}
+.theme-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-top: 4px solid #a8c0a0;
+  border-radius: 16px;
+  background: var(--white);
+  color: inherit;
+  transition: border-color .15s, box-shadow .15s, transform .15s;
+}
+.theme-card:hover {
+  border-color: #87a583;
+  box-shadow: 0 8px 20px #233e3714;
+  transform: translateY(-2px);
+}
+.theme-card-kicker {
+  margin: 0;
+  color: #8a744f;
+  font-size: 13.5px;
+  letter-spacing: .06em;
+}
+.theme-card h3 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin: 0;
+  font-size: 24px;
+}
+.theme-card-arrow {
+  color: var(--green);
+  font-size: 20px;
+}
+.theme-card-desc {
+  margin: 0;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.85;
+}
+.theme-card-count {
+  margin: auto 0 0;
+  padding-top: 10px;
+  border-top: 1px dashed #dbe6d3;
+  color: var(--green-dark);
+  font-size: 15px;
+  font-weight: 650;
+}
+.theme-card-count span {
+  margin-left: 8px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 500;
+}
+.theme-section {
+  margin-top: 26px;
+}
+.theme-section-head h2 {
+  margin: 0 0 4px;
+  font-size: 23px;
+}
+.theme-section-head p {
+  margin: 0 0 14px;
+  color: var(--muted);
+  font-size: 15px;
+}
+.theme-poem-grid {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+}
+.theme-poem {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.theme-poem h3 {
+  font-size: 21px;
+  line-height: 1.5;
+}
+.theme-poem-label {
+  margin: 0 0 2px;
+  color: var(--muted);
+  font-size: 13px;
+  letter-spacing: .04em;
+}
+.theme-poem.is-featured {
+  border-top: 3px solid #b99e6c;
+  background: #fffdf7;
+}
+.theme-poem.is-featured .theme-poem-label {
+  color: #8a744f;
+  font-weight: 650;
+}
+.theme-back {
+  margin: 30px 0 8px;
+  font-size: 15px;
+}
+.theme-back a {
+  color: var(--green);
+}
+@media (max-width: 1099px) {
+  .theme-workspace {
+    grid-template-columns: minmax(9rem, 11rem) minmax(0, 1fr);
+    gap: 18px;
+  }
+}
+@media (max-width: 899px) {
+  .theme-workspace {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .theme-nav {
+    position: static;
+    flex-direction: row;
+    overflow-x: auto;
+    padding: 10px;
+  }
+  .theme-nav a {
+    flex: none;
+    padding: 8px 12px;
+    white-space: nowrap;
+  }
+}
+@media (max-width: 699px) {
+  .theme-hero {
+    padding: 24px 20px;
+  }
+  .theme-hero-lead {
+    font-size: 16px;
+  }
+  .theme-cards,
+  .theme-poem-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .theme-card {
+    padding: 18px;
+  }
+  .theme-section-head h2 {
+    font-size: 21px;
+  }
+  .theme-group-head h2 {
+    font-size: 23px;
+  }
+  .theme-nav {
+    flex-wrap: wrap;
+    overflow-x: visible;
+  }
+  .theme-nav a {
+    flex: 1 1 calc(50% - 4px);
+    white-space: normal;
+  }
+}
+/* 诗词首页的专题入口：与飞花令并排，窄屏整行换行，避免挤压标题。 */
+.poetry-index-header {
+  flex-wrap: wrap;
+}
+.poetry-index-actions {
+  flex: 1 1 auto;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+@media (max-width: 699px) {
+  .poetry-index-actions {
+    flex: 1 1 100%;
+    justify-content: flex-start;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .theme-card {
+    transition: none;
+  }
+}

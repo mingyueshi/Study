@@ -1,25 +1,26 @@
 {% extends 'reference_library/layout.html' %}
-{% load reference_ui %}
+{% load reference_ui static %}
 {% block title %}古诗文 · 乐学堂{% endblock %}
 {% block reference_content %}
+<link rel="stylesheet" href="{% static 'poetry/themes.css' %}">
 {% include 'reference_library/breadcrumbs.html' with subject_title='古诗文' %}
-<header class="ref-header"><div><p class="ref-kicker">读原文，寻出处</p>
+<header class="ref-header poetry-index-header"><div><p class="ref-kicker">读原文，寻出处</p>
 <h1>古诗文</h1><p>按题名、作者或选集查找，保留各来源的字形和异文。</p></div>
-<a class="button small" href="{% url 'feihualing' %}">飞花令 · 练五句诗 →</a>
+<div class="ref-actions poetry-index-actions"><a class="button small" href="{% url 'feihualing' %}">飞花令 · 练五句诗 →</a><a class="button small" href="{% url 'poetry-themes' %}">题材分类 · 12 类唐诗宋词 →</a></div>
 </header>
 <form method="get" class="ref-toolbar" role="search" aria-label="查找古诗文">
   <label class="ref-field ref-search">题名或作者<input name="q" value="{{ q }}" maxlength="120" placeholder="李白、杜甫">
 </label>
   <label class="ref-field">来源子集<select name="collection"><option value="">全部子集</option>{% for value in collections %}<option {% if selected_collection == value %}selected{% endif %}>{{ value }}</option>{% endfor %}</select>
 </label>
-  <label class="ref-field">文本层<select name="layer"><option value="">全部文本</option><option value="raw" {% if layer == 'raw' %}selected{% endif %}>原始选集</option><option value="derived" {% if layer == 'derived' %}selected{% endif %}>保守筛选来源</option></select>
+  <label class="ref-field">文本层<select name="layer"><option value="">全部文本</option><option value="simplified" {% if layer == 'simplified' %}selected{% endif %}>简体（默认）</option><option value="raw" {% if layer == 'raw' %}selected{% endif %}>原始选集</option><option value="derived" {% if layer == 'derived' %}selected{% endif %}>保守筛选来源</option></select>
 </label>
   <div class="ref-actions"><button class="button" type="submit">查找</button><a class="ref-clear" href="{% url 'poetry-index' %}">清除筛选</a></div>
 </form>
 {% include 'reference_library/result_count.html' with result_unit='个文本入口' result_note='总集、选集及章节各自保留' %}
 <div class="ref-grid">
   {% for row in page %}<a class="ref-card ref-card-link" href="{% url 'poetry-detail' row.pk %}{% reference_query %}"><p class="ref-meta">{{ row.document.collection }}</p>
-<h2 title="{{ row.title }}">{{ row.title|truncatechars:90 }}</h2><p class="ref-meta">{{ row.author|default:'来源未署作者' }} · {% if row.document.layer == 'raw' %}原始选集{% else %}筛选文本{% endif %}</p><p class="ref-excerpt">{{ row.body|truncatechars:80 }}</p></a>
+<h2 title="{{ row.title }}">{{ row.title|truncatechars:90 }}</h2><p class="ref-meta">{{ row.author|default:'来源未署作者' }} · {% if row.document.layer == 'simplified' %}简体展示{% elif row.document.layer == 'raw' %}原始选集{% else %}筛选文本{% endif %}</p><p class="ref-excerpt">{{ row.body|truncatechars:80 }}</p></a>
   {% empty %}<div class="ref-empty ref-span">
 <h2>没有找到匹配诗文</h2><p>请尝试原题名或作者名，也可以清除筛选后翻阅。</p></div>{% endfor %}
 </div>

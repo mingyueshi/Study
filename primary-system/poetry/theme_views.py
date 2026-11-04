@@ -1,0 +1,72 @@
+"""诗词题材分类专题页：只负责组装配置与分页，分类规则在 themes.py 与 data/themes.json。"""
+from django.core.paginator import Paginator
+from django.http import Http404
+from django.shortcuts import get_object_or_404, render
+from django.views.decorators.cache import never_cache
+from django.views.decorators.http import require_GET
+
+from reference_library.models import Dataset
+
+from . import themes as theme_data
+
+PER_PAGE = 24
+
+
+@never_cache
+@require_GET
+def index(request):
+    get_object_or_404(Dataset, code="poetry", state="ready")
+    dynasty = theme_data.normalize_dynasty(request.GET.get("dynasty", "all"))
+    groups = theme_data.groups(dynasty)
+    total = sum(item["counts"][dynasty] for group in groups for item in group["themes"])
+    theme_total = sum(len(group["themes"]) for group in groups)
+    return render(
+        request,
+        "poetry/themes_index.html",
+        {
+            "groups": groups,
+            "dynasty": dynasty,
+            "dynasty_labels": theme_data.dynasty_labels(),
+            "total": total,
+            "theme_total": theme_total,
+        },
+    )
+
+
+@never_cache
+@require_GET
+def detail(request, code):
+    get_object_or_404(Dataset, code="poetry", state="ready")
+    theme = theme_data.theme_meta(code)
+    if theme is None:
+        raise Http404("题材分类不存在")
+    dynasty = theme_data.normalize_dynasty(request.GET.get("dynasty", "all"))
+    query = request.GET.get("q", "").strip()[:60]
+    theme, rows = theme_data.entries(code, dynasty, query)
+    featured = [row for row in rows if row["featured"]]
+    auto_rows = [row for row in rows if not row["featured"]]
+    page = Paginator(auto_rows, PER_PAGE).get_page(request.GET.get("page"))
+    group = next(
+        (
+            group
+            for group in theme_data.groups()
+            if code in {item["meta"]["code"] for item in group["themes"]}
+        ),
+        None,
+    )
+    return render(
+        request,
+        "poetry/theme_detail.html",
+        {
+            "theme": theme["meta"],
+            "group": group,
+            "page": page,
+            "featured": featured,
+            "auto_total": len(auto_rows),
+            "total": len(rows),
+            "counts": theme["counts"],
+            "dynasty": dynasty,
+            "dynasty_labels": theme_data.dynasty_labels(),
+            "q": query,
+        },
+    )
