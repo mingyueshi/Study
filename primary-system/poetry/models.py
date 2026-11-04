@@ -3,7 +3,7 @@ from django.db import models
 
 class PoetryDocument(models.Model):
     version = models.CharField(
-        max_length=100, default="b8594f81a89752241442f2ce267d6f66f96704ee"
+        max_length=100, default="b8594f81a89752241442f2ce267d6f66f96704ee+t2s017"
     )
     path = models.CharField(max_length=300)
     sha256 = models.CharField(max_length=64)
@@ -61,7 +61,7 @@ class PoetryNode(models.Model):
 
 class PoetryExclusion(models.Model):
     version = models.CharField(
-        max_length=100, default="b8594f81a89752241442f2ce267d6f66f96704ee"
+        max_length=100, default="b8594f81a89752241442f2ce267d6f66f96704ee+t2s017"
     )
     row = models.PositiveIntegerField()
     source_path = models.CharField(max_length=300)

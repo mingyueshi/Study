@@ -23,6 +23,7 @@ from opencc import OpenCC
 from reference_library.models import Dataset, SourceFile
 from .models import PoetryDocument, PoetryText
 from .feihualing import Answer, ExerciseError, KEYWORDS, TARGET, clean, digest
+from .importing import simplified_relative
 
 FORMAT = "feihualing-complete-sentences-v3"
 HAN = re.compile(r"^[\u3400-\u9fff\uf900-\ufaff\U00020000-\U000323af]+$")
@@ -44,9 +45,11 @@ def normalize(value):
 
 
 def scope():
-    return Q(collection__in=("全唐诗", "宋词", "楚辞", "诗经")) | Q(
-        path="poetry/raw/蒙学/qianjiashi.json"
-    )
+    # 简体镜像层只作展示元数据，不作为独立作答来源。
+    return (
+        Q(collection__in=("全唐诗", "宋词", "楚辞", "诗经"))
+        | Q(path="poetry/raw/蒙学/qianjiashi.json")
+    ) & ~Q(layer="simplified")
 
 
 def sentence_units(paragraph):
@@ -250,7 +253,7 @@ def row_hash(row):
 SCHEMA = """
 CREATE TABLE meta (key TEXT PRIMARY KEY, value TEXT NOT NULL) WITHOUT ROWID;
 CREATE TABLE poems (id INTEGER PRIMARY KEY, document_id INTEGER, locator TEXT, fingerprint TEXT,
-    title TEXT, author TEXT, note TEXT);
+    title TEXT, author TEXT, note TEXT, simplified_fingerprint TEXT);
 CREATE TABLE answers (key TEXT PRIMARY KEY, poem_id INTEGER, paragraph INTEGER, position INTEGER,
     source_digest BLOB, text TEXT, priority INTEGER) WITHOUT ROWID;
 CREATE TABLE lookup (text TEXT, answer_key TEXT, PRIMARY KEY(text,answer_key)) WITHOUT ROWID;
@@ -314,6 +317,24 @@ def build(ctx=None, path=None):
             locator = tuple(source.get(key) for key in ("version", "path", "locator"))
             if all(isinstance(value, str) for value in locator):
                 by_source[locator] = poem
+    simplified_docs = {
+        doc["path"]: doc["id"]
+        for doc in PoetryDocument.objects.filter(
+            version=ctx["dataset"]["version"], layer="simplified"
+        ).values("id", "path")
+    }
+    counterparts = {
+        doc_id: simplified_docs[simplified_relative(doc["path"])]
+        for doc_id, doc in ctx["documents"].items()
+        if simplified_relative(doc["path"]) in simplified_docs
+    }
+    simplified_rows = {}
+    for simplified in (
+        PoetryText.objects.filter(document_id__in=set(counterparts.values()))
+        .values("document_id", "locator", "title", "author", "paragraphs", "body")
+        .iterator(chunk_size=500)
+    ):
+        simplified_rows[(simplified["document_id"], simplified["locator"])] = simplified
     try:
         with closing(sqlite3.connect(temporary)) as db:
             db.executescript(SCHEMA)
@@ -353,8 +374,14 @@ def build(ctx=None, path=None):
                         else:
                             preferred = None
                             counts["disabled_preferred"] += 1
+                    simplified_row = simplified_rows.get(
+                        (counterparts.get(row["document_id"]), row["locator"])
+                    )
+                    simplified_fingerprint = (
+                        row_hash(simplified_row) if simplified_row else ""
+                    )
                     db.execute(
-                        "INSERT INTO poems VALUES (?,?,?,?,?,?,?)",
+                        "INSERT INTO poems VALUES (?,?,?,?,?,?,?,?)",
                         (
                             row["id"],
                             row["document_id"],
@@ -363,15 +390,26 @@ def build(ctx=None, path=None):
                             (
                                 preferred["title"]
                                 if preferred
-                                else converter().convert(row["title"])
+                                else (
+                                    simplified_row["title"]
+                                    if simplified_row
+                                    else converter().convert(row["title"])
+                                )
                             ),
                             (
-                                preferred["author"]
-                                if preferred
-                                else converter().convert(row["author"])
-                            ).strip()
-                            or "来源未署作者",
+                                (
+                                    preferred["author"]
+                                    if preferred
+                                    else (
+                                        simplified_row["author"]
+                                        if simplified_row
+                                        else converter().convert(row["author"])
+                                    )
+                                ).strip()
+                                or "来源未署作者"
+                            ),
                             preferred.get("editorial_note", "") if preferred else "",
+                            simplified_fingerprint,
                         ),
                     )
                     for paragraph_index, paragraph in enumerate(paragraphs):
@@ -380,8 +418,18 @@ def build(ctx=None, path=None):
                         counts["incomplete_tails"] += excluded
                         if not raw_units:
                             continue
+                        layer_paragraph = None
+                        if simplified_row is not None and paragraph_index < len(
+                            simplified_row["paragraphs"]
+                        ):
+                            candidate = simplified_row["paragraphs"][paragraph_index]
+                            candidate_units, _ = sentence_units(candidate)
+                            if len(candidate_units) == len(raw_units):
+                                layer_paragraph = candidate
                         shown_units, _ = sentence_units(
-                            overrides.get(paragraph) or converter().convert(paragraph)
+                            overrides.get(paragraph)
+                            or layer_paragraph
+                            or converter().convert(paragraph)
                         )
                         override_ok = len(raw_units) == len(shown_units)
                         for position, source_sentence in enumerate(raw_units):
@@ -499,7 +547,7 @@ def build(ctx=None, path=None):
                     for key, value in meta.items()
                 ],
             )
-            db.execute("PRAGMA user_version=2")
+            db.execute("PRAGMA user_version=3")
             # These indexes are needed only while replacing duplicate preferred rows.
             db.execute("DROP INDEX lookup_answer")
             db.execute("DROP INDEX uses_answer")
@@ -525,7 +573,7 @@ def build(ctx=None, path=None):
 def _check_file(path, inode, size, modified):
     with closing(readonly(path)) as db:
         if (
-            db.execute("PRAGMA user_version").fetchone()[0] != 2
+            db.execute("PRAGMA user_version").fetchone()[0] != 3
             or db.execute("PRAGMA quick_check").fetchone()[0] != "ok"
         ):
             raise sqlite3.DatabaseError("invalid derived index")
@@ -611,7 +659,8 @@ class IndexedCorpus:
     def _source(self, poem_id):
         if poem_id not in self._sources:
             cached = self._query(
-                "SELECT document_id,locator,fingerprint,title,author,note FROM poems WHERE id=?",
+                "SELECT document_id,locator,fingerprint,title,author,note,"
+                "simplified_fingerprint FROM poems WHERE id=?",
                 (poem_id,),
             ).fetchone()
             doc = self.context["documents"].get(cached[0]) if cached else None
@@ -638,7 +687,28 @@ class IndexedCorpus:
             if not row or row_hash(row) != cached[2]:
                 self.path.with_suffix(".dirty").touch()
                 raise ExerciseError("这句诗的资料正在更新，请重新开始再练。", 409)
-            self._sources[poem_id] = (row, cached[3:])
+            if cached[6]:
+                simplified_row = (
+                    PoetryText.objects.filter(
+                        document__version=doc["version"],
+                        document__path=simplified_relative(doc["path"]),
+                        locator=cached[1],
+                    )
+                    .values(
+                        "id",
+                        "document_id",
+                        "locator",
+                        "title",
+                        "author",
+                        "paragraphs",
+                        "body",
+                    )
+                    .first()
+                )
+                if not simplified_row or row_hash(simplified_row) != cached[6]:
+                    self.path.with_suffix(".dirty").touch()
+                    raise ExerciseError("这句诗的资料正在更新，请重新开始再练。", 409)
+            self._sources[poem_id] = (row, cached[3:6])
         return self._sources[poem_id]
 
     def get(self, key):

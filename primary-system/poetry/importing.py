@@ -11,7 +11,24 @@ from lexicon.reference_importing import (
 )
 from .models import PoetryDocument, PoetryText, PoetryNode, PoetryExclusion
 
-VERSION = "b8594f81a89752241442f2ce267d6f66f96704ee"
+# 上游 commit + 简体镜像层修订号（钉死 opencc t2s 0.1.7，见 scripts/build_poetry_simplified_package.py）。
+VERSION = "b8594f81a89752241442f2ce267d6f66f96704ee+t2s017"
+
+TRADITIONAL_FILES = 90
+SIMPLIFIED_FILES = 90
+TRADITIONAL_TEXTS = 73_676
+EXCLUSIONS = 6_276
+
+
+def simplified_relative(relative):
+    """poetry/raw/诗经/shijing.json -> poetry/simplified/诗经/shijing.json
+
+    非 raw/derived 层的路径没有简体对应，返回 None。
+    """
+    parts = relative.split("/")
+    if len(parts) < 3 or parts[1] not in ("raw", "derived"):
+        return None
+    return f"poetry/simplified/{'/'.join(parts[2:])}"
 
 
 def parse_document(value):
@@ -108,13 +125,19 @@ def parse_document(value):
 
 def import_data(input_root, dry_run=False):
     base = locate(input_root, "poetry/source_selection.json").parent
-    files = sorted([*base.glob("raw/**/*.json"), *base.glob("derived/**/*.json")])
-    if len(files) != 90:
-        raise ValidationError(f"古诗文JSON文件数不符：{len(files)}")
+    traditional_files = sorted(
+        [*base.glob("raw/**/*.json"), *base.glob("derived/**/*.json")]
+    )
+    simplified_files = sorted(base.glob("simplified/**/*.json"))
+    if len(traditional_files) != TRADITIONAL_FILES:
+        raise ValidationError(f"古诗文繁体JSON文件数不符：{len(traditional_files)}")
+    if len(simplified_files) != SIMPLIFIED_FILES:
+        raise ValidationError(f"古诗文简体JSON文件数不符：{len(simplified_files)}")
     documents = []
-    count_text = count_nodes = 0
+    simplified_documents = []
+    count_text = count_nodes = count_simplified = 0
     sha = hashlib.sha256()
-    for path in files:
+    for path in traditional_files:
         data = json.loads(path.read_text(encoding="utf-8-sig"))
         relative = "poetry/" + path.relative_to(base).as_posix()
         file_hash = source_digest(path)
@@ -122,7 +145,28 @@ def import_data(input_root, dry_run=False):
         count_text += len(texts)
         count_nodes += len(nodes)
         sha.update((relative + ":" + file_hash + "\n").encode())
-        documents.append((relative, file_hash, data, len(texts), len(nodes)))
+        documents.append((relative, file_hash, data))
+    for path in simplified_files:
+        data = json.loads(path.read_text(encoding="utf-8-sig"))
+        relative = "poetry/" + path.relative_to(base).as_posix()
+        file_hash = source_digest(path)
+        texts, _ = parse_document(data)
+        count_simplified += len(texts)
+        sha.update((relative + ":" + file_hash + "\n").encode())
+        simplified_documents.append((relative, file_hash, data, texts))
+    expected_texts = {
+        simplified_relative(relative): parse_document(data)[0]
+        for relative, _, data in documents
+    }
+    for relative, _, _, texts in simplified_documents:
+        source_texts = expected_texts.get(relative)
+        if source_texts is None:
+            raise ValidationError(f"古诗文简体层缺少繁体对应：{relative}")
+        if [row["locator"] for row in source_texts] != [row["locator"] for row in texts]:
+            raise ValidationError(f"古诗文简体层 locator 不对齐：{relative}")
+        for source_row, simplified_row in zip(source_texts, texts):
+            if len(source_row["paragraphs"]) != len(simplified_row["paragraphs"]):
+                raise ValidationError(f"古诗文简体层段落数不对齐：{relative}")
     excluded = list(
         csv.DictReader(
             (base / "excluded_records.csv").open(encoding="utf-8-sig", newline="")
@@ -130,13 +174,19 @@ def import_data(input_root, dry_run=False):
     )
     sha.update(source_digest(base / "excluded_records.csv").encode())
     checksum = sha.hexdigest()
-    if count_text != 73676 or len(excluded) != 6276:
+    if (
+        count_text != TRADITIONAL_TEXTS
+        or count_simplified != TRADITIONAL_TEXTS
+        or len(excluded) != EXCLUSIONS
+    ):
         raise ValidationError(
-            f"古诗文解析计数不符：正文{count_text}，排除{len(excluded)}"
+            f"古诗文解析计数不符：正文{count_text}，简体{count_simplified}，排除{len(excluded)}"
         )
     result = {
-        "documents": 90,
+        "documents": TRADITIONAL_FILES + SIMPLIFIED_FILES,
+        "documents_simplified": SIMPLIFIED_FILES,
         "texts": count_text,
+        "texts_simplified": count_simplified,
         "nodes": count_nodes,
         "excluded": len(excluded),
         "sha256": checksum,
@@ -158,7 +208,10 @@ def import_data(input_root, dry_run=False):
             relative.split("/")[2],
             data,
         )
-        for relative, file_hash, data, _, _ in documents
+        for relative, file_hash, data in [
+            *documents,
+            *[(row[0], row[1], row[2]) for row in simplified_documents],
+        ]
     )
     text_fields = [
         "document__path",
@@ -182,12 +235,16 @@ def import_data(input_root, dry_run=False):
     ]
 
     def records(kind, fields):
-        for relative, file_hash, data, _, _ in documents:
+        for relative, _, data in documents:
             texts, nodes = parse_document(data)
             for row in sorted(
                 texts if kind == "text" else nodes, key=lambda row: row["locator"]
             ):
                 yield (relative, *(row[field] for field in fields[1:]))
+        if kind == "text":
+            for relative, _, _, texts in simplified_documents:
+                for row in sorted(texts, key=lambda row: row["locator"]):
+                    yield (relative, *(row[field] for field in fields[1:]))
 
     exclusion_fields = [
         "version",
@@ -218,10 +275,10 @@ def import_data(input_root, dry_run=False):
         (PoetryExclusion.objects.order_by("row"), exclusion_fields, exclusion_hash),
     ]
     checks = [
-        (PoetryDocument.objects.all(), 90),
-        (PoetryText.objects.all(), count_text),
+        (PoetryDocument.objects.all(), TRADITIONAL_FILES + SIMPLIFIED_FILES),
+        (PoetryText.objects.all(), count_text + count_simplified),
         (PoetryNode.objects.all(), count_nodes),
-        (PoetryExclusion.objects.all(), 6276),
+        (PoetryExclusion.objects.all(), EXCLUSIONS),
     ]
     if dry_run:
         validate_existing("poetry", VERSION, checksum, checks, fingerprints)
@@ -247,12 +304,17 @@ def import_data(input_root, dry_run=False):
                 PoetryText.objects.count(),
                 PoetryNode.objects.count(),
                 PoetryExclusion.objects.count(),
-            ) != (90, count_text, count_nodes, 6276):
+            ) != (
+                TRADITIONAL_FILES + SIMPLIFIED_FILES,
+                count_text + count_simplified,
+                count_nodes,
+                EXCLUSIONS,
+            ):
                 raise ValidationError("古诗文回执与数量不符")
             return {**result, "unchanged": count_text}
         if PoetryDocument.objects.exists():
             raise ValidationError("已有半成品版本，拒绝重复追加")
-        for relative, file_hash, data, _, _ in documents:
+        for relative, file_hash, data in documents:
             parts = relative.split("/")
             doc = PoetryDocument.objects.create(
                 path=relative,
@@ -267,6 +329,18 @@ def import_data(input_root, dry_run=False):
             )
             PoetryNode.objects.bulk_create(
                 [PoetryNode(document=doc, **r) for r in nodes], batch_size=500
+            )
+        for relative, file_hash, data, texts in simplified_documents:
+            parts = relative.split("/")
+            doc = PoetryDocument.objects.create(
+                path=relative,
+                sha256=file_hash,
+                layer=parts[1],
+                collection=parts[2],
+                original_data=data,
+            )
+            PoetryText.objects.bulk_create(
+                [PoetryText(document=doc, **r) for r in texts], batch_size=500
             )
         PoetryExclusion.objects.bulk_create(
             [

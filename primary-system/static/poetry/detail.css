@@ -1,0 +1,43 @@
+/* 古诗文详情页专用样式，仅由 templates/poetry/detail.html 引入；不改动共享的 reference.css。 */
+.ref-poem { padding-bottom: 34px; }
+.ref-poem-head { margin-bottom: 12px; }
+.ref-poem-layer { display: inline-block; padding: 1px 7px; border: 1px solid var(--line); border-radius: 6px; color: var(--muted); font-size: 12px; font-weight: 600; letter-spacing: .02em; vertical-align: 2px; }
+.ref-poem-byline { color: var(--muted); font-size: 16px; }
+
+/* 同源上一篇 / 下一篇：顶部先交代位置，长文读完后底部还能继续。 */
+.ref-poem-switch { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 0 0 6px; padding: 8px 0; border-top: 1px dashed var(--line); border-bottom: 1px dashed var(--line); }
+.ref-poem-switch a { display: inline-flex; align-items: center; min-height: 44px; max-width: 48%; padding: 4px 10px; border-radius: 10px; color: var(--green); font-size: 15px; line-height: 1.5; }
+.ref-poem-switch a:hover { background: var(--soft); }
+.ref-poem-switch a.next { margin-left: auto; text-align: right; }
+.ref-poem-switch .is-empty { flex: 0 0 0; }
+.ref-poem-switch-bottom { margin: 4px 0 20px; }
+
+/* 诗行与散文分开排：短诗保持舒展，散文收紧行距；超长文本再压一档。 */
+.ref-poem-text.is-verse p { margin: 0 0 12px; font-size: 22px; line-height: 1.95; letter-spacing: .02em; }
+.ref-poem-text.is-prose p { margin: 0 0 14px; font-size: 18px; line-height: 1.95; letter-spacing: .01em; text-align: justify; }
+.ref-poem-text.is-verse.is-long p { margin-bottom: 8px; font-size: 19px; line-height: 1.8; }
+.ref-poem-text.is-prose.is-long p { margin-bottom: 12px; font-size: 17px; line-height: 1.9; }
+
+/* 来源拼音是辅助信息：去掉每行重复的 label，缩小并弱化，不打断正文。 */
+.ref-poem-text small { display: block; margin-top: 3px; color: #7a8d81; font-size: 13px; line-height: 1.6; letter-spacing: .02em; }
+.ref-poem-text.is-long small { font-size: 12px; }
+.ref-poem-text .ref-poem-empty { color: var(--muted); font-size: 17px; line-height: 1.9; text-align: left; }
+.ref-poem .ref-reading-note { margin-bottom: 0; padding-left: 12px; border-left: 3px solid var(--line); }
+
+/* 长文阅读后回到顶部，避免在几百行正文里手动长滚。 */
+.ref-poem-top { position: fixed; right: 24px; bottom: 28px; z-index: 20; display: inline-flex; align-items: center; min-height: 44px; padding: 8px 14px; border: 1px solid var(--line); border-radius: 999px; background: var(--white); color: var(--green); font-size: 14px; box-shadow: 0 6px 18px #233e3714; }
+.ref-poem-top:hover { background: var(--soft); }
+
+@media (max-width: 699px) {
+  .ref-poem { padding: 20px 18px 26px; }
+  .ref-poem-text { margin: 18px auto 22px; }
+  .ref-poem-text.is-verse p { margin-bottom: 10px; font-size: 20px; line-height: 1.85; }
+  .ref-poem-text.is-prose p { margin-bottom: 12px; font-size: 17px; line-height: 1.9; }
+  .ref-poem-text.is-verse.is-long p { font-size: 18px; line-height: 1.75; }
+  .ref-poem-switch a { max-width: 50%; padding-inline: 6px; font-size: 14px; }
+  .ref-poem-top { right: 14px; bottom: 16px; min-height: 40px; padding: 7px 12px; font-size: 13px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ref-poem-switch a { transition: none; }
+}

@@ -1,14 +1,23 @@
 {% extends 'reference_library/layout.html' %}
-{% load reference_ui %}
-{% block title %}{{ record.title }} · 古诗文{% endblock %}
+{% load static reference_ui %}
+{% block title %}{{ record.title|default:'无题' }} · 古诗文{% endblock %}
 {% block reference_content %}
+<link rel="stylesheet" href="{% static 'poetry/detail.css' %}">
 {% url 'poetry-index' as list_url %}
 {% include 'reference_library/breadcrumbs.html' with subject_title='古诗文' subject_url=list_url current_title=record.title %}
-<article class="ref-poem">
-  <header class="ref-header"><div><p class="ref-kicker">{{ record.document.collection }}</p>
-<h1>{{ record.title }}</h1><p>{{ record.author|default:'来源未署作者' }}</p></div>
+<article class="ref-poem" id="poem-top">
+  <header class="ref-header ref-poem-head"><div><p class="ref-kicker">{{ record.document.collection }}{% if record.document.collection %} · {% endif %}<span class="ref-poem-layer">{{ layer_label }}</span>{% if pair %} · <a href="{% url 'poetry-detail' pair.pk %}{% reference_query %}">{% if current_layer == 'simplified' %}查看繁体原文{% else %}查看简体展示{% endif %}</a>{% endif %}</p>
+<h1{% if record.title %} title="{{ record.title }}"{% endif %}>{{ record.title|default:'无题' }}</h1><p class="ref-poem-byline">{% if record.author %}{{ record.author }}{% else %}来源未标注作者{% endif %}</p></div>
 </header>
-  <div class="ref-poem-text">{% for line in line_rows %}<p>{{ line.text }}{% if line.pinyin %}<small>来源拼音：{{ line.pinyin }}</small>{% endif %}</p>{% endfor %}</div>
+  {% if prev or next %}<nav class="ref-poem-switch" aria-label="同一来源文件的相邻篇目">
+    {% if prev %}<a class="prev" href="{% url 'poetry-detail' prev.pk %}{% reference_query %}" title="{{ prev.title }}"><span aria-hidden="true">←</span> {{ prev.title|default:'无题'|truncatechars:18 }}</a>{% else %}<span class="is-empty" aria-hidden="true"></span>{% endif %}
+    {% if next %}<a class="next" href="{% url 'poetry-detail' next.pk %}{% reference_query %}" title="{{ next.title }}">{{ next.title|default:'无题'|truncatechars:18 }} <span aria-hidden="true">→</span></a>{% endif %}
+  </nav>{% endif %}
+  <div class="ref-poem-text {{ text_style }}">{% for line in line_rows %}<p>{{ line.text }}{% if line.pinyin %}<small>{{ line.pinyin }}</small>{% endif %}</p>{% empty %}<p class="ref-poem-empty">本条目没有可展示的正文，可展开下方来源信息核对原始字段。</p>{% endfor %}</div>
+  {% if prev or next %}<nav class="ref-poem-switch ref-poem-switch-bottom" aria-label="同一来源文件的相邻篇目">
+    {% if prev %}<a class="prev" href="{% url 'poetry-detail' prev.pk %}{% reference_query %}" title="{{ prev.title }}"><span aria-hidden="true">←</span> {{ prev.title|default:'无题'|truncatechars:18 }}</a>{% else %}<span class="is-empty" aria-hidden="true"></span>{% endif %}
+    {% if next %}<a class="next" href="{% url 'poetry-detail' next.pk %}{% reference_query %}" title="{{ next.title }}">{{ next.title|default:'无题'|truncatechars:18 }} <span aria-hidden="true">→</span></a>{% endif %}
+  </nav>{% endif %}
   <p class="ref-reading-note">保留来源原文、字形及异文；现代中文解释和全文注音待补。</p>
   {% if origins %}<section class="ref-related">
 <h2>来源姓氏与郡望</h2><ul>{% for origin in origins %}<li>{{ origin.surname }} · {{ origin.place }}</li>{% endfor %}</ul>
@@ -27,6 +36,7 @@
 </details>
 </article>
 <section class="ref-related">
-<h2>同一来源文件的其他篇目</h2><div class="ref-inline-links">{% for item in siblings %}<a href="{% url 'poetry-detail' item.pk %}{% reference_query %}">{{ item.title }}</a>{% empty %}<p class="ref-meta">本来源没有其他篇目。</p>{% endfor %}</div>
+<h2>同一来源文件的其他篇目</h2><div class="ref-inline-links">{% for item in siblings %}<a href="{% url 'poetry-detail' item.pk %}{% reference_query %}" title="{{ item.title }}">{{ item.title|default:'无题'|truncatechars:40 }}</a>{% empty %}<p class="ref-meta">本来源没有其他篇目。</p>{% endfor %}</div>
 </section>
+{% if line_rows|length > 40 %}<a class="ref-poem-top" href="#poem-top">回到顶部 ↑</a>{% endif %}
 {% endblock %}

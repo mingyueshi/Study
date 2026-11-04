@@ -72,7 +72,7 @@ class PoetryViewTests(TestCase):
 
     def test_list_does_not_load_original_document_json(self):
         with CaptureQueriesContext(connection) as captured:
-            response = self.client.get("/poetry/")
+            response = self.client.get("/poetry/?layer=raw")
         self.assertEqual(response.status_code, 200)
         selects = [
             query["sql"]
