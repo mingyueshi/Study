@@ -69,8 +69,8 @@
 
    【插图规范】
    - 古诗文意境图统一放在 images/poems/ 目录，文件名与篇名拼音对应
-   - 推荐风格：中国传统水墨画（ink wash painting），landscape_4_3 比例
-   - 课文插图可放在 images/lessons/ 目录，fig 字段仍保留 SVG 图示用于结构示意
+   - 课文实景照片放在 images/lessons/ 目录（来源 Pexels 免费图库，自用学习）
+   - fig 字段保留 SVG 图示用于结构示意，img 字段放真实照片，两者可共存
    - 图片使用 loading="lazy" 懒加载，onerror 自动隐藏
 
    家长注意：生字表、背诵篇目等细节请以孩子手中课本为准。
@@ -93,7 +93,7 @@ const KB = {
       lessons: [
         {
           id: '1', title: '观潮', tag: '精读', author: '赵宗成 朱明元',
-          fig: 'tide',
+          fig: 'tide', img: 'images/lessons/qiantang.jpg',
           overview: '课文描绘了农历八月十八钱塘江大潮由远而近、奔腾西去的全过程：声音越来越大，浪头越来越高，气势越来越雄壮，不愧为“天下奇观”。',
           main: [
             '潮来前：江面风平浪静，海塘大堤上早已人山人海，大家昂首东望，等着、盼着。',
@@ -130,7 +130,7 @@ const KB = {
           recite: '第 3、4 自然段（课文要求背诵）',
         },
         {
-          id: '2', title: '繁星', tag: '略读', author: '巴金', fig: 'stars',
+          id: '2', title: '繁星', tag: '略读', author: '巴金', fig: 'stars', img: 'images/lessons/stars.jpg',
           overview: '课文按时间顺序回忆了“从前在家乡庭院”“三年前在南京住处后门”“如今在海上”三次看星星的情景，写出了繁星满天的柔美与梦幻。',
           main: [
             '从前在家乡：七八月的夜晚在庭院里纳凉，最爱看密密麻麻的繁星，望着星天就会忘记一切，仿佛回到了母亲的怀里。',
@@ -218,7 +218,7 @@ const KB = {
         },
         {
           id: '5', title: '夜间飞行的秘密', tag: '精读', author: '',
-          fig: 'bat-radar',
+          fig: 'bat-radar', img: 'images/lessons/bat.jpg',
           overview: '科学家为了弄清蝙蝠为什么能在漆黑的夜里灵巧地飞行，做了三次实验，发现蝙蝠靠嘴和耳朵配合起来探路，后来人们据此发明了雷达。',
           main: [
             '提出问题：蝙蝠在夜里飞行，还能灵巧地躲开障碍物，它有什么特别的本领？',
@@ -343,7 +343,7 @@ const KB = {
         },
         {
           id: '9', title: '爬山虎的脚', tag: '精读', author: '叶圣陶',
-          fig: 'ivy-foot',
+          fig: 'ivy-foot', img: 'images/lessons/ivy.jpg',
           overview: '课文细致描写了爬山虎叶子和脚的特点，以及它怎样一脚一脚往上爬，处处体现作者连续细致的观察。',
           main: [
             '叶子：刚长出来的是嫩红的，不几天变成嫩绿；叶尖一顺儿朝下，在墙上铺得均匀，没有重叠，也不留一点儿空隙。',
@@ -378,7 +378,7 @@ const KB = {
         },
         {
           id: '10', title: '蟋蟀的住宅', tag: '精读', author: '法布尔〔法国〕',
-          fig: 'cricket-home',
+          fig: 'cricket-home', img: 'images/lessons/cricket.jpg',
           overview: '课文介绍了蟋蟀住宅的特点（选址、洞口、平台、隧道、墙壁）和修建住宅的过程，赞扬了蟋蟀吃苦耐劳、不肯随遇而安的精神。',
           main: [
             '住宅特点：朝着阳光、隐蔽、门口有半掩的草丛，门口有一个倾斜的隧道，即使有骤雨也容易排水；墙壁光滑、收拾得很简朴清洁。',
@@ -581,7 +581,7 @@ const KB = {
       },
       lessons: [
         {
-          id: '15', title: '麻雀', tag: '精读', author: '屠格涅夫〔俄国〕', fig: 'sparrow',
+          id: '15', title: '麻雀', tag: '精读', author: '屠格涅夫〔俄国〕', fig: 'sparrow', img: 'images/lessons/sparrow.jpg',
           overview: '猎狗发现一只从巢里掉下来的小麻雀，正要吃掉它。老麻雀像一块石头似的落在猎狗面前，扎煞起全身的羽毛，用身躯掩护小麻雀。猎狗愣住了，慢慢地向后退。',
           main: [
             '起因：风摇撼着梧桐树，一只小麻雀从巢里摔了下来，猎狗慢慢走近它。',
@@ -612,7 +612,7 @@ const KB = {
           ],
         },
         {
-          id: '16', title: '爬天都峰', tag: '精读', author: '黄亦波', fig: 'tiandufeng',
+          id: '16', title: '爬天都峰', tag: '精读', author: '黄亦波', fig: 'tiandufeng', img: 'images/lessons/tiandufeng.jpg',
           overview: '假日里，“我”和爸爸去爬天都峰。天都峰又高又陡，“我”在山脚下犹豫时遇到一位老爷爷，两人互相鼓励，一鼓作气爬上了峰顶。',
           main: [
             '天都峰又高又陡：“峰顶这么高，在云彩上面哩！”石级边上的铁链，似乎是从天上挂下来的。',
@@ -649,7 +649,7 @@ const KB = {
       lessons: [
         {
           id: '17', title: '长城', tag: '精读', author: '',
-          fig: 'greatwall-section',
+          fig: 'greatwall-section', img: 'images/lessons/greatwall.jpg',
           overview: '课文从远看和近看两方面介绍长城：远看像一条长龙，在崇山峻岭之间蜿蜒盘旋；近看高大坚固、设计巧妙。长城是劳动人民血汗和智慧的结晶。',
           main: [
             '远看长城：像一条长龙，从东头的山海关到西头的嘉峪关，有一万三千多里。',
@@ -677,7 +677,7 @@ const KB = {
         },
         {
           id: '18', title: '颐和园', tag: '精读', author: '',
-          fig: 'route-map',
+          fig: 'route-map', img: 'images/lessons/yiheyuan.jpg',
           overview: '课文按照游览顺序（长廊 → 万寿山 → 昆明湖 → 十七孔桥），抓住景物特点，描绘了颐和园的美丽景色。',
           main: [
             '长廊：绿漆的柱子，红漆的栏杆，一眼望不到头；每一间的横槛上都画着五彩的画；两旁栽满花木。',
@@ -710,7 +710,7 @@ const KB = {
           ],
         },
         {
-          id: '19', title: '秦兵马俑', tag: '略读', author: '', fig: 'terracotta',
+          id: '19', title: '秦兵马俑', tag: '略读', author: '', fig: 'terracotta', img: 'images/lessons/terracotta.jpg',
           overview: '课文介绍了秦兵马俑规模宏大、类型众多、个性鲜明的特点，展现了中华民族悠久灿烂的文化。',
           main: [
             '规模宏大：已发掘的三个俑坑总面积达 19120 平方米，差不多有五十个足球场那么大，坑内有兵马俑近八千个。',

@@ -1,6 +1,7 @@
 /* ============================================================
    乐学堂 · 语文知识点 —— 界面逻辑
    单元切换 / 课文知识卡 / 必背古诗文 / 日积月累 / 字词复习
+   真实素材：作者小传 / 原文金句 / 真实百科 / 拓展视频
    搜索 / 点读 / 已复习标记 / 打印
    ============================================================ */
 'use strict';
@@ -100,9 +101,57 @@ function ksec(label, inner) {
   return '<div class="ksec"><span class="seclabel">' + label + '</span>' + inner + '</div>';
 }
 
+/* ---------- 真实素材（knowledge-real.js / knowledge-videos.js） ---------- */
+function kexOf(key) {
+  return (window.KEX && window.KEX.lessons && window.KEX.lessons[key]) || null;
+}
+
+function authorBio(author, color) {
+  if (!author || !window.KEX) return '';
+  const a = window.KEX.authors && window.KEX.authors[author];
+  if (!a) return '';
+  return '<div class="kbio" style="--c:' + color + '">' +
+    '<span class="kbio-ava" aria-hidden="true">👤</span>' +
+    '<div class="kbio-body"><b>' + esc(author) + '</b><i>' + esc(a.life) + '</i>' +
+    '<p>' + esc(a.bio) + '</p></div>' +
+    sayBtn(author + '。作者小传。' + a.life + '。' + a.bio) +
+    '</div>';
+}
+
+function excerptSec(ex, color) {
+  if (!ex || !ex.excerpts || !ex.excerpts.length) return '';
+  return ksec('句', '<div class="kb-quotes" style="--c:' + color + '">' + ex.excerpts.map(q =>
+    '<button class="kb-quote" data-act="say" data-t="' + esc(q) + '">✒️ ' + esc(q) + '</button>').join('') + '</div>');
+}
+
+function factSec(ex) {
+  if (!ex || !ex.facts || !ex.facts.length) return '';
+  return ksec('世', '<ul class="klist kbfacts">' + ex.facts.map(f =>
+    '<li><button class="kli" data-act="say" data-t="' + esc(f) + '">🌍 ' + esc(f) + '</button></li>').join('') + '</ul>');
+}
+
+function videoSec(key) {
+  const vids = (window.KB_VIDEOS && window.KB_VIDEOS.byLesson(key)) || null;
+  if (!vids || !vids.length) return '';
+  return ksec('看', '<div class="kb-videos">' + vids.map(v =>
+    '<a class="kbv" href="' + KB_VIDEOS.link(v) + '" target="_blank" rel="noopener" title="在B站打开：' + esc(v.title) + '">' +
+    '<span class="kbv-play" aria-hidden="true">▶</span>' +
+    '<span class="kbv-main"><b>' + esc(v.title) + '</b><i>' + esc(v.up) + ' · ' + KB_VIDEOS.fmt(v.dur) + ' · ' + esc(v.note) + '</i></span></a>').join('') + '</div>');
+}
+
+function poemVideoSec(title) {
+  const vids = (window.KB_VIDEOS && window.KB_VIDEOS.byPoem(title)) || null;
+  if (!vids || !vids.length) return '';
+  return '<div class="kb-videos kb-videos-poem">' + vids.map(v =>
+    '<a class="kbv" href="' + KB_VIDEOS.link(v) + '" target="_blank" rel="noopener" title="在B站打开：' + esc(v.title) + '">' +
+    '<span class="kbv-play" aria-hidden="true">▶</span>' +
+    '<span class="kbv-main"><b>' + esc(v.title) + '</b><i>' + esc(v.up) + ' · ' + KB_VIDEOS.fmt(v.dur) + ' · ' + esc(v.note) + '</i></span></a>').join('') + '</div>';
+}
+
 function lessonCard(u, l) {
   const key = lessonKey(u, l);
   const learned = !!kbState.learned[key];
+  const ex = kexOf(key);
   const parts = [];
 
   parts.push('<article class="kcard' + (learned ? ' learned' : '') + '" style="--c:' + u.color + '" data-key="' + key + '">');
@@ -113,7 +162,8 @@ function lessonCard(u, l) {
     '<span class="khead-gap"></span>' + sayBtn(l.title + '。' + l.overview) +
     '<button class="learn-btn' + (learned ? ' on' : '') + '" data-act="learn" data-unit="' + u.id + '" data-id="' + esc(l.id) + '" title="标记已复习" aria-pressed="' + learned + '" aria-label="已复习 ' + esc(l.title) + '">' + (learned ? '✓' : '') + '</button></div>');
   parts.push('<p class="k-overview">' + esc(l.overview) + '</p>');
-  if (l.img) parts.push('<img class="kimg" src="' + esc(l.img) + '" alt="' + esc(l.title) + ' 插图" loading="lazy" onerror="this.style.display=\'none\'">');
+  parts.push(authorBio(l.author, u.color));
+  if (l.img) parts.push('<img class="kimg" src="' + esc(l.img) + '" alt="' + esc(l.title) + ' 实景照片" loading="lazy" onerror="this.style.display=\'none\'">');
   if (l.fig && window.Figures) parts.push(Figures.figHTML(l.fig));
 
   if (l.main && l.main.length) {
@@ -123,6 +173,7 @@ function lessonCard(u, l) {
   if (l.theme) {
     parts.push(ksec('旨', '<button class="ktheme" data-act="say" data-t="' + esc(l.theme) + '">' + esc(l.theme) + '</button>'));
   }
+  parts.push(excerptSec(ex, u.color));
   if (l.words && l.words.length) parts.push(ksec('词', wordPills(l.words)));
   if (l.fourWords && l.fourWords.length) parts.push(ksec('汇', fourWordChips(l.fourWords)));
   if (l.poly && l.poly.length) parts.push(ksec('音', polyRows(l.poly)));
@@ -130,6 +181,7 @@ function lessonCard(u, l) {
   if (l.craft) {
     parts.push(ksec('法', '<button class="kcraft" data-act="say" data-t="' + esc(l.craft) + '">' + esc(l.craft) + '</button>'));
   }
+  parts.push(factSec(ex));
   if (l.tips && l.tips.length) {
     parts.push(ksec('考', '<ul class="klist tips">' + l.tips.map(t =>
       '<li><button class="kli" data-act="say" data-t="' + esc(t) + '">⭐ ' + esc(t) + '</button></li>').join('') + '</ul>'));
@@ -137,6 +189,7 @@ function lessonCard(u, l) {
   if (l.recite) {
     parts.push('<div class="krecite">📖 背诵：' + esc(l.recite) + '</div>');
   }
+  parts.push(videoSec(key));
   parts.push('</article>');
   return parts.join('');
 }
@@ -202,10 +255,27 @@ function renderUnit(u) {
 }
 
 /* ---------- 必背古诗文 ---------- */
+function poetBio(p) {
+  if (!window.KEX) return '';
+  const src = !p.author && window.KEX.sources && window.KEX.sources[p.dynasty];
+  const poet = p.author && window.KEX.poets && window.KEX.poets[p.author];
+  const who = poet || src;
+  if (!who) return '';
+  const name = poet ? p.author : p.dynasty;
+  const label = poet ? '诗人小传' : '出处小传';
+  return '<div class="kbio kbio-poem">' +
+    '<span class="kbio-ava" aria-hidden="true">' + (poet ? '🖌️' : '📜') + '</span>' +
+    '<div class="kbio-body"><b>' + esc(name) + '</b><i>' + esc(who.life) + '</i>' +
+    '<p>' + esc(who.bio) + '</p></div>' +
+    sayBtn(name + '。' + label + '。' + who.bio) +
+    '</div>';
+}
+
 function poemCard(p) {
   const meta = p.kind === '文言文' ? esc(p.dynasty) : esc(p.dynasty + ' · ' + p.author);
   const fig = (p.fig && window.Figures) ? Figures.figHTML(p.fig) : '';
   const img = p.img ? '<img class="pimg" src="' + esc(p.img) + '" alt="' + esc(p.title) + ' 意境图" loading="lazy" onerror="this.style.display=\'none\'">' : '';
+  const bg = (window.KEX && window.KEX.poems && window.KEX.poems[p.title]) ? window.KEX.poems[p.title].bg : '';
   return '<article class="poem-card" style="--c:#8b65c9">' +
     '<div class="phead"><h3>' + esc(p.title) + '</h3><span class="pmeta">' + meta +
     '<span class="pkind">' + esc(p.kind) + '</span></span>' + sayBtn(p.title + '。' + p.lines.join('')) + '</div>' +
@@ -216,6 +286,9 @@ function poemCard(p) {
     '<p class="pnote">' + esc(p.note) + '</p>' +
     (p.notes ? '<div class="pnotes">' + p.notes.map(n =>
       '<span class="pnote-row"><b>' + esc(n[0]) + '</b>' + esc(n[1]) + '</span>').join('') + '</div>' : '') +
+    (bg ? '<div class="pbg">📝 <b>创作背景</b>' + esc(bg) + '</div>' : '') +
+    poetBio(p) +
+    poemVideoSec(p.title) +
     '</article>';
 }
 
@@ -263,8 +336,12 @@ function searchResults(q) {
   const ql = q.toLowerCase();
   const lessonHits = [];
   KB.units.forEach(u => u.lessons.forEach(l => {
+    const ex = kexOf(lessonKey(u, l));
+    const authorBio = (l.author && window.KEX && window.KEX.authors && window.KEX.authors[l.author]) || null;
     const hay = [l.title, l.author, l.overview, l.theme, l.craft, (l.main || []).join(''), (l.tips || []).join(''),
-      (l.words || []).map(w => w[0]).join(''), (l.fourWords || []).join('')].join(' ').toLowerCase();
+      (l.words || []).map(w => w[0]).join(''), (l.fourWords || []).join(''),
+      ex ? (ex.excerpts || []).join('') + (ex.facts || []).join('') : '',
+      authorBio ? authorBio.bio : ''].join(' ').toLowerCase();
     if (hay.includes(ql)) lessonHits.push({ u, l });
   }));
   const poemHits = KB.poems.filter(p =>
