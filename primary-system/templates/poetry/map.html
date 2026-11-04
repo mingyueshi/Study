@@ -1,0 +1,27 @@
+{% extends 'base.html' %}{% load static %}{% block title %}诗词地图 · 乐学堂{% endblock %}
+{% block content %}<link rel="stylesheet" href="{% static 'poetry/map.css' %}"><script src="{% static 'speech.js' %}" defer></script><script src="{% static 'tts.js' %}" defer></script>
+<a class="back" href="{% url 'home' %}">← 学习广场</a>
+<div class="page-heading"><p class="eyebrow">古诗词 · 一座城一首诗</p><h1>诗词地图</h1><p>去哪儿玩之前，先查查那里有什么诗。点地图上的地名，或在左边搜城市。</p></div>
+<section class="map-shell">
+  <aside class="map-side">
+    <div class="map-search"><input id="map-search" type="search" placeholder="搜地名 / 城市 / 省份…" aria-label="搜索地点"></div>
+    <div class="map-provinces" id="map-provinces"><button class="chip on" type="button" data-province="">全部</button>{% for p in provinces %}<button class="chip" type="button" data-province="{{ p }}">{{ p }}</button>{% endfor %}</div>
+    <nav class="map-list" id="map-list" aria-label="地点列表">{% for place in places %}<a class="place-row" href="?place={{ place.id }}" data-name="{{ place.name }}" data-city="{{ place.city }}" data-province="{{ place.province }}" {% if place.id == selected.id %}aria-current="page"{% endif %}><span class="place-emoji" aria-hidden="true">{{ place.emoji }}</span><span class="place-text">{{ place.name }}<i>{{ place.city }} · {{ place.province }}</i></span><span class="place-count">{{ place.poem_count }}</span></a>{% endfor %}</nav>
+  </aside>
+  <div class="map-board">
+    <div class="china-wrap"><svg class="china-map" viewBox="0 0 {{ map_width }} {{ map_height }}" role="img" aria-label="诗词地点分布图（示意图）">{{ map_svg|safe }}{% for place in places %}<a class="map-marker{% if place.id == selected.id %} on{% endif %}" href="?place={{ place.id }}" data-name="{{ place.name }}" data-city="{{ place.city }}" data-province="{{ place.province }}" transform="translate({{ place.x }} {{ place.y }})"><circle r="9"/><text class="marker-emoji" y="4">{{ place.emoji }}</text><text class="marker-label" y="-13">{{ place.name }}</text></a>{% endfor %}</svg></div>
+    <article class="place-panel">
+      <header class="place-head"><h2>{{ selected.emoji }} {{ selected.name }}</h2><p class="place-meta">{{ selected.kind }} · {{ selected.city }} · {{ selected.province }} · {{ selected.poem_count }} 首</p><p class="place-blurb">{{ selected.blurb }}</p></header>
+      {% if selected.featured %}<section class="poem-featured">
+        <p class="poem-tag">代表诗</p><h3>{{ selected.featured.title }}</h3><p class="poem-author">{{ selected.featured.author }}</p>
+        <p class="poem-quote">{{ selected.featured.quote }}</p>
+        <p class="poem-note">{{ selected.featured.note }}</p>
+        <div class="poem-actions"><button class="button small" type="button" data-say="{{ selected.featured.title }}。{{ selected.featured.author }}。{{ selected.featured.quote }}" aria-label="朗读 {{ selected.featured.title }}">🔊 读一读</button>{% if selected.featured.pk %}<a class="button small" href="{% url 'poetry-detail' selected.featured.pk %}">读原诗 →</a>{% endif %}</div>
+      </section>{% else %}<p class="poem-missing">这首诗的语料还在整理中。</p>{% endif %}
+      {% if selected.others %}<section class="poem-others"><h4>这里还有</h4>{% for poem in selected.others %}<div class="poem-row"><div class="poem-row-main"><b>{{ poem.title }}</b><span class="poem-author">{{ poem.author }}</span><p class="poem-quote">{{ poem.quote }}</p><p class="poem-note">{{ poem.note }}</p></div><div class="poem-row-actions"><button class="say-chip" type="button" data-say="{{ poem.title }}。{{ poem.author }}。{{ poem.quote }}" aria-label="朗读 {{ poem.title }}">🔊</button>{% if poem.pk %}<a class="say-chip link" href="{% url 'poetry-detail' poem.pk %}" aria-label="打开 {{ poem.title }} 原诗">↗</a>{% endif %}</div></div>{% endfor %}</section>{% endif %}
+      <p class="map-source">诗篇定位自古诗文固定语料（简体层）；地图为示意底图，地点坐标用于学习定位。</p>
+    </article>
+  </div>
+</section>
+<script src="{% static 'poetry/map.js' %}" defer></script>
+{% endblock %}

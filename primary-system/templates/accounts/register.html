@@ -1,0 +1,2 @@
+{% extends 'base.html' %}{% block title %}快速注册 · 乐学堂{% endblock %}
+{% block content %}<section class="auth-card"><p class="eyebrow">第一次来</p><h1>建一个学习账号</h1><p>只要一个用户名和密码，不用手机号也不用邮箱，三十秒开始学习。</p><form method="post" class="stack-form">{% csrf_token %}{{ form.as_p }}<input type="hidden" name="next" value="{{ request.GET.next|default:'' }}"><div class="auth-actions"><button class="button" type="submit">注册并开始学习</button><a class="button auth-register" href="{% url 'login' %}">直接登录</a></div></form><p class="muted">忘记密码时请联系管理员。</p></section>{% endblock %}

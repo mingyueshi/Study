@@ -1,0 +1,54 @@
+/* 成语典故馆：故事卡网格 + 人物线索；与场景成语同色系（青绿山水）。 */
+.hall-hero h1 { font-size: 34px; margin-bottom: 6px; }
+.hall-hero p { max-width: 60ch; color: var(--muted, #6b7480); font-size: 17px; line-height: 1.85; }
+.hall-toolbar { display: flex; flex-direction: column; gap: 10px; margin: 20px 0 22px; }
+.hall-label { display: inline-block; flex-shrink: 0; min-width: 64px; color: var(--muted, #6b7480); font-size: 15px; font-weight: 700; }
+.hall-books, .hall-figures { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.hall-books .chip { min-height: 38px; padding: 6px 13px; border: 1px solid #d5e0ca; border-radius: 11px; background: var(--white, #fff); color: #3d4750; font-size: 15px; }
+.hall-books .chip:hover { border-color: var(--green, #2f7d4f); }
+.hall-books .chip.on { border-color: var(--green, #2f7d4f); background: var(--green, #2f7d4f); color: #fff; font-weight: 700; }
+.hall-books .chip-clear { border-style: dashed; color: var(--muted, #6b7480); }
+.hall-figures { max-height: 120px; overflow-y: auto; align-items: flex-start; }
+.figure-chip { display: inline-flex; align-items: center; gap: 5px; min-height: 36px; padding: 5px 11px; border: 1px solid #e0e8d6; border-radius: 20px; background: #f8fbf4; color: #33404d; font-size: 15px; }
+.figure-chip i { font-style: normal; color: var(--muted, #6b7480); font-size: 13px; }
+.figure-chip:hover { border-color: var(--green, #2f7d4f); background: #eef5e6; }
+.figure-chip.on { border-color: var(--green, #2f7d4f); background: var(--green, #2f7d4f); color: #fff; }
+.figure-chip.on i { color: #d9ecda; }
+
+.figure-clue { padding: 16px 18px; border: 1px solid #cfe0c2; border-radius: 16px; background: #f2f8ea; }
+.figure-card { display: flex; gap: 14px; align-items: center; }
+.figure-emoji { display: grid; place-items: center; flex: 0 0 52px; width: 52px; height: 52px; border-radius: 14px; background: #fff; font-size: 28px; }
+.figure-card h2 { margin: 0; font-size: 22px; }
+.figure-card h2 i { margin-left: 10px; font-style: normal; color: var(--muted, #6b7480); font-size: 15px; font-weight: 500; }
+.figure-card p { margin: 4px 0 0; color: #4d5c54; font-size: 15px; line-height: 1.75; }
+.figure-books { margin: 10px 0 0; color: #4d5c54; font-size: 15px; }
+.figure-books b { color: var(--green, #2f7d4f); }
+
+.hall-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); align-items: start; gap: 18px; }
+.story-card { padding: 20px; border: 1px solid #dfe8d3; border-radius: 18px; background: var(--white, #fff); box-shadow: 0 3px 0 #2a1a3806; }
+.story-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.story-idiom b { font-size: 27px; font-weight: 900; letter-spacing: 1px; }
+.story-book { display: block; margin-top: 4px; color: var(--muted, #6b7480); font-size: 14px; }
+.story-actions { display: flex; gap: 8px; flex-shrink: 0; }
+.say-chip { display: grid; place-items: center; width: 40px; height: 40px; border: 1px solid #cfe0c2; border-radius: 11px; background: #fff; font-size: 17px; }
+.say-chip:hover { background: #eef6e6; }
+.say-chip.link { text-decoration: none; color: var(--green, #2f7d4f); font-weight: 800; }
+.story-quote { margin: 14px 0 0; padding: 10px 14px; border-left: 4px solid #cdddbb; border-radius: 0 12px 12px 0; background: #f6faf0; color: #4d5c54; font-size: 15px; line-height: 1.9; }
+.story-body { margin: 12px 0 0; }
+.story-body p { margin: 0; color: #2f3a33; font-size: 16px; line-height: 2.0; }
+.story-meaning { margin: 12px 0 0; padding: 9px 13px; border-radius: 11px; background: #eef6e6; color: #35602c; font-size: 15px; line-height: 1.8; }
+.story-meaning b { margin-right: 8px; padding: 1px 8px; border-radius: 7px; background: var(--green, #2f7d4f); color: #fff; font-size: 13px; }
+.story-figures { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.figure-mini { display: inline-flex; align-items: center; gap: 5px; padding: 5px 11px; border: 1px solid #e0e8d6; border-radius: 18px; background: #f8fbf4; color: #33404d; font-size: 14px; }
+.figure-mini:hover { border-color: var(--green, #2f7d4f); background: #eef5e6; }
+.story-example { margin: 10px 0 0; color: var(--muted, #6b7480); font-size: 14px; line-height: 1.8; }
+.story-paused { padding: 14px; border: 2px dashed #d5e0ca; border-radius: 13px; color: var(--muted, #6b7480); text-align: center; }
+
+@media (max-width: 720px) {
+  .hall-grid { grid-template-columns: minmax(0, 1fr); }
+  .story-card { padding: 16px; }
+}
+@media print {
+  .hall-toolbar, .say-chip { display: none !important; }
+  .story-card { break-inside: avoid; box-shadow: none; }
+}

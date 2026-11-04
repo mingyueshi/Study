@@ -4,6 +4,7 @@ import gzip
 import hashlib
 import json
 import os
+import re
 from pathlib import Path, PurePosixPath
 import shutil
 import sqlite3
@@ -70,6 +71,11 @@ class BaselineError(ValueError):
     pass
 
 
+def sql(*parts):
+    """SQL 标识符无法参数化：所有动态片段必须先经 quote() 白名单校验再拼接。"""
+    return "".join(parts)
+
+
 def encoded(value):
     return json.dumps(
         value,
@@ -86,6 +92,9 @@ def sha_file(path):
 
 
 def quote(value):
+    # SQL 标识符无法参数化：表名/列名只允许来自项目自身结构的受限字符集。
+    if not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*", str(value)):
+        raise BaselineError(f"非法 SQL 标识符：{value!r}")
     return '"' + value.replace('"', '""') + '"'
 
 
@@ -112,7 +121,7 @@ def backup_database(path, directory):
 
 
 def schema(database, table):
-    rows = list(database.execute("PRAGMA table_info(" + quote(table) + ")"))
+    rows = list(database.execute(sql("PRAGMA table_info(", quote(table), ")")))
     if not rows:
         raise BaselineError(f"缺少基础表 {table}；请先在副本应用项目迁移。")
     return [[row[1], row[2], row[3], row[5]] for row in rows]
@@ -122,13 +131,11 @@ def rows(database, table, columns):
     primary = [column[0] for column in columns if column[3]]
     if len(primary) != 1:
         raise BaselineError("基础表必须有单一主键：" + table)
+    columns_part = ",".join(quote(c[0]) for c in columns)
     return database.execute(
-        "SELECT "
-        + ",".join(quote(c[0]) for c in columns)
-        + " FROM "
-        + quote(table)
-        + " ORDER BY "
-        + quote(primary[0])
+        sql(
+            "SELECT ", columns_part, " FROM ", quote(table), " ORDER BY ", quote(primary[0])
+        )
     )
 
 
@@ -522,9 +529,9 @@ def replacement_blockers(database, root, manifest):
     blockers = []
     for name in PERSONAL:
         if name in available:
-            count = database.execute("SELECT count(*) FROM " + quote(name)).fetchone()[
-                0
-            ]
+            count = database.execute(
+                sql("SELECT count(*) FROM ", quote(name))
+            ).fetchone()[0]
             if count:
                 blockers.append(f"{name}: {count}条个人记录")
     checks = [
@@ -534,7 +541,7 @@ def replacement_blockers(database, root, manifest):
     ]
     for name, where, label in checks:
         if database.execute(
-            "SELECT count(*) FROM " + quote(name) + " WHERE " + where
+            sql("SELECT count(*) FROM ", quote(name), " WHERE ", where)
         ).fetchone()[0]:
             blockers.append(label)
     equivalent_links = inherited_baseline_links(root, manifest)
@@ -594,7 +601,7 @@ def restore_package(
             }
         has_rows = any(
             database.execute(
-                "SELECT EXISTS(SELECT 1 FROM " + quote(name) + ")"
+                sql("SELECT EXISTS(SELECT 1 FROM ", quote(name), ")")
             ).fetchone()[0]
             for name in TABLES
         )
@@ -618,7 +625,7 @@ def restore_package(
         backup = backup_already
         has_rows = any(
             database.execute(
-                "SELECT EXISTS(SELECT 1 FROM " + quote(name) + ")"
+                sql("SELECT EXISTS(SELECT 1 FROM ", quote(name), ")")
             ).fetchone()[0]
             for name in TABLES
         )
@@ -644,29 +651,26 @@ def restore_package(
         database.execute("PRAGMA defer_foreign_keys=ON")
         if not subset:
             for name in reversed(TABLES):
-                database.execute("DELETE FROM " + quote(name))
+                database.execute(sql("DELETE FROM ", quote(name)))
         for table in manifest["tables"]:
             names = [c[0] for c in table["columns"]]
             pk = next(c[0] for c in table["columns"] if c[3])
-            sql = (
-                "INSERT INTO "
-                + quote(table["name"])
-                + " ("
-                + ",".join(map(quote, names))
-                + ") VALUES ("
-                + ",".join("?" for _ in names)
-                + ")"
+            columns_part = ",".join(map(quote, names))
+            placeholders = ",".join("?" for _ in names)
+            insert_sql = sql(
+                "INSERT INTO ", quote(table["name"]),
+                " (", columns_part, ") VALUES (", placeholders, ")",
             )
             if subset:
-                sql += " ON CONFLICT(" + quote(pk) + ") DO NOTHING"
+                insert_sql = sql(insert_sql, " ON CONFLICT(", quote(pk), ") DO NOTHING")
             batch = []
             for row in package_rows(root, table):
                 batch.append(row)
                 if len(batch) >= 1000:
-                    database.executemany(sql, batch)
+                    database.executemany(insert_sql, batch)
                     batch.clear()
             if batch:
-                database.executemany(sql, batch)
+                database.executemany(insert_sql, batch)
         if grade_mapping:
             database.executemany(
                 "UPDATE accounts_user SET grade_id=? WHERE id=?", grade_mapping
@@ -676,10 +680,10 @@ def restore_package(
             if primary[1].upper() == "INTEGER":
                 maximum = (
                     database.execute(
-                        "SELECT max("
-                        + quote(primary[0])
-                        + ") FROM "
-                        + quote(table["name"])
+                        sql(
+                            "SELECT max(", quote(primary[0]),
+                            ") FROM ", quote(table["name"]),
+                        )
                     ).fetchone()[0]
                     or 0
                 )

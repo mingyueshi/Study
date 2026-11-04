@@ -1,0 +1,1041 @@
+{
+ "schema_version": 1,
+ "source_code": "chinese-xinhua-idioms",
+ "figures": [
+  {
+   "id": "lin-xiangru",
+   "name": "蔺相如",
+   "era": "战国",
+   "role": "赵国上卿",
+   "emoji": "🛡️",
+   "blurb": "带着和氏璧出使秦国，凭胆识和口才两次保住赵国颜面。"
+  },
+  {
+   "id": "lian-po",
+   "name": "廉颇",
+   "era": "战国",
+   "role": "赵国名将",
+   "emoji": "⚔️",
+   "blurb": "打了一辈子胜仗的老将军，知错就改，背着荆条上门道歉。"
+  },
+  {
+   "id": "zhao-kuo",
+   "name": "赵括",
+   "era": "战国",
+   "role": "赵国将军",
+   "emoji": "📜",
+   "blurb": "兵书倒背如流，真打仗却一败涂地的将军之子。"
+  },
+  {
+   "id": "zhao-gao",
+   "name": "赵高",
+   "era": "秦朝",
+   "role": "丞相",
+   "emoji": "🐴",
+   "blurb": "把鹿说成马来试探谁顺从他的权臣。"
+  },
+  {
+   "id": "mao-sui",
+   "name": "毛遂",
+   "era": "战国",
+   "role": "平原君门客",
+   "emoji": "💪",
+   "blurb": "三年没被注意的门客，关键时刻挺身而出定下盟约。"
+  },
+  {
+   "id": "xiang-yu",
+   "name": "项羽",
+   "era": "秦末",
+   "role": "西楚霸王",
+   "emoji": "🐎",
+   "blurb": "砸锅沉船拼死一战的大英雄，最后败给了人心。"
+  },
+  {
+   "id": "gou-jian",
+   "name": "勾践",
+   "era": "春秋",
+   "role": "越国国君",
+   "emoji": "👑",
+   "blurb": "睡柴草尝苦胆，忍了二十年终于翻身的国君。"
+  },
+  {
+   "id": "liu-bang",
+   "name": "刘邦",
+   "era": "秦末",
+   "role": "汉高祖",
+   "emoji": "🏹",
+   "blurb": "进城先约法三章，靠规矩和人心赢得天下。"
+  },
+  {
+   "id": "han-xin",
+   "name": "韩信",
+   "era": "秦末",
+   "role": "汉初大将军",
+   "emoji": "🎖️",
+   "blurb": "能忍胯下之辱、记得一饭之恩的军事奇才。"
+  },
+  {
+   "id": "jing-ke",
+   "name": "荆轲",
+   "era": "战国",
+   "role": "刺客",
+   "emoji": "🗡️",
+   "blurb": "带着地图和匕首去刺秦王的悲壮壮士。"
+  },
+  {
+   "id": "cao-cao",
+   "name": "曹操",
+   "era": "东汉",
+   "role": "魏王",
+   "emoji": "🐎",
+   "blurb": "打仗路上用一句「前面有梅林」救了全军的统帅。"
+  },
+  {
+   "id": "liu-bei",
+   "name": "刘备",
+   "era": "三国",
+   "role": "蜀汉昭烈帝",
+   "emoji": "🤝",
+   "blurb": "放下身段三次登门，请出了诸葛亮。"
+  },
+  {
+   "id": "zhuge-liang",
+   "name": "诸葛亮",
+   "era": "三国",
+   "role": "蜀汉丞相",
+   "emoji": "🪶",
+   "blurb": "草庐里的年轻人，一出山就看清了天下大势。"
+  },
+  {
+   "id": "liu-chan",
+   "name": "刘禅",
+   "era": "三国",
+   "role": "蜀汉后主",
+   "emoji": "🎭",
+   "blurb": "亡了国还说「这里挺快乐」的后主。"
+  },
+  {
+   "id": "fu-jian",
+   "name": "苻坚",
+   "era": "东晋",
+   "role": "前秦国君",
+   "emoji": "🏹",
+   "blurb": "带着百万大军南下，却把山上的草木看成敌兵。"
+  },
+  {
+   "id": "zu-ti",
+   "name": "祖逖",
+   "era": "东晋",
+   "role": "名将",
+   "emoji": "🐓",
+   "blurb": "听到鸡叫就起床练剑的发愤青年。"
+  },
+  {
+   "id": "wang-xizhi",
+   "name": "王羲之",
+   "era": "东晋",
+   "role": "书法家",
+   "emoji": "✍️",
+   "blurb": "笔力雄健到墨迹渗进木板三分的书圣。"
+  },
+  {
+   "id": "nan-guo",
+   "name": "南郭处士",
+   "era": "战国",
+   "role": "齐国乐师（冒牌）",
+   "emoji": "🎶",
+   "blurb": "混在三百人乐队里假装吹竽，换了国王就露馅。"
+  },
+  {
+   "id": "yu-gong",
+   "name": "愚公",
+   "era": "上古",
+   "role": "北山老人",
+   "emoji": "⛰️",
+   "blurb": "带着全家一代代挖山，相信坚持就能移走大山。"
+  },
+  {
+   "id": "zhi-sou",
+   "name": "智叟",
+   "era": "上古",
+   "role": "河曲老人",
+   "emoji": "🙄",
+   "blurb": "嘲笑愚公挖山的「聪明人」，其实目光短浅。"
+  },
+  {
+   "id": "kuang-heng",
+   "name": "匡衡",
+   "era": "西汉",
+   "role": "大学问家",
+   "emoji": "🕯️",
+   "blurb": "家里没蜡烛，就在墙上凿个洞借光读书。"
+  },
+  {
+   "id": "su-qin",
+   "name": "苏秦",
+   "era": "战国",
+   "role": "纵横家",
+   "emoji": "📌",
+   "blurb": "读书困了用锥子扎大腿，终于佩上六国相印。"
+  },
+  {
+   "id": "qi-ren",
+   "name": "杞人",
+   "era": "春秋",
+   "role": "杞国人",
+   "emoji": "☁️",
+   "blurb": "天天担心天会塌下来的忧天人。"
+  },
+  {
+   "id": "song-nong",
+   "name": "宋国农夫",
+   "era": "战国",
+   "role": "种田人",
+   "emoji": "🌳",
+   "blurb": "捡到一只撞树的兔子，就放下锄头天天等下一只。"
+  },
+  {
+   "id": "chu-shang",
+   "name": "楚国商人",
+   "era": "战国",
+   "role": "卖兵器的商人",
+   "emoji": "🗡️",
+   "blurb": "既夸盾最坚固又夸矛最锋利，被路人一句话问倒。"
+  }
+ ],
+ "stories": [
+  {
+   "id": "fujing-qingzui",
+   "headword": "负荆请罪",
+   "figure_ids": [
+    "lin-xiangru",
+    "lian-po"
+   ],
+   "source_book": "《史记》",
+   "source_chapter": "廉颇蔺相如列传",
+   "quote": "廉颇闻之，肉袒负荆，因宾客至蔺相如门谢罪。",
+   "story": "蔺相如立了大功，官位升到廉颇之上。老将军廉颇不服气，放话要当面羞辱他。蔺相如听说后，处处躲着廉颇，连门客都觉得丢脸。蔺相如解释说：秦国不敢欺负赵国，是因为有我们两人在。要是我们闹翻，秦国就有机可乘了。这番话传到廉颇耳朵里，老将军羞愧极了，脱掉上衣、背着荆条，亲自登门请罪。两人从此成了同生共死的好朋友。",
+   "meaning": "主动向对方认错赔罪，诚心诚意地道歉。",
+   "clue": "蔺相如和廉颇的故事还有《完璧归赵》，都出自《史记·廉颇蔺相如列传》。",
+   "pin_id": "dc61e00d-aee2-4ce4-baab-5598adaf0892",
+   "entry_id": "dd9c3c91-3686-4ff5-a57d-57e43648a638",
+   "sense_id": "6256d024-291e-4e36-ab2d-b578211658b7",
+   "binding_id": "dc61e00d-aee2-4ce4-baab-5598adaf0892",
+   "pronunciation_id": "7297e845-13c7-4b21-a5b5-b7a517136973",
+   "evidence_id": "27040d43-cfed-4c98-ae95-7f7711f41218",
+   "source_key": "负荆请罪",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "2975b0fe9a18f9c506e9381b983e37a5e1aea7ba1e92c0fcc96a2b9dc4f2d21a",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "id": "wanbi-guizhao",
+   "headword": "完璧归赵",
+   "figure_ids": [
+    "lin-xiangru"
+   ],
+   "source_book": "《史记》",
+   "source_chapter": "廉颇蔺相如列传",
+   "quote": "城入赵而璧留秦；城不入，臣请完璧归赵。",
+   "story": "赵国得到了稀世珍宝和氏璧，秦王写信说愿意用十五座城来换。宝石送去了，秦王却只看宝贝绝口不提城的事。蔺相如看出秦王根本不想兑现，就说璧上有个小斑点要指给秦王看，拿回璧后立刻靠柱子站定，警告说：您要是硬抢，我就和璧一起撞碎在柱子上！后来他悄悄派人把璧送回赵国，自己留下面对秦王。秦国最终没能得到宝璧，赵国也保住了尊严。",
+   "meaning": "把原物完好无损地归还本人。",
+   "clue": "蔺相如的故事还有《负荆请罪》，同在《史记·廉颇蔺相如列传》。",
+   "pin_id": "40983f22-328e-4c5e-b908-568d6a3cab10",
+   "entry_id": "12d06b14-b554-4979-9930-033aa2c41a76",
+   "sense_id": "2d5869b1-057e-438b-aea4-6d65355a0100",
+   "binding_id": "40983f22-328e-4c5e-b908-568d6a3cab10",
+   "pronunciation_id": "7a5aeed8-5696-41f1-a3b7-2e2531d2d980",
+   "evidence_id": "604f0058-c157-4278-b7ab-a0f2277141d7",
+   "source_key": "完璧归赵",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "261ad40318dea36db25a07c963b47831d6305b0d23c7245657afa8b36752b6fe",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "id": "zhishang-tanbing",
+   "headword": "纸上谈兵",
+   "figure_ids": [
+    "zhao-kuo"
+   ],
+   "source_book": "《史记》",
+   "source_chapter": "廉颇蔺相如列传",
+   "quote": "赵括自少时学兵法，言兵事，以天下莫能当。",
+   "story": "赵括从小熟读兵书，谈起打仗头头是道，连父亲、名将赵奢都驳不倒他。可父亲始终不放心，说打仗是生死之事，赵括把它说得太轻巧了。后来赵王真的让赵括替下老将军带兵。他只会照着书本指挥，死搬教条，不知道战场瞬息万变。结果长平一战，四十万赵军被秦军围困歼灭，赵括自己也丢了性命。",
+   "meaning": "空谈理论，不能解决实际问题。",
+   "clue": "他的对手是秦国名将白起，这场惨败就是著名的长平之战。",
+   "pin_id": "79efd242-8ff7-4ed2-8698-24945308c6bf",
+   "entry_id": "65014080-ba98-4566-8b1a-c046a3d14204",
+   "sense_id": "d02770fd-cd9a-447a-bf62-bc29f8dc868b",
+   "binding_id": "79efd242-8ff7-4ed2-8698-24945308c6bf",
+   "pronunciation_id": "49efacdb-befc-4f6f-a725-56b316878be1",
+   "evidence_id": "ca3c0cf0-ff35-45a9-b25d-953de1ff5c3b",
+   "source_key": "纸上谈兵",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "55b01a6fab900867228b027afe8ba0c6be10a82eb11cc3424d9518421d2456a8",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "id": "zhilu-weima",
+   "headword": "指鹿为马",
+   "figure_ids": [
+    "zhao-gao"
+   ],
+   "source_book": "《史记》",
+   "source_chapter": "秦始皇本纪",
+   "quote": "持鹿献于二世，曰『马也。』二世笑曰『丞相误邪？谓鹿为马。』",
+   "story": "丞相赵高想造反，又怕大臣们不服，就想了个办法试探。他牵来一只鹿献给秦二世，硬说这是一匹马。二世笑了：丞相搞错了吧，把鹿说成马？赵高不答，只看大臣们怎么说。有人实话实说是鹿，有人被吓得附和说是马。后来，说真话的大臣都被赵高找借口害了。从此再没人敢说真话，秦朝也很快灭亡了。",
+   "meaning": "颠倒黑白、混淆是非。",
+   "clue": "指鹿为马发生秦二世在位时，和《破釜沉舟》《四面楚歌》处在同一个乱世。",
+   "pin_id": "473cb868-967c-43a1-8d32-5dbba1ea889b",
+   "entry_id": "dc7fdc58-ae82-4563-99c5-322aed034a39",
+   "sense_id": "a3e1d112-7332-47f1-a544-0cefe4fbfbfc",
+   "binding_id": "473cb868-967c-43a1-8d32-5dbba1ea889b",
+   "pronunciation_id": "7171a42b-61ae-42e7-83ad-7dfb41f6b8a3",
+   "evidence_id": "4383efd4-d68c-4567-948b-c4f75171850c",
+   "source_key": "指鹿为马",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "adb78b4ba563cf14cb2771f03f9219c4acdeb628e88b7c13e64b439789ea77ca",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "id": "maosui-zijian",
+   "headword": "毛遂自荐",
+   "figure_ids": [
+    "mao-sui"
+   ],
+   "source_book": "《史记》",
+   "source_chapter": "平原君列传",
+   "quote": "门下有毛遂者，前，自赞于平原君曰『遂闻君将合从于楚，约与食客门下二十人偕。』",
+   "story": "秦军围困赵国都城，平原君要去楚国求救，想挑二十个文武双全的门客同行。有个叫毛遂的门客站出来推荐自己。平原君说：有才能的人就像锥子放进口袋，尖立刻会露出来；你来了三年我却没听说过你。毛遂回答：那是因为我今天才请求放进口袋，要是早放进去，整个锥尖都脱出来了。到了楚国，谈判僵住，毛遂按剑上前，几句话说清利害，楚王当场答应出兵。",
+   "meaning": "自己推荐自己担任某项工作。",
+   "clue": "赏识他的平原君是战国四公子之一，故事出自《史记·平原君列传》。",
+   "pin_id": "ffb41316-16dd-47c3-88f1-c908f488f56a",
+   "entry_id": "ff1dbceb-b7a8-40b8-b241-8af4efd6992e",
+   "sense_id": "80406767-6a52-4d32-a4fb-36628128870b",
+   "binding_id": "ffb41316-16dd-47c3-88f1-c908f488f56a",
+   "pronunciation_id": "779e4353-0401-4097-8fd4-d4522f596a0c",
+   "evidence_id": "37fd6768-938b-4fd5-a573-15e23bc888ea",
+   "source_key": "毛遂自荐",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "acb9ee66c09d5308d9f7f0c2b72bd1b5cbb850ba14c59cd65bfe6769ece947e7",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "id": "simian-chuge",
+   "headword": "四面楚歌",
+   "figure_ids": [
+    "xiang-yu"
+   ],
+   "source_book": "《史记》",
+   "source_chapter": "项羽本纪",
+   "quote": "夜闻汉军四面皆楚歌，项王乃大惊曰『汉皆已得楚乎？是何楚人之多也。』",
+   "story": "项羽被刘邦的大军围困在垓下，兵少粮尽。夜里，四面八方传来楚地的歌谣。项羽大惊：汉军里怎么这么多楚国人？难道楚地全丢了？士兵们听见家乡的歌，想念家人，士气一下散了。项羽突围到乌江边，自觉无颜见江东父老，不肯过江，最终自刎。这位曾经砸锅沉船、战无不胜的霸王，就这样落幕了。",
+   "meaning": "陷入四面受敌、孤立无援的困境。",
+   "clue": "项羽的故事还有《破釜沉舟》《四面楚歌》，都出自《史记·项羽本纪》。",
+   "pin_id": "4c6a7de9-4a23-483a-8cf3-0df6b662d889",
+   "entry_id": "dbba9002-b56a-41f2-b041-20ef0c970143",
+   "sense_id": "c5bbc956-8993-480b-bff9-ee051db5e6b9",
+   "binding_id": "4c6a7de9-4a23-483a-8cf3-0df6b662d889",
+   "pronunciation_id": "d7c850cb-c22b-4bc6-ba79-dfe058f20ee1",
+   "evidence_id": "6e596085-9981-4689-8795-df219df08e90",
+   "source_key": "四面楚歌",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "da99b9bc4dc2d50f1fbb65a2ef09087bb73a974d58fa09e338c1531af2413d63",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "id": "woxin-changdan",
+   "headword": "卧薪尝胆",
+   "figure_ids": [
+    "gou-jian"
+   ],
+   "source_book": "《史记》",
+   "source_chapter": "越王勾践世家",
+   "quote": "越王勾践反国，乃苦身焦思，置胆于坐，坐卧即仰胆，饮食亦尝胆也。",
+   "story": "越王勾践被吴王夫差打败，只好去吴国当了三年奴仆，喂马扫地，受尽屈辱。回国后，他生怕自己忘了耻辱：撤掉床铺睡在柴草上，屋里挂一只苦胆，吃饭前先尝一口，提醒自己「你忘了会稽之耻吗」。他亲自耕种，礼贤下士，训练军队。整整二十年，越国渐渐强大，最后一举灭掉吴国，勾践也成为一方霸主。",
+   "meaning": "刻苦自励，发愤图强，不忘雪耻。",
+   "clue": "帮他复国的大臣有文种和范蠡，故事出自《史记·越王勾践世家》。",
+   "pin_id": "73254f42-4172-4ff0-b39a-aa2ff1e83b79",
+   "entry_id": "a930c409-163f-44c9-949a-c5872d89268e",
+   "sense_id": "524cbc35-c3b3-4ec7-9b23-a187949d4b4b",
+   "binding_id": "73254f42-4172-4ff0-b39a-aa2ff1e83b79",
+   "pronunciation_id": "7508c2ad-b242-40c3-bb96-3f4809bc93f6",
+   "evidence_id": "6dec7de3-95ec-476d-b9e7-768fa1689186",
+   "source_key": "卧薪尝胆",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "23e4da3d8cdda14396094d45db2d4f2356000d8d765f783420d1387803c68200",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "id": "pofu-chenzhou",
+   "headword": "破釜沉舟",
+   "figure_ids": [
+    "xiang-yu"
+   ],
+   "source_book": "《史记》",
+   "source_chapter": "项羽本纪",
+   "quote": "项羽乃悉引兵渡河，皆沉船，破釜甑，烧庐舍，持三日粮，以示士卒必死，无一还心。",
+   "story": "秦军围困巨鹿，各路诸侯援军都怕秦兵，不敢出战。项羽率军渡河后下了死命令：把渡船全部凿沉，锅全部砸破，营房全部烧掉，只带三天口粮。将士们明白：没有退路，只能拼命向前。楚军以一当十，喊杀声震天，九战九捷大破秦军主力。诸侯将领观战吓得腿软，战后进项羽营门时都是跪着爬进去的。",
+   "meaning": "下定决心，不留退路，干到底。",
+   "clue": "这场巨鹿之战让项羽成为诸侯上将军，故事出自《史记·项羽本纪》。",
+   "pin_id": "262bfae8-8ec7-43da-bb5a-848f76ed5328",
+   "entry_id": "172f7d45-31e9-4422-b192-5a03d6a2842f",
+   "sense_id": "c0872500-a5a1-4b95-b30c-2c18f7793d9b",
+   "binding_id": "262bfae8-8ec7-43da-bb5a-848f76ed5328",
+   "pronunciation_id": "1ed1eafd-4e18-4c5c-b173-494c099efef8",
+   "evidence_id": "6cc746c8-826d-4c8c-91f4-4f3442c3cf09",
+   "source_key": "破釜沉舟",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "f036ee4c4b346ee85c894141f50f90924180a0cc021dd8a6c68b73247fb97f51",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "id": "yuefa-sanzhang",
+   "headword": "约法三章",
+   "figure_ids": [
+    "liu-bang"
+   ],
+   "source_book": "《史记》",
+   "source_chapter": "高祖本纪",
+   "quote": "与父老约，法三章耳：杀人者死，伤人及盗抵罪。",
+   "story": "刘邦的军队最先攻进秦朝都城咸阳。面对秦宫的珍宝美女，他封存府库，退军城外，并把各县父老召集起来宣布：秦朝严苛的法令全部废除，只和大家约法三章——杀人的偿命，伤人和偷盗的依法治罪。百姓欣喜若狂，争着送牛羊酒食慰劳军队。靠这份民心，刘邦最终赢得天下，建立了汉朝。",
+   "meaning": "共同遵守简单的约定或几条基本规则。",
+   "clue": "他的对手项羽同期的故事是《四面楚歌》《破釜沉舟》，都出自《史记》。",
+   "pin_id": "4381830b-6e84-4771-829b-be53e42fe332",
+   "entry_id": "5fcabfb2-9f3d-4ba0-ac1b-033ec7d5bb66",
+   "sense_id": "875db497-be4c-4036-a782-d2508b300734",
+   "binding_id": "4381830b-6e84-4771-829b-be53e42fe332",
+   "pronunciation_id": "058e6b96-fe11-49b6-a41e-9cdefbb99745",
+   "evidence_id": "48c7831e-144c-42ec-ae14-02d050ba0ff9",
+   "source_key": "约法三章",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "89a6bc95bb9ea2999d90b065220186daa9362010049a7688655dde2f1a92df42",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "id": "yifan-qianjin",
+   "headword": "一饭千金",
+   "figure_ids": [
+    "han-xin"
+   ],
+   "source_book": "《史记》",
+   "source_chapter": "淮阴侯列传",
+   "quote": "信钓于城下，诸漂母漂，有一母见信饥，饭信，竟漂数十日。",
+   "story": "韩信年轻时家里很穷，常在城下钓鱼充饥，饿得发慌。河边一位漂洗丝絮的大娘看他可怜，一连几十天把自己的饭分给他吃。韩信说：我将来一定重重报答您。大娘生气地说：大丈夫养不活自己，我是可怜你，谁图你的报答！后来韩信投军立下大功，被封楚王，回到家乡找到那位大娘，送上千金作为报答。",
+   "meaning": "受恩深重，哪怕一餐饭也重重报答。",
+   "clue": "韩信的故事还有《背水一战》，都出自《史记·淮阴侯列传》。",
+   "pin_id": "00b6ae5c-0854-489d-8491-1c54293baccb",
+   "entry_id": "92caf432-f499-40b4-ab1a-08abe3fb1915",
+   "sense_id": "2902c323-3a59-4410-a44f-7f91fcc04fa8",
+   "binding_id": "00b6ae5c-0854-489d-8491-1c54293baccb",
+   "pronunciation_id": "1670348c-0ef2-4872-be8c-ff50d354e291",
+   "evidence_id": "488c8161-8529-4bfc-b091-568def13c788",
+   "source_key": "一饭千金",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "2d5244949c18ea03d470f6d01dabe484acbbc87cad595b29b4ea21633a3609dc",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "id": "beishui-yizhan",
+   "headword": "背水一战",
+   "figure_ids": [
+    "han-xin"
+   ],
+   "source_book": "《史记》",
+   "source_chapter": "淮阴侯列传",
+   "quote": "信乃使万人先行，出，背水陈。赵军望见而大笑。",
+   "story": "韩信攻打赵国，把部队布置在河边背水列阵，敌人看了都笑话他不懂兵法——按兵书这是自绝退路的死地。战斗打响，汉军前面迎敌、后面是大河，没有一步可退，人人拼死作战。韩信同时派出轻骑兵绕到敌营，拔掉赵军旗帜换上汉军红旗。赵军前打不赢、回营又见满城汉旗，以为大势已去，一哄而散。战后有人问韩信为什么不按兵书，他说：这也写在兵书上，只是你们没注意——陷之死地而后生。",
+   "meaning": "处于绝境，为求生路而决一死战。",
+   "clue": "韩信的故事还有《一饭千金》，都出自《史记·淮阴侯列传》。",
+   "pin_id": "70cc9522-005b-42bd-9229-36b47a4cb7d8",
+   "entry_id": "501d506a-890d-49b3-8d28-4ad508476577",
+   "sense_id": "4bec3c27-9533-4c60-a7be-346857ad84bb",
+   "binding_id": "70cc9522-005b-42bd-9229-36b47a4cb7d8",
+   "pronunciation_id": "90ff2271-8e18-4523-8919-5579f688ac1c",
+   "evidence_id": "6dc62343-ff22-4d88-baa7-8814bc92e8da",
+   "source_key": "背水一战",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "4236f23850983769a211734a20c0c52f946627af4bc62172b3314eaff42439bd",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "id": "tubiong-bixian",
+   "headword": "图穷匕见",
+   "figure_ids": [
+    "jing-ke"
+   ],
+   "source_book": "《战国策》",
+   "source_chapter": "燕策三",
+   "quote": "轲既取图奉之。发图，图穷而匕首见。",
+   "story": "燕国太子丹派荆轲去刺杀秦王。荆轲带着秦国叛将的人头和燕国督亢地图作礼物，地图里卷着一把淬毒的匕首。秦王高兴地召见他。荆轲慢慢展开地图，一寸一寸，直到地图完全展开——匕首露了出来！他一把抓住秦王的袖子，举起匕首刺去。秦王挣断衣袖绕柱奔逃，最终拔剑反杀。刺杀失败，荆轲壮烈牺牲。",
+   "meaning": "事情发展到最后，真相或意图彻底显露。",
+   "clue": "《战国策》里的故事还有《画蛇添足》《狐假虎威》《南辕北辙》。",
+   "pin_id": "342bf3d3-cfa0-4c49-a662-eb1c3ca13a77",
+   "entry_id": "e01507a4-fbf8-4e7f-b7da-ff37fa4eea85",
+   "sense_id": "b56a543b-b4c2-4b2c-a29c-f7026128d6a9",
+   "binding_id": "342bf3d3-cfa0-4c49-a662-eb1c3ca13a77",
+   "pronunciation_id": "d4b609d7-86bd-403f-9fa9-6ad4fad9ad8f",
+   "evidence_id": "c0d4cf53-6870-41a3-b829-095aab2dc62e",
+   "source_key": "图穷匕见",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "d7fdc8ec817af7094613d84c177754deeaf7db303d3961375eb2365ab25c5bbc",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "id": "wangmei-zhike",
+   "headword": "望梅止渴",
+   "figure_ids": [
+    "cao-cao"
+   ],
+   "source_book": "《世说新语》",
+   "source_chapter": "假谲",
+   "quote": "魏武行役失汲道，军皆渴，乃令曰『前有大梅林，饶子，甘酸可以解渴。』",
+   "story": "曹操带兵行军，走了很远都找不到水源，将士们渴得嗓子冒烟，队伍越走越慢。曹操心生一计，扬鞭朝前方一指：前面有一大片梅林，梅子又多又甜，又酸又解渴！将士们一听，嘴里立刻生出口水，居然不渴了，精神一振加快脚步。虽然梅林根本不存在，队伍还是撑到了有水的地方。",
+   "meaning": "用空想安慰自己或别人。",
+   "clue": "曹操与刘备的故事还有《三顾茅庐》里的乱世背景，都出自三国时期。",
+   "pin_id": "7ce90588-dd7d-471b-8f33-1e4254482cd9",
+   "entry_id": "4d2a0bc6-647f-4b5a-9004-2d1aae153f90",
+   "sense_id": "0263d63a-a650-48ac-8a9c-013dd7decfc4",
+   "binding_id": "7ce90588-dd7d-471b-8f33-1e4254482cd9",
+   "pronunciation_id": "f2dae4f5-30cf-418d-90a5-e0df52c3d999",
+   "evidence_id": "c4be3a93-2653-4127-bf0a-5b3a15dfef1d",
+   "source_key": "望梅止渴",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "9ecfa2077acc9cc91bbe5d2c32f1a00137349dcf5091d04cdde419c6b08577e6",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "id": "sangu-maolu",
+   "headword": "三顾茅庐",
+   "figure_ids": [
+    "liu-bei",
+    "zhuge-liang"
+   ],
+   "source_book": "《三国志》",
+   "source_chapter": "诸葛亮传（出师表）",
+   "quote": "先帝不以臣卑鄙，猥自枉屈，三顾臣于草庐之中。",
+   "story": "刘备听说诸葛亮是旷世奇才，就带着关羽、张飞去隆中的草庐拜访。第一次，诸葛亮出门了；第二次，顶着风雪去，还是扑了个空；第三次，诸葛亮在家却睡着午觉。刘备恭恭敬敬站在台阶下等，直到先生醒来才敢开口。诸葛亮被这份诚意打动，在草庐里纵论天下大势，这就是有名的「隆中对」。从此他辅佐刘备，建立蜀汉。",
+   "meaning": "诚心诚意、一次又一次地登门邀请贤才。",
+   "clue": "诸葛亮后来在《出师表》里亲口提到这件事。",
+   "pin_id": "c8d10936-fae4-490f-902d-b13f0aeee8c7",
+   "entry_id": "33208ff1-cd1c-4ed3-a1a8-f7062005c738",
+   "sense_id": "6a4d7e43-a9e0-40fd-8fec-41ad557d330f",
+   "binding_id": "c8d10936-fae4-490f-902d-b13f0aeee8c7",
+   "pronunciation_id": "c2443a93-f557-4667-bb4a-1d24a0172c32",
+   "evidence_id": "6e4bf885-9928-45f2-8027-39ae49857020",
+   "source_key": "三顾茅庐",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "867dda48ff56f67ec59d67a4d7c784dbabb1bb0d82b4dbc9189274b68c30af6f",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "id": "lebu-sishu",
+   "headword": "乐不思蜀",
+   "figure_ids": [
+    "liu-chan"
+   ],
+   "source_book": "《三国志》",
+   "source_chapter": "蜀书·后主传（汉晋春秋注）",
+   "quote": "王问禅曰『颇思蜀否？』禅曰『此间乐，不思蜀。』",
+   "story": "蜀汉灭亡后，后主刘禅被迁到魏国都城洛阳，被封为安乐公。一次宴会上，魏王故意安排表演蜀地的歌舞，蜀汉旧臣们看了都想落泪，刘禅却看得津津有味。魏王问他：还想念蜀国吗？刘禅笑嘻嘻地回答：这里很快乐，不想念蜀国。旧臣郤正私下教他下次要流着泪说先人坟茔都在蜀地。再被问到时，刘禅照背了一遍，魏王说：怎么像郤正的话？刘禅惊讶地承认，满座大笑。",
+   "meaning": "乐得忘了本，不想念故土。",
+   "clue": "刘禅是刘备的儿子，父亲三顾茅庐请出的诸葛亮辅佐了蜀汉数十年。",
+   "pin_id": "2ef64f42-3602-4e06-b327-211beb24d551",
+   "entry_id": "1895fbd9-99ea-417c-8d5f-2ce431633dc4",
+   "sense_id": "ed534930-a0d1-4d7e-a541-fd708c024598",
+   "binding_id": "2ef64f42-3602-4e06-b327-211beb24d551",
+   "pronunciation_id": "686da21c-d441-4380-a05d-4e8559b776f0",
+   "evidence_id": "40ce53fd-beab-405a-8d97-b71cd8b44ce1",
+   "source_key": "乐不思蜀",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "347ce8a1f79d46c4289506f7930bee0bcda04953707b82949c06a1500a11c766",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "id": "caomu-jiebing",
+   "headword": "草木皆兵",
+   "figure_ids": [
+    "fu-jian"
+   ],
+   "source_book": "《晋书》",
+   "source_chapter": "苻坚载记",
+   "quote": "坚与苻融登城而望王师，见部阵齐整，将士精锐；又北望八公山上草木皆类人形。",
+   "story": "前秦皇帝苻坚号称带兵百万南下，扬言把马鞭投进长江就足以断流。第一场小接触被打败后，他登上寿春城头瞭望晋军，见对方阵营严整、士气高昂，再回头看八公山，风吹草动，竟觉得满山草木都像晋朝伏兵，心里发慌。决战时秦军一退就收不住阵脚，自相践踏，一路溃败，沿途听见风声鹤唳也以为是追兵。百万大军就此崩盘。",
+   "meaning": "惊慌过度，疑神疑鬼，把无关的动静都当成敌人。",
+   "clue": "和它一起诞生的成语还有「风声鹤唳」，出自《晋书·苻坚载记》。",
+   "pin_id": "3ad503ff-7d7f-486f-8d34-e8cdf0c205c3",
+   "entry_id": "d0d52685-bb7c-4547-ad7f-74f9ab523daa",
+   "sense_id": "f49f6c92-bd5d-4032-ab58-3fb22a603a09",
+   "binding_id": "3ad503ff-7d7f-486f-8d34-e8cdf0c205c3",
+   "pronunciation_id": "72ac4ad5-7345-4cf0-af4f-e9975d34bf11",
+   "evidence_id": "08dbb720-2eed-4566-920b-a96598e047ba",
+   "source_key": "草木皆兵",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "066b0bd40e73f67002a6031e0ad9d62c8098f4cc40a15524f6ed7361e145134e",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "id": "wenji-qiwu",
+   "headword": "闻鸡起舞",
+   "figure_ids": [
+    "zu-ti"
+   ],
+   "source_book": "《晋书》",
+   "source_chapter": "祖逖传",
+   "quote": "中夜闻荒鸡鸣，蹴琨觉，曰『此非恶声也。』因起舞。",
+   "story": "祖逖和刘琨年轻时同床而眠，都怀着报国大志。一天半夜，祖逖听见荒野里的鸡叫，一脚踢醒刘琨：别人认为半夜鸡叫不吉利，我看这声音不错，咱们起来练剑吧！两人披衣下床，在院子里对舞起来，从此天天如此，寒来暑往从不间断。后来祖逖率军北伐，成为名将；刘琨也做了都督。多年苦练，全靠那一声声鸡鸣。",
+   "meaning": "有志之士及时奋发、刻苦自励。",
+   "clue": "东晋的故事还有《草木皆兵》，都出自《晋书》。",
+   "pin_id": "7bad0546-4c78-4423-bb73-69cb0f5f1e2e",
+   "entry_id": "fde6d7a9-c18f-4c13-82f1-a563d93f168d",
+   "sense_id": "fbdc4d89-981e-4fd3-ac65-9c6aba590ce8",
+   "binding_id": "7bad0546-4c78-4423-bb73-69cb0f5f1e2e",
+   "pronunciation_id": "0844057c-0ae2-41af-a398-ec783d5bb0e8",
+   "evidence_id": "0a263298-399b-4086-9ed3-97982a8a6f7d",
+   "source_key": "闻鸡起舞",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "b190792c080baffe0584ef35dcab710003d2e68b8d2e0929c7f9061f4a5d9d5b",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "id": "rumu-sanfen",
+   "headword": "入木三分",
+   "figure_ids": [
+    "wang-xizhi"
+   ],
+   "source_book": "《书断》",
+   "source_chapter": "王羲之",
+   "quote": "王羲之书祝版，工人削之，笔入木三分。",
+   "story": "王羲之是东晋最有名的书法家。一次朝廷祭祀，要把祝词写在木板上再雕刻。工匠拿到他写过的祝版去削字，惊讶地发现墨迹竟渗进木板足足三分深，一刀一刀削下去，字迹依然清晰。原来他下笔力透纸背，全靠几十年苦练——连家门口的池塘都被他洗笔洗成了墨色。人们用「入木三分」形容他的笔力，后来也用来比喻见解深刻。",
+   "meaning": "书法笔力遒劲；也比喻见解、议论深刻透彻。",
+   "clue": "练字的故事还有王献之的「十八缸水」，父子合称「二王」。",
+   "pin_id": "c99a6a9a-a4a2-4a3a-9971-4ff84a8f6587",
+   "entry_id": "2ef4c149-a977-427a-ab3e-f2bff90689b9",
+   "sense_id": "d2afe593-e084-47b7-b4c8-a411e8bb1b6b",
+   "binding_id": "c99a6a9a-a4a2-4a3a-9971-4ff84a8f6587",
+   "pronunciation_id": "5d665df1-499f-43c8-b353-c6169cf75f68",
+   "evidence_id": "600fd138-e50d-4831-aef9-bfa4cf5e7f73",
+   "source_key": "入木三分",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "14593a17dd2a11a96c453647d2ba47197b86ea3db0b05e8aaa228cb7fdcb4d9f",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "id": "lanYu-chongshu",
+   "headword": "滥竽充数",
+   "figure_ids": [
+    "nan-guo"
+   ],
+   "source_book": "《韩非子》",
+   "source_chapter": "内储说上",
+   "quote": "齐宣王使人吹竽，必三百人。南郭处士请为王吹竽，宣王说之，廪食以数百人。",
+   "story": "齐宣王喜欢听吹竽，而且要三百人一起合奏。南郭处士根本不会吹竽，却混进乐队，摇头晃脑装模作样，因为人多人少一起响，谁也听不出真假，俸禄照样拿。后来宣王去世，继位的湣王偏偏喜欢听独奏，要乐师一个一个地吹。南郭处士知道再也混不下去了，连夜收拾行李逃跑了。",
+   "meaning": "没有真本领的人混在行家里充数。",
+   "clue": "《韩非子》里的故事还有《守株待兔》《自相矛盾》，都是寓言。",
+   "pin_id": "f69b161b-0542-4905-8d88-7a0f8da4ca3e",
+   "entry_id": "d54654e0-1e20-4c90-9d63-f9aa4e5d71fd",
+   "sense_id": "3c9f5c99-2972-495d-a60c-577838dc25bf",
+   "binding_id": "f69b161b-0542-4905-8d88-7a0f8da4ca3e",
+   "pronunciation_id": "ac7cf594-04b3-473f-b533-590b4f543701",
+   "evidence_id": "e0932d62-de84-44f4-ac4c-b576fd80f932",
+   "source_key": "滥竽充数",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "806f145c78ac971ad3744203d7e04a1318092ce88050d8918ccb425b57d2dac8",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "id": "yugong-yishan",
+   "headword": "愚公移山",
+   "figure_ids": [
+    "yu-gong",
+    "zhi-sou"
+   ],
+   "source_book": "《列子》",
+   "source_chapter": "汤问",
+   "quote": "愚公曰『虽我之死，有子存焉；子又生孙，孙又生子……何苦而不平？』",
+   "story": "两座大山挡在愚公家门前，出门要绕很远。九十岁的愚公召集全家说：咱们把山挖平，开出一条直路！于是子孙们挖土挑石，运到渤海边。河曲的智叟嘲笑他：就凭你这把老骨头，连山上一根草都动不了。愚公叹道：我死了有儿子，儿子还有孙子，子子孙孙没有穷尽，山却不会再长高，怎么挖不平呢？天帝听说了，被这份决心感动，派神把两座山背走了。",
+   "meaning": "做事有顽强的毅力，不怕困难，坚持到底。",
+   "clue": "嘲笑他的智叟和坚持的愚公正好是一对反面角色。",
+   "pin_id": "58b53236-095d-413a-ac36-d258ea517f86",
+   "entry_id": "63733617-247a-4881-850e-d383f58eb657",
+   "sense_id": "bee71f2b-c465-4f9a-bfcc-93823a76c601",
+   "binding_id": "58b53236-095d-413a-ac36-d258ea517f86",
+   "pronunciation_id": "fb2ca1da-7afc-4fb8-8cd6-24e1a4771732",
+   "evidence_id": "05c1382e-d08c-4cfe-9891-d92965d1b2bc",
+   "source_key": "愚公移山",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "4c845e18ac54897102b612f719ffe6d146e32c5c92ae96e2d289f0c6ac11ea96",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "id": "zaobi-touguang",
+   "headword": "凿壁偷光",
+   "figure_ids": [
+    "kuang-heng"
+   ],
+   "source_book": "《西京杂记》",
+   "source_chapter": "卷二",
+   "quote": "匡衡字稚圭，勤学而无烛，邻舍有烛而不逮，衡乃穿壁引其光，以书映光而读之。",
+   "story": "匡衡小时候酷爱读书，可家里穷得连蜡烛都买不起。隔壁邻居家晚上点着烛火，他就在自家墙壁上悄悄凿了一个小洞，引来一线烛光，捧着书凑在洞口读。他还给有钱人家做工不要工钱，只求借书回家看。就这样如饥似渴地读，匡衡后来成了西汉著名的经学家，官至丞相。",
+   "meaning": "家贫仍刻苦读书。",
+   "clue": "类似的苦读故事还有《悬梁刺股》，主人公是苏秦。",
+   "pin_id": "a616d899-d62a-40bd-a3a7-c90af591e909",
+   "entry_id": "16e4e2f7-31b5-43a9-b4fd-3ede85c6158e",
+   "sense_id": "9dbd04e5-e4ec-43b2-adde-27dc25dccf86",
+   "binding_id": "a616d899-d62a-40bd-a3a7-c90af591e909",
+   "pronunciation_id": "d64b37fe-d3c5-446a-9d6c-1e91958ecffc",
+   "evidence_id": "b839abfa-119f-46ae-a417-8d4365ea4708",
+   "source_key": "凿壁偷光",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "c05e2debb062977dd8ac2e1187122b70ddd91ea2b3d31a6426fb186078c837af",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "id": "xuanliang-cigu",
+   "headword": "悬梁刺股",
+   "figure_ids": [
+    "su-qin"
+   ],
+   "source_book": "《战国策》",
+   "source_chapter": "秦策一",
+   "quote": "读书欲睡，引锥自刺其股，血流至足。",
+   "story": "苏秦游说秦王失败，钱花光了，穿着旧草鞋狼狈回家，妻子织布不理他，嫂子不肯给他做饭。他没有怨天尤人，而是找出姜太公的兵书，日夜苦读。夜里困得睁不开眼，他就把头发系在房梁上，一低头就被扯醒；实在不行，就拿锥子往自己大腿上刺，鲜血一直流到脚背。一年后学成，他游说六国合纵抗秦，佩上了六国相印。",
+   "meaning": "学习刻苦、发愤读书。",
+   "clue": "《战国策》的故事还有《画蛇添足》《狐假虎威》《南辕北辙》《图穷匕见》。",
+   "pin_id": "b97bde55-b123-4769-a352-b432c3aa0280",
+   "entry_id": "518d615b-d91d-4ac2-8f55-6f75e3841094",
+   "sense_id": "b9f8d7b9-dc99-422f-9d88-65871ff8978a",
+   "binding_id": "b97bde55-b123-4769-a352-b432c3aa0280",
+   "pronunciation_id": "70d63c13-2330-4d4f-ac0c-6d4a5bdec62d",
+   "evidence_id": "cf0a9d04-3305-48c1-8603-403099273c19",
+   "source_key": "悬梁刺股",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "16c2b1c9c24233bc970330376be2ba895d72bdf15db029c94b1a7c6a635ad4af",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "id": "qiren-youtian",
+   "headword": "杞人忧天",
+   "figure_ids": [
+    "qi-ren"
+   ],
+   "source_book": "《列子》",
+   "source_chapter": "天瑞",
+   "quote": "杞国有人，忧天地崩坠，身亡所寄，废寝食者。",
+   "story": "杞国有个人，整天担心天会塌下来、地会陷下去，急得觉也睡不着，饭也吃不下。有位朋友担心他愁坏了身子，特地来开导：天不过是一团积聚的气，一举一动都在气里，为什么要怕它塌下来？他又问：那地陷了怎么办？朋友说：地是堆满四方的土块，你蹦跳踩踏，它一直稳稳当当。杞人听明白后，高兴得眉开眼笑，朋友也如释重负。",
+   "meaning": "为不必要或缺乏根据的事忧虑。",
+   "clue": "《列子》里的寓言还有《愚公移山》。",
+   "pin_id": "7bfdcc06-6c1e-429c-8287-39b665cd9516",
+   "entry_id": "7a771720-d884-4414-a9fd-11b364c578b7",
+   "sense_id": "4d46bbb3-fab2-4530-9631-dfb901450121",
+   "binding_id": "7bfdcc06-6c1e-429c-8287-39b665cd9516",
+   "pronunciation_id": "0f0ade9b-3964-43e2-ad93-6c95f7ccaf42",
+   "evidence_id": "e0cc0da0-b07c-4961-9327-ff358727c59e",
+   "source_key": "杞人忧天",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "7143eaba6702cf578b0cc7492a8a894c5eee2c28e441219f77deebef4e698a9b",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "id": "shouzhu-daitu",
+   "headword": "守株待兔",
+   "figure_ids": [
+    "song-nong"
+   ],
+   "source_book": "《韩非子》",
+   "source_chapter": "五蠹",
+   "quote": "兔走触株，折颈而死。因释其耒而守株，冀复得兔。",
+   "story": "宋国有个农夫，一天正在田里干活，一只兔子飞奔过来，一头撞在田边的树桩上，折断脖子死了。农夫白捡了一只兔子，高兴坏了。从此他扔下锄头，天天守在树桩旁边，盼着再捡撞死的兔子。兔子再也没来，田地却荒了，他成了宋国人的笑柄。",
+   "meaning": "死守狭隘经验，不知变通；妄想不劳而获。",
+   "clue": "《韩非子》里的故事还有《自相矛盾》《滥竽充数》。",
+   "pin_id": "41f15f7b-0497-4af9-ac33-b467d39734b7",
+   "entry_id": "ece72089-9aa0-4800-9faf-211352c0d6a5",
+   "sense_id": "d4ebe534-19c0-44fe-8d36-8b4ebbecb1d2",
+   "binding_id": "41f15f7b-0497-4af9-ac33-b467d39734b7",
+   "pronunciation_id": "87552f36-e8a1-4622-aadc-82c4df81a855",
+   "evidence_id": "8e064a7c-e3cb-4ebf-bcaf-033ad4a86276",
+   "source_key": "守株待兔",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "f68bc9ca7ef0209a0094da6f57c4140c8627d7d70bf5c02b34409d5319c28405",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "id": "zixiang-maodun",
+   "headword": "自相矛盾",
+   "figure_ids": [
+    "chu-shang"
+   ],
+   "source_book": "《韩非子》",
+   "source_chapter": "难一",
+   "quote": "誉之曰『吾盾之坚，莫之能陷也。』又誉其矛曰『吾矛之利，于物无不陷也。』",
+   "story": "楚国有个卖兵器的商人，先举起盾牌吆喝：我的盾最坚固，什么东西都刺不穿它！接着又举起长矛吹嘘：我的矛最锋利，什么东西都能刺穿！旁边有人问了一句：拿你的矛，刺你的盾，会怎么样呢？商人张口结舌，一个字也答不上来。围观的人哄堂大笑，他的矛和盾一件也没卖出去。",
+   "meaning": "言语或行为前后抵触，自己打自己的脸。",
+   "clue": "《韩非子》里的故事还有《守株待兔》《滥竽充数》。",
+   "pin_id": "21ac2b93-048b-47ca-90dd-90191f0fcc66",
+   "entry_id": "eb302333-b341-4630-b958-66e3dca50fd0",
+   "sense_id": "91b2983e-d4e1-4ab1-8937-a46fe88dad03",
+   "binding_id": "21ac2b93-048b-47ca-90dd-90191f0fcc66",
+   "pronunciation_id": "ff1694c2-5efc-4fa2-95b0-f95f898f587a",
+   "evidence_id": "63e09b07-e4ef-4c41-8272-86e0a3890868",
+   "source_key": "自相矛盾",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "cda4a7e83841c9b4badd7017d3e242cf2fd67c5116b98ec963e3f6b89958396a",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "id": "huashe-tianzu",
+   "headword": "画蛇添足",
+   "figure_ids": [],
+   "source_book": "《战国策》",
+   "source_chapter": "齐策二",
+   "quote": "蛇固无足，子安能为之足？",
+   "story": "楚国有户人家祭祀后把一壶酒赏给门客。人多人少，酒不够分，大家商量：在地上画蛇，谁先画完谁喝。一个人最先画好，得意地拿起酒壶，看别人还在画，又说：我还能给蛇添上脚！他左手拿壶右手画脚，脚还没画完，另一人画好了蛇，夺过酒壶说：蛇本来没有脚，你怎么能给它添脚？说完一饮而尽，先画完的那个人只好干瞪眼。",
+   "meaning": "做多余的事，反而弄巧成拙。",
+   "clue": "《战国策》里的故事还有《狐假虎威》《南辕北辙》《图穷匕见》。",
+   "pin_id": "787bd4cf-b311-4a63-abf9-b36398d1b92b",
+   "entry_id": "20672678-fa41-41fd-bca7-f171a285783f",
+   "sense_id": "3094e28b-2b91-421e-9a62-a1e88923afa4",
+   "binding_id": "787bd4cf-b311-4a63-abf9-b36398d1b92b",
+   "pronunciation_id": "835b9a69-e839-47eb-83b1-d9c1149c0bff",
+   "evidence_id": "e1b2640f-5fac-47fd-9d0e-4fd9a4199f71",
+   "source_key": "画蛇添足",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "6ec52312a1a3f2c908ec7c3cc9f3985b6907500ecc75ffa378476e34602be190",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "id": "hujia-huwei",
+   "headword": "狐假虎威",
+   "figure_ids": [],
+   "source_book": "《战国策》",
+   "source_chapter": "楚策一",
+   "quote": "虎以为然，故遂与之行。兽见之皆走，虎不知兽畏己而走也，以为畏狐也。",
+   "story": "老虎抓住了一只狐狸准备吃掉。狐狸眼珠一转，说：你不敢吃我！天帝派我做百兽之王，你跟我走一趟，看百兽见了我谁敢不逃。老虎半信半疑地跟着狐狸走进森林。果然，野兽们纷纷逃窜——其实它们怕的是走在狐狸后面的老虎，老虎却以为它们真怕狐狸，得意地把威风让给了狐狸。这招「借势」后来被用来讽喻仗势欺人的人。",
+   "meaning": "倚仗别人的势力来欺压、吓唬人。",
+   "clue": "《战国策》里的故事还有《画蛇添足》《南辕北辙》。",
+   "pin_id": "146b78a5-9d26-4c7a-b6eb-381b2d75ec0d",
+   "entry_id": "1f26d4e7-b848-4ddc-8f66-d606a18c1995",
+   "sense_id": "0fbca061-666c-41fe-a4c2-a23b93c95eb2",
+   "binding_id": "146b78a5-9d26-4c7a-b6eb-381b2d75ec0d",
+   "pronunciation_id": "2ce4e7c4-ebd6-4646-af0b-781b66033e1e",
+   "evidence_id": "427a673c-22ed-4c29-8902-dcc9974f5b2f",
+   "source_key": "狐假虎威",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "cfa6fba2c62abc2d896384dfe0e4daac18149430e65bbc0d8274e834231c2ca1",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "id": "nanyuan-beizhe",
+   "headword": "南辕北辙",
+   "figure_ids": [],
+   "source_book": "《战国策》",
+   "source_chapter": "魏策四",
+   "quote": "马虽良，此非楚之路也……用虽多，此非楚之路也。",
+   "story": "有个人要去南方的楚国，却驾车往北走。路人提醒他：方向错了！他满不在乎：我的马好，跑得快。路人说：马再好，方向不对也到不了。他又说：我带的路费多。路人说：路费再多也白搭。他更得意：我的车夫赶车技术最高！他不知道，条件越好，离楚国反而越远。",
+   "meaning": "行动和目的相反，越努力离目标越远。",
+   "clue": "《战国策》里的故事还有《画蛇添足》《狐假虎威》。",
+   "pin_id": "399f190a-446b-4897-a582-a4ae65fd56b2",
+   "entry_id": "166b94fa-56ff-4321-a93d-a674d8dd38c2",
+   "sense_id": "a090ccb0-788e-4959-a9e4-f4400a3e40dd",
+   "binding_id": "399f190a-446b-4897-a582-a4ae65fd56b2",
+   "pronunciation_id": "8de0daec-8ee0-4299-92ea-c45b2cbb30b2",
+   "evidence_id": "e964bd8e-a086-4355-9328-0f02206bed60",
+   "source_key": "南辕北辙",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "62b77213d0fb6da80f8e97125b5deb2c32e13321ac4cb7f802c2c389c9472f47",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "id": "kezhou-qiujian",
+   "headword": "刻舟求剑",
+   "figure_ids": [],
+   "source_book": "《吕氏春秋》",
+   "source_chapter": "察今",
+   "quote": "舟止，从其所契者入水求之。舟已行矣，而剑不行，求剑若此，不亦惑乎！",
+   "story": "楚国人乘船过江，不小心把剑掉进水里。他不慌不忙，在船帮上刻了个记号：我的剑就是从这里掉下去的。船靠岸后，他从刻记号的地方跳进水里找剑。船一直在走，剑却沉在原地不动——像这样找剑，不是糊涂吗？故事告诉我们：情况变了，办法也要跟着变。",
+   "meaning": "拘泥固执，不懂得随情况变化处理问题。",
+   "clue": "《吕氏春秋》里的故事还有《掩耳盗铃》。",
+   "pin_id": "ff9c1fe6-8750-418a-b1e3-7552e49be7d8",
+   "entry_id": "e3d9641c-ccb2-4ce8-bfe3-17a0bd6aa5d8",
+   "sense_id": "fb3c3a53-8a56-46f6-9cff-b5b3acd84058",
+   "binding_id": "ff9c1fe6-8750-418a-b1e3-7552e49be7d8",
+   "pronunciation_id": "d77416fc-d5f7-4bd7-9673-62ea55b8f2af",
+   "evidence_id": "ae03ae0a-264f-4af1-8097-0e3f87c871e2",
+   "source_key": "刻舟求剑",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "d8f04b30d08d7b5c3ada9cebd6183d9b2fc378138b2ad022b7252c0b1179f068",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "id": "yaner-daoling",
+   "headword": "掩耳盗铃",
+   "figure_ids": [],
+   "source_book": "《吕氏春秋》",
+   "source_chapter": "自知",
+   "quote": "恶人闻之可也，恶己自闻之，悖也！",
+   "story": "有个小偷看中了别人家的大钟，想偷走背回自己家。可钟太大背不动，他就找来大锤把钟砸碎再搬。钟一敲就「哐」地响起来。小偷慌了， 怕别人听见钟声来抓他，灵机一动捂住自己的耳朵——以为自己听不见，别人也听不见。结果钟声传出老远，人们闻声赶来，把他当场抓住。",
+   "meaning": "自己欺骗自己，明明掩盖不住偏要掩盖。",
+   "clue": "《吕氏春秋》里的故事还有《刻舟求剑》。",
+   "pin_id": "ef3de5e5-139c-48e2-989d-13d8d7013594",
+   "entry_id": "76ffd90a-f220-4cd3-86e9-faf329c79ee8",
+   "sense_id": "1fde80fb-880a-4201-bc24-be085cd187c0",
+   "binding_id": "ef3de5e5-139c-48e2-989d-13d8d7013594",
+   "pronunciation_id": "bebdaa72-ced7-46f7-839c-ffee1452b7a8",
+   "evidence_id": "f6fb6dd7-fa77-46d5-9c3f-f9fb325c3cec",
+   "source_key": "掩耳盗铃",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "cdeb887a0315c621ac1882d1d6f4940aca9184d37331981e9035303407235761",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  }
+ ]
+}

@@ -5,19 +5,22 @@
 'use strict';
 
 const ENGLISH_STORE_KEY = 'english_textbook_v1';
-let enState = { learned: {}, lastUnit: null };
+let enState = { learned: {}, lastUnit: null, tab: 'words' };
 try {
   const raw = localStorage.getItem(ENGLISH_STORE_KEY);
-  if (raw) enState = { ...{ learned: {}, lastUnit: null }, ...JSON.parse(raw) };
+  if (raw) enState = { ...{ learned: {}, lastUnit: null, tab: 'words' }, ...JSON.parse(raw) };
 } catch (e) { /* 存储不可用时仅保留当前页面状态 */ }
 function enSave() {
   try { localStorage.setItem(ENGLISH_STORE_KEY, JSON.stringify(enState)); } catch (e) {}
 }
 
 let curUnit = ENGLISH_UNITS.some(u => u.id === enState.lastUnit) ? enState.lastUnit : ENGLISH_UNITS[0].id;
+let curTab = enState.tab === 'dialogues' ? 'dialogues' : 'words';
 let query = '';
 let playTimer = null;
 let playing = false;
+let dlgPlaying = null;
+let dlgTimer = null;
 
 function unitById(id) { return ENGLISH_UNITS.find(u => u.id === id); }
 function unitLearned(unit) { return unit.words.filter(word => enState.learned[word.key]).length; }
@@ -97,6 +100,50 @@ function unitHeadHTML(unit) {
     '<div class="unit-main"><h1>' + esc(unit.name) + '</h1><p class="unit-subtitle">' + esc(unit.book + ' · ' + unit.zh) + '</p>' +
     '<p>已掌握 ' + unitLearned(unit) + ' / ' + unit.words.length + ' 条 · 点读发音，拆分记忆</p>' + relLegendHTML() + '</div></div>';
 }
+function tabbarHTML() {
+  return '<div class="tabbar" role="tablist" aria-label="切换单词或课文">' +
+    '<button class="tab' + (curTab === 'words' ? ' on' : '') + '" data-act="tab" data-tab="words" role="tab" aria-selected="' + (curTab === 'words') + '">🔤 单词</button>' +
+    '<button class="tab' + (curTab === 'dialogues' ? ' on' : '') + '" data-act="tab" data-tab="dialogues" role="tab" aria-selected="' + (curTab === 'dialogues') + '">💬 课文</button>' +
+    '</div>';
+}
+/* 课文对话：按说话人首次出现顺序分左右两侧，第一个说话人在左。 */
+function speakerSides(lines) {
+  const order = [];
+  lines.forEach(line => { if (order.indexOf(line.who) < 0) order.push(line.who); });
+  const sides = {};
+  order.forEach((who, index) => { sides[who] = index % 2; });
+  return sides;
+}
+function dialogueHTML(dlg) {
+  const sides = speakerSides(dlg.lines);
+  const bubbles = dlg.lines.map((line, index) =>
+    '<button class="dlg-line side-' + sides[line.who] + '" data-act="say" data-t="' + esc(line.en) +
+    '" data-key="' + esc(dlg.id + ':' + index) + '" aria-label="朗读 ' + esc(line.en) + '">' +
+    '<span class="dlg-avatar" aria-hidden="true">' + (line.emoji || '🙂') + '</span>' +
+    '<span class="dlg-body"><span class="dlg-who">' + esc(line.who) + '</span>' +
+    '<span class="dlg-en">' + esc(line.en) + '</span>' +
+    '<span class="dlg-zh">' + esc(line.zh) + '</span></span></button>'
+  ).join('');
+  return '<section class="dlg">' +
+    '<div class="dlg-head"><span class="dlg-title">' + (dlg.emoji || '💬') + ' ' + esc(dlg.title) + '</span>' +
+    '<span class="dlg-scene">' + esc(dlg.zh) + '</span>' +
+    '<button class="play-dlg" data-act="playdlg" data-id="' + esc(dlg.id) + '">▶️ 连读本段</button></div>' +
+    '<div class="dlg-lines">' + bubbles + '</div></section>';
+}
+function dialoguesHTML(unit) {
+  const list = ENGLISH_DIALOGUES.filter(dlg => dlg.unitId === unit.id);
+  if (!list.length) return '<div class="empty">🐣 这个单元的课文对话整理中，先去学单词吧～</div>';
+  return list.map(dialogueHTML).join('');
+}
+function dialogueHitHTML(hit) {
+  const unit = unitById(hit.dlg.unitId);
+  const color = unit ? unit.color : '#4d96ff';
+  const label = unit ? unit.book + ' · ' + unit.zh : hit.dlg.unitId;
+  return '<button class="dlg-hit" data-act="gotodlg" data-unit="' + esc(hit.dlg.unitId) + '" data-id="' + esc(hit.dlg.id) +
+    '" data-line="' + hit.index + '" style="--c:' + color + '">' +
+    '<span class="unit-tag" style="background:' + color + '">' + esc(label) + '</span>' +
+    '<b>' + esc(hit.line.who) + '：' + esc(hit.line.en) + '</b><i>' + esc(hit.line.zh) + '</i></button>';
+}
 function renderCards() {
   const box = document.getElementById('cards');
   if (query) {
@@ -107,16 +154,31 @@ function renderCards() {
         hits.push({ word, unit });
       }
     }));
-    box.innerHTML = hits.length
+    const lineHits = [];
+    ENGLISH_DIALOGUES.forEach(dlg => dlg.lines.forEach((line, index) => {
+      if (line.en.toLowerCase().includes(q) || line.zh.includes(query)) lineHits.push({ dlg, line, index });
+    }));
+    if (!hits.length && !lineHits.length) {
+      box.innerHTML = '<div class="empty">🐣 没有找到「' + esc(query) + '」，检查一下拼写，或换个词试试～</div>';
+      return;
+    }
+    box.innerHTML = (hits.length
       ? '<div class="search-head">🔎 找到 ' + hits.length + ' 条词汇或短语</div>' + relLegendHTML() +
         '<div class="wgrid">' + hits.map(hit => cardHTML(hit.word, hit.unit, true)).join('') + '</div>'
-      : '<div class="empty">🐣 没有找到「' + esc(query) + '」，检查一下拼写，或换个词试试～</div>';
+      : '') +
+      (lineHits.length
+        ? '<div class="search-head dlg-hits-head">💬 找到 ' + lineHits.length + ' 句课文，点一下去课文</div><div class="dlg-hits">' +
+          lineHits.map(dialogueHitHTML).join('') + '</div>'
+        : '');
     return;
   }
   const unit = unitById(curUnit);
   if (!unit) { box.innerHTML = ''; return; }
-  box.innerHTML = unitHeadHTML(unit) + '<div class="wgrid">' + unit.words.map(word => cardHTML(word, unit, false)).join('') + '</div>' +
-    '<p class="textbook-source">词汇与单元顺序依据外研版《英语（新标准）》三年级起点新课标四年级教材整理；中文释义与记忆提示用于辅助学习。</p>';
+  const body = curTab === 'dialogues'
+    ? dialoguesHTML(unit)
+    : '<div class="wgrid">' + unit.words.map(word => cardHTML(word, unit, false)).join('') + '</div>';
+  box.innerHTML = unitHeadHTML(unit) + tabbarHTML() + body +
+    '<p class="textbook-source">词汇、课文对话与单元顺序依据外研版《英语（新标准）》三年级起点新课标四年级教材整理；中文释义、翻译与记忆提示用于辅助学习。</p>';
 }
 function renderStats() {
   document.getElementById('stats').textContent = '已掌握 ' + totalLearned() + ' / ' + totalWords();
@@ -136,9 +198,13 @@ function toggleLearn(key) {
 }
 function stopPlay() {
   playing = false;
+  dlgPlaying = null;
   if (playTimer) { clearTimeout(playTimer); playTimer = null; }
+  if (dlgTimer) { clearTimeout(dlgTimer); dlgTimer = null; }
   try { speechSynthesis.cancel(); } catch (e) {}
   document.querySelectorAll('.wcard.playing').forEach(el => el.classList.remove('playing'));
+  document.querySelectorAll('.dlg-line.playing').forEach(el => el.classList.remove('playing'));
+  document.querySelectorAll('.play-dlg').forEach(el => { el.textContent = '▶️ 连读本段'; });
   const button = document.getElementById('playBtn');
   if (button) button.textContent = '▶️ 连读本单元';
 }
@@ -146,6 +212,7 @@ function playUnit() {
   if (playing) { stopPlay(); return; }
   const unit = unitById(curUnit);
   if (!unit || !unit.words.length) return;
+  stopPlay();
   playing = true;
   document.getElementById('playBtn').textContent = '⏹ 停止连读';
   let index = 0;
@@ -162,6 +229,31 @@ function playUnit() {
     speak(word.en, 0.78);
     index++;
     playTimer = setTimeout(step, 2200);
+  };
+  step();
+}
+/* 连读一段课文：逐句高亮、滚动并朗读，句子间隔比单词稍长。 */
+function playDialogue(id) {
+  if (dlgPlaying === id) { stopPlay(); return; }
+  const dlg = ENGLISH_DIALOGUES.find(item => item.id === id);
+  if (!dlg || !dlg.lines.length) return;
+  stopPlay();
+  dlgPlaying = id;
+  const button = document.querySelector('[data-act="playdlg"][data-id="' + id + '"]');
+  if (button) button.textContent = '⏹ 停止连读';
+  let index = 0;
+  const step = () => {
+    if (dlgPlaying !== id) return;
+    if (index >= dlg.lines.length) { stopPlay(); return; }
+    document.querySelectorAll('.dlg-line.playing').forEach(el => el.classList.remove('playing'));
+    const bubble = Array.from(document.querySelectorAll('.dlg-line')).find(el => el.dataset.key === dlg.id + ':' + index);
+    if (bubble) {
+      bubble.classList.add('playing');
+      bubble.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    }
+    speak(dlg.lines[index].en, 0.78);
+    index++;
+    dlgTimer = setTimeout(step, 3200);
   };
   step();
 }
@@ -202,6 +294,40 @@ function selectUnit(id) {
   render();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
+function switchTab(tab) {
+  if (tab !== 'words' && tab !== 'dialogues') return;
+  if (curTab === tab) return;
+  curTab = tab;
+  enState.tab = tab;
+  enSave();
+  stopPlay();
+  render();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+/* 搜索结果里点课文句子：切到对应单元的课文视图并高亮那一句话。 */
+function gotoDialogue(unitId, dlgId, lineIndex) {
+  const dlg = ENGLISH_DIALOGUES.find(item => item.id === dlgId);
+  const line = dlg && dlg.lines[lineIndex];
+  if (!dlg || !line) return;
+  curUnit = unitById(unitId) ? unitId : curUnit;
+  curTab = 'dialogues';
+  enState.lastUnit = curUnit;
+  enState.tab = curTab;
+  query = '';
+  document.getElementById('search').value = '';
+  stopPlay();
+  enSave();
+  render();
+  const bubble = Array.from(document.querySelectorAll('.dlg-line')).find(el => el.dataset.key === dlgId + ':' + lineIndex);
+  if (bubble) {
+    bubble.classList.remove('flash');
+    void bubble.offsetWidth;
+    bubble.classList.add('flash');
+    setTimeout(() => bubble.classList.remove('flash'), 1600);
+    bubble.scrollIntoView({ block: 'center', behavior: 'smooth' });
+  }
+  speak(line.en);
+}
 
 document.addEventListener('click', event => {
   const el = event.target.closest('[data-act]');
@@ -212,6 +338,9 @@ document.addEventListener('click', event => {
     else if (action === 'learn') { event.preventDefault(); toggleLearn(el.dataset.key); }
     else if (action === 'unit') { event.preventDefault(); selectUnit(el.dataset.id); }
     else if (action === 'play') { event.preventDefault(); playUnit(); }
+    else if (action === 'tab') { event.preventDefault(); switchTab(el.dataset.tab); }
+    else if (action === 'playdlg') { event.preventDefault(); playDialogue(el.dataset.id); }
+    else if (action === 'gotodlg') { event.preventDefault(); gotoDialogue(el.dataset.unit, el.dataset.id, Number(el.dataset.line)); }
     else if (action === 'rel') { event.preventDefault(); speak(el.dataset.t); }
     else if (action === 'home') { event.preventDefault(); stopPlay(); window.location.href = 'index.html'; }
   } catch (error) { console.error('[教材同步英语] 操作出错:', error); }
@@ -249,9 +378,11 @@ window.addEventListener('beforeunload', stopPlay);
 window.English = {
   get state() { return enState; },
   get unit() { return curUnit; },
+  get tab() { return curTab; },
   get query() { return query; },
   units: ENGLISH_UNITS,
-  render, selectUnit, toggleLearn, playUnit, stopPlay, populateVoices, gotoWord,
+  dialogues: ENGLISH_DIALOGUES,
+  render, selectUnit, switchTab, toggleLearn, playUnit, playDialogue, stopPlay, populateVoices, gotoWord, gotoDialogue,
 };
 populateVoices();
 render();

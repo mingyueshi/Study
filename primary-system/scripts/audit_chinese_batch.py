@@ -1,8 +1,12 @@
 """Original-row hashes with an exact 39-pointer whitelist; no plaintext original business rows."""
-import sqlite3,json,hashlib,uuid,argparse,os
+import sqlite3,json,hashlib,uuid,argparse,os,re
 from pathlib import Path
 p=argparse.ArgumentParser();p.add_argument('database');p.add_argument('baseline');p.add_argument('--verify',action='store_true');a=p.parse_args()
 m=json.loads(Path('data/chinese/cn-foundation-20261102-01.json').read_text());db=sqlite3.connect(a.database)
+def safe_ident(name):
+ if not re.fullmatch(r'[A-Za-z_][A-Za-z0-9_]*',str(name)):raise SystemExit(f'非法 SQL 标识符：{name!r}')
+ return name
+def sql(*parts):return ''.join(parts)
 def h(value):return hashlib.sha256(json.dumps(value,ensure_ascii=False,sort_keys=True,default=str).encode()).hexdigest()
 def key(table,value):return h(value) if table=='django_session' else str(value)
 allowed={}

@@ -3,7 +3,7 @@ from django.contrib.auth import views as auth_views
 from django.urls import include, path
 from django.views.generic.base import RedirectView
 from nova_admin.slider import SliderCaptchaAdminAuthenticationForm
-from accounts.views import profile
+from accounts import views as accounts_views
 from accounts.forms import LearnerAuthenticationForm
 from catalog import views as catalog
 from learning import views as learning
@@ -38,7 +38,8 @@ urlpatterns = [
     path('idioms/', include('idioms.urls')),
     path('phonetics/', include('phonetics.urls')),
     path('writing/', include('writing.urls')),
-    path('accounts/profile/', profile, name='profile'),
+    path('accounts/profile/', accounts_views.profile, name='profile'),
+    path('accounts/register/', accounts_views.register, name='register'),
     path('accounts/login/', auth_views.LoginView.as_view(template_name='accounts/login.html', authentication_form=LearnerAuthenticationForm), name='login'),
     path('accounts/logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('accounts/password/', auth_views.PasswordChangeView.as_view(template_name='accounts/password.html'), name='password_change'),

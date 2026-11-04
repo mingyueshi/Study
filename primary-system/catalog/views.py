@@ -1,3 +1,5 @@
+import re
+
 from django.core.paginator import Paginator
 from django.db.models import Q, Count
 from django.http import Http404, JsonResponse
@@ -93,6 +95,12 @@ def module_detail(request, code):
 # 教材单元词卡按单元顺序取一组明快底色，跨册循环使用。
 UNIT_CARD_COLORS = ('#4d96ff', '#9b5de5', '#00a8a8', '#f15bb5', '#fee440', '#43aa8b')
 
+# 学习目录单元卡图标：取自教材原型数据（primary/english-data.js），新册补录。
+ENGLISH_UNIT_EMOJI = {
+    '4a-u1': '⚽', '4a-u2': '🏠', '4a-u3': '🌦️', '4a-u4': '🍂', '4a-u5': '🚌', '4a-u6': '🗺️',
+    '4b-u1': '👩‍⚕️', '4b-u2': '😊', '4b-u3': '🌟', '4b-u4': '🌻', '4b-u5': '🎨', '4b-u6': '👕',
+}
+
 
 def attach_english_link_chips(placements):
     """解析教材英语词的关联词（相反/相近/同根/组词/同类），点击即发音。"""
@@ -124,6 +132,10 @@ def collection_detail(request, code):
     # 模板里的单元与选中单元共用同一批实例（英语分支要在单元对象上挂词卡底色）。
     for index, unit in enumerate(units):
         unit.color = UNIT_CARD_COLORS[index % len(UNIT_CARD_COLORS)]
+        if book.module_id and book.module.code == 'english':
+            unit.emoji = ENGLISH_UNIT_EMOJI.get(unit.code, '📖')
+            match = re.search(r'Unit\s*(\d+)', unit.title)
+            unit.unit_no = match.group(1) if match else str(index + 1)
     selected_unit = next((u for u in units if u.code == unit_code), None) if unit_code else (units[0] if units else None)
     if unit_code and selected_unit is None:
         raise Http404('单元不存在。')

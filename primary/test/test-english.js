@@ -3,7 +3,7 @@
    运行：node test/test-english.js
    ============================================================ */
 'use strict';
-const { ENGLISH_UNITS, ENGLISH_BOOKS, ENGLISH_WORDS, RELATION_ORDER } = require('../english-data.js');
+const { ENGLISH_UNITS, ENGLISH_BOOKS, ENGLISH_WORDS, ENGLISH_DIALOGUES, RELATION_ORDER } = require('../english-data.js');
 
 let fails = 0;
 let checked = 0;
@@ -66,8 +66,35 @@ for (const unit of ENGLISH_UNITS) {
     }
   }
 }
-ok(total === 306, '总词数应为 306，实际 ' + total);
+ok(total === 310, '总词数应为 310，实际 ' + total);
 ok(ENGLISH_WORDS.length === total, '练习索引导出数应与词卡数一致');
+
+console.log('— 课文对话 —');
+const unitIdSet = new Set(ENGLISH_UNITS.map(unit => unit.id));
+const dlgIds = new Set();
+let dlgLineTotal = 0;
+for (const dlg of ENGLISH_DIALOGUES) {
+  const tag = '[' + dlg.id + ']';
+  ok(dlg.id && !dlgIds.has(dlg.id), tag + ' 对话 id 缺失或重复');
+  dlgIds.add(dlg.id);
+  ok(unitIdSet.has(dlg.unitId), tag + ' unitId 不在教材中：' + dlg.unitId);
+  ok(dlg.title && dlg.zh && typeof dlg.emoji === 'string', tag + ' 缺少标题、场景名或 emoji');
+  ok(Array.isArray(dlg.lines) && dlg.lines.length >= 2, tag + ' 对话至少 2 句');
+  const speakers = new Set();
+  for (const line of dlg.lines) {
+    dlgLineTotal++;
+    const lineTag = tag + ' ' + (line.who || '?');
+    ok(line.who && typeof line.who === 'string', lineTag + ' 缺少说话人');
+    speakers.add(line.who);
+    ok(typeof line.emoji === 'string', lineTag + ' emoji 应为字符串');
+    ok(line.en && /^[A-Za-z.][A-Za-z0-9 ,.!?;:'’\-]*$/.test(line.en), lineTag + ' 英文句不合法：' + line.en);
+    ok(line.zh && line.zh.length > 0, lineTag + ' 缺少中文翻译');
+    ok(!/["'\n]/.test(line.zh), lineTag + ' 中文翻译应使用中文标点：' + line.zh);
+  }
+  ok(speakers.size >= 1 && speakers.size <= 6, tag + ' 说话人应为 1～6 人（歌谣可为 1 人齐唱）');
+}
+ok(dlgIds.size === ENGLISH_DIALOGUES.length, '对话 id 应唯一');
+ok(ENGLISH_DIALOGUES.length >= 1, '至少录入 1 段课文对话');
 
 console.log(fails === 0
   ? '\n✅ 全部通过（' + ENGLISH_UNITS.length + ' 单元，' + total + ' 条词卡，共断言 ' + checked + ' 项）'

@@ -14,12 +14,26 @@
     <p>选一个令字，想一句含这个字的诗，集满五句写成自己的诗单。</p>
     <span class="tag">开始练诗 →</span>
   </a>
+  <a class="module-card color-chinese" href="{% url 'poetry-map' %}">
+    <img src="{% static 'icons/globe.svg' %}" alt="" width="88" height="88">
+    <span class="module-meta">古诗词 <span aria-hidden="true">↗</span></span>
+    <h3>诗词地图</h3>
+    <p>黄鹤楼、庐山、西湖、玉门关……背过的诗按地点摆上中国地图，去哪儿玩先查查。</p>
+    <span class="tag">看看这里有什么诗 →</span>
+  </a>
   <a class="module-card color-chinese" href="{% url 'idiom-scenes' %}">
     <img src="{% static 'icons/idioms.svg' %}" alt="" width="88" height="88">
     <span class="module-meta">语文 <span aria-hidden="true">↗</span></span>
     <h3>场景成语</h3>
     <p>从学习、心情和身边的小事出发，读懂成语，学会在一句话里用它。</p>
     <span class="tag">看看生活里的成语 →</span>
+  </a>
+  <a class="module-card color-chinese" href="{% url 'idiom-stories' %}">
+    <img src="{% static 'icons/dragon.svg' %}" alt="" width="88" height="88">
+    <span class="module-meta">语文 <span aria-hidden="true">↗</span></span>
+    <h3>成语典故馆</h3>
+    <p>负荆请罪、三顾茅庐、望梅止渴——按典籍翻看有人物故事的成语，顺着人物线索把典故串起来。</p>
+    <span class="tag">读成语故事 →</span>
   </a>
 </div></section>
 <section id="books" aria-labelledby="books-title"><div class="section-heading"><div><p class="eyebrow">找到适合自己的那一本</p><h2 id="books-title">我的学习书架</h2></div><p>跟着课本的进度走</p></div>{% include 'catalog/filters.html' %}

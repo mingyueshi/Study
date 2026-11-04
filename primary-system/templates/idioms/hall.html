@@ -1,0 +1,25 @@
+{% extends 'idioms/layout.html' %}{% load static %}{% block title %}成语典故馆 · 乐学堂{% endblock %}
+{% block idiom_crumb %}<span aria-current="page">成语典故馆</span>{% endblock %}
+{% block idiom_content %}<link rel="stylesheet" href="{% static 'idioms/stories.css' %}">
+<div class="hall-hero"><p class="eyebrow">成语 · 有人物故事的典故</p><h1>成语典故馆</h1><p>负荆请罪的荆条、三顾茅庐的雪、望梅止渴的口水——每个成语背后都有一个人在做决定。按典籍翻看，或顺着人物线索把故事串起来。</p></div>
+<div class="hall-toolbar">
+  <div class="hall-books"><span class="hall-label">典籍</span>{% for b in books %}<a class="chip{% if b == book %} on{% endif %}" href="?book={{ b|urlencode }}">{% if b == book %}✓ {% endif %}{{ b }}</a>{% endfor %}{% if book or figure_id %}<a class="chip chip-clear" href="{% url 'idiom-stories' %}">✕ 清除</a>{% endif %}</div>
+  <div class="hall-figures"><span class="hall-label">人物线索</span>{% for c in clues %}<a class="figure-chip{% if c.id == figure_id %} on{% endif %}" href="?figure={{ c.id }}" title="{{ c.blurb }}">{{ c.emoji }} {{ c.name }}<i>{{ c.stories|length }}</i></a>{% endfor %}</div>
+  {% if clue %}<section class="figure-clue">
+    <div class="figure-card"><span class="figure-emoji">{{ clue.emoji }}</span><div><h2>{{ clue.name }} <i>{{ clue.era }} · {{ clue.role }}</i></h2><p>{{ clue.blurb }}</p></div></div>
+    <p class="figure-books">人物线索：{{ clue.name }} 出现在 <b>{{ clue.stories|length }}</b> 个典故里，见于 {{ clue.books|join:'、' }}。</p>
+  </section>{% endif %}
+</div>
+<section class="hall-grid">{% for card in shown %}<article class="story-card" id="story-{{ card.id }}">
+  <header class="story-head"><div class="story-idiom"><b>{{ card.headword }}</b>{% if card.reading and card.valid %}{% include 'idioms/pinyin.html' %}{% endif %}<span class="story-book">{{ card.source_book }} · {{ card.source_chapter }}</span></div>
+  {% if card.valid %}<div class="story-actions"><button class="say-chip" type="button" data-say="{{ card.headword }}。{{ card.meaning }}" aria-label="朗读 {{ card.headword }}">🔊</button><a class="say-chip link" href="{% url 'idiom-entry' card.reading.binding.sense.entry_id %}" aria-label="打开 {{ card.headword }} 词典详情">↗</a></div>{% endif %}</header>
+  {% if card.valid %}
+  <p class="story-quote">「{{ card.quote }}」</p>
+  <div class="story-body"><p>{{ card.story }}</p></div>
+  <p class="story-meaning"><b>含义</b>{{ card.meaning }}</p>
+  {% if card.figures %}<div class="story-figures">{% for f in card.figures %}<a class="figure-mini" href="?figure={{ f.id }}" title="{{ f.blurb }}">{{ f.emoji }} {{ f.name }}</a>{% endfor %}</div>{% endif %}
+  {% if card.reading.properties.example %}<p class="story-example">例：{{ card.reading.properties.example }}</p>{% endif %}
+  {% else %}<div class="story-paused">钉词待核对：词典记录变动，稍后再来看看。</div>{% endif %}
+</article>{% endfor %}</section>
+{% if not shown %}<div class="empty">这个典籍或人物下暂时没有典故卡。</div>{% endif %}
+{% endblock %}

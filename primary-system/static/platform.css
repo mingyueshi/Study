@@ -252,6 +252,10 @@ textarea { resize: vertical; line-height: 1.9; }
 .auth-card > p { color: var(--muted); font-size: 18px; }
 .auth-card > .muted { display: inline-flex; align-items: center; min-height: 44px; margin-top: 24px; font-size: 15px; }
 .auth-card .back { margin-bottom: 0; }
+.auth-actions { display: grid; gap: 14px; margin-top: 26px; }
+.auth-actions .button { width: 100%; }
+.auth-register { background: #eef5e3; border-color: #a3c188; color: #2f6d4f; }
+.auth-register:hover { background: #e2edcf; border-color: var(--green); color: var(--green-dark, #2f6d4f); }
 .tabs { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 28px; }
 .tabs a { display: inline-flex; align-items: center; min-height: 52px; padding: 10px 22px; border: 1px solid #cbdac4; border-radius: 16px; background: var(--white); font-size: 18px; font-weight: 600; }
 .tabs a:hover, .tabs a[aria-current] { border-color: var(--green); background: var(--green); color: #fff; }

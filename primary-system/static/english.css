@@ -1,10 +1,18 @@
 /* 教材同步单词：单元词卡栅格（对齐 primary/english.html 原型）。
    仅在英语教材册页加载；类名与场景单词词卡保持同族，样式独立避免相互影响。 */
 
-/* 单元导航：中文副题（色点与词数见 platform.css 共享规则） */
-.unit-nav .unit-title-text { display: inline; }
-.unit-nav .unit-zh { margin-left: 6px; color: var(--muted, #6b7480); font-size: 15px; font-weight: 500; }
-.unit-nav a[aria-current="page"] .unit-zh { color: var(--ink, #22303c); }
+/* 学习目录：英语单元卡（emoji + Unit 号 + 中文副题 + 词数），按单元着色 */
+.unit-nav .unit-card { display: grid; grid-template-columns: 44px minmax(0, 1fr) auto; align-items: center; gap: 4px 12px; min-height: 60px; padding: 10px 12px; margin-block: 6px; border: 1px solid color-mix(in srgb, var(--c, #609cbd) 22%, #fffefa); border-radius: 15px; background: color-mix(in srgb, var(--c, #609cbd) 7%, #fffefa); line-height: 1.4; }
+.unit-nav .unit-card:hover { border-color: color-mix(in srgb, var(--c) 55%, #fffefa); background: color-mix(in srgb, var(--c, #609cbd) 14%, #fffefa); }
+.unit-nav .unit-card[aria-current="page"] { border-color: color-mix(in srgb, var(--c, #609cbd) 65%, #fffefa); background: color-mix(in srgb, var(--c, #609cbd) 18%, #fffefa); box-shadow: inset 4px 0 0 var(--c, #609cbd); }
+.unit-nav .unit-emoji { display: grid; place-items: center; grid-row: span 2; width: 44px; height: 44px; border-radius: 13px; background: color-mix(in srgb, var(--c, #609cbd) 16%, #fffefa); font-size: 24px; }
+.unit-nav .unit-title-wrap { min-width: 0; display: flex; flex-direction: column; }
+.unit-nav .unit-title-en { color: color-mix(in srgb, var(--c, #609cbd) 62%, #33404d); font-size: 16px; font-weight: 800; letter-spacing: .01em; }
+.unit-nav .unit-title-zh { color: var(--ink, #22303c); font-size: 15px; font-weight: 500; overflow-wrap: anywhere; }
+.unit-nav .unit-card:hover .unit-title-en, .unit-nav .unit-card[aria-current="page"] .unit-title-en { color: color-mix(in srgb, var(--c, #609cbd) 78%, #22303c); }
+.unit-nav .unit-words { grid-row: span 2; align-self: center; color: color-mix(in srgb, var(--c, #609cbd) 68%, #4c5b68); font-size: 16px; font-weight: 800; font-variant-numeric: tabular-nums; }
+.unit-nav .unit-words i { margin-left: 2px; font-style: normal; font-size: 12px; font-weight: 600; }
+.unit-nav .unit-card[aria-current="page"] .unit-words { color: color-mix(in srgb, var(--c, #609cbd) 90%, #22303c); }
 
 /* 关联词图例：反/近/根/组/类 */
 .rel-legend { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; margin: 0 0 16px; font-size: 13px; font-weight: 600; color: #6b7480; }

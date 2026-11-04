@@ -18,7 +18,7 @@
 - 小学版：双击 [`primary/index.html`](primary/index.html)，详见 [`primary/README.md`](primary/README.md)
 - 语文知识点：双击 [`primary/knowledge.html`](primary/knowledge.html)，人教版（统编版·新课标）四年级上册单元知识点总结，配课文图示与实景照片，附作者小传、原文金句、真实百科与B站拓展视频（需联网），可点读、可搜索、可打印。
 - 数学知识点：双击 [`primary/math.html`](primary/math.html)，北师大版（新课标）四年级上册单元知识点总结，含例题、图示与互动演示（转角认角、竖式逐步算、行程小车等）、公式速查与易错诊所。
-- 教材同步单词：双击 [`primary/english.html`](primary/english.html)，外研版新标准三起（新课标）四年级上下册，含 12 单元 306 条词卡点读。
+- 教材同步单词：双击 [`primary/english.html`](primary/english.html)，外研版新标准三起（新课标）四年级上下册，含 12 单元 310 条词卡与 36 段课文对话点读。
 - 场景单词：双击 [`primary/words.html`](primary/words.html)，按教室、食物、农场、交通等 25 个生活场景学习 305 个单词，支持点读、拆分记忆与掌握记录。
 - 成语接龙：双击 [`primary/chain.html`](primary/chain.html)，支持自己接龙、小龙陪练、释义提示与本地续玩。
 - 地理探索：双击 [`primary/geo.html`](primary/geo.html)，适合小学生的地理知识学习，八大站点 37 个知识点，配罗盘、四季互动演示与图示，可点读、可搜索、可打印。

@@ -1,0 +1,11 @@
+{
+ "projection": "albers-equal-area-conic",
+ "lat1": 25.0,
+ "lat2": 47.0,
+ "lon0": 105.0,
+ "scale": 1000.0,
+ "offset_x": -419.07467307742354,
+ "offset_y": -940.074255365897,
+ "width": 773,
+ "height": 892
+}
