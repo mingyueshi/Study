@@ -1,0 +1,1287 @@
+{
+ "oewn-01320032-n": {
+  "en": "domestic animal",
+  "gloss": "any of various animals that have been tamed and made fit for a human environment",
+  "zh": "家畜"
+ },
+ "oewn-01320872-n": {
+  "en": "head",
+  "gloss": "a single domestic animal",
+  "zh": "一头（家畜）"
+ },
+ "oewn-02086723-n": {
+  "en": "dog",
+  "gloss": "a member of the genus Canis (probably descended from the common wolf) that has been domesticated by man since ",
+  "zh": "狗"
+ },
+ "oewn-01325095-n": {
+  "en": "puppy",
+  "gloss": "a young dog",
+  "zh": "小狗"
+ },
+ "oewn-02088026-n": {
+  "en": "toy",
+  "gloss": "any of several breeds of very small dogs kept purely as pets",
+  "zh": "玩赏犬"
+ },
+ "oewn-01321385-n": {
+  "en": "pet",
+  "gloss": "a domesticated animal kept for companionship or amusement",
+  "zh": "宠物"
+ },
+ "oewn-01324070-n": {
+  "en": "young",
+  "gloss": "any immature animal",
+  "zh": "幼崽"
+ },
+ "oewn-01324345-n": {
+  "en": "young mammal",
+  "gloss": "any immature mammal",
+  "zh": "幼崽"
+ },
+ "oewn-01324834-n": {
+  "en": "pup",
+  "gloss": "young of any of various canines such as a dog or wolf",
+  "zh": "幼犬"
+ },
+ "oewn-02125600-n": {
+  "en": "kitty",
+  "gloss": "young domestic cat",
+  "zh": "小猫"
+ },
+ "oewn-01468898-n": {
+  "en": "chordate",
+  "gloss": "any animal of the phylum Chordata having a notochord or spinal column",
+  "zh": "脊索动物"
+ },
+ "oewn-01474323-n": {
+  "en": "craniate",
+  "gloss": "animals having a bony or cartilaginous skeleton with a segmented spinal column and a large brain enclosed in a",
+  "zh": "有头类"
+ },
+ "oewn-01476447-n": {
+  "en": "aquatic vertebrate",
+  "gloss": "animal living wholly or chiefly in or on water",
+  "zh": "水生脊椎动物"
+ },
+ "oewn-01505702-n": {
+  "en": "bird",
+  "gloss": "warm-blooded egg-laying vertebrates characterized by feathers and forelimbs modified as wings",
+  "zh": "鸟"
+ },
+ "oewn-01864419-n": {
+  "en": "mammal",
+  "gloss": "any warm-blooded vertebrate having the skin more or less covered with hair; young are born alive except for th",
+  "zh": "哺乳动物"
+ },
+ "oewn-01908302-n": {
+  "en": "invertebrate",
+  "gloss": "any animal lacking a backbone or notochord; the term is not used as a scientific classification",
+  "zh": "无脊椎动物"
+ },
+ "oewn-01770302-n": {
+  "en": "arthropod",
+  "gloss": "invertebrate having jointed limbs and a segmented body with an exoskeleton made of chitin",
+  "zh": "节肢动物"
+ },
+ "oewn-01771988-n": {
+  "en": "arachnid",
+  "gloss": "air-breathing arthropods characterized by simple eyes and four pairs of legs",
+  "zh": "蛛形类"
+ },
+ "oewn-01977414-n": {
+  "en": "crustacean",
+  "gloss": "any mainly aquatic arthropod usually having a segmented body and chitinous exoskeleton",
+  "zh": "甲壳类"
+ },
+ "oewn-01912063-n": {
+  "en": "cnidarian",
+  "gloss": "radially symmetrical animals having saclike bodies with only one opening and tentacles with stinging structure",
+  "zh": "刺胞动物"
+ },
+ "oewn-01913388-n": {
+  "en": "jellyfish",
+  "gloss": "any of numerous usually marine and free-swimming coelenterates that constitute the sexually reproductive forms",
+  "zh": "水母"
+ },
+ "oewn-01914480-n": {
+  "en": "hydroid",
+  "gloss": "colonial coelenterates having the polyp phase dominant",
+  "zh": "水螅类"
+ },
+ "oewn-01916804-n": {
+  "en": "anthozoan",
+  "gloss": "sessile marine coelenterates including solitary and colonial polyps; the medusoid phase is entirely suppressed",
+  "zh": "珊瑚虫类"
+ },
+ "oewn-01924944-n": {
+  "en": "worm",
+  "gloss": "any of numerous relatively small elongated soft-bodied animals especially of the phyla Annelida and Chaetognat",
+  "zh": "虫子"
+ },
+ "oewn-01943377-n": {
+  "en": "mollusc",
+  "gloss": "invertebrate having a soft unsegmented body usually enclosed in a shell",
+  "zh": "软体动物"
+ },
+ "oewn-01944818-n": {
+  "en": "univalve",
+  "gloss": "a class of mollusks typically having a one-piece coiled shell and flattened muscular foot with a head bearing ",
+  "zh": "单壳类"
+ },
+ "oewn-01970956-n": {
+  "en": "cephalopod",
+  "gloss": "marine mollusk characterized by well-developed head and eyes and sucker-bearing tentacles",
+  "zh": "头足类"
+ },
+ "oewn-02319359-n": {
+  "en": "echinoderm",
+  "gloss": "marine invertebrates with tube feet and five-part radially symmetrical bodies",
+  "zh": "棘皮动物"
+ },
+ "oewn-02319987-n": {
+  "en": "sea star",
+  "gloss": "echinoderms characterized by five arms extending from a central disk",
+  "zh": "海星"
+ },
+ "oewn-07571428-n": {
+  "en": "solid food",
+  "gloss": "any solid substance (as opposed to liquid) that is used as a source of nourishment",
+  "zh": "固体食物"
+ },
+ "oewn-07617570-n": {
+  "en": "chocolate",
+  "gloss": "a food made from roasted ground cacao beans",
+  "zh": "巧克力"
+ },
+ "oewn-07637670-n": {
+  "en": "baked goods",
+  "gloss": "foods (like breads and cakes and pastries) that are cooked in an oven",
+  "zh": "烘焙食品"
+ },
+ "oewn-07644479-n": {
+  "en": "cake",
+  "gloss": "food made from or based on a mixture of flour, sugar, eggs, and fat, typically cooked in an oven",
+  "zh": "蛋糕"
+ },
+ "oewn-07695101-n": {
+  "en": "bread",
+  "gloss": "food made from dough of flour or meal and usually raised with yeast or baking powder and then baked",
+  "zh": "面包"
+ },
+ "oewn-07665463-n": {
+  "en": "meat",
+  "gloss": "the flesh of animals (including fishes and birds and snails) used as food",
+  "zh": "肉"
+ },
+ "oewn-07659991-n": {
+  "en": "bird",
+  "gloss": "the flesh of a bird or fowl (wild or domestic) used as food",
+  "zh": "禽肉"
+ },
+ "oewn-07666058-n": {
+  "en": "game",
+  "gloss": "the flesh of wild animals that is used for food",
+  "zh": "野味"
+ },
+ "oewn-07667063-n": {
+  "en": "organs",
+  "gloss": "edible viscera of a butchered animal",
+  "zh": "内脏"
+ },
+ "oewn-07669003-n": {
+  "en": "cut",
+  "gloss": "a piece of meat that has been cut from an animal carcass",
+  "zh": "肉块"
+ },
+ "oewn-07679337-n": {
+  "en": "beef",
+  "gloss": "meat from an adult domestic bovine",
+  "zh": "牛肉"
+ },
+ "oewn-07691372-n": {
+  "en": "sausage",
+  "gloss": "highly seasoned minced meat stuffed in casings",
+  "zh": "香肠"
+ },
+ "oewn-07798451-n": {
+  "en": "snail",
+  "gloss": "edible terrestrial snail usually served in the shell with a sauce of melted butter and garlic",
+  "zh": "蜗牛（食材）"
+ },
+ "oewn-07721456-n": {
+  "en": "produce",
+  "gloss": "fresh fruits and vegetable grown for the market",
+  "zh": "生鲜农产品"
+ },
+ "oewn-07721676-n": {
+  "en": "edible fruit",
+  "gloss": "edible reproductive body of a seed plant especially one having sweet flesh",
+  "zh": "食用水果"
+ },
+ "oewn-07723196-n": {
+  "en": "veg",
+  "gloss": "edible seeds or roots or stems or leaves or bulbs or tubers or nonsweet fruits of any of numerous herbaceous p",
+  "zh": "蔬菜"
+ },
+ "oewn-07792842-n": {
+  "en": "seafood",
+  "gloss": "edible fish (broadly including freshwater fish) or shellfish or roe etc",
+  "zh": "海鲜"
+ },
+ "oewn-07798341-n": {
+  "en": "octopus",
+  "gloss": "tentacles of octopus prepared as food",
+  "zh": "章鱼（食材）"
+ },
+ "oewn-07799186-n": {
+  "en": "shellfish",
+  "gloss": "meat of edible aquatic invertebrate with a shell (especially a mollusk or crustacean)",
+  "zh": "贝类"
+ },
+ "oewn-07815254-n": {
+  "en": "roe",
+  "gloss": "fish eggs or egg-filled ovary; having a grainy texture",
+  "zh": "鱼子"
+ },
+ "oewn-07865312-n": {
+  "en": "yogurt",
+  "gloss": "a custard-like food made from curdled milk",
+  "zh": "酸奶"
+ },
+ "oewn-07576217-n": {
+  "en": "fare",
+  "gloss": "the food and drink that are regularly served or consumed",
+  "zh": "伙食"
+ },
+ "oewn-07581905-n": {
+  "en": "foodstuff",
+  "gloss": "a substance that can be used or prepared for use as food",
+  "zh": "食材"
+ },
+ "oewn-07582428-n": {
+  "en": "starches",
+  "gloss": "foodstuff rich in natural starch (especially potatoes, rice, bread)",
+  "zh": "淀粉类主食"
+ },
+ "oewn-07726361-n": {
+  "en": "spud",
+  "gloss": "an edible tuber native to South America; a staple food of Ireland",
+  "zh": "土豆"
+ },
+ "oewn-07820299-n": {
+  "en": "rice",
+  "gloss": "grains used as food either unpolished or more often polished",
+  "zh": "米"
+ },
+ "oewn-07818393-n": {
+  "en": "grain",
+  "gloss": "foodstuff prepared from the starchy grains of cereal grasses",
+  "zh": "谷物"
+ },
+ "oewn-07747928-n": {
+  "en": "corn",
+  "gloss": "ears of corn that can be prepared and served for human food",
+  "zh": "玉米"
+ },
+ "oewn-07825072-n": {
+  "en": "fixings",
+  "gloss": "food that is a component of a mixture in cooking",
+  "zh": "配料"
+ },
+ "oewn-07825344-n": {
+  "en": "flavorer",
+  "gloss": "something added to food primarily for the savor it imparts",
+  "zh": "调味料"
+ },
+ "oewn-07857013-n": {
+  "en": "white",
+  "gloss": "the white part of an egg; the nutritive and protective gelatinous substance surrounding the yolk consisting ma",
+  "zh": "蛋清"
+ },
+ "oewn-07856780-n": {
+  "en": "egg",
+  "gloss": "oval reproductive body of a fowl (especially a hen) used as food",
+  "zh": "蛋"
+ },
+ "oewn-07859751-n": {
+  "en": "dairy product",
+  "gloss": "milk and butter and cheese",
+  "zh": "乳制品"
+ },
+ "oewn-07860018-n": {
+  "en": "milk",
+  "gloss": "a white nutritious liquid secreted by mammals and used as food by human beings",
+  "zh": "奶"
+ },
+ "oewn-07860580-n": {
+  "en": "milk",
+  "gloss": "any of several nutritive milklike liquids",
+  "zh": "植物奶"
+ },
+ "oewn-07939988-n": {
+  "en": "juice",
+  "gloss": "the liquid part that can be extracted from plant or animal tissue by squeezing or cooking",
+  "zh": "果汁"
+ },
+ "oewn-07586285-n": {
+  "en": "aliment",
+  "gloss": "a source of materials to nourish the body",
+  "zh": "营养来源"
+ },
+ "oewn-05406377-n": {
+  "en": "milk",
+  "gloss": "produced by mammary glands of female mammals for feeding their young",
+  "zh": "母乳"
+ },
+ "oewn-07572535-n": {
+  "en": "course",
+  "gloss": "part of a meal served at one time",
+  "zh": "一道菜"
+ },
+ "oewn-07625449-n": {
+  "en": "sweet",
+  "gloss": "a dish served as the last course of a meal",
+  "zh": "甜点"
+ },
+ "oewn-07572730-n": {
+  "en": "goody",
+  "gloss": "something considered choice to eat",
+  "zh": "好吃的"
+ },
+ "oewn-07612255-n": {
+  "en": "sweet",
+  "gloss": "a food rich in sugar",
+  "zh": "糖果"
+ },
+ "oewn-07572999-n": {
+  "en": "dish",
+  "gloss": "a particular item of prepared food",
+  "zh": "菜肴"
+ },
+ "oewn-07598762-n": {
+  "en": "soup",
+  "gloss": "liquid food especially of meat or fish or vegetable stock often containing pieces of solid food",
+  "zh": "汤"
+ },
+ "oewn-07679644-n": {
+  "en": "cake",
+  "gloss": "small flat mass of chopped or ground food",
+  "zh": "肉饼"
+ },
+ "oewn-07728127-n": {
+  "en": "snack food",
+  "gloss": "food for light meals or for eating between meals",
+  "zh": "零食"
+ },
+ "oewn-07889783-n": {
+  "en": "pizza",
+  "gloss": "Italian open pie made of thin bread dough spread with a spiced mixture of e.g. tomato sauce and cheese",
+  "zh": "披萨"
+ },
+ "oewn-07589261-n": {
+  "en": "meal",
+  "gloss": "the food served and eaten at one time",
+  "zh": "一餐"
+ },
+ "oewn-07590167-n": {
+  "en": "breakfast",
+  "gloss": "the first meal of the day (usually in the morning)",
+  "zh": "早餐"
+ },
+ "oewn-07590641-n": {
+  "en": "lunch",
+  "gloss": "a midday meal",
+  "zh": "午餐"
+ },
+ "oewn-07591291-n": {
+  "en": "dinner",
+  "gloss": "the main meal of the day served in the evening or at midday",
+  "zh": "晚餐"
+ },
+ "oewn-07592003-n": {
+  "en": "picnic",
+  "gloss": "any informal meal eaten outside or on an excursion",
+  "zh": "野餐"
+ },
+ "oewn-07816067-n": {
+  "en": "feed",
+  "gloss": "food for domestic livestock",
+  "zh": "饲料"
+ },
+ "oewn-07816716-n": {
+  "en": "fodder",
+  "gloss": "coarse food (especially for livestock) composed of entire plants or the leaves and stalks of a cereal crop",
+  "zh": "草料"
+ },
+ "oewn-07817067-n": {
+  "en": "grass",
+  "gloss": "bulky food like grass or hay for browsing or grazing horses or cattle",
+  "zh": "草"
+ },
+ "oewn-07818002-n": {
+  "en": "hay",
+  "gloss": "grass mowed and cured for use as fodder",
+  "zh": "干草"
+ },
+ "oewn-07897775-n": {
+  "en": "drink",
+  "gloss": "any liquid suitable for drinking",
+  "zh": "饮品"
+ },
+ "oewn-07900542-n": {
+  "en": "alcohol",
+  "gloss": "a liquor or brew containing alcohol as the active agent",
+  "zh": ""
+ },
+ "oewn-07907701-n": {
+  "en": "vino",
+  "gloss": "fermented juice (of grapes especially)",
+  "zh": ""
+ },
+ "oewn-07917827-n": {
+  "en": "booze",
+  "gloss": "an alcoholic beverage that is distilled rather than fermented",
+  "zh": ""
+ },
+ "oewn-07927611-n": {
+  "en": "mixed drink",
+  "gloss": "made of two or more ingredients",
+  "zh": "饮品"
+ },
+ "oewn-07939004-n": {
+  "en": "cocoa",
+  "gloss": "a beverage made from cocoa powder and milk and sugar; usually drunk hot",
+  "zh": "可可"
+ },
+ "oewn-07951744-n": {
+  "en": "water",
+  "gloss": "a liquid necessary for the life of most animals and plants",
+  "zh": "水"
+ },
+ "oewn-12056536-n": {
+  "en": "achene",
+  "gloss": "small dry indehiscent fruit with the seed distinct from the fruit wall",
+  "zh": "瘦果"
+ },
+ "oewn-12056695-n": {
+  "en": "key",
+  "gloss": "a winged often one-seed indehiscent fruit as of the ash or elm or maple",
+  "zh": "翅果"
+ },
+ "oewn-13154372-n": {
+  "en": "ear",
+  "gloss": "fruiting spike of a cereal plant especially corn",
+  "zh": "果穗"
+ },
+ "oewn-13156591-n": {
+  "en": "seed",
+  "gloss": "a small hard fruit",
+  "zh": "种子果实"
+ },
+ "oewn-12177336-n": {
+  "en": "grain",
+  "gloss": "dry seed-like fruit produced by the cereal grasses: e.g. wheat, barley, Indian corn",
+  "zh": "谷粒"
+ },
+ "oewn-12177573-n": {
+  "en": "kernel",
+  "gloss": "a single whole grain of a cereal",
+  "zh": "谷粒"
+ },
+ "oewn-13157075-n": {
+  "en": "bean",
+  "gloss": "any of various seeds or fruits that are beans or resemble beans",
+  "zh": "豆状果实"
+ },
+ "oewn-13159085-n": {
+  "en": "drupe",
+  "gloss": "fleshy indehiscent fruit with a single seed: e.g. almond, peach, plum, cherry, elderberry, olive, jujube",
+  "zh": "核果"
+ },
+ "oewn-07766980-n": {
+  "en": "peach",
+  "gloss": "downy juicy fruit with sweet yellowish or whitish flesh",
+  "zh": "豌豆"
+ },
+ "oewn-07773108-n": {
+  "en": "cherry",
+  "gloss": "a red fruit with a single hard stone",
+  "zh": "樱桃"
+ },
+ "oewn-13159619-n": {
+  "en": "pome",
+  "gloss": "a fleshy fruit (apple or pear or related fruits) having seed chambers and an outer fleshy part",
+  "zh": "仁果"
+ },
+ "oewn-13159832-n": {
+  "en": "pod",
+  "gloss": "a several-seeded dehiscent fruit as e.g. of a leguminous plant",
+  "zh": "豆荚"
+ },
+ "oewn-11768471-n": {
+  "en": "legume",
+  "gloss": "the fruit or seed of any of various bean or pea plants consisting of a case that splits along both sides when ",
+  "zh": "豆科果实"
+ },
+ "oewn-12580787-n": {
+  "en": "pea",
+  "gloss": "the fruit or seed of a pea plant",
+  "zh": "豌豆（果实）"
+ },
+ "oewn-13104346-n": {
+  "en": "tracheophyte",
+  "gloss": "green plant having a vascular system: ferns, gymnosperms, angiosperms",
+  "zh": "维管植物"
+ },
+ "oewn-11572837-n": {
+  "en": "phanerogam",
+  "gloss": "plant that reproduces by means of seeds not spores",
+  "zh": "种子植物"
+ },
+ "oewn-11685823-n": {
+  "en": "angiosperm",
+  "gloss": "plants having seeds in a closed ovary",
+  "zh": "被子植物"
+ },
+ "oewn-12226211-n": {
+  "en": "herb",
+  "gloss": "a plant lacking a permanent woody stem; many are flowering garden plants or potherbs; some having medicinal pr",
+  "zh": "草本植物"
+ },
+ "oewn-11767937-n": {
+  "en": "legume",
+  "gloss": "an erect or climbing bean or pea plant of the family Leguminosae",
+  "zh": "腿肉"
+ },
+ "oewn-11889283-n": {
+  "en": "crucifer",
+  "gloss": "any of various plants of the family Cruciferae",
+  "zh": "十字花科植物"
+ },
+ "oewn-11907006-n": {
+  "en": "rocket",
+  "gloss": "erect European annual often grown as a salad crop to be harvested when young and tender",
+  "zh": "火箭"
+ },
+ "oewn-12006775-n": {
+  "en": "lettuce",
+  "gloss": "any of various plants of the genus Lactuca",
+  "zh": "莴苣"
+ },
+ "oewn-12122387-n": {
+  "en": "gramineous plant",
+  "gloss": "cosmopolitan herbaceous or woody plants with hollow jointed stems and long narrow leaves",
+  "zh": "禾本科植物"
+ },
+ "oewn-12372804-n": {
+  "en": "banana",
+  "gloss": "any of several tropical and subtropical treelike herbs of the genus Musa having a terminal crown of large enti",
+  "zh": "香蕉"
+ },
+ "oewn-12628217-n": {
+  "en": "pineapple",
+  "gloss": "a tropical American plant bearing a large fleshy edible fruit with a terminal tuft of stiff leaves; widely cul",
+  "zh": "菠萝"
+ },
+ "oewn-12650905-n": {
+  "en": "strawberry",
+  "gloss": "any of various low perennial herbs with many runners and bearing white flowers followed by edible fruits havin",
+  "zh": "草莓"
+ },
+ "oewn-12916760-n": {
+  "en": "brinjal",
+  "gloss": "hairy upright herb native to southeastern Asia but widely cultivated for its large glossy edible fruit commonl",
+  "zh": "茄子植株"
+ },
+ "oewn-12926577-n": {
+  "en": "tomato",
+  "gloss": "native to South America; widely cultivated in many varieties",
+  "zh": "番茄"
+ },
+ "oewn-12954163-n": {
+  "en": "celery",
+  "gloss": "widely cultivated herb with aromatic leaf stalks that are eaten raw or cooked",
+  "zh": "芹菜"
+ },
+ "oewn-12958148-n": {
+  "en": "carrot",
+  "gloss": "perennial plant widely cultivated as an annual in many varieties for its long conical orange edible roots; tem",
+  "zh": "胡萝卜"
+ },
+ "oewn-13121436-n": {
+  "en": "vine",
+  "gloss": "a plant with a weak stem that derives support from climbing, twining, or creeping along a surface",
+  "zh": "藤蔓"
+ },
+ "oewn-12178286-n": {
+  "en": "gourd",
+  "gloss": "any vine of the family Cucurbitaceae that bears fruits with hard rinds",
+  "zh": "葫芦科藤蔓"
+ },
+ "oewn-12179315-n": {
+  "en": "squash",
+  "gloss": "any of numerous annual trailing plants of the genus Cucurbita grown for their fleshy edible fruits",
+  "zh": "南瓜藤"
+ },
+ "oewn-12391956-n": {
+  "en": "kiwi",
+  "gloss": "climbing vine native to China; cultivated in New Zealand for its fuzzy edible fruit with green meat",
+  "zh": "猕猴桃"
+ },
+ "oewn-12918253-n": {
+  "en": "potato",
+  "gloss": "annual native to South America having underground stolons bearing edible starchy tubers; widely cultivated as ",
+  "zh": "马铃薯"
+ },
+ "oewn-13123168-n": {
+  "en": "climber",
+  "gloss": "a vine or climbing plant that readily grows up a support or over other plants",
+  "zh": "攀缘植物"
+ },
+ "oewn-13165571-n": {
+  "en": "grape",
+  "gloss": "any of numerous woody vines of genus Vitis bearing clusters of edible berries",
+  "zh": "葡萄藤"
+ },
+ "oewn-13170079-n": {
+  "en": "pepper vine",
+  "gloss": "any of various shrubby vines of the genus Piper",
+  "zh": "胡椒藤"
+ },
+ "oewn-13123895-n": {
+  "en": "woody plant",
+  "gloss": "a plant having hard lignified tissues or woody parts especially stems",
+  "zh": "木本植物"
+ },
+ "oewn-13124818-n": {
+  "en": "tree",
+  "gloss": "a tall perennial woody plant having a main trunk and branches forming a distinct elevated crown; includes both",
+  "zh": "树"
+ },
+ "oewn-13133423-n": {
+  "en": "bush",
+  "gloss": "a low woody perennial plant usually having several major stems",
+  "zh": "灌木"
+ },
+ "oewn-13155061-n": {
+  "en": "bulbous plant",
+  "gloss": "plant growing from a bulb",
+  "zh": "球根植物"
+ },
+ "oewn-12445786-n": {
+  "en": "liliaceous plant",
+  "gloss": "plant growing from a bulb or corm or rhizome or tuber",
+  "zh": "百合科植物"
+ },
+ "oewn-03130521-n": {
+  "en": "craft",
+  "gloss": "a vehicle designed for navigation in or on water or air or through outer space",
+  "zh": "飞行器/船"
+ },
+ "oewn-03515727-n": {
+  "en": "heavier-than-air craft",
+  "gloss": "a non-buoyant aircraft that requires a source of power to hold it aloft and to propel it",
+  "zh": "飞行器/船"
+ },
+ "oewn-03672243-n": {
+  "en": "lighter-than-air craft",
+  "gloss": "aircraft supported by its own buoyancy",
+  "zh": "飞行器/船"
+ },
+ "oewn-04272024-n": {
+  "en": "spacecraft",
+  "gloss": "a craft capable of traveling in outer space; technically, a satellite around the sun",
+  "zh": "飞行器/船"
+ },
+ "oewn-04311353-n": {
+  "en": "starship",
+  "gloss": "a spacecraft designed to carry a crew into interstellar space (especially in science fiction)",
+  "zh": "星际飞船"
+ },
+ "oewn-04537861-n": {
+  "en": "vessel",
+  "gloss": "a craft designed for water transportation",
+  "zh": "船舰"
+ },
+ "oewn-04106523-n": {
+  "en": "rocket",
+  "gloss": "any vehicle self-propelled by a rocket engine",
+  "zh": "火箭"
+ },
+ "oewn-04583497-n": {
+  "en": "wheeled vehicle",
+  "gloss": "a vehicle that moves on wheels and usually has a container for transporting things or people",
+  "zh": "轮式车辆"
+ },
+ "oewn-02963378-n": {
+  "en": "car",
+  "gloss": "a wheeled vehicle adapted to the rails of railroad",
+  "zh": "铁道车"
+ },
+ "oewn-03543814-n": {
+  "en": "horse-drawn vehicle",
+  "gloss": "a wheeled vehicle drawn by one or more horses",
+  "zh": "马车"
+ },
+ "oewn-02971932-n": {
+  "en": "rig",
+  "gloss": "a vehicle with wheels drawn by one or more horses",
+  "zh": "马车"
+ },
+ "oewn-04177098-n": {
+  "en": "self-propelled vehicle",
+  "gloss": "a wheeled vehicle that carries in itself a means of propulsion",
+  "zh": "机动车"
+ },
+ "oewn-03796768-n": {
+  "en": "motor vehicle",
+  "gloss": "a self-propelled wheeled vehicle that does not run on rails",
+  "zh": "机动车"
+ },
+ "oewn-04472087-n": {
+  "en": "tracked vehicle",
+  "gloss": "a self-propelled vehicle that moves on tracks",
+  "zh": "履带车"
+ },
+ "oewn-04472736-n": {
+  "en": "tractor",
+  "gloss": "a wheeled vehicle with large wheels; used in farming and other applications",
+  "zh": "拖拉机"
+ },
+ "oewn-02731365-n": {
+  "en": "dress",
+  "gloss": "clothing in general",
+  "zh": "着装"
+ },
+ "oewn-02759103-n": {
+  "en": "garb",
+  "gloss": "clothing of a distinctive style or for a particular occasion",
+  "zh": "装束"
+ },
+ "oewn-03268041-n": {
+  "en": "ecclesiastical robe",
+  "gloss": "attire that is appropriate to wear in a church",
+  "zh": "教士袍"
+ },
+ "oewn-03268195-n": {
+  "en": "purple",
+  "gloss": "(Roman Catholic Church) official dress of a cardinal; so named after the Tyrial purple color of the robes",
+  "zh": "主教紫袍"
+ },
+ "oewn-02849379-n": {
+  "en": "black",
+  "gloss": "black clothing (worn as a sign of mourning)",
+  "zh": "丧服"
+ },
+ "oewn-02859205-n": {
+  "en": "blue",
+  "gloss": "blue clothing",
+  "zh": "蓝色服装"
+ },
+ "oewn-03009373-n": {
+  "en": "change",
+  "gloss": "a different or fresh set of clothes",
+  "zh": "换洗衣物"
+ },
+ "oewn-03409064-n": {
+  "en": "fur",
+  "gloss": "a garment made of animal pelts or synthetic fur",
+  "zh": "皮草"
+ },
+ "oewn-03653533-n": {
+  "en": "wash",
+  "gloss": "garments or white goods that can be cleaned by laundering",
+  "zh": "待洗衣物"
+ },
+ "oewn-03869443-n": {
+  "en": "overgarment",
+  "gloss": "a garment worn over other garments",
+  "zh": "外套"
+ },
+ "oewn-03061006-n": {
+  "en": "coat",
+  "gloss": "an outer garment that has sleeves and covers the body from shoulder down; worn outdoors",
+  "zh": "大衣"
+ },
+ "oewn-04150962-n": {
+  "en": "scarf",
+  "gloss": "a garment worn around the head or neck or shoulders for warmth or decoration",
+  "zh": "铁道车"
+ },
+ "oewn-03600807-n": {
+  "en": "jersey",
+  "gloss": "a close-fitting pullover shirt",
+  "zh": "套头衫"
+ },
+ "oewn-04237870-n": {
+  "en": "skirt",
+  "gloss": "a garment hanging from the waist; worn mainly by girls and women",
+  "zh": "裙子"
+ },
+ "oewn-04377135-n": {
+  "en": "jumper",
+  "gloss": "a crocheted or knitted garment covering the upper part of the body",
+  "zh": "针织衫"
+ },
+ "oewn-04509492-n": {
+  "en": "turtle",
+  "gloss": "a sweater or jersey with a high close-fitting collar",
+  "zh": "高领衫"
+ },
+ "oewn-03361927-n": {
+  "en": "tweed",
+  "gloss": "(usually in the plural) trousers made of flannel or gabardine or tweed or white cloth",
+  "zh": "花呢裤"
+ },
+ "oewn-04212364-n": {
+  "en": "shorts",
+  "gloss": "(used in the plural) trousers that end at or above the knee",
+  "zh": "短裤"
+ },
+ "oewn-04515458-n": {
+  "en": "undergarment",
+  "gloss": "a garment worn under other garments",
+  "zh": "内衣"
+ },
+ "oewn-04515784-n": {
+  "en": "underpants",
+  "gloss": "an undergarment that covers the body from the waist no further than to the thighs; usually worn next to the sk",
+  "zh": "内裤"
+ },
+ "oewn-03507653-n": {
+  "en": "headgear",
+  "gloss": "clothing for the head",
+  "zh": "一头（家畜）"
+ },
+ "oewn-02957776-n": {
+  "en": "cap",
+  "gloss": "a tight-fitting headdress",
+  "zh": "便帽"
+ },
+ "oewn-03502782-n": {
+  "en": "hat",
+  "gloss": "headdress that protects the head from bad weather; has shaped crown and usually a brim",
+  "zh": "帽子"
+ },
+ "oewn-03821022-n": {
+  "en": "neckpiece",
+  "gloss": "an article of apparel worn about the neck",
+  "zh": "颈饰"
+ },
+ "oewn-03073002-n": {
+  "en": "collar",
+  "gloss": "anything worn or placed about the neck",
+  "zh": "领口饰物"
+ },
+ "oewn-04516887-n": {
+  "en": "uniform",
+  "gloss": "clothing of distinctive design worn by members of a particular group as a means of identification",
+  "zh": "制服"
+ },
+ "oewn-04604179-n": {
+  "en": "women's clothing",
+  "gloss": "clothing that is designed for women to wear",
+  "zh": "女装"
+ },
+ "oewn-03241438-n": {
+  "en": "dress",
+  "gloss": "a one-piece garment for a woman; has skirt and bodice",
+  "zh": "着装"
+ },
+ "oewn-03079101-n": {
+  "en": "comb",
+  "gloss": "any of several tools for straightening fibers",
+  "zh": "梳子"
+ },
+ "oewn-03159112-n": {
+  "en": "cutting implement",
+  "gloss": "a tool used for cutting or slicing",
+  "zh": "肉块"
+ },
+ "oewn-03158739-n": {
+  "en": "cutter",
+  "gloss": "a cutting implement; a tool for cutting",
+  "zh": "肉块"
+ },
+ "oewn-03269943-n": {
+  "en": "edge tool",
+  "gloss": "any cutting tool with a sharp cutting edge (as a chisel or knife or plane or gouge)",
+  "zh": "刃具"
+ },
+ "oewn-03389013-n": {
+  "en": "fork",
+  "gloss": "an agricultural tool used for lifting or digging; has a handle and metal prongs",
+  "zh": "耙子"
+ },
+ "oewn-03494245-n": {
+  "en": "hand tool",
+  "gloss": "a tool used with workers' hands",
+  "zh": "手工具"
+ },
+ "oewn-03961007-n": {
+  "en": "plane",
+  "gloss": "a carpenter's hand tool with an adjustable blade for smoothing or shaping wood",
+  "zh": "手刨"
+ },
+ "oewn-04298380-n": {
+  "en": "square",
+  "gloss": "a hand tool consisting of two straight arms at right angles; used to construct or test right angles",
+  "zh": "角尺"
+ },
+ "oewn-04003842-n": {
+  "en": "power tool",
+  "gloss": "a tool driven by a motor",
+  "zh": "电动工具"
+ },
+ "oewn-03961572-n": {
+  "en": "plane",
+  "gloss": "a power tool for smoothing or shaping wood",
+  "zh": "电刨"
+ },
+ "oewn-04398245-n": {
+  "en": "tap",
+  "gloss": "a tool for cutting female (internal) screw threads",
+  "zh": "丝锥"
+ },
+ "oewn-02825078-n": {
+  "en": "bedroom furniture",
+  "gloss": "furniture intended for use in a bedroom",
+  "zh": "皮草"
+ },
+ "oewn-02821967-n": {
+  "en": "bed",
+  "gloss": "a piece of furniture that provides a place to sleep",
+  "zh": "床"
+ },
+ "oewn-04169042-n": {
+  "en": "seat",
+  "gloss": "furniture that is designed for sitting on",
+  "zh": "座椅"
+ },
+ "oewn-03005231-n": {
+  "en": "chair",
+  "gloss": "a seat for one person, with a support for the back",
+  "zh": "椅子"
+ },
+ "oewn-04263630-n": {
+  "en": "sofa",
+  "gloss": "an upholstered seat for more than one person",
+  "zh": "沙发"
+ },
+ "oewn-04386330-n": {
+  "en": "table",
+  "gloss": "a piece of furniture having a smooth flat top that is usually supported by one or more vertical legs",
+  "zh": "桌子"
+ },
+ "oewn-03184367-n": {
+  "en": "desk",
+  "gloss": "a piece of furniture with a writing surface and usually drawers or other compartments",
+  "zh": "书桌"
+ },
+ "oewn-04387051-n": {
+  "en": "table",
+  "gloss": "a piece of furniture with tableware for a meal laid out on it",
+  "zh": "桌子"
+ },
+ "oewn-03619741-n": {
+  "en": "keyboard instrument",
+  "gloss": "a musical instrument that is played by means of a keyboard",
+  "zh": "翅果"
+ },
+ "oewn-03934354-n": {
+  "en": "piano",
+  "gloss": "a keyboard instrument that is played by depressing keys that cause hammers to strike tuned strings and produce",
+  "zh": "钢琴"
+ },
+ "oewn-03921556-n": {
+  "en": "percussion instrument",
+  "gloss": "a musical instrument in which the sound is produced by one object striking another",
+  "zh": "打击乐器"
+ },
+ "oewn-03254272-n": {
+  "en": "drum",
+  "gloss": "a musical percussion instrument; usually consists of a hollow cylinder with a membrane stretched across each e",
+  "zh": "圆桶"
+ },
+ "oewn-04488109-n": {
+  "en": "triangle",
+  "gloss": "a percussion instrument consisting of a metal bar bent in the shape of an open triangle",
+  "zh": "三角铁"
+ },
+ "oewn-04345614-n": {
+  "en": "stringed instrument",
+  "gloss": "a musical instrument in which taut strings provide the source of sound",
+  "zh": "弦乐器"
+ },
+ "oewn-02883788-n": {
+  "en": "string",
+  "gloss": "stringed instruments that are played with a bow",
+  "zh": "弓弦乐器"
+ },
+ "oewn-04544161-n": {
+  "en": "fiddle",
+  "gloss": "bowed stringed instrument that is the highest member of the violin family; this instrument has four strings an",
+  "zh": "小提琴"
+ },
+ "oewn-03472449-n": {
+  "en": "guitar",
+  "gloss": "a stringed instrument usually having six strings; played by strumming or plucking",
+  "zh": "吉他"
+ },
+ "oewn-04594218-n": {
+  "en": "wind",
+  "gloss": "a musical instrument in which the sound is produced by an enclosed column of air that is moved by bellows or t",
+  "zh": "管乐器"
+ },
+ "oewn-02895029-n": {
+  "en": "brass",
+  "gloss": "a wind instrument that consists of a brass tube (usually of variable length) that is blown by means of a cup-s",
+  "zh": "铜管乐器"
+ },
+ "oewn-03115320-n": {
+  "en": "horn",
+  "gloss": "a brass musical instrument with a brilliant tone; has a narrow tube and a flared bell and is played by means o",
+  "zh": "号"
+ },
+ "oewn-04605909-n": {
+  "en": "wood",
+  "gloss": "any wind instrument other than the brass instruments",
+  "zh": "木管乐器"
+ },
+ "oewn-03376875-n": {
+  "en": "flute",
+  "gloss": "a high-pitched woodwind instrument; a slender tube closed at one end with finger holes on one end and an openi",
+  "zh": "长笛"
+ },
+ "oewn-02776042-n": {
+  "en": "bag",
+  "gloss": "a flexible container with a single opening",
+  "zh": "包"
+ },
+ "oewn-02772753-n": {
+  "en": "backpack",
+  "gloss": "a bag carried by a strap on your back or shoulder",
+  "zh": "双肩包"
+ },
+ "oewn-04153408-n": {
+  "en": "schoolbag",
+  "gloss": "a bag for carrying school books and supplies",
+  "zh": "包"
+ },
+ "oewn-04242966-n": {
+  "en": "sleeping bag",
+  "gloss": "large padded bag designed to be slept in outdoors; usually rolls up like a bedroll",
+  "zh": "包"
+ },
+ "oewn-02805104-n": {
+  "en": "basket",
+  "gloss": "a container that is usually woven and has handles",
+  "zh": "篮子"
+ },
+ "oewn-02884638-n": {
+  "en": "bowl",
+  "gloss": "a small round container that is open at the top for holding tobacco",
+  "zh": "碗"
+ },
+ "oewn-02886585-n": {
+  "en": "box",
+  "gloss": "a (usually rectangular) container; may have a lid",
+  "zh": "盒子"
+ },
+ "oewn-03914737-n": {
+  "en": "pencil box",
+  "gloss": "a box for holding pencils",
+  "zh": "盒子"
+ },
+ "oewn-02978156-n": {
+  "en": "case",
+  "gloss": "a portable container for carrying several objects",
+  "zh": "收纳箱"
+ },
+ "oewn-02777635-n": {
+  "en": "baggage",
+  "gloss": "cases used to carry belongings when traveling",
+  "zh": "包"
+ },
+ "oewn-02776843-n": {
+  "en": "bag",
+  "gloss": "a portable rectangular container for carrying clothes",
+  "zh": "包"
+ },
+ "oewn-04207043-n": {
+  "en": "shoe",
+  "gloss": "(card games) a case from which playing cards are dealt one at a time",
+  "zh": "牌盒"
+ },
+ "oewn-03211629-n": {
+  "en": "dish",
+  "gloss": "a piece of dishware normally used as a container for holding or serving food",
+  "zh": "菜肴"
+ },
+ "oewn-02884182-n": {
+  "en": "bowl",
+  "gloss": "a dish that is round and open at the top for serving foods",
+  "zh": "碗"
+ },
+ "oewn-03460968-n": {
+  "en": "boat",
+  "gloss": "a dish (often boat-shaped) for serving gravy or sauce",
+  "zh": "船形碟"
+ },
+ "oewn-03443167-n": {
+  "en": "glass",
+  "gloss": "a container made of glass for holding liquids while drinking",
+  "zh": "玻璃杯"
+ },
+ "oewn-04599402-n": {
+  "en": "wineglass",
+  "gloss": "a glass that has a stem and in which wine is served",
+  "zh": "高脚杯"
+ },
+ "oewn-03377395-n": {
+  "en": "flute",
+  "gloss": "a tall narrow wineglass",
+  "zh": "细长酒杯"
+ },
+ "oewn-03784903-n": {
+  "en": "cast",
+  "gloss": "container into which liquid is poured to create a given shape when it hardens",
+  "zh": "浇铸模具"
+ },
+ "oewn-03941392-n": {
+  "en": "pig",
+  "gloss": "mold consisting of a bed of sand in which pig iron is cast",
+  "zh": "铸铁模"
+ },
+ "oewn-04141606-n": {
+  "en": "sandbox",
+  "gloss": "mold consisting of a box with sand shaped to mold metal",
+  "zh": "砂箱"
+ },
+ "oewn-04068016-n": {
+  "en": "receptacle",
+  "gloss": "a container that is used to put or keep things in",
+  "zh": "容器"
+ },
+ "oewn-04440211-n": {
+  "en": "tidy",
+  "gloss": "receptacle that holds odds and ends (as sewing materials)",
+  "zh": "针线盒"
+ },
+ "oewn-04146942-n": {
+  "en": "bank",
+  "gloss": "a container (usually with a slot in the top) for keeping money at home",
+  "zh": "存钱罐"
+ },
+ "oewn-04291140-n": {
+  "en": "spoon",
+  "gloss": "a piece of cutlery with a shallow bowl-shaped container and a handle; used to stir or serve or take up food",
+  "zh": "勺"
+ },
+ "oewn-04538393-n": {
+  "en": "vessel",
+  "gloss": "an object used as a container (especially for liquids)",
+  "zh": "船舰"
+ },
+ "oewn-02879899-n": {
+  "en": "bottle",
+  "gloss": "a glass or plastic vessel used for storing drinks or other liquids; typically cylindrical without handles and ",
+  "zh": "瓶子"
+ },
+ "oewn-03364412-n": {
+  "en": "flask",
+  "gloss": "bottle that has a narrow neck",
+  "zh": "细颈瓶"
+ },
+ "oewn-02884435-n": {
+  "en": "bowl",
+  "gloss": "a round vessel that is open at the top; used chiefly for holding grains or liquids",
+  "zh": "碗"
+ },
+ "oewn-03254659-n": {
+  "en": "drum",
+  "gloss": "a cylindrical metal container, commonly used for shipping or storage of liquids",
+  "zh": "圆桶"
+ },
+ "oewn-04395830-n": {
+  "en": "tank",
+  "gloss": "a large (usually metallic) vessel for holding gases or liquids",
+  "zh": "大罐"
+ },
+ "oewn-04085686-n": {
+  "en": "reservoir",
+  "gloss": "tank used for collecting and storing a liquid (as water or oil)",
+  "zh": "储水罐"
+ },
+ "oewn-01663732-n": {
+  "en": "reptile",
+  "gloss": "any cold-blooded vertebrate of the class Reptilia including tortoises, turtles, snakes, lizards, alligators, c",
+  "zh": ""
+ },
+ "oewn-02162607-n": {
+  "en": "insect",
+  "gloss": "small air-breathing arthropod",
+  "zh": ""
+ },
+ "oewn-07791351-n": {
+  "en": "fish",
+  "gloss": "the flesh of fish used as food",
+  "zh": ""
+ },
+ "oewn-07580824-n": {
+  "en": "board",
+  "gloss": "food or meals in general",
+  "zh": ""
+ },
+ "oewn-07755101-n": {
+  "en": "apple",
+  "gloss": "fruit with red or yellow or green skin and sweet to tart crisp whitish flesh",
+  "zh": ""
+ },
+ "oewn-07783823-n": {
+  "en": "pear",
+  "gloss": "sweet juicy gritty-textured fruit available in many varieties",
+  "zh": ""
+ },
+ "oewn-12232878-n": {
+  "en": "vegetable",
+  "gloss": "any of various herbaceous plants cultivated for an edible part such as the fruit or the root of the beet or th",
+  "zh": ""
+ },
+ "oewn-02689427-n": {
+  "en": "aircraft",
+  "gloss": "a vehicle that can fly",
+  "zh": ""
+ },
+ "oewn-02861626-n": {
+  "en": "boat",
+  "gloss": "a small vessel for travel on water",
+  "zh": ""
+ },
+ "oewn-04201332-n": {
+  "en": "ship",
+  "gloss": "a vessel that carries passengers or freight",
+  "zh": ""
+ },
+ "oewn-02837983-n": {
+  "en": "bike",
+  "gloss": "a wheeled vehicle that has two wheels and is moved by foot pedals",
+  "zh": ""
+ },
+ "oewn-03423924-n": {
+  "en": "garment",
+  "gloss": "an article of clothing",
+  "zh": ""
+ },
+ "oewn-04204434-n": {
+  "en": "shirt",
+  "gloss": "a garment worn on the upper half of the body",
+  "zh": ""
+ },
+ "oewn-04496264-n": {
+  "en": "pant",
+  "gloss": "(usually in the plural) a garment extending from the waist to the knee or ankle, covering each leg separately",
+  "zh": ""
+ }
+}

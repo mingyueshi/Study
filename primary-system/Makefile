@@ -43,7 +43,10 @@ repair-data: ## 旧开发库修复：备份后恢复基础内容（先停服务�
 writing-data: ## 从 primary/writing-data.js 重新生成作文坊 topics.json（需 node）
 	node scripts/convert_writing_data.js
 
+word-tree: ## 重新生成词以类聚的 WordNet 上下位树（words/tree_data/tree.json）
+	$(PYTHON) scripts/build_word_tree.py
+
 phoneme-audio: ## 重新生成 44 个音素原声 m4a（需 espeak-ng，见 scripts/generate_phoneme_audio.py）
 	python3 scripts/generate_phoneme_audio.py
 
-.PHONY: help install run test check makemigrations migrate seed superuser shell repair-data writing-data phoneme-audio
+.PHONY: help install run test check makemigrations migrate seed superuser shell repair-data writing-data phoneme-audio word-tree

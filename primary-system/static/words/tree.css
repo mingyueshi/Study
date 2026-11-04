@@ -1,0 +1,56 @@
+/* 词以类聚：左树右卡；折叠树用原生 details，无 JS 也可浏览。 */
+.tree-root-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 18px; }
+.tree-root-chips .chip { display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 6px 13px; border: 1px solid #d5e0ca; border-radius: 12px; background: var(--white, #fff); color: #3d4750; font-size: 16px; }
+.tree-root-chips .chip i { font-style: normal; color: var(--muted, #6b7480); font-size: 13px; }
+.tree-root-chips .chip:hover { border-color: var(--green, #2f7d4f); }
+.tree-root-chips .chip.on { border-color: var(--green, #2f7d4f); background: var(--green, #2f7d4f); color: #fff; }
+.tree-root-chips .chip.on i { color: #d9ecda; }
+
+.tree-shell { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(280px, 1fr); gap: 22px; align-items: start; }
+.tree-board { min-width: 0; padding: 18px 20px; border: 1px solid var(--line, #dfe5da); border-radius: 20px; background: var(--white, #fff); }
+.tree-title { margin: 0 0 10px; font-size: 24px; }
+.tree-title .muted { font-size: 16px; font-weight: 500; }
+
+.tree-nodes { list-style: none; margin: 0; padding-left: 18px; }
+.tree-nodes > li { position: relative; }
+.tree-nodes > li::before { content: ""; position: absolute; left: -10px; top: 0; bottom: 0; border-left: 2px solid #e3ecdc; }
+.tree-branch details { margin: 3px 0; }
+.tree-branch summary { display: inline-flex; align-items: center; gap: 8px; cursor: pointer; list-style: none; padding: 5px 10px; border-radius: 10px; font-size: 17px; font-weight: 700; color: #234b38; }
+.tree-branch summary::-webkit-details-marker { display: none; }
+.tree-branch summary::before { content: "▸"; color: var(--green, #2f7d4f); transition: transform .15s; }
+.tree-branch details[open] > summary::before { transform: rotate(90deg); }
+.tree-branch summary:hover { background: #eef5e6; }
+.tree-branch-name i { margin-left: 6px; font-style: normal; font-size: 13px; font-weight: 500; }
+
+.tree-node-words { display: flex; flex-wrap: wrap; gap: 7px; margin: 6px 0 8px 14px; }
+.tree-root-words { margin-left: 0; }
+.tree-word { display: inline-block; padding: 5px 12px; border: 1px solid #d9e1cf; border-radius: 16px; background: #f9fbf5; color: var(--ink, #22303c); font-size: 16px; }
+.tree-word:hover { border-color: var(--green, #2f7d4f); background: #eef5e6; }
+.tree-word.on { border-color: var(--green, #2f7d4f); background: var(--green, #2f7d4f); color: #fff; font-weight: 700; }
+
+.tree-word-panel { position: sticky; top: 24px; }
+.tree-word-card { padding: 22px; border: 1px solid var(--line, #dfe5da); border-radius: 20px; background: var(--white, #fff); text-align: center; }
+.tree-word-emoji { margin: 0; font-size: 46px; }
+.tree-word-headline { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 6px 0 0; }
+.tree-word-headline b { font-size: 32px; font-weight: 900; }
+.say-chip { display: grid; place-items: center; width: 40px; height: 40px; border: 1px solid #cfe0c2; border-radius: 11px; background: #fff; font-size: 17px; }
+.say-chip:hover { background: #eef6e6; }
+.tree-word-ipa { margin: 4px 0 0; color: #77739a; font-size: 18px; }
+.tree-word-zh { margin: 8px 0 0; font-size: 20px; font-weight: 650; }
+.tree-word-scene { margin: 6px 0 0; color: var(--muted, #6b7480); font-size: 15px; }
+.tree-word-status { margin: 6px 0 0; color: #a3332a; font-size: 14px; }
+.tree-word-actions { display: flex; flex-direction: column; gap: 8px; margin-top: 16px; }
+.tree-word-actions .button { justify-content: center; }
+.tree-word-actions .ghost { background: #fff; color: var(--green, #2f7d4f); }
+.tree-word-empty { padding: 18px; border: 2px dashed #dcead2; border-radius: 16px; color: var(--muted, #6b7480); font-size: 16px; line-height: 1.8; text-align: center; }
+.tree-word-empty b { color: var(--green, #2f7d4f); }
+.tree-source { margin: 22px 2px 0; color: var(--muted, #6b7480); font-size: 13px; line-height: 1.7; }
+
+@media (max-width: 900px) {
+  .tree-shell { grid-template-columns: minmax(0, 1fr); }
+  .tree-word-panel { position: static; }
+}
+@media print {
+  .tree-root-chips, .tree-word-actions, .say-chip, .back { display: none !important; }
+  .tree-shell { display: block; }
+}

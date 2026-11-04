@@ -1,0 +1,28 @@
+{% extends 'base.html' %}{% load static %}{% block title %}词以类聚 · 乐学堂{% endblock %}
+{% block content %}<link rel="stylesheet" href="{% static 'words/tree.css' %}"><script src="{% static 'speech.js' %}" defer></script><script src="{% static 'tts.js' %}" defer></script><script src="{% static 'words/tree.js' %}" defer></script>
+<a class="back" href="{% url 'home' %}">← 学习广场</a>
+<div class="page-heading"><p class="eyebrow">英语 · 看结构</p><h1>词以类聚</h1><p>WordNet 上下位关系把单词挂成树：动物下面有狗、猫、熊猫。和场景单词互补——点词看意思，去场景页把它学会。</p></div>
+<div class="tree-root-chips">{% for root in roots %}<a class="chip{% if root.key == selected_root.key %} on{% endif %}" href="?root={{ root.key }}">{{ root.emoji }} {{ root.zh }}<i>{{ root.total }}</i></a>{% endfor %}</div>
+<div class="tree-shell">
+  <section class="tree-board">
+    <h2 class="tree-title">{{ selected_root.emoji }} {{ selected_root.zh }} <span class="muted">{{ selected_root.total }} 词</span></h2>
+    {% if selected_root.words %}<div class="tree-node-words tree-root-words">{% for word in selected_root.words %}<a class="tree-word{% if word.en|lower == request.GET.word|lower %} on{% endif %}" href="?root={{ selected_root.key }}&amp;word={{ word.en|urlencode }}" data-tree-word="{{ word.en }}">{{ word.en }}</a>{% endfor %}</div>{% endif %}
+    {% include 'words/tree_nodes.html' with node=selected_root path_ids=path_ids %}
+  </section>
+  <aside class="tree-word-panel">{% if selected_word %}
+    <article class="tree-word-card" id="tree-word-card">
+      <p class="tree-word-emoji">{{ selected_word.emoji|default:"🔤" }}</p>
+      <p class="tree-word-headline"><b>{{ selected_word.en }}</b> <button class="say-chip" type="button" data-say="{{ selected_word.en }}" aria-label="朗读 {{ selected_word.en }}">🔊</button></p>
+      {% if selected_word.ipa %}<p class="tree-word-ipa">{{ selected_word.ipa }}</p>{% endif %}
+      {% if selected_word.zh %}<p class="tree-word-zh">{{ selected_word.zh }}</p>{% endif %}
+      {% if selected_word.scenario_zh %}<p class="tree-word-scene">场景：{{ selected_word.scenario_zh }}</p>{% endif %}
+      {% if selected_word.source_status and selected_word.source_status != '来源一致' %}<p class="tree-word-status">{{ selected_word.source_status }}</p>{% endif %}
+      <div class="tree-word-actions">
+        <a class="button small" href="{% url 'scenario-words' %}?word={{ selected_word.en|urlencode }}">去场景页学会它 →</a>
+        <a class="button small ghost" href="{% url 'dictionary' %}?q={{ selected_word.en|urlencode }}">查词典 →</a>
+      </div>
+    </article>
+  {% else %}<p class="tree-word-empty">点树上的单词，这里会显示词卡；选中的枝干里共 <b>{{ selected_root.total }}</b> 个词。</p>{% endif %}</aside>
+</div>
+<p class="tree-source">词树结构来自 Open English Wordnet 2025（CC-BY-4.0）上下位关系；中文释义与音标随场景单词词库实时更新。</p>
+{% endblock %}

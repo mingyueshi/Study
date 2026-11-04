@@ -151,5 +151,24 @@
     render();
   });
 
-  render();
+  /* 词以类聚等页面的深链：/words/?word=dog 直接切到该词所在场景并高亮。 */
+  const deepLink = new URLSearchParams(location.search).get('word');
+  if (deepLink) {
+    const hit = state.words.find((w) => w.en.toLowerCase() === deepLink.toLowerCase());
+    if (hit) {
+      curUnit = hit.scenario;
+      render();
+      requestAnimationFrame(() => {
+        const card = cardsEl.querySelector(`[data-word="${hit.id}"]`);
+        if (card) {
+          card.classList.add('learned-flash');
+          card.scrollIntoView({ block: 'center' });
+        }
+      });
+    } else {
+      render();
+    }
+  } else {
+    render();
+  }
 })();

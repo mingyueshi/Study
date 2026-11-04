@@ -1,0 +1,4067 @@
+{
+ "schema_version": 1,
+ "source": {
+  "name": "Open English Wordnet 2025",
+  "license": "CC-BY-4.0",
+  "file": "data/lexicon/english-wordnet-2025.xml.gz",
+  "max_depth": 3
+ },
+ "roots": [
+  {
+   "id": "oewn-00015568-n",
+   "en": "beast",
+   "zh": "动物",
+   "emoji": "🐾",
+   "gloss": "a living organism characterized by voluntary movement",
+   "label": "动物",
+   "children": [
+    {
+     "id": "oewn-01320032-n",
+     "en": "domestic animal",
+     "zh": "家畜",
+     "emoji": "",
+     "gloss": "any of various animals that have been tamed and made fit for a human environment",
+     "label": "家畜",
+     "children": [
+      {
+       "id": "oewn-01320872-n",
+       "en": "head",
+       "zh": "一头（家畜）",
+       "emoji": "",
+       "gloss": "a single domestic animal",
+       "label": "一头（家畜）",
+       "children": [],
+       "words": [
+        {
+         "en": "head",
+         "scenario": 10
+        }
+       ]
+      },
+      {
+       "id": "oewn-02086723-n",
+       "en": "dog",
+       "zh": "狗",
+       "emoji": "",
+       "gloss": "a member of the genus Canis (probably descended from the common wolf) that has been domesticated by man since prehistoric times; occurs in many breeds",
+       "label": "狗",
+       "children": [
+        {
+         "id": "oewn-01325095-n",
+         "en": "puppy",
+         "zh": "小狗",
+         "emoji": "",
+         "gloss": "a young dog",
+         "label": "小狗",
+         "children": [],
+         "words": [
+          {
+           "en": "puppy",
+           "scenario": 45
+          }
+         ]
+        },
+        {
+         "id": "oewn-02088026-n",
+         "en": "toy",
+         "zh": "玩赏犬",
+         "emoji": "",
+         "gloss": "any of several breeds of very small dogs kept purely as pets",
+         "label": "玩赏犬",
+         "children": [],
+         "words": [
+          {
+           "en": "toy",
+           "scenario": 2
+          }
+         ]
+        }
+       ],
+       "words": [
+        {
+         "en": "dog",
+         "scenario": 9
+        }
+       ]
+      }
+     ],
+     "words": []
+    },
+    {
+     "id": "oewn-01321385-n",
+     "en": "pet",
+     "zh": "宠物",
+     "emoji": "",
+     "gloss": "a domesticated animal kept for companionship or amusement",
+     "label": "宠物",
+     "children": [],
+     "words": [
+      {
+       "en": "pet",
+       "scenario": 45
+      }
+     ]
+    },
+    {
+     "id": "oewn-01324070-n",
+     "en": "young",
+     "zh": "幼崽",
+     "emoji": "",
+     "gloss": "any immature animal",
+     "label": "幼崽",
+     "children": [
+      {
+       "id": "oewn-01324345-n",
+       "en": "young mammal",
+       "zh": "幼崽",
+       "emoji": "",
+       "gloss": "any immature mammal",
+       "label": "幼崽",
+       "children": [
+        {
+         "id": "oewn-01324834-n",
+         "en": "pup",
+         "zh": "幼犬",
+         "emoji": "",
+         "gloss": "young of any of various canines such as a dog or wolf",
+         "label": "幼犬",
+         "children": [],
+         "words": [
+          {
+           "en": "puppy",
+           "scenario": 45
+          }
+         ]
+        },
+        {
+         "id": "oewn-02125600-n",
+         "en": "kitty",
+         "zh": "小猫",
+         "emoji": "",
+         "gloss": "young domestic cat",
+         "label": "小猫",
+         "children": [],
+         "words": [
+          {
+           "en": "kitten",
+           "scenario": 45
+          }
+         ]
+        }
+       ],
+       "words": []
+      }
+     ],
+     "words": [
+      {
+       "en": "young",
+       "scenario": 37
+      }
+     ]
+    },
+    {
+     "id": "oewn-01468898-n",
+     "en": "chordate",
+     "zh": "脊索动物",
+     "emoji": "",
+     "gloss": "any animal of the phylum Chordata having a notochord or spinal column",
+     "label": "脊索动物",
+     "children": [
+      {
+       "id": "oewn-01474323-n",
+       "en": "craniate",
+       "zh": "有头类",
+       "emoji": "",
+       "gloss": "animals having a bony or cartilaginous skeleton with a segmented spinal column and a large brain enclosed in a skull or cranium",
+       "label": "有头类",
+       "children": [
+        {
+         "id": "oewn-01476447-n",
+         "en": "aquatic vertebrate",
+         "zh": "水生脊椎动物",
+         "emoji": "",
+         "gloss": "animal living wholly or chiefly in or on water",
+         "label": "水生脊椎动物",
+         "children": [],
+         "words": [
+          {
+           "en": "dolphin",
+           "scenario": 29
+          },
+          {
+           "en": "drum",
+           "scenario": 33
+          },
+          {
+           "en": "fish",
+           "scenario": 5
+          },
+          {
+           "en": "goldfish",
+           "scenario": 45
+          },
+          {
+           "en": "shark",
+           "scenario": 29
+          },
+          {
+           "en": "skate",
+           "scenario": 21
+          }
+         ]
+        },
+        {
+         "id": "oewn-01505702-n",
+         "en": "bird",
+         "zh": "鸟",
+         "emoji": "",
+         "gloss": "warm-blooded egg-laying vertebrates characterized by feathers and forelimbs modified as wings",
+         "label": "鸟",
+         "children": [],
+         "words": [
+          {
+           "en": "bird",
+           "scenario": 9
+          },
+          {
+           "en": "chicken",
+           "scenario": 5
+          },
+          {
+           "en": "duck",
+           "scenario": 9
+          },
+          {
+           "en": "kite",
+           "scenario": 8
+          },
+          {
+           "en": "kiwi",
+           "scenario": 16
+          },
+          {
+           "en": "parrot",
+           "scenario": 45
+          }
+         ]
+        },
+        {
+         "id": "oewn-01663732-n",
+         "en": "reptile",
+         "zh": "",
+         "emoji": "",
+         "gloss": "any cold-blooded vertebrate of the class Reptilia including tortoises, turtles, snakes, lizards, alligators, crocodiles, and extinct forms",
+         "label": "reptile",
+         "children": [],
+         "words": [
+          {
+           "en": "turtle",
+           "scenario": 29
+          }
+         ]
+        },
+        {
+         "id": "oewn-01864419-n",
+         "en": "mammal",
+         "zh": "哺乳动物",
+         "emoji": "",
+         "gloss": "any warm-blooded vertebrate having the skin more or less covered with hair; young are born alive except for the small subclass of monotremes and nourished with ",
+         "label": "哺乳动物",
+         "children": [],
+         "words": [
+          {
+           "en": "beef",
+           "scenario": 5
+          },
+          {
+           "en": "cat",
+           "scenario": 9
+          },
+          {
+           "en": "cow",
+           "scenario": 9
+          },
+          {
+           "en": "dog",
+           "scenario": 9
+          },
+          {
+           "en": "dolphin",
+           "scenario": 29
+          },
+          {
+           "en": "elephant",
+           "scenario": 9
+          },
+          {
+           "en": "hamster",
+           "scenario": 45
+          },
+          {
+           "en": "horse",
+           "scenario": 9
+          },
+          {
+           "en": "monkey",
+           "scenario": 9
+          },
+          {
+           "en": "panda",
+           "scenario": 9
+          },
+          {
+           "en": "pig",
+           "scenario": 9
+          },
+          {
+           "en": "puppy",
+           "scenario": 45
+          },
+          {
+           "en": "rabbit",
+           "scenario": 9
+          },
+          {
+           "en": "sheep",
+           "scenario": 9
+          },
+          {
+           "en": "tiger",
+           "scenario": 9
+          },
+          {
+           "en": "toy",
+           "scenario": 2
+          },
+          {
+           "en": "whale",
+           "scenario": 29
+          }
+         ]
+        }
+       ],
+       "words": []
+      }
+     ],
+     "words": []
+    },
+    {
+     "id": "oewn-01908302-n",
+     "en": "invertebrate",
+     "zh": "无脊椎动物",
+     "emoji": "",
+     "gloss": "any animal lacking a backbone or notochord; the term is not used as a scientific classification",
+     "label": "无脊椎动物",
+     "children": [
+      {
+       "id": "oewn-01770302-n",
+       "en": "arthropod",
+       "zh": "节肢动物",
+       "emoji": "",
+       "gloss": "invertebrate having jointed limbs and a segmented body with an exoskeleton made of chitin",
+       "label": "节肢动物",
+       "children": [
+        {
+         "id": "oewn-01771988-n",
+         "en": "arachnid",
+         "zh": "蛛形类",
+         "emoji": "",
+         "gloss": "air-breathing arthropods characterized by simple eyes and four pairs of legs",
+         "label": "蛛形类",
+         "children": [],
+         "words": [
+          {
+           "en": "spider",
+           "scenario": 28
+          }
+         ]
+        },
+        {
+         "id": "oewn-01977414-n",
+         "en": "crustacean",
+         "zh": "甲壳类",
+         "emoji": "",
+         "gloss": "any mainly aquatic arthropod usually having a segmented body and chitinous exoskeleton",
+         "label": "甲壳类",
+         "children": [],
+         "words": [
+          {
+           "en": "crab",
+           "scenario": 29
+          }
+         ]
+        },
+        {
+         "id": "oewn-02162607-n",
+         "en": "insect",
+         "zh": "",
+         "emoji": "",
+         "gloss": "small air-breathing arthropod",
+         "label": "insect",
+         "children": [],
+         "words": [
+          {
+           "en": "ant",
+           "scenario": 28
+          },
+          {
+           "en": "bee",
+           "scenario": 28
+          },
+          {
+           "en": "blue",
+           "scenario": 11
+          },
+          {
+           "en": "butterfly",
+           "scenario": 28
+          },
+          {
+           "en": "crab",
+           "scenario": 29
+          },
+          {
+           "en": "dragonfly",
+           "scenario": 28
+          },
+          {
+           "en": "firefly",
+           "scenario": 28
+          },
+          {
+           "en": "fly",
+           "scenario": 17
+          },
+          {
+           "en": "grasshopper",
+           "scenario": 28
+          },
+          {
+           "en": "insect",
+           "scenario": 28
+          },
+          {
+           "en": "ladybug",
+           "scenario": 28
+          },
+          {
+           "en": "mosquito",
+           "scenario": 28
+          }
+         ]
+        }
+       ],
+       "words": []
+      },
+      {
+       "id": "oewn-01912063-n",
+       "en": "cnidarian",
+       "zh": "刺胞动物",
+       "emoji": "",
+       "gloss": "radially symmetrical animals having saclike bodies with only one opening and tentacles with stinging structures; they occur in polyp and medusa forms",
+       "label": "刺胞动物",
+       "children": [
+        {
+         "id": "oewn-01913388-n",
+         "en": "jellyfish",
+         "zh": "水母",
+         "emoji": "",
+         "gloss": "any of numerous usually marine and free-swimming coelenterates that constitute the sexually reproductive forms of hydrozoans and scyphozoans",
+         "label": "水母",
+         "children": [],
+         "words": [
+          {
+           "en": "jellyfish",
+           "scenario": 29
+          }
+         ]
+        },
+        {
+         "id": "oewn-01914480-n",
+         "en": "hydroid",
+         "zh": "水螅类",
+         "emoji": "",
+         "gloss": "colonial coelenterates having the polyp phase dominant",
+         "label": "水螅类",
+         "children": [],
+         "words": [
+          {
+           "en": "jellyfish",
+           "scenario": 29
+          }
+         ]
+        },
+        {
+         "id": "oewn-01916804-n",
+         "en": "anthozoan",
+         "zh": "珊瑚虫类",
+         "emoji": "",
+         "gloss": "sessile marine coelenterates including solitary and colonial polyps; the medusoid phase is entirely suppressed",
+         "label": "珊瑚虫类",
+         "children": [],
+         "words": [
+          {
+           "en": "coral",
+           "scenario": 29
+          }
+         ]
+        }
+       ],
+       "words": []
+      },
+      {
+       "id": "oewn-01924944-n",
+       "en": "worm",
+       "zh": "虫子",
+       "emoji": "",
+       "gloss": "any of numerous relatively small elongated soft-bodied animals especially of the phyla Annelida and Chaetognatha and Nematoda and Nemertea and Platyhelminthes; ",
+       "label": "虫子",
+       "children": [],
+       "words": [
+        {
+         "en": "worm",
+         "scenario": 28
+        }
+       ]
+      },
+      {
+       "id": "oewn-01943377-n",
+       "en": "mollusc",
+       "zh": "软体动物",
+       "emoji": "",
+       "gloss": "invertebrate having a soft unsegmented body usually enclosed in a shell",
+       "label": "软体动物",
+       "children": [
+        {
+         "id": "oewn-01944818-n",
+         "en": "univalve",
+         "zh": "单壳类",
+         "emoji": "",
+         "gloss": "a class of mollusks typically having a one-piece coiled shell and flattened muscular foot with a head bearing stalked eyes",
+         "label": "单壳类",
+         "children": [],
+         "words": [
+          {
+           "en": "snail",
+           "scenario": 28
+          }
+         ]
+        },
+        {
+         "id": "oewn-01970956-n",
+         "en": "cephalopod",
+         "zh": "头足类",
+         "emoji": "",
+         "gloss": "marine mollusk characterized by well-developed head and eyes and sucker-bearing tentacles",
+         "label": "头足类",
+         "children": [],
+         "words": [
+          {
+           "en": "octopus",
+           "scenario": 29
+          }
+         ]
+        }
+       ],
+       "words": []
+      },
+      {
+       "id": "oewn-02319359-n",
+       "en": "echinoderm",
+       "zh": "棘皮动物",
+       "emoji": "",
+       "gloss": "marine invertebrates with tube feet and five-part radially symmetrical bodies",
+       "label": "棘皮动物",
+       "children": [
+        {
+         "id": "oewn-02319987-n",
+         "en": "sea star",
+         "zh": "海星",
+         "emoji": "",
+         "gloss": "echinoderms characterized by five arms extending from a central disk",
+         "label": "海星",
+         "children": [],
+         "words": [
+          {
+           "en": "starfish",
+           "scenario": 29
+          }
+         ]
+        }
+       ],
+       "words": []
+      }
+     ],
+     "words": []
+    }
+   ],
+   "words": [],
+   "key": "animal"
+  },
+  {
+   "id": "oewn-00021445-n",
+   "en": "food",
+   "zh": "食物",
+   "emoji": "🍎",
+   "gloss": "any substance that can be metabolized by an animal to give energy and build tissue",
+   "label": "食物",
+   "children": [
+    {
+     "id": "oewn-07571428-n",
+     "en": "solid food",
+     "zh": "固体食物",
+     "emoji": "",
+     "gloss": "any solid substance (as opposed to liquid) that is used as a source of nourishment",
+     "label": "固体食物",
+     "children": [
+      {
+       "id": "oewn-07617570-n",
+       "en": "chocolate",
+       "zh": "巧克力",
+       "emoji": "",
+       "gloss": "a food made from roasted ground cacao beans",
+       "label": "巧克力",
+       "children": [],
+       "words": [
+        {
+         "en": "chocolate",
+         "scenario": 27
+        }
+       ]
+      },
+      {
+       "id": "oewn-07637670-n",
+       "en": "baked goods",
+       "zh": "烘焙食品",
+       "emoji": "",
+       "gloss": "foods (like breads and cakes and pastries) that are cooked in an oven",
+       "label": "烘焙食品",
+       "children": [
+        {
+         "id": "oewn-07644479-n",
+         "en": "cake",
+         "zh": "蛋糕",
+         "emoji": "",
+         "gloss": "food made from or based on a mixture of flour, sugar, eggs, and fat, typically cooked in an oven",
+         "label": "蛋糕",
+         "children": [],
+         "words": [
+          {
+           "en": "cake",
+           "scenario": 24
+          },
+          {
+           "en": "cookie",
+           "scenario": 27
+          }
+         ]
+        },
+        {
+         "id": "oewn-07695101-n",
+         "en": "bread",
+         "zh": "面包",
+         "emoji": "",
+         "gloss": "food made from dough of flour or meal and usually raised with yeast or baking powder and then baked",
+         "label": "面包",
+         "children": [],
+         "words": [
+          {
+           "en": "bread",
+           "scenario": 27
+          }
+         ]
+        }
+       ],
+       "words": []
+      },
+      {
+       "id": "oewn-07665463-n",
+       "en": "meat",
+       "zh": "肉",
+       "emoji": "",
+       "gloss": "the flesh of animals (including fishes and birds and snails) used as food",
+       "label": "肉",
+       "children": [
+        {
+         "id": "oewn-07659991-n",
+         "en": "bird",
+         "zh": "禽肉",
+         "emoji": "",
+         "gloss": "the flesh of a bird or fowl (wild or domestic) used as food",
+         "label": "禽肉",
+         "children": [],
+         "words": [
+          {
+           "en": "bird",
+           "scenario": 9
+          },
+          {
+           "en": "chicken",
+           "scenario": 5
+          },
+          {
+           "en": "duck",
+           "scenario": 9
+          }
+         ]
+        },
+        {
+         "id": "oewn-07666058-n",
+         "en": "game",
+         "zh": "野味",
+         "emoji": "",
+         "gloss": "the flesh of wild animals that is used for food",
+         "label": "野味",
+         "children": [],
+         "words": [
+          {
+           "en": "rabbit",
+           "scenario": 9
+          }
+         ]
+        },
+        {
+         "id": "oewn-07667063-n",
+         "en": "organs",
+         "zh": "内脏",
+         "emoji": "",
+         "gloss": "edible viscera of a butchered animal",
+         "label": "内脏",
+         "children": [],
+         "words": [
+          {
+           "en": "heart",
+           "scenario": 41
+          }
+         ]
+        },
+        {
+         "id": "oewn-07669003-n",
+         "en": "cut",
+         "zh": "肉块",
+         "emoji": "",
+         "gloss": "a piece of meat that has been cut from an animal carcass",
+         "label": "肉块",
+         "children": [],
+         "words": [
+          {
+           "en": "leg",
+           "scenario": 10
+          },
+          {
+           "en": "shoulder",
+           "scenario": 10
+          }
+         ]
+        },
+        {
+         "id": "oewn-07679337-n",
+         "en": "beef",
+         "zh": "牛肉",
+         "emoji": "",
+         "gloss": "meat from an adult domestic bovine",
+         "label": "牛肉",
+         "children": [],
+         "words": [
+          {
+           "en": "beef",
+           "scenario": 5
+          }
+         ]
+        },
+        {
+         "id": "oewn-07691372-n",
+         "en": "sausage",
+         "zh": "香肠",
+         "emoji": "",
+         "gloss": "highly seasoned minced meat stuffed in casings",
+         "label": "香肠",
+         "children": [],
+         "words": [
+          {
+           "en": "dog",
+           "scenario": 9
+          }
+         ]
+        },
+        {
+         "id": "oewn-07798451-n",
+         "en": "snail",
+         "zh": "蜗牛（食材）",
+         "emoji": "",
+         "gloss": "edible terrestrial snail usually served in the shell with a sauce of melted butter and garlic",
+         "label": "蜗牛（食材）",
+         "children": [],
+         "words": [
+          {
+           "en": "snail",
+           "scenario": 28
+          }
+         ]
+        }
+       ],
+       "words": []
+      },
+      {
+       "id": "oewn-07721456-n",
+       "en": "produce",
+       "zh": "生鲜农产品",
+       "emoji": "",
+       "gloss": "fresh fruits and vegetable grown for the market",
+       "label": "生鲜农产品",
+       "children": [
+        {
+         "id": "oewn-07721676-n",
+         "en": "edible fruit",
+         "zh": "食用水果",
+         "emoji": "",
+         "gloss": "edible reproductive body of a seed plant especially one having sweet flesh",
+         "label": "食用水果",
+         "children": [],
+         "words": [
+          {
+           "en": "apple",
+           "scenario": 16
+          },
+          {
+           "en": "banana",
+           "scenario": 16
+          },
+          {
+           "en": "cherry",
+           "scenario": 16
+          },
+          {
+           "en": "grape",
+           "scenario": 16
+          },
+          {
+           "en": "kiwi",
+           "scenario": 16
+          },
+          {
+           "en": "lemon",
+           "scenario": 16
+          },
+          {
+           "en": "mango",
+           "scenario": 16
+          },
+          {
+           "en": "orange",
+           "scenario": 11
+          },
+          {
+           "en": "peach",
+           "scenario": 16
+          },
+          {
+           "en": "pear",
+           "scenario": 16
+          },
+          {
+           "en": "pineapple",
+           "scenario": 16
+          },
+          {
+           "en": "strawberry",
+           "scenario": 16
+          },
+          {
+           "en": "watermelon",
+           "scenario": 16
+          }
+         ]
+        },
+        {
+         "id": "oewn-07723196-n",
+         "en": "veg",
+         "zh": "蔬菜",
+         "emoji": "",
+         "gloss": "edible seeds or roots or stems or leaves or bulbs or tubers or nonsweet fruits of any of numerous herbaceous plant",
+         "label": "蔬菜",
+         "children": [],
+         "words": [
+          {
+           "en": "bean",
+           "scenario": 40
+          },
+          {
+           "en": "broccoli",
+           "scenario": 40
+          },
+          {
+           "en": "cabbage",
+           "scenario": 18
+          },
+          {
+           "en": "carrot",
+           "scenario": 18
+          },
+          {
+           "en": "celery",
+           "scenario": 40
+          },
+          {
+           "en": "cucumber",
+           "scenario": 18
+          },
+          {
+           "en": "eggplant",
+           "scenario": 40
+          },
+          {
+           "en": "green",
+           "scenario": 11
+          },
+          {
+           "en": "lettuce",
+           "scenario": 40
+          },
+          {
+           "en": "mushroom",
+           "scenario": 40
+          },
+          {
+           "en": "onion",
+           "scenario": 40
+          },
+          {
+           "en": "pea",
+           "scenario": 40
+          },
+          {
+           "en": "pepper",
+           "scenario": 40
+          },
+          {
+           "en": "potato",
+           "scenario": 18
+          },
+          {
+           "en": "pumpkin",
+           "scenario": 18
+          },
+          {
+           "en": "radish",
+           "scenario": 40
+          },
+          {
+           "en": "spinach",
+           "scenario": 40
+          },
+          {
+           "en": "tomato",
+           "scenario": 18
+          },
+          {
+           "en": "vegetable",
+           "scenario": 5
+          }
+         ]
+        }
+       ],
+       "words": []
+      },
+      {
+       "id": "oewn-07791351-n",
+       "en": "fish",
+       "zh": "",
+       "emoji": "",
+       "gloss": "the flesh of fish used as food",
+       "label": "fish",
+       "children": [],
+       "words": [
+        {
+         "en": "fish",
+         "scenario": 5
+        }
+       ]
+      },
+      {
+       "id": "oewn-07792842-n",
+       "en": "seafood",
+       "zh": "海鲜",
+       "emoji": "",
+       "gloss": "edible fish (broadly including freshwater fish) or shellfish or roe etc",
+       "label": "海鲜",
+       "children": [
+        {
+         "id": "oewn-07798341-n",
+         "en": "octopus",
+         "zh": "章鱼（食材）",
+         "emoji": "",
+         "gloss": "tentacles of octopus prepared as food",
+         "label": "章鱼（食材）",
+         "children": [],
+         "words": [
+          {
+           "en": "octopus",
+           "scenario": 29
+          }
+         ]
+        },
+        {
+         "id": "oewn-07799186-n",
+         "en": "shellfish",
+         "zh": "贝类",
+         "emoji": "",
+         "gloss": "meat of edible aquatic invertebrate with a shell (especially a mollusk or crustacean)",
+         "label": "贝类",
+         "children": [],
+         "words": [
+          {
+           "en": "crab",
+           "scenario": 29
+          }
+         ]
+        },
+        {
+         "id": "oewn-07815254-n",
+         "en": "roe",
+         "zh": "鱼子",
+         "emoji": "",
+         "gloss": "fish eggs or egg-filled ovary; having a grainy texture",
+         "label": "鱼子",
+         "children": [],
+         "words": [
+          {
+           "en": "coral",
+           "scenario": 29
+          }
+         ]
+        }
+       ],
+       "words": []
+      },
+      {
+       "id": "oewn-07865312-n",
+       "en": "yogurt",
+       "zh": "酸奶",
+       "emoji": "",
+       "gloss": "a custard-like food made from curdled milk",
+       "label": "酸奶",
+       "children": [],
+       "words": [
+        {
+         "en": "yogurt",
+         "scenario": 27
+        }
+       ]
+      }
+     ],
+     "words": []
+    },
+    {
+     "id": "oewn-07576217-n",
+     "en": "fare",
+     "zh": "伙食",
+     "emoji": "",
+     "gloss": "the food and drink that are regularly served or consumed",
+     "label": "伙食",
+     "children": [
+      {
+       "id": "oewn-07580824-n",
+       "en": "board",
+       "zh": "",
+       "emoji": "",
+       "gloss": "food or meals in general",
+       "label": "board",
+       "children": [],
+       "words": [
+        {
+         "en": "table",
+         "scenario": 4
+        }
+       ]
+      }
+     ],
+     "words": []
+    },
+    {
+     "id": "oewn-07581905-n",
+     "en": "foodstuff",
+     "zh": "食材",
+     "emoji": "",
+     "gloss": "a substance that can be used or prepared for use as food",
+     "label": "食材",
+     "children": [
+      {
+       "id": "oewn-07582428-n",
+       "en": "starches",
+       "zh": "淀粉类主食",
+       "emoji": "",
+       "gloss": "foodstuff rich in natural starch (especially potatoes, rice, bread)",
+       "label": "淀粉类主食",
+       "children": [
+        {
+         "id": "oewn-07726361-n",
+         "en": "spud",
+         "zh": "土豆",
+         "emoji": "",
+         "gloss": "an edible tuber native to South America; a staple food of Ireland",
+         "label": "土豆",
+         "children": [],
+         "words": [
+          {
+           "en": "potato",
+           "scenario": 18
+          }
+         ]
+        },
+        {
+         "id": "oewn-07820299-n",
+         "en": "rice",
+         "zh": "米",
+         "emoji": "",
+         "gloss": "grains used as food either unpolished or more often polished",
+         "label": "米",
+         "children": [],
+         "words": [
+          {
+           "en": "rice",
+           "scenario": 5
+          }
+         ]
+        }
+       ],
+       "words": []
+      },
+      {
+       "id": "oewn-07818393-n",
+       "en": "grain",
+       "zh": "谷物",
+       "emoji": "",
+       "gloss": "foodstuff prepared from the starchy grains of cereal grasses",
+       "label": "谷物",
+       "children": [
+        {
+         "id": "oewn-07747928-n",
+         "en": "corn",
+         "zh": "玉米",
+         "emoji": "",
+         "gloss": "ears of corn that can be prepared and served for human food",
+         "label": "玉米",
+         "children": [],
+         "words": [
+          {
+           "en": "corn",
+           "scenario": 18
+          }
+         ]
+        }
+       ],
+       "words": []
+      },
+      {
+       "id": "oewn-07825072-n",
+       "en": "fixings",
+       "zh": "配料",
+       "emoji": "",
+       "gloss": "food that is a component of a mixture in cooking",
+       "label": "配料",
+       "children": [
+        {
+         "id": "oewn-07825344-n",
+         "en": "flavorer",
+         "zh": "调味料",
+         "emoji": "",
+         "gloss": "something added to food primarily for the savor it imparts",
+         "label": "调味料",
+         "children": [],
+         "words": [
+          {
+           "en": "garlic",
+           "scenario": 40
+          },
+          {
+           "en": "pepper",
+           "scenario": 40
+          }
+         ]
+        },
+        {
+         "id": "oewn-07857013-n",
+         "en": "white",
+         "zh": "蛋清",
+         "emoji": "",
+         "gloss": "the white part of an egg; the nutritive and protective gelatinous substance surrounding the yolk consisting mainly of albumin dissolved in water",
+         "label": "蛋清",
+         "children": [],
+         "words": [
+          {
+           "en": "white",
+           "scenario": 11
+          }
+         ]
+        }
+       ],
+       "words": []
+      },
+      {
+       "id": "oewn-07856780-n",
+       "en": "egg",
+       "zh": "蛋",
+       "emoji": "",
+       "gloss": "oval reproductive body of a fowl (especially a hen) used as food",
+       "label": "蛋",
+       "children": [],
+       "words": [
+        {
+         "en": "egg",
+         "scenario": 5
+        }
+       ]
+      },
+      {
+       "id": "oewn-07859751-n",
+       "en": "dairy product",
+       "zh": "乳制品",
+       "emoji": "",
+       "gloss": "milk and butter and cheese",
+       "label": "乳制品",
+       "children": [
+        {
+         "id": "oewn-07860018-n",
+         "en": "milk",
+         "zh": "奶",
+         "emoji": "",
+         "gloss": "a white nutritious liquid secreted by mammals and used as food by human beings",
+         "label": "奶",
+         "children": [],
+         "words": [
+          {
+           "en": "milk",
+           "scenario": 27
+          }
+         ]
+        }
+       ],
+       "words": []
+      },
+      {
+       "id": "oewn-07860580-n",
+       "en": "milk",
+       "zh": "植物奶",
+       "emoji": "",
+       "gloss": "any of several nutritive milklike liquids",
+       "label": "植物奶",
+       "children": [],
+       "words": [
+        {
+         "en": "milk",
+         "scenario": 27
+        }
+       ]
+      },
+      {
+       "id": "oewn-07939988-n",
+       "en": "juice",
+       "zh": "果汁",
+       "emoji": "",
+       "gloss": "the liquid part that can be extracted from plant or animal tissue by squeezing or cooking",
+       "label": "果汁",
+       "children": [],
+       "words": [
+        {
+         "en": "juice",
+         "scenario": 27
+        }
+       ]
+      }
+     ],
+     "words": []
+    },
+    {
+     "id": "oewn-07586285-n",
+     "en": "aliment",
+     "zh": "营养来源",
+     "emoji": "",
+     "gloss": "a source of materials to nourish the body",
+     "label": "营养来源",
+     "children": [
+      {
+       "id": "oewn-05406377-n",
+       "en": "milk",
+       "zh": "母乳",
+       "emoji": "",
+       "gloss": "produced by mammary glands of female mammals for feeding their young",
+       "label": "母乳",
+       "children": [],
+       "words": [
+        {
+         "en": "milk",
+         "scenario": 27
+        }
+       ]
+      },
+      {
+       "id": "oewn-07572535-n",
+       "en": "course",
+       "zh": "一道菜",
+       "emoji": "",
+       "gloss": "part of a meal served at one time",
+       "label": "一道菜",
+       "children": [
+        {
+         "id": "oewn-07625449-n",
+         "en": "sweet",
+         "zh": "甜点",
+         "emoji": "",
+         "gloss": "a dish served as the last course of a meal",
+         "label": "甜点",
+         "children": [],
+         "words": [
+          {
+           "en": "ice cream",
+           "scenario": 27
+          }
+         ]
+        }
+       ],
+       "words": []
+      },
+      {
+       "id": "oewn-07572730-n",
+       "en": "goody",
+       "zh": "好吃的",
+       "emoji": "",
+       "gloss": "something considered choice to eat",
+       "label": "好吃的",
+       "children": [
+        {
+         "id": "oewn-07612255-n",
+         "en": "sweet",
+         "zh": "糖果",
+         "emoji": "",
+         "gloss": "a food rich in sugar",
+         "label": "糖果",
+         "children": [],
+         "words": [
+          {
+           "en": "candy",
+           "scenario": 2
+          },
+          {
+           "en": "marshmallow",
+           "scenario": 36
+          }
+         ]
+        }
+       ],
+       "words": []
+      },
+      {
+       "id": "oewn-07572999-n",
+       "en": "dish",
+       "zh": "菜肴",
+       "emoji": "",
+       "gloss": "a particular item of prepared food",
+       "label": "菜肴",
+       "children": [
+        {
+         "id": "oewn-07598762-n",
+         "en": "soup",
+         "zh": "汤",
+         "emoji": "",
+         "gloss": "liquid food especially of meat or fish or vegetable stock often containing pieces of solid food",
+         "label": "汤",
+         "children": [],
+         "words": [
+          {
+           "en": "soup",
+           "scenario": 5
+          }
+         ]
+        },
+        {
+         "id": "oewn-07679644-n",
+         "en": "cake",
+         "zh": "肉饼",
+         "emoji": "",
+         "gloss": "small flat mass of chopped or ground food",
+         "label": "肉饼",
+         "children": [],
+         "words": [
+          {
+           "en": "cake",
+           "scenario": 24
+          }
+         ]
+        },
+        {
+         "id": "oewn-07728127-n",
+         "en": "snack food",
+         "zh": "零食",
+         "emoji": "",
+         "gloss": "food for light meals or for eating between meals",
+         "label": "零食",
+         "children": [],
+         "words": [
+          {
+           "en": "sandwich",
+           "scenario": 27
+          }
+         ]
+        },
+        {
+         "id": "oewn-07889783-n",
+         "en": "pizza",
+         "zh": "披萨",
+         "emoji": "",
+         "gloss": "Italian open pie made of thin bread dough spread with a spiced mixture of e.g. tomato sauce and cheese",
+         "label": "披萨",
+         "children": [],
+         "words": [
+          {
+           "en": "pizza",
+           "scenario": 27
+          }
+         ]
+        }
+       ],
+       "words": []
+      },
+      {
+       "id": "oewn-07589261-n",
+       "en": "meal",
+       "zh": "一餐",
+       "emoji": "",
+       "gloss": "the food served and eaten at one time",
+       "label": "一餐",
+       "children": [
+        {
+         "id": "oewn-07590167-n",
+         "en": "breakfast",
+         "zh": "早餐",
+         "emoji": "",
+         "gloss": "the first meal of the day (usually in the morning)",
+         "label": "早餐",
+         "children": [],
+         "words": [
+          {
+           "en": "breakfast",
+           "scenario": 15
+          }
+         ]
+        },
+        {
+         "id": "oewn-07590641-n",
+         "en": "lunch",
+         "zh": "午餐",
+         "emoji": "",
+         "gloss": "a midday meal",
+         "label": "午餐",
+         "children": [],
+         "words": [
+          {
+           "en": "lunch",
+           "scenario": 15
+          }
+         ]
+        },
+        {
+         "id": "oewn-07591291-n",
+         "en": "dinner",
+         "zh": "晚餐",
+         "emoji": "",
+         "gloss": "the main meal of the day served in the evening or at midday",
+         "label": "晚餐",
+         "children": [],
+         "words": [
+          {
+           "en": "dinner",
+           "scenario": 15
+          }
+         ]
+        },
+        {
+         "id": "oewn-07592003-n",
+         "en": "picnic",
+         "zh": "野餐",
+         "emoji": "",
+         "gloss": "any informal meal eaten outside or on an excursion",
+         "label": "野餐",
+         "children": [],
+         "words": [
+          {
+           "en": "picnic",
+           "scenario": 36
+          }
+         ]
+        }
+       ],
+       "words": []
+      }
+     ],
+     "words": []
+    },
+    {
+     "id": "oewn-07816067-n",
+     "en": "feed",
+     "zh": "饲料",
+     "emoji": "",
+     "gloss": "food for domestic livestock",
+     "label": "饲料",
+     "children": [
+      {
+       "id": "oewn-07816716-n",
+       "en": "fodder",
+       "zh": "草料",
+       "emoji": "",
+       "gloss": "coarse food (especially for livestock) composed of entire plants or the leaves and stalks of a cereal crop",
+       "label": "草料",
+       "children": [
+        {
+         "id": "oewn-07817067-n",
+         "en": "grass",
+         "zh": "草",
+         "emoji": "",
+         "gloss": "bulky food like grass or hay for browsing or grazing horses or cattle",
+         "label": "草",
+         "children": [],
+         "words": [
+          {
+           "en": "grass",
+           "scenario": 30
+          }
+         ]
+        },
+        {
+         "id": "oewn-07818002-n",
+         "en": "hay",
+         "zh": "干草",
+         "emoji": "",
+         "gloss": "grass mowed and cured for use as fodder",
+         "label": "干草",
+         "children": [],
+         "words": [
+          {
+           "en": "hay",
+           "scenario": 18
+          }
+         ]
+        }
+       ],
+       "words": []
+      }
+     ],
+     "words": [
+      {
+       "en": "feed",
+       "scenario": 45
+      }
+     ]
+    },
+    {
+     "id": "oewn-07897775-n",
+     "en": "drink",
+     "zh": "饮品",
+     "emoji": "",
+     "gloss": "any liquid suitable for drinking",
+     "label": "饮品",
+     "children": [
+      {
+       "id": "oewn-07939004-n",
+       "en": "cocoa",
+       "zh": "可可",
+       "emoji": "",
+       "gloss": "a beverage made from cocoa powder and milk and sugar; usually drunk hot",
+       "label": "可可",
+       "children": [],
+       "words": [
+        {
+         "en": "chocolate",
+         "scenario": 27
+        }
+       ]
+      }
+     ],
+     "words": [
+      {
+       "en": "drink",
+       "scenario": 17
+      }
+     ]
+    },
+    {
+     "id": "oewn-07951744-n",
+     "en": "water",
+     "zh": "水",
+     "emoji": "",
+     "gloss": "a liquid necessary for the life of most animals and plants",
+     "label": "水",
+     "children": [],
+     "words": [
+      {
+       "en": "water",
+       "scenario": 27
+      }
+     ]
+    }
+   ],
+   "words": [],
+   "key": "food"
+  },
+  {
+   "id": "oewn-13155706-n",
+   "en": "fruit",
+   "zh": "水果",
+   "emoji": "🍓",
+   "gloss": "the ripened reproductive body of a seed plant",
+   "label": "水果",
+   "children": [
+    {
+     "id": "oewn-12056536-n",
+     "en": "achene",
+     "zh": "瘦果",
+     "emoji": "",
+     "gloss": "small dry indehiscent fruit with the seed distinct from the fruit wall",
+     "label": "瘦果",
+     "children": [
+      {
+       "id": "oewn-12056695-n",
+       "en": "key",
+       "zh": "翅果",
+       "emoji": "",
+       "gloss": "a winged often one-seed indehiscent fruit as of the ash or elm or maple",
+       "label": "翅果",
+       "children": [],
+       "words": [
+        {
+         "en": "key",
+         "scenario": 2
+        }
+       ]
+      }
+     ],
+     "words": []
+    },
+    {
+     "id": "oewn-13154372-n",
+     "en": "ear",
+     "zh": "果穗",
+     "emoji": "",
+     "gloss": "fruiting spike of a cereal plant especially corn",
+     "label": "果穗",
+     "children": [],
+     "words": [
+      {
+       "en": "ear",
+       "scenario": 10
+      }
+     ]
+    },
+    {
+     "id": "oewn-13156591-n",
+     "en": "seed",
+     "zh": "种子果实",
+     "emoji": "",
+     "gloss": "a small hard fruit",
+     "label": "种子果实",
+     "children": [
+      {
+       "id": "oewn-12177336-n",
+       "en": "grain",
+       "zh": "谷粒",
+       "emoji": "",
+       "gloss": "dry seed-like fruit produced by the cereal grasses: e.g. wheat, barley, Indian corn",
+       "label": "谷粒",
+       "children": [
+        {
+         "id": "oewn-12177573-n",
+         "en": "kernel",
+         "zh": "谷粒",
+         "emoji": "",
+         "gloss": "a single whole grain of a cereal",
+         "label": "谷粒",
+         "children": [],
+         "words": [
+          {
+           "en": "corn",
+           "scenario": 18
+          }
+         ]
+        }
+       ],
+       "words": []
+      },
+      {
+       "id": "oewn-13157075-n",
+       "en": "bean",
+       "zh": "豆状果实",
+       "emoji": "",
+       "gloss": "any of various seeds or fruits that are beans or resemble beans",
+       "label": "豆状果实",
+       "children": [],
+       "words": [
+        {
+         "en": "bean",
+         "scenario": 40
+        }
+       ]
+      }
+     ],
+     "words": [
+      {
+       "en": "seed",
+       "scenario": 30
+      }
+     ]
+    },
+    {
+     "id": "oewn-13159085-n",
+     "en": "drupe",
+     "zh": "核果",
+     "emoji": "",
+     "gloss": "fleshy indehiscent fruit with a single seed: e.g. almond, peach, plum, cherry, elderberry, olive, jujube",
+     "label": "核果",
+     "children": [
+      {
+       "id": "oewn-07766980-n",
+       "en": "peach",
+       "zh": "豌豆",
+       "emoji": "",
+       "gloss": "downy juicy fruit with sweet yellowish or whitish flesh",
+       "label": "豌豆",
+       "children": [],
+       "words": [
+        {
+         "en": "peach",
+         "scenario": 16
+        }
+       ]
+      },
+      {
+       "id": "oewn-07773108-n",
+       "en": "cherry",
+       "zh": "樱桃",
+       "emoji": "",
+       "gloss": "a red fruit with a single hard stone",
+       "label": "樱桃",
+       "children": [],
+       "words": [
+        {
+         "en": "cherry",
+         "scenario": 16
+        }
+       ]
+      }
+     ],
+     "words": []
+    },
+    {
+     "id": "oewn-13159619-n",
+     "en": "pome",
+     "zh": "仁果",
+     "emoji": "",
+     "gloss": "a fleshy fruit (apple or pear or related fruits) having seed chambers and an outer fleshy part",
+     "label": "仁果",
+     "children": [
+      {
+       "id": "oewn-07755101-n",
+       "en": "apple",
+       "zh": "",
+       "emoji": "",
+       "gloss": "fruit with red or yellow or green skin and sweet to tart crisp whitish flesh",
+       "label": "apple",
+       "children": [],
+       "words": [
+        {
+         "en": "apple",
+         "scenario": 16
+        }
+       ]
+      },
+      {
+       "id": "oewn-07783823-n",
+       "en": "pear",
+       "zh": "",
+       "emoji": "",
+       "gloss": "sweet juicy gritty-textured fruit available in many varieties",
+       "label": "pear",
+       "children": [],
+       "words": [
+        {
+         "en": "pear",
+         "scenario": 16
+        }
+       ]
+      }
+     ],
+     "words": []
+    },
+    {
+     "id": "oewn-13159832-n",
+     "en": "pod",
+     "zh": "豆荚",
+     "emoji": "",
+     "gloss": "a several-seeded dehiscent fruit as e.g. of a leguminous plant",
+     "label": "豆荚",
+     "children": [
+      {
+       "id": "oewn-11768471-n",
+       "en": "legume",
+       "zh": "豆科果实",
+       "emoji": "",
+       "gloss": "the fruit or seed of any of various bean or pea plants consisting of a case that splits along both sides when ripe and having the seeds attach to one side of th",
+       "label": "豆科果实",
+       "children": [
+        {
+         "id": "oewn-12580787-n",
+         "en": "pea",
+         "zh": "豌豆（果实）",
+         "emoji": "",
+         "gloss": "the fruit or seed of a pea plant",
+         "label": "豌豆（果实）",
+         "children": [],
+         "words": [
+          {
+           "en": "pea",
+           "scenario": 40
+          }
+         ]
+        }
+       ],
+       "words": []
+      }
+     ],
+     "words": []
+    }
+   ],
+   "words": [
+    {
+     "en": "fruit",
+     "scenario": 16
+    }
+   ],
+   "key": "fruit"
+  },
+  {
+   "id": "oewn-00017402-n",
+   "en": "flora",
+   "zh": "植物",
+   "emoji": "🌿",
+   "gloss": "(botany) a living organism lacking the power of locomotion",
+   "label": "植物",
+   "children": [
+    {
+     "id": "oewn-13104346-n",
+     "en": "tracheophyte",
+     "zh": "维管植物",
+     "emoji": "",
+     "gloss": "green plant having a vascular system: ferns, gymnosperms, angiosperms",
+     "label": "维管植物",
+     "children": [
+      {
+       "id": "oewn-11572837-n",
+       "en": "phanerogam",
+       "zh": "种子植物",
+       "emoji": "",
+       "gloss": "plant that reproduces by means of seeds not spores",
+       "label": "种子植物",
+       "children": [
+        {
+         "id": "oewn-11685823-n",
+         "en": "angiosperm",
+         "zh": "被子植物",
+         "emoji": "",
+         "gloss": "plants having seeds in a closed ovary",
+         "label": "被子植物",
+         "children": [],
+         "words": [
+          {
+           "en": "flower",
+           "scenario": 30
+          },
+          {
+           "en": "pink",
+           "scenario": 11
+          },
+          {
+           "en": "rose",
+           "scenario": 30
+          },
+          {
+           "en": "sunflower",
+           "scenario": 30
+          }
+         ]
+        }
+       ],
+       "words": []
+      },
+      {
+       "id": "oewn-12226211-n",
+       "en": "herb",
+       "zh": "草本植物",
+       "emoji": "",
+       "gloss": "a plant lacking a permanent woody stem; many are flowering garden plants or potherbs; some having medicinal properties; some are pests",
+       "label": "草本植物",
+       "children": [
+        {
+         "id": "oewn-11767937-n",
+         "en": "legume",
+         "zh": "腿肉",
+         "emoji": "",
+         "gloss": "an erect or climbing bean or pea plant of the family Leguminosae",
+         "label": "腿肉",
+         "children": [],
+         "words": [
+          {
+           "en": "bean",
+           "scenario": 40
+          },
+          {
+           "en": "pea",
+           "scenario": 40
+          }
+         ]
+        },
+        {
+         "id": "oewn-11889283-n",
+         "en": "crucifer",
+         "zh": "十字花科植物",
+         "emoji": "",
+         "gloss": "any of various plants of the family Cruciferae",
+         "label": "十字花科植物",
+         "children": [],
+         "words": [
+          {
+           "en": "broccoli",
+           "scenario": 40
+          },
+          {
+           "en": "cabbage",
+           "scenario": 18
+          },
+          {
+           "en": "radish",
+           "scenario": 40
+          }
+         ]
+        },
+        {
+         "id": "oewn-11907006-n",
+         "en": "rocket",
+         "zh": "火箭",
+         "emoji": "",
+         "gloss": "erect European annual often grown as a salad crop to be harvested when young and tender",
+         "label": "火箭",
+         "children": [],
+         "words": [
+          {
+           "en": "rocket",
+           "scenario": 31
+          }
+         ]
+        },
+        {
+         "id": "oewn-12006775-n",
+         "en": "lettuce",
+         "zh": "莴苣",
+         "emoji": "",
+         "gloss": "any of various plants of the genus Lactuca",
+         "label": "莴苣",
+         "children": [],
+         "words": [
+          {
+           "en": "lettuce",
+           "scenario": 40
+          }
+         ]
+        },
+        {
+         "id": "oewn-12122387-n",
+         "en": "gramineous plant",
+         "zh": "禾本科植物",
+         "emoji": "",
+         "gloss": "cosmopolitan herbaceous or woody plants with hollow jointed stems and long narrow leaves",
+         "label": "禾本科植物",
+         "children": [],
+         "words": [
+          {
+           "en": "bamboo",
+           "scenario": 30
+          },
+          {
+           "en": "corn",
+           "scenario": 18
+          },
+          {
+           "en": "grass",
+           "scenario": 30
+          },
+          {
+           "en": "rice",
+           "scenario": 5
+          }
+         ]
+        },
+        {
+         "id": "oewn-12232878-n",
+         "en": "vegetable",
+         "zh": "",
+         "emoji": "",
+         "gloss": "any of various herbaceous plants cultivated for an edible part such as the fruit or the root of the beet or the leaf of spinach or the seeds of bean plants or t",
+         "label": "vegetable",
+         "children": [],
+         "words": [
+          {
+           "en": "spinach",
+           "scenario": 40
+          },
+          {
+           "en": "vegetable",
+           "scenario": 5
+          }
+         ]
+        },
+        {
+         "id": "oewn-12372804-n",
+         "en": "banana",
+         "zh": "香蕉",
+         "emoji": "",
+         "gloss": "any of several tropical and subtropical treelike herbs of the genus Musa having a terminal crown of large entire leaves and usually bearing hanging clusters of ",
+         "label": "香蕉",
+         "children": [],
+         "words": [
+          {
+           "en": "banana",
+           "scenario": 16
+          }
+         ]
+        },
+        {
+         "id": "oewn-12628217-n",
+         "en": "pineapple",
+         "zh": "菠萝",
+         "emoji": "",
+         "gloss": "a tropical American plant bearing a large fleshy edible fruit with a terminal tuft of stiff leaves; widely cultivated in the tropics",
+         "label": "菠萝",
+         "children": [],
+         "words": [
+          {
+           "en": "pineapple",
+           "scenario": 16
+          }
+         ]
+        },
+        {
+         "id": "oewn-12650905-n",
+         "en": "strawberry",
+         "zh": "草莓",
+         "emoji": "",
+         "gloss": "any of various low perennial herbs with many runners and bearing white flowers followed by edible fruits having many small achenes scattered on the surface of a",
+         "label": "草莓",
+         "children": [],
+         "words": [
+          {
+           "en": "strawberry",
+           "scenario": 16
+          }
+         ]
+        },
+        {
+         "id": "oewn-12916760-n",
+         "en": "brinjal",
+         "zh": "茄子植株",
+         "emoji": "",
+         "gloss": "hairy upright herb native to southeastern Asia but widely cultivated for its large glossy edible fruit commonly used as a vegetable",
+         "label": "茄子植株",
+         "children": [],
+         "words": [
+          {
+           "en": "eggplant",
+           "scenario": 40
+          }
+         ]
+        },
+        {
+         "id": "oewn-12926577-n",
+         "en": "tomato",
+         "zh": "番茄",
+         "emoji": "",
+         "gloss": "native to South America; widely cultivated in many varieties",
+         "label": "番茄",
+         "children": [],
+         "words": [
+          {
+           "en": "tomato",
+           "scenario": 18
+          }
+         ]
+        },
+        {
+         "id": "oewn-12954163-n",
+         "en": "celery",
+         "zh": "芹菜",
+         "emoji": "",
+         "gloss": "widely cultivated herb with aromatic leaf stalks that are eaten raw or cooked",
+         "label": "芹菜",
+         "children": [],
+         "words": [
+          {
+           "en": "celery",
+           "scenario": 40
+          }
+         ]
+        },
+        {
+         "id": "oewn-12958148-n",
+         "en": "carrot",
+         "zh": "胡萝卜",
+         "emoji": "",
+         "gloss": "perennial plant widely cultivated as an annual in many varieties for its long conical orange edible roots; temperate and tropical regions",
+         "label": "胡萝卜",
+         "children": [],
+         "words": [
+          {
+           "en": "carrot",
+           "scenario": 18
+          }
+         ]
+        }
+       ],
+       "words": []
+      },
+      {
+       "id": "oewn-13121436-n",
+       "en": "vine",
+       "zh": "藤蔓",
+       "emoji": "",
+       "gloss": "a plant with a weak stem that derives support from climbing, twining, or creeping along a surface",
+       "label": "藤蔓",
+       "children": [
+        {
+         "id": "oewn-12178286-n",
+         "en": "gourd",
+         "zh": "葫芦科藤蔓",
+         "emoji": "",
+         "gloss": "any vine of the family Cucurbitaceae that bears fruits with hard rinds",
+         "label": "葫芦科藤蔓",
+         "children": [],
+         "words": [
+          {
+           "en": "cucumber",
+           "scenario": 18
+          },
+          {
+           "en": "watermelon",
+           "scenario": 16
+          }
+         ]
+        },
+        {
+         "id": "oewn-12179315-n",
+         "en": "squash",
+         "zh": "南瓜藤",
+         "emoji": "",
+         "gloss": "any of numerous annual trailing plants of the genus Cucurbita grown for their fleshy edible fruits",
+         "label": "南瓜藤",
+         "children": [],
+         "words": [
+          {
+           "en": "pumpkin",
+           "scenario": 18
+          }
+         ]
+        },
+        {
+         "id": "oewn-12391956-n",
+         "en": "kiwi",
+         "zh": "猕猴桃",
+         "emoji": "",
+         "gloss": "climbing vine native to China; cultivated in New Zealand for its fuzzy edible fruit with green meat",
+         "label": "猕猴桃",
+         "children": [],
+         "words": [
+          {
+           "en": "kiwi",
+           "scenario": 16
+          }
+         ]
+        },
+        {
+         "id": "oewn-12918253-n",
+         "en": "potato",
+         "zh": "马铃薯",
+         "emoji": "",
+         "gloss": "annual native to South America having underground stolons bearing edible starchy tubers; widely cultivated as a garden vegetable; vines are poisonous",
+         "label": "马铃薯",
+         "children": [],
+         "words": [
+          {
+           "en": "potato",
+           "scenario": 18
+          }
+         ]
+        },
+        {
+         "id": "oewn-13123168-n",
+         "en": "climber",
+         "zh": "攀缘植物",
+         "emoji": "",
+         "gloss": "a vine or climbing plant that readily grows up a support or over other plants",
+         "label": "攀缘植物",
+         "children": [],
+         "words": [
+          {
+           "en": "bean",
+           "scenario": 40
+          },
+          {
+           "en": "pea",
+           "scenario": 40
+          }
+         ]
+        },
+        {
+         "id": "oewn-13165571-n",
+         "en": "grape",
+         "zh": "葡萄藤",
+         "emoji": "",
+         "gloss": "any of numerous woody vines of genus Vitis bearing clusters of edible berries",
+         "label": "葡萄藤",
+         "children": [],
+         "words": [
+          {
+           "en": "grape",
+           "scenario": 16
+          }
+         ]
+        },
+        {
+         "id": "oewn-13170079-n",
+         "en": "pepper vine",
+         "zh": "胡椒藤",
+         "emoji": "",
+         "gloss": "any of various shrubby vines of the genus Piper",
+         "label": "胡椒藤",
+         "children": [],
+         "words": [
+          {
+           "en": "pepper",
+           "scenario": 40
+          }
+         ]
+        }
+       ],
+       "words": []
+      },
+      {
+       "id": "oewn-13123895-n",
+       "en": "woody plant",
+       "zh": "木本植物",
+       "emoji": "",
+       "gloss": "a plant having hard lignified tissues or woody parts especially stems",
+       "label": "木本植物",
+       "children": [
+        {
+         "id": "oewn-13124818-n",
+         "en": "tree",
+         "zh": "树",
+         "emoji": "",
+         "gloss": "a tall perennial woody plant having a main trunk and branches forming a distinct elevated crown; includes both gymnosperms and angiosperms",
+         "label": "树",
+         "children": [],
+         "words": [
+          {
+           "en": "apple",
+           "scenario": 16
+          },
+          {
+           "en": "cherry",
+           "scenario": 16
+          },
+          {
+           "en": "lemon",
+           "scenario": 16
+          },
+          {
+           "en": "mango",
+           "scenario": 16
+          },
+          {
+           "en": "orange",
+           "scenario": 11
+          },
+          {
+           "en": "peach",
+           "scenario": 16
+          },
+          {
+           "en": "pear",
+           "scenario": 16
+          },
+          {
+           "en": "tree",
+           "scenario": 30
+          }
+         ]
+        },
+        {
+         "id": "oewn-13133423-n",
+         "en": "bush",
+         "zh": "灌木",
+         "emoji": "",
+         "gloss": "a low woody perennial plant usually having several major stems",
+         "label": "灌木",
+         "children": [],
+         "words": [
+          {
+           "en": "cube",
+           "scenario": 41
+          },
+          {
+           "en": "pepper",
+           "scenario": 40
+          },
+          {
+           "en": "rose",
+           "scenario": 30
+          }
+         ]
+        }
+       ],
+       "words": []
+      },
+      {
+       "id": "oewn-13155061-n",
+       "en": "bulbous plant",
+       "zh": "球根植物",
+       "emoji": "",
+       "gloss": "plant growing from a bulb",
+       "label": "球根植物",
+       "children": [
+        {
+         "id": "oewn-12445786-n",
+         "en": "liliaceous plant",
+         "zh": "百合科植物",
+         "emoji": "",
+         "gloss": "plant growing from a bulb or corm or rhizome or tuber",
+         "label": "百合科植物",
+         "children": [],
+         "words": [
+          {
+           "en": "garlic",
+           "scenario": 40
+          },
+          {
+           "en": "onion",
+           "scenario": 40
+          },
+          {
+           "en": "tulip",
+           "scenario": 30
+          }
+         ]
+        }
+       ],
+       "words": []
+      }
+     ],
+     "words": []
+    }
+   ],
+   "words": [
+    {
+     "en": "plant",
+     "scenario": 30
+    }
+   ],
+   "key": "plant"
+  },
+  {
+   "id": "oewn-04531608-n",
+   "en": "vehicle",
+   "zh": "交通工具",
+   "emoji": "🚌",
+   "gloss": "a conveyance that transports people or objects",
+   "label": "交通工具",
+   "children": [
+    {
+     "id": "oewn-03130521-n",
+     "en": "craft",
+     "zh": "飞行器/船",
+     "emoji": "",
+     "gloss": "a vehicle designed for navigation in or on water or air or through outer space",
+     "label": "飞行器/船",
+     "children": [
+      {
+       "id": "oewn-02689427-n",
+       "en": "aircraft",
+       "zh": "",
+       "emoji": "",
+       "gloss": "a vehicle that can fly",
+       "label": "aircraft",
+       "children": [
+        {
+         "id": "oewn-03515727-n",
+         "en": "heavier-than-air craft",
+         "zh": "飞行器/船",
+         "emoji": "",
+         "gloss": "a non-buoyant aircraft that requires a source of power to hold it aloft and to propel it",
+         "label": "飞行器/船",
+         "children": [],
+         "words": [
+          {
+           "en": "plane",
+           "scenario": 20
+          }
+         ]
+        },
+        {
+         "id": "oewn-03672243-n",
+         "en": "lighter-than-air craft",
+         "zh": "飞行器/船",
+         "emoji": "",
+         "gloss": "aircraft supported by its own buoyancy",
+         "label": "飞行器/船",
+         "children": [],
+         "words": [
+          {
+           "en": "balloon",
+           "scenario": 44
+          }
+         ]
+        }
+       ],
+       "words": []
+      },
+      {
+       "id": "oewn-04272024-n",
+       "en": "spacecraft",
+       "zh": "飞行器/船",
+       "emoji": "",
+       "gloss": "a craft capable of traveling in outer space; technically, a satellite around the sun",
+       "label": "飞行器/船",
+       "children": [
+        {
+         "id": "oewn-04311353-n",
+         "en": "starship",
+         "zh": "星际飞船",
+         "emoji": "",
+         "gloss": "a spacecraft designed to carry a crew into interstellar space (especially in science fiction)",
+         "label": "星际飞船",
+         "children": [],
+         "words": [
+          {
+           "en": "spaceship",
+           "scenario": 31
+          }
+         ]
+        }
+       ],
+       "words": []
+      },
+      {
+       "id": "oewn-04537861-n",
+       "en": "vessel",
+       "zh": "船舰",
+       "emoji": "",
+       "gloss": "a craft designed for water transportation",
+       "label": "船舰",
+       "children": [
+        {
+         "id": "oewn-02861626-n",
+         "en": "boat",
+         "zh": "",
+         "emoji": "",
+         "gloss": "a small vessel for travel on water",
+         "label": "boat",
+         "children": [],
+         "words": [
+          {
+           "en": "boat",
+           "scenario": 20
+          },
+          {
+           "en": "shell",
+           "scenario": 29
+          }
+         ]
+        },
+        {
+         "id": "oewn-04201332-n",
+         "en": "ship",
+         "zh": "",
+         "emoji": "",
+         "gloss": "a vessel that carries passengers or freight",
+         "label": "ship",
+         "children": [],
+         "words": [
+          {
+           "en": "ship",
+           "scenario": 20
+          }
+         ]
+        }
+       ],
+       "words": []
+      }
+     ],
+     "words": []
+    },
+    {
+     "id": "oewn-04106523-n",
+     "en": "rocket",
+     "zh": "火箭",
+     "emoji": "",
+     "gloss": "any vehicle self-propelled by a rocket engine",
+     "label": "火箭",
+     "children": [],
+     "words": [
+      {
+       "en": "rocket",
+       "scenario": 31
+      }
+     ]
+    },
+    {
+     "id": "oewn-04583497-n",
+     "en": "wheeled vehicle",
+     "zh": "轮式车辆",
+     "emoji": "",
+     "gloss": "a vehicle that moves on wheels and usually has a container for transporting things or people",
+     "label": "轮式车辆",
+     "children": [
+      {
+       "id": "oewn-02837983-n",
+       "en": "bike",
+       "zh": "",
+       "emoji": "",
+       "gloss": "a wheeled vehicle that has two wheels and is moved by foot pedals",
+       "label": "bike",
+       "children": [],
+       "words": [
+        {
+         "en": "bike",
+         "scenario": 20
+        }
+       ]
+      },
+      {
+       "id": "oewn-02963378-n",
+       "en": "car",
+       "zh": "铁道车",
+       "emoji": "",
+       "gloss": "a wheeled vehicle adapted to the rails of railroad",
+       "label": "铁道车",
+       "children": [],
+       "words": [
+        {
+         "en": "car",
+         "scenario": 20
+        }
+       ]
+      },
+      {
+       "id": "oewn-03543814-n",
+       "en": "horse-drawn vehicle",
+       "zh": "马车",
+       "emoji": "",
+       "gloss": "a wheeled vehicle drawn by one or more horses",
+       "label": "马车",
+       "children": [
+        {
+         "id": "oewn-02971932-n",
+         "en": "rig",
+         "zh": "马车",
+         "emoji": "",
+         "gloss": "a vehicle with wheels drawn by one or more horses",
+         "label": "马车",
+         "children": [],
+         "words": [
+          {
+           "en": "stage",
+           "scenario": 33
+          }
+         ]
+        }
+       ],
+       "words": []
+      },
+      {
+       "id": "oewn-04177098-n",
+       "en": "self-propelled vehicle",
+       "zh": "机动车",
+       "emoji": "",
+       "gloss": "a wheeled vehicle that carries in itself a means of propulsion",
+       "label": "机动车",
+       "children": [
+        {
+         "id": "oewn-03796768-n",
+         "en": "motor vehicle",
+         "zh": "机动车",
+         "emoji": "",
+         "gloss": "a self-propelled wheeled vehicle that does not run on rails",
+         "label": "机动车",
+         "children": [],
+         "words": [
+          {
+           "en": "ambulance",
+           "scenario": 35
+          },
+          {
+           "en": "bike",
+           "scenario": 20
+          },
+          {
+           "en": "bus",
+           "scenario": 20
+          },
+          {
+           "en": "car",
+           "scenario": 20
+          },
+          {
+           "en": "taxi",
+           "scenario": 20
+          },
+          {
+           "en": "tractor",
+           "scenario": 18
+          }
+         ]
+        },
+        {
+         "id": "oewn-04472087-n",
+         "en": "tracked vehicle",
+         "zh": "履带车",
+         "emoji": "",
+         "gloss": "a self-propelled vehicle that moves on tracks",
+         "label": "履带车",
+         "children": [],
+         "words": [
+          {
+           "en": "cat",
+           "scenario": 9
+          }
+         ]
+        },
+        {
+         "id": "oewn-04472736-n",
+         "en": "tractor",
+         "zh": "拖拉机",
+         "emoji": "",
+         "gloss": "a wheeled vehicle with large wheels; used in farming and other applications",
+         "label": "拖拉机",
+         "children": [],
+         "words": [
+          {
+           "en": "tractor",
+           "scenario": 18
+          }
+         ]
+        }
+       ],
+       "words": []
+      }
+     ],
+     "words": []
+    }
+   ],
+   "words": [],
+   "key": "vehicle"
+  },
+  {
+   "id": "oewn-03055525-n",
+   "en": "wear",
+   "zh": "衣物",
+   "emoji": "👕",
+   "gloss": "a covering designed to be worn on a person's body",
+   "label": "衣物",
+   "children": [
+    {
+     "id": "oewn-02731365-n",
+     "en": "dress",
+     "zh": "着装",
+     "emoji": "",
+     "gloss": "clothing in general",
+     "label": "着装",
+     "children": [],
+     "words": [
+      {
+       "en": "dress",
+       "scenario": 14
+      }
+     ]
+    },
+    {
+     "id": "oewn-02759103-n",
+     "en": "garb",
+     "zh": "装束",
+     "emoji": "",
+     "gloss": "clothing of a distinctive style or for a particular occasion",
+     "label": "装束",
+     "children": [
+      {
+       "id": "oewn-03268041-n",
+       "en": "ecclesiastical robe",
+       "zh": "教士袍",
+       "emoji": "",
+       "gloss": "attire that is appropriate to wear in a church",
+       "label": "教士袍",
+       "children": [
+        {
+         "id": "oewn-03268195-n",
+         "en": "purple",
+         "zh": "主教紫袍",
+         "emoji": "",
+         "gloss": "(Roman Catholic Church) official dress of a cardinal; so named after the Tyrial purple color of the robes",
+         "label": "主教紫袍",
+         "children": [],
+         "words": [
+          {
+           "en": "purple",
+           "scenario": 11
+          }
+         ]
+        }
+       ],
+       "words": []
+      }
+     ],
+     "words": [
+      {
+       "en": "dress",
+       "scenario": 14
+      }
+     ]
+    },
+    {
+     "id": "oewn-02849379-n",
+     "en": "black",
+     "zh": "丧服",
+     "emoji": "",
+     "gloss": "black clothing (worn as a sign of mourning)",
+     "label": "丧服",
+     "children": [],
+     "words": [
+      {
+       "en": "black",
+       "scenario": 11
+      }
+     ]
+    },
+    {
+     "id": "oewn-02859205-n",
+     "en": "blue",
+     "zh": "蓝色服装",
+     "emoji": "",
+     "gloss": "blue clothing",
+     "label": "蓝色服装",
+     "children": [],
+     "words": [
+      {
+       "en": "blue",
+       "scenario": 11
+      }
+     ]
+    },
+    {
+     "id": "oewn-03009373-n",
+     "en": "change",
+     "zh": "换洗衣物",
+     "emoji": "",
+     "gloss": "a different or fresh set of clothes",
+     "label": "换洗衣物",
+     "children": [],
+     "words": [
+      {
+       "en": "change",
+       "scenario": 34
+      }
+     ]
+    },
+    {
+     "id": "oewn-03423924-n",
+     "en": "garment",
+     "zh": "",
+     "emoji": "",
+     "gloss": "an article of clothing",
+     "label": "garment",
+     "children": [
+      {
+       "id": "oewn-03409064-n",
+       "en": "fur",
+       "zh": "皮草",
+       "emoji": "",
+       "gloss": "a garment made of animal pelts or synthetic fur",
+       "label": "皮草",
+       "children": [],
+       "words": [
+        {
+         "en": "fur",
+         "scenario": 45
+        }
+       ]
+      },
+      {
+       "id": "oewn-03653533-n",
+       "en": "wash",
+       "zh": "待洗衣物",
+       "emoji": "",
+       "gloss": "garments or white goods that can be cleaned by laundering",
+       "label": "待洗衣物",
+       "children": [],
+       "words": [
+        {
+         "en": "wash",
+         "scenario": 26
+        }
+       ]
+      },
+      {
+       "id": "oewn-03869443-n",
+       "en": "overgarment",
+       "zh": "外套",
+       "emoji": "",
+       "gloss": "a garment worn over other garments",
+       "label": "外套",
+       "children": [
+        {
+         "id": "oewn-03061006-n",
+         "en": "coat",
+         "zh": "大衣",
+         "emoji": "",
+         "gloss": "an outer garment that has sleeves and covers the body from shoulder down; worn outdoors",
+         "label": "大衣",
+         "children": [],
+         "words": [
+          {
+           "en": "coat",
+           "scenario": 14
+          },
+          {
+           "en": "jacket",
+           "scenario": 14
+          },
+          {
+           "en": "raincoat",
+           "scenario": 14
+          }
+         ]
+        }
+       ],
+       "words": []
+      },
+      {
+       "id": "oewn-04150962-n",
+       "en": "scarf",
+       "zh": "铁道车",
+       "emoji": "",
+       "gloss": "a garment worn around the head or neck or shoulders for warmth or decoration",
+       "label": "铁道车",
+       "children": [],
+       "words": [
+        {
+         "en": "scarf",
+         "scenario": 14
+        }
+       ]
+      },
+      {
+       "id": "oewn-04204434-n",
+       "en": "shirt",
+       "zh": "",
+       "emoji": "",
+       "gloss": "a garment worn on the upper half of the body",
+       "label": "shirt",
+       "children": [
+        {
+         "id": "oewn-03600807-n",
+         "en": "jersey",
+         "zh": "套头衫",
+         "emoji": "",
+         "gloss": "a close-fitting pullover shirt",
+         "label": "套头衫",
+         "children": [],
+         "words": [
+          {
+           "en": "turtle",
+           "scenario": 29
+          }
+         ]
+        }
+       ],
+       "words": [
+        {
+         "en": "shirt",
+         "scenario": 14
+        }
+       ]
+      },
+      {
+       "id": "oewn-04237870-n",
+       "en": "skirt",
+       "zh": "裙子",
+       "emoji": "",
+       "gloss": "a garment hanging from the waist; worn mainly by girls and women",
+       "label": "裙子",
+       "children": [],
+       "words": [
+        {
+         "en": "skirt",
+         "scenario": 14
+        }
+       ]
+      },
+      {
+       "id": "oewn-04377135-n",
+       "en": "jumper",
+       "zh": "针织衫",
+       "emoji": "",
+       "gloss": "a crocheted or knitted garment covering the upper part of the body",
+       "label": "针织衫",
+       "children": [
+        {
+         "id": "oewn-04509492-n",
+         "en": "turtle",
+         "zh": "高领衫",
+         "emoji": "",
+         "gloss": "a sweater or jersey with a high close-fitting collar",
+         "label": "高领衫",
+         "children": [],
+         "words": [
+          {
+           "en": "turtle",
+           "scenario": 29
+          }
+         ]
+        }
+       ],
+       "words": [
+        {
+         "en": "sweater",
+         "scenario": 14
+        }
+       ]
+      },
+      {
+       "id": "oewn-04496264-n",
+       "en": "pant",
+       "zh": "",
+       "emoji": "",
+       "gloss": "(usually in the plural) a garment extending from the waist to the knee or ankle, covering each leg separately",
+       "label": "pant",
+       "children": [
+        {
+         "id": "oewn-03361927-n",
+         "en": "tweed",
+         "zh": "花呢裤",
+         "emoji": "",
+         "gloss": "(usually in the plural) trousers made of flannel or gabardine or tweed or white cloth",
+         "label": "花呢裤",
+         "children": [],
+         "words": [
+          {
+           "en": "white",
+           "scenario": 11
+          }
+         ]
+        },
+        {
+         "id": "oewn-04212364-n",
+         "en": "shorts",
+         "zh": "短裤",
+         "emoji": "",
+         "gloss": "(used in the plural) trousers that end at or above the knee",
+         "label": "短裤",
+         "children": [],
+         "words": [
+          {
+           "en": "shorts",
+           "scenario": 14
+          }
+         ]
+        }
+       ],
+       "words": []
+      },
+      {
+       "id": "oewn-04515458-n",
+       "en": "undergarment",
+       "zh": "内衣",
+       "emoji": "",
+       "gloss": "a garment worn under other garments",
+       "label": "内衣",
+       "children": [
+        {
+         "id": "oewn-04515784-n",
+         "en": "underpants",
+         "zh": "内裤",
+         "emoji": "",
+         "gloss": "an undergarment that covers the body from the waist no further than to the thighs; usually worn next to the skin",
+         "label": "内裤",
+         "children": [],
+         "words": [
+          {
+           "en": "pants",
+           "scenario": 14
+          },
+          {
+           "en": "shorts",
+           "scenario": 14
+          }
+         ]
+        }
+       ],
+       "words": []
+      }
+     ],
+     "words": []
+    },
+    {
+     "id": "oewn-03507653-n",
+     "en": "headgear",
+     "zh": "一头（家畜）",
+     "emoji": "",
+     "gloss": "clothing for the head",
+     "label": "一头（家畜）",
+     "children": [
+      {
+       "id": "oewn-02957776-n",
+       "en": "cap",
+       "zh": "便帽",
+       "emoji": "",
+       "gloss": "a tight-fitting headdress",
+       "label": "便帽",
+       "children": [],
+       "words": [
+        {
+         "en": "cap",
+         "scenario": 14
+        }
+       ]
+      },
+      {
+       "id": "oewn-03502782-n",
+       "en": "hat",
+       "zh": "帽子",
+       "emoji": "",
+       "gloss": "headdress that protects the head from bad weather; has shaped crown and usually a brim",
+       "label": "帽子",
+       "children": [],
+       "words": [
+        {
+         "en": "hat",
+         "scenario": 14
+        }
+       ]
+      }
+     ],
+     "words": []
+    },
+    {
+     "id": "oewn-03821022-n",
+     "en": "neckpiece",
+     "zh": "颈饰",
+     "emoji": "",
+     "gloss": "an article of apparel worn about the neck",
+     "label": "颈饰",
+     "children": [
+      {
+       "id": "oewn-03073002-n",
+       "en": "collar",
+       "zh": "领口饰物",
+       "emoji": "",
+       "gloss": "anything worn or placed about the neck",
+       "label": "领口饰物",
+       "children": [],
+       "words": [
+        {
+         "en": "collar",
+         "scenario": 45
+        }
+       ]
+      }
+     ],
+     "words": []
+    },
+    {
+     "id": "oewn-04516887-n",
+     "en": "uniform",
+     "zh": "制服",
+     "emoji": "",
+     "gloss": "clothing of distinctive design worn by members of a particular group as a means of identification",
+     "label": "制服",
+     "children": [],
+     "words": [
+      {
+       "en": "uniform",
+       "scenario": 14
+      }
+     ]
+    },
+    {
+     "id": "oewn-04604179-n",
+     "en": "women's clothing",
+     "zh": "女装",
+     "emoji": "",
+     "gloss": "clothing that is designed for women to wear",
+     "label": "女装",
+     "children": [
+      {
+       "id": "oewn-03241438-n",
+       "en": "dress",
+       "zh": "着装",
+       "emoji": "",
+       "gloss": "a one-piece garment for a woman; has skirt and bodice",
+       "label": "着装",
+       "children": [],
+       "words": [
+        {
+         "en": "dress",
+         "scenario": 14
+        }
+       ]
+      }
+     ],
+     "words": []
+    }
+   ],
+   "words": [],
+   "key": "clothing"
+  },
+  {
+   "id": "oewn-04459089-n",
+   "en": "tool",
+   "zh": "工具",
+   "emoji": "🔧",
+   "gloss": "an implement used in the practice of a vocation",
+   "label": "工具",
+   "children": [
+    {
+     "id": "oewn-03079101-n",
+     "en": "comb",
+     "zh": "梳子",
+     "emoji": "",
+     "gloss": "any of several tools for straightening fibers",
+     "label": "梳子",
+     "children": [],
+     "words": [
+      {
+       "en": "comb",
+       "scenario": 26
+      }
+     ]
+    },
+    {
+     "id": "oewn-03159112-n",
+     "en": "cutting implement",
+     "zh": "肉块",
+     "emoji": "",
+     "gloss": "a tool used for cutting or slicing",
+     "label": "肉块",
+     "children": [
+      {
+       "id": "oewn-03158739-n",
+       "en": "cutter",
+       "zh": "肉块",
+       "emoji": "",
+       "gloss": "a cutting implement; a tool for cutting",
+       "label": "肉块",
+       "children": [
+        {
+         "id": "oewn-03269943-n",
+         "en": "edge tool",
+         "zh": "刃具",
+         "emoji": "",
+         "gloss": "any cutting tool with a sharp cutting edge (as a chisel or knife or plane or gouge)",
+         "label": "刃具",
+         "children": [],
+         "words": [
+          {
+           "en": "knife",
+           "scenario": 5
+          },
+          {
+           "en": "plane",
+           "scenario": 20
+          }
+         ]
+        }
+       ],
+       "words": []
+      }
+     ],
+     "words": []
+    },
+    {
+     "id": "oewn-03389013-n",
+     "en": "fork",
+     "zh": "耙子",
+     "emoji": "",
+     "gloss": "an agricultural tool used for lifting or digging; has a handle and metal prongs",
+     "label": "耙子",
+     "children": [],
+     "words": [
+      {
+       "en": "fork",
+       "scenario": 5
+      }
+     ]
+    },
+    {
+     "id": "oewn-03494245-n",
+     "en": "hand tool",
+     "zh": "手工具",
+     "emoji": "",
+     "gloss": "a tool used with workers' hands",
+     "label": "手工具",
+     "children": [
+      {
+       "id": "oewn-03961007-n",
+       "en": "plane",
+       "zh": "手刨",
+       "emoji": "",
+       "gloss": "a carpenter's hand tool with an adjustable blade for smoothing or shaping wood",
+       "label": "手刨",
+       "children": [],
+       "words": [
+        {
+         "en": "plane",
+         "scenario": 20
+        }
+       ]
+      },
+      {
+       "id": "oewn-04298380-n",
+       "en": "square",
+       "zh": "角尺",
+       "emoji": "",
+       "gloss": "a hand tool consisting of two straight arms at right angles; used to construct or test right angles",
+       "label": "角尺",
+       "children": [],
+       "words": [
+        {
+         "en": "square",
+         "scenario": 41
+        }
+       ]
+      }
+     ],
+     "words": []
+    },
+    {
+     "id": "oewn-04003842-n",
+     "en": "power tool",
+     "zh": "电动工具",
+     "emoji": "",
+     "gloss": "a tool driven by a motor",
+     "label": "电动工具",
+     "children": [
+      {
+       "id": "oewn-03961572-n",
+       "en": "plane",
+       "zh": "电刨",
+       "emoji": "",
+       "gloss": "a power tool for smoothing or shaping wood",
+       "label": "电刨",
+       "children": [],
+       "words": [
+        {
+         "en": "plane",
+         "scenario": 20
+        }
+       ]
+      }
+     ],
+     "words": []
+    },
+    {
+     "id": "oewn-04398245-n",
+     "en": "tap",
+     "zh": "丝锥",
+     "emoji": "",
+     "gloss": "a tool for cutting female (internal) screw threads",
+     "label": "丝锥",
+     "children": [],
+     "words": [
+      {
+       "en": "tap",
+       "scenario": 26
+      }
+     ]
+    }
+   ],
+   "words": [],
+   "key": "tool"
+  },
+  {
+   "id": "oewn-03410635-n",
+   "en": "furniture",
+   "zh": "家具",
+   "emoji": "🛋️",
+   "gloss": "furnishings that make a room or other area ready for occupancy",
+   "label": "家具",
+   "children": [
+    {
+     "id": "oewn-02825078-n",
+     "en": "bedroom furniture",
+     "zh": "皮草",
+     "emoji": "",
+     "gloss": "furniture intended for use in a bedroom",
+     "label": "皮草",
+     "children": [
+      {
+       "id": "oewn-02821967-n",
+       "en": "bed",
+       "zh": "床",
+       "emoji": "",
+       "gloss": "a piece of furniture that provides a place to sleep",
+       "label": "床",
+       "children": [],
+       "words": [
+        {
+         "en": "bed",
+         "scenario": 4
+        }
+       ]
+      }
+     ],
+     "words": []
+    },
+    {
+     "id": "oewn-04169042-n",
+     "en": "seat",
+     "zh": "座椅",
+     "emoji": "",
+     "gloss": "furniture that is designed for sitting on",
+     "label": "座椅",
+     "children": [
+      {
+       "id": "oewn-03005231-n",
+       "en": "chair",
+       "zh": "椅子",
+       "emoji": "",
+       "gloss": "a seat for one person, with a support for the back",
+       "label": "椅子",
+       "children": [],
+       "words": [
+        {
+         "en": "chair",
+         "scenario": 1
+        }
+       ]
+      },
+      {
+       "id": "oewn-04263630-n",
+       "en": "sofa",
+       "zh": "沙发",
+       "emoji": "",
+       "gloss": "an upholstered seat for more than one person",
+       "label": "沙发",
+       "children": [],
+       "words": [
+        {
+         "en": "sofa",
+         "scenario": 4
+        }
+       ]
+      }
+     ],
+     "words": []
+    },
+    {
+     "id": "oewn-04386330-n",
+     "en": "table",
+     "zh": "桌子",
+     "emoji": "",
+     "gloss": "a piece of furniture having a smooth flat top that is usually supported by one or more vertical legs",
+     "label": "桌子",
+     "children": [
+      {
+       "id": "oewn-03184367-n",
+       "en": "desk",
+       "zh": "书桌",
+       "emoji": "",
+       "gloss": "a piece of furniture with a writing surface and usually drawers or other compartments",
+       "label": "书桌",
+       "children": [],
+       "words": [
+        {
+         "en": "desk",
+         "scenario": 1
+        }
+       ]
+      }
+     ],
+     "words": [
+      {
+       "en": "table",
+       "scenario": 4
+      }
+     ]
+    },
+    {
+     "id": "oewn-04387051-n",
+     "en": "table",
+     "zh": "桌子",
+     "emoji": "",
+     "gloss": "a piece of furniture with tableware for a meal laid out on it",
+     "label": "桌子",
+     "children": [],
+     "words": [
+      {
+       "en": "table",
+       "scenario": 4
+      }
+     ]
+    }
+   ],
+   "words": [],
+   "key": "furniture"
+  },
+  {
+   "id": "oewn-03806455-n",
+   "en": "instrument",
+   "zh": "乐器",
+   "emoji": "🎻",
+   "gloss": "any of various devices or contrivances that can be used to produce musical tones or sounds",
+   "label": "乐器",
+   "children": [
+    {
+     "id": "oewn-03619741-n",
+     "en": "keyboard instrument",
+     "zh": "翅果",
+     "emoji": "",
+     "gloss": "a musical instrument that is played by means of a keyboard",
+     "label": "翅果",
+     "children": [
+      {
+       "id": "oewn-03934354-n",
+       "en": "piano",
+       "zh": "钢琴",
+       "emoji": "",
+       "gloss": "a keyboard instrument that is played by depressing keys that cause hammers to strike tuned strings and produce sounds",
+       "label": "钢琴",
+       "children": [],
+       "words": [
+        {
+         "en": "piano",
+         "scenario": 33
+        }
+       ]
+      }
+     ],
+     "words": []
+    },
+    {
+     "id": "oewn-03921556-n",
+     "en": "percussion instrument",
+     "zh": "打击乐器",
+     "emoji": "",
+     "gloss": "a musical instrument in which the sound is produced by one object striking another",
+     "label": "打击乐器",
+     "children": [
+      {
+       "id": "oewn-03254272-n",
+       "en": "drum",
+       "zh": "圆桶",
+       "emoji": "",
+       "gloss": "a musical percussion instrument; usually consists of a hollow cylinder with a membrane stretched across each end",
+       "label": "圆桶",
+       "children": [],
+       "words": [
+        {
+         "en": "drum",
+         "scenario": 33
+        }
+       ]
+      },
+      {
+       "id": "oewn-04488109-n",
+       "en": "triangle",
+       "zh": "三角铁",
+       "emoji": "",
+       "gloss": "a percussion instrument consisting of a metal bar bent in the shape of an open triangle",
+       "label": "三角铁",
+       "children": [],
+       "words": [
+        {
+         "en": "triangle",
+         "scenario": 41
+        }
+       ]
+      }
+     ],
+     "words": []
+    },
+    {
+     "id": "oewn-04345614-n",
+     "en": "stringed instrument",
+     "zh": "弦乐器",
+     "emoji": "",
+     "gloss": "a musical instrument in which taut strings provide the source of sound",
+     "label": "弦乐器",
+     "children": [
+      {
+       "id": "oewn-02883788-n",
+       "en": "string",
+       "zh": "弓弦乐器",
+       "emoji": "",
+       "gloss": "stringed instruments that are played with a bow",
+       "label": "弓弦乐器",
+       "children": [
+        {
+         "id": "oewn-04544161-n",
+         "en": "fiddle",
+         "zh": "小提琴",
+         "emoji": "",
+         "gloss": "bowed stringed instrument that is the highest member of the violin family; this instrument has four strings and a hollow body and an unfretted fingerboard and i",
+         "label": "小提琴",
+         "children": [],
+         "words": [
+          {
+           "en": "violin",
+           "scenario": 33
+          }
+         ]
+        }
+       ],
+       "words": []
+      },
+      {
+       "id": "oewn-03472449-n",
+       "en": "guitar",
+       "zh": "吉他",
+       "emoji": "",
+       "gloss": "a stringed instrument usually having six strings; played by strumming or plucking",
+       "label": "吉他",
+       "children": [],
+       "words": [
+        {
+         "en": "guitar",
+         "scenario": 33
+        }
+       ]
+      }
+     ],
+     "words": []
+    },
+    {
+     "id": "oewn-04594218-n",
+     "en": "wind",
+     "zh": "管乐器",
+     "emoji": "",
+     "gloss": "a musical instrument in which the sound is produced by an enclosed column of air that is moved by bellows or the human breath",
+     "label": "管乐器",
+     "children": [
+      {
+       "id": "oewn-02895029-n",
+       "en": "brass",
+       "zh": "铜管乐器",
+       "emoji": "",
+       "gloss": "a wind instrument that consists of a brass tube (usually of variable length) that is blown by means of a cup-shaped or funnel-shaped mouthpiece",
+       "label": "铜管乐器",
+       "children": [
+        {
+         "id": "oewn-03115320-n",
+         "en": "horn",
+         "zh": "号",
+         "emoji": "",
+         "gloss": "a brass musical instrument with a brilliant tone; has a narrow tube and a flared bell and is played by means of valves",
+         "label": "号",
+         "children": [],
+         "words": [
+          {
+           "en": "trumpet",
+           "scenario": 33
+          }
+         ]
+        }
+       ],
+       "words": []
+      },
+      {
+       "id": "oewn-04605909-n",
+       "en": "wood",
+       "zh": "木管乐器",
+       "emoji": "",
+       "gloss": "any wind instrument other than the brass instruments",
+       "label": "木管乐器",
+       "children": [
+        {
+         "id": "oewn-03376875-n",
+         "en": "flute",
+         "zh": "长笛",
+         "emoji": "",
+         "gloss": "a high-pitched woodwind instrument; a slender tube closed at one end with finger holes on one end and an opening near the closed end across which the breath is ",
+         "label": "长笛",
+         "children": [],
+         "words": [
+          {
+           "en": "flute",
+           "scenario": 33
+          }
+         ]
+        }
+       ],
+       "words": []
+      }
+     ],
+     "words": []
+    }
+   ],
+   "words": [
+    {
+     "en": "instrument",
+     "scenario": 33
+    }
+   ],
+   "key": "instrument"
+  },
+  {
+   "id": "oewn-03099154-n",
+   "en": "container",
+   "zh": "容器",
+   "emoji": "🧺",
+   "gloss": "any object that can be used to hold things (especially a large metal boxlike object of standardized dimensions that can be loaded from one form of transport to ",
+   "label": "容器",
+   "children": [
+    {
+     "id": "oewn-02776042-n",
+     "en": "bag",
+     "zh": "包",
+     "emoji": "",
+     "gloss": "a flexible container with a single opening",
+     "label": "包",
+     "children": [
+      {
+       "id": "oewn-02772753-n",
+       "en": "backpack",
+       "zh": "双肩包",
+       "emoji": "",
+       "gloss": "a bag carried by a strap on your back or shoulder",
+       "label": "双肩包",
+       "children": [],
+       "words": [
+        {
+         "en": "backpack",
+         "scenario": 36
+        }
+       ]
+      },
+      {
+       "id": "oewn-04153408-n",
+       "en": "schoolbag",
+       "zh": "包",
+       "emoji": "",
+       "gloss": "a bag for carrying school books and supplies",
+       "label": "包",
+       "children": [],
+       "words": [
+        {
+         "en": "schoolbag",
+         "scenario": 2
+        }
+       ]
+      },
+      {
+       "id": "oewn-04242966-n",
+       "en": "sleeping bag",
+       "zh": "包",
+       "emoji": "",
+       "gloss": "large padded bag designed to be slept in outdoors; usually rolls up like a bedroll",
+       "label": "包",
+       "children": [],
+       "words": [
+        {
+         "en": "sleeping bag",
+         "scenario": 36
+        }
+       ]
+      }
+     ],
+     "words": []
+    },
+    {
+     "id": "oewn-02805104-n",
+     "en": "basket",
+     "zh": "篮子",
+     "emoji": "",
+     "gloss": "a container that is usually woven and has handles",
+     "label": "篮子",
+     "children": [],
+     "words": [
+      {
+       "en": "basket",
+       "scenario": 34
+      }
+     ]
+    },
+    {
+     "id": "oewn-02884638-n",
+     "en": "bowl",
+     "zh": "碗",
+     "emoji": "",
+     "gloss": "a small round container that is open at the top for holding tobacco",
+     "label": "碗",
+     "children": [],
+     "words": [
+      {
+       "en": "bowl",
+       "scenario": 5
+      }
+     ]
+    },
+    {
+     "id": "oewn-02886585-n",
+     "en": "box",
+     "zh": "盒子",
+     "emoji": "",
+     "gloss": "a (usually rectangular) container; may have a lid",
+     "label": "盒子",
+     "children": [
+      {
+       "id": "oewn-03914737-n",
+       "en": "pencil box",
+       "zh": "盒子",
+       "emoji": "",
+       "gloss": "a box for holding pencils",
+       "label": "盒子",
+       "children": [],
+       "words": [
+        {
+         "en": "pencil box",
+         "scenario": 2
+        }
+       ]
+      }
+     ],
+     "words": []
+    },
+    {
+     "id": "oewn-02978156-n",
+     "en": "case",
+     "zh": "收纳箱",
+     "emoji": "",
+     "gloss": "a portable container for carrying several objects",
+     "label": "收纳箱",
+     "children": [
+      {
+       "id": "oewn-02777635-n",
+       "en": "baggage",
+       "zh": "包",
+       "emoji": "",
+       "gloss": "cases used to carry belongings when traveling",
+       "label": "包",
+       "children": [
+        {
+         "id": "oewn-02776843-n",
+         "en": "bag",
+         "zh": "包",
+         "emoji": "",
+         "gloss": "a portable rectangular container for carrying clothes",
+         "label": "包",
+         "children": [],
+         "words": [
+          {
+           "en": "suitcase",
+           "scenario": 46
+          }
+         ]
+        }
+       ],
+       "words": [
+        {
+         "en": "luggage",
+         "scenario": 46
+        }
+       ]
+      },
+      {
+       "id": "oewn-04207043-n",
+       "en": "shoe",
+       "zh": "牌盒",
+       "emoji": "",
+       "gloss": "(card games) a case from which playing cards are dealt one at a time",
+       "label": "牌盒",
+       "children": [],
+       "words": [
+        {
+         "en": "shoe",
+         "scenario": 3
+        }
+       ]
+      }
+     ],
+     "words": []
+    },
+    {
+     "id": "oewn-03211629-n",
+     "en": "dish",
+     "zh": "菜肴",
+     "emoji": "",
+     "gloss": "a piece of dishware normally used as a container for holding or serving food",
+     "label": "菜肴",
+     "children": [
+      {
+       "id": "oewn-02884182-n",
+       "en": "bowl",
+       "zh": "碗",
+       "emoji": "",
+       "gloss": "a dish that is round and open at the top for serving foods",
+       "label": "碗",
+       "children": [],
+       "words": [
+        {
+         "en": "bowl",
+         "scenario": 5
+        }
+       ]
+      },
+      {
+       "id": "oewn-03460968-n",
+       "en": "boat",
+       "zh": "船形碟",
+       "emoji": "",
+       "gloss": "a dish (often boat-shaped) for serving gravy or sauce",
+       "label": "船形碟",
+       "children": [],
+       "words": [
+        {
+         "en": "boat",
+         "scenario": 20
+        }
+       ]
+      }
+     ],
+     "words": []
+    },
+    {
+     "id": "oewn-03443167-n",
+     "en": "glass",
+     "zh": "玻璃杯",
+     "emoji": "",
+     "gloss": "a container made of glass for holding liquids while drinking",
+     "label": "玻璃杯",
+     "children": [
+      {
+       "id": "oewn-04599402-n",
+       "en": "wineglass",
+       "zh": "高脚杯",
+       "emoji": "",
+       "gloss": "a glass that has a stem and in which wine is served",
+       "label": "高脚杯",
+       "children": [
+        {
+         "id": "oewn-03377395-n",
+         "en": "flute",
+         "zh": "细长酒杯",
+         "emoji": "",
+         "gloss": "a tall narrow wineglass",
+         "label": "细长酒杯",
+         "children": [],
+         "words": [
+          {
+           "en": "flute",
+           "scenario": 33
+          }
+         ]
+        }
+       ],
+       "words": []
+      }
+     ],
+     "words": []
+    },
+    {
+     "id": "oewn-03784903-n",
+     "en": "cast",
+     "zh": "浇铸模具",
+     "emoji": "",
+     "gloss": "container into which liquid is poured to create a given shape when it hardens",
+     "label": "浇铸模具",
+     "children": [
+      {
+       "id": "oewn-03941392-n",
+       "en": "pig",
+       "zh": "铸铁模",
+       "emoji": "",
+       "gloss": "mold consisting of a bed of sand in which pig iron is cast",
+       "label": "铸铁模",
+       "children": [],
+       "words": [
+        {
+         "en": "pig",
+         "scenario": 9
+        }
+       ]
+      },
+      {
+       "id": "oewn-04141606-n",
+       "en": "sandbox",
+       "zh": "砂箱",
+       "emoji": "",
+       "gloss": "mold consisting of a box with sand shaped to mold metal",
+       "label": "砂箱",
+       "children": [],
+       "words": [
+        {
+         "en": "sandbox",
+         "scenario": 44
+        }
+       ]
+      }
+     ],
+     "words": []
+    },
+    {
+     "id": "oewn-04068016-n",
+     "en": "receptacle",
+     "zh": "容器",
+     "emoji": "",
+     "gloss": "a container that is used to put or keep things in",
+     "label": "容器",
+     "children": [
+      {
+       "id": "oewn-04440211-n",
+       "en": "tidy",
+       "zh": "针线盒",
+       "emoji": "",
+       "gloss": "receptacle that holds odds and ends (as sewing materials)",
+       "label": "针线盒",
+       "children": [],
+       "words": [
+        {
+         "en": "tidy",
+         "scenario": 43
+        }
+       ]
+      }
+     ],
+     "words": []
+    },
+    {
+     "id": "oewn-04146942-n",
+     "en": "bank",
+     "zh": "存钱罐",
+     "emoji": "",
+     "gloss": "a container (usually with a slot in the top) for keeping money at home",
+     "label": "存钱罐",
+     "children": [],
+     "words": [
+      {
+       "en": "bank",
+       "scenario": 19
+      }
+     ]
+    },
+    {
+     "id": "oewn-04291140-n",
+     "en": "spoon",
+     "zh": "勺",
+     "emoji": "",
+     "gloss": "a piece of cutlery with a shallow bowl-shaped container and a handle; used to stir or serve or take up food",
+     "label": "勺",
+     "children": [],
+     "words": [
+      {
+       "en": "spoon",
+       "scenario": 5
+      }
+     ]
+    },
+    {
+     "id": "oewn-04538393-n",
+     "en": "vessel",
+     "zh": "船舰",
+     "emoji": "",
+     "gloss": "an object used as a container (especially for liquids)",
+     "label": "船舰",
+     "children": [
+      {
+       "id": "oewn-02879899-n",
+       "en": "bottle",
+       "zh": "瓶子",
+       "emoji": "",
+       "gloss": "a glass or plastic vessel used for storing drinks or other liquids; typically cylindrical without handles and with a narrow neck that can be plugged or capped",
+       "label": "瓶子",
+       "children": [
+        {
+         "id": "oewn-03364412-n",
+         "en": "flask",
+         "zh": "细颈瓶",
+         "emoji": "",
+         "gloss": "bottle that has a narrow neck",
+         "label": "细颈瓶",
+         "children": [],
+         "words": [
+          {
+           "en": "canteen",
+           "scenario": 13
+          }
+         ]
+        }
+       ],
+       "words": []
+      },
+      {
+       "id": "oewn-02884435-n",
+       "en": "bowl",
+       "zh": "碗",
+       "emoji": "",
+       "gloss": "a round vessel that is open at the top; used chiefly for holding grains or liquids",
+       "label": "碗",
+       "children": [],
+       "words": [
+        {
+         "en": "bowl",
+         "scenario": 5
+        }
+       ]
+      },
+      {
+       "id": "oewn-03254659-n",
+       "en": "drum",
+       "zh": "圆桶",
+       "emoji": "",
+       "gloss": "a cylindrical metal container, commonly used for shipping or storage of liquids",
+       "label": "圆桶",
+       "children": [],
+       "words": [
+        {
+         "en": "drum",
+         "scenario": 33
+        }
+       ]
+      },
+      {
+       "id": "oewn-04395830-n",
+       "en": "tank",
+       "zh": "大罐",
+       "emoji": "",
+       "gloss": "a large (usually metallic) vessel for holding gases or liquids",
+       "label": "大罐",
+       "children": [
+        {
+         "id": "oewn-04085686-n",
+         "en": "reservoir",
+         "zh": "储水罐",
+         "emoji": "",
+         "gloss": "tank used for collecting and storing a liquid (as water or oil)",
+         "label": "储水罐",
+         "children": [],
+         "words": [
+          {
+           "en": "sink",
+           "scenario": 26
+          }
+         ]
+        }
+       ],
+       "words": []
+      }
+     ],
+     "words": []
+    }
+   ],
+   "words": [],
+   "key": "container"
+  }
+ ]
+}
