@@ -1,10 +1,19 @@
 {% extends 'base.html' %}{% load static %}{% block title %}作文坊 · 乐学堂{% endblock %}
 {% block content %}<link rel="stylesheet" href="{% static 'writing/writing.css' %}"><script src="{% static 'speech.js' %}" defer></script><script src="{% static 'tts.js' %}" defer></script><script src="{% static 'writing/writing.js' %}" defer></script>
 <a class="back" href="{% url 'home' %}">← 学习广场</a>
-<div class="page-heading"><p class="eyebrow">语文 · 表达创作</p><h1>作文坊</h1><p>打开写作锦囊，用素材和范文搭把手，写自己的故事；写好的作文存在作文本里。</p></div>
+<header class="wr-hero">
+  <div class="wr-hero-copy">
+    <span class="wr-hero-icon"><img src="{% static 'icons/writing.svg' %}" alt="" width="56" height="56"></span>
+    <div>
+      <p class="eyebrow">语文 · 表达创作</p>
+      <h1>作文坊</h1>
+      <p>打开写作锦囊，用素材和范文搭把手，写自己的故事；写好的作文存在作文本里。</p>
+    </div>
+  </div>
+  <div class="wr-toolbar"><input id="wr-search" type="search" placeholder="搜索题目或写作目标…" aria-label="搜索题目"><button class="button small" id="wr-lottery" type="button">🎲 灵感抽签</button><button class="button small" id="wr-goto-notebook" type="button">📓 去写作文</button></div>
+</header>
 <div class="library-layout"><aside class="unit-nav" aria-label="写作分类导航"><h2>写作分类</h2>{% for group in groups %}<a href="#cat-{{ group.id }}"><span class="unit-dot" style="--c: {{ group.color }}">{{ group.emoji }}</span>{{ group.name }}<span class="unit-count">{{ group.topics|length }}</span></a>{% endfor %}<a href="#materials"><span class="unit-dot" style="--c: #b58af0">🧰</span>素材百宝箱</a><a href="#notebook"><span class="unit-dot" style="--c: #2f7d4f">📓</span>我的作文本</a></aside>
 <section class="wr-board">
-  <div class="wr-toolbar"><input id="wr-search" type="search" placeholder="搜索题目或写作目标…" aria-label="搜索题目"><button class="button small" id="wr-lottery" type="button">🎲 灵感抽签</button><button class="button small" id="wr-goto-notebook" type="button">📓 去写作文</button></div>
   {% for group in groups %}<section class="wr-group" id="cat-{{ group.id }}" style="--c: {{ group.color }}">
     <div class="section-heading"><div><h2>{{ group.emoji }} {{ group.name }}</h2><p>共 {{ group.topics|length }} 个题目</p></div></div>
     <div class="wr-grid" data-category="{{ group.name }}">{% for topic in group.topics %}<article class="wr-card" data-title="{{ topic.title }}" data-goal="{{ topic.goal }}" data-category="{{ group.name }}">

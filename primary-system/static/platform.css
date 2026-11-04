@@ -209,6 +209,9 @@ textarea { resize: vertical; line-height: 1.9; }
 .unit-nav h2 { margin-bottom: 16px; font-size: 23px; }
 .unit-nav a { display: block; min-height: 52px; padding: 12px 14px; margin-block: 4px; border-radius: 12px; font-size: 17px; line-height: 1.7; overflow-wrap: anywhere; }
 .unit-nav a[aria-current], .unit-nav a:hover { background: var(--green); color: #fff; }
+.unit-nav .unit-dot { display: inline-block; width: 10px; height: 10px; margin-right: 8px; border-radius: 50%; background: var(--c, #609cbd); vertical-align: baseline; }
+.unit-nav .unit-count { float: right; color: var(--muted); font-size: 14px; font-variant-numeric: tabular-nums; }
+.unit-nav a[aria-current="page"] .unit-count { color: var(--ink); font-weight: 700; }
 .content-list { border: 1px solid var(--line); border-radius: 22px; background: var(--white); }
 .content-row { display: flex; align-items: center; gap: 24px; min-width: 0; padding: 28px; border-bottom: 1px solid var(--line); }
 .content-row:first-child { border-radius: 21px 21px 0 0; }

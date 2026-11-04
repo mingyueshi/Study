@@ -38,8 +38,8 @@
 .ph-group-other .ph-card { --c: #2f9e5f; }
 .ph-group .button.small { border: 1px solid var(--green, #2f7d4f); }
 
-/* 侧栏 emoji 点 */
-.unit-nav .unit-dot { background: none; }
+/* 侧栏 emoji 点：不用共享色点圆片，按文字尺寸渲染 */
+.unit-nav .unit-dot { width: auto; height: auto; background: none; }
 
 @media (max-width: 640px) {
   .ph-grid { grid-template-columns: minmax(0, 1fr); }

@@ -1,13 +1,10 @@
 /* 教材同步单词：单元词卡栅格（对齐 primary/english.html 原型）。
    仅在英语教材册页加载；类名与场景单词词卡保持同族，样式独立避免相互影响。 */
 
-/* 单元导航：色点 + 词数 */
-.unit-nav .unit-dot { display: inline-block; width: 10px; height: 10px; margin-right: 8px; border-radius: 50%; background: var(--c, #609cbd); vertical-align: baseline; }
-.unit-nav .unit-count { float: right; color: var(--muted, #6b7480); font-size: 14px; font-variant-numeric: tabular-nums; }
+/* 单元导航：中文副题（色点与词数见 platform.css 共享规则） */
 .unit-nav .unit-title-text { display: inline; }
 .unit-nav .unit-zh { margin-left: 6px; color: var(--muted, #6b7480); font-size: 15px; font-weight: 500; }
 .unit-nav a[aria-current="page"] .unit-zh { color: var(--ink, #22303c); }
-.unit-nav a[aria-current="page"] .unit-count { color: var(--ink, #22303c); font-weight: 700; }
 
 /* 关联词图例：反/近/根/组/类 */
 .rel-legend { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; margin: 0 0 16px; font-size: 13px; font-weight: 600; color: #6b7480; }
