@@ -1,7 +1,7 @@
 /* ============================================================
    天文探索数据测试
    运行：node test/test-astro.js
-   验证八大太空基地结构、字段完整、图示注册、内容安全。
+   验证九大太空基地结构、字段完整、图示注册、内容安全。
    ============================================================ */
 'use strict';
 const ASTRO = require('../astro-data.js');
@@ -17,19 +17,19 @@ function isStr(v) { return typeof v === 'string' && v.trim().length > 0; }
 
 /* ---------- 总体结构 ---------- */
 console.log('— 基地与知识点结构 —');
-check(Array.isArray(ASTRO.units) && ASTRO.units.length === 8, '应有 8 个太空基地，实际 ' + (ASTRO.units || []).length);
+check(Array.isArray(ASTRO.units) && ASTRO.units.length === 9, '应有 9 个太空基地，实际 ' + (ASTRO.units || []).length);
 check(isStr(ASTRO.textbook), '缺少 textbook');
 check(isStr(ASTRO.edition), '缺少 edition');
 
-const EXPECT_IDS = ['au1', 'au2', 'au3', 'au4', 'au5', 'au6', 'au7', 'au8'];
-const EXPECT_NAMES = ['太阳系大家庭', '我们的月球', '恒星与星星', '仰望星空', '银河系与宇宙', '飞出地球', '中国航天足迹', '宇宙里的问号'];
+const EXPECT_IDS = ['au1', 'au2', 'au3', 'au4', 'au5', 'au6', 'au7', 'au8', 'au9'];
+const EXPECT_NAMES = ['太阳系大家庭', '我们的月球', '恒星与星星', '仰望星空', '银河系与宇宙', '飞出地球', '中国航天足迹', '宇宙里的问号', '未解之谜'];
 const seenPoints = new Set();
 const unitNames = new Set();
 ASTRO.units.forEach((u, i) => {
   const tag = '[' + (u.id || 'u?') + ']';
   check(u.id === EXPECT_IDS[i], tag + ' 基地顺序应为 ' + EXPECT_IDS[i]);
   check(u.name === EXPECT_NAMES[i], tag + ' 基地名称应为 ' + EXPECT_NAMES[i]);
-  check(u.no === '第' + '一二三四五六七八'[i] + '站', tag + ' 编号应为第' + '一二三四五六七八'[i] + '站');
+  check(u.no === '第' + '一二三四五六七八九'[i] + '站', tag + ' 编号应为第' + '一二三四五六七八九'[i] + '站');
   check(typeof u.emoji === 'string' && u.emoji.length > 0, tag + ' 缺少 emoji');
   check(/^#[0-9a-f]{6}$/i.test(u.color), tag + ' 颜色格式: ' + u.color);
   check(isStr(u.intro), tag + ' 缺少基地导语');
@@ -51,7 +51,7 @@ ASTRO.units.forEach((u, i) => {
     if (p.recall) check(isStr(p.recall), t + ' 口诀应为字符串');
   });
 });
-check(seenPoints.size === 41, '全册应为 41 个知识点，实际 ' + seenPoints.size);
+check(seenPoints.size === 46, '全册应为 46 个知识点，实际 ' + seenPoints.size);
 
 /* ---------- 与地理模块分开：独立的数据与站点结构 ---------- */
 console.log('— 模块独立检查 —');
@@ -101,6 +101,6 @@ check(FIGS.FIG_IDS.length >= 14, '图示库应有 14 个以上图示，实际 ' 
 check(FIGS.has('demo-astro-planets') && FIGS.has('demo-astro-moonphases'), '缺少互动演示图示');
 
 console.log(fails === 0
-  ? '\n✅ 全部通过（共断言 ' + checked + ' 项：8 基地 41 知识点 + 速查 + 小诊所 + 图示库）'
+  ? '\n✅ 全部通过（共断言 ' + checked + ' 项：9 基地 46 知识点 + 速查 + 小诊所 + 图示库）'
   : '\n❌ 共 ' + fails + ' / ' + checked + ' 项失败');
 process.exit(fails === 0 ? 0 : 1);

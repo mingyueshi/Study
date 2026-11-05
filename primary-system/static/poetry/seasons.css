@@ -1,0 +1,42 @@
+/* 诗词四季：四季大卡横排 + 情感与题材分组；每季一色，活泼清晰。 */
+.seasons-hero { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 24px; margin: 0 0 20px; }
+.seasons-hero h1 { font-size: clamp(32px, 3.6vw, 44px); margin: 0 0 8px; }
+.seasons-hero p { margin: 0; color: var(--muted, #6b7480); font-size: 17px; line-height: 1.8; }
+.seasons-dynasty { display: flex; flex-wrap: wrap; gap: 8px; }
+.seasons-dynasty .chip { display: inline-flex; align-items: center; min-height: 40px; padding: 6px 14px; border: 1px solid #d5e0ca; border-radius: 12px; background: var(--white, #fff); color: #3d4750; font-size: 15px; }
+.seasons-dynasty .chip.on { border-color: var(--green, #2f7d4f); background: var(--green, #2f7d4f); color: #fff; font-weight: 700; }
+
+.seasons-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 18px; margin-bottom: 30px; }
+.season-card { display: flex; flex-direction: column; gap: 4px; padding: 22px 20px; border: 1px solid #e0e8d6; border-top: 6px solid var(--sc, #7fb069); border-radius: 22px; background: var(--white, #fff); box-shadow: 0 4px 0 #2a1a3806; transition: transform .12s ease, box-shadow .12s ease; }
+.season-card:hover { transform: translateY(-3px); box-shadow: 0 8px 0 #2a1a380a; }
+.season-emoji { font-size: 44px; line-height: 1.2; }
+.season-name { font-size: 30px; font-weight: 900; color: #234b38; }
+.season-subtitle { font-style: normal; color: color-mix(in srgb, var(--sc, #7fb069) 60%, #33404d); font-size: 16px; font-weight: 700; }
+.season-count { color: var(--muted, #6b7480); font-size: 14px; font-variant-numeric: tabular-nums; }
+.season-desc { margin: 8px 0 0; color: #4d5c54; font-size: 15px; line-height: 1.8; }
+.season-card.season-chun { --sc: #7fb069; }
+.season-card.season-xia { --sc: #f4a259; }
+.season-card.season-qiu { --sc: #d9822b; }
+.season-card.season-dong { --sc: #6c9bc0; }
+
+.seasons-emotions h2 { margin: 0 0 6px; font-size: 26px; }
+.seasons-emotions-note { margin: 0 0 16px; color: var(--muted, #6b7480); font-size: 14px; }
+.seasons-group { margin-bottom: 18px; padding: 16px 18px; border: 1px solid var(--line, #dfe5da); border-radius: 18px; background: var(--white, #fff); }
+.seasons-group-head h3 { margin: 0; font-size: 19px; color: #234b38; }
+.seasons-group-head p { margin: 4px 0 10px; color: var(--muted, #6b7480); font-size: 14px; line-height: 1.7; }
+.seasons-group-themes { display: flex; flex-wrap: wrap; gap: 10px; }
+.seasons-theme { display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border: 1px solid #dfe8d3; border-radius: 14px; background: #f8fbf4; color: var(--ink, #22303c); font-size: 16px; }
+.seasons-theme:hover { border-color: var(--green, #2f7d4f); background: #eef5e6; }
+.seasons-theme b { font-weight: 750; }
+.seasons-theme i { font-style: normal; color: var(--muted, #6b7480); font-size: 13px; }
+.seasons-note { margin: 20px 2px 0; color: var(--muted, #6b7480); font-size: 13px; line-height: 1.7; }
+
+@media (max-width: 700px) {
+  .seasons-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .season-card { padding: 16px; }
+  .season-name { font-size: 24px; }
+}
+@media print {
+  .seasons-dynasty { display: none !important; }
+  .season-card { break-inside: avoid; }
+}

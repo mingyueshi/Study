@@ -30,6 +30,7 @@ TEXTBOOK_ADAPTERS = {
     'math': {'units': 'units', 'children': 'points', 'kind': 'knowledge',
              'textbooks': {'all': 'bnu-math-4a-2026'}},
     'english': {'units': 'ENGLISH_UNITS', 'children': 'words', 'kind': 'word',
+                'textbook_children': 'ENGLISH_DIALOGUES', 'textbook_kind': 'dialogue',
                 'textbooks': {'first': 'fltrp-english-4a-2026', 'second': 'fltrp-english-4b-2026'}},
 }
 
@@ -115,6 +116,15 @@ def import_snapshot(snapshot, publish=False):
                     # Identity includes source unit: independently tracked textbook occurrences stay distinct.
                     key = f'primary:{code}:{raw_unit["id"]}:{identity}'
                     upsert_item(key, raw, module, source, kind, title, unit, index, publish, report)
+                if code == 'english' and adapter.get('textbook_children'):
+                    # 课文对话按 unitId 挂到同一单元；排在单词之后（100+），页面上单独成 tab。
+                    dialogues = [d for d in data.get(adapter['textbook_children'], [])
+                                 if d.get('unitId') == raw_unit['id']]
+                    for order_d, raw_d in enumerate(dialogues):
+                        title_d = raw_d.get('title') or raw_d.get('zh')
+                        key_d = f'primary:{code}:{raw_unit["id"]}:{raw_d.get("id") or title_d}'
+                        upsert_item(key_d, raw_d, module, source, adapter['textbook_kind'],
+                                    title_d, unit, 100 + order_d, publish, report)
                 extra = {k: v for k, v in raw_unit.items() if k not in {child_key, 'id', 'name', 'no', 'intro', 'zh', 'book'} | SKIP}
                 if extra:
                     upsert_item(f'primary:{code}:{raw_unit["id"]}:__overview', extra, module, source,
@@ -123,7 +133,7 @@ def import_snapshot(snapshot, publish=False):
             metadata_keys = {units_key, 'textbook', 'edition', 'ENGLISH_BOOKS', 'ENGLISH_WORDS'}
             if code == 'english':
                 # Relationship label/style/order settings drive the legacy UI, not learning cards.
-                metadata_keys.update({'RELATION_META', 'RELATION_ORDER'})
+                metadata_keys.update({'RELATION_META', 'RELATION_ORDER', 'ENGLISH_DIALOGUES'})
             extras = {k: v for k, v in data.items() if k not in metadata_keys}
             if extras:
                 reference, _ = Unit.objects.get_or_create(textbook_book=book, code='reference', defaults={'title': '复习与资料', 'order': 10000})

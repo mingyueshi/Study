@@ -32,6 +32,41 @@ class PlatformFixture(TestCase):
         cls.unit = cls.collection.units.get(code='test-unit')
 
 
+def english_snapshot():
+    return {'schema_version': 1, 'modules': [{
+        'code': 'english', 'source_file': 'primary/english-data.js', 'sha256': 'b' * 64,
+        'data': {
+            'ENGLISH_UNITS': [{'id': '4a-u1', 'book': '四年级上册', 'name': 'Unit 1  I love sports', 'zh': '我爱运动',
+                               'words': [{'en': 'sport', 'ipa': '/spɔːt/', 'zh': 'n. 运动', 'emoji': '⚽'}]}],
+            'ENGLISH_DIALOGUES': [{'id': '4a-u1-d1', 'unitId': '4a-u1', 'title': 'Start up  Read and answer',
+                                   'zh': '你能做到吗', 'emoji': '💬',
+                                   'lines': [{'who': 'Amy', 'emoji': '👧', 'en': 'Can you jump high, Daming?', 'zh': '你能跳得很高吗？'},
+                                             {'who': 'Daming', 'emoji': '👦', 'en': 'Yes, I can.', 'zh': '是的，我能。'}]}],
+            'ENGLISH_BOOKS': ['四年级上册'], 'ENGLISH_WORDS': [],
+        }}]}
+
+
+class EnglishTextbookTests(PlatformFixture):
+    def test_dialogue_import_and_texts_tab(self):
+        report = import_snapshot(english_snapshot(), publish=True)
+        self.assertGreaterEqual(report['created'], 1)
+        item = ContentItem.objects.get(kind='dialogue', title__contains='Start up')
+        self.assertEqual(item.source_payload['lines'][0]['who'], 'Amy')
+        response = self.client.get('/books/primary-english-first/?unit=4a-u1&tab=texts')
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'dialogue-card')
+        self.assertContains(response, 'Can you jump high, Daming?')
+        self.assertContains(response, '整段连读')
+        # 单词 tab 不受影响
+        words = self.client.get('/books/primary-english-first/?unit=4a-u1')
+        self.assertContains(words, 'class="wcard"')
+
+    def test_seed_renames_english_module_once(self):
+        Module.objects.filter(code='english').update(name='教材同步单词')
+        call_command('seed_platform', stdout=io.StringIO())
+        self.assertEqual(Module.objects.get(code='english').name, '教材同步')
+
+
 class CatalogTests(PlatformFixture):
     def test_seed_is_idempotent_and_preserves_changes(self):
         Module.objects.filter(code='math').update(name='我的数学')

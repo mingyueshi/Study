@@ -25,7 +25,7 @@ from .models import PoetryDocument, PoetryText
 from .feihualing import Answer, ExerciseError, KEYWORDS, TARGET, clean, digest
 from .importing import simplified_relative
 
-FORMAT = "feihualing-complete-sentences-v3"
+FORMAT = "feihualing-complete-sentences-v4"
 HAN = re.compile(r"^[\u3400-\u9fff\uf900-\ufaff\U00020000-\U000323af]+$")
 SPLIT = re.compile(r"[，,、；;：:]+")
 TERMINALS = frozenset("。！？.!?")
@@ -443,9 +443,8 @@ def build(ctx=None, path=None):
                                 counts["unreadable_units"] += 1
                                 continue
                             canonical = normalize(display)
-                            if not any(char in canonical for char in KEYWORDS):
-                                counts["without_keyword"] += 1
-                                continue
+                            # 全句入索引（不再按预置令字过滤）：自定义令字靠运行时
+                            # instr 检索任意汉字，预置令字仍走 uses/hint_pool 预计算。
                             raw_clauses, shown_clauses = clauses(
                                 source_sentence
                             ), clauses(display)
@@ -767,7 +766,10 @@ class IndexedCorpus:
     def contains_keyword(self, value, keyword):
         return keyword in normalize(value)
 
-    def count(self, keyword, used=()):
+    def count(self, keyword, used=(), answer_keys=()):
+        # 预置令字走 uses/hint_pool 预计算；自定义令字运行时按句文本检索。
+        if keyword not in self.meta["counts"]["keyword_counts"]:
+            return self.custom_count(keyword, answer_keys)
         total = self.meta["counts"]["keyword_counts"][keyword]
         if not used:
             return total
@@ -780,7 +782,9 @@ class IndexedCorpus:
         ).fetchone()[0]
         return total - blocked
 
-    def choose(self, keyword, used, seed):
+    def choose(self, keyword, used, seed, answer_keys=()):
+        if keyword not in self.meta["counts"]["keyword_counts"]:
+            return self.custom_choose(keyword, seed, answer_keys)
         counts = self.meta["counts"]
         total = counts["keyword_counts"][keyword]
         preferred = counts["preferred_counts"][keyword]
@@ -804,6 +808,32 @@ class IndexedCorpus:
             if row:
                 return self.get(row[0])
         return None
+
+    def custom_count(self, keyword, answer_keys=()):
+        """自定义令字：索引表未覆盖，按句文本实时检索；已用整句按句键排除。"""
+        total = self._query(
+            "SELECT count(*) FROM answers WHERE instr(text, ?) > 0", (keyword,)
+        ).fetchone()[0]
+        if not answer_keys:
+            return total
+        blocked = sum(
+            1
+            for key in set(answer_keys)
+            if (answer := self.answers.get(key)) and answer.targets(keyword)
+        )
+        return max(total - blocked, 0)
+
+    def custom_choose(self, keyword, seed, answer_keys=()):
+        params = [keyword]
+        sql = "SELECT key FROM answers WHERE instr(text, ?) > 0"
+        if answer_keys:
+            sql += " AND key NOT IN (" + ",".join("?" for _ in answer_keys) + ")"
+            params.extend(answer_keys)
+        rows = self._query(sql + " ORDER BY priority DESC, key", params).fetchall()
+        if not rows:
+            return None
+        offset = int(digest([seed, sorted(answer_keys)])[:8], 16) % len(rows)
+        return self.get(rows[offset][0])
 
     def keywords(self):
         return [

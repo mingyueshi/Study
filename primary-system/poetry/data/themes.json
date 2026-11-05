@@ -13,6 +13,12 @@
   },
   "groups": [
     {
+      "code": "siji",
+      "title": "四季",
+      "description": "跟着季节读诗：春风、夏蝉、秋月、冬雪，字里行间都是季节的味道。",
+      "themes": ["chun", "xia", "qiu", "dong"]
+    },
+    {
       "code": "qingyi",
       "title": "情谊与思念",
       "description": "写人与人之间的牵挂：分别时的叮咛、远行后的乡愁、独处时的思念。",
@@ -38,6 +44,76 @@
     }
   ],
   "themes": [
+    {
+      "code": "chun",
+      "group": "siji",
+      "title": "春",
+      "subtitle": "春风吹又生",
+      "description": "写春天的诗：春风、细雨、燕子、花开，读一读古人眼里的春天。",
+      "prompt": "想想哪些诗句里有春天的影子：东风、杨柳、桃花都算。",
+      "title_terms": ["春", "春风", "春雨", "春晓", "初春", "立春", "春晚", "春行", "春日"],
+      "body_terms": ["春风", "春雨", "春色", "春眠", "春晓", "东风", "燕子", "桃花", "杏花", "梨花", "杨柳", "柳条", "清明", "踏青", "新芽", "花开"],
+      "exclude_terms": ["送春", "春夜洛城闻笛"],
+      "min_body_hits": 1,
+      "featured": [
+        {"title": "春晓", "author": "孟浩然"},
+        {"title": "咏柳", "author": "贺知章"},
+        {"title": "春夜喜雨", "author": "杜甫"},
+        {"title": "清明", "author": "杜牧"}
+      ]
+    },
+    {
+      "code": "xia",
+      "group": "siji",
+      "title": "夏",
+      "subtitle": "荷叶满池塘",
+      "description": "写夏天的诗：荷叶、蝉鸣、乘凉，听听古人夏天的声音。",
+      "prompt": "夏天的诗常写荷花、蝉和乘凉，留意这些意象。",
+      "title_terms": ["夏", "夏日", "初夏", "纳凉", "乘凉", "采莲"],
+      "body_terms": ["夏日", "荷花", "荷叶", "莲叶", "采莲", "蝉", "鸣蝉", "蛙", "乘凉", "纳凉", "绿荫", "浓荫"],
+      "exclude_terms": ["夏日绝句"],
+      "min_body_hits": 1,
+      "featured": [
+        {"title": "夏日南亭怀辛大", "author": "孟浩然"},
+        {"title": "采莲曲", "author": "王昌龄"}
+      ]
+    },
+    {
+      "code": "qiu",
+      "group": "siji",
+      "title": "秋",
+      "subtitle": "秋风起雁飞",
+      "description": "写秋天的诗：秋风、落叶、大雁、霜月，古人最爱的秋日风景。",
+      "prompt": "秋天的诗常写落叶、大雁和霜月，也可以想想跟思念有关的部分。",
+      "title_terms": ["秋", "秋风", "秋夕", "秋夜", "秋思", "立秋"],
+      "body_terms": ["秋风", "秋月", "秋色", "落叶", "菊花", "大雁", "雁", "霜", "枫", "寒蝉", "中秋", "重阳"],
+      "exclude_terms": ["秋夜将晓"],
+      "min_body_hits": 1,
+      "featured": [
+        {"title": "山行", "author": "杜牧"},
+        {"title": "望洞庭", "author": "刘禹锡"},
+        {"title": "枫桥夜泊", "author": "张继"},
+        {"title": "暮江吟", "author": "白居易"}
+      ]
+    },
+    {
+      "code": "dong",
+      "group": "siji",
+      "title": "冬",
+      "subtitle": "独钓寒江雪",
+      "description": "写冬天的诗：大雪、寒梅、孤舟，最冷的季节有最倔强的诗。",
+      "prompt": "冬天的诗常写雪、梅和寒冷里的坚守。",
+      "title_terms": ["冬", "雪", "梅花", "冬至", "除夜"],
+      "body_terms": ["雪", "寒梅", "梅花", "北风", "冰雪", "寒冬", "孤舟", "蓑笠"],
+      "exclude_terms": ["雪中送炭"],
+      "min_body_hits": 1,
+      "featured": [
+        {"title": "江雪", "author": "柳宗元"},
+        {"title": "别董大", "author": "高适"},
+        {"title": "夜雪", "author": "白居易"},
+        {"title": "白雪歌送武判官归京", "author": "岑参"}
+      ]
+    },
     {
       "code": "songbie",
       "group": "qingyi",

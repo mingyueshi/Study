@@ -236,6 +236,43 @@ class FeihualingTests(TestCase):
         self.assertFalse(flower["enabled"])
         self.assertEqual(self.post("new", keyword="花").status_code, 503)
 
+    def test_custom_keyword_full_flow(self):
+        """「明」不在预置令字库：运行时检索，五句可成局，整句键防重复。"""
+        response = self.post("new", keyword="明")
+        self.assertEqual(response.status_code, 200)
+        state = response.json()
+        self.assertEqual(state["keyword"], "明")
+        self.assertFalse(any(row["char"] == "明" for row in state["keywords"]))
+        token = state["token"]
+        first = self.post("answer", token, answer="床前明月光").json()
+        self.assertEqual(first["outcome"], "accepted")
+        token = first["token"]
+        duplicate = self.post("answer", token, answer="床前明月光").json()
+        self.assertEqual(duplicate["outcome"], "duplicate")
+        for line in ("明月松间照", "海上生明月", "举头望明月", "风雨，月明。"):
+            state = self.post("answer", token, answer=line).json()
+            self.assertEqual(state["outcome"], "accepted", (line, state.get("message")))
+            token = state["token"]
+        self.assertEqual(state["status"], "completed", state["message"])
+        self.assertEqual(state["count"], 5)
+        # 恢复签名态：自定义令字在 token 里原样往返。
+        restored = self.post("hint", state["token"]).status_code
+        self.assertEqual(restored, 200)
+
+    def test_custom_keyword_rejects_invalid_and_uncovered(self):
+        self.assertEqual(self.post("new", keyword="ab").status_code, 400)
+        self.assertEqual(self.post("new", keyword="！").status_code, 400)
+        self.assertEqual(self.post("new", keyword="猫").status_code, 503)
+
+    def test_custom_keyword_hint_uses_runtime_search(self):
+        state = self.post("new", keyword="明").json()
+        self.post("answer", state["token"], answer="床前明月光")
+        hint = self.post("hint", state["token"]).json()
+        self.assertTrue(hint["hint"])
+        self.assertNotIn("床前明月光", hint["hint"]["masked"])
+        revealed = self.post("reveal", hint["token"]).json()
+        self.assertEqual(revealed["outcome"], "revealed")
+
     def test_source_not_ready_overlay_and_document_drift(self):
         token = self.start()["token"]
         self.dataset.state = "pending"
@@ -332,8 +369,10 @@ class FeihualingTests(TestCase):
         token = self.start()["token"]
         for value in [None, False, 1, [], {}, "", "月" * 101]:
             self.assertEqual(self.post("answer", token, answer=value).status_code, 400)
-        for keyword in [None, [], {}, False, "風", "月月"]:
+        for keyword in [None, [], {}, False, "月月"]:
             self.assertEqual(self.post("new", keyword=keyword).status_code, 400)
+        # 「風」是合法的自定义汉字（繁体），语料为简体、覆盖不足 → 503 如实拒绝。
+        self.assertEqual(self.post("new", keyword="風").status_code, 503)
         self.assertEqual(self.post("other", token).status_code, 400)
         self.assertEqual(self.client.get(API).status_code, 405)
         self.assertEqual(

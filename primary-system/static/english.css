@@ -67,6 +67,7 @@
 #english-cards .rel:active { transform: scale(.97); }
 #english-cards .rel b { font-size: 18px; font-weight: 750; }
 #english-cards .rel i { display: inline-flex; align-items: center; gap: 4px; font-style: normal; font-size: 15px; color: var(--muted, #6b7480); }
+#english-cards .rel .rel-ipa { color: #68608d; font-size: 13px; line-height: 1.4; }
 #english-cards .rel[class*="t-"] { border-style: solid; border-color: color-mix(in srgb, var(--rc) 38%, #fff); background: color-mix(in srgb, var(--rc) 8%, #fff); }
 #english-cards .rel[class*="t-"] b { color: color-mix(in srgb, var(--rc) 68%, #33404d); }
 #english-cards .rel .rel-tag { display: inline-grid; place-items: center; min-width: 16px; height: 16px; padding: 0 3px; border-radius: 5px; background: var(--rc); color: #fff; font-size: 11px; font-weight: 800; line-height: 1; }
@@ -107,4 +108,41 @@
   .unit-nav, .tts-bar, .tts-settings, #english-cards .say, #english-cards .card-link { display: none !important; }
   #english-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   #english-cards .wcard { break-inside: avoid; box-shadow: none; }
+}
+
+/* 单词 / 课文 tab 与课文气泡卡 */
+.english-tabs { display: flex; gap: 8px; margin: 0 0 16px; }
+.english-tabs .tab { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 8px 16px; border: 1px solid #d5e0ca; border-radius: 12px; background: var(--white, #fff); color: #3d4750; font-size: 16px; }
+.english-tabs .tab i { font-style: normal; color: var(--muted, #6b7480); font-size: 13px; }
+.english-tabs .tab:hover { border-color: var(--green, #2f7d4f); }
+.english-tabs .tab.on { border-color: var(--green, #2f7d4f); background: var(--green, #2f7d4f); color: #fff; font-weight: 700; }
+.english-tabs .tab.on i { color: #d9ecda; }
+
+.dialogue-list { display: flex; flex-direction: column; gap: 22px; }
+.dialogue-card { padding: 18px 20px; border: 1px solid var(--line, #dfe5da); border-top: 4px solid color-mix(in srgb, var(--c, #609cbd) 55%, #fffefa); border-radius: 20px; background: var(--white, #fff); }
+.dialogue-head { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; }
+.dialogue-emoji { font-size: 30px; }
+.dialogue-head h3 { margin: 0; font-size: 20px; }
+.dialogue-head .muted { margin: 2px 0 0; font-size: 14px; }
+.dialogue-head .button { margin-left: auto; flex-shrink: 0; }
+.dialogue-lines { display: flex; flex-direction: column; gap: 12px; padding-top: 6px; }
+.dialogue-row { display: flex; align-items: flex-end; gap: 8px; }
+.bubble-who { font-size: 24px; flex-shrink: 0; }
+.bubble { display: inline-flex; flex-direction: column; align-items: flex-start; gap: 2px; max-width: min(100%, 86%); padding: 10px 15px; border: 1px solid #dfe5ee; border-radius: 14px; background: #f6f9fc; color: var(--ink, #22303c); text-align: left; cursor: pointer; }
+.dialogue-row.left .bubble { border-bottom-left-radius: 4px; }
+.bubble:hover { border-color: var(--green, #2f7d4f); }
+.bubble-en { font-size: 26px; font-weight: 800; line-height: 1.55; color: #234b38; letter-spacing: .01em; }
+.bubble-zh { font-style: normal; color: var(--muted, #6b7480); font-size: 16px; line-height: 1.75; }
+.bubble-who-name { flex-shrink: 0; color: var(--muted, #6b7480); font-size: 13px; padding-bottom: 4px; }
+.dialogue-row.left .bubble-who-name { order: -1; }
+.dialogue-row.left .bubble { order: 1; }
+
+@media (max-width: 640px) {
+  .bubble { max-width: 86%; }
+  .dialogue-head { flex-wrap: wrap; }
+  .dialogue-head .button { margin-left: 0; }
+}
+@media print {
+  .english-tabs, .dialogue-head .button { display: none !important; }
+  .dialogue-card { break-inside: avoid; }
 }

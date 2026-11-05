@@ -8,7 +8,7 @@ MODULES = [
     # 以模块卡作为入口，页面由各玩法应用自己渲染。
     ('knowledge', '语文知识', 'chinese', 'book', '顺着课文和单元，理解语言的美。'),
     ('math', '数学思维', 'math', 'math', '读知识、看例题，把方法想明白。'),
-    ('english', '教材同步单词', 'english', 'english', '按教材册次，积累每天用得到的英语。'),
+    ('english', '教材同步', 'english', 'english', '跟课本走：单词、课文，一篇一篇学。'),
     ('chain', '成语接龙', 'chinese', 'dragon', '和小龙陪练轮流接龙，词语取自统一词库。'),
     ('words', '场景单词', 'english', 'scenes', '从生活场景出发，认识身边的英文。'),
     ('phonetics', '英语音标', 'english', 'phonetics', '看口型要点，听例词，把 44 个音读准。'),
@@ -34,9 +34,15 @@ class Command(BaseCommand):
         ]):
             subjects[code], _ = Subject.objects.get_or_create(code=code, defaults={'name': name, 'order': order})
         for order, (code, name, subject, icon, description) in enumerate(MODULES):
-            Module.objects.get_or_create(code=code, defaults={
+            module, _ = Module.objects.get_or_create(code=code, defaults={
                 'name': name, 'subject': subjects[subject], 'icon': icon, 'description': description, 'order': order,
             })
+            # 有意的编排更名（课文加入后「教材同步单词」→「教材同步」）一次性刷新；
+            # 其余既有设置（如用户改过的模块名）保持不变。
+            if code == 'english' and module.name == '教材同步单词':
+                module.name = name
+                module.description = description
+                module.save(update_fields=['name', 'description'])
         for code, name, subject, publisher in [
             ('pep-chinese', '统编版语文', 'chinese', '人民教育出版社'),
             ('bnu-math', '北师大版数学', 'math', '北京师范大学出版社'),

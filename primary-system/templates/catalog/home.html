@@ -21,6 +21,13 @@
     <p>黄鹤楼、庐山、西湖、玉门关……背过的诗按地点摆上中国地图，去哪儿玩先查查。</p>
     <span class="tag">看看这里有什么诗 →</span>
   </a>
+  <a class="module-card color-chinese" href="{% url 'poetry-seasons' %}">
+    <img src="{% static 'icons/literature.svg' %}" alt="" width="88" height="88">
+    <span class="module-meta">古诗词 <span aria-hidden="true">↗</span></span>
+    <h3>诗词四季</h3>
+    <p>春风、夏蝉、秋月、冬雪——按季节读诗，也按思乡、送别、边塞这些心情找。</p>
+    <span class="tag">跟着季节读诗 →</span>
+  </a>
   <a class="module-card color-english" href="{% url 'words-tree' %}">
     <img src="{% static 'icons/english.svg' %}" alt="" width="88" height="88">
     <span class="module-meta">英语 <span aria-hidden="true">↗</span></span>
@@ -48,6 +55,20 @@
     <h3>看释义猜成语</h3>
     <p>读意思，把成语缺的字补出来。难度就是亮出的提示字数——从亮 3 个字到全部藏起来。</p>
     <span class="tag">来猜一猜 →</span>
+  </a>
+  <a class="module-card color-chinese" href="{% url 'idiom-emoji' %}">
+    <img src="{% static 'icons/idioms.svg' %}" alt="" width="88" height="88">
+    <span class="module-meta">语文 <span aria-hidden="true">↗</span></span>
+    <h3>成语表情猜猜看</h3>
+    <p>看 emoji 猜成语：🐍➕🦶 是哪个？四选一点一点，猜对一个收一个。</p>
+    <span class="tag">看表情猜成语 →</span>
+  </a>
+  <a class="module-card color-chinese" href="{% url 'idiom-pairs' %}">
+    <img src="{% static 'icons/dragon.svg' %}" alt="" width="88" height="88">
+    <span class="module-meta">语文 <span aria-hidden="true">↗</span></span>
+    <h3>成语配对</h3>
+    <p>左边找一个成语，右边配它的近义或反义。画蛇添足配谁？雪中送炭又配谁？</p>
+    <span class="tag">连线配对 →</span>
   </a>
   <a class="module-card color-chinese" href="{% url 'hanzi-polyphones' %}">
     <img src="{% static 'icons/literature.svg' %}" alt="" width="88" height="88">

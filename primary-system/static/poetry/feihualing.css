@@ -146,3 +146,9 @@
 }
 @media (max-width: 359px) { .fh-keywords { grid-template-columns: repeat(3,minmax(0,1fr)); } }
 @media (prefers-reduced-motion: reduce) { .fh-page * { scroll-behavior: auto; } }
+
+/* 自定义令字入口 */
+.fh-custom { display: flex; gap: 8px; align-items: center; margin-top: 12px; }
+.fh-custom input { flex: 1; min-width: 0; min-height: 42px; border: 1.5px solid #d5cbe6; border-radius: 11px; padding: 6px 12px; font-size: 17px; text-align: center; }
+.fh-custom input:focus { border-color: #73509b; outline: none; }
+.fh-custom .fh-text-button { flex-shrink: 0; }

@@ -10,6 +10,7 @@
     <aside class="fh-panel fh-choices" aria-label="选择令字">
       <h2>今日，拈什么字？</h2><p class="fh-muted">字在句中哪里都可以。</p>
       <div class="fh-keywords" id="fh-keywords"></div>
+      <div class="fh-custom"><input id="fh-custom-char" maxlength="1" placeholder="自定义令字" aria-label="自定义令字（单个汉字）"><button type="button" id="fh-custom-start" class="fh-text-button">开令 →</button></div>
       <div class="fh-rules"><h3>一起来玩</h3><ol><li>写一句含令字的诗。</li><li>每次换一句，不重复。</li><li>答满五次，收成诗单。</li></ol><p>想不起来，可以借张提示笺。揭晓的诗句会单独标为“提示学习”。</p></div>
       <details class="fh-details"><summary>查看完整规则</summary><p>可以答完整一句，也可以答含令字的半句。答中后会显示完整一句；其中含令字的分句不可再拆开重复答。</p><p>繁简体均可，常用标点和空格不影响。错别字请先改一改，再接下一句。</p><p>暂未收录的诗句可以换一句。练习不限令字位置，也没有倒计时。</p></details>
       <a class="fh-source-link" href="{% url 'poetry-index' %}">翻阅古诗文 →</a>

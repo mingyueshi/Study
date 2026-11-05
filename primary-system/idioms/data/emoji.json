@@ -1,0 +1,1526 @@
+{
+ "schema_version": 1,
+ "source_code": "chinese-xinhua-idioms",
+ "entries": [
+  {
+   "headword": "画蛇添足",
+   "emoji": "🐍🎨🦶",
+   "hint": "动作类",
+   "entry_id": "20672678-fa41-41fd-bca7-f171a285783f",
+   "sense_id": "3094e28b-2b91-421e-9a62-a1e88923afa4",
+   "binding_id": "787bd4cf-b311-4a63-abf9-b36398d1b92b",
+   "pronunciation_id": "835b9a69-e839-47eb-83b1-d9c1149c0bff",
+   "evidence_id": "e1b2640f-5fac-47fd-9d0e-4fd9a4199f71",
+   "source_key": "画蛇添足",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "6ec52312a1a3f2c908ec7c3cc9f3985b6907500ecc75ffa378476e34602be190",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "井底之蛙",
+   "emoji": "🐸🕳️",
+   "hint": "动物类",
+   "entry_id": "8cd8888a-aa74-4aca-abb1-0f731404d486",
+   "sense_id": "06772ffc-dd5a-43d2-9f10-4bc72ded320f",
+   "binding_id": "183dca54-9a86-43f3-89ef-508f1a5dd267",
+   "pronunciation_id": "f2da4f1d-cd71-4876-8517-db66e8c952a4",
+   "evidence_id": "b16dc3cd-20ef-4499-9c19-9ed93439653b",
+   "source_key": "井底之蛙",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "c254abaabd39e3cae7ee74a508c9c582a9ea22eb9da0d84dfdb434cf5fbbdcff",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "守株待兔",
+   "emoji": "🌳⏳🐇",
+   "hint": "动作类",
+   "entry_id": "ece72089-9aa0-4800-9faf-211352c0d6a5",
+   "sense_id": "d4ebe534-19c0-44fe-8d36-8b4ebbecb1d2",
+   "binding_id": "41f15f7b-0497-4af9-ac33-b467d39734b7",
+   "pronunciation_id": "87552f36-e8a1-4622-aadc-82c4df81a855",
+   "evidence_id": "8e064a7c-e3cb-4ebf-bcaf-033ad4a86276",
+   "source_key": "守株待兔",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "f68bc9ca7ef0209a0094da6f57c4140c8627d7d70bf5c02b34409d5319c28405",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "狐假虎威",
+   "emoji": "🦊😤🐯",
+   "hint": "动物类",
+   "entry_id": "1f26d4e7-b848-4ddc-8f66-d606a18c1995",
+   "sense_id": "0fbca061-666c-41fe-a4c2-a23b93c95eb2",
+   "binding_id": "146b78a5-9d26-4c7a-b6eb-381b2d75ec0d",
+   "pronunciation_id": "2ce4e7c4-ebd6-4646-af0b-781b66033e1e",
+   "evidence_id": "427a673c-22ed-4c29-8902-dcc9974f5b2f",
+   "source_key": "狐假虎威",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "cfa6fba2c62abc2d896384dfe0e4daac18149430e65bbc0d8274e834231c2ca1",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "亡羊补牢",
+   "emoji": "🐑💨🔧",
+   "hint": "动物类",
+   "entry_id": "903235e8-fa0f-484c-a010-421b3d2e4d13",
+   "sense_id": "2d16d8ed-9932-40ca-93df-40f179d2cc9a",
+   "binding_id": "4979d9ec-4db9-4379-9a57-a4b4afb448e1",
+   "pronunciation_id": "d23081eb-3e77-4149-bf84-3481b23d882d",
+   "evidence_id": "00fb5552-6d29-4b54-a9c5-bfccfacc1b7e",
+   "source_key": "亡羊补牢",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "39b9cb4d88ad516fe4d498f5ff84938bad478acd17e4233eca71f4fb198e73bb",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "对牛弹琴",
+   "emoji": "🐂🎸",
+   "hint": "动作类",
+   "entry_id": "fa7cdd9a-9b5a-4f24-b600-0cc221bb28d2",
+   "sense_id": "4dc4cd08-2317-4ddd-8e7b-ab097207b65d",
+   "binding_id": "ca1d026c-38ed-4629-b0a5-d964b29a0a53",
+   "pronunciation_id": "27e7fa8e-7b2a-4db7-b82f-01ada58e3aa0",
+   "evidence_id": "8d163be4-c972-4c88-8c06-6ad27be49fa4",
+   "source_key": "对牛弹琴",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "1e5b613071dd3669847965e65f6219c15095eab8b9a431647e5f4eae33cca371",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "画龙点睛",
+   "emoji": "🐉🖌️👁️",
+   "hint": "动作类",
+   "entry_id": "3899c2cc-eb63-4998-b5bf-f371cc766ce1",
+   "sense_id": "3bbe9382-82f3-4170-9453-0b847629205c",
+   "binding_id": "85db7218-8831-4ac1-966e-41f7b6294fb4",
+   "pronunciation_id": "848f1338-0711-4822-a97f-6f028e82e05b",
+   "evidence_id": "effaebb4-4f1a-49c4-8bb2-1d0a2cf9cb28",
+   "source_key": "画龙点睛",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "2deda061a14f64a78095556a8a6e2faceecfd5c5f37eff827245b565202b757e",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "杯弓蛇影",
+   "emoji": "🍷🏹🐍",
+   "hint": "器物类",
+   "entry_id": "1fb4c539-9565-40a4-8210-e62ef5b43ce6",
+   "sense_id": "8e3e4aac-ebed-4f6a-9ae0-5e26fe0e6278",
+   "binding_id": "65185bfc-6c2b-48c2-8fda-fd266e3044fa",
+   "pronunciation_id": "69467f42-d873-4bce-926c-bff3c0b156c7",
+   "evidence_id": "b05ddcc0-362e-4587-bf0a-e4015e549cf5",
+   "source_key": "杯弓蛇影",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "35a6fff419521e0195d7986422d9d76edeb1c79b60e75b72393d842d2548134d",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "一石二鸟",
+   "emoji": "🪨🐦🐦",
+   "hint": "数字类",
+   "entry_id": "2285416e-d8a1-425d-ba4e-f9a4d389bf90",
+   "sense_id": "2757b2d1-9b46-476d-ab18-acdbc66599ff",
+   "binding_id": "f24fdd95-9366-41f5-a326-66a564555963",
+   "pronunciation_id": "0686f782-bb8c-4d61-9cc2-dc05443c8d5e",
+   "evidence_id": "b374049c-0114-4c5e-8070-be0254db7f91",
+   "source_key": "一石二鸟",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "d9838a0dffcc875564acbb20bab9d5330d7dc90fabb46cef3177826bb06622c8",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "鸡飞狗跳",
+   "emoji": "🐔💨🐕",
+   "hint": "动物类",
+   "entry_id": "812cdb47-ea09-4b07-ba5b-713d6222fff7",
+   "sense_id": "3ad2cd67-f753-4552-aa89-4c00fdedd0b1",
+   "binding_id": "360ae0e9-65b3-4ce7-8cff-496f97ed2d61",
+   "pronunciation_id": "b39d2a01-09e3-47f4-a4f0-bad638bf4936",
+   "evidence_id": "c37f73f5-2d06-4046-a7b4-ff945b83a836",
+   "source_key": "鸡飞狗跳",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "9fbcafda71cc89c75e35ce2730fac769858938a6176f7a71e1fa0f57df49d142",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "如鱼得水",
+   "emoji": "🐟💧",
+   "hint": "动物类",
+   "entry_id": "034c6706-d2b7-4390-a1ff-4ad7dc5d97c2",
+   "sense_id": "868ab26c-0bef-480b-bc8d-fc4833927b6f",
+   "binding_id": "73ca86ba-c1e5-4be3-b4b5-fa5f6d8679cb",
+   "pronunciation_id": "5e6af078-5b5b-41a7-9960-0794e406e516",
+   "evidence_id": "597beb3b-094d-4713-b211-0cfdd3a92d95",
+   "source_key": "如鱼得水",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "497b2fe8ea5201056b916ccd277960d175863e34229d3717247cb594f0802de8",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "虎头蛇尾",
+   "emoji": "🐅🐍",
+   "hint": "动物类",
+   "entry_id": "25925adc-0da9-44ca-87c4-5b8b90916bc4",
+   "sense_id": "dc5fdaaf-c23f-4363-91b2-367496c3d428",
+   "binding_id": "99b6bcea-7e3f-41cc-850b-b3ffeb0e514d",
+   "pronunciation_id": "54db95fe-105e-4c59-b1f7-6066436cb55f",
+   "evidence_id": "8cbd0a7e-a455-4c0d-afbb-160c1f6c37a1",
+   "source_key": "虎头蛇尾",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "ea6863bdb0b26c9014112b5674e96bbf5cc174f51553379862444db315b9e457",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "马到成功",
+   "emoji": "🐎🏁",
+   "hint": "动物类",
+   "entry_id": "c12aac04-7b87-4095-97a8-8cbb03c4444d",
+   "sense_id": "da85b994-3c17-4fbd-85e4-20815caddcba",
+   "binding_id": "0f362a30-f1db-4f9e-86b5-511b65a652b9",
+   "pronunciation_id": "fa0ad5a5-de24-4bc8-9dd2-615d486bcb0a",
+   "evidence_id": "3445c949-0a5b-4a73-8530-c82176b83efe",
+   "source_key": "马到成功",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "9f777ff7bfca17cd35486fcb2691bccaa13feec7e7cb23463e9d3cbd1e554cd6",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "九牛一毛",
+   "emoji": "🐂🧶",
+   "hint": "数字类",
+   "entry_id": "8a7b2135-63c4-472d-92bb-850beae9f242",
+   "sense_id": "a6cbe5c9-b5bc-4cbc-ba92-7740a663d359",
+   "binding_id": "32918060-a153-4d2c-b22b-67b4633badb4",
+   "pronunciation_id": "b83699ca-83d5-40b9-98ab-8bc796df12a7",
+   "evidence_id": "36c5c8e3-828d-483e-8475-a810c573bb26",
+   "source_key": "九牛一毛",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "61a2ca9021d2d747509f976fc7d0a4cb0c6d4e71f5475e743e1c5a1d5baeabcf",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "盲人摸象",
+   "emoji": "🙈🐘",
+   "hint": "动作类",
+   "entry_id": "d51d855d-5dcf-401c-9f2d-efc69fdfe309",
+   "sense_id": "f80eddc7-4d3f-43dc-b2da-b64132b7d93c",
+   "binding_id": "209c56b0-7643-467d-8fb2-64ce41b92760",
+   "pronunciation_id": "eab67f79-eb04-40d0-bfa7-8762e2a955dc",
+   "evidence_id": "fc171826-cbad-43b0-9944-f52356025e89",
+   "source_key": "盲人摸象",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "a086914bc8d369dea67b9637f0b645fd11c091a40f9cccdee29f167eb83cfaeb",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "鹤立鸡群",
+   "emoji": "🦩🐔",
+   "hint": "动物类",
+   "entry_id": "648c4295-0be9-463b-9549-a958fad0cb63",
+   "sense_id": "51f1f9f6-8953-4c42-89ac-9043a13bcc1e",
+   "binding_id": "8a8135a7-2567-447e-a557-438bc2df638f",
+   "pronunciation_id": "40e4237b-4921-4ac1-ba3c-b1adf76acd05",
+   "evidence_id": "8be6452c-077f-4dd3-8534-ad3c6eb7431e",
+   "source_key": "鹤立鸡群",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "7cd74cc3909fe681f58f7d21eed9bc55890413a4747919609a3bb983e2596378",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "笨鸟先飞",
+   "emoji": "🐦💨",
+   "hint": "动物类",
+   "entry_id": "1a3b19dd-f635-48bf-a19a-4d271017a564",
+   "sense_id": "7363e537-6950-4d81-b7af-8de640ad8f53",
+   "binding_id": "28b668c5-27ac-4440-b62e-039604ca139b",
+   "pronunciation_id": "2f5323d7-586f-4c2d-bbbe-169f145232ab",
+   "evidence_id": "f0580eb1-82cd-46b1-b4fa-758aebfb4311",
+   "source_key": "笨鸟先飞",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "5522d872c8452b7337145a47d90130c53063bfa4cb00af2448e0d6b4e0a18c72",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "掩耳盗铃",
+   "emoji": "🙉🔔",
+   "hint": "动作类",
+   "entry_id": "76ffd90a-f220-4cd3-86e9-faf329c79ee8",
+   "sense_id": "1fde80fb-880a-4201-bc24-be085cd187c0",
+   "binding_id": "ef3de5e5-139c-48e2-989d-13d8d7013594",
+   "pronunciation_id": "bebdaa72-ced7-46f7-839c-ffee1452b7a8",
+   "evidence_id": "f6fb6dd7-fa77-46d5-9c3f-f9fb325c3cec",
+   "source_key": "掩耳盗铃",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "cdeb887a0315c621ac1882d1d6f4940aca9184d37331981e9035303407235761",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "拔苗助长",
+   "emoji": "🌱💪⏫",
+   "hint": "动作类",
+   "entry_id": "8b375ef2-2f17-46b0-a322-e2010d25f519",
+   "sense_id": "4f84c18a-46d3-48b9-aebd-e26cc840f8be",
+   "binding_id": "60572582-fe70-46fc-95e2-207d8eda5f5c",
+   "pronunciation_id": "d424dca8-b646-4b05-83a8-adc7da8f6761",
+   "evidence_id": "c1ecd087-a5ef-43d0-961b-f26c0fb1a295",
+   "source_key": "拔苗助长",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "95ed9497fce70a3cf6c5f47ad61ca44f3889387c92a1a748ea3856bde6173fea",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "打草惊蛇",
+   "emoji": "🌾😱🐍",
+   "hint": "动作类",
+   "entry_id": "3ebe1004-daf6-4028-88d9-65db0ec0916d",
+   "sense_id": "0bdfd143-0513-4f9f-8483-5060f4c495a8",
+   "binding_id": "d16e404a-78cf-4143-a65e-5ad0ce8f0d5a",
+   "pronunciation_id": "5f6bf713-40af-46fb-9c1a-60bfd91db405",
+   "evidence_id": "0873d0e8-eaf6-4ac9-8ecf-31d39b922765",
+   "source_key": "打草惊蛇",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "c71e68214ac556859c7fdbabda4df4fa1c97e1af9ed071b065bc46c1ab6126c7",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "一箭双雕",
+   "emoji": "🏹🦅🦅",
+   "hint": "数字类",
+   "entry_id": "dc203ceb-7ebd-41ee-ad6a-e84f65600dd7",
+   "sense_id": "2f658926-ff3c-4a54-8ddf-f8ad63371623",
+   "binding_id": "75415aee-5c39-4e02-b7de-5d4a6df2a995",
+   "pronunciation_id": "caac5926-48ad-46ef-ab01-2fac2787bc3e",
+   "evidence_id": "f0474a1c-5741-4fb9-8f46-bddc9bee8181",
+   "source_key": "一箭双雕",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "7d5e4d104d06438342ce740f5c0189e2f5c686a2e279a669861654d2c1c77eb4",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "水滴石穿",
+   "emoji": "💧🪨",
+   "hint": "自然类",
+   "entry_id": "53a0d5cc-daad-4729-90a4-32d7858fa27a",
+   "sense_id": "e1a05599-6a92-4abb-b985-7168342a59de",
+   "binding_id": "43f04b62-163f-4763-a57c-98a1c9bd4bdf",
+   "pronunciation_id": "c454181d-8c26-4a92-9750-284895a11201",
+   "evidence_id": "3be5a1d1-4f68-4314-985e-7115779e3add",
+   "source_key": "水滴石穿",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "bbf7003f798c5fdc70395018a4c13f845967d1e8fda07b52e542a8332d9d2f65",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "雪中送炭",
+   "emoji": "❄️🔥",
+   "hint": "自然类",
+   "entry_id": "b8751c56-96dd-4ce7-b7e8-0c79df52e50b",
+   "sense_id": "b043867c-f066-4a37-a05f-f99feacb1fa7",
+   "binding_id": "a0a53807-5552-46ed-9b7c-417d537b9502",
+   "pronunciation_id": "70aa2d42-c346-418f-92f1-6ad8513ff1a1",
+   "evidence_id": "d496f7b5-348a-4c9c-9bff-ce6bc0608bc2",
+   "source_key": "雪中送炭",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "2cb601fdafdd6e1cbde5c89354509d5ecfd5d0f7683acfe6ec908f910b989d9a",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "锦上添花",
+   "emoji": "🧵🌸",
+   "hint": "动作类",
+   "entry_id": "2a5bdb12-e238-411d-80b9-4e7f8702fefe",
+   "sense_id": "2b8d9659-6141-4f44-9725-c9280b737b6a",
+   "binding_id": "b315b774-8c2e-4f15-92fc-7e027d3d3d48",
+   "pronunciation_id": "d22fd67a-a62a-4a81-91ad-09bcdd1b822d",
+   "evidence_id": "0ff1cb23-1ddf-4612-9983-c2bf73ddf6af",
+   "source_key": "锦上添花",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "88213eb3ec7e8cc87939d7136610ad79e891394650ab994411568183e470b9c2",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "狼吞虎咽",
+   "emoji": "🐺👄🐅",
+   "hint": "动物类",
+   "entry_id": "28d15b45-5215-40ee-b1d3-23569791fcb6",
+   "sense_id": "b46494b4-5ad3-40d6-9d94-cc63857d4b23",
+   "binding_id": "ed03c83b-99dd-4e61-8ab4-46565dec52be",
+   "pronunciation_id": "9de0962a-acb2-47e7-ab23-32aa0d07e5b0",
+   "evidence_id": "bf1c664a-ab6d-4363-8a39-53f5046211e9",
+   "source_key": "狼吞虎咽",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "f8853e51b0acc892b4d1bd943cb030f29675bd473343b2b0df21d71b8877ffad",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "龙飞凤舞",
+   "emoji": "🐉🕊️💃",
+   "hint": "动物类",
+   "entry_id": "3d9f4069-f522-45b5-8559-25d30ef1e001",
+   "sense_id": "1f63d4a7-9b0d-42e0-bfd9-b616b183c1eb",
+   "binding_id": "6902ac83-4c5a-4a16-85a6-c3e4a083126d",
+   "pronunciation_id": "d582f2d3-ed98-4648-bb08-d270a4f46f91",
+   "evidence_id": "794b5730-9c48-45f8-ab86-460e44528a3e",
+   "source_key": "龙飞凤舞",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "ef841de7c3c0ab93f68300d933976b9dfac9143313739bd910152ce0b6c21d87",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "牛刀小试",
+   "emoji": "🐂🔪",
+   "hint": "器物类",
+   "entry_id": "471d9629-a87f-4513-9d01-a6734913c4e1",
+   "sense_id": "1c1792d2-bd59-4ff5-89d8-8d5446eea686",
+   "binding_id": "70f56c0e-5f00-437c-b620-e8fa25a46cfb",
+   "pronunciation_id": "9047fddc-4edd-4ee3-8c7a-c607e0a62da0",
+   "evidence_id": "92180af0-2246-4fbc-8f91-feefbecffa25",
+   "source_key": "牛刀小试",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "2a25e0d6d68d61750f14f756ec29ad69e646b51df0e173ad6caabc14006173fe",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "鸟语花香",
+   "emoji": "🐦🗣️🌸",
+   "hint": "自然类",
+   "entry_id": "31fd5c49-aee2-4fd4-b15e-273bffb9cb1e",
+   "sense_id": "a65e1421-4c51-4c86-8b44-b95239915354",
+   "binding_id": "e39a0a64-447b-4b13-be3b-edfef19a76e4",
+   "pronunciation_id": "bbacdc0e-8b72-4dac-bb2d-f6945bf5e903",
+   "evidence_id": "366cb8be-4ae6-4164-b9d2-f9e178bd8fd9",
+   "source_key": "鸟语花香",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "b98d1c6a739b51ca4264af965715b6af33a5ebc4c058989902d4ecc82302f566",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "花好月圆",
+   "emoji": "🌸🌕",
+   "hint": "自然类",
+   "entry_id": "12e060e8-8965-4e0b-adfc-d47ca811bf53",
+   "sense_id": "57bdbabc-cec9-4cb6-8a4e-da33a1bfa9e6",
+   "binding_id": "735fe9d0-fe54-44b0-8691-54312cf8e55a",
+   "pronunciation_id": "dd3c9428-f9d5-4ea5-a853-ae168cfbe35e",
+   "evidence_id": "598faa7b-801c-48ed-afaf-a4672f2409b9",
+   "source_key": "花好月圆",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "4e1adeb73d65eb3f5bdfa97af9898e2c0024b53a3ad7a3eef49a9ced0e7bf1ed",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "瓜熟蒂落",
+   "emoji": "🍈⬇️",
+   "hint": "自然类",
+   "entry_id": "e6301676-28c0-4a6f-ad46-50a67e5fb616",
+   "sense_id": "1b817aeb-d709-45b2-ae13-c6749d390b4c",
+   "binding_id": "1e76936c-5e42-4e03-8298-c3cdd0130042",
+   "pronunciation_id": "f00d8917-b374-4a87-bf7f-174dc0e11bfb",
+   "evidence_id": "d6c807a0-4994-44af-a24f-c24a205d17f9",
+   "source_key": "瓜熟蒂落",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "0c21fb25cfde707871ff1ad8f0df85638e1ca973fb0a54421a3b60b8771bbc8c",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "生龙活虎",
+   "emoji": "🐉⚡🐅",
+   "hint": "动物类",
+   "entry_id": "80d36463-5555-462e-8d44-fa935cd0177b",
+   "sense_id": "deb3944f-0b1f-4f4a-a9dc-3d03843174e2",
+   "binding_id": "dc695497-31b5-4d46-8bc8-c95378fa8c75",
+   "pronunciation_id": "fdab32cf-8cd6-439b-9874-b85ea210ea3b",
+   "evidence_id": "c3276144-933b-4ba8-bb2f-835e4b2c8ea1",
+   "source_key": "生龙活虎",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "da2afa6387e0ba57790fbe8bfc9f72a6d92d609edec1dd1cadb6783c1cbd85d1",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "龙潭虎穴",
+   "emoji": "🐉🕳️🐅",
+   "hint": "动物类",
+   "entry_id": "ed8acc04-b912-427a-aad3-47f89522e0e2",
+   "sense_id": "cf78e266-cd0a-4f59-b958-3532d8f30c30",
+   "binding_id": "31b4e11f-68ea-4149-8ab4-71c2a8d43d22",
+   "pronunciation_id": "9c155c75-a9f2-4ec8-974d-b3fb29410327",
+   "evidence_id": "c37ad114-aae4-4a5f-9f7a-b5da12a071f1",
+   "source_key": "龙潭虎穴",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "d6768e30ddb4c29bad99c350f4b2094eea3ddf8bb96408affea83f4ccbe0ee9a",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "狐朋狗友",
+   "emoji": "🦊🐕🤝",
+   "hint": "动物类",
+   "entry_id": "ae24e3f6-c666-4aa4-8e78-5777a93d7f7e",
+   "sense_id": "e93f5a34-5a89-4841-9594-e39834bc1f3f",
+   "binding_id": "95c230e9-c566-4e91-b27c-6a92ee53653d",
+   "pronunciation_id": "d6edc30f-9032-4c20-8fa5-2b66d3682f79",
+   "evidence_id": "fd1b3a5b-7465-454f-82d6-313e6e5d518a",
+   "source_key": "狐朋狗友",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "5e565fa6d6e67fb7991c7e6e66afea5813d36071c6badc3de441b0bde71622e7",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "鸡犬不宁",
+   "emoji": "🐔🐕😡",
+   "hint": "动物类",
+   "entry_id": "b45ef29f-8840-4977-8ae5-1d933e4a6329",
+   "sense_id": "929461de-5ba7-43a6-8553-c3141dd1c924",
+   "binding_id": "ce72213b-64f7-4dfc-9cac-64faa3b133eb",
+   "pronunciation_id": "26812d22-0ef9-4c57-a942-64d70eec302a",
+   "evidence_id": "613f9197-9a30-4ee7-8e9f-a347acf1d170",
+   "source_key": "鸡犬不宁",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "bbeaa532047e3131d25bf772277d58157be6086ec924e23a32dfeb6b36b680bc",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "如虎添翼",
+   "emoji": "🐅🪽",
+   "hint": "动物类",
+   "entry_id": "f900dbdc-5b42-4315-a64e-cec91b9107b2",
+   "sense_id": "863b51fd-57c1-4942-b6b8-c78897c0bdef",
+   "binding_id": "a458873e-428e-4482-8a5c-10c4a9271559",
+   "pronunciation_id": "aa2aea10-13eb-4573-a664-f737b36c47b8",
+   "evidence_id": "7581f0c1-5f85-460a-82f2-4ece3f8f1654",
+   "source_key": "如虎添翼",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "00e8f04b263f359fcd5afdde31fcd594651c950939e367a1036fef22438df430",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "鱼跃龙门",
+   "emoji": "🐟🚪⬆️",
+   "hint": "动物类",
+   "entry_id": "09b3b430-c83f-4af3-9774-56f0bcb2f3a1",
+   "sense_id": "1291e7bf-abfa-4fa2-a7e0-0549b1b0cdc2",
+   "binding_id": "fcdfa32e-d1d4-4a9d-9cdd-d6e30871fa6c",
+   "pronunciation_id": "8f2384e3-98ac-4f38-9f3a-cebb0c205c0c",
+   "evidence_id": "1513f518-42f3-41e4-80aa-be7cdbb34832",
+   "source_key": "鱼跃龙门",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "11d78bab49bb8c8dd9273165c3d746cbf80aedfa66313f4bb101c9ff0947f467",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "飞蛾扑火",
+   "emoji": "🕯️🦋",
+   "hint": "动作类",
+   "entry_id": "b8817748-cdcb-48dc-8ce1-3f63fb2f0a8a",
+   "sense_id": "fab8fe6b-3a66-4b79-aea6-e792f8ee66f3",
+   "binding_id": "e57a0f80-e97f-4245-89bb-1ff82fe376a1",
+   "pronunciation_id": "10ecc360-1298-407f-a451-fdd262d6e45b",
+   "evidence_id": "43a92c24-4414-45b5-bbc6-c5f27081a5e7",
+   "source_key": "飞蛾扑火",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "7f4aba3b7bd4ae7264ec91eddd3043579170ae3ed0be1b84049d1c4cc8c9b644",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "蛛丝马迹",
+   "emoji": "🕸️🐎🔍",
+   "hint": "器物类",
+   "entry_id": "f4a20aa1-66aa-4059-8c96-aa7b702c81e2",
+   "sense_id": "73e5b6b8-8c39-47c3-91c3-992a5ed94de0",
+   "binding_id": "e213347f-9509-43b8-af62-e6f298d0021a",
+   "pronunciation_id": "28bbda78-8db2-4bec-8be9-a47d3bedaa6d",
+   "evidence_id": "64ef94a0-a405-4c38-be2c-612da1f8652f",
+   "source_key": "蛛丝马迹",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "780ec5df38616428bb8c8c074c81c254eacb398ed3900575de4346f15443d11b",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "莺歌燕舞",
+   "emoji": "🐦🎤💃",
+   "hint": "动物类",
+   "entry_id": "b204e8c6-bb59-4d21-8bdf-9e9da655f857",
+   "sense_id": "39e6b1f3-6f6b-46ca-a908-11546bf1bfca",
+   "binding_id": "a7c2d066-3408-40cd-8707-c2c52037cd23",
+   "pronunciation_id": "833b1d37-03e1-4aa2-8f22-31fa85719ab3",
+   "evidence_id": "bb92309c-debb-4d89-89e3-68a53a74a643",
+   "source_key": "莺歌燕舞",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "a0442d26bbed663381c771399c02d4f516efca0df556140d4503763acca3326b",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "狼狈为奸",
+   "emoji": "🐺🤝🐕",
+   "hint": "动物类",
+   "entry_id": "cb42f65a-d22d-46b7-b19e-d304de4f51ae",
+   "sense_id": "1e2235f7-481f-4f02-a9f7-fbb3368a5b35",
+   "binding_id": "26d10767-d5c1-47fb-a0a4-821b7d230d8b",
+   "pronunciation_id": "6226a8a0-b71e-43cd-8887-94776913117f",
+   "evidence_id": "d9dd0e71-eba5-4e60-b1f9-44f0e582f850",
+   "source_key": "狼狈为奸",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "fbbebb6438291f21a464e7b773488d389ebeef6f7b4207b6612be3fca47b29ec",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "虾兵蟹将",
+   "emoji": "🦐🦀⚔️",
+   "hint": "动物类",
+   "entry_id": "fa6fa67d-206d-40c5-969b-bd932e56981e",
+   "sense_id": "da692655-e15d-497a-a162-f69b09a153fa",
+   "binding_id": "ca7a77c8-6e61-4e77-aa86-93114f8f4380",
+   "pronunciation_id": "d1a7e488-e6c9-4332-ae2c-b8cf76e87443",
+   "evidence_id": "790d7510-3b84-4a56-a4c3-139599cd4adb",
+   "source_key": "虾兵蟹将",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "fbb395703851a311f2d5732932d81a6f08657d6e688a804437561cf13f871273",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "单枪匹马",
+   "emoji": "🗡️🐎",
+   "hint": "数字类",
+   "entry_id": "063d3bc5-2dd0-4971-8378-423b9bbe9704",
+   "sense_id": "f8e2904b-2d86-43af-a0f3-8f8c56a42fdb",
+   "binding_id": "dfd9e136-5e51-4160-b7c8-1dd8c9add563",
+   "pronunciation_id": "56dfc1a7-09a9-4c6a-acd1-9ecd5647d8a4",
+   "evidence_id": "b309b315-9e68-46ab-939a-204b0b443fa5",
+   "source_key": "单枪匹马",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "901d31b0d9f044adb0197508a1b4c28c7f8d157f6f89b688cd6038932f9331a5",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "万马奔腾",
+   "emoji": "🐎🐎🐎💨",
+   "hint": "动物类",
+   "entry_id": "4f69c428-32ea-4052-a10b-3ad90a20bc86",
+   "sense_id": "ecd75576-f5a5-4cce-a94d-7c03f9ea2da1",
+   "binding_id": "235751db-1765-4087-b5a4-efb1b16bd919",
+   "pronunciation_id": "076cd6f1-11a3-476e-98eb-0812c163dbc6",
+   "evidence_id": "65bd4a76-4966-4901-86b7-e29598968e8b",
+   "source_key": "万马奔腾",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "7bc0bf056da6c4b4fd42690b2a0fb88b1f3365fc2b3ea37c3b1f5b3fe0cb46bd",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "千军万马",
+   "emoji": "⚔️🐎🐎",
+   "hint": "数字类",
+   "entry_id": "05032ad7-6bf9-4134-a5b9-4fc11ebb8403",
+   "sense_id": "d36b3565-81ed-4806-b4f1-8fc1d8ebb017",
+   "binding_id": "ce4df386-7ba8-46d6-8f1e-53bfcf306d80",
+   "pronunciation_id": "5691d7d5-b1e3-49d0-a9f8-db9de3abe70f",
+   "evidence_id": "182632d2-73f8-49bd-95bc-0d16436b06e6",
+   "source_key": "千军万马",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "bd455181b685c4b74a282e9944cf4c86d13b9461025cc6217656b2f9327a53ca",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "五颜六色",
+   "emoji": "🎨🌈",
+   "hint": "数字类",
+   "entry_id": "c0e98861-b288-468f-a6ef-ca1b863e3e29",
+   "sense_id": "75681196-dbfa-4eca-ab9d-658ef17854f0",
+   "binding_id": "393d893d-3e98-405c-8047-8a18b29cbd21",
+   "pronunciation_id": "3a649d9a-37c6-43fa-8ee5-05c16e9c31cd",
+   "evidence_id": "38bb2b6f-5c1c-430b-a4b5-dc65bceabba5",
+   "source_key": "五颜六色",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "6efcb1afc297d6d8a6091c13200799f00eaad967ce4e6db532615f9501c30287",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "三头六臂",
+   "emoji": "🧍💪💪",
+   "hint": "数字类",
+   "entry_id": "9f23f93b-bfb9-47e4-87c9-ec0c20642e57",
+   "sense_id": "c85cf646-1406-4a5c-b67a-266ec4095aa3",
+   "binding_id": "804650d2-325b-438d-9e4d-e825dcc51911",
+   "pronunciation_id": "2d0044c3-1d2e-4115-b9c5-0c8a55bc9ffa",
+   "evidence_id": "4e1a9120-bc88-47b2-9a56-d557adda308b",
+   "source_key": "三头六臂",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "907003f4e67e86e8abb2cc54617dafac06f2cc21e39d72ae589eda51a1526d0b",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "七上八下",
+   "emoji": "7️⃣⬆️8️⃣⬇️",
+   "hint": "数字类",
+   "entry_id": "dc1c05ee-7e9c-4f60-bfba-85cae6e3d85b",
+   "sense_id": "c0ed363b-7393-4fb5-a43d-d1bbbd7f93ac",
+   "binding_id": "19c2b78f-0efc-44f1-ba96-c9f1ab4b68b8",
+   "pronunciation_id": "058bf4b6-201f-4e08-8b98-088f5c9af82a",
+   "evidence_id": "0ef34ca2-9233-4a27-b1f7-2a204d1013c2",
+   "source_key": "七上八下",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "bfd604f48f7e50e4c5acd0f70a674aee2ff1d28a8b828a74f40d55ec6d438d55",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "四通八达",
+   "emoji": "🛣️4️⃣8️⃣",
+   "hint": "数字类",
+   "entry_id": "121e53b7-d04f-4e3e-8212-1d29b27ca69c",
+   "sense_id": "046fe65a-f83d-4cad-915f-101dd1beac7a",
+   "binding_id": "7fae89d2-4765-4186-8a07-0c930002017b",
+   "pronunciation_id": "87f6ca98-e120-4814-a331-107542eb9890",
+   "evidence_id": "c65f81f9-12e7-4e84-ae68-74cf7cfe5b7a",
+   "source_key": "四通八达",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "65f8a9e52180e93655dd9d4dc2c4fd9f071efa82e49958793678f7bf7bd53308",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "九死一生",
+   "emoji": "9️⃣💀1️⃣",
+   "hint": "数字类",
+   "entry_id": "a982ec24-2a31-4d13-92f8-3fee70a8a23c",
+   "sense_id": "fc2c9910-64d5-4b19-80ae-530529d17edb",
+   "binding_id": "5e89cbb3-383b-4cb4-a65a-e1b298686900",
+   "pronunciation_id": "40a4367b-7f5e-4909-9f1a-f739ef511c09",
+   "evidence_id": "cf0579f3-1a36-40f5-8cb5-db2d835c832f",
+   "source_key": "九死一生",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "9360dfbc1cb4d6d7166e9121a8544c0716bb14adac7f3509367691f492f4cf20",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "十全十美",
+   "emoji": "🔟✅💎",
+   "hint": "数字类",
+   "entry_id": "c1990fd8-0ea9-4994-86de-7f7afa50efc3",
+   "sense_id": "07078cd8-253d-4c71-b9fe-863ebf630a4c",
+   "binding_id": "e3edfe96-4d39-48bb-95b8-07adf298e92c",
+   "pronunciation_id": "53576060-8399-41ae-abf6-22bddfbbaf11",
+   "evidence_id": "c507cdf3-32c4-45bb-97a4-533de594d9be",
+   "source_key": "十全十美",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "c5f608fb62fbb010fd45a8aa0a5707a3fd47c563af292d648675a48af0423243",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "百发百中",
+   "emoji": "🏹🎯",
+   "hint": "数字类",
+   "entry_id": "d3ce83f3-b530-4d02-b2be-7cbb6167ff18",
+   "sense_id": "76453b9c-a81b-42f6-ad19-b716f7c64373",
+   "binding_id": "c3557aa0-d90d-4895-909a-bfd043a279ff",
+   "pronunciation_id": "ba022fd7-1b28-4723-b0a7-c5a2525a2ac4",
+   "evidence_id": "d825965f-6c43-4e17-a0fb-b71fb816116a",
+   "source_key": "百发百中",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "5e1551e51085d38dd32edcb6a86aa7d7c48f8ffde6df49c616f3375fc5b56581",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "一帆风顺",
+   "emoji": "⛵💨",
+   "hint": "器物类",
+   "entry_id": "20905381-baa4-41e5-8807-a40559f3127a",
+   "sense_id": "78ac0d60-59f5-42f2-8423-15389776a655",
+   "binding_id": "28e6f76e-803d-4af1-99c5-35f2d6afc0d1",
+   "pronunciation_id": "194878b4-c8e4-4684-ac07-2cf76c12883b",
+   "evidence_id": "d23823b1-2b3e-425b-847e-d31a7b42c97e",
+   "source_key": "一帆风顺",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "49758d43f7311d2c249ccf694d08397583377f6b3b61c3d1a3e42cc5e9c2df16",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "二话不说",
+   "emoji": "🤐✌️",
+   "hint": "数字类",
+   "entry_id": "7b1c4b2e-104d-4aec-ab32-6fecf361c026",
+   "sense_id": "06acbf95-98f2-410d-8e28-dffc19ebda56",
+   "binding_id": "fb362caa-adcc-4c89-a1ca-676fc2f840fe",
+   "pronunciation_id": "ae54ffaa-9326-47f1-af44-76198b1748a5",
+   "evidence_id": "e15466fc-e61f-4bee-ac81-4749a4939b7c",
+   "source_key": "二话不说",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "8977fff68af17232feecf11178e3bdc5b99a51f3293043fafea85ef8da749ea2",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "目瞪口呆",
+   "emoji": "😲👄",
+   "hint": "表情类",
+   "entry_id": "8fd90f96-887f-404b-a332-e5e6566d1cb6",
+   "sense_id": "a87ae502-7d08-4c4a-a3c2-4560677cc0f6",
+   "binding_id": "5cc2ff70-f3e5-427b-af9d-d4e2f54bef1a",
+   "pronunciation_id": "b4d17ff0-fa89-4380-8cf1-8410507a7ca1",
+   "evidence_id": "0d6a98c6-5710-40e8-b6aa-9ae7740f2df7",
+   "source_key": "目瞪口呆",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "71acbeee5c392bdbbe4083be1e92894c0430c6cbbdba85db48bb66d53a475b8b",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "手舞足蹈",
+   "emoji": "🙌🕺",
+   "hint": "表情类",
+   "entry_id": "c9f102bc-4827-4b79-972c-6a147b15021e",
+   "sense_id": "c58ee3c3-a992-412c-ad2c-2d9b8301e364",
+   "binding_id": "99179f17-c2f5-407b-a007-7a9256a581c6",
+   "pronunciation_id": "6a6763ed-73b8-4ae1-95af-8de71d303df6",
+   "evidence_id": "29928771-081d-43f4-8424-d67a6489b16f",
+   "source_key": "手舞足蹈",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "2883e639e20e0dbfc5e7797c827892d0358f3157761ebafb1c9b8af06c4128df",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "抓耳挠腮",
+   "emoji": "🐒👂🤔",
+   "hint": "表情类",
+   "entry_id": "194fe511-7753-4557-88e9-4df4f501d260",
+   "sense_id": "3e8ed4f5-f7c1-4056-b96d-09ed9f90d6c2",
+   "binding_id": "c90a092e-e4e0-4c0f-b2ea-a8ae7c3736cd",
+   "pronunciation_id": "cda3d0d3-744a-464c-8213-ee78afb80421",
+   "evidence_id": "766d4d89-3f78-44a6-af75-48d8c25e4be9",
+   "source_key": "抓耳挠腮",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "6c50ea7835b5b17fc10ed2fae94b2a8145bd9f15fcf7da941a753e3548f5820d",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "愁眉苦脸",
+   "emoji": "😟😔",
+   "hint": "表情类",
+   "entry_id": "1673a421-8425-4c26-8796-c900feffb99d",
+   "sense_id": "05327bd6-068b-4ea1-9a27-8d09a6cc27fd",
+   "binding_id": "faafd809-dd6a-4c2f-8302-2315fd307f38",
+   "pronunciation_id": "37b20642-8cbd-46e1-b343-e08782f35005",
+   "evidence_id": "275c33a1-c6c4-4ea5-961b-a6e564190fc5",
+   "source_key": "愁眉苦脸",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "59d01afe8eb0deef1750133f36efc8faa763bd97471f11fdd551aa6199c3bc10",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "眉开眼笑",
+   "emoji": "😄🌸",
+   "hint": "表情类",
+   "entry_id": "6a3ffcc6-b563-4d18-8f82-fb76e74ce4e7",
+   "sense_id": "230e48ff-8bd4-448d-8503-f5d050753b0b",
+   "binding_id": "dfc680a9-4c46-47de-9af3-6b2ce9f41c6b",
+   "pronunciation_id": "ec6c31e1-c225-431a-b339-36212cd8ad55",
+   "evidence_id": "8fa66b90-1b3d-4f44-828b-f3017685ff9d",
+   "source_key": "眉开眼笑",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "509a959eb0bec7f9c432a93fb360dddb117356bd24749085b84cb92f4cefc9da",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "张牙舞爪",
+   "emoji": "🦷👋",
+   "hint": "表情类",
+   "entry_id": "890599d0-5b93-43d4-85f9-837a4ef1d2a7",
+   "sense_id": "33d4d966-56fb-4a46-8578-747680accc37",
+   "binding_id": "b3c17083-58bd-4e32-a590-8efcd0ab68b0",
+   "pronunciation_id": "e2255514-5c94-4463-b322-0ed97d48c3d2",
+   "evidence_id": "af7c27f0-76d6-412a-884a-330eaae44cc3",
+   "source_key": "张牙舞爪",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "c0b18119ca8cdafc8e02cd4ae00e33b8ae46b821076efa33a72a3bb065352690",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "东张西望",
+   "emoji": "👀⬅️➡️",
+   "hint": "表情类",
+   "entry_id": "2a705583-89ef-4335-ab57-098215bfc6ba",
+   "sense_id": "93f9bba4-a63b-470b-9e18-780b0c769d85",
+   "binding_id": "13196208-baea-4f20-8a28-56f444947e0f",
+   "pronunciation_id": "37d1fdba-3913-430a-b8cd-a98091531db3",
+   "evidence_id": "26b19215-2c1d-4712-b3d6-4b41072bdcab",
+   "source_key": "东张西望",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "639b386b6fc362f20a888462b37dc834ae466424ca46bc7b24804df472042318",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "狼心狗肺",
+   "emoji": "🐺❤️🐕",
+   "hint": "动物类",
+   "entry_id": "1845ae3d-10e0-469e-9ba6-af8fc154a14b",
+   "sense_id": "2cc90b1f-c208-45dd-97d4-3ab52fcc1d25",
+   "binding_id": "1865f48c-85a4-47f0-8e98-fac024350373",
+   "pronunciation_id": "d10b0d33-731a-4f95-b81f-d479ec9e9142",
+   "evidence_id": "42166f5a-2b06-4935-b1d1-623ecb079fb5",
+   "source_key": "狼心狗肺",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "374a6969230d388e5d3805f1b20bac21865b5fb8016656e5125fe044826dd00d",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "鼠目寸光",
+   "emoji": "🐭👁️📏",
+   "hint": "动物类",
+   "entry_id": "482b1af4-cfa8-46a9-8cbf-595025f93165",
+   "sense_id": "82a60139-de58-4138-9c33-94f1d5dbbdce",
+   "binding_id": "475f18bc-e9da-456f-b2bb-212e0f026b71",
+   "pronunciation_id": "75bffec7-d886-4602-bf97-d01aaff206bf",
+   "evidence_id": "40b85dd6-965d-4d37-b6f4-22485a1eb575",
+   "source_key": "鼠目寸光",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "543fac194e48acac87b895aa5f11568f94f2db16f26d7d802492e9fd2cb70b8d",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "虎背熊腰",
+   "emoji": "🐅🐻",
+   "hint": "动物类",
+   "entry_id": "34da9340-4ad7-4696-928c-1cf43db9ae89",
+   "sense_id": "3d3cbf9f-1837-4878-aaf4-d1d4632e353f",
+   "binding_id": "17650df1-52d4-4a87-8098-8b0555bc6f2c",
+   "pronunciation_id": "62de9fa0-4482-42d2-a602-68a463f0e80f",
+   "evidence_id": "628a459b-7324-437e-ad9b-7d153dffdc24",
+   "source_key": "虎背熊腰",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "26fd18f9a0eecf1bc1d7c53d3257145916f079af996655b15a19ce6a0974ce32",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "凤毛麟角",
+   "emoji": "🦚🪶",
+   "hint": "动物类",
+   "entry_id": "72c7785b-3892-4ea5-9583-03f9c9a4cf27",
+   "sense_id": "9d77c728-507d-4a2f-8e6a-ab03d8576461",
+   "binding_id": "9ac539ed-44cc-40a4-b6d8-83ed2d38ad83",
+   "pronunciation_id": "0e2dc9fd-90e6-4342-8b35-f78f5d6c1fa6",
+   "evidence_id": "9b95ff9d-a199-4ede-888a-e8b21546bc3b",
+   "source_key": "凤毛麟角",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "022fbe16043de171129db570cd2b30759ead35923665fbcce499e9748acb41b9",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "鸡鸣狗盗",
+   "emoji": "🐔📣🐕🥷",
+   "hint": "动物类",
+   "entry_id": "475402c0-4cba-4db6-b188-23ed8fef2f0e",
+   "sense_id": "e173642e-460d-43c0-b31a-a7ba6f6f2f35",
+   "binding_id": "cfe54fd7-89ad-48a5-9446-b04700fc8e2f",
+   "pronunciation_id": "f064af70-e0c3-43f5-b2dd-a48330610829",
+   "evidence_id": "467413fb-945a-46c1-9e0c-559dfd602024",
+   "source_key": "鸡鸣狗盗",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "f5b5d41d6d6b887b070815bf4107b11859b9850d01dd3383ee2717089ea838df",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "抱头鼠窜",
+   "emoji": "🐭🏃💨",
+   "hint": "动物类",
+   "entry_id": "214d0e1f-3efa-4f2f-b0c7-0af34f06d2dc",
+   "sense_id": "f2b50816-0a2f-44a3-9538-ba67e51418f1",
+   "binding_id": "1e04c5db-f6d5-47ee-adae-115d42a00996",
+   "pronunciation_id": "7df4231a-c5f7-46df-9442-09d0e84fd6d1",
+   "evidence_id": "6dc5c6bd-74b0-4ced-96d7-7c865779a3f9",
+   "source_key": "抱头鼠窜",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "b4ce1f41002813b62e7ec269fd057f1b0a8609a8522a2343cdae36b240494dd8",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "兔死狐悲",
+   "emoji": "🐇💀🦊",
+   "hint": "动物类",
+   "entry_id": "7f741fc8-56b3-476d-8507-c6dd92b2ef90",
+   "sense_id": "03373372-656a-49e5-88a9-e578014c2059",
+   "binding_id": "69490970-6e49-4fdb-a6be-d764e0ec8b4c",
+   "pronunciation_id": "92c0209c-5304-49b6-a2f5-2411b1febeed",
+   "evidence_id": "be5778a3-f8e6-49d6-84ac-0d68da5530c2",
+   "source_key": "兔死狐悲",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "bf8c72a75be225ad692a050b6514e3c7d8baaa41d5631462bcc53e1c8b78e158",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "龙争虎斗",
+   "emoji": "🐉🏆🐅",
+   "hint": "动物类",
+   "entry_id": "d6f63da2-8bac-4b1f-a73b-96a7b2037dd1",
+   "sense_id": "ca4f1cca-8f7b-4578-81e7-6e5514018be9",
+   "binding_id": "660dc0e3-9572-4bb7-9dc6-131f9c416408",
+   "pronunciation_id": "a5258389-d0ef-4dc3-8c55-276a6d6796cf",
+   "evidence_id": "243f5b5b-743a-451d-b1fb-ed608a2193da",
+   "source_key": "龙争虎斗",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "56e133333ad9438add2ddc427c3ef4fce4e9ea9c05c09b9881dd9c41f6072667",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "闻鸡起舞",
+   "emoji": "🐓💃",
+   "hint": "动物类",
+   "entry_id": "fde6d7a9-c18f-4c13-82f1-a563d93f168d",
+   "sense_id": "fbdc4d89-981e-4fd3-ac65-9c6aba590ce8",
+   "binding_id": "7bad0546-4c78-4423-bb73-69cb0f5f1e2e",
+   "pronunciation_id": "0844057c-0ae2-41af-a398-ec783d5bb0e8",
+   "evidence_id": "0a263298-399b-4086-9ed3-97982a8a6f7d",
+   "source_key": "闻鸡起舞",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "b190792c080baffe0584ef35dcab710003d2e68b8d2e0929c7f9061f4a5d9d5b",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "杀鸡取卵",
+   "emoji": "🐔🥚🔪",
+   "hint": "动作类",
+   "entry_id": "81b89189-1c83-49a3-99f4-313a955dcec4",
+   "sense_id": "e59eb53d-9123-4446-a66e-4e85a89321e8",
+   "binding_id": "e993792d-6373-48a0-aa5f-47788e5c1134",
+   "pronunciation_id": "86ddc890-cdd1-4e78-8144-3d25b012bfb9",
+   "evidence_id": "bf515ca3-d1b7-47b7-893f-0ab41ba9d0fa",
+   "source_key": "杀鸡取卵",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "ec29b9ca9f44a7d11dae863061bc7c6b8240c76523c2ea52e9ab9bf716e379c1",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "狗急跳墙",
+   "emoji": "🐕😱🧱",
+   "hint": "动物类",
+   "entry_id": "2ca40ac1-0364-4404-b4e5-4f616ca5e6f9",
+   "sense_id": "7dd811d4-2c20-41ce-a6b6-49a2cc8021c0",
+   "binding_id": "fefd8395-940f-4a44-8049-dd7df656060b",
+   "pronunciation_id": "8f6d1160-7d2c-4d15-b06b-4cb4040ea4b0",
+   "evidence_id": "8730bed1-1a98-497c-9c3c-e6b36101077e",
+   "source_key": "狗急跳墙",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "4b9491b3ca3cbd9202f09addcb6f836d1e386375e68e847116ede4d2fa506b3e",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "叶公好龙",
+   "emoji": "🧑💛🐉",
+   "hint": "动物类",
+   "entry_id": "1ada793c-80d0-47a2-afd0-f6973937b4cb",
+   "sense_id": "10e3fb79-f0ac-4b62-b4fb-f65b12253a86",
+   "binding_id": "6810cf46-f35d-4531-9efd-1fc213b80f43",
+   "pronunciation_id": "8e4c5af4-e32e-463f-add5-4e6c49ef5e21",
+   "evidence_id": "1516dcc7-c23e-4064-81ed-80a9ad306d87",
+   "source_key": "叶公好龙",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "d30960ccff9ff142d9fb2176c1e7894baf06f6fc4ab59aa40590f8a6c816dca5",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "黔驴技穷",
+   "emoji": "🐴❓🈳",
+   "hint": "动物类",
+   "entry_id": "d1327a58-cbd5-4c47-ab1e-2b1da792a4ab",
+   "sense_id": "5170329f-4204-47ba-93a2-3f3cfe689d60",
+   "binding_id": "aaa1476c-29f0-4d0a-9977-df71d0ee4112",
+   "pronunciation_id": "4ff4c71b-4952-413f-86f4-2959186433e5",
+   "evidence_id": "dd3d53ce-c3e3-4ae2-b75a-a5cd6da9ce30",
+   "source_key": "黔驴技穷",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "bbaafa5faa3f13351fee0a0da1ea4d66e4f0949841c1c785a33aa1cb6b3dd88e",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "老马识途",
+   "emoji": "🐴🗺️",
+   "hint": "动物类",
+   "entry_id": "fc76a655-6005-4b55-bb52-b4a08417b77e",
+   "sense_id": "aaae4fc4-6c37-4d83-b707-9d93b13207f3",
+   "binding_id": "e6b26ab4-db03-40fd-82de-01db13c0f815",
+   "pronunciation_id": "6f6b75a9-7654-48db-a00f-0a5a969183ca",
+   "evidence_id": "77ed6648-b13b-445c-b4a2-6aa444d33c6e",
+   "source_key": "老马识途",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "485af0aa33dd38238f8bc4e209f2addb2f62e013b3b95fc86bbc1084d69c4a24",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "火上浇油",
+   "emoji": "🔥🛢️",
+   "hint": "动作类",
+   "entry_id": "6cc4a85d-adb1-450f-9ea4-8af09bda6312",
+   "sense_id": "1e798fc4-744f-4170-afc7-6d1c8d7df05a",
+   "binding_id": "2c283381-9024-48f9-8cdf-839beb5ed433",
+   "pronunciation_id": "e2ef7e38-f011-4f46-9033-0de4ebc7b624",
+   "evidence_id": "48c6c6a3-3290-4cbb-83aa-b8392ea60bad",
+   "source_key": "火上浇油",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "de67d3773bc2488d940d5a795b838478b6a8705962fae47f7afd1596e110d99f",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "天衣无缝",
+   "emoji": "🌥️🧵",
+   "hint": "自然类",
+   "entry_id": "2c91e9ee-ca59-454b-9440-099a8d4a7035",
+   "sense_id": "b4e50b53-dc5b-4c25-b7cf-6311b5ecba3e",
+   "binding_id": "b84a19ef-a659-4899-bf49-b7a6a582d2c4",
+   "pronunciation_id": "285399af-355f-42f0-b9c5-95ed41da521e",
+   "evidence_id": "5aaf4ecd-97a9-47f8-8cfe-aef8af1dd033",
+   "source_key": "天衣无缝",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "46744245db8b35158607db7e132f389882c6a28e90a886acc1b99b7e830a5cb8",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "大海捞针",
+   "emoji": "🌊🔍🪡",
+   "hint": "自然类",
+   "entry_id": "64730e27-26bf-48b2-947e-ca98e6903292",
+   "sense_id": "b43e2f3a-3c6b-499b-a372-2000221b9630",
+   "binding_id": "8cb7a0c9-02ab-4606-89d9-0dcf7185973f",
+   "pronunciation_id": "c2a3b4ed-57ae-4607-90f3-965d36dbcfa0",
+   "evidence_id": "156ef2bf-e254-427b-acc9-d1eee2ed8209",
+   "source_key": "大海捞针",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "bc535d3a702b74c7c24dcfae9b9172022580219f9f7cc6fcb116d99f58f6d2f7",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "瓮中捉鳖",
+   "emoji": "🏺✋🐢",
+   "hint": "动作类",
+   "entry_id": "cc927f8d-7e8e-4a4c-8b33-82f692daa894",
+   "sense_id": "f5cc77dd-ae97-4843-858c-e83a750da990",
+   "binding_id": "cb758c47-63c3-4f40-bd48-d1b8cdee33cd",
+   "pronunciation_id": "eb9a215e-750f-4f49-ba34-f48817066387",
+   "evidence_id": "3c0ea9c6-26bc-4364-8eca-bab9d1db3810",
+   "source_key": "瓮中捉鳖",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "89b09488d63c0a9abc75b7fd4c9e5954d3225b1ca40798f9baafc01b08fa0254",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "水中捞月",
+   "emoji": "🌊🖐️🌕",
+   "hint": "动作类",
+   "entry_id": "e2dc9db9-6667-409b-bcff-b37e18836635",
+   "sense_id": "681f8d21-fe2e-4fe9-afa6-d2986952f517",
+   "binding_id": "e3726343-2965-4cac-ad2b-32610bb7a84f",
+   "pronunciation_id": "1ba7b640-f6c3-45b5-a3b1-3146c0f37265",
+   "evidence_id": "86f7f9eb-22f3-4b24-a17d-8c5473caf273",
+   "source_key": "水中捞月",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "5c1816d5cbd788085c75d99c19964fda1f58929d542ba3711d2c3921b78e2a78",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  },
+  {
+   "headword": "画饼充饥",
+   "emoji": "🎨🫓😋",
+   "hint": "动作类",
+   "entry_id": "5aed9d4d-7d2c-4bfb-aeae-5f6f70ec6851",
+   "sense_id": "e15ef3a4-6d55-4fd4-a914-6d0da7d65c2a",
+   "binding_id": "e5e248b1-2d23-4f9e-a232-2cc45b87d9f8",
+   "pronunciation_id": "0eece454-a4f6-4b86-8e43-c37634cbdc07",
+   "evidence_id": "895d8036-16c4-463c-ada9-7ede69cb66bc",
+   "source_key": "画饼充饥",
+   "source_version": "8de1001aa499cd65fb97ef8712550188c0297a08",
+   "lexical_hash": "3857b42c8d7bcad85034591c1c137f9dda608a0e2fa9f598b915a69d160047d4",
+   "editorial_snapshot": {
+    "sense_revision": 0,
+    "definition": "",
+    "pronunciation_revision": 0,
+    "pronunciation": ""
+   }
+  }
+ ]
+}

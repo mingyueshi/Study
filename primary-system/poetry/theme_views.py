@@ -35,6 +35,38 @@ def index(request):
 
 @never_cache
 @require_GET
+def seasons(request):
+    """诗词四季入口：四季大卡置顶，情感与题材分组紧随其后。"""
+    get_object_or_404(Dataset, code="poetry", state="ready")
+    dynasty = theme_data.normalize_dynasty(request.GET.get("dynasty", "all"))
+    groups = theme_data.groups(dynasty)
+    season_group = next((group for group in groups if group["code"] == "siji"), None)
+    if season_group is None:
+        raise Http404("四季分类尚未配置")
+    season_emoji = {"chun": "🌸", "xia": "☀️", "qiu": "🍂", "dong": "❄️"}
+    seasons = [
+        {**item["meta"], "counts": item["counts"], "emoji": season_emoji.get(item["meta"]["code"], "📖")}
+        for item in season_group["themes"]
+    ]
+    emotion_groups = [group for group in groups if group["code"] != "siji"]
+    emotion_total = sum(
+        item["counts"][dynasty] for group in emotion_groups for item in group["themes"]
+    )
+    return render(
+        request,
+        "poetry/seasons.html",
+        {
+            "seasons": seasons,
+            "emotion_groups": emotion_groups,
+            "dynasty": dynasty,
+            "dynasty_labels": theme_data.dynasty_labels(),
+            "emotion_total": emotion_total,
+        },
+    )
+
+
+@never_cache
+@require_GET
 def detail(request, code):
     get_object_or_404(Dataset, code="poetry", state="ready")
     theme = theme_data.theme_meta(code)

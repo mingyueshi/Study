@@ -6,7 +6,7 @@
   let state = JSON.parse(initial.textContent);
   let busy = false, composing = false, epoch = 0, pendingKeyword = null, needsRestart = false;
   const $ = id => document.getElementById(id);
-  const els = Object.fromEntries(['keywords','keyword','writing-title','dots','unavailable','unavailable-copy','form','answer','count','submit','feedback','complete','complete-title','complete-copy','again','change','reset','hint-panel','hint-button','hint','hint-source','masked','reveal','corpus-note','history-count','history-empty','history','confirm','confirm-title','confirm-copy','confirm-yes','confirm-no'].map(key => [key, $('fh-' + key)]));
+  const els = Object.fromEntries(['keywords','keyword','writing-title','dots','unavailable','unavailable-copy','form','answer','count','submit','feedback','complete','complete-title','complete-copy','again','change','reset','hint-panel','hint-button','hint','hint-source','masked','reveal','corpus-note','history-count','history-empty','history','confirm','confirm-title','confirm-copy','confirm-yes','confirm-no','custom-char','custom-start'].map(key => [key, $('fh-' + key)]));
   const escape = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const feedback = (message, error=false) => {
     els.feedback.textContent = message;
@@ -111,6 +111,21 @@
   els.keywords.addEventListener('click', event => {
     const button = event.target.closest('[data-keyword]');
     if (button && !button.disabled) choose(button.dataset.keyword);
+  });
+  /* 自定义令字：任意单个汉字；语料不足五句时后端会如实拒绝。 */
+  const CUSTOM_HAN = /^[\u3400-\u9fff\uf900-\ufaff\U00020000-\U000323af]$/;
+  const startCustom = () => {
+    const value = (els['custom-char'].value || '').trim();
+    if (!CUSTOM_HAN.test(value)) {
+      feedback('自定义令字请输入一个汉字。', true);
+      els['custom-char'].focus();
+      return;
+    }
+    choose(value);
+  };
+  els['custom-start'].addEventListener('click', startCustom);
+  els['custom-char'].addEventListener('keydown', event => {
+    if (event.key === 'Enter') { event.preventDefault(); startCustom(); }
   });
   els.form.addEventListener('submit', event => {
     event.preventDefault();

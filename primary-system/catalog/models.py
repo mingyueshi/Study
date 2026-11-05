@@ -183,6 +183,7 @@ class ContentItem(models.Model):
     class Kind(models.TextChoices):
         KNOWLEDGE = 'knowledge', '知识卡'
         WORD = 'word', '单词'
+        DIALOGUE = 'dialogue', '课文'
         IDIOM = 'idiom', '成语'
         WRITING = 'writing', '写作'
         REFERENCE = 'reference', '复习资料'

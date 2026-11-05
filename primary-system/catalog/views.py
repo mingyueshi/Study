@@ -102,8 +102,39 @@ ENGLISH_UNIT_EMOJI = {
 }
 
 
+def english_link_pronunciations(placements):
+    """关联词读音索引：词头 -> 已核对 IPA（来自 primary-english/primary-words 生效记录）。
+
+    关联词芯片的音标与词卡本体同源——运行时批量查词库，缺失的如实留空，
+    不用数据里缓存的历史音标冒充。
+    """
+    headwords = set()
+    for placement in placements:
+        raw = placement.item.source_payload if isinstance(placement.item.source_payload, dict) else {}
+        for link in raw.get('links') or []:
+            if isinstance(link, dict) and str(link.get('en') or '').strip():
+                headwords.add(link['en'].strip())
+    index = {}
+    if not headwords:
+        return index
+    from lexicon.models import active_records
+    rows = active_records().filter(
+        release__source__code__in=('primary-english', 'primary-words'),
+        headword__in=headwords,
+    ).select_related('binding__pronunciation')
+    for record in rows:
+        pron = record.binding.pronunciation
+        if pron is None or not pron.is_reviewed:
+            continue
+        reading = (pron.editorial_value or record.pronunciation_value or '').strip()
+        if reading:
+            index.setdefault(record.headword, reading)
+    return index
+
+
 def attach_english_link_chips(placements):
     """解析教材英语词的关联词（相反/相近/同根/组词/同类），点击即发音。"""
+    pronunciations = english_link_pronunciations(placements)
     for placement in placements:
         raw = placement.item.source_payload if isinstance(placement.item.source_payload, dict) else {}
         links = raw.get('links') if isinstance(raw.get('links'), list) else []
@@ -115,6 +146,7 @@ def attach_english_link_chips(placements):
                 'type': link.get('type') if link.get('type') in ENGLISH_RELATION_TAGS else 'group',
                 'tag': ENGLISH_RELATION_TAGS.get(link.get('type'), ENGLISH_RELATION_TAGS['group']),
                 'en': link['en'], 'zh': link.get('zh') or '',
+                'ipa': pronunciations.get(link['en'].strip(), ''),
             })
         placement.link_chips = chips
     return placements
@@ -141,6 +173,15 @@ def collection_detail(request, code):
         raise Http404('单元不存在。')
     placements = selected_unit.placements.select_related('item').filter(item__status='published', item__module=book.module) if selected_unit else []
     is_english = book.module.code == 'english'
+    tab = request.GET.get('tab', '')
+    dialogue_items = []
+    if is_english:
+        # 英语教材同步 = 单词 + 课文两个视图；课文段按编排顺序整段呈现。
+        tab = tab if tab in ('words', 'texts') else 'words'
+        dialogue_items = [p.item for p in
+                          selected_unit.placements.select_related('item').filter(
+                              item__status='published', item__module=book.module, item__kind='dialogue')
+                          ] if selected_unit else []
     # 英语单元整页呈现词卡（最大单元 40 词），一屏可连读；其余模块保持 30 条分页。
     page = Paginator(placements, 60 if is_english else 30).get_page(request.GET.get('page'))
     resolver = LessonResolver([p.item for p in page])
@@ -150,7 +191,7 @@ def collection_detail(request, code):
         attach_english_link_chips(list(page))
     return render(request, 'catalog/collection.html', {
         'book': book, 'units': units, 'selected_unit': selected_unit, 'page': page,
-        'is_english': is_english,
+        'is_english': is_english, 'tab': tab, 'dialogue_items': dialogue_items,
     })
 
 

@@ -10,9 +10,8 @@
 
 | 目录 | 是什么 | 技术形态 |
 |---|---|---|
-| `primary/` | 乐学堂 · 小学离线学习册（12 个学习页面） | 纯 HTML+JS+CSS，双击即开 |
+| `primary/` | 乐学堂 · 小学离线学习册（13 个学习页面） | 纯 HTML+JS+CSS，双击即开 |
 | `primary-system/` | 乐学堂统一系统（多账号、多教材、Nova 后台） | Django 单体，Python 3.12+，SQLite |
-| `history-explorer/` | 历史漫游 · 独立多媒体演示 | 纯 HTML+JS+CSS |
 | `personal-learning/` | 个人学习系统（英文学习、AI 基础篇） | 纯 HTML+JS+CSS |
 | `techlex/` | 旧入口，仅重定向到 personal-learning | 单文件 |
 
@@ -21,7 +20,7 @@
 ## 硬性约定
 
 1. **系统之间零依赖**：不要在顶层目录之间新增文件引用、链接或共享代码。系统内复用已有模块（如 `primary/` 的 `speech.js`、`layout.css`、`books.css`），不要复制一份。
-2. **离线优先**：静态系统（primary、history-explorer、personal-learning）不引入 CDN、外部字体、构建步骤或运行时网络依赖。明确标为「需联网」的扩展内容（B站视频、实景照片链接）除外，且页面在无网时必须能正常降级打开。
+2. **离线优先**：静态系统（primary、personal-learning）不引入 CDN、外部字体、构建步骤或运行时网络依赖。明确标为「需联网」的扩展内容（B站视频、实景照片链接）除外，且页面在无网时必须能正常降级打开。
 3. **无版权顾虑**：这是自用内部页面，没有版权问题，可以放心引用外部资源（图片、数据、素材等），不必为版权绕开或替换优质素材；但出处标注等「内容准确性」上的好习惯仍保留。
 4. **数据与逻辑分离**：内容改动只动 `*-data.js`，不改 `*-app.js`；给数据结构加字段时，必须同步在对应的 `test/` 文件补校验。
 5. **中文标点**：数据字符串里用中文标点（「」、，、：），不要英文双引号和裸换行——测试会拦截。
@@ -42,7 +41,7 @@ node primary/test/test-geo.js        # 改 geo-data.js / geo-figures.js 后
 node primary/test/test-knowledge.js  # 改 knowledge-data.js 后
 ```
 
-对应关系：`test-knowledge`→语文、`test-math-knowledge`→数学、`test-english`→教材同步单词、`test-words`→场景单词、`test-idioms`→成语本、`test-writing`→作文坊、`test-chain`→成语接龙、`test-geo`/`test-astro`/`test-history`/`test-lit`/`test-sci`→五本探索册。personal-learning 的测试是 `node personal-learning/test/test-structure.js` 与 `test-theme.js`。
+对应关系：`test-knowledge`→语文、`test-math-knowledge`→数学、`test-english`→教材同步单词、`test-words`→场景单词、`test-idioms`→成语本、`test-writing`→作文坊、`test-chain`→成语接龙、`test-grammar`→英语语法、`test-geo`/`test-astro`/`test-history`/`test-lit`/`test-sci`→五本探索册。personal-learning 的测试是 `node personal-learning/test/test-structure.js` 与 `test-theme.js`。
 
 改了哪个 data 就跑哪个 test；新增系统或新增数据结构时，先写测试再填数据。
 
@@ -52,8 +51,10 @@ node primary/test/test-knowledge.js  # 改 knowledge-data.js 后
 
 - 知识卡数据字段：`id`、`title`、`fig`、`overview`、`items`、`example`（q/a/steps）、`mistakes`、`recall`；`fig` 必须是对应 figures 文件里注册的 id，否则测试报错。
 - 知识点 id 命名：学段前缀 + 站点号 + 序号，如 `gu1-2`（地理）、`au1-2`（天文）、`hu1-3`（历史）、`lu3-2`（文学）、`su2-2`（科学）、`mu1-1`（数学）。
-- 照片放 `images/` 对应子目录（`images/history/`、`images/astro/`、`images/lessons/` 等）。
+- 照片放 `images/` 对应子目录（`images/astro/`、`images/lessons/` 等）。
 - 新增学习册要在根 README 的「现有系统/快速开始」和 `primary/README.md` 同步登记；修改数据规模（如「8 单元 27 课」）时同步更新两处 README 里的数字。
+
+**例外：地理、历史与英语语法是自包含子目录** `primary/geo/`、`primary/history/`、`primary/grammar/`（共用同一套「平台引擎」：`index.html + content.js + knowledge-*.js + app.js + platform-theme.css + styles.css`，可选 `media.js / diagrams.js / lab.js / assets/`），所有引用都在目录内相对解析，整目录可单独拷走。geo/history 是多媒体版（含图片、音频、动画实验室）；grammar 是语法精讲版（暂无媒体层，按需可加）。知识点 id 前缀：`gu*`（地理）、`hu*`（历史）、`gr*`（语法）；数据校验命令：`node primary/test/test-geo.js`、`node primary/test/test-history.js`、`node primary/test/test-grammar.js`。**以后新增学科一律用这种自包含子目录模式**。
 
 ## primary-system/ 的运行方式
 

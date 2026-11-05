@@ -138,6 +138,11 @@
   .study-page .rel b { font-size: 20px; }
   .study-page .phrase b { font-size: 20px; color: #2c5f86; }
   .study-page :is(.part i, .rel i, .phrase i) { font-size: 16px; font-weight: 500; }
+  .study-page .dlg-title { font-size: 22px; }
+  .study-page .dlg-scene { font-size: 17px; }
+  .study-page .dlg-who { font-size: 16px; }
+  .study-page .dlg-en { font-size: 26px; line-height: 1.55; }
+  .study-page .dlg-zh { font-size: 18px; }
   .study-page .memo { padding: 14px 16px; border-radius: 15px; background: #fff3d8; color: #66563d; font-size: 17px; font-weight: 500; line-height: 1.8; }
   .study-page .unit-tag { color: var(--subject-ink); background: var(--subject-soft) !important; border: 1px solid var(--subject-line); border-radius: 9px; padding: 4px 12px; font-size: 13px; box-shadow: none; }
   .study-page .search-head { margin-block: 4px 20px; font-size: 19px; color: var(--subject-ink); }

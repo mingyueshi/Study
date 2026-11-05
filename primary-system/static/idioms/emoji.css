@@ -1,0 +1,89 @@
+/* 成语表情猜猜看：hero 横幅 + 大 emoji + 四选一；对齐看释义猜成语的优化风格。 */
+.eq-hero {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px 28px;
+  padding: 22px 26px;
+  margin: 0 0 20px;
+  background:
+    radial-gradient(ellipse at 92% 8%, #fff3d6, transparent 60%),
+    linear-gradient(120deg, #f1f8ea, #fdf3e0);
+  border: 1px solid #cfe3c0;
+  border-radius: 22px;
+}
+.eq-hero-copy { flex: 1 1 320px; min-width: 0; }
+.eq-hero-copy .eyebrow { margin-bottom: 6px; }
+.eq-hero-copy h1 { margin: 0 0 8px; font-size: clamp(32px, 3.6vw, 44px); }
+.eq-hero-tag { margin: 0 0 14px; color: var(--muted, #6b7480); font-size: 16px; line-height: 1.7; }
+.eq-hero-stats { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; }
+.eq-hero-stats span { display: inline-flex; align-items: center; gap: 5px; padding: 5px 12px; border-radius: 999px; background: #fff; border: 1px solid #d6e5c6; font-size: 14px; color: #4a5550; }
+.eq-hero-stats b { color: var(--green, #2f7d4f); font-weight: 800; }
+.eq-hero-demo { display: flex; gap: 10px; }
+.ehd { display: grid; place-items: center; width: 64px; height: 64px; border-radius: 16px; font-size: 34px; background: #fff; border: 1px solid #e3ecda; box-shadow: 0 4px 0 #e3ecda; }
+.ehd.eq-hd-mascot { background: var(--green, #2f7d4f); border-color: var(--green, #2f7d4f); animation: ehd-bounce 1.6s ease infinite; }
+@keyframes ehd-bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+
+.eq-layout { display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 24px; align-items: start; }
+.eq-side { padding: 18px; border: 1px solid var(--line, #dfe5da); border-radius: 18px; background: var(--white, #fff); }
+.eq-side h2 { margin: 0 0 12px; font-size: 19px; }
+.eq-side-note { margin: 10px 0 0; color: var(--muted, #6b7480); font-size: 14px; line-height: 1.75; }
+.eq-side-note b { color: var(--green, #2f7d4f); font-size: 18px; }
+
+.eq-dots { display: flex; flex-wrap: wrap; gap: 8px; }
+.eq-dot { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; border: 2px solid #dfe8d3; background: #f8fbf4; color: var(--muted, #6b7480); font-size: 17px; font-weight: 800; font-variant-numeric: tabular-nums; }
+.eq-dot.now { border-color: var(--green, #2f7d4f); color: var(--green, #2f7d4f); }
+.eq-dot.correct { border-color: var(--green, #2f7d4f); background: var(--green, #2f7d4f); color: #fff; }
+.eq-dot.wrong { border-color: #d2544f; background: #fdecea; color: #a3332a; }
+.eq-dot.revealed { border-color: #d9a13c; background: #fdf3e0; color: #8a6d1f; }
+
+.eq-history { display: flex; flex-direction: column; gap: 6px; margin-top: 12px; max-height: 320px; overflow-y: auto; }
+.eq-history-row { display: flex; align-items: center; gap: 8px; padding: 7px 10px; border-radius: 10px; background: #f8fbf4; color: var(--ink, #22303c); font-size: 15px; }
+.eq-history-row.ok { background: #eef6e6; }
+.eq-history-row i { margin-left: auto; font-style: normal; color: var(--muted, #6b7480); font-size: 13px; }
+.eq-history-row b { font-weight: 750; }
+
+.eq-board { min-height: 460px; padding: 30px 32px; border: 1px solid var(--line, #dfe5da); border-radius: 24px; background: var(--white, #fff); text-align: center; }
+.eq-counter { margin: 0; color: var(--muted, #6b7480); font-size: 16px; font-weight: 600; }
+.eq-emoji { margin: 22px 0 0; font-size: clamp(84px, 10vw, 120px); line-height: 1.15; letter-spacing: 8px; animation: eq-float 3.2s ease-in-out infinite; }
+@keyframes eq-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+.eq-question { margin: 16px 0 0; font-size: 22px; font-weight: 800; color: #234b38; }
+.eq-options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 24px; }
+.eq-option { min-height: 68px; padding: 14px 18px; border: 2px solid #dfe5ee; border-radius: 18px; background: #fafbfd; color: var(--ink, #22303c); font-size: 22px; font-weight: 800; cursor: pointer; transition: transform .12s ease, border-color .12s ease, background .12s ease; }
+.eq-option:hover:enabled { border-color: var(--green, #2f7d4f); background: #f0f7ea; transform: translateY(-2px); }
+.eq-option:active:enabled { transform: translateY(0); }
+.eq-option:disabled { cursor: default; }
+.eq-option.picked { border-color: #73509b; }
+.eq-option.right { border-color: var(--green, #2f7d4f); background: #e6f2dd; }
+.eq-option.wrong { border-color: #d2544f; background: #fdecea; text-decoration: line-through; }
+
+.eq-feedback { margin: 22px 0 0; min-height: 1.5em; font-size: 18px; line-height: 1.9; }
+.eq-feedback.ok { color: #2f6d4f; }
+.eq-feedback.bad { color: #a3332a; }
+.eq-feedback:empty { display: none; }
+.eq-answer { margin-left: 6px; font-size: 26px; font-weight: 900; }
+.eq-pinyin { margin-left: 10px; color: #77739a; font-size: 17px; }
+.eq-def { display: block; margin-top: 6px; color: #4d5c54; font-size: 16px; line-height: 1.85; }
+.eq-say, .eq-entry { font-size: 16px; }
+.eq-entry { color: var(--green, #2f7d4f); }
+
+.eq-summary { padding: 24px 0 8px; }
+.eq-summary-label { display: inline-block; margin: 0 0 10px; padding: 3px 12px; border-radius: 9px; background: var(--green, #2f7d4f); color: #fff; font-size: 15px; font-weight: 700; }
+.eq-summary h2 { margin: 0; font-size: clamp(30px, 3vw, 40px); }
+.eq-summary-copy { margin: 12px 0 0; color: #4d5c54; font-size: 18px; }
+.eq-again { min-height: 56px; padding: 12px 30px; margin-top: 20px; border: 2px solid var(--green, #2f7d4f); border-radius: 16px; background: var(--green, #2f7d4f); color: #fff; font-size: 19px; font-weight: 800; cursor: pointer; }
+.eq-again:hover { background: var(--green-dark, #256647); border-color: var(--green-dark, #256647); }
+
+.eq-error { padding: 26px; border: 2px dashed #dfe5da; border-radius: 16px; color: var(--muted, #6b7480); font-size: 17px; }
+.eq-restart { display: inline-block; margin-left: 10px; color: var(--green, #2f7d4f); }
+.eq-source { margin: 22px 2px 0; color: var(--muted, #6b7480); font-size: 13px; line-height: 1.7; }
+
+@media (max-width: 900px) {
+  .eq-layout { grid-template-columns: minmax(0, 1fr); }
+  .eq-options { grid-template-columns: minmax(0, 1fr); }
+  .eq-emoji { font-size: 60px; }
+}
+@media print {
+  .eq-side, .eq-actions, .eq-say { display: none !important; }
+}

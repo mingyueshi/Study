@@ -7,7 +7,6 @@
 | 目录 | 系统 | 面向 | 状态 |
 |---|---|---|---|
 | [`primary/`](primary/) | 🎒 乐学堂 | 小学（当前：四年级） | ✅ 使用中 |
-| [`history-explorer/`](history-explorer/) | 历史漫游 · 时光手册 | 小学中高年级历史启蒙 | 独立多媒体编排演示 |
 | [`primary-system/`](primary-system/) | 乐学堂统一系统 | 多年级、多账号、多教材、多学科 | 数据库、Nova 后台、个人进度、开放词库接入与统一查字查词 |
 | [`personal-learning/`](personal-learning/) | 个人学习系统 | 个人知识与实践积累 | 英文学习（TechLex）可用，AI 基础篇可学习 |
 
@@ -19,12 +18,12 @@
 - 语文知识点：双击 [`primary/knowledge.html`](primary/knowledge.html)，人教版（统编版·新课标）四年级上册单元知识点总结，配课文图示与实景照片，附作者小传、原文金句、真实百科与B站拓展视频（需联网），可点读、可搜索、可打印。
 - 数学知识点：双击 [`primary/math.html`](primary/math.html)，北师大版（新课标）四年级上册单元知识点总结，含例题、图示与互动演示（转角认角、竖式逐步算、行程小车等）、公式速查与易错诊所。
 - 教材同步单词：双击 [`primary/english.html`](primary/english.html)，外研版新标准三起（新课标）四年级上下册，含 12 单元 310 条词卡与 36 段课文对话点读。
+- 英语语法：双击 [`primary/grammar/index.html`](primary/grammar/index.html)，小学语法精讲，八大主题 31 个知识点，覆盖名词、冠词、代词、be 动词、时态、比较级与句型变换，每点配规则讲解、句型结构、例题与巩固题，自测记录存浏览器。
 - 场景单词：双击 [`primary/words.html`](primary/words.html)，按教室、食物、农场、交通等 25 个生活场景学习 305 个单词，支持点读、拆分记忆与掌握记录。
 - 成语接龙：双击 [`primary/chain.html`](primary/chain.html)，支持自己接龙、小龙陪练、释义提示与本地续玩。
-- 地理探索：双击 [`primary/geo.html`](primary/geo.html)，适合小学生的地理知识学习，八大站点 37 个知识点，配罗盘、四季互动演示与图示，可点读、可搜索、可打印。
-- 天文探索：双击 [`primary/astro.html`](primary/astro.html)，适合小学生的天文宇宙知识学习，八大基地 41 个知识点，配行星档案、月相变化互动演示与图示，可点读、可搜索、可打印。
-- 历史长廊：双击 [`primary/history.html`](primary/history.html)，适合小学生的中华历史启蒙，八大长廊 37 个知识点，配甲骨文、丝绸之路、郑和宝船等图示与朝代长河互动演示，可点读、可搜索、可打印。
-- 历史漫游：双击 [`history-explorer/index.html`](history-explorer/index.html)，独立重编的多媒体历史演示，包含真实文物观察、丝路/汉字/造纸互动、遗址短片、37条知识口袋与时光护照；详见 [`history-explorer/README.md`](history-explorer/README.md)。
+- 地理探索：双击 [`primary/geo/index.html`](primary/geo/index.html)，适合小学生的地理知识学习，八大主题 37 个知识点，每点含定义、必学要点、例题、易错辨析与巩固题，配概念图、实景照片、讲解音频、动画实验室与原始机构延伸资料（外链需联网）。
+- 天文探索：双击 [`primary/astro.html`](primary/astro.html)，适合小学生的天文宇宙知识学习，九大基地 46 个知识点（末站「未解之谜」讲暗物质、暗能量、黑洞内部、宇宙结局与时间之箭），配行星档案、月相变化互动演示、宇宙成分饼图与图示，可点读、可搜索、可打印。
+- 历史长廊：双击 [`primary/history/index.html`](primary/history/index.html)，适合小学生的中华历史启蒙，从走进历史到宋元明清八大主题 37 个知识点，每点含定义、必学要点、例题、易错辨析与巩固题，配概念图、文物实景照片、讲解音频、丝路/汉字/造纸动画实验室与原始机构延伸资料（外链需联网）。
 - 文学常识：双击 [`primary/lit.html`](primary/lit.html)，适合小学生的文学常识学习，八大文学苑 41 个知识点，涵盖四大名著、古今作家、文化常识与名句典故，配名著档案、生肖档案互动演示与图示，可点读、可搜索、可打印。
 - 科学实验室：双击 [`primary/sci.html`](primary/sci.html)，适合小学生的科学知识学习，八大实验室 39 个知识点，涵盖物质、力、光声、电磁、生命、地球与技术工程，配三态变化、电路串联并联互动演示与图示，可点读、可搜索、可打印。
 - 个人学习：双击 [`personal-learning/index.html`](personal-learning/index.html)，从总导航进入英文学习或 AI 基础篇；详见 [`personal-learning/README.md`](personal-learning/README.md)。旧 [`techlex/index.html`](techlex/index.html) 会转到新的英文学习模块。

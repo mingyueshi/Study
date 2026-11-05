@@ -1082,6 +1082,32 @@ const AstroFigures = (() => {
     return s + '</svg>';
   };
 
+  /* 宇宙成分饼图：暗能量 / 暗物质 / 普通物质（未解之谜站） */
+  const darkPie = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 230">`;
+    s += txt(320, 18, '宇宙里都有什么？（按能量成分估算）', { fs: 14.5 });
+    /* 饼图三等分：暗能量 68% / 暗物质 27% / 普通物质 5%，从 12 点钟顺时针 */
+    s += `<path d="M200 120 L200 32 A88 88 0 1 1 120.4 157.5 Z" fill="${PURPLE}"/>`;
+    s += `<path d="M200 120 L120.4 157.5 A88 88 0 0 1 172.8 36.3 Z" fill="#4a5fc1"/>`;
+    s += `<path d="M200 120 L172.8 36.3 A88 88 0 0 1 200 32 Z" fill="${SUN}"/>`;
+    s += txt(252, 152, '68%', { fs: 15, fill: '#fff', fw: 900 });
+    s += txt(148, 102, '27%', { fs: 14, fill: '#fff', fw: 900 });
+    /* 图例 */
+    const legend = [
+      ['#8b65c9', '暗能量 约 68%', '让宇宙越胀越快的神秘推力'],
+      ['#4a5fc1', '暗物质 约 27%', '不发光不反光，只用引力「露面」'],
+      ['#f6b93b', '普通物质 约 5%', '星星、星云、地球和我们'],
+    ];
+    legend.forEach((it, i) => {
+      const y = 64 + i * 44;
+      s += `<rect x="330" y="${y - 12}" width="18" height="18" rx="5" fill="${it[0]}"/>`;
+      s += txt(358, y + 2, it[1], { anchor: 'start', fs: 14, fw: 800 });
+      s += txt(358, y + 20, it[2], { anchor: 'start', fs: 12, fill: MUT, fw: 400 });
+    });
+    s += txt(320, 220, '会发光的普通物质只是「零头」，宇宙的绝大部分还是未解之谜', { fs: 13, fill: '#c98a12', fw: 800 });
+    return s + '</svg>';
+  };
+
   /* ================= 单元主题横幅 ================= */
 
   const UNIT_BANNERS = {
@@ -1181,6 +1207,16 @@ const AstroFigures = (() => {
       s += `<text x="30" y="68" font-size="28" font-weight="900" fill="#1d7a48">👽 宇宙里的问号</text>`;
       return s + '</svg>';
     },
+    au9: () => {
+      let s = `<svg viewBox="0 0 640 110" preserveAspectRatio="xMidYMid slice">`;
+      s += `<rect width="640" height="110" fill="url(#g-au9)"/>`;
+      s += `<defs><linearGradient id="g-au9" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e3e7f7"/><stop offset="1" stop-color="#c3cdf0"/></linearGradient></defs>`;
+      s += starDots([[70, 22, 1.6], [130, 55, 1.3], [480, 24, 1.8], [540, 58, 1.5], [430, 78, 1.4], [600, 30, 1.6], [200, 30, 1.2]]);
+      /* 大问号 */
+      s += `<text x="520" y="76" font-size="56" font-weight="900" fill="#4a5fc1">?</text>`;
+      s += `<text x="30" y="68" font-size="28" font-weight="900" fill="#33418f">❓ 未解之谜</text>`;
+      return s + '</svg>';
+    },
   };
 
   function unitBanner(unitId) {
@@ -1233,6 +1269,7 @@ const AstroFigures = (() => {
     'astro-mars-life': marsLife,
     'astro-greeting': greeting,
     'astro-ufo': ufo,
+    'astro-dark-pie': darkPie,
   };
 
   const DEFAULT_CAPS = {
@@ -1277,6 +1314,7 @@ const AstroFigures = (() => {
     'astro-mars-life': '火星有干涸河床和有机分子，但是否有生命还需证据',
     'astro-greeting': '旅行者号带金唱片飞出太阳系，中国天眼聆听宇宙',
     'astro-ufo': 'UFO 只是不明飞行物，绝大多数都有普通解释',
+    'astro-dark-pie': '宇宙成分估算：暗能量约 68%、暗物质约 27%，会发光的普通物质只占约 5%',
   };
 
   function figHTML(id, cap) {

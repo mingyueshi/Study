@@ -8,11 +8,24 @@ import secrets
 
 from django.core import signing
 
-KEYWORDS = ("花", "月", "春", "山", "水", "风")
+KEYWORDS = (
+    "花", "月", "春", "山", "水", "风",
+    "雪", "云", "雨", "江", "日", "天", "秋", "酒", "夜",
+    "柳", "桥", "马", "竹", "红", "白", "青", "海", "河",
+    "梅", "灯", "舟", "松", "荷",
+)
 TARGET = 5
 MAX_AGE = 3600
 SALT = "poetry.feihualing.page.v1"
 PUNCTUATION = frozenset("，。！？；：、,.!?;:「」『』“”‘’\"'")
+HAN = re.compile(r"^[\u3400-\u9fff\uf900-\ufaff\U00020000-\U000323af]$")
+
+
+def valid_keyword(keyword):
+    """预置令字之外，允许任意单个汉字作为自定义令字（语料不足会在开局时拒绝）。"""
+    return keyword in KEYWORDS or (
+        isinstance(keyword, str) and bool(HAN.fullmatch(keyword))
+    )
 
 
 class ExerciseError(ValueError):
@@ -67,8 +80,8 @@ def load_corpus():
 
 
 def fresh(corpus, keyword="月"):
-    if not isinstance(keyword, str) or keyword not in KEYWORDS:
-        raise ExerciseError("请选择页面上的一个令字。")
+    if not valid_keyword(keyword):
+        raise ExerciseError("令字请用一个汉字，或选择页面上的令字。")
     if corpus.count(keyword) < TARGET:
         raise ExerciseError("这枚令字目前不足五句可用诗句，请换一个。", 503)
     return {
@@ -94,6 +107,11 @@ def used_keys(corpus, state):
     )
 
 
+def used_answers(state):
+    """本局已收入诗单的整句键：自定义令字的阻塞粒度（索引表只覆盖预置令字）。"""
+    return {item["key"] for item in state["history"]}
+
+
 def restore(corpus, token):
     if not isinstance(token, str) or not 1 <= len(token) <= 8000:
         raise ExerciseError("这局练习信息不完整，请重新开始。", 409)
@@ -109,7 +127,7 @@ def restore(corpus, token):
         or state["v"] != 1
         or state.get("corpus") != corpus.fingerprint
         or not isinstance(state.get("keyword"), str)
-        or state["keyword"] not in KEYWORDS
+        or not valid_keyword(state["keyword"])
         or not isinstance(state.get("nonce"), str)
         or not re.fullmatch(r"[0-9a-f]{32}", state["nonce"])
         or not isinstance(state.get("history"), list)
@@ -142,7 +160,9 @@ def restore(corpus, token):
 
 def payload(corpus, state, *, message="", outcome="ready"):
     used = used_keys(corpus, state)
-    remaining = corpus.count(state["keyword"], used)
+    remaining = corpus.count(
+        state["keyword"], used, answer_keys=used_answers(state)
+    )
     history = [
         corpus.answers[item["key"]].public(item["mode"]) for item in state["history"]
     ]
@@ -202,7 +222,9 @@ def payload(corpus, state, *, message="", outcome="ready"):
 
 def act(corpus, state, action, answer=None):
     if len(state["history"]) >= TARGET or not corpus.count(
-        state["keyword"], used_keys(corpus, state)
+        state["keyword"],
+        used_keys(corpus, state),
+        answer_keys=used_answers(state),
     ):
         return payload(
             corpus, state, message="这局已经练完，开启新局继续吧。", outcome="finished"
@@ -253,7 +275,9 @@ def act(corpus, state, action, answer=None):
         raise ExerciseError("暂不支持这个操作。")
     if action == "hint":
         if not state["hint"]:
-            choice = corpus.choose(state["keyword"], used, state["nonce"])
+            choice = corpus.choose(
+                state["keyword"], used, state["nonce"], answer_keys=used_answers(state)
+            )
             state["hint"] = choice.key
         return payload(
             corpus,
