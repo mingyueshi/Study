@@ -1,6 +1,8 @@
 """多音字专题：浏览与练习。数据见 polyphone_data/README.md。"""
 import json
 import random
+import unicodedata
+from collections import defaultdict
 from functools import lru_cache
 from pathlib import Path
 
@@ -101,12 +103,45 @@ def reading_rows(item):
     ]
 
 
+def initial_letter(pinyin):
+    """取拼音首字母（去掉声调符号、小写），零声母的 ā/ò 等归到对应元音。"""
+    ch = pinyin[0]
+    if "a" <= ch.lower() <= "z":
+        return ch.lower()
+    base = unicodedata.normalize("NFD", ch)
+    return base[0].lower() if base else "#"
+
+
+def readings_bucket(count):
+    """按读音数分桶：2 / 3 / 4+。"""
+    return "4+" if count >= 4 else str(count)
+
+
 def chip_rows(chars):
     return [
         {"char": item["char"],
-         "readings_text": " · ".join(reading["pinyin"] for reading in item["readings"])}
+         "readings_text": " · ".join(reading["pinyin"] for reading in item["readings"]),
+         "readings_count": len(item["readings"]),
+         "bucket": readings_bucket(len(item["readings"])),
+         "initial": initial_letter(item["readings"][0]["pinyin"])}
         for item in chars
     ]
+
+
+def grouped_chars(chars):
+    """按拼音首字母分组，保留原始顺序；返回有序列表。"""
+    buckets = defaultdict(list)
+    for row in chip_rows(chars):
+        buckets[row["initial"]].append(row)
+    return [{"initial": letter, "chips": buckets[letter]}
+            for letter in sorted(buckets.keys())]
+
+
+def bucket_counts(chars):
+    counts = {"2": 0, "3": 0, "4+": 0}
+    for item in chars:
+        counts[readings_bucket(len(item["readings"]))] += 1
+    return counts
 
 
 def practice_round(rng):
@@ -156,8 +191,16 @@ def page(request):
     seed = request.GET.get("q_seed", "")[:40]
     rng = random.Random(seed) if seed else random.SystemRandom()
     current = practice_round(rng)
+    counts = bucket_counts(data["chars"])
     return render(request, "hanzi/polyphones.html", {
-        "chars": chip_rows(data["chars"]),
+        "chars": grouped_chars(data["chars"]),
+        "total": len(data["chars"]),
+        "buckets": [
+            {"bucket": "all", "label": "全部", "count": len(data["chars"])},
+            {"bucket": "2", "label": "二读", "count": counts["2"]},
+            {"bucket": "3", "label": "三读", "count": counts["3"]},
+            {"bucket": "4+", "label": "四读及以上", "count": counts["4+"]},
+        ],
         "compact": compact_chars(data["chars"]),
         "current_char": {**char_index()[char], "rows": reading_rows(char_index()[char])},
         "round": current,

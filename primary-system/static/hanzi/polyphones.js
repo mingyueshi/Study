@@ -4,11 +4,12 @@
 (() => {
   const dataNode = document.getElementById('poly-data');
   const detailBody = document.querySelector('[data-poly-detail-body]');
-  const grid = document.querySelector('[data-poly-grid]');
+  const groupsEl = document.querySelector('[data-poly-groups]');
+  const chips = groupsEl ? Array.from(groupsEl.querySelectorAll('.poly-chip')) : [];
+  const groups = groupsEl ? Array.from(groupsEl.querySelectorAll('.poly-group')) : [];
   const search = document.querySelector('[data-poly-search]');
   const emptyHint = document.querySelector('[data-poly-empty]');
   const dictUrl = document.querySelector('[data-dict-url]')?.dataset.dictUrl || '';
-  const chips = grid ? Array.from(grid.querySelectorAll('.poly-chip')) : [];
   const index = new Map();
   if (dataNode) {
     JSON.parse(dataNode.textContent).forEach((item) => index.set(item.char, item));
@@ -73,7 +74,7 @@
     }
   };
 
-  grid?.addEventListener('click', (event) => {
+  groupsEl?.addEventListener('click', (event) => {
     const chip = event.target.closest('.poly-chip');
     if (chip) {
       event.preventDefault();
@@ -81,21 +82,40 @@
     }
   });
 
-  /* ---- grid filter (by char or readings). ---- */
-  if (search) {
-    const countEl = document.querySelector('[data-poly-visible]');
-    search.addEventListener('input', () => {
-      const q = search.value.trim().toLowerCase();
-      let visible = 0;
-      chips.forEach((chip) => {
-        const hay = (chip.dataset.char + ' ' + chip.dataset.readings).toLowerCase();
-        const show = !q || hay.includes(q);
-        chip.hidden = !show;
-        if (show) visible += 1;
-      });
-      if (countEl) countEl.textContent = visible;
-      if (emptyHint) emptyHint.hidden = visible !== 0;
+  /* ---- grid filter: reading-count bucket + char/pinyin search. ---- */
+  let activeBucket = 'all';
+  const bucketButtons = Array.from(document.querySelectorAll('[data-bucket]'));
+  bucketButtons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      activeBucket = btn.dataset.bucket;
+      bucketButtons.forEach((b) => b.classList.toggle('on', b === btn));
+      applyFilter();
     });
+  });
+
+  const countEl = document.querySelector('[data-poly-visible]');
+  const applyFilter = () => {
+    const q = search ? search.value.trim().toLowerCase() : '';
+    let visible = 0;
+    chips.forEach((chip) => {
+      const bucketOk = activeBucket === 'all' || chip.dataset.bucket === activeBucket;
+      const hay = (chip.dataset.char + ' ' + chip.dataset.readings).toLowerCase();
+      const show = bucketOk && (!q || hay.includes(q));
+      chip.hidden = !show;
+      if (show) visible += 1;
+    });
+    groups.forEach((group) => {
+      const hasVisible = Array.from(group.querySelectorAll('.poly-chip')).some((c) => !c.hidden);
+      group.hidden = !hasVisible;
+      const head = group.querySelector('.poly-group-head span');
+      if (head) head.textContent = group.querySelectorAll('.poly-chip:not([hidden])').length;
+    });
+    if (countEl) countEl.textContent = visible;
+    if (emptyHint) emptyHint.hidden = visible !== 0;
+  };
+
+  if (search) {
+    search.addEventListener('input', applyFilter);
   }
 
   /* ---- reading-choice practice scoring. ---- */

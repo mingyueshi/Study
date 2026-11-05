@@ -1,8 +1,22 @@
 {% extends 'base.html' %}{% load static %}{% block title %}多音字 · 乐学堂{% endblock %}
 {% block content %}<link rel="stylesheet" href="{% static 'hanzi/polyphones.css' %}"><script src="{% static 'tts.js' %}" defer></script><script src="{% static 'hanzi/polyphones.js' %}" defer></script>
 {{ compact|json_script:"poly-data" }}
-<a class="back" href="{% url 'home' %}">← 学习广场</a>
-<div class="page-heading"><p class="eyebrow">语文 · 认字</p><h1>多音字</h1><p>一个字有不止一个读音：乐在「音乐」里读 yuè，在「快乐」里读 lè。在右边字卡里点一个字，左边马上看它每个读音怎么组词，再玩「给词选读音」。</p></div>
+<header class="poly-hero">
+  <div class="poly-hero-copy">
+    <p class="eyebrow">语文 · 认字</p>
+    <h1>多音字</h1>
+    <p class="poly-hero-tag">一个字，多个读音，按场景切换。</p>
+    <p class="poly-hero-stats"><span><b>1010</b> 字</span><span><b>2~6</b> 个读音</span></p>
+  </div>
+  <div class="poly-hero-demo" aria-hidden="true">
+    <span class="poly-hero-demo-char">乐</span>
+    <div class="poly-hero-demo-readings">
+      <span><i>音乐</i><b>yuè</b></span>
+      <span><i>快乐</i><b>lè</b></span>
+    </div>
+    <span class="poly-hero-demo-deco">yuè lè lào</span>
+  </div>
+</header>
 <div class="poly-shell">
   <div class="poly-main">
     <section class="poly-practice" id="practice" data-poly-round data-answer="{{ round.answer }}" data-char="{{ round.char }}">
@@ -32,9 +46,24 @@
     </section>
   </div>
   <aside class="poly-browse" id="poly-browse">
-    <div class="poly-search-row"><input class="poly-search" type="search" data-poly-search placeholder="筛选：汉字或拼音，如「长」「yue」" aria-label="筛选多音字"><span class="poly-count"><b data-poly-visible>1010</b> 个字</span></div>
-    <div class="poly-grid" data-poly-grid>
-      {% for item in chars %}<a class="poly-chip{% if item.char == current_char.char %} on{% endif %}" href="?char={{ item.char|urlencode }}" data-char="{{ item.char }}" data-readings="{{ item.readings_text }}">{{ item.char }}<i>{{ item.readings_text }}</i></a>
+    <div class="poly-browse-head">
+      <div class="poly-search-row"><input class="poly-search" type="search" data-poly-search placeholder="筛选：汉字或拼音，如「长」「yue」" aria-label="筛选多音字"><span class="poly-count"><b data-poly-visible>{{ total }}</b> ／{{ total }} 字</span></div>
+      <div class="poly-buckets" data-poly-buckets>
+        {% for b in buckets %}<button type="button" class="poly-bucket{% if forloop.first %} on{% endif %}" data-bucket="{{ b.bucket }}">{{ b.label }}<i>{{ b.count }}</i></button>{% endfor %}
+      </div>
+      <div class="poly-alphabet" data-poly-alphabet>
+        {% for g in chars %}<a href="#poly-initial-{{ g.initial }}" data-letter="{{ g.initial }}">{{ g.initial|upper }}</a>{% endfor %}
+      </div>
+    </div>
+    <div class="poly-groups" data-poly-groups>
+      {% for g in chars %}
+      <section class="poly-group" id="poly-initial-{{ g.initial }}" data-initial="{{ g.initial }}">
+        <h3 class="poly-group-head">{{ g.initial|upper }}<span>{{ g.chips|length }}</span></h3>
+        <div class="poly-grid">
+          {% for item in g.chips %}<a class="poly-chip{% if item.char == current_char.char %} on{% endif %}" href="?char={{ item.char|urlencode }}" data-char="{{ item.char }}" data-readings="{{ item.readings_text }}" data-bucket="{{ item.bucket }}" data-initial="{{ item.initial }}">{{ item.char }}<i>{{ item.readings_text }}</i></a>
+          {% endfor %}
+        </div>
+      </section>
       {% empty %}<p class="poly-empty">没有找到多音字数据。</p>
       {% endfor %}
     </div>
