@@ -1,7 +1,7 @@
 from django.test import SimpleTestCase, TestCase
 
 from .models import ScenarioWord
-from .tree import MAX_DEPTH, find_path, load_tree, validate
+from .tree import MAX_DEPTH, find_branch, find_path, load_tree, validate
 
 REAL_SCENARIOS = True  # 树数据与场景词库共同演进；页面测试直接用真实树数据。
 
@@ -88,6 +88,26 @@ class TreePageTests(TestCase):
         self.client.get("/words/tree/")
         self.assertEqual(ScenarioWord.objects.count(), before)
 
+    def test_word_chips_carry_tree_data_attributes(self):
+        """词 chip 携带 data-en 等属性，前端词墙/词卡据此免刷新渲染。"""
+        response = self.client.get("/words/tree/?root=animal")
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'data-en="dog"')
+        self.assertContains(response, 'data-branch-id=')
+
+    def test_branch_deep_link_opens_path(self):
+        tree = load_tree()
+        child = tree["roots"][0]["children"][0]
+        response = self.client.get(f"/words/tree/?branch={child['id']}")
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, f'id="{child["id"]}"')
+        self.assertContains(response, "<details open")
+
+    def test_unknown_branch_falls_back_to_first_root(self):
+        response = self.client.get("/words/tree/?branch=zzz-not-a-node")
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "tree-branch")
+
     def test_find_path_returns_branch(self):
         tree = load_tree()
         word = tree["roots"][0]["children"][0]["children"][0]["words"][0]["en"] \
@@ -95,3 +115,11 @@ class TreePageTests(TestCase):
         root, path = find_path(tree["roots"], word)
         self.assertIsNotNone(root)
         self.assertTrue(path)
+
+    def test_find_branch_returns_path_including_target(self):
+        tree = load_tree()
+        child = tree["roots"][0]["children"][0]
+        root, path = find_branch(tree["roots"], child["id"])
+        self.assertIsNotNone(root)
+        self.assertEqual(path[-1], child["id"])
+        self.assertEqual(path[0], tree["roots"][0]["id"])

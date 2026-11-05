@@ -1,13 +1,14 @@
-{% comment %}词以类聚：递归渲染枝干节点。node=当前节点 path_ids=需展开的节点 id 集合{% endcomment %}
+{% comment %}词以类聚：递归渲染枝干节点。node=当前节点 path_ids=需展开的节点 id 集合。
+词 chip 携带 data-*（en/zh/ipa/emoji/scene/status），tree.js 据此免刷新出词卡与词墙。{% endcomment %}
 <ul class="tree-nodes">
   {% for child in node.children %}
-  <li class="tree-branch">
+  <li class="tree-branch" id="{{ child.id }}">
     <details {% if child.id in path_ids %}open{% endif %}>
-      <summary><span class="tree-branch-name">{{ child.zh|default:child.en }}<i class="muted">{{ child.total }}</i></span></summary>
-      {% if child.words %}<div class="tree-node-words">{% for word in child.words %}<a class="tree-word{% if word.en|lower == request.GET.word|lower %} on{% endif %}" href="?root={{ selected_root.key }}&amp;word={{ word.en|urlencode }}">{{ word.en }}</a>{% endfor %}</div>{% endif %}
+      <summary data-branch-id="{{ child.id }}" data-branch-zh="{{ child.zh|default:child.en }}"><span class="tree-branch-name">{{ child.zh|default:child.en }}{% if child.en and child.zh and child.en != child.zh %}<i class="tree-branch-en">{{ child.en }}</i>{% endif %}<i class="muted">{{ child.total }}</i></span></summary>
+      {% if child.words %}<div class="tree-node-words">{% for word in child.words %}<a class="tree-word{% if word.en|lower == request.GET.word|lower %} on{% endif %}" href="?root={{ selected_root.key }}&amp;word={{ word.en|urlencode }}" data-tree-word="{{ word.en }}" data-en="{{ word.en }}" data-zh="{{ word.zh }}" data-ipa="{{ word.ipa }}" data-emoji="{{ word.emoji }}" data-scene="{{ word.scenario_zh }}" data-status="{{ word.source_status }}">{{ word.en }}</a>{% endfor %}</div>{% endif %}
       {% if child.children %}{% include 'words/tree_nodes.html' with node=child path_ids=path_ids %}{% endif %}
     </details>
   </li>
   {% endfor %}
-  {% if node.words %}<li class="tree-leaves"><div class="tree-node-words">{% for word in node.words %}<a class="tree-word{% if word.en|lower == request.GET.word|lower %} on{% endif %}" href="?root={{ selected_root.key }}&amp;word={{ word.en|urlencode }}" data-tree-word="{{ word.en }}">{{ word.en }}</a>{% endfor %}</div></li>{% endif %}
+  {% if node.words %}<li class="tree-leaves"><div class="tree-node-words">{% for word in node.words %}<a class="tree-word{% if word.en|lower == request.GET.word|lower %} on{% endif %}" href="?root={{ selected_root.key }}&amp;word={{ word.en|urlencode }}" data-tree-word="{{ word.en }}" data-en="{{ word.en }}" data-zh="{{ word.zh }}" data-ipa="{{ word.ipa }}" data-emoji="{{ word.emoji }}" data-scene="{{ word.scenario_zh }}" data-status="{{ word.source_status }}">{{ word.en }}</a>{% endfor %}</div></li>{% endif %}
 </ul>

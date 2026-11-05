@@ -115,16 +115,41 @@ def find_path(roots, word):
     return None, []
 
 
+def find_branch(roots, branch_id):
+    """返回包含该枝干的 (root, path_ids)；找不到返回 (None, [])。"""
+    target = branch_id.strip()
+
+    def walk(node, path):
+        if node["id"] == target:
+            return path + [node["id"]]
+        for child in node["children"]:
+            found = walk(child, path + [node["id"]])
+            if found:
+                return found
+        return None
+
+    for root in roots:
+        found = walk(root, [])
+        if found:
+            return root, found
+    return None, []
+
+
 @never_cache
 @require_GET
 def tree_page(request):
     tree = load_tree_cached()
     roots = enrich(tree["roots"])
     word = request.GET.get("word", "").strip()[:60]
+    branch = request.GET.get("branch", "").strip()[:80]
     selected_root = None
     path_ids = []
     if word:
         selected_root, path_ids = find_path(roots, word)
+    if selected_root is None and branch:
+        selected_root, path_ids = find_branch(roots, branch)
+        if selected_root is None:
+            path_ids = []
     if selected_root is None:
         root_key = request.GET.get("root", "")
         selected_root = next((r for r in roots if r["key"] == root_key), roots[0] if roots else None)

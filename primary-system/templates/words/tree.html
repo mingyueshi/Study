@@ -3,13 +3,16 @@
 <a class="back" href="{% url 'home' %}">← 学习广场</a>
 <div class="page-heading"><p class="eyebrow">英语 · 看结构</p><h1>词以类聚</h1><p>WordNet 上下位关系把单词挂成树：动物下面有狗、猫、熊猫。和场景单词互补——点词看意思，去场景页把它学会。</p></div>
 <div class="tree-root-chips">{% for root in roots %}<a class="chip{% if root.key == selected_root.key %} on{% endif %}" href="?root={{ root.key }}">{{ root.emoji }} {{ root.zh }}<i>{{ root.total }}</i></a>{% endfor %}</div>
-<div class="tree-shell">
+<div class="tree-shell" data-root-key="{{ selected_root.key }}" data-root-zh="{{ selected_root.zh }}" data-root-emoji="{{ selected_root.emoji }}" data-scene-url="{% url 'scenario-words' %}" data-dict-url="{% url 'dictionary' %}">
   <section class="tree-board">
-    <h2 class="tree-title">{{ selected_root.emoji }} {{ selected_root.zh }} <span class="muted">{{ selected_root.total }} 词</span></h2>
-    {% if selected_root.words %}<div class="tree-node-words tree-root-words">{% for word in selected_root.words %}<a class="tree-word{% if word.en|lower == request.GET.word|lower %} on{% endif %}" href="?root={{ selected_root.key }}&amp;word={{ word.en|urlencode }}" data-tree-word="{{ word.en }}">{{ word.en }}</a>{% endfor %}</div>{% endif %}
+    <div class="tree-board-head">
+      <h2 class="tree-title">{{ selected_root.emoji }} {{ selected_root.zh }} <span class="muted">{{ selected_root.total }} 词</span></h2>
+      <div class="tree-tools"><button type="button" class="tree-tool" data-tree-expand>展开全部</button><button type="button" class="tree-tool" data-tree-collapse>全部收起</button></div>
+    </div>
+    {% if selected_root.words %}<div class="tree-node-words tree-root-words">{% for word in selected_root.words %}<a class="tree-word{% if word.en|lower == request.GET.word|lower %} on{% endif %}" href="?root={{ selected_root.key }}&amp;word={{ word.en|urlencode }}" data-tree-word="{{ word.en }}" data-en="{{ word.en }}" data-zh="{{ word.zh }}" data-ipa="{{ word.ipa }}" data-emoji="{{ word.emoji }}" data-scene="{{ word.scenario_zh }}" data-status="{{ word.source_status }}">{{ word.en }}</a>{% endfor %}</div>{% endif %}
     {% include 'words/tree_nodes.html' with node=selected_root path_ids=path_ids %}
   </section>
-  <aside class="tree-word-panel">{% if selected_word %}
+  <aside class="tree-word-panel" id="tree-panel">{% if selected_word %}
     <article class="tree-word-card" id="tree-word-card">
       <p class="tree-word-emoji">{{ selected_word.emoji|default:"🔤" }}</p>
       <p class="tree-word-headline"><b>{{ selected_word.en }}</b> <button class="say-chip" type="button" data-say="{{ selected_word.en }}" aria-label="朗读 {{ selected_word.en }}">🔊</button></p>
@@ -20,6 +23,7 @@
       <div class="tree-word-actions">
         <a class="button small" href="{% url 'scenario-words' %}?word={{ selected_word.en|urlencode }}">去场景页学会它 →</a>
         <a class="button small ghost" href="{% url 'dictionary' %}?q={{ selected_word.en|urlencode }}">查词典 →</a>
+        <button class="button small ghost tree-back" type="button" hidden>← 返回词墙</button>
       </div>
     </article>
   {% else %}<p class="tree-word-empty">点树上的单词，这里会显示词卡；选中的枝干里共 <b>{{ selected_root.total }}</b> 个词。</p>{% endif %}</aside>
