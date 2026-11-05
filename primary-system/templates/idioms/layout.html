@@ -3,7 +3,6 @@
 <link rel="stylesheet" href="{% static 'idioms/idioms.css' %}">
 <div class="idiom-page">
   <nav class="idiom-crumbs" aria-label="专题路径">
-    <a href="{% url 'home' %}">学习广场</a><span aria-hidden="true">›</span>
     {% block idiom_crumb %}<span aria-current="page">场景成语</span>{% endblock %}
   </nav>
   {% block idiom_content %}{% endblock %}

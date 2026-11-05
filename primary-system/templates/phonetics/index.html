@@ -1,6 +1,5 @@
 {% extends 'base.html' %}{% load static %}{% block title %}英语音标 · 乐学堂{% endblock %}
 {% block content %}<link rel="stylesheet" href="{% static 'phonetics/phonetics.css' %}"><script src="{% static 'speech.js' %}" defer></script><script src="{% static 'tts.js' %}" defer></script><script src="{% static 'phonetics/phonetics.js' %}" defer></script>{% include 'includes/tts_controls.html' %}
-<a class="back" href="{% url 'home' %}">← 学习广场</a>
 <div class="page-heading"><p class="eyebrow">英语 · 44 个音</p><h1>英语音标</h1><p>点大音标或喇叭听音素原声，点例词听整词，看着口型要点把每个音读准。</p></div>
 <div class="library-layout"><aside class="unit-nav" aria-label="音标分组导航"><h2>音标分组</h2>{% for group in groups %}<a href="#group-{{ group.code }}">{% if group.emoji %}<span class="unit-dot">{{ group.emoji }}</span>{% endif %}{{ group.name }}<span class="unit-count">{{ group.phonemes|length }}</span></a>{% endfor %}</aside>
 <section class="ph-board">
