@@ -1,7 +1,17 @@
 {% extends 'idioms/layout.html' %}{% load static %}{% block title %}看释义猜成语 · 乐学堂{% endblock %}
 {% block idiom_crumb %}<span aria-current="page">看释义猜成语</span>{% endblock %}
 {% block idiom_content %}<link rel="stylesheet" href="{% static 'idioms/quiz.css' %}"><script src="{% static 'speech.js' %}" defer></script><script src="{% static 'tts.js' %}" defer></script><script src="{% static 'idioms/quiz.js' %}" defer></script>
-<div class="quiz-hero"><p class="eyebrow">语文 · 猜成语</p><h1>看释义猜成语</h1><p>读句子的意思，把成语缺的字补出来。提示越多越简单：入门亮 3 个字，挑战一个字都不给。答对就去看它的词典详解。</p></div>
+<header class="quiz-hero">
+  <div class="quiz-hero-copy">
+    <p class="eyebrow">语文 · 猜成语</p>
+    <h1>看释义猜成语</h1>
+    <p class="quiz-hero-tag">读释义，把缺的字补出来。提示越多越简单，挑战模式一个字都不给。</p>
+    <p class="quiz-hero-stats"><span><b>{{ level_chips|length }}</b> 难度</span><span><b>{{ source_chips|length }}</b> 题库</span></p>
+  </div>
+  <div class="quiz-hero-demo" aria-hidden="true">
+    <span class="qhd qhd-fill">礼</span><span class="qhd qhd-fill">相</span><span class="qhd qhd-blank"></span><span class="qhd qhd-blank"></span>
+  </div>
+</header>
 <div class="quiz-toolbar">
   <div class="quiz-chips"><span class="quiz-label">难度</span>{% for chip in level_chips %}<a class="chip{% if chip.0 == level %} on{% endif %}" href="?level={{ chip.0 }}&amp;source={{ source }}">{{ chip.1 }}</a>{% endfor %}</div>
   <div class="quiz-chips"><span class="quiz-label">题库</span>{% for chip in source_chips %}<a class="chip{% if chip.on %} on{% endif %}" href="?level={{ level }}&amp;source={{ chip.value }}">{{ chip.label }}<i>{{ chip.size }}</i></a>{% endfor %}</div>
