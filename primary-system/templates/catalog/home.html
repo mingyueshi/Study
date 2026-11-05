@@ -42,6 +42,20 @@
     <p>负荆请罪、三顾茅庐、望梅止渴——按典籍翻看有人物故事的成语，顺着人物线索把典故串起来。</p>
     <span class="tag">读成语故事 →</span>
   </a>
+  <a class="module-card color-chinese" href="{% url 'idiom-quiz' %}">
+    <img src="{% static 'icons/idioms.svg' %}" alt="" width="88" height="88">
+    <span class="module-meta">语文 <span aria-hidden="true">↗</span></span>
+    <h3>看释义猜成语</h3>
+    <p>读意思，把成语缺的字补出来。难度就是亮出的提示字数——从亮 3 个字到全部藏起来。</p>
+    <span class="tag">来猜一猜 →</span>
+  </a>
+  <a class="module-card color-chinese" href="{% url 'hanzi-polyphones' %}">
+    <img src="{% static 'icons/literature.svg' %}" alt="" width="88" height="88">
+    <span class="module-meta">语文 <span aria-hidden="true">↗</span></span>
+    <h3>多音字</h3>
+    <p>乐读 yuè 还是 lè？1,010 个多音字按读音看组词，再来几道「给词选读音」。</p>
+    <span class="tag">认一认多音字 →</span>
+  </a>
 </div></section>
 <section id="books" aria-labelledby="books-title"><div class="section-heading"><div><p class="eyebrow">找到适合自己的那一本</p><h2 id="books-title">我的学习书架</h2></div><p>跟着课本的进度走</p></div>{% include 'catalog/filters.html' %}
 <section class="shelf" aria-labelledby="shelf-textbook"><div class="shelf-heading"><h3 id="shelf-textbook">📘 教材同步</h3><p>单元与册次对应手里的教材。</p></div>{% include 'catalog/book_list.html' with collections=textbook_shelf %}</section>

@@ -46,6 +46,9 @@ writing-data: ## 从 primary/writing-data.js 重新生成作文坊 topics.json�
 word-tree: ## 重新生成词以类聚的 WordNet 上下位树（words/tree_data/tree.json）
 	$(PYTHON) scripts/build_word_tree.py
 
+polyphone-data: ## 从 CC-CEDICT 重新生成多音字数据（hanzi/polyphone_data/polyphones.json）
+	$(PYTHON) scripts/build_polyphones.py
+
 phoneme-audio: ## 重新生成 44 个音素原声 m4a（需 espeak-ng，见 scripts/generate_phoneme_audio.py）
 	python3 scripts/generate_phoneme_audio.py
 

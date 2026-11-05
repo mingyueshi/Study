@@ -1,0 +1,45 @@
+{% extends 'base.html' %}{% load static %}{% block title %}多音字 · 乐学堂{% endblock %}
+{% block content %}<link rel="stylesheet" href="{% static 'hanzi/polyphones.css' %}"><script src="{% static 'tts.js' %}" defer></script><script src="{% static 'hanzi/polyphones.js' %}" defer></script>
+{{ compact|json_script:"poly-data" }}
+<a class="back" href="{% url 'home' %}">← 学习广场</a>
+<div class="page-heading"><p class="eyebrow">语文 · 认字</p><h1>多音字</h1><p>一个字有不止一个读音：乐在「音乐」里读 yuè，在「快乐」里读 lè。在右边字卡里点一个字，左边马上看它每个读音怎么组词，再玩「给词选读音」。</p></div>
+<div class="poly-shell">
+  <div class="poly-main">
+    <section class="poly-practice" id="practice" data-poly-round data-answer="{{ round.answer }}" data-char="{{ round.char }}">
+      <p class="poly-practice-title">练一练 · 给词选读音</p>
+      <p class="poly-word"><b>{{ round.before }}</b><span class="poly-target">{{ round.target }}</span><b>{{ round.after }}</b>
+        <button class="say-chip" type="button" data-say="{{ round.word }}" aria-label="朗读 {{ round.word }}">🔊</button></p>
+      <p class="poly-word-pinyin">{% for part in round.syllables %}{% if forloop.counter0 == round.position %}<span class="poly-mask">？</span>{% else %}<span>{{ part }}</span>{% endif %}{% endfor %}</p>
+      <div class="poly-options">{% for option in round.options %}<button class="poly-option" type="button" data-poly-option data-pinyin="{{ option.pinyin }}">{{ option.pinyin }}{% if option.tone == 5 %}<i class="poly-tone-badge">轻</i>{% endif %}</button>{% endfor %}</div>
+      <p class="poly-score">连续答对 <b data-poly-streak>0</b> · 累计答对 <b data-poly-correct>0</b>／<b data-poly-asked>0</b></p>
+      <div class="poly-actions"><a class="button small ghost" href="{{ next_href }}#practice">换一题 ↻</a>{% if round.english %}<span class="poly-english">{{ round.english }}</span>{% endif %}</div>
+    </section>
+    <section class="poly-detail" id="char-detail" data-dict-url="{% url 'dictionary' %}">
+      <div data-poly-detail-body>
+        <p class="poly-detail-head"><b class="poly-detail-char">{{ current_char.char }}</b><span class="poly-detail-sub">{{ current_char.readings|length }} 个读音</span></p>
+        {% for reading in current_char.rows %}
+        <div class="poly-reading">
+          <p class="poly-reading-pinyin">{{ reading.pinyin }}{% if reading.tone == 5 %}<i class="poly-tone-badge">轻</i>{% endif %}</p>
+          <div class="poly-words">
+            {% for w in reading.words %}<a class="poly-word-chip" href="{% url 'dictionary' %}?q={{ w.word|urlencode }}"><b>{{ w.before }}<u>{{ w.target }}</u>{{ w.after }}</b><i>{{ w.pinyin }}</i></a>
+            {% endfor %}
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <p class="poly-detail-links"><a class="button small" href="{% url 'hanzi-detail' current_char.char %}">查字查词看这个字 →</a></p>
+      <p class="poly-detail-note">点组词去查字查词；读音与组词由 CC-CEDICT 全量词语推导，轻声不标调、标「轻」。</p>
+    </section>
+  </div>
+  <aside class="poly-browse" id="poly-browse">
+    <div class="poly-search-row"><input class="poly-search" type="search" data-poly-search placeholder="筛选：汉字或拼音，如「长」「yue」" aria-label="筛选多音字"><span class="poly-count"><b data-poly-visible>1010</b> 个字</span></div>
+    <div class="poly-grid" data-poly-grid>
+      {% for item in chars %}<a class="poly-chip{% if item.char == current_char.char %} on{% endif %}" href="?char={{ item.char|urlencode }}" data-char="{{ item.char }}" data-readings="{{ item.readings_text }}">{{ item.char }}<i>{{ item.readings_text }}</i></a>
+      {% empty %}<p class="poly-empty">没有找到多音字数据。</p>
+      {% endfor %}
+    </div>
+    <p class="poly-empty" data-poly-empty hidden>没有匹配的读音，换个词试试。</p>
+  </aside>
+</div>
+<p class="poly-note">读音与组词由 CC-CEDICT（CC-BY-4.0）全量词语按字位音节对齐推导；轻声不标调、标「轻」。只读浏览，不写学习记录。</p>
+{% endblock %}
