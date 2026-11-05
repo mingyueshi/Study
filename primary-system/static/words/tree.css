@@ -1,6 +1,43 @@
 /* 词以类聚：左树右栏；点枝干出词墙、点词出卡不刷新；无 JS 时仍可原生 details 浏览。 */
-.tree-root-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 18px; }
-.tree-root-chips .chip { display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 6px 13px; border: 1px solid #d5e0ca; border-radius: 12px; background: var(--white, #fff); color: #3d4750; font-size: 16px; }
+.tree-hero {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px 28px;
+  padding: 22px 26px;
+  margin: 0 0 20px;
+  background:
+    radial-gradient(ellipse at 92% 8%, #e8f5db, transparent 60%),
+    linear-gradient(120deg, #f1f8ea, #eaf3e0);
+  border: 1px solid #cfe3c0;
+  border-radius: 22px;
+}
+.tree-hero-copy { flex: 1 1 320px; min-width: 0; }
+.tree-hero-copy .eyebrow { margin-bottom: 6px; }
+.tree-hero-copy h1 { margin: 0 0 8px; font-size: clamp(32px, 3.6vw, 44px); }
+.tree-hero-tag { margin: 0 0 14px; max-width: 60ch; color: var(--muted, #6b7480); font-size: 16px; line-height: 1.7; }
+.tree-hero-stats { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; }
+.tree-hero-stats span { display: inline-flex; align-items: center; gap: 5px; padding: 5px 12px; border-radius: 999px; background: #fff; border: 1px solid #d6e5c6; font-size: 14px; color: #4a5550; }
+.tree-hero-stats b { color: var(--green, #2f7d4f); font-weight: 800; }
+
+.tree-hero-demo {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  border: 1px solid #bcd9a8;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 4px 0 rgba(47, 125, 79, .08);
+}
+.tree-hero-demo-emoji { font-size: 48px; line-height: 1; }
+.tree-hero-demo-words { display: flex; flex-direction: column; gap: 5px; }
+.tree-hero-demo-words span { padding: 3px 11px; border: 1px solid #d9e1cf; border-radius: 10px; background: #f9fbf5; font-size: 14px; font-weight: 600; color: #2f3d28; }
+
+.tree-root-chips { display: flex; flex-wrap: wrap; gap: 8px; padding: 14px 16px; margin: 0 0 20px; border: 1px solid #d8ecd3; border-radius: 18px; background: #f4faef; }
+.tree-root-chips .chip { display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 6px 14px; border: 1px solid #d5e0ca; border-radius: 12px; background: var(--white, #fff); color: #3d4750; font-size: 16px; }
 .tree-root-chips .chip i { font-style: normal; color: var(--muted, #6b7480); font-size: 13px; }
 .tree-root-chips .chip:hover { border-color: var(--green, #2f7d4f); }
 .tree-root-chips .chip.on { border-color: var(--green, #2f7d4f); background: var(--green, #2f7d4f); color: #fff; }

@@ -1,7 +1,17 @@
 {% extends 'base.html' %}{% load static %}{% block title %}词以类聚 · 乐学堂{% endblock %}
 {% block content %}<link rel="stylesheet" href="{% static 'words/tree.css' %}"><script src="{% static 'speech.js' %}" defer></script><script src="{% static 'tts.js' %}" defer></script><script src="{% static 'words/tree.js' %}" defer></script>
-<a class="back" href="{% url 'home' %}">← 学习广场</a>
-<div class="page-heading"><p class="eyebrow">英语 · 看结构</p><h1>词以类聚</h1><p>WordNet 上下位关系把单词挂成树：动物下面有狗、猫、熊猫。和场景单词互补——点词看意思，去场景页把它学会。</p></div>
+<header class="tree-hero">
+  <div class="tree-hero-copy">
+    <p class="eyebrow">英语 · 看结构</p>
+    <h1>词以类聚</h1>
+    <p class="tree-hero-tag">WordNet 上下位关系把单词挂成树：动物下面有狗、猫、熊猫。点词看意思，去场景页把它学会。</p>
+    <p class="tree-hero-stats"><span><b>{{ roots|length }}</b> 词根</span><span><b>{{ selected_root.total }}</b> 当前词</span></p>
+  </div>
+  <div class="tree-hero-demo" aria-hidden="true">
+    <span class="tree-hero-demo-emoji">🌳</span>
+    <div class="tree-hero-demo-words"><span>dog</span><span>cat</span><span>panda</span></div>
+  </div>
+</header>
 <div class="tree-root-chips">{% for root in roots %}<a class="chip{% if root.key == selected_root.key %} on{% endif %}" href="?root={{ root.key }}">{{ root.emoji }} {{ root.zh }}<i>{{ root.total }}</i></a>{% endfor %}</div>
 <div class="tree-shell" data-root-key="{{ selected_root.key }}" data-root-zh="{{ selected_root.zh }}" data-root-emoji="{{ selected_root.emoji }}" data-scene-url="{% url 'scenario-words' %}" data-dict-url="{% url 'dictionary' %}">
   <section class="tree-board">
