@@ -113,6 +113,7 @@
 .subject-math { --card-bg: #dceaff; --card-line: #b9d1f1; --icon-bg: #e9f2ff; --accent: #628fcb; --tag-ink: #355c93; }
 .subject-english { --card-bg: #ddf1e3; --card-line: #b7d9c2; --icon-bg: #e9f9e9; --accent: #5e9f7a; --tag-ink: #376b4e; }
 .subject-grammar { --card-bg: #e3e6f8; --card-line: #c5cdf0; --icon-bg: #eef0fb; --accent: #4a5fc1; --tag-ink: #33418f; }
+.subject-phonetics { --card-bg: #f9e3ec; --card-line: #eccbd9; --icon-bg: #fdeef4; --accent: #b5547c; --tag-ink: #8a3a5c; }
 .subject-scenes { --card-line: #c3ddeb; --icon-bg: #e4f3ff; --accent: #609cbd; --tag-ink: #397493; }
 .subject-idioms { --card-line: #ead5aa; --icon-bg: #fff0c9; --accent: #bd8d3b; --tag-ink: #8e692a; }
 .subject-writing { --card-line: #ded0ec; --icon-bg: #f0e5ff; --accent: #9570c0; --tag-ink: #7b549e; }

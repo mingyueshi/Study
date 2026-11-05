@@ -19,6 +19,7 @@
 - 数学知识点：双击 [`primary/math.html`](primary/math.html)，北师大版（新课标）四年级上册单元知识点总结，含例题、图示与互动演示（转角认角、竖式逐步算、行程小车等）、公式速查与易错诊所。
 - 教材同步单词：双击 [`primary/english.html`](primary/english.html)，外研版新标准三起（新课标）四年级上下册，含 12 单元 310 条词卡与 36 段课文对话点读。
 - 英语语法：双击 [`primary/grammar/index.html`](primary/grammar/index.html)，小学语法精讲，八大主题 31 个知识点，覆盖名词、冠词、代词、be 动词、时态、比较级与句型变换，每点配规则讲解、句型结构、例题与巩固题，自测记录存浏览器。
+- 英语音标：双击 [`primary/phonetics/index.html`](primary/phonetics/index.html)，48 个音标全覆盖，八大主题 33 个知识点，每点配发音要领、口型对比、例词音标标注与辨音巩固题，附词典与 BBC 发音资料链接（需联网）。
 - 场景单词：双击 [`primary/words.html`](primary/words.html)，按教室、食物、农场、交通等 25 个生活场景学习 305 个单词，支持点读、拆分记忆与掌握记录。
 - 成语接龙：双击 [`primary/chain.html`](primary/chain.html)，支持自己接龙、小龙陪练、释义提示与本地续玩。
 - 地理探索：双击 [`primary/geo/index.html`](primary/geo/index.html)，适合小学生的地理知识学习，八大主题 37 个知识点，每点含定义、必学要点、例题、易错辨析与巩固题，配概念图、实景照片、讲解音频、动画实验室与原始机构延伸资料（外链需联网）。

@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7faf5">
+  <meta name="description" content="小学英语音标精讲：33个知识点覆盖全部48个音标，按发音要领、例词、易错辨析和巩固题编排，配长短元音、清浊辅音对比与拼读方法，离线可用。">
+  <title>英语音标精讲 · 乐学堂</title>
+  <link rel="stylesheet" href="platform-theme.css">
+  <link rel="stylesheet" href="styles.css">
+  <script src="content.js" defer></script>
+  <script src="knowledge-vowels.js" defer></script>
+  <script src="knowledge-consonants.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body class="phonetics-demo">
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true">🔤</span><span>乐学堂<small>每一点好奇，都有回响</small></span></a>
+    <nav aria-label="音标知识导航">
+      <a href="#knowledge-main" aria-current="location"><span aria-hidden="true">🔤</span><span>音标精讲</span></a>
+      <a href="#directory"><span aria-hidden="true">🗂️</span><span>音标目录</span></a>
+      <a href="#reference-guide"><span aria-hidden="true">🧭</span><span>使用说明</span></a>
+    </nav>
+    <div class="account"><span class="tag">英语音标 · 小学中高年级</span></div>
+  </header>
+  <main id="main" class="shell" tabindex="-1">
+    <div class="phonetics-topic color-phonetics" id="top">
+      <div class="page-heading knowledge-heading">
+        <div><p class="eyebrow">口型 · 例词 · 辨音 · 自测</p><h1>英语音标精讲</h1><p>8 个主题 / 33 个知识点，覆盖全部 48 个音标。先看口型要领，再跟例词练熟。</p></div>
+        <div class="knowledge-tools"><button id="open-search" class="secondary-button">搜索知识点 <span aria-hidden="true">⌕</span></button><button id="open-progress" class="secondary-button">自测记录 <b id="progress-count">0 / 33</b></button></div>
+      </div>
+      <div class="library-layout knowledge-layout">
+        <aside class="unit-nav knowledge-directory" id="directory" aria-label="音标知识目录">
+          <details open><summary>音标目录 <span>8 个主题</span></summary><p class="directory-note">选择主题，展开具体知识点。</p><div id="chapter-nav"></div></details>
+        </aside>
+        <div class="knowledge-main" id="knowledge-main">
+          <section class="chapter-heading" aria-labelledby="chapter-title"><div><p class="eyebrow" id="chapter-label"></p><h2 id="chapter-title"></h2><p id="chapter-description"></p></div><span class="chapter-count" id="chapter-count"></span></section>
+          <nav id="lesson-index" class="lesson-index" aria-label="本章知识点"></nav>
+          <div id="lessons"></div>
+          <button id="next-chapter" class="next-chapter"><span>学习下一主题</span><strong id="next-chapter-name"></strong><span aria-hidden="true">→</span></button>
+          <section class="reference-guide" id="reference-guide"><h2>使用说明</h2><ul><li><strong>发音要领：</strong>每个音标先讲口型和舌位，再看例词；朗读本点会把讲解读给你听，英文例词可以跟读模仿。</li><li><strong>辨音与巩固题：</strong>易错对比（长短元音、清浊辅音）要重点看；巩固题答对会记入自测记录，答错对照要领再来一次。</li><li><strong>外部资料：</strong>每个知识点附词典和发音练习链接，可以在线听标准发音，需要联网。</li></ul><p>自测记录只保存在当前浏览器中，换浏览器或清缓存会重新开始。</p></section>
+        </div>
+      </div>
+      <dialog id="search-dialog" class="knowledge-dialog"><div class="dialog-heading"><div><p class="eyebrow">按名称、例词和发音要领检索</p><h2>搜索33个知识点</h2></div><button class="close-dialog" aria-label="关闭搜索">×</button></div><label class="search-label" for="knowledge-search">输入关键词</label><input id="knowledge-search" type="search" placeholder="例如：长元音、th 发音、双元音、/book/ 和 /uː/" autocomplete="off"><p id="search-count" class="muted" aria-live="polite"></p><div id="search-results"></div></dialog>
+      <dialog id="progress-dialog" class="knowledge-dialog"><div class="dialog-heading"><div><p class="eyebrow">答对对应的巩固题后记录</p><h2>知识点自测记录</h2></div><button class="close-dialog" aria-label="关闭自测记录">×</button></div><p id="progress-summary"></p><div id="progress-list"></div><p class="small-note">记录按浏览器保存，不按账号同步；答对一道题只代表本次自测通过。</p></dialog>
+      <dialog id="lab-dialog" class="knowledge-dialog lab-dialog"><div class="dialog-heading"><div><p class="eyebrow">辅助理解 · 与对应知识点结合使用</p><h2>口型动画</h2></div><button class="close-dialog" aria-label="关闭动画">×</button></div><div id="phonetics-lab"></div></dialog>
+      <dialog id="video-dialog" class="knowledge-dialog video-dialog"><div class="dialog-heading"><div><p class="eyebrow">发音示范 · 加速合成</p><h2 id="video-title"></h2></div><button class="close-dialog" aria-label="关闭视频">×</button></div><video id="observation-video" controls playsinline preload="none"></video><p id="video-caption"></p><a id="video-source" target="_blank" rel="noopener noreferrer">原始来源说明 ↗</a></dialog>
+      <dialog id="image-dialog" class="knowledge-dialog image-dialog"><div class="dialog-heading"><h2>辅助图片</h2><button class="close-dialog" aria-label="关闭大图">×</button></div><figure><img id="large-image" alt=""><figcaption id="large-caption"></figcaption></figure><a id="large-source" target="_blank" rel="noopener noreferrer">原图及来源 ↗</a></dialog>
+      <div id="status-message" class="status-message" role="status"></div>
+      <noscript><p class="notice">请启用JavaScript以查看知识点正文；内容数据保存在本目录中。</p></noscript>
+    </div>
+  </main>
+  <footer class="site-footer"><span>乐学堂 · 英语音标精讲</span><span>音标为主线，例词练熟 · <a href="#top">回到顶部 ↑</a></span></footer>
+</body>
+</html>
