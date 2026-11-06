@@ -32,19 +32,45 @@ def _owner(request):
     return {'guest_key': key}
 
 
+def _history(request):
+    return [{'score': item.score, 'p2_score': item.p2_score, 'mode': item.mode,
+             'hints': item.hints, 'length': len(item.chain) - 1,
+             'ended_reason': item.get_ended_reason_display() or '手动重开',
+             'finished_at': item.finished_at.strftime('%Y-%m-%d %H:%M')}
+            for item in services.round_history(_owner(request))]
+
+
 def _payload(request, round, *, pool, hint=None):
     payload = {
-        'id': str(round.pk), 'revision': round.revision, 'score': round.score, 'hints': round.hints,
-        'chain': round.chain, 'status': round.status, 'ended_reason': round.get_ended_reason_display() if round.ended_reason else '',
+        'id': str(round.pk), 'revision': round.revision, 'score': round.score,
+        'p2_score': round.p2_score, 'hints': round.hints,
+        'mode': round.mode, 'first_player': round.first_player,
+        'chain': round.chain, 'status': round.status,
+        'ended_reason': round.get_ended_reason_display() if round.ended_reason else '',
         'next_char': round.chain[-1]['last_char'] if round.status == GameRound.Status.PLAYING else '',
         **services.pool_stats(pool),
-        'history': [{'score': item.score, 'hints': item.hints, 'length': len(item.chain) - 1,
-                     'ended_reason': item.get_ended_reason_display() or '手动重开',
-                     'finished_at': item.finished_at.strftime('%Y-%m-%d %H:%M')} for item in services.round_history(_owner(request))],
+        'history': _history(request),
     }
+    if round.mode == GameRound.Mode.DUEL and round.status == GameRound.Status.PLAYING:
+        payload['turn'] = services.duel_turn(round)
     if hint:
         payload['hint'] = hint
     return payload
+
+
+def _needs_start(request, *, pool):
+    """家长对决尚无进行中局：先选这一局谁先接，再开局。"""
+    return {'mode': GameRound.Mode.DUEL, 'status': 'needs_start',
+            'id': '', 'revision': 0, 'score': 0, 'p2_score': 0, 'hints': 0,
+            'first_player': '', 'chain': [], 'next_char': '', 'ended_reason': '',
+            **services.pool_stats(pool), 'history': _history(request)}
+
+
+def _state_round(request, pool):
+    """按 ?mode= 取当前对局；duel 没有进行中局时返回 None（进入先手选择）。"""
+    mode = GameRound.Mode.DUEL if request.GET.get('mode') == GameRound.Mode.DUEL else GameRound.Mode.SOLO
+    return services.current_round(_owner(request), mode=mode,
+                                  exclude_headword=request.session.get('chain_last_starter'), pool=pool)
 
 
 @ensure_csrf_cookie
@@ -53,9 +79,11 @@ def _payload(request, round, *, pool, hint=None):
 def page(request):
     try:
         pool = services.chain_pool()
-        round = services.current_round(_owner(request), exclude_headword=request.session.get('chain_last_starter'), pool=pool)
+        round = _state_round(request, pool)
     except services.ChainError:
         return render(request, 'chain/unavailable.html')
+    if round is None:
+        return render(request, 'chain/play.html', {'state': _needs_start(request, pool=pool)})
     request.session['chain_last_starter'] = round.chain[0]['word']
     return render(request, 'chain/play.html', {'state': _payload(request, round, pool=pool)})
 
@@ -65,9 +93,11 @@ def page(request):
 def state(request):
     try:
         pool = services.chain_pool()
-        round = services.current_round(_owner(request), exclude_headword=request.session.get('chain_last_starter'), pool=pool)
+        round = _state_round(request, pool)
     except services.ChainError:
         return JsonResponse({'error': '暂时没有可用成语，请稍后再来。', 'status': 'unavailable'}, status=503)
+    if round is None:
+        return JsonResponse(_needs_start(request, pool=pool))
     request.session['chain_last_starter'] = round.chain[0]['word']
     return JsonResponse(_payload(request, round, pool=pool))
 
@@ -125,3 +155,41 @@ def hint(request):
 @require_POST
 def restart(request):
     return _mutate(request, 'restart')
+
+
+def _start_body(request):
+    """开局请求只带 first_player；进行中旧局（若有）由服务端自己找并结束。"""
+    if len(request.body) > MAX_BODY:
+        raise services.ChainError('请求过大。')
+    try:
+        data = json.loads(request.body)
+    except (ValueError, UnicodeDecodeError):
+        raise services.ChainError('请求格式不正确。') from None
+    if not isinstance(data, dict) or data.get('first_player') not in (GameRound.FirstPlayer.P1, GameRound.FirstPlayer.P2):
+        raise services.ChainError('请先选择这一局谁先接。')
+    return data
+
+
+@never_cache
+@require_POST
+def start(request):
+    """家长对决开局/重开：每局都重新选先手。"""
+    owner = _owner(request)
+    try:
+        data = _start_body(request)
+        pool = services.chain_pool()
+        playing = GameRound.objects.filter(**owner, status=GameRound.Status.PLAYING,
+                                           mode=GameRound.Mode.DUEL).first()
+        if playing:
+            services.restart_round(owner, str(playing.pk), playing.revision)
+        exclude = playing.chain[0]['word'] if playing else request.session.get('chain_last_starter')
+        round = services.start_round(owner, mode=GameRound.Mode.DUEL, first_player=data['first_player'],
+                                     exclude_headword=exclude, pool=pool)
+    except services.ChainConflict as exc:
+        return JsonResponse({'error': str(exc)}, status=409)
+    except services.ChainError as exc:
+        return JsonResponse({'error': str(exc)}, status=400)
+    except OperationalError:
+        return JsonResponse({'error': '数据库暂忙，请重新读取状态后再操作。'}, status=503)
+    request.session['chain_last_starter'] = round.chain[0]['word']
+    return JsonResponse(_payload(request, round, pool=pool))

@@ -148,16 +148,23 @@ def _chain_item(row, info, by):
 
 
 @transaction.atomic
-def current_round(owner, *, exclude_headword=None, pool=None):
-    """返回进行中的对局；没有则开新局（原子内重查，避免并发重复开局）。"""
+def current_round(owner, *, mode=GameRound.Mode.SOLO, exclude_headword=None, pool=None):
+    """返回该模式进行中的对局。
+
+    solo 没有进行中局则自动开新局（原子内重查，避免并发重复开局）；duel 不自动
+    开局——每局先手由玩家选择，返回 None 让视图进入先手选择状态。
+    """
     round = GameRound.objects.select_for_update().filter(
-        **owner, status=GameRound.Status.PLAYING).order_by('-updated_at').first()
+        **owner, status=GameRound.Status.PLAYING, mode=mode).order_by('-updated_at').first()
     if round is not None:
         return round
+    if mode == GameRound.Mode.DUEL:
+        return None
     return start_round(owner, exclude_headword=exclude_headword, pool=pool)
 
 
-def start_round(owner, *, exclude_headword=None, pool=None):
+def start_round(owner, *, mode=GameRound.Mode.SOLO, first_player=GameRound.FirstPlayer.P1,
+                exclude_headword=None, pool=None):
     pool = chain_pool() if pool is None else pool
     if not pool:
         raise ChainError('接龙词池还是空的，请先在后台填充词池。')
@@ -166,7 +173,17 @@ def start_round(owner, *, exclude_headword=None, pool=None):
     starters = [row for row in starters if row[1] != exclude_headword] or starters or pool
     row = SYSTEM_RANDOM.choice(starters)
     info = chain_entry_info([row[0]]).get(row[0], {'word': row[1], 'pinyin': '', 'meaning': ''})
-    return GameRound.objects.create(**owner, chain=[_chain_item(row, info, 'start')])
+    return GameRound.objects.create(**owner, mode=mode, first_player=first_player,
+                                    chain=[_chain_item(row, info, 'start')])
+
+
+def duel_turn(round):
+    """家长对决的当前出手方：开局词之后按先手方交替。"""
+    moves = len(round.chain) - 1
+    if moves % 2 == 0:
+        return round.first_player
+    return (GameRound.FirstPlayer.P2 if round.first_player == GameRound.FirstPlayer.P1
+            else GameRound.FirstPlayer.P1)
 
 
 @transaction.atomic
@@ -198,23 +215,39 @@ def play(owner, round_id, revision, word, *, pool=None):
         raise ChainError(f'请以“{previous["last_char"]}”字开头，不使用谐音。')
 
     info = chain_entry_info([row[0]]).get(row[0], {'word': word, 'pinyin': '', 'meaning': ''})
-    round.chain.append(_chain_item(row, info, 'player'))
-    round.score += 10
-
     index = _by_first(pool)
     used_words = {item['word'] for item in round.chain}
-    reply = partner_reply(index, row[3], used_words)
-    if reply is None:
-        round.status = GameRound.Status.FINISHED
-        round.ended_reason = GameRound.EndedReason.PARTNER_STUCK
-        round.finished_at = timezone.now()
-    else:
-        reply_info = chain_entry_info([reply[0]]).get(reply[0], {'word': reply[1], 'pinyin': '', 'meaning': ''})
-        round.chain.append(_chain_item(reply, reply_info, 'partner'))
-        if not _unused_candidates(index, reply[3], {item['word'] for item in round.chain}):
+
+    if round.mode == GameRound.Mode.DUEL:
+        # 家长对决：出手方得 10 分，待接方无候选即终局，没有陪练回手。
+        mover = duel_turn(round)
+        round.chain.append(_chain_item(row, info, mover))
+        if mover == GameRound.FirstPlayer.P1:
+            round.score += 10
+        else:
+            round.p2_score += 10
+        if not _unused_candidates(index, row[3], used_words | {word}):
             round.status = GameRound.Status.FINISHED
-            round.ended_reason = GameRound.EndedReason.PLAYER_STUCK
+            # 出手方的对方接不上：mover=p1 → 家长卡死，mover=p2 → 孩子卡死。
+            round.ended_reason = (GameRound.EndedReason.P2_STUCK if mover == GameRound.FirstPlayer.P1
+                                  else GameRound.EndedReason.P1_STUCK)
             round.finished_at = timezone.now()
+    else:
+        round.chain.append(_chain_item(row, info, 'player'))
+        round.score += 10
+        used_words = {item['word'] for item in round.chain}
+        reply = partner_reply(index, row[3], used_words)
+        if reply is None:
+            round.status = GameRound.Status.FINISHED
+            round.ended_reason = GameRound.EndedReason.PARTNER_STUCK
+            round.finished_at = timezone.now()
+        else:
+            reply_info = chain_entry_info([reply[0]]).get(reply[0], {'word': reply[1], 'pinyin': '', 'meaning': ''})
+            round.chain.append(_chain_item(reply, reply_info, 'partner'))
+            if not _unused_candidates(index, reply[3], {item['word'] for item in round.chain}):
+                round.status = GameRound.Status.FINISHED
+                round.ended_reason = GameRound.EndedReason.PLAYER_STUCK
+                round.finished_at = timezone.now()
     round.revision += 1
     round.save()
     return round
@@ -234,7 +267,14 @@ def take_hint(owner, round_id, revision, *, pool=None):
               'pinyin': infos.get(row[0], {}).get('pinyin', ''), 'meaning': infos.get(row[0], {}).get('meaning', ''),
               'public': bool(infos.get(row[0], {}).get('public'))}
              for row in candidates]  # 全部可接候选，前端整列滚动展示。
-    round.score = max(0, round.score - 5)
+    if round.mode == GameRound.Mode.DUEL:
+        # 对决模式：提示谁轮到谁点，−5 从当前出手方的分数扣。
+        if duel_turn(round) == GameRound.FirstPlayer.P1:
+            round.score = max(0, round.score - 5)
+        else:
+            round.p2_score = max(0, round.p2_score - 5)
+    else:
+        round.score = max(0, round.score - 5)
     round.hints += 1
     round.revision += 1
     round.save()

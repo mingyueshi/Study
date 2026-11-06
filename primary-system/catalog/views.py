@@ -7,7 +7,7 @@ from django.shortcuts import render, get_object_or_404, reverse
 from django.views.decorators.cache import never_cache
 from django.views.decorators.http import require_GET
 from .forms import CatalogFilter
-from .entry_registry import entry_for
+from .entry_registry import entry_for, special_entries
 from lexicon.chinese import safe_word_item, safe_search, request_resolver, LessonResolver
 from .models import ENGLISH_RELATION_TAGS, Grade, Module, Placement, Subject, TextbookEdition, TextbookBook, \
     ContentItem, published_items, published_textbook_books, published_units
@@ -49,6 +49,27 @@ def units_of_books(books):
     return published_units().filter(textbook_book__in=[b.pk for b in books])
 
 
+def _entry_cards(request, modules, counts):
+    """首页入口卡装配：模块卡与专题卡（entry_registry.special_entries）同形，
+    模板一个循环渲染；新增玩法只改注册表，不动模板。"""
+    cards = []
+    for module in modules:
+        entry = entry_for(module.code)
+        url = reverse(entry['route_name']) if entry else reverse('module', args=[module.code])
+        if not entry and request.GET:
+            # 普通模块页延续当前筛选（原模板 {% querystring %} 的行为）。
+            url += '?' + request.GET.urlencode()
+        count = counts.get(module.pk, 0)
+        cards.append({
+            'url': url, 'icon': module.icon, 'color_code': module.subject.code,
+            'subject_label': module.subject.name, 'name': module.name,
+            'blurb': module.description,
+            'badge': f'{count} 本学习册' if count else (entry['tag'] if entry else '暂无匹配学习册'),
+        })
+    cards.extend(special_entries())
+    return cards
+
+
 @never_cache
 @require_GET
 def home(request):
@@ -57,19 +78,13 @@ def home(request):
     counts = {}
     for book in books:
         counts[book.module_id] = counts.get(book.module_id, 0) + 1
-    for module in modules:
-        module.available_count = counts.get(module.pk, 0)
-        entry = entry_for(module.code)
-        module.entry = entry
-        module.entry_url = reverse(entry['route_name']) if entry else reverse('module', args=[module.code])
-        module.entry_tag = entry['tag'] if entry else None
     textbook_shelf = books
     digest = None
     if request.user.is_authenticated:
         from .learning_digest import learning_digest
         digest = learning_digest(request.user)
     return render(request, 'catalog/home.html', {
-        'form': form, 'modules': modules, 'digest': digest,
+        'form': form, 'entry_cards': _entry_cards(request, modules, counts), 'digest': digest,
         'textbook_shelf': textbook_shelf,
         'item_count': published_items().filter(placements__unit__in=units_of_books(books)).count(),
     }, status=200 if form.is_valid() else 400)

@@ -9,80 +9,10 @@
 {% include 'includes/overview_cards.html' with areas=digest.areas %}
 <p class="overview-more"><a href="{% url 'my-learning' %}">查看完整学习足迹 →</a></p></section>
 {% else %}
-<section class="study-strip" aria-label="学习概况"><div><strong>{{ modules|length|add:"2" }}</strong><span>探索方向</span></div><div><strong>{{ item_count }}</strong><span>当前可读内容</span></div><p>登录后，收藏、笔记和掌握记录会跟着你的账号走。</p></section>
+<section class="study-strip" aria-label="学习概况"><div><strong>{{ entry_cards|length }}</strong><span>探索方向</span></div><div><strong>{{ item_count }}</strong><span>当前可读内容</span></div><p>登录后，收藏、笔记和掌握记录会跟着你的账号走。</p></section>
 {% endif %}
 <section aria-labelledby="modules-title"><div class="section-heading"><div><p class="eyebrow">跟着兴趣出发</p><h2 id="modules-title">每一科，都有新发现</h2></div><p>读课本、学成语，也可以用诗句接飞花令。</p></div>
-<div class="module-grid">{% for module in modules %}<a class="module-card color-{{ module.subject.code }}" href="{{ module.entry_url }}{% if not module.entry %}{% querystring %}{% endif %}"><img src="{% static 'icons/' %}{{ module.icon }}.svg" alt="" width="88" height="88"><span class="module-meta">{{ module.subject.name }} <span aria-hidden="true">↗</span></span><h3>{{ module.name }}</h3><p>{{ module.description }}</p><span class="tag">{% if module.available_count %}{{ module.available_count }} 本学习册{% elif module.entry_tag %}{{ module.entry_tag }}{% else %}暂无匹配学习册{% endif %}</span></a>{% endfor %}
-  <a class="module-card color-chinese" href="{% url 'feihualing' %}">
-    <img src="{% static 'icons/literature.svg' %}" alt="" width="88" height="88">
-    <span class="module-meta">古诗词 <span aria-hidden="true">↗</span></span>
-    <h3>飞花令</h3>
-    <p>选一个令字，想一句含这个字的诗，集满五句写成自己的诗单。</p>
-    <span class="tag">开始练诗 →</span>
-  </a>
-  <a class="module-card color-chinese" href="{% url 'poetry-map' %}">
-    <img src="{% static 'icons/globe.svg' %}" alt="" width="88" height="88">
-    <span class="module-meta">古诗词 <span aria-hidden="true">↗</span></span>
-    <h3>诗词地图</h3>
-    <p>黄鹤楼、庐山、西湖、玉门关……背过的诗按地点摆上中国地图，去哪儿玩先查查。</p>
-    <span class="tag">看看这里有什么诗 →</span>
-  </a>
-  <a class="module-card color-chinese" href="{% url 'poetry-seasons' %}">
-    <img src="{% static 'icons/literature.svg' %}" alt="" width="88" height="88">
-    <span class="module-meta">古诗词 <span aria-hidden="true">↗</span></span>
-    <h3>诗词四季</h3>
-    <p>春风、夏蝉、秋月、冬雪——按季节读诗，也按思乡、送别、边塞这些心情找。</p>
-    <span class="tag">跟着季节读诗 →</span>
-  </a>
-  <a class="module-card color-english" href="{% url 'words-tree' %}">
-    <img src="{% static 'icons/english.svg' %}" alt="" width="88" height="88">
-    <span class="module-meta">英语 <span aria-hidden="true">↗</span></span>
-    <h3>词以类聚</h3>
-    <p>WordNet 上下位把单词挂成树：动物下面有狗、猫、熊猫。从「背场景」升级到「看结构」。</p>
-    <span class="tag">看单词的结构 →</span>
-  </a>
-  <a class="module-card color-chinese" href="{% url 'idiom-scenes' %}">
-    <img src="{% static 'icons/idioms.svg' %}" alt="" width="88" height="88">
-    <span class="module-meta">语文 <span aria-hidden="true">↗</span></span>
-    <h3>场景成语</h3>
-    <p>从学习、心情和身边的小事出发，读懂成语，学会在一句话里用它。</p>
-    <span class="tag">看看生活里的成语 →</span>
-  </a>
-  <a class="module-card color-chinese" href="{% url 'idiom-stories' %}">
-    <img src="{% static 'icons/dragon.svg' %}" alt="" width="88" height="88">
-    <span class="module-meta">语文 <span aria-hidden="true">↗</span></span>
-    <h3>成语典故馆</h3>
-    <p>负荆请罪、三顾茅庐、望梅止渴——按典籍翻看有人物故事的成语，顺着人物线索把典故串起来。</p>
-    <span class="tag">读成语故事 →</span>
-  </a>
-  <a class="module-card color-chinese" href="{% url 'idiom-quiz' %}">
-    <img src="{% static 'icons/idioms.svg' %}" alt="" width="88" height="88">
-    <span class="module-meta">语文 <span aria-hidden="true">↗</span></span>
-    <h3>看释义猜成语</h3>
-    <p>读意思，把成语缺的字补出来。难度就是亮出的提示字数——从亮 3 个字到全部藏起来。</p>
-    <span class="tag">来猜一猜 →</span>
-  </a>
-  <a class="module-card color-chinese" href="{% url 'idiom-emoji' %}">
-    <img src="{% static 'icons/idioms.svg' %}" alt="" width="88" height="88">
-    <span class="module-meta">语文 <span aria-hidden="true">↗</span></span>
-    <h3>成语表情猜猜看</h3>
-    <p>看 emoji 猜成语：🐍➕🦶 是哪个？四选一点一点，猜对一个收一个。</p>
-    <span class="tag">看表情猜成语 →</span>
-  </a>
-  <a class="module-card color-chinese" href="{% url 'idiom-pairs' %}">
-    <img src="{% static 'icons/dragon.svg' %}" alt="" width="88" height="88">
-    <span class="module-meta">语文 <span aria-hidden="true">↗</span></span>
-    <h3>成语配对</h3>
-    <p>左边找一个成语，右边配它的近义或反义。画蛇添足配谁？雪中送炭又配谁？</p>
-    <span class="tag">连线配对 →</span>
-  </a>
-  <a class="module-card color-chinese" href="{% url 'hanzi-polyphones' %}">
-    <img src="{% static 'icons/literature.svg' %}" alt="" width="88" height="88">
-    <span class="module-meta">语文 <span aria-hidden="true">↗</span></span>
-    <h3>多音字</h3>
-    <p>乐读 yuè 还是 lè？1,010 个多音字按读音看组词，再来几道「给词选读音」。</p>
-    <span class="tag">认一认多音字 →</span>
-  </a>
+<div class="module-grid">{% for card in entry_cards %}<a class="module-card color-{{ card.color_code }}" href="{{ card.url }}"><img src="{% static 'icons/' %}{{ card.icon }}.svg" alt="" width="88" height="88"><span class="module-meta">{{ card.subject_label }} <span aria-hidden="true">↗</span></span><h3>{{ card.name }}</h3><p>{{ card.blurb }}</p><span class="tag">{{ card.badge }}</span></a>{% endfor %}
 </div></section>
 <section id="books" aria-labelledby="books-title"><div class="section-heading"><div><p class="eyebrow">找到适合自己的那一本</p><h2 id="books-title">我的学习书架</h2></div><p>跟着课本的进度走</p></div>{% include 'catalog/filters.html' %}
 <section class="shelf" aria-labelledby="shelf-textbook"><div class="shelf-heading"><h3 id="shelf-textbook">📘 教材同步</h3><p>单元与册次对应手里的教材。</p></div>{% include 'catalog/book_list.html' with collections=textbook_shelf %}</section>

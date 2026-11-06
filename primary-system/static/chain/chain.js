@@ -1,5 +1,6 @@
 /* 成语接龙前端：服务端权威，本文件只做渲染与提交；409 时自动重拉状态。
-   结构与交互对齐 legacy chain.html：当前词大字卡、接字目标、提示面板全量候选、龙迹最新在前。 */
+   结构与交互对齐 legacy chain.html：当前词大字卡、接字目标、提示面板全量候选、龙迹最新在前。
+   mode=duel（家长对决）为同屏轮流热座：先手每局可选，提示双方都能用、各扣各的分。 */
 'use strict';
 
 (() => {
@@ -16,9 +17,18 @@
     next: $('chain-next'), form: $('chain-form'), input: $('chain-word'),
     feedback: $('chain-feedback'), hints: $('chain-hints'), hintOptions: $('chain-hint-options'),
     hintButton: $('chain-hint-btn'), ended: $('chain-ended'), score: $('chain-score'),
+    scoreP1: $('chain-score-p1'), scoreP2: $('chain-score-p2'),
+    soloScore: $('chain-solo-score'), duelScore: $('chain-duel-score'),
+    captionSolo: $('chain-caption-solo'), captionDuel: $('chain-caption-duel'),
+    rulesSolo: $('chain-rules-solo'), rulesDuel: $('chain-rules-duel'),
+    subtitle: $('chain-subtitle'), restartBtn: $('chain-restart-btn'),
+    startChoice: $('chain-start-choice'), roundArea: $('chain-round-area'),
     length: $('chain-length'), hintsCount: $('chain-hints-count'), history: $('chain-history'),
     trail: $('chain-trail'), trailCount: $('chain-trail-count'),
   };
+
+  const isDuel = () => state.mode === 'duel';
+  const playerName = (side) => (side === 'p1' ? '孩子' : '家长');
 
   const csrf = () => decodeURIComponent((document.cookie.match(/(?:^|;\s*)primary_csrftoken=([^;]*)/) || [])[1] || '');
 
@@ -33,7 +43,8 @@
     return data;
   });
 
-  const refresh = () => fetch('/chain/api/state/', {headers: {'Accept': 'application/json'}})
+  const stateUrl = () => (isDuel() ? '/chain/api/state/?mode=duel' : '/chain/api/state/');
+  const refresh = () => fetch(stateUrl(), {headers: {'Accept': 'application/json'}})
     .then((r) => (r.ok ? r.json() : null))
     .then((data) => { if (data) { clearHints(); state = data; render(); } });
 
@@ -62,12 +73,52 @@
     if (window.SpeechKit) window.SpeechKit.speak(text, { rate: 0.85 });
   }
 
+  function renderModeChrome() {
+    const duel = isDuel();
+    els.soloScore.hidden = duel;
+    els.duelScore.hidden = !duel;
+    els.captionSolo.hidden = duel;
+    els.captionDuel.hidden = !duel;
+    els.rulesSolo.hidden = duel;
+    els.rulesDuel.hidden = !duel;
+    els.subtitle.textContent = duel
+      ? '首尾同字，不重复，和孩子轮流看看谁更厉害。'
+      : '首尾同字，不重复，和小龙轮流看看能接多长。';
+    els.restartBtn.textContent = duel ? '↻ 重开一局' : '↻ 换个开头';
+  }
+
+  function renderHistory() {
+    els.history.innerHTML = (state.history || []).map((item) => {
+      const result = item.mode === 'duel'
+        ? `${item.length} 手 · ${item.score}:${item.p2_score} ${item.ended_reason.includes('孩子获胜') ? '赢' : (item.ended_reason.includes('家长获胜') ? '负' : '')}`
+        : `${item.length} 手 · ${item.score} 分`;
+      return `<li><span>${escapeHtml(item.finished_at)}</span><span>${result}</span><span>${escapeHtml(item.ended_reason)}</span></li>`;
+    }).join('') || '<li>还没有完成的对局，接出第一局吧。</li>';
+  }
+
+  function renderStartChoice() {
+    els.turn.textContent = '先选谁先接';
+    els.startChoice.hidden = false;
+    els.roundArea.hidden = true;
+    clearHints();
+    els.trail.innerHTML = '';
+    els.trailCount.textContent = '共 0 手';
+    renderHistory();
+  }
+
   function render() {
+    renderModeChrome();
+    if (state.status === 'needs_start') { renderStartChoice(); return; }
+    els.startChoice.hidden = true;
+    els.roundArea.hidden = false;
+
     const last = state.chain[state.chain.length - 1];
     const playing = state.status === 'playing';
-    const tail = playing ? state.next_char : (last ? last.word.slice(-1) : '');
+    const duel = isDuel();
 
-    els.turn.textContent = playing ? '轮到你啦' : '本局结束';
+    els.turn.textContent = playing
+      ? (duel ? `轮到${playerName(state.turn)}出词` : '轮到你啦')
+      : '本局结束';
     els.pool.textContent = `词池 ${state.pool_count} 条成语`;
     els.poolNote.textContent = state.pool_count;
 
@@ -78,36 +129,47 @@
     els.currentMeaning.textContent = last.meaning || '暂无释义，可以在查词词典里看看。';
     els.next.textContent = playing ? state.next_char : '—';
 
-    els.score.textContent = state.score;
+    if (duel) {
+      els.scoreP1.textContent = state.score;
+      els.scoreP2.textContent = state.p2_score;
+    } else {
+      els.score.textContent = state.score;
+    }
     els.length.textContent = Math.max(0, state.chain.length - 1);
     els.hintsCount.textContent = state.hints;
 
     els.form.hidden = !playing;
     els.hintButton.hidden = !playing;
+    els.hintButton.textContent = playing
+      ? (duel ? `💡 给${playerName(state.turn)}一点提示（−5 分）` : '💡 给我一点提示（−5 分）')
+      : '';
     els.ended.hidden = playing;
     if (!playing) {
-      els.ended.innerHTML = `<h2>🎉 这条龙暂时接到底啦！</h2><p>${escapeHtml(state.ended_reason || '本局结束')}。共接 ${Math.max(0, state.chain.length - 1)} 手，得分 ${state.score}。</p>` +
-        '<button class="chain-button primary" type="button" id="chain-again">换个开头，继续玩 →</button>';
+      els.ended.innerHTML = duel
+        ? `<h2>${state.ended_reason.includes('孩子获胜') ? '🎉 孩子赢啦！' : '💪 这局家长更厉害！'}</h2>` +
+          `<p>${escapeHtml(state.ended_reason)}。比分 孩子 ${state.score} : ${state.p2_score} 家长，共接 ${Math.max(0, state.chain.length - 1)} 手。</p>` +
+          '<button class="chain-button primary" type="button" id="chain-again">再开一局 · 选先手 →</button>'
+        : `<h2>🎉 这条龙暂时接到底啦！</h2><p>${escapeHtml(state.ended_reason || '本局结束')}。共接 ${Math.max(0, state.chain.length - 1)} 手，得分 ${state.score}。</p>` +
+          '<button class="chain-button primary" type="button" id="chain-again">换个开头，继续玩 →</button>';
       const again = document.getElementById('chain-again');
-      if (again) again.addEventListener('click', restart);
+      if (again) again.addEventListener('click', duel ? showStartChoice : restart);
       clearHints();
     }
 
-    els.history.innerHTML = (state.history || []).map((item) =>
-      `<li><span>${escapeHtml(item.finished_at)}</span><span>${item.length} 手 · ${item.score} 分</span><span>${escapeHtml(item.ended_reason)}</span></li>`
-    ).join('') || '<li>还没有完成的对局，接出第一局吧。</li>';
+    renderHistory();
 
     els.trail.innerHTML = '';
     [...state.chain].reverse().forEach((item, index) => {
       const head2 = item.word.slice(0, -1), tail2 = item.word.slice(-1);
-      const who = item.by === 'partner' ? '小龙' : (item.by === 'start' ? '开局' : '你');
+      const who = {start: '开局', player: '你', partner: '小龙', p1: '孩子', p2: '家长'}[item.by] || '';
+      const otherSide = item.by === 'partner' || item.by === 'p2';
       const li = document.createElement('li');
       li.className = 'trail-entry' + (index === 0 ? ' latest' : '');
       // 已公开词条的成语点文字跳词典详情（新标签，不影响对局）；未公开的仅朗读。
       const wordEl = item.public
         ? `<a class="trail-word" href="/dictionary/${escapeHtml(item.entry_id)}/" target="_blank" rel="noopener noreferrer" title="查看词典详情">${escapeHtml(head2)}<span class="tail">${escapeHtml(tail2)}</span></a>`
         : `<button class="trail-word" type="button" data-say="${escapeHtml(item.word)}" aria-label="朗读 ${escapeHtml(item.word)}">${escapeHtml(head2)}<span class="tail">${escapeHtml(tail2)}</span></button>`;
-      li.innerHTML = `<div class="entry-top"><span class="${item.by === 'partner' ? 'entry-partner' : 'entry-player'}">${who}</span><span>${escapeHtml(item.pinyin || '')}</span></div>` +
+      li.innerHTML = `<div class="entry-top"><span class="${otherSide ? 'entry-partner' : 'entry-player'}">${who}</span><span>${escapeHtml(item.pinyin || '')}</span></div>` +
         wordEl +
         `<p class="trail-meaning">${escapeHtml(item.meaning || '')}</p>`;
       els.trail.append(li);
@@ -130,7 +192,9 @@
       clearHints();
       state = data;
       els.input.value = '';
-      showFeedback(`接上了！${gained > 0 ? '+' + gained + ' 分。' : ''}轮到小龙想一想……`, 'success');
+      showFeedback(isDuel()
+        ? `接上了！${playerName(state.turn === 'p1' ? 'p2' : 'p1')} +10 分。轮到${playerName(state.turn)}出词。`
+        : `接上了！${gained > 0 ? '+' + gained + ' 分。' : ''}轮到小龙想一想……`, 'success');
       render();
       speak(state.chain[state.chain.length - 1].word);
       els.input.focus();
@@ -181,10 +245,31 @@
       els.input.focus();
     });
   }
+
+  /* 家长对决：重开一局回到先手选择；start 动作会自动结束旧局。 */
+  function showStartChoice() {
+    state = {...state, status: 'needs_start'};
+    render();
+  }
+
+  els.startChoice.querySelectorAll('[data-first-player]').forEach((button) => button.addEventListener('click', () => {
+    api('/chain/api/start/', {first_player: button.dataset.firstPlayer}).then((data) => {
+      if (!data) return;
+      clearHints();
+      state = data;
+      showFeedback(`${playerName(state.first_player)}先手，新的一局开始啦。`, 'success');
+      render();
+      els.input.focus();
+    });
+  }));
+
   $('chain-restart-btn').addEventListener('click', () => {
-    if (state.chain.length <= 1 || window.confirm('当前对局还没结束，确定换个开头吗？')) restart();
+    if (state.status === 'needs_start') return;
+    if (state.chain.length <= 1 || window.confirm('当前对局还没结束，确定重开吗？')) {
+      if (isDuel()) showStartChoice(); else restart();
+    }
   });
 
   render();
-  els.input.focus();
+  if (state.status === 'playing' && !isDuel()) els.input.focus();
 })();

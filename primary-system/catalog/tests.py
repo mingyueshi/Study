@@ -8,6 +8,8 @@ from django.contrib.auth.models import Group
 from django.core.exceptions import ValidationError
 from django.core.management import call_command
 from django.test import TestCase
+from django.urls import reverse
+from .entry_registry import SPECIAL_ENTRIES
 from .importing import import_snapshot
 from .models import ContentItem, Grade, Module, Placement, Stage, Subject, Textbook, TextbookBook, TextbookEdition, Unit, \
     published_textbook_books
@@ -93,8 +95,19 @@ class CatalogTests(PlatformFixture):
         TextbookBook.objects.create(code='math-second', name='第二本数学', module=self.item.module,
                                     textbook=textbook, is_published=True)
         response = self.client.get('/')
-        module = next(m for m in response.context['modules'] if m.code == 'math')
-        self.assertEqual(module.available_count, 2)
+        card = next(c for c in response.context['entry_cards'] if c['name'] == '数学思维')
+        self.assertEqual(card['badge'], '2 本学习册')
+
+    def test_home_renders_every_registered_special_card(self):
+        """首页专题卡全部由 entry_registry.SPECIAL_ENTRIES 驱动，模板无逐卡硬编码。"""
+        response = self.client.get('/')
+        for spec in SPECIAL_ENTRIES:
+            self.assertContains(response, spec['name'])
+            self.assertContains(response, reverse(spec['route']))
+        # 模块卡在前、专题卡按注册顺序殿后；游客条「探索方向」也由注册表计数。
+        self.assertEqual(response.context['entry_cards'][-1]['name'], '多音字')
+        self.assertEqual(len(response.context['entry_cards']),
+                         Module.objects.filter(is_active=True).count() + len(SPECIAL_ENTRIES))
 
     def test_visibility_is_consistent_across_every_read_path(self):
         item_path = f'/items/{self.item.pk}/'

@@ -123,7 +123,7 @@ def _polyphone_card(user, _overview):
 
     summary = learning_summary(user)
     return {
-        'key': 'polyphones', 'name': '多音字', 'icon': 'literature', 'color': 'chinese',
+        'key': 'polyphones', 'name': '多音字', 'icon': 'polyphone', 'color': 'chinese',
         'url': reverse('hanzi-polyphones'),
         'url_label': '去继续练 →' if summary['asked'] else '去练一题 →',
         'headlines': [(summary['asked'], '练习题数'), (summary['correct'], '答对')],

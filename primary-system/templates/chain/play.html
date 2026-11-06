@@ -1,9 +1,15 @@
 {% extends 'base.html' %}{% load static %}{% block title %}成语接龙 · 乐学堂{% endblock %}
 {% block content %}<link rel="stylesheet" href="{% static 'chain.css' %}"><script src="{% static 'speech.js' %}" defer></script><script src="{% static 'tts.js' %}" defer></script>{{ state|json_script:"chain-state" }}
-<div class="chain-heading"><div><p class="chain-eyebrow">语文小游戏 · 不限时</p><h1>把成语接成一条龙</h1><p>首尾同字，不重复，和小龙轮流看看能接多长。</p></div><button class="chain-button secondary" type="button" id="chain-restart-btn">↻ 换个开头</button></div>
+<div class="chain-heading"><div><nav class="chain-modes" aria-label="接龙模式"><a href="{% url 'chain' %}" {% if state.mode != 'duel' %}class="on" aria-current="page"{% endif %}>单人 · 和小龙</a><a href="{% url 'chain' %}?mode=duel" {% if state.mode == 'duel' %}class="on" aria-current="page"{% endif %}>双人 · 家长对决</a></nav><p class="chain-eyebrow">语文小游戏 · 不限时</p><h1>把成语接成一条龙</h1><p id="chain-subtitle">首尾同字，不重复，和小龙轮流看看能接多长。</p></div><button class="chain-button secondary" type="button" id="chain-restart-btn">↻ 换个开头</button></div>
 <div class="chain-layout">
   <section class="game-panel panel" aria-label="接龙游戏">
     <div class="round-meta"><span class="turn-label" id="chain-turn">轮到你啦</span><span id="chain-pool"></span></div>
+    <section class="start-choice" id="chain-start-choice" aria-labelledby="chain-start-title" hidden>
+      <h2 id="chain-start-title">这局谁先接？</h2>
+      <p>系统先出一个开局成语，选好先手就轮流接龙：谁接不上，对方赢下这一局。</p>
+      <div class="start-buttons"><button class="chain-button primary" type="button" data-first-player="p1">孩子先手</button><button class="chain-button primary" type="button" data-first-player="p2">家长先手</button></div>
+    </section>
+    <div id="chain-round-area">
     <div class="current-row">
       <div class="current-info"><p class="small-label" id="chain-current-label">从这个成语开始</p>
         <button class="current-word" type="button" id="chain-read-current" data-say="" aria-label="朗读当前成语"><span id="chain-current-word"></span><span class="read-icon" aria-hidden="true">🔊</span></button>
@@ -12,7 +18,7 @@
     </div>
     <p class="current-meaning" id="chain-current-meaning"></p>
     <form id="chain-form" novalidate>
-      {% csrf_token %}<label class="answer-label" for="chain-word">你的成语</label>
+      {% csrf_token %}<label class="answer-label" for="chain-word" id="chain-word-label">你的成语</label>
       <div class="answer-row"><input id="chain-word" name="word" maxlength="4" autocomplete="off" spellcheck="false" aria-describedby="chain-feedback chain-rule" placeholder="输入四字成语"><button class="chain-button primary" type="submit" id="chain-submit">接上它 →</button></div>
       <p id="chain-feedback" class="feedback" role="status" aria-live="polite" aria-atomic="true">想一想，再把你的成语写下来。</p>
       <div class="answer-tools"><button type="button" class="hint-button" id="chain-hint-btn" aria-expanded="false" aria-controls="chain-hints">💡 给我一点提示（−5 分）</button><span id="chain-rule">四个汉字 · 只接相同的字 · 不使用谐音</span></div>
@@ -23,18 +29,22 @@
       <div class="hint-options" id="chain-hint-options"></div>
     </section>
     <div class="round-end" id="chain-ended" hidden></div>
+    </div>
   </section>
   <aside class="chain-aside">
     <section class="panel record-panel">
-      <h2>🌱 我的接龙记录</h2>
-      <div class="round-score"><strong id="chain-score">0</strong><span>本轮得分</span></div>
+      <h2>🌱 接龙记录</h2>
+      <div class="round-score" id="chain-solo-score"><strong id="chain-score">0</strong><span>本轮得分</span></div>
+      <div class="round-score duel-score" id="chain-duel-score" hidden><div><strong id="chain-score-p1">0</strong><span>孩子</span></div><div><strong id="chain-score-p2">0</strong><span>家长</span></div></div>
       <dl class="record-grid"><div><dt>已接成语</dt><dd id="chain-length">0</dd></div><div><dt>提示次数</dt><dd id="chain-hints-count">0</dd></div></dl>
-      <p class="record-caption">开头和小龙接的成语不计入成绩；提示每次 −5 分，帮你学会新成语。</p>
+      <p class="record-caption" id="chain-caption-solo">开头和小龙接的成语不计入成绩；提示每次 −5 分，帮你学会新成语。</p>
+      <p class="record-caption" id="chain-caption-duel" hidden>开局成语不计分；每接一个 +10 分，提示每次 −5 分从轮到的一方扣。</p>
       {% if not user.is_authenticated %}<p class="record-caption">游客模式：对局保存在本浏览器，<a href="{% url 'login' %}?next={{ request.path|urlencode }}">登录后</a>记录跟随账号。</p>{% endif %}
     </section>
     <section class="panel rules-panel">
       <h2>怎么玩？</h2>
-      <ol><li>下个成语的第一个字，要和上个成语的最后一个字相同。</li><li>一轮中，每个成语只能用一次。</li><li>小龙接不上时你赢；你接不上时本局结束。</li></ol>
+      <ol id="chain-rules-solo"><li>下个成语的第一个字，要和上个成语的最后一个字相同。</li><li>一轮中，每个成语只能用一次。</li><li>小龙接不上时你赢；你接不上时本局结束。</li></ol>
+      <ol id="chain-rules-duel" hidden><li>和孩子轮流接：下个成语的第一个字，要和上个成语的最后一个字相同。</li><li>一轮中，每个成语只能用一次。</li><li>谁接不上，对方赢下这一局；提示双方都能用，每次 −5 分从轮到的一方扣。</li></ol>
       <div class="rule-example"><span>学以致<b>用</b></span><span aria-hidden="true">↓</span><span><b>用</b>之不竭</span></div>
       <p class="dictionary-note">取词来自统一词库的生效版本；同音不同字不算接上，未收录的成语换一个再试。词池 <span id="chain-pool-note"></span> 条。</p>
     </section>

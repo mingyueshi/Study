@@ -83,7 +83,7 @@ flowchart TD
 
 ### P1：学科入口与学习总览
 
-玩法入口由 `catalog/entry_registry.py` 代码注册（URL 名、卡片徽标、落地页说明、学习摘要与最近动态收集器），教材模块走目录中转页；关闭模块只控制入口，并非每个独立应用的访问开关。
+玩法入口由 `catalog/entry_registry.py` 代码注册：挂在学习模块上的玩法（接龙、场景单词、音标、作文坊）在 `ENTRIES` 登记落地页说明、卡片徽标与摘要口径，不挂模块的专题玩法（飞花令、诗词地图、成语小游戏、多音字等）在 `SPECIAL_ENTRIES` 登记成首页专题卡——首页视图把模块卡与专题卡装配成同形数据，模板一个循环渲染，新增玩法只改注册表、不动模板。关闭模块只控制入口，并非每个独立应用的访问开关。
 
 学习总览由 `catalog/learning_digest.py` 聚合，首页放轻量总览卡、「我的学习」放总览卡加「最近学了什么」动态流。七个领域各出一张卡：教材掌握（`learning.Progress`，与详情页共用 `effective_status` 当前有效状态）、场景单词、成语接龙、作文坊、成语挑战（`idioms.PlayRecord`，看释义猜成语逐题、配对与表情按局）、飞花令（`poetry.FeihualingRound`，服务端判定完成、每局一条）、多音字（`hanzi.PolyphoneAnswer`，每题一条、服务端按读音表复核对错）。数字口径在各自应用的适配函数里（`learning.services.textbook_summary`、`entry_registry` 各摘要、各应用 `records` 模块），汇总只展示各自含义明确的指标与近 7 天新增，不把“读完内容”“会拼写”“玩了一局”合成一个掌握百分比。前端判分的玩法经上报端点落库（quiz/polyphones 的 report），签名回合的玩法在服务端判定完成时落库（pairs/emoji/feihualing 的 action）；页面 GET 保持零写入，游客数据挂会话键并登记进 `accounts.guest_retention` 统一清理。纯代码注册，暂不做动态插件平台。
 

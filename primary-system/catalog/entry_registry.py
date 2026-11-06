@@ -1,9 +1,10 @@
-"""玩法模块入口注册表。
+"""玩法入口注册表：模块挂载入口 + 首页专题卡，全部代码注册。
 
 教材内容走固定的目录编排，落地在「目录中转页 + 学习册列表」；玩法模块
-（接龙 / 场景单词 / 音标 / 作文坊）的入口是各自应用的独立页面，首页卡片
-一次直达。这里集中登记每个玩法的 URL 名、卡片徽标、落地页说明和「学习摘要」
-口径，避免在目录视图与模板里散落硬编码特判。
+（接龙 / 场景单词 / 音标 / 作文坊）挂在学习模块上，``ENTRIES`` 登记每个
+模块的落地页说明、卡片徽标与「学习摘要」口径。不挂模块的专题玩法（飞花令、
+成语小游戏、多音字等）由 ``SPECIAL_ENTRIES`` 登记成首页专题卡。新增一个
+玩法只改这里的注册行，模板不再出现逐卡硬编码。
 
 学习摘要只汇总各自含义明确的指标——掌握单词数、完成对局数、草稿数、本周
 新增——不把不同类型的玩法合成一个百分比。每个玩法另配一个 recent 收集器，
@@ -29,10 +30,16 @@ def _chain_summary(user):
 def _chain_recent(user, limit=8):
     from chain.models import GameRound
     rows = GameRound.objects.filter(user=user, status=GameRound.Status.FINISHED)[:limit]
-    return [{'title': '成语接龙',
-             'note': ('战胜小龙 · ' if row.ended_reason == GameRound.EndedReason.PARTNER_STUCK else '本局结束 · ') + f'{row.score} 分',
-             'when': row.finished_at or row.updated_at, 'url': reverse('chain')}
-            for row in rows]
+    items = []
+    for row in rows:
+        if row.mode == GameRound.Mode.DUEL:
+            result = '获胜' if row.ended_reason == GameRound.EndedReason.P2_STUCK else '惜败'
+            note = f'对决家长{result} · {row.score}:{row.p2_score}'
+        else:
+            note = ('战胜小龙 · ' if row.ended_reason == GameRound.EndedReason.PARTNER_STUCK else '本局结束 · ') + f'{row.score} 分'
+        items.append({'title': '成语接龙', 'note': note,
+                      'when': row.finished_at or row.updated_at, 'url': reverse('chain')})
+    return items
 
 
 def _words_summary(user):
@@ -75,7 +82,7 @@ ENTRIES = {
         'route_name': 'chain',
         'tag': '去接龙 →',
         'headline': '成语接龙已开始',
-        'blurb': '和小龙轮流接龙：用上一个成语的最后一个字接新成语的开头，接不上为止。对局、计分和提示都保存在你的账号下。',
+        'blurb': '和小龙轮流接龙，也可以开一局家长对决、同屏轮流比一比谁接不上。对局、计分和提示都保存在你的账号下。',
         'button': '进入接龙',
         'learning_summary': _chain_summary,
         'recent': _chain_recent,
@@ -112,6 +119,51 @@ ENTRIES = {
 def entry_for(code):
     """玩法模块入口；教材模块（knowledge/math/english）返回 None，走目录中转页。"""
     return ENTRIES.get(code)
+
+
+# 首页专题卡：不挂学习模块的玩法入口，注册顺序即展示顺序。
+# 字段：route（URL 名）、subject（卡片角标学科）、icon、color（卡片配色）、
+# name、tag（徽标）、blurb（一句话介绍）。新增专题只在此追加一行。
+SPECIAL_ENTRIES = (
+    {'route': 'feihualing', 'subject': '古诗词', 'icon': 'literature', 'color': 'chinese',
+     'name': '飞花令', 'tag': '开始练诗 →',
+     'blurb': '选一个令字，想一句含这个字的诗，集满五句写成自己的诗单。'},
+    {'route': 'poetry-map', 'subject': '古诗词', 'icon': 'globe', 'color': 'chinese',
+     'name': '诗词地图', 'tag': '看看这里有什么诗 →',
+     'blurb': '黄鹤楼、庐山、西湖、玉门关……背过的诗按地点摆上中国地图，去哪儿玩先查查。'},
+    {'route': 'poetry-seasons', 'subject': '古诗词', 'icon': 'seasons', 'color': 'chinese',
+     'name': '诗词四季', 'tag': '跟着季节读诗 →',
+     'blurb': '春风、夏蝉、秋月、冬雪——按季节读诗，也按思乡、送别、边塞这些心情找。'},
+    {'route': 'words-tree', 'subject': '英语', 'icon': 'tree', 'color': 'english',
+     'name': '词以类聚', 'tag': '看单词的结构 →',
+     'blurb': 'WordNet 上下位把单词挂成树：动物下面有狗、猫、熊猫。从「背场景」升级到「看结构」。'},
+    {'route': 'idiom-scenes', 'subject': '语文', 'icon': 'idioms', 'color': 'chinese',
+     'name': '场景成语', 'tag': '看看生活里的成语 →',
+     'blurb': '从学习、心情和身边的小事出发，读懂成语，学会在一句话里用它。'},
+    {'route': 'idiom-stories', 'subject': '语文', 'icon': 'history', 'color': 'chinese',
+     'name': '成语典故馆', 'tag': '读成语故事 →',
+     'blurb': '负荆请罪、三顾茅庐、望梅止渴——按典籍翻看有人物故事的成语，顺着人物线索把典故串起来。'},
+    {'route': 'idiom-quiz', 'subject': '语文', 'icon': 'quiz', 'color': 'chinese',
+     'name': '看释义猜成语', 'tag': '来猜一猜 →',
+     'blurb': '读意思，把成语缺的字补出来。难度就是亮出的提示字数——从亮 3 个字到全部藏起来。'},
+    {'route': 'idiom-emoji', 'subject': '语文', 'icon': 'emoji', 'color': 'chinese',
+     'name': '成语表情猜猜看', 'tag': '看表情猜成语 →',
+     'blurb': '看 emoji 猜成语：🐍➕🦶 是哪个？四选一点一点，猜对一个收一个。'},
+    {'route': 'idiom-pairs', 'subject': '语文', 'icon': 'pairs', 'color': 'chinese',
+     'name': '成语配对', 'tag': '连线配对 →',
+     'blurb': '左边找一个成语，右边配它的近义或反义。画蛇添足配谁？雪中送炭又配谁？'},
+    {'route': 'hanzi-polyphones', 'subject': '语文', 'icon': 'polyphone', 'color': 'chinese',
+     'name': '多音字', 'tag': '认一认多音字 →',
+     'blurb': '乐读 yuè 还是 lè？1,010 个多音字按读音看组词，再来几道「给词选读音」。'},
+)
+
+
+def special_entries():
+    """解析好的首页专题卡列表，字段与模块卡完全同形，模板一个循环渲染。"""
+    return [{'url': reverse(spec['route']), 'icon': spec['icon'], 'color_code': spec['color'],
+             'subject_label': spec['subject'], 'name': spec['name'], 'blurb': spec['blurb'],
+             'badge': spec['tag']}
+            for spec in SPECIAL_ENTRIES]
 
 
 def learning_overview(user):

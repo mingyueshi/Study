@@ -109,3 +109,21 @@ button:disabled { cursor: default; opacity: .5; }
 .hint-dict:hover { text-decoration: underline; }
 a.trail-word { text-decoration: none; }
 a.trail-word:hover .tail { text-decoration: underline; }
+
+/* 模式切换与家长对决 */
+.chain-modes { display: flex; gap: 8px; margin-bottom: 12px; }
+.chain-modes a { display: inline-flex; align-items: center; min-height: 38px; padding: 6px 16px; border: 1px solid var(--line); border-radius: 999px; background: #fff; color: var(--muted); font-size: 15px; font-weight: 700; }
+.chain-modes a.on { border-color: var(--chain); background: var(--chain-soft); color: var(--chain); }
+.chain-modes a:hover { color: var(--chain); }
+
+.start-choice { display: flex; flex-direction: column; gap: 14px; padding: 34px 10px; text-align: center; }
+.start-choice h2 { margin: 0; }
+.start-choice p { margin: 0 auto; max-width: 34em; color: var(--muted); }
+.start-buttons { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+
+.round-score.duel-score { display: flex; gap: 34px; }
+.round-score.duel-score div { display: flex; align-items: baseline; gap: 10px; }
+.round-score.duel-score strong { font-size: 44px; }
+
+/* flex 容器会覆盖 [hidden] 的默认 display:none，显式压住 */
+.round-score[hidden], .start-choice[hidden] { display: none !important; }

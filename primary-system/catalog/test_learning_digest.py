@@ -42,6 +42,9 @@ class DigestDataTests(PlatformFixture):
         GameRound.objects.create(user=cls.user, chain=[], score=12, status='finished',
                                  ended_reason='partner_stuck', finished_at=timezone.now())
         GameRound.objects.create(user=cls.user, chain=[], score=3, status='playing')
+        GameRound.objects.create(user=cls.user, chain=[], score=14, p2_score=8, mode='duel',
+                                 first_player='p2', status='finished',
+                                 ended_reason='p2_stuck', finished_at=timezone.now())
         WritingDraft.objects.create(user=cls.user, title='我的假期')
         PlayRecord.objects.create(user=cls.user, game=PlayRecord.Game.QUIZ, size=1, correct=1,
                                   extra={'headword': '守株待兔', 'level': 3, 'source': 'common'})
@@ -60,7 +63,8 @@ class DigestDataTests(PlatformFixture):
         self.assertEqual(by_key['textbook']['headlines'], [(2, '开始学习'), (1, '已经掌握'), (0, '我的收藏')])
         self.assertIn('数学 1', by_key['textbook']['footnote'])
         self.assertEqual(by_key['words']['headlines'], [(1, '已掌握'), (2, '学过')])
-        self.assertEqual(by_key['chain']['headlines'], [(1, '完成对局'), (12, '最高分')])
+        # 对决局的 score 同为孩子得分，计入完成数与最高分。
+        self.assertEqual(by_key['chain']['headlines'], [(2, '完成对局'), (14, '最高分')])
         self.assertEqual(by_key['writing']['headlines'], [(1, '草稿')])
         self.assertEqual(by_key['idioms']['headlines'], [(1, '猜成语答题'), (1, '猜对'), (1, '完成局数')])
         self.assertEqual(by_key['feihualing']['headlines'], [(1, '完成次数'), (1, '集满五句')])
@@ -74,7 +78,7 @@ class DigestDataTests(PlatformFixture):
         GameRound.objects.filter(user=self.user, status='finished').update(updated_at=past, finished_at=past)
         digest = learning_digest(self.user)
         chain = next(card for card in digest['areas'] if card['key'] == 'chain')
-        self.assertEqual(chain['headlines'], [(1, '完成对局'), (12, '最高分')])
+        self.assertEqual(chain['headlines'], [(2, '完成对局'), (14, '最高分')])
         self.assertEqual(chain['week'], '')
 
     def test_recent_merges_and_sorts_desc(self):
@@ -89,6 +93,9 @@ class DigestDataTests(PlatformFixture):
         quiz_row = next(row for row in rows if row['title'] == '守株待兔')
         self.assertEqual(quiz_row['note'], '看释义猜成语 · 答对')
         self.assertTrue(quiz_row['url'].endswith('/idioms/quiz/'))
+        # 接龙动态行按模式分支文案：对决局显示比分与胜负。
+        duel_row = next(row for row in rows if row['note'].startswith('对决家长'))
+        self.assertEqual(duel_row['note'], '对决家长获胜 · 14:8')
 
     def test_guest_has_no_cross_account_rows(self):
         other = get_user_model().objects.create_user('other')

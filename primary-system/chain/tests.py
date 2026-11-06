@@ -524,3 +524,163 @@ class EmptyChainTests(TestCase):
         self.assertIn('no-store', response.headers['Cache-Control'])
 
 
+
+
+class ChainDuelTests(TestCase):
+    """家长对决（mode=duel）：同屏轮流、每局选先手、提示各扣各的分。
+
+    固定开局词「表里如一」（尾字「一」）保证确定性；死局词「一鸣惊人」
+    之后无任何候选，用于两种终局。
+    """
+
+    CHAIN_WORDS = ['一心一意', '意气风发', '发扬光大', '大功告成', '大快人心', '表里如一']
+
+    @classmethod
+    def setUpTestData(cls):
+        rows = [idiom_row(str(i), word, f'{word} pinyin') for i, word in enumerate(cls.CHAIN_WORDS)]
+        rows.append(idiom_row('dead', '一鸣惊人', '一鸣惊人 pinyin'))  # 接「人」无候选 → 对方卡死
+        cls.release = stage_active(rows)
+        cls.entries = entries_of(cls.release)
+        for word, entry in cls.entries.items():
+            make_chain(entry, game_eligible=word in cls.CHAIN_WORDS or word == '一鸣惊人')
+        cls.user = get_user_model().objects.create_user('duel-player', password=get_random_string(24))
+
+    def fixed_duel(self, first_player):
+        """固定开局词的对决局：绕开随机起点。"""
+        entry = self.entries['表里如一']
+        chain_word = ChainWord.objects.get(entry=entry)
+        return GameRound.objects.create(user=self.user, mode='duel', first_player=first_player, chain=[{
+            'entry_id': str(entry.pk), 'word': '表里如一', 'pinyin': '', 'meaning': '',
+            'by': 'start', 'last_char': chain_word.last_char,
+        }])
+
+    def setUp(self):
+        self.client.force_login(self.user)
+
+    def duel_state(self):
+        response = self.client.get('/chain/api/state/?mode=duel')
+        self.assertEqual(response.status_code, 200)
+        return response.json()
+
+    def start(self, first_player):
+        response = self.client.post('/chain/api/start/', data=json.dumps({'first_player': first_player}),
+                                    content_type='application/json')
+        self.assertEqual(response.status_code, 200, response.content.decode())
+        return response.json()
+
+    def play(self, word, state):
+        return self.client.post('/chain/api/play/', data=json.dumps(
+            {'round_id': state['id'], 'revision': state['revision'], 'word': word}), content_type='application/json')
+
+    def hint(self, state):
+        return self.client.post('/chain/api/hint/', data=json.dumps(
+            {'round_id': state['id'], 'revision': state['revision']}), content_type='application/json')
+
+    def test_needs_start_then_first_player_choice(self):
+        state = self.duel_state()
+        self.assertEqual(state['status'], 'needs_start')
+        self.assertEqual(state['mode'], 'duel')
+        self.assertEqual(state['chain'], [])
+        started = self.start('p2')
+        self.assertEqual(started['status'], 'playing')
+        self.assertEqual(started['first_player'], 'p2')
+        self.assertEqual(started['turn'], 'p2')
+        self.assertEqual((started['score'], started['p2_score']), (0, 0))
+        self.assertEqual(len(started['chain']), 1)
+        # 开局请求缺先手 → 400。
+        rejected = self.client.post('/chain/api/start/', data=json.dumps({}), content_type='application/json')
+        self.assertEqual(rejected.status_code, 400)
+
+    def test_solo_and_duel_rounds_do_not_interfere(self):
+        solo = self.client.get('/chain/api/state/').json()
+        self.assertEqual(solo['mode'], 'solo')
+        duel = self.start('p1')
+        again_solo = self.client.get('/chain/api/state/').json()
+        self.assertEqual(again_solo['mode'], 'solo')
+        self.assertEqual(again_solo['id'], solo['id'])
+        again_duel = self.duel_state()
+        self.assertEqual(again_duel['id'], duel['id'])
+        self.assertEqual(again_duel['turn'], 'p1')
+
+    def test_turn_alternates_and_scores_split(self):
+        self.fixed_duel('p2')
+        state = self.duel_state()
+        self.assertEqual(state['turn'], 'p2')
+        response = self.play('一心一意', state)
+        self.assertEqual(response.status_code, 200)
+        state = response.json()
+        self.assertEqual(state['chain'][-1]['by'], 'p2')
+        self.assertEqual((state['score'], state['p2_score']), (0, 10))
+        self.assertEqual(state['turn'], 'p1')
+        response = self.play('意气风发', state)
+        state = response.json()
+        self.assertEqual(state['chain'][-1]['by'], 'p1')
+        self.assertEqual((state['score'], state['p2_score']), (10, 10))
+        self.assertEqual(state['turn'], 'p2')
+        # 没有陪练回手：每次出词链只长一手。
+        self.assertEqual(len(state['chain']), 3)
+
+    def test_rejected_moves_enforced_in_duel(self):
+        self.fixed_duel('p1')
+        state = self.duel_state()
+        cases = [
+            ('一心', '请输入四字成语。'),
+            ('天气很好', '未收录这个成语，请尝试词库中的其他成语。'),
+            ('表里如一', '这个成语已经用过了，换一个吧。'),
+        ]
+        for value, message in cases:
+            response = self.play(value, state)
+            self.assertEqual(response.status_code, 400)
+            self.assertEqual(response.json()['error'], message)
+        # 接上一个合法词后再用错字头，验证接龙校验。
+        state = self.play('一心一意', state).json()
+        response = self.play('大功告成', state)
+        self.assertEqual(response.json()['error'], '请以“意”字开头，不使用谐音。')
+
+    def test_dead_end_finishes_with_winner_scores(self):
+        # 家长先手接死局词 → 孩子无词可接，家长胜。
+        self.fixed_duel('p2')
+        state = self.play('一鸣惊人', self.duel_state()).json()
+        self.assertEqual(state['status'], 'finished')
+        self.assertEqual(state['ended_reason'], '孩子无词可接，家长获胜')
+        self.assertEqual((state['score'], state['p2_score']), (0, 10))
+        # 孩子先手接死局词 → 家长无词可接，孩子胜。
+        self.fixed_duel('p1')
+        state = self.play('一鸣惊人', self.duel_state()).json()
+        self.assertEqual(state['ended_reason'], '家长无词可接，孩子获胜')
+        self.assertEqual((state['score'], state['p2_score']), (10, 0))
+
+    def test_hint_deducts_from_current_player(self):
+        self.fixed_duel('p2')
+        state = self.hint(self.duel_state()).json()
+        self.assertEqual((state['score'], state['p2_score'], state['hints']), (0, 0, 1))
+        self.assertTrue(state['hint'])
+        state = self.play('一心一意', state).json()
+        self.assertEqual((state['score'], state['p2_score']), (0, 10))
+        state = self.play('意气风发', state).json()
+        self.assertEqual((state['score'], state['p2_score']), (10, 10))
+        response = self.hint(state)
+        self.assertEqual(response.status_code, 200)
+        state = response.json()
+        # 孩子接完轮回家长：这次提示扣家长的分，孩子的分不动。
+        self.assertEqual((state['score'], state['p2_score'], state['hints']), (10, 5, 2))
+
+    def test_stale_revision_conflicts(self):
+        self.fixed_duel('p1')
+        state = self.duel_state()
+        response = self.client.post('/chain/api/play/', data=json.dumps(
+            {'round_id': state['id'], 'revision': state['revision'] - 1, 'word': '一心一意'}),
+            content_type='application/json')
+        self.assertEqual(response.status_code, 409)
+
+    def test_start_replaces_playing_duel_round(self):
+        self.fixed_duel('p1')
+        state = self.play('一心一意', self.duel_state()).json()
+        second = self.start('p2')
+        self.assertNotEqual(second['id'], state['id'])
+        self.assertEqual(second['first_player'], 'p2')
+        self.assertEqual(len(second['chain']), 1)
+        history = second['history']
+        self.assertEqual(history[0]['mode'], 'duel')
+        self.assertEqual(history[0]['ended_reason'], '手动重开')
+        self.assertEqual(history[0]['score'], 10)
