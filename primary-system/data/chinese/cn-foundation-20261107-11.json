@@ -1,0 +1,672 @@
+{
+ "schema_version": 1,
+ "batch_id": "cn-foundation-20261107-11",
+ "reviewer": "AI: ZCode 主控（独立逐条复核）",
+ "entries": [
+  {
+   "key": "cn13-001",
+   "selection": {
+    "domain": "target",
+    "reference_id": "288",
+    "object_id": "5347a9a3-e098-4a4b-9873-ba2ff412ffc6",
+    "label": "happy",
+    "positions": [
+     {
+      "scenario": "u-feelings",
+      "order": 0
+     }
+    ],
+    "sense_id": "8d633218-1897-49c9-acda-ef50218d4878",
+    "pronunciation_id": "7192e9bd-a246-4896-a36b-ad2d6d9f4d64",
+    "evidence_id": "c3493f5a-995a-4c47-a341-df33aa4598b9",
+    "snapshot": {
+     "sense_revision": 0,
+     "definition": "",
+     "pronunciation_revision": 0,
+     "pronunciation": ""
+    },
+    "source_code": "primary-words",
+    "source_key": "happy",
+    "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+    "release_version": "scenario-0ad041fb6eac6918338efda4",
+    "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+    "lexical_hash": "8120edde02ed6f41aeb2d93df23de33c2134163b436ccc0a5f760ef47232cf20",
+    "raw_hash": "d942f6cda56a9e9827dbb16257c72d488f531a34fe30528db7d5df19dd4a393c",
+    "gloss_language": "zh",
+    "source_definition": "adj. 开心的；快乐的",
+    "source_pronunciation": "/ˈhæpi/",
+    "pronunciation_reviewed": true,
+    "legacy_chinese": "adj. 开心的；快乐的",
+    "chinese_version_id": null,
+    "presentation_revision": 0,
+    "selection_revision": null,
+    "status": "来源一致",
+    "category": "已有中文未经本轮核对",
+    "binding_key": "[\"8d633218-1897-49c9-acda-ef50218d4878\", \"7192e9bd-a246-4896-a36b-ad2d6d9f4d64\", \"c3493f5a-995a-4c47-a341-df33aa4598b9\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+   },
+   "text": "adj. 开心的；快乐的",
+   "example": "",
+   "kind": "teaching",
+   "origin": "source",
+   "generation_tool": "",
+   "author_label": "既有教学来源；ZCode 整理",
+   "learning_effect": "same",
+   "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+   "review_status": "approved"
+  },
+  {
+   "key": "cn13-002",
+   "selection": {
+    "domain": "target",
+    "reference_id": "289",
+    "object_id": "58187c13-bd14-4870-a7b3-9d7bd0703d93",
+    "label": "sad",
+    "positions": [
+     {
+      "scenario": "u-feelings",
+      "order": 0
+     }
+    ],
+    "sense_id": "962b1b37-1e7c-4030-83e7-f442dd4003dd",
+    "pronunciation_id": "0b0080bf-72d6-4aea-baaf-fd048ff0dea6",
+    "evidence_id": "38810a32-f715-4153-8a15-742f8024d84f",
+    "snapshot": {
+     "sense_revision": 0,
+     "definition": "",
+     "pronunciation_revision": 0,
+     "pronunciation": ""
+    },
+    "source_code": "primary-words",
+    "source_key": "sad",
+    "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+    "release_version": "scenario-0ad041fb6eac6918338efda4",
+    "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+    "lexical_hash": "9626bb6f8f1d3f22dbe8943d2c441c9f791ee9e13174f4874e55ab3593903858",
+    "raw_hash": "82842dcbefc7f6c5b8921e147be2b1d59c5ebf3c489c2ca70df8688ef73a3737",
+    "gloss_language": "zh",
+    "source_definition": "adj. 伤心的；难过的",
+    "source_pronunciation": "/sæd/",
+    "pronunciation_reviewed": true,
+    "legacy_chinese": "adj. 伤心的；难过的",
+    "chinese_version_id": null,
+    "presentation_revision": 0,
+    "selection_revision": null,
+    "status": "来源一致",
+    "category": "已有中文未经本轮核对",
+    "binding_key": "[\"962b1b37-1e7c-4030-83e7-f442dd4003dd\", \"0b0080bf-72d6-4aea-baaf-fd048ff0dea6\", \"38810a32-f715-4153-8a15-742f8024d84f\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+   },
+   "text": "adj. 伤心的；难过的",
+   "example": "",
+   "kind": "teaching",
+   "origin": "source",
+   "generation_tool": "",
+   "author_label": "既有教学来源；ZCode 整理",
+   "learning_effect": "same",
+   "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+   "review_status": "approved"
+  },
+  {
+   "key": "cn13-003",
+   "selection": {
+    "domain": "target",
+    "reference_id": "290",
+    "object_id": "697986e3-c533-465c-a3ec-046789f67a34",
+    "label": "angry",
+    "positions": [
+     {
+      "scenario": "u-feelings",
+      "order": 0
+     }
+    ],
+    "sense_id": "04581b06-0b32-4bb4-8c6a-9777cbade801",
+    "pronunciation_id": "74099b5c-95ae-4a4d-8ffd-0dfed16c5e4e",
+    "evidence_id": "e5a78771-88cf-47cf-a6b1-1a8dd210ccdf",
+    "snapshot": {
+     "sense_revision": 0,
+     "definition": "",
+     "pronunciation_revision": 0,
+     "pronunciation": ""
+    },
+    "source_code": "primary-words",
+    "source_key": "angry",
+    "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+    "release_version": "scenario-0ad041fb6eac6918338efda4",
+    "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+    "lexical_hash": "20b0cb04e93e2a0cb3f2a209c21959d5e7bd4392e783fd2d117cfdfe8b9faf53",
+    "raw_hash": "b83aa40be48c6c286453a8c0b5a4924c63c7a4621090635f7c61d3d28473268b",
+    "gloss_language": "zh",
+    "source_definition": "adj. 生气的",
+    "source_pronunciation": "/ˈæŋɡri/",
+    "pronunciation_reviewed": true,
+    "legacy_chinese": "adj. 生气的",
+    "chinese_version_id": null,
+    "presentation_revision": 0,
+    "selection_revision": null,
+    "status": "来源一致",
+    "category": "已有中文未经本轮核对",
+    "binding_key": "[\"04581b06-0b32-4bb4-8c6a-9777cbade801\", \"74099b5c-95ae-4a4d-8ffd-0dfed16c5e4e\", \"e5a78771-88cf-47cf-a6b1-1a8dd210ccdf\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+   },
+   "text": "adj. 生气的",
+   "example": "",
+   "kind": "teaching",
+   "origin": "source",
+   "generation_tool": "",
+   "author_label": "既有教学来源；ZCode 整理",
+   "learning_effect": "same",
+   "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+   "review_status": "approved"
+  },
+  {
+   "key": "cn13-004",
+   "selection": {
+    "domain": "target",
+    "reference_id": "291",
+    "object_id": "b5d8bc8d-762f-4548-83e5-ad0f6ab3922f",
+    "label": "tired",
+    "positions": [
+     {
+      "scenario": "u-feelings",
+      "order": 0
+     }
+    ],
+    "sense_id": "0efbd367-aedd-47c2-9f45-b4d3c01c10b8",
+    "pronunciation_id": "45f3dc73-dbb5-4ca0-8da2-6bb3c109fd03",
+    "evidence_id": "b7836e8b-7adc-4de6-ab57-3e7f45d3a25d",
+    "snapshot": {
+     "sense_revision": 0,
+     "definition": "",
+     "pronunciation_revision": 0,
+     "pronunciation": ""
+    },
+    "source_code": "primary-words",
+    "source_key": "tired",
+    "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+    "release_version": "scenario-0ad041fb6eac6918338efda4",
+    "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+    "lexical_hash": "22005cd6847ee5e14a57f7caec3be924f9e3819fabad2af8b85478f0cbef7c05",
+    "raw_hash": "19323c25778ff0f64aace7bc4e8dbb43b453a2513f6cfd0c7825f4e4b15d7223",
+    "gloss_language": "zh",
+    "source_definition": "adj. 疲倦的；累的",
+    "source_pronunciation": "/ˈtaɪəd/",
+    "pronunciation_reviewed": true,
+    "legacy_chinese": "adj. 疲倦的；累的",
+    "chinese_version_id": null,
+    "presentation_revision": 0,
+    "selection_revision": null,
+    "status": "来源一致",
+    "category": "已有中文未经本轮核对",
+    "binding_key": "[\"0efbd367-aedd-47c2-9f45-b4d3c01c10b8\", \"45f3dc73-dbb5-4ca0-8da2-6bb3c109fd03\", \"b7836e8b-7adc-4de6-ab57-3e7f45d3a25d\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+   },
+   "text": "adj. 疲倦的；累的",
+   "example": "",
+   "kind": "teaching",
+   "origin": "source",
+   "generation_tool": "",
+   "author_label": "既有教学来源；ZCode 整理",
+   "learning_effect": "same",
+   "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+   "review_status": "approved"
+  },
+  {
+   "key": "cn13-005",
+   "selection": {
+    "domain": "target",
+    "reference_id": "292",
+    "object_id": "56179dc2-3e01-413c-9b8f-be1cc564341e",
+    "label": "hungry",
+    "positions": [
+     {
+      "scenario": "u-feelings",
+      "order": 0
+     }
+    ],
+    "sense_id": "71f29907-162e-4f1f-af96-42ca2b4eab7e",
+    "pronunciation_id": "b67e2d21-bc63-4289-a6d2-23d7b32f9dbd",
+    "evidence_id": "5506c4b9-22ae-4eb6-8178-c8904a3fa042",
+    "snapshot": {
+     "sense_revision": 0,
+     "definition": "",
+     "pronunciation_revision": 0,
+     "pronunciation": ""
+    },
+    "source_code": "primary-words",
+    "source_key": "hungry",
+    "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+    "release_version": "scenario-0ad041fb6eac6918338efda4",
+    "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+    "lexical_hash": "3cfb55818e4f1309d2d8dad68c6df397617225d16f374cbd1617ab41d70e5079",
+    "raw_hash": "de794cb95428c0542a69b60e574dee362056ad012171fa4a07740c3d474d13f9",
+    "gloss_language": "zh",
+    "source_definition": "adj. 饥饿的",
+    "source_pronunciation": "/ˈhʌŋɡri/",
+    "pronunciation_reviewed": true,
+    "legacy_chinese": "adj. 饥饿的",
+    "chinese_version_id": null,
+    "presentation_revision": 0,
+    "selection_revision": null,
+    "status": "来源一致",
+    "category": "已有中文未经本轮核对",
+    "binding_key": "[\"71f29907-162e-4f1f-af96-42ca2b4eab7e\", \"b67e2d21-bc63-4289-a6d2-23d7b32f9dbd\", \"5506c4b9-22ae-4eb6-8178-c8904a3fa042\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+   },
+   "text": "adj. 饥饿的",
+   "example": "",
+   "kind": "teaching",
+   "origin": "source",
+   "generation_tool": "",
+   "author_label": "既有教学来源；ZCode 整理",
+   "learning_effect": "same",
+   "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+   "review_status": "approved"
+  },
+  {
+   "key": "cn13-006",
+   "selection": {
+    "domain": "target",
+    "reference_id": "293",
+    "object_id": "9b3307c8-b585-4bb3-b6e6-7293049e34d1",
+    "label": "thirsty",
+    "positions": [
+     {
+      "scenario": "u-feelings",
+      "order": 0
+     }
+    ],
+    "sense_id": "86830be0-5294-4c51-978b-413114f341ac",
+    "pronunciation_id": "26354418-a2b8-4718-bcc7-80a63ba8deff",
+    "evidence_id": "3839e557-6953-47c4-993c-a4e78d625f93",
+    "snapshot": {
+     "sense_revision": 0,
+     "definition": "",
+     "pronunciation_revision": 0,
+     "pronunciation": ""
+    },
+    "source_code": "primary-words",
+    "source_key": "thirsty",
+    "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+    "release_version": "scenario-0ad041fb6eac6918338efda4",
+    "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+    "lexical_hash": "4a4fa593bd6eaf2c923065688e3cc10081aebe00e524a776eeba99a85fc1d158",
+    "raw_hash": "19af9237e2cf35895b3169fd48efb4b9bdbf0ca5372fe911fec0c7e43ca3a033",
+    "gloss_language": "zh",
+    "source_definition": "adj. 渴的",
+    "source_pronunciation": "/ˈθɜːsti/",
+    "pronunciation_reviewed": true,
+    "legacy_chinese": "adj. 渴的",
+    "chinese_version_id": null,
+    "presentation_revision": 0,
+    "selection_revision": null,
+    "status": "来源一致",
+    "category": "已有中文未经本轮核对",
+    "binding_key": "[\"86830be0-5294-4c51-978b-413114f341ac\", \"26354418-a2b8-4718-bcc7-80a63ba8deff\", \"3839e557-6953-47c4-993c-a4e78d625f93\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+   },
+   "text": "adj. 渴的",
+   "example": "",
+   "kind": "teaching",
+   "origin": "source",
+   "generation_tool": "",
+   "author_label": "既有教学来源；ZCode 整理",
+   "learning_effect": "same",
+   "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+   "review_status": "approved"
+  },
+  {
+   "key": "cn13-007",
+   "selection": {
+    "domain": "target",
+    "reference_id": "294",
+    "object_id": "b6a4d039-cb1b-4411-83c6-ff8da2ce14db",
+    "label": "scared",
+    "positions": [
+     {
+      "scenario": "u-feelings",
+      "order": 0
+     }
+    ],
+    "sense_id": "5e9d4f3e-d9a5-4f40-a670-4359545fe066",
+    "pronunciation_id": "52d5875d-d01e-4552-bff7-1ad4cb953cb6",
+    "evidence_id": "f9299373-0e32-4d1d-97e7-2b940e035d27",
+    "snapshot": {
+     "sense_revision": 0,
+     "definition": "",
+     "pronunciation_revision": 0,
+     "pronunciation": ""
+    },
+    "source_code": "primary-words",
+    "source_key": "scared",
+    "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+    "release_version": "scenario-0ad041fb6eac6918338efda4",
+    "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+    "lexical_hash": "69a9c8b60073f5ac4a586bb53f27c6dfd56bd179a03377f888ac7997df0fd183",
+    "raw_hash": "4da2bd2ddfeb66651b700b3389e02a9f0ff16667467aa20f945057487a5ab29e",
+    "gloss_language": "zh",
+    "source_definition": "adj. 害怕的",
+    "source_pronunciation": "/skeəd/",
+    "pronunciation_reviewed": true,
+    "legacy_chinese": "adj. 害怕的",
+    "chinese_version_id": null,
+    "presentation_revision": 0,
+    "selection_revision": null,
+    "status": "来源一致",
+    "category": "已有中文未经本轮核对",
+    "binding_key": "[\"5e9d4f3e-d9a5-4f40-a670-4359545fe066\", \"52d5875d-d01e-4552-bff7-1ad4cb953cb6\", \"f9299373-0e32-4d1d-97e7-2b940e035d27\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+   },
+   "text": "adj. 害怕的",
+   "example": "",
+   "kind": "teaching",
+   "origin": "source",
+   "generation_tool": "",
+   "author_label": "既有教学来源；ZCode 整理",
+   "learning_effect": "same",
+   "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+   "review_status": "approved"
+  },
+  {
+   "key": "cn13-008",
+   "selection": {
+    "domain": "target",
+    "reference_id": "295",
+    "object_id": "a6c56c91-4ab0-4b42-8bc2-d49e3b127d9a",
+    "label": "excited",
+    "positions": [
+     {
+      "scenario": "u-feelings",
+      "order": 0
+     }
+    ],
+    "sense_id": "a9ec8447-5225-4f6d-bb54-7e388798f3ed",
+    "pronunciation_id": "a6454147-a13a-46d6-92e1-b9ddd7d34bc7",
+    "evidence_id": "edf639db-76a8-404b-9fcc-8a5002e24cab",
+    "snapshot": {
+     "sense_revision": 0,
+     "definition": "",
+     "pronunciation_revision": 0,
+     "pronunciation": ""
+    },
+    "source_code": "primary-words",
+    "source_key": "excited",
+    "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+    "release_version": "scenario-0ad041fb6eac6918338efda4",
+    "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+    "lexical_hash": "5e6139d3365ef6e21d1593f0b4989974355b4873df26e047dc509763e16affcd",
+    "raw_hash": "2f53cceb5581568ab39c3951335889d57d5338f60a8acc4fa82c5dc98ed5d66f",
+    "gloss_language": "zh",
+    "source_definition": "adj. 兴奋的；激动的",
+    "source_pronunciation": "/ɪkˈsaɪtɪd/",
+    "pronunciation_reviewed": true,
+    "legacy_chinese": "adj. 兴奋的；激动的",
+    "chinese_version_id": null,
+    "presentation_revision": 0,
+    "selection_revision": null,
+    "status": "来源一致",
+    "category": "已有中文未经本轮核对",
+    "binding_key": "[\"a9ec8447-5225-4f6d-bb54-7e388798f3ed\", \"a6454147-a13a-46d6-92e1-b9ddd7d34bc7\", \"edf639db-76a8-404b-9fcc-8a5002e24cab\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+   },
+   "text": "adj. 兴奋的；激动的",
+   "example": "",
+   "kind": "teaching",
+   "origin": "source",
+   "generation_tool": "",
+   "author_label": "既有教学来源；ZCode 整理",
+   "learning_effect": "same",
+   "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+   "review_status": "approved"
+  },
+  {
+   "key": "cn13-009",
+   "selection": {
+    "domain": "target",
+    "reference_id": "296",
+    "object_id": "8419de11-cc10-414a-9128-6e3777e16137",
+    "label": "worried",
+    "positions": [
+     {
+      "scenario": "u-feelings",
+      "order": 0
+     }
+    ],
+    "sense_id": "f9865406-152c-4073-87e2-77f0ffe24845",
+    "pronunciation_id": "811453c7-65ad-458b-83dd-a078d0e1d9a6",
+    "evidence_id": "17472347-1e1c-43d8-b2db-a505e1eb233e",
+    "snapshot": {
+     "sense_revision": 0,
+     "definition": "",
+     "pronunciation_revision": 0,
+     "pronunciation": ""
+    },
+    "source_code": "primary-words",
+    "source_key": "worried",
+    "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+    "release_version": "scenario-0ad041fb6eac6918338efda4",
+    "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+    "lexical_hash": "ef1a6466530dc0d86709eff32e4766ab2c76ea4336d6f92075515cc012c0b495",
+    "raw_hash": "c8239bb00405a4708a42b973b6347bc7c18d180fc0a2add3615302876e275090",
+    "gloss_language": "zh",
+    "source_definition": "adj. 担心的",
+    "source_pronunciation": "/ˈwʌrid/",
+    "pronunciation_reviewed": true,
+    "legacy_chinese": "adj. 担心的",
+    "chinese_version_id": null,
+    "presentation_revision": 0,
+    "selection_revision": null,
+    "status": "来源一致",
+    "category": "已有中文未经本轮核对",
+    "binding_key": "[\"f9865406-152c-4073-87e2-77f0ffe24845\", \"811453c7-65ad-458b-83dd-a078d0e1d9a6\", \"17472347-1e1c-43d8-b2db-a505e1eb233e\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+   },
+   "text": "adj. 担心的",
+   "example": "",
+   "kind": "teaching",
+   "origin": "source",
+   "generation_tool": "",
+   "author_label": "既有教学来源；ZCode 整理",
+   "learning_effect": "same",
+   "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+   "review_status": "approved"
+  },
+  {
+   "key": "cn13-010",
+   "selection": {
+    "domain": "target",
+    "reference_id": "297",
+    "object_id": "3e6b116d-2994-4432-9353-e3e111e31a04",
+    "label": "smile",
+    "positions": [
+     {
+      "scenario": "u-feelings",
+      "order": 0
+     }
+    ],
+    "sense_id": "aab6ae1a-cad1-4ace-b5c4-6b19a95a60ba",
+    "pronunciation_id": "e5523889-7fab-4d14-940b-7e26f2ec3a57",
+    "evidence_id": "2856e235-019c-45ae-9990-db441811e239",
+    "snapshot": {
+     "sense_revision": 0,
+     "definition": "",
+     "pronunciation_revision": 0,
+     "pronunciation": ""
+    },
+    "source_code": "primary-words",
+    "source_key": "smile",
+    "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+    "release_version": "scenario-0ad041fb6eac6918338efda4",
+    "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+    "lexical_hash": "920b61666b86a72cc3232246242dcdbd9a81b0bfd493884976543ee2fe6ec2bf",
+    "raw_hash": "0abeef96b2fa0a807edde3a2cf2737455fee769371f1683d5cd1364092bdf259",
+    "gloss_language": "zh",
+    "source_definition": "v./n. 微笑",
+    "source_pronunciation": "/smaɪl/",
+    "pronunciation_reviewed": true,
+    "legacy_chinese": "v./n. 微笑",
+    "chinese_version_id": null,
+    "presentation_revision": 0,
+    "selection_revision": null,
+    "status": "来源一致",
+    "category": "已有中文未经本轮核对",
+    "binding_key": "[\"aab6ae1a-cad1-4ace-b5c4-6b19a95a60ba\", \"e5523889-7fab-4d14-940b-7e26f2ec3a57\", \"2856e235-019c-45ae-9990-db441811e239\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+   },
+   "text": "v./n. 微笑",
+   "example": "",
+   "kind": "teaching",
+   "origin": "source",
+   "generation_tool": "",
+   "author_label": "既有教学来源；ZCode 整理",
+   "learning_effect": "same",
+   "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+   "review_status": "approved"
+  },
+  {
+   "key": "cn13-011",
+   "selection": {
+    "domain": "target",
+    "reference_id": "298",
+    "object_id": "74781ab3-22ea-417c-a023-599a5bcd40c4",
+    "label": "laugh",
+    "positions": [
+     {
+      "scenario": "u-feelings",
+      "order": 0
+     }
+    ],
+    "sense_id": "e6c4a48b-ec23-41b5-baa5-36e885e80103",
+    "pronunciation_id": "f66e4bc9-3567-47be-bfb9-e470e3132dde",
+    "evidence_id": "85bb87c7-61a6-4a14-bfb3-dcadda1e1864",
+    "snapshot": {
+     "sense_revision": 0,
+     "definition": "",
+     "pronunciation_revision": 0,
+     "pronunciation": ""
+    },
+    "source_code": "primary-words",
+    "source_key": "laugh",
+    "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+    "release_version": "scenario-0ad041fb6eac6918338efda4",
+    "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+    "lexical_hash": "88a5d0894f1635ece5c431781a6933fece1a287cd66133264d3ba538b07c7f44",
+    "raw_hash": "b7c30467796e2a2ecad28a741b4799a164ef1f0c4175baaf3052f6c28e1c8745",
+    "gloss_language": "zh",
+    "source_definition": "v. 笑；大笑",
+    "source_pronunciation": "/lɑːf/",
+    "pronunciation_reviewed": true,
+    "legacy_chinese": "v. 笑；大笑",
+    "chinese_version_id": null,
+    "presentation_revision": 0,
+    "selection_revision": null,
+    "status": "来源一致",
+    "category": "已有中文未经本轮核对",
+    "binding_key": "[\"e6c4a48b-ec23-41b5-baa5-36e885e80103\", \"f66e4bc9-3567-47be-bfb9-e470e3132dde\", \"85bb87c7-61a6-4a14-bfb3-dcadda1e1864\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+   },
+   "text": "v. 笑；大笑",
+   "example": "",
+   "kind": "teaching",
+   "origin": "source",
+   "generation_tool": "",
+   "author_label": "既有教学来源；ZCode 整理",
+   "learning_effect": "same",
+   "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+   "review_status": "approved"
+  },
+  {
+   "key": "cn13-012",
+   "selection": {
+    "domain": "target",
+    "reference_id": "299",
+    "object_id": "68d19a9f-d020-404e-8048-4e9beebf2ddf",
+    "label": "cry",
+    "positions": [
+     {
+      "scenario": "u-feelings",
+      "order": 0
+     }
+    ],
+    "sense_id": "b1b45494-838c-4ee5-91bd-3dfdfb6a5f0d",
+    "pronunciation_id": "576e76ef-223d-4120-aa88-059f42f3220d",
+    "evidence_id": "2b48a5ba-c0db-4720-94f1-65a559dcfee7",
+    "snapshot": {
+     "sense_revision": 0,
+     "definition": "",
+     "pronunciation_revision": 0,
+     "pronunciation": ""
+    },
+    "source_code": "primary-words",
+    "source_key": "cry",
+    "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+    "release_version": "scenario-0ad041fb6eac6918338efda4",
+    "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+    "lexical_hash": "a9f1a08bb2421374135940b02657871f30f3b22cb02e855090d7b86190c73e2f",
+    "raw_hash": "e83173157e6ed1a7a851f42ce2e89fd771f7bf6d0239cf665bbe61a3af678b61",
+    "gloss_language": "zh",
+    "source_definition": "v. 哭；喊",
+    "source_pronunciation": "/kraɪ/",
+    "pronunciation_reviewed": true,
+    "legacy_chinese": "v. 哭；喊",
+    "chinese_version_id": null,
+    "presentation_revision": 0,
+    "selection_revision": null,
+    "status": "来源一致",
+    "category": "已有中文未经本轮核对",
+    "binding_key": "[\"b1b45494-838c-4ee5-91bd-3dfdfb6a5f0d\", \"576e76ef-223d-4120-aa88-059f42f3220d\", \"2b48a5ba-c0db-4720-94f1-65a559dcfee7\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+   },
+   "text": "v. 哭；喊",
+   "example": "",
+   "kind": "teaching",
+   "origin": "source",
+   "generation_tool": "",
+   "author_label": "既有教学来源；ZCode 整理",
+   "learning_effect": "same",
+   "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+   "review_status": "approved"
+  },
+  {
+   "key": "cn13-013",
+   "selection": {
+    "domain": "target",
+    "reference_id": "300",
+    "object_id": "e9e6bece-96cd-43f8-8056-9f04a0e95a38",
+    "label": "proud",
+    "positions": [
+     {
+      "scenario": "u-feelings",
+      "order": 0
+     }
+    ],
+    "sense_id": "bea31d1d-c761-4d89-90e9-882397db1a25",
+    "pronunciation_id": "69f8bc4e-1ecd-47be-9b80-dc0a734850e2",
+    "evidence_id": "f12e7642-3290-4fbf-86b0-de321579a85d",
+    "snapshot": {
+     "sense_revision": 0,
+     "definition": "",
+     "pronunciation_revision": 0,
+     "pronunciation": ""
+    },
+    "source_code": "primary-words",
+    "source_key": "proud",
+    "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+    "release_version": "scenario-0ad041fb6eac6918338efda4",
+    "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+    "lexical_hash": "76eef3f1376562d51303ba7432fd8e846f88affb0f75ac582eb4a587551c4ea7",
+    "raw_hash": "e218cd73f8d177b85e77068e04a61ee44a449e12e4d4bf190cb8123c1d2e8240",
+    "gloss_language": "zh",
+    "source_definition": "adj. 自豪的；骄傲的",
+    "source_pronunciation": "/praʊd/",
+    "pronunciation_reviewed": true,
+    "legacy_chinese": "adj. 自豪的；骄傲的",
+    "chinese_version_id": null,
+    "presentation_revision": 0,
+    "selection_revision": null,
+    "status": "来源一致",
+    "category": "已有中文未经本轮核对",
+    "binding_key": "[\"bea31d1d-c761-4d89-90e9-882397db1a25\", \"69f8bc4e-1ecd-47be-9b80-dc0a734850e2\", \"f12e7642-3290-4fbf-86b0-de321579a85d\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+   },
+   "text": "adj. 自豪的；骄傲的",
+   "example": "",
+   "kind": "teaching",
+   "origin": "source",
+   "generation_tool": "",
+   "author_label": "既有教学来源；ZCode 整理",
+   "learning_effect": "same",
+   "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+   "review_status": "approved"
+  }
+ ],
+ "blocked": [],
+ "review_status": "approved"
+}
