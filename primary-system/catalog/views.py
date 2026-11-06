@@ -7,6 +7,7 @@ from django.shortcuts import render, get_object_or_404, reverse
 from django.views.decorators.cache import never_cache
 from django.views.decorators.http import require_GET
 from .forms import CatalogFilter
+from .entry_registry import entry_for, learning_overview
 from lexicon.chinese import safe_word_item, safe_search, request_resolver, LessonResolver
 from .models import ENGLISH_RELATION_TAGS, Grade, Module, Placement, Subject, TextbookEdition, TextbookBook, \
     ContentItem, published_items, published_textbook_books, published_units
@@ -48,10 +49,6 @@ def units_of_books(books):
     return published_units().filter(textbook_book__in=[b.pk for b in books])
 
 
-# 玩法模块的入口是各自应用的页面；首页卡片一次直达（不经过目录中转页）。
-GAME_ROUTES = {'chain': 'chain', 'words': 'scenario-words', 'phonetics': 'phonetics', 'writing': 'writing'}
-
-
 @never_cache
 @require_GET
 def home(request):
@@ -62,10 +59,13 @@ def home(request):
         counts[book.module_id] = counts.get(book.module_id, 0) + 1
     for module in modules:
         module.available_count = counts.get(module.pk, 0)
-        route = GAME_ROUTES.get(module.code)
-        module.entry_url = reverse(route) if route else reverse('module', args=[module.code])
+        entry = entry_for(module.code)
+        module.entry = entry
+        module.entry_url = reverse(entry['route_name']) if entry else reverse('module', args=[module.code])
+        module.entry_tag = entry['tag'] if entry else None
     textbook_shelf = books
     progress = None
+    activity = {}
     if request.user.is_authenticated:
         from learning.models import Progress
         from learning.services import effective_status
@@ -74,8 +74,9 @@ def home(request):
         progress = {'started': sum(p.status != 'new' for p in rows),
                     'mastered': sum(effective_status(p, resolver) == 'mastered' for p in rows),
                     'bookmarked': sum(p.bookmarked for p in rows)}
+        activity = learning_overview(request.user)
     return render(request, 'catalog/home.html', {
-        'form': form, 'modules': modules, 'progress': progress,
+        'form': form, 'modules': modules, 'progress': progress, 'activity': activity,
         'textbook_shelf': textbook_shelf,
         'item_count': published_items().filter(placements__unit__in=units_of_books(books)).count(),
     }, status=200 if form.is_valid() else 400)
@@ -85,6 +86,7 @@ def home(request):
 @require_GET
 def module_detail(request, code):
     module = get_object_or_404(Module, code=code, is_active=True)
+    module.entry = entry_for(module.code)
     form, books = filter_books(request)
     return render(request, 'catalog/module.html', {
         'module': module, 'form': form,

@@ -1,7 +1,14 @@
+import datetime
+
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
+from django.utils import timezone
 from django.utils.crypto import get_random_string
+from accounts.guest_retention import cleanup_guest_data
 from catalog.tests import PlatformFixture
+from chain.models import GameRound
+from words.models import LearningTarget, WordProgress
+from writing.models import WritingDraft
 
 
 class RegistrationTests(PlatformFixture):
@@ -103,3 +110,49 @@ class AccountTests(PlatformFixture):
         response = self.client.post('/accounts/login/', {'username': 'student', 'password': self.password})
         self.assertContains(response, '管理账号请从管理后台入口登录')
         self.assertNotIn('_auth_user_id', self.client.session)
+
+
+class GuestRetentionTests(PlatformFixture):
+    """游客数据保留期：超期游客行删除，新鲜游客行与账号数据保留。"""
+
+    def test_cleanup_guest_data_drops_expired_keeps_fresh_and_account(self):
+        player = get_user_model().objects.create_user('player')
+
+        fresh_round = GameRound.objects.create(guest_key='fresh-round')
+        old_round = GameRound.objects.create(guest_key='old-round')
+        player_round = GameRound.objects.create(user=player)
+        past = timezone.now() - datetime.timedelta(days=91)
+        GameRound.objects.filter(pk=old_round.pk).update(updated_at=past)
+        GameRound.objects.filter(pk=player_round.pk).update(updated_at=past)
+
+        target = LearningTarget.objects.create(label='book', legacy={'word_id': 1})
+        fresh_word = WordProgress.objects.create(guest_key='fresh-word', target=target, learned=False)
+        old_word = WordProgress.objects.create(guest_key='old-word', target=target, learned=True)
+        WordProgress.objects.filter(pk=old_word.pk).update(updated_at=past)
+
+        fresh_draft = WritingDraft.objects.create(guest_key='fresh-draft', title='新草稿')
+        old_draft = WritingDraft.objects.create(guest_key='old-draft', title='旧草稿')
+        WritingDraft.objects.filter(pk=old_draft.pk).update(updated_at=past)
+
+        report = cleanup_guest_data(apply=False, days=90)
+        self.assertTrue(report['dry_run'])
+        self.assertEqual(report['planned']['GameRound'], 1)
+        self.assertEqual(report['planned']['WordProgress'], 1)
+        self.assertEqual(report['planned']['WritingDraft'], 1)
+        self.assertEqual(report['planned_total'], 3)
+        self.assertEqual(GameRound.objects.count(), 3)
+
+        report = cleanup_guest_data(apply=True, days=90)
+        self.assertFalse(report['dry_run'])
+        self.assertEqual(report['deleted']['GameRound'], 1)
+        self.assertEqual(report['deleted']['WordProgress'], 1)
+        self.assertEqual(report['deleted']['WritingDraft'], 1)
+        self.assertEqual(report['deleted_total'], 3)
+
+        self.assertTrue(GameRound.objects.filter(pk=fresh_round.pk).exists())
+        self.assertFalse(GameRound.objects.filter(pk=old_round.pk).exists())
+        self.assertTrue(GameRound.objects.filter(pk=player_round.pk).exists())
+        self.assertTrue(WordProgress.objects.filter(pk=fresh_word.pk).exists())
+        self.assertFalse(WordProgress.objects.filter(pk=old_word.pk).exists())
+        self.assertTrue(WritingDraft.objects.filter(pk=fresh_draft.pk).exists())
+        self.assertFalse(WritingDraft.objects.filter(pk=old_draft.pk).exists())

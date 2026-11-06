@@ -276,8 +276,27 @@ def request_resolver(request):
     return request._lesson_resolver
 
 
+def _sections_match_ids(items, text):
+    """在非词卡内容的分节正文里做子串命中（v1 text/title 与 v2 类型化块统一投影）。"""
+    from django.db.models import Q
+    query = text.casefold()
+    ids = []
+    for pk, sections in items.filter(~Q(kind='word')).values_list('pk', 'sections'):
+        if not isinstance(sections, list):
+            continue
+        if any(query in str(part).casefold()
+               for section in sections if isinstance(section, dict)
+               for part in (section.get('title', ''), section.get('text', ''), section.get('caption', ''))):
+            ids.append(pk)
+    return ids
+
+
 def safe_search(items, text, resolver=None):
     from django.db.models import Q
     resolver = resolver or LessonResolver(items.filter(kind='word'))
-    return items.filter(Q(title__icontains=text) | Q(pk__in=resolver.search_ids(text)) |
-                        (~Q(kind='word') & (Q(summary__icontains=text) | Q(body__icontains=text))))
+    matched = Q(title__icontains=text) | Q(pk__in=resolver.search_ids(text))
+    matched |= ~Q(kind='word') & (Q(summary__icontains=text) | Q(body__icontains=text))
+    section_ids = _sections_match_ids(items, text)
+    if section_ids:
+        matched |= Q(pk__in=section_ids)
+    return items.filter(matched)

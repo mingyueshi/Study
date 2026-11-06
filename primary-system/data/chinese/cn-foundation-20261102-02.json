@@ -1,0 +1,1085 @@
+{
+  "schema_version": 1,
+  "batch_id": "cn-foundation-20261102-02",
+  "reviewer": "AI: Codex 主控（独立逐条复核）",
+  "entries": [
+    {
+      "key": "cn02-001",
+      "selection": {
+        "domain": "target",
+        "reference_id": "17",
+        "object_id": "2f60763a-7c62-4423-b7e8-46955bd4ddc7",
+        "label": "schoolbag",
+        "positions": [
+          {
+            "scenario": "u-schoolbag",
+            "order": 0
+          }
+        ],
+        "sense_id": "d430bab6-42e5-40db-89ff-ba56d24633a0",
+        "pronunciation_id": "526d617c-203f-4a3d-9b28-62929598f9da",
+        "evidence_id": "c3c551c3-14f7-49c0-b335-ff9ca16fbc35",
+        "snapshot": {
+          "sense_revision": 0,
+          "definition": "",
+          "pronunciation_revision": 0,
+          "pronunciation": ""
+        },
+        "source_code": "primary-words",
+        "source_key": "schoolbag",
+        "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+        "release_version": "scenario-0ad041fb6eac6918338efda4",
+        "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+        "lexical_hash": "341a3caf1ca7b26af3441371165522537b9d009669a26744b1ca134b3bb9f820",
+        "raw_hash": "64595038a926b545b8d23adf4119aa9a8a0df63c95219c626f12278c8589cf7b",
+        "gloss_language": "zh",
+        "source_definition": "n. 书包",
+        "source_pronunciation": "/ˈskuːlbæɡ/",
+        "pronunciation_reviewed": true,
+        "legacy_chinese": "n. 书包",
+        "chinese_version_id": null,
+        "presentation_revision": 0,
+        "selection_revision": null,
+        "status": "来源一致",
+        "category": "已有中文未经本轮核对",
+        "binding_key": "[\"d430bab6-42e5-40db-89ff-ba56d24633a0\", \"526d617c-203f-4a3d-9b28-62929598f9da\", \"c3c551c3-14f7-49c0-b335-ff9ca16fbc35\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+      },
+      "text": "n. 书包",
+      "example": "",
+      "kind": "teaching",
+      "origin": "source",
+      "generation_tool": "",
+      "author_label": "既有教学来源；GPT-6.1 SOL整理",
+      "learning_effect": "same",
+      "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+      "review_status": "approved"
+    },
+    {
+      "key": "cn02-002",
+      "selection": {
+        "domain": "target",
+        "reference_id": "18",
+        "object_id": "58b875ed-d454-4842-8696-5bbedd17766b",
+        "label": "school",
+        "positions": [
+          {
+            "scenario": "u-schoolbag",
+            "order": 0
+          }
+        ],
+        "sense_id": "ddd6186b-29d7-4b4c-beb3-e77cd68245b8",
+        "pronunciation_id": "f23de92d-88b6-4c93-93fd-6201ec962687",
+        "evidence_id": "d5e8ca2d-7d2f-4889-ae8f-c5c3d40bcc15",
+        "snapshot": {
+          "sense_revision": 0,
+          "definition": "",
+          "pronunciation_revision": 0,
+          "pronunciation": ""
+        },
+        "source_code": "primary-words",
+        "source_key": "school",
+        "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+        "release_version": "scenario-0ad041fb6eac6918338efda4",
+        "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+        "lexical_hash": "b5b2d8eca1ddb1ee6d07b7c5de766d2a53a8141f867695b3afbb87b698fe7748",
+        "raw_hash": "2486475cc716133f4ea059810b744adc584cb8e696268801220c4e28f4f6abdd",
+        "gloss_language": "zh",
+        "source_definition": "n. 学校",
+        "source_pronunciation": "/skuːl/",
+        "pronunciation_reviewed": true,
+        "legacy_chinese": "n. 学校",
+        "chinese_version_id": null,
+        "presentation_revision": 0,
+        "selection_revision": null,
+        "status": "来源一致",
+        "category": "已有中文未经本轮核对",
+        "binding_key": "[\"ddd6186b-29d7-4b4c-beb3-e77cd68245b8\", \"f23de92d-88b6-4c93-93fd-6201ec962687\", \"d5e8ca2d-7d2f-4889-ae8f-c5c3d40bcc15\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+      },
+      "text": "n. 学校",
+      "example": "",
+      "kind": "teaching",
+      "origin": "source",
+      "generation_tool": "",
+      "author_label": "既有教学来源；GPT-6.1 SOL整理",
+      "learning_effect": "same",
+      "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+      "review_status": "approved"
+    },
+    {
+      "key": "cn02-003",
+      "selection": {
+        "domain": "target",
+        "reference_id": "20",
+        "object_id": "0602439c-3730-45f2-b845-ac43cc800aa0",
+        "label": "English book",
+        "positions": [
+          {
+            "scenario": "u-schoolbag",
+            "order": 0
+          }
+        ],
+        "sense_id": "1864cb8f-3889-4154-bd8c-ad64671adc12",
+        "pronunciation_id": "b8bf40ca-0481-43bc-82cb-e54c796fc434",
+        "evidence_id": "e095bf43-4eb9-483c-8388-c9b21abcea08",
+        "snapshot": {
+          "sense_revision": 0,
+          "definition": "",
+          "pronunciation_revision": 0,
+          "pronunciation": ""
+        },
+        "source_code": "primary-words",
+        "source_key": "English book",
+        "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+        "release_version": "scenario-0ad041fb6eac6918338efda4",
+        "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+        "lexical_hash": "538ffbc7158974287a209a68373991b62ce1f6987eeb833bf6eba7787f61c647",
+        "raw_hash": "16083509f650dddddbc421a14f90fdafc3cb9bfddb2a5dba5a21df847b8e0ec5",
+        "gloss_language": "zh",
+        "source_definition": "n. 英语书",
+        "source_pronunciation": "/ˈɪŋɡlɪʃ bʊk/",
+        "pronunciation_reviewed": true,
+        "legacy_chinese": "n. 英语书",
+        "chinese_version_id": null,
+        "presentation_revision": 0,
+        "selection_revision": null,
+        "status": "来源一致",
+        "category": "已有中文未经本轮核对",
+        "binding_key": "[\"1864cb8f-3889-4154-bd8c-ad64671adc12\", \"b8bf40ca-0481-43bc-82cb-e54c796fc434\", \"e095bf43-4eb9-483c-8388-c9b21abcea08\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+      },
+      "text": "n. 英语书",
+      "example": "",
+      "kind": "teaching",
+      "origin": "source",
+      "generation_tool": "",
+      "author_label": "既有教学来源；GPT-6.1 SOL整理",
+      "learning_effect": "same",
+      "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+      "review_status": "approved"
+    },
+    {
+      "key": "cn02-004",
+      "selection": {
+        "domain": "target",
+        "reference_id": "21",
+        "object_id": "6d971424-025c-4790-b8c6-9e15b70e48a1",
+        "label": "Chinese book",
+        "positions": [
+          {
+            "scenario": "u-schoolbag",
+            "order": 0
+          }
+        ],
+        "sense_id": "da7e7c14-9c0b-4660-88c5-dcd3b6e7a17d",
+        "pronunciation_id": "8f541023-c529-4f19-b335-6f9611217373",
+        "evidence_id": "b8cb0cd1-299a-415d-adc0-b5672447fa69",
+        "snapshot": {
+          "sense_revision": 0,
+          "definition": "",
+          "pronunciation_revision": 0,
+          "pronunciation": ""
+        },
+        "source_code": "primary-words",
+        "source_key": "Chinese book",
+        "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+        "release_version": "scenario-0ad041fb6eac6918338efda4",
+        "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+        "lexical_hash": "b80e872eea3af901cc8740cef848a77a6651a67e72c6ad6d5def48d47f0033b0",
+        "raw_hash": "a7301c55d811e9ed4f50db81d12987059ccc9a4c0f0f078d16f9d57c3e37e0d9",
+        "gloss_language": "zh",
+        "source_definition": "n. 语文书",
+        "source_pronunciation": "/ˌtʃaɪˈniːz bʊk/",
+        "pronunciation_reviewed": true,
+        "legacy_chinese": "n. 语文书",
+        "chinese_version_id": null,
+        "presentation_revision": 0,
+        "selection_revision": null,
+        "status": "来源一致",
+        "category": "已有中文未经本轮核对",
+        "binding_key": "[\"da7e7c14-9c0b-4660-88c5-dcd3b6e7a17d\", \"8f541023-c529-4f19-b335-6f9611217373\", \"b8cb0cd1-299a-415d-adc0-b5672447fa69\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+      },
+      "text": "n. 语文书",
+      "example": "",
+      "kind": "teaching",
+      "origin": "source",
+      "generation_tool": "",
+      "author_label": "既有教学来源；GPT-6.1 SOL整理",
+      "learning_effect": "same",
+      "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+      "review_status": "approved"
+    },
+    {
+      "key": "cn02-005",
+      "selection": {
+        "domain": "target",
+        "reference_id": "22",
+        "object_id": "6c6a2689-c5f9-4173-9495-5387393bfa3f",
+        "label": "storybook",
+        "positions": [
+          {
+            "scenario": "u-schoolbag",
+            "order": 0
+          }
+        ],
+        "sense_id": "031a46f1-704e-455e-8b0f-2c36e5dcd0c9",
+        "pronunciation_id": "8df3d366-7455-4ea8-801f-a8503a9043b0",
+        "evidence_id": "b3d3b202-8a8f-4aab-b6bc-9822730509e3",
+        "snapshot": {
+          "sense_revision": 0,
+          "definition": "",
+          "pronunciation_revision": 0,
+          "pronunciation": ""
+        },
+        "source_code": "primary-words",
+        "source_key": "storybook",
+        "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+        "release_version": "scenario-0ad041fb6eac6918338efda4",
+        "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+        "lexical_hash": "a14736ee55be005a4c3a41d54cffda90c0cd744faa9fa9d45d30ff19b076aad1",
+        "raw_hash": "51fc6a4117ad0ec25acdfb88ed8ee61173fc1f2e18760d97f049eb30210882f2",
+        "gloss_language": "zh",
+        "source_definition": "n. 故事书",
+        "source_pronunciation": "/ˈstɔːribʊk/",
+        "pronunciation_reviewed": true,
+        "legacy_chinese": "n. 故事书",
+        "chinese_version_id": null,
+        "presentation_revision": 0,
+        "selection_revision": null,
+        "status": "来源一致",
+        "category": "已有中文未经本轮核对",
+        "binding_key": "[\"031a46f1-704e-455e-8b0f-2c36e5dcd0c9\", \"8df3d366-7455-4ea8-801f-a8503a9043b0\", \"b3d3b202-8a8f-4aab-b6bc-9822730509e3\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+      },
+      "text": "n. 故事书",
+      "example": "",
+      "kind": "teaching",
+      "origin": "source",
+      "generation_tool": "",
+      "author_label": "既有教学来源；GPT-6.1 SOL整理",
+      "learning_effect": "same",
+      "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+      "review_status": "approved"
+    },
+    {
+      "key": "cn02-006",
+      "selection": {
+        "domain": "target",
+        "reference_id": "23",
+        "object_id": "eb25406d-2b15-45dd-9a70-36ac64292eae",
+        "label": "notebook",
+        "positions": [
+          {
+            "scenario": "u-schoolbag",
+            "order": 0
+          }
+        ],
+        "sense_id": "09b3ac09-574a-485c-9571-f2e75ed1ac18",
+        "pronunciation_id": "382e1456-1f20-4f17-abf4-b571420530ab",
+        "evidence_id": "670dec12-8d28-4056-ad34-a428553c512a",
+        "snapshot": {
+          "sense_revision": 0,
+          "definition": "",
+          "pronunciation_revision": 0,
+          "pronunciation": ""
+        },
+        "source_code": "primary-words",
+        "source_key": "notebook",
+        "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+        "release_version": "scenario-0ad041fb6eac6918338efda4",
+        "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+        "lexical_hash": "e6bf1e4a927f9e9b8bb18f2221912dd2b2beadced7b94fa2d548250dd9b472fd",
+        "raw_hash": "9de1b35a55853c844e89db25fec50dcb4357a98cc861895db78c64037495a9de",
+        "gloss_language": "zh",
+        "source_definition": "n. 笔记本",
+        "source_pronunciation": "/ˈnəʊtbʊk/",
+        "pronunciation_reviewed": true,
+        "legacy_chinese": "n. 笔记本",
+        "chinese_version_id": null,
+        "presentation_revision": 0,
+        "selection_revision": null,
+        "status": "来源一致",
+        "category": "已有中文未经本轮核对",
+        "binding_key": "[\"09b3ac09-574a-485c-9571-f2e75ed1ac18\", \"382e1456-1f20-4f17-abf4-b571420530ab\", \"670dec12-8d28-4056-ad34-a428553c512a\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+      },
+      "text": "n. 笔记本",
+      "example": "",
+      "kind": "teaching",
+      "origin": "source",
+      "generation_tool": "",
+      "author_label": "既有教学来源；GPT-6.1 SOL整理",
+      "learning_effect": "same",
+      "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+      "review_status": "approved"
+    },
+    {
+      "key": "cn02-007",
+      "selection": {
+        "domain": "target",
+        "reference_id": "24",
+        "object_id": "e9de2ba3-9deb-4094-813a-43d1212e1eea",
+        "label": "pencil box",
+        "positions": [
+          {
+            "scenario": "u-schoolbag",
+            "order": 0
+          }
+        ],
+        "sense_id": "37503ff3-b74f-4b8b-b597-c3efe3d9d2d2",
+        "pronunciation_id": "98748c3e-ad56-4b54-b205-2bdabfb64a88",
+        "evidence_id": "5aab5702-6e1d-4164-b64f-c29fb10d13aa",
+        "snapshot": {
+          "sense_revision": 0,
+          "definition": "",
+          "pronunciation_revision": 0,
+          "pronunciation": ""
+        },
+        "source_code": "primary-words",
+        "source_key": "pencil box",
+        "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+        "release_version": "scenario-0ad041fb6eac6918338efda4",
+        "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+        "lexical_hash": "bbefc0ce38d3fc6d80eead370d002321f3c961994a3242da3eca9b527d87a55e",
+        "raw_hash": "9ea1c2c08c1849bf7ea8a2e2bfbbc6dc197c57e09287e941b5f546b680ff7707",
+        "gloss_language": "zh",
+        "source_definition": "n. 铅笔盒",
+        "source_pronunciation": "/ˈpensl bɒks/",
+        "pronunciation_reviewed": true,
+        "legacy_chinese": "n. 铅笔盒",
+        "chinese_version_id": null,
+        "presentation_revision": 0,
+        "selection_revision": null,
+        "status": "来源一致",
+        "category": "已有中文未经本轮核对",
+        "binding_key": "[\"37503ff3-b74f-4b8b-b597-c3efe3d9d2d2\", \"98748c3e-ad56-4b54-b205-2bdabfb64a88\", \"5aab5702-6e1d-4164-b64f-c29fb10d13aa\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+      },
+      "text": "n. 铅笔盒",
+      "example": "",
+      "kind": "teaching",
+      "origin": "source",
+      "generation_tool": "",
+      "author_label": "既有教学来源；GPT-6.1 SOL整理",
+      "learning_effect": "same",
+      "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+      "review_status": "approved"
+    },
+    {
+      "key": "cn02-008",
+      "selection": {
+        "domain": "target",
+        "reference_id": "25",
+        "object_id": "1876f0a8-f71a-4b7a-9928-ee7601b9b3ac",
+        "label": "crayon",
+        "positions": [
+          {
+            "scenario": "u-schoolbag",
+            "order": 0
+          }
+        ],
+        "sense_id": "196398d4-3b1e-4e04-8c2d-0fceab1ca251",
+        "pronunciation_id": "274903c0-9c1c-4c07-a1d8-a9b0000d04d9",
+        "evidence_id": "e109819e-f0ca-4786-990f-021292f4279d",
+        "snapshot": {
+          "sense_revision": 0,
+          "definition": "",
+          "pronunciation_revision": 0,
+          "pronunciation": ""
+        },
+        "source_code": "primary-words",
+        "source_key": "crayon",
+        "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+        "release_version": "scenario-0ad041fb6eac6918338efda4",
+        "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+        "lexical_hash": "fa17d92dc7949dbe5865f22a6c3ce47f3c417a7f23ace2d9f53870e53a8af874",
+        "raw_hash": "5f239ac207afe5832218185655a1acdb9be43b85e24140d7f7243e29cfa1d950",
+        "gloss_language": "zh",
+        "source_definition": "n. 蜡笔",
+        "source_pronunciation": "/ˈkreɪən/",
+        "pronunciation_reviewed": true,
+        "legacy_chinese": "n. 蜡笔",
+        "chinese_version_id": null,
+        "presentation_revision": 0,
+        "selection_revision": null,
+        "status": "来源一致",
+        "category": "已有中文未经本轮核对",
+        "binding_key": "[\"196398d4-3b1e-4e04-8c2d-0fceab1ca251\", \"274903c0-9c1c-4c07-a1d8-a9b0000d04d9\", \"e109819e-f0ca-4786-990f-021292f4279d\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+      },
+      "text": "n. 蜡笔",
+      "example": "",
+      "kind": "teaching",
+      "origin": "source",
+      "generation_tool": "",
+      "author_label": "既有教学来源；GPT-6.1 SOL整理",
+      "learning_effect": "same",
+      "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+      "review_status": "approved"
+    },
+    {
+      "key": "cn02-009",
+      "selection": {
+        "domain": "target",
+        "reference_id": "26",
+        "object_id": "acbbe64c-4e12-4391-a642-06ee1806c37e",
+        "label": "candy",
+        "positions": [
+          {
+            "scenario": "u-schoolbag",
+            "order": 0
+          }
+        ],
+        "sense_id": "37aa9b4f-9edb-4447-96b9-f7ae84ed36c0",
+        "pronunciation_id": "4f6606a1-c247-4daa-a5e4-180455a55465",
+        "evidence_id": "1391fe36-ae04-46af-876c-9360698895a8",
+        "snapshot": {
+          "sense_revision": 0,
+          "definition": "",
+          "pronunciation_revision": 0,
+          "pronunciation": ""
+        },
+        "source_code": "primary-words",
+        "source_key": "candy",
+        "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+        "release_version": "scenario-0ad041fb6eac6918338efda4",
+        "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+        "lexical_hash": "d8466cb9f0e0bab27690c82e2c9a65381f63cfdd092a017e08e2fa4d0f3de78f",
+        "raw_hash": "07cce31672d9c98ad1205a91ef0f5d18e92cc88078d06e5e9b957f9f4191673b",
+        "gloss_language": "zh",
+        "source_definition": "n. 糖果",
+        "source_pronunciation": "/ˈkændi/",
+        "pronunciation_reviewed": true,
+        "legacy_chinese": "n. 糖果",
+        "chinese_version_id": null,
+        "presentation_revision": 0,
+        "selection_revision": null,
+        "status": "来源一致",
+        "category": "已有中文未经本轮核对",
+        "binding_key": "[\"37aa9b4f-9edb-4447-96b9-f7ae84ed36c0\", \"4f6606a1-c247-4daa-a5e4-180455a55465\", \"1391fe36-ae04-46af-876c-9360698895a8\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+      },
+      "text": "n. 糖果",
+      "example": "",
+      "kind": "teaching",
+      "origin": "source",
+      "generation_tool": "",
+      "author_label": "既有教学来源；GPT-6.1 SOL整理",
+      "learning_effect": "same",
+      "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+      "review_status": "approved"
+    },
+    {
+      "key": "cn02-010",
+      "selection": {
+        "domain": "target",
+        "reference_id": "27",
+        "object_id": "24381d71-ce80-4ba9-b480-20da8e23b5cd",
+        "label": "toy",
+        "positions": [
+          {
+            "scenario": "u-schoolbag",
+            "order": 0
+          }
+        ],
+        "sense_id": "cfbb3431-156d-4923-ac24-3d713d08264f",
+        "pronunciation_id": "73b1d143-3ffd-46ae-9436-8881f43d8705",
+        "evidence_id": "89edd17e-e53f-465c-acfa-076e508f55c0",
+        "snapshot": {
+          "sense_revision": 0,
+          "definition": "",
+          "pronunciation_revision": 0,
+          "pronunciation": ""
+        },
+        "source_code": "primary-words",
+        "source_key": "toy",
+        "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+        "release_version": "scenario-0ad041fb6eac6918338efda4",
+        "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+        "lexical_hash": "2a548cde19dc4f0b077f3c147a260cbeacaa8f741e166a76d23efdc4a619b353",
+        "raw_hash": "a4105dc07aef81c4439707928c9034033ccc068f3bdc4f3e4349840656bd6d5a",
+        "gloss_language": "zh",
+        "source_definition": "n. 玩具",
+        "source_pronunciation": "/tɔɪ/",
+        "pronunciation_reviewed": true,
+        "legacy_chinese": "n. 玩具",
+        "chinese_version_id": null,
+        "presentation_revision": 0,
+        "selection_revision": null,
+        "status": "来源一致",
+        "category": "已有中文未经本轮核对",
+        "binding_key": "[\"cfbb3431-156d-4923-ac24-3d713d08264f\", \"73b1d143-3ffd-46ae-9436-8881f43d8705\", \"89edd17e-e53f-465c-acfa-076e508f55c0\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+      },
+      "text": "n. 玩具",
+      "example": "",
+      "kind": "teaching",
+      "origin": "source",
+      "generation_tool": "",
+      "author_label": "既有教学来源；GPT-6.1 SOL整理",
+      "learning_effect": "same",
+      "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+      "review_status": "approved"
+    },
+    {
+      "key": "cn02-011",
+      "selection": {
+        "domain": "target",
+        "reference_id": "28",
+        "object_id": "421ab467-5423-4da3-a644-32d48bfe0acf",
+        "label": "key",
+        "positions": [
+          {
+            "scenario": "u-schoolbag",
+            "order": 0
+          }
+        ],
+        "sense_id": "ee5ec2eb-b58a-4c6d-89dd-41fc18c4d10b",
+        "pronunciation_id": "a2869557-5a73-48f5-b550-854e5267d703",
+        "evidence_id": "ac9e2f6b-1b29-4320-8861-d737ab6da8d5",
+        "snapshot": {
+          "sense_revision": 0,
+          "definition": "",
+          "pronunciation_revision": 0,
+          "pronunciation": ""
+        },
+        "source_code": "primary-words",
+        "source_key": "key",
+        "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+        "release_version": "scenario-0ad041fb6eac6918338efda4",
+        "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+        "lexical_hash": "46915b2979d1ae50d8722a3038b582e1c933df72b2b2654beaee6c501481b9e5",
+        "raw_hash": "64d118082b410f8c786af381380a00b51ef20c310495662ceac5ccd975727e73",
+        "gloss_language": "zh",
+        "source_definition": "n. 钥匙",
+        "source_pronunciation": "/kiː/",
+        "pronunciation_reviewed": true,
+        "legacy_chinese": "n. 钥匙",
+        "chinese_version_id": null,
+        "presentation_revision": 0,
+        "selection_revision": null,
+        "status": "来源一致",
+        "category": "已有中文未经本轮核对",
+        "binding_key": "[\"ee5ec2eb-b58a-4c6d-89dd-41fc18c4d10b\", \"a2869557-5a73-48f5-b550-854e5267d703\", \"ac9e2f6b-1b29-4320-8861-d737ab6da8d5\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+      },
+      "text": "n. 钥匙",
+      "example": "",
+      "kind": "teaching",
+      "origin": "source",
+      "generation_tool": "",
+      "author_label": "既有教学来源；GPT-6.1 SOL整理",
+      "learning_effect": "same",
+      "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+      "review_status": "approved"
+    },
+    {
+      "key": "cn02-012",
+      "selection": {
+        "domain": "target",
+        "reference_id": "42",
+        "object_id": "c20d426f-da80-4ce6-ad99-38b8cf1bd4d2",
+        "label": "home",
+        "positions": [
+          {
+            "scenario": "u-home",
+            "order": 0
+          }
+        ],
+        "sense_id": "045f8cf9-ca23-49c8-86f7-bc9dbe802168",
+        "pronunciation_id": "3d6adbd9-e468-49ed-b787-6f28e684c312",
+        "evidence_id": "3418f54d-0474-471a-a713-8a380cacab01",
+        "snapshot": {
+          "sense_revision": 0,
+          "definition": "",
+          "pronunciation_revision": 0,
+          "pronunciation": ""
+        },
+        "source_code": "primary-words",
+        "source_key": "home",
+        "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+        "release_version": "scenario-0ad041fb6eac6918338efda4",
+        "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+        "lexical_hash": "489ba6e5f908ddd3046017ce4fe024ed50d8cb47d7bc7dee91e70691cc4fd4eb",
+        "raw_hash": "c4b24b50723a2d256acaa1aad9a9d359ce31ed81d600054eb706e00a4276136c",
+        "gloss_language": "zh",
+        "source_definition": "n. 家",
+        "source_pronunciation": "/həʊm/",
+        "pronunciation_reviewed": true,
+        "legacy_chinese": "n. 家",
+        "chinese_version_id": null,
+        "presentation_revision": 0,
+        "selection_revision": null,
+        "status": "来源一致",
+        "category": "已有中文未经本轮核对",
+        "binding_key": "[\"045f8cf9-ca23-49c8-86f7-bc9dbe802168\", \"3d6adbd9-e468-49ed-b787-6f28e684c312\", \"3418f54d-0474-471a-a713-8a380cacab01\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+      },
+      "text": "n. 家",
+      "example": "",
+      "kind": "teaching",
+      "origin": "source",
+      "generation_tool": "",
+      "author_label": "既有教学来源；GPT-6.1 SOL整理",
+      "learning_effect": "same",
+      "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+      "review_status": "approved"
+    },
+    {
+      "key": "cn02-013",
+      "selection": {
+        "domain": "target",
+        "reference_id": "43",
+        "object_id": "19e8e920-f95b-42d6-8227-183140c17d88",
+        "label": "bedroom",
+        "positions": [
+          {
+            "scenario": "u-home",
+            "order": 0
+          }
+        ],
+        "sense_id": "a497177d-3c9c-4cec-8b19-953bc9f16660",
+        "pronunciation_id": "92bdc92d-fcfa-4751-a3a6-975392a7d9a9",
+        "evidence_id": "32425978-7964-4811-b994-78ee18fae93c",
+        "snapshot": {
+          "sense_revision": 0,
+          "definition": "",
+          "pronunciation_revision": 0,
+          "pronunciation": ""
+        },
+        "source_code": "primary-words",
+        "source_key": "bedroom",
+        "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+        "release_version": "scenario-0ad041fb6eac6918338efda4",
+        "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+        "lexical_hash": "1161ac02e29070b61c3bf2f41b6a4892f70f7eb29b66b1f9ce4525b2a181a2fe",
+        "raw_hash": "f6f6f1875ad859dd82b2040cf24c03bd62eba36bcdd731ae819e144c506382fc",
+        "gloss_language": "zh",
+        "source_definition": "n. 卧室",
+        "source_pronunciation": "/ˈbedruːm/",
+        "pronunciation_reviewed": true,
+        "legacy_chinese": "n. 卧室",
+        "chinese_version_id": null,
+        "presentation_revision": 0,
+        "selection_revision": null,
+        "status": "来源一致",
+        "category": "已有中文未经本轮核对",
+        "binding_key": "[\"a497177d-3c9c-4cec-8b19-953bc9f16660\", \"92bdc92d-fcfa-4751-a3a6-975392a7d9a9\", \"32425978-7964-4811-b994-78ee18fae93c\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+      },
+      "text": "n. 卧室",
+      "example": "",
+      "kind": "teaching",
+      "origin": "source",
+      "generation_tool": "",
+      "author_label": "既有教学来源；GPT-6.1 SOL整理",
+      "learning_effect": "same",
+      "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+      "review_status": "approved"
+    },
+    {
+      "key": "cn02-014",
+      "selection": {
+        "domain": "target",
+        "reference_id": "44",
+        "object_id": "dc703a51-d1a8-43ac-b79d-9f10978e6ab5",
+        "label": "living room",
+        "positions": [
+          {
+            "scenario": "u-home",
+            "order": 0
+          }
+        ],
+        "sense_id": "43bcc5e5-f17a-466e-95e2-7d98f331fd1d",
+        "pronunciation_id": "c2d699b5-b6ae-4ec1-b6e0-0b74695df40a",
+        "evidence_id": "75c604d7-1584-491b-8545-32dea632e9f6",
+        "snapshot": {
+          "sense_revision": 0,
+          "definition": "",
+          "pronunciation_revision": 0,
+          "pronunciation": ""
+        },
+        "source_code": "primary-words",
+        "source_key": "living room",
+        "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+        "release_version": "scenario-0ad041fb6eac6918338efda4",
+        "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+        "lexical_hash": "c4458add03ed5bae0226dcb43dff1c116b817e378f538efbba626d14dc423493",
+        "raw_hash": "ef36565a900e2f7574da16e106fad4c96cd20307cde5dd3198257fe2c2affc64",
+        "gloss_language": "zh",
+        "source_definition": "n. 客厅",
+        "source_pronunciation": "/ˈlɪvɪŋ ruːm/",
+        "pronunciation_reviewed": true,
+        "legacy_chinese": "n. 客厅",
+        "chinese_version_id": null,
+        "presentation_revision": 0,
+        "selection_revision": null,
+        "status": "来源一致",
+        "category": "已有中文未经本轮核对",
+        "binding_key": "[\"43bcc5e5-f17a-466e-95e2-7d98f331fd1d\", \"c2d699b5-b6ae-4ec1-b6e0-0b74695df40a\", \"75c604d7-1584-491b-8545-32dea632e9f6\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+      },
+      "text": "n. 客厅",
+      "example": "",
+      "kind": "teaching",
+      "origin": "source",
+      "generation_tool": "",
+      "author_label": "既有教学来源；GPT-6.1 SOL整理",
+      "learning_effect": "same",
+      "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+      "review_status": "approved"
+    },
+    {
+      "key": "cn02-015",
+      "selection": {
+        "domain": "target",
+        "reference_id": "45",
+        "object_id": "8ccaba2e-5878-4a5f-921a-aa8c7e8e3a9f",
+        "label": "kitchen",
+        "positions": [
+          {
+            "scenario": "u-home",
+            "order": 0
+          }
+        ],
+        "sense_id": "9ecdb5c7-450e-4268-bec9-86366a655494",
+        "pronunciation_id": "f0ce0c68-2cc9-4e62-946c-a80e62e4d9b9",
+        "evidence_id": "caf853f1-4797-448a-86fa-34392650846c",
+        "snapshot": {
+          "sense_revision": 0,
+          "definition": "",
+          "pronunciation_revision": 0,
+          "pronunciation": ""
+        },
+        "source_code": "primary-words",
+        "source_key": "kitchen",
+        "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+        "release_version": "scenario-0ad041fb6eac6918338efda4",
+        "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+        "lexical_hash": "a65c04e36cd65dee38e3982269a3c106ee0495be8558ee0d406708c2fe7c670b",
+        "raw_hash": "0b3c038accc15289b7758223c9853f1b91da99156afabfe94857c6bc1cdcb95f",
+        "gloss_language": "zh",
+        "source_definition": "n. 厨房",
+        "source_pronunciation": "/ˈkɪtʃɪn/",
+        "pronunciation_reviewed": true,
+        "legacy_chinese": "n. 厨房",
+        "chinese_version_id": null,
+        "presentation_revision": 0,
+        "selection_revision": null,
+        "status": "来源一致",
+        "category": "已有中文未经本轮核对",
+        "binding_key": "[\"9ecdb5c7-450e-4268-bec9-86366a655494\", \"f0ce0c68-2cc9-4e62-946c-a80e62e4d9b9\", \"caf853f1-4797-448a-86fa-34392650846c\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+      },
+      "text": "n. 厨房",
+      "example": "",
+      "kind": "teaching",
+      "origin": "source",
+      "generation_tool": "",
+      "author_label": "既有教学来源；GPT-6.1 SOL整理",
+      "learning_effect": "same",
+      "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+      "review_status": "approved"
+    },
+    {
+      "key": "cn02-016",
+      "selection": {
+        "domain": "target",
+        "reference_id": "46",
+        "object_id": "8bd7efb0-8882-464d-ae28-5a7aa7e1085f",
+        "label": "bathroom",
+        "positions": [
+          {
+            "scenario": "u-home",
+            "order": 0
+          }
+        ],
+        "sense_id": "bb50d97b-210f-4b30-8386-37c77f75b6b3",
+        "pronunciation_id": "77a0f128-dd5f-4f9f-89f4-57b8438c61e2",
+        "evidence_id": "82919dfa-e54e-4935-88a3-9607eeb8d4f4",
+        "snapshot": {
+          "sense_revision": 0,
+          "definition": "",
+          "pronunciation_revision": 0,
+          "pronunciation": ""
+        },
+        "source_code": "primary-words",
+        "source_key": "bathroom",
+        "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+        "release_version": "scenario-0ad041fb6eac6918338efda4",
+        "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+        "lexical_hash": "bdc722bc3d6227b9da2b61699c349b4510273ebd36e26aff2c8f7ed1aaf27db6",
+        "raw_hash": "886142f11f7911741f51967745de4bcf4e8f18215bfb06dac2bb60b71d8a9fe4",
+        "gloss_language": "zh",
+        "source_definition": "n. 卫生间",
+        "source_pronunciation": "/ˈbɑːθruːm/",
+        "pronunciation_reviewed": true,
+        "legacy_chinese": "n. 卫生间",
+        "chinese_version_id": null,
+        "presentation_revision": 0,
+        "selection_revision": null,
+        "status": "来源一致",
+        "category": "已有中文未经本轮核对",
+        "binding_key": "[\"bb50d97b-210f-4b30-8386-37c77f75b6b3\", \"77a0f128-dd5f-4f9f-89f4-57b8438c61e2\", \"82919dfa-e54e-4935-88a3-9607eeb8d4f4\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+      },
+      "text": "n. 卫生间",
+      "example": "",
+      "kind": "teaching",
+      "origin": "source",
+      "generation_tool": "",
+      "author_label": "既有教学来源；GPT-6.1 SOL整理",
+      "learning_effect": "same",
+      "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+      "review_status": "approved"
+    },
+    {
+      "key": "cn02-017",
+      "selection": {
+        "domain": "target",
+        "reference_id": "47",
+        "object_id": "11067b75-5351-4998-8262-e4feda799cd5",
+        "label": "bed",
+        "positions": [
+          {
+            "scenario": "u-home",
+            "order": 0
+          }
+        ],
+        "sense_id": "a80f9c5f-c03a-444d-936e-4ae85669c58f",
+        "pronunciation_id": "f7036b2e-059f-4cf7-b6cb-cf4f5f6a8011",
+        "evidence_id": "b9cdd17d-eb1c-426c-8da5-58b27ebe855c",
+        "snapshot": {
+          "sense_revision": 0,
+          "definition": "",
+          "pronunciation_revision": 0,
+          "pronunciation": ""
+        },
+        "source_code": "primary-words",
+        "source_key": "bed",
+        "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+        "release_version": "scenario-0ad041fb6eac6918338efda4",
+        "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+        "lexical_hash": "83f9d1905176ce09229ad5c6ad3d59686e89df353605066836239aa31cfed5d1",
+        "raw_hash": "3994a733a930086480051f61669b6795db7fd95dd89a89049752330d3a1126a8",
+        "gloss_language": "zh",
+        "source_definition": "n. 床",
+        "source_pronunciation": "/bed/",
+        "pronunciation_reviewed": true,
+        "legacy_chinese": "n. 床",
+        "chinese_version_id": null,
+        "presentation_revision": 0,
+        "selection_revision": null,
+        "status": "来源一致",
+        "category": "已有中文未经本轮核对",
+        "binding_key": "[\"a80f9c5f-c03a-444d-936e-4ae85669c58f\", \"f7036b2e-059f-4cf7-b6cb-cf4f5f6a8011\", \"b9cdd17d-eb1c-426c-8da5-58b27ebe855c\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+      },
+      "text": "n. 床",
+      "example": "",
+      "kind": "teaching",
+      "origin": "source",
+      "generation_tool": "",
+      "author_label": "既有教学来源；GPT-6.1 SOL整理",
+      "learning_effect": "same",
+      "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+      "review_status": "approved"
+    },
+    {
+      "key": "cn02-018",
+      "selection": {
+        "domain": "target",
+        "reference_id": "48",
+        "object_id": "43c8d234-f334-4e32-80e2-9042bcec422f",
+        "label": "sofa",
+        "positions": [
+          {
+            "scenario": "u-home",
+            "order": 0
+          }
+        ],
+        "sense_id": "e0d0af44-f67f-43ab-9506-e5f5abd49624",
+        "pronunciation_id": "539a3629-23cf-49cf-9655-025fa0afcdae",
+        "evidence_id": "baaa60c9-ead3-40a6-b2ad-77307e5c68f3",
+        "snapshot": {
+          "sense_revision": 0,
+          "definition": "",
+          "pronunciation_revision": 0,
+          "pronunciation": ""
+        },
+        "source_code": "primary-words",
+        "source_key": "sofa",
+        "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+        "release_version": "scenario-0ad041fb6eac6918338efda4",
+        "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+        "lexical_hash": "902ed5f454ef47db74227c5eaf3f8a9707905d02f54744a82d13694c8c325d0e",
+        "raw_hash": "a65fd7f481f844025502157a70f0a814e65a7fdc80aec115e86792c78fbccef5",
+        "gloss_language": "zh",
+        "source_definition": "n. 沙发",
+        "source_pronunciation": "/ˈsəʊfə/",
+        "pronunciation_reviewed": true,
+        "legacy_chinese": "n. 沙发",
+        "chinese_version_id": null,
+        "presentation_revision": 0,
+        "selection_revision": null,
+        "status": "来源一致",
+        "category": "已有中文未经本轮核对",
+        "binding_key": "[\"e0d0af44-f67f-43ab-9506-e5f5abd49624\", \"539a3629-23cf-49cf-9655-025fa0afcdae\", \"baaa60c9-ead3-40a6-b2ad-77307e5c68f3\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+      },
+      "text": "n. 沙发",
+      "example": "",
+      "kind": "teaching",
+      "origin": "source",
+      "generation_tool": "",
+      "author_label": "既有教学来源；GPT-6.1 SOL整理",
+      "learning_effect": "same",
+      "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+      "review_status": "approved"
+    },
+    {
+      "key": "cn02-019",
+      "selection": {
+        "domain": "target",
+        "reference_id": "49",
+        "object_id": "d9e80525-7ec8-4427-8151-89d8b40b6d86",
+        "label": "table",
+        "positions": [
+          {
+            "scenario": "u-home",
+            "order": 0
+          }
+        ],
+        "sense_id": "c643a689-a754-42c2-ad4f-56c1424ddfe9",
+        "pronunciation_id": "9f3eb86f-29b2-419a-990d-9b4f50bb3236",
+        "evidence_id": "4bf3ef83-b42e-4198-9c10-153814a1bec2",
+        "snapshot": {
+          "sense_revision": 0,
+          "definition": "",
+          "pronunciation_revision": 0,
+          "pronunciation": ""
+        },
+        "source_code": "primary-words",
+        "source_key": "table",
+        "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+        "release_version": "scenario-0ad041fb6eac6918338efda4",
+        "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+        "lexical_hash": "ecb3465a108067221c0a76531256dc2f4d39898e692dbeda8b8cddc59a693a62",
+        "raw_hash": "bbeacba8c77fb55db7ef5ba5ec7dd99b1ac6d44c64f18a84493040a882735616",
+        "gloss_language": "zh",
+        "source_definition": "n. 餐桌；桌子",
+        "source_pronunciation": "/ˈteɪbl/",
+        "pronunciation_reviewed": true,
+        "legacy_chinese": "n. 餐桌；桌子",
+        "chinese_version_id": null,
+        "presentation_revision": 0,
+        "selection_revision": null,
+        "status": "来源一致",
+        "category": "已有中文未经本轮核对",
+        "binding_key": "[\"c643a689-a754-42c2-ad4f-56c1424ddfe9\", \"9f3eb86f-29b2-419a-990d-9b4f50bb3236\", \"4bf3ef83-b42e-4198-9c10-153814a1bec2\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+      },
+      "text": "n. 餐桌；桌子",
+      "example": "",
+      "kind": "teaching",
+      "origin": "source",
+      "generation_tool": "",
+      "author_label": "既有教学来源；GPT-6.1 SOL整理",
+      "learning_effect": "same",
+      "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+      "review_status": "approved"
+    },
+    {
+      "key": "cn02-020",
+      "selection": {
+        "domain": "target",
+        "reference_id": "50",
+        "object_id": "17a8bda4-c98a-4107-913a-3231b01daffc",
+        "label": "phone",
+        "positions": [
+          {
+            "scenario": "u-home",
+            "order": 0
+          }
+        ],
+        "sense_id": "3d53f6e3-5a1f-4091-9cc2-808a3fbcee4c",
+        "pronunciation_id": "8f10da33-c49c-4694-bb67-72e36a706cd4",
+        "evidence_id": "b69399a7-a0a1-4a51-bcce-924618898d0c",
+        "snapshot": {
+          "sense_revision": 0,
+          "definition": "",
+          "pronunciation_revision": 0,
+          "pronunciation": ""
+        },
+        "source_code": "primary-words",
+        "source_key": "phone",
+        "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+        "release_version": "scenario-0ad041fb6eac6918338efda4",
+        "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+        "lexical_hash": "9b052b262a123012c42bd3977ea072f40746a821a950216a1a536e36d0e4ad71",
+        "raw_hash": "1cfb1a79b9945c11f44e61a9b40b01bd35e967a42fe1d6cce64e8c610b4fc845",
+        "gloss_language": "zh",
+        "source_definition": "n. 电话",
+        "source_pronunciation": "/fəʊn/",
+        "pronunciation_reviewed": true,
+        "legacy_chinese": "n. 电话",
+        "chinese_version_id": null,
+        "presentation_revision": 0,
+        "selection_revision": null,
+        "status": "来源一致",
+        "category": "已有中文未经本轮核对",
+        "binding_key": "[\"3d53f6e3-5a1f-4091-9cc2-808a3fbcee4c\", \"8f10da33-c49c-4694-bb67-72e36a706cd4\", \"b69399a7-a0a1-4a51-bcce-924618898d0c\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+      },
+      "text": "n. 电话",
+      "example": "",
+      "kind": "teaching",
+      "origin": "source",
+      "generation_tool": "",
+      "author_label": "既有教学来源；GPT-6.1 SOL整理",
+      "learning_effect": "same",
+      "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+      "review_status": "approved"
+    },
+    {
+      "key": "cn02-021",
+      "selection": {
+        "domain": "target",
+        "reference_id": "51",
+        "object_id": "c95ed294-7205-4547-8743-24f8ab1e98f4",
+        "label": "fridge",
+        "positions": [
+          {
+            "scenario": "u-home",
+            "order": 0
+          }
+        ],
+        "sense_id": "80b83ab0-1a75-4773-89ef-366117e829b7",
+        "pronunciation_id": "3b49c692-1fb9-48da-9031-478de3912173",
+        "evidence_id": "d9e51ad4-7ca2-4a85-a31b-d6dda1da2a69",
+        "snapshot": {
+          "sense_revision": 0,
+          "definition": "",
+          "pronunciation_revision": 0,
+          "pronunciation": ""
+        },
+        "source_code": "primary-words",
+        "source_key": "fridge",
+        "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+        "release_version": "scenario-0ad041fb6eac6918338efda4",
+        "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+        "lexical_hash": "ae9f57a4cc260f89f36f31b4c639a895aceb1892f00ec524e009e11c3747521a",
+        "raw_hash": "f1d3f8ee75c84bfd9e74cf5482ba0896b1ba02aac9e95072136d774f8ce70501",
+        "gloss_language": "zh",
+        "source_definition": "n. 冰箱",
+        "source_pronunciation": "/frɪdʒ/",
+        "pronunciation_reviewed": true,
+        "legacy_chinese": "n. 冰箱",
+        "chinese_version_id": null,
+        "presentation_revision": 0,
+        "selection_revision": null,
+        "status": "来源一致",
+        "category": "已有中文未经本轮核对",
+        "binding_key": "[\"80b83ab0-1a75-4773-89ef-366117e829b7\", \"3b49c692-1fb9-48da-9031-478de3912173\", \"d9e51ad4-7ca2-4a85-a31b-d6dda1da2a69\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+      },
+      "text": "n. 冰箱",
+      "example": "",
+      "kind": "teaching",
+      "origin": "source",
+      "generation_tool": "",
+      "author_label": "既有教学来源；GPT-6.1 SOL整理",
+      "learning_effect": "same",
+      "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+      "review_status": "approved"
+    }
+  ],
+  "blocked": [
+    {
+      "label": "study",
+      "reason": "旧义项混合书房／学习，先核查义项边界，不以 same 掩盖拆义。"
+    }
+  ],
+  "review_status": "approved"
+}

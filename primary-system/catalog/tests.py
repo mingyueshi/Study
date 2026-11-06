@@ -119,6 +119,16 @@ class CatalogTests(PlatformFixture):
         self.item.save()
         self.assertEqual(self.client.get('/api/v1/catalog/?q=认识数字').json()['total'], 0)
 
+    def test_search_matches_sections_body_only(self):
+        # 教材正文已迁入类型化 sections；标题与概要排除后仍应能按正文命中。
+        self.item.title = '无关标题'
+        self.item.summary = ''
+        self.item.body = ''
+        self.item.sections = [{'type': 'text', 'title': '要点', 'text': '勾股定理是直角三角形的秘密'}]
+        self.item.save()
+        self.assertEqual(self.client.get('/api/v1/items/?q=直角三角形').json()['total'], 1)
+        self.assertEqual(self.client.get('/api/v1/items/?q=无关标题').json()['total'], 1)
+
     def test_textbook_subject_consistency_and_reusable_placements(self):
         self.collection.textbook = Textbook.objects.get(code='pep-chinese-4a-2026')
         with self.assertRaises(ValidationError):
