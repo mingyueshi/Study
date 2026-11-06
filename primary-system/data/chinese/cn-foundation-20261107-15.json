@@ -1,0 +1,111 @@
+{
+ "schema_version": 1,
+ "batch_id": "cn-foundation-20261107-15",
+ "reviewer": "AI: ZCode 主控（独立逐条复核）",
+ "entries": [
+  {
+   "key": "cn17-001",
+   "selection": {
+    "domain": "target",
+    "reference_id": "19",
+    "object_id": "f91fd3b8-be09-4e7e-8e54-df74e73c97a3",
+    "label": "maths book",
+    "positions": [
+     {
+      "scenario": "u-schoolbag",
+      "order": 0
+     }
+    ],
+    "sense_id": "fd067baf-ccc9-4b4a-ac80-f7d5b93bb9e0",
+    "pronunciation_id": "6cf70000-b587-4972-8d87-ea74a5b97a00",
+    "evidence_id": "5fcbc711-83dd-4c00-b87f-3bdcee974fa7",
+    "snapshot": {
+     "sense_revision": 0,
+     "definition": "",
+     "pronunciation_revision": 0,
+     "pronunciation": ""
+    },
+    "source_code": "primary-words",
+    "source_key": "maths book",
+    "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+    "release_version": "scenario-0ad041fb6eac6918338efda4",
+    "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+    "lexical_hash": "b6253d345dc0983ea3e72233aeb62c390ccf0d366cc5b79c9be1be55558dcd7c",
+    "raw_hash": "e77036771fd509659142088aa7bdfdbc67263c1a27e194b90b059a33360d0a5b",
+    "gloss_language": "zh",
+    "source_definition": "n. 数学书",
+    "source_pronunciation": "/mɑːθs bʊk/",
+    "pronunciation_reviewed": true,
+    "legacy_chinese": "n. 数学书",
+    "chinese_version_id": null,
+    "presentation_revision": 0,
+    "selection_revision": null,
+    "status": "来源一致",
+    "category": "已有中文未经本轮核对",
+    "binding_key": "[\"fd067baf-ccc9-4b4a-ac80-f7d5b93bb9e0\", \"6cf70000-b587-4972-8d87-ea74a5b97a00\", \"5fcbc711-83dd-4c00-b87f-3bdcee974fa7\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+   },
+   "text": "n. 数学书",
+   "example": "",
+   "kind": "teaching",
+   "origin": "source",
+   "generation_tool": "",
+   "author_label": "既有教学来源；ZCode 整理",
+   "learning_effect": "same",
+   "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+   "review_status": "approved"
+  },
+  {
+   "key": "cn17-002",
+   "selection": {
+    "domain": "target",
+    "reference_id": "52",
+    "object_id": "e54a84fa-836a-4b83-9f93-7b2177d16fb6",
+    "label": "study",
+    "positions": [
+     {
+      "scenario": "u-home",
+      "order": 0
+     }
+    ],
+    "sense_id": "23c04519-96a7-45ad-9d17-183b842be8b0",
+    "pronunciation_id": "cbb25c0f-f6c5-44d2-aba6-1ae2e3a51c53",
+    "evidence_id": "0184701f-91e8-4399-863a-cbdaf085a1bf",
+    "snapshot": {
+     "sense_revision": 0,
+     "definition": "",
+     "pronunciation_revision": 0,
+     "pronunciation": ""
+    },
+    "source_code": "primary-words",
+    "source_key": "study",
+    "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+    "release_version": "scenario-0ad041fb6eac6918338efda4",
+    "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+    "lexical_hash": "27b47e0d91b2772686ed3f3cdfbce1d7d27f9761dea09c0d99fd24666bc84b78",
+    "raw_hash": "6d7e95f6e71bf7036d25ec175240fc3a5431c54839e61cd6b6452b421749503e",
+    "gloss_language": "zh",
+    "source_definition": "n. 书房；v. 学习",
+    "source_pronunciation": "/ˈstʌdi/",
+    "pronunciation_reviewed": true,
+    "legacy_chinese": "n. 书房；v. 学习",
+    "chinese_version_id": null,
+    "presentation_revision": 0,
+    "selection_revision": null,
+    "status": "来源一致",
+    "category": "已有中文未经本轮核对",
+    "binding_key": "[\"23c04519-96a7-45ad-9d17-183b842be8b0\", \"cbb25c0f-f6c5-44d2-aba6-1ae2e3a51c53\", \"0184701f-91e8-4399-863a-cbdaf085a1bf\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+   },
+   "text": "n. 书房；v. 学习",
+   "example": "",
+   "kind": "teaching",
+   "origin": "source",
+   "generation_tool": "",
+   "author_label": "既有教学来源；ZCode 整理",
+   "learning_effect": "same",
+   "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+   "review_status": "approved"
+  }
+ ],
+ "blocked": [],
+ "review_status": "approved"
+}
