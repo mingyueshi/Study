@@ -2,12 +2,12 @@
 
 2026-11-02。只读全量清点的原始记录是inventory-before.json；补齐按引用归属的最终采用前记录为inventory-final-before.json（从本阶段backup只读生成），采用后为inventory-final-after.json。均位于`../output/primary-system-audit/2026-11-02/chinese-batch-01/`，包含DB路径、清点时间、全部来源当前版本及每项ID／位置／Sense／读音／证据／快照／原文语言／legacy中文／采用和可用状态。
 
-|分母|批次01后|批次02后|批次03后|批次04后|批次05后|批次06后|批次07后|批次08后|其余legacy未经批次核对|
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-|场景引用577（577目标）|26|47|74|103|140|188|236|287|290|
-|教材引用306|13|13|13|13|13|13|13|13|293|
-|合计引用883|39|60|87|116|153|201|249|300（33.98%）|583|
-|唯一固定绑定883|39|60|87|116|153|201|249|300（33.98%）|583|
+|分母|批次01后|批次02后|批次03后|批次04后|批次05后|批次06后|批次07后|批次08后|批次09后|其余legacy未经批次核对|
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+|场景引用577（577目标）|26|47|74|103|140|188|236|287|357|220|
+|教材引用306|13|13|13|13|13|13|13|13|13|293|
+|合计引用883|39|60|87|116|153|201|249|300|370（41.90%）|513|
+|唯一固定绑定883|39|60|87|116|153|201|249|300|370（41.90%）|513|
 
 全部883项已有legacy中文，不是883项“缺中文”；缺少中文正文0，固定绑定当前失效0。采用前全部仅为旧中文存在，未通过新版本核对。本批39项是来源中文复用并经AI逐条核对采用，不是AI新译文或真人审校。
 
@@ -44,5 +44,9 @@
 ### 批次08（2026-11-07导入）
 
 `cn-foundation-20261107-06`：场景u-family全部12条＋u-friends全部13条＋u-animals全部13条＋u-months全部13条，共51条创建／复跑0新增，回执入库；场景287/577，**中文义项版本累计达300**。逐条核对确认legacy中文与固定证据来源释义逐字一致，读音全部已核对。多义词八处（uncle/aunt/boy/thin/duck/cow/month/May）均核实为本目标证据与legacy逐字一致；**May（n. 五月）与may（可以）为大小写敏感的独立固定绑定**，本批仅采用大写May月份义，与覆盖清点开头的May/may警示一致。light、maths book、study暂缓不变。批次清单与摘要在`data/chinese/cn-foundation-20261107-06.json`与`output/primary-system-audit/2026-11-07/chinese-batch-03/batch8-summary.json`，导入前恢复点`before-batch-08.sqlite3`。剩余583项（场景290＋教材293）仍未逐条核对，不计入已审范围。
+
+### 批次09（2026-11-07导入）
+
+`cn-foundation-20261107-07`：场景u-time、u-greetings、u-camping、u-housework、u-toys全部12条＋u-school全部10条，共70条创建／复跑0新增，回执入库；场景357/577。逐条核对确认legacy中文与固定证据来源释义逐字一致，读音全部已核对。多义词六处（night/excuse me/forest/sweep/puzzle/library）均核实为本目标证据与legacy逐字一致，无light式扩展；含短语词形（get up、go to school、make the bed、take out the trash、hide and seek、skipping rope、teachers' office、first floor、o'clock）照常逐字采用。light、maths book、study暂缓不变。批次清单与摘要在`data/chinese/cn-foundation-20261107-07.json`与`output/primary-system-audit/2026-11-07/chinese-batch-03/batch9-summary.json`，导入前恢复点`before-batch-09.sqlite3`。剩余513项（场景220＋教材293）仍未逐条核对，不计入已审范围。
 
 固定批准清单与摘要见[chinese-batch-01-candidates.md](chinese-batch-01-candidates.md)，实施证据见[首批报告](chinese-batch-01-implementation.md)。
