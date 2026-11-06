@@ -27,11 +27,11 @@ SPECS = {
         "BSD-2-Clause",
         "https://github.com/cmusphinx/cmudict/blob/master/LICENSE",
     ),
-    "unihan17": (
+    "unihan18": (
         UnihanCharacter,
-        "Unihan 17",
+        "Unihan 18",
         "补充字形、读音与原始属性，与正式词库版本分别标注",
-        "https://www.unicode.org/versions/Unicode17.0.0/",
+        "https://www.unicode.org/versions/Unicode18.0.0/",
         "Unicode License v3",
         "https://www.unicode.org/license.txt",
     ),
@@ -216,8 +216,8 @@ def reference_results(text, scope, params, *, exact=False, ready=None):
             version=ready["cmudict"]["version"],
         )
     if chinese and (text or browse in ("hanzi", "strokes")):
-        use_assets = browse == "strokes" or "unihan17" not in ready
-        code = "makemeahanzi" if use_assets else "unihan17"
+        use_assets = browse == "strokes" or "unihan18" not in ready
+        code = "makemeahanzi" if use_assets else "unihan18"
         if code in ready:
             rows = source_rows(code, ready)
             if text:
@@ -252,7 +252,7 @@ def reference_results(text, scope, params, *, exact=False, ready=None):
                 description=(
                     "Make Me a Hanzi字形资料"
                     if use_assets
-                    else "Unihan 17补充属性；与正式来源的版本分别保留。"
+                    else "Unihan 18补充属性；与正式来源的版本分别保留。"
                 ),
                 params=params,
                 version=ready[code]["version"],
@@ -276,8 +276,8 @@ def reference_results(text, scope, params, *, exact=False, ready=None):
             result["stroke_asset"] = asset
             if (
                 asset
-                and "unihan17" in ready
-                and not source_rows("unihan17", ready).filter(character=text).exists()
+                and "unihan18" in ready
+                and not source_rows("unihan18", ready).filter(character=text).exists()
             ):
                 result["asset_only"] = asset
     result["has_results"] = any(

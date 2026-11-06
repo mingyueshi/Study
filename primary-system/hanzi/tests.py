@@ -5,7 +5,7 @@ from .models import HanziAsset, UnihanCharacter, UnihanProperty
 
 class HanziViewTests(TestCase):
     def setUp(self):
-        Dataset.objects.create(code="unihan17", state="ready", version="17.0.0")
+        Dataset.objects.create(code="unihan18", state="ready", version="18.0.0")
         Dataset.objects.create(
             code="makemeahanzi",
             state="ready",
@@ -51,7 +51,7 @@ class HanziViewTests(TestCase):
             "此部件在笔顺字典中收录",
         )
         response = self.client.get("/hanzi/⺆/")
-        self.assertContains(response, "Unihan 17 未收录")
+        self.assertContains(response, "Unihan 18 未收录")
         self.assertContains(response, "translate(0,776) scale(1,-1)")
         self.assertContains(response, "stroke-next")
         self.assertContains(response, "stroke-reset")

@@ -35,7 +35,7 @@ def index(request):
 @require_GET
 def detail(request, character):
     ready = ready_sources()
-    row = source_rows("unihan17", ready).filter(character=character).first()
+    row = source_rows("unihan18", ready).filter(character=character).first()
     asset = source_rows("makemeahanzi", ready).filter(character=character).first()
     if row is None and asset is None:
         raise Http404("来源未收录此字形")

@@ -130,7 +130,7 @@ def import_data(input_root, dry_run=False):
                 dataset.save(update_fields=["state", "counts"])
     asset_chars = set(chars)
     del chars, images
-    original = locate(input_root, "language/unihan-17.0.0/original/Unihan.zip")
+    original = locate(input_root, "language/unihan-18.0.0/original/Unihan.zip")
     props = {}
     locators = {}
     property_count = 0
@@ -149,15 +149,15 @@ def import_data(input_root, dry_run=False):
                     locators[code, name] = (file, index)
                     property_count += 1
     if (
-        len(props) != 102998
-        or property_count != 1555629
+        len(props) != 102999
+        or property_count != 1479698
         or len({name for p in props.values() for name in p}) != 99
     ):
         raise ValidationError(
             f"Unihan原始计数不符：{len(props)}字，{property_count}属性行"
         )
     sha = source_digest(original)
-    result["unihan17"] = {
+    result["unihan18"] = {
         "characters": len(props),
         "properties": property_count,
         "property_names": 99,
@@ -178,7 +178,7 @@ def import_data(input_root, dry_run=False):
     ]
     char_hash = record_digest(
         (
-            "17.0.0",
+            "18.0.0",
             code,
             chr(int(code[2:], 16)),
             p.get("kMandarin", ""),
@@ -210,11 +210,11 @@ def import_data(input_root, dry_run=False):
     ]
     if dry_run:
         validate_existing(
-            "unihan17",
-            "17.0.0",
+            "unihan18",
+            "18.0.0",
             sha,
             [
-                (UnihanCharacter.objects.all(), 102998),
+                (UnihanCharacter.objects.all(), 102999),
                 (UnihanProperty.objects.all(), property_count),
             ],
             unihan_fingerprints,
@@ -222,35 +222,35 @@ def import_data(input_root, dry_run=False):
     if not dry_run:
         with transaction.atomic():
             dataset, created = Dataset.objects.select_for_update().get_or_create(
-                code="unihan17",
+                code="unihan18",
                 defaults={
-                    "title": "Unihan17完整汉字属性",
-                    "version": "17.0.0",
+                    "title": "Unihan18完整汉字属性",
+                    "version": "18.0.0",
                     "input_digest": sha,
                     "state": "importing",
                 },
             )
             if not created and (
-                dataset.input_digest != sha or dataset.version != "17.0.0"
+                dataset.input_digest != sha or dataset.version != "18.0.0"
             ):
                 raise ValidationError("Unihan17版本漂移")
             validate_existing(
-                "unihan17",
-                "17.0.0",
+                "unihan18",
+                "18.0.0",
                 sha,
                 [
-                    (UnihanCharacter.objects.all(), 102998),
+                    (UnihanCharacter.objects.all(), 102999),
                     (UnihanProperty.objects.all(), property_count),
                 ],
                 unihan_fingerprints,
             )
             if dataset.state == "ready":
                 if (
-                    UnihanCharacter.objects.count() != 102998
+                    UnihanCharacter.objects.count() != 102999
                     or UnihanProperty.objects.count() != property_count
                 ):
                     raise ValidationError("Unihan回执行数不符")
-                result["unihan17"]["unchanged"] = 102998
+                result["unihan18"]["unchanged"] = 102999
             else:
                 if UnihanCharacter.objects.exists():
                     raise ValidationError("Unihan已有半成品，拒绝追加")
@@ -288,6 +288,6 @@ def import_data(input_root, dry_run=False):
                 if buffer:
                     UnihanProperty.objects.bulk_create(buffer, batch_size=1000)
                 dataset.state = "ready"
-                dataset.counts = {"characters": 102998, "properties": property_count}
+                dataset.counts = {"characters": 102999, "properties": property_count}
                 dataset.save(update_fields=["state", "counts"])
     return result

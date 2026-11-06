@@ -1,6 +1,6 @@
 """中文短标签；原属性键和值始终保留，不把编码对照当作现代教学结论。
 
-属性范围参照 Unicode UAX #38（17.0.0）：
+属性范围参照 Unicode UAX #38（18.0.0）：
 https://www.unicode.org/reports/tr38/
 """
 

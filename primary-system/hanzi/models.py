@@ -24,7 +24,7 @@ class HanziAsset(models.Model):
 
 
 class UnihanCharacter(models.Model):
-    version = models.CharField(max_length=30, default="17.0.0")
+    version = models.CharField(max_length=30, default="18.0.0")
     codepoint = models.CharField(max_length=12, db_index=True)
     character = models.CharField(max_length=4, db_index=True)
     mandarin = models.CharField(max_length=1000, blank=True, db_index=True)
