@@ -24,19 +24,31 @@ LABELS = {
     'excerpts': '原文金句', 'authorLife': '作者小传', 'authorBio': '作者简介',
     'life': '人物小传', 'bio': '人物简介', 'bg': '创作背景', 'book': '快乐读书吧',
     'examples': '习作例文', 'videos': '拓展视频', 'bvid': 'B站编号', 'up': 'UP 主', 'dur': '时长（秒）',
+    # math 单一数据源（primary/math-data.js）的视频分组字段
+    'desc': '简介', 'list': '视频列表', 'groups': '视频分组', 'group': '所属分组',
 }
-SKIP = {'id', 'key', 'fig', 'img', 'banner', 'emoji', 'color', 'demo', 'interactive', 'tag'}
+SKIP = {'id', 'key', 'fig', 'img', 'banner', 'emoji', 'color', 'demo', 'interactive', 'tag', 'cover'}
 
 # 导入能力由适配器决定。Module 还承载独立玩法和历史专题入口，存在并不代表有教材映射。
 TEXTBOOK_ADAPTERS = {
     'knowledge': {'units': 'units', 'children': 'lessons', 'kind': 'knowledge',
                   'textbooks': {'all': 'pep-chinese-4a-2026'}},
     'math': {'units': 'units', 'children': 'points', 'kind': 'knowledge',
-             'textbooks': {'all': 'bnu-math-4a-2026'}},
+             'textbooks': {'all': 'bnu-math-4a-2026'},
+             # 知识点的 life 是「生活中的数学」一句话，静态页按 id 合成情境照片路径。
+             'labels': {'life': '生活中的数学'}, 'photo_of': None,
+             },
     'english': {'units': 'ENGLISH_UNITS', 'children': 'words', 'kind': 'word',
                 'textbook_children': 'ENGLISH_DIALOGUES', 'textbook_kind': 'dialogue',
                 'textbooks': {'first': 'fltrp-english-4a-2026', 'second': 'fltrp-english-4b-2026'}},
 }
+
+
+def _math_photo(raw):
+    return f'images/math/p-{raw["id"]}.jpg' if raw.get('life') and raw.get('id') else None
+
+
+TEXTBOOK_ADAPTERS['math']['photo_of'] = _math_photo
 
 
 def plain(value):
@@ -49,15 +61,16 @@ def plain(value):
     return str(value) if value is not None else ''
 
 
-def item_defaults(raw, module, source, kind, title):
+def item_defaults(raw, module, source, kind, title, labels=None, image=None):
+    labels = labels or LABELS
     summary = raw.get('zh') or raw.get('overview') or raw.get('goal') or ''
-    sections = [{'type': 'text', 'title': LABELS.get(k, k), 'text': plain(v)} for k, v in raw.items()
+    sections = [{'type': 'text', 'title': labels.get(k, k), 'text': plain(v)} for k, v in raw.items()
                 if k not in SKIP | {'title', 'en', 'idiom', 'zh', 'overview', 'goal'} and v]
     fig = raw.get('fig')
     if isinstance(fig, str) and fig.strip():
         # 图示块置首位，贴近 legacy 卡片的视觉顺序；说明文字由图示库内置默认图注补齐。
         sections.insert(0, {'type': 'figure', 'fig': fig.strip()})
-    img = raw.get('img')
+    img = raw.get('img') or image
     if isinstance(img, str) and img.strip():
         # 实景照片块：文件随系统本地存储（static/images/...），无网也能展示。
         sections.insert(0, {'type': 'image', 'src': img.strip(), 'alt': title})
@@ -92,6 +105,8 @@ def import_snapshot(snapshot, publish=False):
             raise CommandError(f'{code} 的数据或来源摘要不正确。')
         units_key = adapter['units']
         units = data[units_key]
+        adapter_labels = {**LABELS, **adapter.get('labels', {})}
+        photo_of = adapter.get('photo_of')
         groups = [('all', units)] if code != 'english' else [
             ('first', [u for u in units if u['book'] == '四年级上册']),
             ('second', [u for u in units if u['book'] == '四年级下册']),
@@ -123,7 +138,8 @@ def import_snapshot(snapshot, publish=False):
                     identity = raw.get('key') or raw.get('id') or title
                     # Identity includes source unit: independently tracked textbook occurrences stay distinct.
                     key = f'primary:{code}:{raw_unit["id"]}:{identity}'
-                    upsert_item(key, raw, module, source, kind, title, unit, index, publish, report)
+                    upsert_item(key, raw, module, source, kind, title, unit, index, publish, report,
+                                labels=adapter_labels, image=photo_of(raw) if photo_of else None)
                 if code == 'english' and adapter.get('textbook_children'):
                     # 课文对话按 unitId 挂到同一单元；排在单词之后（100+），页面上单独成 tab。
                     dialogues = [d for d in data.get(adapter['textbook_children'], [])
@@ -140,28 +156,36 @@ def import_snapshot(snapshot, publish=False):
                     skip_unit_keys.add('book')
                 extra = {k: v for k, v in raw_unit.items() if k not in skip_unit_keys}
                 if extra:
+                    # 单元横幅实景图（math.banners）作为指南卡首图；引用键带 mban- 前缀（与静态页一致地剥掉）。
+                    banners = data.get('banners') or {}
+                    banner_ref = str(raw_unit.get('banner') or '')
+                    banner_image = banners.get(banner_ref) or banners.get(banner_ref.removeprefix('mban-'))
                     upsert_item(f'primary:{code}:{raw_unit["id"]}:__overview', extra, module, source,
-                                'reference', '单元学习指南', unit, 10000, publish, report)
+                                'reference', '单元学习指南', unit, 10000, publish, report,
+                                labels=adapter_labels, image=banner_image)
             # Keep every ancillary dataset, rather than silently dropping poems or related definitions.
-            metadata_keys = {units_key, 'textbook', 'edition', 'ENGLISH_BOOKS', 'ENGLISH_WORDS'}
+            # meta 是数据元信息、banners 已按单元并入指南卡，都不再单独立卡。
+            metadata_keys = {units_key, 'textbook', 'edition', 'meta', 'banners', 'ENGLISH_BOOKS', 'ENGLISH_WORDS'}
             if code == 'english':
                 # Relationship label/style/order settings drive the legacy UI, not learning cards.
                 metadata_keys.update({'RELATION_META', 'RELATION_ORDER', 'ENGLISH_DIALOGUES'})
             extras = {k: v for k, v in data.items() if k not in metadata_keys}
             if extras:
                 reference, _ = Unit.objects.get_or_create(textbook_book=book, code='reference', defaults={'title': '复习与资料', 'order': 10000})
+                banners = data.get('banners') or {}
                 for index, (key, value) in enumerate(extras.items()):
                     upsert_item(f'primary:{code}:reference:{key}', {key: value}, module, source, 'reference',
-                                LABELS.get(key, key), reference, index, publish, report)
+                                LABELS.get(key, key), reference, index, publish, report,
+                                image=banners.get(key))
     return report
 
 
-def upsert_item(key, raw, module, source, kind, title, unit, order, publish, report):
+def upsert_item(key, raw, module, source, kind, title, unit, order, publish, report, labels=None, image=None):
     if not title:
         raise CommandError(f'{key} 缺少标题。')
     if len(key) > 240:
         key = f'primary:{module.code}:sha256:{hashlib.sha256(key.encode()).hexdigest()}'
-    defaults = item_defaults(raw, module, source, kind, title)
+    defaults = item_defaults(raw, module, source, kind, title, labels=labels, image=image)
     item, created = ContentItem.objects.get_or_create(source_key=key, defaults={
         **defaults, 'status': 'published' if publish else 'draft',
     })

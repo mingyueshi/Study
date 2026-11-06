@@ -447,6 +447,27 @@ class ImportTests(PlatformFixture):
             self.assertEqual(self.item.title, '认识数字')
 
 
+def math_snapshot():
+    """primary/math-data.js 新版单一数据源：单元横幅 + 知识点生活情境照片 + 视频清单。"""
+    return {'schema_version': 1, 'modules': [{
+        'code': 'math', 'source_file': 'primary/math-data.js', 'sha256': 'd' * 64,
+        'data': {
+            'textbook': '北师大版（新课标）数学四年级上册', 'edition': '测试修订版 · 一个单元一个知识点',
+            'meta': {'subject': '数学', 'textbook': '北师大版（新课标）', 'grade': '四年级', 'volume': '上册'},
+            'banners': {'mu1': 'images/math/banner-mu1.jpg', 'formulas': 'images/math/banner-mformulas.jpg'},
+            'videos': {'groups': [{'id': 'blocks', 'name': '数字积木动画', 'desc': '边玩边学'}],
+                       'list': [{'id': 'nb-s1', 'group': 'blocks', 'bvid': 'BV15KTx6SEGr', 'title': '数字积木 第一季',
+                                 'up': 'B站少儿 · Numberblocks', 'dur': 600, 'cover': 'images/math/videos/v-nb-s1.jpg',
+                                 'note': '一集一个数字，认识数与运算'}]},
+            'formulas': [{'title': '亿以内数位顺序表', 'items': ['个级、万级、亿级']}],
+            'units': [{'id': 'mu1', 'no': '第一单元', 'name': '认识更大的数', 'emoji': '🔢', 'color': '#2f9bd6',
+                       'banner': 'mban-mu1', 'intro': '认识万级与亿级的计数单位。',
+                       'goals': ['感受大数'], 'points': [
+                           {'id': 'p1', 'title': '数一数', 'fig': 'count', 'life': '十万张纸摞起来大约厚 10 米。',
+                            'overview': '认识万级计数单位。', 'items': ['十万'], 'recall': '口诀'}]}],
+        }}]}
+
+
 class KnowledgeImportTests(PlatformFixture):
     """knowledge 新版单一数据源导入：素材字段中文化、实景图片块、单元板块不丢。"""
 
@@ -485,3 +506,47 @@ class KnowledgeImportTests(PlatformFixture):
         self.assertIn('人物小传', text)
         self.assertIn('创作背景', text)
         self.assertNotIn('img：', text)
+
+
+class MathImportTests(PlatformFixture):
+    """math 新版单一数据源导入：情境照片按 id 派生、横幅进单元指南、meta/banners 不立卡。"""
+
+    @classmethod
+    def setUpTestData(cls):
+        super().setUpTestData()
+        import_snapshot(math_snapshot(), publish=True)
+        cls.point = ContentItem.objects.get(title='数一数')
+        cls.guide = ContentItem.objects.get(source_key='primary:math:mu1:__overview')
+
+    def test_point_photo_and_life_label(self):
+        self.assertEqual(self.point.sections[0]['type'], 'image')
+        self.assertEqual(self.point.sections[0]['src'], 'images/math/p-p1.jpg')
+        by_title = {s.get('title'): s for s in self.point.sections if s.get('title')}
+        self.assertIn('生活中的数学', by_title)
+        self.assertIn('十万张纸', by_title['生活中的数学']['text'])
+
+    def test_unit_guide_has_banner_image(self):
+        self.assertEqual(self.guide.sections[0]['type'], 'image')
+        self.assertEqual(self.guide.sections[0]['src'], 'images/math/banner-mu1.jpg')
+        titles = [s.get('title') for s in self.guide.sections]
+        self.assertIn('学习目标', titles)
+
+    def test_meta_and_banners_do_not_become_cards(self):
+        from catalog.models import Unit
+        reference = Unit.objects.get(textbook_book__code='primary-math-all', code='reference')
+        titles = [p.item.title for p in reference.placements.select_related('item')]
+        self.assertIn('拓展视频', titles)
+        self.assertNotIn('meta', titles)
+        self.assertNotIn('banners', titles)
+        videos_card = next(p.item for p in reference.placements.select_related('item') if p.item.title == '拓展视频')
+        text = ''.join(s.get('text', '') for s in videos_card.sections)
+        self.assertIn('数字积木 第一季', text)
+        self.assertNotIn('cover：', text)
+
+    def test_reference_cards_get_their_banners(self):
+        # 公式速查卡取 banners['formulas'] 作横幅；单元指南按 mban- 前缀归一化解析。
+        formulas = ContentItem.objects.get(source_key='primary:math:reference:formulas')
+        self.assertEqual(formulas.sections[0], {'type': 'image', 'src': 'images/math/banner-mformulas.jpg',
+                                                'alt': '公式速查'})
+        guide = ContentItem.objects.get(source_key='primary:math:mu1:__overview')
+        self.assertEqual(guide.sections[0]['src'], 'images/math/banner-mu1.jpg')
