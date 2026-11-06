@@ -1,0 +1,876 @@
+{
+ "schema_version": 1,
+ "batch_id": "cn-foundation-20261107-12",
+ "reviewer": "AI: ZCode 主控（独立逐条复核）",
+ "entries": [
+  {
+   "key": "cn14-001",
+   "selection": {
+    "domain": "target",
+    "reference_id": "171",
+    "object_id": "16abbfbd-b1c5-4b76-8c19-220a57e539c5",
+    "label": "hat",
+    "positions": [
+     {
+      "scenario": "u-clothes",
+      "order": 0
+     }
+    ],
+    "sense_id": "1fe6732f-1d36-40ed-a38a-91af7f1e6791",
+    "pronunciation_id": "e5dac362-3a82-4d35-8919-d64ec024b786",
+    "evidence_id": "63347489-bb86-4c45-bab2-59b904c0001e",
+    "snapshot": {
+     "sense_revision": 0,
+     "definition": "",
+     "pronunciation_revision": 0,
+     "pronunciation": ""
+    },
+    "source_code": "primary-words",
+    "source_key": "hat",
+    "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+    "release_version": "scenario-0ad041fb6eac6918338efda4",
+    "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+    "lexical_hash": "0e6ecab498e9edb5c3b9088dba56f0d0f5a111fe414f2af56b508b19cdbb2868",
+    "raw_hash": "56d57bcd18fc609d4447d050b01867ad6422e7dcb7d51ca53d4d46bbeddff59d",
+    "gloss_language": "zh",
+    "source_definition": "n. 帽子（有帽檐）",
+    "source_pronunciation": "/hæt/",
+    "pronunciation_reviewed": true,
+    "legacy_chinese": "n. 帽子（有帽檐）",
+    "chinese_version_id": null,
+    "presentation_revision": 0,
+    "selection_revision": null,
+    "status": "来源一致",
+    "category": "已有中文未经本轮核对",
+    "binding_key": "[\"1fe6732f-1d36-40ed-a38a-91af7f1e6791\", \"e5dac362-3a82-4d35-8919-d64ec024b786\", \"63347489-bb86-4c45-bab2-59b904c0001e\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+   },
+   "text": "n. 帽子（有帽檐）",
+   "example": "",
+   "kind": "teaching",
+   "origin": "source",
+   "generation_tool": "",
+   "author_label": "既有教学来源；ZCode 整理",
+   "learning_effect": "same",
+   "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+   "review_status": "approved"
+  },
+  {
+   "key": "cn14-002",
+   "selection": {
+    "domain": "target",
+    "reference_id": "172",
+    "object_id": "9da54972-72d5-4eb7-bb65-6e5a9c394138",
+    "label": "cap",
+    "positions": [
+     {
+      "scenario": "u-clothes",
+      "order": 0
+     }
+    ],
+    "sense_id": "0e4406f7-1cba-406c-9aaf-f76367d426a5",
+    "pronunciation_id": "007f2356-4276-4b03-a222-5056359e3662",
+    "evidence_id": "eaf398e5-0f65-42a1-bdcb-25aacc43d7de",
+    "snapshot": {
+     "sense_revision": 0,
+     "definition": "",
+     "pronunciation_revision": 0,
+     "pronunciation": ""
+    },
+    "source_code": "primary-words",
+    "source_key": "cap",
+    "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+    "release_version": "scenario-0ad041fb6eac6918338efda4",
+    "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+    "lexical_hash": "784827d2ed072df35511b68be6cf9a28c3bdf1e195f6a0794af2b334983c8ce8",
+    "raw_hash": "9a2ecde73e6eeb9553cc0f1a2740e60c3d46f3870f11d6ed379dab478bc42b5d",
+    "gloss_language": "zh",
+    "source_definition": "n. 鸭舌帽",
+    "source_pronunciation": "/kæp/",
+    "pronunciation_reviewed": true,
+    "legacy_chinese": "n. 鸭舌帽",
+    "chinese_version_id": null,
+    "presentation_revision": 0,
+    "selection_revision": null,
+    "status": "来源一致",
+    "category": "已有中文未经本轮核对",
+    "binding_key": "[\"0e4406f7-1cba-406c-9aaf-f76367d426a5\", \"007f2356-4276-4b03-a222-5056359e3662\", \"eaf398e5-0f65-42a1-bdcb-25aacc43d7de\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+   },
+   "text": "n. 鸭舌帽",
+   "example": "",
+   "kind": "teaching",
+   "origin": "source",
+   "generation_tool": "",
+   "author_label": "既有教学来源；ZCode 整理",
+   "learning_effect": "same",
+   "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+   "review_status": "approved"
+  },
+  {
+   "key": "cn14-003",
+   "selection": {
+    "domain": "target",
+    "reference_id": "173",
+    "object_id": "4bc57ee5-d72f-4272-be33-677fd5c39702",
+    "label": "coat",
+    "positions": [
+     {
+      "scenario": "u-clothes",
+      "order": 0
+     }
+    ],
+    "sense_id": "4b3e860f-57cc-4789-af71-c22a561c3ce2",
+    "pronunciation_id": "d28dea5c-62c5-43dd-9616-89552a8d3b91",
+    "evidence_id": "aa932a61-68be-4cb1-b9b5-68c364f1fdef",
+    "snapshot": {
+     "sense_revision": 0,
+     "definition": "",
+     "pronunciation_revision": 0,
+     "pronunciation": ""
+    },
+    "source_code": "primary-words",
+    "source_key": "coat",
+    "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+    "release_version": "scenario-0ad041fb6eac6918338efda4",
+    "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+    "lexical_hash": "83f224f5282c3ddb1d4913c3df7ac7cf7fe3ff012cfe635de59ee2a2105a1b5e",
+    "raw_hash": "b3ea79a16e0ec9c9bacbde05cb71a3020f602cc49372d0c1a1dd7559d9309eb0",
+    "gloss_language": "zh",
+    "source_definition": "n. 大衣；外套",
+    "source_pronunciation": "/kəʊt/",
+    "pronunciation_reviewed": true,
+    "legacy_chinese": "n. 大衣；外套",
+    "chinese_version_id": null,
+    "presentation_revision": 0,
+    "selection_revision": null,
+    "status": "来源一致",
+    "category": "已有中文未经本轮核对",
+    "binding_key": "[\"4b3e860f-57cc-4789-af71-c22a561c3ce2\", \"d28dea5c-62c5-43dd-9616-89552a8d3b91\", \"aa932a61-68be-4cb1-b9b5-68c364f1fdef\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+   },
+   "text": "n. 大衣；外套",
+   "example": "",
+   "kind": "teaching",
+   "origin": "source",
+   "generation_tool": "",
+   "author_label": "既有教学来源；ZCode 整理",
+   "learning_effect": "same",
+   "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+   "review_status": "approved"
+  },
+  {
+   "key": "cn14-004",
+   "selection": {
+    "domain": "target",
+    "reference_id": "174",
+    "object_id": "496e9836-9e6f-4a98-a26f-eee5008415d1",
+    "label": "shirt",
+    "positions": [
+     {
+      "scenario": "u-clothes",
+      "order": 0
+     }
+    ],
+    "sense_id": "7c9087be-fdce-41d0-8e9f-b2fcda0dd287",
+    "pronunciation_id": "0d248820-7b01-4945-ba59-b43eeed8bc81",
+    "evidence_id": "0a0a800d-5cd8-43b6-b4cc-4020ea2ed6d0",
+    "snapshot": {
+     "sense_revision": 0,
+     "definition": "",
+     "pronunciation_revision": 0,
+     "pronunciation": ""
+    },
+    "source_code": "primary-words",
+    "source_key": "shirt",
+    "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+    "release_version": "scenario-0ad041fb6eac6918338efda4",
+    "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+    "lexical_hash": "fa2f5476131e9bd76eb0e1d8d9fe8bea87c285275db2f80df5b342ce4fac2442",
+    "raw_hash": "306007ed93ffd62912b06382a58ceb9a6b9911a9ae3f46540f2e0eaeb4082f3c",
+    "gloss_language": "zh",
+    "source_definition": "n. 衬衫",
+    "source_pronunciation": "/ʃɜːt/",
+    "pronunciation_reviewed": true,
+    "legacy_chinese": "n. 衬衫",
+    "chinese_version_id": null,
+    "presentation_revision": 0,
+    "selection_revision": null,
+    "status": "来源一致",
+    "category": "已有中文未经本轮核对",
+    "binding_key": "[\"7c9087be-fdce-41d0-8e9f-b2fcda0dd287\", \"0d248820-7b01-4945-ba59-b43eeed8bc81\", \"0a0a800d-5cd8-43b6-b4cc-4020ea2ed6d0\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+   },
+   "text": "n. 衬衫",
+   "example": "",
+   "kind": "teaching",
+   "origin": "source",
+   "generation_tool": "",
+   "author_label": "既有教学来源；ZCode 整理",
+   "learning_effect": "same",
+   "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+   "review_status": "approved"
+  },
+  {
+   "key": "cn14-005",
+   "selection": {
+    "domain": "target",
+    "reference_id": "175",
+    "object_id": "97d7a697-2910-4a38-a622-16afc263db67",
+    "label": "T-shirt",
+    "positions": [
+     {
+      "scenario": "u-clothes",
+      "order": 0
+     }
+    ],
+    "sense_id": "5ed19ded-1ed5-4fe7-810f-771bd2707e3d",
+    "pronunciation_id": "6acc2197-2711-4405-b1b0-df815f3936a1",
+    "evidence_id": "cdbd9b02-b343-41f7-bc8f-4ab76975578e",
+    "snapshot": {
+     "sense_revision": 0,
+     "definition": "",
+     "pronunciation_revision": 0,
+     "pronunciation": ""
+    },
+    "source_code": "primary-words",
+    "source_key": "T-shirt",
+    "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+    "release_version": "scenario-0ad041fb6eac6918338efda4",
+    "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+    "lexical_hash": "58695c3d557bb29a493679134a261316ad3d3ca41f0d5a3cdfb85d098329c9db",
+    "raw_hash": "56a182c45f1c192f3b7434e48a93c2e58819fe98abda0495b9e2e40610b500e3",
+    "gloss_language": "zh",
+    "source_definition": "n. T 恤衫",
+    "source_pronunciation": "/ˈtiːʃɜːt/",
+    "pronunciation_reviewed": true,
+    "legacy_chinese": "n. T 恤衫",
+    "chinese_version_id": null,
+    "presentation_revision": 0,
+    "selection_revision": null,
+    "status": "来源一致",
+    "category": "已有中文未经本轮核对",
+    "binding_key": "[\"5ed19ded-1ed5-4fe7-810f-771bd2707e3d\", \"6acc2197-2711-4405-b1b0-df815f3936a1\", \"cdbd9b02-b343-41f7-bc8f-4ab76975578e\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+   },
+   "text": "n. T 恤衫",
+   "example": "",
+   "kind": "teaching",
+   "origin": "source",
+   "generation_tool": "",
+   "author_label": "既有教学来源；ZCode 整理",
+   "learning_effect": "same",
+   "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+   "review_status": "approved"
+  },
+  {
+   "key": "cn14-006",
+   "selection": {
+    "domain": "target",
+    "reference_id": "176",
+    "object_id": "b09a5a2d-0b55-4727-8b06-84c8afc798b1",
+    "label": "dress",
+    "positions": [
+     {
+      "scenario": "u-clothes",
+      "order": 0
+     }
+    ],
+    "sense_id": "b7d77f66-3cc7-4f9b-9d0e-f1cd489475ea",
+    "pronunciation_id": "311b4a7f-5609-44a9-97e5-efc6127610f8",
+    "evidence_id": "69f06fff-dfe4-4936-ab8c-72231d135971",
+    "snapshot": {
+     "sense_revision": 0,
+     "definition": "",
+     "pronunciation_revision": 0,
+     "pronunciation": ""
+    },
+    "source_code": "primary-words",
+    "source_key": "dress",
+    "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+    "release_version": "scenario-0ad041fb6eac6918338efda4",
+    "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+    "lexical_hash": "ce684cad80fad8a6ab577974d2e82e16613f92038912143ba70a6851abf5ad34",
+    "raw_hash": "ba5c3e0fd781264c1a71bee854dfc6dfa76fff42f4fea8f7e024eed1c3471258",
+    "gloss_language": "zh",
+    "source_definition": "n. 连衣裙",
+    "source_pronunciation": "/dres/",
+    "pronunciation_reviewed": true,
+    "legacy_chinese": "n. 连衣裙",
+    "chinese_version_id": null,
+    "presentation_revision": 0,
+    "selection_revision": null,
+    "status": "来源一致",
+    "category": "已有中文未经本轮核对",
+    "binding_key": "[\"b7d77f66-3cc7-4f9b-9d0e-f1cd489475ea\", \"311b4a7f-5609-44a9-97e5-efc6127610f8\", \"69f06fff-dfe4-4936-ab8c-72231d135971\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+   },
+   "text": "n. 连衣裙",
+   "example": "",
+   "kind": "teaching",
+   "origin": "source",
+   "generation_tool": "",
+   "author_label": "既有教学来源；ZCode 整理",
+   "learning_effect": "same",
+   "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+   "review_status": "approved"
+  },
+  {
+   "key": "cn14-007",
+   "selection": {
+    "domain": "target",
+    "reference_id": "177",
+    "object_id": "a0da4f29-451b-4ea4-bb5b-ab9060f25196",
+    "label": "skirt",
+    "positions": [
+     {
+      "scenario": "u-clothes",
+      "order": 0
+     }
+    ],
+    "sense_id": "6b5c8c86-74e4-42df-b332-9e69f6981cea",
+    "pronunciation_id": "4739f63b-89d0-457a-9a79-04a5d503d6a7",
+    "evidence_id": "086d7f2f-6974-4b17-b393-b038ab11dcc1",
+    "snapshot": {
+     "sense_revision": 0,
+     "definition": "",
+     "pronunciation_revision": 0,
+     "pronunciation": ""
+    },
+    "source_code": "primary-words",
+    "source_key": "skirt",
+    "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+    "release_version": "scenario-0ad041fb6eac6918338efda4",
+    "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+    "lexical_hash": "28199f8d83c1cd63f28136e86518788ab2becba279a61e772f862cac352ad0e0",
+    "raw_hash": "fb1f30e895d5a176f80a8a0a3907f9c518fa131e3a25637c2b3e6a15c411bf5b",
+    "gloss_language": "zh",
+    "source_definition": "n. 裙子",
+    "source_pronunciation": "/skɜːt/",
+    "pronunciation_reviewed": true,
+    "legacy_chinese": "n. 裙子",
+    "chinese_version_id": null,
+    "presentation_revision": 0,
+    "selection_revision": null,
+    "status": "来源一致",
+    "category": "已有中文未经本轮核对",
+    "binding_key": "[\"6b5c8c86-74e4-42df-b332-9e69f6981cea\", \"4739f63b-89d0-457a-9a79-04a5d503d6a7\", \"086d7f2f-6974-4b17-b393-b038ab11dcc1\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+   },
+   "text": "n. 裙子",
+   "example": "",
+   "kind": "teaching",
+   "origin": "source",
+   "generation_tool": "",
+   "author_label": "既有教学来源；ZCode 整理",
+   "learning_effect": "same",
+   "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+   "review_status": "approved"
+  },
+  {
+   "key": "cn14-008",
+   "selection": {
+    "domain": "target",
+    "reference_id": "178",
+    "object_id": "e4c9ec39-35e0-4c9f-ab3f-6b6ef31de9f0",
+    "label": "pants",
+    "positions": [
+     {
+      "scenario": "u-clothes",
+      "order": 0
+     }
+    ],
+    "sense_id": "9e1fa78c-311c-466a-b9a3-749e6e93c733",
+    "pronunciation_id": "1a7e6468-dd9f-4841-9ec8-097fb9f32443",
+    "evidence_id": "e83f765d-1437-42df-bfb9-2dd15db708e2",
+    "snapshot": {
+     "sense_revision": 0,
+     "definition": "",
+     "pronunciation_revision": 0,
+     "pronunciation": ""
+    },
+    "source_code": "primary-words",
+    "source_key": "pants",
+    "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+    "release_version": "scenario-0ad041fb6eac6918338efda4",
+    "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+    "lexical_hash": "49d1b3c338668e2fd60870a946b274615fb8d6276c70f35e09aa86e5e780b3a5",
+    "raw_hash": "1fc069d46beef3422bc92468976c836eb823e1b05d0b3d26db48e5c1001bbf65",
+    "gloss_language": "zh",
+    "source_definition": "n. 裤子",
+    "source_pronunciation": "/pænts/",
+    "pronunciation_reviewed": true,
+    "legacy_chinese": "n. 裤子",
+    "chinese_version_id": null,
+    "presentation_revision": 0,
+    "selection_revision": null,
+    "status": "来源一致",
+    "category": "已有中文未经本轮核对",
+    "binding_key": "[\"9e1fa78c-311c-466a-b9a3-749e6e93c733\", \"1a7e6468-dd9f-4841-9ec8-097fb9f32443\", \"e83f765d-1437-42df-bfb9-2dd15db708e2\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+   },
+   "text": "n. 裤子",
+   "example": "",
+   "kind": "teaching",
+   "origin": "source",
+   "generation_tool": "",
+   "author_label": "既有教学来源；ZCode 整理",
+   "learning_effect": "same",
+   "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+   "review_status": "approved"
+  },
+  {
+   "key": "cn14-009",
+   "selection": {
+    "domain": "target",
+    "reference_id": "179",
+    "object_id": "2c16d9d1-b25a-4073-be04-9953323d620b",
+    "label": "shorts",
+    "positions": [
+     {
+      "scenario": "u-clothes",
+      "order": 0
+     }
+    ],
+    "sense_id": "07dc46e6-842c-4111-ba7d-c202f18882b4",
+    "pronunciation_id": "20b9dac0-f7b4-4758-ab71-036f3a156cdf",
+    "evidence_id": "8c156aa7-7b07-4c67-ac4c-afb6d4df3217",
+    "snapshot": {
+     "sense_revision": 0,
+     "definition": "",
+     "pronunciation_revision": 0,
+     "pronunciation": ""
+    },
+    "source_code": "primary-words",
+    "source_key": "shorts",
+    "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+    "release_version": "scenario-0ad041fb6eac6918338efda4",
+    "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+    "lexical_hash": "6e765cbf948af9d8d7127d59ac77ab06a0dc5a5c514b0e1e9208e69dee913193",
+    "raw_hash": "45549913e2062347284c2e7b715435132298cf54d4856278bc7b39c80552bb45",
+    "gloss_language": "zh",
+    "source_definition": "n. 短裤",
+    "source_pronunciation": "/ʃɔːts/",
+    "pronunciation_reviewed": true,
+    "legacy_chinese": "n. 短裤",
+    "chinese_version_id": null,
+    "presentation_revision": 0,
+    "selection_revision": null,
+    "status": "来源一致",
+    "category": "已有中文未经本轮核对",
+    "binding_key": "[\"07dc46e6-842c-4111-ba7d-c202f18882b4\", \"20b9dac0-f7b4-4758-ab71-036f3a156cdf\", \"8c156aa7-7b07-4c67-ac4c-afb6d4df3217\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+   },
+   "text": "n. 短裤",
+   "example": "",
+   "kind": "teaching",
+   "origin": "source",
+   "generation_tool": "",
+   "author_label": "既有教学来源；ZCode 整理",
+   "learning_effect": "same",
+   "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+   "review_status": "approved"
+  },
+  {
+   "key": "cn14-010",
+   "selection": {
+    "domain": "target",
+    "reference_id": "180",
+    "object_id": "74afd65a-8ff8-4d88-8a0b-1e0ab864faa8",
+    "label": "sweater",
+    "positions": [
+     {
+      "scenario": "u-clothes",
+      "order": 0
+     }
+    ],
+    "sense_id": "de08ee85-6809-492a-bff7-75b1180b4d32",
+    "pronunciation_id": "26535922-ae2e-4a49-a1e7-b401169906de",
+    "evidence_id": "bf8cca5b-4e7f-4bd6-b3a8-7e65fa3e8266",
+    "snapshot": {
+     "sense_revision": 0,
+     "definition": "",
+     "pronunciation_revision": 0,
+     "pronunciation": ""
+    },
+    "source_code": "primary-words",
+    "source_key": "sweater",
+    "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+    "release_version": "scenario-0ad041fb6eac6918338efda4",
+    "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+    "lexical_hash": "f7794d34b082f4ef2d66e598f9dc58b37c86dda0c604934d6b631629f4f0c922",
+    "raw_hash": "b3e6433b512cf999f065fde71d6e0c1f99148a981a97aadc70c0378ac5558a35",
+    "gloss_language": "zh",
+    "source_definition": "n. 毛衣",
+    "source_pronunciation": "/ˈswetə/",
+    "pronunciation_reviewed": true,
+    "legacy_chinese": "n. 毛衣",
+    "chinese_version_id": null,
+    "presentation_revision": 0,
+    "selection_revision": null,
+    "status": "来源一致",
+    "category": "已有中文未经本轮核对",
+    "binding_key": "[\"de08ee85-6809-492a-bff7-75b1180b4d32\", \"26535922-ae2e-4a49-a1e7-b401169906de\", \"bf8cca5b-4e7f-4bd6-b3a8-7e65fa3e8266\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+   },
+   "text": "n. 毛衣",
+   "example": "",
+   "kind": "teaching",
+   "origin": "source",
+   "generation_tool": "",
+   "author_label": "既有教学来源；ZCode 整理",
+   "learning_effect": "same",
+   "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+   "review_status": "approved"
+  },
+  {
+   "key": "cn14-011",
+   "selection": {
+    "domain": "target",
+    "reference_id": "181",
+    "object_id": "584e03ef-4a02-4efd-8af1-6ee8aa7d7fd9",
+    "label": "jacket",
+    "positions": [
+     {
+      "scenario": "u-clothes",
+      "order": 0
+     }
+    ],
+    "sense_id": "93e30241-79fe-4fc7-8a8a-4e7aa48819a4",
+    "pronunciation_id": "e854a5a4-1189-4f75-8dbd-359e0ba792dd",
+    "evidence_id": "7c6966fd-575d-497c-a08c-5a3c0f400319",
+    "snapshot": {
+     "sense_revision": 0,
+     "definition": "",
+     "pronunciation_revision": 0,
+     "pronunciation": ""
+    },
+    "source_code": "primary-words",
+    "source_key": "jacket",
+    "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+    "release_version": "scenario-0ad041fb6eac6918338efda4",
+    "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+    "lexical_hash": "7dd003fc97c8711b0ac8d27048481b5e75c72df726c39b11fb35940f714a4201",
+    "raw_hash": "07692c1b7569abac376e80ee230b07389131503418927f6760506dfcd985b1f3",
+    "gloss_language": "zh",
+    "source_definition": "n. 夹克衫",
+    "source_pronunciation": "/ˈdʒækɪt/",
+    "pronunciation_reviewed": true,
+    "legacy_chinese": "n. 夹克衫",
+    "chinese_version_id": null,
+    "presentation_revision": 0,
+    "selection_revision": null,
+    "status": "来源一致",
+    "category": "已有中文未经本轮核对",
+    "binding_key": "[\"93e30241-79fe-4fc7-8a8a-4e7aa48819a4\", \"e854a5a4-1189-4f75-8dbd-359e0ba792dd\", \"7c6966fd-575d-497c-a08c-5a3c0f400319\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+   },
+   "text": "n. 夹克衫",
+   "example": "",
+   "kind": "teaching",
+   "origin": "source",
+   "generation_tool": "",
+   "author_label": "既有教学来源；ZCode 整理",
+   "learning_effect": "same",
+   "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+   "review_status": "approved"
+  },
+  {
+   "key": "cn14-012",
+   "selection": {
+    "domain": "target",
+    "reference_id": "182",
+    "object_id": "7c0a32a9-c7fd-403e-8c19-fdb68ec12bb8",
+    "label": "scarf",
+    "positions": [
+     {
+      "scenario": "u-clothes",
+      "order": 0
+     }
+    ],
+    "sense_id": "1725d886-1aa1-4cc6-a10e-dc4c55199eea",
+    "pronunciation_id": "c701f50b-dede-4e2c-af52-0205f67bc0e6",
+    "evidence_id": "b194ae4f-1cec-4dbf-a427-cb3c3e0294be",
+    "snapshot": {
+     "sense_revision": 0,
+     "definition": "",
+     "pronunciation_revision": 0,
+     "pronunciation": ""
+    },
+    "source_code": "primary-words",
+    "source_key": "scarf",
+    "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+    "release_version": "scenario-0ad041fb6eac6918338efda4",
+    "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+    "lexical_hash": "10b89f485adfc3be20ac6d396b85f998536ebd7f2de1ce6b5878958ecc3f0e23",
+    "raw_hash": "5e908daf00da2ccbe17e292751aa016055fa2cb1eb4b546e38c2e785b0e26807",
+    "gloss_language": "zh",
+    "source_definition": "n. 围巾",
+    "source_pronunciation": "/skɑːf/",
+    "pronunciation_reviewed": true,
+    "legacy_chinese": "n. 围巾",
+    "chinese_version_id": null,
+    "presentation_revision": 0,
+    "selection_revision": null,
+    "status": "来源一致",
+    "category": "已有中文未经本轮核对",
+    "binding_key": "[\"1725d886-1aa1-4cc6-a10e-dc4c55199eea\", \"c701f50b-dede-4e2c-af52-0205f67bc0e6\", \"b194ae4f-1cec-4dbf-a427-cb3c3e0294be\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+   },
+   "text": "n. 围巾",
+   "example": "",
+   "kind": "teaching",
+   "origin": "source",
+   "generation_tool": "",
+   "author_label": "既有教学来源；ZCode 整理",
+   "learning_effect": "same",
+   "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+   "review_status": "approved"
+  },
+  {
+   "key": "cn14-013",
+   "selection": {
+    "domain": "target",
+    "reference_id": "183",
+    "object_id": "61c0639f-bd27-447c-a989-7ec91f69a6da",
+    "label": "gloves",
+    "positions": [
+     {
+      "scenario": "u-clothes",
+      "order": 0
+     }
+    ],
+    "sense_id": "6043506f-4e06-4f8d-8bf8-4adee88de4f5",
+    "pronunciation_id": "fcd84464-3e13-4dc8-b190-2123581baeb1",
+    "evidence_id": "4d4c34b8-b872-428e-b0a9-6273c2f0faa4",
+    "snapshot": {
+     "sense_revision": 0,
+     "definition": "",
+     "pronunciation_revision": 0,
+     "pronunciation": ""
+    },
+    "source_code": "primary-words",
+    "source_key": "gloves",
+    "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+    "release_version": "scenario-0ad041fb6eac6918338efda4",
+    "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+    "lexical_hash": "ce74a455176de472516641fbca8798e20eb64352ef602be1de58b73b958601a6",
+    "raw_hash": "23a36b8507d89feb8ced04720c4a2fc14091b4b47afef484b324d755f8dc4f94",
+    "gloss_language": "zh",
+    "source_definition": "n. 手套",
+    "source_pronunciation": "/ɡlʌvz/",
+    "pronunciation_reviewed": true,
+    "legacy_chinese": "n. 手套",
+    "chinese_version_id": null,
+    "presentation_revision": 0,
+    "selection_revision": null,
+    "status": "来源一致",
+    "category": "已有中文未经本轮核对",
+    "binding_key": "[\"6043506f-4e06-4f8d-8bf8-4adee88de4f5\", \"fcd84464-3e13-4dc8-b190-2123581baeb1\", \"4d4c34b8-b872-428e-b0a9-6273c2f0faa4\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+   },
+   "text": "n. 手套",
+   "example": "",
+   "kind": "teaching",
+   "origin": "source",
+   "generation_tool": "",
+   "author_label": "既有教学来源；ZCode 整理",
+   "learning_effect": "same",
+   "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+   "review_status": "approved"
+  },
+  {
+   "key": "cn14-014",
+   "selection": {
+    "domain": "target",
+    "reference_id": "184",
+    "object_id": "0e12cc0b-c930-475a-be86-a78258b8eee6",
+    "label": "socks",
+    "positions": [
+     {
+      "scenario": "u-clothes",
+      "order": 0
+     }
+    ],
+    "sense_id": "41b22ec1-b29b-4913-8dcf-363a54b2ad7c",
+    "pronunciation_id": "f86139c3-ccc1-48a2-9c63-c0f4639d656a",
+    "evidence_id": "87a6a811-66de-4c2c-a35e-1158b4cb3514",
+    "snapshot": {
+     "sense_revision": 0,
+     "definition": "",
+     "pronunciation_revision": 0,
+     "pronunciation": ""
+    },
+    "source_code": "primary-words",
+    "source_key": "socks",
+    "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+    "release_version": "scenario-0ad041fb6eac6918338efda4",
+    "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+    "lexical_hash": "98bd3f6e9269bf30d7f3e4e9400d04c3ec94ebf02c2fee40ac97b4b1f823c911",
+    "raw_hash": "6cb98d06033cb8e332c3bb06f81b85eee1378f612ea82c6be435f9a55a902cb6",
+    "gloss_language": "zh",
+    "source_definition": "n. 袜子",
+    "source_pronunciation": "/sɒks/",
+    "pronunciation_reviewed": true,
+    "legacy_chinese": "n. 袜子",
+    "chinese_version_id": null,
+    "presentation_revision": 0,
+    "selection_revision": null,
+    "status": "来源一致",
+    "category": "已有中文未经本轮核对",
+    "binding_key": "[\"41b22ec1-b29b-4913-8dcf-363a54b2ad7c\", \"f86139c3-ccc1-48a2-9c63-c0f4639d656a\", \"87a6a811-66de-4c2c-a35e-1158b4cb3514\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+   },
+   "text": "n. 袜子",
+   "example": "",
+   "kind": "teaching",
+   "origin": "source",
+   "generation_tool": "",
+   "author_label": "既有教学来源；ZCode 整理",
+   "learning_effect": "same",
+   "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+   "review_status": "approved"
+  },
+  {
+   "key": "cn14-015",
+   "selection": {
+    "domain": "target",
+    "reference_id": "185",
+    "object_id": "d2227119-5042-4a94-8198-48b7c20ec617",
+    "label": "boots",
+    "positions": [
+     {
+      "scenario": "u-clothes",
+      "order": 0
+     }
+    ],
+    "sense_id": "b7f085ed-1caa-4df4-a199-43a6ac4d381c",
+    "pronunciation_id": "82ed781a-e695-4151-808c-0e371d8d0aa1",
+    "evidence_id": "cb521c03-92a8-47c2-ae14-c33df89decd2",
+    "snapshot": {
+     "sense_revision": 0,
+     "definition": "",
+     "pronunciation_revision": 0,
+     "pronunciation": ""
+    },
+    "source_code": "primary-words",
+    "source_key": "boots",
+    "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+    "release_version": "scenario-0ad041fb6eac6918338efda4",
+    "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+    "lexical_hash": "68d68d265646c6dd29051a32385d17a59c826e375bcfdc77f59aa234064d4c38",
+    "raw_hash": "b0ceba95324a68b63282dc5e8b0e59a343067404448f79b440ef02bfb74ea19a",
+    "gloss_language": "zh",
+    "source_definition": "n. 靴子",
+    "source_pronunciation": "/buːts/",
+    "pronunciation_reviewed": true,
+    "legacy_chinese": "n. 靴子",
+    "chinese_version_id": null,
+    "presentation_revision": 0,
+    "selection_revision": null,
+    "status": "来源一致",
+    "category": "已有中文未经本轮核对",
+    "binding_key": "[\"b7f085ed-1caa-4df4-a199-43a6ac4d381c\", \"82ed781a-e695-4151-808c-0e371d8d0aa1\", \"cb521c03-92a8-47c2-ae14-c33df89decd2\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+   },
+   "text": "n. 靴子",
+   "example": "",
+   "kind": "teaching",
+   "origin": "source",
+   "generation_tool": "",
+   "author_label": "既有教学来源；ZCode 整理",
+   "learning_effect": "same",
+   "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+   "review_status": "approved"
+  },
+  {
+   "key": "cn14-016",
+   "selection": {
+    "domain": "target",
+    "reference_id": "186",
+    "object_id": "9e3f6dd2-be28-4006-b850-405b5697cffa",
+    "label": "raincoat",
+    "positions": [
+     {
+      "scenario": "u-clothes",
+      "order": 0
+     }
+    ],
+    "sense_id": "3809efe4-9790-4227-a1fa-116907a021fb",
+    "pronunciation_id": "54ad057f-54aa-4bee-9e69-32f33b41c561",
+    "evidence_id": "0a4af110-1149-4155-b00e-d9e13f298cc2",
+    "snapshot": {
+     "sense_revision": 0,
+     "definition": "",
+     "pronunciation_revision": 0,
+     "pronunciation": ""
+    },
+    "source_code": "primary-words",
+    "source_key": "raincoat",
+    "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+    "release_version": "scenario-0ad041fb6eac6918338efda4",
+    "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+    "lexical_hash": "d6eceb3e48f5322e32571f4a0225b2edffadf73a84cf2b8325ec58c4f61432bc",
+    "raw_hash": "1f808d89a610741994b5bde3417070afd9fb87bcd49a0721e6eb2d4408a12dc3",
+    "gloss_language": "zh",
+    "source_definition": "n. 雨衣",
+    "source_pronunciation": "/ˈreɪnkəʊt/",
+    "pronunciation_reviewed": true,
+    "legacy_chinese": "n. 雨衣",
+    "chinese_version_id": null,
+    "presentation_revision": 0,
+    "selection_revision": null,
+    "status": "来源一致",
+    "category": "已有中文未经本轮核对",
+    "binding_key": "[\"3809efe4-9790-4227-a1fa-116907a021fb\", \"54ad057f-54aa-4bee-9e69-32f33b41c561\", \"0a4af110-1149-4155-b00e-d9e13f298cc2\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+   },
+   "text": "n. 雨衣",
+   "example": "",
+   "kind": "teaching",
+   "origin": "source",
+   "generation_tool": "",
+   "author_label": "既有教学来源；ZCode 整理",
+   "learning_effect": "same",
+   "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+   "review_status": "approved"
+  },
+  {
+   "key": "cn14-017",
+   "selection": {
+    "domain": "target",
+    "reference_id": "187",
+    "object_id": "34a52738-3e6f-4630-b435-3ee286863914",
+    "label": "uniform",
+    "positions": [
+     {
+      "scenario": "u-clothes",
+      "order": 0
+     }
+    ],
+    "sense_id": "62a81329-96e1-47de-ab54-dc20dc0bf988",
+    "pronunciation_id": "7b8c3b33-7f0c-4524-9aab-da9358883098",
+    "evidence_id": "22c3bcc4-5d07-48c1-8530-1e217bf2a4fc",
+    "snapshot": {
+     "sense_revision": 0,
+     "definition": "",
+     "pronunciation_revision": 0,
+     "pronunciation": ""
+    },
+    "source_code": "primary-words",
+    "source_key": "uniform",
+    "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+    "release_version": "scenario-0ad041fb6eac6918338efda4",
+    "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+    "lexical_hash": "afaeba79ed2e231c9bd9e01a514264f8d573317dfbfd5112c03cc1edaa80e34f",
+    "raw_hash": "30d940ba2e3ddd2f0ea42dface8a50687226a16f80904e5027c2a68622bc677f",
+    "gloss_language": "zh",
+    "source_definition": "n. 制服；校服",
+    "source_pronunciation": "/ˈjuːnɪfɔːm/",
+    "pronunciation_reviewed": true,
+    "legacy_chinese": "n. 制服；校服",
+    "chinese_version_id": null,
+    "presentation_revision": 0,
+    "selection_revision": null,
+    "status": "来源一致",
+    "category": "已有中文未经本轮核对",
+    "binding_key": "[\"62a81329-96e1-47de-ab54-dc20dc0bf988\", \"7b8c3b33-7f0c-4524-9aab-da9358883098\", \"22c3bcc4-5d07-48c1-8530-1e217bf2a4fc\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+   },
+   "text": "n. 制服；校服",
+   "example": "",
+   "kind": "teaching",
+   "origin": "source",
+   "generation_tool": "",
+   "author_label": "既有教学来源；ZCode 整理",
+   "learning_effect": "same",
+   "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+   "review_status": "approved"
+  }
+ ],
+ "blocked": [],
+ "review_status": "approved"
+}
