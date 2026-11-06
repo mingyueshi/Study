@@ -1,5 +1,5 @@
-/* 看释义猜成语：点候选字补空，前端判分；无刷新、无学习记录。
-   服务端渲染字格（空位带 data-answer）与候选键盘，这里只做交互与计数。 */
+/* 看释义猜成语：点候选字补空，前端判分；每题首次检查后上报一次学习记录。
+   服务端渲染字格（空位带 data-answer）与候选键盘，这里只做交互、计数与上报。 */
 'use strict';
 
 (() => {
@@ -9,6 +9,25 @@
   const result = board.querySelector('[data-quiz-result]');
   const praiseEl = board.querySelector('[data-quiz-praise]');
   if (!slots.length || !result) return;
+
+  /* 对错都上报：服务端按题池校验词头与难度后落一条记录，失败不打扰答题。 */
+  const csrf = () => decodeURIComponent((document.cookie.match(/(?:^|;\s*)primary_csrftoken=([^;]*)/) || [])[1] || '');
+  const report = (correct) => {
+    if (!board.dataset.reportUrl) return;
+    const params = new URLSearchParams(location.search);
+    const level = Number(params.get('level'));
+    fetch(board.dataset.reportUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-CSRFToken': csrf() },
+      body: JSON.stringify({
+        headword: slots.map(answerOf).join(''),
+        level: [3, 2, 1, 0].includes(level) ? level : 3,
+        source: params.get('source') === 'all' ? 'all' : 'common',
+        correct,
+        used_hint: slots.some((slot) => slot.classList.contains('hint')),
+      }),
+    }).catch(() => {});
+  };
 
   const STORE_KEY = 'idioms_quiz_stats_v1';
   let stats = { streak: 0, correct: 0, asked: 0 };
@@ -107,10 +126,10 @@
         if (!ok) wrong += 1;
       });
       if (wrong) {
-        if (!counted) { stats.asked += 1; stats.streak = 0; counted = true; save(); renderScore(); }
+        if (!counted) { stats.asked += 1; stats.streak = 0; counted = true; save(); renderScore(); report(false); }
         return;
       }
-      if (!counted) { stats.correct += 1; stats.asked += 1; stats.streak += 1; counted = true; save(); }
+      if (!counted) { stats.correct += 1; stats.asked += 1; stats.streak += 1; counted = true; save(); report(true); }
       if (praiseEl) praiseEl.textContent = praiseText(stats.streak);
       result.hidden = false;
       renderScore();

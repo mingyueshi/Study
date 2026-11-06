@@ -1,0 +1,15 @@
+{% load static %}{% comment %}学习总览卡网格：areas 由 catalog.learning_digest 装配，首页与「我的学习」共用。每张卡只展示自己领域含义明确的数字，不合成分比。{% endcomment %}
+<div class="overview-grid">
+  {% for card in areas %}
+  <section class="overview-card color-{{ card.color }}">
+    <header><img src="{% static 'icons/' %}{{ card.icon }}.svg" alt="" width="44" height="44"><h3>{{ card.name }}</h3></header>
+    <div class="overview-nums">
+      {% for value, label in card.headlines %}<div><strong>{{ value }}</strong><span>{{ label }}</span></div>{% endfor %}
+    </div>
+    {% if card.week %}<p class="overview-week">{{ card.week }}</p>{% endif %}
+    {% if card.footnote %}<p class="overview-footnote">{{ card.footnote }}</p>{% endif %}
+    {% if card.latest %}<a class="overview-latest" href="{{ card.latest.url }}"><span>{{ card.latest.title }}</span><small>{{ card.latest.note }} · {{ card.latest.when|date:'n月j日 H:i' }}</small></a>{% endif %}
+    <a class="overview-go" href="{{ card.url }}">{{ card.url_label }}</a>
+  </section>
+  {% endfor %}
+</div>

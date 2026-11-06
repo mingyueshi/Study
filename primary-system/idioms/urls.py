@@ -9,6 +9,7 @@ urlpatterns = [
     path('emoji/', emoji.page, name='idiom-emoji'),
     path('emoji/api/action/', emoji.action, name='idiom-emoji-action'),
     path('quiz/', quiz.page, name='idiom-quiz'),
+    path('quiz/api/report/', quiz.report, name='idiom-quiz-report'),
     path('pairs/', pairs.page, name='idiom-pairs'),
     path('pairs/api/action/', pairs.action, name='idiom-pairs-action'),
     path('entries/<uuid:pk>/', views.entry_detail, name='idiom-entry'),

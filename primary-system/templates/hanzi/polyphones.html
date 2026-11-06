@@ -19,7 +19,7 @@
 </header>
 <div class="poly-shell">
   <div class="poly-main">
-    <section class="poly-practice" id="practice" data-poly-round data-answer="{{ round.answer }}" data-char="{{ round.char }}">
+    <section class="poly-practice" id="practice" data-poly-round data-answer="{{ round.answer }}" data-char="{{ round.char }}" data-word="{{ round.word }}" data-report-url="{% url 'hanzi-polyphones-report' %}">
       <p class="poly-practice-title">练一练 · 给词选读音</p>
       <p class="poly-word"><b>{{ round.before }}</b><span class="poly-target">{{ round.target }}</span><b>{{ round.after }}</b>
         <button class="say-chip" type="button" data-say="{{ round.word }}" aria-label="朗读 {{ round.word }}">🔊</button></p>

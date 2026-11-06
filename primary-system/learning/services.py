@@ -1,5 +1,9 @@
+from datetime import timedelta
+
 from django.contrib.auth import get_user_model
 from django.db import transaction
+from django.urls import reverse
+from django.utils import timezone
 from .models import Progress
 
 class ProgressConflict(Exception):
@@ -30,6 +34,52 @@ def progress_data(progress=None):
             'effective_status': effective_status(progress) if progress else 'new',
             'bookmarked': progress.bookmarked if progress else False,
             'note': progress.note if progress else ''}
+
+
+def effective_label(progress, resolver=None):
+    """对外展示的状态文案：与「我的学习」列表同一口径。"""
+    effective = effective_status(progress, resolver)
+    return '历史掌握，依据待确认' if effective == 'needs_confirmation' else progress.get_status_display()
+
+
+def textbook_summary(user):
+    """总览卡口径：教材掌握数与学科分布，复用 effective_status 的当前有效状态。
+
+    首页与「我的学习」共用这份汇总（设计基线：详情、个人页、首页共用当前
+    有效状态计算），只展示含义明确的计数，不做跨学科掌握百分比。
+    """
+    from catalog.models import published_items
+    from lexicon.chinese import LessonResolver
+
+    rows = list(Progress.objects.filter(user=user, item__in=published_items())
+                .select_related('item__module__subject'))
+    resolver = LessonResolver([row.item for row in rows])
+    week_cutoff = timezone.now() - timedelta(days=7)
+    started = mastered = bookmarked = week = 0
+    subjects = {}
+    for row in rows:
+        started += row.status != 'new'
+        bookmarked += row.bookmarked
+        week += row.updated_at >= week_cutoff
+        if effective_status(row, resolver) == 'mastered':
+            mastered += 1
+            name = row.item.module.subject.name
+            subjects[name] = subjects.get(name, 0) + 1
+    return {'started': started, 'mastered': mastered, 'bookmarked': bookmarked, 'week': week,
+            'subjects': sorted(subjects.items(), key=lambda kv: (-kv[1], kv[0]))}
+
+
+def textbook_recent(user, limit=8):
+    """教材最近学习行（学习足迹动态流用），按更新时间取最近的若干条。"""
+    from catalog.models import published_items
+    from lexicon.chinese import LessonResolver
+
+    rows = list(Progress.objects.filter(user=user, item__in=published_items())
+                .select_related('item').order_by('-updated_at')[:limit])
+    resolver = LessonResolver([row.item for row in rows])
+    return [{'title': row.item.title, 'note': effective_label(row, resolver),
+             'when': row.updated_at, 'url': reverse('item', args=[row.item.pk])}
+            for row in rows]
 
 
 @transaction.atomic

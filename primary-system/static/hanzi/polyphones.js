@@ -121,6 +121,19 @@
   /* ---- reading-choice practice scoring. ---- */
   const round = document.querySelector('[data-poly-round]');
   if (!round) return;
+  /* 每题判分后上报一次学习记录；对错由服务端按读音表复核，失败不打扰练习。 */
+  const csrf = () => decodeURIComponent((document.cookie.match(/(?:^|;\s*)primary_csrftoken=([^;]*)/) || [])[1] || '');
+  const report = (chosen) => {
+    if (!round.dataset.reportUrl) return;
+    fetch(round.dataset.reportUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-CSRFToken': csrf() },
+      body: JSON.stringify({
+        char: round.dataset.char, word: round.dataset.word || '',
+        chosen, answer: round.dataset.answer,
+      }),
+    }).catch(() => {});
+  };
   const STORE_KEY = 'hanzi_polyphone_stats_v1';
   let stats = { streak: 0, correct: 0, asked: 0 };
   try { stats = { ...stats, ...JSON.parse(localStorage.getItem(STORE_KEY) || '{}') }; } catch (e) { /* ignore */ }
@@ -158,6 +171,7 @@
       }
       save();
       render();
+      report(option.dataset.pinyin || '');
       /* 答完把详情切到这道题的字，顺势看它的全部读音。 */
       select(round.dataset.char, null);
     });

@@ -55,7 +55,7 @@
     const history = state.history || [];
     els['history-empty'].hidden = history.length > 0;
     els.history.innerHTML = history.map(item => `<li class="fh-history-item"><blockquote>${poemMarkup(item.text)}</blockquote><p>《${escape(item.title)}》 · ${escape(item.author)}</p>${item.editorial_note ? `<p class="fh-editorial-note">${escape(item.editorial_note)}</p>` : ''}<div class="fh-history-meta"><span class="${item.mode === 'learning' ? 'is-learning' : ''}">${escape(item.label)}</span><a href="${escape(item.url)}" target="_blank" rel="noopener noreferrer">查看原诗 ↗</a></div></li>`).join('');
-    if (available) els['corpus-note'].textContent = `唐诗、宋词、诗经、楚辞与千家诗 · 可用完整诗句 ${Number(state.sentence_count || 0).toLocaleString('zh-CN')} 句。练习不写入掌握记录。`;
+    if (available) els['corpus-note'].textContent = `唐诗、宋词、诗经、楚辞与千家诗 · 可用完整诗句 ${Number(state.sentence_count || 0).toLocaleString('zh-CN')} 句。完成一局会计入你的学习足迹。`;
     els['confirm-yes'].disabled = els['confirm-no'].disabled = busy;
   }
 

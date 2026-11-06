@@ -142,6 +142,36 @@ h3 { font-size: 23px; line-height: 1.5; }
 .study-strip span { color: var(--muted); font-size: 16px; }
 .study-strip p, .study-strip > a { margin: 0 0 0 auto; color: var(--muted); font-size: 16px; }
 .study-strip > a { display: inline-flex; align-items: center; min-height: 48px; color: var(--green); font-weight: 650; }
+
+/* 学习总览卡：首页与「我的学习」共用；配色复用 module-card 的 color-* 变量。 */
+.overview-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 22px; margin: 0 0 34px; }
+.overview-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+  padding: 24px;
+  border: 1px solid var(--card-line);
+  border-bottom-width: 4px;
+  border-radius: 26px;
+  background: var(--card-tint);
+  overflow-wrap: anywhere;
+}
+.overview-card header { display: flex; align-items: center; gap: 12px; }
+.overview-card header img { flex-shrink: 0; padding: 6px; background: #fff9; border-radius: 16px; }
+.overview-card h3 { margin: 0; }
+.overview-nums { display: flex; flex-wrap: wrap; gap: 8px 26px; }
+.overview-nums strong { display: block; color: var(--card-accent); font-size: 34px; font-weight: 800; line-height: 1.3; }
+.overview-nums span { color: var(--muted); font-size: 15px; }
+.overview-week { margin: 0; color: var(--card-accent); font-size: 15px; font-weight: 650; }
+.overview-footnote { margin: 0; color: var(--muted); font-size: 15px; }
+.overview-latest { display: block; padding: 12px 14px; border-radius: 16px; background: #fffa; }
+.overview-latest span { display: block; font-weight: 650; }
+.overview-latest small { color: var(--muted); }
+.overview-latest:hover span { color: var(--card-accent); }
+.overview-go { margin-top: auto; color: var(--card-accent); font-weight: 650; }
+.overview-more { margin: 0 0 56px; text-align: center; }
+.overview-more a { color: var(--green); font-weight: 650; }
 .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 16px 24px; margin-bottom: 26px; }
 .section-heading h2 { margin: 0; }
 .section-heading p { margin: 8px 0 0; color: var(--muted); font-size: 16px; }
@@ -285,6 +315,8 @@ textarea { resize: vertical; line-height: 1.9; }
   .orbit-two { left: 0; width: 310px; height: 210px; }
   .module-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
   .module-card { padding: 24px; }
+  .overview-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+  .overview-card { padding: 22px; }
   .module-meta { top: 26px; right: 20px; gap: 6px; }
   .module-meta > span { width: 28px; height: 28px; }
   .book-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -308,6 +340,7 @@ textarea { resize: vertical; line-height: 1.9; }
   .spark-two { right: 0; }
   .module-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .module-card img { width: 84px; height: 84px; }
+  .overview-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .study-strip { gap: 16px 28px; padding: 24px; }
   .study-strip p, .study-strip > a { flex-basis: 100%; margin-left: 0; }
   .reader-layout, .library-layout { grid-template-columns: minmax(0, 1fr); }
@@ -323,6 +356,7 @@ textarea { resize: vertical; line-height: 1.9; }
 
 @media (max-width: 599px) {
   :root { --gutter: 18px; }
+  .overview-grid { grid-template-columns: minmax(0, 1fr); }
   .site-header { gap: 18px 12px; padding-block: 18px; }
   .brand { gap: 8px; font-size: 25px; }
   .brand img { width: 46px; height: 46px; }

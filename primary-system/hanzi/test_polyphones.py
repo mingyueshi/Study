@@ -8,6 +8,7 @@ from django.test import SimpleTestCase, TestCase
 
 from lexicon.reference_models import CedictRecord
 
+from .models import PolyphoneAnswer
 from .polyphones import DATA_PATH, practice_items, practice_round, validate
 
 TONE_MARK_PATTERN = re.compile(r"^[a-zü]*[āáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ]?[a-zü]*$")
@@ -107,3 +108,49 @@ class PolyphonePageTests(TestCase):
         before = CedictRecord.objects.count()
         self.client.get("/hanzi/polyphones/")
         self.assertEqual(CedictRecord.objects.count(), before)
+
+
+class PolyphoneReportTests(TestCase):
+    """逐题上报：服务端按读音表复核并重算对错，不信任前端结论。"""
+
+    @classmethod
+    def setUpTestData(cls):
+        from .polyphones import char_index, common_chars
+        cls.item = common_chars()[0]
+        cls.readings = [reading["pinyin"] for reading in char_index()[cls.item["char"]]["readings"]]
+
+    def post_report(self, **overrides):
+        payload = {"char": self.item["char"], "word": self.item["readings"][0]["words"][0]["word"],
+                   "chosen": self.readings[0], "answer": self.readings[0]}
+        payload.update(overrides)
+        return self.client.post("/hanzi/polyphones/api/report/", payload, content_type="application/json")
+
+    def test_valid_reports_record_with_server_recomputed_correctness(self):
+        # chosen 与 answer 一致：服务端重算为答对，前端的 correct 字段被忽略。
+        response = self.post_report(correct=False)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json(), {"ok": True})
+        record = PolyphoneAnswer.objects.get()
+        self.assertEqual(record.char, self.item["char"])
+        self.assertTrue(record.correct)
+        # 选了另一个真实读音：落一条答错。
+        self.post_report(chosen=self.readings[-1])
+        wrong = PolyphoneAnswer.objects.latest("pk")
+        self.assertFalse(wrong.correct)
+        self.assertEqual(wrong.answer, self.readings[0])
+
+    def test_report_rejects_unknown_char_or_reading(self):
+        outside = DATA["chars"][-1]["char"]  # 练习池只取证据最厚的前 60 字，取末位字必在池外
+        for overrides in ({"char": outside}, {"chosen": "bùzàidewèi"}, {"answer": "bùzàidewèi"}):
+            with self.subTest(overrides=overrides):
+                response = self.post_report(**overrides)
+                self.assertEqual(response.status_code, 400)
+        self.assertEqual(PolyphoneAnswer.objects.count(), 0)
+
+    def test_report_is_post_only_and_guest_rows_carry_session_key(self):
+        self.assertEqual(self.client.get("/hanzi/polyphones/api/report/").status_code, 405)
+        self.post_report()
+        self.post_report()
+        guest_keys = {record.guest_key for record in PolyphoneAnswer.objects.all()}
+        self.assertEqual(len(guest_keys), 1)
+        self.assertTrue(next(iter(guest_keys)))

@@ -7,6 +7,9 @@ from django.utils.crypto import get_random_string
 from accounts.guest_retention import cleanup_guest_data
 from catalog.tests import PlatformFixture
 from chain.models import GameRound
+from hanzi.models import PolyphoneAnswer
+from idioms.models import PlayRecord
+from poetry.models import FeihualingRound
 from words.models import LearningTarget, WordProgress
 from writing.models import WritingDraft
 
@@ -135,12 +138,27 @@ class GuestRetentionTests(PlatformFixture):
         old_draft = WritingDraft.objects.create(guest_key='old-draft', title='旧草稿')
         WritingDraft.objects.filter(pk=old_draft.pk).update(updated_at=past)
 
+        fresh_play = PlayRecord.objects.create(guest_key='fresh-play', game=PlayRecord.Game.QUIZ)
+        old_play = PlayRecord.objects.create(guest_key='old-play', game=PlayRecord.Game.PAIRS)
+        PlayRecord.objects.filter(pk=old_play.pk).update(updated_at=past)
+
+        fresh_feihua = FeihualingRound.objects.create(guest_key='fresh-poetry', keyword='月')
+        old_feihua = FeihualingRound.objects.create(guest_key='old-poetry', keyword='花')
+        FeihualingRound.objects.filter(pk=old_feihua.pk).update(updated_at=past)
+
+        fresh_answer = PolyphoneAnswer.objects.create(guest_key='fresh-hanzi', char='乐', chosen='yuè', answer='yuè')
+        old_answer = PolyphoneAnswer.objects.create(guest_key='old-hanzi', char='乐', chosen='lè', answer='yuè')
+        PolyphoneAnswer.objects.filter(pk=old_answer.pk).update(updated_at=past)
+
         report = cleanup_guest_data(apply=False, days=90)
         self.assertTrue(report['dry_run'])
         self.assertEqual(report['planned']['GameRound'], 1)
         self.assertEqual(report['planned']['WordProgress'], 1)
         self.assertEqual(report['planned']['WritingDraft'], 1)
-        self.assertEqual(report['planned_total'], 3)
+        self.assertEqual(report['planned']['PlayRecord'], 1)
+        self.assertEqual(report['planned']['FeihualingRound'], 1)
+        self.assertEqual(report['planned']['PolyphoneAnswer'], 1)
+        self.assertEqual(report['planned_total'], 6)
         self.assertEqual(GameRound.objects.count(), 3)
 
         report = cleanup_guest_data(apply=True, days=90)
@@ -148,7 +166,10 @@ class GuestRetentionTests(PlatformFixture):
         self.assertEqual(report['deleted']['GameRound'], 1)
         self.assertEqual(report['deleted']['WordProgress'], 1)
         self.assertEqual(report['deleted']['WritingDraft'], 1)
-        self.assertEqual(report['deleted_total'], 3)
+        self.assertEqual(report['deleted']['PlayRecord'], 1)
+        self.assertEqual(report['deleted']['FeihualingRound'], 1)
+        self.assertEqual(report['deleted']['PolyphoneAnswer'], 1)
+        self.assertEqual(report['deleted_total'], 6)
 
         self.assertTrue(GameRound.objects.filter(pk=fresh_round.pk).exists())
         self.assertFalse(GameRound.objects.filter(pk=old_round.pk).exists())
@@ -157,3 +178,9 @@ class GuestRetentionTests(PlatformFixture):
         self.assertFalse(WordProgress.objects.filter(pk=old_word.pk).exists())
         self.assertTrue(WritingDraft.objects.filter(pk=fresh_draft.pk).exists())
         self.assertFalse(WritingDraft.objects.filter(pk=old_draft.pk).exists())
+        self.assertTrue(PlayRecord.objects.filter(pk=fresh_play.pk).exists())
+        self.assertFalse(PlayRecord.objects.filter(pk=old_play.pk).exists())
+        self.assertTrue(FeihualingRound.objects.filter(pk=fresh_feihua.pk).exists())
+        self.assertFalse(FeihualingRound.objects.filter(pk=old_feihua.pk).exists())
+        self.assertTrue(PolyphoneAnswer.objects.filter(pk=fresh_answer.pk).exists())
+        self.assertFalse(PolyphoneAnswer.objects.filter(pk=old_answer.pk).exists())

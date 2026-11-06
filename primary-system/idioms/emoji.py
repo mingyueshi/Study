@@ -1,8 +1,9 @@
-"""成语表情猜猜看：emoji 四选一猜谜（飞花令式签名页状态，无数据库写入）。
+"""成语表情猜猜看：emoji 四选一猜谜（飞花令式签名页状态）。
 
 emoji 映射是编辑内容（``data/emoji.json``，AI 辅助生成、人工核对）；成语的
 拼音与释义实时来自词库生效记录，逐条经 ``matches_pin`` 校验，漂移降级。
 正确答案不入签名状态——选项由服务端在每次 ``question`` 时实时生成。
+一局猜满由服务端判定，完成时落一条学习记录（``records.record_play``）。
 """
 import json
 import secrets
@@ -20,6 +21,8 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.decorators.http import require_GET, require_POST
 
 from .catalog import SOURCE_CODE, dictionary_records, matches_pin, with_details
+from .models import PlayRecord
+from .records import record_play
 
 ENTRIES_PATH = Path(__file__).resolve().parent / "data" / "emoji.json"
 ROUND_SIZE = 8
@@ -300,6 +303,9 @@ def action(request):
                 result = {"available": True, "current": current_question(pool, state, by_headword, index)}
             else:
                 result = act(pool, state, by_headword, data["action"], data)
+                if result.get("finished"):
+                    record_play(request, game=PlayRecord.Game.EMOJI, size=result["size"],
+                                correct=result["correct"], extra={"revealed": result["revealed"]})
         return JsonResponse(result, json_dumps_params={"ensure_ascii": False})
     except QuizError as error:
         return JsonResponse(

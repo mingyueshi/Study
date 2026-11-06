@@ -11,7 +11,7 @@ from django.test import Client, TestCase, override_settings
 from django.test.utils import CaptureQueriesContext
 
 from reference_library.models import ArchivePackage, Dataset, SourceFile
-from .models import PoetryDocument, PoetryText
+from .models import FeihualingRound, PoetryDocument, PoetryText
 from . import feihualing as game
 from . import feihualing_index as index
 
@@ -107,7 +107,7 @@ class FeihualingTests(TestCase):
         self.assertEqual(response.status_code, 200)
         return response.json()
 
-    def test_page_and_api_do_not_write_session_or_any_database_table(self):
+    def test_page_and_single_answer_do_not_write_session_or_database(self):
         with CaptureQueriesContext(connection) as queries:
             response = self.client.get(PAGE)
             state = response.context["state"]
@@ -127,6 +127,50 @@ class FeihualingTests(TestCase):
         self.assertContains(response, "提示学习")
         self.assertContains(response, "feihualing.js")
         self.assertNotContains(response, "speech.js")
+
+    def test_completed_round_writes_exactly_one_record(self):
+        state = self.start()
+        token = state["token"]
+        for sentence in ("床前明月光", "举头望明月", "明月松间照", "海上生明月", "月出惊山鸟"):
+            result = self.post("answer", token, answer=sentence).json()
+            token = result["token"]
+        self.assertEqual(result["status"], "completed")
+        self.assertEqual(FeihualingRound.objects.count(), 1)
+        round_ = FeihualingRound.objects.get()
+        self.assertEqual(round_.keyword, "月")
+        self.assertEqual(round_.independent, 5)
+        self.assertEqual(round_.learning, 0)
+        self.assertEqual(round_.result, FeihualingRound.Result.COMPLETED)
+        self.assertIsNone(round_.user)
+        self.assertTrue(round_.guest_key)
+        # 已完成后再作答（outcome=finished）不会重复记。
+        self.post("answer", token, answer="明月松间照")
+        self.assertEqual(FeihualingRound.objects.count(), 1)
+
+    def test_reveal_completed_round_counts_learning_sentences(self):
+        state = self.start()
+        token = state["token"]
+        for sentence in ("床前明月光", "举头望明月", "明月松间照", "海上生明月"):
+            result = self.post("answer", token, answer=sentence).json()
+            token = result["token"]
+        token = self.post("hint", token).json()["token"]  # reveal 前必须先借提示笺
+        result = self.post("reveal", token).json()
+        self.assertEqual(result["status"], "completed")
+        round_ = FeihualingRound.objects.get()
+        self.assertEqual((round_.independent, round_.learning), (4, 1))
+
+    def test_logged_in_round_attaches_user(self):
+        from django.contrib.auth import get_user_model
+        user = get_user_model().objects.create_user("player", password="pass")
+        self.client.force_login(user)
+        state = self.start()
+        token = state["token"]
+        for sentence in ("床前明月光", "举头望明月", "明月松间照", "海上生明月", "月出惊山鸟"):
+            result = self.post("answer", token, answer=sentence).json()
+            token = result["token"]
+        round_ = FeihualingRound.objects.get()
+        self.assertEqual(round_.user, user)
+        self.assertEqual(round_.guest_key, "")
 
     def test_punctuation_traditional_and_mixed_forms_are_exact(self):
         token = self.start()["token"]

@@ -7,7 +7,7 @@ from django.shortcuts import render, get_object_or_404, reverse
 from django.views.decorators.cache import never_cache
 from django.views.decorators.http import require_GET
 from .forms import CatalogFilter
-from .entry_registry import entry_for, learning_overview
+from .entry_registry import entry_for
 from lexicon.chinese import safe_word_item, safe_search, request_resolver, LessonResolver
 from .models import ENGLISH_RELATION_TAGS, Grade, Module, Placement, Subject, TextbookEdition, TextbookBook, \
     ContentItem, published_items, published_textbook_books, published_units
@@ -64,19 +64,12 @@ def home(request):
         module.entry_url = reverse(entry['route_name']) if entry else reverse('module', args=[module.code])
         module.entry_tag = entry['tag'] if entry else None
     textbook_shelf = books
-    progress = None
-    activity = {}
+    digest = None
     if request.user.is_authenticated:
-        from learning.models import Progress
-        from learning.services import effective_status
-        rows = list(Progress.objects.filter(user=request.user, item__in=published_items()).select_related('item'))
-        resolver = LessonResolver([p.item for p in rows])
-        progress = {'started': sum(p.status != 'new' for p in rows),
-                    'mastered': sum(effective_status(p, resolver) == 'mastered' for p in rows),
-                    'bookmarked': sum(p.bookmarked for p in rows)}
-        activity = learning_overview(request.user)
+        from .learning_digest import learning_digest
+        digest = learning_digest(request.user)
     return render(request, 'catalog/home.html', {
-        'form': form, 'modules': modules, 'progress': progress, 'activity': activity,
+        'form': form, 'modules': modules, 'digest': digest,
         'textbook_shelf': textbook_shelf,
         'item_count': published_items().filter(placements__unit__in=units_of_books(books)).count(),
     }, status=200 if form.is_valid() else 400)

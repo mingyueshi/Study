@@ -1,15 +1,19 @@
 """看释义猜成语：从词库实时出题，释义补字，难度就是提示字数 0~3。
 
 题池按质量过滤后全部来自当前生效词典记录（chinese-xinhua-idioms），
-「常用」池再取场景课程里通过钉词校验的成语；不写学习记录，
-判分、提示与连对计数都在前端完成。
+「常用」池再取场景课程里通过钉词校验的成语。判分、提示与连对计数在前端
+完成；每题第一次检查后由 ``report`` 上报一次结果（对错都记，逐题一条），
+服务端按题池校验词头与难度后再落库。
 """
+import json
 import random
 from functools import lru_cache
 
+from django.http import JsonResponse
 from django.shortcuts import render
 from django.views.decorators.cache import never_cache
-from django.views.decorators.http import require_safe
+from django.views.decorators.csrf import ensure_csrf_cookie
+from django.views.decorators.http import require_POST, require_safe
 
 from lexicon.views import record_payload
 
@@ -93,6 +97,7 @@ def pick_pool(source):
     return items or tuple(question_pool().values())
 
 
+@ensure_csrf_cookie
 @never_cache
 @require_safe
 def page(request):
@@ -117,3 +122,34 @@ def page(request):
         ],
         "next_href": f"?{query}",
     })
+
+
+@never_cache
+@require_POST
+def report(request):
+    """逐题上报结果：对错都记，每题一条（与前端「首次检查才计数」同节奏）。"""
+    from .models import PlayRecord
+    from .records import record_play
+
+    if request.content_type != "application/json" or len(request.body) > 2000:
+        return JsonResponse({"error": "请求格式不正确。"}, status=400)
+    try:
+        data = json.loads(request.body)
+    except (ValueError, UnicodeError, RecursionError):
+        return JsonResponse({"error": "请求格式不正确。"}, status=400)
+    headword, level, source = data.get("headword"), data.get("level"), data.get("source")
+    if (
+        not isinstance(data, dict)
+        or not isinstance(headword, str)
+        or headword not in question_pool()
+        or type(level) is not int or level not in LEVELS
+        or source not in SOURCES
+        or type(data.get("correct")) is not bool
+        or type(data.get("used_hint")) is not bool
+    ):
+        return JsonResponse({"error": "上报内容不完整，请刷新页面后再试。"}, status=400)
+    record_play(request, game=PlayRecord.Game.QUIZ, size=1,
+                correct=1 if data["correct"] else 0,
+                extra={"headword": headword, "level": level, "source": source,
+                       "used_hint": data["used_hint"]})
+    return JsonResponse({"ok": True})

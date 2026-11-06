@@ -7,7 +7,7 @@ from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.cache import never_cache
 from django.views.decorators.http import require_GET, require_http_methods
-from catalog.entry_registry import learning_overview
+from catalog.learning_digest import learning_digest
 from catalog.models import ENGLISH_RELATION_TAGS, Placement, published_items
 from lexicon.models import ContentEntryLink, SourceRecord
 from lexicon.services import link_state
@@ -139,7 +139,8 @@ def my_learning(request):
     if request.GET.get('bookmarked') == '1':
         records = [r for r in records if r.bookmarked]
     page = Paginator(records, 30).get_page(request.GET.get('page'))
-    return render(request, 'learning/mine.html', {'page': page, 'selected': selected, 'activity': learning_overview(request.user)})
+    return render(request, 'learning/mine.html', {'page': page, 'selected': selected,
+                                                  'digest': learning_digest(request.user)})
 
 
 @never_cache

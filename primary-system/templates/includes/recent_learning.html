@@ -1,0 +1,9 @@
+{% comment %}最近学习动态流：catalog.learning_digest.merged_recent 把教材与各玩法的记录按时间合并。{% endcomment %}
+<section class="recent-learning" aria-labelledby="recent-title">
+  <div class="section-heading"><div><p class="eyebrow">学习足迹</p><h2 id="recent-title">最近学了什么</h2></div><p>教材、单词、接龙、作文……都在这一条时间线上。</p></div>
+  <div class="content-list">
+    {% for row in recent %}
+    <a class="content-row" href="{{ row.url }}"><div><span class="tag">{{ row.note }}</span><h3>{{ row.title }}</h3><small>{{ row.when|date:'n月j日 H:i' }}</small></div><span aria-hidden="true">→</span></a>
+    {% empty %}<div class="empty"><h2>还没有学习记录</h2><p>从首页挑一个感兴趣的方向开始，学过的都会记在这里。</p></div>{% endfor %}
+  </div>
+</section>

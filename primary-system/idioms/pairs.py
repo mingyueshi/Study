@@ -1,8 +1,9 @@
-"""成语近义/反义配对：连线配对玩法（签名页状态，无数据库写入）。
+"""成语近义/反义配对：连线配对玩法（签名页状态）。
 
 配对关系是编辑内容（``data/pairs.json``，AI 辅助起草、人工核对），两侧成语
 逐条经 ``matches_pin`` 校验词库生效记录；释义与拼音实时取自词库。正确配对
-关系必须经服务端判定（``match`` 动作），前端不留答案。
+关系必须经服务端判定（``match`` 动作），前端不留答案。一局配满由服务端
+判定，完成时落一条学习记录（``records.record_play``）。
 """
 import json
 import secrets
@@ -17,6 +18,9 @@ from django.shortcuts import render
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.decorators.http import require_GET, require_POST
+
+from .models import PlayRecord
+from .records import record_play
 
 
 @ensure_csrf_cookie
@@ -53,6 +57,9 @@ def action(request):
                 raise PairError("暂不支持这个操作。")
             state, by_id = restore(pool, data.get("token"))
             result = act(pool, state, by_id, data)
+            if result.get("finished"):
+                record_play(request, game=PlayRecord.Game.PAIRS, size=result["size"],
+                            correct=result["matched"], extra={"attempts": result["attempts"]})
         return JsonResponse(result, json_dumps_params={"ensure_ascii": False})
     except PairError as error:
         return JsonResponse(

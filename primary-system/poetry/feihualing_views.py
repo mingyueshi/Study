@@ -1,4 +1,6 @@
-"""Temporary page-local exercise endpoints. No accounts/session/game record writes."""
+"""飞花令页面与动作端点。完成判定在服务端（``feihualing.act``）：集满五句
+或令字语料耗尽的那一刻落一条完成记录（``records``，每局恰好一次）；游客
+沿用会话键双轨，键只在 POST 写入路径生成，页面 GET 仍零写入。"""
 
 import json
 from django.http import JsonResponse
@@ -7,6 +9,8 @@ from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.decorators.http import require_GET, require_POST
 from . import feihualing as game
+from .models import FeihualingRound
+from .records import owner_filter
 
 
 @ensure_csrf_cookie
@@ -57,6 +61,12 @@ def action(request):
                     data["action"],
                     data.get("answer"),
                 )
+        # 刚好收满五句（或令字诗句用尽）才算完成一局；此后重放请求 outcome=finished，不会重复记。
+        if result.get("outcome") in ("accepted", "revealed") and result.get("status") in ("completed", "exhausted"):
+            FeihualingRound.objects.create(
+                keyword=result["keyword"], independent=result["independent"],
+                learning=result["learning"], result=result["status"], **owner_filter(request),
+            )
         return JsonResponse(result, json_dumps_params={"ensure_ascii": False})
     except game.ExerciseError as error:
         return JsonResponse(

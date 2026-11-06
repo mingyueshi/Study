@@ -181,7 +181,9 @@ class ChineseTests(PlatformFixture):
                 self.assertNotIn(forbidden, response.content.decode(), url)
         self.assertEqual(effective_status(progress), 'needs_confirmation')
         self.assertContains(self.client.get('/me/'), '依据待确认')
-        self.assertEqual(self.client.get('/').context['progress']['mastered'], 0)
+        # 首页学习总览与详情页共用当前有效状态口径：撤回后不计入已掌握。
+        textbook = next(area for area in self.client.get('/').context['digest']['areas'] if area['key'] == 'textbook')
+        self.assertEqual(textbook['headlines'][1][0], 0)
         self.assertEqual(ContentLinkSelection.objects.filter(link=self.link).count(), 2)
 
     def test_notes_do_not_recertify_legacy_mastery_or_new_presentation(self):

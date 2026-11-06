@@ -1,4 +1,9 @@
-"""多音字专题：浏览与练习。数据见 polyphone_data/README.md。"""
+"""多音字专题：浏览与练习。数据见 polyphone_data/README.md。
+
+「给词选读音」练习判分在前端，但每题由 ``report`` 上报一次，服务端按读音表
+复核并重算对错后落一条练习记录（``records``，对错都记）。游客沿用会话键
+双轨，键只在 POST 写入路径生成——页面 GET 保持零写入、零会话。
+"""
 import json
 import random
 import unicodedata
@@ -7,9 +12,11 @@ from functools import lru_cache
 from pathlib import Path
 
 from django.core.exceptions import ImproperlyConfigured
+from django.http import JsonResponse
 from django.shortcuts import render
 from django.views.decorators.cache import never_cache
-from django.views.decorators.http import require_safe
+from django.views.decorators.csrf import ensure_csrf_cookie
+from django.views.decorators.http import require_POST, require_safe
 
 DATA_PATH = Path(__file__).resolve().parent / "polyphone_data" / "polyphones.json"
 MAX_PRACTICE_CHARS = 60  # 练习选题池：证据最厚的常见字
@@ -179,6 +186,7 @@ def compact_chars(chars):
     ]
 
 
+@ensure_csrf_cookie
 @never_cache
 @require_safe
 def page(request):
@@ -206,3 +214,30 @@ def page(request):
         "round": current,
         "next_href": "?char=" + char,
     })
+
+@never_cache
+@require_POST
+def report(request):
+    """逐题上报练习结果：服务端按读音表复核并重算对错，不信任前端结论。"""
+    from .models import PolyphoneAnswer
+    from .records import owner_filter
+
+    if request.content_type != "application/json" or len(request.body) > 2000:
+        return JsonResponse({"error": "请求格式不正确。"}, status=400)
+    try:
+        data = json.loads(request.body)
+    except (ValueError, UnicodeError, RecursionError):
+        return JsonResponse({"error": "请求格式不正确。"}, status=400)
+    char, word, chosen, answer = (data.get(key) for key in ("char", "word", "chosen", "answer"))
+    if not isinstance(data, dict) or not isinstance(char, str) or not isinstance(chosen, str) \
+            or not isinstance(answer, str) or not isinstance(word, str):
+        return JsonResponse({"error": "请求格式不正确。"}, status=400)
+    practice_chars = {item["char"] for item in common_chars()}
+    readings = {reading["pinyin"] for reading in char_index()[char]["readings"]} if char in char_index() else set()
+    if char not in practice_chars or chosen not in readings or answer not in readings:
+        return JsonResponse({"error": "这道题不在练习范围，请刷新页面后再试。"}, status=400)
+    PolyphoneAnswer.objects.create(
+        char=char, word=word[:40], chosen=chosen, answer=answer,
+        correct=chosen == answer, **owner_filter(request),
+    )
+    return JsonResponse({"ok": True})
