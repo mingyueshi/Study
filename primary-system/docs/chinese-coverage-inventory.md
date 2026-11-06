@@ -2,12 +2,12 @@
 
 2026-11-02。只读全量清点的原始记录是inventory-before.json；补齐按引用归属的最终采用前记录为inventory-final-before.json（从本阶段backup只读生成），采用后为inventory-final-after.json。均位于`../output/primary-system-audit/2026-11-02/chinese-batch-01/`，包含DB路径、清点时间、全部来源当前版本及每项ID／位置／Sense／读音／证据／快照／原文语言／legacy中文／采用和可用状态。
 
-|分母|…01|…02|…03|…04|…05|…06|…07|…08|…09|…10|其余legacy未经批次核对|
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-|场景引用577（577目标）|26|47|74|103|140|188|236|287|357|429|148|
-|教材引用306|13|13|13|13|13|13|13|13|13|13|293|
-|合计引用883|39|60|87|116|153|201|249|300|370|442（50.06%）|441|
-|唯一固定绑定883|39|60|87|116|153|201|249|300|370|442（50.06%）|441|
+|分母|…01|…02|…03|…04|…05|…06|…07|…08|…09|…10|…11|其余legacy未经批次核对|
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+|场景引用577（577目标）|26|47|74|103|140|188|236|287|357|429|479|98|
+|教材引用306|13|13|13|13|13|13|13|13|13|13|13|293|
+|合计引用883|39|60|87|116|153|201|249|300|370|442|492（55.72%）|391|
+|唯一固定绑定883|39|60|87|116|153|201|249|300|370|442|492（55.72%）|391|
 
 全部883项已有legacy中文，不是883项“缺中文”；缺少中文正文0，固定绑定当前失效0。采用前全部仅为旧中文存在，未通过新版本核对。本批39项是来源中文复用并经AI逐条核对采用，不是AI新译文或真人审校。
 
@@ -52,5 +52,9 @@
 ### 批次10（2026-11-07导入）
 
 `cn-foundation-20261107-08`：场景u-opposites、u-illness、u-sea、u-travel、u-festivals、u-snacks各12条，共72条创建／复跑0新增，回执入库；场景429/577，**合计442/883突破50%**。逐条核对确认legacy中文与固定证据来源释义逐字一致，读音全部已核对。多义词十二处（high/far/cough/better/sea/whale/trip/travel/festival/party/water/ice cream）均核实为本目标证据与legacy逐字一致；patient（n.病人；adj.有耐心的）等证据自带双词性照常镜像；Spring Festival、Mid-Autumn Festival、Children's Day等专名与check-up等连字词形照常采用。light、maths book、study暂缓不变。批次清单与摘要在`data/chinese/cn-foundation-20261107-08.json`与`output/primary-system-audit/2026-11-07/chinese-batch-03/batch10-summary.json`，导入前恢复点`before-batch-10.sqlite3`。剩余441项（场景148＋教材293）仍未逐条核对，不计入已审范围。
+
+### 批次11（2026-11-07导入）
+
+`cn-foundation-20261107-09`：场景u-town全部13条＋u-sports全部12条＋u-sky全部12条＋u-actions全部12条，共50条创建／复跑0新增，回执入库；场景479/577。逐条核对确认legacy中文与固定证据来源释义逐字一致，读音全部已核对。多义词十二处（town/museum/police station/volleyball/ping-pong/win/sky/cloud/earth/fly/sleep/write）均核实为本目标证据与legacy逐字一致；fly「v.飞；放（风筝）」、earth「n.地球；土地」、race「n.赛跑；比赛」等为证据自带并列。light、maths book、study暂缓不变。批次清单与摘要在`data/chinese/cn-foundation-20261107-09.json`与`output/primary-system-audit/2026-11-07/chinese-batch-03/batch11-summary.json`，导入前恢复点`before-batch-11.sqlite3`。剩余391项（场景98＋教材293）仍未逐条核对，不计入已审范围。
 
 固定批准清单与摘要见[chinese-batch-01-candidates.md](chinese-batch-01-candidates.md)，实施证据见[首批报告](chinese-batch-01-implementation.md)。
