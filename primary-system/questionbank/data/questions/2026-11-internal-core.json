@@ -1,0 +1,2950 @@
+{
+ "schema_version": 1,
+ "batch_id": "2026-11-internal-core",
+ "generator": "scripts/build_questionbank.cjs",
+ "note": "内部数据规则生成：数学例题与易错、语文多音字、英语教材同步词义。来源定位与内容身份一一对应。",
+ "questions": [
+  {
+   "uuid": "96a62da4-60cb-5212-9d80-ceab5221ecc4",
+   "type": "selfcheck",
+   "area": "math",
+   "grade": 4,
+   "stem": "10 个一万是多少？",
+   "payload": {
+    "answer": "十万",
+    "steps": "相邻两个计数单位的进率是 10，一万一万地数，数 10 次就是十万。"
+   },
+   "tags": [
+    "数学·认识更大的数",
+    "数学·十万有多大"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mu1-1:example"
+  },
+  {
+   "uuid": "d28438a5-abc9-5094-bc98-b5ab84bc78ad",
+   "type": "selfcheck",
+   "area": "math",
+   "grade": 4,
+   "stem": "10 个一千万是多少？",
+   "payload": {
+    "answer": "一亿",
+    "steps": "相邻计数单位的进率是 10：10 个一百万是一千万，10 个一千万是一亿。"
+   },
+   "tags": [
+    "数学·认识更大的数",
+    "数学·数位顺序表与计数单位"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mu1-2:example"
+  },
+  {
+   "uuid": "e7098114-e10e-532b-bdbe-bdd0c7cb97e4",
+   "type": "selfcheck",
+   "area": "math",
+   "grade": 4,
+   "stem": "30450000 怎么读？",
+   "payload": {
+    "answer": "三千零四十五万",
+    "steps": "分级 3045｜0000；万级 3045 按个级读作「三千零四十五」，再加「万」字；个级的 4 个 0 都不读。"
+   },
+   "tags": [
+    "数学·认识更大的数",
+    "数学·大数的读法"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mu1-3:example"
+  },
+  {
+   "uuid": "a97bbd7c-1539-54b9-a86b-7b6e93eee880",
+   "type": "selfcheck",
+   "area": "math",
+   "grade": 4,
+   "stem": "一千零三万零四十 写作？",
+   "payload": {
+    "answer": "10300040",
+    "steps": "一千零三万 → 万级写 1003；零四十 → 个级写 0040；合起来是 10300040。"
+   },
+   "tags": [
+    "数学·认识更大的数",
+    "数学·大数的写法"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mu1-4:example"
+  },
+  {
+   "uuid": "0561b100-7f25-5ee3-bd44-32b9488b5cbd",
+   "type": "selfcheck",
+   "area": "math",
+   "grade": 4,
+   "stem": "在 ○ 里填 > 或 <：989000 ○ 1000000",
+   "payload": {
+    "answer": "989000 < 1000000",
+    "steps": "989000 是六位数，1000000 是七位数，位数多的数大。"
+   },
+   "tags": [
+    "数学·认识更大的数",
+    "数学·比较数的大小"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mu1-5:example"
+  },
+  {
+   "uuid": "80faf3db-9273-5f50-aea0-400870aec812",
+   "type": "selfcheck",
+   "area": "math",
+   "grade": 4,
+   "stem": "把 17805000 省略万位后面的尾数",
+   "payload": {
+    "answer": "约 1781 万",
+    "steps": "千位是 5，满 5 向万位进 1：1780｜5000 → 1781 万，用「≈」。"
+   },
+   "tags": [
+    "数学·认识更大的数",
+    "数学·改写与省略（近似数）"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mu1-6:example"
+  },
+  {
+   "uuid": "d1d8675c-44e1-5496-8207-17022c8652c8",
+   "type": "selfcheck",
+   "area": "math",
+   "grade": 4,
+   "stem": "「我国人口约 14 亿」中的 14 亿是准确数吗？",
+   "payload": {
+    "answer": "不是，是近似数",
+    "steps": "有「约」字表示大约，这是四舍五入得到的近似数。"
+   },
+   "tags": [
+    "数学·认识更大的数",
+    "数学·准确数与近似数"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mu1-7:example"
+  },
+  {
+   "uuid": "ae379ea9-51b9-51f0-a367-f5172f42803c",
+   "type": "selfcheck",
+   "area": "math",
+   "grade": 4,
+   "stem": "最小的自然数是几？",
+   "payload": {
+    "answer": "0",
+    "steps": "0 表示一个物体也没有，它是最小的自然数；没有最大的自然数。"
+   },
+   "tags": [
+    "数学·认识更大的数",
+    "数学·从结绳计数说起"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mu1-8:example"
+  },
+  {
+   "uuid": "558c6a84-58a7-52ae-b231-c804b393f98a",
+   "type": "selfcheck",
+   "area": "math",
+   "grade": 4,
+   "stem": "身份证号第 7–14 位是 20160901，说明什么？",
+   "payload": {
+    "answer": "出生日期是 2016 年 9 月 1 日",
+    "steps": "身份证第 7–14 位依次表示出生的年、月、日。"
+   },
+   "tags": [
+    "数学·编码",
+    "数学·生活中的编码"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mcode-1:example"
+  },
+  {
+   "uuid": "d9b0181c-ffa7-5343-8ea1-f9251ca2f046",
+   "type": "selfcheck",
+   "area": "math",
+   "grade": 4,
+   "stem": "身份证第 17 位是奇数，说明什么？",
+   "payload": {
+    "answer": "性别为男",
+    "steps": "身份证第 17 位是顺序码，奇数表示男性，偶数表示女性。"
+   },
+   "tags": [
+    "数学·编码",
+    "数学·编码的奥秘"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mcode-2:example"
+  },
+  {
+   "uuid": "5a9fb8bf-fb47-56bd-8752-5c5aed7cf49c",
+   "type": "selfcheck",
+   "area": "math",
+   "grade": 4,
+   "stem": "给全校同学编学号，要包含哪些信息？",
+   "payload": {
+    "answer": "入学年份、年级、班级、序号等",
+    "steps": "信息越多编码越长，要在「够用」和「简洁」之间平衡。"
+   },
+   "tags": [
+    "数学·编码",
+    "数学·设计编码方案"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mcode-3:example"
+  },
+  {
+   "uuid": "6dc43516-53c4-5071-aa98-dcdcd2bf1d5a",
+   "type": "selfcheck",
+   "area": "math",
+   "grade": 4,
+   "stem": "过两点可以画几条直线？",
+   "payload": {
+    "answer": "1 条",
+    "steps": "两点确定一条直线，这是直线的基本性质。"
+   },
+   "tags": [
+    "数学·线与角",
+    "数学·线段、直线、射线"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mu2-1:example"
+  },
+  {
+   "uuid": "10fa91e4-8ace-5c07-9df1-7b4112782a06",
+   "type": "selfcheck",
+   "area": "math",
+   "grade": 4,
+   "stem": "从 A 点到对面马路，怎样走最近？",
+   "payload": {
+    "answer": "沿垂直于马路的线段走",
+    "steps": "垂直线段最短，这段距离就是点到直线的距离。"
+   },
+   "tags": [
+    "数学·线与角",
+    "数学·平行与垂直"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mu2-2:example"
+  },
+  {
+   "uuid": "ea44bed0-aca4-57b8-8b51-61b6e035ae60",
+   "type": "selfcheck",
+   "area": "math",
+   "grade": 4,
+   "stem": "量角时中心对顶点、0° 线对边后，另一边对准内圈 50°，这个角是多少度？",
+   "payload": {
+    "answer": "50°",
+    "steps": "0° 刻度线在内圈，就读内圈刻度，是 50°。"
+   },
+   "tags": [
+    "数学·线与角",
+    "数学·角的度量"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mu2-3:example"
+  },
+  {
+   "uuid": "a93fb696-de14-5155-9dd6-802218336576",
+   "type": "selfcheck",
+   "area": "math",
+   "grade": 4,
+   "stem": "3 时整，时针与分针的夹角是多少度？",
+   "payload": {
+    "answer": "90°，是直角",
+    "steps": "钟面 12 大格，每格 30°；3 时整分针与时针相隔 3 格，30° × 3 = 90°。"
+   },
+   "tags": [
+    "数学·线与角",
+    "数学·角的分类"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mu2-4:example"
+  },
+  {
+   "uuid": "9d4d86f9-25a7-50b7-abb1-fd4468d4cf94",
+   "type": "selfcheck",
+   "area": "math",
+   "grade": 4,
+   "stem": "画一个 65° 的角",
+   "payload": {
+    "answer": "按四步画：射线 → 对准 → 点点 → 连线标注",
+    "steps": "画射线；中心对端点、0° 线对边；找到 65° 处点一个点；连接端点与这个点，标 ∠65°。"
+   },
+   "tags": [
+    "数学·线与角",
+    "数学·画指定度数的角"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mu2-5:example"
+  },
+  {
+   "uuid": "f381bc1a-595f-5d0f-af78-1ba44c834f7a",
+   "type": "selfcheck",
+   "area": "math",
+   "grade": 4,
+   "stem": "计算 14 × 12",
+   "payload": {
+    "answer": "168",
+    "steps": "14 × 2 = 28；14 × 10 = 140；28 + 140 = 168。"
+   },
+   "tags": [
+    "数学·整数乘法（二）",
+    "数学·两位数乘两位数"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mu3-1:example"
+  },
+  {
+   "uuid": "935ef96a-c532-5cef-89a9-fa960a947675",
+   "type": "selfcheck",
+   "area": "math",
+   "grade": 4,
+   "stem": "计算 114 × 21",
+   "payload": {
+    "answer": "2394",
+    "steps": "114 × 1 = 114；114 × 2 = 228，表示 228 个十，即 2280；114 + 2280 = 2394。"
+   },
+   "tags": [
+    "数学·整数乘法（二）",
+    "数学·三位数乘两位数的笔算"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mu3-2:example"
+  },
+  {
+   "uuid": "ac02e4f2-87b7-5a35-a172-7cbf01ba34fb",
+   "type": "selfcheck",
+   "area": "math",
+   "grade": 4,
+   "stem": "门票每张 48 元，102 人去参观，5000 元够吗？",
+   "payload": {
+    "answer": "够（48 × 102 = 4896 元）",
+    "steps": "先估算：48 × 102 ≈ 50 × 100 = 5000，很接近，需要精算；48 × 102 = 4896（元），5000 − 4896 = 104（元），够。"
+   },
+   "tags": [
+    "数学·整数乘法（二）",
+    "数学·估算"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mu3-3:example"
+  },
+  {
+   "uuid": "b12128ce-142f-570b-8c7a-a5957a588043",
+   "type": "selfcheck",
+   "area": "math",
+   "grade": 4,
+   "stem": "计算 160 × 30",
+   "payload": {
+    "answer": "4800",
+    "steps": "16 × 3 = 48；两个因数末尾共有 2 个 0，在 48 后面添 2 个 0，得 4800。"
+   },
+   "tags": [
+    "数学·整数乘法（二）",
+    "数学·因数中间或末尾有 0 的乘法"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mu3-4:example"
+  },
+  {
+   "uuid": "68572099-5b97-5dbd-aeb0-29f7d932b68e",
+   "type": "selfcheck",
+   "area": "math",
+   "grade": 4,
+   "stem": "已知 20 × 4 = 80，直接写出 20 × 40 的积",
+   "payload": {
+    "answer": "800",
+    "steps": "因数 20 不变，4 变成 40（×10），积也 ×10：80 × 10 = 800。"
+   },
+   "tags": [
+    "数学·整数乘法（二）",
+    "数学·积的变化规律"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mu3-5:example"
+  },
+  {
+   "uuid": "d7df5a47-a8dd-57ee-bce2-aa8cf4e830c9",
+   "type": "selfcheck",
+   "area": "math",
+   "grade": 4,
+   "stem": "按规律填空：1234 × 8 + 4 = ？",
+   "payload": {
+    "answer": "9876",
+    "steps": "结果是 9、98、987……每次多一位、末位依次小 1，所以是 9876。"
+   },
+   "tags": [
+    "数学·整数乘法（二）",
+    "数学·用计算器探索规律"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mu3-6:example"
+  },
+  {
+   "uuid": "75412003-efa0-595f-b4e6-5292dbf6cfd2",
+   "type": "selfcheck",
+   "area": "math",
+   "grade": 4,
+   "stem": "路灯下，人走近灯杆时影子怎样变化？",
+   "payload": {
+    "answer": "影子变短",
+    "steps": "人离灯越近，光线照下来越「直」，影子越短；离灯越远影子越长。"
+   },
+   "tags": [
+    "数学·我们生活的空间（二）",
+    "数学·观察的范围"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mu4-1:example"
+  },
+  {
+   "uuid": "3e4e5618-9362-54aa-9177-b0b81a87589e",
+   "type": "selfcheck",
+   "area": "math",
+   "grade": 4,
+   "stem": "四张照片里，人民英雄纪念碑和毛主席纪念堂的左右关系相反，说明什么？",
+   "payload": {
+    "answer": "拍摄者分别站在广场的两侧",
+    "steps": "从相反方向看，两个物体的左右位置会互换，据此判断拍摄点在广场的哪一侧。"
+   },
+   "tags": [
+    "数学·我们生活的空间（二）",
+    "数学·天安门广场"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mu4-2:example"
+  },
+  {
+   "uuid": "5266174e-8f07-5029-ba50-aacbd90db763",
+   "type": "selfcheck",
+   "area": "math",
+   "grade": 4,
+   "stem": "计算 115 + 132 + 118 + 85",
+   "payload": {
+    "answer": "450",
+    "steps": "(115 + 85) + (132 + 118) = 200 + 250 = 450。交换律搬家，结合律凑整。"
+   },
+   "tags": [
+    "数学·运算律",
+    "数学·加法交换律和结合律"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mu5-1:example"
+  },
+  {
+   "uuid": "7cac90f6-acd7-555e-aa89-46800507bf64",
+   "type": "selfcheck",
+   "area": "math",
+   "grade": 4,
+   "stem": "计算 25 × 7 × 4",
+   "payload": {
+    "answer": "700",
+    "steps": "25 × 4 × 7 = 100 × 7 = 700（先交换，再结合）。"
+   },
+   "tags": [
+    "数学·运算律",
+    "数学·乘法交换律和结合律"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mu5-2:example"
+  },
+  {
+   "uuid": "f1841837-65e8-5280-931c-4cf550236d79",
+   "type": "selfcheck",
+   "area": "math",
+   "grade": 4,
+   "stem": "计算 99 × 38",
+   "payload": {
+    "answer": "3762",
+    "steps": "99 × 38 = (100 − 1) × 38 = 100 × 38 − 1 × 38 = 3800 − 38 = 3762。"
+   },
+   "tags": [
+    "数学·运算律",
+    "数学·乘法分配律"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mu5-3:example"
+  },
+  {
+   "uuid": "a2e3a710-b99e-55c5-9990-5be2636f066b",
+   "type": "selfcheck",
+   "area": "math",
+   "grade": 4,
+   "stem": "计算 3900 ÷ 25 ÷ 4",
+   "payload": {
+    "answer": "39",
+    "steps": "25 × 4 = 100，3900 ÷ (25 × 4) = 3900 ÷ 100 = 39。"
+   },
+   "tags": [
+    "数学·运算律",
+    "数学·减法与除法的运算性质"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mu5-4:example"
+  },
+  {
+   "uuid": "006ea45e-491f-5ac3-a4cb-668498f0d73a",
+   "type": "selfcheck",
+   "area": "math",
+   "grade": 4,
+   "stem": "一条线段上有 6 个点（含两端），共有多少条线段？",
+   "payload": {
+    "answer": "15 条",
+    "steps": "5 + 4 + 3 + 2 + 1 = 15（条）。"
+   },
+   "tags": [
+    "数学·数图形的学问",
+    "数学·有序地数图形"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mplay-1:example"
+  },
+  {
+   "uuid": "fba13fd9-2cde-5fdb-a52a-f7462e05883c",
+   "type": "selfcheck",
+   "area": "math",
+   "grade": 4,
+   "stem": "正方体横着切一刀（与底面平行），切面是什么形状？",
+   "payload": {
+    "answer": "正方形",
+    "steps": "切面与正方体的面平行，形状相同，是正方形。"
+   },
+   "tags": [
+    "数学·图形的奥秘",
+    "数学·切开立体图形"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mu6-1:example"
+  },
+  {
+   "uuid": "d7aeb954-282d-56f0-80ff-40fc0befa9dc",
+   "type": "selfcheck",
+   "area": "math",
+   "grade": 4,
+   "stem": "一座「大楼」底层 4 块、第二层 2 块、第三层 1 块，一共几块？",
+   "payload": {
+    "answer": "7 块",
+    "steps": "4 + 2 + 1 = 7（块）；上层必须搭在下层之上。"
+   },
+   "tags": [
+    "数学·图形的奥秘",
+    "数学·搭建立体大楼"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mu6-2:example"
+  },
+  {
+   "uuid": "6ee34312-4358-5ba6-af4a-9dc2d61ebe61",
+   "type": "selfcheck",
+   "area": "math",
+   "grade": 4,
+   "stem": "一个正方体上面写「1」、前面写「2」，向前翻滚一次后，哪个面朝上？",
+   "payload": {
+    "answer": "原来写「2」的前面朝上",
+    "steps": "向前翻滚，前面转到上面的位置，所以原来的前面（写 2）朝上。"
+   },
+   "tags": [
+    "数学·图形的奥秘",
+    "数学·翻滚正方体"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mu6-3:example"
+  },
+  {
+   "uuid": "7deda8b9-8507-5bb1-a3e2-daec943b7be2",
+   "type": "selfcheck",
+   "area": "math",
+   "grade": 4,
+   "stem": "一箱苹果连箱重 25 千克，箱子重 1 千克，苹果重多少千克？",
+   "payload": {
+    "answer": "24 千克",
+    "steps": "总量 25 千克，已知分量（箱子）1 千克，未知分量（苹果）= 25 − 1 = 24（千克）。"
+   },
+   "tags": [
+    "数学·运用数量关系解决问题",
+    "数学·总量与分量"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mu7-1:example"
+  },
+  {
+   "uuid": "4fe24216-4b9a-5fb0-8d64-5c77c284ef1f",
+   "type": "selfcheck",
+   "area": "math",
+   "grade": 4,
+   "stem": "每支钢笔 12 元，买 15 支要多少元？",
+   "payload": {
+    "answer": "180 元",
+    "steps": "总价 = 单价 × 数量 = 12 × 15 = 180（元）。"
+   },
+   "tags": [
+    "数学·运用数量关系解决问题",
+    "数学·单价、数量与总价"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mu7-2:example"
+  },
+  {
+   "uuid": "e8597277-b59b-5104-b318-9b4b6e621ce2",
+   "type": "selfcheck",
+   "area": "math",
+   "grade": 4,
+   "stem": "一辆汽车每时行 85 千米，4 时行多少千米？",
+   "payload": {
+    "answer": "340 千米",
+    "steps": "路程 = 速度 × 时间 = 85 × 4 = 340（千米）。"
+   },
+   "tags": [
+    "数学·运用数量关系解决问题",
+    "数学·速度、时间与路程"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mu7-3:example"
+  },
+  {
+   "uuid": "e9420b7d-4d92-5657-8121-585fd3743e47",
+   "type": "selfcheck",
+   "area": "math",
+   "grade": 4,
+   "stem": "甲乙两车从相距 300 千米的两地同时相向开出，甲车每时行 60 千米，乙车每时行 40 千米，几时后相遇？",
+   "payload": {
+    "answer": "3 时",
+    "steps": "速度和 = 60 + 40 = 100（千米/时）；相遇时间 = 300 ÷ 100 = 3（时）。"
+   },
+   "tags": [
+    "数学·运用数量关系解决问题",
+    "数学·相遇问题"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mu7-4:example"
+  },
+  {
+   "uuid": "4f36970d-0311-528b-8092-f5b87a2ad6cb",
+   "type": "selfcheck",
+   "area": "math",
+   "grade": 4,
+   "stem": "统计全班最喜欢的运动项目，先做什么？",
+   "payload": {
+    "answer": "逐人调查并画「正」字记录",
+    "steps": "先记录原始数据，再分类整理成统计表。"
+   },
+   "tags": [
+    "数学·数据的表示和分析（一）",
+    "数学·数据的收集与整理"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mu8-1:example"
+  },
+  {
+   "uuid": "4c06959e-dc28-5afc-a2ba-e46a17d53718",
+   "type": "selfcheck",
+   "area": "math",
+   "grade": 4,
+   "stem": "1 格代表 2 人，喜欢跳绳的有 5 人，直条画多高？",
+   "payload": {
+    "answer": "2 格半",
+    "steps": "5 ÷ 2 = 2.5（格），半格表示 1 人。"
+   },
+   "tags": [
+    "数学·数据的表示和分析（一）",
+    "数学·认识条形统计图"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mu8-2:example"
+  },
+  {
+   "uuid": "9c1de092-d94a-514a-a648-ea260ff0f3b9",
+   "type": "selfcheck",
+   "area": "math",
+   "grade": 4,
+   "stem": "4 名同学的身高分别是 130、135、140、131 厘米，平均身高是多少？",
+   "payload": {
+    "answer": "134 厘米",
+    "steps": "总身高 = 130 + 135 + 140 + 131 = 536（厘米）；平均数 = 536 ÷ 4 = 134（厘米）。"
+   },
+   "tags": [
+    "数学·数据的表示和分析（一）",
+    "数学·平均数"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mu8-3:example"
+  },
+  {
+   "uuid": "aa0a34a7-b25e-5876-97d1-ed725dad468c",
+   "type": "selfcheck",
+   "area": "math",
+   "grade": 4,
+   "stem": "研究「导航时间准不准」，第一步要做什么？",
+   "payload": {
+    "answer": "提出问题并制订研究计划",
+    "steps": "先想清楚研究什么、走哪条路、用什么方式出行、记录哪些数据，再开始行动。"
+   },
+   "tags": [
+    "数学·导航给的时间准吗",
+    "数学·出行导航"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mnav-1:example"
+  },
+  {
+   "uuid": "c9b7e35a-25e4-53fe-b82b-cc0f5b96363e",
+   "type": "selfcheck",
+   "area": "math",
+   "grade": 4,
+   "stem": "步行 950 米，正常预计 15 分钟，途中遇到 2 个红灯各等 1 分钟，实际大约多久？",
+   "payload": {
+    "answer": "约 17 分钟",
+    "steps": "正常 15 分钟 + 等红灯 2 分钟 = 17 分钟；红灯会让实际时间比导航预计更长。"
+   },
+   "tags": [
+    "数学·导航给的时间准吗",
+    "数学·模拟实验"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mnav-2:example"
+  },
+  {
+   "uuid": "58d261cb-1df3-5ae3-bfa1-f6933baf990d",
+   "type": "selfcheck",
+   "area": "math",
+   "grade": 4,
+   "stem": "导航预计 15 分钟，实际走了 17 分钟，说明什么？",
+   "payload": {
+    "answer": "导航预计时间与实际时间不完全一致",
+    "steps": "路上遇到了红绿灯或小拥堵，多花了 2 分钟；导航时间是估算，实际会受路况影响。"
+   },
+   "tags": [
+    "数学·导航给的时间准吗",
+    "数学·实地研究"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mnav-3:example"
+  },
+  {
+   "uuid": "56bc4661-4808-5cc0-a576-1f135a3e2463",
+   "type": "selfcheck",
+   "area": "math",
+   "grade": 4,
+   "stem": "怎么向同学说明「导航时间不完全准」？",
+   "payload": {
+    "answer": "用预计时间和实际时间的对比数据说话",
+    "steps": "列出几次出行的导航预计时间和实际时间，算出平均差异，再说明影响因素，结论就有说服力。"
+   },
+   "tags": [
+    "数学·导航给的时间准吗",
+    "数学·研究分享会"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mnav-4:example"
+  },
+  {
+   "uuid": "d28b9dd5-7f56-5496-948e-9afc74e6a130",
+   "type": "truefalse",
+   "area": "math",
+   "grade": 4,
+   "stem": "读 30450000 时把末尾的 0 也读出来，对吗？",
+   "payload": {
+    "answer": false,
+    "explanation": "每级末尾的 0 都不读，读作三千零四十五万。"
+   },
+   "tags": [
+    "数学·认识更大的数"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mistakes:ed1654b9"
+  },
+  {
+   "uuid": "3f9470b7-2924-518c-9a21-7c1076af06d6",
+   "type": "truefalse",
+   "area": "math",
+   "grade": 4,
+   "stem": "把 2340000 改写成 234 万时用「≈，对吗？",
+   "payload": {
+    "answer": false,
+    "explanation": "改写是准确数，用「=」；只有省略尾数（四舍五入）才用「≈」。"
+   },
+   "tags": [
+    "数学·认识更大的数"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mistakes:fa8007e5"
+  },
+  {
+   "uuid": "564e84a3-58f4-5496-85d7-93a44a896606",
+   "type": "truefalse",
+   "area": "math",
+   "grade": 4,
+   "stem": "省略万位后面的尾数时直接舍去千位，对吗？",
+   "payload": {
+    "answer": false,
+    "explanation": "四舍五入：千位满 5 要向万位进 1。"
+   },
+   "tags": [
+    "数学·认识更大的数"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mistakes:a374fd20"
+  },
+  {
+   "uuid": "77d68872-34be-5319-90b6-ef47cd3c8be7",
+   "type": "truefalse",
+   "area": "math",
+   "grade": 4,
+   "stem": "画一条 3 厘米长的直线，对吗？",
+   "payload": {
+    "answer": false,
+    "explanation": "直线无限长，不能测量；应该说线段长 3 厘米。"
+   },
+   "tags": [
+    "数学·线与角"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mistakes:1d8ed8dc"
+  },
+  {
+   "uuid": "2563e095-179b-5499-a527-fb361f4fb485",
+   "type": "truefalse",
+   "area": "math",
+   "grade": 4,
+   "stem": "量角时内外圈读混，把 50° 量成 130°，对吗？",
+   "payload": {
+    "answer": false,
+    "explanation": "0° 刻度线在内圈读内圈，在外圈读外圈。"
+   },
+   "tags": [
+    "数学·线与角"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mistakes:514a9436"
+  },
+  {
+   "uuid": "0262e228-71ab-5712-9f09-97852e47804a",
+   "type": "truefalse",
+   "area": "math",
+   "grade": 4,
+   "stem": "钝角就是大于 90° 的角，对吗？",
+   "payload": {
+    "answer": false,
+    "explanation": "钝角大于 90° 且小于 180°。"
+   },
+   "tags": [
+    "数学·线与角"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mistakes:443c9e15"
+  },
+  {
+   "uuid": "98951e7a-e9fe-5b0c-a91a-830e99e3e2a3",
+   "type": "truefalse",
+   "area": "math",
+   "grade": 4,
+   "stem": "用十位去乘时，积的末位和个位对齐，对吗？",
+   "payload": {
+    "answer": false,
+    "explanation": "用十位上的数去乘，积的末位要和十位对齐。"
+   },
+   "tags": [
+    "数学·整数乘法（二）"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mistakes:2a01be51"
+  },
+  {
+   "uuid": "51e0a261-a84e-56f4-a09b-4513aa313f04",
+   "type": "truefalse",
+   "area": "math",
+   "grade": 4,
+   "stem": "102 × 45 = 100 × 45 + 2，对吗？",
+   "payload": {
+    "answer": false,
+    "explanation": "乘法分配律要乘完整：100 × 45 + 2 × 45。"
+   },
+   "tags": [
+    "数学·运算律"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mistakes:800092df"
+  },
+  {
+   "uuid": "7e0d690b-d383-548c-879f-7b7bc8a6ac36",
+   "type": "truefalse",
+   "area": "math",
+   "grade": 4,
+   "stem": "125 × 8 = 100，对吗？",
+   "payload": {
+    "answer": false,
+    "explanation": "125 × 8 = 1000，背熟凑整好朋友。"
+   },
+   "tags": [
+    "数学·运算律"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mistakes:b665d31b"
+  },
+  {
+   "uuid": "29470be2-215a-5d85-b418-04bc19987117",
+   "type": "truefalse",
+   "area": "math",
+   "grade": 4,
+   "stem": "速度单位写成「千米，对吗？",
+   "payload": {
+    "answer": false,
+    "explanation": "速度是复合单位，如 15 千米/时，读作「15 千米每时」。"
+   },
+   "tags": [
+    "数学·运用数量关系解决问题"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mistakes:5018c9db"
+  },
+  {
+   "uuid": "7a2cf1df-4933-5260-ac29-58994a730c98",
+   "type": "truefalse",
+   "area": "math",
+   "grade": 4,
+   "stem": "相遇问题用速度差算，对吗？",
+   "payload": {
+    "answer": false,
+    "explanation": "相向而行的相遇问题用速度和：总路程 = 速度和 × 相遇时间。"
+   },
+   "tags": [
+    "数学·运用数量关系解决问题"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mistakes:db0a0038"
+  },
+  {
+   "uuid": "c39b3edf-dfee-5452-b96c-a77bf96f2e3a",
+   "type": "truefalse",
+   "area": "math",
+   "grade": 4,
+   "stem": "正方体翻滚后只看一个面的变化，对吗？",
+   "payload": {
+    "answer": false,
+    "explanation": "翻滚时其余四个侧面也跟着转，要按方向依次判断每个面的位置。"
+   },
+   "tags": [
+    "数学·图形的奥秘"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mistakes:b07b0b1c"
+  },
+  {
+   "uuid": "3ef444b7-83b4-5f64-9dec-c22dac2c8d50",
+   "type": "truefalse",
+   "area": "math",
+   "grade": 4,
+   "stem": "判断拍摄点只看一个物体的大小，对吗？",
+   "payload": {
+    "answer": false,
+    "explanation": "要对比两个物体的前后、左右位置关系，反过来推拍摄者的位置。"
+   },
+   "tags": [
+    "数学·我们生活的空间（二）"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mistakes:7f203c75"
+  },
+  {
+   "uuid": "e73745af-e1dc-544b-a59c-b0d5b3844239",
+   "type": "truefalse",
+   "area": "math",
+   "grade": 4,
+   "stem": "把平均数当成数据里真实存在的数，对吗？",
+   "payload": {
+    "answer": false,
+    "explanation": "平均数是总数量 ÷ 总份数算出来的整体水平，不一定是某个真实数据。"
+   },
+   "tags": [
+    "数学·数据的表示和分析（一）"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mistakes:f37416c5"
+  },
+  {
+   "uuid": "22e7daf5-827e-5043-8fb3-3d73b4384054",
+   "type": "truefalse",
+   "area": "math",
+   "grade": 4,
+   "stem": "1 格代表 2 人时，把 5 人画成 3 格，对吗？",
+   "payload": {
+    "answer": false,
+    "explanation": "5 ÷ 2 = 2.5 格，半格表示 1 人，画 2 格半。"
+   },
+   "tags": [
+    "数学·数据的表示和分析（一）"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mistakes:b887604f"
+  },
+  {
+   "uuid": "e592e665-ec39-5c69-9c97-2c52a6abed14",
+   "type": "choice",
+   "area": "chinese",
+   "grade": 4,
+   "stem": "「号」在「风号浪吼」中读哪个音？",
+   "payload": {
+    "options": [
+     "háo",
+     "hào"
+    ],
+    "answer": 0,
+    "explanation": "「号」读 háo 时可组成「风号浪吼」；读 hào 时可组成「号召」。"
+   },
+   "tags": [
+    "语文·多音字",
+    "四上·《观潮》"
+   ],
+   "source_key": "primary-chinese",
+   "source_ref": "chinese:u1-1:poly:号"
+  },
+  {
+   "uuid": "9bf4d1de-1e3f-5cdb-b243-246829bed557",
+   "type": "choice",
+   "area": "chinese",
+   "grade": 4,
+   "stem": "「闷」在「闷雷滚动」中读哪个音？",
+   "payload": {
+    "options": [
+     "mèn",
+     "mēn"
+    ],
+    "answer": 1,
+    "explanation": "「闷」读 mēn 时可组成「闷雷滚动」；读 mèn 时可组成「烦闷」。"
+   },
+   "tags": [
+    "语文·多音字",
+    "四上·《观潮》"
+   ],
+   "source_key": "primary-chinese",
+   "source_ref": "chinese:u1-1:poly:闷"
+  },
+  {
+   "uuid": "270e7c51-c49f-55be-b190-719ee2cd4159",
+   "type": "choice",
+   "area": "chinese",
+   "grade": 4,
+   "stem": "「系」在「系铃铛」中读哪个音？",
+   "payload": {
+    "options": [
+     "jì",
+     "xì"
+    ],
+    "answer": 0,
+    "explanation": "「系」读 jì 时可组成「系铃铛」；读 xì 时可组成「联系」。"
+   },
+   "tags": [
+    "语文·多音字",
+    "四上·《夜间飞行的秘密》"
+   ],
+   "source_key": "primary-chinese",
+   "source_ref": "chinese:u2-5:poly:系"
+  },
+  {
+   "uuid": "99e9f32a-88f8-5cef-967a-f209a1be0a90",
+   "type": "choice",
+   "area": "chinese",
+   "grade": 4,
+   "stem": "「将」在「将领」中读哪个音？",
+   "payload": {
+    "options": [
+     "jiāng",
+     "jiàng"
+    ],
+    "answer": 1,
+    "explanation": "「将」读 jiàng 时可组成「将领」；读 jiāng 时可组成「将来」。"
+   },
+   "tags": [
+    "语文·多音字",
+    "四上·《田忌赛马》"
+   ],
+   "source_key": "primary-chinese",
+   "source_ref": "chinese:u2-7:poly:将"
+  },
+  {
+   "uuid": "b35d0333-5b9e-52ca-878d-9b74e16ac2f0",
+   "type": "choice",
+   "area": "chinese",
+   "grade": 4,
+   "stem": "「降」在「未肯降（服输）」中读哪个音？",
+   "payload": {
+    "options": [
+     "jiàng",
+     "xiáng"
+    ],
+    "answer": 1,
+    "explanation": "「降」读 xiáng 时可组成「未肯降（服输）」；读 jiàng 时可组成「降落」。"
+   },
+   "tags": [
+    "语文·多音字",
+    "四上·《古诗三首》"
+   ],
+   "source_key": "primary-chinese",
+   "source_ref": "chinese:u3-8:poly:降"
+  },
+  {
+   "uuid": "d5c73d7d-aba7-543c-a1ea-fee9fbc87fbf",
+   "type": "choice",
+   "area": "chinese",
+   "grade": 4,
+   "stem": "「曲」在「弯曲」中读哪个音？",
+   "payload": {
+    "options": [
+     "qū",
+     "qǔ"
+    ],
+    "answer": 0,
+    "explanation": "「曲」读 qū 时可组成「弯曲」；读 qǔ 时可组成「歌曲」。"
+   },
+   "tags": [
+    "语文·多音字",
+    "四上·《爬山虎的脚》"
+   ],
+   "source_key": "primary-chinese",
+   "source_ref": "chinese:u3-9:poly:曲"
+  },
+  {
+   "uuid": "76b4aaec-a38c-57dc-ba38-5fc847595024",
+   "type": "choice",
+   "area": "chinese",
+   "grade": 4,
+   "stem": "「血」在「血液」中读哪个音？",
+   "payload": {
+    "options": [
+     "xuè",
+     "xiě"
+    ],
+    "answer": 0,
+    "explanation": "「血」读 xuè 时可组成「血液」；读 xiě 时可组成「流血」。"
+   },
+   "tags": [
+    "语文·多音字",
+    "四上·《盘古开天地》"
+   ],
+   "source_key": "primary-chinese",
+   "source_ref": "chinese:u4-11:poly:血"
+  },
+  {
+   "uuid": "2a02d108-7769-58d7-bf72-fd3e0fbbcd42",
+   "type": "choice",
+   "area": "chinese",
+   "grade": 4,
+   "stem": "「佛」在「佛香阁」中读哪个音？",
+   "payload": {
+    "options": [
+     "fú",
+     "fó"
+    ],
+    "answer": 1,
+    "explanation": "「佛」读 fó 时可组成「佛香阁」；读 fú 时可组成「仿佛」。"
+   },
+   "tags": [
+    "语文·多音字",
+    "四上·《颐和园》"
+   ],
+   "source_key": "primary-chinese",
+   "source_ref": "chinese:u6-18:poly:佛"
+  },
+  {
+   "uuid": "c07f205d-6f34-5c1c-be8f-a6742a1ab731",
+   "type": "choice",
+   "area": "chinese",
+   "grade": 4,
+   "stem": "「乘」在「千乘」中读哪个音？",
+   "payload": {
+    "options": [
+     "shèng",
+     "chéng"
+    ],
+    "answer": 0,
+    "explanation": "「乘」读 shèng 时可组成「千乘」；读 chéng 时可组成「乘车」。"
+   },
+   "tags": [
+    "语文·多音字",
+    "四上·《秦兵马俑》"
+   ],
+   "source_key": "primary-chinese",
+   "source_ref": "chinese:u6-19:poly:乘"
+  },
+  {
+   "uuid": "71fea89f-850c-5e09-bcee-cf92629ffbad",
+   "type": "choice",
+   "area": "chinese",
+   "grade": 4,
+   "stem": "「难」在「灾难」中读哪个音？",
+   "payload": {
+    "options": [
+     "nàn",
+     "nán"
+    ],
+    "answer": 0,
+    "explanation": "「难」读 nàn 时可组成「灾难」；读 nán 时可组成「困难」。"
+   },
+   "tags": [
+    "语文·多音字",
+    "四上·《为中华之崛起而读书》"
+   ],
+   "source_key": "primary-chinese",
+   "source_ref": "chinese:u8-25:poly:难"
+  },
+  {
+   "uuid": "687b4ce1-c349-5060-a9ef-512689e298cc",
+   "type": "choice",
+   "area": "chinese",
+   "grade": 4,
+   "stem": "「处」在「惩处」中读哪个音？",
+   "payload": {
+    "options": [
+     "chù",
+     "chǔ"
+    ],
+    "answer": 1,
+    "explanation": "「处」读 chǔ 时可组成「惩处」；读 chù 时可组成「到处」。"
+   },
+   "tags": [
+    "语文·多音字",
+    "四上·《为中华之崛起而读书》"
+   ],
+   "source_key": "primary-chinese",
+   "source_ref": "chinese:u8-25:poly:处"
+  },
+  {
+   "uuid": "d2b5fc4d-1db0-52ba-a27c-cffc8f8fecd0",
+   "type": "choice",
+   "area": "chinese",
+   "grade": 4,
+   "stem": "「号」在「号叫」中读哪个音？",
+   "payload": {
+    "options": [
+     "háo",
+     "hào"
+    ],
+    "answer": 0,
+    "explanation": "「号」读 háo 时可组成「号叫、风号浪吼」；读 hào 时可组成「号召、记号」。"
+   },
+   "tags": [
+    "语文·多音字"
+   ],
+   "source_key": "primary-chinese",
+   "source_ref": "chinese:polyphonic:号"
+  },
+  {
+   "uuid": "4c302911-3ac5-5f32-b928-42eb8bcfe127",
+   "type": "choice",
+   "area": "chinese",
+   "grade": 4,
+   "stem": "「闷」在「闷热」中读哪个音？",
+   "payload": {
+    "options": [
+     "mèn",
+     "mēn"
+    ],
+    "answer": 1,
+    "explanation": "「闷」读 mēn 时可组成「闷热、闷雷」；读 mèn 时可组成「沉闷、烦闷」。"
+   },
+   "tags": [
+    "语文·多音字"
+   ],
+   "source_key": "primary-chinese",
+   "source_ref": "chinese:polyphonic:闷"
+  },
+  {
+   "uuid": "f5b51afe-baeb-56f5-acd0-c7ddc5b693cd",
+   "type": "choice",
+   "area": "chinese",
+   "grade": 4,
+   "stem": "「系」在「系鞋带」中读哪个音？",
+   "payload": {
+    "options": [
+     "jì",
+     "xì"
+    ],
+    "answer": 0,
+    "explanation": "「系」读 jì 时可组成「系鞋带、系铃铛」；读 xì 时可组成「联系、关系」。"
+   },
+   "tags": [
+    "语文·多音字"
+   ],
+   "source_key": "primary-chinese",
+   "source_ref": "chinese:polyphonic:系"
+  },
+  {
+   "uuid": "7c342987-367e-5f20-b544-f58beec7c206",
+   "type": "choice",
+   "area": "chinese",
+   "grade": 4,
+   "stem": "「将」在「大将」中读哪个音？",
+   "payload": {
+    "options": [
+     "jiāng",
+     "jiàng"
+    ],
+    "answer": 1,
+    "explanation": "「将」读 jiàng 时可组成「大将、飞将」；读 jiāng 时可组成「将来、将就」。"
+   },
+   "tags": [
+    "语文·多音字"
+   ],
+   "source_key": "primary-chinese",
+   "source_ref": "chinese:polyphonic:将"
+  },
+  {
+   "uuid": "c7ae315c-b258-5fb8-b648-a125e1168414",
+   "type": "choice",
+   "area": "chinese",
+   "grade": 4,
+   "stem": "「曲」在「弯曲」中读哪个音？",
+   "payload": {
+    "options": [
+     "qū",
+     "qǔ"
+    ],
+    "answer": 0,
+    "explanation": "「曲」读 qū 时可组成「弯曲、曲线」；读 qǔ 时可组成「歌曲、乐曲」。"
+   },
+   "tags": [
+    "语文·多音字"
+   ],
+   "source_key": "primary-chinese",
+   "source_ref": "chinese:polyphonic:曲"
+  },
+  {
+   "uuid": "9c884171-754a-5eb1-905d-e0288626b6a5",
+   "type": "choice",
+   "area": "chinese",
+   "grade": 4,
+   "stem": "「血」在「血液」中读哪个音？",
+   "payload": {
+    "options": [
+     "xuè",
+     "xiě"
+    ],
+    "answer": 0,
+    "explanation": "「血」读 xuè 时可组成「血液、鲜血」；读 xiě 时可组成「流血、血淋淋」。"
+   },
+   "tags": [
+    "语文·多音字"
+   ],
+   "source_key": "primary-chinese",
+   "source_ref": "chinese:polyphonic:血"
+  },
+  {
+   "uuid": "3fb5d444-5ac7-51ac-a58e-889efa881ed7",
+   "type": "choice",
+   "area": "chinese",
+   "grade": 4,
+   "stem": "「乘」在「千乘」中读哪个音？",
+   "payload": {
+    "options": [
+     "chéng",
+     "shèng"
+    ],
+    "answer": 1,
+    "explanation": "「乘」读 shèng 时可组成「千乘、史乘」；读 chéng 时可组成「乘车、乘法」。"
+   },
+   "tags": [
+    "语文·多音字"
+   ],
+   "source_key": "primary-chinese",
+   "source_ref": "chinese:polyphonic:乘"
+  },
+  {
+   "uuid": "4f785a46-0023-595f-a168-c5177c75fcd3",
+   "type": "choice",
+   "area": "chinese",
+   "grade": 4,
+   "stem": "「难」在「灾难」中读哪个音？",
+   "payload": {
+    "options": [
+     "nán",
+     "nàn"
+    ],
+    "answer": 1,
+    "explanation": "「难」读 nàn 时可组成「灾难、遇难」；读 nán 时可组成「困难、难题」。"
+   },
+   "tags": [
+    "语文·多音字"
+   ],
+   "source_key": "primary-chinese",
+   "source_ref": "chinese:polyphonic:难"
+  },
+  {
+   "uuid": "fcd5fbb5-4bdd-53ba-a2aa-c37db900562f",
+   "type": "choice",
+   "area": "chinese",
+   "grade": 4,
+   "stem": "「处」在「惩处」中读哪个音？",
+   "payload": {
+    "options": [
+     "chù",
+     "chǔ"
+    ],
+    "answer": 1,
+    "explanation": "「处」读 chǔ 时可组成「惩处、处理」；读 chù 时可组成「到处、好处」。"
+   },
+   "tags": [
+    "语文·多音字"
+   ],
+   "source_key": "primary-chinese",
+   "source_ref": "chinese:polyphonic:处"
+  },
+  {
+   "uuid": "f9c690fd-2b24-5feb-a57d-2d6374cfd7f9",
+   "type": "choice",
+   "area": "chinese",
+   "grade": 4,
+   "stem": "「还」在「归还」中读哪个音？",
+   "payload": {
+    "options": [
+     "hái",
+     "huán"
+    ],
+    "answer": 1,
+    "explanation": "「还」读 huán 时可组成「归还、还家」；读 hái 时可组成「还有、还是」。"
+   },
+   "tags": [
+    "语文·多音字"
+   ],
+   "source_key": "primary-chinese",
+   "source_ref": "chinese:polyphonic:还"
+  },
+  {
+   "uuid": "cec53a8a-dcd5-5fc4-a3d6-245318f16c06",
+   "type": "choice",
+   "area": "chinese",
+   "grade": 4,
+   "stem": "「佛」在「佛像」中读哪个音？",
+   "payload": {
+    "options": [
+     "fó",
+     "fú"
+    ],
+    "answer": 0,
+    "explanation": "「佛」读 fó 时可组成「佛像、佛香阁」；读 fú 时可组成「仿佛」。"
+   },
+   "tags": [
+    "语文·多音字"
+   ],
+   "source_key": "primary-chinese",
+   "source_ref": "chinese:polyphonic:佛"
+  },
+  {
+   "uuid": "c1855f0b-106c-5a5a-950c-3ff5b2cb7aa4",
+   "type": "choice",
+   "area": "chinese",
+   "grade": 4,
+   "stem": "「降」在「投降」中读哪个音？",
+   "payload": {
+    "options": [
+     "jiàng",
+     "xiáng"
+    ],
+    "answer": 1,
+    "explanation": "「降」读 xiáng 时可组成「投降、未肯降」；读 jiàng 时可组成「下降、降落」。"
+   },
+   "tags": [
+    "语文·多音字"
+   ],
+   "source_key": "primary-chinese",
+   "source_ref": "chinese:polyphonic:降"
+  },
+  {
+   "uuid": "8ac9b517-d58e-539f-849a-110460bb8096",
+   "type": "choice",
+   "area": "chinese",
+   "grade": 4,
+   "stem": "「挣」在「挣扎」中读哪个音？",
+   "payload": {
+    "options": [
+     "zhèng",
+     "zhēng"
+    ],
+    "answer": 1,
+    "explanation": "「挣」读 zhēng 时可组成「挣扎」；读 zhèng 时可组成「挣钱、挣脱」。"
+   },
+   "tags": [
+    "语文·多音字"
+   ],
+   "source_key": "primary-chinese",
+   "source_ref": "chinese:polyphonic:挣"
+  },
+  {
+   "uuid": "1581fa95-c256-5b26-850f-161ea8d30275",
+   "type": "choice",
+   "area": "chinese",
+   "grade": 4,
+   "stem": "「薄」在「薄饼」中读哪个音？",
+   "payload": {
+    "options": [
+     "báo",
+     "bó"
+    ],
+    "answer": 0,
+    "explanation": "「薄」读 báo 时可组成「薄饼、薄片」；读 bó 时可组成「薄弱、单薄」。"
+   },
+   "tags": [
+    "语文·多音字"
+   ],
+   "source_key": "primary-chinese",
+   "source_ref": "chinese:polyphonic:薄"
+  },
+  {
+   "uuid": "c71996f2-11c1-58ce-a4a0-aacf450d4ad6",
+   "type": "choice",
+   "area": "chinese",
+   "grade": 4,
+   "stem": "「禁」在「不禁」中读哪个音？",
+   "payload": {
+    "options": [
+     "jīn",
+     "jìn"
+    ],
+    "answer": 0,
+    "explanation": "「禁」读 jīn 时可组成「不禁、禁受」；读 jìn 时可组成「禁止、禁令」。"
+   },
+   "tags": [
+    "语文·多音字"
+   ],
+   "source_key": "primary-chinese",
+   "source_ref": "chinese:polyphonic:禁"
+  },
+  {
+   "uuid": "46fffda3-a2e1-59dc-983b-bccdcaea4819",
+   "type": "choice",
+   "area": "chinese",
+   "grade": 4,
+   "stem": "「间」在「中间」中读哪个音？",
+   "payload": {
+    "options": [
+     "jiàn",
+     "jiān"
+    ],
+    "answer": 1,
+    "explanation": "「间」读 jiān 时可组成「中间、时间」；读 jiàn 时可组成「间隔、离间」。"
+   },
+   "tags": [
+    "语文·多音字"
+   ],
+   "source_key": "primary-chinese",
+   "source_ref": "chinese:polyphonic:间"
+  },
+  {
+   "uuid": "1066c1eb-fb53-5963-941a-5f1f25df3e07",
+   "type": "choice",
+   "area": "chinese",
+   "grade": 4,
+   "stem": "「露」在「露水」中读哪个音？",
+   "payload": {
+    "options": [
+     "lù",
+     "lòu"
+    ],
+    "answer": 0,
+    "explanation": "「露」读 lù 时可组成「露水、白露」；读 lòu 时可组成「露脸、露怯」。"
+   },
+   "tags": [
+    "语文·多音字"
+   ],
+   "source_key": "primary-chinese",
+   "source_ref": "chinese:polyphonic:露"
+  },
+  {
+   "uuid": "3aa7446c-d6b8-591f-8174-7a088389a479",
+   "type": "choice",
+   "area": "chinese",
+   "grade": 4,
+   "stem": "「朝」在「朝霞」中读哪个音？",
+   "payload": {
+    "options": [
+     "zhāo",
+     "cháo"
+    ],
+    "answer": 0,
+    "explanation": "「朝」读 zhāo 时可组成「朝霞、朝阳」；读 cháo 时可组成「朝向、朝代」。"
+   },
+   "tags": [
+    "语文·多音字"
+   ],
+   "source_key": "primary-chinese",
+   "source_ref": "chinese:polyphonic:朝"
+  },
+  {
+   "uuid": "af1d1a82-c528-543d-8ebc-85fa182023cc",
+   "type": "choice",
+   "area": "chinese",
+   "grade": 4,
+   "stem": "「便」在「方便」中读哪个音？",
+   "payload": {
+    "options": [
+     "pián",
+     "biàn"
+    ],
+    "answer": 1,
+    "explanation": "「便」读 biàn 时可组成「方便、便利」；读 pián 时可组成「便宜、大腹便便」。"
+   },
+   "tags": [
+    "语文·多音字"
+   ],
+   "source_key": "primary-chinese",
+   "source_ref": "chinese:polyphonic:便"
+  },
+  {
+   "uuid": "b455161e-d6c0-5944-870a-829f92530116",
+   "type": "choice",
+   "area": "chinese",
+   "grade": 4,
+   "stem": "「传」在「传说」中读哪个音？",
+   "payload": {
+    "options": [
+     "zhuàn",
+     "chuán"
+    ],
+    "answer": 1,
+    "explanation": "「传」读 chuán 时可组成「传说、传递」；读 zhuàn 时可组成「自传、传记」。"
+   },
+   "tags": [
+    "语文·多音字"
+   ],
+   "source_key": "primary-chinese",
+   "source_ref": "chinese:polyphonic:传"
+  },
+  {
+   "uuid": "1503c95c-d642-560a-95a8-280f379d880c",
+   "type": "choice",
+   "area": "chinese",
+   "grade": 4,
+   "stem": "「强」在「强大」中读哪个音？",
+   "payload": {
+    "options": [
+     "qiǎng",
+     "qiáng"
+    ],
+    "answer": 1,
+    "explanation": "「强」读 qiáng 时可组成「强大、坚强」；读 qiǎng 时可组成「勉强、强词夺理」。"
+   },
+   "tags": [
+    "语文·多音字"
+   ],
+   "source_key": "primary-chinese",
+   "source_ref": "chinese:polyphonic:强"
+  },
+  {
+   "uuid": "d27186b8-5ad8-5670-abc6-20003f77a5bc",
+   "type": "choice",
+   "area": "english",
+   "grade": 4,
+   "stem": "「sport」是什么意思？",
+   "payload": {
+    "options": [
+     "努力；尝试",
+     "运动",
+     "放弃",
+     "决不；永不"
+    ],
+    "answer": 1,
+    "explanation": "sport /spɔːt/ n. 运动。"
+   },
+   "tags": [
+    "英语·Unit 1  I love sports"
+   ],
+   "source_key": "primary-english",
+   "source_ref": "english:4a-u1:sport"
+  },
+  {
+   "uuid": "1c02da88-1c07-528a-9b3c-d946b12294a2",
+   "type": "choice",
+   "area": "english",
+   "grade": 4,
+   "stem": "「phew」是什么意思？",
+   "payload": {
+    "options": [
+     "& v. 报道",
+     "令人惊叹的；奇妙的",
+     "季节",
+     "啊；唷；唉"
+    ],
+    "answer": 3,
+    "explanation": "phew /fjuː/ interj. 啊；唷；唉。"
+   },
+   "tags": [
+    "英语·Unit 2  Helping at home"
+   ],
+   "source_key": "primary-english",
+   "source_ref": "english:4a-u2:phew"
+  },
+  {
+   "uuid": "1b7dfe35-1bd7-52f8-8667-e867428143bb",
+   "type": "choice",
+   "area": "english",
+   "grade": 4,
+   "stem": "「weather」是什么意思？",
+   "payload": {
+    "options": [
+     "清洁的；v. 打扫",
+     "汪汪（狗吠声）",
+     "天气",
+     "容易的"
+    ],
+    "answer": 2,
+    "explanation": "weather /ˈweðə/ n. 天气。"
+   },
+   "tags": [
+    "英语·Unit 3  What's the weather like?"
+   ],
+   "source_key": "primary-english",
+   "source_ref": "english:4a-u3:weather"
+  },
+  {
+   "uuid": "df285b6f-141e-58da-9e1e-c610ea09fed6",
+   "type": "choice",
+   "area": "english",
+   "grade": 4,
+   "stem": "「wonderful」是什么意思？",
+   "payload": {
+    "options": [
+     "令人惊叹的；奇妙的",
+     "冬天；冬季",
+     "最喜欢的",
+     "生日"
+    ],
+    "answer": 0,
+    "explanation": "wonderful /ˈwʌndəfl/ adj. 令人惊叹的；奇妙的。"
+   },
+   "tags": [
+    "英语·Unit 4  Wonderful seasons"
+   ],
+   "source_key": "primary-english",
+   "source_ref": "english:4a-u4:wonderful"
+  },
+  {
+   "uuid": "6a7db8dc-9e0d-557b-ba60-681b317864a4",
+   "type": "choice",
+   "area": "english",
+   "grade": 4,
+   "stem": "「bus」是什么意思？",
+   "payload": {
+    "options": [
+     "笔直地",
+     "公交车；公共汽车",
+     "车轮",
+     "& n. 向左；左边"
+    ],
+    "answer": 1,
+    "explanation": "bus /bʌs/ n. 公交车；公共汽车。"
+   },
+   "tags": [
+    "英语·Unit 5  Let's go!"
+   ],
+   "source_key": "primary-english",
+   "source_ref": "english:4a-u5:bus"
+  },
+  {
+   "uuid": "c7c55445-fd93-5bc7-a29b-46f061ec3897",
+   "type": "choice",
+   "area": "english",
+   "grade": 4,
+   "stem": "「wheel」是什么意思？",
+   "payload": {
+    "options": [
+     "车轮",
+     "竹；竹子",
+     "机场",
+     "自行车"
+    ],
+    "answer": 0,
+    "explanation": "wheel /wiːl/ n. 车轮。"
+   },
+   "tags": [
+    "英语·Unit 6  Find your way"
+   ],
+   "source_key": "primary-english",
+   "source_ref": "english:4a-u6:wheel"
+  },
+  {
+   "uuid": "8bc7a2a7-ccca-5d58-ac7b-ef841f92f5d6",
+   "type": "choice",
+   "area": "english",
+   "grade": 4,
+   "stem": "「doctor」是什么意思？",
+   "payload": {
+    "options": [
+     "担心的；焦虑的",
+     "大街；街道",
+     "撞击；碰撞",
+     "医生；大夫"
+    ],
+    "answer": 3,
+    "explanation": "doctor /ˈdɒktə/ n. 医生；大夫。"
+   },
+   "tags": [
+    "英语·Unit 1  People at work"
+   ],
+   "source_key": "primary-english",
+   "source_ref": "english:4b-u1:doctor"
+  },
+  {
+   "uuid": "4fcbb739-9a48-5f30-a2b4-20833feafd79",
+   "type": "choice",
+   "area": "english",
+   "grade": 4,
+   "stem": "「laugh」是什么意思？",
+   "payload": {
+    "options": [
+     "笔记；记录",
+     "发出笑声；（大）笑",
+     "小时",
+     "文化"
+    ],
+    "answer": 1,
+    "explanation": "laugh /lɑːf/ v. 发出笑声；（大）笑。"
+   },
+   "tags": [
+    "英语·Unit 2  How do you feel today?"
+   ],
+   "source_key": "primary-english",
+   "source_ref": "english:4b-u2:laugh"
+  },
+  {
+   "uuid": "142d29f9-90c3-5a3b-9b2f-6494ba397422",
+   "type": "choice",
+   "area": "english",
+   "grade": 4,
+   "stem": "「talent」是什么意思？",
+   "payload": {
+    "options": [
+     "学生",
+     "落下；降落；跌落",
+     "& prep. 不在（某物）上面；离开",
+     "天资；天赋；才能"
+    ],
+    "answer": 3,
+    "explanation": "talent /ˈtælənt/ n. 天资；天赋；才能。"
+   },
+   "tags": [
+    "英语·Unit 3  Everyone's got talent!"
+   ],
+   "source_key": "primary-english",
+   "source_ref": "english:4b-u3:talent"
+  },
+  {
+   "uuid": "f700f4f2-da25-53e7-be44-ad4f06ee8a46",
+   "type": "choice",
+   "area": "english",
+   "grade": 4,
+   "stem": "「seed」是什么意思？",
+   "payload": {
+    "options": [
+     "整个的；全部的",
+     "鲸",
+     "制服",
+     "种子；籽"
+    ],
+    "answer": 3,
+    "explanation": "seed /siːd/ n. 种子；籽。"
+   },
+   "tags": [
+    "英语·Unit 4  Plant life"
+   ],
+   "source_key": "primary-english",
+   "source_ref": "english:4b-u4:seed"
+  },
+  {
+   "uuid": "c90fe65b-5847-5312-8eb3-a1bdc66a4cac",
+   "type": "choice",
+   "area": "english",
+   "grade": 4,
+   "stem": "「event」是什么意思？",
+   "payload": {
+    "options": [
+     "田地；田野",
+     "画家",
+     "活动；事件",
+     "经常；时常；多次"
+    ],
+    "answer": 2,
+    "explanation": "event /ɪˈvent/ n. 活动；事件。"
+   },
+   "tags": [
+    "英语·Unit 5  School activities"
+   ],
+   "source_key": "primary-english",
+   "source_ref": "english:4b-u5:event"
+  },
+  {
+   "uuid": "56f40b0d-26c4-5f89-a0e5-085849138a18",
+   "type": "choice",
+   "area": "english",
+   "grade": 4,
+   "stem": "「T-shirt」是什么意思？",
+   "payload": {
+    "options": [
+     "& n. 设计",
+     "T 恤（衫）",
+     "选票；v. 投票",
+     "特殊的；特别的"
+    ],
+    "answer": 1,
+    "explanation": "T-shirt /ˈtiː ʃɜːt/ n. T 恤（衫）。"
+   },
+   "tags": [
+    "英语·Unit 6  Cool clothes"
+   ],
+   "source_key": "primary-english",
+   "source_ref": "english:4b-u6:T-shirt"
+  },
+  {
+   "uuid": "2131fcc8-18c1-5948-a746-a796748fe043",
+   "type": "choice",
+   "area": "english",
+   "grade": 4,
+   "stem": "「jump」是什么意思？",
+   "payload": {
+    "options": [
+     "自己的",
+     "跳",
+     "真的；真实的",
+     "步；步骤"
+    ],
+    "answer": 1,
+    "explanation": "jump /dʒʌmp/ v. 跳。"
+   },
+   "tags": [
+    "英语·Unit 1  I love sports"
+   ],
+   "source_key": "primary-english",
+   "source_ref": "english:4a-u1:jump"
+  },
+  {
+   "uuid": "3590e150-27a1-5ce4-aa8d-cfa934e4513f",
+   "type": "choice",
+   "area": "english",
+   "grade": 4,
+   "stem": "「wash」是什么意思？",
+   "payload": {
+    "options": [
+     "女性；女人",
+     "洗",
+     "博物馆；博物院",
+     "& n. 明天"
+    ],
+    "answer": 1,
+    "explanation": "wash /wɒʃ/ v. 洗。"
+   },
+   "tags": [
+    "英语·Unit 2  Helping at home"
+   ],
+   "source_key": "primary-english",
+   "source_ref": "english:4a-u2:wash"
+  },
+  {
+   "uuid": "e4a88926-12df-5107-b105-46567ec14738",
+   "type": "choice",
+   "area": "english",
+   "grade": 4,
+   "stem": "「sunny」是什么意思？",
+   "payload": {
+    "options": [
+     "阳光充足的",
+     "有……的味道；n. 味道",
+     "冰激凌；雪糕",
+     "真的；真正的"
+    ],
+    "answer": 0,
+    "explanation": "sunny /ˈsʌni/ adj. 阳光充足的。"
+   },
+   "tags": [
+    "英语·Unit 3  What's the weather like?"
+   ],
+   "source_key": "primary-english",
+   "source_ref": "english:4a-u3:sunny"
+  },
+  {
+   "uuid": "162e8cbe-19bf-55fa-ab6c-dd2bf7feeed7",
+   "type": "choice",
+   "area": "english",
+   "grade": 4,
+   "stem": "「season」是什么意思？",
+   "payload": {
+    "options": [
+     "努力；尝试",
+     "季节",
+     "放弃",
+     "决不；永不"
+    ],
+    "answer": 1,
+    "explanation": "season /ˈsiːzn/ n. 季节。"
+   },
+   "tags": [
+    "英语·Unit 4  Wonderful seasons"
+   ],
+   "source_key": "primary-english",
+   "source_ref": "english:4a-u4:season"
+  },
+  {
+   "uuid": "8aa303b1-242d-571a-8c1d-d45e6fd5c068",
+   "type": "choice",
+   "area": "english",
+   "grade": 4,
+   "stem": "「car」是什么意思？",
+   "payload": {
+    "options": [
+     "分钟",
+     "穿；戴",
+     "住；居住",
+     "汽车"
+    ],
+    "answer": 3,
+    "explanation": "car /kɑː/ n. 汽车。"
+   },
+   "tags": [
+    "英语·Unit 5  Let's go!"
+   ],
+   "source_key": "primary-english",
+   "source_ref": "english:4a-u5:car"
+  },
+  {
+   "uuid": "c93c44d6-98ac-5cad-a681-696b572a3bad",
+   "type": "choice",
+   "area": "english",
+   "grade": 4,
+   "stem": "「left」是什么意思？",
+   "payload": {
+    "options": [
+     "& n. 向左；左边",
+     "清洁的；v. 打扫",
+     "汪汪（狗吠声）",
+     "任务；事情；工作"
+    ],
+    "answer": 0,
+    "explanation": "left /left/ adv. & n. 向左；左边。"
+   },
+   "tags": [
+    "英语·Unit 6  Find your way"
+   ],
+   "source_key": "primary-english",
+   "source_ref": "english:4a-u6:left"
+  },
+  {
+   "uuid": "fbd32c95-1ed0-53e8-b017-77e6223142f8",
+   "type": "choice",
+   "area": "english",
+   "grade": 4,
+   "stem": "「fireman」是什么意思？",
+   "payload": {
+    "options": [
+     "蜜蜂",
+     "相同的；一模一样的",
+     "声；声音",
+     "消防队员"
+    ],
+    "answer": 3,
+    "explanation": "fireman /ˈfaɪəmən/ n. 消防队员。"
+   },
+   "tags": [
+    "英语·Unit 1  People at work"
+   ],
+   "source_key": "primary-english",
+   "source_ref": "english:4b-u1:fireman"
+  },
+  {
+   "uuid": "466a1ef5-edb5-5e27-8ea8-23657b588ddb",
+   "type": "choice",
+   "area": "english",
+   "grade": 4,
+   "stem": "「sad」是什么意思？",
+   "payload": {
+    "options": [
+     "伤心的；难过的",
+     "角",
+     "点；小圆点",
+     "雨点；雨滴"
+    ],
+    "answer": 0,
+    "explanation": "sad /sæd/ adj. 伤心的；难过的。"
+   },
+   "tags": [
+    "英语·Unit 2  How do you feel today?"
+   ],
+   "source_key": "primary-english",
+   "source_ref": "english:4b-u2:sad"
+  },
+  {
+   "uuid": "4512693c-8d1e-5a7f-ad61-2cc6c4cfa560",
+   "type": "choice",
+   "area": "english",
+   "grade": 4,
+   "stem": "「act」是什么意思？",
+   "payload": {
+    "options": [
+     "T 恤（衫）",
+     "半身裙；裙子",
+     "演出；扮演",
+     "家乡；故乡"
+    ],
+    "answer": 2,
+    "explanation": "act /ækt/ v. 演出；扮演。"
+   },
+   "tags": [
+    "英语·Unit 3  Everyone's got talent!"
+   ],
+   "source_key": "primary-english",
+   "source_ref": "english:4b-u3:act"
+  },
+  {
+   "uuid": "a505dc07-16a1-59db-a12f-6f017faa9a05",
+   "type": "choice",
+   "area": "english",
+   "grade": 4,
+   "stem": "「earth」是什么意思？",
+   "payload": {
+    "options": [
+     "天资；天赋；才能",
+     "泥土；土壤；地球",
+     "大街；街道",
+     "撞击；碰撞"
+    ],
+    "answer": 1,
+    "explanation": "earth /ɜːθ/ n. 泥土；土壤；地球。"
+   },
+   "tags": [
+    "英语·Unit 4  Plant life"
+   ],
+   "source_key": "primary-english",
+   "source_ref": "english:4b-u4:earth"
+  },
+  {
+   "uuid": "45987012-9b3b-5291-ab60-d78f7a59c35b",
+   "type": "choice",
+   "area": "english",
+   "grade": 4,
+   "stem": "「drama」是什么意思？",
+   "payload": {
+    "options": [
+     "皱眉",
+     "害怕的；恐惧的；紧张的",
+     "发抖；颤抖；摇动",
+     "戏剧"
+    ],
+    "answer": 3,
+    "explanation": "drama /ˈdrɑːmə/ n. 戏剧。"
+   },
+   "tags": [
+    "英语·Unit 5  School activities"
+   ],
+   "source_key": "primary-english",
+   "source_ref": "english:4b-u5:drama"
+  },
+  {
+   "uuid": "2f084429-840d-5a67-8fbf-ad967cd2b2cd",
+   "type": "choice",
+   "area": "english",
+   "grade": 4,
+   "stem": "「skirt」是什么意思？",
+   "payload": {
+    "options": [
+     "农民；农场主",
+     "厨师；v. 烹饪",
+     "半身裙；裙子",
+     "消防队员"
+    ],
+    "answer": 2,
+    "explanation": "skirt /skɜːt/ n. 半身裙；裙子。"
+   },
+   "tags": [
+    "英语·Unit 6  Cool clothes"
+   ],
+   "source_key": "primary-english",
+   "source_ref": "english:4b-u6:skirt"
+  },
+  {
+   "uuid": "7dbd3539-c519-5750-9a5e-fe0534ee982f",
+   "type": "choice",
+   "area": "english",
+   "grade": 4,
+   "stem": "「high」是什么意思？",
+   "payload": {
+    "options": [
+     "癌（症）",
+     "横跨；从一边到另一边",
+     "钱",
+     "高高地"
+    ],
+    "answer": 3,
+    "explanation": "high /haɪ/ adv. 高高地。"
+   },
+   "tags": [
+    "英语·Unit 1  I love sports"
+   ],
+   "source_key": "primary-english",
+   "source_ref": "english:4a-u1:high"
+  },
+  {
+   "uuid": "6c6d9322-1c11-5edb-8322-fc4d353ca997",
+   "type": "choice",
+   "area": "english",
+   "grade": 4,
+   "stem": "「dish」是什么意思？",
+   "payload": {
+    "options": [
+     "电影院",
+     "医院",
+     "盘子；碟子",
+     "中心"
+    ],
+    "answer": 2,
+    "explanation": "dish /dɪʃ/ n. 盘子；碟子。"
+   },
+   "tags": [
+    "英语·Unit 2  Helping at home"
+   ],
+   "source_key": "primary-english",
+   "source_ref": "english:4a-u2:dish"
+  },
+  {
+   "uuid": "57ecbb3e-ba5e-52b0-b1d1-2031b7a38b94",
+   "type": "choice",
+   "area": "english",
+   "grade": 4,
+   "stem": "「cloud」是什么意思？",
+   "payload": {
+    "options": [
+     "云",
+     "地铁",
+     "& n. （呼呼地）飞快移动",
+     "有轨电车"
+    ],
+    "answer": 0,
+    "explanation": "cloud /klaʊd/ n. 云。"
+   },
+   "tags": [
+    "英语·Unit 3  What's the weather like?"
+   ],
+   "source_key": "primary-english",
+   "source_ref": "english:4a-u3:cloud"
+  },
+  {
+   "uuid": "c92b15e6-be1c-5411-ae55-105f3c7237c5",
+   "type": "choice",
+   "area": "english",
+   "grade": 4,
+   "stem": "「spring」是什么意思？",
+   "payload": {
+    "options": [
+     "洗",
+     "盘子；碟子",
+     "喂养；给……食物",
+     "春天；春季"
+    ],
+    "answer": 3,
+    "explanation": "spring /sprɪŋ/ n. 春天；春季。"
+   },
+   "tags": [
+    "英语·Unit 4  Wonderful seasons"
+   ],
+   "source_key": "primary-english",
+   "source_ref": "english:4a-u4:spring"
+  },
+  {
+   "uuid": "77f0b4de-bdbf-5ec7-8943-44749d5fd483",
+   "type": "choice",
+   "area": "english",
+   "grade": 4,
+   "stem": "「train」是什么意思？",
+   "payload": {
+    "options": [
+     "地板；地面",
+     "垃圾",
+     "家庭杂务",
+     "火车；列车"
+    ],
+    "answer": 3,
+    "explanation": "train /treɪn/ n. 火车；列车。"
+   },
+   "tags": [
+    "英语·Unit 5  Let's go!"
+   ],
+   "source_key": "primary-english",
+   "source_ref": "english:4a-u5:train"
+  },
+  {
+   "uuid": "c4664f40-7ce9-57fa-a2ff-b926733778f2",
+   "type": "choice",
+   "area": "english",
+   "grade": 4,
+   "stem": "「straight」是什么意思？",
+   "payload": {
+    "options": [
+     "问题",
+     "笔直地",
+     "再一次",
+     "除此之外；还"
+    ],
+    "answer": 1,
+    "explanation": "straight /streɪt/ adv. 笔直地。"
+   },
+   "tags": [
+    "英语·Unit 6  Find your way"
+   ],
+   "source_key": "primary-english",
+   "source_ref": "english:4a-u6:straight"
+  },
+  {
+   "uuid": "a6822bd7-aeff-5262-8507-53155602c800",
+   "type": "choice",
+   "area": "english",
+   "grade": 4,
+   "stem": "「farmer」是什么意思？",
+   "payload": {
+    "options": [
+     "根",
+     "农民；农场主",
+     "种子；籽",
+     "泥土；土壤；地球"
+    ],
+    "answer": 1,
+    "explanation": "farmer /ˈfɑːmə/ n. 农民；农场主。"
+   },
+   "tags": [
+    "英语·Unit 1  People at work"
+   ],
+   "source_key": "primary-english",
+   "source_ref": "english:4b-u1:farmer"
+  },
+  {
+   "uuid": "2ad25140-6965-53a7-bf49-09ac2cd88791",
+   "type": "choice",
+   "area": "english",
+   "grade": 4,
+   "stem": "「cry」是什么意思？",
+   "payload": {
+    "options": [
+     "就；只是",
+     "鸭",
+     "男孩；儿子",
+     "哭；哭泣"
+    ],
+    "answer": 3,
+    "explanation": "cry /kraɪ/ v. 哭；哭泣。"
+   },
+   "tags": [
+    "英语·Unit 2  How do you feel today?"
+   ],
+   "source_key": "primary-english",
+   "source_ref": "english:4b-u2:cry"
+  },
+  {
+   "uuid": "67d2a8d0-2a26-57e4-aaa3-b70c528d69ec",
+   "type": "choice",
+   "area": "english",
+   "grade": 4,
+   "stem": "「magic」是什么意思？",
+   "payload": {
+    "options": [
+     "魔术；戏法",
+     "感觉；感触",
+     "巨大的",
+     "担心的；焦虑的"
+    ],
+    "answer": 0,
+    "explanation": "magic /ˈmædʒɪk/ n. 魔术；戏法。"
+   },
+   "tags": [
+    "英语·Unit 3  Everyone's got talent!"
+   ],
+   "source_key": "primary-english",
+   "source_ref": "english:4b-u3:magic"
+  },
+  {
+   "uuid": "a19d6523-8b74-5ae3-920c-b0ba3cdbc334",
+   "type": "choice",
+   "area": "english",
+   "grade": 4,
+   "stem": "「root」是什么意思？",
+   "payload": {
+    "options": [
+     "叶；叶子",
+     "挖；掘",
+     "向日葵",
+     "根"
+    ],
+    "answer": 3,
+    "explanation": "root /ruːt/ n. 根。"
+   },
+   "tags": [
+    "英语·Unit 4  Plant life"
+   ],
+   "source_key": "primary-english",
+   "source_ref": "english:4b-u4:root"
+  },
+  {
+   "uuid": "089dc1fb-cf19-5b8b-b007-a571beb9140e",
+   "type": "choice",
+   "area": "english",
+   "grade": 4,
+   "stem": "「trip」是什么意思？",
+   "payload": {
+    "options": [
+     "烤；烘；焙",
+     "蜜蜂",
+     "相同的；一模一样的",
+     "旅游；旅行；出行"
+    ],
+    "answer": 3,
+    "explanation": "trip /trɪp/ n. 旅游；旅行；出行。"
+   },
+   "tags": [
+    "英语·Unit 5  School activities"
+   ],
+   "source_key": "primary-english",
+   "source_ref": "english:4b-u5:trip"
+  },
+  {
+   "uuid": "b4f1cb8e-771b-541d-a07b-a91fed9db22e",
+   "type": "choice",
+   "area": "english",
+   "grade": 4,
+   "stem": "「shorts」是什么意思？",
+   "payload": {
+    "options": [
+     "经常；时常；多次",
+     "田地；田野",
+     "短裤",
+     "警察（分）局；派出所"
+    ],
+    "answer": 2,
+    "explanation": "shorts /ʃɔːts/ n. 短裤。"
+   },
+   "tags": [
+    "英语·Unit 6  Cool clothes"
+   ],
+   "source_key": "primary-english",
+   "source_ref": "english:4b-u6:shorts"
+  },
+  {
+   "uuid": "5969a534-9e70-589f-9cf3-01c2f6d11c86",
+   "type": "choice",
+   "area": "english",
+   "grade": 4,
+   "stem": "「far」是什么意思？",
+   "payload": {
+    "options": [
+     "远",
+     "修剪；切；割",
+     "草；青草",
+     "天气"
+    ],
+    "answer": 0,
+    "explanation": "far /fɑː/ adv. 远。"
+   },
+   "tags": [
+    "英语·Unit 1  I love sports"
+   ],
+   "source_key": "primary-english",
+   "source_ref": "english:4a-u1:far"
+  },
+  {
+   "uuid": "cd29c259-0900-52ab-b0ea-4bc29d302021",
+   "type": "choice",
+   "area": "english",
+   "grade": 4,
+   "stem": "「feed」是什么意思？",
+   "payload": {
+    "options": [
+     "方式；方法；路",
+     "野餐",
+     "分钟",
+     "喂养；给……食物"
+    ],
+    "answer": 3,
+    "explanation": "feed /fiːd/ v. 喂养；给……食物。"
+   },
+   "tags": [
+    "英语·Unit 2  Helping at home"
+   ],
+   "source_key": "primary-english",
+   "source_ref": "english:4a-u2:feed"
+  },
+  {
+   "uuid": "cd15e946-9f0c-5b4e-92b0-e5f0b5508438",
+   "type": "choice",
+   "area": "english",
+   "grade": 4,
+   "stem": "「by」是什么意思？",
+   "payload": {
+    "options": [
+     "脏的",
+     "书桌；写字台",
+     "经过；乘坐",
+     "干得好；真不错"
+    ],
+    "answer": 2,
+    "explanation": "by /baɪ/ prep. 经过；乘坐。"
+   },
+   "tags": [
+    "英语·Unit 3  What's the weather like?"
+   ],
+   "source_key": "primary-english",
+   "source_ref": "english:4a-u3:by"
+  },
+  {
+   "uuid": "29f7af0e-f374-57d2-9a73-7f71a4c6bdb0",
+   "type": "choice",
+   "area": "english",
+   "grade": 4,
+   "stem": "「summer」是什么意思？",
+   "payload": {
+    "options": [
+     "发生",
+     "夏天；夏季",
+     "放飞；飞",
+     "放风筝"
+    ],
+    "answer": 1,
+    "explanation": "summer /ˈsʌmə/ n. 夏天；夏季。"
+   },
+   "tags": [
+    "英语·Unit 4  Wonderful seasons"
+   ],
+   "source_key": "primary-english",
+   "source_ref": "english:4a-u4:summer"
+  },
+  {
+   "uuid": "0be86433-c9ef-5cc3-b404-507e2af37202",
+   "type": "choice",
+   "area": "english",
+   "grade": 4,
+   "stem": "「city」是什么意思？",
+   "payload": {
+    "options": [
+     "机场",
+     "自行车",
+     "城市",
+     "竹；竹子"
+    ],
+    "answer": 2,
+    "explanation": "city /ˈsɪti/ n. 城市。"
+   },
+   "tags": [
+    "英语·Unit 5  Let's go!"
+   ],
+   "source_key": "primary-english",
+   "source_ref": "english:4a-u5:city"
+  },
+  {
+   "uuid": "9ea59cf2-d9c6-53eb-b3c0-40de703055bd",
+   "type": "choice",
+   "area": "english",
+   "grade": 4,
+   "stem": "「library」是什么意思？",
+   "payload": {
+    "options": [
+     "图书室；图书馆",
+     "全年；一年到头",
+     "非常；十分",
+     "参与；加入"
+    ],
+    "answer": 0,
+    "explanation": "library /ˈlaɪbrəri/ n. 图书室；图书馆。"
+   },
+   "tags": [
+    "英语·Unit 6  Find your way"
+   ],
+   "source_key": "primary-english",
+   "source_ref": "english:4a-u6:library"
+  },
+  {
+   "uuid": "eca04339-ef9e-5671-addd-7734deb11ecc",
+   "type": "choice",
+   "area": "english",
+   "grade": 4,
+   "stem": "「cook」是什么意思？",
+   "payload": {
+    "options": [
+     "鸭",
+     "厨师；v. 烹饪",
+     "获胜；赢",
+     "就；只是"
+    ],
+    "answer": 1,
+    "explanation": "cook /kʊk/ n. 厨师；v. 烹饪。"
+   },
+   "tags": [
+    "英语·Unit 1  People at work"
+   ],
+   "source_key": "primary-english",
+   "source_ref": "english:4b-u1:cook"
+  },
+  {
+   "uuid": "4fd4d979-58a5-5e57-926e-24d9035bde9b",
+   "type": "choice",
+   "area": "english",
+   "grade": 4,
+   "stem": "「angry」是什么意思？",
+   "payload": {
+    "options": [
+     "半身裙；裙子",
+     "发怒的；生气的",
+     "家乡；故乡",
+     "T 恤（衫）"
+    ],
+    "answer": 1,
+    "explanation": "angry /ˈæŋɡri/ adj. 发怒的；生气的。"
+   },
+   "tags": [
+    "英语·Unit 2  How do you feel today?"
+   ],
+   "source_key": "primary-english",
+   "source_ref": "english:4b-u2:angry"
+  },
+  {
+   "uuid": "dfc068a9-8249-5377-b459-2ae891f59bbb",
+   "type": "choice",
+   "area": "english",
+   "grade": 4,
+   "stem": "「shine」是什么意思？",
+   "payload": {
+    "options": [
+     "表现突出；发光",
+     "拼图游戏；谜",
+     "舞蹈演员",
+     "获胜；赢"
+    ],
+    "answer": 0,
+    "explanation": "shine /ʃaɪn/ v. 表现突出；发光。"
+   },
+   "tags": [
+    "英语·Unit 3  Everyone's got talent!"
+   ],
+   "source_key": "primary-english",
+   "source_ref": "english:4b-u3:shine"
+  },
+  {
+   "uuid": "f3dbc876-378e-55fb-9bba-02c69d9d3443",
+   "type": "choice",
+   "area": "english",
+   "grade": 4,
+   "stem": "「stem」是什么意思？",
+   "payload": {
+    "options": [
+     "实现",
+     "（植物的）茎；梗；柄",
+     "卷心菜；洋白菜；甘蓝",
+     "真的；真实的"
+    ],
+    "answer": 1,
+    "explanation": "stem /stem/ n. （植物的）茎；梗；柄。"
+   },
+   "tags": [
+    "英语·Unit 4  Plant life"
+   ],
+   "source_key": "primary-english",
+   "source_ref": "english:4b-u4:stem"
+  },
+  {
+   "uuid": "014ac80e-f2df-50a4-9ef2-389d18734a0c",
+   "type": "choice",
+   "area": "english",
+   "grade": 4,
+   "stem": "「fair」是什么意思？",
+   "payload": {
+    "options": [
+     "聚会；宴会",
+     "最后部分；末尾",
+     "集市；义卖会；户外游艺会",
+     "连衣裙"
+    ],
+    "answer": 2,
+    "explanation": "fair /feə/ n. 集市；义卖会；户外游艺会。"
+   },
+   "tags": [
+    "英语·Unit 5  School activities"
+   ],
+   "source_key": "primary-english",
+   "source_ref": "english:4b-u5:fair"
+  },
+  {
+   "uuid": "ab8c24b9-2a26-52ac-b5b9-25117f10d172",
+   "type": "choice",
+   "area": "english",
+   "grade": 4,
+   "stem": "「shirt」是什么意思？",
+   "payload": {
+    "options": [
+     "夜晚；夜间",
+     "猫头鹰",
+     "衬衫",
+     "姑母；姨母"
+    ],
+    "answer": 2,
+    "explanation": "shirt /ʃɜːt/ n. 衬衫。"
+   },
+   "tags": [
+    "英语·Unit 6  Cool clothes"
+   ],
+   "source_key": "primary-english",
+   "source_ref": "english:4b-u6:shirt"
+  },
+  {
+   "uuid": "9e3a9cd5-a2da-5e07-8184-fbdbb6b0ef2b",
+   "type": "choice",
+   "area": "english",
+   "grade": 4,
+   "stem": "「ping-pong」是什么意思？",
+   "payload": {
+    "options": [
+     "清洁的；v. 打扫",
+     "乒乓球运动",
+     "整理；adj. 整洁的",
+     "容易的"
+    ],
+    "answer": 1,
+    "explanation": "ping-pong /ˈpɪŋ pɒŋ/ n. 乒乓球运动。"
+   },
+   "tags": [
+    "英语·Unit 1  I love sports"
+   ],
+   "source_key": "primary-english",
+   "source_ref": "english:4a-u1:ping-pong"
+  },
+  {
+   "uuid": "2a7d72a5-3900-55ea-8020-cb61cef084db",
+   "type": "choice",
+   "area": "english",
+   "grade": 4,
+   "stem": "「sweep」是什么意思？",
+   "payload": {
+    "options": [
+     "参与；加入",
+     "扫；打扫",
+     "全年；一年到头",
+     "非常；十分"
+    ],
+    "answer": 1,
+    "explanation": "sweep /swiːp/ v. 扫；打扫。"
+   },
+   "tags": [
+    "英语·Unit 2  Helping at home"
+   ],
+   "source_key": "primary-english",
+   "source_ref": "english:4a-u2:sweep"
+  },
+  {
+   "uuid": "decdcfc9-ab67-5cf2-93d1-46d172b10522",
+   "type": "choice",
+   "area": "english",
+   "grade": 4,
+   "stem": "「cloudy」是什么意思？",
+   "payload": {
+    "options": [
+     "汽车",
+     "多云的；阴天的",
+     "参与；加入",
+     "公交车；公共汽车"
+    ],
+    "answer": 1,
+    "explanation": "cloudy /ˈklaʊdi/ adj. 多云的；阴天的。"
+   },
+   "tags": [
+    "英语·Unit 3  What's the weather like?"
+   ],
+   "source_key": "primary-english",
+   "source_ref": "english:4a-u3:cloudy"
+  },
+  {
+   "uuid": "7057617c-7b9f-5af7-9e93-d2a9322df948",
+   "type": "choice",
+   "area": "english",
+   "grade": 4,
+   "stem": "「autumn」是什么意思？",
+   "payload": {
+    "options": [
+     "收集；采集",
+     "修剪；切；割",
+     "秋天；秋季",
+     "母牛；奶牛"
+    ],
+    "answer": 2,
+    "explanation": "autumn /ˈɔːtəm/ n. 秋天；秋季。"
+   },
+   "tags": [
+    "英语·Unit 4  Wonderful seasons"
+   ],
+   "source_key": "primary-english",
+   "source_ref": "english:4a-u4:autumn"
+  },
+  {
+   "uuid": "1f329f41-9d59-5e97-8c6b-b7f1ff6c9854",
+   "type": "choice",
+   "area": "english",
+   "grade": 4,
+   "stem": "「town」是什么意思？",
+   "payload": {
+    "options": [
+     "电视",
+     "& v. 报道",
+     "令人惊叹的；奇妙的",
+     "镇；城镇"
+    ],
+    "answer": 3,
+    "explanation": "town /taʊn/ n. 镇；城镇。"
+   },
+   "tags": [
+    "英语·Unit 5  Let's go!"
+   ],
+   "source_key": "primary-english",
+   "source_ref": "english:4a-u5:town"
+  },
+  {
+   "uuid": "a94c4fa8-9065-5399-b44a-ebe595f9de40",
+   "type": "choice",
+   "area": "english",
+   "grade": 4,
+   "stem": "「centre」是什么意思？",
+   "payload": {
+    "options": [
+     "中心",
+     "失败",
+     "给予",
+     "放弃"
+    ],
+    "answer": 0,
+    "explanation": "centre /ˈsentə/ n. 中心。"
+   },
+   "tags": [
+    "英语·Unit 6  Find your way"
+   ],
+   "source_key": "primary-english",
+   "source_ref": "english:4a-u6:centre"
+  },
+  {
+   "uuid": "0ab29640-9e23-548b-a183-747ca28765d2",
+   "type": "choice",
+   "area": "english",
+   "grade": 4,
+   "stem": "「police」是什么意思？",
+   "payload": {
+    "options": [
+     "夜猫子；喜欢熬夜的人",
+     "司机；驾驶员",
+     "出租车；计程车",
+     "警察"
+    ],
+    "answer": 3,
+    "explanation": "police /pəˈliːs/ n. 警察。"
+   },
+   "tags": [
+    "英语·Unit 1  People at work"
+   ],
+   "source_key": "primary-english",
+   "source_ref": "english:4b-u1:police"
+  },
+  {
+   "uuid": "84ba36e1-b9b0-5ef9-93db-efd7e52a7186",
+   "type": "choice",
+   "area": "english",
+   "grade": 4,
+   "stem": "「frown」是什么意思？",
+   "payload": {
+    "options": [
+     "皱眉",
+     "出租车；计程车",
+     "安全的；没有危险的",
+     "护士"
+    ],
+    "answer": 0,
+    "explanation": "frown /fraʊn/ v. 皱眉。"
+   },
+   "tags": [
+    "英语·Unit 2  How do you feel today?"
+   ],
+   "source_key": "primary-english",
+   "source_ref": "english:4b-u2:frown"
+  },
+  {
+   "uuid": "3352a49f-5dc6-5d87-9e53-7de732356ed5",
+   "type": "choice",
+   "area": "english",
+   "grade": 4,
+   "stem": "「puzzle」是什么意思？",
+   "payload": {
+    "options": [
+     "发怒的；生气的",
+     "拼图游戏；谜",
+     "伤心的；难过的",
+     "哭；哭泣"
+    ],
+    "answer": 1,
+    "explanation": "puzzle /ˈpʌzl/ n. 拼图游戏；谜。"
+   },
+   "tags": [
+    "英语·Unit 3  Everyone's got talent!"
+   ],
+   "source_key": "primary-english",
+   "source_ref": "english:4b-u3:puzzle"
+  },
+  {
+   "uuid": "990c3abc-97b3-5468-a36a-ab5f51e5638c",
+   "type": "choice",
+   "area": "english",
+   "grade": 4,
+   "stem": "「thin」是什么意思？",
+   "payload": {
+    "options": [
+     "戏剧",
+     "旅游；旅行；出行",
+     "集市；义卖会；户外游艺会",
+     "细的；瘦的"
+    ],
+    "answer": 3,
+    "explanation": "thin /θɪn/ adj. 细的；瘦的。"
+   },
+   "tags": [
+    "英语·Unit 4  Plant life"
+   ],
+   "source_key": "primary-english",
+   "source_ref": "english:4b-u4:thin"
+  },
+  {
+   "uuid": "56a45165-3e10-5c39-8c63-7d8131f13ca1",
+   "type": "choice",
+   "area": "english",
+   "grade": 4,
+   "stem": "「festival」是什么意思？",
+   "payload": {
+    "options": [
+     "& adv. 更多的",
+     "书写；写字",
+     "节；节庆；汇演",
+     "雨点；雨滴"
+    ],
+    "answer": 2,
+    "explanation": "festival /ˈfestɪvl/ n. 节；节庆；汇演。"
+   },
+   "tags": [
+    "英语·Unit 5  School activities"
+   ],
+   "source_key": "primary-english",
+   "source_ref": "english:4b-u5:festival"
+  },
+  {
+   "uuid": "68a344e8-2aae-5bef-94b2-e178e9979f7d",
+   "type": "choice",
+   "area": "english",
+   "grade": 4,
+   "stem": "「trousers」是什么意思？",
+   "payload": {
+    "options": [
+     "活动；事件",
+     "戏剧",
+     "裤子",
+     "纸"
+    ],
+    "answer": 2,
+    "explanation": "trousers /ˈtraʊzəz/ n. 裤子。"
+   },
+   "tags": [
+    "英语·Unit 6  Cool clothes"
+   ],
+   "source_key": "primary-english",
+   "source_ref": "english:4b-u6:trousers"
+  }
+ ]
+}

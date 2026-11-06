@@ -14,6 +14,9 @@ from hanzi.models import PolyphoneAnswer
 from idioms.models import PlayRecord
 from learning.models import Progress
 from poetry.models import FeihualingRound
+from questionbank import types as qb_types
+from questionbank.models import AnswerRecord as QbAnswerRecord
+from questionbank.models import Question as QbQuestion
 from words.models import LearningTarget, WordProgress
 from writing.models import WritingDraft
 
@@ -54,11 +57,19 @@ class DigestDataTests(PlatformFixture):
                                        result=FeihualingRound.Result.COMPLETED)
         PolyphoneAnswer.objects.create(user=cls.user, char='乐', word='音乐', chosen='yuè',
                                        answer='yuè', correct=True)
+        question = QbQuestion(
+            uuid=qb_types.question_uuid('primary-math', 'math:digest:example'), type='choice',
+            area='math', grade=4, stem='10 个一万是多少？',
+            payload={'options': ['十万', '一万'], 'answer': 0, 'explanation': '10 个一万是十万。'},
+            tags=['数学'], source_key='primary-math', source_ref='math:digest:example')
+        question.save()
+        QbAnswerRecord.objects.create(user=cls.user, question=question, given={'value': 0}, correct=True)
 
-    def test_areas_cover_seven_domains_with_own_metrics(self):
+    def test_areas_cover_eight_domains_with_own_metrics(self):
         digest = learning_digest(self.user)
         self.assertEqual([card['key'] for card in digest['areas']],
-                         ['textbook', 'words', 'chain', 'writing', 'idioms', 'feihualing', 'polyphones'])
+                         ['textbook', 'words', 'chain', 'writing', 'idioms', 'feihualing', 'polyphones',
+                          'questionbank'])
         by_key = {card['key']: card for card in digest['areas']}
         self.assertEqual(by_key['textbook']['headlines'], [(2, '开始学习'), (1, '已经掌握'), (0, '我的收藏')])
         self.assertIn('数学 1', by_key['textbook']['footnote'])
@@ -69,6 +80,7 @@ class DigestDataTests(PlatformFixture):
         self.assertEqual(by_key['idioms']['headlines'], [(1, '猜成语答题'), (1, '猜对'), (1, '完成局数')])
         self.assertEqual(by_key['feihualing']['headlines'], [(1, '完成次数'), (1, '集满五句')])
         self.assertEqual(by_key['polyphones']['headlines'], [(1, '练习题数'), (1, '答对')])
+        self.assertEqual(by_key['questionbank']['headlines'], [(1, '答题'), (1, '答对')])
         # 新鲜记录都落在近 7 天：本周文案非空。
         for card in digest['areas']:
             self.assertTrue(card['week'], card['key'])

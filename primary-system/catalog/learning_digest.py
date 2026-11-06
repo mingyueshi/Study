@@ -133,8 +133,23 @@ def _polyphone_card(user, _overview):
     }
 
 
+def _questionbank_card(user, _overview):
+    from questionbank.records import learning_summary, recent
+
+    summary = learning_summary(user)
+    return {
+        'key': 'questionbank', 'name': '挑战题库', 'icon': 'quiz', 'color': 'math',
+        'url': reverse('questionbank'),
+        'url_label': '去继续挑战 →' if summary['answered'] else '去答几题 →',
+        'headlines': [(summary['answered'], '答题'), (summary['correct'], '答对')],
+        'week': _week_text(summary['week'], '练了 '),
+        'footnote': '',
+        'latest': _latest(recent(user, 1)),
+    }
+
+
 AREA_CARDS = (_textbook_card, _words_card, _chain_card, _writing_card,
-              _idioms_card, _feihualing_card, _polyphone_card)
+              _idioms_card, _feihualing_card, _polyphone_card, _questionbank_card)
 
 
 def merged_recent(user, limit=10):
@@ -143,9 +158,11 @@ def merged_recent(user, limit=10):
     from idioms.records import recent as idioms_recent
     from learning.services import textbook_recent
     from poetry.records import recent as poetry_recent
+    from questionbank.records import recent as questionbank_recent
 
     rows = textbook_recent(user, limit) + recent_activity(user, limit)
     rows += idioms_recent(user, limit) + poetry_recent(user, limit) + hanzi_recent(user, limit)
+    rows += questionbank_recent(user, limit)
     rows.sort(key=lambda row: row['when'], reverse=True)
     return rows[:limit]
 

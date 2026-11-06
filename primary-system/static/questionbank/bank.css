@@ -1,0 +1,109 @@
+/* 挑战题库：主页、练习页与错题本。配色沿用 platform.css 的变量。 */
+
+.qb-crumb { margin-bottom: 18px; font-weight: 700; }
+.qb-crumb a:hover { color: var(--green); }
+
+/* ── 主页 hero ─────────────────────────────────────────────────────────── */
+.qb-hero { display: flex; align-items: center; gap: 32px; padding: 34px 0 8px; }
+.qb-hero-copy { flex: 1; }
+.qb-hero-tag { margin: 10px 0 0; max-width: 34em; color: var(--muted); font-size: 20px; }
+.qb-hero-stats { display: flex; gap: 26px; margin: 18px 0 0; font-size: 19px; }
+.qb-hero-stats b { font-size: 30px; color: var(--green); }
+.qb-hero-deco { display: grid; grid-template-columns: repeat(2, 74px); gap: 14px; }
+.qb-hero-deco span {
+  display: grid; place-items: center; height: 74px; border-radius: 22px;
+  background: var(--soft); color: var(--green); font-size: 34px; font-weight: 800;
+}
+.qb-hero-deco span:nth-child(2) { background: #e2f0dc; color: #2c7a4b; transform: rotate(6deg); }
+.qb-hero-deco span:nth-child(3) { background: #fde8e4; color: #b4483a; transform: rotate(-5deg); }
+.qb-hero-deco span:nth-child(4) { background: var(--card-tint); color: var(--card-accent); transform: rotate(4deg); }
+
+/* ── 错题提示条 ────────────────────────────────────────────────────────── */
+.qb-wrong-strip {
+  display: flex; align-items: center; gap: 14px; margin-top: 22px; padding: 16px 24px;
+  border: 2px dashed #e0b193; border-radius: 18px; background: #fff3ea; font-size: 19px;
+}
+.qb-wrong-strip:hover { background: #ffeadb; }
+.qb-wrong-emoji { font-size: 26px; }
+.qb-wrong-go { margin-left: auto; font-weight: 750; color: var(--card-accent); }
+
+/* ── 领域卡 ────────────────────────────────────────────────────────────── */
+.qb-areas { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 26px; margin-top: 26px; }
+.qb-area { padding: 26px; border: 1px solid var(--line); border-radius: 24px; background: var(--white); box-shadow: 0 8px 20px #233e3708; }
+.qb-area-head { display: flex; align-items: center; gap: 16px; margin-bottom: 14px; }
+.qb-area-head img { padding: 10px; border-radius: 18px; background: var(--soft); }
+.qb-area-head h2 { margin: 0; font-size: 26px; }
+.qb-area-count { margin: 0; color: var(--muted); font-size: 16px; }
+.qb-area-intro { min-height: 3.2em; margin: 0 0 10px; color: var(--muted); font-size: 18px; line-height: 1.8; }
+.qb-area-mine { margin: 0 0 14px; font-weight: 700; color: var(--green); }
+.qb-area-actions { display: flex; gap: 12px; }
+
+.qb-note { margin-top: 28px; color: var(--muted); font-size: 15px; }
+
+/* ── 练习页 ────────────────────────────────────────────────────────────── */
+.qb-practice-head { padding-top: 10px; }
+.qb-practice-head h1 { margin-bottom: 14px; }
+.qb-practice-head .button { margin-top: 14px; }
+.qb-toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 26px; }
+.qb-label { color: var(--muted); font-size: 16px; }
+
+.qb-board { max-width: 860px; padding: 26px 30px; border: 1px solid var(--line); border-radius: 24px; background: var(--white); box-shadow: 0 8px 20px #233e3708; }
+.qb-progress { margin: 0 0 18px; color: var(--muted); font-size: 17px; }
+.qb-progress b { color: var(--green); font-size: 22px; }
+
+.qb-stem { display: flex; align-items: flex-start; gap: 12px; margin: 0 0 20px; font-size: 26px; font-weight: 750; line-height: 1.6; }
+.qb-stem .say-chip { flex-shrink: 0; }
+.qb-tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 16px; }
+.qb-tag { padding: 3px 12px; border-radius: 999px; background: var(--soft); color: var(--green); font-size: 14px; }
+
+.qb-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+.qb-option {
+  padding: 18px 22px; border: 2px solid var(--line); border-radius: 18px; background: var(--paper);
+  font-size: 22px; font-weight: 700; text-align: left; cursor: pointer;
+}
+.qb-option:hover { border-color: var(--green); background: var(--soft); }
+.qb-option:disabled { cursor: default; }
+.qb-option.picked { border-color: var(--card-accent); background: var(--card-tint); }
+.qb-option.right { border-color: #2c7a4b; background: #e2f0dc; }
+.qb-option.wrong { border-color: #b4483a; background: #fde8e4; }
+.qb-boolean { display: flex; gap: 18px; }
+.qb-boolean .qb-option { flex: 1; min-height: 84px; text-align: center; font-size: 26px; }
+
+.qb-selfcheck { display: flex; gap: 14px; align-items: center; }
+
+.qb-feedback { margin-top: 22px; padding: 20px 24px; border-radius: 18px; }
+.qb-feedback.good { background: #e2f0dc; }
+.qb-feedback.bad { background: #fde8e4; }
+.qb-feedback-head { margin: 0 0 8px; font-size: 24px; font-weight: 800; }
+.qb-feedback.good .qb-feedback-head { color: #2c7a4b; }
+.qb-feedback.bad .qb-feedback-head { color: #b4483a; }
+.qb-feedback-answer { margin: 0 0 8px; font-size: 22px; font-weight: 750; }
+.qb-feedback-explain, .qb-feedback-steps { margin: 0 0 6px; font-size: 18px; line-height: 1.8; }
+.qb-feedback-steps { color: var(--muted); }
+.qb-feedback-error { margin: 0 0 6px; color: #b4483a; font-weight: 700; }
+.qb-feedback-actions { margin-top: 12px; }
+
+.qb-result { text-align: center; }
+.qb-result-emoji { margin: 12px 0 0; font-size: 52px; }
+.qb-result-score { font-size: 26px; font-weight: 750; }
+.qb-result-score b { color: var(--green); font-size: 40px; }
+.qb-result-praise { color: var(--muted); font-size: 19px; }
+.qb-result-actions { display: flex; justify-content: center; gap: 14px; margin-top: 18px; }
+.qb-result-actions .button[href=''] { visibility: hidden; }
+
+/* ── 错题本 ────────────────────────────────────────────────────────────── */
+.qb-wrong-list { display: grid; gap: 20px; max-width: 900px; }
+.qb-wrong-card { padding: 22px 26px; border: 1px solid var(--line); border-left: 6px solid #e0b193; border-radius: 18px; background: var(--white); }
+.qb-wrong-head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 10px; }
+.qb-badge { padding: 3px 14px; border-radius: 999px; background: var(--soft); color: var(--green); font-size: 15px; font-weight: 700; }
+.qb-badge.ghost { background: var(--card-tint); color: var(--card-accent); }
+.qb-wrong-stem { margin: 0 0 8px; font-size: 22px; font-weight: 750; line-height: 1.6; }
+.qb-wrong-answer { margin: 0 0 6px; font-size: 19px; color: #2c7a4b; }
+.qb-wrong-answer b { font-size: 22px; }
+.qb-wrong-explain { margin: 0; color: var(--muted); font-size: 17px; line-height: 1.8; }
+
+@media (max-width: 720px) {
+  .qb-hero { flex-direction: column; align-items: flex-start; }
+  .qb-hero-deco { display: none; }
+  .qb-stem { font-size: 22px; }
+}

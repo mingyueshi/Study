@@ -125,6 +125,9 @@ def entry_for(code):
 # 字段：route（URL 名）、subject（卡片角标学科）、area（筛选分组键）、icon、
 # color（卡片配色）、name、tag（徽标）、blurb（一句话介绍）。新增专题只在此追加一行。
 SPECIAL_ENTRIES = (
+    {'route': 'questionbank', 'subject': '数学', 'area': 'math', 'icon': 'quiz', 'color': 'math',
+     'name': '挑战题库', 'tag': '来答题 →',
+     'blurb': '数学判断题与例题自评、语文多音字、英语词义四选一。答错自动进错题本，重练答对就退出。'},
     {'route': 'feihualing', 'subject': '古诗词', 'area': 'poetry', 'icon': 'literature', 'color': 'chinese',
      'name': '飞花令', 'tag': '开始练诗 →',
      'blurb': '选一个令字，想一句含这个字的诗，集满五句写成自己的诗单。'},

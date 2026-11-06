@@ -14,10 +14,11 @@ from chain.models import GameRound
 from hanzi.models import PolyphoneAnswer
 from idioms.models import PlayRecord
 from poetry.models import FeihualingRound
+from questionbank.models import AnswerRecord
 from words.models import WordProgress
 from writing.models import WritingDraft
 
-GUEST_MODELS = (GameRound, WordProgress, WritingDraft, PlayRecord, FeihualingRound, PolyphoneAnswer)
+GUEST_MODELS = (GameRound, WordProgress, WritingDraft, PlayRecord, FeihualingRound, PolyphoneAnswer, AnswerRecord)
 
 
 def _expired(model, cutoff):

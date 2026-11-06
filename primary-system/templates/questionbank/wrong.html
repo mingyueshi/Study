@@ -1,0 +1,26 @@
+{% extends 'base.html' %}{% load static %}{% block title %}错题本 · 乐学堂{% endblock %}
+{% block content %}<link rel="stylesheet" href="{% static 'questionbank/bank.css' %}">
+<nav class="qb-crumb"><a href="{% url 'questionbank' %}">← 回题库</a></nav>
+<header class="qb-practice-head">
+  <p class="eyebrow">错题本</p>
+  <h1>答错的题，都在这里</h1>
+  <p class="qb-hero-tag">每道题取最近一次作答：重练答对后，它会自己退出错题本。</p>
+  {% if count %}<a class="button small" href="{% url 'questionbank-practice' %}?mode=wrong&amp;count=10">一键重练这 {{ count }} 题 →</a>{% endif %}
+</header>
+
+{% if count %}
+<section class="qb-wrong-list">
+  {% for row in rows %}
+  <article class="qb-wrong-card">
+    <header class="qb-wrong-head"><span class="qb-badge">{{ row.area }}</span><span class="qb-badge ghost">{{ row.type }}</span>
+      {% for tag in row.tags %}<span class="qb-tag">{{ tag }}</span>{% endfor %}</header>
+    <p class="qb-wrong-stem">{{ row.stem }}</p>
+    <p class="qb-wrong-answer">正确答案：<b>{{ row.reveal }}</b></p>
+    {% if row.explanation %}<p class="qb-wrong-explain">{{ row.explanation }}</p>{% endif %}
+  </article>
+  {% endfor %}
+</section>
+{% else %}
+<div class="notice">错题本是空的——去练一组，答错的题会自动收进来。<a class="button small" href="{% url 'questionbank' %}">回题库挑一组 →</a></div>
+{% endif %}
+{% endblock %}
