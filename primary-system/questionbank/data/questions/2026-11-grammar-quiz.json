@@ -1,0 +1,690 @@
+{
+ "schema_version": 1,
+ "batch_id": "2026-11-grammar-quiz",
+ "generator": "scripts/build_grammar.cjs",
+ "note": "内部数据规则生成：primary/grammar/ 各知识点的巩固题，选项确定性轮换修正答案下标偏斜。",
+ "questions": [
+  {
+   "uuid": "f0d4b75f-dd64-5887-8fc1-61b88f41d570",
+   "type": "choice",
+   "area": "english",
+   "grade": null,
+   "stem": "下面哪一句是正确的英语句子？",
+   "payload": {
+    "options": [
+     "like dogs I.",
+     "I like dogs.",
+     "Dogs like I."
+    ],
+    "answer": 1,
+    "explanation": "英语的基本顺序是主语在前、动词在后、宾语跟在动词后面：I like dogs."
+   },
+   "tags": [
+    "英语·语法",
+    "语法·语法初认识"
+   ],
+   "source_key": "primary-grammar",
+   "source_ref": "grammar:gr1-1:quiz"
+  },
+  {
+   "uuid": "c86b199e-ab44-5e20-a3cf-8557d87cd57d",
+   "type": "choice",
+   "area": "english",
+   "grade": null,
+   "stem": "quickly 是什么词性？",
+   "payload": {
+    "options": [
+     "形容词",
+     "副词",
+     "名词"
+    ],
+    "answer": 1,
+    "explanation": "quickly 说明动作做得怎么样，修饰动词，是副词；形容词 quick 才用来描述名词。"
+   },
+   "tags": [
+    "英语·语法",
+    "语法·语法初认识"
+   ],
+   "source_key": "primary-grammar",
+   "source_ref": "grammar:gr1-2:quiz"
+  },
+  {
+   "uuid": "d839e964-c672-5979-9fff-227661a7e9bd",
+   "type": "choice",
+   "area": "english",
+   "grade": null,
+   "stem": "下面哪个是完整的句子？",
+   "payload": {
+    "options": [
+     "Under the tree.",
+     "Birds fly.",
+     "Very fast."
+    ],
+    "answer": 1,
+    "explanation": "Birds fly. 有主语 Birds 和动词 fly；另外两组没有主语加动词的完整骨架。"
+   },
+   "tags": [
+    "英语·语法",
+    "语法·语法初认识"
+   ],
+   "source_key": "primary-grammar",
+   "source_ref": "grammar:gr1-3:quiz"
+  },
+  {
+   "uuid": "effddf01-e6f4-579a-b4c8-4b963af1bf1d",
+   "type": "choice",
+   "area": "english",
+   "grade": null,
+   "stem": "Sit down, please. 是哪一种句子？",
+   "payload": {
+    "options": [
+     "祈使句",
+     "感叹句",
+     "疑问句"
+    ],
+    "answer": 0,
+    "explanation": "动词原形开头、表示请求或指令，是祈使句；please 让语气更客气。"
+   },
+   "tags": [
+    "英语·语法",
+    "语法·语法初认识"
+   ],
+   "source_key": "primary-grammar",
+   "source_ref": "grammar:gr1-4:quiz"
+  },
+  {
+   "uuid": "6b36dc2b-c977-558b-b77d-b99728d8a05a",
+   "type": "choice",
+   "area": "english",
+   "grade": null,
+   "stem": "下面哪个是不可数名词？",
+   "payload": {
+    "options": [
+     "book",
+     "milk",
+     "egg"
+    ],
+    "answer": 1,
+    "explanation": "milk 是液体，不能一个一个数；book 和 egg 都能数（two books, three eggs）。"
+   },
+   "tags": [
+    "英语·语法",
+    "语法·名词"
+   ],
+   "source_key": "primary-grammar",
+   "source_ref": "grammar:gr2-1:quiz"
+  },
+  {
+   "uuid": "2217c3ad-2047-5669-9d1e-dd67096b3475",
+   "type": "choice",
+   "area": "english",
+   "grade": null,
+   "stem": "watch 的复数是哪个？",
+   "payload": {
+    "options": [
+     "watches",
+     "watchies",
+     "watchs"
+    ],
+    "answer": 0,
+    "explanation": "watch 以 ch 结尾，要加 -es：watches。"
+   },
+   "tags": [
+    "英语·语法",
+    "语法·名词"
+   ],
+   "source_key": "primary-grammar",
+   "source_ref": "grammar:gr2-2:quiz"
+  },
+  {
+   "uuid": "d7c1bc4d-b76e-5e57-a110-2b95b7dfb0b0",
+   "type": "choice",
+   "area": "english",
+   "grade": null,
+   "stem": "sheep 的复数形式是？",
+   "payload": {
+    "options": [
+     "sheeps",
+     "sheep",
+     "sheepes"
+    ],
+    "answer": 1,
+    "explanation": "sheep 单复数同形：one sheep, ten sheep，不加 s。"
+   },
+   "tags": [
+    "英语·语法",
+    "语法·名词"
+   ],
+   "source_key": "primary-grammar",
+   "source_ref": "grammar:gr2-3:quiz"
+  },
+  {
+   "uuid": "b835f777-cfe4-514a-b447-cf3fcc183223",
+   "type": "choice",
+   "area": "english",
+   "grade": null,
+   "stem": "「孩子们的老师」怎么说？",
+   "payload": {
+    "options": [
+     "the childrens teacher",
+     "the children's teacher",
+     "the children teacher"
+    ],
+    "answer": 1,
+    "explanation": "children 是不以 s 结尾的复数，要加 's：the children's teacher。"
+   },
+   "tags": [
+    "英语·语法",
+    "语法·名词"
+   ],
+   "source_key": "primary-grammar",
+   "source_ref": "grammar:gr2-4:quiz"
+  },
+  {
+   "uuid": "47b91391-f3aa-5bd1-a835-a998ed506ccb",
+   "type": "choice",
+   "area": "english",
+   "grade": null,
+   "stem": "___ honest boy 填什么？",
+   "payload": {
+    "options": [
+     "a",
+     "an",
+     "the"
+    ],
+    "answer": 1,
+    "explanation": "honest 的 h 不发音，读音以元音音素开头，用 an。"
+   },
+   "tags": [
+    "英语·语法",
+    "语法·冠词"
+   ],
+   "source_key": "primary-grammar",
+   "source_ref": "grammar:gr3-1:quiz"
+  },
+  {
+   "uuid": "54c69f4b-8c89-5148-a36a-7503eca87567",
+   "type": "choice",
+   "area": "english",
+   "grade": null,
+   "stem": "___ sun is bright today. 填什么？",
+   "payload": {
+    "options": [
+     "A",
+     "An",
+     "The"
+    ],
+    "answer": 2,
+    "explanation": "太阳是世界上独一无二的事物，要用 The。"
+   },
+   "tags": [
+    "英语·语法",
+    "语法·冠词"
+   ],
+   "source_key": "primary-grammar",
+   "source_ref": "grammar:gr3-2:quiz"
+  },
+  {
+   "uuid": "ac9cf50d-0f26-5805-8bc7-6bec5d35cc4e",
+   "type": "choice",
+   "area": "english",
+   "grade": null,
+   "stem": "下面哪句完全正确？",
+   "payload": {
+    "options": [
+     "I play basketball after school.",
+     "I play the football.",
+     "I have the lunch at school."
+    ],
+    "answer": 0,
+    "explanation": "球类前不加 the，三餐前不加 the；第三句没有任何冠词，正确。"
+   },
+   "tags": [
+    "英语·语法",
+    "语法·冠词"
+   ],
+   "source_key": "primary-grammar",
+   "source_ref": "grammar:gr3-3:quiz"
+  },
+  {
+   "uuid": "06374993-db32-556f-ab9c-541d6aed81e4",
+   "type": "choice",
+   "area": "english",
+   "grade": null,
+   "stem": "Please pass ___ the book.（把书递给我）填什么？",
+   "payload": {
+    "options": [
+     "I",
+     "me",
+     "my"
+    ],
+    "answer": 1,
+    "explanation": "pass 是动词，「我」是动作的接受者，用宾格 me。"
+   },
+   "tags": [
+    "英语·语法",
+    "语法·代词"
+   ],
+   "source_key": "primary-grammar",
+   "source_ref": "grammar:gr4-1:quiz"
+  },
+  {
+   "uuid": "a4a7f308-d49e-572f-920e-6c6bd553c195",
+   "type": "choice",
+   "area": "english",
+   "grade": null,
+   "stem": "___ school is near my home.（他们的学校）填什么？",
+   "payload": {
+    "options": [
+     "Their",
+     "They",
+     "Them"
+    ],
+    "answer": 0,
+    "explanation": "修饰名词 school 要用形容词性物主代词 Their；They 是主格，Them 是宾格。"
+   },
+   "tags": [
+    "英语·语法",
+    "语法·代词"
+   ],
+   "source_key": "primary-grammar",
+   "source_ref": "grammar:gr4-2:quiz"
+  },
+  {
+   "uuid": "05e7885f-cd4a-526b-9274-9d59f6bd1543",
+   "type": "choice",
+   "area": "english",
+   "grade": null,
+   "stem": "___ birds over there are singing.（那边那些）填什么？",
+   "payload": {
+    "options": [
+     "This",
+     "These",
+     "Those"
+    ],
+    "answer": 2,
+    "explanation": "over there 说明在远处，birds 是复数，用 Those。"
+   },
+   "tags": [
+    "英语·语法",
+    "语法·代词"
+   ],
+   "source_key": "primary-grammar",
+   "source_ref": "grammar:gr4-3:quiz"
+  },
+  {
+   "uuid": "1d1a16d5-5c24-5678-aeb8-4541417660b9",
+   "type": "choice",
+   "area": "english",
+   "grade": null,
+   "stem": "___ do you come to school? — By bus. 填什么？",
+   "payload": {
+    "options": [
+     "What",
+     "Where",
+     "How"
+    ],
+    "answer": 2,
+    "explanation": "回答 By bus 是交通方式，用 How 提问。"
+   },
+   "tags": [
+    "英语·语法",
+    "语法·代词"
+   ],
+   "source_key": "primary-grammar",
+   "source_ref": "grammar:gr4-4:quiz"
+  },
+  {
+   "uuid": "6423dbeb-ddad-5d91-818d-ef3024725eec",
+   "type": "choice",
+   "area": "english",
+   "grade": null,
+   "stem": "The apples ___ red. 填什么？",
+   "payload": {
+    "options": [
+     "is",
+     "am",
+     "are"
+    ],
+    "answer": 2,
+    "explanation": "apples 是复数，be 动词用 are。"
+   },
+   "tags": [
+    "英语·语法",
+    "语法·be 动词与 there be"
+   ],
+   "source_key": "primary-grammar",
+   "source_ref": "grammar:gr5-1:quiz"
+  },
+  {
+   "uuid": "9bba27c1-5bb5-5333-af6a-dcb4a9e69777",
+   "type": "choice",
+   "area": "english",
+   "grade": null,
+   "stem": "I ___ at school yesterday. 填什么？",
+   "payload": {
+    "options": [
+     "was",
+     "were",
+     "am"
+    ],
+    "answer": 0,
+    "explanation": "I 配 was；yesterday 提示要用过去式。"
+   },
+   "tags": [
+    "英语·语法",
+    "语法·be 动词与 there be"
+   ],
+   "source_key": "primary-grammar",
+   "source_ref": "grammar:gr5-2:quiz"
+  },
+  {
+   "uuid": "9735caf0-7ef2-5ec2-b3a4-d68ab1b688a7",
+   "type": "choice",
+   "area": "english",
+   "grade": null,
+   "stem": "There ___ a tree and some flowers in the garden. 填什么？",
+   "payload": {
+    "options": [
+     "am",
+     "is",
+     "are"
+    ],
+    "answer": 1,
+    "explanation": "就近原则：a tree 是单数，用 is。"
+   },
+   "tags": [
+    "英语·语法",
+    "语法·be 动词与 there be"
+   ],
+   "source_key": "primary-grammar",
+   "source_ref": "grammar:gr5-3:quiz"
+  },
+  {
+   "uuid": "3b89989e-ed9b-5fd3-8a94-93a09265c2a8",
+   "type": "choice",
+   "area": "english",
+   "grade": null,
+   "stem": "They aren't in the classroom. 意思是？",
+   "payload": {
+    "options": [
+     "他们在教室吗？",
+     "他们在教室里。",
+     "他们不在教室里。"
+    ],
+    "answer": 2,
+    "explanation": "aren't 等于 are not，是否定：他们不在教室里。"
+   },
+   "tags": [
+    "英语·语法",
+    "语法·be 动词与 there be"
+   ],
+   "source_key": "primary-grammar",
+   "source_ref": "grammar:gr5-4:quiz"
+  },
+  {
+   "uuid": "4f623df2-17f7-5f4c-8025-0de900bd6879",
+   "type": "choice",
+   "area": "english",
+   "grade": null,
+   "stem": "My father ___ TV in the evening. 填什么？",
+   "payload": {
+    "options": [
+     "watch",
+     "watches",
+     "watching"
+    ],
+    "answer": 1,
+    "explanation": "My father 是第三人称单数，watch 以 ch 结尾加 -es：watches。"
+   },
+   "tags": [
+    "英语·语法",
+    "语法·时态初步"
+   ],
+   "source_key": "primary-grammar",
+   "source_ref": "grammar:gr6-1:quiz"
+  },
+  {
+   "uuid": "77a2465d-b0de-55d5-bb55-90e3fe4e76db",
+   "type": "choice",
+   "area": "english",
+   "grade": null,
+   "stem": "Listen! She ___ (sing). 填什么？",
+   "payload": {
+    "options": [
+     "sings",
+     "sing",
+     "is singing"
+    ],
+    "answer": 2,
+    "explanation": "Listen 提示动作正在进行；She 配 is，sing 加 -ing。"
+   },
+   "tags": [
+    "英语·语法",
+    "语法·时态初步"
+   ],
+   "source_key": "primary-grammar",
+   "source_ref": "grammar:gr6-2:quiz"
+  },
+  {
+   "uuid": "6e467f51-dfff-591d-94c4-c726206dac0a",
+   "type": "choice",
+   "area": "english",
+   "grade": null,
+   "stem": "I ___ my homework yesterday evening. 填什么？",
+   "payload": {
+    "options": [
+     "do",
+     "did",
+     "does"
+    ],
+    "answer": 1,
+    "explanation": "yesterday evening 提示过去；do 的过去式是 did。"
+   },
+   "tags": [
+    "英语·语法",
+    "语法·时态初步"
+   ],
+   "source_key": "primary-grammar",
+   "source_ref": "grammar:gr6-3:quiz"
+  },
+  {
+   "uuid": "9cf9e9ff-43eb-5ac3-808c-09882c067981",
+   "type": "choice",
+   "area": "english",
+   "grade": null,
+   "stem": "We ___ going to have a picnic. 填什么？",
+   "payload": {
+    "options": [
+     "am",
+     "is",
+     "are"
+    ],
+    "answer": 2,
+    "explanation": "We 配 are：be going to 里的 be 要和主语一致。"
+   },
+   "tags": [
+    "英语·语法",
+    "语法·时态初步"
+   ],
+   "source_key": "primary-grammar",
+   "source_ref": "grammar:gr6-4:quiz"
+  },
+  {
+   "uuid": "40221334-545e-5df9-ae66-de8643a91999",
+   "type": "choice",
+   "area": "english",
+   "grade": null,
+   "stem": "下面哪个语序正确？",
+   "payload": {
+    "options": [
+     "a big red ball",
+     "a ball big red",
+     "a red big ball"
+    ],
+    "answer": 0,
+    "explanation": "多个形容词先说大小再说颜色：a big red ball。"
+   },
+   "tags": [
+    "英语·语法",
+    "语法·形容词与副词"
+   ],
+   "source_key": "primary-grammar",
+   "source_ref": "grammar:gr7-1:quiz"
+  },
+  {
+   "uuid": "c684adbe-5272-58e6-a20a-24e4ffcc94fd",
+   "type": "choice",
+   "area": "english",
+   "grade": null,
+   "stem": "An elephant is ___ than a horse. 填什么？",
+   "payload": {
+    "options": [
+     "heavier",
+     "heaviest",
+     "heavy"
+    ],
+    "answer": 0,
+    "explanation": "两者比较用比较级：heavy 变 y 为 i 加 -er 得 heavier。"
+   },
+   "tags": [
+    "英语·语法",
+    "语法·形容词与副词"
+   ],
+   "source_key": "primary-grammar",
+   "source_ref": "grammar:gr7-2:quiz"
+  },
+  {
+   "uuid": "34f389e3-f387-5dd0-b0a3-e5cfb285e374",
+   "type": "choice",
+   "area": "english",
+   "grade": null,
+   "stem": "The Changjiang River is ___ river in China.（最长）填什么？",
+   "payload": {
+    "options": [
+     "long",
+     "longer",
+     "the longest"
+    ],
+    "answer": 2,
+    "explanation": "全中国的河流相比，三者以上用最高级：the longest。"
+   },
+   "tags": [
+    "英语·语法",
+    "语法·形容词与副词"
+   ],
+   "source_key": "primary-grammar",
+   "source_ref": "grammar:gr7-3:quiz"
+  },
+  {
+   "uuid": "84a4bed4-6417-54b7-a27f-96e328351488",
+   "type": "choice",
+   "area": "english",
+   "grade": null,
+   "stem": "Her marks are ___ than mine.（更差）填什么？",
+   "payload": {
+    "options": [
+     "bader",
+     "worse",
+     "worst"
+    ],
+    "answer": 1,
+    "explanation": "bad 的比较级是 worse（更差）；worst 是最高级，两者比较用比较级。"
+   },
+   "tags": [
+    "英语·语法",
+    "语法·形容词与副词"
+   ],
+   "source_key": "primary-grammar",
+   "source_ref": "grammar:gr7-4:quiz"
+  },
+  {
+   "uuid": "9193d0a9-91b5-50cc-a6a7-85fc09edcd68",
+   "type": "choice",
+   "area": "english",
+   "grade": null,
+   "stem": "Tom did his homework last night. 变否定句：Tom ___ his homework last night.",
+   "payload": {
+    "options": [
+     "doesn't do",
+     "didn't did",
+     "didn't do"
+    ],
+    "answer": 2,
+    "explanation": "过去时否定用 didn't，动词 did 还原成原形 do。"
+   },
+   "tags": [
+    "英语·语法",
+    "语法·句型变换"
+   ],
+   "source_key": "primary-grammar",
+   "source_ref": "grammar:gr8-1:quiz"
+  },
+  {
+   "uuid": "82657f50-af14-549a-8c80-7275b86ab611",
+   "type": "choice",
+   "area": "english",
+   "grade": null,
+   "stem": "___ they play football every day? 填什么？",
+   "payload": {
+    "options": [
+     "Does",
+     "Do",
+     "Are"
+    ],
+    "answer": 1,
+    "explanation": "they 是复数、一般现在时，助动词用 Do，play 保持原形。"
+   },
+   "tags": [
+    "英语·语法",
+    "语法·句型变换"
+   ],
+   "source_key": "primary-grammar",
+   "source_ref": "grammar:gr8-2:quiz"
+  },
+  {
+   "uuid": "bd2c6e5d-f64b-53fb-a258-ccd5f416963b",
+   "type": "choice",
+   "area": "english",
+   "grade": null,
+   "stem": "___ does the library open? — At eight. 填什么？",
+   "payload": {
+    "options": [
+     "When",
+     "Who",
+     "Where"
+    ],
+    "answer": 0,
+    "explanation": "回答 At eight 是时间，用 When 提问。"
+   },
+   "tags": [
+    "英语·语法",
+    "语法·句型变换"
+   ],
+   "source_key": "primary-grammar",
+   "source_ref": "grammar:gr8-3:quiz"
+  },
+  {
+   "uuid": "bc2e906c-c83a-55c8-bca1-34e875334c25",
+   "type": "choice",
+   "area": "english",
+   "grade": null,
+   "stem": "下面哪句是感叹句？",
+   "payload": {
+    "options": [
+     "What a big apple!",
+     "Sit down, please.",
+     "Is it big?"
+    ],
+    "answer": 0,
+    "explanation": "What + a + 形容词 + 名词构成感叹句；B 是祈使句，C 是疑问句。"
+   },
+   "tags": [
+    "英语·语法",
+    "语法·句型变换"
+   ],
+   "source_key": "primary-grammar",
+   "source_ref": "grammar:gr8-4:quiz"
+  }
+ ]
+}

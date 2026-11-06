@@ -11,9 +11,9 @@ from django.test import SimpleTestCase
 from questionbank import importing
 
 DATA_DIR = Path(__file__).resolve().parent.parent / 'data' / 'questions'
-SOURCE_KEYS = {'primary-math', 'primary-chinese', 'primary-english'}
+SOURCE_KEYS = {'primary-math', 'primary-chinese', 'primary-english', 'primary-grammar'}
 AREA_FLOORS = {'math': 55, 'chinese': 20, 'english': 35}
-TOTAL_FLOOR = 150
+TOTAL_FLOOR = 180
 
 
 def load_batches():

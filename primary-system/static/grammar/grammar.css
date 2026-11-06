@@ -1,0 +1,80 @@
+/* 英语语法专题：章节导航 + 知识点卡（讲解/要点/表格/口诀/例题/易错/巩固题）。 */
+
+/* 章节号徽章：覆盖平台 10px 色点，装下两位序号 */
+.unit-nav .grammar-dot { display: inline-block; width: auto; height: auto; padding: 0 8px; border-radius: 999px; background: #68cfab; color: #14503a; font-size: 13px; font-weight: 800; line-height: 1.5; vertical-align: baseline; }
+.unit-nav a[aria-current] .grammar-dot, .unit-nav a:hover .grammar-dot { background: #fff; }
+
+.grammar-board { min-width: 0; }
+
+/* ── 知识点卡 ──────────────────────────────────────────────────────────── */
+.grammar-lesson { padding: 24px 28px; margin-bottom: 24px; border: 1px solid var(--line); border-top: 4px solid #4d96ff; border-radius: 20px; background: var(--white); box-shadow: 0 3px 0 #233e3704; scroll-margin-top: 24px; }
+.grammar-lesson-head { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; }
+.grammar-lesson-head h3 { margin: 0; font-size: 25px; }
+.grammar-definition { margin: 0 0 14px; font-size: 19px; line-height: 1.85; }
+
+.grammar-block-title { margin: 0 0 6px; color: var(--green); font-weight: 800; font-size: 16px; }
+.grammar-essentials ul { margin: 0; padding-left: 22px; }
+.grammar-essentials li { margin-bottom: 6px; font-size: 17px; line-height: 1.75; }
+.grammar-essentials li::marker { color: #4d96ff; }
+
+.grammar-formula { display: flex; align-items: baseline; gap: 12px; margin: 16px 0 0; padding: 12px 18px; border-radius: 14px; background: var(--soft); }
+.grammar-formula span { flex-shrink: 0; color: var(--green); font-size: 14px; font-weight: 800; }
+.grammar-formula { font-size: 19px; font-weight: 750; letter-spacing: .02em; }
+
+.grammar-table-wrap { overflow-x: auto; margin-top: 16px; }
+.grammar-table { width: 100%; border-collapse: collapse; font-size: 16px; }
+.grammar-table th, .grammar-table td { padding: 9px 14px; border: 1px solid var(--line); text-align: left; line-height: 1.6; }
+.grammar-table th { background: #eef4fb; color: #234b38; white-space: nowrap; }
+.grammar-table td { background: var(--white); }
+
+.grammar-facts { display: grid; gap: 8px; margin-top: 16px; }
+.grammar-facts p { display: flex; gap: 10px; align-items: baseline; margin: 0; padding: 10px 16px; border-radius: 12px; background: var(--card-tint); font-size: 16px; line-height: 1.7; }
+.grammar-facts b { flex-shrink: 0; color: var(--card-accent); }
+
+.grammar-example { margin-top: 16px; border: 1px solid var(--line); border-radius: 14px; background: #fbfcf8; }
+.grammar-example summary { padding: 12px 18px; font-weight: 750; cursor: pointer; font-size: 17px; }
+.grammar-example-body { padding: 4px 20px 16px; }
+.grammar-example-body ol { margin: 0 0 10px; padding-left: 22px; }
+.grammar-example-body li { margin-bottom: 4px; font-size: 16px; line-height: 1.75; color: var(--muted); }
+.grammar-answer { display: flex; gap: 10px; align-items: baseline; margin: 0; font-size: 17px; }
+.grammar-answer b { flex-shrink: 0; color: #2c7a4b; font-size: 14px; }
+
+.grammar-misconception { display: grid; gap: 8px; margin-top: 16px; }
+.grammar-misconception p { display: flex; gap: 12px; align-items: baseline; margin: 0; padding: 10px 16px; border-radius: 12px; font-size: 16px; line-height: 1.7; }
+.grammar-misconception i { flex-shrink: 0; font-style: normal; font-weight: 800; font-size: 14px; }
+.grammar-wrong { background: #fde8e4; }
+.grammar-wrong i { color: #b4483a; }
+.grammar-right { background: #e2f0dc; }
+.grammar-right i { color: #2c7a4b; }
+
+/* ── 巩固题 ────────────────────────────────────────────────────────────── */
+.grammar-quiz { margin-top: 16px; padding: 16px 18px; border: 2px dashed #b9d3e8; border-radius: 16px; background: #f4f9fd; }
+.grammar-quiz-q { margin: 0 0 12px; font-weight: 750; font-size: 18px; }
+.grammar-quiz-options { display: grid; gap: 10px; }
+.grammar-quiz-option { padding: 12px 18px; border: 2px solid var(--line); border-radius: 14px; background: var(--white); font-size: 17px; font-weight: 700; text-align: left; cursor: pointer; }
+.grammar-quiz-option:hover { border-color: #4d96ff; background: #eef4fb; }
+.grammar-quiz-option:disabled { cursor: default; opacity: .68; }
+.grammar-quiz-option.right { border-color: #2c7a4b; background: #e2f0dc; opacity: 1; }
+.grammar-quiz-option.wrong { border-color: #b4483a; background: #fde8e4; }
+.grammar-quiz-explain { margin: 12px 0 0; font-size: 16px; line-height: 1.75; color: #234b38; }
+.grammar-quiz-explain::before { content: '解析 · '; color: var(--green); font-weight: 800; font-size: 14px; }
+
+.grammar-sources { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: baseline; margin: 14px 0 0; font-size: 14px; color: var(--muted); }
+.grammar-sources a { color: #4d96ff; font-weight: 700; }
+.grammar-source-note { font-size: 13px; }
+
+/* ── 侧栏进度与章节切换 ────────────────────────────────────────────────── */
+.grammar-progress-row { margin: 14px 0 0; padding-top: 14px; border-top: 1px solid var(--line); color: var(--muted); font-size: 15px; }
+.grammar-progress-row b { color: var(--green); font-size: 20px; }
+.grammar-chapter-nav { display: flex; flex-wrap: wrap; gap: 14px; justify-content: space-between; margin-top: 8px; }
+.grammar-chapter-nav .button[href=''] { visibility: hidden; }
+
+@media (max-width: 720px) {
+  .grammar-lesson { padding: 18px; }
+  .grammar-lesson-head h3 { font-size: 22px; }
+}
+@media print {
+  .unit-nav, .tts-bar, .tts-settings, .say-chip, .grammar-quiz-option, .grammar-chapter-nav { display: none !important; }
+  .grammar-lesson { break-inside: avoid; box-shadow: none; }
+  .grammar-quiz-explain { display: block !important; }
+}

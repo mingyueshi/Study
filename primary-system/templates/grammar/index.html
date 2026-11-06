@@ -1,0 +1,60 @@
+{% extends 'base.html' %}{% load static %}{% block title %}英语语法 · 乐学堂{% endblock %}
+{% block content %}<link rel="stylesheet" href="{% static 'grammar/grammar.css' %}"><script src="{% static 'speech.js' %}" defer></script><script src="{% static 'tts.js' %}" defer></script><script src="{% static 'grammar/grammar.js' %}" defer></script>{% include 'includes/tts_controls.html' %}
+<div class="page-heading"><p class="eyebrow">英语 · 精讲</p><h1>英语语法</h1>
+  <p>把单词放对位置的规则，一章一章讲清楚：看讲解、记口诀、辨易错，读完用巩固题测一测。练习记录统一进挑战题库。</p></div>
+<div class="library-layout">
+  <aside class="unit-nav" aria-label="语法章节导航">
+    <h2>语法章节</h2>
+    {% for chapter in chapters %}<a href="?chapter={{ chapter.id }}" {% if chapter.id == current.id %}aria-current="page"{% endif %}><span class="unit-dot grammar-dot">{{ chapter.no }}</span>{{ chapter.title }}<span class="unit-count">{{ chapter.lesson_count }}</span></a>{% endfor %}
+    <p class="grammar-progress-row">巩固题已练 <b data-grammar-progress>0</b>／{{ lesson_total }}</p>
+  </aside>
+  <section class="grammar-board">
+    <div class="section-heading"><div><p class="eyebrow">第 {{ current.no }} 章</p><h2>{{ current.title }}</h2><p>{{ current.description }}</p></div></div>
+    {% for lesson in current.lessons %}
+    <article class="grammar-lesson" id="lesson-{{ lesson.id }}" data-grammar-lesson>
+      <header class="grammar-lesson-head">
+        <h3>{{ lesson.title }}</h3>
+        <button class="say-chip" type="button" data-say="{{ lesson.title }}。{{ lesson.definition }}" aria-label="朗读 {{ lesson.title }}">🔊</button>
+      </header>
+      <p class="grammar-definition">{{ lesson.definition }}</p>
+      <div class="grammar-essentials">
+        <p class="grammar-block-title">必须掌握</p>
+        <ul>{% for essential in lesson.essentials %}<li>{{ essential }}</li>{% endfor %}</ul>
+      </div>
+      {% if lesson.formula %}<p class="grammar-formula"><span>句型公式</span>{{ lesson.formula }}</p>{% endif %}
+      {% if lesson.comparison %}
+      <div class="grammar-table-wrap"><table class="grammar-table">
+        <thead><tr>{% for header in lesson.comparison.headers %}<th>{{ header }}</th>{% endfor %}</tr></thead>
+        <tbody>{% for row in lesson.comparison.rows %}<tr>{% for cell in row %}<td>{{ cell }}</td>{% endfor %}</tr>{% endfor %}</tbody>
+      </table></div>
+      {% endif %}
+      {% if lesson.facts %}<div class="grammar-facts">{% for fact in lesson.facts %}<p><b>{{ fact.label }}</b>{{ fact.value }}</p>{% endfor %}</div>{% endif %}
+      <details class="grammar-example">
+        <summary>例题 · {{ lesson.example.question }}</summary>
+        <div class="grammar-example-body">
+          <ol>{% for step in lesson.example.steps %}<li>{{ step }}</li>{% endfor %}</ol>
+          <p class="grammar-answer"><b>答案</b>{{ lesson.example.answer }}</p>
+        </div>
+      </details>
+      <div class="grammar-misconception">
+        <p class="grammar-wrong"><i>✗ 易错</i>{{ lesson.misconception.wrong }}</p>
+        <p class="grammar-right"><i>✓ 正确</i>{{ lesson.misconception.right }}</p>
+      </div>
+      <div class="grammar-quiz" data-grammar-quiz data-answer="{{ lesson.quiz.answer }}" data-lesson="{{ lesson.id }}">
+        <p class="grammar-quiz-q">练一练 · {{ lesson.quiz.question }}</p>
+        <div class="grammar-quiz-options">
+          {% for option in lesson.quiz.options %}<button class="grammar-quiz-option" type="button" data-grammar-option data-index="{{ forloop.counter0 }}">{{ option }}</button>{% endfor %}
+        </div>
+        <p class="grammar-quiz-explain" hidden data-grammar-explain>{{ lesson.quiz.explanation }}</p>
+      </div>
+      <p class="grammar-sources">来源：{% for source in lesson.sources %}<a href="{{ source.url }}" target="_blank" rel="noopener">🔗 {{ source.label }}</a>{% endfor %}<span class="grammar-source-note">（外链需联网）</span></p>
+    </article>
+    {% endfor %}
+    <nav class="grammar-chapter-nav" aria-label="章节切换">
+      {% if prev_chapter %}<a class="button small ghost" href="?chapter={{ prev_chapter.id }}">← 上一章</a>{% endif %}
+      <a class="button small" href="{% url 'questionbank' %}">去题库练语法题 →</a>
+      {% if next_chapter %}<a class="button small ghost" href="?chapter={{ next_chapter.id }}">下一章 →</a>{% endif %}
+    </nav>
+  </section>
+</div>
+{% endblock %}

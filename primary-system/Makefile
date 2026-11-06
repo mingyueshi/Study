@@ -46,6 +46,9 @@ writing-data: ## 从 primary/writing-data.js 重新生成作文坊 topics.json�
 questionbank-data: ## 从 primary/ 数据重新生成题库批次 JSON（需 node，随后 import_questions 导入）
 	node scripts/build_questionbank.cjs
 
+grammar-data: ## 从 primary/grammar/ 重新生成语法课程数据与题库批次（需 node，随后 import_questions 导入）
+	node scripts/build_grammar.cjs
+
 word-tree: ## 重新生成词以类聚的 WordNet 上下位树（words/tree_data/tree.json）
 	$(PYTHON) scripts/build_word_tree.py
 
@@ -61,4 +64,4 @@ ancient-text: ## 重新生成古文经典资料包 01e（--source 传本地克�
 unihan18-package: ## 重新生成 Unihan 18.0.0 全量属性资料包 01f（辅助文件缓存目录见 scripts/build_unihan18_package.py）
 	$(PYTHON) scripts/build_unihan18_package.py
 
-.PHONY: help install run test check makemigrations migrate seed superuser shell repair-data writing-data questionbank-data phoneme-audio word-tree ancient-text unihan18-package
+.PHONY: help install run test check makemigrations migrate seed superuser shell repair-data writing-data questionbank-data grammar-data phoneme-audio word-tree ancient-text unihan18-package

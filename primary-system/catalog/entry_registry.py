@@ -77,6 +77,10 @@ def _phonetics_summary(user):
     return None
 
 
+def _grammar_summary(user):
+    return None
+
+
 ENTRIES = {
     'chain': {
         'route_name': 'chain',
@@ -103,6 +107,14 @@ ENTRIES = {
         'blurb': '看口型要点、听例词，把 44 个音素一个个读准。音标页只读浏览，不记学习进度。',
         'button': '进入音标',
         'learning_summary': _phonetics_summary,
+    },
+    'grammar': {
+        'route_name': 'grammar',
+        'tag': '开始学语法 →',
+        'headline': '语法学习已开始',
+        'blurb': '8 章 31 个语法点：词法、动词与句型，讲规则、辨易错。页内巩固题即时判分，同题已进挑战题库，练习记录跟着题库走。',
+        'button': '进入语法',
+        'learning_summary': _grammar_summary,
     },
     'writing': {
         'route_name': 'writing',
