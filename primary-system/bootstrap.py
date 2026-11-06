@@ -131,7 +131,7 @@ def main():
         (
             "仅空结构已准备（--skip-content）；尚未加载学习内容。"
             if args.skip_content
-            else "当前基础内容、字词典及205个资料文件已完整准备；未创建默认账号。"
+            else "当前基础内容、字词典及资料文件已完整准备；未创建默认账号。"
         ),
         flush=True,
     )

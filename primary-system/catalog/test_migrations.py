@@ -22,11 +22,14 @@ class CatalogMigrationTests(unittest.TestCase):
         if base.vendor == 'sqlite':
             config['NAME'] = ':memory:'
         elif base.vendor == 'postgresql':
-            self.schema = self.alias
+            # 固定 schema 名保持 DDL 为常量 SQL：测试库本身按运行隔离，
+            # IF EXISTS 保证残留 schema 可重入。
+            self.schema = 'catalog_migration_rehearsal'
             with base.cursor() as cursor:
-                cursor.execute(f'CREATE SCHEMA {base.ops.quote_name(self.schema)}')
+                cursor.execute('CREATE SCHEMA IF NOT EXISTS catalog_migration_rehearsal')
             config['OPTIONS']['options'] = (
-                config['OPTIONS'].get('options', '') + f' -c search_path={self.schema}').strip()
+                config['OPTIONS'].get('options', '')
+                + ' -c search_path=catalog_migration_rehearsal').strip()
         else:
             self.skipTest('Supported application databases are SQLite and PostgreSQL.')
         connections.databases[self.alias] = config
@@ -40,7 +43,7 @@ class CatalogMigrationTests(unittest.TestCase):
         if self.schema:
             base = connections['default']
             with base.cursor() as cursor:
-                cursor.execute(f'DROP SCHEMA {base.ops.quote_name(self.schema)} CASCADE')
+                cursor.execute('DROP SCHEMA IF EXISTS catalog_migration_rehearsal CASCADE')
 
     def migrate(self, catalog_migration):
         targets = [

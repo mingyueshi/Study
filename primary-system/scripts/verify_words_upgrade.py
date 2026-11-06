@@ -7,6 +7,7 @@ import argparse
 import hashlib
 import json
 import os
+import re
 import sqlite3
 from pathlib import Path
 
@@ -20,12 +21,26 @@ db = sqlite3.connect(args.database)
 db.row_factory = sqlite3.Row
 report = Path(args.report)
 
+
 def row_key(table, value):
     # Session primary keys are bearer credentials, never retain them in reports.
     return hashlib.sha256(str(value).encode()).hexdigest() if table == 'django_session' else str(value)
 
+
 def digest(row):
     return hashlib.sha256(json.dumps(list(row), ensure_ascii=False, default=str).encode()).hexdigest()
+
+
+def quote(value):
+    """SQL 标识符无法参数化：表名/列名只允许项目自身结构的受限字符集。"""
+    if not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*", str(value)):
+        raise SystemExit(f"非法 SQL 标识符：{value!r}")
+    return '"' + str(value).replace('"', '""') + '"'
+
+
+def sql(*parts):
+    return "".join(parts)
+
 
 if args.verify:
     before = json.loads(report.read_text())
@@ -33,7 +48,7 @@ if args.verify:
     failures = []
     for table, data in before['tables'].items():
         columns = data['columns']
-        query = 'SELECT ' + ','.join('"'+x+'"' for x in columns) + ' FROM "'+table+'"'
+        query = sql('SELECT ', ', '.join(quote(x) for x in columns), ' FROM ', quote(table))
         rows = {row_key(table, row[0]): digest(row) for row in db.execute(query)}
         changed = [key for key, value in data['rows'].items() if rows.get(key) != value]
         added = len(set(rows) - set(data['rows']))
@@ -56,9 +71,10 @@ else:
         raise SystemExit('Refuse to overwrite baseline')
     tables = {}
     for table, in db.execute("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' AND name != 'django_migrations'"):
-        columns = [r[1] for r in db.execute('PRAGMA table_info("'+table+'")')]
+        columns = [r[0] for r in db.execute('SELECT name FROM pragma_table_info(?)', (table,))]
         # All project tables use the first column as primary key.
-        tables[table] = {'columns': columns, 'rows': {row_key(table, row[0]): digest(row) for row in db.execute('SELECT * FROM "'+table+'"')}}
+        statement = sql('SELECT * FROM ', quote(table))
+        tables[table] = {'columns': columns, 'rows': {row_key(table, row[0]): digest(row) for row in db.execute(statement)}}
     report.write_text(json.dumps({'tables': tables}, ensure_ascii=False, indent=2))
     os.chmod(report, 0o600)
     if args.copy:

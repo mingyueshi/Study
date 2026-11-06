@@ -12,6 +12,7 @@ IMPORTERS = [
     ("lexicon.reference_importing", "词典与读音"),
     ("hanzi.importing", "汉字与Unihan"),
     ("poetry.importing", "古诗文"),
+    ("poetry.ancient_importing", "古文经典"),
     ("geography.importing", "国家地区"),
     ("astronomy.importing", "天文"),
     ("science.importing", "化学元素"),

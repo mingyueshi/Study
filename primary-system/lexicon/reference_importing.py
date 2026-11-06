@@ -1,15 +1,28 @@
 import csv, hashlib, json
 from pathlib import Path
-from django.db import transaction
 from django.core.exceptions import ValidationError
+from django.db import transaction
 from reference_library.models import Dataset
+from reference_library.scope import ACTIVE_ARCHIVES
 from .reference_models import CedictRecord, CmuPronunciation
 
 
 def locate(root, suffix):
+    """定位固定输入路径；唯一性按当前激活包范围判定。
+
+    退役包的解压残留会留在存储根（登记与文件按历史证据保留），
+    不参与当前 scope 的固定输入计数。
+    """
     files = [
         p for p in Path(root).rglob(Path(suffix).name) if p.as_posix().endswith(suffix)
     ]
+    if len(files) > 1:
+        active = {Path(name).stem for name in ACTIVE_ARCHIVES}
+        scoped = [
+            p for p in files if p.relative_to(root).parts[0] in active
+        ]
+        if scoped:
+            files = scoped
     if len(files) != 1:
         raise ValidationError(f"固定输入路径缺失或重复：{suffix}")
     return files[0]

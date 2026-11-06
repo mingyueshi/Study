@@ -4,7 +4,7 @@
 
 设计基线见 [系统设计与开发基线](docs/system-design.md)。当前明确区分两条管线：**教材按册次、单元和内容编排；学科功能拥有独立页面、数据模型和学习流程。** 旧专题学习册已退出，科学、地理、历史等后续按学科逐个开发，不放回通用专题阅读器。
 
-`references/` 新资料的 [基础数据与中文教学规划](docs/foundation-data-plan.md) 已完成，另有 [文件与内容核验](docs/reference-audit-2026-11-02.md)。当前保留六包中的七类资料，南非教材及算术事实已按用户要求删除，提供中文界面、可靠短名称和字段对照及独立浏览入口；长篇英文释义仍保留原文并标明中文待补。字词资料已整合到[查字查词](http://127.0.0.1:8012/dictionary/)，见[统一展示实施](docs/dictionary-unification-implementation.md)；历史[全量资料库实施](docs/reference-library-implementation.md)与[独立验收](docs/reference-library-acceptance.md)。当前退役范围和维护流程见[退役报告](docs/reference-library-removal-implementation.md)。
+`references/` 新资料的 [基础数据与中文教学规划](docs/foundation-data-plan.md) 已完成，另有 [文件与内容核验](docs/reference-audit-2026-11-02.md)。当前保留七包中的七类资料，南非教材及算术事实已按用户要求删除，提供中文界面、可靠短名称和字段对照及独立浏览入口；长篇英文释义仍保留原文并标明中文待补。字词资料已整合到[查字查词](http://127.0.0.1:8012/dictionary/)，见[统一展示实施](docs/dictionary-unification-implementation.md)；历史[全量资料库实施](docs/reference-library-implementation.md)与[独立验收](docs/reference-library-acceptance.md)。当前退役范围和维护流程见[退役报告](docs/reference-library-removal-implementation.md)。
 
 ## 当前功能
 
@@ -27,6 +27,7 @@
 - 飞花令：桌面优先的单字令五句练习，从已入库唐诗、宋词、诗经、楚辞和千家诗检索。预置 29 个令字（花月春山水风雪云雨江日天秋酒夜柳桥马竹红白青海河梅灯舟松荷），也支持自定义任意单个汉字开令（语料不足五句如实拒绝）。输入分句后展示所在完整句，提示学习与独立作答分开统计，可跳转原诗。本页临时状态，刷新重新开始，不写入掌握记录；来源范围、版本采用与派生索引维护见 [诗句库说明](poetry/data/README.md)。
 - 诗词地图：一座城一首诗——背过的诗按地点摆上中国地图（离线 SVG 底图，39 个地点）。点地点或搜城市看当地诗：代表诗、其余诗、点读与跳转原诗；诗篇运行时定位 simplified 层语料，定位不到如实降级。只读浏览，不写学习记录；地点编排与地图来源见 [诗词地图说明](poetry/map_data/README.md)。
 - 诗词四季：按春夏秋冬、按情感与题材两条路径浏览诗词——四季（春 715 / 夏 100 / 秋 477 / 冬 456 句）走新增的关键词分类规则，思乡、送别、边塞、咏物等情感题材复用原题材分类；四季大卡 + 情感分组入口页，诗单沿用题材详情页。关键词自动归档不等于逐句审校；只读浏览，不写学习记录。
+- 古文经典：hanzhaodeng/chinese-ancient-text 62 册简体古籍（三字经、声律启蒙、论语、史记、资治通鉴等）入库古诗文浏览——九个 collection（蒙学读物/儒家经典/史书典籍/诸子百家/兵法谋略/笔记杂谈/科技博物/医学典籍/佛典经文）、5258 篇正文约 1225 万字，与既有诗词语料同页检索但独立来源版本（`ancient-classics` 数据集），正文简体原生不做繁简切换。飞花令、题材分类与诗词地图不收古文经典；只读浏览，不写学习记录。来源与管线见 [古文经典实施](docs/ancient-classics-implementation.md)。
 - 词以类聚：用 WordNet 上下位关系把场景单词挂成树（动物/食物/交通工具等 10 条枝干、263 节点、285 词，OEWN 2025 离线生成）。折叠树浏览，点词出卡（场景中文、音标、点读），一键跳 /words/?word= 深链学词或查词典；中文枝干标注按 synset id 人工维护。只读浏览，不写学习记录；树生成与标注约定见 [词树说明](words/tree_data/README.md)。
 - Nova 后台分组管理课程、词库、玩法、学习记录与账号；普通学习账号不具有管理权限。
 
@@ -63,7 +64,7 @@ PRIMARY_DEBUG=1 .venv/bin/python manage.py runserver 127.0.0.1:8012
 - [诗词地图](http://127.0.0.1:8012/poetry/map/)
 - [管理后台](http://127.0.0.1:8012/admin/)
 
-首次初始化从 `data/baseline/` 恢复当前教材编排、固定内容／词义 UUID、已选中文版本、词库生效与公开状态、接龙词池及八个资料数据集，并从当前六个 ZIP 恢复 205 个资料文件。它不重跑旧领域导入，不创建默认账号，也不需要手工启用词库。
+首次初始化从 `data/baseline/` 恢复当前教材编排、固定内容／词义 UUID、已选中文版本、词库生效与公开状态、接龙词池及九个资料数据集，并从当前七个 ZIP 恢复 361 个资料文件。它不重跑旧领域导入，不创建默认账号，也不需要手工启用词库。
 
 默认数据库为 `db.sqlite3`，用 `PRIMARY_SQLITE_PATH` 可指定独立文件。会话和 CSRF Cookie 使用 `primary_` 前缀；本地随机密钥在权限 0600 的 `.local-secret`。日常数据库、密钥、虚拟环境、备份和解压缓存不进 Git；可复现的基础数据包及三个固定词典来源文件进 Git。
 

@@ -3,9 +3,10 @@ import sqlite3,json,hashlib,uuid,argparse,os,re
 from pathlib import Path
 p=argparse.ArgumentParser();p.add_argument('database');p.add_argument('baseline');p.add_argument('--verify',action='store_true');a=p.parse_args()
 m=json.loads(Path('data/chinese/cn-foundation-20261102-01.json').read_text());db=sqlite3.connect(a.database)
-def safe_ident(name):
- if not re.fullmatch(r'[A-Za-z_][A-Za-z0-9_]*',str(name)):raise SystemExit(f'非法 SQL 标识符：{name!r}')
- return name
+def quote(value):
+ """SQL 标识符无法参数化：表名/列名只允许项目自身结构的受限字符集。"""
+ if not re.fullmatch(r'[A-Za-z_][A-Za-z0-9_]*',str(value)):raise SystemExit(f'非法 SQL 标识符：{value!r}')
+ return '"'+str(value).replace('"','""')+'"'
 def sql(*parts):return ''.join(parts)
 def h(value):return hashlib.sha256(json.dumps(value,ensure_ascii=False,sort_keys=True,default=str).encode()).hexdigest()
 def key(table,value):return h(value) if table=='django_session' else str(value)
@@ -22,14 +23,14 @@ if not a.verify:
  if file.exists():raise SystemExit('refuse overwrite baseline')
  tables={}
  for t, in db.execute("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%'"):
-  cols=[r[1] for r in db.execute('PRAGMA table_info("'+t+'")')]
-  tables[t]={'columns':cols,'rows':{key(t,r[0]):h(list(r)) for r in db.execute('SELECT * FROM "'+t+'"')}}
+  cols=[r[0] for r in db.execute('SELECT name FROM pragma_table_info(?)',[t])]
+  tables[t]={'columns':cols,'rows':{key(t,r[0]):h(list(r)) for r in db.execute(sql('SELECT * FROM ',quote(t)))}}
  file.write_text(json.dumps(tables));os.chmod(file,0o600);print('baseline recorded',sum(len(v['rows']) for v in tables.values()))
 else:
  tables=json.loads(file.read_text());fail=[];adds={};changed=0
  for t,b in tables.items():
   rows={}
-  for r in db.execute('SELECT '+','.join('"'+c+'"' for c in b['columns'])+' FROM "'+t+'"'):
+  for r in db.execute(sql('SELECT ',', '.join(quote(c) for c in b['columns']),' FROM ',quote(t))):
    values=dict(zip(b['columns'],r));ident=str(r[0])
    if (t,ident) in allowed:
     old,new=allowed[t,ident]

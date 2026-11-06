@@ -1,8 +1,8 @@
 # 验证记录
 
-> 当前资料范围：南非教材和算术事实已于2026-11-02退役，保留七类／8个数据集／六包／205源文件。下方各阶段记录按时间保留；当前删除验证见本文末尾及[退役报告](docs/reference-library-removal-implementation.md)。
+> 当前资料范围：南非教材和算术事实已于2026-11-02退役，保留七类／9个数据集／七包／361源文件。下方各阶段记录按时间保留；当前删除验证见本文末尾及[退役报告](docs/reference-library-removal-implementation.md)。
 
-> 最新结果见文末「本地启动、专题退出与设计基线复核（2026-11-02）」；之前章节为历史记录。
+> 最新结果见文末「古文经典62册接入与基础包重导（2026-11-06）」；之前章节为历史记录。
 
 日期：2026-10-30（Asia/Shanghai）。范围为本地统一学习系统基座，未发布、未提交 Git。
 
@@ -440,3 +440,13 @@ SQLite相关38项（37通过／1PG跳过）、PG批次10/10含并发首导、前
 - 主控对日常实际库执行225个读取请求，覆盖24个场景、192个详情、搜索分页/零结果/输入转义/异常输入、首页和词典入口，全部符合预期；捕获写SQL为0，无会话Cookie。批量解析192个引用仅1次SELECT；每个场景读取亦为1次SELECT。没有新增模型、迁移或个人学习状态，基础数据包无需重新导出。
 - 实际浏览器已验收桌面三栏、选词、词典详情、多场景跳转、全量搜索和零结果；1440×1000、1366×768及390×844无横向溢出，桌面和窄屏截图已目视。手机采用纵向浏览，不把桌面三栏压缩成小字。
 - 场景JSON随Git同步，启动依赖既有基础包而非审计目录。证据位于 `output/idiom-scenarios/manifest-acceptance.json`、`control-acceptance.json` 与 `output/playwright/idioms-control-*.png`。8012日常库和8014原隔离预览库均按原数据库路径重启，当前PID记录在 `output/idiom-scenarios/services.json`。未提交、推送或部署。
+
+## 2026-11-06：古文经典62册接入与基础包重导
+
+- hanzhaodeng/chinese-ancient-text 62 册简体古籍以独立数据集 `ancient-classics` 接入 poetry 浏览管线：九个 collection（蒙学读物5/儒家经典13/史书典籍9/诸子百家8/兵法谋略12/笔记杂谈8/科技博物3/医学典籍2/佛典经文2），62 文档、5,258 篇正文、约1,225万字；VERSION 钉定上游 commit `01a1183c…+native`。collection 全新命名，不与 全唐诗/宋词/诗经/楚辞/蒙学 重叠，详情页双层配对不会串册。
+- 资料包 `01e_ancient_classics_2026-11-06.zip`（16.85MB，sha256 `30bc34d6…`）由 `scripts/build_ancient_text_package.py` 确定性生成（manifest+SHA256SUMS+许可索引齐备，上游 commit 钉定），登记进 reference-manifest（11 包）与 scope.py（SCOPE 升为 reference-library-20261106-ancient-classics，激活七包）；IMPORTERS 新增 `poetry.ancient_importing`。
+- 与既有诗词导入器共享四张 poetry 表：双方行数与逐行指纹守卫改为按 `PoetryDocument.version` 圈定（`poetry/importing.py` 同步修改）；`lexicon/reference_importing.locate` 固定输入唯一性改为按当前激活包范围判定——修复历史繁体包 `01d_classical_poetry_2026-11-02` 解压残留导致的 locate 重复命中（该残留此前未被任何流程清理，正式导入首跑即暴露）。
+- 导入实测：dry-run 7 包 361 文件全过、既有 6 导入器全部 unchanged；正式导入后复跑两轮，古诗文 unchanged 73,676、古文经典 unchanged 5,258，幂等成立。首次导入因路径双前缀错误（poetry/poetry/…）已清理重导。
+- 基线重导：48 表 76 分片 2,596,608 行、约 249.15 MiB（旧 64 分片／2,591,219 行／152.27 MiB）；差异仅 poetry 两表（+62/+5,258）与 reference_library 四表（+1 包/+1 数据集/+1 回执/+66 源文件），其余 42 表逐行不变。`verify_base_data` 包校验与 `--database` 现库只读核对通过（同一 digest `991b6e61…`）。
+- 导入器对古文 source_data 剔除与 paragraphs 重复的 content 键，避免正文三份冗余；详情页 metadata 展示本就剔除这些键。页面抽验：蒙学读物/儒家经典筛选 200，三字经详情书名为题、无繁简切换（如实降级），飞花令 scope 不收新 collection。`poetry.test_ancient` 7 项通过；`make check` 通过。文档同步：README 当前功能与数据规模、docs/local-development.md 基础包范围、新增 docs/ancient-classics-implementation.md、Makefile `ancient-text` 目标、bootstrap 完成文案去硬编码数字。
+- 未运行 PostgreSQL 专项、真实浏览器全面回归或另一台物理Mac验证；未提交、推送或部署。

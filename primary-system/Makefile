@@ -52,4 +52,7 @@ polyphone-data: ## 从 CC-CEDICT 重新生成多音字数据（hanzi/polyphone_d
 phoneme-audio: ## 重新生成 44 个音素原声 m4a（需 espeak-ng，见 scripts/generate_phoneme_audio.py）
 	python3 scripts/generate_phoneme_audio.py
 
-.PHONY: help install run test check makemigrations migrate seed superuser shell repair-data writing-data phoneme-audio word-tree
+ancient-text: ## 重新生成古文经典资料包 01e（--source 传本地克隆可免逐册联网，见 scripts/build_ancient_text_package.py）
+	$(PYTHON) scripts/build_ancient_text_package.py
+
+.PHONY: help install run test check makemigrations migrate seed superuser shell repair-data writing-data phoneme-audio word-tree ancient-text

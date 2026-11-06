@@ -3,7 +3,7 @@
   "verified_date": "2026-11-02",
   "status": "verified_input_only_not_imported_or_teaching_reviewed",
   "path_base": "Study repository root; input paths only, not runtime dependencies",
-  "archive_count": 10,
+  "archive_count": 11,
   "payload_occurrences": 260,
   "unique_payload_paths": 181,
   "shared_path_conflicts": [],
@@ -97,6 +97,15 @@
       "crc_ok": true,
       "manifest_ok": true,
       "checked_payloads": 196
+    },
+    {
+      "archive": "references/01e_ancient_classics_2026-11-06.zip",
+      "bytes": 16848880,
+      "sha256": "30bc34d683e756142fa53c8dea8ab3ea6965a19e8da1cf03d90e3b38bd18d2f4",
+      "outer_sha_matches": true,
+      "crc_ok": true,
+      "manifest_ok": true,
+      "checked_payloads": 64
     }
   ],
   "assembled_science_epub": {

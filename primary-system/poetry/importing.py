@@ -261,24 +261,36 @@ def import_data(input_root, dry_run=False):
         for i, row in enumerate(excluded, 2)
     )
     fingerprints = [
-        (PoetryDocument.objects.order_by("pk"), document_fields, document_hash),
         (
-            PoetryText.objects.order_by("document_id", "locator"),
+            PoetryDocument.objects.filter(version=VERSION).order_by("pk"),
+            document_fields,
+            document_hash,
+        ),
+        (
+            PoetryText.objects.filter(document__version=VERSION).order_by(
+                "document_id", "locator"
+            ),
             text_fields,
             record_digest(records("text", text_fields)),
         ),
         (
-            PoetryNode.objects.order_by("document_id", "locator"),
+            PoetryNode.objects.filter(document__version=VERSION).order_by(
+                "document_id", "locator"
+            ),
             node_fields,
             record_digest(records("node", node_fields)),
         ),
-        (PoetryExclusion.objects.order_by("row"), exclusion_fields, exclusion_hash),
+        (
+            PoetryExclusion.objects.filter(version=VERSION).order_by("row"),
+            exclusion_fields,
+            exclusion_hash,
+        ),
     ]
     checks = [
-        (PoetryDocument.objects.all(), TRADITIONAL_FILES + SIMPLIFIED_FILES),
-        (PoetryText.objects.all(), count_text + count_simplified),
-        (PoetryNode.objects.all(), count_nodes),
-        (PoetryExclusion.objects.all(), EXCLUSIONS),
+        (PoetryDocument.objects.filter(version=VERSION), TRADITIONAL_FILES + SIMPLIFIED_FILES),
+        (PoetryText.objects.filter(document__version=VERSION), count_text + count_simplified),
+        (PoetryNode.objects.filter(document__version=VERSION), count_nodes),
+        (PoetryExclusion.objects.filter(version=VERSION), EXCLUSIONS),
     ]
     if dry_run:
         validate_existing("poetry", VERSION, checksum, checks, fingerprints)
@@ -300,10 +312,10 @@ def import_data(input_root, dry_run=False):
         validate_existing("poetry", VERSION, checksum, checks, fingerprints)
         if dataset.state == "ready":
             if (
-                PoetryDocument.objects.count(),
-                PoetryText.objects.count(),
-                PoetryNode.objects.count(),
-                PoetryExclusion.objects.count(),
+                PoetryDocument.objects.filter(version=VERSION).count(),
+                PoetryText.objects.filter(document__version=VERSION).count(),
+                PoetryNode.objects.filter(document__version=VERSION).count(),
+                PoetryExclusion.objects.filter(version=VERSION).count(),
             ) != (
                 TRADITIONAL_FILES + SIMPLIFIED_FILES,
                 count_text + count_simplified,
@@ -312,7 +324,7 @@ def import_data(input_root, dry_run=False):
             ):
                 raise ValidationError("古诗文回执与数量不符")
             return {**result, "unchanged": count_text}
-        if PoetryDocument.objects.exists():
+        if PoetryDocument.objects.filter(version=VERSION).exists():
             raise ValidationError("已有半成品版本，拒绝重复追加")
         for relative, file_hash, data in documents:
             parts = relative.split("/")
