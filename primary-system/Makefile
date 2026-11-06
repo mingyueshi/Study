@@ -55,4 +55,7 @@ phoneme-audio: ## 重新生成 44 个音素原声 m4a（需 espeak-ng，见 scri
 ancient-text: ## 重新生成古文经典资料包 01e（--source 传本地克隆可免逐册联网，见 scripts/build_ancient_text_package.py）
 	$(PYTHON) scripts/build_ancient_text_package.py
 
-.PHONY: help install run test check makemigrations migrate seed superuser shell repair-data writing-data phoneme-audio word-tree ancient-text
+unihan18-package: ## 重新生成 Unihan 18.0.0 全量属性资料包 01f（辅助文件缓存目录见 scripts/build_unihan18_package.py）
+	$(PYTHON) scripts/build_unihan18_package.py
+
+.PHONY: help install run test check makemigrations migrate seed superuser shell repair-data writing-data phoneme-audio word-tree ancient-text unihan18-package

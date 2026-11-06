@@ -450,3 +450,13 @@ SQLite相关38项（37通过／1PG跳过）、PG批次10/10含并发首导、前
 - 基线重导：48 表 76 分片 2,596,608 行、约 249.15 MiB（旧 64 分片／2,591,219 行／152.27 MiB）；差异仅 poetry 两表（+62/+5,258）与 reference_library 四表（+1 包/+1 数据集/+1 回执/+66 源文件），其余 42 表逐行不变。`verify_base_data` 包校验与 `--database` 现库只读核对通过（同一 digest `991b6e61…`）。
 - 导入器对古文 source_data 剔除与 paragraphs 重复的 content 键，避免正文三份冗余；详情页 metadata 展示本就剔除这些键。页面抽验：蒙学读物/儒家经典筛选 200，三字经详情书名为题、无繁简切换（如实降级），飞花令 scope 不收新 collection。`poetry.test_ancient` 7 项通过；`make check` 通过。文档同步：README 当前功能与数据规模、docs/local-development.md 基础包范围、新增 docs/ancient-classics-implementation.md、Makefile `ancient-text` 目标、bootstrap 完成文案去硬编码数字。
 - 未运行 PostgreSQL 专项、真实浏览器全面回归或另一台物理Mac验证；未提交、推送或部署。
+
+## 2026-11-06：Unihan 全量属性升 18.0.0
+
+- 目的：消除词库 IICore Unihan 18.0.0 与 reference_library 全量 Unihan 17.0.0 的版本偏差（原设计「17 归档作对照、不导入覆盖当前18」；本次落地 foundation-data-plan 的「18 同版扩展属性」）。
+- 新资料包 `01f_unihan_18_2026-11-06.zip`（9,997,293 字节，sha256 `d8277fd2…`）由新增 `scripts/build_unihan18_package.py` 确定性构建：主输入 `data/lexicon/unihan-18.0.0.zip` 与词库同源（sha256 与 registry.json 钉定值一致），附 ReadMe/Unicode 许可（unicode.org 白名单下载）与 selected 字段 normalized 层（仅审计用，导入层不读）。登记 reference-manifest（12 包）；scope.py 换 01c→01f，SCOPE 升为 reference-library-20261106-unihan18。
+- 导入器与引用面整体改名：`hanzi/importing.py` 读 18.0.0 包并按新计数守卫（102,999 字／1,479,698 属性行／99 属性名；18.0.0 上游精简属性，较 17.0.0 的 1,555,629 行减少 75,931 行）；dataset code `unihan17`→`unihan18`，`hanzi/views.py`、`lexicon/lookup_sources.py`、`hanzi/tests.py` 同步；`UnihanCharacter.version` 默认值改 18.0.0（迁移 hanzi.0002）。
+- 导入实测：先备份日常库，清空旧 UnihanCharacter 102,998 行／UnihanProperty 1,555,629 行与 unihan17 数据集行；`manage.py migrate` + `manage.py import_reference_library` 七包校验与导入全过（45.6s），unihan18 ready，样例「学」=U+5B66 xué、版本字段全 18.0.0；既有导入器 unchanged 幂等。
+- 基线重导：48 表 76 分片 2,520,689 行（旧 2,596,608）；差异仅 hanzi_unihancharacter ×2、hanzi_unihanproperty ×4、reference_library 四表与 manifest，其余表不变。`verify_base_data` 通过（digest `a6e99396…`）。
+- 全量测试 403 项通过（skipped 14）。文档同步：system-design、foundation-data-plan、reference-library-implementation；Makefile 新增 unihan18-package 目标。
+- 未运行 PostgreSQL 专项或另一台物理 Mac 验证；01c 归档包与历史审计文档（reference-audit-2026-11-02 等）按历史证据保留不改写。
