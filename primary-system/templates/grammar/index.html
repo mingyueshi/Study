@@ -40,6 +40,7 @@
         <p class="grammar-wrong"><i>✗ 易错</i>{{ lesson.misconception.wrong }}</p>
         <p class="grammar-right"><i>✓ 正确</i>{{ lesson.misconception.right }}</p>
       </div>
+      {% if lesson.id == 'gr2-3' %}<p class="grammar-see-also"><a class="button small ghost" href="{% url 'plurals' %}">去「不规则复数」专题看全表 →</a></p>{% endif %}
       <div class="grammar-quiz" data-grammar-quiz data-answer="{{ lesson.quiz.answer }}" data-lesson="{{ lesson.id }}">
         <p class="grammar-quiz-q">练一练 · {{ lesson.quiz.question }}</p>
         <div class="grammar-quiz-options">

@@ -1,0 +1,63 @@
+/* 不规则复数专题：浏览网格 + 「给单数选复数」练习。配色沿用 platform.css 变量。 */
+
+/* ── hero ─────────────────────────────────────────────────────────────── */
+.plural-hero { display: flex; align-items: center; gap: 32px; padding: 34px 0 8px; }
+.plural-hero-copy { flex: 1; }
+.plural-hero-tag { margin: 10px 0 0; max-width: 36em; color: var(--muted); font-size: 20px; }
+.plural-hero-stats { display: flex; gap: 26px; margin: 18px 0 0; font-size: 19px; }
+.plural-hero-stats b { font-size: 30px; color: var(--green); }
+.plural-hero-demo { display: flex; align-items: center; gap: 14px; }
+.plural-demo-card { display: grid; place-items: center; gap: 2px; width: 118px; height: 92px; border-radius: 20px; background: var(--card-tint); color: var(--card-accent); font-size: 30px; font-weight: 800; transform: rotate(-5deg); }
+.plural-demo-card i { font-style: normal; font-size: 14px; font-weight: 700; color: #a4732060; }
+.plural-demo-card.right { background: #e2f0dc; color: #2c7a4b; transform: rotate(4deg); }
+.plural-demo-card.right i { color: #2c7a4b60; }
+.plural-demo-arrow { font-size: 30px; color: var(--muted); }
+
+/* ── 练一练 ───────────────────────────────────────────────────────────── */
+.plural-practice { max-width: 760px; margin: 26px 0 34px; padding: 24px 28px; border: 2px dashed #b9d3e8; border-radius: 22px; background: #f4f9fd; scroll-margin-top: 24px; }
+.plural-practice-title { margin: 0 0 12px; color: var(--green); font-weight: 800; font-size: 17px; }
+.plural-word { display: flex; align-items: baseline; gap: 12px; margin: 0; font-size: 30px; font-weight: 800; }
+.plural-word span { font-size: 22px; font-weight: 700; color: var(--ink); }
+.plural-word-zh { margin: 2px 0 16px; color: var(--muted); font-size: 16px; }
+.plural-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; }
+.plural-option { padding: 14px 18px; border: 2px solid var(--line); border-radius: 16px; background: var(--white); font-size: 21px; font-weight: 750; cursor: pointer; }
+.plural-option:hover { border-color: #4d96ff; background: #eef4fb; }
+.plural-option:disabled { cursor: default; opacity: .68; }
+.plural-option.right { border-color: #2c7a4b; background: #e2f0dc; opacity: 1; }
+.plural-option.wrong { border-color: #b4483a; background: #fde8e4; }
+.plural-score { margin: 14px 0 0; color: var(--muted); font-size: 17px; }
+.plural-score b { color: var(--green); font-size: 22px; }
+.plural-actions { margin-top: 10px; }
+
+/* ── 浏览网格 ─────────────────────────────────────────────────────────── */
+.plural-shell { min-width: 0; }
+.plural-toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-bottom: 22px; }
+.plural-search { flex: 1 1 260px; max-width: 380px; padding: 11px 16px; border: 1px solid var(--line); border-radius: 14px; background: var(--white); }
+.plural-buckets { display: flex; flex-wrap: wrap; gap: 8px; }
+.plural-bucket { padding: 8px 14px; border: 1px solid var(--line); border-radius: 999px; background: var(--white); font-size: 15px; font-weight: 700; cursor: pointer; }
+.plural-bucket i { margin-left: 6px; color: var(--muted); font-style: normal; font-variant-numeric: tabular-nums; }
+.plural-bucket.on { background: var(--green); border-color: var(--green); color: #fff; }
+.plural-bucket.on i { color: #ffffffb0; }
+
+.plural-group { margin-bottom: 30px; }
+.plural-group[hidden] { display: none; }
+.plural-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr)); gap: 14px; }
+.plural-card { position: relative; padding: 16px 18px; border: 1px solid var(--line); border-top: 4px solid #4d96ff; border-radius: 18px; background: var(--white); box-shadow: 0 3px 0 #233e3704; }
+.plural-tier { position: absolute; top: 10px; right: 12px; padding: 1px 10px; border-radius: 999px; background: #f0e4c3; color: #655638; font-size: 12px; font-weight: 800; }
+.plural-pair { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px; margin: 0; font-size: 25px; font-weight: 800; }
+.plural-singular { color: var(--ink); }
+.plural-arrow { color: #4d96ff; font-size: 20px; }
+.plural-plural { color: #2c7a4b; }
+.plural-zh { display: flex; align-items: center; gap: 8px; margin: 6px 0 0; color: var(--muted); font-size: 16px; }
+.plural-note { margin: 8px 0 0; padding-top: 8px; border-top: 1px dashed var(--line); color: var(--muted); font-size: 14px; line-height: 1.7; }
+.plural-note-foot { margin-top: 10px; color: var(--muted); font-size: 15px; }
+
+@media (max-width: 720px) {
+  .plural-hero { flex-direction: column; align-items: flex-start; }
+  .plural-hero-demo { display: none; }
+  .plural-word { font-size: 26px; }
+}
+@media print {
+  .plural-practice, .plural-toolbar, .say-chip, .plural-actions { display: none !important; }
+  .plural-card { break-inside: avoid; box-shadow: none; }
+}

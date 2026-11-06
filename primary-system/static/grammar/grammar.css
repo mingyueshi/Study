@@ -47,6 +47,8 @@
 .grammar-right { background: #e2f0dc; }
 .grammar-right i { color: #2c7a4b; }
 
+.grammar-see-also { margin: 12px 0 0; }
+
 /* ── 巩固题 ────────────────────────────────────────────────────────────── */
 .grammar-quiz { margin-top: 16px; padding: 16px 18px; border: 2px dashed #b9d3e8; border-radius: 16px; background: #f4f9fd; }
 .grammar-quiz-q { margin: 0 0 12px; font-weight: 750; font-size: 18px; }

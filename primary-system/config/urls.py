@@ -40,6 +40,7 @@ urlpatterns = [
     path('writing/', include('writing.urls')),
     path('questionbank/', include('questionbank.urls')),
     path('grammar/', include('grammar.urls')),
+    path('plurals/', include('plurals.urls')),
     path('accounts/profile/', accounts_views.profile, name='profile'),
     path('accounts/register/', accounts_views.register, name='register'),
     path('accounts/login/', auth_views.LoginView.as_view(template_name='accounts/login.html', authentication_form=LearnerAuthenticationForm), name='login'),

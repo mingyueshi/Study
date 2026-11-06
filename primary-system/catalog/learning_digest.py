@@ -148,8 +148,24 @@ def _questionbank_card(user, _overview):
     }
 
 
+def _plurals_card(user, _overview):
+    from plurals.records import learning_summary, recent
+
+    summary = learning_summary(user)
+    return {
+        'key': 'plurals', 'name': '不规则复数', 'icon': 'plurals', 'color': 'english',
+        'url': reverse('plurals'),
+        'url_label': '去继续练 →' if summary['asked'] else '去练一题 →',
+        'headlines': [(summary['asked'], '练习题数'), (summary['correct'], '答对')],
+        'week': _week_text(summary['week'], '练了 '),
+        'footnote': '',
+        'latest': _latest(recent(user, 1)),
+    }
+
+
 AREA_CARDS = (_textbook_card, _words_card, _chain_card, _writing_card,
-              _idioms_card, _feihualing_card, _polyphone_card, _questionbank_card)
+              _idioms_card, _feihualing_card, _polyphone_card, _questionbank_card,
+              _plurals_card)
 
 
 def merged_recent(user, limit=10):
@@ -158,11 +174,12 @@ def merged_recent(user, limit=10):
     from idioms.records import recent as idioms_recent
     from learning.services import textbook_recent
     from poetry.records import recent as poetry_recent
+    from plurals.records import recent as plurals_recent
     from questionbank.records import recent as questionbank_recent
 
     rows = textbook_recent(user, limit) + recent_activity(user, limit)
     rows += idioms_recent(user, limit) + poetry_recent(user, limit) + hanzi_recent(user, limit)
-    rows += questionbank_recent(user, limit)
+    rows += questionbank_recent(user, limit) + plurals_recent(user, limit)
     rows.sort(key=lambda row: row['when'], reverse=True)
     return rows[:limit]
 

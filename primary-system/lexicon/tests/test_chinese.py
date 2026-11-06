@@ -299,7 +299,9 @@ class ChineseTests(PlatformFixture):
             with CaptureQueriesContext(connection) as queries:
                 response = self.client.get(url)
             self.assertEqual(response.status_code, 200)
-            self.assertLess(len(queries), 55, (url, len(queries)))
+            # 上界防的是随内容行数增长的 N+1；每张领域卡是常数约 4 条，
+            # 领域卡增加（如新增不规则复数卡）时按张数上调。
+            self.assertLess(len(queries), 64, (url, len(queries)))
 
     def test_chinese_source_disable_change_missing_and_rollback_never_fall_back(self):
         from lexicon.services import activate_release
