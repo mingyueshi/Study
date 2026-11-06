@@ -1,0 +1,672 @@
+{
+ "schema_version": 1,
+ "batch_id": "cn-foundation-20261107-14",
+ "reviewer": "AI: ZCode 主控（独立逐条复核）",
+ "entries": [
+  {
+   "key": "cn16-001",
+   "selection": {
+    "domain": "target",
+    "reference_id": "313",
+    "object_id": "4b092a73-5c2a-4aad-9b4e-76bdb310c3a2",
+    "label": "left",
+    "positions": [
+     {
+      "scenario": "u-directions",
+      "order": 0
+     }
+    ],
+    "sense_id": "f1cbc211-3fa3-4107-98e3-b3d3e5998155",
+    "pronunciation_id": "f7d070a5-0055-4f73-abd7-1b1901d5d38d",
+    "evidence_id": "c726ff6c-d797-4419-8da8-485e93ff805b",
+    "snapshot": {
+     "sense_revision": 0,
+     "definition": "",
+     "pronunciation_revision": 0,
+     "pronunciation": ""
+    },
+    "source_code": "primary-words",
+    "source_key": "left",
+    "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+    "release_version": "scenario-0ad041fb6eac6918338efda4",
+    "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+    "lexical_hash": "9e5863bb49826e1c033b1319cba5b02856183e32b8198db1d837ff85dbcfd2dc",
+    "raw_hash": "59830c3e4ea09dcc861a78812b06f6e1e4f8ec98f93e8db5645191109cc075a1",
+    "gloss_language": "zh",
+    "source_definition": "n./adj. 左；左边的",
+    "source_pronunciation": "/left/",
+    "pronunciation_reviewed": true,
+    "legacy_chinese": "n./adj. 左；左边的",
+    "chinese_version_id": null,
+    "presentation_revision": 0,
+    "selection_revision": null,
+    "status": "来源一致",
+    "category": "已有中文未经本轮核对",
+    "binding_key": "[\"f1cbc211-3fa3-4107-98e3-b3d3e5998155\", \"f7d070a5-0055-4f73-abd7-1b1901d5d38d\", \"c726ff6c-d797-4419-8da8-485e93ff805b\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+   },
+   "text": "n./adj. 左；左边的",
+   "example": "",
+   "kind": "teaching",
+   "origin": "source",
+   "generation_tool": "",
+   "author_label": "既有教学来源；ZCode 整理",
+   "learning_effect": "same",
+   "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+   "review_status": "approved"
+  },
+  {
+   "key": "cn16-002",
+   "selection": {
+    "domain": "target",
+    "reference_id": "314",
+    "object_id": "fd018eb8-08cb-4f2a-9159-3b6b4df080b1",
+    "label": "right",
+    "positions": [
+     {
+      "scenario": "u-directions",
+      "order": 0
+     }
+    ],
+    "sense_id": "8d486481-2cea-4512-a398-ae8ae20cedfe",
+    "pronunciation_id": "a2a94227-2c1e-4794-8e01-ba27b35558a8",
+    "evidence_id": "fea6a2c8-2cf1-491c-af1b-49a3f9e06a53",
+    "snapshot": {
+     "sense_revision": 0,
+     "definition": "",
+     "pronunciation_revision": 0,
+     "pronunciation": ""
+    },
+    "source_code": "primary-words",
+    "source_key": "right",
+    "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+    "release_version": "scenario-0ad041fb6eac6918338efda4",
+    "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+    "lexical_hash": "c61c5f56309b32b86004a0ffbdabfee641f8c8d49986d4c12d9fc0e83141d674",
+    "raw_hash": "8da1318ab8d15909d43358587c8c469fa5e3b51cd7eb8a1114d58c7548e54d10",
+    "gloss_language": "zh",
+    "source_definition": "n./adj. 右；右边的；正确的",
+    "source_pronunciation": "/raɪt/",
+    "pronunciation_reviewed": true,
+    "legacy_chinese": "n./adj. 右；右边的；正确的",
+    "chinese_version_id": null,
+    "presentation_revision": 0,
+    "selection_revision": null,
+    "status": "来源一致",
+    "category": "已有中文未经本轮核对",
+    "binding_key": "[\"8d486481-2cea-4512-a398-ae8ae20cedfe\", \"a2a94227-2c1e-4794-8e01-ba27b35558a8\", \"fea6a2c8-2cf1-491c-af1b-49a3f9e06a53\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+   },
+   "text": "n./adj. 右；右边的；正确的",
+   "example": "",
+   "kind": "teaching",
+   "origin": "source",
+   "generation_tool": "",
+   "author_label": "既有教学来源；ZCode 整理",
+   "learning_effect": "same",
+   "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+   "review_status": "approved"
+  },
+  {
+   "key": "cn16-003",
+   "selection": {
+    "domain": "target",
+    "reference_id": "315",
+    "object_id": "7ac4e9b4-888d-48c9-b3ac-0db41cb884de",
+    "label": "turn",
+    "positions": [
+     {
+      "scenario": "u-directions",
+      "order": 0
+     }
+    ],
+    "sense_id": "1eb6172e-c727-4479-9fed-6f2cff685109",
+    "pronunciation_id": "a8a18b07-8250-4487-a93d-4f2b082e3546",
+    "evidence_id": "f9132a6e-f83e-47e7-abaa-31b1e4549bfc",
+    "snapshot": {
+     "sense_revision": 0,
+     "definition": "",
+     "pronunciation_revision": 0,
+     "pronunciation": ""
+    },
+    "source_code": "primary-words",
+    "source_key": "turn",
+    "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+    "release_version": "scenario-0ad041fb6eac6918338efda4",
+    "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+    "lexical_hash": "28f2243780195e1a93f04894ae9c052c0e3451031eb92d3f7c3ea7473b5f0969",
+    "raw_hash": "68eacac1a4df9ef627382eaf265334b67b6851ece58ea5f6420f336f538bbf9d",
+    "gloss_language": "zh",
+    "source_definition": "v. 转弯；转向",
+    "source_pronunciation": "/tɜːn/",
+    "pronunciation_reviewed": true,
+    "legacy_chinese": "v. 转弯；转向",
+    "chinese_version_id": null,
+    "presentation_revision": 0,
+    "selection_revision": null,
+    "status": "来源一致",
+    "category": "已有中文未经本轮核对",
+    "binding_key": "[\"1eb6172e-c727-4479-9fed-6f2cff685109\", \"a8a18b07-8250-4487-a93d-4f2b082e3546\", \"f9132a6e-f83e-47e7-abaa-31b1e4549bfc\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+   },
+   "text": "v. 转弯；转向",
+   "example": "",
+   "kind": "teaching",
+   "origin": "source",
+   "generation_tool": "",
+   "author_label": "既有教学来源；ZCode 整理",
+   "learning_effect": "same",
+   "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+   "review_status": "approved"
+  },
+  {
+   "key": "cn16-004",
+   "selection": {
+    "domain": "target",
+    "reference_id": "316",
+    "object_id": "acc952e1-c835-498f-bf0c-31b5eb1fdc44",
+    "label": "straight",
+    "positions": [
+     {
+      "scenario": "u-directions",
+      "order": 0
+     }
+    ],
+    "sense_id": "0aa47cb8-6f02-4d73-8ded-0275cb4ed66e",
+    "pronunciation_id": "7cef50e8-68ba-4977-8dea-e31218f2fcff",
+    "evidence_id": "7e3e0df8-b8bf-43de-94e9-cc2136201424",
+    "snapshot": {
+     "sense_revision": 0,
+     "definition": "",
+     "pronunciation_revision": 0,
+     "pronunciation": ""
+    },
+    "source_code": "primary-words",
+    "source_key": "straight",
+    "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+    "release_version": "scenario-0ad041fb6eac6918338efda4",
+    "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+    "lexical_hash": "c5501bf7fcf3450cca089802826186040cacd87835a86b64bd10234ceade1d4f",
+    "raw_hash": "8c7f7bcb25091e06390943043d1d826c63b229d5998244ffe4613c7b20f1135e",
+    "gloss_language": "zh",
+    "source_definition": "adv. 笔直地；直的",
+    "source_pronunciation": "/streɪt/",
+    "pronunciation_reviewed": true,
+    "legacy_chinese": "adv. 笔直地；直的",
+    "chinese_version_id": null,
+    "presentation_revision": 0,
+    "selection_revision": null,
+    "status": "来源一致",
+    "category": "已有中文未经本轮核对",
+    "binding_key": "[\"0aa47cb8-6f02-4d73-8ded-0275cb4ed66e\", \"7cef50e8-68ba-4977-8dea-e31218f2fcff\", \"7e3e0df8-b8bf-43de-94e9-cc2136201424\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+   },
+   "text": "adv. 笔直地；直的",
+   "example": "",
+   "kind": "teaching",
+   "origin": "source",
+   "generation_tool": "",
+   "author_label": "既有教学来源；ZCode 整理",
+   "learning_effect": "same",
+   "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+   "review_status": "approved"
+  },
+  {
+   "key": "cn16-005",
+   "selection": {
+    "domain": "target",
+    "reference_id": "317",
+    "object_id": "5eacea36-3422-4aa8-837c-0b38bf3de09e",
+    "label": "crossing",
+    "positions": [
+     {
+      "scenario": "u-directions",
+      "order": 0
+     }
+    ],
+    "sense_id": "e875404b-b13b-4271-94ba-610f203d3ebe",
+    "pronunciation_id": "2e73f38d-c866-40de-9b71-c720cd91fa59",
+    "evidence_id": "44ac5aec-fb75-419c-9684-ff405300c1f4",
+    "snapshot": {
+     "sense_revision": 0,
+     "definition": "",
+     "pronunciation_revision": 0,
+     "pronunciation": ""
+    },
+    "source_code": "primary-words",
+    "source_key": "crossing",
+    "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+    "release_version": "scenario-0ad041fb6eac6918338efda4",
+    "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+    "lexical_hash": "c896ea329e5e55d1e5e02c750205c8b1d3c1336027eb11313243e825ed6e7b96",
+    "raw_hash": "9d9afe90bc6c2b35270dbf796735f05122db7846b1586c961632305ca0c9e256",
+    "gloss_language": "zh",
+    "source_definition": "n. 十字路口；人行横道",
+    "source_pronunciation": "/ˈkrɒsɪŋ/",
+    "pronunciation_reviewed": true,
+    "legacy_chinese": "n. 十字路口；人行横道",
+    "chinese_version_id": null,
+    "presentation_revision": 0,
+    "selection_revision": null,
+    "status": "来源一致",
+    "category": "已有中文未经本轮核对",
+    "binding_key": "[\"e875404b-b13b-4271-94ba-610f203d3ebe\", \"2e73f38d-c866-40de-9b71-c720cd91fa59\", \"44ac5aec-fb75-419c-9684-ff405300c1f4\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+   },
+   "text": "n. 十字路口；人行横道",
+   "example": "",
+   "kind": "teaching",
+   "origin": "source",
+   "generation_tool": "",
+   "author_label": "既有教学来源；ZCode 整理",
+   "learning_effect": "same",
+   "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+   "review_status": "approved"
+  },
+  {
+   "key": "cn16-006",
+   "selection": {
+    "domain": "target",
+    "reference_id": "318",
+    "object_id": "4ccd2a1b-1f66-46b2-843c-97a2d80a8923",
+    "label": "near",
+    "positions": [
+     {
+      "scenario": "u-directions",
+      "order": 0
+     }
+    ],
+    "sense_id": "6f33402a-5325-46de-9c98-ee4bfe1ffd19",
+    "pronunciation_id": "d2851b21-7695-46b5-812f-e4e9e0b7881a",
+    "evidence_id": "f1fe520c-cd8a-4b83-9705-294862a373a7",
+    "snapshot": {
+     "sense_revision": 0,
+     "definition": "",
+     "pronunciation_revision": 0,
+     "pronunciation": ""
+    },
+    "source_code": "primary-words",
+    "source_key": "near",
+    "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+    "release_version": "scenario-0ad041fb6eac6918338efda4",
+    "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+    "lexical_hash": "cfdc63f43493d862f2948816b44d73aa9eb294f7eab238cad09db28ac9bc0857",
+    "raw_hash": "c5b3f7b8f9849c3d8b5296913f1a78609e07ece11c8a0bba508b744bd4799ce4",
+    "gloss_language": "zh",
+    "source_definition": "prep. 在……附近",
+    "source_pronunciation": "/nɪə/",
+    "pronunciation_reviewed": true,
+    "legacy_chinese": "prep. 在……附近",
+    "chinese_version_id": null,
+    "presentation_revision": 0,
+    "selection_revision": null,
+    "status": "来源一致",
+    "category": "已有中文未经本轮核对",
+    "binding_key": "[\"6f33402a-5325-46de-9c98-ee4bfe1ffd19\", \"d2851b21-7695-46b5-812f-e4e9e0b7881a\", \"f1fe520c-cd8a-4b83-9705-294862a373a7\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+   },
+   "text": "prep. 在……附近",
+   "example": "",
+   "kind": "teaching",
+   "origin": "source",
+   "generation_tool": "",
+   "author_label": "既有教学来源；ZCode 整理",
+   "learning_effect": "same",
+   "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+   "review_status": "approved"
+  },
+  {
+   "key": "cn16-007",
+   "selection": {
+    "domain": "target",
+    "reference_id": "319",
+    "object_id": "fc653f17-c64e-4494-a350-44d1370f1155",
+    "label": "behind",
+    "positions": [
+     {
+      "scenario": "u-directions",
+      "order": 0
+     }
+    ],
+    "sense_id": "cd8ddd4b-9d2b-4c91-8a14-3c461f00f806",
+    "pronunciation_id": "f934613d-8929-49d8-a6ba-1a27ec8b4a8c",
+    "evidence_id": "099c6320-d9f7-46db-aefc-7d05a73b0d83",
+    "snapshot": {
+     "sense_revision": 0,
+     "definition": "",
+     "pronunciation_revision": 0,
+     "pronunciation": ""
+    },
+    "source_code": "primary-words",
+    "source_key": "behind",
+    "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+    "release_version": "scenario-0ad041fb6eac6918338efda4",
+    "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+    "lexical_hash": "9f4670b53ea8926e0c5466391e1a520ea3384f3015e8653efb9b45e66a10e49c",
+    "raw_hash": "e98e9ea47d9e03855ce7954acb71c73fa6c9f5d0b12bdb63574aa55b6bc02fad",
+    "gloss_language": "zh",
+    "source_definition": "prep. 在……后面",
+    "source_pronunciation": "/bɪˈhaɪnd/",
+    "pronunciation_reviewed": true,
+    "legacy_chinese": "prep. 在……后面",
+    "chinese_version_id": null,
+    "presentation_revision": 0,
+    "selection_revision": null,
+    "status": "来源一致",
+    "category": "已有中文未经本轮核对",
+    "binding_key": "[\"cd8ddd4b-9d2b-4c91-8a14-3c461f00f806\", \"f934613d-8929-49d8-a6ba-1a27ec8b4a8c\", \"099c6320-d9f7-46db-aefc-7d05a73b0d83\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+   },
+   "text": "prep. 在……后面",
+   "example": "",
+   "kind": "teaching",
+   "origin": "source",
+   "generation_tool": "",
+   "author_label": "既有教学来源；ZCode 整理",
+   "learning_effect": "same",
+   "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+   "review_status": "approved"
+  },
+  {
+   "key": "cn16-008",
+   "selection": {
+    "domain": "target",
+    "reference_id": "320",
+    "object_id": "9dde2941-6b8c-4b0a-a32a-40446de4b730",
+    "label": "in front of",
+    "positions": [
+     {
+      "scenario": "u-directions",
+      "order": 0
+     }
+    ],
+    "sense_id": "6f699936-00f3-4d50-b3d1-24bf9ca1e532",
+    "pronunciation_id": "1411a933-2ef3-4135-baeb-295e9793b73c",
+    "evidence_id": "27cef42d-b508-4c3a-9174-0a6f02f3c811",
+    "snapshot": {
+     "sense_revision": 0,
+     "definition": "",
+     "pronunciation_revision": 0,
+     "pronunciation": ""
+    },
+    "source_code": "primary-words",
+    "source_key": "in front of",
+    "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+    "release_version": "scenario-0ad041fb6eac6918338efda4",
+    "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+    "lexical_hash": "4dc5adfa871d83101b8e3bf29d78fee584cb5092f3fb8de184ef0522d347e2cb",
+    "raw_hash": "a00a56e1a5157ece7154bc346138ae4b96128fd10486c2c5bc7b00304389c064",
+    "gloss_language": "zh",
+    "source_definition": "prep. 在……前面",
+    "source_pronunciation": "/ɪn frʌnt əv/",
+    "pronunciation_reviewed": true,
+    "legacy_chinese": "prep. 在……前面",
+    "chinese_version_id": null,
+    "presentation_revision": 0,
+    "selection_revision": null,
+    "status": "来源一致",
+    "category": "已有中文未经本轮核对",
+    "binding_key": "[\"6f699936-00f3-4d50-b3d1-24bf9ca1e532\", \"1411a933-2ef3-4135-baeb-295e9793b73c\", \"27cef42d-b508-4c3a-9174-0a6f02f3c811\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+   },
+   "text": "prep. 在……前面",
+   "example": "",
+   "kind": "teaching",
+   "origin": "source",
+   "generation_tool": "",
+   "author_label": "既有教学来源；ZCode 整理",
+   "learning_effect": "same",
+   "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+   "review_status": "approved"
+  },
+  {
+   "key": "cn16-009",
+   "selection": {
+    "domain": "target",
+    "reference_id": "321",
+    "object_id": "9155edd2-29b0-4e00-ba1c-0c711b7ff567",
+    "label": "between",
+    "positions": [
+     {
+      "scenario": "u-directions",
+      "order": 0
+     }
+    ],
+    "sense_id": "680faed6-6c4c-4376-ac67-ff9bb32956d7",
+    "pronunciation_id": "a14c0a85-6b61-4197-816c-c71ab6dafa88",
+    "evidence_id": "d188a9ba-0a35-40fd-a031-5c72c4ad027e",
+    "snapshot": {
+     "sense_revision": 0,
+     "definition": "",
+     "pronunciation_revision": 0,
+     "pronunciation": ""
+    },
+    "source_code": "primary-words",
+    "source_key": "between",
+    "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+    "release_version": "scenario-0ad041fb6eac6918338efda4",
+    "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+    "lexical_hash": "8bdbfedc35def121c3c83751dad3361e8e347d28d9775b5b4db74c92135bc22a",
+    "raw_hash": "da8801e6fc3c7e39a59ff3f2a6fd1aea6f2927b38dfcde0eb501e46aee896a85",
+    "gloss_language": "zh",
+    "source_definition": "prep. 在……之间",
+    "source_pronunciation": "/bɪˈtwiːn/",
+    "pronunciation_reviewed": true,
+    "legacy_chinese": "prep. 在……之间",
+    "chinese_version_id": null,
+    "presentation_revision": 0,
+    "selection_revision": null,
+    "status": "来源一致",
+    "category": "已有中文未经本轮核对",
+    "binding_key": "[\"680faed6-6c4c-4376-ac67-ff9bb32956d7\", \"a14c0a85-6b61-4197-816c-c71ab6dafa88\", \"d188a9ba-0a35-40fd-a031-5c72c4ad027e\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+   },
+   "text": "prep. 在……之间",
+   "example": "",
+   "kind": "teaching",
+   "origin": "source",
+   "generation_tool": "",
+   "author_label": "既有教学来源；ZCode 整理",
+   "learning_effect": "same",
+   "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+   "review_status": "approved"
+  },
+  {
+   "key": "cn16-010",
+   "selection": {
+    "domain": "target",
+    "reference_id": "322",
+    "object_id": "b3f00b2e-768d-4ad9-9c6f-3c4cdae85a70",
+    "label": "next to",
+    "positions": [
+     {
+      "scenario": "u-directions",
+      "order": 0
+     }
+    ],
+    "sense_id": "4c674c79-137e-40a1-b975-4dc8d2116e37",
+    "pronunciation_id": "498a273e-d1a3-44db-bc20-ff34e5c5a00f",
+    "evidence_id": "31071d90-e944-476d-b2b8-75fe4f704ba3",
+    "snapshot": {
+     "sense_revision": 0,
+     "definition": "",
+     "pronunciation_revision": 0,
+     "pronunciation": ""
+    },
+    "source_code": "primary-words",
+    "source_key": "next to",
+    "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+    "release_version": "scenario-0ad041fb6eac6918338efda4",
+    "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+    "lexical_hash": "d6c8b9e0d3b3cbff26afa31040d31cc48d9fc7378a18129edeb8b7ca546626fb",
+    "raw_hash": "271452dbac4176d424c03281848bd83587211d1a5ad7df2f430e9bcfb73a092b",
+    "gloss_language": "zh",
+    "source_definition": "prep. 紧挨着；在……旁边",
+    "source_pronunciation": "/nekst tə/",
+    "pronunciation_reviewed": true,
+    "legacy_chinese": "prep. 紧挨着；在……旁边",
+    "chinese_version_id": null,
+    "presentation_revision": 0,
+    "selection_revision": null,
+    "status": "来源一致",
+    "category": "已有中文未经本轮核对",
+    "binding_key": "[\"4c674c79-137e-40a1-b975-4dc8d2116e37\", \"498a273e-d1a3-44db-bc20-ff34e5c5a00f\", \"31071d90-e944-476d-b2b8-75fe4f704ba3\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+   },
+   "text": "prep. 紧挨着；在……旁边",
+   "example": "",
+   "kind": "teaching",
+   "origin": "source",
+   "generation_tool": "",
+   "author_label": "既有教学来源；ZCode 整理",
+   "learning_effect": "same",
+   "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+   "review_status": "approved"
+  },
+  {
+   "key": "cn16-011",
+   "selection": {
+    "domain": "target",
+    "reference_id": "323",
+    "object_id": "6aa22914-821b-4b76-a45b-2f0b9bef9a0b",
+    "label": "map",
+    "positions": [
+     {
+      "scenario": "u-directions",
+      "order": 0
+     }
+    ],
+    "sense_id": "6ebc534c-6e18-48e9-acf8-2ce96de9766b",
+    "pronunciation_id": "9ffd5a60-a666-4bf5-8d2a-b9ae2ad20781",
+    "evidence_id": "5c9953a4-09b9-4205-b1b0-b8a34c0fc428",
+    "snapshot": {
+     "sense_revision": 0,
+     "definition": "",
+     "pronunciation_revision": 0,
+     "pronunciation": ""
+    },
+    "source_code": "primary-words",
+    "source_key": "map",
+    "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+    "release_version": "scenario-0ad041fb6eac6918338efda4",
+    "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+    "lexical_hash": "7ed6d14dc0fa82eda35c269e3dcbe01b345618f994c88adf69d2ab8578d73aea",
+    "raw_hash": "34e8834e1ae810a68d9a0b0497eea40ea6fe62209935dd85ec824860919ccdbc",
+    "gloss_language": "zh",
+    "source_definition": "n. 地图",
+    "source_pronunciation": "/mæp/",
+    "pronunciation_reviewed": true,
+    "legacy_chinese": "n. 地图",
+    "chinese_version_id": null,
+    "presentation_revision": 0,
+    "selection_revision": null,
+    "status": "来源一致",
+    "category": "已有中文未经本轮核对",
+    "binding_key": "[\"6ebc534c-6e18-48e9-acf8-2ce96de9766b\", \"9ffd5a60-a666-4bf5-8d2a-b9ae2ad20781\", \"5c9953a4-09b9-4205-b1b0-b8a34c0fc428\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+   },
+   "text": "n. 地图",
+   "example": "",
+   "kind": "teaching",
+   "origin": "source",
+   "generation_tool": "",
+   "author_label": "既有教学来源；ZCode 整理",
+   "learning_effect": "same",
+   "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+   "review_status": "approved"
+  },
+  {
+   "key": "cn16-012",
+   "selection": {
+    "domain": "target",
+    "reference_id": "324",
+    "object_id": "f5265537-0080-4fa1-8d98-4ca00b216645",
+    "label": "ask",
+    "positions": [
+     {
+      "scenario": "u-directions",
+      "order": 0
+     }
+    ],
+    "sense_id": "708e37c5-877d-4a75-8f11-770f4a3113b7",
+    "pronunciation_id": "3a5d1e0f-ad5b-4900-9d3f-b2b0800de37b",
+    "evidence_id": "6f4dacc5-01ba-493a-89e3-c1b292ea27da",
+    "snapshot": {
+     "sense_revision": 0,
+     "definition": "",
+     "pronunciation_revision": 0,
+     "pronunciation": ""
+    },
+    "source_code": "primary-words",
+    "source_key": "ask",
+    "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+    "release_version": "scenario-0ad041fb6eac6918338efda4",
+    "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+    "lexical_hash": "5d66bdb02dafb6e24bd42dc6c51bb5f9da79dd5fc0e9934059bb00fe44dafc01",
+    "raw_hash": "bae12805c1dee91b25070ee9fa3c64ae07a41031e64831fcf27190b2e3b2de71",
+    "gloss_language": "zh",
+    "source_definition": "v. 问；询问",
+    "source_pronunciation": "/ɑːsk/",
+    "pronunciation_reviewed": true,
+    "legacy_chinese": "v. 问；询问",
+    "chinese_version_id": null,
+    "presentation_revision": 0,
+    "selection_revision": null,
+    "status": "来源一致",
+    "category": "已有中文未经本轮核对",
+    "binding_key": "[\"708e37c5-877d-4a75-8f11-770f4a3113b7\", \"3a5d1e0f-ad5b-4900-9d3f-b2b0800de37b\", \"6f4dacc5-01ba-493a-89e3-c1b292ea27da\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+   },
+   "text": "v. 问；询问",
+   "example": "",
+   "kind": "teaching",
+   "origin": "source",
+   "generation_tool": "",
+   "author_label": "既有教学来源；ZCode 整理",
+   "learning_effect": "same",
+   "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+   "review_status": "approved"
+  },
+  {
+   "key": "cn16-013",
+   "selection": {
+    "domain": "target",
+    "reference_id": "6",
+    "object_id": "3041ff8f-70c0-4dfe-8e38-1833114fcf71",
+    "label": "light",
+    "positions": [
+     {
+      "scenario": "u-classroom",
+      "order": 0
+     }
+    ],
+    "sense_id": "4b80f242-b64e-41a8-a09c-44e10672aaa2",
+    "pronunciation_id": "7f96f215-7223-4b9a-bebd-1ba5c3a1f9d6",
+    "evidence_id": "314dbb60-eadf-455d-8c50-795c2b296b2c",
+    "snapshot": {
+     "sense_revision": 0,
+     "definition": "",
+     "pronunciation_revision": 0,
+     "pronunciation": ""
+    },
+    "source_code": "primary-words",
+    "source_key": "light",
+    "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+    "release_version": "scenario-0ad041fb6eac6918338efda4",
+    "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+    "lexical_hash": "b29742ad30d10ffc95ed9494aaba87cb40bb1631f381f8c2dfbb24de3e24b368",
+    "raw_hash": "53bce8ddd7294c70ff1f19bdad8b6214c2f48a8a786d356aafe4e7d48f940592",
+    "gloss_language": "zh",
+    "source_definition": "n. 灯；adj. 轻的",
+    "source_pronunciation": "/laɪt/",
+    "pronunciation_reviewed": true,
+    "legacy_chinese": "n. 灯；adj. 轻的",
+    "chinese_version_id": null,
+    "presentation_revision": 0,
+    "selection_revision": null,
+    "status": "来源一致",
+    "category": "已有中文未经本轮核对",
+    "binding_key": "[\"4b80f242-b64e-41a8-a09c-44e10672aaa2\", \"7f96f215-7223-4b9a-bebd-1ba5c3a1f9d6\", \"314dbb60-eadf-455d-8c50-795c2b296b2c\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+   },
+   "text": "n. 灯；adj. 轻的",
+   "example": "",
+   "kind": "teaching",
+   "origin": "source",
+   "generation_tool": "",
+   "author_label": "既有教学来源；ZCode 整理",
+   "learning_effect": "same",
+   "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+   "review_status": "approved"
+  }
+ ],
+ "blocked": [],
+ "review_status": "approved"
+}

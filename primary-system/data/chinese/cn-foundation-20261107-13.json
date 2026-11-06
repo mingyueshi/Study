@@ -1,0 +1,825 @@
+{
+ "schema_version": 1,
+ "batch_id": "cn-foundation-20261107-13",
+ "reviewer": "AI: ZCode 主控（独立逐条复核）",
+ "entries": [
+  {
+   "key": "cn15-001",
+   "selection": {
+    "domain": "target",
+    "reference_id": "100",
+    "object_id": "a4da3d37-9f95-4fd9-aa38-3d5ff785b1bc",
+    "label": "hot",
+    "positions": [
+     {
+      "scenario": "u-seasons",
+      "order": 0
+     }
+    ],
+    "sense_id": "4fec220a-b2f0-4674-b890-3088921cb90b",
+    "pronunciation_id": "29855135-0428-4e68-bc82-66f24867d6d2",
+    "evidence_id": "7bde8cab-2090-4c00-8483-fe53a4d7a93e",
+    "snapshot": {
+     "sense_revision": 0,
+     "definition": "",
+     "pronunciation_revision": 0,
+     "pronunciation": ""
+    },
+    "source_code": "primary-words",
+    "source_key": "hot",
+    "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+    "release_version": "scenario-0ad041fb6eac6918338efda4",
+    "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+    "lexical_hash": "ebca3c8a7611dfbc0c681a36180683545667900b884ce089c490a78f823c44f7",
+    "raw_hash": "5731b97855f8c6b950c349b05124446a465fe8fca29fda76ad7b4f8f9a67189e",
+    "gloss_language": "zh",
+    "source_definition": "adj. 炎热的",
+    "source_pronunciation": "/hɒt/",
+    "pronunciation_reviewed": true,
+    "legacy_chinese": "adj. 炎热的",
+    "chinese_version_id": null,
+    "presentation_revision": 0,
+    "selection_revision": null,
+    "status": "来源一致",
+    "category": "已有中文未经本轮核对",
+    "binding_key": "[\"4fec220a-b2f0-4674-b890-3088921cb90b\", \"29855135-0428-4e68-bc82-66f24867d6d2\", \"7bde8cab-2090-4c00-8483-fe53a4d7a93e\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+   },
+   "text": "adj. 炎热的",
+   "example": "",
+   "kind": "teaching",
+   "origin": "source",
+   "generation_tool": "",
+   "author_label": "既有教学来源；ZCode 整理",
+   "learning_effect": "same",
+   "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+   "review_status": "approved"
+  },
+  {
+   "key": "cn15-002",
+   "selection": {
+    "domain": "target",
+    "reference_id": "101",
+    "object_id": "fc7b1bd3-6175-4650-9d6e-806189b67be2",
+    "label": "cold",
+    "positions": [
+     {
+      "scenario": "u-seasons",
+      "order": 0
+     }
+    ],
+    "sense_id": "41bfa530-907b-4568-ba32-b7e6fbb570a8",
+    "pronunciation_id": "8659367c-2820-4d14-8156-bf71eca307a9",
+    "evidence_id": "923ed1d5-8de2-4b7f-bcd1-e635f6665498",
+    "snapshot": {
+     "sense_revision": 0,
+     "definition": "",
+     "pronunciation_revision": 0,
+     "pronunciation": ""
+    },
+    "source_code": "primary-words",
+    "source_key": "cold",
+    "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+    "release_version": "scenario-0ad041fb6eac6918338efda4",
+    "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+    "lexical_hash": "4fd301dbdd1e666993a666bd4510115927d9a394db5d1ba39eccb5888a3078e8",
+    "raw_hash": "86262e9d3430b1389dda9a75ebaf973403bae0e918ba347959d148371aef49cd",
+    "gloss_language": "zh",
+    "source_definition": "adj. 寒冷的",
+    "source_pronunciation": "/kəʊld/",
+    "pronunciation_reviewed": true,
+    "legacy_chinese": "adj. 寒冷的",
+    "chinese_version_id": null,
+    "presentation_revision": 0,
+    "selection_revision": null,
+    "status": "来源一致",
+    "category": "已有中文未经本轮核对",
+    "binding_key": "[\"41bfa530-907b-4568-ba32-b7e6fbb570a8\", \"8659367c-2820-4d14-8156-bf71eca307a9\", \"923ed1d5-8de2-4b7f-bcd1-e635f6665498\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+   },
+   "text": "adj. 寒冷的",
+   "example": "",
+   "kind": "teaching",
+   "origin": "source",
+   "generation_tool": "",
+   "author_label": "既有教学来源；ZCode 整理",
+   "learning_effect": "same",
+   "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+   "review_status": "approved"
+  },
+  {
+   "key": "cn15-003",
+   "selection": {
+    "domain": "target",
+    "reference_id": "102",
+    "object_id": "212e54ed-9a85-4632-8162-db70fa57ef34",
+    "label": "warm",
+    "positions": [
+     {
+      "scenario": "u-seasons",
+      "order": 0
+     }
+    ],
+    "sense_id": "91f1af74-39e7-4dbd-b7b3-ce9b7e36134e",
+    "pronunciation_id": "fe662934-fbc3-4f20-a690-93f9a9c3352d",
+    "evidence_id": "7292bc9a-2eca-4a71-bad7-cd5132f9c30a",
+    "snapshot": {
+     "sense_revision": 0,
+     "definition": "",
+     "pronunciation_revision": 0,
+     "pronunciation": ""
+    },
+    "source_code": "primary-words",
+    "source_key": "warm",
+    "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+    "release_version": "scenario-0ad041fb6eac6918338efda4",
+    "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+    "lexical_hash": "e2d32af05ec1aeb14650611b2015ba810cdb9bcd07d5ac417d58b629d1df3c55",
+    "raw_hash": "8831e6be8740b2a5bcdf4d68173d967043c79f3766cbbc20e53548efd3076fad",
+    "gloss_language": "zh",
+    "source_definition": "adj. 温暖的",
+    "source_pronunciation": "/wɔːm/",
+    "pronunciation_reviewed": true,
+    "legacy_chinese": "adj. 温暖的",
+    "chinese_version_id": null,
+    "presentation_revision": 0,
+    "selection_revision": null,
+    "status": "来源一致",
+    "category": "已有中文未经本轮核对",
+    "binding_key": "[\"91f1af74-39e7-4dbd-b7b3-ce9b7e36134e\", \"fe662934-fbc3-4f20-a690-93f9a9c3352d\", \"7292bc9a-2eca-4a71-bad7-cd5132f9c30a\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+   },
+   "text": "adj. 温暖的",
+   "example": "",
+   "kind": "teaching",
+   "origin": "source",
+   "generation_tool": "",
+   "author_label": "既有教学来源；ZCode 整理",
+   "learning_effect": "same",
+   "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+   "review_status": "approved"
+  },
+  {
+   "key": "cn15-004",
+   "selection": {
+    "domain": "target",
+    "reference_id": "103",
+    "object_id": "be5005cc-27c1-475e-9cd5-9ae68da89f3c",
+    "label": "cool",
+    "positions": [
+     {
+      "scenario": "u-seasons",
+      "order": 0
+     }
+    ],
+    "sense_id": "7122e24e-ffe1-4f25-9072-4e3f1ee02128",
+    "pronunciation_id": "3fb3de2a-4934-4b7c-8f5e-17d9a568e990",
+    "evidence_id": "b6db396c-7963-482d-91ac-10269dbb5751",
+    "snapshot": {
+     "sense_revision": 0,
+     "definition": "",
+     "pronunciation_revision": 0,
+     "pronunciation": ""
+    },
+    "source_code": "primary-words",
+    "source_key": "cool",
+    "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+    "release_version": "scenario-0ad041fb6eac6918338efda4",
+    "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+    "lexical_hash": "70b1174c09b38125402ebd0d93ae9165da0ab1031ebabdb4dd5d65432e80547d",
+    "raw_hash": "a91064c6c55afaa415c964e967725bad4c3a2a233dfa9abb371968d7561c4b23",
+    "gloss_language": "zh",
+    "source_definition": "adj. 凉爽的；酷",
+    "source_pronunciation": "/kuːl/",
+    "pronunciation_reviewed": true,
+    "legacy_chinese": "adj. 凉爽的；酷",
+    "chinese_version_id": null,
+    "presentation_revision": 0,
+    "selection_revision": null,
+    "status": "来源一致",
+    "category": "已有中文未经本轮核对",
+    "binding_key": "[\"7122e24e-ffe1-4f25-9072-4e3f1ee02128\", \"3fb3de2a-4934-4b7c-8f5e-17d9a568e990\", \"b6db396c-7963-482d-91ac-10269dbb5751\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+   },
+   "text": "adj. 凉爽的；酷",
+   "example": "",
+   "kind": "teaching",
+   "origin": "source",
+   "generation_tool": "",
+   "author_label": "既有教学来源；ZCode 整理",
+   "learning_effect": "same",
+   "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+   "review_status": "approved"
+  },
+  {
+   "key": "cn15-005",
+   "selection": {
+    "domain": "target",
+    "reference_id": "104",
+    "object_id": "2b3ee940-847a-40fa-a8c4-71e7840c5629",
+    "label": "kite",
+    "positions": [
+     {
+      "scenario": "u-seasons",
+      "order": 0
+     }
+    ],
+    "sense_id": "003b6124-c64e-45cc-93f5-854f11cb007c",
+    "pronunciation_id": "0f2e1028-3048-4140-a41c-5f411d1838cf",
+    "evidence_id": "e9c0e8f6-c16a-4db5-b611-0e9590e49029",
+    "snapshot": {
+     "sense_revision": 0,
+     "definition": "",
+     "pronunciation_revision": 0,
+     "pronunciation": ""
+    },
+    "source_code": "primary-words",
+    "source_key": "kite",
+    "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+    "release_version": "scenario-0ad041fb6eac6918338efda4",
+    "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+    "lexical_hash": "35216878fa8e31c48a3b490d6f8e9a9ef1762388bd4fabfa7c4de90e15453471",
+    "raw_hash": "31f776e92f382dbe0978d011cd3bb4b288e611ebd11633609c981c9343b6a5b9",
+    "gloss_language": "zh",
+    "source_definition": "n. 风筝",
+    "source_pronunciation": "/kaɪt/",
+    "pronunciation_reviewed": true,
+    "legacy_chinese": "n. 风筝",
+    "chinese_version_id": null,
+    "presentation_revision": 0,
+    "selection_revision": null,
+    "status": "来源一致",
+    "category": "已有中文未经本轮核对",
+    "binding_key": "[\"003b6124-c64e-45cc-93f5-854f11cb007c\", \"0f2e1028-3048-4140-a41c-5f411d1838cf\", \"e9c0e8f6-c16a-4db5-b611-0e9590e49029\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+   },
+   "text": "n. 风筝",
+   "example": "",
+   "kind": "teaching",
+   "origin": "source",
+   "generation_tool": "",
+   "author_label": "既有教学来源；ZCode 整理",
+   "learning_effect": "same",
+   "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+   "review_status": "approved"
+  },
+  {
+   "key": "cn15-006",
+   "selection": {
+    "domain": "target",
+    "reference_id": "89",
+    "object_id": "4524dcf0-bfe1-4311-bba0-2e9b63c9a0a6",
+    "label": "season",
+    "positions": [
+     {
+      "scenario": "u-seasons",
+      "order": 0
+     }
+    ],
+    "sense_id": "1be58296-4a2d-4ca6-a15f-1766517de4ef",
+    "pronunciation_id": "b9306319-7fd2-4490-8801-81a13f18aa8a",
+    "evidence_id": "4b8074cb-b8eb-4cc7-baee-cc3027214ff2",
+    "snapshot": {
+     "sense_revision": 0,
+     "definition": "",
+     "pronunciation_revision": 0,
+     "pronunciation": ""
+    },
+    "source_code": "primary-words",
+    "source_key": "season",
+    "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+    "release_version": "scenario-0ad041fb6eac6918338efda4",
+    "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+    "lexical_hash": "9523ccbefec30d106f569d4b53cfbf1dc8f2421dedddd8e316716032d9efa1a7",
+    "raw_hash": "8e28ef33d258aff8f69d4577f09d12e11231f59e25b5856da265beb7549faaa4",
+    "gloss_language": "zh",
+    "source_definition": "n. 季节",
+    "source_pronunciation": "/ˈsiːzn/",
+    "pronunciation_reviewed": true,
+    "legacy_chinese": "n. 季节",
+    "chinese_version_id": null,
+    "presentation_revision": 0,
+    "selection_revision": null,
+    "status": "来源一致",
+    "category": "已有中文未经本轮核对",
+    "binding_key": "[\"1be58296-4a2d-4ca6-a15f-1766517de4ef\", \"b9306319-7fd2-4490-8801-81a13f18aa8a\", \"4b8074cb-b8eb-4cc7-baee-cc3027214ff2\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+   },
+   "text": "n. 季节",
+   "example": "",
+   "kind": "teaching",
+   "origin": "source",
+   "generation_tool": "",
+   "author_label": "既有教学来源；ZCode 整理",
+   "learning_effect": "same",
+   "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+   "review_status": "approved"
+  },
+  {
+   "key": "cn15-007",
+   "selection": {
+    "domain": "target",
+    "reference_id": "90",
+    "object_id": "aee3a0f2-853f-47d7-b4ee-f669b37f6066",
+    "label": "spring",
+    "positions": [
+     {
+      "scenario": "u-seasons",
+      "order": 0
+     }
+    ],
+    "sense_id": "cdcbdbc9-c237-4945-ae77-dfcba735b9ee",
+    "pronunciation_id": "4f25e68f-b654-4788-a3a8-6fb45304599b",
+    "evidence_id": "b1cdd003-86ac-4f3a-b9e2-b8312a83b518",
+    "snapshot": {
+     "sense_revision": 0,
+     "definition": "",
+     "pronunciation_revision": 0,
+     "pronunciation": ""
+    },
+    "source_code": "primary-words",
+    "source_key": "spring",
+    "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+    "release_version": "scenario-0ad041fb6eac6918338efda4",
+    "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+    "lexical_hash": "ab1d74a0bf85e0b81bd273e6f07dc4ca9bf03d9d8509c1e6315122b2372fdb96",
+    "raw_hash": "7bbef0a0e8217a0451d07ab3fbe61e9260cb3fe2bd046c05f0f5156a28219503",
+    "gloss_language": "zh",
+    "source_definition": "n. 春天",
+    "source_pronunciation": "/sprɪŋ/",
+    "pronunciation_reviewed": true,
+    "legacy_chinese": "n. 春天",
+    "chinese_version_id": null,
+    "presentation_revision": 0,
+    "selection_revision": null,
+    "status": "来源一致",
+    "category": "已有中文未经本轮核对",
+    "binding_key": "[\"cdcbdbc9-c237-4945-ae77-dfcba735b9ee\", \"4f25e68f-b654-4788-a3a8-6fb45304599b\", \"b1cdd003-86ac-4f3a-b9e2-b8312a83b518\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+   },
+   "text": "n. 春天",
+   "example": "",
+   "kind": "teaching",
+   "origin": "source",
+   "generation_tool": "",
+   "author_label": "既有教学来源；ZCode 整理",
+   "learning_effect": "same",
+   "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+   "review_status": "approved"
+  },
+  {
+   "key": "cn15-008",
+   "selection": {
+    "domain": "target",
+    "reference_id": "91",
+    "object_id": "ebe7e156-29b8-4975-a60d-c1fe6ae5957d",
+    "label": "summer",
+    "positions": [
+     {
+      "scenario": "u-seasons",
+      "order": 0
+     }
+    ],
+    "sense_id": "78320a77-7668-4b98-a822-db4a9f75c801",
+    "pronunciation_id": "8b6d6bd9-e1aa-4a6c-841c-1ede87aeb743",
+    "evidence_id": "b754391e-c4ad-4678-8950-95751089f023",
+    "snapshot": {
+     "sense_revision": 0,
+     "definition": "",
+     "pronunciation_revision": 0,
+     "pronunciation": ""
+    },
+    "source_code": "primary-words",
+    "source_key": "summer",
+    "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+    "release_version": "scenario-0ad041fb6eac6918338efda4",
+    "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+    "lexical_hash": "464143feb9172b1f2d57643fee1ce5f3935a775a219bc43384b80c4ebb386f49",
+    "raw_hash": "0eca32198287d3d7429dc329d31779caae5c4709f0ed03fbae8ed8590056963f",
+    "gloss_language": "zh",
+    "source_definition": "n. 夏天",
+    "source_pronunciation": "/ˈsʌmə/",
+    "pronunciation_reviewed": true,
+    "legacy_chinese": "n. 夏天",
+    "chinese_version_id": null,
+    "presentation_revision": 0,
+    "selection_revision": null,
+    "status": "来源一致",
+    "category": "已有中文未经本轮核对",
+    "binding_key": "[\"78320a77-7668-4b98-a822-db4a9f75c801\", \"8b6d6bd9-e1aa-4a6c-841c-1ede87aeb743\", \"b754391e-c4ad-4678-8950-95751089f023\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+   },
+   "text": "n. 夏天",
+   "example": "",
+   "kind": "teaching",
+   "origin": "source",
+   "generation_tool": "",
+   "author_label": "既有教学来源；ZCode 整理",
+   "learning_effect": "same",
+   "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+   "review_status": "approved"
+  },
+  {
+   "key": "cn15-009",
+   "selection": {
+    "domain": "target",
+    "reference_id": "92",
+    "object_id": "c2b5a34f-0dc0-4736-ae8c-1ac4bdd1b6d8",
+    "label": "autumn",
+    "positions": [
+     {
+      "scenario": "u-seasons",
+      "order": 0
+     }
+    ],
+    "sense_id": "3dc0ccef-d7f2-4f8e-8976-adfc8dad6fe0",
+    "pronunciation_id": "1174560d-d912-47d3-bcf2-daa5b78a530b",
+    "evidence_id": "195d2b4e-0f00-46ab-8591-c891bdb0fa21",
+    "snapshot": {
+     "sense_revision": 0,
+     "definition": "",
+     "pronunciation_revision": 0,
+     "pronunciation": ""
+    },
+    "source_code": "primary-words",
+    "source_key": "autumn",
+    "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+    "release_version": "scenario-0ad041fb6eac6918338efda4",
+    "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+    "lexical_hash": "728ec979a9e4112316e390828ee76be22d50905b78c69135b1a5a0280e26b835",
+    "raw_hash": "e51cf648874f65afee92f9cb67e837a6f6091143169e4a5b4e0aebe18a52b569",
+    "gloss_language": "zh",
+    "source_definition": "n. 秋天",
+    "source_pronunciation": "/ˈɔːtəm/",
+    "pronunciation_reviewed": true,
+    "legacy_chinese": "n. 秋天",
+    "chinese_version_id": null,
+    "presentation_revision": 0,
+    "selection_revision": null,
+    "status": "来源一致",
+    "category": "已有中文未经本轮核对",
+    "binding_key": "[\"3dc0ccef-d7f2-4f8e-8976-adfc8dad6fe0\", \"1174560d-d912-47d3-bcf2-daa5b78a530b\", \"195d2b4e-0f00-46ab-8591-c891bdb0fa21\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+   },
+   "text": "n. 秋天",
+   "example": "",
+   "kind": "teaching",
+   "origin": "source",
+   "generation_tool": "",
+   "author_label": "既有教学来源；ZCode 整理",
+   "learning_effect": "same",
+   "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+   "review_status": "approved"
+  },
+  {
+   "key": "cn15-010",
+   "selection": {
+    "domain": "target",
+    "reference_id": "93",
+    "object_id": "b20a6bc3-fff8-4f2b-9725-8cf99fffa669",
+    "label": "winter",
+    "positions": [
+     {
+      "scenario": "u-seasons",
+      "order": 0
+     }
+    ],
+    "sense_id": "6ccabac9-7d4f-43f9-bd0d-cd8def6b977b",
+    "pronunciation_id": "34187ca7-96be-4f28-9a4e-c81cb36e8e79",
+    "evidence_id": "5462cc1a-9dac-489c-8692-0c272003b494",
+    "snapshot": {
+     "sense_revision": 0,
+     "definition": "",
+     "pronunciation_revision": 0,
+     "pronunciation": ""
+    },
+    "source_code": "primary-words",
+    "source_key": "winter",
+    "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+    "release_version": "scenario-0ad041fb6eac6918338efda4",
+    "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+    "lexical_hash": "273ccf0254b55dd534445bebba5828c6891cbf9a46c0fba045c9200c5525565f",
+    "raw_hash": "dffc43ee93d3ca9addd1668c9b55d9e56371a127af014ba20b10d9e3809ad0d8",
+    "gloss_language": "zh",
+    "source_definition": "n. 冬天",
+    "source_pronunciation": "/ˈwɪntə/",
+    "pronunciation_reviewed": true,
+    "legacy_chinese": "n. 冬天",
+    "chinese_version_id": null,
+    "presentation_revision": 0,
+    "selection_revision": null,
+    "status": "来源一致",
+    "category": "已有中文未经本轮核对",
+    "binding_key": "[\"6ccabac9-7d4f-43f9-bd0d-cd8def6b977b\", \"34187ca7-96be-4f28-9a4e-c81cb36e8e79\", \"5462cc1a-9dac-489c-8692-0c272003b494\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+   },
+   "text": "n. 冬天",
+   "example": "",
+   "kind": "teaching",
+   "origin": "source",
+   "generation_tool": "",
+   "author_label": "既有教学来源；ZCode 整理",
+   "learning_effect": "same",
+   "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+   "review_status": "approved"
+  },
+  {
+   "key": "cn15-011",
+   "selection": {
+    "domain": "target",
+    "reference_id": "94",
+    "object_id": "33e4a733-9b0c-4200-b9b9-005dde13f41f",
+    "label": "weather",
+    "positions": [
+     {
+      "scenario": "u-seasons",
+      "order": 0
+     }
+    ],
+    "sense_id": "3fad44b4-8b04-4782-8560-35991ba6909b",
+    "pronunciation_id": "26a7df5b-1a8e-438c-bc13-73a48b110377",
+    "evidence_id": "c86c6836-495c-4f6c-a760-10c19c56f1b1",
+    "snapshot": {
+     "sense_revision": 0,
+     "definition": "",
+     "pronunciation_revision": 0,
+     "pronunciation": ""
+    },
+    "source_code": "primary-words",
+    "source_key": "weather",
+    "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+    "release_version": "scenario-0ad041fb6eac6918338efda4",
+    "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+    "lexical_hash": "7a55dd03fcb2ecdeef752adbb0d54666831757d610287032acb9c855a4837ad5",
+    "raw_hash": "9511ba19de8b9e33dddb1d7af2d25a33816f3033eff5487d4c992e83cb793215",
+    "gloss_language": "zh",
+    "source_definition": "n. 天气",
+    "source_pronunciation": "/ˈweðə/",
+    "pronunciation_reviewed": true,
+    "legacy_chinese": "n. 天气",
+    "chinese_version_id": null,
+    "presentation_revision": 0,
+    "selection_revision": null,
+    "status": "来源一致",
+    "category": "已有中文未经本轮核对",
+    "binding_key": "[\"3fad44b4-8b04-4782-8560-35991ba6909b\", \"26a7df5b-1a8e-438c-bc13-73a48b110377\", \"c86c6836-495c-4f6c-a760-10c19c56f1b1\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+   },
+   "text": "n. 天气",
+   "example": "",
+   "kind": "teaching",
+   "origin": "source",
+   "generation_tool": "",
+   "author_label": "既有教学来源；ZCode 整理",
+   "learning_effect": "same",
+   "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+   "review_status": "approved"
+  },
+  {
+   "key": "cn15-012",
+   "selection": {
+    "domain": "target",
+    "reference_id": "95",
+    "object_id": "d61b6c45-52d8-485f-b5a7-6a8d7baec086",
+    "label": "sunny",
+    "positions": [
+     {
+      "scenario": "u-seasons",
+      "order": 0
+     }
+    ],
+    "sense_id": "9e7128e7-43fd-43cc-9678-9ceb3e7d693a",
+    "pronunciation_id": "aedecdd6-82af-48c2-ac7c-7ebd97b299e0",
+    "evidence_id": "cbfe086c-21e5-4088-a52b-eedba42ee393",
+    "snapshot": {
+     "sense_revision": 0,
+     "definition": "",
+     "pronunciation_revision": 0,
+     "pronunciation": ""
+    },
+    "source_code": "primary-words",
+    "source_key": "sunny",
+    "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+    "release_version": "scenario-0ad041fb6eac6918338efda4",
+    "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+    "lexical_hash": "08d6b680639e93bcf1bb1a707050a27529642dd6f0403d6600695a08a8564645",
+    "raw_hash": "87eda5ef138794accef5e7da117faa7665f855ad1af52bf22b25084187c1b4bf",
+    "gloss_language": "zh",
+    "source_definition": "adj. 晴朗的",
+    "source_pronunciation": "/ˈsʌni/",
+    "pronunciation_reviewed": true,
+    "legacy_chinese": "adj. 晴朗的",
+    "chinese_version_id": null,
+    "presentation_revision": 0,
+    "selection_revision": null,
+    "status": "来源一致",
+    "category": "已有中文未经本轮核对",
+    "binding_key": "[\"9e7128e7-43fd-43cc-9678-9ceb3e7d693a\", \"aedecdd6-82af-48c2-ac7c-7ebd97b299e0\", \"cbfe086c-21e5-4088-a52b-eedba42ee393\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+   },
+   "text": "adj. 晴朗的",
+   "example": "",
+   "kind": "teaching",
+   "origin": "source",
+   "generation_tool": "",
+   "author_label": "既有教学来源；ZCode 整理",
+   "learning_effect": "same",
+   "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+   "review_status": "approved"
+  },
+  {
+   "key": "cn15-013",
+   "selection": {
+    "domain": "target",
+    "reference_id": "96",
+    "object_id": "89bc21bc-b0cd-45e2-b20f-d76163670ae7",
+    "label": "rainy",
+    "positions": [
+     {
+      "scenario": "u-seasons",
+      "order": 0
+     }
+    ],
+    "sense_id": "87645dbd-8a23-46ba-ba2f-dce6fc3c3b11",
+    "pronunciation_id": "bec9c209-e29a-4c22-89e6-b5cdd30143a0",
+    "evidence_id": "721b6875-fac8-4a8c-8aa4-ed6a0788c8df",
+    "snapshot": {
+     "sense_revision": 0,
+     "definition": "",
+     "pronunciation_revision": 0,
+     "pronunciation": ""
+    },
+    "source_code": "primary-words",
+    "source_key": "rainy",
+    "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+    "release_version": "scenario-0ad041fb6eac6918338efda4",
+    "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+    "lexical_hash": "498b0774a1e38e4ad4b7f5d3a783fe6ad74f16a7aad6bb54ae7bcdaf65270189",
+    "raw_hash": "4c7124967942956568d18f23abf220c8728704a6c6229192db1b6f86ac11136a",
+    "gloss_language": "zh",
+    "source_definition": "adj. 下雨的",
+    "source_pronunciation": "/ˈreɪni/",
+    "pronunciation_reviewed": true,
+    "legacy_chinese": "adj. 下雨的",
+    "chinese_version_id": null,
+    "presentation_revision": 0,
+    "selection_revision": null,
+    "status": "来源一致",
+    "category": "已有中文未经本轮核对",
+    "binding_key": "[\"87645dbd-8a23-46ba-ba2f-dce6fc3c3b11\", \"bec9c209-e29a-4c22-89e6-b5cdd30143a0\", \"721b6875-fac8-4a8c-8aa4-ed6a0788c8df\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+   },
+   "text": "adj. 下雨的",
+   "example": "",
+   "kind": "teaching",
+   "origin": "source",
+   "generation_tool": "",
+   "author_label": "既有教学来源；ZCode 整理",
+   "learning_effect": "same",
+   "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+   "review_status": "approved"
+  },
+  {
+   "key": "cn15-014",
+   "selection": {
+    "domain": "target",
+    "reference_id": "97",
+    "object_id": "7da3b173-4a2b-4563-aa3b-c738a8a95ec0",
+    "label": "cloudy",
+    "positions": [
+     {
+      "scenario": "u-seasons",
+      "order": 0
+     }
+    ],
+    "sense_id": "3b0d8b8d-cb99-404b-9816-9735eecf1944",
+    "pronunciation_id": "d3e9085d-3809-407e-9cec-c0f8777befcc",
+    "evidence_id": "e132393f-5702-4cce-a090-61de3a953f52",
+    "snapshot": {
+     "sense_revision": 0,
+     "definition": "",
+     "pronunciation_revision": 0,
+     "pronunciation": ""
+    },
+    "source_code": "primary-words",
+    "source_key": "cloudy",
+    "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+    "release_version": "scenario-0ad041fb6eac6918338efda4",
+    "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+    "lexical_hash": "70af00e928dc1ca75751b2a550f35b082fbc33b3c599f974efacd572f7c2286b",
+    "raw_hash": "f1a675c3d0b5420d2e82704304849a591f66bb4e0f459a20bd573d76eec62828",
+    "gloss_language": "zh",
+    "source_definition": "adj. 多云的",
+    "source_pronunciation": "/ˈklaʊdi/",
+    "pronunciation_reviewed": true,
+    "legacy_chinese": "adj. 多云的",
+    "chinese_version_id": null,
+    "presentation_revision": 0,
+    "selection_revision": null,
+    "status": "来源一致",
+    "category": "已有中文未经本轮核对",
+    "binding_key": "[\"3b0d8b8d-cb99-404b-9816-9735eecf1944\", \"d3e9085d-3809-407e-9cec-c0f8777befcc\", \"e132393f-5702-4cce-a090-61de3a953f52\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+   },
+   "text": "adj. 多云的",
+   "example": "",
+   "kind": "teaching",
+   "origin": "source",
+   "generation_tool": "",
+   "author_label": "既有教学来源；ZCode 整理",
+   "learning_effect": "same",
+   "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+   "review_status": "approved"
+  },
+  {
+   "key": "cn15-015",
+   "selection": {
+    "domain": "target",
+    "reference_id": "98",
+    "object_id": "ac32c28a-b24e-420f-a8ae-2978cc090a2b",
+    "label": "windy",
+    "positions": [
+     {
+      "scenario": "u-seasons",
+      "order": 0
+     }
+    ],
+    "sense_id": "f008305a-ee6c-443e-852b-0f5b5a669af8",
+    "pronunciation_id": "66079481-e0ad-4916-ba2e-359e21766045",
+    "evidence_id": "7521cb58-362a-433e-a6d4-c9ef43e70112",
+    "snapshot": {
+     "sense_revision": 0,
+     "definition": "",
+     "pronunciation_revision": 0,
+     "pronunciation": ""
+    },
+    "source_code": "primary-words",
+    "source_key": "windy",
+    "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+    "release_version": "scenario-0ad041fb6eac6918338efda4",
+    "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+    "lexical_hash": "887b8de012e6a4ca38a377b9f4b6db2e0e0c18e9f3af985b9e4121cd745aecb9",
+    "raw_hash": "ce7859f0cfab146a58c3829143de05551a4be0cdf7fdcc8bb7e64bee3fe8ac91",
+    "gloss_language": "zh",
+    "source_definition": "adj. 多风的",
+    "source_pronunciation": "/ˈwɪndi/",
+    "pronunciation_reviewed": true,
+    "legacy_chinese": "adj. 多风的",
+    "chinese_version_id": null,
+    "presentation_revision": 0,
+    "selection_revision": null,
+    "status": "来源一致",
+    "category": "已有中文未经本轮核对",
+    "binding_key": "[\"f008305a-ee6c-443e-852b-0f5b5a669af8\", \"66079481-e0ad-4916-ba2e-359e21766045\", \"7521cb58-362a-433e-a6d4-c9ef43e70112\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+   },
+   "text": "adj. 多风的",
+   "example": "",
+   "kind": "teaching",
+   "origin": "source",
+   "generation_tool": "",
+   "author_label": "既有教学来源；ZCode 整理",
+   "learning_effect": "same",
+   "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+   "review_status": "approved"
+  },
+  {
+   "key": "cn15-016",
+   "selection": {
+    "domain": "target",
+    "reference_id": "99",
+    "object_id": "a39a7278-6bdc-4f43-bcf6-6c57b2bef841",
+    "label": "snowy",
+    "positions": [
+     {
+      "scenario": "u-seasons",
+      "order": 0
+     }
+    ],
+    "sense_id": "ef0ee167-73cd-4f46-b7c6-fc49e505a836",
+    "pronunciation_id": "d515ffa5-5728-489c-9290-3008b2bea605",
+    "evidence_id": "5596e838-a557-4c90-a906-1848decada10",
+    "snapshot": {
+     "sense_revision": 0,
+     "definition": "",
+     "pronunciation_revision": 0,
+     "pronunciation": ""
+    },
+    "source_code": "primary-words",
+    "source_key": "snowy",
+    "release_id": "85542bf1-7bd4-4879-b3fe-0ff9f2f9ed38",
+    "release_version": "scenario-0ad041fb6eac6918338efda4",
+    "release_checksum": "f0ce1785189eb2e65ad91a62ce68a8f265eabae2a9fdeea430d109f4e537f03d",
+    "lexical_hash": "17ba451c16f6a94be1d3409fe71015cc24953bdc3853078ea8eaa87b568880c9",
+    "raw_hash": "0c9f2bc7f1596525ea8e65cc170359d58a46bc07b8184bc1c569b7f3f7c2a056",
+    "gloss_language": "zh",
+    "source_definition": "adj. 下雪的",
+    "source_pronunciation": "/ˈsnəʊi/",
+    "pronunciation_reviewed": true,
+    "legacy_chinese": "adj. 下雪的",
+    "chinese_version_id": null,
+    "presentation_revision": 0,
+    "selection_revision": null,
+    "status": "来源一致",
+    "category": "已有中文未经本轮核对",
+    "binding_key": "[\"ef0ee167-73cd-4f46-b7c6-fc49e505a836\", \"d515ffa5-5728-489c-9290-3008b2bea605\", \"5596e838-a557-4c90-a906-1848decada10\", {\"definition\": \"\", \"pronunciation\": \"\", \"pronunciation_revision\": 0, \"sense_revision\": 0}]"
+   },
+   "text": "adj. 下雪的",
+   "example": "",
+   "kind": "teaching",
+   "origin": "source",
+   "generation_tool": "",
+   "author_label": "既有教学来源；ZCode 整理",
+   "learning_effect": "same",
+   "same_reason": "逐字保留已选固定证据的现有中文及词性／全部并列释义；不收窄、不新增义项，不改变读音或证据。",
+   "review_status": "approved"
+  }
+ ],
+ "blocked": [],
+ "review_status": "approved"
+}
