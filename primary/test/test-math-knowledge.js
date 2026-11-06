@@ -7,7 +7,7 @@
 const MKB = require('../math-data.js');
 const FIGS = require('../figures.js');
 const MFIGS = require('../math-figures.js');
-const MATH_VIDEOS = require('../math-videos.js');
+const MATH_VIDEOS = MKB.videos;
 const hasFig = id => FIGS.has(id) || MFIGS.has(id);
 
 let fails = 0;
@@ -55,6 +55,7 @@ MKB.units.forEach((u, i) => {
     check(isStr(p.fig), t + ' 缺少图示（每个知识点都要有一张图）');
     if (p.fig) check(hasFig(p.fig), t + ' 图示未注册: ' + p.fig);
     check(isStr(p.overview), t + ' 缺少概述');
+    check(isStr(p.life), t + ' 缺少「生活中的数学」情境（life）');
     check(Array.isArray(p.items) && p.items.length >= 2 && p.items.every(isStr), t + ' 知识要点至少 2 条');
     check(p.example && isStr(p.example.q) && isStr(p.example.a) && isStr(p.example.steps), t + ' 例题不完整（q/a/steps）');
     if (p.mistakes) check(p.mistakes.every(isStr), t + ' 易错提醒应为字符串');
@@ -93,10 +94,22 @@ function walk(v, path) {
 walk(MKB.units, 'units');
 walk(MKB.formulas, 'formulas');
 walk(MKB.mistakes, 'mistakes');
+walk(MKB.banners, 'banners');
+walk(MKB.videos, 'videos');
+
+/* ---------- 情境照片 ---------- */
+console.log('— 情境照片 —');
+check(MKB.banners && typeof MKB.banners === 'object', '缺少 banners（单元横幅照片映射）');
+if (MKB.banners) {
+  ['mu1', 'mcode', 'mu2', 'mu3', 'mu4', 'mu5', 'mplay', 'mu6', 'mu7', 'mu8', 'mnav', 'formulas', 'mistakes'].forEach(id => {
+    check(isStr(MKB.banners[id]) && /^images\/math\//.test(MKB.banners[id]), '横幅照片路径异常: ' + id);
+  });
+}
 
 /* ---------- 教学视频 ---------- */
 console.log('— 教学视频 —');
 check(Array.isArray(MATH_VIDEOS.list) && MATH_VIDEOS.list.length > 0, '视频清单为空');
+check(Array.isArray(MATH_VIDEOS.groups) && MATH_VIDEOS.groups.length > 0, '视频分组为空');
 const vidIds = new Set();
 MATH_VIDEOS.list.forEach(v => {
   const t = '[vid ' + (v.id || '?') + ']';

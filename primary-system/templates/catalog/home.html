@@ -9,9 +9,10 @@
 {% include 'includes/overview_cards.html' with areas=digest.areas %}
 <p class="overview-more"><a href="{% url 'my-learning' %}">查看完整学习足迹 →</a></p></section>
 {% else %}
-<section class="study-strip" aria-label="学习概况"><div><strong>{{ entry_cards|length }}</strong><span>探索方向</span></div><div><strong>{{ item_count }}</strong><span>当前可读内容</span></div><p>登录后，收藏、笔记和掌握记录会跟着你的账号走。</p></section>
+<section class="study-strip" aria-label="学习概况"><div><strong>{{ entry_total }}</strong><span>探索方向</span></div><div><strong>{{ item_count }}</strong><span>当前可读内容</span></div><p>登录后，收藏、笔记和掌握记录会跟着你的账号走。</p></section>
 {% endif %}
 <section aria-labelledby="modules-title"><div class="section-heading"><div><p class="eyebrow">跟着兴趣出发</p><h2 id="modules-title">每一科，都有新发现</h2></div><p>读课本、学成语，也可以用诗句接飞花令。</p></div>
+<nav class="area-chips" aria-label="按学科筛选专题">{% for chip in area_chips %}<a href="{{ chip.url }}" {% if chip.on %}class="on" aria-current="page"{% endif %}>{{ chip.label }}<i>{{ chip.count }}</i></a>{% endfor %}</nav>
 <div class="module-grid">{% for card in entry_cards %}<a class="module-card color-{{ card.color_code }}" href="{{ card.url }}"><img src="{% static 'icons/' %}{{ card.icon }}.svg" alt="" width="88" height="88"><span class="module-meta">{{ card.subject_label }} <span aria-hidden="true">↗</span></span><h3>{{ card.name }}</h3><p>{{ card.blurb }}</p><span class="tag">{{ card.badge }}</span></a>{% endfor %}
 </div></section>
 <section id="books" aria-labelledby="books-title"><div class="section-heading"><div><p class="eyebrow">找到适合自己的那一本</p><h2 id="books-title">我的学习书架</h2></div><p>跟着课本的进度走</p></div>{% include 'catalog/filters.html' %}

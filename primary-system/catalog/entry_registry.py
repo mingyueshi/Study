@@ -122,37 +122,37 @@ def entry_for(code):
 
 
 # 首页专题卡：不挂学习模块的玩法入口，注册顺序即展示顺序。
-# 字段：route（URL 名）、subject（卡片角标学科）、icon、color（卡片配色）、
-# name、tag（徽标）、blurb（一句话介绍）。新增专题只在此追加一行。
+# 字段：route（URL 名）、subject（卡片角标学科）、area（筛选分组键）、icon、
+# color（卡片配色）、name、tag（徽标）、blurb（一句话介绍）。新增专题只在此追加一行。
 SPECIAL_ENTRIES = (
-    {'route': 'feihualing', 'subject': '古诗词', 'icon': 'literature', 'color': 'chinese',
+    {'route': 'feihualing', 'subject': '古诗词', 'area': 'poetry', 'icon': 'literature', 'color': 'chinese',
      'name': '飞花令', 'tag': '开始练诗 →',
      'blurb': '选一个令字，想一句含这个字的诗，集满五句写成自己的诗单。'},
-    {'route': 'poetry-map', 'subject': '古诗词', 'icon': 'globe', 'color': 'chinese',
+    {'route': 'poetry-map', 'subject': '古诗词', 'area': 'poetry', 'icon': 'globe', 'color': 'chinese',
      'name': '诗词地图', 'tag': '看看这里有什么诗 →',
      'blurb': '黄鹤楼、庐山、西湖、玉门关……背过的诗按地点摆上中国地图，去哪儿玩先查查。'},
-    {'route': 'poetry-seasons', 'subject': '古诗词', 'icon': 'seasons', 'color': 'chinese',
+    {'route': 'poetry-seasons', 'subject': '古诗词', 'area': 'poetry', 'icon': 'seasons', 'color': 'chinese',
      'name': '诗词四季', 'tag': '跟着季节读诗 →',
      'blurb': '春风、夏蝉、秋月、冬雪——按季节读诗，也按思乡、送别、边塞这些心情找。'},
-    {'route': 'words-tree', 'subject': '英语', 'icon': 'tree', 'color': 'english',
+    {'route': 'words-tree', 'subject': '英语', 'area': 'english', 'icon': 'tree', 'color': 'english',
      'name': '词以类聚', 'tag': '看单词的结构 →',
      'blurb': 'WordNet 上下位把单词挂成树：动物下面有狗、猫、熊猫。从「背场景」升级到「看结构」。'},
-    {'route': 'idiom-scenes', 'subject': '语文', 'icon': 'idioms', 'color': 'chinese',
+    {'route': 'idiom-scenes', 'subject': '语文', 'area': 'chinese', 'icon': 'idioms', 'color': 'chinese',
      'name': '场景成语', 'tag': '看看生活里的成语 →',
      'blurb': '从学习、心情和身边的小事出发，读懂成语，学会在一句话里用它。'},
-    {'route': 'idiom-stories', 'subject': '语文', 'icon': 'history', 'color': 'chinese',
+    {'route': 'idiom-stories', 'subject': '语文', 'area': 'chinese', 'icon': 'history', 'color': 'chinese',
      'name': '成语典故馆', 'tag': '读成语故事 →',
      'blurb': '负荆请罪、三顾茅庐、望梅止渴——按典籍翻看有人物故事的成语，顺着人物线索把典故串起来。'},
-    {'route': 'idiom-quiz', 'subject': '语文', 'icon': 'quiz', 'color': 'chinese',
+    {'route': 'idiom-quiz', 'subject': '语文', 'area': 'chinese', 'icon': 'quiz', 'color': 'chinese',
      'name': '看释义猜成语', 'tag': '来猜一猜 →',
      'blurb': '读意思，把成语缺的字补出来。难度就是亮出的提示字数——从亮 3 个字到全部藏起来。'},
-    {'route': 'idiom-emoji', 'subject': '语文', 'icon': 'emoji', 'color': 'chinese',
+    {'route': 'idiom-emoji', 'subject': '语文', 'area': 'chinese', 'icon': 'emoji', 'color': 'chinese',
      'name': '成语表情猜猜看', 'tag': '看表情猜成语 →',
      'blurb': '看 emoji 猜成语：🐍➕🦶 是哪个？四选一点一点，猜对一个收一个。'},
-    {'route': 'idiom-pairs', 'subject': '语文', 'icon': 'pairs', 'color': 'chinese',
+    {'route': 'idiom-pairs', 'subject': '语文', 'area': 'chinese', 'icon': 'pairs', 'color': 'chinese',
      'name': '成语配对', 'tag': '连线配对 →',
      'blurb': '左边找一个成语，右边配它的近义或反义。画蛇添足配谁？雪中送炭又配谁？'},
-    {'route': 'hanzi-polyphones', 'subject': '语文', 'icon': 'polyphone', 'color': 'chinese',
+    {'route': 'hanzi-polyphones', 'subject': '语文', 'area': 'chinese', 'icon': 'polyphone', 'color': 'chinese',
      'name': '多音字', 'tag': '认一认多音字 →',
      'blurb': '乐读 yuè 还是 lè？1,010 个多音字按读音看组词，再来几道「给词选读音」。'},
 )
@@ -161,8 +161,8 @@ SPECIAL_ENTRIES = (
 def special_entries():
     """解析好的首页专题卡列表，字段与模块卡完全同形，模板一个循环渲染。"""
     return [{'url': reverse(spec['route']), 'icon': spec['icon'], 'color_code': spec['color'],
-             'subject_label': spec['subject'], 'name': spec['name'], 'blurb': spec['blurb'],
-             'badge': spec['tag']}
+             'subject_label': spec['subject'], 'area': spec['area'],
+             'name': spec['name'], 'blurb': spec['blurb'], 'badge': spec['tag']}
             for spec in SPECIAL_ENTRIES]
 
 

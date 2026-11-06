@@ -511,3 +511,15 @@ textarea { resize: vertical; line-height: 1.9; }
 .shelf-heading { display: flex; align-items: baseline; gap: 14px; margin-bottom: 14px; }
 .shelf-heading h3 { font-size: 20px; margin: 0; }
 .shelf-heading p { margin: 0; color: var(--muted); font-size: 14px; }
+
+/* 首页专题单选筛选 chips */
+.area-chips { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 24px; }
+.area-chips a { display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 6px 18px; border: 1px solid var(--line); border-radius: 999px; background: #fff; color: var(--muted); font-size: 15px; font-weight: 700; }
+.area-chips a i { font-style: normal; font-size: 13px; color: #9aa79f; }
+.area-chips a:hover { color: var(--green); border-color: var(--green); }
+.area-chips a.on { border-color: var(--green); background: #eaf4ef; color: var(--green); }
+
+/* 实景图片块：随导入内容本地存储 */
+.reading-image { margin: 0 0 26px; }
+.reading-image img { display: block; width: 100%; border: 1px solid var(--line); border-radius: 20px; }
+.reading-image figcaption { margin-top: 8px; color: var(--muted); font-size: 14px; text-align: center; }

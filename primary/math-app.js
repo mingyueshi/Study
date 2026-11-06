@@ -27,7 +27,7 @@ const TOTAL_POINTS = MKB.units.reduce((n, u) => n + u.points.length, 0);
 const MEXTRA_VIEWS = [
   { id: 'formulas', name: '公式法则', emoji: '📐', color: '#2f9bd6', banner: 'mban-formulas', count: MKB.formulas.reduce((n, f) => n + f.items.length, 0) },
   { id: 'mistakes', name: '易错诊所', emoji: '⚠️', color: '#c2557d', banner: 'mban-mistakes', count: MKB.mistakes.length },
-  { id: 'videos', name: '教学视频', emoji: '🎬', color: '#e25563', banner: 'mban-videos', count: (window.MATH_VIDEOS && MATH_VIDEOS.list.length) || 0 },
+  { id: 'videos', name: '教学视频', emoji: '🎬', color: '#e25563', banner: 'mban-videos', count: ((MKB.videos && MKB.videos.list) || []).length },
 ];
 const MEXTRA_BY_ID = {};
 MEXTRA_VIEWS.forEach(v => { MEXTRA_BY_ID[v.id] = v; });
@@ -72,21 +72,24 @@ function bannerFor(id) {
   if (!id || !window.MathFigures) return '';
   return MathFigures.bannerHTML(id);
 }
-/* 公开图库照片（Pexels），无则回退到 SVG 横幅 */
+/* 情境照片（Pexels，本地存放）：单元横幅 + 知识点「生活中的数学」，均来自 MKB */
 function unitPhoto(id) {
-  return (window.MATH_PHOTOS && MATH_PHOTOS.banner(id)) || '';
+  return (MKB.banners && MKB.banners[id]) || '';
 }
-function pointPhoto(pid) {
-  return (window.MATH_PHOTOS && MATH_PHOTOS.point(pid)) || null;
+function pointPhoto(p) {
+  if (!p || !p.life) return null;
+  return { img: 'images/math/p-' + p.id + '.jpg', life: p.life };
 }
 
-/* ---------- 公开教学视频（MATH_VIDEOS） ---------- */
+/* ---------- 公开教学视频（MKB.videos） ---------- */
 function videoById(id) {
-  return (window.MATH_VIDEOS && MATH_VIDEOS.byId(id)) || null;
+  const list = (MKB.videos && MKB.videos.list) || [];
+  return list.find(v => v.id === id) || null;
 }
 function vidEmbedUrl(id) {
   const v = videoById(id);
-  return v ? MATH_VIDEOS.embedUrl(v.bvid) : '';
+  return v ? 'https://player.bilibili.com/player.html?bvid=' + encodeURIComponent(v.bvid) +
+    '&autoplay=1&danmaku=0&high_quality=1' : '';
 }
 function durText(sec) {
   const m = Math.round(sec / 60);
@@ -184,7 +187,7 @@ function pointCard(u, p, idx) {
   if (figHTML) out.push('<div class="k-fig">' + figHTML + '</div>');
 
   /* 一句话要点：配一张「生活中的数学」情境照片 */
-  const pp = pointPhoto(p.id);
+  const pp = pointPhoto(p);
   if (pp) {
     out.push('<div class="k-overview has-photo">' +
       '<img class="ov-photo" src="' + pp.img + '" alt="" loading="lazy">' +
@@ -299,7 +302,8 @@ function vidCard(v) {
 }
 
 function renderVideos() {
-  if (!window.MATH_VIDEOS || !MATH_VIDEOS.list.length) {
+  const videos = MKB.videos || { groups: [], list: [] };
+  if (!videos.list.length) {
     return '<div class="empty">🎬 视频整理中，先去别的单元逛逛吧～</div>';
   }
   const v = MEXTRA_BY_ID.videos;
@@ -307,15 +311,15 @@ function renderVideos() {
   let s = '<div class="unit-head' + (photo ? ' has-photo' : '') + '" style="--c:' + v.color +
     (photo ? ';background-image:url(' + photo + ')' : '') + '">' +
     '<div class="unit-head-main"><div class="unit-title-row"><span class="unit-emoji">' + v.emoji + '</span><h1>教学视频</h1></div>' +
-    '<p>' + MATH_VIDEOS.list.length + ' 部好片 · 点封面在线看（需要联网），只挑适合小朋友的</p></div>' +
+    '<p>' + videos.list.length + ' 部好片 · 点封面在线看（需要联网），只挑适合小朋友的</p></div>' +
     (photo ? '' : '<div class="unit-head-fig">' + bannerFor(v.banner) + '</div>') + '</div>';
-  MATH_VIDEOS.groups.forEach(g => {
-    const items = MATH_VIDEOS.list.filter(it => it.group === g.id);
+  videos.groups.forEach(g => {
+    const items = videos.list.filter(it => it.group === g.id);
     if (!items.length) return;
     s += '<h2 class="cinema-group">' + g.emoji + ' ' + esc(g.name) + '<span>' + esc(g.desc) + '</span></h2>' +
       '<div class="vid-grid">' + items.map(vidCard).join('') + '</div>';
   });
-  s += '<ul class="cinema-print-list">' + MATH_VIDEOS.list.map(it =>
+  s += '<ul class="cinema-print-list">' + videos.list.map(it =>
     '<li>《' + esc(it.title) + '》— ' + esc(it.up) + '（' + durText(it.dur) + '，B站搜标题或 BV' + esc(it.bvid.replace(/^BV/, '')) + '）</li>').join('') + '</ul>';
   return s;
 }

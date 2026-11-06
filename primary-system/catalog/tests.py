@@ -48,6 +48,33 @@ def english_snapshot():
         }}]}
 
 
+def knowledge_snapshot():
+    """primary/knowledge-data.js 新版单一数据源的形状：课文素材 + 单元板块 + 顶层古诗文。"""
+    return {'schema_version': 1, 'modules': [{
+        'code': 'knowledge', 'source_file': 'primary/knowledge-data.js', 'sha256': 'c' * 64,
+        'data': {
+            'textbook': '人教版（统编版·新课标）语文四年级上册', 'edition': '测试修订版 · 一个单元一课',
+            'units': [{'id': 'u1', 'no': '第一单元', 'name': '自然之美', 'emoji': '🌊', 'color': '#2f9bd6',
+                       'banner': 'bn-u1', 'intro': '壮丽山河，四时之美。',
+                       'goals': ['边读边想象画面'],
+                       'book': {'title': '快乐读书吧', 'points': ['读《中国神话传说》']},
+                       'lessons': [{'id': '1', 'title': '观潮', 'tag': '精读', 'author': '赵宗成 朱明元',
+                                    'fig': 'tide', 'img': 'images/lessons/qiantang.jpg',
+                                    'overview': '课文描绘了钱塘江大潮由远而近的全过程。',
+                                    'main': ['潮来时：白浪翻滚，形成两丈多高的水墙。'],
+                                    'excerpts': ['浪潮犹如千万匹白色战马齐头并进。'],
+                                    'authorLife': '课文改写自观潮报道。',
+                                    'authorBio': '两位作者亲睹大潮后写下此篇。',
+                                    'videos': [{'bvid': 'BV1aP4y1Z7QR', 'title': '钱塘江大潮现场', 'up': '央视频',
+                                                'dur': 532, 'note': '现场实拍'}]}]}],
+            'poems': [{'title': '鹿柴', 'dynasty': '唐', 'author': '王维', 'kind': '诗',
+                       'fig': 'luzhai', 'img': 'images/poems/luzhai.jpg', 'lines': ['空山不见人，但闻人语响。'],
+                       'note': '泛指空幽的意境。', 'notes': [['但', '只']],
+                       'life': '王维，唐代诗人。', 'bio': '本诗作于辋川别业。', 'bg': '隐居辋川时所作。', 'videos': []}],
+            'sayings': [], 'polyphonic': [], 'similar': [],
+        }}]}
+
+
 class EnglishTextbookTests(PlatformFixture):
     def test_dialogue_import_and_texts_tab(self):
         report = import_snapshot(english_snapshot(), publish=True)
@@ -108,6 +135,19 @@ class CatalogTests(PlatformFixture):
         self.assertEqual(response.context['entry_cards'][-1]['name'], '多音字')
         self.assertEqual(len(response.context['entry_cards']),
                          Module.objects.filter(is_active=True).count() + len(SPECIAL_ENTRIES))
+
+    def test_area_filter_single_select(self):
+        """专题单选筛选：按 ?area= 过滤卡片，无效值回退全部，chips 保留书架筛选。"""
+        response = self.client.get('/?area=poetry')
+        self.assertContains(response, '飞花令')
+        self.assertContains(response, '诗词地图')
+        self.assertNotContains(response, '数学思维')
+        self.assertNotContains(response, '场景成语')
+        # 无效值回退全部卡片。
+        self.assertContains(self.client.get('/?area=bogus'), '数学思维')
+        self.assertContains(self.client.get('/'), '数学思维')
+        # chips 链接保留书架的其他筛选参数。
+        self.assertContains(self.client.get('/?grade=primary-4'), '?grade=primary-4&amp;area=poetry')
 
     def test_visibility_is_consistent_across_every_read_path(self):
         item_path = f'/items/{self.item.pk}/'
@@ -405,3 +445,43 @@ class ImportTests(PlatformFixture):
                 call_command('import_primary', str(file), stdout=io.StringIO())
             self.item.refresh_from_db()
             self.assertEqual(self.item.title, '认识数字')
+
+
+class KnowledgeImportTests(PlatformFixture):
+    """knowledge 新版单一数据源导入：素材字段中文化、实景图片块、单元板块不丢。"""
+
+    @classmethod
+    def setUpTestData(cls):
+        super().setUpTestData()
+        import_snapshot(knowledge_snapshot(), publish=True)
+        cls.lesson = ContentItem.objects.get(title='观潮')
+        cls.poem_card = ContentItem.objects.get(source_key='primary:knowledge:reference:poems')
+        cls.guide = ContentItem.objects.get(source_key='primary:knowledge:u1:__overview')
+
+    def test_lesson_sections_use_chinese_labels_and_image_block(self):
+        by_title = {s.get('title'): s for s in self.lesson.sections if s.get('title')}
+        self.assertEqual(self.lesson.sections[0]['type'], 'image')
+        self.assertEqual(self.lesson.sections[0]['src'], 'images/lessons/qiantang.jpg')
+        for expected in ('原文金句', '作者小传', '作者简介', '拓展视频', '内容梳理'):
+            self.assertIn(expected, by_title)
+        # 英文键名不再泄漏进任何块。
+        for section in self.lesson.sections:
+            self.assertNotIn('img：', section.get('text', ''))
+            title = str(section.get('title', ''))
+            self.assertTrue(not title or not title.isascii(), title)
+        self.assertIn('B站编号', by_title['拓展视频']['text'])
+        self.assertIn('UP 主', by_title['拓展视频']['text'])
+
+    def test_unit_guide_keeps_book_and_goals(self):
+        titles = [s.get('title') for s in self.guide.sections]
+        self.assertIn('快乐读书吧', titles)
+        self.assertIn('学习目标', titles)
+
+    def test_poem_reference_card_keeps_life_and_background(self):
+        # 顶层古诗文暂按一张汇总资料卡导入（逐首拆卡是下一步升级）；小传/背景保留，img 不泄漏。
+        text = ''.join(s.get('text', '') for s in self.poem_card.sections)
+        self.assertEqual(self.poem_card.title, '古诗文')
+        self.assertIn('鹿柴', text)
+        self.assertIn('人物小传', text)
+        self.assertIn('创作背景', text)
+        self.assertNotIn('img：', text)

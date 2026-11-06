@@ -15,6 +15,11 @@ function check(cond, msg) {
 }
 function isStr(v) { return typeof v === 'string' && v.trim().length > 0; }
 const PY_RE = /^[a-zāáǎàēéěèīíǐìōóǒòūúǔù]+$/i;
+function checkVideos(vids, t) {
+  check(Array.isArray(vids) && vids.length >= 1 && vids.every(v =>
+    v && typeof v === 'object' && isStr(v.bvid) && isStr(v.title) && isStr(v.up) &&
+    typeof v.dur === 'number' && isStr(v.note)), t + ' 视频格式应为 {bvid,title,up,dur,note}');
+}
 
 /* ---------- 总体结构 ---------- */
 console.log('— 单元与课文结构 —');
@@ -73,6 +78,10 @@ KB.units.forEach((u, i) => {
       t + ' 多音字格式应为 [字, 拼音1, 词1, 拼音2, 词2]');
     if (l.synant) check(l.synant.every(r => r.length === 3 && r.every(isStr)), t + ' 近反义词格式应为 [词, 近义, 反义]');
     if (l.recite) check(isStr(l.recite), t + ' 背诵标注应为字符串');
+    if (l.authorBio) check(isStr(l.authorLife) && isStr(l.authorBio), t + ' 作者小传应含 authorLife/authorBio 字符串');
+    if (l.excerpts) check(Array.isArray(l.excerpts) && l.excerpts.every(isStr), t + ' 原文金句应为字符串数组');
+    if (l.facts) check(Array.isArray(l.facts) && l.facts.every(isStr), t + ' 真实百科应为字符串数组');
+    if (l.videos) checkVideos(l.videos, t);
   });
 });
 check(seenLessons.size === 27, '全册应为 27 课，实际 ' + seenLessons.size);
@@ -94,6 +103,11 @@ KB.poems.forEach(p => {
   if (p.kind === '古诗') check(isStr(p.author), t + ' 古诗缺少作者');
   if (p.notes) check(p.notes.every(n => Array.isArray(n) && n.length === 2 && n.every(isStr)), t + ' 注释格式应为 [字, 释义]');
   if (p.img) check(isStr(p.img) && p.img.startsWith('images/'), t + ' 意境图应为本地 images/ 路径');
+  if (p.life) check(isStr(p.life), t + ' 小传 life 应为字符串');
+  if (p.bio) check(isStr(p.bio), t + ' 小传 bio 应为字符串');
+  if (p.bg) check(isStr(p.bg), t + ' 创作背景应为字符串');
+  if (p.kind === '文言文') check(isStr(p.bg), t + ' 文言文应有创作背景');
+  if (p.videos) checkVideos(p.videos, t);
 });
 ['暮江吟', '题西林壁', '雪梅', '凉州词', '出塞', '夏日绝句', '鹿柴', '嫦娥', '别董大'].forEach(t =>
   check(seenPoems.has(t), '缺少必背古诗《' + t + '》'));

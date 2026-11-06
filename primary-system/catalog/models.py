@@ -195,7 +195,7 @@ class ContentItem(models.Model):
     summary = models.TextField('概要', blank=True)
     body = models.TextField('正文', blank=True, help_text='纯文本；支持换行。')
     sections = models.JSONField('内容分节', default=list, blank=True,
-        help_text='v1：[{"title": "知识要点", "text": "正文"}]；v2 类型化块：{"type": "text", "title": "...", "text": "..."} 或 {"type": "figure", "fig": "图示标识", "caption": "可选说明"}。纯文本，不执行 HTML。')
+        help_text='v1：[{"title": "知识要点", "text": "正文"}]；v2 类型化块：{"type": "text", "title": "...", "text": "..."}、{"type": "figure", "fig": "图示标识", "caption": "可选说明"} 或 {"type": "image", "src": "images/...", "alt": "可选说明"}。纯文本，不执行 HTML。')
     schema_version = models.PositiveSmallIntegerField('内容结构版本', default=1, editable=False)
     status = models.CharField('发布状态', max_length=12, choices=Status.choices, default=Status.DRAFT)
     source_key = models.CharField('来源唯一标识', max_length=240, unique=True, null=True, blank=True, editable=False)
@@ -234,6 +234,14 @@ class ContentItem(models.Model):
                     raise ValidationError({'sections': 'figure 块需要不超过 120 字符的 fig 标识。'})
                 if 'caption' in section and (not isinstance(section['caption'], str) or len(section['caption']) > 200):
                     raise ValidationError({'sections': 'figure 块的 caption 必须是不超过 200 字符的字符串。'})
+            elif section['type'] == 'image':
+                # 实景照片：src 指向 static 下的本地相对路径（随导入拷贝），无网可展示。
+                if set(section) - {'type', 'src', 'alt', 'caption'} or not isinstance(section.get('src'), str) \
+                        or not section['src'].strip() or len(section['src']) > 200:
+                    raise ValidationError({'sections': 'image 块需要不超过 200 字符的 src 相对路径。'})
+                for key in ('alt', 'caption'):
+                    if key in section and (not isinstance(section[key], str) or len(section[key]) > 200):
+                        raise ValidationError({'sections': f'image 块的 {key} 必须是不超过 200 字符的字符串。'})
             else:
                 raise ValidationError({'sections': f'未知分节类型：{section["type"]}'})
         if self.pk and self.module_id and self.placements.exclude(

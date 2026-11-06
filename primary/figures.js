@@ -485,6 +485,47 @@ const Figures = (() => {
     return h;
   };
 
+  /* 田忌赛马·调兵对阵（互动演示） */
+  const demoRace = () => {
+    const rows = [
+      ['第一局', '下等马', '上等马', '输', '用最弱的马「送」掉对方最强的马'],
+      ['第二局', '上等马', '中等马', '赢', '用最强的马稳稳拿下一局'],
+      ['第三局', '中等马', '下等马', '赢', '再用中等马再下一城'],
+    ];
+    let h = '<table class="fig-table"><thead><tr><th>局次</th><th>田忌（孙膑的安排）</th><th>齐威王</th><th>结果</th></tr></thead><tbody>';
+    rows.forEach((r, i) => {
+      h += `<tr class="race-row" data-i="${i}"><td>${r[0]}</td><td><b>${r[1]}</b></td><td>${r[2]}</td><td class="race-res"></td></tr>`;
+    });
+    h += '</tbody></table>';
+    h += '<p class="fig-note race-note">点「下一步」，看孙膑怎么调兵</p>';
+    h += '<div class="fig-ctrl"><button class="fig-btn fig-primary" data-fig-act="race-step">下一步 ▶</button><button class="fig-btn" data-fig-act="race-reset">↺ 重置</button></div>';
+    return h;
+  };
+  const RACE_RES = ['输 ❌', '赢 ✅', '赢 ✅'];
+  const RACE_NOTES = [
+    '点「下一步」，看孙膑怎么调兵',
+    '第一局：用最弱的马「送」掉对方最强的马（故意输一场）',
+    '第二局：用最强的马，稳稳赢下对方的中等马',
+    '第三局：用中等马再下一城——三局两胜，反败为胜 🏆',
+  ];
+  function raceApply(fig, step) {
+    fig.querySelectorAll('.race-row').forEach(row => {
+      const i = +row.dataset.i;
+      row.style.opacity = i < step ? '1' : '0.25';
+      const res = row.querySelector('.race-res');
+      if (i < step) {
+        res.textContent = RACE_RES[i];
+        res.className = 'race-res ' + (RACE_RES[i].indexOf('赢') === 0 ? 'fig-win' : 'fig-lose');
+      } else {
+        res.textContent = '';
+        res.className = 'race-res';
+      }
+    });
+    fig.querySelector('.race-note').textContent = RACE_NOTES[step];
+    const btn = fig.querySelector('[data-fig-act="race-step"]');
+    if (btn) { btn.textContent = step >= 3 ? '✓ 全部讲完' : '下一步 ▶'; btn.disabled = step >= 3; }
+  }
+
   /* 爬山虎的脚 */
   const ivyFoot = () => {
     let s = `<svg class="fig-svg" viewBox="0 0 640 176">`;
@@ -1203,6 +1244,7 @@ const Figures = (() => {
     'tide': tide,
     'bat-radar': batRadar,
     'race-matrix': raceMatrix,
+    'demo-race': demoRace,
     'ivy-foot': ivyFoot,
     'cricket-home': cricketHome,
     'jingwei': jingwei,
@@ -1259,6 +1301,7 @@ const Figures = (() => {
     'demo-speed': '互动演示：拖动滑块，小车和路程会跟着变',
     'demo-bar': '互动演示：切换「1 格代表几人」，看直条怎么画',
     'demo-segcount': '互动演示：增减点数，弧线就是所有的线段',
+    'demo-race': '互动演示：点「下一步」，看孙膑怎么调换马的出场顺序、反败为胜',
     'pv-table': '数位顺序表：分级读数、写数的依据',
   };
 
@@ -1285,6 +1328,8 @@ const Figures = (() => {
       else if (act === 'vreset') { fig.dataset.step = 0; vApply(fig, 0); }
       else if (act === 'cube-view') cubeView(fig, b.dataset.v, b);
       else if (act === 'bar-mode') barApply(fig, b.dataset.v);
+      else if (act === 'race-step') { const s = Math.min((+fig.dataset.step || 0) + 1, 3); fig.dataset.step = s; raceApply(fig, s); }
+      else if (act === 'race-reset') { fig.dataset.step = 0; raceApply(fig, 0); }
     });
   }
 
@@ -1358,6 +1403,7 @@ const Figures = (() => {
         }
         else if (id === 'demo-vertical' && !fig.dataset.init) { fig.dataset.step = 0; vApply(fig, 0); fig.dataset.init = '1'; }
         else if (id === 'demo-bar' && !fig.dataset.init) { barApply(fig, '1'); fig.dataset.init = '1'; }
+        else if (id === 'demo-race' && !fig.dataset.init) { fig.dataset.step = 0; raceApply(fig, 0); fig.dataset.init = '1'; }
       });
     };
     const mo = new MutationObserver(muts => {

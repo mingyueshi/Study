@@ -20,8 +20,12 @@ LABELS = {
     'right': '正确说法', 'title': '标题', 'name': '名称', 'zh': '中文', 'en': '英文',
     't': '词段', 'd': '解释', 'say': '读法', 'text': '内容', 'label': '段落', 'points': '要点',
     'starts': '开头', 'ends': '结尾', 'wordGroups': '好词分类', 'unit': '所属单元', 'kind': '类别',
+    # knowledge 单一数据源（primary/knowledge-data.js）的课文与古诗文素材字段
+    'excerpts': '原文金句', 'authorLife': '作者小传', 'authorBio': '作者简介',
+    'life': '人物小传', 'bio': '人物简介', 'bg': '创作背景', 'book': '快乐读书吧',
+    'examples': '习作例文', 'videos': '拓展视频', 'bvid': 'B站编号', 'up': 'UP 主', 'dur': '时长（秒）',
 }
-SKIP = {'id', 'key', 'fig', 'banner', 'emoji', 'color', 'demo', 'interactive', 'tag'}
+SKIP = {'id', 'key', 'fig', 'img', 'banner', 'emoji', 'color', 'demo', 'interactive', 'tag'}
 
 # 导入能力由适配器决定。Module 还承载独立玩法和历史专题入口，存在并不代表有教材映射。
 TEXTBOOK_ADAPTERS = {
@@ -53,6 +57,10 @@ def item_defaults(raw, module, source, kind, title):
     if isinstance(fig, str) and fig.strip():
         # 图示块置首位，贴近 legacy 卡片的视觉顺序；说明文字由图示库内置默认图注补齐。
         sections.insert(0, {'type': 'figure', 'fig': fig.strip()})
+    img = raw.get('img')
+    if isinstance(img, str) and img.strip():
+        # 实景照片块：文件随系统本地存储（static/images/...），无网也能展示。
+        sections.insert(0, {'type': 'image', 'src': img.strip(), 'alt': title})
     return {
         'module': module, 'kind': kind, 'title': title, 'summary': summary,
         'sections': sections, 'source_file': source['source_file'],
@@ -125,7 +133,12 @@ def import_snapshot(snapshot, publish=False):
                         key_d = f'primary:{code}:{raw_unit["id"]}:{raw_d.get("id") or title_d}'
                         upsert_item(key_d, raw_d, module, source, adapter['textbook_kind'],
                                     title_d, unit, 100 + order_d, publish, report)
-                extra = {k: v for k, v in raw_unit.items() if k not in {child_key, 'id', 'name', 'no', 'intro', 'zh', 'book'} | SKIP}
+                # 单元级编排（目标/口语交际/习作/园地/快乐读书吧/例文）汇成「单元学习指南」卡；
+                # 英语单元的 book 是册次字符串，不是板块，维持排除。
+                skip_unit_keys = {child_key, 'id', 'name', 'no', 'intro', 'zh'} | SKIP
+                if not isinstance(raw_unit.get('book'), dict):
+                    skip_unit_keys.add('book')
+                extra = {k: v for k, v in raw_unit.items() if k not in skip_unit_keys}
                 if extra:
                     upsert_item(f'primary:{code}:{raw_unit["id"]}:__overview', extra, module, source,
                                 'reference', '单元学习指南', unit, 10000, publish, report)

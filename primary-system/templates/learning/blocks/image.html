@@ -1,0 +1,2 @@
+{% load static %}{% comment %}实景图片块：src 为 static 下的相对路径，图片随系统本地存储，无网正常展示{% endcomment %}
+{% if block.src %}<figure class="reading-image"><img src="{% static block.src %}" alt="{{ block.alt|default:'' }}" loading="lazy">{% if block.caption %}<figcaption>{{ block.caption }}</figcaption>{% endif %}</figure>{% endif %}

@@ -52,22 +52,50 @@ def units_of_books(books):
 def _entry_cards(request, modules, counts):
     """首页入口卡装配：模块卡与专题卡（entry_registry.special_entries）同形，
     模板一个循环渲染；新增玩法只改注册表，不动模板。"""
+    params = request.GET.copy()
+    params.pop('area', None)  # 专题筛选不跟着进模块页链接
+    query = ('?' + params.urlencode()) if params else ''
     cards = []
     for module in modules:
         entry = entry_for(module.code)
         url = reverse(entry['route_name']) if entry else reverse('module', args=[module.code])
-        if not entry and request.GET:
+        if not entry and query:
             # 普通模块页延续当前筛选（原模板 {% querystring %} 的行为）。
-            url += '?' + request.GET.urlencode()
+            url += query
         count = counts.get(module.pk, 0)
         cards.append({
             'url': url, 'icon': module.icon, 'color_code': module.subject.code,
-            'subject_label': module.subject.name, 'name': module.name,
-            'blurb': module.description,
+            'subject_label': module.subject.name, 'area': module.subject.code,
+            'name': module.name, 'blurb': module.description,
             'badge': f'{count} 本学习册' if count else (entry['tag'] if entry else '暂无匹配学习册'),
         })
     cards.extend(special_entries())
     return cards
+
+
+def _area_url(request, area):
+    """单选筛选的切换链接：替换 area 参数，保留书架的其他筛选。"""
+    params = request.GET.copy()
+    if area:
+        params['area'] = area
+    else:
+        params.pop('area', None)
+    return ('?' + params.urlencode()) if params else reverse('home')
+
+
+def _area_chips(request, cards, selected):
+    """单选筛选 chips：全部 + 按卡片出现顺序的分组计数。"""
+    chips = [{'area': '', 'label': '全部', 'count': len(cards),
+              'url': _area_url(request, ''), 'on': not selected}]
+    seen = {}
+    for card in cards:
+        key = card['area']
+        if key not in seen:
+            seen[key] = {'area': key, 'label': card['subject_label'], 'count': 0,
+                         'url': _area_url(request, key), 'on': key == selected}
+            chips.append(seen[key])
+        seen[key]['count'] += 1
+    return chips
 
 
 @never_cache
@@ -78,13 +106,20 @@ def home(request):
     counts = {}
     for book in books:
         counts[book.module_id] = counts.get(book.module_id, 0) + 1
+    all_cards = _entry_cards(request, modules, counts)
+    area = request.GET.get('area', '')
+    selected = area if area in {card['area'] for card in all_cards} else ''
     textbook_shelf = books
     digest = None
     if request.user.is_authenticated:
         from .learning_digest import learning_digest
         digest = learning_digest(request.user)
     return render(request, 'catalog/home.html', {
-        'form': form, 'entry_cards': _entry_cards(request, modules, counts), 'digest': digest,
+        'form': form,
+        'entry_cards': [card for card in all_cards if not selected or card['area'] == selected],
+        'entry_total': len(all_cards),
+        'area_chips': _area_chips(request, all_cards, selected),
+        'digest': digest,
         'textbook_shelf': textbook_shelf,
         'item_count': published_items().filter(placements__unit__in=units_of_books(books)).count(),
     }, status=200 if form.is_valid() else 400)
