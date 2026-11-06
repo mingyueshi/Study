@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>乐学堂 · 设计 Token 规范</title>
+<style>
+  /* ===== 本文档自身就使用乐学堂的设计 Token，是一份「活的示例」 ===== */
+  :root {
+    --paper: #f7faf5;
+    --ink: #233e37;
+    --muted: #586b62;
+    --green: #22634c;
+    --green-dark: #184b39;
+    --line: #dce6d9;
+    --soft: #e8f1df;
+    --white: #fffefa;
+    --orange: #b75e2c;
+    --gutter: clamp(20px, 3vw, 80px);
+    --page-width: 2240px;
+    font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", system-ui, sans-serif;
+    font-size: 18px;
+    line-height: 1.7;
+    color: var(--ink);
+    background: var(--paper);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 24px; }
+  body { margin: 0; }
+  p { margin-top: 0; line-height: 1.85; }
+  h1, h2, h3 { margin-top: 0; font-weight: 750; overflow-wrap: anywhere; }
+  h2 { font-size: clamp(26px, 2vw, 34px); line-height: 1.5; }
+  h3 { font-size: 23px; line-height: 1.5; }
+  a { color: inherit; text-decoration: none; }
+  code { padding: 2px 8px; border-radius: 8px; background: var(--soft); color: var(--green-dark);
+         font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: .88em; overflow-wrap: anywhere; }
+
+  .shell { width: min(calc(100% - var(--gutter) * 2), var(--page-width)); margin-inline: auto; padding-bottom: 88px; }
+
+  /* ===== 文档头部 ===== */
+  .doc-hero {
+    display: grid; grid-template-columns: 1.15fr 1fr; align-items: center; gap: 24px;
+    min-height: 360px; padding: clamp(32px, 3.5vw, 64px); margin-top: 28px;
+    border: 1px solid #dde8d2; border-radius: 32px;
+    background: radial-gradient(ellipse at 90% 0%, #fdf0cc 0, transparent 48%), #edf4e5;
+  }
+  .eyebrow { margin-bottom: 14px; color: var(--green); font-size: 15px; font-weight: 700; letter-spacing: .08em; }
+  .doc-hero h1 { margin-bottom: 22px; font-size: clamp(40px, 3.5vw, 64px); line-height: 1.25; letter-spacing: -.03em; }
+  .doc-hero h1 span { color: var(--green); }
+  .lead { font-size: 20px; color: var(--muted); line-height: 1.9; }
+  .hero-art { position: relative; width: min(100%, 520px); height: 300px; justify-self: center; }
+  .art-bubble { position: absolute; display: grid; place-items: center; border: 2px solid #ffffffb3;
+                border-radius: 32px; box-shadow: 0 12px 0 #263d3808; font-size: 92px; }
+  .art-book  { left: 10%; top: 45px;  width: 190px; height: 200px; background: #ffe5ae; transform: rotate(-10deg); }
+  .art-globe { left: 53%; top: 5px;   width: 158px; height: 168px; background: #d7e9ce; transform: rotate(8deg); }
+  .art-math  { left: 56%; top: 180px;  width: 124px; height: 130px; background: #dceaf6; transform: rotate(12deg); }
+
+  /* ===== 章节与卡片 ===== */
+  .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 16px 24px;
+                     margin: 56px 0 26px; }
+  .section-heading p { margin: 8px 0 0; color: var(--muted); font-size: 16px; }
+  .token-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
+  .token-card { min-width: 0; padding: 28px; border: 1px solid var(--line); border-bottom-width: 4px;
+                border-radius: 26px; background: var(--white); transition: transform .18s ease, box-shadow .18s ease; }
+  .token-card:hover { transform: translateY(-5px); box-shadow: 0 12px 26px #233e3710; }
+  .token-card > h3 { margin-bottom: 10px; }
+  .token-card > p { margin-bottom: 18px; color: var(--muted); font-size: 17px; }
+
+  /* 设计原则：要点 / 反例清单 */
+  .rule-list { margin: 0; padding: 0; list-style: none; font-size: 16px; line-height: 1.75; color: var(--muted); }
+  .rule-list + .rule-list { margin-top: 10px; }
+  .rule-list li { padding: 3px 0 3px 26px; position: relative; }
+  .rule-list li::before { position: absolute; left: 0; font-weight: 800; }
+  .do-list li::before { content: "✓"; color: var(--green); }
+  .dont-list li::before { content: "✗"; color: var(--orange); }
+
+  /* 色板 */
+  .swatch { display: flex; align-items: center; gap: 14px; padding: 12px; border: 1px solid var(--line);
+            border-radius: 16px; background: #fff9; margin-bottom: 10px; }
+  .swatch:last-child { margin-bottom: 0; }
+  .swatch > i { flex: 0 0 56px; height: 56px; border-radius: 15px; border: 1px solid #0001; }
+  .swatch > div { min-width: 0; }
+  .swatch b { display: block; font-size: 18px; }
+  .swatch code { background: none; padding: 0; color: var(--muted); }
+  .swatch small { display: block; color: var(--muted); font-size: 14px; line-height: 1.6; }
+
+  .subject-row { display: flex; align-items: center; gap: 12px; padding: 14px; border-radius: 16px; margin-bottom: 12px; border: 1px solid #fff; }
+  .subject-row:last-child { margin-bottom: 0; }
+  .subject-row > i { flex: 0 0 48px; height: 48px; border-radius: 13px; display: grid; place-items: center; font-style: normal; font-size: 24px; }
+  .subject-row b { font-size: 18px; margin-right: 10px; }
+  .subject-row small { color: #4c6252; font-size: 14px; }
+
+  /* 字号样张 */
+  .type-sample { padding: 22px 26px; border: 1px solid var(--line); border-radius: 18px; background: #fff9; margin-bottom: 14px; }
+  .type-sample:last-child { margin-bottom: 0; }
+  .type-sample .demo { margin: 0 0 8px; }
+  .type-sample code { background: none; padding: 0; color: var(--muted); }
+
+  /* 圆角样张 */
+  .radius-row { display: flex; flex-wrap: wrap; gap: 14px; }
+  .radius-demo { display: grid; place-items: center; width: 110px; height: 84px; background: var(--soft);
+                 color: var(--green-dark); font-weight: 700; font-size: 18px; border: 1px solid var(--line); }
+
+  /* 间距 */
+  .space-demo { height: 26px; background: repeating-linear-gradient(45deg, var(--soft), var(--soft) 10px, #d8e7c9 10px, #d8e7c9 20px); border-radius: 8px; }
+
+  /* 组件示例 */
+  .live-button { display: inline-flex; align-items: center; justify-content: center; gap: 20px; min-height: 56px;
+                 padding: 13px 26px; border: 2px solid var(--green); border-radius: 16px; background: var(--green);
+                 color: #fff; font-size: 18px; font-weight: 700; box-shadow: 0 3px 0 #174733; cursor: pointer; }
+  .live-button:active { box-shadow: none; transform: translateY(2px); }
+  .live-input { width: 100%; min-height: 56px; padding: 12px 15px; border: 1.5px solid #bacbb6; border-radius: 12px;
+                background: var(--white); color: var(--ink); font-size: 17px; }
+  .live-input:focus { outline: 3px solid var(--orange); outline-offset: 5px; }
+  .live-tag { display: inline-block; padding: 5px 11px; border: 1px solid #ffffffa3; border-radius: 9px;
+              background: #fff9; color: #4c6252; font-size: 14px; font-weight: 550; }
+  .focus-demo { display: inline-block; padding: 10px 18px; border-radius: 16px; font-weight: 650;
+                outline: 3px solid var(--orange); outline-offset: 5px; }
+
+  /* 断点表 */
+  table { width: 100%; border-collapse: collapse; background: var(--white); border: 1px solid var(--line);
+          border-radius: 22px; overflow: hidden; }
+  th, td { padding: 16px 22px; text-align: left; font-size: 17px; line-height: 1.7; }
+  thead th { background: var(--soft); color: var(--green-dark); font-size: 18px; }
+  tbody tr { border-top: 1px solid var(--line); }
+  tbody tr:hover { background: #eef4e7; }
+
+  /* 目录导航 */
+  .toc { display: flex; flex-wrap: wrap; gap: 12px; padding: 24px 28px; margin: 20px 0 8px;
+         border: 1px solid var(--line); border-radius: 22px; background: var(--white); }
+  .toc a { display: inline-flex; align-items: center; min-height: 48px; padding: 10px 20px; border-radius: 14px;
+           background: var(--soft); color: var(--green-dark); font-weight: 650; font-size: 17px; }
+  .toc a:hover { background: var(--green); color: #fff; }
+
+  .doc-footer { padding-block: 28px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px;
+                display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 24px; }
+
+  /* ===== 宽屏与竖屏适配（与平台断点一致，桌面优先） ===== */
+  @media (min-width: 1680px) { .token-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+  @media (max-width: 1199px) { .token-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .doc-hero { gap: 12px; padding: 36px 28px; } }
+  @media (max-width: 899px)  { .doc-hero { grid-template-columns: 1fr .8fr; } }
+  @media (max-width: 759px)  { .doc-hero { grid-template-columns: minmax(0, 1fr); min-height: 0; } .hero-art { display: none; } }
+  @media (max-width: 599px)  { .token-grid { grid-template-columns: minmax(0, 1fr); } th, td { padding: 12px 14px; font-size: 15px; } }
+</style>
+</head>
+<body>
+<main class="shell">
+
+  <!-- 头部横幅：与首页 hero 同款 -->
+  <section class="doc-hero">
+    <div>
+      <p class="eyebrow">LEXUETANG · DESIGN TOKENS · v1（2026-11）</p>
+      <h1>乐学堂<span>设计 Token</span>规范</h1>
+      <p class="lead">全站共用的颜色、字号、圆角、间距与交互约定，一页看懂。<br>
+      本文档自身就用这套 Token 渲染——你看到的样子，就是规范的样子。</p>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <div class="art-bubble art-book">📚</div>
+      <div class="art-bubble art-globe">🌍</div>
+      <div class="art-bubble art-math">✏️</div>
+    </div>
+  </section>
+
+  <nav class="toc" aria-label="目录">
+    <a href="#principles">设计原则</a>
+    <a href="#color-base">基础色板</a>
+    <a href="#color-subject">学科色系</a>
+    <a href="#color-module">功能模块色</a>
+    <a href="#type">字体字号</a>
+    <a href="#radius">圆角</a>
+    <a href="#space">间距栅格</a>
+    <a href="#components">组件样式</a>
+    <a href="#breakpoints">响应式断点</a>
+    <a href="#motion">动效与可访问</a>
+  </nav>
+
+  <!-- 1 设计原则 -->
+  <section id="principles">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">原则先行</p>
+        <h2>六条设计原则</h2>
+      </div>
+      <p>所有界面改动前先对照这一节，每条都配「这样做 ✓」与「避免 ✗」</p>
+    </div>
+    <div class="token-grid">
+      <article class="token-card">
+        <h3>🎈 活泼有童趣</h3>
+        <p>读者是小学生和家长，界面要明快、像一本精心排版的童书，而不是一个后台。</p>
+        <ul class="rule-list do-list">
+          <li>配色鲜明不沉闷，圆角卡片 + 色块 + 图标</li>
+          <li>hover 有轻微上浮、阴影等轻量动效</li>
+          <li>用 📚 ✏️ 一类装饰气泡营造氛围</li>
+        </ul>
+        <ul class="rule-list dont-list">
+          <li>灰底表格式的严肃后台排版</li>
+          <li>大面积高饱和色块刺激眼睛</li>
+        </ul>
+      </article>
+      <article class="token-card">
+        <h3>🔍 大字号易读</h3>
+        <p>正文 18px 起、行距 1.7 起，孩子和家长长时间阅读都不费力。</p>
+        <ul class="rule-list do-list">
+          <li>标题层级醒目，h1 用 clamp 随屏幕放大</li>
+          <li>拼音、读音、答案等重点内容再放大或加粗</li>
+          <li>说明文字可用 14–16px，但不做主信息</li>
+        </ul>
+        <ul class="rule-list dont-list">
+          <li>14px 以下的正文长段落</li>
+          <li>行距压到 1.5 以下省空间</li>
+        </ul>
+      </article>
+      <article class="token-card">
+        <h3>🖥 桌面端优先</h3>
+        <p>按宽屏（横屏）和竖屏的阅读体验设计布局、间距与字号。</p>
+        <ul class="rule-list do-list">
+          <li>1680px 起加栏展示更多内容</li>
+          <li>1199px 以下逐步减栏，599px 以下单列</li>
+          <li>间距用 clamp() 随视口伸缩</li>
+        </ul>
+        <ul class="rule-list dont-list">
+          <li>为移动端做专门的花哨适配</li>
+          <li>移动端布局反过来挤压桌面端体验</li>
+        </ul>
+      </article>
+      <article class="token-card">
+        <h3>🌱 长在 Token 上</h3>
+        <p>颜色、字号、圆角、间距只有一份定义，改一处全站生效。</p>
+        <ul class="rule-list do-list">
+          <li>新页面一律引用本文档列出的变量</li>
+          <li>学科色用现成的三色组（tint / line / accent）</li>
+          <li>确实需要新 Token 时，先进本文档再上代码</li>
+        </ul>
+        <ul class="rule-list dont-list">
+          <li>临时写一个「就这一次」的魔法色号</li>
+          <li>同一含义出现两种相近颜色</li>
+        </ul>
+      </article>
+      <article class="token-card">
+        <h3>🎯 焦点看得见</h3>
+        <p>孩子用键盘、家长用鼠标，都要随时知道「我现在在哪」。</p>
+        <ul class="rule-list do-list">
+          <li>键盘焦点用 3px 橙色焦点环 <code>var(--orange)</code></li>
+          <li>按钮带 3px 底部投影，按下时下沉 2px</li>
+          <li>导航、链接 hover 有底色或下划线反馈</li>
+        </ul>
+        <ul class="rule-list dont-list">
+          <li>用 <code>outline: none</code> 去掉焦点环</li>
+          <li>点击后毫无视觉反馈的死按钮</li>
+        </ul>
+      </article>
+      <article class="token-card">
+        <h3>🌊 动效要克制</h3>
+        <p>动效是调味料，只用来引导注意力，不抢内容的戏。</p>
+        <ul class="rule-list do-list">
+          <li>时长控制在 0.2–0.3 秒的轻量过渡</li>
+          <li>尊重 <code>prefers-reduced-motion</code>，用户要求减少动效就降级</li>
+          <li>打印样式里去掉装饰，只留内容</li>
+        </ul>
+        <ul class="rule-list dont-list">
+          <li>闪烁、弹跳等容易引起不适的效果</li>
+          <li>为了炫技延迟内容出现</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <!-- 2 基础色板 -->
+  <section id="color-base">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">COLOR · BASE</p>
+        <h2>基础色板（platform.css :root）</h2>
+      </div>
+      <p>全站共用，任何页面不得绕过这些变量另起炉灶</p>
+    </div>
+    <div class="token-grid">
+      <article class="token-card">
+        <h3>画布与文字</h3>
+        <div class="swatch"><i style="background:#f7faf5"></i><div><b>paper 纸面底色</b><code>--paper #f7faf5</code><small>页面背景，米白偏绿</small></div></div>
+        <div class="swatch"><i style="background:#fffefa"></i><div><b>white 卡片底</b><code>--white #fffefa</code><small>卡片、输入框背景</small></div></div>
+        <div class="swatch"><i style="background:#233e37"></i><div><b>ink 主文字</b><code>--ink #233e37</code><small>正文、标题，深墨绿</small></div></div>
+        <div class="swatch"><i style="background:#586b62"></i><div><b>muted 次要文字</b><code>--muted #586b62</code><small>说明、备注、页脚</small></div></div>
+      </article>
+      <article class="token-card">
+        <h3>品牌绿（主操作色）</h3>
+        <div class="swatch"><i style="background:#22634c"></i><div><b>green 主绿</b><code>--green #22634c</code><small>主按钮、链接、选中态</small></div></div>
+        <div class="swatch"><i style="background:#184b39"></i><div><b>green-dark 深绿</b><code>--green-dark #184b39</code><small>按钮 hover、强调文字</small></div></div>
+        <div class="swatch"><i style="background:#e8f1df"></i><div><b>soft 浅绿</b><code>--soft #e8f1df</code><small>导航 hover、标签底、序号块</small></div></div>
+        <div class="swatch"><i style="background:#dce6d9"></i><div><b>line 描边</b><code>--line #dce6d9</code><small>卡片、分隔线边框</small></div></div>
+      </article>
+      <article class="token-card">
+        <h3>点缀橙（焦点强调色）</h3>
+        <div class="swatch"><i style="background:#b75e2c"></i><div><b>orange 橙</b><code>--orange #b75e2c</code><small>键盘焦点环、需要醒目的点缀</small></div></div>
+        <p>焦点可见性全靠它：<code>outline: 3px solid var(--orange)</code>，永远不要去掉焦点环。</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- 3 学科色系 -->
+  <section id="color-subject">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">COLOR · SUBJECT</p>
+        <h2>学科卡片三色组</h2>
+      </div>
+      <p>每科一组：底色 tint / 描边 line / 强调 accent，用于模块卡与教材卡</p>
+    </div>
+    <div class="token-grid">
+      <article class="token-card" style="background:#fff0e5; border-color:#efddca">
+        <h3 style="color:#b75e2c">语文</h3>
+        <div class="subject-row" style="background:#fff9"><i style="background:#fff0e5"></i><div><b>tint</b><code>#fff0e5</code></div><div><b>line</b><code>#efddca</code></div><div><b>accent</b><code>#b75e2c</code></div></div>
+        <p>暖橙纸色，书法与阅读的温度感。</p>
+      </article>
+      <article class="token-card" style="background:#eaf1fd; border-color:#d3dff1">
+        <h3 style="color:#426eac">数学</h3>
+        <div class="subject-row" style="background:#fff9"><i style="background:#eaf1fd"></i><div><b>tint</b><code>#eaf1fd</code></div><div><b>line</b><code>#d3dff1</code></div><div><b>accent</b><code>#426eac</code></div></div>
+        <p>天空蓝，理性冷静。</p>
+      </article>
+      <article class="token-card" style="background:#f3f2d9; border-color:#e3e2bd">
+        <h3 style="color:#77712a">英语</h3>
+        <div class="subject-row" style="background:#fff9"><i style="background:#f3f2d9"></i><div><b>tint</b><code>#f3f2d9</code></div><div><b>line</b><code>#e3e2bd</code></div><div><b>accent</b><code>#77712a</code></div></div>
+        <p>柠檬黄，活泼轻快。</p>
+      </article>
+      <article class="token-card" style="background:#e8f3e8; border-color:#cfe2ce">
+        <h3 style="color:#397648">科学</h3>
+        <div class="subject-row" style="background:#fff9"><i style="background:#e8f3e8"></i><div><b>tint</b><code>#e8f3e8</code></div><div><b>line</b><code>#cfe2ce</code></div><div><b>accent</b><code>#397648</code></div></div>
+        <p>草地绿，探索自然。</p>
+      </article>
+      <article class="token-card" style="background:#e7f3f7; border-color:#cbe1e9">
+        <h3 style="color:#2d7886">地理</h3>
+        <div class="subject-row" style="background:#fff9"><i style="background:#e7f3f7"></i><div><b>tint</b><code>#e7f3f7</code></div><div><b>line</b><code>#cbe1e9</code></div><div><b>accent</b><code>#2d7886</code></div></div>
+        <p>海洋青，山川湖海。</p>
+      </article>
+      <article class="token-card" style="background:#f7ebdf; border-color:#e9d7c2">
+        <h3 style="color:#986332">历史</h3>
+        <div class="subject-row" style="background:#fff9"><i style="background:#f7ebdf"></i><div><b>tint</b><code>#f7ebdf</code></div><div><b>line</b><code>#e9d7c2</code></div><div><b>accent</b><code>#986332</code></div></div>
+        <p>陶土棕，穿越古今。</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- 4 功能模块色 -->
+  <section id="color-module">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">COLOR · MODULE</p>
+        <h2>功能模块主题色</h2>
+      </div>
+      <p>学科功能 app 有自己的主题色，在基础色板之上叠加使用</p>
+    </div>
+    <div class="token-grid">
+      <article class="token-card">
+        <h3 style="color:#157d73">⛓ 成语接龙</h3>
+        <div class="swatch"><i style="background:#157d73"></i><div><b>chain 主题青绿</b><code>--chain #157d73</code><small>对局面板、接龙按钮、主行动色</small></div></div>
+        <div class="swatch"><i style="background:#eaf7f2"></i><div><b>chain-soft 浅青</b><code>--chain-soft #eaf7f2</code><small>面板底色、hover 背景</small></div></div>
+      </article>
+      <article class="token-card">
+        <h3 style="color:#205640">📖 成语本</h3>
+        <div class="swatch"><i style="background:#205640"></i><div><b>idiom-green 墨绿</b><code>--idiom-green #205640</code><small>标题与强调，比品牌绿更深</small></div></div>
+        <div class="swatch"><i style="background:#854521"></i><div><b>idiom-orange 印章棕</b><code>--idiom-orange #854521</code><small>典故、出处等暖色点缀</small></div></div>
+        <div class="swatch"><i style="background:#fff4e1"></i><div><b>idiom-warm 暖纸</b><code>--idiom-warm #fff4e1</code><small>释义块底色</small></div></div>
+      </article>
+      <article class="token-card">
+        <h3 style="color:#73509b">✍️ 作文坊</h3>
+        <div class="swatch"><i style="background:#73509b"></i><div><b>writing 紫</b><code>#73509b</code><small>眉题、序号徽标、范文标签</small></div></div>
+        <div class="swatch"><i style="background:#f4edfd"></i><div><b>浅紫底</b><code>#f4edfd / #f1ecf8</code><small>朗读按钮、栏目标签底色</small></div></div>
+      </article>
+      <article class="token-card">
+        <h3 style="color:#609cbd">🔤 英语单词</h3>
+        <div class="swatch"><i style="background:#609cbd"></i><div><b>单元默认蓝</b><code>--c 默认 #609cbd</code><small>每个单元可有自己的 --c，缺省用这只蓝</small></div></div>
+        <div class="swatch"><i style="background:#68608d"></i><div><b>音标紫灰</b><code>#68608d</code><small>IPA 音标专用色，全站统一</small></div></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- 5 字体字号 -->
+  <section id="type">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">TYPOGRAPHY</p>
+        <h2>字体与字号</h2>
+      </div>
+      <p>大字号是硬约定：正文不小于 18px，阅读区 21px</p>
+    </div>
+    <div class="token-grid">
+      <article class="token-card">
+        <h3>字体栈</h3>
+        <p><code>"PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", system-ui, sans-serif</code></p>
+        <p>系统自带字体，不加载网络字体（离线优先）。数字统计处加 <code>font-variant-numeric: tabular-nums</code>。</p>
+      </article>
+      <article class="token-card">
+        <h3>标题层级</h3>
+        <div class="type-sample"><p class="demo" style="font-size:clamp(34px,3vw,54px);font-weight:750;margin:0">h1 大标题</p><code>clamp(34px, 3vw, 54px) · 750 · 行高 1.4</code></div>
+        <div class="type-sample"><p class="demo" style="font-size:clamp(26px,2vw,34px);font-weight:750;margin:0">h2 章节标题</p><code>clamp(26px, 2vw, 34px) · 750 · 行高 1.5</code></div>
+        <div class="type-sample"><p class="demo" style="font-size:23px;font-weight:750;margin:0">h3 卡片标题</p><code>23px · 750 · 行高 1.5</code></div>
+      </article>
+      <article class="token-card">
+        <h3>正文字号</h3>
+        <div class="type-sample"><p class="demo" style="font-size:21px;line-height:2.05;margin:0">正文（阅读区）21px，行距 2.05</p><code>.prose 21px · 2.05 · 上限 52rem</code></div>
+        <div class="type-sample"><p class="demo" style="font-size:20px;margin:0">导语 lead 20px</p><code>首页 hero 导语 · 行高 1.9</code></div>
+        <div class="type-sample"><p class="demo" style="font-size:18px;margin:0">基础正文 18px</p><code>全站 :root 基准 · 行高 1.7</code></div>
+        <div class="type-sample"><p class="demo" style="font-size:15px;color:var(--muted);margin:0">辅助说明 15px / 14px</p><code>muted 备注 · 最小 13px</code></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- 6 圆角 -->
+  <section id="radius">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">RADIUS</p>
+        <h2>圆角体系</h2>
+      </div>
+      <p>大圆角是童趣感的来源，按尺寸分档取用</p>
+    </div>
+    <div class="token-grid">
+      <article class="token-card">
+        <h3>小件 9–14px</h3>
+        <div class="radius-row">
+          <span class="radius-demo" style="border-radius:9px">9</span>
+          <span class="radius-demo" style="border-radius:12px">12</span>
+          <span class="radius-demo" style="border-radius:14px">14</span>
+        </div>
+        <p>标签 9、输入框与序号块 12、小按钮与导航项 14。</p>
+      </article>
+      <article class="token-card">
+        <h3>中件 16–22px</h3>
+        <div class="radius-row">
+          <span class="radius-demo" style="border-radius:16px">16</span>
+          <span class="radius-demo" style="border-radius:18px">18</span>
+          <span class="radius-demo" style="border-radius:22px">22</span>
+        </div>
+        <p>主按钮 16、摘要块 18、书卡与列表 20–22。</p>
+      </article>
+      <article class="token-card">
+        <h3>大件 26–32px</h3>
+        <div class="radius-row">
+          <span class="radius-demo" style="border-radius:26px">26</span>
+          <span class="radius-demo" style="border-radius:28px">28</span>
+          <span class="radius-demo" style="border-radius:32px">32</span>
+        </div>
+        <p>模块卡与阅读卡 26、登录卡 28、hero 横幅 32。最大不超过 32。</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- 7 间距栅格 -->
+  <section id="space">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">SPACING · LAYOUT</p>
+        <h2>间距与栅格</h2>
+      </div>
+      <p>页面留白跟着视口走，宽屏也不散</p>
+    </div>
+    <div class="token-grid">
+      <article class="token-card">
+        <h3>页面留白</h3>
+        <p>左右页边距 <code>--gutter: clamp(20px, 3vw, 80px)</code>，窄屏收到 18px；内容最大宽 <code>--page-width: 2240px</code>。</p>
+        <div class="space-demo" role="img" aria-label="留白示意"></div>
+      </article>
+      <article class="token-card">
+        <h3>卡片内距</h3>
+        <p>模块卡 <code>28px</code>，阅读器 <code>clamp(28px, 3vw, 56px)</code>，hero <code>clamp(32px, 3.5vw, 64px)</code>；小屏统一减到 22–24px。</p>
+      </article>
+      <article class="token-card">
+        <h3>栅格</h3>
+        <p>模块卡默认 <code>4 列</code>（≥1680px 变 6 列），书卡 <code>3 列</code>；卡间距 <code>22px</code>，区块之间 <code>56–64px</code>。</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- 8 组件 -->
+  <section id="components">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">COMPONENTS</p>
+        <h2>核心组件规格（可直接交互）</h2>
+      </div>
+      <p>下面每个样例都是活的，点击试试</p>
+    </div>
+    <div class="token-grid">
+      <article class="token-card">
+        <h3>主按钮</h3>
+        <p>最小高 56px、圆角 16px、底部 3px 实体阴影；按下会沉 2px。</p>
+        <button class="live-button">开始学习 🚀</button>
+      </article>
+      <article class="token-card">
+        <h3>输入框与标签</h3>
+        <p>最小高 56px、边框 1.5px、圆角 12px；旁边是标准标签 chip。</p>
+        <input class="live-input" placeholder="试试用 Tab 聚焦看焦点环">
+        <p><span class="live-tag">标签 chip</span></p>
+      </article>
+      <article class="token-card">
+        <h3>键盘焦点环</h3>
+        <p>全站统一 <code>outline: 3px solid var(--orange); outline-offset: 5px</code>，任何可交互元素聚焦时都长这样。</p>
+        <p><span class="focus-demo">Tab 聚焦到我 ✨</span></p>
+      </article>
+    </div>
+  </section>
+
+  <!-- 9 断点 -->
+  <section id="breakpoints">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">BREAKPOINTS</p>
+        <h2>响应式断点</h2>
+      </div>
+      <p>桌面优先，宽屏加列、窄屏收列；移动端只保底</p>
+    </div>
+    <table>
+      <thead>
+        <tr><th>断点</th><th>场景</th><th>典型变化</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>≥ 1680px</code></td><td>宽屏 / 横屏大屏</td><td>模块卡 4 列 → 6 列，书卡 3 → 4 列</td></tr>
+        <tr><td><code>1200 – 1679px</code></td><td>桌面主战场（默认）</td><td>基准布局：4 列模块卡 + 22px 间距</td></tr>
+        <tr><td><code>900 – 1199px</code></td><td>小桌面 / 平板横</td><td>模块卡 3 列，双栏侧栏收窄</td></tr>
+        <tr><td><code>760 – 899px</code></td><td>平板竖屏</td><td>hero 压缩为图文两列</td></tr>
+        <tr><td><code>600 – 759px</code></td><td>大手机</td><td>hero 变单列、隐藏装饰插画</td></tr>
+        <tr><td><code>480 – 599px</code></td><td>手机（仅保底）</td><td>模块卡单列图标左排、gutter 18px</td></tr>
+        <tr><td><code>&lt; 480px</code></td><td>小手机（仅保底）</td><td>gutter 14px，隐藏头像等次要元素</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 10 动效 -->
+  <section id="motion">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">MOTION · A11Y</p>
+        <h2>动效与可访问</h2>
+      </div>
+      <p>轻快但不打扰</p>
+    </div>
+    <div class="token-grid">
+      <article class="token-card">
+        <h3>统一动效节奏</h3>
+        <p>过渡时长 <code>.12s – .18s</code>，缓动 <code>ease</code>。卡片 hover 上浮 <code>translateY(-5px)</code> + 阴影，按钮按下下沉 <code>2px</code>。</p>
+      </article>
+      <article class="token-card">
+        <h3>尊重系统设置</h3>
+        <p><code>prefers-reduced-motion: reduce</code> 时关闭滚动动画、上浮与缩放，只保留颜色过渡。</p>
+      </article>
+      <article class="token-card">
+        <h3>可读性兜底</h3>
+        <p>深字浅底为主，正文与背景对比度均 ≥ 4.5:1；<code>overflow-wrap: anywhere</code> 防长单词撑破卡片；打印样式单独适配（隐藏导航与按钮）。</p>
+      </article>
+    </div>
+  </section>
+
+  <footer class="doc-footer">
+    <span>乐学堂设计 Token 规范 · 依据 <code>static/platform.css</code> 及各模块样式表整理</span>
+    <span>改动界面后请同步更新本文档 · 2026-11</span>
+  </footer>
+
+</main>
+</body>
+</html>

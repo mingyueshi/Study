@@ -15,13 +15,14 @@ class RegistrationTests(PlatformFixture):
     """快捷注册：用户名 + 密码即建号并登录，不收联系方式；特权字段永不生效。"""
 
     def register(self, **overrides):
-        payload = {'username': 'newkid', 'display_name': '小明',
+        payload = {'username': 'newkid',
                    'password1': 'happy-learning-42', 'password2': 'happy-learning-42'}
         payload.update(overrides)
         return self.client.post('/accounts/register/', payload)
 
     def test_register_page_renders_and_login_links_to_it(self):
         self.assertContains(self.client.get('/accounts/register/'), '快速注册')
+        self.assertNotContains(self.client.get('/accounts/register/'), '显示名称')
         self.assertContains(self.client.get('/accounts/login/'), '/accounts/register/')
 
     def test_register_creates_learner_and_logs_in(self):
@@ -29,7 +30,7 @@ class RegistrationTests(PlatformFixture):
         self.assertEqual(response.status_code, 302)
         self.assertEqual(response.url, '/books/primary-english-first/')
         user = get_user_model().objects.get(username='newkid')
-        self.assertEqual(user.display_name, '小明')
+        self.assertEqual(user.display_name, '')
         self.assertTrue(user.is_active)
         self.assertFalse(user.is_staff)
         self.assertFalse(user.is_superuser)
@@ -37,7 +38,7 @@ class RegistrationTests(PlatformFixture):
         self.assertIn('_auth_user_id', self.client.session)
 
     def test_register_without_next_goes_home_and_blocks_logged_in_access(self):
-        self.assertEqual(self.register(display_name='').url, '/')
+        self.assertEqual(self.register().url, '/')
         self.assertEqual(self.client.get('/accounts/register/').status_code, 302)
 
     def test_register_rejects_mismatch_weak_and_duplicate(self):

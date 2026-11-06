@@ -415,7 +415,12 @@ textarea { resize: vertical; line-height: 1.9; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .module-card, .book-card { transition: none; }
+  /* 全站降级：platform.css 全局加载，这里同时管住各模块 CSS 的动效 */
+  *, *::before, *::after {
+    transition-duration: .01ms !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+  }
   .module-card:hover, .button:active { transform: none; }
 }
 

@@ -14,9 +14,6 @@ class LearnerAuthenticationForm(AuthenticationForm):
 class LearnerRegistrationForm(forms.ModelForm):
     """快捷注册：用户名 + 密码即可，不收集联系方式、不做任何验证。"""
 
-    display_name = forms.CharField(
-        label='显示名称（选填）', max_length=50, required=False, strip=True,
-        help_text='页面上展示的名字，之后可在我的学习里修改。')
     password1 = forms.CharField(
         label='设置密码', strip=False,
         widget=forms.PasswordInput(attrs={'autocomplete': 'new-password'}),
@@ -27,7 +24,7 @@ class LearnerRegistrationForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('username', 'display_name')
+        fields = ('username',)
         help_texts = {'username': '字母、数字或 . @ + - _ ，登录用；创建后不能改。'}
 
     def clean_password2(self):

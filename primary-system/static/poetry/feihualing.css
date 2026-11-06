@@ -62,18 +62,18 @@
 .fh-hint-panel { margin-top: 16px; padding: 20px; }
 .fh-hint-heading { display: flex; justify-content: space-between; align-items: center; gap: 14px; }
 .fh-hint-heading h2 { font-size: 18px; }
-.fh-hint-heading p { margin: 5px 0 0; color: var(--fh-muted); font-size: 13px; }
+.fh-hint-heading p { margin: 5px 0 0; color: var(--fh-muted); font-size: 14px; }
 .fh-hint-heading .fh-button { min-height: 43px; padding: 8px 12px; font-size: 14px; flex-shrink: 0; }
 .fh-hint { margin-top: 17px; padding: 18px; border: 1px dashed #d9caa8; border-radius: 12px; background: #faf5e8; }
 .fh-hint > p:first-child { margin: 0; color: #786d57; font-size: 14px; }
 .fh-hint .fh-masked { margin: 10px 0; color: #715c3d; font-family: 'Songti SC','STSong',serif; font-size: 27px; letter-spacing: .18em; overflow-wrap: anywhere; }
 .fh-hint small { display: block; color: #82775f; font-size: 12px; }
-.fh-footnote { margin: 15px 4px; color: #7d8371; font-size: 12px; line-height: 1.8; }
+.fh-footnote { margin: 15px 4px; color: #7d8371; font-size: 14px; line-height: 1.8; }
 .fh-notebook { padding: 20px; background: #fffcf3; }
 .fh-notebook-heading { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
 .fh-notebook-heading h2 { font-family: 'Songti SC','STSong',serif; font-size: 22px; letter-spacing: .08em; }
 .fh-notebook-heading span { color: #8c8065; font-size: 14px; }
-.fh-notebook-note { margin: 8px 0 16px; color: #8b826c; font-size: 13px; }
+.fh-notebook-note { margin: 8px 0 16px; color: #8b826c; font-size: 14px; }
 .fh-history-empty { display: grid; place-items: center; min-height: 320px; padding: 35px 10px; color: #9a9079; text-align: center; background: repeating-linear-gradient(transparent 0 43px,#eae3d2 43px 44px); }
 .fh-history-empty > span { display: grid; place-items: center; width: 62px; height: 62px; border: 1px solid #d8c9a7; border-radius: 50%; font-family: 'Songti SC',serif; font-size: 32px; background: #fffcf3; }
 .fh-history-empty p { align-self: start; padding: 8px; margin: 0; background: #fffcf3; font-size: 15px; }
@@ -83,7 +83,7 @@
 .fh-history-item blockquote { margin: 0 0 8px; font-family: 'Songti SC','STSong',serif; color: #384d3d; font-size: 21px; line-height: 1.8; overflow-wrap: anywhere; }
 .fh-poem-line { display: block; }
 .fh-history-item mark { background: transparent; color: var(--fh-red); }
-.fh-history-item p { margin: 0 0 8px; color: #847b66; font-size: 13px; line-height: 1.8; }
+.fh-history-item p { margin: 0 0 8px; color: #847b66; font-size: 14px; line-height: 1.8; }
 .fh-history-item .fh-history-meta { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
 .fh-history-meta span { padding: 2px 7px; border-radius: 5px; background: #eaf0df; color: #416546; font-size: 11px; }
 .fh-history-meta .is-learning { background: #f6ebd6; color: #8c6940; }
@@ -150,5 +150,5 @@
 /* 自定义令字入口 */
 .fh-custom { display: flex; gap: 8px; align-items: center; margin-top: 12px; }
 .fh-custom input { flex: 1; min-width: 0; min-height: 42px; border: 1.5px solid #d5cbe6; border-radius: 11px; padding: 6px 12px; font-size: 17px; text-align: center; }
-.fh-custom input:focus { border-color: #73509b; outline: none; }
+.fh-custom input:focus { border-color: #73509b; }
 .fh-custom .fh-text-button { flex-shrink: 0; }

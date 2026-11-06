@@ -1,49 +1,49 @@
 /* 诗词地图：左目录右地图 + 地点面板；青绿山水色系，可打印。 */
 .map-shell { display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 24px; align-items: start; }
-.map-side { position: sticky; top: 24px; max-height: calc(100dvh - 48px); display: flex; flex-direction: column; gap: 12px; padding: 16px; border: 1px solid var(--line, #dfe5da); border-radius: 20px; background: var(--white, #fff); overflow: hidden; }
+.map-side { position: sticky; top: 24px; max-height: calc(100dvh - 48px); display: flex; flex-direction: column; gap: 12px; padding: 16px; border: 1px solid var(--line, #dce6d9); border-radius: 20px; background: var(--white, #fff); overflow: hidden; }
 .map-search input { width: 100%; min-height: 44px; border: 1.5px solid #cdd9c4; border-radius: 12px; padding: 8px 12px; font-size: 16px; }
-.map-search input:focus { border-color: var(--green, #2f7d4f); outline: none; }
+.map-search input:focus { border-color: var(--green, #22634c); }
 .map-provinces { display: flex; flex-wrap: wrap; gap: 6px; max-height: 96px; overflow-y: auto; }
 .map-provinces .chip { min-height: 32px; padding: 4px 11px; border: 1px solid #d8e2cd; border-radius: 10px; background: #f7faf3; color: #3d4750; font-size: 14px; cursor: pointer; }
-.map-provinces .chip:hover { border-color: var(--green, #2f7d4f); }
-.map-provinces .chip.on { border-color: var(--green, #2f7d4f); background: var(--green, #2f7d4f); color: #fff; font-weight: 700; }
+.map-provinces .chip:hover { border-color: var(--green, #22634c); }
+.map-provinces .chip.on { border-color: var(--green, #22634c); background: var(--green, #22634c); color: #fff; font-weight: 700; }
 .map-list { display: flex; flex-direction: column; gap: 4px; overflow-y: auto; min-height: 0; padding-right: 4px; scrollbar-width: thin; }
-.place-row { display: grid; grid-template-columns: 34px minmax(0, 1fr) auto; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 12px; color: var(--ink, #22303c); }
+.place-row { display: grid; grid-template-columns: 34px minmax(0, 1fr) auto; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 12px; color: var(--ink, #233e37); }
 .place-row:hover { background: #eef5e6; }
-.place-row[aria-current="page"] { background: #e2efd4; box-shadow: inset 3px 0 0 var(--green, #2f7d4f); }
+.place-row[aria-current="page"] { background: #e2efd4; box-shadow: inset 3px 0 0 var(--green, #22634c); }
 .place-emoji { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 10px; background: #eef5e6; font-size: 19px; }
 .place-text { display: flex; flex-direction: column; min-width: 0; font-size: 16px; font-weight: 650; }
-.place-text i { font-style: normal; color: var(--muted, #6b7480); font-size: 13px; font-weight: 500; }
-.place-count { color: var(--muted, #6b7480); font-size: 14px; font-variant-numeric: tabular-nums; }
-.place-row[aria-current="page"] .place-count { color: var(--green, #2f7d4f); font-weight: 800; }
+.place-text i { font-style: normal; color: var(--muted, #586b62); font-size: 13px; font-weight: 500; }
+.place-count { color: var(--muted, #586b62); font-size: 14px; font-variant-numeric: tabular-nums; }
+.place-row[aria-current="page"] .place-count { color: var(--green, #22634c); font-weight: 800; }
 .place-row.hidden { display: none; }
 
 .map-board { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 20px; align-items: start; }
-.china-wrap { padding: 14px; border: 1px solid var(--line, #dfe5da); border-radius: 20px; background: #f4f8f0; }
+.china-wrap { padding: 14px; border: 1px solid var(--line, #dce6d9); border-radius: 20px; background: #f4f8f0; }
 .china-map { display: block; width: 100%; height: auto; }
 .china-map .map-province { fill: #e7efe2; stroke: #ffffff; stroke-width: .8; }
 .china-map .map-dotted { fill: none; stroke: #7a94c4; stroke-width: 1.4; stroke-dasharray: 5 3; }
 .map-marker circle { fill: #ffffff; stroke: #4f7d5c; stroke-width: 2; }
-.map-marker.on circle { fill: var(--green, #2f7d4f); stroke: #234b38; }
+.map-marker.on circle { fill: var(--green, #22634c); stroke: #234b38; }
 .map-marker .marker-emoji { font-size: 11px; text-anchor: middle; }
 .map-marker .marker-label { font-size: 11px; font-weight: 700; fill: #33404d; text-anchor: middle; paint-order: stroke; stroke: #f4f8f0; stroke-width: 3px; }
 .map-marker.on .marker-label { fill: #1d3a2a; font-weight: 900; }
 .map-marker:hover circle { fill: #dcebda; }
 .map-marker.dimmed { opacity: .18; pointer-events: none; }
 
-.place-panel { padding: 22px; border: 1px solid var(--line, #dfe5da); border-radius: 20px; background: var(--white, #fff); }
+.place-panel { padding: 22px; border: 1px solid var(--line, #dce6d9); border-radius: 20px; background: var(--white, #fff); }
 .place-head h2 { margin: 0; font-size: 27px; }
-.place-meta { margin: 4px 0 0; color: var(--muted, #6b7480); font-size: 15px; }
+.place-meta { margin: 4px 0 0; color: var(--muted, #586b62); font-size: 15px; }
 .place-blurb { margin: 10px 0 0; padding: 10px 13px; border-radius: 12px; background: #f4f8f0; color: #3d4750; font-size: 16px; line-height: 1.8; }
 .poem-featured { margin-top: 16px; padding: 18px; border: 1px solid #e3ddc9; border-radius: 16px; background: #fffdf4; }
 .poem-tag { display: inline-block; margin: 0 0 8px; padding: 2px 9px; border-radius: 7px; background: #8a6d1f; color: #fff; font-size: 13px; font-weight: 700; }
 .poem-featured h3 { margin: 0; font-size: 24px; }
-.poem-author { margin: 2px 0 0; color: var(--muted, #6b7480); font-size: 16px; }
+.poem-author { margin: 2px 0 0; color: var(--muted, #586b62); font-size: 16px; }
 .poem-quote { margin: 12px 0 0; color: #234b38; font-size: 21px; line-height: 2; font-weight: 650; }
 .poem-note { margin: 8px 0 0; color: #5d6544; font-size: 15px; line-height: 1.8; }
 .poem-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
-.poem-missing { margin-top: 16px; padding: 14px; border: 2px dashed #d8e2cd; border-radius: 13px; color: var(--muted, #6b7480); text-align: center; }
-.poem-others { margin-top: 18px; border-top: 1px solid var(--line, #dfe5da); padding-top: 14px; }
+.poem-missing { margin-top: 16px; padding: 14px; border: 2px dashed #d8e2cd; border-radius: 13px; color: var(--muted, #586b62); text-align: center; }
+.poem-others { margin-top: 18px; border-top: 1px solid var(--line, #dce6d9); padding-top: 14px; }
 .poem-others h4 { margin: 0 0 10px; font-size: 17px; }
 .poem-row { display: flex; gap: 12px; align-items: flex-start; padding: 10px 0; border-bottom: 1px dashed #e6ecdf; }
 .poem-row:last-child { border-bottom: 0; }
@@ -53,8 +53,8 @@
 .poem-row-actions { display: flex; flex-direction: column; gap: 6px; }
 .say-chip { display: grid; place-items: center; width: 40px; height: 40px; border: 1px solid #cfe0c2; border-radius: 11px; background: #fff; font-size: 17px; }
 .say-chip:hover { background: #eef6e6; }
-.say-chip.link { text-decoration: none; color: var(--green, #2f7d4f); font-weight: 800; }
-.map-source { margin: 16px 0 0; color: var(--muted, #6b7480); font-size: 13px; line-height: 1.7; }
+.say-chip.link { text-decoration: none; color: var(--green, #22634c); font-weight: 800; }
+.map-source { margin: 16px 0 0; color: var(--muted, #586b62); font-size: 13px; line-height: 1.7; }
 
 @media (max-width: 980px) {
   .map-shell { grid-template-columns: minmax(0, 1fr); }
