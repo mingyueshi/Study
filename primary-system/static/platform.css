@@ -235,9 +235,16 @@ h3 { font-size: 23px; line-height: 1.5; }
 .color-history { --card-tint: #f7ebdf; --card-line: #e9d7c2; --card-accent: #986332; }
 .tag { display: inline-block; max-width: 100%; padding: 5px 11px; border: 1px solid #ffffffa3; border-radius: 9px; background: #fff9; color: #4c6252; font-size: 14px; font-weight: 550; line-height: 1.7; overflow-wrap: anywhere; }
 
-.filters { display: flex; flex-wrap: wrap; align-items: end; gap: 16px; padding: 24px; margin-bottom: 26px; border: 1px solid var(--line); border-radius: 22px; background: #edf2e8; }
-.filter-field { flex: 1 1 180px; min-width: 0; }
-.filter-field label { display: block; margin-bottom: 8px; color: var(--muted); font-size: 16px; font-weight: 600; }
+/* 书架筛选：下拉改为可点筛选 chips（与专题区筛选同语言），搜索框单列一行。 */
+.filter-chips { display: grid; gap: 10px; }
+.filter-chips-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; }
+.filter-chips-label { flex-shrink: 0; min-width: 4.2em; color: var(--muted); font-size: 15px; font-weight: 700; }
+.filter-chip { display: inline-flex; align-items: center; min-height: 34px; padding: 4px 14px; border: 1px solid var(--line); border-radius: 999px; background: var(--white); color: var(--muted); font-size: 15px; font-weight: 650; }
+.filter-chip:hover { color: var(--green); border-color: var(--green); }
+.filter-chip.on { border-color: var(--green); background: #eaf4ef; color: var(--green); }
+.filter-search { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 6px; }
+.filter-search input[type='search'] { flex: 0 1 300px; min-height: 42px; padding: 6px 16px; border-radius: 999px; }
+.filter-search .button { margin: 0; }
 input, select, textarea { width: 100%; min-width: 0; min-height: 56px; padding: 12px 15px; border: 1.5px solid #bacbb6; border-radius: 12px; background: var(--white); color: var(--ink); line-height: 1.6; }
 input:hover, select:hover, textarea:hover { border-color: #829e79; }
 input::placeholder, textarea::placeholder { color: #687869; opacity: 1; }
@@ -425,11 +432,7 @@ textarea { resize: vertical; line-height: 1.9; }
   .book-grid { grid-template-columns: minmax(0, 1fr); gap: 16px; }
   .book-card { padding: 24px; }
   .book-card h3 { font-size: 22px; }
-  .filters { gap: 14px; padding: 18px; border-radius: 18px; }
-  .filter-field { flex: 1 1 calc(50% - 7px); }
-  .filters .button { flex: 1 1 50%; }
-  .filter-field label { font-size: 15px; }
-  .reset { flex: 1; }
+  .filter-search input[type='search'] { flex: 1 1 100%; }
   .back { margin-block: 16px; font-size: 16px; }
   .page-heading { margin: 20px 0 28px; }
   .page-heading h1 { font-size: 32px; }
@@ -473,7 +476,8 @@ textarea { resize: vertical; line-height: 1.9; }
   .account-name { max-width: 3em; }
   .account .button { padding-inline: 10px; }
   .hero { padding-inline: 20px; }
-  .filter-field { flex-basis: 100%; }
+  .filter-chips-row { align-items: flex-start; }
+  .filter-chips-label { padding-top: 7px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -535,10 +539,9 @@ textarea { resize: vertical; line-height: 1.9; }
   a[href^="http"]::after { content: ''; }
 }
 
-/* 首页书架分区：教材同步 / 主题探索 */
-/* 书架区白底面板：与专题区绿带交替，页面下半部有节奏。 */
+/* 首页书架区：白底面板，与专题区绿带交替。 */
 .books-section { padding: 30px 32px 42px; margin: 0 0 46px; border: 1px solid var(--line); border-radius: 32px; background: var(--white); box-shadow: 0 8px 20px #233e3706; }
-.books-section .filters { margin-bottom: 24px; }
+.books-section .filter-chips { margin-bottom: 24px; }
 @media (max-width: 720px) { .books-section { padding: 22px 18px 28px; } }
 
 /* 首页专题单选筛选 chips */

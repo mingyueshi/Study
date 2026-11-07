@@ -20,11 +20,17 @@ def published_books():
     return books
 
 
-def filter_books(request):
-    """目录筛选（Python 侧按对象属性过滤；册数量级小，清晰优先）。"""
+def effective_filter_params(request):
+    """书架筛选的有效参数：未显式选年级时默认跟随账号的年级偏好。"""
     params = request.GET.copy()
     if 'grade' not in params and request.user.is_authenticated and request.user.grade_id:
         params['grade'] = request.user.grade.code
+    return params
+
+
+def filter_books(request):
+    """目录筛选（Python 侧按对象属性过滤；册数量级小，清晰优先）。"""
+    params = effective_filter_params(request)
     form = CatalogFilter(params)
     books = published_books()
     if not form.is_valid():
@@ -42,6 +48,40 @@ def filter_books(request):
         books = [b for b in books if q.lower() in b.name.lower()
                  or matched_units & set(b.units.values_list('pk', flat=True))]
     return form, books
+
+
+def _filter_chip_url(request, key, value):
+    """筛选 chip 的切换链接：替换本维度参数，保留其余筛选。"""
+    params = request.GET.copy()
+    if value:
+        params[key] = value
+    else:
+        params.pop(key, None)
+    return ('?' + params.urlencode()) if params else '?'
+
+
+def filter_chip_rows(request, params):
+    """书架筛选 chips：下拉改为可点筛选，选项与 CatalogFilter 同源。
+
+    选中态按有效参数判断——账号年级偏好未显式选择时也正确高亮。"""
+    blank = CatalogFilter()
+    rows = []
+    for key, label in (('grade', '年级'), ('subject', '学科'), ('edition', '教材版本')):
+        field = blank.fields[key]
+        selected = params.get(key, '')
+        chips = [{'label': field.empty_label, 'url': _filter_chip_url(request, key, ''),
+                  'on': not selected}]
+        for obj in field.queryset:
+            chips.append({'label': str(obj), 'url': _filter_chip_url(request, key, obj.code),
+                          'on': selected == obj.code})
+        rows.append({'key': key, 'label': label, 'chips': chips})
+    return rows
+
+
+def search_context(params):
+    """搜索框的隐藏参数（保留当前年级/学科/教材）与回填值。"""
+    hidden = [(key, params[key]) for key in ('grade', 'subject', 'edition') if params.get(key)]
+    return hidden, params.get('q', '')
 
 
 def units_of_books(books):
@@ -102,6 +142,8 @@ def _area_chips(request, cards, selected):
 @require_GET
 def home(request):
     form, books = filter_books(request)
+    params = effective_filter_params(request)
+    hidden, q_value = search_context(params)
     modules = list(Module.objects.filter(is_active=True).select_related('subject'))
     counts = {}
     for book in books:
@@ -117,6 +159,8 @@ def home(request):
         digest = learning_digest(request.user)
     return render(request, 'catalog/home.html', {
         'form': form,
+        'filter_rows': filter_chip_rows(request, params),
+        'search_hidden': hidden, 'q_value': q_value,
         'entry_cards': entry_cards,
         'entry_total': len(all_cards),
         'area_chips': _area_chips(request, all_cards, selected),
@@ -132,8 +176,12 @@ def module_detail(request, code):
     module = get_object_or_404(Module, code=code, is_active=True)
     module.entry = entry_for(module.code)
     form, books = filter_books(request)
+    params = effective_filter_params(request)
+    hidden, q_value = search_context(params)
     return render(request, 'catalog/module.html', {
         'module': module, 'form': form,
+        'filter_rows': filter_chip_rows(request, params),
+        'search_hidden': hidden, 'q_value': q_value,
         'collections': [b for b in books if b.module_id == module.pk],
     }, status=200 if form.is_valid() else 400)
 

@@ -15,7 +15,7 @@
 <nav class="area-chips" aria-label="按学科筛选专题">{% for chip in area_chips %}<a href="{{ chip.url }}" {% if chip.on %}class="on" aria-current="page"{% endif %}>{{ chip.label }}<i>{{ chip.count }}</i></a>{% endfor %}</nav>
 <div class="module-grid">{% for item in entry_cards %}{% if item.is_group %}<div class="grid-group-title" id="group-{{ item.key }}-title"><h3>{{ item.title }}</h3><p>{{ item.note }}</p></div>{% else %}{% include 'catalog/_entry_card.html' with card=item %}{% endif %}{% endfor %}
 </div></section>
-<section id="books" class="books-section" aria-labelledby="books-title"><div class="section-heading"><div><p class="eyebrow">找到适合自己的那一本</p><h2 id="books-title">我的学习书架</h2></div></div>{% include 'catalog/filters.html' %}
+<section id="books" class="books-section" aria-labelledby="books-title"><div class="section-heading"><div><p class="eyebrow">找到适合自己的那一本</p><h2 id="books-title">教材书架</h2></div></div>{% include 'catalog/filters.html' %}
 {% include 'catalog/book_list.html' with collections=textbook_shelf %}
 </section>
 {% endblock %}

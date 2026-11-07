@@ -1,5 +1,13 @@
-<form class="filters" method="get">
-  {% for field in form %}<div class="filter-field">{{ field.label_tag }}{{ field }}{{ field.errors }}</div>{% endfor %}
-  <button class="button" type="submit">查找内容</button>
-  <a class="reset" href="?grade=">查看全部</a>
-</form>
+<div class="filter-chips">
+  {% for row in filter_rows %}
+  <div class="filter-chips-row">
+    <span class="filter-chips-label">{{ row.label }}</span>
+    {% for chip in row.chips %}<a class="filter-chip{% if chip.on %} on{% endif %}" href="{{ chip.url }}">{{ chip.label }}</a>{% endfor %}
+  </div>
+  {% endfor %}
+  <form class="filter-search" method="get">
+    {% for key, value in search_hidden %}<input type="hidden" name="{{ key }}" value="{{ value }}">{% endfor %}
+    <input type="search" name="q" value="{{ q_value }}" placeholder="搜索学习册或知识点" aria-label="搜索学习册或知识点">
+    <button class="button small" type="submit">查找</button>
+  </form>
+</div>
