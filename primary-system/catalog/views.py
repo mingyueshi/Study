@@ -109,19 +109,27 @@ def home(request):
     all_cards = _entry_cards(request, modules, counts)
     area = request.GET.get('area', '')
     selected = area if area in {card['area'] for card in all_cards} else ''
-    # 专题注册表里带 group 的卡从主网格摘出、单独成组展示（如题库组）；
-    # 学科筛选对主网格与分组同时生效，分组卡都被筛掉时整组隐藏。
-    entry_cards, grouped = [], {}
+    # 总数与筛选 chips 始终按未筛选的全量卡计算。
+    total_cards = all_cards
+    if selected:
+        all_cards = [card for card in all_cards if card['area'] == selected]
+    # 专题注册表里带 group 的卡在网格内就地分组：组头行插在组首卡的位置，
+    # 组内卡收拢到组头之后按注册顺序排列，其余卡位置不动；筛选把某组全部
+    # 筛掉时该组组头自然消失。
+    pending = {}
     for card in all_cards:
         if card.get('group'):
-            if not selected or card['area'] == selected:
-                grouped.setdefault(card['group'], []).append(card)
-        elif not selected or card['area'] == selected:
+            pending.setdefault(card['group'], []).append(card)
+    entry_cards, emitted = [], set()
+    for card in all_cards:
+        key = card.get('group')
+        if not key:
             entry_cards.append(card)
-    entry_groups = []
-    for key, cards in grouped.items():
-        meta = ENTRY_GROUPS.get(key, {'title': key, 'note': ''})
-        entry_groups.append({'key': key, **meta, 'cards': cards})
+        elif key not in emitted:
+            emitted.add(key)
+            meta = ENTRY_GROUPS.get(key, {'title': key, 'note': ''})
+            entry_cards.append({'is_group': True, 'key': key, **meta})
+            entry_cards.extend(pending[key])
     textbook_shelf = books
     digest = None
     if request.user.is_authenticated:
@@ -130,9 +138,8 @@ def home(request):
     return render(request, 'catalog/home.html', {
         'form': form,
         'entry_cards': entry_cards,
-        'entry_groups': entry_groups,
-        'entry_total': len(all_cards),
-        'area_chips': _area_chips(request, all_cards, selected),
+        'entry_total': len(total_cards),
+        'area_chips': _area_chips(request, total_cards, selected),
         'digest': digest,
         'textbook_shelf': textbook_shelf,
         'item_count': published_items().filter(placements__unit__in=units_of_books(books)).count(),

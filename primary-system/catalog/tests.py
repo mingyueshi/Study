@@ -131,35 +131,37 @@ class CatalogTests(PlatformFixture):
         for spec in SPECIAL_ENTRIES:
             self.assertContains(response, spec['name'])
             self.assertContains(response, reverse(spec['route']))
-        # 带 group 的专题卡从主网格摘出单独成组；主网格以模块卡在前、无组专题卡殿后。
-        grouped_count = sum(1 for spec in SPECIAL_ENTRIES if spec.get('group'))
+        # 带组头的分组在网格内就地成组：主序列 = 模块卡 + 分组卡 + 组头行。
+        group_count = len({spec['group'] for spec in SPECIAL_ENTRIES if spec.get('group')})
         self.assertEqual(response.context['entry_cards'][-1]['name'], '多音字')
         self.assertEqual(len(response.context['entry_cards']),
-                         Module.objects.filter(is_active=True).count() + len(SPECIAL_ENTRIES) - grouped_count)
+                         Module.objects.filter(is_active=True).count() + len(SPECIAL_ENTRIES) + group_count)
 
-    def test_home_questionbank_group(self):
-        """题库分组：两张题库卡单独成组、注册顺序展示，主网格不再出现。"""
+    def test_home_questionbank_group_inline(self):
+        """题库分组在专题网格内就地成组：组头行紧随模块卡，两张题库卡相邻其后。"""
         response = self.client.get('/')
-        groups = response.context['entry_groups']
-        self.assertEqual([group['key'] for group in groups], ['questionbank'])
-        bank = groups[0]
-        self.assertEqual(bank['title'], '题库')
-        self.assertEqual([card['name'] for card in bank['cards']], ['挑战题库', '奥数挑战'])
-        main_names = [card['name'] for card in response.context['entry_cards']]
-        self.assertNotIn('挑战题库', main_names)
-        self.assertNotIn('奥数挑战', main_names)
-        # 「探索方向」总数仍含分组卡。
+        items = response.context['entry_cards']
+        module_count = Module.objects.filter(is_active=True).count()
+        self.assertTrue(items[module_count]['is_group'])
+        self.assertEqual(items[module_count]['title'], '题库')
+        self.assertEqual([item['name'] for item in items[module_count + 1:module_count + 3]],
+                         ['挑战题库', '奥数挑战'])
+        self.assertFalse(items[-1].get('is_group'))
+        self.assertEqual(items[-1]['name'], '多音字')
+        # 「探索方向」总数仍按全量卡计（组头行不计入）。
         self.assertEqual(response.context['entry_total'],
                          Module.objects.filter(is_active=True).count() + len(SPECIAL_ENTRIES))
 
     def test_area_filter_hides_empty_group(self):
-        """学科筛选对主网格与分组同时生效：数学保留题库组，古诗词筛空整组隐藏。"""
+        """学科筛选与组头联动：数学保留组头与组卡，古诗词把整组筛掉后组头消失。"""
         math = self.client.get('/?area=math')
-        groups = math.context['entry_groups']
-        self.assertEqual([card['name'] for card in groups[0]['cards']], ['挑战题库', '奥数挑战'])
-        self.assertNotIn('飞花令', [card['name'] for card in math.context['entry_cards']])
+        items = math.context['entry_cards']
+        divider = next(index for index, item in enumerate(items) if item.get('is_group'))
+        self.assertEqual([item['name'] for item in items[divider + 1:divider + 3]],
+                         ['挑战题库', '奥数挑战'])
+        self.assertNotIn('飞花令', [item['name'] for item in items if not item.get('is_group')])
         poetry = self.client.get('/?area=poetry')
-        self.assertEqual(poetry.context['entry_groups'], [])
+        self.assertFalse(any(item.get('is_group') for item in poetry.context['entry_cards']))
         self.assertContains(poetry, '飞花令')
 
     def test_area_filter_single_select(self):
