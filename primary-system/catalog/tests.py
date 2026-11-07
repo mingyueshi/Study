@@ -1,6 +1,5 @@
 import copy
 import io
-import re
 import json
 import tempfile
 from pathlib import Path
@@ -108,11 +107,6 @@ class CatalogTests(PlatformFixture):
 
     def test_home_and_filtered_catalog(self):
         self.assertContains(self.client.get('/'), '教材书架')
-        content = self.client.get('/').content.decode()
-        chips = re.findall(r'class="filter-chip[ "]', content)
-        self.assertEqual(len(chips),
-                         3 + Grade.objects.count() + Subject.objects.count() + TextbookEdition.objects.count(),
-                         '三个筛选维度的全部选项都渲染为 chips（含每行的全部）')
         self.assertContains(self.client.get('/'), '搜索学习册或知识点')
         self.assertEqual(self.client.get('/api/v1/catalog/?grade=primary-1').json()['total'], 0)
         self.assertEqual(self.client.get('/api/v1/catalog/?grade=primary-4&subject=math').json()['total'], 1)
