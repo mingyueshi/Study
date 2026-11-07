@@ -536,10 +536,15 @@ textarea { resize: vertical; line-height: 1.9; }
 }
 
 /* 首页书架分区：教材同步 / 主题探索 */
-.shelf { margin-top: 26px; }
-.shelf-heading { display: flex; align-items: baseline; gap: 14px; margin-bottom: 14px; }
-.shelf-heading h3 { font-size: 20px; margin: 0; }
-.shelf-heading p { margin: 0; color: var(--muted); font-size: 14px; }
+.shelf { margin-top: 0; }
+.shelf-heading { display: flex; align-items: baseline; gap: 14px; margin: 28px 0 16px; padding: 10px 18px; border-left: 5px solid var(--green); border-radius: 14px; background: var(--soft); }
+.shelf-heading h3 { font-size: 21px; margin: 0; }
+.shelf-heading p { margin: 0; color: var(--muted); font-size: 15px; }
+
+/* 书架区白底面板：与专题区绿带交替，页面下半部有节奏。 */
+.books-section { padding: 30px 32px 42px; margin: 0 0 46px; border: 1px solid var(--line); border-radius: 32px; background: var(--white); box-shadow: 0 8px 20px #233e3706; }
+.books-section .filters { margin-bottom: 8px; }
+@media (max-width: 720px) { .books-section { padding: 22px 18px 28px; } }
 
 /* 首页专题单选筛选 chips */
 .area-chips { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 24px; }
