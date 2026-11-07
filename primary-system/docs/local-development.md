@@ -107,7 +107,7 @@ python3.12 bootstrap.py --skip-install --refresh-data
 
 以下命令保留维护用途，不参与启动：词库导入、审核、发布、回退与中文批次命令；`import_reference_library`；`cleanup_retired_references`；场景导入与接龙建池。先查各领域说明和 `--help`，不要把阶段报告中的历史导入序列当成初始化清单。
 
-`import_scenarios` 必须显式提供 `--input INPUT_JSON`；输入不是随 Git 保存的旧 `words-scenario.json`。场景原名称、顺序、词位标注与目标身份按领域导入规则保护；同形多义不能省略选择。词库 primary 适配器默认仅教材英语。可选 `scripts/export_primary.cjs` 只处理语文知识／数学／教材英语三个教材模块；旧图示覆盖同步脚本已移除，`static/figures/` 和 `speech.js` 在本项目内独立维护。
+`import_scenarios` 必须显式提供 `--input INPUT_JSON`；输入不是随 Git 保存的旧 `words-scenario.json`。场景原名称、顺序、词位标注与目标身份按领域导入规则保护；同形多义不能省略选择。词库 primary 适配器默认仅教材英语。可选 `scripts/export_primary.cjs` 只处理语文教材／数学教材／英语教材三个教材模块；旧图示覆盖同步脚本已移除，`static/figures/` 和 `speech.js` 在本项目内独立维护。
 
 - [场景学习对象与迁移](scenario-learning.md)
 - [词库维护与历史阶段记录](lexicon-operations.md)

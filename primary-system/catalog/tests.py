@@ -93,7 +93,7 @@ class EnglishTextbookTests(PlatformFixture):
     def test_seed_renames_english_module_once(self):
         Module.objects.filter(code='english').update(name='教材同步单词')
         call_command('seed_platform', stdout=io.StringIO())
-        self.assertEqual(Module.objects.get(code='english').name, '教材同步')
+        self.assertEqual(Module.objects.get(code='english').name, '英语教材')
 
 
 class CatalogTests(PlatformFixture):
@@ -123,7 +123,7 @@ class CatalogTests(PlatformFixture):
         TextbookBook.objects.create(code='math-second', name='第二本数学', module=self.item.module,
                                     textbook=textbook, is_published=True)
         response = self.client.get('/')
-        card = next(c for c in response.context['entry_cards'] if c['name'] == '数学思维')
+        card = next(c for c in response.context['entry_cards'] if c['name'] == '数学教材')
         self.assertEqual(card['badge'], '2 本学习册')
 
     def test_home_renders_every_registered_special_card(self):
@@ -150,11 +150,11 @@ class CatalogTests(PlatformFixture):
         response = self.client.get('/?area=poetry')
         self.assertContains(response, '飞花令')
         self.assertContains(response, '诗词地图')
-        self.assertNotContains(response, '数学思维')
+        self.assertNotContains(response, '数学教材')
         self.assertNotContains(response, '场景成语')
         # 无效值回退全部卡片。
-        self.assertContains(self.client.get('/?area=bogus'), '数学思维')
-        self.assertContains(self.client.get('/'), '数学思维')
+        self.assertContains(self.client.get('/?area=bogus'), '数学教材')
+        self.assertContains(self.client.get('/'), '数学教材')
         # chips 链接保留书架的其他筛选参数。
         self.assertContains(self.client.get('/?grade=primary-4'), '?grade=primary-4&amp;area=poetry')
 
@@ -253,7 +253,7 @@ class ShelfPartitionTests(PlatformFixture):
 
     def test_home_shelf_renders_textbook_section_only(self):
         response = self.client.get('/')
-        self.assertContains(response, '教材同步')
+        self.assertContains(response, '英语教材')
         self.assertNotContains(response, '主题探索')
         self.assertContains(response, '北师大版数学 · 四年级上册')
 

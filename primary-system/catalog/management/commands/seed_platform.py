@@ -6,9 +6,9 @@ from catalog.models import Stage, Grade, Subject, Module, TextbookEdition, Textb
 MODULES = [
     # 教材内容管线走固定结构的目录编排；专题内容各自成为独立玩法应用（如 chain/words），
     # 以模块卡作为入口，页面由各玩法应用自己渲染。
-    ('knowledge', '语文知识', 'chinese', 'book', '顺着课文和单元，理解语言的美。'),
-    ('math', '数学思维', 'math', 'math', '读知识、看例题，把方法想明白。'),
-    ('english', '教材同步', 'english', 'english', '跟课本走：单词、课文，一篇一篇学。'),
+    ('knowledge', '语文教材', 'chinese', 'book', '顺着课文和单元，理解语言的美。'),
+    ('math', '数学教材', 'math', 'math', '读知识、看例题，把方法想明白。'),
+    ('english', '英语教材', 'english', 'english', '跟课本走：单词、课文，一篇一篇学。'),
     ('chain', '成语接龙', 'chinese', 'dragon', '和小龙陪练轮流接龙，词语取自统一词库。'),
     ('words', '场景单词', 'english', 'scenes', '从生活场景出发，认识身边的英文。'),
     ('phonetics', '英语音标', 'english', 'phonetics', '看口型要点，听例词，把 44 个音读准。'),
