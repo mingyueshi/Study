@@ -487,3 +487,11 @@ SQLite相关38项（37通过／1PG跳过）、PG批次10/10含并发首导、前
 - 测试：catalog 分组断言改为就地形态（组头位置、组内卡序、总数含组头行、math/poetry 联动）；全量 `make test` 572 项通过（skipped 14）。
 - 8012 常驻服务器 DOM 目检：网格序列为 7 张模块卡 → 组头「题库」→ 挑战题库 → 奥数挑战 → 其余专题卡（多音字殿后）；`?area=math` 组头与两卡保留，`?area=poetry` 组头隐藏、飞花令显示。
 - 未运行 PostgreSQL 专项；未提交→随本次提交入库。
+
+## 2026-11-07：首页题库卡改为一张卡内双入口
+
+- 按用户指正的二维模型重构：学科是第一维度（area chips 筛选），普通/奥数是题库玩法内部的第二维度——不应产生横跨学科维度的「题库分组」（前两版分组实现就此废弃）。`SPECIAL_ENTRIES` 新增 `links` 写法：一个玩法一张卡、卡内多按钮（题库卡＝「挑战题库」＋「普通题库→/questionbank/」「奥数挑战→/questionbank/olympiad/」两个入口），`ENTRY_GROUPS` 与组头行逻辑删除，`home` 视图还原扁平卡列表。
+- 模板 `_entry_card.html` 支持两种卡形（单链接 `<a>` 卡 / 带按钮的 `div` 卡），`platform.css` 以 `.module-card-links` 替换组头样式。
+- 测试：catalog 断言改为「一卡双入口」（卡内按钮名与顺序、area 仍为 math、poetry 筛选不出现/math 出现、末位与总数口径恢复）；全量 `make test` 571 项通过（skipped 14）。
+- 8012 常驻服务器 DOM 目检：网格中题库为一张 div 双按钮卡（按钮链接与文案正确），位置在模块卡之后，无组头行、无单独奥数卡；`?area=math` 出现、`?area=poetry` 不出现。
+- 未运行 PostgreSQL 专项；未提交→随本次提交入库。

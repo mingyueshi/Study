@@ -7,7 +7,7 @@ from django.shortcuts import render, get_object_or_404, reverse
 from django.views.decorators.cache import never_cache
 from django.views.decorators.http import require_GET
 from .forms import CatalogFilter
-from .entry_registry import ENTRY_GROUPS, entry_for, special_entries
+from .entry_registry import entry_for, special_entries
 from lexicon.chinese import safe_word_item, safe_search, request_resolver, LessonResolver
 from .models import ENGLISH_RELATION_TAGS, Grade, Module, Placement, Subject, TextbookEdition, TextbookBook, \
     ContentItem, published_items, published_textbook_books, published_units
@@ -109,27 +109,7 @@ def home(request):
     all_cards = _entry_cards(request, modules, counts)
     area = request.GET.get('area', '')
     selected = area if area in {card['area'] for card in all_cards} else ''
-    # 总数与筛选 chips 始终按未筛选的全量卡计算。
-    total_cards = all_cards
-    if selected:
-        all_cards = [card for card in all_cards if card['area'] == selected]
-    # 专题注册表里带 group 的卡在网格内就地分组：组头行插在组首卡的位置，
-    # 组内卡收拢到组头之后按注册顺序排列，其余卡位置不动；筛选把某组全部
-    # 筛掉时该组组头自然消失。
-    pending = {}
-    for card in all_cards:
-        if card.get('group'):
-            pending.setdefault(card['group'], []).append(card)
-    entry_cards, emitted = [], set()
-    for card in all_cards:
-        key = card.get('group')
-        if not key:
-            entry_cards.append(card)
-        elif key not in emitted:
-            emitted.add(key)
-            meta = ENTRY_GROUPS.get(key, {'title': key, 'note': ''})
-            entry_cards.append({'is_group': True, 'key': key, **meta})
-            entry_cards.extend(pending[key])
+    entry_cards = [card for card in all_cards if not selected or card['area'] == selected]
     textbook_shelf = books
     digest = None
     if request.user.is_authenticated:
@@ -138,8 +118,8 @@ def home(request):
     return render(request, 'catalog/home.html', {
         'form': form,
         'entry_cards': entry_cards,
-        'entry_total': len(total_cards),
-        'area_chips': _area_chips(request, total_cards, selected),
+        'entry_total': len(all_cards),
+        'area_chips': _area_chips(request, all_cards, selected),
         'digest': digest,
         'textbook_shelf': textbook_shelf,
         'item_count': published_items().filter(placements__unit__in=units_of_books(books)).count(),

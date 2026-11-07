@@ -180,9 +180,6 @@ h3 { font-size: 23px; line-height: 1.5; }
 .module-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 22px; margin-bottom: 64px; }
 
 /* 网格内的专题分组：组头行占满一整行，组内卡紧随其后（如题库组）。 */
-.grid-group-title { grid-column: 1 / -1; display: flex; align-items: baseline; gap: 14px; padding: 10px 18px; border-left: 5px solid var(--green); border-radius: 14px; background: #eef5ec; }
-.grid-group-title h3 { margin: 0; font-size: 21px; }
-.grid-group-title p { margin: 0; color: var(--muted); font-size: 15px; }
 .module-card {
   position: relative;
   display: flex;
@@ -198,6 +195,9 @@ h3 { font-size: 23px; line-height: 1.5; }
   overflow-wrap: anywhere;
 }
 .module-card:hover { transform: translateY(-5px); box-shadow: 0 12px 26px #233e3710; }
+/* 卡内多入口（如题库的普通/奥数）：一张卡承载同玩法的并列入口。 */
+.module-card-links { display: flex; flex-wrap: wrap; gap: 10px; }
+.module-card-links .button { margin: 0; }
 .module-card img { flex-shrink: 0; padding: 8px; margin-bottom: 20px; background: #fff9; border-radius: 23px; }
 .module-meta { position: absolute; top: 30px; right: 24px; display: flex; align-items: center; gap: 12px; color: var(--muted); font-size: 15px; }
 .module-meta > span { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: #fffa; color: var(--card-accent); font-size: 22px; }
