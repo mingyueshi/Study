@@ -503,3 +503,10 @@ SQLite相关38项（37通过／1PG跳过）、PG批次10/10含并发首导、前
 - 测试：catalog 断言「网格无题库卡＋标题侧入口存在」；questionbank 断言四卡同级（奥数卡计数/链接/错题参数、全轨总数）；全量 `make test` 571 项通过（skipped 14）。
 - 8012 常驻服务器 DOM 目检：首页专题网格无题库卡、标题右侧入口指向 /questionbank/；题库首页领域卡序为 数学58/语文32/英语60/奥数30，奥数卡直达 /questionbank/olympiad/practice/。
 - 未运行 PostgreSQL 专项；未提交→随本次提交入库。
+
+## 2026-11-07：奥数挑战上首页专题网格
+
+- 应用户要求把奥数提到首页：`SPECIAL_ENTRIES` 末尾追加「奥数挑战」卡（数学向、route=questionbank-olympiad、quiz 图标），点击直达奥数练习入口页；挑战题库整体入口保持专题区标题右侧药丸不变——题库卡与奥数卡分工不再重复（题库=全库入口、奥数=学科向专题）。
+- catalog 测试同步（末位卡=奥数挑战、网格含奥数挑战且不含挑战题库）；全量 `make test` 571 项通过（skipped 14）。
+- 8012 常驻服务器 DOM 目检：网格 20 张卡、奥数挑战压轴直达 /questionbank/olympiad/，标题侧入口保留。
+- 未运行 PostgreSQL 专项；未提交→随本次提交入库。

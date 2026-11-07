@@ -175,6 +175,9 @@ SPECIAL_ENTRIES = (
     {'route': 'hanzi-polyphones', 'subject': '语文', 'area': 'chinese', 'icon': 'polyphone', 'color': 'chinese',
      'name': '多音字', 'tag': '认一认多音字 →',
      'blurb': '乐读 yuè 还是 lè？1,010 个多音字按读音看组词，再来几道「给词选读音」。'},
+    {'route': 'questionbank-olympiad', 'subject': '数学', 'area': 'math', 'icon': 'quiz', 'color': 'math',
+     'name': '奥数挑战', 'tag': '来挑战 →',
+     'blurb': '四年级奥数思维题：速算巧算、鸡兔同笼、盈亏还原、行程与逻辑推理，每题带思路解析，答错自动进错题本。'},
 )
 
 

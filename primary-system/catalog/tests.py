@@ -132,18 +132,19 @@ class CatalogTests(PlatformFixture):
         for spec in SPECIAL_ENTRIES:
             self.assertContains(response, spec['name'])
             self.assertContains(response, reverse(spec['route']))
-        # 专题卡按注册顺序殿后。
-        self.assertEqual(response.context['entry_cards'][-1]['name'], '多音字')
+        # 专题卡按注册顺序殿后（奥数挑战压轴）。
+        self.assertEqual(response.context['entry_cards'][-1]['name'], '奥数挑战')
         self.assertEqual(len(response.context['entry_cards']),
                          Module.objects.filter(is_active=True).count() + len(SPECIAL_ENTRIES))
 
     def test_home_questionbank_special_entry_in_heading(self):
-        """题库跨学科、内部再分领域：不进专题网格，入口在专题区标题右侧特殊放置。"""
+        """题库跨学科、内部再分领域：整体入口在专题区标题右侧特殊放置，网格不出现「挑战题库」卡；
+        奥数挑战作为数学向专题单独上网格。"""
         response = self.client.get('/')
         self.assertContains(response, reverse('questionbank'))
         names = [c['name'] for c in response.context['entry_cards']]
         self.assertNotIn('挑战题库', names)
-        self.assertNotIn('奥数挑战', names)
+        self.assertIn('奥数挑战', names)
 
     def test_area_filter_single_select(self):
         """专题单选筛选：按 ?area= 过滤卡片，无效值回退全部，chips 保留书架筛选。"""
