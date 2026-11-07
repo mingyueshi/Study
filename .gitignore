@@ -7,6 +7,7 @@
 .zwork/
 .DS_Store
 .playwright-cli/
+.v2c/
 output/
 # WorkBuddy 工作区数据（记忆/会话，不入库）
 .workbuddy/
