@@ -135,10 +135,11 @@ def entry_for(code):
 
 # 首页专题卡：不挂学习模块的玩法入口，注册顺序即展示顺序。
 # 字段：route（URL 名）、subject（卡片角标学科）、area（筛选分组键）、icon、
-# color（卡片配色）、name、tag（徽标）、blurb（一句话介绍）。新增专题只在此追加一行。
+# color（卡片配色）、name、tag（徽标）、blurb（一句话介绍）；可选 group 把
+# 同组卡从主网格摘出、在首页单独成组展示（组内按注册顺序）。新增专题只在此追加一行。
 SPECIAL_ENTRIES = (
     {'route': 'questionbank', 'subject': '数学', 'area': 'math', 'icon': 'quiz', 'color': 'math',
-     'name': '挑战题库', 'tag': '来答题 →',
+     'name': '挑战题库', 'tag': '来答题 →', 'group': 'questionbank',
      'blurb': '普通题库：数学判断题与例题自评、语文多音字、英语词义四选一。答错自动进错题本，重练答对就退出。'},
     {'route': 'phrases', 'subject': '英语', 'area': 'english', 'icon': 'phrases', 'color': 'english',
      'name': '日常用语', 'tag': '开口说 →',
@@ -177,7 +178,7 @@ SPECIAL_ENTRIES = (
      'name': '多音字', 'tag': '认一认多音字 →',
      'blurb': '乐读 yuè 还是 lè？1,010 个多音字按读音看组词，再来几道「给词选读音」。'},
     {'route': 'questionbank-olympiad', 'subject': '数学', 'area': 'math', 'icon': 'quiz', 'color': 'math',
-     'name': '奥数挑战', 'tag': '来挑战 →',
+     'name': '奥数挑战', 'tag': '来挑战 →', 'group': 'questionbank',
      'blurb': '课本外的思维题：速算巧算、鸡兔同笼、盈亏还原、行程与逻辑推理，每题带思路解析，答错自动进错题本。'},
 )
 
@@ -185,9 +186,15 @@ SPECIAL_ENTRIES = (
 def special_entries():
     """解析好的首页专题卡列表，字段与模块卡完全同形，模板一个循环渲染。"""
     return [{'url': reverse(spec['route']), 'icon': spec['icon'], 'color_code': spec['color'],
-             'subject_label': spec['subject'], 'area': spec['area'],
+             'subject_label': spec['subject'], 'area': spec['area'], 'group': spec.get('group', ''),
              'name': spec['name'], 'blurb': spec['blurb'], 'badge': spec['tag']}
             for spec in SPECIAL_ENTRIES]
+
+
+# 首页分组区元信息：带 group 的专题卡从主网格摘出、在主网格下方单独成组。
+ENTRY_GROUPS = {
+    'questionbank': {'title': '题库', 'note': '普通题库与奥数挑战都在这里，判分在服务端，答错进同一个错题本。'},
+}
 
 
 def learning_overview(user):

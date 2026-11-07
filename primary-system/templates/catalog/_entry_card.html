@@ -1,0 +1,1 @@
+{% load static %}<a class="module-card color-{{ card.color_code }}" href="{{ card.url }}"><img src="{% static 'icons/' %}{{ card.icon }}.svg" alt="" width="88" height="88"><span class="module-meta">{{ card.subject_label }} <span aria-hidden="true">↗</span></span><h3>{{ card.name }}</h3><p>{{ card.blurb }}</p><span class="tag">{{ card.badge }}</span></a>

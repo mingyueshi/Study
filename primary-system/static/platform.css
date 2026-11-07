@@ -178,6 +178,13 @@ h3 { font-size: 23px; line-height: 1.5; }
 .section-heading .eyebrow { margin: 0 0 8px; color: var(--green); font-size: 15px; }
 
 .module-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 22px; margin-bottom: 64px; }
+
+/* 首页专题分组：从主网格摘出的同组卡（如题库）单独成区展示。 */
+.entry-group { margin: -18px 0 40px; }
+.entry-group-head { display: flex; align-items: baseline; gap: 14px; margin: 0 0 16px; padding: 12px 18px; border-left: 5px solid var(--green); border-radius: 14px; background: var(--soft, #eef5ec); }
+.entry-group-head h3 { margin: 0; font-size: 22px; }
+.entry-group-head p { margin: 0; color: var(--muted); font-size: 15px; }
+.entry-group .module-grid { margin-bottom: 0; }
 .module-card {
   position: relative;
   display: flex;

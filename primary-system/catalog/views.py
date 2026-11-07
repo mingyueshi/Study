@@ -7,7 +7,7 @@ from django.shortcuts import render, get_object_or_404, reverse
 from django.views.decorators.cache import never_cache
 from django.views.decorators.http import require_GET
 from .forms import CatalogFilter
-from .entry_registry import entry_for, special_entries
+from .entry_registry import ENTRY_GROUPS, entry_for, special_entries
 from lexicon.chinese import safe_word_item, safe_search, request_resolver, LessonResolver
 from .models import ENGLISH_RELATION_TAGS, Grade, Module, Placement, Subject, TextbookEdition, TextbookBook, \
     ContentItem, published_items, published_textbook_books, published_units
@@ -109,6 +109,19 @@ def home(request):
     all_cards = _entry_cards(request, modules, counts)
     area = request.GET.get('area', '')
     selected = area if area in {card['area'] for card in all_cards} else ''
+    # 专题注册表里带 group 的卡从主网格摘出、单独成组展示（如题库组）；
+    # 学科筛选对主网格与分组同时生效，分组卡都被筛掉时整组隐藏。
+    entry_cards, grouped = [], {}
+    for card in all_cards:
+        if card.get('group'):
+            if not selected or card['area'] == selected:
+                grouped.setdefault(card['group'], []).append(card)
+        elif not selected or card['area'] == selected:
+            entry_cards.append(card)
+    entry_groups = []
+    for key, cards in grouped.items():
+        meta = ENTRY_GROUPS.get(key, {'title': key, 'note': ''})
+        entry_groups.append({'key': key, **meta, 'cards': cards})
     textbook_shelf = books
     digest = None
     if request.user.is_authenticated:
@@ -116,7 +129,8 @@ def home(request):
         digest = learning_digest(request.user)
     return render(request, 'catalog/home.html', {
         'form': form,
-        'entry_cards': [card for card in all_cards if not selected or card['area'] == selected],
+        'entry_cards': entry_cards,
+        'entry_groups': entry_groups,
         'entry_total': len(all_cards),
         'area_chips': _area_chips(request, all_cards, selected),
         'digest': digest,

@@ -471,3 +471,11 @@ SQLite相关38项（37通过／1PG跳过）、PG批次10/10含并发首导、前
 - 基线重导：`export_base_data --replace` 后 48 表 76 分片 2,520,689 行，manifest `required_migrations` 含 `["questionbank","0002_question_track"]`；`verify_base_data --database` 通过（digest `9cc1f027…`）。
 - 8012 常驻服务器（自动 reload，未重启）DOM 目检：普通主页「150 道题＋奥数挑战已开张」、奥数落地「30 道题＋八主题 chips」、奥数练习只出奥数题且不泄漏答案、`?tag=鸡兔同笼` 命中 4 题全同主题、普通练习 20 题无奥数混入、判分 API 服务端判对错并返回解析、错题本奥数徽标与轨别过滤/重练链接正确；目检产生的 2 条游客作答记录已清理（库中作答记录归零）。
 - 未运行 PostgreSQL 专项回归；希望杯真题转录（四年级 10 份 PDF）留作后续批次，未经真实浏览器全面回归；未提交。
+
+## 2026-11-07：首页题库分组
+
+- 首页入口区拆为主网格＋专题分组：`SPECIAL_ENTRIES` 支持可选 `group` 键（带组的卡从主网格摘出），`ENTRY_GROUPS` 登记分组元信息（题库组：挑战题库＋奥数挑战，注册顺序展示）；`home` 视图按组拆分并让 `?area=` 学科筛选对主网格与分组同时生效，组卡被筛空时整组隐藏；「探索方向」计数口径不变（仍含分组卡）。
+- 模板：入口卡抽成 `templates/catalog/_entry_card.html` partial（主网格与分组共用一个循环），主网格下方新增 `.entry-group` 分组区（组头标题＋说明＋独立 module-grid），`platform.css` 补分组样式。
+- 测试：catalog 新增分组断言（组内卡序、主网格不含题库卡、总数口径、math 保留组 / poetry 筛空组）；全量 `make test` 572 项通过（skipped 14）。
+- 8012 常驻服务器 DOM 目检：分组区位于主网格与书架之间、组头「题库」与说明渲染正确，主网格不再出现两张题库卡；`?area=math` 分组保留且飞花令隐藏，`?area=poetry` 分组隐藏且飞花令显示。
+- 未运行 PostgreSQL 专项；未提交→随本次提交入库。

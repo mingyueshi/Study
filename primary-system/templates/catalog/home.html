@@ -13,8 +13,15 @@
 {% endif %}
 <section aria-labelledby="modules-title"><div class="section-heading"><div><p class="eyebrow">跟着兴趣出发</p><h2 id="modules-title">每一科，都有新发现</h2></div><p>读课本、学成语，也可以用诗句接飞花令。</p></div>
 <nav class="area-chips" aria-label="按学科筛选专题">{% for chip in area_chips %}<a href="{{ chip.url }}" {% if chip.on %}class="on" aria-current="page"{% endif %}>{{ chip.label }}<i>{{ chip.count }}</i></a>{% endfor %}</nav>
-<div class="module-grid">{% for card in entry_cards %}<a class="module-card color-{{ card.color_code }}" href="{{ card.url }}"><img src="{% static 'icons/' %}{{ card.icon }}.svg" alt="" width="88" height="88"><span class="module-meta">{{ card.subject_label }} <span aria-hidden="true">↗</span></span><h3>{{ card.name }}</h3><p>{{ card.blurb }}</p><span class="tag">{{ card.badge }}</span></a>{% endfor %}
-</div></section>
+<div class="module-grid">{% for card in entry_cards %}{% include 'catalog/_entry_card.html' %}{% endfor %}
+</div>
+{% for group in entry_groups %}
+<div class="entry-group" aria-labelledby="group-{{ group.key }}-title">
+  <div class="entry-group-head"><h3 id="group-{{ group.key }}-title">{{ group.title }}</h3><p>{{ group.note }}</p></div>
+  <div class="module-grid">{% for card in group.cards %}{% include 'catalog/_entry_card.html' %}{% endfor %}</div>
+</div>
+{% endfor %}
+</section>
 <section id="books" aria-labelledby="books-title"><div class="section-heading"><div><p class="eyebrow">找到适合自己的那一本</p><h2 id="books-title">我的学习书架</h2></div><p>跟着课本的进度走</p></div>{% include 'catalog/filters.html' %}
 <section class="shelf" aria-labelledby="shelf-textbook"><div class="shelf-heading"><h3 id="shelf-textbook">📘 教材同步</h3><p>单元与册次对应手里的教材。</p></div>{% include 'catalog/book_list.html' with collections=textbook_shelf %}</section>
 </section>

@@ -131,10 +131,36 @@ class CatalogTests(PlatformFixture):
         for spec in SPECIAL_ENTRIES:
             self.assertContains(response, spec['name'])
             self.assertContains(response, reverse(spec['route']))
-        # 模块卡在前、专题卡按注册顺序殿后；游客条「探索方向」也由注册表计数。
-        self.assertEqual(response.context['entry_cards'][-1]['name'], '奥数挑战')
+        # 带 group 的专题卡从主网格摘出单独成组；主网格以模块卡在前、无组专题卡殿后。
+        grouped_count = sum(1 for spec in SPECIAL_ENTRIES if spec.get('group'))
+        self.assertEqual(response.context['entry_cards'][-1]['name'], '多音字')
         self.assertEqual(len(response.context['entry_cards']),
+                         Module.objects.filter(is_active=True).count() + len(SPECIAL_ENTRIES) - grouped_count)
+
+    def test_home_questionbank_group(self):
+        """题库分组：两张题库卡单独成组、注册顺序展示，主网格不再出现。"""
+        response = self.client.get('/')
+        groups = response.context['entry_groups']
+        self.assertEqual([group['key'] for group in groups], ['questionbank'])
+        bank = groups[0]
+        self.assertEqual(bank['title'], '题库')
+        self.assertEqual([card['name'] for card in bank['cards']], ['挑战题库', '奥数挑战'])
+        main_names = [card['name'] for card in response.context['entry_cards']]
+        self.assertNotIn('挑战题库', main_names)
+        self.assertNotIn('奥数挑战', main_names)
+        # 「探索方向」总数仍含分组卡。
+        self.assertEqual(response.context['entry_total'],
                          Module.objects.filter(is_active=True).count() + len(SPECIAL_ENTRIES))
+
+    def test_area_filter_hides_empty_group(self):
+        """学科筛选对主网格与分组同时生效：数学保留题库组，古诗词筛空整组隐藏。"""
+        math = self.client.get('/?area=math')
+        groups = math.context['entry_groups']
+        self.assertEqual([card['name'] for card in groups[0]['cards']], ['挑战题库', '奥数挑战'])
+        self.assertNotIn('飞花令', [card['name'] for card in math.context['entry_cards']])
+        poetry = self.client.get('/?area=poetry')
+        self.assertEqual(poetry.context['entry_groups'], [])
+        self.assertContains(poetry, '飞花令')
 
     def test_area_filter_single_select(self):
         """专题单选筛选：按 ?area= 过滤卡片，无效值回退全部，chips 保留书架筛选。"""
