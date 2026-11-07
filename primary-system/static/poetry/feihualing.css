@@ -1,5 +1,5 @@
 /* A quiet poetry practice desk. Scoped to avoid changing the shared learning UI. */
-.fh-page { --fh-paper: #fffdf7; --fh-line: #e3dfd1; --fh-red: #a64d3d; --fh-muted: #6b7162; max-width: 1480px; margin: 0 auto; padding: 20px 0 28px; }
+.fh-page { --fh-paper: #fffdf7; --fh-line: #e3dfd1; --fh-red: #a64d3d; --fh-muted: #6b7162; padding: 20px 0 28px; }
 .fh-page [hidden] { display: none !important; }
 .fh-topline { display: flex; align-items: center; justify-content: space-between; gap: 18px; color: var(--fh-muted); font-size: 14px; }
 .fh-topline .back { margin: 0; font-size: 16px; }
@@ -15,7 +15,7 @@
 .fh-muted { margin: 7px 0 18px; color: var(--fh-muted); font-size: 15px; }
 .fh-choices { padding: 20px 18px; }
 .fh-keywords { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; }
-.fh-keyword { display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 1px; min-height: 88px; padding: 8px; border: 1px solid var(--fh-line); border-radius: 14px; background: #faf8ee; color: #5b6751; }
+.fh-keyword { display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 1px; min-height: 88px; padding: 8px; border: 1px solid var(--fh-line); border-radius: 14px; background: #faf8ee; color: #5b6751; transition: border-color .14s ease, background .14s ease; }
 .fh-keyword b { font-family: 'Songti SC','STSong',serif; font-size: 34px; line-height: 1.2; font-weight: 600; }
 .fh-keyword small { font-size: 12px; }
 .fh-keyword:hover:not(:disabled) { border-color: #93ae88; background: #f0f4e6; }
@@ -27,7 +27,7 @@
 .fh-rules p, .fh-details p { margin: 12px 0 0; color: var(--fh-muted); font-size: 14px; line-height: 1.9; }
 .fh-details { margin-top: 16px; }
 .fh-details summary { color: var(--green); font-size: 14px; cursor: pointer; }
-.fh-source-link { display: inline-block; margin-top: 20px; color: var(--green); font-size: 14px; font-weight: 650; }
+.fh-source-link { display: inline-block; margin-top: 14px; color: var(--green); font-size: 14px; font-weight: 650; }
 .fh-workspace { min-width: 0; }
 .fh-writing { padding: 22px; }
 .fh-order { position: relative; display: flex; align-items: center; gap: 24px; overflow: hidden; margin: -22px -22px 22px; padding: 22px; border-radius: 20px 20px 0 0; background: linear-gradient(100deg,#f6f0df,#f9f6ec); border-bottom: 1px solid #e8e1cc; }
@@ -89,6 +89,12 @@
 .fh-history-meta .is-learning { background: #f6ebd6; color: #8c6940; }
 .fh-history-meta a { color: #56795b; font-size: 12px; }
 .fh-history-meta a:hover { text-decoration: underline; }
+/* 诗句点读：书笺小药丸，慢速念诗。 */
+.fh-read { padding: 2px 9px; border: 1px solid #d8c9a7; border-radius: 999px; background: #faf5e8; color: #715c3d; font-size: 12px; cursor: pointer; transition: background .14s ease, border-color .14s ease; }
+.fh-read:hover { border-color: #c3ad82; background: #f3ead4; }
+/* 新收的诗句轻轻亮一下，把目光引到诗单最新一页。 */
+.fh-history-item.is-new { animation: fh-new-item 1.6s ease; }
+@keyframes fh-new-item { 0% { background: #fdf3d9; } 100% { background: transparent; } }
 .fh-notebook-bottom { margin: 16px 0 0; padding-top: 14px; border-top: 1px solid #e8e0cf; color: #a3977b; text-align: center; font-size: 12px; letter-spacing: .08em; }
 .fh-complete { margin: 0; padding: 16px 0 0; }
 .fh-complete .fh-complete-label { color: var(--fh-red); font-size: 13px; letter-spacing: .1em; }
@@ -147,8 +153,10 @@
 @media (max-width: 359px) { .fh-keywords { grid-template-columns: repeat(3,minmax(0,1fr)); } }
 @media (prefers-reduced-motion: reduce) { .fh-page * { scroll-behavior: auto; } }
 
-/* 自定义令字入口 */
-.fh-custom { display: flex; gap: 8px; align-items: center; margin-top: 12px; }
-.fh-custom input { flex: 1; min-width: 0; min-height: 42px; border: 1.5px solid #d5cbe6; border-radius: 11px; padding: 6px 12px; font-size: 17px; text-align: center; }
+/* 自定义令字入口：紫笺卡，与绿色令字笺一眼区分；置于令字笺上方。 */
+.fh-custom { margin: 0 0 16px; padding: 14px; border: 1.5px dashed #c9b7d8; border-radius: 14px; background: #faf7fd; }
+.fh-custom-label { margin: 0 0 9px; color: #73509b; font-size: 15px; font-weight: 750; }
+.fh-custom-row { display: flex; gap: 8px; align-items: stretch; }
+.fh-custom input { flex: 1; min-width: 0; min-height: 48px; border: 1.5px solid #d5cbe6; border-radius: 11px; padding: 6px 12px; font-family: 'Songti SC','STSong',serif; font-size: 24px; text-align: center; }
 .fh-custom input:focus { border-color: #73509b; }
-.fh-custom .fh-text-button { flex-shrink: 0; }
+.fh-custom .fh-custom-start { flex-shrink: 0; min-height: 48px; padding: 8px 15px; font-size: 15px; }

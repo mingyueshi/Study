@@ -3,12 +3,20 @@
 .qb-crumb { margin-bottom: 18px; font-weight: 700; }
 .qb-crumb a:hover { color: var(--green); }
 
-/* ── 主页 hero ─────────────────────────────────────────────────────────── */
-.qb-hero { display: flex; align-items: center; gap: 32px; padding: 34px 0 8px; }
-.qb-hero-copy { flex: 1; }
+/* ── 主页 hero：绿系渐变卡，与全站专题页同构 ─────────────────────────── */
+.qb-hero {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: 18px 28px; padding: 24px 28px; margin: 14px 0 0;
+  background:
+    radial-gradient(ellipse at 92% 8%, #fff3d6, transparent 60%),
+    linear-gradient(120deg, #f1f8ea, #eaf3e0);
+  border: 1px solid #cfe3c0; border-radius: 22px;
+}
+.qb-hero-copy { flex: 1 1 320px; min-width: 0; }
 .qb-hero-tag { margin: 10px 0 0; max-width: 34em; color: var(--muted); font-size: 20px; }
-.qb-hero-stats { display: flex; gap: 26px; margin: 18px 0 0; font-size: 19px; }
-.qb-hero-stats b { font-size: 30px; color: var(--green); }
+.qb-hero-stats { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0; }
+.qb-hero-stats span { display: inline-flex; align-items: center; gap: 5px; padding: 5px 12px; border-radius: 999px; background: #fff; border: 1px solid #d6e5c6; font-size: 14px; color: #4a5550; }
+.qb-hero-stats b { color: var(--green); font-weight: 800; font-size: 16px; }
 .qb-hero-deco { display: grid; grid-template-columns: repeat(2, 74px); gap: 14px; }
 .qb-hero-deco span {
   display: grid; place-items: center; height: 74px; border-radius: 22px;
@@ -29,7 +37,8 @@
 
 /* ── 领域卡 ────────────────────────────────────────────────────────────── */
 .qb-areas { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 26px; margin-top: 26px; }
-.qb-area { padding: 26px; border: 1px solid var(--line); border-radius: 24px; background: var(--white); box-shadow: 0 8px 20px #233e3708; }
+.qb-area { padding: 26px; border: 1px solid var(--line); border-radius: 24px; background: var(--white); box-shadow: 0 8px 20px #233e3708; transition: transform .14s ease, box-shadow .14s ease, border-color .14s ease; }
+.qb-area:hover { transform: translateY(-4px); border-color: #cfe0c2; box-shadow: 0 12px 26px #233e3710; }
 .qb-area-head { display: flex; align-items: center; gap: 16px; margin-bottom: 14px; }
 .qb-area-head img { padding: 10px; border-radius: 18px; background: var(--soft); }
 .qb-area-head h2 { margin: 0; font-size: 26px; }
@@ -40,28 +49,65 @@
 
 .qb-note { margin-top: 28px; color: var(--muted); font-size: 15px; }
 
-/* ── 练习页 ────────────────────────────────────────────────────────────── */
-.qb-practice-head { padding-top: 10px; }
-.qb-practice-head h1 { margin-bottom: 14px; }
+/* ── 练习页：页头卡 + 左设置栏／右答题板 ──────────────────────────────── */
+.qb-practice-head {
+  padding: 18px 26px; margin: 14px 0 20px;
+  background: linear-gradient(120deg, #f1f8ea, #eaf3e0);
+  border: 1px solid #cfe3c0; border-radius: 20px;
+}
+.qb-practice-head h1 { margin: 6px 0 0; font-size: clamp(28px, 3vw, 38px); }
 .qb-practice-head .button { margin-top: 14px; }
 .qb-toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 26px; }
 .qb-label { color: var(--muted); font-size: 16px; }
 
-.qb-board { max-width: 860px; padding: 26px 30px; border: 1px solid var(--line); border-radius: 24px; background: var(--white); box-shadow: 0 8px 20px #233e3708; }
-.qb-progress { margin: 0 0 18px; color: var(--muted); font-size: 17px; }
+.qb-practice-layout { display: grid; grid-template-columns: 250px minmax(0, 1fr); gap: 22px; align-items: start; }
+.qb-side { position: sticky; top: 16px; padding: 18px; border: 1px solid var(--line); border-radius: 18px; background: var(--white); }
+.qb-side h2 { margin: 0 0 14px; font-size: 18px; }
+.qb-side .qb-label { display: block; margin: 0 0 8px; color: var(--muted); font-size: 13px; font-weight: 800; letter-spacing: .08em; }
+.qb-side-chips + .qb-label { margin-top: 18px; }
+.qb-side-chips { display: flex; flex-direction: column; gap: 8px; }
+.qb-side-wrap { flex-direction: row; flex-wrap: wrap; }
+/* 筛选 chips：题库此前从未定义过 chip 样式，侧栏与工具条统一补齐。 */
+.qb-side .chip, .qb-toolbar .chip {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 42px; padding: 8px 16px;
+  border: 1.5px solid var(--line); border-radius: 10px;
+  background: var(--white); color: var(--ink);
+  font-size: 16px; font-weight: 700;
+  transition: border-color .14s ease, background .14s ease;
+}
+.qb-side .chip:hover, .qb-toolbar .chip:hover { border-color: var(--green); background: var(--soft); }
+.qb-side .chip.on, .qb-toolbar .chip.on { border-color: var(--green); background: var(--green); color: #fff; font-weight: 750; }
+.qb-side-note { margin: 16px 0 0; color: var(--muted); font-size: 13px; line-height: 1.7; }
+.qb-side-note a { color: var(--green); font-weight: 650; }
+
+.qb-practice-main { min-width: 0; max-width: 1100px; }
+.qb-board { padding: 26px 30px; border: 1px solid var(--line); border-radius: 24px; background: var(--white); box-shadow: 0 8px 20px #233e3708; }
+.qb-progress { margin: 0 0 12px; color: var(--muted); font-size: 17px; }
 .qb-progress b { color: var(--green); font-size: 22px; }
+.qb-progress-bar { height: 10px; margin: 0 0 22px; border-radius: 999px; background: var(--soft); overflow: hidden; }
+.qb-progress-bar span { display: block; height: 100%; width: 0; border-radius: 999px; background: linear-gradient(90deg, #3daf92, var(--green)); transition: width .18s ease; }
 
 .qb-stem { display: flex; align-items: flex-start; gap: 12px; margin: 0 0 20px; font-size: 26px; font-weight: 750; line-height: 1.6; }
 .qb-stem .say-chip { flex-shrink: 0; }
+.say-chip { flex-shrink: 0; padding: 5px 13px; border: 1.5px solid #ddd3ef; border-radius: 999px; background: #f4edfd; color: #5d5484; font-size: 15px; font-weight: 700; cursor: pointer; transition: border-color .14s ease; }
+.say-chip:hover { border-color: #b9a8e2; }
 .qb-tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 16px; }
 .qb-tag { padding: 3px 12px; border-radius: 999px; background: var(--soft); color: var(--green); font-size: 14px; }
 
 .qb-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
 .qb-option {
-  padding: 18px 22px; border: 2px solid var(--line); border-radius: 18px; background: var(--paper);
+  display: flex; align-items: center; gap: 14px;
+  padding: 16px 20px; border: 2px solid var(--line); border-radius: 18px; background: var(--paper);
   font-size: 22px; font-weight: 700; text-align: left; cursor: pointer;
+  transition: transform .14s ease, border-color .14s ease, background .14s ease;
 }
-.qb-option:hover { border-color: var(--green); background: var(--soft); }
+.qb-option:hover { border-color: var(--green); background: var(--soft); transform: translateY(-2px); }
+.qb-key { display: grid; place-items: center; flex: none; width: 30px; height: 30px; border: 1.5px solid var(--line); border-radius: 9px; background: var(--white); color: var(--muted); font-size: 15px; font-style: normal; font-weight: 750; transition: border-color .14s ease, color .14s ease; }
+.qb-option:hover .qb-key { border-color: #bfd8b4; color: var(--green); }
+.qb-option.right .qb-key { border-color: #2c7a4b; background: #2c7a4b; color: #fff; }
+.qb-option.wrong .qb-key { border-color: #d9a49d; color: #8f3a2f; }
+.qb-boolean .qb-option { justify-content: center; }
 .qb-option:disabled { cursor: default; }
 .qb-option.picked { border-color: var(--card-accent); background: var(--card-tint); }
 .qb-option.right { border-color: #2c7a4b; background: #e2f0dc; }
@@ -85,6 +131,12 @@
 
 .qb-result { text-align: center; }
 .qb-result-emoji { margin: 12px 0 0; font-size: 52px; }
+.qb-result-stars { margin: 6px 0 0; font-size: 40px; line-height: 1.3; }
+.qb-star { color: #e6dfca; }
+.qb-star.on { color: #e9a23b; animation: qb-star-pop .4s ease backwards; }
+.qb-star.on:nth-child(2) { animation-delay: .14s; }
+.qb-star.on:nth-child(3) { animation-delay: .28s; }
+@keyframes qb-star-pop { 0% { transform: scale(.3); } 60% { transform: scale(1.3); } 100% { transform: scale(1); } }
 .qb-result-score { font-size: 26px; font-weight: 750; }
 .qb-result-score b { color: var(--green); font-size: 40px; }
 .qb-result-praise { color: var(--muted); font-size: 19px; }
@@ -103,6 +155,11 @@
 .qb-wrong-answer b { font-size: 22px; }
 .qb-wrong-explain { margin: 0; color: var(--muted); font-size: 17px; line-height: 1.8; }
 
+@media (max-width: 900px) {
+  .qb-practice-layout { grid-template-columns: minmax(0, 1fr); }
+  .qb-side { position: static; }
+  .qb-side-chips { flex-direction: row; flex-wrap: wrap; }
+}
 @media (max-width: 720px) {
   .qb-hero { flex-direction: column; align-items: flex-start; }
   .qb-hero-deco { display: none; }

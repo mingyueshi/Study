@@ -1,59 +1,64 @@
 {% extends 'base.html' %}{% load static %}{% block title %}{{ eyebrow }} · 乐学堂{% endblock %}
-{% block content %}<link rel="stylesheet" href="{% static 'questionbank/bank.css' %}">
+{% block content %}<link rel="stylesheet" href="{% static 'questionbank/bank.css' %}?v=4">
 <script src="{% static 'speech.js' %}" defer></script><script src="{% static 'tts.js' %}" defer></script>
-<script src="{% static 'questionbank/practice.js' %}" defer></script>
+<script src="{% static 'questionbank/practice.js' %}?v=2" defer></script>
 <nav class="qb-crumb"><a href="{{ home_url }}">← 回{{ home_label }}</a></nav>
 <header class="qb-practice-head">
   <p class="eyebrow">{% if mode_wrong %}错题重练{% else %}{{ eyebrow }}{% endif %}</p>
   <h1>{% if mode_wrong %}错题，再闯一遍{% else %}{{ area_label }}{% endif %}</h1>
-  <div class="qb-toolbar">
-    <span class="qb-label">数量</span>
-    {% for size_option in sizes %}
-    <a class="chip{% if size_option == size %} on{% endif %}" href="?{% if area %}area={{ area }}&amp;{% endif %}{% if tag %}tag={{ tag }}&amp;{% endif %}count={{ size_option }}{% if mode_wrong %}&amp;mode=wrong{% endif %}">{{ size_option }} 题</a>
-    {% endfor %}
-    {% if area_chips %}
-    <span class="qb-label">学科</span>
-    <a class="chip{% if not area %} on{% endif %}" href="?count={{ size }}{% if mode_wrong %}&amp;mode=wrong{% endif %}">全部</a>
-    {% for chip in area_chips %}
-    <a class="chip{% if area == chip.area %} on{% endif %}" href="?area={{ chip.area }}&amp;count={{ size }}{% if mode_wrong %}&amp;mode=wrong{% endif %}">{{ chip.label }}</a>
-    {% endfor %}
-    {% endif %}
-    {% if tag_chips %}
-    <span class="qb-label">主题</span>
-    <a class="chip{% if not tag %} on{% endif %}" href="?count={{ size }}{% if mode_wrong %}&amp;mode=wrong{% endif %}">全部</a>
-    {% for chip in tag_chips %}
-    <a class="chip{% if tag == chip.tag %} on{% endif %}" href="?tag={{ chip.tag }}&amp;count={{ size }}{% if mode_wrong %}&amp;mode=wrong{% endif %}">{{ chip.tag }}</a>
-    {% endfor %}
-    {% endif %}
-  </div>
 </header>
 
-{% if empty_wrong %}
-<div class="notice">错题本是空的——先去练一组，答错的题会自动收进来。<a class="button small" href="{{ home_url }}">回{{ home_label }}挑一组 →</a></div>
-{% else %}
-{{ questions|json_script:"qb-questions" }}
-<section class="qb-board" data-qb-practice data-answer-url="{% url 'questionbank-answer' %}" data-practice-url="{{ practice_url }}" data-area="{{ area }}" data-tag="{{ tag }}" data-mode-wrong="{{ mode_wrong|yesno:'1,0' }}" data-size="{{ size }}">
-  <p class="qb-progress">第 <b data-qb-index>1</b>／<b data-qb-total>0</b> 题 · 答对 <b data-qb-correct>0</b></p>
-  <div class="qb-question" data-qb-question></div>
-  <section class="qb-feedback" hidden data-qb-feedback aria-live="polite">
-    <p class="qb-feedback-head" data-qb-feedback-head></p>
-    <p class="qb-feedback-answer" data-qb-feedback-answer></p>
-    <p class="qb-feedback-explain" data-qb-feedback-explain></p>
-    <p class="qb-feedback-steps" data-qb-feedback-steps></p>
-    <div class="qb-feedback-actions">
-      <button class="button small" type="button" data-qb-next>下一题 →</button>
+<div class="qb-practice-layout">
+  <aside class="qb-side" aria-label="练习设置">
+    <h2>练习设置</h2>
+    <p class="qb-label">数量</p>
+    <div class="qb-side-chips">
+      {% for size_option in sizes %}
+      <a class="chip{% if size_option == size %} on{% endif %}" href="?{% if area %}area={{ area }}&amp;{% endif %}{% if tag %}tag={{ tag }}&amp;{% endif %}count={{ size_option }}{% if mode_wrong %}&amp;mode=wrong{% endif %}">{{ size_option }} 题</a>
+      {% endfor %}
     </div>
-  </section>
-  <section class="qb-result" hidden data-qb-result>
-    <p class="qb-result-emoji" aria-hidden="true">🏁</p>
-    <p class="qb-result-score">答对 <b data-qb-final-correct>0</b>／<b data-qb-final-total>0</b> 题</p>
-    <p class="qb-result-praise" data-qb-praise></p>
-    <div class="qb-result-actions">
-      <a class="button small" data-qb-again>再练一组 ↻</a>
-      <a class="button small ghost" href="{{ wrong_url }}">看看错题本</a>
-      <a class="button small ghost" href="{{ home_url }}">回{{ home_label }}</a>
+    {% if tag_chips %}
+    <p class="qb-label">主题</p>
+    <div class="qb-side-chips qb-side-wrap">
+      <a class="chip{% if not tag %} on{% endif %}" href="?count={{ size }}{% if mode_wrong %}&amp;mode=wrong{% endif %}">全部</a>
+      {% for chip in tag_chips %}
+      <a class="chip{% if tag == chip.tag %} on{% endif %}" href="?tag={{ chip.tag }}&amp;count={{ size }}{% if mode_wrong %}&amp;mode=wrong{% endif %}">{{ chip.tag }}</a>
+      {% endfor %}
     </div>
-  </section>
-</section>
-{% endif %}
+    {% endif %}
+    <p class="qb-side-note">换学科回<a href="{{ home_url }}">题库主页</a>挑选。</p>
+  </aside>
+  <div class="qb-practice-main">
+    {% if empty_wrong %}
+    <div class="notice">错题本是空的——先去练一组，答错的题会自动收进来。<a class="button small" href="{{ home_url }}">回{{ home_label }}挑一组 →</a></div>
+    {% else %}
+    {{ questions|json_script:"qb-questions" }}
+    <section class="qb-board" data-qb-practice data-answer-url="{% url 'questionbank-answer' %}" data-practice-url="{{ practice_url }}" data-area="{{ area }}" data-tag="{{ tag }}" data-mode-wrong="{{ mode_wrong|yesno:'1,0' }}" data-size="{{ size }}">
+      <p class="qb-progress">第 <b data-qb-index>1</b>／<b data-qb-total>0</b> 题 · 答对 <b data-qb-correct>0</b></p>
+      <div class="qb-progress-bar" aria-hidden="true"><span data-qb-progress-fill></span></div>
+      <div class="qb-question" data-qb-question></div>
+      <section class="qb-feedback" hidden data-qb-feedback aria-live="polite">
+        <p class="qb-feedback-head" data-qb-feedback-head></p>
+        <p class="qb-feedback-answer" data-qb-feedback-answer></p>
+        <p class="qb-feedback-explain" data-qb-feedback-explain></p>
+        <p class="qb-feedback-steps" data-qb-feedback-steps></p>
+        <div class="qb-feedback-actions">
+          <button class="button small" type="button" data-qb-next>下一题 →</button>
+        </div>
+      </section>
+      <section class="qb-result" hidden data-qb-result>
+        <p class="qb-result-emoji" aria-hidden="true">🏁</p>
+        <p class="qb-result-stars" data-qb-stars aria-label="星级评价"></p>
+        <p class="qb-result-score">答对 <b data-qb-final-correct>0</b>／<b data-qb-final-total>0</b> 题</p>
+        <p class="qb-result-praise" data-qb-praise></p>
+        <div class="qb-result-actions">
+          <a class="button small" data-qb-again>再练一组 ↻</a>
+          <a class="button small ghost" href="{{ wrong_url }}">看看错题本</a>
+          <a class="button small ghost" href="{{ home_url }}">回{{ home_label }}</a>
+        </div>
+      </section>
+    </section>
+    {% endif %}
+  </div>
+</div>
 {% endblock %}

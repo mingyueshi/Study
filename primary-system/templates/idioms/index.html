@@ -76,9 +76,13 @@
       <article class="idiom-reader" id="word-{{ card.id }}">
         {% with reading=card.reading %}
         <header class="idiom-card-heading">
-          <span class="idiom-card-number" aria-hidden="true">{{ forloop.counter|stringformat:"02d" }}</span>
-          <h3>{{ card.headword }}</h3>
-          {% include 'idioms/pinyin.html' %}
+          <span class="idiom-seal" aria-hidden="true">{{ card.headword|first }}</span>
+          <div class="idiom-card-title">
+            <span class="idiom-card-number" aria-hidden="true">{{ forloop.counter|stringformat:"02d" }}</span>
+            <h3>{{ card.headword }}</h3>
+            {% include 'idioms/pinyin.html' %}
+          </div>
+          {% if reading %}<button type="button" class="say-chip" data-say="{{ card.headword }}" aria-label="朗读 {{ card.headword }}">🔊</button>{% endif %}
         </header>
         <div class="idiom-card-body">
         {% if reading %}

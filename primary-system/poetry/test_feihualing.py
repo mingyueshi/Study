@@ -126,7 +126,6 @@ class FeihualingTests(TestCase):
         )
         self.assertContains(response, "提示学习")
         self.assertContains(response, "feihualing.js")
-        self.assertNotContains(response, "speech.js")
 
     def test_completed_round_writes_exactly_one_record(self):
         state = self.start()

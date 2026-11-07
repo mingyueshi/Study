@@ -28,35 +28,55 @@
 .say-chip { padding: 4px 13px; border: 1.5px solid #ddd3ef; border-radius: 999px; background: #f4edfd; color: #5d5484; font-size: 15px; font-weight: 700; cursor: pointer; transition: border-color .14s ease; }
 .say-chip:hover { border-color: #b9a8e2; }
 
-/* ── 练一练 ───────────────────────────────────────────────────────────── */
-.phrase-practice { max-width: 760px; margin: 26px 0 34px; padding: 24px 28px; border: 2px dashed #b9d3e8; border-radius: 22px; background: #f4f9fd; scroll-margin-top: 24px; }
-.phrase-practice-title { margin: 0 0 12px; color: var(--green); font-weight: 800; font-size: 17px; }
-.phrase-prompt { display: flex; align-items: baseline; gap: 12px; margin: 0; font-size: 28px; font-weight: 800; }
-.phrase-prompt span { font-size: 20px; font-weight: 700; color: var(--muted); }
-.phrase-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-top: 14px; }
-.phrase-option { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border: 2px solid var(--line); border-radius: 16px; background: var(--white); font-size: 19px; font-weight: 700; cursor: pointer; text-align: left; transition: transform .14s ease, border-color .14s ease, background .14s ease; }
+/* ── 左右工作区：左 sticky（练习 + 全部控制），右纯词卡流 ─────────────── */
+.phrase-workspace { display: grid; grid-template-columns: minmax(320px, 380px) minmax(0, 1fr); gap: 22px; align-items: start; margin: 6px 0 30px; }
+.phrase-side { position: sticky; top: 16px; display: grid; gap: 14px; }
+.phrase-main { min-width: 0; }
+
+/* ── 练一练（右侧正文顶部，选项两行四列随宽度自适应） ────────────────── */
+.phrase-practice { margin: 0 0 24px; padding: 20px 24px; border: 2px dashed #b9d3e8; border-radius: 22px; background: #f4f9fd; scroll-margin-top: 24px; }
+.phrase-practice-title { margin: 0 0 10px; color: var(--muted); font-weight: 800; font-size: 13px; letter-spacing: .04em; }
+.phrase-prompt { display: flex; align-items: baseline; flex-wrap: wrap; gap: 12px; margin: 0; font-size: 26px; font-weight: 800; }
+.phrase-prompt span { font-size: 18px; font-weight: 700; color: var(--muted); }
+.phrase-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin-top: 14px; }
+.phrase-option { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border: 2px solid var(--line); border-radius: 14px; background: var(--white); font-size: 17px; font-weight: 700; text-align: left; cursor: pointer; transition: transform .14s ease, border-color .14s ease, background .14s ease; }
 .phrase-option:hover:enabled { border-color: #4d96ff; background: #eef4fb; transform: translateY(-2px); }
 .phrase-option:active:enabled { transform: translateY(0); }
 .phrase-option:disabled { cursor: default; opacity: .68; }
-.phrase-option-key { display: grid; place-items: center; flex: none; width: 28px; height: 28px; border: 1.5px solid var(--line); border-radius: 9px; background: var(--white); color: var(--muted); font-size: 14px; font-style: normal; font-weight: 750; transition: border-color .14s ease, color .14s ease; }
+.phrase-option-key { display: grid; place-items: center; flex: none; width: 26px; height: 26px; border: 1.5px solid var(--line); border-radius: 8px; background: var(--white); color: var(--muted); font-size: 13px; font-style: normal; font-weight: 750; transition: border-color .14s ease, color .14s ease; }
 .phrase-option:hover:enabled .phrase-option-key { border-color: #9cc2ec; color: #31627e; }
 .phrase-option.right { border-color: #2c7a4b; background: #e2f0dc; opacity: 1; }
 .phrase-option.right .phrase-option-key { border-color: #2c7a4b; background: #2c7a4b; color: #fff; }
-.phrase-option.right::after { content: "✓"; margin-left: auto; color: #2c7a4b; font-size: 22px; font-weight: 900; }
+.phrase-option.right::after { content: "✓"; margin-left: auto; color: #2c7a4b; font-size: 19px; font-weight: 900; }
 .phrase-option.wrong { border-color: #b4483a; background: #fde8e4; }
 .phrase-option.wrong span { text-decoration: line-through; }
 .phrase-option.wrong .phrase-option-key { border-color: #d9a49d; color: #8f3a2f; }
-.phrase-feedback { margin: 12px 0 0; font-size: 17px; font-weight: 700; }
+.phrase-feedback { margin: 14px 0 0; font-size: 16px; font-weight: 700; line-height: 1.7; }
 .phrase-feedback:empty { display: none; }
 .phrase-feedback.ok { color: #2c7a4b; }
 .phrase-feedback.bad { color: #b4483a; }
 .phrase-feedback .say-chip { margin-inline: 2px; }
-.phrase-score { margin: 14px 0 0; color: var(--muted); font-size: 17px; }
-.phrase-score b { color: var(--green); font-size: 22px; }
-.phrase-actions { margin-top: 12px; }
+.phrase-score-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 14px; padding-top: 14px; border-top: 1px dashed #cddcee; flex-wrap: wrap; }
+.phrase-score { margin: 0; color: var(--muted); font-size: 15px; }
+.phrase-score b { color: var(--green); font-size: 20px; }
+.phrase-actions { margin: 0; }
 /* 答完一题，「换一题」升为主行动引导继续。 */
 .phrase-practice.done .phrase-actions .button { border-color: #2c7a4b; background: #2c7a4b; color: #fff; }
 .phrase-practice.done .phrase-actions .button:hover { background: #235f3b; border-color: #235f3b; color: #fff; }
+
+/* ── 侧栏：全部筛选（视图 + 搜索 + 计数 + 分组 chips） ────────────────── */
+.phrase-side-tools { display: grid; gap: 10px; padding: 16px; border: 1px solid var(--line); border-radius: 18px; background: var(--white); }
+.phrase-side-tools .phrase-views { display: flex; }
+.phrase-side-tools .phrase-view { flex: 1; padding: 9px 12px; }
+.phrase-side-tools .phrase-search { width: 100%; }
+.phrase-side-tools .phrase-count { text-align: center; }
+/* 分组筛选收进侧栏：一行一个，名称左、数量右。 */
+.phrase-side .phrase-chip-row { display: flex; flex-direction: column; gap: 5px; padding: 14px; border: 1px solid var(--line); border-radius: 18px; background: var(--white); }
+.phrase-side .phrase-chip { display: flex; align-items: center; justify-content: space-between; gap: 8px; width: 100%; padding: 8px 12px; border: 1.5px solid transparent; border-radius: 10px; background: none; color: var(--ink); font-size: 14px; font-weight: 650; text-align: left; cursor: pointer; transition: background .14s ease, border-color .14s ease; }
+.phrase-side .phrase-chip i { color: var(--muted); font-style: normal; font-size: 12px; font-variant-numeric: tabular-nums; }
+.phrase-side .phrase-chip:hover { background: var(--soft); }
+.phrase-side .phrase-chip.on { border-color: var(--green); background: var(--green); color: #fff; font-weight: 750; }
+.phrase-side .phrase-chip.on i { color: #ffffffb0; }
 
 /* ── 浏览：视图切换 + chips + 分组 ────────────────────────────────────── */
 .phrase-shell { min-width: 0; }
@@ -88,6 +108,12 @@
 .phrase-empty { padding: 26px; border-radius: 16px; background: var(--soft); color: var(--muted); }
 .phrase-note-foot { margin-top: 12px; color: var(--muted); font-size: 15px; }
 
+@media (max-width: 860px) {
+  .phrase-workspace { grid-template-columns: minmax(0, 1fr); }
+  .phrase-side { position: static; }
+  .phrase-practice { max-width: 760px; }
+  .phrase-options { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+}
 @media (max-width: 720px) {
   .phrase-hero { flex-direction: column; align-items: flex-start; }
   .phrase-hero-demo { display: none; }

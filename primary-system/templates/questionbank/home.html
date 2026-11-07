@@ -1,10 +1,9 @@
 {% extends 'base.html' %}{% load static %}{% block title %}挑战题库 · 乐学堂{% endblock %}
-{% block content %}<link rel="stylesheet" href="{% static 'questionbank/bank.css' %}">
+{% block content %}<link rel="stylesheet" href="{% static 'questionbank/bank.css' %}?v=4">
 <header class="qb-hero">
   <div class="qb-hero-copy">
     <p class="eyebrow">全科 · 练一练</p>
     <h1>挑战题库</h1>
-    <p class="qb-hero-tag">数学、语文、英语、奥数四个领域：答对收进成绩单，答错进错题本，再练一遍就掌握。</p>
     <p class="qb-hero-stats"><span><b>{{ total }}</b> 道题</span><span>已答 <b>{{ summary.answered }}</b> 题</span><span>答对 <b>{{ summary.correct }}</b> 题</span></p>
   </div>
   <div class="qb-hero-deco" aria-hidden="true"><span>对</span><span>✓</span><span>✗</span><span>答</span></div>
@@ -42,5 +41,5 @@
   {% endfor %}
 </section>
 
-<p class="qb-note">题目来自课本与探索册的固定批次，奥数入门题按主题人工撰写；判分在服务端完成，游客练习记录保存在本浏览器，登录后跟着账号走。</p>
+<p class="qb-note">题目来自课本与探索册；判分在服务端完成，答错的题自动进错题本。</p>
 {% endblock %}

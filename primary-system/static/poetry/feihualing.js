@@ -54,7 +54,7 @@
     els.again.disabled = els.change.disabled = busy;
     const history = state.history || [];
     els['history-empty'].hidden = history.length > 0;
-    els.history.innerHTML = history.map(item => `<li class="fh-history-item"><blockquote>${poemMarkup(item.text)}</blockquote><p>《${escape(item.title)}》 · ${escape(item.author)}</p>${item.editorial_note ? `<p class="fh-editorial-note">${escape(item.editorial_note)}</p>` : ''}<div class="fh-history-meta"><span class="${item.mode === 'learning' ? 'is-learning' : ''}">${escape(item.label)}</span><a href="${escape(item.url)}" target="_blank" rel="noopener noreferrer">查看原诗 ↗</a></div></li>`).join('');
+    els.history.innerHTML = history.map(item => `<li class="fh-history-item"><blockquote>${poemMarkup(item.text)}</blockquote><p>《${escape(item.title)}》 · ${escape(item.author)}</p>${item.editorial_note ? `<p class="fh-editorial-note">${escape(item.editorial_note)}</p>` : ''}<div class="fh-history-meta"><span class="${item.mode === 'learning' ? 'is-learning' : ''}">${escape(item.label)}</span><button type="button" class="fh-read" data-say="${escape(item.text)}" data-rate="0.8" aria-label="朗读 ${escape(item.text)}">♪ 朗读</button><a href="${escape(item.url)}" target="_blank" rel="noopener noreferrer">查看原诗 ↗</a></div></li>`).join('');
     if (available) els['corpus-note'].textContent = `唐诗、宋词、诗经、楚辞与千家诗 · 可用完整诗句 ${Number(state.sentence_count || 0).toLocaleString('zh-CN')} 句。完成一局会计入你的学习足迹。`;
     els['confirm-yes'].disabled = els['confirm-no'].disabled = busy;
   }
@@ -63,13 +63,14 @@
     if (busy) return;
     const ticket = ++epoch;
     busy = true;
+    let data = null;
     render();
     try {
       const response = await fetch($('feihualing').dataset.api, {
         method:'POST', headers:{'Content-Type':'application/json','X-CSRFToken':csrf()},
         body:JSON.stringify({action, token:state.token, ...extra}),
       });
-      const data = await response.json().catch(() => null);
+      data = await response.json().catch(() => null);
       if (ticket !== epoch) return;
       if (!response.ok) {
         if (data?.restart_required) needsRestart = true;
@@ -89,7 +90,12 @@
     } catch (error) {
       if (ticket === epoch) feedback('连接中断，诗句和原局已保留。可以重新提交；不会自动重发。', true);
     } finally {
-      if (ticket === epoch) { busy = false; render(); if (action === 'answer' && !els.form.hidden) els.answer.focus(); }
+      if (ticket === epoch) {
+        busy = false;
+        render();
+        if (action === 'answer' && data?.outcome === 'accepted') els.history.firstElementChild?.classList.add('is-new');
+        if (action === 'answer' && !els.form.hidden) els.answer.focus();
+      }
     }
   }
 

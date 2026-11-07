@@ -23,24 +23,27 @@
     '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
   }[ch]));
 
-  const updateProgress = () => {
+  const updateProgress = (answered = false) => {
     $('[data-qb-index]').textContent = Math.min(index + 1, questions.length);
     $('[data-qb-total]').textContent = questions.length;
     $('[data-qb-correct]').textContent = correctCount;
+    const fill = $('[data-qb-progress-fill]');
+    if (fill) fill.style.width = `${((index + (answered ? 1 : 0)) / questions.length) * 100}%`;
   };
 
-  const sayChip = (text) => `<button class="say-chip" type="button" data-say="${escapeHtml(text)}" aria-label="朗读题目">🔊</button>`;
+  const sayChip = (text, label) => `<button class="say-chip" type="button" data-say="${escapeHtml(text)}" aria-label="${escapeHtml(label || '朗读')}">🔊</button>`;
 
   /* ── 每种题型自己的作答区 ─────────────────────────────────────────── */
   const renderers = {
     choice(question) {
       return `<div class="qb-options">${question.options.map((option, position) =>
-        `<button class="qb-option" type="button" data-qb-option data-value="${position}">${escapeHtml(option)}</button>`).join('')}</div>`;
+        `<button class="qb-option" type="button" data-qb-option data-value="${position}" data-text="${escapeHtml(option)}">` +
+        `<i class="qb-key" aria-hidden="true">${position + 1}</i><span>${escapeHtml(option)}</span></button>`).join('')}</div>`;
     },
     truefalse() {
       return `<div class="qb-boolean">
-        <button class="qb-option" type="button" data-qb-option data-value="true">对 ✓</button>
-        <button class="qb-option" type="button" data-qb-option data-value="false">错 ✗</button>
+        <button class="qb-option" type="button" data-qb-option data-value="true" data-text="对">对 ✓</button>
+        <button class="qb-option" type="button" data-qb-option data-value="false" data-text="错">错 ✗</button>
       </div>`;
     },
     selfcheck() {
@@ -64,9 +67,15 @@
     feedback.classList.remove('good', 'bad');
     const question = questions[index];
     const tags = (question.tags || []).map((tag) => `<span class="qb-tag">${escapeHtml(tag)}</span>`).join('');
+    /* 朗读只给英语题：读引号里的单词本身，不读整句题干。 */
+    let readButton = '';
+    if (question.area === 'english') {
+      const word = (question.stem.match(/「([^」]+)」/) || [])[1];
+      if (word) readButton = sayChip(word, `朗读单词 ${word}`);
+    }
     questionBox.innerHTML = `
       <div class="qb-tag-row">${tags}</div>
-      <p class="qb-stem">${escapeHtml(question.stem)}${sayChip(question.stem)}</p>
+      <p class="qb-stem">${escapeHtml(question.stem)}${readButton}</p>
       ${renderers[question.type](question)}`;
     updateProgress();
     const focusTarget = questionBox.querySelector('[data-qb-option], [data-qb-reveal]');
@@ -95,7 +104,7 @@
     const verdict = await response.json();
     if (verdict.correct) correctCount += 1;
     markChoices(question, given, verdict);
-    updateProgress();
+    updateProgress(true);
     showFeedback({
       correct: verdict.correct, given,
       head: verdict.correct ? `${correctCount >= 3 ? correctCount + ' 连对，' : ''}答对了！` : '再想一想～',
@@ -138,7 +147,7 @@
     } else {
       buttons.forEach((button) => {
         button.disabled = true;
-        if (button.textContent === verdict.reveal) button.classList.add('right');
+        if (button.dataset.text === verdict.reveal) button.classList.add('right');
         if (question.type === 'choice' && Number(button.dataset.value) === given.value && !verdict.correct) {
           button.classList.add('wrong');
         }
@@ -158,6 +167,11 @@
     $('[data-qb-final-correct]').textContent = correctCount;
     $('[data-qb-final-total]').textContent = questions.length;
     const ratio = correctCount / questions.length;
+    const stars = ratio >= 1 ? 3 : ratio >= 0.75 ? 2 : ratio >= 0.5 ? 1 : 0;
+    const starsBox = $('[data-qb-stars]');
+    starsBox.innerHTML = [0, 1, 2].map((i) => `<span class="qb-star${i < stars ? ' on' : ''}">★</span>`).join('');
+    starsBox.setAttribute('aria-label', `获得 ${stars} 颗星（满分 3 颗）`);
+    starsBox.hidden = false;
     $('[data-qb-praise]').textContent =
       ratio === 1 ? '全部答对，太棒了！给自己一个大拇指 👍'
         : ratio >= 0.6 ? '很不错，继续加油！答错的题已经在错题本里等你。'
@@ -193,6 +207,26 @@
     questionBox.appendChild(panel);
     panel.querySelector('[data-qb-option]').focus();
   };
+
+  /* 键盘：数字 1~4 选当前可见选项（含自评按钮）；反馈态 Enter 下一题。
+     焦点在按钮/链接上时 Enter 交给原生激活，避免双重触发。 */
+  document.addEventListener('keydown', (event) => {
+    if (event.defaultPrevented || event.ctrlKey || event.metaKey || event.altKey) return;
+    const active = document.activeElement;
+    if (event.key === 'Enter') {
+      if (!feedback.hidden) {
+        const action = feedback.querySelector('[data-qb-next], [data-qb-retry]');
+        if (action) { event.preventDefault(); action.click(); }
+      }
+      return;
+    }
+    if (locked || questionBox.hidden) return;
+    const index = ['1', '2', '3', '4'].indexOf(event.key);
+    if (index < 0) return;
+    const options = [...questionBox.querySelectorAll('[data-qb-option]')].filter((button) => !button.disabled);
+    const target = options[index];
+    if (target) { event.preventDefault(); target.click(); }
+  });
 
   showQuestion();
 })();
