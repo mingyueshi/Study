@@ -243,8 +243,7 @@ input:hover, select:hover, textarea:hover { border-color: #829e79; }
 input::placeholder, textarea::placeholder { color: #687869; opacity: 1; }
 input[type="checkbox"] { width: 26px; height: 26px; min-height: 26px; margin: 0 8px 0 0; vertical-align: middle; accent-color: var(--green); }
 textarea { resize: vertical; line-height: 1.9; }
-.reset { display: inline-flex; align-items: center; justify-content: center; min-height: 56px; padding: 12px 8px; color: var(--green); font-size: 16px; }
-.reset:hover, .back:hover, .empty > a:not(.button):hover { text-decoration: underline; text-underline-offset: 6px; }
+.back:hover, .empty > a:not(.button):hover { text-decoration: underline; text-underline-offset: 6px; }
 .book-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
 .book-card { display: flex; flex-direction: column; align-items: flex-start; min-width: 0; padding: 28px; border: 1px solid var(--line); border-top: 5px solid var(--card-line); border-radius: 22px; background: var(--white); overflow-wrap: anywhere; transition: border-color .18s, box-shadow .18s; }
 .book-card:hover { border-color: var(--card-accent); box-shadow: 0 8px 22px #233e370b; }
@@ -429,7 +428,6 @@ textarea { resize: vertical; line-height: 1.9; }
   .filter-field { flex: 1 1 calc(50% - 7px); }
   .filters .button { flex: 1 1 50%; }
   .filter-field label { font-size: 15px; }
-  .reset { flex: 1; }
   .back { margin-block: 16px; font-size: 16px; }
   .page-heading { margin: 20px 0 28px; }
   .page-heading h1 { font-size: 32px; }
