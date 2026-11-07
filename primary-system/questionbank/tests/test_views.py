@@ -49,6 +49,20 @@ class HomeViewTests(TestCase):
         page = self.client.get(reverse('questionbank'))
         self.assertEqual(page.context['summary']['answered'], 0)
 
+    def test_home_lists_olympiad_as_peer_area(self):
+        """题库首页四张同级领域卡：数学/语文/英语/奥数；总数按全轨计。"""
+        seed_choice()
+        seed_olympiad()
+        page = self.client.get(reverse('questionbank'))
+        cards = {card['title']: card for card in page.context['cards']}
+        self.assertEqual(set(cards), {'数学', '语文', '英语', '奥数'})
+        self.assertEqual(cards['数学']['count'], 1)
+        self.assertEqual(cards['语文']['count'], 0)
+        self.assertEqual(cards['奥数']['count'], 1)
+        self.assertEqual(cards['奥数']['practice_url'], reverse('questionbank-olympiad-practice'))
+        self.assertEqual(cards['奥数']['wrong_query'], '?track=olympiad')
+        self.assertEqual(page.context['total'], 2, '题库首页总数按普通＋奥数全轨计。')
+
 
 class PracticeViewTests(TestCase):
     def test_page_embeds_questions_without_answers(self):
@@ -180,13 +194,6 @@ class OlympiadViewTests(TestCase):
         unknown = self.client.get(reverse('questionbank-olympiad-practice'), {'tag': '数论'})
         self.assertEqual(unknown.context['tag'], '')
         self.assertEqual(len(unknown.context['questions']), 2)
-
-    def test_home_counts_lock_to_regular(self):
-        seed_choice()
-        seed_olympiad()
-        response = self.client.get(reverse('questionbank'))
-        self.assertEqual(response.context['total'], 1)
-        self.assertEqual(response.context['olympiad_count'], 1)
 
 
 class WrongTrackTests(TestCase):

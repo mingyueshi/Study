@@ -135,15 +135,10 @@ def entry_for(code):
 
 # 首页专题卡：不挂学习模块的玩法入口，注册顺序即展示顺序。
 # 字段：route（URL 名）、subject（卡片角标学科）、area（筛选分组键）、icon、
-# color（卡片配色）、name、tag（徽标）、blurb（一句话介绍）。一个玩法占一张卡；
-# 同一玩法内有多个并列入口（如题库的普通/奥数）时改用 links：卡面渲染成
-# 卡内多按钮，学科维度仍是这张卡自己的 area。新增专题只在此追加一行。
+# color（卡片配色）、name、tag（徽标）、blurb（一句话介绍）。
+# 例外：挑战题库跨学科、内部再按领域分卡，不进本网格——由首页专题区标题
+# 右侧的特殊入口直达（见 catalog/home.html 的 section-aside）。
 SPECIAL_ENTRIES = (
-    {'subject': '数学', 'area': 'math', 'icon': 'quiz', 'color': 'math',
-     'name': '挑战题库', 'tag': '2 个题库入口',
-     'blurb': '普通题库练判断、自评、多音字与词义，奥数挑战练速算巧算、鸡兔同笼这些思维题。服务端判分，答错进同一个错题本。',
-     'links': [{'name': '普通题库', 'route': 'questionbank'},
-               {'name': '奥数挑战', 'route': 'questionbank-olympiad'}]},
     {'route': 'phrases', 'subject': '英语', 'area': 'english', 'icon': 'phrases', 'color': 'english',
      'name': '日常用语', 'tag': '开口说 →',
      'blurb': '教材里的 597 条常用短语和短句：按句式记一个开头整句就出来，按话题找场景想说哪句点哪句。'},
@@ -185,17 +180,10 @@ SPECIAL_ENTRIES = (
 
 def special_entries():
     """解析好的首页专题卡列表，字段与模块卡完全同形，模板一个循环渲染。"""
-    cards = []
-    for spec in SPECIAL_ENTRIES:
-        card = {'url': reverse(spec['route']) if 'route' in spec else '',
-                'icon': spec['icon'], 'color_code': spec['color'],
-                'subject_label': spec['subject'], 'area': spec['area'],
-                'name': spec['name'], 'blurb': spec['blurb'], 'badge': spec['tag']}
-        if 'links' in spec:
-            card['links'] = [{'name': link['name'], 'url': reverse(link['route'])}
-                             for link in spec['links']]
-        cards.append(card)
-    return cards
+    return [{'url': reverse(spec['route']), 'icon': spec['icon'], 'color_code': spec['color'],
+             'subject_label': spec['subject'], 'area': spec['area'],
+             'name': spec['name'], 'blurb': spec['blurb'], 'badge': spec['tag']}
+            for spec in SPECIAL_ENTRIES]
 
 
 def learning_overview(user):

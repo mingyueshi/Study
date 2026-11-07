@@ -130,28 +130,19 @@ class CatalogTests(PlatformFixture):
         response = self.client.get('/')
         for spec in SPECIAL_ENTRIES:
             self.assertContains(response, spec['name'])
-            for link in spec.get('links', []):
-                self.assertContains(response, reverse(link['route']))
-            if 'route' in spec:
-                self.assertContains(response, reverse(spec['route']))
-        # 专题卡按注册顺序殿后（最后一个仍是无组的单链接卡）。
+            self.assertContains(response, reverse(spec['route']))
+        # 专题卡按注册顺序殿后。
         self.assertEqual(response.context['entry_cards'][-1]['name'], '多音字')
         self.assertEqual(len(response.context['entry_cards']),
                          Module.objects.filter(is_active=True).count() + len(SPECIAL_ENTRIES))
 
-    def test_home_questionbank_card_carries_both_tracks(self):
-        """题库一张卡承载普通/奥数两个入口：卡内双按钮，学科维度仍是数学一张卡。"""
+    def test_home_questionbank_special_entry_in_heading(self):
+        """题库跨学科、内部再分领域：不进专题网格，入口在专题区标题右侧特殊放置。"""
         response = self.client.get('/')
-        card = next(c for c in response.context['entry_cards'] if c['name'] == '挑战题库')
-        self.assertEqual([link['name'] for link in card['links']], ['普通题库', '奥数挑战'])
-        self.assertEqual([link['url'] for link in card['links']],
-                         [reverse('questionbank'), reverse('questionbank-olympiad')])
-        self.assertEqual(card['area'], 'math')
-        # 学科筛选照常生效：古诗词下题库卡不出现，数学下正常出现。
-        poetry = self.client.get('/?area=poetry')
-        self.assertNotIn('挑战题库', [c['name'] for c in poetry.context['entry_cards']])
-        math_page = self.client.get('/?area=math')
-        self.assertIn('挑战题库', [c['name'] for c in math_page.context['entry_cards']])
+        self.assertContains(response, reverse('questionbank'))
+        names = [c['name'] for c in response.context['entry_cards']]
+        self.assertNotIn('挑战题库', names)
+        self.assertNotIn('奥数挑战', names)
 
     def test_area_filter_single_select(self):
         """专题单选筛选：按 ?area= 过滤卡片，无效值回退全部，chips 保留书架筛选。"""

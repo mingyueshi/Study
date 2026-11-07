@@ -176,6 +176,9 @@ h3 { font-size: 23px; line-height: 1.5; }
 .section-heading h2 { margin: 0; }
 .section-heading p { margin: 8px 0 0; color: var(--muted); font-size: 16px; }
 .section-heading .eyebrow { margin: 0 0 8px; color: var(--green); font-size: 15px; }
+/* 标题右侧的特殊入口（如挑战题库）：说明句 + 按钮同行右对齐。 */
+.section-aside { display: flex; align-items: center; gap: 16px; }
+.section-aside p { margin: 0; }
 
 .module-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 22px; margin-bottom: 64px; }
 
@@ -195,9 +198,6 @@ h3 { font-size: 23px; line-height: 1.5; }
   overflow-wrap: anywhere;
 }
 .module-card:hover { transform: translateY(-5px); box-shadow: 0 12px 26px #233e3710; }
-/* 卡内多入口（如题库的普通/奥数）：一张卡承载同玩法的并列入口。 */
-.module-card-links { display: flex; flex-wrap: wrap; gap: 10px; }
-.module-card-links .button { margin: 0; }
 .module-card img { flex-shrink: 0; padding: 8px; margin-bottom: 20px; background: #fff9; border-radius: 23px; }
 .module-meta { position: absolute; top: 30px; right: 24px; display: flex; align-items: center; gap: 12px; color: var(--muted); font-size: 15px; }
 .module-meta > span { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: #fffa; color: var(--card-accent); font-size: 22px; }

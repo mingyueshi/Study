@@ -11,7 +11,7 @@
 {% else %}
 <section class="study-strip" aria-label="学习概况"><div><strong>{{ entry_total }}</strong><span>探索方向</span></div><div><strong>{{ item_count }}</strong><span>当前可读内容</span></div><p>登录后，收藏、笔记和掌握记录会跟着你的账号走。</p></section>
 {% endif %}
-<section aria-labelledby="modules-title"><div class="section-heading"><div><p class="eyebrow">跟着兴趣出发</p><h2 id="modules-title">每一科，都有新发现</h2></div><p>读课本、学成语，也可以用诗句接飞花令。</p></div>
+<section aria-labelledby="modules-title"><div class="section-heading"><div><p class="eyebrow">跟着兴趣出发</p><h2 id="modules-title">每一科，都有新发现</h2></div><div class="section-aside"><p>读课本、学成语，也可以用诗句接飞花令。</p><a class="button small" href="{% url 'questionbank' %}">挑战题库 <span aria-hidden="true">→</span></a></div></div>
 <nav class="area-chips" aria-label="按学科筛选专题">{% for chip in area_chips %}<a href="{{ chip.url }}" {% if chip.on %}class="on" aria-current="page"{% endif %}>{{ chip.label }}<i>{{ chip.count }}</i></a>{% endfor %}</nav>
 <div class="module-grid">{% for item in entry_cards %}{% if item.is_group %}<div class="grid-group-title" id="group-{{ item.key }}-title"><h3>{{ item.title }}</h3><p>{{ item.note }}</p></div>{% else %}{% include 'catalog/_entry_card.html' with card=item %}{% endif %}{% endfor %}
 </div></section>
