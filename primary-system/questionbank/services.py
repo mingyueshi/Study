@@ -5,6 +5,7 @@
 含义明确：答题数、答对数、按学科分计，不合成跨学科掌握百分比。
 """
 from datetime import timedelta
+import random
 
 from django.db.models import Count, Q
 from django.utils import timezone
@@ -16,13 +17,21 @@ SIZES = (5, 10, 20)
 DEFAULT_SIZE = 10
 
 
-def pick_questions(*, area='', count=DEFAULT_SIZE, ids=None):
-    """按学科抽题：active 且可选领域过滤；ids 用于错题重练等限定池。"""
+def pick_questions(*, area='', track='', count=DEFAULT_SIZE, ids=None, tag=''):
+    """按轨别与学科抽题：active 且可选轨别、领域过滤；ids 用于错题重练等限定池。
+
+    标签过滤在 Python 侧完成：JSON 数组包含查找仅 PostgreSQL 支持，而题库
+    规模可控，先取整池再按标签筛选后随机取样。"""
     rows = Question.objects.filter(active=True)
+    if track in Question.Track.values:
+        rows = rows.filter(track=track)
     if area in Question.Area.values:
         rows = rows.filter(area=area)
     if ids is not None:
         rows = rows.filter(pk__in=ids)
+    if tag:
+        pool = [question for question in rows if tag in (question.tags or [])]
+        return pool if len(pool) <= count else random.sample(pool, count)
     return list(rows.order_by('?')[:count])
 
 
@@ -67,11 +76,15 @@ def record_answer(question, given, owner):
     }
 
 
-def owner_summary(scope):
-    """主页统计卡数字：答题数、答对数、本周新增（只读路径，不建会话）。"""
+def owner_summary(scope, track=''):
+    """主页统计卡数字：答题数、答对数、本周新增（只读路径，不建会话）。
+
+    track 给定时经题目 FK 只统计该轨别的作答。"""
     if not scope:
         return {'answered': 0, 'correct': 0, 'week': 0, 'areas': {}}
     rows = AnswerRecord.objects.filter(**scope)
+    if track in Question.Track.values:
+        rows = rows.filter(question__track=track)
     week_cutoff = timezone.now() - timedelta(days=7)
     return {
         'answered': rows.count(),
@@ -79,6 +92,24 @@ def owner_summary(scope):
         'week': rows.filter(created_at__gte=week_cutoff).count(),
         'areas': area_counts(rows),
     }
+
+
+def track_wrong_ids(scope, track):
+    """错题池 ∩ 轨别：错题重练与各入口的错题条都按轨别取子集。"""
+    wrong_ids = latest_wrong_ids(scope)
+    if not wrong_ids:
+        return []
+    return list(Question.objects.filter(pk__in=wrong_ids, track=track, active=True)
+                .values_list('id', flat=True))
+
+
+def tag_counts(track):
+    """某轨别在库题目的标签计数：[(tag, count), …]，按数量降序、同数按名排。"""
+    counter = {}
+    for tags in Question.objects.filter(active=True, track=track).values_list('tags', flat=True):
+        for tag in tags or []:
+            counter[tag] = counter.get(tag, 0) + 1
+    return sorted(counter.items(), key=lambda item: (-item[1], item[0]))
 
 
 def area_counts(answer_rows):

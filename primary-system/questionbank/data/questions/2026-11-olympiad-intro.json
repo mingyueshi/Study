@@ -1,0 +1,698 @@
+{
+ "schema_version": 1,
+ "batch_id": "2026-11-olympiad-intro",
+ "generator": "人工撰写（uuid 由 questionbank.types.question_uuid 推导）",
+ "note": "四年级奥数入门首批：八个主题（速算巧算、等差数列、鸡兔同笼、盈亏问题、还原问题、行程初步、图形计数、逻辑推理），答案下标按确定性轮换分散。",
+ "questions": [
+  {
+   "uuid": "2b852210-cef5-5ca5-adfa-2dd3c497d0dc",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "巧算 25×44：先把 44 拆成 4×11，凑出 100 再乘，结果是多少？",
+   "payload": {
+    "options": [
+     "110",
+     "1210",
+     "1100",
+     "1010"
+    ],
+    "answer": 2,
+    "explanation": "25×44=25×4×11=100×11=1100。凑出整百再算，又快又准。"
+   },
+   "tags": [
+    "速算巧算"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:susuan:01"
+  },
+  {
+   "uuid": "6f244b2e-54e2-586c-b874-a7d99895581d",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "巧算 99×38：把 99 看成 100，先乘 100 再减去一个 38，结果是多少？",
+   "payload": {
+    "options": [
+     "3762",
+     "3662",
+     "3862",
+     "3742"
+    ],
+    "answer": 0,
+    "explanation": "99×38=100×38-38=3800-38=3762。多算了一个 38，要减回来。"
+   },
+   "tags": [
+    "速算巧算"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:susuan:02"
+  },
+  {
+   "uuid": "39f64a12-d4af-5f52-a8a6-c9759eeba572",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "巧算 125×16：先把 16 拆成 8×2，凑出 1000 再乘，结果是多少？",
+   "payload": {
+    "options": [
+     "2250",
+     "2000",
+     "1250",
+     "1875"
+    ],
+    "answer": 3,
+    "explanation": "125×16=125×8×2=1000×2=2000。记住 125×8=1000 这一对好朋友。"
+   },
+   "tags": [
+    "速算巧算"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:susuan:03"
+  },
+  {
+   "uuid": "c52ae891-73c6-54a0-9b33-9968d8eba14b",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "巧算 456-99：先减 100 再补回 1，结果是多少？",
+   "payload": {
+    "options": [
+     "356",
+     "347",
+     "367",
+     "357"
+    ],
+    "answer": 1,
+    "explanation": "456-99=456-100+1=357。99 比 100 小 1，多减的要加回来。"
+   },
+   "tags": [
+    "速算巧算"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:susuan:04"
+  },
+  {
+   "uuid": "96249992-040e-5b5c-93bb-944470082e53",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "数列 3、7、11、15……每个数都比前一个多 4，第 10 个数是多少？",
+   "payload": {
+    "options": [
+     "43",
+     "40",
+     "36",
+     "39"
+    ],
+    "answer": 1,
+    "explanation": "第 1 个是 3，到第 10 个一共跳了 9 步，每步加 4：3+4×9=39。"
+   },
+   "tags": [
+    "等差数列"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:dengcha:05"
+  },
+  {
+   "uuid": "13956d28-8544-5b88-a049-5b5a2e7aba9c",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "用等差数列求和的方法算 1+2+3+……+20，结果是多少？",
+   "payload": {
+    "options": [
+     "205",
+     "210",
+     "200",
+     "220"
+    ],
+    "answer": 3,
+    "explanation": "首项加末项：1+20=21；一共 20 项，21×20÷2=210。配成 10 对，每对都是 21。"
+   },
+   "tags": [
+    "等差数列"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:dengcha:06"
+  },
+  {
+   "uuid": "e0ef872e-e7f9-5b63-9655-9f04da264926",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "等差数列 5、9、13、17、21 这五个数的和是多少？",
+   "payload": {
+    "options": [
+     "65",
+     "60",
+     "70",
+     "66"
+    ],
+    "answer": 0,
+    "explanation": "首项加末项：(5+21)=26；26×5÷2=65。"
+   },
+   "tags": [
+    "等差数列"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:dengcha:07"
+  },
+  {
+   "uuid": "e923fced-4128-5cb5-9d31-c0991f1d96dd",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "礼堂第一排有 8 个座位，往后每排比前一排多 2 个，第 6 排有几个座位？",
+   "payload": {
+    "options": [
+     "20",
+     "17",
+     "18",
+     "16"
+    ],
+    "answer": 2,
+    "explanation": "从第 1 排到第 6 排走了 5 步，每步多 2 个：8+2×5=18。"
+   },
+   "tags": [
+    "等差数列"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:dengcha:08"
+  },
+  {
+   "uuid": "d48df497-af58-571f-9f75-9d34eb5a1304",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "笼子里鸡和兔共 10 只，数一数脚一共 28 只，兔有几只？",
+   "payload": {
+    "options": [
+     "5",
+     "3",
+     "4",
+     "6"
+    ],
+    "answer": 2,
+    "explanation": "假设全是鸡：10×2=20 只脚，比实际少 28-20=8 只；每只兔比鸡多 2 只脚，8÷2=4 只兔。"
+   },
+   "tags": [
+    "鸡兔同笼"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:jitu:09"
+  },
+  {
+   "uuid": "99e75b5a-50e9-52fe-9cad-899b09fd36f1",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "鸡兔同笼：头共 35 个，脚共 94 只，兔有几只？",
+   "payload": {
+    "options": [
+     "12",
+     "23",
+     "13",
+     "11"
+    ],
+    "answer": 0,
+    "explanation": "假设全是鸡：35×2=70 只脚，差 94-70=24 只；每只兔多 2 只脚，24÷2=12 只兔。验算：12×4+23×2=94。"
+   },
+   "tags": [
+    "鸡兔同笼"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:jitu:10"
+  },
+  {
+   "uuid": "e843808d-cc75-5c51-9014-ac51d6e9cadb",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "停车场里汽车（4 个轮子）和摩托车（3 个轮子）共 9 辆，轮子共 30 个，摩托车有几辆？",
+   "payload": {
+    "options": [
+     "4",
+     "6",
+     "3",
+     "5"
+    ],
+    "answer": 3,
+    "explanation": "假设全是汽车：9×4=36 个轮子，多出 36-30=6 个；每辆摩托车比汽车少 1 个轮子，6÷1=6 辆。"
+   },
+   "tags": [
+    "鸡兔同笼"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:jitu:11"
+  },
+  {
+   "uuid": "58a865d0-c45a-5620-a2c6-ac2ac466b5c7",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "全班 32 人去划船，大船每条坐 6 人，小船每条坐 4 人，共租 6 条船刚好坐满，大船租了几条？",
+   "payload": {
+    "options": [
+     "2",
+     "3",
+     "5",
+     "4"
+    ],
+    "answer": 1,
+    "explanation": "假设全是小船：6×4=24 人，还差 32-24=8 人；大船每条多坐 2 人，8÷2=4 条大船。验算：4×6+2×4=32。"
+   },
+   "tags": [
+    "鸡兔同笼"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:jitu:12"
+  },
+  {
+   "uuid": "76859501-ae1a-5670-a8b5-3d2dba56d720",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "老师给小朋友分铅笔，每人分 3 支多出 12 支，每人分 5 支就少 4 支，共有几个小朋友？",
+   "payload": {
+    "options": [
+     "9",
+     "7",
+     "10",
+     "8"
+    ],
+    "answer": 1,
+    "explanation": "两种分法一共相差 12+4=16 支，每人相差 5-3=2 支，16÷2=8 个小朋友。"
+   },
+   "tags": [
+    "盈亏问题"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:yingkui:13"
+  },
+  {
+   "uuid": "ba8ade49-7ddb-5c68-b4bf-f7fa1f3670dc",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "分苹果：每人分 4 个多 9 个，每人分 6 个少 7 个，共有几个小朋友？",
+   "payload": {
+    "options": [
+     "6",
+     "8",
+     "7",
+     "9"
+    ],
+    "answer": 3,
+    "explanation": "苹果总数不变，两种分法相差 9+7=16 个，每人相差 6-4=2 个，16÷2=8 人。"
+   },
+   "tags": [
+    "盈亏问题"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:yingkui:14"
+  },
+  {
+   "uuid": "e9c14ced-9e7c-5fae-8cee-9c9811cb0f58",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "小朋友分糖：每人分 5 颗正好分完，每人分 7 颗就少 10 颗，共有几个小朋友？",
+   "payload": {
+    "options": [
+     "5",
+     "4",
+     "6",
+     "3"
+    ],
+    "answer": 0,
+    "explanation": "正好分完记作多 0 颗，两种分法相差 0+10=10 颗，每人相差 7-5=2 颗，10÷2=5 人。"
+   },
+   "tags": [
+    "盈亏问题"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:yingkui:15"
+  },
+  {
+   "uuid": "f397f4f6-5b61-549f-8d78-987489d1558d",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "一个数先加上 8，再乘 3，正好得 36。这个数是多少？",
+   "payload": {
+    "options": [
+     "5",
+     "12",
+     "4",
+     "3"
+    ],
+    "answer": 2,
+    "explanation": "倒着往回推：36÷3=12，12-8=4。还原问题从最后一步倒推回去。"
+   },
+   "tags": [
+    "还原问题"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:huanyuan:16"
+  },
+  {
+   "uuid": "cbaf217a-10a2-5a9e-9be7-aac6968835cf",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "小明有一些糖，吃掉一半后又吃了 3 颗，还剩 5 颗。原来有多少颗？",
+   "payload": {
+    "options": [
+     "14",
+     "18",
+     "16",
+     "13"
+    ],
+    "answer": 2,
+    "explanation": "倒着想：又吃 3 颗之前有 5+3=8 颗；吃掉一半之前有 8×2=16 颗。"
+   },
+   "tags": [
+    "还原问题"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:huanyuan:17"
+  },
+  {
+   "uuid": "efc2be88-0c87-5e6c-9cf0-a97cad5eb744",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "一个数先减去 5，再除以 4，正好得 6。这个数是多少？",
+   "payload": {
+    "options": [
+     "29",
+     "19",
+     "24",
+     "34"
+    ],
+    "answer": 0,
+    "explanation": "倒着推：6×4=24，24+5=29。除法倒过来是乘，减法倒过来是加。"
+   },
+   "tags": [
+    "还原问题"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:huanyuan:18"
+  },
+  {
+   "uuid": "cfff0e82-352c-5184-aa03-fde68246700e",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "小华每分钟走 60 米，从家到学校走了 8 分钟，家到学校有多少米？",
+   "payload": {
+    "options": [
+     "420",
+     "480",
+     "460",
+     "500"
+    ],
+    "answer": 3,
+    "explanation": "路程=速度×时间：60×8=480 米。"
+   },
+   "tags": [
+    "行程初步"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:xingcheng:19"
+  },
+  {
+   "uuid": "b7dc8e5c-290c-5d98-8a82-07ce2ff231ff",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "两车同时从相距 360 千米的两地相向开出，甲车每小时行 50 千米，乙车每小时行 40 千米，几小时后相遇？",
+   "payload": {
+    "options": [
+     "5",
+     "3",
+     "6",
+     "4"
+    ],
+    "answer": 1,
+    "explanation": "每小时两车一共走近 50+40=90 千米，360÷90=4 小时相遇。"
+   },
+   "tags": [
+    "行程初步"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:xingcheng:20"
+  },
+  {
+   "uuid": "539872e5-8e4c-511a-8356-7d8b58ff6076",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "一列火车每秒行 30 米，完全通过一条 480 米长的隧道用了 20 秒，火车本身长多少米？",
+   "payload": {
+    "options": [
+     "140",
+     "100",
+     "600",
+     "120"
+    ],
+    "answer": 1,
+    "explanation": "20 秒跑了 30×20=600 米；完全通过隧道要多跑一个车身长，车长 600-480=120 米。"
+   },
+   "tags": [
+    "行程初步"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:xingcheng:21"
+  },
+  {
+   "uuid": "e1bde8df-55eb-5012-b95b-eeee37178abf",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "哥哥和弟弟同时从家去学校，哥哥每分钟走 70 米，弟弟每分钟走 50 米，哥哥比弟弟早到 4 分钟。家到学校有多少米？",
+   "payload": {
+    "options": [
+     "720",
+     "700",
+     "640",
+     "560"
+    ],
+    "answer": 3,
+    "explanation": "弟弟全程比哥哥多走 4 分钟；哥哥走的 70×(t-4) 米等于弟弟走的 50t 米，解得 t=14，路程 50×14=700 米。"
+   },
+   "tags": [
+    "行程初步"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:xingcheng:22"
+  },
+  {
+   "uuid": "5e3be61b-9615-5134-804d-2012a132a7c1",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "一条线段上共有 6 个点（包括两端），这些点之间一共能数出多少条不同的线段？",
+   "payload": {
+    "options": [
+     "15",
+     "12",
+     "10",
+     "21"
+    ],
+    "answer": 0,
+    "explanation": "每条线段由 2 个点决定：从 6 个点里选 2 个，6×5÷2=15 条。"
+   },
+   "tags": [
+    "图形计数"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:tuxing:23"
+  },
+  {
+   "uuid": "81eecb69-d10f-5259-889c-85eed9c371a9",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "一个 3×3 的方格棋盘里，一共能数出多少个正方形？（大大小小的都要数）",
+   "payload": {
+    "options": [
+     "9",
+     "10",
+     "14",
+     "13"
+    ],
+    "answer": 2,
+    "explanation": "1×1 的有 9 个，2×2 的有 4 个，3×3 的有 1 个，一共 9+4+1=14 个。"
+   },
+   "tags": [
+    "图形计数"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:tuxing:24"
+  },
+  {
+   "uuid": "17a81748-e16a-5c28-bfcc-c26aef91f527",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "一个长方形横着切 2 刀、竖着切 2 刀，图里一共能数出多少个长方形？",
+   "payload": {
+    "options": [
+     "18",
+     "30",
+     "36",
+     "9"
+    ],
+    "answer": 2,
+    "explanation": "横向出现 4 条线，任选 2 条：4×3÷2=6 种；竖向同样 6 种；6×6=36 个。"
+   },
+   "tags": [
+    "图形计数"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:tuxing:25"
+  },
+  {
+   "uuid": "dddb1934-6d81-5a96-97f3-73640b0d1f1a",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "从五边形的一个顶点出发，可以向不相邻的顶点画对角线，一共能画几条？",
+   "payload": {
+    "options": [
+     "2",
+     "5",
+     "3",
+     "4"
+    ],
+    "answer": 0,
+    "explanation": "5 个顶点里去掉自己和相邻的 2 个：5-3=2 条。"
+   },
+   "tags": [
+    "图形计数"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:tuxing:26"
+  },
+  {
+   "uuid": "3ceb5a0f-a444-580b-b968-115be907f301",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "甲、乙、丙三人分别是医生、教师和警察。甲比教师年龄大，丙和警察不同岁，警察比乙年龄小。谁是警察？",
+   "payload": {
+    "options": [
+     "无法确定",
+     "甲",
+     "乙",
+     "丙"
+    ],
+    "answer": 3,
+    "explanation": "甲比教师年龄大，甲不是教师；丙和警察不同岁，丙不是警察；警察比乙年龄小，乙不是警察；所以警察只能是甲。"
+   },
+   "tags": [
+    "逻辑推理"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:luoji:27"
+  },
+  {
+   "uuid": "d98e5747-5493-5fd5-91a5-8addcff139e2",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "红、黄、蓝三个盒子只有一个装着球。红盒说：球在我这里。黄盒说：球不在我这里。蓝盒说：球不在红盒里。三句话只有一句是真的，球在哪个盒子里？",
+   "payload": {
+    "options": [
+     "红盒",
+     "蓝盒",
+     "无法确定",
+     "黄盒"
+    ],
+    "answer": 1,
+    "explanation": "球在红盒则红、蓝两句都真；球在蓝盒则黄、蓝两句都真；球在黄盒时只有蓝盒那句真，符合条件，所以球在黄盒。"
+   },
+   "tags": [
+    "逻辑推理"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:luoji:28"
+  },
+  {
+   "uuid": "2ce926b8-84d3-5cda-8e0a-e0af4417dbaa",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "小力、小明、小红三人比跳绳：小红不是跳得最多的，小明比小红跳得少。谁跳得最多？",
+   "payload": {
+    "options": [
+     "小明",
+     "小红",
+     "无法确定",
+     "小力"
+    ],
+    "answer": 1,
+    "explanation": "小明比小红少，小明不是最多；小红也不是最多；最多的是小力。"
+   },
+   "tags": [
+    "逻辑推理"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:luoji:29"
+  },
+  {
+   "uuid": "3e5cecfa-e35c-5c9c-a8a7-97945aad46e7",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "甲、乙、丙、丁四人赛跑：甲不是第一也不是最后，乙比丙跑得快，丁不是第一也不是最后，丙不是最后。谁是第一？",
+   "payload": {
+    "options": [
+     "丁",
+     "乙",
+     "甲",
+     "丙"
+    ],
+    "answer": 3,
+    "explanation": "第一不是甲、不是丁；若丙是第一，比丙快的乙就没有位置了；所以第一是乙。"
+   },
+   "tags": [
+    "逻辑推理"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:luoji:30"
+  }
+ ]
+}

@@ -46,6 +46,17 @@ class QuestionTests(TestCase):
             with self.assertRaises(IntegrityError):
                 twin.save()
 
+    def test_track_defaults_to_regular(self):
+        question = make_question()
+        self.assertEqual(question.track, Question.Track.REGULAR)
+        question.save()
+        self.assertEqual(Question.objects.get(pk=question.pk).track, 'regular')
+
+    def test_track_olympiad_round_trips(self):
+        question = make_question(track=Question.Track.OLYMPIAD)
+        question.save()
+        self.assertEqual(Question.objects.get(pk=question.pk).track, 'olympiad')
+
 
 class AnswerRecordTests(TestCase):
     def test_owner_exclusive_constraint(self):

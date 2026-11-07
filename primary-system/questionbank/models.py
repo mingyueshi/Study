@@ -25,9 +25,15 @@ class Question(models.Model):
         CHINESE = 'chinese', '语文'
         ENGLISH = 'english', '英语'
 
+    class Track(models.TextChoices):
+        REGULAR = 'regular', '普通'
+        OLYMPIAD = 'olympiad', '奥数'
+
     uuid = models.UUIDField('内容身份', unique=True, editable=False)
     type = models.CharField('题型', max_length=16, choices=Type.choices)
     area = models.CharField('学科', max_length=16, choices=Area.choices, db_index=True)
+    track = models.CharField('轨别', max_length=16, choices=Track.choices,
+                             default=Track.REGULAR, db_index=True)
     grade = models.PositiveSmallIntegerField('年级', null=True, blank=True)
     stem = models.TextField('题干')
     payload = models.JSONField('题型数据', default=dict)

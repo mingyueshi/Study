@@ -107,3 +107,61 @@ class SummaryTests(TestCase):
         self.assertEqual(summary['correct'], 1)
         self.assertEqual(summary['areas']['math'], {'answered': 1, 'correct': 1})
         self.assertEqual(summary['areas']['chinese'], {'answered': 1, 'correct': 0})
+
+
+def seed_olympiad(**overrides):
+    fields = dict(track='olympiad', tags=['鸡兔同笼'],
+                  source_key='primary-olympiad', source_ref='olympiad:jitu:01')
+    fields.update(overrides)
+    question = make_question(**fields)
+    question.save()
+    return question
+
+
+class TrackTests(TestCase):
+    def test_pick_filters_track(self):
+        seed_questions()  # 3 道普通轨
+        olympiad = seed_olympiad()
+        self.assertEqual([question.pk for question in services.pick_questions(track='olympiad', count=10)],
+                         [olympiad.pk])
+        self.assertEqual(len(services.pick_questions(track='regular', count=10)), 3)
+        # 未登记的轨别值不过滤，返回全部。
+        self.assertEqual(len(services.pick_questions(track='nope', count=10)), 4)
+
+    def test_pick_filters_tag(self):
+        seed_olympiad(source_ref='olympiad:jitu:01')
+        seed_olympiad(source_ref='olympiad:jitu:02')
+        seed_olympiad(tags=['行程问题'], source_ref='olympiad:xingcheng:01')
+        picked = services.pick_questions(track='olympiad', tag='鸡兔同笼', count=10)
+        self.assertEqual({question.source_ref for question in picked},
+                         {'olympiad:jitu:01', 'olympiad:jitu:02'})
+
+    def test_summary_filters_track(self):
+        from accounts.models import User
+
+        user = User.objects.create_user(username='kid', password='x' * 12)
+        regular = seed_questions()[0]
+        olympiad = seed_olympiad()
+        AnswerRecord.objects.create(user=user, question=regular, given={}, correct=True)
+        AnswerRecord.objects.create(user=user, question=olympiad, given={}, correct=False)
+        self.assertEqual(services.owner_summary({'user': user}, track='olympiad')['answered'], 1)
+        self.assertEqual(services.owner_summary({'user': user}, track='regular')['answered'], 1)
+        self.assertEqual(services.owner_summary({'user': user})['answered'], 2)
+
+    def test_track_wrong_ids_intersect(self):
+        from accounts.models import User
+
+        user = User.objects.create_user(username='kid', password='x' * 12)
+        regular = seed_questions()[0]
+        olympiad = seed_olympiad()
+        AnswerRecord.objects.create(user=user, question=regular, given={}, correct=False)
+        AnswerRecord.objects.create(user=user, question=olympiad, given={}, correct=False)
+        self.assertEqual(services.track_wrong_ids({'user': user}, 'olympiad'), [olympiad.pk])
+        self.assertEqual(services.track_wrong_ids({'user': user}, 'regular'), [regular.pk])
+
+    def test_tag_counts_orders_by_count(self):
+        seed_olympiad(source_ref='olympiad:jitu:01')
+        seed_olympiad(source_ref='olympiad:jitu:02')
+        seed_olympiad(tags=['行程问题'], source_ref='olympiad:xingcheng:01')
+        self.assertEqual(services.tag_counts('olympiad'), [('鸡兔同笼', 2), ('行程问题', 1)])
+        self.assertEqual(services.tag_counts('regular'), [])

@@ -132,7 +132,7 @@ class CatalogTests(PlatformFixture):
             self.assertContains(response, spec['name'])
             self.assertContains(response, reverse(spec['route']))
         # 模块卡在前、专题卡按注册顺序殿后；游客条「探索方向」也由注册表计数。
-        self.assertEqual(response.context['entry_cards'][-1]['name'], '多音字')
+        self.assertEqual(response.context['entry_cards'][-1]['name'], '奥数挑战')
         self.assertEqual(len(response.context['entry_cards']),
                          Module.objects.filter(is_active=True).count() + len(SPECIAL_ENTRIES))
 

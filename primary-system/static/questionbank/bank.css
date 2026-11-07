@@ -97,6 +97,7 @@
 .qb-wrong-head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 10px; }
 .qb-badge { padding: 3px 14px; border-radius: 999px; background: var(--soft); color: var(--green); font-size: 15px; font-weight: 700; }
 .qb-badge.ghost { background: var(--card-tint); color: var(--card-accent); }
+.qb-badge.olympiad { background: #fff3d6; color: #b7791f; }
 .qb-wrong-stem { margin: 0 0 8px; font-size: 22px; font-weight: 750; line-height: 1.6; }
 .qb-wrong-answer { margin: 0 0 6px; font-size: 19px; color: #2c7a4b; }
 .qb-wrong-answer b { font-size: 22px; }

@@ -2,9 +2,9 @@
 {% block content %}<link rel="stylesheet" href="{% static 'questionbank/bank.css' %}">
 <header class="qb-hero">
   <div class="qb-hero-copy">
-    <p class="eyebrow">全科 · 练一练</p>
+    <p class="eyebrow">普通题库 · 练一练</p>
     <h1>挑战题库</h1>
-    <p class="qb-hero-tag">判断题、选择题、课本例题……答对收进成绩单，答错进错题本，再练一遍就掌握。</p>
+    <p class="qb-hero-tag">判断题、选择题、课本例题……答对收进成绩单，答错进错题本，再练一遍就掌握。想玩课本外的思维题，去「奥数挑战」。</p>
     <p class="qb-hero-stats"><span><b>{{ total }}</b> 道题</span><span>已答 <b>{{ summary.answered }}</b> 题</span><span>答对 <b>{{ summary.correct }}</b> 题</span></p>
   </div>
   <div class="qb-hero-deco" aria-hidden="true"><span>对</span><span>✓</span><span>✗</span><span>答</span></div>
@@ -15,6 +15,14 @@
   <span class="qb-wrong-emoji" aria-hidden="true">📕</span>
   <span>错题本里有 <b>{{ wrong_count }}</b> 道题等着重练</span>
   <span class="qb-wrong-go">去重练 →</span>
+</a>
+{% endif %}
+
+{% if olympiad_count %}
+<a class="qb-wrong-strip" href="{{ olympiad_url }}">
+  <span class="qb-wrong-emoji" aria-hidden="true">🧠</span>
+  <span>奥数挑战已开张：<b>{{ olympiad_count }}</b> 道思维题等你来闯</span>
+  <span class="qb-wrong-go">去挑战 →</span>
 </a>
 {% endif %}
 

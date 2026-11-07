@@ -5,8 +5,8 @@ from .models import AnswerRecord, ImportReceipt, Question
 
 @admin.register(Question)
 class QuestionAdmin(admin.ModelAdmin):
-    list_display = ('stem', 'type', 'area', 'grade', 'source_key', 'source_ref', 'active')
-    list_filter = ('area', 'type', 'grade', 'source_key', 'active')
+    list_display = ('stem', 'type', 'area', 'track', 'grade', 'source_key', 'source_ref', 'active')
+    list_filter = ('area', 'track', 'type', 'grade', 'source_key', 'active')
     search_fields = ('stem', 'source_ref')
     readonly_fields = ('uuid', 'checksum', 'created_at', 'updated_at')
 

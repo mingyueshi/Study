@@ -2,7 +2,7 @@
 
 > 当前资料范围：南非教材和算术事实已于2026-11-02退役，保留七类／9个数据集／七包／361源文件。下方各阶段记录按时间保留；当前删除验证见本文末尾及[退役报告](docs/reference-library-removal-implementation.md)。
 
-> 最新结果见文末「古文经典62册接入与基础包重导（2026-11-06）」；之前章节为历史记录。
+> 最新结果见文末「挑战题库普通/奥数双轨拆分（2026-11-07）」；之前章节为历史记录。
 
 日期：2026-10-30（Asia/Shanghai）。范围为本地统一学习系统基座，未发布、未提交 Git。
 
@@ -460,3 +460,14 @@ SQLite相关38项（37通过／1PG跳过）、PG批次10/10含并发首导、前
 - 基线重导：48 表 76 分片 2,520,689 行（旧 2,596,608）；差异仅 hanzi_unihancharacter ×2、hanzi_unihanproperty ×4、reference_library 四表与 manifest，其余表不变。`verify_base_data` 通过（digest `a6e99396…`）。
 - 全量测试 403 项通过（skipped 14）。文档同步：system-design、foundation-data-plan、reference-library-implementation；Makefile 新增 unihan18-package 目标。
 - 未运行 PostgreSQL 专项或另一台物理 Mac 验证；01c 归档包与历史审计文档（reference-audit-2026-11-02 等）按历史证据保留不改写。
+
+## 2026-11-07：挑战题库普通/奥数双轨拆分
+
+- 挑战题库拆成普通与奥数两条轨：`Question.track` choices（`regular/普通` 缺省、`olympiad/奥数`，带索引），迁移 `questionbank.0002_question_track`（AddField 默认值，SQLite 即时完成）；导入管线 `validate_entry` 接受可选 `track`（缺省归普通、非法值拒绝），`SCHEMA_VERSION` 保持 1，旧批次文件仍合法，`content_checksum` 不纳入 track（append-only 不重算旧行指纹）。
+- 奥数独立专题入口：`/questionbank/olympiad/` 落地页（题量、按轨统计、错题条、八主题 chips）＋ `/questionbank/olympiad/practice/`（只从奥数轨抽题，`?tag=` 主题过滤，非法主题忽略）；普通路由锁定 `track=regular` 且不接受主题过滤，普通主页计数锁定普通轨并加奥数导流条；错题本两轨共用，默认全部展示并标注轨别徽标，`?track=` 可按轨过滤，重练按钮按轨别指向对应练习路由。首页 `SPECIAL_ENTRIES` 末尾追加「奥数挑战」卡（catalog 测试末位断言同步）。
+- 首批奥数题：`2026-11-olympiad-intro` 30 题人工撰写并逐题核对（速算巧算/等差数列/鸡兔同笼/盈亏/还原/行程初步/图形计数/逻辑推理各 3~4 题），choice 4 选项、grade 4、来源 `primary-olympiad`，uuid 由 `question_uuid` 推导、答案下标确定性轮换（分布 7/8/7/8）。导入幂等复跑 `already`。
+- 标签过滤在 Python 侧完成（JSON 数组 `contains` 查找仅 PG 支持，SQLite 会 NotSupportedError），`pick_questions` 先取整池再筛标签随机取样。
+- 测试：questionbank＋catalog 132 项通过，全量 `make test` 570 项通过（skipped 14）；新增 track 模型/导入/服务/视图用例、数据契约（来源白名单＋奥数轨≥30＋主题≥6）、迁移演练（隔离连接 0001→0002：旧题默认普通轨、指纹不重算、作答记录逐字段保留）。
+- 基线重导：`export_base_data --replace` 后 48 表 76 分片 2,520,689 行，manifest `required_migrations` 含 `["questionbank","0002_question_track"]`；`verify_base_data --database` 通过（digest `9cc1f027…`）。
+- 8012 常驻服务器（自动 reload，未重启）DOM 目检：普通主页「150 道题＋奥数挑战已开张」、奥数落地「30 道题＋八主题 chips」、奥数练习只出奥数题且不泄漏答案、`?tag=鸡兔同笼` 命中 4 题全同主题、普通练习 20 题无奥数混入、判分 API 服务端判对错并返回解析、错题本奥数徽标与轨别过滤/重练链接正确；目检产生的 2 条游客作答记录已清理（库中作答记录归零）。
+- 未运行 PostgreSQL 专项回归；希望杯真题转录（四年级 10 份 PDF）留作后续批次，未经真实浏览器全面回归；未提交。

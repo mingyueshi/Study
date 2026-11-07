@@ -77,6 +77,19 @@ class ImportBatchTests(TestCase):
         with self.assertRaises(ValidationError):
             importing.import_batch(make_batch([make_entry(area='history')]))
 
+    def test_track_defaults_to_regular_and_olympiad_imports(self):
+        importing.import_batch(make_batch([make_entry()]))
+        self.assertEqual(Question.objects.get().track, Question.Track.REGULAR)
+        entry = make_entry(source_key='primary-olympiad', source_ref='olympiad:jitu:01',
+                           track='olympiad', tags=['鸡兔同笼'])
+        importing.import_batch(make_batch([entry], batch_id='test-olympiad'))
+        self.assertEqual(Question.objects.get(source_ref='olympiad:jitu:01').track,
+                         Question.Track.OLYMPIAD)
+
+    def test_unknown_track_rejected(self):
+        with self.assertRaises(ValidationError):
+            importing.import_batch(make_batch([make_entry(track='hard')]))
+
     def test_bad_payload_rejected(self):
         entry = make_entry(payload={'options': ['只有一个'], 'answer': 0})
         with self.assertRaises(ValidationError):

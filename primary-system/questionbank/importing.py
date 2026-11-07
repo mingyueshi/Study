@@ -45,6 +45,9 @@ def validate_entry(entry, index):
         raise ValidationError(f'第 {index + 1} 题题型未知：{entry["type"]}。')
     if entry['area'] not in Question.Area.values:
         raise ValidationError(f'第 {index + 1} 题学科未知：{entry["area"]}。')
+    # 轨别可选：缺省归普通轨，出现则必须是登记值。
+    if 'track' in entry and entry['track'] not in Question.Track.values:
+        raise ValidationError(f'第 {index + 1} 题轨别未知：{entry["track"]}。')
     grade = entry.get('grade')
     if grade is not None and (isinstance(grade, bool) or not isinstance(grade, int) or not 1 <= grade <= MAX_GRADE):
         raise ValidationError(f'第 {index + 1} 题年级只能是 1~{MAX_GRADE} 的整数或空。')
@@ -119,7 +122,8 @@ def import_batch(payload, *, source='', dry_run=False):
     with transaction.atomic():
         for entry in fresh:
             Question.objects.create(
-                uuid=entry['uuid'], type=entry['type'], area=entry['area'], grade=entry.get('grade'),
+                uuid=entry['uuid'], type=entry['type'], area=entry['area'],
+                track=entry.get('track', Question.Track.REGULAR), grade=entry.get('grade'),
                 stem=entry['stem'], payload=entry['payload'], tags=entry['tags'],
                 source_key=entry['source_key'], source_ref=entry['source_ref'])
         ImportReceipt.objects.create(batch_id=batch_id, digest=digest, source=source[:200],

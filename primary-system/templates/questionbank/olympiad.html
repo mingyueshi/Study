@@ -1,0 +1,45 @@
+{% extends 'base.html' %}{% load static %}{% block title %}奥数挑战 · 乐学堂{% endblock %}
+{% block content %}<link rel="stylesheet" href="{% static 'questionbank/bank.css' %}">
+<header class="qb-hero">
+  <div class="qb-hero-copy">
+    <p class="eyebrow">数学 · 思维挑战</p>
+    <h1>奥数挑战</h1>
+    <p class="qb-hero-tag">{{ hero_tag }}</p>
+    <p class="qb-hero-stats"><span><b>{{ total }}</b> 道题</span><span>已答 <b>{{ summary.answered }}</b> 题</span><span>答对 <b>{{ summary.correct }}</b> 题</span></p>
+  </div>
+  <div class="qb-hero-deco" aria-hidden="true"><span>🧠</span><span>⚡</span><span>🎯</span><span>?</span></div>
+</header>
+
+{% if wrong_count %}
+<a class="qb-wrong-strip" href="{{ wrong_url }}">
+  <span class="qb-wrong-emoji" aria-hidden="true">📕</span>
+  <span>奥数错题本里有 <b>{{ wrong_count }}</b> 道题等着重练</span>
+  <span class="qb-wrong-go">去重练 →</span>
+</a>
+{% endif %}
+
+<section class="qb-areas">
+  <article class="qb-area color-math">
+    <header class="qb-area-head">
+      <img src="{% static 'icons/quiz.svg' %}" alt="" width="52" height="52">
+      <div><h2>开始挑战</h2><p class="qb-area-count">{{ total }} 道题</p></div>
+    </header>
+    <p class="qb-area-intro">从八个主题里随机抽一组：每题四个选项，选完马上知道对错，还能看思路解析。</p>
+    <div class="qb-area-actions">
+      <a class="button small" href="{{ practice_url }}?count=10">开始挑战 →</a>
+      <a class="button small ghost" href="{{ wrong_url }}">奥数错题本</a>
+    </div>
+  </article>
+</section>
+
+{% if tags %}
+<section class="qb-toolbar">
+  <span class="qb-label">主题</span>
+  {% for item in tags %}
+  <a class="chip" href="{{ practice_url }}?tag={{ item.tag }}&amp;count=10">{{ item.tag }} · {{ item.count }} 题</a>
+  {% endfor %}
+</section>
+{% endif %}
+
+<p class="qb-note">奥数入门题按主题人工撰写并逐题核对解答，判分在服务端完成；答错的题收进错题本，重练答对后自动退出。</p>
+{% endblock %}

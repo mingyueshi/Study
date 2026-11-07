@@ -11,9 +11,10 @@ from django.test import SimpleTestCase
 from questionbank import importing
 
 DATA_DIR = Path(__file__).resolve().parent.parent / 'data' / 'questions'
-SOURCE_KEYS = {'primary-math', 'primary-chinese', 'primary-english', 'primary-grammar'}
+SOURCE_KEYS = {'primary-math', 'primary-chinese', 'primary-english', 'primary-grammar',
+               'primary-olympiad'}
 AREA_FLOORS = {'math': 55, 'chinese': 20, 'english': 35}
-TOTAL_FLOOR = 180
+TOTAL_FLOOR = 210
 
 
 def load_batches():
@@ -66,3 +67,18 @@ class BatchContractTests(SimpleTestCase):
         for _, batch in load_batches():
             for entry in batch['questions']:
                 self.assertTrue(entry['tags'], f'{entry["source_ref"]} 缺少知识点标签。')
+
+    def test_track_values_valid(self):
+        entries = [entry for _, batch in load_batches() for entry in batch['questions']]
+        for entry in entries:
+            self.assertIn(entry.get('track', 'regular'), {'regular', 'olympiad'},
+                          f'{entry["source_ref"]} 轨别未知。')
+
+    def test_olympiad_track_scale(self):
+        entries = [entry for _, batch in load_batches() for entry in batch['questions']]
+        olympiad = [entry for entry in entries if entry.get('track') == 'olympiad']
+        self.assertGreaterEqual(len(olympiad), 30, '奥数轨题量低于 30。')
+        self.assertTrue(all(entry['source_key'] == 'primary-olympiad' for entry in olympiad),
+                        '奥数轨题目必须标注 primary-olympiad 来源。')
+        themes = {tag for entry in olympiad for tag in entry['tags']}
+        self.assertGreaterEqual(len(themes), 6, f'奥数主题覆盖不足：{sorted(themes)}')

@@ -5,14 +5,31 @@
   <p class="eyebrow">错题本</p>
   <h1>答错的题，都在这里</h1>
   <p class="qb-hero-tag">每道题取最近一次作答：重练答对后，它会自己退出错题本。</p>
-  {% if count %}<a class="button small" href="{% url 'questionbank-practice' %}?mode=wrong&amp;count=10">一键重练这 {{ count }} 题 →</a>{% endif %}
+  <div class="qb-toolbar">
+    <span class="qb-label">轨别</span>
+    <a class="chip{% if not track %} on{% endif %}" href="{% url 'questionbank-wrong' %}">全部</a>
+    <a class="chip{% if track == 'regular' %} on{% endif %}" href="?track=regular">普通</a>
+    <a class="chip{% if track == 'olympiad' %} on{% endif %}" href="?track=olympiad">奥数</a>
+  </div>
+  <div class="qb-area-actions">
+    {% if track == 'olympiad' and count %}
+    <a class="button small" href="{{ practice_url }}">一键重练这 {{ count }} 题 →</a>
+    {% elif track == 'regular' and count %}
+    <a class="button small" href="{{ practice_url }}">一键重练这 {{ count }} 题 →</a>
+    {% elif not track %}
+    {% if regular_count %}<a class="button small" href="{% url 'questionbank-practice' %}?mode=wrong&amp;count=10">重练普通 {{ regular_count }} 题 →</a>{% endif %}
+    {% if olympiad_count %}<a class="button small" href="{% url 'questionbank-olympiad-practice' %}?mode=wrong&amp;count=10">重练奥数 {{ olympiad_count }} 题 →</a>{% endif %}
+    {% endif %}
+  </div>
 </header>
 
 {% if count %}
 <section class="qb-wrong-list">
   {% for row in rows %}
   <article class="qb-wrong-card">
-    <header class="qb-wrong-head"><span class="qb-badge">{{ row.area }}</span><span class="qb-badge ghost">{{ row.type }}</span>
+    <header class="qb-wrong-head"><span class="qb-badge">{{ row.area }}</span>
+      {% if row.track %}<span class="qb-badge olympiad">{{ row.track }}</span>{% endif %}
+      <span class="qb-badge ghost">{{ row.type }}</span>
       {% for tag in row.tags %}<span class="qb-tag">{{ tag }}</span>{% endfor %}</header>
     <p class="qb-wrong-stem">{{ row.stem }}</p>
     <p class="qb-wrong-answer">正确答案：<b>{{ row.reveal }}</b></p>

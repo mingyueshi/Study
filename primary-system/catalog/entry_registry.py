@@ -139,7 +139,7 @@ def entry_for(code):
 SPECIAL_ENTRIES = (
     {'route': 'questionbank', 'subject': '数学', 'area': 'math', 'icon': 'quiz', 'color': 'math',
      'name': '挑战题库', 'tag': '来答题 →',
-     'blurb': '数学判断题与例题自评、语文多音字、英语词义四选一。答错自动进错题本，重练答对就退出。'},
+     'blurb': '普通题库：数学判断题与例题自评、语文多音字、英语词义四选一。答错自动进错题本，重练答对就退出。'},
     {'route': 'phrases', 'subject': '英语', 'area': 'english', 'icon': 'phrases', 'color': 'english',
      'name': '日常用语', 'tag': '开口说 →',
      'blurb': '教材里的 597 条常用短语和短句：按句式记一个开头整句就出来，按话题找场景想说哪句点哪句。'},
@@ -176,6 +176,9 @@ SPECIAL_ENTRIES = (
     {'route': 'hanzi-polyphones', 'subject': '语文', 'area': 'chinese', 'icon': 'polyphone', 'color': 'chinese',
      'name': '多音字', 'tag': '认一认多音字 →',
      'blurb': '乐读 yuè 还是 lè？1,010 个多音字按读音看组词，再来几道「给词选读音」。'},
+    {'route': 'questionbank-olympiad', 'subject': '数学', 'area': 'math', 'icon': 'quiz', 'color': 'math',
+     'name': '奥数挑战', 'tag': '来挑战 →',
+     'blurb': '课本外的思维题：速算巧算、鸡兔同笼、盈亏还原、行程与逻辑推理，每题带思路解析，答错自动进错题本。'},
 )
 
 

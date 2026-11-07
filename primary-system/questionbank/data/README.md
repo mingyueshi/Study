@@ -9,6 +9,8 @@
 | 文件 | batch_id | 内容 | 题量 |
 |---|---|---|---|
 | `2026-11-internal-core.json` | `2026-11-internal-core` | 内部数据规则生成首批 | 150 |
+| `2026-11-grammar-quiz.json` | `2026-11-grammar-quiz` | 语法精讲知识点巩固题 | 31 |
+| `2026-11-olympiad-intro.json` | `2026-11-olympiad-intro` | 人工撰写的四年级奥数入门（奥数轨） | 30 |
 
 ## 生成与导入
 
@@ -38,6 +40,7 @@ node scripts/build_questionbank.cjs          # 生成批次 JSON（确定性，�
 | `uuid` | 稳定内容身份 = `uuid5(NAMESPACE_URL, 'primary-system/questionbank/' + source_key + '/' + source_ref)`，导入时重算比对，防止手改来源定位后身份漂移 |
 | `type` | 题型：`choice` / `truefalse` / `selfcheck`（见 `questionbank/types.py` 注册表，加新题型只注册不改框架） |
 | `area` | `math` / `chinese` / `english` |
+| `track` | 轨别：`regular`（普通，缺省值）/ `olympiad`（奥数）。普通题库与奥数挑战两个入口各从本轨抽题；奥数轨题目 `tags` 记主题（速算巧算、鸡兔同笼……），练习页按主题过滤 |
 | `grade` | 年级整数，可空 |
 | `stem` | 题干（中文标点，不允许英文双引号与裸换行，测试拦截） |
 | `payload` | 按题型：choice→`{options[],answer,explanation}`；truefalse→`{answer,explanation}`；selfcheck→`{answer,steps}` |
@@ -52,7 +55,15 @@ node scripts/build_questionbank.cjs          # 生成批次 JSON（确定性，�
   从不自动覆盖。
 - `--dry-run` 走完整校验后回滚，不落任何行。
 - 数据契约测试：`manage.py test questionbank.tests.test_data` 断言批次形状、
-  规模下限（math≥55 / chinese≥20 / english≥35、总量≥150）与中文标点。
+  规模下限（math≥55 / chinese≥20 / english≥35、总量≥210，奥数轨≥30 且来源
+  全为 `primary-olympiad`、主题≥6）与中文标点。
+
+## 奥数轨与希望杯真题
+
+奥数首批为人工撰写并逐题核对解答（uuid 由 `questionbank.types.question_uuid`
+推导，答案下标按确定性轮换分散）。后续批次候选：希望杯官网历届真题 PDF
+（四年级 10 份），需转录为结构化题目并单独建 batch，来源标注届次；
+CMATH 等外部数据集的调研结论见下节。
 
 ## 数据源调研记录（2026-11-07）
 

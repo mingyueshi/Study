@@ -18,6 +18,18 @@ def seed_choice():
     return question
 
 
+OLYMPIAD = {'options': ['6 只', '3 只'], 'answer': 0, 'explanation': '假设全是鸡，差出的脚除以 2。'}
+
+
+def seed_olympiad(**overrides):
+    fields = dict(track='olympiad', tags=['鸡兔同笼'], payload=OLYMPIAD,
+                  source_key='primary-olympiad', source_ref='olympiad:jitu:01')
+    fields.update(overrides)
+    question = make_question(**fields)
+    question.save()
+    return question
+
+
 def post_answer(client, payload):
     return client.post(reverse('questionbank-answer'), data=json.dumps(payload),
                        content_type='application/json')
@@ -130,3 +142,67 @@ class WrongViewTests(TestCase):
         response = self.client.get(reverse('questionbank-wrong'))
         self.assertEqual(response.context['rows'], [])
         self.assertNotIn(settings.SESSION_COOKIE_NAME, response.cookies)
+
+
+class OlympiadViewTests(TestCase):
+    def test_landing_renders_track_stats(self):
+        seed_olympiad()
+        response = self.client.get(reverse('questionbank-olympiad'))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, '奥数挑战')
+        self.assertEqual(response.context['total'], 1)
+        self.assertEqual(response.context['tags'], [{'tag': '鸡兔同笼', 'count': 1}])
+
+    def test_olympiad_practice_serves_only_olympiad(self):
+        seed_choice()
+        olympiad = seed_olympiad()
+        response = self.client.get(reverse('questionbank-olympiad-practice'))
+        self.assertEqual([item['uuid'] for item in response.context['questions']],
+                         [str(olympiad.uuid)])
+        self.assertEqual(response.context['area_chips'], [])
+
+    def test_regular_practice_excludes_olympiad(self):
+        regular = seed_choice()
+        seed_olympiad()
+        response = self.client.get(reverse('questionbank-practice'))
+        self.assertEqual([item['uuid'] for item in response.context['questions']],
+                         [str(regular.uuid)])
+        self.assertIsNone(response.context['tag_chips'])
+
+    def test_tag_filter_and_unknown_tag_ignored(self):
+        seed_olympiad()
+        seed_olympiad(tags=['行程问题'], source_ref='olympiad:xingcheng:01')
+        response = self.client.get(reverse('questionbank-olympiad-practice'), {'tag': '鸡兔同笼'})
+        self.assertEqual(response.context['tag'], '鸡兔同笼')
+        self.assertEqual(len(response.context['questions']), 1)
+        stray = self.client.get(reverse('questionbank-practice'), {'tag': '鸡兔同笼'})
+        self.assertEqual(stray.context['tag'], '', '普通轨不接受主题过滤。')
+        unknown = self.client.get(reverse('questionbank-olympiad-practice'), {'tag': '数论'})
+        self.assertEqual(unknown.context['tag'], '')
+        self.assertEqual(len(unknown.context['questions']), 2)
+
+    def test_home_counts_lock_to_regular(self):
+        seed_choice()
+        seed_olympiad()
+        response = self.client.get(reverse('questionbank'))
+        self.assertEqual(response.context['total'], 1)
+        self.assertEqual(response.context['olympiad_count'], 1)
+
+
+class WrongTrackTests(TestCase):
+    def test_wrong_rows_carry_track_and_filter(self):
+        regular = seed_choice()
+        olympiad = seed_olympiad()
+        post_answer(self.client, {'uuid': str(regular.uuid), 'given': {'value': 1}})
+        post_answer(self.client, {'uuid': str(olympiad.uuid), 'given': {'value': 1}})
+        page = self.client.get(reverse('questionbank-wrong'))
+        self.assertEqual(page.context['regular_count'], 1)
+        self.assertEqual(page.context['olympiad_count'], 1)
+        badges = [row['track'] for row in page.context['rows']]
+        self.assertEqual(badges.count('奥数'), 1)
+        filtered = self.client.get(reverse('questionbank-wrong'), {'track': 'olympiad'})
+        self.assertEqual(len(filtered.context['rows']), 1)
+        self.assertIn('/olympiad/practice/', filtered.context['practice_url'])
+        regular_view = self.client.get(reverse('questionbank-wrong'), {'track': 'regular'})
+        self.assertEqual(len(regular_view.context['rows']), 1)
+        self.assertIn(reverse('questionbank-practice'), regular_view.context['practice_url'])

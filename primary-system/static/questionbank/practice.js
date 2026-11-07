@@ -165,7 +165,7 @@
     const again = $('[data-qb-again]');
     const params = board.dataset.modeWrong === '1'
       ? `?mode=wrong&count=${board.dataset.size}`
-      : `?${board.dataset.area ? `area=${board.dataset.area}&` : ''}count=${board.dataset.size}`;
+      : `?${board.dataset.area ? `area=${board.dataset.area}&` : ''}${board.dataset.tag ? `tag=${board.dataset.tag}&` : ''}count=${board.dataset.size}`;
     again.href = board.dataset.practiceUrl + params;
     result.hidden = false;
     again.focus();
