@@ -13,13 +13,15 @@ from django.utils import timezone
 from chain.models import GameRound
 from hanzi.models import PolyphoneAnswer
 from idioms.models import PlayRecord
+from phrases.models import PhraseAnswer
 from poetry.models import FeihualingRound
 from plurals.models import PluralAnswer
 from questionbank.models import AnswerRecord
 from words.models import WordProgress
 from writing.models import WritingDraft
 
-GUEST_MODELS = (GameRound, WordProgress, WritingDraft, PlayRecord, FeihualingRound, PolyphoneAnswer, AnswerRecord, PluralAnswer)
+GUEST_MODELS = (GameRound, WordProgress, WritingDraft, PlayRecord, FeihualingRound, PolyphoneAnswer,
+                AnswerRecord, PluralAnswer, PhraseAnswer)
 
 
 def _expired(model, cutoff):

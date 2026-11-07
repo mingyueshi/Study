@@ -13,6 +13,7 @@ from chain.models import GameRound
 from hanzi.models import PolyphoneAnswer
 from idioms.models import PlayRecord
 from learning.models import Progress
+from phrases.models import PhraseAnswer
 from poetry.models import FeihualingRound
 from plurals.models import PluralAnswer
 from questionbank import types as qb_types
@@ -66,12 +67,14 @@ class DigestDataTests(PlatformFixture):
         question.save()
         QbAnswerRecord.objects.create(user=cls.user, question=question, given={'value': 0}, correct=True)
         PluralAnswer.objects.create(user=cls.user, singular='man', chosen='men', answer='men', correct=True)
+        PhraseAnswer.objects.create(user=cls.user, phrase='ph-digest', chosen='Good job!', answer='Good job!',
+                                    correct=True)
 
-    def test_areas_cover_nine_domains_with_own_metrics(self):
+    def test_areas_cover_ten_domains_with_own_metrics(self):
         digest = learning_digest(self.user)
         self.assertEqual([card['key'] for card in digest['areas']],
                          ['textbook', 'words', 'chain', 'writing', 'idioms', 'feihualing', 'polyphones',
-                          'questionbank', 'plurals'])
+                          'questionbank', 'plurals', 'phrases'])
         by_key = {card['key']: card for card in digest['areas']}
         self.assertEqual(by_key['textbook']['headlines'], [(2, '开始学习'), (1, '已经掌握'), (0, '我的收藏')])
         self.assertIn('数学 1', by_key['textbook']['footnote'])
@@ -84,6 +87,7 @@ class DigestDataTests(PlatformFixture):
         self.assertEqual(by_key['polyphones']['headlines'], [(1, '练习题数'), (1, '答对')])
         self.assertEqual(by_key['questionbank']['headlines'], [(1, '答题'), (1, '答对')])
         self.assertEqual(by_key['plurals']['headlines'], [(1, '练习题数'), (1, '答对')])
+        self.assertEqual(by_key['phrases']['headlines'], [(1, '练习题数'), (1, '答对')])
         # 新鲜记录都落在近 7 天：本周文案非空。
         for card in digest['areas']:
             self.assertTrue(card['week'], card['key'])

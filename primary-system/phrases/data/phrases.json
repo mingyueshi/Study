@@ -1,0 +1,7934 @@
+{
+ "schema_version": 1,
+ "source": {
+  "name": "primary-english-phrases",
+  "references": "外研版《英语（新标准）》四年级上/下册词卡短语（primary/english-data.js ENGLISH_PHRASES）",
+  "method": "en/zh 原文转换；情景由词头单元映射；句式由句首功能正则切组 + 覆盖表校准；句子形态进练习池"
+ },
+ "patterns": [
+  {
+   "code": "lets",
+   "name": "Let's… 提议",
+   "formula": "Let's + 动词原形 = 我们……吧"
+  },
+  {
+   "code": "would",
+   "name": "Will/Would… 询问与将来",
+   "formula": "Will you come? / Would you like…? = 你会来吗？你想要……吗？"
+  },
+  {
+   "code": "going-to",
+   "name": "be going to 计划",
+   "formula": "I'm going to… = 我打算……"
+  },
+  {
+   "code": "can",
+   "name": "can/may 会、能与许可",
+   "formula": "Can you…? / May I…? / I can… = 你会……吗？我可以……吗？我会……"
+  },
+  {
+   "code": "how-many",
+   "name": "How many/much 多少",
+   "formula": "How many + 可数 / How much + 不可数"
+  },
+  {
+   "code": "how",
+   "name": "How 怎么样",
+   "formula": "How…? = ……怎么样/怎么……"
+  },
+  {
+   "code": "what",
+   "name": "What 什么",
+   "formula": "What…? = 什么/什么样的……"
+  },
+  {
+   "code": "where",
+   "name": "Where 哪里",
+   "formula": "Where is/are…? = ……在哪里"
+  },
+  {
+   "code": "question-word",
+   "name": "其他疑问词",
+   "formula": "When 何时 / Who 谁 / Why 为什么 / Which 哪个"
+  },
+  {
+   "code": "do-you",
+   "name": "Do/Does… 一般疑问",
+   "formula": "Do you + 动词原形…? = 你……吗？"
+  },
+  {
+   "code": "imperative",
+   "name": "动词开头祈使",
+   "formula": "动词原形开头 = 去做……（Be careful! 小心！）"
+  },
+  {
+   "code": "be-q",
+   "name": "Is/Are/Have…? 确认",
+   "formula": "Is it…? / Are you…? / Have you got…? = 它是……吗？你有……吗？"
+  },
+  {
+   "code": "there-be",
+   "name": "There be 有",
+   "formula": "There is + 单个 / There are + 多个 = 有……"
+  },
+  {
+   "code": "i-like",
+   "name": "I like… 喜好",
+   "formula": "I (really) like/love… = 我（很）喜欢……"
+  },
+  {
+   "code": "i-statement",
+   "name": "I… 自我陈述",
+   "formula": "I + 动词 = 我……"
+  },
+  {
+   "code": "be",
+   "name": "be 动词陈述",
+   "formula": "I'm / It's / He's… = ……是……的样子"
+  },
+  {
+   "code": "don-t",
+   "name": "Don't… 劝阻",
+   "formula": "Don't + 动词原形 = 不要……"
+  },
+  {
+   "code": "daily",
+   "name": "日常套语",
+   "formula": "Good job! / See you. / No problem. = 整句记、整句用"
+  },
+  {
+   "code": "statement",
+   "name": "人/物陈述",
+   "formula": "某物/某人 + 动词 = 谁怎么样、谁做什么"
+  }
+ ],
+ "scenarios": [
+  {
+   "code": "u-sports",
+   "zh": "运动"
+  },
+  {
+   "code": "u-housework",
+   "zh": "在家帮忙"
+  },
+  {
+   "code": "u-seasons",
+   "zh": "天气与四季"
+  },
+  {
+   "code": "u-travel",
+   "zh": "出行"
+  },
+  {
+   "code": "u-directions",
+   "zh": "问路与方位"
+  },
+  {
+   "code": "u-jobs",
+   "zh": "职业"
+  },
+  {
+   "code": "u-feelings",
+   "zh": "心情感受"
+  },
+  {
+   "code": "u-actions",
+   "zh": "动作与本领"
+  },
+  {
+   "code": "u-plants",
+   "zh": "植物"
+  },
+  {
+   "code": "u-school",
+   "zh": "学校生活"
+  },
+  {
+   "code": "u-clothes",
+   "zh": "服装"
+  }
+ ],
+ "items": [
+  {
+   "id": "ph-221270403c",
+   "en": "play sports",
+   "zh": "做运动",
+   "head": "sport",
+   "heads": [
+    "sport"
+   ],
+   "unit_id": "4a-u1",
+   "scenario": "u-sports",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-d6c90ef965",
+   "en": "I love sports.",
+   "zh": "我热爱运动。",
+   "head": "sport",
+   "heads": [
+    "sport"
+   ],
+   "unit_id": "4a-u1",
+   "scenario": "u-sports",
+   "pattern": "i-like",
+   "tier": "core"
+  },
+  {
+   "id": "ph-f5142ee130",
+   "en": "jump high",
+   "zh": "跳得高",
+   "head": "jump",
+   "heads": [
+    "jump",
+    "high"
+   ],
+   "unit_id": "4a-u1",
+   "scenario": "u-sports",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-61b7f98ad1",
+   "en": "Let's jump together.",
+   "zh": "我们一起跳吧。",
+   "head": "jump",
+   "heads": [
+    "jump"
+   ],
+   "unit_id": "4a-u1",
+   "scenario": "u-sports",
+   "pattern": "lets",
+   "tier": "core"
+  },
+  {
+   "id": "ph-0a92010197",
+   "en": "How high can you jump?",
+   "zh": "你能跳多高？",
+   "head": "high",
+   "heads": [
+    "high"
+   ],
+   "unit_id": "4a-u1",
+   "scenario": "u-sports",
+   "pattern": "how",
+   "tier": "core"
+  },
+  {
+   "id": "ph-a64749a63d",
+   "en": "jump far",
+   "zh": "跳得远",
+   "head": "far",
+   "heads": [
+    "far"
+   ],
+   "unit_id": "4a-u1",
+   "scenario": "u-sports",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-6e18292ceb",
+   "en": "He can jump far.",
+   "zh": "他能跳得很远。",
+   "head": "far",
+   "heads": [
+    "far"
+   ],
+   "unit_id": "4a-u1",
+   "scenario": "u-sports",
+   "pattern": "statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-65f920da33",
+   "en": "play ping-pong",
+   "zh": "打乒乓球",
+   "head": "ping-pong",
+   "heads": [
+    "ping-pong"
+   ],
+   "unit_id": "4a-u1",
+   "scenario": "u-sports",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-b6624550ed",
+   "en": "I like playing ping-pong.",
+   "zh": "我喜欢打乒乓球。",
+   "head": "ping-pong",
+   "heads": [
+    "ping-pong"
+   ],
+   "unit_id": "4a-u1",
+   "scenario": "u-sports",
+   "pattern": "i-like",
+   "tier": "core"
+  },
+  {
+   "id": "ph-3881f18c24",
+   "en": "play volleyball",
+   "zh": "打排球",
+   "head": "volleyball",
+   "heads": [
+    "volleyball"
+   ],
+   "unit_id": "4a-u1",
+   "scenario": "u-sports",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-7c42262adf",
+   "en": "We play volleyball after school.",
+   "zh": "我们放学后打排球。",
+   "head": "volleyball",
+   "heads": [
+    "volleyball"
+   ],
+   "unit_id": "4a-u1",
+   "scenario": "u-sports",
+   "pattern": "statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-b7b7cadc70",
+   "en": "at first",
+   "zh": "起初；首先",
+   "head": "first",
+   "heads": [
+    "first"
+   ],
+   "unit_id": "4a-u1",
+   "scenario": "u-sports",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-cfa74b63fb",
+   "en": "First, let's warm up.",
+   "zh": "首先，我们来热身。",
+   "head": "first",
+   "heads": [
+    "first"
+   ],
+   "unit_id": "4a-u1",
+   "scenario": "u-sports",
+   "pattern": "lets",
+   "tier": "core"
+  },
+  {
+   "id": "ph-282efc7b73",
+   "en": "At first I was scared.",
+   "zh": "起初我很害怕。",
+   "head": "at first",
+   "heads": [
+    "at first"
+   ],
+   "unit_id": "4a-u1",
+   "scenario": "u-sports",
+   "pattern": "i-statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-9178ef3b67",
+   "en": "At first, he didn't like it.",
+   "zh": "一开始他不喜欢。",
+   "head": "at first",
+   "heads": [
+    "at first"
+   ],
+   "unit_id": "4a-u1",
+   "scenario": "u-sports",
+   "pattern": "statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-e8cc9b47c1",
+   "en": "I hope you win.",
+   "zh": "我希望你赢。",
+   "head": "hope",
+   "heads": [
+    "hope"
+   ],
+   "unit_id": "4a-u1",
+   "scenario": "u-sports",
+   "pattern": "i-statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-4c63e8ef9d",
+   "en": "Hope to see you again.",
+   "zh": "希望能再见到你。",
+   "head": "hope",
+   "heads": [
+    "hope"
+   ],
+   "unit_id": "4a-u1",
+   "scenario": "u-sports",
+   "pattern": "daily",
+   "tier": "core"
+  },
+  {
+   "id": "ph-b06c617b1b",
+   "en": "lose the game",
+   "zh": "输掉比赛",
+   "head": "lose",
+   "heads": [
+    "lose"
+   ],
+   "unit_id": "4a-u1",
+   "scenario": "u-sports",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-582f61098d",
+   "en": "Don't lose hope.",
+   "zh": "不要失去希望。",
+   "head": "lose",
+   "heads": [
+    "lose"
+   ],
+   "unit_id": "4a-u1",
+   "scenario": "u-sports",
+   "pattern": "don-t",
+   "tier": "core"
+  },
+  {
+   "id": "ph-b324b5c1bc",
+   "en": "I like it because it's fun.",
+   "zh": "我喜欢它因为它很有趣。",
+   "head": "because",
+   "heads": [
+    "because"
+   ],
+   "unit_id": "4a-u1",
+   "scenario": "u-sports",
+   "pattern": "i-like",
+   "tier": "core"
+  },
+  {
+   "id": "ph-5a0c3be8a0",
+   "en": "because of the rain",
+   "zh": "因为下雨",
+   "head": "because",
+   "heads": [
+    "because",
+    "because of"
+   ],
+   "unit_id": "4a-u1",
+   "scenario": "u-sports",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-14c5b1afc9",
+   "en": "We stayed home because of the rain.",
+   "zh": "因为下雨我们待在家里。",
+   "head": "because of",
+   "heads": [
+    "because of"
+   ],
+   "unit_id": "4a-u1",
+   "scenario": "u-sports",
+   "pattern": "statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-77080d4aa1",
+   "en": "fight cancer",
+   "zh": "与癌症作斗争",
+   "head": "cancer",
+   "heads": [
+    "cancer"
+   ],
+   "unit_id": "4a-u1",
+   "scenario": "u-sports",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-e7238f8f43",
+   "en": "He is ill with cancer.",
+   "zh": "他患了癌症。",
+   "head": "cancer",
+   "heads": [
+    "cancer"
+   ],
+   "unit_id": "4a-u1",
+   "scenario": "u-sports",
+   "pattern": "statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-dabe67eed9",
+   "en": "run across the field",
+   "zh": "跑过田野",
+   "head": "across",
+   "heads": [
+    "across"
+   ],
+   "unit_id": "4a-u1",
+   "scenario": "u-sports",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-78d0afed0b",
+   "en": "walk across the street",
+   "zh": "穿过街道",
+   "head": "across",
+   "heads": [
+    "across"
+   ],
+   "unit_id": "4a-u1",
+   "scenario": "u-sports",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-87a54e4508",
+   "en": "save money",
+   "zh": "存钱",
+   "head": "money",
+   "heads": [
+    "money"
+   ],
+   "unit_id": "4a-u1",
+   "scenario": "u-sports",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-a8f1bd6081",
+   "en": "I have no money.",
+   "zh": "我没有钱。",
+   "head": "money",
+   "heads": [
+    "money"
+   ],
+   "unit_id": "4a-u1",
+   "scenario": "u-sports",
+   "pattern": "i-statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-c70b7c322c",
+   "en": "work hard",
+   "zh": "努力学习/工作",
+   "head": "hard",
+   "heads": [
+    "hard"
+   ],
+   "unit_id": "4a-u1",
+   "scenario": "u-sports",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-33578cc8c7",
+   "en": "It's hard to learn English.",
+   "zh": "学英语很难。",
+   "head": "hard",
+   "heads": [
+    "hard"
+   ],
+   "unit_id": "4a-u1",
+   "scenario": "u-sports",
+   "pattern": "be",
+   "tier": "core"
+  },
+  {
+   "id": "ph-6323ca7881",
+   "en": "be kind to others",
+   "zh": "对别人友善",
+   "head": "kind",
+   "heads": [
+    "kind"
+   ],
+   "unit_id": "4a-u1",
+   "scenario": "u-sports",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-01b2077a4b",
+   "en": "She is a kind girl.",
+   "zh": "她是个友善的女孩。",
+   "head": "kind",
+   "heads": [
+    "kind"
+   ],
+   "unit_id": "4a-u1",
+   "scenario": "u-sports",
+   "pattern": "statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-b21b5dc1af",
+   "en": "keep going",
+   "zh": "继续前进",
+   "head": "keep",
+   "heads": [
+    "keep"
+   ],
+   "unit_id": "4a-u1",
+   "scenario": "u-sports",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-8befdecdfd",
+   "en": "keep warm",
+   "zh": "保暖",
+   "head": "keep",
+   "heads": [
+    "keep"
+   ],
+   "unit_id": "4a-u1",
+   "scenario": "u-sports",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-3bdbd38bd1",
+   "en": "last month",
+   "zh": "上个月",
+   "head": "month",
+   "heads": [
+    "month"
+   ],
+   "unit_id": "4a-u1",
+   "scenario": "u-sports",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-42c96bc06b",
+   "en": "this month",
+   "zh": "这个月",
+   "head": "month",
+   "heads": [
+    "month"
+   ],
+   "unit_id": "4a-u1",
+   "scenario": "u-sports",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-3931cce710",
+   "en": "feel ill",
+   "zh": "觉得不舒服",
+   "head": "ill",
+   "heads": [
+    "ill"
+   ],
+   "unit_id": "4a-u1",
+   "scenario": "u-sports",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-3df8941022",
+   "en": "be ill in bed",
+   "zh": "卧病在床",
+   "head": "ill",
+   "heads": [
+    "ill"
+   ],
+   "unit_id": "4a-u1",
+   "scenario": "u-sports",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-66fecf9978",
+   "en": "this year",
+   "zh": "今年",
+   "head": "year",
+   "heads": [
+    "year"
+   ],
+   "unit_id": "4a-u1",
+   "scenario": "u-sports",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-9a724e1461",
+   "en": "one year ago",
+   "zh": "一年前",
+   "head": "year",
+   "heads": [
+    "year"
+   ],
+   "unit_id": "4a-u1",
+   "scenario": "u-sports",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-59c8d663e5",
+   "en": "remember me",
+   "zh": "记得我",
+   "head": "remember",
+   "heads": [
+    "remember"
+   ],
+   "unit_id": "4a-u1",
+   "scenario": "u-sports",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-41d65ea656",
+   "en": "I remember your name.",
+   "zh": "我记得你的名字。",
+   "head": "remember",
+   "heads": [
+    "remember"
+   ],
+   "unit_id": "4a-u1",
+   "scenario": "u-sports",
+   "pattern": "i-statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-525e271f74",
+   "en": "fail the test",
+   "zh": "考试不及格",
+   "head": "fail",
+   "heads": [
+    "fail"
+   ],
+   "unit_id": "4a-u1",
+   "scenario": "u-sports",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-bf69b88439",
+   "en": "Never fail to try.",
+   "zh": "永远不要放弃尝试。",
+   "head": "fail",
+   "heads": [
+    "fail"
+   ],
+   "unit_id": "4a-u1",
+   "scenario": "u-sports",
+   "pattern": "imperative",
+   "tier": "core"
+  },
+  {
+   "id": "ph-078da1f995",
+   "en": "give up",
+   "zh": "放弃",
+   "head": "give",
+   "heads": [
+    "give"
+   ],
+   "unit_id": "4a-u1",
+   "scenario": "u-sports",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-ebe5af98b1",
+   "en": "give me a hand",
+   "zh": "帮我一把",
+   "head": "give",
+   "heads": [
+    "give"
+   ],
+   "unit_id": "4a-u1",
+   "scenario": "u-sports",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-65ef20d28b",
+   "en": "Don't give up.",
+   "zh": "不要放弃。",
+   "head": "give up",
+   "heads": [
+    "give up"
+   ],
+   "unit_id": "4a-u1",
+   "scenario": "u-sports",
+   "pattern": "don-t",
+   "tier": "core"
+  },
+  {
+   "id": "ph-9c52adc1c5",
+   "en": "He gave up smoking.",
+   "zh": "他戒了烟。",
+   "head": "give up",
+   "heads": [
+    "give up"
+   ],
+   "unit_id": "4a-u1",
+   "scenario": "u-sports",
+   "pattern": "statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-9e09f2a644",
+   "en": "never give up",
+   "zh": "永不放弃",
+   "head": "never",
+   "heads": [
+    "never"
+   ],
+   "unit_id": "4a-u1",
+   "scenario": "u-sports",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-854aa1db88",
+   "en": "I never tell lies.",
+   "zh": "我从不说谎。",
+   "head": "never",
+   "heads": [
+    "never"
+   ],
+   "unit_id": "4a-u1",
+   "scenario": "u-sports",
+   "pattern": "i-statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-fd5770e19b",
+   "en": "try again",
+   "zh": "再试一次",
+   "head": "try",
+   "heads": [
+    "try",
+    "again"
+   ],
+   "unit_id": "4a-u1",
+   "scenario": "u-sports",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-1bd6ffe278",
+   "en": "try your best",
+   "zh": "尽你最大的努力",
+   "head": "try",
+   "heads": [
+    "try"
+   ],
+   "unit_id": "4a-u1",
+   "scenario": "u-sports",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-0b62d3da74",
+   "en": "a good player",
+   "zh": "一名优秀的运动员",
+   "head": "player",
+   "heads": [
+    "player"
+   ],
+   "unit_id": "4a-u1",
+   "scenario": "u-sports",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-56cdd9ec93",
+   "en": "football player",
+   "zh": "足球运动员",
+   "head": "player",
+   "heads": [
+    "player"
+   ],
+   "unit_id": "4a-u1",
+   "scenario": "u-sports",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-15c24918de",
+   "en": "have the ability to",
+   "zh": "有能力做……",
+   "head": "ability",
+   "heads": [
+    "ability"
+   ],
+   "unit_id": "4a-u1",
+   "scenario": "u-sports",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-5bbb99275d",
+   "en": "ability to learn",
+   "zh": "学习能力",
+   "head": "ability",
+   "heads": [
+    "ability"
+   ],
+   "unit_id": "4a-u1",
+   "scenario": "u-sports",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-3ed7432724",
+   "en": "Phew! It's hot.",
+   "zh": "唷！好热啊。",
+   "head": "phew",
+   "heads": [
+    "phew"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": "be",
+   "tier": "core"
+  },
+  {
+   "id": "ph-fdf14d1ded",
+   "en": "Phew, I'm tired.",
+   "zh": "唉，我累了。",
+   "head": "phew",
+   "heads": [
+    "phew"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": "i-statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-70097fadbe",
+   "en": "wash the dishes",
+   "zh": "洗碗",
+   "head": "wash",
+   "heads": [
+    "wash",
+    "dish"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-aa3d52c456",
+   "en": "wash your hands",
+   "zh": "洗手",
+   "head": "wash",
+   "heads": [
+    "wash"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-8499580b00",
+   "en": "a dish of rice",
+   "zh": "一盘米饭",
+   "head": "dish",
+   "heads": [
+    "dish"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-9418385622",
+   "en": "feed the dog",
+   "zh": "喂狗",
+   "head": "feed",
+   "heads": [
+    "feed"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-5e710c8c10",
+   "en": "feed the baby",
+   "zh": "喂婴儿",
+   "head": "feed",
+   "heads": [
+    "feed"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-284df6d51b",
+   "en": "sweep the floor",
+   "zh": "扫地",
+   "head": "sweep",
+   "heads": [
+    "sweep",
+    "floor"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-f4887933a5",
+   "en": "sweep away the rubbish",
+   "zh": "扫走垃圾",
+   "head": "sweep",
+   "heads": [
+    "sweep"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-71521aaa8b",
+   "en": "on the floor",
+   "zh": "在地板上",
+   "head": "floor",
+   "heads": [
+    "floor"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-5a922d9318",
+   "en": "take out the rubbish",
+   "zh": "倒垃圾",
+   "head": "rubbish",
+   "heads": [
+    "rubbish"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-78acb130f7",
+   "en": "a bag of rubbish",
+   "zh": "一袋垃圾",
+   "head": "rubbish",
+   "heads": [
+    "rubbish"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-e7f4c4f04c",
+   "en": "do chores",
+   "zh": "做家务",
+   "head": "chore",
+   "heads": [
+    "chore"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-03405a448b",
+   "en": "household chores",
+   "zh": "家务杂事",
+   "head": "chore",
+   "heads": [
+    "chore"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-30106ae64c",
+   "en": "make a to-do list",
+   "zh": "列一张待办清单",
+   "head": "to-do list",
+   "heads": [
+    "to-do list"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-ce8463aa78",
+   "en": "check the to-do list",
+   "zh": "查看待办清单",
+   "head": "to-do list",
+   "heads": [
+    "to-do list"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-fa96d74df3",
+   "en": "May I come in?",
+   "zh": "我可以进来吗？",
+   "head": "may",
+   "heads": [
+    "may"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": "can",
+   "tier": "core"
+  },
+  {
+   "id": "ph-9611ac8618",
+   "en": "You may go now.",
+   "zh": "你现在可以走了。",
+   "head": "may",
+   "heads": [
+    "may"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": "can",
+   "tier": "core"
+  },
+  {
+   "id": "ph-9045836cc3",
+   "en": "play outside",
+   "zh": "在外面玩",
+   "head": "outside",
+   "heads": [
+    "outside"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-419b7acf30",
+   "en": "go outside",
+   "zh": "出去",
+   "head": "outside",
+   "heads": [
+    "outside"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-cb0c6f6c15",
+   "en": "tidy the room",
+   "zh": "整理房间",
+   "head": "tidy",
+   "heads": [
+    "tidy"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-539313bce3",
+   "en": "keep it tidy",
+   "zh": "保持整洁",
+   "head": "tidy",
+   "heads": [
+    "tidy"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-a86ded3ba5",
+   "en": "It's easy.",
+   "zh": "这很容易。",
+   "head": "easy",
+   "heads": [
+    "easy"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": "be",
+   "tier": "core"
+  },
+  {
+   "id": "ph-42b63d0736",
+   "en": "easy to use",
+   "zh": "容易使用",
+   "head": "easy",
+   "heads": [
+    "easy"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-46b0372a56",
+   "en": "clean the room",
+   "zh": "打扫房间",
+   "head": "clean",
+   "heads": [
+    "clean"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-b75933c597",
+   "en": "keep clean",
+   "zh": "保持清洁",
+   "head": "clean",
+   "heads": [
+    "clean"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-22571053bf",
+   "en": "Woof! Woof!",
+   "zh": "汪！汪！",
+   "head": "woof",
+   "heads": [
+    "woof"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": "daily",
+   "tier": "core"
+  },
+  {
+   "id": "ph-ab2fcc3003",
+   "en": "The dog says woof.",
+   "zh": "狗汪汪叫。",
+   "head": "woof",
+   "heads": [
+    "woof"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": "statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-96e28e87f0",
+   "en": "good job",
+   "zh": "干得好",
+   "head": "job",
+   "heads": [
+    "job"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-acf1d48b45",
+   "en": "do a good job",
+   "zh": "做得好",
+   "head": "job",
+   "heads": [
+    "job"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-ba926318fd",
+   "en": "Good job!",
+   "zh": "干得好！",
+   "head": "good job",
+   "heads": [
+    "good job"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": "daily",
+   "tier": "core"
+  },
+  {
+   "id": "ph-cba2cd67e8",
+   "en": "You did a good job.",
+   "zh": "你做得很好。",
+   "head": "good job",
+   "heads": [
+    "good job"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": "statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-87438cd03b",
+   "en": "dirty hands",
+   "zh": "脏手",
+   "head": "dirty",
+   "heads": [
+    "dirty"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-387d66efb6",
+   "en": "The floor is dirty.",
+   "zh": "地板脏了。",
+   "head": "dirty",
+   "heads": [
+    "dirty"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": "statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-8a2544f3d7",
+   "en": "clean the desk",
+   "zh": "擦书桌",
+   "head": "desk",
+   "heads": [
+    "desk"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-f53e6ffff1",
+   "en": "on the desk",
+   "zh": "在书桌上",
+   "head": "desk",
+   "heads": [
+    "desk"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-2754268c66",
+   "en": "on the wall",
+   "zh": "在墙上",
+   "head": "wall",
+   "heads": [
+    "wall"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-61527dcd78",
+   "en": "paint the wall",
+   "zh": "刷墙",
+   "head": "wall",
+   "heads": [
+    "wall"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-7f37686225",
+   "en": "See you again.",
+   "zh": "再见。",
+   "head": "again",
+   "heads": [
+    "again"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": "daily",
+   "tier": "core"
+  },
+  {
+   "id": "ph-57ec1f1e99",
+   "en": "I also like it.",
+   "zh": "我也喜欢它。",
+   "head": "also",
+   "heads": [
+    "also"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": "i-like",
+   "tier": "core"
+  },
+  {
+   "id": "ph-96f04220b1",
+   "en": "He is also tall.",
+   "zh": "他也很高。",
+   "head": "also",
+   "heads": [
+    "also"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": "statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-b3095dc51e",
+   "en": "No problem.",
+   "zh": "没问题。",
+   "head": "problem",
+   "heads": [
+    "problem"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": "daily",
+   "tier": "core"
+  },
+  {
+   "id": "ph-2c81ad959e",
+   "en": "solve a problem",
+   "zh": "解决问题",
+   "head": "problem",
+   "heads": [
+    "problem"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-ee9a84fffe",
+   "en": "finish the homework",
+   "zh": "完成作业",
+   "head": "finish",
+   "heads": [
+    "finish"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-c41f2744e1",
+   "en": "I finished my work.",
+   "zh": "我完成了工作。",
+   "head": "finish",
+   "heads": [
+    "finish"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": "i-statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-46c74aea5b",
+   "en": "in the sunshine",
+   "zh": "在阳光下",
+   "head": "sunshine",
+   "heads": [
+    "sunshine"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-1b394c32f3",
+   "en": "enjoy the sunshine",
+   "zh": "享受阳光",
+   "head": "sunshine",
+   "heads": [
+    "sunshine",
+    "enjoy"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-00080669bf",
+   "en": "Sometimes I read books.",
+   "zh": "有时我看书。",
+   "head": "sometimes",
+   "heads": [
+    "sometimes"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": "i-statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-16dd6434bd",
+   "en": "sometimes go shopping",
+   "zh": "有时去购物",
+   "head": "sometimes",
+   "heads": [
+    "sometimes"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-d4982689b4",
+   "en": "feel happy",
+   "zh": "感到开心",
+   "head": "feel",
+   "heads": [
+    "feel"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-2675116cbd",
+   "en": "How do you feel?",
+   "zh": "你感觉怎么样？",
+   "head": "feel",
+   "heads": [
+    "feel"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": "how",
+   "tier": "core"
+  },
+  {
+   "id": "ph-e41221eb32",
+   "en": "feel tired",
+   "zh": "感到疲倦",
+   "head": "tired",
+   "heads": [
+    "tired"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-be691426f1",
+   "en": "I'm tired.",
+   "zh": "我累了。",
+   "head": "tired",
+   "heads": [
+    "tired"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": "i-statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-03965f2e9a",
+   "en": "a helpful boy",
+   "zh": "一个乐于助人的男孩",
+   "head": "helpful",
+   "heads": [
+    "helpful"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-c8aee1e478",
+   "en": "be helpful at home",
+   "zh": "在家里帮忙",
+   "head": "helpful",
+   "heads": [
+    "helpful"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-5ecf5b2714",
+   "en": "warm up",
+   "zh": "热身；变暖",
+   "head": "warm",
+   "heads": [
+    "warm"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-cc0e8ca900",
+   "en": "It's warm today.",
+   "zh": "今天很暖和。",
+   "head": "warm",
+   "heads": [
+    "warm"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": "be",
+   "tier": "core"
+  },
+  {
+   "id": "ph-71c4ef2201",
+   "en": "warm up before running",
+   "zh": "跑步前热身",
+   "head": "warm up",
+   "heads": [
+    "warm up"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-6baaad72e3",
+   "en": "The room warms up.",
+   "zh": "房间变暖和了。",
+   "head": "warm up",
+   "heads": [
+    "warm up"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": "statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-0e41dc33aa",
+   "en": "water the flowers",
+   "zh": "浇花",
+   "head": "water",
+   "heads": [
+    "water"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-6d59712b68",
+   "en": "drink water",
+   "zh": "喝水",
+   "head": "water",
+   "heads": [
+    "water"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-7c48f51e9c",
+   "en": "in the yard",
+   "zh": "在院子里",
+   "head": "yard",
+   "heads": [
+    "yard"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-519b5b4b88",
+   "en": "clean the yard",
+   "zh": "打扫院子",
+   "head": "yard",
+   "heads": [
+    "yard"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-52ef8598a0",
+   "en": "a good helper",
+   "zh": "好帮手",
+   "head": "helper",
+   "heads": [
+    "helper"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-4882a1b43d",
+   "en": "Mom's little helper",
+   "zh": "妈妈的小帮手",
+   "head": "helper",
+   "heads": [
+    "helper"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-4212bf805b",
+   "en": "pick apples",
+   "zh": "摘苹果",
+   "head": "pick",
+   "heads": [
+    "pick"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-a9afe27c56",
+   "en": "pick up the pen",
+   "zh": "捡起钢笔",
+   "head": "pick",
+   "heads": [
+    "pick"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-83ff12b980",
+   "en": "a little pig",
+   "zh": "一只小猪",
+   "head": "pig",
+   "heads": [
+    "pig"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-edb2ec7d23",
+   "en": "The pig is fat.",
+   "zh": "这头猪很胖。",
+   "head": "pig",
+   "heads": [
+    "pig"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": "statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-f18673eb3a",
+   "en": "a black cow",
+   "zh": "一头黑牛",
+   "head": "cow",
+   "heads": [
+    "cow"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-adeb00120e",
+   "en": "The cow gives milk.",
+   "zh": "奶牛产奶。",
+   "head": "cow",
+   "heads": [
+    "cow"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": "statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-c68102c7d5",
+   "en": "collect stamps",
+   "zh": "集邮",
+   "head": "collect",
+   "heads": [
+    "collect"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-0894243aab",
+   "en": "collect rubbish",
+   "zh": "收垃圾",
+   "head": "collect",
+   "heads": [
+    "collect"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-6c6d2c06c6",
+   "en": "cut the grass",
+   "zh": "割草",
+   "head": "cut",
+   "heads": [
+    "cut",
+    "grass"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-2653d34fb2",
+   "en": "cut with scissors",
+   "zh": "用剪刀剪",
+   "head": "cut",
+   "heads": [
+    "cut"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-3e98017a58",
+   "en": "green grass",
+   "zh": "青草",
+   "head": "grass",
+   "heads": [
+    "grass"
+   ],
+   "unit_id": "4a-u2",
+   "scenario": "u-housework",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-84a760d272",
+   "en": "What's the weather like?",
+   "zh": "天气怎么样？",
+   "head": "weather",
+   "heads": [
+    "weather"
+   ],
+   "unit_id": "4a-u3",
+   "scenario": "u-seasons",
+   "pattern": "what",
+   "tier": "core"
+  },
+  {
+   "id": "ph-14bca66183",
+   "en": "nice weather",
+   "zh": "好天气",
+   "head": "weather",
+   "heads": [
+    "weather"
+   ],
+   "unit_id": "4a-u3",
+   "scenario": "u-seasons",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-bd601386aa",
+   "en": "a sunny day",
+   "zh": "晴朗的一天",
+   "head": "sunny",
+   "heads": [
+    "sunny"
+   ],
+   "unit_id": "4a-u3",
+   "scenario": "u-seasons",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-b10678c50f",
+   "en": "It's sunny today.",
+   "zh": "今天阳光明媚。",
+   "head": "sunny",
+   "heads": [
+    "sunny"
+   ],
+   "unit_id": "4a-u3",
+   "scenario": "u-seasons",
+   "pattern": "be",
+   "tier": "core"
+  },
+  {
+   "id": "ph-a376fbf998",
+   "en": "a white cloud",
+   "zh": "一朵白云",
+   "head": "cloud",
+   "heads": [
+    "cloud"
+   ],
+   "unit_id": "4a-u3",
+   "scenario": "u-seasons",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-3121813a64",
+   "en": "in the clouds",
+   "zh": "在云层里",
+   "head": "cloud",
+   "heads": [
+    "cloud"
+   ],
+   "unit_id": "4a-u3",
+   "scenario": "u-seasons",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-e266fd0e47",
+   "en": "by bus",
+   "zh": "乘公交车",
+   "head": "by",
+   "heads": [
+    "by",
+    "bus"
+   ],
+   "unit_id": "4a-u3",
+   "scenario": "u-seasons",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-4c836dcc89",
+   "en": "by the window",
+   "zh": "在窗边",
+   "head": "by",
+   "heads": [
+    "by"
+   ],
+   "unit_id": "4a-u3",
+   "scenario": "u-seasons",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-8011662dcf",
+   "en": "a cloudy sky",
+   "zh": "多云的天空",
+   "head": "cloudy",
+   "heads": [
+    "cloudy"
+   ],
+   "unit_id": "4a-u3",
+   "scenario": "u-seasons",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-52e2188b0f",
+   "en": "It's cloudy today.",
+   "zh": "今天多云。",
+   "head": "cloudy",
+   "heads": [
+    "cloudy"
+   ],
+   "unit_id": "4a-u3",
+   "scenario": "u-seasons",
+   "pattern": "be",
+   "tier": "core"
+  },
+  {
+   "id": "ph-966d6781eb",
+   "en": "strong wind",
+   "zh": "大风",
+   "head": "wind",
+   "heads": [
+    "wind"
+   ],
+   "unit_id": "4a-u3",
+   "scenario": "u-seasons",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-be1cb7e06a",
+   "en": "The wind blows.",
+   "zh": "风吹着。",
+   "head": "wind",
+   "heads": [
+    "wind"
+   ],
+   "unit_id": "4a-u3",
+   "scenario": "u-seasons",
+   "pattern": "statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-3a49b39909",
+   "en": "blow in the wind",
+   "zh": "在风中吹",
+   "head": "blow",
+   "heads": [
+    "blow"
+   ],
+   "unit_id": "4a-u3",
+   "scenario": "u-seasons",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-665e7c738f",
+   "en": "The wind blows hard.",
+   "zh": "风刮得很大。",
+   "head": "blow",
+   "heads": [
+    "blow"
+   ],
+   "unit_id": "4a-u3",
+   "scenario": "u-seasons",
+   "pattern": "statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-a17f66c298",
+   "en": "a windy day",
+   "zh": "刮风的一天",
+   "head": "windy",
+   "heads": [
+    "windy"
+   ],
+   "unit_id": "4a-u3",
+   "scenario": "u-seasons",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-d11d7cf0cc",
+   "en": "It's windy outside.",
+   "zh": "外面风很大。",
+   "head": "windy",
+   "heads": [
+    "windy"
+   ],
+   "unit_id": "4a-u3",
+   "scenario": "u-seasons",
+   "pattern": "be",
+   "tier": "core"
+  },
+  {
+   "id": "ph-cba424d11b",
+   "en": "heavy rain",
+   "zh": "大雨",
+   "head": "rain",
+   "heads": [
+    "rain"
+   ],
+   "unit_id": "4a-u3",
+   "scenario": "u-seasons",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-53a8641a9d",
+   "en": "It is raining.",
+   "zh": "正在下雨。",
+   "head": "rain",
+   "heads": [
+    "rain"
+   ],
+   "unit_id": "4a-u3",
+   "scenario": "u-seasons",
+   "pattern": "be",
+   "tier": "core"
+  },
+  {
+   "id": "ph-3f027f2114",
+   "en": "a rainy day",
+   "zh": "雨天",
+   "head": "rainy",
+   "heads": [
+    "rainy"
+   ],
+   "unit_id": "4a-u3",
+   "scenario": "u-seasons",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-db2070732e",
+   "en": "It's rainy today.",
+   "zh": "今天下雨。",
+   "head": "rainy",
+   "heads": [
+    "rainy"
+   ],
+   "unit_id": "4a-u3",
+   "scenario": "u-seasons",
+   "pattern": "be",
+   "tier": "core"
+  },
+  {
+   "id": "ph-f1cdae75c0",
+   "en": "play in the snow",
+   "zh": "在雪地里玩",
+   "head": "snow",
+   "heads": [
+    "snow"
+   ],
+   "unit_id": "4a-u3",
+   "scenario": "u-seasons",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-e0ad799604",
+   "en": "It is snowing.",
+   "zh": "正在下雪。",
+   "head": "snow",
+   "heads": [
+    "snow"
+   ],
+   "unit_id": "4a-u3",
+   "scenario": "u-seasons",
+   "pattern": "be",
+   "tier": "core"
+  },
+  {
+   "id": "ph-0f86c6289b",
+   "en": "any questions",
+   "zh": "任何问题",
+   "head": "any",
+   "heads": [
+    "any"
+   ],
+   "unit_id": "4a-u3",
+   "scenario": "u-seasons",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-26f8ca2f79",
+   "en": "Do you have any water?",
+   "zh": "你有水吗？",
+   "head": "any",
+   "heads": [
+    "any"
+   ],
+   "unit_id": "4a-u3",
+   "scenario": "u-seasons",
+   "pattern": "do-you",
+   "tier": "core"
+  },
+  {
+   "id": "ph-8ad32758bd",
+   "en": "feel cold",
+   "zh": "觉得冷",
+   "head": "cold",
+   "heads": [
+    "cold"
+   ],
+   "unit_id": "4a-u3",
+   "scenario": "u-seasons",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-23da218fd6",
+   "en": "It's very cold.",
+   "zh": "天气很冷。",
+   "head": "cold",
+   "heads": [
+    "cold"
+   ],
+   "unit_id": "4a-u3",
+   "scenario": "u-seasons",
+   "pattern": "be",
+   "tier": "core"
+  },
+  {
+   "id": "ph-a00c1e9f98",
+   "en": "tea or coffee",
+   "zh": "茶还是咖啡",
+   "head": "or",
+   "heads": [
+    "or"
+   ],
+   "unit_id": "4a-u3",
+   "scenario": "u-seasons",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-8c4f6f4808",
+   "en": "yes or no",
+   "zh": "是或否",
+   "head": "or",
+   "heads": [
+    "or"
+   ],
+   "unit_id": "4a-u3",
+   "scenario": "u-seasons",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-f20cb6800e",
+   "en": "I enjoy reading.",
+   "zh": "我喜欢阅读。",
+   "head": "enjoy",
+   "heads": [
+    "enjoy"
+   ],
+   "unit_id": "4a-u3",
+   "scenario": "u-seasons",
+   "pattern": "i-like",
+   "tier": "core"
+  },
+  {
+   "id": "ph-d94c6e4de6",
+   "en": "write a diary",
+   "zh": "写日记",
+   "head": "diary",
+   "heads": [
+    "diary"
+   ],
+   "unit_id": "4a-u3",
+   "scenario": "u-seasons",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-f2610e175d",
+   "en": "keep a diary",
+   "zh": "坚持写日记",
+   "head": "diary",
+   "heads": [
+    "diary"
+   ],
+   "unit_id": "4a-u3",
+   "scenario": "u-seasons",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-24832e0131",
+   "en": "a special day",
+   "zh": "特别的一天",
+   "head": "special",
+   "heads": [
+    "special",
+    "special"
+   ],
+   "unit_id": "4a-u3",
+   "scenario": "u-seasons",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-8a54b353c0",
+   "en": "something special",
+   "zh": "特别的东西",
+   "head": "special",
+   "heads": [
+    "special",
+    "special"
+   ],
+   "unit_id": "4a-u3",
+   "scenario": "u-seasons",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-31f47b4eca",
+   "en": "my English teacher",
+   "zh": "我的英语老师",
+   "head": "teacher",
+   "heads": [
+    "teacher"
+   ],
+   "unit_id": "4a-u3",
+   "scenario": "u-seasons",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-f71fc98f5a",
+   "en": "a kind teacher",
+   "zh": "一位友善的老师",
+   "head": "teacher",
+   "heads": [
+    "teacher"
+   ],
+   "unit_id": "4a-u3",
+   "scenario": "u-seasons",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-983aa6afae",
+   "en": "taste good",
+   "zh": "尝起来不错",
+   "head": "taste",
+   "heads": [
+    "taste"
+   ],
+   "unit_id": "4a-u3",
+   "scenario": "u-seasons",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-2c731dbac2",
+   "en": "Have a taste.",
+   "zh": "尝一尝。",
+   "head": "taste",
+   "heads": [
+    "taste"
+   ],
+   "unit_id": "4a-u3",
+   "scenario": "u-seasons",
+   "pattern": "imperative",
+   "tier": "core"
+  },
+  {
+   "id": "ph-2f41335147",
+   "en": "eat ice cream",
+   "zh": "吃冰激凌",
+   "head": "ice cream",
+   "heads": [
+    "ice cream"
+   ],
+   "unit_id": "4a-u3",
+   "scenario": "u-seasons",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-6f2ba758c4",
+   "en": "an ice cream",
+   "zh": "一个冰激凌",
+   "head": "ice cream",
+   "heads": [
+    "ice cream"
+   ],
+   "unit_id": "4a-u3",
+   "scenario": "u-seasons",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-e798a23ecb",
+   "en": "a real story",
+   "zh": "真实的故事",
+   "head": "real",
+   "heads": [
+    "real"
+   ],
+   "unit_id": "4a-u3",
+   "scenario": "u-seasons",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-b150819c81",
+   "en": "Is it real?",
+   "zh": "这是真的吗？",
+   "head": "real",
+   "heads": [
+    "real"
+   ],
+   "unit_id": "4a-u3",
+   "scenario": "u-seasons",
+   "pattern": "be-q",
+   "tier": "core"
+  },
+  {
+   "id": "ph-a3e6d94880",
+   "en": "see you later",
+   "zh": "回头见",
+   "head": "later",
+   "heads": [
+    "later"
+   ],
+   "unit_id": "4a-u3",
+   "scenario": "u-seasons",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-9f2efb86b0",
+   "en": "later on",
+   "zh": "稍后",
+   "head": "later",
+   "heads": [
+    "later"
+   ],
+   "unit_id": "4a-u3",
+   "scenario": "u-seasons",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-ab9e6c6a02",
+   "en": "a big surprise",
+   "zh": "一个大惊喜",
+   "head": "surprise",
+   "heads": [
+    "surprise"
+   ],
+   "unit_id": "4a-u3",
+   "scenario": "u-seasons",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-f44acdf8e8",
+   "en": "What a surprise!",
+   "zh": "真令人惊讶！",
+   "head": "surprise",
+   "heads": [
+    "surprise"
+   ],
+   "unit_id": "4a-u3",
+   "scenario": "u-seasons",
+   "pattern": "what",
+   "tier": "core"
+  },
+  {
+   "id": "ph-743554ddf8",
+   "en": "put on a coat",
+   "zh": "穿上外套",
+   "head": "coat",
+   "heads": [
+    "coat",
+    "coat"
+   ],
+   "unit_id": "4a-u3",
+   "scenario": "u-seasons",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-c6a9c00e9e",
+   "en": "a warm coat",
+   "zh": "一件暖和的外套",
+   "head": "coat",
+   "heads": [
+    "coat",
+    "coat"
+   ],
+   "unit_id": "4a-u3",
+   "scenario": "u-seasons",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-551df89a9e",
+   "en": "turn on the TV",
+   "zh": "打开电视",
+   "head": "turn",
+   "heads": [
+    "turn",
+    "turn on",
+    "TV"
+   ],
+   "unit_id": "4a-u3",
+   "scenario": "u-seasons",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-719f929b38",
+   "en": "turn around",
+   "zh": "转身",
+   "head": "turn",
+   "heads": [
+    "turn"
+   ],
+   "unit_id": "4a-u3",
+   "scenario": "u-seasons",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-28fc803276",
+   "en": "turn on the light",
+   "zh": "开灯",
+   "head": "turn on",
+   "heads": [
+    "turn on",
+    "light"
+   ],
+   "unit_id": "4a-u3",
+   "scenario": "u-seasons",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-c21e479f4e",
+   "en": "watch TV",
+   "zh": "看电视",
+   "head": "TV",
+   "heads": [
+    "TV"
+   ],
+   "unit_id": "4a-u3",
+   "scenario": "u-seasons",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-5af597581b",
+   "en": "weather report",
+   "zh": "天气预报",
+   "head": "report",
+   "heads": [
+    "report"
+   ],
+   "unit_id": "4a-u3",
+   "scenario": "u-seasons",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-50266f18b5",
+   "en": "a news report",
+   "zh": "新闻报道",
+   "head": "report",
+   "heads": [
+    "report"
+   ],
+   "unit_id": "4a-u3",
+   "scenario": "u-seasons",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-3be34dc0e7",
+   "en": "a wonderful day",
+   "zh": "美好的一天",
+   "head": "wonderful",
+   "heads": [
+    "wonderful"
+   ],
+   "unit_id": "4a-u4",
+   "scenario": "u-seasons",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-6acd3ffc7b",
+   "en": "What a wonderful season!",
+   "zh": "多美好的季节啊！",
+   "head": "wonderful",
+   "heads": [
+    "wonderful"
+   ],
+   "unit_id": "4a-u4",
+   "scenario": "u-seasons",
+   "pattern": "what",
+   "tier": "core"
+  },
+  {
+   "id": "ph-35501d63ff",
+   "en": "four seasons",
+   "zh": "四季",
+   "head": "season",
+   "heads": [
+    "season"
+   ],
+   "unit_id": "4a-u4",
+   "scenario": "u-seasons",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-dd6805f7ae",
+   "en": "favourite season",
+   "zh": "最喜欢的季节",
+   "head": "season",
+   "heads": [
+    "season"
+   ],
+   "unit_id": "4a-u4",
+   "scenario": "u-seasons",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-c2fa2aa9aa",
+   "en": "in spring",
+   "zh": "在春天",
+   "head": "spring",
+   "heads": [
+    "spring"
+   ],
+   "unit_id": "4a-u4",
+   "scenario": "u-seasons",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-d857043005",
+   "en": "Spring is warm.",
+   "zh": "春天很暖和。",
+   "head": "spring",
+   "heads": [
+    "spring"
+   ],
+   "unit_id": "4a-u4",
+   "scenario": "u-seasons",
+   "pattern": "statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-c0a66f8303",
+   "en": "in summer",
+   "zh": "在夏天",
+   "head": "summer",
+   "heads": [
+    "summer"
+   ],
+   "unit_id": "4a-u4",
+   "scenario": "u-seasons",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-b67860eb9b",
+   "en": "Summer is hot.",
+   "zh": "夏天很热。",
+   "head": "summer",
+   "heads": [
+    "summer"
+   ],
+   "unit_id": "4a-u4",
+   "scenario": "u-seasons",
+   "pattern": "statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-11b9fdbf0c",
+   "en": "in autumn",
+   "zh": "在秋天",
+   "head": "autumn",
+   "heads": [
+    "autumn"
+   ],
+   "unit_id": "4a-u4",
+   "scenario": "u-seasons",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-e2fc2d0b45",
+   "en": "Autumn is cool.",
+   "zh": "秋天很凉爽。",
+   "head": "autumn",
+   "heads": [
+    "autumn"
+   ],
+   "unit_id": "4a-u4",
+   "scenario": "u-seasons",
+   "pattern": "statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-618902d84c",
+   "en": "in winter",
+   "zh": "在冬天",
+   "head": "winter",
+   "heads": [
+    "winter"
+   ],
+   "unit_id": "4a-u4",
+   "scenario": "u-seasons",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-8bea658148",
+   "en": "Winter is cold.",
+   "zh": "冬天很冷。",
+   "head": "winter",
+   "heads": [
+    "winter"
+   ],
+   "unit_id": "4a-u4",
+   "scenario": "u-seasons",
+   "pattern": "statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-aeba9519be",
+   "en": "my favourite season",
+   "zh": "我最喜欢的季节",
+   "head": "favourite",
+   "heads": [
+    "favourite"
+   ],
+   "unit_id": "4a-u4",
+   "scenario": "u-seasons",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-1c723b2842",
+   "en": "What's your favourite colour?",
+   "zh": "你最喜欢的颜色是什么？",
+   "head": "favourite",
+   "heads": [
+    "favourite"
+   ],
+   "unit_id": "4a-u4",
+   "scenario": "u-seasons",
+   "pattern": "what",
+   "tier": "core"
+  },
+  {
+   "id": "ph-fa47bb06f6",
+   "en": "happy birthday",
+   "zh": "生日快乐",
+   "head": "birthday",
+   "heads": [
+    "birthday"
+   ],
+   "unit_id": "4a-u4",
+   "scenario": "u-seasons",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-64de78fc08",
+   "en": "birthday party",
+   "zh": "生日聚会",
+   "head": "birthday",
+   "heads": [
+    "birthday"
+   ],
+   "unit_id": "4a-u4",
+   "scenario": "u-seasons",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-9c5f6a3784",
+   "en": "fly kites",
+   "zh": "放风筝",
+   "head": "fly",
+   "heads": [
+    "fly"
+   ],
+   "unit_id": "4a-u4",
+   "scenario": "u-seasons",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-22f1e2dfa4",
+   "en": "The bird can fly.",
+   "zh": "鸟会飞。",
+   "head": "fly",
+   "heads": [
+    "fly"
+   ],
+   "unit_id": "4a-u4",
+   "scenario": "u-seasons",
+   "pattern": "statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-877b3ef539",
+   "en": "fly kites in spring",
+   "zh": "在春天放风筝",
+   "head": "fly kites",
+   "heads": [
+    "fly kites"
+   ],
+   "unit_id": "4a-u4",
+   "scenario": "u-seasons",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-27bf428a3b",
+   "en": "Let's fly kites.",
+   "zh": "我们去放风筝吧。",
+   "head": "fly kites",
+   "heads": [
+    "fly kites"
+   ],
+   "unit_id": "4a-u4",
+   "scenario": "u-seasons",
+   "pattern": "lets",
+   "tier": "core"
+  },
+  {
+   "id": "ph-760912f13d",
+   "en": "What happens next?",
+   "zh": "接下来发生什么？",
+   "head": "happen",
+   "heads": [
+    "happen"
+   ],
+   "unit_id": "4a-u4",
+   "scenario": "u-seasons",
+   "pattern": "what",
+   "tier": "core"
+  },
+  {
+   "id": "ph-b591ca32f7",
+   "en": "Snowstorms happen in winter.",
+   "zh": "暴风雪发生在冬天。",
+   "head": "happen",
+   "heads": [
+    "happen"
+   ],
+   "unit_id": "4a-u4",
+   "scenario": "u-seasons",
+   "pattern": "statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-73712856b1",
+   "en": "a heavy snowstorm",
+   "zh": "一场暴风雪",
+   "head": "snowstorm",
+   "heads": [
+    "snowstorm"
+   ],
+   "unit_id": "4a-u4",
+   "scenario": "u-seasons",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-411392dc37",
+   "en": "The snowstorm is coming.",
+   "zh": "暴风雪要来了。",
+   "head": "snowstorm",
+   "heads": [
+    "snowstorm"
+   ],
+   "unit_id": "4a-u4",
+   "scenario": "u-seasons",
+   "pattern": "statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-c9959c8419",
+   "en": "wait for me",
+   "zh": "等等我",
+   "head": "wait",
+   "heads": [
+    "wait"
+   ],
+   "unit_id": "4a-u4",
+   "scenario": "u-seasons",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-86b14a21a3",
+   "en": "Wait a minute.",
+   "zh": "等一会儿。",
+   "head": "wait",
+   "heads": [
+    "wait"
+   ],
+   "unit_id": "4a-u4",
+   "scenario": "u-seasons",
+   "pattern": "imperative",
+   "tier": "core"
+  },
+  {
+   "id": "ph-2dde528d22",
+   "en": "go to the beach",
+   "zh": "去海滩",
+   "head": "beach",
+   "heads": [
+    "beach"
+   ],
+   "unit_id": "4a-u4",
+   "scenario": "u-seasons",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-1ebc3e5e0a",
+   "en": "on the beach",
+   "zh": "在海滩上",
+   "head": "beach",
+   "heads": [
+    "beach"
+   ],
+   "unit_id": "4a-u4",
+   "scenario": "u-seasons",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-6bcf2769a0",
+   "en": "by the sea",
+   "zh": "在海边",
+   "head": "sea",
+   "heads": [
+    "sea"
+   ],
+   "unit_id": "4a-u4",
+   "scenario": "u-seasons",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-3591149746",
+   "en": "swim in the sea",
+   "zh": "在海里游泳",
+   "head": "sea",
+   "heads": [
+    "sea"
+   ],
+   "unit_id": "4a-u4",
+   "scenario": "u-seasons",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-de5250dd9e",
+   "en": "near the equator",
+   "zh": "靠近赤道",
+   "head": "equator",
+   "heads": [
+    "equator"
+   ],
+   "unit_id": "4a-u4",
+   "scenario": "u-seasons",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-b39241db94",
+   "en": "hot near the equator",
+   "zh": "赤道附近很热",
+   "head": "equator",
+   "heads": [
+    "equator"
+   ],
+   "unit_id": "4a-u4",
+   "scenario": "u-seasons",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-c6c901ea01",
+   "en": "go round the tree",
+   "zh": "绕着树走",
+   "head": "round",
+   "heads": [
+    "round"
+   ],
+   "unit_id": "4a-u4",
+   "scenario": "u-seasons",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-565d980870",
+   "en": "all year round",
+   "zh": "一年到头",
+   "head": "round",
+   "heads": [
+    "round"
+   ],
+   "unit_id": "4a-u4",
+   "scenario": "u-seasons",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-88a0146d84",
+   "en": "It is warm all year round.",
+   "zh": "这里全年温暖。",
+   "head": "all year round",
+   "heads": [
+    "all year round"
+   ],
+   "unit_id": "4a-u4",
+   "scenario": "u-seasons",
+   "pattern": "be",
+   "tier": "core"
+  },
+  {
+   "id": "ph-3e83311e0d",
+   "en": "green all year round",
+   "zh": "四季常绿",
+   "head": "all year round",
+   "heads": [
+    "all year round"
+   ],
+   "unit_id": "4a-u4",
+   "scenario": "u-seasons",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-2fd3c5c308",
+   "en": "quite good",
+   "zh": "相当好",
+   "head": "quite",
+   "heads": [
+    "quite"
+   ],
+   "unit_id": "4a-u4",
+   "scenario": "u-seasons",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-86f15685e6",
+   "en": "quite hot",
+   "zh": "相当热",
+   "head": "quite",
+   "heads": [
+    "quite"
+   ],
+   "unit_id": "4a-u4",
+   "scenario": "u-seasons",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-74fb357d25",
+   "en": "join the club",
+   "zh": "加入俱乐部",
+   "head": "join",
+   "heads": [
+    "join"
+   ],
+   "unit_id": "4a-u4",
+   "scenario": "u-seasons",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-5c78b8a990",
+   "en": "join us",
+   "zh": "加入我们",
+   "head": "join",
+   "heads": [
+    "join"
+   ],
+   "unit_id": "4a-u4",
+   "scenario": "u-seasons",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-c46817f81b",
+   "en": "take a bus",
+   "zh": "坐公交车",
+   "head": "bus",
+   "heads": [
+    "bus"
+   ],
+   "unit_id": "4a-u5",
+   "scenario": "u-travel",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-e0d5a82697",
+   "en": "by car",
+   "zh": "开车",
+   "head": "car",
+   "heads": [
+    "car"
+   ],
+   "unit_id": "4a-u5",
+   "scenario": "u-travel",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-cdf3d2f001",
+   "en": "a red car",
+   "zh": "一辆红色的车",
+   "head": "car",
+   "heads": [
+    "car"
+   ],
+   "unit_id": "4a-u5",
+   "scenario": "u-travel",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-bd8d06bf76",
+   "en": "by train",
+   "zh": "乘火车",
+   "head": "train",
+   "heads": [
+    "train"
+   ],
+   "unit_id": "4a-u5",
+   "scenario": "u-travel",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-07a88101b8",
+   "en": "take the train",
+   "zh": "坐火车",
+   "head": "train",
+   "heads": [
+    "train"
+   ],
+   "unit_id": "4a-u5",
+   "scenario": "u-travel",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-95dccf6cb1",
+   "en": "a big city",
+   "zh": "一座大城市",
+   "head": "city",
+   "heads": [
+    "city"
+   ],
+   "unit_id": "4a-u5",
+   "scenario": "u-travel",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-3ca22c23c4",
+   "en": "in the city",
+   "zh": "在城市里",
+   "head": "city",
+   "heads": [
+    "city"
+   ],
+   "unit_id": "4a-u5",
+   "scenario": "u-travel",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-d655d67449",
+   "en": "a small town",
+   "zh": "一座小镇",
+   "head": "town",
+   "heads": [
+    "town"
+   ],
+   "unit_id": "4a-u5",
+   "scenario": "u-travel",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-60edb1ce15",
+   "en": "in town",
+   "zh": "在镇上",
+   "head": "town",
+   "heads": [
+    "town"
+   ],
+   "unit_id": "4a-u5",
+   "scenario": "u-travel",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-022e457cb0",
+   "en": "by plane",
+   "zh": "乘飞机",
+   "head": "plane",
+   "heads": [
+    "plane"
+   ],
+   "unit_id": "4a-u5",
+   "scenario": "u-travel",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-d6c6feb77d",
+   "en": "take a plane",
+   "zh": "坐飞机",
+   "head": "plane",
+   "heads": [
+    "plane"
+   ],
+   "unit_id": "4a-u5",
+   "scenario": "u-travel",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-ccd52b2e84",
+   "en": "in the sky",
+   "zh": "在天空中",
+   "head": "sky",
+   "heads": [
+    "sky"
+   ],
+   "unit_id": "4a-u5",
+   "scenario": "u-travel",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-0accfd6abb",
+   "en": "blue sky",
+   "zh": "蓝天",
+   "head": "sky",
+   "heads": [
+    "sky"
+   ],
+   "unit_id": "4a-u5",
+   "scenario": "u-travel",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-8217ce03fc",
+   "en": "by ship",
+   "zh": "乘船",
+   "head": "ship",
+   "heads": [
+    "ship"
+   ],
+   "unit_id": "4a-u5",
+   "scenario": "u-travel",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-1f3510fb87",
+   "en": "a big ship",
+   "zh": "一艘大船",
+   "head": "ship",
+   "heads": [
+    "ship"
+   ],
+   "unit_id": "4a-u5",
+   "scenario": "u-travel",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-044e37450c",
+   "en": "a good place",
+   "zh": "一个好地方",
+   "head": "place",
+   "heads": [
+    "place"
+   ],
+   "unit_id": "4a-u5",
+   "scenario": "u-travel",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-7363c3401f",
+   "en": "travel to a place",
+   "zh": "去某地旅行",
+   "head": "place",
+   "heads": [
+    "place"
+   ],
+   "unit_id": "4a-u5",
+   "scenario": "u-travel",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-f2c9e732e1",
+   "en": "near the school",
+   "zh": "在学校附近",
+   "head": "near",
+   "heads": [
+    "near"
+   ],
+   "unit_id": "4a-u5",
+   "scenario": "u-travel",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-179b5b4d16",
+   "en": "near here",
+   "zh": "在这附近",
+   "head": "near",
+   "heads": [
+    "near"
+   ],
+   "unit_id": "4a-u5",
+   "scenario": "u-travel",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-5d8f063a38",
+   "en": "travel by train",
+   "zh": "乘火车旅行",
+   "head": "travel",
+   "heads": [
+    "travel"
+   ],
+   "unit_id": "4a-u5",
+   "scenario": "u-travel",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-7c2c089687",
+   "en": "I love to travel.",
+   "zh": "我喜欢旅行。",
+   "head": "travel",
+   "heads": [
+    "travel"
+   ],
+   "unit_id": "4a-u5",
+   "scenario": "u-travel",
+   "pattern": "i-like",
+   "tier": "core"
+  },
+  {
+   "id": "ph-9c6b84790c",
+   "en": "on the way",
+   "zh": "在路上",
+   "head": "way",
+   "heads": [
+    "way"
+   ],
+   "unit_id": "4a-u5",
+   "scenario": "u-travel",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-755e7fd403",
+   "en": "the way to school",
+   "zh": "去学校的路",
+   "head": "way",
+   "heads": [
+    "way"
+   ],
+   "unit_id": "4a-u5",
+   "scenario": "u-travel",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-29aa54bf65",
+   "en": "have a picnic",
+   "zh": "去野餐",
+   "head": "picnic",
+   "heads": [
+    "picnic"
+   ],
+   "unit_id": "4a-u5",
+   "scenario": "u-travel",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-8f57d0e6eb",
+   "en": "go for a picnic",
+   "zh": "去野餐",
+   "head": "picnic",
+   "heads": [
+    "picnic"
+   ],
+   "unit_id": "4a-u5",
+   "scenario": "u-travel",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-70411dcd28",
+   "en": "wait a minute",
+   "zh": "等一会儿",
+   "head": "minute",
+   "heads": [
+    "minute"
+   ],
+   "unit_id": "4a-u5",
+   "scenario": "u-travel",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-43d6cb1b3f",
+   "en": "in a minute",
+   "zh": "马上",
+   "head": "minute",
+   "heads": [
+    "minute"
+   ],
+   "unit_id": "4a-u5",
+   "scenario": "u-travel",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-bed021e7fa",
+   "en": "wear a coat",
+   "zh": "穿外套",
+   "head": "wear",
+   "heads": [
+    "wear"
+   ],
+   "unit_id": "4a-u5",
+   "scenario": "u-travel",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-94169d0810",
+   "en": "wear a hat",
+   "zh": "戴帽子",
+   "head": "wear",
+   "heads": [
+    "wear",
+    "hat"
+   ],
+   "unit_id": "4a-u5",
+   "scenario": "u-travel",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-67a6fac11e",
+   "en": "live in China",
+   "zh": "住在中国",
+   "head": "live",
+   "heads": [
+    "live"
+   ],
+   "unit_id": "4a-u5",
+   "scenario": "u-travel",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-b035a70957",
+   "en": "Where do you live?",
+   "zh": "你住在哪里？",
+   "head": "live",
+   "heads": [
+    "live"
+   ],
+   "unit_id": "4a-u5",
+   "scenario": "u-travel",
+   "pattern": "where",
+   "tier": "core"
+  },
+  {
+   "id": "ph-158ee90f12",
+   "en": "go away",
+   "zh": "走开",
+   "head": "away",
+   "heads": [
+    "away"
+   ],
+   "unit_id": "4a-u5",
+   "scenario": "u-travel",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-65f2aa14ac",
+   "en": "far away",
+   "zh": "遥远",
+   "head": "away",
+   "heads": [
+    "away"
+   ],
+   "unit_id": "4a-u5",
+   "scenario": "u-travel",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-8076e1d31a",
+   "en": "a big truck",
+   "zh": "一辆大卡车",
+   "head": "truck",
+   "heads": [
+    "truck"
+   ],
+   "unit_id": "4a-u5",
+   "scenario": "u-travel",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-c1a41a9709",
+   "en": "by truck",
+   "zh": "用卡车",
+   "head": "truck",
+   "heads": [
+    "truck"
+   ],
+   "unit_id": "4a-u5",
+   "scenario": "u-travel",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-71cc98093f",
+   "en": "green bamboo",
+   "zh": "绿竹",
+   "head": "bamboo",
+   "heads": [
+    "bamboo"
+   ],
+   "unit_id": "4a-u5",
+   "scenario": "u-travel",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-edd371f40c",
+   "en": "a bamboo forest",
+   "zh": "竹林",
+   "head": "bamboo",
+   "heads": [
+    "bamboo"
+   ],
+   "unit_id": "4a-u5",
+   "scenario": "u-travel",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-d1f03ec637",
+   "en": "at the airport",
+   "zh": "在机场",
+   "head": "airport",
+   "heads": [
+    "airport"
+   ],
+   "unit_id": "4a-u5",
+   "scenario": "u-travel",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-25a0cf3600",
+   "en": "go to the airport",
+   "zh": "去机场",
+   "head": "airport",
+   "heads": [
+    "airport"
+   ],
+   "unit_id": "4a-u5",
+   "scenario": "u-travel",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-f89698d55e",
+   "en": "by bike",
+   "zh": "骑自行车",
+   "head": "bike",
+   "heads": [
+    "bike"
+   ],
+   "unit_id": "4a-u5",
+   "scenario": "u-travel",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-8247125ab1",
+   "en": "ride a bike",
+   "zh": "骑自行车",
+   "head": "bike",
+   "heads": [
+    "bike"
+   ],
+   "unit_id": "4a-u5",
+   "scenario": "u-travel",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-984fef3f52",
+   "en": "the bell rings",
+   "zh": "铃响了",
+   "head": "ring",
+   "heads": [
+    "ring"
+   ],
+   "unit_id": "4a-u5",
+   "scenario": "u-travel",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-5acc48806c",
+   "en": "ring the bell",
+   "zh": "按铃",
+   "head": "ring",
+   "heads": [
+    "ring"
+   ],
+   "unit_id": "4a-u5",
+   "scenario": "u-travel",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-43c831b35a",
+   "en": "the car beeps",
+   "zh": "汽车鸣笛",
+   "head": "beep",
+   "heads": [
+    "beep"
+   ],
+   "unit_id": "4a-u5",
+   "scenario": "u-travel",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-b16997b562",
+   "en": "Beep! Beep!",
+   "zh": "嘀！嘀！",
+   "head": "beep",
+   "heads": [
+    "beep"
+   ],
+   "unit_id": "4a-u5",
+   "scenario": "u-travel",
+   "pattern": "daily",
+   "tier": "core"
+  },
+  {
+   "id": "ph-ed7f4b9a25",
+   "en": "by subway",
+   "zh": "乘地铁",
+   "head": "subway",
+   "heads": [
+    "subway"
+   ],
+   "unit_id": "4a-u5",
+   "scenario": "u-travel",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-586022c779",
+   "en": "take the subway",
+   "zh": "坐地铁",
+   "head": "subway",
+   "heads": [
+    "subway"
+   ],
+   "unit_id": "4a-u5",
+   "scenario": "u-travel",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-fa796ebd5e",
+   "en": "Whoosh! The train goes by.",
+   "zh": "呼！火车呼啸而过。",
+   "head": "whoosh",
+   "heads": [
+    "whoosh"
+   ],
+   "unit_id": "4a-u5",
+   "scenario": "u-travel",
+   "pattern": "statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-9d0ce67930",
+   "en": "by tram",
+   "zh": "乘有轨电车",
+   "head": "tram",
+   "heads": [
+    "tram"
+   ],
+   "unit_id": "4a-u5",
+   "scenario": "u-travel",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-9d74cbd7b8",
+   "en": "take a tram",
+   "zh": "坐有轨电车",
+   "head": "tram",
+   "heads": [
+    "tram"
+   ],
+   "unit_id": "4a-u5",
+   "scenario": "u-travel",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-3533584f2c",
+   "en": "The train chugs along.",
+   "zh": "火车突突地前进。",
+   "head": "chug",
+   "heads": [
+    "chug"
+   ],
+   "unit_id": "4a-u5",
+   "scenario": "u-travel",
+   "pattern": "statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-3e75ebf555",
+   "en": "a car wheel",
+   "zh": "车轮",
+   "head": "wheel",
+   "heads": [
+    "wheel"
+   ],
+   "unit_id": "4a-u6",
+   "scenario": "u-directions",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-15389a3136",
+   "en": "the wheel of a bike",
+   "zh": "自行车的轮子",
+   "head": "wheel",
+   "heads": [
+    "wheel"
+   ],
+   "unit_id": "4a-u6",
+   "scenario": "u-directions",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-ddbc8f5a56",
+   "en": "turn left",
+   "zh": "向左转",
+   "head": "left",
+   "heads": [
+    "left"
+   ],
+   "unit_id": "4a-u6",
+   "scenario": "u-directions",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-83549adee8",
+   "en": "on the left",
+   "zh": "在左边",
+   "head": "left",
+   "heads": [
+    "left"
+   ],
+   "unit_id": "4a-u6",
+   "scenario": "u-directions",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-20e2177eab",
+   "en": "go straight",
+   "zh": "直走",
+   "head": "straight",
+   "heads": [
+    "straight"
+   ],
+   "unit_id": "4a-u6",
+   "scenario": "u-directions",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-d793af79a9",
+   "en": "walk straight on",
+   "zh": "一直往前走",
+   "head": "straight",
+   "heads": [
+    "straight"
+   ],
+   "unit_id": "4a-u6",
+   "scenario": "u-directions",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-a8952971a5",
+   "en": "go to the library",
+   "zh": "去图书馆",
+   "head": "library",
+   "heads": [
+    "library"
+   ],
+   "unit_id": "4a-u6",
+   "scenario": "u-directions",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-29a04f95a6",
+   "en": "in the library",
+   "zh": "在图书馆里",
+   "head": "library",
+   "heads": [
+    "library"
+   ],
+   "unit_id": "4a-u6",
+   "scenario": "u-directions",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-bd3f924b84",
+   "en": "city centre",
+   "zh": "市中心",
+   "head": "centre",
+   "heads": [
+    "centre"
+   ],
+   "unit_id": "4a-u6",
+   "scenario": "u-directions",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-5ef4bc65c1",
+   "en": "in the centre",
+   "zh": "在中心",
+   "head": "centre",
+   "heads": [
+    "centre"
+   ],
+   "unit_id": "4a-u6",
+   "scenario": "u-directions",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-72bb491afc",
+   "en": "go to the cinema",
+   "zh": "去看电影",
+   "head": "cinema",
+   "heads": [
+    "cinema"
+   ],
+   "unit_id": "4a-u6",
+   "scenario": "u-directions",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-27308e4b97",
+   "en": "at the cinema",
+   "zh": "在电影院",
+   "head": "cinema",
+   "heads": [
+    "cinema"
+   ],
+   "unit_id": "4a-u6",
+   "scenario": "u-directions",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-be67d834cd",
+   "en": "go to the hospital",
+   "zh": "去医院",
+   "head": "hospital",
+   "heads": [
+    "hospital"
+   ],
+   "unit_id": "4a-u6",
+   "scenario": "u-directions",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-66211e65ac",
+   "en": "in the hospital",
+   "zh": "在医院里",
+   "head": "hospital",
+   "heads": [
+    "hospital"
+   ],
+   "unit_id": "4a-u6",
+   "scenario": "u-directions",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-9f53ffc739",
+   "en": "go to the supermarket",
+   "zh": "去超市",
+   "head": "supermarket",
+   "heads": [
+    "supermarket"
+   ],
+   "unit_id": "4a-u6",
+   "scenario": "u-directions",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-becac40f88",
+   "en": "at the supermarket",
+   "zh": "在超市",
+   "head": "supermarket",
+   "heads": [
+    "supermarket"
+   ],
+   "unit_id": "4a-u6",
+   "scenario": "u-directions",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-11fe3e4bec",
+   "en": "visit the museum",
+   "zh": "参观博物馆",
+   "head": "museum",
+   "heads": [
+    "museum"
+   ],
+   "unit_id": "4a-u6",
+   "scenario": "u-directions",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-088308d4e2",
+   "en": "in the museum",
+   "zh": "在博物馆里",
+   "head": "museum",
+   "heads": [
+    "museum"
+   ],
+   "unit_id": "4a-u6",
+   "scenario": "u-directions",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-9a4be103d1",
+   "en": "see you tomorrow",
+   "zh": "明天见",
+   "head": "tomorrow",
+   "heads": [
+    "tomorrow"
+   ],
+   "unit_id": "4a-u6",
+   "scenario": "u-directions",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-e424052183",
+   "en": "Tomorrow is Sunday.",
+   "zh": "明天是星期天。",
+   "head": "tomorrow",
+   "heads": [
+    "tomorrow"
+   ],
+   "unit_id": "4a-u6",
+   "scenario": "u-directions",
+   "pattern": "statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-8d373260b6",
+   "en": "a kind woman",
+   "zh": "一位善良的女士",
+   "head": "woman",
+   "heads": [
+    "woman"
+   ],
+   "unit_id": "4a-u6",
+   "scenario": "u-directions",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-8b3714b912",
+   "en": "the woman in red",
+   "zh": "穿红衣服的女士",
+   "head": "woman",
+   "heads": [
+    "woman"
+   ],
+   "unit_id": "4a-u6",
+   "scenario": "u-directions",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-5e436f3356",
+   "en": "excuse me",
+   "zh": "劳驾；对不起",
+   "head": "excuse",
+   "heads": [
+    "excuse"
+   ],
+   "unit_id": "4a-u6",
+   "scenario": "u-directions",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-30b0caaade",
+   "en": "Excuse me, where is...?",
+   "zh": "打扰一下，……在哪里？",
+   "head": "excuse",
+   "heads": [
+    "excuse"
+   ],
+   "unit_id": "4a-u6",
+   "scenario": "u-directions",
+   "pattern": "daily",
+   "tier": "core"
+  },
+  {
+   "id": "ph-ad4cdbf012",
+   "en": "Excuse me, can you help me?",
+   "zh": "打扰一下，你能帮我吗？",
+   "head": "excuse me",
+   "heads": [
+    "excuse me"
+   ],
+   "unit_id": "4a-u6",
+   "scenario": "u-directions",
+   "pattern": "daily",
+   "tier": "core"
+  },
+  {
+   "id": "ph-cecb5a5dc1",
+   "en": "Excuse me, I'm sorry.",
+   "zh": "对不起，不好意思。",
+   "head": "excuse me",
+   "heads": [
+    "excuse me"
+   ],
+   "unit_id": "4a-u6",
+   "scenario": "u-directions",
+   "pattern": "daily",
+   "tier": "core"
+  },
+  {
+   "id": "ph-35a2e4cbbd",
+   "en": "make a wish",
+   "zh": "许个愿",
+   "head": "wish",
+   "heads": [
+    "wish"
+   ],
+   "unit_id": "4a-u6",
+   "scenario": "u-directions",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-a6f88fe1e1",
+   "en": "I wish you happiness.",
+   "zh": "祝你幸福。",
+   "head": "wish",
+   "heads": [
+    "wish"
+   ],
+   "unit_id": "4a-u6",
+   "scenario": "u-directions",
+   "pattern": "i-statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-e2c0016a80",
+   "en": "come true",
+   "zh": "实现",
+   "head": "true",
+   "heads": [
+    "true",
+    "true"
+   ],
+   "unit_id": "4a-u6",
+   "scenario": "u-directions",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-b3de9bc981",
+   "en": "Is it true?",
+   "zh": "这是真的吗？",
+   "head": "true",
+   "heads": [
+    "true",
+    "true"
+   ],
+   "unit_id": "4a-u6",
+   "scenario": "u-directions",
+   "pattern": "be-q",
+   "tier": "core"
+  },
+  {
+   "id": "ph-a1860f9990",
+   "en": "the first step",
+   "zh": "第一步",
+   "head": "step",
+   "heads": [
+    "step"
+   ],
+   "unit_id": "4a-u6",
+   "scenario": "u-directions",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-86c70f8ed5",
+   "en": "step by step",
+   "zh": "一步一步地",
+   "head": "step",
+   "heads": [
+    "step"
+   ],
+   "unit_id": "4a-u6",
+   "scenario": "u-directions",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-bbcde44480",
+   "en": "my own room",
+   "zh": "我自己的房间",
+   "head": "own",
+   "heads": [
+    "own"
+   ],
+   "unit_id": "4a-u6",
+   "scenario": "u-directions",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-7c1a2b6a71",
+   "en": "on your own",
+   "zh": "独自",
+   "head": "own",
+   "heads": [
+    "own"
+   ],
+   "unit_id": "4a-u6",
+   "scenario": "u-directions",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-bc8afeb899",
+   "en": "cross the street",
+   "zh": "过马路",
+   "head": "cross",
+   "heads": [
+    "cross",
+    "street"
+   ],
+   "unit_id": "4a-u6",
+   "scenario": "u-directions",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-d065911df8",
+   "en": "cross the road",
+   "zh": "过马路",
+   "head": "cross",
+   "heads": [
+    "cross"
+   ],
+   "unit_id": "4a-u6",
+   "scenario": "u-directions",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-f64d1951b0",
+   "en": "be careful",
+   "zh": "当心",
+   "head": "careful",
+   "heads": [
+    "careful"
+   ],
+   "unit_id": "4a-u6",
+   "scenario": "u-directions",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-f81b25cf8f",
+   "en": "Be careful!",
+   "zh": "小心！",
+   "head": "careful",
+   "heads": [
+    "careful"
+   ],
+   "unit_id": "4a-u6",
+   "scenario": "u-directions",
+   "pattern": "imperative",
+   "tier": "core"
+  },
+  {
+   "id": "ph-d948e88cbe",
+   "en": "Be careful on the road.",
+   "zh": "路上小心。",
+   "head": "be careful",
+   "heads": [
+    "be careful"
+   ],
+   "unit_id": "4a-u6",
+   "scenario": "u-directions",
+   "pattern": "imperative",
+   "tier": "core"
+  },
+  {
+   "id": "ph-8b3c5753d9",
+   "en": "Be careful with fire.",
+   "zh": "小心火。",
+   "head": "be careful",
+   "heads": [
+    "be careful"
+   ],
+   "unit_id": "4a-u6",
+   "scenario": "u-directions",
+   "pattern": "imperative",
+   "tier": "core"
+  },
+  {
+   "id": "ph-ff87d25f53",
+   "en": "by underground",
+   "zh": "乘地铁",
+   "head": "underground",
+   "heads": [
+    "underground"
+   ],
+   "unit_id": "4a-u6",
+   "scenario": "u-directions",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-5066f18e27",
+   "en": "take the underground",
+   "zh": "坐地铁",
+   "head": "underground",
+   "heads": [
+    "underground"
+   ],
+   "unit_id": "4a-u6",
+   "scenario": "u-directions",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-f5c04f7083",
+   "en": "see a doctor",
+   "zh": "看医生",
+   "head": "doctor",
+   "heads": [
+    "doctor"
+   ],
+   "unit_id": "4b-u1",
+   "scenario": "u-jobs",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-fac4265146",
+   "en": "a kind doctor",
+   "zh": "一位友善的医生",
+   "head": "doctor",
+   "heads": [
+    "doctor"
+   ],
+   "unit_id": "4b-u1",
+   "scenario": "u-jobs",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-e7c257b353",
+   "en": "a brave fireman",
+   "zh": "一名勇敢的消防员",
+   "head": "fireman",
+   "heads": [
+    "fireman"
+   ],
+   "unit_id": "4b-u1",
+   "scenario": "u-jobs",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-a20dd2682b",
+   "en": "The fireman puts out fires.",
+   "zh": "消防员灭火。",
+   "head": "fireman",
+   "heads": [
+    "fireman"
+   ],
+   "unit_id": "4b-u1",
+   "scenario": "u-jobs",
+   "pattern": "statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-6ab6f43f79",
+   "en": "a busy farmer",
+   "zh": "一位忙碌的农民",
+   "head": "farmer",
+   "heads": [
+    "farmer"
+   ],
+   "unit_id": "4b-u1",
+   "scenario": "u-jobs",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-72b8e48e5e",
+   "en": "The farmer grows rice.",
+   "zh": "农民种稻子。",
+   "head": "farmer",
+   "heads": [
+    "farmer"
+   ],
+   "unit_id": "4b-u1",
+   "scenario": "u-jobs",
+   "pattern": "statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-8c003531fa",
+   "en": "cook dinner",
+   "zh": "做晚饭",
+   "head": "cook",
+   "heads": [
+    "cook"
+   ],
+   "unit_id": "4b-u1",
+   "scenario": "u-jobs",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-455fe138e4",
+   "en": "a great cook",
+   "zh": "一位很棒的厨师",
+   "head": "cook",
+   "heads": [
+    "cook"
+   ],
+   "unit_id": "4b-u1",
+   "scenario": "u-jobs",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-2b05a9d2fb",
+   "en": "call the police",
+   "zh": "报警",
+   "head": "police",
+   "heads": [
+    "police"
+   ],
+   "unit_id": "4b-u1",
+   "scenario": "u-jobs",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-bd5cbec391",
+   "en": "the police station",
+   "zh": "警察局",
+   "head": "police",
+   "heads": [
+    "police"
+   ],
+   "unit_id": "4b-u1",
+   "scenario": "u-jobs",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-d058c5e267",
+   "en": "a police officer",
+   "zh": "一名警察",
+   "head": "police officer",
+   "heads": [
+    "police officer"
+   ],
+   "unit_id": "4b-u1",
+   "scenario": "u-jobs",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-69230e2844",
+   "en": "The police officer helps us.",
+   "zh": "警察帮助我们。",
+   "head": "police officer",
+   "heads": [
+    "police officer"
+   ],
+   "unit_id": "4b-u1",
+   "scenario": "u-jobs",
+   "pattern": "statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-b0ac271cd5",
+   "en": "police station",
+   "zh": "警察局",
+   "head": "station",
+   "heads": [
+    "station"
+   ],
+   "unit_id": "4b-u1",
+   "scenario": "u-jobs",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-1ce4d1769c",
+   "en": "train station",
+   "zh": "火车站",
+   "head": "station",
+   "heads": [
+    "station"
+   ],
+   "unit_id": "4b-u1",
+   "scenario": "u-jobs",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-22b875364e",
+   "en": "go to the police station",
+   "zh": "去警察局",
+   "head": "police station",
+   "heads": [
+    "police station"
+   ],
+   "unit_id": "4b-u1",
+   "scenario": "u-jobs",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-0c5576f4d7",
+   "en": "near the police station",
+   "zh": "在警察局附近",
+   "head": "police station",
+   "heads": [
+    "police station"
+   ],
+   "unit_id": "4b-u1",
+   "scenario": "u-jobs",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-ce8a0bd718",
+   "en": "I often read books.",
+   "zh": "我经常看书。",
+   "head": "often",
+   "heads": [
+    "often"
+   ],
+   "unit_id": "4b-u1",
+   "scenario": "u-jobs",
+   "pattern": "i-statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-e5bf4f0df0",
+   "en": "How often do you...?",
+   "zh": "你多久……一次？",
+   "head": "often",
+   "heads": [
+    "often"
+   ],
+   "unit_id": "4b-u1",
+   "scenario": "u-jobs",
+   "pattern": "how-many",
+   "tier": "core"
+  },
+  {
+   "id": "ph-b67959bf3a",
+   "en": "in the field",
+   "zh": "在田野里",
+   "head": "field",
+   "heads": [
+    "field"
+   ],
+   "unit_id": "4b-u1",
+   "scenario": "u-jobs",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-6c379a6777",
+   "en": "a green field",
+   "zh": "一片绿色的田野",
+   "head": "field",
+   "heads": [
+    "field"
+   ],
+   "unit_id": "4b-u1",
+   "scenario": "u-jobs",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-6ae0aa8d51",
+   "en": "a famous painter",
+   "zh": "一位著名的画家",
+   "head": "painter",
+   "heads": [
+    "painter"
+   ],
+   "unit_id": "4b-u1",
+   "scenario": "u-jobs",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-c971ae62de",
+   "en": "The painter paints well.",
+   "zh": "这位画家画得很好。",
+   "head": "painter",
+   "heads": [
+    "painter"
+   ],
+   "unit_id": "4b-u1",
+   "scenario": "u-jobs",
+   "pattern": "statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-1e8b3145f9",
+   "en": "use a pen",
+   "zh": "使用钢笔",
+   "head": "use",
+   "heads": [
+    "use"
+   ],
+   "unit_id": "4b-u1",
+   "scenario": "u-jobs",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-76e5928226",
+   "en": "Can I use your phone?",
+   "zh": "我能用一下你的电话吗？",
+   "head": "use",
+   "heads": [
+    "use"
+   ],
+   "unit_id": "4b-u1",
+   "scenario": "u-jobs",
+   "pattern": "can",
+   "tier": "core"
+  },
+  {
+   "id": "ph-4fac199154",
+   "en": "a paint brush",
+   "zh": "画笔",
+   "head": "brush",
+   "heads": [
+    "brush"
+   ],
+   "unit_id": "4b-u1",
+   "scenario": "u-jobs",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-6adaaf6d16",
+   "en": "brush your teeth",
+   "zh": "刷牙",
+   "head": "brush",
+   "heads": [
+    "brush"
+   ],
+   "unit_id": "4b-u1",
+   "scenario": "u-jobs",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-0fdf70b250",
+   "en": "a great scientist",
+   "zh": "一位伟大的科学家",
+   "head": "scientist",
+   "heads": [
+    "scientist"
+   ],
+   "unit_id": "4b-u1",
+   "scenario": "u-jobs",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-16449de51d",
+   "en": "The scientist studies stars.",
+   "zh": "科学家研究星星。",
+   "head": "scientist",
+   "heads": [
+    "scientist"
+   ],
+   "unit_id": "4b-u1",
+   "scenario": "u-jobs",
+   "pattern": "statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-d0d8e93a69",
+   "en": "a famous writer",
+   "zh": "一位著名的作家",
+   "head": "writer",
+   "heads": [
+    "writer"
+   ],
+   "unit_id": "4b-u1",
+   "scenario": "u-jobs",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-e867d48ae2",
+   "en": "The writer writes books.",
+   "zh": "作家写书。",
+   "head": "writer",
+   "heads": [
+    "writer"
+   ],
+   "unit_id": "4b-u1",
+   "scenario": "u-jobs",
+   "pattern": "statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-0b380c805c",
+   "en": "a factory worker",
+   "zh": "一名工厂工人",
+   "head": "worker",
+   "heads": [
+    "worker"
+   ],
+   "unit_id": "4b-u1",
+   "scenario": "u-jobs",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-5d8fdd220d",
+   "en": "The worker works hard.",
+   "zh": "工人工作努力。",
+   "head": "worker",
+   "heads": [
+    "worker"
+   ],
+   "unit_id": "4b-u1",
+   "scenario": "u-jobs",
+   "pattern": "statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-39bdb49e61",
+   "en": "my aunt",
+   "zh": "我的姑姑/阿姨",
+   "head": "aunt",
+   "heads": [
+    "aunt"
+   ],
+   "unit_id": "4b-u1",
+   "scenario": "u-jobs",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-2e5ba59391",
+   "en": "Aunt Mary",
+   "zh": "玛丽阿姨",
+   "head": "aunt",
+   "heads": [
+    "aunt"
+   ],
+   "unit_id": "4b-u1",
+   "scenario": "u-jobs",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-3627e6d34d",
+   "en": "at night",
+   "zh": "在夜里",
+   "head": "night",
+   "heads": [
+    "night"
+   ],
+   "unit_id": "4b-u1",
+   "scenario": "u-jobs",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-56b611281b",
+   "en": "good night",
+   "zh": "晚安",
+   "head": "night",
+   "heads": [
+    "night"
+   ],
+   "unit_id": "4b-u1",
+   "scenario": "u-jobs",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-0f3cf60ceb",
+   "en": "a wise owl",
+   "zh": "一只聪明的猫头鹰",
+   "head": "owl",
+   "heads": [
+    "owl"
+   ],
+   "unit_id": "4b-u1",
+   "scenario": "u-jobs",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-e3721d7344",
+   "en": "The owl flies at night.",
+   "zh": "猫头鹰在夜间飞行。",
+   "head": "owl",
+   "heads": [
+    "owl"
+   ],
+   "unit_id": "4b-u1",
+   "scenario": "u-jobs",
+   "pattern": "statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-5125c39c12",
+   "en": "He is a night owl.",
+   "zh": "他是个夜猫子。",
+   "head": "night owl",
+   "heads": [
+    "night owl"
+   ],
+   "unit_id": "4b-u1",
+   "scenario": "u-jobs",
+   "pattern": "statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-c0788fcf79",
+   "en": "become a night owl",
+   "zh": "变成夜猫子",
+   "head": "night owl",
+   "heads": [
+    "night owl"
+   ],
+   "unit_id": "4b-u1",
+   "scenario": "u-jobs",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-5f08134480",
+   "en": "a bus driver",
+   "zh": "一名公交车司机",
+   "head": "driver",
+   "heads": [
+    "driver"
+   ],
+   "unit_id": "4b-u1",
+   "scenario": "u-jobs",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-5fa8f6f1ff",
+   "en": "a careful driver",
+   "zh": "一位谨慎的司机",
+   "head": "driver",
+   "heads": [
+    "driver"
+   ],
+   "unit_id": "4b-u1",
+   "scenario": "u-jobs",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-449f98140d",
+   "en": "by taxi",
+   "zh": "乘出租车",
+   "head": "taxi",
+   "heads": [
+    "taxi"
+   ],
+   "unit_id": "4b-u1",
+   "scenario": "u-jobs",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-38ba904db0",
+   "en": "take a taxi",
+   "zh": "坐出租车",
+   "head": "taxi",
+   "heads": [
+    "taxi"
+   ],
+   "unit_id": "4b-u1",
+   "scenario": "u-jobs",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-5dfd316c24",
+   "en": "keep safe",
+   "zh": "保证安全",
+   "head": "safe",
+   "heads": [
+    "safe"
+   ],
+   "unit_id": "4b-u1",
+   "scenario": "u-jobs",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-31f9800d73",
+   "en": "Is it safe?",
+   "zh": "安全吗？",
+   "head": "safe",
+   "heads": [
+    "safe"
+   ],
+   "unit_id": "4b-u1",
+   "scenario": "u-jobs",
+   "pattern": "be-q",
+   "tier": "core"
+  },
+  {
+   "id": "ph-59889ad8c3",
+   "en": "a kind nurse",
+   "zh": "一位友善的护士",
+   "head": "nurse",
+   "heads": [
+    "nurse"
+   ],
+   "unit_id": "4b-u1",
+   "scenario": "u-jobs",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-106226a69c",
+   "en": "The nurse helps the doctor.",
+   "zh": "护士协助医生。",
+   "head": "nurse",
+   "heads": [
+    "nurse"
+   ],
+   "unit_id": "4b-u1",
+   "scenario": "u-jobs",
+   "pattern": "statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-7f15a58097",
+   "en": "a bright light",
+   "zh": "明亮的光",
+   "head": "light",
+   "heads": [
+    "light"
+   ],
+   "unit_id": "4b-u1",
+   "scenario": "u-jobs",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-fa24cccb2a",
+   "en": "my uncle",
+   "zh": "我的叔叔/伯伯",
+   "head": "uncle",
+   "heads": [
+    "uncle"
+   ],
+   "unit_id": "4b-u1",
+   "scenario": "u-jobs",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-7618a42475",
+   "en": "Uncle Tom",
+   "zh": "汤姆叔叔",
+   "head": "uncle",
+   "heads": [
+    "uncle"
+   ],
+   "unit_id": "4b-u1",
+   "scenario": "u-jobs",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-fb6a122192",
+   "en": "bake a cake",
+   "zh": "烤蛋糕",
+   "head": "bake",
+   "heads": [
+    "bake"
+   ],
+   "unit_id": "4b-u1",
+   "scenario": "u-jobs",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-7913a7ccb6",
+   "en": "bake bread",
+   "zh": "烤面包",
+   "head": "bake",
+   "heads": [
+    "bake"
+   ],
+   "unit_id": "4b-u1",
+   "scenario": "u-jobs",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-91d62a6254",
+   "en": "a busy bee",
+   "zh": "一只忙碌的蜜蜂",
+   "head": "bee",
+   "heads": [
+    "bee"
+   ],
+   "unit_id": "4b-u1",
+   "scenario": "u-jobs",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-1e545d697c",
+   "en": "The bee makes honey.",
+   "zh": "蜜蜂酿蜜。",
+   "head": "bee",
+   "heads": [
+    "bee"
+   ],
+   "unit_id": "4b-u1",
+   "scenario": "u-jobs",
+   "pattern": "statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-fd5b23d7e2",
+   "en": "the same as",
+   "zh": "与……相同",
+   "head": "same",
+   "heads": [
+    "same"
+   ],
+   "unit_id": "4b-u1",
+   "scenario": "u-jobs",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-3b8602848c",
+   "en": "We are the same age.",
+   "zh": "我们同岁。",
+   "head": "same",
+   "heads": [
+    "same"
+   ],
+   "unit_id": "4b-u1",
+   "scenario": "u-jobs",
+   "pattern": "statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-b18f8166d2",
+   "en": "a loud sound",
+   "zh": "很大的声音",
+   "head": "sound",
+   "heads": [
+    "sound"
+   ],
+   "unit_id": "4b-u1",
+   "scenario": "u-jobs",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-e44a8fa4e8",
+   "en": "That sounds good.",
+   "zh": "听起来不错。",
+   "head": "sound",
+   "heads": [
+    "sound"
+   ],
+   "unit_id": "4b-u1",
+   "scenario": "u-jobs",
+   "pattern": "statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-1eedebf1ca",
+   "en": "a postman",
+   "zh": "一名邮递员",
+   "head": "postman",
+   "heads": [
+    "postman"
+   ],
+   "unit_id": "4b-u1",
+   "scenario": "u-jobs",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-d8a0033406",
+   "en": "The postman brings letters.",
+   "zh": "邮递员送信。",
+   "head": "postman",
+   "heads": [
+    "postman"
+   ],
+   "unit_id": "4b-u1",
+   "scenario": "u-jobs",
+   "pattern": "statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-04639e912e",
+   "en": "daily life",
+   "zh": "日常生活",
+   "head": "life",
+   "heads": [
+    "life"
+   ],
+   "unit_id": "4b-u1",
+   "scenario": "u-jobs",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-35a229f2e6",
+   "en": "enjoy life",
+   "zh": "享受生活",
+   "head": "life",
+   "heads": [
+    "life"
+   ],
+   "unit_id": "4b-u1",
+   "scenario": "u-jobs",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-2fa855b5c6",
+   "en": "a high mountain",
+   "zh": "一座高山",
+   "head": "mountain",
+   "heads": [
+    "mountain"
+   ],
+   "unit_id": "4b-u1",
+   "scenario": "u-jobs",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-57adbc466d",
+   "en": "climb a mountain",
+   "zh": "爬山",
+   "head": "mountain",
+   "heads": [
+    "mountain"
+   ],
+   "unit_id": "4b-u1",
+   "scenario": "u-jobs",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-a02586abe7",
+   "en": "laugh loudly",
+   "zh": "大声笑",
+   "head": "laugh",
+   "heads": [
+    "laugh"
+   ],
+   "unit_id": "4b-u2",
+   "scenario": "u-feelings",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-c60cbe5147",
+   "en": "The children laugh.",
+   "zh": "孩子们在笑。",
+   "head": "laugh",
+   "heads": [
+    "laugh"
+   ],
+   "unit_id": "4b-u2",
+   "scenario": "u-feelings",
+   "pattern": "statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-c8883ad544",
+   "en": "feel sad",
+   "zh": "感到难过",
+   "head": "sad",
+   "heads": [
+    "sad"
+   ],
+   "unit_id": "4b-u2",
+   "scenario": "u-feelings",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-9ca2e73235",
+   "en": "Why are you sad?",
+   "zh": "你为什么难过？",
+   "head": "sad",
+   "heads": [
+    "sad"
+   ],
+   "unit_id": "4b-u2",
+   "scenario": "u-feelings",
+   "pattern": "question-word",
+   "tier": "core"
+  },
+  {
+   "id": "ph-9915f348b0",
+   "en": "cry for help",
+   "zh": "呼救",
+   "head": "cry",
+   "heads": [
+    "cry"
+   ],
+   "unit_id": "4b-u2",
+   "scenario": "u-feelings",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-9907f31ac3",
+   "en": "Don't cry.",
+   "zh": "别哭。",
+   "head": "cry",
+   "heads": [
+    "cry"
+   ],
+   "unit_id": "4b-u2",
+   "scenario": "u-feelings",
+   "pattern": "don-t",
+   "tier": "core"
+  },
+  {
+   "id": "ph-647c11d810",
+   "en": "feel angry",
+   "zh": "感到生气",
+   "head": "angry",
+   "heads": [
+    "angry"
+   ],
+   "unit_id": "4b-u2",
+   "scenario": "u-feelings",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-e4d5ab1d11",
+   "en": "He is angry.",
+   "zh": "他很生气。",
+   "head": "angry",
+   "heads": [
+    "angry"
+   ],
+   "unit_id": "4b-u2",
+   "scenario": "u-feelings",
+   "pattern": "statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-5d4d129945",
+   "en": "frown at me",
+   "zh": "对我皱眉",
+   "head": "frown",
+   "heads": [
+    "frown"
+   ],
+   "unit_id": "4b-u2",
+   "scenario": "u-feelings",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-5f0a20d6b3",
+   "en": "Don't frown.",
+   "zh": "别皱眉。",
+   "head": "frown",
+   "heads": [
+    "frown"
+   ],
+   "unit_id": "4b-u2",
+   "scenario": "u-feelings",
+   "pattern": "don-t",
+   "tier": "core"
+  },
+  {
+   "id": "ph-03d452455d",
+   "en": "feel scared",
+   "zh": "感到害怕",
+   "head": "scared",
+   "heads": [
+    "scared"
+   ],
+   "unit_id": "4b-u2",
+   "scenario": "u-feelings",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-949f3ae1b5",
+   "en": "I'm scared of dogs.",
+   "zh": "我怕狗。",
+   "head": "scared",
+   "heads": [
+    "scared"
+   ],
+   "unit_id": "4b-u2",
+   "scenario": "u-feelings",
+   "pattern": "i-statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-90a32591f2",
+   "en": "shake hands",
+   "zh": "握手",
+   "head": "shake",
+   "heads": [
+    "shake"
+   ],
+   "unit_id": "4b-u2",
+   "scenario": "u-feelings",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-06e138f5e4",
+   "en": "shake with fear",
+   "zh": "吓得发抖",
+   "head": "shake",
+   "heads": [
+    "shake"
+   ],
+   "unit_id": "4b-u2",
+   "scenario": "u-feelings",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-e83410780c",
+   "en": "feel excited",
+   "zh": "感到兴奋",
+   "head": "excited",
+   "heads": [
+    "excited"
+   ],
+   "unit_id": "4b-u2",
+   "scenario": "u-feelings",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-2b148f929a",
+   "en": "I'm excited about the trip.",
+   "zh": "我对这次旅行感到兴奋。",
+   "head": "excited",
+   "heads": [
+    "excited"
+   ],
+   "unit_id": "4b-u2",
+   "scenario": "u-feelings",
+   "pattern": "i-statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-4b73f43140",
+   "en": "go to the opera",
+   "zh": "去看歌剧",
+   "head": "opera",
+   "heads": [
+    "opera"
+   ],
+   "unit_id": "4b-u2",
+   "scenario": "u-feelings",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-5fb4f32136",
+   "en": "a Beijing opera",
+   "zh": "京剧",
+   "head": "opera",
+   "heads": [
+    "opera"
+   ],
+   "unit_id": "4b-u2",
+   "scenario": "u-feelings",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-1347dfb6f9",
+   "en": "next time",
+   "zh": "下次",
+   "head": "next",
+   "heads": [
+    "next"
+   ],
+   "unit_id": "4b-u2",
+   "scenario": "u-feelings",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-6b505abac2",
+   "en": "next week",
+   "zh": "下周",
+   "head": "next",
+   "heads": [
+    "next"
+   ],
+   "unit_id": "4b-u2",
+   "scenario": "u-feelings",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-914bfcc80a",
+   "en": "have a cough",
+   "zh": "咳嗽",
+   "head": "cough",
+   "heads": [
+    "cough"
+   ],
+   "unit_id": "4b-u2",
+   "scenario": "u-feelings",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-84c7011370",
+   "en": "He coughed all night.",
+   "zh": "他咳了一整夜。",
+   "head": "cough",
+   "heads": [
+    "cough"
+   ],
+   "unit_id": "4b-u2",
+   "scenario": "u-feelings",
+   "pattern": "statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-b50f96ab1a",
+   "en": "feel better",
+   "zh": "感觉好些了",
+   "head": "better",
+   "heads": [
+    "better"
+   ],
+   "unit_id": "4b-u2",
+   "scenario": "u-feelings",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-b0cc8c92a3",
+   "en": "Get better soon.",
+   "zh": "早日康复。",
+   "head": "better",
+   "heads": [
+    "better"
+   ],
+   "unit_id": "4b-u2",
+   "scenario": "u-feelings",
+   "pattern": "imperative",
+   "tier": "core"
+  },
+  {
+   "id": "ph-18634be4c5",
+   "en": "practise English",
+   "zh": "练习英语",
+   "head": "practise",
+   "heads": [
+    "practise"
+   ],
+   "unit_id": "4b-u2",
+   "scenario": "u-feelings",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-c59e171c2f",
+   "en": "practise every day",
+   "zh": "每天练习",
+   "head": "practise",
+   "heads": [
+    "practise"
+   ],
+   "unit_id": "4b-u2",
+   "scenario": "u-feelings",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-c70d00809c",
+   "en": "a birthday gift",
+   "zh": "一份生日礼物",
+   "head": "gift",
+   "heads": [
+    "gift"
+   ],
+   "unit_id": "4b-u2",
+   "scenario": "u-feelings",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-33de0fc422",
+   "en": "give a gift",
+   "zh": "送礼物",
+   "head": "gift",
+   "heads": [
+    "gift"
+   ],
+   "unit_id": "4b-u2",
+   "scenario": "u-feelings",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-2d94db69bd",
+   "en": "feel surprised",
+   "zh": "感到惊讶",
+   "head": "surprised",
+   "heads": [
+    "surprised"
+   ],
+   "unit_id": "4b-u2",
+   "scenario": "u-feelings",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-653ef0be87",
+   "en": "I'm surprised to see you.",
+   "zh": "见到你我很惊讶。",
+   "head": "surprised",
+   "heads": [
+    "surprised"
+   ],
+   "unit_id": "4b-u2",
+   "scenario": "u-feelings",
+   "pattern": "i-statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-367a19377e",
+   "en": "a model ship",
+   "zh": "一艘模型船",
+   "head": "model",
+   "heads": [
+    "model"
+   ],
+   "unit_id": "4b-u2",
+   "scenario": "u-feelings",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-a2d232a9a5",
+   "en": "make a model",
+   "zh": "做模型",
+   "head": "model",
+   "heads": [
+    "model"
+   ],
+   "unit_id": "4b-u2",
+   "scenario": "u-feelings",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-e408a1891e",
+   "en": "Bang! The door closes.",
+   "zh": "砰！门关上了。",
+   "head": "bang",
+   "heads": [
+    "bang"
+   ],
+   "unit_id": "4b-u2",
+   "scenario": "u-feelings",
+   "pattern": "statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-2688098ecc",
+   "en": "a loud bang",
+   "zh": "砰的一声巨响",
+   "head": "bang",
+   "heads": [
+    "bang"
+   ],
+   "unit_id": "4b-u2",
+   "scenario": "u-feelings",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-c5b9056a6a",
+   "en": "shout for help",
+   "zh": "大声呼救",
+   "head": "shout",
+   "heads": [
+    "shout"
+   ],
+   "unit_id": "4b-u2",
+   "scenario": "u-feelings",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-bd4aff07bc",
+   "en": "Don't shout.",
+   "zh": "别大喊大叫。",
+   "head": "shout",
+   "heads": [
+    "shout"
+   ],
+   "unit_id": "4b-u2",
+   "scenario": "u-feelings",
+   "pattern": "don-t",
+   "tier": "core"
+  },
+  {
+   "id": "ph-979c413215",
+   "en": "You should rest.",
+   "zh": "你应该休息。",
+   "head": "should",
+   "heads": [
+    "should"
+   ],
+   "unit_id": "4b-u2",
+   "scenario": "u-feelings",
+   "pattern": "statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-85aed6d8ee",
+   "en": "We should help others.",
+   "zh": "我们应该帮助别人。",
+   "head": "should",
+   "heads": [
+    "should"
+   ],
+   "unit_id": "4b-u2",
+   "scenario": "u-feelings",
+   "pattern": "statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-e325c44e80",
+   "en": "break a cup",
+   "zh": "打碎杯子",
+   "head": "break",
+   "heads": [
+    "break"
+   ],
+   "unit_id": "4b-u2",
+   "scenario": "u-feelings",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-c560d6c0ad",
+   "en": "have a break",
+   "zh": "休息一下",
+   "head": "break",
+   "heads": [
+    "break"
+   ],
+   "unit_id": "4b-u2",
+   "scenario": "u-feelings",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-ebccd9adf6",
+   "en": "a good feeling",
+   "zh": "一种好感觉",
+   "head": "feeling",
+   "heads": [
+    "feeling"
+   ],
+   "unit_id": "4b-u2",
+   "scenario": "u-feelings",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-df81f011a7",
+   "en": "How is your feeling?",
+   "zh": "你感觉怎么样？",
+   "head": "feeling",
+   "heads": [
+    "feeling"
+   ],
+   "unit_id": "4b-u2",
+   "scenario": "u-feelings",
+   "pattern": "how",
+   "tier": "core"
+  },
+  {
+   "id": "ph-fa770c2158",
+   "en": "a huge elephant",
+   "zh": "一头巨大的象",
+   "head": "huge",
+   "heads": [
+    "huge"
+   ],
+   "unit_id": "4b-u2",
+   "scenario": "u-feelings",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-735e083954",
+   "en": "a huge house",
+   "zh": "一座大房子",
+   "head": "huge",
+   "heads": [
+    "huge"
+   ],
+   "unit_id": "4b-u2",
+   "scenario": "u-feelings",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-02eab1444b",
+   "en": "feel worried",
+   "zh": "感到担心",
+   "head": "worried",
+   "heads": [
+    "worried"
+   ],
+   "unit_id": "4b-u2",
+   "scenario": "u-feelings",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-498bed2fcd",
+   "en": "Don't be worried.",
+   "zh": "别担心。",
+   "head": "worried",
+   "heads": [
+    "worried"
+   ],
+   "unit_id": "4b-u2",
+   "scenario": "u-feelings",
+   "pattern": "don-t",
+   "tier": "core"
+  },
+  {
+   "id": "ph-0993846856",
+   "en": "in the street",
+   "zh": "在街上",
+   "head": "street",
+   "heads": [
+    "street"
+   ],
+   "unit_id": "4b-u2",
+   "scenario": "u-feelings",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-7e3d94c8f0",
+   "en": "hit the ball",
+   "zh": "击球",
+   "head": "hit",
+   "heads": [
+    "hit"
+   ],
+   "unit_id": "4b-u2",
+   "scenario": "u-feelings",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-9ba9541998",
+   "en": "hit the wall",
+   "zh": "撞到墙",
+   "head": "hit",
+   "heads": [
+    "hit"
+   ],
+   "unit_id": "4b-u2",
+   "scenario": "u-feelings",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-a598c47b05",
+   "en": "have a talent",
+   "zh": "有天赋",
+   "head": "talent",
+   "heads": [
+    "talent"
+   ],
+   "unit_id": "4b-u3",
+   "scenario": "u-actions",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-4a9fe9838e",
+   "en": "a talent show",
+   "zh": "才艺表演",
+   "head": "talent",
+   "heads": [
+    "talent"
+   ],
+   "unit_id": "4b-u3",
+   "scenario": "u-actions",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-ec815f4903",
+   "en": "act in a play",
+   "zh": "在剧中表演",
+   "head": "act",
+   "heads": [
+    "act"
+   ],
+   "unit_id": "4b-u3",
+   "scenario": "u-actions",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-4758f5b6a1",
+   "en": "act well",
+   "zh": "演得好",
+   "head": "act",
+   "heads": [
+    "act"
+   ],
+   "unit_id": "4b-u3",
+   "scenario": "u-actions",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-958764a2d3",
+   "en": "magic tricks",
+   "zh": "魔术",
+   "head": "magic",
+   "heads": [
+    "magic"
+   ],
+   "unit_id": "4b-u3",
+   "scenario": "u-actions",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-18088466ea",
+   "en": "do magic",
+   "zh": "变魔术",
+   "head": "magic",
+   "heads": [
+    "magic"
+   ],
+   "unit_id": "4b-u3",
+   "scenario": "u-actions",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-cfcef1d861",
+   "en": "the sun shines",
+   "zh": "阳光照耀",
+   "head": "shine",
+   "heads": [
+    "shine"
+   ],
+   "unit_id": "4b-u3",
+   "scenario": "u-actions",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-0519621309",
+   "en": "shine bright",
+   "zh": "闪闪发光",
+   "head": "shine",
+   "heads": [
+    "shine"
+   ],
+   "unit_id": "4b-u3",
+   "scenario": "u-actions",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-cc69d72b61",
+   "en": "do a puzzle",
+   "zh": "做拼图",
+   "head": "puzzle",
+   "heads": [
+    "puzzle"
+   ],
+   "unit_id": "4b-u3",
+   "scenario": "u-actions",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-66aecdb2fc",
+   "en": "a jigsaw puzzle",
+   "zh": "拼图游戏",
+   "head": "puzzle",
+   "heads": [
+    "puzzle"
+   ],
+   "unit_id": "4b-u3",
+   "scenario": "u-actions",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-f785407bc2",
+   "en": "a good dancer",
+   "zh": "一位优秀的舞者",
+   "head": "dancer",
+   "heads": [
+    "dancer"
+   ],
+   "unit_id": "4b-u3",
+   "scenario": "u-actions",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-99b9301b28",
+   "en": "The dancer dances well.",
+   "zh": "这位舞者跳得很好。",
+   "head": "dancer",
+   "heads": [
+    "dancer"
+   ],
+   "unit_id": "4b-u3",
+   "scenario": "u-actions",
+   "pattern": "statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-3aba6d5369",
+   "en": "win the game",
+   "zh": "赢得比赛",
+   "head": "win",
+   "heads": [
+    "win"
+   ],
+   "unit_id": "4b-u3",
+   "scenario": "u-actions",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-d32024ec02",
+   "en": "We win!",
+   "zh": "我们赢了！",
+   "head": "win",
+   "heads": [
+    "win"
+   ],
+   "unit_id": "4b-u3",
+   "scenario": "u-actions",
+   "pattern": "statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-c87732a745",
+   "en": "just a minute",
+   "zh": "稍等一下",
+   "head": "just",
+   "heads": [
+    "just"
+   ],
+   "unit_id": "4b-u3",
+   "scenario": "u-actions",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-2654992d78",
+   "en": "just now",
+   "zh": "刚才",
+   "head": "just",
+   "heads": [
+    "just"
+   ],
+   "unit_id": "4b-u3",
+   "scenario": "u-actions",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-d02ba1cba9",
+   "en": "a little duck",
+   "zh": "一只小鸭子",
+   "head": "duck",
+   "heads": [
+    "duck"
+   ],
+   "unit_id": "4b-u3",
+   "scenario": "u-actions",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-b6add86bdd",
+   "en": "The duck swims.",
+   "zh": "鸭子在游泳。",
+   "head": "duck",
+   "heads": [
+    "duck"
+   ],
+   "unit_id": "4b-u3",
+   "scenario": "u-actions",
+   "pattern": "statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-86d426c6a5",
+   "en": "a clever boy",
+   "zh": "一个聪明的男孩",
+   "head": "boy",
+   "heads": [
+    "boy",
+    "clever"
+   ],
+   "unit_id": "4b-u3",
+   "scenario": "u-actions",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-a63f1fa360",
+   "en": "a little boy",
+   "zh": "一个小男孩",
+   "head": "boy",
+   "heads": [
+    "boy"
+   ],
+   "unit_id": "4b-u3",
+   "scenario": "u-actions",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-74d91bb871",
+   "en": "anything else",
+   "zh": "还有别的吗",
+   "head": "anything",
+   "heads": [
+    "anything"
+   ],
+   "unit_id": "4b-u3",
+   "scenario": "u-actions",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-00d890f14c",
+   "en": "Do you need anything?",
+   "zh": "你需要什么吗？",
+   "head": "anything",
+   "heads": [
+    "anything"
+   ],
+   "unit_id": "4b-u3",
+   "scenario": "u-actions",
+   "pattern": "do-you",
+   "tier": "core"
+  },
+  {
+   "id": "ph-2f788e8239",
+   "en": "Cock-a-doodle-doo!",
+   "zh": "喔喔喔！（公鸡叫）",
+   "head": "cock-a-doodle-doo",
+   "heads": [
+    "cock-a-doodle-doo"
+   ],
+   "unit_id": "4b-u3",
+   "scenario": "u-actions",
+   "pattern": "daily",
+   "tier": "core"
+  },
+  {
+   "id": "ph-5e022346b6",
+   "en": "enough water",
+   "zh": "足够的水",
+   "head": "enough",
+   "heads": [
+    "enough"
+   ],
+   "unit_id": "4b-u3",
+   "scenario": "u-actions",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-f8701f4678",
+   "en": "I have enough time.",
+   "zh": "我有足够的时间。",
+   "head": "enough",
+   "heads": [
+    "enough"
+   ],
+   "unit_id": "4b-u3",
+   "scenario": "u-actions",
+   "pattern": "i-statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-bbd3fed825",
+   "en": "walk slowly",
+   "zh": "慢慢地走",
+   "head": "slowly",
+   "heads": [
+    "slowly"
+   ],
+   "unit_id": "4b-u3",
+   "scenario": "u-actions",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-8bd75eafe8",
+   "en": "Please speak slowly.",
+   "zh": "请说慢一点。",
+   "head": "slowly",
+   "heads": [
+    "slowly"
+   ],
+   "unit_id": "4b-u3",
+   "scenario": "u-actions",
+   "pattern": "imperative",
+   "tier": "core"
+  },
+  {
+   "id": "ph-009be24616",
+   "en": "plant a seed",
+   "zh": "种下一颗种子",
+   "head": "seed",
+   "heads": [
+    "seed"
+   ],
+   "unit_id": "4b-u4",
+   "scenario": "u-plants",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-12c8a89554",
+   "en": "a sunflower seed",
+   "zh": "一颗向日葵种子",
+   "head": "seed",
+   "heads": [
+    "seed"
+   ],
+   "unit_id": "4b-u4",
+   "scenario": "u-plants",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-19c71279d6",
+   "en": "plant in the earth",
+   "zh": "种在泥土里",
+   "head": "earth",
+   "heads": [
+    "earth"
+   ],
+   "unit_id": "4b-u4",
+   "scenario": "u-plants",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-3d57fd9d43",
+   "en": "the Earth",
+   "zh": "地球",
+   "head": "earth",
+   "heads": [
+    "earth"
+   ],
+   "unit_id": "4b-u4",
+   "scenario": "u-plants",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-17b9186f94",
+   "en": "tree roots",
+   "zh": "树根",
+   "head": "root",
+   "heads": [
+    "root"
+   ],
+   "unit_id": "4b-u4",
+   "scenario": "u-plants",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-189e300f5c",
+   "en": "the root of a plant",
+   "zh": "植物的根",
+   "head": "root",
+   "heads": [
+    "root"
+   ],
+   "unit_id": "4b-u4",
+   "scenario": "u-plants",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-f71e5ca86d",
+   "en": "a plant stem",
+   "zh": "植物的茎",
+   "head": "stem",
+   "heads": [
+    "stem"
+   ],
+   "unit_id": "4b-u4",
+   "scenario": "u-plants",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-3b2e482325",
+   "en": "a long stem",
+   "zh": "长长的茎",
+   "head": "stem",
+   "heads": [
+    "stem"
+   ],
+   "unit_id": "4b-u4",
+   "scenario": "u-plants",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-c064add06a",
+   "en": "a thin stem",
+   "zh": "细细的茎",
+   "head": "thin",
+   "heads": [
+    "thin"
+   ],
+   "unit_id": "4b-u4",
+   "scenario": "u-plants",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-b0761d8d54",
+   "en": "a thin boy",
+   "zh": "瘦瘦的男孩",
+   "head": "thin",
+   "heads": [
+    "thin"
+   ],
+   "unit_id": "4b-u4",
+   "scenario": "u-plants",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-4924ce97a5",
+   "en": "green leaves",
+   "zh": "绿叶",
+   "head": "leaf",
+   "heads": [
+    "leaf"
+   ],
+   "unit_id": "4b-u4",
+   "scenario": "u-plants",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-197c5d79c0",
+   "en": "a leaf falls",
+   "zh": "一片叶子落下",
+   "head": "leaf",
+   "heads": [
+    "leaf"
+   ],
+   "unit_id": "4b-u4",
+   "scenario": "u-plants",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-734a9cf7c2",
+   "en": "dig a hole",
+   "zh": "挖一个坑",
+   "head": "dig",
+   "heads": [
+    "dig"
+   ],
+   "unit_id": "4b-u4",
+   "scenario": "u-plants",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-cb6dccf110",
+   "en": "dig in the earth",
+   "zh": "在泥土里挖",
+   "head": "dig",
+   "heads": [
+    "dig"
+   ],
+   "unit_id": "4b-u4",
+   "scenario": "u-plants",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-5c99109586",
+   "en": "a tall sunflower",
+   "zh": "一棵高高的向日葵",
+   "head": "sunflower",
+   "heads": [
+    "sunflower"
+   ],
+   "unit_id": "4b-u4",
+   "scenario": "u-plants",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-1ae5ef8173",
+   "en": "sunflowers face the sun",
+   "zh": "向日葵朝向太阳",
+   "head": "sunflower",
+   "heads": [
+    "sunflower"
+   ],
+   "unit_id": "4b-u4",
+   "scenario": "u-plants",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-5e69d97291",
+   "en": "a field of wheat",
+   "zh": "一片麦田",
+   "head": "wheat",
+   "heads": [
+    "wheat"
+   ],
+   "unit_id": "4b-u4",
+   "scenario": "u-plants",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-5c5a606dc6",
+   "en": "wheat bread",
+   "zh": "全麦面包",
+   "head": "wheat",
+   "heads": [
+    "wheat"
+   ],
+   "unit_id": "4b-u4",
+   "scenario": "u-plants",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-50723c0ee9",
+   "en": "cotton clothes",
+   "zh": "棉质衣服",
+   "head": "cotton",
+   "heads": [
+    "cotton"
+   ],
+   "unit_id": "4b-u4",
+   "scenario": "u-plants",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-74ff4f8fa5",
+   "en": "white cotton",
+   "zh": "白色的棉花",
+   "head": "cotton",
+   "heads": [
+    "cotton"
+   ],
+   "unit_id": "4b-u4",
+   "scenario": "u-plants",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-1933c33341",
+   "en": "plant trees",
+   "zh": "种树",
+   "head": "plant",
+   "heads": [
+    "plant"
+   ],
+   "unit_id": "4b-u4",
+   "scenario": "u-plants",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-0f4a789eb9",
+   "en": "a green plant",
+   "zh": "一株绿色的植物",
+   "head": "plant",
+   "heads": [
+    "plant"
+   ],
+   "unit_id": "4b-u4",
+   "scenario": "u-plants",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-e614feefdb",
+   "en": "have a dream",
+   "zh": "有一个梦想",
+   "head": "dream",
+   "heads": [
+    "dream"
+   ],
+   "unit_id": "4b-u4",
+   "scenario": "u-plants",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-7a856e363e",
+   "en": "dream come true",
+   "zh": "梦想成真",
+   "head": "dream",
+   "heads": [
+    "dream"
+   ],
+   "unit_id": "4b-u4",
+   "scenario": "u-plants",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-15a0b31cd9",
+   "en": "go to sleep",
+   "zh": "入睡",
+   "head": "sleep",
+   "heads": [
+    "sleep"
+   ],
+   "unit_id": "4b-u4",
+   "scenario": "u-plants",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-cb8611ea91",
+   "en": "sleep well",
+   "zh": "睡得好",
+   "head": "sleep",
+   "heads": [
+    "sleep"
+   ],
+   "unit_id": "4b-u4",
+   "scenario": "u-plants",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-492482cb9c",
+   "en": "a little mouse",
+   "zh": "一只小老鼠",
+   "head": "mouse",
+   "heads": [
+    "mouse"
+   ],
+   "unit_id": "4b-u4",
+   "scenario": "u-plants",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-88d58e0a52",
+   "en": "The mouse runs fast.",
+   "zh": "老鼠跑得很快。",
+   "head": "mouse",
+   "heads": [
+    "mouse"
+   ],
+   "unit_id": "4b-u4",
+   "scenario": "u-plants",
+   "pattern": "statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-791a78eea3",
+   "en": "a grain of rice",
+   "zh": "一粒米",
+   "head": "grain",
+   "heads": [
+    "grain"
+   ],
+   "unit_id": "4b-u4",
+   "scenario": "u-plants",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-9a6e9b8442",
+   "en": "wheat grain",
+   "zh": "麦粒",
+   "head": "grain",
+   "heads": [
+    "grain"
+   ],
+   "unit_id": "4b-u4",
+   "scenario": "u-plants",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-48dfa72327",
+   "en": "miss my family",
+   "zh": "想念家人",
+   "head": "miss",
+   "heads": [
+    "miss"
+   ],
+   "unit_id": "4b-u4",
+   "scenario": "u-plants",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-e961d2b53a",
+   "en": "I miss you.",
+   "zh": "我想你。",
+   "head": "miss",
+   "heads": [
+    "miss"
+   ],
+   "unit_id": "4b-u4",
+   "scenario": "u-plants",
+   "pattern": "i-statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-18ffc41ed5",
+   "en": "I will go.",
+   "zh": "我会去的。",
+   "head": "will",
+   "heads": [
+    "will"
+   ],
+   "unit_id": "4b-u4",
+   "scenario": "u-plants",
+   "pattern": "i-statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-b728884bf4",
+   "en": "Will you come?",
+   "zh": "你会来吗？",
+   "head": "will",
+   "heads": [
+    "will"
+   ],
+   "unit_id": "4b-u4",
+   "scenario": "u-plants",
+   "pattern": "would",
+   "tier": "core"
+  },
+  {
+   "id": "ph-e54ebe2fd5",
+   "en": "everything is fine",
+   "zh": "一切都好",
+   "head": "everything",
+   "heads": [
+    "everything"
+   ],
+   "unit_id": "4b-u4",
+   "scenario": "u-plants",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-1dd2aa88da",
+   "en": "Thank you for everything.",
+   "zh": "谢谢你所做的一切。",
+   "head": "everything",
+   "heads": [
+    "everything"
+   ],
+   "unit_id": "4b-u4",
+   "scenario": "u-plants",
+   "pattern": "daily",
+   "tier": "core"
+  },
+  {
+   "id": "ph-bd0f7c7245",
+   "en": "a green cabbage",
+   "zh": "一颗卷心菜",
+   "head": "cabbage",
+   "heads": [
+    "cabbage"
+   ],
+   "unit_id": "4b-u4",
+   "scenario": "u-plants",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-9bf5dfe317",
+   "en": "eat cabbage",
+   "zh": "吃卷心菜",
+   "head": "cabbage",
+   "heads": [
+    "cabbage"
+   ],
+   "unit_id": "4b-u4",
+   "scenario": "u-plants",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-1b644412c0",
+   "en": "My dream comes true.",
+   "zh": "我的梦想实现了。",
+   "head": "come true",
+   "heads": [
+    "come true"
+   ],
+   "unit_id": "4b-u4",
+   "scenario": "u-plants",
+   "pattern": "statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-6c6028a8ac",
+   "en": "wish come true",
+   "zh": "愿望成真",
+   "head": "come true",
+   "heads": [
+    "come true"
+   ],
+   "unit_id": "4b-u4",
+   "scenario": "u-plants",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-e27f42977b",
+   "en": "a piece of paper",
+   "zh": "一张纸",
+   "head": "paper",
+   "heads": [
+    "paper"
+   ],
+   "unit_id": "4b-u4",
+   "scenario": "u-plants",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-82b0994141",
+   "en": "write on paper",
+   "zh": "在纸上写字",
+   "head": "paper",
+   "heads": [
+    "paper"
+   ],
+   "unit_id": "4b-u4",
+   "scenario": "u-plants",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-b2668899df",
+   "en": "a school event",
+   "zh": "一项学校活动",
+   "head": "event",
+   "heads": [
+    "event"
+   ],
+   "unit_id": "4b-u5",
+   "scenario": "u-school",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-cd0b4345aa",
+   "en": "a sports event",
+   "zh": "一场体育赛事",
+   "head": "event",
+   "heads": [
+    "event"
+   ],
+   "unit_id": "4b-u5",
+   "scenario": "u-school",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-7b9630eb33",
+   "en": "a drama club",
+   "zh": "戏剧社",
+   "head": "drama",
+   "heads": [
+    "drama"
+   ],
+   "unit_id": "4b-u5",
+   "scenario": "u-school",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-17d37214c8",
+   "en": "act in a drama",
+   "zh": "在剧中表演",
+   "head": "drama",
+   "heads": [
+    "drama"
+   ],
+   "unit_id": "4b-u5",
+   "scenario": "u-school",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-107bf0cd77",
+   "en": "a school trip",
+   "zh": "学校旅行",
+   "head": "trip",
+   "heads": [
+    "trip"
+   ],
+   "unit_id": "4b-u5",
+   "scenario": "u-school",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-bb66fe9260",
+   "en": "go on a trip",
+   "zh": "去旅行",
+   "head": "trip",
+   "heads": [
+    "trip"
+   ],
+   "unit_id": "4b-u5",
+   "scenario": "u-school",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-e93b2d3262",
+   "en": "a book fair",
+   "zh": "书展",
+   "head": "fair",
+   "heads": [
+    "fair"
+   ],
+   "unit_id": "4b-u5",
+   "scenario": "u-school",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-8d21f89a3c",
+   "en": "go to the fair",
+   "zh": "去集市",
+   "head": "fair",
+   "heads": [
+    "fair"
+   ],
+   "unit_id": "4b-u5",
+   "scenario": "u-school",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-0b7aca0f2f",
+   "en": "a music festival",
+   "zh": "音乐节",
+   "head": "festival",
+   "heads": [
+    "festival"
+   ],
+   "unit_id": "4b-u5",
+   "scenario": "u-school",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-668282b1cc",
+   "en": "Spring Festival",
+   "zh": "春节",
+   "head": "festival",
+   "heads": [
+    "festival"
+   ],
+   "unit_id": "4b-u5",
+   "scenario": "u-school",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-108285ceee",
+   "en": "a cow's horn",
+   "zh": "牛角",
+   "head": "horn",
+   "heads": [
+    "horn"
+   ],
+   "unit_id": "4b-u5",
+   "scenario": "u-school",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-8c4e403d89",
+   "en": "blow the horn",
+   "zh": "吹号角",
+   "head": "horn",
+   "heads": [
+    "horn"
+   ],
+   "unit_id": "4b-u5",
+   "scenario": "u-school",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-b96705ac5c",
+   "en": "a red dot",
+   "zh": "一个红点",
+   "head": "dot",
+   "heads": [
+    "dot"
+   ],
+   "unit_id": "4b-u5",
+   "scenario": "u-school",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-c2cae964d0",
+   "en": "join the dots",
+   "zh": "把点连起来",
+   "head": "dot",
+   "heads": [
+    "dot"
+   ],
+   "unit_id": "4b-u5",
+   "scenario": "u-school",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-c98ff3e2e8",
+   "en": "a little raindrop",
+   "zh": "一滴小雨滴",
+   "head": "raindrop",
+   "heads": [
+    "raindrop"
+   ],
+   "unit_id": "4b-u5",
+   "scenario": "u-school",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-64a32fbc9a",
+   "en": "raindrops fall",
+   "zh": "雨滴落下",
+   "head": "raindrop",
+   "heads": [
+    "raindrop"
+   ],
+   "unit_id": "4b-u5",
+   "scenario": "u-school",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-a383d665a2",
+   "en": "more water",
+   "zh": "更多的水",
+   "head": "more",
+   "heads": [
+    "more"
+   ],
+   "unit_id": "4b-u5",
+   "scenario": "u-school",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-39230f48d8",
+   "en": "one more time",
+   "zh": "再来一次",
+   "head": "more",
+   "heads": [
+    "more"
+   ],
+   "unit_id": "4b-u5",
+   "scenario": "u-school",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-4acccdd1bd",
+   "en": "write a letter",
+   "zh": "写信",
+   "head": "write",
+   "heads": [
+    "write"
+   ],
+   "unit_id": "4b-u5",
+   "scenario": "u-school",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-f983d7bdfc",
+   "en": "write your name",
+   "zh": "写下你的名字",
+   "head": "write",
+   "heads": [
+    "write"
+   ],
+   "unit_id": "4b-u5",
+   "scenario": "u-school",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-c9a0c64694",
+   "en": "those books",
+   "zh": "那些书",
+   "head": "those",
+   "heads": [
+    "those"
+   ],
+   "unit_id": "4b-u5",
+   "scenario": "u-school",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-4bec2c68cc",
+   "en": "What are those?",
+   "zh": "那些是什么？",
+   "head": "those",
+   "heads": [
+    "those"
+   ],
+   "unit_id": "4b-u5",
+   "scenario": "u-school",
+   "pattern": "what",
+   "tier": "core"
+  },
+  {
+   "id": "ph-63b4753978",
+   "en": "a big forest",
+   "zh": "一片大森林",
+   "head": "forest",
+   "heads": [
+    "forest"
+   ],
+   "unit_id": "4b-u5",
+   "scenario": "u-school",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-cf022da451",
+   "en": "in the forest",
+   "zh": "在森林里",
+   "head": "forest",
+   "heads": [
+    "forest"
+   ],
+   "unit_id": "4b-u5",
+   "scenario": "u-school",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-891094b2e0",
+   "en": "enjoy nature",
+   "zh": "享受大自然",
+   "head": "nature",
+   "heads": [
+    "nature"
+   ],
+   "unit_id": "4b-u5",
+   "scenario": "u-school",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-eea29ead96",
+   "en": "nature park",
+   "zh": "自然公园",
+   "head": "nature",
+   "heads": [
+    "nature"
+   ],
+   "unit_id": "4b-u5",
+   "scenario": "u-school",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-24573de658",
+   "en": "hunt for food",
+   "zh": "寻找食物",
+   "head": "hunt",
+   "heads": [
+    "hunt"
+   ],
+   "unit_id": "4b-u5",
+   "scenario": "u-school",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-46537b99c9",
+   "en": "hunt for treasure",
+   "zh": "寻宝",
+   "head": "hunt",
+   "heads": [
+    "hunt"
+   ],
+   "unit_id": "4b-u5",
+   "scenario": "u-school",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-7c62221e9d",
+   "en": "a zoo keeper",
+   "zh": "动物园饲养员",
+   "head": "keeper",
+   "heads": [
+    "keeper"
+   ],
+   "unit_id": "4b-u5",
+   "scenario": "u-school",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-3aa9ab04a7",
+   "en": "a shop keeper",
+   "zh": "店主",
+   "head": "keeper",
+   "heads": [
+    "keeper"
+   ],
+   "unit_id": "4b-u5",
+   "scenario": "u-school",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-0426fcfc05",
+   "en": "a lovely day",
+   "zh": "美好的一天",
+   "head": "lovely",
+   "heads": [
+    "lovely"
+   ],
+   "unit_id": "4b-u5",
+   "scenario": "u-school",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-31d77ea9d4",
+   "en": "a lovely girl",
+   "zh": "可爱的女孩",
+   "head": "lovely",
+   "heads": [
+    "lovely"
+   ],
+   "unit_id": "4b-u5",
+   "scenario": "u-school",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-bd5babe2c9",
+   "en": "a good student",
+   "zh": "一名好学生",
+   "head": "student",
+   "heads": [
+    "student"
+   ],
+   "unit_id": "4b-u5",
+   "scenario": "u-school",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-247d6ee0e5",
+   "en": "a new student",
+   "zh": "一名新学生",
+   "head": "student",
+   "heads": [
+    "student"
+   ],
+   "unit_id": "4b-u5",
+   "scenario": "u-school",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-4e8f6c552d",
+   "en": "fall down",
+   "zh": "摔倒",
+   "head": "fall",
+   "heads": [
+    "fall"
+   ],
+   "unit_id": "4b-u5",
+   "scenario": "u-school",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-a095374c55",
+   "en": "leaves fall",
+   "zh": "树叶落下",
+   "head": "fall",
+   "heads": [
+    "fall"
+   ],
+   "unit_id": "4b-u5",
+   "scenario": "u-school",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-07b822bb3e",
+   "en": "take off the coat",
+   "zh": "脱下外套",
+   "head": "off",
+   "heads": [
+    "off"
+   ],
+   "unit_id": "4b-u5",
+   "scenario": "u-school",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-f8a7ff4a32",
+   "en": "turn off the light",
+   "zh": "关灯",
+   "head": "off",
+   "heads": [
+    "off"
+   ],
+   "unit_id": "4b-u5",
+   "scenario": "u-school",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-0483f5b5d3",
+   "en": "fall off the bike",
+   "zh": "从自行车上摔下来",
+   "head": "fall off",
+   "heads": [
+    "fall off"
+   ],
+   "unit_id": "4b-u5",
+   "scenario": "u-school",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-3aeeb6a676",
+   "en": "The leaves fall off.",
+   "zh": "树叶脱落了。",
+   "head": "fall off",
+   "heads": [
+    "fall off"
+   ],
+   "unit_id": "4b-u5",
+   "scenario": "u-school",
+   "pattern": "statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-3b17b3d314",
+   "en": "half an hour",
+   "zh": "半小时",
+   "head": "hour",
+   "heads": [
+    "hour"
+   ],
+   "unit_id": "4b-u5",
+   "scenario": "u-school",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-c14b4a6a20",
+   "en": "an hour ago",
+   "zh": "一小时前",
+   "head": "hour",
+   "heads": [
+    "hour"
+   ],
+   "unit_id": "4b-u5",
+   "scenario": "u-school",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-1210e8090e",
+   "en": "Chinese culture",
+   "zh": "中国文化",
+   "head": "culture",
+   "heads": [
+    "culture"
+   ],
+   "unit_id": "4b-u5",
+   "scenario": "u-school",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-c6e1e25b24",
+   "en": "learn about culture",
+   "zh": "了解文化",
+   "head": "culture",
+   "heads": [
+    "culture"
+   ],
+   "unit_id": "4b-u5",
+   "scenario": "u-school",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-755e9ba41d",
+   "en": "take notes",
+   "zh": "做笔记",
+   "head": "note",
+   "heads": [
+    "note"
+   ],
+   "unit_id": "4b-u5",
+   "scenario": "u-school",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-ef21e0c9cc",
+   "en": "write a note",
+   "zh": "写一张便条",
+   "head": "note",
+   "heads": [
+    "note"
+   ],
+   "unit_id": "4b-u5",
+   "scenario": "u-school",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-c3168566df",
+   "en": "vote for me",
+   "zh": "投我一票",
+   "head": "vote",
+   "heads": [
+    "vote"
+   ],
+   "unit_id": "4b-u5",
+   "scenario": "u-school",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-ece75cdcc3",
+   "en": "cast a vote",
+   "zh": "投票",
+   "head": "vote",
+   "heads": [
+    "vote"
+   ],
+   "unit_id": "4b-u5",
+   "scenario": "u-school",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-96134a6b7f",
+   "en": "design a poster",
+   "zh": "设计海报",
+   "head": "design",
+   "heads": [
+    "design"
+   ],
+   "unit_id": "4b-u5",
+   "scenario": "u-school",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-ea00330f4d",
+   "en": "a new design",
+   "zh": "一个新设计",
+   "head": "design",
+   "heads": [
+    "design"
+   ],
+   "unit_id": "4b-u5",
+   "scenario": "u-school",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-dae0080de7",
+   "en": "my hometown",
+   "zh": "我的家乡",
+   "head": "hometown",
+   "heads": [
+    "hometown"
+   ],
+   "unit_id": "4b-u5",
+   "scenario": "u-school",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-577a22b157",
+   "en": "go back to hometown",
+   "zh": "回到家乡",
+   "head": "hometown",
+   "heads": [
+    "hometown"
+   ],
+   "unit_id": "4b-u5",
+   "scenario": "u-school",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-4b2355f0f9",
+   "en": "a white T-shirt",
+   "zh": "一件白色T恤",
+   "head": "T-shirt",
+   "heads": [
+    "T-shirt"
+   ],
+   "unit_id": "4b-u6",
+   "scenario": "u-clothes",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-564454b10b",
+   "en": "wear a T-shirt",
+   "zh": "穿T恤",
+   "head": "T-shirt",
+   "heads": [
+    "T-shirt"
+   ],
+   "unit_id": "4b-u6",
+   "scenario": "u-clothes",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-8d4a3530dc",
+   "en": "a red skirt",
+   "zh": "一条红裙子",
+   "head": "skirt",
+   "heads": [
+    "skirt"
+   ],
+   "unit_id": "4b-u6",
+   "scenario": "u-clothes",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-542b831a2d",
+   "en": "wear a skirt",
+   "zh": "穿裙子",
+   "head": "skirt",
+   "heads": [
+    "skirt"
+   ],
+   "unit_id": "4b-u6",
+   "scenario": "u-clothes",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-a2018ca75d",
+   "en": "a pair of shorts",
+   "zh": "一条短裤",
+   "head": "shorts",
+   "heads": [
+    "shorts"
+   ],
+   "unit_id": "4b-u6",
+   "scenario": "u-clothes",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-26aaba3f7e",
+   "en": "wear shorts",
+   "zh": "穿短裤",
+   "head": "shorts",
+   "heads": [
+    "shorts"
+   ],
+   "unit_id": "4b-u6",
+   "scenario": "u-clothes",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-a1941bfec3",
+   "en": "a blue shirt",
+   "zh": "一件蓝色衬衫",
+   "head": "shirt",
+   "heads": [
+    "shirt"
+   ],
+   "unit_id": "4b-u6",
+   "scenario": "u-clothes",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-45401b3a60",
+   "en": "wear a shirt",
+   "zh": "穿衬衫",
+   "head": "shirt",
+   "heads": [
+    "shirt"
+   ],
+   "unit_id": "4b-u6",
+   "scenario": "u-clothes",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-2d1c26ec0d",
+   "en": "a pair of trousers",
+   "zh": "一条裤子",
+   "head": "trousers",
+   "heads": [
+    "trousers"
+   ],
+   "unit_id": "4b-u6",
+   "scenario": "u-clothes",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-8ad2108d2c",
+   "en": "wear trousers",
+   "zh": "穿裤子",
+   "head": "trousers",
+   "heads": [
+    "trousers"
+   ],
+   "unit_id": "4b-u6",
+   "scenario": "u-clothes",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-76a0ad86af",
+   "en": "a warm scarf",
+   "zh": "一条暖和的围巾",
+   "head": "scarf",
+   "heads": [
+    "scarf"
+   ],
+   "unit_id": "4b-u6",
+   "scenario": "u-clothes",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-624fc9ab1a",
+   "en": "wear a scarf",
+   "zh": "戴围巾",
+   "head": "scarf",
+   "heads": [
+    "scarf"
+   ],
+   "unit_id": "4b-u6",
+   "scenario": "u-clothes",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-2d8699ab24",
+   "en": "a wool sweater",
+   "zh": "一件羊毛衫",
+   "head": "sweater",
+   "heads": [
+    "sweater"
+   ],
+   "unit_id": "4b-u6",
+   "scenario": "u-clothes",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-e4871d9b8f",
+   "en": "wear a sweater",
+   "zh": "穿毛衣",
+   "head": "sweater",
+   "heads": [
+    "sweater"
+   ],
+   "unit_id": "4b-u6",
+   "scenario": "u-clothes",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-18b58311dd",
+   "en": "a nice dress",
+   "zh": "一条漂亮的连衣裙",
+   "head": "dress",
+   "heads": [
+    "dress"
+   ],
+   "unit_id": "4b-u6",
+   "scenario": "u-clothes",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-7708a37cbf",
+   "en": "wear a dress",
+   "zh": "穿连衣裙",
+   "head": "dress",
+   "heads": [
+    "dress"
+   ],
+   "unit_id": "4b-u6",
+   "scenario": "u-clothes",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-63876b6689",
+   "en": "a birthday party",
+   "zh": "生日聚会",
+   "head": "party",
+   "heads": [
+    "party"
+   ],
+   "unit_id": "4b-u6",
+   "scenario": "u-clothes",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-fac6e1754d",
+   "en": "go to a party",
+   "zh": "去参加聚会",
+   "head": "party",
+   "heads": [
+    "party"
+   ],
+   "unit_id": "4b-u6",
+   "scenario": "u-clothes",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-fa4416bf5f",
+   "en": "at the end of",
+   "zh": "在……的末尾",
+   "head": "end",
+   "heads": [
+    "end"
+   ],
+   "unit_id": "4b-u6",
+   "scenario": "u-clothes",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-a6a3b11134",
+   "en": "in the end",
+   "zh": "最后",
+   "head": "end",
+   "heads": [
+    "end"
+   ],
+   "unit_id": "4b-u6",
+   "scenario": "u-clothes",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-7bcd99815f",
+   "en": "a dressmaker",
+   "zh": "一位裁缝",
+   "head": "dressmaker",
+   "heads": [
+    "dressmaker"
+   ],
+   "unit_id": "4b-u6",
+   "scenario": "u-clothes",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-1d35587072",
+   "en": "The dressmaker makes dresses.",
+   "zh": "裁缝做衣服。",
+   "head": "dressmaker",
+   "heads": [
+    "dressmaker"
+   ],
+   "unit_id": "4b-u6",
+   "scenario": "u-clothes",
+   "pattern": "statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-4757e749b5",
+   "en": "Merry Christmas!",
+   "zh": "圣诞快乐！",
+   "head": "Christmas",
+   "heads": [
+    "Christmas"
+   ],
+   "unit_id": "4b-u6",
+   "scenario": "u-clothes",
+   "pattern": "daily",
+   "tier": "core"
+  },
+  {
+   "id": "ph-2f09ecc7e9",
+   "en": "Christmas Day",
+   "zh": "圣诞节",
+   "head": "Christmas",
+   "heads": [
+    "Christmas"
+   ],
+   "unit_id": "4b-u6",
+   "scenario": "u-clothes",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-3ef8458bcc",
+   "en": "look the same",
+   "zh": "看起来一样",
+   "head": "the same",
+   "heads": [
+    "the same"
+   ],
+   "unit_id": "4b-u6",
+   "scenario": "u-clothes",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-db4213003b",
+   "en": "We are the same.",
+   "zh": "我们一样。",
+   "head": "the same",
+   "heads": [
+    "the same"
+   ],
+   "unit_id": "4b-u6",
+   "scenario": "u-clothes",
+   "pattern": "statement",
+   "tier": "core"
+  },
+  {
+   "id": "ph-f73c3a4893",
+   "en": "a wrong answer",
+   "zh": "错误的答案",
+   "head": "wrong",
+   "heads": [
+    "wrong"
+   ],
+   "unit_id": "4b-u6",
+   "scenario": "u-clothes",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-5e7e2961cd",
+   "en": "What's wrong?",
+   "zh": "怎么了？",
+   "head": "wrong",
+   "heads": [
+    "wrong"
+   ],
+   "unit_id": "4b-u6",
+   "scenario": "u-clothes",
+   "pattern": "what",
+   "tier": "core"
+  },
+  {
+   "id": "ph-4a8a6f21cb",
+   "en": "How clever!",
+   "zh": "真聪明！",
+   "head": "clever",
+   "heads": [
+    "clever"
+   ],
+   "unit_id": "4b-u6",
+   "scenario": "u-clothes",
+   "pattern": "how",
+   "tier": "core"
+  },
+  {
+   "id": "ph-7ca70f7861",
+   "en": "Mr Brown",
+   "zh": "布朗先生",
+   "head": "Mr",
+   "heads": [
+    "Mr"
+   ],
+   "unit_id": "4b-u6",
+   "scenario": "u-clothes",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-6eaf86b580",
+   "en": "Mr and Mrs",
+   "zh": "先生和夫人",
+   "head": "Mr",
+   "heads": [
+    "Mr"
+   ],
+   "unit_id": "4b-u6",
+   "scenario": "u-clothes",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-86098556e8",
+   "en": "a birthday present",
+   "zh": "一份生日礼物",
+   "head": "present",
+   "heads": [
+    "present"
+   ],
+   "unit_id": "4b-u6",
+   "scenario": "u-clothes",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-a3fbfaed87",
+   "en": "give a present",
+   "zh": "送礼物",
+   "head": "present",
+   "heads": [
+    "present"
+   ],
+   "unit_id": "4b-u6",
+   "scenario": "u-clothes",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-52058caad8",
+   "en": "the whole day",
+   "zh": "一整天",
+   "head": "whole",
+   "heads": [
+    "whole"
+   ],
+   "unit_id": "4b-u6",
+   "scenario": "u-clothes",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-eeae3ba907",
+   "en": "the whole class",
+   "zh": "全班",
+   "head": "whole",
+   "heads": [
+    "whole"
+   ],
+   "unit_id": "4b-u6",
+   "scenario": "u-clothes",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-281b5211e1",
+   "en": "a big whale",
+   "zh": "一头大鲸鱼",
+   "head": "whale",
+   "heads": [
+    "whale"
+   ],
+   "unit_id": "4b-u6",
+   "scenario": "u-clothes",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-c013a9cfdd",
+   "en": "whales live in the sea",
+   "zh": "鲸鱼生活在海里",
+   "head": "whale",
+   "heads": [
+    "whale"
+   ],
+   "unit_id": "4b-u6",
+   "scenario": "u-clothes",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-b8de8095bb",
+   "en": "school uniform",
+   "zh": "校服",
+   "head": "uniform",
+   "heads": [
+    "uniform"
+   ],
+   "unit_id": "4b-u6",
+   "scenario": "u-clothes",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-d4207c5aac",
+   "en": "wear a uniform",
+   "zh": "穿制服",
+   "head": "uniform",
+   "heads": [
+    "uniform"
+   ],
+   "unit_id": "4b-u6",
+   "scenario": "u-clothes",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-43164bb96b",
+   "en": "a long robe",
+   "zh": "一件长袍",
+   "head": "robe",
+   "heads": [
+    "robe"
+   ],
+   "unit_id": "4b-u6",
+   "scenario": "u-clothes",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-b836485c53",
+   "en": "wear a robe",
+   "zh": "穿长袍",
+   "head": "robe",
+   "heads": [
+    "robe"
+   ],
+   "unit_id": "4b-u6",
+   "scenario": "u-clothes",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-d02e9cdfb2",
+   "en": "a warm jacket",
+   "zh": "一件暖和的夹克",
+   "head": "jacket",
+   "heads": [
+    "jacket"
+   ],
+   "unit_id": "4b-u6",
+   "scenario": "u-clothes",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-3c1d94d3b8",
+   "en": "wear a jacket",
+   "zh": "穿夹克",
+   "head": "jacket",
+   "heads": [
+    "jacket"
+   ],
+   "unit_id": "4b-u6",
+   "scenario": "u-clothes",
+   "pattern": null,
+   "tier": "extended"
+  },
+  {
+   "id": "ph-09be5d87bd",
+   "en": "a funny hat",
+   "zh": "一顶有趣的帽子",
+   "head": "hat",
+   "heads": [
+    "hat"
+   ],
+   "unit_id": "4b-u6",
+   "scenario": "u-clothes",
+   "pattern": null,
+   "tier": "extended"
+  }
+ ]
+}
