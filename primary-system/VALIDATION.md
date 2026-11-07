@@ -510,3 +510,21 @@ SQLite相关38项（37通过／1PG跳过）、PG批次10/10含并发首导、前
 - catalog 测试同步（末位卡=奥数挑战、网格含奥数挑战且不含挑战题库）；全量 `make test` 571 项通过（skipped 14）。
 - 8012 常驻服务器 DOM 目检：网格 20 张卡、奥数挑战压轴直达 /questionbank/olympiad/，标题侧入口保留。
 - 未运行 PostgreSQL 专项；未提交→随本次提交入库。
+
+## 2026-11-07：数学教材改为文件编排（mathbook 试点）
+
+- 新增零模型应用 `mathbook`（照 grammar 先例，按册编排：`/mathbook/` 册次入口（单册自动跳转）＋册页 `/mathbook/<册>/`，册次码对齐 catalog 教材码后缀，新册在 build 脚本 BOOKS 映射加一行）：册页套 base.html 导航，
+  内容与交互全在前端（移植 primary/math-app.js：单元切换、要点/例题/易错标签页、
+  图示互动演示、点读、搜索、打印、公式速查、易错诊所、B站视频），「已掌握」存
+  localStorage；内容源头 primary/math-data.js 经 `scripts/build_mathbook.cjs`
+  确定性同步（books/4a.js 数据 + books/4a.json manifest + 共享图示库 + 照片，
+  页面数据版本取来源 sha256 前 8 位），加载期校验；未注册册次回 404。
+- `make mathbook-data` 跑两遍无 diff；`node primary/test/test-math-knowledge.js`
+  通过（源头未动）。共享 `static/figures/figures.js|css` 从 primary 换新
+  （补互动演示），`learning/views.py` 与 `item.html` 引用升 `?v=2`。
+- catalog 迁移 0008 下架 `primary-math-all`（可逆），基线包重导
+  （`export_base_data --replace`）后 `verify_base_data` 摘要一致；仅
+  textbookbook 分片与 manifest 变化。
+- 全量 `make test`：577 项通过（skipped 14）。8012 常驻服务器浏览器目检：
+  见本节末尾补记。
+- 未运行 PostgreSQL 专项；未提交→随本次提交入库。

@@ -485,6 +485,47 @@ const Figures = (() => {
     return h;
   };
 
+  /* 田忌赛马·调兵对阵（互动演示） */
+  const demoRace = () => {
+    const rows = [
+      ['第一局', '下等马', '上等马', '输', '用最弱的马「送」掉对方最强的马'],
+      ['第二局', '上等马', '中等马', '赢', '用最强的马稳稳拿下一局'],
+      ['第三局', '中等马', '下等马', '赢', '再用中等马再下一城'],
+    ];
+    let h = '<table class="fig-table"><thead><tr><th>局次</th><th>田忌（孙膑的安排）</th><th>齐威王</th><th>结果</th></tr></thead><tbody>';
+    rows.forEach((r, i) => {
+      h += `<tr class="race-row" data-i="${i}"><td>${r[0]}</td><td><b>${r[1]}</b></td><td>${r[2]}</td><td class="race-res"></td></tr>`;
+    });
+    h += '</tbody></table>';
+    h += '<p class="fig-note race-note">点「下一步」，看孙膑怎么调兵</p>';
+    h += '<div class="fig-ctrl"><button class="fig-btn fig-primary" data-fig-act="race-step">下一步 ▶</button><button class="fig-btn" data-fig-act="race-reset">↺ 重置</button></div>';
+    return h;
+  };
+  const RACE_RES = ['输 ❌', '赢 ✅', '赢 ✅'];
+  const RACE_NOTES = [
+    '点「下一步」，看孙膑怎么调兵',
+    '第一局：用最弱的马「送」掉对方最强的马（故意输一场）',
+    '第二局：用最强的马，稳稳赢下对方的中等马',
+    '第三局：用中等马再下一城——三局两胜，反败为胜 🏆',
+  ];
+  function raceApply(fig, step) {
+    fig.querySelectorAll('.race-row').forEach(row => {
+      const i = +row.dataset.i;
+      row.style.opacity = i < step ? '1' : '0.25';
+      const res = row.querySelector('.race-res');
+      if (i < step) {
+        res.textContent = RACE_RES[i];
+        res.className = 'race-res ' + (RACE_RES[i].indexOf('赢') === 0 ? 'fig-win' : 'fig-lose');
+      } else {
+        res.textContent = '';
+        res.className = 'race-res';
+      }
+    });
+    fig.querySelector('.race-note').textContent = RACE_NOTES[step];
+    const btn = fig.querySelector('[data-fig-act="race-step"]');
+    if (btn) { btn.textContent = step >= 3 ? '✓ 全部讲完' : '下一步 ▶'; btn.disabled = step >= 3; }
+  }
+
   /* 爬山虎的脚 */
   const ivyFoot = () => {
     let s = `<svg class="fig-svg" viewBox="0 0 640 176">`;
@@ -579,6 +620,608 @@ const Figures = (() => {
     return h;
   };
 
+  /* ================= 语文 · 古诗文场景插画 ================= */
+
+  /* 鹿柴：空山深林，夕阳返照青苔 */
+  const poemLuzhai = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 160">`;
+    s += `<rect width="640" height="160" fill="#f4f1e8"/>`;
+    /* 远山 */
+    s += `<path d="M0 110 Q 120 70 220 100 T 440 90 T 640 100 V 160 H 0 Z" fill="#d9d4c4"/>`;
+    /* 树林剪影 */
+    for (let i = 0; i < 9; i++) {
+      const x = 40 + i * 72, h = 50 + (i % 3) * 14;
+      s += `<rect x="${x}" y="${130 - h}" width="14" height="${h}" fill="#8a9a7a"/>`;
+      s += `<circle cx="${x + 7}" cy="${130 - h}" r="18" fill="#9aaa88"/>`;
+    }
+    /* 夕阳光柱 */
+    s += `<polygon points="300,30 380,30 360,130 320,130" fill="#ffd66b44"/>`;
+    s += `<polygon points="300,30 380,30 360,130 320,130" fill="url(#sunray)" opacity=".5"/>`;
+    s += `<circle cx="340" cy="30" r="14" fill="#ffb84d"/>`;
+    /* 青苔 */
+    s += `<ellipse cx="340" cy="138" rx="60" ry="10" fill="#6b8f4f55"/>`;
+    s += txt(340, 152, '返景入深林，复照青苔上', { fs: 13, fill: '#7a6a3a' });
+    s += txt(120, 50, '空山不见人', { fs: 14, fill: '#8a8478', anchor: 'start' });
+    s += txt(120, 72, '但闻人语响', { fs: 14, fill: '#8a8478', anchor: 'start' });
+    s += `<path d="M 170 56 q 12 -6 24 0" fill="none" stroke="#8a8478" stroke-width="1.5" stroke-dasharray="3 3"/>`;
+    return s + '</svg>';
+  };
+
+  /* 暮江吟：残阳铺水，半江瑟瑟半江红，露似珍珠月似弓 */
+  const poemMujiang = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 160">`;
+    s += `<defs><linearGradient id="sky-mj" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd9a8"/><stop offset="1" stop-color="#ff8a5c"/></linearGradient></defs>`;
+    s += `<rect width="640" height="80" fill="url(#sky-mj)"/>`;
+    s += `<circle cx="120" cy="70" r="22" fill="#ff5a3c"/>`;
+    /* 江水 */
+    s += `<path d="M0 80 Q 160 70 320 80 T 640 80 V 160 H 0 Z" fill="#2a6f8f"/>`;
+    /* 半江红 */
+    s += `<path d="M0 80 Q 160 70 320 80 T 640 80 V 160 H 0 Z" fill="#e25563" opacity=".55" mask="url(#half-mask)"/>`;
+    s += `<path d="M 60 110 Q 100 104 140 110 T 220 110" fill="none" stroke="#ffb84d" stroke-width="2"/>`;
+    s += `<path d="M 300 120 Q 340 114 380 120 T 460 120" fill="none" stroke="#ffd66b" stroke-width="2"/>`;
+    /* 弯月 */
+    s += `<path d="M 540 30 a 14 14 0 1 0 16 12 a 10 10 0 1 1 -16 -12 Z" fill="#fff8e0"/>`;
+    /* 露珠 */
+    s += `<ellipse cx="440" cy="130" rx="5" ry="6" fill="#fff8e0" stroke="#b9d4e0"/>`;
+    s += `<ellipse cx="470" cy="134" rx="4" ry="5" fill="#fff8e0" stroke="#b9d4e0"/>`;
+    s += `<ellipse cx="500" cy="128" rx="5" ry="6" fill="#fff8e0" stroke="#b9d4e0"/>`;
+    s += txt(320, 152, '露似真珠月似弓', { fs: 13, fill: '#7a5a3a' });
+    s += txt(320, 20, '一道残阳铺水中，半江瑟瑟半江红', { fs: 13, fill: '#fff', fw: 800 });
+    return s + '</svg>';
+  };
+
+  /* 题西林壁：庐山横看侧看各不同 */
+  const poemLushan = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 170">`;
+    s += `<rect width="640" height="170" fill="#eef4fd"/>`;
+    /* 横看：连绵山岭 */
+    s += `<path d="M20 120 Q 60 70 100 90 Q 140 60 180 100 Q 220 70 260 95 Q 300 65 340 120 Z" fill="#7ba6c9"/>`;
+    s += txt(180, 140, '横看 → 连绵山岭', { fs: 12, fill: '#4a6b8a' });
+    s += arrow(200, 130, 200, 110, '#4a6b8a');
+    /* 侧看：高耸山峰 */
+    s += `<path d="M400 120 L 440 40 L 470 80 L 500 30 L 540 90 L 580 60 L 620 120 Z" fill="#c97b7b"/>`;
+    s += txt(510, 140, '侧看 → 高耸山峰', { fs: 12, fill: '#8a4a4a' });
+    s += arrow(510, 130, 500, 60, '#8a4a4a');
+    s += txt(320, 162, '不识庐山真面目，只缘身在此山中', { fs: 13.5, fill: '#35567e' });
+    return s + '</svg>';
+  };
+
+  /* 雪梅：梅雪争春 */
+  const poemXuemei = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 150">`;
+    s += `<rect width="640" height="150" fill="#faf6f9"/>`;
+    /* 雪花 */
+    [[80, 30], [140, 60], [60, 90], [200, 40]].forEach(p => s += txt(p[0], p[1], '❄', { fs: 18, fill: '#b9d4e0' }));
+    /* 梅枝 */
+    s += `<path d="M 360 130 Q 380 80 420 60 Q 460 40 520 50" fill="none" stroke="#6b4a3a" stroke-width="5"/>`;
+    s += `<path d="M 420 60 Q 440 30 470 20" fill="none" stroke="#6b4a3a" stroke-width="3"/>`;
+    /* 梅花 */
+    [[430, 55], [460, 35], [500, 50], [520, 65], [480, 70]].forEach(p => {
+      for (let a = 0; a < 5; a++) {
+        const r = a * 72 * Math.PI / 180;
+        s += `<circle cx="${p[0] + 5 * Math.cos(r)}" cy="${p[1] + 5 * Math.sin(r)}" r="5" fill="#f2a8c0"/>`;
+      }
+      s += `<circle cx="${p[0]}" cy="${p[1]}" r="3" fill="#fff3b0"/>`;
+    });
+    s += txt(150, 110, '雪', { fs: 28, fill: '#7ba6c9' });
+    s += txt(500, 110, '梅', { fs: 28, fill: '#d95f8a' });
+    s += arrow(220, 100, 380, 100, '#d97745');
+    s += txt(320, 138, '梅须逊雪三分白，雪却输梅一段香', { fs: 13, fill: '#7a4a5a' });
+    return s + '</svg>';
+  };
+
+  /* 嫦娥：云母屏风烛影深，碧海青天夜夜心 */
+  const poemChange = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 160">`;
+    s += `<defs><radialGradient id="moon-g" cx="50%" cy="50%"><stop offset="0" stop-color="#fff8e0"/><stop offset="1" stop-color="#e8d9a8"/></radialGradient></defs>`;
+    s += `<rect width="640" height="160" fill="#1a2240"/>`;
+    /* 星星 */
+    [[60, 30], [120, 50], [200, 25], [560, 40], [600, 80], [500, 20]].forEach(p =>
+      s += `<circle cx="${p[0]}" cy="${p[1]}" r="1.5" fill="#fff"/>`);
+    /* 月亮 */
+    s += `<circle cx="480" cy="60" r="38" fill="url(#moon-g)"/>`;
+    s += `<circle cx="470" cy="52" r="6" fill="#d8c890" opacity=".5"/>`;
+    s += `<circle cx="492" cy="70" r="4" fill="#d8c890" opacity=".5"/>`;
+    /* 屏风 */
+    s += `<rect x="60" y="40" width="120" height="110" rx="4" fill="#3a2f5a" stroke="#c9a84a" stroke-width="2"/>`;
+    for (let i = 0; i < 4; i++) s += `<line x1="${60 + i * 30}" y1="40" x2="${60 + i * 30}" y2="150" stroke="#c9a84a" stroke-width="1"/>`;
+    /* 烛影 */
+    s += `<rect x="100" y="100" width="6" height="30" fill="#e8c870"/>`;
+    s += `<ellipse cx="103" cy="96" rx="5" ry="10" fill="#ffb84d"/>`;
+    s += `<ellipse cx="103" cy="94" rx="3" ry="6" fill="#ffe08a"/>`;
+    s += txt(320, 150, '嫦娥应悔偷灵药，碧海青天夜夜心', { fs: 13, fill: '#c9b8e0' });
+    return s + '</svg>';
+  };
+
+  /* 别董大：千里黄云白日曛，北风吹雁雪纷纷 */
+  const poemBiedongda = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 150">`;
+    s += `<rect width="640" height="150" fill="#e8dcc0"/>`;
+    /* 黄云 */
+    s += `<ellipse cx="160" cy="40" rx="120" ry="22" fill="#c9b878" opacity=".7"/>`;
+    s += `<ellipse cx="420" cy="30" rx="140" ry="20" fill="#b8a868" opacity=".6"/>`;
+    /* 曛日 */
+    s += `<circle cx="520" cy="50" r="20" fill="#e8a040" opacity=".8"/>`;
+    /* 雪 */
+    for (let i = 0; i < 20; i++) s += `<circle cx="${20 + i * 32}" cy="${30 + (i % 4) * 22}" r="2" fill="#fff" opacity=".8"/>`;
+    /* 归雁 */
+    s += `<path d="M 200 70 q 10 -8 20 0 q 10 -8 20 0" fill="none" stroke="#5a5570" stroke-width="2"/>`;
+    s += `<path d="M 260 80 q 8 -6 16 0 q 8 -6 16 0" fill="none" stroke="#5a5570" stroke-width="2"/>`;
+    s += `<path d="M 150 86 q 8 -6 16 0 q 8 -6 16 0" fill="none" stroke="#5a5570" stroke-width="2"/>`;
+    /* 人物剪影 */
+    s += `<circle cx="100" cy="110" r="8" fill="#5a5570"/>`;
+    s += `<path d="M 100 118 L 100 140 M 100 124 L 88 134 M 100 124 L 112 130" stroke="#5a5570" stroke-width="3" fill="none"/>`;
+    s += txt(320, 140, '莫愁前路无知己，天下谁人不识君', { fs: 13.5, fill: '#7a5a3a', fw: 800 });
+    return s + '</svg>';
+  };
+
+  /* 凉州词：葡萄美酒夜光杯，欲饮琵琶马上催 */
+  const poemLiangzhou = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 150">`;
+    s += `<rect width="640" height="150" fill="#f4e8d8"/>`;
+    /* 夜光杯 */
+    s += `<path d="M 120 70 L 160 70 L 150 120 L 130 120 Z" fill="#2a4a6a" stroke="#c9a84a" stroke-width="2"/>`;
+    s += `<ellipse cx="140" cy="70" rx="22" ry="7" fill="#6a2a3a" stroke="#c9a84a" stroke-width="2"/>`;
+    s += `<ellipse cx="140" cy="68" rx="18" ry="4" fill="#9a3a5a" opacity=".7"/>`;
+    /* 葡萄 */
+    [[70, 100], [82, 108], [76, 118], [88, 124], [64, 116]].forEach(p => s += `<circle cx="${p[0]}" cy="${p[1]}" r="7" fill="#7a3a8a" stroke="#5a2a6a"/>`);
+    s += txt(75, 142, '葡萄美酒', { fs: 12, fill: '#7a3a8a' });
+    /* 马与琵琶 */
+    s += `<path d="M 340 120 q 20 -30 60 -20 q 10 4 20 -4 q 8 -6 14 -2 l 6 8 q 4 6 -2 10 l -4 4 l -6 14 l -10 4 l -2 12 l -14 -2 l -2 -10 l -28 0 l -10 -8 Z" fill="#8a6a4a"/>`;
+    s += `<circle cx="448" cy="86" r="6" fill="#8a6a4a"/>`;
+    s += `<line x1="456" y1="84" x2="466" y2="78" stroke="#5a4a3a" stroke-width="3"/>`;
+    s += `<ellipse cx="380" cy="92" rx="16" ry="10" fill="#c9a84a" stroke="#8a6a3a"/>`;
+    s += `<line x1="380" y1="82" x2="380" y2="102" stroke="#5a4a3a"/>`;
+    s += txt(400, 142, '马上琵琶催', { fs: 12, fill: '#7a5a3a' });
+    s += txt(320, 30, '醉卧沙场君莫笑，古来征战几人回', { fs: 13, fill: '#8a4a3a', fw: 800 });
+    return s + '</svg>';
+  };
+
+  /* 出塞：秦时明月汉时关 */
+  const poemChusai = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 150">`;
+    s += `<rect width="640" height="150" fill="#2a2a4a"/>`;
+    /* 明月 */
+    s += `<circle cx="500" cy="40" r="26" fill="#fff8e0"/>`;
+    s += `<circle cx="492" cy="34" r="4" fill="#e0d4a8" opacity=".6"/>`;
+    /* 关城 */
+    s += `<rect x="80" y="80" width="200" height="60" fill="#6a5a4a"/>`;
+    for (let i = 0; i < 8; i++) s += `<rect x="${84 + i * 25}" y="70" width="14" height="14" fill="#6a5a4a"/>`;
+    s += `<rect x="160" y="96" width="30" height="44" fill="#3a2a1a"/>`;
+    /* 远山 */
+    s += `<path d="M0 100 Q 120 60 240 90 T 480 80 T 640 90 V 150 H 0 Z" fill="#3a3a5a"/>`;
+    /* 长城延伸 */
+    s += `<path d="M 280 110 L 360 96 L 440 104 L 520 92 L 600 100" fill="none" stroke="#7a6a5a" stroke-width="6"/>`;
+    s += txt(320, 140, '但使龙城飞将在，不教胡马度阴山', { fs: 13, fill: '#e0d4a8', fw: 800 });
+    return s + '</svg>';
+  };
+
+  /* 夏日绝句：生当作人杰，死亦为鬼雄 */
+  const poemXrj = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 150">`;
+    s += `<defs><linearGradient id="bg-xrj" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a1a2a"/><stop offset="1" stop-color="#7a2a3a"/></linearGradient></defs>`;
+    s += `<rect width="640" height="150" fill="url(#bg-xrj)"/>`;
+    /* 江水 */
+    s += `<path d="M0 110 Q 160 100 320 110 T 640 110 V 150 H 0 Z" fill="#1a2a4a"/>`;
+    s += `<path d="M0 120 Q 160 112 320 120 T 640 120" fill="none" stroke="#4a6a8a" stroke-width="2"/>`;
+    /* 项羽剪影（佩剑立江岸） */
+    s += `<path d="M 300 60 L 320 50 L 340 60 L 336 110 L 304 110 Z" fill="#1a1a1a"/>`;
+    s += `<line x1="320" y1="50" x2="320" y2="30" stroke="#c9a84a" stroke-width="3"/>`;
+    s += `<line x1="340" y1="70" x2="360" y2="108" stroke="#c9a84a" stroke-width="3"/>`;
+    s += `<line x1="356" y1="100" x2="364" y2="108" stroke="#c9a84a" stroke-width="3"/>`;
+    s += txt(320, 24, '生当作人杰，死亦为鬼雄', { fs: 15, fill: '#ffd66b', fw: 900 });
+    s += txt(320, 140, '至今思项羽，不肯过江东', { fs: 13, fill: '#e8c870' });
+    return s + '</svg>';
+  };
+
+  /* 王戎不取道旁李：道边李树多子折枝 */
+  const poemWangrong = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 150">`;
+    s += `<rect width="640" height="150" fill="#f4f1e0"/>`;
+    /* 路 */
+    s += `<path d="M0 130 Q 320 120 640 135 V 150 H 0 Z" fill="#d4c8a8"/>`;
+    /* 李树 */
+    s += `<rect x="140" y="80" width="12" height="56" fill="#6b4a3a"/>`;
+    s += `<circle cx="146" cy="60" r="40" fill="#6b8f4f"/>`;
+    /* 李子累累 */
+    for (let i = 0; i < 14; i++) {
+      const a = i * 0.5, r = 28 + (i % 3) * 8;
+      s += `<circle cx="${146 + r * Math.cos(a)}" cy="${60 + r * Math.sin(a)}" r="6" fill="#b04a4a" stroke="#8a3a3a"/>`;
+    }
+    s += `<path d="M 120 70 q 30 -16 60 -4 q -30 12 -60 4" fill="#5a7a3f" opacity=".6"/>`;
+    /* 众小儿跑 */
+    [[320, 120, '#e25563'], [360, 122, '#2f9bd6'], [400, 118, '#2fbf71']].forEach(p => {
+      s += `<circle cx="${p[0]}" cy="${p[1] - 20}" r="7" fill="${p[2]}"/>`;
+      s += `<path d="M ${p[0]} ${p[1] - 13} l 0 16 M ${p[0]} ${p[1] - 6} l -10 8 M ${p[0]} ${p[1] - 6} l 10 8 M ${p[0]} ${p[1] + 3} l -6 10 M ${p[0]} ${p[1] + 3} l 6 10" stroke="${p[2]}" stroke-width="3" fill="none"/>`;
+    });
+    /* 王戎不动 */
+    s += `<circle cx="520" cy="108" r="8" fill="#7c5cc4"/>`;
+    s += `<path d="M 520 116 l 0 16 M 520 122 l -10 6 M 520 122 l 10 6 M 520 132 l -6 8 M 520 132 l 6 8" stroke="#7c5cc4" stroke-width="3" fill="none"/>`;
+    s += txt(520, 98, '王戎不动', { fs: 12, fill: '#7c5cc4' });
+    s += txt(320, 146, '树在道边而多子，此必苦李', { fs: 13, fill: '#7a5a3a', fw: 800 });
+    return s + '</svg>';
+  };
+
+  /* ================= 语文 · 补充课文图示 ================= */
+
+  /* 繁星：三次看星 */
+  const stars = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 160">`;
+    s += `<rect width="640" height="160" fill="#0f1a3a"/>`;
+    const scenes = [
+      { x: 120, label: '从前·家乡庭院', desc: '密密麻麻的繁星' },
+      { x: 320, label: '三年前·南京', desc: '星光微小，光明无处不在' },
+      { x: 520, label: '如今·海上', desc: '萤火虫飞舞，睡在母亲怀里' },
+    ];
+    scenes.forEach((sc, i) => {
+      s += `<circle cx="${sc.x}" cy="${i === 2 ? 110 : 70}" r="44" fill="#1a2a5a" stroke="#3a5a8a" stroke-width="1.5"/>`;
+      for (let k = 0; k < 12; k++) {
+        const a = k * 0.9 + i, r = 14 + (k % 4) * 8;
+        s += `<circle cx="${sc.x + r * Math.cos(a)}" cy="${(i === 2 ? 110 : 70) + r * Math.sin(a)}" r="${1 + (k % 2)}" fill="#fff8e0"/>`;
+      }
+      s += txt(sc.x, 30, sc.label, { fs: 12, fill: '#9ab8e0' });
+      s += txt(sc.x, i === 2 ? 150 : 130, sc.desc, { fs: 11, fill: '#7a9ac0' });
+      if (i < 2) s += arrow(sc.x + 50, 70, sc.x + 110, 70, '#5a7aaa');
+    });
+    s += emo(320, 90, '🌙', 22);
+    return s + '</svg>';
+  };
+
+  /* 现代诗二首：秋晚江上 + 花牛草地 */
+  const autumnRiver = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 150">`;
+    s += `<defs><linearGradient id="sky-ar" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd9a8"/><stop offset="1" stop-color="#f4a87a"/></linearGradient></defs>`;
+    s += `<rect width="640" height="70" fill="url(#sky-ar)"/>`;
+    s += `<circle cx="480" cy="50" r="18" fill="#ff7a4a"/>`;
+    /* 归鸟驮斜阳 */
+    s += `<path d="M 200 50 q 12 -10 24 0 q 12 -10 24 0" fill="none" stroke="#3a2a1a" stroke-width="2.5"/>`;
+    /* 江水 */
+    s += `<path d="M0 70 Q 160 64 320 70 T 640 70 V 150 H 0 Z" fill="#3a7a9a"/>`;
+    s += `<path d="M 100 96 Q 140 90 180 96 T 260 96" fill="none" stroke="#ffb84d" stroke-width="2"/>`;
+    /* 芦苇染红 */
+    for (let i = 0; i < 6; i++) {
+      const x = 60 + i * 20;
+      s += `<line x1="${x}" y1="130" x2="${x}" y2="100" stroke="#c97a5a" stroke-width="2"/>`;
+      s += `<ellipse cx="${x}" cy="98" rx="3" ry="8" fill="#d95a4a"/>`;
+    }
+    /* 花牛在草地 */
+    s += `<ellipse cx="420" cy="130" rx="30" ry="10" fill="#6b8f4f"/>`;
+    s += `<ellipse cx="410" cy="120" rx="16" ry="12" fill="#8a6a4a"/>`;
+    s += `<circle cx="398" cy="116" r="8" fill="#8a6a4a"/>`;
+    s += txt(410, 146, '花牛草地坐眠', { fs: 11, fill: '#5a4a3a' });
+    s += txt(140, 30, '秋晚的江上', { fs: 14, fill: '#7a3a2a', fw: 800 });
+    return s + '</svg>';
+  };
+
+  /* 一个豆荚里的五粒豆 */
+  const fivePeas = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 150">`;
+    s += `<rect width="640" height="150" fill="#f4f8ec"/>`;
+    /* 豆荚 */
+    s += `<path d="M 120 60 Q 320 30 520 60 Q 520 110 320 130 Q 120 110 120 60 Z" fill="#7bbf5a" stroke="#4a8a3a" stroke-width="2.5"/>`;
+    s += `<path d="M 120 60 Q 320 80 520 60" fill="none" stroke="#4a8a3a" stroke-width="1.5" stroke-dasharray="4 4"/>`;
+    /* 五粒豆 */
+    const peas = [
+      { x: 180, y: 80, label: '①' },
+      { x: 250, y: 72, label: '②' },
+      { x: 320, y: 68, label: '③' },
+      { x: 390, y: 72, label: '④' },
+      { x: 460, y: 80, label: '⑤' },
+    ];
+    peas.forEach(p => {
+      s += `<circle cx="${p.x}" cy="${p.y}" r="16" fill="#a8d87a" stroke="#5a9a3a" stroke-width="2"/>`;
+      s += txt(p.x, p.y + 5, p.label, { fs: 13, fill: '#3a6a2a', fw: 900 });
+    });
+    s += txt(180, 110, '想飞到广大世界', { fs: 11, fill: '#5a7a3a', anchor: 'start' });
+    s += txt(460, 110, '该怎么样就怎么样', { fs: 11, fill: '#5a7a3a', anchor: 'end' });
+    s += txt(320, 142, '第五粒豆在裂缝里发芽，给生病的小女孩带来希望', { fs: 12.5, fill: '#3a5a2a' });
+    return s + '</svg>';
+  };
+
+  /* 方帽子店：方帽子 vs 圆帽子 */
+  const squareHats = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 140">`;
+    s += `<rect width="640" height="140" fill="#f8f4ec"/>`;
+    /* 方帽子 */
+    const squareColors = ['#c97b7b', '#d9a04a', '#7ba6c9', '#9a7ac9'];
+    squareColors.forEach((c, i) => {
+      const x = 60 + i * 70;
+      s += `<rect x="${x}" y="60" width="50" height="40" rx="2" fill="${c}" stroke="#5a4a3a" stroke-width="1.5"/>`;
+      s += `<rect x="${x - 8}" y="96" width="66" height="8" rx="2" fill="${c}" stroke="#5a4a3a" stroke-width="1.5"/>`;
+    });
+    s += txt(180, 40, '方帽子店', { fs: 15, fill: '#7a5a3a', fw: 800 });
+    s += arrow(350, 80, 410, 80, '#d97745');
+    s += txt(380, 70, '→', { fs: 20, fill: '#d97745', fw: 900 });
+    /* 圆帽子 */
+    const roundColors = ['#2fbf71', '#e25563', '#2f9bd6', '#d97745'];
+    roundColors.forEach((c, i) => {
+      const x = 430 + i * 50;
+      s += `<path d="M ${x} 84 Q ${x + 20} 50 ${x + 40} 84 Z" fill="${c}" stroke="#5a4a3a" stroke-width="1.5"/>`;
+      s += `<ellipse cx="${x + 20}" cy="84" rx="24" ry="5" fill="${c}" stroke="#5a4a3a" stroke-width="1.5"/>`;
+    });
+    s += txt(530, 40, '舒服的圆帽子', { fs: 15, fill: '#2f7a4a', fw: 800 });
+    s += txt(320, 128, '日子一天天过去，方帽子慢慢成了古董', { fs: 13, fill: '#7a6a5a' });
+    return s + '</svg>';
+  };
+
+  /* 盘古开天地：天地分开 */
+  const pangu = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 160">`;
+    s += `<defs><linearGradient id="sky-pg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8ab8e8"/><stop offset="1" stop-color="#d4e8f8"/></linearGradient></defs>`;
+    s += `<rect width="640" height="70" fill="url(#sky-pg)"/>`;
+    s += `<rect width="640" y="70" height="90" fill="#c9a878"/>`;
+    s += `<rect width="640" y="70" height="6" fill="#8a6a4a"/>`;
+    /* 盘古 */
+    s += `<circle cx="320" cy="56" r="12" fill="#e8c8a0"/>`;
+    s += `<path d="M 320 68 L 320 120 M 320 80 L 290 60 M 320 80 L 350 60 M 320 120 L 300 150 M 320 120 L 340 150" stroke="#5a4a3a" stroke-width="5" fill="none"/>`;
+    s += `<path d="M 320 80 L 290 50 M 320 80 L 350 50" stroke="#5a4a3a" stroke-width="5"/>`;
+    /* 斧头 */
+    s += `<line x1="282" y1="46" x2="268" y2="30" stroke="#8a6a4a" stroke-width="3"/>`;
+    s += `<rect x="258" y="22" width="18" height="12" fill="#9aa8b8"/>`;
+    /* 头顶天，脚踩地 */
+    s += arrow(320, 44, 320, 16, '#4a8ac9');
+    s += txt(340, 24, '天每天升高', { fs: 12, fill: '#3a6a9a', anchor: 'start' });
+    s += arrow(320, 120, 320, 150, '#8a6a4a');
+    s += txt(340, 142, '地每天加厚', { fs: 12, fill: '#7a5a3a', anchor: 'start' });
+    s += txt(320, 156, '盘古顶天立地，天地成形后累倒，身体化为万物', { fs: 12.5, fill: '#5a4a3a' });
+    return s + '</svg>';
+  };
+
+  /* 普罗米修斯：盗火与受罚 */
+  const prometheus = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 150">`;
+    s += `<rect width="640" height="150" fill="#f0e8d8"/>`;
+    /* 高加索山 */
+    s += `<path d="M 0 140 L 120 50 L 200 100 L 280 40 L 360 140 Z" fill="#8a7a6a"/>`;
+    /* 被锁的普罗米修斯 */
+    s += `<circle cx="200" cy="60" r="10" fill="#e8c8a0"/>`;
+    s += `<path d="M 200 70 L 200 110" stroke="#5a4a3a" stroke-width="4"/>`;
+    s += `<line x1="180" y1="76" x2="160" y2="66" stroke="#5a4a3a" stroke-width="4"/>`;
+    s += `<line x1="220" y1="76" x2="240" y2="66" stroke="#5a4a3a" stroke-width="4"/>`;
+    s += `<circle cx="158" cy="64" r="5" fill="#c9a84a" stroke="#8a6a3a" stroke-width="2"/>`;
+    s += `<circle cx="242" cy="64" r="5" fill="#c9a84a" stroke="#8a6a3a" stroke-width="2"/>`;
+    /* 鹰 */
+    s += `<path d="M 360 60 q 20 -16 40 0 q -20 4 -40 0" fill="#5a4a3a"/>`;
+    s += `<circle cx="356" cy="58" r="4" fill="#5a4a3a"/>`;
+    s += `<line x1="352" y1="58" x2="340" y2="54" stroke="#e8a040" stroke-width="2"/>`;
+    /* 火种 */
+    s += `<ellipse cx="500" cy="100" rx="14" ry="22" fill="#e25563"/>`;
+    s += `<ellipse cx="500" cy="104" rx="8" ry="14" fill="#ffb84d"/>`;
+    s += `<ellipse cx="500" cy="110" rx="4" ry="8" fill="#ffe08a"/>`;
+    s += txt(500, 140, '火种带给人类', { fs: 12, fill: '#c05f22' });
+    s += arrow(470, 100, 440, 80, '#e25563');
+    s += txt(320, 140, '为人类盗取天火，被锁高加索山，每日被鹰啄食肝脏', { fs: 12.5, fill: '#7a5a3a' });
+    return s + '</svg>';
+  };
+
+  /* 女娲补天 */
+  const nüwa = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 160">`;
+    s += `<defs><linearGradient id="sky-nw" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a1a3a"/><stop offset="1" stop-color="#5a3a6a"/></linearGradient></defs>`;
+    s += `<rect width="640" height="160" fill="url(#sky-nw)"/>`;
+    /* 天破洞 */
+    s += `<ellipse cx="480" cy="50" rx="80" ry="30" fill="#1a0a2a" stroke="#8a5aaa" stroke-width="2" stroke-dasharray="6 4"/>`;
+    /* 女娲 */
+    s += `<circle cx="200" cy="70" r="14" fill="#f0d8b8"/>`;
+    s += `<path d="M 200 84 Q 170 100 180 140 L 220 140 Q 230 100 200 84 Z" fill="#c97bb8"/>`;
+    s += `<path d="M 186 58 q 14 -16 28 0" fill="none" stroke="#3a2a4a" stroke-width="4"/>`;
+    /* 五彩石 */
+    [[320, 80, '#e25563'], [340, 70, '#2f9bd6'], [330, 92, '#2fbf71'], [354, 84, '#ffb84d'], [316, 88, '#8b65c9']].forEach(p =>
+      s += `<polygon points="${p[0]},${p[1] - 8} ${p[0] + 7},${p[1]} ${p[0]},${p[1] + 8} ${p[0] - 7},${p[1]}" fill="${p[2]}" stroke="#fff" stroke-width="1"/>`);
+    s += arrow(360, 80, 420, 60, '#ffb84d');
+    s += txt(200, 150, '女娲炼五彩石补天', { fs: 13, fill: '#e8c8e0', fw: 800 });
+    s += txt(480, 92, '修补天破洞', { fs: 12, fill: '#c9a8e0' });
+    return s + '</svg>';
+  };
+
+  /* 麻雀：老麻雀掩护小麻雀 */
+  const sparrow = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 150">`;
+    s += `<rect width="640" height="150" fill="#f4f0e8"/>`;
+    /* 地面 */
+    s += `<path d="M0 120 Q 320 112 640 120 V 150 H 0 Z" fill="#c9b89a"/>`;
+    /* 猎狗 */
+    s += `<path d="M 460 100 q 30 -20 70 -10 q 20 6 30 -4 l 8 10 q -4 8 -12 8 l -4 12 l -16 4 l -2 14 l -18 -2 l -4 -12 l -36 0 l -16 -10 Z" fill="#8a6a4a"/>`;
+    s += `<circle cx="564" cy="88" r="7" fill="#8a6a4a"/>`;
+    s += `<path d="M 566 82 l 8 -4" stroke="#5a4a3a" stroke-width="3"/>`;
+    /* 老麻雀（张开翅膀扎煞） */
+    s += `<ellipse cx="260" cy="100" rx="20" ry="12" fill="#7a6a5a"/>`;
+    s += `<circle cx="244" cy="92" r="8" fill="#7a6a5a"/>`;
+    s += `<path d="M 244 96 l -8 2" stroke="#e8a040" stroke-width="2"/>`;
+    s += `<path d="M 260 88 q -10 -20 -30 -8 q 12 8 30 8" fill="#8a7a6a"/>`;
+    s += `<path d="M 260 88 q 10 -20 30 -8 q -12 8 -30 8" fill="#8a7a6a"/>`;
+    /* 小麻雀 */
+    s += `<circle cx="280" cy="116" r="7" fill="#9a8a7a"/>`;
+    s += `<circle cx="276" cy="114" r="1.5" fill="#1a1a1a"/>`;
+    s += arrow(440, 100, 300, 104, '#e25563');
+    s += txt(370, 92, '猎狗逼近', { fs: 12, fill: '#b04a4a' });
+    s += txt(260, 142, '老麻雀像石头似的落下，用身躯掩护小麻雀', { fs: 12.5, fill: '#5a4a3a' });
+    return s + '</svg>';
+  };
+
+  /* 爬天都峰：陡峭山峰 */
+  const tiandufeng = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 160">`;
+    s += `<rect width="640" height="160" fill="#eef4fd"/>`;
+    /* 远山 */
+    s += `<path d="M0 140 Q 160 100 320 130 T 640 120 V 160 H 0 Z" fill="#b9c8d8"/>`;
+    /* 天都峰（笔陡） */
+    s += `<path d="M 300 150 L 340 30 L 360 30 L 380 150 Z" fill="#7a8a9a" stroke="#5a6a7a" stroke-width="2"/>`;
+    s += `<path d="M 340 30 L 340 150" stroke="#5a6a7a" stroke-width="1" stroke-dasharray="4 4"/>`;
+    /* 铁链 */
+    s += `<path d="M 340 30 Q 330 80 340 150" fill="none" stroke="#8a7a6a" stroke-width="2"/>`;
+    s += `<path d="M 370 30 Q 380 80 370 150" fill="none" stroke="#8a7a6a" stroke-width="2"/>`;
+    /* 登山的人 */
+    [[350, 70], [355, 100], [345, 130]].forEach((p, i) => {
+      s += `<circle cx="${p[0]}" cy="${p[1]}" r="6" fill="${['#e25563', '#2fbf71', '#2f9bd6'][i]}"/>`;
+      s += `<line x1="${p[0]}" y1="${p[1] + 6}" x2="${p[0]}" y2="${p[1] + 18}" stroke="${['#e25563', '#2fbf71', '#2f9bd6'][i]}" stroke-width="3"/>`;
+    });
+    s += txt(350, 20, '峰顶', { fs: 12, fill: '#3a5a7a' });
+    s += txt(120, 80, '石级笔陡', { fs: 13, fill: '#5a6a7a', anchor: 'start' });
+    s += txt(120, 100, '铁链从天上挂下来', { fs: 13, fill: '#5a6a7a', anchor: 'start' });
+    s += txt(320, 156, '汲取力量，互相鼓励，终于爬上天都峰', { fs: 12.5, fill: '#3a5a7a' });
+    return s + '</svg>';
+  };
+
+  /* 秦兵马俑：军阵 */
+  const terracotta = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 150">`;
+    s += `<rect width="640" height="150" fill="#f0e8d8"/>`;
+    /* 军阵排列 */
+    const rows = [
+      { y: 40, n: 8, c: '#8a6a4a' },
+      { y: 70, n: 7, c: '#7a5a3a' },
+      { y: 100, n: 6, c: '#6a4a2a' },
+    ];
+    rows.forEach(row => {
+      for (let i = 0; i < row.n; i++) {
+        const x = 60 + i * (520 / row.n);
+        s += `<circle cx="${x}" cy="${row.y}" r="9" fill="${row.c}"/>`;
+        s += `<rect x="${x - 6}" y="${row.y + 8}" width="12" height="18" fill="${row.c}"/>`;
+        s += `<rect x="${x - 9}" y="${row.y + 26}" width="18" height="4" fill="${row.c}"/>`;
+      }
+    });
+    /* 战车 */
+    s += `<rect x="270" y="116" width="80" height="14" fill="#5a4a3a"/>`;
+    s += `<circle cx="282" cy="132" r="8" fill="#5a4a3a" stroke="#3a2a1a" stroke-width="2"/>`;
+    s += `<circle cx="338" cy="132" r="8" fill="#5a4a3a" stroke="#3a2a1a" stroke-width="2"/>`;
+    s += txt(320, 20, '规模宏大 · 类型众多 · 个性鲜明', { fs: 13, fill: '#7a5a3a', fw: 800 });
+    s += txt(320, 148, '秦始皇陵兵马俑，被誉为「世界第八大奇迹」', { fs: 12, fill: '#8a7a6a' });
+    return s + '</svg>';
+  };
+
+  /* 牛和鹅：换个角度看问题 */
+  const cowGoose = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 150">`;
+    s += `<rect width="640" height="150" fill="#f4f8ec"/>`;
+    /* 牛（温顺） */
+    s += `<ellipse cx="140" cy="100" rx="40" ry="24" fill="#8a6a4a"/>`;
+    s += `<circle cx="100" cy="92" r="18" fill="#8a6a4a"/>`;
+    s += `<path d="M 88 82 l -8 -10 M 112 82 l 8 -10" stroke="#5a4a3a" stroke-width="3"/>`;
+    s += `<circle cx="94" cy="90" r="2" fill="#1a1a1a"/>`;
+    s += `<ellipse cx="88" cy="98" rx="5" ry="4" fill="#d9a890"/>`;
+    s += txt(140, 140, '牛：怕人，看人大', { fs: 12, fill: '#7a5a3a' });
+    /* 鹅（凶猛） */
+    s += `<ellipse cx="480" cy="100" rx="36" ry="22" fill="#f0f0f0" stroke="#ccc" stroke-width="1.5"/>`;
+    s += `<path d="M 516 88 q 10 -6 16 -14 q 4 4 4 14 q 0 10 -20 14" fill="#f0f0f0" stroke="#ccc" stroke-width="1.5"/>`;
+    s += `<circle cx="524" cy="84" r="3" fill="#e25563"/>`;
+    s += `<path d="M 532 88 l 10 -2 l -10 4 Z" fill="#e8a040"/>`;
+    s += txt(480, 140, '鹅：不怕人，看人小', { fs: 12, fill: '#7a5a3a' });
+    s += arrow(280, 100, 400, 100, '#d97745');
+    s += txt(340, 88, '换个角度', { fs: 13, fill: '#d97745', fw: 800 });
+    s += txt(340, 108, '看问题', { fs: 13, fill: '#d97745', fw: 800 });
+    return s + '</svg>';
+  };
+
+  /* 一只窝囊的大老虎：台上扮老虎 */
+  const tigerCostume = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 150">`;
+    s += `<rect width="640" height="150" fill="#f8f0e8"/>`;
+    /* 舞台 */
+    s += `<rect x="0" y="120" width="640" height="30" fill="#c95a4a"/>`;
+    s += `<rect x="0" y="116" width="640" height="6" fill="#8a3a2a"/>`;
+    /* 幕布 */
+    s += `<rect x="0" y="20" width="40" height="100" fill="#a83a3a"/>`;
+    s += `<rect x="600" y="20" width="40" height="100" fill="#a83a3a"/>`;
+    for (let i = 0; i < 5; i++) {
+      s += `<path d="M ${i * 8} 20 q 4 8 8 0" fill="none" stroke="#7a2a2a" stroke-width="1"/>`;
+      s += `<path d="M ${600 + i * 8} 20 q 4 8 8 0" fill="none" stroke="#7a2a2a" stroke-width="1"/>`;
+    }
+    /* 扮老虎的孩子 */
+    s += `<circle cx="320" cy="60" r="22" fill="#e8a84a"/>`;
+    /* 王字 */
+    s += `<text x="320" y="56" text-anchor="middle" font-size="14" font-weight="900" fill="#1a1a1a">王</text>`;
+    /* 耳朵 */
+    s += `<circle cx="302" cy="44" r="8" fill="#e8a84a"/>`;
+    s += `<circle cx="338" cy="44" r="8" fill="#e8a84a"/>`;
+    /* 眼睛 */
+    s += `<circle cx="312" cy="62" r="3" fill="#1a1a1a"/>`;
+    s += `<circle cx="328" cy="62" r="3" fill="#1a1a1a"/>`;
+    /* 嘴（窝囊的嘴） */
+    s += `<path d="M 312 74 q 8 -4 16 0" fill="none" stroke="#1a1a1a" stroke-width="2"/>`;
+    /* 身体虎纹 */
+    s += `<rect x="300" y="82" width="40" height="38" rx="6" fill="#e8a84a"/>`;
+    s += `<line x1="308" y1="88" x2="332" y2="88" stroke="#1a1a1a" stroke-width="2"/>`;
+    s += `<line x1="308" y1="96" x2="332" y2="96" stroke="#1a1a1a" stroke-width="2"/>`;
+    s += `<line x1="308" y1="104" x2="332" y2="104" stroke="#1a1a1a" stroke-width="2"/>`;
+    s += txt(320, 144, '本想演个威风的大老虎，结果演得窝囊又好笑', { fs: 12.5, fill: '#7a5a3a' });
+    return s + '</svg>';
+  };
+
+  /* 陀螺：旋转的陀螺 */
+  const spinningTop = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 150">`;
+    s += `<rect width="640" height="150" fill="#eef4fd"/>`;
+    /* 地面 */
+    s += `<ellipse cx="320" cy="130" rx="200" ry="14" fill="#d4dce8"/>`;
+    /* 陀螺 */
+    s += `<path d="M 300 60 L 340 60 L 330 110 L 310 110 Z" fill="#e25563" stroke="#a03a4a" stroke-width="2"/>`;
+    s += `<ellipse cx="320" cy="60" rx="22" ry="7" fill="#c04a5a" stroke="#a03a4a" stroke-width="2"/>`;
+    s += `<path d="M 320 110 L 320 124" stroke="#5a4a3a" stroke-width="3"/>`;
+    /* 旋转线 */
+    s += `<ellipse cx="320" cy="124" rx="14" ry="4" fill="none" stroke="#2f9bd6" stroke-width="2" opacity=".7"/>`;
+    s += `<path d="M 280 80 q 40 -20 80 0" fill="none" stroke="#2f9bd6" stroke-width="2" stroke-dasharray="4 4" opacity=".5"/>`;
+    /* 鞭子 */
+    s += `<line x1="400" y1="50" x2="360" y2="90" stroke="#8a6a4a" stroke-width="3"/>`;
+    s += `<path d="M 360 90 q -10 4 -16 -4" fill="none" stroke="#c9a84a" stroke-width="2"/>`;
+    s += txt(180, 70, '抽一鞭，转得欢', { fs: 13, fill: '#3a5a7a', anchor: 'start' });
+    s += txt(320, 146, '「人不可貌相，海水不可斗量」——小陀螺也能打败大陀螺', { fs: 12.5, fill: '#35567e' });
+    return s + '</svg>';
+  };
+
+  /* 延安，我把你追寻 */
+  const yanan = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 150">`;
+    s += `<rect width="640" height="150" fill="#f0e8d8"/>`;
+    /* 宝塔山 */
+    s += `<path d="M 80 130 L 130 40 L 180 130 Z" fill="#8a7a5a"/>`;
+    /* 宝塔 */
+    s += `<rect x="118" y="50" width="24" height="60" fill="#c9a84a" stroke="#8a6a3a" stroke-width="1.5"/>`;
+    s += `<polygon points="118,50 130,34 142,50" fill="#c95a4a"/>`;
+    for (let i = 0; i < 5; i++) s += `<rect x="120" y="${56 + i * 12}" width="20" height="3" fill="#8a6a3a"/>`;
+    s += txt(130, 146, '宝塔山', { fs: 12, fill: '#7a5a3a' });
+    /* 窑洞 */
+    [[320, 100], [380, 100], [440, 100]].forEach(p => {
+      s += `<rect x="${p[0] - 22}" y="${p[1]}" width="44" height="30" fill="#c9a878" stroke="#8a6a4a" stroke-width="1.5"/>`;
+      s += `<path d="M ${p[0] - 22} ${p[1]} q 22 -16 44 0" fill="#c9a878" stroke="#8a6a4a" stroke-width="1.5"/>`;
+      s += `<rect x="${p[0] - 8}" y="${p[1] + 8}" width="16" height="22" fill="#5a3a2a"/>`;
+    });
+    s += txt(380, 146, '窑洞', { fs: 12, fill: '#7a5a3a' });
+    /* 延河 */
+    s += `<path d="M 200 130 Q 260 120 320 130 T 580 126" fill="none" stroke="#4a8ac9" stroke-width="6"/>`;
+    s += txt(320, 20, '追寻信念、追寻温暖、追寻光明', { fs: 14, fill: '#c0392b', fw: 900 });
+    s += txt(320, 40, '延安精神', { fs: 16, fill: '#c0392b', fw: 900 });
+    return s + '</svg>';
+  };
+
+  /* 为中华之崛起而读书 */
+  const zhouEnlai = () => {
+    let s = `<svg class="fig-svg" viewBox="0 0 640 150">`;
+    s += `<rect width="640" height="150" fill="#f4f0e8"/>`;
+    /* 书桌 */
+    s += `<rect x="60" y="100" width="200" height="12" fill="#8a6a4a"/>`;
+    s += `<rect x="70" y="112" width="8" height="28" fill="#8a6a4a"/>`;
+    s += `<rect x="242" y="112" width="8" height="28" fill="#8a6a4a"/>`;
+    /* 书本 */
+    s += `<rect x="100" y="82" width="100" height="18" fill="#e25563"/>`;
+    s += `<rect x="100" y="82" width="100" height="3" fill="#a03a4a"/>`;
+    s += `<line x1="150" y1="82" x2="150" y2="100" stroke="#a03a4a" stroke-width="1"/>`;
+    /* 少年读书 */
+    s += `<circle cx="320" cy="70" r="16" fill="#f0d8b8"/>`;
+    s += `<path d="M 306 60 q 14 -18 28 0" fill="none" stroke="#1a1a1a" stroke-width="5"/>`;
+    s += `<circle cx="314" cy="72" r="2" fill="#1a1a1a"/>`;
+    s += `<circle cx="326" cy="72" r="2" fill="#1a1a1a"/>`;
+    s += `<path d="M 314 80 q 6 3 12 0" fill="none" stroke="#1a1a1a" stroke-width="1.5"/>`;
+    s += `<rect x="300" y="86" width="40" height="34" fill="#3a5a8a"/>`;
+    s += `<line x1="320" y1="86" x2="320" y2="120" stroke="#2a4a7a" stroke-width="1"/>`;
+    /* 中华崛起文字卷轴 */
+    s += `<rect x="380" y="60" width="220" height="50" rx="4" fill="#f8e8c8" stroke="#c9a84a" stroke-width="2"/>`;
+    s += txt(490, 82, '为中华之崛起', { fs: 16, fill: '#8a3a2a', fw: 900 });
+    s += txt(490, 100, '而读书！', { fs: 16, fill: '#8a3a2a', fw: 900 });
+    s += txt(320, 140, '少年周恩来立下远大志向——为中华之崛起而读书', { fs: 12.5, fill: '#5a4a3a' });
+    return s + '</svg>';
+  };
+
   /* ================= 注册表 ================= */
   const REG = {
     /* 数学 */
@@ -601,11 +1244,39 @@ const Figures = (() => {
     'tide': tide,
     'bat-radar': batRadar,
     'race-matrix': raceMatrix,
+    'demo-race': demoRace,
     'ivy-foot': ivyFoot,
     'cricket-home': cricketHome,
     'jingwei': jingwei,
     'greatwall-section': greatwall,
     'route-map': routeMap,
+    /* 古诗文场景插画 */
+    'poem-luzhai': poemLuzhai,
+    'poem-mujiang': poemMujiang,
+    'poem-lushan': poemLushan,
+    'poem-xuemei': poemXuemei,
+    'poem-change': poemChange,
+    'poem-biedongda': poemBiedongda,
+    'poem-liangzhou': poemLiangzhou,
+    'poem-chusai': poemChusai,
+    'poem-xrj': poemXrj,
+    'poem-wangrong': poemWangrong,
+    /* 补充课文图示 */
+    'stars': stars,
+    'autumn-river': autumnRiver,
+    'five-peas': fivePeas,
+    'square-hats': squareHats,
+    'pangu': pangu,
+    'prometheus': prometheus,
+    'nüwa': nüwa,
+    'sparrow': sparrow,
+    'tiandufeng': tiandufeng,
+    'terracotta': terracotta,
+    'cow-goose': cowGoose,
+    'tiger-costume': tigerCostume,
+    'spinning-top': spinningTop,
+    'yanan': yanan,
+    'zhou-enlai': zhouEnlai,
     /* 横幅 */
     'bn-u1': banners['bn-u1'],
     'bn-u2': banners['bn-u2'],
@@ -630,6 +1301,7 @@ const Figures = (() => {
     'demo-speed': '互动演示：拖动滑块，小车和路程会跟着变',
     'demo-bar': '互动演示：切换「1 格代表几人」，看直条怎么画',
     'demo-segcount': '互动演示：增减点数，弧线就是所有的线段',
+    'demo-race': '互动演示：点「下一步」，看孙膑怎么调换马的出场顺序、反败为胜',
     'pv-table': '数位顺序表：分级读数、写数的依据',
   };
 
@@ -656,6 +1328,8 @@ const Figures = (() => {
       else if (act === 'vreset') { fig.dataset.step = 0; vApply(fig, 0); }
       else if (act === 'cube-view') cubeView(fig, b.dataset.v, b);
       else if (act === 'bar-mode') barApply(fig, b.dataset.v);
+      else if (act === 'race-step') { const s = Math.min((+fig.dataset.step || 0) + 1, 3); fig.dataset.step = s; raceApply(fig, s); }
+      else if (act === 'race-reset') { fig.dataset.step = 0; raceApply(fig, 0); }
     });
   }
 
@@ -729,6 +1403,7 @@ const Figures = (() => {
         }
         else if (id === 'demo-vertical' && !fig.dataset.init) { fig.dataset.step = 0; vApply(fig, 0); fig.dataset.init = '1'; }
         else if (id === 'demo-bar' && !fig.dataset.init) { barApply(fig, '1'); fig.dataset.init = '1'; }
+        else if (id === 'demo-race' && !fig.dataset.init) { fig.dataset.step = 0; raceApply(fig, 0); fig.dataset.init = '1'; }
       });
     };
     const mo = new MutationObserver(muts => {

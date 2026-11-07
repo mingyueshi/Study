@@ -1,0 +1,33 @@
+{% extends 'base.html' %}{% load static %}{% block title %}数学知识点 · 乐学堂{% endblock %}
+{% block content %}<link rel="stylesheet" href="{% static 'mathbook/mathbook-base.css' %}?v=1"><link rel="stylesheet" href="{% static 'figures/figures.css' %}?v=2"><link rel="stylesheet" href="{% static 'mathbook/mathbook.css' %}?v=1">
+<div class="study-page" data-subject="math">
+  <div class="study-shell">
+    <aside class="sidebar">
+      <p class="sidebar-label">教材单元 <span class="nav-count"></span></p>
+      <details class="category-nav" open>
+        <summary>切换单元 <span class="nav-current"></span></summary>
+        <nav id="chips" aria-label="单元切换"></nav>
+      </details>
+      <p class="sidebar-note"><span id="mk-edition">{{ textbook }}</span><br><a href="{% url 'module' 'knowledge' %}">📖 语文教材</a><br>看要点 · 读例题 · 打印复习</p>
+    </aside>
+    <div class="study-content">
+      <div class="textbook-banner">
+        <span>🔢 <span id="mk-banner-textbook">{{ meta.textbook }} {{ meta.subject }}</span></span>
+        <strong><span id="mk-banner-vol">{{ meta.grade }}{{ meta.volume }}</span> · 知识点总结</strong>
+      </div>
+      <section class="toolbar" aria-label="学习工具">
+        <div class="search-box"><span>🔎</span><input id="search" type="search" aria-label="搜索全部知识点" placeholder="搜索知识点、公式、易错点…" autocomplete="off"></div>
+        <span class="stats-pill" id="stats"></span>
+        <button class="play-btn" data-act="print">🖨️ 打印本单元</button>
+      </section>
+      <main id="cards" tabindex="-1"></main>
+    </div>
+  </div>
+</div>
+<script src="{% static 'speech.js' %}" defer></script>
+<script src="{{ data_src }}" defer></script>
+<script src="{% static 'figures/figures.js' %}?v=2" defer></script>
+<script src="{% static 'mathbook/math-figures.js' %}?v=1" defer></script>
+<script src="{% static 'mathbook/math-app.js' %}?v=1" defer></script>
+<script src="{% static 'mathbook/layout.js' %}?v=1" defer></script>
+{% endblock %}

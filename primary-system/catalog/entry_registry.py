@@ -81,6 +81,10 @@ def _grammar_summary(user):
     return None
 
 
+def _mathbook_summary(user):
+    return None
+
+
 ENTRIES = {
     'chain': {
         'route_name': 'chain',
@@ -125,11 +129,22 @@ ENTRIES = {
         'learning_summary': _writing_summary,
         'recent': _writing_recent,
     },
+    # 教材模块里的文件编排例外：数学教材直接走静态编排的教材册页，
+    # 内容源头在 primary/math-data.js（scripts/build_mathbook.cjs 同步）。
+    'math': {
+        'route_name': 'mathbook',
+        'tag': '打开知识点 →',
+        'headline': '数学教材已开始',
+        'blurb': '北师大版四上知识点：图示开路，要点、例题、易错一卡一卡看明白，公式速查和易错诊所考前过一遍，同款例题已进挑战题库。',
+        'button': '进入数学教材',
+        'learning_summary': _mathbook_summary,
+    },
 }
 
 
 def entry_for(code):
-    """玩法模块入口；教材模块（knowledge/math/english）返回 None，走目录中转页。"""
+    """玩法模块入口；教材模块（knowledge/english）返回 None，走目录中转页。
+    math 是文件编排例外，直接指向静态编排的数学教材册。"""
     return ENTRIES.get(code)
 
 
@@ -145,6 +160,9 @@ SPECIAL_ENTRIES = (
     {'route': 'plurals', 'subject': '英语', 'area': 'english', 'icon': 'plurals', 'color': 'english',
      'name': '不规则复数', 'tag': '认一认 →',
      'blurb': 'man 变 men、foot 变 feet、knife 变 knives——不按规矩变的复数一张表看全，再来几道「给单数选复数」。'},
+    {'route': 'grammar', 'subject': '英语', 'area': 'english', 'icon': 'grammar', 'color': 'english',
+     'name': '英语语法', 'tag': '学语法 →',
+     'blurb': '8 章 31 个语法点：词法、动词与句型，讲规则、辨易错；页内巩固题即时判分，同题已进挑战题库。'},
     {'route': 'feihualing', 'subject': '古诗词', 'area': 'poetry', 'icon': 'literature', 'color': 'chinese',
      'name': '飞花令', 'tag': '开始练诗 →',
      'blurb': '选一个令字，想一句含这个字的诗，集满五句写成自己的诗单。'},

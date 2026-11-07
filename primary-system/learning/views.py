@@ -27,16 +27,23 @@ FIGURE_SCRIPTS = {
     'GeoFigures': 'figures/geo-figures.js', 'AstroFigures': 'figures/astro-figures.js',
     'HistoryFigures': 'figures/history-figures.js', 'LitFigures': 'figures/lit-figures.js',
 }
+# 共享图示库内容更新后在此升版本（{% static %} 会转义查询串，版本号在视图侧拼）。
+FIGURE_SCRIPT_VERSIONS = {'figures/figures.js': 2}
 
 
 def figure_context(item):
-    """内容含图示块时返回对应图示库与脚本路径；其余情况不加载图示资产。"""
+    """内容含图示块时返回对应图示库与脚本 URL（带缓存版本号）；其余情况不加载图示资产。"""
     sections = item.sections if isinstance(item.sections, list) else []
     if not any(isinstance(s, dict) and s.get('type') == 'figure' for s in sections):
         return {}
     lib = FIGURE_LIBS.get(item.module.code)
     script = FIGURE_SCRIPTS.get(lib) if lib else None
-    return {'figure_lib': lib, 'figure_script': script} if script else {}
+    if not script:
+        return {}
+    from django.templatetags.static import static as static_url
+    version = FIGURE_SCRIPT_VERSIONS.get(script)
+    src = static_url(script) + (f'?v={version}' if version else '')
+    return {'figure_lib': lib, 'figure_script': src}
 
 
 def word_card_context(item, resolver=None):
