@@ -1,6 +1,7 @@
 /* 不规则复数：网格筛选 + 「给单数选复数」判分上报。
-   前端判分只做即时展示；每题上报一次，服务端按词表确定性选项集复核后落
-   学习记录（对错都记），失败不打扰练习。 */
+   前端判分只做即时展示；每题只答一次，答错即揭示正确答案并锁定，
+   上报一次由服务端按词表确定性选项集复核后落学习记录（对错都记），
+   失败不打扰练习。键盘：数字 1~4 作答，答完 Enter 换一题。 */
 'use strict';
 
 (() => {
@@ -8,8 +9,11 @@
   const round = document.querySelector('[data-plural-round]');
   if (round) {
     const options = Array.from(round.querySelectorAll('[data-plural-option]'));
+    const feedback = round.querySelector('[data-plural-feedback]');
+    const nextLink = round.querySelector('.plural-actions a');
     const STORE_KEY = 'plurals_stats_v1';
     let stats = { streak: 0, correct: 0, asked: 0 };
+    let answered = false;
     try {
       stats = { ...stats, ...JSON.parse(localStorage.getItem(STORE_KEY) || '{}') };
     } catch (e) { /* 使用默认 */ }
@@ -39,25 +43,53 @@
       }).catch(() => {});
     };
 
+    const choose = (option) => {
+      if (answered) return;
+      answered = true;
+      const ok = option.dataset.form === round.dataset.answer;
+      stats.asked += 1;
+      if (ok) {
+        stats.correct += 1;
+        stats.streak += 1;
+        option.classList.add('right');
+        feedback.textContent = '🎉 答对啦！就是这么变。';
+        feedback.classList.add('ok');
+      } else {
+        stats.streak = 0;
+        option.classList.add('wrong');
+        options.forEach((button) => {
+          if (button.dataset.form === round.dataset.answer) button.classList.add('right');
+        });
+        feedback.textContent = `正确答案是 ${round.dataset.answer}，记住它。`;
+        feedback.classList.add('bad');
+      }
+      options.forEach((button) => { button.disabled = true; });
+      round.classList.add('done');
+      save();
+      render();
+      report(option.dataset.form);
+    };
+
     options.forEach((option) => {
-      option.addEventListener('click', () => {
-        if (options.every((button) => button.disabled)) return;
-        const ok = option.dataset.form === round.dataset.answer;
-        stats.asked += 1;
-        if (ok) {
-          stats.correct += 1;
-          stats.streak += 1;
-          option.classList.add('right');
-          options.forEach((button) => { button.disabled = true; });
-        } else {
-          stats.streak = 0;
-          option.classList.add('wrong');
-          option.disabled = true;
+      option.addEventListener('click', () => choose(option));
+    });
+
+    /* 键盘：输入框里不抢按键；数字 1~4 作答，答完 Enter 换一题。 */
+    document.addEventListener('keydown', (event) => {
+      if (event.defaultPrevented || event.ctrlKey || event.metaKey || event.altKey) return;
+      if (event.target.closest?.('input, textarea, select')) return;
+      if (event.key === 'Enter') {
+        if (answered && nextLink) {
+          event.preventDefault();
+          nextLink.click();
         }
-        save();
-        render();
-        report(option.dataset.form);
-      });
+        return;
+      }
+      if (answered) return;
+      const index = ['1', '2', '3', '4'].indexOf(event.key);
+      if (index < 0 || index >= options.length) return;
+      event.preventDefault();
+      choose(options[index]);
     });
   }
 

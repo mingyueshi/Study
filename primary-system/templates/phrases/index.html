@@ -1,11 +1,10 @@
 {% extends 'base.html' %}{% load static %}{% block title %}日常用语 · 乐学堂{% endblock %}
-{% block content %}<link rel="stylesheet" href="{% static 'phrases/phrases.css' %}"><script src="{% static 'speech.js' %}" defer></script><script src="{% static 'tts.js' %}" defer></script><script src="{% static 'phrases/phrases.js' %}" defer></script>
+{% block content %}<link rel="stylesheet" href="{% static 'phrases/phrases.css' %}?v=2"><script src="{% static 'speech.js' %}" defer></script><script src="{% static 'tts.js' %}" defer></script><script src="{% static 'phrases/phrases.js' %}?v=2" defer></script>
 <header class="phrase-hero">
   <div class="phrase-hero-copy">
     <p class="eyebrow">英语 · 开口说</p>
     <h1>日常用语</h1>
-    <p class="phrase-hero-tag">教材里的 597 条常用短语和短句：按句式记一个开头，整句就出来了；按话题找场景，想说哪句点哪句。练习记录统一落账。</p>
-    <p class="phrase-hero-stats"><span><b>{{ total }}</b> 条</span><span><b>{{ core_count }}</b> 句进练习</span></p>
+    <p class="phrase-hero-stats"><span><b>{{ total }}</b> 条短语</span><span><b>{{ core_count }}</b> 句进练习</span></p>
   </div>
   <div class="phrase-hero-demo" aria-hidden="true"><span class="phrase-demo-line">Can I help?</span><span class="phrase-demo-line small">Let's go!</span><span class="phrase-demo-line">Thank you!</span></div>
 </header>
@@ -14,9 +13,9 @@
          data-answer="{{ round.en }}" data-id="{{ round.id }}"
          data-report-url="{% url 'phrases-report' %}">
   <p class="phrase-practice-title">练一练 · 看中文选英文</p>
-  <p class="phrase-prompt"><b>{{ round.zh }}</b><span>英文怎么说？</span>
-    <button class="say-chip" type="button" data-say="{{ round.zh }}" aria-label="朗读提示">🔊</button></p>
-  <div class="phrase-options">{% for option in round.options %}<button class="phrase-option" type="button" data-phrases-option data-en="{{ option }}">{{ option }}</button>{% endfor %}</div>
+  <p class="phrase-prompt"><b>{{ round.zh }}</b><span>英文怎么说？</span></p>
+  <div class="phrase-options">{% for option in round.options %}<button class="phrase-option" type="button" data-phrases-option data-en="{{ option }}"><i class="phrase-option-key" aria-hidden="true">{{ forloop.counter }}</i><span>{{ option }}</span></button>{% endfor %}</div>
+  <p class="phrase-feedback" data-phrases-feedback></p>
   <p class="phrase-score">连续答对 <b data-phrases-streak>0</b> · 累计答对 <b data-phrases-correct>0</b>／<b data-phrases-asked>0</b></p>
   <div class="phrase-actions"><a class="button small ghost" href="{{ next_href }}">换一题 ↻</a></div>
 </section>
@@ -28,16 +27,18 @@
       <button type="button" class="phrase-view on" data-phrases-view="pattern">按句式</button>
       <button type="button" class="phrase-view" data-phrases-view="scenario">按话题</button>
     </div>
-    <input class="phrase-search" type="search" data-phrases-search placeholder="筛选：英文或中文，如「help」「帮忙」" aria-label="筛选日常用语">
+    <input class="phrase-search" type="search" data-phrases-search placeholder="英文或中文，如 help" aria-label="筛选日常用语">
     <span class="phrase-count"><b data-phrases-visible>0</b>／{{ total }} 条</span>
   </div>
   <div class="phrase-chip-row" data-chip-row="pattern">
-    {% for pattern in patterns %}<button type="button" class="phrase-chip{% if forloop.first %} on{% endif %}" data-chip="{{ pattern.code }}">{{ pattern.name }}<i>{{ pattern.count }}</i></button>{% endfor %}
+    <button type="button" class="phrase-chip on" data-chip="all">全部</button>
+    {% for pattern in patterns %}<button type="button" class="phrase-chip" data-chip="{{ pattern.code }}">{{ pattern.name }}<i>{{ pattern.count }}</i></button>{% endfor %}
   </div>
   <div class="phrase-chip-row" data-chip-row="scenario" hidden>
-    {% for scenario in scenarios %}<button type="button" class="phrase-chip{% if forloop.first %} on{% endif %}" data-chip="{{ scenario.code }}">{{ scenario.zh }}<i>{{ scenario.count }}</i></button>{% endfor %}
+    <button type="button" class="phrase-chip on" data-chip="all">全部</button>
+    {% for scenario in scenarios %}<button type="button" class="phrase-chip" data-chip="{{ scenario.code }}">{{ scenario.zh }}<i>{{ scenario.count }}</i></button>{% endfor %}
   </div>
   <div id="phrase-groups" data-phrase-groups data-words-url="{% url 'scenario-words' %}"></div>
-  <p class="phrase-note-foot">句子和搭配都来自教材词卡短语；「按话题」视图里每组的「去场景单词学词」带你到对应单词页。练习只考句子形态，服务端复核后记账。</p>
+  <p class="phrase-note-foot">短语来自教材词卡；「按话题」视图可去对应场景单词页学词。练习只考句子，不考搭配。</p>
 </div>
 {% endblock %}

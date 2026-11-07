@@ -267,10 +267,11 @@ def act(pool, state, by_headword, action, data):
 def page(request):
     try:
         pool = quiz_pool()
+        context = {"total": sum(1 for entry in pool if entry["valid"])}
         state = fresh(pool)
-        context = page_state(pool, state, {e["headword"]: e for e in pool if e["valid"]})
+        context.update(page_state(pool, state, {e["headword"]: e for e in pool if e["valid"]}))
     except QuizError as error:
-        context = {"available": False, "message": str(error)}
+        context = {"available": False, "message": str(error), "total": context["total"]}
     return render(request, "idioms/emoji.html", {"state": context})
 
 

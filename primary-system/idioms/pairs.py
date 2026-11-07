@@ -29,10 +29,11 @@ from .records import record_play
 def page(request):
     try:
         pool = pairs_pool()
+        context = {"total": sum(1 for pair in pool if pair["valid"])}
         state = fresh(pool)
-        context = page_state(pool, state, {pair["id"]: pair for pair in pool if pair["valid"]})
+        context.update(page_state(pool, state, {pair["id"]: pair for pair in pool if pair["valid"]}))
     except PairError as error:
-        context = {"available": False, "message": str(error)}
+        context = {"available": False, "message": str(error), "total": context["total"]}
     return render(request, "idioms/pairs.html", {"state": context})
 
 

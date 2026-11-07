@@ -1,15 +1,32 @@
 /* 日常用语专题：句式/话题双视图 + 「看中文选英文」练习。 */
 
-/* ── hero ─────────────────────────────────────────────────────────────── */
-.phrase-hero { display: flex; align-items: center; gap: 32px; padding: 34px 0 8px; }
-.phrase-hero-copy { flex: 1; }
-.phrase-hero-tag { margin: 10px 0 0; max-width: 36em; color: var(--muted); font-size: 20px; }
-.phrase-hero-stats { display: flex; gap: 26px; margin: 18px 0 0; font-size: 19px; }
-.phrase-hero-stats b { font-size: 30px; color: var(--green); }
+/* ── hero：蓝系渐变卡，配英语家族色 ──────────────────────────────────── */
+.phrase-hero {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px 28px;
+  padding: 26px 30px;
+  margin: 18px 0 8px;
+  background:
+    radial-gradient(ellipse at 92% 8%, #ffe9c2, transparent 60%),
+    linear-gradient(120deg, #edf4fc, #e6f0fa);
+  border: 1px solid #d2e3f2;
+  border-radius: 22px;
+}
+.phrase-hero-copy { flex: 1 1 320px; min-width: 0; }
+.phrase-hero-stats { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0; }
+.phrase-hero-stats span { display: inline-flex; align-items: center; gap: 5px; padding: 5px 12px; border-radius: 999px; background: #fff; border: 1px solid #d6e5f0; font-size: 14px; color: #4a5550; }
+.phrase-hero-stats b { font-size: 18px; color: var(--green); font-weight: 800; }
 .phrase-hero-demo { display: grid; gap: 10px; justify-items: end; }
-.phrase-demo-line { padding: 8px 20px; border-radius: 18px 18px 18px 4px; background: #eef4fb; color: #234b38; font-size: 20px; font-weight: 750; }
-.phrase-demo-line.small { border-radius: 18px 18px 4px 18px; background: var(--soft); color: var(--green); font-size: 17px; transform: translateX(-26px) rotate(-2deg); }
-.phrase-demo-line:nth-child(3) { background: var(--card-tint); color: var(--card-accent); transform: rotate(2deg); }
+.phrase-demo-line { padding: 8px 20px; border-radius: 18px 18px 18px 4px; background: #fff; border: 1px solid #dce6f5; color: #234b38; font-size: 20px; font-weight: 750; box-shadow: 0 3px 0 #cddff0; }
+.phrase-demo-line.small { border-radius: 18px 18px 4px 18px; background: var(--soft); border-color: #c9ddc5; color: var(--green); font-size: 17px; transform: translateX(-26px) rotate(-2deg); box-shadow: 0 3px 0 #c9ddc5; }
+.phrase-demo-line:nth-child(3) { background: var(--card-tint); border-color: #ecd9c5; color: var(--card-accent); transform: rotate(2deg); box-shadow: 0 3px 0 #ecd9c5; }
+
+/* 朗读按钮：本页样式自足（浅紫药丸，同其他专题页）。 */
+.say-chip { padding: 4px 13px; border: 1.5px solid #ddd3ef; border-radius: 999px; background: #f4edfd; color: #5d5484; font-size: 15px; font-weight: 700; cursor: pointer; transition: border-color .14s ease; }
+.say-chip:hover { border-color: #b9a8e2; }
 
 /* ── 练一练 ───────────────────────────────────────────────────────────── */
 .phrase-practice { max-width: 760px; margin: 26px 0 34px; padding: 24px 28px; border: 2px dashed #b9d3e8; border-radius: 22px; background: #f4f9fd; scroll-margin-top: 24px; }
@@ -17,14 +34,29 @@
 .phrase-prompt { display: flex; align-items: baseline; gap: 12px; margin: 0; font-size: 28px; font-weight: 800; }
 .phrase-prompt span { font-size: 20px; font-weight: 700; color: var(--muted); }
 .phrase-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-top: 14px; }
-.phrase-option { padding: 13px 18px; border: 2px solid var(--line); border-radius: 16px; background: var(--white); font-size: 19px; font-weight: 700; cursor: pointer; text-align: left; }
-.phrase-option:hover { border-color: #4d96ff; background: #eef4fb; }
+.phrase-option { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border: 2px solid var(--line); border-radius: 16px; background: var(--white); font-size: 19px; font-weight: 700; cursor: pointer; text-align: left; transition: transform .14s ease, border-color .14s ease, background .14s ease; }
+.phrase-option:hover:enabled { border-color: #4d96ff; background: #eef4fb; transform: translateY(-2px); }
+.phrase-option:active:enabled { transform: translateY(0); }
 .phrase-option:disabled { cursor: default; opacity: .68; }
+.phrase-option-key { display: grid; place-items: center; flex: none; width: 28px; height: 28px; border: 1.5px solid var(--line); border-radius: 9px; background: var(--white); color: var(--muted); font-size: 14px; font-style: normal; font-weight: 750; transition: border-color .14s ease, color .14s ease; }
+.phrase-option:hover:enabled .phrase-option-key { border-color: #9cc2ec; color: #31627e; }
 .phrase-option.right { border-color: #2c7a4b; background: #e2f0dc; opacity: 1; }
+.phrase-option.right .phrase-option-key { border-color: #2c7a4b; background: #2c7a4b; color: #fff; }
+.phrase-option.right::after { content: "✓"; margin-left: auto; color: #2c7a4b; font-size: 22px; font-weight: 900; }
 .phrase-option.wrong { border-color: #b4483a; background: #fde8e4; }
+.phrase-option.wrong span { text-decoration: line-through; }
+.phrase-option.wrong .phrase-option-key { border-color: #d9a49d; color: #8f3a2f; }
+.phrase-feedback { margin: 12px 0 0; font-size: 17px; font-weight: 700; }
+.phrase-feedback:empty { display: none; }
+.phrase-feedback.ok { color: #2c7a4b; }
+.phrase-feedback.bad { color: #b4483a; }
+.phrase-feedback .say-chip { margin-inline: 2px; }
 .phrase-score { margin: 14px 0 0; color: var(--muted); font-size: 17px; }
 .phrase-score b { color: var(--green); font-size: 22px; }
-.phrase-actions { margin-top: 10px; }
+.phrase-actions { margin-top: 12px; }
+/* 答完一题，「换一题」升为主行动引导继续。 */
+.phrase-practice.done .phrase-actions .button { border-color: #2c7a4b; background: #2c7a4b; color: #fff; }
+.phrase-practice.done .phrase-actions .button:hover { background: #235f3b; border-color: #235f3b; color: #fff; }
 
 /* ── 浏览：视图切换 + chips + 分组 ────────────────────────────────────── */
 .phrase-shell { min-width: 0; }
@@ -46,8 +78,11 @@
 .phrase-group { margin-bottom: 30px; }
 .phrase-words-link { color: #2c7a4b; font-weight: 750; font-size: 16px; white-space: nowrap; }
 .phrase-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 270px), 1fr)); gap: 12px; }
-.phrase-card { padding: 14px 18px; border: 1px solid var(--line); border-top: 4px solid #9b5de5; border-radius: 16px; background: var(--white); box-shadow: 0 3px 0 #233e3704; }
+.phrase-card { position: relative; padding: 14px 18px; border: 1px solid var(--line); border-top: 4px solid #9b5de5; border-radius: 16px; background: var(--white); box-shadow: 0 3px 0 #233e3704; transition: transform .14s ease, box-shadow .14s ease, border-color .14s ease; }
+.phrase-card:hover, .phrase-card:focus-within { transform: translateY(-3px); border-color: #e2d5f4; box-shadow: 0 6px 14px #233e3714; }
 .phrase-card.collocation { border-top-color: #d9c89e; }
+.phrase-card.collocation:hover, .phrase-card.collocation:focus-within { border-color: #e8dfc8; }
+.phrase-tier { position: absolute; top: 10px; right: 12px; padding: 1px 10px; border-radius: 999px; background: #f0e4c3; color: #655638; font-size: 12px; font-weight: 800; }
 .phrase-en { display: flex; align-items: baseline; gap: 8px; margin: 0; font-size: 20px; font-weight: 750; line-height: 1.5; overflow-wrap: anywhere; }
 .phrase-zh { margin: 4px 0 0; color: var(--muted); font-size: 16px; }
 .phrase-empty { padding: 26px; border-radius: 16px; background: var(--soft); color: var(--muted); }

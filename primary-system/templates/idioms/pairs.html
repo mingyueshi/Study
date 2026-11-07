@@ -1,13 +1,12 @@
 {% extends 'idioms/layout.html' %}{% load static %}{% block title %}成语配对 · 乐学堂{% endblock %}
-{% block idiom_crumb %}<span aria-current="page">成语配对</span>{% endblock %}
-{% block idiom_content %}<link rel="stylesheet" href="{% static 'idioms/pairs.css' %}"><script src="{% static 'speech.js' %}" defer></script><script src="{% static 'tts.js' %}" defer></script><script src="{% static 'idioms/pairs.js' %}" defer></script>
+{% block idiom_crumb %}{% endblock %}
+{% block idiom_content %}<link rel="stylesheet" href="{% static 'idioms/pairs.css' %}?v=3"><script src="{% static 'idioms/pairs.js' %}?v=2" defer></script>
 {{ state|json_script:'pairs-state' }}
 <header class="pairs-hero">
   <div class="pairs-hero-copy">
     <p class="eyebrow">语文 · 连线配对</p>
     <h1>成语近义 / 反义配对</h1>
-    <p class="pairs-hero-tag">左边找一个成语，右边配它的近义或反义。全部配对成功，就能看清每一组的关系。</p>
-    <p class="pairs-hero-stats"><span><b>{{ state.size|default:5 }}</b> 对一局</span><span><b>2</b> 种关系</span><span><b>49</b> 对题库</span></p>
+    <p class="pairs-hero-stats"><span><b>{{ state.size|default:5 }}</b> 对一局</span><span><b>2</b> 种关系</span><span><b>{{ state.total }}</b> 对题库</span></p>
   </div>
   <div class="pairs-hero-demo" aria-hidden="true">
     <span class="phd">画蛇添足</span><span class="phd-link">⇌</span><span class="phd phd-b">多此一举</span>

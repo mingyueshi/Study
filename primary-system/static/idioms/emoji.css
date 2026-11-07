@@ -1,4 +1,7 @@
-/* 成语表情猜猜看：hero 横幅 + 大 emoji + 四选一；对齐看释义猜成语的优化风格。 */
+/* 成语表情猜猜看：hero 横幅 + 画框谜面 + 四选一 + 释义反馈卡；
+   配色沿用 platform.css 变量，类别徽章沿用 idioms.css 的分组色。 */
+/* 标题已在 hero 内，本页不用面包屑，收起空导航。 */
+.idiom-page .idiom-crumbs { display: none; }
 .eq-hero {
   display: flex;
   flex-wrap: wrap;
@@ -25,8 +28,10 @@
 .ehd.eq-hd-mascot { background: var(--green, #22634c); border-color: var(--green, #22634c); animation: ehd-bounce 1.6s ease infinite; }
 @keyframes ehd-bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
 
+/* 左进度面板 sticky，窄屏时移到答题板之后（见 .eq-layout 的 order）。 */
 .eq-layout { display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 24px; align-items: start; }
 .eq-side { padding: 18px; border: 1px solid var(--line, #dce6d9); border-radius: 18px; background: var(--white, #fff); }
+.eq-progress-panel { position: sticky; top: 1rem; max-height: calc(100vh - 2rem); overflow-y: auto; scrollbar-width: thin; }
 .eq-side h2 { margin: 0 0 12px; font-size: 19px; }
 .eq-side-note { margin: 10px 0 0; color: var(--muted, #586b62); font-size: 14px; line-height: 1.75; }
 .eq-side-note b { color: var(--green, #22634c); font-size: 18px; }
@@ -45,45 +50,117 @@
 .eq-history-row b { font-weight: 750; }
 
 .eq-board { min-height: 460px; padding: 30px 32px; border: 1px solid var(--line, #dce6d9); border-radius: 24px; background: var(--white, #fff); text-align: center; }
-.eq-counter { margin: 0; color: var(--muted, #586b62); font-size: 16px; font-weight: 600; }
-.eq-emoji { margin: 22px 0 0; font-size: clamp(84px, 10vw, 120px); line-height: 1.15; letter-spacing: 8px; animation: eq-float 3.2s ease-in-out infinite; }
-@keyframes eq-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-.eq-question { margin: 16px 0 0; font-size: 22px; font-weight: 800; color: #234b38; }
+.eq-counter { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px 10px; margin: 0; color: var(--muted, #586b62); font-size: 16px; font-weight: 600; }
+
+/* 类别提示徽章：色沿 idioms.css 分组圆点，一眼分辨题型。 */
+.eq-hint-chip { display: inline-flex; align-items: center; gap: 6px; padding: 3px 12px 3px 9px; border-radius: 999px; font-size: 14px; font-weight: 750; }
+.eq-hint-chip::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+.eq-hint-animal { color: #3a6e4c; background: #e9f2ec; }
+.eq-hint-number { color: #3f6491; background: #e9eff7; }
+.eq-hint-action { color: #9c5250; background: #f7ecea; }
+.eq-hint-nature { color: #8a6a26; background: #f5efdf; }
+.eq-hint-object { color: #a3622f; background: #f8efe5; }
+.eq-hint-face { color: #7f5c78; background: #f2ecf1; }
+.eq-hint-generic { color: #586b62; background: #eef2ea; }
+
+/* 谜面是一幅小画：画框卡 + 轻浮动，衬「emoji 是一幅小画」的玩法。 */
+.eq-emoji {
+  display: inline-grid;
+  place-items: center;
+  margin: 26px auto 0;
+  padding: 18px 34px;
+  border: 2px solid #e6dcbd;
+  border-radius: 18px;
+  background: linear-gradient(160deg, #fffdf6, #fbf5e6);
+  box-shadow: 0 6px 0 #efe6cb, 0 16px 30px rgb(163 132 60 / 12%);
+  font-size: clamp(72px, 9vw, 104px);
+  line-height: 1.15;
+  letter-spacing: 8px;
+  animation: eq-float 3.6s ease-in-out infinite;
+}
+@keyframes eq-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+.eq-question { margin: 18px 0 0; font-size: 22px; font-weight: 800; color: #234b38; }
+
 .eq-options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 24px; }
-.eq-option { min-height: 68px; padding: 14px 18px; border: 2px solid #dfe5ee; border-radius: 18px; background: #fafbfd; color: var(--ink, #233e37); font-size: 22px; font-weight: 800; cursor: pointer; transition: transform .12s ease, border-color .12s ease, background .12s ease; }
+.eq-option { position: relative; display: flex; align-items: center; gap: 12px; min-height: 68px; padding: 12px 18px 12px 14px; border: 2px solid #dfe5ee; border-radius: 18px; background: #fafbfd; color: var(--ink, #233e37); font-size: 22px; font-weight: 800; text-align: left; cursor: pointer; transition: transform .14s ease, border-color .14s ease, background .14s ease; }
 .eq-option:hover:enabled { border-color: var(--green, #22634c); background: #f0f7ea; transform: translateY(-2px); }
 .eq-option:active:enabled { transform: translateY(0); }
 .eq-option:disabled { cursor: default; }
-.eq-option.picked { border-color: #73509b; }
+.eq-option-key { display: grid; place-items: center; flex: none; width: 30px; height: 30px; border: 1.5px solid #e2e8f0; border-radius: 9px; background: #fff; color: var(--muted, #586b62); font-size: 15px; font-style: normal; font-weight: 750; transition: border-color .14s ease, color .14s ease; }
+.eq-option:hover:enabled .eq-option-key { border-color: #bfd8b4; color: var(--green, #22634c); }
+.eq-option.picked { border-color: #73509b; background: #f6f2fc; }
+.eq-option.picked .eq-option-key { border-color: #73509b; color: #73509b; }
 .eq-option.right { border-color: var(--green, #22634c); background: #e6f2dd; }
-.eq-option.wrong { border-color: #d2544f; background: #fdecea; text-decoration: line-through; }
+.eq-option.right .eq-option-key { border-color: var(--green, #22634c); background: var(--green, #22634c); color: #fff; }
+.eq-option.right::after { content: "✓"; margin-left: auto; color: var(--green, #22634c); font-size: 26px; font-weight: 900; animation: eq-pop .35s ease; }
+.eq-option.wrong { border-color: #d2544f; background: #fdecea; }
+.eq-option.wrong span { text-decoration: line-through; }
+.eq-option.wrong .eq-option-key { border-color: #e5b3b0; color: #a3332a; }
+@keyframes eq-pop { 0% { transform: scale(.4); } 60% { transform: scale(1.3); } 100% { transform: scale(1); } }
 
-.eq-feedback { margin: 22px 0 0; min-height: 1.5em; font-size: 18px; line-height: 1.9; }
-.eq-feedback.ok { color: #2f6d4f; }
-.eq-feedback.bad { color: #a3332a; }
+.eq-actions { display: flex; justify-content: center; margin-top: 16px; }
+.eq-reveal { min-height: 46px; padding: 8px 20px; border: 1.5px dashed #b9c8b3; border-radius: 12px; background: transparent; color: var(--muted, #586b62); font-size: 16px; cursor: pointer; transition: border-color .14s ease, color .14s ease, background .14s ease; }
+.eq-reveal:hover { border-color: var(--green, #22634c); background: #f4f9f0; color: var(--green, #22634c); }
+
+.eq-feedback { margin: 22px 0 0; }
 .eq-feedback:empty { display: none; }
-.eq-answer { margin-left: 6px; font-size: 26px; font-weight: 900; }
-.eq-pinyin { margin-left: 10px; color: #77739a; font-size: 17px; }
-.eq-def { display: block; margin-top: 6px; color: #4d5c54; font-size: 16px; line-height: 1.85; }
-.eq-say, .eq-entry { font-size: 16px; }
-.eq-entry { color: var(--green, #22634c); }
+.eq-verdict { margin: 0; font-size: 19px; font-weight: 800; }
+.eq-feedback.ok .eq-verdict { color: #2f6d4f; }
+.eq-feedback.bad .eq-verdict { color: #a3332a; }
+.eq-feedback.hinted .eq-verdict { color: #8a6d1f; }
+.eq-combo { margin-left: 8px; padding: 2px 10px; border-radius: 999px; background: #fdeed3; color: #9c6414; font-size: 15px; }
+.eq-answer-card { max-width: 34em; margin: 12px auto 0; padding: 14px 20px 15px; border: 1px solid var(--line, #dce6d9); border-radius: 16px; background: #fbfdf8; text-align: left; }
+.eq-feedback.ok .eq-answer-card { border-color: #d5e7cf; background: #f6faf1; }
+.eq-feedback.bad .eq-answer-card { border-color: #f2d4d2; background: #fdf6f5; }
+.eq-feedback.hinted .eq-answer-card { border-color: #ecd9b1; background: #fdf9ef; }
+.eq-answer-line { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 12px; }
+.eq-answer { font-size: 28px; font-weight: 900; color: var(--ink, #233e37); }
+.eq-pinyin { color: #77739a; font-size: 17px; font-weight: 650; }
+.eq-def { margin: 6px 0 0; color: #4d5c54; font-size: 16px; line-height: 1.85; }
+.eq-say { padding: 4px 13px; border: 1.5px solid #ddd3ef; border-radius: 999px; background: #f4edfd; color: #5d5484; font-size: 15px; cursor: pointer; transition: border-color .14s ease; }
+.eq-say:hover { border-color: #b9a8e2; }
+.eq-entry { color: var(--green, #22634c); font-size: 16px; text-underline-offset: .18em; }
+.eq-next { min-height: 52px; padding: 10px 28px; margin-top: 16px; border: 2px solid var(--green, #22634c); border-radius: 14px; background: var(--green, #22634c); color: #fff; font-size: 18px; font-weight: 800; cursor: pointer; transition: background .14s ease, border-color .14s ease; }
+.eq-next:hover { background: var(--green-dark, #184b39); border-color: var(--green-dark, #184b39); }
 
-.eq-summary { padding: 24px 0 8px; }
+.eq-summary { padding: 16px 0 8px; }
 .eq-summary-label { display: inline-block; margin: 0 0 10px; padding: 3px 12px; border-radius: 9px; background: var(--green, #22634c); color: #fff; font-size: 15px; font-weight: 700; }
-.eq-summary h2 { margin: 0; font-size: clamp(30px, 3vw, 40px); }
-.eq-summary-copy { margin: 12px 0 0; color: #4d5c54; font-size: 18px; }
-.eq-again { min-height: 56px; padding: 12px 30px; margin-top: 20px; border: 2px solid var(--green, #22634c); border-radius: 16px; background: var(--green, #22634c); color: #fff; font-size: 19px; font-weight: 800; cursor: pointer; }
-.eq-again:hover { background: var(--green-dark, #256647); border-color: var(--green-dark, #256647); }
+.eq-stars { margin: 6px 0 0; font-size: 42px; line-height: 1.2; }
+.eq-star { color: #e6dfca; }
+.eq-star.on { color: #e9a23b; animation: eq-star-pop .4s ease backwards; }
+.eq-star.on:nth-child(2) { animation-delay: .14s; }
+.eq-star.on:nth-child(3) { animation-delay: .28s; }
+@keyframes eq-star-pop { 0% { transform: scale(.3); } 60% { transform: scale(1.3); } 100% { transform: scale(1); } }
+.eq-summary h2 { margin: 8px 0 0; font-size: clamp(30px, 3vw, 40px); color: var(--ink, #233e37); }
+.eq-summary-copy { margin: 10px 0 0; color: #4d5c54; font-size: 18px; }
+
+.eq-review { max-width: 620px; margin: 22px auto 0; padding-top: 16px; border-top: 1px dashed var(--line, #dce6d9); text-align: left; }
+.eq-review h3 { margin: 0 0 10px; color: var(--muted, #586b62); font-size: 17px; }
+.eq-review ul { display: flex; flex-direction: column; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.eq-review li { display: flex; align-items: flex-start; gap: 14px; padding: 10px 14px; border: 1px solid #e7eede; border-radius: 14px; background: #fafcf6; }
+.eq-review-emoji { flex: none; font-size: 30px; line-height: 1.3; }
+.eq-review-word { flex: 1; min-width: 0; }
+.eq-review-word b { font-size: 20px; color: var(--ink, #233e37); }
+.eq-review-word i { display: block; margin-top: 1px; color: #77739a; font-size: 14px; font-style: normal; }
+.eq-review-word em { display: block; margin-top: 2px; color: var(--muted, #586b62); font-size: 14px; font-style: normal; line-height: 1.7; }
+.eq-review-links { flex: none; display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+
+.eq-again { min-height: 56px; padding: 12px 30px; margin-top: 22px; border: 2px solid var(--green, #22634c); border-radius: 16px; background: var(--green, #22634c); color: #fff; font-size: 19px; font-weight: 800; cursor: pointer; transition: background .14s ease, border-color .14s ease; }
+.eq-again:hover { background: var(--green-dark, #184b39); border-color: var(--green-dark, #184b39); }
 
 .eq-error { padding: 26px; border: 2px dashed var(--line); border-radius: 16px; color: var(--muted, #586b62); font-size: 17px; }
 .eq-restart { display: inline-block; margin-left: 10px; color: var(--green, #22634c); }
 .eq-source { margin: 22px 2px 0; color: var(--muted, #586b62); font-size: 13px; line-height: 1.7; }
 
+/* 窄屏单列：答题板在前，进度面板收成普通卡片垫底。 */
 @media (max-width: 900px) {
   .eq-layout { grid-template-columns: minmax(0, 1fr); }
+  .eq-board { order: 1; padding: 24px 20px; }
+  .eq-progress-panel { order: 2; position: static; max-height: none; overflow: visible; }
   .eq-options { grid-template-columns: minmax(0, 1fr); }
-  .eq-emoji { font-size: 60px; }
+  .eq-emoji { font-size: 52px; padding: 14px 26px; }
+  .eq-dot { width: 34px; height: 34px; font-size: 15px; }
 }
 @media print {
-  .eq-side, .eq-actions, .eq-say { display: none !important; }
+  .eq-side, .eq-actions, .eq-reveal, .eq-say, .eq-next, .eq-again { display: none !important; }
 }

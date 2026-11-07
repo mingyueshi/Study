@@ -1,6 +1,15 @@
 {% extends 'idioms/layout.html' %}{% load static %}{% block title %}成语典故馆 · 乐学堂{% endblock %}
-{% block idiom_crumb %}<span aria-current="page">成语典故馆</span>{% endblock %}
-{% block idiom_content %}<link rel="stylesheet" href="{% static 'idioms/stories.css' %}">
+{% block idiom_crumb %}{% endblock %}
+{% block idiom_content %}<link rel="stylesheet" href="{% static 'idioms/stories.css' %}?v=5">
+<header class="hall-hero">
+  <div class="hall-hero-copy">
+    <p class="eyebrow">成语 · 有人物故事的典故</p>
+    <h1>成语典故馆</h1>
+    <p class="hall-hero-tag">负荆请罪的荆条、三顾茅庐的雪——每个成语背后都有一个人在做决定。</p>
+    <p class="hall-hero-stats"><span><b>{{ shown|length }}</b> 典故</span><span><b>{{ clues|length }}</b> 人物</span><span><b>{{ books|length }}</b> 典籍</span></p>
+  </div>
+  <div class="hall-hero-demo" aria-hidden="true"><span class="hall-hero-demo-char">典</span></div>
+</header>
 <div class="hall-shell">
   <aside class="hall-sidebar">
     <div class="hall-books"><span class="hall-label">典籍</span>{% for b in books %}<a class="chip{% if b == book %} on{% endif %}" href="?book={{ b|urlencode }}">{% if b == book %}✓ {% endif %}{{ b }}</a>{% endfor %}{% if book or figure_id %}<a class="chip chip-clear" href="{% url 'idiom-stories' %}">✕ 清除</a>{% endif %}</div>
@@ -11,15 +20,6 @@
     </section>{% endif %}
   </aside>
   <main class="hall-main">
-    <header class="hall-hero">
-      <div class="hall-hero-copy">
-        <p class="eyebrow">成语 · 有人物故事的典故</p>
-        <h1>成语典故馆</h1>
-        <p class="hall-hero-tag">负荆请罪的荆条、三顾茅庐的雪——每个成语背后都有一个人在做决定。</p>
-        <p class="hall-hero-stats"><span><b>{{ shown|length }}</b> 典故</span><span><b>{{ clues|length }}</b> 人物</span><span><b>{{ books|length }}</b> 典籍</span></p>
-      </div>
-      <div class="hall-hero-demo" aria-hidden="true"><span class="hall-hero-demo-char">典</span></div>
-    </header>
     <section class="hall-grid">{% for card in shown %}<article class="story-card" id="story-{{ card.id }}">
       <header class="story-head"><div class="story-idiom"><b>{{ card.headword }}</b>{% if card.reading and card.valid %}{% include 'idioms/pinyin.html' %}{% endif %}<span class="story-book">{{ card.source_book }} · {{ card.source_chapter }}</span></div>
       {% if card.valid %}<div class="story-actions"><button class="say-chip" type="button" data-say="{{ card.headword }}。{{ card.meaning }}" aria-label="朗读 {{ card.headword }}">🔊</button><a class="say-chip link" href="{% url 'idiom-entry' card.reading.binding.sense.entry_id %}" aria-label="打开 {{ card.headword }} 词典详情">↗</a></div>{% endif %}</header>

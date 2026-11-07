@@ -1,4 +1,6 @@
 /* 成语配对：双栏连线玩法；hero 与表情猜猜看同族。 */
+/* 标题已在 hero 内，本页不用面包屑，收起空导航。 */
+.idiom-page .idiom-crumbs { display: none; }
 .pairs-hero {
   display: flex;
   flex-wrap: wrap;
@@ -52,9 +54,20 @@
 .pairs-row-def { margin: 4px 0 0; color: var(--muted, #586b62); font-size: 13px; line-height: 1.7; }
 .pairs-side-note { margin: 12px 0 0; color: var(--muted, #586b62); font-size: 14px; line-height: 1.75; }
 
-.pairs-matched-pair { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding: 16px; border-radius: 16px; background: #e6f2dd; }
-.pairs-matched-word { font-size: 22px; font-weight: 900; color: #234b38; }
-.pairs-matched-link { color: var(--green, #22634c); font-weight: 800; }
+/* 朗读按钮：本页样式自足（浅紫药丸，同其他专题页）。 */
+.say-chip { padding: 4px 13px; border: 1.5px solid #ddd3ef; border-radius: 999px; background: #f4edfd; color: #5d5484; font-size: 15px; font-weight: 700; cursor: pointer; transition: border-color .14s ease; }
+.say-chip:hover { border-color: #b9a8e2; }
+
+/* 配对成功横幅：留在棋盘上方，剩余词卡原地继续。 */
+.pairs-banner { margin: 0 0 18px; padding: 16px 20px; border: 1px solid #cfe0c2; border-radius: 16px; background: linear-gradient(120deg, #f2f9ec, #e9f5e0); }
+.pairs-banner-head { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin: 0; }
+.pairs-banner-word { font-size: 24px; font-weight: 900; color: #234b38; }
+.pairs-banner-relation { padding: 3px 12px; border-radius: 999px; background: var(--green, #22634c); color: #fff; font-size: 14px; font-weight: 700; }
+.pairs-banner-defs { display: grid; gap: 6px; margin: 10px 0 0; }
+.pairs-banner-def { margin: 0; color: #4d5c54; font-size: 15px; line-height: 1.8; overflow-wrap: anywhere; }
+.pairs-banner-def b { margin-right: 6px; color: #234b38; font-weight: 800; }
+.pairs-banner-def i { margin-right: 8px; color: #77739a; font-size: 14px; font-style: normal; }
+.pairs-dict { color: var(--green, #22634c); font-size: 15px; font-weight: 700; text-underline-offset: .18em; }
 .pairs-feedback.ok { color: #2f6d4f; }
 
 .pairs-summary { padding: 24px 0 8px; text-align: center; }

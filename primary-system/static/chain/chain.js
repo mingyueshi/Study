@@ -121,6 +121,10 @@
       : '本局结束';
     els.pool.textContent = `词池 ${state.pool_count} 条成语`;
     els.poolNote.textContent = state.pool_count;
+    const heroPool = $('chain-hero-pool');
+    const heroLength = $('chain-hero-length');
+    if (heroPool) heroPool.textContent = state.pool_count;
+    if (heroLength) heroLength.textContent = Math.max(0, state.chain.length - 1);
 
     const head = last.word.slice(0, -1), tailChar = last.word.slice(-1);
     els.currentWord.innerHTML = `${escapeHtml(head)}<span class="tail">${escapeHtml(tailChar)}</span>`;
@@ -215,7 +219,7 @@
       els.hintOptions.innerHTML = (data.hint || []).map((item) => {
         const dictLink = item.public
           ? `<a class="hint-dict" href="/dictionary/${escapeHtml(item.entry_id)}/" target="_blank" rel="noopener noreferrer">词典 ↗</a>` : '';
-        return `<div class="hint-choice"><strong>${escapeHtml(item.word)}</strong>${dictLink}` +
+        return `<div class="hint-choice"><button class="hint-word" type="button" data-say="${escapeHtml(item.word)}" aria-label="朗读 ${escapeHtml(item.word)}"><strong>${escapeHtml(item.word)}</strong></button>${dictLink}` +
         `<span class="hint-pinyin">${escapeHtml(item.pinyin || '')}</span>` +
         `<span class="hint-meaning">${escapeHtml(item.meaning || '暂无释义')}</span>` +
         `<button class="hint-fill" type="button" data-fill="${escapeHtml(item.word)}">填入输入框</button></div>`;

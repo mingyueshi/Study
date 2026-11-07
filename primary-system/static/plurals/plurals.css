@@ -1,17 +1,33 @@
 /* 不规则复数专题：浏览网格 + 「给单数选复数」练习。配色沿用 platform.css 变量。 */
 
-/* ── hero ─────────────────────────────────────────────────────────────── */
-.plural-hero { display: flex; align-items: center; gap: 32px; padding: 34px 0 8px; }
-.plural-hero-copy { flex: 1; }
-.plural-hero-tag { margin: 10px 0 0; max-width: 36em; color: var(--muted); font-size: 20px; }
-.plural-hero-stats { display: flex; gap: 26px; margin: 18px 0 0; font-size: 19px; }
-.plural-hero-stats b { font-size: 30px; color: var(--green); }
+/* ── hero：蓝系渐变卡，配英语家族色 ──────────────────────────────────── */
+.plural-hero {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px 28px;
+  padding: 26px 30px;
+  margin: 18px 0 8px;
+  background:
+    radial-gradient(ellipse at 92% 8%, #ffe9c2, transparent 60%),
+    linear-gradient(120deg, #edf4fc, #e6f0fa);
+  border: 1px solid #d2e3f2;
+  border-radius: 22px;
+}
+.plural-hero-copy { flex: 1 1 320px; min-width: 0; }
+.plural-hero-stats { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0; }
+.plural-hero-stats span { display: inline-flex; align-items: center; gap: 5px; padding: 5px 12px; border-radius: 999px; background: #fff; border: 1px solid #d6e5f0; font-size: 14px; color: #4a5550; }
+.plural-hero-stats b { font-size: 18px; color: var(--green); font-weight: 800; }
 .plural-hero-demo { display: flex; align-items: center; gap: 14px; }
-.plural-demo-card { display: grid; place-items: center; gap: 2px; width: 118px; height: 92px; border-radius: 20px; background: var(--card-tint); color: var(--card-accent); font-size: 30px; font-weight: 800; transform: rotate(-5deg); }
-.plural-demo-card i { font-style: normal; font-size: 14px; font-weight: 700; color: #a4732060; }
-.plural-demo-card.right { background: #e2f0dc; color: #2c7a4b; transform: rotate(4deg); }
-.plural-demo-card.right i { color: #2c7a4b60; }
+.plural-demo-card { display: grid; place-items: center; gap: 2px; width: 118px; height: 92px; border-radius: 20px; background: var(--card-tint); color: var(--card-accent); font-size: 30px; font-weight: 800; transform: rotate(-5deg); box-shadow: 0 3px 0 #cddff0; }
+.plural-demo-card i { font-style: normal; font-size: 14px; font-weight: 700; color: inherit; opacity: .45; }
+.plural-demo-card.right { background: var(--soft, #e8f1df); color: var(--green, #22634c); transform: rotate(4deg); box-shadow: 0 3px 0 #c9ddc5; }
 .plural-demo-arrow { font-size: 30px; color: var(--muted); }
+
+/* 朗读按钮：本页样式自足（浅紫药丸，同其他专题页）。 */
+.say-chip { padding: 4px 13px; border: 1.5px solid #ddd3ef; border-radius: 999px; background: #f4edfd; color: #5d5484; font-size: 15px; font-weight: 700; cursor: pointer; transition: border-color .14s ease; }
+.say-chip:hover { border-color: #b9a8e2; }
 
 /* ── 练一练 ───────────────────────────────────────────────────────────── */
 .plural-practice { max-width: 760px; margin: 26px 0 34px; padding: 24px 28px; border: 2px dashed #b9d3e8; border-radius: 22px; background: #f4f9fd; scroll-margin-top: 24px; }
@@ -20,14 +36,28 @@
 .plural-word span { font-size: 22px; font-weight: 700; color: var(--ink); }
 .plural-word-zh { margin: 2px 0 16px; color: var(--muted); font-size: 16px; }
 .plural-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; }
-.plural-option { padding: 14px 18px; border: 2px solid var(--line); border-radius: 16px; background: var(--white); font-size: 21px; font-weight: 750; cursor: pointer; }
-.plural-option:hover { border-color: #4d96ff; background: #eef4fb; }
+.plural-option { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border: 2px solid var(--line); border-radius: 16px; background: var(--white); font-size: 21px; font-weight: 750; text-align: left; cursor: pointer; transition: transform .14s ease, border-color .14s ease, background .14s ease; }
+.plural-option:hover:enabled { border-color: #4d96ff; background: #eef4fb; transform: translateY(-2px); }
+.plural-option:active:enabled { transform: translateY(0); }
 .plural-option:disabled { cursor: default; opacity: .68; }
+.plural-option-key { display: grid; place-items: center; flex: none; width: 28px; height: 28px; border: 1.5px solid var(--line); border-radius: 9px; background: var(--white); color: var(--muted); font-size: 14px; font-style: normal; font-weight: 750; transition: border-color .14s ease, color .14s ease; }
+.plural-option:hover:enabled .plural-option-key { border-color: #9cc2ec; color: #31627e; }
 .plural-option.right { border-color: #2c7a4b; background: #e2f0dc; opacity: 1; }
+.plural-option.right .plural-option-key { border-color: #2c7a4b; background: #2c7a4b; color: #fff; }
+.plural-option.right::after { content: "✓"; margin-left: auto; color: #2c7a4b; font-size: 22px; font-weight: 900; }
 .plural-option.wrong { border-color: #b4483a; background: #fde8e4; }
+.plural-option.wrong span { text-decoration: line-through; }
+.plural-option.wrong .plural-option-key { border-color: #d9a49d; color: #8f3a2f; }
+.plural-feedback { margin: 12px 0 0; font-size: 17px; font-weight: 700; }
+.plural-feedback:empty { display: none; }
+.plural-feedback.ok { color: #2c7a4b; }
+.plural-feedback.bad { color: #b4483a; }
 .plural-score { margin: 14px 0 0; color: var(--muted); font-size: 17px; }
 .plural-score b { color: var(--green); font-size: 22px; }
-.plural-actions { margin-top: 10px; }
+.plural-actions { margin-top: 12px; }
+/* 答完一题，「换一题」升为主行动引导继续。 */
+.plural-practice.done .plural-actions .button { border-color: #2c7a4b; background: #2c7a4b; color: #fff; }
+.plural-practice.done .plural-actions .button:hover { background: #235f3b; border-color: #235f3b; color: #fff; }
 
 /* ── 浏览网格 ─────────────────────────────────────────────────────────── */
 .plural-shell { min-width: 0; }
@@ -42,9 +72,14 @@
 .plural-group { margin-bottom: 30px; }
 .plural-group[hidden] { display: none; }
 .plural-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr)); gap: 14px; }
-.plural-card { position: relative; padding: 16px 18px; border: 1px solid var(--line); border-top: 4px solid #4d96ff; border-radius: 18px; background: var(--white); box-shadow: 0 3px 0 #233e3704; }
+.plural-card { position: relative; padding: 16px 18px; border: 1px solid var(--line); border-top: 4px solid #4d96ff; border-radius: 18px; background: var(--white); box-shadow: 0 3px 0 #233e3704; transition: transform .14s ease, box-shadow .14s ease, border-color .14s ease; }
+.plural-card:hover, .plural-card:focus-within { transform: translateY(-3px); border-color: #cfe0f2; box-shadow: 0 6px 14px #233e3714; }
 .plural-tier { position: absolute; top: 10px; right: 12px; padding: 1px 10px; border-radius: 999px; background: #f0e4c3; color: #655638; font-size: 12px; font-weight: 800; }
 .plural-pair { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px; margin: 0; font-size: 25px; font-weight: 800; }
+/* 单词本身可点读：淡虚线下摆提示，悬停点亮。 */
+.plural-say { display: inline-flex; padding: 0 5px; margin: 0 -5px; border: 0; border-radius: 10px; background: none; font: inherit; color: inherit; cursor: pointer; text-decoration: underline dotted #9cc2ec; text-decoration-thickness: 2px; text-underline-offset: .18em; transition: background .14s ease, text-decoration-color .14s ease; }
+.plural-say b { font: inherit; }
+.plural-say:hover { background: #eef4fb; text-decoration-color: #4d96ff; }
 .plural-singular { color: var(--ink); }
 .plural-arrow { color: #4d96ff; font-size: 20px; }
 .plural-plural { color: #2c7a4b; }

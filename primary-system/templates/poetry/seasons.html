@@ -1,12 +1,18 @@
 {% extends 'base.html' %}{% load static %}
 {% block title %}诗词四季 · 乐学堂{% endblock %}
 {% block content %}
-<link rel="stylesheet" href="{% static 'poetry/seasons.css' %}">
+<link rel="stylesheet" href="{% static 'poetry/seasons.css' %}?v=2">
 <div class="fh-topline"><a class="back" href="{% url 'poetry-index' %}">← 古诗文</a><span>跟着季节读诗</span></div>
 <header class="seasons-hero">
-  <div><p class="eyebrow">古诗词 · 四季与情感</p><h1>诗词四季</h1><p>春风、夏蝉、秋月、冬雪——背过的诗原来都带着季节。按季节翻，也按心情找。</p></div>
+  <div class="seasons-hero-copy">
+    <p class="eyebrow">古诗词 · 四季与情感</p>
+    <h1>诗词四季</h1>
+    <p class="seasons-hero-tag">春风、夏蝉、秋月、冬雪——背过的诗原来都带着季节。按季节翻，也按心情找。</p>
+    <p class="seasons-hero-stats"><span><b>4</b> 季</span><span><b>{{ emotion_groups|length }}</b> 组题材</span><span><b>{{ emotion_total }}</b> 首情感诗</span></p>
+  </div>
   <div class="seasons-dynasty" role="group" aria-label="按朝代筛选">
-    {% for code, label in dynasty_labels.items %}<a class="chip{% if dynasty == code %} on{% endif %}" href="?dynasty={{ code }}">{{ label }}</a>{% endfor %}
+    <span class="seasons-dynasty-label">朝代</span>
+    <span class="seasons-dynasty-chips">{% for code, label in dynasty_labels.items %}<a class="chip{% if dynasty == code %} on{% endif %}" href="?dynasty={{ code }}">{{ label }}</a>{% endfor %}</span>
   </div>
 </header>
 <section class="seasons-grid" aria-label="按季节浏览">
@@ -22,7 +28,7 @@
 </section>
 <section class="seasons-emotions" aria-label="按情感与题材浏览">
   <h2>按情感与题材</h2>
-  <p class="seasons-emotions-note">送别、思乡、边塞、咏物……这些分组按关键词自动归档，个别诗归错了也别惊讶。</p>
+  <p class="seasons-emotions-note">按关键词自动归档，个别诗归错了也别惊讶。</p>
   {% for group in emotion_groups %}
   <div class="seasons-group">
     <div class="seasons-group-head"><h3>{{ group.title }}</h3><p>{{ group.description }}</p></div>
@@ -30,5 +36,4 @@
   </div>
   {% endfor %}
 </section>
-<p class="seasons-note">共收录情感与题材诗 {{ emotion_total }} 首；季节与题材按关键词自动归档，不等于逐句审校。</p>
 {% endblock %}

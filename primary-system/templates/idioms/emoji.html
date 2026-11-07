@@ -1,21 +1,20 @@
 {% extends 'idioms/layout.html' %}{% load static %}{% block title %}成语表情猜猜看 · 乐学堂{% endblock %}
-{% block idiom_crumb %}<span aria-current="page">成语表情猜猜看</span>{% endblock %}
-{% block idiom_content %}<link rel="stylesheet" href="{% static 'idioms/emoji.css' %}?v=2"><script src="{% static 'speech.js' %}" defer></script><script src="{% static 'tts.js' %}" defer></script><script src="{% static 'idioms/emoji.js' %}" defer></script>
+{% block idiom_crumb %}{% endblock %}
+{% block idiom_content %}<link rel="stylesheet" href="{% static 'idioms/emoji.css' %}?v=4"><script src="{% static 'idioms/emoji.js' %}" defer></script>
 {{ state|json_script:'emoji-state' }}
 <header class="eq-hero">
   <div class="eq-hero-copy">
     <p class="eyebrow">语文 · 看表情猜一猜</p>
     <h1>成语表情猜猜看</h1>
-    <p class="eq-hero-tag">emoji 是一幅小画。看懂了就点它——一轮八题，猜对一个收一个。</p>
-    <p class="eq-hero-stats"><span><b>80</b> 成语</span><span><b>4</b> 选 1</span><span><b>8</b> 题一轮</span></p>
+    <p class="eq-hero-stats"><span><b>{{ state.total }}</b> 成语</span><span><b>4</b> 选 1</span><span><b>8</b> 题一轮</span></p>
   </div>
   <div class="eq-hero-demo" aria-hidden="true">
     <span class="ehd">🐸</span><span class="ehd">🕳️</span><span class="ehd eq-hd-mascot">❓</span><span class="ehd">🎉</span>
   </div>
 </header>
 <div class="eq-layout">
-  <aside class="eq-side eq-progress-panel"><h2>本局进度</h2><div class="eq-dots" id="eq-dots"></div><p class="eq-side-note">答对 <b id="eq-correct">0</b> 题 · 揭示 <span id="eq-revealed">0</span> 次</p><div id="eq-history" class="eq-history"></div><p class="eq-side-note">页面临时练习，刷新重开；一局猜满会计入你的学习足迹。</p></aside>
+  <aside class="eq-side eq-progress-panel"><h2>本局进度</h2><div class="eq-dots" id="eq-dots"></div><p class="eq-side-note">答对 <b id="eq-correct">0</b> 题 · 揭示 <span id="eq-revealed">0</span> 次</p><div id="eq-history" class="eq-history"></div><p class="eq-side-note">刷新重开；猜满一局计入学习足迹。键盘 1~4 作答，Enter 继续。</p></aside>
   <section class="eq-board" id="eq-board" aria-live="polite"></section>
 </div>
-<p class="eq-source">成语拼音与释义实时取自词库生效记录（chinese-xinhua-idioms）；emoji 映射是编辑内容，见 <a href="https://github.com/mingyueshi/Study">仓库说明</a>。</p>
+<p class="eq-source">拼音与释义取自词库生效记录 · emoji 映射见<a href="https://github.com/mingyueshi/Study">仓库说明</a></p>
 {% endblock %}

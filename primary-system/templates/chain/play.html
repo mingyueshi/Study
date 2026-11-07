@@ -1,13 +1,15 @@
 {% extends 'base.html' %}{% load static %}{% block title %}成语接龙 · 乐学堂{% endblock %}
-{% block content %}<link rel="stylesheet" href="{% static 'chain.css' %}"><script src="{% static 'speech.js' %}" defer></script><script src="{% static 'tts.js' %}" defer></script>{{ state|json_script:"chain-state" }}
-<div class="chain-heading"><div><nav class="chain-modes" aria-label="接龙模式"><a href="{% url 'chain' %}" {% if state.mode != 'duel' %}class="on" aria-current="page"{% endif %}>单人 · 和小龙</a><a href="{% url 'chain' %}?mode=duel" {% if state.mode == 'duel' %}class="on" aria-current="page"{% endif %}>双人 · 家长对决</a></nav><p class="chain-eyebrow">语文小游戏 · 不限时</p><h1>把成语接成一条龙</h1><p id="chain-subtitle">首尾同字，不重复，和小龙轮流看看能接多长。</p></div><button class="chain-button secondary" type="button" id="chain-restart-btn">↻ 换个开头</button></div>
+{% block content %}<link rel="stylesheet" href="{% static 'chain.css' %}?v=4"><script src="{% static 'speech.js' %}" defer></script><script src="{% static 'tts.js' %}" defer></script>{{ state|json_script:"chain-state" }}
+<header class="chain-heading"><div class="chain-heading-copy"><p class="chain-eyebrow">语文小游戏 · 不限时</p><h1>把成语接成一条龙</h1><p id="chain-subtitle">首尾同字，不重复，和小龙轮流看看能接多长。</p><p class="chain-hero-stats"><span><b id="chain-hero-pool">—</b> 条成语</span><span><b id="chain-hero-length">0</b> 手已接</span></p></div><button class="chain-button secondary" type="button" id="chain-restart-btn">↻ 换个开头</button></header>
 <div class="chain-layout">
   <section class="game-panel panel" aria-label="接龙游戏">
     <div class="round-meta"><span class="turn-label" id="chain-turn">轮到你啦</span><span id="chain-pool"></span></div>
     <section class="start-choice" id="chain-start-choice" aria-labelledby="chain-start-title" hidden>
-      <h2 id="chain-start-title">这局谁先接？</h2>
-      <p>系统先出一个开局成语，选好先手就轮流接龙：谁接不上，对方赢下这一局。</p>
-      <div class="start-buttons"><button class="chain-button primary" type="button" data-first-player="p1">孩子先手</button><button class="chain-button primary" type="button" data-first-player="p2">家长先手</button></div>
+      <div class="start-copy">
+        <h2 id="chain-start-title">这局谁先接？</h2>
+        <p>系统先出一个开局成语，选好先手就轮流接龙：谁接不上，对方赢下这一局。</p>
+      </div>
+      <div class="start-buttons"><button class="chain-button primary" type="button" data-first-player="p1">👦 孩子先手</button><button class="chain-button primary" type="button" data-first-player="p2">👪 家长先手</button></div>
     </section>
     <div id="chain-round-area">
     <div class="current-row">
@@ -32,6 +34,7 @@
     </div>
   </section>
   <aside class="chain-aside">
+    <nav class="chain-modes" aria-label="接龙模式"><a href="{% url 'chain' %}" {% if state.mode != 'duel' %}class="on" aria-current="page"{% endif %}>单人 · 和小龙</a><a href="{% url 'chain' %}?mode=duel" {% if state.mode == 'duel' %}class="on" aria-current="page"{% endif %}>双人 · 家长对决</a></nav>
     <section class="panel record-panel">
       <h2>🌱 接龙记录</h2>
       <div class="round-score" id="chain-solo-score"><strong id="chain-score">0</strong><span>本轮得分</span></div>
@@ -46,7 +49,7 @@
       <ol id="chain-rules-solo"><li>下个成语的第一个字，要和上个成语的最后一个字相同。</li><li>一轮中，每个成语只能用一次。</li><li>小龙接不上时你赢；你接不上时本局结束。</li></ol>
       <ol id="chain-rules-duel" hidden><li>和孩子轮流接：下个成语的第一个字，要和上个成语的最后一个字相同。</li><li>一轮中，每个成语只能用一次。</li><li>谁接不上，对方赢下这一局；提示双方都能用，每次 −5 分从轮到的一方扣。</li></ol>
       <div class="rule-example"><span>学以致<b>用</b></span><span aria-hidden="true">↓</span><span><b>用</b>之不竭</span></div>
-      <p class="dictionary-note">取词来自统一词库的生效版本；同音不同字不算接上，未收录的成语换一个再试。词池 <span id="chain-pool-note"></span> 条。</p>
+      <p class="dictionary-note">同音不同字不算接上；没收录的成语换一个再试。词池 <span id="chain-pool-note"></span> 条。</p>
     </section>
     <section class="panel history-panel"><h2>最近对局</h2><ul class="chain-history" id="chain-history"></ul></section>
   </aside>
@@ -55,5 +58,5 @@
     <ol class="trail-list" id="chain-trail" reversed aria-label="接龙轨迹，从最新到最早"></ol>
   </section>
 </div>
-<script src="{% static 'chain/chain.js' %}" defer></script>
+<script src="{% static 'chain/chain.js' %}?v=2" defer></script>
 {% endblock %}

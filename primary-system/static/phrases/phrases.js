@@ -1,20 +1,24 @@
 /* 日常用语：句式/话题双视图渲染、筛选搜索 + 「看中文选英文」判分上报。
-   前端判分只做即时展示；每题上报一次，服务端按确定性选项集复核后落学习
-   记录（对错都记），失败不打扰练习。 */
+   前端判分只做即时展示；每题只答一次，答错即揭示正确答案并锁定，上报一次
+   由服务端按确定性选项集复核后落学习记录（对错都记），失败不打扰练习。
+   键盘：数字 1~4 作答，答完 Enter 换一题。 */
 'use strict';
 
 (() => {
   const escapeHtml = (text) => String(text).replace(/[&<>"']/g, (ch) => ({
     '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
   }[ch]));
-  const sayChip = (text) => `<button class="say-chip" type="button" data-say="${escapeHtml(text)}" aria-label="朗读 ${escapeHtml(text)}">🔊</button>`;
+  const sayChip = (text, label) => `<button class="say-chip" type="button" data-say="${escapeHtml(text)}" aria-label="朗读 ${escapeHtml(label || text)}">🔊</button>`;
 
   /* ── 练习：判分 + 上报 + 计分 ─────────────────────────────────────── */
   const round = document.querySelector('[data-phrases-round]');
   if (round) {
     const options = Array.from(round.querySelectorAll('[data-phrases-option]'));
+    const feedback = round.querySelector('[data-phrases-feedback]');
+    const nextLink = round.querySelector('.phrase-actions a');
     const STORE_KEY = 'phrases_stats_v1';
     let stats = { streak: 0, correct: 0, asked: 0 };
+    let answered = false;
     try {
       stats = { ...stats, ...JSON.parse(localStorage.getItem(STORE_KEY) || '{}') };
     } catch (e) { /* 使用默认 */ }
@@ -40,25 +44,53 @@
       }).catch(() => {});
     };
 
+    const choose = (option) => {
+      if (answered) return;
+      answered = true;
+      const ok = option.dataset.en === round.dataset.answer;
+      stats.asked += 1;
+      if (ok) {
+        stats.correct += 1;
+        stats.streak += 1;
+        option.classList.add('right');
+        feedback.innerHTML = `🎉 答对啦！跟读一遍：${sayChip(round.dataset.answer)}`;
+        feedback.classList.add('ok');
+      } else {
+        stats.streak = 0;
+        option.classList.add('wrong');
+        options.forEach((button) => {
+          if (button.dataset.en === round.dataset.answer) button.classList.add('right');
+        });
+        feedback.innerHTML = `正确答案是 ${sayChip(round.dataset.answer)}，跟读记住它。`;
+        feedback.classList.add('bad');
+      }
+      options.forEach((button) => { button.disabled = true; });
+      round.classList.add('done');
+      save();
+      render();
+      report(option.dataset.en);
+    };
+
     options.forEach((option) => {
-      option.addEventListener('click', () => {
-        if (options.every((button) => button.disabled)) return;
-        const ok = option.dataset.en === round.dataset.answer;
-        stats.asked += 1;
-        if (ok) {
-          stats.correct += 1;
-          stats.streak += 1;
-          option.classList.add('right');
-          options.forEach((button) => { button.disabled = true; });
-        } else {
-          stats.streak = 0;
-          option.classList.add('wrong');
-          option.disabled = true;
+      option.addEventListener('click', () => choose(option));
+    });
+
+    /* 键盘：输入框里不抢按键；数字 1~4 作答，答完 Enter 换一题。 */
+    document.addEventListener('keydown', (event) => {
+      if (event.defaultPrevented || event.ctrlKey || event.metaKey || event.altKey) return;
+      if (event.target.closest?.('input, textarea, select')) return;
+      if (event.key === 'Enter') {
+        if (answered && nextLink) {
+          event.preventDefault();
+          nextLink.click();
         }
-        save();
-        render();
-        report(option.dataset.en);
-      });
+        return;
+      }
+      if (answered) return;
+      const index = ['1', '2', '3', '4'].indexOf(event.key);
+      if (index < 0 || index >= options.length) return;
+      event.preventDefault();
+      choose(options[index]);
     });
   }
 
@@ -74,6 +106,7 @@
   let activeChip = null;
 
   const card = (item) => `<article class="phrase-card${item.tier === 'extended' ? ' collocation' : ''}">
+    ${item.tier === 'extended' ? '<span class="phrase-tier">搭配</span>' : ''}
     <p class="phrase-en">${escapeHtml(item.en)}${sayChip(item.en)}</p>
     <p class="phrase-zh">${escapeHtml(item.zh)}</p>
   </article>`;

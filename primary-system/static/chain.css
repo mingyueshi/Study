@@ -1,10 +1,28 @@
 /* 成语接龙：对局板／侧栏／龙迹三区布局，设计语言对齐 legacy chain.css。 */
 :root { --chain: #157d73; --chain-soft: #eaf7f2; }
-.chain-heading { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-bottom: 24px; }
+/* ── hero：青绿渐变卡，接龙主题色 ────────────────────────────────────── */
+.chain-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px 28px;
+  padding: 24px 28px;
+  margin: 18px 0 20px;
+  background:
+    radial-gradient(ellipse at 92% 8%, #fff3d6, transparent 60%),
+    linear-gradient(120deg, #ecf7f1, #e1f1e8);
+  border: 1px solid #cfe8db;
+  border-radius: 22px;
+}
+.chain-heading-copy { flex: 1 1 320px; min-width: 0; }
+.chain-heading .chain-button { flex: 0 0 auto; }
 .chain-eyebrow { color: var(--chain); font-size: 13px; font-weight: 800; letter-spacing: 2px; margin-bottom: 6px; }
 .chain-heading h1 { font-size: clamp(26px, 2.2vw, 36px); font-weight: 900; }
 .chain-heading p:last-child { color: var(--muted); font-size: 14px; margin-top: 6px; }
-.chain-button { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; min-height: 46px; padding: 11px 18px; border: 1px solid transparent; border-radius: 13px; font-size: 16px; font-weight: 800; white-space: nowrap; cursor: pointer; }
+.chain-hero-stats { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 0; }
+.chain-hero-stats span { display: inline-flex; align-items: center; gap: 5px; padding: 4px 12px; border-radius: 999px; background: #fff; border: 1px solid #cfe8db; font-size: 14px; color: #4a5550; }
+.chain-hero-stats b { color: var(--chain); font-weight: 800; }
+.chain-button { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; min-height: 46px; padding: 11px 18px; border: 1px solid transparent; border-radius: 13px; font-size: 16px; font-weight: 800; white-space: nowrap; cursor: pointer; transition: background .14s ease, border-color .14s ease, transform .14s ease; }
 .chain-button.primary { color: #fff; background: var(--chain); box-shadow: 0 3px 0 #0d5e57; }
 .chain-button.primary:hover { background: #106d64; }
 .chain-button.secondary { background: #fff; border-color: var(--line); }
@@ -46,9 +64,12 @@ button:disabled { cursor: default; opacity: .5; }
 .hint-heading button { border: none; background: none; padding: 6px; color: #8b7956; font-size: 13px; cursor: pointer; }
 .hint-panel > p { color: #8b7956; font-size: 14px; margin: 6px 0 14px; }
 .hint-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 190px), 1fr)); gap: 10px; max-height: 420px; overflow-y: auto; padding-right: 4px; }
-.hint-choice { display: flex; flex-direction: column; gap: 7px; min-width: 0; border: 1px solid #e9dfca; border-radius: 12px; background: #fff; padding: 14px; text-align: left; }
-.hint-choice:hover { border-color: #ba9c58; }
-.hint-choice strong { font-size: 18px; }
+.hint-choice { display: flex; flex-direction: column; gap: 7px; min-width: 0; border: 1px solid #e9dfca; border-radius: 12px; background: #fff; padding: 14px; text-align: left; transition: transform .14s ease, border-color .14s ease, box-shadow .14s ease; }
+.hint-choice:hover, .hint-choice:focus-within { border-color: #ba9c58; transform: translateY(-2px); box-shadow: 0 4px 10px #233e3712; }
+/* 提示词本身可点读（呼应面板说明「点成语听读音」）。 */
+.hint-word { display: inline-flex; align-self: flex-start; max-width: 100%; margin: -2px -4px; padding: 2px 4px; border: 0; border-radius: 9px; background: none; font: inherit; color: inherit; cursor: pointer; text-align: left; transition: background .14s ease; }
+.hint-word strong { font-size: 18px; }
+.hint-word:hover { background: #f6efdd; }
 .hint-choice .hint-pinyin { color: #77739a; font-size: 12px; }
 .hint-choice .hint-meaning { color: #717589; font-size: 14px; line-height: 1.7; overflow-wrap: anywhere; }
 .hint-fill { color: var(--chain); font-size: 12px; font-weight: 700; margin-top: auto; border: none; background: none; padding: 0; text-align: left; cursor: pointer; }
@@ -78,7 +99,8 @@ button:disabled { cursor: default; opacity: .5; }
 .trail-heading h2 { font-size: 19px; }
 .trail-heading p { color: var(--muted); font-size: 14px; margin-top: 4px; }
 .trail-list { list-style: none; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr)); gap: 12px; }
-.trail-entry { min-width: 0; padding: 16px; background: #f8fafc; border: 1px solid var(--line); border-radius: 14px; }
+.trail-entry { min-width: 0; padding: 16px; background: #f8fafc; border: 1px solid var(--line); border-radius: 14px; transition: transform .14s ease, box-shadow .14s ease, border-color .14s ease; }
+.trail-entry:hover { transform: translateY(-2px); border-color: #cfe0d8; box-shadow: 0 4px 10px #233e3710; }
 .trail-entry.latest { border-color: #abd7c8; background: #f2faf6; }
 .entry-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 8px; color: #8b94a5; font-size: 11px; }
 .entry-player { color: var(--chain); }
@@ -110,16 +132,25 @@ button:disabled { cursor: default; opacity: .5; }
 a.trail-word { text-decoration: none; }
 a.trail-word:hover .tail { text-decoration: underline; }
 
-/* 模式切换与家长对决 */
-.chain-modes { display: flex; gap: 8px; margin-bottom: 12px; }
-.chain-modes a { display: inline-flex; align-items: center; min-height: 38px; padding: 6px 16px; border: 1px solid var(--line); border-radius: 999px; background: #fff; color: var(--muted); font-size: 15px; font-weight: 700; }
-.chain-modes a.on { border-color: var(--chain); background: var(--chain-soft); color: var(--chain); }
+/* 模式切换：侧栏顶部分段选择器（记录面板上方）。 */
+.chain-modes { display: flex; gap: 4px; padding: 6px; background: #fff; border: 1px solid var(--line); border-radius: 16px; }
+.chain-modes a { flex: 1; display: inline-flex; justify-content: center; align-items: center; min-height: 42px; padding: 6px 10px; border-radius: 999px; background: none; color: var(--muted); font-size: 15px; font-weight: 750; text-align: center; transition: background .14s ease, color .14s ease; }
+.chain-modes a.on { background: var(--chain-soft); color: var(--chain); font-weight: 800; }
 .chain-modes a:hover { color: var(--chain); }
 
-.start-choice { display: flex; flex-direction: column; gap: 14px; padding: 34px 10px; text-align: center; }
+/* 先手选择：说明在左，大按钮在右一眼可见。 */
+.start-choice { display: flex; align-items: center; justify-content: space-between; gap: 18px 28px; padding: 26px 30px; background: linear-gradient(120deg, #f4fbf7, #e9f5ef); border: 1px solid #cfe8db; border-radius: 18px; }
+.start-copy { flex: 1 1 320px; min-width: 0; }
 .start-choice h2 { margin: 0; }
-.start-choice p { margin: 0 auto; max-width: 34em; color: var(--muted); }
-.start-buttons { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+.start-choice p { margin: 8px 0 0; color: var(--muted); line-height: 1.8; }
+.start-buttons { flex: 0 0 auto; display: flex; flex-direction: column; gap: 12px; }
+.start-buttons .chain-button { min-height: 62px; min-width: 200px; padding: 14px 32px; font-size: 20px; box-shadow: 0 4px 0 #0d5e57; }
+.start-buttons .chain-button:active { transform: translateY(2px); }
+@media (max-width: 720px) {
+  .start-choice { flex-direction: column; align-items: stretch; text-align: center; padding: 20px 18px; }
+  .start-buttons { flex-direction: row; }
+  .start-buttons .chain-button { flex: 1; min-width: 0; }
+}
 
 .round-score.duel-score { display: flex; gap: 34px; }
 .round-score.duel-score div { display: flex; align-items: baseline; gap: 10px; }
