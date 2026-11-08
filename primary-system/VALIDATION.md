@@ -546,3 +546,16 @@ SQLite相关38项（37通过／1PG跳过）、PG批次10/10含并发首导、前
   textbookbook 分片与 manifest 变化。
 - 全量 `make test`：589 项通过（skipped 14）。
 - 未运行 PostgreSQL 专项；未提交→随本次提交入库。
+
+## 2026-11-08：英语阅读器套学习页皮肤
+
+- 结论先行：英语教材保留 DB 编排（306 条 ContentEntryLink 词义固定绑定 +
+  专用词卡/气泡渲染分支与内容形态匹配），不做文件迁移；视觉统一走皮肤——
+  新增 `static/english-study.css`（.study-skin 作用域：重定 --green/--line 等
+  变量到学习页 english 主题色 + 卡片实色投影），不改结构不复制组件。
+- `collection.html` 与 `item.html` 的英语分支套 `<div class="study-skin">`
+  包裹层并加载皮肤（english.css 本体不动，仍 ?v=2）。
+- 全量 `make test`：589 项通过（skipped 14）。8012 服务器 DOM/截图目检：
+  册页与课文 tab 暖底 + 英语绿强调生效（--green 解析 #5e9f7a、词卡
+  0 3px 0 投影），英语内容页 skin 挂载确认。
+- 未运行 PostgreSQL 专项；未提交→随本次提交入库。

@@ -1,0 +1,50 @@
+/* 英语教材阅读的学习页皮肤：给英语教材册页与内容页套暖色学习页视觉。
+   不改结构、不复制组件——platform 组件与 english.css 在 .study-skin 作用域内
+   自动取到学习页配色（--green/--line 等变量重定 scope），本文件只补
+   卡片质感与少量组件覆写。仅英语教材册页（collection）与英语内容页加载。 */
+.study-skin {
+  --green: #5e9f7a;   /* 学习页 english 主题强调色（对齐 study-theme） */
+  --line: #e9e2d6;
+  --soft: #ddf1e3;
+  --subject-accent: #5e9f7a;
+  --subject-soft: #ddf1e3;
+  --subject-line: #b7d9c2;
+  --subject-ink: #376b4e;
+  color: #293b4a;
+  font-size: 18px;
+  line-height: 1.75;
+}
+/* 学习页底色铺满平台内容区 */
+body:has(.study-skin) { background: #fffaf2; }
+body:has(.study-skin) .shell { padding-bottom: 40px; }
+
+/* 卡片质感对齐学习页：暖边框 + 实色投影 */
+.study-skin #english-cards .wcard,
+.study-skin .dialogue-card {
+  border-color: var(--subject-line);
+  box-shadow: 0 3px 0 var(--subject-line);
+  background: #fffefb;
+}
+.study-skin #english-cards .say { border: 1px solid var(--subject-line); background: var(--subject-soft); }
+.study-skin #english-cards .say:hover { background: #cde9d8; }
+.study-skin #english-cards .seclabel { background: var(--subject-soft); color: var(--subject-ink); }
+.study-skin #english-cards .card-link:hover { color: var(--subject-ink); }
+
+/* 单元目录卡：调色基底从冷白转暖 */
+.study-skin .unit-nav .unit-card { border-color: color-mix(in srgb, var(--c, #609cbd) 22%, #fffdf6); background: color-mix(in srgb, var(--c, #609cbd) 8%, #fffdf6); }
+.study-skin .unit-nav .unit-card:hover { border-color: color-mix(in srgb, var(--c, #609cbd) 55%, #fffdf6); background: color-mix(in srgb, var(--c, #609cbd) 14%, #fffdf6); }
+.study-skin .unit-nav .unit-card[aria-current="page"] { border-color: color-mix(in srgb, var(--c, #609cbd) 65%, #fffdf6); background: color-mix(in srgb, var(--c, #609cbd) 18%, #fffdf6); }
+
+/* 单词 / 课文 tab */
+.study-skin .english-tabs .tab { border-color: var(--subject-line); background: #fffefb; }
+.study-skin .english-tabs .tab:hover { border-color: var(--subject-accent); }
+.study-skin .english-tabs .tab.on { border-color: var(--subject-ink); background: var(--subject-ink); }
+.study-skin .english-tabs .tab.on i { color: #d8ecdf; }
+
+/* 课文气泡 */
+.study-skin .bubble { border-color: var(--subject-line); background: #fffaf0; }
+.study-skin .bubble:hover { border-color: var(--subject-accent); }
+
+/* 内容页（学习页 ↗）：reader 卡与概览条取暖 */
+.study-skin .reader { background: #fffefb; }
+.study-skin .reader-summary { background: var(--subject-soft); color: var(--subject-ink); }
