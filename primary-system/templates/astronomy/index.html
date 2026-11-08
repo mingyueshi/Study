@@ -1,9 +1,11 @@
 {% extends 'reference_library/layout.html' %}
-{% load reference_ui %}
+{% load static reference_ui %}
 {% block title %}天文星表 · 乐学堂{% endblock %}
 {% block reference_content %}
+<link rel="stylesheet" href="{% static 'astronomy/astronomy.css' %}?v=2">
 {% include 'reference_library/breadcrumbs.html' with subject_title='天文星表' %}
-<header class="ref-header"><div><p class="ref-kicker">在星表中认识天体</p>
+<div class="astro-page">
+<header class="ref-header astro-hero"><div><p class="ref-kicker">在星表中认识天体</p>
 <h1>天文星表</h1><p>按名称、HYG编号或星座查找。星表坐标参考J2000.0，不是实时星空。</p></div>
 </header>
 <form method="get" class="ref-toolbar" role="search" aria-label="查找天体">
@@ -29,7 +31,7 @@
 <td><a href="{% url 'astronomy-detail' record.catalogue_id %}{% reference_query %}">{{ record.display_name }}</a><span class="ref-meta">{{ record.proper_name }}{% if record.designation %} · {{ record.designation }}{% endif %}</span>
 </td>
 <td>{{ record.catalogue_id }}</td>
-<td>{{ record.constellation_zh }}<span class="ref-meta">{{ record.constellation|default:'来源未提供' }}</span>
+<td>{% if record.constellation_zh == '未提供／中文名暂缺' %}<span class="ref-meta">未提供／中文名暂缺</span>{% else %}<span class="astro-const">{{ record.constellation_zh }}</span><span class="ref-meta">{{ record.constellation|default:'来源未提供' }}</span>{% endif %}
 </td>
 <td>{% if record.distance_unknown %}未知{% else %}{{ record.distance_pc }}{% endif %}</td>
 </tr>{% endfor %}</tbody></table></div>{% else %}<div class="ref-empty">
@@ -38,4 +40,5 @@
 <details class="ref-source">
 <summary>坐标、距离与目录说明</summary><p>HYG 4.2共{{ total }}条目录记录，具名子集499行；名称相同的分量仍是不同记录。赤经为小时、赤纬为度，坐标参考J2000.0。距离未知表示来源未提供可用距离，不作0；HYG编号0是太阳。没有常用中文名时保留编号与原名，不虚构中文专名。</p>
 </details>
+</div>
 {% endblock %}

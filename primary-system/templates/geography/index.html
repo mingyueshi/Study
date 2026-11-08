@@ -1,9 +1,11 @@
 {% extends 'reference_library/layout.html' %}
-{% load reference_ui %}
+{% load static reference_ui %}
 {% block title %}国家与地区 · 乐学堂{% endblock %}
 {% block reference_content %}
+<link rel="stylesheet" href="{% static 'geography/geography.css' %}?v=1">
 {% include 'reference_library/breadcrumbs.html' with subject_title='国家与地区' %}
-<header class="ref-header"><div><p class="ref-kicker">认识世界上的地方</p>
+<div class="geo-page">
+<header class="ref-header geo-hero"><div><p class="ref-kicker">认识世界上的地方</p>
 <h1>国家与地区</h1><p>查找所属区域、首都、语言和货币。来源包含国家、地区与属地。</p></div>
 </header>
 <form method="get" class="ref-toolbar" role="search" aria-label="查找国家与地区">
@@ -22,4 +24,5 @@
 <details class="ref-source">
 <summary>来源分类与收录说明</summary><p>共{{ total|default_if_none:'0' }}条来源记录，包括国家、地区与属地，不是“250个国家”。来源名称和事实不等于中国教材审定口径；少数中文名暂缺时保留原名。来源自定义代码不能全部视作正式ISO代码。</p>
 </details>
+</div>
 {% endblock %}

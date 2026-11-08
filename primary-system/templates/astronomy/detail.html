@@ -1,10 +1,12 @@
 {% extends 'reference_library/layout.html' %}
-{% load reference_ui %}
+{% load static reference_ui %}
 {% block title %}{{ record.display_name }} · 天文星表{% endblock %}
 {% block reference_content %}
+<link rel="stylesheet" href="{% static 'astronomy/astronomy.css' %}?v=2">
 {% url 'astronomy-index' as list_url %}
 {% include 'reference_library/breadcrumbs.html' with subject_title='天文星表' subject_url=list_url current_title=record.display_name %}
-<header class="ref-header"><div><p class="ref-kicker">HYG {{ record.catalogue_id }} · {{ record.object_kind }}</p>
+<div class="astro-page">
+<header class="ref-header astro-hero"><div><p class="ref-kicker">HYG {{ record.catalogue_id }} · {{ record.object_kind }}</p>
 <h1>{{ record.display_name }}</h1><p>原名：{{ record.proper_name|default:'未提供' }} · 标识：{{ record.designation|default:'未提供' }}</p></div>
 </header>
 <div class="ref-detail-grid">
@@ -43,4 +45,5 @@
 <dl class="ref-facts">{% for key,value in record.raw.items %}<dt>{{ key }}</dt>
 <dd>{{ value|default_if_none:'来源未提供' }}</dd>{% endfor %}</dl>
 </details>
+</div>
 {% endblock %}

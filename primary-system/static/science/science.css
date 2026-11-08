@@ -1,0 +1,39 @@
+/* 化学元素页专用样式，仅由 templates/science/ 两个页面引入；不改动共享的 reference.css。 */
+
+/* hero：渐变标题卡同族（右上暖黄、左下科学绿），落在浅绿底上。 */
+.sci-hero {
+  padding: 22px 28px;
+  border: 1px solid #c6dcc4;
+  border-radius: 22px;
+  background: radial-gradient(ellipse at 92% 0, #fff3d6, transparent 58%),
+    radial-gradient(ellipse at 0 100%, #e0efe2, transparent 62%), #e9f3ea;
+}
+.sci-hero .ref-kicker { color: #397648; }
+
+/* 页面容器：index 与 detail 内容包一层 .sci-page，工具栏、来源与分页随科学绿基调。 */
+.sci-page .ref-toolbar { border-color: #c6dcc4; background: #e9f3ea; }
+.sci-page .ref-field input:focus, .sci-page .ref-field select:focus { border-color: #397648; }
+.sci-page .ref-source { border-color: #c6dcc4; background: #eef4ef; }
+.sci-page .ref-source summary { color: #397648; }
+.sci-page .pagination a { color: #397648; }
+
+/* 元素卡与徽章：符号、顶边线、方卡底色统一科学绿。 */
+.sci-page .ref-element { border-top-color: #9dbd9a; }
+.sci-page .ref-element-symbol { color: #397648; }
+.sci-page .ref-element-badge { border-color: #b6d3ba; background: #e4f1e6; }
+.sci-page .ref-element-badge strong { color: #397648; }
+.sci-page .ref-facts dd { font-variant-numeric: tabular-nums; }
+
+/* 分类小徽章：列表里一眼认出元素类别。 */
+.sci-category { display: inline-block; padding: 2px 10px; border: 1px solid #cfe2d0; border-radius: 999px; background: #e9f3ea; color: #397648; font-size: 14px; font-weight: 650; line-height: 1.6; }
+
+/* 详情面板标题缀一枚元素方卡（圆角小方块），与周期表格子呼应。 */
+.sci-page .ref-panel h2::before {
+  content: ''; display: inline-block; width: 11px; height: 11px;
+  margin-right: 9px; border: 2px solid #8fbf9a; border-radius: 3px;
+  background: #e4f1e6; vertical-align: 1px;
+}
+
+@media (max-width: 699px) {
+  .sci-hero { padding: 16px 18px; border-radius: 18px; }
+}

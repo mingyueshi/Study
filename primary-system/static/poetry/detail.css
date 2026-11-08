@@ -1,4 +1,9 @@
 /* 古诗文详情页专用样式，仅由 templates/poetry/detail.html 引入；不改动共享的 reference.css。 */
+
+/* 内容区不限宽：铺满平台 .shell 版心自适应宽度，覆盖 reference.css 的 920px 卡宽与 36em 行宽。 */
+.ref-poem { max-width: none; }
+.ref-poem-text { max-width: none; }
+
 .ref-poem { padding-bottom: 34px; }
 .ref-poem-head { margin-bottom: 12px; }
 .ref-poem-layer { display: inline-block; padding: 1px 7px; border: 1px solid var(--line); border-radius: 6px; color: var(--muted); font-size: 12px; font-weight: 600; letter-spacing: .02em; vertical-align: 2px; }

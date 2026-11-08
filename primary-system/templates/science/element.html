@@ -1,9 +1,12 @@
 {% extends 'reference_library/layout.html' %}
+{% load static %}
 {% block title %}{{ element.chinese_name|default:element.name }} · 元素资料{% endblock %}
 {% block reference_content %}
+<link rel="stylesheet" href="{% static 'science/science.css' %}?v=1">
 {% url 'science-elements' as list_url %}
 {% include 'reference_library/breadcrumbs.html' with subject_title='化学元素' subject_url=list_url current_title=element.chinese_name|default:element.name %}
-<header class="ref-header"><div class="ref-element-identity"><div class="ref-element-badge"><span>{{ element.number }}</span><strong>{{ element.symbol }}</strong></div><div><p class="ref-kicker">{{ element.category_zh }}</p>
+<div class="sci-page">
+<header class="ref-header sci-hero"><div class="ref-element-identity"><div class="ref-element-badge"><span>{{ element.number }}</span><strong>{{ element.symbol }}</strong></div><div><p class="ref-kicker">{{ element.category_zh }}</p>
 <h1>{{ element.chinese_name|default:element.name }} {{ element.symbol }}</h1><p lang="en">{{ element.name }}</p></div></div>
 </header>
 {% if not element.chinese_name %}<p class="ref-reading-note">中文专名暂缺；不以自动音译冒充规范名称。</p>{% endif %}
@@ -31,4 +34,5 @@
 <dd>{{ element.source_checksum }}</dd>{% for key,value in element.raw.items %}<dt>{{ key }}</dt>
 <dd>{{ value|default_if_none:'未知' }}</dd>{% endfor %}</dl>
 </details>
+</div>
 {% endblock %}

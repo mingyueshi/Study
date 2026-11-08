@@ -2,8 +2,9 @@
 {% load reference_ui static %}
 {% block title %}古诗文 · 乐学堂{% endblock %}
 {% block reference_content %}
-<link rel="stylesheet" href="{% static 'poetry/themes.css' %}">
+<link rel="stylesheet" href="{% static 'poetry/themes.css' %}?v=3">
 {% include 'reference_library/breadcrumbs.html' with subject_title='古诗文' %}
+<div class="poetry-home">
 <header class="ref-header poetry-index-header"><div><p class="ref-kicker">读原文，寻出处</p>
 <h1>古诗文</h1><p>按题名、作者或选集查找，保留各来源的字形和异文。</p></div>
 <div class="ref-actions poetry-index-actions"><a class="button small" href="{% url 'feihualing' %}">飞花令 · 练五句诗 →</a><a class="button small" href="{% url 'poetry-themes' %}">题材分类 · 12 类唐诗宋词 →</a></div>
@@ -28,4 +29,5 @@
 <details class="ref-source">
 <summary>选集、版本与收录说明</summary><p>{{ document_count }}份来源文件。总集、选集、章与韵部粒度不同，文本入口数不等于唯一作品数；重叠与异文分别保留，未自动标作教材标准版。现代中文解释和全文注音待补。</p><a href="{% url 'poetry-exclusions' %}">查看{{ excluded_count }}条来源排除记录与原因 →</a>
 </details>
+</div>
 {% endblock %}

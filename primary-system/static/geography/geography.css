@@ -1,0 +1,27 @@
+/* 国家与地区页专用样式，仅由 templates/geography/ 两个页面引入；不改动共享的 reference.css。 */
+
+/* hero：渐变标题卡同族（右上暖沙、左下青碧），落在水青底上。 */
+.geo-hero {
+  padding: 22px 28px;
+  border: 1px solid #c3dbe2;
+  border-radius: 22px;
+  background: radial-gradient(ellipse at 92% 0, #fff3d6, transparent 58%),
+    radial-gradient(ellipse at 0 100%, #dcecf0, transparent 62%), #e7f1f4;
+}
+.geo-hero .ref-kicker { color: #2d7886; }
+
+/* 页面容器：index 与 detail 内容包一层 .geo-page，工具栏、区域徽章、来源与分页随青碧基调。 */
+.geo-page .ref-toolbar { border-color: #c3dbe2; background: #e7f1f4; }
+.geo-page .ref-field input:focus, .geo-page .ref-field select:focus { border-color: #2d7886; }
+.geo-page .ref-label { background: #e1eff2; color: #2d7886; }
+.geo-page .ref-facts dd { font-variant-numeric: tabular-nums; }
+.geo-page .ref-source { border-color: #c3dbe2; background: #eef4f5; }
+.geo-page .ref-source summary { color: #2d7886; }
+.geo-page .pagination a { color: #2d7886; }
+
+/* 详情面板标题缀一枚青碧菱形，与 hero 呼应。 */
+.geo-page .ref-panel h2::before { content: '◆ '; color: #7fb3bd; font-size: 15px; }
+
+@media (max-width: 699px) {
+  .geo-hero { padding: 16px 18px; border-radius: 18px; }
+}

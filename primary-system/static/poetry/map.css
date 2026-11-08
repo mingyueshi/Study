@@ -1,5 +1,5 @@
-/* 诗词地图：左目录右地图 + 地点面板；青绿山水色系，可打印。 */
-.map-shell { display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 24px; align-items: start; }
+/* 诗词地图：左目录（加宽）右地图 + 地点面板；青绿山水色系，可打印。 */
+.map-shell { display: grid; grid-template-columns: clamp(300px, 26vw, 360px) minmax(0, 1fr); gap: 24px; align-items: start; }
 .map-side { position: sticky; top: 24px; max-height: calc(100dvh - 48px); display: flex; flex-direction: column; gap: 12px; padding: 16px; border: 1px solid var(--line, #dce6d9); border-radius: 20px; background: var(--white, #fff); overflow: hidden; }
 .map-search input { width: 100%; min-height: 44px; border: 1.5px solid #cdd9c4; border-radius: 12px; padding: 8px 12px; font-size: 16px; }
 .map-search input:focus { border-color: var(--green, #22634c); }
@@ -18,7 +18,8 @@
 .place-row[aria-current="page"] .place-count { color: var(--green, #22634c); font-weight: 800; }
 .place-row.hidden { display: none; }
 
-.map-board { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 20px; align-items: start; }
+/* 右侧合并为一列：地图在上，地点面板接在下方。 */
+.map-board { display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; align-items: start; }
 .china-wrap { padding: 14px; border: 1px solid var(--line, #dce6d9); border-radius: 20px; background: #f4f8f0; }
 .china-map { display: block; width: 100%; height: auto; }
 .china-map .map-province { fill: #e7efe2; stroke: #ffffff; stroke-width: .8; }
@@ -61,7 +62,6 @@
   .map-shell { grid-template-columns: minmax(0, 1fr); }
   .map-side { position: static; max-height: none; }
   .map-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); max-height: 300px; }
-  .map-board { grid-template-columns: minmax(0, 1fr); }
 }
 @media print {
   .map-side, .poem-actions, .say-chip, .back, .map-search { display: none !important; }

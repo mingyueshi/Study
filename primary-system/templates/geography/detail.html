@@ -1,10 +1,12 @@
 {% extends 'reference_library/layout.html' %}
-{% load reference_ui %}
+{% load static reference_ui %}
 {% block title %}{{ country.display_name }} · 国家与地区{% endblock %}
 {% block reference_content %}
+<link rel="stylesheet" href="{% static 'geography/geography.css' %}?v=1">
 {% url 'geography-index' as list_url %}
 {% include 'reference_library/breadcrumbs.html' with subject_title='国家与地区' subject_url=list_url current_title=country.display_name %}
-<header class="ref-header"><div><p class="ref-kicker">{{ country.region_zh }} · {{ country.subregion_zh }}</p>
+<div class="geo-page">
+<header class="ref-header geo-hero"><div><p class="ref-kicker">{{ country.region_zh }} · {{ country.subregion_zh }}</p>
 <h1>{{ country.display_name }}</h1><p lang="en">{{ country.name_en }}</p></div>
 </header>
 <div class="ref-detail-grid">
@@ -16,7 +18,7 @@
 <dt>首都／行政中心</dt>
 <dd>{% for capital in country.capital_labels %}<p>{{ capital.zh }} <span class="ref-meta">· {{ capital.original }}</span></p>{% empty %}来源未提供{% endfor %}</dd>
 <dt>面积</dt>
-<dd>{% if country.area_km2 != None %}{{ country.area_km2 }} 平方千米{% else %}来源未提供{% endif %}</dd>
+<dd>{% if country.area_label %}{{ country.area_label }} 平方千米{% else %}来源未提供{% endif %}</dd>
 <dt>来源坐标</dt>
 <dd>纬度 {{ country.latitude|default_if_none:'未知' }}°<br>经度 {{ country.longitude|default_if_none:'未知' }}°<span class="ref-meta">（不是边界几何）</span>
 </dd>
@@ -48,4 +50,5 @@
 <dd>{{ country.source_row }}</dd>{% for key,value in country.raw.items %}<dt>{{ key }}</dt>
 <dd>{{ value|default_if_none:'未知' }}</dd>{% endfor %}</dl>
 </details>
+</div>
 {% endblock %}

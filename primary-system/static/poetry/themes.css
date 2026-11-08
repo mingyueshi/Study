@@ -312,6 +312,29 @@
     justify-content: flex-start;
   }
 }
+
+/* ── 古诗文首页（.poetry-home 仅 index.html 包裹）：暖纸 hero 与文集卡 ── */
+.poetry-home .poetry-index-header {
+  padding: 22px 28px;
+  border: 1px solid #e3dbc6;
+  border-radius: 22px;
+  background: radial-gradient(ellipse at 92% 0, #fff0d6, transparent 58%),
+    radial-gradient(ellipse at 0 100%, #f3e9d3, transparent 62%), #f8f4e8;
+}
+.poetry-home .ref-toolbar { border-color: #e3dbc6; background: #f8f4e8; }
+.poetry-home .ref-field input:focus, .poetry-home .ref-field select:focus { border-color: #8a744f; }
+.poetry-home .ref-card .ref-meta:first-child {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: #f6eddb;
+  color: #8a744f;
+  font-weight: 650;
+  line-height: 1.6;
+}
+@media (max-width: 699px) {
+  .poetry-home .poetry-index-header { padding: 16px 18px; border-radius: 18px; }
+}
 @media (prefers-reduced-motion: reduce) {
   .theme-card {
     transition: none;

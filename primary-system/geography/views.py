@@ -59,6 +59,10 @@ def decorate(country):
     country.subregion_zh = SUBREGIONS.get(
         country.subregion, country.subregion or "来源未提供"
     )
+    # 面积加千分位便于孩子朗读；格式属展示层，来源数值不动。
+    country.area_label = (
+        f"{country.area_km2:,.0f}" if country.area_km2 is not None else None
+    )
     country.capital_labels = [
         {"original": name, "zh": CAPITALS.get(name, "中文名暂缺")}
         for name in country.capitals
