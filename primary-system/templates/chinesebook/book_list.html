@@ -1,21 +1,21 @@
 {% extends 'base.html' %}{% load static %}{% block title %}语文教材册 · 乐学堂{% endblock %}
 {% block content %}<link rel="stylesheet" href="{% static 'chinesebook/chinesebook-base.css' %}?v=1"><link rel="stylesheet" href="{% static 'chinesebook/chinesebook.css' %}?v=1">
 <div class="study-page" data-subject="knowledge">
-  <div class="study-shell" style="grid-template-columns: minmax(0, 1fr);">
-    <div class="study-content">
-      <div class="textbook-banner"><span>📖 语文教材册</span><strong>选一册开始</strong></div>
-      <div class="book-grid">
-        {% for item in books %}<a class="book-card" href="{% url 'chinesebook-book' item.book %}">
-          <span class="book-emoji">📗</span>
-          <b>{{ item.banner_volume }}</b>
-          <span class="book-sub">{{ item.textbook }}</span>
-          <span class="book-meta">{{ item.units }} 个单元 · {{ item.lessons }} 篇课文 · 古诗文 {{ item.poems }} 篇</span>
-        </a>{% endfor %}
-      </div>
+  <div class="book-list-wrap">
+    <div class="textbook-banner"><span>📖 语文教材册</span><strong>选一册开始</strong></div>
+    <div class="book-grid">
+      {% for item in books %}<a class="book-card" href="{% url 'chinesebook-book' item.book %}">
+        <span class="book-emoji">📗</span>
+        <b>{{ item.banner_volume }}</b>
+        <span class="book-sub">{{ item.textbook }}</span>
+        <span class="book-meta">{{ item.units }} 个单元 · {{ item.lessons }} 篇课文 · 古诗文 {{ item.poems }} 篇</span>
+      </a>{% endfor %}
     </div>
   </div>
 </div>
 <style>
+  /* 册次列表直接铺在平台 .shell 宽度上（study-shell 自带 gutter 会造成双层缩进） */
+  .book-list-wrap { padding: 8px 0 48px; }
   .book-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 18px; }
   .book-card { display: flex; flex-direction: column; gap: 6px; padding: 22px 20px; background: var(--card);
     border: 1px solid var(--subject-line); border-radius: 18px; box-shadow: 0 3px 0 var(--subject-line);
