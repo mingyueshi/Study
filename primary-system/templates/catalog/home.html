@@ -4,11 +4,7 @@
   <div class="hero-copy"><p class="eyebrow">你的日常学习小天地</p><h1>今天，想探索<br><span>哪一种精彩？</span></h1><p class="lead">从课本里的一个知识点，到世界里的一个小问号。<br>选一本学习册，用自己的节奏慢慢读懂。</p><a class="button" href="#modules-title">开始探索 <span aria-hidden="true">↗</span></a></div>
   <div class="hero-art" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="art-bubble art-book"><img src="{% static 'icons/book.svg' %}" alt=""></div><div class="art-bubble art-globe"><img src="{% static 'icons/globe.svg' %}" alt=""></div><div class="art-bubble art-math"><img src="{% static 'icons/math.svg' %}" alt=""></div><span class="spark spark-one">✦</span><span class="spark spark-two">✧</span><span class="art-note">保持好奇，天天有新发现</span></div>
 </section>
-{% if digest %}
-<section class="overview-section" aria-labelledby="overview-title"><div class="section-heading"><div><p class="eyebrow">学习总览</p><h2 id="overview-title">这段时间学了多少</h2></div><p>教材、单词、成语、作文……每一份努力都记着账。</p></div>
-{% include 'includes/overview_cards.html' with areas=digest.areas %}
-<p class="overview-more"><a href="{% url 'my-learning' %}">查看完整学习足迹 →</a></p></section>
-{% else %}
+{% if not user.is_authenticated %}
 <section class="study-strip" aria-label="学习概况"><div><strong>{{ entry_total }}</strong><span>探索方向</span></div><div><strong>{{ item_count }}</strong><span>当前可读内容</span></div><p>登录后，收藏、笔记和掌握记录会跟着你的账号走。</p></section>
 {% endif %}
 <section class="modules-section" aria-labelledby="modules-title"><div class="section-heading"><div><p class="eyebrow">跟着兴趣出发</p><h2 id="modules-title">每一科，都有新发现</h2></div><div class="section-aside"><a class="special-entry" href="{% url 'questionbank' %}"><img src="{% static 'icons/quiz.svg' %}" alt="" width="30" height="30">挑战题库<span class="arrow" aria-hidden="true">→</span></a></div></div>

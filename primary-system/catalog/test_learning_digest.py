@@ -132,15 +132,14 @@ class DigestViewTests(PlatformFixture):
         PlayRecord.objects.create(user=cls.user, game=PlayRecord.Game.QUIZ, size=1, correct=1,
                                   extra={'headword': '守株待兔'})
 
-    def test_home_renders_overview_cards_for_logged_in_user(self):
+    def test_home_hides_overview_for_logged_in_user(self):
+        """首页不再放学习总览与足迹（完整版在「我的学习」）；两种状态都不出现。"""
         self.client.force_login(self.user)
         response = self.client.get('/')
-        self.assertContains(response, '学习总览')
-        self.assertContains(response, '教材学习')
-        self.assertContains(response, '成语挑战')
-        self.assertContains(response, '飞花令')
-        self.assertContains(response, '查看完整学习足迹')
+        self.assertNotContains(response, '学习总览')
+        self.assertNotContains(response, '查看完整学习足迹')
         self.assertNotContains(response, '登录后，收藏、笔记和掌握记录会跟着你的账号走')
+        self.assertContains(response, '挑战题库')
 
     def test_home_keeps_guest_strip(self):
         response = self.client.get('/')
