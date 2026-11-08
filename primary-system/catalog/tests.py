@@ -106,8 +106,9 @@ class CatalogTests(PlatformFixture):
         self.assertFalse(Group.objects.get(name='内容编辑').permissions.exclude(content_type__app_label='catalog').exists())
 
     def test_home_and_filtered_catalog(self):
-        self.assertContains(self.client.get('/'), '教材书架')
-        self.assertContains(self.client.get('/'), '搜索学习册或知识点')
+        # 书架与筛选表单已下线（教材册专属书架在各模块页），筛选仅保留在 API 层。
+        self.assertNotContains(self.client.get('/'), '教材书架')
+        self.assertNotContains(self.client.get('/'), '搜索学习册或知识点')
         self.assertEqual(self.client.get('/api/v1/catalog/?grade=primary-1').json()['total'], 0)
         self.assertEqual(self.client.get('/api/v1/catalog/?grade=primary-4&subject=math').json()['total'], 1)
         self.assertEqual(self.client.get('/api/v1/catalog/?edition=pep-chinese').json()['total'], 0)
@@ -147,7 +148,7 @@ class CatalogTests(PlatformFixture):
         self.assertIn('奥数挑战', names)
 
     def test_area_filter_single_select(self):
-        """专题单选筛选：按 ?area= 过滤卡片，无效值回退全部，chips 保留书架筛选。"""
+        """专题单选筛选：按 ?area= 过滤卡片，无效值回退全部。"""
         response = self.client.get('/?area=poetry')
         self.assertContains(response, '飞花令')
         self.assertContains(response, '诗词地图')
@@ -156,8 +157,6 @@ class CatalogTests(PlatformFixture):
         # 无效值回退全部卡片。
         self.assertContains(self.client.get('/?area=bogus'), '数学教材')
         self.assertContains(self.client.get('/'), '数学教材')
-        # chips 链接保留书架的其他筛选参数。
-        self.assertContains(self.client.get('/?grade=primary-4'), '?grade=primary-4&amp;area=poetry')
 
     def test_visibility_is_consistent_across_every_read_path(self):
         item_path = f'/items/{self.item.pk}/'
@@ -253,10 +252,20 @@ class ShelfPartitionTests(PlatformFixture):
         self.assertIn(self.collection, published_textbook_books())
 
     def test_home_shelf_renders_textbook_section_only(self):
+        # 首页不再渲染书架：教材同步册的专属书架在英语模块页（语文/数学模块卡
+        # 已直挂文件编排的教材册，模块页变成落地页，不再列书）。
         response = self.client.get('/')
+        self.assertNotContains(response, '教材书架')
         self.assertContains(response, '英语教材')
         self.assertNotContains(response, '主题探索')
-        self.assertContains(response, '北师大版数学 · 四年级上册')
+        english = Module.objects.get(code='english')
+        TextbookBook.objects.create(code='primary-english-first', name='外研版新标准英语（三起）· 四年级上册',
+                                    module=english, textbook=Textbook.objects.get(code='fltrp-english-4a-2026'),
+                                    is_published=True)
+        module_page = self.client.get('/modules/english/')
+        self.assertContains(module_page, '外研版新标准英语（三起）· 四年级上册')
+        # 语文/数学模块页是教材册落地页，不再出现书架网格。
+        self.assertContains(self.client.get('/modules/math/'), '进入数学教材')
 
     def test_api_reports_textbook_kind(self):
         data = self.client.get('/api/v1/catalog/').json()

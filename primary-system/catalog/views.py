@@ -101,7 +101,9 @@ def _area_chips(request, cards, selected):
 @never_cache
 @require_GET
 def home(request):
-    form, books = filter_books(request)
+    # 书架已下线（教材同步册的专属书架在各模块页），首页只剩模块卡与专题卡；
+    # 已发布册数仍用于模块卡角标与可读内容统计，筛选仅保留在 API 层。
+    books = published_books()
     modules = list(Module.objects.filter(is_active=True).select_related('subject'))
     counts = {}
     for book in books:
@@ -110,20 +112,17 @@ def home(request):
     area = request.GET.get('area', '')
     selected = area if area in {card['area'] for card in all_cards} else ''
     entry_cards = [card for card in all_cards if not selected or card['area'] == selected]
-    textbook_shelf = books
     digest = None
     if request.user.is_authenticated:
         from .learning_digest import learning_digest
         digest = learning_digest(request.user)
     return render(request, 'catalog/home.html', {
-        'form': form,
         'entry_cards': entry_cards,
         'entry_total': len(all_cards),
         'area_chips': _area_chips(request, all_cards, selected),
         'digest': digest,
-        'textbook_shelf': textbook_shelf,
         'item_count': published_items().filter(placements__unit__in=units_of_books(books)).count(),
-    }, status=200 if form.is_valid() else 400)
+    })
 
 
 @never_cache
@@ -131,11 +130,10 @@ def home(request):
 def module_detail(request, code):
     module = get_object_or_404(Module, code=code, is_active=True)
     module.entry = entry_for(module.code)
-    form, books = filter_books(request)
+    collections = [b for b in published_books() if b.module_id == module.pk]
     return render(request, 'catalog/module.html', {
-        'module': module, 'form': form,
-        'collections': [b for b in books if b.module_id == module.pk],
-    }, status=200 if form.is_valid() else 400)
+        'module': module, 'collections': collections,
+    })
 
 
 # 教材单元词卡按单元顺序取一组明快底色，跨册循环使用。

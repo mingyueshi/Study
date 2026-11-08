@@ -559,3 +559,14 @@ SQLite相关38项（37通过／1PG跳过）、PG批次10/10含并发首导、前
   册页与课文 tab 暖底 + 英语绿强调生效（--green 解析 #5e9f7a、词卡
   0 3px 0 投影），英语内容页 skin 挂载确认。
 - 未运行 PostgreSQL 专项；未提交→随本次提交入库。
+
+## 2026-11-08：首页书架与科目筛选下线，英语模块页成教材同步册专属书架
+
+- 语文/数学改文件编排后书架只剩英语两册：首页删除「教材书架」区与筛选表单
+  （hero 按钮改指模块网格），`module.html` 非落地分支删除筛选表单——英语模块页
+  成为教材同步册专属书架；`/api/v1/catalog/`、`/api/v1/items/` 的筛选口径保留
+  （CatalogFilter/filter_books 仅服务 API）。`filters.html` 模板删除。
+- 测试：test_home_and_filtered_catalog 改断言首页无书架、API 筛选不变；
+  test_area_filter_single_select 去掉书架参数透传断言；test_home_shelf_renders_
+  textbook_section_only 改在英语模块页验证书架网格。全量 `make test` 589 项通过。
+- 未运行 PostgreSQL 专项；未提交→随本次提交入库。
