@@ -85,6 +85,10 @@ def _mathbook_summary(user):
     return None
 
 
+def _chinesebook_summary(user):
+    return None
+
+
 ENTRIES = {
     'chain': {
         'route_name': 'chain',
@@ -129,8 +133,8 @@ ENTRIES = {
         'learning_summary': _writing_summary,
         'recent': _writing_recent,
     },
-    # 教材模块里的文件编排例外：数学教材直接走静态编排的教材册页，
-    # 内容源头在 primary/math-data.js（scripts/build_mathbook.cjs 同步）。
+    # 教材模块里的文件编排例外：语文/数学教材直接走静态编排的教材册页，
+    # 内容源头在 primary/（scripts/build_chinesebook.cjs / build_mathbook.cjs 同步）。
     'math': {
         'route_name': 'mathbook',
         'tag': '打开知识点 →',
@@ -139,12 +143,20 @@ ENTRIES = {
         'button': '进入数学教材',
         'learning_summary': _mathbook_summary,
     },
+    'knowledge': {
+        'route_name': 'chinesebook',
+        'tag': '打开课文 →',
+        'headline': '语文教材已开始',
+        'blurb': '统编版四上 8 个单元 27 篇课文：课文卡配作者小传、原文金句、真实百科，必背古诗文、日积月累和字词复习单独成页，可点读、可搜索、可打印。',
+        'button': '进入语文教材',
+        'learning_summary': _chinesebook_summary,
+    },
 }
 
 
 def entry_for(code):
-    """玩法模块入口；教材模块（knowledge/english）返回 None，走目录中转页。
-    math 是文件编排例外，直接指向静态编排的数学教材册。"""
+    """玩法模块入口；教材模块（english）返回 None，走目录中转页。
+    knowledge/math 是文件编排例外，直接指向静态编排的语文/数学教材册。"""
     return ENTRIES.get(code)
 
 

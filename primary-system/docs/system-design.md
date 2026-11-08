@@ -4,7 +4,7 @@
 
 ## 1. 项目目标与边界
 
-`primary-system/` 是家庭辅导孩子学习的主项目。仓库其他目录是临时原型、资料来源或研究，不能成为线上运行时依赖。现有导出脚本允许读取受信任的 `primary/` 静态资料，导入后由本项目数据库提供内容；呈现天然富交互的学科（数学教材，后续语文）改为文件编排——内容源头在静态版、Django 只做零模型只读壳，见 [数学教材册](#数学教材册2026-11-07)。
+`primary-system/` 是家庭辅导孩子学习的主项目。仓库其他目录是临时原型、资料来源或研究，不能成为线上运行时依赖。现有导出脚本允许读取受信任的 `primary/` 静态资料，导入后由本项目数据库提供内容；呈现天然富交互的学科（语文、数学教材）改为文件编排——内容源头在静态版、Django 只做零模型只读壳，见 [教材册文件编排](#教材册文件编排数学与语文2026-11-0708)。
 
 采用 Django 单体、服务端模板、少量独立 JavaScript。当前规模下不引入微服务、消息队列、搜索集群或统一的动态页面搭建引擎。SQLite 用于本机；多请求并发与跨数据库正确性用 PostgreSQL 回归验证。
 
@@ -195,30 +195,37 @@ childs、foots 这类规则误推形态且在加载期确定性生成；每题�
 `PhraseAnswer`（对错都记，已登记 `GUEST_MODELS`），总览第十张领域卡
 「日常用语」。教材课文对话仍在教材模块承载，本专题不重复放对话原文。
 
-## 数学教材册（2026-11-07）
+## 教材册文件编排：数学与语文（2026-11-07/08）
 
-独立 `mathbook` 应用承接数学教材的文件编排试点（照 grammar 先例）：零模型
-只读浏览，无模型、无迁移、无学习记录；页面套平台导航（base.html），内容与
-交互全在前端——移植 `primary/math-app.js` 渲染层（单元切换、知识点卡的
-要点/例题/易错标签页、图示互动演示、点读、搜索、打印、公式速查、易错诊所、
-教学视频），「已掌握」标记存浏览器 localStorage（与语法同口径），同款例题
-练习统一在 `questionbank` 侧，两边口径独立。
+独立 `mathbook`、`chinesebook` 应用承接数学/语文教材的文件编排（照 grammar
+先例）：零模型只读浏览，无模型、无迁移、无学习记录；页面套平台导航
+（base.html），内容与交互全在前端——分别移植 `primary/math-app.js`（单元切换、
+要点/例题/易错标签页、图示互动演示、公式速查、易错诊所、教学视频）与
+`primary/knowledge-app.js`（课文卡配作者小传/原文金句/真实百科/重点词语/
+多音字/近反义词、必背古诗文、日积月累、字词复习）的渲染层，点读、搜索、
+打印保留；「已掌握／已复习」标记存浏览器 localStorage（与语法同口径），
+同款练习统一在 `questionbank` 侧，两边口径独立。
 
-页面按册编排：`/mathbook/` 为册次入口（单册直接跳转，多册出列表），
-册页 `/mathbook/<册>/`，册次码对齐 catalog 教材码后缀
-（bnu-math-4a-2026 → `4a`）。内容源头是 `primary/math-data.js`（11 单元
-43 知识点）：改内容去静态版改、先过 `node primary/test/test-math-knowledge.js`，
-再 `make mathbook-data` 重跑 `scripts/build_mathbook.cjs`——册次注册在脚本的
-`BOOKS` 映射（一行一册，新册 = primary 加数据文件＋测试＋加一行），每册确定性
-同步规范化数据 `static/mathbook/books/<册>.js`（`const MKB = <JSON>;`，页面
-用来源 sha256 前 8 位作 `?v=` 版本）与结构摘要 `mathbook/data/books/<册>.json`，
-并同步共享图示库（`static/figures/figures.js|css`，语文阅读器图示块同受益）与
-`images/math/` 照片；加载期 `mathbook/content.py::load_book()` 对照 manifest
-校验（计数以 manifest 为权威、图示/视频引用、照片在位、中文标点），坏数据
-拒绝上线。渲染层按教材名派生存档键，同科目多册进度互不覆盖。
+页面按册编排：`/mathbook/`、`/chinesebook/` 为册次列表（点教材卡先看到
+可选册次，以后加册次同一直入口径），册页 `/mathbook/<册>/`、`/chinesebook/<册>/`，册次码对齐
+catalog 教材码后缀（bnu-math-4a-2026 → `4a`、pep-chinese-4a-2026 → `4a`）。
+内容源头是 `primary/math-data.js`（11 单元 43 知识点）与
+`primary/knowledge-data.js`（8 单元 27 课＋古诗文＋字词复习）：改内容去
+静态版改、先过各册声明的静态版测试，再 `make mathbook-data` /
+`make chinesebook-data` 重跑 `scripts/build_mathbook.cjs` /
+`scripts/build_chinesebook.cjs`——册次注册在脚本的 `BOOKS` 映射（一行一册，
+新册 = primary 加数据文件＋测试＋加一行），每册确定性同步规范化数据
+`static/<应用>/books/<册>.js`（页面用来源 sha256 前 8 位作 `?v=` 版本）与
+结构摘要 `<应用>/data/books/<册>.json`，并同步共享图示库
+（`static/figures/figures.js|css`，DB 阅读器图示块同受益）与对应图片目录；
+加载期 `<应用>/content.py::load_book()` 对照 manifest 校验（计数以 manifest
+为权威、图示/视频引用、图片在位、中文标点——语文正文不允许任何尖括号），
+坏数据拒绝上线。渲染层按教材名派生存档键，同科目多册进度互不覆盖。
 
-catalog 的 `primary-math-all` 同步册经数据迁移 0008 下架（可逆），数学
-ContentItem 保持 published，学习总览与搜索口径不变；首页数学卡经
-`ENTRIES['math']` 直挂教材册页，`/modules/math/` 自动变成落地页。语文教材
-后续照此模式迁移，届时再一并退役两科 DB 内容（TEXTBOOK_ADAPTERS 与
-import_primary 管线暂不动，数学仍可经旧管线重导入，只是入口隐藏）。
+catalog 的 `primary-math-all`、`primary-knowledge-all` 同步册经数据迁移
+0008/0009 下架（可逆），两科 ContentItem 保持 published——学习总览与全局
+搜索口径不变，旧阅读器仅剩搜索结果一条深处路径；首页两科模块卡经
+`ENTRIES['math']`/`ENTRIES['knowledge']` 直挂教材册页，模块页自动变成落地页。
+DB 里的两科内容行暂不删除：待静态教材册有全局检索层后再做最终退役
+（TEXTBOOK_ADAPTERS 与 import_primary 管线暂不动，仍可经旧管线重导入，
+只是入口隐藏）。

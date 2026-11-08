@@ -62,13 +62,13 @@ class MathbookDataTests(SimpleTestCase):
 
 
 class MathbookPageTests(TestCase):
-    def test_index_redirects_to_single_book(self):
+    def test_index_lists_books(self):
+        # 教材卡先进册次列表，再进具体册页（多册后同一直入口径）。
         response = self.client.get(reverse('mathbook'))
-        books = available_books()
-        if len(books) == 1:
-            self.assertRedirects(response, reverse('mathbook-book', args=[books[0]['book']]))
-        else:
-            self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, '选一册开始')
+        for book in available_books():
+            self.assertContains(response, reverse('mathbook-book', args=[book['book']]))
 
     def test_reader_renders_mount_points(self):
         response = self.client.get(reverse('mathbook-book', args=['4a']))

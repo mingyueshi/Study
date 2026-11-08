@@ -1,11 +1,11 @@
 """数学教材册：零模型只读浏览，按册编排（照 grammar 先例）。
 
-``/mathbook/`` 是册次入口——单册直接跳到册页，多册出选择列表；
+``/mathbook/`` 是册次列表——点教材卡先看到可选册次，再进具体册页；
 ``/mathbook/<册>/`` 是册页，内容与交互全在前端（math-app.js + books/<册>.js），
 视图只做加载期校验并把结构摘要交给页面文案；GET 不写任何记录。
 """
 from django.http import Http404
-from django.shortcuts import redirect, render
+from django.shortcuts import render
 from django.templatetags.static import static as static_url
 from django.views.decorators.cache import never_cache
 from django.views.decorators.http import require_safe
@@ -16,10 +16,7 @@ from .content import available_books, book_exists, load_book
 @never_cache
 @require_safe
 def index(request):
-    books = available_books()
-    if len(books) == 1:
-        return redirect('mathbook-book', book=books[0]['book'])
-    return render(request, 'mathbook/book_list.html', {'books': books})
+    return render(request, 'mathbook/book_list.html', {'books': available_books()})
 
 
 @never_cache

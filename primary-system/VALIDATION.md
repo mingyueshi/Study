@@ -528,3 +528,21 @@ SQLite相关38项（37通过／1PG跳过）、PG批次10/10含并发首导、前
 - 全量 `make test`：577 项通过（skipped 14）。8012 常驻服务器浏览器目检：
   见本节末尾补记。
 - 未运行 PostgreSQL 专项；未提交→随本次提交入库。
+
+## 2026-11-08：语文教材改为文件编排（chinesebook）
+
+- 新增零模型应用 `chinesebook`（照 mathbook 先例，按册编排：`/chinesebook/` 册次
+  列表（列表优先，mathbook 入口同步取消单册自动跳转）＋册页 `/chinesebook/<册>/`）：册页套 base.html 导航，内容
+  与交互全在前端（移植 primary/knowledge-app.js：单元切换、课文卡（作者小传/
+  原文金句/真实百科/词语/多音字/近反义词/拓展视频外链卡）、必背古诗文（意境图/
+  注释/创作背景/诗人小传）、日积月累、字词复习、点读、搜索、打印），「已复习」
+  存 localStorage（键改按教材名派生）；内容源头 primary/knowledge-data.js 经
+  `scripts/build_chinesebook.cjs` 确定性同步（books/4a.js + books/4a.json +
+  共享图示库 + lessons/poems 图片），加载期校验（语文正文禁任何尖括号）。
+- `make chinesebook-data` 跑两遍无 diff；`node primary/test/test-knowledge.js`
+  通过（源头未动）。
+- catalog 迁移 0009 下架 `primary-knowledge-all`（可逆），基线包重导
+  （`export_base_data --replace`）后 `verify_base_data` 摘要一致；仅
+  textbookbook 分片与 manifest 变化。
+- 全量 `make test`：589 项通过（skipped 14）。
+- 未运行 PostgreSQL 专项；未提交→随本次提交入库。

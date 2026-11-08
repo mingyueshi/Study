@@ -1,0 +1,94 @@
+/* ============================================================
+   语文教材册（chinesebook）页面底座
+   移植自 primary/layout.css 与 study-theme.css 的公共子集。
+   与静态版的差异：裸元素规则（body 重置、:root 变量）全部收进
+   .study-page 作用域，避免影响 base.html 的平台站点底座；
+   平台页宽 --page-width 已足够宽，学习壳直接沿用平台 .shell 容器。
+   ============================================================ */
+.study-page {
+  --red: #ff6b6b; --blue: #4d96ff; --green: #2fbf71; --orange: #ffa630; --purple: #9b5de5;
+  --bg: #fffaf2; --ink: #293b4a; --card: #fffefb; --muted: #596879; --line: #e9e2d6;
+  --gutter: clamp(20px, 3.2vw, 76px);
+  --subject-accent: #dd8250; --subject-soft: #ffe3d0; --subject-line: #efc4a8; --subject-ink: #91482a;
+  background: var(--bg); color: var(--ink);
+  font-family: "PingFang SC", "Microsoft YaHei UI", "Microsoft YaHei", "Hiragino Sans GB", sans-serif;
+  font-size: 18px; line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+/* 静态版的全局零边距重置收进学习页作用域（数学组件依赖它） */
+.study-page *, .study-page *::before, .study-page *::after { margin: 0; padding: 0; }
+.study-page button, .study-page input, .study-page select, .study-page textarea { color: inherit; }
+.study-page button { cursor: pointer; }
+.study-page a { color: inherit; }
+.study-page b { font-weight: 800; }
+.study-page :is(button, a, input, select, textarea, summary) { touch-action: manipulation; }
+.study-page :focus-visible { outline: 3px solid #315faa; outline-offset: 4px; }
+/* 学习页铺满平台内容区：底色随学习页主题，收窄平台底部留白 */
+body:has(.study-page) { background: #fffaf2; }
+body:has(.study-page) .shell { padding-bottom: 40px; }
+
+/* ---------- 工具件（来自 layout.css） ---------- */
+.study-page .stats-pill {
+  display: inline-flex; align-items: center; min-height: 36px;
+  background: #f0f4fc; border: 1px solid #e7edf8; border-radius: 999px;
+  padding: 5px 13px; font-size: 14px; font-weight: 800; white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.study-page .back-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 42px; border: 1px solid transparent; border-radius: 12px;
+  background: transparent; padding: 8px 12px; font-size: 14px; font-weight: 700; text-decoration: none;
+}
+.study-page .back-btn:hover { background: #f0f4fc; color: #2a64bc; }
+
+/* ---------- 学习壳：侧栏目录 + 正文 ---------- */
+.study-page .study-shell {
+  display: grid; grid-template-columns: 240px minmax(0, 1fr);
+  align-items: start; gap: clamp(20px, 2vw, 36px); padding: 24px var(--gutter) 40px;
+}
+.study-page .study-content, .study-page #cards { min-width: 0; }
+.study-page .sidebar {
+  position: sticky; top: 24px; max-height: calc(100vh - 48px); max-height: calc(100dvh - 48px);
+  display: flex; flex-direction: column; background: var(--card);
+  border: 1px solid var(--line); border-radius: 20px; padding: 16px 10px 12px;
+}
+.study-page .sidebar-label { display: flex; align-items: center; justify-content: space-between; padding: 0 10px 12px; font-size: 13px; font-weight: 800; color: var(--muted); }
+.study-page .nav-count { border-radius: 6px; padding: 1px 7px; background: #f0f3f9; color: #596275; font-size: 12px; }
+.study-page .category-nav { min-height: 0; overflow-y: auto; scrollbar-width: thin; scrollbar-color: #cdd5e3 transparent; overscroll-behavior-y: contain; }
+.study-page .category-nav > summary { display: none; }
+.study-page .sidebar-note { padding: 12px 10px 0; margin-top: 10px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
+.study-page .sidebar-note a { color: var(--subject-ink); font-weight: 700; }
+.study-page #chips { display: flex; flex-direction: column; gap: 5px; padding: 0 4px; }
+.study-page .chip {
+  --c: var(--blue); display: flex; align-items: center; gap: 9px; flex: 0 0 auto;
+  width: 100%; min-width: 0; min-height: 46px; padding: 9px 10px; text-align: left;
+  border: 1px solid transparent; border-radius: 12px; background: transparent;
+  font-size: 14px; font-weight: 700;
+}
+.study-page .chip:hover { background: #f5f7fb; }
+.study-page .chip.on { background: #edf4ff; background: color-mix(in srgb, var(--c) 11%, white); border-color: color-mix(in srgb, var(--c) 32%, white); color: #34384d; }
+.study-page .chip-emoji { width: 24px; flex-shrink: 0; text-align: center; font-size: 20px; }
+.study-page .chip-name { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+.study-page .chip-num { flex-shrink: 0; border-radius: 7px; padding: 2px 7px; color: #757c8f; background: #edf0f5; font-size: 11px; font-weight: 700; }
+.study-page .chip-num.full { color: #187749; background: #dcf5e6; }
+
+/* ---------- 窄屏：目录折叠成原生 details（layout.js 配合） ---------- */
+@media (max-width: 999px) {
+  .study-page .study-shell { grid-template-columns: minmax(0, 1fr); gap: 18px; padding-top: 18px; }
+  .study-page .sidebar { position: static; max-height: none; padding: 0; border-radius: 16px; }
+  .study-page .sidebar-label, .study-page .sidebar-note { display: none; }
+  .study-page .category-nav { overflow: visible; }
+  .study-page .category-nav > summary { display: flex; align-items: center; gap: 12px; padding: 13px 16px; font-size: 14px; font-weight: 800; cursor: pointer; list-style: none; }
+  .study-page .category-nav > summary::-webkit-details-marker { display: none; }
+  .study-page .category-nav > summary::after { content: '⌄'; font-size: 20px; color: var(--muted); }
+  .study-page .category-nav[open] > summary::after { content: '⌃'; }
+  .study-page .nav-current { flex: 1; color: #2b68c7; text-align: right; font-weight: 600; }
+  .study-page #chips { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 6px; padding: 0 10px 12px; }
+}
+@media (max-width: 600px) {
+  .study-page .stats-pill { font-size: 12px; padding-inline: 9px; min-height: 32px; }
+  .study-page #chips { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .study-page .chip { gap: 6px; padding-inline: 7px; font-size: 13px; }
+  .study-page .chip-emoji { width: 20px; font-size: 18px; }
+  .study-page .chip-num { font-size: 10px; padding-inline: 5px; }
+}
