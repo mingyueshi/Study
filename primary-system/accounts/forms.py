@@ -1,6 +1,5 @@
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.password_validation import validate_password
 from .models import User
 
 
@@ -17,7 +16,7 @@ class LearnerRegistrationForm(forms.ModelForm):
     password1 = forms.CharField(
         label='设置密码', strip=False,
         widget=forms.PasswordInput(attrs={'autocomplete': 'new-password'}),
-        help_text='至少 8 位，不要用生日或 123456 这类简单密码。')
+        help_text='给自己一个好记的密码就行，孩子自己能输入最重要。')
     password2 = forms.CharField(
         label='再输一遍密码', strip=False,
         widget=forms.PasswordInput(attrs={'autocomplete': 'new-password'}))
@@ -32,8 +31,6 @@ class LearnerRegistrationForm(forms.ModelForm):
         password2 = self.cleaned_data.get('password2')
         if password1 and password2 and password1 != password2:
             raise forms.ValidationError('两次输入的密码不一致。', code='password_mismatch')
-        if password2:
-            validate_password(password2, User(username=self.cleaned_data.get('username') or ''))
         return password2
 
     def save(self, commit=True):

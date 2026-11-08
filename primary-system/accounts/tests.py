@@ -44,15 +44,20 @@ class RegistrationTests(PlatformFixture):
         self.assertEqual(self.register().url, '/')
         self.assertEqual(self.client.get('/accounts/register/').status_code, 302)
 
-    def test_register_rejects_mismatch_weak_and_duplicate(self):
+    def test_register_rejects_mismatch_and_duplicate(self):
         self.assertContains(self.register(password2='happy-learning-43'), '两次输入的密码不一致')
-        self.assertContains(self.register(username='weakkid', password1='12345678', password2='12345678'), '密码')
+        # 自用系统不设密码复制度限制：简单短密码直接可用（换一个未登录会话注册，
+        # 避免注册成功把主会话登录、影响后续用例的匿名前提）。
+        weak = self.client_class()
+        self.assertEqual(weak.post('/accounts/register/', {
+            'username': 'weakkid', 'password1': '1234', 'password2': '1234'}).status_code, 302)
+        self.assertTrue(get_user_model().objects.filter(username='weakkid').exists())
         self.register()
         other = self.client_class()  # 换一个未登录会话再注册同名账号
         self.assertContains(other.post('/accounts/register/', {
             'username': 'newkid', 'password1': 'happy-learning-42', 'password2': 'happy-learning-42',
         }), '已存在')
-        self.assertEqual(get_user_model().objects.count(), 1)
+        self.assertEqual(get_user_model().objects.count(), 2)
 
     def test_privilege_fields_cannot_be_injected(self):
         self.register(is_staff='on', is_superuser='on')

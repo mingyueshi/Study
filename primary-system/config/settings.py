@@ -65,12 +65,9 @@ else:
     raise ImproperlyConfigured('PRIMARY_DB_ENGINE must be sqlite or postgres.')
 
 AUTH_USER_MODEL = 'accounts.User'
-AUTH_PASSWORD_VALIDATORS = [
-    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
-    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
-    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
-    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
-]
+# 自用家庭系统，不设密码复制度限制（长度/常见密码/全数字/与用户名相似都不拦）；
+# 表单侧仍要求两次输入一致，注册页会提示忘记密码联系管理员重置。
+AUTH_PASSWORD_VALIDATORS = []
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'

@@ -570,3 +570,13 @@ SQLite相关38项（37通过／1PG跳过）、PG批次10/10含并发首导、前
   test_area_filter_single_select 去掉书架参数透传断言；test_home_shelf_renders_
   textbook_section_only 改在英语模块页验证书架网格。全量 `make test` 589 项通过。
 - 未运行 PostgreSQL 专项；未提交→随本次提交入库。
+
+## 2026-11-08：注册与改密取消密码复制度限制
+
+- 自用家庭系统定位：AUTH_PASSWORD_VALIDATORS 清空（长度/常见密码/全数字/
+  与用户名相似四项全不拦，注册、改密、后台同口径）；注册表单只保留
+  「两次输入一致」，help_text 改为「给自己一个好记的密码就行」。
+- 测试：原「弱密码拒绝」断言改为「1234 直接注册成功」（独立会话避免注册
+  成功登录影响主会话），重复注册与两次不一致口径不变。全量 `make test`
+  589 项通过（skipped 14）。
+- 未运行 PostgreSQL 专项；未提交→随本次提交入库。
