@@ -1,5 +1,5 @@
 {% extends 'base.html' %}{% load static %}{% block title %}不规则复数 · 乐学堂{% endblock %}
-{% block content %}<link rel="stylesheet" href="{% static 'plurals/plurals.css' %}?v=5"><script src="{% static 'speech.js' %}" defer></script><script src="{% static 'tts.js' %}" defer></script><script src="{% static 'plurals/plurals.js' %}?v=2" defer></script>
+{% block content %}<link rel="stylesheet" href="{% static 'plurals/plurals.css' %}?v=7"><script src="{% static 'speech.js' %}" defer></script><script src="{% static 'tts.js' %}" defer></script><script src="{% static 'plurals/plurals.js' %}?v=2" defer></script>
 <header class="plural-hero">
   <div class="plural-hero-copy">
     <p class="eyebrow">英语 · 认词形</p>
@@ -13,43 +13,49 @@
   </div>
 </header>
 
-<section class="plural-practice" id="practice" data-plural-round
-         data-answer="{{ round.plural }}" data-singular="{{ round.singular }}"
-         data-report-url="{% url 'plurals-report' %}">
-  <p class="plural-practice-title">练一练 · 给单数选复数</p>
-  <p class="plural-word"><b>{{ round.singular }}</b><span>的复数是？</span>
-    <button class="say-chip" type="button" data-say="{{ round.singular }}" aria-label="朗读 {{ round.singular }}">🔊 朗读</button></p>
-  <p class="plural-word-zh">{{ round.zh }}</p>
-  <div class="plural-options">{% for option in round.options %}<button class="plural-option" type="button" data-plural-option data-form="{{ option }}"><i class="plural-option-key" aria-hidden="true">{{ forloop.counter }}</i><span>{{ option }}</span></button>{% endfor %}</div>
-  <p class="plural-feedback" data-plural-feedback></p>
-  <p class="plural-score">连续答对 <b data-plural-streak>0</b> · 累计答对 <b data-plural-correct>0</b>／<b data-plural-asked>0</b></p>
-  <div class="plural-actions"><a class="button small ghost" href="{{ next_href }}">换一题 ↻</a></div>
-</section>
-
-<div class="plural-shell">
-  <div class="plural-toolbar">
-    <input class="plural-search" type="search" data-plural-search placeholder="单词或中文，如 foot" aria-label="筛选不规则复数">
-    <div class="plural-buckets" data-plural-buckets>
-      <button type="button" class="plural-bucket on" data-bucket="all">全部<i>{{ total }}</i></button>
-      {% for group in groups %}<button type="button" class="plural-bucket" data-bucket="{{ group.code }}">{{ group.name }}<i>{{ group.count }}</i></button>{% endfor %}
+<div class="plural-workspace">
+  <div class="plural-side">
+    <section class="plural-practice" id="practice" data-plural-round
+             data-answer="{{ round.plural }}" data-singular="{{ round.singular }}"
+             data-report-url="{% url 'plurals-report' %}">
+      <p class="plural-practice-title">练一练 · 给单数选复数</p>
+      <p class="plural-word"><b>{{ round.singular }}</b>{% if round.singular_ipa %}<i class="plural-ipa">{{ round.singular_ipa }}</i>{% endif %}<span>的复数是？</span>
+        <button class="say-chip" type="button" data-say="{{ round.singular }}" aria-label="朗读 {{ round.singular }}">🔊 朗读</button></p>
+      <p class="plural-word-zh">{{ round.zh }}</p>
+      <div class="plural-options">{% for option in round.options %}<button class="plural-option" type="button" data-plural-option data-form="{{ option }}"><i class="plural-option-key" aria-hidden="true">{{ forloop.counter }}</i><span>{{ option }}</span></button>{% endfor %}</div>
+      <p class="plural-feedback" data-plural-feedback></p>
+      <div class="plural-score-row">
+        <p class="plural-score">连续 <b data-plural-streak>0</b> · 累计 <b data-plural-correct>0</b>／<b data-plural-asked>0</b></p>
+        <div class="plural-actions"><a class="button small ghost" href="{{ next_href }}">换一题 ↻</a></div>
+      </div>
+    </section>
+    <div class="plural-side-tools">
+      <input class="plural-search" type="search" data-plural-search placeholder="单词或中文，如 foot" aria-label="筛选不规则复数">
+      <div class="plural-buckets" data-plural-buckets>
+        <button type="button" class="plural-bucket on" data-bucket="all">全部<i>{{ total }}</i></button>
+        {% for group in groups %}<button type="button" class="plural-bucket" data-bucket="{{ group.code }}">{{ group.name }}<i>{{ group.count }}</i></button>{% endfor %}
+      </div>
     </div>
   </div>
-  {% for group in groups %}
-  <section class="plural-group" data-group="{{ group.code }}">
-    <div class="section-heading"><div><h2>{{ group.name }}</h2><p>{{ group.hint }}</p></div></div>
-    <div class="plural-grid">
-      {% for card in group.rows %}
-      <article class="plural-card" data-plural-card data-singular="{{ card.singular }}" data-zh="{{ card.zh }}" data-group="{{ card.group }}">
-        {% if card.tier == 'extended' %}<span class="plural-tier">拓展</span>{% endif %}
-        <p class="plural-pair"><button type="button" class="plural-say" data-say="{{ card.singular }}" aria-label="朗读 {{ card.singular }}"><b class="plural-singular">{{ card.singular }}</b></button><span class="plural-arrow" aria-hidden="true">→</span><button type="button" class="plural-say" data-say="{{ card.plural }}" aria-label="朗读 {{ card.plural }}"><b class="plural-plural">{{ card.plural }}</b></button></p>
-        <p class="plural-zh">{% if card.emoji %}{{ card.emoji }} {% endif %}{{ card.zh }}
-          <button class="say-chip" type="button" data-say="{{ card.singular }}, {{ card.plural }}" aria-label="朗读 {{ card.singular }} 和 {{ card.plural }}">🔊</button></p>
-        {% if card.note %}<p class="plural-note">{{ card.note }}</p>{% endif %}
-      </article>
-      {% endfor %}
-    </div>
-  </section>
-  {% endfor %}
-  <p class="plural-note-foot">练习只考没有「拓展」徽章的核心词。</p>
+
+  <div class="plural-main plural-shell">
+    {% for group in groups %}
+    <section class="plural-group" data-group="{{ group.code }}">
+      <div class="section-heading"><div><h2>{{ group.name }}</h2><p>{{ group.hint }}</p></div></div>
+      <div class="plural-grid">
+        {% for card in group.rows %}
+        <article class="plural-card" data-plural-card data-singular="{{ card.singular }}" data-zh="{{ card.zh }}" data-group="{{ card.group }}">
+          {% if card.tier == 'extended' %}<span class="plural-tier">拓展</span>{% endif %}
+          <p class="plural-pair"><button type="button" class="plural-say" data-say="{{ card.singular }}" aria-label="朗读 {{ card.singular }}"><b class="plural-singular">{{ card.singular }}</b></button>{% if card.singular_ipa %}<i class="plural-ipa">{{ card.singular_ipa }}</i>{% endif %}<span class="plural-arrow" aria-hidden="true">→</span><button type="button" class="plural-say" data-say="{{ card.plural }}" aria-label="朗读 {{ card.plural }}"><b class="plural-plural">{{ card.plural }}</b></button>{% if card.plural_ipa %}<i class="plural-ipa">{{ card.plural_ipa }}</i>{% endif %}</p>
+          <p class="plural-zh">{% if card.emoji %}{{ card.emoji }} {% endif %}{{ card.zh }}
+            <button class="say-chip" type="button" data-say="{{ card.singular }}, {{ card.plural }}" aria-label="朗读 {{ card.singular }} 和 {{ card.plural }}">🔊</button></p>
+          {% if card.note %}<p class="plural-note">{{ card.note }}</p>{% endif %}
+        </article>
+        {% endfor %}
+      </div>
+    </section>
+    {% endfor %}
+    <p class="plural-note-foot">练习只考没有「拓展」徽章的核心词。</p>
+  </div>
 </div>
 {% endblock %}

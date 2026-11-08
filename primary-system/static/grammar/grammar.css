@@ -1,13 +1,19 @@
 /* 英语语法专题：章节导航 + 知识点卡（讲解/要点/表格/口诀/例题/易错/巩固题）。 */
 
 /* 章节号徽章：覆盖平台 10px 色点，装下两位序号 */
-.unit-nav .grammar-dot { display: inline-block; width: auto; height: auto; padding: 0 8px; border-radius: 999px; background: #68cfab; color: #14503a; font-size: 13px; font-weight: 800; line-height: 1.5; vertical-align: baseline; }
+.unit-nav .grammar-dot { display: inline-block; width: auto; height: auto; padding: 0 7px; border-radius: 999px; background: #68cfab; color: #14503a; font-size: 12px; font-weight: 800; line-height: 1.5; vertical-align: baseline; }
 .unit-nav a[aria-current] .grammar-dot, .unit-nav a:hover .grammar-dot { background: #fff; }
+/* 侧栏章节导航压缩一档（同 idioms/phonetics 侧栏处理） */
+.library-layout .unit-nav { padding: 18px 14px; }
+.library-layout .unit-nav h2 { margin-bottom: 10px; font-size: 1.05rem; }
+.library-layout .unit-nav a { min-height: 40px; padding: 7px 11px; margin-block: 3px; border-radius: 10px; font-size: .84rem; }
+.library-layout .unit-nav .unit-count { font-size: 12px; }
 
 .grammar-board { min-width: 0; }
 
 /* ── 知识点卡 ──────────────────────────────────────────────────────────── */
-.grammar-lesson { padding: 24px 28px; margin-bottom: 24px; border: 1px solid var(--line); border-top: 4px solid #4d96ff; border-radius: 20px; background: var(--white); box-shadow: 0 3px 0 #233e3704; scroll-margin-top: 24px; }
+.grammar-lesson { padding: 24px 28px; margin-bottom: 24px; border: 1px solid var(--line); border-top: 4px solid #4d96ff; border-radius: 20px; background: var(--white); box-shadow: 0 3px 0 #233e3704; scroll-margin-top: 24px; transition: transform .14s ease, box-shadow .14s ease, border-color .14s ease; }
+.grammar-lesson:hover, .grammar-lesson:focus-within { transform: translateY(-3px); border-color: #cfe0f2; box-shadow: 0 8px 18px #233e3710; }
 .grammar-lesson-head { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; }
 .grammar-lesson-head h3 { margin: 0; font-size: 25px; }
 .grammar-definition { margin: 0 0 14px; font-size: 19px; line-height: 1.85; }

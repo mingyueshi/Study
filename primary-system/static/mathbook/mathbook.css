@@ -556,3 +556,15 @@
   .study-page .fig-btn { font-size: 15px; }
   .study-page .fig-note { font-size: 16px; }
 }
+
+/* ---------- 册列表横幅：全站同款渐变标题卡 ---------- */
+.study-page .textbook-banner.textbook-banner-hero {
+  flex-direction: column; align-items: flex-start; gap: 6px;
+  margin: 14px 0 22px; padding: 20px 26px;
+  background:
+    radial-gradient(ellipse at 92% 8%, #fff3d6, transparent 60%),
+    linear-gradient(120deg, #f1f8ea, #eaf3e0);
+  border: 1px solid #cfe3c0; border-radius: 20px; color: var(--ink);
+}
+.study-page .textbook-banner.textbook-banner-hero span { color: var(--muted); font-size: 13px; font-weight: 800; letter-spacing: .08em; }
+.study-page .textbook-banner.textbook-banner-hero strong { font-size: clamp(24px, 2.4vw, 32px); color: var(--ink); }

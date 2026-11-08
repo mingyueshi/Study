@@ -109,10 +109,37 @@ def practice_round(rng):
     return {**item, "options": options}
 
 
-def card_rows(items):
+def _ipa_index(items):
+    """词头 -> 已核对 IPA（primary-english/primary-words 生效记录）。
+
+    与 catalog.english_link_pronunciations 同源同口径：运行时批量查词库，
+    缺失的如实留空，不用数据里缓存的历史音标冒充。
+    """
+    headwords = {word for item in items for word in (item["singular"], item["plural"])}
+    if not headwords:
+        return {}
+    from lexicon.models import active_records
+    rows = active_records().filter(
+        release__source__code__in=('primary-english', 'primary-words'),
+        headword__in=headwords,
+    ).select_related('binding__pronunciation')
+    index = {}
+    for record in rows:
+        pron = record.binding.pronunciation
+        if pron is None or not pron.is_reviewed:
+            continue
+        reading = (pron.editorial_value or record.pronunciation_value or '').strip()
+        if reading:
+            index.setdefault(record.headword, reading)
+    return index
+
+
+def card_rows(items, ipa=None):
+    ipa = ipa or {}
     return [{"singular": item["singular"], "plural": item["plural"], "zh": item.get("zh", ""),
              "emoji": item.get("emoji", ""), "tier": item["tier"], "note": item.get("note", ""),
-             "group": item["group"]}
+             "group": item["group"],
+             "singular_ipa": ipa.get(item["singular"], ""), "plural_ipa": ipa.get(item["plural"], "")}
             for item in items]
 
 
@@ -125,15 +152,17 @@ def page(request):
     groups = data["groups"]
     seed = request.GET.get("q_seed", "")[:40]
     rng = random.Random(seed) if seed else random.SystemRandom()
+    ipa = _ipa_index(items)
     group_rows = []
     for group in groups:
-        rows = card_rows([item for item in items if item["group"] == group["code"]])
+        rows = card_rows([item for item in items if item["group"] == group["code"]], ipa)
         group_rows.append({**group, "rows": rows, "count": len(rows)})
+    round_item = practice_round(rng)
     return render(request, "plurals/index.html", {
         "groups": group_rows,
         "total": len(items),
         "core_count": sum(1 for item in items if item["tier"] == "core"),
-        "round": practice_round(rng),
+        "round": {**round_item, "singular_ipa": ipa.get(round_item["singular"], "")},
         "next_href": "?q_seed=" + secrets.token_hex(4) + "#practice",
     })
 

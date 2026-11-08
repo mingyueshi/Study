@@ -1,5 +1,5 @@
 {% extends 'base.html' %}{% load static %}{% block title %}场景单词 · 乐学堂{% endblock %}
-{% block content %}<link rel="stylesheet" href="{% static 'words/words.css' %}"><script src="{% static 'speech.js' %}" defer></script><script src="{% static 'tts.js' %}" defer></script>{{ state|json_script:"words-state" }}
+{% block content %}<link rel="stylesheet" href="{% static 'words/words.css' %}?v=3"><script src="{% static 'speech.js' %}" defer></script><script src="{% static 'tts.js' %}" defer></script>{{ state|json_script:"words-state" }}
 <div class="study-shell words-shell">
   <aside class="sidebar" aria-label="场景选择">
     <div class="sidebar-label">切换场景 <span class="nav-count" id="words-nav-count"></span></div>
@@ -16,5 +16,5 @@
     <main id="words-cards" tabindex="-1"></main>
   </div>
 </div>
-<script src="{% static 'words/words.js' %}" defer></script>
+<script src="{% static 'words/words.js' %}?v=2" defer></script>
 {% endblock %}

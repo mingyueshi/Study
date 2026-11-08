@@ -10,6 +10,17 @@
 .tts-controls-grid button { min-height: 46px; }
 .tts-controls-note { margin: 10px 0 0; font-size: 13px; color: var(--muted); line-height: 1.7; }
 
+/* 折叠容器：模块详情/语法页把朗读设置收成一行，要点开才展开。 */
+.tts-details { margin: 0 0 20px; }
+.tts-details summary { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 8px 18px; border: 1px solid var(--w-line, #c3ddeb); border-radius: 999px; background: #fff; color: #365f77; font-size: 15px; font-weight: 700; cursor: pointer; list-style: none; transition: border-color .14s ease, background .14s ease; }
+.tts-details summary::-webkit-details-marker { display: none; }
+.tts-details summary::marker { content: ""; }
+.tts-details summary::after { content: "▸"; font-size: 12px; }
+.tts-details summary:hover { border-color: #487e9c; background: #f2f8fb; }
+.tts-details[open] summary::after { content: "▾"; }
+.tts-details[open] summary { margin-bottom: 12px; }
+.tts-details .tts-settings { margin-bottom: 0; }
+
 @container tts-settings (max-width: 700px) {
   .tts-controls-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 18px; }
   .tts-voice-control { grid-column: 1 / -1; }

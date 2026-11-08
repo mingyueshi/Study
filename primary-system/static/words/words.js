@@ -70,7 +70,7 @@
     const related = (word.related || []).map((r) =>
       `<button class="rel" type="button" data-say="${escapeHtml(r.en)}" aria-label="朗读 ${escapeHtml(r.en)}">` +
       `<b>${escapeHtml(r.en)}</b>${r.ipa ? `<i class="rel-ipa">${escapeHtml(r.ipa)}</i>` : ''}` +
-      `${r.zh ? `<i class="rel-zh">${escapeHtml(r.zh)}</i>` : '<i class="rel-zh">拓展词</i>'}</button>`).join('');
+      `${r.zh ? `<i class="rel-zh">${escapeHtml(r.zh)}</i>` : ''}</button>`).join('');
     const unitTag = showUnitTag && unit.zh
       ? `<span class="unit-tag">${escapeHtml(unit.emoji || '')} ${escapeHtml(unit.zh)}</span>` : '';
     return `<article class="wcard${word.learned ? ' learned' : ''}" data-word="${escapeHtml(word.id)}" data-say-seq="${escapeHtml(word.en)}" style="--c:${escapeHtml(unit.color || '#4d96ff')}">${unitTag}` +

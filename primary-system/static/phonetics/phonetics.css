@@ -2,10 +2,12 @@
 
 .ph-board { min-width: 0; }
 .ph-group { margin-bottom: 34px; scroll-margin-top: 24px; }
+.ph-group[hidden] { display: none !important; }
 
 .ph-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); align-items: stretch; gap: 16px; }
 
-.ph-card { display: flex; flex-direction: column; min-width: 0; padding: 16px 18px; border: 1px solid #e0e7e0; border-top: 4px solid color-mix(in srgb, var(--c, #2f9e5f) 55%, #fffefa); border-radius: 18px; background: var(--white, #fff); box-shadow: 0 3px 0 #233e3704; }
+.ph-card { display: flex; flex-direction: column; min-width: 0; padding: 16px 18px; border: 1px solid #e0e7e0; border-top: 4px solid color-mix(in srgb, var(--c, #2f9e5f) 55%, #fffefa); border-radius: 18px; background: var(--white, #fff); box-shadow: 0 3px 0 #233e3704; transition: transform .14s ease, box-shadow .14s ease, border-color .14s ease; }
+.ph-card:hover, .ph-card:focus-within { transform: translateY(-3px); border-color: #cfe0c2; box-shadow: 0 8px 18px #233e3710; }
 
 /* 大音标 + 试听键：点大音标或喇叭都播放音素原声 */
 .ph-symbol { display: flex; align-items: center; gap: 12px; }
@@ -40,6 +42,12 @@
 
 /* 侧栏 emoji 点：不用共享色点圆片，按文字尺寸渲染 */
 .unit-nav .unit-dot { width: auto; height: auto; background: none; }
+/* 侧栏分组导航压缩一档（同 idioms/words 侧栏处理） */
+.library-layout .unit-nav { padding: 18px 14px; }
+.library-layout .unit-nav h2 { margin-bottom: 10px; font-size: 1.05rem; }
+.library-layout .unit-nav a { min-height: 40px; padding: 7px 11px; margin-block: 3px; border-radius: 10px; font-size: .84rem; }
+.library-layout .unit-nav .unit-count { font-size: 12px; }
+.library-layout .unit-nav .unit-dot { margin-right: 6px; font-size: .92em; }
 
 @media (max-width: 640px) {
   .ph-grid { grid-template-columns: minmax(0, 1fr); }

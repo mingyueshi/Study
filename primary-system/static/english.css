@@ -32,13 +32,13 @@
 #english-cards .pic-fallback { color: var(--green, #22634c); font-size: 26px; font-weight: 800; text-transform: uppercase; }
 #english-cards .winfo { flex: 1; min-width: 0; }
 #english-cards .wline { display: flex; align-items: center; gap: 10px; margin: 0; }
-#english-cards .word { min-width: 0; margin: 0; font-size: 32px; font-weight: 800; line-height: 1.3; overflow-wrap: anywhere; letter-spacing: -.01em; }
+#english-cards .word { min-width: 0; margin: 0; font-size: 34px; font-weight: 800; line-height: 1.3; overflow-wrap: anywhere; letter-spacing: -.01em; }
 #english-cards .say { display: grid; place-items: center; flex: 0 0 46px; width: 46px; height: 46px; padding: 0; border: 0; border-radius: 14px; background: #eef3f9; font-size: 22px; cursor: pointer; transition: transform .15s ease, background .15s ease; }
 #english-cards .say:hover { background: #e0eaf5; transform: scale(1.08); }
 #english-cards .say:active { transform: scale(.92); }
 #english-cards .wmeta { display: flex; align-items: baseline; flex-wrap: wrap; gap: 2px 14px; margin-top: 5px; }
-#english-cards .ipa { color: #68608d; font-size: 19px; overflow-wrap: anywhere; }
-#english-cards .zh { font-size: 19px; font-weight: 500; overflow-wrap: anywhere; }
+#english-cards .ipa { color: #57517d; font-size: 21px; font-weight: 650; overflow-wrap: anywhere; }
+#english-cards .zh { font-size: 20px; font-weight: 600; color: #33404d; overflow-wrap: anywhere; }
 #english-cards .wsec { display: flex; align-items: flex-start; gap: 10px; margin-top: 16px; }
 #english-cards .seclabel { flex-shrink: 0; margin-top: 4px; padding: 4px 10px; border-radius: 9px; background: #edf3e5; color: var(--green, #22634c); font-size: 16px; font-weight: 750; }
 #english-cards .parts, #english-cards .rels { display: flex; align-items: flex-start; flex-wrap: wrap; gap: 8px; min-width: 0; }
@@ -65,9 +65,9 @@
 #english-cards .rel { display: inline-flex; flex-direction: column; align-items: flex-start; gap: 2px; max-width: 100%; min-height: 46px; padding: 8px 12px; border: 1px solid #dfe5ee; border-radius: 12px; background: #fafbfd; color: var(--ink, #233e37); overflow-wrap: anywhere; text-align: left; cursor: pointer; transition: transform .12s ease, border-color .12s ease, background .12s ease; }
 #english-cards .rel:hover { border-color: #b9c8dd; background: #f0f5fb; transform: translateY(-2px); }
 #english-cards .rel:active { transform: scale(.97); }
-#english-cards .rel b { font-size: 18px; font-weight: 750; }
-#english-cards .rel i { display: inline-flex; align-items: center; gap: 4px; font-style: normal; font-size: 15px; color: var(--muted, #586b62); }
-#english-cards .rel .rel-ipa { color: #68608d; font-size: 13px; line-height: 1.4; }
+#english-cards .rel b { font-size: 20px; font-weight: 800; }
+#english-cards .rel i { display: inline-flex; align-items: center; gap: 4px; font-style: normal; font-size: 16px; color: #465765; }
+#english-cards .rel .rel-ipa { color: #57517d; font-size: 14px; font-weight: 650; line-height: 1.4; }
 #english-cards .rel[class*="t-"] { border-style: solid; border-color: color-mix(in srgb, var(--rc) 38%, #fff); background: color-mix(in srgb, var(--rc) 8%, #fff); }
 #english-cards .rel[class*="t-"] b { color: color-mix(in srgb, var(--rc) 68%, #33404d); }
 #english-cards .rel .rel-tag { display: inline-grid; place-items: center; min-width: 16px; height: 16px; padding: 0 3px; border-radius: 5px; background: var(--rc); color: #fff; font-size: 11px; font-weight: 800; line-height: 1; }
@@ -86,12 +86,12 @@
   #english-cards { grid-template-columns: minmax(0, 1fr); }
   #english-cards .wcard { padding: 16px 18px; }
   #english-cards .pic { flex-basis: 54px; width: 54px; height: 54px; font-size: 28px; }
-  #english-cards .word { font-size: 28px; }
+  #english-cards .word { font-size: 30px; }
   #english-cards .say { flex-basis: 42px; width: 42px; height: 42px; font-size: 20px; }
-  #english-cards .ipa { font-size: 17px; }
-  #english-cards .zh { font-size: 17px; }
-  #english-cards .part b, #english-cards .phrase b, #english-cards .rel b { font-size: 16px; }
-  #english-cards .part i, #english-cards .phrase i, #english-cards .rel i { font-size: 14px; }
+  #english-cards .ipa { font-size: 19px; }
+  #english-cards .zh { font-size: 18px; }
+  #english-cards .part b, #english-cards .phrase b, #english-cards .rel b { font-size: 18px; }
+  #english-cards .part i, #english-cards .phrase i, #english-cards .rel i { font-size: 15px; }
   #english-cards .memo { font-size: 15px; }
 }
 @media (prefers-reduced-motion: reduce) {

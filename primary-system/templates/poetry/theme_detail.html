@@ -2,13 +2,13 @@
 {% load static %}
 {% block title %}{{ theme.title }} · 诗词题材分类 · 乐学堂{% endblock %}
 {% block reference_content %}
-<link rel="stylesheet" href="{% static 'poetry/themes.css' %}">
+<link rel="stylesheet" href="{% static 'poetry/themes.css' %}?v=2">
 <nav class="ref-breadcrumbs" aria-label="专题路径">
   <a href="{% url 'poetry-index' %}">古诗文</a><span aria-hidden="true">›</span>
   <a href="{% url 'poetry-themes' %}">题材分类</a><span aria-hidden="true">›</span>
   <span aria-current="page">{{ theme.title }}</span>
 </nav>
-<header class="theme-hero theme-hero-detail">
+<header class="theme-hero theme-hero-detail page-heading-compact">
   <p class="ref-kicker">{% if group %}{{ group.title }} · {% endif %}题材</p>
   <h1>{{ theme.title }}</h1>
   <p class="theme-hero-sub">{{ theme.subtitle }}</p>
@@ -20,64 +20,86 @@
     <span>宋 <strong>{{ counts.song }}</strong> 首</span>
   </div>
 </header>
-<nav class="theme-dynasty" aria-label="按朝代浏览">
-  {% for code, label in dynasty_labels.items %}
-  <a class="theme-pill{% if dynasty == code %} is-active{% endif %}" href="?dynasty={{ code }}{% if q %}&amp;q={{ q|urlencode }}{% endif %}">{{ label }}</a>
-  {% endfor %}
-</nav>
-<form method="get" class="ref-toolbar theme-search" role="search" aria-label="在{{ theme.title }}中查找">
-  <input type="hidden" name="dynasty" value="{{ dynasty }}">
-  <label class="ref-field ref-search">题名或作者<input name="q" value="{{ q }}" maxlength="60" placeholder="在这类诗里找作者或题名">
-  </label>
-  <div class="ref-actions"><button class="button" type="submit">查找</button>
-    <a class="ref-clear" href="?dynasty={{ dynasty }}">清除搜索</a>
-  </div>
-</form>
-{% if q %}
-<div class="ref-results-bar"><p>在「{{ theme.title }}」中搜索「{{ q }}」，命中 <strong>{{ total }}</strong> 首</p></div>
-{% endif %}
-
-{% if featured %}
-<section class="theme-section" aria-labelledby="featured-title">
-  <div class="theme-section-head">
-    <h2 id="featured-title">精选篇目</h2>
-    <p>题名与作者已核对，适合先读这几首。</p>
-  </div>
-  <div class="ref-grid theme-poem-grid">
-    {% for row in featured %}
-    <a class="ref-card ref-card-link theme-poem is-featured" href="{% url 'poetry-detail' row.pk %}?dynasty={{ dynasty }}{% if q %}&amp;q={{ q|urlencode }}{% endif %}">
-      <p class="theme-poem-label">精选 · {{ row.collection }}</p>
-      <h3>{{ row.title }}</h3>
-      <p class="ref-meta">{{ row.author|default:'来源未署作者' }}</p>
-      {% if row.excerpt %}<p class="ref-excerpt">{{ row.excerpt|truncatechars:72 }}</p>{% endif %}
-    </a>
-    {% endfor %}
-  </div>
-</section>
-{% endif %}
-
-<section class="theme-section" aria-labelledby="auto-title">
-  <div class="theme-section-head">
-    <h2 id="auto-title">关键词自动归档</h2>
-    <p>按题名与正文用词自动归入，未逐首人工校订；同一首诗只取最贴近的一类。{% if auto_total %}共 {{ auto_total }} 首。{% endif %}</p>
-  </div>
-  <div class="ref-grid theme-poem-grid">
-    {% for row in page %}
-    <a class="ref-card ref-card-link theme-poem" href="{% url 'poetry-detail' row.pk %}?dynasty={{ dynasty }}{% if q %}&amp;q={{ q|urlencode }}{% endif %}">
-      <p class="theme-poem-label">{{ row.collection }}</p>
-      <h3>{{ row.title|truncatechars:40 }}</h3>
-      <p class="ref-meta">{{ row.author|default:'来源未署作者' }}</p>
-      {% if row.excerpt %}<p class="ref-excerpt">{{ row.excerpt|truncatechars:72 }}</p>{% endif %}
-    </a>
-    {% empty %}
-    <div class="ref-empty ref-span">
-      <h2>这一类里暂时没有匹配的诗</h2>
-      <p>可以换一个朝代，或清除搜索后看看精选篇目。</p>
+<div class="theme-workspace">
+  <aside class="theme-side" aria-label="主题导航">
+    <div class="theme-side-card">
+      <p class="theme-side-label">朝代</p>
+      <nav class="theme-dynasty" aria-label="按朝代浏览">
+        {% for code, label in dynasty_labels.items %}
+        <a class="theme-pill{% if dynasty == code %} is-active{% endif %}" href="?dynasty={{ code }}{% if q %}&amp;q={{ q|urlencode }}{% endif %}">{{ label }}</a>
+        {% endfor %}
+      </nav>
     </div>
-    {% endfor %}
-  </div>
-  {% include 'pagination.html' %}
-</section>
+    <nav class="theme-side-card" aria-label="全部诗词主题">
+      <p class="theme-side-label">四季</p>
+      <div class="theme-nav-list">
+        {% for season in seasons %}<a class="theme-nav-link{% if season.code == theme.code %} on{% endif %}" href="{% url 'poetry-theme' season.code %}?dynasty={{ dynasty }}"><span class="theme-nav-emoji" aria-hidden="true">{{ season.emoji }}</span><span class="theme-nav-name">{{ season.title }}</span><span class="theme-nav-count">{{ season.counts.all }}</span></a>{% endfor %}
+      </div>
+      <p class="theme-side-label theme-nav-second">情感与题材</p>
+      {% for g in emotion_groups %}
+      <p class="theme-nav-group">{{ g.title }}</p>
+      <div class="theme-nav-list">
+        {% for t in g.themes %}<a class="theme-nav-link{% if t.meta.code == theme.code %} on{% endif %}" href="{% url 'poetry-theme' t.meta.code %}?dynasty={{ dynasty }}"><span class="theme-nav-name">{{ t.meta.title }}</span><span class="theme-nav-count">{{ t.counts.all }}</span></a>{% endfor %}
+      </div>
+      {% endfor %}
+    </nav>
+  </aside>
+  <div class="theme-main">
+    <form method="get" class="ref-toolbar theme-search" role="search" aria-label="在{{ theme.title }}中查找">
+      <input type="hidden" name="dynasty" value="{{ dynasty }}">
+      <label class="ref-field ref-search">题名或作者<input name="q" value="{{ q }}" maxlength="60" placeholder="在这类诗里找作者或题名">
+      </label>
+      <div class="ref-actions"><button class="button" type="submit">查找</button>
+        <a class="ref-clear" href="?dynasty={{ dynasty }}">清除搜索</a>
+      </div>
+    </form>
+    {% if q %}
+    <div class="ref-results-bar"><p>在「{{ theme.title }}」中搜索「{{ q }}」，命中 <strong>{{ total }}</strong> 首</p></div>
+    {% endif %}
 
-<p class="theme-back"><a href="{% url 'poetry-themes' %}?dynasty={{ dynasty }}">← 返回题材分类</a></p>
+    {% if featured %}
+    <section class="theme-section" aria-labelledby="featured-title">
+      <div class="theme-section-head">
+        <h2 id="featured-title">精选篇目</h2>
+        <p>题名与作者已核对，适合先读这几首。</p>
+      </div>
+      <div class="ref-grid theme-poem-grid">
+        {% for row in featured %}
+        <a class="ref-card ref-card-link theme-poem is-featured" href="{% url 'poetry-detail' row.pk %}?dynasty={{ dynasty }}{% if q %}&amp;q={{ q|urlencode }}{% endif %}">
+          <p class="theme-poem-label">精选 · {{ row.collection }}</p>
+          <h3>{{ row.title }}</h3>
+          <p class="ref-meta">{{ row.author|default:'来源未署作者' }}</p>
+          {% if row.excerpt %}<p class="ref-excerpt">{{ row.excerpt|truncatechars:72 }}</p>{% endif %}
+        </a>
+        {% endfor %}
+      </div>
+    </section>
+    {% endif %}
+
+    <section class="theme-section" aria-labelledby="auto-title">
+      <div class="theme-section-head">
+        <h2 id="auto-title">关键词自动归档</h2>
+        <p>按题名与正文用词自动归入，未逐首人工校订；同一首诗只取最贴近的一类。{% if auto_total %}共 {{ auto_total }} 首。{% endif %}</p>
+      </div>
+      <div class="ref-grid theme-poem-grid">
+        {% for row in page %}
+        <a class="ref-card ref-card-link theme-poem" href="{% url 'poetry-detail' row.pk %}?dynasty={{ dynasty }}{% if q %}&amp;q={{ q|urlencode }}{% endif %}">
+          <p class="theme-poem-label">{{ row.collection }}</p>
+          <h3>{{ row.title|truncatechars:40 }}</h3>
+          <p class="ref-meta">{{ row.author|default:'来源未署作者' }}</p>
+          {% if row.excerpt %}<p class="ref-excerpt">{{ row.excerpt|truncatechars:72 }}</p>{% endif %}
+        </a>
+        {% empty %}
+        <div class="ref-empty ref-span">
+          <h2>这一类里暂时没有匹配的诗</h2>
+          <p>可以换一个朝代，或清除搜索后看看精选篇目。</p>
+        </div>
+        {% endfor %}
+      </div>
+      {% include 'pagination.html' %}
+    </section>
+
+    <p class="theme-back"><a href="{% url 'poetry-themes' %}?dynasty={{ dynasty }}">← 返回题材分类</a></p>
+  </div>
+</div>
 {% endblock %}

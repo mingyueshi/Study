@@ -1,7 +1,7 @@
 {% extends 'base.html' %}{% load static %}{% block title %}英语语法 · 乐学堂{% endblock %}
-{% block content %}<link rel="stylesheet" href="{% static 'grammar/grammar.css' %}"><script src="{% static 'speech.js' %}" defer></script><script src="{% static 'tts.js' %}" defer></script><script src="{% static 'grammar/grammar.js' %}" defer></script>{% include 'includes/tts_controls.html' %}
-<div class="page-heading"><p class="eyebrow">英语 · 精讲</p><h1>英语语法</h1>
-  <p>把单词放对位置的规则，一章一章讲清楚：看讲解、记口诀、辨易错，读完用巩固题测一测。练习记录统一进挑战题库。</p></div>
+{% block content %}<link rel="stylesheet" href="{% static 'grammar/grammar.css' %}?v=2"><script src="{% static 'speech.js' %}" defer></script><script src="{% static 'tts.js' %}" defer></script><script src="{% static 'grammar/grammar.js' %}" defer></script>
+<header class="page-heading page-heading-compact"><p class="eyebrow">英语 · 精讲</p><h1>英语语法</h1>
+  <p>把单词放对位置的规则，一章一章讲清楚：看讲解、记口诀、辨易错，读完用巩固题测一测。练习记录统一进挑战题库。</p></header>
 <div class="library-layout">
   <aside class="unit-nav" aria-label="语法章节导航">
     <h2>语法章节</h2>

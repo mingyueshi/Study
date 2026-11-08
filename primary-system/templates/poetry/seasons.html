@@ -1,39 +1,50 @@
 {% extends 'base.html' %}{% load static %}
 {% block title %}诗词四季 · 乐学堂{% endblock %}
 {% block content %}
-<link rel="stylesheet" href="{% static 'poetry/seasons.css' %}?v=2">
+<link rel="stylesheet" href="{% static 'poetry/seasons.css' %}?v=4">
 <div class="fh-topline"><a class="back" href="{% url 'poetry-index' %}">← 古诗文</a><span>跟着季节读诗</span></div>
 <header class="seasons-hero">
   <div class="seasons-hero-copy">
     <p class="eyebrow">古诗词 · 四季与情感</p>
     <h1>诗词四季</h1>
-    <p class="seasons-hero-tag">春风、夏蝉、秋月、冬雪——背过的诗原来都带着季节。按季节翻，也按心情找。</p>
-    <p class="seasons-hero-stats"><span><b>4</b> 季</span><span><b>{{ emotion_groups|length }}</b> 组题材</span><span><b>{{ emotion_total }}</b> 首情感诗</span></p>
-  </div>
-  <div class="seasons-dynasty" role="group" aria-label="按朝代筛选">
-    <span class="seasons-dynasty-label">朝代</span>
-    <span class="seasons-dynasty-chips">{% for code, label in dynasty_labels.items %}<a class="chip{% if dynasty == code %} on{% endif %}" href="?dynasty={{ code }}">{{ label }}</a>{% endfor %}</span>
   </div>
 </header>
-<section class="seasons-grid" aria-label="按季节浏览">
-  {% for season in seasons %}
-  <a class="season-card season-{{ season.code }}" href="{% url 'poetry-theme' season.code %}?dynasty={{ dynasty }}">
-    <span class="season-emoji" aria-hidden="true">{{ season.emoji }}</span>
-    <b class="season-name">{{ season.title }}</b>
-    <i class="season-subtitle">{{ season.subtitle }}</i>
-    <span class="season-count">{{ season.counts.all }} 首{% if dynasty != 'all' %}（{{ season.counts.tang }} 唐 · {{ season.counts.song }} 宋）{% endif %}</span>
-    <p class="season-desc">{{ season.description }}</p>
-  </a>
-  {% endfor %}
-</section>
-<section class="seasons-emotions" aria-label="按情感与题材浏览">
-  <h2>按情感与题材</h2>
-  <p class="seasons-emotions-note">按关键词自动归档，个别诗归错了也别惊讶。</p>
-  {% for group in emotion_groups %}
-  <div class="seasons-group">
-    <div class="seasons-group-head"><h3>{{ group.title }}</h3><p>{{ group.description }}</p></div>
-    <div class="seasons-group-themes">{% for theme in group.themes %}<a class="seasons-theme" href="{% url 'poetry-theme' theme.meta.code %}?dynasty={{ dynasty }}"><b>{{ theme.meta.title }}</b><i>{{ theme.counts.all }} 首</i></a>{% endfor %}</div>
+<div class="seasons-workspace">
+  <aside class="seasons-side" aria-label="筛选与导航">
+    <div class="seasons-side-block">
+      <p class="seasons-side-label">朝代</p>
+      <div class="seasons-dynasty" role="group" aria-label="按朝代筛选">
+        <span class="seasons-dynasty-chips">{% for code, label in dynasty_labels.items %}<a class="chip{% if dynasty == code %} on{% endif %}" href="?dynasty={{ code }}">{{ label }}</a>{% endfor %}</span>
+      </div>
+    </div>
+    <nav class="seasons-side-block" aria-label="诗词主题">
+      <p class="seasons-side-label">四季</p>
+      <div class="seasons-nav-list">
+        {% for season in seasons %}<a class="seasons-nav-link" href="{% url 'poetry-theme' season.code %}?dynasty={{ dynasty }}"><span class="seasons-nav-emoji" aria-hidden="true">{{ season.emoji }}</span><span class="seasons-nav-name">{{ season.title }}</span><span class="seasons-nav-count">{{ season.counts.all }}</span></a>{% endfor %}
+      </div>
+      <p class="seasons-side-label seasons-nav-second">情感与题材</p>
+      {% for group in emotion_groups %}
+      <p class="seasons-nav-group">{{ group.title }}</p>
+      <div class="seasons-nav-list">
+        {% for theme in group.themes %}<a class="seasons-nav-link" href="{% url 'poetry-theme' theme.meta.code %}?dynasty={{ dynasty }}"><span class="seasons-nav-name">{{ theme.meta.title }}</span><span class="seasons-nav-count">{{ theme.counts.all }}</span></a>{% endfor %}
+      </div>
+      {% endfor %}
+    </nav>
+    <p class="seasons-side-note">题材按关键词自动归档，个别诗归错了也别惊讶。</p>
+  </aside>
+
+  <div class="seasons-main">
+    <div class="seasons-grid">
+      {% for season in seasons %}
+      <a class="season-card season-{{ season.code }}" href="{% url 'poetry-theme' season.code %}?dynasty={{ dynasty }}">
+        <span class="season-emoji" aria-hidden="true">{{ season.emoji }}</span>
+        <b class="season-name">{{ season.title }}</b>
+        <i class="season-subtitle">{{ season.subtitle }}</i>
+        <span class="season-count">{{ season.counts.all }} 首{% if dynasty != 'all' %}（{{ season.counts.tang }} 唐 · {{ season.counts.song }} 宋）{% endif %}</span>
+        <p class="season-desc">{{ season.description }}</p>
+      </a>
+      {% endfor %}
+    </div>
   </div>
-  {% endfor %}
-</section>
+</div>
 {% endblock %}

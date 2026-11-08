@@ -317,3 +317,39 @@
     transition: none;
   }
 }
+
+/* ── 主题详情：左右工作区——左 sticky 导航（朝代 + 全量主题），右诗单 ── */
+.theme-workspace { display: grid; grid-template-columns: minmax(280px, 320px) minmax(0, 1fr); gap: 22px; align-items: start; margin-bottom: 30px; }
+.theme-side {
+  position: sticky; top: 16px;
+  max-height: calc(100dvh - 32px); overflow-y: auto;
+  display: flex; flex-direction: column; gap: 14px;
+  padding: 16px;
+  border: 1px solid #d3e0c9; border-radius: 20px; background: #eef5e7;
+  scrollbar-width: thin; scrollbar-color: #b7c9ab transparent;
+}
+.theme-side-card { padding: 14px; border-radius: 14px; background: #fff; }
+.theme-side-label { margin: 0 0 8px; color: var(--muted, #586b62); font-size: 13px; font-weight: 800; letter-spacing: .08em; }
+.theme-nav-list { display: flex; flex-direction: column; gap: 3px; }
+.theme-nav-link { display: flex; align-items: center; gap: 8px; padding: 7px 10px; border-radius: 9px; color: #234b38; font-size: 14px; font-weight: 650; transition: background .14s ease; }
+.theme-nav-link:hover { background: #eaf4df; }
+.theme-nav-link.on { background: var(--green, #22634c); color: #fff; }
+.theme-nav-emoji { flex-shrink: 0; font-size: 16px; line-height: 1.2; }
+.theme-nav-count { margin-left: auto; color: var(--muted, #586b62); font-size: 12px; font-variant-numeric: tabular-nums; }
+.theme-nav-link.on .theme-nav-count { color: #d9ecda; }
+.theme-nav-group { margin: 10px 0 4px; color: #49643f; font-size: 13px; font-weight: 800; }
+.theme-nav-second { margin-top: 14px; padding-top: 12px; border-top: 1px dashed #d9e4d4; }
+.theme-main { min-width: 0; }
+
+/* 详情版 hero 压缩：标题卡内边距与字号收一档 */
+.theme-hero-detail { padding: 18px 26px; margin-bottom: 20px; }
+.theme-hero-detail h1 { margin-bottom: 6px; font-size: clamp(26px, 2.6vw, 36px); }
+.theme-hero-detail .theme-hero-sub { margin-bottom: 6px; font-size: 17px; }
+.theme-hero-detail .theme-hero-lead { font-size: 16px; line-height: 1.75; }
+.theme-hero-detail .theme-hero-stats { margin-top: 12px; }
+.theme-hero-detail .theme-prompt { margin-top: 12px; padding: 9px 14px; font-size: 14.5px; }
+
+@media (max-width: 860px) {
+  .theme-workspace { grid-template-columns: minmax(0, 1fr); }
+  .theme-side { position: static; max-height: none; }
+}

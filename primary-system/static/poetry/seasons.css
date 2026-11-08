@@ -1,38 +1,58 @@
-/* 诗词四季：四季大卡横排 + 情感与题材分组；每季一色，活泼清晰。 */
+/* 诗词四季：左右工作区——左 sticky 全量导航（朝代 + 四季 + 情感题材），右四季大卡。 */
 /* 顶栏返回：本页未加载家族其余样式，就地补齐。 */
 .fh-topline { display: flex; align-items: baseline; gap: 12px; margin: 14px 0 0; font-size: 15px; }
 .fh-topline .back { color: var(--green, #22634c); font-weight: 700; text-decoration: none; }
 .fh-topline .back:hover { text-decoration: underline; }
 .fh-topline span { color: var(--muted, #586b62); font-size: 14px; }
-/* hero：绿系渐变卡，与全站专题页同构。 */
+
+/* hero：绿系渐变卡（紧凑：导航已入侧栏）。 */
 .seasons-hero {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 18px 28px;
-  padding: 24px 28px;
-  margin: 14px 0 20px;
+  padding: 14px 24px;
+  margin: 14px 0 16px;
   background:
     radial-gradient(ellipse at 92% 8%, #fff3d6, transparent 60%),
     linear-gradient(120deg, #f1f8ea, #eaf3e0);
   border: 1px solid #cfe3c0;
-  border-radius: 22px;
+  border-radius: 20px;
 }
-.seasons-hero-copy { flex: 1 1 320px; min-width: 0; }
-.seasons-hero h1 { font-size: clamp(32px, 3.6vw, 44px); margin: 0 0 8px; }
-.seasons-hero-tag { margin: 0 0 14px; color: var(--muted, #586b62); font-size: 16px; line-height: 1.7; }
-.seasons-hero-stats { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; }
-.seasons-hero-stats span { display: inline-flex; align-items: center; gap: 5px; padding: 5px 12px; border-radius: 999px; background: #fff; border: 1px solid #d6e5c6; font-size: 14px; color: #4a5550; }
-.seasons-hero-stats b { color: var(--green, #22634c); font-weight: 800; }
-.seasons-dynasty { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
-.seasons-dynasty-label { color: var(--muted, #586b62); font-size: 13px; font-weight: 800; letter-spacing: .08em; }
-.seasons-dynasty-chips { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; }
-.seasons-dynasty .chip { display: inline-flex; align-items: center; min-height: 40px; padding: 6px 14px; border: 1px solid #d5e0ca; border-radius: 12px; background: var(--white, #fff); color: #3d4750; font-size: 15px; transition: border-color .14s ease, background .14s ease; }
+.seasons-hero h1 { font-size: clamp(24px, 2.4vw, 32px); margin: 2px 0 0; }
+.seasons-hero .eyebrow { margin-bottom: 2px; }
+
+/* ── 左右工作区 ────────────────────────────────────────────────────────── */
+.seasons-workspace { display: grid; grid-template-columns: minmax(300px, 340px) minmax(0, 1fr); gap: 22px; align-items: start; margin: 0 0 30px; }
+.seasons-side {
+  position: sticky; top: 16px;
+  max-height: calc(100dvh - 32px); overflow-y: auto;
+  display: flex; flex-direction: column; gap: 16px;
+  padding: 18px 16px;
+  border: 1px solid var(--line, #dce6d9); border-radius: 20px;
+  background: var(--white, #fff);
+  scrollbar-width: thin; scrollbar-color: #b7c9ab transparent;
+}
+.seasons-main { min-width: 0; }
+.seasons-side-label { margin: 0 0 8px; color: var(--muted, #586b62); font-size: 13px; font-weight: 800; letter-spacing: .08em; }
+
+/* 朝代筛选 */
+.seasons-dynasty { display: flex; flex-wrap: wrap; gap: 8px; }
+.seasons-dynasty-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.seasons-dynasty .chip { display: inline-flex; align-items: center; min-height: 38px; padding: 5px 13px; border: 1px solid #d5e0ca; border-radius: 10px; background: var(--white, #fff); color: #3d4750; font-size: 14px; transition: border-color .14s ease, background .14s ease; }
 .seasons-dynasty .chip:hover { border-color: var(--green, #22634c); background: #eaf4df; }
 .seasons-dynasty .chip.on { border-color: var(--green, #22634c); background: var(--green, #22634c); color: #fff; font-weight: 700; }
 
-.seasons-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 18px; margin-bottom: 30px; }
+/* 主题导航：一行一个（名称左、数量右） */
+.seasons-nav-list { display: flex; flex-direction: column; gap: 3px; }
+.seasons-nav-link { display: flex; align-items: center; gap: 9px; padding: 7px 10px; border-radius: 9px; color: #234b38; transition: background .14s ease; }
+.seasons-nav-link:hover { background: #eaf4df; }
+.seasons-nav-emoji { flex-shrink: 0; font-size: 17px; line-height: 1.2; }
+.seasons-nav-name { flex: 1; min-width: 0; font-size: 14.5px; font-weight: 650; overflow-wrap: anywhere; }
+.seasons-nav-count { color: var(--muted, #586b62); font-size: 12.5px; font-variant-numeric: tabular-nums; }
+.seasons-nav-second { margin-top: 6px; padding-top: 12px; border-top: 1px dashed var(--line, #dce6d9); }
+.seasons-nav-group { margin: 10px 0 4px; color: #49643f; font-size: 13px; font-weight: 800; }
+.seasons-side-note { margin: 4px 0 0; padding-top: 12px; border-top: 1px dashed var(--line, #dce6d9); color: var(--muted, #586b62); font-size: 13px; line-height: 1.7; }
+
+/* ── 右栏：四季大卡 ────────────────────────────────────────────────────── */
+.seasons-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 18px; }
+
 .season-card { display: flex; flex-direction: column; gap: 4px; padding: 22px 20px; border: 1px solid #e0e8d6; border-top: 6px solid var(--sc, #7fb069); border-radius: 22px; background: var(--white, #fff); box-shadow: 0 4px 0 #2a1a3806; transition: transform .12s ease, box-shadow .12s ease; }
 .season-card:hover { transform: translateY(-3px); box-shadow: 0 8px 0 #2a1a380a; }
 .season-emoji { font-size: 44px; line-height: 1.2; }
@@ -45,25 +65,17 @@
 .season-card.season-qiu { --sc: #d9822b; }
 .season-card.season-dong { --sc: #6c9bc0; }
 
-.seasons-emotions h2 { margin: 0 0 6px; font-size: 26px; }
-.seasons-emotions-note { margin: 0 0 16px; color: var(--muted, #586b62); font-size: 14px; }
-.seasons-group { margin-bottom: 18px; padding: 16px 18px; border: 1px solid var(--line, #dce6d9); border-radius: 18px; background: var(--white, #fff); }
-.seasons-group-head h3 { margin: 0; font-size: 19px; color: #234b38; }
-.seasons-group-head p { margin: 4px 0 10px; color: var(--muted, #586b62); font-size: 14px; line-height: 1.7; }
-.seasons-group-themes { display: flex; flex-wrap: wrap; gap: 10px; }
-.seasons-theme { display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border: 1px solid #dfe8d3; border-radius: 14px; background: #f8fbf4; color: var(--ink, #233e37); font-size: 16px; transition: border-color .14s ease, background .14s ease, transform .14s ease; }
-.seasons-theme:hover { border-color: var(--green, #22634c); background: #eef5e6; transform: translateY(-2px); }
-.seasons-theme b { font-weight: 750; }
-.seasons-theme i { font-style: normal; color: var(--muted, #586b62); font-size: 13px; }
-
+@media (max-width: 860px) {
+  .seasons-workspace { grid-template-columns: minmax(0, 1fr); }
+  .seasons-side { position: static; max-height: none; }
+}
 @media (max-width: 700px) {
   .seasons-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .season-card { padding: 16px; }
   .season-name { font-size: 24px; }
-  .seasons-dynasty { align-items: flex-start; }
-  .seasons-dynasty-chips { justify-content: flex-start; }
 }
 @media print {
-  .seasons-dynasty { display: none !important; }
+  .seasons-side { display: none !important; }
+  .seasons-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .season-card { break-inside: avoid; }
 }

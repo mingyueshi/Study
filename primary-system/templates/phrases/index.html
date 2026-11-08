@@ -1,10 +1,9 @@
 {% extends 'base.html' %}{% load static %}{% block title %}日常用语 · 乐学堂{% endblock %}
-{% block content %}<link rel="stylesheet" href="{% static 'phrases/phrases.css' %}?v=8"><script src="{% static 'speech.js' %}" defer></script><script src="{% static 'tts.js' %}" defer></script><script src="{% static 'phrases/phrases.js' %}?v=2" defer></script>
+{% block content %}<link rel="stylesheet" href="{% static 'phrases/phrases.css' %}?v=12"><script src="{% static 'speech.js' %}" defer></script><script src="{% static 'tts.js' %}" defer></script><script src="{% static 'phrases/phrases.js' %}?v=4" defer></script>
 <header class="phrase-hero">
   <div class="phrase-hero-copy">
     <p class="eyebrow">英语 · 开口说</p>
     <h1>日常用语</h1>
-    <p class="phrase-hero-stats"><span><b>{{ total }}</b> 条短语</span><span><b>{{ core_count }}</b> 句进练习</span></p>
   </div>
   <div class="phrase-hero-demo" aria-hidden="true"><span class="phrase-demo-line">Can I help?</span><span class="phrase-demo-line small">Let's go!</span><span class="phrase-demo-line">Thank you!</span></div>
 </header>
@@ -31,18 +30,24 @@
 
   <div class="phrase-main phrase-shell">
     {{ items|json_script:"phrase-items" }}{{ patterns|json_script:"phrase-patterns" }}{{ scenarios|json_script:"phrase-scenarios" }}
-    <section class="phrase-practice" id="practice" data-phrases-round
-             data-answer="{{ round.en }}" data-id="{{ round.id }}"
-             data-report-url="{% url 'phrases-report' %}">
-      <p class="phrase-practice-title">练一练 · 看中文选英文</p>
-      <p class="phrase-prompt"><b>{{ round.zh }}</b><span>英文怎么说？</span></p>
-      <div class="phrase-options">{% for option in round.options %}<button class="phrase-option" type="button" data-phrases-option data-en="{{ option }}"><i class="phrase-option-key" aria-hidden="true">{{ forloop.counter }}</i><span>{{ option }}</span></button>{% endfor %}</div>
-      <p class="phrase-feedback" data-phrases-feedback></p>
-      <div class="phrase-score-row">
-        <p class="phrase-score">连续 <b data-phrases-streak>0</b> · 累计 <b data-phrases-correct>0</b>／<b data-phrases-asked>0</b></p>
-        <div class="phrase-actions"><a class="button small ghost" href="{{ next_href }}">换一题 ↻</a></div>
-      </div>
-    </section>
+    <details class="phrase-practice-details" id="practice" open>
+      <summary>
+        <span class="phrase-practice-summary-title">🎯 练一练 · 看中文选英文</span>
+        <span class="phrase-practice-summary-meta">连续 <b data-phrases-streak>0</b> · 累计 <b data-phrases-correct>0</b>／<b data-phrases-asked>0</b></span>
+        <span class="phrase-practice-arrow" aria-hidden="true">▾</span>
+      </summary>
+      <section class="phrase-practice" data-phrases-round
+               data-answer="{{ round.en }}" data-id="{{ round.id }}"
+               data-report-url="{% url 'phrases-report' %}">
+        <p class="phrase-prompt"><b>{{ round.zh }}</b><span>英文怎么说？</span></p>
+        <div class="phrase-options">{% for option in round.options %}<button class="phrase-option" type="button" data-phrases-option data-en="{{ option }}"><i class="phrase-option-key" aria-hidden="true">{{ forloop.counter }}</i><span>{{ option }}</span></button>{% endfor %}</div>
+        <p class="phrase-feedback" data-phrases-feedback></p>
+        <div class="phrase-score-row">
+          <p class="phrase-score">连续 <b data-phrases-streak>0</b> · 累计 <b data-phrases-correct>0</b>／<b data-phrases-asked>0</b></p>
+          <div class="phrase-actions"><a class="button small ghost" href="{{ next_href }}">换一题 ↻</a></div>
+        </div>
+      </section>
+    </details>
     <div id="phrase-groups" data-phrase-groups data-words-url="{% url 'scenario-words' %}"></div>
     <p class="phrase-note-foot">短语来自教材词卡；「按话题」视图可去对应场景单词页学词。练习只考句子，不考搭配。</p>
   </div>

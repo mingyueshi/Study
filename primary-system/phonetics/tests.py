@@ -122,7 +122,7 @@ class PhoneticsPageTests(TestCase):
         for symbol in ('/iː/', '/æ/', '/eɪ/', '/θ/', '/ŋ/'):
             self.assertContains(response, symbol)
         self.assertContains(response, '连读本组')
-        self.assertContains(response, '拓展词')  # 测试库无基线数据，例词按拓展词降级
+        self.assertContains(response, '拓展例词')  # 测试库无基线数据，例词降级为虚线拓展词卡（悬停提示注明来源待核对）
 
     def test_symbol_buttons_play_phoneme_audio_with_fallback(self):
         response = self.client.get('/phonetics/')

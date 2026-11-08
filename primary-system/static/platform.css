@@ -261,6 +261,22 @@ textarea { resize: vertical; line-height: 1.9; }
 .page-heading h1 { margin-bottom: 16px; }
 .page-heading p { color: var(--muted); }
 .page-heading .eyebrow { color: var(--green); }
+/* 模块详情页：标题卡（渐变底）+ 学习册分带，区域以背景区分。 */
+.page-heading-compact {
+  margin: 18px 0 20px; padding: 20px 26px;
+  background:
+    radial-gradient(ellipse at 92% 8%, #fff3d6, transparent 60%),
+    linear-gradient(120deg, #f1f8ea, #eaf3e0);
+  border: 1px solid #cfe3c0; border-radius: 20px;
+}
+.page-heading-compact h1 { margin-bottom: 8px; font-size: clamp(28px, 2.6vw, 40px); }
+.module-books { padding: 20px 24px 24px; border: 1px solid var(--line); border-radius: 22px; background: #fbfdf9; }
+.module-books .section-heading { margin: 0 0 10px; }
+.module-books .book-grid { margin-top: 14px; }
+/* 语文/数学模块页的教材落地卡：与英语模块页分区风格统一。 */
+.module-entry { padding: 24px 28px; border: 1px solid var(--line); border-radius: 22px; background: var(--white); box-shadow: 0 8px 20px #233e3708; }
+.module-entry h2 { margin: 0 0 10px; font-size: clamp(22px, 2.2vw, 28px); }
+.module-entry p { margin: 0 0 20px; max-width: 46em; color: var(--muted); line-height: 1.8; }
 .library-layout { display: grid; grid-template-columns: clamp(250px, 20vw, 330px) minmax(0, 1fr); gap: 32px; align-items: start; }
 .library-layout > section { min-width: 0; }
 .unit-nav { position: sticky; top: 24px; max-height: calc(100dvh - 48px); padding: 24px; border: 1px solid var(--line); border-radius: 22px; background: #edf2e5; overflow-y: auto; }

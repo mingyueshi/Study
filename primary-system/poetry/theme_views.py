@@ -86,6 +86,19 @@ def detail(request, code):
         ),
         None,
     )
+    # 侧栏全量导航：四季与全部情感题材组（与 seasons 页同源同口径）。
+    all_groups = theme_data.groups()
+    season_group = next((g for g in all_groups if g["code"] == "siji"), None)
+    season_emoji = {"chun": "🌸", "xia": "☀️", "qiu": "🍂", "dong": "❄️"}
+    seasons = (
+        [
+            {**item["meta"], "counts": item["counts"], "emoji": season_emoji.get(item["meta"]["code"], "📖")}
+            for item in season_group["themes"]
+        ]
+        if season_group
+        else []
+    )
+    emotion_groups = [g for g in all_groups if g["code"] != "siji"]
     return render(
         request,
         "poetry/theme_detail.html",
@@ -100,5 +113,7 @@ def detail(request, code):
             "dynasty": dynasty,
             "dynasty_labels": theme_data.dynasty_labels(),
             "q": query,
+            "seasons": seasons,
+            "emotion_groups": emotion_groups,
         },
     )

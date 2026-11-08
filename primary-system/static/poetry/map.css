@@ -3,7 +3,7 @@
 .map-side { position: sticky; top: 24px; max-height: calc(100dvh - 48px); display: flex; flex-direction: column; gap: 12px; padding: 16px; border: 1px solid var(--line, #dce6d9); border-radius: 20px; background: var(--white, #fff); overflow: hidden; }
 .map-search input { width: 100%; min-height: 44px; border: 1.5px solid #cdd9c4; border-radius: 12px; padding: 8px 12px; font-size: 16px; }
 .map-search input:focus { border-color: var(--green, #22634c); }
-.map-provinces { display: flex; flex-wrap: wrap; gap: 6px; max-height: 96px; overflow-y: auto; }
+.map-provinces { display: flex; flex-wrap: wrap; gap: 6px; }
 .map-provinces .chip { min-height: 32px; padding: 4px 11px; border: 1px solid #d8e2cd; border-radius: 10px; background: #f7faf3; color: #3d4750; font-size: 14px; cursor: pointer; }
 .map-provinces .chip:hover { border-color: var(--green, #22634c); }
 .map-provinces .chip.on { border-color: var(--green, #22634c); background: var(--green, #22634c); color: #fff; font-weight: 700; }
@@ -45,7 +45,8 @@
 .poem-missing { margin-top: 16px; padding: 14px; border: 2px dashed #d8e2cd; border-radius: 13px; color: var(--muted, #586b62); text-align: center; }
 .poem-others { margin-top: 18px; border-top: 1px solid var(--line, #dce6d9); padding-top: 14px; }
 .poem-others h4 { margin: 0 0 10px; font-size: 17px; }
-.poem-row { display: flex; gap: 12px; align-items: flex-start; padding: 10px 0; border-bottom: 1px dashed #e6ecdf; }
+.poem-row { display: flex; gap: 12px; align-items: flex-start; padding: 10px 8px; margin-inline: -8px; border-bottom: 1px dashed #e6ecdf; border-radius: 12px; transition: background .14s ease; }
+.poem-row:hover { background: #f6f9f2; }
 .poem-row:last-child { border-bottom: 0; }
 .poem-row-main { flex: 1; min-width: 0; }
 .poem-row-main b { font-size: 17px; }

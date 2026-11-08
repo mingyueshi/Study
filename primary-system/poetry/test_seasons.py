@@ -57,7 +57,8 @@ class SeasonPageTests(TestCase):
         self.assertContains(response, "诗词四季")
         for label in ("春", "夏", "秋", "冬"):
             self.assertContains(response, f">{label}</b>")
-        self.assertContains(response, "按情感与题材")
+        self.assertContains(response, "seasons-nav-link")  # 侧栏全量导航：四季与情感题材主题链接
+        self.assertContains(response, "情感与题材")
 
     def test_theme_detail_works_for_season_codes(self):
         response = self.client.get("/poetry/themes/chun/")

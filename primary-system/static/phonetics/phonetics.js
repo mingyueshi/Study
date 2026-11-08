@@ -18,4 +18,28 @@
       if (window.SpeechKit && button.dataset.fallback) SpeechKit.speak(button.dataset.fallback);
     });
   });
+
+  /* 音标分组以标签页切换：点侧栏只显示对应组；无 JS 时回退为锚点滚动全列。 */
+  const nav = document.querySelector('.library-layout .unit-nav');
+  const groups = Array.from(document.querySelectorAll('.ph-group'));
+  if (nav && groups.length) {
+    const activate = (code) => {
+      groups.forEach((group) => { group.hidden = group.id !== `group-${code}`; });
+      nav.querySelectorAll('a').forEach((link) => {
+        if (link.getAttribute('href') === `#group-${code}`) link.setAttribute('aria-current', 'page');
+        else link.removeAttribute('aria-current');
+      });
+    };
+    nav.addEventListener('click', (event) => {
+      const link = event.target.closest('a[href^="#group-"]');
+      if (!link) return;
+      event.preventDefault();
+      const code = link.getAttribute('href').replace('#group-', '');
+      activate(code);
+      history.replaceState(null, '', `#group-${code}`);
+    });
+    const initial = (location.hash.match(/^#group-([\w-]+)$/) || [])[1];
+    activate(initial && groups.some((group) => group.id === `group-${initial}`)
+      ? initial : groups[0].id.replace('group-', ''));
+  }
 })();

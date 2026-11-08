@@ -25,9 +25,10 @@
 
     const csrf = () => decodeURIComponent((document.cookie.match(/(?:^|;\s*)primary_csrftoken=([^;]*)/) || [])[1] || '');
     const render = () => {
-      round.querySelector('[data-phrases-streak]').textContent = stats.streak;
-      round.querySelector('[data-phrases-correct]').textContent = stats.correct;
-      round.querySelector('[data-phrases-asked]').textContent = stats.asked;
+      /* 计数同时出现在折叠摘要与计分行，全部同步 */
+      document.querySelectorAll('[data-phrases-streak]').forEach((el) => { el.textContent = stats.streak; });
+      document.querySelectorAll('[data-phrases-correct]').forEach((el) => { el.textContent = stats.correct; });
+      document.querySelectorAll('[data-phrases-asked]').forEach((el) => { el.textContent = stats.asked; });
     };
     const save = () => {
       try {
@@ -128,8 +129,8 @@
   };
 
   const applyFilter = () => {
-    const chip = document.querySelector(`.phrase-chip.on[data-chip-row="${view}"]`) ||
-      document.querySelector(`[data-chip-row="${view}"] .phrase-chip`);
+    /* 选中态 .on 在 chip 上，行属性 data-chip-row 在父级——分别取再组条件 */
+    const chip = document.querySelector(`[data-chip-row="${view}"] .phrase-chip.on`);
     const active = chip ? chip.dataset.chip : null;
     const query = (document.querySelector('[data-phrases-search]')?.value || '').trim().toLowerCase();
     const pool = items.filter((item) => {
@@ -183,4 +184,8 @@
   document.querySelector('[data-phrases-search]').addEventListener('input', applyFilter);
 
   applyFilter();
+
+  /* 换一题等入口带 #practice 锚点回到本页时，确保练一练处于展开态 */
+  const practiceDetails = document.getElementById('practice');
+  if (practiceDetails && location.hash === '#practice') practiceDetails.open = true;
 })();

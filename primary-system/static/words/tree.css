@@ -89,16 +89,16 @@
 .tree-word.on { border-color: var(--green, #22634c); background: var(--green, #22634c); color: #fff; font-weight: 700; }
 
 .tree-word-panel { position: sticky; top: 24px; max-height: calc(100vh - 48px); overflow-y: auto; padding: 2px; }
-.tree-word-card { padding: 22px; border: 1px solid var(--line, #dce6d9); border-radius: 20px; background: var(--white, #fff); text-align: center; }
-.tree-word-emoji { margin: 0; font-size: 46px; }
-.tree-word-headline { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 6px 0 0; }
-.tree-word-headline b { font-size: 32px; font-weight: 900; }
-.say-chip { display: grid; place-items: center; width: 40px; height: 40px; border: 1px solid #cfe0c2; border-radius: 11px; background: #fff; font-size: 17px; }
+.tree-word-card { padding: 26px 24px; border: 1px solid var(--line, #dce6d9); border-radius: 20px; background: var(--white, #fff); text-align: center; }
+.tree-word-emoji { margin: 0; font-size: 54px; }
+.tree-word-headline { display: flex; align-items: center; justify-content: center; gap: 12px; margin: 8px 0 0; }
+.tree-word-headline b { font-size: 38px; font-weight: 900; letter-spacing: .01em; }
+.say-chip { display: grid; place-items: center; width: 46px; height: 46px; border: 1px solid #cfe0c2; border-radius: 13px; background: #fff; font-size: 19px; }
 .say-chip:hover { background: #eef6e6; }
-.tree-word-ipa { margin: 4px 0 0; color: #77739a; font-size: 18px; }
-.tree-word-zh { margin: 8px 0 0; font-size: 20px; font-weight: 650; }
-.tree-word-scene { margin: 6px 0 0; color: var(--muted, #586b62); font-size: 15px; }
-.tree-word-status { margin: 6px 0 0; color: #a3332a; font-size: 14px; }
+.tree-word-ipa { margin: 6px 0 0; color: #57517d; font-size: 21px; font-weight: 650; }
+.tree-word-zh { margin: 10px 0 0; font-size: 23px; font-weight: 700; color: #33404d; }
+.tree-word-scene { margin: 8px 0 0; color: var(--muted, #586b62); font-size: 16px; }
+.tree-word-status { margin: 8px 0 0; color: #a3332a; font-size: 14px; }
 .tree-word-actions { display: flex; flex-direction: column; gap: 8px; margin-top: 16px; }
 .tree-word-actions .button { justify-content: center; }
 .tree-word-actions .ghost { background: #fff; color: var(--green, #22634c); }
