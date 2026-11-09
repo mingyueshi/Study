@@ -68,7 +68,7 @@ mathbook-data: ## 从数学教材源生成数据与图示资产（需 node）
 chinesebook-data: ## 从语文教材源生成数据与图片资产（需 node）
 	node scripts/build_chinesebook.cjs
 
-study-topics-data: ## 从 content_sources/ 生成历史、地理、天文、文学和科学专题
+study-topics-data: ## 从 content_sources/ 生成数学、历史、地理、天文、文学和科学专题
 	$(PYTHON) scripts/build_study_topics.py
 
 word-tree: ## 重新生成词以类聚的 WordNet 上下位树（words/tree_data/tree.json）

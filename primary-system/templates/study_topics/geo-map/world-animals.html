@@ -1,0 +1,49 @@
+{% extends "study_topics/page.html" %}
+{% load static %}
+{# 由 scripts/build_study_topics.py 生成。 #}
+{% block title %}世界动物地图 · 地理图谱 · 乐学堂{% endblock %}
+{% block study_assets %}
+<link rel="stylesheet" href="{% static 'study_topics/geo-map/styles.css' %}">
+<link rel="stylesheet" href="{% static 'study_topics/geo-map/animals.css' %}">
+<script src="{% static 'study_topics/geo-map/world-geo.js' %}" defer></script>
+<script src="{% static 'study_topics/geo-map/shared.js' %}" defer></script>
+<script src="{% static 'study_topics/geo-map/world-animals-data.js' %}" defer></script>
+<script src="{% static 'study_topics/geo-map/animals-app.js' %}" defer></script>
+{% endblock %}
+{% block study_content %}
+<div class="study-atlas">
+<div class="gm-wildlife" data-map="world">
+    <header class="gm-wildlife-header">
+      <div>
+        <p class="gm-wildlife-kicker">地理图谱 <span aria-hidden="true">／</span> 野外观察</p>
+        <h1>世界动物地图</h1>
+        <p>从北极的冰海到非洲的草原，点一点地图，看看七大洲和大洋里的动物怎样生活。</p>
+      </div>
+      <nav class="gm-wildlife-links" aria-label="地图切换">
+        <a href="world.html">← 返回世界地图</a>
+        <a href="animals.html">去看中国动物 →</a>
+      </nav>
+    </header>
+
+    <div class="gm-wildlife-tools" hidden>
+      <div>
+        <h2 id="gm-habitat-title">按栖息地找</h2>
+        <div class="gm-habitat-filters" role="group" aria-labelledby="gm-habitat-title"></div>
+      </div>
+      <label for="gm-animal-picker">选择动物
+        <select id="gm-animal-picker"></select>
+      </label>
+    </div>
+
+    <div class="gm-wildlife-workspace" hidden>
+      <figure class="gm-wildlife-map">
+        <svg id="gm-animal-map" role="group" aria-label="世界野生动物代表栖息地示意地图"></svg>
+        <figcaption><span id="gm-animal-count"></span>地图上的点表示代表地点，动物还可能在其他地方生活。</figcaption>
+      </figure>
+      <article id="gm-animal-card" aria-labelledby="gm-animal-name"></article>
+    </div>
+    <noscript><p class="gm-notice">请启用 JavaScript 查看动物地图和照片。</p></noscript>
+  </div>
+<div class="gm-footer">乐学堂 · 地理图谱 · <a href="{% url 'geography-atlas' %}">图谱首页</a></div>
+</div>
+{% endblock %}

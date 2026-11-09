@@ -15,7 +15,7 @@
 
 - 乐学堂统一系统：在 [`primary-system/`](primary-system/) 运行 `python3.12 bootstrap.py --serve`。目录自带离线基础包和 226 道题，详见 [本地运行](primary-system/README.md#本地运行)。
 - 小学课程维护：教材、专题、素材、生成命令和测试见[小学课程文件源](primary-system/content_sources/README.md)。
-- 个人学习：双击 [`personal-learning/index.html`](personal-learning/index.html)，从总导航进入英文学习或 AI 基础篇；详见 [`personal-learning/README.md`](personal-learning/README.md)。旧 [`techlex/index.html`](techlex/index.html) 会转到新的英文学习模块。
+- 个人学习：双击 [`personal-learning/index.html`](personal-learning/index.html)，从总导航进入英文学习或 AI 基础篇；详见 [`personal-learning/README.md`](personal-learning/README.md)。
 
 原 `primary/` 双击离线版已归档，可从 Git 修订 `fb47d0b` 下恢复。小学课程统一在 `primary-system/` 使用和维护。
 

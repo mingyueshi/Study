@@ -12,7 +12,7 @@ HISTORY_PAGES = (
 GEOGRAPHY_PAGES = (
     'geography-study', 'geography-atlas', 'geography-atlas-china',
     'geography-atlas-world', 'geography-atlas-province', 'geography-atlas-places',
-    'geography-atlas-routes', 'geography-atlas-gallery',
+    'geography-atlas-routes', 'geography-atlas-gallery', 'geography-atlas-animals', 'geography-atlas-world-animals',
 )
 COURSES = (
     ('geography', 'astronomy-study', 'astro', '天文探索', ('astronomy-index', 'mysteries')),
@@ -60,6 +60,8 @@ class StudyTopicPageTests(SimpleTestCase):
             ('history-timeline-era', 'event.html', '?event=tc35'),
             ('geography-atlas', 'china.html', '?place=f20'),
             ('geography-atlas-china', 'province.html', '?adcode=110000'),
+            ('geography-atlas-china', 'animals.html', '?animal=giant-panda'),
+            ('geography-atlas-world', 'world-animals.html', '?animal=emperor-penguin'),
             ('geography-atlas-places', 'gallery.html', '?place=f20'),
         ):
             with self.subTest(name=name, target=target):
@@ -73,10 +75,12 @@ class StudyTopicPageTests(SimpleTestCase):
         self.assertEqual(reverse('geography-index'), '/geography/')
         self.assertEqual(reverse('geography-detail', args=['CHN']), '/geography/CHN/')
 
-    def test_main_views_link_to_lesson_directories(self):
+    def test_main_views_link_to_related_topics(self):
         for main, lesson, label in (
             ('history-timeline-timeline', 'history-study', '历史精讲'),
             ('geography-atlas-china', 'geography-study', '地理小课堂'),
+            ('geography-atlas-china', 'geography-atlas-animals', '中国动物地图'),
+            ('geography-atlas-world', 'geography-atlas-world-animals', '世界动物地图'),
         ):
             with self.subTest(main=main):
                 response = self.client.get(reverse(main))

@@ -26,7 +26,9 @@
     <a href="{% url 'history-timeline-timeline' %}" {% if current == 'history-timeline-timeline' %}aria-current="page"{% elif current != 'history-study' %}aria-current="location"{% endif %}>历史双轨时间轴</a>
     <a href="{% url 'history-study' %}" {% if current == 'history-study' %}aria-current="page"{% endif %}>历史精讲</a>
     {% elif study_area == 'geography' %}
-    <a href="{% url 'geography-atlas-china' %}" {% if current == 'geography-atlas-china' %}aria-current="page"{% elif current != 'geography-study' %}aria-current="location"{% endif %}>地理图谱</a>
+    <a href="{% url 'geography-atlas-china' %}" {% if current == 'geography-atlas-china' %}aria-current="page"{% elif current != 'geography-study' and current != 'geography-atlas-animals' and current != 'geography-atlas-world-animals' %}aria-current="location"{% endif %}>地理图谱</a>
+    <a href="{% url 'geography-atlas-animals' %}" {% if current == 'geography-atlas-animals' %}aria-current="page"{% endif %}>中国动物地图</a>
+    <a href="{% url 'geography-atlas-world-animals' %}" {% if current == 'geography-atlas-world-animals' %}aria-current="page"{% endif %}>世界动物地图</a>
     <a href="{% url 'geography-study' %}" {% if current == 'geography-study' %}aria-current="page"{% endif %}>地理小课堂</a>
     <a href="{% url 'geography-index' %}">查国家与地区 ↗</a>
     {% endif %}

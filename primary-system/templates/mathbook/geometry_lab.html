@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}图形运动实验室 · 乐学堂{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'study_topics/platform-bridge.css' %}">
+<link rel="stylesheet" href="{% static 'mathbook/geometry-lab.css' %}">
+<div class="geometry-lab color-math" id="geometry-lab">
+  <nav class="study-topic-nav" aria-label="数学专题导航">
+    <a href="{% url 'home' %}?area=math#modules-title">← 学习广场 · 数学</a>
+    <a href="{% url 'mathbook-book' '4a' %}#mu2-3">四上教材 · 角的度量 ↗</a>
+  </nav>
+
+  <header class="geometry-intro">
+    <div>
+      <p class="geometry-kicker">四年级上 · 图形与几何拓展</p>
+      <h1>图形运动实验室</h1>
+      <p>把箭头放上方格纸。拖一拖、转一转、折一折，看看同一个点跑到了哪里。</p>
+    </div>
+    <span class="geometry-stamp" aria-hidden="true">A <span>→</span> A′</span>
+  </header>
+
+  <nav class="geometry-modes" aria-label="选择实验">
+    {% for mode, lesson in modes.items %}
+    <a href="#{{ mode }}" data-mode="{{ mode }}"{% if forloop.first %} aria-current="true"{% endif %}>
+      <span class="geometry-mode-number" aria-hidden="true">0{{ forloop.counter }}</span>
+      <span><strong>{{ lesson.label }}</strong><small>{{ lesson.action }}</small></span>
+    </a>
+    {% endfor %}
+  </nav>
+  <noscript><p class="notice">打开浏览器的 JavaScript，就能动手操作方格纸上的图形。</p></noscript>
+
+  <div class="geometry-workspace">
+    <section class="geometry-bench" aria-label="方格实验台">
+      <header class="geometry-bench-bar">
+        <strong>方格实验台</strong>
+        <span>跟着 A 点看变化</span>
+        <button type="button" class="geometry-button geometry-reset" id="geometry-reset">↺ 重来</button>
+      </header>
+      <div class="geometry-paper">
+        <svg id="geometry-board" viewBox="0 0 600 360" role="img" aria-labelledby="geometry-board-title">
+          <title id="geometry-board-title">方格纸上的图形运动示意图</title>
+          <defs>
+            <pattern id="geometry-grid" width="30" height="30" patternUnits="userSpaceOnUse">
+              <path d="M0 30 V0 H30" fill="none" stroke="#bfd6df" stroke-width="1.5"/>
+            </pattern>
+            <pattern id="geometry-major-grid" width="150" height="150" patternUnits="userSpaceOnUse">
+              <path d="M0 150 V0 H150" fill="none" stroke="#95b7c6" stroke-width="1.5"/>
+            </pattern>
+            <polygon id="geometry-shape" points="-60,-30 0,-30 0,-60 60,0 0,60 0,30 -30,30 -60,0"/>
+          </defs>
+          <rect width="600" height="360" fill="url(#geometry-grid)"/>
+          <rect width="600" height="360" fill="url(#geometry-major-grid)"/>
+          <circle data-only="rotation" cx="300" cy="180" r="120" class="geometry-orbit" hidden/>
+          <path id="geometry-guide" class="geometry-guide"/>
+          <use href="#geometry-shape" id="geometry-origin" class="geometry-origin"/>
+          <use href="#geometry-shape" id="geometry-piece" class="geometry-piece"/>
+          <path id="geometry-trace" class="geometry-trace"/>
+          <g data-only="rotation" hidden>
+            <circle cx="300" cy="180" r="5" class="geometry-center"/>
+            <text x="283" y="201" class="geometry-point-label">O</text>
+            <g id="geometry-handle" class="geometry-handle">
+              <circle r="24" fill="transparent"/>
+              <circle r="14" class="geometry-knob"/>
+              <path d="M-6 2 A6 6 0 1 0 0 -6 H-6 M-2 -10 L-6 -6 L-2 -2" class="geometry-knob-icon"/>
+            </g>
+          </g>
+          <g id="geometry-from" class="geometry-point" hidden>
+            <circle r="5"/><text y="-11" class="geometry-point-label">A</text>
+          </g>
+          <g id="geometry-to" class="geometry-point">
+            <circle r="5"/><text y="-11" class="geometry-point-label">A</text>
+          </g>
+        </svg>
+      </div>
+      <div class="geometry-controls">
+        <p class="geometry-readout"><span class="geometry-key"><i></i>灰色虚线是原图</span> <output id="geometry-reading" aria-live="off"></output></p>
+        <div class="geometry-buttons" data-only="translation" aria-label="每次平移一格" role="group">
+          <button type="button" class="geometry-button" data-shift="-1,0">← 左</button>
+          <button type="button" class="geometry-button" data-shift="0,-1">↑ 上</button>
+          <button type="button" class="geometry-button" data-shift="0,1">↓ 下</button>
+          <button type="button" class="geometry-button" data-shift="1,0">→ 右</button>
+        </div>
+        <div class="geometry-buttons" data-only="rotation" hidden>
+          <button type="button" class="geometry-button" data-turn="-90">逆时针 90°</button>
+          <input id="geometry-angle" type="range" min="-180" max="180" step="1" value="0" aria-label="旋转角度">
+          <button type="button" class="geometry-button" data-turn="90">顺时针 90°</button>
+        </div>
+        <div class="geometry-buttons geometry-fold-controls" data-only="reflection" hidden>
+          <div class="geometry-buttons" role="group" aria-label="选择折痕">
+            <button type="button" class="geometry-button" data-axis="vertical" aria-pressed="true">竖折痕</button>
+            <button type="button" class="geometry-button" data-axis="horizontal" aria-pressed="false">横折痕</button>
+          </div>
+          <input id="geometry-fold" type="range" min="0" max="100" value="0" aria-label="翻折进度">
+        </div>
+      </div>
+    </section>
+
+    <aside class="geometry-notebook" aria-label="实验手记">
+      {% for mode, lesson in modes.items %}
+      <div data-only="{{ mode }}"{% if not forloop.first %} hidden{% endif %}>
+        <p class="geometry-kicker">实验 0{{ forloop.counter }} · {{ lesson.label }}</p>
+        <h2>{{ lesson.action }}</h2>
+        <p>{{ lesson.instruction }}</p>
+        <div class="geometry-observation">
+          <h3>看一看</h3>
+          <p>{{ lesson.observation }}</p>
+          <p>{{ lesson.example }}</p>
+        </div>
+        <h3>小挑战</h3>
+        <p>{{ lesson.task }}</p>
+      </div>
+      {% endfor %}
+      <button type="button" class="geometry-button geometry-check" id="geometry-check">检查一下</button>
+      <p class="geometry-feedback" id="geometry-feedback" role="status"></p>
+    </aside>
+  </div>
+</div>
+{{ modes|json_script:"geometry-lessons" }}
+<script src="{% static 'mathbook/geometry-lab.js' %}" defer></script>
+{% endblock %}

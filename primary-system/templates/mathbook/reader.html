@@ -20,6 +20,7 @@
       <section class="toolbar" aria-label="学习工具">
         <div class="search-box"><span>🔎</span><input id="search" type="search" aria-label="搜索全部知识点" placeholder="搜索知识点、公式、易错点…" autocomplete="off"></div>
         <span class="stats-pill" id="stats"></span>
+        {% if book == '4a' %}<a class="play-btn" href="{% url 'geometry-lab' %}">📐 图形运动实验室</a>{% endif %}
         <button class="play-btn" data-act="print">🖨️ 打印本单元</button>
       </section>
       <div class="mathbook-progress">

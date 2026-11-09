@@ -28,21 +28,7 @@
     return;
   }
 
-  /* ---------- 投影：等经距（plate carrée），南极洲截至南纬 73° ---------- */
-  const LNG0 = -180, LAT_TOP = 87, LAT_BOT = -73;
-  const K = 1280 / 360;
-  const W = 1280, H = (LAT_TOP - LAT_BOT) * K;
-  const WX = (lng) => (lng - LNG0) * K;
-  const WY = (lat) => (LAT_TOP - lat) * K;
-  const mp = (lng, lat) => [WX(lng), WY(lat)];
-
-  const ringPath = (ring) => S.ringPath(ring, mp);
-  const countries = GEO.countries;
-  const paths = new Map(countries.map(c => {
-    // 南极洲已经裁到图底，底边应在两端之间闭合。
-    const rings = c.name === 'Antarctica' ? c.rings : c.rings.flatMap(S.wrapRing);
-    return [c.name, rings.map(ringPath).join('')];
-  }));
+  const { W, H, m: mp, ringPath, countries, paths, gridSVG } = S.worldMap();
   const continentColor = Object.fromEntries(CONTINENTS.map((r) => [r.id, r.color]));
   const continentName = Object.fromEntries(CONTINENTS.map((r) => [r.id, r.name]));
   const continentHint = Object.fromEntries(CONTINENTS.map((r) => [r.id, r.hint]));
@@ -53,26 +39,6 @@
   const KIND_COLOR = { mountain: '#7c5a40', peak: '#8a6fae', river: '#3b82c4', desert: '#c98a4b', plateau: '#5f8f45', trench: '#2e5f8e', reef: '#3aaf9f', island: '#3a8f7a' };
 
   /* ---------- 渲染 ---------- */
-  const gridSVG = () => {
-    let out = '';
-    for (let lng = -150; lng <= 180; lng += 30) {
-      out += `<line x1="${WX(lng).toFixed(1)}" y1="${WY(LAT_TOP).toFixed(1)}" x2="${WX(lng).toFixed(1)}" y2="${WY(LAT_BOT).toFixed(1)}"/>`;
-      if (lng !== -180 && lng !== 180) {
-        out += `<text class="gm-grid-label" x="${WX(lng).toFixed(1)}" y="${(H - 6).toFixed(1)}" text-anchor="middle">${Math.abs(lng)}°${lng < 0 ? 'W' : 'E'}</text>`;
-      }
-    }
-    for (let lat = -60; lat <= 60; lat += 30) {
-      out += `<line x1="0" y1="${WY(lat).toFixed(1)}" x2="${W.toFixed(1)}" y2="${WY(lat).toFixed(1)}"/>`;
-      if (lat !== 0) {
-        out += `<text class="gm-grid-label" x="6" y="${(WY(lat) - 5).toFixed(1)}">${Math.abs(lat)}°${lat < 0 ? 'S' : 'N'}</text>`;
-      } else {
-        out += `<line class="gm-equator" x1="0" y1="${WY(0).toFixed(1)}" x2="${W.toFixed(1)}" y2="${WY(0).toFixed(1)}"/>`;
-        out += `<text class="gm-equator-label" x="${(WX(90)).toFixed(1)}" y="${(WY(0) - 6).toFixed(1)}" text-anchor="middle">赤道 0°</text>`;
-      }
-    }
-    return `<g class="gm-grid">${out}</g>`;
-  };
-
   const oceanSVG = () => OCEANS.map((o) => {
     const p = mp(o.point[0], o.point[1]);
     return `<g data-id="${o.id}" tabindex="0" role="button" aria-label="${esc(o.name)}">` +

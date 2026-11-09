@@ -21,6 +21,8 @@ require('../geo-map/world-data.js');
 require('../geo-map/atlas-data.js');
 require('../geo-map/atlas.js');
 require('../geo-map/media-data.js');
+require('../geo-map/animals-data.js');
+require('../geo-map/world-animals-data.js');
 require('../geo-map/shared.js');
 const W = globalThis.window;
 
@@ -449,11 +451,54 @@ for (const route of routes) {
   }
 }
 
+/* ---------- 中国与世界动物地图 ---------- */
+console.log('— 中国与世界动物地图 —');
+function checkWildlife({ habitats, animals }, [west, east, south, north], checkPlace) {
+  const habitatIds = new Set();
+  for (const { id, name, color } of habitats) {
+    check(/^[a-z-]+$/.test(id) && !habitatIds.has(id), '栖息地 ID 应唯一：' + id);
+    check(isStr(name) && !hasBadPunct(name), '栖息地名称应使用中文标点：' + id);
+    check(/^#[0-9a-f]{6}$/.test(color), '栖息地应有十六进制图例颜色：' + id);
+    check(animals.some(animal => animal.habitat === id), '栖息地应有动物档案：' + id);
+    habitatIds.add(id);
+  }
+  const animalIds = new Set();
+  for (const animal of animals) {
+    const { id, habitat, point, source, photoSource } = animal;
+    check(/^[a-z-]+$/.test(id) && !animalIds.has(id), '动物 ID 应唯一：' + id);
+    animalIds.add(id);
+    check(habitatIds.has(habitat), '动物应引用有效的栖息地：' + id);
+    check(Array.isArray(point) && point.length === 2 && point.every(Number.isFinite) &&
+      point[0] >= west && point[0] <= east && point[1] >= south && point[1] <= north, '标记应在底图范围内：' + id);
+    check(checkPlace(animal), '动物应关联有效的地图档案：' + id);
+    for (const field of ['name', 'place', 'home', 'clue']) {
+      check(isStr(animal[field]) && !hasBadPunct(animal[field]), field + ' 应使用中文标点：' + id);
+    }
+    check(animal.labelSide === undefined || ['left', 'top', 'top-right', 'bottom'].includes(animal.labelSide), '标签方向无效：' + id);
+    check(/^https:\/\/[^\s]+$/.test(source), '动物应有资料出处：' + id);
+    check(photoSource === undefined || /^https:\/\/[^\s]+$/.test(photoSource), '照片出处应为 HTTPS 链接：' + id);
+    check(fileExists('assets/animals/' + id + '.jpg'), '缺少本地动物照片：' + id);
+  }
+  check(habitatIds.size >= 4 && animalIds.size >= 12, '动物地图应覆盖多种栖息地与代表动物');
+}
+checkWildlife(W.GM_WILDLIFE, [73, 136, 17.8, 53.8], animal => provAdcodes.has(animal.adcode));
+check(W.GM_WILDLIFE.animals.length >= 30, '中国动物地图应有至少 30 种代表动物');
+check(new Set(W.GM_WILDLIFE.animals.map(animal => animal.adcode)).size >= 27, '中国动物地图应覆盖至少 27 个省级行政区');
+checkWildlife(W.GM_WORLD_WILDLIFE, [-180, 180, -73, 87], animal => A.get(animal.mapPlace)?.map === 'world');
+const worldAnimalPlaces = W.GM_WORLD_WILDLIFE.animals.map(animal => animal.mapPlace);
+check(worldAnimalPlaces.length >= 30, '世界动物地图应有至少 30 种代表动物');
+for (const continent of CONTINENTS) {
+  check(worldAnimalPlaces.some(place => COUNTRY_META[place]?.[1] === continent.id), '应有代表动物：' + continent.name);
+}
+for (const ocean of ['o1', 'o2', 'o3']) {
+  check(worldAnimalPlaces.includes(ocean), '应有代表海洋动物：' + A.get(ocean).name);
+}
+
 /* ---------- 入口文件（多页面系统） ---------- */
 console.log('— 入口文件（多页面系统） —');
-['index.html', 'china.html', 'province.html', 'world.html', 'places.html', 'routes.html', 'gallery.html',
+['index.html', 'china.html', 'animals.html', 'world-animals.html', 'province.html', 'world.html', 'places.html', 'routes.html', 'gallery.html',
   'content.js', 'china-geo.js', 'map-data.js', 'shared.js',
-  'china-app.js', 'home-app.js', 'province-app.js', 'world-app.js',
+  'china-app.js', 'home-app.js', 'province-app.js', 'world-app.js', 'animals-data.js', 'world-animals-data.js', 'animals-app.js', 'animals.css',
   'styles.css', 'province.css', 'README.md',
   'world-geo.js', 'world-data.js', 'atlas-data.js', 'atlas.js', 'map-ui.js',
   'places-app.js', 'routes-app.js', 'media-data.js', 'media.js', 'gallery-app.js',
@@ -461,13 +506,15 @@ console.log('— 入口文件（多页面系统） —');
   .forEach(f => check(fileExists(f), '缺少文件: ' + f));
 const PAGE_REFS = {
   'index.html': ['content.js', 'china-geo.js', 'map-data.js', 'shared.js', 'home-app.js', 'styles.css',
-    'china.html', 'province.html', 'world.html'],
+    'china.html', 'province.html', 'world.html', 'animals.html', 'world-animals.html'],
   'china.html': ['content.js', 'china-geo.js', 'map-data.js', 'shared.js', 'media-data.js', 'media.js', 'map-ui.js', 'china-app.js', 'styles.css',
-    'province.html', 'world.html', 'index.html'],
+    'province.html', 'world.html', 'index.html', 'animals.html'],
+  'animals.html': ['animals-data.js', 'animals-app.js', 'animals.css', 'styles.css', 'china-geo.js', 'map-data.js', 'shared.js', 'china.html', 'world-animals.html'],
+  'world-animals.html': ['world-animals-data.js', 'animals-app.js', 'animals.css', 'styles.css', 'world-geo.js', 'shared.js', 'world.html', 'animals.html'],
   'province.html': ['content.js', 'china-geo.js', 'map-data.js', 'shared.js', 'media-data.js', 'media.js', 'province-app.js',
     'styles.css', 'province.css', 'china.html', 'index.html'],
   'world.html': ['map-data.js', 'world-geo.js', 'world-data.js', 'shared.js', 'media-data.js', 'media.js', 'map-ui.js', 'world-app.js', 'styles.css',
-    'china.html', 'index.html'],
+    'china.html', 'index.html', 'world-animals.html'],
   'places.html': ['places-app.js', 'styles.css'],
   'routes.html': ['routes-app.js', 'styles.css'],
   'gallery.html': ['media-data.js', 'media.js', 'gallery-app.js', 'styles.css']
@@ -475,12 +522,15 @@ const PAGE_REFS = {
 Object.entries(PAGE_REFS).forEach(([page, refs]) => {
   if (!fileExists(page)) return;
   const html = fs.readFileSync(path.join(DIR, page), 'utf8');
-  [...refs, 'atlas.js', 'atlas-data.js', 'places.html', 'routes.html', 'gallery.html'].forEach(f =>
-    check(html.includes(f), page + ' 应引用 ' + f));
+  refs.forEach(f => check(html.includes(f), page + ' 应引用 ' + f));
   check(html.includes('lang="zh-CN"'), page + ' 应声明 zh-CN');
-  check(html.includes('gm-sysnav'), page + ' 应有系统导航条');
-  check(html.includes('class="gm-sidebar"') && html.includes('id="content" class="gm-content"'),
-    page + ' 应使用共用侧栏和内容区');
+  if (!page.endsWith('animals.html')) {
+    ['atlas.js', 'atlas-data.js', 'places.html', 'routes.html', 'gallery.html'].forEach(f =>
+      check(html.includes(f), page + ' 应引用 ' + f));
+    check(html.includes('gm-sysnav'), page + ' 应有系统导航条');
+    check(html.includes('class="gm-sidebar"') && html.includes('id="content" class="gm-content"'),
+      page + ' 应使用共用侧栏和内容区');
+  }
   check(!/https?:\/\//.test(html.replace(/<!--[\s\S]*?-->/g, '')), page + ' 不应引用外部网络资源（离线优先）');
 });
 if (fileExists('README.md')) {

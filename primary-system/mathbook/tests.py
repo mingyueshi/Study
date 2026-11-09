@@ -94,6 +94,20 @@ class MathbookPageTests(TestCase):
         response = self.client.get('/mathbook/9z/')
         self.assertEqual(response.status_code, 404)
 
+    def test_geometry_lab_is_a_read_only_math_topic_linked_from_fourth_grade(self):
+        url = reverse('geometry-lab')
+        home = self.client.get(reverse('home'), {'area': 'math'})
+        self.assertIn(url, [card['url'] for card in home.context['entry_cards']])
+        reader = reverse('mathbook-book', args=['4a'])
+        self.assertContains(self.client.get(reader), f'href="{url}"')
+        response = self.client.get(url)
+        self.assertContains(response, f'href="{reader}#mu2-3"')
+        self.assertContains(response, 'id="geometry-lessons"')
+        for mode in ('translation', 'rotation', 'reflection'):
+            self.assertContains(response, f'href="#{mode}"')
+        self.assertNotIn(settings.SESSION_COOKIE_NAME, response.cookies)
+        self.assertEqual(self.client.post(url).status_code, 405)
+
     def test_page_is_read_only(self):
         # 游客只读浏览不分配会话或写任何记录。
         response = self.client.get(reverse('mathbook'))

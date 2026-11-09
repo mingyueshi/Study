@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """从 content_sources 生成专题与学习册。服务直接读取生成的文件。"""
 import argparse
+import json
 import re
 from pathlib import Path
 
@@ -12,7 +13,7 @@ TOPICS = {
     'history': ('', '', ('index',)),
     'geo': ('', '', ('index',)),
     'history-timeline': ('study-timeline', 'history-timeline', ('index', 'timeline', 'era', 'event', 'dynasties')),
-    'geo-map': ('study-atlas', 'geography-atlas', ('index', 'china', 'world', 'province', 'places', 'routes', 'gallery')),
+    'geo-map': ('study-atlas', 'geography-atlas', ('index', 'china', 'animals', 'world', 'world-animals', 'province', 'places', 'routes', 'gallery')),
 }
 COURSES = ('astro', 'lit', 'sci')
 COURSE_IMAGE = re.compile(r"(?:img|hero): '(images/[^']+)'")
@@ -184,6 +185,31 @@ def course_outputs():
                 yield dest / path.relative_to(SOURCE), path.read_bytes()
 
 
+def geometry_lab_data():
+    content = (SOURCE / 'geometry-lab.json').read_bytes()
+    modes = json.loads(content)
+    if not isinstance(modes, dict) or tuple(modes) != ('translation', 'rotation', 'reflection'):
+        raise ValueError('图形运动实验室需按顺序提供平移、旋转和轴对称。')
+    text_fields = ('label', 'action', 'instruction', 'observation', 'example', 'task', 'success', 'hint')
+    for name, mode in modes.items():
+        if not isinstance(mode, dict) or set(mode) != {*text_fields, 'target'}:
+            raise ValueError(f'图形运动实验室字段有误：{name}')
+        for field in text_fields:
+            value = mode[field]
+            if not isinstance(value, str) or not value.strip() or any(char in value for char in '"\r\n'):
+                raise ValueError(f'图形运动实验室文案有误：{name}.{field}')
+    shift, angle, axis = (mode['target'] for mode in modes.values())
+    if not (
+        isinstance(shift, list) and len(shift) == 2
+        and all(type(count) is int for count in shift)
+        and -2 <= shift[0] <= 12 and -2 <= shift[1] <= 4
+        and type(angle) is int and -180 <= angle <= 180
+        and axis in ('vertical', 'horizontal')
+    ):
+        raise ValueError('图形运动实验室的挑战目标超出操作范围。')
+    return content
+
+
 def outputs():
     for topic, (theme, index_route, pages) in TOPICS.items():
         source_dir = SOURCE / topic
@@ -217,6 +243,7 @@ def outputs():
                 content = script.encode('utf-8')
             yield STATIC / topic / path.relative_to(source_dir), content
     yield from course_outputs()
+    yield PROJECT / 'mathbook' / 'data' / 'geometry-lab.json', geometry_lab_data()
 
 
 def main():

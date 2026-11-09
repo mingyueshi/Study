@@ -46,6 +46,45 @@ window.GMShared = (() => {
     return copies;
   }
 
+  /* 世界底图：等经距投影，南极洲截至南纬 73°。 */
+  function worldMap() {
+    const LNG0 = -180, LAT_TOP = 87, LAT_BOT = -73;
+    const K = 1280 / 360;
+    const W = 1280, H = (LAT_TOP - LAT_BOT) * K;
+    const WX = (lng) => (lng - LNG0) * K;
+    const WY = (lat) => (LAT_TOP - lat) * K;
+    const m = (lng, lat) => [WX(lng), WY(lat)];
+
+    const worldRingPath = (ring) => ringPath(ring, m);
+    const countries = window.GEO_WORLD_GEO.countries;
+    const paths = new Map(countries.map(c => {
+      // 南极洲已经裁到图底，底边应在两端之间闭合。
+      const rings = c.name === 'Antarctica' ? c.rings : c.rings.flatMap(wrapRing);
+      return [c.name, rings.map(worldRingPath).join('')];
+    }));
+
+    const gridSVG = () => {
+      let out = '';
+      for (let lng = -150; lng <= 180; lng += 30) {
+        out += `<line x1="${WX(lng).toFixed(1)}" y1="${WY(LAT_TOP).toFixed(1)}" x2="${WX(lng).toFixed(1)}" y2="${WY(LAT_BOT).toFixed(1)}"/>`;
+        if (lng !== -180 && lng !== 180) {
+          out += `<text class="gm-grid-label gm-longitude-label" x="${WX(lng).toFixed(1)}" y="${(H - 6).toFixed(1)}" text-anchor="middle">${Math.abs(lng)}°${lng < 0 ? 'W' : 'E'}</text>`;
+        }
+      }
+      for (let lat = -60; lat <= 60; lat += 30) {
+        out += `<line x1="0" y1="${WY(lat).toFixed(1)}" x2="${W.toFixed(1)}" y2="${WY(lat).toFixed(1)}"/>`;
+        if (lat !== 0) {
+          out += `<text class="gm-grid-label" x="6" y="${(WY(lat) - 5).toFixed(1)}">${Math.abs(lat)}°${lat < 0 ? 'S' : 'N'}</text>`;
+        } else {
+          out += `<line class="gm-equator" x1="0" y1="${WY(0).toFixed(1)}" x2="${W.toFixed(1)}" y2="${WY(0).toFixed(1)}"/>`;
+          out += `<text class="gm-equator-label" x="${(WX(90)).toFixed(1)}" y="${(WY(0) - 6).toFixed(1)}" text-anchor="middle">赤道 0°</text>`;
+        }
+      }
+      return `<g class="gm-grid">${out}</g>`;
+    };
+    return { W, H, m, ringPath: worldRingPath, countries, paths, gridSVG };
+  }
+
   /* 省份路径与外接框中心：数据来自 china-geo.js 与 map-data.js（须先于本文件加载）。 */
   const GEO = window.GEO_CHINA_GEO;
   const provD = new Map();      // adcode -> path d
@@ -129,7 +168,7 @@ window.GMShared = (() => {
     `<span class="gm-station-go" aria-hidden="true">进站 →</span></a>`;
 
   return {
-    esc, W, H, MX, MY, m, ringPath, lineD, midOf, wrapRing,
+    esc, W, H, MX, MY, m, ringPath, lineD, midOf, wrapRing, worldMap,
     KIND_CN, KIND_ICON, KIND_COLOR, displayName,
     provD, provLabel, clipDefs, mapPrelude, provincePathsSVG, insetSVG, compass, stationCard
   };

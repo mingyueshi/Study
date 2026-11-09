@@ -8,6 +8,8 @@
 | --- | --- |
 | `index.html` | 从地图预览进中国地图，查地名，或挑一个省域站 |
 | `china.html` | 切换省级行政区、山河大地和邻居图层。认识 34 个省级行政区、45 处山河湖海和 20 个邻居，翻看 7 张口诀卡 |
+| `animals.html?animal=giant-panda` | 在中国地图上认识 30 种代表动物，点位覆盖 27 个省级行政区。可按 6 类栖息地筛选，查看本地照片和关联省域站 |
+| `world-animals.html?animal=emperor-penguin` | 在世界地图上认识七大洲和多片海域的 30 种代表动物，按 7 类栖息地筛选，查看本地照片和关联地点 |
 | `world.html` | 看七大洲、四大洋、177 个国家和地区、10 处世界地标。在「中国与世界」图层找中国，也可以从对照卡直接定位 |
 | `province.html?adcode=110000` | 用同一页查看任意省域站的档案和五条「记一记」。迷你地图高亮本省，点其他省份可换站；省域目录按四大地理区域分组 |
 | `places.html` | 查 291 条地点档案，支持地名、简称、省会、英文名和地点类型，选中结果即打开相应地图 |
@@ -24,8 +26,11 @@
 - `atlas.js` 从已有档案生成地点索引，供目录、路线、图层定位、关联档案和练习共用。新增地点时保留原档案的 ID 规则，并在对应 SVG 中用 `data-id` 注册可点选的图形。原 ID 会出现在已有链接里。
 - `atlas-data.js` 用地点 ID 组织路线和双向关联。每个路线站点填写一条观察提示。中国的邻居还会按中文名关联到世界地图中的对应记录。中外对照卡在 `map-data.js` 的 `GM_WORLD_TEASERS` 中维护，`places` 依次引用左右两个地点。
 - `media-data.js` 用地点 ID 挂接素材，`media.js` 在地图档案、省域站和图册复用渲染。图册支持 `?place=地点ID`，例如 `gallery.html?place=f20`。素材保留来源页、作者和适用的授权链接。图片按原画面等比缩放，转成 JPEG 后保存在 `assets/`，影片只打开央视网。
-- `shared.js` 提供投影、SVG 路径和省域站卡片。中国与世界地图页各自绘制图层，由 `map-ui.js` 处理定位、图层切换、档案关联、缩放和练习。目录和路线页只加载档案数据。
+- `shared.js` 提供投影、SVG 路径、世界底图和省域站卡片。中国与世界地图页各自绘制图层，由 `map-ui.js` 处理定位、图层切换、档案关联、缩放和练习。目录和路线页只加载档案数据。
+- `animals-data.js`、`world-animals-data.js` 分别维护中国和世界的动物档案与栖息地图例，交互共用 `animals-app.js`。动物 ID 用于直达链接和 `assets/animals/` 下的同名 JPEG 照片。中国档案用 `adcode` 关联省域站，世界档案用 `mapPlace` 关联国家、地区或大洋。点位只标出代表栖息地。档案里的 `source` 是资料出处，照片来自另一页面时填写 `photoSource`。
 - 地图链接用 `?place=地点ID#map`，例如 `china.html?place=f20#map`，自动选中对应地点和图层。需要保留路线时加上 `&route=路线ID`。同一地点也可以在另一可见图层打开，例如 `world.html?place=China&layer=home#map`。
+
+动物照片按原比例缩放并压缩为 JPEG。大熊猫照片由 J. Patrick Fischer 拍摄，采用 [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/) 许可。褐马鸡照片由 Somongkol Teng 拍摄，采用 [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/) 许可。原图及其他照片的出处见页面档案。
 
 `china-geo.js` 和 `world-geo.js` 由脚本生成。重新生成时可传入本地源文件，省略参数时脚本会尝试联网下载。打开学习页面只读取本目录的文件。
 

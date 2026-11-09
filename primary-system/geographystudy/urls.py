@@ -14,6 +14,6 @@ urlpatterns = [
     path('atlas/', page('geo-map/index'), name='geography-atlas'),
     *[
         path(f'atlas/{name}.html', page(f'geo-map/{name}'), name=f'geography-atlas-{name}')
-        for name in ('china', 'world', 'province', 'places', 'routes', 'gallery')
+        for name in ('china', 'animals', 'world', 'world-animals', 'province', 'places', 'routes', 'gallery')
     ],
 ]

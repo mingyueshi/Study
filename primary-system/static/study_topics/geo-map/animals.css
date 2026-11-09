@@ -1,0 +1,212 @@
+.gm-wildlife {
+  --animal-land: #dce8ca;
+  --animal-sea: #dceceb;
+  --animal-green: #234c3b;
+  --animal-rust: #913d24;
+  margin: 0 auto;
+  padding-block: clamp(18px, 3vw, 38px) 0;
+}
+
+.gm-wildlife [hidden] { display: none !important; }
+
+.gm-wildlife-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: space-between;
+  gap: 14px 28px;
+  padding-bottom: clamp(16px, 2vw, 26px);
+}
+
+.gm-wildlife-kicker {
+  color: var(--animal-rust);
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: .12em;
+}
+
+.gm-wildlife-header h1 {
+  margin: 4px 0 8px;
+  color: var(--animal-green);
+  font-size: clamp(34px, 4vw, 64px);
+  font-weight: 900;
+  line-height: 1.16;
+}
+
+.gm-wildlife-header p:not(.gm-wildlife-kicker) { color: var(--ink-soft); font-size: 17px; }
+.gm-wildlife-header a { color: var(--animal-green); font-weight: 700; padding-block: 8px; }
+.gm-wildlife-links { display: flex; flex-wrap: wrap; gap: 4px 20px; }
+
+.gm-wildlife-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: space-between;
+  gap: 12px 20px;
+  margin-bottom: 14px;
+  padding: 14px clamp(12px, 1.6vw, 22px);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--card);
+}
+
+.gm-wildlife-tools h2,
+.gm-wildlife-tools label { color: var(--ink); font-size: 15px; font-weight: 800; }
+
+.gm-habitat-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 5px;
+}
+
+.gm-habitat-filters button,
+#gm-animal-picker {
+  min-height: 42px;
+  padding: 6px 12px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  color: var(--ink);
+  background: var(--card);
+  font: inherit;
+}
+
+.gm-habitat-filters button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.gm-habitat-filters button:hover,
+.gm-habitat-filters button[aria-pressed="true"] { background: #e4edda; border-color: #6f8964; color: var(--animal-green); }
+
+.gm-habitat-key {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--animal-color);
+}
+
+.gm-wildlife-tools label { display: grid; gap: 5px; }
+#gm-animal-picker { min-width: 12em; }
+
+.gm-wildlife-workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+  gap: clamp(12px, 1.5vw, 24px);
+}
+
+.gm-wildlife-map,
+#gm-animal-card {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--card);
+}
+
+#gm-animal-map {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 76svh;
+  background: var(--animal-sea);
+}
+
+.gm-wildlife .gm-sea { fill: var(--animal-sea); }
+.gm-wildlife .gm-neutral { stroke: #fbfdf4; stroke-width: 1.6; }
+.gm-wildlife[data-map="world"] .gm-neutral { stroke-width: .8; }
+.gm-wildlife .gm-equator-label { fill: #537473; }
+.gm-wildlife .gm-grid-label { fill: #537473; font-size: 14px; }
+.gm-wildlife .gm-longitude-label { display: none; }
+.gm-wildlife .gm-inset-title { font-size: 16px; }
+.gm-wildlife .gm-compass text { font-size: 17px; }
+
+.gm-animal-marker { cursor: pointer; outline: none; }
+.gm-animal-hit { fill: transparent; }
+.gm-animal-ring { fill: none; stroke: transparent; stroke-width: 3; }
+.gm-animal-marker:is(:hover, :focus-visible, [aria-pressed="true"]) .gm-animal-ring { stroke: var(--animal-color); }
+.gm-animal-dot { fill: var(--animal-color); stroke: #fff; stroke-width: 2; }
+.gm-animal-number { fill: #fff; font-size: 18px; font-weight: 850; }
+.gm-animal-label {
+  fill: #22372f;
+  stroke: #fffdf1;
+  stroke-width: 4px;
+  stroke-linejoin: round;
+  paint-order: stroke;
+  font-size: 21px;
+  font-weight: 850;
+}
+
+.gm-wildlife-map figcaption {
+  padding: 10px 14px;
+  color: var(--ink-soft);
+  font-size: 14px;
+}
+
+#gm-animal-count { margin-inline-end: .5em; color: var(--animal-green); font-weight: 800; }
+
+.gm-animal-photo {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: contain;
+  background: #23362d;
+}
+
+.gm-animal-info { padding: clamp(16px, 1.5vw, 26px); }
+.gm-animal-kicker {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--animal-color);
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.gm-animal-kicker span {
+  display: grid;
+  place-items: center;
+  min-width: 26px;
+  height: 26px;
+  padding-inline: 3px;
+  border-radius: 50%;
+  color: white;
+  background: var(--animal-color);
+}
+
+.gm-animal-info h2 {
+  margin: 6px 0 2px;
+  font-size: clamp(26px, 2.6vw, 40px);
+  line-height: 1.15;
+}
+
+.gm-animal-place { color: var(--ink-soft); font-weight: 700; }
+.gm-animal-info dl { margin: 14px 0; padding-top: 10px; border-top: 1px dashed var(--line); }
+.gm-animal-info dt { color: var(--animal-green); font-weight: 800; }
+.gm-animal-info dd { margin: 2px 0 10px; font-size: 17px; line-height: 1.7; }
+.gm-animal-station { color: var(--animal-green); font-weight: 800; }
+.gm-animal-sources { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 8px; }
+.gm-animal-sources a { color: var(--ink-soft); font-size: 14px; }
+
+@media (min-width: 1100px) {
+  .gm-wildlife-workspace { grid-template-columns: minmax(0, 1fr) clamp(284px, 23vw, 424px); }
+  #gm-animal-map { max-height: max(490px, calc(100svh - 490px)); }
+}
+
+@media (min-width: 680px) and (max-width: 1099px) {
+  #gm-animal-card { display: grid; grid-template-columns: 44% minmax(0, 1fr); align-items: start; }
+}
+
+@media (max-width: 560px) {
+  .gm-wildlife-header { gap: 8px; }
+  .gm-habitat-filters { gap: 4px; }
+  .gm-habitat-filters button { min-height: 44px; padding-inline: 6px; font-size: 14px; }
+  .gm-animal-label { display: none; }
+  .gm-animal-ring { r: 23px; }
+  .gm-animal-dot { r: 20px; }
+  .gm-animal-number { font-size: 22px; }
+}

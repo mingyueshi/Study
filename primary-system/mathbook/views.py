@@ -11,7 +11,7 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.decorators.http import require_http_methods, require_safe
 
 from . import exercises, records
-from .content import available_books, book_exists, load_book
+from .content import BOOKS_DIR, available_books, book_exists, load_book
 
 MAX_BODY = 12000
 
@@ -20,6 +20,12 @@ MAX_BODY = 12000
 @require_safe
 def index(request):
     return render(request, 'mathbook/book_list.html', {'books': available_books()})
+
+
+@require_safe
+def geometry_lab(request):
+    modes = json.loads((BOOKS_DIR.parent / 'geometry-lab.json').read_text(encoding='utf-8'))
+    return render(request, 'mathbook/geometry_lab.html', {'modes': modes, 'study_area': 'math'})
 
 
 @never_cache

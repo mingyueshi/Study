@@ -12,7 +12,6 @@
 |---|---|---|
 | `primary-system/` | 乐学堂统一系统（多账号、多教材、Nova 后台） | Django 单体，Python 3.12+，SQLite |
 | `personal-learning/` | 个人学习系统（英文学习、AI 基础篇） | 纯 HTML+JS+CSS |
-| `techlex/` | 旧入口，仅重定向到 personal-learning | 单文件 |
 
 `junior/`、`senior/`、`university/` 为规划中的学段目录，尚不存在。
 

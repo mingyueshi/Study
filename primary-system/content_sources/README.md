@@ -5,6 +5,7 @@
 | 内容 | 编辑位置 | 生成命令 |
 |---|---|---|
 | 数学、语文教材 | `math-data.js`、`knowledge-data.js`、图示与 `images/` | `make mathbook-data chinesebook-data` |
+| 图形运动实验室 | `geometry-lab.json`（实验手记和挑战目标） | `make study-topics-data` |
 | 英语教材、日常用语 | `english-data.js` | `make phrases-data`；教材导出见项目 README |
 | 英语语法 | `grammar/` | `make grammar-data` |
 | 作文坊 | `writing-data.js` | `make writing-data` |
