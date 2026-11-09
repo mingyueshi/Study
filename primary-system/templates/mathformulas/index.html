@@ -1,0 +1,69 @@
+{% extends 'base.html' %}{% load static %}{% block title %}数学公式 · 乐学堂{% endblock %}
+{% block content %}<link rel="stylesheet" href="{% static 'mathformulas/formulas.css' %}?v=1"><script src="{% static 'mathformulas/formulas.js' %}?v=1" defer></script>
+<header class="mform-hero">
+  <div class="mform-hero-copy">
+    <p class="eyebrow">数学 · 公式速查</p>
+    <h1>数学公式</h1>
+    <p class="mform-hero-lead">{{ stage.blurb }}</p>
+  </div>
+  <nav class="mform-stages" aria-label="切换学段">
+    {% for item in stages %}
+    <a class="mform-stage {% if item.code == stage.code %}on{% endif %}" href="?stage={{ item.code }}" {% if item.code == stage.code %}aria-current="page"{% endif %}>
+      <span class="mform-stage-emoji" aria-hidden="true">{{ item.emoji }}</span>
+      <span class="mform-stage-name">{{ item.name }}{% if item.wip %}<i class="mform-wip">整理中</i>{% endif %}</span>
+      <span class="mform-stage-count">{{ item.chapters }} 章 · {{ item.groups }} 组</span>
+    </a>
+    {% endfor %}
+  </nav>
+</header>
+
+<div class="mform-workspace">
+  <aside class="mform-side" aria-label="公式章节导航">
+    <nav class="mform-nav" aria-label="本章所在学段的章节">
+      {% for item in chapters %}
+      <a class="mform-nav-link {% if item.code == chapter.code %}on{% endif %}" href="?stage={{ stage.code }}&chapter={{ item.code }}" {% if item.code == chapter.code %}aria-current="page"{% endif %}>
+        <span class="mform-nav-emoji" aria-hidden="true">{{ item.emoji }}</span>
+        <span class="mform-nav-title">{{ item.title }}</span>
+        <i class="mform-nav-count">{{ item.group_count }}</i>
+      </a>
+      {% endfor %}
+    </nav>
+    <div class="mform-side-tools">
+      <input class="mform-search" type="search" data-mform-search placeholder="查公式，如 梯形、速度" aria-label="搜索本章公式">
+      <span class="mform-count"><b data-mform-visible>{{ chapter.item_count }}</b> 条公式</span>
+    </div>
+  </aside>
+
+  <div class="mform-main">
+    <header class="mform-chapter-head">
+      <span class="mform-chapter-emoji" aria-hidden="true">{{ chapter.emoji }}</span>
+      <div>
+        <h2>{{ chapter.no }}. {{ chapter.title }}</h2>
+        <p>{{ chapter.intro }}</p>
+      </div>
+    </header>
+    <div data-mform-groups>
+      {% for group in groups %}
+      <section class="mform-group" data-mform-group>
+        <h3>{{ group.title }}</h3>
+        {% if group.note %}<p class="mform-group-note">{{ group.note }}</p>{% endif %}
+        <ul class="mform-rows">
+          {% for item in group.items %}
+          <li class="mform-row" data-mform-row>
+            <span class="mform-row-name">{{ item.0 }}</span>
+            <span class="mform-row-formula">{{ item.1 }}</span>
+          </li>
+          {% endfor %}
+        </ul>
+      </section>
+      {% endfor %}
+    </div>
+    <p class="mform-empty" data-mform-empty hidden>这一章没有匹配的公式，换个关键词试试。</p>
+    <nav class="mform-pager" aria-label="上一章下一章">
+      {% if prev_chapter %}<a class="mform-pager-link" href="?stage={{ stage.code }}&chapter={{ prev_chapter.code }}">← {{ prev_chapter.emoji }} {{ prev_chapter.title }}</a>{% endif %}
+      {% if next_chapter %}<a class="mform-pager-link mform-pager-right" href="?stage={{ stage.code }}&chapter={{ next_chapter.code }}">{{ next_chapter.emoji }} {{ next_chapter.title }} →</a>{% endif %}
+    </nav>
+    <p class="mform-foot">公式按通行教材口径整理；单位换算与应用题关系式考前过一遍最管用。初高中正在整理中。</p>
+  </div>
+</div>
+{% endblock %}

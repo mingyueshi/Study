@@ -263,3 +263,21 @@ DB 里的两科内容行暂不删除：待静态教材册有全局检索层后�
    渲染 `EVENT_RULES`，与实际口径同源不过期）。AJAX 端点在响应里带
    `rewards` 字段，各玩法 JS 经共享 `static/incentives/reward-toast.js` 弹小
    庆祝条；教材表单路径走 Django messages。
+
+## 数学公式专题（2026-11-09）
+
+独立 `mathformulas` 应用承接跨学段的公式速查手册（照 grammar 零模型先例）：
+无模型、无迁移、无学习记录，页面 GET 零写入零会话；`/mathformulas/` 前端
+左右工作区布局（照 phrases/plurals 的 87f4839 统一模式）——左栏 sticky 章节
+导航与页内搜索（纯前端渐进增强），右栏公式组卡流，hero 卡上的学段切换走
+服务端 `?stage=`（小学/初中/高中，非法参数回退、跨学段 chapter 回退）。
+
+内容全部在 Git 跟踪的 `mathformulas/data/formulas.json`（`content.py::validate`
+契约校验：学段归属、文本契约禁英文双引号/裸换行/HTML 标签、规模下限），公式
+组沿用 `primary/math-data.js` 公式速查的 `{title, items: [[名称, 公式], …],
+note}` 形状。小学按 1-6 年级全覆盖（10 章 42 组 157 条：数的认识、运算、
+方程、分数百分数、比与比例、平面/立体图形、常考数量关系、单位换算、统计）；
+初中高中先搭 5 章框架 + 打底公式（标「整理中」），后续按需补齐。首页数学
+区专题卡经 `SPECIAL_ENTRIES` 注册（route `math-formulas`，新图标 formula.svg）；
+不进 base.html 顶部导航，与 phrases/plurals 同口径。纯速查无练习判分——
+将来若加「公式回忆练习」，再按 plurals 模式加模型并接 incentives 积分。

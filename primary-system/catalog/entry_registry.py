@@ -208,6 +208,9 @@ SPECIAL_ENTRIES = (
     {'route': 'questionbank-olympiad', 'subject': '数学', 'area': 'math', 'icon': 'quiz', 'color': 'math',
      'name': '奥数挑战', 'tag': '来挑战 →',
      'blurb': '四年级奥数思维题：速算巧算、鸡兔同笼、盈亏还原、行程与逻辑推理，每题带思路解析，答错自动进错题本。'},
+    {'route': 'math-formulas', 'subject': '数学', 'area': 'math', 'icon': 'formula', 'color': 'math',
+     'name': '数学公式', 'tag': '查公式 →',
+     'blurb': '小学一到六年级的公式速查手册：运算律、周长面积体积、行程植树鸡兔同笼、单位换算，初中高中在整理中。'},
 )
 
 

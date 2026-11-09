@@ -610,3 +610,29 @@ SQLite相关38项（37通过／1PG跳过）、PG批次10/10含并发首导、前
   redeem_refund/+2）→ 余额不足拒单文案正确。冒烟账号与测试奖励项已删除，
   五张激励表残留为 0。
 - 未运行 PostgreSQL 专项；未提交→随本次提交入库。
+
+## 2026-11-09：数学公式专题（小学全覆盖 + 初高中框架）
+
+- 结论先行：新增零模型只读 app `mathformulas`（照 grammar 先例）——
+  `/mathformulas/` 左右工作区布局（左 sticky 章节导航 + 搜索、右公式组卡流），
+  hero 学段切换走服务端 `?stage=`（小学/初中/高中，非法参数与跨学段 chapter
+  一律回退），重点完善小学 1-6 年级全覆盖。
+- 内容：Git 跟踪 `mathformulas/data/formulas.json`，公式组沿用 math-data.js
+  公式速查形状 `{title, items:[[名称,公式],…], note}`。小学 10 章 42 组 157 条
+  （数的认识与整除/数的运算/式与方程/分数与百分数/比与比例/平面图形/立体
+  图形/常考数量关系/单位换算/统计与可能性）；初中、高中各 5 章框架 + 打底
+  公式（9 组/7 组，标「整理中」）。`content.py::validate` 契约校验：学段归属、
+  章节唯一、二元组形状、文本契约（禁英文双引号/裸换行/HTML 标签）、规模下限
+  （小学 ≥8 章/36 组/150 条），数据坏拒绝上线；data/README.md 记维护口径。
+- 注册：INSTALLED_APPS、`/mathformulas/` 路由（name `math-formulas`）、
+  `SPECIAL_ENTRIES` 数学区专题卡（新图标 formula.svg）；不进顶部导航（与
+  phrases/plurals 同口径）。
+- 测试：`mathformulas` 16 项（数据契约、validate 拒坏数据、?stage/?chapter 分
+  视图与回退、GET 零会话、首页专题卡渲染）；全量 `make test` 638 项通过
+  （skipped 14）。catalog 既有守卫测试「专题卡殿后」断言随注册顺序更新为
+  「数学公式」。
+- 8012 冒烟 + 截图目检（桌面 1440px）：小学默认页（10 章·42 组、公式行左右
+  两栏式）、`?stage=junior`（整理中徽标、数与式 3 组）、`?chapter=plane`
+  （圆环面积/周长公式）、跨学段 chapter 回退到该学段第一章、首页数学卡可点
+  达；Unicode 数学符号（a²、aᵐ⁺ⁿ、√、π）渲染正常。
+- 未运行 PostgreSQL 专项；未提交→随本次提交入库。

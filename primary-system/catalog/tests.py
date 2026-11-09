@@ -133,8 +133,8 @@ class CatalogTests(PlatformFixture):
         for spec in SPECIAL_ENTRIES:
             self.assertContains(response, spec['name'])
             self.assertContains(response, reverse(spec['route']))
-        # 专题卡按注册顺序殿后（奥数挑战压轴）。
-        self.assertEqual(response.context['entry_cards'][-1]['name'], '奥数挑战')
+        # 专题卡按注册顺序殿后（数学公式压轴，与奥数挑战同属数学区）。
+        self.assertEqual(response.context['entry_cards'][-1]['name'], '数学公式')
         self.assertEqual(len(response.context['entry_cards']),
                          Module.objects.filter(is_active=True).count() + len(SPECIAL_ENTRIES))
 
