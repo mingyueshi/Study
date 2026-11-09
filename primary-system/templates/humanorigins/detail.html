@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{ station.title }} · 人类起源 · 乐学堂{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'humanorigins/origins.css' %}">
+<div class="origins">
+  <a class="origins-back" href="{% url 'human-origins' %}">← 人类起源 · 全部学习站</a>
+  <div class="origins-layout">
+    <nav class="origins-side" aria-label="学习站导航">
+      <p class="origins-kicker">考察路线</p>
+      <ol>
+        {% for item in stations %}
+        <li><a href="{% url 'human-origins-station' item.slug %}" {% if item.slug == station.slug %}aria-current="page"{% endif %}>
+          <span aria-hidden="true">0{{ forloop.counter }}</span>{{ item.label }}
+        </a></li>
+        {% endfor %}
+      </ol>
+    </nav>
+
+    <article class="origins-article">
+      <header class="origins-station-head">
+        <p class="origins-kicker">第 {{ number }} 站 / {{ stations|length }} 站 · {{ station.label }}</p>
+        <h1>{{ station.title }}</h1>
+        <p class="origins-lead">{{ station.opening }}</p>
+        <nav class="origins-jumps" aria-label="本页小节">
+          <a href="#origins-clues">看线索 ↓</a>
+          <a href="#origins-quiz">做判断 ↓</a>
+          <a href="#origins-sources">查出处 ↓</a>
+        </nav>
+      </header>
+
+      {% include 'humanorigins/_figure.html' with figure=station.figures.0 %}
+      {% for figure in station.figures|slice:'1:' %}
+        {% include 'humanorigins/_figure.html' with lazy=True %}
+      {% endfor %}
+
+      {% if station.timeline %}
+      <section class="origins-panel origins-timeline" aria-labelledby="origins-timeline-heading">
+        <p class="origins-kicker">比一比年代</p>
+        <h2 id="origins-timeline-heading">{{ station.timeline.title }}</h2>
+        <p>{{ station.timeline.note }}</p>
+        <div class="origins-time-axis" aria-hidden="true"><span>约 400 万年前</span><span>约 200 万年前</span><span>今天</span></div>
+        <ul class="origins-time-list">
+          {% for bar in station.timeline.bars %}
+          <li>
+            <div><strong>{{ bar.label }}</strong><a href="#source-{{ bar.source }}">{{ bar.period }} ↘</a></div>
+            <span class="origins-time-track" aria-hidden="true" style="--start: {{ bar.start }}%; --end: {{ bar.end }}%"></span>
+          </li>
+          {% endfor %}
+        </ul>
+      </section>
+      {% endif %}
+
+      {% if station.map_pins %}
+      <section class="origins-panel" aria-labelledby="origins-sites-heading">
+        <p class="origins-kicker">在地图上找一找</p>
+        <h2 id="origins-sites-heading">两地，三个发现</h2>
+        <div class="origins-site-map">
+          <div class="origins-china">
+            <img src="{% static 'poetry/china-map.svg' %}" width="773" height="892" alt="中国遗址示意图。元谋在云南，北京人和田园洞人的发现地点都在北京周口店一带。" loading="lazy">
+            {% for pin in station.map_pins %}
+            <span class="origins-pin" aria-hidden="true" style="--x: {{ pin.x }}%; --y: {{ pin.y }}%">{{ pin.label }}</span>
+            {% endfor %}
+          </div>
+          <ol class="origins-sites" aria-label="遗址按年代由早到晚">
+            {% for clue in station.clues %}
+            <li><a href="#clue-{{ forloop.counter }}">
+              <span class="origins-pin-label" aria-hidden="true">{{ forloop.counter }}</span>
+              <span><strong>{{ clue.title }}</strong><small>{{ clue.place }}</small><small>{{ clue.period }}</small></span>
+            </a></li>
+            {% endfor %}
+          </ol>
+        </div>
+        <p class="origins-note">地点为示意。周口店第 1 地点和田园洞靠得很近，图上共用一个标记。列表按年代由早到晚排列。</p>
+      </section>
+      {% endif %}
+
+      <section id="origins-clues" class="origins-clues" aria-labelledby="origins-clues-heading">
+        <p class="origins-kicker">观察和解释</p>
+        <h2 id="origins-clues-heading">看看这三条线索</h2>
+        <ol class="origins-clue-list">
+          {% for clue in station.clues %}
+          <li id="clue-{{ forloop.counter }}">
+            <span class="origins-clue-number" aria-hidden="true">0{{ forloop.counter }}</span>
+            <div>
+              <h3>{{ clue.title }}</h3>
+              {% if clue.place %}<p class="origins-clue-place">{{ clue.place }} · {{ clue.period }}</p>{% endif %}
+              <dl>
+                <dt>观察到了什么</dt><dd>{{ clue.observation }}</dd>
+                <dt>它能说明什么</dt><dd>{{ clue.meaning }}</dd>
+              </dl>
+              <a class="origins-source-link" href="#source-{{ clue.source }}">看这条线索的出处 ↘</a>
+            </div>
+          </li>
+          {% endfor %}
+        </ol>
+      </section>
+
+      <section id="origins-quiz" class="origins-panel origins-quiz" aria-labelledby="origins-quiz-heading">
+        <p class="origins-kicker">证据小挑战</p>
+        <h2 id="origins-quiz-heading">{{ station.quiz.prompt }}</h2>
+        <p>点开你选的答案，看看理由。</p>
+        {% for choice in station.quiz.choices %}
+        <details class="origins-choice" name="origins-choice">
+          <summary><span class="origins-choice-letter" aria-hidden="true">{{ forloop.counter }}</span>{{ choice.label }}</summary>
+          <div class="origins-feedback{% if choice.correct %} origins-correct{% endif %}">
+            <strong>{% if choice.correct %}这个判断有依据{% else %}再看看线索{% endif %}</strong>
+            <p>{{ choice.feedback }}</p>
+          </div>
+        </details>
+        {% endfor %}
+      </section>
+
+      <section class="origins-takeaway" aria-labelledby="origins-takeaway-heading">
+        <h2 id="origins-takeaway-heading">手记里记一句</h2>
+        <p>{{ station.takeaway }}</p>
+      </section>
+
+      <section class="origins-sources" id="origins-sources" aria-labelledby="origins-sources-heading">
+        <h2 id="origins-sources-heading">资料与图像出处</h2>
+        <p>核对日期 <time datetime="{{ station.checked_on }}">{{ station.checked_on }}</time> · 原文需联网</p>
+        <ol>
+          {% for source in station.sources %}
+          <li id="source-{{ forloop.counter }}"><a href="{{ source.url }}">{{ source.title }} ↗</a></li>
+          {% endfor %}
+        </ol>
+      </section>
+
+      <nav class="origins-pagination" aria-label="继续考察">
+        {% if previous %}
+        <a href="{% url 'human-origins-station' previous.slug %}"><small>← 上一站</small>{{ previous.label }}</a>
+        {% else %}
+        <a href="{% url 'human-origins' %}"><small>← 返回</small>全部学习站</a>
+        {% endif %}
+        {% if following %}
+        <a href="{% url 'human-origins-station' following.slug %}"><small>下一站 →</small>{{ following.label }}</a>
+        {% else %}
+        <a href="{% url 'human-origins' %}"><small>五站走完啦</small>回到专题首页 ↗</a>
+        {% endif %}
+      </nav>
+    </article>
+  </div>
+</div>
+{% endblock %}

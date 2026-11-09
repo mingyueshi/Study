@@ -1,6 +1,6 @@
 """日常用语专题：句式与话题双视图浏览 + 「看中文选英文」练习。
 
-数据是生成物：``scripts/build_phrases.cjs`` 从 primary/english-data.js 的
+数据是生成物：``scripts/build_phrases.cjs`` 从 content_sources/english-data.js 的
 ENGLISH_PHRASES（教材词卡短语）确定性转换而来，en/zh 文本不改写。判分在
 前端展示，每题由 ``report`` 按词表确定性选项集复核并重算对错后落一条记录
 （``records``，对错都记）。游客沿用会话键双轨，键只在 POST 写入路径生成

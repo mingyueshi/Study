@@ -1,0 +1,43 @@
+{% extends "study_topics/page.html" %}
+{% load static %}
+{# 由 scripts/build_study_topics.py 生成。 #}
+{% block title %}地理小课堂 · 乐学堂{% endblock %}
+{% block study_assets %}
+<link rel="stylesheet" href="{% static 'study_topics/geo/styles.css' %}">
+<link rel="stylesheet" href="{% static 'study_topics/geo/lab.css' %}">
+<script src="{% static 'study_topics/geo/content.js' %}" defer></script>
+<script src="{% static 'study_topics/geo/knowledge-core.js' %}" defer></script>
+<script src="{% static 'study_topics/geo/knowledge-regions.js' %}" defer></script>
+<script src="{% static 'study_topics/geo/media.js' %}" defer></script>
+<script src="{% static 'study_topics/geo/diagrams.js' %}" defer></script>
+<script src="{% static 'study_topics/geo/app.js' %}" defer></script>
+<script src="{% static 'study_topics/geo/lab.js' %}" defer></script>
+{% endblock %}
+{% block study_content %}
+    <div class="geography-topic color-geography" id="top">
+      <div class="page-heading knowledge-heading">
+        <div><p class="eyebrow">概念 · 原理 · 数据 · 应用</p><h1>地理小课堂</h1><p>8 个主题 / 37 个知识点。先掌握定义与规律，再用图示、例题和资料理解。</p></div>
+        <div class="knowledge-tools"><button id="open-search" class="secondary-button">搜索知识点 <span aria-hidden="true">⌕</span></button><button id="open-progress" class="secondary-button">自测记录 <b id="progress-count">0 / 37</b></button></div>
+      </div>
+      <div class="library-layout knowledge-layout">
+        <aside class="unit-nav knowledge-directory" id="directory" aria-label="地理知识目录">
+          <details open><summary>知识目录 <span>8 个主题</span></summary><p class="directory-note">选择主题，展开具体知识点。</p><div id="chapter-nav"></div></details>
+        </aside>
+        <div class="knowledge-main" id="knowledge-main">
+          <section class="chapter-heading" aria-labelledby="chapter-title"><div><p class="eyebrow" id="chapter-label"></p><h2 id="chapter-title"></h2><p id="chapter-description"></p></div><span class="chapter-count" id="chapter-count"></span></section>
+          <nav id="lesson-index" class="lesson-index" aria-label="本章知识点"></nav>
+          <div id="lessons"></div>
+          <button id="next-chapter" class="next-chapter"><span>学习下一主题</span><strong id="next-chapter-name"></strong><span aria-hidden="true">→</span></button>
+          <section class="reference-guide" id="reference-guide"><h2>辅助资料怎样用</h2><ul><li><strong>图示与动画：</strong>帮助理解空间关系、过程与规律。概念图不按真实大小和距离绘制。</li><li><strong>音频与视频：</strong>音频讲解用于复习；短片说明观测对象与时间，不代替定义、数据和推导。</li><li><strong>外部资料：</strong>每个知识点附原始机构链接，适合继续查阅。数值注意单位、约数、统计或公布年份。</li></ul><p>自测记录只保存在当前浏览器中。旧版探索印章不等同于这37条知识的掌握程度。</p><div class="reference-links"><a href="CONTENT-SOURCES.md" data-local-doc>内容编排依据 ↗</a><a href="CORE-SOURCES.md" data-local-doc>自然地理核对记录 ↗</a><a href="REGIONS-SOURCES.md" data-local-doc>区域与应用核对记录 ↗</a><a href="MEDIA-SOURCES.md" data-local-doc>素材来源 ↗</a></div></section>
+        </div>
+      </div>
+      <dialog id="search-dialog" class="knowledge-dialog"><div class="dialog-heading"><div><p class="eyebrow">按名称、概念、公式和例题检索</p><h2>搜索37个知识点</h2></div><button class="close-dialog" aria-label="关闭搜索">×</button></div><label class="search-label" for="knowledge-search">输入关键词</label><input id="knowledge-search" type="search" placeholder="例如：比例尺、经度、气候、长江" autocomplete="off"><p id="search-count" class="muted" aria-live="polite"></p><div id="search-results"></div></dialog>
+      <dialog id="progress-dialog" class="knowledge-dialog"><div class="dialog-heading"><div><p class="eyebrow">答对对应的巩固题后记录</p><h2>知识点自测记录</h2></div><button class="close-dialog" aria-label="关闭自测记录">×</button></div><p id="progress-summary"></p><div id="progress-list"></div><p class="small-note">记录按浏览器保存，不按账号同步；答对一道题只代表本次自测通过。</p></dialog>
+      <dialog id="lab-dialog" class="knowledge-dialog lab-dialog"><div class="dialog-heading"><div><p class="eyebrow">辅助理解 · 与对应知识点结合使用</p><h2>地理原理动画</h2></div><button class="close-dialog" aria-label="关闭动画">×</button></div><div id="geo-lab"></div></dialog>
+      <dialog id="video-dialog" class="knowledge-dialog video-dialog"><div class="dialog-heading"><div><p class="eyebrow">卫星观测 · 加速合成</p><h2 id="video-title"></h2></div><button class="close-dialog" aria-label="关闭视频">×</button></div><video id="observation-video" controls playsinline preload="none"></video><p id="video-caption"></p><a id="video-source" target="_blank" rel="noopener noreferrer">原始观测说明 ↗</a></dialog>
+      <dialog id="image-dialog" class="knowledge-dialog image-dialog"><div class="dialog-heading"><h2>辅助图片</h2><button class="close-dialog" aria-label="关闭大图">×</button></div><figure><img id="large-image" alt=""><figcaption id="large-caption"></figcaption></figure><a id="large-source" target="_blank" rel="noopener noreferrer">原图及来源 ↗</a></dialog>
+      <div id="status-message" class="status-message" role="status"></div>
+      <noscript><p class="notice">请启用JavaScript以查看知识点正文；内容数据与来源记录均保存在本目录中。</p></noscript>
+    </div>
+
+{% endblock %}

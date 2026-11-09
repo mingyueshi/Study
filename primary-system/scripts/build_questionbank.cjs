@@ -1,4 +1,4 @@
-/* 把 primary/ 的数学、语文、英语内部数据规则转换为题库批次 JSON。
+/* 把 content_sources/ 的数学、语文、英语数据按规则转换为题库批次 JSON。
    产出 questionbank/data/questions/2026-11-internal-core.json，经
    `manage.py import_questions --input <文件>` 导入。
 
@@ -14,14 +14,14 @@ const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
 
-const ROOT = path.resolve(__dirname, '../..');
+const SOURCES = path.resolve(__dirname, '../content_sources');
 const BATCH = '2026-11-internal-core';
 const TARGET = process.argv[2] || path.resolve(__dirname, '../questionbank/data/questions/', `${BATCH}.json`);
 const ENGLISH_CAP = 60; // 教材同步词义题上限（按单元轮转取样，各单元覆盖均匀）
 
-const MKB = require(path.join(ROOT, 'primary/math-data.js'));
-const KB = require(path.join(ROOT, 'primary/knowledge-data.js'));
-const ENGLISH = require(path.join(ROOT, 'primary/english-data.js'));
+const MKB = require(path.join(SOURCES, 'math-data.js'));
+const KB = require(path.join(SOURCES, 'knowledge-data.js'));
+const ENGLISH = require(path.join(SOURCES, 'english-data.js'));
 
 const GRADE = 4; // 三册数据均为四年级（北师大数学四上 / 统编语文四上 / 外研英语四上四下）
 

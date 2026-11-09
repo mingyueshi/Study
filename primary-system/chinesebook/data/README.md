@@ -4,11 +4,11 @@
 映射里（一行一册，册次码对齐 catalog 教材码后缀，如 pep-chinese-4a-2026 → `4a`），
 每册产出 `static/chinesebook/books/<册>.js`（规范化 `const KB = <JSON>;`）与
 `chinesebook/data/books/<册>.json`（结构摘要）。重跑无 diff。
-**内容源头在静态版**——修改课文、古诗文、字词复习都去 primary 对应数据文件改
-（当前 `primary/knowledge-data.js` 即四上），然后：
+**内容源头在 `content_sources/`**——修改课文、古诗文、字词复习都去 `content_sources/` 对应数据文件改
+（当前 `content_sources/knowledge-data.js` 即四上），然后：
 
 ```sh
-node primary/test/test-knowledge.js     # 源头契约（构建脚本也会先代跑作为审计门）
+node content_sources/test/test-knowledge.js     # 源头契约（构建脚本也会先代跑作为审计门）
 make chinesebook-data                    # 或 node scripts/build_chinesebook.cjs
 .venv/bin/python manage.py test chinesebook   # 生成物契约与页面测试
 ```
@@ -21,7 +21,7 @@ make chinesebook-data                    # 或 node scripts/build_chinesebook.cj
 - `chinesebook/data/books/<册>.json`：结构摘要（`book`、`textbook_code`、
   `source_file`、`source_sha256`、单元/课文/古诗文/日积月累/多音字/形近字计数、
   `fig_ids`/`image_refs` 清单），是加载期校验的对照基准。
-- `static/figures/figures.js`、`figures.css`：语文/数学共用图示库（primary 同步；
+- `static/figures/figures.js`、`figures.css`：语文/数学共用图示库（由文件源生成；
   DB 阅读器的图示块同样消费，引用处 `?v=N` 需随内容变化递增）。
 - `static/images/lessons/`、`static/images/poems/`：课文实景照片与古诗意境图
   （只增不删）。
@@ -42,14 +42,14 @@ make chinesebook-data                    # 或 node scripts/build_chinesebook.cj
 ## 与挑战题库的关系
 
 课文多音字「给词选读音」由 `scripts/build_questionbank.cjs` 从同一份
-`primary/knowledge-data.js` 生成批次进题库（服务端判分、落记录、进错题本）；
+`content_sources/knowledge-data.js` 生成批次进题库（服务端判分、落记录、进错题本）；
 教材册页内「已复习」只存浏览器 localStorage，两边口径独立、不互相同步。
 
 ## 新增一册 / 修订流程
 
-1. 改 primary 对应数据文件（新增册次：先在 primary 建数据文件＋静态版测试）
+1. 改 `content_sources/` 对应数据文件（新增册次：先在 `content_sources/` 建数据文件＋静态版测试）
 2. `scripts/build_chinesebook.cjs` 的 `BOOKS` 映射加一行（新册），或直接改现有册内容
-3. `node primary/test/test-knowledge.js` 过源头契约（构建脚本也会先代跑）
+3. `node content_sources/test/test-knowledge.js` 过源头契约（构建脚本也会先代跑）
 4. `make chinesebook-data` 重跑同步（确定性产出、重跑无 diff；图片只增不删）
 5. 静态文件内容有变时升 `templates/chinesebook/reader.html` 里的 `?v=N`
 6. `manage.py test chinesebook` ＋ 打开 `/chinesebook/` 目检

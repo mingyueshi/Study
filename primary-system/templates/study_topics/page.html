@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<script src="{% static 'study_topics/connections-data.js' %}" defer></script>
+<script src="{% static 'study_topics/connections.js' %}" defer></script>
+{% block study_assets %}{% endblock %}
+<link rel="stylesheet" href="{% static 'study_topics/platform-bridge.css' %}">
+<div class="study-topic-frame color-{{ study_area }}"
+     data-history-lesson="{% url 'history-study' %}" data-geography-lesson="{% url 'geography-study' %}"
+     data-calendar="{% url 'history-timeline-dynasties' %}" data-china-map="{% url 'geography-atlas-china' %}"
+     {% if course_slug %}
+     data-history-event="{% url 'history-timeline-event' %}"
+     data-mars-life="{% url 'mystery-case' 'mars-life' %}" data-dark-matter="{% url 'mystery-case' 'dark-matter' %}"
+     data-stars="{% url 'astronomy-index' %}" data-poetry="{% url 'poetry-index' %}"
+     data-idiom-stories="{% url 'idiom-stories' %}" data-elements="{% url 'science-elements' %}"
+     {% endif %}>
+  <nav class="study-topic-nav" aria-label="{{ study_label }}专题导航">
+    <a href="{% url 'home' %}?area={{ study_area }}#modules-title">← 学习广场 · {{ study_label }}</a>
+    {% with current=request.resolver_match.url_name %}
+    {% if course_slug %}
+    <a href="{% url current %}" aria-current="page">{{ course_title }}</a>
+    {% for route, label in course_links %}
+    <a href="{% url route %}">{{ label }} ↗</a>
+    {% endfor %}
+    {% elif study_area == 'history' %}
+    <a href="{% url 'history-timeline-timeline' %}" {% if current == 'history-timeline-timeline' %}aria-current="page"{% elif current != 'history-study' %}aria-current="location"{% endif %}>历史双轨时间轴</a>
+    <a href="{% url 'history-study' %}" {% if current == 'history-study' %}aria-current="page"{% endif %}>历史精讲</a>
+    {% elif study_area == 'geography' %}
+    <a href="{% url 'geography-atlas-china' %}" {% if current == 'geography-atlas-china' %}aria-current="page"{% elif current != 'geography-study' %}aria-current="location"{% endif %}>地理图谱</a>
+    <a href="{% url 'geography-study' %}" {% if current == 'geography-study' %}aria-current="page"{% endif %}>地理小课堂</a>
+    <a href="{% url 'geography-index' %}">查国家与地区 ↗</a>
+    {% endif %}
+    {% endwith %}
+  </nav>
+  {% block study_content %}{% endblock %}
+</div>
+{% endblock %}

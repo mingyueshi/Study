@@ -1,0 +1,184 @@
+/* Topic-scoped experiments using the shared learning-platform visual language. */
+.geography-topic #geo-lab {
+  --geo-lab-ink: #233e37;
+  --geo-lab-muted: #586b62;
+  --geo-lab-green: #22634c;
+  --geo-lab-line: #dce6d9;
+  --geo-lab-soft: #e8f1df;
+  --geo-lab-paper: #fffefa;
+  color: var(--geo-lab-ink);
+  background: var(--geo-lab-paper);
+  border: 1px solid var(--geo-lab-line);
+  border-radius: 26px;
+  overflow: hidden;
+  font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", system-ui, sans-serif;
+  font-size: 18px;
+  line-height: 1.8;
+}
+.geography-topic #geo-lab *,
+.geography-topic #geo-lab *::before,
+.geography-topic #geo-lab *::after { box-sizing: border-box; }
+.geography-topic #geo-lab button { font-family: inherit; cursor: pointer; touch-action: manipulation; }
+.geography-topic #geo-lab button:focus-visible,
+.geography-topic #geo-lab [role="button"]:focus-visible { outline: 3px solid #b75e2c; outline-offset: 4px; }
+.geography-topic #geo-lab button:disabled,
+.geography-topic #geo-lab .btn-disabled { cursor: default; opacity: .45; box-shadow: none; }
+.geography-topic .geo-lab-tabs { display: flex; flex-wrap: wrap; gap: 12px; padding: 18px 28px; border-bottom: 1px solid var(--geo-lab-line); background: #edf2e5; }
+.geography-topic .geo-lab-tab { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 54px; padding: 12px 20px; border: 1px solid transparent; border-radius: 16px; background: transparent; color: var(--geo-lab-muted); font-size: 18px; font-weight: 700; line-height: 1.6; }
+.geography-topic .geo-lab-tab-number { font-size: 16px; font-weight: 600; }
+.geography-topic .geo-lab-tab:hover { background: #e1ead8; }
+.geography-topic .geo-lab-tab[aria-selected="true"] { background: var(--geo-lab-green); color: #fff; }
+.geography-topic .geo-lab-panel { padding: 32px; }
+.geography-topic .geo-lab-panel[hidden] { display: none !important; }
+.geography-topic .geo-lab-heading { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: start; gap: 14px 24px; }
+.geography-topic .geo-lab-eyebrow { margin: 0 0 10px; color: var(--geo-lab-green); font-size: 16px; font-weight: 700; letter-spacing: .04em; }
+.geography-topic .geo-lab-heading h3 { margin: 0; font-family: inherit; font-size: clamp(24px, 1.8vw, 30px); font-weight: 750; line-height: 1.55; }
+.geography-topic .geo-lab-note { color: var(--geo-lab-muted); padding-top: 6px; font-size: 16px; line-height: 1.7; }
+.geography-topic .geo-lab-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.geography-topic .geo-lab-controls button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-width: 54px; min-height: 54px; padding: 11px 18px; border: 1.5px solid #bacbb6; border-radius: 16px; background: var(--geo-lab-paper); color: var(--geo-lab-green); font-size: 18px; font-weight: 700; line-height: 1.6; }
+.geography-topic .geo-lab-controls button:hover:not(:disabled) { background: var(--geo-lab-soft); border-color: var(--geo-lab-green); }
+.geography-topic .geo-lab-controls .geo-lab-primary { border: 2px solid var(--geo-lab-green); background: var(--geo-lab-green); color: #fff; box-shadow: 0 3px 0 #174733; }
+.geography-topic .geo-lab-controls .geo-lab-primary:hover { background: #184b39; color: #fff; }
+.geography-topic .geo-lab-tip { margin: 22px 0 0; color: var(--geo-lab-muted); font-size: 16px; line-height: 1.9; }
+.geography-topic .geo-lab-map-layout { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 32px; width: 100%; max-width: 1250px; margin: 30px auto 0; }
+.geography-topic .geo-lab-campus-wrap { flex: 1 1 500px; min-width: 0; max-width: 660px; }
+.geography-topic .geo-lab-campus { display: block; width: 100%; height: auto; }
+.geography-topic .geo-lab-map-rotator { transition: transform .45s ease; }
+.geography-topic .geo-lab-map-face { transition: transform .45s ease; }
+.geography-topic .geo-lab-campus text { fill: #36554a; font-family: inherit; font-size: 24px; font-weight: 700; }
+.geography-topic .geo-lab-campus .geo-lab-school-label { fill: #785029; font-size: 25px; }
+.geography-topic .geo-lab-campus .geo-lab-north-letter { fill: #22634c; font-size: 25px; font-weight: 800; }
+.geography-topic .geo-lab-map-art { fill: none; stroke: #56765d; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+.geography-topic .geo-lab-landmark { cursor: pointer; }
+.geography-topic .geo-lab-landmark .geo-lab-map-face > circle { stroke: #fffefa; stroke-width: 4; }
+.geography-topic .geo-lab-landmark:hover .geo-lab-map-face > circle,
+.geography-topic .geo-lab-landmark[aria-pressed="true"] .geo-lab-map-face > circle { stroke: #22634c; stroke-width: 4; }
+.geography-topic .geo-lab-map-side { flex: 1 1 280px; min-width: 0; max-width: 440px; }
+.geography-topic .geo-lab-answer { padding: 24px; border: 1px solid #d5e3c9; border-radius: 24px; background: var(--geo-lab-soft); }
+.geography-topic .geo-lab-direction { display: grid; place-items: center; width: 60px; min-height: 60px; margin-bottom: 18px; border-radius: 18px; background: var(--geo-lab-green); color: #fff; font-size: 30px; font-weight: 750; line-height: 1.5; }
+.geography-topic .geo-lab-answer h4 { margin: 0 0 12px; font-size: 23px; font-weight: 750; line-height: 1.7; }
+.geography-topic .geo-lab-answer p { margin: 0; color: var(--geo-lab-muted); font-size: 18px; line-height: 1.9; }
+.geography-topic .geo-lab-rotation { margin: 20px 0; color: var(--geo-lab-green); font-size: 17px; font-weight: 650; line-height: 1.8; }
+.geography-topic .geo-lab-map-controls { align-items: stretch; }
+.geography-topic .geo-lab-map-controls button { flex: 1 1 auto; }
+.geography-topic .geo-lab-water-wrap { width: 100%; max-width: 1100px; margin: 28px auto; }
+.geography-topic .geo-lab-water-scene { display: block; width: 100%; height: auto; }
+.geography-topic .geo-lab-water-phase { opacity: .18; transition: opacity .45s ease; }
+.geography-topic .geo-lab-water-phase.geo-is-active { opacity: 1; }
+.geography-topic .geo-lab-water-traveler { transition: transform 1.2s ease-in-out; }
+.geography-topic .geo-lab-water-label { font-family: inherit; font-size: 23px; font-weight: 650; }
+.geography-topic .geo-lab-water-steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; max-width: 1100px; margin: 0 auto; }
+.geography-topic .geo-lab-water-steps button { display: flex; align-items: center; justify-content: center; gap: 12px; min-height: 62px; min-width: 0; padding: 12px 18px; border: 1px solid var(--geo-lab-line); border-radius: 18px; background: #f7faf5; color: var(--geo-lab-muted); font-size: 18px; font-weight: 700; line-height: 1.6; }
+.geography-topic .geo-lab-water-steps button span { color: #82976d; font-size: 17px; font-weight: 650; }
+.geography-topic .geo-lab-water-steps button:hover { border-color: #829e79; }
+.geography-topic .geo-lab-water-steps button[aria-pressed="true"] { border-color: var(--geo-lab-green); background: var(--geo-lab-soft); color: var(--geo-lab-green); }
+.geography-topic .geo-lab-water-steps button[aria-pressed="true"] span { color: var(--geo-lab-green); }
+.geography-topic .geo-lab-water-bottom { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px; margin-top: 28px; }
+.geography-topic .geo-lab-story { flex: 1 1 430px; min-width: 0; max-width: 850px; }
+.geography-topic .geo-lab-story h4 { margin: 0 0 12px; font-size: 23px; font-weight: 750; line-height: 1.6; }
+.geography-topic .geo-lab-story p { margin: 0; color: var(--geo-lab-muted); font-size: 18px; line-height: 1.9; }
+.geography-topic .geo-lab-story p.geo-lab-small-tip { margin-top: 14px; padding-left: 14px; border-left: 3px solid #9ab77c; color: var(--geo-lab-green); font-size: 16px; line-height: 1.9; }
+.geography-topic .geo-lab-water-bottom > .geo-lab-controls { flex-shrink: 0; margin-inline-start: auto; }
+.geography-topic .geo-lab-caution { margin: 26px 0 0; padding: 16px 20px; border: 1px solid #e8d8b9; border-radius: 18px; background: #fff7e7; color: #765732; font-size: 16px; line-height: 1.9; }
+.geography-topic .geo-lab-seasons-layout { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 28px; width: 100%; max-width: 1450px; margin: 28px auto; }
+.geography-topic .geo-lab-orbit-wrap { flex: 1 1 600px; min-width: 0; max-width: 1100px; padding: 12px; border: 1px solid var(--geo-lab-line); border-radius: 24px; background: #f7faf5; }
+.geography-topic .geo-lab-orbit { display: block; width: 100%; height: auto; }
+.geography-topic .geo-lab-earth-position { opacity: .62; transition: opacity .3s ease; }
+.geography-topic .geo-lab-earth-position.geo-is-selected { opacity: 1; }
+.geography-topic .geo-lab-earth-halo { opacity: 0; }
+.geography-topic .geo-lab-earth-position.geo-is-selected .geo-lab-earth-halo { opacity: 1; }
+.geography-topic .geo-lab-sun-label { fill: #795921; font-family: inherit; font-size: 25px; font-weight: 750; }
+.geography-topic .geo-lab-pole-label { fill: #986332; font-family: inherit; font-size: 18px; font-weight: 700; }
+.geography-topic .geo-lab-season-labels { fill: #36554a; font-family: inherit; font-size: 23px; font-weight: 750; }
+.geography-topic .geo-lab-axis-legend { fill: #765732; font-family: inherit; font-size: 20px; font-weight: 650; }
+.geography-topic .geo-lab-diagram-note { margin: 6px 12px 12px; color: var(--geo-lab-muted); font-size: 16px; line-height: 1.8; }
+.geography-topic .geo-lab-season-side { flex: 1 1 280px; min-width: 0; max-width: 420px; padding: 26px; border: 1px solid #d5e3c9; border-radius: 24px; background: var(--geo-lab-soft); }
+.geography-topic .geo-lab-season-story h4 { margin: 0 0 14px; font-size: 28px; font-weight: 750; line-height: 1.6; }
+.geography-topic .geo-lab-season-story p { margin: 0; color: var(--geo-lab-muted); font-size: 18px; line-height: 1.9; }
+.geography-topic .geo-lab-season-story dl { margin: 22px 0; }
+.geography-topic .geo-lab-season-story dl > div { padding: 14px 0; border-top: 1px solid #cfddc3; }
+.geography-topic .geo-lab-season-story dt { margin: 0 0 4px; color: var(--geo-lab-muted); font-size: 16px; }
+.geography-topic .geo-lab-season-story dd { margin: 0; color: var(--geo-lab-green); font-size: 18px; font-weight: 700; line-height: 1.8; }
+.geography-topic .geo-lab-season-south { display: inline-flex; align-items: center; min-height: 42px; padding: 6px 12px; border-radius: 12px; background: #fffefa; color: var(--geo-lab-green); font-size: 17px; font-weight: 650; }
+.geography-topic .geo-lab-season-choices { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.geography-topic .geo-lab-season-choices button { display: flex; align-items: center; justify-content: center; gap: 14px; min-height: 62px; min-width: 0; padding: 12px 18px; border: 1.5px solid #bacbb6; border-radius: 18px; background: var(--geo-lab-paper); color: var(--geo-lab-green); font-size: 19px; font-weight: 750; line-height: 1.6; }
+.geography-topic .geo-lab-season-choices button span { color: var(--geo-lab-muted); font-size: 16px; font-weight: 600; }
+.geography-topic .geo-lab-season-choices button:hover { background: #edf2e5; }
+.geography-topic .geo-lab-season-choices button[aria-pressed="true"] { border-color: var(--geo-lab-green); background: var(--geo-lab-green); color: #fff; }
+.geography-topic .geo-lab-season-choices button[aria-pressed="true"] span { color: #e8f1df; }
+.geography-topic .geo-lab-season-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--geo-lab-line); }
+.geography-topic .geo-lab-season-facts p { margin: 0; color: var(--geo-lab-muted); font-size: 17px; line-height: 1.9; }
+.geography-topic .geo-lab-season-facts strong { display: block; margin-bottom: 8px; color: var(--geo-lab-green); font-size: 18px; }
+
+@media (max-width: 899px) {
+  .geography-topic .geo-lab-tabs { gap: 10px; padding: 16px 22px; }
+  .geography-topic .geo-lab-tab { padding-inline: 16px; }
+  .geography-topic .geo-lab-panel { padding: 26px; }
+  .geography-topic .geo-lab-heading { display: block; }
+  .geography-topic .geo-lab-heading h3 { font-size: 25px; }
+  .geography-topic .geo-lab-note { display: block; padding-top: 12px; }
+  .geography-topic .geo-lab-map-layout { gap: 24px; }
+  .geography-topic .geo-lab-campus-wrap { flex-basis: 430px; max-width: 600px; }
+  .geography-topic .geo-lab-map-side { max-width: 600px; }
+  .geography-topic .geo-lab-water-steps { gap: 8px; }
+  .geography-topic .geo-lab-water-steps button { flex-direction: column; gap: 2px; padding: 10px; }
+  .geography-topic .geo-lab-season-side { max-width: 700px; }
+  .geography-topic .geo-lab-season-choices button { flex-direction: column; gap: 3px; padding-inline: 10px; }
+  .geography-topic .geo-lab-season-facts { gap: 20px; }
+}
+
+@media (max-width: 599px) {
+  .geography-topic #geo-lab { border-radius: 22px; }
+  .geography-topic .geo-lab-tabs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; padding: 14px 10px; }
+  .geography-topic .geo-lab-tab { flex-direction: column; gap: 3px; min-width: 0; min-height: 70px; padding: 8px 2px; border-radius: 14px; font-size: 16px; }
+  .geography-topic .geo-lab-tab-number { font-size: 14px; }
+  .geography-topic .geo-lab-panel { padding: 24px 16px; }
+  .geography-topic .geo-lab-heading h3 { font-size: 23px; }
+  .geography-topic .geo-lab-note { font-size: 16px; }
+  .geography-topic .geo-lab-controls { gap: 8px; }
+  .geography-topic .geo-lab-controls button { min-height: 54px; padding-inline: 12px; font-size: 17px; }
+  .geography-topic .geo-lab-map-layout { margin-top: 20px; }
+  .geography-topic .geo-lab-campus-wrap { flex-basis: 100%; }
+  .geography-topic .geo-lab-campus text { font-size: 30px; }
+  .geography-topic .geo-lab-campus .geo-lab-school-label,
+  .geography-topic .geo-lab-campus .geo-lab-north-letter { font-size: 31px; }
+  .geography-topic .geo-lab-answer { padding: 22px; border-radius: 22px; }
+  .geography-topic .geo-lab-answer h4 { font-size: 22px; }
+  .geography-topic .geo-lab-answer p { font-size: 18px; }
+  .geography-topic .geo-lab-rotation { font-size: 16px; }
+  .geography-topic .geo-lab-map-controls button { flex-basis: 100%; }
+  .geography-topic .geo-lab-tip { margin-top: 20px; }
+  .geography-topic .geo-lab-water-wrap { margin-block: 24px; }
+  .geography-topic .geo-lab-water-scene { min-height: 165px; }
+  .geography-topic .geo-lab-water-label { font-size: 32px; }
+  .geography-topic .geo-lab-water-steps { gap: 6px; }
+  .geography-topic .geo-lab-water-steps button { min-height: 76px; padding: 9px 4px; border-radius: 14px; font-size: 17px; }
+  .geography-topic .geo-lab-water-steps button span { font-size: 15px; }
+  .geography-topic .geo-lab-water-bottom { display: block; margin-top: 24px; }
+  .geography-topic .geo-lab-story h4 { font-size: 22px; }
+  .geography-topic .geo-lab-story p { font-size: 18px; }
+  .geography-topic .geo-lab-water-bottom > .geo-lab-controls { justify-content: flex-end; margin-top: 24px; }
+  .geography-topic .geo-lab-caution { padding: 16px; }
+  .geography-topic .geo-lab-seasons-layout { gap: 24px; margin-block: 24px; }
+  .geography-topic .geo-lab-orbit-wrap { flex-basis: 100%; padding: 10px 4px; border-radius: 18px; }
+  .geography-topic .geo-lab-orbit { min-height: 175px; }
+  .geography-topic .geo-lab-pole-label { font-size: 30px; }
+  .geography-topic .geo-lab-season-labels { font-size: 31px; }
+  .geography-topic .geo-lab-axis-legend { font-size: 27px; }
+  .geography-topic .geo-lab-sun-label { font-size: 32px; }
+  .geography-topic .geo-lab-diagram-note { margin: 10px 10px 6px; font-size: 16px; }
+  .geography-topic .geo-lab-season-side { flex-basis: 100%; max-width: none; padding: 22px; border-radius: 22px; }
+  .geography-topic .geo-lab-season-story h4 { font-size: 27px; }
+  .geography-topic .geo-lab-season-choices { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .geography-topic .geo-lab-season-choices button { flex-direction: row; min-height: 62px; gap: 10px; padding: 12px 8px; font-size: 18px; }
+  .geography-topic .geo-lab-season-choices button span { font-size: 16px; }
+  .geography-topic .geo-lab-season-facts { grid-template-columns: 1fr; gap: 22px; margin-top: 24px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .geography-topic .geo-lab-map-rotator,
+  .geography-topic .geo-lab-map-face,
+  .geography-topic .geo-lab-water-phase,
+  .geography-topic .geo-lab-water-traveler,
+  .geography-topic .geo-lab-earth-position { transition: none; }
+}

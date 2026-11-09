@@ -17,7 +17,7 @@ app 的教学数据，由本文件与 `writing/tests.py` 的数据契约共同�
 
 ## 修改流程
 
-1. 数据源头在 `primary/writing-data.js`（原型同源）；改完在 primary-system 目录跑
+1. 数据源头在 `content_sources/writing-data.js`（原型同源）；改完在 primary-system 目录跑
    `node scripts/convert_writing_data.js` 重新生成本 JSON 并提交。
 2. `manage.py test writing`：契约校验 + 草稿 API + 页面渲染全过。
 3. 打开 `/writing/` 目检新题卡与素材。

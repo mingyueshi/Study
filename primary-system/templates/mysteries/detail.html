@@ -11,6 +11,7 @@
       <h1>{{ case.title }}</h1>
       <p class="mystery-lead">{{ case.opening }}</p>
       <nav class="mystery-jumps" aria-label="案卷小节">
+        {% if case.background %}<a href="#background">{{ case.background.title }} ↓</a>{% endif %}
         <a href="#evidence">看线索 ↓</a>
         <a href="#challenge">试着判断 ↓</a>
         <a href="#findings">查看调查结论 ↓</a>
@@ -24,6 +25,28 @@
       </figcaption>
     </figure>
   </header>
+  {% if case.background %}
+  <section id="background" class="mystery-section" aria-labelledby="background-heading">
+    <header class="mystery-section-heading">
+      <h2 id="background-heading">{{ case.background.title }}</h2>
+      <p>{{ case.background.intro }}</p>
+    </header>
+    <ul class="mystery-evidence-list">
+      {% for fact in case.background.facts %}
+      <li class="mystery-panel">
+        <h3>{{ fact.title }}</h3>
+        <p>{{ fact.text }}</p>
+      </li>
+      {% endfor %}
+    </ul>
+    <p>{{ case.background.transition }}</p>
+    <p class="mystery-source-link">资料出处
+      {% for number in case.background.sources %}
+      <a href="#source-{{ number }}" aria-label="第 {{ number }} 条资料">〔{{ number }}〕</a>
+      {% endfor %}
+    </p>
+  </section>
+  {% endif %}
   {% if case.figure.detail_path %}
   <details class="mystery-panel mystery-expand">
     <summary>{{ case.figure.detail_label }}</summary>

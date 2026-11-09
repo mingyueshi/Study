@@ -27,7 +27,7 @@ INSTALLED_APPS = [
     'django.contrib.admin', 'django.contrib.auth', 'django.contrib.contenttypes',
     'django.contrib.sessions', 'django.contrib.messages', 'django.contrib.staticfiles',
     'accounts', 'catalog', 'learning', 'lexicon', 'chain', 'words', 'reference_library', 'science','hanzi','poetry','geography','astronomy','arithmetic', 'idioms', 'phonetics', 'writing', 'questionbank', 'grammar', 'plurals', 'phrases', 'mathbook', 'chinesebook', 'mathformulas', 'incentives',
-    'mysteries',
+    'mysteries', 'humanorigins', 'historystudy', 'geographystudy',
 ]
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware', 'django.contrib.sessions.middleware.SessionMiddleware',

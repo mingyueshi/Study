@@ -15,7 +15,7 @@
 
 ## 生成与导入
 
-批次由转换脚本从 `primary/` 同源数据规则生成（对齐作文坊/场景词的导出模式）：
+批次由转换脚本从 `content_sources/` 同源数据规则生成（对齐作文坊/场景词的导出模式）：
 
 ```sh
 node scripts/build_questionbank.cjs          # 生成批次 JSON（确定性，重跑无 diff）

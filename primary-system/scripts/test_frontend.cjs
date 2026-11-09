@@ -672,3 +672,93 @@ test('idiom quiz keeps the answer on network failure and displays the server sco
   assert.equal(get('[data-quiz-result]').hidden, false);
   assert.equal(get('[data-quiz-headword]').textContent, '画蛇添足');
 });
+
+test('study topic links resolve to real events, places, lessons and chapters', () => {
+  const context = vm.createContext({
+    window: {},
+    document: {querySelector: () => ({dataset: {
+      historyLesson: '/history/',
+      geographyLesson: '/geography/study/',
+      calendar: '/history/timeline/dynasties.html',
+      chinaMap: '/geography/atlas/china.html',
+      historyEvent: '/history/timeline/event.html',
+      marsLife: '/mysteries/mars-life/', darkMatter: '/mysteries/dark-matter/',
+      stars: '/astronomy/', poetry: '/poetry/', idiomStories: '/idioms/stories/',
+      elements: '/science/elements/',
+    }})},
+  });
+  [
+    'history/content.js', 'history/knowledge-foundations.js', 'history/knowledge-dynasties.js',
+    'history-timeline/content.js', 'history-timeline/timeline-data.js',
+    'geo/content.js', 'geo/knowledge-core.js', 'geo/knowledge-regions.js',
+    'geo-map/content.js', 'geo-map/map-data.js', 'geo-map/world-data.js', 'geo-map/atlas-data.js', 'geo-map/atlas.js',
+    'astro/astro-data.js', 'lit/lit-data.js', 'sci/sci-data.js',
+    'connections-data.js', 'connections.js',
+  ].forEach(file => run('study_topics/' + file, context));
+  const data = context.window;
+  const {groups, backlinks, lessonEdits} = data.STUDY_TOPIC_CONNECTIONS;
+  const connections = data.StudyTopicConnections;
+  const history = [...data.HISTORY_LESSONS_FOUNDATIONS, ...data.HISTORY_LESSONS_DYNASTIES];
+  const geography = [...data.GEO_LESSONS_CORE, ...data.GEO_LESSONS_REGIONS];
+  const coursePoints = vm.runInContext('[ASTRO, LIT, SCI].flatMap(course => course.units.flatMap(unit => unit.points))', context);
+  const all = new Map([...history, ...geography, ...coursePoints].map(lesson => [lesson.id, lesson]));
+  assert.equal(all.size, history.length + geography.length + coursePoints.length);
+  const lessonAnchors = lessons => lessons.map(lesson => '#lesson-' + lesson.id);
+  const referenceTargets = {
+    calendar: ['#cal-title', '#dyn-title'],
+    chinaMap: data.GMAtlas.places.map(place => `?place=${place.id}#map`),
+    historyLesson: lessonAnchors(history), geographyLesson: lessonAnchors(geography),
+    historyEvent: data.TIMELINE_EVENTS.map(event => '?event=' + event.id),
+    marsLife: [''], darkMatter: [''], stars: [''], poetry: [''], idiomStories: [''], elements: [''],
+  };
+  for (const [key, source, targets] of [
+    ['events', data.TIMELINE_EVENTS, history.map(lesson => '#lesson-' + lesson.id)],
+    ['eras', data.TIMELINE_ERAS, [
+      ...data.HISTORY_CHAPTERS.map(chapter => '#' + chapter.id),
+      ...history.map(lesson => '#lesson-' + lesson.id),
+    ]],
+    ['places', data.GMAtlas.places, geography.map(lesson => '#lesson-' + lesson.id)],
+  ]) {
+    const sourceIds = new Set(source.map(item => item.id));
+    const allowed = new Set(targets);
+    for (const [id, links] of Object.entries(groups[key].links)) {
+      assert.ok(sourceIds.has(id), `${key} has an unknown source ID: ${id}`);
+      assert.ok(links.length, id);
+      const anchors = new Set();
+      for (const [anchor, label] of links) {
+        assert.ok(allowed.has(anchor), `${key} points to an unknown anchor: ${anchor}`);
+        assert.ok(!anchors.has(anchor), `${key} repeats ${anchor} for ${id}`);
+        anchors.add(anchor);
+        assert.ok(label.trim(), id);
+      }
+    }
+  }
+  for (const [id, links] of Object.entries(backlinks)) {
+    assert.ok(all.has(id), id);
+    for (const [route, suffix, label] of links) {
+      assert.ok(label.trim(), id);
+      assert.ok(referenceTargets[route]?.includes(suffix), `${id} links to ${route}${suffix}`);
+    }
+  }
+  for (const id of Object.keys(lessonEdits)) {
+    const original = all.get(id);
+    assert.ok(original, id);
+    assert.ok(backlinks[id]?.length, `${id} is missing its source link`);
+    const edited = connections.lesson(original);
+    assert.equal(edited.id, original.id);
+    assert.equal(edited.quiz, original.quiz);
+    assert.ok((edited.essentials || edited.items).length, id);
+    if (Object.hasOwn(edited, 'showPhoto')) {
+      assert.match(id, /^au\d+-\d+$/);
+      assert.equal(typeof edited.showPhoto, 'boolean');
+    }
+  }
+  assert.match(connections.related('events', 'tc13'), /href="\/history\/#lesson-hu5-1"/);
+  assert.match(connections.related('places', 'f20'), /href="\/geography\/study\/#lesson-gu5-2"/);
+  assert.match(connections.references('hu1-2'), /dynasties\.html#cal-title/);
+  assert.match(connections.references('gu5-2'), /china\.html\?place=f20#map/);
+  assert.match(connections.references('au8-3', '接着学'), /href="\/mysteries\/mars-life\/"/);
+  assert.match(connections.references('lu6-3', '接着学'), /href="\/history\/#lesson-hu7-2"/);
+  assert.match(connections.references('su7-3', '接着学'), /href="\/geography\/study\/#lesson-gu5-1"/);
+  assert.equal(connections.related('events', 'unknown'), '');
+});

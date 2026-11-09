@@ -1,6 +1,6 @@
 """数学公式专题的内容加载与契约校验（零模型只读，数据在本目录 formulas.json）。
 
-公式组沿用 primary/math-data.js 公式速查的形状：组 = {title, items: [[名称,
+公式组沿用 content_sources/math-data.js 公式速查的形状：组 = {title, items: [[名称,
 公式], …], note}；再按学段（小学/初中/高中）组织章节。文本契约与 plurals
 同口径：字符串值里禁英文双引号、裸换行与 HTML 标签，改数据先过校验。
 """

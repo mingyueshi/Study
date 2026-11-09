@@ -1,7 +1,7 @@
 {
  "schema_version": 1,
  "source_code": "primary-writing",
- "converted_from": "primary/writing-data.js",
+ "converted_from": "content_sources/writing-data.js",
  "categories": [
   {
    "id": "w-person",

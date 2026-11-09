@@ -1,0 +1,35 @@
+{% extends "study_topics/page.html" %}
+{% load static %}
+{# 由 scripts/build_study_topics.py 生成。 #}
+{% block title %}历史大事 · 历史时间轴 · 乐学堂{% endblock %}
+{% block study_assets %}
+<link rel="stylesheet" href="{% static 'study_topics/history-timeline/styles.css' %}">
+<link rel="stylesheet" href="{% static 'study_topics/history-timeline/era.css' %}">
+<link rel="stylesheet" href="{% static 'study_topics/history-timeline/media.css' %}">
+<script src="{% static 'study_topics/history-timeline/content.js' %}" defer></script>
+<script src="{% static 'study_topics/history-timeline/timeline-data.js' %}" defer></script>
+<script src="{% static 'study_topics/history-timeline/media-data.js' %}" defer></script>
+<script src="{% static 'study_topics/history-timeline/shared.js' %}" defer></script>
+<script src="{% static 'study_topics/history-timeline/event-app.js' %}" defer></script>
+{% endblock %}
+{% block study_content %}
+<div class="study-timeline">
+<div class="tl-shell">
+    <div class="event-topic" id="top">
+      <nav class="tl-sysnav" aria-label="历史时间轴系统页面导航">
+        <a class="tl-sysnav-brand" href="{% url 'history-timeline' %}">🕰️ 历史时间轴<small>中国史与世界史</small></a>
+        <a data-page href="timeline.html">双轨时间轴</a>
+        <a data-page href="era.html">时代站</a>
+        <a data-page href="dynasties.html">朝代更替</a>
+      </nav>
+      <nav class="tl-breadcrumb" aria-label="所在位置">
+        <a href="timeline.html">双轨时间轴</a><a id="event-era" href="era.html" hidden></a>
+        <b aria-current="page">历史大事</b>
+      </nav>
+      <div id="event-page"></div>
+      <noscript><p class="tl-notice">请启用 JavaScript 阅读历史大事。</p></noscript>
+    </div>
+  </div>
+<div class="tl-footer">历史时间轴系统 · <a href="{% url 'history-timeline' %}">系统首页</a> · <a href="#top">回到顶部 ↑</a></div>
+</div>
+{% endblock %}

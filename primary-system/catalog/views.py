@@ -110,6 +110,8 @@ def home(request):
         counts[book.module_id] = counts.get(book.module_id, 0) + 1
     all_cards = _entry_cards(request, modules, counts)
     area = request.GET.get('area', '')
+    if area == 'exploration':
+        area = 'science'
     selected = area if area in {card['area'] for card in all_cards} else ''
     entry_cards = [card for card in all_cards if not selected or card['area'] == selected]
     digest = None
@@ -143,7 +145,7 @@ def module_detail(request, code):
 # 教材单元词卡按单元顺序取一组明快底色，跨册循环使用。
 UNIT_CARD_COLORS = ('#4d96ff', '#9b5de5', '#00a8a8', '#f15bb5', '#fee440', '#43aa8b')
 
-# 学习目录单元卡图标：取自教材原型数据（primary/english-data.js），新册补录。
+# 学习目录单元卡图标：取自教材原型数据（content_sources/english-data.js），新册补录。
 ENGLISH_UNIT_EMOJI = {
     '4a-u1': '⚽', '4a-u2': '🏠', '4a-u3': '🌦️', '4a-u4': '🍂', '4a-u5': '🚌', '4a-u6': '🗺️',
     '4b-u1': '👩‍⚕️', '4b-u2': '😊', '4b-u3': '🌟', '4b-u4': '🌻', '4b-u5': '🎨', '4b-u6': '👕',

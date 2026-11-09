@@ -23,6 +23,7 @@ class MysteryContentTests(SimpleTestCase):
     def test_case_contract(self):
         cases = load_cases()
         self.assertTrue({'mars-life', 'dark-matter', 'deep-ocean', 'voynich'} <= set(cases))
+        self.assertTrue(cases['mars-life']['background'])
         for slug, case in cases.items():
             with self.subTest(slug=slug):
                 self.assertRegex(slug, r'^[a-z]+(?:-[a-z]+)*$')
@@ -47,6 +48,17 @@ class MysteryContentTests(SimpleTestCase):
                     self.assertEqual(url.scheme, 'https')
                     self.assertTrue(url.netloc)
                     self.assertTrue(source['title'].strip())
+                if 'background' in case:
+                    background = case['background']
+                    for field in ('title', 'intro', 'transition'):
+                        self.assertTrue(background[field].strip(), field)
+                    self.assertTrue(background['facts'])
+                    for fact in background['facts']:
+                        self.assertTrue(fact['title'].strip())
+                        self.assertTrue(fact['text'].strip())
+                    self.assertTrue(background['sources'])
+                    for number in background['sources']:
+                        self.assertIn(number, range(1, len(sources) + 1))
                 self.assertIn(figure['source'], range(1, len(sources) + 1))
                 self.assertIn(len(case['evidence']), range(3, 6))
                 for clue in case['evidence']:
@@ -80,6 +92,18 @@ class MysteryPageTests(SimpleTestCase):
                 response = self.client.get(reverse('mystery-case', args=[slug]))
                 self.assertContains(response, case['opening'])
                 self.assertContains(response, case['unresolved'])
+                if 'background' in case:
+                    background = case['background']
+                    self.assertContains(response, 'href="#background"', count=1)
+                    for field in ('title', 'intro', 'transition'):
+                        self.assertContains(response, background[field])
+                    for fact in background['facts']:
+                        self.assertContains(response, fact['title'])
+                        self.assertContains(response, fact['text'])
+                    html = response.content.decode()
+                    self.assertLess(html.index('id="background"'), html.index('id="evidence"'))
+                else:
+                    self.assertNotContains(response, 'id="background"')
                 self.assertContains(response, 'name="mystery-choice"', count=3)
                 for choice in case['challenge']['choices']:
                     self.assertContains(response, choice['feedback'])
@@ -94,7 +118,7 @@ class MysteryPageTests(SimpleTestCase):
 
 
 class MysteryHomeEntryTests(TestCase):
-    def test_home_exploration_filter_links_to_mysteries(self):
-        response = self.client.get(reverse('home'), {'area': 'exploration'})
+    def test_home_science_filter_links_to_mysteries(self):
+        response = self.client.get(reverse('home'), {'area': 'science'})
         self.assertContains(response, '未解之谜研究所')
         self.assertContains(response, f'href="{reverse("mysteries")}"')

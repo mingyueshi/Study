@@ -1,4 +1,4 @@
-/* 生成物：由 scripts/build_mathbook.cjs 从 primary/ 确定性同步，勿手改。 */
+/* 生成物：由 scripts/build_mathbook.cjs 从 content_sources/ 生成，勿手改。 */
 const MKB = {
   "meta": {
     "subject": "数学",

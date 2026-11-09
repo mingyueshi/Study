@@ -6,7 +6,7 @@ const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
 
-const source = process.argv[2] || path.resolve(__dirname, '../../primary/words-data.js');
+const source = path.resolve(process.argv[2] || path.join(__dirname, '../content_sources/words-data.js'));
 const target = process.argv[3] || path.resolve(__dirname, '../data/words-scenario.json');
 
 const raw = fs.readFileSync(source);

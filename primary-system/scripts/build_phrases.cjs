@@ -1,4 +1,4 @@
-/* 把 primary/english-data.js 的 ENGLISH_PHRASES（挂在教材词卡上的常见短语与
+/* 把 content_sources/english-data.js 的 ENGLISH_PHRASES（挂在教材词卡上的常见短语与
    短句）确定性转换为日常用语专题数据 phrases/data/phrases.json。
 
    组织方式（一份数据两个视图）：
@@ -14,10 +14,9 @@ const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
 
-const ROOT = path.resolve(__dirname, '../..');
 const TARGET = process.argv[2] || path.resolve(__dirname, '../phrases/data/phrases.json');
 
-const ENGLISH = require(path.join(ROOT, 'primary/english-data.js'));
+const ENGLISH = require('../content_sources/english-data.js');
 
 const md5 = (text) => crypto.createHash('md5').update(text).digest('hex');
 
@@ -164,7 +163,7 @@ const payload = {
   schema_version: 1,
   source: {
     name: 'primary-english-phrases',
-    references: '外研版《英语（新标准）》四年级上/下册词卡短语（primary/english-data.js ENGLISH_PHRASES）',
+    references: '外研版《英语（新标准）》四年级上/下册词卡短语（content_sources/english-data.js ENGLISH_PHRASES）',
     method: 'en/zh 原文转换；情景由词头单元映射；句式由句首功能正则切组 + 覆盖表校准；句子形态进练习池',
   },
   patterns: PATTERNS.map(({ code, name, formula }) => ({ code, name, formula })),

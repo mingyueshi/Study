@@ -1,0 +1,101 @@
+{% extends "study_topics/page.html" %}
+{% load static %}
+{# 由 scripts/build_study_topics.py 生成。 #}
+{% block title %}中国地图 · 乐学堂{% endblock %}
+{% block study_assets %}
+<link rel="stylesheet" href="{% static 'study_topics/geo-map/styles.css' %}">
+<script src="{% static 'study_topics/geo-map/china-geo.js' %}" defer></script>
+<script src="{% static 'study_topics/geo-map/content.js' %}" defer></script>
+<script src="{% static 'study_topics/geo-map/map-data.js' %}" defer></script>
+<script src="{% static 'study_topics/geo-map/world-data.js' %}" defer></script>
+<script src="{% static 'study_topics/geo-map/atlas-data.js' %}" defer></script>
+<script src="{% static 'study_topics/geo-map/atlas.js' %}" defer></script>
+<script src="{% static 'study_topics/geo-map/shared.js' %}" defer></script>
+<script src="{% static 'study_topics/geo-map/media-data.js' %}" defer></script>
+<script src="{% static 'study_topics/geo-map/media.js' %}" defer></script>
+<script src="{% static 'study_topics/geo-map/map-ui.js' %}" defer></script>
+<script src="{% static 'study_topics/geo-map/china-app.js' %}" defer></script>
+{% endblock %}
+{% block study_content %}
+<div class="study-atlas">
+<div class="gm-topic gm-map-topic china-topic" data-layer="province">
+    <aside class="gm-sidebar" aria-label="导航和页面工具">
+      <nav class="gm-sysnav" aria-label="地理图谱页面导航">
+        <a class="gm-sysnav-brand" href="{% url 'geography-atlas' %}">🧭 地理图谱</a>
+        <a data-page href="china.html" aria-current="page">中国地图</a>
+        <a data-page href="world.html">世界地图</a>
+        <a data-page href="province.html">省域站</a>
+        <a data-page href="places.html">地点索引</a>
+        <a data-page href="routes.html">主题路线</a>
+        <a data-page href="gallery.html">实景图册</a>
+      </nav>
+
+      <header class="gm-hero">
+        <p class="gm-eyebrow">看中国 · 从省份到山河</p>
+        <h1 class="gm-title">中国地图</h1>
+        <p class="gm-intro">换图层认省份、找山河、访邻居。点图上任意地点，打开它的小档案。</p>
+      </header>
+
+      <section class="gm-toolbar gm-side-panel" id="map-tools" aria-labelledby="map-tools-title" tabindex="-1">
+        <h2 class="gm-side-title" id="map-tools-title">地图工具</h2>
+        <div class="gm-filters" id="gm-filters" role="group" aria-label="选择图层"></div>
+        <p class="gm-layer-hint" id="gm-layer-hint"></p>
+        <a class="study-map-tool" href="{% url 'geography-study' %}#lesson-gu2-3">地图三要素与比例尺 →</a>
+        <div class="gm-toolbar-actions">
+          <label class="gm-map-picker"><span>找地点</span><select id="gm-map-place"><option value="">选择地点</option></select></label>
+          <button type="button" id="gm-quiz-start" class="gm-btn gm-btn--go">🔍 找一找</button>
+        </div>
+      </section>
+
+      <div class="gm-stats" aria-label="内容规模">
+        <span><b id="stat-provinces">34</b>个省级行政区</span>
+        <span><b id="stat-features">45</b>处山河湖海</span>
+        <span><b id="stat-neighbors">20</b>个邻居国家</span>
+        <span><b id="stat-rhymes">7</b>张地图口诀卡</span>
+      </div>
+    </aside>
+
+    <div id="content" class="gm-content" tabindex="-1">
+      <section id="map" class="gm-map-workspace" aria-label="地图探索">
+        <div class="gm-route-stop" id="gm-route-stop" hidden></div>
+        <div class="gm-stage">
+          <figure class="gm-map-wrap">
+            <div class="gm-quiz" id="gm-quiz" aria-live="polite" tabindex="-1" hidden></div>
+            <div class="gm-view-bar">
+              <div class="gm-view-tools" id="gm-view-tools" role="group" aria-label="地图缩放"></div>
+              <ul class="gm-legend" id="gm-legend" aria-label="图例"></ul>
+              <a class="gm-tools-jump" href="#map-tools">图层与找地点 ↑</a>
+            </div>
+            <svg id="gm-svg" role="group" tabindex="0" aria-label="中国示意地图，包含省级行政区、山河大地与邻居图层"></svg>
+            <figcaption class="gm-map-note" id="gm-map-note">示意教学地图：省级行政区轮廓来自公开边界数据并做了简化，山脉与河道位置为近似示意；南海诸岛与十段线按制图惯例画在右下小图中。</figcaption>
+          </figure>
+          <aside class="gm-card gm-card--blank" id="gm-card" aria-label="地点档案" aria-live="polite"></aside>
+        </div>
+      </section>
+
+      <section class="gm-section" aria-labelledby="rhymes-title">
+        <h2 id="rhymes-title">地图口诀卡</h2>
+        <p class="gm-section-sub">把地图知识编成顺口的句子，念几遍就记住了。</p>
+        <div class="gm-rhymes-grid" id="gm-rhymes"></div>
+      </section>
+
+      <section class="gm-section gm-guide" aria-labelledby="guide-title">
+        <h2 id="guide-title">这张地图怎么玩</h2>
+        <ol>
+          <li><strong>换图层：</strong>工具栏有「省级行政区」「山河大地」「我们的邻居」三个图层，每次看一类东西，地图清爽不吵闹。</li>
+          <li><strong>点一点：</strong>点省份、山脉、大河或邻居，地点档案会告诉你它的简称、方位和小知识。</li>
+          <li><strong>进省域站：</strong>点开省份档案卡后，点「进省域站细看 →」可以进入这个省份自己的页面。</li>
+          <li><strong>定位与缩放：</strong>从「找地点」里选名字，地图会标出它。放大后可拖动地图，或把焦点移到地图上按方向键。</li>
+          <li><strong>找一找：</strong>点工具栏的「🔍 找一找」，按提示在地图上点出正确的地方，一轮 5 题，看看能拿几颗星。</li>
+          <li><strong>念口诀：</strong>页面下方的口诀卡把三级阶梯、34 个省级行政区、长江黄河和邻国编成了顺口溜。</li>
+        </ol>
+        <p class="gm-guide-note">地图为教学示意版：轮廓经过简化，山脉与大河按近似位置绘制；南海诸岛、十段线按制图惯例放在右下角小图里，台湾岛、海南岛、钓鱼岛、赤尾屿都标注在图上。数字一律用通行约数。</p>
+      </section>
+
+      <div id="gm-status" class="gm-status" role="status" aria-live="polite"></div>
+      <noscript><p class="gm-notice">请启用 JavaScript 查看地图；内容数据保存在本目录的 content.js、china-geo.js 与 map-data.js 中。</p></noscript>
+    </div>
+  </div>
+<div class="gm-footer">乐学堂 · 地理图谱 · <a href="{% url 'geography-atlas' %}">系统首页</a> · <a href="province.html">省域站</a> · <a href="world.html">世界地图</a> · <a href="#main">回到顶部 ↑</a></div>
+</div>
+{% endblock %}

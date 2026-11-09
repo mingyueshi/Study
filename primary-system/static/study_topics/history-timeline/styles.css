@@ -1,0 +1,308 @@
+.study-timeline {
+  --tl-paper: #fbf4e8;
+  --tl-ink: #3f342a;
+  --tl-ink-soft: #6e5b49;
+  --tl-china: #c2472f;
+  --tl-china-deep: #8f2c1a;
+  --tl-china-soft: #fbeae3;
+  --tl-world: #1d7d8c;
+  --tl-world-deep: #0d5260;
+  --tl-world-soft: #e4f2f4;
+  --tl-pair: #7a5bc4;
+  --tl-pair-deep: #5a3fa0;
+  --tl-pair-soft: #f1ecfb;
+  --tl-card: #fffdf8;
+  --tl-line: #d8c5a4;
+}
+
+.tl-shell { max-width: 1240px; margin: 0 auto; padding: 20px 24px 48px; }
+
+/* ---------- 顶部 ---------- */
+.tl-hero {
+  position: relative; overflow: hidden;
+  border-radius: 26px; padding: 34px 38px 30px; margin-top: 18px;
+  background: linear-gradient(115deg, rgba(194, 71, 47, .12) 0%, rgba(255, 251, 242, .9) 45%, rgba(29, 125, 140, .13) 100%);
+  border: 1px solid rgba(194, 71, 47, .18);
+  box-shadow: 0 10px 30px rgba(120, 84, 40, .1);
+}
+.tl-eyebrow {
+  margin: 0 0 6px; font-weight: 800; letter-spacing: .18em;
+  color: var(--tl-pair-deep); font-size: 14px;
+}
+.tl-hero h1 { margin: 0 0 10px; font-size: clamp(30px, 4.6vw, 44px); line-height: 1.25; letter-spacing: .02em; }
+.tl-hero h1 .tl-h1-china { color: var(--tl-china); }
+.tl-hero h1 .tl-h1-world { color: var(--tl-world); }
+.tl-intro { margin: 0; max-width: 62em; color: var(--tl-ink); }
+.tl-stats { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+.tl-stats span {
+  background: rgba(255, 255, 255, .8); border: 1px solid var(--tl-line);
+  padding: 4px 14px; border-radius: 999px; font-size: 15px; color: var(--tl-ink-soft);
+}
+.tl-stats b { font-size: 19px; color: var(--tl-ink); margin-right: 2px; }
+
+/* 同期速览 */
+.tl-spotlight {
+  text-align: left; cursor: pointer; text-decoration: none; color: var(--tl-ink);
+  display: flex; flex-direction: column; gap: 7px;
+  background: var(--tl-card); border: 1px solid var(--tl-line); border-radius: 18px;
+  padding: 14px 16px; box-shadow: 0 4px 14px rgba(120, 84, 40, .08);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.tl-spotlight:hover { transform: translateY(-3px); box-shadow: 0 10px 22px rgba(120, 84, 40, .16); }
+.tl-spotlight .tl-pair-badge { align-self: flex-start; }
+.tl-spotlight-row {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 3px 8px; font-size: 15.5px; line-height: 1.45;
+  padding-left: 10px; position: relative;
+}
+.tl-spotlight-row::before {
+  content: ''; position: absolute; left: 0; top: 4px; bottom: 4px; width: 4px; border-radius: 2px;
+}
+.tl-spotlight-row.china::before { background: var(--tl-china); }
+.tl-spotlight-row.world::before { background: var(--tl-world); }
+.tl-spotlight-year { font-weight: 800; white-space: nowrap; }
+.tl-spotlight-row.china .tl-spotlight-year { color: var(--tl-china-deep); }
+.tl-spotlight-row.world .tl-spotlight-year { color: var(--tl-world-deep); }
+.tl-spotlight-label { font-size: 14px; color: var(--tl-ink-soft); line-height: 1.6; }
+
+/* ---------- 系统导航条（所有页面共用） ---------- */
+.tl-sysnav {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px;
+  margin-top: 16px; padding: 8px 12px;
+  background: rgba(255, 255, 255, .88); border: 1.5px solid var(--tl-line);
+  border-radius: 16px; box-shadow: 0 4px 12px rgba(120, 84, 40, .08);
+}
+.tl-sysnav-brand {
+  display: inline-flex; align-items: baseline; gap: 8px; margin-right: 8px;
+  font-weight: 900; font-size: 16.5px; color: var(--tl-ink); text-decoration: none;
+}
+.tl-sysnav-brand small { font-size: 11.5px; font-weight: 700; color: var(--tl-ink-soft); letter-spacing: .08em; }
+.tl-sysnav a[data-page] {
+  font-weight: 700; font-size: 14.5px; color: var(--tl-ink-soft);
+  text-decoration: none; padding: 4px 14px; border-radius: 999px;
+  transition: background .15s ease, color .15s ease;
+}
+.tl-sysnav a[data-page]:hover { color: var(--tl-ink); background: var(--tl-pair-soft); }
+.tl-sysnav a[data-page][aria-current="page"] { background: var(--tl-pair); color: #fff; }
+
+.tl-sysnav-brand[aria-current="page"] { color: var(--tl-pair-deep); }
+
+/* ---------- 门户页 ---------- */
+.tl-hero-actions, .tl-related {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 10px 12px; margin-top: 18px;
+}
+.tl-primary-action, .tl-secondary-action, .tl-related a {
+  display: inline-block; text-decoration: none; padding: 8px 16px; border-radius: 999px;
+  font-size: 15.5px; font-weight: 800; cursor: pointer;
+}
+.tl-primary-action { background: var(--tl-pair-deep); color: #fff; }
+.tl-primary-action:hover { background: #45307c; }
+.tl-secondary-action, .tl-related a {
+  color: var(--tl-pair-deep); background: #fff;
+  border: 1px solid color-mix(in srgb, var(--tl-pair) 48%, #fff);
+}
+.tl-secondary-action:hover, .tl-related a:hover { background: var(--tl-pair-soft); }
+
+.tl-stations { margin-top: 28px; }
+.tl-stations h2 { margin: 0 0 6px; font-size: 26px; }
+.tl-stations-note { margin: 0 0 14px; color: var(--tl-ink-soft); }
+.tl-station-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.tl-station {
+  display: grid; grid-template-columns: auto 1fr; align-items: start; gap: 6px 12px;
+  text-decoration: none; padding: 14px 16px;
+  background: color-mix(in srgb, var(--era-accent) 9%, #fff);
+  border: 1px solid color-mix(in srgb, var(--era-accent) 45%, transparent);
+  border-left: 4px solid var(--era-accent);
+  border-radius: 16px; transition: transform .15s ease, box-shadow .15s ease;
+}
+.tl-station:hover { transform: translateY(-2px); box-shadow: 0 8px 16px rgba(120, 84, 40, .16); }
+.tl-station-no, .tl-era-no {
+  color: #fff; background: color-mix(in srgb, var(--era-accent) 70%, #000);
+}
+.tl-station-no {
+  width: 32px; height: 32px; border-radius: 50%;
+  font-weight: 800; display: inline-grid; place-items: center;
+}
+.tl-station b { display: block; font-size: 20px; color: var(--tl-ink); }
+.tl-station small { display: block; font-size: 15px; color: var(--tl-ink-soft); }
+.tl-station-go { grid-column: 2; font-size: 14px; font-weight: 800; color: var(--tl-pair-deep); }
+
+/* 时代带页首里的「进时代站」链接 */
+.tl-era-link {
+  margin-left: auto; flex: 0 0 auto; align-self: center;
+  font-size: 13.5px; font-weight: 800; text-decoration: none;
+  color: var(--tl-ink); background: #fff;
+  border: 1.5px solid color-mix(in srgb, var(--era-accent) 55%, transparent);
+  border-radius: 999px; padding: 4px 14px; white-space: nowrap;
+}
+.tl-era-link:hover { background: var(--tl-pair-soft); }
+
+/* ---------- 时代带 ---------- */
+.tl-era { margin: 0 0 32px; }
+.tl-era-head {
+  border-radius: 20px; padding: 16px 22px 14px; margin-bottom: 20px;
+  background: linear-gradient(100deg, color-mix(in srgb, var(--era-accent) 20%, #fff) 0%, color-mix(in srgb, var(--era-accent) 6%, #fff) 70%);
+  border: 1.5px solid color-mix(in srgb, var(--era-accent) 45%, transparent);
+}
+.tl-era-title { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; }
+.tl-era-no {
+  flex: 0 0 auto; width: 46px; height: 46px; border-radius: 50%;
+  font-size: 22px; font-weight: 800;
+  display: inline-flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 10px color-mix(in srgb, var(--era-accent) 45%, transparent);
+}
+.tl-era-title h1, .tl-era-title h2 { margin: 0; font-size: 25px; line-height: 1.3; }
+.tl-era-span { margin: 2px 0 0; font-size: 15px; font-weight: 700; color: var(--tl-ink-soft); }
+.tl-era-compare {
+  margin: 10px 0 0 60px; font-size: 15.5px; color: var(--tl-ink);
+  display: flex; align-items: baseline; gap: 8px;
+}
+
+/* ---------- 双轨共用的年代行 ---------- */
+.tl-date-flow { position: relative; }
+.tl-date-flow::before {
+  content: ''; position: absolute; inset: 4px auto 0 50%;
+  border-left: 2px dashed var(--tl-line); transform: translateX(-50%);
+}
+.tl-date-legend, .tl-date-row {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 64px;
+}
+.tl-date-legend { margin-bottom: 12px; }
+.tl-date-row + .tl-date-row { margin-top: 12px; }
+.tl-date-track { display: grid; align-content: start; gap: 10px; min-width: 0; }
+.tl-track-label {
+  width: fit-content; font-size: 15px; font-weight: 800; letter-spacing: .04em;
+  padding: 4px 14px; border-radius: 999px; color: #fff;
+}
+.tl-track-label.china-label { justify-self: end; background: var(--tl-china-deep); }
+.tl-track-label.world-label { background: var(--tl-world-deep); }
+
+/* ---------- 事件卡 ---------- */
+.tl-card {
+  position: relative; background: var(--tl-card);
+  border: 1.5px solid rgba(120, 84, 40, .14); border-radius: 18px;
+  padding: 14px 18px 14px; box-shadow: 0 4px 12px rgba(120, 84, 40, .08);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.tl-card:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(120, 84, 40, .15); }
+.tl-card.china { border-right: 4px solid var(--tl-china); }
+.tl-card.world { border-left: 4px solid var(--tl-world); }
+/* 连向脊轴的短线与圆点 */
+.tl-card.china::before,
+.tl-card.china::after {
+  content: ''; position: absolute; top: 29px;
+}
+.tl-card.china::after { right: -34px; width: 34px; height: 3px; background: var(--tl-china); opacity: .4; }
+.tl-card.china::before {
+  right: -41px; width: 12px; height: 12px; border-radius: 50%;
+  background: var(--tl-china); border: 2.5px solid #fff; box-shadow: 0 0 0 2px var(--tl-china);
+}
+.tl-card.world::before,
+.tl-card.world::after {
+  content: ''; position: absolute; top: 29px;
+}
+.tl-card.world::after { left: -34px; width: 34px; height: 3px; background: var(--tl-world); opacity: .4; }
+.tl-card.world::before {
+  left: -41px; width: 12px; height: 12px; border-radius: 50%;
+  background: var(--tl-world); border: 2.5px solid #fff; box-shadow: 0 0 0 2px var(--tl-world);
+}
+
+.tl-card-top { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.tl-year {
+  font-size: 15.5px; font-weight: 800; padding: 3px 12px; border-radius: 999px;
+}
+.tl-card.china .tl-year { background: var(--tl-china-soft); color: var(--tl-china-deep); }
+.tl-card.world .tl-year { background: var(--tl-world-soft); color: var(--tl-world-deep); }
+.tl-tag {
+  font-size: 13.5px; font-weight: 700; color: var(--tl-ink-soft);
+  border: 1.5px solid var(--tl-line); border-radius: 999px; padding: 2px 10px;
+}
+.tl-media-badge {
+  padding: 2px 8px; border-radius: 999px; font-size: 13px; font-weight: 800;
+  color: var(--tl-pair-deep); background: var(--tl-pair-soft); text-decoration: none;
+}
+.tl-media-badge:hover { text-decoration: underline; }
+.tl-pair-badge {
+  font-size: 13.5px; font-weight: 800;
+  color: var(--tl-pair-deep); background: var(--tl-pair-soft);
+  border: 1.5px dashed var(--tl-pair); border-radius: 999px; padding: 2px 12px;
+}
+.tl-card-title { margin: 10px 0 6px; font-size: 20.5px; line-height: 1.4; display: flex; align-items: center; gap: 10px; }
+.tl-icon {
+  flex: 0 0 auto; width: 38px; height: 38px; border-radius: 12px; font-size: 21px;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.tl-card.china .tl-icon { background: var(--tl-china-soft); }
+.tl-card.world .tl-icon { background: var(--tl-world-soft); }
+.tl-card-title a { color: var(--tl-ink); text-decoration-color: var(--tl-line); text-underline-offset: 4px; }
+.tl-card-title a:hover { color: var(--tl-pair-deep); text-decoration-color: currentColor; }
+.tl-card-text { margin: 0; font-size: 17px; color: var(--tl-ink); }
+.tl-pair-btn {
+  display: inline-block; margin-top: 5px; font-size: 14px; font-weight: 800; text-decoration: none;
+  color: var(--tl-pair-deep); background: transparent;
+  border: 1.5px dashed var(--tl-pair); border-radius: 999px; padding: 4px 14px;
+  transition: background .15s, color .15s;
+}
+.tl-pair-btn:hover { background: var(--tl-pair); color: #fff; border-style: solid; }
+
+/* 同期对照与页面回链共同使用片段锚点。 */
+.tl-card:target, .dyn-band:target, .event-comparison:target {
+  outline: 3px solid var(--tl-pair); outline-offset: 3px;
+}
+.tl-pair-caption {
+  display: none; margin: 10px 0 4px; padding: 6px 10px; border-radius: 8px;
+  background: var(--tl-pair-soft); color: var(--tl-pair-deep); font-size: 15px;
+}
+.tl-card:target .tl-pair-caption { display: block; }
+
+.tl-flow[data-mode="china"] .tl-date-row, .tl-flow[data-mode="world"] .tl-date-row,
+.tl-flow[data-mode="china"] .tl-date-legend, .tl-flow[data-mode="world"] .tl-date-legend { grid-template-columns: 1fr; }
+.tl-flow[data-mode="china"] .tl-date-track.world, .tl-flow[data-mode="world"] .tl-date-track.china,
+.tl-flow[data-mode="china"] .world-label, .tl-flow[data-mode="world"] .china-label,
+.tl-flow[data-mode="china"] .tl-date-flow::before, .tl-flow[data-mode="world"] .tl-date-flow::before,
+.tl-flow[data-mode="china"] .tl-card::before, .tl-flow[data-mode="china"] .tl-card::after,
+.tl-flow[data-mode="world"] .tl-card::before, .tl-flow[data-mode="world"] .tl-card::after { display: none; }
+.tl-flow[data-mode="china"] .china-label { justify-self: start; }
+
+/* ---------- 使用说明 ---------- */
+.tl-guide {
+  margin-top: 36px; border-radius: 22px; padding: 24px 28px;
+  background: #fff; border: 1.5px solid var(--tl-line);
+}
+.tl-guide h2 { margin: 0 0 12px; font-size: 23px; }
+.tl-guide p { margin: 0; }
+.tl-guide a { color: var(--tl-pair-deep); }
+.tl-guide-note {
+  margin: 0; font-size: 14.5px; color: var(--tl-ink-soft);
+  border-top: 1.5px dashed var(--tl-line); padding-top: 12px;
+}
+.tl-notice {
+  background: #fff; border: 1.5px solid var(--tl-line); border-radius: 16px;
+  padding: 18px 22px; text-align: center; color: var(--tl-ink-soft);
+}
+/* ---------- 页脚 ---------- */
+.tl-footer { text-align: center; color: var(--tl-ink-soft); font-size: 14.5px; padding: 10px 0 30px; }
+.tl-footer a { color: var(--tl-pair-deep); }
+
+/* ---------- 窄屏 ---------- */
+@media (max-width: 860px) {
+  .tl-shell { padding: 12px 16px 36px; }
+  .tl-hero { padding: 24px 22px; border-radius: 20px; }
+  .tl-station-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .tl-era-compare { margin-left: 0; }
+}
+@media (max-width: 650px) {
+  .tl-shell { padding-inline: 12px; }
+  .tl-date-legend { display: flex; gap: 8px; }
+  .tl-date-row { grid-template-columns: 1fr; gap: 8px; }
+  .tl-date-track:not(:has(.tl-card:not([hidden]))) { display: none; }
+  .tl-date-flow::before, .tl-card::before, .tl-card::after { display: none; }
+  .tl-era-link { margin-left: 0; }
+}
+@media (max-width: 480px) {
+  .tl-station-grid { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tl-card, .tl-card:hover, .tl-spotlight, .tl-spotlight:hover, .tl-station, .tl-station:hover {
+    transition: none; transform: none;
+  }
+}

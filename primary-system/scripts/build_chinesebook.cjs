@@ -1,4 +1,4 @@
-/* 把 primary/ 的语文教材静态数据与图片资产确定性同步到主项目 chinesebook 应用。
+/* 把 content_sources/ 的语文教材静态数据与图片资产确定性同步到 chinesebook 应用。
    语文教材按册编排：BOOKS 映射一行一册（册次码对齐 catalog 教材码后缀，
    如 pep-chinese-4a-2026 → '4a'），新增册次 = primary 加数据文件 + 这里加一行。
 
@@ -14,7 +14,7 @@
    4. static/images/lessons/、static/images/poems/ —— 课文照片与古诗意境图
       （只增不删）。
 
-   内容源头在 primary/：改内容去静态版改，先跑该册声明的静态版测试
+   内容源头在 content_sources/：先跑该册声明的源数据测试
    （本脚本会先代跑作为审计门），再重跑本脚本。
    与 build_mathbook.cjs 同纪律：确定性产出、重跑无 diff。 */
 'use strict';
@@ -23,8 +23,7 @@ const path = require('path');
 const crypto = require('crypto');
 const { spawnSync } = require('child_process');
 
-const ROOT = path.resolve(__dirname, '../..');
-const PRIMARY = path.join(ROOT, 'primary');
+const SOURCES = path.resolve(__dirname, '../content_sources');
 const TARGET_DIR = path.resolve(__dirname, '../static/chinesebook');
 const SHARED_FIG_DIR = path.resolve(__dirname, '../static/figures');
 const BOOKS_DIR = path.resolve(__dirname, '../chinesebook/data/books');
@@ -36,25 +35,25 @@ const BOOKS = {
 
 /* ---------- 源头审计：先跑各册声明的静态版测试 ---------- */
 for (const testFile of [...new Set(Object.values(BOOKS).map((b) => b.test))]) {
-  const audit = spawnSync('node', [path.join(PRIMARY, testFile)], { encoding: 'utf8' });
+  const audit = spawnSync('node', [path.join(SOURCES, testFile)], { encoding: 'utf8' });
   if (audit.status !== 0) {
     console.error(audit.stdout || '');
     console.error(audit.stderr || '');
-    console.error(`源头审计未通过（primary/${testFile}），已停止同步。`);
+    console.error(`源头审计未通过（content_sources/${testFile}），已停止同步。`);
     process.exit(1);
   }
 }
 
 /* ---------- 加载图示库（静态文件无 module.exports 的部分照静态版桩加载） ---------- */
 globalThis.window = {};
-const FIGS = require(path.join(PRIMARY, 'figures.js'));
+const FIGS = require(path.join(SOURCES, 'figures.js'));
 
 /* ---------- 每册：加载 → 引用审计 → 产出数据与 manifest ---------- */
 fs.mkdirSync(TARGET_DIR, { recursive: true });
 fs.mkdirSync(BOOKS_DIR, { recursive: true });
 const summary = [];
 for (const [book, spec] of Object.entries(BOOKS)) {
-  const KB = require(path.join(PRIMARY, spec.file));
+  const KB = require(path.join(SOURCES, spec.file));
   const errors = [];
   const figIds = [];
   const imageRefs = [];
@@ -79,8 +78,7 @@ for (const [book, spec] of Object.entries(BOOKS)) {
     if (poem.img) imageRefs.push(poem.img);
   }
   for (const img of imageRefs) {
-    const target = path.resolve(__dirname, '../static', img);
-    if (!fs.existsSync(target)) errors.push(`图片缺失：${img}`);
+    if (!fs.existsSync(path.join(SOURCES, img))) errors.push(`图片缺失：${img}`);
   }
   if (errors.length) {
     console.error(`[${book}] 引用审计未通过：`);
@@ -90,16 +88,16 @@ for (const [book, spec] of Object.entries(BOOKS)) {
 
   const dataTarget = path.join(TARGET_DIR, 'books', `${book}.js`);
   fs.mkdirSync(path.dirname(dataTarget), { recursive: true });
-  fs.writeFileSync(dataTarget, '/* 生成物：由 scripts/build_chinesebook.cjs 从 primary/ 确定性同步，勿手改。 */\n'
+  fs.writeFileSync(dataTarget, '/* 生成物：由 scripts/build_chinesebook.cjs 从 content_sources/ 生成，勿手改。 */\n'
     + 'const KB = ' + JSON.stringify(KB, null, 2) + ';\n', 'utf8');
 
   const sourceSha = crypto.createHash('sha256')
-    .update(fs.readFileSync(path.join(PRIMARY, spec.file))).digest('hex');
+    .update(fs.readFileSync(path.join(SOURCES, spec.file))).digest('hex');
   const manifest = {
     schema_version: 1,
     book,
     textbook_code: spec.textbook_code,
-    source_file: `primary/${spec.file}`,
+    source_file: `content_sources/${spec.file}`,
     source_sha256: sourceSha,
     units: KB.units.length,
     lessons: KB.units.reduce((n, u) => n + u.lessons.length, 0),
@@ -121,17 +119,17 @@ function copyFile(source, target) {
   if (fs.existsSync(target) && incoming.equals(fs.readFileSync(target))) return;
   fs.writeFileSync(target, incoming);
 }
-copyFile(path.join(PRIMARY, 'figures.js'), path.join(SHARED_FIG_DIR, 'figures.js'));
-copyFile(path.join(PRIMARY, 'figures.css'), path.join(SHARED_FIG_DIR, 'figures.css'));
+copyFile(path.join(SOURCES, 'figures.js'), path.join(SHARED_FIG_DIR, 'figures.js'));
+copyFile(path.join(SOURCES, 'figures.css'), path.join(SHARED_FIG_DIR, 'figures.css'));
 function syncImages(dir, targetRoot) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
     const source = path.join(dir, entry.name);
-    if (entry.isDirectory()) { syncImages(source, targetRoot); continue; }
+    if (entry.isDirectory()) { syncImages(source, path.join(targetRoot, entry.name)); continue; }
     if (!/\.(jpg|jpeg|png|webp)$/i.test(entry.name)) continue;
-    copyFile(source, path.join(targetRoot, path.relative(dir, source)));
+    copyFile(source, path.join(targetRoot, entry.name));
   }
 }
-syncImages(path.join(PRIMARY, 'images/lessons'), path.resolve(__dirname, '../static/images/lessons'));
-syncImages(path.join(PRIMARY, 'images/poems'), path.resolve(__dirname, '../static/images/poems'));
+syncImages(path.join(SOURCES, 'images/lessons'), path.resolve(__dirname, '../static/images/lessons'));
+syncImages(path.join(SOURCES, 'images/poems'), path.resolve(__dirname, '../static/images/poems'));
 
 console.log('✅ chinesebook 同步完成：' + summary.join('，'));

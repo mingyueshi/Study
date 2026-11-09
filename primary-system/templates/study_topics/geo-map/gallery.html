@@ -1,0 +1,56 @@
+{% extends "study_topics/page.html" %}
+{% load static %}
+{# 由 scripts/build_study_topics.py 生成。 #}
+{% block title %}实景图册 · 地理图谱 · 乐学堂{% endblock %}
+{% block study_assets %}
+<link rel="stylesheet" href="{% static 'study_topics/geo-map/styles.css' %}">
+<script src="{% static 'study_topics/geo-map/content.js' %}" defer></script>
+<script src="{% static 'study_topics/geo-map/map-data.js' %}" defer></script>
+<script src="{% static 'study_topics/geo-map/world-data.js' %}" defer></script>
+<script src="{% static 'study_topics/geo-map/atlas-data.js' %}" defer></script>
+<script src="{% static 'study_topics/geo-map/atlas.js' %}" defer></script>
+<script src="{% static 'study_topics/geo-map/shared.js' %}" defer></script>
+<script src="{% static 'study_topics/geo-map/media-data.js' %}" defer></script>
+<script src="{% static 'study_topics/geo-map/media.js' %}" defer></script>
+<script src="{% static 'study_topics/geo-map/gallery-app.js' %}" defer></script>
+{% endblock %}
+{% block study_content %}
+<div class="study-atlas">
+<div class="gm-topic gallery-topic">
+    <aside class="gm-sidebar" aria-label="导航和页面工具">
+      <nav class="gm-sysnav" aria-label="地理图谱页面导航">
+        <a class="gm-sysnav-brand" href="{% url 'geography-atlas' %}">🧭 地理图谱</a>
+        <a data-page href="china.html">中国地图</a>
+        <a data-page href="world.html">世界地图</a>
+        <a data-page href="province.html">省域站</a>
+        <a data-page href="places.html">地点索引</a>
+        <a data-page href="routes.html">主题路线</a>
+        <a data-page href="gallery.html" aria-current="page">实景图册</a>
+      </nav>
+
+      <header class="gm-hero">
+        <p class="gm-eyebrow">从地图走进真实世界</p>
+        <h1 class="gm-title">实景图册</h1>
+        <p class="gm-intro" id="media-intro">看照片、读卫星影像、跟着影片找山河，再回地图上认位置。</p>
+      </header>
+
+      <section class="gm-side-panel gm-media-filters" aria-labelledby="media-tools-title">
+        <h2 class="gm-side-title" id="media-tools-title">挑素材</h2>
+        <label>素材类型 <select id="media-kind"><option value="">全部类型</option></select></label>
+        <label>观察主题 <select id="media-group"><option value="">全部主题</option></select></label>
+        <a class="gm-media-link" id="media-all" href="gallery.html" hidden>看全部地点的素材 →</a>
+        <p>照片与太空影像可离线看，影片需要联网。</p>
+      </section>
+    </aside>
+
+    <div id="content" class="gm-content" tabindex="-1">
+      <p class="gm-result-count" id="media-count" role="status"></p>
+      <div class="gm-media-groups" id="media-list"></div>
+      <p class="gm-notice" id="media-empty" hidden>这里没有符合条件的素材。换一种类型或主题试试。</p>
+
+      <noscript><p class="gm-notice">请启用 JavaScript 查看地点和地图。</p></noscript>
+    </div>
+  </div>
+<div class="gm-footer">乐学堂 · 地理图谱 · <a href="{% url 'geography-atlas' %}">回到首页</a></div>
+</div>
+{% endblock %}

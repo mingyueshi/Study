@@ -2,7 +2,7 @@
  "schema_version": 1,
  "source": {
   "name": "primary-english-phrases",
-  "references": "外研版《英语（新标准）》四年级上/下册词卡短语（primary/english-data.js ENGLISH_PHRASES）",
+  "references": "外研版《英语（新标准）》四年级上/下册词卡短语（content_sources/english-data.js ENGLISH_PHRASES）",
   "method": "en/zh 原文转换；情景由词头单元映射；句式由句首功能正则切组 + 覆盖表校准；句子形态进练习池"
  },
  "patterns": [

@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 'use strict';
-/* 把 primary/writing-data.js 的作文坊数据转换成 writing/data/topics.json。
+/* 把 content_sources/writing-data.js 的作文坊数据转换成 writing/data/topics.json。
    开发期工具：node scripts/convert_writing_data.js（在 primary-system 目录运行）。 */
 
 const fs = require('fs');
 const path = require('path');
 
 // 静态相对路径（相对本脚本目录），避免动态 require。
-const { WRITING_UNITS, WRITING_MATERIALS } = require('../../primary/writing-data.js');
+const { WRITING_UNITS, WRITING_MATERIALS } = require('../content_sources/writing-data.js');
 const OUT = path.join(__dirname, '..', 'writing', 'data', 'topics.json');
 
 const problems = [];
@@ -64,7 +64,7 @@ if (problems.length) {
 const payload = {
   schema_version: 1,
   source_code: 'primary-writing',
-  converted_from: 'primary/writing-data.js',
+  converted_from: 'content_sources/writing-data.js',
   categories,
   materials,
 };

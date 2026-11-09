@@ -1,5 +1,5 @@
 """语文教材册测试：数据契约（镜像静态版 test-knowledge.js 的加载期部分）
-+ 页面只读。内容源头在 primary/，静态版测试管源头质量；这里管生成物与页面
++ 页面只读。内容源头在 content_sources/，源数据测试管源头质量；这里管生成物与页面
 的契约，按册遍历（册次注册在 scripts/build_chinesebook.cjs 的 BOOKS 映射）。"""
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured

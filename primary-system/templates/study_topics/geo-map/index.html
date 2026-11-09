@@ -1,0 +1,89 @@
+{% extends "study_topics/page.html" %}
+{% load static %}
+{# 由 scripts/build_study_topics.py 生成。 #}
+{% block title %}地理图谱 · 乐学堂{% endblock %}
+{% block study_assets %}
+<link rel="stylesheet" href="{% static 'study_topics/geo-map/styles.css' %}">
+<script src="{% static 'study_topics/geo-map/china-geo.js' %}" defer></script>
+<script src="{% static 'study_topics/geo-map/content.js' %}" defer></script>
+<script src="{% static 'study_topics/geo-map/map-data.js' %}" defer></script>
+<script src="{% static 'study_topics/geo-map/world-data.js' %}" defer></script>
+<script src="{% static 'study_topics/geo-map/atlas-data.js' %}" defer></script>
+<script src="{% static 'study_topics/geo-map/atlas.js' %}" defer></script>
+<script src="{% static 'study_topics/geo-map/shared.js' %}" defer></script>
+<script src="{% static 'study_topics/geo-map/home-app.js' %}" defer></script>
+{% endblock %}
+{% block study_content %}
+<div class="study-atlas">
+<div class="gm-topic home-topic">
+    <aside class="gm-sidebar" aria-label="导航和页面工具">
+      <nav class="gm-sysnav" aria-label="地理图谱页面导航">
+        <a class="gm-sysnav-brand" href="{% url 'geography-atlas' %}" aria-current="page">🧭 地理图谱</a>
+        <a data-page href="china.html">中国地图</a>
+        <a data-page href="world.html">世界地图</a>
+        <a data-page href="province.html">省域站</a>
+        <a data-page href="places.html">地点索引</a>
+        <a data-page href="routes.html">主题路线</a>
+        <a data-page href="gallery.html">实景图册</a>
+      </nav>
+
+      <header class="gm-hero">
+        <p class="gm-eyebrow">乐学堂 · 离线地图探索</p>
+        <h1 class="gm-title">地理图谱</h1>
+        <p class="gm-intro">从家乡出发，顺着山河看中国，把地图拉远再看世界。</p>
+        <form class="gm-search gm-search--home" action="places.html" role="search">
+          <label for="home-search">想找哪里？</label>
+          <div><input id="home-search" name="q" type="search" placeholder="试试长江或北京"><button type="submit">查地点 →</button></div>
+        </form>
+        <div class="gm-stats" aria-label="内容规模">
+          <span><b id="stat-stations">34</b>个省域站</span>
+          <span><b id="stat-places">291</b>条地点档案</span>
+          <span><b id="stat-routes">3</b>条主题路线</span>
+        </div>
+      </header>
+    </aside>
+
+    <div id="content" class="gm-content" tabindex="-1">
+      <a class="gm-home-map" href="china.html#map">
+        <svg id="gm-home-svg" aria-hidden="true"></svg>
+        <span><b>打开中国地图</b><small>换图层，认省份和山河 →</small></span>
+      </a>
+
+      <section class="gm-pages" aria-labelledby="pages-title">
+        <h2 id="pages-title">下一站去哪儿？</h2>
+        <div class="gm-page-cards">
+          <a class="gm-page-card" href="world.html#map" style="--page-accent:#1f6f8b">
+            <span class="gm-page-icon" aria-hidden="true">🌍</span>
+            <div><h3>世界地图</h3><p>给七大洲认颜色，点一点世界地标，再找找中国在哪儿。</p></div>
+            <span class="gm-page-go" aria-hidden="true">看世界 →</span>
+          </a>
+          <a class="gm-page-card" href="routes.html" style="--page-accent:#b07d3a">
+            <span class="gm-page-icon" aria-hidden="true">🥾</span>
+            <div><h3>主题路线</h3><p>沿长江走到海边，登上世界屋脊，或换一张地图去串门。</p></div>
+            <span class="gm-page-go" aria-hidden="true">选一条路线 →</span>
+          </a>
+          <a class="gm-page-card" href="places.html" style="--page-accent:#7465aa">
+            <span class="gm-page-icon" aria-hidden="true">🔍</span>
+            <div><h3>地点索引</h3><p>用地名、简称或英文名找到地点，再跳到地图上看。</p></div>
+            <span class="gm-page-go" aria-hidden="true">查地点 →</span>
+          </a>
+          <a class="gm-page-card" href="gallery.html" style="--page-accent:#287f87">
+            <span class="gm-page-icon" aria-hidden="true">📷</span>
+            <div><h3>实景图册</h3><p>从江面看峡谷，从太空看河口。带着问题，把照片和地图对起来。</p></div>
+            <span class="gm-page-go" aria-hidden="true">看照片和影片 →</span>
+          </a>
+        </div>
+      </section>
+
+      <section class="gm-stations" aria-labelledby="stations-title">
+        <h2 id="stations-title">三十四个省域站</h2>
+        <p class="gm-stations-note">挑一个省域站，读五条小知识，再在迷你地图上看看它的位置。</p>
+        <div class="gm-station-grid" id="station-grid"></div>
+      </section>
+
+      <noscript><p class="gm-notice">请启用 JavaScript 查看系统首页；页面入口链接不依赖脚本，可直接双击 china.html、province.html 或 world.html 进入。</p></noscript>
+    </div>
+  </div>
+<div class="gm-footer">乐学堂 · 地理图谱 · <a href="china.html">中国地图</a> · <a href="province.html">省域站</a> · <a href="world.html">世界地图</a></div>
+</div>
+{% endblock %}

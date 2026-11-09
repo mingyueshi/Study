@@ -1,5 +1,5 @@
 """数学教材册测试：数据契约（镜像静态版 test-math-knowledge.js 的加载期部分）
-+ 页面和账号进度。内容源头在 primary/，静态版测试管源头质量；这里管生成物与页面
++ 页面和账号进度。内容源头在 content_sources/，源数据测试管源头质量；这里管生成物与页面
 的契约，按册遍历（册次注册在 scripts/build_mathbook.cjs 的 BOOKS 映射）。"""
 import json
 

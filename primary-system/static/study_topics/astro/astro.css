@@ -1,0 +1,294 @@
+/* ============================================================
+   乐学堂 · 天文探索 —— 专属样式
+   与 geo.css 同构：知识卡 / 想一想 / 速查 / 小诊所 / 打印
+   配色换成深空蓝紫主题
+   ============================================================ */
+
+/* ---------- 站点横幅 ---------- */
+.textbook-banner {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  margin: 0 0 16px; padding: 12px 16px;
+  background: linear-gradient(135deg, #e9ecfb, #f1eefa);
+  border: 1px solid #d5dbf2; border-radius: 14px;
+  color: #47539a; font-size: 14px; font-weight: 700;
+}
+.textbook-banner strong { font-size: 16px; }
+
+/* ---------- 站点导语 ---------- */
+.goal-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.goal-tags span {
+  background: color-mix(in srgb, var(--c) 12%, white);
+  border: 1px solid color-mix(in srgb, var(--c) 30%, white);
+  color: #4a4f63; border-radius: 999px; padding: 3px 10px;
+  font-size: 12.5px; font-weight: 700;
+}
+
+/* ---------- 单元头 · 实景照片横幅 ---------- */
+.study-page[data-subject="astro"] .unit-head.has-photo {
+  position: relative; overflow: hidden;
+  background-size: cover; background-position: center;
+  border-left: none; border-block: none; border-right: none;
+}
+.study-page[data-subject="astro"] .unit-head.has-photo::before {
+  content: ''; position: absolute; inset: 0; z-index: 0;
+  background: linear-gradient(102deg, rgba(24, 27, 46, .86) 0%, rgba(24, 27, 46, .58) 48%, rgba(24, 27, 46, .28) 100%);
+}
+.study-page[data-subject="astro"] .unit-head.has-photo::after {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 5px;
+  background: var(--c); z-index: 2;
+}
+.study-page[data-subject="astro"] .unit-head.has-photo > * { position: relative; z-index: 1; }
+.study-page[data-subject="astro"] .unit-head.has-photo .unit-emoji { filter: drop-shadow(0 2px 8px rgba(0, 0, 0, .4)); }
+.study-page[data-subject="astro"] .unit-head.has-photo h1 { color: #fff; text-shadow: 0 2px 14px rgba(0, 0, 0, .45); }
+.study-page[data-subject="astro"] .unit-head.has-photo p { color: rgba(255, 255, 255, .93); text-shadow: 0 1px 8px rgba(0, 0, 0, .35); }
+.study-page[data-subject="astro"] .unit-head.has-photo .goal-tags span {
+  background: rgba(255, 255, 255, .16); border-color: rgba(255, 255, 255, .34);
+  color: #fff; backdrop-filter: blur(3px);
+}
+
+/* ---------- 知识点卡 · 「宇宙真面目」实景照片 ---------- */
+.k-overview.has-photo { display: flex; align-items: center; gap: 13px; }
+.k-overview .ov-photo {
+  flex: 0 0 auto; width: 72px; height: 72px; border-radius: 14px;
+  object-fit: cover; border: 2px solid #fff;
+  box-shadow: 0 3px 10px rgba(30, 38, 60, .18);
+}
+.k-overview .ov-txt { flex: 1; min-width: 0; }
+.k-overview .ov-main { font-size: 15.5px; line-height: 1.72; color: #45495e; font-weight: 600; }
+.k-overview .ov-life {
+  margin-top: 5px; font-size: 12.5px; line-height: 1.6;
+  color: #6a71a0; font-weight: 700;
+}
+
+/* ---------- 知识点卡 ---------- */
+.kcard {
+  --c: #6b7fb3;
+  position: relative;
+  background: var(--card); border-radius: 18px; padding: 18px 18px 16px;
+  border: 1px solid var(--line); border-top: 4px solid var(--c);
+  box-shadow: 0 4px 16px rgba(40, 54, 85, .035); overflow-wrap: anywhere;
+  margin-bottom: 20px;
+}
+.kcard.learned { background: #f4fcf7; }
+.khead { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding-right: 40px; }
+.ktitle { font-size: 21px; font-weight: 900; }
+.khead-gap { flex: 1; }
+.kcard .say { width: 32px; height: 32px; }
+.learn-btn {
+  position: absolute; top: 12px; right: 12px;
+  width: 36px; height: 36px; border-radius: 50%;
+  border: 3px solid #e5decd; background: #faf7f0;
+  font-size: 17px; font-weight: 900; color: #fff; line-height: 1;
+}
+.learn-btn.on { background: #2fbf71; border-color: #2fbf71; }
+.k-overview { margin-top: 12px; font-size: 15.5px; line-height: 1.75; color: #4a4f63; }
+
+/* ---------- 小节 ---------- */
+.ksec { display: flex; align-items: flex-start; gap: 10px; margin-top: 12px; }
+.ksec > :last-child { min-width: 0; flex: 1; }
+.seclabel {
+  flex: 0 0 26px; height: 26px; margin-top: 2px;
+  background: #e4e8f5; color: #5d6480; border-radius: 8px;
+  font-size: 13px; font-weight: 900; display: grid; place-items: center;
+}
+.klist { list-style: none; display: grid; gap: 5px; }
+.kli {
+  display: block; width: 100%; text-align: left;
+  border: none; background: none; padding: 2px 0;
+  font-size: 14.5px; line-height: 1.7; color: #4a4f63; font-weight: 600;
+}
+.kli:hover { color: #47539a; }
+.klist.mis .kli { color: #7a5327; }
+
+/* ---------- 想一想 ---------- */
+.mex { display: grid; gap: 6px; }
+.mex-q, .mex-steps, .mex-a {
+  display: block; width: 100%; text-align: left; border: none;
+  padding: 8px 12px; border-radius: 12px;
+  font-size: 14.5px; line-height: 1.7; font-weight: 600;
+}
+.mex-q { background: #edf1fb; color: #47539a; }
+.mex-steps { background: #f8f9fc; color: #5a5570; }
+.mex-a { background: #e9f9f0; color: #187749; font-weight: 800; }
+
+.krecite {
+  margin-top: 12px; background: #fdf6e9; border-radius: 12px;
+  padding: 9px 12px; font-size: 14px; font-weight: 800; color: #7a5b18;
+}
+
+/* ---------- 宇宙数据速查 ---------- */
+.formula-card {
+  --c: #b5893a;
+  background: var(--card); border-radius: 18px; padding: 16px 18px;
+  border: 1px solid var(--line); border-left: 5px solid var(--c);
+  margin-bottom: 16px; box-shadow: 0 4px 16px rgba(40, 54, 85, .035); overflow-wrap: anywhere;
+}
+.phead { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.phead h3 { font-size: 17px; font-weight: 900; }
+.frows { display: grid; gap: 6px; margin-top: 10px; }
+.frow {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+  border: 1.5px solid var(--line); background: #fafbfe;
+  border-radius: 10px; padding: 7px 12px; text-align: left;
+}
+.frow:active { transform: scale(.98); }
+.frow b { font-size: 15px; font-weight: 900; color: #7a5b18; }
+.frow span { font-size: 15px; font-weight: 700; color: #4a4f63; font-variant-numeric: tabular-nums; }
+.pnote {
+  margin-top: 10px; background: #f7f3e8; border-radius: 12px;
+  padding: 9px 12px; font-size: 13.5px; line-height: 1.7; color: #6d6350; font-weight: 600;
+}
+
+/* ---------- 天文小诊所 ---------- */
+.mistake-card {
+  --c: #c2557d;
+  position: relative;
+  display: grid; gap: 8px;
+  background: var(--card); border-radius: 18px; padding: 20px 16px 14px;
+  border: 1px solid var(--line); border-top: 4px solid var(--c);
+  box-shadow: 0 4px 16px rgba(40, 54, 85, .035); overflow-wrap: anywhere;
+}
+.unit-tag {
+  position: absolute; top: -12px; left: 14px;
+  color: #fff; font-size: 12px; font-weight: 800;
+  border-radius: 999px; padding: 3px 12px; box-shadow: 0 2px 6px rgba(0, 0, 0, .18);
+}
+.mist-row {
+  display: flex; align-items: flex-start; gap: 8px;
+  border: none; background: none; text-align: left;
+  font-size: 14.5px; line-height: 1.7; font-weight: 600; padding: 2px 4px;
+}
+.mist-mark { flex-shrink: 0; }
+.wrong-row-text { color: #a4453f; text-decoration: line-through; text-decoration-color: #e4b6b2; text-decoration-thickness: 2px; }
+.right-row-text { color: #187749; font-weight: 700; }
+
+/* ============================================================
+   动画与装饰：入场、悬浮、星光闪烁、太阳脉动、行星旋转
+   ============================================================ */
+
+/* ---------- 关键帧 ---------- */
+@keyframes af-fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes af-twinkle {
+  0%, 100% { opacity: 0.3; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.15); }
+}
+@keyframes af-sun-pulse {
+  0%, 100% { filter: drop-shadow(0 0 6px rgba(246, 185, 59, 0.5)); }
+  50% { filter: drop-shadow(0 0 18px rgba(246, 185, 59, 0.85)); }
+}
+@keyframes af-orbit {
+  from { transform: rotate(0deg) translateX(0) rotate(0deg); }
+  to { transform: rotate(360deg) translateX(0) rotate(-360deg); }
+}
+@keyframes af-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+@keyframes af-spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes af-shimmer {
+  0% { opacity: 0.4; }
+  50% { opacity: 0.9; }
+  100% { opacity: 0.4; }
+}
+
+/* ---------- 图示入场动画（仅屏幕） ---------- */
+@media screen {
+  .fig {
+    animation: af-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .fig:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(40, 54, 85, 0.12);
+  }
+  .fig, .fig * {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  /* 太阳脉动 */
+  .fig[data-fig="astro-sun-facts"] svg circle:first-of-type,
+  .fig[data-fig="astro-asteroid-belt"] svg circle:first-child {
+    animation: af-sun-pulse 3s ease-in-out infinite;
+    transform-origin: center;
+  }
+  /* 星光闪烁：所有星星小点 */
+  .fig-svg circle[fill="#c9c2f2"],
+  .fig-svg circle[fill="#c9c2f2"] {
+    animation: af-twinkle 2.4s ease-in-out infinite;
+  }
+  /* 行星小点悬浮 */
+  .planet-dot {
+    cursor: pointer;
+    transition: r 0.3s ease, stroke-width 0.3s ease;
+  }
+  .planet-dot:hover {
+    filter: drop-shadow(0 0 6px rgba(40, 54, 85, 0.4));
+  }
+  /* 空间站悬浮 */
+  .fig[data-fig="astro-space-station"] svg {
+    animation: af-float 5s ease-in-out infinite;
+  }
+  /* 北斗连线高亮 */
+  .fig[data-fig="astro-constellations"] svg line {
+    transition: stroke-width 0.3s ease;
+  }
+}
+
+/* ---------- 背景星空装饰 ---------- */
+@media screen {
+  .study-page[data-subject="astro"] .study-content {
+    position: relative;
+  }
+  .astro-starfield {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .astro-starfield::before,
+  .astro-starfield::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(1.5px 1.5px at 10% 20%, rgba(155, 145, 200, 0.8), transparent),
+      radial-gradient(1px 1px at 25% 60%, rgba(155, 145, 200, 0.6), transparent),
+      radial-gradient(1.8px 1.8px at 45% 15%, rgba(155, 145, 200, 0.7), transparent),
+      radial-gradient(1px 1px at 60% 75%, rgba(155, 145, 200, 0.5), transparent),
+      radial-gradient(1.5px 1.5px at 75% 35%, rgba(155, 145, 200, 0.7), transparent),
+      radial-gradient(1px 1px at 88% 55%, rgba(155, 145, 200, 0.6), transparent),
+      radial-gradient(1.4px 1.4px at 35% 85%, rgba(155, 145, 200, 0.5), transparent),
+      radial-gradient(1px 1px at 92% 10%, rgba(155, 145, 200, 0.6), transparent);
+    animation: af-twinkle 4s ease-in-out infinite;
+  }
+  .astro-starfield::after {
+    animation-delay: 2s;
+    opacity: 0.6;
+  }
+  #app { position: relative; z-index: 1; }
+}
+
+/* ---------- 打印 ---------- */
+@media print {
+  .study-course .study-page { background: #fff; font-size: 13px; }
+  #app > header, .sidebar, .toolbar, .textbook-banner, .skip-link,
+  .say, .learn-btn, .goal-tags, .astro-starfield { display: none !important; }
+  .study-shell { display: block; padding: 0; }
+  .study-content { padding: 0; }
+  .unit-head { border: 1px solid #ccc; box-shadow: none; }
+  .study-page[data-subject="astro"] .unit-head.has-photo { background-image: none !important; background: #fff; }
+  .study-page[data-subject="astro"] .unit-head.has-photo::before,
+  .study-page[data-subject="astro"] .unit-head.has-photo::after { display: none !important; }
+  .study-page[data-subject="astro"] .unit-head.has-photo h1,
+  .study-page[data-subject="astro"] .unit-head.has-photo p { color: #1c1f2a; text-shadow: none; }
+  .study-page[data-subject="astro"] .unit-head.has-photo .goal-tags span { background: #fff; border-color: #ccc; color: #333; }
+  .ov-photo { display: none !important; }
+  .kcard, .formula-card, .mistake-card { box-shadow: none; break-inside: avoid; page-break-inside: avoid; }
+  .wgrid { grid-template-columns: 1fr; display: block; }
+  .kcard, .mistake-card { margin-bottom: 12px; }
+}

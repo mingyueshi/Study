@@ -20,11 +20,11 @@ LABELS = {
     'right': '正确说法', 'title': '标题', 'name': '名称', 'zh': '中文', 'en': '英文',
     't': '词段', 'd': '解释', 'say': '读法', 'text': '内容', 'label': '段落', 'points': '要点',
     'starts': '开头', 'ends': '结尾', 'wordGroups': '好词分类', 'unit': '所属单元', 'kind': '类别',
-    # knowledge 单一数据源（primary/knowledge-data.js）的课文与古诗文素材字段
+    # knowledge 单一数据源（content_sources/knowledge-data.js）的课文与古诗文素材字段
     'excerpts': '原文金句', 'authorLife': '作者小传', 'authorBio': '作者简介',
     'life': '人物小传', 'bio': '人物简介', 'bg': '创作背景', 'book': '快乐读书吧',
     'examples': '习作例文', 'videos': '拓展视频', 'bvid': 'B站编号', 'up': 'UP 主', 'dur': '时长（秒）',
-    # math 单一数据源（primary/math-data.js）的视频分组字段
+    # math 单一数据源（content_sources/math-data.js）的视频分组字段
     'desc': '简介', 'list': '视频列表', 'groups': '视频分组', 'group': '所属分组',
 }
 SKIP = {'id', 'key', 'fig', 'img', 'banner', 'emoji', 'color', 'demo', 'interactive', 'tag', 'cover'}

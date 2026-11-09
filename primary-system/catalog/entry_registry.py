@@ -137,7 +137,7 @@ ENTRIES = {
         'recent': _writing_recent,
     },
     # 教材模块里的文件编排例外：语文/数学教材直接走静态编排的教材册页，
-    # 内容源头在 primary/（scripts/build_chinesebook.cjs / build_mathbook.cjs 同步）。
+    # 内容源头在 content_sources/（scripts/build_chinesebook.cjs / build_mathbook.cjs 同步）。
     'math': {
         'route_name': 'mathbook',
         'tag': '打开知识点 →',
@@ -169,7 +169,25 @@ def entry_for(code):
 # 例外：挑战题库跨学科、内部再按领域分卡，不进本网格——由首页专题区标题
 # 右侧的特殊入口直达（见 catalog/home.html 的 section-aside）。
 SPECIAL_ENTRIES = (
-    {'route': 'mysteries', 'subject': '探索', 'area': 'exploration', 'icon': 'mysteries', 'color': 'geography',
+    {'route': 'history-timeline-timeline', 'subject': '历史', 'area': 'history', 'icon': 'history', 'color': 'history',
+     'name': '历史双轨时间轴', 'tag': '对照中外大事 →',
+     'blurb': '沿时间对照 126 件中外大事。点开事件读故事，跟着相关精讲看制度、因果和史料。'},
+    {'route': 'geography-atlas-china', 'subject': '地理', 'area': 'geography', 'icon': 'globe', 'color': 'geography',
+     'name': '地理图谱', 'tag': '在地图上找一找 →',
+     'blurb': '从中国地图出发，找山河、访邻居、看世界。遇到想弄懂的问题，可以打开地理小课堂。'},
+    {'route': 'astronomy-study', 'subject': '地理', 'area': 'geography', 'icon': 'astro', 'color': 'geography',
+     'name': '天文探索', 'tag': '出发看星空 →',
+     'blurb': '9 个太空基地。看月相变化、找北极星，再跟着探测器走出太阳系。'},
+    {'route': 'literature-study', 'subject': '语文', 'area': 'chinese', 'icon': 'literature', 'color': 'chinese',
+     'name': '文学常识', 'tag': '打开阅读册 →',
+     'blurb': '8 个阅读主题。从诗歌、四大名著到名家名篇，边读边练习找线索。'},
+    {'route': 'science-lab', 'subject': '科学', 'area': 'science', 'icon': 'science', 'color': 'science',
+     'name': '科学实验室', 'tag': '看看怎么做 →',
+     'blurb': '8 个实验主题。动手试试光、声音和磁铁，也学会怎样记录观察结果。'},
+    {'route': 'human-origins', 'subject': '科学', 'area': 'science', 'icon': 'footprints', 'color': 'science',
+     'name': '人类起源', 'tag': '追踪远古脚印 →',
+     'blurb': '从火山灰里的脚印出发，读懂人类家谱、远古生活和中国遗址里的线索。'},
+    {'route': 'mysteries', 'subject': '科学', 'area': 'science', 'icon': 'mysteries', 'color': 'science',
      'name': '未解之谜研究所', 'tag': '打开案卷 →',
      'blurb': '从火星古河道到神秘手稿，看看真实线索能告诉我们什么。'},
     {'route': 'phrases', 'subject': '英语', 'area': 'english', 'icon': 'phrases', 'color': 'english',

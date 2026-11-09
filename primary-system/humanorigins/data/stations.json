@@ -1,0 +1,175 @@
+{
+  "schema_version": 1,
+  "stations": [
+    {
+      "slug": "footprints",
+      "label": "脚印与化石",
+      "title": "一串脚印能告诉我们什么？",
+      "summary": "在火山灰里，找一串约 360 万年前的脚印。",
+      "opening": "下雨后走过泥地，你会留下一串脚印。约 360 万年前，在今天的坦桑尼亚莱托利，远古人类也走过一层湿润的火山灰。灰里的脚印后来被埋住，保存了下来。仔细看，哪边像脚跟，哪边像脚趾？",
+      "figures": [
+        {"path": "humanorigins/laetoli.jpg", "alt": "莱托利足迹翻模，凹下去的足印在表面排成行", "place": "坦桑尼亚 · 莱托利", "age": "约 360 万年前的脚印", "caption": "莱托利足迹翻模。找一找排成一行的脚印。", "credit": "柏林国立博物馆拉特根研究实验室 · CC BY-NC-SA", "source": 1}
+      ],
+      "clues": [
+        {"title": "湿灰里的脚印", "observation": "有一列脚印左右交替，每个印子能分辨出脚跟和脚趾。", "meaning": "脚印的排列和形状，支持留下脚印的远古人类当时用两只脚走路。", "source": 2},
+        {"title": "骨骼和牙齿", "observation": "研究者可以量骨头的长短，观察牙齿的形状和磨损。", "meaning": "骨骼提供身形和活动方式的线索，牙齿上的磨损能帮助我们了解可能吃过什么。", "source": 3},
+        {"title": "石器和古 DNA", "observation": "石头上有时留着敲击留下的痕迹。有些保存较好的古骨或牙齿里，还能提取到少量 DNA。", "meaning": "敲击痕迹帮助我们理解怎么做工具。DNA 像从父母那里传下来的信息，科学家比较这些信息，就能研究古人群之间的亲缘关系。", "source": 3}
+      ],
+      "quiz": {
+        "prompt": "只看莱托利这串脚印，我们最有把握回答哪一个问题？",
+        "choices": [
+          {"label": "留下脚印的人吃了什么？", "correct": false, "feedback": "脚印记录了脚踩过地面的样子。研究食物，可以去看牙齿磨损或遗址里的食物残留。"},
+          {"label": "留下脚印的人当时怎么走？", "correct": true, "feedback": "左右脚交替和清楚的脚印形状，都是双脚行走的线索。"},
+          {"label": "留下脚印的人会不会用火？", "correct": false, "feedback": "研究用火，需要找火塘、炭屑、烧过的骨头等别的线索。"}
+        ]
+      },
+      "takeaway": "先问「我看到了什么」，再问「它能告诉我什么」。脚印、骨骼、石器和古 DNA，各有能回答的问题。",
+      "checked_on": "2026-11-09",
+      "sources": [
+        {"title": "柏林国立博物馆 · 莱托利足迹保护与翻模", "url": "https://www.smb.museum/en/museums-institutions/rathgen-forschungslabor/research/research-projects/laetoli/"},
+        {"title": "史密森尼学会 · 莱托利足迹", "url": "https://humanorigins.si.edu/evidence/behavior/footprints/laetoli-footprint-trails"},
+        {"title": "史密森尼学会 · 人类演化有哪些证据", "url": "https://humanorigins.si.edu/evidence"}
+      ]
+    },
+    {
+      "slug": "family-tree",
+      "label": "人类家谱",
+      "title": "人类的家谱长什么样？",
+      "summary": "看一棵分叉的树，再找找哪些古人类曾同时生活。",
+      "opening": "一代又一代，生物的身体特征会慢慢发生变化，这叫作演化。人类演化像一棵长了几百万年的树，有许多分支。现在的人类和黑猩猩是亲戚，两支都能往回追到很久以前的共同祖先。",
+      "figures": [
+        {"path": "humanorigins/lucy.webp", "alt": "阿法南方古猿露西的骨骼复原展示，可见骨盆和腿骨", "caption": "「露西」骨骼复原展示。她生活在约 320 万年前。", "credit": "史密森尼学会人类起源项目", "source": 1},
+        {"path": "humanorigins/family-tree.svg", "alt": "共同祖先分出通向今天黑猩猩的一支和人类这一支，人类一支又有多个分支", "caption": "共同祖先和分支关系示意图。短枝表示已消失的古人类分支。", "credit": "乐学堂绘制", "source": 2}
+      ],
+      "timeline": {
+        "title": "哪些古人类曾同时生活？",
+        "note": "色条表示目前化石记录显示的大致生活时段。同一竖线上有两条色条，表示它们曾生活在同一个时代。",
+        "bars": [
+          {"label": "阿法南方古猿", "period": "约 380 万至 300 万年前", "start": 5, "end": 25, "source": 3},
+          {"label": "直立人", "period": "约 190 万至 11 万年前", "start": 52.5, "end": 97.25, "source": 4},
+          {"label": "尼安德特人", "period": "约 40 万至 4 万年前", "start": 90, "end": 99, "source": 5},
+          {"label": "智人", "period": "约 30 万年前至今", "start": 92.5, "end": 100, "source": 6}
+        ]
+      },
+      "clues": [
+        {"title": "露西的骨盆", "observation": "在埃塞俄比亚发现的「露西」保存了部分骨盆和腿骨。", "meaning": "骨骼的形状为她能用双脚行走提供了线索。露西属于阿法南方古猿。", "source": 1},
+        {"title": "直立人走得很远", "observation": "非洲和亚洲都发现了直立人的化石。早期非洲直立人的腿相对较长。", "meaning": "身体比例提供了行走方式的线索。相隔很远的化石发现，让我们看到直立人的活动范围。", "source": 4},
+        {"title": "时间条上有重叠", "observation": "尼安德特人的时间条和智人的时间条有一段重叠。", "meaning": "他们曾在同一个时代生活。演化树上的几个分支，可以同时存在。", "source": 5}
+      ],
+      "quiz": {
+        "prompt": "两种古人类的时间条有一段重叠，最能说明什么？",
+        "choices": [
+          {"label": "他们曾生活在同一个时代。", "correct": true, "feedback": "时间条告诉我们什么时候可能见到他们。重叠的这一段，两个分支都还存在。"},
+          {"label": "他们一定住在同一个山洞。", "correct": false, "feedback": "时间条告诉我们年代。要知道住在哪里，还得看化石和遗址的地点。"},
+          {"label": "他们一定有一方是另一方的祖先。", "correct": false, "feedback": "时间重叠只告诉我们两个分支同时存在。还要比较骨骼和 DNA 等线索，才能研究亲缘关系。"}
+        ]
+      },
+      "takeaway": "用树枝看亲缘，用时间条看早晚。今天的人类和黑猩猩各自走过了漫长的演化历程。",
+      "checked_on": "2026-11-09",
+      "sources": [
+        {"title": "史密森尼学会 · 露西的骨骼", "url": "https://humanorigins.si.edu/evidence/human-fossils/fossils/al-288-1"},
+        {"title": "史密森尼学会 · 人类与其他灵长类的亲缘", "url": "https://humanorigins.si.edu/education/how-do-we-know/how-do-we-know-humans-are-primates"},
+        {"title": "史密森尼学会 · 阿法南方古猿", "url": "https://humanorigins.si.edu/evidence/human-fossils/species/australopithecus-afarensis"},
+        {"title": "史密森尼学会 · 直立人", "url": "https://humanorigins.si.edu/evidence/human-fossils/species/homo-erectus"},
+        {"title": "史密森尼学会 · 尼安德特人", "url": "https://humanorigins.si.edu/evidence/human-fossils/species/homo-neanderthalensis"},
+        {"title": "史密森尼学会 · 智人", "url": "https://humanorigins.si.edu/evidence/human-fossils/species/homo-sapiens"}
+      ]
+    },
+    {
+      "slug": "early-life",
+      "label": "石器与火",
+      "title": "远古人类怎么生活？",
+      "summary": "看看石器的刃口、骨头的切痕和留下来的火塘。",
+      "opening": "一块石头能当工具吗？看看图里的大石块和小石片。把一块石头当锤子敲另一块，掉下来的薄石片可能有锋利的边。几百万年前，远古人类就已经会用这样的办法做石器。",
+      "figures": [
+        {"path": "humanorigins/stone-tools.jpg", "alt": "肯尼亚洛卡拉莱遗址的石核和几块石片的翻模", "caption": "肯尼亚洛卡拉莱的石核和石片翻模。找找大石块上缺掉的边。", "credit": "史密森尼学会人类起源项目", "source": 1}
+      ],
+      "clues": [
+        {"title": "从石头上敲下刀刃", "observation": "石核是被敲打过的大块石料，表面留下石片脱落的痕迹。有些石片的边很锋利。", "meaning": "把石核和石片放在一起看，能帮助研究者推想当时是怎么敲出工具的。", "source": 1},
+        {"title": "一条细痕与一顿饭", "observation": "一些遗址里的动物骨头上有细小的切痕，位置和形状与用石片切肉留下的痕迹相像。", "meaning": "这些痕迹支持古人类曾切割动物。植物也能提供食物，只是它们通常比骨头更难保存。", "source": 2},
+        {"title": "火塘留下了什么", "observation": "在一些遗址里，炭屑、受热变色的石头和烧过的骨头聚在一小块地方。", "meaning": "要判断那里是否是人用过的火塘，要把好几条线索放在一起。火可以用来取暖、照明和烹煮食物。", "source": 3}
+      ],
+      "quiz": {
+        "prompt": "想判断遗址里曾经有火塘，下面哪组发现最值得继续查？",
+        "choices": [
+          {"label": "一块尖石头和一串脚印。", "correct": false, "feedback": "它们可能与工具和行走有关。还得找一找受热或燃烧留下的痕迹。"},
+          {"label": "一堆没有烧过的兽骨。", "correct": false, "feedback": "兽骨能提供动物和食物的线索。想知道附近有没有火塘，可以看骨头、石块有没有受过热。"},
+          {"label": "一小片区域里有炭屑、烧骨和受热的石头。", "correct": true, "feedback": "好几种受过热的东西聚在一起，比只看到一处灰烬更值得调查。科学家还会检查它们埋在哪里、是否属于同一时期。"}
+        ]
+      },
+      "takeaway": "一处发现可能有好几种解释。把刃口、切痕、炭屑等线索放在一起，生活场景才慢慢清楚起来。",
+      "checked_on": "2026-11-09",
+      "sources": [
+        {"title": "史密森尼学会 · 早期石器", "url": "https://humanorigins.si.edu/evidence/behavior/stone-tools/early-stone-age-tools"},
+        {"title": "史密森尼学会 · 古人类怎样获得食物", "url": "https://humanorigins.si.edu/evidence/behavior/getting-food"},
+        {"title": "史密森尼学会 · 火塘与住所", "url": "https://humanorigins.si.edu/evidence/behavior/hearths-shelters"}
+      ]
+    },
+    {
+      "slug": "migration",
+      "label": "智人的迁徙",
+      "title": "智人怎样走向世界？",
+      "summary": "在同一张地图上，分辨两段相隔很久的旅程。",
+      "opening": "你和地球上今天生活的所有人，都属于同一个物种，叫作「智人」。约 30 万年前，非洲已经有了早期智人。再往前很久，也有别的古人类从非洲走到了亚洲。",
+      "figures": [
+        {"path": "humanorigins/migration.svg", "alt": "迁徙示意图。蓝色虚线表示直立人等早期人类从非洲扩散到亚洲，橙色实线表示后来智人从非洲扩散到世界多地", "caption": "两段迁徙放在一起看。箭头表示大致方向，许多次旅程跨越了许多代人。", "credit": "乐学堂绘制 · 底图 Natural Earth", "source": 5}
+      ],
+      "clues": [
+        {"title": "更早的旅程", "observation": "非洲有约 190 万年前的早期直立人化石，亚洲也发现了年代久远的直立人化石。", "meaning": "直立人等古人类很早就扩散到了非洲之外。这段旅程发生在早期智人出现之前。", "source": 1},
+        {"title": "非洲的早期智人", "observation": "摩洛哥杰贝勒伊尔胡德遗址的化石约有 30 万年历史，脸部有早期智人的特征。", "meaning": "这些化石是早期智人生活在非洲的证据之一。后来，一些智人群体陆续迁往世界各地。", "source": 2},
+        {"title": "在路上相遇", "observation": "科学家把尼安德特人的古 DNA 和今天许多人的 DNA 作比较，找到了一些有亲缘联系的片段。", "meaning": "一些智人和尼安德特人相遇后有了共同后代，他们的一小部分遗传信息留传到了今天。", "source": 3}
+      ],
+      "quiz": {
+        "prompt": "在亚洲找到直立人的化石，可以支持哪一个说法？",
+        "choices": [
+          {"label": "这块化石记录的是现代智人的迁徙。", "correct": false, "feedback": "直立人和智人是演化树上不同的分支。先辨认化石属于哪一类，再谈它记录了谁的旅程。"},
+          {"label": "直立人曾在亚洲生活。", "correct": true, "feedback": "化石的种类和出土地点能帮助我们判断哪类古人类曾到过那里。"},
+          {"label": "直立人和智人同一天离开非洲。", "correct": false, "feedback": "比较化石年代就能看出，两段旅程相隔很久，每一段都跨过了很长的时间。"}
+        ]
+      },
+      "takeaway": "看迁徙图时，一边问「是谁」，一边问「什么时候」。化石的地点和年代，能帮我们把不同的旅程分开。",
+      "checked_on": "2026-11-09",
+      "sources": [
+        {"title": "史密森尼学会 · 直立人的分布", "url": "https://humanorigins.si.edu/evidence/human-fossils/species/homo-erectus"},
+        {"title": "史密森尼学会 · 约 30 万年前的早期智人化石", "url": "https://humanorigins.si.edu/research/whats-hot-human-origins/our-species-arose-least-300000-years-ago"},
+        {"title": "史密森尼学会 · 古 DNA 与尼安德特人", "url": "https://humanorigins.si.edu/evidence/genetics/ancient-dna-and-neanderthals"},
+        {"title": "史密森尼学会 · 智人从非洲走向世界", "url": "https://humanorigins.si.edu/evidence/human-fossils/species/homo-sapiens"},
+        {"title": "Natural Earth · 世界陆地底图", "url": "https://www.naturalearthdata.com/downloads/110m-physical-vectors/110m-land/"}
+      ]
+    },
+    {
+      "slug": "china-sites",
+      "label": "中国遗址",
+      "title": "在中国，找到了哪些线索？",
+      "summary": "去云南和北京，把牙齿、头骨和古 DNA 放回地图上。",
+      "opening": "把镜头拉近，来到中国。云南元谋发现过两枚古人类牙齿，北京周口店一带也留下了许多线索。按发现地点和年代比一比，看看哪些线索隔得近，哪些隔了很久。",
+      "figures": [
+        {"path": "humanorigins/yuanmou.webp", "alt": "上方是元谋的两枚门齿化石，下方是石器", "caption": "云南元谋发现的门齿化石和石器。上方两件是牙齿。", "credit": "史密森尼学会人类起源项目", "source": 1}
+      ],
+      "map_pins": [
+        {"label": "1", "x": 47.92, "y": 57.72},
+        {"label": "2、3", "x": 72.82, "y": 29.17}
+      ],
+      "clues": [
+        {"title": "元谋人", "place": "云南 · 元谋", "period": "约 170 万年前", "observation": "在云南元谋，研究者发现了两枚古人类门齿化石。", "meaning": "牙齿虽小，也记录了古人类很早就在这一带活动。", "source": 1},
+        {"title": "北京人", "place": "北京 · 周口店第 1 地点", "period": "约 50 万年前（代表化石）", "observation": "周口店第 1 地点出土了头骨等古人类化石。", "meaning": "比较头骨等骨骼的特征，科学家把这些古人类归入直立人。", "source": 2},
+        {"title": "田园洞人", "place": "北京 · 田园洞", "period": "约 4 万年前", "observation": "研究者从距今约 4 万年的田园洞人骨骼中提取到了古 DNA。", "meaning": "田园洞人属于早期智人。比较这些古 DNA，可以研究当时东亚的早期现代人与其他人群的亲缘。", "source": 3}
+      ],
+      "quiz": {
+        "prompt": "周口店第 1 地点和田园洞离得很近。哪种比较更能帮我们认识这两处的古人类？",
+        "choices": [
+          {"label": "只看地点，离得近就当作同一类古人类。", "correct": false, "feedback": "同一个地区在不同年代可以住过不同的人群。把年代也放进来比较。"},
+          {"label": "比较化石和 DNA 等线索，再核对它们的年代。", "correct": true, "feedback": "两处遗址留下的线索和年代不同。把它们放在地图和时间里一起看，才能知道近在何处、远在何时。"},
+          {"label": "只看年代，把三个遗址依次连成一条祖先链。", "correct": false, "feedback": "时间先后可以排序。要研究谁和谁有亲缘，还得比较更多的骨骼与遗传线索。"}
+        ]
+      },
+      "takeaway": "同一片地方，可以留着不同时代、不同古人类的痕迹。看地图找地点，看年代找先后，再回到证据本身。",
+      "checked_on": "2026-11-09",
+      "sources": [
+        {"title": "史密森尼学会 · 中国早期人类与元谋化石", "url": "https://humanorigins.si.edu/research/asian-research-projects/earliest-humans-china"},
+        {"title": "中科院古脊椎所 · 周口店遗址古人类化石", "url": "https://www.ivpp.cas.cn/kxcb/kpdt/202307/t20230718_6812446.html"},
+        {"title": "中科院古脊椎所 · 约 4 万年前田园洞人的 DNA", "url": "https://www.ivpp.cas.cn/xwdt/kyjz/201811/t20181103_5155289.html"}
+      ]
+    }
+  ]
+}

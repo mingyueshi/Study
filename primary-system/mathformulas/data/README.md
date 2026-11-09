@@ -10,7 +10,7 @@
   `wip: true` 的学段在前端显示「整理中」徽标。
 - `chapters`：章节按学段归属（`code` 唯一，小写字母加连字符），顺序即页面左栏
   导航顺序，`emoji` + `intro` 一行简介。
-- `groups`：公式组沿用 `primary/math-data.js` 公式速查的形状——
+- `groups`：公式组沿用 `content_sources/math-data.js` 公式速查的形状——
   `{chapter, title, items: [[名称, 公式], …], note?}`，`note` 可省略。
 
 ## 文本契约（校验强制）

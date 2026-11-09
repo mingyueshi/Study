@@ -1,9 +1,9 @@
 # 语法课程数据说明
 
-`grammar.json` 是**生成物**：由 `scripts/build_grammar.cjs` 从 `primary/grammar/`
+`grammar.json` 是**生成物**：由 `scripts/build_grammar.cjs` 从 `content_sources/grammar/`
 静态版（`content.js` + `knowledge-words.js` + `knowledge-sentences.js`）确定性
-转换而来，重跑无 diff。**内容源头在静态版**——修改知识点、增删章节都去
-`primary/grammar/` 改，然后：
+转换而来，重跑无 diff。**内容源头在 `content_sources/`**——修改知识点、增删章节都去
+`content_sources/grammar/` 改，然后：
 
 ```sh
 node scripts/build_grammar.cjs       # 重新生成 grammar.json 与题库批次
@@ -20,7 +20,7 @@ manage.py test grammar               # 契约测试
   example{question, steps[], answer}, misconception{wrong, right},
   quiz{question, options[3], answer 下标, explanation}, sources[{label, url 全 https}]}`
   可选 `facts[{label,value}]`、`formula`、`comparison{headers[], rows[][]}`，空为 `null`
-- 内容契约与静态版 `primary/test/test-grammar.js` 一致：中文标点（禁英文双引号、
+- 内容契约与源测试 `content_sources/test/test-grammar.js` 一致：中文标点（禁英文双引号、
   裸换行、HTML 标签形态）、31 点、来源全 https。加载期 `grammar/catalog.py::validate()`
   再校验一遍，坏数据拒绝上线。
 
@@ -34,7 +34,7 @@ manage.py test grammar               # 契约测试
 
 ## 修订流程
 
-1. 改 `primary/grammar/knowledge-*.js`（或补新章节数据文件并在脚本里接入）
+1. 改 `content_sources/grammar/knowledge-*.js`（或补新章节数据文件并在脚本里接入）
 2. 重跑生成脚本，核对输出规模（8 章 31 点 / facts 5 / formula 12 / comparison 21）
 3. 题库批次有变化时换新 `batch_id` 再导入（批次纪律见题库数据说明）
 4. `manage.py test grammar` + 打开 `/grammar/` 目检

@@ -1,0 +1,85 @@
+{% extends "study_topics/page.html" %}
+{% load static %}
+{# 由 scripts/build_study_topics.py 生成。 #}
+{% block title %}历史双轨时间轴 · 乐学堂{% endblock %}
+{% block study_assets %}
+<link rel="stylesheet" href="{% static 'study_topics/history-timeline/styles.css' %}">
+<link rel="stylesheet" href="{% static 'study_topics/history-timeline/timeline.css' %}">
+<script src="{% static 'study_topics/history-timeline/content.js' %}" defer></script>
+<script src="{% static 'study_topics/history-timeline/timeline-data.js' %}" defer></script>
+<script src="{% static 'study_topics/history-timeline/media-data.js' %}" defer></script>
+<script src="{% static 'study_topics/history-timeline/dynasty-data.js' %}" defer></script>
+<script src="{% static 'study_topics/history-timeline/shared.js' %}" defer></script>
+<script src="{% static 'study_topics/history-timeline/timeline-app.js' %}" defer></script>
+{% endblock %}
+{% block study_content %}
+<div class="study-timeline">
+<div class="tl-shell tl-workspace-shell">
+    <div class="timeline-topic" id="top">
+      <aside class="timeline-sidebar" aria-label="时间轴导航与工具">
+        <header class="timeline-heading">
+          <p class="tl-eyebrow">中国史 × 世界史</p>
+          <h1>历史双轨<br class="tl-sidebar-break">时间轴</h1>
+          <p class="timeline-totals"><b id="stat-eras">9</b> 个时代 · <b id="stat-events">126</b> 件大事</p>
+        </header>
+        <nav class="tl-sysnav" aria-label="历史时间轴系统页面导航">
+          <a data-page href="{% url 'history-timeline' %}">首页</a>
+          <a data-page href="era.html">时代站</a>
+          <a data-page href="dynasties.html">朝代更替</a>
+        </nav>
+
+        <details class="timeline-tools" id="timeline-tools" open>
+          <summary>搜索、筛选和时代导航</summary>
+          <div class="tl-search">
+            <label for="event-search">找大事</label>
+            <input type="search" id="event-search" placeholder="如郑和、1405">
+            <span id="event-count" role="status"></span>
+          </div>
+          <div class="tl-filters" role="group" aria-label="选择查看视角">
+            <button type="button" data-mode="all" aria-pressed="true">双轨全览</button>
+            <button type="button" data-mode="china" aria-pressed="false">中国史</button>
+            <button type="button" data-mode="world" aria-pressed="false">世界史</button>
+            <button type="button" data-mode="pair" aria-pressed="false">同期对照</button>
+          </div>
+          <label class="tl-media-filter"><input id="media-only" type="checkbox"> 只看带素材的大事</label>
+          <a class="tl-mobile-results" href="#timeline-results">查看结果 ↓</a>
+          <nav aria-label="跳到指定时代">
+            <h2 class="tl-sidebar-label">跳到时代</h2>
+            <div class="tl-era-nav" id="era-nav"></div>
+          </nav>
+        </details>
+      </aside>
+
+      <section class="timeline-content" aria-labelledby="timeline-results">
+        <header class="timeline-reading-head">
+          <h2 id="timeline-results" data-tl-anchor tabindex="-1">沿时间读大事</h2>
+          <p>越往下越接近今天。点标题读故事，点「同期对照」跳到另一件大事。</p>
+        </header>
+
+        <div class="timeline-extras">
+          <details class="timeline-extra">
+            <summary>同期对照精选 <span><b id="stat-pairs">30</b> 组对照</span></summary>
+            <div class="tl-spotlights" id="spotlights"></div>
+          </details>
+
+          <details class="timeline-extra">
+            <summary>朝代速览 <span>夏到清</span></summary>
+            <div class="tl-dynasty-strip" id="dynasty-strip"></div>
+            <p class="tl-dynasty-song"><strong>朝代歌</strong>：夏商与西周，东周分两段；三分魏蜀吴，二晋前后延；南北朝并立，隋唐五代传；宋元明清后，皇朝至此完。</p>
+            <a class="tl-dynasty-more" href="dynasties.html">朝代更替与公元纪年 →</a>
+          </details>
+        </div>
+
+        <div class="tl-notice" id="no-events" hidden>
+          <p>没有找到符合条件的大事。试试少输入几个字，或切换查看视角。</p>
+          <button class="tl-secondary-action" id="reset-filters" type="button">清空筛选</button>
+        </div>
+        <div class="tl-flow" id="timeline-flow"></div>
+        <p class="tl-guide-note">上下间距只表示先后。「约」表示大致年代。标有「传说」的是流传下来的故事。长时段按其中的代表年代排序。</p>
+        <noscript><p class="tl-notice">请启用 JavaScript 查看时间轴；内容数据保存在本目录的 content.js 与 timeline-data.js 中。</p></noscript>
+      </section>
+    </div>
+  </div>
+<div class="tl-footer">历史时间轴系统 · <a href="{% url 'history-timeline' %}">系统首页</a> · <a href="dynasties.html">朝代更替</a> · <a href="#top">回到顶部 ↑</a></div>
+</div>
+{% endblock %}

@@ -1,6 +1,6 @@
 """英语语法专题的数据加载与契约校验。
 
-数据是生成物：``scripts/build_grammar.cjs`` 从 primary/grammar/ 静态版确定性
+数据是生成物：``scripts/build_grammar.cjs`` 从 content_sources/grammar/ 静态版确定性
 转换而来——内容源头在静态版，改内容去那里改、重跑脚本再提交。加载期校验
 与静态版 test-grammar.js 同契约（8 章 31 点、id 归属、字段完整性、中文标点、
 来源全 https），坏数据直接拒绝上线。

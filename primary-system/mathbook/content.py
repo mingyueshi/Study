@@ -1,6 +1,6 @@
 """数学教材册的数据加载与契约校验（按册编排）。
 
-数据是生成物：``scripts/build_mathbook.cjs`` 从 primary/ 确定性同步。册次注册
+数据是生成物：``scripts/build_mathbook.cjs`` 从 content_sources/ 确定性同步。册次注册
 在构建脚本的 ``BOOKS`` 映射里（册次码对齐 catalog 教材码后缀，如 bnu-math-4a
 → ``4a``），每册产出两个文件：
 

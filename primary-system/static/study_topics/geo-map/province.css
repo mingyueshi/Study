@@ -1,0 +1,42 @@
+/* 省域站详情页样式：面包屑、迷你地图与记一记。
+   基础令牌、省份路径与省域站格子样式复用 styles.css。 */
+
+#province-heading .gm-chips { margin: 10px 0 0; }
+#province-page > .gm-stations:first-child { margin-top: 0; }
+#province-page > .gm-stations { scroll-margin-top: 12px; }
+.gm-prov-where { color: var(--ink-soft); margin: 0 0 15px; }
+
+#gm-prov-svg { display: block; width: 100%; height: auto; border-radius: 22px; box-shadow: 0 10px 28px rgba(51, 65, 59, 0.12); }
+
+.gm-facts {
+  margin-top: 26px; background: var(--card); border-radius: 22px;
+  padding: 24px 30px 18px; box-shadow: 0 8px 20px rgba(51, 65, 59, 0.1);
+}
+.gm-facts h2 { font-size: 24px; margin-bottom: 12px; }
+.gm-facts ol { padding-left: 0; list-style: none; display: grid; gap: 12px; counter-reset: fact; }
+.gm-facts li {
+  counter-increment: fact; display: flex; gap: 12px; align-items: baseline;
+  font-size: 16.5px; line-height: 1.75;
+}
+.gm-facts li::before {
+  content: counter(fact); flex: none;
+  width: 30px; height: 30px; border-radius: 50%;
+  background: color-mix(in srgb, var(--accent, var(--green)) 16%, #fff);
+  border: 2px solid color-mix(in srgb, var(--accent, var(--green)) 60%, #fff);
+  color: color-mix(in srgb, var(--accent, var(--green)) 80%, #000);
+  font-weight: 800; font-size: 15px;
+  display: inline-flex; align-items: center; justify-content: center;
+  transform: translateY(5px);
+}
+.gm-facts .gm-card-foot { margin-top: 14px; }
+
+.gm-all-stations {
+  margin-top: 26px; background: var(--card); border-radius: 18px;
+  padding: 4px 22px 20px; box-shadow: 0 8px 20px rgba(51, 65, 59, 0.1);
+}
+.gm-all-stations summary {
+  cursor: pointer; font-weight: 800; font-size: 17px; color: var(--ink);
+  padding: 14px 0; list-style-position: inside;
+}
+.gm-all-stations summary:hover { color: var(--green); }
+.gm-all-stations .gm-station-grid { margin-top: 8px; }

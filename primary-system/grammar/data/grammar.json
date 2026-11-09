@@ -1,7 +1,7 @@
 {
  "schema_version": 1,
  "source_code": "primary-grammar",
- "source_file": "primary/grammar/",
+ "source_file": "content_sources/grammar/",
  "chapters": [
   {
    "id": "basics",

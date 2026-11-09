@@ -1,0 +1,26 @@
+{
+  "chronology": {
+    "title": "公元纪年与世纪换算",
+    "file": "chronology.m4a",
+    "transcript": "chronology.txt",
+    "credit": "macOS Tingting 中文语音合成；知识摘要由本页编写"
+  },
+  "qin-system": {
+    "title": "秦朝统一与郡县制度",
+    "file": "qin-system.m4a",
+    "transcript": "qin-system.txt",
+    "credit": "macOS Tingting 中文语音合成；知识摘要由本页编写"
+  },
+  "silk-road": {
+    "title": "丝绸之路的网络与交流",
+    "file": "silk-road.m4a",
+    "transcript": "silk-road.txt",
+    "credit": "macOS Tingting 中文语音合成；知识摘要由本页编写"
+  },
+  "inventions": {
+    "title": "四大发明的演进与区别",
+    "file": "inventions.m4a",
+    "transcript": "inventions.txt",
+    "credit": "macOS Tingting 中文语音合成；知识摘要由本页编写"
+  }
+}

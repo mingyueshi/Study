@@ -1,0 +1,50 @@
+{% extends "study_topics/page.html" %}
+{% load static %}
+{# 由 scripts/build_study_topics.py 生成。 #}
+{% block title %}省域站 · 地理图谱 · 乐学堂{% endblock %}
+{% block study_assets %}
+<link rel="stylesheet" href="{% static 'study_topics/geo-map/styles.css' %}">
+<link rel="stylesheet" href="{% static 'study_topics/geo-map/province.css' %}">
+<script src="{% static 'study_topics/geo-map/china-geo.js' %}" defer></script>
+<script src="{% static 'study_topics/geo-map/content.js' %}" defer></script>
+<script src="{% static 'study_topics/geo-map/map-data.js' %}" defer></script>
+<script src="{% static 'study_topics/geo-map/world-data.js' %}" defer></script>
+<script src="{% static 'study_topics/geo-map/atlas-data.js' %}" defer></script>
+<script src="{% static 'study_topics/geo-map/atlas.js' %}" defer></script>
+<script src="{% static 'study_topics/geo-map/shared.js' %}" defer></script>
+<script src="{% static 'study_topics/geo-map/media-data.js' %}" defer></script>
+<script src="{% static 'study_topics/geo-map/media.js' %}" defer></script>
+<script src="{% static 'study_topics/geo-map/province-app.js' %}" defer></script>
+{% endblock %}
+{% block study_content %}
+<div class="study-atlas">
+<div class="gm-topic province-topic">
+    <aside class="gm-sidebar" aria-label="导航和页面工具">
+      <nav class="gm-sysnav" aria-label="地理图谱页面导航">
+        <a class="gm-sysnav-brand" href="{% url 'geography-atlas' %}">🧭 地理图谱</a>
+        <a data-page href="china.html">中国地图</a>
+        <a data-page href="world.html">世界地图</a>
+        <a data-page href="province.html" aria-current="page">省域站</a>
+        <a data-page href="places.html">地点索引</a>
+        <a data-page href="routes.html">主题路线</a>
+        <a data-page href="gallery.html">实景图册</a>
+      </nav>
+
+      <header class="gm-hero" id="province-heading">
+        <p class="gm-eyebrow">看家乡 · 四大地理区域</p>
+        <h1 class="gm-title">省域站</h1>
+        <p class="gm-intro">挑一个省域站，看看它在地图上的位置。</p>
+      </header>
+
+      <nav class="gm-side-panel gm-side-links" id="province-nav" aria-label="省域站导航"></nav>
+    </aside>
+
+    <div id="content" class="gm-content" tabindex="-1">
+      <div id="province-page"></div>
+
+      <noscript><p class="gm-notice">请启用 JavaScript 查看省域站和地图。</p></noscript>
+    </div>
+  </div>
+<div class="gm-footer">乐学堂 · 地理图谱 · <a href="{% url 'geography-atlas' %}">系统首页</a> · <a href="china.html">中国地图</a> · <a href="world.html">世界地图</a></div>
+</div>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'study_topics/page.html' %}
+{% load static %}
+
+{% block title %}{{ course_title }} · 乐学堂{% endblock %}
+
+{% block study_assets %}
+{% with topic='study_topics/'|add:course_slug|add:'/'|add:course_slug %}
+<link rel="stylesheet" href="{% static 'mathbook/mathbook-base.css' %}">
+<link rel="stylesheet" href="{% static 'figures/figures.css' %}">
+<link rel="stylesheet" href="{% static topic|add:'.css' %}">
+<link rel="stylesheet" href="{% static 'study_topics/course.css' %}">
+<script src="{% static 'speech.js' %}" defer></script>
+<script src="{% static topic|add:'-data.js' %}" defer></script>
+<script src="{% static topic|add:'-figures.js' %}" defer></script>
+{% if course_slug == 'astro' %}<script src="{% static 'study_topics/astro/astro-photos.js' %}" defer></script>{% endif %}
+<script src="{% static topic|add:'-app.js' %}" defer></script>
+<script src="{% static 'mathbook/layout.js' %}" defer></script>
+{% endwith %}
+{% endblock %}
+
+{% block study_content %}
+<div class="study-course">
+  <div class="study-page" data-subject="{{ course_slug }}">
+    <div class="study-shell">
+      <aside class="sidebar">
+        <p class="sidebar-label">{{ course_section }}目录</p>
+        <details class="category-nav" open>
+          <summary>切换{{ course_section }} <span class="nav-current"></span></summary>
+          <nav id="chips" aria-label="{{ course_section }}目录"></nav>
+        </details>
+        <p class="sidebar-note">本浏览器的学习标记</p>
+        <p class="stats-pill" id="stats" role="status"></p>
+      </aside>
+      <div class="study-content">
+        <div class="textbook-banner"><strong>{{ course_title }}</strong><span>{{ course_intro }}</span></div>
+        <div class="toolbar" role="search" aria-label="{{ course_title }}学习工具">
+          <div class="search-box">
+            <span aria-hidden="true">🔎</span>
+            <input id="search" type="search" aria-label="搜索全部知识点" placeholder="搜索知识点、例题和易错点…" autocomplete="off">
+          </div>
+          <button type="button" class="play-btn" data-act="print">打印当前内容</button>
+        </div>
+        <div id="cards" tabindex="-1"></div>
+        <noscript>请启用 JavaScript，查看知识卡和互动图示。</noscript>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends "study_topics/page.html" %}
+{% load static %}
+{# 由 scripts/build_study_topics.py 生成。 #}
+{% block title %}地点索引 · 地理图谱 · 乐学堂{% endblock %}
+{% block study_assets %}
+<link rel="stylesheet" href="{% static 'study_topics/geo-map/styles.css' %}">
+<script src="{% static 'study_topics/geo-map/content.js' %}" defer></script>
+<script src="{% static 'study_topics/geo-map/map-data.js' %}" defer></script>
+<script src="{% static 'study_topics/geo-map/world-data.js' %}" defer></script>
+<script src="{% static 'study_topics/geo-map/atlas-data.js' %}" defer></script>
+<script src="{% static 'study_topics/geo-map/atlas.js' %}" defer></script>
+<script src="{% static 'study_topics/geo-map/shared.js' %}" defer></script>
+<script src="{% static 'study_topics/geo-map/places-app.js' %}" defer></script>
+{% endblock %}
+{% block study_content %}
+<div class="study-atlas">
+<div class="gm-topic places-topic">
+    <aside class="gm-sidebar" aria-label="导航和页面工具">
+      <nav class="gm-sysnav" aria-label="地理图谱页面导航">
+        <a class="gm-sysnav-brand" href="{% url 'geography-atlas' %}">🧭 地理图谱</a>
+        <a data-page href="china.html">中国地图</a>
+        <a data-page href="world.html">世界地图</a>
+        <a data-page href="province.html">省域站</a>
+        <a data-page href="places.html" aria-current="page">地点索引</a>
+        <a data-page href="routes.html">主题路线</a>
+        <a data-page href="gallery.html">实景图册</a>
+      </nav>
+
+      <header class="gm-hero">
+        <p class="gm-eyebrow">找地点 · 从名字到位置</p>
+        <h1 class="gm-title">地点索引</h1>
+        <p class="gm-intro">找家乡、山河、大洋和世界地标，点结果就能打开地图上的档案。</p>
+      </header>
+
+      <form class="gm-search gm-side-panel" role="search">
+        <label for="place-search">输入地名、简称或英文名</label>
+        <div><input type="search" id="place-search" name="q" placeholder="试试长江或 Japan"><button type="submit">查找</button></div>
+        <label class="gm-category" for="place-category">地点类型 <select id="place-category" name="type"><option value="">全部类型</option></select></label>
+      </form>
+    </aside>
+
+    <div id="content" class="gm-content" tabindex="-1">
+      <section class="gm-section gm-catalog" aria-label="查找地点">
+        <p class="gm-result-count" id="place-count" role="status"></p>
+        <ul class="gm-place-grid" id="place-results"></ul>
+        <p class="gm-notice" id="place-empty" hidden>没有找到这个地点。试试短一点的名字，或者选「全部类型」再找。</p>
+        <button class="gm-btn gm-more" id="place-more" type="button" hidden>显示更多地点</button>
+      </section>
+
+      <noscript><p class="gm-notice">请启用 JavaScript 查看地点和地图。</p></noscript>
+    </div>
+  </div>
+<div class="gm-footer">乐学堂 · 地理图谱 · <a href="{% url 'geography-atlas' %}">回到首页</a></div>
+</div>
+{% endblock %}

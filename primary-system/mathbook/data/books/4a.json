@@ -2,7 +2,7 @@
   "schema_version": 1,
   "book": "4a",
   "textbook_code": "bnu-math-4a-2026",
-  "source_file": "primary/math-data.js",
+  "source_file": "content_sources/math-data.js",
   "source_sha256": "8b6f16b999ddf978b9ecf605ddec4ecba3f3babf851d78e286145857e6e654ca",
   "units": 11,
   "points": 43,

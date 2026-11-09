@@ -1,4 +1,4 @@
-/* 生成物：由 scripts/build_chinesebook.cjs 从 primary/ 确定性同步，勿手改。 */
+/* 生成物：由 scripts/build_chinesebook.cjs 从 content_sources/ 生成，勿手改。 */
 const KB = {
   "textbook": "人教版（统编版·新课标）语文四年级上册",
   "edition": "2026 年秋季学期新修订版目录 · 八个单元 27 课",

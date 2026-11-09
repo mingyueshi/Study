@@ -4,7 +4,7 @@
 
 ## 1. 项目目标与边界
 
-`primary-system/` 是家庭辅导孩子学习的主项目。仓库其他目录是临时原型、资料来源或研究，不能成为线上运行时依赖。现有导出脚本允许读取受信任的 `primary/` 静态资料，导入后由本项目数据库提供内容；呈现天然富交互的学科（语文、数学教材）改为文件编排——内容源头在静态版、Django 只做零模型只读壳，见 [教材册文件编排](#教材册文件编排数学与语文2026-11-0708)。
+`primary-system/` 是家庭辅导孩子学习的主项目。小学版的文件源、素材、生成脚本和测试都由本项目维护。语文、数学教材采用文件编排，见 [教材册文件编排](#教材册文件编排数学与语文2026-11-0708)。
 
 采用 Django 单体、服务端模板、少量独立 JavaScript。当前规模下不引入微服务、消息队列、搜索集群或统一的动态页面搭建引擎。SQLite 用于本机；多请求并发与跨数据库正确性用 PostgreSQL 回归验证。
 
@@ -136,7 +136,7 @@ lexicon拥有不可变中文正文版本及核对历史；words拥有目标采�
 
 独立 `questionbank` 应用承载跨学科的统一题库：题目按批次导入（Git 跟踪的
 `data/questions/` 批次 JSON + `import_questions` 命令），数据库只存题，运行时
-不读批次文件。首批题来自 `primary/` 同源数据的规则转换（数学例题自评与易错
+不读批次文件。首批题来自 `content_sources/` 的教材源的规则转换（数学例题自评与易错
 判断、语文课文多音字、英语教材同步词义），生成脚本 `scripts/build_questionbank.cjs`
 确定性产出、重跑无 diff；外部开放数据集（CMATH 等）已完成调研，引入时单独
 建批次走同一管线，见 [题库数据说明](../questionbank/data/README.md)。
@@ -153,7 +153,7 @@ lexicon拥有不可变中文正文版本及核对历史；words拥有目标采�
 
 ## 英语语法（2026-11-07）
 
-独立 `grammar` 应用承接静态版 `primary/grammar/` 的语法精讲（8 章 31 点）：
+独立 `grammar` 应用读取 `content_sources/grammar/` 的语法文件（8 章 31 点）：
 零模型只读浏览（照 phonetics 先例，无模型、无迁移、无学习记录），页面按
 `?chapter=` 分章展示，知识点卡含讲解、要点、对比表、句型公式、例题、易错
 辨析与三选一巩固题——页内判分在前端、进度只存浏览器 localStorage（与静态
@@ -163,7 +163,7 @@ lexicon拥有不可变中文正文版本及核对历史；words拥有目标采�
 `primary-grammar` 题库批次（选项确定性轮换修正静态版答案下标偏斜）。「练本章」
 以语法章节的知识点 ID 与题目的来源定位对应，章节练习、错题本与重练共用同一题池。
 判分和作答记录统一在 `questionbank` 侧。**内容源头是静态版**——主项目
-`grammar/data/grammar.json` 是生成物，改内容去 `primary/grammar/` 改后重跑
+`grammar/data/grammar.json` 是生成物，修改 `content_sources/grammar/` 后重跑
 脚本，批次有变化时换新 batch_id 导入。总览不出语法卡（与音标同），语法答题
 自然计入题库卡；入口经 `seed_platform` 模块行挂英语学科，`ENTRIES` 摘要返回
 None。只读边界由测试兜底：GET 不得产生会话。
@@ -184,7 +184,7 @@ childs、foots 这类规则误推形态且在加载期确定性生成；每题�
 
 ## 日常用语（2026-11-07）
 
-独立 `phrases` 应用承接教材词卡上的常用短语与短句：`primary/english-data.js`
+独立 `phrases` 应用承接教材词卡上的常用短语与短句：`content_sources/english-data.js`
 的 ENGLISH_PHRASES（597 条去重，外研版四上/四下口径）经
 `scripts/build_phrases.cjs` 确定性转换为本专题数据，en/zh 文本以教材语料为
 单一数据源不改写。一份数据两个视图：按句式（18 组，句首功能正则切组 +
@@ -208,12 +208,12 @@ childs、foots 这类规则误推形态且在加载期确定性生成；每题�
 页面按册编排：`/mathbook/`、`/chinesebook/` 为册次列表（点教材卡先看到
 可选册次，以后加册次同一直入口径），册页 `/mathbook/<册>/`、`/chinesebook/<册>/`，册次码对齐
 catalog 教材码后缀（bnu-math-4a-2026 → `4a`、pep-chinese-4a-2026 → `4a`）。
-内容源头是 `primary/math-data.js`（11 单元 43 知识点）与
-`primary/knowledge-data.js`（8 单元 27 课＋古诗文＋字词复习）：改内容去
-静态版改、先过各册声明的静态版测试，再 `make mathbook-data` /
+源文件是 `content_sources/math-data.js`（11 单元 43 知识点）与
+`content_sources/knowledge-data.js`（8 单元 27 课＋古诗文＋字词复习）。
+先运行对应源测试，再 `make mathbook-data` /
 `make chinesebook-data` 重跑 `scripts/build_mathbook.cjs` /
 `scripts/build_chinesebook.cjs`——册次注册在脚本的 `BOOKS` 映射（一行一册，
-新册 = primary 加数据文件＋测试＋加一行），每册确定性同步规范化数据
+新增册次同时补源文件和测试），每册确定性同步规范化数据
 `static/<应用>/books/<册>.js`（页面用来源 sha256 前 8 位作 `?v=` 版本）与
 结构摘要 `<应用>/data/books/<册>.json`，并同步共享图示库
 （`static/figures/figures.js|css`，DB 阅读器图示块同受益）与对应图片目录；
@@ -269,6 +269,22 @@ DB 里的两科内容行暂不删除：待静态教材册有全局检索层后�
    `rewards` 字段，各玩法 JS 经共享 `static/incentives/reward-toast.js` 弹小
    庆祝条；教材表单路径走 Django messages。
 
+## 历史与地理专题文件编排
+
+`historystudy` 和 `geographystudy` 提供只读页面。`SPECIAL_ENTRIES` 每科登记一张卡，分别直达双轨总轴和中国地图。历史精讲和地理小课堂从专题导航及相关事件、时代和地点进入。四套内容套用统一导航、字号和配色，精讲自测结果按原方式存本机浏览器。
+
+时代站使用简版事件卡，事件正文集中在详情页。纪年和朝代顺序以朝代更替页为准，世纪判断和并存政权在历史精讲展开。长江、黄河的基础档案和瞿塘峡照片集中在地理图谱，地理小课堂保留流域、泥沙与原有自测。`static/study_topics/connections-data.js` 按稳定 ID 登记相关精讲、回链和统一版的精讲删重内容。
+
+内容源头分别在 `content_sources/` 下的 `history/`、`history-timeline/`、`geo/` 和 `geo-map/`。更新来源后先跑 `content_sources/test/` 下对应的 `test-history.js`、`test-timeline.js`、`test-geo.js` 或 `test-geo-map.js`，再在本系统目录运行 `make study-topics-data`。该命令同步模板、脚本、样式和本地媒体，保留时代、事件、地点和知识点深链接。运行所需文件均保存在本系统目录内。
+
+## 天文、文学与科学课程文件编排
+
+三套课程共用 `templates/study_topics/course.html` 和平台主题。在学习广场，天文探索归「地理」，文学常识归「语文」，科学实验室归「科学」。章节内容、图示和配图由 `make study-topics-data` 从 `content_sources/` 的 `astro-*`、`lit-*`、`sci-*` 文件及对应图片生成到 `static/study_topics/`。先跑源测试 `test-astro.js`、`test-lit.js`、`test-sci.js` 再同步。项目运行直接读取同步文件，掌握标记继续保存在当前浏览器。
+
+跨专题关联和统一版的课程修订集中在 `static/study_topics/connections-data.js`。「科学」分类同时收录人类起源和未解之谜研究所，旧的 `?area=exploration` 筛选指向科学。火星生命和暗物质的证据在未解之谜研究所查阅，天文课侧重辨认线索和读图。科举制度和《史记》的体例从文学课跳转历史精讲，文学课保留作品阅读。水循环和预警知识从科学课跳转地理小课堂，科学课侧重量水和天气观测。
+
+用 `.venv/bin/python scripts/build_study_topics.py --check` 核对同步结果，用 `.venv/bin/python manage.py test catalog.test_study_topics` 核对页面与入口。改动专题关联后运行 `make test-frontend`，校验事件、地点、章节和知识点的引用。
+
 ## 数学公式专题（2026-11-09）
 
 独立 `mathformulas` 应用承接跨学段的公式速查手册（照 grammar 零模型先例）：
@@ -279,7 +295,7 @@ DB 里的两科内容行暂不删除：待静态教材册有全局检索层后�
 
 内容全部在 Git 跟踪的 `mathformulas/data/formulas.json`（`content.py::validate`
 契约校验：学段归属、文本契约禁英文双引号/裸换行/HTML 标签、规模下限），公式
-组沿用 `primary/math-data.js` 公式速查的 `{title, items: [[名称, 公式], …],
+组沿用 `content_sources/math-data.js` 公式速查的 `{title, items: [[名称, 公式], …],
 note}` 形状。小学按 1-6 年级全覆盖（10 章 42 组 157 条：数的认识、运算、
 方程、分数百分数、比与比例、平面/立体图形、常考数量关系、单位换算、统计）；
 初中高中先搭 5 章框架 + 打底公式（标「整理中」），后续按需补齐。首页数学

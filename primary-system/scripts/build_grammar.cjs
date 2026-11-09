@@ -1,17 +1,16 @@
-/* 把 primary/grammar/ 的静态语法数据确定性转换为两份产物：
+/* 把 content_sources/grammar/ 的语法数据确定性转换为两份产物：
    1. grammar/data/grammar.json —— 语法专题课程数据（章节 + 知识点，原样转换）；
    2. questionbank/data/questions/2026-11-grammar-quiz.json —— 31 道巩固题批次
       （choice 题走 import_questions 导入题库，选项做确定性轮换修正答案下标偏斜）。
 
-   内容源头是 primary/grammar/：改内容去静态版改，重跑本脚本再导入。
+   修改源数据后重跑本脚本，按批次维护规则导入题库。
    与 build_questionbank.cjs 同纪律：确定性产出、重跑无 diff。 */
 'use strict';
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
 
-const ROOT = path.resolve(__dirname, '../..');
-const SOURCE_DIR = path.join(ROOT, 'primary/grammar');
+const SOURCE_DIR = path.resolve(__dirname, '../content_sources/grammar');
 const GRAMMAR_TARGET = process.argv[2] || path.resolve(__dirname, '../grammar/data/grammar.json');
 const BATCH_ID = '2026-11-grammar-quiz';
 const BATCH_TARGET = process.argv[3] || path.resolve(__dirname, '../questionbank/data/questions/', `${BATCH_ID}.json`);
@@ -105,7 +104,7 @@ function buildCurriculum() {
   return {
     schema_version: 1,
     source_code: 'primary-grammar',
-    source_file: 'primary/grammar/',
+    source_file: 'content_sources/grammar/',
     chapters: chapters.map((chapter) => ({
       id: chapter.id, no: chapter.no, title: chapter.title, description: chapter.description,
       lesson_ids: chapter.lessonIds,
@@ -160,6 +159,7 @@ function buildBatch() {
     schema_version: 1,
     batch_id: BATCH_ID,
     generator: 'scripts/build_grammar.cjs',
+    // 保留已发布批次的说明原文，避免改变同一 batch_id 的导入指纹。
     note: '内部数据规则生成：primary/grammar/ 各知识点的巩固题，选项确定性轮换修正答案下标偏斜。',
     questions,
   };

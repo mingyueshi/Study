@@ -23,6 +23,9 @@ test: ## 跑全量测试（需先 install）
 test-frontend: ## 跑 Node 前端回归测试
 	node --test scripts/test_frontend.cjs scripts/test_feihualing_frontend.cjs
 
+test-content-sources: ## 校验教材与专题的文件源
+	@set -e; for test in content_sources/test/test-*.js; do node "$$test"; done
+
 check: ## Django system check（快速体检）
 	$(MANAGE) check
 
@@ -44,23 +47,29 @@ shell: ## 进入 Django shell
 repair-data: ## 旧开发库修复：备份后恢复基础内容（先停服务；保护个人数据需库中可识别）
 	python3.12 bootstrap.py --refresh-data
 
-writing-data: ## 从 primary/writing-data.js 重新生成作文坊 topics.json（需 node）
+content-data: ## 重生成教材、专题、作文坊、语法、日常用语和题库批次
+	$(MAKE) -j1 writing-data questionbank-data grammar-data phrases-data mathbook-data chinesebook-data study-topics-data
+
+writing-data: ## 从 content_sources/ 重新生成作文坊 topics.json（需 node）
 	node scripts/convert_writing_data.js
 
-questionbank-data: ## 从 primary/ 数据重新生成题库批次 JSON（需 node，随后 import_questions 导入）
+questionbank-data: ## 从教材源重新生成题库批次 JSON（需 node）
 	node scripts/build_questionbank.cjs
 
-grammar-data: ## 从 primary/grammar/ 重新生成语法课程数据与题库批次（需 node，随后 import_questions 导入）
+grammar-data: ## 从 content_sources/grammar/ 重新生成语法课程与题库批次（需 node）
 	node scripts/build_grammar.cjs
 
-phrases-data: ## 从 primary/english-data.js 重新生成日常用语数据（需 node）
+phrases-data: ## 从英语教材源重新生成日常用语数据（需 node）
 	node scripts/build_phrases.cjs
 
-mathbook-data: ## 从 primary/math-data.js 重新同步数学教材册数据与图示资产（需 node）
+mathbook-data: ## 从数学教材源生成数据与图示资产（需 node）
 	node scripts/build_mathbook.cjs
 
-chinesebook-data: ## 从 primary/knowledge-data.js 重新同步语文教材册数据与图片资产（需 node）
+chinesebook-data: ## 从语文教材源生成数据与图片资产（需 node）
 	node scripts/build_chinesebook.cjs
+
+study-topics-data: ## 从 content_sources/ 生成历史、地理、天文、文学和科学专题
+	$(PYTHON) scripts/build_study_topics.py
 
 word-tree: ## 重新生成词以类聚的 WordNet 上下位树（words/tree_data/tree.json）
 	$(PYTHON) scripts/build_word_tree.py
@@ -77,4 +86,4 @@ ancient-text: ## 重新生成古文经典资料包 01e（--source 传本地克�
 unihan18-package: ## 重新生成 Unihan 18.0.0 全量属性资料包 01f（辅助文件缓存目录见 scripts/build_unihan18_package.py）
 	$(PYTHON) scripts/build_unihan18_package.py
 
-.PHONY: help install run test test-frontend check makemigrations migrate seed superuser shell repair-data writing-data questionbank-data grammar-data phrases-data mathbook-data chinesebook-data phoneme-audio word-tree ancient-text unihan18-package
+.PHONY: help install run test test-frontend test-content-sources check makemigrations migrate seed superuser shell repair-data content-data writing-data questionbank-data grammar-data phrases-data mathbook-data chinesebook-data study-topics-data phoneme-audio word-tree ancient-text unihan18-package

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}人类起源 · 乐学堂{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'humanorigins/origins.css' %}">
+<div class="origins">
+  <a class="origins-back" href="{% url 'home' %}?area=science#modules-title">← 学习广场 · 科学</a>
+  <header class="origins-hero">
+    <div class="origins-hero-copy">
+      <p class="origins-kicker"><img src="{% static 'icons/footprints.svg' %}" alt="" width="34" height="34"> 远古考察手记</p>
+      <h1>人类起源</h1>
+      <p class="origins-lead">没有照片，也没有文字。<br>科学家怎么知道远古人类是什么样的？</p>
+      <a class="origins-action" href="{% url 'human-origins-station' stations.0.slug %}">从第一串脚印开始 <span aria-hidden="true">→</span></a>
+    </div>
+    {% with figure=stations.0.figures.0 %}
+    <figure class="origins-cover">
+      <img src="{% static figure.path %}" alt="{{ figure.alt }}" width="1898" height="926">
+      <figcaption><span>{{ figure.place }}</span><strong>{{ figure.age }}</strong><small>足迹翻模 · {{ figure.credit }}</small></figcaption>
+    </figure>
+    {% endwith %}
+  </header>
+
+  <section class="origins-route" aria-labelledby="origins-route-heading">
+    <header class="origins-section-head">
+      <div><p class="origins-kicker">考察路线</p><h2 id="origins-route-heading">沿着线索走五站</h2></div>
+      <p>小学中高年级 · 看实物、读线索、做判断</p>
+    </header>
+    <ol class="origins-station-list">
+      {% for station in stations %}
+      <li>
+        <a href="{% url 'human-origins-station' station.slug %}">
+          <span class="origins-station-number" aria-hidden="true">0{{ forloop.counter }}</span>
+          <span class="origins-station-title"><small>{{ station.label }}</small><strong>{{ station.title }}</strong></span>
+          <span class="origins-station-description">{{ station.summary }}</span>
+          <span class="origins-station-arrow" aria-hidden="true">→</span>
+        </a>
+      </li>
+      {% endfor %}
+    </ol>
+  </section>
+</div>
+{% endblock %}

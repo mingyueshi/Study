@@ -1,7 +1,7 @@
 # 日常用语数据说明
 
 `phrases.json` 是**生成物**：由 `scripts/build_phrases.cjs` 从
-`primary/english-data.js` 的 `ENGLISH_PHRASES`（挂在教材词卡上的常见短语与
+`content_sources/english-data.js` 的 `ENGLISH_PHRASES`（挂在教材词卡上的常见短语与
 短句，外研版四上/四下口径）确定性转换而来，重跑无 diff。**en/zh 文本以教材
 语料为单一数据源**——改句子去教材数据改，重跑本脚本自动同步。
 
@@ -40,7 +40,7 @@ manage.py test phrases                # 契约测试
 
 ## 修订流程
 
-1. 改 `primary/english-data.js` 的 ENGLISH_PHRASES（或单元/词卡）
+1. 改 `content_sources/english-data.js` 的 ENGLISH_PHRASES（或单元/词卡）
 2. 重跑生成脚本，核对输出统计（597 / core 141 / misc=0）
 3. `manage.py test phrases` + 打开 `/phrases/` 目检双视图与练习
 4. 学习记录、总览卡与游客清理不依赖本文件内容，无需额外操作

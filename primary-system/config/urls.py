@@ -6,6 +6,7 @@ from nova_admin.slider import SliderCaptchaAdminAuthenticationForm
 from accounts import views as accounts_views
 from accounts.forms import LearnerAuthenticationForm
 from catalog import views as catalog
+from catalog.study_courses import literature_study
 from learning import views as learning
 from lexicon import views as lexicon
 from lexicon import pages as dictionary
@@ -23,8 +24,11 @@ urlpatterns = [
     path('references/lexicon/', include('lexicon.reference_urls')),
     path('hanzi/', include('hanzi.urls')),
     path('poetry/', include('poetry.urls')),
+    path('history/', include('historystudy.urls')),
+    path('geography/', include('geographystudy.urls')),
     path('geography/', include('geography.urls')),
     path('astronomy/', include('astronomy.urls')),
+    path('literature/', literature_study, name='literature-study'),
     path('science/', include('science.urls')),
     path('dictionary/', dictionary.lookup, name='dictionary'),
     path('dictionary/sources/', dictionary.sources, name='dictionary-sources'),
@@ -46,6 +50,7 @@ urlpatterns = [
     path('chinesebook/', include('chinesebook.urls')),
     path('mathformulas/', include('mathformulas.urls')),
     path('mysteries/', include('mysteries.urls')),
+    path('human-origins/', include('humanorigins.urls')),
     path('rewards/', include('incentives.urls')),
     path('accounts/profile/', accounts_views.profile, name='profile'),
     path('accounts/register/', accounts_views.register, name='register'),

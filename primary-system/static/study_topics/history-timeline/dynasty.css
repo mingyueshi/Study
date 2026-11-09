@@ -1,0 +1,163 @@
+/* 朝代更替子页样式：公元纪年小课堂 + 竖版朝代更替时间轴。
+   基础令牌（颜色、字体、卡片）复用同目录 styles.css。 */
+
+/* ---------- 页首 ---------- */
+.tl-back {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-weight: 700; font-size: 15px; text-decoration: none;
+  color: var(--tl-pair-deep); background: var(--tl-card);
+  border: 1.5px solid var(--tl-line); border-radius: 999px;
+  padding: 6px 16px; margin-bottom: 16px;
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.tl-back:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(120, 84, 40, .16); }
+.dyn-hero { padding: 28px 34px 26px; }
+
+/* ---------- 公元纪年小课堂 ---------- */
+.cal-class {
+  margin-top: 20px; background: var(--tl-card);
+  border: 1.5px solid var(--tl-line); border-radius: 22px;
+  padding: 22px 26px 18px; box-shadow: 0 4px 14px rgba(120, 84, 40, .08);
+}
+.cal-class > h2 { margin: 0 0 8px; font-size: 24px; }
+.cal-intro { margin: 0 0 18px; font-size: 15.5px; }
+
+.cal-axis-wrap {
+  background: linear-gradient(100deg, rgba(194, 71, 47, .07), rgba(255, 251, 242, .6) 45%, rgba(29, 125, 140, .08));
+  border: 1.5px dashed var(--tl-line); border-radius: 16px;
+  padding: 20px 18px 12px; overflow-x: auto;
+}
+.cal-axis { display: flex; justify-content: space-between; gap: 14px; min-width: 640px; position: relative; padding-top: 8px; }
+.cal-axis::before { content: ''; position: absolute; left: 8px; right: 8px; top: 17px; height: 3px; border-radius: 2px; background: var(--tl-line); }
+.cal-tick { position: relative; display: flex; flex-direction: column; align-items: center; gap: 2px; text-align: center; flex: 1 0 0; }
+.cal-dot { width: 14px; height: 14px; border-radius: 50%; border: 3px solid #fff; margin-bottom: 4px; }
+.cal-tick.bce .cal-dot { background: var(--tl-china); box-shadow: 0 0 0 2px var(--tl-china); }
+.cal-tick.ce .cal-dot { background: var(--tl-world); box-shadow: 0 0 0 2px var(--tl-world); }
+.cal-tick.now .cal-dot { background: var(--tl-pair); box-shadow: 0 0 0 2px var(--tl-pair); }
+.cal-tick b { font-size: 15px; line-height: 1.35; }
+.cal-tick.bce b { color: var(--tl-china-deep); }
+.cal-tick.ce b { color: var(--tl-world-deep); }
+.cal-tick.now b { color: var(--tl-pair-deep); }
+.cal-tick small { font-size: 12px; color: var(--tl-ink-soft); line-height: 1.4; }
+.cal-axis-note { margin: 10px 0 0; font-size: 13.5px; color: var(--tl-ink-soft); text-align: center; }
+
+.cal-rules { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 18px; }
+.cal-rule {
+  position: relative; background: #fff; border: 1.5px solid var(--tl-line);
+  border-radius: 16px; padding: 16px 16px 12px 16px;
+}
+.cal-rule-no {
+  position: absolute; top: -12px; left: 14px; width: 26px; height: 26px;
+  border-radius: 50%; background: var(--tl-pair); color: #fff;
+  font-weight: 800; font-size: 15px; display: inline-flex; align-items: center; justify-content: center;
+}
+.cal-rule h3 { margin: 2px 0 6px; font-size: 17.5px; }
+.cal-rule p { margin: 0; font-size: 14.5px; line-height: 1.65; }
+.cal-rule-example {
+  margin-top: 8px !important; background: var(--tl-pair-soft);
+  border-radius: 10px; padding: 6px 10px; font-size: 13.5px !important;
+  color: var(--tl-pair-deep); font-weight: 600;
+}
+.cal-quiz { margin-top: 18px; border-top: 1.5px dashed var(--tl-line); padding-top: 14px; }
+.cal-quiz > h3 { margin: 0 0 10px; font-size: 19px; }
+.cal-quiz-item {
+  background: #fff; border: 1.5px solid var(--tl-line); border-radius: 14px;
+  padding: 0; margin-bottom: 8px; overflow: hidden;
+}
+.cal-quiz-item summary {
+  cursor: pointer; list-style: none; padding: 10px 16px;
+  font-weight: 700; font-size: 15.5px; display: flex; align-items: center; gap: 8px;
+}
+.cal-quiz-item summary::-webkit-details-marker { display: none; }
+.cal-quiz-item summary::before { content: '＋'; color: var(--tl-pair); font-weight: 800; }
+.cal-quiz-item[open] summary::before { content: '－'; }
+.cal-quiz-item summary:hover { background: var(--tl-pair-soft); }
+.cal-quiz-item p { margin: 0; padding: 0 16px 12px 40px; font-size: 15px; color: var(--tl-ink); }
+
+/* ---------- 竖版朝代更替时间轴 ---------- */
+.dyn-section { margin-top: 30px; }
+.dyn-section > h2 { margin: 0 0 6px; font-size: 24px; }
+.dyn-legend { margin: 0 0 18px; font-size: 14.5px; color: var(--tl-ink-soft); }
+.dyn-legend b { color: var(--tl-ink); }
+
+.dyn-flow { list-style: none; margin: 0; padding: 0 0 4px; position: relative; }
+.dyn-flow::before {
+  content: ''; position: absolute; left: 26px; top: 6px; bottom: 6px;
+  border-left: 3px dashed var(--tl-line);
+}
+.dyn-cap {
+  position: relative; margin: 0 0 16px 64px; width: fit-content;
+  color: var(--tl-ink-soft); font-size: 14.5px;
+  background: rgba(255, 255, 255, .75); border: 1.5px dashed var(--tl-line);
+  border-radius: 999px; padding: 5px 16px;
+}
+.dyn-cap.dyn-end { margin-top: 16px; margin-bottom: 0; color: var(--tl-pair-deep); border-color: var(--tl-pair); font-weight: 700; }
+
+.dyn-band {
+  position: relative; margin: 0 0 16px 64px;
+  background: var(--tl-card); border: 1.5px solid rgba(120, 84, 40, .14);
+  border-top: 4px solid var(--band-accent, #b07d3a);
+  border-radius: 16px; padding: 14px 18px 12px;
+  box-shadow: 0 4px 12px rgba(120, 84, 40, .08);
+}
+.dyn-band::before {
+  content: ''; position: absolute; left: -42px; top: 24px;
+  width: 12px; height: 12px; border-radius: 50%;
+  background: var(--band-accent, #b07d3a);
+  border: 2.5px solid #fff; box-shadow: 0 0 0 2px var(--band-accent, #b07d3a);
+}
+.dyn-band-head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; }
+.dyn-band-head h3 { margin: 0; font-size: 24px; line-height: 1.3; }
+.dyn-duration {
+  font-size: 14px; font-weight: 800; padding: 2px 12px; border-radius: 999px;
+  background: color-mix(in srgb, var(--band-accent, #b07d3a) 14%, #fff);
+  color: color-mix(in srgb, var(--band-accent, #b07d3a) 75%, #000);
+}
+.dyn-zone { font-size: 13px; font-weight: 800; padding: 2px 10px; border-radius: 999px; }
+.dyn-zone.bce { background: var(--tl-china-soft); color: var(--tl-china-deep); }
+.dyn-zone.cross { background: var(--tl-pair-soft); color: var(--tl-pair-deep); }
+.dyn-zone.ce { background: var(--tl-world-soft); color: var(--tl-world-deep); }
+.dyn-span { margin: 0; font-size: 15px; font-weight: 700; color: var(--tl-ink-soft); }
+.dyn-line { margin: 8px 0 0; font-size: 15.5px; line-height: 1.65; display: flex; align-items: baseline; gap: 8px; }
+.dyn-line span {
+  flex: 0 0 auto; font-size: 12.5px; font-weight: 800; color: #fff;
+  border-radius: 6px; padding: 1px 8px; transform: translateY(-1px);
+}
+.dyn-line.rise span { background: #2e7d64; }
+.dyn-line.fall span { background: #a8654a; }
+.dyn-capital { margin: 8px 0 0; font-size: 14px; color: var(--tl-ink-soft); }
+.dyn-note {
+  margin: 8px 0 0; width: fit-content; max-width: 100%;
+  font-size: 13.5px; color: var(--tl-ink-soft);
+  background: var(--tl-paper); border-radius: 10px; padding: 4px 12px;
+}
+
+.dyn-bridge {
+  position: relative; margin: 0 0 16px 64px; width: fit-content; max-width: calc(100% - 64px);
+  display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px;
+  background: var(--tl-pair-soft); border: 1.5px dashed var(--tl-pair);
+  border-radius: 999px; padding: 5px 16px;
+}
+.dyn-bridge::before {
+  content: ''; position: absolute; left: -42px; top: 50%; transform: translateY(-50%);
+  width: 12px; height: 12px; border-radius: 50%;
+  background: var(--tl-pair); border: 2.5px solid #fff; box-shadow: 0 0 0 2px var(--tl-pair);
+}
+.dyn-bridge-mark { font-size: 12px; font-weight: 800; color: var(--tl-pair-deep); letter-spacing: .06em; }
+.dyn-bridge b { font-size: 15px; color: var(--tl-ink); }
+.dyn-bridge small { font-size: 13.5px; font-weight: 700; color: var(--tl-pair-deep); }
+
+/* ---------- 窄屏 ---------- */
+@media (max-width: 920px) {
+  .dyn-hero { padding: 22px 18px; border-radius: 20px; }
+  .cal-class { padding: 18px 14px 14px; border-radius: 16px; }
+  .cal-rules { grid-template-columns: 1fr; }
+  .cal-rule { padding-top: 18px; }
+  .dyn-band, .dyn-bridge, .dyn-cap { margin-left: 48px; }
+  .dyn-band::before, .dyn-bridge::before { left: -34px; }
+  .dyn-flow::before { left: 18px; }
+  .dyn-band-head h3 { font-size: 21px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tl-back, .tl-back:hover { transition: none; transform: none; }
+}

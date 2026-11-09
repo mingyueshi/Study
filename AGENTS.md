@@ -10,7 +10,6 @@
 
 | 目录 | 是什么 | 技术形态 |
 |---|---|---|
-| `primary/` | 乐学堂 · 小学离线学习册（14 个学习页面） | 纯 HTML+JS+CSS，双击即开 |
 | `primary-system/` | 乐学堂统一系统（多账号、多教材、Nova 后台） | Django 单体，Python 3.12+，SQLite |
 | `personal-learning/` | 个人学习系统（英文学习、AI 基础篇） | 纯 HTML+JS+CSS |
 | `techlex/` | 旧入口，仅重定向到 personal-learning | 单文件 |
@@ -19,10 +18,10 @@
 
 ## 硬性约定
 
-1. **系统之间零依赖**：不要在顶层目录之间新增文件引用、链接或共享代码。系统内复用已有模块（如 `primary/` 的 `speech.js`、`layout.css`、`books.css`），不要复制一份。
-2. **离线优先**：静态系统（primary、personal-learning）不引入 CDN、外部字体、构建步骤或运行时网络依赖。明确标为「需联网」的扩展内容（B站视频、实景照片链接）除外，且页面在无网时必须能正常降级打开。
+1. **系统之间零依赖**。各系统的本地链接、页面、脚本、样式、素材和生成输入都在自己的顶层目录内解析。小学课程从 `primary-system/content_sources/` 生成，生成物随项目保存。系统内优先复用已有模块，如 `speech.js` 和学习页样式。
+2. **离线优先**：静态系统（personal-learning）不引入 CDN、外部字体、构建步骤或运行时网络依赖。明确标为「需联网」的扩展内容（B站视频、实景照片链接）除外，且页面在无网时必须能正常降级打开。
 3. **无版权顾虑**：这是自用内部页面，没有版权问题，可以放心引用外部资源（图片、数据、素材等），不必为版权绕开或替换优质素材；但出处标注等「内容准确性」上的好习惯仍保留。
-4. **数据与逻辑分离**：内容改动只动 `*-data.js`，不改 `*-app.js`；给数据结构加字段时，必须同步在对应的 `test/` 文件补校验。
+4. **数据与逻辑分离**。正文、题目、图注和关联关系写在对应内容源文件中，如 `*-data.js`、`content.js`、`knowledge-*.js` 或专题 JSON。渲染和交互放在应用代码中。新增数据字段要先补对应的结构校验。
 5. **中文标点**：数据字符串里用中文标点（「」、，、：），不要英文双引号和裸换行——测试会拦截。
 6. **不提交本地产物**：`db.sqlite3`、`.local-secret`、`.venv`、备份文件、`.zcode/`、`output/` 等已在 `.gitignore`，不要往里写东西也不要设法入库。
 
@@ -31,32 +30,34 @@
 1. **活泼的界面**：整体风格要明快、有童趣，配色鲜明不沉闷，适度使用圆角、卡片、色块、图标和轻量动效，避免严肃死板的后台式排版。
 2. **清晰易读的大字号**：面向小学生和家长，正文字号要偏大、行距要宽松，确保长时间阅读不费力；标题层级要醒目，重点内容（如拼音、读音、答案）应进一步放大或加粗突出。
 3. **桌面端优先**：主要适配桌面端宽屏（横屏）和竖屏显示，布局、间距、字号都按桌面端阅读体验设计；移动端只需保证基本可用，不投入过多精力做移动端专门优化。
+4. **专题页面整组适应宽屏**。统一版历史、地理图谱、人类起源、天文探索、文学常识和科学实验室均随窗口展开，首页和子页使用同一宽度规则。沿用 `base.html`、`platform.css` 的导航、主题和自适应留白。在专题样式中按页面解除外壳和工作区的固定宽度上限。正文、侧栏、图片和弹窗可以保留适合阅读的尺寸约束。
+5. **验证实际布局**。改专题宽度时用浏览器逐页核对首页、目录、详情和带参数的深链接，覆盖约 390 像素窄屏、820 像素竖屏及 1920–3440 像素宽屏。确认页头与工作区对齐、页面无横向溢出，并抽查筛选、跳转和本地媒体。
 
-## 数据测试（改完必须跑）
+## 小学课程源与测试
 
-primary 的测试不依赖浏览器，直接用 node 跑：
+小学版统一维护在 `primary-system/`。文件源、配套素材和源数据测试在 `primary-system/content_sources/`，具体对应关系见[课程文件源说明](primary-system/content_sources/README.md)。数学、语文、英语的教材与题库生成共用源数据，保留知识点、事件、地点和题目的稳定 ID。修改发布内容时同步更新 `primary-system/README.md` 的入口和规模。
+
+在 `primary-system/` 内运行：
 
 ```sh
-node primary/test/test-geo.js        # 改 geo/knowledge-*.js 后
-node primary/test/test-knowledge.js  # 改 knowledge-data.js 后
+make test-content-sources   # 源数据结构、引用与素材
+make content-data          # 重生成教材、专题、作文坊、语法、日常用语和题库批次
+make test-frontend
+make test
 ```
 
-对应关系：`test-knowledge`→语文、`test-math-knowledge`→数学、`test-english`→教材同步单词、`test-words`→场景单词、`test-idioms`→成语本、`test-writing`→作文坊、`test-chain`→成语接龙、`test-grammar`→英语语法、`test-phonetics`→英语音标、`test-geo`/`test-astro`/`test-history`/`test-lit`/`test-sci`→五本探索册、`test-timeline`→历史双轨时间轴。personal-learning 的测试是 `node personal-learning/test/test-structure.js` 与 `test-theme.js`。
+只改一个领域时跑对应的源测试、生成命令和 Django 测试。新增数据结构时先写校验。已发布题库批次按原指纹验证；有内容变动按题库文档处理新批次。personal-learning 的测试为 `node personal-learning/test/test-structure.js` 与 `node personal-learning/test/test-theme.js`。
 
-改了哪个 data 就跑哪个 test；新增系统或新增数据结构时，先写测试再填数据。
+## primary-system/ 的专题编排
 
-## primary/ 的固定模式
-
-每个学习册一套：入口 `xxx.html` + 数据 `xxx-data.js` + 逻辑 `xxx-app.js` + 样式 `xxx.css`，可选 `xxx-figures.js`（SVG 图示与互动演示）、`xxx-photos.js`、`xxx-videos.js`。要点：
-
-- 知识卡数据字段：`id`、`title`、`fig`、`overview`、`items`、`example`（q/a/steps）、`mistakes`、`recall`；`fig` 必须是对应 figures 文件里注册的 id，否则测试报错。
-- 知识点 id 命名：学段前缀 + 站点号 + 序号，如 `gu1-2`（地理）、`au1-2`（天文）、`hu1-3`（历史）、`lu3-2`（文学）、`su2-2`（科学）、`mu1-1`（数学）。
-- 照片放 `images/` 对应子目录（`images/astro/`、`images/lessons/` 等）。
-- 新增学习册要在根 README 的「现有系统/快速开始」和 `primary/README.md` 同步登记；修改数据规模（如「8 单元 27 课」）时同步更新两处 README 里的数字。
-
-**例外：地理、历史、英语语法与英语音标是自包含子目录** `primary/geo/`、`primary/history/`、`primary/grammar/`、`primary/phonetics/`（共用同一套「平台引擎」：`index.html + content.js + knowledge-*.js + app.js + platform-theme.css + styles.css`，可选 `media.js / diagrams.js / lab.js / assets/`），所有引用都在目录内相对解析，整目录可单独拷走。geo/history 是多媒体版（含图片、音频、动画实验室）；grammar 是语法精讲版、phonetics 是音标精讲版（暂无媒体层，按需可加）。知识点 id 前缀：`gu*`（地理）、`hu*`（历史）、`gr*`（语法）、`ph*`（音标）；数据校验命令：`node primary/test/test-geo.js`、`node primary/test/test-history.js`、`node primary/test/test-grammar.js`、`node primary/test/test-phonetics.js`。**以后新增学科一律用这种自包含子目录模式**。
-
-`primary/history-timeline/` 是自包含的历史时间轴系统。门户 `index.html` 导航到双轨总轴 `timeline.html`、时代站 `era.html?era=`、事件详情 `event.html?event=` 与朝代更替 `dynasties.html`。数据在 `content.js`（时代）、`timeline-data.js`（事件与对照）和 `dynasty-data.js`（朝代速览、更替、公元纪年）。`shared.js` 提供各页共用的索引、年代行与链接。时代、事件、朝代 id 用于深链接，事件 id 前缀为 `tc*` 或 `tw*`。校验命令为 `node primary/test/test-timeline.js`。
+- 教材按册次和单元编排。学科专题由 `catalog/entry_registry.py` 注册学习广场入口。只读专题采用文件编排，模板、数据和本地素材随项目发布，无需入库，可复用同一课程外壳。各应用的数据维护方式见对应的 `data/README.md` 或[系统设计](primary-system/docs/system-design.md)。
+- **历史以时间轴为主，地理以地图为主**。学习广场的主卡分别直达历史双轨总轴和地理图谱的中国地图。历史精讲与地理小课堂作为二级入口，从专题导航、时代、事件、地图工具或地点档案进入。地理的「国家与地区」资料查阅走原有资料探索入口。
+- **每项内容有一个主出处**。事件正文集中在详情，时代站用简版事件卡。公元纪年与朝代顺序集中在朝代更替页，精讲侧重制度、因果、史料与练习。河流走向、长度和实景图集中在地图档案与图册，小课堂侧重流域、泥沙等概念及练习。通过稳定 ID 互相链接，保留已有深链接和本机自测记录。
+- **天文归地理，文学归语文**。学习广场的「地理」下先放地理图谱，再放天文探索。「语文」下设文学常识。天文按观测与航天主题分站，文学按体裁、作品和作家分组。星表、古诗文原文、成语典故、元素档案和未解之谜案卷保留原有入口，课程通过关联链接引导查阅。
+- **科学专题**依次放科学实验室、人类起源和未解之谜研究所。实验室按实验主题分室，人类起源和未解之谜侧重从线索出发做证据判断。旧的「探索」筛选链接归到「科学」。
+- **专题文件源**。历史和地理在 `content_sources/` 下的 `history/`、`history-timeline/`、`geo/`、`geo-map/`。天文、文学和科学在同目录的 `astro-*`、`lit-*`、`sci-*` 与 `images/`。修改后运行 `make study-topics-data`。专题关联和去重内容维护在 `static/study_topics/connections-data.js`，主题适配维护在 `platform-bridge.css` 和 `course.css`。
+- **同步验证**。用 `.venv/bin/python scripts/build_study_topics.py --check`、`make test-frontend` 和 `.venv/bin/python manage.py test catalog.test_study_topics` 核对生成结果、关联和入口。
+- **人类起源**沿脚印与化石、人类家谱、远古生活、智人迁徙和中国遗址五站编排。先看实物或图示，再区分观察与解释，最后做证据判断。正文、图注、题目和出处维护在 `humanorigins/data/stations.json`，修改后运行 `.venv/bin/python manage.py test humanorigins`。
 
 ## primary-system/ 的运行方式
 
@@ -67,9 +68,7 @@ PRIMARY_DEBUG=1 .venv/bin/python manage.py runserver 127.0.0.1:8012
 ```
 
 - 已有数据库默认只校验不重置；重置用 `python3.12 bootstrap.py --refresh-data`，含个人记录或人工修订时会拒绝——不要绕过这个保护，先问用户。
-- 设计基线在 `primary-system/docs/system-design.md`；区分两条管线：**教材按册次/单元编排**，**学科功能是独立 Django app**（words、idioms、phonetics、writing、poetry 等），不要把学科功能塞回通用阅读器。
-- 各 app 的 `data/README.md` 说明数据维护方式，改数据前先读对应文件。
-- 端口固定 127.0.0.1:8012，不要改成其他端口。
+- 端口固定为 `8012`，本地默认绑定 `127.0.0.1`。用户要求局域网访问时使用当前局域网地址，并加入 `PRIMARY_ALLOWED_HOSTS`。重启现有服务时先核对监听进程，沿用原有地址和数据库配置，重启后检查实际入口是否返回新版。
 
 ## Git 习惯
 

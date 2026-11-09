@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 292">
+  <rect width="720" height="292" rx="20" fill="#f7f1de"/>
+  <path d="M360 230v-32q0-20-20-34L208 76M360 198q0-20 20-34L525 76" fill="none" stroke="#8f6a42" stroke-width="8" stroke-linecap="round"/>
+  <path d="M406 148q40 14 61 0l41-24m-65 0q27 8 50-2l43-20m-76 12 9-30" fill="none" stroke="#ab8653" stroke-width="4" stroke-linecap="round"/>
+  <g fill="#99602b">
+    <circle cx="360" cy="198" r="8"/><circle cx="360" cy="231" r="8"/>
+  </g>
+  <g font-family="PingFang SC, Microsoft YaHei, sans-serif" text-anchor="middle" font-weight="700">
+    <rect x="125" y="25" width="166" height="52" rx="13" fill="#d8e8da"/>
+    <text x="208" y="58" font-size="23" fill="#245644">今天的黑猩猩</text>
+    <rect x="449" y="25" width="152" height="52" rx="13" fill="#f5dc95"/>
+    <text x="525" y="58" font-size="23" fill="#603d1e">今天的智人</text>
+    <text x="557" y="151" font-size="18" fill="#795733">古人类分支</text>
+    <text x="360" y="266" font-size="21" fill="#795733">共同祖先</text>
+  </g>
+</svg>
