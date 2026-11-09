@@ -1,0 +1,70 @@
+{
+  "lessons": [
+    {
+      "id": "symbols",
+      "title": "音标是一张发音地图",
+      "explanation": "字母告诉你单词怎么写，音标告诉你怎么读。词典常把音标写在两道斜线里。比如 ship 有四个字母，开头的 sh 合起来只读一个音 /ʃ/。",
+      "practice": "先听整词，再试着把 /ʃ/、/ɪ/、/p/ 三个音连起来。",
+      "phoneme_ids": ["33-sh", "01-i", "21-p"],
+      "examples": [{"word": "ship", "ipa": "/ʃɪp/", "meaning": "船"}]
+    },
+    {
+      "id": "vowels-consonants",
+      "title": "认识元音和辅音",
+      "explanation": "发元音时，嘴里的气流比较通畅，像 /æ/。发许多辅音时，嘴唇或舌头会挡住气流，或把通道变窄。发 /m/ 时双唇合上，气从鼻子出去。",
+      "practice": "读 map，先找中间的元音 /æ/，再听它前面的 /m/ 和后面的 /p/。读完 /p/ 就停，试着只读一拍。",
+      "phoneme_ids": ["03-ae", "37-m", "21-p"],
+      "examples": [{"word": "map", "ipa": "/mæp/", "meaning": "地图"}]
+    },
+    {
+      "id": "vowel-glide",
+      "title": "单元音站稳，双元音滑过去",
+      "explanation": "发单元音时，口型大致保持一个样子，比如 /e/。发双元音时，口型从一个位置滑向另一个位置，比如 /eɪ/，整段仍在同一个音节里。",
+      "practice": "轮流读 pen 和 day，感受嘴巴在 /e/ 时比较稳，在 /eɪ/ 时有滑动。两词各拍一下手。",
+      "phoneme_ids": ["02-e", "13-ay"],
+      "examples": [
+        {"word": "pen", "ipa": "/pen/", "meaning": "笔"},
+        {"word": "day", "ipa": "/deɪ/", "meaning": "一天"}
+      ]
+    },
+    {
+      "id": "voicing",
+      "title": "清音和浊音，摸摸喉咙",
+      "explanation": "发清音时声带不振动，发浊音时声带振动。/f/ 和 /v/ 都把上牙轻放在下唇边，/v/ 会多一点像小马达一样的振动。",
+      "practice": "手指轻搭在喉咙上，分别拉长读 /f/ 和 /v/，感受哪个在振动。再听 fan 和 van 的开头。",
+      "phoneme_ids": ["27-f", "28-v"],
+      "examples": [
+        {"word": "fan", "ipa": "/fæn/", "meaning": "风扇"},
+        {"word": "van", "ipa": "/væn/", "meaning": "厢式小货车"}
+      ]
+    },
+    {
+      "id": "stress",
+      "title": "找出音节里的重拍",
+      "explanation": "音节可以听成单词里的小节拍。词典用点隔开音节，用 ˈ 标出重读音节的开头。英式读音 banana 中间一拍读得更突出，前后两拍的元音都轻轻读成 /ə/。",
+      "practice": "听 banana，拍三下手，让中间一下最明显。再听 system，找一找重拍换到了哪儿。",
+      "phoneme_ids": ["07-schwa", "09-ar"],
+      "examples": [
+        {"word": "banana", "ipa": "/bəˈnɑː.nə/", "meaning": "香蕉"},
+        {"word": "system", "ipa": "/ˈsɪs.təm/", "meaning": "系统"}
+      ]
+    },
+    {
+      "id": "minimal-pairs",
+      "title": "换一个音，意思就变了",
+      "explanation": "两个词只差一个音，可以用来练辨音。ship 和 sheep 的开头、结尾相同，中间分别是 /ɪ/ 和 /iː/。ː 提醒你读的是长元音，两个音的口型和听感也有差别。",
+      "practice": "来回点读这两个词，再请同伴读其中一个。你听到的是一艘船，还是一只羊？",
+      "phoneme_ids": ["01-i", "08-ee"],
+      "examples": [
+        {"word": "ship", "ipa": "/ʃɪp/", "meaning": "船"},
+        {"word": "sheep", "ipa": "/ʃiːp/", "meaning": "绵羊"}
+      ]
+    }
+  ],
+  "sources": [
+    {"label": "剑桥词典 · 音标与重音符号", "url": "https://dictionary.cambridge.org/us/help/phonetics"},
+    {"label": "英国文化教育协会 · 双元音", "url": "https://www.teachingenglish.org.uk/professional-development/teachers/teaching-knowledge-database/d-h/diphthong"},
+    {"label": "英国文化教育协会 · 清辅音和浊辅音", "url": "https://www.teachingenglish.org.uk/teaching-resources/teaching-secondary/activities/beginner-a1/voiced-and-unvoiced-consonants"},
+    {"label": "英国文化教育协会 · 弱读音 /ə/", "url": "https://www.teachingenglish.org.uk/professional-development/teachers/teaching-knowledge-database/q-s/schwa"}
+  ]
+}

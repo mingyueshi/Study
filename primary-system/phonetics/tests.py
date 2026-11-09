@@ -7,7 +7,7 @@ from lexicon.models import LexicalEntry, LexiconSource, Pronunciation, Sense, So
     SourceRelease
 
 from .catalog import EXAMPLE_SOURCES, PHONEME_COUNT, example_index, grouped_phonemes, load_curriculum, \
-    phoneme_cards, validate
+    phoneme_cards, pronunciation_theory, validate
 
 AUDIO_DIR = Path(__file__).resolve().parent.parent / 'static' / 'phonetics' / 'audio'
 
@@ -64,6 +64,28 @@ class PhonemeAudioTests(SimpleTestCase):
         self.assertEqual(missing, [], f'缺少音素音频：{missing}')
 
 
+class TheoryDataTests(SimpleTestCase):
+    def test_lessons_have_practice_and_reuse_existing_sounds(self):
+        phonemes = load_curriculum()['phonemes']
+        theory = pronunciation_theory([{'phonemes': phonemes}])
+        lessons = theory['lessons']
+        self.assertEqual(len(lessons), 6)
+        self.assertEqual(len({lesson['id'] for lesson in lessons}), len(lessons))
+        for lesson in lessons:
+            with self.subTest(lesson=lesson['id']):
+                for field in ('title', 'explanation', 'practice'):
+                    self.assertTrue(lesson[field].strip())
+                self.assertTrue(lesson['sounds'])
+                self.assertTrue(lesson['examples'])
+                for sound in lesson['sounds']:
+                    self.assertIn(sound, phonemes)
+                for example in lesson['examples']:
+                    self.assertRegex(example['ipa'], r'^/[^/]+/$')
+                    self.assertTrue(example['word'].strip() and example['meaning'].strip())
+        self.assertTrue(theory['sources'])
+        self.assertTrue(all(source['url'].startswith('https://') for source in theory['sources']))
+
+
 class ExampleResolutionTests(TestCase):
     """例词回查词库：用夹具验证解析与降级（测试库不含基线数据）。"""
 
@@ -116,6 +138,15 @@ class ExampleResolutionTests(TestCase):
 
 
 class PhoneticsPageTests(TestCase):
+    def test_theory_tab_renders_practice_with_existing_audio(self):
+        response = self.client.get('/phonetics/')
+        self.assertContains(response, 'href="#group-theory"', count=1)
+        self.assertContains(response, 'id="group-theory"', count=1)
+        self.assertContains(response, 'class="ph-theory-card"', count=6)
+        self.assertContains(response, 'data-say="banana"')
+        self.assertContains(response, 'data-audio="/static/phonetics/audio/07-schwa.m4a"')
+        self.assertContains(response, '/bəˈnɑː.nə/')
+
     def test_index_renders_all_groups(self):
         response = self.client.get('/phonetics/')
         self.assertEqual(response.status_code, 200)

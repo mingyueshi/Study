@@ -15,6 +15,7 @@ from lexicon.models import active_records
 
 SOURCE_CODE = 'primary-phonetics'
 CURRICULUM_PATH = Path(__file__).parent / 'data' / 'phonemes.json'
+THEORY_PATH = CURRICULUM_PATH.with_name('theory.json')
 PHONEME_COUNT = 44
 EXAMPLE_SOURCES = ('primary-words', 'primary-english')
 
@@ -91,3 +92,16 @@ def grouped_phonemes():
         {**group, 'phonemes': [card for card in cards if card['group'] == group['code']]}
         for group in curriculum['groups']
     ]
+
+
+def pronunciation_theory(groups):
+    """发音基础引用已编排的音素卡，复用原声与例词回退。"""
+    with THEORY_PATH.open(encoding='utf-8') as file:
+        theory = json.load(file)
+    cards = {card['id']: card for group in groups for card in group['phonemes']}
+    for lesson in theory['lessons']:
+        try:
+            lesson['sounds'] = [cards[ident] for ident in lesson['phoneme_ids']]
+        except KeyError as error:
+            raise ImproperlyConfigured(f'发音基础 {lesson["id"]} 引用了未知音素：{error}') from error
+    return theory

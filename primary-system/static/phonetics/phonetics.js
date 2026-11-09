@@ -38,8 +38,9 @@
       activate(code);
       history.replaceState(null, '', `#group-${code}`);
     });
-    const initial = (location.hash.match(/^#group-([\w-]+)$/) || [])[1];
-    activate(initial && groups.some((group) => group.id === `group-${initial}`)
-      ? initial : groups[0].id.replace('group-', ''));
+    const target = document.getElementById(location.hash.slice(1));
+    const initialGroup = target?.closest('.ph-group') || groups[0];
+    activate(initialGroup.id.replace('group-', ''));
+    if (target && target !== initialGroup && initialGroup.contains(target)) target.scrollIntoView();
   }
 })();

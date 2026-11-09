@@ -1,0 +1,34 @@
+{% load static %}
+<section class="ph-group" id="group-theory" aria-labelledby="ph-theory-title">
+  <div class="section-heading">
+    <div>
+      <h2 id="ph-theory-title">发音基础</h2>
+      <p>点音标听一个音，点单词听整词。例词音标采用英式写法，点读跟随语音设置。</p>
+    </div>
+  </div>
+  <div class="ph-grid">
+    {% for lesson in theory.lessons %}
+    <article class="ph-theory-card" id="theory-{{ lesson.id }}">
+      <h3>{{ lesson.title }}</h3>
+      <p>{{ lesson.explanation }}</p>
+      <div class="ph-theory-sounds" role="group" aria-label="音素原声">
+        {% for sound in lesson.sounds %}
+        <button type="button" data-audio="{% static sound.audio %}" data-fallback="{{ sound.key_word }}" aria-label="听音标 {{ sound.symbol }}">{{ sound.symbol }}</button>
+        {% endfor %}
+      </div>
+      <div class="ph-examples" role="group" aria-label="例词点读">
+        {% for example in lesson.examples %}
+        <button class="ph-word" type="button" data-say="{{ example.word }}">
+          <b lang="en">{{ example.word }}</b><i>{{ example.ipa }}</i><i>{{ example.meaning }}</i>
+        </button>
+        {% endfor %}
+      </div>
+      <p class="ph-theory-practice"><strong>试一试</strong> {{ lesson.practice }}</p>
+    </article>
+    {% endfor %}
+  </div>
+  <details class="ph-theory-sources">
+    <summary>参考资料（需联网）</summary>
+    <ul>{% for source in theory.sources %}<li><a href="{{ source.url }}">{{ source.label }}</a></li>{% endfor %}</ul>
+  </details>
+</section>

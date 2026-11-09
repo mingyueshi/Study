@@ -6,6 +6,27 @@
 
 .ph-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); align-items: stretch; gap: 16px; }
 
+.ph-theory-card {
+  display: flex; flex-direction: column; gap: 12px; min-width: 0; scroll-margin-top: 24px;
+  padding: 18px; border: 1px solid var(--line); border-radius: 18px; background: var(--white);
+}
+.ph-theory-card h3 { margin: 0; font-size: 21px; }
+.ph-theory-card p { margin: 0; line-height: 1.7; }
+.ph-theory-card .ph-examples { margin-top: 0; }
+.ph-theory-sounds { display: flex; flex-wrap: wrap; gap: 8px; }
+.ph-theory-sounds button {
+  min-height: 44px; min-width: 44px; padding: 5px 12px; border: 1px solid var(--line);
+  border-radius: 10px; color: var(--green); background: var(--soft); font: inherit;
+  font-size: 21px; font-weight: 750; cursor: pointer;
+}
+.ph-theory-sounds button:hover { border-color: var(--green); }
+.ph-theory-card .ph-theory-practice {
+  margin-top: auto; padding: 9px 11px; border-radius: 10px; background: var(--soft); font-size: 16px;
+}
+.ph-theory-sources { margin-top: 16px; font-size: 15px; }
+.ph-theory-sources summary { cursor: pointer; }
+.ph-theory-sources a { color: var(--green); text-decoration: underline; }
+
 .ph-card { display: flex; flex-direction: column; min-width: 0; padding: 16px 18px; border: 1px solid #e0e7e0; border-top: 4px solid color-mix(in srgb, var(--c, #2f9e5f) 55%, #fffefa); border-radius: 18px; background: var(--white, #fff); box-shadow: 0 3px 0 #233e3704; transition: transform .14s ease, box-shadow .14s ease, border-color .14s ease; }
 .ph-card:hover, .ph-card:focus-within { transform: translateY(-3px); border-color: #cfe0c2; box-shadow: 0 8px 18px #233e3710; }
 
@@ -49,6 +70,9 @@
 .library-layout .unit-nav .unit-count { font-size: 12px; }
 .library-layout .unit-nav .unit-dot { margin-right: 6px; font-size: .92em; }
 
+@media (min-width: 1480px) {
+  #group-theory .ph-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
 @media (max-width: 640px) {
   .ph-grid { grid-template-columns: minmax(0, 1fr); }
   .ph-symbol-text { font-size: 34px; }
@@ -57,5 +81,5 @@
 @media print {
   .unit-nav, .tts-bar, .tts-settings, .ph-hear, .section-heading .button { display: none !important; }
   .ph-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .ph-card { break-inside: avoid; box-shadow: none; }
+  .ph-card, .ph-theory-card { break-inside: avoid; box-shadow: none; }
 }
