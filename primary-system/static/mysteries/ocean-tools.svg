@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420" font-family="system-ui, sans-serif">
+  <defs>
+    <linearGradient id="water" x2="0" y2="1" gradientUnits="objectBoundingBox">
+      <stop stop-color="#236e9d"/>
+      <stop offset="1" stop-color="#123552"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="420" fill="#dff5fa"/>
+  <path d="M0 93q40-16 80 0t80 0t80 0t80 0t80 0t80 0t80 0t80 0v327H0z" fill="url(#water)"/>
+  <path d="M0 362q89 4 158 17t130-8q57-19 93-45t69-18q66 16 104-2t86-58v172H0z" fill="#c5a67c"/>
+  <path d="M0 392q125 2 191 11t160-43q60-34 128-26t161-62" fill="none" stroke="#ad8967" stroke-width="6"/>
+  <path d="M99 75h154l-24 29H125z" fill="#133952"/>
+  <path d="M131 75V54h67l17 21" fill="#fff"/>
+  <path d="M154 54V36h32v18m-9-18V23" fill="none" stroke="#133952" stroke-width="5"/>
+  <path d="M167 109l-66 250m74-250 11 265m-4-265 92 258" fill="none" stroke="#94e6fa" stroke-width="2.5" stroke-dasharray="8 7"/>
+  <path d="M225 104q101 38 146 122" fill="none" stroke="#d6edf3" stroke-width="2" stroke-dasharray="5 5"/>
+  <rect x="350" y="225" width="81" height="44" rx="9" fill="#ffe082" stroke="#173a4c" stroke-width="4"/>
+  <circle cx="414" cy="247" r="8" fill="#16394d"/>
+  <path d="M424 240l120 15v42l-120-44" fill="#fff7b9" opacity=".55"/>
+  <path d="M386 267l19 29 34 11m-10-7 9 8-11 2" fill="none" stroke="#ffe082" stroke-width="4" stroke-linecap="round"/>
+  <path d="M504 300v-15m0 5-8-7m8 7 8-10m23 17v-13m0 6-7-5" fill="none" stroke="#d14f46" stroke-width="5" stroke-linecap="round"/>
+  <g fill="#fff" font-size="23" font-weight="700">
+    <text x="41" y="173">声呐测深</text>
+    <text x="431" y="214">摄像观察</text>
+    <text x="346" y="332">机械手取样</text>
+  </g>
+</svg>

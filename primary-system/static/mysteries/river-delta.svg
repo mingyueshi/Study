@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 320" font-family="system-ui, sans-serif">
+  <rect width="640" height="320" fill="#fff5df"/>
+  <path d="M301 0h339v320H248c42-55 55-109 40-162S285 42 301 0z" fill="#b7e7ed"/>
+  <path d="M0 111c104-18 142 57 233 47l66-15 10 42-71 13C133 210 99 137 0 154z" fill="#67bbc9"/>
+  <path d="M245 161c57-60 152-96 202-50 34 29 30 79 10 114-55 29-166-14-212-64z" fill="#e4a968" stroke="#9f632c" stroke-width="3"/>
+  <path d="M0 132c106-21 145 59 246 31m0 0c52-21 116-53 170-52m-170 52c63 7 122-10 207-5m-207 5c47 35 129 60 190 54" fill="none" stroke="#238299" stroke-linecap="round" stroke-width="5"/>
+  <path d="M119 174l18 5-13 12m211-72 16-4-7 13m23 43 17-2-10 13" fill="none" stroke="#176579" stroke-linecap="round" stroke-width="3"/>
+  <g fill="#233e48" font-size="25" font-weight="700">
+    <text x="57" y="84">河流</text>
+    <text x="304" y="267">泥沙堆成的扇形</text>
+    <text x="518" y="84">湖泊</text>
+  </g>
+</svg>

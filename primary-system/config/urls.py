@@ -45,6 +45,7 @@ urlpatterns = [
     path('mathbook/', include('mathbook.urls')),
     path('chinesebook/', include('chinesebook.urls')),
     path('mathformulas/', include('mathformulas.urls')),
+    path('mysteries/', include('mysteries.urls')),
     path('rewards/', include('incentives.urls')),
     path('accounts/profile/', accounts_views.profile, name='profile'),
     path('accounts/register/', accounts_views.register, name='register'),

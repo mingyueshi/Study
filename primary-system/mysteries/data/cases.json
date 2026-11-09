@@ -1,0 +1,223 @@
+{
+  "schema_version": 1,
+  "cases": [
+    {
+      "slug": "mars-life",
+      "title": "火星上曾经有过生命吗？",
+      "category": "行星探索",
+      "icon": "🚀",
+      "summary": "从古河道到岩石上的斑点，追踪火星留下的两类线索。",
+      "opening": "想象你是毅力号火星车的驾驶员。眼前的火星又冷又干，地图上却有一片像河流入湖时留下的扇形地貌。先猜一猜，只看这张照片，你能知道火星上曾经有什么？",
+      "figure": {
+        "path": "mysteries/jezero.jpg",
+        "alt": "从火星上空俯瞰耶泽罗陨石坑，坑边的河道通向一片向坑内展开的扇形地貌",
+        "caption": "耶泽罗陨石坑的轨道影像。颜色标出了地表成分的差异。顺着左边的河道，找找它在哪里展开成扇形。",
+        "credit": "NASA／JPL-Caltech／MSSS／JHU-APL",
+        "source": 1,
+        "detail_path": "mysteries/river-delta.svg",
+        "detail_alt": "左边的河流把泥沙带进右边的湖，河口逐渐堆起一片扇形地貌",
+        "detail_label": "看图了解扇形地貌怎样形成",
+        "detail_prompt": "在这张示意图里，水流进湖泊后变慢，带来的泥沙在河口慢慢堆积。回头看看火星照片，你能指出河道和扇形分别在哪里吗？"
+      },
+      "evidence": [
+        {
+          "title": "河流留下的扇形",
+          "observation": "陨石坑边有狭窄的河道，河道末端是一片扇形地貌。火星车还在附近看到了不同的岩层。",
+          "meaning": "地形和岩层一起支持一个判断：古代有水流进这个坑，留下了泥沙和石块。",
+          "source": 2
+        },
+        {
+          "title": "有些岩层适合找线索",
+          "observation": "火星车在旧河道附近看见了层层堆叠的沉积岩。沉积岩可以由泥沙等物质堆积形成。",
+          "meaning": "如果过去有过微小的生命，有些痕迹可能被埋在沉积物里。研究人员因此会仔细检查这些岩石。",
+          "source": 2
+        },
+        {
+          "title": "岩石上的浅色斑点",
+          "observation": "毅力号在一块岩石上看见浅色小斑点，斑点的边缘和内部含有不同的矿物。",
+          "meaning": "这些斑点是值得调查的疑似生命线索。科学家还要查清没有生命参与的化学反应能不能造成类似斑点。",
+          "source": 3
+        }
+      ],
+      "challenge": {
+        "prompt": "如果手头只有古河道的照片，哪句话最有依据？",
+        "choices": [
+          {"label": "古河道里一定生活过鱼。", "correct": false, "feedback": "照片里有地形线索。要判断有没有鱼，还需要能指向鱼或其他生物的证据。"},
+          {"label": "这个地方很可能曾有水流过。", "correct": true, "feedback": "河道连着扇形地貌，像水流把泥沙带到开阔处留下的形状。要追查生命，还得看岩石里有没有更直接的线索。"},
+          {"label": "这个坑现在一定还有一湖水。", "correct": false, "feedback": "地形可以保留过去的痕迹。要判断现在有多少水，需要观察今天的火星。"}
+        ]
+      },
+      "known": "耶泽罗陨石坑过去有河流和湖泊。",
+      "unresolved": "这些岩石里有没有古代生命留下的可靠痕迹？",
+      "next_step": "分析更多样本，并用实验检验普通化学反应能否做出类似的斑点。",
+      "deep_dive": "有水、有适合微生物生活的环境、发现生命，分别需要不同的证据。评估疑似生命线索时，可以比较它的形状、矿物组成和所在岩层，再检查多种成因能否同时解释这些观察。",
+      "checked_on": "2026-11-09",
+      "sources": [
+        {"title": "NASA｜耶泽罗陨石坑轨道影像", "url": "https://science.nasa.gov/photojournal/jezero-crater-mars-2020s-landing-site/"},
+        {"title": "NASA｜毅力号调查火星古河道", "url": "https://science.nasa.gov/resource/perseverance-rover-zooms-in-on-ancient-mars-river/"},
+        {"title": "NASA｜疑似生命线索专题报告", "url": "https://science.nasa.gov/mars/the-mars-report/2025-september-special-edition/"}
+      ]
+    },
+    {
+      "slug": "dark-matter",
+      "title": "暗物质到底是什么？",
+      "category": "宇宙探索",
+      "icon": "🌌",
+      "summary": "星系边缘的星星跑得出乎意料，跟着引力找原因。",
+      "opening": "假设你只知道一座星系里看得见的恒星和气体有多少。你可以估算它们的引力，再猜猜外圈恒星应该跑多快。可是，望远镜测出的速度比这个估算高。哪部分线索还没算进去？",
+      "figure": {
+        "path": "mysteries/galaxy-speed.svg",
+        "alt": "示意图横轴为到星系中心的距离，纵轴为恒星速度。外圈的观测示意线高于仅计可见物质的估算示意线",
+        "caption": "星系转速示意图。顺着两条线往右看，越到星系外圈，哪条线更高？曲线仅用来说明差异。",
+        "credit": "乐学堂示意图，依据 NASA 暗物质专题绘制",
+        "source": 1
+      },
+      "evidence": [
+        {
+          "title": "星系外圈的恒星转得快",
+          "observation": "在许多星系里，离中心很远的恒星仍以较高的速度绕行。",
+          "meaning": "只把能观测到的普通物质算进去，引力常常不够解释这样的速度。",
+          "source": 1
+        },
+        {
+          "title": "遥远的光也会拐弯",
+          "observation": "有些遥远星系的影像被前方的星系团拉成了弧形。这种现象叫引力透镜。",
+          "meaning": "根据光弯了多少，可以估算前方有多少质量。这给了研究人员另一条寻找额外引力的路。",
+          "source": 2
+        },
+        {
+          "title": "两条线索指向额外的质量",
+          "observation": "恒星的运动和光线的弯曲可以用不同的方法测量，两种结果都显示有额外的引力需要解释。",
+          "meaning": "一种主流解释是星系周围还有大量难以直接看见的物质，研究人员称它为暗物质。",
+          "source": 1
+        }
+      ],
+      "challenge": {
+        "prompt": "图里的两条线，最能支持哪项判断？",
+        "choices": [
+          {"label": "所有星系都用完全相同的速度转。", "correct": false, "feedback": "示意图只对照一类常见的观测差异。要比较不同星系，需要分别测量。"},
+          {"label": "图中已经拍到了暗物质粒子。", "correct": false, "feedback": "这张图比较的是速度。要弄清暗物质由什么组成，还要靠别的实验和观测。"},
+          {"label": "仅凭看得见的物质，算出的外圈速度偏低。", "correct": true, "feedback": "看图的右边：表示观测的线在估算线上方。这提醒我们，需要解释为什么外圈的星星转得这么快。"}
+        ]
+      },
+      "known": "恒星运动和光线弯曲给出了额外引力的线索。",
+      "unresolved": "如果额外的引力来自暗物质，它由什么组成？",
+      "next_step": "继续比较更多星系的引力线索，也用实验寻找候选粒子可能留下的信号。",
+      "deep_dive": "引力透镜像一把量质量的尺。研究人员先观察背景星系的图像怎样变形，再推算前方总质量如何分布，最后和能观测到的普通物质相比较。结果还要考虑观测误差和模型假设。",
+      "checked_on": "2026-11-09",
+      "sources": [
+        {"title": "NASA｜暗物质与引力证据", "url": "https://science.nasa.gov/dark-matter/"},
+        {"title": "NASA｜哈勃望远镜看到的引力透镜", "url": "https://science.nasa.gov/mission/hubble/science/science-behind-the-discoveries/hubble-gravitational-lenses/"}
+      ]
+    },
+    {
+      "slug": "deep-ocean",
+      "title": "深海地图上还有哪些未知？",
+      "category": "地球探索",
+      "icon": "🌊",
+      "summary": "给探测队选工具，看看从画地图到认识海底生物还要走几步。",
+      "opening": "你的探测船来到一片海底山上方。地图告诉你山坡的形状，可谁住在山坡上？手里有声呐、摄像机和取样工具，你会先用哪个？",
+      "figure": {
+        "path": "mysteries/ocean-tools.svg",
+        "alt": "海洋剖面示意图，海面上的探测船发出声波，水下机器人照亮海底坡面并能取样",
+        "caption": "从海面测深，再到海底观察和取样。试着在图里找到三种工具各自工作的地方。",
+        "credit": "乐学堂示意图，依据 NOAA 海洋探索资料绘制",
+        "source": 1
+      },
+      "evidence": [
+        {
+          "title": "声呐用回声量深浅",
+          "observation": "船底发出声波。声波碰到海底再返回，探测设备记录回声到达的时间。",
+          "meaning": "科学家用这些测量拼出海底地形，找到山坡、沟谷和可以继续观察的地点。",
+          "source": 2
+        },
+        {
+          "title": "摄像机把海底带到眼前",
+          "observation": "有些水下机器人带着灯和摄像机，可以把沿途拍到的画面传回探测船。",
+          "meaning": "画面可以告诉我们镜头拍到的地方有什么生物，还能记录它们在做什么。",
+          "source": 3
+        },
+        {
+          "title": "取一点样本回去研究",
+          "observation": "有些水下机器人能用机械手或专门的取样设备收集样本。",
+          "meaning": "遇到光靠外形难辨认的生物，研究人员可以在有许可时取样，在实验室观察更细小的特征。",
+          "source": 3
+        }
+      ],
+      "challenge": {
+        "prompt": "已经有海底山的地图。想先看看山坡上有什么生物，最合适的下一步是什么？",
+        "choices": [
+          {"label": "派带灯和摄像机的水下机器人沿坡拍摄。", "correct": true, "feedback": "对。先拍下生物的位置、外形和活动。遇到看不清、分不出的，再考虑更仔细地观察或取样。"},
+          {"label": "继续用船底声呐多测几次水深。", "correct": false, "feedback": "多测几次能补充地形图。想知道动物长什么样，应该到山坡附近拍摄。"},
+          {"label": "只从海面取一瓶水，看清整座山上有什么。", "correct": false, "feedback": "一瓶表层海水提供的是取样点附近的线索。要观察山坡上的生物，可以让机器人到现场。"}
+        ]
+      },
+      "known": "地形图能帮助我们挑选下潜地点，摄像和取样可以补上当地的生物线索。",
+      "unresolved": "这座海底山的不同深度和坡面上，分别有哪些生物？",
+      "next_step": "沿不同深度拍摄几条路线，并记下每次观察的位置、深度和画面。",
+      "deep_dive": "一条拍摄路线只能覆盖镜头扫到的地方。选择不同深度、不同朝向的坡面重复观察，可以减少把偶然看到的情形当成整座海底山特征的风险。",
+      "checked_on": "2026-11-09",
+      "sources": [
+        {"title": "NOAA｜我们探索了多少海洋？", "url": "https://oceanexplorer.noaa.gov/ocean-fact/explored/"},
+        {"title": "NOAA｜多波束声呐怎样测绘海底", "url": "https://oceanexplorer.noaa.gov/technology/sonar-multibeam/"},
+        {"title": "NOAA｜遥控水下机器人", "url": "https://oceanexplorer.noaa.gov/technology/subs-rovs/"}
+      ]
+    },
+    {
+      "slug": "voynich",
+      "title": "伏尼契手稿写了什么？",
+      "category": "文字探索",
+      "icon": "📜",
+      "summary": "放大真实的手稿，找重复符号，再试试怎样检验一种读法。",
+      "opening": "翻开一本几百年前的手稿，你看见一株画出来的植物，旁边却挤满了陌生符号。先在两行字里找找相似的形状。要是同一组符号出现了好几次，你会怎样验证它的意思？",
+      "figure": {
+        "path": "mysteries/voynich-2r.jpg",
+        "alt": "伏尼契手稿第 2 叶正面，页面中央是绿色叶片和三朵花，图画上下有多行陌生符号",
+        "caption": "伏尼契手稿第 2 叶正面。上方和下方都有文字，你能找到形状相似的笔画吗？",
+        "credit": "耶鲁大学拜内克珍本与手稿图书馆，Beinecke MS 408，2r",
+        "source": 1,
+        "detail_path": "mysteries/voynich-script.jpg",
+        "detail_alt": "同一页手稿上方文字的放大局部，能看到圆环和高杆形的笔画",
+        "detail_label": "放大手稿，找重复的符号",
+        "detail_prompt": "从左往右找高高竖起的笔画。比较它们前后的符号，你看到的是单个相似形状，还是相同的一整组？"
+      },
+      "evidence": [
+        {
+          "title": "同一页有图也有符号",
+          "observation": "这一页有花和叶片的图画，旁边排着多行符号。",
+          "meaning": "图画可以帮我们提出猜测，例如文字可能在说植物。要判断每组符号的意思，还得去别处验证。",
+          "source": 1
+        },
+        {
+          "title": "有些形状反复出现",
+          "observation": "把扫描件放大，可以在不同行里找到相似的笔画和符号。",
+          "meaning": "把重复的位置记下来，就有了一条可检验的线索。相似的笔画也可能只是写法相近，比较时要看前后的组合。",
+          "source": 1
+        },
+        {
+          "title": "材料也会留下年代线索",
+          "observation": "耶鲁大学图书馆介绍，科学检测发现手稿材料和 15 世纪的手稿相符。",
+          "meaning": "材料检测能帮助估计年代。要知道符号怎么读，还得研究文字本身。",
+          "source": 2
+        }
+      ],
+      "challenge": {
+        "prompt": "有人猜某组符号是「叶子」。接下来怎么检验这个猜想？",
+        "choices": [
+          {"label": "只看这一页的绿叶图，直接确定答案。", "correct": false, "feedback": "图画让这个猜想有了起点。它也可能配的是花名、用途或别的内容，需要到其他页检查。"},
+          {"label": "去没看过的页面找同一组符号，看看这个读法是否还说得通。", "correct": true, "feedback": "用同一条规则读新页面，还可以记录读不通的地方。如果反复遇到矛盾，就要改猜想或继续找证据。"},
+          {"label": "找更多人投票，票最多的读法就算破解。", "correct": false, "feedback": "投票能告诉你大家喜欢哪个猜想。想检验读法，需要它在别的页面也能解释符号和上下文。"}
+        ]
+      },
+      "known": "手稿有真实的图画和成行的符号，原件和扫描件都可以核对。",
+      "unresolved": "这些符号在记录什么？还缺少一套能在多页上稳定读通的解释。",
+      "next_step": "选几组容易辨认的符号，记录它们在不同页面的位置，再用新页面检验同一套规则。",
+      "deep_dive": "尝试破译时，可以先在一部分页面上提出规则，再用之前没有用过的页面检验。如果每遇到读不通的地方就临时改规则，任何读法都容易在少数页面上碰巧说通。",
+      "checked_on": "2026-11-09",
+      "sources": [
+        {"title": "耶鲁大学图书馆｜伏尼契手稿数字扫描", "url": "https://collections.library.yale.edu/catalog/2002046"},
+        {"title": "耶鲁大学图书馆｜手稿的材料、图画和研究情况", "url": "https://beinecke.library.yale.edu/beinecke/collections/beinecke-cipher-voynich-manuscript"}
+      ]
+    }
+  ]
+}

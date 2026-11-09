@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420" font-family="system-ui, sans-serif">
+  <rect width="640" height="420" fill="#f2f7fb"/>
+  <rect x="91" y="52" width="492" height="276" rx="10" fill="#fff"/>
+  <path d="M91 120h492m-492 69h492m-492 69h492" stroke="#e1eaf1" stroke-width="2"/>
+  <path d="M91 48v280h505M84 57l7-9 7 9m489 264 9 7-9 7" fill="none" stroke="#405b6d" stroke-width="3"/>
+  <path d="M106 296C167 234 188 157 263 134S460 122 558 130" fill="none" stroke="#176d65" stroke-width="7" stroke-linecap="round"/>
+  <path d="M106 298C163 218 208 148 263 167S420 252 558 270" fill="none" stroke="#ae501d" stroke-width="6" stroke-linecap="round" stroke-dasharray="12 10"/>
+  <text x="91" y="33" fill="#203d50" font-size="21">绕行速度</text>
+  <text x="570" y="370" text-anchor="end" fill="#203d50" font-size="21">离星系中心越来越远</text>
+  <text x="548" y="106" text-anchor="end" fill="#176d65" font-size="23" font-weight="700">观测示意</text>
+  <text x="548" y="306" text-anchor="end" fill="#934318" font-size="23" font-weight="700">仅计可见物质的估算</text>
+</svg>

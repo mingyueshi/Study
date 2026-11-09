@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{ case.title }} · 未解之谜研究所{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'mysteries/mysteries.css' %}">
+<article class="mysteries">
+  <a class="mystery-back" href="{% url 'mysteries' %}">← 未解之谜研究所</a>
+  <header class="mystery-banner mystery-case-hero">
+    <div>
+      <p class="mystery-kicker"><span aria-hidden="true">{{ case.icon }}</span> {{ case.category }}</p>
+      <h1>{{ case.title }}</h1>
+      <p class="mystery-lead">{{ case.opening }}</p>
+      <nav class="mystery-jumps" aria-label="案卷小节">
+        <a href="#evidence">看线索 ↓</a>
+        <a href="#challenge">试着判断 ↓</a>
+        <a href="#findings">查看调查结论 ↓</a>
+      </nav>
+    </div>
+    <figure class="mystery-figure">
+      <img src="{% static case.figure.path %}" alt="{{ case.figure.alt }}">
+      <figcaption>
+        <strong>{{ case.figure.caption }}</strong>
+        <span>{{ case.figure.credit }} · <a href="#source-{{ case.figure.source }}">图像出处</a></span>
+      </figcaption>
+    </figure>
+  </header>
+  {% if case.figure.detail_path %}
+  <details class="mystery-panel mystery-expand">
+    <summary>{{ case.figure.detail_label }}</summary>
+    <p>{{ case.figure.detail_prompt }}</p>
+    <img class="mystery-figure-detail" src="{% static case.figure.detail_path %}" alt="{{ case.figure.detail_alt }}" loading="lazy">
+  </details>
+  {% endif %}
+
+  <section id="evidence" class="mystery-section" aria-labelledby="evidence-heading">
+    <header class="mystery-section-heading">
+      <p class="mystery-kicker">第一步</p>
+      <h2 id="evidence-heading">看看这些线索</h2>
+      <p>想一想，每条线索能帮我们回答哪个问题？</p>
+    </header>
+    <ol class="mystery-evidence-list">
+      {% for clue in case.evidence %}
+      <li class="mystery-panel mystery-evidence">
+        <span class="mystery-number" aria-hidden="true">0{{ forloop.counter }}</span>
+        <h3>{{ clue.title }}</h3>
+        <dl>
+          <dt>观察到了什么</dt>
+          <dd>{{ clue.observation }}</dd>
+          <dt>它能说明什么</dt>
+          <dd>{{ clue.meaning }}</dd>
+        </dl>
+        <a class="mystery-source-link" href="#source-{{ clue.source }}">查看线索出处 ↓</a>
+      </li>
+      {% endfor %}
+    </ol>
+  </section>
+
+  <section id="challenge" class="mystery-section mystery-panel mystery-challenge" aria-labelledby="challenge-heading">
+    <header class="mystery-section-heading">
+      <p class="mystery-kicker">第二步</p>
+      <h2 id="challenge-heading">试着做判断</h2>
+      <p>{{ case.challenge.prompt }}</p>
+    </header>
+    <p class="mystery-instruction">点选一条，看看理由。</p>
+    {% for choice in case.challenge.choices %}
+    <details class="mystery-choice" name="mystery-choice">
+      <summary><span class="mystery-choice-number" aria-hidden="true">{{ forloop.counter }}</span><span>{{ choice.label }}</span></summary>
+      <div class="mystery-feedback {% if choice.correct %}mystery-feedback-correct{% endif %}">
+        <strong>{% if choice.correct %}这个判断有依据{% else %}再看看线索{% endif %}</strong>
+        <p>{{ choice.feedback }}</p>
+      </div>
+    </details>
+    {% endfor %}
+  </section>
+
+  <section id="findings" class="mystery-section" aria-labelledby="findings-heading">
+    <header class="mystery-section-heading">
+      <p class="mystery-kicker">第三步</p>
+      <h2 id="findings-heading">写下调查结论</h2>
+    </header>
+    <dl class="mystery-findings">
+      <div><dt>已经知道</dt><dd>{{ case.known }}</dd></div>
+      <div><dt>还在研究</dt><dd>{{ case.unresolved }}</dd></div>
+      <div><dt>下一步怎么查</dt><dd>{{ case.next_step }}</dd></div>
+    </dl>
+    <details class="mystery-panel mystery-expand">
+      <summary>给家长和想多读一点的你</summary>
+      <p>{{ case.deep_dive }}</p>
+    </details>
+  </section>
+
+  <section class="mystery-section mystery-panel mystery-sources" aria-labelledby="sources-heading">
+    <h2 id="sources-heading">线索从哪里来</h2>
+    <p>资料核对日期 <time datetime="{{ case.checked_on }}">{{ case.checked_on }}</time> · 原文需联网</p>
+    <ol>
+      {% for source in case.sources %}
+      <li id="source-{{ forloop.counter }}"><a href="{{ source.url }}">{{ source.title }}</a></li>
+      {% endfor %}
+    </ol>
+  </section>
+
+  <nav class="mystery-section mystery-next" aria-label="其他案卷">
+    <a href="{% url 'mysteries' %}">← 返回全部案卷</a>
+    {% for other in other_cases %}
+    <a href="{% url 'mystery-case' other.slug %}"><span aria-hidden="true">{{ other.icon }}</span> {{ other.title }}</a>
+    {% endfor %}
+  </nav>
+</article>
+{% endblock %}

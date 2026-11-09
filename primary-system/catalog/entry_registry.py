@@ -169,6 +169,9 @@ def entry_for(code):
 # 例外：挑战题库跨学科、内部再按领域分卡，不进本网格——由首页专题区标题
 # 右侧的特殊入口直达（见 catalog/home.html 的 section-aside）。
 SPECIAL_ENTRIES = (
+    {'route': 'mysteries', 'subject': '探索', 'area': 'exploration', 'icon': 'mysteries', 'color': 'geography',
+     'name': '未解之谜研究所', 'tag': '打开案卷 →',
+     'blurb': '从火星古河道到神秘手稿，看看真实线索能告诉我们什么。'},
     {'route': 'phrases', 'subject': '英语', 'area': 'english', 'icon': 'phrases', 'color': 'english',
      'name': '日常用语', 'tag': '开口说 →',
      'blurb': '教材里的 597 条常用短语和短句：按句式记一个开头整句就出来，按话题找场景想说哪句点哪句。'},
