@@ -46,6 +46,7 @@
       return;
     }
     const word = WORDS_BY_ID.get(wordId);
+    if (window.rewardToast && data.rewards) window.rewardToast(data.rewards);
     for (const item of state.words) {
       if (item.target_id === data.target_id) { item.learned = data.learned; item.revision = data.revision; }
     }

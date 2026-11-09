@@ -1,0 +1,6 @@
+{% load static %}<a class="incentive-strip" href="{% url 'rewards' %}" aria-label="查看我的奖励">
+  <span class="incentive-item"><strong>{{ incentive.balance }}</strong> 可用积分</span>
+  <span class="incentive-item"><strong>{{ incentive.checkin.current }}</strong> 天连续打卡</span>
+  <span class="incentive-item">{{ incentive.level.icon }} {{ incentive.level.name }}</span>
+  <span class="incentive-go">去看奖励 <span aria-hidden="true">→</span></span>
+</a>

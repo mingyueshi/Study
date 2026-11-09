@@ -44,6 +44,7 @@ urlpatterns = [
     path('phrases/', include('phrases.urls')),
     path('mathbook/', include('mathbook.urls')),
     path('chinesebook/', include('chinesebook.urls')),
+    path('rewards/', include('incentives.urls')),
     path('accounts/profile/', accounts_views.profile, name='profile'),
     path('accounts/register/', accounts_views.register, name='register'),
     path('accounts/login/', auth_views.LoginView.as_view(template_name='accounts/login.html', authentication_form=LearnerAuthenticationForm), name='login'),

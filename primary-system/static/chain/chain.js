@@ -192,6 +192,7 @@
     if (state.chain.some((item) => item.word === word)) { showFeedback('这个成语已经用过了，换一个吧。', 'error'); return; }
     api('/chain/api/play/', {word}).then((data) => {
       if (!data) return;
+      if (window.rewardToast && data.rewards) window.rewardToast(data.rewards);
       const gained = data.score - state.score;
       clearHints();
       state = data;

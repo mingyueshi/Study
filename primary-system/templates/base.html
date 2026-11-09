@@ -19,6 +19,7 @@
         <img src="{% static 'icons/globe.svg' %}" alt="" width="32" height="32"><span>资料探索</span>
       </a>
       <a href="{% url 'my-learning' %}" {% if current == 'my-learning' %}aria-current="page"{% endif %}><img src="{% static 'icons/scenes.svg' %}" alt="" width="32" height="32"><span>我的学习</span></a>
+      {% if user.is_authenticated %}<a href="{% url 'rewards' %}" {% if current == 'rewards' %}aria-current="page"{% endif %}><img src="{% static 'icons/trophy.svg' %}" alt="" width="32" height="32"><span>我的奖励</span></a>{% endif %}
       {% if user.is_staff %}<a href="{% url 'admin:index' %}">管理后台 ↗</a>{% endif %}
     </nav>
     <div class="account">{% if user.is_authenticated %}<a class="account-profile" href="{% url 'profile' %}" {% if current == 'profile' or current == 'password_change' or current == 'password_change_done' %}aria-current="location"{% endif %}><span class="account-avatar" aria-hidden="true">{{ user|stringformat:'s'|slice:':1' }}</span><span class="account-name">{{ user }}</span></a><form method="post" action="{% url 'logout' %}">{% csrf_token %}<button class="text-button" type="submit">退出</button></form>{% else %}<a class="button small" href="{% url 'login' %}">登录学习 <span aria-hidden="true">→</span></a>{% endif %}</div>
@@ -29,5 +30,6 @@
     {% block content %}{% endblock %}
   </main>
   <footer class="site-footer"><span>乐学堂 · 让知识慢慢长成自己的力量</span><span>语文 / 数学 / 英语 / 更大的世界</span></footer>
+  {% if user.is_authenticated %}<script src="{% static 'incentives/reward-toast.js' %}" defer></script>{% endif %}
 </body>
 </html>

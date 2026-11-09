@@ -83,6 +83,7 @@
       }
       state = data;
       needsRestart = false;
+      if (window.rewardToast && data.rewards) window.rewardToast(data.rewards);
       if (action === 'new' || data.outcome === 'accepted' || data.outcome === 'revealed') els.answer.value = '';
       els.confirm.hidden = true;
       pendingKeyword = null;

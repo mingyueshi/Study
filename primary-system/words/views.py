@@ -51,13 +51,23 @@ def learn(request):
             uuid.UUID(data['chinese_version_id'])
     except (ValueError, TypeError, AttributeError):
         return JsonResponse({'error': '呈现版本无效。'}, status=400)
-    from words.models import LearningTarget
+    from words.models import LearningTarget, WordProgress
+    owner = services.owner_filter(request)
+    # 掌握跃迁（False → True）才记激励；游客没有积分，services 里静默跳过。
+    pre_learned = bool(WordProgress.objects.filter(target_id=target_id, **owner).values_list('learned', flat=True).first()) \
+        if request.user.is_authenticated else False
     try:
-        row = services.set_learned(services.owner_filter(request), target_id, data['learned'], data['revision'], chinese_version_id=data['chinese_version_id'], presentation_revision=data['presentation_revision'])
+        row = services.set_learned(owner, target_id, data['learned'], data['revision'], chinese_version_id=data['chinese_version_id'], presentation_revision=data['presentation_revision'])
     except LearningTarget.DoesNotExist:
         return JsonResponse({'error': '学习目标不存在。'}, status=404)
     except services.ProgressConflict as error:
         return JsonResponse({'error': str(error)}, status=409)
     except OperationalError:
         return JsonResponse({'error': '数据库暂忙，请重试。'}, status=503)
-    return JsonResponse({'schema_version': 3, 'target_id': str(row.target_id), 'learned': row.learned, 'revision': row.revision})
+    payload = {'schema_version': 3, 'target_id': str(row.target_id), 'learned': row.learned, 'revision': row.revision}
+    if request.user.is_authenticated and data['learned'] and not pre_learned:
+        from incentives.services import record_event
+        rewards = record_event(request.user, 'words_learned', request=request)
+        if rewards:
+            payload['rewards'] = rewards
+    return JsonResponse(payload)

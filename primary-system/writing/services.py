@@ -73,6 +73,7 @@ def list_drafts(request):
 @transaction.atomic
 def save_draft(request, data, draft=None):
     """新建或更新草稿；更新时按 revision 乐观并发，冲突抛 DraftConflict。"""
+    is_new = draft is None
     if draft is None:
         draft = WritingDraft(**owner_filter(request))
     else:
@@ -85,4 +86,8 @@ def save_draft(request, data, draft=None):
     draft.revision += 1
     draft.full_clean(exclude=('user', 'guest_key'))
     draft.save()
+    if is_new and request.user.is_authenticated:
+        # 只有动笔新写一篇才记激励；旧稿反复保存不重复发分。
+        from incentives.services import record_event
+        record_event(request.user, 'writing_draft', request=request)
     return draft

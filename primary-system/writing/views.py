@@ -30,7 +30,13 @@ def drafts_api(request):
             draft = save_draft(request, data)
         except OperationalError:
             return JsonResponse({'error': '数据库暂忙，请稍后再试。'}, status=503)
-        return JsonResponse(draft_payload(draft), status=201)
+        payload = draft_payload(draft)
+        if request.user.is_authenticated:
+            from incentives.services import take_awards
+            rewards = take_awards(request)
+            if rewards:
+                payload['rewards'] = rewards
+        return JsonResponse(payload, status=201)
     return JsonResponse({'schema_version': 1, 'drafts': [draft_payload(d) for d in list_drafts(request)]})
 
 

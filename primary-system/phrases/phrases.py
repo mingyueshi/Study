@@ -184,8 +184,13 @@ def report(request):
     if phrase_id not in practice_pool() or chosen not in pool_options[phrase_id] \
             or answer not in pool_options[phrase_id]:
         return JsonResponse({"error": "这道题不在练习范围，请刷新页面后再试。"}, status=400)
-    PhraseAnswer.objects.create(
+    answer = PhraseAnswer.objects.create(
         phrase=phrase_id, chosen=chosen[:200], answer=answer,
         correct=chosen == answer, **owner_filter(request),
     )
-    return JsonResponse({"ok": True})
+    if request.user.is_authenticated and answer.correct:
+        from incentives.services import record_event
+        record_event(request.user, "phrase_correct", request=request)
+    from incentives.services import take_awards
+    rewards = take_awards(request)
+    return JsonResponse({"ok": True} | ({"rewards": rewards} if rewards else {}))

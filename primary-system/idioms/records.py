@@ -35,8 +35,25 @@ def record_play(request, *, game, size, correct, extra=None):
     """落一条小游戏记录；由服务端判定完成/判分的动作调用。"""
     from .models import PlayRecord
 
-    return PlayRecord.objects.create(game=game, size=size, correct=correct,
-                                     extra=extra or {}, **owner_filter(request))
+    record = PlayRecord.objects.create(game=game, size=size, correct=correct,
+                                       extra=extra or {}, **owner_filter(request))
+    _reward(request, game, bool(correct))
+    return record
+
+
+def _reward(request, game, correct):
+    """登录玩家的小游戏激励：看释义猜成语按答对逐题，配对与表情按完成局；游客静默跳过。"""
+    if not request.user.is_authenticated:
+        return
+    from .models import PlayRecord
+    from incentives.services import record_event
+
+    code = {PlayRecord.Game.QUIZ: 'idiom_quiz_correct',
+            PlayRecord.Game.PAIRS: 'idiom_pairs_round',
+            PlayRecord.Game.EMOJI: 'idiom_emoji_round'}.get(game)
+    if code == 'idiom_quiz_correct' and not correct:
+        return  # 答错不记激励（记录本身对错都落）
+    record_event(request.user, code, request=request)
 
 
 def _row(record):

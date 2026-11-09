@@ -142,6 +142,10 @@ h3 { font-size: 23px; line-height: 1.5; }
 .study-strip span { color: var(--muted); font-size: 16px; }
 .study-strip p, .study-strip > a { margin: 0 0 0 auto; color: var(--muted); font-size: 16px; }
 .study-strip > a { display: inline-flex; align-items: center; min-height: 48px; color: var(--green); font-weight: 650; }
+.incentive-strip { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 30px; padding: 18px 28px; margin: 20px 0 8px; border: 1px solid var(--card-line); border-radius: 22px; background: linear-gradient(135deg, var(--card-tint), var(--white)); color: var(--ink); font-size: 16px; text-decoration: none; }
+.incentive-strip .incentive-item strong { color: var(--card-accent); font-size: 26px; font-weight: 800; margin-right: 4px; }
+.incentive-strip .incentive-go { margin-left: auto; display: inline-flex; align-items: center; min-height: 44px; color: var(--card-accent); font-weight: 650; }
+.incentive-strip:hover .incentive-go { text-decoration: underline; }
 
 /* 学习总览卡：首页与「我的学习」共用；配色复用 module-card 的 color-* 变量。 */
 .overview-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 22px; margin: 0 0 34px; }

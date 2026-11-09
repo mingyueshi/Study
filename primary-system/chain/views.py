@@ -122,6 +122,10 @@ def _mutate(request, action):
         pool = services.chain_pool()
         if action == 'play':
             round, hint = services.play(owner, data['round_id'], data['revision'], data.get('word', ''), pool=pool), None
+            if round.status == services.GameRound.Status.FINISHED and round.ended_reason:
+                # 真实终局（有人接不上）才记激励；中途重开旧局不算。
+                from incentives.services import record_event
+                record_event(request.user, 'chain_round_finished', request=request)
         elif action == 'hint':
             round, hint = services.take_hint(owner, data['round_id'], data['revision'], pool=pool)
         else:
@@ -136,7 +140,13 @@ def _mutate(request, action):
         return JsonResponse({'error': str(exc)}, status=400)
     except OperationalError:
         return JsonResponse({'error': '数据库暂忙，请重新读取状态后再操作。'}, status=503)
-    return JsonResponse(_payload(request, round, pool=pool, hint=hint))
+    payload = _payload(request, round, pool=pool, hint=hint)
+    if request.user.is_authenticated:
+        from incentives.services import take_awards
+        rewards = take_awards(request)
+        if rewards:
+            payload['rewards'] = rewards
+    return JsonResponse(payload)
 
 
 @never_cache

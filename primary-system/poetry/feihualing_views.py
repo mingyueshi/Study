@@ -67,6 +67,16 @@ def action(request):
                 keyword=result["keyword"], independent=result["independent"],
                 learning=result["learning"], result=result["status"], **owner_filter(request),
             )
+            if request.user.is_authenticated:
+                from incentives.services import record_event
+                record_event(request.user, "feihualing_completed" if result["status"] == "completed"
+                             else "feihualing_exhausted", request=request)
+        rewards = None
+        if request.user.is_authenticated:
+            from incentives.services import take_awards
+            rewards = take_awards(request)
+        if rewards:
+            result = {**result, "rewards": rewards}
         return JsonResponse(result, json_dumps_params={"ensure_ascii": False})
     except game.ExerciseError as error:
         return JsonResponse(

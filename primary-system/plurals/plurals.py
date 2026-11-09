@@ -187,8 +187,13 @@ def report(request):
     if singular not in practice_pool() or chosen not in pool_options[singular] \
             or answer not in pool_options[singular]:
         return JsonResponse({"error": "这道题不在练习范围，请刷新页面后再试。"}, status=400)
-    PluralAnswer.objects.create(
+    answer = PluralAnswer.objects.create(
         singular=singular, chosen=chosen[:40], answer=answer,
         correct=chosen == answer, **owner_filter(request),
     )
-    return JsonResponse({"ok": True})
+    if request.user.is_authenticated and answer.correct:
+        from incentives.services import record_event
+        record_event(request.user, "plural_correct", request=request)
+    from incentives.services import take_awards
+    rewards = take_awards(request)
+    return JsonResponse({"ok": True} | ({"rewards": rewards} if rewards else {}))

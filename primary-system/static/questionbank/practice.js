@@ -102,6 +102,7 @@
       return;
     }
     const verdict = await response.json();
+    if (window.rewardToast && verdict.rewards) window.rewardToast(verdict.rewards);
     if (verdict.correct) correctCount += 1;
     markChoices(question, given, verdict);
     updateProgress(true);

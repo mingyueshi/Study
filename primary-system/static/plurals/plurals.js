@@ -40,7 +40,9 @@
           chosen,
           answer: round.dataset.answer,
         }),
-      }).catch(() => {});
+      }).then((response) => (response.ok ? response.json() : null))
+        .then((data) => { if (window.rewardToast && data && data.rewards) window.rewardToast(data.rewards); })
+        .catch(() => {});
     };
 
     const choose = (option) => {

@@ -35,6 +35,7 @@
         renderError(data.error || '请求没成功，请刷新页面。', data.restart_required);
         return null;
       }
+      if (window.rewardToast && data.rewards) window.rewardToast(data.rewards);
     } catch (error) {
       renderError('网络不给力，请刷新页面再试。', false);
       return null;

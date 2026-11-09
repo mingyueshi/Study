@@ -42,7 +42,9 @@
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'X-CSRFToken': csrf() },
         body: JSON.stringify({ id: round.dataset.id, chosen, answer: round.dataset.answer }),
-      }).catch(() => {});
+      }).then((response) => (response.ok ? response.json() : null))
+        .then((data) => { if (window.rewardToast && data && data.rewards) window.rewardToast(data.rewards); })
+        .catch(() => {});
     };
 
     const choose = (option) => {

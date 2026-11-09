@@ -26,7 +26,9 @@
         correct,
         used_hint: slots.some((slot) => slot.classList.contains('hint')),
       }),
-    }).catch(() => {});
+    }).then((response) => (response.ok ? response.json() : null))
+      .then((data) => { if (window.rewardToast && data && data.rewards) window.rewardToast(data.rewards); })
+      .catch(() => {});
   };
 
   const STORE_KEY = 'idioms_quiz_stats_v1';

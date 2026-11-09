@@ -210,6 +210,7 @@
       }
       currentDraftId = data.id;
       currentRevision = data.revision;
+      if (window.rewardToast && data.rewards) window.rewardToast(data.rewards);
       showFeedback(`已保存《${data.title || '未命名'}》到作文本。`);
       const index = drafts.findIndex((d) => d.id === data.id);
       if (index >= 0) drafts[index] = data; else drafts.unshift(data);

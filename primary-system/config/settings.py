@@ -26,7 +26,7 @@ INSTALLED_APPS = [
     'nova_admin', 'nova_slider_captcha',
     'django.contrib.admin', 'django.contrib.auth', 'django.contrib.contenttypes',
     'django.contrib.sessions', 'django.contrib.messages', 'django.contrib.staticfiles',
-    'accounts', 'catalog', 'learning', 'lexicon', 'chain', 'words', 'reference_library', 'science','hanzi','poetry','geography','astronomy','arithmetic', 'idioms', 'phonetics', 'writing', 'questionbank', 'grammar', 'plurals', 'phrases', 'mathbook', 'chinesebook',
+    'accounts', 'catalog', 'learning', 'lexicon', 'chain', 'words', 'reference_library', 'science','hanzi','poetry','geography','astronomy','arithmetic', 'idioms', 'phonetics', 'writing', 'questionbank', 'grammar', 'plurals', 'phrases', 'mathbook', 'chinesebook', 'incentives',
 ]
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware', 'django.contrib.sessions.middleware.SessionMiddleware',
@@ -100,7 +100,7 @@ NOVA_ADMIN_NAV_GROUPS = [
     {'key': 'catalog', 'label': '课程内容', 'apps': ['catalog']},
     {'key': 'lexicon', 'label': '基础词库', 'apps': ['lexicon']},
     {'key': 'chain', 'label': '游戏中心', 'apps': ['chain']},
-    {'key': 'learning', 'label': '学习记录', 'apps': ['learning']},
+    {'key': 'learning', 'label': '学习记录', 'apps': ['learning', 'incentives']},
     {'key': 'people', 'label': '账号与权限', 'apps': ['accounts', 'auth']},
 ]
 NOVA_ADMIN_NAV_COMMON_MODELS = ['catalog.contentitem', 'catalog.textbookbook', 'lexicon.lexicalentry', 'chain.chainword']

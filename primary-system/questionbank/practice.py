@@ -136,4 +136,11 @@ def answer(request):
         _, result = services.record_answer(question, data['given'], records.owner_filter(request))
     except question_types.InvalidAnswer as error:
         return JsonResponse({'error': str(error)}, status=400)
+    if request.user.is_authenticated and result['correct']:
+        from incentives.services import record_event
+        record_event(request.user, 'questionbank_correct', request=request)
+    from incentives.services import take_awards
+    rewards = take_awards(request)
+    if rewards:
+        result['rewards'] = rewards
     return JsonResponse(result)

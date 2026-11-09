@@ -1,0 +1,91 @@
+/* 「我的奖励」页样式：沿用 platform.css 的设计令牌，暖橙卡色 + 大圆角。 */
+
+.rewards-hero { display: flex; flex-wrap: wrap; gap: 20px; margin-top: 24px; }
+
+.reward-stats { flex: 2 1 420px; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px; padding: 26px 28px; border: 1px solid var(--card-line); border-radius: 22px; background: linear-gradient(135deg, var(--card-tint), var(--white)); }
+.reward-stat strong { display: block; font-size: 34px; line-height: 1.2; color: var(--card-accent); }
+.reward-stat span { color: var(--muted); font-size: 15px; }
+.reward-stat .stat-label { font-size: 17px; color: var(--ink); }
+
+.level-card { flex: 1 1 280px; padding: 26px 28px; border: 1px solid var(--card-line); border-radius: 22px; background: var(--white); }
+.level-card .level-now { display: flex; align-items: center; gap: 10px; font-size: 26px; font-weight: 700; color: var(--card-accent); }
+.level-card .level-icon { font-size: 38px; line-height: 1; }
+.level-card p { margin: 6px 0 14px; color: var(--muted); font-size: 15px; }
+.level-bar { height: 14px; border-radius: 8px; background: var(--soft); overflow: hidden; }
+.level-bar i { display: block; height: 100%; border-radius: 8px; background: linear-gradient(90deg, #f5b26b, var(--card-accent)); transition: width .4s ease; }
+.level-next { margin-top: 8px; font-size: 14px; color: var(--muted); }
+
+.checkin-section { display: flex; flex-wrap: wrap; gap: 20px; align-items: stretch; margin-top: 20px; }
+.checkin-card { flex: 2 1 420px; padding: 22px 26px; border: 1px solid var(--line); border-radius: 22px; background: var(--white); }
+.checkin-card h2, .badge-section h2, .redeem-section h2, .events-section h2, .rules-section h2 { margin: 0 0 16px; font-size: 24px; }
+.checkin-meta { display: flex; flex-wrap: wrap; gap: 10px 22px; margin-bottom: 16px; color: var(--muted); font-size: 16px; }
+.checkin-meta strong { color: var(--green); font-size: 22px; }
+.checkin-today { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 999px; font-size: 15px; font-weight: 600; }
+.checkin-today.on { background: #e2f0dc; color: var(--green-dark); }
+.checkin-today.off { background: var(--card-tint); color: var(--card-accent); }
+
+.checkin-grid { display: grid; grid-template-columns: 28px repeat(7, 1fr); gap: 6px; max-width: 480px; }
+.checkin-grid .dow { color: var(--muted); font-size: 13px; text-align: center; align-self: center; }
+.checkin-grid .cell { position: relative; aspect-ratio: 1; border-radius: 10px; background: var(--soft); font-size: 13px; }
+.checkin-grid .cell span { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: var(--muted); }
+.checkin-grid .cell.blank { background: transparent; }
+.checkin-grid .cell.checked { background: #dceccf; border: 1px solid #a9c793; color: var(--green-dark); font-weight: 700; }
+.checkin-grid .cell.checked span::after { content: '✓'; margin-left: 2px; color: var(--green); }
+.checkin-grid .cell.today { outline: 3px solid var(--orange); outline-offset: 1px; }
+
+.badge-section { margin-top: 20px; padding: 22px 26px; border: 1px solid var(--line); border-radius: 22px; background: var(--white); }
+.badge-wall { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 14px; }
+.badge-card { position: relative; display: flex; gap: 12px; align-items: flex-start; padding: 16px; border: 1px solid var(--line); border-radius: 16px; background: var(--paper); }
+.badge-card .badge-icon { font-size: 34px; line-height: 1.1; filter: grayscale(1); opacity: .45; }
+.badge-card h3 { margin: 0; font-size: 17px; }
+.badge-card p { margin: 4px 0 0; font-size: 13.5px; color: var(--muted); line-height: 1.55; }
+.badge-card .tier-tag { position: absolute; top: 10px; right: 12px; font-size: 12px; color: var(--muted); }
+.badge-card.earned { background: var(--card-tint); border-color: var(--card-line); }
+.badge-card.earned .badge-icon { filter: none; opacity: 1; }
+.badge-card.earned.tier-gold { border-color: #e3b764; }
+.badge-card.earned.tier-silver { border-color: #b9c4cf; }
+.badge-card.earned.tier-bronze { border-color: #d3a179; }
+.badge-progress { margin-top: 8px; height: 8px; border-radius: 6px; background: var(--soft); overflow: hidden; }
+.badge-progress i { display: block; height: 100%; border-radius: 6px; background: var(--green); }
+.badge-card.earned .badge-progress i { background: var(--card-accent); }
+.badge-progress-num { font-size: 12.5px; color: var(--muted); margin-top: 4px; }
+
+.redeem-section { margin-top: 20px; padding: 22px 26px; border: 1px solid var(--line); border-radius: 22px; background: var(--white); }
+.redeem-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 14px; }
+.reward-card { display: flex; flex-direction: column; gap: 6px; padding: 18px; border: 1px solid var(--card-line); border-radius: 16px; background: var(--card-tint); }
+.reward-card .reward-icon { font-size: 36px; line-height: 1.1; }
+.reward-card h3 { margin: 0; font-size: 18px; }
+.reward-card .cost { font-size: 15px; color: var(--card-accent); font-weight: 700; }
+.reward-card .note { font-size: 13.5px; color: var(--muted); }
+.reward-card .button { align-self: flex-start; margin-top: 6px; }
+.reward-card.locked { opacity: .65; }
+.reward-empty { color: var(--muted); font-size: 16px; }
+
+.redemption-list { margin: 18px 0 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+.redemption-list li { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; padding: 12px 16px; border: 1px solid var(--line); border-radius: 14px; background: var(--paper); font-size: 16px; }
+.redemption-list .when { color: var(--muted); font-size: 14px; }
+.status-chip { padding: 3px 12px; border-radius: 999px; font-size: 13.5px; font-weight: 600; }
+.status-chip.pending { background: #ffefc7; color: #8a6116; }
+.status-chip.done { background: #e2f0dc; color: var(--green-dark); }
+.status-chip.cancelled { background: #f0e3e3; color: #8a5050; }
+
+.events-section { margin-top: 20px; padding: 22px 26px; border: 1px solid var(--line); border-radius: 22px; background: var(--white); }
+.event-list { margin: 0; padding: 0; list-style: none; }
+.event-list li { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 18px; padding: 9px 4px; border-bottom: 1px dashed var(--line); font-size: 16px; }
+.event-list li:last-child { border-bottom: none; }
+.event-list .when { color: var(--muted); font-size: 14px; }
+.event-points { font-weight: 700; }
+.event-points.plus { color: var(--green); }
+.event-points.minus { color: #a33425; }
+
+.rules-section { margin-top: 20px; padding: 22px 26px; border: 1px solid var(--line); border-radius: 22px; background: var(--paper); }
+.rules-section p.lead { margin: 0 0 14px; color: var(--muted); font-size: 15px; }
+.rules-table { width: 100%; border-collapse: collapse; font-size: 15.5px; }
+.rules-table th, .rules-table td { padding: 8px 12px; border-bottom: 1px solid var(--line); text-align: left; }
+.rules-table th { color: var(--muted); font-weight: 600; font-size: 14px; }
+.rules-table td .cap { color: var(--muted); font-size: 13.5px; }
+
+@media (max-width: 720px) {
+  .checkin-grid { grid-template-columns: 24px repeat(7, 1fr); gap: 4px; }
+  .reward-stats { padding: 20px; }
+}

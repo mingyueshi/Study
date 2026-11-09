@@ -6,6 +6,8 @@
 </section>
 {% if not user.is_authenticated %}
 <section class="study-strip" aria-label="学习概况"><div><strong>{{ entry_total }}</strong><span>探索方向</span></div><div><strong>{{ item_count }}</strong><span>当前可读内容</span></div><p>登录后，收藏、笔记和掌握记录会跟着你的账号走。</p></section>
+{% elif incentive %}
+{% include 'includes/incentive_strip.html' %}
 {% endif %}
 <section class="modules-section" aria-labelledby="modules-title"><div class="section-heading"><div><p class="eyebrow">跟着兴趣出发</p><h2 id="modules-title">每一科，都有新发现</h2></div><div class="section-aside"><a class="special-entry" href="{% url 'questionbank' %}"><img src="{% static 'icons/quiz.svg' %}" alt="" width="30" height="30">挑战题库<span class="arrow" aria-hidden="true">→</span></a></div></div>
 <nav class="area-chips" aria-label="按学科筛选专题">{% for chip in area_chips %}<a href="{{ chip.url }}" {% if chip.on %}class="on" aria-current="page"{% endif %}>{{ chip.label }}<i>{{ chip.count }}</i></a>{% endfor %}</nav>

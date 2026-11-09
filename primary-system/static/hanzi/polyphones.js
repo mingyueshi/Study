@@ -132,7 +132,9 @@
         char: round.dataset.char, word: round.dataset.word || '',
         chosen, answer: round.dataset.answer,
       }),
-    }).catch(() => {});
+    }).then((response) => (response.ok ? response.json() : null))
+      .then((data) => { if (window.rewardToast && data && data.rewards) window.rewardToast(data.rewards); })
+      .catch(() => {});
   };
   const STORE_KEY = 'hanzi_polyphone_stats_v1';
   let stats = { streak: 0, correct: 0, asked: 0 };

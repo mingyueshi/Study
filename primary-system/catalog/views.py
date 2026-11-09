@@ -113,14 +113,18 @@ def home(request):
     selected = area if area in {card['area'] for card in all_cards} else ''
     entry_cards = [card for card in all_cards if not selected or card['area'] == selected]
     digest = None
+    incentive = None
     if request.user.is_authenticated:
         from .learning_digest import learning_digest
+        from incentives.services import home_summary
         digest = learning_digest(request.user)
+        incentive = home_summary(request.user)
     return render(request, 'catalog/home.html', {
         'entry_cards': entry_cards,
         'entry_total': len(all_cards),
         'area_chips': _area_chips(request, all_cards, selected),
         'digest': digest,
+        'incentive': incentive,
         'item_count': published_items().filter(placements__unit__in=units_of_books(books)).count(),
     })
 

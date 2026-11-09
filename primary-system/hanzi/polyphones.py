@@ -236,8 +236,13 @@ def report(request):
     readings = {reading["pinyin"] for reading in char_index()[char]["readings"]} if char in char_index() else set()
     if char not in practice_chars or chosen not in readings or answer not in readings:
         return JsonResponse({"error": "这道题不在练习范围，请刷新页面后再试。"}, status=400)
-    PolyphoneAnswer.objects.create(
+    answer = PolyphoneAnswer.objects.create(
         char=char, word=word[:40], chosen=chosen, answer=answer,
         correct=chosen == answer, **owner_filter(request),
     )
-    return JsonResponse({"ok": True})
+    if request.user.is_authenticated and answer.correct:
+        from incentives.services import record_event
+        record_event(request.user, "polyphone_correct", request=request)
+    from incentives.services import take_awards
+    rewards = take_awards(request)
+    return JsonResponse({"ok": True} | ({"rewards": rewards} if rewards else {}))

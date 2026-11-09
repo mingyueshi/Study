@@ -16,6 +16,7 @@ from .forms import ProgressForm
 from .models import Progress
 from .services import ProgressConflict, progress_data, save_progress, effective_status
 from lexicon.chinese import safe_word_item, content_presentation, LessonResolver
+from incentives.services import record_event, summarize_awards, take_awards
 
 # 图示库按模块分配：六个 legacy 自包含库，loader.js 按全局名注入。
 FIGURE_LIBS = {
@@ -83,6 +84,19 @@ def word_card_context(item, resolver=None):
     return context
 
 
+def _textbook_rewards(request, pre_status, data_status, has_links, cleaned_data):
+    """掌握/开始学习的状态跃迁时记激励；游客与未真正更新学习状态的保存静默跳过。"""
+    if not request.user.is_authenticated:
+        return []
+    if has_links and cleaned_data.get('update_learning') is not True:
+        return []  # 收藏、笔记单独保存不动学习状态，不发分
+    if data_status == 'mastered' and pre_status != 'mastered':
+        return record_event(request.user, 'textbook_mastered', request=request)
+    if pre_status == 'new' and data_status != 'new':
+        return record_event(request.user, 'textbook_started', request=request)
+    return []
+
+
 @never_cache
 @require_http_methods(['GET', 'POST'])
 def item_detail(request, pk):
@@ -102,7 +116,9 @@ def item_detail(request, pk):
             form.fields.pop('update_learning', None)
         if form.is_valid():
             try:
+                pre_status = progress.status if progress else 'new'
                 save_progress(request.user, item, form.cleaned_data)
+                awards = _textbook_rewards(request, pre_status, form.cleaned_data['status'], bool(links), form.cleaned_data)
             except ProgressConflict as exc:
                 form.add_error(None, str(exc))
                 status = 409
@@ -110,7 +126,7 @@ def item_detail(request, pk):
                 form.add_error(None, '数据库暂忙。请重新打开页面核对保存状态，再进行操作。')
                 status = 503
             else:
-                messages.success(request, '学习记录已保存到你的账号。')
+                messages.success(request, '学习记录已保存到你的账号。' + summarize_awards(awards))
                 return redirect('item', pk=item.pk)
         else:
             status = 400
@@ -175,9 +191,15 @@ def progress_api(request, pk):
     if not form.is_valid():
         return JsonResponse({'errors': form.errors.get_json_data()}, status=400)
     try:
+        pre_status = Progress.objects.filter(user=request.user, item=item).values_list('status', flat=True).first() or 'new'
         progress = save_progress(request.user, item, form.cleaned_data)
+        awards = _textbook_rewards(request, pre_status, form.cleaned_data['status'],
+                                   ContentEntryLink.objects.filter(content=item).exists(), form.cleaned_data)
     except ProgressConflict as exc:
         return JsonResponse({'error': str(exc)}, status=409)
     except OperationalError:
         return JsonResponse({'error': '数据库暂忙，请重新读取状态后再操作。'}, status=503)
-    return JsonResponse(progress_data(progress))
+    payload = progress_data(progress)
+    if awards:
+        payload['rewards'] = awards
+    return JsonResponse(payload)
