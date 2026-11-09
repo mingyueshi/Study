@@ -152,24 +152,23 @@
     render();
   });
 
-  /* 词以类聚等页面的深链：/words/?word=dog 直接切到该词所在场景并高亮。 */
-  const deepLink = new URLSearchParams(location.search).get('word');
-  if (deepLink) {
-    const hit = state.words.find((w) => w.en.toLowerCase() === deepLink.toLowerCase());
-    if (hit) {
-      curUnit = hit.scenario;
-      render();
-      requestAnimationFrame(() => {
-        const card = cardsEl.querySelector(`[data-word="${hit.id}"]`);
-        if (card) {
-          card.classList.add('learned-flash');
-          card.scrollIntoView({ block: 'center' });
-        }
-      });
-    } else {
-      render();
-    }
-  } else {
-    render();
+  /* 学习足迹按词条定位，词以类聚等旧链接仍可用英文拼写定位。 */
+  const params = new URLSearchParams(location.search);
+  const target = params.get('target'), word = params.get('word');
+  const hit = target
+    ? state.words.find((w) => w.target_id === target)
+    : word && state.words.find((w) => w.en.toLowerCase() === word.toLowerCase());
+  if (hit) curUnit = hit.scenario;
+  render();
+  if (hit) {
+    requestAnimationFrame(() => {
+      const card = cardsEl.querySelector(`[data-word="${hit.id}"]`);
+      if (card) {
+        card.classList.add('learned-flash');
+        card.scrollIntoView({ block: 'center' });
+      }
+    });
+  } else if (target) {
+    showFeedback('这张词卡找不到了，可以在这里搜单词。', true);
   }
 })();

@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.test import SimpleTestCase, TestCase
 
@@ -69,6 +70,9 @@ class DraftApiTests(TestCase):
 
         listing = self.client.get('/writing/api/drafts/').json()
         self.assertEqual([d['id'] for d in listing['drafts']], [draft['id']])
+        detail = self.client.get(f"/writing/api/drafts/{draft['id']}/",
+                                 headers={'X-Writing-Scope': listing['autosave_scope']})
+        self.assertEqual(detail.json(), draft)
 
         updated = self.client.patch(f"/writing/api/drafts/{draft['id']}/",
                                      {'title': '我的自画像（改）', 'content': '改好了。', 'revision': 1},
@@ -113,14 +117,55 @@ class DraftApiTests(TestCase):
 
     def test_guest_draft_can_be_resumed_after_register_and_logout(self):
         draft = self.create_draft(self.client).json()
+        guest_scope = self.client.get('/writing/').context['autosave_scope']
+        self.assertTrue(guest_scope)
         response = self.client.post('/accounts/register/', {
             'username': 'new-writer', 'password1': 'family-test', 'password2': 'family-test',
         })
         self.assertEqual(response.status_code, 302)
-        self.assertEqual(self.client.get('/writing/api/drafts/').json()['drafts'], [])
+        account_listing = self.client.get('/writing/api/drafts/').json()
+        self.assertEqual(account_listing['drafts'], [])
+        self.assertNotEqual(account_listing['autosave_scope'], guest_scope)
         self.create_draft(self.client, title='账号草稿')
         self.assertEqual(self.client.post('/accounts/logout/').status_code, 302)
-        self.assertEqual(self.client.get('/writing/api/drafts/').json()['drafts'], [draft])
+        guest_listing = self.client.get('/writing/api/drafts/').json()
+        self.assertEqual(guest_listing['drafts'], [draft])
+        self.assertEqual(guest_listing['autosave_scope'], guest_scope)
+
+    def test_old_account_page_cannot_read_or_save_under_new_account(self):
+        user_model = get_user_model()
+        first = user_model.objects.create_user(username='first-writer')
+        second = user_model.objects.create_user(username='second-writer')
+        self.client.force_login(first)
+        first_scope = self.client.get('/writing/').context['autosave_scope']
+        draft = self.create_draft(self.client).json()
+        url = f"/writing/api/drafts/{draft['id']}/"
+        self.assertEqual(self.client.get(url, headers={'X-Writing-Scope': first_scope}).json()['id'], draft['id'])
+        guest_detail = self.client_class().get(url)
+        self.assertEqual(guest_detail.status_code, 404)
+        self.assertNotIn(settings.SESSION_COOKIE_NAME, guest_detail.cookies)
+        self.client.post('/accounts/logout/')
+        self.client.force_login(second)
+        self.assertNotEqual(self.client.get('/writing/').context['autosave_scope'], first_scope)
+        headers = {'X-Writing-Scope': first_scope}
+        listing = self.client.get('/writing/api/drafts/', headers=headers)
+        self.assertEqual(listing.status_code, 409)
+        self.assertEqual(listing.json()['code'], 'owner_changed')
+        self.assertEqual(self.client.get(url, headers=headers).json()['code'], 'owner_changed')
+        self.assertEqual(self.client.get(url).status_code, 404)
+        save = self.client.post('/writing/api/drafts/', {'title': '暂存', 'content': '原账号的正文'},
+                                content_type='application/json', headers=headers)
+        self.assertEqual(save.status_code, 409)
+        self.assertEqual(WritingDraft.objects.count(), 1)
+
+    def test_new_guest_scope_only_created_when_opening_the_draft_list(self):
+        page = self.client.get('/writing/')
+        self.assertEqual(page.context['autosave_scope'], '')
+        self.assertNotIn(settings.SESSION_COOKIE_NAME, page.cookies)
+        listing = self.client.get('/writing/api/drafts/', headers={'X-Writing-Scope': 'guest'})
+        scope = listing.json()['autosave_scope']
+        self.assertTrue(scope)
+        self.assertEqual(self.client.get('/writing/').context['autosave_scope'], scope)
 
     def test_service_conflict_exception(self):
         user = get_user_model().objects.create_user(username='w2', password='pw-123456')

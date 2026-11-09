@@ -1,5 +1,5 @@
 {% extends 'base.html' %}{% load static %}{% block title %}作文坊 · 乐学堂{% endblock %}
-{% block content %}<link rel="stylesheet" href="{% static 'writing/writing.css' %}"><script src="{% static 'speech.js' %}" defer></script><script src="{% static 'tts.js' %}" defer></script><script src="{% static 'writing/writing.js' %}" defer></script>
+{% block content %}<link rel="stylesheet" href="{% static 'writing/writing.css' %}"><script src="{% static 'speech.js' %}" defer></script><script src="{% static 'tts.js' %}" defer></script><script src="{% static 'writing/writing.js' %}?v=3" defer></script>
 <header class="wr-hero">
   <div class="wr-hero-copy">
     <span class="wr-hero-icon"><img src="{% static 'icons/writing.svg' %}" alt="" width="56" height="56"></span>
@@ -32,8 +32,8 @@
     {% for wg in materials.wordGroups %}{% if forloop.first %}<div class="wr-material-groups">{% endif %}<div class="wr-chips"><span class="wr-seclabel">{{ wg.name }}</span>{% for word in wg.words %}<button class="wr-chip" type="button" data-say="{{ word }}" aria-label="朗读 {{ word }}">{{ word }}</button>{% endfor %}</div>{% if forloop.last %}</div>{% endif %}{% endfor %}
     {% for sentence in materials.sentences %}{% if forloop.first %}<div class="wr-chips"><span class="wr-seclabel">比喻拟人句</span>{% endif %}<button class="wr-chip wr-sentence" type="button" data-say="{{ sentence }}" aria-label="朗读比喻句">{{ sentence }}</button>{% if forloop.last %}</div>{% endif %}{% endfor %}
   </section>
-  <section class="wr-group" id="notebook" style="--c: #2f7d4f">
-    <div class="section-heading"><div><h2>📓 我的作文本</h2><p>写完点保存。登录时写的草稿跟着账号走，游客草稿可以在同一浏览器退出登录后接着写。</p></div><span class="tag" id="wr-draft-count"></span></div>
+  <section class="wr-group" id="notebook" data-autosave-scope="{{ autosave_scope }}" style="--c: #2f7d4f">
+    <div class="section-heading"><div><h2>📓 我的作文本</h2><p>写到一半会暂存在这台设备。点保存后，登录时的草稿跟着账号走，游客草稿可以在同一浏览器退出登录后接着写。</p></div><span class="tag" id="wr-draft-count"></span></div>
     <div class="wr-editor"><input id="wr-title" type="text" maxlength="120" placeholder="作文标题…" aria-label="作文标题"><textarea id="wr-content" rows="12" placeholder="从这里开始写……写完点下面的保存。" aria-label="作文正文"></textarea>
       <p class="wr-stats" id="wr-stats" aria-live="polite"></p><p class="wr-hints" id="wr-hints" aria-live="polite"></p>
       <p class="wr-feedback" id="wr-feedback" role="status" aria-live="polite"></p>

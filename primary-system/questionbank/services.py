@@ -9,6 +9,7 @@ import random
 from uuid import uuid4
 
 from django.db.models import Count, Q
+from django.http import Http404
 from django.utils import timezone
 
 from . import types
@@ -16,6 +17,7 @@ from .models import AnswerRecord, Question
 
 SIZES = (5, 10, 20)
 DEFAULT_SIZE = 10
+SELF_CHECK = Q(question__type=Question.Type.SELFCHECK)
 
 
 class AttemptConflict(Exception):
@@ -56,14 +58,33 @@ def client_question(question):
     return item
 
 
-def latest_wrong_ids(scope, limit=None):
-    """错题本口径：每人每题取最近一次作答，答错的进入错题列表（新错在前）。"""
+def grammar_pool(chapter_id):
+    """用讲义的知识点编号限定题池，避免按题干或标签猜测章节。"""
+    from grammar.catalog import SOURCE_CODE, chapters_with_lessons
+
+    chapter = next((item for item in chapters_with_lessons() if item['id'] == chapter_id), None)
+    if chapter is None:
+        raise Http404('找不到这一章语法。')
+    refs = [f"grammar:{lesson['id']}:quiz" for lesson in chapter['lessons']]
+    ids = Question.objects.filter(
+        active=True, track=Question.Track.REGULAR, area=Question.Area.ENGLISH,
+        source_key=SOURCE_CODE, source_ref__in=refs,
+    ).values_list('pk', flat=True)
+    return chapter, ids
+
+
+def latest_wrong_ids(scope, limit=None, *, track='', ids=None):
+    """可重练的错题：只看仍启用的题，每题取最近一次作答。"""
     if not scope:
         return []
-    records = AnswerRecord.objects.filter(**scope).order_by('-created_at').only('id', 'question_id', 'correct')
+    records = AnswerRecord.objects.filter(question__active=True, **scope)
+    if track in Question.Track.values:
+        records = records.filter(question__track=track)
+    if ids is not None:
+        records = records.filter(question_id__in=ids)
     latest = {}
-    for record in records:
-        latest.setdefault(record.question_id, record.correct)
+    for question_id, correct in records.order_by('-created_at', '-pk').values_list('question_id', 'correct').iterator():
+        latest.setdefault(question_id, correct)
     wrong = [question_id for question_id, correct in latest.items() if not correct]
     return wrong[:limit] if limit else wrong
 
@@ -95,27 +116,24 @@ def owner_summary(scope, track=''):
     """主页统计卡数字：答题数、答对数、本周新增（只读路径，不建会话）。
 
     track 给定时经题目 FK 只统计该轨别的作答。"""
-    if not scope:
-        return {'answered': 0, 'correct': 0, 'week': 0, 'areas': {}}
-    rows = AnswerRecord.objects.filter(**scope)
+    rows = AnswerRecord.objects.filter(**scope) if scope else AnswerRecord.objects.none()
     if track in Question.Track.values:
         rows = rows.filter(question__track=track)
-    week_cutoff = timezone.now() - timedelta(days=7)
-    return {
-        'answered': rows.count(),
-        'correct': rows.filter(correct=True).count(),
-        'week': rows.filter(created_at__gte=week_cutoff).count(),
-        'areas': area_counts(rows),
-    }
+    return {**answer_counts(rows), 'areas': area_counts(rows)}
+
+
+def answer_counts(rows):
+    return rows.aggregate(
+        answered=Count('pk'),
+        correct=Count('pk', filter=Q(correct=True) & ~SELF_CHECK),
+        selfchecked=Count('pk', filter=SELF_CHECK),
+        week=Count('pk', filter=Q(created_at__gte=timezone.now() - timedelta(days=7))),
+    )
 
 
 def track_wrong_ids(scope, track):
     """错题池 ∩ 轨别：错题重练与各入口的错题条都按轨别取子集。"""
-    wrong_ids = latest_wrong_ids(scope)
-    if not wrong_ids:
-        return []
-    return list(Question.objects.filter(pk__in=wrong_ids, track=track, active=True)
-                .values_list('id', flat=True))
+    return latest_wrong_ids(scope, track=track) if track in Question.Track.values else []
 
 
 def tag_counts(track):
@@ -128,8 +146,10 @@ def tag_counts(track):
 
 
 def area_counts(answer_rows):
-    """按学科分计答题与答对：返回 {area: {'answered', 'correct'}}。"""
+    """按学科分计作答、客观答对和自评次数。"""
     grouped = (answer_rows.values('question__area')
-               .annotate(total=Count('id'), right=Count('id', filter=Q(correct=True))))
-    return {row['question__area']: {'answered': row['total'], 'correct': row['right']}
+               .annotate(total=Count('id'), right=Count('id', filter=Q(correct=True) & ~SELF_CHECK),
+                         selfchecked=Count('id', filter=SELF_CHECK)))
+    return {row['question__area']: {'answered': row['total'], 'correct': row['right'],
+                                  'selfchecked': row['selfchecked']}
             for row in grouped}

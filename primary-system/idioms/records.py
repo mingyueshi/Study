@@ -7,7 +7,8 @@ action 落一条，看释义猜成语由上报端点逐题落一条（对错都�
 """
 from datetime import timedelta
 
-from django.db.models import Sum
+from django.db import transaction
+from django.db.models import Count, Q, Sum
 from django.urls import reverse
 from django.utils import timezone
 
@@ -17,7 +18,7 @@ GUEST_KEY = 'idioms_guest'
 GAME_URLS = {'quiz': 'idiom-quiz', 'pairs': 'idiom-pairs', 'emoji': 'idiom-emoji'}
 
 
-def owner_filter(request):
+def owner_filter(request, *, initial_guest_key=None):
     """归属过滤字典：登录玩家挂账号，游客挂浏览器会话键（与场景单词同式）。"""
     if request.user.is_authenticated:
         return {'user': request.user}
@@ -26,7 +27,7 @@ def owner_filter(request):
     key = request.session.get(GUEST_KEY)
     if not key:
         # 同一已存在会话的多标签页首写使用同一个稳定键；不合并账号。
-        key = request.session.session_key
+        key = initial_guest_key or request.session.session_key
         request.session[GUEST_KEY] = key
     return {'guest_key': key}
 
@@ -39,6 +40,43 @@ def record_play(request, *, game, size, correct, extra=None):
                                        extra=extra or {}, **owner_filter(request))
     _reward(request, game, bool(correct))
     return record
+
+
+@transaction.atomic
+def record_quiz_attempt(request, attempt_id, correct, extra, *, initial_guest_key):
+    """同一道签名题只记首次判分，并在同一事务里发放积分。"""
+    from .models import PlayRecord
+
+    owner = owner_filter(request, initial_guest_key=initial_guest_key)
+    record, created = PlayRecord.objects.get_or_create(
+        attempt_id=attempt_id,
+        defaults={**owner, 'game': PlayRecord.Game.QUIZ, 'size': 1,
+                  'correct': int(correct), 'extra': extra},
+    )
+    if (record.user_id != getattr(owner.get('user'), 'pk', None)
+            or record.guest_key != owner.get('guest_key', '')):
+        return None
+    if created:
+        _reward(request, PlayRecord.Game.QUIZ, correct)
+    return record
+
+
+def quiz_score(request):
+    """同一账号或游客会话内的累计成绩，查询不会创建游客会话。"""
+    from .models import PlayRecord
+
+    rows = PlayRecord.objects.filter(game=PlayRecord.Game.QUIZ)
+    if request.user.is_authenticated:
+        rows = rows.filter(user=request.user)
+    else:
+        key = request.session.get(GUEST_KEY)
+        if not key:
+            return {'asked': 0, 'correct': 0, 'streak': 0}
+        rows = rows.filter(guest_key=key)
+    score = rows.aggregate(asked=Count('pk'), correct=Count('pk', filter=Q(correct=1)))
+    last_wrong = rows.filter(correct=0).order_by('-pk').values_list('pk', flat=True).first()
+    score['streak'] = rows.filter(pk__gt=last_wrong).count() if last_wrong else score['correct']
+    return score
 
 
 def _reward(request, game, correct):

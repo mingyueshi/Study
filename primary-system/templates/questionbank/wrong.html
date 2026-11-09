@@ -1,24 +1,22 @@
 {% extends 'base.html' %}{% load static %}{% block title %}错题本 · 乐学堂{% endblock %}
 {% block content %}<link rel="stylesheet" href="{% static 'questionbank/bank.css' %}?v=3">
-<nav class="qb-crumb"><a href="{% url 'questionbank' %}">← 回题库</a></nav>
+<nav class="qb-crumb">{% if grammar_chapter %}<a href="{{ chapter_practice_url }}">← 回本章练习</a>{% else %}<a href="{% url 'questionbank' %}">← 回题库</a>{% endif %}</nav>
 <header class="qb-practice-head">
   <p class="eyebrow">错题本</p>
-  <h1>答错的题，都在这里</h1>
-  <p class="qb-hero-tag">每道题取最近一次作答：重练答对后，它会自己退出错题本。</p>
-  <div class="qb-toolbar">
+  <h1>{% if grammar_chapter %}{{ grammar_chapter.title }} · 本章错题{% else %}答错的题，都在这里{% endif %}</h1>
+  <p class="qb-hero-tag">这里只看最近一次作答。重练答对，或在例题自评中选「我做对了」，这道题就会移出错题本。</p>
+  {% if not grammar_chapter %}<div class="qb-toolbar">
     <span class="qb-label">轨别</span>
     <a class="chip{% if not track %} on{% endif %}" href="{% url 'questionbank-wrong' %}">全部</a>
     <a class="chip{% if track == 'regular' %} on{% endif %}" href="?track=regular">普通</a>
     <a class="chip{% if track == 'olympiad' %} on{% endif %}" href="?track=olympiad">奥数</a>
-  </div>
+  </div>{% endif %}
   <div class="qb-area-actions">
-    {% if track == 'olympiad' and count %}
-    <a class="button small" href="{{ practice_url }}">一键重练这 {{ count }} 题 →</a>
-    {% elif track == 'regular' and count %}
-    <a class="button small" href="{{ practice_url }}">一键重练这 {{ count }} 题 →</a>
+    {% if track and count %}
+    <a class="button small" href="{{ practice_url }}">开始重练 · 共 {{ count }} 道错题 →</a>
     {% elif not track %}
-    {% if regular_count %}<a class="button small" href="{% url 'questionbank-practice' %}?mode=wrong&amp;count=10">重练普通 {{ regular_count }} 题 →</a>{% endif %}
-    {% if olympiad_count %}<a class="button small" href="{% url 'questionbank-olympiad-practice' %}?mode=wrong&amp;count=10">重练奥数 {{ olympiad_count }} 题 →</a>{% endif %}
+    {% if regular_count %}<a class="button small" href="{% url 'questionbank-practice' %}?mode=wrong&amp;count=10">重练普通错题 · 共 {{ regular_count }} 道 →</a>{% endif %}
+    {% if olympiad_count %}<a class="button small" href="{% url 'questionbank-olympiad-practice' %}?mode=wrong&amp;count=10">重练奥数错题 · 共 {{ olympiad_count }} 道 →</a>{% endif %}
     {% endif %}
   </div>
 </header>
@@ -37,6 +35,8 @@
   </article>
   {% endfor %}
 </section>
+{% elif grammar_chapter %}
+<div class="notice">本章没有待重练的错题。<a class="button small" href="{{ chapter_practice_url }}">练本章 →</a></div>
 {% else %}
 <div class="notice">错题本是空的——去练一组，答错的题会自动收进来。<a class="button small" href="{% url 'questionbank' %}">回题库挑一组 →</a></div>
 {% endif %}

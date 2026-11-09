@@ -13,7 +13,13 @@
         countEl = $('wr-draft-count'), notebookEl = $('notebook');
   if (!contentEl) return;
 
-  const AUTOSAVE_KEY = 'writing_autosave_v1';
+  const AUTOSAVE_PREFIX = 'writing_autosave_v2:';
+  let autosaveScope = notebookEl.dataset.autosaveScope;
+  let autosaveSnapshot = null;
+  let dirty = false;
+  let saving = false;
+  let ownerChanged = false;
+  let pendingLoad = null;
   let drafts = [];
   let currentDraftId = null;
   let currentRevision = 0;
@@ -43,7 +49,8 @@
   }
 
   function openInEditor(topicTitle, goal) {
-    if (contentEl.value.trim() && !confirm('作文本里有没保存的内容，覆盖吗？')) return;
+    if (saving || ownerChanged || !canReplaceEditor()) return;
+    clearAutosave();
     const card = Array.from(document.querySelectorAll('.wr-card'))
       .find((el) => el.dataset.title === topicTitle);
     goodWords = card ? Array.from(card.querySelectorAll('.wr-chip')).map((el) => el.textContent.trim()) : [];
@@ -53,9 +60,7 @@
     if (goal) titleEl.setAttribute('title', goal);
     contentEl.value = '';
     contentEl.dataset.topic = topicTitle || '';
-    updateStats();
-    localStorage.setItem(AUTOSAVE_KEY, JSON.stringify(
-      {topic: topicTitle || '', title: titleEl.value, content: contentEl.value}));
+    editorChanged();
     notebookEl.scrollIntoView({behavior: 'smooth', block: 'start'});
     titleEl.focus();
   }
@@ -96,16 +101,50 @@
     if (chars >= 60 && paragraphs < 3) hints.push('试着分成 3 段：开头、中间、结尾。');
     if (chars >= 150 && paragraphs >= 3 && used >= 2) hints.push('🎉 已经很像一篇像样的作文，读给家人听一听！');
     hintsEl.textContent = hints.join(' ');
-    try { localStorage.setItem(AUTOSAVE_KEY, JSON.stringify(
-      {topic: contentEl.dataset.topic || '', title: titleEl.value, content: text})); } catch (e) { /* 忽略 */ }
+  }
+
+  function canReplaceEditor() {
+    return !dirty || confirm('当前作文还有没保存的内容，要换一篇吗？');
+  }
+
+  function editorChanged() {
+    dirty = true;
+    updateStats();
+    stashAutosave();
+  }
+
+  function stashAutosave() {
+    if (!autosaveScope || ownerChanged) return;
+    const snapshot = JSON.stringify({
+      draftId: currentDraftId, revision: currentRevision,
+      topic: contentEl.dataset.topic || '', title: titleEl.value, content: contentEl.value,
+    });
+    try {
+      localStorage.setItem(AUTOSAVE_PREFIX + autosaveScope, snapshot);
+      autosaveSnapshot = snapshot;
+    } catch (e) { /* 存储不可用时仍可手动保存 */ }
+  }
+
+  function clearAutosave() {
+    if (!autosaveScope || autosaveSnapshot === null) return;
+    try {
+      const key = AUTOSAVE_PREFIX + autosaveScope;
+      if (localStorage.getItem(key) === autosaveSnapshot) localStorage.removeItem(key);
+    } catch (e) { /* 忽略 */ }
+    autosaveSnapshot = null;
   }
 
   function restoreAutosave() {
+    if (!autosaveScope) return;
     try {
-      const raw = localStorage.getItem(AUTOSAVE_KEY);
+      const raw = localStorage.getItem(AUTOSAVE_PREFIX + autosaveScope);
       if (!raw) return;
       const saved = JSON.parse(raw);
-      if (saved && (saved.title || saved.content)) {
+      if (saved && (saved.draftId || saved.title || saved.content)) {
+        currentDraftId = saved.draftId || null;
+        currentRevision = saved.revision || 0;
+        autosaveSnapshot = raw;
+        dirty = true;
         titleEl.value = saved.title || '';
         contentEl.value = saved.content || '';
         contentEl.dataset.topic = saved.topic || '';
@@ -119,13 +158,44 @@
 
   /* ---------- 草稿 API ---------- */
 
-  async function loadDrafts() {
+  function handleOwnerChange(data) {
+    if (data?.code !== 'owner_changed') return false;
+    ownerChanged = true;
+    titleEl.value = '';
+    contentEl.value = '';
+    contentEl.dataset.topic = '';
+    goodWords = [];
+    drafts = [];
+    countEl.textContent = '';
+    listEl.innerHTML = '';
+    titleEl.disabled = contentEl.disabled = saveEl.disabled = true;
+    updateStats();
+    showFeedback(data.error, true);
+    return true;
+  }
+
+  function loadDrafts() {
+    if (!pendingLoad) pendingLoad = fetchDrafts().finally(() => { pendingLoad = null; });
+    return pendingLoad;
+  }
+
+  async function fetchDrafts() {
+    if (ownerChanged) return;
     try {
-      const response = await fetch('/writing/api/drafts/', {headers: {Accept: 'application/json'}});
+      const response = await fetch('/writing/api/drafts/', {
+        headers: {Accept: 'application/json', 'X-Writing-Scope': autosaveScope || 'guest'},
+      });
       const data = await response.json().catch(() => ({}));
-      if (!response.ok || !Array.isArray(data?.drafts)) {
+      if (ownerChanged || handleOwnerChange(data)) return;
+      if (!response.ok || !Array.isArray(data?.drafts) || !data.autosave_scope) {
         showFeedback('草稿列表暂时读不出来，稍后刷新再试。', true);
         return;
+      }
+      if (!autosaveScope) {
+        autosaveScope = data.autosave_scope;
+        if (dirty) stashAutosave();
+        else restoreAutosave();
+        updateStats();
       }
       drafts = data.drafts;
       renderDrafts();
@@ -153,77 +223,139 @@
       </div>`).join('');
   }
 
+  function openDraft(draft) {
+    if (saving || ownerChanged || !canReplaceEditor()) return;
+    clearAutosave();
+    dirty = false;
+    const card = Array.from(document.querySelectorAll('.wr-card'))
+      .find((el) => el.dataset.title === draft.topic_title);
+    goodWords = card ? Array.from(card.querySelectorAll('.wr-chip')).map((el) => el.textContent.trim()) : [];
+    currentDraftId = draft.id;
+    currentRevision = draft.revision;
+    titleEl.value = draft.title;
+    contentEl.value = draft.content;
+    contentEl.dataset.topic = draft.topic_title || '';
+    updateStats();
+    showFeedback('');
+    notebookEl.scrollIntoView({behavior: 'smooth', block: 'start'});
+  }
+
+  async function openLinkedDraft() {
+    const requested = new URLSearchParams(location.search).get('draft');
+    if (!requested || !autosaveScope || ownerChanged) return;
+    const id = requested.toLowerCase();
+    if (!/^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/.test(id)) {
+      showFeedback('找不到这篇草稿，可以在作文本里看看。', true);
+      return;
+    }
+    if (id === currentDraftId) {
+      notebookEl.scrollIntoView({behavior: 'smooth', block: 'start'});
+      return;
+    }
+    const listed = drafts.find((draft) => draft.id === id);
+    if (listed) {
+      openDraft(listed);
+      return;
+    }
+    const previousDraftId = currentDraftId;
+    try {
+      // 列表只显示最近的草稿，仍可从链接直接打开更早的稿件。
+      const response = await fetch(`/writing/api/drafts/${id}/`, {
+        headers: {Accept: 'application/json', 'X-Writing-Scope': autosaveScope},
+      });
+      const data = await response.json().catch(() => ({}));
+      if (ownerChanged || handleOwnerChange(data) || previousDraftId !== currentDraftId) return;
+      if (response.ok && data.id === id) openDraft(data);
+      else if (response.status === 404) showFeedback('找不到这篇草稿，可以在作文本里看看。', true);
+      else showFeedback('这篇草稿暂时读不出来，稍后再试。', true);
+    } catch (error) {
+      showFeedback('网络不给力，这篇草稿暂时读不出来。', true);
+    }
+  }
+
   listEl?.addEventListener('click', async (event) => {
+    if (saving || ownerChanged) return;
     const button = event.target.closest('button');
     if (!button) return;
     const item = button.closest('.wr-draft');
     const draft = drafts.find((d) => d.id === item?.dataset.id);
     if (!draft) return;
     if (button.dataset.open) {
-      const card = Array.from(document.querySelectorAll('.wr-card'))
-        .find((el) => el.dataset.title === draft.topic_title);
-      goodWords = card ? Array.from(card.querySelectorAll('.wr-chip')).map((el) => el.textContent.trim()) : [];
-      currentDraftId = draft.id;
-      currentRevision = draft.revision;
-      titleEl.value = draft.title;
-      contentEl.value = draft.content;
-      contentEl.dataset.topic = draft.topic_title || '';
-      updateStats();
-      notebookEl.scrollIntoView({behavior: 'smooth', block: 'start'});
+      openDraft(draft);
     } else if (button.dataset.read) {
       if (window.SpeechKit) SpeechKit.speak(`${draft.title || '未命名作文'}。${draft.content}`);
     } else if (button.dataset.del) {
       if (!confirm(`删除《${draft.title || '未命名'}》？删了就找不回来了。`)) return;
       const response = await fetch(`/writing/api/drafts/${draft.id}/`, {
-        method: 'DELETE', headers: {'X-CSRFToken': csrf()},
+        method: 'DELETE', headers: {'X-CSRFToken': csrf(), 'X-Writing-Scope': autosaveScope},
       });
+      if (ownerChanged) return;
       if (response.ok) {
         drafts = drafts.filter((d) => d.id !== draft.id);
-        if (currentDraftId === draft.id) { currentDraftId = null; currentRevision = 0; }
+        if (currentDraftId === draft.id) {
+          currentDraftId = null;
+          currentRevision = 0;
+          if (dirty) stashAutosave();
+        }
         renderDrafts();
         showFeedback('已删除。');
       } else {
-        showFeedback('删除没成功，请刷新后再试。', true);
+        const data = await response.json().catch(() => ({}));
+        if (!handleOwnerChange(data)) showFeedback('删除没成功，请刷新后再试。', true);
       }
     }
   });
 
   saveEl?.addEventListener('click', async () => {
+    if (saving || ownerChanged) return;
     const title = titleEl.value.trim();
     const content = contentEl.value;
     if (!title && !content.trim()) { showFeedback('先写点什么再保存吧。', true); return; }
     saveEl.disabled = true;
+    saving = true;
     showFeedback('正在保存……');
     const body = {title, content, topic_title: contentEl.dataset.topic || ''};
     const url = currentDraftId ? `/writing/api/drafts/${currentDraftId}/` : '/writing/api/drafts/';
     const method = currentDraftId ? 'PATCH' : 'POST';
     if (currentDraftId) body.revision = currentRevision;
     try {
+      if (!autosaveScope) {
+        await loadDrafts();
+        if (ownerChanged || !autosaveScope) return;
+      }
       const response = await fetch(url, {
-        method, headers: {'Content-Type': 'application/json', 'X-CSRFToken': csrf()},
+        method, headers: {'Content-Type': 'application/json', 'X-CSRFToken': csrf(),
+                          'X-Writing-Scope': autosaveScope},
         body: JSON.stringify(body),
       });
       const data = await response.json().catch(() => ({}));
+      if (ownerChanged || handleOwnerChange(data)) return;
       if (!response.ok || !data?.id) {
-        showFeedback(data?.error || '保存没成功，请稍后再试。', true);
+        const message = response.status === 409 ? '这篇草稿已在别处保存。暂存还在，请先核对最新稿。'
+          : data?.error || '保存没成功，请稍后再试。';
+        showFeedback(message, true);
         return;
       }
       currentDraftId = data.id;
       currentRevision = data.revision;
       if (window.rewardToast && data.rewards) window.rewardToast(data.rewards);
-      showFeedback(`已保存《${data.title || '未命名'}》到作文本。`);
+      dirty = titleEl.value.trim() !== title || contentEl.value !== content;
+      if (dirty) stashAutosave();
+      else clearAutosave();
+      showFeedback(dirty ? '已保存上一版，你刚写的内容已暂存。' : `已保存《${data.title || '未命名'}》到作文本。`);
       const index = drafts.findIndex((d) => d.id === data.id);
       if (index >= 0) drafts[index] = data; else drafts.unshift(data);
       renderDrafts();
-      try { localStorage.removeItem(AUTOSAVE_KEY); } catch (e) { /* 忽略 */ }
     } catch (error) {
       showFeedback('网络中断，还没确认是否保存；请刷新页面核对后再试。', true);
     } finally {
-      saveEl.disabled = false;
+      saving = false;
+      saveEl.disabled = ownerChanged;
     }
   });
 
   clearEl?.addEventListener('click', () => {
+    if (saving || ownerChanged) return;
     if (!confirm('清空当前编辑内容？（已保存到作文本的不受影响）')) return;
     currentDraftId = null;
     currentRevision = 0;
@@ -231,9 +363,10 @@
     contentEl.value = '';
     contentEl.dataset.topic = '';
     goodWords = [];
+    dirty = false;
     updateStats();
     showFeedback('');
-    try { localStorage.removeItem(AUTOSAVE_KEY); } catch (e) { /* 忽略 */ }
+    clearAutosave();
   });
 
   readEl?.addEventListener('click', () => {
@@ -243,10 +376,18 @@
   });
 
   searchEl?.addEventListener('input', filterCards);
-  titleEl.addEventListener('input', updateStats);
-  contentEl.addEventListener('input', updateStats);
+  titleEl.addEventListener('input', editorChanged);
+  contentEl.addEventListener('input', editorChanged);
+  document.addEventListener('visibilitychange', async () => {
+    if (document.hidden) return;
+    await pendingLoad;
+    if (!document.hidden) loadDrafts();
+  });
+  window.addEventListener('pageshow', (event) => {
+    if (event.persisted) window.location.reload();
+  });
 
   restoreAutosave();
   updateStats();
-  loadDrafts();
+  loadDrafts().then(openLinkedDraft);
 })();

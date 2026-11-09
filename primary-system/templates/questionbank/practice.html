@@ -1,22 +1,26 @@
 {% extends 'base.html' %}{% load static %}{% block title %}{{ eyebrow }} · 乐学堂{% endblock %}
 {% block content %}<link rel="stylesheet" href="{% static 'questionbank/bank.css' %}?v=4">
 <script src="{% static 'speech.js' %}" defer></script><script src="{% static 'tts.js' %}" defer></script>
-<script src="{% static 'questionbank/practice.js' %}?v=2" defer></script>
+<script src="{% static 'questionbank/practice.js' %}?v=3" defer></script>
 <nav class="qb-crumb"><a href="{{ home_url }}">← 回{{ home_label }}</a></nav>
 <header class="qb-practice-head">
   <p class="eyebrow">{% if mode_wrong %}错题重练{% else %}{{ eyebrow }}{% endif %}</p>
-  <h1>{% if mode_wrong %}错题，再闯一遍{% else %}{{ area_label }}{% endif %}</h1>
+  <h1>{% if mathbook_title %}{{ mathbook_title }}{% elif grammar_chapter %}{{ grammar_chapter.title }} · {% if mode_wrong %}错题重练{% else %}章节练习{% endif %}{% elif mode_wrong %}错题，再闯一遍{% else %}{{ area_label }}{% endif %}</h1>
 </header>
 
 <div class="qb-practice-layout">
   <aside class="qb-side" aria-label="练习设置">
     <h2>练习设置</h2>
+    {% if single_question %}
+    <p class="qb-side-note">自己做一遍，再对照参考答案。</p>
+    {% else %}
     <p class="qb-label">数量</p>
     <div class="qb-side-chips">
       {% for size_option in sizes %}
       <a class="chip{% if size_option == size %} on{% endif %}" href="?{% if area %}area={{ area }}&amp;{% endif %}{% if tag %}tag={{ tag }}&amp;{% endif %}count={{ size_option }}{% if mode_wrong %}&amp;mode=wrong{% endif %}">{{ size_option }} 题</a>
       {% endfor %}
     </div>
+    {% endif %}
     {% if tag_chips %}
     <p class="qb-label">主题</p>
     <div class="qb-side-chips qb-side-wrap">
@@ -26,15 +30,27 @@
       {% endfor %}
     </div>
     {% endif %}
+    {% if grammar_chapter %}
+    <p class="qb-side-note"><a href="{{ wrong_url }}">看看本章错题本</a></p>
+    {% elif mathbook_title %}
+    <p class="qb-side-note"><a href="{{ home_url }}">回数学教材</a></p>
+    {% else %}
     <p class="qb-side-note">换学科回<a href="{{ home_url }}">题库主页</a>挑选。</p>
+    {% endif %}
   </aside>
   <div class="qb-practice-main">
-    {% if empty_wrong %}
+    {% if empty_wrong and grammar_chapter %}
+    <div class="notice">本章没有待重练的错题。<a class="button small" href="{{ practice_url }}">练本章 →</a></div>
+    {% elif grammar_chapter and not questions %}
+    <div class="notice">本章的练习题还在准备中。<a class="button small" href="{{ home_url }}">回本章讲解 →</a></div>
+    {% elif mathbook_title and not questions %}
+    <div class="notice">这里暂时没有可练的题。<a class="button small" href="{{ home_url }}">回数学教材 →</a></div>
+    {% elif empty_wrong %}
     <div class="notice">错题本是空的——先去练一组，答错的题会自动收进来。<a class="button small" href="{{ home_url }}">回{{ home_label }}挑一组 →</a></div>
     {% else %}
     {{ questions|json_script:"qb-questions" }}
     <section class="qb-board" data-qb-practice data-answer-url="{% url 'questionbank-answer' %}" data-practice-url="{{ practice_url }}" data-area="{{ area }}" data-tag="{{ tag }}" data-mode-wrong="{{ mode_wrong|yesno:'1,0' }}" data-size="{{ size }}">
-      <p class="qb-progress">第 <b data-qb-index>1</b>／<b data-qb-total>0</b> 题 · 答对 <b data-qb-correct>0</b></p>
+      <p class="qb-progress">第 <b data-qb-index>1</b>／<b data-qb-total>0</b> 题<span data-qb-tally></span></p>
       <div class="qb-progress-bar" aria-hidden="true"><span data-qb-progress-fill></span></div>
       <div class="qb-question" data-qb-question></div>
       <section class="qb-feedback" hidden data-qb-feedback aria-live="polite">
@@ -48,11 +64,11 @@
       </section>
       <section class="qb-result" hidden data-qb-result>
         <p class="qb-result-emoji" aria-hidden="true">🏁</p>
-        <p class="qb-result-stars" data-qb-stars aria-label="星级评价"></p>
-        <p class="qb-result-score">答对 <b data-qb-final-correct>0</b>／<b data-qb-final-total>0</b> 题</p>
+        <p class="qb-result-stars" data-qb-stars hidden></p>
+        <p class="qb-result-score" data-qb-final-score></p>
         <p class="qb-result-praise" data-qb-praise></p>
         <div class="qb-result-actions">
-          <a class="button small" data-qb-again>再练一组 ↻</a>
+          <a class="button small" data-qb-again>{% if single_question %}再练一次{% else %}再练一组{% endif %} ↻</a>
           <a class="button small ghost" href="{{ wrong_url }}">看看错题本</a>
           <a class="button small ghost" href="{{ home_url }}">回{{ home_label }}</a>
         </div>

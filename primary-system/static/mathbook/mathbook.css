@@ -355,7 +355,7 @@
 @media print {
   body { background: #fff; font-size: 13px; }
   .site-header, .site-footer, .sidebar, .toolbar, .textbook-banner, .skip-link,
-  .say, .learn-btn, .ktabs, .view-bar, .unit-head-fig,
+  .say, .learn-btn, .ktabs, .view-bar, .unit-head-fig, .mathbook-progress, .mk-card-actions,
   .fig-ctrl, .fig-btn { display: none !important; }
   .study-page { background: none; }
   .study-shell { display: block; padding: 0; }
@@ -568,3 +568,9 @@
 }
 .study-page .textbook-banner.textbook-banner-hero span { color: var(--muted); font-size: 13px; font-weight: 800; letter-spacing: .08em; }
 .study-page .textbook-banner.textbook-banner-hero strong { font-size: clamp(24px, 2.4vw, 32px); color: var(--ink); }
+.study-page .mathbook-progress { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; margin: 0 0 14px; }
+.study-page .mathbook-progress p { margin: 0; color: var(--muted); }
+.study-page .mathbook-progress [hidden] { display: none; }
+.study-page .mk-card-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.study-page .mk-card-actions [aria-pressed="true"] { background: #e5f5e9; color: #2e6c4b; }
+.study-page .kcard { scroll-margin-top: 90px; }

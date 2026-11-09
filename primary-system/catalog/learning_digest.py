@@ -41,6 +41,18 @@ def _textbook_card(user, _overview):
     }
 
 
+def _mathbook_card(_user, overview):
+    summary = overview['math']
+    latest = _latest(summary['recent'])
+    return {
+        'key': 'mathbook', 'name': '数学教材', 'icon': 'math', 'color': 'math',
+        'url': latest['url'] if latest else reverse('mathbook'),
+        'url_label': '接着学 →' if latest else '选一册开始 →',
+        'headlines': [(summary['read'], '已读'), (summary['learned'], '自评掌握'), (summary['total'], '知识点')],
+        'week': '', 'footnote': '', 'latest': latest,
+    }
+
+
 def _words_card(user, overview):
     summary = overview.get('words')
     if not summary:
@@ -137,11 +149,14 @@ def _questionbank_card(user, _overview):
     from questionbank.records import learning_summary, recent
 
     summary = learning_summary(user)
+    headlines = [(summary['answered'], '答题'), (summary['correct'], '答对')]
+    if summary['selfchecked']:
+        headlines.append((summary['selfchecked'], '自评'))
     return {
         'key': 'questionbank', 'name': '挑战题库', 'icon': 'quiz', 'color': 'math',
         'url': reverse('questionbank'),
         'url_label': '去继续挑战 →' if summary['answered'] else '去答几题 →',
-        'headlines': [(summary['answered'], '答题'), (summary['correct'], '答对')],
+        'headlines': headlines,
         'week': _week_text(summary['week'], '练了 '),
         'footnote': '',
         'latest': _latest(recent(user, 1)),
@@ -178,12 +193,12 @@ def _phrases_card(user, _overview):
     }
 
 
-AREA_CARDS = (_textbook_card, _words_card, _chain_card, _writing_card,
+AREA_CARDS = (_textbook_card, _mathbook_card, _words_card, _chain_card, _writing_card,
               _idioms_card, _feihualing_card, _polyphone_card, _questionbank_card,
               _plurals_card, _phrases_card)
 
 
-def merged_recent(user, limit=10):
+def merged_recent(user, limit=10, *, mathbook_rows=None):
     """各领域「最近学习行」按时间合并：家长看孩子最近在学什么。"""
     from hanzi.records import recent as hanzi_recent
     from idioms.records import recent as idioms_recent
@@ -193,7 +208,11 @@ def merged_recent(user, limit=10):
     from plurals.records import recent as plurals_recent
     from questionbank.records import recent as questionbank_recent
 
+    if mathbook_rows is None:
+        from mathbook.records import learning_summary as mathbook_summary
+        mathbook_rows = mathbook_summary(user)['recent']
     rows = textbook_recent(user, limit) + recent_activity(user, limit)
+    rows.extend(mathbook_rows)
     rows += idioms_recent(user, limit) + poetry_recent(user, limit) + hanzi_recent(user, limit)
     rows += questionbank_recent(user, limit) + plurals_recent(user, limit) + phrases_recent(user, limit)
     rows.sort(key=lambda row: row['when'], reverse=True)
@@ -204,4 +223,4 @@ def learning_digest(user):
     """登录用户的完整学习总览：areas 为总览卡，recent 为最近学习动态流。"""
     overview = learning_overview(user)
     areas = [card for card in (fn(user, overview) for fn in AREA_CARDS) if card is not None]
-    return {'areas': areas, 'recent': merged_recent(user)}
+    return {'areas': areas, 'recent': merged_recent(user, mathbook_rows=overview['math']['recent'])}

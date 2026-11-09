@@ -54,7 +54,7 @@ def _words_recent(user, limit=8):
     rows = WordProgress.objects.filter(user=user).select_related('target')[:limit]
     return [{'title': row.target.label,
              'note': '场景单词 · 已掌握' if row.learned else '场景单词 · 学过',
-             'when': row.updated_at, 'url': reverse('scenario-words')}
+             'when': row.updated_at, 'url': reverse('scenario-words', query={'target': row.target_id})}
             for row in rows]
 
 
@@ -69,7 +69,8 @@ def _writing_recent(user, limit=8):
     from writing.models import WritingDraft
     rows = WritingDraft.objects.filter(user=user)[:limit]
     return [{'title': row.title or row.topic_title or '无题草稿',
-             'note': '作文坊 · 草稿', 'when': row.updated_at, 'url': reverse('writing')}
+             'note': '作文坊 · 草稿', 'when': row.updated_at,
+             'url': reverse('writing', query={'draft': row.pk}, fragment='notebook')}
             for row in rows]
 
 
@@ -82,7 +83,9 @@ def _grammar_summary(user):
 
 
 def _mathbook_summary(user):
-    return None
+    from mathbook.records import learning_summary
+
+    return learning_summary(user)
 
 
 def _chinesebook_summary(user):
@@ -128,7 +131,7 @@ ENTRIES = {
         'route_name': 'writing',
         'tag': '打开作文坊 →',
         'headline': '作文坊已开始',
-        'blurb': '打开写作锦囊，写自己的故事。草稿自动保存，跟着你的账号走。',
+        'blurb': '打开写作锦囊，写自己的故事。写到一半会暂存在这台设备，点保存才会放进作文本。',
         'button': '进入作文坊',
         'learning_summary': _writing_summary,
         'recent': _writing_recent,

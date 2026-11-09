@@ -4,10 +4,10 @@
 「会话键」双轨，键只在 POST 写入路径生成——页面 GET 保持零写入、零会话。
 汇总口径含义明确：答题数、答对数、本周新增，不合成跨学科掌握百分比。
 """
-from datetime import timedelta
-
 from django.urls import reverse
-from django.utils import timezone
+
+from .models import AnswerRecord, Question
+from .services import answer_counts
 
 GUEST_KEY = 'questionbank_guest'
 
@@ -36,23 +36,18 @@ def read_scope(request):
 
 def _row(record):
     stem = record.question.stem
+    result = '答对' if record.correct else '答错'
+    if record.question.type == Question.Type.SELFCHECK:
+        result = '自评做对' if record.correct else '自评再想想'
     return {'title': stem if len(stem) <= 24 else stem[:24] + '…',
-            'note': f'挑战题库 · {"答对" if record.correct else "答错"}',
+            'note': f'挑战题库 · {result}',
             'when': record.created_at, 'url': reverse('questionbank')}
 
 
 def learning_summary(user):
-    from .models import AnswerRecord
-
-    rows = AnswerRecord.objects.filter(user=user)
-    week_cutoff = timezone.now() - timedelta(days=7)
-    return {'answered': rows.count(),
-            'correct': rows.filter(correct=True).count(),
-            'week': rows.filter(created_at__gte=week_cutoff).count()}
+    return answer_counts(AnswerRecord.objects.filter(user=user))
 
 
 def recent(user, limit=8):
-    from .models import AnswerRecord
-
     return [_row(record) for record in
             AnswerRecord.objects.filter(user=user).select_related('question')[:limit]]

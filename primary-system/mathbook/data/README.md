@@ -40,8 +40,14 @@ make mathbook-data                          # 或 node scripts/build_mathbook.cj
 ## 与挑战题库的关系
 
 例题自评与易错诊所题由 `scripts/build_questionbank.cjs` 从同一份
-`primary/math-data.js` 生成批次进题库（服务端判分、落记录、进错题本）；
-教材册页内「已掌握」只存浏览器 localStorage，两边口径独立、不互相同步。
+`primary/math-data.js` 生成批次进题库。四上知识卡按 `math:{知识点ID}:example`
+打开对应的自评题，易错诊所按原始条目打开判断练习。自评记录孩子的对照结果，
+判断题由服务端判分。题库分别显示自评和客观答对，练完可以返回原知识点或易错诊所。
+
+## 账号进度
+
+- 已读和自评掌握是两个独立标记，按册次和知识点 ID 保存。上次单元按册次和单元 ID 保存。修订内容时保留含义相同的 ID，换成其他知识点时使用新 ID。
+- 游客沿用本机浏览器原有存档。登录后可确认导入，每个账号每册一次。导入分别合并已读与自评掌握，优先保留已有的账号续读位置。操作后，浏览器里的游客存档仍可继续使用。
 
 ## 新增一册 / 修订流程
 
@@ -49,6 +55,6 @@ make mathbook-data                          # 或 node scripts/build_mathbook.cj
 2. `scripts/build_mathbook.cjs` 的 `BOOKS` 映射加一行（新册），或直接改现有册内容
 3. `node primary/test/test-math-knowledge.js` 过源头契约（构建脚本也会先代跑）
 4. `make mathbook-data` 重跑同步（确定性产出、重跑无 diff；图片只增不删）
-4. 静态文件内容有变时升 `templates/mathbook/index.html` 与
+5. 静态文件内容有变时升 `templates/mathbook/reader.html` 与
    `templates/learning/item.html` 里的 `?v=N`
-5. `manage.py test mathbook` ＋ 打开 `/mathbook/` 目检
+6. `manage.py test mathbook` ＋ 打开 `/mathbook/` 目检

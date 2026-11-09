@@ -23,6 +23,7 @@ class PlayRecord(models.Model):
     game = models.CharField('游戏', max_length=10, choices=Game.choices)
     size = models.PositiveSmallIntegerField('题数', default=1)
     correct = models.PositiveSmallIntegerField('答对', default=0)
+    attempt_id = models.UUIDField('作答标识', null=True, unique=True, editable=False)
     extra = models.JSONField('补充信息', default=dict, blank=True)
     created_at = models.DateTimeField('时间', auto_now_add=True)
     updated_at = models.DateTimeField('更新时间', auto_now=True)

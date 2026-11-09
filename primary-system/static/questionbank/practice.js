@@ -16,7 +16,11 @@
 
   let index = 0;
   let correctCount = 0;
+  let selfcheckCount = 0;
+  let selfcheckRight = 0;
   let locked = false;
+  const selfcheckTotal = questions.filter((question) => question.type === 'selfcheck').length;
+  const objectiveTotal = questions.length - selfcheckTotal;
 
   const csrf = () => decodeURIComponent((document.cookie.match(/(?:^|;\s*)primary_csrftoken=([^;]*)/) || [])[1] || '');
   const escapeHtml = (text) => String(text).replace(/[&<>"']/g, (ch) => ({
@@ -26,7 +30,10 @@
   const updateProgress = (answered = false) => {
     $('[data-qb-index]').textContent = Math.min(index + 1, questions.length);
     $('[data-qb-total]').textContent = questions.length;
-    $('[data-qb-correct]').textContent = correctCount;
+    const tally = [];
+    if (objectiveTotal) tally.push(`答对 ${correctCount} 题`);
+    if (selfcheckTotal) tally.push(`已自评 ${selfcheckCount} 题`);
+    $('[data-qb-tally]').textContent = ' · ' + tally.join(' · ');
     const fill = $('[data-qb-progress-fill]');
     if (fill) fill.style.width = `${((index + (answered ? 1 : 0)) / questions.length) * 100}%`;
   };
@@ -92,7 +99,8 @@
       headers: { 'Content-Type': 'application/json', 'X-CSRFToken': csrf() },
       body: JSON.stringify({ uuid: question.uuid, attempt_id: question.attempt_id, given }),
     }).catch(() => null);
-    if (!response || !response.ok) {
+    const verdict = response?.ok ? await response.json().catch(() => null) : null;
+    if (typeof verdict?.correct !== 'boolean') {
       locked = false;
       showFeedback({
         correct: false, retry: true, given,
@@ -101,25 +109,30 @@
       });
       return;
     }
-    const verdict = await response.json();
     if (window.rewardToast && verdict.rewards) window.rewardToast(verdict.rewards);
-    if (verdict.correct) correctCount += 1;
+    const selfcheck = question.type === 'selfcheck';
+    if (selfcheck) {
+      selfcheckCount += 1;
+      if (verdict.correct) selfcheckRight += 1;
+    } else if (verdict.correct) {
+      correctCount += 1;
+    }
     markChoices(question, given, verdict);
     updateProgress(true);
     showFeedback({
-      correct: verdict.correct, given,
-      head: verdict.correct ? `${correctCount >= 3 ? correctCount + ' 连对，' : ''}答对了！` : '再想一想～',
+      correct: verdict.correct, given, selfcheck,
+      head: selfcheck ? '自评已记录。' : verdict.correct ? '答对了！' : '再想一想～',
       reveal: verdict.reveal || '',
       explanation: verdict.explanation || '',
       steps: verdict.steps || '',
     });
   };
 
-  const showFeedback = ({ correct, head, reveal, explanation, steps, retry, given }) => {
+  const showFeedback = ({ correct, head, reveal, explanation, steps, retry, given, selfcheck }) => {
     feedback.classList.toggle('good', Boolean(correct));
     feedback.classList.toggle('bad', !correct);
     feedback.querySelector('[data-qb-feedback-head]').textContent = head;
-    feedback.querySelector('[data-qb-feedback-answer]').textContent = reveal ? `正确答案：${reveal}` : '';
+    feedback.querySelector('[data-qb-feedback-answer]').textContent = reveal ? `${selfcheck ? '参考答案' : '正确答案'}：${reveal}` : '';
     feedback.querySelector('[data-qb-feedback-explain]').textContent = explanation;
     feedback.querySelector('[data-qb-feedback-steps]').textContent = steps;
     const actions = feedback.querySelector('.qb-feedback-actions');
@@ -165,18 +178,21 @@
   const finish = () => {
     questionBox.hidden = true;
     feedback.hidden = true;
-    $('[data-qb-final-correct]').textContent = correctCount;
-    $('[data-qb-final-total]').textContent = questions.length;
-    const ratio = correctCount / questions.length;
-    const stars = ratio >= 1 ? 3 : ratio >= 0.75 ? 2 : ratio >= 0.5 ? 1 : 0;
+    const scores = [];
+    if (objectiveTotal) scores.push(`答对 ${correctCount}／${objectiveTotal} 题`);
+    if (selfcheckTotal) scores.push(`自评做对 ${selfcheckRight}／${selfcheckTotal} 题`);
+    $('[data-qb-final-score]').textContent = scores.join(' · ');
     const starsBox = $('[data-qb-stars]');
-    starsBox.innerHTML = [0, 1, 2].map((i) => `<span class="qb-star${i < stars ? ' on' : ''}">★</span>`).join('');
-    starsBox.setAttribute('aria-label', `获得 ${stars} 颗星（满分 3 颗）`);
-    starsBox.hidden = false;
-    $('[data-qb-praise]').textContent =
-      ratio === 1 ? '全部答对，太棒了！给自己一个大拇指 👍'
-        : ratio >= 0.6 ? '很不错，继续加油！答错的题已经在错题本里等你。'
-          : '别灰心，答错的题都收进错题本了，再练一遍就掌握啦！';
+    if (objectiveTotal) {
+      const ratio = correctCount / objectiveTotal;
+      const stars = ratio >= 1 ? 3 : ratio >= 0.75 ? 2 : ratio >= 0.5 ? 1 : 0;
+      starsBox.innerHTML = [0, 1, 2].map((i) => `<span class="qb-star${i < stars ? ' on' : ''}">★</span>`).join('');
+      starsBox.setAttribute('aria-label', `判分题获得 ${stars} 颗星（满分 3 颗）`);
+      starsBox.hidden = false;
+    }
+    $('[data-qb-praise]').textContent = correctCount + selfcheckRight === questions.length
+      ? '这一组练完啦，给自己一个大拇指 👍'
+      : '需要再想一想的题已收进错题本。';
     const again = $('[data-qb-again]');
     const params = board.dataset.modeWrong === '1'
       ? `?mode=wrong&count=${board.dataset.size}`

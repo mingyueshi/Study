@@ -1,16 +1,19 @@
-"""数学教材册：零模型只读浏览，按册编排（照 grammar 先例）。
+"""数学教材册的文件编排与账号进度。GET 保持只读。"""
+import json
 
-``/mathbook/`` 是册次列表——点教材卡先看到可选册次，再进具体册页；
-``/mathbook/<册>/`` 是册页，内容与交互全在前端（math-app.js + books/<册>.js），
-视图只做加载期校验并把结构摘要交给页面文案；GET 不写任何记录。
-"""
-from django.http import Http404
+from django.db import OperationalError
+from django.http import Http404, JsonResponse
 from django.shortcuts import render
 from django.templatetags.static import static as static_url
+from django.urls import reverse
 from django.views.decorators.cache import never_cache
-from django.views.decorators.http import require_safe
+from django.views.decorators.csrf import ensure_csrf_cookie
+from django.views.decorators.http import require_http_methods, require_safe
 
+from . import exercises, records
 from .content import available_books, book_exists, load_book
+
+MAX_BODY = 12000
 
 
 @never_cache
@@ -20,6 +23,7 @@ def index(request):
 
 
 @never_cache
+@ensure_csrf_cookie
 @require_safe
 def reader(request, book):
     if not book_exists(book):
@@ -28,6 +32,13 @@ def reader(request, book):
     manifest, mkb = data['manifest'], data['mkb']
     # 数据文件版本号取来源内容 sha256 前 8 位：源头变了缓存自动失效。
     data_src = static_url(f'mathbook/books/{book}.js') + f"?v={manifest['source_sha256'][:8]}"
+    progress = None
+    if request.user.is_authenticated:
+        progress = {
+            **records.payload(records.read_progress(request.user, book)),
+            'scope': records.account_scope(request.user),
+            'url': reverse('mathbook-progress', args=[book]),
+        }
     return render(request, 'mathbook/reader.html', {
         'book': book,
         'data_src': data_src,
@@ -35,4 +46,35 @@ def reader(request, book):
         'meta': mkb.get('meta', {}),
         'unit_total': manifest['units'],
         'point_total': manifest['points'],
+        'progress': progress,
+        'practice_links': exercises.reader_links(book),
     })
+
+
+@never_cache
+@require_http_methods(['GET', 'POST'])
+def progress(request, book):
+    if not book_exists(book):
+        raise Http404('未注册的教材册次。')
+    if not request.user.is_authenticated or request.headers.get('X-Mathbook-Scope') != records.account_scope(request.user):
+        return JsonResponse({'code': 'owner_changed', 'error': '登录状态已变化，请刷新数学教材。'}, status=409)
+    if request.method == 'GET':
+        return JsonResponse(records.payload(records.read_progress(request.user, book)))
+    if request.content_type != 'application/json' or len(request.body) > MAX_BODY:
+        return JsonResponse({'error': '进度格式有误。'}, status=400)
+    try:
+        data = json.loads(request.body)
+    except (ValueError, UnicodeError, RecursionError):
+        return JsonResponse({'error': '进度格式有误。'}, status=400)
+    try:
+        records.validate_change(book, data)
+    except ValueError as error:
+        return JsonResponse({'error': str(error)}, status=400)
+    try:
+        row, saved = records.save_progress(request.user, book, data)
+    except OperationalError:
+        return JsonResponse({'error': '暂时保存不了，请再试一次。'}, status=503)
+    state = records.payload(row)
+    if not saved:
+        return JsonResponse({**state, 'code': 'conflict', 'error': '进度已在别处更新，请核对后再操作。'}, status=409)
+    return JsonResponse(state)

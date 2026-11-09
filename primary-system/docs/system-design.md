@@ -85,7 +85,7 @@ flowchart TD
 
 玩法入口由 `catalog/entry_registry.py` 代码注册：挂在学习模块上的玩法（接龙、场景单词、音标、作文坊）在 `ENTRIES` 登记落地页说明、卡片徽标与摘要口径，不挂模块的专题玩法（飞花令、诗词地图、成语小游戏、多音字等）在 `SPECIAL_ENTRIES` 登记成首页专题卡——首页视图把模块卡与专题卡装配成同形数据，模板一个循环渲染，新增玩法只改注册表、不动模板。关闭模块只控制入口，并非每个独立应用的访问开关。
 
-学习总览由 `catalog/learning_digest.py` 聚合，首页放轻量总览卡、「我的学习」放总览卡加「最近学了什么」动态流。七个领域各出一张卡：教材掌握（`learning.Progress`，与详情页共用 `effective_status` 当前有效状态）、场景单词、成语接龙、作文坊、成语挑战（`idioms.PlayRecord`，看释义猜成语逐题、配对与表情按局）、飞花令（`poetry.FeihualingRound`，服务端判定完成、每局一条）、多音字（`hanzi.PolyphoneAnswer`，每题一条、服务端按读音表复核对错）。数字口径在各自应用的适配函数里（`learning.services.textbook_summary`、`entry_registry` 各摘要、各应用 `records` 模块），汇总只展示各自含义明确的指标与近 7 天新增，不把“读完内容”“会拼写”“玩了一局”合成一个掌握百分比。前端判分的玩法经上报端点落库（quiz/polyphones 的 report），签名回合的玩法在服务端判定完成时落库（pairs/emoji/feihualing 的 action）；页面 GET 保持零写入，游客数据挂会话键并登记进 `accounts.guest_retention` 统一清理。纯代码注册，暂不做动态插件平台。
+学习总览由 `catalog/learning_digest.py` 聚合，首页放轻量总览卡、「我的学习」放总览卡加「最近学了什么」动态流。七个领域各出一张卡：教材掌握（`learning.Progress`，与详情页共用 `effective_status` 当前有效状态）、场景单词、成语接龙、作文坊、成语挑战（`idioms.PlayRecord`，看释义猜成语逐题、配对与表情按局）、飞花令（`poetry.FeihualingRound`，服务端判定完成、每局一条）、多音字（`hanzi.PolyphoneAnswer`，每题一条、服务端按读音表复核对错）。数字口径在各自应用的适配函数里（`learning.services.textbook_summary`、`entry_registry` 各摘要、各应用 `records` 模块），汇总只展示各自含义明确的指标与近 7 天新增，不把“读完内容”“会拼写”“玩了一局”合成一个掌握百分比。猜成语凭签名题目由服务端判分，按作答标识记首次结果。多音字通过上报端点复核读音，配对、表情和飞花令由服务端判定回合结束并落库；页面 GET 保持零写入，游客数据挂会话键并登记进 `accounts.guest_retention` 统一清理。纯代码注册，暂不做动态插件平台。
 
 ### P2：学习内容检索与语音
 
@@ -160,8 +160,9 @@ lexicon拥有不可变中文正文版本及核对历史；words拥有目标采�
 版同口径），不入学习总览。
 
 练习记录走另一条路：每点的巩固题由 `scripts/build_grammar.cjs` 同步产出
-`primary-grammar` 题库批次（选项确定性轮换修正静态版答案下标偏斜），判分、
-记录与错题本统一在 `questionbank` 侧。**内容源头是静态版**——主项目
+`primary-grammar` 题库批次（选项确定性轮换修正静态版答案下标偏斜）。「练本章」
+以语法章节的知识点 ID 与题目的来源定位对应，章节练习、错题本与重练共用同一题池。
+判分和作答记录统一在 `questionbank` 侧。**内容源头是静态版**——主项目
 `grammar/data/grammar.json` 是生成物，改内容去 `primary/grammar/` 改后重跑
 脚本，批次有变化时换新 batch_id 导入。总览不出语法卡（与音标同），语法答题
 自然计入题库卡；入口经 `seed_platform` 模块行挂英语学科，`ENTRIES` 摘要返回
@@ -197,14 +198,12 @@ childs、foots 这类规则误推形态且在加载期确定性生成；每题�
 
 ## 教材册文件编排：数学与语文（2026-11-07/08）
 
-独立 `mathbook`、`chinesebook` 应用承接数学/语文教材的文件编排（照 grammar
-先例）：零模型只读浏览，无模型、无迁移、无学习记录；页面套平台导航
+独立 `mathbook`、`chinesebook` 应用承接数学/语文教材的文件编排。册页 GET 只读，页面套平台导航
 （base.html），内容与交互全在前端——分别移植 `primary/math-app.js`（单元切换、
 要点/例题/易错标签页、图示互动演示、公式速查、易错诊所、教学视频）与
 `primary/knowledge-app.js`（课文卡配作者小传/原文金句/真实百科/重点词语/
 多音字/近反义词、必背古诗文、日积月累、字词复习）的渲染层，点读、搜索、
-打印保留；「已掌握／已复习」标记存浏览器 localStorage（与语法同口径），
-同款练习统一在 `questionbank` 侧，两边口径独立。
+打印保留。语文的「已复习」标记存浏览器 localStorage。同款练习统一在 `questionbank` 侧。
 
 页面按册编排：`/mathbook/`、`/chinesebook/` 为册次列表（点教材卡先看到
 可选册次，以后加册次同一直入口径），册页 `/mathbook/<册>/`、`/chinesebook/<册>/`，册次码对齐
@@ -220,7 +219,13 @@ catalog 教材码后缀（bnu-math-4a-2026 → `4a`、pep-chinese-4a-2026 → `4
 （`static/figures/figures.js|css`，DB 阅读器图示块同受益）与对应图片目录；
 加载期 `<应用>/content.py::load_book()` 对照 manifest 校验（计数以 manifest
 为权威、图示/视频引用、图片在位、中文标点——语文正文不允许任何尖括号），
-坏数据拒绝上线。渲染层按教材名派生存档键，同科目多册进度互不覆盖。
+坏数据拒绝上线。游客进度按教材名派生本机存档键，同科目多册进度互不覆盖。
+
+数学账号进度按用户和册次独立保存，知识点和单元 ID 由已注册册次校验。
+「我的学习」单列数学教材的已读数、自评掌握数和上次单元。写入校验页面账号和版本，
+并发冲突返回该账号的最新进度。旧本机存档经用户确认后每个账号每册可导入一次，
+导入分别合并已读与自评掌握标记，并优先保留已有的账号续读位置。账号进度表列入基础包刷新保护范围。
+四上知识卡用稳定题目来源定位跳转到对应例题，易错诊所链接到本册判断题。题库将自评与客观答对分开统计。
 
 catalog 的 `primary-math-all`、`primary-knowledge-all` 同步册经数据迁移
 0008/0009 下架（可逆），两科 ContentItem 保持 published——学习总览与全局

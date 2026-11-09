@@ -18,12 +18,22 @@ def page(request):
     track = request.GET.get('track', '')
     if track not in Question.Track.values:
         track = ''
+    return _page(request, track=track)
+
+
+@never_cache
+@require_safe
+def grammar_page(request, chapter_id):
+    return _page(request, track=Question.Track.REGULAR, grammar_chapter_id=chapter_id)
+
+
+def _page(request, *, track, grammar_chapter_id=None):
+    chapter = pool = None
+    if grammar_chapter_id is not None:
+        chapter, pool = services.grammar_pool(grammar_chapter_id)
     scope = records.read_scope(request)
-    wrong_ids = services.latest_wrong_ids(scope)
-    pool = Question.objects.filter(pk__in=wrong_ids, active=True)
-    if track:
-        pool = pool.filter(track=track)
-    questions = list(pool)
+    wrong_ids = services.latest_wrong_ids(scope, track=track, ids=pool)
+    questions = list(Question.objects.filter(pk__in=wrong_ids, active=True))
     # 保持「新错在前」的顺序：按错题列表排序取回。
     order = {question_id: index for index, question_id in enumerate(wrong_ids)}
     questions.sort(key=lambda question: order.get(question.pk, len(order)))
@@ -36,14 +46,20 @@ def page(request):
             for question in questions]
     regular_count = sum(1 for row in rows if not row['track'])
     olympiad_count = len(rows) - regular_count
-    if track == Question.Track.OLYMPIAD:
-        practice_url = reverse('questionbank-olympiad-practice') + '?mode=wrong&count=10'
+    params = {'mode': 'wrong', 'count': services.DEFAULT_SIZE}
+    chapter_practice_url = ''
+    if chapter:
+        chapter_practice_url = reverse('questionbank-grammar-practice', args=[chapter['id']])
+        practice_url = reverse('questionbank-grammar-practice', args=[chapter['id']], query=params)
+    elif track == Question.Track.OLYMPIAD:
+        practice_url = reverse('questionbank-olympiad-practice', query=params)
     elif track == Question.Track.REGULAR:
-        practice_url = reverse('questionbank-practice') + '?mode=wrong&count=10'
+        practice_url = reverse('questionbank-practice', query=params)
     else:
         practice_url = ''
     return render(request, 'questionbank/wrong.html', {
         'rows': rows, 'count': len(rows),
         'track': track, 'regular_count': regular_count, 'olympiad_count': olympiad_count,
-        'practice_url': practice_url,
+        'practice_url': practice_url, 'grammar_chapter': chapter,
+        'chapter_practice_url': chapter_practice_url,
     })

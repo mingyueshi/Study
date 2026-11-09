@@ -7,9 +7,11 @@ import json
 from pathlib import Path
 import uuid
 
+from django.contrib.auth import get_user_model
 from django.contrib.sessions.models import Session
 from django.test import TestCase
 
+from incentives.models import PointEvent
 from lexicon.models import LexicalEntry, LexiconSource, Pronunciation, Sense, SourceBinding, \
     SourceRecord, SourceRelease
 
@@ -40,7 +42,7 @@ def build_lexicon_fixture(source, release, rows):
 
 
 class QuizReportTests(TestCase):
-    """看释义猜成语逐题上报：对错都记、校验拒绝、双轨归属。"""
+    """看释义猜成语由服务端判分，重试不增加学习记录或积分。"""
 
     @classmethod
     def setUpTestData(cls):
@@ -51,53 +53,93 @@ class QuizReportTests(TestCase):
         LexiconSource.objects.filter(pk=cls.source.pk).update(active_release=cls.release)
         build_lexicon_fixture(cls.source, cls.release, sorted(GOOD_IDIOMS.items()))
 
-    def post_report(self, **overrides):
-        payload = {"headword": "守株待兔", "level": 3, "source": "common",
-                   "correct": True, "used_hint": False}
-        payload.update(overrides)
-        return self.client.post("/idioms/quiz/api/report/", payload, content_type="application/json")
+    def question(self):
+        response = self.client.get("/idioms/quiz/?level=3&source=all&seed=example")
+        card = response.context["round"]
+        position = next(i for i, slot in enumerate(card["slots"]) if not slot["shown"])
+        return response.context["token"], position, card["headword"]
 
-    def test_valid_report_records_one_row(self):
-        response = self.post_report(correct=False, used_hint=True)
+    def post_report(self, token, **payload):
+        return self.client.post("/idioms/quiz/api/report/", {"token": token, **payload},
+                                content_type="application/json")
+
+    def test_wrong_then_correct_keeps_first_result_without_awarding_points(self):
+        user = get_user_model().objects.create_user("first-wrong")
+        self.client.force_login(user)
+        token, position, headword = self.question()
+        response = self.post_report(token, action="answer", answer="错", correct=True)
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.json(), {"ok": True})
+        self.assertFalse(response.json()["correct"])
+        self.assertNotIn("card", response.json())
+        correction = self.post_report(token, action="answer", answer=headword[position]).json()
+        self.assertTrue(correction["correct"])
+        self.assertFalse(correction["first_correct"])
+        self.assertEqual(correction["score"], {"asked": 1, "correct": 0, "streak": 0})
         record = PlayRecord.objects.get()
         self.assertEqual(record.game, PlayRecord.Game.QUIZ)
         self.assertEqual((record.size, record.correct), (1, 0))
-        self.assertEqual(record.extra["headword"], "守株待兔")
-        self.assertTrue(record.extra["used_hint"])
+        self.assertEqual(record.extra["headword"], headword)
+        self.assertFalse(PointEvent.objects.filter(user=user).exists())
 
-    def test_report_rejects_unknown_headword_and_bad_types(self):
-        for overrides in ({"headword": "不存在的成语"}, {"level": "3"}, {"level": 9},
-                          {"source": "bogus"}, {"correct": "yes"}, {"used_hint": 1}):
-            with self.subTest(overrides=overrides):
-                response = self.post_report(**overrides)
-                self.assertEqual(response.status_code, 400)
+    def test_report_rejects_unsigned_or_malformed_submissions(self):
+        token, position, headword = self.question()
+        self.assertEqual(self.post_report("", action="answer", answer=headword[position]).status_code, 400)
+        self.assertEqual(self.post_report(token, action="answer", answer="").status_code, 400)
+        self.assertEqual(self.post_report(token, action="hint", position=True).status_code, 400)
+        legacy = self.client.post("/idioms/quiz/api/report/", {"correct": True, "headword": headword},
+                                  content_type="application/json")
+        self.assertEqual(legacy.status_code, 400)
         self.assertEqual(PlayRecord.objects.count(), 0)
 
     def test_report_is_post_only(self):
         self.assertEqual(self.client.get("/idioms/quiz/api/report/").status_code, 405)
         self.assertEqual(PlayRecord.objects.count(), 0)
 
-    def test_guest_reports_share_one_session_key(self):
-        self.post_report()
-        self.post_report()
+    def test_guest_hints_are_read_only_and_replaying_an_answer_creates_one_record(self):
+        token, position, headword = self.question()
+        hint = self.post_report(token, action="hint", position=position).json()
+        self.assertEqual(hint["char"], headword[position])
+        self.assertEqual(Session.objects.count(), 0)
+        self.assertEqual(PlayRecord.objects.count(), 0)
+        for _ in range(2):
+            self.assertTrue(self.post_report(hint["token"], action="answer", answer=hint["char"]).json()["correct"])
+        self.assertTrue(PlayRecord.objects.get().extra["used_hint"])
+        other_token, position, headword = self.question()
+        self.post_report(other_token, action="answer", answer=headword[position])
         self.assertEqual(PlayRecord.objects.count(), 2)
         guest_keys = {record.guest_key for record in PlayRecord.objects.all()}
         self.assertEqual(len(guest_keys), 1)
         self.assertTrue(next(iter(guest_keys)))
         self.assertEqual(Session.objects.count(), 1)
 
-    def test_logged_in_report_attaches_user_without_new_session(self):
-        from django.contrib.auth import get_user_model
+    def test_replaying_a_correct_answer_awards_points_only_once(self):
         user = get_user_model().objects.create_user("player", password="pass")
         self.client.force_login(user)
         sessions_before = Session.objects.count()  # force_login 自带一条会话
-        self.post_report()
+        token, position, headword = self.question()
+        first = self.post_report(token, action="answer", answer=headword[position]).json()
+        retry = self.post_report(token, action="answer", answer=headword[position]).json()
+        self.assertTrue(first["first_correct"])
+        self.assertTrue(retry["first_correct"])
+        self.assertEqual(first["score"], {"asked": 1, "correct": 1, "streak": 1})
+        self.assertEqual(retry["score"], first["score"])
+        self.assertIn("rewards", first)
+        self.assertNotIn("rewards", retry)
         record = PlayRecord.objects.get()
         self.assertEqual(record.user, user)
         self.assertEqual(record.guest_key, "")
         self.assertEqual(Session.objects.count(), sessions_before)
+        self.assertEqual(PointEvent.objects.filter(user=user, code="idiom_quiz_correct").count(), 1)
+
+    def test_token_cannot_move_between_guests_or_after_the_source_is_disabled(self):
+        token, position, headword = self.question()
+        other = self.client_class()
+        self.assertEqual(other.post("/idioms/quiz/api/report/", {
+            "token": token, "action": "answer", "answer": headword[position],
+        }, content_type="application/json").status_code, 409)
+        LexiconSource.objects.filter(pk=self.source.pk).update(enabled=False)
+        self.assertEqual(self.post_report(token, action="answer", answer=headword[position]).status_code, 409)
+        self.assertEqual(PlayRecord.objects.count(), 0)
 
 
 class EmojiFinishRecordTests(TestCase):

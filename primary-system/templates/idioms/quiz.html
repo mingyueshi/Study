@@ -1,6 +1,6 @@
 {% extends 'idioms/layout.html' %}{% load static %}{% block title %}看释义猜成语 · 乐学堂{% endblock %}
 {% block idiom_crumb %}<span aria-current="page">看释义猜成语</span>{% endblock %}
-{% block idiom_content %}<link rel="stylesheet" href="{% static 'idioms/quiz.css' %}"><script src="{% static 'idioms/quiz.js' %}" defer></script>
+{% block idiom_content %}<link rel="stylesheet" href="{% static 'idioms/quiz.css' %}"><script src="{% static 'idioms/quiz.js' %}?v=2" defer></script>
 <header class="quiz-hero">
   <div class="quiz-hero-copy">
     <p class="eyebrow">语文 · 猜成语</p>
@@ -16,11 +16,12 @@
   <div class="quiz-chips"><span class="quiz-label">难度</span>{% for chip in level_chips %}<a class="chip{% if chip.0 == level %} on{% endif %}" href="?level={{ chip.0 }}&amp;source={{ source }}">{{ chip.1 }}</a>{% endfor %}</div>
   <div class="quiz-chips"><span class="quiz-label">题库</span>{% for chip in source_chips %}<a class="chip{% if chip.on %} on{% endif %}" href="?level={{ level }}&amp;source={{ chip.value }}">{{ chip.label }}<i>{{ chip.size }}</i></a>{% endfor %}</div>
 </div>
-{% if round %}<section class="quiz-board" data-quiz-round data-report-url="{% url 'idiom-quiz-report' %}">
+{% if round %}<section class="quiz-board" data-quiz-round data-report-url="{% url 'idiom-quiz-report' %}" data-token="{{ token }}">
   <p class="quiz-definition">{{ round.definition }}</p>
   <div class="quiz-slots">
-    {% for slot in round.slots %}{% if slot.shown %}<span class="quiz-slot shown">{{ slot.shown }}</span>{% else %}<button class="quiz-slot blank" type="button" data-answer="{{ slot.answer }}" data-quiz-slot aria-label="待填的成语字"></button>{% endif %}{% endfor %}
+    {% for slot in round.slots %}{% if slot.shown %}<span class="quiz-slot shown">{{ slot.shown }}</span>{% else %}<button class="quiz-slot blank" type="button" data-position="{{ forloop.counter0 }}" data-quiz-slot aria-label="待填的成语字"></button>{% endif %}{% endfor %}
   </div>
+  <p class="quiz-note" role="status" data-quiz-feedback></p>
   <div class="quiz-keys">{% for key in round.keys %}<button class="quiz-key" type="button" data-quiz-key data-char="{{ key }}">{{ key }}</button>{% endfor %}</div>
   <div class="quiz-actions">
     <button class="button small" type="button" data-quiz-check>检查</button>
@@ -28,15 +29,15 @@
     <button class="button small ghost" type="button" data-quiz-clear>清空重填</button>
     <a class="button small ghost" href="{{ next_href }}">换一题 ↻</a>
   </div>
-  <p class="quiz-score" data-quiz-score>连续答对 <b data-quiz-streak>0</b> · 累计答对 <b data-quiz-correct>0</b>／<b data-quiz-asked>0</b></p>
+  <p class="quiz-score" data-quiz-score>连续答对 <b data-quiz-streak>{{ score.streak }}</b> · 累计答对 <b data-quiz-correct>{{ score.correct }}</b>／<b data-quiz-asked>{{ score.asked }}</b></p>
   <section class="quiz-result" hidden data-quiz-result>
-    <p class="quiz-result-head"><b>{{ round.headword }}</b> <button class="say-chip" type="button" data-say="{{ round.headword }}。{{ round.definition }}" aria-label="朗读 {{ round.headword }}">🔊</button></p>
-    {% if round.pinyin %}<p class="quiz-result-pinyin">{{ round.pinyin }}</p>{% endif %}
-    <p class="quiz-result-definition">{{ round.definition }}</p>
-    {% if round.example %}<p class="quiz-result-example">例：{{ round.example }}</p>{% endif %}
+    <p class="quiz-result-head"><b data-quiz-headword></b> <button class="say-chip" type="button" data-say="" data-quiz-say aria-label="朗读成语">🔊</button></p>
+    <p class="quiz-result-pinyin" hidden data-quiz-pinyin></p>
+    <p class="quiz-result-definition" data-quiz-explanation></p>
+    <p class="quiz-result-example" hidden data-quiz-example></p>
     <p class="quiz-praise" data-quiz-praise aria-live="polite"></p>
     <div class="quiz-result-actions">
-      <a class="button small" href="{% url 'idiom-entry' round.entry_id %}">查词典详解 →</a>
+      <a class="button small" data-quiz-entry>查词典详解 →</a>
       <a class="button small ghost" href="{{ next_href }}">下一题 →</a>
     </div>
   </section>

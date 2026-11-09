@@ -1,142 +1,144 @@
-/* 看释义猜成语：点候选字补空，前端判分；每题首次检查后上报一次学习记录。
-   服务端渲染字格（空位带 data-answer）与候选键盘，这里只做交互、计数与上报。 */
+/* 看释义猜成语：点候选字补空，服务端提示和判分。 */
 'use strict';
 
 (() => {
   const board = document.querySelector('[data-quiz-round]');
   if (!board) return;
+  const node = (selector) => board.querySelector(selector);
   const slots = Array.from(board.querySelectorAll('[data-quiz-slot]'));
-  const result = board.querySelector('[data-quiz-result]');
-  const praiseEl = board.querySelector('[data-quiz-praise]');
-  if (!slots.length || !result) return;
-
-  /* 对错都上报：服务端按题池校验词头与难度后落一条记录，失败不打扰答题。 */
-  const csrf = () => decodeURIComponent((document.cookie.match(/(?:^|;\s*)primary_csrftoken=([^;]*)/) || [])[1] || '');
-  const report = (correct) => {
-    if (!board.dataset.reportUrl) return;
-    const params = new URLSearchParams(location.search);
-    const level = Number(params.get('level'));
-    fetch(board.dataset.reportUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'X-CSRFToken': csrf() },
-      body: JSON.stringify({
-        headword: slots.map(answerOf).join(''),
-        level: [3, 2, 1, 0].includes(level) ? level : 3,
-        source: params.get('source') === 'all' ? 'all' : 'common',
-        correct,
-        used_hint: slots.some((slot) => slot.classList.contains('hint')),
-      }),
-    }).then((response) => (response.ok ? response.json() : null))
-      .then((data) => { if (window.rewardToast && data && data.rewards) window.rewardToast(data.rewards); })
-      .catch(() => {});
-  };
-
-  const STORE_KEY = 'idioms_quiz_stats_v1';
-  let stats = { streak: 0, correct: 0, asked: 0 };
-  try {
-    stats = { ...stats, ...JSON.parse(localStorage.getItem(STORE_KEY) || '{}') };
-  } catch (e) { /* 忽略 */ }
-
-  let counted = false; // 每轮只在第一次检查时计数
-
-  const node = (name) => board.querySelector(name);
-
-  const renderScore = () => {
-    const streak = node('[data-quiz-streak]');
-    const correct = node('[data-quiz-correct]');
-    const asked = node('[data-quiz-asked]');
-    if (streak) streak.textContent = stats.streak;
-    if (correct) correct.textContent = stats.correct;
-    if (asked) asked.textContent = stats.asked;
-  };
-
-  const save = () => {
-    try { localStorage.setItem(STORE_KEY, JSON.stringify(stats)); } catch (e) { /* 忽略 */ }
-  };
+  const keys = Array.from(board.querySelectorAll('[data-quiz-key]'));
+  const result = node('[data-quiz-result]');
+  const feedback = node('[data-quiz-feedback]');
+  const checkButton = node('[data-quiz-check]');
+  const hintButton = node('[data-quiz-hint]');
+  const clearButton = node('[data-quiz-clear]');
+  let token = board.dataset.token;
+  let busy = false;
+  let finished = false;
+  function renderScore(score) {
+    node('[data-quiz-streak]').textContent = score.streak;
+    node('[data-quiz-correct]').textContent = score.correct;
+    node('[data-quiz-asked]').textContent = score.asked;
+  }
 
   const filled = (slot) => slot.dataset.char || '';
-  const answerOf = (slot) => slot.dataset.answer || '';
-  const emptySlots = () => slots.filter((slot) => !filled(slot) && !slot.classList.contains('hint'));
-
+  const emptySlots = () => slots.filter((slot) => !filled(slot));
   const fill = (slot, char) => {
     slot.dataset.char = char;
     slot.textContent = char;
     slot.classList.add('filled');
     slot.classList.remove('bad', 'ok');
   };
-
   const clearSlot = (slot) => {
+    if (slot.classList.contains('hint')) return;
     delete slot.dataset.char;
     slot.textContent = '';
     slot.classList.remove('filled', 'bad', 'ok');
-    slot.disabled = false;
   };
 
-  const clear = () => {
-    slots.forEach((slot) => { if (!slot.classList.contains('hint')) clearSlot(slot); });
-  };
+  function updateControls() {
+    checkButton.disabled = clearButton.disabled = busy || finished;
+    hintButton.disabled = busy || finished || emptySlots().length === 0;
+    keys.forEach((key) => { key.disabled = busy || finished; });
+    slots.forEach((slot) => { slot.disabled = busy || finished || slot.classList.contains('hint'); });
+  }
 
-  board.querySelectorAll('[data-quiz-key]').forEach((key) => {
+  async function request(action, fields, onSuccess) {
+    if (busy || finished) return;
+    busy = true;
+    feedback.textContent = '';
+    updateControls();
+    try {
+      const csrf = decodeURIComponent((document.cookie.match(/(?:^|;\s*)primary_csrftoken=([^;]*)/) || [])[1] || '');
+      const response = await fetch(board.dataset.reportUrl, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json', 'X-CSRFToken': csrf},
+        body: JSON.stringify({action, token, ...fields}),
+      });
+      const data = await response.json().catch(() => null);
+      if (!response.ok || !data) {
+        feedback.textContent = data?.error || '刚才没能检查，请再试一次。';
+        return;
+      }
+      onSuccess(data);
+    } catch (e) {
+      feedback.textContent = '连接暂时中断，填好的字还在。请再试一次。';
+    } finally {
+      busy = false;
+      updateControls();
+    }
+  }
+
+  keys.forEach((key) => {
     key.addEventListener('click', () => {
+      if (busy || finished) return;
       const target = emptySlots()[0];
-      if (target) fill(target, key.dataset.char || key.textContent.trim());
+      if (target) fill(target, key.dataset.char);
+      updateControls();
     });
   });
 
   slots.forEach((slot) => {
     slot.addEventListener('click', () => {
-      if (slot.classList.contains('hint')) return;
+      if (busy || finished) return;
       clearSlot(slot);
+      updateControls();
     });
   });
 
-  const clearButton = node('[data-quiz-clear]');
-  if (clearButton) clearButton.addEventListener('click', clear);
+  clearButton.addEventListener('click', () => {
+    if (busy || finished) return;
+    slots.forEach(clearSlot);
+    feedback.textContent = '';
+    updateControls();
+  });
 
-  const hintButton = node('[data-quiz-hint]');
-  if (hintButton) {
-    hintButton.addEventListener('click', () => {
-      const target = emptySlots()[0];
-      if (!target) return;
-      target.dataset.char = answerOf(target);
-      target.textContent = answerOf(target);
+  hintButton.addEventListener('click', () => {
+    const target = emptySlots()[0];
+    if (!target) return;
+    return request('hint', {position: Number(target.dataset.position)}, (data) => {
+      token = data.token;
+      fill(target, data.char);
       target.classList.add('hint');
-      target.disabled = true;
     });
+  });
+
+  function showResult(card, firstCorrect, streak) {
+    node('[data-quiz-headword]').textContent = card.headword;
+    node('[data-quiz-say]').dataset.say = card.headword + '。' + card.definition;
+    const pinyin = node('[data-quiz-pinyin]');
+    pinyin.textContent = card.pinyin;
+    pinyin.hidden = !card.pinyin;
+    node('[data-quiz-explanation]').textContent = card.definition;
+    const example = node('[data-quiz-example]');
+    example.textContent = card.example ? '例：' + card.example : '';
+    example.hidden = !card.example;
+    node('[data-quiz-entry]').href = card.url;
+    node('[data-quiz-praise]').textContent = !firstCorrect ? '这次填对啦！'
+      : streak >= 3 ? '连续答对 ' + streak + ' 题，真棒！' : '答对啦，真棒！';
+    result.hidden = false;
+    finished = true;
   }
 
-  const praiseText = (streak) => {
-    if (streak >= 10) return '连对 ' + streak + ' 题，成语小达人！';
-    if (streak >= 5) return '五连对，火力全开！';
-    if (streak >= 3) return '三连对，越战越勇！';
-    return '答对啦，真棒！';
-  };
-
-  const checkButton = node('[data-quiz-check]');
-  if (checkButton) {
-    checkButton.addEventListener('click', () => {
-      const gaps = emptySlots();
-      if (gaps.length) {
-        gaps.forEach((slot) => slot.classList.add('bad'));
-        return;
-      }
-      let wrong = 0;
-      slots.forEach((slot) => {
-        const ok = filled(slot) === answerOf(slot) || slot.classList.contains('hint');
-        slot.classList.toggle('bad', !ok);
-        slot.classList.toggle('ok', ok);
-        if (!ok) wrong += 1;
+  checkButton.addEventListener('click', () => {
+    if (busy || finished) return;
+    const gaps = emptySlots();
+    if (gaps.length) {
+      gaps.forEach((slot) => slot.classList.add('bad'));
+      feedback.textContent = '还有空格，填完再检查吧。';
+      return;
+    }
+    return request('answer', {answer: slots.map(filled).join('')}, (data) => {
+      slots.forEach((slot, index) => {
+        slot.classList.toggle('bad', !data.marks[index]);
+        slot.classList.toggle('ok', data.marks[index]);
       });
-      if (wrong) {
-        if (!counted) { stats.asked += 1; stats.streak = 0; counted = true; save(); renderScore(); report(false); }
-        return;
-      }
-      if (!counted) { stats.correct += 1; stats.asked += 1; stats.streak += 1; counted = true; save(); report(true); }
-      if (praiseEl) praiseEl.textContent = praiseText(stats.streak);
-      result.hidden = false;
-      renderScore();
+      renderScore(data.score);
+      if (data.correct) showResult(data.card, data.first_correct, data.score.streak);
+      else feedback.textContent = '再想想标红的字。';
+      if (window.rewardToast && data.rewards) window.rewardToast(data.rewards);
     });
-  }
+  });
 
-  renderScore();
+  updateControls();
 })();

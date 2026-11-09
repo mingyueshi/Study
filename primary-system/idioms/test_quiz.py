@@ -102,6 +102,8 @@ class QuizPageTests(TestCase):
         self.assertContains(response, "data-quiz-key")
         self.assertContains(response, "检查")
         self.assertContains(response, "quiz-result")
+        self.assertNotContains(response, "data-answer=")
+        self.assertNotContains(response, response.context["round"]["headword"])
 
     def test_level_controls_blank_count(self):
         easy = self.client.get("/idioms/quiz/?level=3&seed=page1")

@@ -69,25 +69,18 @@ def _clean_tag(value, track):
     return value if value in tags else ''
 
 
-def _practice(request, *, track):
+def _practice(request, *, track, pool=None, scoped_page=None):
     page = TRACK_PAGES.get(track, TRACK_PAGES[Question.Track.REGULAR])
     page = {**page, **_page_urls(track)}
     area = _clean_area(request.GET.get('area', ''))
     tag = _clean_tag(request.GET.get('tag', ''), track)
     size = _clean_size(request.GET.get('count', ''))
     mode_wrong = request.GET.get('mode') == 'wrong'
-    pool = None
+    if scoped_page:
+        page.update(scoped_page)
+        area = scoped_page['area']
     if mode_wrong:
-        pool = services.track_wrong_ids(records.read_scope(request), track)
-        if not pool:
-            return render(request, 'questionbank/practice.html', {
-                'questions': [], 'area': area, 'tag': tag,
-                'area_label': dict(Question.Area.choices).get(area) or page['mix_label'],
-                'area_chips': AREA_CHIPS,
-                'sizes': services.SIZES,
-                'size': size, 'mode_wrong': True, 'empty_wrong': True,
-                'track': track, **page,
-            }, status=200)
+        pool = services.latest_wrong_ids(records.read_scope(request), track=track, ids=pool)
     questions = services.pick_questions(area=area, track=track, count=size, ids=pool, tag=tag)
     return render(request, 'questionbank/practice.html', {
         'questions': [services.client_question(question) for question in questions],
@@ -97,7 +90,7 @@ def _practice(request, *, track):
         'tag_chips': ([{'tag': name} for name, _ in services.tag_counts(track)]
                       if track == Question.Track.OLYMPIAD else None),
         'sizes': services.SIZES,
-        'size': size, 'mode_wrong': mode_wrong, 'empty_wrong': False,
+        'size': size, 'mode_wrong': mode_wrong, 'empty_wrong': mode_wrong and not questions,
         'track': track, **page,
     })
 
@@ -116,6 +109,36 @@ def page(request):
 def olympiad_page(request):
     """奥数轨练习：只从奥数轨抽题，支持 ?tag= 主题过滤。"""
     return _practice(request, track=Question.Track.OLYMPIAD)
+
+
+@ensure_csrf_cookie
+@never_cache
+@require_safe
+def grammar_page(request, chapter_id):
+    chapter, pool = services.grammar_pool(chapter_id)
+    return _practice(request, track=Question.Track.REGULAR, pool=pool, scoped_page={
+        'area': Question.Area.ENGLISH, 'eyebrow': '英语语法', 'home_label': '本章讲解',
+        'grammar_chapter': chapter,
+        'home_url': reverse('grammar', query={'chapter': chapter['id']}),
+        'practice_url': reverse('questionbank-grammar-practice', args=[chapter['id']]),
+        'wrong_url': reverse('questionbank-grammar-wrong', args=[chapter['id']]),
+    })
+
+
+@ensure_csrf_cookie
+@never_cache
+@require_safe
+def mathbook_page(request, book, topic):
+    from mathbook.exercises import practice_scope
+
+    title, pool = practice_scope(book, topic)
+    return _practice(request, track=Question.Track.REGULAR, pool=pool, scoped_page={
+        'area': Question.Area.MATH, 'eyebrow': '数学教材练习', 'home_label': '数学教材',
+        'mathbook_title': title, 'single_question': topic != 'mistakes',
+        'home_url': reverse('mathbook-book', args=[book], fragment=topic),
+        'practice_url': reverse('questionbank-mathbook-practice', args=[book, topic]),
+        'wrong_url': reverse('questionbank-wrong', query={'track': Question.Track.REGULAR}),
+    })
 
 
 @never_cache

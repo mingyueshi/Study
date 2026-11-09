@@ -4,7 +4,7 @@
   <div class="qb-hero-copy">
     <p class="eyebrow">全科 · 练一练</p>
     <h1>挑战题库</h1>
-    <p class="qb-hero-stats"><span><b>{{ total }}</b> 道题</span><span>已答 <b>{{ summary.answered }}</b> 题</span><span>答对 <b>{{ summary.correct }}</b> 题</span></p>
+    <p class="qb-hero-stats"><span><b>{{ total }}</b> 道题</span><span>已答 <b>{{ summary.answered }}</b> 题</span><span>答对 <b>{{ summary.correct }}</b> 题</span>{% if summary.selfchecked %}<span>已自评 <b>{{ summary.selfchecked }}</b> 题</span>{% endif %}</p>
   </div>
   <div class="qb-hero-deco" aria-hidden="true"><span>对</span><span>✓</span><span>✗</span><span>答</span></div>
 </header>
@@ -26,7 +26,7 @@
     </header>
     <p class="qb-area-intro">{{ card.intro }}</p>
     {% if card.answered %}
-    <p class="qb-area-mine">我答过 {{ card.answered }} 题 · 答对 {{ card.correct }} 题</p>
+    <p class="qb-area-mine">我答过 {{ card.answered }} 题 · 答对 {{ card.correct }} 题{% if card.selfchecked %} · 自评 {{ card.selfchecked }} 题{% endif %}</p>
     {% endif %}
     <div class="qb-area-actions">
       {% if card.practice_url %}

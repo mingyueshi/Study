@@ -105,8 +105,8 @@ class SummaryTests(TestCase):
         summary = services.owner_summary({'user': user})
         self.assertEqual(summary['answered'], 2)
         self.assertEqual(summary['correct'], 1)
-        self.assertEqual(summary['areas']['math'], {'answered': 1, 'correct': 1})
-        self.assertEqual(summary['areas']['chinese'], {'answered': 1, 'correct': 0})
+        self.assertEqual(summary['areas']['math'], {'answered': 1, 'correct': 1, 'selfchecked': 0})
+        self.assertEqual(summary['areas']['chinese'], {'answered': 1, 'correct': 0, 'selfchecked': 0})
 
 
 def seed_olympiad(**overrides):

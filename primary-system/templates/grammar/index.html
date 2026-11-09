@@ -1,7 +1,7 @@
 {% extends 'base.html' %}{% load static %}{% block title %}英语语法 · 乐学堂{% endblock %}
 {% block content %}<link rel="stylesheet" href="{% static 'grammar/grammar.css' %}?v=2"><script src="{% static 'speech.js' %}" defer></script><script src="{% static 'tts.js' %}" defer></script><script src="{% static 'grammar/grammar.js' %}" defer></script>
 <header class="page-heading page-heading-compact"><p class="eyebrow">英语 · 精讲</p><h1>英语语法</h1>
-  <p>把单词放对位置的规则，一章一章讲清楚：看讲解、记口诀、辨易错，读完用巩固题测一测。练习记录统一进挑战题库。</p></header>
+  <p>看讲解、记口诀，先用页内巩固题试一试。点「练本章」进入挑战题库，答错的题会收进本章错题本。</p></header>
 <div class="library-layout">
   <aside class="unit-nav" aria-label="语法章节导航">
     <h2>语法章节</h2>
@@ -53,7 +53,7 @@
     {% endfor %}
     <nav class="grammar-chapter-nav" aria-label="章节切换">
       {% if prev_chapter %}<a class="button small ghost" href="?chapter={{ prev_chapter.id }}">← 上一章</a>{% endif %}
-      <a class="button small" href="{% url 'questionbank' %}">去题库练语法题 →</a>
+      <a class="button small" href="{% url 'questionbank-grammar-practice' current.id %}">练本章 →</a>
       {% if next_chapter %}<a class="button small ghost" href="?chapter={{ next_chapter.id }}">下一章 →</a>{% endif %}
     </nav>
   </section>

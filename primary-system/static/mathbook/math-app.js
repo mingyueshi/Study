@@ -2,8 +2,7 @@
    乐学堂 · 数学知识点 —— 界面逻辑（mathbook 移植版）
    单元切换 / 知识点卡（图示 → 一句话 → 要点·例题·易错 分段）/ 公式速查 / 易错诊所
    搜索 / 点读 / 已掌握标记 / 打印
-   源自 primary/math-app.js：页面逻辑不变，仅静态资源路径改走 /static/，
-   并去掉独立站点时代的首页跳转（平台导航由 base.html 承担）。
+   渲染源自 primary/math-app.js；账号进度在统一系统内保存。
    ============================================================ */
 'use strict';
 
@@ -17,16 +16,24 @@ function mkStoreKey() {
   return 'mathbook_' + (base || 'v2');
 }
 const MATH_STORE_KEY = mkStoreKey();
-let mkState = { last: 'mu1', learned: {}, pane: {} };
+const mkProgressEl = document.getElementById('mathbook-progress');
+const mkAccount = mkProgressEl ? JSON.parse(mkProgressEl.textContent) : null;
+const mkExercises = JSON.parse(document.getElementById('mathbook-exercises')?.textContent || '{}');
+let mkLocal = {};
 try {
   const raw = localStorage.getItem(MATH_STORE_KEY);
-  if (raw) mkState = { ...{ last: 'mu1', learned: {}, pane: {} }, ...JSON.parse(raw) };
+  if (raw) mkLocal = JSON.parse(raw) || {};
 } catch (e) { /* 仅用内存状态 */ }
-if (!mkState.pane) mkState.pane = {};
-function mkSave() { try { localStorage.setItem(MATH_STORE_KEY, JSON.stringify(mkState)); } catch (e) {} }
+const mkState = mkAccount
+  ? { last: mkAccount.last_unit, learned: {}, read: {}, pane: {} }
+  : { last: mkLocal.last || MKB.units[0].id, learned: mkLocal.learned || {}, read: mkLocal.read || {}, pane: mkLocal.pane || {} };
+function mkSave() {
+  if (mkAccount) return;
+  try { localStorage.setItem(MATH_STORE_KEY, JSON.stringify(mkState)); } catch (e) {}
+}
 
 /* ---------- 索引与视图状态 ---------- */
-const MUNIT_BY_ID = {};
+const MUNIT_BY_ID = Object.create(null);
 MKB.units.forEach(u => { MUNIT_BY_ID[u.id] = u; });
 const TOTAL_POINTS = MKB.units.reduce((n, u) => n + u.points.length, 0);
 const MEXTRA_VIEWS = [
@@ -34,22 +41,103 @@ const MEXTRA_VIEWS = [
   { id: 'mistakes', name: '易错诊所', emoji: '⚠️', color: '#c2557d', banner: 'mban-mistakes', count: MKB.mistakes.length },
   { id: 'videos', name: '教学视频', emoji: '🎬', color: '#e25563', banner: 'mban-videos', count: ((MKB.videos && MKB.videos.list) || []).length },
 ];
-const MEXTRA_BY_ID = {};
+const MEXTRA_BY_ID = Object.create(null);
 MEXTRA_VIEWS.forEach(v => { MEXTRA_BY_ID[v.id] = v; });
 
-let curView = MUNIT_BY_ID[mkState.last] ? mkState.last : 'mu1';
-/* 支持 URL 锚点直达单元，如 math.html#mu5 */
-try {
-  const h = (location.hash || '').slice(1);
-  if (h && (MUNIT_BY_ID[h] || MEXTRA_BY_ID[h])) curView = h;
-} catch (e) {}
+let curView = MUNIT_BY_ID[mkState.last] ? mkState.last : MKB.units[0].id;
+/* 支持 URL 锚点直达单元、知识点或资料页。 */
+const entryAnchor = (location.hash || '').slice(1);
+const entryUnit = MKB.units.find(u => u.points.some(p => p.id === entryAnchor));
+if (entryUnit) curView = entryUnit.id;
+else if (MUNIT_BY_ID[entryAnchor] || MEXTRA_BY_ID[entryAnchor]) curView = entryAnchor;
 let query = '';
 let cardSeq = 0;
 
 function munitById(id) { return MUNIT_BY_ID[id]; }
 function pointKey(u, p) { return u.id + '-' + p.id; }
 function totalLearned() { return MKB.units.reduce((n, u) => n + u.points.filter(p => mkState.learned[pointKey(u, p)]).length, 0); }
+function totalRead() { return MKB.units.reduce((n, u) => n + u.points.filter(p => mkState.read[pointKey(u, p)]).length, 0); }
 function unitLearned(u) { return u.points.filter(p => mkState.learned[pointKey(u, p)]).length; }
+
+/* ---------- 账号进度 ---------- */
+const mkPointKeys = new Map(MKB.units.flatMap(u => u.points.map(p => [p.id, pointKey(u, p)])));
+const mkLocalLearned = [...mkPointKeys].filter(([, key]) => mkLocal.learned?.[key] === true).map(([id]) => id);
+const mkLocalRead = [...mkPointKeys].filter(([, key]) => mkLocal.read?.[key] === true).map(([id]) => id);
+const mkLocalUnit = MUNIT_BY_ID[mkLocal.last] ? mkLocal.last : '';
+const mkImportButton = document.getElementById('mk-import-progress');
+const mkSyncStatus = document.getElementById('mk-sync-status');
+let mkProgressQueue = Promise.resolve();
+let mkSyncEpoch = 0;
+let mkOwnerChanged = false;
+
+function pointMarks(ids) {
+  return Object.fromEntries(ids.filter(id => mkPointKeys.has(id)).map(id => [mkPointKeys.get(id), true]));
+}
+
+function applyAccountProgress(data) {
+  mkAccount.read_points = data.read_points || [];
+  mkAccount.learned = data.learned;
+  mkAccount.revision = data.revision;
+  mkState.last = data.last_unit;
+  mkState.read = pointMarks(mkAccount.read_points);
+  mkState.learned = pointMarks(data.learned);
+  mkImportButton.hidden = mkOwnerChanged || data.local_imported || !(mkLocalRead.length || mkLocalLearned.length || mkLocalUnit);
+}
+
+function syncProgress(change) {
+  const epoch = mkSyncEpoch;
+  mkProgressQueue = mkProgressQueue.then(async () => {
+    if (mkOwnerChanged || epoch !== mkSyncEpoch) return;
+    try {
+      const request = { headers: { 'X-Mathbook-Scope': mkAccount.scope } };
+      if (change) {
+        mkSyncStatus.textContent = '正在保存进度…';
+        request.method = 'POST';
+        request.headers['Content-Type'] = 'application/json';
+        request.headers['X-CSRFToken'] = decodeURIComponent((document.cookie.match(/(?:^|;\s*)primary_csrftoken=([^;]*)/) || [])[1] || '');
+        request.body = JSON.stringify({ ...change, revision: mkAccount.revision });
+      }
+      const response = await fetch(mkAccount.url, request);
+      const data = await response.json().catch(() => ({}));
+      if (data.code === 'owner_changed') {
+        mkOwnerChanged = true;
+        applyAccountProgress({learned: [], last_unit: ''});
+        render();
+        mkSyncStatus.textContent = data.error;
+      } else if ((response.ok || data.code === 'conflict') && Array.isArray(data.learned)) {
+        const marksChanged = JSON.stringify([data.learned, data.read_points || []])
+          !== JSON.stringify([mkAccount.learned, mkAccount.read_points]);
+        applyAccountProgress(data);
+        if (marksChanged) render();
+        if (data.code === 'conflict') {
+          mkSyncEpoch += 1;
+          mkSyncStatus.textContent = data.error;
+        } else if (change) {
+          mkSyncStatus.textContent = change.action === 'import' ? '本机进度已导入。' : '已保存到账号。';
+        }
+      } else {
+        mkSyncStatus.textContent = data.error || '进度暂时同步不了，请再试一次。';
+      }
+    } catch (error) {
+      mkSyncStatus.textContent = '网络不给力，进度暂时同步不了。';
+    }
+  });
+  return mkProgressQueue;
+}
+
+if (mkAccount) {
+  applyAccountProgress(mkAccount);
+  mkImportButton.addEventListener('click', () => {
+    if (!confirm('请确认这台设备上的数学进度是你的。每册可以导入一次。')) return;
+    syncProgress({ action: 'import', read_points: mkLocalRead, learned: mkLocalLearned, unit: mkLocalUnit });
+  });
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) syncProgress();
+  });
+}
+window.addEventListener('pageshow', (event) => {
+  if (event.persisted) window.location.reload();
+});
 
 /* ---------- 朗读 ---------- */
 function speak(text) {
@@ -121,7 +209,7 @@ function renderChips() {
 
 function renderStats() {
   const el = document.getElementById('stats');
-  if (el) el.textContent = '已掌握 ' + totalLearned() + ' / ' + TOTAL_POINTS + ' 个知识点';
+  if (el) el.textContent = '已读 ' + totalRead() + ' / ' + TOTAL_POINTS + ' · 自评掌握 ' + totalLearned() + ' / ' + TOTAL_POINTS;
 }
 
 /* ---------- 知识点编号 ----------
@@ -170,6 +258,7 @@ function paneBody(u, p, id) {
 
 function pointCard(u, p, idx) {
   const key = pointKey(u, p);
+  const read = !!mkState.read[key];
   const learned = !!mkState.learned[key];
   const active = mkState.pane[key] || 'items';
   const has = {};
@@ -178,14 +267,14 @@ function pointCard(u, p, idx) {
   const seq = idx == null ? cardSeq++ : idx;
 
   const out = [];
-  out.push('<article class="kcard' + (learned ? ' learned' : '') + '" style="--c:' + u.color + ';--i:' + seq + '" data-key="' + esc(key) + '">');
+  out.push('<article class="kcard' + (learned ? ' learned' : '') + '" id="' + esc(p.id) + '" style="--c:' + u.color + ';--i:' + seq + '" data-key="' + esc(key) + '">');
 
   /* 头部：编号 + 标题 + 朗读 + 已掌握 */
   out.push('<div class="khead">' +
     '<span class="k-idx">' + esc(unitShort(u) + '-' + pointSeq(u, p)) + '</span>' +
     '<h3 class="ktitle">' + esc(p.title) + '</h3>' +
     '<span class="khead-gap"></span>' + sayBtn(p.title + '。' + p.overview) +
-    '<button class="learn-btn' + (learned ? ' on' : '') + '" data-act="learn" data-unit="' + u.id + '" data-id="' + esc(p.id) + '" title="标记已掌握" aria-pressed="' + learned + '" aria-label="已掌握 ' + esc(p.title) + '">' + (learned ? '✓' : '') + '</button>' +
+    '<button class="learn-btn' + (learned ? ' on' : '') + '" data-act="learn" data-unit="' + u.id + '" data-id="' + esc(p.id) + '" title="自评已掌握" aria-pressed="' + learned + '" aria-label="自评已掌握 ' + esc(p.title) + '">' + (learned ? '✓' : '') + '</button>' +
     '</div>');
 
   /* 图示：先看图，再读字 */
@@ -225,7 +314,11 @@ function pointCard(u, p, idx) {
     }
   }
 
-  out.push('</article>');
+  out.push('<div class="mk-card-actions">' +
+    '<button class="button small ghost" type="button" data-act="read" data-unit="' + u.id + '" data-id="' + esc(p.id) +
+    '" aria-pressed="' + read + '">' + (read ? '✓ 已读' : '标为已读') + '</button>' +
+    (mkExercises[p.id] ? '<a class="button small ghost" href="' + esc(mkExercises[p.id]) + '">做例题 · 自评 →</a>' : '') +
+    '</div></article>');
   return out.join('');
 }
 
@@ -284,7 +377,9 @@ function renderMistakes() {
   return '<div class="unit-head' + (photo ? ' has-photo' : '') + '" style="--c:' + v.color +
     (photo ? ';background-image:url(' + photo + ')' : '') + '">' +
     '<div class="unit-head-main"><div class="unit-title-row"><span class="unit-emoji">' + v.emoji + '</span><h1>易错诊所</h1></div>' +
-    '<p>考前把这张「错处清单」过一遍</p></div>' +
+    '<p>考前把这张「错处清单」过一遍</p>' +
+    (mkExercises.mistakes ? '<p class="mk-card-actions"><a class="button small ghost" href="' + esc(mkExercises.mistakes) + '">练判断题 →</a></p>' : '') +
+    '</div>' +
     (photo ? '' : '<div class="unit-head-fig">' + bannerFor(v.banner) + '</div>') + '</div>' +
     '<div class="wgrid">' + MKB.mistakes.map(m =>
       '<article class="mistake-card" style="--c:#c2557d">' +
@@ -437,8 +532,13 @@ function applyMeta() {
 /* ---------- 交互 ---------- */
 function selectView(id) {
   curView = id;
-  if (MUNIT_BY_ID[id]) mkState.last = id;
-  mkSave();
+  if (MUNIT_BY_ID[id]) {
+    if (mkAccount) syncProgress({ action: 'resume', unit: id });
+    else {
+      mkState.last = id;
+      mkSave();
+    }
+  }
   try { history.replaceState(null, '', '#' + id); } catch (e) {}
   query = '';
   const search = document.getElementById('search');
@@ -447,10 +547,13 @@ function selectView(id) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-function toggleLearn(unitId, pointId) {
+function toggleMark(unitId, pointId, action) {
   const key = unitId + '-' + pointId;
-  if (mkState.learned[key]) delete mkState.learned[key];
-  else mkState.learned[key] = true;
+  const flag = action === 'read' ? 'read' : 'learned';
+  const marks = mkState[flag];
+  if (mkAccount) return syncProgress({ action, point: pointId, [flag]: !marks[key] });
+  if (marks[key]) delete marks[key];
+  else marks[key] = true;
   mkSave();
   render();
 }
@@ -496,7 +599,7 @@ document.addEventListener('click', e => {
   const act = el.dataset.act;
   try {
     if (act === 'say') { e.preventDefault(); speak(el.dataset.t); }
-    else if (act === 'learn') { e.preventDefault(); toggleLearn(el.dataset.unit, el.dataset.id); }
+    else if (act === 'learn' || act === 'read') { e.preventDefault(); toggleMark(el.dataset.unit, el.dataset.id, act); }
     else if (act === 'unit') { e.preventDefault(); selectView(el.dataset.id); }
     else if (act === 'kpane') { e.preventDefault(); setPane(el); }
     else if (act === 'allpane') { e.preventDefault(); setAllPanes(el.dataset.p); }
@@ -526,8 +629,9 @@ window.MathPoints = {
   get query() { return query; },
   data: MKB,
   units: MKB.units,
-  render, selectView, toggleLearn, searchResults, setPane, setAllPanes,
+  render, selectView, toggleMark, searchResults, setPane, setAllPanes,
 };
 
 applyMeta();
 render();
+if (entryUnit) requestAnimationFrame(() => document.getElementById(entryAnchor)?.scrollIntoView());

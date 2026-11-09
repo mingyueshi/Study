@@ -63,7 +63,7 @@ TABLES = (
     "words_targetchineseadoption",
 )
 PERSONAL = (
-    "learning_progress", "words_wordprogress", "chain_gameround",
+    "learning_progress", "mathbook_bookprogress", "words_wordprogress", "chain_gameround",
     "writing_writingdraft", "questionbank_answerrecord", "hanzi_polyphoneanswer",
     "idioms_playrecord", "phrases_phraseanswer", "plurals_pluralanswer",
     "poetry_feihualinground", "incentives_pointevent", "incentives_redemption",

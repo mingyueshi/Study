@@ -7,12 +7,14 @@ import datetime
 
 from django.contrib.auth import get_user_model
 from django.test import TestCase
+from django.urls import reverse
 from django.utils import timezone
 
 from chain.models import GameRound
 from hanzi.models import PolyphoneAnswer
 from idioms.models import PlayRecord
 from learning.models import Progress
+from mathbook.models import BookProgress
 from phrases.models import PhraseAnswer
 from poetry.models import FeihualingRound
 from plurals.models import PluralAnswer
@@ -70,14 +72,15 @@ class DigestDataTests(PlatformFixture):
         PhraseAnswer.objects.create(user=cls.user, phrase='ph-digest', chosen='Good job!', answer='Good job!',
                                     correct=True)
 
-    def test_areas_cover_ten_domains_with_own_metrics(self):
+    def test_areas_cover_eleven_domains_with_own_metrics(self):
         digest = learning_digest(self.user)
         self.assertEqual([card['key'] for card in digest['areas']],
-                         ['textbook', 'words', 'chain', 'writing', 'idioms', 'feihualing', 'polyphones',
+                         ['textbook', 'mathbook', 'words', 'chain', 'writing', 'idioms', 'feihualing', 'polyphones',
                           'questionbank', 'plurals', 'phrases'])
         by_key = {card['key']: card for card in digest['areas']}
         self.assertEqual(by_key['textbook']['headlines'], [(2, '开始学习'), (1, '已经掌握'), (0, '我的收藏')])
         self.assertIn('数学 1', by_key['textbook']['footnote'])
+        self.assertEqual(by_key['mathbook']['headlines'], [(0, '已读'), (0, '自评掌握'), (43, '知识点')])
         self.assertEqual(by_key['words']['headlines'], [(1, '已掌握'), (2, '学过')])
         # 对决局的 score 同为孩子得分，计入完成数与最高分。
         self.assertEqual(by_key['chain']['headlines'], [(2, '完成对局'), (14, '最高分')])
@@ -90,7 +93,8 @@ class DigestDataTests(PlatformFixture):
         self.assertEqual(by_key['phrases']['headlines'], [(1, '练习题数'), (1, '答对')])
         # 新鲜记录都落在近 7 天：本周文案非空。
         for card in digest['areas']:
-            self.assertTrue(card['week'], card['key'])
+            if card['key'] != 'mathbook':
+                self.assertTrue(card['week'], card['key'])
 
     def test_week_only_counts_recent_records(self):
         past = timezone.now() - datetime.timedelta(days=30)
@@ -147,14 +151,35 @@ class DigestViewTests(PlatformFixture):
         self.assertNotContains(response, '学习总览')
 
     def test_my_learning_renders_cards_feed_and_list(self):
+        draft = WritingDraft.objects.create(user=self.user, title='我的假期')
+        target = LearningTarget.objects.create(label='book', legacy={'word_id': 1})
+        WordProgress.objects.create(user=self.user, target=target, learned=True)
         self.client.force_login(self.user)
         response = self.client.get('/me/')
         self.assertContains(response, '最近学了什么')
         self.assertContains(response, '教材内容记录')
         self.assertContains(response, '守株待兔')
         self.assertContains(response, '认识数字')
+        draft_url = reverse('writing', query={'draft': draft.pk}, fragment='notebook')
+        target_url = reverse('scenario-words', query={'target': target.pk})
+        self.assertContains(response, f'href="{draft_url}"')
+        self.assertContains(response, f'href="{target_url}"')
 
     def test_my_learning_requires_login(self):
         response = self.client.get('/me/')
         self.assertEqual(response.status_code, 302)
         self.assertIn('login', response.url)
+
+    def test_mathbook_progress_is_separate_and_links_to_the_last_unit(self):
+        BookProgress.objects.create(user=self.user, book='4a', last_unit='mu2',
+                                    read_points=['mu2-2'], learned=['mu2-1', 'removed-point'])
+        other = get_user_model().objects.create_user('other-math')
+        BookProgress.objects.create(user=other, book='4a', last_unit='mu3', learned=['mu3-1', 'mu3-2'])
+        self.client.force_login(self.user)
+        response = self.client.get('/me/')
+        resume_url = reverse('mathbook-book', args=['4a'], fragment='mu2')
+        self.assertContains(response, f'href="{resume_url}">接着学')
+        digest = learning_digest(self.user)
+        math = next(card for card in digest['areas'] if card['key'] == 'mathbook')
+        self.assertEqual(math['headlines'], [(1, '已读'), (1, '自评掌握'), (43, '知识点')])
+        self.assertEqual([row['url'] for row in digest['recent'] if row['note'].startswith('数学教材')], [resume_url])

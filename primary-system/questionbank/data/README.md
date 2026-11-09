@@ -31,6 +31,9 @@ node scripts/build_questionbank.cjs          # 生成批次 JSON（确定性，�
 - **英语 `primary-english`**：教材同步单词按单元轮转取样（上限 60）→
   词义四选一（干扰项取同册词义池，去词性前缀）。
 
+数学四上使用来源定位直达例题自评和易错诊所判断题。自评按孩子对照答案后的结论记账，
+题库统计将自评次数与客观判分题的答对次数分开显示。练习结算的星级取客观判分题成绩。
+
 ## 字段与身份
 
 批次顶层：`schema_version:1`、`batch_id`、`generator`、`questions[]`。每题：

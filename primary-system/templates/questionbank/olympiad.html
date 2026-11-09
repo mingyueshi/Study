@@ -5,7 +5,7 @@
     <p class="eyebrow">数学 · 思维挑战</p>
     <h1>奥数挑战</h1>
     <p class="qb-hero-tag">{{ hero_tag }}</p>
-    <p class="qb-hero-stats"><span><b>{{ total }}</b> 道题</span><span>已答 <b>{{ summary.answered }}</b> 题</span><span>答对 <b>{{ summary.correct }}</b> 题</span></p>
+    <p class="qb-hero-stats"><span><b>{{ total }}</b> 道题</span><span>已答 <b>{{ summary.answered }}</b> 题</span><span>答对 <b>{{ summary.correct }}</b> 题</span>{% if summary.selfchecked %}<span>已自评 <b>{{ summary.selfchecked }}</b> 题</span>{% endif %}</p>
   </div>
   <div class="qb-hero-deco" aria-hidden="true"><span>🧠</span><span>⚡</span><span>🎯</span><span>?</span></div>
 </header>

@@ -34,19 +34,20 @@ def index(request):
                  .values('area').annotate(total=Count('id'))}
     olympiad_total = Question.objects.filter(active=True, track=Question.Track.OLYMPIAD).count()
     scope = records.read_scope(request)
-    summary = services.owner_summary(scope)
+    regular_summary = services.owner_summary(scope, track=Question.Track.REGULAR)
     olympiad_summary = services.owner_summary(scope, track=Question.Track.OLYMPIAD)
+    keys = ('answered', 'correct', 'selfchecked')
+    summary = {key: regular_summary[key] + olympiad_summary[key] for key in (*keys, 'week')}
     cards = []
     for meta in AREA_META:
         if meta.get('track'):
-            counts = {'answered': olympiad_summary['answered'], 'correct': olympiad_summary['correct']}
+            counts = olympiad_summary
             count = olympiad_total
             meta = {**meta, 'practice_url': reverse(meta['practice_url'])}
         else:
-            counts = summary['areas'].get(meta['area'], {'answered': 0, 'correct': 0})
+            counts = regular_summary['areas'].get(meta['area'], {})
             count = questions.get(meta['area'], 0)
-        cards.append({**meta, 'count': count,
-                      'answered': counts['answered'], 'correct': counts['correct']})
+        cards.append({**meta, 'count': count, **{key: counts.get(key, 0) for key in keys}})
     return render(request, 'questionbank/home.html', {
         'cards': cards,
         'total': sum(questions.values()) + olympiad_total,

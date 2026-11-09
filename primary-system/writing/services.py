@@ -3,6 +3,7 @@
 import json
 
 from django.db import transaction
+from django.utils.crypto import salted_hmac
 
 from .models import WritingDraft
 
@@ -27,6 +28,18 @@ def owner_filter(request):
         key = request.session.session_key
         request.session[GUEST_KEY] = key
     return {'guest_key': key}
+
+
+def autosave_scope(request):
+    """浏览器暂存的隔离标识。读取页面时不创建游客会话。"""
+    if request.user.is_authenticated:
+        identity = f'user:{request.user.pk}:{request.user.date_joined.isoformat()}'
+    else:
+        guest_key = request.session.get(GUEST_KEY)
+        if not guest_key:
+            return ''
+        identity = f'guest:{guest_key}'
+    return salted_hmac('writing.autosave', identity, algorithm='sha256').hexdigest()
 
 
 def parse_draft_payload(request, require_revision):
