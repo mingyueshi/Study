@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="中国地图系统·省域站：进入单个省级行政区，看档案、读记一记要点，在迷你地图上找到它的位置。">
+  <title>省域站 · 中国地图</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="province.css">
+  <script src="content.js" defer></script>
+  <script src="china-geo.js" defer></script>
+  <script src="map-data.js" defer></script>
+  <script src="shared.js" defer></script>
+  <script src="province-app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <main id="main" class="gm-topic province-topic" tabindex="-1">
+    <nav class="gm-sysnav" aria-label="中国地图系统页面导航">
+      <a class="gm-sysnav-brand" href="index.html">🗺️ 中国地图<small>多页面编排</small></a>
+      <a data-page href="china.html">中国地图</a>
+      <a data-page href="province.html" aria-current="page">省域站</a>
+      <a data-page href="world.html">世界地图</a>
+    </nav>
+
+    <nav class="gm-breadcrumb" aria-label="所在位置">
+      <a href="china.html">中国地图</a><span aria-hidden="true">›</span><b id="crumb-here">省域站</b>
+    </nav>
+
+    <div id="province-page"></div>
+
+    <noscript><p class="gm-notice">请启用 JavaScript 查看省域站；省域站列表可从系统首页进入。</p></noscript>
+  </main>
+  <footer class="gm-footer">乐学堂 · 中国地图系统 · <a href="index.html">系统首页</a> · <a href="china.html">中国地图</a> · <a href="world.html">世界地图</a></footer>
+</body>
+</html>

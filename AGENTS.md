@@ -41,7 +41,7 @@ node primary/test/test-geo.js        # 改 geo/knowledge-*.js 后
 node primary/test/test-knowledge.js  # 改 knowledge-data.js 后
 ```
 
-对应关系：`test-knowledge`→语文、`test-math-knowledge`→数学、`test-english`→教材同步单词、`test-words`→场景单词、`test-idioms`→成语本、`test-writing`→作文坊、`test-chain`→成语接龙、`test-grammar`→英语语法、`test-phonetics`→英语音标、`test-geo`/`test-astro`/`test-history`/`test-lit`/`test-sci`→五本探索册。personal-learning 的测试是 `node personal-learning/test/test-structure.js` 与 `test-theme.js`。
+对应关系：`test-knowledge`→语文、`test-math-knowledge`→数学、`test-english`→教材同步单词、`test-words`→场景单词、`test-idioms`→成语本、`test-writing`→作文坊、`test-chain`→成语接龙、`test-grammar`→英语语法、`test-phonetics`→英语音标、`test-geo`/`test-astro`/`test-history`/`test-lit`/`test-sci`→五本探索册、`test-timeline`→历史双轨时间轴。personal-learning 的测试是 `node personal-learning/test/test-structure.js` 与 `test-theme.js`。
 
 改了哪个 data 就跑哪个 test；新增系统或新增数据结构时，先写测试再填数据。
 
@@ -55,6 +55,8 @@ node primary/test/test-knowledge.js  # 改 knowledge-data.js 后
 - 新增学习册要在根 README 的「现有系统/快速开始」和 `primary/README.md` 同步登记；修改数据规模（如「8 单元 27 课」）时同步更新两处 README 里的数字。
 
 **例外：地理、历史、英语语法与英语音标是自包含子目录** `primary/geo/`、`primary/history/`、`primary/grammar/`、`primary/phonetics/`（共用同一套「平台引擎」：`index.html + content.js + knowledge-*.js + app.js + platform-theme.css + styles.css`，可选 `media.js / diagrams.js / lab.js / assets/`），所有引用都在目录内相对解析，整目录可单独拷走。geo/history 是多媒体版（含图片、音频、动画实验室）；grammar 是语法精讲版、phonetics 是音标精讲版（暂无媒体层，按需可加）。知识点 id 前缀：`gu*`（地理）、`hu*`（历史）、`gr*`（语法）、`ph*`（音标）；数据校验命令：`node primary/test/test-geo.js`、`node primary/test/test-history.js`、`node primary/test/test-grammar.js`、`node primary/test/test-phonetics.js`。**以后新增学科一律用这种自包含子目录模式**。
+
+`primary/history-timeline/`（历史时间轴系统，多页面编排演示）同为自包含子目录，但不套用平台引擎：门户 `index.html` + 双轨时间轴 `timeline.html` + 时代站 `era.html?era=` + 朝代更替 `dynasties.html`，页面共享系统导航条；数据在 `content.js`（时代带/朝代速览）、`timeline-data.js`（事件/对照）、`dynasty-data.js`（朝代更替/公元纪年），事件 id 前缀 `tc*`/`tw*`，事件卡渲染在 `shared.js` 供各页复用；校验命令 `node primary/test/test-timeline.js`。
 
 ## primary-system/ 的运行方式
 

@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="中国地图系统·世界地图：七大洲四大洋换图层认一认，世界之最点一点，看看中国站在世界的什么位置。">
+  <title>世界地图 · 乐学堂</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="map-data.js" defer></script>
+  <script src="world-geo.js" defer></script>
+  <script src="world-data.js" defer></script>
+  <script src="shared.js" defer></script>
+  <script src="world-app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <main id="main" class="gm-topic world-topic" tabindex="-1" data-layer="continent">
+    <nav class="gm-sysnav" aria-label="中国地图系统页面导航">
+      <a class="gm-sysnav-brand" href="index.html">🗺️ 中国地图<small>多页面编排</small></a>
+      <a data-page href="china.html">中国地图</a>
+      <a data-page href="province.html">省域站</a>
+      <a data-page href="world.html" aria-current="page">世界地图</a>
+    </nav>
+
+    <header class="gm-hero gm-hero--world">
+      <p class="gm-eyebrow">地理编排演示 · 第二站：世界地图 · 正式开放</p>
+      <h1 class="gm-title">🌍 世界地图，<br><span class="gm-h1-blue">七大洲与四大洋</span></h1>
+      <p class="gm-intro">把在第一站认识的中国放到全世界：换上不同图层，看国家们属于哪块大陆、世界之最都藏在哪，再找找金色那块——中国站在世界的什么位置。还能玩「找一找」，比比谁认识的国家多。</p>
+      <div class="gm-stats" aria-label="内容规模">
+        <span><b id="stat-continents">7</b>大洲</span>
+        <span><b id="stat-oceans">4</b>大洋</span>
+        <span><b id="stat-countries">177</b>个国家和地区</span>
+        <span><b id="stat-worlds">10</b>处世界之最</span>
+      </div>
+      <a class="gm-next-chip" href="china.html">↩ 回到第一站：中国地图，把山河先认熟</a>
+    </header>
+
+    <nav class="gm-toolbar" aria-label="地图工具">
+      <div class="gm-toolbar-row">
+        <div class="gm-filters" id="gm-filters" role="group" aria-label="选择图层"></div>
+        <div class="gm-toolbar-actions">
+          <button type="button" id="gm-quiz-start" class="gm-btn gm-btn--go">🔍 找一找</button>
+        </div>
+      </div>
+      <p class="gm-layer-hint" id="gm-layer-hint"></p>
+    </nav>
+
+    <div class="gm-stage">
+      <figure class="gm-map-wrap">
+        <svg id="gm-svg" role="group" aria-label="世界示意地图，包含七大洲、世界之最与中国与世界图层"></svg>
+        <div class="gm-quiz" id="gm-quiz" hidden></div>
+        <figcaption class="gm-map-note">示意教学地图：国家轮廓经过简化，山脉与大河位置为近似示意；南极洲按制图惯例截至南纬 73°；国家中文名与英文名对照见档案卡，个别地区沿用地图集通行写法。</figcaption>
+      </figure>
+      <aside class="gm-card gm-card--blank" id="gm-card" aria-live="polite"></aside>
+    </div>
+
+    <section class="gm-section" aria-labelledby="teasers-title">
+      <h2 id="teasers-title">从中国看世界</h2>
+      <p class="gm-section-sub">同样的东西放到世界地图上，尺度完全不一样——现在可以亲自到图上验证了。</p>
+      <div class="gm-teasers-grid" id="gm-teasers"></div>
+    </section>
+
+    <section class="gm-section gm-guide" aria-labelledby="guide-title">
+      <h2 id="guide-title">这张地图怎么玩</h2>
+      <ol>
+        <li><strong>认大洲：</strong>「七大洲」图层里每个国家都按所属大洲着色，点国家或大洋亮出档案卡；</li>
+        <li><strong>找之最：</strong>「世界之最」图层里标着最高的山峰、最长的河流、最大的沙漠，点标记听故事；</li>
+        <li><strong>看中国：</strong>「中国与世界」图层里金色那块就是中国，点它看中国在世界上站的位置；</li>
+        <li><strong>找一找：</strong>点工具栏的「🔍 找一找」，按提示在世界地图上点出正确的地方，一轮 5 题。</li>
+      </ol>
+      <p class="gm-guide-note">地图为教学示意版：轮廓经过简化，山脉与大河按近似位置绘制；南北方向没有拉伸（等经距画法），俄罗斯、格陵兰岛看起来不会像有些地图上那么巨大。数字一律用通行约数。</p>
+    </section>
+
+    <div id="gm-status" class="gm-status" role="status" aria-live="polite"></div>
+    <noscript><p class="gm-notice">请启用 JavaScript 查看世界地图；内容数据保存在本目录的 world-geo.js 与 world-data.js 中。</p></noscript>
+  </main>
+  <footer class="gm-footer">乐学堂 · 中国地图系统 · <a href="index.html">系统首页</a> · <a href="china.html">中国地图</a> · <a href="province.html">省域站</a></footer>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="小学历史双轨时间轴演示：竖版布局，时间从上往下流动，左轨中国史、右轨世界史，同期大事对照着看。">
+  <title>历史双轨时间轴 · 乐学堂</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="content.js" defer></script>
+  <script src="timeline-data.js" defer></script>
+  <script src="shared.js" defer></script>
+  <script src="timeline-app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <main id="main" class="tl-shell" tabindex="-1">
+    <div class="timeline-topic" id="top">
+      <nav class="tl-sysnav" aria-label="历史时间轴系统页面导航">
+        <a class="tl-sysnav-brand" href="index.html">🕰️ 历史时间轴<small>多页面编排</small></a>
+        <a data-page href="timeline.html" aria-current="page">双轨时间轴</a>
+        <a data-page href="dynasties.html">朝代更替</a>
+        <a data-page href="era.html">时代站</a>
+      </nav>
+      <header class="tl-hero">
+        <p class="tl-eyebrow">中国史 × 世界史 · 同一时间刻度</p>
+        <h1>历史<span class="tl-h1-china">双</span>轨<span class="tl-h1-world">时间轴</span></h1>
+        <p class="tl-intro">时间从上往下流动：左边一条线讲中国，右边一条线讲世界。看到感兴趣的卡片，点「对照」就能跳到同一时期另一边正在发生的事——原来秦始皇和迦太基的大象几乎同时登场。</p>
+        <div class="tl-stats" aria-label="内容规模">
+          <span><b id="stat-eras">8</b>个时代</span>
+          <span><b id="stat-events">70</b>件大事</span>
+          <span><b id="stat-pairs">19</b>组同期对照</span>
+        </div>
+        <div class="tl-spotlights" id="spotlights" aria-label="同期对照速览"></div>
+      </header>
+
+      <section class="tl-dynasty" aria-labelledby="dynasty-title">
+        <div class="tl-dynasty-head">
+          <h2 id="dynasty-title">朝代速览</h2>
+          <p>中国朝代排成一条线，点朝名跳到时间轴上对应的阶段。</p>
+          <a class="tl-dynasty-more" href="dynasties.html">竖版更替时间轴 + 公元前小课堂 →</a>
+        </div>
+        <div class="tl-dynasty-strip" id="dynasty-strip"></div>
+        <p class="tl-dynasty-song"><strong>朝代歌</strong>：夏商与西周，东周分两段；三分魏蜀吴，二晋前后延；南北朝并立，隋唐五代传；宋元明清后，皇朝至此完。</p>
+      </section>
+
+      <nav class="tl-toolbar" aria-label="时间轴工具">
+        <div class="tl-filters" role="group" aria-label="选择查看视角">
+          <button type="button" data-mode="all" aria-pressed="true">双轨全览</button>
+          <button type="button" data-mode="china" aria-pressed="false">只看中国史</button>
+          <button type="button" data-mode="world" aria-pressed="false">只看世界史</button>
+          <button type="button" data-mode="pair" aria-pressed="false">只看对照时刻</button>
+        </div>
+        <div class="tl-era-nav" id="era-nav" aria-label="跳到指定时代"></div>
+      </nav>
+
+      <div class="tl-flow" id="timeline-flow"></div>
+
+      <section class="tl-guide" aria-labelledby="guide-title">
+        <h2 id="guide-title">这张时间轴怎么用</h2>
+        <ol>
+          <li><strong>先看朝代条：</strong>页首的「朝代速览」把中国朝代排成一条线，点朝名直达时间轴对应阶段；</li>
+          <li><strong>顺着中线往下滑：</strong>中间的虚线是时间脊轴，圆点代表一个时代站，越往下离现在越近；</li>
+          <li><strong>看两条线的「对照」编号：</strong>同色编号的两张卡是同一时期发生的事，点卡片下方的对照按钮可直接跳过去；</li>
+          <li><strong>换视角：</strong>用顶部按钮只看中国史、只看世界史，或只看全部对照时刻，看看两边如何互相影响；</li>
+        </ol>
+        <p class="tl-guide-note">年代多为约数（如夏朝约前 2070 年），以通行说法为准；上下距离不表示时间长短，卡片位置只按时代顺序排列。传说时代的内容会明确标注「传说」。</p>
+      </section>
+
+      <div id="tl-status" role="status" aria-live="polite"></div>
+      <noscript><p class="tl-notice">请启用 JavaScript 查看时间轴；内容数据保存在本目录的 content.js 与 timeline-data.js 中。</p></noscript>
+    </div>
+  </main>
+  <footer class="tl-footer">历史时间轴系统 · <a href="index.html">系统首页</a> · <a href="dynasties.html">朝代更替</a> · <a href="#top">回到顶部 ↑</a></footer>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="中国朝代更替竖版时间轴：先学会看公元前、公元后，再顺着一条竖轴看夏到清十六个朝代如何更替。">
+  <title>中国朝代更替时间轴 · 乐学堂</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="dynasty.css">
+  <script src="content.js" defer></script>
+  <script src="dynasty-data.js" defer></script>
+  <script src="dynasty-app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <main id="main" class="tl-shell" tabindex="-1">
+    <div class="dynasty-topic" id="top">
+      <nav class="tl-sysnav" aria-label="历史时间轴系统页面导航">
+        <a class="tl-sysnav-brand" href="index.html">🕰️ 历史时间轴<small>多页面编排</small></a>
+        <a data-page href="timeline.html">双轨时间轴</a>
+        <a data-page href="dynasties.html" aria-current="page">朝代更替</a>
+        <a data-page href="era.html">时代站</a>
+      </nav>
+      <header class="tl-hero dyn-hero">
+        <a class="tl-back" href="timeline.html">← 返回双轨时间轴</a>
+        <p class="tl-eyebrow">中国朝代 · 竖版更替</p>
+        <h1>中国<span class="tl-h1-china">朝代更替</span>时间轴</h1>
+        <p class="tl-intro">先花两分钟弄懂「公元前、公元后」这把时间尺子，再顺着一条竖轴看夏到清十六个朝代如何你方唱罢我登场：每张卡讲一个朝代怎么建立、怎么谢幕，卡片之间的紫色箭头就是改朝换代的关键事件。</p>
+      </header>
+
+      <section class="cal-class" aria-labelledby="cal-title">
+        <h2 id="cal-title">先学个小工具：什么是公元前、公元后</h2>
+        <p class="cal-intro" id="cal-intro"></p>
+        <div class="cal-axis-wrap">
+          <div class="cal-axis" id="cal-axis" role="img" aria-label="时间数轴：公元前在左，公元后在右，公元前 1 年紧挨着公元 1 年，中间没有公元 0 年"></div>
+          <p class="cal-axis-note">时间数轴（不按比例，只示意顺序）：左边公元前、右边公元后，越往右越接近现在。</p>
+        </div>
+        <div class="cal-rules" id="cal-rules" aria-label="计算隔了多少年的三条规则"></div>
+        <div class="cal-quiz" id="cal-quiz" aria-label="练一练"></div>
+      </section>
+
+      <section class="dyn-section" aria-labelledby="dyn-title">
+        <h2 id="dyn-title">十六个朝代的更替</h2>
+        <p class="dyn-legend">每张卡是一个朝代：<b>建立</b>讲它怎么取代前朝，<b>灭亡</b>讲它怎么谢幕；卡上的小徽章告诉你它的年代属于公元前、公元后，还是横跨两边。</p>
+        <ol class="dyn-flow" id="dyn-flow"></ol>
+      </section>
+
+      <noscript><p class="tl-notice">请启用 JavaScript 查看时间轴；内容数据保存在本目录的 content.js 与 dynasty-data.js 中。</p></noscript>
+    </div>
+  </main>
+  <footer class="tl-footer">历史时间轴系统 · <a href="index.html">系统首页</a> · <a href="timeline.html">双轨时间轴</a> · <a href="#top">回到顶部 ↑</a></footer>
+</body>
+</html>

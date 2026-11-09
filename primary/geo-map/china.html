@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="中国地图主页：一张真实轮廓的中国示意地图，分省级行政区、山河大地、我们的邻居三层探索，配档案卡、找一找游戏与地图口诀卡。">
+  <title>中国地图 · 乐学堂</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="content.js" defer></script>
+  <script src="china-geo.js" defer></script>
+  <script src="map-data.js" defer></script>
+  <script src="shared.js" defer></script>
+  <script src="china-app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <main id="main" class="gm-topic" tabindex="-1" data-layer="province">
+    <nav class="gm-sysnav" aria-label="中国地图系统页面导航">
+      <a class="gm-sysnav-brand" href="index.html">🗺️ 中国地图<small>多页面编排</small></a>
+      <a data-page href="china.html" aria-current="page">中国地图</a>
+      <a data-page href="province.html">省域站</a>
+      <a data-page href="world.html">世界地图</a>
+    </nav>
+
+    <header class="gm-hero">
+      <p class="gm-eyebrow">地理编排演示 · 第一站：中国地图 · 像探险一样看地图</p>
+      <h1 class="gm-title">地图上的<span class="gm-h1-green">中</span>国，<br>脚下的<span class="gm-h1-blue">山河</span>与邻居</h1>
+      <p class="gm-intro">这次不用一篇篇文章学地理，而是像探险一样「看地图」：换上不同图层，省份在哪里、江河山脉在哪里、邻居们住在哪里，一点就亮出档案卡。想细看哪个省份，就进它的省域站；还能玩「找一找」，看谁的眼睛最亮。</p>
+      <div class="gm-stats" aria-label="内容规模">
+        <span><b id="stat-provinces">34</b>个省级行政区</span>
+        <span><b id="stat-features">45</b>处山河湖海</span>
+        <span><b id="stat-neighbors">20</b>个邻居国家</span>
+        <span><b id="stat-rhymes">7</b>张地图口诀卡</span>
+      </div>
+      <a class="gm-next-chip" href="world.html">🌍 第二站：世界地图 <small>· 已开放，去看看 →</small></a>
+    </header>
+
+    <nav class="gm-toolbar" aria-label="地图工具">
+      <div class="gm-toolbar-row">
+        <div class="gm-filters" id="gm-filters" role="group" aria-label="选择图层"></div>
+        <div class="gm-toolbar-actions">
+          <button type="button" id="gm-quiz-start" class="gm-btn gm-btn--go">🔍 找一找</button>
+        </div>
+      </div>
+      <p class="gm-layer-hint" id="gm-layer-hint"></p>
+    </nav>
+
+    <div class="gm-stage">
+      <figure class="gm-map-wrap">
+        <svg id="gm-svg" role="group" aria-label="中国示意地图，包含省级行政区、山河大地与邻居图层"></svg>
+        <div class="gm-quiz" id="gm-quiz" hidden></div>
+        <figcaption class="gm-map-note">示意教学地图：省级行政区轮廓来自公开边界数据并做了简化，山脉与河道位置为近似示意；南海诸岛与十段线按制图惯例画在右下小图中。</figcaption>
+      </figure>
+      <aside class="gm-card gm-card--blank" id="gm-card" aria-live="polite"></aside>
+    </div>
+
+    <section class="gm-section" aria-labelledby="rhymes-title">
+      <h2 id="rhymes-title">地图口诀卡</h2>
+      <p class="gm-section-sub">把地图知识编成顺口的句子，念几遍就记住了。</p>
+      <div class="gm-rhymes-grid" id="gm-rhymes"></div>
+    </section>
+
+    <section class="gm-section gm-guide" aria-labelledby="guide-title">
+      <h2 id="guide-title">这张地图怎么玩</h2>
+      <ol>
+        <li><strong>换图层：</strong>工具栏有「省级行政区」「山河大地」「我们的邻居」三个图层，每次看一类东西，地图清爽不吵闹。</li>
+        <li><strong>点一点：</strong>点省份、山脉、大河或邻居，右边的档案卡会告诉你它的简称、方位和小知识。</li>
+        <li><strong>进省域站：</strong>点开省份档案卡后，点「进省域站细看 →」可以进入这个省份自己的页面。</li>
+        <li><strong>找一找：</strong>点工具栏的「🔍 找一找」，按提示在地图上点出正确的地方，一轮 5 题，看看能拿几颗星。</li>
+        <li><strong>念口诀：</strong>页面下方的口诀卡把三级阶梯、34 个省级行政区、长江黄河和邻国编成了顺口溜。</li>
+      </ol>
+      <p class="gm-guide-note">地图为教学示意版：轮廓经过简化，山脉与大河按近似位置绘制；南海诸岛、十段线按制图惯例放在右下角小图里，台湾岛、海南岛、钓鱼岛、赤尾屿都标注在图上。数字一律用通行约数。</p>
+    </section>
+
+    <div id="gm-status" class="gm-status" role="status" aria-live="polite"></div>
+    <noscript><p class="gm-notice">请启用 JavaScript 查看地图；内容数据保存在本目录的 content.js、china-geo.js 与 map-data.js 中。</p></noscript>
+  </main>
+  <footer class="gm-footer">乐学堂 · 中国地图系统 · <a href="index.html">系统首页</a> · <a href="province.html">省域站</a> · <a href="world.html">世界地图</a> · <a href="#main">回到顶部 ↑</a></footer>
+</body>
+</html>
