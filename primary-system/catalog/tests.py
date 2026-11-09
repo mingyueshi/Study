@@ -12,7 +12,7 @@ from django.urls import reverse
 from .entry_registry import SPECIAL_ENTRIES
 from .importing import import_snapshot
 from .models import ContentItem, Grade, Module, Placement, Stage, Subject, Textbook, TextbookBook, TextbookEdition, Unit, \
-    published_textbook_books
+    published_items, published_textbook_books
 
 
 def minimal_snapshot():
@@ -98,6 +98,19 @@ class EnglishTextbookTests(PlatformFixture):
 
 
 class CatalogTests(PlatformFixture):
+    def test_cross_module_placement_cannot_publish_hidden_content(self):
+        import_snapshot(english_snapshot(), publish=True)
+        english = TextbookBook.objects.get(code='primary-english-first')
+        self.collection.is_published = False
+        self.collection.save(update_fields=['is_published'])
+        placement = Placement(unit=english.units.get(), item=self.item)
+        with self.assertRaises(ValidationError):
+            placement.save()
+        # 即使历史数据绕过模型保存，公开查询也应继续隐藏该内容。
+        Placement.objects.bulk_create([placement])
+        self.assertFalse(published_items().filter(pk=self.item.pk).exists())
+        self.assertEqual(self.client.get(reverse('item', args=[self.item.pk])).status_code, 404)
+
     def test_seed_is_idempotent_and_preserves_changes(self):
         Module.objects.filter(code='math').update(name='我的数学')
         call_command('seed_platform', stdout=io.StringIO())

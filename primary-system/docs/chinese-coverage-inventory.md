@@ -80,3 +80,7 @@
 `cn-foundation-20261107-15`：场景侧最后2条——maths book与study（均经维护者当日确认处置）：maths book读音疑点消解（英式/ˈmɑːθs bʊk/为primary教学卡自带人工音标，已随全量读音核对正式确认，与外研社体系一致）；study按kiwi同理逐字采用合并卡（n.书房；v.学习），教学层后续如需拆分按改义规则另建身份。2条创建／复跑0新增，回执入库。**场景侧577/577全部完成**；剩余293项全部为教材ContentEntryLink固定绑定。批次清单与摘要在`data/chinese/cn-foundation-20261107-15.json`与`output/primary-system-audit/2026-11-07/chinese-batch-03/batch17-summary.json`，恢复点`before-batch-17.sqlite3`。
 
 固定批准清单与摘要见[chinese-batch-01-candidates.md](chinese-batch-01-candidates.md)，实施证据见[首批报告](chinese-batch-01-implementation.md)。
+
+2026-11-09 复查修订。四上第四单元的 `all year round`、`happen`、`wait`、`wonderful` 补齐了教材来源。新来源版本保留 306 个原有绑定的词汇内容摘要。新增批次 `cn-foundation-20261109-textbook` 明确采用 297 条固定教材释义，教材采用覆盖达到 310/310。其中 `beach` 继续使用原绑定的「海滩」，旧卡片的「沙滩」作为原文留存。
+
+`maths book` 的原读音 `/mɑːθs bʊk/` 仍保留在来源证据中。对照剑桥词典后，场景词卡采用 `/mæθs bʊk/`，纠音后的词卡使用新学习目标，保留旧目标、审核和学习记录。静态词卡源文件同步纠音。[maths 读音](https://dictionary.cambridge.org/us/pronunciation/english/maths) · [book 读音](https://dictionary.cambridge.org/pronunciation/english/book)

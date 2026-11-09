@@ -1,4 +1,4 @@
-/* 时代带元数据；双轨事件与同期对照在 timeline-data.js，朝代速览在下方。 */
+/* 时代带元数据；双轨事件与同期对照在 timeline-data.js。 */
 window.TIMELINE_ERAS = [
   {
     "no": 1,
@@ -72,25 +72,4 @@ window.TIMELINE_ERAS = [
     "accent": "#a5486d",
     "compare": "大战重塑了世界，新中国一路追赶，科技把地球变成一个小村庄。"
   }
-];
-
-/* 中国朝代速览：一条线排顺序，点朝名跳到对应时代带。
-   sort 为起算年代数字（公元前记负数），note 是分段的补充说明，可省略。 */
-window.TIMELINE_DYNASTIES = [
-  { "name": "夏", "span": "约前 2070—前 1600", "sort": -2070, "era": "bronze" },
-  { "name": "商", "span": "约前 1600—前 1046", "sort": -1600, "era": "bronze" },
-  { "name": "西周", "span": "前 1046—前 771", "sort": -1046, "era": "bronze" },
-  { "name": "东周", "span": "前 770—前 221", "sort": -770, "era": "axial", "note": "春秋 · 战国" },
-  { "name": "秦", "span": "前 221—前 207", "sort": -221, "era": "empire" },
-  { "name": "汉", "span": "前 202—220", "sort": -202, "era": "empire", "note": "西汉 · 东汉" },
-  { "name": "三国", "span": "220—280", "sort": 220, "era": "migration", "note": "魏 · 蜀 · 吴" },
-  { "name": "两晋", "span": "266—420", "sort": 266, "era": "migration", "note": "西晋 · 东晋" },
-  { "name": "南北朝", "span": "420—589", "sort": 420, "era": "migration" },
-  { "name": "隋", "span": "581—618", "sort": 581, "era": "golden" },
-  { "name": "唐", "span": "618—907", "sort": 618, "era": "golden" },
-  { "name": "五代十国", "span": "907—979", "sort": 907, "era": "golden" },
-  { "name": "宋", "span": "960—1279", "sort": 960, "era": "golden", "note": "北宋 · 南宋" },
-  { "name": "元", "span": "1271—1368", "sort": 1271, "era": "golden" },
-  { "name": "明", "span": "1368—1644", "sort": 1368, "era": "voyage" },
-  { "name": "清", "span": "1644—1912", "sort": 1644, "era": "change" }
 ];

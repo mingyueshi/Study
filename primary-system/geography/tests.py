@@ -39,7 +39,7 @@ class CountryImportTests(TestCase):
                     "region": "Asia",
                     "subregion": "Eastern Asia",
                     "latlng": [0, 0],
-                    "area_km2": i,
+                    "area_km2": -1 if i == 1 else i,
                     "independent": True,
                     "un_member": True,
                 }
@@ -72,6 +72,15 @@ class CountryImportTests(TestCase):
         row.save()
         with self.assertRaises(ValidationError):
             import_data(self.root, True)
+
+    def test_negative_source_area_is_kept_as_evidence_and_shown_as_unknown(self):
+        import_data(self.root)
+        row = CountryRegion.objects.get(code='X001')
+        self.assertIsNone(row.area_km2)
+        self.assertEqual(row.derived['area_km2'], -1)
+        page = self.client.get('/geography/X001/')
+        self.assertNotContains(page, '-1 平方千米')
+        self.assertContains(page, '来源未提供')
 
     def test_incomplete_existing_rejected_and_pending_hidden(self):
         import_data(self.root)

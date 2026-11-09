@@ -1,6 +1,6 @@
 /* ============================================================
    历史双轨时间轴数据测试（primary/history-timeline/ 自包含子目录）
-   运行：node test/test-timeline.js
+   运行：node primary/test/test-timeline.js
    验证时代带、双轨事件、同期对照组、首页速览与入口文件引用。
    数据文件面向浏览器（window.* 全局 / IIFE），require 前先在
    globalThis 上放 window/document 桩，使同一文件双环境可用。
@@ -14,7 +14,9 @@ globalThis.document = { currentScript: null };
 const DIR = path.join(__dirname, '..', 'history-timeline');
 require('../history-timeline/content.js');
 require('../history-timeline/timeline-data.js');
+require('../history-timeline/media-data.js');
 require('../history-timeline/dynasty-data.js');
+require('../history-timeline/shared.js');
 const W = globalThis.window;
 
 let fails = 0;
@@ -52,7 +54,7 @@ const eraIds = new Set();
 ERAS.forEach((e, i) => {
   const tag = `[时代${i + 1}]`;
   check(e.no === i + 1, tag + ' no 应为 ' + (i + 1));
-  check(isStr(e.id) && !eraIds.has(e.id), tag + ' id 应非空且唯一: ' + e.id);
+  check(/^[a-z]+$/.test(e.id) && !eraIds.has(e.id), tag + ' id 应非空且唯一: ' + e.id);
   eraIds.add(e.id);
   check(isStr(e.name), tag + ' 缺少 name');
   check(isStr(e.span), tag + ' 缺少 span（年代范围）');
@@ -135,27 +137,24 @@ check(SPOTLIGHTS.every(id => pairIds.has(id)), 'TIMELINE_SPOTLIGHTS 引用了不
   SPOTLIGHTS.filter(id => !pairIds.has(id)).join('，'));
 check(SPOTLIGHTS.length === 3 && new Set(SPOTLIGHTS).size === 3, '首页速览应为 3 组不重复的对照');
 
-/* ---------- 朝代速览 ---------- */
-console.log('— 朝代速览 —');
-const DYN = W.TIMELINE_DYNASTIES;
-check(Array.isArray(DYN) && DYN.length > 0, 'TIMELINE_DYNASTIES 应为非空数组');
-if (Array.isArray(DYN)) {
-  check(DYN.length === 16, '应有 16 个朝代条目（夏到清），实际 ' + DYN.length);
-  const dynastyNames = new Set();
-  DYN.forEach((d, i) => {
-    const tag = `[朝代${i + 1}]`;
-    check(isStr(d.name) && !dynastyNames.has(d.name), tag + ' name 应非空且唯一: ' + d.name);
-    dynastyNames.add(d.name);
-    check(isStr(d.span) && (d.span.includes('年') || d.span.includes('前') || /^\d/.test(d.span)),
-      tag + ' span 应是年代范围: ' + d.span);
-    check(typeof d.sort === 'number' && Number.isFinite(d.sort), tag + ' sort 应为数字');
-    check(eraIds.has(d.era), tag + ' era 应指向存在的时代带: ' + d.era);
-    check(d.note === undefined || isStr(d.note), tag + ' note 若存在应为非空字符串');
-    ['name', 'span'].concat(d.note ? ['note'] : []).forEach(k =>
-      check(!hasBadPunct(d[k]), tag + ` ${k} 含英文引号/分号/裸换行: ` + d[k]));
-    if (i > 0) check(d.sort >= DYN[i - 1].sort, `朝代应按 sort 升序：${DYN[i - 1].name} → ${d.name}`);
-  });
-}
+/* ---------- 共用时间轴索引 ---------- */
+console.log('— 共用时间轴索引 —');
+const ctx = W.TLShared.makeContext(ERAS, EVENTS, PAIRS);
+ERAS.forEach(era => {
+  const expected = EVENTS.filter(ev => ev.era === era.id).sort((a, b) => a.sort - b.sort);
+  const rows = ctx.byEra.get(era.id);
+  check(JSON.stringify(rows.flat().map(ev => ev.id)) === JSON.stringify(expected.map(ev => ev.id)),
+    era.id + ' 年代行应按时间合并中外大事，每件只出现一次');
+  check(rows.every(row => row.every(ev => ev.sort === row[0].sort)),
+    era.id + ' 同一行只放排序年代相同的大事');
+  check(rows.every((row, i) => i === 0 || row[0].sort > rows[i - 1][0].sort),
+    era.id + ' 排序年代相同的大事应合并在同一行');
+});
+EVENTS.forEach(ev => {
+  check(ctx.eventMap.get(ev.id) === ev, ev.id + ' 应能按稳定 id 定位事件');
+  check(ctx.pairOfEvent.get(ev.id) === pairOfEvent.get(ev.id), ev.id + ' 的同期对照应与数据一致');
+  check(W.TLShared.eventHref(ev) === 'event.html?event=' + ev.id, ev.id + ' 应有独立详情入口');
+});
 
 /* ---------- 朝代更替子页 ---------- */
 console.log('— 朝代更替子页 —');
@@ -165,13 +164,17 @@ check(isStr(W.CALENDAR_INTRO), 'CALENDAR_INTRO 应为非空介绍文字');
 check(!hasBadPunct(W.CALENDAR_INTRO || ''), 'CALENDAR_INTRO 含英文引号/分号/裸换行');
 check(Array.isArray(BANDS) && BANDS.length > 0, 'DYNASTY_BANDS 应为非空数组');
 const bandIdx = new Map();
+const dynastyNames = new Set();
 if (Array.isArray(BANDS)) {
   check(BANDS.length === 16, '朝代更替应有 16 个朝代带（夏到清），实际 ' + BANDS.length);
   BANDS.forEach((b, i) => {
     const tag = `[带 ${b.id || i + 1}]`;
-    check(isStr(b.id) && !bandIdx.has(b.id), tag + ' id 应非空且唯一: ' + b.id);
+    check(/^[a-z]+$/.test(b.id) && !bandIdx.has(b.id), tag + ' id 应非空且唯一: ' + b.id);
     bandIdx.set(b.id, i);
-    check(isStr(b.name), tag + ' 缺少 name');
+    check(isStr(b.name) && !dynastyNames.has(b.name), tag + ' name 应非空且唯一');
+    dynastyNames.add(b.name);
+    check(eraIds.has(b.era), tag + ' era 应指向存在的时代站');
+    if (i > 0) check(b.startYear >= BANDS[i - 1].startYear, tag + ' 朝代速览应按起始年代排序');
     check(isStr(b.span), tag + ' 缺少 span（展示年代）');
     check(typeof b.startYear === 'number' && typeof b.endYear === 'number' && b.startYear < b.endYear,
       tag + ' 起止年代应满足 startYear < endYear: ' + b.startYear + ' → ' + b.endYear);
@@ -185,11 +188,7 @@ if (Array.isArray(BANDS)) {
     if (i > 0) check(b.startYear >= BANDS[i - 1].endYear - 120,
       `朝代带应按时间先后排列：${BANDS[i - 1].name}（止 ${BANDS[i - 1].endYear}）→ ${b.name}（起 ${b.startYear}）`);
   });
-  /* 朝代更替带应与主页朝代速览一一对应 */
-  if (Array.isArray(DYN)) {
-    check(JSON.stringify(BANDS.map(b => b.name)) === JSON.stringify(DYN.map(d => d.name)),
-      '朝代更替带与朝代速览的 16 个朝代应一一对应且顺序一致');
-  }
+
 }
 check(Array.isArray(BRIDGES) && BRIDGES.length > 0, 'DYNASTY_TRANSITIONS 应为非空数组');
 if (Array.isArray(BRIDGES) && Array.isArray(BANDS)) {
@@ -242,28 +241,63 @@ if (Array.isArray(QUIZ)) {
   });
 }
 
+/* ---------- 教学素材 ---------- */
+console.log('— 教学素材 —');
+const mediaPaths = new Set();
+const mediaEras = new Set();
+const isSource = value => typeof value === 'string' && /^https:\/\/[^\s]+$/.test(value);
+for (const [id, items] of Object.entries(W.TIMELINE_MEDIA)) {
+  const event = EVENTS.find(ev => ev.id === id);
+  check(Boolean(event), '素材应指向存在的事件：' + id);
+  check(Array.isArray(items) && items.length > 0, id + ' 的素材应为非空数组');
+  if (!Array.isArray(items)) continue;
+  for (const item of items) {
+    const tag = id + ' / ' + item.title;
+    const isImage = item.type === 'image';
+    check(isImage || item.type === 'audio', tag + ' 应是图片或录音');
+    const validPath = /^assets\/history\/[a-z0-9-]+\.(jpg|mp3)$/.test(item.src);
+    check(validPath && item.src.endsWith(isImage ? '.jpg' : '.mp3') && fileExists(item.src),
+      tag + ' 应引用本目录内存在的素材文件');
+    check(!mediaPaths.has(item.src), tag + ' 素材路径重复');
+    mediaPaths.add(item.src);
+    for (const field of ['kind', 'title', 'caption', 'prompt', 'credit', 'license']) {
+      check(isStr(item[field]) && !hasBadPunct(item[field]), tag + ' 缺少有效的 ' + field);
+    }
+    check(isSource(item.source), tag + ' 应有 HTTPS 来源链接');
+    check(item.further === undefined || (isStr(item.further.label) && isSource(item.further.url)),
+      tag + ' 的延伸资料应有名称和 HTTPS 链接');
+    if (isImage) {
+      check(isStr(item.alt) && !hasBadPunct(item.alt), tag + ' 应有图片替代文字');
+      check([item.width, item.height].every(n => Number.isInteger(n) && n > 0), tag + ' 应有有效的图片尺寸');
+      if (event) mediaEras.add(event.era);
+    }
+  }
+}
+ERAS.forEach(era => check(mediaEras.has(era.id), era.name + ' 应有可离线查看的图片素材'));
+
 /* ---------- 入口文件（多页面系统） ---------- */
 console.log('— 入口文件（多页面系统） —');
-['index.html', 'timeline.html', 'dynasties.html', 'era.html',
-  'content.js', 'timeline-data.js', 'dynasty-data.js', 'shared.js',
-  'timeline-app.js', 'era-app.js', 'dynasty-app.js', 'home-app.js',
-  'styles.css', 'era.css', 'dynasty.css', 'README.md']
-  .forEach(f => check(fileExists(f), '缺少文件: ' + f));
-/* 四个页面各自应引用的脚本/样式/互链：门户 → 时间轴/朝代/时代站，
-   时间轴与时代站共用 shared.js 渲染事件卡。 */
+check(fileExists('README.md'), '缺少历史时间轴维护说明');
+/* 页面引用均应在可独立拷走的目录内。 */
 const PAGE_REFS = {
-  'index.html': ['content.js', 'shared.js', 'home-app.js', 'styles.css', 'timeline.html', 'dynasties.html', 'era.html'],
-  'timeline.html': ['content.js', 'timeline-data.js', 'shared.js', 'timeline-app.js', 'styles.css',
+  'index.html': ['content.js', 'timeline-data.js', 'dynasty-data.js', 'shared.js', 'home-app.js', 'styles.css', 'timeline.html', 'dynasties.html', 'era.html'],
+  'timeline.html': ['content.js', 'timeline-data.js', 'media-data.js', 'dynasty-data.js', 'shared.js', 'timeline-app.js', 'styles.css', 'timeline.css',
     'dynasties.html', 'era.html'],
-  'dynasties.html': ['content.js', 'dynasty-data.js', 'dynasty-app.js', 'styles.css', 'dynasty.css',
+  'dynasties.html': ['content.js', 'dynasty-data.js', 'shared.js', 'dynasty-app.js', 'styles.css', 'dynasty.css',
     'timeline.html'],
-  'era.html': ['content.js', 'timeline-data.js', 'shared.js', 'era-app.js', 'styles.css', 'era.css',
-    'timeline.html']
+  'era.html': ['content.js', 'timeline-data.js', 'media-data.js', 'dynasty-data.js', 'shared.js', 'era-app.js', 'styles.css', 'era.css', 'media.css',
+    'timeline.html'],
+  'event.html': ['content.js', 'timeline-data.js', 'media-data.js', 'shared.js', 'event-app.js', 'styles.css', 'era.css', 'media.css',
+    'timeline.html', 'era.html']
 };
 Object.entries(PAGE_REFS).forEach(([page, refs]) => {
+  check(fileExists(page), '缺少页面 ' + page);
   if (!fileExists(page)) return;
   const html = fs.readFileSync(path.join(DIR, page), 'utf8');
   refs.forEach(f => check(html.includes(f), page + ' 应引用 ' + f));
+  for (const [, target] of html.matchAll(/(?:href|src)="([^"#?]+)(?:[#?][^"]*)?"/g)) {
+    check(!/[/:]/.test(target) && fileExists(target), page + ' 应引用目录内存在的文件：' + target);
+  }
   check(html.includes('lang="zh-CN"'), page + ' 应声明 zh-CN');
   check(html.includes('tl-sysnav'), page + ' 应有系统导航条');
   check(!/https?:\/\//.test(html.replace(/<!--[\s\S]*?-->/g, '')), page + ' 不应引用外部网络资源（离线优先）');
@@ -271,6 +305,6 @@ Object.entries(PAGE_REFS).forEach(([page, refs]) => {
 
 /* ---------- 汇总 ---------- */
 const total = EVENTS.length;
-console.log(`\n时代 ${ERAS.length} 个，事件 ${total} 条（中国 ${chinaCount} / 世界 ${total - chinaCount}），对照 ${PAIRS.length} 组，朝代条目 ${Array.isArray(DYN) ? DYN.length : 0} 条。`);
+console.log(`\n时代 ${ERAS.length} 个，事件 ${total} 条（中国 ${chinaCount} / 世界 ${total - chinaCount}），对照 ${PAIRS.length} 组，朝代条目 ${Array.isArray(BANDS) ? BANDS.length : 0} 条。`);
 console.log(`共 ${checked} 项检查，${fails} 项未通过。`);
 process.exit(fails ? 1 : 0);

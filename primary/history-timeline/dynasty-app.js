@@ -5,7 +5,7 @@
   const root = document.querySelector('.dynasty-topic');
   if (!root) return;
   const $ = id => root.querySelector(`#${id}`);
-  const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const { esc, eraHref, bindAnchors } = window.TLShared;
 
   const intro = window.CALENDAR_INTRO || '';
   const axis = window.CALENDAR_AXIS || [];
@@ -18,13 +18,7 @@
     return;
   }
 
-  /* 朝代 → 时代带 accent（复用主页配色，缺省给青铜色）。 */
-  const eraMap = new Map((window.TIMELINE_ERAS || []).map(e => [e.id, e]));
-  const nameEra = new Map((window.TIMELINE_DYNASTIES || []).map(d => [d.name, d.era]));
-  const accentOf = name => {
-    const era = eraMap.get(nameEra.get(name));
-    return era ? era.accent : '#b07d3a';
-  };
+  const eraMap = new Map(window.TIMELINE_ERAS.map(era => [era.id, era]));
   const zoneOf = band => {
     if (band.startYear < 0 && band.endYear < 0) return { label: '公元前', cls: 'bce' };
     if (band.startYear < 0) return { label: '跨公元前后', cls: 'cross' };
@@ -50,8 +44,8 @@
 
   function bandHTML(band) {
     const zone = zoneOf(band);
-    const accent = accentOf(band.name);
-    return `<li class="dyn-band" id="dyn-${esc(band.id)}" style="--band-accent:${esc(accent)}">` +
+    const era = eraMap.get(band.era);
+    return `<li class="dyn-band" id="dyn-${esc(band.id)}" style="--band-accent:${esc(era.accent)}" data-tl-anchor tabindex="-1">` +
       `<div class="dyn-band-head"><h3>${esc(band.name)}</h3>` +
       `<span class="dyn-duration">${esc(band.duration)}</span>` +
       `<span class="dyn-zone ${zone.cls}">${zone.label}</span>` +
@@ -59,7 +53,8 @@
       `<p class="dyn-line rise"><span>建立</span>${esc(band.rise)}</p>` +
       `<p class="dyn-line fall"><span>灭亡</span>${esc(band.fall)}</p>` +
       `<p class="dyn-capital">🏛️ 都城：${esc(band.capital)}</p>` +
-      `${band.note ? `<p class="dyn-note">ℹ️ ${esc(band.note)}</p>` : ''}</li>`;
+      `${band.note ? `<p class="dyn-note">ℹ️ ${esc(band.note)}</p>` : ''}` +
+      `<nav class="tl-related" aria-label="${esc(band.name)}的时代"><a href="${eraHref(era)}">在「${esc(era.name)}」看中外大事 →</a></nav></li>`;
   }
 
   function bridgeHTML(t) {
@@ -83,4 +78,5 @@
 
   renderCalendar();
   renderFlow();
+  bindAnchors(root);
 })();

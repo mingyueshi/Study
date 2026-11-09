@@ -50,6 +50,26 @@ class ImportBatchTests(TestCase):
         self.assertEqual(report['status'], 'already')
         self.assertEqual(Question.objects.count(), 1)
 
+    def test_receipt_does_not_hide_missing_or_changed_questions(self):
+        batch = make_batch([make_entry(track='olympiad')])
+        importing.import_batch(batch)
+        question = Question.objects.get()
+        old_checksum = question.checksum
+        question.track = Question.Track.REGULAR
+        question.save(update_fields=['track'])
+        question.refresh_from_db()
+        self.assertNotEqual(question.checksum, old_checksum)
+        with self.assertRaisesMessage(ValidationError, '内容不同'):
+            importing.import_batch(batch, verify_only=True)
+        # 即便批量写入留下过期指纹，也须比对实际字段。
+        Question.objects.update(checksum=old_checksum)
+        with self.assertRaisesMessage(ValidationError, '内容不同'):
+            importing.import_batch(batch, verify_only=True)
+        question.delete()
+        with self.assertRaisesMessage(ValidationError, '缺少 1 道题'):
+            importing.import_batch(batch, verify_only=True)
+        self.assertFalse(Question.objects.exists())
+
     def test_same_batch_id_with_new_content_rejected(self):
         importing.import_batch(make_batch([make_entry()]))
         changed = make_batch([make_entry(stem='换了一道题。')])

@@ -3,73 +3,89 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="中国地图系统首页：地理知识庞大，这套编排拆成多个页面——中国地图换图层认省份山河邻居，省域站逐省细看，世界地图正在筹备。">
-  <title>中国地图系统 · 乐学堂</title>
+  <meta name="description" content="地理图谱：从中国地图和世界地图出发，查地点、进省域站、沿主题路线看山河与邻居。">
+  <title>地理图谱 · 乐学堂</title>
   <link rel="stylesheet" href="styles.css">
-  <script src="content.js" defer></script>
   <script src="china-geo.js" defer></script>
+  <script src="content.js" defer></script>
   <script src="map-data.js" defer></script>
+  <script src="world-data.js" defer></script>
+  <script src="atlas-data.js" defer></script>
+  <script src="atlas.js" defer></script>
   <script src="shared.js" defer></script>
   <script src="home-app.js" defer></script>
 </head>
 <body>
-  <a class="skip-link" href="#main">跳到主要内容</a>
+  <a class="skip-link" href="#content">跳到主要内容</a>
   <main id="main" class="gm-topic home-topic" tabindex="-1">
-    <nav class="gm-sysnav" aria-label="中国地图系统页面导航">
-      <a class="gm-sysnav-brand" href="index.html">🗺️ 中国地图<small>多页面编排</small></a>
-      <a data-page href="china.html">中国地图</a>
-      <a data-page href="province.html">省域站</a>
-      <a data-page href="world.html">世界地图</a>
-    </nav>
+    <aside class="gm-sidebar" aria-label="导航和页面工具">
+      <nav class="gm-sysnav" aria-label="地理图谱页面导航">
+        <a class="gm-sysnav-brand" href="index.html" aria-current="page">🧭 地理图谱</a>
+        <a data-page href="china.html">中国地图</a>
+        <a data-page href="world.html">世界地图</a>
+        <a data-page href="province.html">省域站</a>
+        <a data-page href="places.html">地点索引</a>
+        <a data-page href="routes.html">主题路线</a>
+        <a data-page href="gallery.html">实景图册</a>
+      </nav>
 
-    <header class="gm-hero">
-      <p class="gm-eyebrow">地理编排演示 · 第一站：中国地图 · 第二站：世界地图（筹备中）</p>
-      <h1 class="gm-title">地图上的<span class="gm-h1-green">中</span>国，<br>脚下的<span class="gm-h1-blue">山河</span>与邻居</h1>
-      <p class="gm-intro">地理知识是一个庞大的体系，一个页面装不下，所以这套编排拆成了多个页面：先在中国地图上换图层、认省份、找山河、访邻居，还能玩「找一找」；想细看哪个省份，就走进它的省域站；等下一站世界地图开放，再把认识的山河放到全世界比一比。</p>
-      <div class="gm-stats" aria-label="内容规模">
-        <span><b id="stat-stations">34</b>个省域站</span>
-        <span><b id="stat-features">45</b>处山河湖海</span>
-        <span><b id="stat-neighbors">20</b>个邻居国家</span>
-        <span><b id="stat-rhymes">7</b>张地图口诀卡</span>
-      </div>
-    </header>
+      <header class="gm-hero">
+        <p class="gm-eyebrow">乐学堂 · 离线地图探索</p>
+        <h1 class="gm-title">地理图谱</h1>
+        <p class="gm-intro">从家乡出发，顺着山河看中国，把地图拉远再看世界。</p>
+        <form class="gm-search gm-search--home" action="places.html" role="search">
+          <label for="home-search">想找哪里？</label>
+          <div><input id="home-search" name="q" type="search" placeholder="试试长江或北京"><button type="submit">查地点 →</button></div>
+        </form>
+        <div class="gm-stats" aria-label="内容规模">
+          <span><b id="stat-stations">34</b>个省域站</span>
+          <span><b id="stat-places">291</b>条地点档案</span>
+          <span><b id="stat-routes">3</b>条主题路线</span>
+        </div>
+      </header>
+    </aside>
 
-    <section class="gm-pages" aria-labelledby="pages-title">
-      <h2 id="pages-title">两个入口</h2>
-      <div class="gm-page-cards">
-        <a class="gm-page-card" href="china.html" style="--page-accent:#2e7d64">
-          <span class="gm-page-icon" aria-hidden="true">🗺️</span>
-          <div><h3>中国地图</h3>
-          <p>真实轮廓的中国示意地图，三个图层互斥切换：省级行政区按四大区域着色，山河大地有三级阶梯和大江大山，邻居按方位站队。点一下亮档案卡，还能玩「找一找」寻宝。</p></div>
-          <span class="gm-page-go" aria-hidden="true">进入 →</span>
-        </a>
-        <a class="gm-page-card" href="world.html" style="--page-accent:#1f6f8b">
-          <span class="gm-page-icon" aria-hidden="true">🌍</span>
-          <div><h3>世界地图</h3>
-          <p>第二站正式开放：177 个国家和地区按七大洲着色，点国家与四大洋亮档案卡；世界之最都标在图上；「中国与世界」图层里看中国站在世界的什么位置。</p></div>
-          <span class="gm-page-go" aria-hidden="true">进入 →</span>
-        </a>
-      </div>
-    </section>
+    <div id="content" class="gm-content" tabindex="-1">
+      <a class="gm-home-map" href="china.html#map">
+        <svg id="gm-home-svg" aria-hidden="true"></svg>
+        <span><b>打开中国地图</b><small>换图层，认省份和山河 →</small></span>
+      </a>
 
-    <section class="gm-stations" aria-labelledby="stations-title">
-      <h2 id="stations-title">三十四个省域站</h2>
-      <p class="gm-stations-note">每个省级行政区都有自己的站：进站看档案、读「记一记」，还能在迷你地图上看它的位置。也可以在中国地图上点省份直达。</p>
-      <div class="gm-station-grid" id="station-grid"></div>
-    </section>
+      <section class="gm-pages" aria-labelledby="pages-title">
+        <h2 id="pages-title">下一站去哪儿？</h2>
+        <div class="gm-page-cards">
+          <a class="gm-page-card" href="world.html#map" style="--page-accent:#1f6f8b">
+            <span class="gm-page-icon" aria-hidden="true">🌍</span>
+            <div><h3>世界地图</h3><p>给七大洲认颜色，点一点世界地标，再找找中国在哪儿。</p></div>
+            <span class="gm-page-go" aria-hidden="true">看世界 →</span>
+          </a>
+          <a class="gm-page-card" href="routes.html" style="--page-accent:#b07d3a">
+            <span class="gm-page-icon" aria-hidden="true">🥾</span>
+            <div><h3>主题路线</h3><p>沿长江走到海边，登上世界屋脊，或换一张地图去串门。</p></div>
+            <span class="gm-page-go" aria-hidden="true">选一条路线 →</span>
+          </a>
+          <a class="gm-page-card" href="places.html" style="--page-accent:#7465aa">
+            <span class="gm-page-icon" aria-hidden="true">🔍</span>
+            <div><h3>地点索引</h3><p>用地名、简称或英文名找到地点，再跳到地图上看。</p></div>
+            <span class="gm-page-go" aria-hidden="true">查地点 →</span>
+          </a>
+          <a class="gm-page-card" href="gallery.html" style="--page-accent:#287f87">
+            <span class="gm-page-icon" aria-hidden="true">📷</span>
+            <div><h3>实景图册</h3><p>从江面看峡谷，从太空看河口。带着问题，把照片和地图对起来。</p></div>
+            <span class="gm-page-go" aria-hidden="true">看照片和影片 →</span>
+          </a>
+        </div>
+      </section>
 
-    <section class="gm-section gm-guide" aria-labelledby="guide-title">
-      <h2 id="guide-title">这套编排怎么用</h2>
-      <ol>
-        <li><strong>先看全局：</strong>进「中国地图」换三个图层，把省份、山河和邻居的位置混个脸熟；</li>
-        <li><strong>再进省域站：</strong>对哪个省份感兴趣就进它的站，读「记一记」要点，看看它在地图上的家；</li>
-        <li><strong>再去第二站：</strong>世界地图已开放——认七大洲四大洋、点世界之最，再看看中国站在世界什么位置。</li>
-      </ol>
-      <p class="gm-guide-note">地图为教学示意版：轮廓来自公开边界数据并做了简化，山河位置为近似示意；南海诸岛与十段线按制图惯例放在右下小图。所有页面离线可用，双击任意页面即可打开。</p>
-    </section>
+      <section class="gm-stations" aria-labelledby="stations-title">
+        <h2 id="stations-title">三十四个省域站</h2>
+        <p class="gm-stations-note">挑一个省域站，读五条小知识，再在迷你地图上看看它的位置。</p>
+        <div class="gm-station-grid" id="station-grid"></div>
+      </section>
 
-    <noscript><p class="gm-notice">请启用 JavaScript 查看系统首页；页面入口链接不依赖脚本，可直接双击 china.html、province.html 或 world.html 进入。</p></noscript>
+      <noscript><p class="gm-notice">请启用 JavaScript 查看系统首页；页面入口链接不依赖脚本，可直接双击 china.html、province.html 或 world.html 进入。</p></noscript>
+    </div>
   </main>
-  <footer class="gm-footer">乐学堂 · 中国地图系统 · <a href="china.html">中国地图</a> · <a href="province.html">省域站</a> · <a href="world.html">世界地图</a></footer>
+  <footer class="gm-footer">乐学堂 · 地理图谱 · <a href="china.html">中国地图</a> · <a href="province.html">省域站</a> · <a href="world.html">世界地图</a></footer>
 </body>
 </html>

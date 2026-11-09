@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="找家乡、山河、大洋和世界地标，点结果就能打开地图上的档案。">
+  <title>地点索引 · 地理图谱</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="content.js" defer></script>
+  <script src="map-data.js" defer></script>
+  <script src="world-data.js" defer></script>
+  <script src="atlas-data.js" defer></script>
+  <script src="atlas.js" defer></script>
+  <script src="shared.js" defer></script>
+  <script src="places-app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#content">跳到主要内容</a>
+  <main id="main" class="gm-topic places-topic" tabindex="-1">
+    <aside class="gm-sidebar" aria-label="导航和页面工具">
+      <nav class="gm-sysnav" aria-label="地理图谱页面导航">
+        <a class="gm-sysnav-brand" href="index.html">🧭 地理图谱</a>
+        <a data-page href="china.html">中国地图</a>
+        <a data-page href="world.html">世界地图</a>
+        <a data-page href="province.html">省域站</a>
+        <a data-page href="places.html" aria-current="page">地点索引</a>
+        <a data-page href="routes.html">主题路线</a>
+        <a data-page href="gallery.html">实景图册</a>
+      </nav>
+
+      <header class="gm-hero">
+        <p class="gm-eyebrow">找地点 · 从名字到位置</p>
+        <h1 class="gm-title">地点索引</h1>
+        <p class="gm-intro">找家乡、山河、大洋和世界地标，点结果就能打开地图上的档案。</p>
+      </header>
+
+      <form class="gm-search gm-side-panel" role="search">
+        <label for="place-search">输入地名、简称或英文名</label>
+        <div><input type="search" id="place-search" name="q" placeholder="试试长江或 Japan"><button type="submit">查找</button></div>
+        <label class="gm-category" for="place-category">地点类型 <select id="place-category" name="type"><option value="">全部类型</option></select></label>
+      </form>
+    </aside>
+
+    <div id="content" class="gm-content" tabindex="-1">
+      <section class="gm-section gm-catalog" aria-label="查找地点">
+        <p class="gm-result-count" id="place-count" role="status"></p>
+        <ul class="gm-place-grid" id="place-results"></ul>
+        <p class="gm-notice" id="place-empty" hidden>没有找到这个地点。试试短一点的名字，或者选「全部类型」再找。</p>
+        <button class="gm-btn gm-more" id="place-more" type="button" hidden>显示更多地点</button>
+      </section>
+
+      <noscript><p class="gm-notice">请启用 JavaScript 查看地点和地图。</p></noscript>
+    </div>
+  </main>
+  <footer class="gm-footer">乐学堂 · 地理图谱 · <a href="index.html">回到首页</a></footer>
+</body>
+</html>

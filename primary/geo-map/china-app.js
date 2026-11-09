@@ -2,11 +2,12 @@
    地图基座与投影来自 shared.js；数据来自 content.js 与 map-data.js。 */
 (() => {
   'use strict';
-  const root = document.querySelector('.gm-topic');
+  const root = document.querySelector('.china-topic');
   if (!root) return;
   const $ = (id) => root.querySelector(`#${id}`);
   const S = window.GMShared;
   const esc = S.esc;
+  const A = window.GMAtlas;
 
   const LAYERS = window.GM_LAYERS || [];
   const REGIONS = window.GM_REGIONS || [];
@@ -27,7 +28,6 @@
   }
 
   const regionColor = Object.fromEntries(REGIONS.map((r) => [r.id, r.color]));
-  const regionName = Object.fromEntries(REGIONS.map((r) => [r.id, r.name]));
   const SIDE_CN = { north: '北', northeast: '东北', northwest: '西北', west: '西', southwest: '西南', south: '南', sea: '海上' };
 
   /* 标签位置微调：避开省份名与相邻标记的重叠。 */
@@ -70,7 +70,7 @@
       }).join('');
   };
 
-  const featureSVG = () => FEATURES.map((f) => {
+  const featureSVG = () => FEATURES.filter(f => f.id !== 'f28').map((f) => {
     const color = S.KIND_COLOR[f.kind] || '#666';
     if (f.kind === 'river') {
       const d = S.lineD(f.line);
@@ -140,186 +140,73 @@
     `<g data-g="province">${colored()}${provLabels()}${capitalSVG()}</g>` +
     `<g data-g="land">${neutral('#f3ecd9')}${stepShade()}${featureSVG()}</g>` +
     `<g data-g="neighbor">${neutral('#e3e7d2')}${neighborSVG()}${capitalSVG()}</g>` +
-    S.insetSVG() + S.compass();
-
-  /* ---------- 状态条 ---------- */
-  let statusTimer;
-  const status = (msg) => {
-    const el = $('gm-status');
-    el.textContent = msg;
-    el.classList.add('visible');
-    clearTimeout(statusTimer);
-    statusTimer = setTimeout(() => el.classList.remove('visible'), 4200);
-  };
+    S.insetSVG({ interactive: true }) + S.compass();
 
   /* ---------- 详情卡 ---------- */
   const badge = (text, color) => `<span class="gm-badge" style="--badge:${esc(color)}">${esc(text)}</span>`;
   const row = (label, value) => `<div class="gm-row"><span class="gm-row-label">${esc(label)}</span><span class="gm-row-value">${esc(value)}</span></div>`;
 
-  function openCard(kind, id) {
+  function openCard(id) {
+    const kind = id === 'capital' ? id : id[0];
     const card = $('gm-card');
     if (kind === 'p') {
-      const p = PROVINCES.find((x) => x.id === id);
+      const p = A.get(id);
       if (!p) return;
       const r = REGIONS.find((x) => x.id === p.region) || {};
       const capLabel = p.type === '自治区' ? '首府' : '省会';
       card.innerHTML =
         `<p class="gm-card-eyebrow">省级行政区</p>` +
-        `<h3 class="gm-card-title">${esc(p.name)}</h3>` +
-        `<div class="gm-chips">${badge(`简称 ${p.short}`, r.color)}${badge(p.type, '#8a7a55')}${badge(regionName[p.region] || '', r.color)}</div>` +
+        `<h2 class="gm-card-title">${esc(p.name)}</h2>` +
+        `<div class="gm-chips">${badge(`简称 ${p.short}`, r.color)}${badge(p.type, '#8a7a55')}${badge(r.name || '', r.color)}</div>` +
         row('在哪里', p.where) +
         (p.capital ? row(capLabel, p.capital) : '') +
         `<p class="gm-card-text">${esc(p.note)}</p>` +
         (r.hint ? `<p class="gm-card-foot">${esc(r.name)}：${esc(r.hint)}</p>` : '') +
         `<a class="gm-card-link" href="province.html?adcode=${esc(p.adcode)}">进省域站细看 →</a>`;
     } else if (kind === 'f') {
-      const f = FEATURES.find((x) => x.id === id);
+      const f = A.get(id);
       if (!f) return;
       card.innerHTML =
         `<p class="gm-card-eyebrow">山河大地 · ${esc(S.KIND_CN[f.kind] || '')}</p>` +
-        `<h3 class="gm-card-title"><span aria-hidden="true">${S.KIND_ICON[f.kind] || '📍'}</span>${esc(f.name)}</h3>` +
+        `<h2 class="gm-card-title"><span aria-hidden="true">${S.KIND_ICON[f.kind] || '📍'}</span>${esc(f.name)}</h2>` +
         `<div class="gm-chips">${badge(S.KIND_CN[f.kind] || '', S.KIND_COLOR[f.kind])}</div>` +
         row('在哪里', f.where) +
         `<p class="gm-card-text">${esc(f.note)}</p>`;
     } else if (kind === 'n') {
-      const n = NEIGHBORS.find((x) => x.id === id);
+      const n = A.get(id);
       if (!n) return;
       const rel = n.rel === 'sea' ? '隔海相望' : '陆上接壤';
       card.innerHTML =
         `<p class="gm-card-eyebrow">我们的邻居</p>` +
-        `<h3 class="gm-card-title">${esc(n.name)}</h3>` +
+        `<h2 class="gm-card-title">${esc(n.name)}</h2>` +
         `<div class="gm-chips">${badge(rel, n.rel === 'sea' ? '#1f6f8b' : '#b07d3a')}${badge(`${SIDE_CN[n.side] || ''}方向`, '#8a7a55')}</div>` +
         `<p class="gm-card-text">${esc(n.note)}</p>` +
         `<p class="gm-card-foot">我国有 14 个陆上邻国和 6 个隔海相望的国家。${n.rel === 'sea' ? n.name + '与我国没有共同的陆地边界。' : ''}</p>`;
     } else if (kind === 'capital' && CAPITAL) {
       card.innerHTML =
         `<p class="gm-card-eyebrow">首都星标</p>` +
-        `<h3 class="gm-card-title"><span aria-hidden="true">⭐</span>首都${esc(CAPITAL.name)}</h3>` +
+        `<h2 class="gm-card-title"><span aria-hidden="true">⭐</span>首都${esc(CAPITAL.name)}</h2>` +
         `<p class="gm-card-text">${esc(CAPITAL.text)}</p>`;
     }
     card.classList.remove('gm-card--blank');
   }
 
-  /* ---------- 图层切换 ---------- */
-  const layerOf = (id) => (id[0] === 'p' ? 'province' : id[0] === 'f' ? 'land' : 'neighbor');
-  function setLayer(id, announce = true) {
-    root.dataset.layer = id;
-    const layer = LAYERS.find((l) => l.id === id) || LAYERS[0];
-    root.querySelectorAll('.gm-filters button').forEach((b) =>
-      b.setAttribute('aria-pressed', String(b.dataset.layer === id)));
-    $('gm-layer-hint').textContent = layer.hint || '';
-    const card = $('gm-card');
-    card.classList.add('gm-card--blank');
-    card.style.setProperty('--accent', layer.accent);
-    card.innerHTML =
-      `<p class="gm-card-blank-icon" aria-hidden="true">${layer.icon}</p>` +
-      `<p class="gm-card-blank">${esc(layer.blank || '点地图上的元素试试。')}</p>`;
-    if (announce) status(`已切换到「${layer.name}」图层。`);
-  }
-  $('gm-filters').innerHTML = LAYERS.map((l) =>
-    `<button type="button" data-layer="${esc(l.id)}" aria-pressed="false">${esc(l.icon)} ${esc(l.name)}</button>`).join('');
-  root.querySelectorAll('.gm-filters button').forEach((b) =>
-    b.addEventListener('click', () => { if (!quiz.on) setLayer(b.dataset.layer); }));
-
-  /* ---------- 找一找 ---------- */
-  const quiz = { on: false, queue: [], idx: 0, score: 0 };
-  const shuffle = (arr) => arr.map((v) => [Math.random(), v]).sort((a, b) => a[0] - b[0]).map(([, v]) => v);
-  const findName = (id) => {
-    if (id[0] === 'p') { const p = PROVINCES.find((x) => x.id === id); return p ? p.name : id; }
-    if (id[0] === 'f') { const f = FEATURES.find((x) => x.id === id); return f ? f.name : id; }
-    const n = NEIGHBORS.find((x) => x.id === id); return n ? n.name : id;
-  };
-  const findHint = (id) => {
-    if (id[0] === 'p') { const p = PROVINCES.find((x) => x.id === id); return p ? `它在${p.where}一带` : ''; }
-    if (id[0] === 'f') { const f = FEATURES.find((x) => x.id === id); return f ? `它${f.where}` : ''; }
-    const n = NEIGHBORS.find((x) => x.id === id);
-    if (!n) return '';
-    return n.rel === 'sea' ? `它在我国的${SIDE_CN[n.side] || ''}方向海面上` : `它在我国的${SIDE_CN[n.side] || ''}方向`;
-  };
-  const dots = () => quiz.queue.map((_, i) => `<span class="${i < quiz.score ? 'ok' : i === quiz.idx ? 'now' : ''}" aria-hidden="true">●</span>`).join('');
-
-  function renderQuizBanner() {
-    const banner = $('gm-quiz');
-    if (quiz.idx >= quiz.queue.length) {
-      banner.innerHTML =
-        `<div class="gm-quiz-result">` +
-        `<b>${'⭐'.repeat(quiz.score)}${'☆'.repeat(quiz.queue.length - quiz.score)}</b>` +
-        `<p>一轮找完，答对 ${quiz.score} 题（共 ${quiz.queue.length} 题）。${quiz.score === quiz.queue.length ? '眼睛真亮，全找对啦！' : '没找对的再翻翻地图，下一轮肯定更棒。'}</p>` +
-        `<button type="button" class="gm-btn" data-quiz-act="again">再来一轮</button>` +
-        `<button type="button" class="gm-btn gm-btn--ghost" data-quiz-act="exit">退出找一找</button></div>`;
-      return;
+  const hintFor = (id) => {
+    const p = A.get(id);
+    if (p.category === 'neighbor') {
+      return p.rel === 'sea' ? '在地图右侧找隔海相望的邻居' : `它在我国的${SIDE_CN[p.side]}方向`;
     }
-    const target = quiz.queue[quiz.idx];
-    banner.innerHTML =
-      `<div class="gm-quiz-head"><b>找一找</b><span>第 ${quiz.idx + 1}／${quiz.queue.length} 题</span>` +
-      `<span class="gm-quiz-dots">${dots()}</span>` +
-      `<button type="button" class="gm-quiz-exit" data-quiz-act="exit" aria-label="退出找一找">✕</button></div>` +
-      `<p class="gm-quiz-target">请点一点：<span class="gm-quiz-name">${esc(findName(target))}</span></p>`;
-  }
-  function startQuiz() {
-    quiz.on = true;
-    quiz.queue = shuffle(POOL.filter((id) => findName(id) !== id)).slice(0, 5);
-    quiz.idx = 0;
-    quiz.score = 0;
-    root.dataset.quiz = 'on';
-    $('gm-quiz').hidden = false;
-    root.querySelectorAll('.gm-filters button').forEach((b) => b.setAttribute('aria-pressed', 'false'));
-    nextQuestion();
-    status('找一找开始啦！按提示在地图上点出正确的地方。');
-  }
-  function nextQuestion() {
-    const target = quiz.queue[quiz.idx];
-    if (!target) { renderQuizBanner(); return; }
-    setLayer(layerOf(target), false);
-    renderQuizBanner();
-  }
-  function stopQuiz(quiet = false) {
-    quiz.on = false;
-    delete root.dataset.quiz;
-    $('gm-quiz').hidden = true;
-    svg.querySelectorAll('.is-found').forEach((el) => el.classList.remove('is-found'));
-    setLayer(root.dataset.layer || 'province', false);
-    if (!quiet) status('已退出找一找，继续自由探索地图吧。');
-  }
-  function handleQuizClick(id) {
-    const target = quiz.queue[quiz.idx];
-    if (!target) return;
-    if (id === target) {
-      quiz.score++;
-      const el = svg.querySelector(`[data-id="${id}"]`);
-      if (el) el.classList.add('is-found');
-      status(`答对啦！${findName(target)}就在这里。`);
-      quiz.idx++;
-      renderQuizBanner();
-      if (quiz.idx < quiz.queue.length) setTimeout(nextQuestion, 900);
-    } else {
-      status(`再想想：${findHint(target)}。`);
-    }
-  }
+    return `看看${p.where}一带`;
+  };
 
-  /* ---------- 事件 ---------- */
-  function activate(id, el) {
-    if (quiz.on) { handleQuizClick(id); return; }
-    svg.querySelectorAll('.is-active').forEach((n) => n.classList.remove('is-active'));
-    if (el) el.classList.add('is-active');
-    openCard(id[0] === 'c' ? 'capital' : id[0], id);
-  }
-  svg.addEventListener('click', (e) => {
-    const el = e.target.closest('[data-id]');
-    if (el) activate(el.dataset.id, el);
+  window.GMMapUI.mount({
+    root, svg, map: 'china', layers: LAYERS, pool: POOL, openCard, hintFor,
+    legends: {
+      province: REGIONS,
+      land: STEPS,
+      neighbor: [{ name: '牌子按大致方位摆放', color: '#fff' }, { name: '右侧一列隔海相望', color: '#cfe3f0' }]
+    }
   });
-  svg.addEventListener('keydown', (e) => {
-    if (e.key !== 'Enter' && e.key !== ' ') return;
-    const el = e.target.closest('[data-id]');
-    if (el) { e.preventDefault(); activate(el.dataset.id, el); }
-  });
-  root.addEventListener('click', (e) => {
-    const act = e.target.closest('[data-quiz-act]');
-    if (!act) return;
-    if (act.dataset.quizAct === 'exit') stopQuiz();
-    else { quiz.idx = 0; quiz.score = 0; svg.querySelectorAll('.is-found').forEach((el) => el.classList.remove('is-found')); nextQuestion(); }
-  });
-  $('gm-quiz-start').addEventListener('click', () => startQuiz());
 
   /* ---------- 静态区块 ---------- */
   $('stat-provinces').textContent = PROVINCES.length;
@@ -333,6 +220,4 @@
     `<h3><span aria-hidden="true">${esc(r.icon)}</span>${esc(r.title)}</h3>` +
     r.lines.map((l) => `<p>${esc(l)}</p>`).join('') +
     `<p class="gm-rhyme-note">${esc(r.note)}</p></article>`).join('');
-
-  setLayer('province', false);
 })();

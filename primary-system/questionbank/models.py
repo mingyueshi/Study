@@ -52,10 +52,16 @@ class Question(models.Model):
 
     def save(self, *args, **kwargs):
         # 指纹始终由内容推导：导入用它检测冲突，后台改题也保持一致。
-        self.checksum = types.content_checksum(
-            question_type=self.type, area=self.area, grade=self.grade, stem=self.stem,
-            payload=self.payload, tags=self.tags, source_key=self.source_key, source_ref=self.source_ref)
+        self.checksum = self.content_checksum()
+        if kwargs.get('update_fields') is not None:
+            kwargs['update_fields'] = set(kwargs['update_fields']) | {'checksum'}
         super().save(*args, **kwargs)
+
+    def content_checksum(self):
+        return types.content_checksum(
+            question_type=self.type, area=self.area, grade=self.grade, stem=self.stem,
+            payload=self.payload, tags=self.tags, source_key=self.source_key, source_ref=self.source_ref,
+            track=self.track)
 
     def clean(self):
         try:

@@ -1,0 +1,54 @@
+/* 时代站展示缩略图，大事详情保留图片的完整构图。 */
+.era-media, .event-media { margin: 24px 0; }
+.era-media h2, .event-media h2 { margin: 0 0 4px; font-size: clamp(22px, 3vw, 28px); }
+.era-media > p { margin: 0 0 12px; color: var(--tl-ink-soft); }
+.era-media-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+}
+.era-media-card {
+  display: flex; flex-direction: column; gap: 2px; min-width: 0;
+  padding: 8px 8px 12px; border: 1px solid var(--tl-line); border-radius: 14px;
+  color: var(--tl-ink); background: var(--tl-card); text-decoration: none;
+}
+.era-media-card:hover { border-color: var(--tl-pair); color: var(--tl-pair-deep); }
+.era-media-card img {
+  display: block; width: 100%; height: 126px; object-fit: contain;
+  background: #ede3d3; border-radius: 8px;
+}
+.era-media-card small { margin: 5px 4px 0; font-size: 13px; color: var(--tl-pair-deep); }
+.era-media-card strong { margin: 0 4px; font-size: 16px; line-height: 1.45; }
+.event-material {
+  margin: 12px 0; padding: clamp(12px, 2vw, 20px); border: 1px solid var(--tl-line);
+  border-radius: 18px; background: var(--tl-card);
+}
+.event-material.image-material {
+  display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  align-items: center; gap: clamp(14px, 3vw, 28px);
+}
+.event-material-image {
+  display: flex; flex-direction: column; gap: 4px; align-items: center;
+  color: var(--tl-pair-deep); font-size: 14px; font-weight: 700;
+}
+.event-material-image img {
+  display: block; width: 100%; height: auto; max-height: 520px;
+  object-fit: contain; background: #ede3d3; border-radius: 10px;
+}
+.event-material figcaption { min-width: 0; }
+.event-material h3 { margin: 0; line-height: 1.35; font-size: 22px; }
+.event-material figcaption > p:not(.tl-eyebrow) { margin: 10px 0; }
+.event-material audio { display: block; width: min(100%, 420px); margin-top: 12px; }
+.media-prompt {
+  padding: 10px 12px; border-radius: 10px;
+  background: var(--tl-pair-soft); color: var(--tl-pair-deep);
+}
+.media-prompt b { display: block; }
+.media-credit { color: var(--tl-ink-soft); font-size: 13px; overflow-wrap: anywhere; }
+.media-credit a, .media-further { color: var(--tl-pair-deep); }
+.media-further { font-size: 14px; font-weight: 800; }
+@media (max-width: 760px) {
+  .event-material.image-material { grid-template-columns: 1fr; }
+  .event-material-image img { max-height: 410px; }
+  .era-media-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .era-media-card img { height: 110px; }
+}

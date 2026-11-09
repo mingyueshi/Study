@@ -87,12 +87,9 @@ def import_batch(payload, *, source='', dry_run=False, verify_only=False):
 
     digest = batch_digest(payload)
     existing_receipt = ImportReceipt.objects.filter(batch_id=batch_id).first()
-    if existing_receipt is not None:
-        if existing_receipt.digest == digest:
-            return {'status': 'already', 'batch_id': batch_id,
-                    'total': existing_receipt.total, 'imported': 0, 'duplicated': existing_receipt.imported}
+    if existing_receipt is not None and existing_receipt.digest != digest:
         raise ValidationError('批次标识已被不同内容的批次占用，请换新的 batch_id。')
-    if verify_only:
+    if verify_only and existing_receipt is None:
         raise ValidationError(f'尚未导入题库批次 {batch_id}。请运行 import_questions 导入该批次。')
 
     for index, entry in enumerate(questions):
@@ -114,12 +111,20 @@ def import_batch(payload, *, source='', dry_run=False, verify_only=False):
         checksum = types.content_checksum(
             question_type=entry['type'], area=entry['area'], grade=entry.get('grade'),
             stem=entry['stem'], payload=entry['payload'], tags=entry['tags'],
-            source_key=entry['source_key'], source_ref=entry['source_ref'])
-        (duplicated if current.checksum == checksum else conflicts).append(entry)
+            source_key=entry['source_key'], source_ref=entry['source_ref'],
+            track=entry.get('track', Question.Track.REGULAR))
+        (duplicated if current.content_checksum() == checksum else conflicts).append(entry)
 
     if conflicts:
         names = '、'.join(entry['source_ref'] for entry in conflicts[:5])
         raise ValidationError(f'以下题目已存在但内容不同，需人工处理，不做覆盖：{names}')
+
+    if existing_receipt is not None:
+        if fresh:
+            names = '、'.join(entry['source_ref'] for entry in fresh[:5])
+            raise ValidationError(f'批次 {batch_id} 的回执存在，但缺少 {len(fresh)} 道题：{names}')
+        return {'status': 'already', 'batch_id': batch_id,
+                'total': len(questions), 'imported': 0, 'duplicated': len(duplicated)}
 
     with transaction.atomic():
         for entry in fresh:

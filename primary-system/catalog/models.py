@@ -1,7 +1,7 @@
 import uuid
 from django.core.exceptions import ValidationError
 from django.db import models, transaction
-from django.db.models import Q
+from django.db.models import F, Q
 
 
 class NamedModel(models.Model):
@@ -279,7 +279,10 @@ class Placement(models.Model):
     @transaction.atomic
     def save(self, *args, **kwargs):
         from lexicon.models import ContentEntryLink
-        ContentItem.objects.select_for_update().get(pk=self.item_id)
+        item = ContentItem.objects.select_for_update().get(pk=self.item_id)
+        unit = Unit.objects.select_for_update().get(pk=self.unit_id)
+        if unit.book_module_id != item.module_id:
+            raise ValidationError({'item': '内容与学习册必须属于同一个模块。'})
         ContentEntryLink.objects.filter(content_id=self.item_id).update(semantic_established=True)
         return super().save(*args, **kwargs)
 
@@ -298,4 +301,5 @@ def published_items():
     return ContentItem.objects.filter(
         status=ContentItem.Status.PUBLISHED, module__is_active=True,
         placements__unit__in=published_units(),
+        placements__unit__textbook_book__module_id=F('module_id'),
     ).distinct()

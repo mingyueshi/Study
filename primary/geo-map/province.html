@@ -3,34 +3,50 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="中国地图系统·省域站：进入单个省级行政区，看档案、读记一记要点，在迷你地图上找到它的位置。">
-  <title>省域站 · 中国地图</title>
+  <meta name="description" content="地理图谱·省域站：进入单个省级行政区，看档案、读记一记要点，在迷你地图上找到它的位置。">
+  <title>省域站 · 地理图谱</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="province.css">
-  <script src="content.js" defer></script>
   <script src="china-geo.js" defer></script>
+  <script src="content.js" defer></script>
   <script src="map-data.js" defer></script>
+  <script src="world-data.js" defer></script>
+  <script src="atlas-data.js" defer></script>
+  <script src="atlas.js" defer></script>
   <script src="shared.js" defer></script>
+  <script src="media-data.js" defer></script>
+  <script src="media.js" defer></script>
   <script src="province-app.js" defer></script>
 </head>
 <body>
-  <a class="skip-link" href="#main">跳到主要内容</a>
+  <a class="skip-link" href="#content">跳到主要内容</a>
   <main id="main" class="gm-topic province-topic" tabindex="-1">
-    <nav class="gm-sysnav" aria-label="中国地图系统页面导航">
-      <a class="gm-sysnav-brand" href="index.html">🗺️ 中国地图<small>多页面编排</small></a>
-      <a data-page href="china.html">中国地图</a>
-      <a data-page href="province.html" aria-current="page">省域站</a>
-      <a data-page href="world.html">世界地图</a>
-    </nav>
+    <aside class="gm-sidebar" aria-label="导航和页面工具">
+      <nav class="gm-sysnav" aria-label="地理图谱页面导航">
+        <a class="gm-sysnav-brand" href="index.html">🧭 地理图谱</a>
+        <a data-page href="china.html">中国地图</a>
+        <a data-page href="world.html">世界地图</a>
+        <a data-page href="province.html" aria-current="page">省域站</a>
+        <a data-page href="places.html">地点索引</a>
+        <a data-page href="routes.html">主题路线</a>
+        <a data-page href="gallery.html">实景图册</a>
+      </nav>
 
-    <nav class="gm-breadcrumb" aria-label="所在位置">
-      <a href="china.html">中国地图</a><span aria-hidden="true">›</span><b id="crumb-here">省域站</b>
-    </nav>
+      <header class="gm-hero" id="province-heading">
+        <p class="gm-eyebrow">看家乡 · 四大地理区域</p>
+        <h1 class="gm-title">省域站</h1>
+        <p class="gm-intro">挑一个省域站，看看它在地图上的位置。</p>
+      </header>
 
-    <div id="province-page"></div>
+      <nav class="gm-side-panel gm-side-links" id="province-nav" aria-label="省域站导航"></nav>
+    </aside>
 
-    <noscript><p class="gm-notice">请启用 JavaScript 查看省域站；省域站列表可从系统首页进入。</p></noscript>
+    <div id="content" class="gm-content" tabindex="-1">
+      <div id="province-page"></div>
+
+      <noscript><p class="gm-notice">请启用 JavaScript 查看省域站和地图。</p></noscript>
+    </div>
   </main>
-  <footer class="gm-footer">乐学堂 · 中国地图系统 · <a href="index.html">系统首页</a> · <a href="china.html">中国地图</a> · <a href="world.html">世界地图</a></footer>
+  <footer class="gm-footer">乐学堂 · 地理图谱 · <a href="index.html">系统首页</a> · <a href="china.html">中国地图</a> · <a href="world.html">世界地图</a></footer>
 </body>
 </html>

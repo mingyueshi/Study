@@ -1,4 +1,4 @@
-/* 时代站详情页样式：面包屑、页首间距、对照区与翻页器。
+/* 时代站与事件页样式：面包屑、页首间距、对照区与翻页器。
    基础令牌与事件卡样式复用 styles.css。 */
 .tl-breadcrumb {
   margin-top: 16px; display: flex; align-items: center; gap: 8px;
@@ -10,13 +10,13 @@
 
 .era-page-head { margin-top: 14px; }
 .era-missing { display: block; }
-.era-missing h2 { margin: 4px 0 6px; font-size: 24px; }
+.era-missing h1 { margin: 4px 0 6px; }
 .era-missing p { margin: 0 0 14px; color: var(--tl-ink-soft); }
 .era-missing .tl-station-grid { margin-top: 6px; }
 
 .era-pairs { margin-top: 26px; }
 .era-pairs h2 { margin: 0 0 12px; font-size: 23px; }
-.era-pairs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; }
+.era-pairs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 275px), 1fr)); gap: 14px; }
 
 .era-pager {
   margin-top: 30px; display: grid; grid-template-columns: 1fr auto 1fr;
@@ -44,4 +44,46 @@
   .era-pager-home { grid-column: 1 / -1; order: 3; }
   .era-pager-btn:first-child { grid-column: 1; }
   .era-pager-btn:last-child { grid-column: 2; text-align: right; }
+}
+
+.tl-breadcrumb { flex-wrap: wrap; }
+.tl-breadcrumb > :not(:first-child)::before {
+  content: '›'; margin-right: 8px; color: var(--tl-ink-soft);
+}
+.era-page-head h1, .era-missing h1 { font-size: clamp(27px, 4vw, 38px); }
+.era-section-links {
+  display: flex; flex-wrap: wrap; gap: 6px 14px; margin: 12px 0 0 60px;
+}
+.era-section-links a { color: var(--tl-pair-deep); font-size: 15px; font-weight: 800; text-underline-offset: 3px; }
+.era-events { margin-top: 24px; }
+.era-events h2 { margin: 0 0 6px; }
+.era-events .tl-date-flow { margin-top: 14px; }
+
+.event-hero { border-left: 5px solid var(--tl-china); }
+.event-hero.world { border-left-color: var(--tl-world); }
+.event-year {
+  display: inline-block; margin: 12px 0 8px; padding: 3px 12px; border-radius: 8px;
+  color: var(--tl-china-deep); background: var(--tl-china-soft); font-weight: 800;
+}
+.event-hero.world .event-year { color: var(--tl-world-deep); background: var(--tl-world-soft); }
+.event-text { max-width: 45em; margin: 0; font-size: clamp(18px, 2.4vw, 22px); line-height: 1.85; }
+.event-comparison {
+  margin-top: 22px; padding: 20px 24px; border-radius: 20px;
+  border: 1px solid var(--tl-line); background: var(--tl-card);
+}
+.event-comparison h2 { margin: 0; font-size: 24px; }
+.event-comparison > p:not(.tl-eyebrow) { margin: 8px 0 16px; }
+.event-compare-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.event-compare-side {
+  display: flex; flex-direction: column; padding: 12px 16px; border-radius: 14px;
+  background: var(--tl-china-soft); color: var(--tl-china-deep);
+}
+.event-compare-side.world { background: var(--tl-world-soft); color: var(--tl-world-deep); }
+.event-compare-side b { font-size: 18px; }
+.event-compare-side[href]:hover { outline: 2px solid currentColor; }
+@media (max-width: 860px) {
+  .era-section-links { margin-left: 0; }
+}
+@media (max-width: 540px) {
+  .event-compare-grid { grid-template-columns: 1fr; }
 }

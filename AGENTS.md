@@ -56,7 +56,7 @@ node primary/test/test-knowledge.js  # 改 knowledge-data.js 后
 
 **例外：地理、历史、英语语法与英语音标是自包含子目录** `primary/geo/`、`primary/history/`、`primary/grammar/`、`primary/phonetics/`（共用同一套「平台引擎」：`index.html + content.js + knowledge-*.js + app.js + platform-theme.css + styles.css`，可选 `media.js / diagrams.js / lab.js / assets/`），所有引用都在目录内相对解析，整目录可单独拷走。geo/history 是多媒体版（含图片、音频、动画实验室）；grammar 是语法精讲版、phonetics 是音标精讲版（暂无媒体层，按需可加）。知识点 id 前缀：`gu*`（地理）、`hu*`（历史）、`gr*`（语法）、`ph*`（音标）；数据校验命令：`node primary/test/test-geo.js`、`node primary/test/test-history.js`、`node primary/test/test-grammar.js`、`node primary/test/test-phonetics.js`。**以后新增学科一律用这种自包含子目录模式**。
 
-`primary/history-timeline/`（历史时间轴系统，多页面编排演示）同为自包含子目录，但不套用平台引擎：门户 `index.html` + 双轨时间轴 `timeline.html` + 时代站 `era.html?era=` + 朝代更替 `dynasties.html`，页面共享系统导航条；数据在 `content.js`（时代带/朝代速览）、`timeline-data.js`（事件/对照）、`dynasty-data.js`（朝代更替/公元纪年），事件 id 前缀 `tc*`/`tw*`，事件卡渲染在 `shared.js` 供各页复用；校验命令 `node primary/test/test-timeline.js`。
+`primary/history-timeline/` 是自包含的历史时间轴系统。门户 `index.html` 导航到双轨总轴 `timeline.html`、时代站 `era.html?era=`、事件详情 `event.html?event=` 与朝代更替 `dynasties.html`。数据在 `content.js`（时代）、`timeline-data.js`（事件与对照）和 `dynasty-data.js`（朝代速览、更替、公元纪年）。`shared.js` 提供各页共用的索引、年代行与链接。时代、事件、朝代 id 用于深链接，事件 id 前缀为 `tc*` 或 `tw*`。校验命令为 `node primary/test/test-timeline.js`。
 
 ## primary-system/ 的运行方式
 

@@ -195,8 +195,9 @@ class MathbookProgressTests(TestCase):
 class MathbookPracticeTests(TestCase):
     @classmethod
     def setUpTestData(cls):
-        path = settings.BASE_DIR / 'questionbank/data/questions/2026-11-internal-core.json'
-        import_batch(json.loads(path.read_text(encoding='utf-8')))
+        folder = settings.BASE_DIR / 'questionbank/data/questions'
+        for name in ('2026-11-internal-core.json', '2026-11-math-mistakes-correct.json'):
+            import_batch(json.loads((folder / name).read_text(encoding='utf-8')))
 
     def test_reading_card_opens_exact_example_and_returns_to_the_same_point(self):
         reader = reverse('mathbook-book', args=['4a'])
@@ -231,8 +232,9 @@ class MathbookPracticeTests(TestCase):
         self.assertTrue(all('answer' not in row for row in items))
         expected = Question.objects.filter(source_key='primary-math', type='truefalse').count()
         self.assertEqual(len(items), min(20, expected))
+        question = Question.objects.get(uuid=items[0]['uuid'])
         answer = self.client.post(reverse('questionbank-answer'), {
-            'uuid': items[0]['uuid'], 'attempt_id': items[0]['attempt_id'], 'given': {'value': False},
+            'uuid': items[0]['uuid'], 'attempt_id': items[0]['attempt_id'], 'given': {'value': question.payload['answer']},
         }, content_type='application/json')
         self.assertIs(answer.json()['correct'], True)
 

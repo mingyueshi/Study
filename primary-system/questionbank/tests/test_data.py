@@ -63,6 +63,15 @@ class BatchContractTests(SimpleTestCase):
             self.assertTrue(any(entry['type'] == question_type for entry in entries),
                             f'批次里缺少题型 {question_type}。')
 
+    def test_math_mistakes_pair_true_and_false_statements(self):
+        questions = {entry['source_ref']: entry['payload']['answer']
+                     for _, batch in load_batches() for entry in batch['questions']
+                     if entry['source_key'] == 'primary-math' and entry['type'] == 'truefalse'}
+        false_refs = {ref for ref, answer in questions.items() if answer is False}
+        true_refs = {ref for ref, answer in questions.items() if answer is True}
+        self.assertTrue(false_refs)
+        self.assertEqual(true_refs, {ref + ':correct' for ref in false_refs})
+
     def test_tags_present(self):
         for _, batch in load_batches():
             for entry in batch['questions']:

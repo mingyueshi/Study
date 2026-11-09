@@ -7,8 +7,11 @@
   <title>时代站 · 历史时间轴</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="era.css">
+  <link rel="stylesheet" href="media.css">
   <script src="content.js" defer></script>
   <script src="timeline-data.js" defer></script>
+  <script src="media-data.js" defer></script>
+  <script src="dynasty-data.js" defer></script>
   <script src="shared.js" defer></script>
   <script src="era-app.js" defer></script>
 </head>
@@ -17,19 +20,18 @@
   <main id="main" class="tl-shell" tabindex="-1">
     <div class="era-topic" id="top">
       <nav class="tl-sysnav" aria-label="历史时间轴系统页面导航">
-        <a class="tl-sysnav-brand" href="index.html">🕰️ 历史时间轴<small>多页面编排</small></a>
+        <a class="tl-sysnav-brand" href="index.html">🕰️ 历史时间轴<small>中国史与世界史</small></a>
         <a data-page href="timeline.html">双轨时间轴</a>
-        <a data-page href="dynasties.html">朝代更替</a>
         <a data-page href="era.html" aria-current="page">时代站</a>
+        <a data-page href="dynasties.html">朝代更替</a>
       </nav>
 
       <nav class="tl-breadcrumb" aria-label="所在位置">
-        <a href="timeline.html">双轨时间轴</a><span aria-hidden="true">›</span><b id="crumb-here">时代站</b>
+        <a href="timeline.html">双轨时间轴</a><b id="crumb-here" aria-current="page">时代站</b>
       </nav>
 
       <div id="era-page"></div>
 
-      <div id="tl-status" role="status" aria-live="polite"></div>
       <noscript><p class="tl-notice">请启用 JavaScript 查看时代站；时代列表可从双轨时间轴每个时代的「进时代站细看 →」进入。</p></noscript>
     </div>
   </main>

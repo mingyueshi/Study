@@ -1,21 +1,20 @@
-/* 系统门户：渲染数据规模与三十四个省域站格子（入口卡为静态 HTML）。 */
+/* 门户使用与中国地图相同的省界与区域色。 */
 (() => {
   'use strict';
   const root = document.querySelector('.home-topic');
-  if (!root) return;
-  const $ = (id) => root.querySelector(`#${id}`);
+  const $ = (id) => root.querySelector('#' + id);
   const S = window.GMShared;
+  const A = window.GMAtlas;
+  const regions = window.GM_REGIONS;
+  const provinces = window.GM_PROVINCES;
+  const colors = new Map(regions.map(r => [r.id, r.color]));
 
-  const REGIONS = window.GM_REGIONS || [];
-  const PROVINCES = window.GM_PROVINCES || [];
-  const FEATURES = window.GM_FEATURES || [];
-  const NEIGHBORS = window.GM_NEIGHBORS || [];
-  const RHYMES = window.GM_RHYMES || [];
+  $('stat-stations').textContent = provinces.length;
+  $('stat-places').textContent = A.places.length;
+  $('stat-routes').textContent = A.routes.length;
+  $('station-grid').innerHTML = provinces.map(p => S.stationCard(p, colors.get(p.region))).join('');
 
-  const color = Object.fromEntries(REGIONS.map((r) => [r.id, r.color]));
-  $('stat-stations').textContent = PROVINCES.length;
-  $('stat-features').textContent = FEATURES.length;
-  $('stat-neighbors').textContent = NEIGHBORS.length;
-  $('stat-rhymes').textContent = RHYMES.length;
-  $('station-grid').innerHTML = PROVINCES.map((p) => S.stationCard(p, color[p.region] || '#8a7a55')).join('');
+  const svg = $('gm-home-svg');
+  svg.setAttribute('viewBox', `94 5 1100 ${S.H.toFixed(0)}`);
+  svg.innerHTML = S.mapPrelude() + S.provincePathsSVG(p => colors.get(p.region)) + S.insetSVG();
 })();

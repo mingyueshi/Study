@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="历史时间轴系统首页：历史知识庞大，这套编排拆成多个页面——双轨时间轴看全局，时代站逐段细看，朝代更替学公元纪年。">
+  <meta name="description" content="沿时间看中国和世界的大事，从九个时代站出发，读历史故事和朝代更替。">
   <title>历史时间轴系统 · 乐学堂</title>
   <link rel="stylesheet" href="styles.css">
   <script src="content.js" defer></script>
@@ -17,56 +17,38 @@
   <main id="main" class="tl-shell" tabindex="-1">
     <div class="home-topic" id="top">
       <nav class="tl-sysnav" aria-label="历史时间轴系统页面导航">
-        <a class="tl-sysnav-brand" href="index.html">🕰️ 历史时间轴<small>多页面编排</small></a>
-        <a data-page href="timeline.html" aria-current="page">双轨时间轴</a>
-        <a data-page href="dynasties.html">朝代更替</a>
+        <a class="tl-sysnav-brand" href="index.html" aria-current="page">🕰️ 历史时间轴<small>中国史与世界史</small></a>
+        <a data-page href="timeline.html">双轨时间轴</a>
         <a data-page href="era.html">时代站</a>
+        <a data-page href="dynasties.html">朝代更替</a>
       </nav>
 
       <header class="tl-hero">
-        <p class="tl-eyebrow">中国史 × 世界史 · 多页面编排</p>
-        <h1>历史<span class="tl-h1-china">时间轴</span><span class="tl-h1-world">系统</span></h1>
-        <p class="tl-intro">历史知识是一个庞大的体系，一个页面装不下，所以这套编排拆成了多个页面：先用双轨时间轴纵览全局，再走进任意一个时代站细看两边的大事与对照，或者到朝代更替页弄懂公元前后、看十六个朝代如何轮流登场。</p>
+        <p class="tl-eyebrow">从文明的曙光到今天</p>
+        <h1>沿着<span class="tl-h1-china">时间轴</span>读历史</h1>
+        <p class="tl-intro">同一时期，中国和世界都在发生什么？从一条双轨时间轴出发，进时代站读故事，也可以直接找一件你听说过的大事。</p>
+        <div class="tl-hero-actions">
+          <a class="tl-primary-action" href="timeline.html">打开双轨时间轴 →</a>
+          <a class="tl-secondary-action" href="dynasties.html">看朝代更替</a>
+        </div>
         <div class="tl-stats" aria-label="内容规模">
-          <span><b id="stat-eras">8</b>个时代站</span>
-          <span><b id="stat-events">73</b>件大事</span>
-          <span><b id="stat-pairs">19</b>组同期对照</span>
+          <span><b id="stat-eras">9</b>个时代站</span>
+          <span><b id="stat-events">126</b>件大事</span>
+          <span><b id="stat-pairs">30</b>组同期对照</span>
           <span><b id="stat-dynasties">16</b>个朝代</span>
         </div>
       </header>
 
-      <section class="tl-pages" aria-labelledby="pages-title">
-        <h2 id="pages-title">两个入口</h2>
-        <div class="tl-page-cards">
-          <a class="tl-page-card" href="timeline.html" style="--page-accent:#c2472f">
-            <span class="tl-page-icon" aria-hidden="true">🛤️</span>
-            <div><h3>双轨时间轴</h3>
-            <p>竖版主轴从上往下流动，左轨中国史、右轨世界史。上百件大事配合同期对照，点「对照」直接跳到同一时期另一边正在发生的事。</p></div>
-            <span class="tl-page-go" aria-hidden="true">进入 →</span>
-          </a>
-          <a class="tl-page-card" href="dynasties.html" style="--page-accent:#1d7d8c">
-            <span class="tl-page-icon" aria-hidden="true">🏯</span>
-            <div><h3>朝代更替</h3>
-            <p>先学「什么是公元前、公元后」这把时间尺子，再顺着竖轴看夏到清十六个朝代怎么建立、怎么谢幕，改朝换代的关键事件标在朝代之间。</p></div>
-            <span class="tl-page-go" aria-hidden="true">进入 →</span>
-          </a>
-        </div>
-      </section>
-
       <section class="tl-stations" aria-labelledby="stations-title">
+        <p class="tl-eyebrow">从早到晚</p>
         <h2 id="stations-title">九个时代站</h2>
-        <p class="tl-stations-note">时间轴上的八个时代，每个都有自己的页面：进站细看这一时期中国和世界分别发生了什么。也可以从双轨时间轴上每个时代的「进时代站细看 →」进入。</p>
+        <p class="tl-stations-note">按顺序一站站读，或直接选一个感兴趣的时代。每站都有中外大事和前后站的路标。</p>
         <div class="tl-station-grid" id="station-grid"></div>
       </section>
 
       <section class="tl-guide" aria-labelledby="guide-title">
-        <h2 id="guide-title">这套编排怎么用</h2>
-        <ol>
-          <li><strong>先看全局：</strong>双轨时间轴一页纵览八千年，建立「同一时期两边都在做什么」的时间感；</li>
-          <li><strong>再进时代站：</strong>对哪个时代感兴趣就进站细读，页面更短、更聚焦；</li>
-          <li><strong>补上尺子：</strong>到朝代更替页学会公元前、公元后，朝代顺序和年代计算一次搞定。</li>
-        </ol>
-        <p class="tl-guide-note">年代多为约数（如夏朝约前 2070 年），以通行说法为准；所有页面离线可用，双击任意页面即可打开。数据保存在本目录的 content.js、timeline-data.js 与 dynasty-data.js 中。</p>
+        <h2 id="guide-title">第一次读时间轴</h2>
+        <p>看到「前 221 年」时，先到<a href="dynasties.html#cal-title">公元纪年小课堂</a>学会读年代。再去时间轴找秦统一中国，看看当时世界另一边的故事。</p>
       </section>
 
       <noscript><p class="tl-notice">请启用 JavaScript 查看系统首页；页面入口链接不依赖脚本，可直接双击 timeline.html 或 dynasties.html 进入。</p></noscript>

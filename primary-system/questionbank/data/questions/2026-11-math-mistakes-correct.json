@@ -1,0 +1,248 @@
+{
+ "schema_version": 1,
+ "batch_id": "2026-11-math-mistakes-correct",
+ "generator": "人工编排",
+ "note": "四上易错诊所的正确说法，和原有错误说法一起练习。保留旧题与答题记录。",
+ "questions": [
+  {
+   "uuid": "a536abc7-f49a-5324-8e36-d8e3aa918d73",
+   "type": "truefalse",
+   "area": "math",
+   "grade": 4,
+   "stem": "判断：30450000 读作三千零四十五万。",
+   "payload": {
+    "answer": true,
+    "explanation": "按四位一级分成 3045｜0000，万级读三千零四十五，再加上「万」。"
+   },
+   "tags": [
+    "数学·认识更大的数"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mistakes:ed1654b9:correct"
+  },
+  {
+   "uuid": "46786545-decf-59d9-a821-dc11009419b9",
+   "type": "truefalse",
+   "area": "math",
+   "grade": 4,
+   "stem": "判断：2340000 和 234 万一样大，可以用等号连接。",
+   "payload": {
+    "answer": true,
+    "explanation": "用「万」作单位改写，数的大小没有变。"
+   },
+   "tags": [
+    "数学·认识更大的数"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mistakes:fa8007e5:correct"
+  },
+  {
+   "uuid": "c632d09f-bac1-5220-922d-6b701e9c6499",
+   "type": "truefalse",
+   "area": "math",
+   "grade": 4,
+   "stem": "判断：把 16800 四舍五入到万位，约是 2 万。",
+   "payload": {
+    "answer": true,
+    "explanation": "千位上的 6 满 5，向万位进 1。"
+   },
+   "tags": [
+    "数学·认识更大的数"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mistakes:a374fd20:correct"
+  },
+  {
+   "uuid": "cad9cb75-8a1f-53b3-a64e-aa58617d1c90",
+   "type": "truefalse",
+   "area": "math",
+   "grade": 4,
+   "stem": "判断：一条长 3 厘米的线段有两个端点。",
+   "payload": {
+    "answer": true,
+    "explanation": "线段有两个端点，长度可以量出来。"
+   },
+   "tags": [
+    "数学·线与角"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mistakes:1d8ed8dc:correct"
+  },
+  {
+   "uuid": "0c33f265-675d-581e-b3b6-cac3b2efdaca",
+   "type": "truefalse",
+   "area": "math",
+   "grade": 4,
+   "stem": "判断：用量角器量角时，角的一边对准内圈的 0°，就从内圈读数。",
+   "payload": {
+    "answer": true,
+    "explanation": "看角的起始边对准哪一圈的 0°，就在那一圈读另一条边的刻度。"
+   },
+   "tags": [
+    "数学·线与角"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mistakes:514a9436:correct"
+  },
+  {
+   "uuid": "1b7c4114-72f8-5791-8523-9bb6fdcc8a92",
+   "type": "truefalse",
+   "area": "math",
+   "grade": 4,
+   "stem": "判断：120° 的角是钝角。",
+   "payload": {
+    "answer": true,
+    "explanation": "大于 90° 又小于 180° 的角叫钝角。"
+   },
+   "tags": [
+    "数学·线与角"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mistakes:443c9e15:correct"
+  },
+  {
+   "uuid": "acedfdd5-6b84-5aa0-becd-377a7f7a7291",
+   "type": "truefalse",
+   "area": "math",
+   "grade": 4,
+   "stem": "判断：用竖式算 24 × 13 时，十位上的 1 乘 24 得到 240。",
+   "payload": {
+    "answer": true,
+    "explanation": "十位上的 1 表示 10。24 × 10 = 240。"
+   },
+   "tags": [
+    "数学·整数乘法（二）"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mistakes:2a01be51:correct"
+  },
+  {
+   "uuid": "96c2b601-17d3-5f79-8b33-bcc98243803c",
+   "type": "truefalse",
+   "area": "math",
+   "grade": 4,
+   "stem": "判断：102 × 45 = 100 × 45 + 2 × 45。",
+   "payload": {
+    "answer": true,
+    "explanation": "把 102 拆成 100 和 2，两部分都乘 45，再相加。"
+   },
+   "tags": [
+    "数学·运算律"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mistakes:800092df:correct"
+  },
+  {
+   "uuid": "11557bb1-161f-58ab-a032-ee6e2e68923b",
+   "type": "truefalse",
+   "area": "math",
+   "grade": 4,
+   "stem": "判断：125 × 8 的积是 1000。",
+   "payload": {
+    "answer": true,
+    "explanation": "记住 125 × 8 = 1000，乘法中可以用它凑整。"
+   },
+   "tags": [
+    "数学·运算律"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mistakes:b665d31b:correct"
+  },
+  {
+   "uuid": "c1873218-16c5-5a3d-bdb0-ae1a76558f07",
+   "type": "truefalse",
+   "area": "math",
+   "grade": 4,
+   "stem": "判断：每小时行 15 千米，速度可以写成 15 千米/时。",
+   "payload": {
+    "answer": true,
+    "explanation": "「千米」表示路程，「千米/时」表示每小时走多少千米。"
+   },
+   "tags": [
+    "数学·运用数量关系解决问题"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mistakes:5018c9db:correct"
+  },
+  {
+   "uuid": "2abc84b8-b57c-59c3-b321-f72dbe08d658",
+   "type": "truefalse",
+   "area": "math",
+   "grade": 4,
+   "stem": "判断：两人从两地同时出发、相向而行，走了相同的时间后相遇。两地距离等于两人的速度和乘相遇时间。",
+   "payload": {
+    "answer": true,
+    "explanation": "同一段时间里，两人走过的路程加起来就是两地距离。"
+   },
+   "tags": [
+    "数学·运用数量关系解决问题"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mistakes:db0a0038:correct"
+  },
+  {
+   "uuid": "261cf566-4570-5f5f-9878-a3d42976c824",
+   "type": "truefalse",
+   "area": "math",
+   "grade": 4,
+   "stem": "判断：正方体向右翻滚一格，原来朝上的面会转到右侧。",
+   "payload": {
+    "answer": true,
+    "explanation": "向右翻滚时，原来朝上的面向右转四分之一圈。"
+   },
+   "tags": [
+    "数学·图形的奥秘"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mistakes:b07b0b1c:correct"
+  },
+  {
+   "uuid": "797dca8d-c3c9-5f5c-bcb9-d5fcb8299088",
+   "type": "truefalse",
+   "area": "math",
+   "grade": 4,
+   "stem": "判断：同一组物体从不同位置拍摄，物体在照片上的前后和左右关系可能变化。",
+   "payload": {
+    "answer": true,
+    "explanation": "可以根据物体之间的位置关系，推测照片是从哪里拍的。"
+   },
+   "tags": [
+    "数学·我们生活的空间（二）"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mistakes:7f203c75:correct"
+  },
+  {
+   "uuid": "ab5e4462-a249-53e2-a3f7-2ae8a96a2460",
+   "type": "truefalse",
+   "area": "math",
+   "grade": 4,
+   "stem": "判断：2 和 6 的平均数是 4，4 不在这两个数里。",
+   "payload": {
+    "answer": true,
+    "explanation": "（2 + 6）÷ 2 = 4。平均数表示整体水平。"
+   },
+   "tags": [
+    "数学·数据的表示和分析（一）"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mistakes:f37416c5:correct"
+  },
+  {
+   "uuid": "c0baeb10-511c-5d98-a18a-dbaa45533146",
+   "type": "truefalse",
+   "area": "math",
+   "grade": 4,
+   "stem": "判断：条形统计图里，如果一格代表 2 人，5 人可以画成两格半。",
+   "payload": {
+    "answer": true,
+    "explanation": "2 格是 4 人，半格再表示 1 人。"
+   },
+   "tags": [
+    "数学·数据的表示和分析（一）"
+   ],
+   "source_key": "primary-math",
+   "source_ref": "math:mistakes:b887604f:correct"
+  }
+ ]
+}

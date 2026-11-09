@@ -19,7 +19,8 @@ def _sources():
     for item in mkb['mistakes']:
         # 与 build_questionbank.cjs 的来源定位一致。
         identity = f"{item['unit']}|{item['wrong']}".encode()
-        mistakes.append(f'math:mistakes:{md5(identity, usedforsecurity=False).hexdigest()[:8]}')
+        reference = f'math:mistakes:{md5(identity, usedforsecurity=False).hexdigest()[:8]}'
+        mistakes.extend((reference, f'{reference}:correct'))
     return points, mistakes
 
 

@@ -1,103 +1,74 @@
-/* 时代站详情页：按 ?era=时代id 渲染单个时代的双轨事件与同期对照。
-   事件卡渲染复用 shared.js，数据来自 content.js 与 timeline-data.js。 */
+/* 时代站按时代 id 取出完整双轨故事、同期对照和相关朝代。 */
 (() => {
   'use strict';
   const root = document.querySelector('.era-topic');
-  if (!root) return;
-  const $ = id => root.querySelector(`#${id}`);
-  const esc = window.TLShared.esc;
-
-  const eras = window.TIMELINE_ERAS || [];
-  const events = window.TIMELINE_EVENTS || [];
-  const pairs = window.TIMELINE_PAIRS || [];
-  const ctx = window.TLShared.makeContext(events, pairs);
-  const slot = $('era-page');
-
+  const slot = document.getElementById('era-page');
+  const { esc, makeContext, eraHref, dynastyHref, mediaFor, mediaHref, stationsHTML, bindAnchors } = window.TLShared;
+  const eras = window.TIMELINE_ERAS;
+  const ctx = makeContext(eras, window.TIMELINE_EVENTS, window.TIMELINE_PAIRS);
   const eraId = new URLSearchParams(location.search).get('era');
-  const index = eras.findIndex(e => e.id === eraId);
+  const index = eras.findIndex(era => era.id === eraId);
+  const crumb = document.getElementById('crumb-here');
   if (index < 0) {
-    $('crumb-here').textContent = '没有找到这个时代';
-    slot.innerHTML = '<section class="tl-era-head era-missing"><h2>没有找到这个时代站</h2>' +
-      '<p>从下面的列表重新进站：</p><div class="tl-station-grid">' +
-      eras.map(e => `<a class="tl-station" href="era.html?era=${esc(e.id)}" style="--era-accent:${esc(e.accent)}">` +
-        `<span class="tl-station-no" aria-hidden="true">${e.no}</span><b>${esc(e.name)}</b><small>${esc(e.span)}</small>` +
-        `<span class="tl-station-go" aria-hidden="true">进站 →</span></a>`).join('') +
-      '</div></section>';
+    const title = eraId ? '没有找到这个时代站' : '九个时代站';
+    crumb.textContent = '时代站目录';
+    slot.innerHTML = `<section class="tl-era-head era-missing"><h1>${title}</h1>
+      <p>选一站，看看那时的中国和世界各发生了什么。</p>
+      <div class="tl-station-grid">${stationsHTML(eras, ctx)}</div>
+    </section>`;
     return;
   }
+
   const era = eras[index];
-  const prev = eras[index - 1];
-  const next = eras[index + 1];
-  document.title = `时代站 · ${era.name} · 历史时间轴`;
-  $('crumb-here').textContent = `第 ${era.no} 站 · ${era.name}`;
-  /* 页头渐变、编号圆点与脊轴都依赖 --era-accent，挂在容器上统一供给。 */
+  const pairs = window.TIMELINE_PAIRS.filter(pair => ctx.eventMap.get(pair.china).era === era.id);
+  const bands = window.DYNASTY_BANDS.filter(band => band.era === era.id);
+  const previews = ctx.byEra.get(era.id).flat()
+    .map(ev => ({ ev, image: mediaFor(ev).find(item => item.type === 'image') }))
+    .filter(({ image }) => image);
+  const timelineHref = 'timeline.html#era-' + encodeURIComponent(era.id);
+  document.title = era.name + ' · 时代站 · 历史时间轴';
+  crumb.textContent = '第 ' + era.no + ' 站 · ' + era.name;
   slot.style.setProperty('--era-accent', era.accent);
 
-  const bucket = { china: [], world: [] };
-  events.forEach(ev => { if (ev.era === era.id && bucket[ev.track]) bucket[ev.track].push(ev); });
-  bucket.china.sort((a, b) => a.sort - b.sort);
-  bucket.world.sort((a, b) => a.sort - b.sort);
-  const eraPairs = pairs.filter(p => {
-    const a = ctx.eventMap.get(p.china);
-    const b = ctx.eventMap.get(p.world);
-    return a && b && a.era === era.id;
-  });
-
-  let html = `<header class="tl-era-head era-page-head">` +
-    `<div class="tl-era-title"><span class="tl-era-no" aria-hidden="true">${era.no}</span>` +
-    `<div><h2>${esc(era.name)}</h2><p class="tl-era-span">${esc(era.span)}</p></div>` +
-    `<a class="tl-era-link" href="timeline.html#era-${esc(era.id)}">在完整时间轴中查看 ↗</a></div>` +
-    `<p class="tl-era-compare"><span aria-hidden="true">⇄</span>${esc(era.compare)}</p></header>` +
-    `<div class="tl-era-grid">` +
-    `<div class="tl-track tl-track-china"><p class="tl-track-label china-label"><span aria-hidden="true">🏮</span>中国线</p>${bucket.china.map(ctx.cardHTML).join('')}</div>` +
-    `<div class="tl-spine" aria-hidden="true"><span class="tl-spine-node"></span><span class="tl-spine-tail">▼</span></div>` +
-    `<div class="tl-track tl-track-world"><p class="tl-track-label world-label"><span aria-hidden="true">🌍</span>世界线</p>${bucket.world.map(ctx.cardHTML).join('')}</div>` +
-    `</div>`;
-
-  if (eraPairs.length) {
-    html += `<section class="era-pairs" aria-labelledby="era-pairs-title"><h2 id="era-pairs-title">这一站的同期对照</h2>` +
-      `<div class="era-pairs-grid">${eraPairs.map(p => {
-        const a = ctx.eventMap.get(p.china);
-        const b = ctx.eventMap.get(p.world);
-        return `<button class="tl-spotlight" data-spotlight="${esc(p.id)}">` +
-          `<span class="tl-pair-badge">对照 ${ctx.pairNo(p.id)}</span>` +
-          `<span class="tl-spotlight-row china"><span class="tl-spotlight-year">${esc(a.year)}</span><b>${esc(a.title)}</b></span>` +
-          `<span class="tl-spotlight-row world"><span class="tl-spotlight-year">${esc(b.year)}</span><b>${esc(b.title)}</b></span>` +
-          `<span class="tl-spotlight-label">${esc(p.label)}</span></button>`;
-      }).join('')}</div></section>`;
+  function pageLink(neighbor, label) {
+    return neighbor ? `<a class="era-pager-btn" href="${eraHref(neighbor)}"><small>${label}</small><b>${esc(neighbor.name)}</b></a>` : '<span></span>';
   }
 
-  html += `<nav class="era-pager" aria-label="上一站下一站">` +
-    (prev ? `<a class="era-pager-btn" href="era.html?era=${esc(prev.id)}"><small>上一站</small><b>${esc(prev.name)}</b></a>` : '<span></span>') +
-    `<a class="era-pager-btn era-pager-home" href="timeline.html">↩ 回双轨时间轴</a>` +
-    (next ? `<a class="era-pager-btn" href="era.html?era=${esc(next.id)}"><small>下一站</small><b>${esc(next.name)}</b></a>` : '<span></span>') +
-    `</nav>`;
-
-  slot.innerHTML = html;
-
-  let statusTimer;
-  const status = message => {
-    const el = $('tl-status');
-    el.textContent = message;
-    el.classList.add('visible');
-    clearTimeout(statusTimer);
-    statusTimer = setTimeout(() => el.classList.remove('visible'), 4200);
-  };
-  const flashCard = id => {
-    const card = $(`card-${id}`);
-    if (!card) return;
-    card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    card.classList.remove('flash');
-    void card.offsetWidth;
-    card.classList.add('flash');
-  };
-  root.addEventListener('click', event => {
-    const btn = event.target.closest('.tl-pair-btn, .tl-spotlight');
-    if (!btn) return;
-    const pair = ctx.pairMap.get(btn.dataset.pair || btn.dataset.spotlight);
-    if (!pair) return;
-    flashCard(pair.china);
-    flashCard(pair.world);
-    status(`同期对照 ${ctx.pairNo(pair.id)}：${pair.label}`);
-  });
+  slot.innerHTML = `<header class="tl-era-head era-page-head">
+      <div class="tl-era-title"><span class="tl-era-no" aria-hidden="true">${era.no}</span>
+        <div><h1>${esc(era.name)}</h1><p class="tl-era-span">${esc(era.span)}</p></div>
+        <a class="tl-era-link" href="${timelineHref}">回总轴这一站 ↗</a>
+      </div>
+      <p class="tl-era-compare">${esc(era.compare)}</p>
+      <nav class="era-section-links" aria-label="时代站内容">
+        ${previews.length ? '<a href="#era-media">看这站的素材 ↓</a>' : ''}
+        <a href="#era-events">沿时间读大事 ↓</a>
+        ${pairs.length ? '<a href="#era-pairs">看同期对照 ↓</a>' : ''}
+      </nav>
+    </header>
+    ${bands.length ? `<nav class="tl-related" aria-label="这一站的朝代"><b>这一站的朝代</b>
+      ${bands.map(band => `<a href="${dynastyHref(band)}">${esc(band.name)} →</a>`).join('')}
+    </nav>` : ''}
+    ${previews.length ? `<section class="era-media" id="era-media" data-tl-anchor tabindex="-1" aria-labelledby="era-media-title">
+      <h2 id="era-media-title">从素材看这段历史</h2>
+      <p>选一张图，看看它给我们留下了什么线索。</p>
+      <div class="era-media-grid">${previews.map(({ ev, image }) => `<a class="era-media-card" href="${mediaHref(ev)}">
+        <img src="${esc(image.src)}" alt="" width="${image.width}" height="${image.height}" decoding="async">
+        <small>${esc(image.kind)}</small><strong>${esc(image.title)}</strong>
+      </a>`).join('')}</div>
+    </section>` : ''}
+    <section class="era-events" id="era-events" data-tl-anchor tabindex="-1" aria-labelledby="era-events-title">
+      <h2 id="era-events-title">沿时间读大事</h2>
+      <p class="tl-stations-note">从早到晚读。点标题打开大事详情，也能从那里回到总轴。</p>
+      ${ctx.rowsHTML(era)}
+    </section>
+    ${pairs.length ? `<section class="era-pairs" id="era-pairs" data-tl-anchor tabindex="-1" aria-labelledby="era-pairs-title"><h2 id="era-pairs-title">这时，中国和世界</h2>
+      <div class="era-pairs-grid">${pairs.map(ctx.spotlightHTML).join('')}</div>
+    </section>` : ''}
+    <nav class="era-pager" aria-label="上一站下一站">
+      ${pageLink(eras[index - 1], '上一站')}
+      <a class="era-pager-btn era-pager-home" href="${timelineHref}">回总轴这一站</a>
+      ${pageLink(eras[index + 1], '下一站')}
+    </nav>`;
+  bindAnchors(root);
 })();

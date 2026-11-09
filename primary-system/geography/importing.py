@@ -80,6 +80,7 @@ def import_data(input_root, dry_run=False):
         original = raw_by[r["cca3"]]
         source_hash = canonical([original, r])
         coords = r.get("latlng") or []
+        area = r.get("area_km2")
         objects.append(
             CountryRegion(
                 source_version=VERSION,
@@ -94,7 +95,7 @@ def import_data(input_root, dry_run=False):
                 capitals=r.get("capital") or [],
                 region=r.get("region", ""),
                 subregion=r.get("subregion", ""),
-                area_km2=r.get("area_km2"),
+                area_km2=area if area is not None and area >= 0 else None,
                 latitude=coords[0] if len(coords) > 0 else None,
                 longitude=coords[1] if len(coords) > 1 else None,
                 independent=r.get("independent"),

@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="一站一个地点，带着问题看地图。每到一站，都可以接着走到下一站。">
+  <title>主题路线 · 地理图谱</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="content.js" defer></script>
+  <script src="map-data.js" defer></script>
+  <script src="world-data.js" defer></script>
+  <script src="atlas-data.js" defer></script>
+  <script src="atlas.js" defer></script>
+  <script src="shared.js" defer></script>
+  <script src="routes-app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#content">跳到主要内容</a>
+  <main id="main" class="gm-topic routes-topic" tabindex="-1">
+    <aside class="gm-sidebar" aria-label="导航和页面工具">
+      <nav class="gm-sysnav" aria-label="地理图谱页面导航">
+        <a class="gm-sysnav-brand" href="index.html">🧭 地理图谱</a>
+        <a data-page href="china.html">中国地图</a>
+        <a data-page href="world.html">世界地图</a>
+        <a data-page href="province.html">省域站</a>
+        <a data-page href="places.html">地点索引</a>
+        <a data-page href="routes.html" aria-current="page">主题路线</a>
+        <a data-page href="gallery.html">实景图册</a>
+      </nav>
+
+      <header class="gm-hero">
+        <p class="gm-eyebrow">跟着地图走 · 把地点连起来</p>
+        <h1 class="gm-title">主题路线</h1>
+        <p class="gm-intro">一站一个地点，带着问题看地图。每到一站，都可以接着走到下一站。</p>
+      </header>
+
+      <nav class="gm-side-panel gm-side-links" id="route-nav" aria-label="跳到主题路线"></nav>
+    </aside>
+
+    <div id="content" class="gm-content" tabindex="-1">
+      <div class="gm-routes" id="route-list"></div>
+
+      <noscript><p class="gm-notice">请启用 JavaScript 查看地点和地图。</p></noscript>
+    </div>
+  </main>
+  <footer class="gm-footer">乐学堂 · 地理图谱 · <a href="index.html">回到首页</a></footer>
+</body>
+</html>

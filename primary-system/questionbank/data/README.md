@@ -2,7 +2,7 @@
 
 `questionbank/data/questions/` 存放 Git 跟踪的题库批次 JSON。每份文件是一个
 「全有或全无」的导入批次，经 `manage.py import_questions` 导入数据库，运行时
-只读数据库表。首次初始化导入随项目提供的三个批次，后续默认初始化只读核对回执。
+只读数据库表。首次初始化导入随项目提供的四个批次，后续默认初始化只读核对回执和逐题内容（含轨别）。
 
 ## 当前批次
 
@@ -11,6 +11,7 @@
 | `2026-11-internal-core.json` | `2026-11-internal-core` | 内部数据规则生成首批 | 150 |
 | `2026-11-grammar-quiz.json` | `2026-11-grammar-quiz` | 语法精讲知识点巩固题 | 31 |
 | `2026-11-olympiad-intro.json` | `2026-11-olympiad-intro` | 人工撰写的四年级奥数入门（奥数轨） | 30 |
+| `2026-11-math-mistakes-correct.json` | `2026-11-math-mistakes-correct` | 四上易错诊所的正确陈述补充 | 15 |
 
 ## 生成与导入
 
@@ -33,6 +34,8 @@ node scripts/build_questionbank.cjs          # 生成批次 JSON（确定性，�
 
 数学四上使用来源定位直达例题自评和易错诊所判断题。自评按孩子对照答案后的结论记账，
 题库统计将自评次数与客观判分题的答对次数分开显示。练习结算的星级取客观判分题成绩。
+易错诊所含 15 道错误陈述和 15 道正确陈述。补充批次在原题来源定位后附加 `:correct`，
+保留旧题 UUID 和历史作答。
 
 ## 字段与身份
 

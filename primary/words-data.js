@@ -102,7 +102,7 @@ const WORD_UNITS = [
         parts: [{ t: 'sch', d: 'ch 在这里读 /k/！' }, { t: 'ool', d: '读 /uːl/' }],
         memo: 'school 的 ch 读 /k/（同 Christmas）；ool 家族：school、cool、pool、tool。',
         related: ['classroom', 'cool', 'pool', 'teacher'] },
-      { en: 'maths book', ipa: '/mɑːθs bʊk/', zh: 'n. 数学书', emoji: '🔢',
+      { en: 'maths book', ipa: '/mæθs bʊk/', zh: 'n. 数学书', emoji: '🔢',
         parts: [{ t: 'maths', d: '数学' }, { t: 'book', d: '书' }],
         memo: 'maths 是英式说法，美式说 math；th 咬舌 /θ/。同类：Chinese book、English book。',
         related: ['book', 'Chinese book', 'English book', 'number'] },

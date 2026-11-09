@@ -150,9 +150,9 @@ def question_uuid(source_key, source_ref):
     return uuid.uuid5(uuid.NAMESPACE_URL, f'primary-system/questionbank/{source_key}/{source_ref}')
 
 
-def content_checksum(*, question_type, area, grade, stem, payload, tags, source_key, source_ref):
+def content_checksum(*, question_type, area, grade, stem, payload, tags, source_key, source_ref, track='regular'):
     """题目内容指纹：导入用它检测「同 uuid 但内容变了」的冲突。"""
     body = {'type': question_type, 'area': area, 'grade': grade, 'stem': stem,
-            'payload': payload, 'tags': tags, 'source_key': source_key, 'source_ref': source_ref}
+            'payload': payload, 'tags': tags, 'source_key': source_key, 'source_ref': source_ref, 'track': track}
     encoded = json.dumps(body, ensure_ascii=False, sort_keys=True, separators=(',', ':'))
     return hashlib.sha256(encoded.encode()).hexdigest()

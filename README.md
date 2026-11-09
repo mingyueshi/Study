@@ -26,8 +26,8 @@
 - 地理探索：双击 [`primary/geo/index.html`](primary/geo/index.html)，适合小学生的地理知识学习，八大主题 37 个知识点，每点含定义、必学要点、例题、易错辨析与巩固题，配概念图、实景照片、讲解音频、动画实验室与原始机构延伸资料（外链需联网）。
 - 天文探索：双击 [`primary/astro.html`](primary/astro.html)，适合小学生的天文宇宙知识学习，九大基地 46 个知识点（末站「未解之谜」讲暗物质、暗能量、黑洞内部、宇宙结局与时间之箭），配行星档案、月相变化互动演示、宇宙成分饼图与图示，可点读、可搜索、可打印。
 - 历史长廊：双击 [`primary/history/index.html`](primary/history/index.html)，适合小学生的中华历史启蒙，从走进历史到宋元明清八大主题 37 个知识点，每点含定义、必学要点、例题、易错辨析与巩固题，配概念图、文物实景照片、讲解音频、丝路/汉字/造纸动画实验室与原始机构延伸资料（外链需联网）。
-- 历史时间轴系统：双击 [`primary/history-timeline/index.html`](primary/history-timeline/index.html)，历史编排的另一种演示，多页面系统：门户页导航到双轨时间轴（竖版主轴，左轨中国史、右轨世界史，9 个时代 126 件大事、30 组同期对照编号互跳）、九个时代站详情页（`era.html?era=` 逐段细看）与朝代更替页（公元前/公元后小课堂 + 十六朝更替竖轴），页首还有 16 朝代速览条（点朝名跳转）。
-- 中国地图导览：双击 [`primary/geo-map/index.html`](primary/geo-map/index.html)，地理编排的另一种演示、地图编排系列第一站，多页面系统：门户页导航到中国地图主页（真实轮廓示意地图，省级行政区按四大区域着色、45 处山河湖海与三级阶梯、20 个邻居按方位站队三个图层互斥切换，配找一找寻宝与 7 张口诀卡）、三十四个省域站详情页（`province.html?adcode=` 逐省细看，迷你地图高亮本省）与世界地图页（177 个国家和地区按七大洲着色、四大洋与世界之最标记、「中国与世界」图层金色高亮中国）。
+- 历史时间轴系统：双击 [`primary/history-timeline/index.html`](primary/history-timeline/index.html)。从双轨时间轴查找 9 个时代的 126 件中外大事，打开时代站或独立事件页，沿 30 组同期对照读另一边的故事，也可以在朝代更替页看夏到清的 16 个朝代并学习公元纪年。
+- 地理图谱：双击 [`primary/geo-map/index.html`](primary/geo-map/index.html)。在中国和世界地图上切换图层、缩放、玩「找一找」，也可以查找 291 条地点档案、进入 34 个省域站，或沿三条主题路线跨图观察。 实景图册收录 13 张离线照片和太空影像，另有 3 项央视影片。
 - 文学常识：双击 [`primary/lit.html`](primary/lit.html)，适合小学生的文学常识学习，八大文学苑 41 个知识点，涵盖四大名著、古今作家、文化常识与名句典故，配名著档案、生肖档案互动演示与图示，可点读、可搜索、可打印。
 - 科学实验室：双击 [`primary/sci.html`](primary/sci.html)，适合小学生的科学知识学习，八大实验室 39 个知识点，涵盖物质、力、光声、电磁、生命、地球与技术工程，配三态变化、电路串联并联互动演示与图示，可点读、可搜索、可打印。
 - 个人学习：双击 [`personal-learning/index.html`](personal-learning/index.html)，从总导航进入英文学习或 AI 基础篇；详见 [`personal-learning/README.md`](personal-learning/README.md)。旧 [`techlex/index.html`](techlex/index.html) 会转到新的英文学习模块。

@@ -33,7 +33,11 @@ class CountryRegion(models.Model):
         constraints = [
             models.UniqueConstraint(
                 fields=("source_version", "code"), name="geo_country_version_code"
-            )
+            ),
+            models.CheckConstraint(
+                condition=models.Q(area_km2__isnull=True) | models.Q(area_km2__gte=0),
+                name="geo_country_nonnegative_area",
+            ),
         ]
 
     @property

@@ -33,6 +33,19 @@ window.GMShared = (() => {
   const lineD = (line) => ringPath(line, m).replace(/Z$/, '');
   const midOf = (line) => line[Math.floor((line.length - 1) / 2)];
 
+  /* 跨日期变更线的环沿连续经度绘制，在另一侧画平移副本。SVG 视窗裁掉图外部分。 */
+  function wrapRing(ring) {
+    let previous = ring[0][0];
+    const continuous = ring.map(([lng, lat]) => {
+      previous = lng + 360 * Math.round((previous - lng) / 360);
+      return [previous, lat];
+    });
+    const copies = [continuous];
+    if (continuous.some(([lng]) => lng > 180)) copies.push(continuous.map(([lng, lat]) => [lng - 360, lat]));
+    if (continuous.some(([lng]) => lng < -180)) copies.push(continuous.map(([lng, lat]) => [lng + 360, lat]));
+    return copies;
+  }
+
   /* 省份路径与外接框中心：数据来自 china-geo.js 与 map-data.js（须先于本文件加载）。 */
   const GEO = window.GEO_CHINA_GEO;
   const provD = new Map();      // adcode -> path d
@@ -76,12 +89,12 @@ window.GMShared = (() => {
       .filter((p) => provD.has(p.adcode))
       .map((p) => {
         const hit = interactive
-          ? ' tabindex="0" role="button" aria-label="' + esc(p.name) + '"'
+          ? ' data-id="' + esc(p.id) + '" tabindex="0" role="button" aria-label="' + esc(p.name) + '"'
           : ' aria-label="' + esc(p.name) + '"';
-        return `<path class="gm-neutral" data-id="${p.id}"${hit} fill="${fillFor(p)}" fill-rule="evenodd" d="${provD.get(p.adcode)}"/>`;
+        return `<path class="${interactive ? 'gm-prov' : 'gm-neutral'}"${hit} fill="${fillFor(p)}" fill-rule="evenodd" d="${provD.get(p.adcode)}"/>`;
       }).join('');
 
-  const insetSVG = () => {
+  const insetSVG = ({ interactive = false } = {}) => {
     const islands = (GEO && GEO.southSeaIslands || []).map((ring) => {
       let sx = 0, sy = 0;
       ring.forEach((pt) => { sx += IX(pt[0]); sy += IY(pt[1]); });
@@ -90,11 +103,18 @@ window.GMShared = (() => {
     const dashes = (GEO && GEO.seaDash || []).map((ring) =>
       `<path class="gm-dash" d="${ringPath(ring, (lng, lat) => [IX(lng), IY(lat)])}" fill="#7fa8c9" opacity="0.85"/>`).join('');
     const sea = (window.GM_FEATURES || []).find((f) => f.id === 'f28');
+    const seaLabel = sea
+      ? `<text class="gm-sea-label" x="${IX(sea.point[0]).toFixed(1)}" y="${IY(sea.point[1]).toFixed(1)}" text-anchor="middle" fill="#2e6f9e">${esc(sea.name)}</text>`
+      : '';
+    const seaMark = interactive && sea
+      ? `<g data-g="land" data-id="${sea.id}" tabindex="0" role="button" aria-label="${esc(sea.name)}">` +
+        `<circle class="gm-hit" cx="${IX(sea.point[0]).toFixed(1)}" cy="${IY(sea.point[1]).toFixed(1)}" r="19"/>` + seaLabel + '</g>'
+      : seaLabel;
     return `<g class="gm-inset">` +
       `<rect x="${IB.x}" y="${IB.y}" width="${IB.w}" height="${IB.h}" rx="10" class="gm-inset-frame"/>` +
       `<text class="gm-inset-title" x="${IB.x + 10}" y="${IB.y + 17}">南海诸岛</text>` +
       `<g class="gm-inset-body">` + islands + dashes +
-      (sea ? `<text class="gm-sea-label" x="${IX(sea.point[0]).toFixed(1)}" y="${IY(sea.point[1]).toFixed(1)}" text-anchor="middle" fill="#2e6f9e">${esc(sea.name)}</text>` : '') +
+      seaMark +
       `</g></g>`;
   };
 
@@ -109,7 +129,7 @@ window.GMShared = (() => {
     `<span class="gm-station-go" aria-hidden="true">进站 →</span></a>`;
 
   return {
-    esc, W, H, MX, MY, m, ringPath, lineD, midOf,
+    esc, W, H, MX, MY, m, ringPath, lineD, midOf, wrapRing,
     KIND_CN, KIND_ICON, KIND_COLOR, displayName,
     provD, provLabel, clipDefs, mapPrelude, provincePathsSVG, insetSVG, compass, stationCard
   };
