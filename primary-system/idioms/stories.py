@@ -5,7 +5,6 @@
 逐条经 ``matches_pin`` 校验，钉词漂移的卡片如实降级为「待核对」。
 """
 import json
-from functools import lru_cache
 from pathlib import Path
 
 from django.core.exceptions import ImproperlyConfigured
@@ -13,7 +12,7 @@ from django.shortcuts import render
 from django.views.decorators.cache import never_cache
 from django.views.decorators.http import require_safe
 
-from .catalog import SOURCE_CODE, dictionary_records, matches_pin, with_details
+from .catalog import SOURCE_CODE, matches_pin, pinned_records
 
 STORIES_PATH = Path(__file__).resolve().parent / "data" / "stories.json"
 
@@ -56,11 +55,10 @@ def validate(curriculum):
                 raise ImproperlyConfigured(f"{story['headword']} 缺词库钉词字段 {field}。")
 
 
-@lru_cache(maxsize=1)
 def story_cards():
     """全部典故故事卡：词典 payload + 故事编辑内容 + 人物档案；钉词漂移即降级。"""
     curriculum = load_stories()
-    records = {str(record.binding_id): record for record in with_details(dictionary_records())}
+    records = pinned_records(story["binding_id"] for story in curriculum["stories"])
     figures = {figure["id"]: figure for figure in curriculum["figures"]}
     cards = []
     for story in curriculum["stories"]:
@@ -75,21 +73,21 @@ def story_cards():
     return cards
 
 
-def books():
+def books(cards):
     """典籍分组列表（按卡序）。"""
     seen = []
-    for card in story_cards():
+    for card in cards:
         if card["source_book"] not in seen:
             seen.append(card["source_book"])
     return seen
 
 
-def figure_clues():
+def figure_clues(cards):
     """人物线索：每个人物 + 参与的典故卡 + 同出处提示。"""
     figures = load_stories()["figures"]
     clues = []
     for figure in figures:
-        stories = [card for card in story_cards() if figure["id"] in card.get("figure_ids", [])]
+        stories = [card for card in cards if figure["id"] in card.get("figure_ids", [])]
         if not stories:
             continue
         books_ = sorted({card["source_book"] for card in stories})
@@ -104,7 +102,8 @@ def page(request):
     cards = story_cards()
     figure_id = request.GET.get("figure", "")
     book = request.GET.get("book", "")
-    clue = next((c for c in figure_clues() if c["id"] == figure_id), None)
+    clues = figure_clues(cards)
+    clue = next((c for c in clues if c["id"] == figure_id), None)
     if clue is not None:
         shown = clue["stories"]
     elif book:
@@ -112,6 +111,6 @@ def page(request):
     else:
         shown = cards
     return render(request, "idioms/hall.html", {
-        "cards": cards, "shown": shown, "books": books(), "book": book,
-        "clues": figure_clues(), "clue": clue, "figure_id": figure_id,
+        "cards": cards, "shown": shown, "books": books(cards), "book": book,
+        "clues": clues, "clue": clue, "figure_id": figure_id,
     })

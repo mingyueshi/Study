@@ -81,9 +81,6 @@ class PairsQuizTests(TestCase):
                                             properties={"derivation": "测试出处"})
                 cls.fixture_words.append(story)
 
-    def setUp(self):
-        pairs_pool.cache_clear()
-
     def test_fresh_draws_disjoint_round(self):
         pool = pairs_pool()
         state_pool = [pair for pair in pool if pair["valid"]]
@@ -117,7 +114,6 @@ class PairsQuizTests(TestCase):
                                     headword=record.headword, definition="漂移释义",
                                     lexical_hash="drifted", properties=record.properties)
         LexiconSource.objects.filter(pk=self.source.pk).update(active_release=drift_release)
-        pairs_pool.cache_clear()
         pool = pairs_pool()
         fixture_pair = next(p for p in pool if p["headword_a"] == "画蛇添足")
         self.assertFalse(fixture_pair["valid"])

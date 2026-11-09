@@ -27,7 +27,7 @@ MAX_DELIVERY_BYTES = 33_554_432  # 32 MiB：简体层使 ZIP 超出旧 14 MiB �
 PROJECT = Path(__file__).resolve().parents[1]
 WORKSPACE = PROJECT.parent
 OLD_ZIP = WORKSPACE / "references" / OLD_ARCHIVE
-NEW_ZIP = WORKSPACE / "references" / NEW_ARCHIVE
+NEW_ZIP = PROJECT / "data" / "reference-archives" / NEW_ARCHIVE
 REFERENCE_MANIFEST = PROJECT / "docs" / "reference-manifest-2026-11-02.json"
 
 
@@ -256,7 +256,7 @@ def main():
         raise SystemExit("固定清单已登记新包，先确认历史条目再重跑")
     specification["archives"].append(
         {
-            "archive": f"references/{NEW_ARCHIVE}",
+            "archive": str(NEW_ZIP.relative_to(WORKSPACE)),
             "bytes": len(payload),
             "sha256": digest,
             "outer_sha_matches": True,

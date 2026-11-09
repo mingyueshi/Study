@@ -12,7 +12,7 @@ license；rights_evidence 记「原典公版+转录来源」并钉死上游 comm
 用法：.venv/bin/python scripts/build_ancient_text_package.py [--source 本地克隆目录]
       --source 指向 hanzhaodeng/chinese-ancient-text 的本地浅克隆（HEAD 校验
       等于钉定 commit），网络不佳时用整克隆替代逐册抓取。
-产物：../references/01e_ancient_classics_2026-11-06.zip（本地产物，不进 Git），
+产物：data/reference-archives/01e_ancient_classics_2026-11-06.zip，
       并打印正文计数、ZIP bytes/sha256 供固定清单登记。
 """
 
@@ -49,7 +49,7 @@ from poetry.ancient_sources import (  # noqa: E402
 from poetry.importing import parse_document  # noqa: E402
 
 ZIP_NAME = "01e_ancient_classics_2026-11-06.zip"
-REFERENCES = Path(__file__).resolve().parent.parent.parent / "references"
+REFERENCES = Path(__file__).resolve().parents[1] / "data/reference-archives"
 MARKER_DIR = "ancient_text"
 # 固定时间戳与文件属性，保证同内容重复打包字节一致（固定清单登记依据）。
 ZIP_DATE = (2026, 11, 6, 0, 0, 0)

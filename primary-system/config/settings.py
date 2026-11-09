@@ -145,4 +145,6 @@ if PRODUCTION:
     SECURE_HSTS_SECONDS = 31536000
 
 # Privately managed reference sources; never served as static/media wholesale.
+REFERENCE_ARCHIVE_ROOT = BASE_DIR / 'data' / 'reference-archives'
 REFERENCE_STORAGE_ROOT = Path(os.environ.get('PRIMARY_REFERENCE_ROOT', str(BASE_DIR / '.reference-assets')))
+FEIHUALING_INDEX_ROOT = Path(os.environ.get('PRIMARY_FEIHUALING_INDEX_ROOT', str(BASE_DIR / '.feihualing-cache')))

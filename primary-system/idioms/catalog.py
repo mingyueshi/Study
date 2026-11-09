@@ -36,6 +36,11 @@ def with_details(records):
     return records.select_related('release__source', 'binding__sense__entry', 'binding__pronunciation')
 
 
+def pinned_records(binding_ids):
+    records = with_details(dictionary_records().filter(binding_id__in=binding_ids))
+    return {str(record.binding_id): record for record in records}
+
+
 def matches_pin(record, pin):
     # The original record and release identify the review evidence. New releases
     # may keep the same lexical content and change only supplemental fields.

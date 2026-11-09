@@ -90,7 +90,7 @@
     const response = await fetch(board.dataset.answerUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'X-CSRFToken': csrf() },
-      body: JSON.stringify({ uuid: question.uuid, given }),
+      body: JSON.stringify({ uuid: question.uuid, attempt_id: question.attempt_id, given }),
     }).catch(() => null);
     if (!response || !response.ok) {
       locked = false;

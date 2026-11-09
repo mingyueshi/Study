@@ -29,16 +29,16 @@ class RedemptionAdmin(admin.ModelAdmin):
     def mark_done(self, request, queryset):
         count = 0
         for redemption in queryset.filter(status=Redemption.Status.PENDING):
-            services.mark_redemption_done(redemption)
-            count += 1
+            if services.mark_redemption_done(redemption):
+                count += 1
         self.message_user(request, f'已核销 {count} 条兑换记录。')
 
     @admin.action(description='取消兑换并退回积分')
     def cancel_and_refund(self, request, queryset):
         count = 0
         for redemption in queryset.filter(status=Redemption.Status.PENDING):
-            services.cancel_redemption(redemption)
-            count += 1
+            if services.cancel_redemption(redemption):
+                count += 1
         self.message_user(request, f'已取消 {count} 条兑换记录，积分已退回。')
 
 

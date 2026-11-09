@@ -23,7 +23,7 @@ def sha(data):
     return hashlib.sha256(data).hexdigest()
 
 
-def prepare(input_root, storage_root, *, persist):
+def prepare(input_root, storage_root, *, persist, verify_only=False):
     specification = json.loads(
         (settings.BASE_DIR / "docs/reference-manifest-2026-11-02.json").read_text()
     )
@@ -70,6 +70,8 @@ def prepare(input_root, storage_root, *, persist):
                 if target.exists():
                     if sha(target.read_bytes()) != checksum:
                         raise ValidationError(f"已有来源文件漂移：{info.filename}")
+                elif verify_only:
+                    raise ValidationError(f"缺少已恢复的来源文件：{info.filename}")
                 else:
                     target.parent.mkdir(parents=True, exist_ok=True)
                     with tempfile.NamedTemporaryFile(
@@ -103,7 +105,7 @@ def prepare(input_root, storage_root, *, persist):
             }
         )
     if {package["name"] for package in reports} != ACTIVE_ARCHIVES:
-        raise ValidationError("当前六包范围与固定清单不符")
+        raise ValidationError("当前资料包范围与固定清单不符")
     return reports
 
 

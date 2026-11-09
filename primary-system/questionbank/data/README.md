@@ -2,7 +2,7 @@
 
 `questionbank/data/questions/` 存放 Git 跟踪的题库批次 JSON。每份文件是一个
 「全有或全无」的导入批次，经 `manage.py import_questions` 导入数据库，运行时
-只读数据库表，不直接读这些文件。
+只读数据库表。首次初始化导入随项目提供的三个批次，后续默认初始化只读核对回执。
 
 ## 当前批次
 

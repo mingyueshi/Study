@@ -25,7 +25,7 @@ class Command(BaseCommand):
             "--backup-already", type=Path, help="bootstrap在迁移前创建的本次恢复点"
         )
         parser.add_argument(
-            "--input-root", type=Path, default=settings.BASE_DIR.parent / "references"
+            "--input-root", type=Path, default=settings.REFERENCE_ARCHIVE_ROOT
         )
 
     def handle(self, *args, **options):
@@ -42,6 +42,7 @@ class Command(BaseCommand):
                 options["input_root"],
                 settings.REFERENCE_STORAGE_ROOT / "packages",
                 persist=True,
+                verify_only=options["verify_only"],
             )
             result = restore_package(
                 settings.DATABASES["default"]["NAME"],

@@ -75,6 +75,7 @@ class AnswerRecord(models.Model):
     guest_key = models.CharField('游客会话键', max_length=64, blank=True, db_index=True)
     question = models.ForeignKey(Question, verbose_name='题目', on_delete=models.PROTECT,
                                  related_name='answers')
+    attempt_id = models.UUIDField('作答标识', null=True, unique=True, editable=False)
     given = models.JSONField('作答内容', default=dict)
     correct = models.BooleanField('答对', default=False)
     created_at = models.DateTimeField('时间', auto_now_add=True)

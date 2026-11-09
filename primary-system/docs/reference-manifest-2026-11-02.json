@@ -9,7 +9,7 @@
   "shared_path_conflicts": [],
   "archives": [
     {
-      "archive": "references/01a_cc_cedict_2026-11-02.zip",
+      "archive": "primary-system/data/reference-archives/01a_cc_cedict_2026-11-02.zip",
       "bytes": 13046395,
       "sha256": "af26852227ee53fc95da58111cd04650452fe608673bd532e42f243e684d9930",
       "outer_sha_matches": true,
@@ -18,7 +18,7 @@
       "checked_payloads": 14
     },
     {
-      "archive": "references/01b_hanzi_strokes_2026-11-02.zip",
+      "archive": "primary-system/data/reference-archives/01b_hanzi_strokes_2026-11-02.zip",
       "bytes": 12861445,
       "sha256": "a4a7dcd1caa29a055de5f81d45d4300007a2ed8cffdc96791608509270cccf01",
       "outer_sha_matches": true,
@@ -45,7 +45,7 @@
       "checked_payloads": 104
     },
     {
-      "archive": "references/02a_geography_english_elements_math_2026-11-02.zip",
+      "archive": "primary-system/data/reference-archives/02a_geography_english_elements_math_2026-11-02.zip",
       "bytes": 2485319,
       "sha256": "04870c025abc27d778368a710c7a5ca71bb553b8a4ba6760c15344277c9bea72",
       "outer_sha_matches": true,
@@ -54,7 +54,7 @@
       "checked_payloads": 34
     },
     {
-      "archive": "references/02b_hyg_stars_2026-11-02.zip",
+      "archive": "primary-system/data/reference-archives/02b_hyg_stars_2026-11-02.zip",
       "bytes": 13758119,
       "sha256": "0fa4d85d0a70f67477732b5d0812b5ee5dc08669d9fc3dd1bd52b51f3cc4bab3",
       "outer_sha_matches": true,
@@ -90,7 +90,7 @@
       "checked_payloads": 20
     },
     {
-      "archive": "references/01d_classical_poetry_simplified_2026-11-04.zip",
+      "archive": "primary-system/data/reference-archives/01d_classical_poetry_simplified_2026-11-04.zip",
       "bytes": 23701708,
       "sha256": "9439ee4b8be5cc4a773d1d8ce0f31d4fb228fb8314e8f9d19f7b2f716ea8fdb4",
       "outer_sha_matches": true,
@@ -99,7 +99,7 @@
       "checked_payloads": 196
     },
     {
-      "archive": "references/01e_ancient_classics_2026-11-06.zip",
+      "archive": "primary-system/data/reference-archives/01e_ancient_classics_2026-11-06.zip",
       "bytes": 16848880,
       "sha256": "30bc34d683e756142fa53c8dea8ab3ea6965a19e8da1cf03d90e3b38bd18d2f4",
       "outer_sha_matches": true,
@@ -108,7 +108,7 @@
       "checked_payloads": 64
     },
     {
-      "archive": "references/01f_unihan_18_2026-11-06.zip",
+      "archive": "primary-system/data/reference-archives/01f_unihan_18_2026-11-06.zip",
       "bytes": 9997293,
       "sha256": "d8277fd2554af60f403f114fa1a75ade22868266ed069e6121818fbbed740a1c",
       "outer_sha_matches": true,

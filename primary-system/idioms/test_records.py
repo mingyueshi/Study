@@ -51,11 +51,6 @@ class QuizReportTests(TestCase):
         LexiconSource.objects.filter(pk=cls.source.pk).update(active_release=cls.release)
         build_lexicon_fixture(cls.source, cls.release, sorted(GOOD_IDIOMS.items()))
 
-    def setUp(self):
-        from .quiz import char_bank, question_pool
-        question_pool.cache_clear()
-        char_bank.cache_clear()
-
     def post_report(self, **overrides):
         payload = {"headword": "守株待兔", "level": 3, "source": "common",
                    "correct": True, "used_hint": False}
@@ -130,10 +125,6 @@ class EmojiFinishRecordTests(TestCase):
                                         definition="测试释义", lexical_hash=story["lexical_hash"],
                                         properties={"derivation": "测试出处"})
 
-    def setUp(self):
-        from .emoji import quiz_pool
-        quiz_pool.cache_clear()
-
     def test_finished_round_writes_exactly_one_record(self):
         client = self.client
         token = client.post("/idioms/emoji/api/action/", {"action": "new"},
@@ -187,10 +178,6 @@ class PairsFinishRecordTests(TestCase):
                                             binding=binding, headword=pair[f"headword_{side}"],
                                             definition="测试释义", lexical_hash=pair[f"{side}_lexical_hash"],
                                             properties={"derivation": "测试出处"})
-
-    def setUp(self):
-        from .pairs import pairs_pool
-        pairs_pool.cache_clear()
 
     def test_finished_round_writes_one_record_with_attempts(self):
         client = self.client

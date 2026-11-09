@@ -207,7 +207,11 @@ def collection_detail(request, code):
         'module', 'textbook__grade', 'textbook__edition').first()
     if not book:
         raise Http404('学习册不存在或未发布。')
-    units = list(book.units.annotate(word_count=Count('placements', filter=Q(placements__item__status='published'))))
+    is_english = book.module.code == 'english'
+    word_filter = Q(placements__item__status='published', placements__item__module=book.module)
+    if is_english:
+        word_filter &= Q(placements__item__kind=ContentItem.Kind.WORD)
+    units = list(book.units.annotate(word_count=Count('placements', filter=word_filter)))
     unit_code = request.GET.get('unit')
     # 模板里的单元与选中单元共用同一批实例（英语分支要在单元对象上挂词卡底色）。
     for index, unit in enumerate(units):
@@ -220,16 +224,14 @@ def collection_detail(request, code):
     if unit_code and selected_unit is None:
         raise Http404('单元不存在。')
     placements = selected_unit.placements.select_related('item').filter(item__status='published', item__module=book.module) if selected_unit else []
-    is_english = book.module.code == 'english'
     tab = request.GET.get('tab', '')
     dialogue_items = []
     if is_english:
         # 英语教材同步 = 单词 + 课文两个视图；课文段按编排顺序整段呈现。
         tab = tab if tab in ('words', 'texts') else 'words'
-        dialogue_items = [p.item for p in
-                          selected_unit.placements.select_related('item').filter(
-                              item__status='published', item__module=book.module, item__kind='dialogue')
-                          ] if selected_unit else []
+        if selected_unit:
+            dialogue_items = [p.item for p in placements.filter(item__kind=ContentItem.Kind.DIALOGUE)]
+            placements = placements.filter(item__kind=ContentItem.Kind.WORD)
     # 英语单元整页呈现词卡（最大单元 40 词），一屏可连读；其余模块保持 30 条分页。
     page = Paginator(placements, 60 if is_english else 30).get_page(request.GET.get('page'))
     resolver = LessonResolver([p.item for p in page])

@@ -1,8 +1,12 @@
 """激励系统测试：规则表自检、record_event 发分/上限/打卡/勋章、兑换核销、
 奖励页渲染与代表性端点集成（plurals 上报）。口径：答错不给分；游客零激励。"""
 from datetime import date, timedelta
+from concurrent.futures import ThreadPoolExecutor
+from threading import Barrier
+from unittest import skipUnless
 
-from django.test import RequestFactory, TestCase
+from django.db import connection, connections
+from django.test import RequestFactory, TestCase, TransactionTestCase
 from django.urls import reverse
 from django.utils import timezone
 
@@ -85,6 +89,31 @@ class RecordEventTests(TestCase):
         self.assertIn('1 积分', text)
         self.assertIn('第一次打卡', text)
         self.assertEqual(services.summarize_awards([]), '')
+
+
+@skipUnless(connection.vendor == 'postgresql', '需要 PostgreSQL 行锁')
+class ConcurrentRecordEventTests(TransactionTestCase):
+    def test_parallel_awards_share_one_daily_limit(self):
+        from django.contrib.auth import get_user_model
+
+        user = get_user_model().objects.create_user('parallel-learner')
+        for _ in range(9):
+            services.record_event(user, 'plural_correct')
+        barrier = Barrier(2)
+
+        def award():
+            try:
+                barrier.wait(timeout=5)
+                return services.record_event(user, 'plural_correct')
+            finally:
+                connections.close_all()
+
+        with ThreadPoolExecutor(max_workers=2) as pool:
+            requests = [pool.submit(award) for _ in range(2)]
+            results = [request.result(timeout=10) for request in requests]
+        self.assertEqual(sum(bool(awards) for awards in results), 1)
+        self.assertEqual(PointEvent.objects.filter(user=user, code='plural_correct').count(), 10)
+        self.assertEqual(CheckIn.objects.filter(user=user).count(), 1)
 
 
 class CheckinStatusTests(TestCase):
@@ -190,11 +219,16 @@ class RedeemTests(TestCase):
     def test_cancel_refunds_points(self):
         self._grant(50)
         redemption = services.redeem(self.user, self.item.pk)
+        stale = Redemption.objects.get(pk=redemption.pk)
         self.assertEqual(services.stats_for(self.user)['balance'], 0)
         services.cancel_redemption(redemption, note='下雨改期')
+        self.assertIsNone(services.cancel_redemption(stale))
+        self.assertIsNone(services.mark_redemption_done(stale))
         self.assertEqual(redemption.refresh_from_db() or redemption.status, Redemption.Status.CANCELLED)
         self.assertEqual(services.stats_for(self.user)['balance'], 50)
-        self.assertTrue(PointEvent.objects.filter(user=self.user, code='redeem_refund').exists())
+        self.assertEqual(services.home_summary(self.user)['earned'], 50)
+        self.assertEqual(services.stats_for(self.user)['points_earned'], 50)
+        self.assertEqual(PointEvent.objects.filter(user=self.user, code='redeem_refund').count(), 1)
 
     def test_mark_done_keeps_balance_deducted(self):
         self._grant(50)

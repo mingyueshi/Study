@@ -73,14 +73,13 @@ class StoryPinTests(TestCase):
             cls.records[story["headword"]] = record
 
     def test_first_three_cards_valid_from_fixture(self):
-        story_cards.cache_clear()
         cards = {c["headword"]: c for c in story_cards()[:3]}
         # 夹具记录与 stories.json 钉词完全一致 → 出卡；其余词典缺失 → 降级。
         self.assertTrue(all(c["valid"] for c in cards.values()))
 
     def test_hash_drift_pauses_card(self):
         # 词库记录不可修改；真实漂移路径是发布新版本，active_release 指向新记录。
-        story_cards.cache_clear()
+        self.assertTrue(story_cards()[0]["valid"])
         drift_release = SourceRelease.objects.create(source=self.source, version="stories-drift", status=SourceRelease.Status.READY)
         record = self.records["负荆请罪"]
         drifted = SourceRecord.objects.create(release=drift_release, binding=record.binding,
@@ -93,7 +92,7 @@ class StoryPinTests(TestCase):
         self.assertTrue(str(drifted.pk))
 
     def test_figure_clues_link_stories(self):
-        clues = {c["id"]: c for c in figure_clues()}
+        clues = {c["id"]: c for c in figure_clues(story_cards())}
         lxr = clues["lin-xiangru"]
         self.assertEqual([s["headword"] for s in lxr["stories"]], ["负荆请罪", "完璧归赵"])
         self.assertEqual(lxr["books"], ["《史记》"])

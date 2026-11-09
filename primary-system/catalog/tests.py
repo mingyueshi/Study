@@ -86,9 +86,10 @@ class EnglishTextbookTests(PlatformFixture):
         self.assertContains(response, 'dialogue-card')
         self.assertContains(response, 'Can you jump high, Daming?')
         self.assertContains(response, '整段连读')
-        # 单词 tab 不受影响
         words = self.client.get('/books/primary-english-first/?unit=4a-u1')
-        self.assertContains(words, 'class="wcard"')
+        self.assertContains(words, 'class="wcard"', count=1)
+        self.assertContains(words, '1 个单词')
+        self.assertNotContains(words, item.title)
 
     def test_seed_renames_english_module_once(self):
         Module.objects.filter(code='english').update(name='教材同步单词')

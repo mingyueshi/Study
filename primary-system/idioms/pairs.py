@@ -7,7 +7,6 @@
 """
 import json
 import secrets
-from functools import lru_cache
 from pathlib import Path
 import re
 
@@ -68,7 +67,7 @@ def action(request):
             status=error.status,
         )
 
-from .catalog import SOURCE_CODE, dictionary_records, matches_pin, with_details
+from .catalog import SOURCE_CODE, matches_pin, pinned_records
 
 PAIRS_PATH = Path(__file__).resolve().parent / "data" / "pairs.json"
 ROUND_SIZE = 5
@@ -118,11 +117,10 @@ def validate(curriculum):
     # 单一成语可以出现在多个配对里，但同局抽取需词头不相交（抽局时处理）。
 
 
-@lru_cache(maxsize=1)
 def pairs_pool():
     """双侧钉词校验通过的配对题库；漂移的配对不出题。"""
     curriculum = load_pairs()
-    records = {str(record.binding_id): record for record in with_details(dictionary_records())}
+    records = pinned_records(pair[f"{side}_binding_id"] for pair in curriculum["pairs"] for side in ("a", "b"))
 
     def side_pin(pair, side):
         pin = {k[len(side) + 1:]: v for k, v in pair.items() if k.startswith(f"{side}_")}

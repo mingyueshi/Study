@@ -5,10 +5,12 @@
 """
 import json
 import re
-from functools import lru_cache
+from functools import lru_cache, reduce
+from operator import or_
 from pathlib import Path
 
 from django.core.exceptions import ImproperlyConfigured
+from django.db.models import Q
 
 from .models import PoetryText
 
@@ -64,29 +66,24 @@ def _excerpt(body, size=90):
     return " ".join((body or "").split())[:size]
 
 
-def _resolve_featured(theme, collection_names):
-    """按题名、作者（必要时首句）定位精选篇目，返回 (row, 展示题名)。"""
-    resolved = []
-    for item in theme.get("featured", []):
-        rows = (
-            PoetryText.objects.filter(
-                document__layer="simplified",
-                document__collection__in=collection_names,
-                title__contains=item["title"],
-                author__contains=item["author"],
-            )
-            .select_related("document")
-            .only("id", "title", "author", "paragraphs", "body", "document__collection")
-        )
-        chosen = None
-        for row in rows:
-            if item.get("first_line") and item["first_line"] not in "".join(row.paragraphs):
+def _resolve_featured(themes, rows):
+    """一次查出精选候选，再用首句确定同题同作者的版本。"""
+    pins = [(theme["code"], item) for theme in themes for item in theme.get("featured", [])]
+    if not pins:
+        return {}, set()
+    candidates = list(rows.filter(reduce(or_, (
+        Q(title__contains=item["title"], author__contains=item["author"]) for _, item in pins
+    ))).order_by("pk").values_list("pk", "title", "author", "paragraphs"))
+    resolved = {}
+    for code, item in pins:
+        for pk, title, author, paragraphs in candidates:
+            if item["title"] not in title or item["author"] not in author:
                 continue
-            chosen = row
+            if item.get("first_line") and item["first_line"] not in "".join(paragraphs):
+                continue
+            resolved.setdefault(pk, (code, item.get("display") or _clean_title(title)))
             break
-        if chosen is not None:
-            resolved.append((chosen, item.get("display") or _clean_title(chosen.title)))
-    return resolved
+    return resolved, {(_clean_title(item["title"]), item["author"]) for _, item in pins}
 
 
 @lru_cache(maxsize=1)
@@ -114,19 +111,13 @@ def _catalog():
         for theme in themes
     }
 
-    featured_by_pk = {}
-    featured_keys = set()
-    for theme in themes:
-        for item in theme.get("featured", []):
-            featured_keys.add((_clean_title(item["title"]), item["author"]))
-        for row, display in _resolve_featured(theme, collection_names):
-            featured_by_pk.setdefault(row.pk, (theme["code"], display))
-
-    buckets = {theme["code"]: [] for theme in themes}
     rows = PoetryText.objects.filter(
         document__layer="simplified",
         document__collection__in=collection_names,
-    ).values_list("pk", "title", "author", "body", "document__collection")
+    )
+    featured_by_pk, featured_keys = _resolve_featured(themes, rows)
+    buckets = {theme["code"]: [] for theme in themes}
+    rows = rows.values_list("pk", "title", "author", "body", "document__collection")
     for pk, title, author, body, collection in rows.iterator(chunk_size=2000):
         if pk in featured_by_pk:
             code, display = featured_by_pk[pk]

@@ -62,9 +62,6 @@ class EmojiQuizTests(TestCase):
                                         lexical_hash=story["lexical_hash"],
                                         properties={"derivation": "测试出处"})
 
-    def setUp(self):
-        quiz_pool.cache_clear()
-
     def test_pool_marks_missing_records_invalid(self):
         pool = quiz_pool()
         valid = [e for e in pool if e["valid"]]

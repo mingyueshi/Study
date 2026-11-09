@@ -9,7 +9,9 @@
 ``?tag=`` 主题过滤。判分端点共用，按题目 uuid 定位，不区分轨别。
 """
 import json
+from uuid import UUID
 
+from django.db import transaction
 from django.http import JsonResponse
 from django.shortcuts import render
 from django.urls import reverse
@@ -129,17 +131,28 @@ def answer(request):
     if not isinstance(data, dict) or not isinstance(data.get('uuid'), str) \
             or not isinstance(data.get('given'), dict):
         return JsonResponse({'error': '请求格式不正确。'}, status=400)
-    question = Question.objects.filter(active=True, uuid=data['uuid']).first()
+    attempt_id = data.get('attempt_id')
+    try:
+        question_id = UUID(data['uuid'])
+        if 'attempt_id' in data:
+            if not isinstance(attempt_id, str):
+                raise ValueError
+            attempt_id = UUID(attempt_id)
+    except ValueError:
+        return JsonResponse({'error': '题目标识或作答标识不正确。'}, status=400)
+    question = Question.objects.filter(active=True, uuid=question_id).first()
     if question is None:
         return JsonResponse({'error': '这道题不在题库里，请刷新页面后再试。'}, status=400)
+    from incentives.services import take_awards
     try:
-        _, result = services.record_answer(question, data['given'], records.owner_filter(request))
+        with transaction.atomic():
+            _, result = services.record_answer(
+                question, data['given'], records.owner_filter(request), attempt_id, request=request,
+            )
     except question_types.InvalidAnswer as error:
         return JsonResponse({'error': str(error)}, status=400)
-    if request.user.is_authenticated and result['correct']:
-        from incentives.services import record_event
-        record_event(request.user, 'questionbank_correct', request=request)
-    from incentives.services import take_awards
+    except services.AttemptConflict as error:
+        return JsonResponse({'error': str(error)}, status=409)
     rewards = take_awards(request)
     if rewards:
         result['rewards'] = rewards

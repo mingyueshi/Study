@@ -6,6 +6,7 @@
 """
 from datetime import timedelta
 import random
+from uuid import uuid4
 
 from django.db.models import Count, Q
 from django.utils import timezone
@@ -15,6 +16,10 @@ from .models import AnswerRecord, Question
 
 SIZES = (5, 10, 20)
 DEFAULT_SIZE = 10
+
+
+class AttemptConflict(Exception):
+    """同一个作答标识已用于另一份提交。"""
 
 
 def pick_questions(*, area='', track='', count=DEFAULT_SIZE, ids=None, tag=''):
@@ -41,7 +46,7 @@ def client_question(question):
     选择/判断题不带答案与解析，判分走服务端；自评题的答案与思路本来就是
     给孩子对照用的，直接内嵌（与多音字页内嵌读音表同思路）。
     """
-    item = {'uuid': str(question.uuid), 'type': question.type,
+    item = {'uuid': str(question.uuid), 'attempt_id': str(uuid4()), 'type': question.type,
             'area': question.area, 'stem': question.stem, 'tags': question.tags or []}
     if question.type == 'choice':
         item['options'] = question.payload.get('options', [])
@@ -63,13 +68,23 @@ def latest_wrong_ids(scope, limit=None):
     return wrong[:limit] if limit else wrong
 
 
-def record_answer(question, given, owner):
+def record_answer(question, given, owner, attempt_id=None, *, request=None):
     """判分并落一条作答记录；given 形状不合法由 types.judge 抛 InvalidAnswer。"""
     correct = types.judge(question.type, question.payload, given)
-    record = AnswerRecord.objects.create(
-        question=question, given=given or {}, correct=correct, **owner)
+    values = {'question': question, 'given': given, 'correct': correct, **owner}
+    if attempt_id is None:
+        record, created = AnswerRecord.objects.create(**values), True
+    else:
+        record, created = AnswerRecord.objects.get_or_create(attempt_id=attempt_id, defaults=values)
+        if (record.question_id != question.pk or record.given != given
+                or record.user_id != getattr(owner.get('user'), 'pk', None)
+                or record.guest_key != owner.get('guest_key', '')):
+            raise AttemptConflict('这次作答已经提交。请刷新后再练习。')
+    if created and record.correct and request is not None and request.user.is_authenticated:
+        from incentives.services import record_event
+        record_event(request.user, 'questionbank_correct', request=request)
     return record, {
-        'correct': correct,
+        'correct': record.correct,
         'reveal': types.reveal(question.type, question.payload),
         'explanation': question.payload.get('explanation', ''),
         'steps': question.payload.get('steps', ''),

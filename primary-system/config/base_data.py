@@ -62,7 +62,13 @@ TABLES = (
     "words_scenarioword",
     "words_targetchineseadoption",
 )
-PERSONAL = ("learning_progress", "words_wordprogress", "chain_gameround")
+PERSONAL = (
+    "learning_progress", "words_wordprogress", "chain_gameround",
+    "writing_writingdraft", "questionbank_answerrecord", "hanzi_polyphoneanswer",
+    "idioms_playrecord", "phrases_phraseanswer", "plurals_pluralanswer",
+    "poetry_feihualinground", "incentives_pointevent", "incentives_redemption",
+    "incentives_checkin", "incentives_badgeaward",
+)
 LIMIT = 40 * 1024 * 1024
 SHARD_BYTES = 30 * 1024 * 1024
 
@@ -587,7 +593,9 @@ def restore_package(
     backup_already=None,
 ):
     manifest = verify_package(root)  # No target writes before all package checks pass.
-    database = sqlite3.connect(database_path, isolation_level=None)
+    database = open_readonly(database_path) if verify_only else sqlite3.connect(
+        database_path, isolation_level=None,
+    )
     try:
         database.execute("PRAGMA foreign_keys=ON")
         database.execute("BEGIN IMMEDIATE" if not verify_only else "BEGIN")

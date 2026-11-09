@@ -38,8 +38,6 @@ class QuizPoolTests(TestCase):
             SourceRecord.objects.create(
                 release=cls.release, binding=binding, headword=headword,
                 definition=definition, lexical_hash="hash-" + headword, properties={})
-        question_pool.cache_clear()
-        char_bank.cache_clear()
         cls.pool = question_pool()
 
     def test_pool_keeps_only_clean_idioms(self):

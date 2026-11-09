@@ -49,7 +49,7 @@ urlpatterns = [
     path('accounts/profile/', accounts_views.profile, name='profile'),
     path('accounts/register/', accounts_views.register, name='register'),
     path('accounts/login/', auth_views.LoginView.as_view(template_name='accounts/login.html', authentication_form=LearnerAuthenticationForm), name='login'),
-    path('accounts/logout/', auth_views.LogoutView.as_view(), name='logout'),
+    path('accounts/logout/', accounts_views.LearnerLogoutView.as_view(), name='logout'),
     path('accounts/password/', auth_views.PasswordChangeView.as_view(template_name='accounts/password.html'), name='password_change'),
     path('accounts/password/done/', auth_views.PasswordChangeDoneView.as_view(template_name='accounts/password_done.html'), name='password_change_done'),
     path('api/v1/catalog/', catalog.catalog_api),

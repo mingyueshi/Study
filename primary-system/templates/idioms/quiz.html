@@ -16,7 +16,7 @@
   <div class="quiz-chips"><span class="quiz-label">难度</span>{% for chip in level_chips %}<a class="chip{% if chip.0 == level %} on{% endif %}" href="?level={{ chip.0 }}&amp;source={{ source }}">{{ chip.1 }}</a>{% endfor %}</div>
   <div class="quiz-chips"><span class="quiz-label">题库</span>{% for chip in source_chips %}<a class="chip{% if chip.on %} on{% endif %}" href="?level={{ level }}&amp;source={{ chip.value }}">{{ chip.label }}<i>{{ chip.size }}</i></a>{% endfor %}</div>
 </div>
-<section class="quiz-board" data-quiz-round data-report-url="{% url 'idiom-quiz-report' %}">
+{% if round %}<section class="quiz-board" data-quiz-round data-report-url="{% url 'idiom-quiz-report' %}">
   <p class="quiz-definition">{{ round.definition }}</p>
   <div class="quiz-slots">
     {% for slot in round.slots %}{% if slot.shown %}<span class="quiz-slot shown">{{ slot.shown }}</span>{% else %}<button class="quiz-slot blank" type="button" data-answer="{{ slot.answer }}" data-quiz-slot aria-label="待填的成语字"></button>{% endif %}{% endfor %}
@@ -41,5 +41,6 @@
     </div>
   </section>
 </section>
+{% else %}<p class="empty">成语题库暂时没有可用的题目。</p>{% endif %}
 <p class="quiz-note">成语与释义来自当前生效的成语记录；难度就是亮出的字数——亮 3 个只剩一个空，一个都不亮就是挑战模式。</p>
 {% endblock %}

@@ -9,7 +9,7 @@
 - manifest.json / SHA256SUMS / 固定时间戳，重复构建字节一致。
 
 用法：cd primary-system && python3 scripts/build_unihan18_package.py
-输出：../references/01f_unihan_18_2026-11-06.zip
+输出：data/reference-archives/01f_unihan_18_2026-11-06.zip
 """
 import hashlib
 import io
@@ -25,7 +25,7 @@ from pathlib import Path
 
 BASE = Path(__file__).resolve().parent.parent
 LOCAL_UNIHAN = BASE / "data/lexicon/unihan-18.0.0.zip"
-DESTINATION = BASE.parent / "references/01f_unihan_18_2026-11-06.zip"
+DESTINATION = BASE / "data/reference-archives/01f_unihan_18_2026-11-06.zip"
 AUX_DIR = Path(sys.argv[1]) if len(sys.argv) > 1 else Path("/tmp/unihan18-src")
 
 VERSION = "18.0.0"

@@ -8,7 +8,6 @@ emoji 映射是编辑内容（``data/emoji.json``，AI 辅助生成、人工核�
 import json
 import secrets
 from dataclasses import dataclass
-from functools import lru_cache
 from pathlib import Path
 import re
 
@@ -20,7 +19,7 @@ from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.decorators.http import require_GET, require_POST
 
-from .catalog import SOURCE_CODE, dictionary_records, matches_pin, with_details
+from .catalog import SOURCE_CODE, matches_pin, pinned_records
 from .models import PlayRecord
 from .records import record_play
 
@@ -66,11 +65,10 @@ def validate(curriculum):
         raise ImproperlyConfigured("表情题库至少需要 40 个成语。")
 
 
-@lru_cache(maxsize=1)
 def quiz_pool():
     """题库：钉词校验通过的条目 + 词典 payload（拼音/释义/entry 链接）。"""
     curriculum = load_entries()
-    records = {str(record.binding_id): record for record in with_details(dictionary_records())}
+    records = pinned_records(entry["binding_id"] for entry in curriculum["entries"])
     pool = []
     for entry in curriculum["entries"]:
         record = records.get(entry["binding_id"])

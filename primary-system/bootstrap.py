@@ -126,6 +126,12 @@ def main():
             run("manage.py", "seed_platform")
             run("manage.py", "seed_lexicon_roles")
     run("manage.py", "check")
+    if not args.skip_content:
+        batch_mode = ["--verify-only"] if existing and not args.refresh_data else []
+        for batch in sorted((root / "questionbank/data/questions").glob("*.json")):
+            run("manage.py", "import_questions", "--input", str(batch), *batch_mode)
+    if not args.skip_content and (not existing or args.refresh_data or args.serve):
+        run("manage.py", "build_feihualing_index", "--if-needed")
     print("本地数据库：" + str(database), flush=True)
     print(
         (

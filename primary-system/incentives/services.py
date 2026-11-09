@@ -9,7 +9,7 @@ import logging
 from datetime import timedelta
 
 from django.contrib.auth import get_user_model
-from django.db import transaction
+from django.db import connection, transaction
 from django.db.models import Q, Sum
 from django.utils import timezone
 
@@ -21,6 +21,13 @@ logger = logging.getLogger(__name__)
 
 class RedemptionError(Exception):
     """兑换失败（余额不足、奖励下架等）；异常文案是给孩子的中文提示。"""
+
+
+def _lock_account(user_id):
+    # PostgreSQL 的较弱行锁仍能串行记账，也允许其他学习记录引用这个账号。
+    get_user_model().objects.select_for_update(
+        no_key=connection.features.has_select_for_no_key_update,
+    ).get(pk=user_id)
 
 
 # ---------------------------------------------------------------------------
@@ -45,6 +52,7 @@ def record_event(user, code, *, request=None, note=None):
     awards = []
     try:
         with transaction.atomic():
+            _lock_account(user.pk)
             today = timezone.localdate()
             if rule['points'] > 0:
                 used = PointEvent.objects.filter(user=user, code=code, created_at__date=today).count()
@@ -110,8 +118,9 @@ def _badge_awards(user, stats=None, *, cats=None):
         if cats is not None and not set(badge['cats']) & cats:
             continue
         if stats.get(badge['key'], 0) >= badge['target']:
-            BadgeAward.objects.create(user=user, badge=badge['code'])
-            fresh.append(badge)
+            _, created = BadgeAward.objects.get_or_create(user=user, badge=badge['code'])
+            if created:
+                fresh.append(badge)
     return fresh
 
 
@@ -157,7 +166,7 @@ def stats_for(user):
     from writing.models import WritingDraft
 
     points = PointEvent.objects.filter(user=user).aggregate(
-        earned=Sum('points', filter=Q(points__gt=0)), balance=Sum('points'))
+        earned=Sum('points', filter=Q(points__gt=0) & ~Q(code='redeem_refund')), balance=Sum('points'))
     checkin = checkin_status(user)
     quiz = PlayRecord.objects.filter(user=user, game=PlayRecord.Game.QUIZ).aggregate(total=Sum('correct'))
     finished = GameRound.objects.filter(user=user, status=GameRound.Status.FINISHED).exclude(ended_reason='')
@@ -210,7 +219,7 @@ def badge_overview(user, stats=None):
 def home_summary(user):
     """首页激励条的轻量汇总（积分、称号、打卡连击），不碰勋章墙。"""
     points = PointEvent.objects.filter(user=user).aggregate(
-        earned=Sum('points', filter=Q(points__gt=0)), balance=Sum('points'))
+        earned=Sum('points', filter=Q(points__gt=0) & ~Q(code='redeem_refund')), balance=Sum('points'))
     checkin = checkin_status(user)
     current, _ = level_for(points['earned'] or 0)
     return {'balance': points['balance'] or 0, 'earned': points['earned'] or 0,
@@ -228,7 +237,7 @@ def redeem(user, item_id):
     if item is None:
         raise RedemptionError('这个奖励现在不能兑换，请看看别的奖励吧。')
     # 锁用户行串行化同一账号的并发兑换；余额来自流水求和，账实永不分离。
-    get_user_model().objects.select_for_update().get(pk=user.pk)
+    _lock_account(user.pk)
     balance = PointEvent.objects.filter(user=user).aggregate(total=Sum('points'))['total'] or 0
     if balance < item.cost:
         raise RedemptionError(f'积分还差 {item.cost - balance} 分，再学一学就能兑换啦。')
@@ -237,23 +246,26 @@ def redeem(user, item_id):
     return redemption
 
 
-@transaction.atomic
-def mark_redemption_done(redemption, note=''):
-    """家长核销：标记已完成。"""
-    redemption.status = Redemption.Status.DONE
-    redemption.resolved_at = timezone.now()
-    redemption.resolved_note = note or ''
-    redemption.save(update_fields=('status', 'resolved_at', 'resolved_note'))
+def _resolve_pending(redemption, status, note):
+    resolved = {'status': status, 'resolved_at': timezone.now(), 'resolved_note': note or ''}
+    if not Redemption.objects.filter(pk=redemption.pk, status=Redemption.Status.PENDING).update(**resolved):
+        return None
+    for field, value in resolved.items():
+        setattr(redemption, field, value)
     return redemption
+
+
+def mark_redemption_done(redemption, note=''):
+    """家长核销：只有仍在等待的兑换可标记完成。"""
+    return _resolve_pending(redemption, Redemption.Status.DONE, note)
 
 
 @transaction.atomic
 def cancel_redemption(redemption, note=''):
     """家长取消：记录退回，并把积分原路退回流水。"""
-    redemption.status = Redemption.Status.CANCELLED
-    redemption.resolved_at = timezone.now()
-    redemption.resolved_note = note or ''
-    redemption.save(update_fields=('status', 'resolved_at', 'resolved_note'))
+    _lock_account(redemption.user_id)
+    if not _resolve_pending(redemption, Redemption.Status.CANCELLED, note):
+        return None
     PointEvent.objects.create(user=redemption.user, code='redeem_refund', points=redemption.cost,
                               note=f'退回「{redemption.item_name}」')
     return redemption

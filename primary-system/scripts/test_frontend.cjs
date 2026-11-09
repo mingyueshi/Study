@@ -192,7 +192,10 @@ function wordsPage(fetch, extraWords = []) {
     scenarios: [{ id: '1', name: 'Fruit', zh: '水果', color: '#fff', total: 1, learned: 0 }],
     words: [{ id: '1', target_id: 'target-a', revision: 0, chinese_version_id: null, presentation_revision: 0, en: 'apple', zh: '苹果', ipa: '', scenario: '1', learned: false }, ...extraWords],
   });
-  const context = vm.createContext({ document: { getElementById: get, cookie: '' }, window: {}, fetch });
+  const context = vm.createContext({
+    document: { getElementById: get, cookie: '' }, window: {}, fetch,
+    URLSearchParams, location: { search: '' },
+  });
   run('words/words.js', context);
   return {
     get,

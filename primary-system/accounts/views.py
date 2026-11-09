@@ -1,12 +1,23 @@
 from django.contrib import messages
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.views import LogoutView
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.utils.http import url_has_allowed_host_and_scheme
 from django.views.decorators.cache import never_cache
 from django.views.decorators.http import require_http_methods
 from .forms import LearnerRegistrationForm, ProfileForm
+from writing.services import GUEST_KEY as WRITING_GUEST_KEY
+
+
+class LearnerLogoutView(LogoutView):
+    def post(self, request, *args, **kwargs):
+        writing_guest = request.session.get(WRITING_GUEST_KEY)
+        response = super().post(request, *args, **kwargs)
+        if writing_guest:
+            request.session[WRITING_GUEST_KEY] = writing_guest
+        return response
 
 
 def _safe_next(request, default='/'):

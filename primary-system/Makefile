@@ -14,10 +14,14 @@ install: ## 初始化环境：建 .venv、装依赖、校验/恢复基础数据�
 	$(BOOTSTRAP)
 
 run: ## 启动开发服务器 http://127.0.0.1:$(PORT)（需先 install）
+	$(MANAGE) build_feihualing_index --if-needed
 	PRIMARY_DEBUG=1 $(MANAGE) runserver 127.0.0.1:$(PORT)
 
 test: ## 跑全量测试（需先 install）
 	$(MANAGE) test
+
+test-frontend: ## 跑 Node 前端回归测试
+	node --test scripts/test_frontend.cjs scripts/test_feihualing_frontend.cjs
 
 check: ## Django system check（快速体检）
 	$(MANAGE) check
@@ -73,4 +77,4 @@ ancient-text: ## 重新生成古文经典资料包 01e（--source 传本地克�
 unihan18-package: ## 重新生成 Unihan 18.0.0 全量属性资料包 01f（辅助文件缓存目录见 scripts/build_unihan18_package.py）
 	$(PYTHON) scripts/build_unihan18_package.py
 
-.PHONY: help install run test check makemigrations migrate seed superuser shell repair-data writing-data questionbank-data grammar-data phrases-data mathbook-data chinesebook-data phoneme-audio word-tree ancient-text unihan18-package
+.PHONY: help install run test test-frontend check makemigrations migrate seed superuser shell repair-data writing-data questionbank-data grammar-data phrases-data mathbook-data chinesebook-data phoneme-audio word-tree ancient-text unihan18-package

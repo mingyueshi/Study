@@ -72,7 +72,7 @@ def validate_entry(entry, index):
         raise ValidationError(f'第 {index + 1} 题内容身份与来源定位不一致（应为 {expected}）。')
 
 
-def import_batch(payload, *, source='', dry_run=False):
+def import_batch(payload, *, source='', dry_run=False, verify_only=False):
     """导入一个批次：校验 → 冲突检测 → 事务写入（dry_run 回滚）→ 回执。"""
     if not isinstance(payload, dict):
         raise ValidationError('批次文件必须是对象。')
@@ -92,6 +92,8 @@ def import_batch(payload, *, source='', dry_run=False):
             return {'status': 'already', 'batch_id': batch_id,
                     'total': existing_receipt.total, 'imported': 0, 'duplicated': existing_receipt.imported}
         raise ValidationError('批次标识已被不同内容的批次占用，请换新的 batch_id。')
+    if verify_only:
+        raise ValidationError(f'尚未导入题库批次 {batch_id}。请运行 import_questions 导入该批次。')
 
     for index, entry in enumerate(questions):
         validate_entry(entry, index)

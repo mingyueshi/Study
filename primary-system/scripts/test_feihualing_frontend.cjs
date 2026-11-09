@@ -24,6 +24,7 @@ function page(fetch,initial=base()) {
   get('feihualing').dataset.api='/poetry/feihualing/api/action/';
   get('fh-form').requestSubmit=()=>get('fh-form').handlers.submit({preventDefault(){}});
   vm.runInNewContext(fs.readFileSync(path.join(__dirname,'../static/poetry/feihualing.js'),'utf8'),{
+    window:{},
     document:{getElementById:get,cookie:'primary_csrftoken=csrf-value'},
     fetch:async(...args)=>{calls.push(args);return fetch(...args);},
   });

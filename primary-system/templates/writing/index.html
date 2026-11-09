@@ -33,7 +33,7 @@
     {% for sentence in materials.sentences %}{% if forloop.first %}<div class="wr-chips"><span class="wr-seclabel">比喻拟人句</span>{% endif %}<button class="wr-chip wr-sentence" type="button" data-say="{{ sentence }}" aria-label="朗读比喻句">{{ sentence }}</button>{% if forloop.last %}</div>{% endif %}{% endfor %}
   </section>
   <section class="wr-group" id="notebook" style="--c: #2f7d4f">
-    <div class="section-heading"><div><h2>📓 我的作文本</h2><p>写完点保存，草稿就存进作文本；游客保存在本浏览器，登录后跟着账号走。</p></div><span class="tag" id="wr-draft-count"></span></div>
+    <div class="section-heading"><div><h2>📓 我的作文本</h2><p>写完点保存。登录时写的草稿跟着账号走，游客草稿可以在同一浏览器退出登录后接着写。</p></div><span class="tag" id="wr-draft-count"></span></div>
     <div class="wr-editor"><input id="wr-title" type="text" maxlength="120" placeholder="作文标题…" aria-label="作文标题"><textarea id="wr-content" rows="12" placeholder="从这里开始写……写完点下面的保存。" aria-label="作文正文"></textarea>
       <p class="wr-stats" id="wr-stats" aria-live="polite"></p><p class="wr-hints" id="wr-hints" aria-live="polite"></p>
       <p class="wr-feedback" id="wr-feedback" role="status" aria-live="polite"></p>

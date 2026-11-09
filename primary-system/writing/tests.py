@@ -111,6 +111,17 @@ class DraftApiTests(TestCase):
         self.assertEqual(row.user, user)
         self.assertEqual(row.guest_key, '')
 
+    def test_guest_draft_can_be_resumed_after_register_and_logout(self):
+        draft = self.create_draft(self.client).json()
+        response = self.client.post('/accounts/register/', {
+            'username': 'new-writer', 'password1': 'family-test', 'password2': 'family-test',
+        })
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(self.client.get('/writing/api/drafts/').json()['drafts'], [])
+        self.create_draft(self.client, title='账号草稿')
+        self.assertEqual(self.client.post('/accounts/logout/').status_code, 302)
+        self.assertEqual(self.client.get('/writing/api/drafts/').json()['drafts'], [draft])
+
     def test_service_conflict_exception(self):
         user = get_user_model().objects.create_user(username='w2', password='pw-123456')
         from django.test import RequestFactory

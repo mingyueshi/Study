@@ -14,6 +14,7 @@
 
 快速开始：
 
+- 乐学堂统一系统：在 [`primary-system/`](primary-system/) 运行 `python3.12 bootstrap.py --serve`。目录自带离线基础包和 211 道题，详见 [本地运行](primary-system/README.md#本地运行)。
 - 小学版：双击 [`primary/index.html`](primary/index.html)，详见 [`primary/README.md`](primary/README.md)
 - 语文知识点：双击 [`primary/knowledge.html`](primary/knowledge.html)，人教版（统编版·新课标）四年级上册单元知识点总结，配课文图示与实景照片，附作者小传、原文金句、真实百科与B站拓展视频（需联网），可点读、可搜索、可打印。
 - 数学知识点：双击 [`primary/math.html`](primary/math.html)，北师大版（新课标）四年级上册单元知识点总结，含例题、图示与互动演示（转角认角、竖式逐步算、行程小车等）、公式速查与易错诊所。

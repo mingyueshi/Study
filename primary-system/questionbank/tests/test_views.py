@@ -136,10 +136,29 @@ class AnswerApiTests(TestCase):
         self.assertEqual(self.client.post(reverse('questionbank-answer'), data='not json',
                                           content_type='application/json').status_code, 400)
         self.assertEqual(post_answer(self.client, {'uuid': str(question.uuid)}).status_code, 400)
+        self.assertEqual(post_answer(self.client, {'uuid': 'abc', 'given': {'value': 0}}).status_code, 400)
         self.assertEqual(post_answer(self.client, {'uuid': str(question.uuid), 'given': {'value': 9}}).status_code, 400)
         unknown = make_question(source_ref='math:not-imported').uuid
         self.assertEqual(post_answer(self.client, {'uuid': str(unknown), 'given': {'value': 0}}).status_code, 400)
         self.assertEqual(AnswerRecord.objects.count(), 0)
+
+    def test_retry_keeps_one_answer_and_one_award_but_new_practice_can_score(self):
+        from accounts.models import User
+        from incentives.models import PointEvent
+
+        self.client.force_login(User.objects.create_user(username='retry-student'))
+        seed_choice()
+        url = reverse('questionbank-practice')
+        question = self.client.get(url).context['questions'][0]
+        submission = {'uuid': question['uuid'], 'attempt_id': question['attempt_id'], 'given': {'value': 0}}
+        self.assertTrue(post_answer(self.client, submission).json()['correct'])
+        self.assertTrue(post_answer(self.client, submission).json()['correct'])
+        self.assertEqual(post_answer(self.client, {**submission, 'given': {'value': 1}}).status_code, 409)
+        self.assertEqual(AnswerRecord.objects.count(), 1)
+        self.assertEqual(PointEvent.objects.filter(code='questionbank_correct').count(), 1)
+        submission['attempt_id'] = self.client.get(url).context['questions'][0]['attempt_id']
+        self.assertTrue(post_answer(self.client, submission).json()['correct'])
+        self.assertEqual(AnswerRecord.objects.count(), 2)
 
 
 class WrongViewTests(TestCase):

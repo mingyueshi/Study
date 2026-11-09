@@ -6,11 +6,11 @@ from reference_library.importing import run_import
 
 
 class Command(BaseCommand):
-    help = "核验当前六包并按保留领域全量导入；--dry-run不写DB或项目资产。"
+    help = "核验当前资料包并按保留领域全量导入；--dry-run不写DB或项目资产。"
 
     def add_arguments(self, p):
         p.add_argument(
-            "--input-root", default=str(settings.BASE_DIR.parent / "references")
+            "--input-root", default=str(settings.REFERENCE_ARCHIVE_ROOT)
         )
         p.add_argument("--dry-run", action="store_true")
 
