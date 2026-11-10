@@ -12,18 +12,14 @@
       <p class="mystery-lead">{{ case.opening }}</p>
       <nav class="mystery-jumps" aria-label="案卷小节">
         {% if case.background %}<a href="#background">{{ case.background.title }} ↓</a>{% endif %}
+        {% if case.depth_explorer %}<a href="#ocean-depths">沿标尺下潜 ↓</a>{% endif %}
         <a href="#evidence">看线索 ↓</a>
+        {% if case.media %}<a href="#field-notes">看动态线索 ↓</a>{% endif %}
         <a href="#challenge">试着判断 ↓</a>
         <a href="#findings">查看调查结论 ↓</a>
       </nav>
     </div>
-    <figure class="mystery-figure">
-      <img src="{% static case.figure.path %}" alt="{{ case.figure.alt }}">
-      <figcaption>
-        <strong>{{ case.figure.caption }}</strong>
-        <span>{{ case.figure.credit }} · <a href="#source-{{ case.figure.source }}">图像出处</a></span>
-      </figcaption>
-    </figure>
+    {% include 'mysteries/figure.html' with figure=case.figure only %}
   </header>
   {% if case.background %}
   <section id="background" class="mystery-section" aria-labelledby="background-heading">
@@ -55,6 +51,10 @@
   </details>
   {% endif %}
 
+  {% if case.depth_explorer %}
+    {% include 'mysteries/ocean-depths.html' with explorer=case.depth_explorer only %}
+  {% endif %}
+
   <section id="evidence" class="mystery-section" aria-labelledby="evidence-heading">
     <header class="mystery-section-heading">
       <p class="mystery-kicker">第一步</p>
@@ -66,6 +66,9 @@
       <li class="mystery-panel mystery-evidence">
         <span class="mystery-number" aria-hidden="true">0{{ forloop.counter }}</span>
         <h3>{{ clue.title }}</h3>
+        {% if clue.image %}
+          {% include 'mysteries/figure.html' with figure=clue.image is_clue=True only %}
+        {% endif %}
         <dl>
           <dt>观察到了什么</dt>
           <dd>{{ clue.observation }}</dd>
@@ -77,6 +80,21 @@
       {% endfor %}
     </ol>
   </section>
+
+  {% if case.media %}
+  <section id="field-notes" class="mystery-section" aria-labelledby="field-notes-heading">
+    <header class="mystery-section-heading">
+      <h2 id="field-notes-heading">把线索动起来看</h2>
+      <p>留意画面里变了什么，也看看哪些地方还需要更多证据。</p>
+    </header>
+    <div class="mystery-media-list">
+      {% for item in case.media %}
+        {% include 'mysteries/media.html' with item=item number=forloop.counter only %}
+      {% endfor %}
+    </div>
+  </section>
+  <script src="{% static 'mysteries/media.js' %}" defer></script>
+  {% endif %}
 
   <section id="challenge" class="mystery-section mystery-panel mystery-challenge" aria-labelledby="challenge-heading">
     <header class="mystery-section-heading">

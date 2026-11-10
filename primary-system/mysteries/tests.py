@@ -20,6 +20,48 @@ def iter_strings(value):
 
 
 class MysteryContentTests(SimpleTestCase):
+    def assert_local_figure(self, figure, sources):
+        self.assertTrue(finders.find(figure['path']))
+        for field in ('alt', 'caption', 'credit'):
+            self.assertTrue(figure[field].strip(), field)
+        self.assertIn(figure['source'], range(1, len(sources) + 1))
+
+    def assert_local_media(self, item, sources):
+        self.assert_local_figure(item, sources)
+        self.assertTrue(item['title'].strip())
+        kind = item['kind']
+        self.assertIn(kind, ('video', 'animation', 'diagram'))
+        if kind == 'diagram':
+            self.assertIn(len(item['steps']), range(2, 5))
+            for step in item['steps']:
+                self.assertTrue(step['label'].strip())
+                self.assertTrue(step['text'].strip())
+                for axis in ('x', 'y'):
+                    self.assertIs(type(step[axis]), int)
+                    self.assertIn(step[axis], range(5, 96))
+        else:
+            self.assertTrue(finders.find(item['poster']))
+            self.assertTrue(item['path'].endswith('.mp4' if kind == 'video' else '.gif'))
+
+    def assert_depth_explorer(self, explorer, sources):
+        for field in ('title', 'intro', 'scale_note'):
+            self.assertTrue(explorer[field].strip(), field)
+        self.assertIn(explorer['source'], range(1, len(sources) + 1))
+        self.assertEqual(explorer['approximate_limit'], 11000)
+        layers = explorer['layers']
+        self.assertEqual(
+            [(layer['minimum'], layer['maximum']) for layer in layers],
+            [(0, 200), (200, 1000), (1000, 4000), (4000, 6000), (6000, None)],
+        )
+        for layer in layers:
+            for field in ('name', 'condition', 'description'):
+                self.assertTrue(layer[field].strip(), field)
+            self.assertIn(len(layer['animals']), range(1, 4))
+            for animal in layer['animals']:
+                self.assert_local_figure(animal, sources)
+                self.assertTrue(animal['title'].strip())
+                self.assertTrue(animal['depth_note'].strip())
+
     def test_case_contract(self):
         cases = load_cases()
         self.assertTrue({'mars-life', 'dark-matter', 'deep-ocean', 'voynich'} <= set(cases))
@@ -32,16 +74,13 @@ class MysteryContentTests(SimpleTestCase):
                     self.assertTrue(case[field].strip(), field)
                 date.fromisoformat(case['checked_on'])
                 figure = case['figure']
-                self.assertTrue(finders.find(figure['path']))
-                self.assertTrue(figure['alt'].strip())
-                self.assertTrue(figure['caption'].strip())
-                self.assertTrue(figure['credit'].strip())
+                sources = case['sources']
+                self.assert_local_figure(figure, sources)
                 if 'detail_path' in figure:
                     self.assertTrue(finders.find(figure['detail_path']))
                     self.assertTrue(figure['detail_alt'].strip())
                     self.assertTrue(figure['detail_label'].strip())
                     self.assertTrue(figure['detail_prompt'].strip())
-                sources = case['sources']
                 self.assertGreaterEqual(len(sources), 2)
                 for source in sources:
                     url = urlsplit(source['url'])
@@ -59,12 +98,17 @@ class MysteryContentTests(SimpleTestCase):
                     self.assertTrue(background['sources'])
                     for number in background['sources']:
                         self.assertIn(number, range(1, len(sources) + 1))
-                self.assertIn(figure['source'], range(1, len(sources) + 1))
                 self.assertIn(len(case['evidence']), range(3, 6))
                 for clue in case['evidence']:
                     self.assertIn(clue['source'], range(1, len(sources) + 1))
                     for field in ('title', 'observation', 'meaning'):
                         self.assertTrue(clue[field].strip())
+                    if 'image' in clue:
+                        self.assert_local_figure(clue['image'], sources)
+                for item in case.get('media', []):
+                    self.assert_local_media(item, sources)
+                if 'depth_explorer' in case:
+                    self.assert_depth_explorer(case['depth_explorer'], sources)
                 self.assertTrue(case['challenge']['prompt'].strip())
                 choices = case['challenge']['choices']
                 self.assertEqual(len(choices), 3)
@@ -82,7 +126,13 @@ class MysteryPageTests(SimpleTestCase):
         response = self.client.get(reverse('mysteries'))
         self.assertContains(response, '未解之谜研究所')
         self.assertFalse(response.cookies)
-        for slug, case in load_cases().items():
+        cases = load_cases()
+        self.assertContains(response, f'{len(cases)} 份案卷')
+        for number, category in enumerate(dict.fromkeys(case['category'] for case in cases.values()), 1):
+            self.assertContains(response, f'href="#case-group-{number}"')
+            self.assertContains(response, f'id="case-group-{number}"')
+            self.assertContains(response, category)
+        for slug, case in cases.items():
             self.assertContains(response, reverse('mystery-case', args=[slug]))
             self.assertContains(response, case['title'])
 
@@ -92,6 +142,33 @@ class MysteryPageTests(SimpleTestCase):
                 response = self.client.get(reverse('mystery-case', args=[slug]))
                 self.assertContains(response, case['opening'])
                 self.assertContains(response, case['unresolved'])
+                for clue in case['evidence']:
+                    if 'image' in clue:
+                        self.assertContains(response, clue['image']['alt'])
+                        self.assertContains(response, clue['image']['caption'])
+                if case.get('media'):
+                    self.assertContains(response, 'href="#field-notes"', count=1)
+                    for item in case['media']:
+                        self.assertContains(response, item['title'])
+                        self.assertContains(response, f'/static/{item["path"]}')
+                        if item['kind'] == 'diagram':
+                            for step in item['steps']:
+                                self.assertContains(response, step['text'])
+                        else:
+                            self.assertContains(response, f'/static/{item["poster"]}')
+                else:
+                    self.assertNotContains(response, 'id="field-notes"')
+                if 'depth_explorer' in case:
+                    self.assertContains(response, 'href="#ocean-depths"', count=1)
+                    for layer in case['depth_explorer']['layers']:
+                        marker = f'ocean-depth-{layer["minimum"]}'
+                        self.assertContains(response, f'href="#{marker}"', count=1)
+                        self.assertContains(response, f'id="{marker}"', count=1)
+                        for animal in layer['animals']:
+                            self.assertContains(response, f'/static/{animal["path"]}')
+                            self.assertContains(response, animal['depth_note'])
+                else:
+                    self.assertNotContains(response, 'id="ocean-depths"')
                 if 'background' in case:
                     background = case['background']
                     self.assertContains(response, 'href="#background"', count=1)

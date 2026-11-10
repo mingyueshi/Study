@@ -4,9 +4,9 @@
     {
       "slug": "mars-life",
       "title": "火星上曾经有过生命吗？",
-      "category": "行星探索",
+      "category": "太空与信号",
       "icon": "🚀",
-      "summary": "先认识地球的红色邻居，再跟着毅力号从古河道和岩石中寻找生命线索。",
+      "summary": "跟着毅力号看火星全景，再点读轨道图，找找古河道从哪里流进陨石坑。",
       "opening": "想象你是毅力号火星车的驾驶员。眼前的火星又冷又干，地图上却有一片像河流入湖时留下的扇形地貌。出发调查前，我们先认识这颗红色行星。",
       "figure": {
         "path": "mysteries/jezero.jpg",
@@ -49,7 +49,11 @@
           }
         ],
         "transition": "今天的火星仍有水冰，但液态水很难在地表长久停留。那古河道是怎么来的？跟着毅力号去耶泽罗陨石坑，看看古代河流和湖泊留下了什么，这里过去又有没有适合微生物生活的环境。",
-        "sources": [4, 5, 6]
+        "sources": [
+          4,
+          5,
+          6
+        ]
       },
       "evidence": [
         {
@@ -71,32 +75,103 @@
           "source": 3
         }
       ],
+      "media": [
+        {
+          "kind": "video",
+          "title": "跟毅力号从地面看古河道一带",
+          "path": "mysteries/mars-ancient-river.mp4",
+          "poster": "mysteries/mars-ancient-river.jpg",
+          "alt": "毅力号拍摄的火星全景从前方碎石扫到远处坑缘",
+          "caption": "视线从脚下的碎石移向远处的坑缘。这是毅力号在耶泽罗陨石坑拍摄的照片拼成的全景，颜色经过处理，方便看清地形。再对照下面的轨道图，找找古河从哪里穿过坑边。约 18 秒，无声节选。",
+          "credit": "NASA／JPL-Caltech／ASU／MSSS",
+          "source": 2
+        },
+        {
+          "kind": "diagram",
+          "title": "从轨道上找河道和扇形",
+          "path": "mysteries/jezero.jpg",
+          "alt": "耶泽罗陨石坑轨道图，左边的沟谷通向图中央扇形，扇形右边是坑内低地",
+          "caption": "从上往下看，河道和扇形的关系就清楚多了。按顺序点三个读图步骤，看看从前的水流可能怎么走。",
+          "credit": "NASA／JPL-Caltech／MSSS／JHU-APL，乐学堂加注",
+          "source": 1,
+          "steps": [
+            {
+              "label": "河道穿过坑边",
+              "text": "先找左边狭长的沟谷。它从坑外穿过坑边，通向陨石坑里面。研究人员认为，古河就是从这里流进来的。",
+              "x": 28,
+              "y": 53
+            },
+            {
+              "label": "泥沙堆成扇形",
+              "text": "顺着沟谷往右，地面像一把张开的扇子。水流进开阔的湖里会变慢，带来的泥沙和小石块可以在河口堆积。",
+              "x": 57,
+              "y": 53
+            },
+            {
+              "label": "再往坑里看",
+              "text": "扇形的边缘伸向坑内低地。研究人员把这些形状和火星车看到的岩层合起来，推断这里曾经有湖。",
+              "x": 78,
+              "y": 68
+            }
+          ]
+        }
+      ],
       "challenge": {
         "prompt": "如果手头只有古河道的照片，哪句话最有依据？",
         "choices": [
-          {"label": "古河道里一定生活过鱼。", "correct": false, "feedback": "照片里有地形线索。要判断有没有鱼，还需要能指向鱼或其他生物的证据。"},
-          {"label": "这个地方很可能曾有水流过。", "correct": true, "feedback": "河道连着扇形地貌，像水流把泥沙带到开阔处留下的形状。要追查生命，还得看岩石里有没有更直接的线索。"},
-          {"label": "这个坑现在一定还有一湖水。", "correct": false, "feedback": "地形可以保留过去的痕迹。要判断现在有多少水，需要观察今天的火星。"}
+          {
+            "label": "古河道里一定生活过鱼。",
+            "correct": false,
+            "feedback": "照片里有地形线索。要判断有没有鱼，还需要能指向鱼或其他生物的证据。"
+          },
+          {
+            "label": "这个地方很可能曾有水流过。",
+            "correct": true,
+            "feedback": "河道连着扇形地貌，像水流把泥沙带到开阔处留下的形状。要追查生命，还得看岩石里有没有更直接的线索。"
+          },
+          {
+            "label": "这个坑现在一定还有一湖水。",
+            "correct": false,
+            "feedback": "地形可以保留过去的痕迹。要判断现在有多少水，需要观察今天的火星。"
+          }
         ]
       },
       "known": "耶泽罗陨石坑过去有河流和湖泊。",
       "unresolved": "科学家还没有确认火星上曾有生命。岩石上的斑点是古代微生物留下的，还是普通化学反应形成的？",
       "next_step": "分析更多样本，并用实验检验普通化学反应能否做出类似的斑点。",
       "deep_dive": "有水、有适合微生物生活的环境、发现生命，分别需要不同的证据。评估疑似生命线索时，可以比较它的形状、矿物组成和所在岩层，再检查多种成因能否同时解释这些观察。",
-      "checked_on": "2026-11-09",
+      "checked_on": "2026-11-10",
       "sources": [
-        {"title": "NASA｜耶泽罗陨石坑轨道影像", "url": "https://science.nasa.gov/photojournal/jezero-crater-mars-2020s-landing-site/"},
-        {"title": "NASA｜毅力号调查火星古河道", "url": "https://science.nasa.gov/resource/perseverance-rover-zooms-in-on-ancient-mars-river/"},
-        {"title": "NASA｜疑似生命线索专题报告", "url": "https://science.nasa.gov/mars/the-mars-report/2025-september-special-edition/"},
-        {"title": "NASA｜太阳系与银河系", "url": "https://science.nasa.gov/solar-system/solar-system-facts/"},
-        {"title": "NASA｜火星概况与地表环境", "url": "https://science.nasa.gov/mars/facts/"},
-        {"title": "NASA｜火星与地球参数对照", "url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/marsfact.html?level=1"}
+        {
+          "title": "NASA｜耶泽罗陨石坑轨道影像",
+          "url": "https://science.nasa.gov/photojournal/jezero-crater-mars-2020s-landing-site/"
+        },
+        {
+          "title": "NASA｜毅力号全景短片与古河道调查",
+          "url": "https://science.nasa.gov/resource/perseverance-rover-zooms-in-on-ancient-mars-river/"
+        },
+        {
+          "title": "NASA｜疑似生命线索专题报告",
+          "url": "https://science.nasa.gov/mars/the-mars-report/2025-september-special-edition/"
+        },
+        {
+          "title": "NASA｜太阳系与银河系",
+          "url": "https://science.nasa.gov/solar-system/solar-system-facts/"
+        },
+        {
+          "title": "NASA｜火星概况与地表环境",
+          "url": "https://science.nasa.gov/mars/facts/"
+        },
+        {
+          "title": "NASA｜火星与地球参数对照",
+          "url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/marsfact.html?level=1"
+        }
       ]
     },
     {
       "slug": "dark-matter",
       "title": "暗物质到底是什么？",
-      "category": "宇宙探索",
+      "category": "太空与信号",
       "icon": "🌌",
       "summary": "星系边缘的星星跑得出乎意料，跟着引力找原因。",
       "opening": "假设你只知道一座星系里看得见的恒星和气体有多少。你可以估算它们的引力，再猜猜外圈恒星应该跑多快。可是，望远镜测出的速度比这个估算高。哪部分线索还没算进去？",
@@ -118,7 +193,14 @@
           "title": "遥远的光也会拐弯",
           "observation": "有些遥远星系的影像被前方的星系团拉成了弧形。这种现象叫引力透镜。",
           "meaning": "根据光弯了多少，可以估算前方有多少质量。这给了研究人员另一条寻找额外引力的路。",
-          "source": 2
+          "source": 2,
+          "image": {
+            "path": "mysteries/hubble-lens.jpg",
+            "alt": "哈勃望远镜拍到的阿贝尔 1689 星系团，许多亮点周围有细长弧线",
+            "caption": "阿贝尔 1689 星系团实拍。在一团团亮光中找找细长的弧线，那是有些背景星系被拉弯的影像。",
+            "credit": "NASA、ESA、ACS 科学团队及合作研究人员",
+            "source": 3
+          }
         },
         {
           "title": "两条线索指向额外的质量",
@@ -130,9 +212,21 @@
       "challenge": {
         "prompt": "图里的两条线，最能支持哪项判断？",
         "choices": [
-          {"label": "所有星系都用完全相同的速度转。", "correct": false, "feedback": "示意图只对照一类常见的观测差异。要比较不同星系，需要分别测量。"},
-          {"label": "图中已经拍到了暗物质粒子。", "correct": false, "feedback": "这张图比较的是速度。要弄清暗物质由什么组成，还要靠别的实验和观测。"},
-          {"label": "仅凭看得见的物质，算出的外圈速度偏低。", "correct": true, "feedback": "看图的右边：表示观测的线在估算线上方。这提醒我们，需要解释为什么外圈的星星转得这么快。"}
+          {
+            "label": "所有星系都用完全相同的速度转。",
+            "correct": false,
+            "feedback": "示意图只对照一类常见的观测差异。要比较不同星系，需要分别测量。"
+          },
+          {
+            "label": "图中已经拍到了暗物质粒子。",
+            "correct": false,
+            "feedback": "这张图比较的是速度。要弄清暗物质由什么组成，还要靠别的实验和观测。"
+          },
+          {
+            "label": "仅凭看得见的物质，算出的外圈速度偏低。",
+            "correct": true,
+            "feedback": "看图的右边：表示观测的线在估算线上方。这提醒我们，需要解释为什么外圈的星星转得这么快。"
+          }
         ]
       },
       "known": "恒星运动和光线弯曲给出了额外引力的线索。",
@@ -141,23 +235,177 @@
       "deep_dive": "引力透镜像一把量质量的尺。研究人员先观察背景星系的图像怎样变形，再推算前方总质量如何分布，最后和能观测到的普通物质相比较。结果还要考虑观测误差和模型假设。",
       "checked_on": "2026-11-09",
       "sources": [
-        {"title": "NASA｜暗物质与引力证据", "url": "https://science.nasa.gov/dark-matter/"},
-        {"title": "NASA｜哈勃望远镜看到的引力透镜", "url": "https://science.nasa.gov/mission/hubble/science/science-behind-the-discoveries/hubble-gravitational-lenses/"}
+        {
+          "title": "NASA｜暗物质与引力证据",
+          "url": "https://science.nasa.gov/dark-matter/"
+        },
+        {
+          "title": "NASA｜哈勃望远镜看到的引力透镜",
+          "url": "https://science.nasa.gov/mission/hubble/science/science-behind-the-discoveries/hubble-gravitational-lenses/"
+        },
+        {
+          "title": "NASA｜哈勃拍摄的阿贝尔 1689 星系团",
+          "url": "https://science.nasa.gov/asset/hubble/galaxy-abell-1689s-gravitational-lens-magnifies-light-of-distant-galaxies/"
+        }
       ]
     },
     {
       "slug": "deep-ocean",
       "title": "深海地图上还有哪些未知？",
-      "category": "地球探索",
+      "category": "地球与生命",
       "icon": "🌊",
-      "summary": "给探测队选工具，看看从画地图到认识海底生物还要走几步。",
-      "opening": "你的探测船来到一片海底山上方。地图告诉你山坡的形状，可谁住在山坡上？手里有声呐、摄像机和取样工具，你会先用哪个？",
+      "summary": "沿立体海洋的标尺潜过五层水域，看真实动物照片，再跟着水下机器人调查海底。",
+      "opening": "你的探测船来到一片海底山上方。从有阳光的海面潜到漆黑的海底，会遇见谁？沿标尺看过五层水域以后，再给探测队挑一件工具去找答案。",
       "figure": {
         "path": "mysteries/ocean-tools.svg",
         "alt": "海洋剖面示意图，海面上的探测船发出声波，水下机器人照亮海底坡面并能取样",
         "caption": "从海面测深，再到海底观察和取样。试着在图里找到三种工具各自工作的地方。",
         "credit": "乐学堂示意图，依据 NOAA 海洋探索资料绘制",
         "source": 1
+      },
+      "depth_explorer": {
+        "title": "沿着标尺潜进海洋",
+        "intro": "把小潜水器从海面开到海沟。点一下水层，看看阳光能到哪里，哪些动物在这里被研究人员发现。",
+        "scale_note": "每层等高展示，旁边的刻度告诉你实际分界。动物也会跨层活动，照片注明了拍摄深度、采集深度或活动水域。",
+        "approximate_limit": 11000,
+        "source": 5,
+        "layers": [
+          {
+            "name": "阳光层",
+            "minimum": 0,
+            "maximum": 200,
+            "condition": "阳光照进水里",
+            "description": "靠近海面，阳光能照进水里，浮游植物可以利用光生长。岸边的浅水还可能有海草床和珊瑚礁，给动物提供食物和藏身处。",
+            "animals": [
+              {
+                "title": "绿海龟",
+                "path": "mysteries/ocean-depths/green-turtle.jpg",
+                "alt": "一只绿海龟伸展前鳍，在海面附近游动",
+                "depth_note": "常见觅食水域 · 沿岸浅水",
+                "caption": "长大的绿海龟会到浅水里找海草和海藻吃，还会浮到水面换气。看一看，它的前鳍像不像两把桨？",
+                "credit": "NOAA Fisheries",
+                "source": 6
+              },
+              {
+                "title": "黄鳍金枪鱼",
+                "path": "mysteries/ocean-depths/yellowfin-tuna.jpg",
+                "alt": "一群银灰色的黄鳍金枪鱼在蓝色海水中游动",
+                "depth_note": "幼鱼常活动于表层海水",
+                "caption": "黄鳍金枪鱼的身体两头收尖，像一支箭。幼鱼多待在表层，长大后也会游到更深的水里。",
+                "credit": "Jeff Muir／NOAA Fisheries",
+                "source": 7
+              }
+            ]
+          },
+          {
+            "name": "微光层",
+            "minimum": 200,
+            "maximum": 1000,
+            "condition": "只剩很弱的日光",
+            "description": "越往下，白天的太阳光也越来越弱。一些鱼会向上看，找头顶掠过的影子。还有动物会自己发光，或收集从上面慢慢落下的食物碎屑。",
+            "animals": [
+              {
+                "title": "管眼鱼",
+                "path": "mysteries/ocean-depths/barreleye.jpg",
+                "alt": "管眼鱼的头部像透明罩，里面能看到绿色的眼睛",
+                "depth_note": "这张照片拍于约 600 米",
+                "caption": "透明头罩里那对绿色的东西才是眼睛。眼睛能转动，让它既能朝上找食物，也能朝前看。",
+                "credit": "MBARI",
+                "source": 8
+              },
+              {
+                "title": "吸血乌贼",
+                "path": "mysteries/ocean-depths/vampire-squid.jpg",
+                "alt": "吸血乌贼漂浮在水里，深红色的腕之间连着一层膜",
+                "depth_note": "已知活动深度约 600–900 米",
+                "caption": "它的腕之间有膜，张开时像披风。它会伸出细丝，收集从上方飘下来的碎屑。这些碎屑叫「海洋雪」。",
+                "credit": "MBARI",
+                "source": 9
+              }
+            ]
+          },
+          {
+            "name": "午夜层",
+            "minimum": 1000,
+            "maximum": 4000,
+            "condition": "阳光到不了这里",
+            "description": "潜到这里，已经没有阳光了，水也更冷，压在身上的水更多。有些动物在水中游，有些会停在海底。探测器通常要开灯，才能把它们拍清楚。",
+            "animals": [
+              {
+                "title": "三脚架鱼",
+                "path": "mysteries/ocean-depths/tripod-fish.jpg",
+                "alt": "一条细长的鱼用延长的鳍条撑在泥沙海底",
+                "depth_note": "这张照片拍于约 1200 米",
+                "caption": "它用伸得很长的鳍条撑住身体，像在海底架起一副小三脚架。找找它的肚子和泥面之间隔了多远。",
+                "credit": "NOAA Ocean Exploration／Windows to the Deep 2021",
+                "source": 10
+              },
+              {
+                "title": "小飞象章鱼",
+                "path": "mysteries/ocean-depths/dumbo-octopus.jpg",
+                "alt": "小飞象章鱼在深水中展开腕，头上有两片像耳朵的鳍",
+                "depth_note": "这张照片拍于接近 4000 米处",
+                "caption": "它头上像耳朵的两片其实是鳍，可以帮它游泳。研究人员在莫纳峡谷的深处拍到了这一只。",
+                "credit": "NOAA Ocean Exploration／波多黎各深海探测",
+                "source": 11
+              }
+            ]
+          },
+          {
+            "name": "深渊层",
+            "minimum": 4000,
+            "maximum": 6000,
+            "condition": "很多地方是深海平原",
+            "description": "不少海底在这一带铺开，像又冷又暗的泥地。上面落下的碎屑会沉到海底，一些海胆和海参会沿着泥面寻找食物。",
+            "animals": [
+              {
+                "title": "深海海胆",
+                "path": "mysteries/ocean-depths/abyssal-urchin.jpg",
+                "alt": "一只黄色、外形近似小金字塔的深海海胆在泥面上爬行",
+                "depth_note": "这张照片拍于约 4200 米",
+                "caption": "这只海胆的身体像一座小金字塔。研究人员看到它在软泥上爬行，身后留下一条痕迹。看看照片里它身上的细刺。",
+                "credit": "NOAA Ocean Exploration／Seascape Alaska",
+                "source": 12
+              },
+              {
+                "title": "长尾深海海参",
+                "path": "mysteries/ocean-depths/abyssal-cucumber.jpg",
+                "alt": "一只浅色海参贴着深海泥面，身体后端伸出长尾状结构",
+                "depth_note": "这张照片拍于约 5100 米",
+                "caption": "这只海参尾端翘起，前端能伸出红色的摄食触手。研究团队给它起了个绰号，叫「软糖松鼠」。",
+                "credit": "DeepCCZ 考察队／NOAA 海洋探索资料页",
+                "source": 13
+              }
+            ]
+          },
+          {
+            "name": "超深渊层",
+            "minimum": 6000,
+            "maximum": null,
+            "condition": "多在深深的海沟里",
+            "description": "到了 6000 米以下，许多地方已经是狭长的海沟。水压还在增大。探测器能在一些海沟拍到狮子鱼，在更深的海沟底还采到过小型甲壳动物。",
+            "animals": [
+              {
+                "title": "深海狮子鱼",
+                "path": "mysteries/ocean-depths/hadal-snailfish.jpg",
+                "alt": "深海着陆器拍到的浅色狮子鱼，身体从头部向尾部渐细",
+                "depth_note": "在小笠原海沟约 8336 米处拍到",
+                "caption": "研究人员把带相机的着陆器放到海沟底，记录到这条幼鱼。看看它宽宽的头和细细的尾巴。",
+                "credit": "Caladan Oceanic／Inkfish，东京海洋大学发布",
+                "source": 14
+              },
+              {
+                "title": "海沟端足类",
+                "path": "mysteries/ocean-depths/hadal-amphipod.jpg",
+                "alt": "一只身体弯曲、分节的小型甲壳动物放在厘米标尺旁",
+                "depth_note": "在马里亚纳海沟约 10500 米处采到",
+                "caption": "它是小型甲壳动物，看着有点像弯起来的小虾。这张是采上来后拍的照片，旁边的厘米标尺能帮你估计大小。",
+                "credit": "Paul Yancey、Anna Downing／Schmidt Ocean Institute",
+                "source": 15
+              }
+            ]
+          }
+        ]
       },
       "evidence": [
         {
@@ -170,7 +418,14 @@
           "title": "摄像机把海底带到眼前",
           "observation": "有些水下机器人带着灯和摄像机，可以把沿途拍到的画面传回探测船。",
           "meaning": "画面可以告诉我们镜头拍到的地方有什么生物，还能记录它们在做什么。",
-          "source": 3
+          "source": 3,
+          "image": {
+            "path": "mysteries/hercules-rov.jpg",
+            "alt": "黄色的赫拉克勒斯号遥控水下机器人正在海底用灯照亮前方",
+            "caption": "赫拉克勒斯号水下机器人。看看前方装了哪些工具，想一想下潜以后怎样把黑暗中的海底拍清楚。",
+            "credit": "Inner Space Center 与罗得岛大学，NOAA 海洋探索资料页",
+            "source": 3
+          }
         },
         {
           "title": "取一点样本回去研究",
@@ -179,29 +434,110 @@
           "source": 3
         }
       ],
+      "media": [
+        {
+          "kind": "video",
+          "title": "把海底的镜头拉近",
+          "path": "mysteries/deep-ocean-zoom.mp4",
+          "poster": "mysteries/deep-ocean-zoom.jpg",
+          "alt": "水下机器人拍摄海底坡面，再拉近镜头显示海底生物的细节",
+          "caption": "这是「深海发现者」号在阿拉斯加外海拍到的画面。先看看大范围的海底，再看看近处的生物。镜头拉近以后，哪些细节变得更清楚？约 14 秒，无声节选。",
+          "credit": "NOAA Ocean Exploration，Seascape Alaska 第 15 潜次",
+          "source": 4
+        }
+      ],
       "challenge": {
         "prompt": "已经有海底山的地图。想先看看山坡上有什么生物，最合适的下一步是什么？",
         "choices": [
-          {"label": "派带灯和摄像机的水下机器人沿坡拍摄。", "correct": true, "feedback": "对。先拍下生物的位置、外形和活动。遇到看不清、分不出的，再考虑更仔细地观察或取样。"},
-          {"label": "继续用船底声呐多测几次水深。", "correct": false, "feedback": "多测几次能补充地形图。想知道动物长什么样，应该到山坡附近拍摄。"},
-          {"label": "只从海面取一瓶水，看清整座山上有什么。", "correct": false, "feedback": "一瓶表层海水提供的是取样点附近的线索。要观察山坡上的生物，可以让机器人到现场。"}
+          {
+            "label": "派带灯和摄像机的水下机器人沿坡拍摄。",
+            "correct": true,
+            "feedback": "对。先拍下生物的位置、外形和活动。遇到看不清、分不出的，再考虑更仔细地观察或取样。"
+          },
+          {
+            "label": "继续用船底声呐多测几次水深。",
+            "correct": false,
+            "feedback": "多测几次能补充地形图。想知道动物长什么样，应该到山坡附近拍摄。"
+          },
+          {
+            "label": "只从海面取一瓶水，看清整座山上有什么。",
+            "correct": false,
+            "feedback": "一瓶表层海水提供的是取样点附近的线索。要观察山坡上的生物，可以让机器人到现场。"
+          }
         ]
       },
       "known": "地形图能帮助我们挑选下潜地点，摄像和取样可以补上当地的生物线索。",
       "unresolved": "这座海底山的不同深度和坡面上，分别有哪些生物？",
       "next_step": "沿不同深度拍摄几条路线，并记下每次观察的位置、深度和画面。",
       "deep_dive": "一条拍摄路线只能覆盖镜头扫到的地方。选择不同深度、不同朝向的坡面重复观察，可以减少把偶然看到的情形当成整座海底山特征的风险。",
-      "checked_on": "2026-11-09",
+      "checked_on": "2026-11-10",
       "sources": [
-        {"title": "NOAA｜我们探索了多少海洋？", "url": "https://oceanexplorer.noaa.gov/ocean-fact/explored/"},
-        {"title": "NOAA｜多波束声呐怎样测绘海底", "url": "https://oceanexplorer.noaa.gov/technology/sonar-multibeam/"},
-        {"title": "NOAA｜遥控水下机器人", "url": "https://oceanexplorer.noaa.gov/technology/subs-rovs/"}
+        {
+          "title": "NOAA｜我们探索了多少海洋？",
+          "url": "https://oceanexplorer.noaa.gov/ocean-fact/explored/"
+        },
+        {
+          "title": "NOAA｜多波束声呐怎样测绘海底",
+          "url": "https://oceanexplorer.noaa.gov/technology/sonar-multibeam/"
+        },
+        {
+          "title": "NOAA｜遥控水下机器人",
+          "url": "https://oceanexplorer.noaa.gov/technology/subs-rovs/"
+        },
+        {
+          "title": "NOAA｜阿拉斯加外海第 15 潜次的近距离观察",
+          "url": "https://oceanexplorer.noaa.gov/multimedia/okeanos-explorations-seascape-alaska-ex2306-gallery-media-dive15-zoom/"
+        },
+        {
+          "title": "NOAA｜从阳光层到海沟的五个深度带",
+          "url": "https://www.noaa.gov/jetstream/ocean/layers-of-ocean"
+        },
+        {
+          "title": "NOAA Fisheries｜绿海龟的外形、食物和浅水栖息地",
+          "url": "https://www.fisheries.noaa.gov/species/green-turtle"
+        },
+        {
+          "title": "NOAA Fisheries｜太平洋黄鳍金枪鱼的照片和活动水域",
+          "url": "https://www.fisheries.noaa.gov/species/pacific-yellowfin-tuna"
+        },
+        {
+          "title": "MBARI｜在约 600 米深处拍到的管眼鱼",
+          "url": "https://www.mbari.org/news/mbari-researchers-film-rarely-seen-deep-sea-barreleye-fish-in-4k/"
+        },
+        {
+          "title": "MBARI｜吸血乌贼的活动深度和海洋雪",
+          "url": "https://www.mbari.org/animal/vampire-squid/"
+        },
+        {
+          "title": "NOAA｜在约 1200 米拍到的三脚架鱼",
+          "url": "https://oceanexplorer.noaa.gov/multimedia/okeanos-explorations-ex2107-gallery-media-dive08-tripod-fish/"
+        },
+        {
+          "title": "NOAA｜莫纳峡谷的小飞象章鱼",
+          "url": "https://oceanexplorer.noaa.gov/multimedia/daily-image-media-20201106/"
+        },
+        {
+          "title": "NOAA｜在约 4200 米拍到的深海海胆",
+          "url": "https://oceanexplorer.noaa.gov/multimedia/okeanos-explorations-seascape-alaska-ex2306-gallery-media-dive02-urchin/"
+        },
+        {
+          "title": "NOAA｜在约 5100 米拍到的深海海参",
+          "url": "https://oceanexplorer.noaa.gov/multimedia/daily-image-media-20210201/"
+        },
+        {
+          "title": "东京海洋大学｜小笠原海沟 8336 米的狮子鱼观测",
+          "url": "https://www.kaiyodai.ac.jp/en/faculty/r/news/detail/8336_1.html"
+        },
+        {
+          "title": "Schmidt Ocean Institute｜马里亚纳海沟约 10500 米处的端足类",
+          "url": "https://schmidtocean.org/cruise-log-post/the-deepest-living-animals/"
+        }
       ]
     },
     {
       "slug": "voynich",
       "title": "伏尼契手稿写了什么？",
-      "category": "文字探索",
+      "category": "古迹与文字",
       "icon": "📜",
       "summary": "放大真实的手稿，找重复符号，再试试怎样检验一种读法。",
       "opening": "翻开一本几百年前的手稿，你看见一株画出来的植物，旁边却挤满了陌生符号。先在两行字里找找相似的形状。要是同一组符号出现了好几次，你会怎样验证它的意思？",
@@ -239,9 +575,21 @@
       "challenge": {
         "prompt": "有人猜某组符号是「叶子」。接下来怎么检验这个猜想？",
         "choices": [
-          {"label": "只看这一页的绿叶图，直接确定答案。", "correct": false, "feedback": "图画让这个猜想有了起点。它也可能配的是花名、用途或别的内容，需要到其他页检查。"},
-          {"label": "去没看过的页面找同一组符号，看看这个读法是否还说得通。", "correct": true, "feedback": "用同一条规则读新页面，还可以记录读不通的地方。如果反复遇到矛盾，就要改猜想或继续找证据。"},
-          {"label": "找更多人投票，票最多的读法就算破解。", "correct": false, "feedback": "投票能告诉你大家喜欢哪个猜想。想检验读法，需要它在别的页面也能解释符号和上下文。"}
+          {
+            "label": "只看这一页的绿叶图，直接确定答案。",
+            "correct": false,
+            "feedback": "图画让这个猜想有了起点。它也可能配的是花名、用途或别的内容，需要到其他页检查。"
+          },
+          {
+            "label": "去没看过的页面找同一组符号，看看这个读法是否还说得通。",
+            "correct": true,
+            "feedback": "用同一条规则读新页面，还可以记录读不通的地方。如果反复遇到矛盾，就要改猜想或继续找证据。"
+          },
+          {
+            "label": "找更多人投票，票最多的读法就算破解。",
+            "correct": false,
+            "feedback": "投票能告诉你大家喜欢哪个猜想。想检验读法，需要它在别的页面也能解释符号和上下文。"
+          }
         ]
       },
       "known": "手稿有真实的图画和成行的符号，原件和扫描件都可以核对。",
@@ -250,8 +598,826 @@
       "deep_dive": "尝试破译时，可以先在一部分页面上提出规则，再用之前没有用过的页面检验。如果每遇到读不通的地方就临时改规则，任何读法都容易在少数页面上碰巧说通。",
       "checked_on": "2026-11-09",
       "sources": [
-        {"title": "耶鲁大学图书馆｜伏尼契手稿数字扫描", "url": "https://collections.library.yale.edu/catalog/2002046"},
-        {"title": "耶鲁大学图书馆｜手稿的材料、图画和研究情况", "url": "https://beinecke.library.yale.edu/beinecke/collections/beinecke-cipher-voynich-manuscript"}
+        {
+          "title": "耶鲁大学图书馆｜伏尼契手稿数字扫描",
+          "url": "https://collections.library.yale.edu/catalog/2002046"
+        },
+        {
+          "title": "耶鲁大学图书馆｜手稿的材料、图画和研究情况",
+          "url": "https://beinecke.library.yale.edu/beinecke/collections/beinecke-cipher-voynich-manuscript"
+        }
+      ]
+    },
+    {
+      "slug": "enceladus-ocean",
+      "title": "土卫二的冰下海洋里有生命吗？",
+      "category": "太空与信号",
+      "icon": "🧊",
+      "summary": "看卡西尼号的喷流动图，沿剖面找找冰下海洋和南极裂缝。",
+      "opening": "土星身边有一颗白白的小卫星，叫土卫二。卡西尼号飞过时，看见它向太空喷出一束束冰粒和水汽。厚厚的冰盖下面到底有什么？",
+      "figure": {
+        "path": "mysteries/enceladus-plume.jpg",
+        "alt": "卡西尼号从背光方向拍摄的土卫二，弯弯的亮边外有一束束喷流",
+        "caption": "这是卡西尼号拍到的土卫二。沿着亮弧找一找，哪些细细的亮束伸出了地面？",
+        "credit": "NASA／JPL-Caltech／Space Science Institute",
+        "source": 1
+      },
+      "evidence": [
+        {
+          "title": "冰面上有向外喷的缝",
+          "observation": "探测器在不同时间拍到南极附近的喷流，有些画面里能看到好几束喷流。",
+          "meaning": "喷流让研究人员有机会在太空里收集从这颗冰月喷出来的物质。",
+          "source": 1
+        },
+        {
+          "title": "喷出的冰粒带着海洋线索",
+          "observation": "卡西尼号测到喷流里有水汽和含盐冰粒。结合对整颗卫星的观测，科学家发现冰壳下面有一片广阔的液态海洋。",
+          "meaning": "海水能通过冰层里的裂缝把物质送上来。研究人员可以先分析冰粒，再推想地下海洋的环境。",
+          "source": 2,
+          "image": {
+            "path": "mysteries/enceladus-interior.jpg",
+            "alt": "土卫二剖面示意图，外面是冰壳，下面是海洋和岩石，南极有喷流",
+            "caption": "剖面示意图。试着从冰壳下面的海洋出发，沿裂缝走到喷流所在的位置。",
+            "credit": "NASA／JPL-Caltech",
+            "source": 2
+          }
+        },
+        {
+          "title": "冰粒里找到了磷酸盐",
+          "observation": "研究人员重看卡西尼号收集到的冰粒数据，发现其中有磷酸盐。",
+          "meaning": "地球上的生命会用到磷。找到这种成分，能帮助我们判断环境是否具备一些适合生命的条件。",
+          "source": 3
+        }
+      ],
+      "media": [
+        {
+          "kind": "animation",
+          "title": "四张照片连起来看喷流",
+          "path": "mysteries/enceladus-plume.gif",
+          "poster": "mysteries/enceladus-plume-still.jpg",
+          "alt": "土卫二亮弧下方有多束细细的喷流，背后的天空是黑色的",
+          "caption": "卡西尼号每隔约 12 分钟拍一张，四张照片合成了这段动图。盯住亮弧下面的细亮束，看它们在不同画面里出现在什么位置。拍摄角度也在变化，亮束变样可能和角度有关。",
+          "credit": "NASA／JPL-Caltech／Space Science Institute，PIA07762",
+          "source": 1
+        },
+        {
+          "kind": "diagram",
+          "title": "跟着海水从冰下走到太空",
+          "path": "mysteries/enceladus-interior.jpg",
+          "alt": "土卫二剖面示意，深蓝色海洋在浅蓝色冰壳下面，冰壳底部的裂缝通向喷流",
+          "caption": "动图拍到的是土卫二表面外的亮束。按顺序看这张剖面示意图，找找科学家怎样把喷流和冰下海洋联系起来。",
+          "credit": "NASA／JPL-Caltech 剖面示意图，乐学堂加注",
+          "source": 2,
+          "steps": [
+            {
+              "label": "冰下海洋",
+              "text": "深蓝色这一层是冰壳下的海洋。卡西尼号测到一些喷出的冰粒含盐，这给了研究人员一条关于海水的线索。",
+              "x": 52,
+              "y": 64
+            },
+            {
+              "label": "南极裂缝",
+              "text": "沿着浅蓝色冰壳里的细线往外看。图中这些裂缝通向南极附近的表面。",
+              "x": 63,
+              "y": 68
+            },
+            {
+              "label": "喷进太空",
+              "text": "从裂缝喷出的水汽和冰粒散向太空。探测器可以从这里取样，间接了解冰下的环境。",
+              "x": 50,
+              "y": 77
+            }
+          ]
+        }
+      ],
+      "challenge": {
+        "prompt": "如果手里有一粒含磷酸盐的冰，哪项判断最有依据？",
+        "choices": [
+          {
+            "label": "这种冰粒里有地球生命也会用到的成分。",
+            "correct": true,
+            "feedback": "冰粒的成分告诉我们海里可能有什么。要确认生命，还需要找到能区分生命活动和普通化学反应的证据。"
+          },
+          {
+            "label": "冰粒里已经找到活着的小动物。",
+            "correct": false,
+            "feedback": "这次仪器记录的是物质成分。想找小动物，需要能显示它们存在的观察。"
+          },
+          {
+            "label": "只要冰层够厚，海里就一定有生命。",
+            "correct": false,
+            "feedback": "冰层厚度能告诉我们海洋被盖住的情况。生命是否存在还要看其他证据。"
+          }
+        ]
+      },
+      "known": "土卫二冰壳下有海洋，喷出的冰粒带着盐和磷酸盐等物质。",
+      "unresolved": "海洋里有没有生命？如果有，它会留下哪些能被仪器发现的痕迹？",
+      "next_step": "设计能分析更多冰粒的仪器，同时用实验看看没有生命的环境会产生哪些相似的物质。",
+      "deep_dive": "一台仪器可以测水、盐和不同分子，另一台仪器可以检查细小结构。两类结果都指向生命时，还需要排查探测器自身带来的杂质，以及岩石和水的化学反应。",
+      "checked_on": "2026-11-10",
+      "sources": [
+        {
+          "title": "NASA｜卡西尼号拍到土卫二喷流",
+          "url": "https://science.nasa.gov/photojournal/enceladus-plume-movie/"
+        },
+        {
+          "title": "NASA｜土卫二冰壳、海洋与喷流示意",
+          "url": "https://science.nasa.gov/photojournal/enceladus-artist-concept/"
+        },
+        {
+          "title": "NASA｜从卡西尼号数据中发现磷酸盐",
+          "url": "https://www.nasa.gov/missions/cassini/nasa-cassini-data-reveals-building-block-for-life-in-enceladus-ocean/"
+        }
+      ]
+    },
+    {
+      "slug": "fast-radio-bursts",
+      "title": "谁发出了眨眼般短的无线电信号？",
+      "category": "太空与信号",
+      "icon": "📡",
+      "summary": "有些信号只亮了几毫秒。跟着望远镜把无线电记录和星空地图对起来。",
+      "opening": "你盯着一张无线电记录图。刚才还是平平的背景，忽然冒出一个又短又强的信号。它叫快速射电暴，常常只持续几毫秒，比眨一下眼短得多。它从哪儿来？",
+      "figure": {
+        "path": "mysteries/magnetar.jpg",
+        "alt": "画家笔下的一颗磁星，星体周围有弯曲的磁场线并向外射出辐射",
+        "caption": "磁星活动的想象图。磁星是一种磁场特别强的中子星，中子星是有些大恒星结束一生后留下的致密星体。",
+        "credit": "欧洲航天局（ESA）",
+        "source": 3
+      },
+      "evidence": [
+        {
+          "title": "有的方向会再来信号",
+          "observation": "加拿大的 CHIME 射电望远镜多次从同一些源记录到这种短促的暴发。",
+          "meaning": "重复出现给望远镜多一次对准位置的机会，也能比较同一个源前后发出的信号。",
+          "source": 2
+        },
+        {
+          "title": "银河系里抓到了一次",
+          "observation": "2020 年，望远镜在无线电波段和 X 射线波段都记录到短促的暴发，位置和银河系里一颗已知磁星相符。",
+          "meaning": "把时间和位置放在一起核对，可以把这次暴发和这颗磁星联系起来。",
+          "source": 1,
+          "image": {
+            "path": "mysteries/radio-matching.svg",
+            "alt": "无线电与 X 射线两行示意记录在相近时刻各出现一个峰",
+            "caption": "两种仪器的对照示意图。先找上面一行的尖峰，再看看下面一行的尖峰出现在什么位置。",
+            "credit": "乐学堂示意图，依据 NASA 的联合观测说明绘制",
+            "source": 1
+          }
+        },
+        {
+          "title": "一次找到来源，还有别的信号",
+          "observation": "研究人员已经找到会重复发出快速射电暴的源，也有许多源只在现有记录里出现过一次。",
+          "meaning": "等得更久，可能会看到其中一些再出现。研究人员还要比较不同源，看看它们是否用同样的方式发出信号。",
+          "source": 2
+        }
+      ],
+      "challenge": {
+        "prompt": "两种望远镜都在一颗磁星附近记录到同一次暴发。这个结果最能支持什么？",
+        "choices": [
+          {
+            "label": "每次快速射电暴一定都来自这一颗星。",
+            "correct": false,
+            "feedback": "这次对上了一个来源。不同方向和不同时间的其他暴发还要各自检查。"
+          },
+          {
+            "label": "至少有些快速射电暴可以由磁星产生。",
+            "correct": true,
+            "feedback": "对。把位置和时间都核对上，能帮助研究人员判断这一例来自哪里。"
+          },
+          {
+            "label": "只记录到一次的信号永远不会再来。",
+            "correct": false,
+            "feedback": "望远镜能记录到哪些暴发，还取决于观测时间和它能测到多弱的信号。"
+          }
+        ]
+      },
+      "known": "2020 年的联合观测发现，银河系里的一颗磁星能够产生像快速射电暴一样的无线电信号。",
+      "unresolved": "遥远星系中的快速射电暴是不是都和磁星有关？磁星附近究竟发生了什么，才产生这样的信号？",
+      "next_step": "让不同望远镜同时盯住同一片天，比较更多信号的位置、持续时间和能量。",
+      "deep_dive": "一颗磁星与无线电暴发的关联，可以缩小寻找来源的范围。要区分具体的发射机制，还需要测量信号在不同频率的到达时间、偏振和形状，并和模型预报比较。",
+      "checked_on": "2026-11-10",
+      "sources": [
+        {
+          "title": "NASA 喷气推进实验室｜磁星的无线电和 X 射线暴发",
+          "url": "https://www.jpl.nasa.gov/news/nasa-missions-help-pinpoint-the-source-of-a-unique-x-ray-radio-burst/"
+        },
+        {
+          "title": "CHIME／FRB 团队｜新发现的重复快速射电暴源",
+          "url": "https://arxiv.org/abs/2301.08762"
+        },
+        {
+          "title": "欧洲航天局｜产生射电暴发的磁星想象图",
+          "url": "https://www.esa.int/ESA_Multimedia/Images/2020/07/Artist_s_impression_of_radio_bursting_magnetar"
+        }
+      ]
+    },
+    {
+      "slug": "wow-signal",
+      "title": "「哇！」信号从哪里来？",
+      "category": "太空与信号",
+      "icon": "📻",
+      "summary": "读一张 1977 年的观测打印纸，把六个字符变成一排表示强弱的柱子。",
+      "opening": "1977 年，美国「大耳朵」射电望远镜扫过天空，纸上突然冒出一列和平常不同的字符。检查记录的杰里·埃曼把那一列圈起来，在旁边写下「Wow！」。这张纸上究竟记了什么？",
+      "figure": {
+        "path": "mysteries/wow-printout.jpg",
+        "alt": "大耳朵望远镜的打印纸局部，一列字符被圈出，旁边手写 Wow",
+        "caption": "原始观测打印纸的扫描图。先找手写的「Wow！」，再沿着圈出的那一列从上往下读。",
+        "credit": "俄亥俄州立大学射电天文台，SETI 研究所资料页",
+        "source": 1
+      },
+      "evidence": [
+        {
+          "title": "六个字符表示信号有多强",
+          "observation": "打印机用数字和字母记录每段时间的信号强度。圈出的六格从上到下是 6、E、Q、U、J、5。",
+          "meaning": "把这些记录按强弱画出来，可以看到信号先变强、再变弱。",
+          "source": 1,
+          "image": {
+            "path": "mysteries/wow-strength.svg",
+            "alt": "依次标着 6、E、Q、U、J、5 的六根柱子先变高再变低，其中 U 最高",
+            "caption": "根据信号强度编码画出的对照图。哪一格最高？它前后各是哪一格？",
+            "credit": "乐学堂整理，依据 SETI 研究所记录绘制",
+            "source": 1
+          }
+        },
+        {
+          "title": "望远镜扫过去，只收到这一回",
+          "observation": "这次信号在约 72 秒的观测窗口里出现。后来朝相关天区寻找，没有确认同样的信号再次出现。",
+          "meaning": "只有一次记录，很难让别的望远镜确认它的准确来处。",
+          "source": 1
+        },
+        {
+          "title": "旧资料还能重查",
+          "observation": "阿雷西博研究团队重新检查早年的记录，找到了可以拿来比较的较弱窄频信号。",
+          "meaning": "天然的氢气云等解释也能拿来做比较。相似的信号能提供思路，原来那一次的来源仍需要验证。",
+          "source": 2
+        }
+      ],
+      "challenge": {
+        "prompt": "单看圈出的 6、E、Q、U、J、5，我们最有把握读出什么？",
+        "choices": [
+          {
+            "label": "谁发送了这条信号。",
+            "correct": false,
+            "feedback": "仪器把强弱记在纸上。要确定来处，还要核对天空位置，并用不同仪器再次测量。"
+          },
+          {
+            "label": "发送者写给地球人的六个字。",
+            "correct": false,
+            "feedback": "这里的字母和数字都是强度记号。用它们能画出信号变强又变弱的过程。"
+          },
+          {
+            "label": "这段时间里信号强度怎样变化。",
+            "correct": true,
+            "feedback": "对，先找到最高的 U，再看看它前后的柱子怎样变高、变低。"
+          }
+        ]
+      },
+      "known": "望远镜记录过一次又强又集中在很窄频段的信号，研究人员保留了打印纸。",
+      "unresolved": "究竟是什么过程产生了这次信号？现有证据还不能确定来源。",
+      "next_step": "用不同的射电望远镜检查相应天区，并比较历史记录中有类似形状的信号。",
+      "deep_dive": "固定在天空的源扫过天线的灵敏区域时，记录可能先升后降。要追查来源，还需检查频率、望远镜响应、附近干扰和能否重复探测。",
+      "checked_on": "2026-11-10",
+      "sources": [
+        {
+          "title": "SETI 研究所｜「哇！」信号与原始打印记录",
+          "url": "https://www.seti.org/research/seti-101/the-wow-signal"
+        },
+        {
+          "title": "波多黎各大学阿雷西博分校｜档案重查与候选解释",
+          "url": "https://phl.upr.edu/wow/faq"
+        }
+      ]
+    },
+    {
+      "slug": "eel-navigation",
+      "title": "欧洲鳗鲡怎么找到大海里的目的地？",
+      "category": "地球与生命",
+      "icon": "🐟",
+      "summary": "认识会游过大西洋的鱼，再点开卫星追踪图，认认四种记号。",
+      "opening": "一条在河口长大的欧洲鳗鲡，开始往大海深处游。长大的鳗鲡会朝大西洋里的马尾藻海迁移。那里没有路标，它们怎样认路？",
+      "figure": {
+        "path": "mysteries/european-eel.jpg",
+        "alt": "欧洲鳗鲡细长的身体弯成弧形",
+        "caption": "欧洲鳗鲡的实拍。看看它细长的身体，想想怎样跟踪一条钻进大海的鱼。",
+        "credit": "英国环境署",
+        "source": 1
+      },
+      "evidence": [
+        {
+          "title": "小鳗鲡帮忙圈出目的地",
+          "observation": "研究人员在马尾藻海一带找到很小的欧洲鳗鲡幼体。",
+          "meaning": "刚孵出不久的幼体能帮忙缩小寻找繁殖区的范围。成鳗从哪儿游过来，还要另外调查。",
+          "source": 2
+        },
+        {
+          "title": "小标签浮起来报位置",
+          "observation": "研究团队给亚速尔群岛出发的成鳗装上记录标签。过了一段时间，标签脱落浮到海面，把数据传给卫星。",
+          "meaning": "有些标签在马尾藻海内报出了位置。这样就能把成鳗确实到过附近海域和只看到幼体这两条证据接起来。",
+          "source": 2,
+          "image": {
+            "path": "mysteries/eel-tracking.jpg",
+            "alt": "北大西洋追踪图，黄色直线标出一组鳗鲡的平均迁徙方向，十字标出浮标回报点",
+            "caption": "十字是浮标报出位置的地方，黄色直线表示一组鳗鲡的平均迁徙方向。每条鳗鲡在水下怎么转弯，还需要更多测量。",
+            "credit": "Wright 等，Scientific Reports 图 1C（CC BY 4.0，裁切）",
+            "source": 2
+          }
+        },
+        {
+          "title": "记录位置还答不了认路问题",
+          "observation": "追踪研究收集到了位置和深度等线索，但还没有测出哪种提示指引了这一趟迁移。",
+          "meaning": "海流、水温、气味和地磁都可以提出检验办法。只知道鱼到过哪里，还分不出它靠什么认路。",
+          "source": 2
+        }
+      ],
+      "media": [
+        {
+          "kind": "diagram",
+          "title": "在追踪图上找四种记号",
+          "path": "mysteries/eel-tracking.jpg",
+          "alt": "北大西洋研究地图，标注亚速尔群岛放流点、浮标回报点、平均迁徙方向和幼体采样区",
+          "caption": "一张图里有不同的线索。点选下方步骤，看看研究人员是怎样从放流和采样记录里拼出迁徙方向的。",
+          "credit": "Wright 等，Scientific Reports 图 1C（CC BY 4.0，裁切并加注）",
+          "source": 2,
+          "steps": [
+            {
+              "label": "在哪儿放流",
+              "text": "找右上方的黄圆点和橙圆点。研究人员在亚速尔群岛给成鳗装上标签，再从这两个地点放它们入海。",
+              "x": 76,
+              "y": 19
+            },
+            {
+              "label": "标签在哪儿报位置",
+              "text": "看散开的一枚枚十字。标签从鳗鲡身上脱落，浮到海面后才把数据传给卫星。每个十字表示一个回报点。",
+              "x": 70,
+              "y": 46
+            },
+            {
+              "label": "朝哪个方向游",
+              "text": "黄线表示 2019 年从其中一个地点出发的那组鳗鲡，平均朝哪个方向游。水下每条鱼的实际路线还要继续查。线末端的黄星是研究人员沿这个方向估出来的位置。",
+              "x": 55,
+              "y": 43
+            },
+            {
+              "label": "哪里采到了幼体",
+              "text": "找马尾藻海一带密密的白圆点。这些点来自历年的幼体采样。成鳗的部分回报点也在这一带，两种证据可以放在一起看。",
+              "x": 27,
+              "y": 49
+            }
+          ]
+        }
+      ],
+      "challenge": {
+        "prompt": "在马尾藻海收到一个成鳗标签传来的位置。你能在调查笔记里写下什么？",
+        "choices": [
+          {
+            "label": "欧洲鳗鲡只靠闻海水就能认路。",
+            "correct": false,
+            "feedback": "位置记录能说明鱼游到了哪一带。要查气味的作用，可以让实验中的鳗鲡面对不同气味，再比较游向。"
+          },
+          {
+            "label": "这条鳗鲡到过这一带，认路方法还要查。",
+            "correct": true,
+            "feedback": "这正是追踪工具能帮我们分清的两件事。标签提供了到达附近海域的证据，接下来可以专门研究导航。"
+          },
+          {
+            "label": "标签把鳗鲡从出发到产卵都拍下来了。",
+            "correct": false,
+            "feedback": "研究人员用标签记录位置和深度等数据。想亲眼看见产卵，还得有相应的现场观测。"
+          }
+        ]
+      },
+      "known": "幼体采样和成鳗的卫星追踪都指向马尾藻海一带。",
+      "unresolved": "成鳗怎样在大海里认路？它们沿途会用到哪些线索？",
+      "next_step": "继续追踪更多成鳗，同时在实验里一次改变一个条件，观察游动方向是否跟着改变。",
+      "deep_dive": "浮标最后报出的是浮到海面的位置。比较不同年份和出发地点的记录时，还要考虑海流让标签漂移的距离，以及标签提前脱落的可能。",
+      "checked_on": "2026-11-10",
+      "sources": [
+        {
+          "title": "英国环境署｜欧洲鳗鲡跨洋追踪",
+          "url": "https://www.gov.uk/government/news/ancient-mystery-of-european-eel-migration-unravelled-to-help-combat-decline-of-critically-endangered-species"
+        },
+        {
+          "title": "Wright 等｜卫星标签追踪论文与地图",
+          "url": "https://www.nature.com/articles/s41598-022-19248-8"
+        }
+      ]
+    },
+    {
+      "slug": "ball-lightning",
+      "title": "雷雨中的发光小球是怎么来的？",
+      "category": "地球与生命",
+      "icon": "⚡",
+      "summary": "看研究仪器拍到的慢放短片，了解科学家怎样从一束光里找成分。",
+      "opening": "研究人员在青海观测雷电时，一次闪电过后，仪器拍到一团在移动的亮光。这类很少见、像球一样的亮光常被叫作「球状闪电」。亮光里藏着什么线索？",
+      "figure": {
+        "path": "mysteries/ball-lightning-sequence.jpg",
+        "alt": "研究记录中八幅发光小球的图像，颜色和亮度随时间变化",
+        "caption": "2012 年观测记录的画面局部。比较左边刚出现的亮光和右边快消失的亮光，颜色和亮度有什么变化？",
+        "credit": "岑建勇、袁萍、薛思敏，论文图 2（裁切）",
+        "source": 1
+      },
+      "evidence": [
+        {
+          "title": "这次亮光跟在落地闪电后面",
+          "observation": "观测仪器先记录到一次云对地闪电，随后记录到附近一团持续约 1.6 秒的亮光。",
+          "meaning": "时间顺序让研究人员有理由检查两件事有没有关系。还可以比较亮光的位置、移动方向和光谱。",
+          "source": 1
+        },
+        {
+          "title": "把光拆开，就能多看一层",
+          "observation": "仪器记录到亮光中有对应硅、铁、钙的谱线。谱线可以想成某些成分在一排颜色里留下的亮记号。",
+          "meaning": "这些元素也常见于土壤，因而可以追问，闪电打到地面时，有没有把土壤里的物质带进发光区域。",
+          "source": 1,
+          "image": {
+            "path": "mysteries/light-spectrum.svg",
+            "alt": "把一束光分开后，在不同颜色的位置显示不同的亮条，亮条分布可供比较",
+            "caption": "光谱读法示意。把每条亮线的位置记下来，再去跟已知物质的记录比一比。图中的亮条不代表这次观测的真实数值。",
+            "credit": "乐学堂示意图，依据美国物理学会的光谱说明绘制",
+            "source": 2
+          }
+        },
+        {
+          "title": "一段视频也需要核查",
+          "observation": "其他研究团队分析可能拍到球状闪电的视频时，会检查相机、环境和亮点的形状等信息。",
+          "meaning": "亮点有时可能来自镜头或别的光源。保留多个角度和现场记录，能帮助判断它在哪里、怎样发光。",
+          "source": 3
+        }
+      ],
+      "media": [
+        {
+          "kind": "video",
+          "title": "慢放青海雷雨中的亮光",
+          "path": "mysteries/ball-lightning-recording.mp4",
+          "poster": "mysteries/ball-lightning-recording.jpg",
+          "alt": "黑色画面里，左侧小亮点渐暗，右侧有彩色光谱",
+          "caption": "实拍画面把约 1.3 秒的记录慢放成约 11 秒。看左侧的小亮点和右侧被仪器分开的彩色光谱，比较它们在开头和结尾的亮度。无声。",
+          "credit": "岑建勇、袁萍、薛思敏，美国物理学会发布的慢放影像",
+          "source": 2
+        }
+      ],
+      "challenge": {
+        "prompt": "如果又收到一段只有小亮点的视频，哪条线索最能帮助检查它的成因？",
+        "choices": [
+          {
+            "label": "同一时间还有另一台仪器拍到现场，并留下光谱。",
+            "correct": true,
+            "feedback": "两份观测能互相核对。光谱还能提供视频里的颜色和形状之外的新线索。"
+          },
+          {
+            "label": "有很多人转发了这段视频。",
+            "correct": false,
+            "feedback": "转发次数能告诉我们大家注意到了它。要研究成因，还得查看拍摄条件和现场记录。"
+          },
+          {
+            "label": "给视频加一个闪电特效再看。",
+            "correct": false,
+            "feedback": "特效会改动画面。研究人员需要保留最早的记录，才能核对亮点是什么时候出现的。"
+          }
+        ]
+      },
+      "known": "这一次有仪器记录了亮光出现的时间、移动和光谱。",
+      "unresolved": "它究竟靠什么持续发光？不同地点被称为球状闪电的现象，会不会有不同的成因？",
+      "next_step": "比较多次带有时间、位置和光谱的记录，并在实验室检验闪电和土壤物质相互作用的猜想。",
+      "deep_dive": "这次记录支持继续研究土壤参与的机制。要验证这一机制，需要让它预言新的可测现象，例如随时间变化的成分或亮度，并拿独立观测来比较。",
+      "checked_on": "2026-11-10",
+      "sources": [
+        {
+          "title": "《物理评论快报》｜球状闪电的光学和光谱观测",
+          "url": "https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.112.035001"
+        },
+        {
+          "title": "美国物理学会｜球状闪电慢放影像与光谱",
+          "url": "https://physics.aps.org/articles/v7/5"
+        },
+        {
+          "title": "英国皇家气象学会期刊｜疑似球状闪电视频证据评估",
+          "url": "https://doi.org/10.1002/qj.5038"
+        }
+      ]
+    },
+    {
+      "slug": "nazca-lines",
+      "title": "纳斯卡人在沙漠里画巨画做什么？",
+      "category": "古迹与文字",
+      "icon": "🪶",
+      "summary": "从飞机上找蜂鸟，再点读航拍照片，分辨鸟嘴、翅膀和尾巴。",
+      "opening": "坐在飞机上往下望，沙漠里竟出现了一只长嘴鸟，旁边还有长长的直线。秘鲁的纳斯卡地画是古人留在地面上的大图案。画在这里，是为了让谁看见，又是用来做什么的？",
+      "figure": {
+        "path": "mysteries/nazca-hummingbird.jpg",
+        "alt": "从空中看到的纳斯卡蜂鸟地画，鸟嘴细长，双翅展开",
+        "caption": "纳斯卡的蜂鸟地画。顺着地面上较浅的线条，试着找到鸟嘴和翅膀。",
+        "credit": "Diego Delso／维基共享资源（CC BY-SA 4.0）",
+        "source": 1
+      },
+      "evidence": [
+        {
+          "title": "地表有两种颜色",
+          "observation": "许多线条是移开表面的深色小石子后，露出下面较浅的地面形成的。",
+          "meaning": "地面颜色不同，就能留下线条。干燥的环境有助于保留这些痕迹。",
+          "source": 2
+        },
+        {
+          "title": "不同图案靠近不同的路",
+          "observation": "研究人员把图案和路画在同一张图上，发现许多较小的图案靠近小径，一些大型图案则和长长的线网相邻。",
+          "meaning": "图案所在的位置，能帮助我们猜测古人如何经过、观看或使用这些地方。",
+          "source": 3
+        },
+        {
+          "title": "电脑先帮忙找，考古队再到地面查",
+          "observation": "一项研究让电脑在航拍照片里标出可疑形状，再由考古队到现场检查，确认了 303 幅此前未记录的图案。",
+          "meaning": "电脑可以缩小搜索范围。地面检查可以把人为刻画和远看很像图案的自然痕迹分开。",
+          "source": 3,
+          "image": {
+            "path": "mysteries/nazca-survey.jpg",
+            "alt": "研究人员用无人机拍摄的十五幅纳斯卡小型地画",
+            "caption": "考古队在现场用无人机拍下的部分地画。挑一格，沿着淡淡的痕迹找轮廓。哪一段最容易和周围的石头混在一起？",
+            "credit": "Sakai 等，PNAS 论文图 2（裁切）",
+            "source": 3
+          }
+        }
+      ],
+      "media": [
+        {
+          "kind": "video",
+          "title": "从飞机窗口找蜂鸟",
+          "path": "mysteries/nazca-hummingbird-flight.mp4",
+          "poster": "mysteries/nazca-hummingbird-flight.jpg",
+          "alt": "飞机从干燥的山坡和浅色直线上方掠过，随后拍到蜂鸟地画",
+          "caption": "镜头一开始扫过山坡和长长的浅色线。到了后半段，暂停看看画面中间，找找那只张开翅膀的鸟。你能顺着哪条线认出它？约 12 秒，无声节选。",
+          "credit": "Codas／维基共享资源（CC BY-SA 4.0，节选、去声）",
+          "source": 4
+        },
+        {
+          "kind": "diagram",
+          "title": "沿着浅色线找出蜂鸟轮廓",
+          "path": "mysteries/nazca-hummingbird.jpg",
+          "alt": "蜂鸟地画的俯拍照片，细长的嘴指向左侧，双翅展开，尾部的线向右延伸",
+          "caption": "这张俯拍照片和短片的朝向不同。先认出几个部位，再回到短片里找同样的线条。",
+          "credit": "Diego Delso／维基共享资源（CC BY-SA 4.0），乐学堂加注",
+          "source": 1,
+          "steps": [
+            {
+              "label": "细长的嘴",
+              "text": "找左边两道挨得很近的浅色线。沿着它们向右走，会接到蜂鸟的头和身体。",
+              "x": 26,
+              "y": 45
+            },
+            {
+              "label": "展开的翅膀",
+              "text": "鸟身上方有一排长短不一的弯线，像伸开的羽毛。再看看鸟身下方，你能找到另一只翅膀吗？",
+              "x": 47,
+              "y": 25
+            },
+            {
+              "label": "向右伸的尾巴",
+              "text": "右边的几条长线弯回来，连成尾巴。把它们和附近的直线比一比，看看哪些线条连回了鸟身。",
+              "x": 87,
+              "y": 54
+            }
+          ]
+        }
+      ],
+      "challenge": {
+        "prompt": "怎样检查「有些地画是让走在小径上的人看的」这个猜想？",
+        "choices": [
+          {
+            "label": "看看最像哪种动物，就能确定用途。",
+            "correct": false,
+            "feedback": "动物形状是一条线索。想了解谁能看见，还需要比较图案和道路的位置。"
+          },
+          {
+            "label": "只选最大的一张地画，给全部地画找一个用途。",
+            "correct": false,
+            "feedback": "不同大小的图案可能有不同用途。选多幅、比较它们的环境，才能看出有什么规律。"
+          },
+          {
+            "label": "把许多地画和古小径标在同一张地图上，再去现场看看。",
+            "correct": true,
+            "feedback": "可以比较它们的距离、朝向和从小径上是否看得清。这样就能检查猜想与观察合不合得上。"
+          }
+        ]
+      },
+      "known": "古人在沙漠地表留下了动物、几何图案和长线。许多图案与古小径或线网相邻。",
+      "unresolved": "不同图案各用来做什么？哪些可能和仪式、行走路线或给路人看的标记有关？",
+      "next_step": "把更多地画、古小径和附近遗址的位置及年代放在一起对照，看看哪些图案可能属于同一套活动。",
+      "deep_dive": "空间上的相邻可以帮助提出猜想。要推断它们曾一起被使用，还要确认年代重合，并比较遗物、道路走向和不同观察位置的视野。",
+      "checked_on": "2026-11-10",
+      "sources": [
+        {
+          "title": "Diego Delso｜纳斯卡蜂鸟航拍原图",
+          "url": "https://commons.wikimedia.org/wiki/File:L%C3%ADneas_de_Nazca,_Nazca,_Per%C3%BA,_2015-07-29,_DD_52.JPG"
+        },
+        {
+          "title": "联合国教科文组织｜纳斯卡和帕尔帕的线条与地画",
+          "url": "https://whc.unesco.org/en/list/700/"
+        },
+        {
+          "title": "Sakai 等｜航拍、人工智能和实地调查论文",
+          "url": "https://elib.dlr.de/206765/1/sakai-et-al-2024-ai-accelerated-nazca-survey-nearly-doubles-the-number-of-known-figurative-geoglyphs-and-sheds-light-on.pdf"
+        },
+        {
+          "title": "Codas｜蜂鸟地画飞行实拍",
+          "url": "https://commons.wikimedia.org/wiki/File:El_colibr%C3%AD.webm"
+        }
+      ]
+    },
+    {
+      "slug": "rongorongo",
+      "title": "复活节岛木板上的符号怎么读？",
+      "category": "古迹与文字",
+      "icon": "🪵",
+      "summary": "看拉帕努伊人刻下的小人和动物形符号，试着顺着木纹找行。",
+      "opening": "在太平洋上的拉帕努伊岛，也叫复活节岛，人们曾把一排排小符号刻在木头上。有的像伸手的人，有的像动物。这些刻纹叫「朗戈朗戈」。如果拿到这样一块板，你会先从哪里读起？",
+      "figure": {
+        "path": "mysteries/rongorongo-tablet.jpg",
+        "alt": "拉帕努伊刻纹木板的数字模型，弯曲表面上排列着数行刻纹",
+        "caption": "研究人员记录下木板的形状和刻纹。看看符号是否像课本的字一样都朝着同一个方向。",
+        "credit": "Ferrara 等，Scientific Reports 图 1（CC BY 4.0，裁切）",
+        "source": 1
+      },
+      "evidence": [
+        {
+          "title": "相邻两行的符号会转向",
+          "observation": "有些木板的相邻两行朝向相反。顺着一行看到末尾，转动木板，再看下一行。",
+          "meaning": "符号朝向能帮我们猜阅读顺序。即使找到了行的顺序，符号的意思还得另找证据。",
+          "source": 1,
+          "image": {
+            "path": "mysteries/rongorongo-detail.jpg",
+            "alt": "左边放大木板上的刻纹，右边描出了相邻两行方向不同的四个符号",
+            "caption": "对照左边的刻纹和右边的描线。挑一个像小人的符号，看看下一行有没有朝向相反的形状。",
+            "credit": "Ferrara 等，Scientific Reports 图 1（CC BY 4.0，放大裁切）",
+            "source": 1
+          }
+        },
+        {
+          "title": "找到一块用较早木料制成的板",
+          "observation": "研究团队检测了四块木板的木料。有一块的木材估计来自 15 世纪，比欧洲人到达岛上的时间早。",
+          "meaning": "测年能为木料定一个时间范围。刻字是在什么时候，还要结合木料怎么来、有没有被重新使用等线索。",
+          "source": 1
+        },
+        {
+          "title": "留下的木板很少",
+          "observation": "保留下来的刻纹物件只有几十件，研究人员能用来互相对照的长篇刻纹很有限。",
+          "meaning": "一种读法如果只能解释一小段，可能是碰巧。到别的木板上按同样的规则试一试，才更有说服力。",
+          "source": 2
+        }
+      ],
+      "challenge": {
+        "prompt": "测出一块木板的木材来自 15 世纪，哪项判断最合适？",
+        "choices": [
+          {
+            "label": "刻纹一定和树的年轮同一天形成。",
+            "correct": false,
+            "feedback": "树先长出木材，人们后来才能把板做出来。木材可能放了一段时间才使用。"
+          },
+          {
+            "label": "我们得到了一条关于木料年代的线索。",
+            "correct": true,
+            "feedback": "对。这能帮助缩小调查范围，刻纹的时间还需要别的线索来判断。"
+          },
+          {
+            "label": "所有木板上的所有符号都已经读懂。",
+            "correct": false,
+            "feedback": "知道木料有多老，和知道符号写了什么，是两项不同的调查。"
+          }
+        ]
+      },
+      "known": "这些刻纹留在少量真实的木质文物上。研究人员可以记录符号的样子、顺序和木料年代。",
+      "unresolved": "每组符号在记录什么？这些刻纹最早什么时候开始使用？",
+      "next_step": "比较不同木板上的重复符号和行序，再用没参与猜读的木板检验规则。",
+      "deep_dive": "记录刻纹时，照明角度和木板的弧度会影响照片里哪些笔画更清楚。数字模型有助于把浅痕、裂纹和可能的人为笔画分开。",
+      "checked_on": "2026-11-10",
+      "sources": [
+        {
+          "title": "Ferrara 等｜朗戈朗戈木板数字模型与年代研究",
+          "url": "https://www.nature.com/articles/s41598-024-53063-7?CJEVENT=e045b7e3c77411ee839001020a1eba23"
+        },
+        {
+          "title": "《自然》研究访谈｜留存木板和刻纹年代的问题",
+          "url": "https://www.nature.com/articles/d43978-024-00037-y"
+        }
+      ]
+    },
+    {
+      "slug": "sanxingdui-pits",
+      "title": "三星堆的宝贝为什么埋在坑里？",
+      "category": "古迹与文字",
+      "icon": "🏺",
+      "summary": "看考古队吊起青铜面具，再点读三号坑现场照片，找象牙、铜器和标尺。",
+      "opening": "在四川广汉，考古队从三星堆的土坑里找到了青铜面具、树形青铜器和象牙。把一件大青铜器做好就很费工夫，古蜀人为什么还要把这么多东西埋起来？",
+      "figure": {
+        "path": "mysteries/sanxingdui-mask.jpg",
+        "alt": "三星堆出土的青铜面具，两眼向前凸出，耳朵向两边伸展，额头上有装饰",
+        "caption": "夔龙冠纵目青铜面具，出自二号坑。看看眼睛、耳朵和头顶，哪一处最先吸引你？",
+        "credit": "四川广汉三星堆博物馆藏，上海博物馆展览资料",
+        "source": 1
+      },
+      "evidence": [
+        {
+          "title": "同一坑里发现了不同形状的青铜器",
+          "observation": "二号坑出土的青铜器有造型夸张的面具，也有树形器物。",
+          "meaning": "考古人员会把造型和出土位置一起记录，看看这些器物是否原本和同一种活动有关。",
+          "source": 1,
+          "image": {
+            "path": "mysteries/sanxingdui-bronze-tree.jpg",
+            "alt": "三星堆出土的青铜神树下部，中央是树干，下方有向外伸开的底座",
+            "caption": "二号坑出土的青铜神树。看看底座是怎样向两边撑开的，再找找树干上向外伸出的部分。",
+            "credit": "四川广汉三星堆博物馆藏，上海博物馆展览资料",
+            "source": 1
+          }
+        },
+        {
+          "title": "有些东西叠在一起",
+          "observation": "考古队在部分坑里记录到了象牙和铜器相互叠压的情形。三号坑的一件器物下面还压着铜面具和铜人头像等。",
+          "meaning": "谁盖在谁上面，能帮助研究人员推想放入的先后。出土时拍照、测位置，能把这种关系留在记录里。",
+          "source": 2
+        },
+        {
+          "title": "碎片有可能跨坑对上",
+          "observation": "发掘报告记录，三号坑出土的几件残片，分别和二号、七号、八号坑出土的残片拼上了。",
+          "meaning": "能拼合的碎片把几个坑联系了起来。考古队据此推断，这些坑可能是在同一时期填埋的。",
+          "source": 2
+        }
+      ],
+      "media": [
+        {
+          "kind": "video",
+          "title": "青铜大面具怎样从坑里吊起来",
+          "path": "mysteries/sanxingdui-mask-lift.mp4",
+          "poster": "mysteries/sanxingdui-mask-lift.jpg",
+          "alt": "考古人员用木架和绑带保护三星堆三号坑的青铜大面具，缓缓将它吊起",
+          "caption": "这是三星堆三号坑提取青铜大面具的现场。看看面具周围的木架和绑带，想一想这些东西在吊起时分别保护哪里。约 20 秒，无声节选。",
+          "credit": "央视网 CCTV-10《探索·发现》",
+          "source": 3
+        },
+        {
+          "kind": "diagram",
+          "title": "给三号坑的现场照片做记录",
+          "path": "mysteries/sanxingdui-pit-finds.jpg",
+          "alt": "三号坑发掘照片局部，弯曲的象牙和一些带绿色的铜器交错分布，底部有一米标尺",
+          "caption": "这张照片保留了遗物在坑里的样子。点选读图步骤，看看考古人员在取出文物之前，可以从画面里记下什么。",
+          "credit": "四川省文物考古研究院、上海大学，三号坑发掘简报图五（局部，乐学堂加注）",
+          "source": 2,
+          "steps": [
+            {
+              "label": "交错的象牙",
+              "text": "留意一根根长而弯的象牙。沿着弧线看，哪些象牙交叉在一起？把这些位置记下来，取出后还能回头核对。",
+              "x": 62,
+              "y": 31
+            },
+            {
+              "label": "象牙旁的铜器",
+              "text": "这附近能看到带绿色的铜器。照片能告诉我们它们和象牙靠得多近。要看清谁在上面、谁在下面，还可以比一比从侧面拍的照片和深度记录。",
+              "x": 34,
+              "y": 67
+            },
+            {
+              "label": "一米标尺",
+              "text": "照片底部有一段从 0 到 1 米的标尺。照片放大或缩小，标尺会一起变，用它就能估计照片里遗物的大小。",
+              "x": 51,
+              "y": 92
+            }
+          ]
+        }
+      ],
+      "challenge": {
+        "prompt": "发掘时看见象牙压在青铜器上面，哪一步对解开埋藏经过最有帮助？",
+        "choices": [
+          {
+            "label": "先拍照并记下每件东西在坑里的位置和上下关系。",
+            "correct": true,
+            "feedback": "东西一取出来，上下关系就很难重新看见。留下记录，之后才能比较不同坑里有没有相似的摆放。"
+          },
+          {
+            "label": "只给最漂亮的那件编号。",
+            "correct": false,
+            "feedback": "不起眼的小碎片也可能能拼合，或者记录它旁边原来放着什么。每一件的位置都有用。"
+          },
+          {
+            "label": "仅凭这一幕就写出当时仪式的所有步骤。",
+            "correct": false,
+            "feedback": "上下关系能提供一段顺序。整场活动怎么进行，还需要比较其他坑和器物。"
+          }
+        ]
+      },
+      "known": "古蜀人留下了成组的青铜器、金器和象牙等。不同坑之间还找到能拼合的器物。",
+      "unresolved": "发掘报告推测这些坑用来埋放祭祀器物。古蜀人当时举行了怎样的仪式，又为何挑选这些器物放进去？",
+      "next_step": "比较器物碎片的拼合关系、坑里的层位和材料检测结果，试着排出更完整的先后顺序。",
+      "deep_dive": "拼合能把两个出土地点联系起来。要判断是否同时填埋，还需要看各坑的地层、测年和器物之间的摆放关系。",
+      "checked_on": "2026-11-10",
+      "sources": [
+        {
+          "title": "上海博物馆｜三星堆面具、青铜神树与古蜀文明展",
+          "url": "https://www.shanghaimuseum.net/mu/frontend/pg/m/article/id/I00004626"
+        },
+        {
+          "title": "四川省文物考古研究院｜祭祀区三号坑发掘简报",
+          "url": "https://www.sckg.com/uploads/soft/20240924/2-240924145943M8.pdf"
+        },
+        {
+          "title": "央视《探索·发现》｜三星堆三号坑青铜大面具提取现场",
+          "url": "https://tv.cctv.com/2021/10/21/VIDEfwSOkKHtbNpKfvuX2TsI211021.shtml"
+        }
       ]
     }
   ]

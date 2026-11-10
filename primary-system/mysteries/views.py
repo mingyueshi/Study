@@ -7,7 +7,14 @@ from .content import load_cases
 
 @require_safe
 def index(request):
-    return render(request, 'mysteries/index.html', {'cases': load_cases().values()})
+    cases = load_cases()
+    groups = {}
+    for case in cases.values():
+        groups.setdefault(case['category'], []).append(case)
+    return render(request, 'mysteries/index.html', {
+        'groups': groups,
+        'case_count': len(cases),
+    })
 
 
 @require_safe

@@ -1,0 +1,74 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'mysteries/ocean-depths.css' %}">
+<section id="ocean-depths" class="mystery-section" aria-labelledby="ocean-depths-title" data-ocean-depths>
+  <header class="mystery-section-heading">
+    <p class="mystery-kicker">下潜观察舱</p>
+    <h2 id="ocean-depths-title">{{ explorer.title }}</h2>
+    <p>{{ explorer.intro }}</p>
+  </header>
+
+  <div class="ocean-depth-layout">
+    <div class="ocean-scene">
+      <div class="ocean-scene-heading">
+        <strong>立体海洋剖面</strong>
+        <span>分段标尺 · 米</span>
+      </div>
+      <nav class="ocean-navigation" aria-label="海洋深度标尺">
+        <ol class="ocean-bands">
+          {% for layer in explorer.layers %}
+          <li class="ocean-band">
+            <a class="ocean-layer-link" href="#ocean-depth-{{ layer.minimum }}">
+              <span class="ocean-tick">{{ layer.minimum }}</span>
+              <span class="ocean-layer-face">
+                <strong>{{ layer.name }}</strong>
+                <small>{{ layer.condition }}</small>
+              </span>
+            </a>
+          </li>
+          {% endfor %}
+        </ol>
+        <div class="ocean-probe" aria-hidden="true" hidden>
+          <svg viewBox="0 0 56 32" fill="none" width="48" height="28">
+            <path d="M17 10v-4h14v4m-7 17h13m-16-4-3 5m17-5 4 5" stroke="#ffc667" stroke-width="3" stroke-linecap="round"/>
+            <path d="m12 14-6-3v12l6-3" fill="#e8943a" stroke="#ffd080" stroke-width="2"/>
+            <rect x="12" y="10" width="38" height="14" rx="7" fill="#ffd47f" stroke="#fff4c6" stroke-width="2"/>
+            <circle cx="38" cy="17" r="4" fill="#16445f" stroke="#fff2c3" stroke-width="2"/>
+          </svg>
+        </div>
+      </nav>
+      <div class="ocean-end"><span>{{ explorer.approximate_limit }}</span><strong>海沟最深处约在这里</strong></div>
+      <p class="ocean-scale-note">{{ explorer.scale_note }} <a href="#source-{{ explorer.source }}">分层出处</a></p>
+    </div>
+
+    <div class="ocean-readout">
+      <div class="ocean-stepper" hidden>
+        <button type="button" class="mystery-media-button" data-dive-step="-1">↑ 上一层</button>
+        <span class="ocean-dive-status" aria-live="polite"></span>
+        <button type="button" class="mystery-media-button" data-dive-step="1">下一层 ↓</button>
+      </div>
+      {% for layer in explorer.layers %}
+      <article class="ocean-layer-panel" id="ocean-depth-{{ layer.minimum }}" aria-labelledby="ocean-depth-label-{{ layer.minimum }}">
+        <header class="ocean-layer-heading">
+          <p class="mystery-kicker ocean-depth-label">{% if layer.maximum %}{{ layer.minimum }}–{{ layer.maximum }} 米{% else %}{{ layer.minimum }} 米以下{% endif %}</p>
+          <h3 id="ocean-depth-label-{{ layer.minimum }}">{{ layer.name }}</h3>
+          <p>{{ layer.description }}</p>
+        </header>
+        <div class="ocean-animal-list">
+          {% for animal in layer.animals %}
+          <figure class="ocean-animal">
+            <img src="{% static animal.path %}" alt="{{ animal.alt }}" loading="lazy" decoding="async">
+            <figcaption>
+              <h4>{{ animal.title }}</h4>
+              <p class="ocean-animal-depth">{{ animal.depth_note }}</p>
+              <p>{{ animal.caption }}</p>
+              <p class="ocean-animal-credit">{{ animal.credit }} · <a href="{% static animal.path %}" target="_blank" rel="noopener" aria-label="查看{{ animal.title }}大图">查看大图</a> · <a href="#source-{{ animal.source }}">照片与资料</a></p>
+            </figcaption>
+          </figure>
+          {% endfor %}
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+<script src="{% static 'mysteries/ocean-depths.js' %}" defer></script>

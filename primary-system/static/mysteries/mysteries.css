@@ -29,6 +29,8 @@
   border: 1px solid var(--mystery-line);
   background: radial-gradient(ellipse at right top, #fff2ce, transparent 55%), linear-gradient(120deg, #e0f5ea, #f1f9f8);
 }
+.mystery-directory-hero { padding-block: clamp(1.4rem, 3vw, 2.25rem); }
+.mystery-directory-hero h1 { font-size: clamp(2.2rem, 4vw, 3.5rem); }
 .mysteries .mystery-kicker {
   margin: 0 0 .35rem;
   color: var(--mystery-accent);
@@ -71,6 +73,8 @@
 .mystery-section { margin-top: clamp(1.5rem, 4vw, 3rem); }
 .mystery-section-heading { margin-bottom: 1rem; }
 .mystery-section-heading > p { color: var(--mystery-muted); }
+.mystery-group { margin-top: clamp(1.5rem, 3vw, 2.25rem); }
+.mystery-group h3 { margin-bottom: .85rem; }
 .mystery-case-list, .mystery-evidence-list, .mystery-findings {
   display: grid;
   gap: 1rem;
@@ -78,37 +82,30 @@
   padding: 0;
   margin: 0;
 }
-.mystery-case-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.mystery-case-list { grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr)); }
 .mysteries .mystery-case-card {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  align-items: start;
-  gap: 1rem;
+  display: flex;
+  flex-direction: column;
   height: 100%;
   color: var(--mystery-ink);
   border-radius: 1.4rem;
   border: 1px solid var(--mystery-line);
   background: #fff;
-  padding: clamp(1rem, 2.8vw, 2rem);
+  overflow: hidden;
   text-decoration: none;
 }
 .mysteries .mystery-case-card:hover { border-color: var(--mystery-accent); background: var(--mystery-tint); }
-.mystery-icon {
-  display: grid;
-  place-items: center;
-  background: #fff1d8;
-  border-radius: 1rem;
-  width: clamp(2.7rem, 5vw, 4rem);
-  aspect-ratio: 1;
-  font-size: clamp(1.4rem, 3vw, 2rem);
+.mystery-card-image {
+  width: 100%;
+  height: clamp(8.5rem, 13vw, 11rem);
+  object-fit: contain;
+  background: var(--mystery-tint);
+  border-bottom: 1px solid var(--mystery-line);
 }
-.mystery-case-list li:nth-child(2) .mystery-icon { background: #eeebfb; }
-.mystery-case-list li:nth-child(3) .mystery-icon { background: #ddf3f9; }
-.mystery-case-list li:nth-child(4) .mystery-icon { background: #f7e8da; }
-.mystery-card-copy { display: grid; gap: .25rem; }
-.mystery-card-copy strong { font-size: clamp(1.3rem, 2.5vw, 1.8rem); line-height: 1.3; }
-.mystery-card-copy > span:not(.mystery-kicker) { color: var(--mystery-muted); }
-.mystery-card-copy .mystery-card-action { font-size: .95rem; font-weight: 800; }
+.mystery-card-copy { display: flex; flex: 1; flex-direction: column; gap: .35rem; padding: 1rem 1.15rem; }
+.mystery-card-copy strong { font-size: 1.3rem; line-height: 1.35; }
+.mystery-card-copy > span { color: var(--mystery-muted); }
+.mystery-card-copy .mystery-card-action { margin-top: auto; font-size: .95rem; font-weight: 800; color: var(--mystery-accent); }
 
 .mystery-case-hero { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
 .mystery-case-hero h1 { font-size: clamp(2rem, 3.8vw, 2.8rem); text-wrap: balance; }
@@ -128,6 +125,10 @@
 }
 .mystery-figure figcaption { padding: .75rem 1rem; font-size: .95rem; line-height: 1.5; }
 .mystery-figure figcaption span { display: block; margin-top: .3rem; color: var(--mystery-muted); }
+.mystery-clue-figure { width: 100%; margin-top: .35rem; }
+.mystery-clue-figure img { height: clamp(9rem, 19vw, 14rem); }
+.mystery-clue-figure figcaption { padding: .65rem .8rem; }
+.mystery-clue-figure a { text-decoration: underline; text-underline-offset: .15em; }
 .mystery-figure-detail { display: block; max-width: 100%; height: auto; margin-top: .8rem; border-radius: .75rem; }
 .mystery-evidence-list, .mystery-findings { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .mystery-panel {
@@ -142,6 +143,57 @@
 .mystery-evidence dt { font-weight: 800; color: var(--mystery-accent); font-size: .9rem; margin-top: .6rem; }
 .mystery-evidence dd, .mystery-findings dd { margin: .2rem 0 0; }
 .mystery-source-link { margin-top: auto; font-size: .9rem; }
+
+.mystery-media-list { display: grid; gap: 1rem; }
+.mystery-media {
+  display: grid;
+  grid-template-columns: minmax(0, min(56%, 37rem)) minmax(0, 1fr);
+  align-items: start;
+  gap: clamp(.9rem, 2.5vw, 2rem);
+  margin: 0;
+}
+.mystery-media-visual {
+  min-width: 0;
+  border-radius: .85rem;
+  overflow: hidden;
+  background: #142733;
+}
+.mystery-media-visual video, .mystery-media-visual img { display: block; width: 100%; height: auto; }
+.mystery-media-visual video { aspect-ratio: 16 / 9; object-fit: contain; }
+.mystery-media-copy { max-width: 36rem; }
+.mysteries .mystery-media-credit { color: var(--mystery-muted); font-size: .9rem; overflow-wrap: anywhere; }
+.mystery-media-credit a { text-decoration: underline; text-underline-offset: .15em; }
+.mystery-media-button {
+  border: 1px solid var(--mystery-line);
+  border-radius: .75rem;
+  padding: .45rem .8rem;
+  color: var(--mystery-accent);
+  background: var(--mystery-tint);
+  font-size: .95rem;
+  font-weight: 750;
+}
+.mystery-media-button:hover { border-color: var(--mystery-accent); }
+.mystery-media-button[aria-pressed="true"] { color: #fff; background: var(--mystery-accent); }
+.mystery-media-button[data-animation-toggle] { margin-top: .75rem; }
+.mystery-diagram-buttons:not([hidden]) { display: flex; flex-wrap: wrap; gap: .45rem; margin-top: .8rem; }
+.mysteries .mystery-diagram-note { padding: .65rem .85rem; border-radius: .75rem; background: var(--mystery-tint); }
+.mystery-diagram-image { position: relative; }
+.mystery-diagram-pin {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: clamp(1.4rem, 2.5vw, 2rem);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  border: 2px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 1px 5px #142733aa;
+  background: #1d474f;
+  color: #fff;
+  font-size: .8rem;
+  font-weight: 800;
+}
+.mystery-diagram-pin[data-current] { z-index: 1; color: #432f17; background: #ffce72; outline: 3px solid #432f17; }
 
 .mystery-challenge { background: var(--mystery-tint); }
 .mystery-instruction { font-size: .95rem; color: var(--mystery-muted); }
@@ -175,10 +227,10 @@
 .mystery-sources a { overflow-wrap: anywhere; }
 
 @media (max-width: 58rem) {
-  .mystery-case-hero { grid-template-columns: minmax(0, 1fr); }
+  .mystery-case-hero, .mystery-media { grid-template-columns: minmax(0, 1fr); }
   .mystery-evidence-list { grid-template-columns: minmax(0, 1fr); }
 }
 @media (max-width: 40rem) {
-  .mystery-banner, .mystery-case-list, .mystery-findings { grid-template-columns: minmax(0, 1fr); }
+  .mystery-banner, .mystery-findings { grid-template-columns: minmax(0, 1fr); }
   .mystery-emblem { display: none; }
 }

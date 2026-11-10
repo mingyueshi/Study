@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 390" font-family="system-ui, sans-serif">
+  <rect width="680" height="390" fill="#eef3fc"/>
+  <text x="48" y="52" fill="#18363b" font-size="26" font-weight="700">把两种观测的时间对起来</text>
+  <text x="48" y="83" fill="#425e61" font-size="20">示意图</text>
+  <rect x="46" y="102" width="588" height="221" rx="16" fill="#fff"/>
+  <path d="M348 118v190" stroke="#8396ab" stroke-width="2" stroke-dasharray="6 7"/>
+  <g fill="#18363b" font-size="22" font-weight="700">
+    <text x="66" y="139">无线电</text>
+    <text x="66" y="248">X 射线</text>
+  </g>
+  <path d="M68 194h216l11-4 15 4 11-7 11 6 16-67 13 67 10-4 12 5h226"
+        fill="none" stroke="#235b9d" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M68 298h205l13-6 18 6 19-9 11 6 17-57 15 59 15-8 13 9h215"
+        fill="none" stroke="#ad4c28" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M494 354h102l-10-8m10 8-10 8" fill="none" stroke="#425e61" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="478" y="362" fill="#425e61" text-anchor="end" font-size="20">时间</text>
+</svg>

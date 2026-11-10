@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 390" font-family="system-ui, sans-serif">
+  <defs>
+    <linearGradient id="colors">
+      <stop stop-color="#a680fc"/><stop offset=".24" stop-color="#6e9aff"/>
+      <stop offset=".46" stop-color="#70e5ad"/><stop offset=".68" stop-color="#ffe783"/>
+      <stop offset=".86" stop-color="#ffae79"/><stop offset="1" stop-color="#f45b64"/>
+    </linearGradient>
+  </defs>
+  <rect width="680" height="390" fill="#172337"/>
+  <text x="48" y="54" fill="#fff" font-size="26" font-weight="700">在光里找亮线</text>
+  <text x="48" y="88" fill="#cbd6eb" font-size="20">示意图</text>
+  <rect x="48" y="116" width="584" height="39" rx="5" fill="url(#colors)"/>
+  <rect x="48" y="178" width="584" height="105" rx="8" fill="#0b1321" stroke="#667996"/>
+  <g stroke-width="7">
+    <path d="M132 188v84" stroke="#a68dff"/>
+    <path d="M267 188v84" stroke="#67dcf7"/>
+    <path d="M346 188v84" stroke="#85ea96"/>
+    <path d="M477 188v84" stroke="#ffd884"/>
+    <path d="M575 188v84" stroke="#ff7779"/>
+  </g>
+  <path d="M346 317v-24m-7 8 7-8 7 8" fill="none" stroke="#cbd6eb" stroke-width="2.5" stroke-linejoin="round"/>
+  <text x="346" y="350" fill="#fff" text-anchor="middle" font-size="22">记下亮线的位置</text>
+</svg>

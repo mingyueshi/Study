@@ -189,7 +189,7 @@ SPECIAL_ENTRIES = (
      'blurb': '从火山灰里的脚印出发，读懂人类家谱、远古生活和中国遗址里的线索。'},
     {'route': 'mysteries', 'subject': '科学', 'area': 'science', 'icon': 'mysteries', 'color': 'science',
      'name': '未解之谜研究所', 'tag': '打开案卷 →',
-     'blurb': '从火星古河道到神秘手稿，看看真实线索能告诉我们什么。'},
+     'blurb': '从土卫二的冰泉到三星堆的青铜器，读案卷、看实物、试着做判断。'},
     {'route': 'phrases', 'subject': '英语', 'area': 'english', 'icon': 'phrases', 'color': 'english',
      'name': '日常用语', 'tag': '开口说 →',
      'blurb': '教材里的 597 条常用短语和短句：按句式记一个开头整句就出来，按话题找场景想说哪句点哪句。'},

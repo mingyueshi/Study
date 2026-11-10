@@ -5,11 +5,11 @@
 <link rel="stylesheet" href="{% static 'mysteries/mysteries.css' %}">
 <div class="mysteries">
   <a class="mystery-back" href="{% url 'home' %}?area=science#modules-title">← 学习广场 · 科学</a>
-  <header class="mystery-banner">
+  <header class="mystery-banner mystery-directory-hero">
     <div>
       <p class="mystery-kicker">好奇心调查站</p>
       <h1>未解之谜研究所</h1>
-      <p class="mystery-lead">火星的岩石、深海的山坡、手稿里的陌生符号，都藏着值得追问的线索。挑一份案卷，看看你能从证据里读出什么。</p>
+      <p class="mystery-lead">看看冰月喷出的水汽、游过大西洋的鳗鱼和古蜀人留下的青铜器。挑一份案卷，从真实的线索出发，做一次小小调查。</p>
       <ul class="mystery-steps" aria-label="调查步骤">
         <li><span>1</span> 看线索</li>
         <li><span>2</span> 做判断</li>
@@ -22,23 +22,32 @@
   <section class="mystery-section" aria-labelledby="case-list-heading">
     <header class="mystery-section-heading">
       <h2 id="case-list-heading">选择一份案卷</h2>
-      <p>小学四到六年级 · 每篇约 5–8 分钟</p>
+      <p>{{ case_count }} 份案卷 · 小学四到六年级 · 每篇约 5–8 分钟</p>
     </header>
-    <ul class="mystery-case-list">
-      {% for case in cases %}
-      <li>
-        <a class="mystery-case-card" href="{% url 'mystery-case' case.slug %}">
-          <span class="mystery-icon" aria-hidden="true">{{ case.icon }}</span>
-          <span class="mystery-card-copy">
-            <span class="mystery-kicker">{{ case.category }}</span>
-            <strong>{{ case.title }}</strong>
-            <span>{{ case.summary }}</span>
-            <span class="mystery-card-action" aria-hidden="true">打开案卷 →</span>
-          </span>
-        </a>
-      </li>
+    <nav class="mystery-jumps" aria-label="案卷分类">
+      {% for category, cases in groups.items %}
+      <a href="#case-group-{{ forloop.counter }}">{{ category }} · {{ cases|length }} 份 ↓</a>
       {% endfor %}
-    </ul>
+    </nav>
+    {% for category, cases in groups.items %}
+    <section class="mystery-section mystery-group" id="case-group-{{ forloop.counter }}" aria-labelledby="case-group-heading-{{ forloop.counter }}">
+      <h3 id="case-group-heading-{{ forloop.counter }}">{{ category }}</h3>
+      <ul class="mystery-case-list">
+        {% for case in cases %}
+        <li>
+          <a class="mystery-case-card" href="{% url 'mystery-case' case.slug %}">
+            <img class="mystery-card-image" src="{% static case.figure.path %}" alt="" loading="lazy">
+            <span class="mystery-card-copy">
+              <strong><span aria-hidden="true">{{ case.icon }}</span> {{ case.title }}</strong>
+              <span>{{ case.summary }}</span>
+              <span class="mystery-card-action" aria-hidden="true">打开案卷 →</span>
+            </span>
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+    </section>
+    {% endfor %}
   </section>
 </div>
 {% endblock %}

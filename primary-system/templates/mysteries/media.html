@@ -1,0 +1,41 @@
+{% load static %}
+<figure class="mystery-panel mystery-media" {% if item.kind == 'animation' %}data-mystery-animation{% elif item.kind == 'diagram' %}data-mystery-diagram{% endif %}>
+  <div class="mystery-media-visual">
+    {% if item.kind == 'video' %}
+    <video controls playsinline preload="none" poster="{% static item.poster %}" aria-labelledby="media-title-{{ number }}" aria-describedby="media-caption-{{ number }}">
+      <source src="{% static item.path %}" type="video/mp4">
+      <p>{{ item.alt }} <a href="{% static item.path %}">打开本地短视频</a></p>
+    </video>
+    {% elif item.kind == 'animation' %}
+    <img id="media-image-{{ number }}" src="{% static item.poster %}" alt="{{ item.alt }}" loading="lazy" data-animation-src="{% static item.path %}">
+    {% elif item.kind == 'diagram' %}
+    <div class="mystery-diagram-image">
+      <img src="{% static item.path %}" alt="{{ item.alt }}" loading="lazy">
+      {% for step in item.steps %}
+      <span class="mystery-diagram-pin" aria-hidden="true" style="left: {{ step.x }}%; top: {{ step.y }}%">{{ forloop.counter }}</span>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+  <figcaption class="mystery-media-copy">
+    <p class="mystery-kicker">{% if item.kind == 'video' %}实拍短视频{% elif item.kind == 'animation' %}观测动图{% else %}互动读图{% endif %}</p>
+    <h3 id="media-title-{{ number }}">{{ item.title }}</h3>
+    <p id="media-caption-{{ number }}">{{ item.caption }}</p>
+    {% if item.kind == 'animation' %}
+    <button class="mystery-media-button" type="button" hidden aria-controls="media-image-{{ number }}" data-animation-toggle>播放动图</button>
+    <noscript><p><a href="{% static item.path %}">打开本地动图</a></p></noscript>
+    {% elif item.kind == 'diagram' %}
+    <div class="mystery-diagram-buttons" role="group" aria-label="选择读图步骤" hidden>
+      {% for step in item.steps %}
+      <button class="mystery-media-button" type="button" aria-pressed="false" aria-controls="media-note-{{ number }}-{{ forloop.counter }}">{{ forloop.counter }}. {{ step.label }}</button>
+      {% endfor %}
+    </div>
+    <div class="mystery-diagram-notes" aria-live="polite">
+      {% for step in item.steps %}
+      <p id="media-note-{{ number }}-{{ forloop.counter }}" class="mystery-diagram-note"><strong>{{ forloop.counter }}. {{ step.label }}</strong><br>{{ step.text }}</p>
+      {% endfor %}
+    </div>
+    {% endif %}
+    <p class="mystery-media-credit">{{ item.credit }} · <a href="#source-{{ item.source }}">素材出处</a></p>
+  </figcaption>
+</figure>

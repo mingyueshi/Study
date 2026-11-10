@@ -1,0 +1,8 @@
+{% load static %}
+<figure class="mystery-figure{% if is_clue %} mystery-clue-figure{% endif %}">
+  <img src="{% static figure.path %}" alt="{{ figure.alt }}"{% if is_clue %} loading="lazy"{% endif %}>
+  <figcaption>
+    <strong>{{ figure.caption }}</strong>
+    <span>{{ figure.credit }} · <a href="#source-{{ figure.source }}">图像出处</a>{% if is_clue %} · <a href="{% static figure.path %}" target="_blank" rel="noopener">查看大图</a>{% endif %}</span>
+  </figcaption>
+</figure>
