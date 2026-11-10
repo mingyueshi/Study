@@ -12,7 +12,7 @@
   const rootKey = shell.dataset.rootKey || '';
   const rootZh = shell.dataset.rootZh || '';
   const rootEmoji = shell.dataset.rootEmoji || '';
-  const sceneUrl = shell.dataset.sceneUrl || '/words/';
+  const sceneUrl = shell.dataset.sceneUrl;
   const dictUrl = shell.dataset.dictUrl || '/dictionary/';
 
   const el = (tag, className, text) => {
@@ -25,14 +25,14 @@
   /* —— 展开状态记忆：按枝干 id 存（key v2，与旧版文本键不兼容）—— */
   const STORE_KEY = 'words_tree_expand_v2';
   let saved = {};
-  try { saved = JSON.parse(localStorage.getItem(STORE_KEY) || '{}'); } catch (e) { /* 忽略 */ }
+  try { saved = JSON.parse(localStorage.getItem(STORE_KEY) || '{}') || {}; } catch (e) { /* 忽略 */ }
   const save = () => {
     try { localStorage.setItem(STORE_KEY, JSON.stringify(saved)); } catch (e) { /* 忽略 */ }
   };
   document.querySelectorAll('.tree-branch details').forEach((details) => {
     const id = details.closest('.tree-branch')?.id;
     if (!id) return;
-    if (id in saved) details.open = saved[id];
+    if (id in saved && !details.hasAttribute('data-path-open')) details.open = saved[id];
     details.addEventListener('toggle', () => { saved[id] = details.open; save(); });
   });
 
@@ -44,7 +44,22 @@
     emoji: chip.dataset.emoji || '',
     scene: chip.dataset.scene || '',
     status: chip.dataset.status || '',
+    ending: chip.dataset.ending || '',
   });
+
+  const addSpelling = (node, { en, ending }) => {
+    node.lang = 'en';
+    if (ending) node.append(en.slice(0, -ending.length), el('span', 'tree-word-ending', ending));
+    else node.textContent = en;
+  };
+
+  const sayButton = (en, className = 'say-chip') => {
+    const button = el('button', className, '🔊');
+    button.type = 'button';
+    button.dataset.say = en;
+    button.setAttribute('aria-label', `朗读 ${en}`);
+    return button;
+  };
 
   // 一个 details 的直属词（:scope > 避开嵌套枝干和末尾 leaves 的重复渲染）
   const ownChips = (details) =>
@@ -89,30 +104,39 @@
   const groupsOf = (branchLi) => {
     const groups = [];
     const own = branchLi ? ownChips(branchLi.querySelector('details')) : rootOwnChips();
-    if (own.length) groups.push({ title: '本级', chips: own });
+    const active = branchLi?.querySelector('summary')?.dataset;
+    if (own.length) groups.push({ title: active?.branchIpa ? active.branchZh : '本级', ipa: active?.branchIpa, chips: own });
     const lis = branchLi
       ? branchLi.querySelectorAll(':scope > details > ul.tree-nodes > li.tree-branch')
       : board.querySelectorAll(':scope > .tree-nodes > li.tree-branch');
     lis.forEach((li) => {
       const chips = subtreeChips(li.querySelector('details'));
       if (chips.length) {
-        groups.push({ title: li.querySelector('summary')?.dataset.branchZh || '', chips });
+        const { branchZh, branchIpa } = li.querySelector('summary').dataset;
+        groups.push({ title: branchZh, ipa: branchIpa, chips });
       }
     });
     return groups;
   };
 
-  const wallChip = (data) => {
+  const wallEntry = (source) => {
+    const data = chipData(source);
     const chip = el('a', 'tree-word');
-    chip.href = '#';
-    chip.dataset.en = data.en;
-    chip.dataset.zh = data.zh;
-    chip.append(el('b', '', data.en));
+    chip.href = source.getAttribute('href');
+    Object.assign(chip.dataset, data);
+    const word = el('b');
+    addSpelling(word, data);
+    chip.append(word);
+    if (data.ending) chip.append(el('span', 'tree-wall-ipa', data.ipa));
     if (data.zh) chip.append(el('i', '', data.zh));
-    return chip;
+    if (!data.ending) return chip;
+
+    const entry = el('div', 'tree-wall-entry');
+    entry.append(chip, sayButton(data.en, 'say-chip tree-wall-say'));
+    return entry;
   };
 
-  const renderWall = (branchLi) => {
+  const renderWall = (branchLi, scroll = true) => {
     wallBranch = branchLi;
     setUrl(branchLi
       ? `root=${encodeURIComponent(rootKey)}&branch=${encodeURIComponent(branchLi.id)}`
@@ -132,9 +156,11 @@
     groupsOf(branchLi).forEach((group) => {
       const box = el('div', 'tree-wall-group');
       const head = el('p', 'tree-wall-group-title');
-      head.append(el('span', '', group.title), el('i', '', String(group.chips.length)));
+      head.append(el('span', '', group.title));
+      if (group.ipa) head.append(el('i', 'tree-family-sound', group.ipa));
+      head.append(el('i', '', `${group.chips.length} 词`));
       const chips = el('div', 'tree-wall-words');
-      group.chips.forEach((source) => chips.append(wallChip(chipData(source))));
+      group.chips.forEach((source) => chips.append(wallEntry(source)));
       box.append(head, chips);
       wrap.append(box);
     });
@@ -147,13 +173,14 @@
         box.querySelectorAll('.tree-word').forEach((chip) => {
           const hay = `${chip.dataset.en} ${chip.dataset.zh}`.toLowerCase();
           const show = !q || hay.includes(q);
-          chip.hidden = !show;
+          const entry = chip.closest('.tree-wall-entry') || chip;
+          entry.hidden = !show;
           if (show) visible += 1;
         });
         box.hidden = visible === 0;
       });
     });
-    panel.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    if (scroll) panel.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
   };
 
   /* —— 词卡 —— */
@@ -161,12 +188,9 @@
     const card = el('article', 'tree-word-card');
     card.append(el('p', 'tree-word-emoji', data.emoji || '🔤'));
     const headline = el('p', 'tree-word-headline');
-    headline.append(el('b', '', data.en));
-    const say = el('button', 'say-chip', '🔊');
-    say.type = 'button';
-    say.dataset.say = data.en;
-    say.setAttribute('aria-label', `朗读 ${data.en}`);
-    headline.append(say);
+    const word = el('b');
+    addSpelling(word, data);
+    headline.append(word, sayButton(data.en));
     card.append(headline);
     if (data.ipa) card.append(el('p', 'tree-word-ipa', data.ipa));
     if (data.zh) card.append(el('p', 'tree-word-zh', data.zh));
@@ -175,13 +199,16 @@
       card.append(el('p', 'tree-word-status', data.status));
     }
     const actions = el('div', 'tree-word-actions');
-    const scene = el('a', 'button small', '去场景页学会它 →');
-    scene.href = `${sceneUrl}?word=${encodeURIComponent(data.en)}`;
+    if (sceneUrl) {
+      const scene = el('a', 'button small', '去场景页学会它 →');
+      scene.href = `${sceneUrl}?word=${encodeURIComponent(data.en)}`;
+      actions.append(scene);
+    }
     const dict = el('a', 'button small ghost', '查词典 →');
     dict.href = `${dictUrl}?q=${encodeURIComponent(data.en)}`;
     const back = el('button', 'button small ghost tree-back', '← 返回词墙');
     back.type = 'button';
-    actions.append(scene, dict, back);
+    actions.append(dict, back);
     card.append(actions);
     panel.replaceChildren(card);
     markOn(data.en);
@@ -201,6 +228,7 @@
     const chip = event.target.closest('.tree-word');
     if (chip) {
       event.preventDefault();
+      if (board.contains(chip)) wallBranch = containingBranch(chip);
       renderCard(chipData(chip));
     }
   });
@@ -230,10 +258,6 @@
     const branchLi = params.get('branch')
       ? document.getElementById(params.get('branch'))
       : null;
-    if (branchLi) {
-      renderWall(branchLi);
-    } else {
-      renderWall(null);
-    }
+    renderWall(branchLi?.classList.contains('tree-branch') ? branchLi : null, false);
   }
 })();

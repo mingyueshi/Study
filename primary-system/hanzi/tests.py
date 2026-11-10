@@ -64,6 +64,6 @@ class HanziViewTests(TestCase):
 
     def test_polyphones_page_links_to_evolution_hall_for_selected_chars(self):
         self.assertContains(
-            self.client.get("/hanzi/polyphones/", {"char": "学"}),
-            reverse("hanzi-evolution"),
+            self.client.get("/hanzi/polyphones/", {"char": "行"}),
+            reverse("hanzi-evolution", query={"char": "行"}),
         )

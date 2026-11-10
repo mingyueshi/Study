@@ -1,0 +1,29 @@
+<div data-poly-round data-answer="{{ round.answer }}" data-char="{{ round.char }}" data-word="{{ round.word }}">
+  <p class="poly-hint">{% if more_practice %}词库拓展{% else %}常用词练习{% endif %} · 这个词里，「{{ round.char }}」读什么？</p>
+  <div class="poly-word">
+    {% for char, syllable in round.cells %}
+    <span class="poly-cell">
+      {% if forloop.counter0 == round.position %}
+      <b class="poly-target">{{ char }}</b><span class="poly-mask" data-poly-mask>？</span>
+      {% else %}
+      <b>{{ char }}</b><span>{{ syllable }}</span>
+      {% endif %}
+    </span>
+    {% endfor %}
+  </div>
+  {% if round.example %}<p class="poly-example">读句子想一想 · {{ round.example }}</p>{% endif %}
+  <div class="poly-options" role="group" aria-label="读音选项">
+    {% for option in round.options %}
+    <button class="poly-option" type="button" data-poly-option="{{ option.pinyin }}">{{ option.pinyin }}{% if option.tone == 5 %} <span class="poly-tone-badge">轻</span>{% endif %}</button>
+    {% endfor %}
+  </div>
+  <p class="poly-feedback" role="status" data-poly-feedback></p>
+  <div class="poly-review" data-poly-review hidden>
+    <button class="poly-link" type="button" data-say="{{ round.word }}" data-rate="0.8">🔊 听读「{{ round.word }}」</button>
+    <a class="poly-link" href="?char={{ round.char|urlencode }}#char-detail" data-poly-char="{{ round.char }}">看看「{{ round.char }}」的读音 →</a>
+  </div>
+  <div class="poly-actions">
+    <a class="button small ghost" href="{{ next_href }}#practice" data-poly-next>换一题</a>
+    <a class="poly-link" href="{{ mode_href }}#practice" data-poly-next>{% if more_practice %}回到常用词练习{% else %}试试词库拓展 →{% endif %}</a>
+  </div>
+</div>

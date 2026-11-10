@@ -1,0 +1,34 @@
+{
+  "乐": [
+    {"pinyin": "lè", "meaning": "心里高兴", "example": "我们一起玩得很快乐。", "words": [["快乐", "kuài lè"], ["欢乐", "huān lè"]]},
+    {"pinyin": "yuè", "meaning": "和音乐、乐器有关", "example": "上课铃响起，教室里传来了音乐。", "words": [["音乐", "yīn yuè"], ["乐器", "yuè qì"]]}
+  ],
+  "长": [
+    {"pinyin": "cháng", "meaning": "长度大，或时间久", "example": "我们沿着长江看风景。", "words": [["长江", "cháng jiāng"], ["长久", "cháng jiǔ"]]},
+    {"pinyin": "zhǎng", "meaning": "从小变大，也可以指带领大家的人", "example": "小树一天天长大了。", "words": [["长大", "zhǎng dà"], ["班长", "bān zhǎng"]]}
+  ],
+  "重": [
+    {"pinyin": "zhòng", "meaning": "分量大，也可以说一件事很要紧", "example": "保护眼睛很重要。", "words": [["重要", "zhòng yào"], ["重量", "zhòng liàng"]]},
+    {"pinyin": "chóng", "meaning": "再做一次，或一层叠一层", "example": "我把没听清的那句话重复了一遍。", "words": [["重复", "chóng fù"], ["重叠", "chóng dié"]]}
+  ],
+  "行": [
+    {"pinyin": "xíng", "meaning": "走动、做事，也可以表示可以", "example": "我们和老师一起步行去公园。", "words": [["步行", "bù xíng"], ["行走", "xíng zǒu"]]},
+    {"pinyin": "háng", "meaning": "一排，也用在「银行」「行业」这些词里", "example": "妈妈去银行存钱。", "words": [["银行", "yín háng"], ["行业", "háng yè"]]}
+  ],
+  "觉": [
+    {"pinyin": "jué", "meaning": "感受到，或心里有了一个想法", "example": "我感觉今天比昨天暖和。", "words": [["感觉", "gǎn jué"], ["发觉", "fā jué"]]},
+    {"pinyin": "jiào", "meaning": "和睡觉有关", "example": "天黑了，小猫趴在垫子上睡觉。", "words": [["睡觉", "shuì jiào"], ["午觉", "wǔ jiào"]]}
+  ],
+  "还": [
+    {"pinyin": "hái", "meaning": "事情仍然如此，或者还有别的", "example": "雨停了，路上还是湿湿的。", "words": [["还是", "hái shì"], ["还好", "hái hǎo"]]},
+    {"pinyin": "huán", "meaning": "把东西送回原来的地方或还给原来的人", "example": "读完借来的书，要记得归还。", "words": [["归还", "guī huán"], ["交还", "jiāo huán"]]}
+  ],
+  "都": [
+    {"pinyin": "dōu", "meaning": "所有人或东西都算进去", "example": "放学了，同学们全都背上了书包。", "words": [["全都", "quán dōu"]]},
+    {"pinyin": "dū", "meaning": "国家的首都，也可以指大城市", "example": "北京是中国的首都。", "words": [["首都", "shǒu dū"], ["都市", "dū shì"]]}
+  ],
+  "背": [
+    {"pinyin": "bèi", "meaning": "身体的后面，也可以说凭记忆念出来", "example": "我会背诵这首古诗。", "words": [["背诵", "bèi sòng"], ["后背", "hòu bèi"]]},
+    {"pinyin": "bēi", "meaning": "把东西放在背上带走", "example": "骆驼能背负很重的行李。", "words": [["背负", "bēi fù"], ["背包", "bēi bāo"]]}
+  ]
+}

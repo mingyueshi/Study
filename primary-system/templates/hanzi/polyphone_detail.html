@@ -1,0 +1,27 @@
+<div class="poly-card-heading">
+  <div>
+    <p class="eyebrow">看组词 · 比读音</p>
+    <h2 id="poly-detail-heading" tabindex="-1"><strong>{{ current_char.char }}</strong> <span>{{ current_char.rows|length }} 个读音</span></h2>
+  </div>
+  <a class="poly-link" href="#poly-browse">继续找字 ↓</a>
+</div>
+<div class="poly-readings">
+  {% for reading in current_char.rows %}
+  <article class="poly-reading">
+    <h3 class="poly-reading-pinyin">{{ reading.pinyin }}{% if reading.tone == 5 %} <span class="poly-tone-badge">轻</span>{% endif %}</h3>
+    {% if reading.meaning %}<p class="poly-meaning">{{ reading.meaning }}</p>{% endif %}
+    {% include 'hanzi/polyphone_words.html' with words=reading.words only %}
+    {% if reading.example %}<p class="poly-example">{{ reading.example }}</p>{% endif %}
+    {% if reading.extra %}
+    <details class="poly-extra">
+      <summary>更多组词</summary>
+      {% include 'hanzi/polyphone_words.html' with words=reading.extra only %}
+    </details>
+    {% endif %}
+  </article>
+  {% endfor %}
+</div>
+<div class="poly-detail-links">
+  <a class="poly-link" href="{% url 'hanzi-detail' current_char.char %}">查「{{ current_char.char }}」的字典资料 →</a>
+  {% if in_evolution_hall %}<a class="poly-link" href="{% url 'hanzi-evolution' %}?char={{ current_char.char|urlencode }}">看字源故事 →</a>{% endif %}
+</div>

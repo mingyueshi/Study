@@ -1,10 +1,5 @@
 /* 词以类聚：左树右栏；点枝干出词墙、点词出卡不刷新；无 JS 时仍可原生 details 浏览。 */
 .tree-hero {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 18px 28px;
   padding: 22px 26px;
   margin: 0 0 20px;
   background:
@@ -13,28 +8,26 @@
   border: 1px solid #cfe3c0;
   border-radius: 22px;
 }
-.tree-hero-copy { flex: 1 1 320px; min-width: 0; }
 .tree-hero-copy .eyebrow { margin-bottom: 6px; }
 .tree-hero-copy h1 { margin: 0 0 8px; font-size: clamp(32px, 3.6vw, 44px); }
-.tree-hero-tag { margin: 0 0 14px; max-width: 60ch; color: var(--muted, #586b62); font-size: 16px; line-height: 1.7; }
-.tree-hero-stats { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; }
-.tree-hero-stats span { display: inline-flex; align-items: center; gap: 5px; padding: 5px 12px; border-radius: 999px; background: #fff; border: 1px solid #d6e5c6; font-size: 14px; color: #4a5550; }
-.tree-hero-stats b { color: var(--green, #22634c); font-weight: 800; }
-
-.tree-hero-demo {
-  flex: 0 0 auto;
+.tree-hero-tag { margin: 0 0 18px; color: var(--muted, #586b62); font-size: 17px; line-height: 1.7; }
+.tree-modes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.tree-modes a {
   display: flex;
   align-items: center;
-  gap: 14px;
-  padding: 14px 18px;
+  gap: 12px;
+  padding: 12px 16px;
   border: 1px solid #bcd9a8;
-  border-radius: 18px;
-  background: #fff;
-  box-shadow: 0 4px 0 rgba(47, 125, 79, .08);
+  border-radius: 16px;
+  background: var(--white, #fff);
+  line-height: 1.5;
 }
-.tree-hero-demo-emoji { font-size: 48px; line-height: 1; }
-.tree-hero-demo-words { display: flex; flex-direction: column; gap: 5px; }
-.tree-hero-demo-words span { padding: 3px 11px; border: 1px solid #d9e1cf; border-radius: 10px; background: #f9fbf5; font-size: 14px; font-weight: 600; color: #2f3d28; }
+.tree-mode-icon { flex-shrink: 0; font-size: 28px; }
+.tree-modes b { font-size: 20px; }
+.tree-modes small { display: block; font-size: 15px; color: var(--muted, #586b62); }
+.tree-modes a:hover { border-color: var(--green, #22634c); }
+.tree-modes a[aria-current] { border-color: var(--green, #22634c); background: var(--green, #22634c); color: #fff; }
+.tree-modes a[aria-current] small { color: #ecf7ea; }
 
 .tree-root-chips { display: flex; flex-wrap: wrap; gap: 8px; padding: 14px 16px; margin: 0 0 20px; border: 1px solid #d8ecd3; border-radius: 18px; background: #f4faef; }
 .tree-root-chips .chip { display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 6px 14px; border: 1px solid #d5e0ca; border-radius: 12px; background: var(--white, #fff); color: #3d4750; font-size: 16px; }
@@ -59,6 +52,9 @@
 .tree-branch summary:hover { background: #eef5e6; }
 .tree-branch-name i { margin-left: 6px; font-style: normal; font-size: 13px; font-weight: 500; }
 .tree-branch-en { margin-left: 6px; font-style: normal; font-size: 13px; font-weight: 500; color: #7a8a6e; }
+.tree-family-tip { margin-bottom: 12px; color: var(--muted, #586b62); font-size: 16px; }
+.tree-shell-spelling .tree-branch-name [lang="en"] { font-size: 20px; }
+.tree-shell .tree-family-sound { color: #57517d; font-size: 16px; }
 
 .tree-board-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
 .tree-board-head .tree-title { margin: 0; }
@@ -78,15 +74,34 @@
 .tree-wall-group-title i { font-style: normal; font-size: 13px; font-weight: 500; color: var(--muted, #586b62); }
 .tree-wall-words { display: flex; flex-wrap: wrap; gap: 8px; }
 .tree-wall .tree-word { display: inline-flex; flex-direction: column; align-items: flex-start; gap: 1px; min-width: 86px; padding: 7px 12px; }
+.tree-wall .tree-word[hidden] { display: none; }
 .tree-wall .tree-word b { font-size: 16px; font-weight: 700; }
 .tree-wall .tree-word i { font-style: normal; font-size: 12px; color: var(--muted, #586b62); }
+.tree-shell-spelling .tree-wall .tree-word b { font-size: 18px; }
+.tree-shell-spelling .tree-wall .tree-word i { font-size: 14px; }
 .tree-wall .tree-word.on i { color: #d9ecda; }
+.tree-wall-entry {
+  display: inline-grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  min-width: min(128px, 100%);
+  max-width: 100%;
+  border: 1px solid #d9e1cf;
+  border-radius: 16px;
+  background: #f9fbf5;
+}
+.tree-wall-entry[hidden] { display: none; }
+.tree-wall-entry .tree-word { min-width: 0; padding: 7px 10px; border: 0; background: transparent; overflow-wrap: anywhere; }
+.tree-wall-entry .tree-word:hover { background: #eef5e6; }
+.tree-wall-ipa { color: #57517d; font-size: 15px; font-weight: 600; }
 
 .tree-node-words { display: flex; flex-wrap: wrap; gap: 7px; margin: 6px 0 8px 14px; }
 .tree-root-words { margin-left: 0; }
 .tree-word { display: inline-block; padding: 5px 12px; border: 1px solid #d9e1cf; border-radius: 16px; background: #f9fbf5; color: var(--ink, #233e37); font-size: 16px; }
 .tree-word:hover { border-color: var(--green, #22634c); background: #eef5e6; }
 .tree-word.on { border-color: var(--green, #22634c); background: var(--green, #22634c); color: #fff; font-weight: 700; }
+.tree-word-ending { color: #275e49; background: #dff2cc; border-radius: .2em; font-weight: 800; }
+.tree-word.on .tree-word-ending { color: #e4ffc9; background: transparent; }
 
 .tree-word-panel { position: sticky; top: 24px; max-height: calc(100vh - 48px); overflow-y: auto; padding: 2px; }
 .tree-word-card { padding: 26px 24px; border: 1px solid var(--line, #dce6d9); border-radius: 20px; background: var(--white, #fff); text-align: center; }
@@ -95,6 +110,7 @@
 .tree-word-headline b { font-size: 38px; font-weight: 900; letter-spacing: .01em; }
 .say-chip { display: grid; place-items: center; width: 46px; height: 46px; border: 1px solid #cfe0c2; border-radius: 13px; background: #fff; font-size: 19px; }
 .say-chip:hover { background: #eef6e6; }
+.tree-wall-say { width: 44px; height: 44px; margin-inline-end: 8px; font-size: 18px; }
 .tree-word-ipa { margin: 6px 0 0; color: #57517d; font-size: 21px; font-weight: 650; }
 .tree-word-zh { margin: 10px 0 0; font-size: 23px; font-weight: 700; color: #33404d; }
 .tree-word-scene { margin: 8px 0 0; color: var(--muted, #586b62); font-size: 16px; }
@@ -110,7 +126,11 @@
   .tree-shell { grid-template-columns: minmax(0, 1fr); }
   .tree-word-panel { position: static; }
 }
+@media (max-width: 560px) {
+  .tree-hero { padding: 16px; }
+  .tree-modes { grid-template-columns: minmax(0, 1fr); }
+}
 @media print {
-  .tree-root-chips, .tree-word-actions, .say-chip, .back { display: none !important; }
+  .tree-modes, .tree-root-chips, .tree-word-actions, .say-chip, .back { display: none !important; }
   .tree-shell { display: block; }
 }

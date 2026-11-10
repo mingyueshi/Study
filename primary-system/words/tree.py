@@ -1,8 +1,7 @@
-"""词以类聚：WordNet 上下位树（只读浏览；掌握仍走 /words/ 场景页）。
+"""词以类聚：WordNet 上下位树和拼写家族。
 
-树来自 ``tree_data/tree.json``（开发期从 OEWN 2025 生成）；叶词按词头连接
-场景单词，运行时复用 ``state_payload`` 的同一套词典口径（中文、音标、状态），
-保证树页词卡与场景页完全一致。不做义项级自动对齐。
+词义树来自 ``tree_data/tree.json``（开发期从 OEWN 2025 生成）。叶词按词头连接
+场景单词，运行时复用 ``state_payload`` 的中文、音标和状态。拼写家族自带拼读例词。
 """
 import json
 from functools import lru_cache
@@ -13,6 +12,7 @@ from django.shortcuts import render
 from django.views.decorators.cache import never_cache
 from django.views.decorators.http import require_GET
 
+from .families import ROOT_KEY as SPELLING_ROOT_KEY, load_spelling_root
 from .services import state_payload
 
 TREE_PATH = Path(__file__).resolve().parent / "tree_data" / "tree.json"
@@ -138,30 +138,26 @@ def find_branch(roots, branch_id):
 @never_cache
 @require_GET
 def tree_page(request):
-    tree = load_tree_cached()
-    roots = enrich(tree["roots"])
     word = request.GET.get("word", "").strip()[:60]
     branch = request.GET.get("branch", "").strip()[:80]
-    selected_root = None
-    path_ids = []
-    if word:
-        selected_root, path_ids = find_path(roots, word)
+    root_key = request.GET.get("root", "")
+    spelling_root = load_spelling_root()
+    spelling_branch, _ = find_branch([spelling_root], branch) if branch else (None, [])
+    is_spelling = root_key == SPELLING_ROOT_KEY or (not root_key and spelling_branch is not None)
+    roots = [spelling_root] if is_spelling else enrich(load_tree_cached()["roots"])
+
+    selected_root, path_ids = find_path(roots, word) if word else (None, [])
     if selected_root is None and branch:
         selected_root, path_ids = find_branch(roots, branch)
-        if selected_root is None:
-            path_ids = []
     if selected_root is None:
-        root_key = request.GET.get("root", "")
-        selected_root = next((r for r in roots if r["key"] == root_key), roots[0] if roots else None)
-    if selected_root is None:
-        raise ImproperlyConfigured("词树没有任何根枝干。")
+        selected_root = next((root for root in roots if root["key"] == root_key), roots[0])
     selected_word = None
-    if word and selected_root is not None:
-        selected_word = next(
-            (w for w in iter_words([selected_root]) if w["en"].lower() == word.lower()), None)
+    if word:
+        selected_word = next((row for row in iter_words([selected_root]) if row["en"].lower() == word.lower()), None)
     return render(request, "words/tree.html", {
         "roots": roots, "selected_root": selected_root, "path_ids": path_ids,
-        "word": word, "selected_word": selected_word,
+        "selected_word": selected_word, "is_spelling": is_spelling,
+        "spelling_root": spelling_root,
     })
 
 

@@ -9,7 +9,9 @@
 | 英语教材、日常用语 | `english-data.js` | `make phrases-data`；教材导出见项目 README |
 | 英语语法 | `grammar/` | `make grammar-data` |
 | 作文坊 | `writing-data.js` | `make writing-data` |
+| 病句医院、错别字诊所 | `chinese-clinics.json`（病例、句子和辨析提示），形近字与多音字候选来自四上教材的 `knowledge-data.js` | 病例由 Django 直接读取。改教材字词后运行 `make chinesebook-data`，再运行 `.venv/bin/python manage.py test chinesebook.test_clinics` |
 | 场景单词导入来源 | `words-data.js` | `node scripts/export_words_scenario.cjs`，默认导出到 `data/words-scenario.json` |
+| 词以类聚 · 拼写家族 | `word-families.json`（词尾、例词、音标和释义） | Django 直接读取。改后运行 `.venv/bin/python manage.py test words.test_tree` |
 | 教材练习 | 与教材共用语数英数据 | `make questionbank-data` |
 | 历史、地理 | `history/`、`history-timeline/`、`geo/`、`geo-map/` | `make study-topics-data` |
 | 天文、文学、科学 | `astro-*`、`lit-*`、`sci-*` 及 `images/` | `make study-topics-data` |

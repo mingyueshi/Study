@@ -1,42 +1,48 @@
 {% extends 'base.html' %}{% load static %}{% block title %}词以类聚 · 乐学堂{% endblock %}
-{% block content %}<link rel="stylesheet" href="{% static 'words/tree.css' %}?v=2"><script src="{% static 'speech.js' %}" defer></script><script src="{% static 'tts.js' %}" defer></script><script src="{% static 'words/tree.js' %}" defer></script>
+{% block content %}<link rel="stylesheet" href="{% static 'words/tree.css' %}?v=3"><script src="{% static 'speech.js' %}" defer></script><script src="{% static 'tts.js' %}" defer></script><script src="{% static 'words/tree.js' %}?v=2" defer></script>
 <header class="tree-hero">
   <div class="tree-hero-copy">
     <p class="eyebrow">英语 · 看结构</p>
     <h1>词以类聚</h1>
-    <p class="tree-hero-tag">WordNet 上下位关系把单词挂成树：动物下面有狗、猫、熊猫。点词看意思，去场景页把它学会。</p>
-    <p class="tree-hero-stats"><span><b>{{ roots|length }}</b> 词根</span><span><b>{{ selected_root.total }}</b> 当前词</span></p>
+    <p class="tree-hero-tag">单词也有亲戚。你可以按意思找一找，也可以顺着相同的词尾读一读。</p>
   </div>
-  <div class="tree-hero-demo" aria-hidden="true">
-    <span class="tree-hero-demo-emoji">🌳</span>
-    <div class="tree-hero-demo-words"><span>dog</span><span>cat</span><span>panda</span></div>
-  </div>
+  <nav class="tree-modes" aria-label="词树分类">
+    <a href="{% url 'words-tree' %}"{% if not is_spelling %} aria-current="page"{% endif %}>
+      <span class="tree-mode-icon" aria-hidden="true">🌳</span>
+      <span><b>WordNet 词义树</b><small>按意思找亲戚，猫和狗都挂在动物枝上。</small></span>
+    </a>
+    <a href="{% url 'words-tree' %}?root={{ spelling_root.key }}"{% if is_spelling %} aria-current="page"{% endif %}>
+      <span class="tree-mode-icon" aria-hidden="true">{{ spelling_root.emoji }}</span>
+      <span><b>{{ spelling_root.zh }}</b><small><span lang="en">Word families</span> · 保留词尾，换个开头读一读。</small></span>
+    </a>
+  </nav>
 </header>
-<div class="tree-root-chips">{% for root in roots %}<a class="chip{% if root.key == selected_root.key %} on{% endif %}" href="?root={{ root.key }}">{{ root.emoji }} {{ root.zh }}<i>{{ root.total }}</i></a>{% endfor %}</div>
-<div class="tree-shell" data-root-key="{{ selected_root.key }}" data-root-zh="{{ selected_root.zh }}" data-root-emoji="{{ selected_root.emoji }}" data-scene-url="{% url 'scenario-words' %}" data-dict-url="{% url 'dictionary' %}">
+{% if not is_spelling %}<nav class="tree-root-chips" aria-label="词义树枝干">{% for root in roots %}<a class="chip{% if root.key == selected_root.key %} on{% endif %}" href="?root={{ root.key }}"{% if root.key == selected_root.key %} aria-current="page"{% endif %}>{{ root.emoji }} {{ root.zh }}<i>{{ root.total }}</i></a>{% endfor %}</nav>{% endif %}
+<div class="tree-shell{% if is_spelling %} tree-shell-spelling{% endif %}" data-root-key="{{ selected_root.key }}" data-root-zh="{{ selected_root.zh }}" data-root-emoji="{{ selected_root.emoji }}"{% if not is_spelling %} data-scene-url="{% url 'scenario-words' %}"{% endif %} data-dict-url="{% url 'dictionary' %}">
   <section class="tree-board">
     <div class="tree-board-head">
-      <h2 class="tree-title">{{ selected_root.emoji }} {{ selected_root.zh }} <span class="muted">{{ selected_root.total }} 词</span></h2>
+      <h2 class="tree-title">{{ selected_root.emoji }} {{ selected_root.zh }} <span class="muted">{% if is_spelling %}{{ selected_root.children|length }} 组 · {% endif %}{{ selected_root.total }} 词</span></h2>
       <div class="tree-tools"><button type="button" class="tree-tool" data-tree-expand>展开全部</button><button type="button" class="tree-tool" data-tree-collapse>全部收起</button></div>
     </div>
-    {% if selected_root.words %}<div class="tree-node-words tree-root-words">{% for word in selected_root.words %}<a class="tree-word{% if word.en|lower == request.GET.word|lower %} on{% endif %}" href="?root={{ selected_root.key }}&amp;word={{ word.en|urlencode }}" data-tree-word="{{ word.en }}" data-en="{{ word.en }}" data-zh="{{ word.zh }}" data-ipa="{{ word.ipa }}" data-emoji="{{ word.emoji }}" data-scene="{{ word.scenario_zh }}" data-status="{{ word.source_status }}">{{ word.en }}</a>{% endfor %}</div>{% endif %}
+    {% if is_spelling %}<p class="tree-family-tip">挑一个词尾，点单词听一听。换掉开头，再读一个词，听听哪一段声音一样。</p>{% endif %}
+    {% if selected_root.words %}<div class="tree-node-words tree-root-words">{% for word in selected_root.words %}{% include 'words/tree_word.html' %}{% endfor %}</div>{% endif %}
     {% include 'words/tree_nodes.html' with node=selected_root path_ids=path_ids %}
   </section>
   <aside class="tree-word-panel" id="tree-panel">{% if selected_word %}
     <article class="tree-word-card" id="tree-word-card">
       <p class="tree-word-emoji">{{ selected_word.emoji|default:"🔤" }}</p>
-      <p class="tree-word-headline"><b>{{ selected_word.en }}</b> <button class="say-chip" type="button" data-say="{{ selected_word.en }}" aria-label="朗读 {{ selected_word.en }}">🔊</button></p>
+      <p class="tree-word-headline"><b lang="en">{% include 'words/tree_spelling.html' with word=selected_word %}</b> <button class="say-chip" type="button" data-say="{{ selected_word.en }}" aria-label="朗读 {{ selected_word.en }}">🔊</button></p>
       {% if selected_word.ipa %}<p class="tree-word-ipa">{{ selected_word.ipa }}</p>{% endif %}
       {% if selected_word.zh %}<p class="tree-word-zh">{{ selected_word.zh }}</p>{% endif %}
       {% if selected_word.scenario_zh %}<p class="tree-word-scene">场景：{{ selected_word.scenario_zh }}</p>{% endif %}
       {% if selected_word.source_status and selected_word.source_status != '来源一致' %}<p class="tree-word-status">{{ selected_word.source_status }}</p>{% endif %}
       <div class="tree-word-actions">
-        <a class="button small" href="{% url 'scenario-words' %}?word={{ selected_word.en|urlencode }}">去场景页学会它 →</a>
+        {% if not is_spelling %}<a class="button small" href="{% url 'scenario-words' %}?word={{ selected_word.en|urlencode }}">去场景页学会它 →</a>{% endif %}
         <a class="button small ghost" href="{% url 'dictionary' %}?q={{ selected_word.en|urlencode }}">查词典 →</a>
         <button class="button small ghost tree-back" type="button" hidden>← 返回词墙</button>
       </div>
     </article>
   {% else %}<p class="tree-word-empty">点树上的单词，这里会显示词卡；选中的枝干里共 <b>{{ selected_root.total }}</b> 个词。</p>{% endif %}</aside>
 </div>
-<p class="tree-source">词树结构来自 Open English Wordnet 2025（CC-BY-4.0）上下位关系；中文释义与音标随场景单词词库实时更新。</p>
+<p class="tree-source">{% if is_spelling %}例词按共同的拼写和读音分组，音标采用常见英式标法。{% else %}词树结构来自 Open English Wordnet 2025（CC-BY-4.0）上下位关系，中文释义与音标随场景单词词库实时更新。{% endif %}</p>
 {% endblock %}

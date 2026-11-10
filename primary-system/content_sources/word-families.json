@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "families": [
+    {"ending": "at", "ipa": "/æt/", "words": [
+      {"en": "cat", "ipa": "/kæt/", "zh": "猫"},
+      {"en": "hat", "ipa": "/hæt/", "zh": "帽子"},
+      {"en": "mat", "ipa": "/mæt/", "zh": "垫子"},
+      {"en": "rat", "ipa": "/ræt/", "zh": "大老鼠"},
+      {"en": "bat", "ipa": "/bæt/", "zh": "蝙蝠"}
+    ]},
+    {"ending": "an", "ipa": "/æn/", "words": [
+      {"en": "can", "ipa": "/kæn/", "zh": "罐头盒"},
+      {"en": "fan", "ipa": "/fæn/", "zh": "扇子"},
+      {"en": "man", "ipa": "/mæn/", "zh": "男人"},
+      {"en": "pan", "ipa": "/pæn/", "zh": "平底锅"},
+      {"en": "van", "ipa": "/væn/", "zh": "厢式货车"}
+    ]},
+    {"ending": "ap", "ipa": "/æp/", "words": [
+      {"en": "cap", "ipa": "/kæp/", "zh": "有帽舌的帽子"},
+      {"en": "map", "ipa": "/mæp/", "zh": "地图"},
+      {"en": "lap", "ipa": "/læp/", "zh": "坐下时的大腿面"},
+      {"en": "tap", "ipa": "/tæp/", "zh": "轻敲"},
+      {"en": "nap", "ipa": "/næp/", "zh": "小睡"}
+    ]},
+    {"ending": "ack", "ipa": "/æk/", "words": [
+      {"en": "back", "ipa": "/bæk/", "zh": "背部"},
+      {"en": "pack", "ipa": "/pæk/", "zh": "打包"},
+      {"en": "sack", "ipa": "/sæk/", "zh": "大袋子"},
+      {"en": "rack", "ipa": "/ræk/", "zh": "架子"},
+      {"en": "snack", "ipa": "/snæk/", "zh": "零食"}
+    ]},
+    {"ending": "en", "ipa": "/en/", "words": [
+      {"en": "pen", "ipa": "/pen/", "zh": "笔"},
+      {"en": "ten", "ipa": "/ten/", "zh": "十"},
+      {"en": "hen", "ipa": "/hen/", "zh": "母鸡"},
+      {"en": "den", "ipa": "/den/", "zh": "兽窝"},
+      {"en": "men", "ipa": "/men/", "zh": "男人们"}
+    ]},
+    {"ending": "et", "ipa": "/et/", "words": [
+      {"en": "pet", "ipa": "/pet/", "zh": "宠物"},
+      {"en": "net", "ipa": "/net/", "zh": "网"},
+      {"en": "wet", "ipa": "/wet/", "zh": "湿的"},
+      {"en": "get", "ipa": "/ɡet/", "zh": "得到"},
+      {"en": "jet", "ipa": "/dʒet/", "zh": "喷气式飞机"}
+    ]},
+    {"ending": "ig", "ipa": "/ɪɡ/", "words": [
+      {"en": "pig", "ipa": "/pɪɡ/", "zh": "猪"},
+      {"en": "big", "ipa": "/bɪɡ/", "zh": "大的"},
+      {"en": "dig", "ipa": "/dɪɡ/", "zh": "挖"},
+      {"en": "wig", "ipa": "/wɪɡ/", "zh": "假发"},
+      {"en": "fig", "ipa": "/fɪɡ/", "zh": "无花果"}
+    ]},
+    {"ending": "in", "ipa": "/ɪn/", "words": [
+      {"en": "pin", "ipa": "/pɪn/", "zh": "别针"},
+      {"en": "bin", "ipa": "/bɪn/", "zh": "垃圾桶"},
+      {"en": "fin", "ipa": "/fɪn/", "zh": "鱼鳍"},
+      {"en": "tin", "ipa": "/tɪn/", "zh": "金属罐"},
+      {"en": "win", "ipa": "/wɪn/", "zh": "赢"}
+    ]},
+    {"ending": "it", "ipa": "/ɪt/", "words": [
+      {"en": "sit", "ipa": "/sɪt/", "zh": "坐"},
+      {"en": "hit", "ipa": "/hɪt/", "zh": "击打"},
+      {"en": "fit", "ipa": "/fɪt/", "zh": "合身"},
+      {"en": "kit", "ipa": "/kɪt/", "zh": "一套用具"},
+      {"en": "bit", "ipa": "/bɪt/", "zh": "一小块"}
+    ]},
+    {"ending": "og", "ipa": "/ɒɡ/", "words": [
+      {"en": "dog", "ipa": "/dɒɡ/", "zh": "狗"},
+      {"en": "fog", "ipa": "/fɒɡ/", "zh": "雾"},
+      {"en": "log", "ipa": "/lɒɡ/", "zh": "圆木"},
+      {"en": "jog", "ipa": "/dʒɒɡ/", "zh": "慢跑"},
+      {"en": "frog", "ipa": "/frɒɡ/", "zh": "青蛙"}
+    ]},
+    {"ending": "op", "ipa": "/ɒp/", "words": [
+      {"en": "top", "ipa": "/tɒp/", "zh": "顶部"},
+      {"en": "hop", "ipa": "/hɒp/", "zh": "单脚跳"},
+      {"en": "mop", "ipa": "/mɒp/", "zh": "拖把"},
+      {"en": "pop", "ipa": "/pɒp/", "zh": "啪的一声"},
+      {"en": "stop", "ipa": "/stɒp/", "zh": "停下"}
+    ]},
+    {"ending": "ug", "ipa": "/ʌɡ/", "words": [
+      {"en": "bug", "ipa": "/bʌɡ/", "zh": "小虫"},
+      {"en": "hug", "ipa": "/hʌɡ/", "zh": "拥抱"},
+      {"en": "mug", "ipa": "/mʌɡ/", "zh": "带把手的杯子"},
+      {"en": "rug", "ipa": "/rʌɡ/", "zh": "小地毯"},
+      {"en": "plug", "ipa": "/plʌɡ/", "zh": "插头"}
+    ]},
+    {"ending": "un", "ipa": "/ʌn/", "words": [
+      {"en": "sun", "ipa": "/sʌn/", "zh": "太阳"},
+      {"en": "fun", "ipa": "/fʌn/", "zh": "乐趣"},
+      {"en": "run", "ipa": "/rʌn/", "zh": "跑"},
+      {"en": "bun", "ipa": "/bʌn/", "zh": "小圆面包"},
+      {"en": "spun", "ipa": "/spʌn/", "zh": "转了起来"}
+    ]},
+    {"ending": "ake", "ipa": "/eɪk/", "words": [
+      {"en": "cake", "ipa": "/keɪk/", "zh": "蛋糕"},
+      {"en": "bake", "ipa": "/beɪk/", "zh": "烘烤"},
+      {"en": "make", "ipa": "/meɪk/", "zh": "制作"},
+      {"en": "lake", "ipa": "/leɪk/", "zh": "湖"},
+      {"en": "rake", "ipa": "/reɪk/", "zh": "耙子"}
+    ]},
+    {"ending": "ame", "ipa": "/eɪm/", "words": [
+      {"en": "name", "ipa": "/neɪm/", "zh": "名字"},
+      {"en": "game", "ipa": "/ɡeɪm/", "zh": "游戏"},
+      {"en": "same", "ipa": "/seɪm/", "zh": "相同的"},
+      {"en": "tame", "ipa": "/teɪm/", "zh": "驯服"},
+      {"en": "flame", "ipa": "/fleɪm/", "zh": "火焰"}
+    ]},
+    {"ending": "ight", "ipa": "/aɪt/", "words": [
+      {"en": "light", "ipa": "/laɪt/", "zh": "光"},
+      {"en": "night", "ipa": "/naɪt/", "zh": "夜晚"},
+      {"en": "right", "ipa": "/raɪt/", "zh": "右边"},
+      {"en": "bright", "ipa": "/braɪt/", "zh": "明亮的"},
+      {"en": "flight", "ipa": "/flaɪt/", "zh": "飞行"}
+    ]}
+  ]
+}

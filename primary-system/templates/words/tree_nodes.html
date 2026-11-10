@@ -3,12 +3,12 @@
 <ul class="tree-nodes">
   {% for child in node.children %}
   <li class="tree-branch" id="{{ child.id }}">
-    <details {% if child.id in path_ids %}open{% endif %}>
-      <summary data-branch-id="{{ child.id }}" data-branch-zh="{{ child.zh|default:child.en }}"><span class="tree-branch-name">{{ child.zh|default:child.en }}{% if child.en and child.zh and child.en != child.zh %}<i class="tree-branch-en">{{ child.en }}</i>{% endif %}<i class="muted">{{ child.total }}</i></span></summary>
-      {% if child.words %}<div class="tree-node-words">{% for word in child.words %}<a class="tree-word{% if word.en|lower == request.GET.word|lower %} on{% endif %}" href="?root={{ selected_root.key }}&amp;word={{ word.en|urlencode }}" data-tree-word="{{ word.en }}" data-en="{{ word.en }}" data-zh="{{ word.zh }}" data-ipa="{{ word.ipa }}" data-emoji="{{ word.emoji }}" data-scene="{{ word.scenario_zh }}" data-status="{{ word.source_status }}">{{ word.en }}</a>{% endfor %}</div>{% endif %}
+    <details{% if child.id in path_ids %} open data-path-open{% endif %}>
+      <summary data-branch-id="{{ child.id }}" data-branch-zh="{{ child.zh|default:child.en }}"{% if child.ipa %} data-branch-ipa="{{ child.ipa }}"{% endif %}><span class="tree-branch-name">{% if child.ipa %}<span lang="en">{{ child.zh }}</span><i class="tree-family-sound">{{ child.ipa }}</i>{% else %}{{ child.zh|default:child.en }}{% if child.en and child.zh and child.en != child.zh %}<i class="tree-branch-en">{{ child.en }}</i>{% endif %}{% endif %}<i class="muted">{{ child.total }} 词</i></span></summary>
+      {% if child.words %}<div class="tree-node-words">{% for word in child.words %}{% include 'words/tree_word.html' %}{% endfor %}</div>{% endif %}
       {% if child.children %}{% include 'words/tree_nodes.html' with node=child path_ids=path_ids %}{% endif %}
     </details>
   </li>
   {% endfor %}
-  {% if node.words %}<li class="tree-leaves"><div class="tree-node-words">{% for word in node.words %}<a class="tree-word{% if word.en|lower == request.GET.word|lower %} on{% endif %}" href="?root={{ selected_root.key }}&amp;word={{ word.en|urlencode }}" data-tree-word="{{ word.en }}" data-en="{{ word.en }}" data-zh="{{ word.zh }}" data-ipa="{{ word.ipa }}" data-emoji="{{ word.emoji }}" data-scene="{{ word.scenario_zh }}" data-status="{{ word.source_status }}">{{ word.en }}</a>{% endfor %}</div></li>{% endif %}
+  {% if node.words %}<li class="tree-leaves"><div class="tree-node-words">{% for word in node.words %}{% include 'words/tree_word.html' %}{% endfor %}</div></li>{% endif %}
 </ul>

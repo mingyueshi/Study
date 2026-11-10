@@ -1,183 +1,214 @@
-/* polyphones: inline char switching, grid filter, reading-choice scoring. */
 'use strict';
 
 (() => {
-  const dataNode = document.getElementById('poly-data');
-  const detailBody = document.querySelector('[data-poly-detail-body]');
-  const groupsEl = document.querySelector('[data-poly-groups]');
-  const chips = groupsEl ? Array.from(groupsEl.querySelectorAll('.poly-chip')) : [];
-  const groups = groupsEl ? Array.from(groupsEl.querySelectorAll('.poly-group')) : [];
-  const search = document.querySelector('[data-poly-search]');
-  const emptyHint = document.querySelector('[data-poly-empty]');
-  const dictUrl = document.querySelector('[data-dict-url]')?.dataset.dictUrl || '';
-  const index = new Map();
-  if (dataNode) {
-    JSON.parse(dataNode.textContent).forEach((item) => index.set(item.char, item));
-  }
+  const page = document.querySelector('[data-poly-page]');
+  if (!page) return;
 
-  const markOn = (char) => {
-    chips.forEach((chip) => chip.classList.toggle('on', chip.dataset.char === char));
-  };
+  const detail = page.querySelector('[data-poly-detail]');
+  const detailStatus = page.querySelector('[data-poly-detail-status]');
+  const search = page.querySelector('[data-poly-search]');
+  const reset = page.querySelector('[data-poly-reset]');
+  const directory = page.querySelector('[data-poly-groups]');
+  const groups = Array.from(directory.querySelectorAll('[data-poly-initial]'));
+  const letters = new Map(Array.from(page.querySelectorAll('[data-poly-letter]'), (link) => [link.dataset.polyLetter, link]));
+  const buckets = Array.from(page.querySelectorAll('[data-poly-bucket]'));
+  const normalize = (text) => text.normalize('NFC').toLowerCase().replace(/u:|v/g, 'ü');
+  const withoutTone = (text) => text.normalize('NFD').replace(/[\u0300\u0301\u0304\u030c]/g, '').normalize('NFC');
+  const entries = groups.map((group) => Array.from(group.querySelectorAll('.poly-chip'), (chip) => ({
+    chip,
+    readings: chip.dataset.readings.split(' · '),
+    plain: withoutTone(chip.dataset.readings).split(' · '),
+  })));
 
-  /* ---- char detail: server renders the first char; JS re-renders inline. ---- */
-  const renderDetail = (item) => {
-    if (!detailBody || !item) return;
-    const head = document.createElement('p');
-    head.className = 'poly-detail-head';
-    head.innerHTML = `<b class="poly-detail-char"></b><span class="poly-detail-sub"></span>`;
-    head.querySelector('b').textContent = item.char;
-    head.querySelector('span').textContent = `${item.readings.length} 个读音`;
-    const frag = document.createDocumentFragment();
-    frag.append(head);
-    item.readings.forEach((reading) => {
-      const box = document.createElement('div');
-      box.className = 'poly-reading';
-      const title = document.createElement('p');
-      title.className = 'poly-reading-pinyin';
-      title.append(reading.pinyin);
-      if (reading.tone === 5) {
-        const badge = document.createElement('i');
-        badge.className = 'poly-tone-badge';
-        badge.textContent = '轻';
-        title.append(badge);
+  let bucket = 'all';
+  function filter() {
+    const query = normalize(search.value.trim());
+    const hasTone = query !== withoutTone(query);
+    let total = 0;
+    groups.forEach((group, index) => {
+      let count = 0;
+      for (const { chip, readings, plain } of entries[index]) {
+        const matches = chip.dataset.polyChar.includes(query) || chip.dataset.words.includes(query)
+          || (hasTone ? readings : plain).some((reading) => reading.startsWith(query));
+        chip.hidden = !matches || (bucket !== 'all' && chip.dataset.bucket !== bucket);
+        if (!chip.hidden) count += 1;
       }
-      const words = document.createElement('div');
-      words.className = 'poly-words';
-      reading.words.forEach((word) => {
-        const chip = document.createElement('a');
-        chip.className = 'poly-word-chip';
-        chip.href = dictUrl ? `${dictUrl}?q=${encodeURIComponent(word.word)}` : '#';
-        const name = document.createElement('b');
-        name.textContent = word.word.slice(0, word.position);
-        const target = document.createElement('u');
-        target.textContent = word.word[word.position];
-        name.append(target, word.word.slice(word.position + 1));
-        const pinyin = document.createElement('i');
-        pinyin.textContent = word.pinyin;
-        chip.append(name, pinyin);
-        words.append(chip);
-      });
-      box.append(title, words);
-      frag.append(box);
+      group.hidden = !count;
+      letters.get(group.dataset.polyInitial).hidden = !count;
+      group.querySelector('.poly-group-head span').textContent = count;
+      total += count;
     });
-    detailBody.replaceChildren(frag);
-  };
-
-  const select = (char, chip) => {
-    const item = index.get(char);
-    if (!item) return;
-    renderDetail(item);
-    markOn(char);
-    history.replaceState(null, '', `?char=${encodeURIComponent(char)}`);
-    if (window.innerWidth < 960) {
-      document.getElementById('char-detail')?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-    }
-  };
-
-  groupsEl?.addEventListener('click', (event) => {
-    const chip = event.target.closest('.poly-chip');
-    if (chip) {
-      event.preventDefault();
-      select(chip.dataset.char, chip);
-    }
-  });
-
-  /* ---- grid filter: reading-count bucket + char/pinyin search. ---- */
-  let activeBucket = 'all';
-  const bucketButtons = Array.from(document.querySelectorAll('[data-bucket]'));
-  bucketButtons.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      activeBucket = btn.dataset.bucket;
-      bucketButtons.forEach((b) => b.classList.toggle('on', b === btn));
-      applyFilter();
-    });
-  });
-
-  const countEl = document.querySelector('[data-poly-visible]');
-  const applyFilter = () => {
-    const q = search ? search.value.trim().toLowerCase() : '';
-    let visible = 0;
-    chips.forEach((chip) => {
-      const bucketOk = activeBucket === 'all' || chip.dataset.bucket === activeBucket;
-      const hay = (chip.dataset.char + ' ' + chip.dataset.readings).toLowerCase();
-      const show = bucketOk && (!q || hay.includes(q));
-      chip.hidden = !show;
-      if (show) visible += 1;
-    });
-    groups.forEach((group) => {
-      const hasVisible = Array.from(group.querySelectorAll('.poly-chip')).some((c) => !c.hidden);
-      group.hidden = !hasVisible;
-      const head = group.querySelector('.poly-group-head span');
-      if (head) head.textContent = group.querySelectorAll('.poly-chip:not([hidden])').length;
-    });
-    if (countEl) countEl.textContent = visible;
-    if (emptyHint) emptyHint.hidden = visible !== 0;
-  };
-
-  if (search) {
-    search.addEventListener('input', applyFilter);
+    page.querySelector('[data-poly-visible]').textContent = total;
+    page.querySelector('[data-poly-empty]').hidden = total > 0;
+    reset.hidden = !query && bucket === 'all';
+    directory.scrollTop = 0;
   }
 
-  /* ---- reading-choice practice scoring. ---- */
-  const round = document.querySelector('[data-poly-round]');
-  if (!round) return;
-  /* 每题判分后上报一次学习记录；对错由服务端按读音表复核，失败不打扰练习。 */
-  const csrf = () => decodeURIComponent((document.cookie.match(/(?:^|;\s*)primary_csrftoken=([^;]*)/) || [])[1] || '');
-  const report = (chosen) => {
-    if (!round.dataset.reportUrl) return;
-    fetch(round.dataset.reportUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'X-CSRFToken': csrf() },
-      body: JSON.stringify({
-        char: round.dataset.char, word: round.dataset.word || '',
-        chosen, answer: round.dataset.answer,
-      }),
-    }).then((response) => (response.ok ? response.json() : null))
-      .then((data) => { if (window.rewardToast && data && data.rewards) window.rewardToast(data.rewards); })
-      .catch(() => {});
-  };
-  const STORE_KEY = 'hanzi_polyphone_stats_v1';
+  function setBucket(value) {
+    bucket = value;
+    buckets.forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.polyBucket === bucket)));
+    filter();
+  }
+
+  search.addEventListener('input', filter);
+  buckets.forEach((button) => button.addEventListener('click', () => setBucket(button.dataset.polyBucket)));
+  reset.addEventListener('click', () => {
+    search.value = '';
+    setBucket('all');
+    search.focus();
+  });
+
+  const practice = page.querySelector('#practice');
+  const question = practice.querySelector('[data-poly-question]');
+  const practiceStatus = practice.querySelector('[data-poly-practice-status]');
+  const storageKey = 'hanzi_polyphone_stats_v1';
   let stats = { streak: 0, correct: 0, asked: 0 };
-  try { stats = { ...stats, ...JSON.parse(localStorage.getItem(STORE_KEY) || '{}') }; } catch (e) { /* ignore */ }
+  try { stats = { ...stats, ...JSON.parse(localStorage.getItem(storageKey) || '{}') }; } catch { /* 继续用本页计数 */ }
+  function renderStats() {
+    for (const key of ['streak', 'correct', 'asked']) {
+      practice.querySelector(`[data-poly-${key}]`).textContent = stats[key];
+    }
+  }
 
-  const node = (name) => round.querySelector(name);
-  const render = () => {
-    const streak = node('[data-poly-streak]');
-    const correct = node('[data-poly-correct]');
-    const asked = node('[data-poly-asked]');
-    if (streak) streak.textContent = stats.streak;
-    if (correct) correct.textContent = stats.correct;
-    if (asked) asked.textContent = stats.asked;
-  };
-  const save = () => {
-    try { localStorage.setItem(STORE_KEY, JSON.stringify(stats)); } catch (e) { /* ignore */ }
-  };
+  function report(round, chosen) {
+    const token = document.cookie.match(/(?:^|;\s*)primary_csrftoken=([^;]*)/)?.[1] || '';
+    fetch(practice.dataset.reportUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-CSRFToken': decodeURIComponent(token) },
+      keepalive: true,
+      body: JSON.stringify({ char: round.char, word: round.word, chosen, answer: round.answer }),
+    }).then((response) => (response.ok ? response.json() : null))
+      .then((data) => { if (data?.rewards) window.rewardToast?.(data.rewards); })
+      .catch(() => {});
+  }
 
-  let counted = false;
-  round.querySelectorAll('[data-poly-option]').forEach((option) => {
-    option.addEventListener('click', () => {
-      if (counted) return;
-      counted = true;
-      const ok = option.dataset.pinyin === round.dataset.answer;
-      stats.asked += 1;
-      if (ok) {
-        stats.correct += 1;
-        stats.streak += 1;
-        option.classList.add('ok');
-      } else {
-        stats.streak = 0;
-        option.classList.add('bad');
-        round.querySelectorAll('[data-poly-option]').forEach((other) => {
-          if (other.dataset.pinyin === round.dataset.answer) other.classList.add('ok');
-        });
-      }
-      save();
-      render();
-      report(option.dataset.pinyin || '');
-      /* 答完把详情切到这道题的字，顺势看它的全部读音。 */
-      select(round.dataset.char, null);
+  function answer(option) {
+    const round = option.closest('[data-poly-round]');
+    if (round.dataset.answered || question.hasAttribute('aria-busy')) return;
+    round.dataset.answered = 'true';
+    const chosen = option.dataset.polyOption;
+    const { char, word, answer: correct } = round.dataset;
+    const ok = chosen === correct;
+    for (const button of round.querySelectorAll('[data-poly-option]')) {
+      button.setAttribute('aria-disabled', 'true');
+      if (button.dataset.polyOption === correct) button.classList.add('ok');
+    }
+    if (!ok) option.classList.add('bad');
+    round.querySelector('[data-poly-mask]').textContent = correct;
+    round.querySelector('[data-poly-review]').hidden = false;
+    round.querySelector('[data-poly-feedback]').textContent = ok
+      ? `答对啦！「${word}」的「${char}」读 ${correct}。`
+      : `再读一读：「${word}」的「${char}」读 ${correct}。`;
+    stats.asked += 1;
+    stats.correct += Number(ok);
+    stats.streak = ok ? stats.streak + 1 : 0;
+    try { localStorage.setItem(storageKey, JSON.stringify(stats)); } catch { /* 继续用本页计数 */ }
+    renderStats();
+    report(round.dataset, chosen);
+  }
+
+  async function loadPart(url, name, selector, signal) {
+    url.searchParams.set('part', name);
+    const response = await fetch(url, { signal });
+    if (!response.ok) throw new Error('无法加载内容');
+    const fragment = new DOMParser().parseFromString(await response.text(), 'text/html');
+    if (!fragment.body.querySelector(selector)) throw new Error('返回内容有误');
+    return fragment.body.childNodes;
+  }
+
+  function updateCharLinks(char) {
+    page.querySelectorAll('.poly-starter-list a, .poly-chip').forEach((link) => {
+      if (link.dataset.polyChar === char) link.setAttribute('aria-current', 'true');
+      else link.removeAttribute('aria-current');
     });
+    for (const link of question.querySelectorAll('[data-poly-next]')) {
+      const url = new URL(link.href);
+      url.searchParams.set('char', char);
+      link.href = url;
+    }
+  }
+
+  let detailRequest;
+  let activeChar = detail.querySelector('strong').textContent;
+  function focusDetail(scroll) {
+    const heading = detail.querySelector('#poly-detail-heading');
+    const { top, bottom } = heading.getBoundingClientRect();
+    heading.focus({ preventScroll: true });
+    if (scroll || top < 0 || bottom > window.innerHeight) {
+      detail.closest('section').scrollIntoView({ block: 'start' });
+    }
+  }
+
+  async function selectChar(link) {
+    detailRequest?.abort();
+    const request = new AbortController();
+    detailRequest = request;
+    const char = link.dataset.polyChar;
+    detailStatus.textContent = '';
+    detail.setAttribute('aria-busy', 'true');
+    try {
+      if (char !== activeChar) {
+        const nodes = await loadPart(new URL(link.href), 'detail', ':scope > .poly-card-heading #poly-detail-heading', request.signal);
+        if (request.signal.aborted) return;
+        detail.replaceChildren(...nodes);
+        activeChar = char;
+        updateCharLinks(char);
+        const url = new URL(location.href);
+        url.searchParams.set('char', char);
+        history.replaceState(null, '', url);
+      }
+      focusDetail(link.closest('[data-poly-review]') !== null);
+    } catch {
+      if (!request.signal.aborted) detailStatus.textContent = '这个字暂时加载不了，请再点一次。';
+    } finally {
+      if (detailRequest === request) detail.removeAttribute('aria-busy');
+    }
+  }
+
+  async function nextQuestion(link) {
+    if (question.hasAttribute('aria-busy')) return;
+    question.setAttribute('aria-busy', 'true');
+    const actions = question.querySelectorAll('[data-poly-next]');
+    actions.forEach((action) => action.setAttribute('aria-disabled', 'true'));
+    practiceStatus.textContent = '';
+    const url = new URL(link.href);
+    try {
+      const nodes = await loadPart(url, 'practice', ':scope > [data-poly-round]');
+      window.TTS?.stopSequence();
+      question.replaceChildren(...nodes);
+      updateCharLinks(activeChar);
+      const currentUrl = new URL(location.href);
+      for (const key of ['mode', 'avoid', 'q_seed']) {
+        if (url.searchParams.get(key)) currentUrl.searchParams.set(key, url.searchParams.get(key));
+        else currentUrl.searchParams.delete(key);
+      }
+      history.replaceState(null, '', currentUrl);
+      question.querySelector('[data-poly-option]').focus({ preventScroll: true });
+    } catch {
+      practiceStatus.textContent = '下一题暂时加载不了，请再试一次。';
+    } finally {
+      question.removeAttribute('aria-busy');
+      actions.forEach((action) => action.removeAttribute('aria-disabled'));
+    }
+  }
+
+  page.addEventListener('click', (event) => {
+    const option = event.target.closest('[data-poly-option]');
+    if (option) {
+      answer(option);
+      return;
+    }
+    const link = event.target.closest('a');
+    if (!link || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    if (link.hasAttribute('data-poly-char')) {
+      event.preventDefault();
+      selectChar(link);
+    } else if (link.hasAttribute('data-poly-next')) {
+      event.preventDefault();
+      nextQuestion(link);
+    }
   });
 
-  render();
+  filter();
+  renderStats();
 })();

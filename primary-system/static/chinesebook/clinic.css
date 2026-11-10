@@ -1,0 +1,138 @@
+.shell:has(.clinic-page) {
+  width: calc(100% - var(--gutter) * 2);
+}
+
+.clinic-page {
+  --clinic-accent: #775094;
+  --clinic-tint: #f4eafa;
+  --clinic-line: #e4d4ef;
+  margin-top: 28px;
+}
+
+.clinic-page[data-clinic="word"] {
+  --clinic-accent: #206858;
+  --clinic-tint: #e8f5ee;
+  --clinic-line: #c9e3d8;
+}
+
+.clinic-banner, .clinic-panel {
+  padding: clamp(20px, 3vw, 44px);
+  border: 1px solid var(--clinic-line);
+  border-radius: 24px;
+}
+
+.clinic-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  background: var(--clinic-tint);
+}
+
+.clinic-banner h1, .clinic-panel h2 { margin-bottom: .35em; }
+.clinic-banner p { max-width: 42em; margin-bottom: 12px; }
+.clinic-banner .eyebrow, .clinic-label { color: var(--clinic-accent); font-weight: 750; }
+.clinic-banner nav { display: flex; flex-wrap: wrap; column-gap: 24px; }
+.clinic-banner nav a, .clinic-more {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--clinic-accent);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: .25em;
+}
+
+.clinic-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(250px, 1fr);
+  align-items: start;
+  gap: clamp(16px, 2vw, 32px);
+  margin-top: 24px;
+}
+
+.clinic-panel { background: var(--white); }
+.clinic-label { font-size: 16px; margin-bottom: .45em; }
+
+.clinic-steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 26px;
+  padding: 0;
+  list-style: none;
+  counter-reset: clinic-step;
+}
+
+.clinic-steps li {
+  counter-increment: clinic-step;
+  display: flex;
+  align-items: center;
+  gap: .45em;
+  padding: 5px 12px;
+  border: 1px solid var(--clinic-line);
+  border-radius: 999px;
+  font-size: 16px;
+  color: var(--clinic-accent);
+}
+
+.clinic-steps li::before { content: counter(clinic-step); font-variant-numeric: tabular-nums; }
+.clinic-steps li[aria-current] { color: white; background: var(--clinic-accent); font-weight: 750; }
+.clinic-choices { display: flex; flex-wrap: wrap; gap: 12px; max-width: 54rem; }
+.clinic-choices[hidden] { display: none; }
+.clinic-choice {
+  padding: 11px 18px;
+  min-height: 52px;
+  border: 2px solid var(--clinic-line);
+  border-radius: 14px;
+  color: var(--ink);
+  background: var(--white);
+  text-align: left;
+  font-weight: 650;
+}
+.clinic-choice:hover { border-color: var(--clinic-accent); background: var(--clinic-tint); }
+.clinic-choice[data-tried] { border-style: dashed; background: #fff4df; border-color: #a46f31; }
+.clinic-mixed { box-shadow: none; }
+.clinic-prompt, .clinic-review {
+  max-width: 54rem;
+  padding: clamp(14px, 2vw, 24px);
+  border: 1px solid var(--clinic-line);
+  border-radius: 16px;
+  background: var(--clinic-tint);
+}
+.clinic-prompt, .clinic-result {
+  font-size: clamp(23px, 2vw, 32px);
+  font-weight: 750;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+.clinic-prompt mark { padding-inline: .12em; border-radius: .15em; background: #ffe6a3; color: #633912; }
+.clinic-diagnosis { color: var(--clinic-accent); font-weight: 750; }
+.clinic-feedback { margin: .75em 0 0; color: #794616; }
+.clinic-feedback:empty { margin: 0; }
+.clinic-result { margin-bottom: 8px; }
+.clinic-compare {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 6px 14px;
+  margin: 0 0 20px;
+}
+.clinic-compare[hidden] { display: none; }
+.clinic-compare dt { font-weight: 750; color: var(--clinic-accent); }
+.clinic-compare dd { margin: 0; }
+
+.clinic-guide { max-width: 31rem; }
+.clinic-guide details { border-top: 1px solid var(--clinic-line); }
+.clinic-guide summary { padding: 10px 0; cursor: pointer; font-weight: 700; }
+.clinic-guide details p { margin: 0 0 14px; }
+
+@media (max-width: 780px) {
+  .clinic-layout { grid-template-columns: minmax(0, 1fr); }
+  .clinic-guide { max-width: none; }
+}
+@media (max-width: 580px) {
+  .clinic-banner img { display: none; }
+  .clinic-choices { gap: 8px; }
+  .clinic-steps { gap: 5px; }
+  .clinic-steps li { padding-inline: 8px; font-size: 14px; }
+}

@@ -27,3 +27,16 @@
 2. 补枝干中文：改 `zh-editorial.json` 对应 id 的 `zh`，重跑生成。
 3. `manage.py test words`（含 test_tree.py）：契约 + 页面全过。
 4. 打开 `/words/tree/` 目检树结构与词卡。
+
+## 拼写家族
+
+「词以类聚」页顶的拼写家族与 WordNet 词义树并列。词族维护在
+[`content_sources/word-families.json`](../../content_sources/word-families.json)，Django 直接读取。
+每组记录共同的词尾和音标，例词自带拼读用简释和英式音标。新增组时校对每个词的
+末尾字母和共同读音，选至少三个例词。词尾用于生成枝干 ID，修改时需考虑现有深链接。
+
+- 拼写家族首页 `/words/tree/?root=spelling`
+- 词尾深链接 `/words/tree/?branch=spelling-at`
+- 例词深链接 `/words/tree/?root=spelling&word=cat`
+
+修改后运行 `.venv/bin/python manage.py test words.test_tree`，核对内容和页面入口。

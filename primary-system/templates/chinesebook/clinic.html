@@ -1,0 +1,87 @@
+{% extends 'base.html' %}{% load static %}
+{% block title %}{% if hospital %}病句医院{% else %}错别字诊所{% endif %} · 乐学堂{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'chinesebook/clinic.css' %}">
+<div class="clinic-page" data-clinic="{% if hospital %}sentence{% else %}word{% endif %}">
+  <header class="clinic-banner">
+    <div>
+      <p class="eyebrow">语文 · 四年级</p>
+      <h1>{% if hospital %}病句医院{% else %}错别字诊所{% endif %}</h1>
+      <p>{% if hospital %}欢迎，小医生！读一读来挂号的句子，找出病因，再开一张处方。{% else %}看看句子里的字词。字写串了就换个字，拿不准怎么读就连着词想一想。{% endif %}</p>
+      <nav aria-label="语文练习导航">
+        {% if hospital %}
+        <a href="{% url 'typo-clinic' %}">去错别字诊所 →</a>
+        {% else %}
+        <a href="{% url 'sentence-hospital' %}">去病句医院 →</a>
+        {% endif %}
+        <a href="{% url 'chinesebook-book' book='4a' %}">回四上语文教材</a>
+      </nav>
+    </div>
+    <img src="{% if hospital %}{% static 'icons/writing.svg' %}{% else %}{% static 'icons/polyphone.svg' %}{% endif %}" alt="" width="112" height="112">
+  </header>
+
+  <div class="clinic-layout">
+    <section class="clinic-panel" aria-label="诊室练习">
+      <ol class="clinic-steps" aria-label="接诊步骤">
+        <li aria-current="step">挂号</li>
+        <li>{% if hospital %}诊断{% else %}辨析{% endif %}</li>
+        <li>{% if hospital %}处方{% else %}复核{% endif %}</li>
+      </ol>
+
+      <section data-registration aria-labelledby="registration-title">
+        <p class="clinic-label">接诊台 · {{ clinic.cases|length }} 张病例</p>
+        <h2 id="registration-title" tabindex="-1">今天想接诊哪一类？</h2>
+        <p>可以专练一类，也可以试试混合接诊。</p>
+        <div class="clinic-choices" data-register-buttons hidden>
+          <button type="button" class="button clinic-mixed" data-register="mixed">混合接诊</button>
+          {% for group in clinic.groups %}
+          <button type="button" class="clinic-choice" data-register="{{ group.id }}">{{ group.name }}</button>
+          {% endfor %}
+        </div>
+        <noscript><p>请启用 JavaScript 开始接诊。右边的随身手册可以直接阅读。</p></noscript>
+      </section>
+
+      <section data-work hidden>
+        <p class="clinic-label" data-progress></p>
+        <p class="clinic-prompt" id="clinic-prompt" data-prompt></p>
+        <p class="clinic-diagnosis" data-diagnosis hidden></p>
+        <h2 id="clinic-question" data-question tabindex="-1" aria-describedby="clinic-prompt"></h2>
+        <div class="clinic-choices" data-choices role="group" aria-labelledby="clinic-question"></div>
+        <p class="clinic-feedback" data-feedback role="status"></p>
+        <div class="clinic-review" data-review hidden>
+          <p class="clinic-result" data-result></p>
+          <p data-explanation></p>
+          <dl class="clinic-compare" data-compare hidden></dl>
+          <button class="button small" type="button" data-next>接诊下一位 →</button>
+        </div>
+      </section>
+
+      <section data-finish hidden>
+        <p class="clinic-label">值班结束</p>
+        <h2 data-finish-title tabindex="-1">这轮接诊完成！</h2>
+        <p data-summary></p>
+        <button class="button small" type="button" data-restart>重新挂号</button>
+      </section>
+    </section>
+
+    <aside class="clinic-panel clinic-guide" aria-labelledby="guide-title">
+      <p class="clinic-label">随身手册</p>
+      <h2 id="guide-title">{% if hospital %}病因怎么看？{% else %}辨字小窍门{% endif %}</h2>
+      {% if hospital %}
+      <p>改完再读一遍，看看句子通不通，原来的意思还在不在。</p>
+      {% endif %}
+      {% for group in clinic.groups %}
+      <details>
+        <summary>{{ group.name }}</summary>
+        <p>{{ group.tip }}</p>
+      </details>
+      {% endfor %}
+      {% if not hospital %}
+      <a class="clinic-more" href="{% url 'hanzi-polyphones' %}">去多音字专题查读音 →</a>
+      {% endif %}
+    </aside>
+  </div>
+</div>
+{{ clinic|json_script:"clinic-data" }}
+<script src="{% static 'chinesebook/clinic.js' %}" defer></script>
+{% endblock %}

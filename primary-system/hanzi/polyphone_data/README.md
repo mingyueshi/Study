@@ -17,4 +17,4 @@ cd primary-system
 make polyphone-data
 ```
 
-页面读 `polyphones.json`（`hanzi/polyphones.py`），不改词库、不写学习记录。
+页面浏览读取 `polyphones.json`，另用 `starters.json` 补充 8 个常用字的读音提示、组词和例句。每个入门读音的首个组词用于常用词练习，例句须包含该词。词库拓展练习从原词库组词出题，排除资料中同一个字在同一个词里有不同读音的词，以及重复出现目标字的词。浏览不写学习记录，作答通过上报接口记入。

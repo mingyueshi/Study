@@ -1,0 +1,8 @@
+<div class="poly-words">
+  {% for w in words %}
+  <div class="poly-word-chip">
+    <a href="{% url 'dictionary' %}?q={{ w.word|urlencode }}"><b>{{ w.before }}<em>{{ w.target }}</em>{{ w.after }}</b><span>{{ w.pinyin }}</span></a>
+    <button type="button" data-say="{{ w.word }}" data-rate="0.8" aria-label="朗读{{ w.word }}">🔊</button>
+  </div>
+  {% endfor %}
+</div>

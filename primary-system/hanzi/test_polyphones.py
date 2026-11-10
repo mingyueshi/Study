@@ -9,7 +9,7 @@ from django.test import SimpleTestCase, TestCase
 from lexicon.reference_models import CedictRecord
 
 from .models import PolyphoneAnswer
-from .polyphones import DATA_PATH, practice_items, practice_round, validate
+from .polyphones import DATA_PATH, char_index, practice_items, practice_round, starter_questions, validate
 
 TONE_MARK_PATTERN = re.compile(r"^[a-zü]*[āáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ]?[a-zü]*$")
 DATA = json.loads(DATA_PATH.read_text(encoding="utf-8"))
@@ -77,6 +77,21 @@ class PolyphoneRoundTests(SimpleTestCase):
         self.assertEqual(len(round_["syllables"]), len(round_["word"]))
         self.assertGreaterEqual(len(round_["options"]), 2)
 
+    def test_common_questions_have_context(self):
+        for item in starter_questions():
+            self.assertIn(item["word"], item["example"])
+            self.assertEqual(item["syllables"][item["position"]], item["answer"])
+
+    def test_extension_omits_ambiguous_words_and_repeated_target_chars(self):
+        for item in practice_items():
+            char, word = item["char"], item["word"]
+            readings = {
+                row["pinyin"] for row in char_index()[char]["readings"]
+                if any(entry["word"] == word for entry in row["words"])
+            }
+            self.assertEqual(readings, {item["answer"]}, (char, word))
+            self.assertEqual(word.count(char), 1, word)
+
 
 class PolyphonePageTests(TestCase):
     """页面：渲染、char 深链与回退、只读保证。"""
@@ -93,6 +108,7 @@ class PolyphonePageTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "poly-reading-pinyin")
         self.assertContains(response, "yuè")
+        self.assertContains(response, 'data-say="音乐"')
 
     def test_unknown_char_falls_back(self):
         response = self.client.get("/hanzi/polyphones/?char=zz")
@@ -103,6 +119,20 @@ class PolyphonePageTests(TestCase):
         first = self.client.get("/hanzi/polyphones/?q_seed=same")
         second = self.client.get("/hanzi/polyphones/?q_seed=same")
         self.assertEqual(first.context["round"]["word"], second.context["round"]["word"])
+
+    def test_fragments_reuse_the_page_sections(self):
+        detail = self.client.get("/hanzi/polyphones/", {"part": "detail", "char": "行"})
+        self.assertContains(detail, "看字源故事")
+        self.assertNotContains(detail, "poly-chip")
+
+        for mode in ("", "more"):
+            params = {"part": "practice", "mode": mode, "q_seed": "same"}
+            first = self.client.get("/hanzi/polyphones/", params)
+            word = first.context["round"]["word"]
+            next_question = self.client.get("/hanzi/polyphones/", {**params, "avoid": word})
+            self.assertContains(next_question, "data-poly-option")
+            self.assertNotContains(next_question, "poly-chip")
+            self.assertNotEqual(next_question.context["round"]["word"], word)
 
     def test_page_is_read_only(self):
         before = CedictRecord.objects.count()
@@ -146,6 +176,13 @@ class PolyphoneReportTests(TestCase):
                 response = self.post_report(**overrides)
                 self.assertEqual(response.status_code, 400)
         self.assertEqual(PolyphoneAnswer.objects.count(), 0)
+
+    def test_curated_practice_can_be_reported(self):
+        for item in starter_questions():
+            response = self.post_report(char=item["char"], word=item["word"],
+                                        chosen=item["answer"], answer=item["answer"])
+            self.assertEqual(response.status_code, 200)
+        self.assertEqual(PolyphoneAnswer.objects.filter(correct=True).count(), len(starter_questions()))
 
     def test_report_is_post_only_and_guest_rows_carry_session_key(self):
         self.assertEqual(self.client.get("/hanzi/polyphones/api/report/").status_code, 405)

@@ -1,5 +1,9 @@
+import json
+
+from django.core.exceptions import ImproperlyConfigured
 from django.test import SimpleTestCase, TestCase
 
+from .families import SOURCE, load_spelling_root, validate as validate_families
 from .models import ScenarioWord
 from .tree import MAX_DEPTH, find_branch, find_path, load_tree, validate
 
@@ -36,7 +40,6 @@ class TreeDataTests(SimpleTestCase):
 
     def test_every_leaf_word_is_scenario_word(self):
         """树里每个叶词都必须存在于场景词库（防树数据与词库漂移）。"""
-        import json
         from pathlib import Path
 
         payload = json.loads((Path(__file__).parent / "tree_data" / "tree.json").read_text(encoding="utf-8"))
@@ -53,6 +56,42 @@ class TreeDataTests(SimpleTestCase):
         self.assertGreaterEqual(len(words), 100)
 
 
+class SpellingFamiliesTests(SimpleTestCase):
+    def test_families_data_and_totals(self):
+        root = load_spelling_root()
+        self.assertEqual(len(root["children"]), 16)
+        self.assertEqual(root["total"], 80)
+        self.assertTrue({"-at", "-an", "-ake"}.issubset(child["zh"] for child in root["children"]))
+
+    def test_rejects_mismatched_spelling_sound_and_duplicate_words(self):
+        for change in ({"en": "cap"}, {"ipa": "/kæp/"}, {"en": "hat"}):
+            with self.subTest(change=change):
+                data = json.loads(SOURCE.read_text(encoding="utf-8"))
+                data["families"][0]["words"][0].update(change)
+                with self.assertRaises(ImproperlyConfigured):
+                    validate_families(data)
+
+    def test_families_index_and_branch_links_are_read_only(self):
+        response = self.client.get("/words/tree/?root=spelling")
+        self.assertContains(response, "16 组 · 80 词")
+        self.assertContains(response, 'id="spelling-an"')
+        self.assertContains(response, 'data-root-key="spelling"')
+        response = self.client.get("/words/tree/?branch=spelling-ake")
+        self.assertContains(response, 'data-root-key="spelling"')
+        self.assertContains(response, 'id="spelling-ake"')
+        self.assertContains(response, "<details open", count=1)
+        self.assertContains(response, 'data-branch-ipa="/eɪk/"')
+
+    def test_family_word_link_opens_card_and_preserves_family(self):
+        response = self.client.get("/words/tree/?root=spelling&word=CAT")
+        self.assertContains(response, '<span class="tree-word-ending">at</span>')
+        self.assertContains(response, 'data-say="cat"')
+        self.assertContains(response, 'class="tree-word-ipa">/kæt/')
+        self.assertContains(response, 'class="tree-word-zh">猫')
+        self.assertContains(response, "?q=cat")
+        self.assertNotContains(response, "去场景页学会它")
+
+
 class TreePageTests(TestCase):
     """页面：真实场景词库联动的深链与根切换。"""
 
@@ -60,7 +99,15 @@ class TreePageTests(TestCase):
         response = self.client.get("/words/tree/")
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "词以类聚")
+        self.assertContains(response, "WordNet 词义树")
+        self.assertContains(response, "?root=spelling")
         self.assertContains(response, "tree-branch")
+
+    def test_legacy_word_link_keeps_wordnet_for_a_word_in_both_trees(self):
+        response = self.client.get("/words/tree/?word=cat")
+        self.assertContains(response, 'data-root-key="animal"')
+        self.assertContains(response, 'data-say="cat"')
+        self.assertContains(response, "去场景页学会它")
 
     def test_root_switch(self):
         response = self.client.get("/words/tree/?root=vehicle")
