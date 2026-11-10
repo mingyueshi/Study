@@ -19,6 +19,9 @@
     <span>唐 <strong>{{ counts.tang }}</strong> 首</span>
     <span>宋 <strong>{{ counts.song }}</strong> 首</span>
   </div>
+  {% if group.code == 'siji' %}
+  <p class="theme-back"><a href="{% url 'solar-terms' %}#{{ theme.code }}">回二十四节气馆看这一季 →</a></p>
+  {% endif %}
 </header>
 <div class="theme-workspace">
   <aside class="theme-side" aria-label="主题导航">

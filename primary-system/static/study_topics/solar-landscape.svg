@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 284">
+  <defs>
+    <clipPath id="field"><path d="M22 232V145a136 136 0 0 1 136-136h304a136 136 0 0 1 136 136v87z"/></clipPath>
+    <pattern id="lines" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)">
+      <path d="M0 0v8" stroke="#f5e9bb" stroke-opacity=".27" stroke-width="2"/>
+    </pattern>
+  </defs>
+  <g clip-path="url(#field)">
+    <path fill="#e4e6c7" d="M12 0h596v242H12z"/>
+    <path fill="#f0d28d" d="M166 0h144v242H166z"/>
+    <path fill="#efb17d" d="M310 0h144v242H310z"/>
+    <path fill="#bacfd1" d="M454 0h150v242H454z"/>
+    <circle cx="310" cy="117" r="74" fill="#fff2cd" stroke="#fcf0ca" stroke-width="6"/>
+    <circle cx="310" cy="117" r="62" fill="#f3a856"/>
+    <path d="M15 161q53-60 109-28t103 5q74-29 134 4t101-10q65-42 144-15v125H15z" fill="#7c9c72"/>
+    <path d="M169 240v-72q44-31 97-25t63 21v76z" fill="#d4aa4e"/>
+    <path d="M310 240v-74q50-30 106-7t51 17v64z" fill="#bd7447"/>
+    <path d="M454 240v-65q41-22 68-67l24 15 39-26 28 48v95z" fill="#719998"/>
+    <path d="m500 139 22-31 24 15 39-26 20 35-25-14-31 18-26-9z" fill="#ecf1e2"/>
+    <path d="M12 203q100-29 168-5t145 2q82-26 151-2t144-14v59H12z" fill="#456a4e"/>
+    <path d="M12 203q100-29 168-5t145 2q82-26 151-2t144-14v59H12z" fill="url(#lines)"/>
+    <path d="M31 225q80-35 176-7m35 9q96-38 199-4m30 0q66 16 132-15" fill="none" stroke="#faeac4" stroke-width="1.5" opacity=".7"/>
+    <path d="M166 4v230M310 4v230M454 4v230" stroke="#fff3d7" stroke-width="2" stroke-dasharray="2 5" opacity=".75"/>
+    <path d="M84 197q3-36-15-64m13 31q-21 1-32-12m32 18q19-11 24-27" fill="none" stroke="#344d3c" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="68" cy="132" r="8" fill="#f5bd9e"/>
+    <circle cx="49" cy="150" r="7" fill="#f5bd9e"/>
+    <circle cx="106" cy="141" r="8" fill="#f5bd9e"/>
+    <path d="M199 204v-43m13 41v-52m13 50v-31m-27 19-8-9m23-6 10-11m-11 20-8-9" fill="none" stroke="#fff0bb" stroke-width="3" stroke-linecap="round"/>
+    <path d="M370 180q10-23 29-21-1 19-29 21zm-12-5q-13-17-24-14 2 14 24 14z" fill="#783f2c"/>
+    <path d="m538 174 8-13 8 13zm-4 8 12-16 12 16zm-4 8 16-20 16 20z" fill="#365b54"/>
+  </g>
+  <path d="M22 232v-87A136 136 0 0 1 158 9h304a136 136 0 0 1 136 136v87z" fill="none" stroke="#fbf3d7" stroke-width="2"/>
+  <g fill="#fff2d4" text-anchor="middle" font-family="serif" font-size="19">
+    <text x="115" y="264">春</text><text x="239" y="264">夏</text>
+    <text x="382" y="264">秋</text><text x="514" y="264">冬</text>
+  </g>
+  <g fill="#d7b47c"><circle cx="172" cy="258" r="2"/><circle cx="310" cy="258" r="2"/><circle cx="449" cy="258" r="2"/></g>
+</svg>

@@ -1,0 +1,87 @@
+{% extends 'science/body/base.html' %}
+{% load static %}
+{% block title %}{{ lesson.label }} · {{ station.title }} · 乐学堂{% endblock %}
+{% block station %}
+<nav class="body-lesson-nav" aria-label="四课目录">
+  {% for item in lessons %}
+  <a class="body-{{ item.slug }}" href="{% url 'science-body-lesson' item.slug %}" {% if item.slug == lesson.slug %}aria-current="page"{% endif %}>
+    <span>0{{ forloop.counter }}</span> {{ item.label }}
+  </a>
+  {% endfor %}
+</nav>
+<article class="body-{{ lesson.slug }}">
+  <header class="body-lesson-header">
+    <div>
+      <p class="body-kicker"><span></span> 第 {{ number }} 课 · {{ lesson.label }}</p>
+      <h1>{{ lesson.title }}</h1>
+      <p class="body-intro">{{ lesson.intro }}</p>
+      {% if lesson.slug == 'circulation' %}
+      <div class="body-hero-actions">
+        <a class="body-button body-button-primary" href="#heart">看泵血图 ↓</a>
+        <a class="body-button body-button-light" href="#pulse">去测脉搏 ↓</a>
+      </div>
+      {% endif %}
+    </div>
+    <svg viewBox="0 0 180 120" aria-hidden="true"><use href="{% static 'science/body-atlas.svg' %}#{{ lesson.slug }}"></use></svg>
+  </header>
+  <div class="body-workspace">
+    <div class="body-main">
+      {% if lesson.slug == 'circulation' %}
+        {% include 'science/body/heart.html' %}
+      {% endif %}
+      <section class="body-panel body-notes" aria-labelledby="body-notes-title">
+        <p class="body-kicker">顺着线索找</p>
+        <h2 id="body-notes-title">身体里发生了什么？</h2>
+        <ol class="body-stops">
+          {% for stop in lesson.stops %}
+          <li>
+            <span class="body-stop-number" aria-hidden="true">0{{ forloop.counter }}</span>
+            <div><h3>{{ stop.title }}</h3><p>{{ stop.body }}</p></div>
+          </li>
+          {% endfor %}
+        </ol>
+      </section>
+    </div>
+    <aside class="body-side">
+      <section class="body-panel body-observe">
+        <p class="body-kicker">先观察</p>
+        <h2>试一试</h2>
+        <p>{{ lesson.observe }}</p>
+      </section>
+      <section class="body-panel">
+        <p class="body-kicker">合上笔记想一想</p>
+        <h2>{{ lesson.quiz.question }}</h2>
+        <details class="body-answer">
+          <summary>翻开答案</summary>
+          <p>{{ lesson.quiz.answer }}</p>
+        </details>
+      </section>
+      <section class="body-panel body-takeaway">
+        <p class="body-kicker">带走一句话</p>
+        <p>{{ lesson.takeaway }}</p>
+      </section>
+    </aside>
+  </div>
+  {% if lesson.slug == 'circulation' %}
+    {% include 'science/body/pulse.html' %}
+    <script src="{% static 'science/body.js' %}" defer></script>
+  {% endif %}
+  <details class="body-sources">
+    <summary>资料出处 · 需联网</summary>
+    <ul>
+      {% for source in lesson.sources %}<li><a href="{{ source.url }}">{{ source.label }} ↗</a></li>{% endfor %}
+      {% if lesson.slug == 'circulation' %}
+        {% for source in pulse.sources %}<li><a href="{{ source.url }}">{{ source.label }} ↗</a></li>{% endfor %}
+      {% endif %}
+    </ul>
+  </details>
+  <nav class="body-lesson-footer" aria-label="接着学">
+    <a class="body-inline-link" href="{% url 'science-body' %}#lessons">← 四课目录</a>
+    {% if next_lesson %}
+    <a class="body-button body-button-primary" href="{% url 'science-body-lesson' next_lesson.slug %}">下一课 · {{ next_lesson.label }} →</a>
+    {% else %}
+    <a class="body-inline-link" href="{% url 'science-body-lesson' 'circulation' %}#pulse">动手测脉搏 ↗</a>
+    {% endif %}
+  </nav>
+</article>
+{% endblock %}

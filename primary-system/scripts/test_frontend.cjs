@@ -684,7 +684,8 @@ test('study topic links resolve to real events, places, lessons and chapters', (
       historyEvent: '/history/timeline/event.html',
       marsLife: '/mysteries/mars-life/', darkMatter: '/mysteries/dark-matter/',
       stars: '/astronomy/', poetry: '/poetry/', idiomStories: '/idioms/stories/',
-      elements: '/science/elements/',
+      elements: '/science/elements/', bodyStation: '/science/body/',
+      solarTerms: '/geography/solar-terms/',
     }})},
   });
   [
@@ -709,7 +710,7 @@ test('study topic links resolve to real events, places, lessons and chapters', (
     chinaMap: data.GMAtlas.places.map(place => `?place=${place.id}#map`),
     historyLesson: lessonAnchors(history), geographyLesson: lessonAnchors(geography),
     historyEvent: data.TIMELINE_EVENTS.map(event => '?event=' + event.id),
-    marsLife: [''], darkMatter: [''], stars: [''], poetry: [''], idiomStories: [''], elements: [''],
+    marsLife: [''], darkMatter: [''], stars: [''], poetry: [''], idiomStories: [''], elements: [''], bodyStation: [''], solarTerms: [''],
   };
   for (const [key, source, targets] of [
     ['events', data.TIMELINE_EVENTS, history.map(lesson => '#lesson-' + lesson.id)],
@@ -759,6 +760,10 @@ test('study topic links resolve to real events, places, lessons and chapters', (
   assert.match(connections.references('gu5-2'), /china\.html\?place=f20#map/);
   assert.match(connections.references('au8-3', '接着学'), /href="\/mysteries\/mars-life\/"/);
   assert.match(connections.references('lu6-3', '接着学'), /href="\/history\/#lesson-hu7-2"/);
+  for (const id of ['gu4-1', 'gu4-3', 'lu6-5']) {
+    assert.match(connections.references(id), /href="\/geography\/solar-terms\/"/);
+  }
+  assert.match(connections.references('su6-5', '接着学'), /href="\/science\/body\/"/);
   assert.match(connections.references('su7-3', '接着学'), /href="\/geography\/study\/#lesson-gu5-1"/);
   assert.equal(connections.related('events', 'unknown'), '');
 });

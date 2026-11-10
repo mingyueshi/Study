@@ -1,6 +1,8 @@
 from django.urls import path
 from django.views.generic import TemplateView
 
+from . import solar_terms
+
 
 def page(name):
     return TemplateView.as_view(
@@ -11,6 +13,7 @@ def page(name):
 
 urlpatterns = [
     path('study/', page('geo/index'), name='geography-study'),
+    path('solar-terms/', solar_terms.index, name='solar-terms'),
     path('atlas/', page('geo-map/index'), name='geography-atlas'),
     *[
         path(f'atlas/{name}.html', page(f'geo-map/{name}'), name=f'geography-atlas-{name}')

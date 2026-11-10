@@ -8,10 +8,13 @@
 - 题目 UUID 由 ``source_key``/``source_ref`` 确定性推导，导入时重算比对，
   防止手改来源定位后身份漂移。
 - 同 uuid 但内容指纹不同的冲突一律报错中止（保护人工内容），由人工处理。
+- 修订批次可按 uuid 和原指纹停用旧题，旧题内容与作答记录保留。
 - 预演（``dry_run``）走完整校验后回滚，不落任何行。
 """
 import hashlib
 import json
+import re
+from uuid import UUID
 
 from django.core.exceptions import ValidationError
 from django.db import transaction
@@ -72,6 +75,37 @@ def validate_entry(entry, index):
         raise ValidationError(f'第 {index + 1} 题内容身份与来源定位不一致（应为 {expected}）。')
 
 
+def _validate_retire(retire, incoming):
+    if not isinstance(retire, dict):
+        raise ValidationError('停用清单必须是题目 UUID 到原内容指纹的映射。')
+    for uuid, checksum in retire.items():
+        try:
+            valid_uuid = isinstance(uuid, str) and str(UUID(uuid)) == uuid
+        except ValueError:
+            valid_uuid = False
+        if not valid_uuid or not isinstance(checksum, str) or not re.fullmatch(r'[0-9a-f]{64}', checksum):
+            raise ValidationError('停用清单含无效的题目 UUID 或内容指纹。')
+        if uuid in incoming:
+            raise ValidationError('同一批次不能同时导入和停用同一道题。')
+
+
+def _retire_questions(retire, *, verify):
+    if not retire:
+        return
+    targets = Question.objects.filter(uuid__in=retire)
+    if not verify:
+        targets = targets.select_for_update()
+    rows = {str(row.uuid): row for row in targets}
+    for uuid, checksum in retire.items():
+        row = rows.get(uuid)
+        if row is None or row.content_checksum() != checksum:
+            raise ValidationError(f'待停用题目 {uuid} 不存在或内容指纹不同。请核对原批次。')
+        if verify and row.active:
+            raise ValidationError(f'应停用的题目 {uuid} 仍在启用。')
+    if not verify:
+        Question.objects.filter(pk__in=[row.pk for row in rows.values()], active=True).update(active=False)
+
+
 def import_batch(payload, *, source='', dry_run=False, verify_only=False):
     """导入一个批次：校验 → 冲突检测 → 事务写入（dry_run 回滚）→ 回执。"""
     if not isinstance(payload, dict):
@@ -100,6 +134,8 @@ def import_batch(payload, *, source='', dry_run=False, verify_only=False):
     uuids = {entry['uuid'] for entry in questions}
     if len(uuids) != len(questions):
         raise ValidationError('批次内内容身份重复。')
+    retire = payload.get('retire', {})
+    _validate_retire(retire, uuids)
 
     existing = {str(row.uuid): row for row in Question.objects.filter(uuid__in=uuids)}
     fresh, duplicated, conflicts = [], [], []
@@ -123,10 +159,12 @@ def import_batch(payload, *, source='', dry_run=False, verify_only=False):
         if fresh:
             names = '、'.join(entry['source_ref'] for entry in fresh[:5])
             raise ValidationError(f'批次 {batch_id} 的回执存在，但缺少 {len(fresh)} 道题：{names}')
+        _retire_questions(retire, verify=True)
         return {'status': 'already', 'batch_id': batch_id,
                 'total': len(questions), 'imported': 0, 'duplicated': len(duplicated)}
 
     with transaction.atomic():
+        _retire_questions(retire, verify=False)
         for entry in fresh:
             Question.objects.create(
                 uuid=entry['uuid'], type=entry['type'], area=entry['area'],

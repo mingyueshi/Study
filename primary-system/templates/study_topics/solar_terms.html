@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}二十四节气馆 · 乐学堂{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'study_topics/solar-terms.css' %}?v=1">
+<div class="solar-hall" id="solar-top">
+  <nav class="solar-breadcrumbs" aria-label="专题路径">
+    <a href="{% url 'home' %}?area=geography#modules-title">← 学习广场 · 地理</a>
+  </nav>
+
+  <header class="solar-hero">
+    <div class="solar-intro">
+      <p class="solar-kicker">四时观察册 <span>24 节气 · 72 候</span></p>
+      <h1>二十四节气馆</h1>
+      <p>从立春的第一缕暖风，到大寒的阵阵冷风。翻开节气卡，看古人怎样用鸟鸣、花开和田里的忙碌记下时光。</p>
+    </div>
+    <img class="solar-landscape" src="{% static 'study_topics/solar-landscape.svg' %}" width="620" height="284" alt="">
+  </header>
+
+  <nav class="solar-index" aria-label="按四季查找节气">
+    {% for season in seasons %}
+    <div class="solar-index-season solar-{{ season.id }}">
+      <a class="solar-index-title" href="#{{ season.id }}" aria-label="跳到{{ season.name }}季">
+        <b>{{ season.name }}</b><span>{{ season.terms.0.name }}至{{ season.terms.5.name }} <span aria-hidden="true">↓</span></span>
+      </a>
+      <ul>
+        {% for term in season.terms %}<li><a href="#{{ term.id }}">{{ term.name }}</a></li>{% endfor %}
+      </ul>
+    </div>
+    {% endfor %}
+  </nav>
+
+  <nav class="solar-links" aria-label="跨学科联读">
+    <a href="{% url 'geography-study' %}#lesson-gu4-3"><span>地理小课堂</span> 四季怎样形成？ <span aria-hidden="true">↗</span></a>
+    <a href="{% url 'geography-study' %}#lesson-gu4-1"><span>地理小课堂</span> 天气和气候怎么分？ <span aria-hidden="true">↗</span></a>
+    <a href="{% url 'literature-study' %}#lesson-lu6-5"><span>文学常识</span> 认识二十四节气 <span aria-hidden="true">↗</span></a>
+    {% if poetry_ready %}<a href="{% url 'poetry-seasons' %}"><span>古诗词</span> 诗词四季 <span aria-hidden="true">↗</span></a>{% endif %}
+  </nav>
+  <p class="solar-note">一候约五天，一个节气分三候。三候里有古人的观察，也有他们的想象。各地冷暖不同，家乡的花鸟和农事会有自己的时钟。</p>
+
+  {% for season in seasons %}
+  <section id="{{ season.id }}" class="solar-season solar-{{ season.id }}" aria-labelledby="season-{{ season.id }}" tabindex="-1">
+    <header class="solar-season-head">
+      <h2 id="season-{{ season.id }}">{{ season.name }}季 <span>{{ season.caption }}</span></h2>
+      <div class="solar-season-links">
+        {% if poetry_ready %}<a href="{% url 'poetry-theme' season.id %}">读更多{{ season.name }}季诗词 <span aria-hidden="true">↗</span></a>{% endif %}
+        <a href="#solar-top">回目录 <span aria-hidden="true">↑</span></a>
+      </div>
+    </header>
+    <div class="solar-cards">
+      {% for term in season.terms %}
+      <article class="solar-card" id="{{ term.id }}" aria-labelledby="term-{{ term.id }}" tabindex="-1">
+        <header class="solar-card-head">
+          <div>
+            <p class="solar-date">{{ term.number|stringformat:'02d' }} <span aria-hidden="true">·</span> 公历 {{ term.date }}前后</p>
+            <h3 id="term-{{ term.id }}">{{ term.name }}</h3>
+          </div>
+          <span class="solar-symbol" aria-hidden="true">{{ term.symbol }}</span>
+        </header>
+        <div class="solar-card-body">
+          <h4>三候物候</h4>
+          <ol class="solar-phases">
+            {% for phase in term.phenology %}
+            <li>
+              <span class="solar-phase-number">{% cycle '初候' '二候' '三候' %}</span>
+              <div><b>{{ phase.name }}</b><p>{{ phase.note }}</p></div>
+            </li>
+            {% endfor %}
+          </ol>
+          <h4>地方习俗</h4>
+          <p>{{ term.custom }}</p>
+          <figure class="solar-poem">
+            <h4>应景诗词</h4>
+            {% if term.quote %}
+            <blockquote>{{ term.quote.line }}</blockquote>
+            <figcaption>{{ term.quote.author }} · <a href="{% url 'poetry-detail' term.quote.pk %}">《{{ term.quote.title }}》 <span aria-hidden="true">↗</span></a></figcaption>
+            {% else %}
+            <p>当前诗词库暂时读不到这首诗。</p>
+            {% endif %}
+          </figure>
+          <h4>农谚</h4>
+          <p class="solar-proverb">「{{ term.proverb }}」</p>
+          <p>{{ term.proverb_note }}</p>
+          <a class="solar-source" href="{{ term.source }}" target="_blank" rel="noopener noreferrer">{{ term.name }}资料 · 需联网 <span aria-hidden="true">↗</span></a>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </section>
+  {% endfor %}
+
+  <footer class="solar-references">
+    <h2>资料出处</h2>
+    <p>三候采用《月令七十二候集解》的说法，农谚和习俗按各地资料整理。诗句打开页面时从乐学堂已入库的简体诗文中读取。</p>
+    <ul>
+      {% for source in sources %}<li><a href="{{ source.url }}" target="_blank" rel="noopener noreferrer">{{ source.label }} <span aria-hidden="true">↗</span></a></li>{% endfor %}
+    </ul>
+  </footer>
+</div>
+{% endblock %}

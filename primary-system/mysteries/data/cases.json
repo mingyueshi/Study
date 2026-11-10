@@ -1419,6 +1419,549 @@
           "url": "https://tv.cctv.com/2021/10/21/VIDEfwSOkKHtbNpKfvuX2TsI211021.shtml"
         }
       ]
+    },
+    {
+      "slug": "solar-corona",
+      "title": "日冕为什么比太阳表面还热？",
+      "category": "太空与信号",
+      "icon": "☀️",
+      "summary": "从一张日全食照片找出太阳外层，再看看探测器怎样追踪热量的来路。",
+      "opening": "站远一点通常就没那么热。太阳却有一处让人意外：它外面稀薄的日冕，比我们平常看到的亮亮的表面还热得多。热量是怎么传到那里的？",
+      "figure": {
+        "path": "mysteries/solar-corona-eclipse.jpg",
+        "alt": "日全食照片中央是月球的黑色圆影，周围的白色日冕向外伸出细细的光丝",
+        "caption": "这是 2024 年 4 月 8 日在美国达拉斯拍到的日全食。黑色圆影外，白色光晕向好几个方向伸展。仔细看，哪一边伸出的光丝更长？",
+        "credit": "NASA／Keegan Barber",
+        "source": 1
+      },
+      "evidence": [
+        {
+          "title": "月球挡住了最亮的一层",
+          "observation": "日全食时，月球挡住平常最亮的太阳圆面，外面更暗的白色光晕才显出来。",
+          "meaning": "照片帮我们认出日冕的位置。要知道它有多热，还要测量它发出的光或那里的粒子。",
+          "source": 1
+        },
+        {
+          "title": "光里藏着温度线索",
+          "observation": "研究人员把日冕的光分开观察，认出了来自失去许多电子的铁粒子的光。",
+          "meaning": "让铁粒子失去这么多电子需要很高的温度。这些光支持日冕可以超过 100 万摄氏度，远高于太阳可见表面约 5500 摄氏度。",
+          "source": 2
+        },
+        {
+          "title": "探测器飞进太阳外层",
+          "observation": "帕克太阳探测器在 2021 年首次穿过日冕边界，后来还传回了更靠近太阳的图像。",
+          "meaning": "望远镜在远处看整个日冕，探测器则可以飞到其中一小片区域，近距离观察。",
+          "source": 3
+        },
+        {
+          "title": "把两种测量对起来",
+          "observation": "探测器上有的仪器测量飞过的带电粒子，有的测量周围电场、磁场的变化。",
+          "meaning": "把粒子的变化和磁场的变化放在一起看，可以追查粒子在哪里、怎样获得能量。",
+          "source": 4
+        }
+      ],
+      "media": [
+        {
+          "kind": "diagram",
+          "title": "在日全食照片上找日冕",
+          "path": "mysteries/solar-corona-eclipse.jpg",
+          "alt": "日全食照片中央是月球的黑色圆影，周围的白色日冕向外伸出细细的光丝",
+          "caption": "这是 2024 年 4 月 8 日在美国达拉斯拍到的日全食。黑色圆影外，白色光晕向好几个方向伸展。仔细看，哪一边伸出的光丝更长？",
+          "credit": "NASA／Keegan Barber",
+          "source": 1,
+          "steps": [
+            {
+              "label": "挡住阳光的月球",
+              "text": "照片中央的黑色圆盘是月球的剪影。最亮的太阳圆面在它后面。",
+              "x": 50,
+              "y": 49
+            },
+            {
+              "label": "靠近边缘的光晕",
+              "text": "沿着黑色圆盘的边缘往外看，白色光晕就是太阳的外层大气。",
+              "x": 35,
+              "y": 51
+            },
+            {
+              "label": "向外变淡的光丝",
+              "text": "白色光丝伸向更远的地方，并逐渐变暗。照片上的亮暗还需要用其他观测来解释。",
+              "x": 57,
+              "y": 21
+            }
+          ]
+        }
+      ],
+      "challenge": {
+        "prompt": "一张日全食照片显示了白色光晕。只用这张普通照片，哪项判断最有依据？",
+        "choices": [
+          {
+            "label": "白色光晕比圆面暗，所以一定更冷。",
+            "correct": false,
+            "feedback": "一张照片上的亮暗还受物质多少和拍摄方式影响，不能直接拿来比温度。"
+          },
+          {
+            "label": "圆面被挡住时，能看见它外面的日冕。",
+            "correct": true,
+            "feedback": "黑色圆影挡住太阳最亮的部分，白色光晕的位置就是照片直接提供的线索。"
+          },
+          {
+            "label": "光晕的形状证明日冕只靠一种办法升温。",
+            "correct": false,
+            "feedback": "形状可以帮助研究磁场。要分辨哪些过程在加热，还得看温度和磁场等观测。"
+          }
+        ]
+      },
+      "known": "日冕是太阳的外层大气，其中一些区域的温度超过 100 万摄氏度。",
+      "unresolved": "沿磁场传播的波和许多小规模的能量释放都可能加热日冕。它们在不同地方各出了多少力？",
+      "next_step": "把探测器测到的粒子温度与磁场变化对上时间，再和望远镜看到的日冕活动比较。",
+      "deep_dive": "温度跟粒子的运动有关，物质有多稀薄则是另一回事。日冕里的粒子虽然可以很热，却比我们周围的空气稀薄得多。",
+      "checked_on": "2026-11-10",
+      "sources": [
+        {
+          "title": "NASA · 2024 年日全食中的日冕实拍",
+          "url": "https://science.nasa.gov/image-article/centers-and-facilities/goddard/2024-total-solar-eclipse-prediction-vs-reality/"
+        },
+        {
+          "title": "NASA · 帕克太阳探测器与日冕加热之谜",
+          "url": "https://www.nasa.gov/science-research/heliophysics/nasas-parker-solar-probe-and-the-curious-case-of-the-hot-corona/"
+        },
+        {
+          "title": "NASA · 帕克太阳探测器的近太阳观测",
+          "url": "https://science.nasa.gov/science-research/heliophysics/nasas-parker-solar-probe-snaps-closest-ever-images-to-sun/"
+        },
+        {
+          "title": "NASA · 帕克太阳探测器的科学仪器",
+          "url": "https://science.nasa.gov/mission/parker-solar-probe/parker-solar-probe-instruments/"
+        }
+      ]
+    },
+    {
+      "slug": "jupiter-red-spot",
+      "title": "木星的大红斑为什么能转这么久？",
+      "category": "太空与信号",
+      "icon": "🌀",
+      "summary": "比较哈勃的八张照片，再看看朱诺号怎样量出风暴藏在云下的深度。",
+      "opening": "木星云带上有一块橙红色的大椭圆。把不同日期的照片放在一起，你会发现它不只在转，还会一会儿变宽、一会儿变圆。",
+      "figure": {
+        "path": "mysteries/jupiter-great-red-spot.jpg",
+        "alt": "朱诺号近距离拍下的大红斑占据画面右半部，边缘连着木星浅色云带",
+        "caption": "朱诺号在 2017 年飞过木星时拍下了这张近照。颜色经过处理，方便辨认大红斑边缘和旁边的云纹。",
+        "credit": "NASA／JPL-Caltech／SwRI／MSSS，图像处理 Andrea Luck（CC BY）",
+        "source": 1
+      },
+      "evidence": [
+        {
+          "title": "一百多年的观测记录",
+          "observation": "天文学家对今天所见的这团大风暴已有至少 150 年的观测记录。",
+          "meaning": "这种长度的记录能帮研究人员找出长期变化，也能避免把古书里每一个红色斑点都算作同一团风暴。",
+          "source": 2
+        },
+        {
+          "title": "同一块斑也会变形",
+          "observation": "哈勃望远镜在约 90 天内观测了八次。测量结果显示，大红斑的宽度和长短比例会变化。",
+          "meaning": "给同一团风暴反复拍照，才能分辨它短期的变化。再拿更早的记录对照，可以研究它长期怎样改变。",
+          "source": 2
+        },
+        {
+          "title": "风暴伸到云层下面",
+          "observation": "朱诺号飞过大红斑上方时测到了微小的引力变化。研究团队据此估算，风暴在云顶以下延伸数百千米。",
+          "meaning": "照片主要显示云顶附近的样子，引力测量补上了风暴深处的信息。",
+          "source": 1
+        }
+      ],
+      "media": [
+        {
+          "kind": "diagram",
+          "title": "顺着日期读八次哈勃观测",
+          "path": "mysteries/jupiter-spot-sequence.jpg",
+          "alt": "哈勃望远镜在不同日期拍下的八张大红斑照片，每幅下面标有日期",
+          "caption": "按照片下面的日期读，从左到右看完上排，再看下排。找找大红斑哪几次显得比较宽，哪几次比较圆。",
+          "credit": "NASA／ESA／Amy Simon，图像处理 Joseph DePasquale",
+          "source": 2,
+          "steps": [
+            {
+              "label": "先找第一次",
+              "text": "上排左边是 2023 年 12 月的第一次。先找出橙红色椭圆，再留意旁边浅色和深色的云带。",
+              "x": 12,
+              "y": 28
+            },
+            {
+              "label": "再看中间一张",
+              "text": "在后面的照片里找同一块红斑。比一比它横着有多宽、竖着有多高。",
+              "x": 38,
+              "y": 76
+            },
+            {
+              "label": "读到最后一次",
+              "text": "最右下是 2024 年 3 月的观测。每幅都记录了当时的样子，两次观测之间的变化要靠更多测量来补。",
+              "x": 86,
+              "y": 76
+            }
+          ]
+        }
+      ],
+      "challenge": {
+        "prompt": "要判断大红斑在一段时间里有没有改变形状，你会用哪条线索？",
+        "choices": [
+          {
+            "label": "一张颜色特别鲜艳的近照。",
+            "correct": false,
+            "feedback": "一张近照能看清一次的样子。比较变化需要不同日期的记录。"
+          },
+          {
+            "label": "朱诺号飞越时测到的引力变化。",
+            "correct": false,
+            "feedback": "引力变化主要用来追查云层下面的深度。"
+          },
+          {
+            "label": "把同一团风暴在不同日期的照片放在一起测量。",
+            "correct": true,
+            "feedback": "可以比较每次的大红斑有多宽、多高，再看看这些数是不是在变化。"
+          }
+        ]
+      },
+      "known": "大红斑是一团长寿的风暴。它的轮廓会变，云顶以下也有很深的一部分。",
+      "unresolved": "它和两侧高速云带怎样相互影响？哪些过程让它保持了这么久，又是什么让它时宽时窄？",
+      "next_step": "继续追踪斑点和两侧云带的速度、轮廓，再把这些记录与朱诺号测到的深层信息一起比较。",
+      "deep_dive": "图上的大小比较需要先校准比例。木星和地球之间的距离会变，同样大小的物体也可能在两次照片里看起来不同。",
+      "checked_on": "2026-11-10",
+      "sources": [
+        {
+          "title": "NASA · 朱诺号大红斑图像与深度测量",
+          "url": "https://science.nasa.gov/photojournal/jupiters-great-red-spot-both-deep-and-wide/"
+        },
+        {
+          "title": "NASA／哈勃团队 · 大红斑约 90 天的观测",
+          "url": "https://science.nasa.gov/missions/hubble/nasas-hubble-watches-jupiters-great-red-spot-behave-like-a-stress-ball/"
+        }
+      ]
+    },
+    {
+      "slug": "monarch-migration",
+      "title": "帝王蝶怎么找到越冬的山林？",
+      "category": "地球与生命",
+      "icon": "🦋",
+      "summary": "从带标签的蝴蝶和接收点地图出发，分辨飞对方向和找到终点是两道什么题。",
+      "opening": "每到秋天，许多北美东部的帝王蝶飞往墨西哥中部的山区。它们怎么在路上辨方向？飞对大方向之后，又怎么找准那一片山林？",
+      "figure": {
+        "path": "mysteries/monarch-radio-tag.jpg",
+        "alt": "一只黑边橙翅的帝王蝶停在手上，背上带有一枚很小的标签",
+        "caption": "这只雄性帝王蝶戴着一枚会发出无线信号的小标签。附近接收到信号时，研究人员就多了一个位置线索。",
+        "credit": "Monarch Joint Venture，经美国鱼类及野生动物管理局发布",
+        "source": 3
+      },
+      "evidence": [
+        {
+          "title": "秋天飞向墨西哥",
+          "observation": "北美东部的许多帝王蝶秋季向南飞，最后聚集在墨西哥中部山地的林中。",
+          "meaning": "同一季节有许多个体到达相近的区域。研究人员可以追问，它们在途中用了哪些方向线索。",
+          "source": 1
+        },
+        {
+          "title": "触角里的生物钟",
+          "observation": "研究人员让迁徙中的帝王蝶在飞行装置里选方向。改变它们感受到的昼夜时间，飞行方向也跟着变。相关实验还发现，触角参与这套计时。",
+          "meaning": "太阳早晚的位置不同。太阳的位置和身体里的计时线索一起，可以帮蝴蝶选飞行方向。",
+          "source": 2
+        },
+        {
+          "title": "地图上的一串位置",
+          "observation": "一只带标签的帝王蝶先在美国明尼苏达州被记录，后来在南达科他州和得克萨斯州方向留下了新的信号点。",
+          "meaning": "一个个接收点能拼出飞行的大致路线。两点之间有没有停过、绕过什么地方，还需要更多记录。",
+          "source": 3,
+          "image": {
+            "path": "mysteries/monarch-signal-map.jpg",
+            "alt": "帝王蝶追踪地图用橙线连接明尼苏达州到得克萨斯州方向的记录",
+            "caption": "美国鱼类及野生动物管理局发布的一只帝王蝶的记录。地图上的路线用已有位置连成，线上的每一小段都未必有信号记录。",
+            "credit": "Project Monarch 应用，经美国鱼类及野生动物管理局发布",
+            "source": 3
+          }
+        }
+      ],
+      "challenge": {
+        "prompt": "地图上有两个相邻的信号点，中间用线连了起来。下面哪句话最有依据？",
+        "choices": [
+          {
+            "label": "研究人员在这两个地方接收到了这只蝶的信号。",
+            "correct": true,
+            "feedback": "信号点标出了检测的位置。连线便于读图，两点之间的细节还要继续追踪。"
+          },
+          {
+            "label": "它一定沿着画出的直线飞过，中间没有停。",
+            "correct": false,
+            "feedback": "只凭起点和后一个接收点，无法看见它在中途飞过的每一段。"
+          },
+          {
+            "label": "从两个接收点就能知道它靠什么找到山林。",
+            "correct": false,
+            "feedback": "接收点记录位置。研究导航还要比较天气、方向实验和更多个体的路线。"
+          }
+        ]
+      },
+      "known": "太阳的位置和身体里的生物钟能帮帝王蝶辨方向。小标签可以留下迁徙途中的位置记录。",
+      "unresolved": "当帝王蝶飞近墨西哥的越冬山区时，哪些线索能引导它们找到那片适合停留的树林？",
+      "next_step": "给更多迁徙的帝王蝶做标记，比较晴天和多云时的走向，再看看接近越冬地时它们在哪里转向。",
+      "deep_dive": "能持续选对方向，和知道离目的地还有多远，是两种能力。追踪地图和飞行装置各能回答其中一部分问题。",
+      "checked_on": "2026-11-10",
+      "sources": [
+        {
+          "title": "美国鱼类及野生动物管理局 · 帝王蝶的分布和越冬地",
+          "url": "https://www.fws.gov/species/monarch-danaus-plexippus"
+        },
+        {
+          "title": "Merlin 等 · 帝王蝶的触角生物钟与太阳罗盘",
+          "url": "https://www.umassmed.edu/globalassets/reppert-lab/publications/scienceantennapaper.pdf"
+        },
+        {
+          "title": "美国鱼类及野生动物管理局 · 追踪迁徙中的帝王蝶",
+          "url": "https://www.fws.gov/story/2026-10/following-flight-routes-migrating-monarchs"
+        }
+      ]
+    },
+    {
+      "slug": "wrangel-mammoths",
+      "title": "最后一群猛犸象为什么消失了？",
+      "category": "地球与生命",
+      "icon": "🦣",
+      "summary": "从象牙和骨头留下的时间与遗传线索，追查北冰洋小岛上最后的猛犸象。",
+      "opening": "许多地方的长毛猛犸象消失之后，北冰洋的弗兰格尔岛上还有一群继续生活了几千年。骨头可以告诉我们它们活到多晚，又能不能告诉我们最后发生了什么？",
+      "figure": {
+        "path": "mysteries/mammoth-tusk.jpg",
+        "alt": "研究人员玛丽安娜·德阿斯克双手托着一根很长的弯曲猛犸象牙",
+        "caption": "研究人员展示猛犸象的长牙。象牙和骨头里的线索可以用来测年代，也可以帮助研究猛犸象之间的亲缘关系。",
+        "credit": "Love Dalén／斯德哥尔摩大学",
+        "source": 1
+      },
+      "evidence": [
+        {
+          "title": "岛上留下较晚的骨骼记录",
+          "observation": "研究人员给岛上的猛犸象遗存测过年代。已知最晚的一批记录接近距今 4000 年，比大多数大陆猛犸象遗存晚得多。",
+          "meaning": "这说明岛上的猛犸象活得比大陆上许多群体更久。最后一次留下的骨头也只是我们目前找到的记录。",
+          "source": 2
+        },
+        {
+          "title": "骨头里读出家族历史",
+          "observation": "研究团队把不同时期的猛犸象遗传信息放在一起比较，发现岛上的猛犸象早期数量曾大幅下降，之后又恢复了一些，并存活了几千年。",
+          "meaning": "种群变小会减少遗传差异。后来又生活了很久，说明只凭群体曾经很小，还无法解释它在最后那段时间为何消失。",
+          "source": 3
+        },
+        {
+          "title": "化学线索可以反映环境",
+          "observation": "另一项研究比较了骨骼和牙齿里的化学成分，用来了解猛犸象生活时的食物和环境。",
+          "meaning": "如果最后时期的样本在某些指标上突然变化，就能为追查环境变化提供线索。也要看样本有多接近最后一代。",
+          "source": 2
+        }
+      ],
+      "challenge": {
+        "prompt": "研究人员发现岛上猛犸象曾经变少，后来又延续了几千年。怎样理解这条线索？",
+        "choices": [
+          {
+            "label": "群体一变小就立刻灭绝了。",
+            "correct": false,
+            "feedback": "骨骼年代记录了之后几千年里仍有猛犸象在岛上生活。"
+          },
+          {
+            "label": "一定是近亲繁殖直接导致最后一群灭绝。",
+            "correct": false,
+            "feedback": "遗传信息告诉我们群体曾经变小，也能看出遗传变化。确定最后发生了什么，还需要更接近消失时间的证据。"
+          },
+          {
+            "label": "群体变小和最后消失之间还缺一些证据。",
+            "correct": true,
+            "feedback": "要解释最后发生的事，可以再找更晚的遗存，并把遗传、环境和考古线索放在一起。"
+          }
+        ]
+      },
+      "known": "最后已知的长毛猛犸象种群在弗兰格尔岛延续到约 4000 年前，曾经历群体规模的明显变化。",
+      "unresolved": "最后一群消失前，岛上的天气、食物或水源有没有发生特别大的变化？遗传因素又起了多大作用？",
+      "next_step": "找更接近最后时期的骨头和牙齿，把它们的年代、遗传信息和岛上同一时期的环境记录排到一条时间线上。",
+      "deep_dive": "同一物种的不同群体可能在不同地方、不同时间消失。岛上最后一群的线索回答的是这座岛上的问题。",
+      "checked_on": "2026-11-10",
+      "sources": [
+        {
+          "title": "斯德哥尔摩大学 · 最后一群长毛猛犸象的遗传研究与象牙照片",
+          "url": "https://www.su.se/english/news/articles/2024-06-27-new-genetic-study-reveals-the-woolly-mammoths-journey-towards-extinction"
+        },
+        {
+          "title": "赫尔辛基大学 · 弗兰格尔岛猛犸象骨骼与牙齿的化学分析",
+          "url": "https://www.helsinki.fi/en/news/life-sciences/last-mammoths-died-remote-island"
+        },
+        {
+          "title": "Dehasque 等 · 猛犸象灭绝前的种群遗传变化",
+          "url": "https://doi.org/10.1016/j.cell.2024.05.033"
+        }
+      ]
+    },
+    {
+      "slug": "stonehenge-altar-stone",
+      "title": "巨石阵里的祭坛石是怎么运来的？",
+      "category": "古迹与文字",
+      "icon": "🪨",
+      "summary": "从石头里的小矿物追到苏格兰，再想想一块约 6 吨的石头怎样走完几百千米。",
+      "opening": "远看巨石阵，高高竖起的石柱最醒目。研究人员还盯上了靠近中央的一块躺着的石头。它被叫作祭坛石，身上的矿物藏着一张远方的地址卡。",
+      "figure": {
+        "path": "mysteries/stonehenge-altar.jpg",
+        "alt": "英国巨石阵发掘时的黑白照片，标注的祭坛石有一部分被倒下的巨石压住",
+        "caption": "1958 年发掘时拍下的照片。找找右下写着 Altar Stone 的位置，那块平躺的石头就是祭坛石。虚线标出了被其他石块遮挡的部分。",
+        "credit": "Historic England 档案，经 Clarke 等 2024 年论文图 1b 标注，节选",
+        "source": 2
+      },
+      "evidence": [
+        {
+          "title": "石圈里有好几类石头",
+          "observation": "巨石阵许多高大的石柱和横梁属于一种坚硬的大砂石。研究人员在石圈中央附近还记录了一块约 6 吨的平躺砂岩，也就是祭坛石。",
+          "meaning": "同一处遗址里的石头可以来自不同地方。要追查祭坛石，得测它自己的样本。",
+          "source": 1
+        },
+        {
+          "title": "多数高石柱来自另一处",
+          "observation": "另一组研究人员测了巨石阵现存的大型石柱，发现大多数的成分很相似。石柱样本的成分与英格兰的西林地一带相符。",
+          "meaning": "同样是巨石阵的石头，大型石柱和祭坛石却各有自己的产地线索。",
+          "source": 4
+        },
+        {
+          "title": "小矿物指向远方",
+          "observation": "研究人员比较了祭坛石里不同矿物颗粒的年龄等特点，与苏格兰东北部一带的砂岩对上了许多线索。",
+          "meaning": "就像把石头的几处指纹一起比对，这些匹配支持祭坛石来自苏格兰东北部。石头到达巨石阵之前的每一站，还得靠别的证据。",
+          "source": 2
+        },
+        {
+          "title": "研究人员在地图上试着找路",
+          "observation": "后续研究把产地线索和山地、河流及古代冰川的活动范围一起比较，讨论了分段运输的可能性。",
+          "meaning": "研究者提出，有些路段或许可沿河流或海岸走，有些需要走陆路。地形能帮助筛选可能的路线，还要靠新的考古证据来检验。",
+          "source": 3
+        }
+      ],
+      "challenge": {
+        "prompt": "祭坛石里的矿物和苏格兰东北部的砂岩很相似。下面哪句话最有依据？",
+        "choices": [
+          {
+            "label": "祭坛石很可能来自苏格兰东北部一带。",
+            "correct": true,
+            "feedback": "矿物年龄等多种特征相互支持，可以用来判断石材的来源。"
+          },
+          {
+            "label": "巨石阵的每一块石头都来自同一个地方。",
+            "correct": false,
+            "feedback": "这次比对针对祭坛石。其他石头的来源要用它们自己的证据来查。"
+          },
+          {
+            "label": "从矿物颗粒就能看出古人走过的每一站。",
+            "correct": false,
+            "feedback": "矿物主要提供产地线索。要复原路线，还需要沿途的考古发现和地形证据。"
+          }
+        ]
+      },
+      "known": "祭坛石是一块沉重的砂岩。矿物证据支持它来自苏格兰东北部一带。",
+      "unresolved": "古人从哪一处取到它？哪几段用了陆路、河道或海路？目前没有一条被完整证实的路线。",
+      "next_step": "继续比较更多产地的砂岩，再到可能的交通线路上寻找与搬运时间相符的考古线索。",
+      "deep_dive": "「祭坛石」是这块石头的通用名称。名字本身没有告诉我们古人当年用它做了什么。",
+      "checked_on": "2026-11-10",
+      "sources": [
+        {
+          "title": "科廷大学 · 祭坛石的苏格兰产地研究",
+          "url": "https://www.curtin.edu.au/news/media-release/great-scott-stonehenges-altar-stone-origins-reveal-advanced-ancient-britain/"
+        },
+        {
+          "title": "Clarke 等 · 巨石阵祭坛石的苏格兰来源与发掘照片",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11324516/"
+        },
+        {
+          "title": "Clarke 等 · 进一步比较祭坛石产地和运输路线",
+          "url": "https://doi.org/10.1002/jqs.70080"
+        },
+        {
+          "title": "英格兰遗产委员会 · 巨石阵的大型石柱来自哪里",
+          "url": "https://www.english-heritage.org.uk/about/search-news/research-reveals-origin-of-stonehenge-stones/"
+        }
+      ]
+    },
+    {
+      "slug": "antikythera-mechanism",
+      "title": "两千年前的齿轮怎样算天象？",
+      "category": "古迹与文字",
+      "icon": "⚙️",
+      "summary": "从沉船里的青铜残片、X 光读出的刻字，到学者提出的齿轮复原模型。",
+      "opening": "希腊一处沉船里发现的青铜块上，竟有一排排小齿。它们原来属于一台古希腊天文计算装置，叫安提基特拉机械。机器只剩碎片，我们还能怎样认出它的本领？",
+      "figure": {
+        "path": "mysteries/antikythera-front-model.jpg",
+        "alt": "研究者复原的圆形正面有多层同心刻度环，环上设有标记",
+        "caption": "研究者发表的正面计算机复原图。不同圆环用来表示不同天体或日期。留意图里的刻度和标记，再回头看看真正留下来的青铜碎片。",
+        "credit": "Freeth 等，Scientific Reports（2021），图 7，CC BY 4.0",
+        "source": 1
+      },
+      "evidence": [
+        {
+          "title": "残片里藏着许多齿轮",
+          "observation": "现存的 82 块残片中，研究者识别出 30 个留下来的青铜齿轮。大部分都在编号 A 的大残片里。",
+          "meaning": "齿轮的大小、齿数和位置是复原的线索。排在一起的齿轮可以按不同快慢转动，像是在计算长短不同的周期。",
+          "source": 3,
+          "image": {
+            "path": "mysteries/antikythera-fragment-a.jpg",
+            "alt": "A 号青铜残片的照片，左边有尺寸标尺，表面能辨认圆形轮廓和多处突起",
+            "caption": "A 号残片的近照。先找左边的厘米刻度，再找原来装着零件的几处突起。",
+            "credit": "Freeth 等，Scientific Reports（2021），图 4a，节选，CC BY 4.0",
+            "source": 1
+          }
+        },
+        {
+          "title": "X 光帮助读出刻字",
+          "observation": "研究人员用 X 光从不同角度扫描残片，看到了被腐蚀层和其他零件挡住的细小刻字。有些写着行星周期，有些描述显示天体的圆环。",
+          "meaning": "文字可以和齿轮互相印证。刻字让研究人员知道原机打算显示什么，也给他们提出了新的机械难题。",
+          "source": 1,
+          "image": {
+            "path": "mysteries/antikythera-inscription.jpg",
+            "alt": "论文图下半部分的两块深色 X 光刻字拼图，带有研究者加注的天体名称",
+            "caption": "研究团队把多个残片的 X 光图拼起来，并在图上标出一些读到的文字。这是论文图 1 的刻字部分。",
+            "credit": "Freeth 等，Scientific Reports（2021），图 1b、1c，节选，CC BY 4.0",
+            "source": 1
+          }
+        },
+        {
+          "title": "背面的刻度记录食象",
+          "observation": "研究者在背面刻度的残片和刻字中认出了与日食、月食有关的标记。",
+          "meaning": "这些标记与食象出现的周期对得上，支持机器可以计算哪些时候可能发生日食或月食。",
+          "source": 2
+        }
+      ],
+      "challenge": {
+        "prompt": "研究团队做出了能按刻字说明转动的正面模型。我们能据此得出什么判断？",
+        "choices": [
+          {
+            "label": "原机的每个零件都已经找到了。",
+            "correct": false,
+            "feedback": "现存的是一部分残片。模型补入了推算出的零件。"
+          },
+          {
+            "label": "这个模型给出了一种与已知线索相符的装法。",
+            "correct": true,
+            "feedback": "能运转，还能对上刻字、残片和机器空间，是支持模型的理由。新证据仍可能帮我们分辨不同装法。"
+          },
+          {
+            "label": "只要模型转得动，旧刻字就不重要了。",
+            "correct": false,
+            "feedback": "不少齿轮组合都能转动。刻字告诉研究人员原机需要算什么，才能检验模型有没有算对。"
+          }
+        ]
+      },
+      "known": "这是一台用青铜齿轮计算天象的古希腊装置，背面保留了预测食象的线索。",
+      "unresolved": "正面显示行星位置的齿轮有不少没保存下来。原机具体怎样装下并带动这些齿轮，还有待验证。",
+      "next_step": "把复原模型的大小、齿数和输出与残片、刻字一一对照，再用实物模型检验齿轮能否装得下、转得动。",
+      "deep_dive": "做复原时，可以把每个零件标成「从残片读出」「由刻字推算」或「为了检验而暂加」。这些标签能帮读者看懂模型中证据有多少。",
+      "checked_on": "2026-11-10",
+      "sources": [
+        {
+          "title": "Freeth 等 · 安提基特拉机械的正面模型与残片图",
+          "url": "https://discovery.ucl.ac.uk/id/eprint/10124374/1/s41598-021-84310-w.pdf"
+        },
+        {
+          "title": "Freeth · 安提基特拉机械如何用背面刻度预测食象",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4116162/"
+        },
+        {
+          "title": "伦敦大学学院 · 依据刻字和残片复原天文显示装置",
+          "url": "https://www.ucl.ac.uk/news/2021/mar/experts-recreate-mechanical-cosmos-worlds-first-computer"
+        }
+      ]
     }
   ]
 }

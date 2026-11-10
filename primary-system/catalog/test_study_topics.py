@@ -111,14 +111,14 @@ class StudyTopicPageTests(SimpleTestCase):
 
 class StudyTopicEntryTests(TestCase):
     def test_science_includes_the_evidence_topics_and_accepts_the_old_filter(self):
-        urls = [reverse(name) for name in ('science-lab', 'human-origins', 'mysteries')]
+        urls = [reverse(name) for name in ('science-lab', 'science-body', 'human-origins', 'mysteries', 'science-rumors')]
         for area in ('science', 'exploration'):
             with self.subTest(area=area):
                 response = self.client.get(reverse('home'), {'area': area})
                 self.assertEqual([card['url'] for card in response.context['entry_cards']], urls)
                 self.assertNotContains(response, 'href="?area=exploration"')
                 self.assertContains(response, 'href="?area=science" class="on"')
-        for name in ('human-origins', 'mysteries'):
+        for name in ('science-body', 'human-origins', 'mysteries', 'science-rumors'):
             response = self.client.get(reverse(name))
             self.assertContains(response, f'href="{reverse("home")}?area=science#modules-title"')
 
@@ -134,7 +134,7 @@ class StudyTopicEntryTests(TestCase):
     def test_history_and_geography_keep_their_primary_cards_first(self):
         for area, shown, hidden in (
             ('history', ('history-timeline-timeline',), ('geography-atlas-china', 'astronomy-study')),
-            ('geography', ('geography-atlas-china', 'astronomy-study'), ('history-timeline-timeline', 'literature-study')),
+            ('geography', ('geography-atlas-china', 'astronomy-study', 'solar-terms'), ('history-timeline-timeline', 'literature-study')),
         ):
             with self.subTest(area=area):
                 response = self.client.get(reverse('home'), {'area': area})

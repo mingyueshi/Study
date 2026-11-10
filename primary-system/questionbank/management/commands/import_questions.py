@@ -9,13 +9,13 @@ from questionbank import importing
 
 
 class Command(BaseCommand):
-    help = '导入题库批次 JSON：全有或全无、只新增、回执防重。'
+    help = '导入题库批次 JSON，按原指纹停用修订批次指定的旧题，回执防重。'
 
     def add_arguments(self, parser):
         parser.add_argument('--input', required=True, help='批次 JSON 路径（相对仓库根或绝对路径）。')
         mode = parser.add_mutually_exclusive_group()
         mode.add_argument('--dry-run', action='store_true', help='预演：完整校验后回滚，不落库。')
-        mode.add_argument('--verify-only', action='store_true', help='只读核对已导入批次的回执、题目与轨别。')
+        mode.add_argument('--verify-only', action='store_true', help='只读核对已导入批次的回执、题目内容与停用状态。')
 
     def handle(self, *args, **options):
         path = Path(options['input'])

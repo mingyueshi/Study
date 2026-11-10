@@ -1,0 +1,50 @@
+{% extends 'science/rumors/base.html' %}
+{% load static %}
+{% block title %}科学流言粉碎机 · 乐学堂{% endblock %}
+{% block station %}
+<a class="rumor-back" href="{% url 'home' %}?area=science#modules-title">← 学习广场 · 科学</a>
+<header class="rumor-hero">
+  <div class="rumor-hero-copy">
+    <p class="rumor-kicker">科学查证站</p>
+    <h1>科学流言<span>粉碎机</span></h1>
+    <p class="rumor-lead">听到一句很肯定的话，先问一句「证据在哪儿？」选一条身边的说法，看看证据能帮你判断到哪一步。</p>
+    <a class="rumor-button" href="#rumor-cases">挑一项查证任务 <span aria-hidden="true">↓</span></a>
+  </div>
+  <img class="rumor-machine" src="{% static 'science/rumor-machine.svg' %}" width="550" height="370" alt="">
+</header>
+
+<ol class="rumor-workflow" aria-label="查证三步">
+  <li><span aria-hidden="true">01</span><div><strong>听说法</strong><small>圈出「所有」「一定」这样的词</small></div></li>
+  <li><span aria-hidden="true">02</span><div><strong>翻证据</strong><small>看看观察和实验告诉了我们什么</small></div></li>
+  <li><span aria-hidden="true">03</span><div><strong>盖判断章</strong><small>想一想，这些证据够不够</small></div></li>
+</ol>
+
+<section id="rumor-cases" aria-labelledby="rumor-cases-title">
+  <header class="rumor-board-heading">
+    <div>
+      <h2 id="rumor-cases-title">待查证任务</h2>
+      <p>{{ cases|length }} 条说法 · 小学四到六年级 · 每项约 3 分钟</p>
+    </div>
+    <div class="rumor-progress" hidden>
+      <label for="rumor-progress-bar">已查证 <span data-completed-count>0</span> / {{ cases|length }}</label>
+      <progress id="rumor-progress-bar" value="0" max="{{ cases|length }}"></progress>
+    </div>
+  </header>
+  <ul class="rumor-cards">
+    {% for case in cases %}
+    <li>
+      <a class="rumor-card" data-rumor-card="{{ case.slug }}" href="{% url 'science-rumor-case' case.slug %}">
+        <div class="rumor-card-top">
+          <span>{{ forloop.counter|stringformat:'02d' }} <span aria-hidden="true">/</span> {{ case.category }}</span>
+          <span class="rumor-done" hidden>✓ 已查证</span>
+        </div>
+        <svg class="rumor-card-icon" aria-hidden="true" viewBox="0 0 96 96" width="96" height="96"><use href="{% static 'science/rumors.svg' %}#{{ case.slug }}"></use></svg>
+        <h3>「{{ case.claim }}」</h3>
+        <p>{{ case.teaser }}</p>
+        <span class="rumor-card-action" aria-hidden="true">打开任务 →</span>
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+</section>
+{% endblock %}

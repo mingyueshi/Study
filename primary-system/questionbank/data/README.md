@@ -2,7 +2,7 @@
 
 `questionbank/data/questions/` 存放 Git 跟踪的题库批次 JSON。每份文件是一个
 「全有或全无」的导入批次，经 `manage.py import_questions` 导入数据库，运行时
-只读数据库表。首次初始化导入随项目提供的四个批次，后续默认初始化只读核对回执和逐题内容（含轨别）。
+只读数据库表。首次初始化导入随项目提供的 5 个批次，后续默认初始化只读核对回执、逐题内容和修订批次的停用状态。
 
 ## 当前批次
 
@@ -12,10 +12,13 @@
 | `2026-11-grammar-quiz.json` | `2026-11-grammar-quiz` | 语法精讲知识点巩固题 | 31 |
 | `2026-11-olympiad-intro.json` | `2026-11-olympiad-intro` | 人工撰写的四年级奥数入门（奥数轨） | 30 |
 | `2026-11-math-mistakes-correct.json` | `2026-11-math-mistakes-correct` | 四上易错诊所的正确陈述补充 | 15 |
+| `2026-11-olympiad-practice.json` | `2026-11-olympiad-practice` | 四年级奥数扩充，含 70 道新题及 16 道首批题修订 | 86 |
+
+5 个批次共导入 312 条题目记录，其中 16 条是已停用的奥数原题，共有 296 道可练题。
 
 ## 生成与导入
 
-批次由转换脚本从 `content_sources/` 同源数据规则生成（对齐作文坊/场景词的导出模式）：
+教材同步题由转换脚本从 `content_sources/` 同源数据生成。奥数题直接维护批次 JSON。
 
 ```sh
 node scripts/build_questionbank.cjs          # 生成批次 JSON（确定性，重跑无 diff）
@@ -39,7 +42,7 @@ node scripts/build_questionbank.cjs          # 生成批次 JSON（确定性，�
 
 ## 字段与身份
 
-批次顶层：`schema_version:1`、`batch_id`、`generator`、`questions[]`。每题：
+批次顶层包含 `schema_version:1`、`batch_id`、`generator`、`questions[]`。修订批次可额外提供 `retire`，把需要停用的旧题 UUID 映射到其原内容指纹。
 
 | 字段 | 说明 |
 |---|---|
@@ -59,15 +62,23 @@ node scripts/build_questionbank.cjs          # 生成批次 JSON（确定性，�
   同 `batch_id` 内容变了直接拒绝——**批次演进必须换新 batch_id**。
 - 导入只新增：同 uuid 同内容跳过，同 uuid 不同内容报错中止（保护人工内容），
   从不自动覆盖。
+- 修订题使用新 UUID。通过 `retire` 停用旧题时，旧题必须已导入且指纹匹配。停用和补题在同一事务完成，保留旧题内容和作答记录。
 - `--dry-run` 走完整校验后回滚，不落任何行。
 - 数据契约测试：`manage.py test questionbank.tests.test_data` 断言批次形状、
-  规模下限（math≥55 / chinese≥20 / english≥35、总量≥210，奥数轨≥30 且来源
-  全为 `primary-olympiad`、主题≥6）与中文标点。
+  规模下限与中文标点。奥数至少有 100 道可练题，每个主题至少有一组 10 题。
 
 ## 奥数轨与希望杯真题
 
-奥数首批为人工撰写并逐题核对解答（uuid 由 `questionbank.types.question_uuid`
-推导，答案下标按确定性轮换分散）。后续批次候选：希望杯官网历届真题 PDF
+奥数有 100 道四年级可练题，速算巧算、等差数列、鸡兔同笼、盈亏问题、还原问题、行程初步、图形计数、逻辑推理、植树问题和周期规律各 10 道。新增题使用 `questionbank.types.question_uuid` 推导 UUID，正确选项位置均衡分布。校正的 16 道首批题用 `:rev2` 标记来源定位，其中赛跑题也修正了相互冲突的条件。
+
+已有首批奥数题的数据库在 `primary-system/` 下执行以下命令补题。若使用独立数据库，沿用运行服务时的 `PRIMARY_SQLITE_PATH`。
+
+```sh
+.venv/bin/python manage.py import_questions \
+  --input questionbank/data/questions/2026-11-olympiad-practice.json
+```
+
+后续批次候选包括希望杯官网历届真题 PDF
 （四年级 10 份），需转录为结构化题目并单独建 batch，来源标注届次；
 CMATH 等外部数据集的调研结论见下节。
 

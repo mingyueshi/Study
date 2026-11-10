@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'science/rumors.css' %}">
+<div class="rumor-station">
+  {% block station %}{% endblock %}
+</div>
+<script src="{% static 'science/rumors.js' %}" defer></script>
+{% endblock %}

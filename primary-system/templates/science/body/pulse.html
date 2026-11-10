@@ -1,0 +1,41 @@
+<section class="body-panel body-pulse" id="pulse" aria-labelledby="pulse-title">
+  <div>
+    <p class="body-kicker">动手实验</p>
+    <h2 id="pulse-title">{{ pulse.title }}</h2>
+    <p>{{ pulse.intro }}</p>
+    <ol class="body-stops">
+      {% for step in pulse.steps %}
+      <li>
+        <span class="body-stop-number" aria-hidden="true">0{{ forloop.counter }}</span>
+        <div><h3>{{ step.title }}</h3><p>{{ step.body }}</p></div>
+      </li>
+      {% endfor %}
+    </ol>
+    <p class="body-pulse-safety">{{ pulse.safety }}</p>
+  </div>
+  <div class="body-pulse-workbench">
+    <div data-pulse-timer data-seconds="{{ pulse.seconds }}" hidden>
+      <p class="body-kicker">两次都数 {{ pulse.seconds }} 秒</p>
+      <p class="body-timer"><span data-pulse-time role="timer">{{ pulse.seconds }}</span><span>秒</span></p>
+      <div class="body-controls">
+        <button class="body-button-primary" type="button" data-pulse-start>开始计时</button>
+        <button type="button" data-pulse-reset>重置计时</button>
+      </div>
+      <p class="body-timer-status" data-pulse-status role="status"></p>
+    </div>
+    <noscript><p>可以用手表计时，把两次的次数记在纸上。</p></noscript>
+    <p>{{ pulse.comparison }}</p>
+    <div data-pulse-records hidden>
+      <fieldset>
+        <legend>我的观察记录</legend>
+        <label>静坐时（{{ pulse.seconds }} 秒次数）
+          <input type="number" min="1" max="999" step="1" required inputmode="numeric" autocomplete="off" data-pulse-rest>
+        </label>
+        <label>活动后（{{ pulse.seconds }} 秒次数）
+          <input type="number" min="1" max="999" step="1" required inputmode="numeric" autocomplete="off" data-pulse-active>
+        </label>
+      </fieldset>
+      <p data-pulse-result role="status"></p>
+    </div>
+  </div>
+</section>

@@ -12,5 +12,6 @@
 - 分开写已知、待解问题和下一步调查。核对原始资料后填写 `checked_on`，有新进展时一起复查正文、结论和反馈。
 - 核心图片、视频、动图和图示放在本项目的 `static/mysteries/`。真实图像注明机构和原始页面，解释用的示意图写清「示意」。核对资料和原图时可点外链。
 - 鳗鲡追踪图与朗戈朗戈图使用 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)，图注标记了裁切。纳斯卡蜂鸟照片和飞行短片使用 [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)，短片保留作者署名并标明节选、去声。
+- 日全食和大红斑的实拍与连拍图沿用 NASA 公布的署名。帝王蝶地图的线连接信号接收点。安提基特拉机械的复原图、残片照片和 X 光图来自 [Freeth 等的论文](https://discovery.ucl.ac.uk/id/eprint/10124374/1/s41598-021-84310-w.pdf)，使用 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)，图注标明原图编号及节选范围。祭坛石黑白照片节选自 Clarke 等 2024 年论文图 1b，保留 Historic England 档案署名和原有标注。
 
 改完在 `primary-system/` 运行 `.venv/bin/python manage.py test mysteries`，刷新页面即可查看新版内容。

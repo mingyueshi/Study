@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}对联工坊 · 乐学堂{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'study_topics/couplets.css' %}">
+<div class="couplets-workshop">
+  <a class="couplets-back" href="{% url 'home' %}?area=chinese#modules-title">← 学习广场 · 语文</a>
+  <header class="couplets-hero">
+    <div>
+      <p class="couplets-kicker">语文 · 楹联小课堂</p>
+      <h1>对联工坊</h1>
+      <p class="couplets-lead">两行字，怎么对得齐、读得顺？从一扇贴好春联的门开始，找一找词语的搭档，再写一副自己的对联。</p>
+      <a class="couplets-button" href="#rules">从一副联学起 <span aria-hidden="true">↓</span></a>
+    </div>
+    {% include 'study_topics/_couplet_door.html' %}
+  </header>
+
+  <nav class="couplets-nav" aria-label="工坊目录">
+    <a href="#rules"><span aria-hidden="true">01</span> 看门道</a>
+    <a href="#examples"><span aria-hidden="true">02</span> 读例联</a>
+    <a href="#practice"><span aria-hidden="true">03</span> 对一对</a>
+    <a href="#studio"><span aria-hidden="true">04</span> 写一副</a>
+  </nav>
+
+  <section class="couplets-section" id="rules" aria-labelledby="couplets-rules-title">
+    <p class="couplets-kicker">01 · 看门道</p>
+    <h2 id="couplets-rules-title">一副对联，四个小线索</h2>
+    <ol class="couplets-rules">
+      {% for rule in course.rules %}
+      <li id="rule-{{ rule.id }}">
+        <h3>{{ rule.title }}</h3>
+        <p>{{ rule.text }}</p>
+        <p class="couplets-clue">{{ rule.clue }}</p>
+      </li>
+      {% endfor %}
+    </ol>
+  </section>
+
+  <section class="couplets-section" id="examples" aria-labelledby="couplets-examples-title">
+    <p class="couplets-kicker">02 · 读例联</p>
+    <h2 id="couplets-examples-title">把两行字拆开看</h2>
+    <p class="couplets-intro">同一列里的词是一对搭档。先上下对照，再把整副联连起来读。</p>
+    <div class="couplets-examples">
+      {% for example in course.examples %}
+      <article class="couplet-example" id="example-{{ example.id }}" aria-labelledby="example-title-{{ example.id }}">
+        <header><h3 id="example-title-{{ example.id }}">{{ example.title }}</h3><span>{{ example.scene }}</span></header>
+        <table class="couplet-pair" aria-label="{{ example.title }}的上下联对照">
+          <tbody>
+            <tr><th scope="row">上联</th>{% for word in example.upper %}<td>{{ word }}</td>{% endfor %}</tr>
+            <tr><th scope="row">下联</th>{% for word in example.lower %}<td>{{ word }}</td>{% endfor %}</tr>
+          </tbody>
+        </table>
+        <p class="couplets-clue">横批 · {{ example.banner }}</p>
+        <p>{{ example.note }}</p>
+      </article>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="couplets-section" id="practice" aria-labelledby="couplets-practice-title">
+    <p class="couplets-kicker">03 · 对一对</p>
+    <h2 id="couplets-practice-title">给上下联找搭档</h2>
+    <p class="couplets-intro">拿不准时，先读一读，再找词语和句尾的线索。</p>
+    <div class="couplets-questions">
+      {% for question in course.questions %}
+      <article class="couplet-question" id="question-{{ question.id }}" aria-labelledby="question-title-{{ question.id }}" data-question>
+        <p class="couplets-kicker">{{ forloop.counter|stringformat:'02d' }} · {{ question.skill }}</p>
+        <h3 id="question-title-{{ question.id }}">{{ question.prompt }}</h3>
+        <form data-quiz data-answer="{{ question.answer }}" hidden>
+          <fieldset aria-labelledby="question-title-{{ question.id }}">
+            {% for choice in question.choices %}
+            <label class="couplet-option"><input type="radio" name="choice" value="{{ forloop.counter0 }}" required> {{ choice }}</label>
+            {% endfor %}
+          </fieldset>
+          <button class="couplets-button" type="submit">检查答案</button>
+          <p class="couplet-feedback" role="status"></p>
+        </form>
+        <noscript><ol>{% for choice in question.choices %}<li>{{ choice }}</li>{% endfor %}</ol></noscript>
+        <details>
+          <summary>看提示</summary>
+          <p data-hint>{{ question.hint }}</p>
+        </details>
+        <details>
+          <summary>看答案</summary>
+          <p><strong>{{ question.answer_text }}</strong></p>
+          <p data-explanation>{{ question.explanation }}</p>
+        </details>
+      </article>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="couplets-section" id="studio" aria-labelledby="couplets-studio-title">
+    <p class="couplets-kicker">04 · 写一副</p>
+    <h2 id="couplets-studio-title">把自己的对联贴上门</h2>
+    <p class="couplets-intro">挑一个你熟悉的场景，比如校门、书桌或过年的小院，试着用两句话把它写出来。</p>
+    <div class="couplets-studio" data-studio>
+      <div>
+        <div class="couplets-editor" data-editor hidden>
+          <p id="couplets-editor-help">可以从示例改起。红纸只排汉字，上下联各排前 12 个字，横批排前 6 个字。</p>
+          <div class="couplets-fields" role="group" aria-label="填写联文" aria-describedby="couplets-editor-help">
+            <label>上联<input type="text" data-ink="upper" value="{{ demo.upper|join:'' }}"></label>
+            <label>下联<input type="text" data-ink="lower" value="{{ demo.lower|join:'' }}"></label>
+            <label>横批 <small>（选填）</small><input type="text" data-ink="banner" value="{{ demo.banner }}"></label>
+          </div>
+          <p class="couplet-feedback" role="status" data-counts></p>
+          <fieldset class="couplets-directions">
+            <legend>横批从哪边读？</legend>
+            <label class="couplet-option"><input type="radio" name="direction" value="right" checked> 从右往左</label>
+            <label class="couplet-option"><input type="radio" name="direction" value="left"> 从左往右</label>
+          </fieldset>
+          <button class="couplets-plain" type="button" data-clear>换一张空红纸</button>
+        </div>
+        <noscript><p>拿一张纸写下自己的上下联，再照着示例排一排。</p></noscript>
+        <aside class="couplets-checklist" aria-label="写完自查">
+          <h3>写完自己读一遍</h3>
+          <ul>{% for item in course.checklist %}<li>{{ item }}</li>{% endfor %}</ul>
+        </aside>
+      </div>
+      {% include 'study_topics/_couplet_door.html' with preview=True %}
+    </div>
+  </section>
+
+  <footer class="couplets-sources">
+    <h2>还想多读一点？</h2>
+    <a href="{% url 'literature-study' %}">文学常识 →</a>
+    <details>
+      <summary>资料出处（原文需联网）</summary>
+      <ul>{% for source in course.sources %}<li><a href="{{ source.url }}">{{ source.label }}</a></li>{% endfor %}</ul>
+    </details>
+  </footer>
+</div>
+<script src="{% static 'study_topics/couplets.js' %}" defer></script>
+{% endblock %}

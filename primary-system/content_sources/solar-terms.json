@@ -1,0 +1,751 @@
+{
+  "schema_version": 1,
+  "seasons": [
+    {
+      "id": "chun",
+      "name": "春",
+      "caption": "冰雪渐融，花和鸟带来春信。",
+      "terms": [
+        {
+          "id": "lichun",
+          "name": "立春",
+          "date": "2月4日",
+          "symbol": "🌱",
+          "phenology": [
+            {
+              "name": "东风解冻",
+              "note": "春风带来暖意，冰雪开始消融。"
+            },
+            {
+              "name": "蛰虫始振",
+              "note": "藏着过冬的小虫渐渐活动起来。"
+            },
+            {
+              "name": "鱼陟负冰",
+              "note": "陟读 zhì，指向上移动。鱼游近水面的薄冰，仿佛背着冰。"
+            }
+          ],
+          "custom": "河南内乡有打春牛的习俗。人们用鞭子轻打泥做的春牛，提醒大家准备春耕。",
+          "proverb": "一年之计在于春",
+          "proverb_note": "春天要早做打算，整地、备种，才能赶上合适的农时。",
+          "poem": {
+            "title": "和晋陵陆丞早春游望",
+            "author": "杜审言",
+            "paragraph": 1
+          },
+          "source": "https://www.ihchina.cn/solar_details/40.html"
+        },
+        {
+          "id": "yushui",
+          "name": "雨水",
+          "date": "2月19日",
+          "symbol": "🌧️",
+          "phenology": [
+            {
+              "name": "獭祭鱼",
+              "note": "水獭捕鱼，古人把鱼摆在岸边的样子比作祭鱼。"
+            },
+            {
+              "name": "候雁北",
+              "note": "天气回暖，越冬的雁群陆续往北飞。"
+            },
+            {
+              "name": "草木萌动",
+              "note": "草木开始抽出新芽。"
+            }
+          ],
+          "custom": "川西旧时有雨水节回娘家的习俗。出嫁的女儿带礼物看望父母，感谢他们的养育。",
+          "proverb": "春雨贵如油",
+          "proverb_note": "春天的雨给种子和新苗补水。在春旱多的地方，这场雨格外珍贵。",
+          "poem": {
+            "title": "春夜喜雨",
+            "author": "杜甫",
+            "paragraph": 1
+          },
+          "source": "https://www.ihchina.cn/solar_details/41.html"
+        },
+        {
+          "id": "jingzhe",
+          "name": "惊蛰",
+          "date": "3月6日",
+          "symbol": "🍐",
+          "phenology": [
+            {
+              "name": "桃始华",
+              "note": "华在这里指开花，桃树开始开花。"
+            },
+            {
+              "name": "仓庚鸣",
+              "note": "仓庚是古人对黄鹂的称呼，可以留意黄鹂的鸣声。"
+            },
+            {
+              "name": "鹰化为鸠",
+              "note": "古人把春天见到鸠鸟的变化说成鹰变了样，这是旧说。"
+            }
+          ],
+          "custom": "有些地方惊蛰吃梨。梨和「离」同音，人们借这个字祝愿虫害远离庄稼。",
+          "proverb": "过了惊蛰节，春耕不能歇",
+          "proverb_note": "天气转暖后，许多地方要抓紧翻地、播种，春耕渐渐忙起来。",
+          "poem": {
+            "title": "观田家",
+            "author": "韦应物",
+            "paragraph": 0
+          },
+          "source": "https://www.ihchina.cn/solar_details/42.html"
+        },
+        {
+          "id": "chunfen",
+          "name": "春分",
+          "date": "3月20日",
+          "symbol": "🐦",
+          "phenology": [
+            {
+              "name": "元鸟至",
+              "note": "元鸟也叫玄鸟，这里说的是燕子飞回来了。"
+            },
+            {
+              "name": "雷乃发声",
+              "note": "春日渐暖，一些地方开始听到雷声。"
+            },
+            {
+              "name": "始电",
+              "note": "春天的雷雨里可以看见闪电。"
+            }
+          ],
+          "custom": "春分有竖蛋的玩法。把鸡蛋轻轻立在平桌上，比一比谁能让它站得稳。",
+          "proverb": "春分麦起身，一刻值千金",
+          "proverb_note": "一些麦区的冬小麦开始直立拔高，这时的田间管理很要紧。",
+          "poem": {
+            "title": "二月二十七日社兼春分端居有怀简所思者",
+            "author": "权德舆",
+            "paragraph": 2
+          },
+          "source": "https://www.ihchina.cn/solar_details/43.html"
+        },
+        {
+          "id": "qingming",
+          "name": "清明",
+          "date": "4月5日",
+          "symbol": "🪁",
+          "phenology": [
+            {
+              "name": "桐始华",
+              "note": "桐树开始开花，枝头有了浅色的花朵。"
+            },
+            {
+              "name": "田鼠化为鴽",
+              "note": "鴽读 rú，是古书里的一种鸟。田鼠变鸟是古人的说法。"
+            },
+            {
+              "name": "虹始见",
+              "note": "雨后太阳出来时，可以留意天空中的彩虹。"
+            }
+          ],
+          "custom": "清明既是节气，也是传统节日。人们扫墓祭祖、思念亲人，也会踏青、放风筝。",
+          "proverb": "清明前后，种瓜点豆",
+          "proverb_note": "许多地方气温回升，适合给瓜和豆找一块暖和的地播种。",
+          "poem": {
+            "title": "清明",
+            "author": "（唐）杜牧",
+            "paragraph": 0
+          },
+          "source": "https://www.ihchina.cn/solar_details/44.html"
+        },
+        {
+          "id": "guyu",
+          "name": "谷雨",
+          "date": "4月20日",
+          "symbol": "🍵",
+          "phenology": [
+            {
+              "name": "萍始生",
+              "note": "池塘里开始出现小片浮萍。"
+            },
+            {
+              "name": "鸣鸠拂其羽",
+              "note": "古人记下鸠鸟鸣叫、拍翅的样子。"
+            },
+            {
+              "name": "戴胜降于桑",
+              "note": "戴胜头上有一簇冠羽，像戴着一顶小帽子。古书记它落在桑树上。"
+            }
+          ],
+          "custom": "南方一些茶区会在谷雨前后采嫩芽，制成谷雨茶。",
+          "proverb": "谷雨前后栽地瓜，最好不要过立夏",
+          "proverb_note": "有些地方趁土暖、有水分时栽红薯苗，让它们早点扎根。",
+          "poem": {
+            "title": "咏廿四气诗 谷雨春光晓",
+            "author": "元稹",
+            "paragraph": 1
+          },
+          "source": "https://www.ihchina.cn/solar_details/45.html"
+        }
+      ]
+    },
+    {
+      "id": "xia",
+      "name": "夏",
+      "caption": "日照长，田里忙着收麦和插秧。",
+      "terms": [
+        {
+          "id": "lixia",
+          "name": "立夏",
+          "date": "5月5日",
+          "symbol": "🥚",
+          "phenology": [
+            {
+              "name": "蝼蝈鸣",
+              "note": "蝼蝈是古书里的叫法，说的是这时草间、土边能听到小虫鸣叫。"
+            },
+            {
+              "name": "蚯蚓出",
+              "note": "地面变暖又潮湿时，蚯蚓更容易被看见。"
+            },
+            {
+              "name": "王瓜生",
+              "note": "古书记载，叫作王瓜的藤本植物开始生长。"
+            }
+          ],
+          "custom": "杭州半山等地有立夏斗蛋的玩法。孩子们把煮熟的鸡蛋相碰，看谁的蛋壳更结实。",
+          "proverb": "立夏三天遍地锄",
+          "proverb_note": "天气暖了，杂草也长得快，农人会抓紧给田里的幼苗除草。",
+          "poem": {
+            "title": "立夏日忆京师诸弟",
+            "author": "韦应物",
+            "paragraph": 1
+          },
+          "source": "https://www.ihchina.cn/solar_details/46.html"
+        },
+        {
+          "id": "xiaoman",
+          "name": "小满",
+          "date": "5月21日",
+          "symbol": "🌾",
+          "phenology": [
+            {
+              "name": "苦菜秀",
+              "note": "古人留意到这时苦菜长得茂盛。"
+            },
+            {
+              "name": "靡草死",
+              "note": "一些枝叶细软、喜凉的草开始枯萎。"
+            },
+            {
+              "name": "麦秋至",
+              "note": "虽然还是初夏，对快成熟的小麦来说，收获的时节要到了。"
+            }
+          ],
+          "custom": "浙江海宁一带旧时会在小满踏水车。大家一起把水引入田里，盼着庄稼喝足水。",
+          "proverb": "小满动三车",
+          "proverb_note": "江南说的三车是水车、丝车和油车，这时灌田、缫丝和榨油都忙起来。",
+          "poem": {
+            "title": "观刈麦",
+            "author": "白居易",
+            "paragraph": 1
+          },
+          "source": "https://www.ihchina.cn/solar_details/6968.html"
+        },
+        {
+          "id": "mangzhong",
+          "name": "芒种",
+          "date": "6月6日",
+          "symbol": "🌿",
+          "phenology": [
+            {
+              "name": "螳螂生",
+              "note": "小螳螂从卵鞘里孵出来，像一排小战士。"
+            },
+            {
+              "name": "鵙始鸣",
+              "note": "鵙读 jú，指伯劳。古人记下伯劳在这个时节开始鸣叫。"
+            },
+            {
+              "name": "反舌无声",
+              "note": "反舌是古书里的名字，这一候写它的叫声渐少。"
+            }
+          ],
+          "custom": "皖南有安苗的习俗。插完秧，人们把麦面捏成瓜果等形状蒸熟，盼稻苗长得好。",
+          "proverb": "芒种忙忙栽",
+          "proverb_note": "有的地方一边收麦，一边赶着插秧或播种，收和种常常挨在一起。",
+          "poem": {
+            "title": "新晴野望",
+            "author": "王维",
+            "paragraph": 3
+          },
+          "source": "https://www.ihchina.cn/solar_details/6969.html"
+        },
+        {
+          "id": "xiazhi",
+          "name": "夏至",
+          "date": "6月21日",
+          "symbol": "☀️",
+          "phenology": [
+            {
+              "name": "鹿角解",
+              "note": "解在这里指脱落，古人把鹿换角记进了夏至。"
+            },
+            {
+              "name": "蜩始鸣",
+              "note": "蜩读 tiáo，就是蝉。树上开始传来蝉鸣。"
+            },
+            {
+              "name": "半夏生",
+              "note": "半夏是一种草本植物，古人记它在盛夏前后生长。"
+            }
+          ],
+          "custom": "北京有夏至吃面的习俗，山东一些地方把煮好的面过一遍凉水，做成过水面。",
+          "proverb": "夏至雨点值千金",
+          "proverb_note": "有些田地在这个时节缺水，及时雨能帮正在生长的庄稼解渴。",
+          "poem": {
+            "title": "夏至避暑北池",
+            "author": "韦应物",
+            "paragraph": 0
+          },
+          "source": "https://www.ihchina.cn/solar_details/6970.html"
+        },
+        {
+          "id": "xiaoshu",
+          "name": "小暑",
+          "date": "7月7日",
+          "symbol": "🪭",
+          "phenology": [
+            {
+              "name": "温风至",
+              "note": "吹来的风也带上了暑热。"
+            },
+            {
+              "name": "蟋蟀居壁",
+              "note": "古人留意到蟋蟀在土穴或墙根躲避暑热。"
+            },
+            {
+              "name": "鹰始击",
+              "note": "古书描写鹰开始练习飞扑。"
+            }
+          ],
+          "custom": "小暑前后，有些北方麦区在入伏时吃饺子或伏面，尝尝用新收的小麦磨成的面粉。",
+          "proverb": "小暑雷，黄梅回",
+          "proverb_note": "江南一些地方用这句谚语提醒自己，小暑打雷后还可能遇到一段连阴雨。",
+          "poem": {
+            "title": "咏廿四气诗 小暑六月节",
+            "author": "元稹",
+            "paragraph": 0
+          },
+          "source": "https://www.ihchina.cn/solar_details/6971.html"
+        },
+        {
+          "id": "dashu",
+          "name": "大暑",
+          "date": "7月23日",
+          "symbol": "🛶",
+          "phenology": [
+            {
+              "name": "腐草为萤",
+              "note": "古人见萤火虫常在湿草丛附近出现，便想象它们由腐草变来。"
+            },
+            {
+              "name": "土润溽暑",
+              "note": "溽读 rù。雨后地面潮湿，空气又闷又热。"
+            },
+            {
+              "name": "大雨时行",
+              "note": "一些地方时常遇到来得急、下得大的雨。"
+            }
+          ],
+          "custom": "浙江台州椒江有送大暑船的习俗。当地人抬着船模走过街巷，寄托平安的愿望。",
+          "proverb": "早稻抢日，晚稻抢时",
+          "proverb_note": "种两季稻的地方要趁天气合适赶收早稻，也要抓紧栽好晚稻。",
+          "poem": {
+            "title": "夏日南亭怀辛大",
+            "author": "孟浩然",
+            "paragraph": 2
+          },
+          "source": "https://www.ihchina.cn/solar_details/6972.html"
+        }
+      ]
+    },
+    {
+      "id": "qiu",
+      "name": "秋",
+      "caption": "露珠渐凉，田野迎来收获。",
+      "terms": [
+        {
+          "id": "liqiu",
+          "name": "立秋",
+          "date": "8月7日",
+          "symbol": "🍉",
+          "phenology": [
+            {
+              "name": "凉风至",
+              "note": "一些地方先从清早或傍晚感到一阵凉风。"
+            },
+            {
+              "name": "白露降",
+              "note": "清晨，草叶上有机会看见小露珠。"
+            },
+            {
+              "name": "寒蝉鸣",
+              "note": "古人把听见寒蝉的叫声也记作入秋线索。"
+            }
+          ],
+          "custom": "有些地方立秋吃西瓜，叫作「啃秋」或「咬秋」，借一口清甜迎接秋天。",
+          "proverb": "立秋三场雨，秕稻变成米",
+          "proverb_note": "秕读 bǐ。稻谷灌浆时需要水，适量的雨有助于谷粒长得饱满。",
+          "poem": {
+            "title": "立秋",
+            "author": "刘言史",
+            "paragraph": 1
+          },
+          "source": "https://www.ihchina.cn/solar_details/6973.html"
+        },
+        {
+          "id": "chushu",
+          "name": "处暑",
+          "date": "8月23日",
+          "symbol": "🚤",
+          "phenology": [
+            {
+              "name": "鹰乃祭鸟",
+              "note": "鹰开始捕鸟，古人把鹰摆放猎物的样子比作祭鸟。"
+            },
+            {
+              "name": "天地始肃",
+              "note": "古人用这个说法写秋凉初起、草木渐少生长的景象。"
+            },
+            {
+              "name": "禾乃登",
+              "note": "登在这里指成熟，田里的谷物渐渐可以收割了。"
+            }
+          ],
+          "custom": "浙江沿海一些地方在处暑前后举办开渔节。休渔结束，渔船结队出海。",
+          "proverb": "处暑高粱遍地红",
+          "proverb_note": "有些地方的高粱渐熟，红红的穗子提醒农人准备收获。",
+          "poem": {
+            "title": "咏廿四气诗 处暑七月中",
+            "author": "元稹",
+            "paragraph": 2
+          },
+          "source": "https://www.ihchina.cn/solar_details/6974.html"
+        },
+        {
+          "id": "bailu",
+          "name": "白露",
+          "date": "9月8日",
+          "symbol": "💧",
+          "phenology": [
+            {
+              "name": "鸿雁来",
+              "note": "一些大雁从北方飞到较温暖的地方。"
+            },
+            {
+              "name": "元鸟归",
+              "note": "燕子陆续离开繁殖地，飞去过冬。"
+            },
+            {
+              "name": "群鸟养羞",
+              "note": "羞在古文里有食物的意思，这里写一些鸟为过冬准备食物。"
+            }
+          ],
+          "custom": "南京一带有喝白露茶的习惯。人们把白露前后采制的秋茶泡来尝鲜。",
+          "proverb": "白露秋风夜，一夜凉一夜",
+          "proverb_note": "一些地方白露后夜晚凉得快，农人会多留意低温，赶在霜冻前收好怕冷的作物。",
+          "poem": {
+            "title": "月夜忆舍弟",
+            "author": "杜甫",
+            "paragraph": 1
+          },
+          "source": "https://www.ihchina.cn/solar_details/6975.html"
+        },
+        {
+          "id": "qiufen",
+          "name": "秋分",
+          "date": "9月23日",
+          "symbol": "⚖️",
+          "phenology": [
+            {
+              "name": "雷始收声",
+              "note": "随着一些地区天气转凉，雷雨比夏天少了。"
+            },
+            {
+              "name": "蛰虫坏户",
+              "note": "坏在这里读 péi，指泥土。古人说过冬的小虫开始用泥封住洞口。"
+            },
+            {
+              "name": "水始涸",
+              "note": "部分地方雨水减少，河塘里的水位渐渐降低。"
+            }
+          ],
+          "custom": "古时有秋分祭月的习俗。北京的月坛就是明清时祭月的地方。",
+          "proverb": "白露早，寒露迟，秋分种麦正当时",
+          "proverb_note": "这是一些北方麦区的经验，冬小麦要趁合适的温度和墒情下种。墒情就是土壤里水分的多少。",
+          "poem": {
+            "title": "山居秋暝",
+            "author": "王维",
+            "paragraph": 0
+          },
+          "source": "https://www.ihchina.cn/solar_details/6976.html"
+        },
+        {
+          "id": "hanlu",
+          "name": "寒露",
+          "date": "10月8日",
+          "symbol": "🌼",
+          "phenology": [
+            {
+              "name": "鸿雁来宾",
+              "note": "较晚南飞的雁群也陆续到来，像赶来做客。"
+            },
+            {
+              "name": "雀入大水为蛤",
+              "note": "古人见雀鸟少了、岸边的蛤多了，便想象雀变成了蛤。"
+            },
+            {
+              "name": "菊有黄华",
+              "note": "黄菊盛开，给渐凉的秋日添上亮色。"
+            }
+          ],
+          "custom": "寒露前后菊花渐开，有些地方会登高赏菊。登高也是重阳节的传统活动。",
+          "proverb": "大豆收割寒露天，石榴山楂摘下来",
+          "proverb_note": "有些地方寒露前后既要收大豆，也要及时采摘熟果。",
+          "poem": {
+            "title": "咏廿四气诗 寒露九月节",
+            "author": "元稹",
+            "paragraph": 0
+          },
+          "source": "https://www.ihchina.cn/solar_details/6977.html"
+        },
+        {
+          "id": "shuangjiang",
+          "name": "霜降",
+          "date": "10月23日",
+          "symbol": "🍁",
+          "phenology": [
+            {
+              "name": "豺祭兽",
+              "note": "古人用「祭兽」比喻豺捕到猎物后的场景。"
+            },
+            {
+              "name": "草木黄落",
+              "note": "许多草木叶子变黄，树叶一片片落下来。"
+            },
+            {
+              "name": "蛰虫咸俯",
+              "note": "咸就是都。古人用这个词写小虫藏起来、活动少了。"
+            }
+          ],
+          "custom": "福建泉州等地有霜降吃柿子的习俗，熟透的柿子像挂在树上的小灯笼。",
+          "proverb": "霜降不起葱，越长越要空",
+          "proverb_note": "起葱就是把葱收起来。这句农谚提醒人们趁天气还合适收葱。",
+          "poem": {
+            "title": "山行",
+            "author": "杜牧",
+            "paragraph": 1
+          },
+          "source": "https://www.ihchina.cn/solar_details/6978.html"
+        }
+      ]
+    },
+    {
+      "id": "dong",
+      "name": "冬",
+      "caption": "风寒霜重，数着日子等春来。",
+      "terms": [
+        {
+          "id": "lidong",
+          "name": "立冬",
+          "date": "11月7日",
+          "symbol": "🥟",
+          "phenology": [
+            {
+              "name": "水始冰",
+              "note": "一些地方的静水表面开始结薄冰。"
+            },
+            {
+              "name": "地始冻",
+              "note": "天气继续转冷，地表的土开始冻硬。"
+            },
+            {
+              "name": "雉入大水为蜃",
+              "note": "雉是野鸡，蜃在这里指大蛤。野鸡变成大蛤是古人的想象。"
+            }
+          ],
+          "custom": "北方一些地方立冬包饺子，全家人一起迎冬。福建有些地方则会用姜母鸭等应节。",
+          "proverb": "立冬种麦正当时",
+          "proverb_note": "这句话说的是一些较暖的地方。各地冬小麦的播种时间会随气候而变。",
+          "poem": {
+            "title": "早冬",
+            "author": "白居易",
+            "paragraph": 0
+          },
+          "source": "https://www.ihchina.cn/solar_details/6979.html"
+        },
+        {
+          "id": "xiaoxue",
+          "name": "小雪",
+          "date": "11月22日",
+          "symbol": "🫙",
+          "phenology": [
+            {
+              "name": "虹藏不见",
+              "note": "一些地方降雨变少，彩虹也少见了。"
+            },
+            {
+              "name": "天气上升，地气下降",
+              "note": "这是古人解释天气转冷的一种说法。"
+            },
+            {
+              "name": "闭塞而成冬",
+              "note": "草木渐歇，动物各自躲寒，古人用这个说法描绘冬景。"
+            }
+          ],
+          "custom": "有些南方农家在小雪前后开始腌腊肉、做香肠，为冬天和过年备食物。",
+          "proverb": "小雪收葱，不收就空",
+          "proverb_note": "在较冷的地方，小雪前后要留意收葱和储菜，避免蔬菜冻坏。",
+          "poem": {
+            "title": "问刘十九",
+            "author": "白居易",
+            "paragraph": 1
+          },
+          "source": "https://www.ihchina.cn/solar_details/6980.html"
+        },
+        {
+          "id": "daxue",
+          "name": "大雪",
+          "date": "12月7日",
+          "symbol": "❄️",
+          "phenology": [
+            {
+              "name": "鹖鴠不鸣",
+              "note": "鹖鴠读 hé dàn，是古书里的动物名。这句话写入冬后听不到它叫。"
+            },
+            {
+              "name": "虎始交",
+              "note": "古人把虎开始求偶的情形记作一候。"
+            },
+            {
+              "name": "荔挺出",
+              "note": "荔挺是古书里的草名，古人记下它在寒天也会冒芽。"
+            }
+          ],
+          "custom": "老南京有大雪腌肉的说法。旧时人们趁天气转冷做咸肉，留到过年吃。",
+          "proverb": "今年麦盖三层被，来年枕着馒头睡",
+          "proverb_note": "被子指田里的积雪。合适的积雪能给冬麦挡风保温，融化后还能给土壤补水。",
+          "poem": {
+            "title": "江雪",
+            "author": "柳宗元",
+            "paragraph": 1
+          },
+          "source": "https://www.ihchina.cn/solar_details/6981.html"
+        },
+        {
+          "id": "dongzhi",
+          "name": "冬至",
+          "date": "12月22日",
+          "symbol": "🏮",
+          "phenology": [
+            {
+              "name": "蚯蚓结",
+              "note": "古书把蚯蚓在冷天缩成团的样子比作打结的绳子。"
+            },
+            {
+              "name": "麋角解",
+              "note": "麋读 mí。古人把麋鹿脱落旧角的现象记在这一候。"
+            },
+            {
+              "name": "水泉动",
+              "note": "有的泉水在寒天还会流动，古人也把它记进冬至。"
+            }
+          ],
+          "custom": "冬至后有数九的习俗。人们每过一天就在消寒图上填一笔，数着日子等春天。",
+          "proverb": "七九六十三，家家把种拣",
+          "proverb_note": "这是江苏数九歌里的农谚。从冬至数到七九，农家会为春播挑好种子。",
+          "poem": {
+            "title": "邯郸冬至夜思家",
+            "author": "白居易",
+            "paragraph": 0
+          },
+          "source": "https://www.ihchina.cn/solar_details/6982.html"
+        },
+        {
+          "id": "xiaohan",
+          "name": "小寒",
+          "date": "1月5日",
+          "symbol": "🪶",
+          "phenology": [
+            {
+              "name": "雁北乡",
+              "note": "乡读 xiàng，意思是朝向，古人用它描述雁群有了向北的动向。"
+            },
+            {
+              "name": "鹊始巢",
+              "note": "喜鹊衔来树枝，开始搭窝。"
+            },
+            {
+              "name": "雉雊",
+              "note": "雊读 gòu，指野鸡鸣叫。"
+            }
+          ],
+          "custom": "南京有小寒吃菜饭的习惯，把青菜和米饭一起煮，寒天里吃一碗热乎的。",
+          "proverb": "一月小寒随大寒，农人拾粪莫偷闲",
+          "proverb_note": "从前农家冬天就收集肥料，为来年春种做好准备。",
+          "poem": {
+            "title": "咏廿四气诗 小寒十二月节",
+            "author": "元稹",
+            "paragraph": 0
+          },
+          "source": "https://www.ihchina.cn/solar_details/6983.html"
+        },
+        {
+          "id": "dahan",
+          "name": "大寒",
+          "date": "1月20日",
+          "symbol": "☃️",
+          "phenology": [
+            {
+              "name": "鸡乳",
+              "note": "乳在这里有育雏的意思，古人用它记母鸡孵育小鸡。"
+            },
+            {
+              "name": "征鸟厉疾",
+              "note": "古书用这个说法描写鹰隼飞扑迅疾的样子。"
+            },
+            {
+              "name": "水泽腹坚",
+              "note": "一些寒冷地方的冰层变厚，水泽像冻到了肚子里。"
+            }
+          ],
+          "custom": "大寒常在岁末，一些地方开始置办年货、准备窗花。东北有蒸黏豆包的食俗。",
+          "proverb": "大寒见三白，农民衣食足",
+          "proverb_note": "三白指多场雪。农人盼冬雪给田里存水，也盼来年有好收成。",
+          "poem": {
+            "title": "逢雪宿芙蓉山主人",
+            "author": "刘长卿",
+            "paragraph": 1
+          },
+          "source": "https://www.ihchina.cn/solar_details/6984.html"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "吴澄《月令七十二候集解》",
+      "url": "https://zh.wikisource.org/wiki/月令七十二候集解"
+    },
+    {
+      "label": "中国非物质文化遗产网 · 二十四节气专题",
+      "url": "https://www.ihchina.cn/solar_terms.html"
+    },
+    {
+      "label": "中国农业博物馆 · 二十四节气与节令",
+      "url": "https://www.zgnybwg.com.cn/detail/zh/1045.html"
+    },
+    {
+      "label": "中国气象报 · 秋分农事",
+      "url": "https://www.cma.gov.cn/ztbd/2024zt/jq/xz/202409/P020240923585957696529.pdf"
+    },
+    {
+      "label": "中国气象报 · 大寒食俗",
+      "url": "https://www.cma.gov.cn/ztbd/2024zt/jq/xz/202501/P020250120408040105388.pdf"
+    }
+  ]
+}

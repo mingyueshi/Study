@@ -1,0 +1,16 @@
+<figure class="couplet-door" data-direction="right" {% if preview %}data-door-preview{% endif %}>
+  <div class="couplet-banner">
+    <span class="couplet-sr">横批：</span>
+    <span class="couplet-banner-text" data-paper="banner">{% for character in demo.banner %}<span>{{ character }}</span>{% endfor %}</span>
+  </div>
+  <div class="couplet-door-frame" aria-hidden="true"><span></span></div>
+  <div class="couplet-scroll couplet-scroll-upper">
+    <span class="couplet-scroll-text" data-paper="upper">{{ demo.upper|join:'' }}</span>
+    <span class="couplet-scroll-label">上联</span>
+  </div>
+  <div class="couplet-scroll couplet-scroll-lower">
+    <span class="couplet-scroll-text" data-paper="lower">{{ demo.lower|join:'' }}</span>
+    <span class="couplet-scroll-label">下联</span>
+  </div>
+  <figcaption data-door-caption>面对门看 · 横批从右往左读</figcaption>
+</figure>

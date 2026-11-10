@@ -7,7 +7,7 @@ from django.core.management.base import CommandError
 from django.test import TestCase
 
 from questionbank import importing, types
-from questionbank.models import ImportReceipt, Question
+from questionbank.models import AnswerRecord, ImportReceipt, Question
 
 from .test_models import make_question
 
@@ -81,6 +81,44 @@ class ImportBatchTests(TestCase):
         self.assertEqual(report['status'], 'dry-run')
         self.assertEqual(Question.objects.count(), 0)
         self.assertEqual(ImportReceipt.objects.count(), 0)
+
+    def test_revised_batch_retires_old_question_without_changing_its_content_or_records(self):
+        original = make_batch([make_entry()])
+        importing.import_batch(original)
+        question = Question.objects.get()
+        record = AnswerRecord.objects.create(question=question, guest_key='guest', given={'value': 0}, correct=True)
+        revised = make_batch([make_entry(source_ref='math:mu1-1:example:rev2')], batch_id='test-revision')
+        revised['retire'] = {str(question.uuid): question.checksum}
+
+        importing.import_batch(revised, dry_run=True)
+        question.refresh_from_db()
+        self.assertTrue(question.active)
+        self.assertEqual(Question.objects.count(), 1)
+
+        importing.import_batch(revised)
+        question.refresh_from_db()
+        record.refresh_from_db()
+        self.assertFalse(question.active)
+        self.assertTrue(record.correct)
+        self.assertEqual(record.question_id, question.pk)
+        self.assertEqual(Question.objects.filter(active=True).count(), 1)
+        self.assertEqual(importing.import_batch(original, verify_only=True)['status'], 'already')
+        self.assertEqual(importing.import_batch(revised, verify_only=True)['status'], 'already')
+        self.assertEqual(importing.import_batch(revised)['status'], 'already')
+
+        Question.objects.filter(pk=question.pk).update(active=True)
+        with self.assertRaisesMessage(ValidationError, '仍在启用'):
+            importing.import_batch(revised, verify_only=True)
+
+    def test_invalid_retirement_does_not_publish_revised_questions(self):
+        question = seed_question(make_entry())
+        entry = make_entry(source_ref='math:mu1-1:example:rev2')
+        batch = make_batch([entry])
+        for retire in ([str(question.uuid)], {entry['uuid']: question.checksum}, {str(question.uuid): '0' * 64}):
+            with self.subTest(retire=retire), self.assertRaises(ValidationError):
+                importing.import_batch({**batch, 'retire': retire})
+        self.assertEqual(Question.objects.filter(active=True).count(), 1)
+        self.assertFalse(ImportReceipt.objects.exists())
 
     def test_uuid_mismatch_rejected(self):
         entry = make_entry(uuid='00000000-0000-5000-8000-000000000000')

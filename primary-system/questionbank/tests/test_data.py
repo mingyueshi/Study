@@ -3,6 +3,7 @@
 按 AGENTS.md 约定「新增数据结构时先写测试再填数据」：这里断言的是已提交
 批次文件的形状与规模下限，数据更新后跑 ``manage.py test questionbank``。
 """
+from collections import Counter
 import json
 from pathlib import Path
 
@@ -84,10 +85,13 @@ class BatchContractTests(SimpleTestCase):
                           f'{entry["source_ref"]} 轨别未知。')
 
     def test_olympiad_track_scale(self):
-        entries = [entry for _, batch in load_batches() for entry in batch['questions']]
-        olympiad = [entry for entry in entries if entry.get('track') == 'olympiad']
-        self.assertGreaterEqual(len(olympiad), 30, '奥数轨题量低于 30。')
+        batches = load_batches()
+        retired = {uuid for _, batch in batches for uuid in batch.get('retire', {})}
+        olympiad = [entry for _, batch in batches for entry in batch['questions']
+                    if entry.get('track') == 'olympiad' and entry['uuid'] not in retired]
+        self.assertGreaterEqual(len(olympiad), 100, '奥数轨可练题量低于 100。')
         self.assertTrue(all(entry['source_key'] == 'primary-olympiad' for entry in olympiad),
                         '奥数轨题目必须标注 primary-olympiad 来源。')
-        themes = {tag for entry in olympiad for tag in entry['tags']}
-        self.assertGreaterEqual(len(themes), 6, f'奥数主题覆盖不足：{sorted(themes)}')
+        themes = Counter(tag for entry in olympiad for tag in entry['tags'])
+        self.assertGreaterEqual(len(themes), 10, f'奥数主题覆盖不足：{sorted(themes)}')
+        self.assertTrue(all(count >= 10 for count in themes.values()), f'奥数主题不足一组 10 题：{themes}')

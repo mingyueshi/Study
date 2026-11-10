@@ -72,6 +72,8 @@ window.STUDY_TOPIC_CONNECTIONS = {
   backlinks: {
     'hu1-2': [['calendar', '#cal-title', '看公元纪年和跨年计算']],
     'hu1-3': [['calendar', '#dyn-title', '按时间看十六个朝代更替']],
+    'gu4-1': [['solarTerms', '', '到二十四节气馆比较古人的物候记录和家乡的天气']],
+    'gu4-3': [['solarTerms', '', '到二十四节气馆沿着一年的太阳位置认识四季']],
     'gu5-2': [['chinaMap', '?place=f20#map', '在地图上看长江的源头、流向和入海口']],
     'gu5-3': [
       ['chinaMap', '?place=f21#map', '在地图上找黄河的「几」字弯'],
@@ -85,9 +87,11 @@ window.STUDY_TOPIC_CONNECTIONS = {
     'lu2-1': [['poetry', '', '找一首学过的诗，对照原文看句式和韵脚']],
     'lu4-2': [['historyLesson', '#lesson-hu5-5', '到历史精讲看《史记》怎样组织历史']],
     'lu6-3': [['historyLesson', '#lesson-hu7-2', '到历史精讲查科举制度和考试次序']],
+    'lu6-5': [['solarTerms', '', '到二十四节气馆看三候、习俗和应景诗句']],
     'lu7-1': [['poetry', '', '按作者或篇名查古诗文原文']],
     'lu7-2': [['idiomStories', '', '到成语典故馆读《史记》等典籍里的故事']],
     'su2-1': [['elements', '', '到元素周期表认识组成物质的元素']],
+    'su6-5': [['bodyStation', '', '到人体奥秘站打开四张身体地图']],
     'su7-3': [['geographyLesson', '#lesson-gu5-1', '到地理小课堂看水循环的路线']],
     'su7-4': [
       ['geographyLesson', '#lesson-gu4-2', '到地理小课堂学读天气预报'],

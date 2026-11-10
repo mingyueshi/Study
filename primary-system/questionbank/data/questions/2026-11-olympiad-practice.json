@@ -1,0 +1,2004 @@
+{
+ "schema_version": 1,
+ "batch_id": "2026-11-olympiad-practice",
+ "generator": "人工编排（uuid 由 questionbank.types.question_uuid 推导）",
+ "note": "四年级奥数扩充批次：70 道新题，16 道首批题修订；原有八个主题补齐到每组 10 道，新增植树问题和周期规律。",
+ "retire": {
+  "39f64a12-d4af-5f52-a8a6-c9759eeba572": "665abc89b9a26ed1932cd95cc2d69e0ac2618129bd16f9115c89421906bf8c3b",
+  "c52ae891-73c6-54a0-9b33-9968d8eba14b": "0c38c6ef3893ae671db6d235a76ed31331f563c80c4c483886f7d393298eae1b",
+  "96249992-040e-5b5c-93bb-944470082e53": "7103e5b6676bab75c0fec193d2163c9405e33afaeb11a95c6904929d7d99bce4",
+  "13956d28-8544-5b88-a049-5b5a2e7aba9c": "07f1682783682f430ff04ea05d6c4cb38462a526e8a0685a8917229e1109364e",
+  "e843808d-cc75-5c51-9014-ac51d6e9cadb": "e687af32812553d1c043a84e5de946ea13540b367ca9ac9d418c72b627a70b82",
+  "58a865d0-c45a-5620-a2c6-ac2ac466b5c7": "43d4f4fab3082b98a889f937a92cb3752218161d511287b108f51f500ce85a36",
+  "76859501-ae1a-5670-a8b5-3d2dba56d720": "5070a4490a4e9de6c87f727d831742cefb3e3c1aa4147f22d590255eedccf71c",
+  "ba8ade49-7ddb-5c68-b4bf-f7fa1f3670dc": "d121f80d2eabfe74f0fa1344250347aa338466bb561f7200b34767c4846a68fd",
+  "cfff0e82-352c-5184-aa03-fde68246700e": "0f86017a1f85cb068383549129812b69411ca97a60be25cc9abb44a91615752c",
+  "b7dc8e5c-290c-5d98-8a82-07ce2ff231ff": "f6b7b187d0ca89aae0c13f92be4464e60bf491df48d1675c11610ef51403b4a6",
+  "539872e5-8e4c-511a-8356-7d8b58ff6076": "a18ef2e1490883a3748a86c6dd4208e2a764e6ddb7fa07598f0661c6062e9a1a",
+  "e1bde8df-55eb-5012-b95b-eeee37178abf": "3a1ae95609acc97e7afea11459323def106f90146c864879f6ff8342c0b8570c",
+  "3ceb5a0f-a444-580b-b968-115be907f301": "f4ffd6512bff23664b1aabf7194d3349a51e086a7e960e81ca625f24516a74b8",
+  "d98e5747-5493-5fd5-91a5-8addcff139e2": "3ee9fcde2be9b3befbe93ed29483e4db266cf99f208e7c168c9fca1bd23537aa",
+  "2ce926b8-84d3-5cda-8e0a-e0af4417dbaa": "49eda17ad7f5c99f021d4644162cec772b6068f3740940a69de33a51e23389f1",
+  "3e5cecfa-e35c-5c9c-a8a7-97945aad46e7": "0d6e5b0b6658f9da0ebbb1286bc7655e3a300dd66eb2071eb9abced4855d9a29"
+ },
+ "questions": [
+  {
+   "uuid": "64aaf3d9-742c-5b81-b93b-31cd40b815f2",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "198＋297＋305 等于多少？",
+   "payload": {
+    "options": [
+     "800",
+     "798",
+     "790",
+     "810"
+    ],
+    "answer": 0,
+    "explanation": "把 198 和 297 先看成 200 和 300，多加了 2＋3＝5。再加 305，最后减去 5，得到 800。"
+   },
+   "tags": [
+    "速算巧算"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:practice:susuan:01"
+  },
+  {
+   "uuid": "53326a69-01a6-5165-a992-ddb0bc87ac9b",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "37×56＋63×56 等于多少？",
+   "payload": {
+    "options": [
+     "5500",
+     "5660",
+     "5600",
+     "6300"
+    ],
+    "answer": 2,
+    "explanation": "两个乘积里都有 56，可以先把 37 和 63 加起来。100 个 56 就是 5600。"
+   },
+   "tags": [
+    "速算巧算"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:practice:susuan:02"
+  },
+  {
+   "uuid": "36c4a8db-2263-5677-a90f-8adb7a72170e",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "4800÷25 等于多少？",
+   "payload": {
+    "options": [
+     "200",
+     "192",
+     "180",
+     "120"
+    ],
+    "answer": 1,
+    "explanation": "被除数和除数同时乘 4，商不变。4800÷25＝19200÷100＝192。"
+   },
+   "tags": [
+    "速算巧算"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:practice:susuan:03"
+  },
+  {
+   "uuid": "01165cdb-acd3-5522-93c2-cc332f147a6e",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "999×7＋7 等于多少？",
+   "payload": {
+    "options": [
+     "7007",
+     "7000",
+     "6999",
+     "6993"
+    ],
+    "answer": 1,
+    "explanation": "999 个 7 再添上 1 个 7，正好是 1000 个 7，结果是 7000。"
+   },
+   "tags": [
+    "速算巧算"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:practice:susuan:04"
+  },
+  {
+   "uuid": "eb8f9fd5-5300-591d-92d9-60d3f9854222",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "100－98＋96－94＋……＋4－2，按照从 100 开始每次减小 2 的顺序写完，结果是多少？",
+   "payload": {
+    "options": [
+     "25",
+     "50",
+     "48",
+     "52"
+    ],
+    "answer": 1,
+    "explanation": "把相邻的加减项两个一组。100－98、96－94……每组都等于 2。从 100 到 2 有 50 个数，可以分 25 组，和是 50。"
+   },
+   "tags": [
+    "速算巧算"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:practice:susuan:05"
+  },
+  {
+   "uuid": "04fabf82-aa6c-5778-93e9-1b787d989a1d",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "32×125×25 等于多少？",
+   "payload": {
+    "options": [
+     "125000",
+     "10000",
+     "100000",
+     "80000"
+    ],
+    "answer": 2,
+    "explanation": "把 32 拆成 8×4，8 和 125 凑成 1000，4 和 25 凑成 100，再相乘得到 100000。"
+   },
+   "tags": [
+    "速算巧算"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:practice:susuan:06"
+  },
+  {
+   "uuid": "9ceecd2c-7b74-5064-b1fe-a861b069d938",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "一串数从 92 开始，每次减去 5。第 13 个数是多少？",
+   "payload": {
+    "options": [
+     "27",
+     "37",
+     "42",
+     "32"
+    ],
+    "answer": 3,
+    "explanation": "从第 1 个到第 13 个，要减 12 次。一共减去 5×12＝60，92－60＝32。"
+   },
+   "tags": [
+    "等差数列"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:practice:dengcha:01"
+  },
+  {
+   "uuid": "20b1502f-06b4-5964-965b-4569c87d2649",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "数列 7、12、17、22……每次加 5。57 是第几个数？",
+   "payload": {
+    "options": [
+     "第 13 个",
+     "第 12 个",
+     "第 10 个",
+     "第 11 个"
+    ],
+    "answer": 3,
+    "explanation": "从 7 到 57 一共增加 50，每步增加 5，所以走了 10 步。7 已经是第 1 个，因此 57 是第 11 个。"
+   },
+   "tags": [
+    "等差数列"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:practice:dengcha:02"
+  },
+  {
+   "uuid": "ad5471c2-e16b-510a-be46-0547df5e5190",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "从 12 到 48，每次加 4，把得到的数都写下来，包含 12 和 48。这些数的和是多少？",
+   "payload": {
+    "options": [
+     "330",
+     "288",
+     "300",
+     "270"
+    ],
+    "answer": 2,
+    "explanation": "从 12 到 48 有 9 步，一共有 10 个数。首尾配成 5 对，每对和是 12＋48＝60，所以总和是 300。"
+   },
+   "tags": [
+    "等差数列"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:practice:dengcha:03"
+  },
+  {
+   "uuid": "15a53392-214f-554c-95c5-3dab168e566b",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "一摞积木有 7 层，最上面一层放 3 块，往下每层比上一层多 2 块。这摞积木共有多少块？",
+   "payload": {
+    "options": [
+     "63 块",
+     "72 块",
+     "60 块",
+     "54 块"
+    ],
+    "answer": 0,
+    "explanation": "最下面一层有 3＋6×2＝15 块。最上层和最下层配对，接着向中间配，共 3 对，每对 18 块。加上中间那层的 9 块，一共 63 块。"
+   },
+   "tags": [
+    "等差数列"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:practice:dengcha:04"
+  },
+  {
+   "uuid": "322ac99a-e432-5bd8-8f13-164031c62550",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "有 9 个连续的奇数，中间那个是 25。这 9 个数的和是多少？",
+   "payload": {
+    "options": [
+     "200",
+     "250",
+     "225",
+     "216"
+    ],
+    "answer": 2,
+    "explanation": "离中间一样远的两个数，一个比 25 小几，另一个就比 25 大几，每对和都是 50。4 对再加上中间的 25，一共 225。"
+   },
+   "tags": [
+    "等差数列"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:practice:dengcha:05"
+  },
+  {
+   "uuid": "b7fcc733-9ac8-54b1-b52b-aedacd2c1917",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "数列 14、21、28、35……每次加 7。第 8 个数和第 15 个数相差多少？",
+   "payload": {
+    "options": [
+     "49",
+     "63",
+     "56",
+     "42"
+    ],
+    "answer": 0,
+    "explanation": "从第 8 个到第 15 个一共走 7 步，每步加 7，相差 7×7＝49。"
+   },
+   "tags": [
+    "等差数列"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:practice:dengcha:06"
+  },
+  {
+   "uuid": "0f8a6351-39e6-53f8-9519-39dfd2cecb82",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "文具店卖 3 元和 5 元两种笔记本。小琳买了 12 本，共花 46 元。她买了几本 5 元的笔记本？",
+   "payload": {
+    "options": [
+     "6 本",
+     "5 本",
+     "7 本",
+     "4 本"
+    ],
+    "answer": 1,
+    "explanation": "假设 12 本都买 3 元的，只要 36 元。每换成一本 5 元的就多花 2 元，实际多花 10 元，所以换了 5 本。"
+   },
+   "tags": [
+    "鸡兔同笼"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:practice:jitu:01"
+  },
+  {
+   "uuid": "05930cea-d633-5422-bf93-111c39538c71",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "体育老师买了 11 根跳绳，其中短绳每根长 2 米，长绳每根长 3 米。这些跳绳一共长 29 米，短绳有几根？",
+   "payload": {
+    "options": [
+     "4 根",
+     "7 根",
+     "6 根",
+     "3 根"
+    ],
+    "answer": 0,
+    "explanation": "假设全是长绳，总长是 33 米。每换一根短绳就少 1 米，实际少了 4 米，所以短绳有 4 根。"
+   },
+   "tags": [
+    "鸡兔同笼"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:practice:jitu:02"
+  },
+  {
+   "uuid": "9af27441-e2fe-5517-a579-5c35ccbbe4c6",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "小刚做了 15 道抢答题，每题都答了。答对一题得 4 分，答错一题扣 2 分，最后得 36 分。小刚答错了几题？",
+   "payload": {
+    "options": [
+     "6 题",
+     "3 题",
+     "4 题",
+     "9 题"
+    ],
+    "answer": 2,
+    "explanation": "全答对有 60 分。把一道答对的改为答错，会少拿 4 分，还会扣 2 分，一共少 6 分。实际少 24 分，所以答错了 4 题。"
+   },
+   "tags": [
+    "鸡兔同笼"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:practice:jitu:03"
+  },
+  {
+   "uuid": "e0615d7b-9b41-5c96-a607-9d6547ca0d36",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "有 19 个零件装在 5 个盒子里。大盒每盒装 5 个，小盒每盒装 2 个，每盒都装满。大盒有几个？",
+   "payload": {
+    "options": [
+     "2 个",
+     "4 个",
+     "1 个",
+     "3 个"
+    ],
+    "answer": 3,
+    "explanation": "假设全用小盒，只能装 10 个。每换一个大盒能多装 3 个，一共要多装 19－10＝9 个，所以要换 3 个大盒。"
+   },
+   "tags": [
+    "鸡兔同笼"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:practice:jitu:04"
+  },
+  {
+   "uuid": "21ad79fe-4154-546d-a91a-832449a4f6c3",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "学校买了两种面额的纪念券，面额分别是 2 元和 10 元，共 16 张，合计 88 元。10 元券有几张？",
+   "payload": {
+    "options": [
+     "9 张",
+     "7 张",
+     "6 张",
+     "8 张"
+    ],
+    "answer": 1,
+    "explanation": "假设全是 2 元券，总额是 32 元。每换一张 10 元券多 8 元，实际多了 56 元，所以有 7 张。"
+   },
+   "tags": [
+    "鸡兔同笼"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:practice:jitu:05"
+  },
+  {
+   "uuid": "41c3695f-0686-5932-bbe9-f9e397928cd3",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "农场有鸡和兔共 14 只。兔脚总数比鸡脚总数多 8 只。兔有几只？",
+   "payload": {
+    "options": [
+     "7 只",
+     "4 只",
+     "8 只",
+     "6 只"
+    ],
+    "answer": 3,
+    "explanation": "假设全是鸡，兔脚是 0，鸡脚是 28，兔脚比鸡脚少 28 只。每把一只鸡换成兔，兔脚加 4，鸡脚减 2，差就向兔脚这边增加 6。要从少 28 变成多 8，一共增加 36，所以要换 6 只。"
+   },
+   "tags": [
+    "鸡兔同笼"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:practice:jitu:06"
+  },
+  {
+   "uuid": "4db82b8b-9e70-5955-ac35-01c382ab6b0e",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "把棋子分给几个小朋友。每人分 4 枚会剩 18 枚，每人分 6 枚会剩 4 枚。共有几个小朋友？",
+   "payload": {
+    "options": [
+     "9 人",
+     "11 人",
+     "7 人",
+     "6 人"
+    ],
+    "answer": 2,
+    "explanation": "每人多拿 2 枚，一共多拿了 18－4＝14 枚。14÷2＝7，所以有 7 人。"
+   },
+   "tags": [
+    "盈亏问题"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:practice:yingkui:01"
+  },
+  {
+   "uuid": "12794e97-5968-506b-9551-5d346de21318",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "把书分给几个小组。每组计划发 5 本时少 3 本，每组计划发 7 本时少 15 本。一共有多少本书？",
+   "payload": {
+    "options": [
+     "30 本",
+     "27 本",
+     "33 本",
+     "42 本"
+    ],
+    "answer": 1,
+    "explanation": "两种分法相差 15－3＝12 本，每组相差 2 本，所以有 6 组。按每组 5 本需要 30 本，实际少 3 本，原来有 27 本。"
+   },
+   "tags": [
+    "盈亏问题"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:practice:yingkui:02"
+  },
+  {
+   "uuid": "9218ece4-c9ce-5386-9551-7ca82aee30e9",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "把小红旗分给一队同学，每人分 3 面刚好分完。每人分 2 面时剩 9 面。这队同学有多少人？",
+   "payload": {
+    "options": [
+     "18 人",
+     "6 人",
+     "9 人",
+     "27 人"
+    ],
+    "answer": 2,
+    "explanation": "从每人拿 3 面改为每人拿 2 面，每个人都少拿 1 面，刚好多出 9 面，所以有 9 人。"
+   },
+   "tags": [
+    "盈亏问题"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:practice:yingkui:03"
+  },
+  {
+   "uuid": "50e71c7a-ed02-5a8d-8c1a-8bb77f4c8cd0",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "手工课分彩纸，每人分 6 张会剩 5 张，每人分 8 张会少 9 张。实际有多少张彩纸？",
+   "payload": {
+    "options": [
+     "47 张",
+     "42 张",
+     "49 张",
+     "56 张"
+    ],
+    "answer": 0,
+    "explanation": "从剩 5 张到少 9 张，两种分法相差 14 张。每人相差 2 张，所以有 7 人。按每人 6 张分掉 42 张，还剩 5 张，实际有 47 张。"
+   },
+   "tags": [
+    "盈亏问题"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:practice:yingkui:04"
+  },
+  {
+   "uuid": "cf267c1f-a722-5b70-b630-e9341dbba495",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "把一堆苹果装篮。每篮装 8 个，装完所有篮子还剩 6 个；每篮计划装 11 个，最后一个篮子只有 5 个，前面的都装满。有几个篮子？",
+   "payload": {
+    "options": [
+     "5 个",
+     "4 个",
+     "3 个",
+     "6 个"
+    ],
+    "answer": 1,
+    "explanation": "每篮装 11 个时，最后一个还差 6 个才装满。两种计划装的总数相差 6＋6＝12 个，每篮相差 3 个，所以有 4 个篮子。"
+   },
+   "tags": [
+    "盈亏问题"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:practice:yingkui:05"
+  },
+  {
+   "uuid": "79dff381-1304-5668-827c-055ec0af1297",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "安排同学乘船。每条船坐 5 人，还有 4 人没座位；每条船坐 7 人时，只有最后一条船空出 6 个座位，其余都坐满。一共有多少名同学？",
+   "payload": {
+    "options": [
+     "31 人",
+     "35 人",
+     "25 人",
+     "29 人"
+    ],
+    "answer": 3,
+    "explanation": "两种安排的总座位数相差 4＋6＝10 个，每条船相差 2 个座位，所以有 5 条船。每条坐 5 人还差 4 个座位，同学共有 5×5＋4＝29 人。"
+   },
+   "tags": [
+    "盈亏问题"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:practice:yingkui:06"
+  },
+  {
+   "uuid": "d4ecd5a4-1cb9-57b5-abc2-c8bb386bbce1",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "把玻璃珠分装到一些袋子里。每袋装 6 颗，装完还剩 8 颗；加进 4 颗玻璃珠以后，同样这些袋子每袋装 8 颗正好装完。原来有多少颗？",
+   "payload": {
+    "options": [
+     "36 颗",
+     "56 颗",
+     "48 颗",
+     "44 颗"
+    ],
+    "answer": 3,
+    "explanation": "原来剩的 8 颗加上新添的 4 颗，正好给每袋多装 2 颗。所以有 12÷2＝6 袋，原来有 6×6＋8＝44 颗。"
+   },
+   "tags": [
+    "盈亏问题"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:practice:yingkui:07"
+  },
+  {
+   "uuid": "b34943e6-e557-565e-96e0-d0e400773065",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "一个数先乘 4，再加上 12，然后除以 2，得到 30。原来的数是多少？",
+   "payload": {
+    "options": [
+     "18",
+     "15",
+     "9",
+     "12"
+    ],
+    "answer": 3,
+    "explanation": "从 30 倒推，先乘 2 得 60，再减 12 得 48，最后除以 4 得 12。"
+   },
+   "tags": [
+    "还原问题"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:practice:huanyuan:01"
+  },
+  {
+   "uuid": "6fbdde56-f630-52bb-b81d-80e08790a1f7",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "盒里有一些球。先放进 6 个，再拿走当时球数的一半，最后剩 15 个。盒里原来有几个球？",
+   "payload": {
+    "options": [
+     "24 个",
+     "30 个",
+     "36 个",
+     "18 个"
+    ],
+    "answer": 0,
+    "explanation": "拿走一半后剩 15 个，所以放进 6 个后共有 30 个。往回减去新放的 6 个，原来有 24 个。"
+   },
+   "tags": [
+    "还原问题"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:practice:huanyuan:02"
+  },
+  {
+   "uuid": "beb02da8-c042-529c-b1da-8171902355ba",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "小乐第一天读了剩余页数的一半，第二天读了剩余页数的一半，最后还剩 18 页没读。这本书原来有多少页？",
+   "payload": {
+    "options": [
+     "72 页",
+     "90 页",
+     "54 页",
+     "36 页"
+    ],
+    "answer": 0,
+    "explanation": "第二天读之前还有 18×2＝36 页。第一天读之前是 36×2＝72 页。"
+   },
+   "tags": [
+    "还原问题"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:practice:huanyuan:03"
+  },
+  {
+   "uuid": "cc57ab91-86d3-5d7c-aca2-4591593ab631",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "书架有上下两层。把上层的 8 本书移到下层后，两层各有 24 本。原来上层比下层多几本？",
+   "payload": {
+    "options": [
+     "24 本",
+     "16 本",
+     "8 本",
+     "32 本"
+    ],
+    "answer": 1,
+    "explanation": "把这 8 本搬回去，上层有 24＋8＝32 本，下层有 24－8＝16 本，原来相差 16 本。"
+   },
+   "tags": [
+    "还原问题"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:practice:huanyuan:04"
+  },
+  {
+   "uuid": "64bafb11-1561-5e84-90a0-7a6f3a940bcd",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "游戏一开始有一些积分。第一关把积分变成原来的 2 倍，再扣 3 分；第二关照样先翻倍再扣 3 分。最后剩 31 分，开始有多少分？",
+   "payload": {
+    "options": [
+     "9 分",
+     "10 分",
+     "7 分",
+     "17 分"
+    ],
+    "answer": 1,
+    "explanation": "先撤销第二关的扣分，再撤销翻倍，得到（31＋3）÷2＝17。第一关也这样倒推，（17＋3）÷2＝10。"
+   },
+   "tags": [
+    "还原问题"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:practice:huanyuan:05"
+  },
+  {
+   "uuid": "36f2063e-756e-5f1a-afcf-65a221885e3c",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "小安有一些贴纸，先送出一半，再把剩下的分给两个朋友，每人 6 张，她自己还剩 2 张。小安原来有多少张贴纸？",
+   "payload": {
+    "options": [
+     "14 张",
+     "24 张",
+     "28 张",
+     "32 张"
+    ],
+    "answer": 2,
+    "explanation": "分给两个朋友前有 6×2＋2＝14 张，这是原来的一半，所以原来有 28 张。"
+   },
+   "tags": [
+    "还原问题"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:practice:huanyuan:06"
+  },
+  {
+   "uuid": "6a6ce148-6924-556e-a06e-6653d2547466",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "把一个数除以 5，余数是 3。再把商减 4，得到 7。原来的数是多少？",
+   "payload": {
+    "options": [
+     "55",
+     "62",
+     "52",
+     "58"
+    ],
+    "answer": 3,
+    "explanation": "先把 4 加回去，原来的商是 11。商乘除数再加余数，原来的数是 11×5＋3＝58。"
+   },
+   "tags": [
+    "还原问题"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:practice:huanyuan:07"
+  },
+  {
+   "uuid": "8e210895-cc39-5313-87a4-1de35969cd8d",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "小明以每分钟 60 米的速度走在前面，小华以每分钟 80 米的速度从同一地点沿同一条路出发。小明先走 5 分钟，小华出发后几分钟追上小明？",
+   "payload": {
+    "options": [
+     "20 分钟",
+     "10 分钟",
+     "15 分钟",
+     "12 分钟"
+    ],
+    "answer": 2,
+    "explanation": "小华出发时，小明领先 60×5＝300 米。小华每分钟追近 80－60＝20 米，需要 300÷20＝15 分钟。"
+   },
+   "tags": [
+    "行程初步"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:practice:xingcheng:01"
+  },
+  {
+   "uuid": "7f07c935-0bef-5e1c-9ba9-b420c9a9729a",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "两人同时从操场同一点背向走，沿同一条直线前进，每分钟分别走 55 米和 65 米。走了 6 分钟，两人相距多少米？",
+   "payload": {
+    "options": [
+     "780 米",
+     "660 米",
+     "700 米",
+     "720 米"
+    ],
+    "answer": 3,
+    "explanation": "他们每分钟一共走远 55＋65＝120 米，6 分钟相距 120×6＝720 米。"
+   },
+   "tags": [
+    "行程初步"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:practice:xingcheng:02"
+  },
+  {
+   "uuid": "c26d391c-015a-5718-a63d-7b1580b37e71",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "一列长 120 米的火车每秒行 20 米，从车头驶上桥到车尾完全离开桥，共用了 18 秒。桥长多少米？",
+   "payload": {
+    "options": [
+     "300 米",
+     "360 米",
+     "120 米",
+     "240 米"
+    ],
+    "answer": 3,
+    "explanation": "车头一共走了 20×18＝360 米，这段路包括整座桥和一个车身长。桥长是 360－120＝240 米。"
+   },
+   "tags": [
+    "行程初步"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:practice:xingcheng:03"
+  },
+  {
+   "uuid": "fd124bbf-50af-5186-9c2e-716f54cb619a",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "一条环形跑道长 400 米。两人从同一点同时出发，沿相反方向跑，每秒分别跑 4 米和 6 米。几秒后第一次相遇？",
+   "payload": {
+    "options": [
+     "40 秒",
+     "50 秒",
+     "20 秒",
+     "80 秒"
+    ],
+    "answer": 0,
+    "explanation": "两人跑过的路程合起来正好满一圈时，第一次相遇。每秒合计跑 10 米，400÷10＝40 秒。"
+   },
+   "tags": [
+    "行程初步"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:practice:xingcheng:04"
+  },
+  {
+   "uuid": "7580c740-e80f-53bc-b206-dc1510bda78f",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "小芸骑车去图书馆，每分钟骑 200 米，用了 15 分钟。回家走原路，每分钟骑 150 米。来回骑车一共用了多少分钟？",
+   "payload": {
+    "options": [
+     "35 分钟",
+     "20 分钟",
+     "30 分钟",
+     "40 分钟"
+    ],
+    "answer": 0,
+    "explanation": "单程长 200×15＝3000 米。回来用了 3000÷150＝20 分钟，加上去时的 15 分钟，一共 35 分钟。"
+   },
+   "tags": [
+    "行程初步"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:practice:xingcheng:05"
+  },
+  {
+   "uuid": "1e48cbdd-70f9-586a-b64b-c4ea07de7246",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "一条直路长 1000 米。哥哥从一端每分钟走 80 米，先走 5 分钟；妹妹再从另一端每分钟走 70 米，两人相向而行。妹妹出发后几分钟相遇？",
+   "payload": {
+    "options": [
+     "5 分钟",
+     "4 分钟",
+     "3 分钟",
+     "6 分钟"
+    ],
+    "answer": 1,
+    "explanation": "妹妹出发时，哥哥已走 400 米，两人还差 600 米。每分钟一起走近 80＋70＝150 米，600÷150＝4 分钟。"
+   },
+   "tags": [
+    "行程初步"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:practice:xingcheng:06"
+  },
+  {
+   "uuid": "0e491f09-39f7-5b38-88b8-f04fbe041232",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "五个点从左到右排在一条直线上，依次是 A、B、C、D、E。从这五个点中任选两个当作端点画线段，有多少条线段包含 C？",
+   "payload": {
+    "options": [
+     "10 条",
+     "6 条",
+     "8 条",
+     "4 条"
+    ],
+    "answer": 2,
+    "explanation": "以 C 为端点时，另一端可以是其他 4 个点中的任意一个。C 在线段中间时，左端有 2 种选法，右端有 2 种选法，能画 4 条。两种情况合起来是 8 条。"
+   },
+   "tags": [
+    "图形计数"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:practice:tuxing:01"
+  },
+  {
+   "uuid": "c57555a3-8248-5585-8702-33c512669aa5",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "方格纸上画出了完整的 2 行 4 列方格。沿着已有的格线，一共能找出多少个正方形？",
+   "payload": {
+    "options": [
+     "10 个",
+     "11 个",
+     "12 个",
+     "8 个"
+    ],
+    "answer": 1,
+    "explanation": "边长 1 格的有 2×4＝8 个。边长 2 格的可以从左往右放 3 处，共 3 个。再大的放不下，所以共有 11 个。"
+   },
+   "tags": [
+    "图形计数"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:practice:tuxing:02"
+  },
+  {
+   "uuid": "565ec592-3260-52b0-8673-63f092bf2155",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "方格纸上画出了完整的 2 行 3 列方格。沿已有的格线，一共能找出多少个长方形？正方形也算。",
+   "payload": {
+    "options": [
+     "24 个",
+     "18 个",
+     "12 个",
+     "15 个"
+    ],
+    "answer": 1,
+    "explanation": "3 条横线里选 2 条作上下边，有 3 种选法。4 条竖线里选 2 条作左右边，有 6 种选法，所以有 3×6＝18 个。"
+   },
+   "tags": [
+    "图形计数"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:practice:tuxing:03"
+  },
+  {
+   "uuid": "a8f97631-56c3-5f80-90df-3250ac43e0de",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "从一个七边形的每个顶点出发，向所有不相邻的顶点连线。一共能画出多少条不同的对角线？",
+   "payload": {
+    "options": [
+     "21 条",
+     "28 条",
+     "7 条",
+     "14 条"
+    ],
+    "answer": 3,
+    "explanation": "每个顶点除去自己和相邻的两个顶点，可以连 4 条。7 个顶点合计数了 28 次，每条线两端各数了一次，所以共有 14 条。"
+   },
+   "tags": [
+    "图形计数"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:practice:tuxing:04"
+  },
+  {
+   "uuid": "f9d34022-b0dd-581f-bbd3-155655e2fc9d",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "三角形 ABC 的边 BC 上另有 3 个不同的点。从顶点 A 向这 3 个点各画一条线段。在图中一共能数出多少个三角形？",
+   "payload": {
+    "options": [
+     "4 个",
+     "6 个",
+     "15 个",
+     "10 个"
+    ],
+    "answer": 3,
+    "explanation": "每个三角形都以 A 为顶点，在 BC 上的 5 个点里任选两个作底边端点。从左到右数，有 4＋3＋2＋1＝10 种选法。"
+   },
+   "tags": [
+    "图形计数"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:practice:tuxing:05"
+  },
+  {
+   "uuid": "db67a8bd-d63e-5fa3-9f05-fdbf177e6470",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "一个正方形画上两条对角线。沿着已有的线段，一共能数出多少个三角形？",
+   "payload": {
+    "options": [
+     "12 个",
+     "6 个",
+     "4 个",
+     "8 个"
+    ],
+    "answer": 3,
+    "explanation": "用中心点当顶点，可以和四条边各组成一个小三角形。每条对角线又把正方形分成两个大三角形，大三角形共 4 个。两类加起来是 8 个。"
+   },
+   "tags": [
+    "图形计数"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:practice:tuxing:06"
+  },
+  {
+   "uuid": "6157e049-627e-52af-83f8-64612f9c3ef6",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "安安、贝贝、可可各选了一种不同的水果，恰好是苹果、梨和橘子。贝贝选了梨，可可没有选橘子。谁选了橘子？",
+   "payload": {
+    "options": [
+     "安安",
+     "贝贝",
+     "无法确定",
+     "可可"
+    ],
+    "answer": 0,
+    "explanation": "贝贝选的是梨。可可既不能选梨，也没有选橘子，只能选苹果，所以橘子是安安选的。"
+   },
+   "tags": [
+    "逻辑推理"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:practice:luoji:01"
+  },
+  {
+   "uuid": "d64ff031-b059-50c4-9b0f-f808644b9980",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "甲、乙、丙、丁四人排成一队。丁站第一个，乙紧挨在甲后面，丙不站最后。谁站第二个？",
+   "payload": {
+    "options": [
+     "甲",
+     "乙",
+     "无法确定",
+     "丙"
+    ],
+    "answer": 3,
+    "explanation": "丁在第一个。甲和乙只能连在第二、三位或第三、四位。若他们站第二、三位，丙就成了最后一个，因此只能让丙站第二位。"
+   },
+   "tags": [
+    "逻辑推理"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:practice:luoji:02"
+  },
+  {
+   "uuid": "ced06ada-598e-5b24-8ba2-bafb03ee937e",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "四张不同的数字卡上分别写着 1、2、3、4。从中取两张组成一个两位数，十位上的数比个位上的数大 2，且这个两位数是偶数。这个数是多少？",
+   "payload": {
+    "options": [
+     "43",
+     "24",
+     "42",
+     "31"
+    ],
+    "answer": 2,
+    "explanation": "个位可以是 2 或 4。个位若是 4，十位得是 6，但没有这张卡。个位是 2 时，十位是 4，所以这个数是 42。"
+   },
+   "tags": [
+    "逻辑推理"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:practice:luoji:03"
+  },
+  {
+   "uuid": "bfe34a18-6987-5609-9960-a846b09d55ef",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "一把钥匙藏在 1、2、3 号柜中的一个。小青说「在 1 号柜」，小禾说「不在 2 号柜」，小川说「在 3 号柜」。三个人里恰好两个人说对了。一定说对的是谁？",
+   "payload": {
+    "options": [
+     "小青",
+     "小禾",
+     "无法确定",
+     "小川"
+    ],
+    "answer": 1,
+    "explanation": "钥匙在 1 号时，小青和小禾说对；在 2 号时，三人都说错；在 3 号时，小禾和小川说对。符合条件的两种情形里，小禾都说对了。"
+   },
+   "tags": [
+    "逻辑推理"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:practice:luoji:04"
+  },
+  {
+   "uuid": "8e2839a7-f54a-5156-84b1-69718a03086c",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "四名同学投篮，每个人投进的个数都不同。小乐比小齐投进得多，比小林投进得少；小林又比小可投进得少。谁排第二？",
+   "payload": {
+    "options": [
+     "小林",
+     "小可",
+     "小乐",
+     "小齐"
+    ],
+    "answer": 0,
+    "explanation": "小可比小林多，小林比小乐多，小乐比小齐多。从多到少排下来，第二名是小林。"
+   },
+   "tags": [
+    "逻辑推理"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:practice:luoji:05"
+  },
+  {
+   "uuid": "daeda1ca-ada7-5838-9c3e-5ebdee37247f",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "抽屉里有红、蓝、黄三种袜子，每种都有 4 只。闭着眼睛最少要拿出几只，才能保证有两只同色？",
+   "payload": {
+    "options": [
+     "5 只",
+     "3 只",
+     "4 只",
+     "2 只"
+    ],
+    "answer": 2,
+    "explanation": "拿出 3 只时，可能正好每种颜色一只。再拿 1 只，不论是什么颜色，总能和前面一只配成同色。"
+   },
+   "tags": [
+    "逻辑推理"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:practice:luoji:06"
+  },
+  {
+   "uuid": "a15b2ed6-e0cc-5e1b-946b-49ef040a2793",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "一条直路长 48 米，只在一侧每隔 6 米栽一棵树，两端都栽。一共栽几棵？",
+   "payload": {
+    "options": [
+     "9 棵",
+     "10 棵",
+     "8 棵",
+     "7 棵"
+    ],
+    "answer": 0,
+    "explanation": "48 米里有 48÷6＝8 段间隔。两端都栽时，8 段间隔需要 9 棵树。"
+   },
+   "tags": [
+    "植树问题"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:practice:zhishu:01"
+  },
+  {
+   "uuid": "04e5102f-d9b4-5c43-a9b9-c7b345a60c26",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "一条直路长 42 米，只在一侧栽树。两端都不栽，最靠近两端的树各离路端 7 米，相邻两棵树也隔 7 米。要栽几棵？",
+   "payload": {
+    "options": [
+     "6 棵",
+     "5 棵",
+     "7 棵",
+     "4 棵"
+    ],
+    "answer": 1,
+    "explanation": "把两端也当作标记，42÷7＝6 段，共有 7 个标记位置。去掉两端，留下 5 棵树。"
+   },
+   "tags": [
+    "植树问题"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:practice:zhishu:02"
+  },
+  {
+   "uuid": "e35e075b-90c4-5d55-9db4-a6497f3e6b93",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "一面墙长 36 米。从左端开始每隔 4 米贴一个标志，左端贴，右端不贴。一共贴几个？",
+   "payload": {
+    "options": [
+     "9 个",
+     "12 个",
+     "8 个",
+     "10 个"
+    ],
+    "answer": 0,
+    "explanation": "36 米分成 9 段，每段左端贴一个标志，最右边刚好不贴，所以有 9 个。"
+   },
+   "tags": [
+    "植树问题"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:practice:zhishu:03"
+  },
+  {
+   "uuid": "413cada3-25df-5f16-b99a-5df21b537273",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "在一圈长 72 米的圆形花坛边上，每隔 8 米插一面小旗。一共要插几面？",
+   "payload": {
+    "options": [
+     "9 面",
+     "8 面",
+     "10 面",
+     "12 面"
+    ],
+    "answer": 0,
+    "explanation": "一圈分成 72÷8＝9 段。绕完一圈回到起点，起点只插一次，所以是 9 面。"
+   },
+   "tags": [
+    "植树问题"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:practice:zhishu:04"
+  },
+  {
+   "uuid": "52072e9a-67cd-500b-985e-c9807fbe1d15",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "一条直路的一侧从头到尾排了 13 盏路灯，两端各有一盏。相邻两盏路灯相隔 5 米。这条路长多少米？",
+   "payload": {
+    "options": [
+     "60 米",
+     "55 米",
+     "70 米",
+     "65 米"
+    ],
+    "answer": 0,
+    "explanation": "13 盏路灯中间有 12 段间隔，每段 5 米，所以路长 12×5＝60 米。"
+   },
+   "tags": [
+    "植树问题"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:practice:zhishu:05"
+  },
+  {
+   "uuid": "1e0636ae-a5d6-57f6-ae61-7f25a0599d38",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "一根木条长 54 厘米，要锯成每段 6 厘米的小木条。每次只锯一根，忽略锯缝宽度。一共要锯几次？",
+   "payload": {
+    "options": [
+     "9 次",
+     "8 次",
+     "10 次",
+     "7 次"
+    ],
+    "answer": 1,
+    "explanation": "可以得到 54÷6＝9 段。每锯一次，就多出一段。从原来的 1 段变成 9 段，需要锯 8 次。"
+   },
+   "tags": [
+    "植树问题"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:practice:zhishu:06"
+  },
+  {
+   "uuid": "e382db78-88a6-58d4-a68a-e8c25690c846",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "在一条长 40 米的直路两侧摆花盆。每一侧的两端各摆一盆，相邻两盆之间都隔 5 米。两侧一共摆几盆？",
+   "payload": {
+    "options": [
+     "16 盆",
+     "18 盆",
+     "20 盆",
+     "17 盆"
+    ],
+    "answer": 1,
+    "explanation": "每一侧有 40÷5＝8 段间隔，两端都摆就是 9 盆。两侧一共摆 9×2＝18 盆。"
+   },
+   "tags": [
+    "植树问题"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:practice:zhishu:07"
+  },
+  {
+   "uuid": "4c28e7e7-3743-52e1-98b2-268d12856573",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "四个角都要插旗。一个正方形花圃的边长是 18 米，每条边每隔 3 米插一面旗，共需要几面旗？",
+   "payload": {
+    "options": [
+     "28 面",
+     "20 面",
+     "24 面",
+     "26 面"
+    ],
+    "answer": 2,
+    "explanation": "绕花圃一圈有 18×4＝72 米，每 3 米一段，共有 24 段。围成一圈时，每个角上的旗只数一次，旗数和段数相等。"
+   },
+   "tags": [
+    "植树问题"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:practice:zhishu:08"
+  },
+  {
+   "uuid": "5292e9e3-3e83-55da-8714-4f6b1cc454b8",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "小钟下午 3 点整敲 3 下。从第一下敲响到第三下敲响过了 4 秒，每两下的间隔一样长。按这个间隔敲 7 下，从第一下到最后一下要几秒？",
+   "payload": {
+    "options": [
+     "8 秒",
+     "14 秒",
+     "12 秒",
+     "10 秒"
+    ],
+    "answer": 2,
+    "explanation": "敲 3 下有 2 段间隔，每段 4÷2＝2 秒。敲 7 下有 6 段间隔，共 6×2＝12 秒。"
+   },
+   "tags": [
+    "植树问题"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:practice:zhishu:09"
+  },
+  {
+   "uuid": "a9021d50-7b3b-59b8-9eaa-8761fdc0fc86",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "一条直路一侧从起点到终点共栽了 11 棵树，两端都栽，相邻两棵树间距是 6 米。现在改为每隔 5 米栽一棵，两端仍栽。棵数增加了多少？",
+   "payload": {
+    "options": [
+     "2 棵",
+     "1 棵",
+     "3 棵",
+     "4 棵"
+    ],
+    "answer": 0,
+    "explanation": "原来有 10 段，路长 60 米。改栽后有 60÷5＝12 段，两端都栽就是 13 棵，比原来多 2 棵。"
+   },
+   "tags": [
+    "植树问题"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:practice:zhishu:10"
+  },
+  {
+   "uuid": "2521689d-4ead-5053-b663-a918d5ce1708",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "彩旗按红、蓝、黄的顺序反复排列。第 26 面彩旗是什么颜色？",
+   "payload": {
+    "options": [
+     "黄色",
+     "红色",
+     "无法确定",
+     "蓝色"
+    ],
+    "answer": 3,
+    "explanation": "每 3 面一组，26÷3＝8 余 2，所以第 26 面是下一组第 2 面，也就是蓝色。"
+   },
+   "tags": [
+    "周期规律"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:practice:zhouqi:01"
+  },
+  {
+   "uuid": "d8985f0e-87f1-5e8e-84f0-dc441fb0262c",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "小熊按「跳、拍手、拍手、转圈」的顺序重复表演。第 28 个动作是什么？",
+   "payload": {
+    "options": [
+     "拍手",
+     "无法确定",
+     "转圈",
+     "跳"
+    ],
+    "answer": 2,
+    "explanation": "每 4 个动作一组。28 正好是 4 的 7 倍，第 28 个动作就是第 7 组的最后一个：转圈。"
+   },
+   "tags": [
+    "周期规律"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:practice:zhouqi:02"
+  },
+  {
+   "uuid": "c1d9ceea-6489-55cf-9e28-f99467fa05b8",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "今天是星期二。过 45 天是星期几？",
+   "payload": {
+    "options": [
+     "星期四",
+     "星期五",
+     "星期日",
+     "星期六"
+    ],
+    "answer": 1,
+    "explanation": "过 42 天正好过了 6 个星期，还是星期二。再过 3 天，就是星期五。"
+   },
+   "tags": [
+    "周期规律"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:practice:zhouqi:03"
+  },
+  {
+   "uuid": "c15ae3bc-16e4-5eca-a778-c819d42c4341",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "灯泡按「亮、亮、灭、灭、灭」的顺序排成一行。前 42 个灯泡中，有几个亮着？",
+   "payload": {
+    "options": [
+     "20 个",
+     "18 个",
+     "17 个",
+     "16 个"
+    ],
+    "answer": 1,
+    "explanation": "每组 5 个灯泡，有 2 个亮着。42 个里有 8 整组，亮 16 个；最后 2 个正好都亮，一共 18 个。"
+   },
+   "tags": [
+    "周期规律"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:practice:zhouqi:04"
+  },
+  {
+   "uuid": "f56ca1b9-d302-59d2-9471-949a72396cb6",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "一串珠子按「绿、白、红、白」的顺序重复排列。从第 9 颗到第 20 颗，包含两端，共有几颗白珠？",
+   "payload": {
+    "options": [
+     "5 颗",
+     "4 颗",
+     "7 颗",
+     "6 颗"
+    ],
+    "answer": 3,
+    "explanation": "第 9 颗恰好是一组的开始，到第 20 颗一共 12 颗，正好 3 组。每组 2 颗白珠，一共 6 颗。"
+   },
+   "tags": [
+    "周期规律"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:practice:zhouqi:05"
+  },
+  {
+   "uuid": "66085378-31fb-56f2-92c8-0e8480f54934",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "图案按「圆、圆、三角、方」的顺序重复排。第 19 个图案和第 34 个图案分别是什么？",
+   "payload": {
+    "options": [
+     "三角、圆",
+     "三角、方",
+     "方、圆",
+     "圆、三角"
+    ],
+    "answer": 0,
+    "explanation": "一组 4 个。19÷4 余 3，所以第 19 个是三角；34÷4 余 2，所以第 34 个是圆。"
+   },
+   "tags": [
+    "周期规律"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:practice:zhouqi:06"
+  },
+  {
+   "uuid": "4ba37e40-2b69-5064-8295-372065662194",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "一排数字按 2、4、6、8 的顺序重复写。前 23 个数字相加，和是多少？",
+   "payload": {
+    "options": [
+     "120",
+     "100",
+     "108",
+     "112"
+    ],
+    "answer": 3,
+    "explanation": "每 4 个数字的和是 20。前 20 个有 5 组，和是 100。剩下 3 个是 2、4、6，再加 12，共 112。"
+   },
+   "tags": [
+    "周期规律"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:practice:zhouqi:07"
+  },
+  {
+   "uuid": "9d227087-ca93-530f-b2be-1be589c9375f",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "一排珠子按「红、蓝、蓝、黄、黄」重复排列。第 17 颗蓝珠是整排的第几颗？",
+   "payload": {
+    "options": [
+     "第 42 颗",
+     "第 43 颗",
+     "第 41 颗",
+     "第 40 颗"
+    ],
+    "answer": 0,
+    "explanation": "每 5 颗里有 2 颗蓝珠，8 整组数到第 16 颗蓝珠，已经排了 40 颗。第 17 颗蓝珠在下一组的第 2 个位置，所以是第 42 颗。"
+   },
+   "tags": [
+    "周期规律"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:practice:zhouqi:08"
+  },
+  {
+   "uuid": "946ed96f-40af-576c-95db-375f4194e957",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "机器人每次沿直线向前走 3 步，再沿原路后退 1 步，如此重复。它走了 18 步时，停在起点前方几步处？",
+   "payload": {
+    "options": [
+     "9 步",
+     "11 步",
+     "10 步",
+     "8 步"
+    ],
+    "answer": 2,
+    "explanation": "每走完 4 步，实际前进 3－1＝2 步。前 16 步有 4 组，前进 8 步；接着的 2 步都向前，所以停在起点前方 10 步。"
+   },
+   "tags": [
+    "周期规律"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:practice:zhouqi:09"
+  },
+  {
+   "uuid": "4f8a717f-6b17-5e06-88da-e3dac9058b5d",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "有一列数按 1、2、3、2 的顺序反复写。第 38 个数后面，最先出现的 1 是第几个数？",
+   "payload": {
+    "options": [
+     "第 42 个",
+     "第 40 个",
+     "第 41 个",
+     "第 39 个"
+    ],
+    "answer": 2,
+    "explanation": "每组的开头是 1。第 38 个数在第 10 组的第 2 位，这一组到第 40 个数结束，所以紧接的第 41 个数就是 1。"
+   },
+   "tags": [
+    "周期规律"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:practice:zhouqi:10"
+  },
+  {
+   "uuid": "98239d87-15cf-5ede-9a7d-e1a8a2b775e2",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "巧算 125×16：先把 16 拆成 8×2，凑出 1000 再乘，结果是多少？",
+   "payload": {
+    "options": [
+     "2250",
+     "2000",
+     "1250",
+     "1875"
+    ],
+    "answer": 1,
+    "explanation": "125×16=125×8×2=1000×2=2000。记住 125×8=1000 这一对好朋友。"
+   },
+   "tags": [
+    "速算巧算"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:susuan:03:rev2"
+  },
+  {
+   "uuid": "3142629e-b5f0-53ad-bee2-7731431aac62",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "巧算 456-99：先减 100 再补回 1，结果是多少？",
+   "payload": {
+    "options": [
+     "356",
+     "347",
+     "367",
+     "357"
+    ],
+    "answer": 3,
+    "explanation": "456-99=456-100+1=357。99 比 100 小 1，多减的要加回来。"
+   },
+   "tags": [
+    "速算巧算"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:susuan:04:rev2"
+  },
+  {
+   "uuid": "de85159b-8aba-52df-8080-7a5e223c75e4",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "数列 3、7、11、15……每个数都比前一个多 4，第 10 个数是多少？",
+   "payload": {
+    "options": [
+     "43",
+     "40",
+     "36",
+     "39"
+    ],
+    "answer": 3,
+    "explanation": "第 1 个是 3，到第 10 个一共跳了 9 步，每步加 4：3+4×9=39。"
+   },
+   "tags": [
+    "等差数列"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:dengcha:05:rev2"
+  },
+  {
+   "uuid": "55ca7164-5dda-557b-bfd1-fb8632e99b22",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "用等差数列求和的方法算 1+2+3+……+20，结果是多少？",
+   "payload": {
+    "options": [
+     "205",
+     "210",
+     "200",
+     "220"
+    ],
+    "answer": 1,
+    "explanation": "首项加末项：1+20=21；一共 20 项，21×20÷2=210。配成 10 对，每对都是 21。"
+   },
+   "tags": [
+    "等差数列"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:dengcha:06:rev2"
+  },
+  {
+   "uuid": "7860ea1f-088b-5769-a5a2-db4107ec39e9",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "停车场里有四轮汽车和三轮摩托车，共 9 辆，一共有 30 个轮子。三轮摩托车有几辆？",
+   "payload": {
+    "options": [
+     "4",
+     "6",
+     "3",
+     "5"
+    ],
+    "answer": 1,
+    "explanation": "假设全是四轮汽车，一共有 9×4＝36 个轮子。每换一辆三轮摩托车就少 1 个轮子，实际少了 36－30＝6 个，所以有 6 辆三轮摩托车。"
+   },
+   "tags": [
+    "鸡兔同笼"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:jitu:11:rev2"
+  },
+  {
+   "uuid": "dd6a04bf-9a52-502e-92c0-a9003424df05",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "全班 32 人去划船，大船每条坐 6 人，小船每条坐 4 人，共租 6 条船刚好坐满，大船租了几条？",
+   "payload": {
+    "options": [
+     "2",
+     "3",
+     "5",
+     "4"
+    ],
+    "answer": 3,
+    "explanation": "假设全是小船：6×4=24 人，还差 32-24=8 人；大船每条多坐 2 人，8÷2=4 条大船。验算：4×6+2×4=32。"
+   },
+   "tags": [
+    "鸡兔同笼"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:jitu:12:rev2"
+  },
+  {
+   "uuid": "7aae7d95-8cb2-52d6-91c4-bafec97acdd6",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "老师给小朋友分铅笔，每人分 3 支多出 12 支，每人分 5 支就少 4 支，共有几个小朋友？",
+   "payload": {
+    "options": [
+     "9",
+     "7",
+     "10",
+     "8"
+    ],
+    "answer": 3,
+    "explanation": "两种分法一共相差 12+4=16 支，每人相差 5-3=2 支，16÷2=8 个小朋友。"
+   },
+   "tags": [
+    "盈亏问题"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:yingkui:13:rev2"
+  },
+  {
+   "uuid": "f25563be-9d6e-5775-b50e-983c4bf96d4c",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "分苹果：每人分 4 个多 9 个，每人分 6 个少 7 个，共有几个小朋友？",
+   "payload": {
+    "options": [
+     "6",
+     "8",
+     "7",
+     "9"
+    ],
+    "answer": 1,
+    "explanation": "苹果总数不变，两种分法相差 9+7=16 个，每人相差 6-4=2 个，16÷2=8 人。"
+   },
+   "tags": [
+    "盈亏问题"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:yingkui:14:rev2"
+  },
+  {
+   "uuid": "2f31e471-460f-5f40-ab1d-682d03e8bd81",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "小华每分钟走 60 米，从家到学校走了 8 分钟，家到学校有多少米？",
+   "payload": {
+    "options": [
+     "420",
+     "480",
+     "460",
+     "500"
+    ],
+    "answer": 1,
+    "explanation": "路程=速度×时间：60×8=480 米。"
+   },
+   "tags": [
+    "行程初步"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:xingcheng:19:rev2"
+  },
+  {
+   "uuid": "e429c1c3-d496-528f-a0e6-f050b44702bd",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "两车同时从相距 360 千米的两地相向开出，甲车每小时行 50 千米，乙车每小时行 40 千米，几小时后相遇？",
+   "payload": {
+    "options": [
+     "5",
+     "3",
+     "6",
+     "4"
+    ],
+    "answer": 3,
+    "explanation": "每小时两车一共走近 50+40=90 千米，360÷90=4 小时相遇。"
+   },
+   "tags": [
+    "行程初步"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:xingcheng:20:rev2"
+  },
+  {
+   "uuid": "51966967-2ee8-5559-a69f-a12707283be1",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "一列火车每秒行 30 米，完全通过一条 480 米长的隧道用了 20 秒，火车本身长多少米？",
+   "payload": {
+    "options": [
+     "140",
+     "100",
+     "600",
+     "120"
+    ],
+    "answer": 3,
+    "explanation": "20 秒跑了 30×20=600 米；完全通过隧道要多跑一个车身长，车长 600-480=120 米。"
+   },
+   "tags": [
+    "行程初步"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:xingcheng:21:rev2"
+  },
+  {
+   "uuid": "cac9edc5-ea6a-5dbf-b653-fe6740a9c70f",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "哥哥和弟弟同时从家去学校，哥哥每分钟走 70 米，弟弟每分钟走 50 米，哥哥比弟弟早到 4 分钟。家到学校有多少米？",
+   "payload": {
+    "options": [
+     "720",
+     "700",
+     "640",
+     "560"
+    ],
+    "answer": 1,
+    "explanation": "哥哥到学校时，弟弟还要走 4 分钟，也就是还差 50×4＝200 米。两人同时走的那段时间，哥哥每分钟比弟弟多走 20 米，所以哥哥走了 200÷20＝10 分钟，路程是 70×10＝700 米。"
+   },
+   "tags": [
+    "行程初步"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:xingcheng:22:rev2"
+  },
+  {
+   "uuid": "677cc62a-3303-5ac3-a965-b6203e8b5329",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "甲、乙、丙分别从事医生、教师和警察三种职业，每种职业恰好一人。甲比教师年龄大，丙和警察不同岁，警察比乙年龄小。谁是警察？",
+   "payload": {
+    "options": [
+     "无法确定",
+     "甲",
+     "乙",
+     "丙"
+    ],
+    "answer": 1,
+    "explanation": "甲比教师年龄大，甲不是教师；丙和警察不同岁，丙不是警察；警察比乙年龄小，乙不是警察；所以警察只能是甲。"
+   },
+   "tags": [
+    "逻辑推理"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:luoji:27:rev2"
+  },
+  {
+   "uuid": "9e471a78-c45b-5e2a-8d39-4b91182a51d3",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "红、黄、蓝三个盒子只有一个装着球。红盒说：球在我这里。黄盒说：球不在我这里。蓝盒说：球不在红盒里。三句话只有一句是真的，球在哪个盒子里？",
+   "payload": {
+    "options": [
+     "红盒",
+     "蓝盒",
+     "无法确定",
+     "黄盒"
+    ],
+    "answer": 3,
+    "explanation": "球在红盒时，红盒和黄盒说得对。球在蓝盒时，黄盒和蓝盒说得对。球在黄盒时，只有蓝盒说得对，正好符合条件。"
+   },
+   "tags": [
+    "逻辑推理"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:luoji:28:rev2"
+  },
+  {
+   "uuid": "7d40e858-1960-5f4d-ac3e-c6928b3eabfb",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "小力、小明、小红三人比跳绳：小红不是跳得最多的，小明比小红跳得少。谁跳得最多？",
+   "payload": {
+    "options": [
+     "小明",
+     "小红",
+     "无法确定",
+     "小力"
+    ],
+    "answer": 3,
+    "explanation": "小明比小红少，小明不是最多；小红也不是最多；最多的是小力。"
+   },
+   "tags": [
+    "逻辑推理"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:luoji:29:rev2"
+  },
+  {
+   "uuid": "5eeb2603-2782-55b9-b669-02deb4ec4ecf",
+   "type": "choice",
+   "area": "math",
+   "grade": 4,
+   "track": "olympiad",
+   "stem": "甲、乙、丙、丁四人赛跑，名次各不相同。甲和丁都不是第一，也不是最后。乙比丙跑得快。谁是第一？",
+   "payload": {
+    "options": [
+     "丁",
+     "乙",
+     "甲",
+     "丙"
+    ],
+    "answer": 1,
+    "explanation": "甲和丁占了第二、第三名。第一和最后只能由乙、丙来占。乙比丙跑得快，所以第一是乙。"
+   },
+   "tags": [
+    "逻辑推理"
+   ],
+   "source_key": "primary-olympiad",
+   "source_ref": "olympiad:luoji:30:rev2"
+  }
+ ]
+}

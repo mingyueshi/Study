@@ -1,13 +1,14 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<script src="{% static 'study_topics/connections-data.js' %}" defer></script>
+<script src="{% static 'study_topics/connections-data.js' %}?v=3" defer></script>
 <script src="{% static 'study_topics/connections.js' %}" defer></script>
 {% block study_assets %}{% endblock %}
 <link rel="stylesheet" href="{% static 'study_topics/platform-bridge.css' %}">
 <div class="study-topic-frame color-{{ study_area }}"
      data-history-lesson="{% url 'history-study' %}" data-geography-lesson="{% url 'geography-study' %}"
      data-calendar="{% url 'history-timeline-dynasties' %}" data-china-map="{% url 'geography-atlas-china' %}"
+     data-solar-terms="{% url 'solar-terms' %}"
      {% if course_slug %}
      data-history-event="{% url 'history-timeline-event' %}"
      data-mars-life="{% url 'mystery-case' 'mars-life' %}" data-dark-matter="{% url 'mystery-case' 'dark-matter' %}"
@@ -15,6 +16,7 @@
      data-idiom-stories="{% url 'idiom-stories' %}" data-elements="{% url 'science-elements' %}"
      data-dictionary="{% url 'dictionary' %}" data-stroke="{% url 'hanzi-detail' '日' %}"
      data-polyphones="{% url 'hanzi-polyphones' %}"
+     {% if course_slug == 'sci' %}data-body-station="{% url 'science-body' %}"{% endif %}
      {% endif %}>
   <nav class="study-topic-nav" aria-label="{{ study_label }}专题导航">
     <a href="{% url 'home' %}?area={{ study_area }}#modules-title">← 学习广场 · {{ study_label }}</a>

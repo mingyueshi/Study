@@ -1,0 +1,71 @@
+{% extends 'science/rumors/base.html' %}
+{% load static %}
+{% block title %}{{ case.claim }} · 科学流言粉碎机{% endblock %}
+{% block station %}
+<a class="rumor-back" href="{% url 'science-rumors' %}#rumor-cases">← 科学流言粉碎机 · 任务目录</a>
+<header class="rumor-case-header">
+  <div>
+    <p class="rumor-kicker">任务 {{ number|stringformat:'02d' }} <span aria-hidden="true">/</span> {{ case.category }}</p>
+    <h1>「{{ case.claim }}」</h1>
+    <p>{{ case.scenario }}</p>
+  </div>
+  <svg aria-hidden="true" viewBox="0 0 96 96" width="140" height="140"><use href="{% static 'science/rumors.svg' %}#{{ case.slug }}"></use></svg>
+</header>
+
+<div class="rumor-workspace">
+  <section class="rumor-panel" aria-labelledby="rumor-evidence-heading">
+    <h2 id="rumor-evidence-heading"><span aria-hidden="true">01</span> 翻开证据卡</h2>
+    <p>看完两张卡，找找哪条线索最能帮你判断。</p>
+    {% for clue in case.evidence %}
+    <details class="rumor-clue">
+      <summary><span aria-hidden="true">{{ forloop.counter|stringformat:'02d' }}</span>{{ clue.title }}</summary>
+      <p>{{ clue.body }}</p>
+    </details>
+    {% endfor %}
+  </section>
+
+  <section class="rumor-panel rumor-judge" aria-labelledby="rumor-judge-heading">
+    <h2 id="rumor-judge-heading"><span aria-hidden="true">02</span> 盖一个判断章</h2>
+    <form data-rumor="{{ case.slug }}" data-verdict="{{ case.verdict }}" hidden>
+      <fieldset>
+        <legend>根据手里的证据，你会怎么判断这句话？</legend>
+        <div class="rumor-options">
+          {% for value, label in verdicts.items %}
+          <label class="rumor-option"><input type="radio" name="verdict" value="{{ value }}" required> {{ label }}</label>
+          {% endfor %}
+        </div>
+      </fieldset>
+      <button class="rumor-button" type="submit">提交判断 <span aria-hidden="true">→</span></button>
+      <p class="rumor-feedback" role="status"></p>
+      <template id="rumor-hint">{{ case.hint }}</template>
+    </form>
+    <details class="rumor-answer" id="rumor-answer">
+      <summary>查看查证结论</summary>
+      <div class="rumor-answer-copy">
+        <strong class="rumor-stamp">{{ verdict_label }}</strong>
+        <p>{{ case.explanation }}</p>
+      </div>
+    </details>
+  </section>
+
+  <section class="rumor-panel rumor-transfer" aria-labelledby="rumor-transfer-heading">
+    <h2 id="rumor-transfer-heading"><span aria-hidden="true">03</span> 下次怎么查</h2>
+    <details class="rumor-method">
+      <summary>展开查证方法和小问题</summary>
+      <strong>{{ case.method }}</strong>
+      <p>{{ case.transfer }}</p>
+    </details>
+    <details class="rumor-sources">
+      <summary>查看资料出处 · 需联网</summary>
+      <ul>
+        {% for source in case.sources %}<li><a href="{{ source.url }}" target="_blank" rel="noopener noreferrer">{{ source.label }} ↗</a></li>{% endfor %}
+      </ul>
+    </details>
+  </section>
+</div>
+
+<nav class="rumor-case-nav" aria-label="查证任务导航">
+  <a class="rumor-back" href="{% url 'science-rumors' %}#rumor-cases">← 返回任务目录</a>
+  {% if next_case %}<a class="rumor-button" href="{% url 'science-rumor-case' next_case.slug %}">查下一条 <span aria-hidden="true">→</span></a>{% endif %}
+</nav>
+{% endblock %}

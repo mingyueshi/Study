@@ -59,11 +59,13 @@ class SeasonPageTests(TestCase):
             self.assertContains(response, f">{label}</b>")
         self.assertContains(response, "seasons-nav-link")  # 侧栏全量导航：四季与情感题材主题链接
         self.assertContains(response, "情感与题材")
+        self.assertContains(response, 'href="/geography/solar-terms/"')
 
     def test_theme_detail_works_for_season_codes(self):
         response = self.client.get("/poetry/themes/chun/")
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "春")
+        self.assertContains(response, 'href="/geography/solar-terms/#chun"')
 
     def test_dataset_gate(self):
         self.dataset.state = "importing"

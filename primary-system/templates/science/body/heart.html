@@ -1,0 +1,58 @@
+<section class="body-panel body-heart" id="heart" data-heart aria-labelledby="heart-title">
+  <p class="body-kicker">互动图示</p>
+  <h2 id="heart-title">{{ heart.title }}</h2>
+  <p>{{ heart.intro }}</p>
+  <figure class="body-flow" data-phase="all">
+    <svg viewBox="0 0 640 314" role="img" aria-labelledby="flow-title flow-desc">
+      <title id="flow-title">心脏泵血路线图</title>
+      <desc id="flow-desc">{{ heart.route }}。{{ heart.legend }}</desc>
+      <defs>
+        <marker id="body-arrow-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="2.5" markerHeight="2.5" orient="auto-start-reverse">
+          <path d="M0 0 10 5 0 10Z" fill="#24688a"/>
+        </marker>
+        <marker id="body-arrow-red" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="2.5" markerHeight="2.5" orient="auto-start-reverse">
+          <path d="M0 0 10 5 0 10Z" fill="#ae403e"/>
+        </marker>
+      </defs>
+      <g fill="none" stroke-width="5.5" stroke-linecap="round">
+        <path class="flow-route" data-route="return" d="M106 218 V99" stroke="#24688a" marker-end="url(#body-arrow-blue)"/>
+        <path class="flow-route" data-route="fill" d="M186 60 H235" stroke="#24688a" marker-end="url(#body-arrow-blue)"/>
+        <path class="flow-route" data-route="pump" d="M400 60 H449" stroke="#24688a" marker-end="url(#body-arrow-blue)"/>
+        <path class="flow-route" data-route="return" d="M534 96 V215" stroke="#ae403e" marker-end="url(#body-arrow-red)"/>
+        <path class="flow-route" data-route="fill" d="M454 254 H405" stroke="#ae403e" marker-end="url(#body-arrow-red)"/>
+        <path class="flow-route" data-route="pump" d="M240 254 H191" stroke="#ae403e" marker-end="url(#body-arrow-red)"/>
+      </g>
+      <g stroke-width="2">
+        <rect x="26" y="24" width="160" height="72" rx="18" fill="#d9ecf5" stroke="#91b5c8"/>
+        <rect x="240" y="24" width="160" height="72" rx="18" fill="#d9ecf5" stroke="#91b5c8"/>
+        <rect x="454" y="24" width="160" height="72" rx="18" fill="#dcf1e6" stroke="#9fbfa9"/>
+        <rect x="26" y="218" width="160" height="72" rx="18" fill="#fff2ce" stroke="#d5bb74"/>
+        <rect x="240" y="218" width="160" height="72" rx="18" fill="#fae3df" stroke="#d3a09b"/>
+        <rect x="454" y="218" width="160" height="72" rx="18" fill="#fae3df" stroke="#d3a09b"/>
+      </g>
+      <path d="M266 158h31l12-24 16 46 14-22h34" fill="none" stroke="#b38379" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      <g text-anchor="middle" dominant-baseline="central" font-size="28" font-weight="750" fill="#173c38">
+        <text x="106" y="60">右心房</text><text x="320" y="60">右心室</text><text x="534" y="60">肺</text>
+        <text x="106" y="254">全身</text><text x="320" y="254">左心室</text><text x="534" y="254">左心房</text>
+      </g>
+    </svg>
+    <figcaption>
+      <strong>{{ heart.route }}</strong>
+      <span>{{ heart.legend }}</span>
+    </figcaption>
+  </figure>
+  <div class="body-controls" data-heart-controls hidden>
+    <div class="body-phase-group" role="group" aria-label="选择泵血步骤">
+      <button type="button" data-heart-all aria-pressed="true">全部路线</button>
+      {% for phase in heart.phases %}
+      <button type="button" data-phase-choice="{{ phase.id }}" aria-pressed="false">{{ forloop.counter }} · {{ phase.label }}</button>
+      {% endfor %}
+    </div>
+    <button type="button" data-heart-play>连续播放</button>
+  </div>
+  <div class="body-phase-notes" aria-live="polite">
+    {% for phase in heart.phases %}
+    <p data-phase-note="{{ phase.id }}"><strong>{{ phase.label }}：</strong>{{ phase.description }}</p>
+    {% endfor %}
+  </div>
+</section>

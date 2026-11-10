@@ -24,7 +24,7 @@
       <img src="{% static 'icons/quiz.svg' %}" alt="" width="52" height="52">
       <div><h2>开始挑战</h2><p class="qb-area-count">{{ total }} 道题</p></div>
     </header>
-    <p class="qb-area-intro">从八个主题里随机抽一组：每题四个选项，选完马上知道对错，还能看思路解析。</p>
+    <p class="qb-area-intro">从各个主题里随机抽一组。每题四个选项，选完马上知道对错，还能看思路解析。</p>
     <div class="qb-area-actions">
       <a class="button small" href="{{ practice_url }}?count=10">开始挑战 →</a>
       <a class="button small ghost" href="{{ wrong_url }}">奥数错题本</a>
@@ -41,5 +41,5 @@
 </section>
 {% endif %}
 
-<p class="qb-note">奥数入门题按主题人工撰写并逐题核对解答，判分在服务端完成；答错的题收进错题本，重练答对后自动退出。</p>
+<p class="qb-note">可以从一个主题开始练，也可以来一组混合挑战。答错的题会进错题本，重练答对后自动移出。</p>
 {% endblock %}

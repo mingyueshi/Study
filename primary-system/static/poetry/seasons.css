@@ -17,6 +17,7 @@
 }
 .seasons-hero h1 { font-size: clamp(24px, 2.4vw, 32px); margin: 2px 0 0; }
 .seasons-hero .eyebrow { margin-bottom: 2px; }
+.seasons-hall-link { display: inline-block; margin-top: 6px; color: var(--green-dark); font-size: 16px; font-weight: 700; text-decoration: underline; text-underline-offset: .18em; }
 
 /* ── 左右工作区 ────────────────────────────────────────────────────────── */
 .seasons-workspace { display: grid; grid-template-columns: minmax(300px, 340px) minmax(0, 1fr); gap: 22px; align-items: start; margin: 0 0 30px; }

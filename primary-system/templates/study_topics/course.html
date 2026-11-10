@@ -10,10 +10,10 @@
 <link rel="stylesheet" href="{% static topic|add:'.css' %}">
 <link rel="stylesheet" href="{% static 'study_topics/course.css' %}">
 <script src="{% static 'speech.js' %}" defer></script>
-<script src="{% static topic|add:'-data.js' %}" defer></script>
-<script src="{% static topic|add:'-figures.js' %}" defer></script>
+<script src="{% static topic|add:'-data.js' %}{% if course_slug == 'sci' %}?v=2{% endif %}" defer></script>
+<script src="{% static topic|add:'-figures.js' %}{% if course_slug == 'sci' %}?v=2{% endif %}" defer></script>
 {% if course_slug == 'astro' %}<script src="{% static 'study_topics/astro/astro-photos.js' %}" defer></script>{% endif %}
-<script src="{% static topic|add:'-app.js' %}" defer></script>
+<script src="{% static topic|add:'-app.js' %}{% if course_slug == 'sci' %}?v=2{% elif course_slug == 'lit' %}?v=2{% endif %}" defer></script>
 <script src="{% static 'mathbook/layout.js' %}" defer></script>
 {% endwith %}
 {% endblock %}

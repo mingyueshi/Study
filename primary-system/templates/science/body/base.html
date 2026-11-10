@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'study_topics/platform-bridge.css' %}">
+<link rel="stylesheet" href="{% static 'science/body.css' %}">
+<div class="body-station color-science">
+  <nav class="study-topic-nav" aria-label="人体奥秘站导航">
+    <a href="{% url 'home' %}?area=science#modules-title">← 学习广场 · 科学</a>
+    <a href="{% url 'science-body' %}" {% if not lesson %}aria-current="page"{% endif %}>人体奥秘站</a>
+    <a href="{% url 'science-lab' %}#lesson-su6-5">科学实验室 · 我们的身体</a>
+  </nav>
+  {% block station %}{% endblock %}
+</div>
+{% endblock %}

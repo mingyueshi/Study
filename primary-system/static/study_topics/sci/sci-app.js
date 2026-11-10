@@ -82,7 +82,7 @@ function pointCard(u, p) {
   const learned = !!scState.learned[key];
   const parts = [];
 
-  parts.push('<article class="kcard' + (learned ? ' learned' : '') + '" style="--c:' + u.color + '">');
+  parts.push('<article id="lesson-' + esc(p.id) + '" class="kcard' + (learned ? ' learned' : '') + '" style="--c:' + u.color + '">');
   parts.push('<div class="khead"><h3 class="ktitle">' + esc(p.title) + '</h3>' +
     '<span class="khead-gap"></span>' + sayBtn(p.title + '。' + p.overview) +
     '<button class="learn-btn' + (learned ? ' on' : '') + '" data-act="learn" data-unit="' + u.id + '" data-id="' + esc(p.id) + '" title="标记已掌握" aria-pressed="' + learned + '" aria-label="已掌握 ' + esc(p.title) + '">' + (learned ? '✓' : '') + '</button></div>');
@@ -270,4 +270,19 @@ window.SciExplore = {
   render, selectView, toggleLearn, searchResults,
 };
 
-render();
+function openLessonFromHash() {
+  const anchor = window.location.hash.slice(1);
+  if (!anchor.startsWith('lesson-')) return false;
+  const id = anchor.slice('lesson-'.length);
+  const unit = SCI.units.find(item => item.points.some(point => point.id === id));
+  if (!unit) return false;
+  curView = unit.id;
+  query = '';
+  document.getElementById('search').value = '';
+  render();
+  document.getElementById(anchor).scrollIntoView();
+  return true;
+}
+
+window.addEventListener('hashchange', openLessonFromHash);
+if (!openLessonFromHash()) render();

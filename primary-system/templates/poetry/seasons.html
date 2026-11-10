@@ -1,12 +1,13 @@
 {% extends 'base.html' %}{% load static %}
 {% block title %}诗词四季 · 乐学堂{% endblock %}
 {% block content %}
-<link rel="stylesheet" href="{% static 'poetry/seasons.css' %}?v=4">
+<link rel="stylesheet" href="{% static 'poetry/seasons.css' %}?v=5">
 <div class="fh-topline"><a class="back" href="{% url 'poetry-index' %}">← 古诗文</a><span>跟着季节读诗</span></div>
 <header class="seasons-hero">
   <div class="seasons-hero-copy">
     <p class="eyebrow">古诗词 · 四季与情感</p>
     <h1>诗词四季</h1>
+    <a class="seasons-hall-link" href="{% url 'solar-terms' %}">去二十四节气馆看诗里的四季 →</a>
   </div>
 </header>
 <div class="seasons-workspace">

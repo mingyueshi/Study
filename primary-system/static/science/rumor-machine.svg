@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 550 370">
+  <defs>
+    <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M24 0H0V24" fill="none" stroke="#52628d" stroke-opacity=".5"/>
+    </pattern>
+  </defs>
+  <rect x="25" y="23" width="500" height="324" rx="24" fill="url(#grid)"/>
+  <path d="M60 89V53h36m358 0h36v36m0 196v34h-36m-358 0H60v-34" fill="none" stroke="#a6b8e7" stroke-width="2"/>
+  <ellipse cx="276" cy="326" rx="179" ry="16" fill="#101832" opacity=".65"/>
+  <g transform="rotate(-13 170 128)">
+    <rect x="89" y="71" width="159" height="108" rx="10" fill="#17213d" stroke="#9caff3" stroke-width="2"/>
+    <path d="M106 94h59m-59 16h42m-42 16h55" fill="none" stroke="#9caff3" stroke-width="3" stroke-linecap="round"/>
+    <path d="M202 98q3-10 14-10c15 0 19 16 7 23q-8 5-8 13m0 12h.1" fill="none" stroke="#e5fa96" stroke-width="5" stroke-linecap="round"/>
+  </g>
+  <path d="M117 167h300l-20-37H137z" fill="#839bee" stroke="#111b38" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M163 147h207" stroke="#111b38" stroke-width="8" stroke-linecap="round"/>
+  <g transform="rotate(8 310 122)">
+    <rect x="248" y="51" width="138" height="105" rx="10" fill="#f7f5e6" stroke="#111b38" stroke-width="4"/>
+    <path d="M267 112h47m-47 14h66" stroke="#677aaa" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="333" cy="87" r="16" fill="#e5fa96" stroke="#213153" stroke-width="3"/>
+    <path d="m326 87 5 5 9-11" fill="none" stroke="#213153" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <rect x="114" y="161" width="306" height="148" rx="22" fill="#afc2ff" stroke="#111b38" stroke-width="4"/>
+  <path d="M138 279h257v24H138z" fill="#8da4f5"/>
+  <rect x="137" y="179" width="206" height="93" rx="12" fill="#17213d" stroke="#111b38" stroke-width="3"/>
+  <path d="M151 226h178m-152-34v65m32-65v65m32-65v65m32-65v65m32-65v65" stroke="#546693" opacity=".55"/>
+  <path d="M154 232h31l11-14 13 27 17-39 15 26h19l10-12 12 12h40" fill="none" stroke="#d9f67d" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="379" cy="201" r="13" fill="#ddf88d" stroke="#213153" stroke-width="3"/>
+  <path d="M367 236h24m-24 10h24m-24 10h24" stroke="#374876" stroke-width="3" stroke-linecap="round"/>
+  <path d="M164 290h202" stroke="#213153" stroke-width="8" stroke-linecap="round"/>
+  <path d="M196 293h138l14 37H182z" fill="#e5fa96" stroke="#213153" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M212 306h77m-81 10h62" stroke="#6c862f" stroke-width="3" stroke-linecap="round"/>
+  <path d="M433 94h30m-15-15v30M84 238h18m-9-9v18" stroke="#e5fa96" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="449" cy="272" r="4" fill="#a6b8e7"/><circle cx="76" cy="270" r="4" fill="#a6b8e7"/>
+</svg>

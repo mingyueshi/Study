@@ -1,0 +1,55 @@
+{% extends 'science/body/base.html' %}
+{% load static %}
+{% block title %}{{ station.title }} · 乐学堂{% endblock %}
+{% block station %}
+<header class="body-hero">
+  <div class="body-hero-copy">
+    <p class="body-kicker"><span></span> 生命世界 · 身体观察手册</p>
+    <h1>{{ station.title }}</h1>
+    <p class="body-intro">{{ station.intro }}</p>
+    <div class="body-hero-actions">
+      <a class="body-button body-button-primary" href="#lessons">打开四课目录 ↓</a>
+      <a class="body-button body-button-light" href="{% url 'science-body-lesson' 'circulation' %}#heart">看心脏泵血 ↗</a>
+    </div>
+  </div>
+  <figure class="body-cover">
+    <svg viewBox="0 0 500 380" aria-hidden="true"><use href="{% static 'science/body-atlas.svg' %}#atlas"></use></svg>
+    <figcaption><span>图 01</span> 身体里的四组搭档</figcaption>
+  </figure>
+</header>
+<section class="body-section" id="lessons" aria-labelledby="body-lessons-title">
+  <div class="body-section-heading">
+    <p class="body-kicker">观察路线</p>
+    <h2 id="body-lessons-title">四张身体地图</h2>
+  </div>
+  <ol class="body-lesson-grid">
+    {% for item in lessons %}
+    <li class="body-{{ item.slug }}">
+      <a class="body-card" href="{% url 'science-body-lesson' item.slug %}">
+        <span class="body-card-meta"><span>第 {{ forloop.counter }} 课</span><span>{{ item.label }}</span></span>
+        <svg viewBox="0 0 180 120" aria-hidden="true"><use href="{% static 'science/body-atlas.svg' %}#{{ item.slug }}"></use></svg>
+        <strong>{{ item.title }}</strong>
+        <span class="body-card-teaser">{{ item.teaser }}</span>
+        <span class="body-card-link">开始观察 <span aria-hidden="true">↗</span></span>
+      </a>
+    </li>
+    {% endfor %}
+  </ol>
+</section>
+<div class="body-home-bottom">
+  <section class="body-panel">
+    <p class="body-kicker">动手实验</p>
+    <h2>{{ pulse.title }}</h2>
+    <p>{{ pulse.teaser }}</p>
+    <a class="body-inline-link" href="{% url 'science-body-lesson' 'circulation' %}#pulse">打开实验台 ↗</a>
+  </section>
+  <section class="body-panel">
+    <p class="body-kicker">四课连起来</p>
+    <h2>{{ station.prompt }}</h2>
+    <details class="body-answer">
+      <summary>看看身体怎么配合</summary>
+      <p>{{ station.answer }}</p>
+    </details>
+  </section>
+</div>
+{% endblock %}

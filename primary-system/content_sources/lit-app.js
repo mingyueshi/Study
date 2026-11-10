@@ -78,7 +78,8 @@ function pointCard(u, p) {
   const learned = !!lkState.learned[key];
   const parts = [];
 
-  parts.push('<article class="kcard' + (learned ? ' learned' : '') + '" style="--c:' + u.color + '">');
+  parts.push('<article id="lesson-' + esc(p.id) + '" tabindex="-1" class="kcard' +
+    (learned ? ' learned' : '') + '" style="--c:' + u.color + '">');
   parts.push('<div class="khead"><h3 class="ktitle">' + esc(p.title) + '</h3>' +
     '<span class="khead-gap"></span>' + sayBtn(p.title + '。' + p.overview) +
     '<button class="learn-btn' + (learned ? ' on' : '') + '" data-act="learn" data-unit="' + u.id + '" data-id="' + esc(p.id) + '" title="标记已掌握" aria-pressed="' + learned + '" aria-label="已掌握 ' + esc(p.title) + '">' + (learned ? '✓' : '') + '</button></div>');
@@ -270,4 +271,19 @@ window.LitExplore = {
   render, selectView, toggleLearn, searchResults,
 };
 
-render();
+function openLinkedLesson() {
+  const id = window.location.hash.match(/^#lesson-(lu\d+-\d+)$/)?.[1];
+  const unit = LIT.units.find(unit => unit.points.some(point => point.id === id));
+  if (!unit) return false;
+  curView = unit.id;
+  query = '';
+  document.getElementById('search').value = '';
+  render();
+  const card = document.getElementById('lesson-' + id);
+  card.scrollIntoView({ block: 'start' });
+  card.focus({ preventScroll: true });
+  return true;
+}
+
+window.addEventListener('hashchange', openLinkedLesson);
+if (!openLinkedLesson()) render();
