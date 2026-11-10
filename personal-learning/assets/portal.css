@@ -91,7 +91,10 @@ progress::-moz-progress-bar { background: var(--accent); }
 /* 大类用小面积的主题色区分，长文和卡片底色保持平静。 */
 .direction-card { border-top: 3px solid var(--blue-border); }
 .direction-card.ai-card { border-top-color: var(--purple-border); }
+.direction-card.dev-card { border-top-color: var(--warm-border); }
 .english-card .subject-icon { color: var(--blue); background: var(--blue-soft); border-color: var(--blue-border); }
 .ai-card .subject-icon { color: var(--purple); }
+.dev-card .subject-icon { color: var(--warm); background: var(--warm-soft); border-color: var(--warm-border); }
+@media (min-width: 1480px) { .direction-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 .module-overview { background: var(--blue-soft); border-color: var(--blue-border); }
 .module-name { color: var(--blue); }

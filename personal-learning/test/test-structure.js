@@ -11,7 +11,7 @@ function files(directory) {
 }
 let links = 0;
 const pages = files(root).filter(file => file.endsWith('.html'));
-for (const entry of ['index.html', 'english/index.html', 'english/techlex/index.html', 'ai/index.html']) {
+for (const entry of ['index.html', 'english/index.html', 'english/techlex/index.html', 'ai/index.html', 'dev/index.html']) {
   assert.ok(pages.includes(path.join(root, entry)), entry + ' 入口缺失');
 }
 for (const file of pages) {
@@ -33,4 +33,8 @@ const ai = fs.readFileSync(path.join(root, 'ai/index.html'), 'utf8');
 assert.match(ai, /AI 学习 · 基础篇/);
 assert.match(ai, /src="ai-data.js"/);
 assert.match(ai, /src="ai-app.js"/);
+const dev = fs.readFileSync(path.join(root, 'dev/index.html'), 'utf8');
+assert.match(dev, /开发命令 · 个人学习/);
+assert.match(dev, /src="dev-data.js"/);
+assert.match(dev, /src="dev-app.js"/);
 console.log('✅ ' + pages.length + ' 个页面、' + links + ' 个内部链接与资源通过检查，可独立拷走运行');

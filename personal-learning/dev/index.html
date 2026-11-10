@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="常用开发命令速查：mac、Linux、git、pyenv、nvm、vi 的日常命令，支持搜索、一键复制、遮住自测与掌握标记。">
+  <meta name="theme-color" content="#101515">
+  <title>开发命令 · 个人学习</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%23b4e5c9'/%3E%3Ctext x='20' y='73' font-size='70' fill='%23101515'%3EL%3C/text%3E%3C/svg%3E">
+<script src="../assets/theme.js"></script><link rel="stylesheet" href="../assets/theme.css">
+  <link rel="stylesheet" href="../assets/portal.css">
+  <link rel="stylesheet" href="dev.css">
+</head>
+<body class="portal dev-app">
+  <a class="skip-link" href="#devContent">跳到学习内容</a>
+  <div class="portal-shell">
+    <header class="portal-header">
+      <a class="portal-brand" href="../index.html" aria-label="个人学习首页"><span aria-hidden="true">L.</span>个人学习</a>
+      <nav aria-label="学习系统导航"><a href="../index.html">学习首页</a><a href="../english/index.html">英文学习</a><a href="../ai/index.html">AI 学习 <small>基础篇</small></a><a href="index.html" aria-current="page">开发命令</a></nav>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="切换阅读主题"><span data-theme-icon aria-hidden="true">☀</span><span data-theme-label>主题</span></button>
+    </header>
+    <main id="main">
+      <section class="dev-intro" aria-labelledby="devTitle">
+        <div><p class="eyebrow">LOOK IT UP. MAKE IT STICK.</p><h1 id="devTitle">开发命令 <span>速查与自测</span></h1><p>查得到、复制得快，再用遮住自测和掌握标记，把命令记进手里。</p></div>
+        <div class="dev-stats" id="devStats"></div>
+      </section>
+      <div class="dev-shell">
+        <aside class="dev-sidebar" aria-label="工具目录与进度">
+          <p class="side-heading">我的掌握进度 <strong id="progressLabel">0 / 0</strong></p>
+          <progress id="devProgress" value="0" max="0" aria-label="开发命令已掌握进度"></progress>
+          <nav id="toolNav" class="tool-nav" aria-label="工具目录"></nav>
+          <p class="sidebar-help">点命令即可复制；开启「遮住自测」，先看描述猜命令，再点击揭晓。标记只保存在当前浏览器。</p>
+          <div class="sidebar-system"><a href="../index.html">学习首页</a><a href="../english/index.html">英文学习</a><a href="../ai/index.html">AI 学习</a></div>
+        </aside>
+        <div class="dev-workspace">
+          <div class="reader-tools" aria-label="查找与自测">
+            <label class="command-search"><span aria-hidden="true">⌕</span><input id="commandSearch" type="search" placeholder="搜索命令、说明或关键词…" aria-label="搜索开发命令" autocomplete="off"><button id="clearSearch" data-dev-act="clear-search" aria-label="清空搜索" hidden>×</button><kbd aria-hidden="true">/</kbd></label>
+            <button class="quiz-button" type="button" data-dev-act="quiz" id="quizButton" aria-pressed="false">遮住自测</button>
+            <button class="resume-button" type="button" data-dev-act="resume" id="resumeButton">开始速查 <span aria-hidden="true">→</span></button>
+          </div>
+          <p class="storage-notice" id="storageNotice" role="status" hidden>浏览器暂时无法保存记录，本次会话仍可继续使用。</p>
+          <p class="sr-only" id="viewStatus" role="status" aria-live="polite" aria-atomic="true"></p>
+          <div id="devContent" tabindex="-1"></div>
+          <noscript><p>请启用 JavaScript，以使用命令速查、自测和掌握标记。顶部导航仍可切换学习方向。</p></noscript>
+        </div>
+      </div>
+    </main>
+    <footer class="portal-footer"><span>个人学习 · 开发命令</span><span>掌握标记保存在当前浏览器</span><a href="../index.html">返回学习首页</a></footer>
+  </div>
+  <script src="dev-data.js"></script>
+  <script src="dev-state.js"></script>
+  <script src="dev-app.js"></script>
+</body>
+</html>

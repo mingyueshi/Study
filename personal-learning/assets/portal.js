@@ -14,6 +14,21 @@
       values['ai-lesson-total'] = AI_COURSE.stages.reduce((sum, stage) => sum + stage.lessons.length, 0);
       values['ai-practice-total'] = AI_COURSE.stages.filter(stage => stage.practice).length;
     }
+    if (typeof DEV_TOOLS !== 'undefined' && typeof DevState !== 'undefined') {
+      const devCommands = DEV_TOOLS.tools.reduce((sum, tool) => sum + tool.groups.reduce((count, group) => count + group.commands.length, 0), 0);
+      let devMastered = 0;
+      try {
+        devMastered = Object.keys(DevState.normalize(JSON.parse(localStorage.getItem(DevState.key) || 'null'), DEV_TOOLS).mastered).length;
+      } catch (error) { devMastered = 0; }
+      values['dev-tool-total'] = DEV_TOOLS.tools.length;
+      values['dev-command-total'] = devCommands;
+      values['dev-mastered'] = devMastered;
+      values['dev-percentage'] = Math.round(devMastered / devCommands * 100) + '%';
+      document.querySelectorAll('[data-dev-progress]').forEach(element => {
+        element.max = devCommands;
+        element.value = devMastered;
+      });
+    }
     Object.entries(values).forEach(([key, value]) => {
       document.querySelectorAll('[data-' + key + ']').forEach(element => { element.textContent = value; });
     });
@@ -23,6 +38,6 @@
     });
   }
   window.addEventListener('pageshow', renderSummary);
-  window.addEventListener('storage', event => { if (!event.key || event.key === window.LearningProgress.key) renderSummary(); });
+  window.addEventListener('storage', event => { if (!event.key || event.key === window.LearningProgress.key || (window.DevState && event.key === window.DevState.key)) renderSummary(); });
   renderSummary();
 })();

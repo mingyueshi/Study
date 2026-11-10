@@ -16,16 +16,19 @@ personal-learning/
 │       ├── index.html
 │       ├── progress.js        学习进度管理
 │       └── test/
-└── ai/
-    └── index.html             AI 基础篇：路线、概念、自检与笔记
+├── ai/
+│   └── index.html             AI 基础篇：路线、概念、自检与笔记
+└── dev/
+    └── index.html             开发命令：速查、搜索、遮住自测与掌握标记
 ```
 
 | 方向 | 内容 | 状态 |
 | --- | --- | --- |
 | [英文学习](english/index.html) | [TechLex](english/techlex/index.html)：12 类、205 个术语、24 条双语工作表达 | 可使用 |
 | [AI 学习](ai/index.html) | 6 阶段路线、24 个基础概念、24 道自检题、6 个小练习 | 基础篇可学习 |
+| [开发命令](dev/index.html) | 6 个工具、151 条常用命令：mac、Linux、git、pyenv、nvm、vi | 可使用 |
 
-总首页、方向目录和 TechLex 都有返回首页、切换英文学习及 AI 学习的导航。AI 基础篇支持路线与概念检索、参考资料、概念自检、手动学习标记和本机笔记；自检不自动替你标记学会。
+总首页、方向目录和 TechLex 都有返回首页、切换英文学习、AI 学习及开发命令的导航。AI 基础篇支持路线与概念检索、参考资料、概念自检、手动学习标记和本机笔记；自检不自动替你标记学会。开发命令支持跨工具搜索、一键复制、遮住自测和逐条掌握标记，详见 [开发命令文档](dev/README.md)。
 
 ## 学习进度
 
@@ -33,6 +36,8 @@ personal-learning/
 - 进度只保存在当前浏览器。不同浏览器、域名或端口之间不自动同步进度。
 
 AI 模块使用独立的 `personal_ai_v1` 保存已学习标记、自检选项、上次阅读位置与笔记，不修改英文学习档案。详见 [AI 模块文档](ai/README.md)。
+
+开发命令模块使用独立的 `personal_dev_v1` 保存已掌握命令与上次工具，详见 [开发命令文档](dev/README.md)。
 
 ## 阅读主题与发音
 
@@ -50,6 +55,7 @@ TechLex 搜索栏下的「系统发音」可展开选择英语、中文发音人
 node test/test-structure.js
 node test/test-theme.js
 node ai/test/test-ai.js
+node dev/test/test-dev.js
 node english/techlex/test/test-tech.js
 node english/techlex/test/test-speech.js
 node english/techlex/test/test-progress.js
