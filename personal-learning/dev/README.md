@@ -1,6 +1,6 @@
 # 开发命令
 
-六个常用开发工具的命令速查与自测页：macOS、Linux 与 Shell、Git、pyenv 与 pip、nvm 与 npm、vi 编辑器。查得到、复制得快，再用遮住自测和掌握标记把命令记进手里。入口页是 [dev/index.html](index.html)。
+九个常用开发工具的命令速查与自测页：macOS、Shell 基础、Git、Docker 与容器、Linux 运维、SSH 与远程、pyenv 与 pip、nvm 与 npm、vi 编辑器。查得到、复制得快，再用遮住自测和掌握标记把命令记进手里。入口页是 [dev/index.html](index.html)。
 
 ## 使用
 

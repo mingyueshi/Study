@@ -26,7 +26,7 @@ personal-learning/
 | --- | --- | --- |
 | [英文学习](english/index.html) | [TechLex](english/techlex/index.html)：12 类、205 个术语、24 条双语工作表达 | 可使用 |
 | [AI 学习](ai/index.html) | 6 阶段路线、24 个基础概念、24 道自检题、6 个小练习 | 基础篇可学习 |
-| [开发命令](dev/index.html) | 6 个工具、151 条常用命令：mac、Linux、git、pyenv、nvm、vi | 可使用 |
+| [开发命令](dev/index.html) | 9 个工具、210 条常用命令：mac、Shell、Git、Docker、Linux 运维、SSH、pyenv、nvm、vi | 可使用 |
 
 总首页、方向目录和 TechLex 都有返回首页、切换英文学习、AI 学习及开发命令的导航。AI 基础篇支持路线与概念检索、参考资料、概念自检、手动学习标记和本机笔记；自检不自动替你标记学会。开发命令支持跨工具搜索、一键复制、遮住自测和逐条掌握标记，详见 [开发命令文档](dev/README.md)。
 

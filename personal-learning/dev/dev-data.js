@@ -42,12 +42,19 @@ const DEV_TOOLS = {
           { id: "mac-diskutil", cmd: "diskutil list", desc: "查看磁盘和分区列表。" },
           { id: "mac-swvers", cmd: "sw_vers", desc: "查看 macOS 系统版本号。" },
           { id: "mac-xattr", cmd: "xattr -dr com.apple.quarantine 目录", desc: "解除打开下载应用时的隔离标记。", note: "⚠️ 只对自己信任的软件使用。" }
+        ]},
+        { id: "mac-ops", name: "系统维护", commands: [
+          { id: "mac-softwareupdate", cmd: "sudo softwareupdate -i -a", desc: "在命令行里安装全部系统更新。" },
+          { id: "mac-flush-dns", cmd: "sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder", desc: "清除系统 DNS 缓存。", note: "改了 hosts 或换 DNS 后用它。" },
+          { id: "mac-mdfind", cmd: "mdfind 关键词", desc: "用 Spotlight 全盘秒搜文件。", example: "mdfind -name '会议记录'" },
+          { id: "mac-sips", cmd: "sips -Z 1024 图片.jpg", desc: "把图片最长边缩到 1024 像素。", note: "批量：sips -Z 1024 *.jpg。" },
+          { id: "mac-brew-cleanup", cmd: "brew cleanup", desc: "清掉旧版本软件包和缓存。", note: "加 -n 先看看会删什么。" }
         ]}
       ]
     },
     {
       id: "shell",
-      name: "Linux 与 Shell",
+      name: "Shell 基础",
       emoji: "🐧",
       tagline: "文件、文本、进程、网络，每天都要敲的基础命令。",
       groups: [
@@ -78,6 +85,14 @@ const DEV_TOOLS = {
           { id: "sh-diff", cmd: "diff a.txt b.txt", desc: "比较两个文件的差异。" },
           { id: "sh-pipe", cmd: "命令一 | 命令二", desc: "管道：把前一个命令的输出交给后一个。", example: "history | grep git" },
           { id: "sh-redirect", cmd: "命令 > 文件", desc: "把输出写进文件。", example: "ls > list.txt", note: "用 >> 追加，不覆盖原内容。" }
+        ]},
+        { id: "sh-adv", name: "管道与进阶", commands: [
+          { id: "sh-xargs", cmd: "命令 | xargs 子命令", desc: "把前一个命令的输出变成参数。", example: "find . -name '*.tmp' | xargs rm", note: "⚠️ 删除前先不带 xargs 跑一遍，看清会删哪些。" },
+          { id: "sh-tee", cmd: "命令 | tee 文件", desc: "屏幕看得到，同时写进文件。", note: "加 -a 追加不覆盖。" },
+          { id: "sh-tr", cmd: "cat 文件 | tr a-z A-Z", desc: "逐字符替换，大小写转换常用。" },
+          { id: "sh-jq", cmd: "jq '.' data.json", desc: "格式化并高亮 JSON。", note: "取字段：jq '.name'；配合管道处理接口输出。" },
+          { id: "sh-file", cmd: "file 文件", desc: "识别文件的真实类型，不看扩展名。" },
+          { id: "sh-env", cmd: "env", desc: "查看当前全部环境变量。", note: "配合管道找变量：env | grep PATH。" }
         ]},
         { id: "sh-proc", name: "进程与权限", commands: [
           { id: "sh-chmod", cmd: "chmod +x run.sh", desc: "给脚本加上可执行权限。", note: "数字写法：644 给普通文件，755 给脚本。" },
@@ -156,6 +171,96 @@ const DEV_TOOLS = {
           { id: "git-force-push", cmd: "git push --force-with-lease", desc: "用本地历史覆盖远程分支。", note: "⚠️ 会盖掉别人的提交，确认只有自己在用这个分支。" },
           { id: "git-fetch", cmd: "git fetch", desc: "只下载远程的更新，先不合并。", note: "配合 git log origin/main 看看再决定。" },
           { id: "git-tag", cmd: "git tag v1.0", desc: "给当前提交打个版本标签。", example: "git push --tags" }
+        ]}
+      ]
+    },
+    {
+      id: "docker",
+      name: "Docker 与容器",
+      emoji: "🐳",
+      tagline: "起容器、看日志、清垃圾，部署调试都靠它。",
+      groups: [
+        { id: "docker-life", name: "容器操作", commands: [
+          { id: "docker-ps", cmd: "docker ps", desc: "查看正在运行的容器。", note: "加 -a 连已停止的容器一起列出。" },
+          { id: "docker-run", cmd: "docker run -d -p 8080:80 --name web nginx", desc: "后台新建并启动一个容器。", note: "-d 后台运行，-p 主机端口:容器端口，--name 给容器起名。" },
+          { id: "docker-stop", cmd: "docker stop 容器名", desc: "优雅停止一个容器。", note: "再启动用 docker start，重启用 docker restart。" },
+          { id: "docker-rm", cmd: "docker rm 容器名", desc: "删除已停止的容器。", note: "⚠️ 运行中的要先 stop，或用 docker rm -f 强删。" },
+          { id: "docker-exec", cmd: "docker exec -it 容器名 bash", desc: "进入容器里开个 shell 排查问题。", note: "精简镜像可能没有 bash，换成 sh。" },
+          { id: "docker-logs", cmd: "docker logs -f 容器名", desc: "跟踪容器日志。", note: "--tail 100 只看最后 100 行。" },
+          { id: "docker-cp", cmd: "docker cp 本地文件 容器名:路径", desc: "在主机和容器之间复制文件。" }
+        ]},
+        { id: "docker-image", name: "镜像与构建", commands: [
+          { id: "docker-images", cmd: "docker images", desc: "查看本地已有的镜像列表。" },
+          { id: "docker-pull", cmd: "docker pull 镜像名", desc: "从镜像仓库下载镜像。", example: "docker pull python:3.12-slim" },
+          { id: "docker-build", cmd: "docker build -t 镜像名:标签 .", desc: "按 Dockerfile 构建镜像。", note: "结尾的 . 表示构建上下文是当前目录。" },
+          { id: "docker-rmi", cmd: "docker rmi 镜像名", desc: "删除本地镜像。", note: "⚠️ 还有容器引用时要先删容器。" },
+          { id: "docker-prune", cmd: "docker system prune", desc: "清理停止的容器、悬空镜像等无用资源。", note: "⚠️ 加 -a 会连没用过的镜像一起清。" }
+        ]},
+        { id: "docker-compose", name: "compose 编排", commands: [
+          { id: "compose-up", cmd: "docker compose up -d", desc: "按 docker-compose.yml 一次起好全套服务。" },
+          { id: "compose-down", cmd: "docker compose down", desc: "停止并删除整套服务和网络。", note: "⚠️ 加 -v 连数据卷一起删。" },
+          { id: "compose-logs", cmd: "docker compose logs -f 服务名", desc: "跟踪编排里某个服务的日志。" },
+          { id: "compose-ps", cmd: "docker compose ps", desc: "查看编排里各服务的状态。" }
+        ]}
+      ]
+    },
+    {
+      id: "linux",
+      name: "Linux 运维",
+      emoji: "🖥️",
+      tagline: "apt、systemd 和定时任务，管好一台服务器。",
+      groups: [
+        { id: "linux-apt", name: "apt 软件包", commands: [
+          { id: "apt-update", cmd: "sudo apt update", desc: "刷新软件源索引。", note: "只是更新目录，不升级软件；Ubuntu、Debian 系列适用。" },
+          { id: "apt-upgrade", cmd: "sudo apt upgrade", desc: "把已安装的软件升到最新。" },
+          { id: "apt-install", cmd: "sudo apt install 包名", desc: "安装一个软件包。", example: "sudo apt install -y htop", note: "-y 跳过确认。" },
+          { id: "apt-search", cmd: "apt search 关键词", desc: "搜索仓库里有哪些软件包。" },
+          { id: "apt-remove", cmd: "sudo apt remove 包名", desc: "卸载软件包。", note: "换 purge 连配置文件一起删。" },
+          { id: "apt-list", cmd: "apt list --installed | grep 关键词", desc: "查看已安装的软件包。" }
+        ]},
+        { id: "linux-service", name: "服务与日志", commands: [
+          { id: "systemctl-status", cmd: "systemctl status 服务名", desc: "看服务是否在跑和最近日志。" },
+          { id: "systemctl-restart", cmd: "sudo systemctl restart 服务名", desc: "重启一个服务。", note: "start 启动，stop 停止。" },
+          { id: "systemctl-enable", cmd: "sudo systemctl enable 服务名", desc: "设置开机自启。", note: "enable --now 顺手立即启动。" },
+          { id: "systemctl-list", cmd: "systemctl list-units --type=service", desc: "列出系统里的服务和状态。" },
+          { id: "journalctl-service", cmd: "journalctl -u 服务名 -f", desc: "跟踪某个服务的日志。", note: "-e 看最新几条，--disk-usage 看日志占了多少盘。" }
+        ]},
+        { id: "linux-sys", name: "系统与任务", commands: [
+          { id: "linux-free", cmd: "free -h", desc: "查看内存和交换空间。", note: "macOS 上没有这个命令，用 vm_stat。" },
+          { id: "linux-ss", cmd: "ss -tlnp", desc: "查看监听中的端口和对应进程。", note: "netstat 的现代替代品。" },
+          { id: "linux-uname", cmd: "uname -a", desc: "看内核版本和系统架构。" },
+          { id: "linux-uptime", cmd: "uptime", desc: "看开机时长和一分钟负载。" },
+          { id: "crontab-edit", cmd: "crontab -e", desc: "编辑当前用户的定时任务。", note: "格式：分 时 日 月 周 命令，例如 0 9 * * 1 每周一九点。" },
+          { id: "crontab-list", cmd: "crontab -l", desc: "查看已有的定时任务。" },
+          { id: "linux-watch", cmd: "watch -n 2 命令", desc: "每两秒刷新一次命令输出。", note: "Ctrl+C 退出。" }
+        ]}
+      ]
+    },
+    {
+      id: "remote",
+      name: "SSH 与远程",
+      emoji: "🔐",
+      tagline: "免密登录、增量同步、tmux 挂任务。",
+      groups: [
+        { id: "remote-ssh", name: "SSH 连接与密钥", commands: [
+          { id: "ssh-keygen", cmd: "ssh-keygen -t ed25519", desc: "生成一对新的 SSH 密钥。", note: "公钥 .pub 可以交给别人，私钥绝不能外传。" },
+          { id: "ssh-copy-id", cmd: "ssh-copy-id 用户@主机", desc: "把公钥装到服务器，之后免密登录。" },
+          { id: "ssh-port", cmd: "ssh -p 端口 用户@主机", desc: "服务器改了默认端口时用 -p 指定。" },
+          { id: "ssh-key-file", cmd: "ssh -i 密钥文件 用户@主机", desc: "用指定的私钥连接。" },
+          { id: "ssh-tunnel", cmd: "ssh -L 9000:localhost:3306 用户@主机", desc: "把远程端口转发到本机。", note: "例子里把服务器的 MySQL 映射到本机 9000。" },
+          { id: "ssh-config", cmd: "ssh 主机别名", desc: "连接 ~/.ssh/config 里配置好的主机。", note: "config 里写 Host 别名、HostName、User、Port，之后短名直连。" }
+        ]},
+        { id: "remote-sync", name: "传输与同步", commands: [
+          { id: "rsync", cmd: "rsync -avz 源目录 用户@主机:路径", desc: "增量同步目录到远程。", note: "只传改动过的文件，中途断了还能续。" },
+          { id: "rsync-pull", cmd: "rsync -avz 用户@主机:路径 本地目录", desc: "把远程目录拉回本地，方向反过来即可。" },
+          { id: "rsync-delete", cmd: "rsync -avz --delete 源 目标", desc: "让目标和源完全一致。", note: "⚠️ 会删掉目标里多出来的文件，先加 -n 空跑演练。" }
+        ]},
+        { id: "remote-tmux", name: "tmux 终端复用", commands: [
+          { id: "tmux-new", cmd: "tmux new -s 名字", desc: "新建一个可分离的终端会话。" },
+          { id: "tmux-detach", cmd: "Ctrl+b d", desc: "分离当前会话，里面的命令继续跑。", note: "ssh 断线任务也不丢。" },
+          { id: "tmux-attach", cmd: "tmux attach -t 名字", desc: "回到之前的会话。" },
+          { id: "tmux-ls", cmd: "tmux ls", desc: "列出所有会话。", note: "结束用 tmux kill-session -t 名字。" },
+          { id: "tmux-split", cmd: "Ctrl+b %", desc: "左右分屏。", note: "上下分屏按 Ctrl+b 加双引号键；Ctrl+b 加方向键切换窗格。" }
         ]}
       ]
     },

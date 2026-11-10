@@ -14,7 +14,7 @@ function checkText(text, where) {
   assert.ok(!text.includes('\n'), where + ' 含裸换行：' + text);
 }
 assert.match(DEV_TOOLS.updatedAt, /^\d{4}-\d{2}-\d{2}$/, 'updatedAt 应是日期');
-assert.ok(DEV_TOOLS.tools.length >= 6, '至少六个工具组');
+assert.ok(DEV_TOOLS.tools.length >= 9, '至少九个工具组');
 
 const toolIds = new Set();
 const groupIds = new Set();
@@ -47,7 +47,7 @@ for (const tool of DEV_TOOLS.tools) {
     }
   }
 }
-assert.ok(commandCount >= 120, '命令数量应不少于 120 条，当前 ' + commandCount + ' 条');
+assert.ok(commandCount >= 200, '命令数量应不少于 200 条，当前 ' + commandCount + ' 条');
 
 /* normalize：脏数据一律丢弃，只保留已知 id。 */
 const empty = DevState.normalize(null, DEV_TOOLS);
