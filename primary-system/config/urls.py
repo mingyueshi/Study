@@ -6,7 +6,7 @@ from nova_admin.slider import SliderCaptchaAdminAuthenticationForm
 from accounts import views as accounts_views
 from accounts.forms import LearnerAuthenticationForm
 from catalog import views as catalog
-from catalog.study_courses import literature_study
+from catalog.study_courses import hanzi_evolution, literature_study
 from learning import views as learning
 from lexicon import views as lexicon
 from lexicon import pages as dictionary
@@ -29,6 +29,7 @@ urlpatterns = [
     path('geography/', include('geography.urls')),
     path('astronomy/', include('astronomy.urls')),
     path('literature/', literature_study, name='literature-study'),
+    path('hanzi-evolution/', hanzi_evolution, name='hanzi-evolution'),
     path('science/', include('science.urls')),
     path('dictionary/', dictionary.lookup, name='dictionary'),
     path('dictionary/sources/', dictionary.sources, name='dictionary-sources'),

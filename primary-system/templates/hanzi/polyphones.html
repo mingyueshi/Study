@@ -41,7 +41,8 @@
         </div>
         {% endfor %}
       </div>
-      <p class="poly-detail-links"><a class="button small" href="{% url 'hanzi-detail' current_char.char %}">查字查词看这个字 →</a></p>
+      <p class="poly-detail-links"><a class="button small" href="{% url 'hanzi-detail' current_char.char %}">查字查词看这个字 →</a>
+      {% if in_evolution_hall %}<a class="button small" href="{% url 'hanzi-evolution' %}?char={{ current_char.char|urlencode }}">🏛️ 看字源故事 →</a>{% endif %}</p>
       <p class="poly-detail-note">点组词去查字查词；读音与组词由 CC-CEDICT 全量词语推导，轻声不标调、标「轻」。</p>
     </section>
   </div>

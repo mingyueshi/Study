@@ -21,3 +21,10 @@ science_lab = TemplateView.as_view(template_name='study_topics/course.html', ext
     'course_intro': '从身边的现象提出问题，用图示、观察和小实验寻找答案。',
     'course_links': (('science-elements', '查元素周期表'),),
 })
+
+hanzi_evolution = TemplateView.as_view(template_name='study_topics/course.html', extra_context={
+    'study_area': 'chinese', 'study_label': '语文',
+    'course_slug': 'hanzi-evo', 'course_title': '汉字演变馆', 'course_section': '字族',
+    'course_intro': '100 个常用字从甲骨文走到楷书：先猜字，再读字理小故事。',
+    'course_links': (('dictionary', '查字查词'), ('hanzi-polyphones', '多音字')),
+})

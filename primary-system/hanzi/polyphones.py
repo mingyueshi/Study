@@ -21,6 +21,11 @@ from django.views.decorators.http import require_POST, require_safe
 DATA_PATH = Path(__file__).resolve().parent / "polyphone_data" / "polyphones.json"
 MAX_PRACTICE_CHARS = 60  # 练习选题池：证据最厚的常见字
 
+try:
+    from .evolution_chars import CHARS as EVOLUTION_HALL_CHARS
+except ImportError:  # 汉字演变馆数据尚未生成时照常工作
+    EVOLUTION_HALL_CHARS = frozenset()
+
 
 @lru_cache(maxsize=1)
 def load_polyphones():
@@ -211,6 +216,7 @@ def page(request):
         ],
         "compact": compact_chars(data["chars"]),
         "current_char": {**char_index()[char], "rows": reading_rows(char_index()[char])},
+        "in_evolution_hall": char in EVOLUTION_HALL_CHARS,
         "round": current,
         "next_href": "?char=" + char,
     })

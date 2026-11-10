@@ -15,7 +15,10 @@ TOPICS = {
     'history-timeline': ('study-timeline', 'history-timeline', ('index', 'timeline', 'era', 'event', 'dynasties')),
     'geo-map': ('study-atlas', 'geography-atlas', ('index', 'china', 'animals', 'world', 'world-animals', 'province', 'places', 'routes', 'gallery')),
 }
-COURSES = ('astro', 'lit', 'sci')
+COURSES = ('astro', 'lit', 'sci', 'hanzi-evo')
+# 数据全局名：slug 含连字符时 .upper() 不是合法 JS 标识符，需要单独映射。
+COURSE_GLOBALS = {'hanzi-evo': 'HANZI_EVO'}
+EVOLUTION_CHARS = PROJECT / 'hanzi' / 'evolution_chars.py'
 COURSE_IMAGE = re.compile(r"(?:img|hero): '(images/[^']+)'")
 HEAD_ASSET = re.compile(r'<(?:link rel="stylesheet" href|script src)="([^"]+)"[^>]*>')
 MAIN = re.compile(r'<main\b([^>]*)>(.*?)</main>', re.DOTALL)
@@ -146,9 +149,10 @@ def resolve_media_from_script(source, item):
 
 
 def course_app(source, topic):
+    global_name = COURSE_GLOBALS.get(topic, topic.upper())
     source = replace_once(source, "'use strict';", f"""'use strict';
 
-{topic.upper()}.units.forEach(unit => {{
+{global_name}.units.forEach(unit => {{
   unit.points = unit.points.map(window.StudyTopicConnections.lesson);
 }});""")
     source = replace_once(source, "  parts.push('</article>');", """  parts.push(window.StudyTopicConnections.references(p.id, '接着学'));
@@ -161,6 +165,18 @@ def course_app(source, topic):
         for field in ('p.img', 'u.hero'):
             source = replace_once(source, f'esc({field})', f'esc(new URL({field}, courseAssets).href)')
     return source
+
+
+def evolution_chars_module(data_source):
+    """从汉字演变馆数据里取全部选字，生成 hanzi 应用反链用的字集模块。"""
+    chars = re.findall(r"char: '(.)',", data_source)
+    if len(chars) != 100 or len(set(chars)) != 100:
+        raise ValueError(f'汉字演变馆应有 100 个不重复选字，当前 {len(chars)}。')
+    return (
+        '# 由 scripts/build_study_topics.py 生成，请勿手改。'
+        '来源：content_sources/hanzi-evo-data.js。\n'
+        'CHARS = frozenset(' + repr(''.join(chars)) + ')\n'
+    )
 
 
 def course_outputs():
@@ -177,6 +193,8 @@ def course_outputs():
         yield dest / f'{topic}.css', styles.encode('utf-8')
         for path in sorted(set(COURSE_IMAGE.findall(data))):
             yield dest / path, (SOURCE / path).read_bytes()
+        if topic == 'hanzi-evo':
+            yield EVOLUTION_CHARS, evolution_chars_module(data).encode('utf-8')
         if topic == 'astro':
             photos = (SOURCE / 'astro-photos.js').read_text(encoding='utf-8')
             photos = replace_once(photos, "'images/astro/'", "new URL('images/astro/', document.currentScript.src).href")

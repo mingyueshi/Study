@@ -13,6 +13,7 @@
 | 教材练习 | 与教材共用语数英数据 | `make questionbank-data` |
 | 历史、地理 | `history/`、`history-timeline/`、`geo/`、`geo-map/` | `make study-topics-data` |
 | 天文、文学、科学 | `astro-*`、`lit-*`、`sci-*` 及 `images/` | `make study-topics-data` |
+| 汉字演变馆 | `hanzi-evo-*`、`images/glyphs/`（古字形 SVG）与 `hanzi-evo-availability.json` | `make study-topics-data`；字形重抓见 `scripts/fetch_hanzi_glyphs.py` |
 
 `make test-content-sources` 运行本目录的源文件校验。`make content-data` 重生成全部随项目维护的文件和题库批次；命令只写文件。题库题目发生变化时，按[题库数据说明](../questionbank/data/README.md)处理新批次。已发布批次的备注可能保留旧来源名称，以维持原有导入指纹。
 

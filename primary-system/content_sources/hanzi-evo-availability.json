@@ -1,0 +1,1445 @@
+[
+ {
+  "index": 1,
+  "char": "日",
+  "py": "ri4",
+  "site_pinyin": "r&#xEC;",
+  "meaning": "",
+  "files": {
+   "ob": "he001-ri4-ob.svg",
+   "bronze": "he001-ri4-bronze.svg",
+   "seal": "he001-ri4-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 2,
+  "char": "月",
+  "py": "yue4",
+  "site_pinyin": "yu&#xE8;",
+  "meaning": "",
+  "files": {
+   "ob": "he002-yue4-ob.svg",
+   "bronze": "he002-yue4-bronze.svg",
+   "seal": "he002-yue4-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 3,
+  "char": "星",
+  "py": "xing1",
+  "site_pinyin": "x&#x12B;ng",
+  "meaning": "",
+  "files": {
+   "ob": "he003-xing1-ob.svg",
+   "bronze": "he003-xing1-bronze.svg",
+   "seal": "he003-xing1-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 4,
+  "char": "云",
+  "py": "yun2",
+  "site_pinyin": "y&#xFA;n",
+  "meaning": "",
+  "files": {
+   "ob": "he004-yun2-ob.svg",
+   "seal": "he004-yun2-seal.svg"
+  },
+  "missing": [
+   "bronze"
+  ],
+  "precursor": {
+   "char": "雲",
+   "note": "古字作雲，从雨从云",
+   "from": "he101"
+  }
+ },
+ {
+  "index": 5,
+  "char": "雨",
+  "py": "yu3",
+  "site_pinyin": "y&#x1D4;",
+  "meaning": "",
+  "files": {
+   "ob": "he005-yu3-ob.svg",
+   "bronze": "he005-yu3-bronze.svg",
+   "seal": "he005-yu3-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 6,
+  "char": "雪",
+  "py": "xue3",
+  "site_pinyin": "xu&#x11B;",
+  "meaning": "",
+  "files": {
+   "ob": "he006-xue3-ob.svg",
+   "seal": "he006-xue3-seal.svg"
+  },
+  "missing": [
+   "bronze"
+  ],
+  "precursor": null
+ },
+ {
+  "index": 7,
+  "char": "雷",
+  "py": "lei2",
+  "site_pinyin": "l&#xE9;i",
+  "meaning": "",
+  "files": {
+   "ob": "he007-lei2-ob.svg",
+   "bronze": "he007-lei2-bronze.svg",
+   "seal": "he007-lei2-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 8,
+  "char": "电",
+  "py": "dian4",
+  "site_pinyin": "di&#xE0;n",
+  "meaning": "",
+  "files": {
+   "ob": "he008-dian4-ob.svg",
+   "bronze": "he008-dian4-bronze.svg",
+   "seal": "he008-dian4-seal.svg"
+  },
+  "missing": [],
+  "precursor": {
+   "char": "申",
+   "note": "甲骨文借用「申」，像闪电之形",
+   "from": "he102"
+  }
+ },
+ {
+  "index": 9,
+  "char": "风",
+  "py": "feng1",
+  "site_pinyin": "f&#x113;ng",
+  "meaning": "",
+  "files": {
+   "ob": "he009-feng1-ob.svg",
+   "seal": "he009-feng1-seal.svg"
+  },
+  "missing": [
+   "bronze"
+  ],
+  "precursor": null
+ },
+ {
+  "index": 10,
+  "char": "天",
+  "py": "tian1",
+  "site_pinyin": "ti&#x101;n",
+  "meaning": "",
+  "files": {
+   "ob": "he010-tian1-ob.svg",
+   "bronze": "he010-tian1-bronze.svg",
+   "seal": "he010-tian1-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 11,
+  "char": "山",
+  "py": "shan1",
+  "site_pinyin": "sh&#x101;n",
+  "meaning": "",
+  "files": {
+   "ob": "he011-shan1-ob.svg",
+   "bronze": "he011-shan1-bronze.svg",
+   "seal": "he011-shan1-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 12,
+  "char": "川",
+  "py": "chuan1",
+  "site_pinyin": "chu&#x101;n",
+  "meaning": "",
+  "files": {
+   "ob": "he012-chuan1-ob.svg",
+   "bronze": "he012-chuan1-bronze.svg",
+   "seal": "he012-chuan1-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 13,
+  "char": "水",
+  "py": "shui3",
+  "site_pinyin": "shu&#x1D0;",
+  "meaning": "",
+  "files": {
+   "ob": "he013-shui3-ob.svg",
+   "bronze": "he013-shui3-bronze.svg",
+   "seal": "he013-shui3-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 14,
+  "char": "火",
+  "py": "huo3",
+  "site_pinyin": "hu&#x1D2;",
+  "meaning": "",
+  "files": {
+   "ob": "he014-huo3-ob.svg",
+   "seal": "he014-huo3-seal.svg"
+  },
+  "missing": [
+   "bronze"
+  ],
+  "precursor": null
+ },
+ {
+  "index": 15,
+  "char": "土",
+  "py": "tu3",
+  "site_pinyin": "t&#x1D4;",
+  "meaning": "",
+  "files": {
+   "ob": "he015-tu3-ob.svg",
+   "bronze": "he015-tu3-bronze.svg",
+   "seal": "he015-tu3-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 16,
+  "char": "石",
+  "py": "shi2",
+  "site_pinyin": "sh&#xED;",
+  "meaning": "",
+  "files": {
+   "ob": "he016-shi2-ob.svg",
+   "bronze": "he016-shi2-bronze.svg",
+   "seal": "he016-shi2-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 17,
+  "char": "田",
+  "py": "tian2",
+  "site_pinyin": "ti&#xE1;n",
+  "meaning": "",
+  "files": {
+   "ob": "he017-tian2-ob.svg",
+   "bronze": "he017-tian2-bronze.svg",
+   "seal": "he017-tian2-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 18,
+  "char": "井",
+  "py": "jing3",
+  "site_pinyin": "j&#x1D0;ng",
+  "meaning": "",
+  "files": {
+   "ob": "he018-jing3-ob.svg",
+   "bronze": "he018-jing3-bronze.svg",
+   "seal": "he018-jing3-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 19,
+  "char": "谷",
+  "py": "gu3",
+  "site_pinyin": "g&#x1D4;",
+  "meaning": "",
+  "files": {
+   "bronze": "he019-gu3-bronze.svg",
+   "seal": "he019-gu3-seal.svg"
+  },
+  "missing": [
+   "ob"
+  ],
+  "precursor": null
+ },
+ {
+  "index": 20,
+  "char": "泉",
+  "py": "quan2",
+  "site_pinyin": "qu&#xE1;n",
+  "meaning": "",
+  "files": {
+   "ob": "he020-quan2-ob.svg",
+   "seal": "he020-quan2-seal.svg"
+  },
+  "missing": [
+   "bronze"
+  ],
+  "precursor": null
+ },
+ {
+  "index": 21,
+  "char": "马",
+  "py": "ma3",
+  "site_pinyin": "m&#x1CE;",
+  "meaning": "",
+  "files": {
+   "ob": "he021-ma3-ob.svg",
+   "bronze": "he021-ma3-bronze.svg",
+   "seal": "he021-ma3-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 22,
+  "char": "牛",
+  "py": "niu2",
+  "site_pinyin": "ni&#xFA;",
+  "meaning": "",
+  "files": {
+   "ob": "he022-niu2-ob.svg",
+   "bronze": "he022-niu2-bronze.svg",
+   "seal": "he022-niu2-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 23,
+  "char": "羊",
+  "py": "yang2",
+  "site_pinyin": "y&#xE1;ng",
+  "meaning": "",
+  "files": {
+   "ob": "he023-yang2-ob.svg",
+   "bronze": "he023-yang2-bronze.svg",
+   "seal": "he023-yang2-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 24,
+  "char": "犬",
+  "py": "quan3",
+  "site_pinyin": "qu&#x1CE;n",
+  "meaning": "",
+  "files": {
+   "ob": "he024-quan3-ob.svg",
+   "bronze": "he024-quan3-bronze.svg",
+   "seal": "he024-quan3-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 25,
+  "char": "豕",
+  "py": "shi3",
+  "site_pinyin": "sh&#x1D0;",
+  "meaning": "",
+  "files": {
+   "ob": "he025-shi3-ob.svg",
+   "bronze": "he025-shi3-bronze.svg",
+   "seal": "he025-shi3-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 26,
+  "char": "鹿",
+  "py": "lu4",
+  "site_pinyin": "l&#xF9;",
+  "meaning": "",
+  "files": {
+   "ob": "he026-lu4-ob.svg",
+   "bronze": "he026-lu4-bronze.svg",
+   "seal": "he026-lu4-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 27,
+  "char": "虎",
+  "py": "hu3",
+  "site_pinyin": "h&#x1D4;",
+  "meaning": "",
+  "files": {
+   "ob": "he027-hu3-ob.svg",
+   "bronze": "he027-hu3-bronze.svg",
+   "seal": "he027-hu3-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 28,
+  "char": "兔",
+  "py": "tu4",
+  "site_pinyin": "t&#xF9;",
+  "meaning": "",
+  "files": {
+   "ob": "he028-tu4-ob.svg",
+   "seal": "he028-tu4-seal.svg"
+  },
+  "missing": [
+   "bronze"
+  ],
+  "precursor": null
+ },
+ {
+  "index": 29,
+  "char": "蛇",
+  "py": "she2",
+  "site_pinyin": "sh&#xE9;",
+  "meaning": "",
+  "files": {
+   "bronze": "he029-she2-bronze.svg",
+   "seal": "he029-she2-seal.svg"
+  },
+  "missing": [
+   "ob"
+  ],
+  "precursor": {
+   "char": "它",
+   "note": "蛇的古字写作「它」",
+   "from": "he103"
+  }
+ },
+ {
+  "index": 30,
+  "char": "鱼",
+  "py": "yu2",
+  "site_pinyin": "y&#xFA;",
+  "meaning": "",
+  "files": {
+   "ob": "he030-yu2-ob.svg",
+   "bronze": "he030-yu2-bronze.svg",
+   "seal": "he030-yu2-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 31,
+  "char": "鸟",
+  "py": "niao3",
+  "site_pinyin": "ni&#x1CE;o",
+  "meaning": "",
+  "files": {
+   "ob": "he031-niao3-ob.svg",
+   "bronze": "he031-niao3-bronze.svg",
+   "seal": "he031-niao3-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 32,
+  "char": "龙",
+  "py": "long2",
+  "site_pinyin": "l&#xF3;ng",
+  "meaning": "",
+  "files": {
+   "ob": "he032-long2-ob.svg",
+   "bronze": "he032-long2-bronze.svg",
+   "seal": "he032-long2-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 33,
+  "char": "木",
+  "py": "mu4",
+  "site_pinyin": "m&#xF9;",
+  "meaning": "",
+  "files": {
+   "ob": "he033-mu4-ob.svg",
+   "bronze": "he033-mu4-bronze.svg",
+   "seal": "he033-mu4-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 34,
+  "char": "林",
+  "py": "lin2",
+  "site_pinyin": "l&#xED;n",
+  "meaning": "",
+  "files": {
+   "ob": "he034-lin2-ob.svg",
+   "bronze": "he034-lin2-bronze.svg",
+   "seal": "he034-lin2-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 35,
+  "char": "森",
+  "py": "sen1",
+  "site_pinyin": "s&#x113;n",
+  "meaning": "",
+  "files": {
+   "ob": "he035-sen1-ob.svg",
+   "seal": "he035-sen1-seal.svg"
+  },
+  "missing": [
+   "bronze"
+  ],
+  "precursor": null
+ },
+ {
+  "index": 36,
+  "char": "禾",
+  "py": "he2",
+  "site_pinyin": "h&#xE9;",
+  "meaning": "",
+  "files": {
+   "ob": "he036-he2-ob.svg",
+   "bronze": "he036-he2-bronze.svg",
+   "seal": "he036-he2-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 37,
+  "char": "米",
+  "py": "mi3",
+  "site_pinyin": "m&#x1D0;",
+  "meaning": "",
+  "files": {
+   "ob": "he037-mi3-ob.svg",
+   "seal": "he037-mi3-seal.svg"
+  },
+  "missing": [
+   "bronze"
+  ],
+  "precursor": null
+ },
+ {
+  "index": 38,
+  "char": "瓜",
+  "py": "gua1",
+  "site_pinyin": "gu&#x101;",
+  "meaning": "",
+  "files": {
+   "bronze": "he038-gua1-bronze.svg",
+   "seal": "he038-gua1-seal.svg"
+  },
+  "missing": [
+   "ob"
+  ],
+  "precursor": null
+ },
+ {
+  "index": 39,
+  "char": "果",
+  "py": "guo3",
+  "site_pinyin": "gu&#x1D2;",
+  "meaning": "",
+  "files": {
+   "bronze": "he039-guo3-bronze.svg",
+   "seal": "he039-guo3-seal.svg"
+  },
+  "missing": [
+   "ob"
+  ],
+  "precursor": null
+ },
+ {
+  "index": 40,
+  "char": "竹",
+  "py": "zhu2",
+  "site_pinyin": "zh&#xFA;",
+  "meaning": "",
+  "files": {
+   "bronze": "he040-zhu2-bronze.svg",
+   "seal": "he040-zhu2-seal.svg"
+  },
+  "missing": [
+   "ob"
+  ],
+  "precursor": null
+ },
+ {
+  "index": 41,
+  "char": "草",
+  "py": "cao3",
+  "site_pinyin": "c&#x1CE;o",
+  "meaning": "",
+  "files": {
+   "bronze": "he041-cao3-bronze.svg",
+   "seal": "he041-cao3-seal.svg"
+  },
+  "missing": [
+   "ob"
+  ],
+  "precursor": {
+   "char": "屮",
+   "note": "草的古字写作「屮」，像小草芽",
+   "from": "he105"
+  }
+ },
+ {
+  "index": 42,
+  "char": "桑",
+  "py": "sang1",
+  "site_pinyin": "s&#x101;ng",
+  "meaning": "",
+  "files": {
+   "ob": "he042-sang1-ob.svg",
+   "seal": "he042-sang1-seal.svg"
+  },
+  "missing": [
+   "bronze"
+  ],
+  "precursor": null
+ },
+ {
+  "index": 43,
+  "char": "人",
+  "py": "ren2",
+  "site_pinyin": "r&#xE9;n",
+  "meaning": "",
+  "files": {
+   "ob": "he043-ren2-ob.svg",
+   "bronze": "he043-ren2-bronze.svg",
+   "seal": "he043-ren2-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 44,
+  "char": "大",
+  "py": "da4",
+  "site_pinyin": "d&#xE0;",
+  "meaning": "",
+  "files": {
+   "ob": "he044-da4-ob.svg",
+   "bronze": "he044-da4-bronze.svg",
+   "seal": "he044-da4-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 45,
+  "char": "女",
+  "py": "nv3",
+  "site_pinyin": "n&#x1DA;",
+  "meaning": "",
+  "files": {
+   "ob": "he045-nv3-ob.svg",
+   "bronze": "he045-nv3-bronze.svg",
+   "seal": "he045-nv3-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 46,
+  "char": "子",
+  "py": "zi3",
+  "site_pinyin": "zi",
+  "meaning": "",
+  "files": {
+   "ob": "he046-zi3-ob.svg",
+   "bronze": "he046-zi3-bronze.svg",
+   "seal": "he046-zi3-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 47,
+  "char": "目",
+  "py": "mu4",
+  "site_pinyin": "m&#xF9;",
+  "meaning": "",
+  "files": {
+   "ob": "he047-mu4-ob.svg",
+   "bronze": "he047-mu4-bronze.svg",
+   "seal": "he047-mu4-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 48,
+  "char": "口",
+  "py": "kou3",
+  "site_pinyin": "k&#x1D2;u",
+  "meaning": "",
+  "files": {
+   "ob": "he048-kou3-ob.svg",
+   "bronze": "he048-kou3-bronze.svg",
+   "seal": "he048-kou3-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 49,
+  "char": "耳",
+  "py": "er3",
+  "site_pinyin": "&#x11B;r",
+  "meaning": "",
+  "files": {
+   "ob": "he049-er3-ob.svg",
+   "bronze": "he049-er3-bronze.svg",
+   "seal": "he049-er3-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 50,
+  "char": "手",
+  "py": "shou3",
+  "site_pinyin": "sh&#x1D2;u",
+  "meaning": "",
+  "files": {
+   "bronze": "he050-shou3-bronze.svg",
+   "seal": "he050-shou3-seal.svg"
+  },
+  "missing": [
+   "ob"
+  ],
+  "precursor": null
+ },
+ {
+  "index": 51,
+  "char": "足",
+  "py": "zu2",
+  "site_pinyin": "z&#xFA;",
+  "meaning": "",
+  "files": {
+   "ob": "he051-zu2-ob.svg",
+   "bronze": "he051-zu2-bronze.svg",
+   "seal": "he051-zu2-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 52,
+  "char": "心",
+  "py": "xin1",
+  "site_pinyin": "x&#x12B;n",
+  "meaning": "",
+  "files": {
+   "bronze": "he052-xin1-bronze.svg",
+   "seal": "he052-xin1-seal.svg"
+  },
+  "missing": [
+   "ob"
+  ],
+  "precursor": null
+ },
+ {
+  "index": 53,
+  "char": "见",
+  "py": "jian4",
+  "site_pinyin": "ji&#xE0;n",
+  "meaning": "",
+  "files": {
+   "ob": "he053-jian4-ob.svg",
+   "bronze": "he053-jian4-bronze.svg",
+   "seal": "he053-jian4-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 54,
+  "char": "走",
+  "py": "zou3",
+  "site_pinyin": "z&#x1D2;u",
+  "meaning": "",
+  "files": {
+   "bronze": "he054-zou3-bronze.svg",
+   "seal": "he054-zou3-seal.svg"
+  },
+  "missing": [
+   "ob"
+  ],
+  "precursor": null
+ },
+ {
+  "index": 55,
+  "char": "步",
+  "py": "bu4",
+  "site_pinyin": "b&#xF9;",
+  "meaning": "",
+  "files": {
+   "ob": "he055-bu4-ob.svg",
+   "bronze": "he055-bu4-bronze.svg",
+   "seal": "he055-bu4-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 56,
+  "char": "行",
+  "py": "xing2",
+  "site_pinyin": "x&#xED;ng",
+  "meaning": "",
+  "files": {
+   "ob": "he056-xing2-ob.svg",
+   "bronze": "he056-xing2-bronze.svg",
+   "seal": "he056-xing2-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 57,
+  "char": "立",
+  "py": "li4",
+  "site_pinyin": "l&#xEC;",
+  "meaning": "",
+  "files": {
+   "ob": "he057-li4-ob.svg",
+   "bronze": "he057-li4-bronze.svg",
+   "seal": "he057-li4-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 58,
+  "char": "休",
+  "py": "xiu1",
+  "site_pinyin": "xi&#x16B;",
+  "meaning": "",
+  "files": {
+   "ob": "he058-xiu1-ob.svg",
+   "bronze": "he058-xiu1-bronze.svg",
+   "seal": "he058-xiu1-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 59,
+  "char": "从",
+  "py": "cong2",
+  "site_pinyin": "c&#xF3;ng",
+  "meaning": "",
+  "files": {
+   "bronze": "he059-cong2-bronze.svg",
+   "seal": "he059-cong2-seal.svg"
+  },
+  "missing": [
+   "ob"
+  ],
+  "precursor": null
+ },
+ {
+  "index": 60,
+  "char": "得",
+  "py": "de2",
+  "site_pinyin": "d&#xE9;",
+  "meaning": "",
+  "files": {
+   "ob": "he060-de2-ob.svg",
+   "bronze": "he060-de2-bronze.svg",
+   "seal": "he060-de2-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 61,
+  "char": "及",
+  "py": "ji2",
+  "site_pinyin": "j&#xED;",
+  "meaning": "",
+  "files": {
+   "ob": "he061-ji2-ob.svg",
+   "bronze": "he061-ji2-bronze.svg",
+   "seal": "he061-ji2-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 62,
+  "char": "涉",
+  "py": "she4",
+  "site_pinyin": "sh&#xE8;",
+  "meaning": "",
+  "files": {
+   "ob": "he062-she4-ob.svg",
+   "bronze": "he062-she4-bronze.svg",
+   "seal": "he062-she4-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 63,
+  "char": "门",
+  "py": "men2",
+  "site_pinyin": "m&#xE9;n",
+  "meaning": "",
+  "files": {
+   "ob": "he063-men2-ob.svg",
+   "bronze": "he063-men2-bronze.svg",
+   "seal": "he063-men2-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 64,
+  "char": "户",
+  "py": "hu4",
+  "site_pinyin": "h&#xF9;",
+  "meaning": "",
+  "files": {
+   "ob": "he064-hu4-ob.svg",
+   "seal": "he064-hu4-seal.svg"
+  },
+  "missing": [
+   "bronze"
+  ],
+  "precursor": null
+ },
+ {
+  "index": 65,
+  "char": "车",
+  "py": "che1",
+  "site_pinyin": "ch&#x113;",
+  "meaning": "",
+  "files": {
+   "ob": "he065-che1-ob.svg",
+   "bronze": "he065-che1-bronze.svg",
+   "seal": "he065-che1-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 66,
+  "char": "舟",
+  "py": "zhou1",
+  "site_pinyin": "zh&#x14D;u",
+  "meaning": "",
+  "files": {
+   "ob": "he066-zhou1-ob.svg",
+   "bronze": "he066-zhou1-bronze.svg",
+   "seal": "he066-zhou1-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 67,
+  "char": "网",
+  "py": "wang3",
+  "site_pinyin": "w&#x1CE;ng",
+  "meaning": "",
+  "files": {
+   "bronze": "he067-wang3-bronze.svg",
+   "seal": "he067-wang3-seal.svg"
+  },
+  "missing": [
+   "ob"
+  ],
+  "precursor": null
+ },
+ {
+  "index": 68,
+  "char": "弓",
+  "py": "gong1",
+  "site_pinyin": "g&#x14D;ng",
+  "meaning": "",
+  "files": {
+   "ob": "he068-gong1-ob.svg",
+   "bronze": "he068-gong1-bronze.svg",
+   "seal": "he068-gong1-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 69,
+  "char": "矢",
+  "py": "shi3",
+  "site_pinyin": "sh&#x1D0;",
+  "meaning": "",
+  "files": {
+   "ob": "he069-shi3-ob.svg",
+   "bronze": "he069-shi3-bronze.svg",
+   "seal": "he069-shi3-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 70,
+  "char": "戈",
+  "py": "ge1",
+  "site_pinyin": "g&#x113;",
+  "meaning": "",
+  "files": {
+   "ob": "he070-ge1-ob.svg",
+   "bronze": "he070-ge1-bronze.svg",
+   "seal": "he070-ge1-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 71,
+  "char": "鼎",
+  "py": "ding3",
+  "site_pinyin": "d&#x1D0;ng",
+  "meaning": "",
+  "files": {
+   "ob": "he071-ding3-ob.svg",
+   "bronze": "he071-ding3-bronze.svg",
+   "seal": "he071-ding3-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 72,
+  "char": "册",
+  "py": "ce4",
+  "site_pinyin": "c&#xE8;",
+  "meaning": "",
+  "files": {
+   "ob": "he072-ce4-ob.svg",
+   "bronze": "he072-ce4-bronze.svg",
+   "seal": "he072-ce4-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 73,
+  "char": "衣",
+  "py": "yi1",
+  "site_pinyin": "y&#x12B;",
+  "meaning": "",
+  "files": {
+   "ob": "he073-yi1-ob.svg",
+   "bronze": "he073-yi1-bronze.svg",
+   "seal": "he073-yi1-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 74,
+  "char": "一",
+  "py": "yi1",
+  "site_pinyin": "y&#x12B;",
+  "meaning": "",
+  "files": {
+   "ob": "he074-yi1-ob.svg",
+   "bronze": "he074-yi1-bronze.svg",
+   "seal": "he074-yi1-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 75,
+  "char": "二",
+  "py": "er4",
+  "site_pinyin": "&#xE8;r",
+  "meaning": "",
+  "files": {
+   "ob": "he075-er4-ob.svg",
+   "bronze": "he075-er4-bronze.svg",
+   "seal": "he075-er4-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 76,
+  "char": "三",
+  "py": "san1",
+  "site_pinyin": "s&#x101;n",
+  "meaning": "",
+  "files": {
+   "ob": "he076-san1-ob.svg",
+   "bronze": "he076-san1-bronze.svg",
+   "seal": "he076-san1-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 77,
+  "char": "四",
+  "py": "si4",
+  "site_pinyin": "s&#xEC;",
+  "meaning": "",
+  "files": {
+   "ob": "he077-si4-ob.svg",
+   "bronze": "he077-si4-bronze.svg",
+   "seal": "he077-si4-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 78,
+  "char": "五",
+  "py": "wu3",
+  "site_pinyin": "w&#x1D4;",
+  "meaning": "",
+  "files": {
+   "ob": "he078-wu3-ob.svg",
+   "bronze": "he078-wu3-bronze.svg",
+   "seal": "he078-wu3-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 79,
+  "char": "六",
+  "py": "liu4",
+  "site_pinyin": "li&#xF9;",
+  "meaning": "",
+  "files": {
+   "ob": "he079-liu4-ob.svg",
+   "bronze": "he079-liu4-bronze.svg",
+   "seal": "he079-liu4-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 80,
+  "char": "七",
+  "py": "qi1",
+  "site_pinyin": "q&#x12B;",
+  "meaning": "",
+  "files": {
+   "ob": "he080-qi1-ob.svg",
+   "bronze": "he080-qi1-bronze.svg",
+   "seal": "he080-qi1-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 81,
+  "char": "八",
+  "py": "ba1",
+  "site_pinyin": "b&#x101;",
+  "meaning": "",
+  "files": {
+   "ob": "he081-ba1-ob.svg",
+   "bronze": "he081-ba1-bronze.svg",
+   "seal": "he081-ba1-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 82,
+  "char": "九",
+  "py": "jiu3",
+  "site_pinyin": "ji&#x1D4;",
+  "meaning": "",
+  "files": {
+   "ob": "he082-jiu3-ob.svg",
+   "bronze": "he082-jiu3-bronze.svg",
+   "seal": "he082-jiu3-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 83,
+  "char": "十",
+  "py": "shi2",
+  "site_pinyin": "sh&#xED;",
+  "meaning": "",
+  "files": {
+   "ob": "he083-shi2-ob.svg",
+   "bronze": "he083-shi2-bronze.svg",
+   "seal": "he083-shi2-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 84,
+  "char": "万",
+  "py": "wan4",
+  "site_pinyin": "w&#xE0;n",
+  "meaning": "",
+  "files": {
+   "ob": "he084-wan4-ob.svg",
+   "bronze": "he084-wan4-bronze.svg",
+   "seal": "he084-wan4-seal.svg"
+  },
+  "missing": [],
+  "precursor": {
+   "char": "萬",
+   "note": "繁体作萬，像一只蝎子",
+   "from": "he107"
+  }
+ },
+ {
+  "index": 85,
+  "char": "上",
+  "py": "shang4",
+  "site_pinyin": "sh&#xE0;ng",
+  "meaning": "",
+  "files": {
+   "ob": "he085-shang4-ob.svg",
+   "bronze": "he085-shang4-bronze.svg",
+   "seal": "he085-shang4-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 86,
+  "char": "下",
+  "py": "xia4",
+  "site_pinyin": "xi&#xE0;",
+  "meaning": "",
+  "files": {
+   "ob": "he086-xia4-ob.svg",
+   "bronze": "he086-xia4-bronze.svg",
+   "seal": "he086-xia4-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 87,
+  "char": "中",
+  "py": "zhong1",
+  "site_pinyin": "zh&#x14D;ng",
+  "meaning": "",
+  "files": {
+   "ob": "he087-zhong1-ob.svg",
+   "bronze": "he087-zhong1-bronze.svg",
+   "seal": "he087-zhong1-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 88,
+  "char": "东",
+  "py": "dong1",
+  "site_pinyin": "d&#x14D;ng",
+  "meaning": "",
+  "files": {
+   "ob": "he088-dong1-ob.svg",
+   "bronze": "he088-dong1-bronze.svg",
+   "seal": "he088-dong1-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 89,
+  "char": "西",
+  "py": "xi1",
+  "site_pinyin": "xi",
+  "meaning": "",
+  "files": {
+   "ob": "he089-xi1-ob.svg",
+   "bronze": "he089-xi1-bronze.svg",
+   "seal": "he089-xi1-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 90,
+  "char": "南",
+  "py": "nan2",
+  "site_pinyin": "n&#xE1;n",
+  "meaning": "",
+  "files": {
+   "ob": "he090-nan2-ob.svg",
+   "bronze": "he090-nan2-bronze.svg",
+   "seal": "he090-nan2-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 91,
+  "char": "北",
+  "py": "bei3",
+  "site_pinyin": "b&#x11B;i",
+  "meaning": "",
+  "files": {
+   "ob": "he091-bei3-ob.svg",
+   "bronze": "he091-bei3-bronze.svg",
+   "seal": "he091-bei3-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 92,
+  "char": "家",
+  "py": "jia1",
+  "site_pinyin": "ji&#x101;",
+  "meaning": "",
+  "files": {
+   "bronze": "he092-jia1-bronze.svg",
+   "seal": "he092-jia1-seal.svg"
+  },
+  "missing": [
+   "ob"
+  ],
+  "precursor": null
+ },
+ {
+  "index": 93,
+  "char": "安",
+  "py": "an1",
+  "site_pinyin": "&#x101;n",
+  "meaning": "",
+  "files": {
+   "ob": "he093-an1-ob.svg",
+   "bronze": "he093-an1-bronze.svg",
+   "seal": "he093-an1-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 94,
+  "char": "明",
+  "py": "ming2",
+  "site_pinyin": "m&#xED;ng",
+  "meaning": "",
+  "files": {
+   "ob": "he094-ming2-ob.svg",
+   "bronze": "he094-ming2-bronze.svg",
+   "seal": "he094-ming2-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 95,
+  "char": "旦",
+  "py": "dan4",
+  "site_pinyin": "d&#xE0;n",
+  "meaning": "",
+  "files": {
+   "ob": "he095-dan4-ob.svg",
+   "bronze": "he095-dan4-bronze.svg",
+   "seal": "he095-dan4-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 96,
+  "char": "莫",
+  "py": "mo4",
+  "site_pinyin": "m&#xF2;",
+  "meaning": "",
+  "files": {
+   "ob": "he096-mo4-ob.svg",
+   "bronze": "he096-mo4-bronze.svg",
+   "seal": "he096-mo4-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 97,
+  "char": "春",
+  "py": "chun1",
+  "site_pinyin": "ch&#x16B;n",
+  "meaning": "",
+  "files": {
+   "ob": "he097-chun1-ob.svg",
+   "bronze": "he097-chun1-bronze.svg",
+   "seal": "he097-chun1-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 98,
+  "char": "秋",
+  "py": "qiu1",
+  "site_pinyin": "qi&#x16B;",
+  "meaning": "",
+  "files": {
+   "seal": "he098-qiu1-seal.svg"
+  },
+  "missing": [
+   "ob",
+   "bronze"
+  ],
+  "precursor": null
+ },
+ {
+  "index": 99,
+  "char": "年",
+  "py": "nian2",
+  "site_pinyin": "ni&#xE1;n",
+  "meaning": "",
+  "files": {
+   "ob": "he099-nian2-ob.svg",
+   "bronze": "he099-nian2-bronze.svg",
+   "seal": "he099-nian2-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ },
+ {
+  "index": 100,
+  "char": "学",
+  "py": "xue2",
+  "site_pinyin": "xu&#xE9;",
+  "meaning": "",
+  "files": {
+   "ob": "he100-xue2-ob.svg",
+   "bronze": "he100-xue2-bronze.svg",
+   "seal": "he100-xue2-seal.svg"
+  },
+  "missing": [],
+  "precursor": null
+ }
+]

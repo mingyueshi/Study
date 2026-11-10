@@ -13,6 +13,8 @@
      data-mars-life="{% url 'mystery-case' 'mars-life' %}" data-dark-matter="{% url 'mystery-case' 'dark-matter' %}"
      data-stars="{% url 'astronomy-index' %}" data-poetry="{% url 'poetry-index' %}"
      data-idiom-stories="{% url 'idiom-stories' %}" data-elements="{% url 'science-elements' %}"
+     data-dictionary="{% url 'dictionary' %}" data-stroke="{% url 'hanzi-detail' '日' %}"
+     data-polyphones="{% url 'hanzi-polyphones' %}"
      {% endif %}>
   <nav class="study-topic-nav" aria-label="{{ study_label }}专题导航">
     <a href="{% url 'home' %}?area={{ study_area }}#modules-title">← 学习广场 · {{ study_label }}</a>

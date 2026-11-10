@@ -7,6 +7,11 @@ from lexicon.reference_views import redirect_lookup
 
 from .property_labels import LABELS
 
+try:
+    from .evolution_chars import CHARS as EVOLUTION_HALL_CHARS
+except ImportError:  # 汉字演变馆数据尚未生成时照常工作
+    EVOLUTION_HALL_CHARS = frozenset()
+
 GROUPS = {
     "Unihan_DictionaryIndices.txt": "字典索引",
     "Unihan_DictionaryLikeData.txt": "字典资料",
@@ -69,5 +74,6 @@ def detail(request, character):
             "has_unihan": row is not None,
             "asset": asset,
             "properties": properties,
+            "in_evolution_hall": character in EVOLUTION_HALL_CHARS,
         },
     )

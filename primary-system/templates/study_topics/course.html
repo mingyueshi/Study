@@ -36,7 +36,7 @@
         <div class="toolbar" role="search" aria-label="{{ course_title }}学习工具">
           <div class="search-box">
             <span aria-hidden="true">🔎</span>
-            <input id="search" type="search" aria-label="搜索全部知识点" placeholder="搜索知识点、例题和易错点…" autocomplete="off">
+            <input id="search" type="search" aria-label="搜索全部知识点" placeholder="{% if course_slug == 'hanzi-evo' %}搜索字、拼音或故事里的词…{% else %}搜索知识点、例题和易错点…{% endif %}" autocomplete="off">
           </div>
           <button type="button" class="play-btn" data-act="print">打印当前内容</button>
         </div>

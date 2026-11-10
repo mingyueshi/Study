@@ -18,6 +18,7 @@ COURSES = (
     ('geography', 'astronomy-study', 'astro', '天文探索', ('astronomy-index', 'mysteries')),
     ('chinese', 'literature-study', 'lit', '文学常识', ('poetry-index', 'idiom-stories')),
     ('science', 'science-lab', 'sci', '科学实验室', ('science-elements',)),
+    ('chinese', 'hanzi-evolution', 'hanzi-evo', '汉字演变馆', ('dictionary', 'hanzi-polyphones')),
 )
 
 

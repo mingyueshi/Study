@@ -1,4 +1,5 @@
 from django.test import TestCase
+from django.urls import reverse
 from reference_library.models import Dataset
 from .models import HanziAsset, UnihanCharacter, UnihanProperty
 
@@ -55,3 +56,14 @@ class HanziViewTests(TestCase):
         self.assertContains(response, "translate(0,776) scale(1,-1)")
         self.assertContains(response, "stroke-next")
         self.assertContains(response, "stroke-reset")
+
+    def test_evolution_hall_backlink_only_for_selected_chars(self):
+        """馆藏 100 字的详情页有「看字源」反链，非馆藏字没有。"""
+        self.assertContains(self.client.get("/hanzi/学/"), reverse("hanzi-evolution"))
+        self.assertNotContains(self.client.get("/hanzi/𠀀/"), "hanzi-evolution")
+
+    def test_polyphones_page_links_to_evolution_hall_for_selected_chars(self):
+        self.assertContains(
+            self.client.get("/hanzi/polyphones/", {"char": "学"}),
+            reverse("hanzi-evolution"),
+        )
