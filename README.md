@@ -7,15 +7,15 @@
 | 目录 | 系统 | 面向 | 状态 |
 |---|---|---|---|
 | [`primary-system/`](primary-system/) | 乐学堂统一系统 | 多年级、多账号、多教材、多学科 | 数据库、Nova 后台、个人进度、开放词库与统一查字查词、历史与地理专题、天文探索、文学常识、科学实验室、未解之谜研究所、人类起源 |
-| [`personal-learning/`](personal-learning/) | 个人学习系统 | 个人知识与实践积累 | 英文学习（TechLex）可用，AI 基础篇可学习 |
+| [`personal-learning/`](personal-learning/) | 个人学习系统 | 个人知识与实践积累 | 英文学习、AI 开发提示词与工具、开发命令、Python / Vue / Django 学习可使用 |
 
-**个人学习系统**：独立目录与总导航，当前包含英文学习和 AI 基础篇（6 阶段、24 个概念、自检与练习）。英文目录中的 TechLex 已有 12 大分类、205 个术语（含 57 个缩写）、24 条双语工作表达，支持点读、搜索、学习状态筛选与本机进度；以桌面宽屏和竖屏阅读为主。
+**个人学习系统**：独立目录与总导航，当前包含英文学习、AI 开发提示词与工具（7 类、36 个模板、8 个模型家族与 13 个工具介绍；基础知识折叠查阅，保留 24 个概念与 9 个实操），以及开发命令（12 类、326 条，含 Django）、语言与框架（Python、Vue、Django，共 30 节课与 3 个实操项目）。英文目录中的 TechLex 已有 12 大分类、205 个术语（含 57 个缩写）、24 条双语工作表达，支持点读、搜索、学习状态筛选与本机进度；以桌面宽屏和竖屏阅读为主。
 
 快速开始：
 
 - 乐学堂统一系统可在 [`primary-system/`](primary-system/) 运行 `python3.12 bootstrap.py --serve`。目录自带离线基础包和 296 道可练题，详见[本地运行](primary-system/README.md#本地运行)。
 - 小学课程维护：教材、专题、素材、生成命令和测试见[小学课程文件源](primary-system/content_sources/README.md)。
-- 个人学习：双击 [`personal-learning/index.html`](personal-learning/index.html)，从总导航进入英文学习或 AI 基础篇；详见 [`personal-learning/README.md`](personal-learning/README.md)。
+- 个人学习：双击 [`personal-learning/index.html`](personal-learning/index.html)，从总导航进入英文学习、AI 开发提示词、开发命令或语言与框架；详见 [`personal-learning/README.md`](personal-learning/README.md)。
 
 原 `primary/` 双击离线版已归档，可从 Git 修订 `fb47d0b` 下恢复。小学课程统一在 `primary-system/` 使用和维护。
 

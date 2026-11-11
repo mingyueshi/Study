@@ -86,9 +86,15 @@ class EnglishTextbookTests(PlatformFixture):
         self.assertContains(response, 'dialogue-card')
         self.assertContains(response, 'Can you jump high, Daming?')
         self.assertContains(response, '整段连读')
+        self.assertContains(response, 'data-say-seq="Can you jump high, Daming?"')
+        self.assertContains(response, 'data-say-seq="Yes, I can."')
+        self.assertContains(response, 'id="tts-interval"')
+        self.assertContains(response, 'id="tts-repeat"')
         words = self.client.get('/books/primary-english-first/?unit=4a-u1')
         self.assertContains(words, 'class="wcard"', count=1)
         self.assertContains(words, '1 个单词')
+        self.assertContains(words, 'id="tts-interval"')
+        self.assertContains(words, 'id="tts-repeat"')
         self.assertNotContains(words, item.title)
 
     def test_seed_renames_english_module_once(self):

@@ -11,7 +11,7 @@ function files(directory) {
 }
 let links = 0;
 const pages = files(root).filter(file => file.endsWith('.html'));
-for (const entry of ['index.html', 'english/index.html', 'english/techlex/index.html', 'ai/index.html', 'dev/index.html']) {
+for (const entry of ['index.html', 'english/index.html', 'english/techlex/index.html', 'ai/index.html', 'dev/index.html', 'coding/index.html']) {
   assert.ok(pages.includes(path.join(root, entry)), entry + ' 入口缺失');
 }
 for (const file of pages) {
@@ -19,6 +19,7 @@ for (const file of pages) {
   assert.match(html, /data-theme-toggle/, '每个学习页面应能切换阅读主题');
   assert.match(html, /src="[^"]*assets\/theme.js"/, '应在页面头部预先应用阅读主题');
   assert.match(html, /aria-label="学习系统导航"/, path.relative(root, file) + ' 缺少跨目录导航');
+  assert.match(html, /href="[^"]*coding\/index.html"[^>]*>语言与框架<|href="index.html" aria-current="page">语言与框架</, '各入口应可切换到语言与框架');
   assert.doesNotMatch(html, /乐学堂|小学版|(?:href|src)="[^"]*\/primary(?:-system)?\//, '独立系统不应有其他系统的入口');
   for (const match of html.matchAll(/(?:href|src)="([^"]+)"/g)) {
     const url = match[1];
@@ -30,9 +31,16 @@ for (const file of pages) {
   }
 }
 const ai = fs.readFileSync(path.join(root, 'ai/index.html'), 'utf8');
-assert.match(ai, /AI 学习 · 基础篇/);
+assert.match(ai, /AI 开发提示词 · 个人学习/);
+assert.match(ai, /src="ai-prompts-data.js"/);
+assert.match(ai, /src="ai-prompts-ui.js"/);
+assert.match(ai, /<details class="foundation-directory" id="foundationDirectory">/);
 assert.match(ai, /src="ai-data.js"/);
 assert.match(ai, /src="ai-app.js"/);
+const coding = fs.readFileSync(path.join(root, 'coding/index.html'), 'utf8');
+assert.match(coding, /语言与框架 · 个人学习/);
+assert.match(coding, /src="coding-data.js"/);
+assert.match(coding, /src="coding-app.js"/);
 const dev = fs.readFileSync(path.join(root, 'dev/index.html'), 'utf8');
 assert.match(dev, /开发命令 · 个人学习/);
 assert.match(dev, /src="dev-data.js"/);

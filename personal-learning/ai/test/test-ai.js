@@ -39,3 +39,5 @@ assert.equal(state.notes.llm.length, 2000);
 assert.equal(state.lastLesson, 'ai');
 assert.equal(normalize({ lastLesson: 'removed' }, course).lastLesson, null);
 console.log('✅ AI 课程：' + stages.size + ' 个阶段、' + count + ' 个概念、自检与练习完整；进度、答案和笔记校验通过');
+require('./test-practice.js');
+require('./test-prompts.js');

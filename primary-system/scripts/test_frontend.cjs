@@ -196,8 +196,10 @@ test('a self-check-only round displays its assessment without objective stars', 
   assert.equal(page.get('[data-qb-stars]').hidden, true);
 });
 
-function speechPage({ supported = true, throws = false, controls = false, stored = {}, voices = [] } = {}) {
+function speechPage({ supported = true, throws = false, controls = false, sequenceControls = false, stored = {}, voices = [] } = {}) {
   const button = element(), items = [element(), element()], clicks = [], spoken = [];
+  const buttons = [button], timers = new Map(), lifecycle = {};
+  let time = 0, timerId = 0;
   button.textContent = '连读';
   button.dataset = { ttsSequence: '#cards', ttsRate: '0.78' };
   items[0].dataset.saySeq = 'A long sentence that must finish before the next word.';
@@ -210,6 +212,11 @@ function speechPage({ supported = true, throws = false, controls = false, stored
     'tts-rate-value': element(), 'tts-volume-value': element(), 'tts-voice': element(),
     'tts-status': element(), 'tts-preview': element(),
   } : {};
+  if (sequenceControls) Object.assign(fields, {
+    'tts-interval': Object.assign(element(), { id: 'tts-interval', min: '0', max: '10', step: '1', value: '3' }),
+    'tts-repeat': Object.assign(element(), { id: 'tts-repeat', min: '1', max: '5', step: '1', value: '1' }),
+    'tts-interval-value': element(), 'tts-repeat-value': element(), 'tts-sequence-status': element(),
+  });
   const synth = {
     getVoices: () => voices, addEventListener() {},
     get speaking() { return current !== null; }, pending: false,
@@ -225,7 +232,7 @@ function speechPage({ supported = true, throws = false, controls = false, stored
     },
   };
   const context = vm.createContext({
-    window: supported ? { speechSynthesis: synth } : {},
+    window: { ...(supported ? { speechSynthesis: synth } : {}), addEventListener: (event, fn) => { lifecycle[event] = fn; } },
     localStorage: { getItem: (key) => storage[key] || null, setItem: (key, value) => { storage[key] = value; } },
     SpeechSynthesisUtterance: function (text) { this.text = text; },
     document: {
@@ -234,8 +241,10 @@ function speechPage({ supported = true, throws = false, controls = false, stored
       querySelector: () => ({ querySelectorAll: () => items }),
       querySelectorAll: (selector) => selector === '.tts-playing'
         ? items.filter((item) => item.classList.contains('tts-playing'))
-        : button.classList.contains('tts-active') ? [button] : [],
+        : buttons.filter((button) => button.classList.contains('tts-active')),
     },
+    setTimeout(callback, delay) { const id = ++timerId; timers.set(id, { callback, at: time + delay }); return id; },
+    clearTimeout(id) { timers.delete(id); },
     setInterval() { throw new Error('A timer must not advance speech'); },
   });
   run('speech.js', context);
@@ -244,7 +253,25 @@ function speechPage({ supported = true, throws = false, controls = false, stored
     preventDefault() {}, target: { closest: (value) => value === selector ? target : null },
   }));
   return {
-    button, spoken, items, fields, storage, click: () => click(button, '[data-tts-sequence]'),
+    button, spoken, items, fields, storage, lifecycle, timers, click: () => click(button, '[data-tts-sequence]'),
+    clickOther() {
+      const other = Object.assign(element(), { textContent: '另一段连读', dataset: { ttsSequence: '#other' } });
+      buttons.push(other);
+      click(other, '[data-tts-sequence]');
+      return other;
+    },
+    advance(ms) {
+      const end = time + ms;
+      for (;;) {
+        const due = [...timers.entries()].filter(([, timer]) => timer.at <= end).sort((a, b) => a[1].at - b[1].at)[0];
+        if (!due) break;
+        const [id, timer] = due;
+        time = timer.at;
+        timers.delete(id);
+        timer.callback();
+      }
+      time = end;
+    },
     adjust(name, value) { fields['tts-' + name].value = String(value); fields['tts-' + name].handlers.input(); },
     chooseVoice(name) { fields['tts-voice'].value = name; fields['tts-voice'].handlers.change(); },
     say(text) { click({ dataset: { say: text } }, '[data-say]'); },
@@ -354,6 +381,131 @@ test('invalid saved playback settings fall back safely and unsupported controls 
   assert.equal(unsupported.fields['tts-rate'].disabled, true);
   assert.equal(unsupported.fields['tts-preview'].disabled, true);
   assert.match(unsupported.fields['tts-status'].textContent, /不支持/);
+});
+
+test('textbook follow-along waits three seconds after speech ends, including the final item', () => {
+  const page = speechPage({ sequenceControls: true });
+  page.click();
+  page.advance(30000);
+  assert.equal(page.spoken.length, 1);
+  assert.equal(page.timers.size, 0);
+  page.finish();
+  assert.match(page.fields['tts-sequence-status'].textContent, /轮到你跟读/);
+  assert.ok(page.items[0].classList.contains('tts-playing'));
+  page.advance(2999);
+  assert.equal(page.spoken.length, 1);
+  page.advance(1);
+  assert.equal(page.spoken[1].text, 'apple');
+  assert.ok(page.items[1].classList.contains('tts-playing'));
+  page.finish();
+  assert.ok(page.button.classList.contains('tts-active'));
+  page.advance(3000);
+  assert.equal(page.button.textContent, '连读');
+  assert.match(page.fields['tts-sequence-status'].textContent, /完成/);
+  assert.ok(page.items.every((item) => !item.classList.contains('tts-playing')));
+});
+
+test('textbook repeats each item before advancing and leaves a gap after every repetition', () => {
+  const page = speechPage({ sequenceControls: true });
+  page.adjust('interval', 2);
+  page.adjust('repeat', 3);
+  page.click();
+  for (let i = 0; i < 6; i += 1) {
+    assert.equal(page.spoken.length, i + 1);
+    assert.equal(page.spoken[i].text, page.items[Math.floor(i / 3)].dataset.saySeq);
+    assert.match(page.fields['tts-sequence-status'].textContent, new RegExp(`第 ${i % 3 + 1}／3 遍`));
+    page.finish();
+    page.advance(1999);
+    assert.equal(page.spoken.length, i + 1);
+    page.advance(1);
+  }
+  assert.equal(page.spoken.length, 6);
+  assert.equal(page.button.textContent, '连读');
+});
+
+test('zero interval and five repetitions play exactly five times per item without timers', () => {
+  const page = speechPage({ sequenceControls: true });
+  page.adjust('interval', 0);
+  page.adjust('repeat', 5);
+  page.click();
+  for (let i = 0; i < 10; i += 1) {
+    assert.equal(page.spoken[i].text, page.items[Math.floor(i / 5)].dataset.saySeq);
+    page.finish();
+  }
+  assert.equal(page.spoken.length, 10);
+  assert.equal(page.timers.size, 0);
+  assert.equal(page.button.textContent, '连读');
+});
+
+test('stopping or replacing a sequence during a gap invalidates even late timer and speech callbacks', () => {
+  const voices = [{ name: 'English US', lang: 'en-US', localService: true }];
+  for (const action of ['stop', 'tap', 'voice', 'pagehide', 'other']) {
+    const page = speechPage({ controls: true, sequenceControls: true, voices });
+    page.click();
+    const oldSpeech = page.spoken[0];
+    page.finish();
+    const lateTimer = [...page.timers.values()][0].callback;
+    if (action === 'stop') page.click();
+    if (action === 'tap') page.say('pear');
+    if (action === 'voice') page.chooseVoice('English US');
+    if (action === 'pagehide') page.lifecycle.pagehide();
+    if (action === 'other') page.clickOther();
+    assert.equal(page.timers.size, 0);
+    assert.equal(page.button.textContent, '连读');
+    if (action !== 'other') page.click();
+    const count = page.spoken.length;
+    lateTimer();
+    oldSpeech.onend();
+    oldSpeech.onerror({ error: 'canceled' });
+    page.advance(30000);
+    assert.equal(page.spoken.length, count, action);
+  }
+});
+
+test('textbook settings persist separately and changes apply on the next sequence', () => {
+  const page = speechPage({ controls: true, sequenceControls: true });
+  page.adjust('repeat', 2);
+  page.click();
+  page.adjust('interval', 0);
+  page.adjust('repeat', 1);
+  page.adjust('rate', 0.6);
+  page.finish();
+  page.advance(2999);
+  assert.equal(page.spoken.length, 1);
+  page.advance(1);
+  assert.equal(page.spoken[1].text, page.spoken[0].text);
+  page.click();
+  page.click();
+  page.finish();
+  assert.equal(page.spoken.at(-1).text, 'apple');
+  assert.equal(page.timers.size, 0);
+  const restored = speechPage({ sequenceControls: true, stored: page.storage });
+  assert.equal(restored.fields['tts-interval-value'].textContent, '0 秒');
+  assert.equal(restored.fields['tts-repeat-value'].textContent, '1 次');
+  assert.deepEqual(JSON.parse(page.storage.textbook_tts_sequence_pref_v1), { interval: 0, repeat: 1 });
+  assert.deepEqual(JSON.parse(page.storage.words_tts_pref_v1), { rate: 0.6 });
+  const otherPage = speechPage({ stored: { textbook_tts_sequence_pref_v1: '{"interval":10,"repeat":5}' } });
+  otherPage.click();
+  otherPage.finish();
+  assert.equal(otherPage.spoken[1].text, 'apple');
+});
+
+test('invalid textbook settings fall back and unavailable speech disables follow-along controls', () => {
+  for (const saved of ['broken JSON', 'null', '[]', 'true', '{"interval":-1,"repeat":0}', '{"interval":11,"repeat":6}', '{"interval":1.5,"repeat":2.5}']) {
+    const page = speechPage({ sequenceControls: true, stored: { textbook_tts_sequence_pref_v1: saved } });
+    assert.equal(Number(page.fields['tts-interval'].value), 3);
+    assert.equal(Number(page.fields['tts-repeat'].value), 1);
+  }
+  for (const options of [{ supported: false }, { throws: true }]) {
+    const page = speechPage({ sequenceControls: true, ...options });
+    page.click();
+    assert.equal(page.timers.size, 0);
+    assert.equal(page.button.textContent, '连读');
+    if (options.supported === false) {
+      assert.equal(page.fields['tts-interval'].disabled, true);
+      assert.equal(page.fields['tts-repeat'].disabled, true);
+    }
+  }
 });
 
 function wordsPage(fetch, extraWords = [], search = '') {

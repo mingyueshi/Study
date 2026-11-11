@@ -9,6 +9,9 @@
 .tts-control-slider input[type="range"] { display: block; min-height: 46px; padding: 0; border: 0; margin: 6px 0 0; background: transparent; accent-color: #487e9c; cursor: pointer; }
 .tts-controls-grid button { min-height: 46px; }
 .tts-controls-note { margin: 10px 0 0; font-size: 13px; color: var(--muted); line-height: 1.7; }
+.tts-sequence-settings { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)) minmax(0, 1.3fr); gap: 18px; align-items: center; margin-top: 16px; padding-top: 16px; border-top: 1px dashed var(--w-line, #c3ddeb); }
+.tts-sequence-settings label { font-size: 16px; font-weight: 700; }
+.tts-sequence-status { margin: 0; padding: 12px 16px; border-radius: 12px; background: #eff8f0; color: #376b4e; font-size: 16px; line-height: 1.7; }
 
 /* 折叠容器：模块详情/语法页把朗读设置收成一行，要点开才展开。 */
 .tts-details { margin: 0 0 20px; }
@@ -23,6 +26,8 @@
 
 @container tts-settings (max-width: 700px) {
   .tts-controls-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 18px; }
+  .tts-sequence-settings { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 18px; }
+  .tts-sequence-status { grid-column: 1 / -1; }
   .tts-voice-control { grid-column: 1 / -1; }
   .tts-controls-grid button { justify-self: start; }
 }

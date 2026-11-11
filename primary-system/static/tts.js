@@ -10,14 +10,26 @@
 
   const rateControl = document.getElementById('tts-rate');
   const volumeControl = document.getElementById('tts-volume');
+  const intervalControl = document.getElementById('tts-interval');
+  const repeatControl = document.getElementById('tts-repeat');
+  const sequenceStatus = document.getElementById('tts-sequence-status');
   // Reuse the original key so existing scene-word settings carry over to textbooks.
   const playbackKey = 'words_tts_pref_v1';
-  let playback = {};
-  try { playback = JSON.parse(localStorage.getItem(playbackKey) || '{}') || {}; } catch (e) { /* 使用默认设置 */ }
-  const bindSlider = (control, name, fallback, label) => {
+  const sequenceKey = 'textbook_tts_sequence_pref_v1';
+  const readPreferences = (key) => {
+    try {
+      const saved = JSON.parse(localStorage.getItem(key) || '{}');
+      if (saved && typeof saved === 'object' && !Array.isArray(saved)) return saved;
+    } catch (e) { /* 使用默认设置 */ }
+    return {};
+  };
+  const playback = readPreferences(playbackKey);
+  const sequencePreferences = readPreferences(sequenceKey);
+  const bindSlider = (control, name, fallback, label, preferences = playback, key = playbackKey) => {
     if (!control) return;
-    const saved = playback[name];
-    control.value = Number.isFinite(saved) && saved >= Number(control.min) && saved <= Number(control.max) ? saved : fallback;
+    const saved = preferences[name];
+    control.value = Number.isFinite(saved) && saved >= Number(control.min) && saved <= Number(control.max)
+      && (Number(control.step) !== 1 || Number.isInteger(saved)) ? saved : fallback;
     const update = () => {
       const value = Number(control.value);
       const text = label(value);
@@ -28,14 +40,14 @@
     };
     update();
     control.addEventListener('input', () => {
-      // Textbook and scene pages share these playback options and the voice preference.
-      playback = { rate: rateControl ? Number(rateControl.value) : 0.8, volume: volumeControl ? Number(volumeControl.value) : 1 };
-      update();
-      try { localStorage.setItem(playbackKey, JSON.stringify(playback)); } catch (e) { /* 仍可在本页使用 */ }
+      preferences[name] = update();
+      try { localStorage.setItem(key, JSON.stringify(preferences)); } catch (e) { /* 仍可在本页使用 */ }
     });
   };
   bindSlider(rateControl, 'rate', 0.8, (value) => value.toFixed(2) + '×');
   bindSlider(volumeControl, 'volume', 1, (value) => Math.round(value * 100) + '%');
+  bindSlider(intervalControl, 'interval', 3, (value) => value + ' 秒', sequencePreferences, sequenceKey);
+  bindSlider(repeatControl, 'repeat', 1, (value) => value + ' 次', sequencePreferences, sequenceKey);
   const readingOptions = (options = {}) => ({
     ...options,
     ...(rateControl ? { rate: Number(rateControl.value) } : {}),
@@ -53,16 +65,19 @@
     speak(target.dataset.say, { rate: Number.isFinite(rate) ? rate : undefined });
   });
 
-  /* 连读：步进高亮 + 滚动跟随；再次点击停止 */
+  /* 连读：发音结束后留出跟读时间，同一项读够次数再前进；再次点击停止。 */
   let activeSequence = null;
 
   function clearPlaying() {
     document.querySelectorAll('.tts-playing').forEach((el) => el.classList.remove('tts-playing'));
   }
 
-  function stopSequence() {
+  function stopSequence(message = '连读已停止，可以再选一段练习。') {
     // 先使旧回调失效；浏览器 cancel 可能同步或异步触发 end/error。
+    const previous = activeSequence;
     activeSequence = null;
+    if (previous) clearTimeout(previous.timer);
+    if (previous && sequenceStatus) sequenceStatus.textContent = message;
     clearPlaying();
     document.querySelectorAll('[data-tts-sequence].tts-active').forEach((button) => {
       button.classList.remove('tts-active');
@@ -80,24 +95,43 @@
     if (!items.length) return;
     stopSequence();
     const rate = parseFloat(button.dataset.ttsRate) || 0.78;
-    const sequence = { button };
+    // 仅提供教材连读设置的页面启用间隔和重复，其他页面保持原有节奏。
+    const interval = intervalControl ? Number(intervalControl.value) : 0;
+    const repeat = repeatControl ? Number(repeatControl.value) : 1;
+    const sequence = { button, timer: null };
     activeSequence = sequence;
     button.dataset.ttsLabel = button.textContent;
     button.classList.add('tts-active');
     button.textContent = '⏹ 停止连读';
     let index = 0;
+    let iteration = 0;
     const step = () => {
       if (activeSequence !== sequence) return;
-      if (index >= items.length) { stopSequence(); return; }
+      if (index >= items.length) { stopSequence('本次连读完成啦！'); return; }
       clearPlaying();
       const item = items[index];
       item.el.classList.add('tts-playing');
-      item.el.scrollIntoView({ block: 'nearest', behavior: window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
-      index += 1;
+      if (iteration === 0) item.el.scrollIntoView({ block: 'nearest', behavior: window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+      if (sequenceStatus) sequenceStatus.textContent = `正在朗读第 ${index + 1}／${items.length} 项，第 ${iteration + 1}／${repeat} 遍。`;
+      let settled = false;
       speak(item.text, {
         rate,
-        onend: step,
-        onerror: () => { if (activeSequence === sequence) stopSequence(); },
+        onend: () => {
+          if (activeSequence !== sequence || settled) return;
+          settled = true;
+          iteration += 1;
+          if (iteration >= repeat) { index += 1; iteration = 0; }
+          if (interval > 0) {
+            if (sequenceStatus) sequenceStatus.textContent = `轮到你跟读啦！留出 ${interval} 秒，试着读一读。`;
+            sequence.timer = setTimeout(() => { sequence.timer = null; step(); }, interval * 1000);
+          } else step();
+        },
+        onerror: () => {
+          if (activeSequence === sequence && !settled) {
+            settled = true;
+            stopSequence('朗读遇到问题，请再试一次。');
+          }
+        },
       });
     };
     step();
@@ -110,6 +144,7 @@
     if (activeSequence?.button === button) stopSequence();
     else playSequence(button);
   });
+  window.addEventListener('pagehide', () => stopSequence());
 
   /* 发音人偏好（profile、教材与场景页） */
   const select = document.getElementById('tts-voice');
@@ -149,7 +184,7 @@
   if (!('speechSynthesis' in window)) {
     const status = document.getElementById('tts-status');
     if (status) status.textContent = '当前浏览器不支持语音朗读，可换用支持朗读的浏览器。';
-    [rateControl, volumeControl, document.getElementById('tts-preview')].forEach((control) => { if (control) control.disabled = true; });
+    [rateControl, volumeControl, intervalControl, repeatControl, document.getElementById('tts-preview')].forEach((control) => { if (control) control.disabled = true; });
   }
   window.TTS = { stopSequence, speak };
 })();

@@ -1,5 +1,5 @@
 {% load static %}
-<link rel="stylesheet" href="{% static 'tts.css' %}?v=3">
+<link rel="stylesheet" href="{% static 'tts.css' %}?v=4">
 <fieldset class="tts-settings" aria-describedby="tts-status">
   <legend>朗读设置</legend>
   <div class="tts-controls-grid">
@@ -16,5 +16,19 @@
     </div>
     <button class="button small" id="tts-preview" type="button" data-say="Hello! Nice to meet you.">试听</button>
   </div>
-  <p id="tts-status" class="tts-controls-note">与场景单词、教材同步单词共用设置，保存在当前浏览器；调整后从下一次发音生效。</p>
+  {% if sequence_settings %}
+  <div class="tts-sequence-settings" aria-label="教材连读设置">
+    <div class="tts-control-slider">
+      <label for="tts-interval">跟读间隔 <output id="tts-interval-value" for="tts-interval">3 秒</output></label>
+      <input id="tts-interval" type="range" min="0" max="10" step="1" value="3" aria-describedby="tts-sequence-note">
+    </div>
+    <div class="tts-control-slider">
+      <label for="tts-repeat">每项朗读 <output id="tts-repeat-value" for="tts-repeat">1 次</output></label>
+      <input id="tts-repeat" type="range" min="1" max="5" step="1" value="1" aria-describedby="tts-sequence-note">
+    </div>
+    <p class="tts-sequence-status" id="tts-sequence-status" role="status">听一遍，再跟着读一遍。</p>
+  </div>
+  <p class="tts-controls-note" id="tts-sequence-note">单词和课文连读时，每次发音后都会留出跟读时间，同一项读够次数再往下读。设为 0 秒可连续播放；连读设置保存在当前浏览器，下次开始连读时生效。</p>
+  {% endif %}
+  <p id="tts-status" class="tts-controls-note">发音人、速度和音量保存在当前浏览器，并与场景单词共用；调整后从下一次发音生效。</p>
 </fieldset>

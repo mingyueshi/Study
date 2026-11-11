@@ -17,27 +17,34 @@ personal-learning/
 │       ├── progress.js        学习进度管理
 │       └── test/
 ├── ai/
-│   └── index.html             AI 基础篇：路线、概念、自检与笔记
-└── dev/
-    └── index.html             开发命令：速查、搜索、遮住自测与掌握标记
+│   └── index.html             AI 开发提示词：模板、模型工具与折叠的基础知识
+├── dev/
+│   └── index.html             开发命令：速查、搜索、遮住自测与掌握标记
+└── coding/
+    └── index.html             Python、Vue、Django：课程、代码与实操项目
 ```
 
 | 方向 | 内容 | 状态 |
 | --- | --- | --- |
 | [英文学习](english/index.html) | [TechLex](english/techlex/index.html)：12 类、205 个术语、24 条双语工作表达 | 可使用 |
-| [AI 学习](ai/index.html) | 6 阶段路线、24 个基础概念、24 道自检题、6 个小练习 | 基础篇可学习 |
-| [开发命令](dev/index.html) | 9 个工具、210 条常用命令：mac、Shell、Git、Docker、Linux 运维、SSH、pyenv、nvm、vi | 可使用 |
+| [AI 学习](ai/index.html) | 7 类、36 个开发提示词，8 个模型家族、13 个工具；附 24 个基础概念与 9 个实操 | 可使用 |
+| [语言与框架](coding/index.html) | Python、Vue、Django：3 条路线、30 节课与自检、3 个实操项目 | 可使用 |
+| [开发命令](dev/index.html) | 12 个工具、326 条常用命令：macOS、Shell、Git、Docker、Linux 运维、SSH、pyenv、Django、nvm、vi、nano、网络与接口 | 可使用 |
 
-总首页、方向目录和 TechLex 都有返回首页、切换英文学习、AI 学习及开发命令的导航。AI 基础篇支持路线与概念检索、参考资料、概念自检、手动学习标记和本机笔记；自检不自动替你标记学会。开发命令支持跨工具搜索、一键复制、遮住自测和逐条掌握标记，详见 [开发命令文档](dev/README.md)。
+总首页、方向目录和 TechLex 都有返回首页、切换英文学习、AI 学习、开发命令及语言与框架的导航。AI 学习默认进入开发提示词，覆盖需求、产品设计、前后端、Bug、运营维护和二次开发，支持背景填写、正文编辑、一键复制与收藏；基础概念默认折叠，工作流作为进阶选学。保留材料实操、JSON 结果检查及模型工具介绍；外部工具使用与首次模型下载需联网，本页不调用模型服务。开发命令支持多关键词搜索、当前工具与掌握状态筛选、分组及单条深链接、一键复制、遮住自测和逐条掌握标记，详见 [开发命令文档](dev/README.md)。
+
+语言与框架按开发任务串起 Python 脚本、Django 接口与 Vue 页面，每课提供示例、接入说明、预期结果、练习和自检；代码可复制，项目材料可离线打包下载。解释器、脚手架及依赖首次安装需联网，详见 [语言与框架文档](coding/README.md)。
 
 ## 学习进度
 
 - 英文模块继续使用 `techlex_v1`。通过同源网站打开时，总首页与英文目录直接读取同一份档案，不重复保存进度；直接双击本地文件时，首页和目录会引导到 TechLex 查看进度，避免不同文件的存储隔离导致统计误导。
 - 进度只保存在当前浏览器。不同浏览器、域名或端口之间不自动同步进度。
 
-AI 模块使用独立的 `personal_ai_v1` 保存已学习标记、自检选项、上次阅读位置与笔记，不修改英文学习档案。详见 [AI 模块文档](ai/README.md)。
+AI 模块使用独立的 `personal_ai_v1` 保存已学习标记、自检选项、上次阅读位置与笔记，不修改英文学习档案。实操使用独立的 `personal_ai_practice_v1` 保存提示词草稿、检查表、输出、笔记与完成记录。开发提示词另用 `personal_ai_prompts_v1` 保存收藏、背景填写项、编辑正文和上次模板。详见 [AI 模块文档](ai/README.md)。
 
 开发命令模块使用独立的 `personal_dev_v1` 保存已掌握命令与上次工具，详见 [开发命令文档](dev/README.md)。
+
+语言与框架使用独立的 `personal_coding_v1` 保存课程与项目完成标记、自检答案、笔记和上次课程。
 
 ## 阅读主题与发音
 
@@ -56,6 +63,7 @@ node test/test-structure.js
 node test/test-theme.js
 node ai/test/test-ai.js
 node dev/test/test-dev.js
+node coding/test/test-coding.js
 node english/techlex/test/test-tech.js
 node english/techlex/test/test-speech.js
 node english/techlex/test/test-progress.js

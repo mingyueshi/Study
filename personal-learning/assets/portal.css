@@ -95,6 +95,9 @@ progress::-moz-progress-bar { background: var(--accent); }
 .english-card .subject-icon { color: var(--blue); background: var(--blue-soft); border-color: var(--blue-border); }
 .ai-card .subject-icon { color: var(--purple); }
 .dev-card .subject-icon { color: var(--warm); background: var(--warm-soft); border-color: var(--warm-border); }
-@media (min-width: 1480px) { .direction-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+
 .module-overview { background: var(--blue-soft); border-color: var(--blue-border); }
 .module-name { color: var(--blue); }
+
+.coding-card .subject-icon { color: var(--accent); background: var(--accent-soft); border-color: var(--accent-border); }
+.direction-card.coding-card { border-top-color: var(--accent-border); }

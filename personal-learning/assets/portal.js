@@ -14,6 +14,20 @@
       values['ai-lesson-total'] = AI_COURSE.stages.reduce((sum, stage) => sum + stage.lessons.length, 0);
       values['ai-practice-total'] = AI_COURSE.stages.filter(stage => stage.practice).length;
     }
+    if (typeof AI_PRACTICE !== 'undefined') {
+      values['ai-practice-total'] = AI_PRACTICE.labs.length;
+      values['ai-model-total'] = AI_PRACTICE.models.length;
+      values['ai-tool-total'] = AI_PRACTICE.tools.length;
+    }
+    if (typeof AI_PROMPTS !== 'undefined') {
+      values['ai-prompt-total'] = AI_PROMPTS.prompts.length;
+      values['ai-prompt-category-total'] = AI_PROMPTS.categories.length;
+    }
+    if (typeof CODING_COURSE !== 'undefined') {
+      values['coding-track-total'] = CODING_COURSE.tracks.length;
+      values['coding-lesson-total'] = CODING_COURSE.tracks.reduce((sum, track) => sum + track.lessons.length, 0);
+      values['coding-project-total'] = CODING_COURSE.projects.length;
+    }
     if (typeof DEV_TOOLS !== 'undefined' && typeof DevState !== 'undefined') {
       const devCommands = DEV_TOOLS.tools.reduce((sum, tool) => sum + tool.groups.reduce((count, group) => count + group.commands.length, 0), 0);
       let devMastered = 0;

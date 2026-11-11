@@ -1,4 +1,4 @@
-/* AI 基础篇：路线、概念阅读、自检与本机笔记。 */
+/* AI 学习外壳：开发提示词优先，概念与实操保留独立记录。 */
 (function () {
   'use strict';
   const course = AI_COURSE;
@@ -11,15 +11,22 @@
   let query = '';
   let filter = 'all';
   let pendingAnswer = null;
+  let renderedHash = location.hash;
+  let previousSection = null;
 
   function save() {
     try { localStorage.setItem(AILearningState.key, JSON.stringify(state)); $('storageNotice').hidden = true; }
     catch (e) { $('storageNotice').hidden = false; }
   }
   function current() {
+    const promptView = AIPromptsUI.current(location.hash);
+    if (promptView) return promptView;
+    const guideView = AIPracticeUI.current(location.hash);
+    if (guideView) return guideView;
     if (location.hash === '#concepts') return { view: 'concepts' };
     const id = new URLSearchParams(location.hash.slice(1)).get('lesson');
-    return byId.has(id) ? { view: 'lesson', lesson: byId.get(id) } : { view: 'route' };
+    if (byId.has(id)) return { view: 'lesson', lesson: byId.get(id) };
+    return location.hash === '#route' ? { view: 'route' } : { view: 'prompts', category: 'all' };
   }
   function resumeLesson(stage) {
     if (stage) return stage.lessons.find(lesson => !state.completed[lesson.id]) || stage.lessons[0];
@@ -35,25 +42,46 @@
   }
   function renderOverview() {
     const n = lessons.filter(lesson => state.completed[lesson.id]).length;
-    $('courseStats').innerHTML = '<span><strong>' + course.stages.length + '</strong>学习阶段</span><span><strong>' + lessons.length + '</strong>基础概念</span><span><strong>' + n + '</strong>已学习</span>';
+    $('courseStats').innerHTML = '<span><strong>' + AI_PROMPTS.prompts.length + '</strong>提示词模板</span><span><strong>' + AI_PROMPTS.categories.length + '</strong>开发场景</span><span><strong>' + AI_PRACTICE.models.length + '</strong>模型家族</span><span><strong>' + AI_PRACTICE.tools.length + '</strong>工具介绍</span>';
     $('progressLabel').textContent = n + ' / ' + lessons.length;
     $('courseProgress').max = lessons.length;
     $('courseProgress').value = n;
     $('resumeButton').textContent = n === lessons.length ? '复习基础篇 →' : state.lastLesson ? '继续学习 →' : '开始学习 →';
     const view = current();
-    ['route', 'concepts'].forEach(name => {
+    const section = view.lesson ? 'concepts' : view.view === 'prompt' ? 'prompts' : AIPracticeUI.catalog(view.view);
+    const foundation = section === 'concepts' || section === 'route';
+    if (previousSection !== section) {
+      $('foundationDirectory').open = foundation;
+      document.querySelector('.foundation-menu').open = foundation;
+      $('portraitTree').closest('details').open = foundation;
+    }
+    previousSection = section;
+    document.querySelector('.foundation-menu').dataset.active = String(foundation);
+    $('promptSavedLabel').textContent = AIPromptsUI.favoriteCount ? '已收藏 ' + AIPromptsUI.favoriteCount + ' 个常用模板' : '常用模板随手收藏';
+    const activeCategory = view.item?.category || view.category;
+    $('promptCategories').innerHTML = AI_PROMPTS.categories.map(category => '<a href="#category=' + category.id + '"' + (section === 'prompts' && activeCategory === category.id ? ' aria-current="page"' : '') + '><span>' + esc(category.name) + '</span><small>' + AI_PROMPTS.prompts.filter(item => item.category === category.id).length + '</small></a>').join('');
+    $('practiceProgress').textContent = '实操完成 ' + AIPracticeUI.completed + ' / ' + AI_PRACTICE.labs.length;
+    if (AIPracticeUI.current(location.hash)) $('resumeButton').textContent = AIPracticeUI.completed ? '继续实操 →' : '开始实操 →';
+    if (section === 'prompts') $('resumeButton').textContent = view.view === 'prompt' ? '返回提示词库 →' : AIPromptsUI.lastPrompt ? '继续上次填写 →' : '开始填写 →';
+    $('conceptSearch').placeholder = ({ prompts: '搜索提示词，如：接口、需求、部署…', practice: '搜索实操任务，如：日志、JSON、代码…', models: '搜索模型家族或用途…', tools: '搜索工具、用途或使用环境…' })[section] || '搜索基础概念、英文或关键词…';
+    document.querySelectorAll('[data-ai-view]').forEach(link => {
+      if (link.dataset.aiView === section) link.setAttribute('aria-current', 'page'); else link.removeAttribute('aria-current');
+    });
+    ['prompts', 'route', 'concepts', 'practice', 'models', 'tools'].forEach(name => {
       const link = $(name + 'Link');
-      if (view.view === name) link.setAttribute('aria-current', 'page');
+      if (section === name) link.setAttribute('aria-current', 'page');
       else link.removeAttribute('aria-current');
     });
-    const expanded = new Set([...$('courseTree').querySelectorAll('details[open]')].map(element => element.dataset.stage));
+    const expanded = new Set([...document.querySelectorAll('#courseTree details[open], #portraitTree details[open]')].map(element => element.dataset.stage));
     const focused = document.activeElement && document.activeElement.dataset.aiLesson;
-    $('courseTree').innerHTML = course.stages.map((stage, index) => {
+    const treeHTML = course.stages.map((stage, index) => {
       const active = view.lesson && view.lesson.stage.id === stage.id;
       return '<details class="stage-directory" data-stage="' + stage.id + '"' + (active || expanded.has(stage.id) ? ' open' : '') + '><summary><span class="stage-index">0' + (index + 1) + '</span><span>' + esc(stage.title) + '</span><small>' + learnedCount(stage) + '/' + stage.lessons.length + '</small></summary><div>' + stage.lessons.map(lesson => '<a data-ai-lesson="' + lesson.id + '" href="#lesson=' + lesson.id + '"' + (view.lesson && view.lesson.id === lesson.id ? ' aria-current="page"' : '') + '><span>' + esc(lesson.title) + '</span><span class="tree-check" aria-label="' + (state.completed[lesson.id] ? '已学习' : '待学习') + '">' + (state.completed[lesson.id] ? '✓' : '·') + '</span></a>').join('') + '</div></details>';
     }).join('');
+    $('courseTree').innerHTML = treeHTML;
+    $('portraitTree').innerHTML = treeHTML;
     if (focused) {
-      const target = $('courseTree').querySelector('[data-ai-lesson="' + focused + '"]');
+      const target = [...document.querySelectorAll('[data-ai-lesson="' + focused + '"]')].find(element => element.getClientRects().length);
       if (target) target.focus({ preventScroll: true });
     }
   }
@@ -86,26 +114,43 @@
     $('viewStatus').textContent = '正在学习：' + lesson.title;
   }
   function render() {
+    renderedHash = location.hash;
     const view = current();
     if (view.lesson) { state.lastLesson = view.lesson.id; save(); }
     renderOverview();
     $('clearSearch').hidden = !query;
-    if (view.view === 'concepts') renderCatalog();
+    if (view.view === 'prompts' || view.view === 'prompt') AIPromptsUI.render(view, query);
+    else if (AIPracticeUI.current(location.hash)) AIPracticeUI.render(view, query);
+    else if (view.view === 'concepts') renderCatalog();
     else if (view.lesson) renderLesson(view.lesson);
-    else renderRoute();
+    else { renderRoute(); $('learningContent').querySelector('.view-lead').insertAdjacentHTML('afterend', '<section class="practice-start" aria-label="动手学习入口"><div><h3>先完成一次小任务</h3><p>从可下载材料和提示词开始，试工具、核对结果，再回到概念解释。</p></div><div><a href="#practice">进入实操工坊 →</a><a href="#models">认识大模型</a><a href="#tools">找合适的工具</a></div></section>'); }
+    document.title = ($('viewTitle')?.textContent || '开发提示词') + ' · AI 学习 · 个人学习';
   }
-  function navigate(hash) {
-    if (location.hash === hash) render();
-    else location.hash = hash;
+  function navigate(hash, searching = false) {
+    if (!searching) { query = ''; $('conceptSearch').value = ''; }
+    location.hash = hash;
+    render();
+    if (!searching) {
+      $('learningContent').focus({ preventScroll: true });
+      $('learningContent').scrollIntoView({ block: 'start' });
+      if (!['route', 'concepts', 'lesson'].includes(current().view)) $('portraitTree').closest('details.portrait-directory').open = false;
+    }
   }
   function updateSearch(value) {
     query = value.trim();
     $('conceptSearch').value = value;
     $('clearSearch').hidden = !query;
-    if (current().view !== 'concepts') navigate('#concepts');
-    else renderCatalog();
+    const guideView = AIPracticeUI.current(location.hash);
+    const view = current();
+    const target = ['prompt', 'prompts'].includes(view.view) ? 'prompts' : guideView ? AIPracticeUI.catalog(guideView.view) : 'concepts';
+    if (current().view !== target) navigate('#' + target, true);
+    else render();
   }
   document.addEventListener('click', event => {
+    const link = event.target.closest('a[href^="#"]');
+    if (link && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey && /^#(?:prompts|category=|prompt=|route|concepts|practice|models|tools|lesson=|lab=|model=|tool=)/.test(link.getAttribute('href'))) {
+      event.preventDefault(); navigate(link.getAttribute('href')); return;
+    }
     const button = event.target.closest('[data-ai-act]');
     if (!button) return;
     const action = button.dataset.aiAct;
@@ -114,7 +159,10 @@
       event.preventDefault();
       $('learningContent').focus({ preventScroll: true });
       $('learningContent').scrollIntoView({ block: 'start' });
-    } else if (action === 'resume') navigate('#lesson=' + resumeLesson().id);
+    } else if (action === 'resume') {
+      const view = current();
+      navigate(view.view === 'prompt' ? '#prompts' : view.view === 'prompts' ? AIPromptsUI.resumePath() : AIPracticeUI.current(location.hash) ? AIPracticeUI.resumePath() : '#lesson=' + resumeLesson().id);
+    }
     else if (action === 'clear-search') { updateSearch(''); $('conceptSearch').focus(); }
     else if (action === 'filter') { filter = button.dataset.filter; renderCatalog(); $('learningContent').querySelector('[data-filter="' + filter + '"]').focus({ preventScroll: true }); }
     else if (action === 'reset-catalog') { filter = 'all'; updateSearch(''); }
@@ -151,10 +199,15 @@
     if (event.key === 'Escape' && event.target === $('conceptSearch')) updateSearch('');
   });
   window.addEventListener('hashchange', () => {
-    if (current().view === 'route') { query = ''; filter = 'all'; $('conceptSearch').value = ''; }
+    if (location.hash === renderedHash) return;
+    query = ''; filter = 'all'; $('conceptSearch').value = '';
     render();
     $('learningContent').scrollIntoView({ block: 'start', behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
   });
+  document.addEventListener('ai-search-reset', () => updateSearch(''));
+  document.addEventListener('ai-practice-change', renderOverview);
+  document.addEventListener('ai-prompts-change', renderOverview);
+  document.addEventListener('ai-prompts-reset', () => navigate('#prompts'));
   if (window.ResizeObserver) new ResizeObserver(entries => {
     document.documentElement.style.setProperty('--ai-tools-height', Math.ceil(entries[0].target.getBoundingClientRect().height) + 'px');
   }).observe(document.querySelector('.reader-tools'));

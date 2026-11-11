@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="AI 学习基础篇：六阶段学习路线，24 个基础概念、例子、自检题与小练习，记录本机学习进度与笔记。">
+  <meta name="description" content="开发常用提示词：36 个模板覆盖需求、产品、前后端、Bug、运营维护与二次开发，支持填写、编辑、复制与收藏。">
   <meta name="theme-color" content="#101515">
-  <title>AI 学习 · 基础篇 · 个人学习</title>
+  <title>AI 开发提示词 · 个人学习</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%23b4e5c9'/%3E%3Ctext x='20' y='73' font-size='70' fill='%23101515'%3EL%3C/text%3E%3C/svg%3E">
 <script src="../assets/theme.js"></script><link rel="stylesheet" href="../assets/theme.css">
   <link rel="stylesheet" href="../assets/portal.css">
@@ -16,39 +16,55 @@
   <div class="portal-shell">
     <header class="portal-header">
       <a class="portal-brand" href="../index.html" aria-label="个人学习首页"><span aria-hidden="true">L.</span>个人学习</a>
-      <nav aria-label="学习系统导航"><a href="../index.html">学习首页</a><a href="../english/index.html">英文学习</a><a href="index.html" aria-current="page">AI 学习 <small>基础篇</small></a><a href="../dev/index.html">开发命令</a></nav>
+      <nav aria-label="学习系统导航"><a href="../index.html">学习首页</a><a href="../english/index.html">英文学习</a><a href="index.html" aria-current="page">AI 学习 <small>提示词与工具</small></a><a href="../dev/index.html">开发命令</a><a href="../coding/index.html">语言与框架</a></nav>
       <button class="theme-toggle" type="button" data-theme-toggle aria-label="切换阅读主题"><span data-theme-icon aria-hidden="true">☀</span><span data-theme-label>主题</span></button>
     </header>
     <main id="main">
       <section class="ai-intro" aria-labelledby="courseTitle">
-        <div><p class="eyebrow">UNDERSTAND FIRST. BUILD NEXT.</p><h1 id="courseTitle">AI 学习 <span>基础篇</span></h1><p>先弄懂概念，再用例子、自检和小练习，把知识连起来。</p></div>
+        <div><h1 id="courseTitle">AI 开发提示词 <span>日常开发</span></h1><p>从需求到上线，选一个任务，补上背景，直接拿去使用。</p></div>
         <div class="course-stats" id="courseStats"></div>
       </section>
       <div class="course-shell">
         <aside class="course-sidebar" aria-label="学习目录与进度">
-          <p class="side-heading">我的学习进度 <strong id="progressLabel">0 / 24</strong></p>
-          <progress id="courseProgress" value="0" max="24" aria-label="AI 基础篇已学习概念进度"></progress>
-          <div class="overview-links"><a href="#route" id="routeLink">学习路线 <span aria-hidden="true">↗</span></a><a href="#concepts" id="conceptsLink">全部概念 <span aria-hidden="true">↗</span></a></div>
-          <nav id="courseTree" aria-label="AI 学习目录"></nav>
-          <p class="sidebar-help">按理解程度推进；每阶段完成一个小练习。</p>
+          <div class="overview-links"><a href="#prompts" id="promptsLink">开发提示词 <span aria-hidden="true">↗</span></a></div>
+          <nav id="promptCategories" class="prompt-side-categories" aria-label="开发提示词分类"></nav>
+          <p class="prompt-saved-label" id="promptSavedLabel">常用模板随手收藏</p>
+          <div class="overview-links secondary-links"><a href="#tools" id="toolsLink">工具指南 <span aria-hidden="true">↗</span></a><a href="#models" id="modelsLink">大模型 <span aria-hidden="true">↗</span></a><a href="#practice" id="practiceLink">材料实操 <span aria-hidden="true">↗</span></a></div>
+          <details class="foundation-directory" id="foundationDirectory"><summary>基础知识 <span>按需展开</span></summary>
+            <div class="overview-links"><a href="#route" id="routeLink">学习路线</a><a href="#concepts" id="conceptsLink">基础概念</a></div>
+            <p class="side-heading">概念学习进度 <strong id="progressLabel">0 / 24</strong></p>
+            <progress id="courseProgress" value="0" max="24" aria-label="AI 基础篇已学习概念进度"></progress>
+            <nav id="courseTree" aria-label="AI 学习目录"></nav>
+          </details>
+          <p class="practice-progress" id="practiceProgress">实操完成 0 / 9</p>
+          <p class="sidebar-help">原有概念、自检与笔记保留在基础知识中，遇到疑问再查。</p>
           <div class="sidebar-system"><a href="../index.html">学习首页</a><a href="../english/index.html">英文学习</a><a href="../dev/index.html">开发命令</a></div>
         </aside>
         <div class="course-workspace">
           <div class="reader-tools" aria-label="查找与继续学习">
-            <label class="concept-search"><span aria-hidden="true">⌕</span><input id="conceptSearch" type="search" placeholder="搜索概念、英文或关键词…" aria-label="搜索 AI 基础概念" autocomplete="off"><button id="clearSearch" data-ai-act="clear-search" aria-label="清空概念搜索" hidden>×</button><kbd aria-hidden="true">/</kbd></label>
-            <button class="resume-button" data-ai-act="resume" id="resumeButton">开始学习 <span aria-hidden="true">→</span></button>
+            <nav class="workspace-sections" aria-label="AI 学习分区"><a href="#prompts" data-ai-view="prompts">开发提示词</a><a href="#tools" data-ai-view="tools">工具指南</a><a href="#models" data-ai-view="models">大模型</a><a href="#practice" data-ai-view="practice">材料实操</a><details class="foundation-menu"><summary>基础知识</summary><div><a href="#route" data-ai-view="route">学习路线</a><a href="#concepts" data-ai-view="concepts">基础概念</a></div></details></nav>
+            <label class="concept-search"><span aria-hidden="true">⌕</span><input id="conceptSearch" type="search" placeholder="搜索提示词，如：接口、需求、部署…" aria-label="搜索 AI 学习内容" autocomplete="off"><button id="clearSearch" type="button" data-ai-act="clear-search" aria-label="清空搜索" hidden>×</button><kbd aria-hidden="true">/</kbd></label>
+            <button class="resume-button" data-ai-act="resume" id="resumeButton">开始填写 <span aria-hidden="true">→</span></button>
           </div>
+          <details class="portrait-directory"><summary>基础知识 · 展开目录</summary><div class="guide-links"><a href="#route">学习路线</a><a href="#concepts">基础概念</a></div><nav id="portraitTree" aria-label="竖屏概念目录"></nav></details>
           <p class="storage-notice" id="storageNotice" role="status" hidden>浏览器暂时无法保存记录，本次会话仍可继续学习。</p>
           <p class="sr-only" id="viewStatus" role="status" aria-live="polite" aria-atomic="true"></p>
           <div id="learningContent" tabindex="-1"></div>
-          <noscript><p>请启用 JavaScript，以阅读基础概念、完成自检并保存学习进度。顶部导航仍可切换学习方向。</p></noscript>
+          <p id="aiCopyStatus" class="ai-copy-status" role="status" aria-live="polite" hidden></p>
+          <noscript><p>请启用 JavaScript，以查找、填写和复制开发提示词。顶部导航仍可切换学习方向。</p></noscript>
         </div>
       </div>
     </main>
-    <footer class="portal-footer"><span>个人学习 · AI 基础篇</span><span>进度与笔记保存在当前浏览器</span><a href="../index.html">返回学习首页</a></footer>
+    <footer class="portal-footer"><span>个人学习 · AI 提示词与工具</span><span>进度与笔记保存在当前浏览器</span><a href="../index.html">返回学习首页</a></footer>
   </div>
   <script src="ai-data.js"></script>
   <script src="ai-state.js"></script>
+  <script src="ai-practice-data.js"></script>
+  <script src="ai-practice-core.js"></script>
+  <script src="ai-practice-ui.js"></script>
+  <script src="ai-prompts-data.js"></script>
+  <script src="ai-prompts-core.js"></script>
+  <script src="ai-prompts-ui.js"></script>
   <script src="ai-app.js"></script>
 </body>
 </html>

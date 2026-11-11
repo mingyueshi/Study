@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+ <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+ <meta name="description" content="Python、Vue、Django 开发学习：3 条路线、30 节课与 3 个可下载实操项目，配有代码、练习、自检和本机记录。">
+ <meta name="theme-color" content="#101515"><title>语言与框架 · 个人学习</title>
+ <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%23b4e5c9'/%3E%3Ctext x='20' y='73' font-size='70' fill='%23101515'%3EL%3C/text%3E%3C/svg%3E">
+ <script src="../assets/theme.js"></script><link rel="stylesheet" href="../assets/theme.css"><link rel="stylesheet" href="../assets/portal.css"><link rel="stylesheet" href="coding.css">
+</head>
+<body class="portal coding-app">
+ <a class="skip-link" href="#lessonContent" data-code-act="skip">跳到学习内容</a>
+ <div class="portal-shell">
+  <header class="portal-header">
+   <a class="portal-brand" href="../index.html" aria-label="个人学习首页"><span aria-hidden="true">L.</span>个人学习</a>
+   <nav aria-label="学习系统导航"><a href="../index.html">学习首页</a><a href="../english/index.html">英文学习</a><a href="../ai/index.html">AI 学习 <small>提示词与工具</small></a><a href="../dev/index.html">开发命令</a><a href="index.html" aria-current="page">语言与框架</a></nav>
+   <button class="theme-toggle" type="button" data-theme-toggle aria-label="切换阅读主题"><span data-theme-icon aria-hidden="true">☀</span><span data-theme-label>主题</span></button>
+  </header>
+  <main>
+   <section class="coding-intro"><div><h1>语言与框架</h1><p>Python 写脚本，Django 做接口，Vue 把数据变成可操作的页面。</p></div><p id="courseSummary">3 条路线 · 30 节课 · 3 个项目</p></section>
+   <div class="coding-shell">
+    <aside class="coding-sidebar" aria-label="课程目录与进度">
+     <nav class="coding-main-links" aria-label="课程入口"><a href="#home" data-course-view="home">学习路线</a><a href="#projects" data-course-view="projects">实操项目</a></nav>
+     <p class="coding-progress-label">课程进度 <strong id="progressLabel">0 / 30</strong></p><progress id="courseProgress" value="0" max="30" aria-label="语言与框架课程进度"></progress>
+     <nav id="courseDirectory" aria-label="语言与框架课程目录"></nav>
+     <p class="coding-sidebar-note">先跟着示例理解一处变化，再完成小练习。学习标记与笔记留在当前浏览器。</p>
+     <div class="coding-related"><a href="../dev/index.html">开发命令 →</a><a href="../ai/index.html#prompts">开发提示词 →</a></div>
+    </aside>
+    <div class="coding-workspace">
+     <div class="coding-toolbar">
+      <nav class="coding-top-links" aria-label="课程分区"><a href="#home" data-course-view="home">学习路线</a><a href="#projects" data-course-view="projects">实操项目</a></nav>
+      <label class="coding-track-select">路线<select id="trackSelect" aria-label="选择学习路线"><option value="all">全部路线</option><option value="python">Python</option><option value="vue">Vue</option><option value="django">Django</option></select></label>
+      <label class="coding-search"><span aria-hidden="true">⌕</span><input type="search" id="lessonSearch" placeholder="搜索课程或代码，如：表单、JSON、ref…" aria-label="搜索语言与框架课程" autocomplete="off"><button type="button" data-code-act="clear-search" aria-label="清空搜索" id="clearSearch" hidden>×</button><kbd aria-hidden="true">/</kbd></label>
+      <button type="button" class="coding-primary" data-code-act="resume" id="resumeButton">开始学习 →</button>
+     </div>
+     <p id="storageNotice" class="coding-notice" role="status" hidden>浏览器暂时无法保存记录，本次会话仍可阅读、练习和复制。</p>
+     <p class="coding-sr-only" id="viewStatus" role="status" aria-live="polite"></p>
+     <div id="lessonContent" tabindex="-1"></div>
+     <p id="copyStatus" class="coding-toast" role="status" aria-live="polite" hidden></p>
+     <noscript><p>请启用 JavaScript 以阅读课程和下载项目材料。顶部导航仍可切换学习方向。</p></noscript>
+    </div>
+   </div>
+  </main>
+  <footer class="portal-footer"><span>个人学习 · Python / Vue / Django</span><span>课程与材料可离线查阅 · 记录保存在当前浏览器</span><a href="../index.html">学习首页</a></footer>
+ </div>
+ <script src="coding-data.js"></script><script src="coding-core.js"></script><script src="coding-app.js"></script>
+</body>
+</html>

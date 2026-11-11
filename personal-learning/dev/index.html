@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="常用开发命令速查：mac、Linux、git、pyenv、nvm、vi 的日常命令，支持搜索、一键复制、遮住自测与掌握标记。">
+  <meta name="description" content="开发与运维命令速查：macOS、Shell、Git、Docker、Linux、SSH、Python、Django、Node、Vim、nano 和网络排查，支持筛选、复制与自测。">
   <meta name="theme-color" content="#101515">
   <title>开发命令 · 个人学习</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%23b4e5c9'/%3E%3Ctext x='20' y='73' font-size='70' fill='%23101515'%3EL%3C/text%3E%3C/svg%3E">
@@ -16,12 +16,12 @@
   <div class="portal-shell">
     <header class="portal-header">
       <a class="portal-brand" href="../index.html" aria-label="个人学习首页"><span aria-hidden="true">L.</span>个人学习</a>
-      <nav aria-label="学习系统导航"><a href="../index.html">学习首页</a><a href="../english/index.html">英文学习</a><a href="../ai/index.html">AI 学习 <small>基础篇</small></a><a href="index.html" aria-current="page">开发命令</a></nav>
+      <nav aria-label="学习系统导航"><a href="../index.html">学习首页</a><a href="../english/index.html">英文学习</a><a href="../ai/index.html">AI 学习 <small>提示词与工具</small></a><a href="index.html" aria-current="page">开发命令</a><a href="../coding/index.html">语言与框架</a></nav>
       <button class="theme-toggle" type="button" data-theme-toggle aria-label="切换阅读主题"><span data-theme-icon aria-hidden="true">☀</span><span data-theme-label>主题</span></button>
     </header>
     <main id="main">
       <section class="dev-intro" aria-labelledby="devTitle">
-        <div><p class="eyebrow">LOOK IT UP. MAKE IT STICK.</p><h1 id="devTitle">开发命令 <span>速查与自测</span></h1><p>查得到、复制得快，再用遮住自测和掌握标记，把命令记进手里。</p></div>
+        <div><h1 id="devTitle">开发命令 <span>速查与自测</span></h1><p>从日常开发到服务排查，查命令、看示例，再动手记一遍。</p></div>
         <div class="dev-stats" id="devStats"></div>
       </section>
       <div class="dev-shell">
@@ -34,13 +34,20 @@
         </aside>
         <div class="dev-workspace">
           <div class="reader-tools" aria-label="查找与自测">
-            <label class="command-search"><span aria-hidden="true">⌕</span><input id="commandSearch" type="search" placeholder="搜索命令、说明或关键词…" aria-label="搜索开发命令" autocomplete="off"><button id="clearSearch" data-dev-act="clear-search" aria-label="清空搜索" hidden>×</button><kbd aria-hidden="true">/</kbd></label>
+            <label class="command-search"><span aria-hidden="true">⌕</span><input id="commandSearch" type="search" placeholder="搜索命令或问题，如：端口、取消 暂存…" aria-label="搜索开发命令" autocomplete="off"><button id="clearSearch" type="button" data-dev-act="clear-search" aria-label="清空搜索" hidden>×</button><kbd aria-hidden="true">/</kbd></label>
             <button class="quiz-button" type="button" data-dev-act="quiz" id="quizButton" aria-pressed="false">遮住自测</button>
             <button class="resume-button" type="button" data-dev-act="resume" id="resumeButton">开始速查 <span aria-hidden="true">→</span></button>
+            <div class="reader-filters">
+              <label class="portrait-tool">工具 <select id="toolSelect" aria-label="选择工具"></select></label>
+              <label>搜索范围 <select id="searchScope"><option value="all">全部工具</option><option value="current">当前工具</option></select></label>
+              <label>掌握状态 <select id="masteryFilter"><option value="all">全部命令</option><option value="unmastered">未掌握</option><option value="mastered">已掌握</option></select></label>
+              <span class="search-help">多个关键词用空格分隔</span>
+            </div>
           </div>
           <p class="storage-notice" id="storageNotice" role="status" hidden>浏览器暂时无法保存记录，本次会话仍可继续使用。</p>
           <p class="sr-only" id="viewStatus" role="status" aria-live="polite" aria-atomic="true"></p>
           <div id="devContent" tabindex="-1"></div>
+          <p id="copyStatus" class="copy-status" role="status" aria-live="polite" hidden></p>
           <noscript><p>请启用 JavaScript，以使用命令速查、自测和掌握标记。顶部导航仍可切换学习方向。</p></noscript>
         </div>
       </div>
@@ -49,6 +56,7 @@
   </div>
   <script src="dev-data.js"></script>
   <script src="dev-state.js"></script>
+  <script src="dev-core.js"></script>
   <script src="dev-app.js"></script>
 </body>
 </html>
