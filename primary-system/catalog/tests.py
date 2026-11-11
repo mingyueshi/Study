@@ -85,7 +85,11 @@ class EnglishTextbookTests(PlatformFixture):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'dialogue-card')
         self.assertContains(response, 'Can you jump high, Daming?')
-        self.assertContains(response, '整段连读')
+        self.assertContains(response, '本单元全部课文')
+        self.assertContains(response, 'id="tts-text-scope"')
+        self.assertContains(response, 'data-tts-sequence="#english-dialogues"')
+        self.assertContains(response, 'data-tts-pausable="true"')
+        self.assertContains(response, '从头开始')
         self.assertContains(response, 'data-say-seq="Can you jump high, Daming?"')
         self.assertContains(response, 'data-say-seq="Yes, I can."')
         self.assertContains(response, 'id="tts-interval"')
@@ -95,6 +99,7 @@ class EnglishTextbookTests(PlatformFixture):
         self.assertContains(words, '1 个单词')
         self.assertContains(words, 'id="tts-interval"')
         self.assertContains(words, 'id="tts-repeat"')
+        self.assertContains(words, 'data-tts-sequence="#english-cards"')
         self.assertNotContains(words, item.title)
 
     def test_seed_renames_english_module_once(self):

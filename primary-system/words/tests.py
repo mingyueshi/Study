@@ -227,6 +227,13 @@ class ScenarioPlayTests(TestCase):
         page = enforced.get('/words/')
         self.assertEqual(page.status_code, 200)
         self.assertContains(page, 'words-state')
+        self.assertContains(page, 'data-sidebar-side="right"')
+        self.assertContains(page, 'id="english-sidebar-toggle"')
+        self.assertContains(page, 'data-tts-sequence="#words-cards"')
+        self.assertContains(page, 'data-tts-pausable="true"')
+        self.assertContains(page, 'id="tts-interval"')
+        self.assertContains(page, 'id="tts-repeat"')
+        self.assertContains(page, 'id="tts-sequence-status"', count=1)
         token = enforced.cookies['primary_csrftoken'].value
         state = enforced.get('/words/api/state/').json()
         response = enforced.post('/words/api/learn/', data=json.dumps(

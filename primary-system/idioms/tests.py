@@ -109,6 +109,24 @@ class IdiomPageTests(TestCase):
         response = self.client.get(self.scene_url)
         self.assertContains(response, '场景词卡待核对')
         self.assertNotContains(response, '同学们兴高采烈地去春游。')
+        self.assertNotContains(response, 'data-say-seq=')
+        self.assertNotContains(response, 'data-say-example=')
+        self.assertContains(response, '本组词卡待核对，先换一个场景试试吧。')
+        self.assertRegex(response.content.decode(), r'id="tts-unit-play"[^>]+disabled')
+
+    def test_scene_reader_has_chinese_follow_along_and_preserves_card_links(self):
+        response = self.client.get(self.scene_url)
+        for text in ('data-reading-layout', 'data-sidebar-side="right"', '移到左侧',
+                     '跟读间隔', '每项朗读', '从头开始', 'data-tts-language="zh-CN"',
+                     'data-say-seq="兴高采烈"', 'data-say-example="同学们兴高采烈地去春游。"',
+                     'data-tts-text-key="sayExample"', 'lang="zh-CN"',
+                     f'id="word-{self.binding.pk}"', f'#record-{self.record.pk}'):
+            self.assertContains(response, text)
+        self.assertNotContains(response, 'id="tts-voice"')
+        self.assertNotContains(response, 'Hello! Nice to meet you.')
+        html = response.content.decode()
+        self.assertLess(html.index('id="tts-sequence-player"'), html.index('<summary>朗读设置</summary>'))
+        self.assertLess(html.index('<summary>朗读设置</summary>'), html.index('id="idiom-scenes"'))
 
     def test_internal_source_and_multiple_scene_links(self):
         self.assertFalse(self.source.public_allowed)

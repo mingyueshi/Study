@@ -17,6 +17,7 @@ function element() {
     addEventListener(event, fn) { this.handlers[event] = fn; },
     querySelectorAll() { return []; },
     setAttribute(name, value) { this[name] = value; },
+    removeAttribute(name) { delete this[name]; },
     append() {}, focus() {}, scrollIntoView() {},
   };
 }
@@ -196,7 +197,7 @@ test('a self-check-only round displays its assessment without objective stars', 
   assert.equal(page.get('[data-qb-stars]').hidden, true);
 });
 
-function speechPage({ supported = true, throws = false, controls = false, sequenceControls = false, stored = {}, voices = [] } = {}) {
+function speechPage({ supported = true, throws = false, controls = false, sequenceControls = false, pausable = false, textbookKind = 'words', stored = {}, voices = [] } = {}) {
   const button = element(), items = [element(), element()], clicks = [], spoken = [];
   const buttons = [button], timers = new Map(), lifecycle = {};
   let time = 0, timerId = 0;
@@ -217,9 +218,30 @@ function speechPage({ supported = true, throws = false, controls = false, sequen
     'tts-repeat': Object.assign(element(), { id: 'tts-repeat', min: '1', max: '5', step: '1', value: '1' }),
     'tts-interval-value': element(), 'tts-repeat-value': element(), 'tts-sequence-status': element(),
   });
+  if (pausable) {
+    button.dataset.ttsPausable = 'true';
+    const contentId = textbookKind === 'texts' ? 'english-dialogues' : textbookKind === 'scenario' ? 'words-cards' : textbookKind === 'idioms' ? 'idiom-cards' : 'english-cards';
+    Object.assign(fields, {
+      [textbookKind === 'scenario' ? 'words-play-btn' : 'tts-unit-play']: button, 'tts-sequence-player': element(),
+      'tts-sequence-current': element(), 'tts-sequence-progress': element(),
+      'tts-sequence-restart': Object.assign(element(), { disabled: true }),
+      'tts-text-scope': Object.assign(element(), { value: '#cards' }),
+      [contentId]: Object.assign(element(), { id: contentId }),
+    });
+    if (textbookKind === 'idioms') {
+      fields['tts-sequence-player'].dataset.ttsLanguage = 'zh-CN';
+      fields['tts-text-scope'].selectedOptions = [{dataset: {ttsTextKey: 'saySeq', ttsFocusLabel: '🔊 听这个成语'}}];
+      delete fields['tts-voice'];
+      items[0].dataset = {saySeq: '兴高采烈', sayExample: '同学们兴高采烈地去春游。'};
+      items[1].dataset = {saySeq: '喜出望外', sayExample: '听到这个好消息，他喜出望外。'};
+    }
+  }
   const synth = {
     getVoices: () => voices, addEventListener() {},
     get speaking() { return current !== null; }, pending: false,
+    paused: false, pauseCount: 0, resumeCount: 0,
+    pause() { this.paused = true; this.pauseCount += 1; },
+    resume() { this.paused = false; this.resumeCount += 1; },
     cancel() {
       const old = current;
       current = null;
@@ -238,13 +260,14 @@ function speechPage({ supported = true, throws = false, controls = false, sequen
     document: {
       addEventListener: (event, fn) => clicks.push(fn), getElementById: (id) => fields[id] || null,
       createElement: () => element(),
-      querySelector: () => ({ querySelectorAll: () => items }),
+      querySelector: (selector) => ({ querySelectorAll: () => selector === '#last' ? items.slice(1) : items }),
       querySelectorAll: (selector) => selector === '.tts-playing'
         ? items.filter((item) => item.classList.contains('tts-playing'))
         : buttons.filter((button) => button.classList.contains('tts-active')),
     },
     setTimeout(callback, delay) { const id = ++timerId; timers.set(id, { callback, at: time + delay }); return id; },
     clearTimeout(id) { timers.delete(id); },
+    performance: { now: () => time },
     setInterval() { throw new Error('A timer must not advance speech'); },
   });
   run('speech.js', context);
@@ -253,7 +276,14 @@ function speechPage({ supported = true, throws = false, controls = false, sequen
     preventDefault() {}, target: { closest: (value) => value === selector ? target : null },
   }));
   return {
-    button, spoken, items, fields, storage, lifecycle, timers, click: () => click(button, '[data-tts-sequence]'),
+    button, spoken, items, fields, storage, lifecycle, timers, synth, click: () => click(button, '[data-tts-sequence]'),
+    reset() { context.window.TTS.resetSequence(); },
+    restart() { fields['tts-sequence-restart'].handlers.click(); },
+    chooseScope(value, textKey) {
+      fields['tts-text-scope'].value = value;
+      if (textKey) fields['tts-text-scope'].selectedOptions = [{dataset: {ttsTextKey: textKey, ttsFocusLabel: '🔊 听这句例句'}}];
+      fields['tts-text-scope'].handlers.change();
+    },
     clickOther() {
       const other = Object.assign(element(), { textContent: '另一段连读', dataset: { ttsSequence: '#other' } });
       buttons.push(other);
@@ -508,10 +538,259 @@ test('invalid textbook settings fall back and unavailable speech disables follow
   }
 });
 
+test('textbook pause and resume preserve the current utterance and make the paused position visible', () => {
+  const page = speechPage({ sequenceControls: true, pausable: true });
+  page.click();
+  assert.equal(page.button.textContent, '⏸ 暂停连读');
+  assert.equal(page.fields['tts-sequence-current'].textContent, page.spoken[0].text);
+  page.click();
+  assert.equal(page.synth.paused, true);
+  assert.equal(page.button.textContent, '▶ 继续连读');
+  assert.equal(page.fields['tts-sequence-player'].dataset.state, 'paused');
+  assert.match(page.fields['tts-sequence-status'].textContent, /已暂停.*第 1／2 项/);
+  assert.ok(page.items[0].classList.contains('tts-paused'));
+  page.advance(30000);
+  page.click();
+  assert.equal(page.synth.paused, false);
+  assert.equal(page.synth.resumeCount, 1);
+  assert.equal(page.spoken.length, 1);
+  assert.ok(!page.items[0].classList.contains('tts-paused'));
+  page.finish();
+  page.advance(3000);
+  assert.equal(page.spoken[1].text, 'apple');
+  page.finish();
+  page.advance(3000);
+  assert.equal(page.fields['tts-sequence-player'].dataset.state, 'complete');
+  assert.equal(page.fields['tts-sequence-progress'].value, 2);
+  assert.equal(page.button.textContent, '连读');
+});
+
+test('pausing during the follow-along gap freezes its remaining time and repeat count', () => {
+  const page = speechPage({ sequenceControls: true, pausable: true });
+  page.adjust('repeat', 2);
+  page.click();
+  page.finish();
+  const lateTimer = [...page.timers.values()][0].callback;
+  page.advance(1000);
+  page.click();
+  assert.equal(page.fields['tts-sequence-player'].dataset.state, 'paused');
+  assert.equal(page.fields['tts-sequence-progress'].value, 1);
+  assert.match(page.fields['tts-sequence-status'].textContent, /继续后接着计时/);
+  assert.equal(page.timers.size, 0);
+  page.advance(30000);
+  lateTimer();
+  page.click();
+  lateTimer();
+  page.advance(1999);
+  assert.equal(page.spoken.length, 1);
+  page.advance(1);
+  assert.equal(page.spoken.length, 2);
+  assert.equal(page.spoken[1].text, page.spoken[0].text);
+  assert.match(page.fields['tts-sequence-status'].textContent, /第 2／2 遍/);
+});
+
+test('reading focus follows textbook and scenario items through listening, following, pause and completion', () => {
+  for (const textbookKind of ['words', 'texts', 'scenario', 'idioms']) {
+    const page = speechPage({ sequenceControls: true, pausable: true, textbookKind });
+    const container = page.fields[textbookKind === 'texts' ? 'english-dialogues' : textbookKind === 'scenario' ? 'words-cards' : textbookKind === 'idioms' ? 'idiom-cards' : 'english-cards'];
+    page.click();
+    assert.ok(container.classList.contains('tts-focus-mode'));
+    assert.equal(page.items[0]['aria-current'], 'true');
+    assert.match(page.items[0].dataset.ttsFocusLabel, textbookKind === 'texts' ? /听这一句/ : textbookKind === 'idioms' ? /听这个成语/ : /听这个单词/);
+    page.finish();
+    assert.equal(page.items[0].dataset.ttsPhase, 'following');
+    assert.match(page.items[0].dataset.ttsFocusLabel, /轮到你读/);
+    page.click();
+    assert.equal(page.items[0].dataset.ttsPhase, 'paused');
+    assert.match(page.items[0].dataset.ttsFocusLabel, /暂停/);
+    page.click();
+    page.advance(3000);
+    assert.equal(page.items[0]['aria-current'], undefined);
+    assert.equal(page.items[0].dataset.ttsFocusLabel, undefined);
+    assert.equal(page.items[1]['aria-current'], 'true');
+    page.finish();
+    page.advance(3000);
+    assert.ok(!container.classList.contains('tts-focus-mode'));
+    assert.ok(page.items.every(item => !item.dataset.ttsFocusLabel && !item['aria-current']));
+  }
+});
+
+test('idioms use Chinese speech and independent speed preferences, with repeat gaps before the next idiom', () => {
+  const page = speechPage({
+    controls: true, sequenceControls: true, pausable: true, textbookKind: 'idioms',
+    voices: [{name: 'Samantha', lang: 'en-US'}, {name: 'Tingting', lang: 'zh-CN'}],
+    stored: {words_tts_pref_v1: '{"rate":1.5}', chinese_tts_pref_v1: '{"rate":0.9}', textbook_tts_sequence_pref_v1: '{"interval":2,"repeat":2}'},
+  });
+  page.click();
+  assert.equal(page.spoken[0].text, '兴高采烈');
+  assert.equal(page.spoken[0].voice.name, 'Tingting');
+  assert.equal(page.spoken[0].rate, 0.9);
+  page.finish();
+  page.advance(1999);
+  assert.equal(page.spoken.length, 1);
+  page.advance(1);
+  assert.equal(page.spoken[1].text, '兴高采烈');
+  page.finish();
+  page.advance(2000);
+  assert.equal(page.spoken[2].text, '喜出望外');
+  page.fields['tts-rate'].value = '1';
+  page.fields['tts-rate'].handlers.input();
+  assert.equal(JSON.parse(page.storage.chinese_tts_pref_v1).rate, 1);
+  assert.equal(JSON.parse(page.storage.words_tts_pref_v1).rate, 1.5);
+});
+
+test('switching idioms to scene examples discards the paused queue and highlights the matching sentence', () => {
+  const page = speechPage({sequenceControls: true, pausable: true, textbookKind: 'idioms'});
+  page.click();
+  page.finish();
+  const oldTimer = [...page.timers.values()][0].callback;
+  page.click();
+  page.chooseScope('#cards', 'sayExample');
+  oldTimer();
+  assert.equal(page.spoken.length, 1);
+  assert.equal(page.fields['tts-sequence-player'].dataset.state, 'idle');
+  assert.ok(!page.items[0].dataset.ttsContentKey);
+  page.click();
+  assert.equal(page.spoken[1].text, '同学们兴高采烈地去春游。');
+  assert.equal(page.items[0].dataset.ttsContentKey, 'sayExample');
+  assert.match(page.items[0].dataset.ttsFocusLabel, /听这句例句/);
+  assert.ok(!page.fields['tts-sequence-current'].classList.contains('textbook-player-current-word'));
+  page.finish();
+  page.advance(3000);
+  assert.equal(page.spoken[2].text, '听到这个好消息，他喜出望外。');
+  page.restart();
+  assert.equal(page.spoken[3].text, '同学们兴高采烈地去春游。');
+});
+
+test('changing scenario cards clears paused progress and prevents old callbacks from reading detached cards', () => {
+  const page = speechPage({ sequenceControls: true, pausable: true, textbookKind: 'scenario' });
+  page.click();
+  const old = page.spoken[0];
+  page.finish();
+  const lateTimer = [...page.timers.values()][0].callback;
+  page.click();
+  page.reset();
+  assert.equal(page.button.textContent, '连读');
+  assert.equal(page.fields['tts-sequence-restart'].disabled, true);
+  assert.equal(page.fields['tts-sequence-current'].hidden, true);
+  assert.equal(page.fields['tts-sequence-current'].textContent, '');
+  assert.equal(page.fields['tts-sequence-progress'].hidden, true);
+  assert.ok(!page.fields['words-cards'].classList.contains('tts-focus-mode'));
+  page.restart();
+  assert.equal(page.spoken.length, 1);
+  page.items[0].dataset.saySeq = 'banana';
+  page.click();
+  old.onend();
+  lateTimer();
+  page.advance(30000);
+  assert.equal(page.spoken.length, 2);
+  assert.equal(page.spoken[1].text, 'banana');
+  assert.equal(page.fields['tts-sequence-progress'].value, 0);
+  const unavailable = speechPage({ sequenceControls: true, pausable: true, textbookKind: 'scenario', supported: false });
+  unavailable.reset();
+  assert.equal(unavailable.fields['tts-sequence-player'].dataset.state, 'error');
+});
+
+test('a speech-end event arriving just after pause cannot advance the paused sequence', () => {
+  const page = speechPage({ sequenceControls: true, pausable: true });
+  page.click();
+  page.click();
+  page.finish();
+  assert.equal(page.timers.size, 0);
+  assert.equal(page.fields['tts-sequence-player'].dataset.state, 'paused');
+  page.advance(30000);
+  assert.equal(page.spoken.length, 1);
+  page.click();
+  page.advance(2999);
+  assert.equal(page.spoken.length, 1);
+  page.advance(1);
+  assert.equal(page.spoken[1].text, 'apple');
+});
+
+test('quick resume and restart release a pause request even before the browser paused flag changes', () => {
+  for (const action of ['resume', 'restart', 'scope']) {
+    const page = speechPage({ sequenceControls: true, pausable: true });
+    page.synth.pause = function () { this.pauseCount += 1; };
+    page.click();
+    page.click();
+    assert.equal(page.synth.paused, false);
+    if (action === 'resume') page.click();
+    if (action === 'restart') page.restart();
+    if (action === 'scope') page.chooseScope('#last');
+    assert.equal(page.synth.resumeCount, 1, action);
+  }
+});
+
+test('restart explicitly returns to the first item from speaking, following, paused and completed states', () => {
+  for (const state of ['speaking', 'following', 'paused', 'complete']) {
+    const page = speechPage({ sequenceControls: true, pausable: true });
+    if (state === 'complete') page.adjust('interval', 0);
+    page.click();
+    const old = page.spoken[0];
+    if (state === 'following') page.finish();
+    if (state === 'paused') page.click();
+    if (state === 'complete') { page.finish(); page.finish(); }
+    const count = page.spoken.length;
+    page.adjust('repeat', 3);
+    page.restart();
+    assert.equal(page.synth.paused, false, state);
+    assert.equal(page.spoken.length, count + 1, state);
+    assert.equal(page.spoken.at(-1).text, page.items[0].dataset.saySeq, state);
+    assert.equal(page.fields['tts-sequence-progress'].value, 0, state);
+    assert.equal(page.fields['tts-sequence-player'].dataset.state, 'playing', state);
+    assert.match(page.fields['tts-sequence-status'].textContent, /第 1／3 遍/);
+    old.onend();
+    old.onerror({ error: 'canceled' });
+    page.advance(30000);
+    assert.equal(page.spoken.length, count + 1, state);
+    assert.equal(page.timers.size, 0, state);
+  }
+});
+
+test('changing passage scope discards the old paused sequence and starts the selected passage only', () => {
+  const page = speechPage({ sequenceControls: true, pausable: true });
+  page.click();
+  const old = page.spoken[0];
+  page.click();
+  page.chooseScope('#last');
+  assert.equal(page.synth.paused, false);
+  assert.equal(page.button.textContent, '连读');
+  assert.equal(page.fields['tts-sequence-player'].dataset.state, 'idle');
+  assert.equal(page.fields['tts-sequence-restart'].disabled, true);
+  assert.equal(page.fields['tts-sequence-current'].hidden, true);
+  old.onend();
+  page.click();
+  assert.equal(page.spoken.at(-1).text, 'apple');
+  assert.match(page.fields['tts-sequence-status'].textContent, /第 1／1 项/);
+});
+
+test('taps, voice changes, page exit and speech failures all release a paused browser engine', () => {
+  const voices = [{ name: 'English US', lang: 'en-US', localService: true }];
+  for (const action of ['tap', 'voice', 'pagehide', 'error']) {
+    const page = speechPage({ controls: true, sequenceControls: true, pausable: true, voices });
+    page.click();
+    const old = page.spoken[0];
+    page.click();
+    if (action === 'tap') page.say('pear');
+    if (action === 'voice') page.chooseVoice('English US');
+    if (action === 'pagehide') page.lifecycle.pagehide();
+    if (action === 'error') page.fail();
+    assert.equal(page.synth.paused, false, action);
+    assert.ok(!page.items[0].classList.contains('tts-paused'), action);
+    old.onend();
+    page.advance(30000);
+    assert.equal(page.timers.size, 0, action);
+    assert.equal(page.button.textContent, '连读', action);
+  }
+  const unsupported = speechPage({ sequenceControls: true, pausable: true, supported: false });
+  assert.equal(unsupported.button.disabled, true);
+  assert.equal(unsupported.fields['tts-sequence-restart'].disabled, true);
+});
+
 function wordsPage(fetch, extraWords = [], search = '') {
   const elements = {};
   const get = (id) => elements[id] || (elements[id] = element());
-  const card = element(), focused = [];
+  const card = element(), focused = [], resets = [];
   get('words-cards').querySelector = (selector) => {
     focused.push(selector);
     return card;
@@ -524,12 +803,17 @@ function wordsPage(fetch, extraWords = [], search = '') {
     words: [{ id: '1', target_id: 'target-a', revision: 0, chinese_version_id: null, presentation_revision: 0, en: 'apple', zh: '苹果', ipa: '', scenario: '1', learned: false }, ...extraWords],
   });
   const context = vm.createContext({
-    document: { getElementById: get, cookie: '' }, window: {}, fetch,
+    document: { getElementById: get, cookie: '' },
+    window: { speechSynthesis: {}, TTS: { resetSequence: message => resets.push(message), speak() {} } }, fetch,
     URLSearchParams, location: { search }, requestAnimationFrame: (callback) => callback(),
   });
   run('words/words.js', context);
   return {
-    get, card, focused,
+    get, card, focused, resets,
+    selectUnit(unit) {
+      get('words-chips').handlers.click({preventDefault() {}, target: {closest: () => ({dataset: {unit}})}});
+    },
+    search(value) { get('words-search').value = value; get('words-search').handlers.input(); },
     async mark() {
       const button = { dataset: { learn: '1' } };
       get('words-cards').handlers.click({ preventDefault() {}, target: { closest: () => button } });
@@ -561,6 +845,24 @@ test('learning links focus the exact scenario target when two cards share a spel
   const missing = wordsPage(undefined, [other], '?target=missing&word=apple');
   assert.deepEqual(missing.focused, []);
   assert.match(missing.get('words-feedback').textContent, /词卡找不到/);
+});
+
+test('scenario selection and search reset the reading range and disable playback for an empty result', () => {
+  const page = wordsPage(undefined, [{id:'2',target_id:'target-b',en:'pear',zh:'梨',ipa:'',scenario:'2'}]);
+  assert.equal(page.get('words-play-btn').disabled, false);
+  assert.match(page.get('words-player-scope').textContent, /水果 · 1 词/);
+  page.selectUnit('2');
+  assert.match(page.get('words-cards').innerHTML, /data-say-seq="pear"/);
+  assert.match(page.get('words-player-scope').textContent, /名字 · 1 词/);
+  page.search('apple');
+  assert.match(page.get('words-player-scope').textContent, /搜索结果 · 1 词/);
+  assert.equal(page.get('words-play-btn').disabled, false);
+  page.search('not-a-word');
+  assert.equal(page.get('words-play-btn').disabled, true);
+  assert.match(page.resets.at(-1), /没有可连读的单词/);
+  page.search('');
+  assert.match(page.get('words-player-scope').textContent, /名字 · 1 词/);
+  assert.equal(page.resets.length, 5);
 });
 
 test('HTTP, malformed response and network failures preserve state and show feedback', async () => {

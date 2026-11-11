@@ -1,7 +1,4 @@
-/* 英语教材阅读的学习页皮肤：给英语教材册页与内容页套暖色学习页视觉。
-   不改结构、不复制组件——platform 组件与 english.css 在 .study-skin 作用域内
-   自动取到学习页配色（--green/--line 等变量重定 scope），本文件只补
-   卡片质感与少量组件覆写。仅英语教材册页（collection）与英语内容页加载。 */
+/* 英语教材、场景单词与内容页共用的阅读皮肤、侧栏播放器和跟读焦点。 */
 .study-skin {
   --green: #5e9f7a;   /* 学习页 english 主题强调色（对齐 study-theme） */
   --line: #e9e2d6;
@@ -19,21 +16,102 @@ body:has(.study-skin) { background: #fffaf2; }
 body:has(.study-skin) .shell { padding-bottom: 40px; }
 
 /* 卡片质感对齐学习页：暖边框 + 实色投影 */
-.study-skin #english-cards .wcard,
+.study-skin :is(#english-cards, #words-cards) .wcard,
 .study-skin .dialogue-card {
   border-color: var(--subject-line);
   box-shadow: 0 3px 0 var(--subject-line);
   background: #fffefb;
 }
-.study-skin #english-cards .say { border: 1px solid var(--subject-line); background: var(--subject-soft); }
-.study-skin #english-cards .say:hover { background: #cde9d8; }
-.study-skin #english-cards .seclabel { background: var(--subject-soft); color: var(--subject-ink); }
-.study-skin #english-cards .card-link:hover { color: var(--subject-ink); }
+.study-skin :is(#english-cards, #words-cards) .say { border: 1px solid var(--subject-line); background: var(--subject-soft); }
+.study-skin :is(#english-cards, #words-cards) .say:hover { background: #cde9d8; }
+.study-skin :is(#english-cards, #words-cards) .seclabel { background: var(--subject-soft); color: var(--subject-ink); }
+.study-skin :is(#english-cards, #words-cards) .card-link:hover { color: var(--subject-ink); }
+.study-skin #words-cards .wcard.learned:not(.tts-playing) { background: #f0f7e9; border-color: #b8d2a5; }
 
 /* 单元目录卡：调色基底从冷白转暖 */
 .study-skin .unit-nav .unit-card { border-color: color-mix(in srgb, var(--c, #609cbd) 22%, #fffdf6); background: color-mix(in srgb, var(--c, #609cbd) 8%, #fffdf6); }
 .study-skin .unit-nav .unit-card:hover { border-color: color-mix(in srgb, var(--c, #609cbd) 55%, #fffdf6); background: color-mix(in srgb, var(--c, #609cbd) 14%, #fffdf6); }
 .study-skin .unit-nav .unit-card[aria-current="page"] { border-color: color-mix(in srgb, var(--c, #609cbd) 65%, #fffdf6); background: color-mix(in srgb, var(--c, #609cbd) 18%, #fffdf6); }
+
+/* 播放控制与朗读设置集中在顶部，目录使用剩余高度独立滚动。 */
+.english-sidebar { position: sticky; top: 24px; display: flex; flex-direction: column; gap: 14px; min-width: 0; min-height: 0; height: var(--reading-sidebar-height, calc(100dvh - 48px)); max-height: calc(100dvh - 48px); }
+.textbook-player { flex: 0 0 auto; min-width: 0; min-height: 0; max-height: max(0px, calc(var(--reading-sidebar-height, calc(100dvh - 48px)) - 80px)); overflow-y: auto; padding: 16px; border: 2px solid var(--subject-line); border-radius: 20px; background: #fffefb; box-shadow: 0 3px 0 var(--subject-line); }
+.textbook-player-heading { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 12px; font-size: 16px; }
+.sidebar-side-toggle { min-height: 36px; padding: 5px 10px; border: 1px solid var(--subject-line); border-radius: 9px; background: var(--subject-soft); color: var(--subject-ink); font: inherit; font-size: 14px; font-weight: 700; white-space: nowrap; cursor: pointer; }
+.sidebar-side-toggle:hover { border-color: var(--subject-ink); }
+.textbook-player .english-tabs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin: 0 0 14px; }
+.textbook-player .english-tabs .tab { justify-content: center; padding: 8px 4px; font-size: 16px; }
+.reading-scope { margin-bottom: 14px; }
+.reading-scope p { margin: 0 0 4px; color: var(--muted); font-size: 14px; }
+.reading-scope h2 { margin: 0; font-size: 20px; line-height: 1.5; text-wrap: balance; }
+.textbook-scope { display: block; margin: 0 0 14px; font-size: 15px; font-weight: 700; }
+.textbook-scope select { margin-top: 6px; min-width: 0; font-size: 15px; text-overflow: ellipsis; }
+.textbook-player-actions { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 8px; }
+.textbook-player-actions .button { min-width: 0; min-height: 48px; padding: 10px 6px; font-size: 15px; }
+.textbook-player-actions .button:disabled { opacity: .5; cursor: not-allowed; box-shadow: none; }
+.textbook-player-actions .textbook-restart { background: #fffaf0; color: #76501e; border-color: #dec99f; }
+.textbook-player-actions .tts-active { background: #9b5316; color: #fff; border-color: #9b5316; }
+.textbook-player[data-state="paused"] { border-color: #ce9949; box-shadow: 0 3px 0 #ce9949; }
+.textbook-player[data-state="paused"] .tts-active { background: var(--subject-ink); border-color: var(--subject-ink); }
+.textbook-player-status { font-variant-numeric: tabular-nums; margin: 14px 0 0; padding: 10px 12px; border-radius: 12px; background: var(--subject-soft); color: var(--subject-ink); font-size: 15px; font-weight: 700; line-height: 1.65; }
+.textbook-player[data-state="paused"] .textbook-player-status { background: #fff0ce; color: #76501e; }
+.textbook-player-current { max-height: 4.8em; overflow-y: auto; overflow-wrap: anywhere; margin: 12px 0 0; color: #293b4a; font-size: 21px; font-weight: 750; line-height: 1.6; }
+.textbook-player progress { width: 100%; height: 9px; margin-top: 12px; accent-color: var(--subject-ink); }
+.english-sidebar-body { display: flex; flex: 1 1 0px; flex-direction: column; gap: 14px; min-height: 0; overflow-y: auto; scrollbar-gutter: stable; padding: 0 4px 4px 0; }
+.english-sidebar-body > * { flex-shrink: 0; }
+.study-skin .english-sidebar .unit-nav { position: static; max-height: none; overflow: visible; padding: 18px; }
+.english-sidebar .textbook-settings { margin: 0; }
+.english-sidebar > .textbook-settings { flex: 0 0 auto; min-height: 0; }
+.english-sidebar > .textbook-settings[open] { flex-shrink: 1; max-height: calc(var(--reading-sidebar-height, 100dvh) * .5); overflow-y: auto; }
+.english-sidebar .textbook-settings summary { display: flex; justify-content: space-between; border-radius: 14px; }
+.english-sidebar > .textbook-settings[open] > summary { position: sticky; top: 0; background: #fffefb; }
+.english-sidebar .tts-settings { margin: 0; padding: 12px; border-color: var(--subject-line); background: #fffefb; }
+.study-skin .tts-playing.tts-paused,
+.study-skin :is(#english-cards, #words-cards) .wcard.tts-playing.tts-paused { outline-style: dashed; background: #fff4df; }
+
+/* 跟读焦点只用于屏幕，打印时保留完整词卡。 */
+@media screen {
+/* 跟读焦点：当前词句保持明亮，其他内容退后；不改变卡片栅格与字号，避免跳动。 */
+.study-skin :is(#english-cards, #words-cards).tts-focus-mode .wcard:not(.tts-playing) { opacity: .5; }
+.study-skin :is(#english-cards, #words-cards).tts-focus-mode .wcard:not(.tts-playing):focus-within { opacity: 1; }
+.study-skin :is(#english-cards, #words-cards) .wcard.tts-playing { position: relative; outline: 5px solid #ad5718; outline-offset: 3px; border-color: #d99530; border-top-color: #ad5718; background: #fff7d6; box-shadow: 0 7px 0 #e5bd68; }
+.study-skin :is(#english-cards, #words-cards) .wcard.tts-playing:hover { transform: none; }
+.study-skin :is(#english-cards, #words-cards) .wcard.tts-playing .word { color: #64330e; background: #ffdf78; border-radius: 6px; box-shadow: 0 0 0 5px #ffdf78; }
+.study-skin :is(#english-cards, #words-cards) .wcard.tts-playing .wsec,
+.study-skin :is(#english-cards, #words-cards) .wcard.tts-playing .memo,
+.study-skin :is(#english-cards, #words-cards) .wcard.tts-playing .wcard-footer { opacity: .58; }
+.study-skin .tts-playing[data-tts-focus-label]::after { content: attr(data-tts-focus-label); position: absolute; padding: 5px 12px; border-radius: 999px; background: #ad5718; color: #fff; font-size: 15px; font-weight: 800; line-height: 1.5; white-space: nowrap; pointer-events: none; }
+.study-skin :is(#english-cards, #words-cards) .wcard.tts-playing::after { top: -17px; left: 18px; }
+.study-skin [data-tts-phase="following"][data-tts-focus-label]::after { background: var(--subject-ink); }
+.study-skin [data-tts-phase="paused"][data-tts-focus-label]::after { background: #76501e; }
+.study-skin .dialogue-lines { gap: 26px; padding-top: 12px; }
+.study-skin #english-dialogues.tts-focus-mode .dialogue-row:not(:has(.tts-playing)) { opacity: .5; }
+.study-skin #english-dialogues.tts-focus-mode .dialogue-row:focus-within { opacity: 1; }
+.study-skin .bubble.tts-playing { position: relative; outline: 4px solid #ad5718; outline-offset: 3px; background: #fff0af; border-color: #ad5718; box-shadow: 0 5px 0 #e5bd68; }
+.study-skin .bubble.tts-playing.tts-paused { outline-style: dashed; background: #fff4df; }
+.study-skin .bubble.tts-playing .bubble-en { color: #64330e; }
+.study-skin .bubble.tts-playing::after { right: 10px; bottom: -15px; }
+.textbook-player:is([data-state="playing"], [data-state="following"], [data-state="paused"]) .textbook-player-current-word { padding: 12px; border: 2px solid #e5bd68; border-radius: 12px; background: #fff0af; color: #64330e; font-size: clamp(32px, 3vw, 50px); line-height: 1.25; text-align: center; text-wrap: balance; }
+}
+@container tts-settings (max-width: 350px) {
+  .study-skin .english-sidebar .tts-controls-grid,
+  .study-skin .english-sidebar .tts-sequence-settings { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .study-skin .english-sidebar .tts-voice-control { grid-column: auto; }
+}
+@media (min-width: 760px) {
+  .study-skin .english-library-layout { grid-template-columns: minmax(0, 1fr) clamp(250px, 20vw, 330px); grid-template-areas: "content sidebar"; }
+  .study-skin .english-library-layout[data-sidebar-side="left"] { grid-template-columns: clamp(250px, 20vw, 330px) minmax(0, 1fr); grid-template-areas: "sidebar content"; }
+  .english-library-layout > .english-sidebar { grid-area: sidebar; }
+  .english-library-layout > section { grid-area: content; }
+}
+@media (max-width: 759px) {
+  .textbook-player-heading { display: none; }
+  .english-sidebar { position: static; height: var(--reading-sidebar-height, calc(100dvh - 48px)); max-height: var(--reading-sidebar-height, calc(100dvh - 48px)); }
+}
+@media print {
+  .english-sidebar { display: none !important; }
+  .study-skin .english-library-layout { display: block; }
+}
 
 /* 单词 / 课文 tab */
 .study-skin .english-tabs .tab { border-color: var(--subject-line); background: #fffefb; }

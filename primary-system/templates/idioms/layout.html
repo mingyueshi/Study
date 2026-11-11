@@ -1,7 +1,8 @@
 {% extends 'base.html' %}{% load static %}
 {% block content %}
 <link rel="stylesheet" href="{% static 'idioms/idioms.css' %}?v=3">
-<script src="{% static 'speech.js' %}" defer></script><script src="{% static 'tts.js' %}" defer></script>
+<script src="{% static 'speech.js' %}" defer></script><script src="{% static 'tts.js' %}?v=6" defer></script>
+{% block idiom_assets %}{% endblock %}
 <div class="idiom-page">
   <nav class="idiom-crumbs" aria-label="专题路径">
     {% block idiom_crumb %}<span aria-current="page">场景成语</span>{% endblock %}

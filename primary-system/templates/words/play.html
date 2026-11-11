@@ -1,20 +1,22 @@
 {% extends 'base.html' %}{% load static %}{% block title %}场景单词 · 乐学堂{% endblock %}
-{% block content %}<link rel="stylesheet" href="{% static 'words/words.css' %}?v=3"><script src="{% static 'speech.js' %}" defer></script><script src="{% static 'tts.js' %}" defer></script>{{ state|json_script:"words-state" }}
-<div class="study-shell words-shell">
-  <aside class="sidebar" aria-label="场景选择">
-    <div class="sidebar-label">切换场景 <span class="nav-count" id="words-nav-count"></span></div>
-    <details class="category-nav" open><summary>场景列表</summary><nav id="words-chips"></nav></details>
-    <p class="sidebar-note">点场景换一组词；点单词听发音；记不住就看拆分和提示。</p>
-  </aside>
-  <div class="study-content">
-    <div class="toolbar">
-      <div class="search-box"><label class="sr-only" for="words-search">搜索单词、中文或场景</label><input id="words-search" type="search" placeholder="搜索单词、中文或场景" autocomplete="off"></div>
-      <button class="play-btn" type="button" id="words-play-btn" data-tts-sequence="#words-cards" data-tts-rate="0.78"><span aria-hidden="true">▶</span> 连读本组</button>
+{% block content %}<link rel="stylesheet" href="{% static 'words/words.css' %}?v=5"><link rel="stylesheet" href="{% static 'english-study.css' %}?v=9"><script src="{% static 'english-study.js' %}?v=3" defer></script><script src="{% static 'speech.js' %}" defer></script><script src="{% static 'tts.js' %}?v=6" defer></script>{{ state|json_script:"words-state" }}
+<div class="study-skin"><div class="study-shell words-shell english-library-layout" id="english-textbook-layout" data-sidebar-side="right">
+  <aside class="english-sidebar" aria-label="场景学习控制与目录">
+    {% include 'includes/tts_player.html' with player_mode='scenario' %}
+    <details class="tts-details textbook-settings"><summary>⚙ 朗读设置</summary>{% include 'includes/tts_controls.html' with sequence_settings=True sequence_status_in_player=True %}</details>
+    <div class="english-sidebar-body">
+      <section class="sidebar" aria-label="场景选择">
+        <div class="sidebar-label">切换场景 <span class="nav-count" id="words-nav-count"></span></div>
+        <div class="search-box"><label class="sr-only" for="words-search">搜索单词、中文或场景</label><input id="words-search" type="search" placeholder="搜索单词、中文或场景" autocomplete="off"></div>
+        <details class="category-nav" open><summary>场景列表</summary><nav id="words-chips"></nav></details>
+        <p class="sidebar-note">点场景换一组词；也可以搜索后连读找到的单词。</p>
+      </section>
     </div>
-    {% include 'includes/tts_controls.html' %}
+  </aside>
+  <section class="study-content">
     <p id="words-feedback" class="words-feedback" role="status" aria-live="polite" aria-atomic="true"></p>
-    <main id="words-cards" tabindex="-1"></main>
-  </div>
-</div>
-<script src="{% static 'words/words.js' %}?v=3" defer></script>
+    <div id="words-cards" tabindex="-1"></div>
+  </section>
+</div></div>
+<script src="{% static 'words/words.js' %}?v=4" defer></script>
 {% endblock %}

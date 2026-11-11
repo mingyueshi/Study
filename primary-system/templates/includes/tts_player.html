@@ -1,0 +1,37 @@
+<section class="textbook-player" id="tts-sequence-player" data-state="idle"{% if player_mode == 'idiom' %} data-tts-language="zh-CN"{% endif %} aria-label="连读控制">
+    <div class="textbook-player-heading">
+      <b>学习侧栏</b>
+      <button class="sidebar-side-toggle" id="english-sidebar-toggle" type="button" aria-controls="{{ reading_layout_id|default:'english-textbook-layout' }}" aria-label="将侧栏移到左侧">← 移到左侧</button>
+    </div>
+    {% if player_mode == 'idiom' %}
+    <div class="reading-scope"><p>本组跟读 · {{ available_count }} 个成语</p><h2>{{ scene.title }}</h2></div>
+    <label class="textbook-scope" for="tts-text-scope">朗读内容
+      <select id="tts-text-scope">
+        <option value="#idiom-cards" data-tts-text-key="saySeq" data-tts-focus-label="🔊 听这个成语">成语</option>
+        <option value="#idiom-cards" data-tts-text-key="sayExample" data-tts-focus-label="🔊 听这句例句">场景例句</option>
+      </select>
+    </label>
+    {% elif player_mode == 'scenario' %}
+    <div class="reading-scope"><p>本组跟读</p><h2 id="words-player-scope">场景单词</h2></div>
+    {% else %}
+    <div class="english-tabs" role="tablist" aria-label="切换单词或课文">
+      <a class="tab{% if tab != 'texts' %} on{% endif %}" role="tab" aria-selected="{% if tab != 'texts' %}true{% else %}false{% endif %}" href="?unit={{ selected_unit.code }}&amp;tab=words">🔤 单词 <i>{{ page.paginator.count }}</i></a>
+      <a class="tab{% if tab == 'texts' %} on{% endif %}" role="tab" aria-selected="{% if tab == 'texts' %}true{% else %}false{% endif %}" href="?unit={{ selected_unit.code }}&amp;tab=texts">💬 课文 <i>{{ dialogue_items|length }}</i></a>
+    </div>
+    {% if tab == 'texts' and dialogue_items %}
+    <label class="textbook-scope" for="tts-text-scope">朗读范围
+      <select id="tts-text-scope">
+        <option value="#english-dialogues">本单元全部课文</option>
+        {% for item in dialogue_items %}<option value="#dialogue-{{ item.pk }} .dialogue-lines">{{ item.title }}</option>{% endfor %}
+      </select>
+    </label>
+    {% endif %}
+    {% endif %}
+    <div class="textbook-player-actions">
+      <button class="button" id="{% if player_mode == 'scenario' %}words-play-btn{% else %}tts-unit-play{% endif %}" type="button" data-tts-sequence="{% if player_mode == 'idiom' %}#idiom-cards{% elif player_mode == 'scenario' %}#words-cards{% elif tab == 'texts' %}#english-dialogues{% else %}#english-cards{% endif %}" data-tts-rate="0.78" data-tts-pausable="true" {% if player_mode == 'idiom' %}{% if not available_count %}disabled{% endif %}{% elif player_mode == 'scenario' %}disabled{% elif tab == 'texts' and not dialogue_items or tab != 'texts' and not page.paginator.count %}disabled{% endif %}>▶ 开始连读</button>
+      <button class="button textbook-restart" id="tts-sequence-restart" type="button" disabled>从头开始</button>
+    </div>
+    <p class="textbook-player-status" id="tts-sequence-status" role="status">{% if player_mode == 'idiom' and not available_count %}本组词卡待核对，先换一个场景试试吧。{% else %}准备好了，点击开始连读。{% endif %}</p>
+    <p class="textbook-player-current{% if tab != 'texts' %} textbook-player-current-word{% endif %}" id="tts-sequence-current" lang="{% if player_mode == 'idiom' %}zh-CN{% else %}en{% endif %}" hidden></p>
+    <progress id="tts-sequence-progress" max="1" value="0" aria-label="本次连读进度" hidden></progress>
+  </section>

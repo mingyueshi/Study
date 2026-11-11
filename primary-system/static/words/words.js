@@ -11,7 +11,7 @@
 
   const $ = (id) => document.getElementById(id);
   const chipsEl = $('words-chips'), cardsEl = $('words-cards'), navCountEl = $('words-nav-count'),
-        searchEl = $('words-search'), playBtn = $('words-play-btn'), feedbackEl = $('words-feedback');
+        searchEl = $('words-search'), playBtn = $('words-play-btn'), feedbackEl = $('words-feedback'), scopeEl = $('words-player-scope');
 
   const WORDS_BY_ID = new Map(state.words.map((w) => [w.id, w]));
   const scenarioOf = (word) => word.scenario;
@@ -53,7 +53,6 @@
     for (const scenario of state.scenarios) {
       scenario.learned = state.words.filter((w) => w.scenario === scenario.id && w.learned).length;
     }
-    if (window.TTS) window.TTS.stopSequence();
     render();
     showFeedback(`${word?.en || '单词'}：${data.learned ? '已标记掌握' : '已取消掌握'}。`);
     if (data.learned && window.TTS) window.TTS.speak('Great!', { rate: 0.9 });
@@ -99,6 +98,9 @@
     const searching = Boolean(query);
     const shown = state.words.filter(matchSearch);
     const unit = state.scenarios.find((s) => s.id === curUnit) || state.scenarios[0];
+    const visible = searching ? shown : state.words.filter(w => w.scenario === unit?.id);
+    // 重画词卡前使旧队列与回调失效，场景、搜索及掌握操作都从新范围开始。
+    window.TTS?.resetSequence?.(visible.length ? '准备好了，点击开始连读。' : '暂时没有可连读的单词，试着换个搜索词。');
 
     chipsEl.innerHTML = state.scenarios.map((s) =>
       `<button class="chip${s.id === curUnit && !searching ? ' on' : ''}" type="button" data-unit="${s.id}" aria-pressed="${s.id === curUnit && !searching}" style="--c:${escapeHtml(s.color)}">` +
@@ -119,11 +121,12 @@
       const learned = state.words.filter((w) => w.scenario === unit.id && w.learned).length;
       cardsEl.innerHTML = `<div class="unit-head"><span class="unit-emoji" aria-hidden="true">${escapeHtml(unit.emoji)}</span>` +
         `<h1>${escapeHtml(unit.name)} <span class="unit-cn">${escapeHtml(unit.zh)}</span></h1><p class="unit-progress">已掌握 <strong>${learned}</strong> / ${unit.total} 词</p></div>` +
-        `<div class="wgrid">${state.words.filter((w) => w.scenario === unit.id).map((w) => cardHTML(w, false)).join('')}</div>`;
+        `<div class="wgrid">${visible.map((w) => cardHTML(w, false)).join('')}</div>`;
     } else {
       cardsEl.innerHTML = '<div class="empty">场景正在准备中。</div>';
     }
-    playBtn.hidden = searching || !unit;
+    playBtn.disabled = !visible.length || !('speechSynthesis' in window);
+    if (scopeEl) scopeEl.textContent = searching ? `搜索结果 · ${visible.length} 词` : unit ? `${unit.emoji || ''} ${unit.zh} · ${visible.length} 词`.trim() : '场景正在准备中';
   }
 
   cardsEl.addEventListener('click', (event) => {
@@ -142,13 +145,11 @@
     curUnit = chip.dataset.unit;
     query = '';
     searchEl.value = '';
-    if (window.TTS) window.TTS.stopSequence();
     render();
   });
 
   searchEl.addEventListener('input', () => {
     query = searchEl.value.trim().toLowerCase();
-    if (query && window.TTS) window.TTS.stopSequence();
     render();
   });
 

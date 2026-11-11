@@ -1,0 +1,48 @@
+/* 场景成语使用共用阅读侧栏，专题的词典、故事和游戏保持原有编排。 */
+.idiom-learning { --subject-ink: var(--idiom-green); --subject-line: var(--idiom-line); }
+.idiom-learning :is(h1, h2, h3) { text-wrap: balance; }
+.idiom-learning p { text-wrap: pretty; }
+.idiom-learning .idiom-hero { background: #edf4e4; }
+.idiom-learning .idiom-scene-content { min-width: 0; }
+.idiom-learning .idiom-search-results { margin-bottom: 1rem; }
+.idiom-learning .idiom-section-heading { margin-top: 0; }
+.idiom-learning .idiom-card-heading { background: #eaf3e7; }
+.idiom-learning .idiom-card-heading h3 { font-size: clamp(28px, 2.2vw, 36px); }
+.idiom-learning .idiom-card-heading .idiom-pinyin { font-size: 20px; }
+.idiom-learning .idiom-card-body { font-size: 18px; line-height: 1.8; }
+.idiom-learning .idiom-practice dt { display: flex; align-items: center; gap: 10px; }
+.idiom-learning .idiom-example-say { padding: 3px 10px; }
+.idiom-learning .idiom-workspace .idiom-scene-nav { position: static; max-height: none; overflow: visible; }
+.idiom-learning .idiom-scene-nav a { font-size: 17px; padding: 7px 10px; }
+.idiom-learning .idiom-nav-group h3 { font-size: 15px; }
+.idiom-learning .idiom-scene-nav h2 { font-size: 20px; }
+.idiom-learning .textbook-scope select { display: block; width: 100%; }
+.idiom-learning .textbook-player-status { margin-top: 14px; }
+.idiom-learning .textbook-player-current { margin-top: 12px; }
+.idiom-learning .textbook-settings summary { border-color: var(--subject-line); color: var(--subject-ink); }
+.idiom-learning .tts-settings legend { font-size: 16px; }
+.idiom-learning .tts-controls-note { font-size: 14px; line-height: 1.7; }
+.idiom-learning .tts-voice-control { margin: 0; }
+.idiom-learning .idiom-cards { gap: 28px; padding: 14px 8px 10px; }
+
+@media screen {
+  .idiom-learning .idiom-cards.tts-focus-mode .idiom-reader:not(.tts-playing) { opacity: .5; }
+  .idiom-learning .idiom-cards.tts-focus-mode .idiom-reader:focus-within { opacity: 1; }
+  .idiom-learning .idiom-reader.tts-playing { position: relative; outline: 5px solid #ad5718; outline-offset: 3px; border-color: #d99530; background: #fff7d6; }
+  .idiom-learning .idiom-reader.tts-playing::after { top: -17px; left: 18px; }
+  .idiom-learning .idiom-reader.tts-playing .idiom-card-heading { background: #fff0af; }
+  .idiom-learning .idiom-reader.tts-playing .idiom-card-title h3 { color: #64330e; }
+  .idiom-learning .idiom-reader.tts-playing .idiom-pinyin { color: #64330e; font-weight: 750; }
+  .idiom-learning .idiom-reader.tts-playing :is(.idiom-definition, .idiom-card-footer) { opacity: .58; }
+  .idiom-learning .idiom-reader.tts-playing[data-tts-content-key="sayExample"] .idiom-scene-example { color: #64330e; background: #ffdf78; border-radius: 6px; box-shadow: 0 0 0 5px #ffdf78; font-weight: 750; }
+  .idiom-learning .idiom-reader.tts-playing.tts-paused { outline-style: dashed; background: #fff4df; }
+}
+@media (max-width: 759px) {
+  .idiom-learning .idiom-workspace { grid-template-columns: minmax(0, 1fr); }
+  .idiom-learning .idiom-card-heading { gap: 10px; padding-inline: 12px; }
+  .idiom-learning .idiom-seal { width: 42px; height: 42px; font-size: 28px; }
+  .idiom-learning .idiom-card-heading h3 { font-size: 28px; }
+}
+@media print {
+  .idiom-learning .idiom-search, .idiom-learning .say-chip { display: none; }
+}

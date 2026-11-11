@@ -3,9 +3,13 @@
 <fieldset class="tts-settings" aria-describedby="tts-status">
   <legend>朗读设置</legend>
   <div class="tts-controls-grid">
+    {% if language == 'zh' %}
+    <p class="tts-voice-control tts-controls-note">中文朗读 · 自动使用系统中文发音</p>
+    {% else %}
     <label class="tts-voice-control" for="tts-voice">英语发音
       <select id="tts-voice"><option value="">正在加载发音人……</option></select>
     </label>
+    {% endif %}
     <div class="tts-control-slider">
       <label for="tts-rate">速度 <output id="tts-rate-value" for="tts-rate">0.80×</output></label>
       <input id="tts-rate" type="range" min="0.5" max="1.5" step="0.05" value="0.8">
@@ -14,10 +18,10 @@
       <label for="tts-volume">音量 <output id="tts-volume-value" for="tts-volume">100%</output></label>
       <input id="tts-volume" type="range" min="0" max="1" step="0.05" value="1">
     </div>
-    <button class="button small" id="tts-preview" type="button" data-say="Hello! Nice to meet you.">试听</button>
+    <button class="button small" id="tts-preview" type="button" data-say="{% if language == 'zh' %}兴高采烈，学会一个成语，讲好一个故事。{% else %}Hello! Nice to meet you.{% endif %}">试听</button>
   </div>
   {% if sequence_settings %}
-  <div class="tts-sequence-settings" aria-label="教材连读设置">
+  <div class="tts-sequence-settings" aria-label="连读设置">
     <div class="tts-control-slider">
       <label for="tts-interval">跟读间隔 <output id="tts-interval-value" for="tts-interval">3 秒</output></label>
       <input id="tts-interval" type="range" min="0" max="10" step="1" value="3" aria-describedby="tts-sequence-note">
@@ -26,9 +30,9 @@
       <label for="tts-repeat">每项朗读 <output id="tts-repeat-value" for="tts-repeat">1 次</output></label>
       <input id="tts-repeat" type="range" min="1" max="5" step="1" value="1" aria-describedby="tts-sequence-note">
     </div>
-    <p class="tts-sequence-status" id="tts-sequence-status" role="status">听一遍，再跟着读一遍。</p>
+    {% if not sequence_status_in_player %}<p class="tts-sequence-status" id="tts-sequence-status" role="status">听一遍，再跟着读一遍。</p>{% endif %}
   </div>
-  <p class="tts-controls-note" id="tts-sequence-note">单词和课文连读时，每次发音后都会留出跟读时间，同一项读够次数再往下读。设为 0 秒可连续播放；连读设置保存在当前浏览器，下次开始连读时生效。</p>
+  <p class="tts-controls-note" id="tts-sequence-note">每次发音后都会留出跟读时间，同一项读够次数再往下读。设为 0 秒可连续播放；连读设置保存在当前浏览器，下次开始连读时生效。</p>
   {% endif %}
-  <p id="tts-status" class="tts-controls-note">发音人、速度和音量保存在当前浏览器，并与场景单词共用；调整后从下一次发音生效。</p>
+  <p id="tts-status" class="tts-controls-note">{% if language == 'zh' %}中文朗读的速度和音量保存在当前浏览器；调整后从下一次发音生效。{% else %}发音人、速度和音量保存在当前浏览器，并与场景单词共用；调整后从下一次发音生效。{% endif %}</p>
 </fieldset>
