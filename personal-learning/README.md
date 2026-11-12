@@ -70,3 +70,7 @@ node english/techlex/test/test-progress.js
 ```
 
 进一步说明见 [TechLex 文档](english/techlex/README.md)。新增学习方向时，在本目录创建子目录及入口页，并更新总首页和各页面的学习系统导航。
+
+## 阅读侧栏
+
+TechLex、AI 学习、开发命令和语言与框架的目录默认位于右侧，顶部按钮可移到左侧，位置自动保存在当前浏览器。长目录按剩余屏幕高度滚动，窄窗口通过「展开侧栏」查看。AI 概念自检、工具资料、实操记录、提示词背景和项目检查也沿用这套交互。实现与样式位于本系统的 `assets/sidebar-layout.js` 和 `assets/sidebar-layout.css`，离线打开仍可使用。

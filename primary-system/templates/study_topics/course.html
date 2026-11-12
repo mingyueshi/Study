@@ -14,7 +14,7 @@
 <script src="{% static topic|add:'-figures.js' %}{% if course_slug == 'sci' %}?v=2{% endif %}" defer></script>
 {% if course_slug == 'astro' %}<script src="{% static 'study_topics/astro/astro-photos.js' %}" defer></script>{% endif %}
 <script src="{% static topic|add:'-app.js' %}{% if course_slug == 'sci' %}?v=2{% elif course_slug == 'lit' %}?v=2{% endif %}" defer></script>
-<script src="{% static 'mathbook/layout.js' %}" defer></script>
+<script src="{% static 'mathbook/layout.js' %}?v=2" defer></script>
 {% endwith %}
 {% endblock %}
 

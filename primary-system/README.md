@@ -206,3 +206,7 @@ make test-frontend
 PostgreSQL 使用 `requirements-postgres.txt`，设置 `PRIMARY_DB_ENGINE=postgres` 及 `PRIMARY_DB_NAME/USER/HOST/PORT/PASSWORD`；切换配置不会自动搬运 SQLite 数据。本机默认 SQLite；`bootstrap.py --database` 只支持 SQLite 初始化。
 
 本次范围为本地开发。生产配置需启用 `PRIMARY_PRODUCTION=1`、关闭 DEBUG，并设置独立密钥、主机与 CSRF 域名，使用正式应用服务和 HTTPS 代理。开发服务器仅监听回环地址。
+
+## 阅读侧栏
+
+教材、专题目录和工具侧栏默认在右侧，顶部按钮可以移到左侧，选择自动保存在当前浏览器。侧栏按窗口剩余高度伸缩，搜索、筛选等常用工具在上方，长目录在剩余区域独立滚动；窄窗口可展开或收起侧栏。页面切换和词卡更新保留原有查询、深链接、作答和记录逻辑。适用页面与接入方法见 [侧栏布局说明](docs/sidebar-layout.md)。

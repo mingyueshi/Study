@@ -43,10 +43,11 @@
     if (count) count.textContent = buttons.length;
     const active = chips.querySelector('.chip.on');
     if (active && !compact.matches) {
-      const top = active.getBoundingClientRect().top - directory.getBoundingClientRect().top;
-      if (top < 0) directory.scrollTop += top;
-      else if (top + active.offsetHeight > directory.clientHeight) {
-        directory.scrollTop += top + active.offsetHeight - directory.clientHeight;
+      const scroller = directory.closest('.sl-scroll') || directory;
+      const top = active.getBoundingClientRect().top - scroller.getBoundingClientRect().top;
+      if (top < 0) scroller.scrollTop += top;
+      else if (top + active.offsetHeight > scroller.clientHeight) {
+        scroller.scrollTop += top + active.offsetHeight - scroller.clientHeight;
       }
     }
   };

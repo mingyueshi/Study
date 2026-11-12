@@ -23,10 +23,11 @@
     // 只滚动侧栏自身，恢复上次单元时不把正文一起推走。
     const active = chips.querySelector('.chip.on');
     if (active && !compact.matches) {
-      const top = active.getBoundingClientRect().top - directory.getBoundingClientRect().top;
-      if (top < 0) directory.scrollTop += top;
-      else if (top + active.offsetHeight > directory.clientHeight) {
-        directory.scrollTop += top + active.offsetHeight - directory.clientHeight;
+      const scroller = directory.closest('.sl-scroll') || directory;
+      const top = active.getBoundingClientRect().top - scroller.getBoundingClientRect().top;
+      if (top < 0) scroller.scrollTop += top;
+      else if (top + active.offsetHeight > scroller.clientHeight) {
+        scroller.scrollTop += top + active.offsetHeight - scroller.clientHeight;
       }
     }
   };
