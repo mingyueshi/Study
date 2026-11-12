@@ -90,6 +90,8 @@ class EnglishTextbookTests(PlatformFixture):
         self.assertContains(response, 'data-tts-sequence="#english-dialogues"')
         self.assertContains(response, 'data-tts-pausable="true"')
         self.assertContains(response, '从头开始')
+        self.assertContains(response, 'id="tts-sequence-stop"')
+        self.assertContains(response, 'data-reading-select aria-pressed="false"')
         self.assertContains(response, 'data-say-seq="Can you jump high, Daming?"')
         self.assertContains(response, 'data-say-seq="Yes, I can."')
         self.assertContains(response, 'id="tts-interval"')
@@ -100,6 +102,8 @@ class EnglishTextbookTests(PlatformFixture):
         self.assertContains(words, 'id="tts-interval"')
         self.assertContains(words, 'id="tts-repeat"')
         self.assertContains(words, 'data-tts-sequence="#english-cards"')
+        self.assertContains(words, 'class="word-select"')
+        self.assertContains(words, 'reading-focus.js')
         self.assertNotContains(words, item.title)
 
     def test_seed_renames_english_module_once(self):

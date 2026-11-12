@@ -50,6 +50,8 @@ body:has(.study-skin) .shell { padding-bottom: 40px; }
 .textbook-player-actions .button { min-width: 0; min-height: 48px; padding: 10px 6px; font-size: 15px; }
 .textbook-player-actions .button:disabled { opacity: .5; cursor: not-allowed; box-shadow: none; }
 .textbook-player-actions .textbook-restart { background: #fffaf0; color: #76501e; border-color: #dec99f; }
+.textbook-player-actions .textbook-stop { grid-column: 1 / -1; background: #fff4ed; color: #8b3f24; border-color: #dca78b; box-shadow: 0 2px 0 #dca78b; }
+.textbook-player-actions .textbook-stop:hover:not(:disabled) { background: #ffe6d9; border-color: #8b3f24; }
 .textbook-player-actions .tts-active { background: #9b5316; color: #fff; border-color: #9b5316; }
 .textbook-player[data-state="paused"] { border-color: #ce9949; box-shadow: 0 3px 0 #ce9949; }
 .textbook-player[data-state="paused"] .tts-active { background: var(--subject-ink); border-color: var(--subject-ink); }
@@ -70,7 +72,24 @@ body:has(.study-skin) .shell { padding-bottom: 40px; }
 .study-skin :is(#english-cards, #words-cards) .wcard.tts-playing.tts-paused { outline-style: dashed; background: #fff4df; }
 
 /* 跟读焦点只用于屏幕，打印时保留完整词卡。 */
+.study-skin :is(#english-cards, #words-cards, #idiom-cards) :is(.word-select, .reading-select) { max-width: 100%; padding: 0; border: 0; background: transparent; color: inherit; font: inherit; letter-spacing: inherit; line-height: inherit; text-align: left; overflow-wrap: anywhere; cursor: pointer; }
 @media screen {
+/* 悬停和手动选中不挪动词句，保留稳定的阅读位置。 */
+.study-skin :is(#english-cards, #words-cards, #idiom-cards) :is(.word-select, .reading-select):focus-visible { outline: 3px solid #ad5718; outline-offset: 5px; border-radius: 4px; }
+.study-skin :is(#english-cards, #words-cards) .wcard:not(.tts-playing):is(:hover, :focus-within) { transform: none; outline: 3px solid #d3a04d; outline-offset: 2px; border-color: #d3a04d; background: #fff9e6; box-shadow: 0 3px 0 #e5cf9c; }
+.study-skin #english-dialogues .bubble:not(.tts-playing):is(:hover, :focus-visible) { outline: 3px solid #d3a04d; outline-offset: 2px; border-color: #d3a04d; background: #fff9e6; }
+.study-skin :is(#english-cards, #words-cards).has-reading-selection .wcard:not(.reading-selected) { opacity: .65; }
+.study-skin #english-dialogues.has-reading-selection .dialogue-row:not(:has(.reading-selected)) { opacity: .65; }
+.study-skin :is(#english-cards, #words-cards) .wcard.reading-selected:not(.tts-playing),
+.study-skin #english-dialogues .bubble.reading-selected:not(.tts-playing) { position: relative; transform: none; outline: 4px solid #ad5718; outline-offset: 3px; border-color: #ad5718; background: #fff0b5; box-shadow: 0 5px 0 #e5bd68; }
+.study-skin :is(#english-cards, #words-cards) .wcard.reading-selected .word,
+.study-skin #english-dialogues .bubble.reading-selected .bubble-en { color: #64330e; }
+.study-skin :is(#english-cards, #words-cards, #english-dialogues, #idiom-cards) .reading-selected::after { content: '✓ 已选中'; position: absolute; padding: 4px 12px; border-radius: 999px; color: #fff; background: #8b4a15; font-size: 15px; font-weight: 800; line-height: 1.5; pointer-events: none; }
+.study-skin :is(#english-cards, #words-cards) .wcard.reading-selected::after { top: -17px; left: 18px; }
+.study-skin #english-dialogues .bubble.reading-selected::after { right: 10px; bottom: -15px; }
+.study-skin :is(#english-cards, #words-cards) .reading-selected-detail { outline: 3px solid #ad5718; outline-offset: 2px; background: #ffdf78; }
+.study-skin :is(#english-cards, #words-cards) .wcard:is(:hover, :focus-within),
+.study-skin #english-dialogues .dialogue-row:is(:hover, :focus-within) { opacity: 1 !important; }
 /* 跟读焦点：当前词句保持明亮，其他内容退后；不改变卡片栅格与字号，避免跳动。 */
 .study-skin :is(#english-cards, #words-cards).tts-focus-mode .wcard:not(.tts-playing) { opacity: .5; }
 .study-skin :is(#english-cards, #words-cards).tts-focus-mode .wcard:not(.tts-playing):focus-within { opacity: 1; }

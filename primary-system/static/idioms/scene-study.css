@@ -26,6 +26,15 @@
 .idiom-learning .idiom-cards { gap: 28px; padding: 14px 8px 10px; }
 
 @media screen {
+  .idiom-learning .idiom-reader[data-say-seq]:not(.tts-playing):is(:hover, :focus-within) { outline: 3px solid #d3a04d; outline-offset: 2px; border-color: #d3a04d; background: #fff9e6; }
+  .idiom-learning .idiom-cards.has-reading-selection .idiom-reader:not(.reading-selected) { opacity: .65; }
+  .idiom-learning .idiom-reader.reading-selected[data-say-seq]:not(.tts-playing) { position: relative; outline: 4px solid #ad5718; outline-offset: 3px; border-color: #ad5718; background: #fff0b5; box-shadow: 0 5px 0 #e5bd68; }
+  .idiom-learning .idiom-reader.reading-selected::after { top: -17px; left: 18px; }
+  .idiom-learning .idiom-reader.reading-selected .idiom-card-heading { background: #fff0af; }
+  .idiom-learning .idiom-reader.reading-selected :is(h3, .idiom-pinyin) { color: #64330e; }
+  .idiom-learning #idiom-cards .reading-selected-detail { outline: 3px solid #ad5718; outline-offset: 2px; border-radius: 6px; background: #ffdf78; color: #64330e; }
+  .idiom-learning .idiom-cards .idiom-reader:is(:hover, :focus-within) { opacity: 1 !important; }
+
   .idiom-learning .idiom-cards.tts-focus-mode .idiom-reader:not(.tts-playing) { opacity: .5; }
   .idiom-learning .idiom-cards.tts-focus-mode .idiom-reader:focus-within { opacity: 1; }
   .idiom-learning .idiom-reader.tts-playing { position: relative; outline: 5px solid #ad5718; outline-offset: 3px; border-color: #d99530; background: #fff7d6; }

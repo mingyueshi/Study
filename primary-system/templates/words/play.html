@@ -1,5 +1,5 @@
 {% extends 'base.html' %}{% load static %}{% block title %}场景单词 · 乐学堂{% endblock %}
-{% block content %}<link rel="stylesheet" href="{% static 'words/words.css' %}?v=5"><link rel="stylesheet" href="{% static 'english-study.css' %}?v=9"><script src="{% static 'english-study.js' %}?v=3" defer></script><script src="{% static 'speech.js' %}" defer></script><script src="{% static 'tts.js' %}?v=6" defer></script>{{ state|json_script:"words-state" }}
+{% block content %}<link rel="stylesheet" href="{% static 'words/words.css' %}?v=5"><link rel="stylesheet" href="{% static 'english-study.css' %}?v=11"><script src="{% static 'english-study.js' %}?v=3" defer></script><script src="{% static 'speech.js' %}" defer></script><script src="{% static 'tts.js' %}?v=8" defer></script><script src="{% static 'reading-focus.js' %}?v=1" defer></script>{{ state|json_script:"words-state" }}
 <div class="study-skin"><div class="study-shell words-shell english-library-layout" id="english-textbook-layout" data-sidebar-side="right">
   <aside class="english-sidebar" aria-label="场景学习控制与目录">
     {% include 'includes/tts_player.html' with player_mode='scenario' %}
@@ -18,5 +18,5 @@
     <div id="words-cards" tabindex="-1"></div>
   </section>
 </div></div>
-<script src="{% static 'words/words.js' %}?v=4" defer></script>
+<script src="{% static 'words/words.js' %}?v=5" defer></script>
 {% endblock %}

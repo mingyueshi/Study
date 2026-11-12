@@ -111,6 +111,7 @@ class IdiomPageTests(TestCase):
         self.assertNotContains(response, '同学们兴高采烈地去春游。')
         self.assertNotContains(response, 'data-say-seq=')
         self.assertNotContains(response, 'data-say-example=')
+        self.assertNotContains(response, 'data-reading-select')
         self.assertContains(response, '本组词卡待核对，先换一个场景试试吧。')
         self.assertRegex(response.content.decode(), r'id="tts-unit-play"[^>]+disabled')
 
@@ -120,6 +121,8 @@ class IdiomPageTests(TestCase):
                      '跟读间隔', '每项朗读', '从头开始', 'data-tts-language="zh-CN"',
                      'data-say-seq="兴高采烈"', 'data-say-example="同学们兴高采烈地去春游。"',
                      'data-tts-text-key="sayExample"', 'lang="zh-CN"',
+                     'reading-focus.js', 'data-reading-select data-reading-detail',
+                     'data-reading-target=".idiom-example-select"',
                      f'id="word-{self.binding.pk}"', f'#record-{self.record.pk}'):
             self.assertContains(response, text)
         self.assertNotContains(response, 'id="tts-voice"')

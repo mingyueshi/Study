@@ -1,9 +1,10 @@
 {% extends 'idioms/layout.html' %}{% load static %}
 {% block title %}场景成语 · 乐学堂{% endblock %}
 {% block idiom_assets %}
-<link rel="stylesheet" href="{% static 'english-study.css' %}?v=9">
-<link rel="stylesheet" href="{% static 'idioms/scene-study.css' %}?v=1">
+<link rel="stylesheet" href="{% static 'english-study.css' %}?v=11">
+<link rel="stylesheet" href="{% static 'idioms/scene-study.css' %}?v=2">
 <script src="{% static 'english-study.js' %}?v=3" defer></script>
+<script src="{% static 'reading-focus.js' %}?v=1" defer></script>
 {% endblock %}
 {% block idiom_content %}
 <div class="study-skin idiom-learning">
@@ -94,7 +95,7 @@
           <span class="idiom-seal" aria-hidden="true">{{ card.headword|first }}</span>
           <div class="idiom-card-title">
             <span class="idiom-card-number" aria-hidden="true">{{ forloop.counter|stringformat:"02d" }}</span>
-            <h3>{{ card.headword }}</h3>
+            <h3>{% if reading %}<button class="reading-select" type="button" data-reading-select aria-pressed="false" aria-label="选中成语 {{ card.headword }}">{{ card.headword }}</button>{% else %}{{ card.headword }}{% endif %}</h3>
             {% include 'idioms/pinyin.html' %}
           </div>
           {% if reading %}<button type="button" class="say-chip" data-say="{{ card.headword }}" aria-label="朗读 {{ card.headword }}">🔊</button>{% endif %}
@@ -102,7 +103,7 @@
         <div class="idiom-card-body">
         {% if reading %}
           <dl class="idiom-practice">
-            <div><dt>场景例句 <button type="button" class="say-chip idiom-example-say" data-say="{{ card.example }}" aria-label="朗读{{ card.headword }}的场景例句">🔊</button></dt><dd class="idiom-scene-example">{{ card.example }}</dd></div>
+            <div><dt>场景例句 <button type="button" class="say-chip idiom-example-say" data-reading-target=".idiom-example-select" data-say="{{ card.example }}" aria-label="朗读{{ card.headword }}的场景例句">🔊</button></dt><dd class="idiom-scene-example"><button class="reading-select idiom-example-select" type="button" data-reading-select data-reading-detail aria-pressed="false" aria-label="选中{{ card.headword }}的场景例句">{{ card.example }}</button></dd></div>
             <div><dt>用法提示</dt><dd>{{ card.note }}</dd></div>
           </dl>
           <dl class="idiom-definition">{% include 'idioms/gloss.html' %}</dl>

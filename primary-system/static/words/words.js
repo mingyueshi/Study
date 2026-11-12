@@ -75,7 +75,7 @@
       ? `<span class="unit-tag">${escapeHtml(unit.emoji || '')} ${escapeHtml(unit.zh)}</span>` : '';
     return `<article class="wcard${word.learned ? ' learned' : ''}" data-word="${escapeHtml(word.id)}" data-say-seq="${escapeHtml(word.en)}" style="--c:${escapeHtml(unit.color || '#4d96ff')}">${unitTag}` +
       `<div class="wtop"><button class="pic" type="button" data-say="${escapeHtml(word.en)}" aria-label="朗读 ${escapeHtml(word.en)}">${picHTML(word)}</button>` +
-      `<div class="winfo"><div class="wline"><h2 class="word">${escapeHtml(word.en)}</h2><button class="say" type="button" data-say="${escapeHtml(word.en)}" aria-label="朗读 ${escapeHtml(word.en)}">🔊</button></div>` +
+      `<div class="winfo"><div class="wline"><h2 class="word"><button class="word-select" type="button" data-reading-select aria-pressed="false" aria-label="选中单词 ${escapeHtml(word.en)}">${escapeHtml(word.en)}</button></h2><button class="say" type="button" data-say="${escapeHtml(word.en)}" aria-label="朗读 ${escapeHtml(word.en)}">🔊</button></div>` +
       `<div class="wmeta"><span class="ipa">${escapeHtml(word.ipa)}</span><span class="zh">${escapeHtml(word.zh || word.source_status || '')}</span></div></div></div>` +
       (word.chinese_example ? `<p class="memo">例：${escapeHtml(word.chinese_example)}</p>` : '') +
       (parts ? `<div class="wsec"><span class="seclabel">记</span><span class="parts">${parts}</span></div>` : '') +

@@ -233,6 +233,8 @@ class ScenarioPlayTests(TestCase):
         self.assertContains(page, 'data-tts-pausable="true"')
         self.assertContains(page, 'id="tts-interval"')
         self.assertContains(page, 'id="tts-repeat"')
+        self.assertContains(page, 'reading-focus.js')
+        self.assertContains(page, 'id="tts-sequence-stop"')
         self.assertContains(page, 'id="tts-sequence-status"', count=1)
         token = enforced.cookies['primary_csrftoken'].value
         state = enforced.get('/words/api/state/').json()

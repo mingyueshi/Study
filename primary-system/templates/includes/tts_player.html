@@ -30,6 +30,7 @@
     <div class="textbook-player-actions">
       <button class="button" id="{% if player_mode == 'scenario' %}words-play-btn{% else %}tts-unit-play{% endif %}" type="button" data-tts-sequence="{% if player_mode == 'idiom' %}#idiom-cards{% elif player_mode == 'scenario' %}#words-cards{% elif tab == 'texts' %}#english-dialogues{% else %}#english-cards{% endif %}" data-tts-rate="0.78" data-tts-pausable="true" {% if player_mode == 'idiom' %}{% if not available_count %}disabled{% endif %}{% elif player_mode == 'scenario' %}disabled{% elif tab == 'texts' and not dialogue_items or tab != 'texts' and not page.paginator.count %}disabled{% endif %}>▶ 开始连读</button>
       <button class="button textbook-restart" id="tts-sequence-restart" type="button" disabled>从头开始</button>
+      <button class="button textbook-stop" id="tts-sequence-stop" type="button" disabled>⏹ 停止连读</button>
     </div>
     <p class="textbook-player-status" id="tts-sequence-status" role="status">{% if player_mode == 'idiom' and not available_count %}本组词卡待核对，先换一个场景试试吧。{% else %}准备好了，点击开始连读。{% endif %}</p>
     <p class="textbook-player-current{% if tab != 'texts' %} textbook-player-current-word{% endif %}" id="tts-sequence-current" lang="{% if player_mode == 'idiom' %}zh-CN{% else %}en{% endif %}" hidden></p>

@@ -199,7 +199,7 @@ test('a self-check-only round displays its assessment without objective stars', 
 
 function speechPage({ supported = true, throws = false, controls = false, sequenceControls = false, pausable = false, textbookKind = 'words', stored = {}, voices = [] } = {}) {
   const button = element(), items = [element(), element()], clicks = [], spoken = [];
-  const buttons = [button], timers = new Map(), lifecycle = {};
+  const buttons = [button], timers = new Map(), lifecycle = {}, signals = [];
   let time = 0, timerId = 0;
   button.textContent = '连读';
   button.dataset = { ttsSequence: '#cards', ttsRate: '0.78' };
@@ -225,6 +225,7 @@ function speechPage({ supported = true, throws = false, controls = false, sequen
       [textbookKind === 'scenario' ? 'words-play-btn' : 'tts-unit-play']: button, 'tts-sequence-player': element(),
       'tts-sequence-current': element(), 'tts-sequence-progress': element(),
       'tts-sequence-restart': Object.assign(element(), { disabled: true }),
+      'tts-sequence-stop': Object.assign(element(), { disabled: true }),
       'tts-text-scope': Object.assign(element(), { value: '#cards' }),
       [contentId]: Object.assign(element(), { id: contentId }),
     });
@@ -257,8 +258,10 @@ function speechPage({ supported = true, throws = false, controls = false, sequen
     window: { ...(supported ? { speechSynthesis: synth } : {}), addEventListener: (event, fn) => { lifecycle[event] = fn; } },
     localStorage: { getItem: (key) => storage[key] || null, setItem: (key, value) => { storage[key] = value; } },
     SpeechSynthesisUtterance: function (text) { this.text = text; },
+    CustomEvent: function (type) {this.type = type;},
     document: {
       addEventListener: (event, fn) => clicks.push(fn), getElementById: (id) => fields[id] || null,
+      dispatchEvent: event => {signals.push(event.type); return true;},
       createElement: () => element(),
       querySelector: (selector) => ({ querySelectorAll: () => selector === '#last' ? items.slice(1) : items }),
       querySelectorAll: (selector) => selector === '.tts-playing'
@@ -276,9 +279,10 @@ function speechPage({ supported = true, throws = false, controls = false, sequen
     preventDefault() {}, target: { closest: (value) => value === selector ? target : null },
   }));
   return {
-    button, spoken, items, fields, storage, lifecycle, timers, synth, click: () => click(button, '[data-tts-sequence]'),
+    button, spoken, items, fields, storage, lifecycle, timers, synth, signals, click: () => click(button, '[data-tts-sequence]'),
     reset() { context.window.TTS.resetSequence(); },
     restart() { fields['tts-sequence-restart'].handlers.click(); },
+    stop() { fields['tts-sequence-stop'].handlers.click(); },
     chooseScope(value, textKey) {
       fields['tts-text-scope'].value = value;
       if (textKey) fields['tts-text-scope'].selectedOptions = [{dataset: {ttsTextKey: textKey, ttsFocusLabel: '🔊 听这句例句'}}];
@@ -589,6 +593,165 @@ test('pausing during the follow-along gap freezes its remaining time and repeat 
   assert.match(page.fields['tts-sequence-status'].textContent, /第 2／2 遍/);
 });
 
+test('explicit stop exits reading focus, clears paused audio and pending gaps, and starts fresh next time', () => {
+  for (const textbookKind of ['words', 'texts', 'scenario', 'idioms']) {
+    for (const phase of ['speaking', 'following', 'paused-speaking', 'paused-gap']) {
+      const page = speechPage({sequenceControls: true, pausable: true, textbookKind});
+      page.adjust('repeat', 2);
+      page.click();
+      const old = page.spoken[0];
+      assert.equal(page.fields['tts-sequence-stop'].disabled, false);
+      if (phase === 'following' || phase === 'paused-gap') page.finish();
+      const lateTimer = [...page.timers.values()][0]?.callback;
+      if (phase.startsWith('paused')) page.click();
+      page.stop();
+      assert.equal(page.synth.paused, false, phase);
+      assert.equal(page.fields['tts-sequence-player'].dataset.state, 'idle');
+      assert.match(page.fields['tts-sequence-status'].textContent, /已停止连读/);
+      assert.equal(page.fields['tts-sequence-stop'].disabled, true);
+      assert.equal(page.fields['tts-sequence-restart'].disabled, true);
+      assert.equal(page.fields['tts-sequence-current'].hidden, true);
+      assert.equal(page.fields['tts-sequence-current'].textContent, '');
+      assert.equal(page.fields['tts-sequence-progress'].hidden, true);
+      assert.equal(page.fields['tts-sequence-progress'].value, 0);
+      assert.equal(page.fields['tts-sequence-progress'].max, 1);
+      assert.ok(page.items.every(item => !item.classList.contains('tts-playing') && !item.dataset.ttsFocusLabel && !item['aria-current']));
+      assert.equal(page.timers.size, 0);
+      old.onend(); lateTimer?.(); page.advance(30000);
+      assert.equal(page.spoken.length, 1);
+      page.click(); old.onend(); lateTimer?.();
+      assert.equal(page.spoken.at(-1).text, page.items[0].dataset.saySeq);
+      assert.match(page.fields['tts-sequence-status'].textContent, /第 1／2 遍/);
+      assert.equal(page.fields['tts-sequence-stop'].disabled, false);
+    }
+  }
+});
+
+function readingSelectionPage(kind = 'words', supported = true) {
+  const root = element(), play = element(), stop = element(), resets = [], events = {};
+  const items = [element(), element()], controls = [element(), element()];
+  items.forEach((item, i) => {
+    item.matches = () => kind === 'texts';
+    item.querySelectorAll = () => [controls[i]];
+    item.querySelector = () => controls[i];
+  });
+  root.contains = item => items.includes(item);
+  const fields = {
+    [{words: 'english-cards', texts: 'english-dialogues', scenario: 'words-cards', idioms: 'idiom-cards'}[kind]]: root,
+    [kind === 'scenario' ? 'words-play-btn' : 'tts-unit-play']: play, 'tts-sequence-stop': stop,
+    'tts-sequence-restart': element(), 'tts-text-scope': element(), 'tts-voice': element(),
+  };
+  let range = false;
+  const reset = message => {resets.push(message); play.classList.remove('tts-active'); stop.disabled = true; events['tts:reset']?.();};
+  const context = vm.createContext({
+    document: {getElementById: id => fields[id] || null, addEventListener: (event, callback) => {events[event] = callback;}},
+    window: {
+      ...(supported ? {speechSynthesis: {}} : {}), getSelection: () => ({type: range ? 'Range' : 'Caret'}),
+      TTS: {resetSequence: reset},
+    },
+  });
+  run('reading-focus.js', context);
+  return {root, items, controls, fields, resets, play, stop, reset,
+    select(index, {say = kind === 'texts', link = false, detail = null, ignored = false} = {}) {
+      const button = {matches: () => !ignored};
+      root.handlers.click({target: {closest(selector) {
+        if (selector === '[data-say-seq]') return items[index];
+        if (selector === 'a, input, textarea, select, summary') return link ? {} : null;
+        if (selector === 'button') return button;
+        if (selector === '[data-say]') return say ? {} : null;
+        if (selector === '[data-reading-select]') return kind === 'texts' ? items[index] : controls[index];
+        if (selector === '[data-reading-detail], .part, .phrase, .rel') return detail;
+        return null;
+      }}});
+    },
+    range(on) {range = on;},
+    escape() {root.handlers.keydown({key: 'Escape', preventDefault() {}});},
+  };
+}
+
+test('reset and explicit stop announce that page rendering must clear manual reading focus', () => {
+  const page = speechPage({sequenceControls: true, pausable: true});
+  page.click();
+  const old = page.spoken[0];
+  page.stop();
+  page.reset();
+  old.onend(); page.advance(30000);
+  assert.deepEqual(page.signals, ['tts:reset', 'tts:reset']);
+});
+
+test('textbook and scenario selection replaces the previous item, preserves links and copying, and clears on stop', () => {
+  for (const kind of ['words', 'texts', 'scenario', 'idioms']) {
+    const page = readingSelectionPage(kind);
+    page.play.classList.add('tts-active');
+    page.select(0);
+    assert.equal(page.resets.length, 1);
+    assert.ok(!page.play.classList.contains('tts-active'));
+    assert.ok(page.items[0].classList.contains('reading-selected'));
+    assert.equal((kind === 'texts' ? page.items : page.controls)[0]['aria-pressed'], 'true');
+    assert.equal(page.stop.disabled, false);
+    page.select(1);
+    assert.ok(!page.items[0].classList.contains('reading-selected'));
+    assert.ok(page.items[1].classList.contains('reading-selected'));
+    page.select(0, {link: true});
+    page.range(true); page.select(0); page.range(false);
+    assert.equal(page.resets.length, 2);
+    page.stop.handlers.click();
+    assert.ok(!page.root.classList.contains('has-reading-selection'));
+    assert.ok(page.items.every(item => !item.classList.contains('reading-selected')));
+    assert.equal((kind === 'texts' ? page.items : page.controls)[1]['aria-pressed'], 'false');
+  }
+});
+
+test('a word can be deselected, detail focus clears on escape, and starting a sequence clears manual focus', () => {
+  const page = readingSelectionPage();
+  page.select(0); page.select(0);
+  assert.ok(!page.root.classList.contains('has-reading-selection'));
+  assert.match(page.resets.at(-1), /已取消选中/);
+  const detail = element();
+  detail.matches = () => false;
+  page.select(0, {say: true, detail});
+  assert.ok(detail.classList.contains('reading-selected-detail'));
+  page.escape();
+  assert.ok(!detail.classList.contains('reading-selected-detail'));
+  assert.ok(!page.root.classList.contains('has-reading-selection'));
+  page.select(1); page.play.handlers.click();
+  assert.ok(!page.root.classList.contains('has-reading-selection'));
+  const unavailable = readingSelectionPage('words', false);
+  unavailable.select(0);
+  assert.equal(unavailable.stop.disabled, true);
+});
+
+test('scenario redraw resets manual focus while mastery buttons keep their own state', () => {
+  const page = readingSelectionPage('scenario');
+  page.select(0);
+  page.select(1, {ignored: true});
+  assert.equal(page.resets.length, 1);
+  assert.ok(page.items[0].classList.contains('reading-selected'));
+  page.reset('重新绘制场景');
+  assert.ok(!page.root.classList.contains('has-reading-selection'));
+  assert.equal(page.controls[0]['aria-pressed'], 'false');
+  assert.equal(page.stop.disabled, true);
+  page.select(1);
+  assert.ok(page.items[1].classList.contains('reading-selected'));
+});
+
+test('idiom headword and example can be selected independently within one card', () => {
+  const page = readingSelectionPage('idioms'), example = element();
+  example.matches = () => true;
+  page.select(0);
+  page.select(0, {detail: example});
+  assert.equal(page.controls[0]['aria-pressed'], 'false');
+  assert.equal(example['aria-pressed'], 'true');
+  assert.ok(example.classList.contains('reading-selected-detail'));
+  page.select(0);
+  assert.ok(page.items[0].classList.contains('reading-selected'));
+  assert.equal(example['aria-pressed'], 'false');
+  assert.equal(page.controls[0]['aria-pressed'], 'true');
+  page.select(0, {detail: example}); page.select(0, {detail: example});
+  assert.ok(!page.root.classList.contains('has-reading-selection'));
+  assert.equal(example['aria-pressed'], 'false');
+});
+
 test('reading focus follows textbook and scenario items through listening, following, pause and completion', () => {
   for (const textbookKind of ['words', 'texts', 'scenario', 'idioms']) {
     const page = speechPage({ sequenceControls: true, pausable: true, textbookKind });
@@ -785,6 +948,7 @@ test('taps, voice changes, page exit and speech failures all release a paused br
   const unsupported = speechPage({ sequenceControls: true, pausable: true, supported: false });
   assert.equal(unsupported.button.disabled, true);
   assert.equal(unsupported.fields['tts-sequence-restart'].disabled, true);
+  assert.equal(unsupported.fields['tts-sequence-stop'].disabled, true);
 });
 
 function wordsPage(fetch, extraWords = [], search = '') {

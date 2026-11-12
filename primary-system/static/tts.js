@@ -18,6 +18,7 @@
   const sequenceProgress = document.getElementById('tts-sequence-progress');
   const unitPlay = document.getElementById('tts-unit-play') || document.getElementById('words-play-btn');
   const restartControl = document.getElementById('tts-sequence-restart');
+  const stopControl = document.getElementById('tts-sequence-stop');
   const scopeControl = document.getElementById('tts-text-scope');
   const readingContent = document.getElementById('english-cards') || document.getElementById('english-dialogues') || document.getElementById('words-cards') || document.getElementById('idiom-cards');
   // 英语沿用原有偏好；中文速度和音量单独保存，避免影响英语跟读。
@@ -127,6 +128,7 @@
     const previous = activeSequence;
     activeSequence = null;
     if (previous) clearTimeout(previous.timer);
+    if (previous && stopControl) stopControl.disabled = true;
     if (previous) setPlayerState(state, message);
     clearPlaying();
     document.querySelectorAll('[data-tts-sequence].tts-active').forEach((button) => {
@@ -143,10 +145,12 @@
   function resetSequence(message = '准备好了，点击开始连读。') {
     stopSequence();
     if (restartControl) restartControl.disabled = true;
+    if (stopControl) stopControl.disabled = true;
     if (sequenceCurrent) { sequenceCurrent.hidden = true; sequenceCurrent.textContent = ''; }
-    if (sequenceProgress) { sequenceProgress.hidden = true; sequenceProgress.value = 0; }
+    if (sequenceProgress) { sequenceProgress.hidden = true; sequenceProgress.value = 0; sequenceProgress.max = 1; }
     const supported = 'speechSynthesis' in window;
     setPlayerState(supported ? 'idle' : 'error', supported ? message : '当前浏览器不支持语音朗读。');
+    document.dispatchEvent?.(new CustomEvent('tts:reset'));
   }
 
   function advanceSequence(sequence) {
@@ -226,6 +230,7 @@
     button.classList.add('tts-active');
     button.textContent = sequence.pausable ? '⏸ 暂停连读' : '⏹ 停止连读';
     if (sequence.pausable && restartControl) restartControl.disabled = false;
+    if (stopControl) stopControl.disabled = false;
     stepSequence(sequence);
   }
 
@@ -269,6 +274,9 @@
   });
   if (restartControl && unitPlay) restartControl.addEventListener('click', () => {
     if (!restartControl.disabled) playSequence(unitPlay);
+  });
+  if (stopControl) stopControl.addEventListener('click', () => {
+    if (!stopControl.disabled) resetSequence('已停止连读，可以自由浏览。再次开始会从头朗读。');
   });
   if (scopeControl && unitPlay) scopeControl.addEventListener('change', () => {
     resetSequence('已切换朗读范围，点击开始连读。');
@@ -314,7 +322,7 @@
   if (!('speechSynthesis' in window)) {
     const status = document.getElementById('tts-status');
     if (status) status.textContent = '当前浏览器不支持语音朗读，可换用支持朗读的浏览器。';
-    [rateControl, volumeControl, intervalControl, repeatControl, unitPlay, restartControl, scopeControl, document.getElementById('tts-preview')].forEach((control) => { if (control) control.disabled = true; });
+    [rateControl, volumeControl, intervalControl, repeatControl, unitPlay, restartControl, stopControl, scopeControl, document.getElementById('tts-preview')].forEach((control) => { if (control) control.disabled = true; });
     if (sequencePlayer) setPlayerState('error', '当前浏览器不支持语音朗读。');
   }
   window.TTS = { stopSequence, resetSequence, speak };
