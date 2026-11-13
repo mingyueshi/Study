@@ -10,8 +10,7 @@ html body [data-sl-ready] > .sl-sidebar {
   min-width: 0; min-height: 0; height: var(--sl-size, var(--sl-height, calc(100dvh - 48px))); max-height: calc(100dvh - var(--sl-top, 24px) - 24px);
 }
 html body [data-sl-ready][data-sl-mode="wide"][data-sl-side="left"] > .sl-sidebar { grid-column: 1 !important; }
-.sl-header { flex: 0 0 auto; display: flex; justify-content: flex-end; }
-[data-sidebar-collapsible="true"] > .sl-sidebar > .sl-header { justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+.sl-header { flex: 0 0 auto; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
 html body .sl-toggle {
   display: inline-flex; align-items: center; justify-content: center; min-height: 40px; padding: 7px 12px;
   border: 1px solid var(--line, #c9dccc); border-radius: 10px; background: var(--panel, var(--white, #f3f8ef));
@@ -19,13 +18,13 @@ html body .sl-toggle {
 }
 html body .sl-toggle:hover { border-color: currentColor; }
 html body .sl-toggle:focus-visible { outline: 3px solid currentColor; outline-offset: 3px; }
-html body [data-sl-ready][data-sl-mode="wide"][data-sl-collapsed="true"] { grid-template-columns: minmax(0, 1fr) 48px !important; }
+html body [data-sl-ready][data-sl-mode="wide"][data-sl-collapsed="true"] { grid-template-columns: minmax(0, 1fr) 48px !important; column-gap: 14px !important; }
 html body [data-sl-ready][data-sl-mode="wide"][data-sl-collapsed="true"][data-sl-side="left"] { grid-template-columns: 48px minmax(0, 1fr) !important; }
 html body [data-sl-ready][data-sl-mode="wide"][data-sl-collapsed="true"] > .sl-sidebar { height: auto; }
 html body [data-sl-ready][data-sl-mode="wide"][data-sl-collapsed="true"] > .sl-sidebar > .sl-panel { display: none !important; }
-html body [data-sl-ready][data-sl-mode="wide"][data-sl-collapsed="true"] .sl-header { justify-content: center; }
-html body [data-sl-ready][data-sl-mode="wide"][data-sl-collapsed="true"] .sl-toggle:not(.sl-collapse) { display: none; }
-html body [data-sl-ready][data-sl-mode="wide"][data-sl-collapsed="true"] .sl-collapse { width: 44px; min-height: 112px; padding: 12px 8px; writing-mode: vertical-rl; }
+html body [data-sl-ready][data-sl-mode="wide"][data-sl-collapsed="true"] > .sl-sidebar > .sl-header { justify-content: center; }
+html body [data-sl-ready][data-sl-mode="wide"][data-sl-collapsed="true"] > .sl-sidebar > .sl-header > .sl-toggle:not(.sl-collapse) { display: none; }
+html body [data-sl-ready][data-sl-mode="wide"][data-sl-collapsed="true"] > .sl-sidebar > .sl-header > .sl-collapse { width: 44px; min-height: 112px; padding: 12px 8px; writing-mode: vertical-rl; }
 html body .sl-sidebar .sl-panel {
   position: static !important; display: flex !important; flex: 1 1 0px; flex-direction: column !important; gap: 12px;
   min-width: 0; min-height: 0; height: auto !important; max-height: none !important; margin: 0 !important; overflow: hidden !important;
@@ -41,9 +40,9 @@ html body [data-sl-ready][data-sl-mode="compact"] > .sl-main { grid-column: 1 !i
 html body [data-sl-ready][data-sl-mode="compact"] > .sl-sidebar { grid-column: 1 !important; grid-row: 1 !important; position: static; height: auto; max-height: none; }
 html body [data-sl-ready][data-sl-mode="compact"][data-sl-open="false"] > .sl-sidebar > .sl-panel { display: none !important; }
 html body [data-sl-ready][data-sl-mode="compact"][data-sl-open="true"] > .sl-sidebar { height: var(--sl-size, var(--sl-height, calc(100dvh - 48px))); }
-html body [data-sl-ready][data-sl-mode="compact"] .sl-header { justify-content: stretch; }
-html body [data-sl-ready][data-sl-mode="compact"] .sl-toggle { width: 100%; }
-html body [data-sl-ready][data-sl-mode="compact"] .sl-collapse { display: none; }
+html body [data-sl-ready][data-sl-mode="compact"] > .sl-sidebar > .sl-header { justify-content: stretch; }
+html body [data-sl-ready][data-sl-mode="compact"] > .sl-sidebar > .sl-header > .sl-toggle { width: 100%; }
+html body [data-sl-ready][data-sl-mode="compact"] > .sl-sidebar > .sl-header > .sl-collapse { display: none; }
 /* 原先藏起的个人学习目录在窄屏也有可展开的入口。 */
 html body .sl-sidebar :is(.course-sidebar, .coding-sidebar, .dev-sidebar) { border: 1px solid var(--line); border-radius: 12px; padding: 16px; }
 html body [data-sl-ready][data-sl-mode="wide"][data-sl-side="right"] .sl-sidebar .sidebar { border-right: 0; border-left: 1px solid var(--line); padding-inline: 16px 0; }

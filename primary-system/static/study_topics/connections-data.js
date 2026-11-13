@@ -91,7 +91,7 @@ window.STUDY_TOPIC_CONNECTIONS = {
     'lu7-1': [['poetry', '', '按作者或篇名查古诗文原文']],
     'lu7-2': [['idiomStories', '', '到成语典故馆读《史记》等典籍里的故事']],
     'su2-1': [['elements', '', '到元素周期表认识组成物质的元素']],
-    'su6-5': [['bodyStation', '', '到人体奥秘站打开四张身体地图']],
+    'su6-5': [['bodyStation', '', '到人体奥秘站打开六张身体地图']],
     'su7-3': [['geographyLesson', '#lesson-gu5-1', '到地理小课堂看水循环的路线']],
     'su7-4': [
       ['geographyLesson', '#lesson-gu4-2', '到地理小课堂学读天气预报'],

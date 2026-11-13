@@ -14,8 +14,14 @@
       "teaser": "让钢回形针和铝箔接受同一块磁铁的考验。",
       "scenario": "一块磁铁吸起了回形针。有人说，既然回形针是金属，换成别的金属也一定能吸住。",
       "evidence": [
-        {"title": "钢回形针靠近磁铁", "body": "把普通磁铁靠近钢回形针，回形针会被吸过去，还能跟着磁铁移动。"},
-        {"title": "用同一块磁铁试铝箔", "body": "把同一块磁铁靠近放在桌面上的铝箔。铝也是金属，这一次磁铁却吸不起它。"}
+        {
+          "title": "钢回形针靠近磁铁",
+          "body": "把普通磁铁靠近钢回形针，回形针会被吸过去，还能跟着磁铁移动。"
+        },
+        {
+          "title": "用同一块磁铁试铝箔",
+          "body": "把同一块磁铁靠近放在桌面上的铝箔。铝也是金属，这一次磁铁却吸不起它。"
+        }
       ],
       "verdict": "false",
       "hint": "再读一遍铝箔的证据卡。只要有一种金属吸不起来，「所有」就站不住了。",
@@ -23,8 +29,21 @@
       "method": "找一个反例",
       "transfer": "下次听到「每一种都这样」，试着找一个属于同一类、表现却不一样的例子。",
       "sources": [
-        {"label": "美国化学学会 · 金属和磁性", "url": "https://www.acs.org/education/whatischemistry/adventures-in-chemistry/experiments/metals-magnetism.html"}
-      ]
+        {
+          "label": "美国化学学会 · 金属和磁性",
+          "url": "https://www.acs.org/education/whatischemistry/adventures-in-chemistry/experiments/metals-magnetism.html"
+        }
+      ],
+      "activity": {
+        "title": "给磁铁做一张材料名单",
+        "materials": "一块普通教学磁铁、钢回形针、铝箔、木片和塑料片。",
+        "steps": [
+          "先猜每种材料会不会被吸起，把猜想画进表格。",
+          "用同一块磁铁，逐个靠近材料，记录能不能吸起。",
+          "把能吸起和不能吸起的材料放成两组，检查铝箔属于哪一组。"
+        ],
+        "note": "使用大块普通教学磁铁，不使用小颗强磁铁。材料不放进嘴里。"
+      }
     },
     {
       "slug": "sugar",
@@ -33,8 +52,14 @@
       "teaser": "糖粒看不见了，秤上的数字也会跟着变吗？",
       "scenario": "把少量白糖搅进水里，杯底很快就看不见糖粒了。有人说，糖已经从杯里消失了。",
       "evidence": [
-        {"title": "溶解前后称一称", "body": "把杯子、水和糖都放在秤上称一次。再把糖倒进杯里，轻轻晃到糖粒看不见，把同样的东西放回秤上。只要没有洒出，短时间内两次读数应当一样。"},
-        {"title": "把视线放大到分子", "body": "每颗糖粒都由许多极小的糖分子组成。白糖溶解时，糖分子彼此分开，散到水里。它们小到肉眼看不见。"}
+        {
+          "title": "溶解前后称一称",
+          "body": "把杯子、水和糖都放在秤上称一次。再把糖倒进杯里，轻轻晃到糖粒看不见，把同样的东西放回秤上。只要没有洒出，短时间内两次读数应当一样。"
+        },
+        {
+          "title": "把视线放大到分子",
+          "body": "每颗糖粒都由许多极小的糖分子组成。白糖溶解时，糖分子彼此分开，散到水里。它们小到肉眼看不见。"
+        }
       ],
       "verdict": "false",
       "hint": "如果糖真的从杯里消失，杯子、水和糖合起来称，数字会怎样？",
@@ -42,18 +67,37 @@
       "method": "换一种办法观察",
       "transfer": "盐粒溶进水里后也看不见了。除了用眼睛看，你还能怎样查一查它有没有留下？",
       "sources": [
-        {"label": "美国化学学会 · 水为什么能溶解糖", "url": "https://www.acs.org/middleschoolchemistry/lessonplans/chapter5/lesson4.html"}
-      ]
+        {
+          "label": "美国化学学会 · 水为什么能溶解糖",
+          "url": "https://www.acs.org/middleschoolchemistry/lessonplans/chapter5/lesson4.html"
+        }
+      ],
+      "activity": {
+        "title": "看不见的糖还在不在",
+        "materials": "透明杯、常温水、少量白糖、小碟、能分辨所加糖重量的电子秤。",
+        "steps": [
+          "把装水的杯子和装糖的小碟一起放在秤上，记录数字。",
+          "把糖倒进水里，轻轻晃动杯子直到糖粒看不见。",
+          "把杯子和原来的小碟一起放回秤上，比较总重量。"
+        ],
+        "note": "把同样的杯、碟、水和糖都算进去。没有洒出或明显蒸发时，总重量应当基本相同。"
+      }
     },
     {
       "slug": "ice",
-      "category": "自然现象",
+      "category": "天气与地球",
       "claim": "冰化成水会让水面升高",
       "teaser": "一块冰漂在水里，另一块冰架在水面上。它们融化后的结果一样吗？",
       "scenario": "有人说，冰化成的水流进杯里，水面就会升高。要是冰本来就漂在杯里呢？",
       "evidence": [
-        {"title": "冰原本漂在淡水里", "body": "等冰漂稳以后，先在杯壁标出水面。冰融化后，淡水杯的水面几乎没变。冰还漂着的时候，就已经把一部分水挤开了。"},
-        {"title": "冰原本架在水面上", "body": "在另一杯水上方架一块冰，让融水滴进杯里。冰本来没有泡在水里，融水滴进去后，水面就升高了。"}
+        {
+          "title": "冰原本漂在淡水里",
+          "body": "等冰漂稳以后，先在杯壁标出水面。冰融化后，淡水杯的水面几乎没变。冰还漂着的时候，就已经把一部分水挤开了。"
+        },
+        {
+          "title": "冰原本架在水面上",
+          "body": "在另一杯水上方架一块冰，让融水滴进杯里。冰本来没有泡在水里，融水滴进去后，水面就升高了。"
+        }
       ],
       "verdict": "depends",
       "hint": "两个杯子里都添了冰，只有一个水面明显升高。关键是冰一开始在哪里。",
@@ -61,19 +105,31 @@
       "method": "先把条件说清楚",
       "transfer": "把这个实验比作大海，哪一杯更像陆地上的冰川化成水流进海里？",
       "sources": [
-        {"label": "NASA 喷气推进实验室 · 陆地冰与海冰对比实验", "url": "https://www.jpl.nasa.gov/edu/resources/lesson-plan/whats-causing-sea-level-rise-land-ice-vs-sea-ice/"},
-        {"label": "NASA 海平面变化资料站 · 海水和杯中淡水的区别", "url": "https://sealevel.nasa.gov/news/261/melting-ocean-ice-affects-sea-level-unlike-ice-cubes-in-a-glass"}
+        {
+          "label": "NASA 喷气推进实验室 · 陆地冰与海冰对比实验",
+          "url": "https://www.jpl.nasa.gov/edu/resources/lesson-plan/whats-causing-sea-level-rise-land-ice-vs-sea-ice/"
+        },
+        {
+          "label": "NASA 海平面变化资料站 · 海水和杯中淡水的区别",
+          "url": "https://sealevel.nasa.gov/news/261/melting-ocean-ice-affects-sea-level-unlike-ice-cubes-in-a-glass"
+        }
       ]
     },
     {
       "slug": "moon",
-      "category": "自然现象",
+      "category": "太空里的误会",
       "claim": "我们看到的月光主要来自太阳",
       "teaser": "找一找，夜里照到我们眼睛里的月光绕过了哪一站。",
       "scenario": "有人指着夜空里的月亮说，它像一面把阳光反射过来的镜子。夜里也能收到太阳的光吗？",
       "evidence": [
-        {"title": "月面亮暗跟着阳光走", "body": "看月球照片，太阳照到的地方明亮，坑壁挡住阳光的地方就会出现影子。月球表面的岩石能把照上去的一部分光反射出去。"},
-        {"title": "用手电筒照亮纸球", "body": "把手电筒当作太阳、白纸球当作月球。纸球本来很暗，光照上去，朝着手电筒的一面就亮了。你站在旁边也能看到它反射出来的光。"}
+        {
+          "title": "月面亮暗跟着阳光走",
+          "body": "看月球照片，太阳照到的地方明亮，坑壁挡住阳光的地方就会出现影子。月球表面的岩石能把照上去的一部分光反射出去。"
+        },
+        {
+          "title": "用手电筒照亮纸球",
+          "body": "把手电筒当作太阳、白纸球当作月球。纸球本来很暗，光照上去，朝着手电筒的一面就亮了。你站在旁边也能看到它反射出来的光。"
+        }
       ],
       "verdict": "supported",
       "hint": "想一想白纸球亮起来之前，先有哪样东西把光照到了它身上。",
@@ -81,18 +137,47 @@
       "method": "用模型解释观察",
       "transfer": "手电筒不动，你绕着亮着的纸球慢慢走。你每次看到的亮面一样大吗？",
       "sources": [
-        {"label": "NASA 科学 · 月光从哪里来", "url": "https://science.nasa.gov/moon/moonlight/"}
+        {
+          "label": "NASA 科学 · 月光从哪里来",
+          "url": "https://science.nasa.gov/moon/moonlight/"
+        }
+      ],
+      "activity": {
+        "title": "把纸球照成一轮小月亮",
+        "materials": "白纸球、白光手电筒。",
+        "steps": [
+          "在较暗房间里，先看看纸球原来有多亮。",
+          "把手电筒固定在一侧，照向纸球，观察亮面和暗面。",
+          "手电筒保持不动，你从不同位置看纸球，画下看到的亮面。"
+        ],
+        "note": "手电筒不要照眼睛。纸球模型帮助理解光路，距离和大小不按真实比例。"
+      },
+      "media": [
+        {
+          "kind": "image",
+          "path": "science/rumor-media/moon.webp",
+          "alt": "月球表面的探测器照片",
+          "caption": "月球表面实拍。照片中的亮面由阳光照亮。",
+          "credit": "NASA／Goddard／Arizona State University",
+          "source_url": "https://science.nasa.gov/moon/facts/"
+        }
       ]
     },
     {
       "slug": "falling",
-      "category": "自然现象",
+      "category": "太空里的误会",
       "claim": "越重的东西总是落得越快",
       "teaser": "在教室里和在月球上，落下去的东西会遇到同样的阻力吗？",
       "scenario": "一块橡皮比一张纸先落地。有人说，这是因为橡皮更重，换成别的东西也一定是重的先落地。",
       "evidence": [
-        {"title": "同样重的纸，换个形状", "body": "用两张一样的纸，一张摊平，一张揉成团。从同一高度同时松手。两张纸一样重，纸团通常先落地。"},
-        {"title": "看一次月球上的下落实验", "body": "阿波罗 15 号宇航员在月面同时放开一把锤子和一根羽毛。那里几乎没有空气，两样东西几乎同时碰到月面。"}
+        {
+          "title": "同样重的纸，换个形状",
+          "body": "用两张一样的纸，一张摊平，一张揉成团。从同一高度同时松手。两张纸一样重，纸团通常先落地。"
+        },
+        {
+          "title": "看一次月球上的下落实验",
+          "body": "阿波罗 15 号宇航员在月面同时放开一把锤子和一根羽毛。那里几乎没有空气，两样东西几乎同时碰到月面。"
+        }
       ],
       "verdict": "false",
       "hint": "两张纸一样重，却能落得一快一慢。再看看月球上的锤子和羽毛。",
@@ -100,7 +185,31 @@
       "method": "把另一个可能的原因挑出来",
       "transfer": "一张纸揉得更紧后，重量变了吗？你还改变了什么？",
       "sources": [
-        {"label": "NASA 科学 · 阿波罗 15 号的锤子和羽毛实验", "url": "https://science.nasa.gov/resource/the-apollo-15-hammer-feather-drop/"}
+        {
+          "label": "NASA 科学 · 阿波罗 15 号的锤子和羽毛实验",
+          "url": "https://science.nasa.gov/resource/the-apollo-15-hammer-feather-drop/"
+        }
+      ],
+      "activity": {
+        "title": "一样重的纸，谁先落地",
+        "materials": "两张同样大小、同样材质的纸。",
+        "steps": [
+          "把一张纸揉成团，另一张保持平展。",
+          "从同一高度同时放手，观察哪张先落地，重复几次。",
+          "再把第二张也揉成差不多紧的小团，按同样方法比较。"
+        ],
+        "note": "站在地面从胸前高度释放轻纸张，不登高，也不用重物代替纸张。"
+      },
+      "media": [
+        {
+          "kind": "video",
+          "path": "science/rumor-media/falling.m4v",
+          "poster": "science/rumor-media/falling-poster.webp",
+          "alt": "阿波罗 15 号宇航员在月球上同时放开锤子和羽毛",
+          "caption": "1971 年阿波罗 15 号月面实验原始影像。留意放手和落地的时刻，锤子和羽毛几乎同时落地。画面中的实验过程也已写在下方证据卡里。",
+          "credit": "NASA",
+          "source_url": "https://science.nasa.gov/resource/the-apollo-15-hammer-feather-drop/"
+        }
       ]
     },
     {
@@ -110,8 +219,14 @@
       "teaser": "镜头拍到一盆高豆苗。还缺什么，才能知道它为什么长得高？",
       "scenario": "想象一段短视频。它拍到窗边的一盆豆苗和角落的一盆豆苗。窗边那盆有音乐，也更高。视频说，音乐就是它长得更快的原因。",
       "evidence": [
-        {"title": "镜头只给了一次比较", "body": "镜头里的确有一盆更高，但没有告诉我们两盆起初有多高，也没有记录它们几天里各长了多少。"},
-        {"title": "位置也变了", "body": "一盆靠窗，另一盆在角落，照到的光可能不同。视频也没交代两盆浇了多少水。这样一来，能影响豆苗的条件就不只音乐了。"}
+        {
+          "title": "镜头只给了一次比较",
+          "body": "镜头里的确有一盆更高，但没有告诉我们两盆起初有多高，也没有记录它们几天里各长了多少。"
+        },
+        {
+          "title": "位置也变了",
+          "body": "一盆靠窗，另一盆在角落，照到的光可能不同。视频也没交代两盆浇了多少水。这样一来，能影响豆苗的条件就不只音乐了。"
+        }
       ],
       "verdict": "unclear",
       "hint": "现在只看见哪盆更高。要知道谁长得更快，需要怎样的记录？",
@@ -119,7 +234,761 @@
       "method": "设计公平的比较",
       "transfer": "有人说换了花盆以后豆苗长得快。要做公平比较，你会只改变什么？哪些条件要保持一样？",
       "sources": [
-        {"label": "澳大利亚科学院 Primary Connections · 植物生长与公平比较", "url": "https://primaryconnections.org.au/teaching-sequences/year-6/whats-great-growth/lesson-3-floating-growth"}
+        {
+          "label": "澳大利亚科学院 Primary Connections · 植物生长与公平比较",
+          "url": "https://primaryconnections.org.au/teaching-sequences/year-6/whats-great-growth/lesson-3-floating-growth"
+        }
+      ],
+      "activity": {
+        "title": "给一次比较补上观察表",
+        "materials": "纸、笔和一把尺子。",
+        "steps": [
+          "画出日期、开始高度、结束高度和长高多少四栏。",
+          "再列出种类、光照、浇水、温度等需要尽量保持相同的条件。",
+          "说一说，如果只看最后高度，哪些原本不同的地方会被忽略。"
+        ],
+        "note": "这是实验设计练习。真做生长实验时，每组要有多盆，并持续记录。"
+      }
+    },
+    {
+      "slug": "condensation",
+      "icon": "sugar",
+      "category": "身边的材料",
+      "claim": "冷饮杯外的水珠是从杯里漏出来的",
+      "teaser": "把杯壁擦干，过一会儿，外面为什么又湿了？",
+      "scenario": "一杯冰水放在桌上，杯子外面冒出许多小水珠。有人说，杯子一定有小孔，水从里面钻出来了。",
+      "evidence": [
+        {
+          "title": "完整的杯壁也会湿",
+          "body": "同样的完好杯子，装常温水时外面通常很干。装冰水时，外壁却可能慢慢出现水珠。改变的是杯壁温度。"
+        },
+        {
+          "title": "空气里也藏着水",
+          "body": "空气含有肉眼看不见的水蒸气。它遇到足够冷的杯壁，会凝结成小水滴。这些水来自杯子外面的空气。"
+        }
+      ],
+      "verdict": "false",
+      "hint": "同一个杯子为什么装常温水时不湿？想一想，杯子外面还有什么地方藏着水。",
+      "explanation": "冷饮杯外的水珠主要来自空气中的水蒸气。水蒸气在冷杯壁上凝结，变成了看得见的小水滴。空气很干时，杯外的水珠也可能很少。",
+      "method": "给看不见的东西找线索",
+      "transfer": "冬天的窗玻璃、浴室镜子上也会出现水珠。哪些地方提供了水蒸气，哪些表面比较冷？",
+      "sources": [
+        {
+          "label": "美国化学学会 · 凝结观察站",
+          "url": "https://www.acs.org/education/whatischemistry/adventures-in-chemistry/experiments/condenstation-station.html"
+        },
+        {
+          "label": "美国化学学会 · 水蒸气怎样凝结",
+          "url": "https://www.acs.org/middleschoolchemistry/lessonplans/chapter2/lesson3.html"
+        }
+      ],
+      "activity": {
+        "title": "谁给杯子穿上水珠外衣",
+        "materials": "两个完好的透明杯、常温水、冰块、纸巾。",
+        "steps": [
+          "给两个杯子倒入差不多多的常温水，只在其中一个杯子里加入冰块。",
+          "把两只杯子的外壁擦干，放在同一张桌上，等几分钟再观察。",
+          "记下哪只杯子先变湿。换一天再试，看看空气干湿会不会影响结果。"
+        ],
+        "note": "先垫好托盘，实验后擦干桌面。空气很干时，水珠可能不明显。"
+      }
+    },
+    {
+      "slug": "metal-boat",
+      "icon": "boat",
+      "category": "身边的材料",
+      "claim": "金属做的东西放进水里一定会沉",
+      "teaser": "同一张铝箔，揉成紧实的小团和折成小船，结果会一样吗？",
+      "scenario": "金属勺掉进水里沉了。有人由此认为，只要是金属做的东西，水就托不住它。",
+      "evidence": [
+        {
+          "title": "一张铝箔能做成小船",
+          "body": "把铝箔折成底部较宽、四周竖起的船形，轻轻放在水面，它能漂起来。许多大轮船的船身也由金属制成。"
+        },
+        {
+          "title": "形状决定挤开多少水",
+          "body": "空心船体把金属和里面的空气一起托在水面，能挤开足够多的水。船里进水或装得太重，照样可能下沉。"
+        }
+      ],
+      "verdict": "false",
+      "hint": "只要有一艘金属船能漂起来，「一定会沉」还能成立吗？",
+      "explanation": "物体能否漂浮，要看水的浮力能不能托住它的重量。把金属做成合适的空心船形，就有机会挤开足够多的水，获得足够的浮力。只看材料名称，判断还不够。",
+      "method": "把材料和形状分开比较",
+      "transfer": "用同样大小的两张铝箔，哪种船形能装下更多枚硬币？你怎样让比较公平？",
+      "sources": [
+        {
+          "label": "Science Buddies · 铝箔船能载多少重量",
+          "url": "https://www.sciencebuddies.org/stem-activities/aluminum-foil-boats-float"
+        },
+        {
+          "label": "美国化学学会 · 让金属船漂起来",
+          "url": "https://www.acs.org/content/dam/acsorg/education/outreach/ncw/plan-an-event/educational-resources/float-a-metal-boat.pdf"
+        }
+      ],
+      "activity": {
+        "title": "给铝箔设计一艘小船",
+        "materials": "两张同样大小的铝箔、浅水盆、几枚硬币。",
+        "steps": [
+          "把两张铝箔折成不同宽窄的船，四边竖起，检查有没有破口。",
+          "把船轻放在水面，每次加一枚硬币，尽量放在船中间。",
+          "记录船开始进水前各装了多少枚硬币，再改一次船形。"
+        ],
+        "note": "用浅水盆，轻拿铝箔边缘和硬币。比较时使用同一种硬币。"
+      }
+    },
+    {
+      "slug": "boiling-water",
+      "icon": "thermometer",
+      "category": "身边的材料",
+      "claim": "水烧开时的温度是 100 ℃",
+      "teaser": "在海边和高山上，水开了，温度计会显示同一个数吗？",
+      "scenario": "课本常说水在 100 ℃ 沸腾。要把这句话带到高山上使用，还需要补上什么条件？",
+      "evidence": [
+        {
+          "title": "先看标准条件",
+          "body": "在标准大气压下，纯水的沸点约为 100 ℃。这里的「标准大气压」是这句话成立的重要条件。"
+        },
+        {
+          "title": "高处的空气压力更小",
+          "body": "在高海拔地区，空气压力通常更低，水可以在低于 100 ℃ 时沸腾。压力锅内部压力更高，水的沸点也会升高。"
+        }
+      ],
+      "verdict": "depends",
+      "hint": "第一张卡里，100 ℃ 前面还有一个条件。第二张卡改变了什么？",
+      "explanation": "水的沸点会受压力等条件影响。说「纯水约在 100 ℃ 沸腾」时，要补上标准大气压这个条件。到了高山，看到水翻滚，并不代表它已经达到 100 ℃。",
+      "method": "把数字和适用条件一起记",
+      "transfer": "说明书上的温度、速度和续航时间，是否也可能带着测量条件？读数字时，试着把旁边的小字一起找出来。",
+      "sources": [
+        {
+          "label": "国际水与水蒸气性质协会 · 压力如何影响沸腾",
+          "url": "https://iapws.org/faqs/faq1"
+        }
+      ]
+    },
+    {
+      "slug": "cold-metal",
+      "icon": "thermometer",
+      "category": "身边的材料",
+      "claim": "摸起来更凉的东西，温度一定更低",
+      "teaser": "同一间屋里的金属勺和木勺，为什么手感不一样？",
+      "scenario": "金属勺和木勺在同一间阴凉的屋里放了很久。摸一摸，金属勺更凉。它的温度一定更低吗？",
+      "evidence": [
+        {
+          "title": "让两把勺子充分适应室温",
+          "body": "在同一处放足够久，远离阳光、热水和电器，两把勺子的温度可以十分接近。材料不同，摸起来仍可能一凉一暖。"
+        },
+        {
+          "title": "手也在传递热量",
+          "body": "金属通常比木头导热快。勺子比手冷时，金属能更快带走手上的热量，所以你会觉得它更凉。"
+        }
+      ],
+      "verdict": "false",
+      "hint": "你的手感觉到的，除了物体温度，还与热量离开手的快慢有关。",
+      "explanation": "手感还受导热快慢影响。相同室温下的金属和木头，可能温度相近，摸起来却不同。要比较温度，需要在合适的测量条件下使用温度计。",
+      "method": "用测量补充感觉",
+      "transfer": "同一个房间里的瓷砖和地毯，赤脚踩上去也会有不同感觉。你能用热量传递来解释吗？",
+      "sources": [
+        {
+          "label": "美国化学学会 · 热、温度和传导",
+          "url": "https://www.acs.org/middleschoolchemistry/lessonplans/chapter2/lesson1.html"
+        },
+        {
+          "label": "瑞士 Technorama 科学中心 · 凉凉的金属",
+          "url": "https://explorer.technorama.ch/en/experiment/cold-metal"
+        }
+      ],
+      "activity": {
+        "title": "同一间屋里的两把勺子",
+        "materials": "一把常温金属勺、一把常温木勺。",
+        "steps": [
+          "把两把勺子并排放在阴凉的桌面上，等它们充分适应室温。",
+          "用手指轻触两把勺子的柄，比较感觉。",
+          "把你的解释画出来，标出热量从手传向勺子的方向。"
+        ],
+        "note": "只用常温物品，避开刚晒过、冷冻过或装过热水的物品。"
+      }
+    },
+    {
+      "slug": "bats",
+      "icon": "animal",
+      "category": "动物与植物",
+      "claim": "蝙蝠看不见，只能靠耳朵认路",
+      "teaser": "会用回声定位，就等于没有视力吗？",
+      "scenario": "很多蝙蝠夜里用回声寻找昆虫。有人把这个本领理解成，蝙蝠的眼睛全都看不见。",
+      "evidence": [
+        {
+          "title": "蝙蝠有能工作的眼睛",
+          "body": "对蝙蝠的观察和研究表明，它们能够看见。不同种类的蝙蝠，视力和利用视觉的方式有差别。"
+        },
+        {
+          "title": "一种动物可以有多种感官",
+          "body": "许多蝙蝠会发声，再听声音碰到物体后返回的回声，用来判断障碍物和猎物。视觉和回声定位可以互相配合。"
+        }
+      ],
+      "verdict": "false",
+      "hint": "你能边看路边听声音。蝙蝠会用耳朵，能推出它不能用眼睛吗？",
+      "explanation": "蝙蝠能看见。很多种类还会利用回声定位，在昏暗环境里寻找食物和避开障碍。认识一种动物时，要把它的多种本领一起看。",
+      "method": "别把一种本领当成唯一的本领",
+      "transfer": "海豚也会回声定位。想查海豚有没有视力，你需要找哪方面的观察或研究？",
+      "sources": [
+        {
+          "label": "美国地质调查局 · 蝙蝠看得见吗",
+          "url": "https://www.usgs.gov/faqs/are-bats-blind"
+        },
+        {
+          "label": "美国国家公园管理局 · 蝙蝠流言辨析",
+          "url": "https://www.nps.gov/subjects/bats/myth-busters.htm"
+        }
+      ],
+      "media": [
+        {
+          "kind": "image",
+          "path": "science/rumor-media/bats.webp",
+          "alt": "戴手套的研究人员正在检查一只蝙蝠",
+          "caption": "研究人员在专业条件下检查蝙蝠。照片用于观察外形，视力结论还要结合研究。",
+          "credit": "美国国家公园管理局",
+          "source_url": "https://www.nps.gov/articles/bats-brief.htm"
+        }
+      ]
+    },
+    {
+      "slug": "chameleons",
+      "icon": "animal",
+      "category": "动物与植物",
+      "claim": "变色龙能随便变成任何背景的颜色",
+      "teaser": "站在彩色方格上，就能把自己变成一张方格纸吗？",
+      "scenario": "动画里的变色龙能和墙纸变得一模一样。有人说，真正的变色龙也能随意复制身后的所有颜色和图案。",
+      "evidence": [
+        {
+          "title": "每种变色龙都有自己的调色范围",
+          "body": "变色龙的皮肤结构允许它呈现一些颜色和花纹，但每个种类能呈现的范围有限，无法像屏幕一样显示所有画面。"
+        },
+        {
+          "title": "颜色也在传递状态",
+          "body": "变色还会受到温度、光照和与其他变色龙交流时的状态影响。它并不是看到什么背景，就照着复制什么背景。"
+        }
+      ],
+      "verdict": "false",
+      "hint": "能改变颜色与能复制任何颜色之间，还隔着多大一步？",
+      "explanation": "变色龙有变色本领，但能变的颜色和花纹受自身结构限制，变色也有多种作用。动画把一种真实本领放大后，可能变成现实里做不到的事。",
+      "method": "分清真实本领和动画夸张",
+      "transfer": "想验证一段变色视频，除了看结果，你还想知道动物种类、原始拍摄和中间有没有剪辑吗？",
+      "sources": [
+        {
+          "label": "圣迭戈动物园 · 变色龙的皮肤与变色",
+          "url": "https://animals.sandiegozoo.org/animals/chameleon"
+        }
+      ],
+      "media": [
+        {
+          "kind": "image",
+          "path": "science/rumor-media/chameleons.webp",
+          "alt": "树枝上一只绿色的高冠变色龙",
+          "caption": "高冠变色龙实拍。照片记录了它某一刻的颜色，不能单独证明它能变出的所有颜色。",
+          "credit": "圣迭戈动物园野生动物联盟",
+          "source_url": "https://animals.sandiegozoo.org/animals/chameleon"
+        }
+      ]
+    },
+    {
+      "slug": "whales",
+      "icon": "animal",
+      "category": "动物与植物",
+      "claim": "鲸生活在水里，也要到水面呼吸空气",
+      "teaser": "鲸头顶的呼吸孔，帮我们看出它怎样呼吸。",
+      "scenario": "鲸能长时间潜水，看上去也很像大鱼。有人却说，鲸用肺呼吸，得定期回到水面。",
+      "evidence": [
+        {
+          "title": "呼吸孔要露出水面",
+          "body": "研究者观察鲸浮上水面时，能看到它通过头顶的呼吸孔呼气和吸气。潜水时，呼吸孔会关闭。"
+        },
+        {
+          "title": "鲸属于哺乳动物",
+          "body": "鲸用肺呼吸空气，幼鲸出生后还要喝妈妈的奶。这些特征帮助我们认识它的分类，而不仅仅看它生活在哪里。"
+        }
+      ],
+      "verdict": "supported",
+      "hint": "头顶呼吸孔的用途，和哺乳动物的特征，能不能互相印证？",
+      "explanation": "鲸是生活在水里的哺乳动物，用肺呼吸，需要回到水面换气。外形适合游泳，生活在海里，都不能单独用来判断一种动物是不是鱼。",
+      "method": "把不同方面的证据拼起来",
+      "transfer": "鲸鲨的名字也带「鲸」。要判断它属于鱼还是哺乳动物，你会继续查它用什么呼吸、怎样养育幼崽吗？",
+      "sources": [
+        {
+          "label": "NOAA 渔业局 · 鲸类",
+          "url": "https://www.fisheries.noaa.gov/whales"
+        },
+        {
+          "label": "NOAA 渔业局 · 座头鲸资料",
+          "url": "https://www.fisheries.noaa.gov/species/humpback-whale"
+        }
+      ],
+      "media": [
+        {
+          "kind": "image",
+          "path": "study_topics/geo-map/assets/animals/humpback-whale.jpg",
+          "alt": "一头座头鲸跃出海面",
+          "caption": "座头鲸跃出海面。鲸的呼吸方式还需要结合浮出水面时的持续观察。",
+          "credit": "Wikimedia Commons",
+          "source_url": "https://commons.wikimedia.org/wiki/File:Humpback_whale_breaching_off_Cabo_San_Lucas.jpg"
+        }
+      ]
+    },
+    {
+      "slug": "penguins",
+      "icon": "animal",
+      "category": "动物与植物",
+      "claim": "野生企鹅全都生活在南极冰天雪地里",
+      "teaser": "去赤道附近的加拉帕戈斯群岛，找找企鹅的另一种家。",
+      "scenario": "纪录片里的帝企鹅常常站在冰雪中。有人于是觉得，离开南极的雪地，野生企鹅就没地方生活了。",
+      "evidence": [
+        {
+          "title": "赤道附近也有企鹅",
+          "body": "加拉帕戈斯企鹅生活在靠近赤道的加拉帕戈斯群岛，常在火山岩海岸和附近海水中活动。"
+        },
+        {
+          "title": "同一家族有不同的家",
+          "body": "不同企鹅种类的分布并不相同。帝企鹅与加拉帕戈斯企鹅，生活环境就有很大差别，不能只拿一种代表全部。"
+        }
+      ],
+      "verdict": "false",
+      "hint": "只要在南极以外找到一个野生企鹅种类，「全都在南极」就需要改写。",
+      "explanation": "有些企鹅生活在南极，有些分布在南美洲、非洲南部等地，还有加拉帕戈斯企鹅生活在赤道附近。认识动物的家，先查清具体种类和分布。",
+      "method": "先问是哪一种",
+      "transfer": "听到「熊都冬眠」「鸟都会飞」时，你能不能先找找不同的熊和鸟，再做判断？",
+      "sources": [
+        {
+          "label": "加拉帕戈斯保护信托 · 加拉帕戈斯企鹅",
+          "url": "https://galapagosconservation.org.uk/species/galapagos-penguin/"
+        }
+      ],
+      "media": [
+        {
+          "kind": "image",
+          "path": "science/rumor-media/penguins.webp",
+          "alt": "加拉帕戈斯企鹅的头部和喙",
+          "caption": "加拉帕戈斯企鹅实拍。它的家在赤道附近的群岛，具体分布还要查物种资料。",
+          "credit": "Sam Rowley／加拉帕戈斯保护信托",
+          "source_url": "https://galapagosconservation.org.uk/species/galapagos-penguin/"
+        }
+      ]
+    },
+    {
+      "slug": "living-dinosaurs",
+      "icon": "animal",
+      "category": "动物与植物",
+      "claim": "今天的鸟类也属于恐龙家族",
+      "teaser": "把化石上的羽毛、骨骼和今天的鸟放在一起看。",
+      "scenario": "霸王龙早就消失了，可博物馆说，今天窗外的小鸟也属于恐龙家族。听起来像玩笑，这句话有什么证据？",
+      "evidence": [
+        {
+          "title": "化石把两边连起来",
+          "body": "一些小型兽脚类恐龙化石保存了羽毛等特征。始祖鸟等化石也呈现出帮助科学家追踪鸟类起源的特征组合。"
+        },
+        {
+          "title": "分类要沿着家谱看",
+          "body": "科学家综合骨骼等多方面证据，把鸟类放在兽脚类恐龙这一支中。今天的鸟类是这条演化支系延续到现在的成员。"
+        }
+      ],
+      "verdict": "supported",
+      "hint": "恐龙家族的某些分支消失了，能不能推出所有分支都消失了？",
+      "explanation": "按照演化亲缘关系分类，鸟类属于恐龙的一支。霸王龙等非鸟恐龙已经灭绝，而鸟类这一支延续到了今天。这里说的家族，是很长时间里的演化亲缘关系。",
+      "method": "沿着家谱理解分类",
+      "transfer": "一根羽毛能证明两种动物完全一样吗？除了羽毛，科学家为什么还要对照更多骨骼特征？",
+      "sources": [
+        {
+          "label": "英国自然历史博物馆 · 为什么鸟类是存活至今的恐龙",
+          "url": "https://www.nhm.ac.uk/discover/why-are-birds-the-only-surviving-dinosaurs.html"
+        }
+      ]
+    },
+    {
+      "slug": "seeds",
+      "icon": "plant-video",
+      "category": "动物与植物",
+      "claim": "种子一定要埋进土里才能发芽",
+      "teaser": "给豆子一张湿纸巾，它会不会冒出小根？",
+      "scenario": "平时种花要把种子埋进土里。有人说，土就是发芽的开关，没有土，任何种子都不会发芽。",
+      "evidence": [
+        {
+          "title": "湿纸巾也能用来测试发芽",
+          "body": "园艺研究和种子测试常把种子放在湿润纸巾上，等待它们长出小根。纸巾能提供水分，并没有变成土壤。"
+        },
+        {
+          "title": "发芽和长期生长要分开",
+          "body": "种子最初能利用自身储存的营养。不同种子对水、空气、温度和光照有不同要求，发芽后长期生长还需要合适的营养和环境。"
+        }
+      ],
+      "verdict": "false",
+      "hint": "湿纸巾上的豆子只要成功发芽一次，「一定要有土」还能成立吗？",
+      "explanation": "许多种子在合适的湿纸巾上也能发芽，土壤并不是所有种子发芽的必要条件。种子能否发芽，还要看种子是否有活力，以及水、空气、温度等条件是否合适。",
+      "method": "把不同生长阶段分开",
+      "transfer": "豆子在纸巾上长出了小根，能不能推出它只靠水就能一直长大？还缺哪些长期观察？",
+      "sources": [
+        {
+          "label": "伊利诺伊大学推广部 · 用湿纸巾测试种子发芽",
+          "url": "https://extension.illinois.edu/blogs/good-growing/2023-01-20-are-my-seeds-still-good-testing-seed-germination"
+        }
+      ],
+      "activity": {
+        "title": "给豆子写一本发芽日记",
+        "materials": "几颗用于种植的绿豆、纸巾、浅盘、水。",
+        "steps": [
+          "把纸巾打湿后放入浅盘，铺上几颗健康绿豆，保持温暖和空气流通。",
+          "每天检查纸巾，保持湿润，别让种子一直泡在深水里。",
+          "每天同一时间画下小根变化，记录有几颗发芽，比较不同种子。"
+        ],
+        "note": "这份材料用于观察，实验种子和发霉种子都不食用。观察后可以请家长帮忙移栽。"
+      }
+    },
+    {
+      "slug": "seasons",
+      "icon": "earth",
+      "category": "太空里的误会",
+      "claim": "夏天热，是因为地球离太阳更近",
+      "teaser": "同一天的中国和澳大利亚，为什么会过不同的季节？",
+      "scenario": "离暖炉近一点就更暖。有人把这个经验搬到地球上，说夏天一定是因为地球走到了离太阳更近的地方。",
+      "evidence": [
+        {
+          "title": "南北半球的季节相反",
+          "body": "中国过夏天时，澳大利亚正处在冬天。两地都在同一个地球上，同一天并不会一个特别靠近太阳、一个特别远离太阳。"
+        },
+        {
+          "title": "地球斜着绕太阳走",
+          "body": "地球的自转轴是倾斜的。北半球朝向太阳倾斜时，白天更长，阳光照得也更直，北半球会收到更多太阳能量。"
+        }
+      ],
+      "verdict": "false",
+      "hint": "如果只由地球到太阳的距离决定，南北半球为什么不是一起过夏天？",
+      "explanation": "地球自转轴的倾斜改变了各地的日照时长和阳光照射角度，形成四季。地球到太阳的距离确实会变，但这种距离变化解释不了南北半球季节相反这件事。",
+      "method": "找能同时解释多处观察的原因",
+      "transfer": "查一查你家冬至和夏至的日出、日落时间，看看白天长短能不能给四季提供另一条证据。",
+      "sources": [
+        {
+          "label": "NASA Space Place · 四季是怎样形成的",
+          "url": "https://spaceplace.nasa.gov/seasons/en/"
+        }
+      ],
+      "activity": {
+        "title": "一束光照出的不同光斑",
+        "materials": "手电筒、一张白纸。",
+        "steps": [
+          "在白纸上方保持大致相同距离，先让手电筒垂直照向纸面，画出光斑大小。",
+          "保持距离相近，改为斜照，再画一次光斑。",
+          "比较同一束光是集中照在一小块地方，还是铺到了更大的地方。"
+        ],
+        "note": "这是帮助理解照射角度的模型。地球四季还与白天长短一起有关，手电筒不要照眼睛。"
+      },
+      "media": [
+        {
+          "kind": "image",
+          "path": "science/rumor-media/seasons.webp",
+          "alt": "NASA 绘制的地轴倾斜与南北半球季节对照图",
+          "caption": "NASA 示意图。左图北半球向太阳倾斜，北半球夏季、南半球冬季；右图南北半球季节相反。图中大小和距离不按真实比例。",
+          "credit": "NASA／JPL-Caltech",
+          "source_url": "https://spaceplace.nasa.gov/seasons/en/"
+        }
+      ]
+    },
+    {
+      "slug": "far-side",
+      "icon": "moon",
+      "category": "太空里的误会",
+      "claim": "月球背面永远照不到太阳",
+      "teaser": "「背向地球」和「背向太阳」是同一回事吗？",
+      "scenario": "我们从地球上总是看见月球大致相同的一面。有人把另一面叫作黑暗面，以为那里永远是黑夜。",
+      "evidence": [
+        {
+          "title": "背面是相对地球说的",
+          "body": "月球一边自转，一边绕地球转，两种转动配合，使它大致以同一面朝向地球。背面这个词描述的是我们从哪里看。"
+        },
+        {
+          "title": "太阳照亮的位置会变",
+          "body": "月球绕地球运动时，太阳也会照到背面。探测器已经拍到阳光照亮的月球背面，它和正面大部分地区一样会经历白天和黑夜。"
+        }
+      ],
+      "verdict": "false",
+      "hint": "把地球和太阳当作两个不同的参照。看不见一个地方，就等于太阳照不到那里吗？",
+      "explanation": "月球背面大部分地区也会被太阳照亮。「背面」表示它通常背向地球。月球两极某些深坑里有长期照不到直射阳光的阴影区，但那和整个月球背面是两回事。",
+      "method": "先说清楚相对谁",
+      "transfer": "太阳落山时，是太阳消失了，还是你所在的位置转到了暂时看不到太阳的一侧？",
+      "sources": [
+        {
+          "label": "NASA 科学 · 月球事实与月球背面",
+          "url": "https://science.nasa.gov/moon/facts/"
+        }
+      ],
+      "activity": {
+        "title": "给纸球画一张朝向地球的脸",
+        "materials": "纸球、笔、桌面上的地球标记、一盏台灯。",
+        "steps": [
+          "在纸球一侧画一张脸，用桌面标记代表地球，固定的台灯代表太阳。",
+          "拿着纸球绕标记走一圈，让脸始终朝着地球标记。",
+          "看一看，没有画脸的背面在什么时候也会被台灯照亮。"
+        ],
+        "note": "使用温度较低的灯具，不触碰灯泡。这个模型帮助分清朝向，大小和距离不按真实比例。"
+      },
+      "media": [
+        {
+          "kind": "video",
+          "path": "science/rumor-media/far-side.mp4",
+          "poster": "science/rumor-media/far-side-poster.webp",
+          "alt": "DSCOVR 卫星拍到阳光照亮的月球背面从地球前方经过",
+          "caption": "2015 年 7 月 16 日，DSCOVR 卫星拍摄的 20 张照片组成这段延时影像。经过地球前方的灰色圆盘是阳光照亮的月球背面，播放速度已加快。",
+          "credit": "NASA／NOAA／Goddard",
+          "source_url": "https://svs.gsfc.nasa.gov/11924/"
+        }
+      ]
+    },
+    {
+      "slug": "space-gravity",
+      "icon": "earth",
+      "category": "太空里的误会",
+      "claim": "空间站里的航天员漂着，是因为那里没有引力",
+      "teaser": "地球还能拉住空间站，怎么会完全没有引力？",
+      "scenario": "航天员在空间站里轻轻一推就能漂起来。有人说，到了太空，地球引力已经消失了。",
+      "evidence": [
+        {
+          "title": "引力仍在拉着空间站",
+          "body": "国际空间站所在的高度，地球引力仍然很强。正是引力不断改变空间站前进的方向，让它沿轨道绕地球运行。"
+        },
+        {
+          "title": "人和舱体一起下落",
+          "body": "空间站、航天员和舱内物品一起绕地球自由下落，同时又有很快的向前速度。它们一起落，航天员就不像站在地面上那样受到地板托举。"
+        }
+      ],
+      "verdict": "false",
+      "hint": "假如引力真的消失，什么力量还能持续把空间站的运动方向拉弯？",
+      "explanation": "空间站里仍有地球引力。航天员漂浮，主要因为人和舱体一起处于绕地球的自由下落状态。看到失重现象，还需要继续查它是怎样产生的。",
+      "method": "分开描述现象和解释原因",
+      "transfer": "「人漂起来了」是一条观察，「因为引力消失」是一种解释。你还能从这项任务里找出一组观察与解释吗？",
+      "sources": [
+        {
+          "label": "NASA 学生课堂 · 什么是微重力",
+          "url": "https://www.nasa.gov/learning-resources/for-kids-and-students/what-is-microgravity-grades-5-8/"
+        }
+      ],
+      "media": [
+        {
+          "kind": "image",
+          "path": "science/rumor-media/space-gravity.webp",
+          "alt": "空间站里航天员和漂浮的水果",
+          "caption": "国际空间站中的航天员与水果。漂浮是照片里能看见的现象，引力是否存在要结合轨道运动继续判断。",
+          "credit": "NASA",
+          "source_url": "https://www.nasa.gov/learning-resources/for-kids-and-students/what-is-microgravity-grades-5-8/"
+        }
+      ]
+    },
+    {
+      "slug": "cold-deserts",
+      "icon": "earth",
+      "category": "天气与地球",
+      "claim": "沙漠一定又热又有很多沙子",
+      "teaser": "南极冰原为什么也能属于沙漠？",
+      "scenario": "提到沙漠，我们很容易想到金色沙丘和火辣辣的太阳。有人说，没有高温和沙子，就不能叫沙漠。",
+      "evidence": [
+        {
+          "title": "先看沙漠的干燥",
+          "body": "沙漠的一个重要特点是降水很少。地表可以是沙，也可以是岩石、砾石，甚至覆盖着冰雪。"
+        },
+        {
+          "title": "南极内陆极冷也极干",
+          "body": "南极内陆许多地方年降水很少，属于寒冷的极地沙漠。眼前的大量冰雪，是长时间积累的，不能拿它直接当作今年下了很多雪的证据。"
+        }
+      ],
+      "verdict": "false",
+      "hint": "判断沙漠时，先查的是一年能得到多少降水，还是你脑海里的一幅风景？",
+      "explanation": "沙漠可以很热，也可以很冷，可以有沙丘，也可以是岩地或冰雪覆盖。要认识一种地理环境，需要查看降水等长期条件，单凭一张风景照片容易漏掉重要信息。",
+      "method": "先查定义，再看样子",
+      "transfer": "冰原表面有很多冰，能证明它现在每年降水很多吗？还需要看多长时间的积累？",
+      "sources": [
+        {
+          "label": "英国南极调查局 · 南极高原的降水和极地沙漠",
+          "url": "https://legacy.bas.ac.uk/met/momu/International_Antarctic_Weather_Forecasting_Handbook/2.6_Mean%20values%20of%20the%20main%20meteorological%20elements.php"
+        }
+      ],
+      "media": [
+        {
+          "kind": "image",
+          "path": "science/rumor-media/cold-deserts.webp",
+          "alt": "南极麦克默多干谷及周围冰雪的卫星影像",
+          "caption": "Landsat 7 遥感影像，能看到南极麦克默多干谷裸露的山谷与周围冰雪。是否属于沙漠，还要查看长期降水资料。",
+          "credit": "Robert Simmon／NASA GSFC／Landsat 7 科学团队",
+          "source_url": "https://science.nasa.gov/earth/earth-observatory/mcmurdo-dry-valleys-2140/"
+        }
+      ]
+    },
+    {
+      "slug": "lightning",
+      "icon": "cloud",
+      "category": "天气与地球",
+      "claim": "闪电不会两次击中同一个地方",
+      "teaser": "高楼顶端的接闪装置，为什么需要一直留在那里？",
+      "scenario": "有句话说，闪电不会两次落在同一个地方。有人因此觉得，刚被雷击过的地方已经很安全。",
+      "evidence": [
+        {
+          "title": "高处会被反复击中",
+          "body": "气象部门的记录显示，闪电能多次击中同一座高大建筑。高大、突出、孤立的物体，还可能更容易成为雷击位置。"
+        },
+        {
+          "title": "一次发生不等于用完机会",
+          "body": "一次雷击不会让那个地方获得免雷击保护。只要雷暴条件仍在，那里仍可能再次遭遇雷击。"
+        }
+      ],
+      "verdict": "false",
+      "hint": "已经发生过一件事，为什么就一定能阻止它再发生？看看高楼的记录。",
+      "explanation": "闪电可以反复击中同一个地方。刚被雷击过，不能成为安全的理由。听到雷声，应由大人带领进入坚固建筑或车窗关闭的硬顶汽车，远离孤立树木和开阔地。",
+      "method": "用重复记录检查老说法",
+      "transfer": "某个路口昨天发生过一次交通事故，能推出今天不会发生吗？你会怎样检查这种推理？",
+      "sources": [
+        {
+          "label": "美国国家气象局 · 雷电流言与事实",
+          "url": "https://www.weather.gov/safety/lightning-myths"
+        },
+        {
+          "label": "NOAA 强风暴实验室 · 雷电常见问题",
+          "url": "https://www.nssl.noaa.gov/education/svrwx101/lightning/faq/"
+        }
+      ],
+      "media": [
+        {
+          "kind": "image",
+          "path": "science/rumor-media/lightning.webp",
+          "alt": "一道闪电击中纽约高楼的顶部",
+          "caption": "美国国家气象局收录的雷击照片。单张照片记录这一次雷击，是否反复发生要继续查多次记录。",
+          "credit": "美国国家气象局",
+          "source_url": "https://www.weather.gov/safety/lightning-myths"
+        }
+      ]
+    },
+    {
+      "slug": "clouds",
+      "icon": "cloud",
+      "category": "天气与地球",
+      "claim": "天上看得见的云就是水蒸气",
+      "teaser": "水蒸气看不见，白白的云又是由什么组成的？",
+      "scenario": "太阳晒暖了水面，水会蒸发，后来天上出现云。有人就说，云是成团飘起来的水蒸气。",
+      "evidence": [
+        {
+          "title": "水蒸气是看不见的气体",
+          "body": "空气里的水蒸气本身无法直接用肉眼看见。它可以在合适条件下变成小水滴，也可以形成小冰晶。"
+        },
+        {
+          "title": "云里有极小的水滴和冰晶",
+          "body": "许多云由大量小水滴、小冰晶，或者两者共同组成。它们会散射阳光，所以我们能看见白白或灰灰的一团。"
+        }
+      ],
+      "verdict": "false",
+      "hint": "先分清水的气体状态和一大群小水滴。它们都与水有关，但状态一样吗？",
+      "explanation": "可见的云主要是大量小水滴和小冰晶组成的。水蒸气参与了云的形成，但水蒸气本身看不见。雾与云很相似，只是雾出现在靠近地面的地方。",
+      "method": "把变化前后的状态分清楚",
+      "transfer": "冷饮杯外的小水珠、清晨的雾和高空的云，哪些地方都用到了水蒸气变成小水滴的过程？",
+      "sources": [
+        {
+          "label": "NOAA 气象课堂 · 云怎样形成",
+          "url": "https://www.noaa.gov/jetstream/clouds/how-clouds-form"
+        }
+      ],
+      "media": [
+        {
+          "kind": "image",
+          "path": "study_topics/geo/assets/clouds.jpg",
+          "alt": "蓝天下的一片片白色积云",
+          "caption": "瑞典的淡积云实拍。要知道白云里有哪些小颗粒，还需要结合云的形成过程。",
+          "credit": "Kr-val／Wikimedia Commons",
+          "source_url": "https://commons.wikimedia.org/wiki/File:Cumulus_humilis_sweden_2009.jpg"
+        }
+      ]
+    },
+    {
+      "slug": "rainbows",
+      "icon": "rainbow",
+      "category": "天气与地球",
+      "claim": "白色的阳光里藏着多种颜色的光",
+      "teaser": "雨滴和三棱镜怎样把一束光变成彩色的带子？",
+      "scenario": "阳光看起来没有七彩条纹。有人说，彩虹的颜色原本就混在阳光里，水滴只是把它们分了开来。",
+      "evidence": [
+        {
+          "title": "不同颜色的光弯折程度不同",
+          "body": "阳光进入和离开雨滴时会发生折射，还会在雨滴内部反射。不同颜色的光偏折不同，合在一起的光便分出了颜色。"
+        },
+        {
+          "title": "三棱镜也能分出颜色",
+          "body": "让一束白光通过合适的三棱镜，也能在白纸上看到彩色的光带。即使没有彩色颜料，仍能从白光中分出多种颜色。"
+        }
+      ],
+      "verdict": "supported",
+      "hint": "没有添加颜料，为什么还是出现了不同颜色？两种观察能不能互相印证？",
+      "explanation": "白色阳光包含多种颜色的光。雨滴让不同颜色沿不同方向出来，于是形成彩虹。彩虹中的颜色是连续过渡的，人们常把它概括成七种颜色。",
+      "method": "用另一种工具重复验证",
+      "transfer": "用彩笔画出的彩虹和真正的彩虹，颜色来自同一个过程吗？试着说清两者的区别。",
+      "sources": [
+        {
+          "label": "NOAA SciJinks · 彩虹是怎样形成的",
+          "url": "https://www.nesdis.noaa.gov/about/k-12-education/optical-phenomena/what-causes-rainbow"
+        },
+        {
+          "label": "美国地质调查局 · 水与光形成的彩虹",
+          "url": "https://www.usgs.gov/water-science-school/science/rainbows-water-and-light"
+        }
+      ],
+      "activity": {
+        "title": "把白光分成彩色光带",
+        "materials": "教学用三棱镜、白纸、白光手电筒。",
+        "steps": [
+          "把房间稍微调暗，让手电筒的一束光通过三棱镜照向白纸。",
+          "慢慢改变三棱镜和白纸的位置，寻找彩色光带。",
+          "画出看到的颜色顺序，看看颜色之间有没有硬边界。"
+        ],
+        "note": "不直视强光和太阳，不使用激光笔。普通手电筒光束太散时，光带可能不明显。"
+      },
+      "media": [
+        {
+          "kind": "image",
+          "path": "science/rumor-media/rainbows.webp",
+          "alt": "法罗群岛山坡上方的一道彩虹",
+          "caption": "法罗群岛苏德岛的彩虹。连续的彩色光带来自阳光与水滴的相互作用。",
+          "credit": "Erik Christensen／NOAA 收录",
+          "source_url": "https://www.nesdis.noaa.gov/about/k-12-education/optical-phenomena/what-causes-rainbow"
+        }
+      ]
+    },
+    {
+      "slug": "moon-photo",
+      "icon": "camera",
+      "category": "视频里的说法",
+      "claim": "这两张照片足以证明月亮变大了",
+      "teaser": "照片里的月亮大小不同，先查一查镜头有没有变。",
+      "scenario": "想象有人展示两张月亮照片，一张月亮小，一张月亮大。他没给出拍摄设置，就说照片已经证明月亮本身变大了。",
+      "evidence": [
+        {
+          "title": "画面大小还由镜头决定",
+          "body": "同一个月亮，换焦距、放大照片，或者把图裁剪后铺满屏幕，都能让画面里的月亮看起来更大。"
+        },
+        {
+          "title": "公平的比较缺了条件",
+          "body": "这两张照片没有说明拍摄时间、焦距、裁剪比例和最终显示尺寸。我们连照片是不是按同一种方式比较，都还不知道。"
+        }
+      ],
+      "verdict": "unclear",
+      "hint": "先问照片是怎样拍、怎样处理、怎样摆在一起的。图片里的大小能直接当作真实尺寸吗？",
+      "explanation": "仅凭这两张设置不明的照片，还不能判断月亮本身的大小变化。可以先查原始照片、拍摄时间和焦距，再用相同方式比较。NASA 介绍了用一致拍摄方法检查月亮视觉大小的办法。",
+      "method": "给图片补上拍摄条件",
+      "transfer": "短视频里的玩具看起来像一座楼，可能还受哪些拍摄条件影响？你最想先看到哪一段原始镜头？",
+      "sources": [
+        {
+          "label": "NASA 科学 · 月亮为什么有时看起来特别大",
+          "url": "https://science.nasa.gov/solar-system/moon/the-moon-illusion-why-does-the-moon-look-so-big-sometimes/"
+        }
+      ],
+      "media": [
+        {
+          "kind": "image",
+          "path": "science/rumor-media/moon-photo.webp",
+          "alt": "月亮从树梢上方升起的照片",
+          "caption": "月亮从树梢上方升起。拿它和另一张照片比大小之前，先核对拍摄和显示条件。",
+          "credit": "NASA／Bill Dunford",
+          "source_url": "https://science.nasa.gov/solar-system/moon/the-moon-illusion-why-does-the-moon-look-so-big-sometimes/"
+        }
       ]
     }
   ]

@@ -1,0 +1,24 @@
+<svg viewBox="0 0 640 420" role="img" aria-labelledby="nerves-title">
+  <title id="nerves-title">{{ diagram.title }}</title>
+  <defs>
+    <marker id="nerve-yellow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="3" markerHeight="3" orient="auto"><path d="M0 0 10 5 0 10" fill="#b2731c"/></marker>
+    <marker id="nerve-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="3" markerHeight="3" orient="auto"><path d="M0 0 10 5 0 10" fill="#327e9d"/></marker>
+  </defs>
+  <path class="body-anatomy-outline" d="M266 155c-43-17-62-61-39-100 17-29 62-39 94-23 25 13 33 32 34 56l14 25-16 8-4 32-31 8v28l60 20 47 53 71 20-16 38-82-23-49-44v135H210V224l56-35Z"/>
+  <path class="body-brain" d="M253 56c-15 0-26 18-20 31-13 14-1 37 15 36 5 14 23 19 34 10 11 12 31 8 34-7 19-3 23-24 12-36 8-18-10-34-24-31-8-15-31-14-40-2Z" fill="#e0a69c" stroke="#9a5c5c" stroke-width="3"/>
+  <path d="M256 67q-10 15 3 25m15-33q17 13 4 27m25-16q-8 10 4 22m-65 14q14-8 23 9m18-22q19 7 15 24" fill="none" stroke="#aa6e68" stroke-width="3" stroke-linecap="round"/>
+  <path d="M285 139v214" stroke="#c49e73" stroke-width="19" stroke-linecap="round"/>
+  <path d="M285 147v202" stroke="#ead19d" stroke-width="11" stroke-dasharray="7 6" stroke-linecap="round"/>
+  <circle cx="505" cy="282" r="28" fill="#a4cbbb" stroke="#448f77" stroke-width="3"/>
+  <path d="M481 275q11-17 21-5m-22 13q12-14 23-5m-17 14q10-11 21-3" fill="none" stroke="#967452" stroke-width="6" stroke-linecap="round"/>
+  <path class="body-nerve-route body-nerve-in" d="M478 283 386 261 273 244V145" fill="none" stroke="#b2731c" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#nerve-yellow)"/>
+  <path class="body-nerve-route body-nerve-out" d="M299 147V227L397 245 480 264" fill="none" stroke="#327e9d" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#nerve-blue)"/>
+  <g class="body-svg-labels">
+    <path class="body-leader" d="M114 79h111M118 197h139M473 309v30"/>
+    <text x="73" y="86">{{ diagram.labels.brain }}</text>
+    <text x="63" y="204">{{ diagram.labels.spine }}</text>
+    <text x="407" y="366">{{ diagram.labels.hand }}</text>
+    <text x="61" y="295" fill="#9c681c">{{ diagram.labels.sensory }} ↑</text>
+    <text x="355" y="195" fill="#286c88">{{ diagram.labels.motor }} ↓</text>
+  </g>
+</svg>

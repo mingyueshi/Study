@@ -6,6 +6,12 @@
       <source src="{% static item.path %}" type="video/mp4">
       <p>{{ item.alt }} <a href="{% static item.path %}">打开本地短视频</a></p>
     </video>
+    {% elif item.kind == 'audio' %}
+    <img src="{% static item.poster %}" alt="{{ item.alt }}" loading="lazy">
+    <audio controls preload="none" aria-labelledby="media-title-{{ number }}" aria-describedby="media-caption-{{ number }}">
+      <source src="{% static item.path %}" type="audio/mpeg">
+      <a href="{% static item.path %}">打开本地录音</a>
+    </audio>
     {% elif item.kind == 'animation' %}
     <img id="media-image-{{ number }}" src="{% static item.poster %}" alt="{{ item.alt }}" loading="lazy" data-animation-src="{% static item.path %}">
     {% elif item.kind == 'diagram' %}
@@ -18,7 +24,7 @@
     {% endif %}
   </div>
   <figcaption class="mystery-media-copy">
-    <p class="mystery-kicker">{% if item.kind == 'video' %}实拍短视频{% elif item.kind == 'animation' %}观测动图{% else %}互动读图{% endif %}</p>
+    <p class="mystery-kicker">{% if item.kind == 'video' %}实拍短视频{% elif item.kind == 'animation' %}观测动图{% elif item.kind == 'audio' %}实录声音{% else %}互动读图{% endif %}</p>
     <h3 id="media-title-{{ number }}">{{ item.title }}</h3>
     <p id="media-caption-{{ number }}">{{ item.caption }}</p>
     {% if item.kind == 'animation' %}
@@ -37,5 +43,6 @@
     </div>
     {% endif %}
     <p class="mystery-media-credit">{{ item.credit }} · <a href="#source-{{ item.source }}">素材出处</a></p>
+    {% if item.kind == 'diagram' %}<p><a class="mystery-source-link" href="{% static item.path %}" target="_blank" rel="noopener">查看本地大图 ↗</a></p>{% endif %}
   </figcaption>
 </figure>

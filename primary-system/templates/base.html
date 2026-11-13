@@ -7,7 +7,7 @@
   <title>{% block title %}乐学堂 · 一起把世界读懂{% endblock %}</title>
   <link rel="icon" href="{% static 'icons/book.svg' %}" type="image/svg+xml">
   <link rel="stylesheet" href="{% static 'platform.css' %}?v=4">
-  <link rel="stylesheet" href="{% static 'sidebar-layout.css' %}?v=2">
+  <link rel="stylesheet" href="{% static 'sidebar-layout.css' %}?v=3">
 </head>
 <body>
   <a class="skip-link" href="#main">跳到主要内容</a>
@@ -33,6 +33,6 @@
   </main>
   <footer class="site-footer"><span>乐学堂 · 让知识慢慢长成自己的力量</span><span>语文 / 数学 / 英语 / 更大的世界</span></footer>
   {% if user.is_authenticated %}<script src="{% static 'incentives/reward-toast.js' %}" defer></script>{% endif %}
-  <script src="{% static 'sidebar-layout.js' %}?v=2" defer></script>
+  <script src="{% static 'sidebar-layout.js' %}?v=3" defer></script>
 </body>
 </html>

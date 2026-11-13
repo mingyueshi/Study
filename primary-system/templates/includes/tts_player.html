@@ -1,8 +1,8 @@
-<section class="textbook-player" id="tts-sequence-player" data-state="idle"{% if player_mode == 'idiom' %} data-tts-language="zh-CN"{% endif %} aria-label="连读控制">
-    <div class="textbook-player-heading">
-      <b>学习侧栏</b>
+<div class="reading-sidebar-header" role="group" aria-label="侧栏操作">
+      <button class="sidebar-side-toggle reading-sidebar-collapse" id="reading-sidebar-collapse" type="button" aria-controls="tts-sequence-player reading-sidebar-settings reading-sidebar-directory" aria-expanded="true" hidden>收起侧栏</button>
       <button class="sidebar-side-toggle" id="english-sidebar-toggle" type="button" aria-controls="{{ reading_layout_id|default:'english-textbook-layout' }}" aria-label="将侧栏移到左侧">← 移到左侧</button>
-    </div>
+</div>
+<section class="textbook-player" id="tts-sequence-player" data-state="idle"{% if player_mode == 'idiom' %} data-tts-language="zh-CN"{% endif %} aria-label="连读控制">
     {% if player_mode == 'idiom' %}
     <div class="reading-scope"><p>本组跟读 · {{ available_count }} 个成语</p><h2>{{ scene.title }}</h2></div>
     <label class="textbook-scope" for="tts-text-scope">朗读内容

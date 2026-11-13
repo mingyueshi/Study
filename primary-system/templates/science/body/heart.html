@@ -1,9 +1,21 @@
 <section class="body-panel body-heart" id="heart" data-heart aria-labelledby="heart-title">
   <p class="body-kicker">互动图示</p>
-  <h2 id="heart-title">{{ heart.title }}</h2>
-  <p>{{ heart.intro }}</p>
+  <h2 id="heart-title">{{ lesson.diagram.title }}</h2>
+  <p>{{ lesson.diagram.prompt }}</p>
+  <div class="body-controls" data-heart-controls hidden>
+    <div class="body-phase-group" role="group" aria-label="选择泵血步骤">
+      <button type="button" data-heart-all aria-pressed="true">全部路线</button>
+      {% for phase in heart.phases %}
+      <button type="button" data-phase-choice="{{ phase.id }}" aria-pressed="false">{{ forloop.counter }} · {{ phase.label }}</button>
+      {% endfor %}
+    </div>
+    <button type="button" data-heart-play>连续播放</button>
+  </div>
+  {% include 'science/body/heart-anatomy.html' %}
+  <details class="body-route-details">
+    <summary>沿着箭头，追踪完整路线</summary>
   <figure class="body-flow" data-phase="all">
-    <svg viewBox="0 0 640 314" role="img" aria-labelledby="flow-title flow-desc">
+    <svg viewBox="0 0 640 314" role="img" aria-labelledby="flow-title" aria-describedby="flow-desc">
       <title id="flow-title">心脏泵血路线图</title>
       <desc id="flow-desc">{{ heart.route }}。{{ heart.legend }}</desc>
       <defs>
@@ -41,15 +53,7 @@
       <span>{{ heart.legend }}</span>
     </figcaption>
   </figure>
-  <div class="body-controls" data-heart-controls hidden>
-    <div class="body-phase-group" role="group" aria-label="选择泵血步骤">
-      <button type="button" data-heart-all aria-pressed="true">全部路线</button>
-      {% for phase in heart.phases %}
-      <button type="button" data-phase-choice="{{ phase.id }}" aria-pressed="false">{{ forloop.counter }} · {{ phase.label }}</button>
-      {% endfor %}
-    </div>
-    <button type="button" data-heart-play>连续播放</button>
-  </div>
+  </details>
   <div class="body-phase-notes" aria-live="polite">
     {% for phase in heart.phases %}
     <p data-phase-note="{{ phase.id }}"><strong>{{ phase.label }}：</strong>{{ phase.description }}</p>

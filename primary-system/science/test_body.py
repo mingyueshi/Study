@@ -4,7 +4,7 @@ from django.urls import reverse
 
 
 class HumanBodyStationTests(SimpleTestCase):
-    def test_index_and_four_lessons_are_public(self):
+    def test_index_and_six_lessons_are_public(self):
         index = self.client.get(reverse('science-body'))
         self.assertContains(index, '人体奥秘站')
         lab = reverse('science-lab')
@@ -13,13 +13,17 @@ class HumanBodyStationTests(SimpleTestCase):
         for slug, label in (
             ('breathing', '呼吸'), ('digestion', '消化'),
             ('circulation', '血液循环'), ('movement', '骨骼肌肉'),
+            ('nerves', '大脑与神经'), ('senses', '眼耳与感官'),
         ):
             with self.subTest(slug=slug):
                 lesson_url = reverse('science-body-lesson', args=[slug])
                 self.assertContains(index, f'href="{lesson_url}"')
                 lesson = self.client.get(lesson_url)
                 self.assertContains(lesson, f'{label} · 人体奥秘站')
-                self.assertContains(lesson, f'/static/science/body-atlas.svg#{slug}')
+                self.assertContains(lesson, '/static/science/body.js?v=3')
+                self.assertContains(lesson, 'role="img"')
+                self.assertContains(lesson, 'id="gallery"')
+                self.assertContains(lesson, 'id="checkup"')
                 self.assertContains(lesson, '翻开答案')
                 self.assertContains(lesson, 'aria-current="page"', count=1)
 
@@ -29,7 +33,8 @@ class HumanBodyStationTests(SimpleTestCase):
         self.assertContains(response, 'id="heart"')
         self.assertContains(response, 'id="pulse"')
         self.assertContains(response, 'data-seconds="30"')
-        for asset in ('science/body.css', 'science/body.js', 'science/body-atlas.svg'):
+        self.assertContains(response, '心脏正面简化剖面')
+        for asset in ('science/body.css', 'science/body.js'):
             self.assertContains(response, f'/static/{asset}')
             self.assertTrue(finders.find(asset))
 

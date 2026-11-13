@@ -38,4 +38,47 @@
     <path d="M29 62h38" stroke="#27365b" stroke-width="2.5" stroke-linecap="round"/>
     <circle cx="70" cy="32" r="4" fill="#e07862"/>
   </symbol>
+  <symbol id="boat" viewBox="0 0 96 96">
+    <rect width="96" height="96" rx="24" fill="#e2f2fc"/>
+    <path d="M17 52h62L65 72H31z" fill="#ffbe80" stroke="#27365b" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M48 18v34m-4-28L25 46h19zm9 0v22h17z" fill="#fffbed" stroke="#27365b" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M15 78q9-8 17 0t16 0 16 0 17 0" fill="none" stroke="#477ea6" stroke-width="3" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="thermometer" viewBox="0 0 96 96">
+    <rect width="96" height="96" rx="24" fill="#ffefdc"/>
+    <path d="M40 24a8 8 0 0 1 16 0v33a15 15 0 1 1-16 0z" fill="#fffbed" stroke="#27365b" stroke-width="3"/>
+    <path d="M48 34v29" stroke="#e17b5f" stroke-width="5" stroke-linecap="round"/>
+    <circle cx="48" cy="69" r="8" fill="#e17b5f"/>
+    <path d="M63 29h9m-9 12h6m-6 12h9" stroke="#27365b" stroke-width="3" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="animal" viewBox="0 0 96 96">
+    <rect width="96" height="96" rx="24" fill="#e8f3cf"/>
+    <path d="M48 43c-7 0-9 10-15 15-13 13 1 24 15 17 14 7 28-4 15-17-6-5-8-15-15-15z" fill="#9cc7a2" stroke="#27365b" stroke-width="3"/>
+    <g fill="#fffbed" stroke="#27365b" stroke-width="3"><ellipse cx="23" cy="42" rx="7" ry="10" transform="rotate(-25 23 42)"/><ellipse cx="39" cy="28" rx="7" ry="10"/><ellipse cx="57" cy="28" rx="7" ry="10"/><ellipse cx="73" cy="42" rx="7" ry="10" transform="rotate(25 73 42)"/></g>
+  </symbol>
+  <symbol id="earth" viewBox="0 0 96 96">
+    <rect width="96" height="96" rx="24" fill="#e9edff"/>
+    <circle cx="48" cy="48" r="29" fill="#8bc5e5" stroke="#27365b" stroke-width="3"/>
+    <path d="m29 26 15 4 3 12-10 5-13-6m42-17-9 13 6 10 12 3m-33 9 17-7 8 10-8 13-13-1z" fill="#b1d38a" stroke="#27365b" stroke-width="2.5" stroke-linejoin="round"/>
+    <path d="m18 78 60-60" stroke="#27365b" stroke-width="2" stroke-dasharray="4 5"/>
+  </symbol>
+  <symbol id="cloud" viewBox="0 0 96 96">
+    <rect width="96" height="96" rx="24" fill="#e2f2fc"/>
+    <path d="M30 58a14 14 0 0 1-1-28 21 21 0 0 1 39 4 12 12 0 0 1 0 24z" fill="#fffbed" stroke="#27365b" stroke-width="3"/>
+    <path d="m47 56-9 15h11l-5 14 19-21H51l6-8" fill="#ffcf71" stroke="#27365b" stroke-width="2.5" stroke-linejoin="round"/>
+  </symbol>
+  <symbol id="rainbow" viewBox="0 0 96 96">
+    <rect width="96" height="96" rx="24" fill="#fff0de"/>
+    <path d="M18 70V53a30 30 0 0 1 60 0v17" fill="none" stroke="#e58b74" stroke-width="9"/>
+    <path d="M27 70V53a21 21 0 0 1 42 0v17" fill="none" stroke="#f4cd77" stroke-width="9"/>
+    <path d="M36 70V53a12 12 0 0 1 24 0v17" fill="none" stroke="#8dc4ac" stroke-width="9"/>
+    <path d="M13 73h27m16 0h27" stroke="#27365b" stroke-width="3" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="camera" viewBox="0 0 96 96">
+    <rect width="96" height="96" rx="24" fill="#e9edff"/>
+    <path d="m32 30 6-9h20l6 9h11a7 7 0 0 1 7 7v32a7 7 0 0 1-7 7H21a7 7 0 0 1-7-7V37a7 7 0 0 1 7-7z" fill="#afc2ff" stroke="#27365b" stroke-width="3"/>
+    <circle cx="48" cy="53" r="16" fill="#fffbed" stroke="#27365b" stroke-width="3"/>
+    <circle cx="48" cy="53" r="8" fill="#8bc5e5" stroke="#27365b" stroke-width="2"/>
+    <path d="M70 40h3" stroke="#27365b" stroke-width="4" stroke-linecap="round"/>
+  </symbol>
 </svg>

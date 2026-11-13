@@ -18,8 +18,25 @@ def load_content():
 
 @require_safe
 def index(request):
+    all_cases = load_content()['cases']
+    categories = list(dict.fromkeys(case['category'] for case in all_cases))
+    category = request.GET.get('category', '')
+    if category not in categories:
+        category = ''
+    query = request.GET.get('q', '').strip()[:100]
+    cases = [
+        dict(case, number=number)
+        for number, case in enumerate(all_cases, 1)
+        if (not category or case['category'] == category)
+        and query.casefold() in f'{case["claim"]} {case["teaser"]} {case["category"]}'.casefold()
+    ]
     return render(request, 'science/rumors/index.html', {
-        'cases': load_content()['cases'],
+        'cases': cases,
+        'categories': categories,
+        'category': category,
+        'query': query,
+        'all_slugs': [case['slug'] for case in all_cases],
+        'total_count': len(all_cases),
         'study_area': 'science',
     })
 

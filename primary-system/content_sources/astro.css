@@ -292,3 +292,92 @@
   .wgrid { grid-template-columns: 1fr; display: block; }
   .kcard, .mistake-card { margin-bottom: 12px; }
 }
+
+/* 宇宙漫游：保持平台阅读主题，在影像和模型里使用深色观察背景。 */
+.astro-roam { font-size: 18px; line-height: 1.8; color: var(--ink); }
+.astro-roam *, .roam-search { box-sizing: border-box; min-width: 0; }
+.astro-roam :is(h1,h2,h3,p,figure,dl) { margin: 0; }
+.astro-roam h2 { font-size: 28px; line-height: 1.4; margin-bottom: 12px; }
+.astro-roam h3 { font-size: 22px; line-height: 1.5; }
+.astro-roam p { max-width: 72ch; }
+.astro-roam a { text-underline-offset: 4px; }
+.astro-roam :is(a,button,summary):focus-visible, .roam-course-link a:focus-visible { outline: 3px solid var(--course-action); outline-offset: 4px; }
+.roam-hero { position: relative; isolation: isolate; display: grid; align-items: center; min-height: 430px; padding: clamp(22px, 4vw, 64px); overflow: hidden; border-radius: 16px; background: #111c38; color: #fff; }
+.roam-hero > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
+.roam-hero::before { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(6,16,40,.95), rgba(6,16,40,.77) 45%, rgba(6,16,40,.1)); z-index: -1; }
+.roam-hero h1 { font-size: clamp(30px, 3.5vw, 54px); line-height: 1.35; letter-spacing: -.02em; margin: 10px 0 18px; color: #fff; }
+.roam-hero p { color: #fff; max-width: 36ch; }
+.roam-hero .roam-intro-tag { color: #cce9ff; font-size: 18px; font-weight: 700; }
+.roam-hero nav { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+.roam-hero nav a { min-height: 44px; padding: 6px 16px; color: #fff; border: 1px solid #b0c5e5; border-radius: 8px; text-decoration: none; font-weight: 700; background: #193353; }
+.roam-hero nav a:hover { background: #2b4c75; }
+.astro-roam .roam-local-note { margin: 16px 0 40px; color: var(--muted); font-size: 16px; }
+.roam-chapter { margin-block: 56px; scroll-margin-top: 30px; }
+.roam-chapter > header { padding-block: 22px; border-top: 2px solid var(--line); }
+.astro-roam .roam-scale { display: inline-block; margin-top: 16px; padding: 8px 14px; background: var(--card-tint); color: var(--ink); border-radius: 8px; font-weight: 700; }
+.roam-gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
+.roam-photo > a { display: block; position: relative; background: #0b152b; border-radius: 12px; overflow: hidden; }
+.roam-photo img { display: block; width: 100%; height: clamp(250px, 24vw, 600px); object-fit: contain; }
+.roam-photo > a > span { position: absolute; right: 12px; bottom: 12px; padding: 4px 10px; border-radius: 6px; background: #132641; color: #fff; font-size: 15px; }
+.roam-photo a:hover img { filter: brightness(1.12); }
+.roam-photo figcaption { padding-block: 16px; }
+.roam-kind { display: inline-block; font-size: 14px; font-weight: 750; color: var(--course-action); background: var(--soft); padding: 2px 8px; border-radius: 5px; margin-bottom: 6px; }
+.astro-roam small { display: block; color: var(--muted); font-size: 14px; line-height: 1.7; margin-top: 8px; overflow-wrap: anywhere; }
+.roam-photo p, .roam-cinema p { margin-block: 8px; }
+.roam-cinema { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(260px, 1fr); gap: 28px; align-items: center; padding-block: 28px; }
+.roam-cinema video { display: block; width: 100%; max-height: 680px; aspect-ratio: 16/9; background: #0b152b; border-radius: 12px; }
+.roam-cinema-copy { max-width: 65ch; }
+.roam-question { padding: 18px 22px; background: var(--card-tint); border-radius: 12px; margin-block: 16px 24px; }
+.roam-question summary { cursor: pointer; font-weight: 750; }
+.roam-question p { padding-top: 12px; }
+.roam-links h3 small { display: inline; margin-left: 10px; font-weight: 500; }
+.roam-links ul { display: flex; flex-wrap: wrap; gap: 12px 36px; list-style: none; padding: 0; margin: 14px 0 18px; }
+.roam-links li { flex: 1 1 300px; max-width: 65ch; }
+.roam-links li > a { font-weight: 750; }
+.roam-links li > p { font-size: 16px; color: var(--muted); }
+.roam-lab { padding: clamp(16px, 2.5vw, 30px); border-radius: 12px; background: var(--card); border: 1px solid var(--line); }
+.roam-controls { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+.roam-controls button, .roam-planet-picker button { min-height: 44px; border: 1px solid var(--line); border-radius: 8px; background: var(--card); color: var(--ink); padding: 6px 14px; font: inherit; cursor: pointer; }
+.roam-controls button[aria-pressed="true"] { color: #fff; border-color: #365394; background: #365394; }
+.roam-controls button:hover, .roam-planet-picker button:hover { background: var(--soft); color: var(--ink); }
+.roam-controls [data-roam-play] { margin-left: auto; color: var(--course-action); font-weight: 750; }
+.astro-roam .roam-model-note { margin: 12px 0; font-size: 16px; min-height: 3.5em; }
+.roam-solar-stage { background: #101c32; border-radius: 12px; overflow: hidden; }
+.roam-solar-stage svg { display: block; width: 100%; max-height: 620px; }
+.roam-solar-stage text { font-family: inherit; font-size: 21px; }
+.roam-planet-picker { display: flex; flex-wrap: wrap; gap: 8px; margin-block: 18px; }
+.roam-planet-picker button::before { content: ''; display: inline-block; width: 12px; height: 12px; border-radius: 50%; background: var(--planet); margin-right: 6px; }
+.roam-planet-picker button[aria-pressed="true"] { outline: 2px solid var(--course-action); outline-offset: 1px; font-weight: 800; }
+.roam-planet-info { background: var(--soft); padding: 18px; border-radius: 8px; }
+.roam-planet-info dl { display: flex; flex-wrap: wrap; gap: 12px 36px; margin-block: 12px; }
+.roam-planet-info dt { color: var(--muted); font-size: 15px; }
+.roam-planet-info dd { margin: 0; font-size: 20px; font-weight: 750; }
+.astro-roam .roam-data-source { font-size: 14px; color: var(--muted); margin-top: 16px; }
+.roam-course-link, .roam-search { padding: 16px; margin-bottom: 20px; border-radius: 10px; background: var(--card-tint); color: var(--ink); font-size: 18px; }
+.roam-search a { display: block; padding-block: 8px; }
+.roam-video-error { color: var(--ink); background: var(--soft); padding: 12px; font-size: 16px; }
+@media (max-width: 1150px) {
+  .roam-cinema { grid-template-columns: 1fr; gap: 16px; }
+}
+@media (max-width: 650px) {
+  .astro-roam { font-size: 17px; }
+  .astro-roam h2 { font-size: 25px; }
+  .roam-gallery { grid-template-columns: 1fr; gap: 16px; }
+  .roam-hero { min-height: 380px; }
+  .roam-chapter { margin-block: 36px; }
+  .roam-controls [data-roam-play] { margin-left: 0; }
+  .roam-solar-stage svg { min-width: 600px; }
+  .roam-solar-stage { overflow-x: auto; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .study-page[data-subject="astro"] *, .study-page[data-subject="astro"] *::before, .study-page[data-subject="astro"] *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
+@media print {
+  .roam-hero { min-height: auto; background: #fff; color: #111; padding: 0; }
+  .roam-hero :is(h1,p) { color: #111; }
+  .roam-hero::before, .roam-hero > img, .roam-controls, .roam-planet-picker, .roam-cinema video, .roam-hero nav { display: none; }
+  .roam-gallery, .roam-cinema { display: block; }
+  .roam-photo { break-inside: avoid; }
+  .roam-photo img { height: 230px; }
+  .roam-chapter { margin-block: 22px; }
+}

@@ -4,7 +4,7 @@ from django.views.generic import TemplateView
 astronomy_study = TemplateView.as_view(template_name='study_topics/course.html', extra_context={
     'study_area': 'geography', 'study_label': '地理',
     'course_slug': 'astro', 'course_title': '天文探索', 'course_section': '太空基地',
-    'course_intro': '从太阳系出发，读星图、看实景照片，认识更远的宇宙。',
+    'course_intro': '从太阳系到银河系和深空，看大图、动画，动手比较宇宙尺度。',
     'course_links': (('astronomy-index', '查恒星与星座'), ('mysteries', '未解之谜研究所')),
 })
 

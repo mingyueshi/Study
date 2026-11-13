@@ -6,21 +6,21 @@
     const cards = document.querySelectorAll('[data-rumor-card]');
     const count = progress.querySelector('[data-completed-count]');
     const bar = progress.querySelector('progress');
+    const slugs = JSON.parse(document.querySelector('#rumor-all-slugs').textContent);
 
     window.addEventListener('pageshow', () => {
-      let completed = 0;
       try {
         for (const card of cards) {
           const done = localStorage.getItem(storageKey + card.dataset.rumorCard) === '1';
           card.querySelector('.rumor-done').hidden = !done;
-          completed += Number(done);
         }
+        const completed = slugs.filter(slug => localStorage.getItem(storageKey + slug) === '1').length;
+        count.textContent = completed;
+        bar.value = completed;
       } catch {
         progress.hidden = true;
         return;
       }
-      count.textContent = completed;
-      bar.value = completed;
       progress.hidden = false;
     });
   }

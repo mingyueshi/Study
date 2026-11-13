@@ -1,0 +1,44 @@
+<svg viewBox="0 0 640 400" role="img" aria-labelledby="senses-title">
+  <title id="senses-title">{{ diagram.title }}</title>
+  <defs><marker id="sense-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="3" markerHeight="3" orient="auto"><path d="M0 0 10 5 0 10" fill="#a77522"/></marker></defs>
+  <g data-sense-art="eye">
+    <path d="M230 89c-61 0-116 58-116 118s55 118 116 118c78 0 137-50 137-118S308 89 230 89Z" fill="#fff7e7" stroke="#bd9674" stroke-width="6"/>
+    <path d="M230 99c73 0 125 49 125 108s-52 108-125 108" fill="none" stroke="#d7856f" stroke-width="8"/>
+    <path d="M130 149q-41 58 0 116" fill="#d3ece4" stroke="#6a9e8c" stroke-width="4"/>
+    <ellipse cx="166" cy="207" rx="18" ry="49" fill="#dcecb6" stroke="#98aa5d" stroke-width="3"/>
+    <path d="M363 214 463 238" stroke="#d5b16b" stroke-width="23"/>
+    <path d="M41 174h84l229 33M41 241h84l229-34" fill="none" stroke="#c79428" stroke-width="3" marker-end="url(#sense-arrow)"/>
+    <g class="body-svg-labels">
+      <text x="57" y="124">{{ diagram.labels.cornea }}</text><path d="M110 132v25" class="body-leader"/>
+      <text x="128" y="369">{{ diagram.labels.lens }}</text><path d="M165 341v-78" class="body-leader"/>
+      <text x="383" y="110">{{ diagram.labels.retina }}</text><path d="M391 124 341 157" class="body-leader"/>
+      <text x="477" y="246">{{ diagram.labels.optic }}</text>
+      <text x="401" y="303" font-size="20">{{ diagram.labels.nerve }} →</text>
+    </g>
+  </g>
+  <g data-sense-art="ear">
+    <path d="M128 79c-48-17-75 19-69 81 3 36 22 59 31 92 8 32 43 41 62 15 11-15 13-33 8-50-4-14-1-31 12-47 25-34 2-77-44-91Z" fill="#e8b69b" stroke="#b8795b" stroke-width="5"/>
+    <path d="M108 124c-27 11-25 54-1 74m5-30q24-26 29-2" fill="none" stroke="#b8795b" stroke-width="7" stroke-linecap="round"/>
+    <path d="M132 213h149" stroke="#c99477" stroke-width="36" stroke-linecap="round"/>
+    <path d="M132 213h149" stroke="#f4dab2" stroke-width="24" stroke-linecap="round"/>
+    <path d="m287 180 10 66" stroke="#ab706a" stroke-width="9"/>
+    <path d="m300 195 22-22 21 20 24-11" fill="none" stroke="#937957" stroke-width="9" stroke-linecap="round"/>
+    <path d="M384 190c64-52 137 21 85 68-47 42-96-16-59-42 24-16 50 13 28 28" fill="none" stroke="#b9b2d8" stroke-width="25" stroke-linecap="round"/>
+    <path d="M485 223h83" stroke="#ddb86d" stroke-width="14"/>
+    <g fill="none" stroke="#a77522" stroke-width="3"><path d="M22 177q18 35 0 65m19-55q10 25 0 45"/><path d="M165 213h99" marker-end="url(#sense-arrow)"/></g>
+    <g class="body-svg-labels">
+      <text x="185" y="296">{{ diagram.labels.canal }}</text>
+      <text x="254" y="138">{{ diagram.labels.drum }}</text>
+      <text x="409" y="324">{{ diagram.labels.cochlea }}</text>
+      <text x="419" y="159" font-size="20">{{ diagram.labels.nerve }} →</text>
+    </g>
+  </g>
+  <g data-sense-art="smell">
+    <path d="M251 53c-46 5-74 48-65 96l-22 45 40 9 5 65c5 26 34 40 65 37l24 44h131l-58-124c19-26 29-52 24-86-8-55-65-94-144-86Z" fill="#f6dbb3" stroke="#ba9363" stroke-width="4"/>
+    <path d="m217 104-17 57 38 15" fill="none" stroke="#a67f56" stroke-width="5" stroke-linecap="round"/>
+    <path d="M203 217q40-4 58 15-32 26-49 9" fill="#d98483" stroke="#aa6567" stroke-width="3"/>
+    <circle cx="134" cy="162" r="10" fill="#d4a835"/><circle cx="101" cy="155" r="7" fill="#d4a835"/><circle cx="71" cy="145" r="5" fill="#d4a835"/>
+    <path d="M248 174q60-1 65-57m-66 115q64-14 69-99" fill="none" stroke="#ad8536" stroke-width="4" stroke-dasharray="6 6"/>
+    <g class="body-svg-labels"><text x="29" y="109">{{ diagram.labels.nose }}</text><text x="25" y="290">{{ diagram.labels.tongue }}</text><text x="398" y="111" font-size="20">{{ diagram.labels.nerve }}</text></g>
+  </g>
+</svg>

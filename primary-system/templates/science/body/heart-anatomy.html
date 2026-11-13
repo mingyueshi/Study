@@ -1,0 +1,52 @@
+<figure class="body-stage body-heart-stage">
+  <svg viewBox="0 0 640 410" role="img" aria-labelledby="heart-anatomy-title heart-anatomy-desc">
+    <title id="heart-anatomy-title">{{ lesson.diagram.title }}</title>
+    <desc id="heart-anatomy-desc">{{ lesson.diagram.caption }}</desc>
+    <defs>
+      <marker id="heart-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="3" markerHeight="3" orient="auto"><path d="M0 0 10 5 0 10" fill="#2d719b"/></marker>
+      <marker id="heart-red" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="3" markerHeight="3" orient="auto"><path d="M0 0 10 5 0 10" fill="#b84d48"/></marker>
+    </defs>
+    <path d="M321 121c-39-60-116-39-124 17-8 58 8 164 124 237 116-73 132-179 124-237-8-56-85-77-124-17Z" fill="#efb2a1" stroke="#a35a50" stroke-width="4"/>
+    <g class="body-heart-atria">
+      <path d="M310 141c-19-40-73-32-83 0-6 16-5 43 4 58h76Z" fill="#a4cee3" stroke="#3e7d9d" stroke-width="3"/>
+      <path d="M332 141c19-40 73-32 83 0 6 16 5 43-4 58h-76Z" fill="#f5d0bc" stroke="#bc7360" stroke-width="3"/>
+    </g>
+    <g class="body-heart-ventricles">
+      <path d="M231 218c4 56 27 91 75 121V218Z" fill="#80b6d3" stroke="#3e7d9d" stroke-width="3"/>
+      <path d="M335 218v121c48-30 71-65 76-121Z" fill="#e88c7f" stroke="#b35f53" stroke-width="3"/>
+    </g>
+    <path d="m250 199 16 10 16-10m78 0 16 10 16-10" fill="none" stroke="#faf0d8" stroke-width="5" stroke-linecap="round"/>
+    <g class="body-heart-vessels" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="11">
+      <path d="M265 257C168 244 165 116 188 60" stroke="#93bfd5"/>
+      <path d="M375 257C472 244 475 116 452 60" stroke="#dd9788"/>
+      <path d="M98 151h126" stroke="#9ac3d7"/>
+      <path d="M542 151H418" stroke="#e6ac9c"/>
+    </g>
+    <g fill="none" stroke-width="4">
+      <g data-anatomy-phase="return">
+        <path d="M108 151h110" stroke="#2d719b" marker-end="url(#heart-blue)"/>
+        <path d="M532 151H424" stroke="#b84d48" marker-end="url(#heart-red)"/>
+      </g>
+      <g data-anatomy-phase="fill">
+        <path d="M266 182v52" stroke="#2d719b" marker-end="url(#heart-blue)"/>
+        <path d="M376 182v52" stroke="#b84d48" marker-end="url(#heart-red)"/>
+      </g>
+      <g data-anatomy-phase="pump">
+        <path d="M245 249C166 222 176 114 187 65" stroke="#2d719b" marker-end="url(#heart-blue)"/>
+        <path d="M394 249C473 222 463 114 453 65" stroke="#b84d48" marker-end="url(#heart-red)"/>
+      </g>
+    </g>
+    <g class="body-svg-labels" text-anchor="middle">
+      <text x="185" y="35" fill="#286788">{{ lesson.diagram.labels.lungs }} ↑</text>
+      <text x="451" y="35" fill="#a34540">{{ lesson.diagram.labels.body }} ↑</text>
+      <text x="266" y="163">{{ lesson.diagram.labels.rightAtrium }}</text>
+      <text x="376" y="163">{{ lesson.diagram.labels.leftAtrium }}</text>
+      <text x="270" y="282">{{ lesson.diagram.labels.rightVentricle }}</text>
+      <text x="372" y="282">{{ lesson.diagram.labels.leftVentricle }}</text>
+      <text x="100" y="124" font-size="18">{{ lesson.diagram.labels.fromBody }}</text>
+      <text x="539" y="124" font-size="18">{{ lesson.diagram.labels.fromLungs }}</text>
+    </g>
+    <path d="M317 133v206" stroke="#9c5c56" stroke-width="6" stroke-linecap="round"/>
+  </svg>
+  <figcaption>{{ lesson.diagram.caption }} {{ heart.legend }}</figcaption>
+</figure>

@@ -38,6 +38,14 @@
   <symbol id="circulation" viewBox="0 0 180 120"><use href="#pump-art"/></symbol>
   <symbol id="movement" viewBox="0 0 180 120"><use href="#arm"/></symbol>
 
+  <symbol id="nerves" viewBox="0 0 180 120">
+    <path d="M82 23c-12-14-32-5-34 8-16-1-24 17-16 29-15 21 5 43 22 38 7 15 32 14 36-2 15 11 39 0 36-16 21-6 22-35 4-41 3-16-16-28-30-20-5-9-15-8-18 4Z" fill="#aad1cd" stroke="#3b777b" stroke-width="3"/>
+    <path d="M80 32v58m-29-44q19-9 21 10m-28 22q18-14 27 0m28-40q19 2 17 15m-15 15q15-3 21 10" fill="none" stroke="#518d8c" stroke-width="3" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="senses" viewBox="0 0 180 120">
+    <path d="M15 64q71-85 150 0-79 72-150 0Z" fill="#fff3d7" stroke="#a57c44" stroke-width="3"/>
+    <circle cx="90" cy="62" r="28" fill="#a8c9d4" stroke="#477588" stroke-width="3"/><circle cx="90" cy="62" r="13" fill="#2d505d"/><circle cx="83" cy="53" r="6" fill="#fffdf1"/>
+  </symbol>
   <symbol id="atlas" viewBox="0 0 500 380">
     <rect x="1" y="1" width="498" height="378" rx="25" fill="#edf7ef" stroke="#adcac0" stroke-width="2"/>
     <rect x="14" y="14" width="472" height="352" rx="16" fill="url(#graph)" stroke="#aecdc0"/>

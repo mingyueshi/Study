@@ -12,7 +12,7 @@ ASTRO.units.forEach(unit => {
 const ASTRO_STORE_KEY = 'astrobook_v1';
 
 /* ---------- 学习档案 ---------- */
-let akState = { last: 'au1', learned: {} };
+let akState = { last: 'universe', learned: {} };
 try {
   const raw = localStorage.getItem(ASTRO_STORE_KEY);
   if (raw) akState = { ...{ last: 'au1', learned: {} }, ...JSON.parse(raw) };
@@ -24,11 +24,14 @@ const AUNIT_BY_ID = {};
 ASTRO.units.forEach(u => { AUNIT_BY_ID[u.id] = u; });
 const ATOTAL_POINTS = ASTRO.units.reduce((n, u) => n + u.points.length, 0);
 const AEXTRA_VIEWS = [
+  { id: 'universe', name: '宇宙漫游 · 图像与动画', emoji: '🌌', color: '#4766b5', count: 3 },
   { id: 'facts', name: '宇宙数据速查', emoji: '🏆', color: '#b5893a', count: ASTRO.facts.reduce((n, f) => n + f.items.length, 0) },
   { id: 'clinic', name: '天文小诊所', emoji: '🩺', color: '#c2557d', count: ASTRO.mistakes.length },
 ];
 
-let curView = AUNIT_BY_ID[akState.last] ? akState.last : 'au1';
+const validView = id => Boolean(AUNIT_BY_ID[id] || AEXTRA_VIEWS.some(v => v.id === id));
+const requestedView = new URLSearchParams(location.search).get('view');
+let curView = validView(requestedView) ? requestedView : validView(akState.last) ? akState.last : 'universe';
 let query = '';
 
 function aunitById(id) { return AUNIT_BY_ID[id]; }
@@ -64,7 +67,7 @@ function renderChips() {
     '<button class="chip' + (v.id === curView && !query ? ' on' : '') + '" style="--c:' + v.color + '" data-act="unit" data-id="' + v.id + '">' +
     '<span class="chip-emoji">' + v.emoji + '</span><span class="chip-name">' + esc(v.name) + '</span>' +
     '<span class="chip-num">' + v.count + '</span></button>');
-  document.getElementById('chips').innerHTML = unitChips.join('') + extraChips.join('');
+  document.getElementById('chips').innerHTML = extraChips[0] + unitChips.join('') + extraChips.slice(1).join('');
 }
 
 function renderStats() {
@@ -135,6 +138,7 @@ function renderUnit(u) {
     '<p>' + esc(u.intro) + '</p>' +
     '<div class="goal-tags">' + u.goals.map(g => '<span>🎯 ' + esc(g) + '</span>').join('') + '</div></div></div>' +
     banner +
+    (u.id === 'au1' || u.id === 'au5' ? '<p class="roam-course-link">🌌 <a href="?view=universe#roam-' + (u.id === 'au1' ? 'solar' : 'galaxy') + '">打开宇宙漫游：看大图、动画与外部资料 →</a></p>' : '') +
     u.points.map(p => pointCard(u, p)).join('');
 }
 
@@ -188,6 +192,10 @@ function searchResults(q) {
     (m.unit + m.wrong + m.right).toLowerCase().includes(ql));
 
   const out = [];
+  if (window.AstroMedia) {
+    const mediaHits = ASTRO_MEDIA.chapters.filter(c => [c.title, c.intro, ...c.images.map(i => i.title + i.caption)].join(' ').toLowerCase().includes(ql));
+    if (mediaHits.length) out.push('<nav class="roam-search" aria-label="匹配的影像资料"><h2>🌌 图像与动画</h2>' + mediaHits.map(c => '<a href="?view=universe#roam-' + c.id + '">' + esc(c.title) + ' →</a>').join('') + '</nav>');
+  }
   if (pointHits.length) {
     out.push('<div class="search-head">🔎 找到 ' + pointHits.length + ' 个知识点</div>');
     ASTRO.units.forEach(u => {
@@ -216,12 +224,18 @@ function searchResults(q) {
 /* ---------- 渲染 ---------- */
 function renderMain() {
   const box = document.getElementById('cards');
+  if (window.AstroMedia) AstroMedia.dispose();
   if (query) {
     box.innerHTML = searchResults(query);
     return;
   }
   if (curView === 'facts') { box.innerHTML = renderFacts(); return; }
   if (curView === 'clinic') { box.innerHTML = renderClinic(); return; }
+  if (curView === 'universe' && window.AstroMedia) {
+    box.innerHTML = AstroMedia.render();
+    AstroMedia.mount();
+    return;
+  }
   const u = aunitById(curView);
   box.innerHTML = u ? renderUnit(u) : '';
 }
@@ -234,14 +248,19 @@ function render() {
 
 /* ---------- 交互 ---------- */
 function selectView(id) {
+  if (!validView(id)) return;
   curView = id;
-  if (AUNIT_BY_ID[id]) akState.last = id;
+  akState.last = id;
+  const url = new URL(location.href);
+  url.searchParams.set('view', id);
+  url.hash = '';
+  history.replaceState(null, '', url);
   akSave();
   query = '';
   const search = document.getElementById('search');
   if (search) search.value = '';
   render();
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  window.scrollTo({ top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
 }
 
 function toggleLearn(unitId, pointId) {
@@ -285,3 +304,6 @@ window.AstroExplore = {
 };
 
 render();
+if (location.hash.startsWith('#roam-')) {
+  requestAnimationFrame(() => document.getElementById(location.hash.slice(1))?.scrollIntoView({behavior: 'instant'}));
+}

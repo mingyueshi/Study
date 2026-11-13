@@ -7,13 +7,17 @@
 {% with topic='study_topics/'|add:course_slug|add:'/'|add:course_slug %}
 <link rel="stylesheet" href="{% static 'mathbook/mathbook-base.css' %}">
 <link rel="stylesheet" href="{% static 'figures/figures.css' %}">
-<link rel="stylesheet" href="{% static topic|add:'.css' %}">
+<link rel="stylesheet" href="{% static topic|add:'.css' %}{% if course_slug == 'astro' %}?v=20261113{% endif %}">
 <link rel="stylesheet" href="{% static 'study_topics/course.css' %}">
 <script src="{% static 'speech.js' %}" defer></script>
 <script src="{% static topic|add:'-data.js' %}{% if course_slug == 'sci' %}?v=2{% endif %}" defer></script>
 <script src="{% static topic|add:'-figures.js' %}{% if course_slug == 'sci' %}?v=2{% endif %}" defer></script>
-{% if course_slug == 'astro' %}<script src="{% static 'study_topics/astro/astro-photos.js' %}" defer></script>{% endif %}
-<script src="{% static topic|add:'-app.js' %}{% if course_slug == 'sci' %}?v=2{% elif course_slug == 'lit' %}?v=2{% endif %}" defer></script>
+{% if course_slug == 'astro' %}
+<script src="{% static 'study_topics/astro/astro-photos.js' %}" defer></script>
+<script src="{% static 'study_topics/astro/astro-media-data.js' %}?v=20261113" defer></script>
+<script src="{% static 'study_topics/astro/astro-media.js' %}?v=20261113" defer></script>
+{% endif %}
+<script src="{% static topic|add:'-app.js' %}{% if course_slug == 'sci' %}?v=2{% elif course_slug == 'lit' %}?v=2{% elif course_slug == 'astro' %}?v=20261113{% endif %}" defer></script>
 <script src="{% static 'mathbook/layout.js' %}?v=2" defer></script>
 {% endwith %}
 {% endblock %}

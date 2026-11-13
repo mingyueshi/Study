@@ -196,10 +196,14 @@ def course_outputs():
         if topic == 'hanzi-evo':
             yield EVOLUTION_CHARS, evolution_chars_module(data).encode('utf-8')
         if topic == 'astro':
+            for filename in ('astro-media-data.js', 'astro-media.js'):
+                yield dest / filename, (SOURCE / filename).read_bytes()
             photos = (SOURCE / 'astro-photos.js').read_text(encoding='utf-8')
             photos = replace_once(photos, "'images/astro/'", "new URL('images/astro/', document.currentScript.src).href")
             yield dest / 'astro-photos.js', photos.encode('utf-8')
-            for path in sorted((SOURCE / 'images' / 'astro').glob('*.jpg')):
+            for path in sorted((SOURCE / 'images' / 'astro').glob('*')):
+                if path.suffix not in ('.jpg', '.webm'):
+                    continue
                 yield dest / path.relative_to(SOURCE), path.read_bytes()
 
 

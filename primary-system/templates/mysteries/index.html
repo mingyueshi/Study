@@ -9,7 +9,7 @@
     <div>
       <p class="mystery-kicker">好奇心调查站</p>
       <h1>未解之谜研究所</h1>
-      <p class="mystery-lead">看看冰月喷出的水汽、游过大西洋的鳗鱼和古蜀人留下的青铜器。挑一份案卷，从真实的线索出发，做一次小小调查。</p>
+      <p class="mystery-lead">一段鲸歌、一片古文字、一张遥远星系的照片，都可能藏着还没回答的问题。挑一份案卷，先找出未解的地方，再沿着真实线索做调查。</p>
       <ul class="mystery-steps" aria-label="调查步骤">
         <li><span>1</span> 看线索</li>
         <li><span>2</span> 做判断</li>
@@ -40,6 +40,7 @@
             <span class="mystery-card-copy">
               <strong><span aria-hidden="true">{{ case.icon }}</span> {{ case.title }}</strong>
               <span>{{ case.summary }}</span>
+              <span class="mystery-card-question"><b>未解焦点</b>{{ case.open_questions.0.question }}</span>
               <span class="mystery-card-action" aria-hidden="true">打开案卷 →</span>
             </span>
           </a>

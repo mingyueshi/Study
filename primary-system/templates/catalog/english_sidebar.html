@@ -1,10 +1,10 @@
 <aside class="english-sidebar" aria-label="单元学习控制与目录">
   {% include 'includes/tts_player.html' %}
-  <details class="tts-details textbook-settings">
+  <details class="tts-details textbook-settings" id="reading-sidebar-settings">
     <summary>⚙ 朗读设置</summary>
     {% include 'includes/tts_controls.html' with sequence_settings=True sequence_status_in_player=True %}
   </details>
-  <div class="english-sidebar-body">
+  <div class="english-sidebar-body" id="reading-sidebar-directory">
     <nav class="unit-nav" aria-label="单元导航">
       <h2>学习目录</h2>
       {% for unit in units %}<a class="unit-card" href="?unit={{ unit.code }}&amp;tab={{ tab }}" {% if unit.pk == selected_unit.pk %}aria-current="page"{% endif %} style="--c: {{ unit.color }}"><span class="unit-emoji" aria-hidden="true">{{ unit.emoji }}</span><span class="unit-title-wrap"><b class="unit-title-en">Unit {{ unit.unit_no }}</b><span class="unit-title-zh">{{ unit.description|default:unit.title }}</span></span><span class="unit-words">{{ unit.word_count }}<i>词</i></span></a>{% empty %}<p>单元整理中</p>{% endfor %}

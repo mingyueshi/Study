@@ -11,6 +11,7 @@
       <h1>{{ case.title }}</h1>
       <p class="mystery-lead">{{ case.opening }}</p>
       <nav class="mystery-jumps" aria-label="案卷小节">
+        <a href="#open-questions">未解在哪里 ↓</a>
         {% if case.background %}<a href="#background">{{ case.background.title }} ↓</a>{% endif %}
         {% if case.depth_explorer %}<a href="#ocean-depths">沿标尺下潜 ↓</a>{% endif %}
         <a href="#evidence">看线索 ↓</a>
@@ -21,6 +22,23 @@
     </div>
     {% include 'mysteries/figure.html' with figure=case.figure only %}
   </header>
+  <section id="open-questions" class="mystery-section mystery-questions" aria-labelledby="open-questions-heading">
+    <header class="mystery-section-heading">
+      <p class="mystery-kicker">带着问题出发</p>
+      <h2 id="open-questions-heading">这份案卷，哪里还没解开？</h2>
+      <p>{{ case.unresolved }}</p>
+    </header>
+    <ol class="mystery-question-list">
+      {% for question in case.open_questions %}
+      <li>
+        <h3><span aria-hidden="true">?</span> {{ question.question }}</h3>
+        <p><strong>还缺的线索</strong> {{ question.gap }}</p>
+        <a class="mystery-source-link" href="#source-{{ question.source }}">查看研究依据 ↓</a>
+      </li>
+      {% endfor %}
+    </ol>
+    <p class="mystery-question-trail">沿着下面的图片和记录，看看我们已经走到了哪一步。</p>
+  </section>
   {% if case.background %}
   <section id="background" class="mystery-section" aria-labelledby="background-heading">
     <header class="mystery-section-heading">

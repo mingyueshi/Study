@@ -21,17 +21,27 @@
   try { if (localStorage.getItem(storageKey) === 'left') side = 'left'; } catch (e) { /* 使用默认右侧 */ }
 
   function render(instance) {
-    const {layout, toggle, breakpoint} = instance;
+    const {layout, toggle, breakpoint, collapseToggle} = instance;
     const compact = window.innerWidth < breakpoint;
     layout.dataset.slMode = compact ? 'compact' : 'wide';
     layout.dataset.slSide = side;
-    const label = compact ? (layout.dataset.slOpen === 'true' ? '收起侧栏 ↑' : '展开侧栏 ↓')
+    layout.dataset.slCollapsed = String(Boolean(collapseToggle && instance.collapsed));
+    const sidebarLabel = layout.dataset.sidebarLabel || '侧栏';
+    const label = compact ? (layout.dataset.slOpen === 'true' ? `收起${sidebarLabel} ↑` : `展开${sidebarLabel} ↓`)
       : side === 'right' ? '← 移到左侧' : '移到右侧 →';
     if (toggle.textContent !== label) toggle.textContent = label;
     toggle.setAttribute('aria-label', compact ? toggle.textContent : side === 'right' ? '将侧栏移到左侧' : '将侧栏移到右侧');
     if (compact) toggle.setAttribute('aria-expanded', String(layout.dataset.slOpen === 'true'));
     else toggle.removeAttribute('aria-expanded');
     if (compact && layout.dataset.slOpen !== 'true' && instance.panels.some(panel => panel.contains(document.activeElement))) toggle.focus({preventScroll: true});
+    if (collapseToggle) {
+      const collapseLabel = `${instance.collapsed ? '展开' : '收起'}${sidebarLabel}`;
+      if (collapseToggle.textContent !== collapseLabel) collapseToggle.textContent = collapseLabel;
+      collapseToggle.setAttribute('aria-label', `${instance.collapsed ? '展开' : '收起'}${sidebarLabel}`);
+      collapseToggle.setAttribute('aria-expanded', String(!instance.collapsed));
+      if (compact && document.activeElement === collapseToggle) toggle.focus({preventScroll: true});
+      if (!compact && instance.collapsed && instance.panels.some(panel => panel.contains(document.activeElement))) collapseToggle.focus({preventScroll: true});
+    }
   }
 
   function preparePanel(instance, panel) {
@@ -64,7 +74,10 @@
       const top = layout.dataset.slMode === 'compact' ? instance.top : Math.max(instance.top, wrapper.getBoundingClientRect().top);
       const available = Math.max(120, Math.floor((window.visualViewport?.height || window.innerHeight) - top - 24));
       wrapper.style.setProperty('--sl-height', available + 'px');
-      if (layout.dataset.slMode === 'wide' || layout.dataset.slOpen === 'true') {
+      if (layout.dataset.slMode === 'wide' && instance.collapsed) {
+        wrapper.style.setProperty('--sl-size', Math.ceil(instance.toggle.parentElement.getBoundingClientRect().height) + 'px');
+      }
+      else if (layout.dataset.slMode === 'wide' || layout.dataset.slOpen === 'true') {
         const natural = instance.panels.reduce((total, panel) => {
           const scroll = panel.querySelector(':scope > .sl-scroll');
           const fixed = panel.querySelector(':scope > .sl-fixed');
@@ -82,6 +95,15 @@
     if (!frame) frame = requestAnimationFrame(refresh);
   }
   const sizeObserver = typeof ResizeObserver === 'function' ? new ResizeObserver(schedule) : null;
+
+  function revealHash(instance) {
+    let target;
+    try { target = document.getElementById(decodeURIComponent(location.hash.slice(1))); } catch (e) { return; }
+    if (!target || !instance.panels.some(panel => panel.contains(target))) return;
+    instance.collapsed = false;
+    instance.layout.dataset.slOpen = 'true';
+    requestAnimationFrame(() => target.scrollIntoView({block: 'nearest'}));
+  }
 
   function attach(layout, sidebarSelector, width, breakpoint = 900, fixed = '') {
     const previous = instances.get(layout);
@@ -102,6 +124,11 @@
     const toggle = document.createElement('button');
     toggle.type = 'button'; toggle.className = 'sl-toggle';
     toggle.setAttribute('aria-controls', wrapper.id);
+    const collapseToggle = layout.dataset.sidebarCollapsible !== 'false' ? document.createElement('button') : null;
+    if (collapseToggle) {
+      collapseToggle.type = 'button'; collapseToggle.className = 'sl-toggle sl-collapse';
+      header.append(collapseToggle);
+    }
     header.append(toggle); wrapper.append(header);
     // 多块辅助栏集中到同侧，正文继续按原来的顺序排列。
     const host = panels.length > 1 ? document.createElement('div') : panels[0];
@@ -112,9 +139,22 @@
     wrapper.style.setProperty('--sl-rows', String(contents.length));
     const top = layout.matches('.study-shell') ? Math.max(24, Math.ceil(document.querySelector('header')?.getBoundingClientRect().height || 0) + 16) : 24;
     wrapper.style.setProperty('--sl-top', top + 'px');
-    const instance = {layout, wrapper, toggle, panels: [host], breakpoint: Number(breakpoint), fixed, top, header: top > 24 ? document.querySelector('header') : null};
+    const collapseKey = layout.dataset.sidebarCollapseKey || 'personal_sidebar_collapsed_v1:' + sidebarSelector;
+    let collapsed = false;
+    try { if (collapseToggle && collapseKey) collapsed = localStorage.getItem(collapseKey) === 'true'; } catch (e) { /* 默认展开导航 */ }
+    const instance = {layout, wrapper, toggle, collapseToggle, collapseKey, collapsed, panels: [host], breakpoint: Number(breakpoint), fixed, top, header: top > 24 ? document.querySelector('header') : null};
     if (!host.id) host.id = wrapper.id + '-panel';
     toggle.setAttribute('aria-controls', host.id);
+    if (collapseToggle) {
+      collapseToggle.setAttribute('aria-controls', host.id);
+      collapseToggle.addEventListener('click', () => {
+        instance.collapsed = !instance.collapsed;
+        if (collapseKey) {
+          try { localStorage.setItem(collapseKey, String(instance.collapsed)); } catch (e) { /* 本页仍可折叠 */ }
+        }
+        render(instance); schedule();
+      });
+    }
     instances.set(layout, instance);
     preparePanel(instance, host);
     toggle.addEventListener('click', () => {
@@ -128,7 +168,7 @@
       }
       instances.forEach(render); schedule();
     });
-    render(instance); sizeObserver?.observe(layout);
+    revealHash(instance); render(instance); sizeObserver?.observe(layout);
   }
 
   function scan() {
@@ -147,9 +187,12 @@
   window.addEventListener('resize', schedule, {passive: true});
   window.visualViewport?.addEventListener('resize', schedule, {passive: true});
   window.addEventListener('scroll', schedule, {passive: true});
+  window.addEventListener('hashchange', () => { instances.forEach(revealHash); schedule(); });
   window.addEventListener('storage', event => {
-    if (event.key !== storageKey) return;
-    side = event.newValue === 'left' ? 'left' : 'right';
+    if (event.key === storageKey || event.key === null) side = event.newValue === 'left' ? 'left' : 'right';
+    for (const instance of instances.values()) {
+      if (event.key === instance.collapseKey || event.key === null) instance.collapsed = event.newValue === 'true';
+    }
     schedule();
   });
 })();

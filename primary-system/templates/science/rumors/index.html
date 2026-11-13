@@ -23,22 +23,44 @@
   <header class="rumor-board-heading">
     <div>
       <h2 id="rumor-cases-title">待查证任务</h2>
-      <p>{{ cases|length }} 条说法 · 小学四到六年级 · 每项约 3 分钟</p>
+      <p>{{ total_count }} 条说法 · 小学四到六年级 · 每项约 3–5 分钟</p>
     </div>
     <div class="rumor-progress" hidden>
-      <label for="rumor-progress-bar">已查证 <span data-completed-count>0</span> / {{ cases|length }}</label>
-      <progress id="rumor-progress-bar" value="0" max="{{ cases|length }}"></progress>
+      <label for="rumor-progress-bar">已查证 <span data-completed-count>0</span> / {{ total_count }}</label>
+      <progress id="rumor-progress-bar" value="0" max="{{ total_count }}"></progress>
     </div>
   </header>
+  <nav class="rumor-categories" aria-label="按主题找任务">
+    <a href="?q={{ query|urlencode }}#rumor-cases" {% if not category %}aria-current="page"{% endif %}>全部任务</a>
+    {% for label in categories %}
+    <a href="?category={{ label|urlencode }}&amp;q={{ query|urlencode }}#rumor-cases" {% if category == label %}aria-current="page"{% endif %}>{{ label }}</a>
+    {% endfor %}
+  </nav>
+  <form class="rumor-search" method="get" action="{% url 'science-rumors' %}#rumor-cases" role="search">
+    {% if category %}<input type="hidden" name="category" value="{{ category }}">{% endif %}
+    <label for="rumor-query">找一句听过的说法</label>
+    <input id="rumor-query" name="q" type="search" value="{{ query }}" placeholder="试试「企鹅」「水」「月亮」" maxlength="100">
+    <button class="rumor-button" type="submit">找一找</button>
+    {% if query or category %}<a href="{% url 'science-rumors' %}#rumor-cases">显示全部任务</a>{% endif %}
+  </form>
+  <p class="rumor-results">{% if category %}{{ category }} · {% endif %}当前显示 {{ cases|length }} 项任务{% if query %} · 关键词「{{ query }}」{% endif %}</p>
   <ul class="rumor-cards">
     {% for case in cases %}
     <li>
       <a class="rumor-card" data-rumor-card="{{ case.slug }}" href="{% url 'science-rumor-case' case.slug %}">
         <div class="rumor-card-top">
-          <span>{{ forloop.counter|stringformat:'02d' }} <span aria-hidden="true">/</span> {{ case.category }}</span>
+          <span>{{ case.number|stringformat:'02d' }} <span aria-hidden="true">/</span> {{ case.category }}</span>
           <span class="rumor-done" hidden>✓ 已查证</span>
         </div>
-        <svg class="rumor-card-icon" aria-hidden="true" viewBox="0 0 96 96" width="96" height="96"><use href="{% static 'science/rumors.svg' %}#{{ case.slug }}"></use></svg>
+        {% if case.media %}
+        {% if case.media.0.kind == 'video' %}
+        <img class="rumor-card-photo" src="{% static case.media.0.poster %}" alt="" loading="lazy">
+        {% else %}
+        <img class="rumor-card-photo" src="{% static case.media.0.path %}" alt="" loading="lazy">
+        {% endif %}
+        {% else %}
+        <svg class="rumor-card-icon" aria-hidden="true" viewBox="0 0 96 96" width="96" height="96"><use href="{% static 'science/rumors.svg' %}#{{ case.icon|default:case.slug }}"></use></svg>
+        {% endif %}
         <h3>「{{ case.claim }}」</h3>
         <p>{{ case.teaser }}</p>
         <span class="rumor-card-action" aria-hidden="true">打开任务 →</span>
@@ -46,5 +68,7 @@
     </li>
     {% endfor %}
   </ul>
+  {% if not cases %}<p class="rumor-empty">这次没找到。试着换个短一点的词，或者点「全部任务」看看。</p>{% endif %}
 </section>
+{{ all_slugs|json_script:'rumor-all-slugs' }}
 {% endblock %}

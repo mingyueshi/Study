@@ -3,6 +3,7 @@
     <p class="body-kicker">动手实验</p>
     <h2 id="pulse-title">{{ pulse.title }}</h2>
     <p>{{ pulse.intro }}</p>
+    {% include 'science/body/wrist.html' %}
     <ol class="body-stops">
       {% for step in pulse.steps %}
       <li>

@@ -13,7 +13,13 @@ def load_content():
     content = json.loads(source.read_text(encoding='utf-8'))
     if content['schema_version'] != 1:
         raise ImproperlyConfigured('人体奥秘站的数据版本不受支持。')
-    return {**content, 'study_area': 'science'}
+    return {
+        **content,
+        'study_area': 'science',
+        'lesson_count': len(content['lessons']),
+        'media_count': sum(len(lesson['gallery']) for lesson in content['lessons']),
+        'question_count': sum(len(lesson['checkup']) for lesson in content['lessons']),
+    }
 
 
 @require_safe

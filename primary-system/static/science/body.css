@@ -302,3 +302,166 @@ body:has(.body-station) { --page-width: 100%; }
   .body-lesson-header svg { width: min(50%, 160px); }
   .body-lesson-grid { grid-template-columns: minmax(0, 1fr); }
 }
+
+/* 每一课先看可操作的身体图，再读解释。 */
+.body-lesson-header-compact {
+  display: block;
+  padding: 22px 30px;
+  margin-top: 16px;
+  border-radius: 20px;
+}
+.body-lesson-header-compact h1 { font-size: clamp(32px, 3.5vw, 54px); line-height: 1.3; margin-bottom: 5px; }
+.body-lesson-header-compact .body-kicker { margin-bottom: 4px; }
+.body-lesson-lead { font-size: 19px; margin: 0; color: var(--atlas-muted); }
+.body-workspace { margin-top: 18px; }
+.body-interactive, .body-heart { overflow: hidden; border-color: color-mix(in srgb, var(--lesson-accent) 35%, white); }
+.body-demo-heading h2, .body-heart h2 { font-size: clamp(24px, 2.1vw, 34px); }
+.body-demo-heading > p:last-child { margin-bottom: 12px; font-size: 18px; }
+.body-stage {
+  margin: 0 0 14px;
+  padding: 12px clamp(4px, 1vw, 18px);
+  border: 1px solid color-mix(in srgb, var(--lesson-accent) 20%, white);
+  border-radius: 19px;
+  background-color: var(--lesson-tint);
+  background-image: radial-gradient(color-mix(in srgb, var(--lesson-accent) 16%, transparent) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+.body-stage > svg { display: block; width: 100%; max-width: 870px; height: auto; max-height: 440px; margin-inline: auto; }
+.body-stage figcaption { max-width: 58em; margin: 6px auto 0; padding: 0 9px; font-size: 14px; line-height: 1.6; color: var(--atlas-muted); }
+.body-anatomy-outline { fill: #fff6df; stroke: #d2be91; stroke-width: 2; }
+.body-svg-labels, .body-svg-label { font-size: 23px; font-weight: 750; fill: var(--atlas-ink); }
+.body-leader { fill: none; stroke: #818d73; stroke-width: 2; stroke-linecap: round; }
+.body-demo-controls { margin-bottom: 14px; }
+.body-demo-controls [role="group"] { display: flex; flex-wrap: wrap; gap: 8px; }
+.body-step-dot { display: grid; place-content: center; width: 25px; height: 25px; border-radius: 50%; margin-right: 6px; background: var(--lesson-tint); color: var(--lesson-accent); font-size: 14px; }
+.body-demo-caption { padding: 16px 20px; border-radius: 12px; background: var(--lesson-tint); }
+.body-demo-caption h3 { margin: 0 0 4px; font-size: 23px; color: var(--lesson-accent); }
+.body-demo-caption p { margin-bottom: 0; font-size: 18px; line-height: 1.7; }
+.body-notes > summary { cursor: pointer; font-weight: 750; font-size: 20px; color: var(--lesson-accent); }
+.body-notes[open] > summary { margin-bottom: 20px; }
+.body-notes h2 { font-size: 26px; }
+.body-atlas-hit { fill: transparent; stroke: transparent; stroke-width: 3; transition: fill .15s; }
+.body-cover a:hover .body-atlas-hit, .body-cover a:focus .body-atlas-hit { fill: #fff9cf55; stroke: #9a6633; }
+.body-breath-lungs { transform-origin: 236px 128px; }
+[data-state="inhale"] .body-breath-lungs { transform: scale(1.05, 1.07); }
+[data-state="exhale"] .body-breath-lungs { transform: scale(.87, .84); }
+[data-state="inhale"] [data-breath-out], [data-state="exhale"] [data-breath-in] { display: none; }
+[data-nutrient-particles], [data-water-particles] { visibility: hidden; }
+[data-state="intestine"] [data-nutrient-particles], [data-state="colon"] [data-water-particles] { visibility: visible; }
+[data-state="mouth"] [data-food-organ="mouth"],
+[data-state="esophagus"] [data-food-organ="esophagus"],
+[data-state="stomach"] [data-food-organ="stomach"],
+[data-state="intestine"] [data-food-organ="intestine"],
+[data-state="colon"] [data-food-organ="colon"] { filter: drop-shadow(0 0 5px #c2872c); }
+.body-arm-slider { display: grid; flex: 1 0 100%; gap: 4px; max-width: 540px; padding: 12px 0 2px; color: var(--lesson-accent); font-size: 17px; font-weight: 700; }
+.body-arm-slider input { width: 100%; min-height: 32px; margin: 0; accent-color: var(--lesson-accent); cursor: pointer; }
+.body-arm-slider > span { display: flex; justify-content: space-between; font-size: 15px; }
+.body-motion-indicator { opacity: .6; }
+.body-heart-stage { margin-top: 15px; }
+.body-heart-atria { transform-origin: 321px 165px; }
+.body-heart-ventricles { transform-origin: 321px 260px; }
+.body-heart[data-phase="pump"] .body-heart-ventricles { transform: scale(.89, .88); }
+.body-heart[data-phase="fill"] .body-heart-atria { transform: scale(.95, .93); }
+.body-heart[data-phase="return"] [data-anatomy-phase]:not([data-anatomy-phase="return"]),
+.body-heart[data-phase="fill"] [data-anatomy-phase]:not([data-anatomy-phase="fill"]),
+.body-heart[data-phase="pump"] [data-anatomy-phase]:not([data-anatomy-phase="pump"]) { opacity: .15; }
+.body-route-details { margin-bottom: 14px; }
+.body-route-details summary { color: var(--lesson-accent); cursor: pointer; font-size: 17px; font-weight: 750; }
+.body-wrist-figure { max-width: 570px; margin: 0 0 20px; padding: 12px; border-radius: 15px; background: #fff5e2; }
+.body-wrist-figure svg { display: block; width: 100%; height: auto; }
+.body-wrist-figure figcaption { margin-top: 5px; font-size: 15px; color: var(--atlas-muted); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .body-breath-lungs, .body-heart-ventricles, .body-heart-atria { transition: transform .65s ease; }
+  .body-diaphragm { transition: d .65s ease; }
+  .body-food-dot { transition: transform .65s ease; }
+  [data-nutrient-particles] circle { animation: body-nutrient 1.6s ease-in-out infinite; }
+  @keyframes body-nutrient { 50% { transform: translateX(12px); } }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .body-breath-lungs, .body-diaphragm, .body-food-dot, .body-heart-ventricles, .body-heart-atria { transition: none; }
+}
+
+@media (min-width: 1800px) {
+  .body-stage > svg { max-height: 530px; }
+}
+@media (max-width: 480px) {
+  .body-lesson-header-compact { padding: 16px; }
+  .body-interactive, .body-heart { padding: 15px; }
+  .body-stage { margin-inline: -5px; padding-inline: 0; }
+  .body-demo-caption { padding: 13px; }
+  .body-demo-caption h3 { font-size: 21px; }
+}
+
+.body-nerves { --lesson-tint: #e0eff0; --lesson-accent: #27636d; }
+.body-senses { --lesson-tint: #fff0d7; --lesson-accent: #85571e; }
+.body-section-jumps { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.body-section-jumps a { display: inline-flex; align-items: center; min-height: 40px; padding: 5px 13px; border: 1px solid var(--atlas-edge); border-radius: 20px; background: var(--atlas-white); font-size: 15px; font-weight: 700; }
+.body-section-jumps a:hover { background: var(--lesson-tint); }
+.body-lesson-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.body-card .body-card-photo { width: 100%; height: clamp(150px, 15vw, 245px); object-fit: contain; margin: 12px 0 8px; padding: 8px; border-radius: 12px; background: #fff; }
+.body-card-kind { font-size: 13px; color: var(--lesson-accent); margin-bottom: 6px; font-weight: 700; }
+.body-card { grid-template-rows: auto auto auto auto 1fr auto; }
+.body-gallery-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.body-gallery-grid figure { min-width: 0; margin: 0; overflow: hidden; border: 1px solid var(--atlas-edge); border-radius: 17px; background: var(--atlas-white); }
+.body-media-open { display: block; padding: 12px; background: #fff; }
+.body-media-open img { width: 100%; height: clamp(190px, 18vw, 320px); object-fit: contain; }
+.body-media-open > span { display: flex; justify-content: space-between; gap: 8px; padding-top: 9px; font-size: 13px; color: var(--lesson-accent); font-weight: 750; }
+.body-media-open:hover { box-shadow: inset 0 0 0 2px var(--lesson-accent); }
+.body-media-card figcaption { padding: 16px; }
+.body-media-card h3 { font-size: 23px; margin: 0 0 10px; }
+.body-section-intro, .body-media-description { color: var(--atlas-muted); font-size: 17px; }
+.body-media-clues { padding-left: 24px; margin: 0 0 14px; font-size: 16px; line-height: 1.75; }
+.body-media-clues li + li { margin-top: 7px; }
+.body-media-credit { font-size: 13px; line-height: 1.65; color: var(--atlas-muted); overflow-wrap: anywhere; }
+.body-media-credit a { text-decoration: underline; text-underline-offset: .2em; }
+.body-discovery-grid { display: grid; gap: 10px; }
+.body-discovery-grid details { padding: 14px 16px; border-radius: 12px; background: var(--lesson-tint); }
+.body-discovery-grid summary { cursor: pointer; font-size: 20px; font-weight: 700; }
+.body-discovery-grid summary span { margin-right: 10px; color: var(--lesson-accent); }
+.body-discovery-grid p { margin-top: 10px; font-size: 17px; }
+.body-materials { display: flex; flex-wrap: wrap; gap: 6px 14px; padding: 10px 14px; background: var(--lesson-tint); border-radius: 10px; font-size: 17px; }
+.body-materials strong { color: var(--lesson-accent); }
+.body-experiment-steps { list-style: none; padding: 0; margin: 0 0 20px; }
+.body-experiment-steps li { display: flex; align-items: baseline; gap: 12px; padding-block: 9px; }
+.body-experiment-steps li > span { flex: 0 0 29px; height: 29px; display: grid; place-content: center; border-radius: 50%; background: var(--lesson-tint); color: var(--lesson-accent); font-weight: 750; font-size: 16px; }
+.body-experiment-steps p { margin: 0; font-size: 18px; }
+.body-check-question { min-width: 0; margin: 18px 0; padding: 14px 16px; border: 1px solid var(--atlas-edge); border-radius: 12px; }
+.body-check-question:last-child { margin-bottom: 0; }
+.body-check-question legend { max-width: 100%; padding: 0 7px; font-size: 20px; font-weight: 750; }
+.body-check-options { display: grid; gap: 8px; }
+.body-check-options button { min-height: 48px; padding: 10px 14px; text-align: left; border: 1px solid var(--atlas-edge); border-radius: 9px; background: var(--atlas-white); color: var(--atlas-ink); font-size: 18px; }
+.body-check-options button:hover, .body-check-options button[aria-pressed="true"] { background: var(--lesson-tint); border-color: var(--lesson-accent); }
+.body-check-options button[data-correct="true"] { background: #e5f1dd; border-color: #739e58; }
+.body-check-feedback { margin-top: 12px; padding: 8px 12px; border-radius: 8px; background: #fff1d5; font-size: 17px; }
+.body-check-feedback[data-correct="true"] { background: #e5f1dd; }
+.body-check-answer summary { cursor: pointer; color: var(--lesson-accent); }
+.body-media-dialog { width: min(1200px, 94vw); max-height: 94dvh; overflow: auto; padding: 22px; border: 1px solid var(--atlas-edge); border-radius: 22px; background: var(--atlas-white); color: var(--atlas-ink); }
+.body-media-dialog::backdrop { background: #16392add; }
+.body-media-dialog form { display: flex; justify-content: flex-end; }
+.body-media-dialog h2 { margin: 10px 0; font-size: 27px; }
+.body-media-dialog img { width: 100%; max-height: 65dvh; object-fit: contain; background: #fff; }
+.body-media-dialog p { margin: 12px 0 0; font-size: 17px; }
+.body-reaction-target { display: grid; place-content: center; width: 100%; min-height: 170px; padding: 24px; border: 2px solid #597887; border-radius: 17px; background: #e2ebf3; color: #254d60; font-size: clamp(25px, 3vw, 40px); font-weight: 800; }
+[data-body-reaction][data-state="waiting"] .body-reaction-target { border-color: #bb8634; background: #fff0ce; color: #865716; }
+[data-body-reaction][data-state="ready"] .body-reaction-target { border-color: #25734e; background: #297750; color: #fff; }
+[data-reaction-result] { margin-top: 12px; font-size: 23px; font-weight: 750; }
+.body-blindspot-target { display: flex; align-items: center; justify-content: space-evenly; min-height: 140px; padding: 18px; border: 1px solid var(--atlas-edge); border-radius: 15px; background: #fff; color: #263e34; font-size: 54px; }
+.body-blindspot ol { padding-left: 26px; font-size: 18px; }
+.body-nerve-route { opacity: .18; }
+[data-state="sense"] .body-nerve-in, [data-state="respond"] .body-nerve-out { opacity: 1; }
+[data-state="process"] .body-brain { fill: #efcd83; stroke: #9b702e; stroke-width: 5; }
+[data-sense-art] { display: none; }
+[data-state="eye"] [data-sense-art="eye"], [data-state="ear"] [data-sense-art="ear"], [data-state="smell"] [data-sense-art="smell"] { display: block; }
+
+@media (max-width: 1050px) {
+  .body-lesson-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 600px) {
+  .body-gallery-grid, .body-lesson-grid { grid-template-columns: minmax(0, 1fr); }
+  .body-gallery-grid img { height: 240px; }
+  .body-card .body-card-photo { height: 200px; }
+}
+.body-station-stats { display: flex; flex-wrap: wrap; gap: 12px 20px; margin: 18px 0 0; color: var(--atlas-muted); font-size: 15px; }
+.body-station-stats strong { color: var(--atlas-ink); font-size: 25px; margin-right: 4px; font-variant-numeric: tabular-nums; }

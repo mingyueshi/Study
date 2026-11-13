@@ -1,0 +1,68 @@
+<section class="body-panel body-discoveries" aria-labelledby="discoveries-title">
+  <p class="body-kicker">再往里看一点</p>
+  <h2 id="discoveries-title">你可能还想知道</h2>
+  <div class="body-discovery-grid">
+    {% for item in lesson.discoveries %}
+    <details>
+      <summary><span aria-hidden="true">0{{ forloop.counter }}</span>{{ item.title }}</summary>
+      <p>{{ item.body }}</p>
+    </details>
+    {% endfor %}
+  </div>
+</section>
+<section class="body-panel body-experiment" id="experiment" aria-labelledby="experiment-title">
+  <p class="body-kicker">离开屏幕，也能试</p>
+  <h2 id="experiment-title">{{ lesson.experiment.title }}</h2>
+  <p class="body-materials"><strong>准备好</strong>{{ lesson.experiment.materials }}</p>
+  <ol class="body-experiment-steps">
+    {% for step in lesson.experiment.steps %}<li><span aria-hidden="true">{{ forloop.counter }}</span><p>{{ step }}</p></li>{% endfor %}
+  </ol>
+  <details class="body-answer">
+    <summary>{{ lesson.experiment.question }}</summary><p>{{ lesson.experiment.explanation }}</p>
+  </details>
+  {% if lesson.slug == 'circulation' %}
+    <a class="body-inline-link" href="#pulse">打开计时器和记录表 ↓</a>
+  {% endif %}
+</section>
+{% if lesson.slug == 'nerves' %}
+<section class="body-panel body-reaction" id="reaction" aria-labelledby="reaction-title">
+  <p class="body-kicker">反应小游戏</p>
+  <h2 id="reaction-title">{{ reaction.title }}</h2>
+  <p>{{ reaction.intro }}</p>
+  <div data-body-reaction data-state="idle" hidden>
+    <button type="button" class="body-reaction-target" data-reaction-button>{{ reaction.start }}</button>
+    <p data-reaction-result role="status"></p>
+    {{ reaction|json_script:"body-reaction-copy" }}
+  </div>
+  <noscript><p>启用 JavaScript 后，可以做屏幕上的反应小游戏。</p></noscript>
+  <p class="body-media-credit">{{ reaction.caption }}</p>
+</section>
+{% elif lesson.slug == 'senses' %}
+<section class="body-panel body-blindspot" id="blindspot" aria-labelledby="blindspot-title">
+  <p class="body-kicker">眼睛的小实验</p>
+  <h2 id="blindspot-title">{{ blindspot.title }}</h2>
+  <p>{{ blindspot.intro }}</p>
+  <div class="body-blindspot-target" role="img" aria-label="左边十字，右边圆点">
+    <span aria-hidden="true">＋</span><span aria-hidden="true">●</span>
+  </div>
+  <ol>{% for step in blindspot.steps %}<li>{{ step }}</li>{% endfor %}</ol>
+  <details class="body-answer"><summary>圆点为什么会消失？</summary><p>{{ blindspot.explanation }}</p></details>
+</section>
+{% endif %}
+<section class="body-panel body-checkup" id="checkup" aria-labelledby="checkup-title">
+  <p class="body-kicker">把发现用起来</p>
+  <h2 id="checkup-title">三题小挑战</h2>
+  {% for question in lesson.checkup %}
+  <fieldset class="body-check-question" data-body-question>
+    <legend>{{ forloop.counter }} · {{ question.prompt }}</legend>
+    <div class="body-check-options" hidden>
+      {% for option in question.options %}
+      <button type="button" data-check-option="{{ forloop.counter0 }}" aria-pressed="false">{{ option }}</button>
+      {% endfor %}
+    </div>
+    <p class="body-check-feedback" role="status" hidden></p>
+    <details class="body-check-answer"><summary>翻开答案</summary><p>{{ question.explanation }}</p></details>
+    {{ question|json_script }}
+  </fieldset>
+  {% endfor %}
+</section>

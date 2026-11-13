@@ -105,7 +105,37 @@
 .mystery-card-copy { display: flex; flex: 1; flex-direction: column; gap: .35rem; padding: 1rem 1.15rem; }
 .mystery-card-copy strong { font-size: 1.3rem; line-height: 1.35; }
 .mystery-card-copy > span { color: var(--mystery-muted); }
+.mystery-card-copy .mystery-card-question {
+  margin-block: .4rem .65rem;
+  padding: .6rem .75rem;
+  border-radius: .7rem;
+  background: #fff4d9;
+  color: #664414;
+  line-height: 1.55;
+}
+.mystery-card-question b { display: block; margin-bottom: .15rem; font-size: .85rem; }
 .mystery-card-copy .mystery-card-action { margin-top: auto; font-size: .95rem; font-weight: 800; color: var(--mystery-accent); }
+
+.mystery-questions {
+  padding: clamp(1.15rem, 2.7vw, 2rem);
+  border: 1px solid #ebcb8c;
+  border-radius: 1.4rem;
+  background: #fff8e8;
+}
+.mystery-question-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.1rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.mystery-question-list li { display: flex; flex-direction: column; align-items: flex-start; gap: .5rem; padding: 1.1rem; border-radius: .9rem; background: #fff; }
+.mystery-question-list h3 { font-size: 1.2rem; }
+.mystery-question-list h3 span { color: #a06410; }
+.mystery-question-list p { margin: 0 0 .3rem; }
+.mystery-question-list strong { display: block; color: #805316; font-size: .9rem; }
+.mystery-question-trail { font-size: 1rem; color: var(--mystery-muted); }
 
 .mystery-case-hero { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
 .mystery-case-hero h1 { font-size: clamp(2rem, 3.8vw, 2.8rem); text-wrap: balance; }
@@ -160,6 +190,7 @@
 }
 .mystery-media-visual video, .mystery-media-visual img { display: block; width: 100%; height: auto; }
 .mystery-media-visual video { aspect-ratio: 16 / 9; object-fit: contain; }
+.mystery-media-visual audio { display: block; width: 100%; margin-block: .75rem; }
 .mystery-media-copy { max-width: 36rem; }
 .mysteries .mystery-media-credit { color: var(--mystery-muted); font-size: .9rem; overflow-wrap: anywhere; }
 .mystery-media-credit a { text-decoration: underline; text-underline-offset: .15em; }
@@ -231,6 +262,6 @@
   .mystery-evidence-list { grid-template-columns: minmax(0, 1fr); }
 }
 @media (max-width: 40rem) {
-  .mystery-banner, .mystery-findings { grid-template-columns: minmax(0, 1fr); }
+  .mystery-banner, .mystery-findings, .mystery-question-list { grid-template-columns: minmax(0, 1fr); }
   .mystery-emblem { display: none; }
 }

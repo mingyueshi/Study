@@ -51,7 +51,8 @@
     else toggle.removeAttribute('aria-expanded');
     if (compact && layout.dataset.slOpen !== 'true' && instance.panels.some(panel => panel.contains(document.activeElement))) toggle.focus({preventScroll: true});
     if (collapseToggle) {
-      collapseToggle.textContent = instance.collapsed ? '展开导航' : '收起导航';
+      const collapseLabel = `${instance.collapsed ? '展开' : '收起'}${sidebarLabel}`;
+      if (collapseToggle.textContent !== collapseLabel) collapseToggle.textContent = collapseLabel;
       collapseToggle.setAttribute('aria-label', `${instance.collapsed ? '展开' : '收起'}${sidebarLabel}`);
       collapseToggle.setAttribute('aria-expanded', String(!instance.collapsed));
       if (compact && document.activeElement === collapseToggle) toggle.focus({preventScroll: true});
@@ -111,6 +112,15 @@
   }
   const sizeObserver = typeof ResizeObserver === 'function' ? new ResizeObserver(schedule) : null;
 
+  function revealHash(instance) {
+    let target;
+    try { target = document.getElementById(decodeURIComponent(location.hash.slice(1))); } catch (e) { return; }
+    if (!target || !instance.panels.some(panel => panel.contains(target))) return;
+    instance.collapsed = false;
+    instance.layout.dataset.slOpen = 'true';
+    requestAnimationFrame(() => target.scrollIntoView({block: 'nearest'}));
+  }
+
   function attach(layout, sidebarSelector, width, breakpoint = 900, fixed = '') {
     const previous = instances.get(layout);
     if (previous?.wrapper.parentElement === layout) return;
@@ -130,7 +140,7 @@
     const toggle = document.createElement('button');
     toggle.type = 'button'; toggle.className = 'sl-toggle';
     toggle.setAttribute('aria-controls', wrapper.id);
-    const collapseToggle = layout.dataset.sidebarCollapsible === 'true' ? document.createElement('button') : null;
+    const collapseToggle = layout.dataset.sidebarCollapsible !== 'false' ? document.createElement('button') : null;
     if (collapseToggle) {
       collapseToggle.type = 'button'; collapseToggle.className = 'sl-toggle sl-collapse';
       header.append(collapseToggle);
@@ -145,7 +155,7 @@
     wrapper.style.setProperty('--sl-rows', String(contents.length));
     const top = 24;
     wrapper.style.setProperty('--sl-top', top + 'px');
-    const collapseKey = layout.dataset.sidebarCollapseKey || '';
+    const collapseKey = layout.dataset.sidebarCollapseKey || 'primary_sidebar_collapsed_v1:' + sidebarSelector;
     let collapsed = false;
     try { if (collapseToggle && collapseKey) collapsed = localStorage.getItem(collapseKey) === 'true'; } catch (e) { /* 默认展开导航 */ }
     const instance = {layout, wrapper, toggle, collapseToggle, collapseKey, collapsed, panels: [host], breakpoint: Number(breakpoint), fixed, top, header: top > 24 ? document.querySelector('header') : null};
@@ -174,7 +184,7 @@
       }
       instances.forEach(render); schedule();
     });
-    render(instance); sizeObserver?.observe(layout);
+    revealHash(instance); render(instance); sizeObserver?.observe(layout);
   }
 
   function scan() {
@@ -193,9 +203,12 @@
   window.addEventListener('resize', schedule, {passive: true});
   window.visualViewport?.addEventListener('resize', schedule, {passive: true});
   window.addEventListener('scroll', schedule, {passive: true});
+  window.addEventListener('hashchange', () => { instances.forEach(revealHash); schedule(); });
   window.addEventListener('storage', event => {
-    if (event.key !== storageKey) return;
-    side = event.newValue === 'left' ? 'left' : 'right';
+    if (event.key === storageKey || event.key === null) side = event.newValue === 'left' ? 'left' : 'right';
+    for (const instance of instances.values()) {
+      if (event.key === instance.collapseKey || event.key === null) instance.collapsed = event.newValue === 'true';
+    }
     schedule();
   });
 })();

@@ -1,0 +1,22 @@
+{% load static %}
+<section class="body-panel body-gallery" id="gallery" aria-labelledby="gallery-title">
+  <p class="body-kicker">从器官看到细胞</p>
+  <h2 id="gallery-title">打开身体观察窗</h2>
+  <p class="body-section-intro">点图片放大，跟着「找一找」观察细节。</p>
+  <div class="body-gallery-grid">
+    {% for media in lesson.gallery %}
+    <figure class="body-media-card">
+      <a class="body-media-open" href="{% static media.src %}" data-body-photo aria-label="放大看：{{ media.title }}">
+        <img src="{% static media.src %}" alt="{{ media.alt }}" loading="lazy" decoding="async">
+        <span>{{ media.kind }} <span>放大看 ↗</span></span>
+      </a>
+      <figcaption>
+        <h3>{{ media.title }}</h3>
+        <p class="body-media-description">{{ media.caption }}</p>
+        <ol class="body-media-clues">{% for clue in media.clues %}<li>{{ clue }}</li>{% endfor %}</ol>
+        <p class="body-media-credit">{{ media.credit }} · <a href="{{ media.source_url }}" data-media-source>原出处（需联网）↗</a></p>
+      </figcaption>
+    </figure>
+    {% endfor %}
+  </div>
+</section>

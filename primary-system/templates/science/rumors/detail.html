@@ -9,13 +9,26 @@
     <h1>「{{ case.claim }}」</h1>
     <p>{{ case.scenario }}</p>
   </div>
-  <svg aria-hidden="true" viewBox="0 0 96 96" width="140" height="140"><use href="{% static 'science/rumors.svg' %}#{{ case.slug }}"></use></svg>
+  <svg aria-hidden="true" viewBox="0 0 96 96" width="140" height="140"><use href="{% static 'science/rumors.svg' %}#{{ case.icon|default:case.slug }}"></use></svg>
 </header>
 
 <div class="rumor-workspace">
   <section class="rumor-panel" aria-labelledby="rumor-evidence-heading">
     <h2 id="rumor-evidence-heading"><span aria-hidden="true">01</span> 翻开证据卡</h2>
     <p>看完两张卡，找找哪条线索最能帮你判断。</p>
+    {% for media in case.media %}
+    <figure class="rumor-media">
+      {% if media.kind == 'video' %}
+      <video controls playsinline preload="none" poster="{% static media.poster %}" aria-label="{{ media.alt }}" aria-describedby="rumor-media-caption-{{ forloop.counter }}">
+        <source src="{% static media.path %}" type="video/mp4">
+        <a href="{% static media.path %}">打开实验影像</a>
+      </video>
+      {% else %}
+      <a class="rumor-media-zoom" href="{% static media.path %}" target="_blank" rel="noopener" aria-label="放大查看{{ media.alt }}"><img src="{% static media.path %}" alt="{{ media.alt }}" loading="lazy"></a>
+      {% endif %}
+      <figcaption id="rumor-media-caption-{{ forloop.counter }}">{{ media.caption }} <a href="{{ media.source_url }}" target="_blank" rel="noopener noreferrer">{{ media.credit }} · 原始资料 ↗</a></figcaption>
+    </figure>
+    {% endfor %}
     {% for clue in case.evidence %}
     <details class="rumor-clue">
       <summary><span aria-hidden="true">{{ forloop.counter|stringformat:'02d' }}</span>{{ clue.title }}</summary>
@@ -55,6 +68,14 @@
       <strong>{{ case.method }}</strong>
       <p>{{ case.transfer }}</p>
     </details>
+    {% if case.activity %}
+    <details class="rumor-activity">
+      <summary>动手查一查 · {{ case.activity.title }}</summary>
+      <p class="rumor-materials"><strong>准备好</strong> {{ case.activity.materials }}</p>
+      <ol>{% for step in case.activity.steps %}<li>{{ step }}</li>{% endfor %}</ol>
+      <p class="rumor-activity-note">{{ case.activity.note }}</p>
+    </details>
+    {% endif %}
     <details class="rumor-sources">
       <summary>查看资料出处 · 需联网</summary>
       <ul>

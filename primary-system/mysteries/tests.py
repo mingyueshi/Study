@@ -30,7 +30,7 @@ class MysteryContentTests(SimpleTestCase):
         self.assert_local_figure(item, sources)
         self.assertTrue(item['title'].strip())
         kind = item['kind']
-        self.assertIn(kind, ('video', 'animation', 'diagram'))
+        self.assertIn(kind, ('video', 'animation', 'audio', 'diagram'))
         if kind == 'diagram':
             self.assertIn(len(item['steps']), range(2, 5))
             for step in item['steps']:
@@ -41,7 +41,8 @@ class MysteryContentTests(SimpleTestCase):
                     self.assertIn(step[axis], range(5, 96))
         else:
             self.assertTrue(finders.find(item['poster']))
-            self.assertTrue(item['path'].endswith('.mp4' if kind == 'video' else '.gif'))
+            extension = {'video': '.mp4', 'animation': '.gif', 'audio': '.mp3'}[kind]
+            self.assertTrue(item['path'].endswith(extension))
 
     def assert_depth_explorer(self, explorer, sources):
         for field in ('title', 'intro', 'scale_note'):
@@ -75,6 +76,11 @@ class MysteryContentTests(SimpleTestCase):
                 date.fromisoformat(case['checked_on'])
                 figure = case['figure']
                 sources = case['sources']
+                self.assertIn(len(case['open_questions']), range(2, 4))
+                for question in case['open_questions']:
+                    for field in ('question', 'gap'):
+                        self.assertTrue(question[field].strip(), field)
+                    self.assertIn(question['source'], range(1, len(sources) + 1))
                 self.assert_local_figure(figure, sources)
                 if 'detail_path' in figure:
                     self.assertTrue(finders.find(figure['detail_path']))
@@ -135,6 +141,7 @@ class MysteryPageTests(SimpleTestCase):
         for slug, case in cases.items():
             self.assertContains(response, reverse('mystery-case', args=[slug]))
             self.assertContains(response, case['title'])
+            self.assertContains(response, case['open_questions'][0]['question'])
 
     def test_cases_render_evidence_feedback_and_sources_without_database(self):
         for slug, case in load_cases().items():
@@ -142,6 +149,12 @@ class MysteryPageTests(SimpleTestCase):
                 response = self.client.get(reverse('mystery-case', args=[slug]))
                 self.assertContains(response, case['opening'])
                 self.assertContains(response, case['unresolved'])
+                self.assertContains(response, 'href="#open-questions"', count=1)
+                html = response.content.decode()
+                self.assertLess(html.index('id="open-questions"'), html.index('id="evidence"'))
+                for question in case['open_questions']:
+                    self.assertContains(response, question['question'])
+                    self.assertContains(response, question['gap'])
                 for clue in case['evidence']:
                     if 'image' in clue:
                         self.assertContains(response, clue['image']['alt'])

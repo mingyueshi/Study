@@ -1,0 +1,40 @@
+<svg viewBox="0 0 640 410" role="img" aria-labelledby="breathing-title breathing-desc">
+  <title id="breathing-title">{{ diagram.title }}</title>
+  <desc id="breathing-desc">{{ lesson.takeaway }}</desc>
+  <defs>
+    <marker id="breath-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="3" markerHeight="3" orient="auto"><path d="M0 0 10 5 0 10" fill="#246a5c"/></marker>
+    <marker id="gas-red" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="3" markerHeight="3" orient="auto"><path d="M0 0 10 5 0 10" fill="#b34845"/></marker>
+  </defs>
+  <path class="body-anatomy-outline" d="M197 20v35l-62 29c-34 24-42 96-43 176l18 111h250l18-111c-1-80-9-152-43-176l-62-29V20"/>
+  <path d="M236 48v100m0-18-41 41m41-41 41 41" fill="none" stroke="#e1be83" stroke-width="24" stroke-linejoin="round" stroke-linecap="round"/>
+  <g class="body-breath-lungs">
+    <path d="M214 126c-27-15-46 12-62 51-19 44-33 101-16 123 13 17 59 6 76-11 16-16 16-145 2-163Z" fill="#82cdb7" stroke="#286d5c" stroke-width="3"/>
+    <path d="M258 126c27-15 46 12 62 51 19 44 33 101 16 123-13 17-59 6-76-11-16-16-16-145-2-163Z" fill="#82cdb7" stroke="#286d5c" stroke-width="3"/>
+    <path d="M236 137 189 191m9-10-12 52m4-38-26 11m72-69 47 54m-9-10 12 52m-4-38 26 11" fill="none" stroke="#f2fbdb" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <path class="body-diaphragm" d="M128 345Q236 317 344 345" fill="none" stroke="#b97548" stroke-width="13" stroke-linecap="round"/>
+  <path data-breath-in d="M236 66v61" fill="none" stroke="#246a5c" stroke-width="5" marker-end="url(#breath-arrow)"/>
+  <path data-breath-out d="M236 127V66" fill="none" stroke="#246a5c" stroke-width="5" marker-end="url(#breath-arrow)"/>
+  <g class="body-svg-labels">
+    <path d="M43 77h113l58 20M42 223h82M50 369h80l35-28" class="body-leader"/>
+    <text x="38" y="66">{{ diagram.labels.airway }}</text>
+    <text x="44" y="212">{{ diagram.labels.lungs }}</text>
+    <text x="42" y="395">{{ diagram.labels.diaphragm }}</text>
+  </g>
+  <path d="M322 227 409 172" stroke="#85a893" stroke-width="2" stroke-dasharray="5 6"/>
+  <g class="body-gas-inset">
+    <rect x="403" y="59" width="222" height="316" rx="24" fill="#fffdf2" stroke="#bad4c1" stroke-width="2"/>
+    <text x="514" y="94" text-anchor="middle" class="body-svg-label">{{ diagram.labels.alveoli }}</text>
+    <path d="M474 135v21c-27 14-37 36-33 62 3 28 26 48 53 49 28 1 53-19 57-48 4-27-9-48-36-63v-21" fill="#d7e9a1" stroke="#79944a" stroke-width="3"/>
+    <path d="M565 155c24 33 24 70 2 107" fill="none" stroke="#cd716e" stroke-width="14" stroke-linecap="round"/>
+    <path d="M512 194h45" stroke="#b34845" stroke-width="4" marker-end="url(#gas-red)"/>
+    <path d="M557 232h-45" stroke="#246a5c" stroke-width="4" marker-end="url(#breath-arrow)"/>
+    <circle cx="530" cy="194" r="7" fill="#b34845"/><circle cx="538" cy="232" r="7" fill="#246a5c"/>
+    <g font-size="17" font-weight="650" text-anchor="middle" fill="#315d50">
+      <text x="544" y="128" font-size="14">{{ diagram.labels.blood }}</text>
+      <text x="484" y="297">{{ diagram.labels.air }}</text>
+      <text x="514" y="326" fill="#a7433f">{{ diagram.labels.oxygen }}</text>
+      <text x="514" y="351">{{ diagram.labels.carbon }}</text>
+    </g>
+  </g>
+</svg>

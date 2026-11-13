@@ -1,10 +1,10 @@
 {% extends 'base.html' %}{% load static %}{% block title %}场景单词 · 乐学堂{% endblock %}
-{% block content %}<link rel="stylesheet" href="{% static 'words/words.css' %}?v=5"><link rel="stylesheet" href="{% static 'english-study.css' %}?v=11"><script src="{% static 'english-study.js' %}?v=3" defer></script><script src="{% static 'speech.js' %}" defer></script><script src="{% static 'tts.js' %}?v=8" defer></script><script src="{% static 'reading-focus.js' %}?v=1" defer></script>{{ state|json_script:"words-state" }}
+{% block content %}<link rel="stylesheet" href="{% static 'words/words.css' %}?v=5"><link rel="stylesheet" href="{% static 'english-study.css' %}?v=12"><script src="{% static 'english-study.js' %}?v=4" defer></script><script src="{% static 'speech.js' %}" defer></script><script src="{% static 'tts.js' %}?v=8" defer></script><script src="{% static 'reading-focus.js' %}?v=1" defer></script>{{ state|json_script:"words-state" }}
 <div class="study-skin"><div class="study-shell words-shell english-library-layout" id="english-textbook-layout" data-sidebar-side="right">
   <aside class="english-sidebar" aria-label="场景学习控制与目录">
     {% include 'includes/tts_player.html' with player_mode='scenario' %}
-    <details class="tts-details textbook-settings"><summary>⚙ 朗读设置</summary>{% include 'includes/tts_controls.html' with sequence_settings=True sequence_status_in_player=True %}</details>
-    <div class="english-sidebar-body">
+    <details class="tts-details textbook-settings" id="reading-sidebar-settings"><summary>⚙ 朗读设置</summary>{% include 'includes/tts_controls.html' with sequence_settings=True sequence_status_in_player=True %}</details>
+    <div class="english-sidebar-body" id="reading-sidebar-directory">
       <section class="sidebar" aria-label="场景选择">
         <div class="sidebar-label">切换场景 <span class="nav-count" id="words-nav-count"></span></div>
         <div class="search-box"><label class="sr-only" for="words-search">搜索单词、中文或场景</label><input id="words-search" type="search" placeholder="搜索单词、中文或场景" autocomplete="off"></div>

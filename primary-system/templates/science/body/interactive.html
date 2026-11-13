@@ -1,0 +1,45 @@
+<section class="body-panel body-interactive" id="explore" data-body-demo="{{ lesson.slug }}" data-state="{{ lesson.diagram.steps.0.id }}" aria-labelledby="demo-title">
+  <div class="body-demo-heading">
+    <p class="body-kicker">动一动，看变化</p>
+    <h2 id="demo-title">{{ lesson.diagram.title }}</h2>
+    <p>{{ lesson.diagram.prompt }}</p>
+  </div>
+  <div class="body-controls body-demo-controls" hidden>
+    <div role="group" aria-label="{{ lesson.diagram.title }}">
+      {% for step in lesson.diagram.steps %}
+      <button type="button" data-demo-step="{{ step.id }}" aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}">
+        <span class="body-step-dot" aria-hidden="true">{{ forloop.counter }}</span>{{ step.label }}
+      </button>
+      {% endfor %}
+    </div>
+    {% if lesson.slug == 'digestion' %}<button type="button" data-demo-next>下一站 →</button>{% endif %}
+    {% if lesson.slug == 'movement' %}
+    <label class="body-arm-slider">{{ lesson.diagram.labels.slider }}
+      <input type="range" min="0" max="120" value="0" step="1" data-arm-angle>
+      <span><span>{{ lesson.diagram.labels.straight }}</span><span>{{ lesson.diagram.labels.bent }}</span></span>
+    </label>
+    {% endif %}
+  </div>
+  <figure class="body-stage">
+    {% if lesson.slug == 'breathing' %}
+      {% include 'science/body/breathing.html' with diagram=lesson.diagram %}
+    {% elif lesson.slug == 'digestion' %}
+      {% include 'science/body/digestion.html' with diagram=lesson.diagram %}
+    {% elif lesson.slug == 'nerves' %}
+      {% include 'science/body/nerves.html' with diagram=lesson.diagram %}
+    {% elif lesson.slug == 'senses' %}
+      {% include 'science/body/senses.html' with diagram=lesson.diagram %}
+    {% else %}
+      {% include 'science/body/movement.html' with diagram=lesson.diagram %}
+    {% endif %}
+    <figcaption>{{ lesson.diagram.caption }}</figcaption>
+  </figure>
+  <div class="body-demo-caption" aria-live="polite">
+    {% for step in lesson.diagram.steps %}
+    <div data-demo-note="{{ step.id }}" {% if not forloop.first %}hidden{% endif %}>
+      <h3>{{ step.headline }}</h3><p>{{ step.body }}</p>
+    </div>
+    {% endfor %}
+  </div>
+  <noscript><p>图中展示第一个动作，下面的学习笔记可以继续阅读。</p></noscript>
+</section>

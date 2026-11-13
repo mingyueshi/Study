@@ -7,30 +7,45 @@
     <p class="body-kicker"><span></span> 生命世界 · 身体观察手册</p>
     <h1>{{ station.title }}</h1>
     <p class="body-intro">{{ station.intro }}</p>
+    <p class="body-station-stats"><span><strong>{{ lesson_count }}</strong> 张身体地图</span><span><strong>{{ media_count }}</strong> 幅观察图像</span><span><strong>{{ question_count }}</strong> 道小挑战</span></p>
     <div class="body-hero-actions">
-      <a class="body-button body-button-primary" href="#lessons">打开四课目录 ↓</a>
+      <a class="body-button body-button-primary" href="#lessons">打开六课目录 ↓</a>
       <a class="body-button body-button-light" href="{% url 'science-body-lesson' 'circulation' %}#heart">看心脏泵血 ↗</a>
     </div>
   </div>
   <figure class="body-cover">
-    <svg viewBox="0 0 500 380" aria-hidden="true"><use href="{% static 'science/body-atlas.svg' %}#atlas"></use></svg>
-    <figcaption><span>图 01</span> 身体里的四组搭档</figcaption>
+    <svg viewBox="0 0 500 380" role="group" aria-label="点身体地图，打开一课">
+      <use href="{% static 'science/body-atlas.svg' %}#atlas"></use>
+      <path d="M153 41 221 58M355 42l-77 29" stroke="#68918b" stroke-width="2" fill="none"/>
+      <a href="{% url 'science-body-lesson' 'nerves' %}" aria-label="大脑与神经，跟消息跑接力">
+        <rect x="20" y="20" width="133" height="36" rx="10" fill="#dceced" stroke="#7babb2"/><text x="86" y="44" text-anchor="middle" font-size="16" font-weight="750" fill="#275b62">大脑与神经</text>
+      </a>
+      <a href="{% url 'science-body-lesson' 'senses' %}" aria-label="眼耳与感官，打开感官窗口">
+        <rect x="355" y="20" width="125" height="36" rx="10" fill="#fbe7cd" stroke="#c6a576"/><text x="418" y="44" text-anchor="middle" font-size="16" font-weight="750" fill="#80521e">眼耳与感官</text>
+      </a>
+      <a href="{% url 'science-body-lesson' 'breathing' %}" aria-label="呼吸，看肺怎样展开"><rect class="body-atlas-hit" x="26" y="65" width="103" height="55" rx="12"/></a>
+      <a href="{% url 'science-body-lesson' 'digestion' %}" aria-label="消化，跟食物去旅行"><rect class="body-atlas-hit" x="26" y="240" width="103" height="55" rx="12"/></a>
+      <a href="{% url 'science-body-lesson' 'circulation' %}" aria-label="循环，看心脏怎样送血"><rect class="body-atlas-hit" x="366" y="77" width="115" height="55" rx="12"/></a>
+      <a href="{% url 'science-body-lesson' 'movement' %}" aria-label="骨骼肌肉，弯一弯手臂"><rect class="body-atlas-hit" x="366" y="247" width="115" height="55" rx="12"/></a>
+    </svg>
+    <figcaption><span>图 01</span> 点图上的标签，打开一个小剧场</figcaption>
   </figure>
 </header>
 <section class="body-section" id="lessons" aria-labelledby="body-lessons-title">
   <div class="body-section-heading">
     <p class="body-kicker">观察路线</p>
-    <h2 id="body-lessons-title">四张身体地图</h2>
+    <h2 id="body-lessons-title">六张身体地图</h2>
   </div>
   <ol class="body-lesson-grid">
     {% for item in lessons %}
     <li class="body-{{ item.slug }}">
       <a class="body-card" href="{% url 'science-body-lesson' item.slug %}">
         <span class="body-card-meta"><span>第 {{ forloop.counter }} 课</span><span>{{ item.label }}</span></span>
-        <svg viewBox="0 0 180 120" aria-hidden="true"><use href="{% static 'science/body-atlas.svg' %}#{{ item.slug }}"></use></svg>
+        <img class="body-card-photo" src="{% static item.gallery.0.src %}" alt="{{ item.gallery.0.title }}" loading="lazy">
+        <span class="body-card-kind">{{ item.gallery.0.kind }} · 互动图解 · 小实验</span>
         <strong>{{ item.title }}</strong>
         <span class="body-card-teaser">{{ item.teaser }}</span>
-        <span class="body-card-link">开始观察 <span aria-hidden="true">↗</span></span>
+        <span class="body-card-link">动手试试 <span aria-hidden="true">↗</span></span>
       </a>
     </li>
     {% endfor %}
@@ -44,7 +59,7 @@
     <a class="body-inline-link" href="{% url 'science-body-lesson' 'circulation' %}#pulse">打开实验台 ↗</a>
   </section>
   <section class="body-panel">
-    <p class="body-kicker">四课连起来</p>
+    <p class="body-kicker">身体各站连起来</p>
     <h2>{{ station.prompt }}</h2>
     <details class="body-answer">
       <summary>看看身体怎么配合</summary>

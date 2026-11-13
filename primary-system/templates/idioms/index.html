@@ -1,9 +1,9 @@
 {% extends 'idioms/layout.html' %}{% load static %}
 {% block title %}场景成语 · 乐学堂{% endblock %}
 {% block idiom_assets %}
-<link rel="stylesheet" href="{% static 'english-study.css' %}?v=11">
+<link rel="stylesheet" href="{% static 'english-study.css' %}?v=12">
 <link rel="stylesheet" href="{% static 'idioms/scene-study.css' %}?v=2">
-<script src="{% static 'english-study.js' %}?v=3" defer></script>
+<script src="{% static 'english-study.js' %}?v=4" defer></script>
 <script src="{% static 'reading-focus.js' %}?v=1" defer></script>
 {% endblock %}
 {% block idiom_content %}
@@ -31,11 +31,11 @@
 <div class="idiom-workspace english-library-layout" id="idiom-layout" data-reading-layout data-sidebar-side="right">
   <aside class="english-sidebar" aria-label="成语学习侧栏">
     {% include 'includes/tts_player.html' with player_mode='idiom' reading_layout_id='idiom-layout' %}
-    <details class="tts-details textbook-settings">
+    <details class="tts-details textbook-settings" id="reading-sidebar-settings">
       <summary>朗读设置</summary>
       {% include 'includes/tts_controls.html' with language='zh' sequence_settings=True sequence_status_in_player=True %}
     </details>
-    <div class="english-sidebar-body">
+    <div class="english-sidebar-body" id="reading-sidebar-directory">
       <nav id="idiom-scenes" class="idiom-scene-nav" aria-label="切换成语场景">
         <div class="idiom-nav-title"><h2>切换场景</h2><span>{{ scene_count }} 个</span></div>
         {% for group in groups %}
