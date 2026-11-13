@@ -74,3 +74,28 @@ class PostgresBaselineValueTests(SimpleTestCase):
         self.assertIsNone(normalized(field, None))
         self.assertEqual(normalized(field, 'null'), 'null')
         self.assertNotEqual(normalized(field, '"null"'), normalized(field, 'null'))
+
+
+class MigrationCompatibilityTests(SimpleTestCase):
+    @patch('catalog.management.commands.check_deployment_database.MigrationExecutor')
+    @patch('catalog.management.commands.check_deployment_database.connection')
+    def test_pending_migration_requires_explicit_migration_mode(self, connection, executor):
+        connection.vendor = 'postgresql'
+        loader = executor.return_value.loader
+        loader.applied_migrations = {('app', '0001')}
+        loader.disk_migrations = {('app', '0001'), ('app', '0002')}
+        executor.return_value.migration_plan.return_value = ['pending']
+        with self.assertRaisesRegex(CommandError, '快速更新已拒绝'):
+            call_command('check_deployment_database')
+        call_command('check_deployment_database', allow_pending=True)
+        executor.return_value.migrate.assert_not_called()
+
+    @patch('catalog.management.commands.check_deployment_database.MigrationExecutor')
+    @patch('catalog.management.commands.check_deployment_database.connection')
+    def test_unknown_newer_database_is_never_allowed(self, connection, executor):
+        connection.vendor = 'postgresql'
+        loader = executor.return_value.loader
+        loader.applied_migrations = {('app', '0002')}
+        loader.disk_migrations = {('app', '0001')}
+        with self.assertRaisesRegex(CommandError, '未知的迁移'):
+            call_command('check_deployment_database', allow_pending=True)

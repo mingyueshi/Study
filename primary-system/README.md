@@ -65,6 +65,8 @@
 
 本地可用 `make test-deploy` 测试部署保护逻辑，`make test-docker` 在独立容器和临时卷中验证实际部署、更新、备份恢复和数据持久性。全部运维说明、反向代理规则与故障恢复步骤见 [部署文档](docs/docker-deployment.md)。
 
+日常只改页面、样式、文件型专题或无迁移的代码，使用 `make update-app`（已拉取代码加 `PULL=0`），省略全量备份、迁移、资料扫描与索引重建。已构建镜像用 `make apply`；应用配置改动用 `make reload-config`，普通 `make restart` 保留原环境。快捷更新遇到待执行迁移会在替换应用前拒绝；改用完整更新，或构建后 `make db-migrate`。积分兑换用 `make rewards-preview`、`make rewards-import`；另有 `questions-import`、`permissions-sync` 和 `index-rebuild` 单项维护，具体执行范围见部署文档的场景表。
+
 ## 本地运行
 
 Python 3.12+；依赖版本固定于 `requirements.txt`。初始化与运行均从项目内读取内容与素材，Node 仅用于生成和测试。完整基础内容及固定来源载荷随仓库保存，内容恢复不联网；首次安装 Python 依赖可能需要网络。

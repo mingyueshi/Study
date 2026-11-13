@@ -145,6 +145,54 @@ Progress.objects.create(user=user, item=ContentItem.objects.first(), status='mas
                 'Host': 'localhost', 'X-Forwarded-Proto': 'https', 'Cookie': 'primary_sessionid=' + session})
             with no_redirect.open(profile, timeout=30) as response:
                 assert response.status == 200
+            def container_id(service):
+                return compose('ps', '-q', service, capture_output=True).stdout.strip()
+
+            def backups():
+                return make('backups', capture_output=True).stdout
+
+            db_id, app_id = container_id('db'), container_id('app')
+            before = backups()
+            make('rewards-preview')
+            assert backups() == before
+            shell('from incentives.models import RewardItem; assert RewardItem.objects.count() == 0')
+            make('rewards-import')
+            shell('from incentives.models import RewardItem; assert RewardItem.objects.count() == 22')
+            make('questions-import')
+            make('permissions-sync')
+            make('index-rebuild')
+            assert container_id('app') == app_id
+            before = backups()
+            make('update-app', 'PULL=0')
+            assert backups() == before, '快速应用更新不应生成全量备份'
+            assert container_id('app') != app_id
+            assert container_id('db') == db_id, '快捷命令不能重建数据库容器'
+            make('apply')
+            # 普通 restart 不加载修改后的环境；reload-config 才让环境生效。
+            envfile.write_text(envfile.read_text().replace('PRIMARY_HTTPS=1', 'PRIMARY_HTTPS=0'))
+            app_id = container_id('app')
+            make('restart')
+            assert container_id('app') == app_id
+            shell('from django.conf import settings; assert settings.SECURE_SSL_REDIRECT')
+            make('reload-config')
+            shell('from django.conf import settings; assert not settings.SECURE_SSL_REDIRECT')
+            envfile.write_text(envfile.read_text().replace('PRIMARY_HTTPS=0', 'PRIMARY_HTTPS=1'))
+            make('reload-config')
+            # 本次独立测试库中制造待执行的 choices 迁移，验证先拒绝快速替换，再单独迁移。
+            shell("from django.db import connection; from django.db.migrations.recorder import MigrationRecorder; MigrationRecorder(connection).record_unapplied('incentives', '0003_entertainment_category')")
+            app_id = container_id('app')
+            try:
+                make('apply', capture_output=True)
+                raise AssertionError('待执行迁移未阻止快速更新')
+            except subprocess.CalledProcessError:
+                pass
+            assert container_id('app') == app_id
+            with request('/healthz/') as response:
+                assert response.status == 200
+            make('db-migrate')
+            assert container_id('db') == db_id
+            shell("from learning.models import Progress; assert Progress.objects.get(user__username='deploy_learner').revision == 7")
+            print('快捷场景通过：更新应用、启用镜像、配置生效、待迁移拦截及迁移、兑换/题库/权限/索引单项维护；数据库容器保持不变。', flush=True)
             make('backup')
             backup_output = make('backups', capture_output=True).stdout
             backup = [line.split()[0] for line in backup_output.splitlines() if line.startswith('primary-')][-1]

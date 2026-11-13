@@ -60,6 +60,66 @@ class RuntimeTests(unittest.TestCase):
         runtime.backup()
         return next(self.backups.glob('*.tar.gz'))
 
+    def test_shortcuts_refuse_fresh_or_unfinished_installations(self):
+        runtime.write_state(self.current, ready=False)
+        with self.assertRaisesRegex(RuntimeError, '未完成'):
+            runtime.check_existing()
+        shutil.rmtree(self.current)
+        with self.assertRaisesRegex(RuntimeError, '首次'):
+            runtime.check_existing()
+        self.manage.assert_not_called()
+
+    def test_pending_migration_blocks_quick_update_without_changing_state(self):
+        before = (self.current / 'deployment.json').read_bytes()
+        def command(*args, **kwargs):
+            if args[0] == 'check_deployment_database':
+                raise RuntimeError('待执行迁移')
+        self.manage.side_effect = command
+        with self.assertRaisesRegex(RuntimeError, '待执行迁移'):
+            runtime.check_existing()
+        self.assertEqual((self.current / 'deployment.json').read_bytes(), before)
+
+    def test_preview_and_index_never_backup_or_import(self):
+        backup = self.mock(runtime, 'backup')
+        for action, command in [('rewards-preview', ('import_rewards', '--dry-run')),
+                                ('index-rebuild', ('build_feihualing_index',))]:
+            self.manage.reset_mock()
+            runtime.maintenance(action)
+            self.assertEqual(self.manage.call_args.args, command)
+            self.assertFalse(any(call.args[0] in ('migrate', 'seed_platform', 'import_questions')
+                                 for call in self.manage.call_args_list))
+        backup.assert_not_called()
+
+    def test_data_maintenance_does_not_write_if_backup_fails(self):
+        self.mock(runtime, 'backup', side_effect=OSError('backup disk full'))
+        with self.assertRaisesRegex(OSError, 'disk full'):
+            runtime.maintenance('rewards-import')
+        self.assertFalse(any(call.args[0] == 'import_rewards' for call in self.manage.call_args_list))
+        self.assertTrue(runtime.read_state()['ready'])
+
+    def test_rewards_import_only_imports_requested_catalog_after_backup(self):
+        events = []
+        self.mock(runtime, 'backup', side_effect=lambda: events.append('backup'))
+        self.manage.side_effect = lambda *args, **kwargs: events.append(args[0])
+        runtime.maintenance('rewards-import')
+        self.assertEqual(events, ['check', 'check_deployment_database', 'backup', 'import_rewards'])
+        self.assertEqual(self.databases['live']['revision'], 7)
+
+    def test_migration_failure_keeps_readiness_false_and_can_be_retried(self):
+        def command(*args, **kwargs):
+            if args[0] == 'migrate':
+                raise RuntimeError('migration failed')
+        self.manage.side_effect = command
+        with self.assertRaisesRegex(RuntimeError, 'migration failed'):
+            runtime.migrate_only()
+        self.assertFalse(runtime.read_state()['ready'])
+        self.manage.side_effect = None
+        self.manage.reset_mock()
+        runtime.migrate_only()
+        self.assertTrue(runtime.read_state()['ready'])
+        self.assertFalse(any(call.args[0] in ('seed_platform', 'import_questions', 'build_feihualing_index', 'restore_postgres_baseline')
+                             for call in self.manage.call_args_list))
+
     def test_snapshot_restore_preserves_records_assets_and_cleans_staging(self):
         archive = self.backup()
         self.assertEqual(archive.stat().st_mode & 0o777, 0o600)

@@ -18,6 +18,7 @@ x-environment: &environment
   PRIMARY_FEIHUALING_INDEX_ROOT: /data/cache/feihualing
 x-application: &application
   image: ${COMPOSE_PROJECT_NAME:-primary-system}:local
+  pull_policy: never
   environment: *environment
   volumes:
     - data:/data

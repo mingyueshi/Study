@@ -6,6 +6,8 @@
 
 在 `primary-system/` 内运行：
 
+生产 Docker 环境直接运行 `make rewards-preview` 预览，`make rewards-import` 备份后导入；不需要重新部署或停应用。如果修改了奖励源文件，先 `make update-app` 更新镜像，再执行导入。以下 `.venv` 命令仅用于本地开发库。
+
 ```sh
 .venv/bin/python manage.py migrate
 .venv/bin/python manage.py import_rewards --dry-run

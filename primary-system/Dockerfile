@@ -22,10 +22,14 @@ RUN groupadd --gid 10001 primary && useradd --uid 10001 --gid primary --no-creat
     && mkdir -p /app /data /backups && chown primary:primary /data /backups
 COPY --from=dependencies /opt/venv /opt/venv
 WORKDIR /app
+# 基础包和校验器未变时复用该校验层，日常改页面不再扫描 250 万行内容。
+# BuildKit 的只读绑定输入参与缓存校验，不将临时校验文件留在镜像中。
+RUN --mount=type=bind,source=data/baseline,target=/baseline \
+    --mount=type=bind,source=config/base_data.py,target=/tmp/base_data.py \
+    PYTHONPATH=/tmp python -c 'from base_data import verify_package; print(verify_package("/baseline")["digest"])'
 COPY --chown=10001:10001 . .
 # 构建时不使用运行密钥，也不读取宿主机数据库。
-RUN PRIMARY_SECRET_KEY=build-only-not-a-runtime-secret python manage.py collectstatic --noinput \
-    && PRIMARY_SECRET_KEY=build-only-not-a-runtime-secret python manage.py verify_base_data
+RUN PRIMARY_SECRET_KEY=build-only-not-a-runtime-secret python manage.py collectstatic --noinput
 ARG PRIMARY_REVISION=unknown
 ENV PRIMARY_IMAGE_REVISION=$PRIMARY_REVISION
 LABEL org.opencontainers.image.title="乐学堂" org.opencontainers.image.revision=$PRIMARY_REVISION

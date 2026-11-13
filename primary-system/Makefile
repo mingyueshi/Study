@@ -22,6 +22,36 @@ deploy: ## Docker 一键部署当前代码：构建、备份、初始化/迁移�
 update: ## 快进拉取 Git 后部署；已同步代码或本地测试用 make update PULL=0
 	@ENV_FILE="$(ENV_FILE)" PULL="$(PULL)" sh deploy/update.sh
 
+pull: ## 只快进拉取代码，不改变运行中的容器
+	@sh deploy/update.sh pull
+
+update-app: ## 快速更新页面/代码/静态资源：拉取、构建、检查迁移、仅替换应用（支持 PULL=0）
+	@ENV_FILE="$(ENV_FILE)" PULL="$(PULL)" sh deploy/update.sh update-app
+
+apply: ## 启用已构建镜像：检查后仅替换应用，不拉取、不构建、不迁移
+	@$(DEPLOY) apply
+
+reload-config: ## 修改 .env.production 后重建应用容器，不构建镜像、不重建数据库
+	@$(DEPLOY) reload-config
+
+db-migrate: ## 已构建镜像的结构迁移：检查、停应用、备份、迁移、启用应用
+	@$(DEPLOY) db-migrate
+
+rewards-preview: ## 预览镜像内的积分兑换目录，不写数据库
+	@$(DEPLOY) rewards-preview
+
+rewards-import: ## 备份后补齐积分兑换目录，保留已有设置与兑换历史，不停应用
+	@$(DEPLOY) rewards-import
+
+questions-import: ## 备份后导入镜像内题库批次，不停应用
+	@$(DEPLOY) questions-import
+
+permissions-sync: ## 备份后同步基础目录和权限组，不停应用
+	@$(DEPLOY) permissions-sync
+
+index-rebuild: ## 仅原子重建飞花令缓存，不备份、不停应用
+	@$(DEPLOY) index-rebuild
+
 build: ## 只构建 Docker 镜像，不停服
 	@$(DEPLOY) build
 
@@ -169,3 +199,4 @@ unihan18-package: ## 重新生成 Unihan 18.0.0 全量属性资料包 01f（辅�
 .PHONY: env deploy update build start stop restart down status logs check-deploy manage admin app-shell container-shell backup backups backup-export backup-import restore test-deploy test-docker polyphone-data
 
 .PHONY: db-shell db-logs db-update
+.PHONY: pull update-app apply reload-config db-migrate rewards-preview rewards-import questions-import permissions-sync index-rebuild

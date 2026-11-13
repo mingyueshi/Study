@@ -4,7 +4,7 @@
 
 ## 首次部署
 
-服务器需安装 Docker Engine、Docker Compose v2.20+ 和 GNU Make。首次构建需访问 Python／PostgreSQL 镜像、Debian／PostgreSQL 软件源、PyPI 与 requirements 中固定提交的两个 GitHub 依赖；初始化学习内容不访问外网。无需宿主机 Python、Node 或 PostgreSQL。
+服务器需安装 Docker Engine（启用默认的 BuildKit 构建器）、Docker Compose v2.20+ 和 GNU Make。首次构建需访问 Python／PostgreSQL 镜像、Debian／PostgreSQL 软件源、PyPI 与 requirements 中固定提交的两个 GitHub 依赖；初始化学习内容不访问外网。无需宿主机 Python、Node 或 PostgreSQL。
 
 ```sh
 cd primary-system
@@ -92,6 +92,49 @@ make update PULL=0
 
 ## 日常命令
 
+### 按改动选择更新方式
+
+首次部署使用 `make deploy`；已有站点无需每次执行完整部署。以下快捷命令要求数据库已运行、站点已有完整部署记录。
+
+首次从旧版部署脚本升级到本版，先 `git pull --ff-only`，再 `make update-app PULL=0`，将新增的维护脚本装入应用镜像；之后才能在该镜像上使用各项快捷维护命令。
+
+| 场景 | 命令 | 执行范围 |
+| --- | --- | --- |
+| 只同步服务器工作区 | `make pull` | 仅 `git pull --ff-only`；运行中的页面不变 |
+| 修改模板、CSS、JS、文件型专题或无迁移的 Python 代码／依赖 | `make update-app` | 拉取、构建镜像（含静态资源）、检查兼容性、替换应用并等待健康 |
+| 代码已拉取／复制到服务器 | `make update-app PULL=0` | 同上，省略 Git 拉取 |
+| 镜像已通过 `make build` 构建 | `make apply` | 检查后启用已构建镜像，不再拉取和构建 |
+| 修改域名、CSRF、HTTPS、应用端口或应用内存等配置 | `make reload-config` | 使用已构建镜像和当前配置重建应用，不构建镜像或重建数据库 |
+| 应用进程需要重启 | `make restart` | 重启现有容器，保留原镜像和环境；不加载新配置 |
+| 只处理已构建镜像中的数据库迁移 | `make db-migrate` | 预检查、停应用、备份、迁移、启用应用；不导入题库或重建索引 |
+| 首次导入／补充积分兑换目录 | `make rewards-preview` → `make rewards-import` | 预览无写入；正式导入先备份，只补缺及补齐分类，不停应用 |
+| 只导入题库批次 | `make questions-import` | 先备份，再校验和导入镜像内各批次，不停应用 |
+| 同步基础目录及权限组 | `make permissions-sync` | 先备份，再执行两项幂等配置命令，不停应用 |
+| 飞花令索引缺失或需要重建 | `make index-rebuild` | 原子重建可丢弃缓存，不备份、不停应用 |
+| 涉及迁移、权限、题库等多项变更，或不确定更新范围 | `make update` | 保留完整更新流程 |
+
+`update-app`、`apply` 和 `reload-config` 不创建全量备份，不执行迁移、题库导入、资料扫描或索引重建，也不会重建 PostgreSQL 容器。它们在替换应用**之前**检查基础包身份、部署就绪状态、数据库连接和迁移兼容性；有待执行迁移时失败并保留现有应用。发现这种情况改用 `make update PULL=0`，或明确只需要结构迁移时使用 `make db-migrate`。健康检查失败则停止新应用并返回错误，不报告成功。
+
+这些命令不能自动判断 Python 代码是否包含业务数据升级要求。涉及数据契约、题库批次、资料库或初始化逻辑的变更，应按对应升级步骤或完整更新处理；快捷命令不会自动补做这些步骤。
+
+应用代码和资源封装在镜像中：只 `git pull` 或 `restart` 不会更新页面。文件型课程仍须在开发机先生成发布文件并提交；服务器不临时运行 Node 生成步骤。只改文件型课程可用 `update-app`，修改题库源需先构建并启用新镜像，再执行 `questions-import`。数据维护命令同样读取**已构建镜像**中的文件，不读取宿主机未构建的修改。不要并行执行 Git 拉取与构建／部署。
+
+构建时将基础包校验单独缓存：只改页面或业务代码时，不再重复扫描约 250 万行 JSONL；基础包或校验器改变时自动重新验证。静态文件仍在镜像构建时收集，无需宿主机手工执行 `collectstatic`。
+
+例如，更新兑换目录后：
+
+```sh
+make update-app
+make rewards-preview
+make rewards-import
+```
+
+只导入当前镜像内已有的 22 项兑换奖励，直接执行后两条即可。自定义源文件或下架旧目录等高级参数仍通过 `make manage ARGS='import_rewards ...'` 操作。
+
+`reload-config` 不修改数据库角色密码，也不应用 PostgreSQL 容器的内存等配置；数据库配置调整应走数据库维护流程。若刚构建了尚未启用的应用镜像，`apply` 与 `reload-config` 都会启用该镜像。`db-migrate` 失败时保持应用停止和未就绪标记，可修复后重试；它不承担权限组或内容数据同步。
+
+### 其他日常操作
+
 | 命令 | 用途 |
 | --- | --- |
 | `make` | 查看全部命令 |
@@ -111,7 +154,7 @@ make update PULL=0
 | `make test-deploy` | 本地部署逻辑回归测试，需本地开发依赖，不需要数据库容器 |
 | `make test-docker` | 用独立项目、回环端口和临时卷执行真实 Docker 演练 |
 
-原有 `install`、`run`、`test`、`test-frontend`、`migrate`、`shell`、`superuser` 等继续面向**本地开发环境**。线上操作使用上表 Docker 命令，结构迁移由 `deploy/update` 统一备份后执行。
+原有 `install`、`run`、`test`、`test-frontend`、`migrate`、`shell`、`superuser` 等继续面向**本地开发环境**。线上操作使用上表 Docker 命令，结构迁移由 `deploy/update` 或 `db-migrate` 备份后执行。
 
 ## 备份与恢复
 
@@ -147,6 +190,6 @@ make restore BACKUP=primary-时间-标识.tar.gz
 
 并发部署用宿主机目录锁、卷内文件锁和 PostgreSQL advisory lock 拒绝。若宿主机异常退出遗留 `<配置文件>.deploy-lock`，确认没有运维命令和临时初始化容器仍在执行后，再删除该空锁目录。断电可能遗留 `primary_stage_*` 临时库或暂存资料；先核实数据库与资料的部署身份、保留恢复点，再处理残留，不批量删除。切换过程中的普通异常会回滚数据库和目录，强制中断后的未就绪状态会阻止应用启动。
 
-`make test-docker` 会实际构建镜像和 PostgreSQL 容器、导入全量基础数据，在独立测试库运行学习进度、单词状态及积分的并发测试，检查普通数据库账号、自增序列、首页、后台、资料页、静态资源、HTTPS 代理头、登录和 Cookie。它还会写入专用测试账号和学习记录，验证更新保留记录、pg_dump 导出、备份导入、pg_restore 恢复及删除容器后的数据持久性。结束时只清理该次随机项目的容器、卷与镜像，不接触日常开发库和服务。生产服务器的 DNS、证书及真实 Nginx 入口仍需上线时验证。
+`make test-docker` 会实际构建镜像和 PostgreSQL 容器、导入全量基础数据，在独立测试库运行学习进度、单词状态及积分的并发测试，检查普通数据库账号、自增序列、首页、后台、资料页、静态资源、HTTPS 代理头、登录和 Cookie。它会验证快捷更新不备份且不重建数据库、重启不加载新环境、配置刷新生效、待迁移拦截、单独迁移及兑换／题库／权限／索引维护，再验证完整更新保留学习记录、pg_dump 导出、备份导入、pg_restore 恢复及删除容器后的数据持久性。结束时只清理该次随机项目的容器、卷与镜像，不接触日常开发库和服务。生产服务器的 DNS、证书及真实 Nginx 入口仍需上线时验证。
 
 实现依据：[Docker Compose 健康等待](https://docs.docker.com/reference/cli/docker/compose/up/)、[PostgreSQL pg_dump](https://www.postgresql.org/docs/16/app-pgdump.html)、[pg_restore](https://www.postgresql.org/docs/16/app-pgrestore.html)、[Psycopg COPY](https://www.psycopg.org/psycopg3/docs/basic/copy.html)、[Django 部署检查](https://docs.djangoproject.com/en/dev/howto/deployment/checklist/)、[WhiteNoise 静态文件服务](https://whitenoise.readthedocs.io/en/stable/django.html)。

@@ -100,6 +100,43 @@ def load_questions(directory=None, database=None):
         manage('import_questions', '--input', str(batch), directory=directory, database=database)
 
 
+def check_existing(*, allow_pending=False, require_ready=True):
+    if not CURRENT.exists():
+        raise RuntimeError('快捷命令只用于已部署站点；首次请运行 make deploy。')
+    state = read_state()
+    if require_ready and not state.get('ready'):
+        raise RuntimeError('上次部署未完成，请先用 make update 或 make db-migrate 修复。')
+    preflight()
+    manage('check_deployment_database', *(['--allow-pending'] if allow_pending else []))
+
+
+def migrate_only():
+    check_existing(allow_pending=True, require_ready=False)
+    write_state(CURRENT, ready=False)
+    manage('migrate', '--noinput')
+    manage('check_deployment_database')
+    manage('check')
+    write_state(CURRENT, ready=True)
+
+
+def maintenance(action):
+    check_existing()
+    if action == 'rewards-preview':
+        manage('import_rewards', '--dry-run')
+    elif action == 'index-rebuild':
+        manage('build_feihualing_index')
+    else:
+        # 单项数据维护仍保留恢复点，不停应用、不重复初始化和扫描全部资料。
+        backup()
+        if action == 'rewards-import':
+            manage('import_rewards')
+        elif action == 'questions-import':
+            load_questions()
+        elif action == 'permissions-sync':
+            manage('seed_platform')
+            manage('seed_lexicon_roles')
+
+
 def promote(stage, database):
     previous_db = pg.STAGE_PREFIX + uuid4().hex
     previous_files = DATA / ('.previous-' + uuid4().hex)
@@ -283,7 +320,8 @@ def restore(name, validate_only=False):
 def main():
     os.umask(0o077)
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('action', choices=['preflight', 'prepare', 'backup', 'backups', 'export', 'import', 'validate-backup', 'restore', 'serve'])
+    maintenance_actions = ['rewards-preview', 'rewards-import', 'questions-import', 'permissions-sync', 'index-rebuild']
+    parser.add_argument('action', choices=['preflight', 'prepare', 'backup', 'backups', 'export', 'import', 'validate-backup', 'restore', 'serve', 'check-app', 'check-migrate', 'migrate', 'mark-release', *maintenance_actions])
     parser.add_argument('name', nargs='?')
     args = parser.parse_args()
     if args.action == 'serve':
@@ -305,6 +343,13 @@ def main():
             elif args.action == 'prepare': prepare()
             elif args.action == 'backup': backup()
             elif args.action == 'import': import_backup(args.name)
+            elif args.action == 'check-app': check_existing()
+            elif args.action == 'check-migrate': check_existing(allow_pending=True, require_ready=False)
+            elif args.action == 'migrate': migrate_only()
+            elif args.action == 'mark-release':
+                check_existing()
+                write_state(CURRENT, ready=True)
+            elif args.action in maintenance_actions: maintenance(args.action)
             else: restore(args.name, validate_only=args.action == 'validate-backup')
 
 

@@ -39,6 +39,10 @@ init_env() {
 
 compose() { docker compose --env-file "$PRIMARY_ENV_FILE" -f compose.yaml "$@"; }
 runtime() { compose run --rm --no-deps -T ops python deploy/runtime.py "$@"; }
+build_app() {
+    export PRIMARY_REVISION=$(git rev-parse HEAD 2>/dev/null || printf unknown)
+    compose build app
+}
 ensure_db() {
     if ! compose up -d --wait --wait-timeout 180 db; then
         compose logs --tail=60 db
@@ -46,15 +50,15 @@ ensure_db() {
         return 1
     fi
 }
-wait_up() {
-    ensure_db
-    if ! compose up -d --no-build --wait --wait-timeout 180 app; then
+wait_app() {
+    if ! compose up -d --no-deps --no-build --wait --wait-timeout 180 "$@" app; then
         compose logs --tail=80 app
         compose stop app
         echo '健康检查失败，服务已停止；未报告部署成功。' >&2
         return 1
     fi
 }
+wait_up() { ensure_db; wait_app; }
 
 if [ "$action" = env ]; then init_env; exit 0; fi
 if [ "$action" = deploy ]; then init_env; fi
@@ -64,7 +68,7 @@ compose config --quiet
 
 # 宿主机锁覆盖停服、备份、迁移、启动整个流程。容器内另有数据操作锁。
 lock="${PRIMARY_ENV_FILE}.deploy-lock"
-case "$action" in deploy|update|restore|start|stop|restart|down|build|backup|backup-import|db-update)
+case "$action" in deploy|update|restore|start|stop|restart|down|build|backup|backup-import|db-update|update-app|apply|reload-config|db-migrate|rewards-preview|rewards-import|questions-import|permissions-sync|index-rebuild)
     if ! mkdir "$lock" 2>/dev/null; then echo "另一个运维命令正在执行；若上次异常退出，请核实后移除 ${lock}。" >&2; exit 1; fi
     trap 'rmdir "$lock"' EXIT
     trap 'exit 130' INT
@@ -74,8 +78,7 @@ esac
 case "$action" in
     deploy|update)
         # 构建和配置校验均在停服前完成；update 使用当前检出的代码。
-        export PRIMARY_REVISION=$(git rev-parse HEAD 2>/dev/null || printf unknown)
-        compose build app
+        build_app
         ensure_db
         runtime preflight
         compose stop app
@@ -88,10 +91,33 @@ case "$action" in
         compose ps
         echo '部署完成，健康检查已通过。'
         ;;
-    build) compose build app;;
+    build) build_app;;
+    update-app|apply|reload-config)
+        if [ "$action" = update-app ]; then build_app; fi
+        # 在替换应用之前检查配置、卷身份和迁移；不启动或重建数据库。
+        runtime check-app
+        wait_app --force-recreate
+        runtime mark-release
+        echo '应用更新完成；未执行数据库迁移、内容导入或索引重建。'
+        ;;
+    db-migrate)
+        runtime check-migrate
+        compose stop app
+        runtime backup
+        runtime migrate
+        wait_app --force-recreate
+        echo '数据库迁移及应用启动完成。'
+        ;;
+    rewards-preview|rewards-import|questions-import|permissions-sync|index-rebuild)
+        runtime "$action"
+        ;;
     start) wait_up;;
     stop) compose stop app db;;
-    restart) compose stop app; wait_up;;
+    restart)
+        # restart 使用现有容器的镜像和环境；配置改动由 reload-config 显式应用。
+        compose restart app
+        wait_app --no-recreate
+        ;;
     down) compose down;;
     status) compose ps -a;;
     logs) compose logs --tail=100 --follow app;;
@@ -104,7 +130,8 @@ case "$action" in
     db-shell) ensure_db; compose exec db sh -c 'PGPASSWORD="$PRIMARY_DB_PASSWORD" exec psql -h 127.0.0.1 -U "$PRIMARY_DB_USER" -d "$PRIMARY_DB_NAME"';;
     db-update)
         compose pull db
-        compose start --wait --wait-timeout 180 db
+        compose start db
+        compose up -d --no-deps --no-recreate --wait --wait-timeout 180 db
         compose stop app
         runtime backup
         ensure_db
