@@ -35,6 +35,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware', 'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+# Docker 镜像提供静态文件服务，本地开发仍由 runserver 处理。
+if os.environ.get('PRIMARY_DOCKER') == '1':
+    MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
+    WHITENOISE_MAX_AGE = 60
 ROOT_URLCONF = 'config.urls'
 TEMPLATES = [{
     'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -85,7 +89,7 @@ CSRF_COOKIE_NAME = 'primary_csrftoken'
 SESSION_COOKIE_HTTPONLY = True
 SESSION_COOKIE_SAMESITE = 'Lax'
 SESSION_COOKIE_AGE = 86400 * 14
-CSRF_TRUSTED_ORIGINS = [s for s in os.environ.get('PRIMARY_CSRF_TRUSTED_ORIGINS', '').split(',') if s]
+CSRF_TRUSTED_ORIGINS = [s.strip() for s in os.environ.get('PRIMARY_CSRF_TRUSTED_ORIGINS', '').split(',') if s.strip()]
 X_FRAME_OPTIONS = 'DENY'
 SECURE_CONTENT_TYPE_NOSNIFF = True
 DATA_UPLOAD_MAX_MEMORY_SIZE = 256 * 1024
@@ -138,12 +142,20 @@ NOVA_ADMIN_NAV_ICONS = {
 }
 NOVA_ADMIN_NAV_BADGE_PROVIDER = 'config.admin_navigation.badges'
 if PRODUCTION:
-    if DEBUG or len(SECRET_KEY) < 50 or '*' in ALLOWED_HOSTS:
+    if DEBUG or len(SECRET_KEY) < 50 or not ALLOWED_HOSTS or any('*' in host for host in ALLOWED_HOSTS):
         raise ImproperlyConfigured('Production requires DEBUG=0, a strong secret and explicit hosts.')
-    SESSION_COOKIE_SECURE = True
-    CSRF_COOKIE_SECURE = True
-    SECURE_SSL_REDIRECT = True
-    SECURE_HSTS_SECONDS = 31536000
+    for setting, default in [('PRIMARY_HTTPS', '1'), ('PRIMARY_TRUST_PROXY', '0')]:
+        if os.environ.get(setting, default) not in {'0', '1'}:
+            raise ImproperlyConfigured(f'{setting} must be 0 or 1.')
+    https = os.environ.get('PRIMARY_HTTPS', '1') == '1'
+    SESSION_COOKIE_SECURE = https
+    CSRF_COOKIE_SECURE = https
+    SECURE_SSL_REDIRECT = https
+    SECURE_HSTS_SECONDS = 31536000 if https else 0
+    # 仅为容器内健康探针放行；此端点不读写会话、不返回业务数据。
+    SECURE_REDIRECT_EXEMPT = [r'^healthz/$']
+    if os.environ.get('PRIMARY_TRUST_PROXY', '0') == '1':
+        SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Privately managed reference sources; never served as static/media wholesale.
 REFERENCE_ARCHIVE_ROOT = BASE_DIR / 'data' / 'reference-archives'

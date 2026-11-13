@@ -1,0 +1,88 @@
+name: ${COMPOSE_PROJECT_NAME:-primary-system}
+x-environment: &environment
+  PRIMARY_DOCKER: "1"
+  PRIMARY_PRODUCTION: "1"
+  PRIMARY_DEBUG: "0"
+  PRIMARY_SECRET_KEY: ${PRIMARY_SECRET_KEY:?请先运行 make env}
+  PRIMARY_ALLOWED_HOSTS: ${PRIMARY_ALLOWED_HOSTS:-localhost,127.0.0.1}
+  PRIMARY_CSRF_TRUSTED_ORIGINS: ${PRIMARY_CSRF_TRUSTED_ORIGINS:-}
+  PRIMARY_HTTPS: ${PRIMARY_HTTPS:-1}
+  PRIMARY_TRUST_PROXY: ${PRIMARY_TRUST_PROXY:-1}
+  PRIMARY_DB_ENGINE: postgres
+  PRIMARY_DB_HOST: db
+  PRIMARY_DB_PORT: "5432"
+  PRIMARY_DB_NAME: ${PRIMARY_DB_NAME:-primary_system}
+  PRIMARY_DB_USER: ${PRIMARY_DB_USER:-primary_app}
+  PRIMARY_DB_PASSWORD: ${PRIMARY_DB_PASSWORD:?请先运行 make env 补充数据库密码}
+  PRIMARY_REFERENCE_ROOT: /data/current/reference-assets
+  PRIMARY_FEIHUALING_INDEX_ROOT: /data/cache/feihualing
+x-application: &application
+  image: ${COMPOSE_PROJECT_NAME:-primary-system}:local
+  environment: *environment
+  volumes:
+    - data:/data
+    - backups:/backups
+  read_only: true
+  mem_limit: ${PRIMARY_MEMORY_LIMIT:-1g}
+  tmpfs: ["/tmp:mode=1777,size=256m"]
+  security_opt: [no-new-privileges:true]
+  cap_drop: [ALL]
+  init: true
+  logging: &logging
+    driver: json-file
+    options: {max-size: 10m, max-file: "3"}
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${PRIMARY_PG_ADMIN_PASSWORD:?请先运行 make env 补充数据库管理密码}
+      POSTGRES_INITDB_ARGS: --auth-host=scram-sha-256 --auth-local=trust
+      PRIMARY_DB_NAME: ${PRIMARY_DB_NAME:-primary_system}
+      PRIMARY_DB_USER: ${PRIMARY_DB_USER:-primary_app}
+      PRIMARY_DB_PASSWORD: ${PRIMARY_DB_PASSWORD:?请先运行 make env}
+    volumes:
+      - postgres:/var/lib/postgresql/data
+      - ./deploy/postgres-init.sql:/docker-entrypoint-initdb.d/10-primary.sql:ro
+    command: [postgres, -c, shared_buffers=128MB, -c, max_connections=60, -c, max_wal_size=512MB]
+    mem_limit: ${PRIMARY_DB_MEMORY_LIMIT:-1g}
+    shm_size: 128m
+    restart: unless-stopped
+    stop_grace_period: 60s
+    healthcheck:
+      test: [CMD-SHELL, 'PGPASSWORD="$$PRIMARY_DB_PASSWORD" psql -h 127.0.0.1 -U "$$PRIMARY_DB_USER" -d "$$PRIMARY_DB_NAME" -tAc "SELECT 1" | grep -qx 1']
+      interval: 5s
+      timeout: 5s
+      start_period: 20s
+      retries: 20
+    logging: *logging
+  app:
+    <<: *application
+    build:
+      context: .
+      args:
+        PRIMARY_REVISION: ${PRIMARY_REVISION:-unknown}
+    depends_on:
+      db: {condition: service_healthy}
+    ports:
+      - "${PRIMARY_BIND:-127.0.0.1}:${PRIMARY_PORT:-8012}:8012"
+    restart: unless-stopped
+    stop_grace_period: 45s
+    healthcheck:
+      test: [CMD, python, deploy/healthcheck.py]
+      interval: 10s
+      timeout: 5s
+      start_period: 20s
+      retries: 6
+  ops:
+    <<: *application
+    profiles: [tools]
+    environment:
+      <<: *environment
+      PRIMARY_PG_ADMIN_PASSWORD: ${PRIMARY_PG_ADMIN_PASSWORD:?请先运行 make env}
+    command: [python, deploy/runtime.py, preflight]
+volumes:
+  postgres:
+  data:
+  backups:

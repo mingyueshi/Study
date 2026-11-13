@@ -53,6 +53,14 @@
 
 以上内容规模是当前资料范围，不表示所有内容均已完成教学审校。场景词已支持多场景／多义项引用；新的学科教学玩法尚待实现，见设计基线的后续顺序。
 
+## Docker 线上部署
+
+已有 Nginx／宝塔负责域名和 HTTPS 时，在本目录执行 `make deploy DOMAIN=自己的域名`：自动生成密钥、构建镜像、准备完整学习内容并等待健康检查；再用 `make admin` 创建管理员。代理转发到 `127.0.0.1:8012`，配置片段见 [Docker 部署与日常维护](docs/docker-deployment.md)。
+
+后续 `make update` 快进拉取 Git 并在备份后升级；已同步代码用 `make update PULL=0`。生产使用独立的 **PostgreSQL 16 Docker 容器**，仅在容器内网连接；数据库、私有资料和备份分别保存在持久卷。`make status`、`make logs`、`make db-shell`、`make db-logs`、`make restart`、`make backup`、`make restore BACKUP=文件名` 提供日常维护，数据库小版本升级使用 `make db-update`。更新不重置账号或学习记录，新站点初始化使用发布基础包；本机仍默认 SQLite，个人数据不会自动上云。
+
+本地可用 `make test-deploy` 测试部署保护逻辑，`make test-docker` 在独立容器和临时卷中验证实际部署、更新、备份恢复和数据持久性。全部运维说明、反向代理规则与故障恢复步骤见 [部署文档](docs/docker-deployment.md)。
+
 ## 本地运行
 
 Python 3.12+；依赖版本固定于 `requirements.txt`。初始化与运行均从项目内读取内容与素材，Node 仅用于生成和测试。完整基础内容及固定来源载荷随仓库保存，内容恢复不联网；首次安装 Python 依赖可能需要网络。
@@ -208,7 +216,7 @@ make test-frontend
 
 PostgreSQL 使用 `requirements-postgres.txt`，设置 `PRIMARY_DB_ENGINE=postgres` 及 `PRIMARY_DB_NAME/USER/HOST/PORT/PASSWORD`；切换配置不会自动搬运 SQLite 数据。本机默认 SQLite；`bootstrap.py --database` 只支持 SQLite 初始化。
 
-本次范围为本地开发。生产配置需启用 `PRIMARY_PRODUCTION=1`、关闭 DEBUG，并设置独立密钥、主机与 CSRF 域名，使用正式应用服务和 HTTPS 代理。开发服务器仅监听回环地址。
+生产使用本项目的 Docker Compose 配置：PostgreSQL、Gunicorn、独立密钥、显式主机和 CSRF 域名，并通过已有 HTTPS 代理接入，详见 [部署文档](docs/docker-deployment.md)。本地开发服务器默认仅监听回环地址。
 
 ## 阅读侧栏
 

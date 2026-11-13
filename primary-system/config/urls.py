@@ -11,6 +11,7 @@ from chinesebook import couplets
 from learning import views as learning
 from lexicon import views as lexicon
 from lexicon import pages as dictionary
+from config.health import health
 
 admin.site.site_header = '乐学堂 · 学习管理'
 admin.site.site_title = '乐学堂后台'
@@ -19,6 +20,7 @@ admin.site.login_form = SliderCaptchaAdminAuthenticationForm
 admin.site.login_template = 'nova_admin/slider_login.html'
 
 urlpatterns = [
+    path('healthz/', health, name='health'),
     path('favicon.ico', RedirectView.as_view(url='/static/icons/book.svg', permanent=False)),
     path('', catalog.home, name='home'),
     path('references/', include('reference_library.urls')),

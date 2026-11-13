@@ -4,11 +4,90 @@
 .DEFAULT_GOAL := help
 PORT ?= 8012
 PYTHON := $(if $(wildcard .venv/bin/python),.venv/bin/python,python3.12)
+ENV_FILE ?= .env.production
+PULL ?= 1
+DEPLOY := ENV_FILE="$(ENV_FILE)" sh deploy/compose.sh
 BOOTSTRAP := $(if $(wildcard .venv/bin/python),.venv/bin/python bootstrap.py,python3.12 bootstrap.py)
 MANAGE := $(PYTHON) manage.py
 
 help: ## 显示可用命令
-	@awk 'BEGIN { FS = ":.*?## " } /^[a-zA-Z_-]+:.*?## / { printf "  \033[36m%-16s\033[0m %s\n", $$1, $$2 }' $(MAKEFILE_LIST)
+	@awk 'BEGIN { FS = ":.*?## " } /^[a-zA-Z_-]+:.*?## / { printf "  \033[36m%-22s\033[0m %s\n", $$1, $$2 }' $(MAKEFILE_LIST)
+
+env: ## 创建生产配置和随机密钥：make env DOMAIN=study.example.com（已有配置不覆盖）
+	@DOMAIN="$(DOMAIN)" $(DEPLOY) env
+
+deploy: ## Docker 一键部署当前代码：构建、备份、初始化/迁移、启动、健康检查
+	@DOMAIN="$(DOMAIN)" $(DEPLOY) deploy
+
+update: ## 快进拉取 Git 后部署；已同步代码或本地测试用 make update PULL=0
+	@ENV_FILE="$(ENV_FILE)" PULL="$(PULL)" sh deploy/update.sh
+
+build: ## 只构建 Docker 镜像，不停服
+	@$(DEPLOY) build
+
+start: ## 启动已部署容器，等待健康检查（首次请用 deploy）
+	@$(DEPLOY) start
+
+stop: ## 停止 Docker 服务，保留数据
+	@$(DEPLOY) stop
+
+restart: ## 重启应用容器，等待健康检查
+	@$(DEPLOY) restart
+
+down: ## 删除容器与网络，保留数据库和备份卷
+	@$(DEPLOY) down
+
+status: ## 查看 Docker 服务状态
+	@$(DEPLOY) status
+
+db-shell: ## 进入 PostgreSQL psql（应用账号）
+	@$(DEPLOY) db-shell
+
+db-logs: ## 查看 PostgreSQL 容器日志
+	@$(DEPLOY) db-logs
+
+db-update: ## 更新 PostgreSQL 16 小版本镜像：停应用、备份、更新数据库并恢复服务
+	@$(DEPLOY) db-update
+
+logs: ## 持续查看最近 100 行容器日志（Ctrl+C 退出）
+	@$(DEPLOY) logs
+
+check-deploy: ## 检查线上安全配置和容器健康
+	@$(DEPLOY) check
+
+manage: ## 在运行容器中执行 Django 命令：make manage ARGS='showmigrations'
+	@$(DEPLOY) manage $(ARGS)
+
+admin: ## 在 Docker 中交互创建管理员（无默认账号）
+	@$(DEPLOY) manage createsuperuser
+
+app-shell: ## 进入 Docker 内的 Django shell
+	@$(DEPLOY) manage shell
+
+container-shell: ## 进入容器 sh
+	@$(DEPLOY) sh
+
+backup: ## 备份线上数据库、私有资料与部署记录（pg_dump 一致快照）
+	@$(DEPLOY) backup
+
+backups: ## 列出独立备份卷中的恢复点
+	@$(DEPLOY) backups
+
+backup-export: ## 导出备份到宿主机：BACKUP=文件名 DEST=/安全目录/文件.tar.gz
+	@BACKUP="$(BACKUP)" DEST="$(DEST)" $(DEPLOY) backup-export
+
+backup-import: ## 校验并导入宿主机备份：FILE=/安全目录/primary-*.tar.gz（不覆盖线上库）
+	@FILE="$(FILE)" $(DEPLOY) backup-import
+
+restore: ## 恢复指定备份：BACKUP=文件名；先校验，再停服、备份当前库并替换
+	@BACKUP="$(BACKUP)" $(DEPLOY) restore
+
+test-deploy: ## 部署脚本与生产配置回归测试（不操作 Docker 或日常库）
+	$(PYTHON) -m unittest discover -s deploy/tests -v
+	$(MANAGE) test config.test_deployment
+
+test-docker: ## Docker 完整演练：初始化、更新保留记录、备份恢复、重建持久化（独立卷）
+	$(PYTHON) deploy/smoke.py
 
 install: ## 初始化环境：建 .venv、装依赖、校验/恢复基础数据（bootstrap.py）
 	$(BOOTSTRAP)
@@ -87,3 +166,6 @@ unihan18-package: ## 重新生成 Unihan 18.0.0 全量属性资料包 01f（辅�
 	$(PYTHON) scripts/build_unihan18_package.py
 
 .PHONY: help install run test test-frontend test-content-sources check makemigrations migrate seed superuser shell repair-data content-data writing-data questionbank-data grammar-data phrases-data mathbook-data chinesebook-data study-topics-data phoneme-audio word-tree ancient-text unihan18-package
+.PHONY: env deploy update build start stop restart down status logs check-deploy manage admin app-shell container-shell backup backups backup-export backup-import restore test-deploy test-docker polyphone-data
+
+.PHONY: db-shell db-logs db-update
