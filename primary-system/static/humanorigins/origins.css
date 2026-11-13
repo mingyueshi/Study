@@ -128,7 +128,7 @@ body:has(.origins) {
 .origins-section-head h2, .origins-section-head > p { margin: 0; }
 .origins-section-head > p { color: var(--origins-muted); font-size: 16px; }
 
-.origins-station-list, .origins-side ol, .origins-clue-list, .origins-time-list,
+.origins-station-list, .origins-station-nav ol, .origins-clue-list, .origins-time-list,
 .origins-sites, .origins-map-key {
   margin: 0;
   padding: 0;
@@ -176,25 +176,23 @@ body:has(.origins) {
 .origins-station-description { color: var(--origins-muted); font-size: 17px; }
 .origins-station-arrow { color: var(--origins-brown); font-size: 24px; text-align: end; }
 
-.origins-layout {
-  display: grid;
-  grid-template-columns: 206px minmax(0, 1fr);
-  align-items: start;
-  gap: clamp(24px, 4vw, 56px);
-}
+.origins-reading { min-width: 0; }
+.origins-reading[data-sl-ready] { column-gap: clamp(20px, 3vw, 44px); row-gap: 16px; }
+.origins-reading[data-sl-collapsed="true"] { column-gap: 14px; }
+.origins-reading[data-sl-ready] .origins-station-nav ol { display: grid; gap: 4px; }
 
-.origins-side {
-  position: sticky;
-  top: 20px;
+.origins-station-nav {
+  margin-bottom: 20px;
   padding: 16px;
   border: 1px solid var(--origins-line);
   border-radius: 16px;
   background: var(--origins-white);
 }
 
-.origins-side .origins-kicker { margin-inline: 10px; }
+.origins-station-nav .origins-kicker { margin: 0 0 8px 10px; }
+.origins-station-nav ol { display: flex; flex-wrap: wrap; gap: 6px 12px; }
 
-.origins-side a {
+.origins-station-nav a {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -204,9 +202,9 @@ body:has(.origins) {
   font-size: 16px;
 }
 
-.origins-side a span { color: var(--origins-brown); font: 700 16px Georgia, serif; }
-.origins-side a:hover { background: var(--origins-cream); }
-.origins-side a[aria-current] { background: #f4e2b5; font-weight: 800; }
+.origins-station-nav a span { color: var(--origins-brown); font: 700 16px Georgia, serif; }
+.origins-station-nav a:hover { background: var(--origins-cream); }
+.origins-station-nav a[aria-current] { background: #f4e2b5; font-weight: 800; }
 
 .origins-article { min-width: 0; }
 
@@ -321,11 +319,11 @@ body:has(.origins) {
   content: "";
 }
 
-.origins-time-list li:nth-child(2n) .origins-time-track::after { background: #31738a; }
+.origins-time-list .origins-time-track::after { background: var(--person-color, #a06330); }
 
 .origins-site-map {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr);
   align-items: center;
   gap: clamp(14px, 3vw, 30px);
 }
@@ -473,10 +471,8 @@ body:has(.origins) {
 
 @media (max-width: 880px) {
   .origins-hero { gap: 22px; }
-  .origins-layout { grid-template-columns: minmax(0, 1fr); gap: 14px; }
-  .origins-side { position: static; padding: 9px; }
-  .origins-side .origins-kicker { display: none; }
-  .origins-side ol { display: flex; flex-wrap: wrap; gap: 2px; }
+  .origins-station-nav { padding: 9px; }
+  .origins-station-nav ol { gap: 2px; }
   .origins-station-list a { grid-template-columns: 46px minmax(0, 1fr) 24px; gap: 1px 14px; }
   .origins-station-number { grid-row: span 2; }
   .origins-station-description { grid-column: 2; }
@@ -490,9 +486,214 @@ body:has(.origins) {
   .origins-clue-list li { grid-template-columns: minmax(0, 1fr); gap: 7px; }
   .origins-clue-number { width: 35px; height: 35px; font-size: 17px; }
   .origins-site-map { grid-template-columns: minmax(0, 1fr); }
-  .origins-china { max-width: 220px; }
+  .origins-china { max-width: 100%; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .origins-station-list a { transition: none; }
 }
+
+/* 迁徙地图与地区证据卡：地图和下方资料共同阅读，无独立导航侧栏。 */
+.origins-atlas-entry { display: flex; align-items: center; gap: 20px; margin-top: 22px; padding: 22px 28px; border: 2px solid #5e9c92; border-radius: 20px; background: #e7f6ed; color: #234e48; }
+.origins-atlas-entry > span:first-child { font-size: 42px; }
+.origins-atlas-entry > span:last-child { margin-left: auto; font-size: 30px; }
+.origins-atlas-entry strong, .origins-atlas-entry small { display: block; }
+.origins-atlas-entry strong { font-size: clamp(22px, 2vw, 30px); }
+.origins-atlas-entry small { margin-top: 5px; font-size: 17px; }
+.origins-atlas-entry:hover { background: #d7f0e2; }
+.origins-atlas { scroll-margin-top: 26px; }
+.origins-atlas h2 { font-size: clamp(28px, 2.6vw, 38px); }
+.origins-atlas p, .origins-population p { max-width: 80em; line-height: 1.85; }
+.origins-identity { padding: 14px 18px; border-left: 4px solid #368576; border-radius: 4px 12px 12px 4px; background: #e8f4ec; color: #244d42 !important; font-size: 18px; }
+.origins-atlas-controls { margin-top: 24px; }
+.origins-atlas-current { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+.origins-atlas-current label { font-size: 19px; }
+.origins-atlas-current strong { display: inline-block; margin-left: 8px; color: #87451c; font-size: clamp(24px, 2.4vw, 34px); }
+.origins-atlas button { min-height: 44px; padding: 7px 13px; border: 1px solid #cbb888; border-radius: 10px; background: #fff9e9; color: #5b4126; font: inherit; cursor: pointer; }
+.origins-atlas button:hover { background: #f5e6b9; }
+.origins-atlas button:disabled { opacity: .45; cursor: default; }
+#atlas-year { display: block; width: 100%; margin: 20px 0 12px; accent-color: #a15a24; cursor: pointer; }
+.origins-atlas-steps { display: flex; flex-wrap: wrap; gap: 8px; }
+.origins-atlas-steps button { font-size: 16px; }
+.origins-atlas-steps button[aria-pressed="true"] { border-color: #80501c; background: #80501c; color: #fff; font-weight: 800; }
+.origins-atlas-summary { min-height: 3.7em; margin: 12px 0; font-size: 19px; font-weight: 650; }
+.origins-world-scroll { overflow-x: auto; border: 1px solid #b8d6d6; border-radius: 18px; background: #e0eef0; }
+.origins-world { position: relative; width: 100%; min-width: 1000px; max-width: 1800px; margin-inline: auto; }
+.origins-world > img { display: block; width: 100%; height: auto; }
+.origins-world-routes { position: absolute; inset: 0; width: 100%; height: 100%; color: #a45420; pointer-events: none; }
+.origins-people-geography { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.origins-marker-line { stroke-width: 1.5; opacity: .7; vector-effect: non-scaling-stroke; }
+.origins-marker-line-unknown { stroke-dasharray: 4 3; }
+.origins-marker-location { stroke-width: 1.5; vector-effect: non-scaling-stroke; pointer-events: all; cursor: pointer; }
+.origins-hominin-pin {
+  position: absolute; top: var(--y); left: var(--x); z-index: 1; display: grid; gap: 2px;
+  width: 128px; padding: 5px 7px; border: 2px solid var(--person-color); border-radius: 10px;
+  background: #fffef5f5; color: #302d22; transform: translate(-50%, -50%); text-align: center;
+  font-size: 14px; line-height: 1.35; box-shadow: 0 2px 5px #302d2214;
+}
+.origins-hominin-pin strong { display: flex; align-items: center; justify-content: center; gap: 5px; font-size: 16px; }
+.origins-hominin-pin > span { font-size: 13px; }
+.origins-hominin-pin small { color: var(--person-color); font-size: 12px; font-weight: 800; }
+.origins-hominin-dot { display: grid; place-items: center; flex: 0 0 17px; width: 17px; height: 17px; border: 2px solid var(--person-color); border-radius: 50%; background: var(--person-color); color: #fff; font-size: 13px; font-weight: 900; }
+.origins-hominin-pin[data-map-state="unknown"] { border-style: dashed; background: #fffef5ef; }
+.origins-hominin-pin[data-map-state="unknown"] .origins-hominin-dot { background: #fffef5; color: var(--person-color); }
+.origins-hominin-pin:is([data-map-state="unknown"], [data-map-state="last"]) .origins-hominin-dot::after { content: "？"; }
+.origins-hominin-pin[data-map-state="last"] { border-style: double; border-width: 3px; }
+.origins-hominin-pin[aria-current] { z-index: 2; outline: 3px solid var(--person-color); outline-offset: 3px; }
+.origins-hominin-pin:hover { z-index: 3; background: #fff; box-shadow: 0 3px 10px #302d2233; }
+.origins-people-key { display: flex; flex-wrap: wrap; gap: 10px 22px; margin: 18px 0; padding: 0; list-style: none; }
+.origins-people-key li { display: flex; align-items: center; gap: 7px; font-size: 17px; font-weight: 750; }
+.origins-people-key li > span { width: 18px; height: 18px; border-radius: 50%; background: var(--person-color); }
+.origins-map-uncertain { margin-top: 14px; padding: 15px 18px; border: 1px dashed #ab8d57; border-radius: 13px; background: #fff8e6; }
+.origins-map-uncertain h3 { margin: 0 0 10px; font-size: 20px; }
+#atlas-uncertain-records { display: flex; flex-wrap: wrap; gap: 8px; }
+#atlas-uncertain-records button { border-color: var(--person-color); border-style: dashed; color: var(--person-color); font-size: 15px; text-align: left; }
+.origins-marker-detail { margin-top: 14px; padding: 12px; border: 2px solid var(--person-color); border-radius: 11px; background: #fffdf5; }
+.origins-marker-detail h3 { margin: 0 0 8px; color: var(--person-color); }
+.origins-marker-detail > strong { color: var(--person-color); font-size: 17px; }
+.origins-marker-detail p { margin: 8px 0; }
+#atlas-routes { fill: none; stroke: currentColor; stroke-width: 2; stroke-dasharray: 5 3; stroke-linejoin: round; }
+.origins-world-pin { position: absolute; left: var(--x); top: var(--y); display: flex; align-items: center; gap: 5px; transform: translate(-16px, -16px); font-weight: 800; color: #593b20; white-space: nowrap; }
+.origins-world-dot { display: grid; place-items: center; width: 32px; height: 32px; flex: 0 0 32px; border: 2px solid #fffdf3; border-radius: 50%; background: #b35a24; color: #fff; box-shadow: 0 1px 6px #382c2450; font-size: 16px; }
+.origins-world-label { border-radius: 6px; padding: 2px 6px; background: #fffcf0ed; font-size: clamp(14px, 1vw, 18px); }
+.origins-world-label strong, .origins-world-label small { display: block; line-height: 1.45; }
+.origins-world-label small { font-size: 13px; font-weight: 650; }
+.origins-world-pin[data-region-link="europe"] .origins-world-label { position: absolute; right: 0; bottom: 37px; }
+.origins-world-pin[data-region-link="australia"] .origins-world-label { position: absolute; right: 37px; }
+.origins-world-pin[data-reached="false"] .origins-world-dot { border-color: #7c7b6c; background: #fffdf4; color: #62604d; box-shadow: none; }
+.origins-world-pin[data-reached="false"] .origins-world-label { color: #62604d; }
+.origins-world-pin[aria-current] .origins-world-dot { outline: 3px solid #246658; outline-offset: 3px; }
+.origins-world-pin[aria-current] .origins-world-label { background: #235e52; color: #fff; }
+.origins-world-legend { display: flex; flex-wrap: wrap; gap: 4px 22px; margin: 10px 0 0; color: #634a2c; font-size: 16px; }
+.origins-atlas-regions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+.origins-atlas-regions a, .origins-region-people a { padding: 8px 12px; border: 1px solid #c7d8ca; border-radius: 9px; background: #eff5ec; color: #31574b; font-size: 17px; font-weight: 700; }
+.origins-atlas-regions a { min-height: 44px; }
+.origins-atlas-regions a[aria-current] { background: #285f52; border-color: #285f52; color: #fff; }
+.origins-region-record { margin-top: 18px; padding: clamp(18px, 2.5vw, 28px); border: 2px solid #83b8a6; border-radius: 16px; background: #f3f9ee; scroll-margin-top: 24px; }
+.origins-region-record h3 { margin: 0 0 8px; font-size: 28px; }
+.origins-region-record h3 span { display: inline-block; margin-left: 12px; color: #725123; font-size: 21px; }
+.origins-region-record h4 { margin: 18px 0 3px; font-size: 21px; }
+.origins-region-status { color: #4b6556; font-size: 16px; font-weight: 700; }
+.origins-region-people { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.origins-region-record .origins-note a { display: inline-block; margin-right: 8px; }
+.origins-populations { display: grid; gap: 16px; margin-top: 12px; }
+.origins-population { padding: 18px 22px; border: 1px solid var(--origins-line); border-radius: 14px; background: #fffdf7; scroll-margin-top: 26px; }
+.origins-population[data-related="true"] { border-color: #4c937b; box-shadow: inset 5px 0 #4c937b; }
+.origins-population header { display: flex; flex-wrap: wrap; gap: 2px 16px; justify-content: space-between; align-items: baseline; }
+.origins-population h3 { margin: 0; font-size: 24px; }
+.origins-population header > span { color: var(--origins-muted); font-size: 17px; }
+.origins-population p { margin: 7px 0; font-size: 18px; }
+.origins-population .origins-population-place { font-size: 16px; color: var(--origins-muted); }
+.origins-population-ending { display: block; margin-top: 8px; color: #714719; font-size: 20px; }
+.origins-population[data-status="living"] .origins-population-ending { color: #27664d; }
+.origins-population-track { height: 18px; margin: 12px 0; border-radius: 10px; background: linear-gradient(90deg, transparent 49.85%, #c7bd9f 49.85%, #c7bd9f 50.15%, transparent 50.15%), #eee9d7; }
+.origins-population-track > span { position: relative; display: block; left: var(--start); width: var(--width); height: 100%; border-radius: inherit; background: #b88242; color: #fff; font-size: 16px; line-height: 18px; }
+.origins-population-track b { position: absolute; right: -9px; top: -4px; display: grid; place-items: center; width: 26px; height: 26px; border: 1px dashed #8b6531; border-radius: 50%; background: #fff9e9; color: #77501e; }
+.origins-population[data-status="living"] .origins-population-track > span { background: #3d856c; }
+.origins-old-map summary { cursor: pointer; font-size: 21px; font-weight: 750; }
+.origins-atlas a:focus-visible, .origins-atlas button:focus-visible, .origins-world-scroll:focus-visible { outline: 3px solid #246658; outline-offset: 4px; }
+.origins-atlas [hidden] { display: none !important; }
+.origins-playback { display: flex; align-items: center; flex-wrap: wrap; gap: 10px 16px; margin-top: 18px; }
+.origins-playback label { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; font-size: 17px; }
+.origins-playback label > span { white-space: nowrap; }
+.origins-playback select { min-height: 44px; max-width: 100%; padding: 6px 9px; border: 1px solid #cbb888; border-radius: 9px; background: #fffdf4; color: #5b4126; font: inherit; }
+#atlas-play { min-width: 145px; border-color: #285f52; background: #285f52; color: #fff; font-weight: 800; }
+#atlas-play:hover { background: #347761; }
+#atlas-progress { color: #725123; font-size: 17px; font-weight: 800; font-variant-numeric: tabular-nums; }
+.origins-atlas-stage { display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; }
+.origins-era-panel { min-width: 0; padding: clamp(18px, 2.5vw, 28px); border: 2px solid #83b8a6; border-radius: 16px; background: #f3f9ee; }
+.origins-era-panel h3 { margin: 12px 0; color: #725123; font-size: 26px; }
+.origins-era-panel h4 { margin: 20px 0 9px; font-size: 20px; }
+.origins-era-panel p { max-width: 70em; font-size: 18px; line-height: 1.8; }
+.origins-era-panel a { color: #285f52; text-decoration: underline; text-underline-offset: .18em; }
+.origins-era-panel .origins-note { font-size: 16px; }
+#atlas-local-people { display: grid; gap: 9px; margin: 0; padding: 0; list-style: none; }
+#atlas-local-people li { padding: 10px 12px; border-left: 4px solid var(--person-color); border-radius: 4px 10px 10px 4px; background: #fffdf4; }
+#atlas-local-people a, #atlas-local-people strong, #atlas-local-people small { display: block; }
+#atlas-local-people a { color: var(--person-color); font-size: 19px; font-weight: 800; }
+#atlas-local-people strong { margin-block: 4px; color: #2f684e; font-size: 16px; }
+#atlas-local-people small { color: #625745; font-size: 14px; line-height: 1.6; }
+#atlas-local-people [data-era-state="before"] { opacity: .65; }
+#atlas-local-people :is([data-era-state="unknown"], [data-era-state="last"]) { border-left-style: dashed; }
+#atlas-local-people [data-era-state="extinct"] { opacity: .75; }
+#atlas-local-people :is([data-era-state="unknown"], [data-era-state="last"], [data-era-state="extinct"]) strong { color: #80552a; }
+.origins-population .origins-population-era { padding: 4px 10px; border-radius: 6px; background: #e8f4ec; color: #285f52; font-size: 16px; font-weight: 750; }
+.origins-population:is([data-era-state="unknown"], [data-era-state="last"], [data-era-state="extinct"]) .origins-population-era { background: #f6ecd3; color: #80552a; }
+#atlas-routes .origins-route-arriving { stroke-dasharray: 1; animation: origins-route-arrive 1.3s ease-out both; }
+@keyframes origins-route-arrive { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  #atlas-routes .origins-route-arriving { animation: none; }
+}
+@media (max-width: 630px) {
+  .origins-atlas-entry { padding: 18px; gap: 12px; }
+  .origins-atlas-entry > span:first-child { font-size: 30px; }
+  .origins-atlas-entry small { font-size: 15px; }
+  .origins-region-record h3 span { display: block; margin: 5px 0 0; font-size: 20px; }
+  .origins-population { padding: 16px; }
+}
+
+/* 观察、对照与选学均在正文中上下排列。 */
+.origins-image-link { display: block; color: var(--origins-brown); text-align: center; }
+.origins-image-link > span { display: inline-block; margin-top: 5px; padding: 5px 12px; border-radius: 7px; background: #f7edd4; font-size: 15px; }
+.origins-image-link:has(img[src$="stone-tools.jpg"]) { max-width: 1000px; margin-inline: auto; }
+.origins-image-link img[src$="stone-tools.jpg"] { aspect-ratio: 2.2; object-fit: cover; object-position: center bottom; }
+.origins-image-link:focus-visible, .origins-family-card summary:focus-visible, .origins-observation summary:focus-visible { outline: 3px solid #246658; outline-offset: 3px; }
+.origins-clue-list .origins-figure { margin-top: 16px; }
+.origins-observation { margin-top: 12px; border-top: 1px dashed #c9b98f; padding: 12px 5px 0; }
+.origins-observation summary { cursor: pointer; color: #63441d; font-weight: 750; font-size: 18px; }
+.origins-observation p { margin: 10px 0 3px; font-size: 18px; line-height: 1.8; }
+.origins-marker-detail { scroll-margin-block: 28px; padding: 18px 22px; box-shadow: 0 5px 18px #68542a12; }
+.origins-marker-detail:focus { outline: 3px solid #285f52; outline-offset: 4px; }
+.origins-marker-detail .origins-kicker { font-size: 15px; }
+.origins-map-return { display: block; margin-top: 15px; }
+.origins-comparison > h3 { margin-top: 28px; font-size: 24px; }
+.origins-comparison-times { padding: 0; margin: 18px 0 28px; list-style: none; }
+.origins-comparison-times li { margin-top: 15px; }
+.origins-comparison-times a { color: var(--person-color); font-size: 19px; font-weight: 800; }
+.origins-comparison-times small { display: block; color: var(--origins-muted); font-size: 15px; }
+.origins-comparison-times .origins-population-track { margin: 5px 10px 4px 0; }
+.origins-comparison-times .origins-population-track > span { background: var(--person-color); }
+.origins-family-cards { display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; }
+.origins-family-card { border: 1px solid var(--origins-line); border-left: 5px solid var(--person-color); border-radius: 12px; background: #fffdf5; scroll-margin-top: 28px; }
+.origins-family-card:target { outline: 3px solid #e4bd57; outline-offset: 3px; }
+.origins-family-card summary { display: flex; flex-wrap: wrap; align-items: center; gap: 5px 18px; padding: 15px 18px; cursor: pointer; }
+.origins-family-card summary strong { display: flex; align-items: center; gap: 8px; color: var(--person-color); font-size: 23px; }
+.origins-family-card summary strong span { width: 14px; height: 14px; background: var(--person-color); border-radius: 50%; }
+.origins-family-card summary > span { color: var(--origins-muted); font-size: 16px; }
+.origins-family-card summary em { margin-left: auto; color: #6a532c; font-size: 15px; font-style: normal; text-decoration: underline; }
+.origins-family-card[open] summary em { display: none; }
+.origins-family-card > div { padding: 0 18px 18px; }
+.origins-family-card p { margin: 10px 0; line-height: 1.8; }
+.origins-family-ending { color: var(--origins-brown); font-weight: 750; }
+.origins-family-map-link { display: block; width: fit-content; max-width: 100%; margin: 14px 0 9px; padding: 8px 14px; border: 1px solid #bad3c2; border-radius: 8px; background: #edf7ef; color: #245c4a; font-weight: 750; }
+.origins-resources ul { display: grid; gap: 12px; padding: 0; list-style: none; }
+.origins-resources li { padding: 15px 18px; background: #eef6ec; border-radius: 12px; }
+.origins-resources h3 { margin: 0; font-size: 21px; }
+.origins-resources h3 a { color: #285f52; text-decoration: underline; text-underline-offset: .2em; }
+.origins-resources h3 span { display: inline-block; color: #63441d; font-size: 14px; margin-left: 6px; }
+.origins-resources li p { margin: 8px 0 0; font-size: 18px; }
+.origins-image-dialog { width: min(1200px, calc(100% - 24px)); max-height: 92dvh; padding: clamp(16px, 3vw, 28px); border: 2px solid #bca16b; border-radius: 18px; background: #fffef8; color: #302d22; }
+.origins-image-dialog::backdrop { background: #182d27bd; }
+.origins-image-dialog header { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; align-items: center; margin-bottom: 15px; }
+.origins-image-dialog h2 { margin: 0; font-size: 25px; }
+.origins-image-dialog button { min-height: 44px; padding: 8px 15px; border: 1px solid #bca16b; border-radius: 8px; background: #f7edd4; color: #593f22; font: inherit; cursor: pointer; }
+.origins-image-dialog > img { display: block; width: 100%; max-height: 65dvh; object-fit: contain; }
+.origins-image-dialog > p { font-size: 17px; line-height: 1.8; }
+.origins-image-dialog > a { color: #285f52; text-decoration: underline; }
+body:has(.origins-image-dialog[open]) { overflow: hidden; }
+@media (max-width: 630px) {
+  .origins-marker-detail, .origins-family-card > div { padding: 14px; }
+  .origins-family-card summary { padding: 12px 14px; }
+  .origins-family-card summary em { margin-left: 0; }
+}
+
+.origins-china { width: min(100%, 420px); }
+.origins-site-pin { position: absolute; left: var(--x); top: var(--y); display: flex; gap: 4px; transform: translate(-50%, -50%); }
+.origins-site-pin .origins-pin-label { min-width: 36px; height: 36px; border: 2px solid #fffdf4; background: var(--person-color, #815027); box-shadow: 0 2px 5px #302d222b; text-decoration: none; }
+.origins-site-pin a:focus-visible { outline: 3px solid #246658; outline-offset: 3px; }
+.origins-linked-site { border-left: 5px solid var(--person-color) !important; }
+.origins-related-links { display: flex; flex-wrap: wrap; gap: 8px 12px; margin-top: 16px; }
+.origins-related-links a { display: inline-flex; align-items: center; min-height: 44px; max-width: 100%; padding: 8px 12px; border: 1px solid #bad3c2; border-radius: 8px; background: #edf7ef; color: #245c4a; font-size: 17px; font-weight: 750; text-decoration: none; }
+.origins-related-links a:hover { background: #dceee1; }
+.origins-related-links a:focus-visible { outline: 3px solid #246658; outline-offset: 3px; }
+.origins-site-return { display: inline-block; margin-top: 12px; padding: 5px 0; color: var(--origins-brown); font-size: 16px; font-weight: 750; text-decoration: underline; text-underline-offset: .2em; }

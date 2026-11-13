@@ -1,0 +1,40 @@
+<section id="origins-comparison" class="origins-panel origins-comparison" aria-labelledby="origins-comparison-heading">
+  <p class="origins-kicker">从家谱走到地图</p>
+  <h2 id="origins-comparison-heading">{{ station.comparison.title }}</h2>
+  <p>{{ station.comparison.intro }}</p>
+
+  {% include 'humanorigins/_figure.html' with figure=station.comparison.figure lazy=True %}
+
+  <h3>{{ station.comparison.timeline_title }}</h3>
+  <p>{{ station.comparison.timeline_note }}</p>
+  <div class="origins-time-axis" aria-hidden="true"><span>约 40 万年前</span><span>约 20 万年前</span><span>今天</span></div>
+  <ul class="origins-comparison-times">
+    {% for card in comparison_groups %}
+    <li style="--person-color: {{ card.person.color }}">
+      <a href="#family-{{ card.group }}">{{ card.person.label }} ↓</a>
+      <div class="origins-population-track" aria-hidden="true"><span style="--start: {{ card.start }}%; --width: {{ card.width }}%">{% if card.person.oldest > 400000 %}←{% endif %}{% if card.person.status == 'unknown' %}<b>？</b>{% endif %}</span></div>
+      <small>{{ card.person.period }}</small>
+    </li>
+    {% endfor %}
+  </ul>
+
+  <div class="origins-family-cards">
+    {% for card in comparison_groups %}
+    <details id="family-{{ card.group }}" class="origins-family-card" style="--person-color: {{ card.person.color }}">
+      <summary><strong><span aria-hidden="true"></span>{{ card.person.label }}</strong><span>{{ card.person.period }}</span><em>展开比较</em></summary>
+      <div>
+        <p><strong>在哪里发现：</strong>{{ card.person.place }}</p>
+        <p><strong>留下什么线索：</strong>{{ card.evidence }}</p>
+        <p><strong>怎样比较：</strong>{{ card.observation }}</p>
+        <p class="origins-family-ending">{{ card.person.ending }}</p>
+        <a class="origins-family-map-link" href="{% url 'human-origins-station' 'migration' %}?year={{ card.year }}&amp;marker={{ card.marker }}#migration-atlas">去迁徙地图找{{ card.person.label }} ↗</a>
+        <a class="origins-source-link" href="#source-{{ card.source }}">查这组人群的出处 ↘</a>
+        {% if card.sites %}<nav class="origins-related-links" aria-label="{{ card.person.label }}在中国的实物线索">
+          {% for site in card.sites %}<a href="{% url 'human-origins-station' 'china-sites' %}#{{ site.anchor }}">看{{ site.title }}的实物 ↗</a>{% endfor %}
+        </nav>{% endif %}
+      </div>
+    </details>
+    {% endfor %}
+  </div>
+  <p class="origins-note">{{ station.comparison.note }}</p>
+</section>

@@ -5,20 +5,71 @@
 """
 import calendar
 from datetime import timedelta
+from urllib.parse import urlencode
 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.db.models import Sum
 from django.shortcuts import redirect, render
+from django.urls import reverse
 from django.utils import timezone
 from django.views.decorators.cache import never_cache
-from django.views.decorators.http import require_POST
+from django.views.decorators.http import require_GET, require_POST
 
 from . import services
+from .categories import CATEGORY_CODES, OTHER_CATEGORY, REWARD_CATEGORIES, canonical_category
 from .models import PointEvent, Redemption, RewardItem
 from .rules import EVENT_RULES
 
 # 日历表头：周一 → 周日
 WEEK_HEADERS = ('一', '二', '三', '四', '五', '六', '日')
+
+
+def _shop_url(category='', *, anchor=False):
+    category = canonical_category(category)
+    path = reverse('rewards-shop')
+    if category in CATEGORY_CODES or category == 'other':
+        path += '?' + urlencode({'category': category})
+    return path + ('#reward-shop' if anchor else '')
+
+
+def _shop_context(user, balance, category=''):
+    rows = [{'item': item, 'can_redeem': user.is_authenticated and balance >= item.cost}
+            for item in RewardItem.objects.filter(is_active=True)]
+    grouped = {code: [] for code in (*CATEGORY_CODES, 'other')}
+    for row in rows:
+        code = canonical_category(row['item'].category)
+        code = code if code in CATEGORY_CODES else 'other'
+        grouped[code].append(row)
+    categories = (*REWARD_CATEGORIES, OTHER_CATEGORY) if grouped['other'] else REWARD_CATEGORIES
+    category = canonical_category(category)
+    selected = category if category in {code for code, _name, _icon in categories} else ''
+    filters = [{'code': code, 'name': name, 'icon': icon, 'count': len(grouped[code]),
+                'url': _shop_url(code, anchor=True)} for code, name, icon in categories]
+    groups = [{**entry, 'items': grouped[entry['code']]} for entry in filters
+              if grouped[entry['code']] and (not selected or selected == entry['code'])]
+    return {
+        'items': grouped[selected] if selected else rows,
+        'category_filters': filters, 'category_groups': groups,
+        'selected_category': selected,
+        'selected_category_name': next((entry['name'] for entry in filters if entry['code'] == selected), ''),
+        'all_categories_url': _shop_url(anchor=True),
+        'shop_login_url': reverse('login') + '?' + urlencode({'next': _shop_url(selected)}),
+        'total_rewards': len(rows), 'has_rewards': bool(rows),
+        'redemptions': Redemption.objects.filter(user=user)[:10] if user.is_authenticated else Redemption.objects.none(),
+    }
+
+
+@never_cache
+@require_GET
+def shop(request):
+    balance = None
+    if request.user.is_authenticated:
+        balance = PointEvent.objects.filter(user=request.user).aggregate(value=Sum('points'))['value'] or 0
+    return render(request, 'incentives/shop.html', {
+        'summary': {'balance': balance}, 'shop_page': True,
+        **_shop_context(request.user, balance, request.GET.get('category', '')),
+    })
 
 
 def _calendar_rows(checked_dates, today):
@@ -71,13 +122,12 @@ def rewards(request):
         'checkin': {'current': stats['streak_current'], 'best': stats['streak_best'],
                     'days': stats['checkin_days']},
         'checked_today': checkin['checked_today'],
+        'calendar_month': today,
         'calendar_rows': _calendar_rows(checkin['dates'], today),
         'week_headers': WEEK_HEADERS,
         'badges': badges,
         'earned_badges': sum(1 for badge in badges if badge['earned']),
-        'items': [{'item': item, 'can_redeem': balance >= item.cost}
-                  for item in RewardItem.objects.filter(is_active=True)],
-        'redemptions': Redemption.objects.filter(user=user)[:10],
+        **_shop_context(user, balance),
         'events': PointEvent.objects.filter(user=user)[:20],
         'rules_rows': rules_rows,
     }
@@ -88,15 +138,18 @@ def rewards(request):
 @login_required
 @require_POST
 def redeem_view(request):
+    destination = 'rewards-shop' if request.POST.get('return_to') == 'shop' else 'rewards'
+    if destination == 'rewards-shop':
+        destination = _shop_url(request.POST.get('category', ''))
     try:
         item_id = int(request.POST.get('item', ''))
     except ValueError:
         messages.error(request, '没有选中要兑换的奖励。')
-        return redirect('rewards')
+        return redirect(destination)
     try:
         redemption = services.redeem(request.user, item_id)
     except services.RedemptionError as error:
         messages.error(request, str(error))
     else:
         messages.success(request, f'兑换成功！「{redemption.item_name}」已提交，请告诉家长来核销。')
-    return redirect('rewards')
+    return redirect(destination)

@@ -8,8 +8,8 @@
     </div>
     {% if card.week %}<p class="overview-week">{{ card.week }}</p>{% endif %}
     {% if card.footnote %}<p class="overview-footnote">{{ card.footnote }}</p>{% endif %}
-    {% if card.latest %}<a class="overview-latest" href="{{ card.latest.url }}"><span>{{ card.latest.title }}</span><small>{{ card.latest.note }} · {{ card.latest.when|date:'n月j日 H:i' }}</small></a>{% endif %}
-    <a class="overview-go" href="{{ card.url }}">{{ card.url_label }}</a>
+    {% if card.latest and not hide_latest %}<a class="overview-latest" href="{{ card.latest.url }}"><span>{{ card.latest.title }}</span><small>{{ card.latest.note }} · {{ card.latest.when|date:'n月j日 H:i' }}</small></a>{% endif %}
+    <a class="overview-go" href="{% if card.key == 'textbook' and textbook_records_url %}{{ textbook_records_url }}{% else %}{{ card.url }}{% endif %}">{% if card.key == 'textbook' and textbook_records_url %}翻看教材记录 →{% else %}{{ card.url_label }}{% endif %}</a>
   </section>
   {% endfor %}
 </div>

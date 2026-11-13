@@ -10,6 +10,7 @@
 
 .gm-facts {
   margin-top: 26px; background: var(--card); border-radius: 22px;
+  border: 1px solid var(--atlas-border); border-top: 5px solid #76a68e;
   padding: 24px 30px 18px; box-shadow: 0 8px 20px rgba(51, 65, 59, 0.1);
 }
 .gm-facts h2 { font-size: 24px; margin-bottom: 12px; }
@@ -32,6 +33,7 @@
 
 .gm-all-stations {
   margin-top: 26px; background: var(--card); border-radius: 18px;
+  border: 1px solid var(--atlas-border);
   padding: 4px 22px 20px; box-shadow: 0 8px 20px rgba(51, 65, 59, 0.1);
 }
 .gm-all-stations summary {

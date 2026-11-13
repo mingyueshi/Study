@@ -7,6 +7,7 @@
 """
 from django.conf import settings
 from django.db import models
+from .categories import CATEGORY_CHOICES
 
 
 class PointEvent(models.Model):
@@ -70,6 +71,7 @@ class RewardItem(models.Model):
     """家长在后台配置的兑换奖励（如「公园郊游」），孩子用积分兑换。"""
 
     name = models.CharField('奖励名称', max_length=50)
+    category = models.CharField('奖励分类', max_length=20, choices=CATEGORY_CHOICES, blank=True, default='')
     icon = models.CharField('图标', max_length=16, default='🎁')
     cost = models.PositiveIntegerField('所需积分')
     note = models.CharField('说明', max_length=200, blank=True)

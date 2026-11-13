@@ -1,0 +1,7 @@
+{% load static %}
+<article class="reward-card{% if user.is_authenticated and not row.can_redeem %} locked{% endif %}">
+  <span class="reward-icon" aria-hidden="true">{{ row.item.icon }}</span><h4>{{ row.item.name }}</h4><span class="cost">{{ row.item.cost }} <small>积分</small></span>{% if row.item.note %}<p class="note">{{ row.item.note }}</p>{% endif %}
+  {% if user.is_authenticated %}
+  <form class="reward-redeem-form" method="post" action="{% url 'rewards-redeem' %}">{% csrf_token %}<input type="hidden" name="item" value="{{ row.item.pk }}">{% if shop_page %}<input type="hidden" name="return_to" value="shop">{% if selected_category %}<input type="hidden" name="category" value="{{ selected_category }}">{% endif %}{% endif %}<button class="button small" type="submit" {% if not row.can_redeem %}disabled{% endif %}>{% if row.can_redeem %}兑换这份奖励 <span aria-hidden="true">→</span>{% else %}积分还差一点{% endif %}</button></form>
+  {% else %}<a class="button small" href="{{ shop_login_url }}">登录后兑换 <span aria-hidden="true">→</span></a>{% endif %}
+</article>

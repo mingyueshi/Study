@@ -50,7 +50,7 @@
     const name = c.name;
     const isChina = name === 'China' || name === 'Taiwan';
     const color = continentColor[continentOf(name)] || '#d9d2b8';
-    return `<path class="gm-country${isChina ? ' gm-country--china' : ''}" data-id="${esc(name)}" tabindex="0" role="button" ` +
+    return `<path class="gm-country${isChina ? ' gm-country--china' : ''}" data-id="${esc(name)}" data-continent="${esc(continentOf(name))}" tabindex="0" role="button" ` +
       `aria-label="${esc(zhOf(name))}" style="--continent:${color}" fill-rule="evenodd" d="${paths.get(name)}"/>`;
   }).join('');
 
@@ -58,7 +58,7 @@
     const at = mp(m.at[0], m.at[1]);
     const isChina = m.name === 'China';
     const cls = isChina ? ' gm-cn-label' : '';
-    return `<text class="gm-major-label${cls}" x="${at[0].toFixed(1)}" y="${at[1].toFixed(1)}" text-anchor="middle">${esc(zhOf(m.name))}</text>`;
+    return `<text class="gm-major-label${cls}" data-continent="${esc(continentOf(m.name))}" x="${at[0].toFixed(1)}" y="${at[1].toFixed(1)}" text-anchor="middle">${esc(zhOf(m.name))}</text>`;
   }).join('');
 
   const featureSVG = () => FEATURES.map((f) => {
@@ -142,13 +142,58 @@
     const p = A.get(id);
     return p.category === 'country' ? `它属于${p.context}` : `看看${p.where}一带`;
   };
-  window.GMMapUI.mount({
+  const continentChoices = $('gm-continent');
+  const continentInfo = $('gm-continent-info');
+  const params = new URLSearchParams(location.search);
+  let selectedContinent = CONTINENTS.some(c => c.id === params.get('continent')) ? params.get('continent') : '';
+  continentChoices.innerHTML = [{ id: '', name: '全部大洲', color: '#dcefe5' }, ...CONTINENTS].map(c =>
+    `<button type="button" data-continent="${esc(c.id)}" style="--choice-color:${esc(c.color)}" aria-pressed="false">` +
+    `<span aria-hidden="true"></span>${esc(c.name)}</button>`).join('');
+
+  function showContinent(layer, quiz) {
+    const continent = CONTINENTS.find(c => c.id === selectedContinent);
+    for (const button of continentChoices.querySelectorAll('button')) {
+      button.disabled = quiz;
+      button.setAttribute('aria-pressed', String(button.dataset.continent === selectedContinent && layer === 'continent' && !quiz));
+    }
+    const visible = continent && layer === 'continent' && !quiz;
+    continentInfo.hidden = !visible;
+    for (const el of svg.querySelectorAll('[data-continent]')) {
+      el.classList.toggle('is-continent', Boolean(visible && el.dataset.continent === continent.id));
+      el.classList.toggle('is-outside-continent', Boolean(visible && el.dataset.continent !== continent.id));
+    }
+    root.classList.toggle('gm-continent-selected', Boolean(visible));
+    if (!visible) return;
+    continentInfo.style.setProperty('--continent-accent', continent.color);
+    continentInfo.innerHTML =
+      '<p class="gm-card-eyebrow">大洲重点 · 图上加深边线的部分</p>' +
+      `<h2 class="gm-card-title">${esc(continent.name)}</h2><p>${esc(continent.location)}</p>` +
+      '<dl class="gm-continent-facts">' + continent.facts.map(f =>
+        `<div><dt>${esc(f.title)}</dt><dd>${esc(f.text)}</dd></div>`).join('') + '</dl>' +
+      `<p class="gm-media-observe"><b>看图想一想</b> ${esc(continent.observe)}</p>` +
+      '<p class="gm-continent-links">在图上找</p><div class="gm-chips">' + continent.places.map(id => {
+        const p = A.get(id);
+        return `<a class="gm-card-link" href="${esc(A.mapHref(p, { continent: continent.id }))}">${esc(p.name)}</a>`;
+      }).join('') + '</div>' +
+      '<p class="gm-card-foot">跨洲国家按本图所属洲显示。' +
+      `<a href="${esc(continent.source)}" target="_blank" rel="noopener noreferrer">内容出处（需联网）</a></p>`;
+  }
+
+  const mapUI = window.GMMapUI.mount({
     root, svg, map: 'world', layers: LAYERS, pool: POOL, openCard, hintFor,
+    onLayerChange: showContinent,
     legends: {
       continent: CONTINENTS,
       extreme: [{ name: '地标', color: '#fffdf5' }, { name: '河流', color: KIND_COLOR.river }],
       home: [{ name: '中国', color: '#e2a13c' }]
     }
+  });
+  continentChoices.addEventListener('click', (event) => {
+    const button = event.target.closest('button');
+    if (!button || button.disabled) return;
+    selectedContinent = button.dataset.continent;
+    mapUI.setLayer('continent');
+    mapUI.revealMap();
   });
 
   /* ---------- 静态区块 ---------- */

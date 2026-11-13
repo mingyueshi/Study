@@ -1,0 +1,5 @@
+<a class="learning-recent-card" href="{{ row.url }}">
+  <span class="learning-recent-note">{{ row.note }}</span>
+  <h3>{{ row.title }}</h3>
+  <div class="learning-recent-footer"><time datetime="{{ row.when|date:'c' }}">{{ row.when|date:'n月j日 H:i' }}</time><span>接着学 <span aria-hidden="true">→</span></span></div>
+</a>

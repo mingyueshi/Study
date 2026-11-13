@@ -1,2 +1,26 @@
-{% extends 'base.html' %}{% load static %}{% block title %}学习偏好 · 乐学堂{% endblock %}
-{% block content %}<script src="{% static 'speech.js' %}" defer></script><script src="{% static 'tts.js' %}" defer></script><section class="auth-card"><p class="eyebrow">我的账号 · {{ user.username }}</p><h1>学习偏好</h1><p>设置当前年级，学习广场会优先展示适合你的内容。</p><form method="post" class="stack-form">{% csrf_token %}{{ form.as_p }}<button class="button" type="submit">保存偏好</button></form><h2>点读发音</h2><p>英语跟读使用的发音人保存在本机浏览器里。</p><div class="stack-form"><label for="tts-voice">英语发音人</label><select id="tts-voice"></select></div><a class="back" href="{% url 'password_change' %}">修改密码 →</a></section>{% endblock %}
+{% extends 'accounts/center_base.html' %}{% load static %}
+{% block title %}学习偏好 · 乐学堂{% endblock %}
+{% block center_title %}学习偏好{% endblock %}
+{% block center_description %}一个熟悉的名字，一种喜欢的声音，让学习更自在。{% endblock %}
+{% block center_icon %}<img src="{% static 'icons/footprints.svg' %}" alt="" width="82" height="82">{% endblock %}
+{% block center_content %}
+<script src="{% static 'speech.js' %}" defer></script><script src="{% static 'tts.js' %}" defer></script>
+<div class="account-settings">
+  <section class="account-panel" aria-labelledby="profile-title">
+    <div class="account-panel-heading"><span class="account-step" aria-hidden="true">01</span><div><h2 id="profile-title">认识一下你</h2><p>显示名称和年级跟着账号保存，换一台设备也能用。</p></div><span class="account-scope">随账号保存</span></div>
+    <p class="account-username">登录用户名 <strong>{{ user.username }}</strong></p>
+    <form method="post" class="account-form">{% csrf_token %}
+      {% include 'accounts/form_fields.html' with two_columns=True %}
+      <div class="account-form-actions"><button class="button" type="submit">保存偏好 <span aria-hidden="true">✓</span></button><span>改好以后，记得保存哦。</span></div>
+    </form>
+  </section>
+  <section class="account-panel account-voice-panel" aria-labelledby="voice-title">
+    <div class="account-panel-heading"><span class="account-step" aria-hidden="true">02</span><div><h2 id="voice-title">选一个喜欢的英语声音</h2><p>点读单词、跟读课文时，都用你选好的发音人。</p></div><span class="account-scope">仅当前浏览器</span></div>
+    <div class="account-voice-controls"><div class="account-field"><label for="tts-voice">英语发音人</label><select id="tts-voice" aria-describedby="voice-help"><option value="">使用浏览器默认英语发音</option></select></div><button class="button account-button-secondary" id="tts-preview" type="button" data-say="Hello! Nice to meet you." data-rate="0.9">听听这个声音 <span aria-hidden="true">♪</span></button></div>
+    <p class="account-inline-note" id="voice-help">选择后会自动保存，并读一句英语给你听，不用再点「保存偏好」。可选声音由当前设备提供。</p>
+    <p class="account-speech-status" id="tts-status" role="status"></p>
+    <noscript><p class="account-inline-note">启用浏览器的 JavaScript 后，可以选择英语发音人。</p></noscript>
+  </section>
+  <a class="account-security-link" href="{% url 'password_change' %}"><span class="account-security-icon" aria-hidden="true">⚿</span><span><strong>想换一个密码？</strong><small>去修改密码，下次登录就用新的。</small></span><span aria-hidden="true">→</span></a>
+</div>
+{% endblock %}

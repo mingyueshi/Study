@@ -96,7 +96,7 @@ body:has(.study-topic-frame.color-history, .study-topic-frame .study-atlas, .stu
 }
 
 :where(.study-atlas) :is(h1, h2, h3, h4, p, ul, ol, figure) { margin: 0; padding: 0; }
-.study-atlas .gm-hero { background: var(--green); }
+.study-atlas .gm-hero { background: linear-gradient(135deg, var(--atlas-hero-start), var(--atlas-hero-end)); }
 .study-atlas .gm-intro { font-size: 16px; }
 .study-atlas .gm-stats { font-variant-numeric: tabular-nums; }
 

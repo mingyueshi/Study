@@ -86,7 +86,7 @@ window.GMMapUI = (() => {
     return reset;
   }
 
-  function mount({ root, svg, map, layers, legends, pool, openCard, hintFor }) {
+  function mount({ root, svg, map, layers, legends, pool, openCard, hintFor, onLayerChange }) {
     const $ = (id) => root.querySelector('#' + id);
     const card = $('gm-card');
     const filters = $('gm-filters');
@@ -135,6 +135,7 @@ window.GMMapUI = (() => {
       card.style.setProperty('--accent', layer.accent);
       card.innerHTML = `<p class="gm-card-blank-icon" aria-hidden="true">${esc(layer.icon)}</p>` +
         `<p class="gm-card-blank">${esc(layer.blank)}</p>`;
+      onLayerChange?.(layer.id, Boolean(quiz.queue));
     }
 
     function select(id, el) {
@@ -272,6 +273,7 @@ window.GMMapUI = (() => {
     } else if (params.has('place')) {
       status('这张地图上没找到这个地点。可以从地点索引重新选择。');
     }
+    return { setLayer, revealMap };
   }
 
   function showRouteStop(el, { route, index, step }) {

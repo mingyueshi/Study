@@ -293,6 +293,12 @@ CONTINENTS.forEach((r) => {
   continentIds.add(r.id);
   check(isStr(r.name), '[大洲] 缺少 name: ' + r.id);
   check(isStr(r.hint), '[大洲] 缺少 hint: ' + r.id);
+  check(isStr(r.location) && isStr(r.observe) && !hasBadPunct(r.location + r.observe), '[大洲] 位置与观察问题不完整：' + r.id);
+  check(Array.isArray(r.facts) && r.facts.length === 3 &&
+    r.facts.every(f => isStr(f.title) && isStr(f.text) && !hasBadPunct(f.title + f.text)), '[大洲] 应有三条带标题的重点：' + r.id);
+  check(Array.isArray(r.places) && r.places.length > 0 && new Set(r.places).size === r.places.length &&
+    r.places.every(id => COUNTRY_META[id]?.[1] === r.id), '[大洲] 代表地点应属于本图中的该洲：' + r.id);
+  check(typeof r.source === 'string' && /^https:\/\//.test(r.source), '[大洲] 重点内容应注明来源：' + r.id);
   check(isStr(r.color) && /^#[0-9a-fA-F]{6}$/.test(r.color), '[大洲] color 应为 6 位十六进制: ' + r.id);
 });
 check(Array.isArray(OCEANS) && OCEANS.length === 4, '四大洋应为 4 个，实际 ' + (OCEANS || []).length);

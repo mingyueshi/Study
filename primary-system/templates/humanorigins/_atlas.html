@@ -1,0 +1,108 @@
+{% load static %}
+<section id="migration-atlas" class="origins-panel origins-atlas" aria-labelledby="atlas-heading" data-sites-url="{% url 'human-origins-station' 'china-sites' %}" data-family-url="{% url 'human-origins-station' 'family-tree' %}">
+  <p class="origins-kicker">一张地图，两种线索 · 先看年代，再找地点</p>
+  <h2 id="atlas-heading">{{ station.atlas.title }}</h2>
+  <p>{{ station.atlas.intro }}</p>
+  <p class="origins-identity">{{ station.atlas.identity_note }}</p>
+
+  <div class="origins-atlas-controls" hidden>
+    <div class="origins-atlas-current">
+      <label for="atlas-year">把时间拨到 <strong id="atlas-year-label">今天</strong></label>
+      <div><button type="button" id="atlas-previous" aria-label="查看前一个年代">← 更早</button><button type="button" id="atlas-next" aria-label="查看后一个年代">更晚 →</button></div>
+    </div>
+    <div class="origins-playback">
+      <button type="button" id="atlas-play" aria-pressed="false">{{ station.atlas.playback.play }}</button>
+      <button type="button" id="atlas-restart">↻ 从非洲重新开始</button>
+      <label for="atlas-speed"><span>播放速度</span><select id="atlas-speed">{% for speed in station.atlas.playback.speeds %}<option value="{{ speed.milliseconds }}"{% if speed.milliseconds == station.atlas.playback.default_milliseconds %} selected{% endif %}>{{ speed.label }}</option>{% endfor %}</select></label>
+      <span id="atlas-progress"></span>
+    </div>
+    <p id="atlas-playback-status" class="origins-note" role="status">{{ station.atlas.playback.ready }}</p>
+    <input id="atlas-year" type="range" min="0" max="{{ station.atlas.steps|length|add:'-1' }}" value="{{ station.atlas.steps|length|add:'-1' }}" step="1" aria-describedby="atlas-scale-note">
+    <div class="origins-atlas-steps" aria-label="选择年代">
+      {% for step in station.atlas.steps %}<button type="button" data-atlas-step="{{ forloop.counter0 }}" aria-pressed="false">{{ step.label }}</button>{% endfor %}
+    </div>
+    <p id="atlas-scale-note" class="origins-note">每一格是一个线索节点，格子之间的时间长短不相等。</p>
+    <p id="atlas-step-summary" class="origins-atlas-summary" aria-live="polite"></p>
+  </div>
+
+  <ul class="origins-people-key" aria-label="地图人群颜色图例">
+    {% for person in station.atlas.groups %}<li><span style="--person-color: {{ person.color }}" aria-hidden="true"></span>{{ person.label }}</li>{% endfor %}
+  </ul>
+  <div class="origins-atlas-stage">
+    <div class="origins-map-area">
+    <div id="atlas-map" class="origins-world-scroll" role="region" aria-label="智人迁徙世界地图，可左右滚动" tabindex="0">
+    <div class="origins-world">
+      <img src="{% static station.atlas.basemap %}" width="720" height="292" alt="世界陆地示意底图。地图点位对应下方八个地区的证据记录。">
+      <svg class="origins-world-routes" viewBox="0 0 720 292" aria-hidden="true"><defs><marker id="atlas-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="currentColor"/></marker></defs><g id="atlas-routes"></g></svg>
+      <svg class="origins-people-geography" viewBox="0 0 720 292" aria-hidden="true"><g id="atlas-marker-points"></g></svg>
+      {% for marker in station.atlas.map_markers %}
+      <a class="origins-hominin-pin" href="#population-{{ marker.group }}" data-map-marker="{{ marker.id }}" style="--x: {{ marker.label_x }}%; --y: {{ marker.label_y }}%; --person-color: {{ marker.person.color }}" title="{{ marker.period }}。{{ marker.note }}" aria-controls="atlas-marker-detail">
+        <strong><span class="origins-hominin-dot" aria-hidden="true"></span>{{ marker.person.label }}</strong>
+        <span>{{ marker.place }}</span><small data-map-state-label>代表记录</small>
+      </a>
+      {% endfor %}
+    </div>
+    </div>
+      <section id="atlas-marker-detail" class="origins-marker-detail" hidden tabindex="-1" aria-labelledby="atlas-selected-heading"></section>
+      <p class="origins-world-legend"><span>● 本节点展示的证据</span><span>◇？ 末段线索</span><span>○？ 记录之后 · 灭绝未定</span><span>⇢ 智人扩散方向示意</span></p>
+      <p class="origins-note">{{ station.atlas.map_key.note }}</p>
+      <p id="atlas-map-summary" class="origins-note" role="status"></p>
+    </div>
+    <section class="origins-era-panel" aria-labelledby="atlas-era-heading" hidden>
+      <p class="origins-kicker">跟着年代看线索</p>
+      <h3 id="atlas-era-heading">本年代的发现</h3>
+      <div id="atlas-era-events" aria-live="polite" aria-atomic="true"></div>
+      <h4 id="atlas-local-heading">当地出现过的古人类</h4>
+      <ul id="atlas-local-people"></ul>
+      <p class="origins-note">{{ station.atlas.playback.note }}</p>
+    </section>
+  </div>
+  <section class="origins-map-uncertain" aria-labelledby="atlas-uncertain-heading" hidden>
+    <h3 id="atlas-uncertain-heading">{{ station.atlas.map_key.uncertain_heading }}</h3>
+    <div id="atlas-uncertain-records"></div>
+  </section>
+  <noscript><p class="origins-note">关闭脚本时显示全部代表记录，不按年代筛选。详细内容可从下方地区资料与古人类卡片查看。</p></noscript>
+  <p class="origins-note">窄窗口可左右滑动地图，也可以直接点下面的地区。</p>
+  <nav class="origins-atlas-regions" aria-label="选择地区">
+    {% for region in station.atlas.regions %}<a href="#region-{{ region.id }}" data-region-link="{{ region.id }}" aria-controls="region-{{ region.id }}">{{ forloop.counter }} · {{ region.label }}</a>{% endfor %}
+  </nav>
+
+  <div id="atlas-region-records">
+    {% for region in station.atlas.regions %}
+    <section class="origins-region-record" id="region-{{ region.id }}" data-region-record="{{ region.id }}" aria-labelledby="region-title-{{ region.id }}">
+      <p class="origins-kicker">地区证据卡</p>
+      <h3 id="region-title-{{ region.id }}">{{ region.label }} <span>{{ region.date }}</span></h3>
+      <p class="origins-region-status" data-region-status></p>
+      <p>{{ region.evidence }}</p>
+      <h4>当地出现过哪些古人类？</h4>
+      <p>{{ region.people_note }}</p>
+      <div class="origins-region-people">{% for person in region.people %}<a href="#population-{{ person.id }}">{{ person.label }} · 看生活时段 ↓</a>{% endfor %}</div>
+      <p class="origins-note">查证据：{% for source in region.sources %}<a class="origins-source-link" href="#source-{{ source }}">资料 {{ source }} ↘</a> {% endfor %}</p>
+    </section>
+    {% endfor %}
+  </div>
+  <p class="origins-note">{{ station.atlas.note }} <a class="origins-source-link" href="#source-5">底图出处 ↘</a></p>
+</section>
+
+<section id="origins-populations" class="origins-panel" aria-labelledby="populations-heading">
+  <p class="origins-kicker">出现、共存与消失</p>
+  <h2 id="populations-heading">这些古人类，后来怎么样了？</h2>
+  <p>{{ station.atlas.extinction_note }}</p>
+  <p class="origins-note">下方共用近 40 万年的刻度。直立人更早的部分在左侧截去；色条只表示这里介绍的记录时段，问号表示灭绝时间未定。点地图后，相关人群的卡片会亮起。</p>
+  <div class="origins-time-axis" aria-hidden="true"><span>约 40 万年前</span><span>约 20 万年前</span><span>今天</span></div>
+  <div class="origins-populations">
+    {% for person in atlas_groups %}
+    <section class="origins-population" id="population-{{ person.id }}" data-population="{{ person.id }}" data-status="{{ person.status }}">
+      <header><h3>{{ person.label }}</h3><span>{{ person.period }}</span></header>
+      <p class="origins-population-era" data-population-era hidden></p>
+      <div class="origins-population-track" aria-hidden="true"><span style="--start: {{ person.start }}%; --width: {{ person.width }}%">{% if person.oldest > 400000 %}←{% endif %}{% if person.status == 'unknown' %}<b>？</b>{% endif %}</span></div>
+      <p class="origins-population-place">{{ person.place }}</p>
+      <strong class="origins-population-ending">{{ person.ending }}</strong>
+      <p>{{ person.note }}</p>
+      <a class="origins-source-link" href="#source-{{ person.source }}">看这条记录的出处 ↘</a>
+    </section>
+    {% endfor %}
+  </div>
+</section>
+{{ station.atlas|json_script:'origins-atlas-data' }}
+<script src="{% static 'humanorigins/migration.js' %}?v=4" defer></script>

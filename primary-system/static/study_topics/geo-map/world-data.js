@@ -31,13 +31,97 @@ window.GM_WORLD_LAYERS = [
 
 /* 七大洲：国家按主要部分归入其中之一着色，地跨两洲的国家按习惯划分。 */
 window.GM_CONTINENTS = [
-  { "id": "asia", "name": "亚洲", "color": "#f0c75e", "hint": "世界上面积最大的大洲，我们中国就住在亚洲东部。" },
-  { "id": "europe", "name": "欧洲", "color": "#8fa8d8", "hint": "发达国家多、国家数量也多，与中国隔着亚欧大陆相连。" },
-  { "id": "africa", "name": "非洲", "color": "#d8875f", "hint": "赤道从中间穿过，有世界上最大的沙漠和最长的河流。" },
-  { "id": "northamerica", "name": "北美洲", "color": "#9ec98a", "hint": "美国和加拿大在北边，还有墨西哥与一串中美洲国家。" },
-  { "id": "southamerica", "name": "南美洲", "color": "#b5a0c8", "hint": "亚马孙河与热带雨林的老家，大部分在南半球。" },
-  { "id": "oceania", "name": "大洋洲", "color": "#e8a1a1", "hint": "面积最小的大洲，澳大利亚占去了绝大部分陆地。" },
-  { "id": "antarctica", "name": "南极洲", "color": "#d5dde3", "hint": "地球最南端的大洲，没有国家定居，只有科考站和企鹅。" }
+  {
+    id: 'asia', name: '亚洲', color: '#f0c75e',
+    hint: '世界上面积最大的大洲，我们中国就住在亚洲东部。',
+    location: '大部分位于北半球，东临太平洋，南临印度洋，北临北冰洋；西边与欧洲连成亚欧大陆。',
+    facts: [
+      { title: '大洲之最', text: '亚洲的陆地面积最大，人口也最多。中国、印度和日本都在这里。' },
+      { title: '高山与平原', text: '中部有青藏高原和喜马拉雅山脉，周围分布着广阔的平原，地势高低差别很大。' },
+      { title: '从寒冷到炎热', text: '亚洲从北方冰雪地带一直伸到赤道附近。北部寒冷，南部有热带雨林，东部和南部许多地方受季风影响。' }
+    ],
+    places: ['China', 'India', 'Japan'],
+    observe: '先找到中国，再向西找印度、向东找日本。它们分别靠近哪片海洋？',
+    source: 'https://education.nationalgeographic.org/resource/asia/'
+  },
+  {
+    id: 'europe', name: '欧洲', color: '#8fa8d8',
+    hint: '位于亚欧大陆西部，海岸曲折，半岛和岛屿很多。',
+    location: '全部位于北半球，西临大西洋，北临北冰洋，南面隔着地中海与非洲相望。',
+    facts: [
+      { title: '半岛与海湾', text: '欧洲面积较小，海岸线却很曲折。意大利伸进地中海，样子像一只靴子。' },
+      { title: '平原与山脉', text: '欧洲中部和东部有广阔的平原，南部有阿尔卑斯山脉，北部还有冰川塑造的峡湾。' },
+      { title: '海洋的影响', text: '西部许多地方受大西洋影响，冬天较温和、雨水较多；越往内陆，冬夏温差通常越大。' }
+    ],
+    places: ['France', 'Germany', 'Italy'],
+    observe: '在南边找意大利这只「靴子」。它伸进的海叫什么？海对面是哪一个洲？',
+    source: 'https://education.nationalgeographic.org/resource/europe-physical-geography/'
+  },
+  {
+    id: 'africa', name: '非洲', color: '#d8875f',
+    hint: '赤道从中部穿过，北部有撒哈拉沙漠，东北部有尼罗河。',
+    location: '赤道从中部穿过，西临大西洋，东临印度洋，北面隔着地中海与欧洲相望。',
+    facts: [
+      { title: '炎热的大陆', text: '非洲的大部分陆地位于南北回归线之间，热带范围很广，全年炎热的地方很多。' },
+      { title: '沙漠、雨林与草原', text: '北部的撒哈拉是世界最大的热沙漠；赤道附近有刚果盆地雨林，雨林两侧分布着大片热带草原。' },
+      { title: '高原与河流', text: '非洲高原分布很广，东部有大裂谷和许多湖泊；东北部的尼罗河向北流入地中海。' }
+    ],
+    places: ['Egypt', 'Kenya', 'South Africa'],
+    observe: '从埃及向南找肯尼亚，再找南非。三个地方在赤道的哪一边？',
+    source: 'https://education.nationalgeographic.org/resource/africa-physical-geography/'
+  },
+  {
+    id: 'northamerica', name: '北美洲', color: '#9ec98a',
+    hint: '加拿大、美国和墨西哥在这里，还包括中美洲和加勒比海的许多岛屿。',
+    location: '全部位于北半球，西临太平洋，东临大西洋，北临北冰洋，南部通过狭窄的陆地连接南美洲。',
+    facts: [
+      { title: '西高、中平、东部有山地', text: '西部有落基山脉等高山，中部是开阔的平原，东部有阿巴拉契亚山脉。' },
+      { title: '大河与大湖', text: '密西西比河流经美国中部，五大湖分布在美国与加拿大交界一带。' },
+      { title: '从北极到热带', text: '最北边有冰雪和苔原，南部接近热带。格陵兰岛虽然很大，仍然属于岛屿。' }
+    ],
+    places: ['Canada', 'United States of America', 'Mexico'],
+    observe: '按从北到南的顺序找到加拿大、美国和墨西哥，再看看它们东西两侧的海洋。',
+    source: 'https://education.nationalgeographic.org/resource/north-america-physical-geography/'
+  },
+  {
+    id: 'southamerica', name: '南美洲', color: '#b5a0c8',
+    hint: '亚马孙河与热带雨林的家园，大部分陆地在南半球。',
+    location: '赤道穿过北部，大部分陆地位于南半球，西临太平洋，东临大西洋。',
+    facts: [
+      { title: '西边的长山脉', text: '安第斯山脉沿大陆西侧南北延伸，像一条长长的脊梁。' },
+      { title: '大河与热带雨林', text: '北部的亚马孙河水量很大，流域里有大片热带雨林，最终流入大西洋。' },
+      { title: '高原与草原', text: '东部有巴西高原，东南部有潘帕斯草原；从赤道走向南端，能看到很不一样的自然景色。' }
+    ],
+    places: ['Brazil', 'Peru', 'Argentina'],
+    observe: '先找巴西，再找西边的秘鲁和更南边的阿根廷。哪个国家更靠近太平洋？',
+    source: 'https://education.nationalgeographic.org/resource/south-america-physical-geography/'
+  },
+  {
+    id: 'oceania', name: '大洋洲', color: '#e8a1a1',
+    hint: '面积最小的大洲，包括澳大利亚大陆和太平洋中的许多岛屿。',
+    location: '大部分陆地位于南半球，散布在太平洋中，澳大利亚西侧邻着印度洋。',
+    facts: [
+      { title: '大陆与群岛', text: '澳大利亚大陆占去大部分陆地，新西兰、新几内亚岛和许多太平洋岛屿也在这一带。' },
+      { title: '干燥内陆与沿海', text: '澳大利亚内陆有大片沙漠和草原，东部沿海有大分水岭；新西兰则有高山、火山和冰川。' },
+      { title: '珊瑚与火山', text: '澳大利亚东北海上有大堡礁。太平洋上的一些岛屿由火山形成，还有一些由珊瑚礁构成。' }
+    ],
+    places: ['Australia', 'New Zealand', 'Papua New Guinea'],
+    observe: '找澳大利亚东南方的新西兰。再看看澳大利亚北边的新几内亚岛，哪些地方被海洋隔开？',
+    source: 'https://education.nationalgeographic.org/resource/oceania-physical-geography/'
+  },
+  {
+    id: 'antarctica', name: '南极洲', color: '#d5dde3',
+    hint: '围绕南极点的冰雪大陆，有来自不同国家的科考队。',
+    location: '位于地球最南端，几乎全部在南极圈内，四周被海洋环绕。',
+    facts: [
+      { title: '厚厚的冰盖', text: '绝大部分陆地被冰盖覆盖，冰层下面还有山脉和谷地。' },
+      { title: '寒冷、干燥、多风', text: '南极洲十分寒冷，内陆降水很少。靠近南极点的地方，一年中会经历很长的白昼和黑夜。' },
+      { title: '生命与科考', text: '企鹅、海豹等动物生活在沿岸和周围海域。科考队在这里研究冰雪、气候和海洋。' }
+    ],
+    places: ['Antarctica'],
+    observe: '看看南极洲在地图的哪一边，再找到最北边的北冰洋。南北两极的陆地和海洋有什么不同？',
+    source: 'https://www.antarctica.gov.au/about-antarctica/geography-and-geology/'
+  }
 ];
 
 /* 四大洋：按通行口径采用四大洋。point 为标注位置的 [经度, 纬度]。 */

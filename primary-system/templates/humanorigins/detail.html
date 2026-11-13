@@ -2,11 +2,11 @@
 {% load static %}
 {% block title %}{{ station.title }} · 人类起源 · 乐学堂{% endblock %}
 {% block content %}
-<link rel="stylesheet" href="{% static 'humanorigins/origins.css' %}">
+<link rel="stylesheet" href="{% static 'humanorigins/origins.css' %}?v=4">
 <div class="origins">
   <a class="origins-back" href="{% url 'human-origins' %}">← 人类起源 · 全部学习站</a>
-  <div class="origins-layout">
-    <nav class="origins-side" aria-label="学习站导航">
+  <div class="origins-reading" data-sidebar-layout=".origins-station-nav" data-sidebar-width="250px" data-sidebar-breakpoint="900" data-sidebar-collapsible="true" data-sidebar-collapse-key="humanorigins_navigation_collapsed_v1" data-sidebar-label="专题导航">
+    <nav class="origins-station-nav" aria-label="学习站导航">
       <p class="origins-kicker">考察路线</p>
       <ol>
         {% for item in stations %}
@@ -23,13 +23,25 @@
         <h1>{{ station.title }}</h1>
         <p class="origins-lead">{{ station.opening }}</p>
         <nav class="origins-jumps" aria-label="本页小节">
+          {% if station.atlas %}<a href="#migration-atlas">年代地图 ↓</a><a href="#origins-populations">古人类何时消失 ↓</a>{% endif %}
+          {% if station.comparison %}<a href="#origins-comparison">七组人群对照 ↓</a>{% endif %}
+          {% if station.map_pins %}<a href="#origins-sites-heading">遗址地图 ↓</a>{% endif %}
           <a href="#origins-clues">看线索 ↓</a>
           <a href="#origins-quiz">做判断 ↓</a>
+          {% if station.resources %}<a href="#origins-resources">博物馆选学 ↓</a>{% endif %}
           <a href="#origins-sources">查出处 ↓</a>
         </nav>
       </header>
 
-      {% include 'humanorigins/_figure.html' with figure=station.figures.0 %}
+      {% if station.atlas %}
+        {% include 'humanorigins/_atlas.html' %}
+        <details class="origins-panel origins-old-map">
+          <summary>再比一比：更早的直立人迁徙</summary>
+          {% include 'humanorigins/_figure.html' with figure=station.figures.0 %}
+        </details>
+      {% else %}
+        {% include 'humanorigins/_figure.html' with figure=station.figures.0 %}
+      {% endif %}
       {% for figure in station.figures|slice:'1:' %}
         {% include 'humanorigins/_figure.html' with lazy=True %}
       {% endfor %}
@@ -44,43 +56,47 @@
           {% for bar in station.timeline.bars %}
           <li>
             <div><strong>{{ bar.label }}</strong><a href="#source-{{ bar.source }}">{{ bar.period }} ↘</a></div>
-            <span class="origins-time-track" aria-hidden="true" style="--start: {{ bar.start }}%; --end: {{ bar.end }}%"></span>
+            <span class="origins-time-track" aria-hidden="true" style="--start: {{ bar.start }}%; --end: {{ bar.end }}%;{% if bar.color %} --person-color: {{ bar.color }};{% endif %}"></span>
           </li>
           {% endfor %}
         </ul>
       </section>
       {% endif %}
 
+      {% if station.comparison %}{% include 'humanorigins/_comparison.html' %}{% endif %}
+
       {% if station.map_pins %}
       <section class="origins-panel" aria-labelledby="origins-sites-heading">
         <p class="origins-kicker">在地图上找一找</p>
-        <h2 id="origins-sites-heading">两地，三个发现</h2>
+        <h2 id="origins-sites-heading">{{ station.site_map.title }}</h2>
         <div class="origins-site-map">
           <div class="origins-china">
-            <img src="{% static 'poetry/china-map.svg' %}" width="773" height="892" alt="中国遗址示意图。元谋在云南，北京人和田园洞人的发现地点都在北京周口店一带。" loading="lazy">
-            {% for pin in station.map_pins %}
-            <span class="origins-pin" aria-hidden="true" style="--x: {{ pin.x }}%; --y: {{ pin.y }}%">{{ pin.label }}</span>
+            <img src="{% static 'poetry/china-map.svg' %}" width="773" height="892" alt="{{ station.site_map.alt }}" loading="lazy">
+            {% for pin in china_pins %}
+            <div class="origins-site-pin" style="--x: {{ pin.x }}%; --y: {{ pin.y }}%">
+              {% for site in pin.records %}<a class="origins-pin-label" href="#{{ site.anchor }}" aria-label="{{ site.number }} · {{ site.title }}，查看线索"{% if site.person %} style="--person-color: {{ site.person.color }}"{% endif %}>{{ site.number }}</a>{% endfor %}
+            </div>
             {% endfor %}
           </div>
-          <ol class="origins-sites" aria-label="遗址按年代由早到晚">
-            {% for clue in station.clues %}
-            <li><a href="#clue-{{ forloop.counter }}">
+          <ol class="origins-sites" aria-label="{{ station.site_map.list_label }}">
+            {% for clue in reading_clues %}
+            <li><a href="#{{ clue.anchor }}">
               <span class="origins-pin-label" aria-hidden="true">{{ forloop.counter }}</span>
               <span><strong>{{ clue.title }}</strong><small>{{ clue.place }}</small><small>{{ clue.period }}</small></span>
             </a></li>
             {% endfor %}
           </ol>
         </div>
-        <p class="origins-note">地点为示意。周口店第 1 地点和田园洞靠得很近，图上共用一个标记。列表按年代由早到晚排列。</p>
+        <p class="origins-note">{{ station.site_map.note }}</p>
       </section>
       {% endif %}
 
       <section id="origins-clues" class="origins-clues" aria-labelledby="origins-clues-heading">
         <p class="origins-kicker">观察和解释</p>
-        <h2 id="origins-clues-heading">看看这三条线索</h2>
+        <h2 id="origins-clues-heading">看看这些线索</h2>
         <ol class="origins-clue-list">
-          {% for clue in station.clues %}
-          <li id="clue-{{ forloop.counter }}">
+          {% for clue in reading_clues %}
+          <li id="{{ clue.anchor }}"{% if clue.person %} class="origins-linked-site" style="--person-color: {{ clue.person.color }}"{% endif %}>
             <span class="origins-clue-number" aria-hidden="true">0{{ forloop.counter }}</span>
             <div>
               <h3>{{ clue.title }}</h3>
@@ -90,11 +106,19 @@
                 <dt>它能说明什么</dt><dd>{{ clue.meaning }}</dd>
               </dl>
               <a class="origins-source-link" href="#source-{{ clue.source }}">看这条线索的出处 ↘</a>
+              {% for source in clue.supplementary_sources %}<a class="origins-source-link" href="#source-{{ source }}">补充资料 {{ source }} ↘</a>{% endfor %}
+              {% if clue.figure %}{% include 'humanorigins/_figure.html' with figure=clue.figure lazy=True %}{% endif %}
+              {% if clue.person %}<nav class="origins-related-links" aria-label="{{ clue.title }}的关联线索">
+                <a href="{% url 'human-origins-station' 'family-tree' %}#family-{{ clue.group }}">家谱里的{{ clue.person.label }} ↗</a>
+                <a href="{% url 'human-origins-station' 'migration' %}?year={{ clue.year }}&amp;marker={{ clue.marker }}#migration-atlas">在年代地图找{{ clue.title }} ↗</a>
+              </nav>{% endif %}
+              {% if station.map_pins %}<a class="origins-site-return" href="#origins-sites-heading">↑ 回遗址地图</a>{% endif %}
             </div>
           </li>
           {% endfor %}
         </ol>
       </section>
+
 
       <section id="origins-quiz" class="origins-panel origins-quiz" aria-labelledby="origins-quiz-heading">
         <p class="origins-kicker">证据小挑战</p>
@@ -115,6 +139,18 @@
         <h2 id="origins-takeaway-heading">手记里记一句</h2>
         <p>{{ station.takeaway }}</p>
       </section>
+
+      {% if station.resources %}
+      <section id="origins-resources" class="origins-panel origins-resources" aria-labelledby="origins-resources-heading">
+        <p class="origins-kicker">带着问题去博物馆</p>
+        <h2 id="origins-resources-heading">选学：再找一条线索</h2>
+        <p>本页图片和说明可以离线阅读。下面的选学资源需联网，打开新页面后可以随时回到本站。</p>
+        <ul>{% for resource in guided_resources %}<li>
+          <h3><a href="{{ resource.url }}" target="_blank" rel="noopener noreferrer">{{ resource.title }} ↗</a> <span>需联网</span></h3>
+          <p>{{ resource.prompt }}</p>
+        </li>{% endfor %}</ul>
+      </section>
+      {% endif %}
 
       <section class="origins-sources" id="origins-sources" aria-labelledby="origins-sources-heading">
         <h2 id="origins-sources-heading">资料与图像出处</h2>
@@ -138,7 +174,14 @@
         <a href="{% url 'human-origins' %}"><small>五站走完啦</small>回到专题首页 ↗</a>
         {% endif %}
       </nav>
+      <dialog id="origins-image-dialog" class="origins-image-dialog" aria-labelledby="origins-image-heading">
+        <header><h2 id="origins-image-heading">观察大图</h2><button type="button" data-origins-image-close autofocus>关闭大图 ×</button></header>
+        <img id="origins-large-image" alt="">
+        <p id="origins-large-caption"></p>
+        <a id="origins-original-image" target="_blank" rel="noopener noreferrer">在新页面看原图 ↗</a>
+      </dialog>
     </article>
   </div>
 </div>
+<script src="{% static 'humanorigins/figures.js' %}" defer></script>
 {% endblock %}

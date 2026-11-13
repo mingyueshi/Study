@@ -1,119 +1,70 @@
-{% extends 'base.html' %}{% load static %}
+{% extends 'accounts/center_base.html' %}{% load static %}
 {% block title %}我的奖励 · 乐学堂{% endblock %}
-{% block content %}
-<link rel="stylesheet" href="{% static 'incentives/rewards.css' %}">
-<h1>我的奖励</h1>
+{% block center_title %}我的奖励{% endblock %}
+{% block center_description %}把每一次认真，攒成看得见的小小成就。{% endblock %}
+{% block center_icon %}<img src="{% static 'icons/trophy.svg' %}" alt="" width="82" height="82">{% endblock %}
+{% block center_content %}
+<link rel="stylesheet" href="{% static 'incentives/rewards.css' %}?v=5">
+<div class="rewards-page">
+  <section class="reward-stats" aria-label="我的奖励总览">
+    <div class="reward-stat"><span class="reward-stat-icon" aria-hidden="true">★</span><span class="stat-label">可用积分</span><strong>{{ summary.balance }}</strong><span>攒着随时能兑换</span></div>
+    <div class="reward-stat"><span class="reward-stat-icon" aria-hidden="true">✦</span><span class="stat-label">累计获得</span><strong>{{ summary.earned }}</strong><span>每一分都是学来的</span></div>
+    <div class="reward-stat"><span class="reward-stat-icon" aria-hidden="true">☀</span><span class="stat-label">连续打卡</span><strong>{{ checkin.current }}<small> 天</small></strong><span>最长坚持过 {{ checkin.best }} 天</span></div>
+    <div class="reward-stat"><img class="reward-stat-icon" src="{% static 'icons/trophy.svg' %}" alt="" width="38" height="38"><span class="stat-label">已点亮勋章</span><strong>{{ earned_badges }}<small> / {{ badges|length }}</small></strong><span>每一枚，都有成长的故事</span></div>
+  </section>
 
-<section class="rewards-hero">
-  <div class="reward-stats">
-    <div class="reward-stat"><strong>{{ summary.balance }}</strong><span class="stat-label">可用积分</span><span>攒着随时能兑换</span></div>
-    <div class="reward-stat"><strong>{{ summary.earned }}</strong><span class="stat-label">累计获得</span><span>每一分都是学来的</span></div>
-    <div class="reward-stat"><strong>{{ checkin.current }}</strong><span class="stat-label">连续打卡</span><span>最长坚持过 {{ checkin.best }} 天</span></div>
-    <div class="reward-stat"><strong>{{ earned_badges }}</strong><span class="stat-label">已点亮勋章</span><span>一共 {{ badges|length }} 枚等你收</span></div>
-  </div>
-  <div class="level-card">
-    <div class="level-now"><span class="level-icon">{{ summary.level.icon }}</span>{{ summary.level.name }}</div>
-    {% if summary.next_level %}
-    <p>再攒 {{ summary.next_gap }} 分就是「{{ summary.next_level.name }}」</p>
-    <div class="level-bar"><i style="width: {% widthratio summary.level_progress summary.level_span 100 %}%"></i></div>
-    <p class="level-next">{{ summary.level.since }} → {{ summary.next_level.since }} 分</p>
-    {% else %}
-    <p>已经是最高的称号啦，继续保持！</p>
-    {% endif %}
-  </div>
-</section>
+  <nav class="rewards-jumps" aria-label="奖励分区"><a href="#reward-growth">成长与打卡 ↓</a><a href="#reward-badges">勋章墙 ↓</a><a href="#reward-shop">兑换专区 ↓</a><a href="#reward-events">积分明细 ↓</a></nav>
 
-<section class="checkin-section">
-  <div class="checkin-card">
-    <h2>打卡日历</h2>
-    <div class="checkin-meta">
-      <span>总打卡 <strong>{{ checkin.days }}</strong> 天</span>
-      <span>当前连续 <strong>{{ checkin.current }}</strong> 天</span>
-      {% if checked_today %}<span class="checkin-today on">✓ 今天已打卡</span>
-      {% else %}<span class="checkin-today off">今天完成任意学习就自动打卡</span>{% endif %}
-    </div>
-    <div class="checkin-grid" role="img" aria-label="本月打卡日历">
-      <span class="dow"></span>{% for dow in week_headers %}<span class="dow">{{ dow }}</span>{% endfor %}
-      {% for row in calendar_rows %}{% for cell in row %}
-      <div class="cell {% if not cell.in_month %}blank{% else %}{% if cell.checked %}checked{% endif %}{% if cell.is_today %} today{% endif %}{% endif %}"><span>{{ cell.day }}</span></div>
-      {% endfor %}{% endfor %}
-    </div>
-  </div>
-</section>
-
-<section class="badge-section">
-  <h2>勋章墙</h2>
-  <div class="badge-wall">
-    {% for badge in badges %}
-    <div class="badge-card tier-{{ badge.tier }} {% if badge.earned %}earned{% endif %}">
-      <span class="badge-icon" aria-hidden="true">{{ badge.icon }}</span>
-      <div>
-        <h3>{{ badge.name }}</h3>
-        <p>{{ badge.description }}</p>
-        <div class="badge-progress"><i style="width: {% widthratio badge.current badge.target 100 %}%"></i></div>
-        <p class="badge-progress-num">{% if badge.earned %}已点亮{% else %}{{ badge.current }} / {{ badge.target }}{% endif %}</p>
+  <div id="reward-growth" class="reward-growth-grid">
+    <section class="level-card" aria-labelledby="level-title">
+      <div class="reward-section-heading"><div><p class="eyebrow">一点点，变得更厉害</p><h2 id="level-title">我的成长称号</h2></div></div>
+      <div class="level-now"><span class="level-icon" aria-hidden="true">{{ summary.level.icon }}</span><div><small>当前称号</small><strong>{{ summary.level.name }}</strong></div></div>
+      {% if summary.next_level %}
+      <p class="level-goal">再攒 <strong>{{ summary.next_gap }}</strong> 分，就能成为「{{ summary.next_level.name }}」</p>
+      <progress class="level-bar" value="{{ summary.level_progress }}" max="{{ summary.level_span }}" aria-label="距离下一称号的积分进度">{% widthratio summary.level_progress summary.level_span 100 %}%</progress>
+      <p class="level-next"><span>{{ summary.level.since }} 分起步</span><span>{{ summary.next_level.since }} 分到达</span></p>
+      {% else %}<p class="level-goal">已经是最高的称号啦，继续保持！</p>{% endif %}
+      <div class="level-encouragement"><p>读懂一个知识点，答对一道题，都在为成长添一点力量。</p><a class="account-text-link" href="{% url 'my-learning' %}">看看我的学习足迹 <span aria-hidden="true">→</span></a></div>
+    </section>
+    <section class="checkin-card" aria-labelledby="checkin-title">
+      <div class="reward-section-heading"><div><p class="eyebrow">认真学习的日子，亮起来</p><h2 id="checkin-title">打卡日历</h2></div><time class="calendar-month" datetime="{{ calendar_month|date:'Y-m' }}">{{ calendar_month|date:'Y年n月' }}</time></div>
+      <div class="checkin-meta"><span>总打卡 <strong>{{ checkin.days }}</strong> 天</span>{% if checked_today %}<span class="checkin-today on">✓ 今天已打卡</span>{% else %}<span class="checkin-today off">完成有积分的学习，就会自动打卡</span>{% endif %}</div>
+      <div class="checkin-grid" role="list" aria-label="{{ calendar_month|date:'Y年n月' }}打卡日历">
+        {% for dow in week_headers %}<span class="dow" aria-hidden="true">{{ dow }}</span>{% endfor %}
+        {% for row in calendar_rows %}{% for cell in row %}
+        {% if cell.in_month %}<div class="cell{% if cell.checked %} checked{% endif %}{% if cell.is_today %} today{% endif %}" role="listitem" aria-label="{{ cell.day }}日{% if cell.is_today %}，今天{% endif %}，{% if cell.checked %}已打卡{% else %}未打卡{% endif %}"><span aria-hidden="true">{{ cell.day }}</span>{% if cell.checked %}<span class="cell-check" aria-hidden="true">✓</span>{% endif %}</div>{% else %}<span class="cell blank" aria-hidden="true"></span>{% endif %}
+        {% endfor %}{% endfor %}
       </div>
-      <span class="tier-tag">{{ badge.tier_label }}</span>
-    </div>
-    {% endfor %}
+      <div class="calendar-legend"><span><i class="legend-checked" aria-hidden="true"></i>已打卡</span><span><i class="legend-today" aria-hidden="true"></i>今天</span></div>
+    </section>
   </div>
-</section>
 
-<section class="redeem-section">
-  <h2>兑换专区</h2>
-  {% if items %}
-  <div class="redeem-grid">
-    {% for row in items %}
-    <form class="reward-card {% if not row.can_redeem %}locked{% endif %}" method="post" action="{% url 'rewards-redeem' %}">
-      {% csrf_token %}
-      <input type="hidden" name="item" value="{{ row.item.pk }}">
-      <span class="reward-icon" aria-hidden="true">{{ row.item.icon }}</span>
-      <h3>{{ row.item.name }}</h3>
-      <span class="cost">{{ row.item.cost }} 积分</span>
-      {% if row.item.note %}<span class="note">{{ row.item.note }}</span>{% endif %}
-      <button class="button small" type="submit" {% if not row.can_redeem %}disabled{% endif %}>{% if row.can_redeem %}兑换{% else %}积分还差一点{% endif %}</button>
-    </form>
-    {% endfor %}
-  </div>
-  {% else %}
-  <p class="reward-empty">家长还没有上架奖励，先攒好积分等着吧。</p>
-  {% endif %}
-  {% if redemptions %}
-  <ul class="redemption-list">
-    {% for redemption in redemptions %}
-    <li><span class="status-chip {{ redemption.status }}">{{ redemption.get_status_display }}</span>
-      <strong>{{ redemption.item_name }}</strong><span>−{{ redemption.cost }} 积分</span>
-      <span class="when">{{ redemption.requested_at|date:'m月d日 H:i' }}{% if redemption.resolved_note %} · {{ redemption.resolved_note }}{% endif %}</span></li>
-    {% endfor %}
-  </ul>
-  {% endif %}
-</section>
-
-<section class="events-section">
-  <h2>积分明细</h2>
-  {% if events %}
-  <ul class="event-list">
-    {% for event in events %}
-    <li><span>{{ event.note }}</span>
-      <span class="when">{{ event.created_at|date:'m月d日 H:i' }}</span>
-      <span class="event-points {% if event.points >= 0 %}plus{% else %}minus{% endif %}">{{ event.points }}{% if event.points >= 0 %}+{% endif %}</span></li>
-    {% endfor %}
-  </ul>
-  {% else %}
-  <p class="reward-empty">还没有积分记录——去学点什么，今天就打卡！</p>
-  {% endif %}
-</section>
-
-<section class="rules-section">
-  <h2>积分怎么攒</h2>
-  <p class="lead">完成整课、整局给大分，答对题目给小分；答错不扣分，每类每天有上限，放心大胆学。</p>
-  <table class="rules-table">
-    <thead><tr><th>学习动作</th><th>每次得分</th><th>每日上限</th></tr></thead>
-    <tbody>
-      {% for rule in rules_rows %}
-      <tr><td>{{ rule.label }}</td><td>+{{ rule.points }}</td><td>{{ rule.cap }} <span class="cap">（今日已得 {{ rule.today_used }} 次）</span></td></tr>
+  <section id="reward-badges" class="reward-panel badge-section" aria-labelledby="badges-title">
+    <div class="reward-section-heading"><div><p class="eyebrow">给努力一个闪亮的纪念</p><h2 id="badges-title">勋章墙 <span class="reward-count">已点亮 {{ earned_badges }} 枚</span></h2></div><p>每枚勋章下面，都有自己的小目标。</p></div>
+    <div class="badge-wall">
+      {% for badge in badges %}
+      <div class="badge-card tier-{{ badge.tier }}{% if badge.earned %} earned{% endif %}">
+        <div class="badge-card-top"><span class="badge-icon" aria-hidden="true">{{ badge.icon }}</span><span class="tier-tag">{{ badge.tier_label }}章</span></div>
+        <h3>{{ badge.name }}</h3><p>{{ badge.description }}</p>
+        <div class="badge-card-bottom"><progress class="badge-progress" value="{{ badge.current }}" max="{{ badge.target }}" aria-label="{{ badge.name }}的完成进度">{{ badge.current }} / {{ badge.target }}</progress><p class="badge-progress-num">{% if badge.earned %}<span>✓ 已点亮</span>{% else %}已完成 <strong>{{ badge.current }}</strong> / {{ badge.target }}{% endif %}</p></div>
+      </div>
       {% endfor %}
-    </tbody>
-  </table>
-</section>
+    </div>
+  </section>
+
+  {% include 'incentives/shop_section.html' %}
+
+  <section id="reward-events" class="reward-panel events-section" aria-labelledby="events-title">
+    <div class="reward-section-heading"><div><p class="eyebrow">每一分，都有来处</p><h2 id="events-title">积分明细</h2></div><p>最近 {{ events|length }} 条积分变动</p></div>
+    {% if events %}<ul class="event-list">
+      {% for event in events %}<li><span class="event-marker{% if event.points < 0 %} minus{% endif %}" aria-hidden="true">{% if event.points >= 0 %}+{% else %}−{% endif %}</span><div><strong>{{ event.note }}</strong><time class="when" datetime="{{ event.created_at|date:'c' }}">{{ event.created_at|date:'n月j日 H:i' }}</time></div><span class="event-points {% if event.points >= 0 %}plus{% else %}minus{% endif %}">{% if event.points >= 0 %}+{% endif %}{{ event.points }}</span></li>{% endfor %}
+    </ul>{% else %}<div class="reward-empty"><img src="{% static 'icons/footprints.svg' %}" alt="" width="60" height="60"><h3>第一份积分，等你来攒</h3><p>完成有积分的学习任务，收获就会记在这里。</p><a class="account-text-link" href="{% url 'home' %}">去学习广场 <span aria-hidden="true">→</span></a></div>{% endif %}
+  </section>
+
+  <details class="reward-panel rules-section" id="reward-rules">
+    <summary><div><p class="eyebrow">小小收获指南</p><h2>积分怎么攒</h2></div><span class="reward-rules-toggle"><span class="rules-open-label">展开看看</span><span class="rules-close-label">收起规则</span><span class="rules-chevron" aria-hidden="true">⌄</span></span></summary>
+    <p class="rules-note">完成整课、整局给大分，答对题目给小分；答错不扣分，每类每天有上限，放心大胆学。</p>
+    <table class="rules-table"><caption class="reward-sr-only">学习动作的每次得分和每日奖励次数上限</caption><thead><tr><th scope="col">学习动作</th><th scope="col">每次得分</th><th scope="col">每日上限</th></tr></thead><tbody>{% for rule in rules_rows %}<tr><th scope="row">{{ rule.label }}</th><td>+{{ rule.points }}</td><td>{{ rule.cap }} 次 <span class="cap">今日已得 {{ rule.today_used }} 次</span></td></tr>{% endfor %}</tbody></table>
+  </details>
+</div>
 {% endblock %}

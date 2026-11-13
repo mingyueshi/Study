@@ -110,7 +110,7 @@ def template(source, topic, page, theme, index_route):
     if theme:
         attrs = attrs.replace(' id="main"', '').replace(' tabindex="-1"', '')
         footer = re.search(r'<footer\b([^>]*)>(.*?)</footer>', source, re.DOTALL)
-        local_nav = f'<div{footer[1]}>{footer[2]}</div>'
+        local_nav = f'<div{footer[1]}>{footer[2]}</div>' if footer else ''
         content = f'<div class="{theme}">\n<div{attrs}>{content}</div>\n{local_nav}\n</div>'
         content = content.replace('href="index.html"', 'href="{% url \'' + index_route + '\' %}"')
 

@@ -1,8 +1,106 @@
-{% extends 'base.html' %}{% block title %}我的学习 · 乐学堂{% endblock %}
-{% block content %}<div class="page-heading"><p class="eyebrow">{{ user }} 的学习足迹</p><h1>学过的，慢慢变成自己的</h1><p class="lead">复习一个知识点，也是一小步进步。</p></div>
-{% if digest %}
-<section aria-label="学习总览">{% include 'includes/overview_cards.html' with areas=digest.areas %}</section>
-{% include 'includes/recent_learning.html' with recent=digest.recent %}
-{% endif %}
-<section aria-labelledby="textbook-records-title"><div class="section-heading"><div><p class="eyebrow">教材学习</p><h2 id="textbook-records-title">教材内容记录</h2></div><p>按状态翻看知识点，点开继续复习。</p></div></section>
-<nav class="tabs" aria-label="记录筛选"><a href="{% url 'my-learning' %}" {% if not selected and not request.GET.bookmarked %}aria-current="page"{% endif %}>全部记录</a><a href="?status=learning" {% if selected == 'learning' and not request.GET.bookmarked %}aria-current="page"{% endif %}>学习中</a><a href="?status=mastered" {% if selected == 'mastered' and not request.GET.bookmarked %}aria-current="page"{% endif %}>已掌握</a><a href="?bookmarked=1" {% if request.GET.bookmarked == '1' %}aria-current="page"{% endif %}>我的收藏</a></nav><div class="content-list">{% for record in page %}<a class="content-row" href="{% url 'item' record.item.pk %}"><div><span class="tag">{{ record.item.module.name }} · {{ record.effective_label }}{% if record.bookmarked %} · 已收藏{% endif %}</span><h3>{{ record.item.title }}</h3><p>{{ record.note|truncatechars:120 }}</p><small>{{ record.updated_at|date:'Y-m-d H:i' }}</small></div><span aria-hidden="true">→</span></a>{% empty %}<div class="empty"><h2>还没有学习记录</h2><p>从一个感兴趣的知识点开始，在内容页保存你的学习状态。</p><a class="button" href="{% url 'home' %}">去学习广场</a></div>{% endfor %}</div>{% include 'pagination.html' %}{% endblock %}
+{% extends 'base.html' %}{% load static %}
+{% block title %}我的学习 · 乐学堂{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'learning/mine.css' %}?v=1">
+<div class="my-learning">
+  <header class="learning-welcome">
+    <div class="learning-welcome-copy">
+      <div class="learning-person"><span class="learning-avatar" aria-hidden="true">{{ user|stringformat:'s'|slice:':1' }}</span><p>{{ user }} 的学习空间{% if user.grade %}<span>{{ user.grade }}</span>{% endif %}</p></div>
+      <h1>我的学习<span>每一小步，都算数。</span></h1>
+      <p class="learning-welcome-note">把好奇留下来，让学过的慢慢变成自己的。</p>
+      <div class="learning-account-links">
+        <a href="{% url 'profile' %}">学习偏好 <span aria-hidden="true">↗</span></a>
+        <a href="{% url 'rewards' %}"><img src="{% static 'icons/trophy.svg' %}" alt="" width="24" height="24">我的奖励 <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+    <div class="learning-welcome-art" aria-hidden="true">
+      <span class="learning-art-orbit"></span>
+      <span class="learning-art-star learning-art-star-one">✦</span>
+      <span class="learning-art-star learning-art-star-two">✧</span>
+      <span class="learning-art-tile learning-art-book"><img src="{% static 'icons/book.svg' %}" alt="" width="120" height="120"></span>
+      <span class="learning-art-tile learning-art-globe"><img src="{% static 'icons/globe.svg' %}" alt="" width="76" height="76"></span>
+      <span class="learning-art-note">今天也有新发现！</span>
+    </div>
+  </header>
+
+  <nav class="learning-jumps" aria-label="我的学习分区">
+    <a href="#learning-recent"><img src="{% static 'icons/footprints.svg' %}" alt="" width="28" height="28">最近足迹 <span aria-hidden="true">↓</span></a>
+    <a href="#learning-overview"><img src="{% static 'icons/scenes.svg' %}" alt="" width="28" height="28">学习总览 <span aria-hidden="true">↓</span></a>
+    <a href="#textbook-records"><img src="{% static 'icons/book.svg' %}" alt="" width="28" height="28">教材记录 <span aria-hidden="true">↓</span></a>
+  </nav>
+
+  {% if digest %}
+  <section id="learning-recent" class="learning-panel learning-recent" aria-labelledby="recent-title">
+    <div class="learning-section-heading">
+      <div><p class="eyebrow">接着上次的好奇</p><h2 id="recent-title">最近学了什么</h2></div>
+      <p>点开一条足迹，就能继续出发。</p>
+    </div>
+    {% if digest.recent %}
+    <div class="learning-recent-grid">
+      {% for row in digest.recent|slice:':3' %}{% include 'learning/recent_card.html' %}{% endfor %}
+    </div>
+    {% if digest.recent|length > 3 %}
+    <details class="learning-more">
+      <summary>查看更多学习足迹 <span>还有 {{ digest.recent|length|add:'-3' }} 条</span><span class="learning-more-chevron" aria-hidden="true">⌄</span></summary>
+      <div class="learning-recent-grid">{% for row in digest.recent|slice:'3:' %}{% include 'learning/recent_card.html' %}{% endfor %}</div>
+    </details>
+    {% endif %}
+    {% else %}
+    <div class="learning-empty learning-first-step">
+      <img src="{% static 'icons/footprints.svg' %}" alt="" width="68" height="68">
+      <div><h3>第一串学习足迹，等你来留下</h3><p>读一个知识点、认几个单词，或来一场成语挑战。</p></div>
+      <a class="button" href="{% url 'home' %}">去学习广场 <span aria-hidden="true">→</span></a>
+    </div>
+    {% endif %}
+  </section>
+
+  <section id="learning-overview" class="learning-panel learning-overview" aria-labelledby="overview-title">
+    <div class="learning-section-heading">
+      <div><p class="eyebrow">积累看得见</p><h2 id="overview-title">学习总览 <span class="learning-section-count">{{ digest.areas|length }} 个方向</span></h2></div>
+      <p>读过、练过、写过，每一种收获都值得记住。</p>
+    </div>
+    {% include 'includes/overview_cards.html' with areas=digest.areas hide_latest=True textbook_records_url='#textbook-records' %}
+  </section>
+  {% endif %}
+
+  <section id="textbook-records" class="learning-panel learning-records" aria-labelledby="textbook-records-title">
+    <div class="learning-section-heading">
+      <div><p class="eyebrow">温故，也能知新</p><h2 id="textbook-records-title">教材内容记录</h2></div>
+      <p>按状态翻看知识点，点开继续复习。</p>
+    </div>
+    <div class="learning-record-tools">
+      <nav class="tabs" aria-label="记录筛选">
+        <a href="{% url 'my-learning' %}#textbook-records" {% if not selected and not request.GET.bookmarked %}aria-current="page"{% endif %}>全部记录</a>
+        <a href="?status=learning#textbook-records" {% if selected == 'learning' and not request.GET.bookmarked %}aria-current="page"{% endif %}>学习中</a>
+        <a href="?status=mastered#textbook-records" {% if selected == 'mastered' and not request.GET.bookmarked %}aria-current="page"{% endif %}>已掌握</a>
+        <a href="?bookmarked=1#textbook-records" {% if request.GET.bookmarked == '1' %}aria-current="page"{% endif %}>我的收藏</a>
+      </nav>
+      <p class="learning-record-count">当前共 <strong>{{ page.paginator.count }}</strong> 条</p>
+    </div>
+    <div class="content-list">
+      {% for record in page %}
+      <a class="content-row learning-record" href="{% url 'item' record.item.pk %}">
+        <span class="learning-record-icon color-{{ record.item.module.code }}" aria-hidden="true"><img src="{% static 'icons/' %}{{ record.item.module.icon }}.svg" alt="" width="36" height="36"></span>
+        <div>
+          <div class="learning-record-labels"><span>{{ record.item.module.name }}</span><span class="learning-status learning-status-{{ record.effective }}">{{ record.effective_label }}</span>{% if record.bookmarked %}<span class="learning-bookmarked">★ 已收藏</span>{% endif %}</div>
+          <h3>{{ record.item.title }}</h3>
+          {% if record.note %}<p>{{ record.note|truncatechars:120 }}</p>{% endif %}
+          <small><time datetime="{{ record.updated_at|date:'c' }}">{{ record.updated_at|date:'Y年n月j日 H:i' }}</time> 更新</small>
+        </div>
+        <span class="learning-record-arrow" aria-hidden="true">→</span>
+      </a>
+      {% empty %}
+      <div class="learning-empty">
+        <img src="{% static 'icons/book.svg' %}" alt="" width="68" height="68">
+        {% if request.GET.bookmarked == '1' %}<h3>还没有收藏的知识点</h3><p>遇到想再读一遍的内容，在内容页把它收藏起来吧。</p>
+        {% elif selected == 'learning' %}<h3>暂时没有学习中的知识点</h3><p>挑一个感兴趣的知识点，保存为「学习中」，下次就能在这里找到。</p>
+        {% elif selected == 'mastered' %}<h3>还没有已掌握的知识点</h3><p>学懂以后，在内容页确认「已掌握」，一点点积累自己的收获。</p>
+        {% else %}<h3>还没有学习记录</h3><p>从一个感兴趣的知识点开始，在内容页保存你的学习状态。</p>{% endif %}
+        {% if selected or request.GET.bookmarked == '1' %}<a class="learning-text-link" href="{% url 'my-learning' %}#textbook-records">查看全部记录 <span aria-hidden="true">→</span></a>{% else %}<a class="button" href="{% url 'home' %}">去学习广场 <span aria-hidden="true">→</span></a>{% endif %}
+      </div>
+      {% endfor %}
+    </div>
+    {% include 'pagination.html' with fragment='textbook-records' %}
+  </section>
+</div>
+{% endblock %}

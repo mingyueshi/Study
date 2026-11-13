@@ -1,0 +1,14 @@
+{% if form.non_field_errors %}<div class="account-form-errors" role="alert"><p>再检查一下，就能继续啦</p>{{ form.non_field_errors }}</div>{% endif %}
+{% for hidden in form.hidden_fields %}{{ hidden }}{{ hidden.errors }}{% endfor %}
+<div class="account-fields {% if two_columns %}account-fields-two{% endif %}">
+  {% for field in form.visible_fields %}
+  <div class="account-field{% if field.errors %} account-field-invalid{% endif %}">
+    <div class="account-field-label"><label for="{{ field.id_for_label }}">{{ field.label }}</label>{% if field.field.required %}<span>必填</span>{% endif %}</div>
+    {% if field.field.widget.input_type == 'password' %}
+    <div class="account-password-field">{{ field }}<button class="account-password-toggle" type="button" data-password-toggle data-password-label="{{ field.label }}" aria-controls="{{ field.auto_id }}" aria-label="显示{{ field.label }}" aria-pressed="false" hidden>显示</button></div>
+    {% else %}{{ field }}{% endif %}
+    {% if field.help_text %}<div class="account-field-help" id="{{ field.auto_id }}_helptext">{{ field.help_text|safe }}</div>{% endif %}
+    {% if field.errors %}<div role="alert">{{ field.errors }}</div>{% endif %}
+  </div>
+  {% endfor %}
+</div>

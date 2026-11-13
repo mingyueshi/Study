@@ -8,27 +8,71 @@
       "summary": "在火山灰里，找一串约 360 万年前的脚印。",
       "opening": "下雨后走过泥地，你会留下一串脚印。约 360 万年前，在今天的坦桑尼亚莱托利，远古人类也走过一层湿润的火山灰。灰里的脚印后来被埋住，保存了下来。仔细看，哪边像脚跟，哪边像脚趾？",
       "figures": [
-        {"path": "humanorigins/laetoli.jpg", "alt": "莱托利足迹翻模，凹下去的足印在表面排成行", "place": "坦桑尼亚 · 莱托利", "age": "约 360 万年前的脚印", "caption": "莱托利足迹翻模。找一找排成一行的脚印。", "credit": "柏林国立博物馆拉特根研究实验室 · CC BY-NC-SA", "source": 1}
+        {
+          "path": "humanorigins/laetoli.jpg",
+          "alt": "莱托利足迹翻模，凹下去的足印在表面排成行",
+          "place": "坦桑尼亚 · 莱托利",
+          "age": "约 360 万年前的脚印",
+          "caption": "莱托利足迹翻模。找一找排成一行的脚印。",
+          "credit": "柏林国立博物馆拉特根研究实验室 · CC BY-NC-SA",
+          "source": 1
+        }
       ],
       "clues": [
-        {"title": "湿灰里的脚印", "observation": "有一列脚印左右交替，每个印子能分辨出脚跟和脚趾。", "meaning": "脚印的排列和形状，支持留下脚印的远古人类当时用两只脚走路。", "source": 2},
-        {"title": "骨骼和牙齿", "observation": "研究者可以量骨头的长短，观察牙齿的形状和磨损。", "meaning": "骨骼提供身形和活动方式的线索，牙齿上的磨损能帮助我们了解可能吃过什么。", "source": 3},
-        {"title": "石器和古 DNA", "observation": "石头上有时留着敲击留下的痕迹。有些保存较好的古骨或牙齿里，还能提取到少量 DNA。", "meaning": "敲击痕迹帮助我们理解怎么做工具。DNA 像从父母那里传下来的信息，科学家比较这些信息，就能研究古人群之间的亲缘关系。", "source": 3}
+        {
+          "title": "湿灰里的脚印",
+          "observation": "有一列脚印左右交替，每个印子能分辨出脚跟和脚趾。",
+          "meaning": "脚印的排列和形状，支持留下脚印的远古人类当时用两只脚走路。",
+          "source": 2
+        },
+        {
+          "title": "骨骼和牙齿",
+          "observation": "研究者可以量骨头的长短，观察牙齿的形状和磨损。",
+          "meaning": "骨骼提供身形和活动方式的线索，牙齿上的磨损能帮助我们了解可能吃过什么。",
+          "source": 3
+        },
+        {
+          "title": "石器和古 DNA",
+          "observation": "石头上有时留着敲击留下的痕迹。有些保存较好的古骨或牙齿里，还能提取到少量 DNA。",
+          "meaning": "敲击痕迹帮助我们理解怎么做工具。DNA 像从父母那里传下来的信息，科学家比较这些信息，就能研究古人群之间的亲缘关系。",
+          "source": 3
+        }
       ],
       "quiz": {
         "prompt": "只看莱托利这串脚印，我们最有把握回答哪一个问题？",
         "choices": [
-          {"label": "留下脚印的人吃了什么？", "correct": false, "feedback": "脚印记录了脚踩过地面的样子。研究食物，可以去看牙齿磨损或遗址里的食物残留。"},
-          {"label": "留下脚印的人当时怎么走？", "correct": true, "feedback": "左右脚交替和清楚的脚印形状，都是双脚行走的线索。"},
-          {"label": "留下脚印的人会不会用火？", "correct": false, "feedback": "研究用火，需要找火塘、炭屑、烧过的骨头等别的线索。"}
+          {
+            "label": "留下脚印的人吃了什么？",
+            "correct": false,
+            "feedback": "脚印记录了脚踩过地面的样子。研究食物，可以去看牙齿磨损或遗址里的食物残留。"
+          },
+          {
+            "label": "留下脚印的人当时怎么走？",
+            "correct": true,
+            "feedback": "左右脚交替和清楚的脚印形状，都是双脚行走的线索。"
+          },
+          {
+            "label": "留下脚印的人会不会用火？",
+            "correct": false,
+            "feedback": "研究用火，需要找火塘、炭屑、烧过的骨头等别的线索。"
+          }
         ]
       },
       "takeaway": "先问「我看到了什么」，再问「它能告诉我什么」。脚印、骨骼、石器和古 DNA，各有能回答的问题。",
       "checked_on": "2026-11-09",
       "sources": [
-        {"title": "柏林国立博物馆 · 莱托利足迹保护与翻模", "url": "https://www.smb.museum/en/museums-institutions/rathgen-forschungslabor/research/research-projects/laetoli/"},
-        {"title": "史密森尼学会 · 莱托利足迹", "url": "https://humanorigins.si.edu/evidence/behavior/footprints/laetoli-footprint-trails"},
-        {"title": "史密森尼学会 · 人类演化有哪些证据", "url": "https://humanorigins.si.edu/evidence"}
+        {
+          "title": "柏林国立博物馆 · 莱托利足迹保护与翻模",
+          "url": "https://www.smb.museum/en/museums-institutions/rathgen-forschungslabor/research/research-projects/laetoli/"
+        },
+        {
+          "title": "史密森尼学会 · 莱托利足迹",
+          "url": "https://humanorigins.si.edu/evidence/behavior/footprints/laetoli-footprint-trails"
+        },
+        {
+          "title": "史密森尼学会 · 人类演化有哪些证据",
+          "url": "https://humanorigins.si.edu/evidence"
+        }
       ]
     },
     {
@@ -38,41 +82,241 @@
       "summary": "看一棵分叉的树，再找找哪些古人类曾同时生活。",
       "opening": "一代又一代，生物的身体特征会慢慢发生变化，这叫作演化。人类演化像一棵长了几百万年的树，有许多分支。现在的人类和黑猩猩是亲戚，两支都能往回追到很久以前的共同祖先。",
       "figures": [
-        {"path": "humanorigins/lucy.webp", "alt": "阿法南方古猿露西的骨骼复原展示，可见骨盆和腿骨", "caption": "「露西」骨骼复原展示。她生活在约 320 万年前。", "credit": "史密森尼学会人类起源项目", "source": 1},
-        {"path": "humanorigins/family-tree.svg", "alt": "共同祖先分出通向今天黑猩猩的一支和人类这一支，人类一支又有多个分支", "caption": "共同祖先和分支关系示意图。短枝表示已消失的古人类分支。", "credit": "乐学堂绘制", "source": 2}
+        {
+          "path": "humanorigins/lucy.webp",
+          "alt": "阿法南方古猿露西的骨骼复原展示，可见骨盆和腿骨",
+          "caption": "「露西」骨骼复原展示。她生活在约 320 万年前。",
+          "credit": "史密森尼学会人类起源项目",
+          "source": 1
+        },
+        {
+          "path": "humanorigins/family-tree.svg",
+          "alt": "共同祖先分出通向今天黑猩猩的一支和人类这一支，人类一支又有多个分支",
+          "caption": "共同祖先和分支关系示意图。短枝表示已消失的古人类分支。",
+          "credit": "乐学堂绘制",
+          "source": 2
+        }
       ],
       "timeline": {
         "title": "哪些古人类曾同时生活？",
         "note": "色条表示目前化石记录显示的大致生活时段。同一竖线上有两条色条，表示它们曾生活在同一个时代。",
         "bars": [
-          {"label": "阿法南方古猿", "period": "约 380 万至 300 万年前", "start": 5, "end": 25, "source": 3},
-          {"label": "直立人", "period": "约 190 万至 11 万年前", "start": 52.5, "end": 97.25, "source": 4},
-          {"label": "尼安德特人", "period": "约 40 万至 4 万年前", "start": 90, "end": 99, "source": 5},
-          {"label": "智人", "period": "约 30 万年前至今", "start": 92.5, "end": 100, "source": 6}
+          {
+            "label": "阿法南方古猿",
+            "period": "约 380 万至 300 万年前",
+            "start": 5,
+            "end": 25,
+            "source": 3
+          },
+          {
+            "label": "直立人",
+            "period": "约 190 万至 11 万年前",
+            "start": 52.5,
+            "end": 97.25,
+            "source": 4,
+            "group": "erectus"
+          },
+          {
+            "label": "尼安德特人",
+            "period": "约 40 万至 4 万年前",
+            "start": 90,
+            "end": 99,
+            "source": 5,
+            "group": "neanderthals"
+          },
+          {
+            "label": "智人",
+            "period": "约 30 万年前至今",
+            "start": 92.5,
+            "end": 100,
+            "source": 6,
+            "group": "sapiens"
+          }
         ]
       },
       "clues": [
-        {"title": "露西的骨盆", "observation": "在埃塞俄比亚发现的「露西」保存了部分骨盆和腿骨。", "meaning": "骨骼的形状为她能用双脚行走提供了线索。露西属于阿法南方古猿。", "source": 1},
-        {"title": "直立人走得很远", "observation": "非洲和亚洲都发现了直立人的化石。早期非洲直立人的腿相对较长。", "meaning": "身体比例提供了行走方式的线索。相隔很远的化石发现，让我们看到直立人的活动范围。", "source": 4},
-        {"title": "时间条上有重叠", "observation": "尼安德特人的时间条和智人的时间条有一段重叠。", "meaning": "他们曾在同一个时代生活。演化树上的几个分支，可以同时存在。", "source": 5}
+        {
+          "title": "露西的骨盆",
+          "observation": "在埃塞俄比亚发现的「露西」保存了部分骨盆和腿骨。",
+          "meaning": "骨骼的形状为她能用双脚行走提供了线索。露西属于阿法南方古猿。",
+          "source": 1
+        },
+        {
+          "title": "直立人走得很远",
+          "observation": "非洲和亚洲都发现了直立人的化石。早期非洲直立人的腿相对较长。",
+          "meaning": "身体比例提供了行走方式的线索。相隔很远的化石发现，让我们看到直立人的活动范围。",
+          "source": 4
+        },
+        {
+          "title": "时间条上有重叠",
+          "observation": "尼安德特人的时间条和智人的时间条有一段重叠。",
+          "meaning": "他们曾在同一个时代生活。演化树上的几个分支，可以同时存在。",
+          "source": 5
+        }
       ],
       "quiz": {
         "prompt": "两种古人类的时间条有一段重叠，最能说明什么？",
         "choices": [
-          {"label": "他们曾生活在同一个时代。", "correct": true, "feedback": "时间条告诉我们什么时候可能见到他们。重叠的这一段，两个分支都还存在。"},
-          {"label": "他们一定住在同一个山洞。", "correct": false, "feedback": "时间条告诉我们年代。要知道住在哪里，还得看化石和遗址的地点。"},
-          {"label": "他们一定有一方是另一方的祖先。", "correct": false, "feedback": "时间重叠只告诉我们两个分支同时存在。还要比较骨骼和 DNA 等线索，才能研究亲缘关系。"}
+          {
+            "label": "他们曾生活在同一个时代。",
+            "correct": true,
+            "feedback": "时间条告诉我们什么时候可能见到他们。重叠的这一段，两个分支都还存在。"
+          },
+          {
+            "label": "他们一定住在同一个山洞。",
+            "correct": false,
+            "feedback": "时间条告诉我们年代。要知道住在哪里，还得看化石和遗址的地点。"
+          },
+          {
+            "label": "他们一定有一方是另一方的祖先。",
+            "correct": false,
+            "feedback": "时间重叠只告诉我们两个分支同时存在。还要比较骨骼和 DNA 等线索，才能研究亲缘关系。"
+          }
         ]
       },
       "takeaway": "用树枝看亲缘，用时间条看早晚。今天的人类和黑猩猩各自走过了漫长的演化历程。",
-      "checked_on": "2026-11-09",
+      "checked_on": "2026-11-13",
       "sources": [
-        {"title": "史密森尼学会 · 露西的骨骼", "url": "https://humanorigins.si.edu/evidence/human-fossils/fossils/al-288-1"},
-        {"title": "史密森尼学会 · 人类与其他灵长类的亲缘", "url": "https://humanorigins.si.edu/education/how-do-we-know/how-do-we-know-humans-are-primates"},
-        {"title": "史密森尼学会 · 阿法南方古猿", "url": "https://humanorigins.si.edu/evidence/human-fossils/species/australopithecus-afarensis"},
-        {"title": "史密森尼学会 · 直立人", "url": "https://humanorigins.si.edu/evidence/human-fossils/species/homo-erectus"},
-        {"title": "史密森尼学会 · 尼安德特人", "url": "https://humanorigins.si.edu/evidence/human-fossils/species/homo-neanderthalensis"},
-        {"title": "史密森尼学会 · 智人", "url": "https://humanorigins.si.edu/evidence/human-fossils/species/homo-sapiens"}
+        {
+          "title": "史密森尼学会 · 露西的骨骼",
+          "url": "https://humanorigins.si.edu/evidence/human-fossils/fossils/al-288-1"
+        },
+        {
+          "title": "史密森尼学会 · 人类与其他灵长类的亲缘",
+          "url": "https://humanorigins.si.edu/education/how-do-we-know/how-do-we-know-humans-are-primates"
+        },
+        {
+          "title": "史密森尼学会 · 阿法南方古猿",
+          "url": "https://humanorigins.si.edu/evidence/human-fossils/species/australopithecus-afarensis"
+        },
+        {
+          "title": "史密森尼学会 · 直立人",
+          "url": "https://humanorigins.si.edu/evidence/human-fossils/species/homo-erectus"
+        },
+        {
+          "title": "史密森尼学会 · 尼安德特人",
+          "url": "https://humanorigins.si.edu/evidence/human-fossils/species/homo-neanderthalensis"
+        },
+        {
+          "title": "史密森尼学会 · 智人",
+          "url": "https://humanorigins.si.edu/evidence/human-fossils/species/homo-sapiens"
+        },
+        {
+          "title": "英国自然历史博物馆 · 尼安德特人与智人的头骨对照",
+          "url": "https://www.nhm.ac.uk/discover/who-were-the-neanderthals.html"
+        },
+        {
+          "title": "史密森尼学会 · 三维化石与石器藏品",
+          "url": "https://humanorigins.si.edu/evidence/3d-collection"
+        },
+        {
+          "title": "自然 · 白石崖溶洞的丹尼索瓦人及晚期肋骨",
+          "url": "https://www.nature.com/articles/s41586-024-07612-9"
+        },
+        {
+          "title": "自然 · 爪哇昂栋直立人的最后化石记录",
+          "url": "https://www.nature.com/articles/s41586-019-1863-2"
+        },
+        {
+          "title": "史密森尼学会 · 弗洛勒斯人的化石与石器年代",
+          "url": "https://humanorigins.si.edu/evidence/human-fossils/species/homo-floresiensis"
+        },
+        {
+          "title": "自然 · 菲律宾吕宋人的发现",
+          "url": "https://www.nature.com/articles/s41586-019-1067-9"
+        },
+        {
+          "title": "史密森尼学会 · 纳莱迪人的化石年代",
+          "url": "https://humanorigins.si.edu/evidence/human-fossils/species/homo-naledi"
+        }
+      ],
+      "comparison": {
+        "title": "地图上的七组古人类，怎样认一认？",
+        "intro": "这里的人群名称和颜色与迁徙地图相同。先看他们留下什么线索，再点开卡片比较；这不是把他们排成一条祖先队伍。",
+        "timeline_title": "放大看：近 40 万年的共同生活时段",
+        "timeline_note": "色条沿用迁徙图选用的代表记录。左箭头表示更早的部分没有画出；问号表示灭绝年代未定。某个人群有记录，不表示每个地区都一直有人居住。",
+        "note": "地点和年代帮助我们比较，亲缘还要看骨骼和遗传线索。记录的开头不一定是人群起源，结尾也不一定是灭绝日。",
+        "cards": [
+          {
+            "group": "sapiens",
+            "evidence": "头骨、其他骨骼与古 DNA 等。",
+            "observation": "今天世界各地的人都属于智人。比较古老头骨时，可以留意头骨轮廓和眉脊。",
+            "marker": "sapiens-africa",
+            "year": 300000,
+            "source": 6
+          },
+          {
+            "group": "neanderthals",
+            "evidence": "较完整的头骨、骨骼和古 DNA。",
+            "observation": "他们是智人的古人类近亲。先比较头骨形状，再看年代，不能把不同外形排成聪明程度的顺序。",
+            "marker": "neanderthals-eurasia",
+            "year": 45000,
+            "source": 5
+          },
+          {
+            "group": "denisovans",
+            "evidence": "骨骼、牙齿，以及古 DNA 和古蛋白线索。",
+            "observation": "已知化石不多。研究者把骨骼与分子线索放在一起，辨认这些古人类。",
+            "marker": "denisovans-baishiya",
+            "year": 40000,
+            "source": 9
+          },
+          {
+            "group": "erectus",
+            "evidence": "非洲和亚洲多地的头骨、牙齿与其他骨骼。",
+            "observation": "他们很早就走出了非洲。不同地方的发现要分别看年代，不能把某处最后的化石当作所有直立人的终点。",
+            "marker": "erectus-zhoukoudian",
+            "year": 200000,
+            "source": 10
+          },
+          {
+            "group": "floresiensis",
+            "evidence": "弗洛勒斯岛的头骨、肢骨等化石。",
+            "observation": "骨骼显示他们身材较小。骨骼与石器有不同的记录时段，要把两类证据分开看。",
+            "marker": "floresiensis-flores",
+            "year": 70000,
+            "source": 11
+          },
+          {
+            "group": "luzonensis",
+            "evidence": "吕宋岛卡劳洞的牙齿、手骨和足骨等。",
+            "observation": "只发现了一部分骨骼。已有线索能帮助辨认特征，还不能告诉我们这个分支何时消失。",
+            "marker": "luzonensis-callao",
+            "year": 67000,
+            "source": 12
+          },
+          {
+            "group": "naledi",
+            "evidence": "南非升星洞发现的多件骨骼。",
+            "observation": "这些化石的年代与早期智人的时代有重叠。同时存在不等于一定相遇。",
+            "marker": "naledi-south-africa",
+            "year": 300000,
+            "source": 13
+          }
+        ],
+        "figure": {
+          "path": "humanorigins/skull-comparison.jpg",
+          "alt": "左边是尼安德特人头骨侧面，右边是智人头骨侧面，可以比较眉脊和头骨轮廓",
+          "caption": "两件化石的侧面对照：左为法国拉费拉西的尼安德特人，右为阿布里帕托的智人。照片用于比较特征，不表示两件化石来自同一地点或同一年代。",
+          "credit": "英国自然历史博物馆",
+          "source": 7,
+          "observation": {
+            "prompt": "先找眉毛上方的骨头，再看头顶轮廓。两边有什么不同？",
+            "answer": "左边的眉脊更突出，头骨较低长；右边的头骨轮廓更圆。比较外形能提供线索，还要结合其他骨骼和年代，不能只看一个部位就下结论。"
+          }
+        }
+      },
+      "resources": [
+        {
+          "title": "转一转，看看三维化石",
+          "prompt": "打开博物馆藏品，选一件头骨，从侧面和正面各看一次。找找照片里不容易看到的地方。",
+          "source": 8
+        },
+        {
+          "title": "再看一组头骨对照",
+          "prompt": "到博物馆原文里找头骨侧面对照，试着指出眉脊和头顶的位置。先看本页中文提示，再选学英文原文。",
+          "source": 7
+        }
       ]
     },
     {
@@ -82,93 +326,1403 @@
       "summary": "看看石器的刃口、骨头的切痕和留下来的火塘。",
       "opening": "一块石头能当工具吗？看看图里的大石块和小石片。把一块石头当锤子敲另一块，掉下来的薄石片可能有锋利的边。几百万年前，远古人类就已经会用这样的办法做石器。",
       "figures": [
-        {"path": "humanorigins/stone-tools.jpg", "alt": "肯尼亚洛卡拉莱遗址的石核和几块石片的翻模", "caption": "肯尼亚洛卡拉莱的石核和石片翻模。找找大石块上缺掉的边。", "credit": "史密森尼学会人类起源项目", "source": 1}
+        {
+          "path": "humanorigins/stone-tools.jpg",
+          "alt": "肯尼亚洛卡拉莱遗址的石核和几块石片的翻模",
+          "caption": "肯尼亚洛卡拉莱的石核和石片翻模。找找大石块上缺掉的边。",
+          "credit": "史密森尼学会人类起源项目",
+          "source": 1
+        }
       ],
       "clues": [
-        {"title": "从石头上敲下刀刃", "observation": "石核是被敲打过的大块石料，表面留下石片脱落的痕迹。有些石片的边很锋利。", "meaning": "把石核和石片放在一起看，能帮助研究者推想当时是怎么敲出工具的。", "source": 1},
-        {"title": "一条细痕与一顿饭", "observation": "一些遗址里的动物骨头上有细小的切痕，位置和形状与用石片切肉留下的痕迹相像。", "meaning": "这些痕迹支持古人类曾切割动物。植物也能提供食物，只是它们通常比骨头更难保存。", "source": 2},
-        {"title": "火塘留下了什么", "observation": "在一些遗址里，炭屑、受热变色的石头和烧过的骨头聚在一小块地方。", "meaning": "要判断那里是否是人用过的火塘，要把好几条线索放在一起。火可以用来取暖、照明和烹煮食物。", "source": 3}
+        {
+          "title": "从石头上敲下刀刃",
+          "observation": "石核是被敲打过的大块石料，表面留下石片脱落的痕迹。有些石片的边很锋利。",
+          "meaning": "把石核和石片放在一起看，能帮助研究者推想当时是怎么敲出工具的。",
+          "source": 1
+        },
+        {
+          "title": "一条细痕与一顿饭",
+          "observation": "一些遗址里的动物骨头上有细小的切痕，位置和形状与用石片切肉留下的痕迹相像。",
+          "meaning": "这些痕迹支持古人类曾切割动物。植物也能提供食物，只是它们通常比骨头更难保存。",
+          "source": 4,
+          "figure": {
+            "path": "humanorigins/cutmarked-bone.webp",
+            "alt": "埃塞俄比亚戈纳发现的斑马踝骨化石，骨面上保留细小切痕",
+            "caption": "戈纳的一枚斑马踝骨化石，约 260 万年前。放大观察骨面上的细痕。",
+            "credit": "史密森尼学会人类起源项目",
+            "source": 4,
+            "observation": {
+              "prompt": "骨头上的细痕是怎样被解释的？只看到一条线就够了吗？",
+              "answer": "研究者把化石上的痕迹与实验中用石器切割留下的痕迹比较。位置和形状相似，支持曾用石器处理动物的解释；仍要结合其他证据。"
+            }
+          }
+        },
+        {
+          "title": "火塘留下了什么",
+          "observation": "在一些遗址里，炭屑、受热变色的石头和烧过的骨头聚在一小块地方。",
+          "meaning": "要判断那里是否是人用过的火塘，要把好几条线索放在一起。火可以用来取暖、照明和烹煮食物。",
+          "source": 5,
+          "figure": {
+            "path": "humanorigins/burned-flint.webp",
+            "alt": "以色列盖谢尔贝诺特雅各布遗址的三块受火影响的燧石",
+            "caption": "约 79 万年前遗址里的受热燧石。附近还发现了聚集的烧过的种子和木头，用火解释来自一组线索。",
+            "credit": "史密森尼学会人类起源项目",
+            "source": 5,
+            "observation": {
+              "prompt": "照片里只有三块石头，为什么还要查它们旁边发现了什么？",
+              "answer": "受热石头本身还不够。烧过的种子、木头是否聚在附近，以及它们的位置和年代，都能帮助判断是否是古人类用过的火。"
+            }
+          }
+        }
       ],
       "quiz": {
         "prompt": "想判断遗址里曾经有火塘，下面哪组发现最值得继续查？",
         "choices": [
-          {"label": "一块尖石头和一串脚印。", "correct": false, "feedback": "它们可能与工具和行走有关。还得找一找受热或燃烧留下的痕迹。"},
-          {"label": "一堆没有烧过的兽骨。", "correct": false, "feedback": "兽骨能提供动物和食物的线索。想知道附近有没有火塘，可以看骨头、石块有没有受过热。"},
-          {"label": "一小片区域里有炭屑、烧骨和受热的石头。", "correct": true, "feedback": "好几种受过热的东西聚在一起，比只看到一处灰烬更值得调查。科学家还会检查它们埋在哪里、是否属于同一时期。"}
+          {
+            "label": "一块尖石头和一串脚印。",
+            "correct": false,
+            "feedback": "它们可能与工具和行走有关。还得找一找受热或燃烧留下的痕迹。"
+          },
+          {
+            "label": "一堆没有烧过的兽骨。",
+            "correct": false,
+            "feedback": "兽骨能提供动物和食物的线索。想知道附近有没有火塘，可以看骨头、石块有没有受过热。"
+          },
+          {
+            "label": "一小片区域里有炭屑、烧骨和受热的石头。",
+            "correct": true,
+            "feedback": "好几种受过热的东西聚在一起，比只看到一处灰烬更值得调查。科学家还会检查它们埋在哪里、是否属于同一时期。"
+          }
         ]
       },
       "takeaway": "一处发现可能有好几种解释。把刃口、切痕、炭屑等线索放在一起，生活场景才慢慢清楚起来。",
-      "checked_on": "2026-11-09",
+      "checked_on": "2026-11-13",
       "sources": [
-        {"title": "史密森尼学会 · 早期石器", "url": "https://humanorigins.si.edu/evidence/behavior/stone-tools/early-stone-age-tools"},
-        {"title": "史密森尼学会 · 古人类怎样获得食物", "url": "https://humanorigins.si.edu/evidence/behavior/getting-food"},
-        {"title": "史密森尼学会 · 火塘与住所", "url": "https://humanorigins.si.edu/evidence/behavior/hearths-shelters"}
+        {
+          "title": "史密森尼学会 · 早期石器",
+          "url": "https://humanorigins.si.edu/evidence/behavior/stone-tools/early-stone-age-tools"
+        },
+        {
+          "title": "史密森尼学会 · 古人类怎样获得食物",
+          "url": "https://humanorigins.si.edu/evidence/behavior/getting-food"
+        },
+        {
+          "title": "史密森尼学会 · 火塘与住所",
+          "url": "https://humanorigins.si.edu/evidence/behavior/hearths-shelters"
+        },
+        {
+          "title": "史密森尼学会 · 埃塞俄比亚戈纳的切痕骨骼",
+          "url": "https://humanorigins.si.edu/evidence/behavior/getting-food/butchered-animal-bones-gona-ethiopia"
+        },
+        {
+          "title": "史密森尼学会 · 受火影响的燧石",
+          "url": "https://humanorigins.si.edu/evidence/behavior/hearths-shelters/fire-altered-stone-tools"
+        }
+      ],
+      "resources": [
+        {
+          "title": "去博物馆查切痕证据",
+          "prompt": "看看原始标本说明，再想一想：科学家为什么要做石器切割实验来比较？",
+          "source": 4
+        },
+        {
+          "title": "去博物馆找用火线索",
+          "prompt": "找出石头以外的两种线索，说说它们怎样一起帮助判断。",
+          "source": 5
+        }
       ]
     },
     {
       "slug": "migration",
       "label": "智人的迁徙",
       "title": "智人怎样走向世界？",
-      "summary": "在同一张地图上，分辨两段相隔很久的旅程。",
-      "opening": "你和地球上今天生活的所有人，都属于同一个物种，叫作「智人」。约 30 万年前，非洲已经有了早期智人。再往前很久，也有别的古人类从非洲走到了亚洲。",
+      "summary": "拨动年代地图，看智人走到哪里，查各地古人类的出现与消失。",
+      "opening": "你和地球上今天生活的所有人，都属于同一个物种，叫作「智人」。约 30 万年前，非洲已经有早期智人。后来，一些群体分批走向其他地方。点点地图，看看他们什么时候留下了足迹，当地还生活过哪些古人类。",
       "figures": [
-        {"path": "humanorigins/migration.svg", "alt": "迁徙示意图。蓝色虚线表示直立人等早期人类从非洲扩散到亚洲，橙色实线表示后来智人从非洲扩散到世界多地", "caption": "两段迁徙放在一起看。箭头表示大致方向，许多次旅程跨越了许多代人。", "credit": "乐学堂绘制 · 底图 Natural Earth", "source": 5}
+        {
+          "path": "humanorigins/migration.svg",
+          "alt": "迁徙示意图。蓝色虚线表示直立人等早期人类从非洲扩散到亚洲，橙色实线表示后来智人从非洲扩散到世界多地",
+          "caption": "两段迁徙放在一起看。箭头表示大致方向，许多次旅程跨越了许多代人。",
+          "credit": "乐学堂绘制 · 底图 Natural Earth",
+          "source": 5
+        }
       ],
       "clues": [
-        {"title": "更早的旅程", "observation": "非洲有约 190 万年前的早期直立人化石，亚洲也发现了年代久远的直立人化石。", "meaning": "直立人等古人类很早就扩散到了非洲之外。这段旅程发生在早期智人出现之前。", "source": 1},
-        {"title": "非洲的早期智人", "observation": "摩洛哥杰贝勒伊尔胡德遗址的化石约有 30 万年历史，脸部有早期智人的特征。", "meaning": "这些化石是早期智人生活在非洲的证据之一。后来，一些智人群体陆续迁往世界各地。", "source": 2},
-        {"title": "在路上相遇", "observation": "科学家把尼安德特人的古 DNA 和今天许多人的 DNA 作比较，找到了一些有亲缘联系的片段。", "meaning": "一些智人和尼安德特人相遇后有了共同后代，他们的一小部分遗传信息留传到了今天。", "source": 3}
+        {
+          "title": "更早的旅程",
+          "observation": "非洲有约 190 万年前的早期直立人化石，亚洲也发现了年代久远的直立人化石。",
+          "meaning": "直立人等古人类很早就扩散到了非洲之外。这段旅程发生在早期智人出现之前。",
+          "source": 1
+        },
+        {
+          "title": "非洲的早期智人",
+          "observation": "摩洛哥杰贝勒伊尔胡德遗址的化石约有 30 万年历史，脸部有早期智人的特征。",
+          "meaning": "这些化石是早期智人生活在非洲的证据之一。后来，一些智人群体陆续迁往世界各地。",
+          "source": 2
+        },
+        {
+          "title": "在路上相遇",
+          "observation": "科学家把尼安德特人的古 DNA 和今天许多人的 DNA 作比较，找到了一些有亲缘联系的片段。",
+          "meaning": "一些智人和尼安德特人相遇后有了共同后代，他们的一小部分遗传信息留传到了今天。",
+          "source": 3
+        }
       ],
       "quiz": {
         "prompt": "在亚洲找到直立人的化石，可以支持哪一个说法？",
         "choices": [
-          {"label": "这块化石记录的是现代智人的迁徙。", "correct": false, "feedback": "直立人和智人是演化树上不同的分支。先辨认化石属于哪一类，再谈它记录了谁的旅程。"},
-          {"label": "直立人曾在亚洲生活。", "correct": true, "feedback": "化石的种类和出土地点能帮助我们判断哪类古人类曾到过那里。"},
-          {"label": "直立人和智人同一天离开非洲。", "correct": false, "feedback": "比较化石年代就能看出，两段旅程相隔很久，每一段都跨过了很长的时间。"}
+          {
+            "label": "这块化石记录的是现代智人的迁徙。",
+            "correct": false,
+            "feedback": "直立人和智人是演化树上不同的分支。先辨认化石属于哪一类，再谈它记录了谁的旅程。"
+          },
+          {
+            "label": "直立人曾在亚洲生活。",
+            "correct": true,
+            "feedback": "化石的种类和出土地点能帮助我们判断哪类古人类曾到过那里。"
+          },
+          {
+            "label": "直立人和智人同一天离开非洲。",
+            "correct": false,
+            "feedback": "比较化石年代就能看出，两段旅程相隔很久，每一段都跨过了很长的时间。"
+          }
         ]
       },
       "takeaway": "看迁徙图时，一边问「是谁」，一边问「什么时候」。化石的地点和年代，能帮我们把不同的旅程分开。",
-      "checked_on": "2026-11-09",
+      "checked_on": "2026-11-13",
       "sources": [
-        {"title": "史密森尼学会 · 直立人的分布", "url": "https://humanorigins.si.edu/evidence/human-fossils/species/homo-erectus"},
-        {"title": "史密森尼学会 · 约 30 万年前的早期智人化石", "url": "https://humanorigins.si.edu/research/whats-hot-human-origins/our-species-arose-least-300000-years-ago"},
-        {"title": "史密森尼学会 · 古 DNA 与尼安德特人", "url": "https://humanorigins.si.edu/evidence/genetics/ancient-dna-and-neanderthals"},
-        {"title": "史密森尼学会 · 智人从非洲走向世界", "url": "https://humanorigins.si.edu/evidence/human-fossils/species/homo-sapiens"},
-        {"title": "Natural Earth · 世界陆地底图", "url": "https://www.naturalearthdata.com/downloads/110m-physical-vectors/110m-land/"}
-      ]
+        {
+          "title": "史密森尼学会 · 直立人的分布",
+          "url": "https://humanorigins.si.edu/evidence/human-fossils/species/homo-erectus"
+        },
+        {
+          "title": "史密森尼学会 · 约 30 万年前的早期智人化石",
+          "url": "https://humanorigins.si.edu/research/whats-hot-human-origins/our-species-arose-least-300000-years-ago"
+        },
+        {
+          "title": "史密森尼学会 · 古 DNA 与尼安德特人",
+          "url": "https://humanorigins.si.edu/evidence/genetics/ancient-dna-and-neanderthals"
+        },
+        {
+          "title": "史密森尼学会 · 智人从非洲走向世界",
+          "url": "https://humanorigins.si.edu/evidence/human-fossils/species/homo-sapiens"
+        },
+        {
+          "title": "Natural Earth · 世界陆地底图",
+          "url": "https://www.naturalearthdata.com/downloads/110m-physical-vectors/110m-land/"
+        },
+        {
+          "title": "史密森尼学会 · 智人的年代与分布",
+          "url": "https://humanorigins.si.edu/evidence/human-fossils/species/homo-sapiens"
+        },
+        {
+          "title": "PNAS · 西南亚斯胡尔与卡夫泽的早期智人",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2752549/"
+        },
+        {
+          "title": "自然通讯 · 老挝塔姆巴岭约 8.6 万至 6.8 万年前的智人",
+          "url": "https://www.nature.com/articles/s41467-023-38715-y"
+        },
+        {
+          "title": "犹他大学 · 智人何时到达澳大利亚",
+          "url": "https://www.global.utah.edu/stories/when-did-humans-first-colonize-australia/"
+        },
+        {
+          "title": "自然 · 保加利亚巴乔基罗洞的早期智人",
+          "url": "https://www.nature.com/articles/s41586-020-2259-z"
+        },
+        {
+          "title": "中科院古脊椎所 · 约 4 万年前田园洞人的 DNA",
+          "url": "https://www.ivpp.cas.cn/xwdt/kyjz/201811/t20181103_5155289.html"
+        },
+        {
+          "title": "美国地质调查局 · 白沙国家公园的古人类足迹",
+          "url": "https://pubs.usgs.gov/publication/fs20253046/full"
+        },
+        {
+          "title": "PLOS ONE · 智利皮劳科的晚更新世人类足迹",
+          "url": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0213572"
+        },
+        {
+          "title": "史密森尼学会 · 尼安德特人的生活时段",
+          "url": "https://humanorigins.si.edu/evidence/human-fossils/species/homo-neanderthalensis"
+        },
+        {
+          "title": "自然 · 白石崖溶洞的丹尼索瓦人及晚期肋骨",
+          "url": "https://www.nature.com/articles/s41586-024-07612-9"
+        },
+        {
+          "title": "自然 · 爪哇昂栋直立人的最后化石记录",
+          "url": "https://www.nature.com/articles/s41586-019-1863-2"
+        },
+        {
+          "title": "史密森尼学会 · 弗洛勒斯人的化石与石器年代",
+          "url": "https://humanorigins.si.edu/evidence/human-fossils/species/homo-floresiensis"
+        },
+        {
+          "title": "自然 · 菲律宾吕宋人的发现",
+          "url": "https://www.nature.com/articles/s41586-019-1067-9"
+        },
+        {
+          "title": "史密森尼学会 · 纳莱迪人的化石年代",
+          "url": "https://humanorigins.si.edu/evidence/human-fossils/species/homo-naledi"
+        },
+        {
+          "title": "PNAS · 智人向亚洲南部扩散的遗传与考古证据",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3696785/"
+        },
+        {
+          "title": "自然生态与演化 · 约 20 万年前的丹尼索瓦人化石",
+          "url": "https://www.nature.com/articles/s41559-021-01581-2"
+        },
+        {
+          "title": "联合国教科文组织 · 周口店北京人遗址",
+          "url": "https://whc.unesco.org/en/list/449/"
+        },
+        {
+          "title": "自然 · 丹尼索瓦洞古人类化石的年代",
+          "url": "https://www.eva.mpg.de/documents/Nature/Douka_Age_Nature_2019_3024326.pdf"
+        },
+        {
+          "title": "自然 · 青藏高原约 16 万年前的夏河下颌骨",
+          "url": "https://www.nature.com/articles/s41586-019-1139-x"
+        },
+        {
+          "title": "中科院古脊椎所 · 哈尔滨丹尼索瓦人头骨的分子证据",
+          "url": "https://ivpp.cas.cn/xwdt/ttyw/202506/t20250619_7871653.html"
+        }
+      ],
+      "atlas": {
+        "title": "跟着年代，走一趟世界",
+        "intro": "点「自动播放」，按年代看智人从非洲走向各地；地图会同步显示本站线索和当地出现过的古人类。也可以随时暂停，自己选年代、点地区。",
+        "identity_note": "这里的「从非洲出发」说的是远古智人群体。今天各地的人都属于智人；尼安德特人、丹尼索瓦人等是其他古人类，并不是各洲不同种类的现代人。",
+        "note": "这是一张线索地图，不是每一年的人口分布图。年代为约数，表示「那时已经有人」，不等于第一次到达；未亮起也不表示当时一定无人。箭头只示意扩散方向，不能证明沿线每一站的先后和相遇。底图用今天的海岸线，远古海岸线与冰川范围会变化。",
+        "extinction_note": "最后找到的化石，不等于最后一个人。化石记录有空白，各地消失的时间也可能不同；有些古人类与智人生育过共同后代，一部分遗传信息保留至今。",
+        "basemap": "humanorigins/world-land.svg",
+        "known_status": "在所选年代之前或当时，本图的代表线索已经出现。这不表示此后每一年都持续有人居住。",
+        "later_status": "本图为这里选用的代表线索比所选年代更晚。这不表示更早一定无人，也不能据此确定首次到达时间。",
+        "steps": [
+          {
+            "years_ago": 300000,
+            "label": "约 30 万年前",
+            "summary": "非洲已经出现早期智人。地图用摩洛哥的一处发现作代表，并不表示只有这里有人。",
+            "focus_region": "africa",
+            "events": [
+              {
+                "group": "sapiens",
+                "text": "非洲：早期智人已经出现，后来一些群体分批走向世界。",
+                "source": 2
+              },
+              {
+                "group": "naledi",
+                "text": "南部非洲：同一大时代还生活着纳莱迪人。",
+                "source": 19
+              }
+            ]
+          },
+          {
+            "years_ago": 236000,
+            "label": "约 23.6 万年前",
+            "summary": "南部非洲纳莱迪人的已知化石记录延续到约 23.6 万年前。线索到这里，并不表示他们就在这时灭绝。",
+            "focus_region": "africa",
+            "events": [
+              {
+                "group": "naledi",
+                "text": "南部非洲：纳莱迪人的已知记录到这里，灭绝时间未定。",
+                "source": 19
+              }
+            ]
+          },
+          {
+            "years_ago": 200000,
+            "label": "约 20 万年前",
+            "summary": "亚洲已经留下丹尼索瓦人的早期化石线索。智人、尼安德特人和其他古人类，在这个大时代里曾同时存在。",
+            "focus_region": "east-asia",
+            "events": [
+              {
+                "group": "denisovans",
+                "text": "亚洲：丹尼索瓦人的早期化石约有 20 万年历史。",
+                "source": 21
+              }
+            ]
+          },
+          {
+            "years_ago": 160000,
+            "label": "约 16 万年前",
+            "summary": "甘肃夏河的下颌骨至少约有 16 万年历史。古蛋白线索把它与丹尼索瓦人联系起来，说明青藏高原很早就留下了这组古人类的活动证据。",
+            "focus_region": "east-asia",
+            "events": [
+              {
+                "text": "青藏高原：白石崖溶洞的夏河下颌骨至少约有 16 万年历史；这不是人群起源或首次到达的精确日期。",
+                "group": "denisovans",
+                "source": 24
+              }
+            ]
+          },
+          {
+            "years_ago": 146000,
+            "label": "约 14.6 万年前",
+            "summary": "在这个节点查看哈尔滨头骨：它至少约有 14.6 万年历史，实际可能更古老。2025 年的分子证据把它与丹尼索瓦人联系起来，不能把这个数字画成连续生活时段。",
+            "focus_region": "east-asia",
+            "events": [
+              {
+                "text": "中国东北：哈尔滨头骨的测年下限约为 14.6 万年前。古蛋白与牙结石古 DNA 为认识丹尼索瓦人提供了新线索。",
+                "group": "denisovans",
+                "source": 25
+              }
+            ]
+          },
+          {
+            "years_ago": 110000,
+            "label": "约 11 万年前",
+            "summary": "爪哇昂栋保留了约 11 万年前的晚期直立人化石。这是最后已知的化石记录，不能当作所有地区直立人的灭绝日期。",
+            "focus_region": "southeast-asia",
+            "events": [
+              {
+                "group": "erectus",
+                "text": "爪哇：晚期直立人留下化石，确切灭绝时间仍未确定。",
+                "source": 16
+              }
+            ]
+          },
+          {
+            "years_ago": 100000,
+            "label": "约 10 万年前",
+            "summary": "西南亚留下了早期智人的化石，说明较早就有人离开非洲。这些早期外出群体与后来人群的关系，还要继续寻找线索。",
+            "focus_region": "west-asia",
+            "events": [
+              {
+                "group": "sapiens",
+                "text": "西南亚：较早离开非洲的智人留下了化石。",
+                "source": 7
+              },
+              {
+                "group": "floresiensis",
+                "text": "弗洛勒斯岛：约 10 万年前已有代表遗骸记录。",
+                "source": 17
+              }
+            ]
+          },
+          {
+            "years_ago": 70000,
+            "label": "约 7 万年前",
+            "summary": "老挝的化石记录表明，东南亚大陆这时已经有智人。不同批次的迁徙，并不一定都留下了今天的后代。",
+            "focus_region": "southeast-asia",
+            "events": [
+              {
+                "group": "sapiens",
+                "text": "东南亚大陆：老挝塔姆巴岭已有智人线索。",
+                "source": 8
+              }
+            ]
+          },
+          {
+            "years_ago": 67000,
+            "label": "约 6.7 万年前",
+            "summary": "菲律宾吕宋岛的卡劳洞留下吕宋人的骨骼线索。它们与智人是不同的古人类分支，不能把岛上的几种人群连成一条祖先链。",
+            "focus_region": "southeast-asia",
+            "events": [
+              {
+                "group": "luzonensis",
+                "text": "吕宋岛：出现约 6.7 万年前的吕宋人化石记录。",
+                "source": 18
+              }
+            ]
+          },
+          {
+            "years_ago": 60000,
+            "label": "约 6 万年前",
+            "summary": "约 6 万至 5 万年前是理解后来广泛扩散的重要时段。箭头是方向示意，不是已经还原的行走路线。",
+            "focus_region": "southeast-asia",
+            "events": [
+              {
+                "group": "sapiens",
+                "text": "智人的扩散：后来人群广泛迁徙的重要时段。",
+                "source": 20
+              },
+              {
+                "group": "floresiensis",
+                "text": "弗洛勒斯岛：代表遗骸的较晚端约为 6 万年前，相关石器还更晚。",
+                "source": 17
+              }
+            ]
+          },
+          {
+            "years_ago": 50000,
+            "label": "约 5 万年前",
+            "summary": "智人已到达澳大利亚一带。旅程中需要跨过海面，不能全靠步行；更早到达的具体年代仍在研究。",
+            "focus_region": "australia",
+            "events": [
+              {
+                "group": "sapiens",
+                "text": "澳大利亚一带：智人已经到达，途中需要跨海。",
+                "source": 9
+              },
+              {
+                "group": "luzonensis",
+                "text": "吕宋岛：已知化石记录的较晚端约为 5 万年前，灭绝时间未定。",
+                "source": 18
+              },
+              {
+                "group": "floresiensis",
+                "text": "弗洛勒斯岛：相关石器约延续到 5 万年前，不能据此确定灭绝时间。",
+                "source": 17
+              }
+            ]
+          },
+          {
+            "years_ago": 45000,
+            "label": "约 4.5 万年前",
+            "summary": "欧洲有约 4.5 万年前的智人遗骸。尼安德特人当时也还存在，两支人群曾有共同后代。",
+            "focus_region": "europe",
+            "events": [
+              {
+                "group": "sapiens",
+                "text": "欧洲：早期智人已经留下遗骸。",
+                "source": 10
+              },
+              {
+                "group": "neanderthals",
+                "text": "欧洲：尼安德特人与智人曾在同一大时代生活。",
+                "source": 14
+              }
+            ]
+          },
+          {
+            "years_ago": 40000,
+            "label": "约 4 万年前",
+            "summary": "北京田园洞留下了智人的骨骼和古 DNA。尼安德特人大约在这个时期消失，不能据此推断每个地区同一天消失。",
+            "focus_region": "europe",
+            "events": [
+              {
+                "group": "neanderthals",
+                "text": "欧洲与亚洲部分地区：尼安德特人约在这个时期消失。",
+                "source": 14
+              },
+              {
+                "group": "sapiens",
+                "text": "东亚：田园洞智人留下骨骼和古 DNA。",
+                "source": 11
+              }
+            ]
+          },
+          {
+            "years_ago": 32000,
+            "label": "约 3.2 万年前",
+            "summary": "白石崖溶洞的一件丹尼索瓦人肋骨，所在层位约为 4.8 万至 3.2 万年前。这里用年代范围的较晚端作阅读节点，灭绝时间仍然未知。",
+            "focus_region": "east-asia",
+            "events": [
+              {
+                "group": "denisovans",
+                "text": "青藏高原：晚期丹尼索瓦人线索的年代范围到约 3.2 万年前；这不是灭绝日期。",
+                "source": 15
+              }
+            ]
+          },
+          {
+            "years_ago": 23000,
+            "label": "约 2.3 万年前",
+            "summary": "北美白沙国家公园保留了约 2.3 万至 2.1 万年前的足迹。这些线索说明，智人进入美洲比过去一些简图画得更早。",
+            "focus_region": "north-america",
+            "events": [
+              {
+                "group": "sapiens",
+                "text": "北美洲：白沙国家公园保留了远古人类的足迹。",
+                "source": 12
+              }
+            ]
+          },
+          {
+            "years_ago": 15000,
+            "label": "约 1.5 万年前",
+            "summary": "南美洲也留下了智人活动的线索。本图用智利皮劳科约 1.56 万年前的足迹作代表。",
+            "focus_region": "south-america",
+            "events": [
+              {
+                "group": "sapiens",
+                "text": "南美洲：智利皮劳科的足迹说明人类已经到达这里。",
+                "source": 13
+              }
+            ]
+          },
+          {
+            "years_ago": 0,
+            "label": "今天",
+            "summary": "今天生活在地球上的所有人都属于智人。其他古人类已消失，部分遗传信息仍通过共同后代留在现代人群中。",
+            "focus_region": "africa",
+            "events": [
+              {
+                "group": "sapiens",
+                "text": "今天：各地的人都属于智人；一部分古人类遗传信息保留至今。",
+                "source": 6
+              }
+            ]
+          }
+        ],
+        "regions": [
+          {
+            "id": "africa",
+            "label": "非洲",
+            "x": 48.08,
+            "y": 35.03,
+            "years_ago": 300000,
+            "date": "约 30 万年前已有早期智人",
+            "evidence": "摩洛哥杰贝勒伊尔胡德的化石约有 30 万年历史。早期智人的演化发生在非洲，不能把一个发现点当成唯一的起点。",
+            "people_note": "这里出现了早期智人；南部非洲还生活过纳莱迪人。直立人在更早的年代也曾生活在非洲。",
+            "groups": [
+              "sapiens",
+              "naledi",
+              "erectus"
+            ],
+            "sources": [
+              2,
+              6,
+              19,
+              1
+            ],
+            "date_short": "约 30 万年前"
+          },
+          {
+            "id": "west-asia",
+            "label": "西南亚",
+            "x": 59.81,
+            "y": 34.45,
+            "years_ago": 100000,
+            "date": "约 10 万年前已有智人线索",
+            "evidence": "斯胡尔和卡夫泽等遗址留下早期智人的化石。这是较早走出非洲的一批线索，并不是所有后来迁徙的出发点。",
+            "people_note": "这里先后生活过智人和尼安德特人。同在一个地区发现，不等于同一时期住在同一个山洞。",
+            "groups": [
+              "sapiens",
+              "neanderthals"
+            ],
+            "sources": [
+              7,
+              14
+            ],
+            "date_short": "约 10 万年前"
+          },
+          {
+            "id": "southeast-asia",
+            "label": "东南亚",
+            "x": 78.72,
+            "y": 43.01,
+            "years_ago": 70000,
+            "date": "约 7 万年前已有智人线索",
+            "evidence": "老挝塔姆巴岭的智人化石所在层位约为 8.6 万至 6.8 万年前。地图采用约 7 万年前这个阅读节点。",
+            "people_note": "大陆发现了智人。更早的爪哇有直立人，弗洛勒斯岛有弗洛勒斯人，吕宋岛有吕宋人；这些地点和年代各不相同。",
+            "groups": [
+              "sapiens",
+              "erectus",
+              "floresiensis",
+              "luzonensis"
+            ],
+            "sources": [
+              8,
+              16,
+              17,
+              18
+            ],
+            "date_short": "约 7 万年前"
+          },
+          {
+            "id": "australia",
+            "label": "澳大利亚一带",
+            "x": 86.11,
+            "y": 67.12,
+            "years_ago": 50000,
+            "date": "约 5 万年前已有智人",
+            "evidence": "考古与遗传资料支持智人在约 5 万年前已到达澳大利亚一带。当时澳大利亚与新几内亚连在一起，但从亚洲前往仍需要跨海。",
+            "people_note": "已知这里的远古人类属于智人。携带丹尼索瓦人的部分遗传信息，不能证明丹尼索瓦人曾住在澳大利亚。",
+            "groups": [
+              "sapiens"
+            ],
+            "sources": [
+              9,
+              20
+            ],
+            "date_short": "约 5 万年前"
+          },
+          {
+            "id": "europe",
+            "label": "欧洲",
+            "x": 57.06,
+            "y": 27.47,
+            "years_ago": 45000,
+            "date": "约 4.5 万年前已有智人",
+            "evidence": "保加利亚巴乔基罗洞等地保存了约 4.5 万年前的智人遗骸。它们记录了早期智人进入欧洲的一段旅程。",
+            "people_note": "尼安德特人在智人到来前已生活很久，后来二者曾有共同后代。尼安德特人约在 4 万年前消失。",
+            "groups": [
+              "sapiens",
+              "neanderthals"
+            ],
+            "sources": [
+              10,
+              14,
+              3
+            ],
+            "date_short": "约 4.5 万年前"
+          },
+          {
+            "id": "east-asia",
+            "label": "东亚",
+            "x": 82.19,
+            "y": 29.66,
+            "years_ago": 40000,
+            "date": "约 4 万年前的田园洞智人",
+            "evidence": "北京田园洞人的骨骼和古 DNA 约有 4 万年历史。这个点说明当时东亚已有智人，不能当作东亚最早到达的日期。",
+            "people_note": "东亚不同地点、不同时期出现过直立人、丹尼索瓦人和智人。北京人属于直立人，田园洞人属于智人，不能依次连成一条祖先链。",
+            "groups": [
+              "sapiens",
+              "denisovans",
+              "erectus"
+            ],
+            "sources": [
+              11,
+              15,
+              1
+            ],
+            "date_short": "约 4 万年前"
+          },
+          {
+            "id": "north-america",
+            "label": "北美洲",
+            "x": 20.5,
+            "y": 34.38,
+            "years_ago": 23000,
+            "date": "约 2.3 万至 2.1 万年前的足迹",
+            "evidence": "美国白沙国家公园有古人类足迹，多种测年证据支持其中一些约为 2.3 万至 2.1 万年前。进入美洲的具体路线和更早年代仍在研究。",
+            "people_note": "美洲已知的远古人类属于智人，没有当地尼安德特人或直立人的可靠化石记录。东北亚通往美洲的箭头只表示大方向。",
+            "groups": [
+              "sapiens"
+            ],
+            "sources": [
+              12,
+              6
+            ],
+            "date_short": "约 2.3 万年前"
+          },
+          {
+            "id": "south-america",
+            "label": "南美洲",
+            "x": 29.69,
+            "y": 84.66,
+            "years_ago": 15000,
+            "date": "约 1.5 万年前已有智人线索",
+            "evidence": "智利皮劳科遗址发现约 1.56 万年前的人类足迹。它说明智人已经走到南美洲南部，并不表示在这一天才第一次进入南美洲。",
+            "people_note": "已知的远古人类属于智人。北美到南美的扩散经过许多代人，地图只画大致方向。",
+            "groups": [
+              "sapiens"
+            ],
+            "sources": [
+              13,
+              6
+            ],
+            "date_short": "约 1.5 万年前"
+          }
+        ],
+        "groups": [
+          {
+            "id": "sapiens",
+            "label": "智人",
+            "period": "约 30 万年前至今",
+            "place": "起源于非洲，后来扩散到世界各地",
+            "oldest": 300000,
+            "youngest": 0,
+            "status": "living",
+            "ending": "仍然存在：今天的我们都是智人。",
+            "note": "不同地区的人都属于同一个物种。某个古老群体没有留下可确认的后代，不等于智人这个物种灭绝。",
+            "source": 6,
+            "color": "#0b6fa4"
+          },
+          {
+            "id": "neanderthals",
+            "label": "尼安德特人",
+            "period": "约 40 万至 4 万年前",
+            "place": "欧洲和西南亚至中亚",
+            "oldest": 400000,
+            "youngest": 40000,
+            "status": "approximate",
+            "ending": "约 4 万年前消失，各地可能有早晚。",
+            "note": "他们是已消失的古人类近亲。部分遗传信息通过与智人的共同后代保留至今。",
+            "source": 14,
+            "color": "#9237b6"
+          },
+          {
+            "id": "denisovans",
+            "label": "丹尼索瓦人",
+            "period": "约 20 万年前已有；晚期化石约 4.8 万至 3.2 万年前",
+            "place": "亚洲多地，包括阿尔泰与青藏高原等地",
+            "oldest": 200000,
+            "youngest": 32000,
+            "status": "unknown",
+            "ending": "灭绝时间尚不确定。",
+            "note": "白石崖溶洞的晚期肋骨来自约 4.8 万至 3.2 万年前的地层，不能把 3.2 万年前直接写成灭绝日期。部分遗传信息保留在今天的人群中。",
+            "source": 15,
+            "color": "#ba2868"
+          },
+          {
+            "id": "erectus",
+            "label": "直立人",
+            "period": "约 190 万年前已有；晚期化石约 11 万年前",
+            "place": "非洲及亚洲，亚洲包括中国和爪哇等地",
+            "oldest": 1900000,
+            "youngest": 110000,
+            "status": "unknown",
+            "ending": "最后已知化石约 11 万年前，确切灭绝时间未定。",
+            "note": "爪哇昂栋的晚期化石约为 11.7 万至 10.8 万年前。这个年代不能用来断定中国每个直立人群何时消失。",
+            "source": 16,
+            "color": "#9a5014"
+          },
+          {
+            "id": "floresiensis",
+            "label": "弗洛勒斯人",
+            "period": "代表遗骸约 10 万至 6 万年前",
+            "place": "印度尼西亚弗洛勒斯岛",
+            "oldest": 100000,
+            "youngest": 60000,
+            "status": "unknown",
+            "ending": "相关石器延续到约 5 万年前，确切灭绝时间未定。",
+            "note": "骨骼与石器的年代要分开看。时间条画的是这里介绍的遗骸时段，并不表示这个分支只存在过这么久。",
+            "source": 17,
+            "color": "#14755c"
+          },
+          {
+            "id": "luzonensis",
+            "label": "吕宋人",
+            "period": "已知化石约 6.7 万至 5 万年前",
+            "place": "菲律宾吕宋岛卡劳洞",
+            "oldest": 67000,
+            "youngest": 50000,
+            "status": "unknown",
+            "ending": "灭绝时间尚不确定。",
+            "note": "已知化石很少，不能把最年轻化石的年代当作整个分支的终点。",
+            "source": 18,
+            "color": "#8d6506"
+          },
+          {
+            "id": "naledi",
+            "label": "纳莱迪人",
+            "period": "已知化石约 33.5 万至 23.6 万年前",
+            "place": "南部非洲",
+            "oldest": 335000,
+            "youngest": 236000,
+            "status": "unknown",
+            "ending": "灭绝时间尚不确定。",
+            "note": "南非化石的年代与早期智人的时代有重叠。重叠只说明同时存在，不能说明曾经相遇。",
+            "source": 19,
+            "color": "#4658ad"
+          }
+        ],
+        "routes": [
+          {
+            "from": "africa",
+            "to": "west-asia",
+            "years_ago": 100000,
+            "via": []
+          },
+          {
+            "from": "west-asia",
+            "to": "southeast-asia",
+            "years_ago": 60000,
+            "via": [
+              [
+                68,
+                48
+              ]
+            ]
+          },
+          {
+            "from": "southeast-asia",
+            "to": "australia",
+            "years_ago": 50000,
+            "via": [
+              [
+                84,
+                64
+              ]
+            ]
+          },
+          {
+            "from": "west-asia",
+            "to": "europe",
+            "years_ago": 45000,
+            "via": []
+          },
+          {
+            "from": "southeast-asia",
+            "to": "east-asia",
+            "years_ago": 40000,
+            "via": []
+          },
+          {
+            "from": "east-asia",
+            "to": "north-america",
+            "years_ago": 23000,
+            "via": [
+              [
+                94,
+                9
+              ],
+              [
+                100,
+                11
+              ],
+              [
+                0,
+                11
+              ],
+              [
+                10,
+                22
+              ]
+            ]
+          },
+          {
+            "from": "north-america",
+            "to": "south-america",
+            "years_ago": 15000,
+            "via": [
+              [
+                25,
+                60
+              ],
+              [
+                32,
+                68
+              ]
+            ]
+          }
+        ],
+        "playback": {
+          "default_milliseconds": 6000,
+          "speeds": [
+            {
+              "milliseconds": 3000,
+              "label": "快一些 · 每站 3 秒"
+            },
+            {
+              "milliseconds": 6000,
+              "label": "标准 · 每站 6 秒"
+            },
+            {
+              "milliseconds": 10000,
+              "label": "慢慢看 · 每站 10 秒"
+            }
+          ],
+          "play": "▶ 自动播放",
+          "pause": "Ⅱ 暂停演示",
+          "resume": "▶ 继续播放",
+          "replay": "↻ 再播放一遍",
+          "ready": "点「自动播放」，跟着迁徙路线从非洲出发。",
+          "playing": "正在按年代演示；点击年代或地区会暂停，方便你仔细看。",
+          "paused": "已暂停，可以查看线索，再继续播放。",
+          "ended": "演示结束：走到今天，地球上生活的人都属于智人。",
+          "before": "本图尚无这个年代的记录",
+          "known": "有生活线索",
+          "last": "末段线索，灭绝时间未定",
+          "unknown": "记录之后，灭绝时间未定",
+          "extinct": "约在此时或此前消失",
+          "living": "今天仍然存在",
+          "note": "下面列出这个地区曾出现过的人群。状态按各人群的代表记录比较，不表示这里每一年都有人，也不能把记录末端当作灭绝日期。"
+        },
+        "map_markers": [
+          {
+            "id": "sapiens-africa",
+            "group": "sapiens",
+            "region": "africa",
+            "place": "非洲",
+            "period": "约 30 万年前已有线索",
+            "oldest": 300000,
+            "youngest": 0,
+            "status": "living",
+            "x": 48.08,
+            "y": 35.03,
+            "label_x": 42,
+            "label_y": 50,
+            "note": "摩洛哥杰贝勒伊尔胡德的化石约有 30 万年历史。早期智人的演化发生在非洲，不能把一个发现点当成唯一的起点。 此点表示智人已经到过这里，不代表此后每一年都有人居住。",
+            "source": 2
+          },
+          {
+            "id": "sapiens-west-asia",
+            "group": "sapiens",
+            "region": "west-asia",
+            "place": "西南亚",
+            "period": "约 10 万年前已有线索",
+            "oldest": 100000,
+            "youngest": 0,
+            "status": "living",
+            "x": 59.81,
+            "y": 34.45,
+            "label_x": 57,
+            "label_y": 46,
+            "note": "斯胡尔和卡夫泽等遗址留下早期智人的化石。这是较早走出非洲的一批线索，并不是所有后来迁徙的出发点。 此点表示智人已经到过这里，不代表此后每一年都有人居住。",
+            "source": 7
+          },
+          {
+            "id": "sapiens-southeast-asia",
+            "group": "sapiens",
+            "region": "southeast-asia",
+            "place": "东南亚",
+            "period": "约 7 万年前已有线索",
+            "oldest": 70000,
+            "youngest": 0,
+            "status": "living",
+            "x": 78.72,
+            "y": 43.01,
+            "label_x": 63,
+            "label_y": 70,
+            "note": "老挝塔姆巴岭的智人化石所在层位约为 8.6 万至 6.8 万年前。地图采用约 7 万年前这个阅读节点。 此点表示智人已经到过这里，不代表此后每一年都有人居住。",
+            "source": 8
+          },
+          {
+            "id": "sapiens-australia",
+            "group": "sapiens",
+            "region": "australia",
+            "place": "澳大利亚一带",
+            "period": "约 5 万年前已有线索",
+            "oldest": 50000,
+            "youngest": 0,
+            "status": "living",
+            "x": 86.11,
+            "y": 67.12,
+            "label_x": 93,
+            "label_y": 90,
+            "note": "考古与遗传资料支持智人在约 5 万年前已到达澳大利亚一带。当时澳大利亚与新几内亚连在一起，但从亚洲前往仍需要跨海。 此点表示智人已经到过这里，不代表此后每一年都有人居住。",
+            "source": 9
+          },
+          {
+            "id": "sapiens-europe",
+            "group": "sapiens",
+            "region": "europe",
+            "place": "欧洲",
+            "period": "约 4.5 万年前已有线索",
+            "oldest": 45000,
+            "youngest": 0,
+            "status": "living",
+            "x": 57.06,
+            "y": 27.47,
+            "label_x": 51,
+            "label_y": 10,
+            "note": "保加利亚巴乔基罗洞等地保存了约 4.5 万年前的智人遗骸。它们记录了早期智人进入欧洲的一段旅程。 此点表示智人已经到过这里，不代表此后每一年都有人居住。",
+            "source": 10
+          },
+          {
+            "id": "sapiens-east-asia",
+            "group": "sapiens",
+            "region": "east-asia",
+            "place": "东亚",
+            "period": "约 4 万年前已有线索",
+            "oldest": 40000,
+            "youngest": 0,
+            "status": "living",
+            "x": 82.19,
+            "y": 29.66,
+            "label_x": 93,
+            "label_y": 50,
+            "note": "北京田园洞人的骨骼和古 DNA 约有 4 万年历史。这个点说明当时东亚已有智人，不能当作东亚最早到达的日期。 此点表示智人已经到过这里，不代表此后每一年都有人居住。",
+            "source": 11
+          },
+          {
+            "id": "sapiens-north-america",
+            "group": "sapiens",
+            "region": "north-america",
+            "place": "北美洲",
+            "period": "约 2.3 万年前已有线索",
+            "oldest": 23000,
+            "youngest": 0,
+            "status": "living",
+            "x": 20.5,
+            "y": 34.38,
+            "label_x": 12,
+            "label_y": 42,
+            "note": "美国白沙国家公园有古人类足迹，多种测年证据支持其中一些约为 2.3 万至 2.1 万年前。进入美洲的具体路线和更早年代仍在研究。 此点表示智人已经到过这里，不代表此后每一年都有人居住。",
+            "source": 12
+          },
+          {
+            "id": "sapiens-south-america",
+            "group": "sapiens",
+            "region": "south-america",
+            "place": "南美洲",
+            "period": "约 1.5 万年前已有线索",
+            "oldest": 15000,
+            "youngest": 0,
+            "status": "living",
+            "x": 29.69,
+            "y": 84.66,
+            "label_x": 22,
+            "label_y": 86,
+            "note": "智利皮劳科遗址发现约 1.56 万年前的人类足迹。它说明智人已经走到南美洲南部，并不表示在这一天才第一次进入南美洲。 此点表示智人已经到过这里，不代表此后每一年都有人居住。",
+            "source": 13
+          },
+          {
+            "id": "neanderthals-eurasia",
+            "group": "neanderthals",
+            "region": "europe",
+            "place": "欧洲至西亚",
+            "period": "约 40 万至 4 万年前",
+            "oldest": 400000,
+            "youngest": 40000,
+            "status": "approximate",
+            "x": 52.8,
+            "y": 27,
+            "label_x": 37,
+            "label_y": 17,
+            "note": "点位示意尼安德特人在欧洲至西亚的分布，并非单个遗址。约 4 万年前消失，各地可能有早晚；部分遗传信息通过共同后代保留至今。",
+            "source": 14
+          },
+          {
+            "id": "naledi-south-africa",
+            "group": "naledi",
+            "region": "africa",
+            "place": "南部非洲",
+            "period": "已知化石约 33.5 万至 23.6 万年前",
+            "oldest": 335000,
+            "youngest": 236000,
+            "status": "unknown",
+            "x": 57.8,
+            "y": 74.8,
+            "label_x": 50,
+            "label_y": 86,
+            "note": "南非纳莱迪人的化石记录与早期智人的时代有重叠。约 23.6 万年前是这里介绍的记录末端，不能当作灭绝日期。",
+            "source": 19
+          },
+          {
+            "id": "erectus-zhoukoudian",
+            "group": "erectus",
+            "region": "east-asia",
+            "place": "周口店 · 中国",
+            "period": "约 70 万至 20 万年前的遗址记录",
+            "oldest": 700000,
+            "youngest": 200000,
+            "status": "unknown",
+            "x": 82.2,
+            "y": 29.6,
+            "label_x": 93,
+            "label_y": 30,
+            "note": "北京人属于直立人。这里采用周口店世界遗产资料中的约略年代；当地记录的末端不能用来断定全部直立人何时灭绝。",
+            "source": 22
+          },
+          {
+            "id": "erectus-ngandong",
+            "group": "erectus",
+            "region": "southeast-asia",
+            "place": "昂栋 · 爪哇",
+            "period": "晚期化石约 11.7 万至 10.8 万年前",
+            "oldest": 117000,
+            "youngest": 108000,
+            "status": "unknown",
+            "x": 81,
+            "y": 61.5,
+            "label_x": 76,
+            "label_y": 90,
+            "note": "爪哇昂栋保存了晚期直立人的化石。这是代表化石记录的年代范围，不是直立人在爪哇首次出现的日期；确切灭绝时间未定。",
+            "source": 16
+          },
+          {
+            "id": "denisovans-altai",
+            "group": "denisovans",
+            "region": "east-asia",
+            "place": "丹尼索瓦洞",
+            "period": "代表化石约 20 万至 5 万年前",
+            "oldest": 200000,
+            "youngest": 50000,
+            "status": "unknown",
+            "x": 73.5,
+            "y": 21.7,
+            "label_x": 71,
+            "label_y": 10,
+            "note": "阿尔泰的丹尼索瓦洞留下不同时期的丹尼索瓦人化石。这里合并为约略记录范围，不表示每一年连续居住，也不能把约 5 万年前当作灭绝日期。",
+            "source": 23
+          },
+          {
+            "id": "denisovans-baishiya",
+            "group": "denisovans",
+            "region": "east-asia",
+            "place": "白石崖 · 青藏高原",
+            "period": "约 16 万年前已有；晚期地层约 4.8 万至 3.2 万年前",
+            "oldest": 160000,
+            "youngest": 32000,
+            "status": "unknown",
+            "x": 78.5,
+            "y": 32.6,
+            "label_x": 73,
+            "label_y": 35,
+            "note": "夏河下颌骨显示丹尼索瓦人至少约 16 万年前已在青藏高原活动。晚期肋骨所在层位约为 4.8 万至 3.2 万年前，3.2 万年前不是灭绝日期。",
+            "source": 15,
+            "site": "baishiya"
+          },
+          {
+            "id": "floresiensis-flores",
+            "group": "floresiensis",
+            "region": "southeast-asia",
+            "place": "弗洛勒斯岛",
+            "period": "代表遗骸约 10 万至 6 万年前",
+            "oldest": 100000,
+            "youngest": 60000,
+            "status": "unknown",
+            "x": 83.5,
+            "y": 62.7,
+            "label_x": 78,
+            "label_y": 70,
+            "note": "这里显示代表遗骸的记录范围，相关石器还延续到约 5 万年前。骨骼记录结束后，仍不能据此判定这个分支何时灭绝。",
+            "source": 17
+          },
+          {
+            "id": "luzonensis-callao",
+            "group": "luzonensis",
+            "region": "southeast-asia",
+            "place": "卡劳洞 · 吕宋岛",
+            "period": "已知化石约 6.7 万至 5 万年前",
+            "oldest": 67000,
+            "youngest": 50000,
+            "status": "unknown",
+            "x": 83.8,
+            "y": 44.7,
+            "label_x": 93,
+            "label_y": 70,
+            "note": "菲律宾卡劳洞的化石记录很少。约 5 万年前是这里介绍的较晚化石年代，灭绝时间仍然未知。",
+            "source": 18
+          },
+          {
+            "id": "denisovans-harbin",
+            "group": "denisovans",
+            "region": "east-asia",
+            "place": "哈尔滨 · 中国东北",
+            "period": "头骨至少约 14.6 万年前（年代下限）",
+            "oldest": 146000,
+            "youngest": 146000,
+            "record_type": "minimum_age",
+            "status": "unknown",
+            "x": 85.2,
+            "y": 25.8,
+            "label_x": 85,
+            "label_y": 10,
+            "note": "哈尔滨头骨至少约有 14.6 万年历史。2025 年的古蛋白与牙结石古 DNA 研究把它与丹尼索瓦人联系起来。这个节点只用来查看头骨的年代下限，不代表首次到达、连续居住或灭绝日期；头骨也可能更古老。",
+            "source": 25,
+            "site": "harbin"
+          }
+        ],
+        "map_key": {
+          "note": "颜色区分人群，连线指向发现地点。实心表示本节点展示的证据，记录范围或年代下限要看点位说明；哈尔滨只展示单件头骨的年代下限。空心问号表示此后情况不明，不能据此说当时仍有人居住。今天古人类旁的问号只表示消失年代未定。",
+          "known": "有生活线索",
+          "last": "末段线索 · 灭绝未定",
+          "unknown": "？ 灭绝时间未定",
+          "extinct": "约略消失后已退场",
+          "living": "今天仍然存在",
+          "uncertain_heading": "灭绝时间未定 · 单独查看",
+          "none_uncertain": "这个年代没有需要单独列出的不确定记录。",
+          "unknown_today": "已消失 · 年代未定",
+          "selected": "已选中 · 这处发现的详细线索",
+          "back_to_map": "↑ 回到刚才的地图点位",
+          "minimum_age": "单件化石 · 年代下限",
+          "site_link": "回中国遗址看实物 ↗",
+          "family_link": "到家谱认识这组人群 ↗"
+        }
+      }
     },
     {
       "slug": "china-sites",
       "label": "中国遗址",
       "title": "在中国，找到了哪些线索？",
-      "summary": "去云南和北京，把牙齿、头骨和古 DNA 放回地图上。",
-      "opening": "把镜头拉近，来到中国。云南元谋发现过两枚古人类牙齿，北京周口店一带也留下了许多线索。按发现地点和年代比一比，看看哪些线索隔得近，哪些隔了很久。",
+      "summary": "去云南、北京、甘肃和黑龙江，把牙齿、下颌骨、头骨和古 DNA 放回地图上。",
+      "opening": "把镜头拉近，来到中国。云南元谋的牙齿、北京周口店的头骨、甘肃白石崖的下颌骨，以及黑龙江哈尔滨的头骨，留下了不同时代的线索。按地点和大致年代比一比，再到家谱与迁徙地图里找对应的人群。",
       "figures": [
-        {"path": "humanorigins/yuanmou.webp", "alt": "上方是元谋的两枚门齿化石，下方是石器", "caption": "云南元谋发现的门齿化石和石器。上方两件是牙齿。", "credit": "史密森尼学会人类起源项目", "source": 1}
+        {
+          "path": "humanorigins/yuanmou.webp",
+          "alt": "上方是元谋的两枚门齿化石，下方是石器",
+          "caption": "云南元谋发现的门齿化石和石器。上方两件是牙齿。",
+          "credit": "史密森尼学会人类起源项目",
+          "source": 1
+        }
       ],
       "map_pins": [
-        {"label": "1", "x": 47.92, "y": 57.72},
-        {"label": "2、3", "x": 72.82, "y": 29.17}
+        {
+          "sites": [
+            "yuanmou"
+          ],
+          "x": 47.92,
+          "y": 57.72
+        },
+        {
+          "sites": [
+            "zhoukoudian",
+            "tianyuan"
+          ],
+          "x": 72.82,
+          "y": 29.17
+        },
+        {
+          "sites": [
+            "baishiya"
+          ],
+          "x": 48.7,
+          "y": 38.4
+        },
+        {
+          "sites": [
+            "harbin"
+          ],
+          "x": 89.5,
+          "y": 15.1
+        }
       ],
       "clues": [
-        {"title": "元谋人", "place": "云南 · 元谋", "period": "约 170 万年前", "observation": "在云南元谋，研究者发现了两枚古人类门齿化石。", "meaning": "牙齿虽小，也记录了古人类很早就在这一带活动。", "source": 1},
-        {"title": "北京人", "place": "北京 · 周口店第 1 地点", "period": "约 50 万年前（代表化石）", "observation": "周口店第 1 地点出土了头骨等古人类化石。", "meaning": "比较头骨等骨骼的特征，科学家把这些古人类归入直立人。", "source": 2},
-        {"title": "田园洞人", "place": "北京 · 田园洞", "period": "约 4 万年前", "observation": "研究者从距今约 4 万年的田园洞人骨骼中提取到了古 DNA。", "meaning": "田园洞人属于早期智人。比较这些古 DNA，可以研究当时东亚的早期现代人与其他人群的亲缘。", "source": 3}
+        {
+          "title": "元谋人",
+          "place": "云南 · 元谋",
+          "period": "约 170 万年前",
+          "observation": "在云南元谋，研究者发现了两枚古人类门齿化石。",
+          "meaning": "牙齿虽小，也记录了古人类很早就在这一带活动。",
+          "source": 1,
+          "id": "yuanmou",
+          "anchor": "clue-1",
+          "order": 1
+        },
+        {
+          "title": "北京人",
+          "place": "北京 · 周口店第 1 地点",
+          "period": "约 50 万年前（代表化石）",
+          "observation": "周口店第 1 地点出土了头骨等古人类化石。",
+          "meaning": "比较头骨等骨骼的特征，科学家把这些古人类归入直立人。",
+          "source": 2,
+          "id": "zhoukoudian",
+          "anchor": "clue-2",
+          "order": 2
+        },
+        {
+          "title": "田园洞人",
+          "place": "北京 · 田园洞",
+          "period": "约 4 万年前",
+          "observation": "研究者从距今约 4 万年的田园洞人骨骼中提取到了古 DNA。",
+          "meaning": "田园洞人属于早期智人。比较这些古 DNA，可以研究当时东亚的早期现代人与其他人群的亲缘。",
+          "source": 3,
+          "id": "tianyuan",
+          "anchor": "clue-3",
+          "order": 5
+        },
+        {
+          "id": "baishiya",
+          "anchor": "site-baishiya",
+          "order": 3,
+          "title": "白石崖溶洞 · 夏河人",
+          "place": "甘肃 · 夏河",
+          "period": "下颌骨至少约 16 万年前；晚期肋骨地层约 4.8 万至 3.2 万年前",
+          "observation": "夏河下颌骨保存了右半部和牙齿。研究者分析其中的古蛋白线索，把它与丹尼索瓦人联系起来；后来又在白石崖溶洞发现了有晚期地层年代的丹尼索瓦人肋骨。",
+          "meaning": "下颌骨和肋骨来自不同的发现，年代也不同。它们共同记录了丹尼索瓦人在青藏高原的活动，不能把两件化石当成同一个人，也不能把较晚的记录直接当作灭绝日。",
+          "source": 4,
+          "supplementary_sources": [
+            5
+          ],
+          "group": "denisovans",
+          "marker": "denisovans-baishiya",
+          "year": 160000,
+          "figure": {
+            "path": "humanorigins/xiahe-mandible.jpg",
+            "alt": "夏河下颌骨化石的右半部，上缘可见牙齿，下方有两厘米比例尺",
+            "caption": "白石崖溶洞的夏河下颌骨实物照片，至少约 16 万年前。保存的是右半部，照片没有补出另一半；下方红线是比例尺。",
+            "credit": "兰州大学研究团队；马普演化人类学研究所发布",
+            "source": 4,
+            "observation": {
+              "prompt": "这是一整副下颌骨吗？照片里哪些部分确实保存下来了？",
+              "answer": "它只保存了右半部，上缘还有牙齿。先分清原来保存的部分，再比较骨骼和古蛋白线索；不要把后来补画的完整形状当成化石本身。"
+            }
+          }
+        },
+        {
+          "id": "harbin",
+          "anchor": "site-harbin",
+          "order": 4,
+          "title": "哈尔滨头骨",
+          "place": "黑龙江 · 哈尔滨地区",
+          "period": "至少约 14.6 万年前（头骨年代下限）",
+          "observation": "哈尔滨地区发现的这件头骨保存得较完整。2025 年的研究把古蛋白和从牙结石中提取的古 DNA 线索放在一起，确认它与丹尼索瓦人的联系。",
+          "meaning": "头骨外形与分子线索可以互相核对，帮助研究者认识丹尼索瓦人。「至少约 14.6 万年前」是这件头骨的年代下限，不表示这个人群在那时才出现，也不代表当地一直连续有人居住。",
+          "source": 6,
+          "group": "denisovans",
+          "marker": "denisovans-harbin",
+          "year": 146000,
+          "figure": {
+            "path": "humanorigins/harbin-cranium.jpg",
+            "alt": "同一件哈尔滨头骨化石的正面和侧面照片，可比较眼眶、眉脊和头骨轮廓",
+            "caption": "同一件哈尔滨头骨的正面与侧面。图像来自 2021 年资料；本页结合 2025 年古蛋白与古 DNA 研究，介绍它与丹尼索瓦人的联系。",
+            "credit": "英国自然历史博物馆图像资料",
+            "source": 7,
+            "observation": {
+              "prompt": "这是两个人的头骨，还是同一件化石的两个角度？",
+              "answer": "这是同一件化石的正面和侧面。换个角度能看到不同特征，研究者还会把外形与古蛋白、古 DNA 等线索一起比较。"
+            }
+          }
+        }
       ],
       "quiz": {
         "prompt": "周口店第 1 地点和田园洞离得很近。哪种比较更能帮我们认识这两处的古人类？",
         "choices": [
-          {"label": "只看地点，离得近就当作同一类古人类。", "correct": false, "feedback": "同一个地区在不同年代可以住过不同的人群。把年代也放进来比较。"},
-          {"label": "比较化石和 DNA 等线索，再核对它们的年代。", "correct": true, "feedback": "两处遗址留下的线索和年代不同。把它们放在地图和时间里一起看，才能知道近在何处、远在何时。"},
-          {"label": "只看年代，把三个遗址依次连成一条祖先链。", "correct": false, "feedback": "时间先后可以排序。要研究谁和谁有亲缘，还得比较更多的骨骼与遗传线索。"}
+          {
+            "label": "只看地点，离得近就当作同一类古人类。",
+            "correct": false,
+            "feedback": "同一个地区在不同年代可以住过不同的人群。把年代也放进来比较。"
+          },
+          {
+            "label": "比较化石和 DNA 等线索，再核对它们的年代。",
+            "correct": true,
+            "feedback": "两处遗址留下的线索和年代不同。把它们放在地图和时间里一起看，才能知道近在何处、远在何时。"
+          },
+          {
+            "label": "只看年代，把这些遗址依次连成一条祖先链。",
+            "correct": false,
+            "feedback": "时间先后可以排序。要研究谁和谁有亲缘，还得比较更多的骨骼与遗传线索。"
+          }
         ]
       },
       "takeaway": "同一片地方，可以留着不同时代、不同古人类的痕迹。看地图找地点，看年代找先后，再回到证据本身。",
-      "checked_on": "2026-11-09",
+      "checked_on": "2026-11-13",
       "sources": [
-        {"title": "史密森尼学会 · 中国早期人类与元谋化石", "url": "https://humanorigins.si.edu/research/asian-research-projects/earliest-humans-china"},
-        {"title": "中科院古脊椎所 · 周口店遗址古人类化石", "url": "https://www.ivpp.cas.cn/kxcb/kpdt/202307/t20230718_6812446.html"},
-        {"title": "中科院古脊椎所 · 约 4 万年前田园洞人的 DNA", "url": "https://www.ivpp.cas.cn/xwdt/kyjz/201811/t20181103_5155289.html"}
+        {
+          "title": "史密森尼学会 · 中国早期人类与元谋化石",
+          "url": "https://humanorigins.si.edu/research/asian-research-projects/earliest-humans-china"
+        },
+        {
+          "title": "中科院古脊椎所 · 周口店遗址古人类化石",
+          "url": "https://www.ivpp.cas.cn/kxcb/kpdt/202307/t20230718_6812446.html"
+        },
+        {
+          "title": "中科院古脊椎所 · 约 4 万年前田园洞人的 DNA",
+          "url": "https://www.ivpp.cas.cn/xwdt/kyjz/201811/t20181103_5155289.html"
+        },
+        {
+          "title": "马普演化人类学研究所 · 夏河下颌骨实物与研究",
+          "url": "https://www.eva.mpg.de/press/news/2019-05-01-101405-first-hominins-on-the-tibetan-plateau-were-denisovans/"
+        },
+        {
+          "title": "国家自然科学基金委 · 白石崖晚期肋骨与动物资源研究",
+          "url": "https://www.nsfc.gov.cn/p1/3381/2825/68287.html"
+        },
+        {
+          "title": "中科院古脊椎所 · 哈尔滨头骨的古蛋白与古 DNA 证据",
+          "url": "https://ivpp.cas.cn/xwdt/ttyw/202506/t20250619_7871653.html"
+        },
+        {
+          "title": "英国自然历史博物馆 · 哈尔滨头骨实物照片（2021 年资料）",
+          "url": "https://www.nhm.ac.uk/discover/news/2021/june/ancient-skull-from-china-could-be-new-species-dragon-man.html"
+        }
+      ],
+      "site_map": {
+        "title": "四个地区，五组发现",
+        "alt": "中国遗址示意图：云南元谋、北京周口店一带、甘肃夏河白石崖溶洞、黑龙江哈尔滨。北京人和田园洞人来自北京周口店一带的不同地点。",
+        "note": "地点为示意。点编号可跳到实物线索。周口店第 1 地点和田园洞靠得近，图上把两个编号放在一起。列表按代表年代大致排列；「至少」表示年代下限，不是精确年份，也不能把这些发现连成一条祖先链。",
+        "list_label": "中国遗址按代表年代大致排列"
+      },
+      "resources": [
+        {
+          "title": "核对白石崖的晚期骨骼证据",
+          "prompt": "下颌骨和肋骨的年代一样吗？看看中文研究介绍，再区分代表化石的年代与人群消失的时间。",
+          "source": 5
+        },
+        {
+          "title": "看看哈尔滨头骨的新研究",
+          "prompt": "科学家用了哪两类分子线索？这两类线索为什么能帮助我们核对头骨的身份？",
+          "source": 6
+        }
       ]
     }
   ]

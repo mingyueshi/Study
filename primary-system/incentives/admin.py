@@ -11,8 +11,9 @@ from .models import BadgeAward, CheckIn, PointEvent, Redemption, RewardItem
 
 @admin.register(RewardItem)
 class RewardItemAdmin(admin.ModelAdmin):
-    list_display = ('name', 'icon', 'cost', 'is_active', 'sort')
-    list_editable = ('cost', 'is_active', 'sort')
+    list_display = ('name', 'category', 'icon', 'cost', 'is_active', 'sort')
+    list_editable = ('category', 'cost', 'is_active', 'sort')
+    list_filter = ('category', 'is_active')
     search_fields = ('name',)
     list_display_links = ('name',)
 

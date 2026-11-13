@@ -1,2 +1,16 @@
-{% extends 'base.html' %}{% block title %}登录 · 乐学堂{% endblock %}
-{% block content %}<section class="auth-card"><p class="eyebrow">欢迎回来</p><h1>开启今天的学习</h1><p>使用自己的账号，让每一次积累都有记录。</p><form method="post" class="stack-form">{% csrf_token %}{{ form.as_p }}<input type="hidden" name="next" value="{{ next }}"><div class="auth-actions"><button class="button" type="submit">登录</button><a class="button auth-register" href="{% url 'register' %}{% if next %}?next={{ next|urlencode }}{% endif %}">快速注册新账号</a></div></form><p class="muted">忘记密码时请联系管理员。</p><a class="muted" href="{% url 'admin:login' %}">管理后台入口 →</a></section>{% endblock %}
+{% extends 'accounts/center_base.html' %}
+{% block title %}登录 · 乐学堂{% endblock %}
+{% block center_class %}account-entry{% endblock %}
+{% block center_eyebrow %}欢迎回来{% endblock %}
+{% block center_title %}开启今天的学习{% endblock %}
+{% block center_description %}使用自己的账号，让每一次积累都有记录。{% endblock %}
+{% block center_nav %}{% endblock %}
+{% block center_content %}
+<section class="account-panel account-form-card" aria-labelledby="login-form-title">
+  <div class="account-panel-heading"><div><h2 id="login-form-title">登录学习账号</h2><p>你的收藏、笔记和学习足迹，都在这里等你。</p></div></div>
+  <form method="post" class="account-form">{% csrf_token %}{% include 'accounts/form_fields.html' %}<input type="hidden" name="next" value="{{ next }}"><button class="button account-submit" type="submit">登录 <span aria-hidden="true">→</span></button></form>
+  <div class="account-entry-switch"><span>第一次来乐学堂？</span><a href="{% url 'register' %}{% if next %}?next={{ next|urlencode }}{% endif %}">快速注册新账号 <span aria-hidden="true">↗</span></a></div>
+  <p class="account-form-footnote">忘记密码时请联系管理员。</p>
+  <a class="account-admin-link" href="{% url 'admin:login' %}">管理后台入口 <span aria-hidden="true">→</span></a>
+</section>
+{% endblock %}

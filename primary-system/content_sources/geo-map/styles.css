@@ -37,9 +37,41 @@ body {
 .gm-content { min-width: 0; container-type: inline-size; }
 .gm-map-workspace, .gm-route { scroll-margin-top: 12px; }
 
+.gm-topic, .gm-wildlife {
+  --atlas-hero-start: #1f654e;
+  --atlas-hero-end: #2b7766;
+  --atlas-tint: #edf5ef;
+  --atlas-border: #cadfd3;
+}
+.world-topic, .gm-wildlife[data-map="world"] {
+  --atlas-hero-start: #225875;
+  --atlas-hero-end: #2c7687;
+  --atlas-tint: #eef6fa;
+  --atlas-border: #c9dfe8;
+}
+.places-topic {
+  --atlas-hero-start: #256366;
+  --atlas-hero-end: #32767a;
+  --atlas-tint: #eef7f5;
+  --atlas-border: #c7dedb;
+}
+.routes-topic {
+  --atlas-hero-start: #795127;
+  --atlas-hero-end: #91622e;
+  --atlas-tint: #fbf4e8;
+  --atlas-border: #e6d5b8;
+}
+.gallery-topic {
+  --atlas-hero-start: #575180;
+  --atlas-hero-end: #75618f;
+  --atlas-tint: #f4f1f8;
+  --atlas-border: #dcd3e8;
+}
+
 /* ---------- 侧边导航与页面工具 ---------- */
 .gm-sysnav, .gm-side-panel {
-  background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 12px;
+  background: linear-gradient(150deg, var(--card), var(--atlas-tint));
+  border: 1px solid var(--atlas-border); border-radius: 16px; padding: 12px;
 }
 .gm-sysnav {
   display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px;
@@ -61,7 +93,8 @@ body {
 .gm-side-links small { color: var(--ink-soft); }
 
 .gm-hero {
-  background: linear-gradient(145deg, #1b5a49, #246c72);
+  background: linear-gradient(135deg, var(--atlas-hero-start), var(--atlas-hero-end));
+  border: 1px solid #ffffff38; box-shadow: 0 8px 20px #254f4612;
   border-radius: 16px; padding: 15px 16px; color: #f4fbf7;
 }
 .gm-eyebrow { font-size: 13px; letter-spacing: 0.03em; color: #d6efe9; }
@@ -75,6 +108,11 @@ body {
 
 /* ---------- 门户页 ---------- */
 .gm-pages { margin-top: 26px; }
+.gm-content :is(.gm-pages, .gm-stations), .gm-media-group {
+  padding: clamp(14px, 1.8vw, 24px);
+  border: 1px solid var(--atlas-border); border-radius: 20px;
+  background: linear-gradient(150deg, var(--atlas-tint), var(--card));
+}
 .gm-pages h2, .gm-stations h2 { margin: 0 0 12px; font-size: 23px; }
 .gm-page-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 175px), 1fr)); gap: 14px; }
 .gm-page-card {
@@ -142,7 +180,10 @@ body {
 .gm-stage { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; align-items: start; }
 .gm-route-stop:not([hidden]) + .gm-stage { margin-top: 12px; }
 
-.gm-map-wrap { position: relative; }
+.gm-map-wrap, .gm-map-mini {
+  position: relative; min-width: 0; padding: clamp(10px, 1.2vw, 18px);
+  border: 1px solid var(--atlas-border); border-radius: 22px; background: var(--atlas-tint);
+}
 #gm-svg { display: block; width: 100%; height: auto; border-radius: 22px; box-shadow: 0 10px 28px rgba(51, 65, 59, 0.12); }
 .gm-map-note { margin-top: 10px; font-size: 14px; color: var(--ink-soft); }
 
@@ -216,6 +257,7 @@ body {
 /* 档案卡 */
 .gm-card {
   background: var(--card); border-radius: 20px; padding: 22px 22px 20px;
+  border: 1px solid var(--atlas-border);
   border-top: 6px solid var(--accent, var(--green));
   box-shadow: 0 10px 26px rgba(51, 65, 59, 0.12);
 }
@@ -245,6 +287,7 @@ body {
 .gm-rhymes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); gap: 16px; }
 .gm-rhyme {
   background: #fff; border-radius: 18px; padding: 20px 22px 16px;
+  border: 1px solid var(--atlas-border);
   border-top: 6px solid var(--accent, var(--amber));
   box-shadow: 0 8px 20px rgba(51, 65, 59, 0.1);
 }
@@ -261,7 +304,10 @@ body {
 .gm-teaser-vs { font-weight: 800; color: #b04a3a; font-size: 13px; }
 .gm-teaser p { font-size: 14.5px; color: var(--ink-soft); }
 
-.gm-guide { background: #fff; border-radius: 20px; padding: 24px 30px; box-shadow: 0 8px 20px rgba(51, 65, 59, 0.1); }
+.gm-guide {
+  background: #fff8e8; border: 1px solid #e6d6ac; border-radius: 20px;
+  padding: clamp(16px, 2vw, 28px); box-shadow: 0 8px 20px rgba(51, 65, 59, 0.06);
+}
 .gm-guide ol { padding-left: 26px; display: grid; gap: 10px; }
 .gm-guide li::marker { color: var(--green); font-weight: 700; }
 .gm-guide-note { margin-top: 12px; font-size: 13.5px; color: var(--ink-soft); }
@@ -275,6 +321,32 @@ body {
 .gm-country.is-active, .world-topic[data-layer="home"] .gm-country.is-active { stroke: #973a18; stroke-width: 2.7; }
 .gm-country.is-found, .gm-prov.is-found { stroke: #197535; stroke-width: 3; }
 .gm-country:hover { filter: brightness(1.08) drop-shadow(0 2px 5px rgba(51, 65, 59, 0.3)); }
+.gm-country.is-continent { stroke: #285c4d; stroke-width: 2; }
+.gm-country.is-outside-continent { fill: #e6eae7; stroke: #c3cec8; }
+.gm-major-label.is-outside-continent { opacity: 0.35; }
+.gm-world-details { display: grid; gap: 14px; min-width: 0; }
+.gm-continent-choices { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+.gm-continent-choices button {
+  display: inline-flex; align-items: center; justify-content: center; gap: 7px;
+  min-height: 42px; padding: 7px 14px; border: 2px solid var(--line); border-radius: 12px;
+  background: var(--card); color: var(--ink); font: inherit; font-weight: 700; cursor: pointer;
+}
+.gm-continent-choices button span { width: 12px; height: 12px; border-radius: 4px; background: var(--choice-color); }
+.gm-continent-choices button:hover { border-color: #285c4d; }
+.gm-continent-choices button[aria-pressed="true"] { background: var(--choice-color); color: #203e34; border-color: #285c4d; }
+.gm-continent-choices button:disabled { opacity: 0.5; cursor: default; }
+.world-topic[data-layer="continent"] #gm-legend { display: none; }
+.gm-continent-selected .gm-card--blank { display: none; }
+.gm-continent-info {
+  padding: 18px 22px; border-radius: 20px; background: var(--card);
+  border: 1px solid var(--atlas-border);
+  border-top: 6px solid var(--continent-accent); box-shadow: 0 8px 22px #33413b18;
+}
+.gm-continent-facts { display: grid; gap: 12px; margin: 16px 0; }
+.gm-continent-facts dt { font-weight: 750; color: #285c4d; }
+.gm-continent-facts dd { margin: 2px 0 0; }
+.gm-continent-links { margin-top: 12px; font-weight: 700; }
+.gm-continent-info .gm-card-link { margin-top: 4px; }
 .gm-ocean-label {
   font-size: 15px; font-weight: 800; letter-spacing: 4px; fill: #35678e;
   paint-order: stroke; stroke: rgba(255, 255, 255, 0.7); stroke-width: 3; cursor: pointer;
@@ -290,7 +362,7 @@ body {
   paint-order: stroke; stroke: rgba(255, 255, 255, 0.8); stroke-width: 3;
 }
 
-/* ---------- 状态条与页脚 ---------- */
+/* ---------- 状态条 ---------- */
 .gm-status {
   position: fixed; left: 50%; bottom: 26px; transform: translateX(-50%) translateY(16px);
   background: rgba(51, 65, 59, 0.94); color: #fff;
@@ -299,8 +371,6 @@ body {
   max-width: min(86vw, 620px); text-align: center; z-index: 60;
 }
 .gm-status.visible { opacity: 1; transform: translateX(-50%) translateY(0); }
-.gm-footer { text-align: center; color: var(--ink-soft); font-size: 14px; padding: 30px 0 10px; }
-.gm-footer a { color: var(--green); }
 
 .gm-notice { background: #fff6d9; border: 2px solid #e8b73a; border-radius: 14px; padding: 14px 18px; margin-top: 16px; }
 
@@ -314,7 +384,7 @@ body {
 .gm-view-bar {
   display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
   gap: 6px 12px; padding: 8px; margin-bottom: 8px;
-  background: #fff; border: 1px solid var(--line); border-radius: 12px;
+  background: var(--card); border: 1px solid var(--atlas-border); border-radius: 12px;
 }
 .gm-tools-jump { display: none; color: #185d4b; font-size: 14px; font-weight: 700; }
 .gm-legend { display: flex; flex-wrap: wrap; gap: 2px 13px; font-size: 14px; list-style: none; }
@@ -365,7 +435,10 @@ body {
 .gm-search button { cursor: pointer; color: #fff; background: #22604e; border-color: transparent; font-weight: 700; }
 .gm-search--home { margin-top: 16px; }
 .gm-search--home button { color: #4a3709; background: #ffe293; }
-.gm-catalog { margin-top: 0; }
+.gm-catalog {
+  margin-top: 0; padding: clamp(14px, 1.8vw, 24px);
+  border: 1px solid var(--atlas-border); border-radius: 20px; background: var(--atlas-tint);
+}
 .gm-search .gm-category { margin: 10px 0 0; }
 .gm-category select { display: block; margin-top: 4px; }
 .gm-result-count { margin: 0 0 10px; color: var(--ink-soft); }
@@ -386,7 +459,7 @@ body {
 
 /* ---------- 地图主题路线 ---------- */
 .gm-routes { display: grid; gap: 18px; }
-.gm-route, .gm-route-stop { background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 18px 22px; }
+.gm-route, .gm-route-stop { background: var(--card); border: 1px solid var(--atlas-border); border-radius: 18px; padding: 18px 22px; }
 .gm-route-head, .gm-route-stop {
   display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 22px;
 }

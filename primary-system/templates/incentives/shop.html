@@ -1,0 +1,13 @@
+{% extends 'accounts/center_base.html' %}{% load static %}
+{% block title %}积分兑换 · 乐学堂{% endblock %}
+{% block center_eyebrow %}{% if user.is_authenticated %}{{ user }} 的愿望清单{% else %}小小积分，大大期待{% endif %}{% endblock %}
+{% block center_title %}积分兑换{% endblock %}
+{% block center_description %}把每一点积累，换成想要的小礼物和自由时光。{% endblock %}
+{% block center_icon %}<img src="{% static 'icons/trophy.svg' %}" alt="" width="82" height="82">{% endblock %}
+{% block center_content %}
+<link rel="stylesheet" href="{% static 'incentives/rewards.css' %}?v=5">
+<div class="rewards-page">
+  <div class="shop-welcome"><span class="shop-welcome-icon" aria-hidden="true">🎁</span><div><h2>挑一份属于自己的小期待</h2><p>愿望券按标注金额选礼物，娱乐和自由时间按标注时长安排。娱乐时间可用于手机、平板或游戏。兑换后，告诉家长来帮你兑现。</p></div>{% if user.is_authenticated %}<a class="account-text-link" href="{% url 'rewards' %}">看看积分怎么攒 <span aria-hidden="true">→</span></a>{% else %}<a class="account-text-link" href="{{ shop_login_url }}">登录后攒积分 <span aria-hidden="true">→</span></a>{% endif %}</div>
+  {% include 'incentives/shop_section.html' %}
+</div>
+{% endblock %}

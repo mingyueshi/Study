@@ -1,0 +1,9 @@
+{% load static %}{% with current=request.resolver_match.url_name %}
+<nav class="account-center-nav" aria-label="用户中心">
+  <a href="{% url 'my-learning' %}" {% if current == 'my-learning' %}aria-current="page"{% endif %}><img src="{% static 'icons/scenes.svg' %}" alt="" width="26" height="26">我的学习</a>
+  <a href="{% url 'rewards' %}" {% if current == 'rewards' %}aria-current="page"{% endif %}><img src="{% static 'icons/trophy.svg' %}" alt="" width="26" height="26">我的奖励</a>
+  <a href="{% url 'rewards-shop' %}" {% if current == 'rewards-shop' %}aria-current="page"{% endif %}><span aria-hidden="true">🎁</span>积分兑换</a>
+  <a href="{% url 'profile' %}" {% if current == 'profile' %}aria-current="page"{% endif %}><img src="{% static 'icons/footprints.svg' %}" alt="" width="26" height="26">学习偏好</a>
+  <a href="{% url 'password_change' %}" {% if current == 'password_change' or current == 'password_change_done' %}aria-current="page"{% endif %}><span class="account-nav-key" aria-hidden="true">⚿</span>修改密码</a>
+</nav>
+{% endwith %}

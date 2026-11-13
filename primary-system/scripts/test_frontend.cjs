@@ -1385,3 +1385,232 @@ test('study topic links resolve to real events, places, lessons and chapters', (
   assert.match(connections.references('su7-3', '接着学'), /href="\/geography\/study\/#lesson-gu5-1"/);
   assert.equal(connections.related('events', 'unknown'), '');
 });
+
+function originsAtlasPage(query = '') {
+  const data = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'humanorigins/data/stations.json'), 'utf8'));
+  const atlas = data.stations.find(station => station.slug === 'migration').atlas;
+  const chinaSites = data.stations.find(station => station.slug === 'china-sites').clues;
+  atlas.map_markers.forEach(marker => {
+    if (marker.site) marker.site_anchor = chinaSites.find(site => site.id === marker.site).anchor;
+  });
+  const nodes = new Map();
+  const make = () => {
+    const node = element(); node.children = [];
+    node.append = child => node.children.push(child);
+    node.replaceChildren = () => { node.children = []; };
+    node.focus = () => { node.focused = true; };
+    node.scrollIntoView = options => { node.scrolled = options; };
+    return node;
+  };
+  const get = id => { if (!nodes.has(id)) nodes.set(id, make()); return nodes.get(id); };
+  const steps = atlas.steps.map(() => element());
+  const markerLabels = atlas.map_markers.map(marker => {
+    const label = Object.assign(make(), {dataset: {mapMarker: marker.id}, stateLabel: make()});
+    label.querySelector = () => label.stateLabel;
+    return label;
+  });
+  const links = atlas.regions.map(region => Object.assign(element(), {dataset: {regionLink: region.id}}));
+  const records = atlas.regions.map(region => {
+    const record = Object.assign(element(), {dataset: {regionRecord: region.id}, status: element()});
+    record.querySelector = () => record.status; return record;
+  });
+  const groups = atlas.groups.map(group => {
+    const node = Object.assign(make(), {dataset: {population: group.id}, eraLabel: make()});
+    node.querySelector = () => node.eraLabel;
+    return node;
+  });
+  const controls = element(); controls.hidden = true;
+  get('migration-atlas').dataset.sitesUrl = '/human-origins/china-sites/';
+  get('migration-atlas').dataset.familyUrl = '/human-origins/family-tree/';
+  get('migration-atlas').querySelectorAll = selector => ({'[data-atlas-step]': steps, '[data-region-link]': links, '[data-region-record]': records, '[data-map-marker]': markerLabels})[selector];
+  get('migration-atlas').querySelector = selector => selector === '.origins-atlas-controls' ? controls : get(selector);
+  get('origins-atlas-data').textContent = JSON.stringify(atlas);
+  const routes = get('atlas-routes'); routes.children = [];
+  routes.replaceChildren = () => { routes.children = []; };
+  routes.append = child => routes.children.push(child);
+  const location = new URL('http://study.test/human-origins/migration/' + query), events = {}, timers = new Map();
+  let timerId = 0;
+  const doc = {hidden: false, getElementById: get, querySelectorAll: () => groups,
+    createElementNS: make, createElement: make, addEventListener: (type, handler) => { events[type] = handler; }};
+  run('humanorigins/migration.js', vm.createContext({URL,
+    document: doc,
+    setTimeout: (callback, delay) => { const id = ++timerId; timers.set(id, {callback, delay}); return id; },
+    clearTimeout: id => timers.delete(id),
+    localStorage: {getItem: () => null, setItem() {}},
+    window: {location, addEventListener: (type, handler) => { events[type] = handler; },
+      history: {replaceState: (_, __, url) => { location.href = url.href; }}},
+  }));
+  const click = node => node.handlers.click({preventDefault() {}});
+  const fireNext = () => { const [id, timer] = timers.entries().next().value; timers.delete(id); timer.callback(); };
+  const indexOf = year => atlas.steps.findIndex(step => step.years_ago === year);
+  return {atlas, get, steps, links, records, groups, controls, location, routes, click, events, timers, fireNext, indexOf, doc, markerLabels};
+}
+
+test('origins atlas restores a dated region link and distinguishes later evidence', () => {
+  const page = originsAtlasPage('?year=45000&region=europe#migration-atlas');
+  assert.equal(page.get('atlas-year').value, String(page.indexOf(45000)));
+  assert.equal(page.controls.hidden, false);
+  assert.deepEqual(page.records.filter(record => !record.hidden).map(record => record.dataset.regionRecord), ['europe']);
+  assert.equal(page.links.find(link => link.dataset.regionLink === 'east-asia').dataset.reached, 'false');
+  assert.equal(page.groups.find(group => group.dataset.population === 'neanderthals').dataset.related, 'true');
+  page.click(page.links.find(link => link.dataset.regionLink === 'east-asia'));
+  assert.match(page.records.find(record => !record.hidden).status.textContent, /更晚/);
+  assert.equal(page.location.searchParams.get('region'), 'east-asia');
+  page.click(page.steps[page.indexOf(40000)]);
+  assert.equal(page.links.find(link => link.dataset.regionLink === 'east-asia').dataset.reached, 'true');
+});
+
+test('origins atlas bounds era controls and splits the Pacific crossing at the map edge', () => {
+  const page = originsAtlasPage('?year=invalid&region=missing#ignored');
+  assert.equal(page.get('atlas-next').disabled, true);
+  assert.equal(page.routes.children.length, 8);
+  for (const child of page.routes.children) {
+    const xs = [...child.d.matchAll(/[ML]([\d.]+) /g)].map(match => Number(match[1]));
+    for (let i = 1; i < xs.length; i++) assert.ok(Math.abs(xs[i] - xs[i - 1]) <= 360);
+  }
+  page.click(page.steps[0]);
+  assert.equal(page.get('atlas-previous').disabled, true);
+  assert.equal(page.routes.children.length, 0);
+  assert.equal(page.links.filter(link => link.dataset.reached === 'true').length, 1);
+  page.get('atlas-year').value = String(page.indexOf(23000)); page.get('atlas-year').handlers.input();
+  assert.equal(page.location.searchParams.get('year'), '23000');
+  assert.equal(page.links.find(link => link.dataset.regionLink === 'north-america').dataset.reached, 'true');
+  assert.equal(page.links.find(link => link.dataset.regionLink === 'south-america').dataset.reached, 'false');
+});
+
+test('origins atlas follows region anchors and browser navigation', () => {
+  const page = originsAtlasPage('?region=europe#region-east-asia');
+  assert.equal(page.records.find(record => !record.hidden).dataset.regionRecord, 'east-asia');
+  page.location.hash = 'region-europe'; page.events.hashchange();
+  assert.equal(page.records.find(record => !record.hidden).dataset.regionRecord, 'europe');
+  page.location.href = 'http://study.test/human-origins/migration/?year=300000&region=africa'; page.events.popstate();
+  assert.equal(page.get('atlas-year').value, '0');
+  assert.equal(page.records.find(record => !record.hidden).dataset.regionRecord, 'africa');
+});
+
+test('origins autoplay tours from Africa, shows record changes and stops at today', () => {
+  const page = originsAtlasPage();
+  page.click(page.get('atlas-play'));
+  assert.equal(page.get('atlas-year').value, '0');
+  assert.equal(page.location.searchParams.get('region'), 'africa');
+  assert.equal(page.timers.size, 1);
+  assert.equal(page.get('atlas-play')['aria-pressed'], 'true');
+  const state = id => page.groups.find(group => group.dataset.population === id).dataset.eraState;
+  assert.equal(state('denisovans'), 'before');
+  while (page.timers.size) {
+    page.fireNext();
+    const year = Number(page.location.searchParams.get('year'));
+    if (year === 236000) assert.equal(state('naledi'), 'last');
+    if (year === 200000) assert.equal(state('denisovans'), 'known');
+    if (year === 110000) assert.equal(state('erectus'), 'last');
+    if (year === 40000) assert.equal(state('neanderthals'), 'extinct');
+    if (year === 32000) assert.equal(state('denisovans'), 'last');
+    if (year === 23000) assert.equal(state('denisovans'), 'unknown');
+    assert.ok(page.timers.size <= 1);
+    assert.ok(page.get('atlas-local-people').children.length >= 1);
+  }
+  assert.equal(page.location.searchParams.get('year'), '0');
+  assert.equal(state('sapiens'), 'living');
+  assert.equal(page.get('atlas-play')['aria-pressed'], 'false');
+  assert.equal(page.get('atlas-play').textContent, page.atlas.playback.replay);
+});
+
+test('origins autoplay cancels stale ticks after pause, manual selection, speed change and restart', () => {
+  const page = originsAtlasPage();
+  page.click(page.get('atlas-play'));
+  const stale = [...page.timers.values()][0].callback;
+  page.click(page.get('atlas-play'));
+  assert.equal(page.timers.size, 0);
+  page.click(page.get('atlas-play'));
+  stale();
+  assert.equal(page.get('atlas-year').value, '0');
+  page.fireNext();
+  assert.equal(page.get('atlas-year').value, '1');
+  page.get('atlas-speed').value = '3000'; page.get('atlas-speed').handlers.change();
+  assert.equal(page.timers.size, 1);
+  assert.equal([...page.timers.values()][0].delay, 3000);
+  page.click(page.links.find(link => link.dataset.regionLink === 'europe'));
+  assert.equal(page.timers.size, 0);
+  page.click(page.get('atlas-restart'));
+  assert.equal(page.location.searchParams.get('region'), 'africa');
+  assert.equal(page.timers.size, 1);
+  page.doc.hidden = true; page.events.visibilitychange();
+  assert.equal(page.timers.size, 0);
+  assert.equal(page.get('atlas-play')['aria-pressed'], 'false');
+  page.doc.hidden = false;
+  page.click(page.get('atlas-play'));
+  page.click(page.steps[page.indexOf(40000)]);
+  assert.equal(page.timers.size, 0);
+  page.click(page.get('atlas-play'));
+  page.events.pagehide();
+  assert.equal(page.timers.size, 0);
+});
+
+test('origins map markers follow local records, retire known extinctions and retain uncertain endings', () => {
+  const page = originsAtlasPage('?year=300000&region=africa');
+  const marker = id => page.markerLabels.find(label => label.dataset.mapMarker === id);
+  assert.equal(marker('naledi-south-africa').hidden, false);
+  assert.equal(marker('naledi-south-africa').dataset.mapState, 'known');
+  assert.equal(marker('denisovans-altai').hidden, true);
+  assert.equal(marker('sapiens-europe').hidden, true);
+  page.click(page.steps[page.indexOf(110000)]);
+  assert.equal(marker('erectus-ngandong').dataset.mapState, 'known');
+  assert.equal(marker('erectus-zhoukoudian').dataset.mapState, 'unknown');
+  assert.equal(marker('erectus-zhoukoudian').hidden, false);
+  assert.equal(marker('denisovans-baishiya').dataset.mapState, 'known');
+  page.click(page.steps[page.indexOf(40000)]);
+  assert.equal(marker('neanderthals-eurasia').hidden, true);
+  assert.equal(marker('sapiens-europe').hidden, false);
+  assert.equal(marker('luzonensis-callao').dataset.mapState, 'unknown');
+  assert.equal(marker('denisovans-baishiya').dataset.mapState, 'known');
+  page.click(page.steps[page.indexOf(32000)]);
+  assert.equal(marker('denisovans-baishiya').dataset.mapState, 'last');
+  assert.match(marker('denisovans-baishiya').stateLabel.textContent, /灭绝未定/);
+  page.click(page.steps[page.indexOf(0)]);
+  assert.equal(marker('neanderthals-eurasia').hidden, true);
+  assert.equal(page.markerLabels.filter(label => label.dataset.mapState === 'unknown' && !label.hidden).length, 8);
+  assert.equal(page.get('atlas-uncertain-records').children.length, 8);
+});
+
+test('origins Harbin point preserves the fossil age bound and links to the physical evidence', () => {
+  const page = originsAtlasPage('?year=160000&region=east-asia');
+  const marker = page.markerLabels.find(label => label.dataset.mapMarker === 'denisovans-harbin');
+  assert.equal(marker.hidden, true);
+  page.click(page.steps[page.indexOf(146000)]);
+  assert.equal(marker.hidden, false);
+  assert.equal(marker.dataset.mapState, 'known');
+  assert.match(marker.stateLabel.textContent, /年代下限/);
+  page.click(marker);
+  const related = page.get('atlas-marker-detail').children.find(child => child.className === 'origins-related-links');
+  assert.deepEqual(related.children.map(child => child.href), [
+    '/human-origins/china-sites/#site-harbin', '/human-origins/family-tree/#family-denisovans',
+  ]);
+  page.click(page.steps[page.indexOf(110000)]);
+  assert.equal(marker.dataset.mapState, 'unknown');
+  page.click(page.steps[page.indexOf(0)]);
+  assert.match(marker.stateLabel.textContent, /已消失/);
+});
+
+test('origins map selection pauses playback, restores deep links and drops invisible selections', () => {
+  const page = originsAtlasPage('?year=110000&marker=erectus-zhoukoudian');
+  const marker = id => page.markerLabels.find(label => label.dataset.mapMarker === id);
+  assert.equal(page.get('atlas-marker-detail').hidden, false);
+  assert.equal(page.get('atlas-marker-detail').focused, undefined, 'restoring a deep link must not move focus');
+  assert.equal(marker('erectus-zhoukoudian')['aria-current'], 'location');
+  page.click(page.get('atlas-play'));
+  page.click(marker('erectus-ngandong'));
+  assert.equal(page.timers.size, 0);
+  assert.equal(page.location.searchParams.get('marker'), 'erectus-ngandong');
+  assert.equal(page.location.searchParams.get('region'), 'southeast-asia');
+  assert.equal(page.get('atlas-marker-detail').hidden, false);
+  assert.equal(page.get('atlas-marker-detail').focused, true);
+  assert.equal(page.get('atlas-marker-detail').scrolled.block, 'nearest');
+  const back = page.get('atlas-marker-detail').children.find(child => child.className === 'origins-map-return');
+  page.click(back);
+  assert.equal(marker('erectus-ngandong').focused, true);
+  page.click(page.steps[0]);
+  assert.equal(page.get('atlas-marker-detail').hidden, true);
+  assert.equal(page.location.searchParams.has('marker'), false);
+  const invalid = originsAtlasPage('?year=40000&marker=missing');
+  assert.equal(invalid.get('atlas-marker-detail').hidden, true);
+});

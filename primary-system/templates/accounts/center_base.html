@@ -1,0 +1,17 @@
+{% extends 'base.html' %}{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'accounts/center.css' %}?v=2">
+<script src="{% static 'accounts/center.js' %}?v=1" defer></script>
+<div class="account-center {% block center_class %}{% endblock %}">
+  <header class="account-heading">
+    <div class="account-heading-copy">
+      <p class="eyebrow">{% block center_eyebrow %}{{ user }} 的学习空间{% endblock %}</p>
+      <h1>{% block center_title %}{% endblock %}</h1>
+      <p class="account-heading-note">{% block center_description %}{% endblock %}</p>
+    </div>
+    <div class="account-heading-art" aria-hidden="true"><span>✦</span>{% block center_icon %}<img src="{% static 'icons/book.svg' %}" alt="" width="82" height="82">{% endblock %}<span>✧</span></div>
+  </header>
+  {% block center_nav %}{% if user.is_authenticated %}{% include 'accounts/center_nav.html' %}{% endif %}{% endblock %}
+  {% block center_content %}{% endblock %}
+</div>
+{% endblock %}

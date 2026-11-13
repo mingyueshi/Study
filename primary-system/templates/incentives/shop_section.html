@@ -1,0 +1,25 @@
+{% load static %}
+<section id="reward-shop" class="reward-panel redeem-section" aria-labelledby="shop-title">
+    <div class="reward-section-heading"><div><p class="eyebrow">给坚持一个小小的奖励</p><h2 id="shop-title">兑换专区</h2></div><p>{% if user.is_authenticated %}可用 <strong>{{ summary.balance }}</strong> 积分，挑一份喜欢的奖励。{% else %}先看看喜欢什么，登录后再来兑换。{% endif %}</p></div>
+    {% if shop_page %}
+    <nav class="reward-category-filters" aria-label="奖励分类">
+      <a href="{{ all_categories_url }}" {% if not selected_category %}aria-current="page"{% endif %}>全部 <span>{{ total_rewards }}</span></a>
+      {% for category in category_filters %}<a href="{{ category.url }}" {% if selected_category == category.code %}aria-current="page"{% endif %}><span class="category-filter-icon" aria-hidden="true">{{ category.icon }}</span>{{ category.name }} <span>{{ category.count }}</span></a>{% endfor %}
+    </nav>
+    <p class="reward-filter-result" role="status">{% if selected_category %}{{ selected_category_name }} · 共 {{ items|length }} 项奖励{% else %}共 {{ total_rewards }} 项奖励，按分类慢慢挑。{% endif %}</p>
+    {% endif %}
+    {% for group in category_groups %}
+    <section class="reward-category-group" aria-labelledby="reward-category-{{ group.code }}">
+      <header class="reward-category-heading"><span class="reward-category-icon" aria-hidden="true">{{ group.icon }}</span><h3 id="reward-category-{{ group.code }}">{{ group.name }}</h3><span>{{ group.count }} 项奖励</span></header>
+      <div class="redeem-grid">{% for row in group.items %}{% include 'incentives/reward_card.html' %}{% endfor %}</div>
+    </section>
+    {% empty %}
+    <div class="reward-empty"><span aria-hidden="true">🎁</span>{% if selected_category %}<h3>这一类暂时没有上架奖励</h3><p>换个分类看看，还有别的小期待。</p><a class="account-text-link" href="{{ all_categories_url }}">查看全部奖励 <span aria-hidden="true">→</span></a>{% else %}<h3>奖励还在准备中</h3><p>家长还没有上架奖励，先攒好积分等着吧。</p>{% endif %}</div>
+    {% endfor %}
+    {% if user.is_authenticated and redemptions %}
+    <h3 class="reward-subheading">我的兑换记录 <small>最近 {{ redemptions|length }} 条</small></h3>
+    <ul class="redemption-list">
+      {% for redemption in redemptions %}<li><div class="redemption-main"><span class="status-chip {{ redemption.status }}">{{ redemption.get_status_display }}</span><strong>{{ redemption.item_name }}</strong><span class="redemption-cost">−{{ redemption.cost }} 积分</span></div><p class="when"><time datetime="{{ redemption.requested_at|date:'c' }}">{{ redemption.requested_at|date:'n月j日 H:i' }}</time>{% if redemption.resolved_note %} · {{ redemption.resolved_note }}{% endif %}</p></li>{% endfor %}
+    </ul>
+    {% endif %}
+  </section>

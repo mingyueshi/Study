@@ -1,6 +1,9 @@
 {% load static %}
 <figure class="origins-figure">
-  <img src="{% static figure.path %}" alt="{{ figure.alt }}" {% if lazy %}loading="lazy"{% endif %}>
+  <a class="origins-image-link" href="{% static figure.path %}" data-origins-zoom>
+    <img src="{% static figure.path %}" alt="{{ figure.alt }}" {% if lazy %}loading="lazy"{% endif %}>
+    <span>放大观察 ↗</span>
+  </a>
   {% if station.slug == 'migration' %}
   <ul class="origins-map-key" aria-label="迁徙图例">
     <li><span class="origins-route-early" aria-hidden="true"></span>直立人等早期人类的扩散</li>
@@ -8,4 +11,10 @@
   </ul>
   {% endif %}
   <figcaption>{{ figure.caption }} <a href="#source-{{ figure.source }}">{{ figure.credit }} ↘</a></figcaption>
+  {% if figure.observation %}
+  <details class="origins-observation">
+    <summary>{{ figure.observation.prompt }}</summary>
+    <p>{{ figure.observation.answer }}</p>
+  </details>
+  {% endif %}
 </figure>

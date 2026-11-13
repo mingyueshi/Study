@@ -15,11 +15,17 @@
   align-items: end;
   justify-content: space-between;
   gap: 14px 28px;
-  padding-bottom: clamp(16px, 2vw, 26px);
+  padding: clamp(18px, 2.2vw, 30px);
+  margin-bottom: 18px;
+  border: 1px solid #ffffff38;
+  border-radius: 22px;
+  background: linear-gradient(125deg, var(--atlas-hero-start), var(--atlas-hero-end));
+  box-shadow: 0 8px 20px #254f4612;
+  color: #f4fbf7;
 }
 
 .gm-wildlife-kicker {
-  color: var(--animal-rust);
+  color: #e0efe6;
   font-size: 14px;
   font-weight: 800;
   letter-spacing: .12em;
@@ -27,14 +33,17 @@
 
 .gm-wildlife-header h1 {
   margin: 4px 0 8px;
-  color: var(--animal-green);
+  color: #fff;
   font-size: clamp(34px, 4vw, 64px);
   font-weight: 900;
   line-height: 1.16;
 }
 
-.gm-wildlife-header p:not(.gm-wildlife-kicker) { color: var(--ink-soft); font-size: 17px; }
-.gm-wildlife-header a { color: var(--animal-green); font-weight: 700; padding-block: 8px; }
+.gm-wildlife-header p:not(.gm-wildlife-kicker) { color: #f4fbf7; font-size: 17px; }
+.gm-wildlife-header a {
+  color: #fff; font-weight: 700; padding: 7px 12px;
+  background: #ffffff18; border: 1px solid #ffffff52; border-radius: 10px;
+}
 .gm-wildlife-links { display: flex; flex-wrap: wrap; gap: 4px 20px; }
 
 .gm-wildlife-tools {
@@ -45,13 +54,12 @@
   gap: 12px 20px;
   margin-bottom: 14px;
   padding: 14px clamp(12px, 1.6vw, 22px);
-  border: 1px solid var(--line);
+  border: 1px solid var(--atlas-border);
   border-radius: 16px;
-  background: var(--card);
+  background: var(--atlas-tint);
 }
 
-.gm-wildlife-tools h2,
-.gm-wildlife-tools label { color: var(--ink); font-size: 15px; font-weight: 800; }
+.gm-wildlife-tools h2 { color: var(--ink); font-size: 15px; font-weight: 800; }
 
 .gm-habitat-filters {
   display: flex;
@@ -60,11 +68,10 @@
   margin-top: 5px;
 }
 
-.gm-habitat-filters button,
-#gm-animal-picker {
+.gm-habitat-filters button {
   min-height: 42px;
   padding: 6px 12px;
-  border: 1px solid var(--line);
+  border: 1px solid var(--atlas-border);
   border-radius: 9px;
   color: var(--ink);
   background: var(--card);
@@ -89,8 +96,38 @@
   background: var(--animal-color);
 }
 
-.gm-wildlife-tools label { display: grid; gap: 5px; }
-#gm-animal-picker { min-width: 12em; }
+.gm-animal-explore { display: grid; gap: 18px; min-width: 0; }
+.gm-animal-catalog {
+  padding: clamp(12px, 1.5vw, 22px); border: 1px solid var(--atlas-border);
+  border-radius: 18px; background: var(--atlas-tint);
+}
+.gm-animal-catalog-head {
+  display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 6px 14px;
+  margin-bottom: 12px;
+}
+.gm-animal-catalog h2 { font-size: 23px; }
+.gm-animal-catalog p { font-size: 15px; color: var(--ink-soft); }
+.gm-animal-catalog-head a { color: var(--animal-green); font-weight: 700; font-size: 15px; }
+#gm-animal-picker { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 160px), 1fr)); gap: 12px; }
+.gm-animal-choice {
+  display: grid; grid-template-rows: auto 1fr; min-width: 0; padding: 0; overflow: hidden;
+  border: 2px solid var(--atlas-border); border-radius: 14px; background: var(--card); color: var(--ink);
+  font: inherit; text-align: left; cursor: pointer;
+}
+.gm-animal-choice img { width: 100%; aspect-ratio: 4 / 3; object-fit: contain; background: #e8efea; }
+.gm-animal-choice-caption { display: grid; align-content: start; gap: 3px; padding: 10px 12px; }
+.gm-animal-choice-name { display: flex; gap: 7px; align-items: center; }
+.gm-animal-choice-name > span {
+  display: grid; place-items: center; flex: none; min-width: 24px; height: 24px;
+  padding-inline: 3px; border-radius: 50%; background: var(--animal-color); color: #fff; font-size: 13px;
+}
+.gm-animal-choice b { font-size: 18px; line-height: 1.4; }
+.gm-animal-choice small { font-size: 13px; color: var(--ink-soft); line-height: 1.5; }
+.gm-animal-choice:hover { border-color: var(--animal-color); }
+.gm-animal-choice[aria-pressed="true"] {
+  border-color: var(--animal-color); background: color-mix(in srgb, var(--animal-color) 12%, var(--card));
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--animal-color) 35%, transparent);
+}
 
 .gm-wildlife-workspace {
   display: grid;

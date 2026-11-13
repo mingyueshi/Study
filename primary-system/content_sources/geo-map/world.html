@@ -63,6 +63,7 @@
         <div class="gm-stage">
           <figure class="gm-map-wrap">
             <div class="gm-quiz" id="gm-quiz" aria-live="polite" tabindex="-1" hidden></div>
+            <div class="gm-continent-choices" id="gm-continent" role="group" aria-label="选择大洲"></div>
             <div class="gm-view-bar">
               <div class="gm-view-tools" id="gm-view-tools" role="group" aria-label="地图缩放"></div>
               <ul class="gm-legend" id="gm-legend" aria-label="图例"></ul>
@@ -71,7 +72,10 @@
             <svg id="gm-svg" role="group" tabindex="0" aria-label="世界示意地图，包含七大洲、世界地标与中国与世界图层"></svg>
             <figcaption class="gm-map-note" id="gm-map-note">示意教学地图：国家轮廓经过简化，山脉与大河位置为近似示意；南极洲按制图惯例截至南纬 73°；国家中文名与英文名对照见档案卡，个别地区沿用地图集通行写法。</figcaption>
           </figure>
-          <aside class="gm-card gm-card--blank" id="gm-card" aria-label="地点档案" aria-live="polite"></aside>
+          <div class="gm-world-details">
+            <section class="gm-continent-info" id="gm-continent-info" aria-label="大洲重点内容" aria-live="polite" hidden></section>
+            <aside class="gm-card gm-card--blank" id="gm-card" aria-label="地点档案" aria-live="polite"></aside>
+          </div>
         </div>
       </section>
 
@@ -85,6 +89,7 @@
         <h2 id="guide-title">这张地图怎么玩</h2>
         <ol>
           <li><strong>认大洲：</strong>「七大洲」图层里每个国家都按所属大洲着色，点国家或大洋亮出档案卡；</li>
+          <li><strong>选一个洲：</strong>点击地图上方的洲名按钮，地图会突出这个洲，旁边或下方会展示它的位置、地形和观察问题。点「全部大洲」可回到全览。</li>
           <li><strong>找之最：</strong>「世界地标」图层里标着最高的山峰、最长的河流、最大的沙漠，点标记读小档案；</li>
           <li><strong>看中国：</strong>「中国与世界」图层里金色那块就是中国，点它看中国在世界上站的位置；</li>
           <li><strong>定位与缩放：</strong>从「找地点」里选名字，地图会标出它。放大后可拖动地图，或把焦点移到地图上按方向键。</li>
@@ -97,6 +102,5 @@
       <noscript><p class="gm-notice">请启用 JavaScript 查看世界地图；内容数据保存在本目录的 world-geo.js 与 world-data.js 中。</p></noscript>
     </div>
   </main>
-  <footer class="gm-footer">乐学堂 · 地理图谱 · <a href="index.html">系统首页</a> · <a href="china.html">中国地图</a> · <a href="province.html">省域站</a></footer>
 </body>
 </html>

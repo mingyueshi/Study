@@ -54,6 +54,16 @@
   map.innerHTML = '<g aria-hidden="true">' + baseMap + S.compass() + '</g>' + animals.map(marker).join('');
   const markers = [...map.querySelectorAll('[data-animal]')];
   const numbers = new Map(animals.map((animal, index) => [animal.id, index + 1]));
+  picker.innerHTML = animals.map(animal =>
+    `<button type="button" class="gm-animal-choice" data-animal="${esc(animal.id)}" aria-pressed="false"
+             style="--animal-color:${habitatById.get(animal.habitat).color}">
+      <img src="${esc(new URL(animal.id + '.jpg', assets).href)}" alt="" loading="lazy" decoding="async">
+      <span class="gm-animal-choice-caption">
+        <span class="gm-animal-choice-name"><span>${numbers.get(animal.id)}</span><b>${esc(animal.name)}</b></span>
+        <small>${esc(animal.place)}</small>
+      </span>
+    </button>`).join('');
+  const targets = [...markers, ...picker.querySelectorAll('[data-animal]')];
 
   filters.innerHTML = [{ id: '', name: '全部', color: '' }, ...habitats].map(({ id, name, color }) =>
     `<button type="button" data-habitat="${id}" aria-pressed="false">
@@ -67,8 +77,7 @@
     const placeLink = world
       ? `<a class="gm-animal-station" href="world.html?place=${encodeURIComponent(animal.mapPlace)}#map">在世界地图上看 →</a>`
       : `<a class="gm-animal-station" href="province.html?adcode=${province.adcode}">看${esc(S.displayName(province.name))}省域站 →</a>`;
-    picker.value = animal.id;
-    for (const pin of markers) pin.setAttribute('aria-pressed', String(pin.dataset.animal === animal.id));
+    for (const target of targets) target.setAttribute('aria-pressed', String(target.dataset.animal === animal.id));
     card.style.setProperty('--animal-color', habitat.color);
     card.innerHTML = `
       <img class="gm-animal-photo" src="${esc(new URL(animal.id + '.jpg', assets).href)}" alt="${esc(animal.name)}">
@@ -100,14 +109,12 @@
     for (const button of filters.querySelectorAll('button')) {
       button.setAttribute('aria-pressed', String(button.dataset.habitat === habitat));
     }
-    for (const pin of markers) pin.toggleAttribute('hidden', !visibleIds.has(pin.dataset.animal));
-    picker.innerHTML = visible.map(({ id, name }) =>
-      `<option value="${id}">${numbers.get(id)} · ${esc(name)}</option>`).join('');
+    for (const target of targets) target.toggleAttribute('hidden', !visibleIds.has(target.dataset.animal));
     count.textContent = `地图上有 ${visible.length} 种动物。`;
     select(visibleIds.has(selected.id) ? selected : visible[0]);
   }
 
-  function chooseMarker(event) {
+  function chooseAnimal(event) {
     const pin = event.target.closest('[data-animal]');
     if (!pin) return;
     select(animalById.get(pin.dataset.animal));
@@ -120,15 +127,12 @@
     filter(button.dataset.habitat);
     rememberSelection();
   });
-  picker.addEventListener('change', () => {
-    select(animalById.get(picker.value));
-    rememberSelection();
-  });
-  map.addEventListener('click', chooseMarker);
+  picker.addEventListener('click', chooseAnimal);
+  map.addEventListener('click', chooseAnimal);
   map.addEventListener('keydown', event => {
     if (!event.target.matches('[data-animal]') || !['Enter', ' '].includes(event.key)) return;
     event.preventDefault();
-    if (!event.repeat) chooseMarker(event);
+    if (!event.repeat) chooseAnimal(event);
   });
 
   filter('');

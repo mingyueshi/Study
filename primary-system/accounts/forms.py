@@ -24,6 +24,7 @@ class LearnerRegistrationForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ('username',)
+        widgets = {'username': forms.TextInput(attrs={'autocomplete': 'username'})}
         help_texts = {'username': '字母、数字或 . @ + - _ ，登录用；创建后不能改。'}
 
     def clean_password2(self):
@@ -46,6 +47,14 @@ class LearnerRegistrationForm(forms.ModelForm):
 
 
 class ProfileForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['grade'].empty_label = '暂不设置年级'
+
     class Meta:
         model = User
         fields = ('display_name', 'grade')
+        help_texts = {
+            'display_name': '学习时显示这个名字，不填就用登录用户名。',
+            'grade': '可以先不选，以后再来调整。',
+        }
