@@ -1,0 +1,440 @@
+{
+  "schema_version": 1,
+  "id": "daodejing-67",
+  "title": "道德经·第六十七章",
+  "attribution": "老子",
+  "level": "challenge",
+  "genre": "reasoning",
+  "skills": [
+    "meaning",
+    "referent",
+    "reason",
+    "contrast",
+    "retell"
+  ],
+  "curriculum": null,
+  "intro": "慈、俭与不争先。本章说的三宝是慈爱、节俭与不争先，强调勇敢也需要关爱作根本。",
+  "background": "这是《道德经》德经·第六十七章。本章围绕「慈、俭与不争先」展开，可以先读原文，再对照译文，看看作者用了什么比方或对比。",
+  "editorial_note": "本馆用逐句译解帮助入门。读「道」「无为」等词时要看上下文；古代观念和理想化比方，可以边读边与家长讨论。",
+  "source": {
+    "work": "道德经（又名老子）",
+    "section": "德经·第六十七章",
+    "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#六十七章",
+    "note": "原文以本机简体《老子》为底本，统一引号，第七章移去括号异文提示。译文、词义和练习为本馆编写的入门读法，参考王弼注理解，不将不同底本混作同一文本。"
+  },
+  "source_ref": {
+    "locator": "/content/66",
+    "path": "poetry/simplified/诸子百家/老子.json",
+    "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+    "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+    "anchor_text": "天下皆谓我道大，似不肖。夫唯大，故似不肖。若肖，久矣其细也夫！我有三宝，持而保之。一曰慈，二曰俭，三曰不敢为天下先。慈故能勇；俭故能广；不敢为天下先，故能成器长。今捨慈且勇；捨俭且广；捨后且先；死矣！夫慈以战则胜，以守则固。天将救之，以慈卫之。"
+  },
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "天下皆谓我道大，似不肖。",
+      "translation": "天下人都说道广大，好像不像一般事物。",
+      "explanation": "读词小提示：「不肖」：不像一般具体事物的样子。",
+      "chunks": [
+        "天下皆谓我道大，",
+        "似不肖。"
+      ],
+      "hints": [
+        "不肖"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "不肖",
+          "kind": "word",
+          "meaning": "不像一般具体事物的样子。",
+          "reading": "bù xiào"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第六十七章》第1句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#六十七章",
+        "source_ref": {
+          "locator": "/content/66",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "天下皆谓我道大，似不肖。"
+        }
+      }
+    },
+    {
+      "id": "s2",
+      "text": "夫唯大，故似不肖。",
+      "translation": "正因为广大，所以不只像某个具体事物。",
+      "explanation": "读词小提示：「不肖」：不像一般具体事物的样子。",
+      "chunks": [
+        "夫唯大，",
+        "故似不肖。"
+      ],
+      "hints": [
+        "不肖"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "不肖",
+          "kind": "word",
+          "meaning": "不像一般具体事物的样子。",
+          "reading": "bù xiào"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第六十七章》第2句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#六十七章",
+        "source_ref": {
+          "locator": "/content/66",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "天下皆谓我道大，似不肖。夫唯大，故似不肖。若肖，久矣其细也夫！我有三宝，持而保之。一曰慈，二曰俭，三曰不敢为天下先。慈故能勇；俭故能广；不敢为天下先，故能成器长。今捨慈且勇；捨俭且广；捨后且先；死矣！夫慈以战则胜，以守则固。天将救之，以慈卫之。"
+        }
+      }
+    },
+    {
+      "id": "s3",
+      "text": "若肖，久矣其细也夫！",
+      "translation": "如果只像某个具体事物，它早已显得狭小了。",
+      "explanation": "读词小提示：「若肖」：如果只像某个具体事物；「细」：狭小。",
+      "chunks": [
+        "若肖，",
+        "久矣其细也夫！"
+      ],
+      "hints": [
+        "若肖",
+        "细"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "若肖",
+          "kind": "word",
+          "meaning": "如果只像某个具体事物。"
+        },
+        {
+          "id": "n2",
+          "quote": "细",
+          "kind": "word",
+          "meaning": "狭小。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第六十七章》第3句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#六十七章",
+        "source_ref": {
+          "locator": "/content/66",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "若肖，久矣其细也夫！"
+        }
+      }
+    },
+    {
+      "id": "s4",
+      "text": "我有三宝，持而保之。",
+      "translation": "我有三件宝贵的原则，认真持守保护。",
+      "explanation": "读词小提示：「三宝」：慈、俭、不敢为天下先。",
+      "chunks": [
+        "我有三宝，",
+        "持而保之。"
+      ],
+      "hints": [
+        "三宝"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "三宝",
+          "kind": "word",
+          "meaning": "慈、俭、不敢为天下先。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第六十七章》第4句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#六十七章",
+        "source_ref": {
+          "locator": "/content/66",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "我有三宝，持而保之。"
+        }
+      }
+    },
+    {
+      "id": "s5",
+      "text": "一曰慈，二曰俭，三曰不敢为天下先。",
+      "translation": "第一是慈爱，第二是节俭，第三是不争着抢在天下人前面。",
+      "explanation": "读词小提示：「慈」：慈爱、关怀生命；「俭」：节制、爱惜用度。",
+      "chunks": [
+        "一曰慈，",
+        "二曰俭，",
+        "三曰不敢为天下先。"
+      ],
+      "hints": [
+        "慈",
+        "俭"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "慈",
+          "kind": "word",
+          "meaning": "慈爱、关怀生命。"
+        },
+        {
+          "id": "n2",
+          "quote": "俭",
+          "kind": "word",
+          "meaning": "节制、爱惜用度。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第六十七章》第5句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#六十七章",
+        "source_ref": {
+          "locator": "/content/66",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "一曰慈，二曰俭，三曰不敢为天下先。"
+        }
+      }
+    },
+    {
+      "id": "s6",
+      "text": "慈故能勇；俭故能广；不敢为天下先，故能成器长。",
+      "translation": "因为慈爱而能勇敢，因为节俭而能宽裕，因为不争先而能担当带领的责任。",
+      "explanation": "读词小提示：「慈」：慈爱、关怀生命；「俭」：节制、爱惜用度。",
+      "chunks": [
+        "慈故能勇；",
+        "俭故能广；",
+        "不敢为天下先，",
+        "故能成器长。"
+      ],
+      "hints": [
+        "慈",
+        "俭",
+        "器长"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "慈",
+          "kind": "word",
+          "meaning": "慈爱、关怀生命。"
+        },
+        {
+          "id": "n2",
+          "quote": "俭",
+          "kind": "word",
+          "meaning": "节制、爱惜用度。"
+        },
+        {
+          "id": "n3",
+          "quote": "器长",
+          "kind": "word",
+          "meaning": "有能力担当带领责任的人。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第六十七章》第6句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#六十七章",
+        "source_ref": {
+          "locator": "/content/66",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "慈故能勇；俭故能广；不敢为天下先，故能成器长。"
+        }
+      }
+    },
+    {
+      "id": "s7",
+      "text": "今捨慈且勇；捨俭且广；捨后且先；死矣！",
+      "translation": "如今若舍弃慈爱而只求勇敢，舍弃节俭而只求宽裕，舍弃退让而只求争先，就会有危险。",
+      "explanation": "读词小提示：「慈」：慈爱、关怀生命；「俭」：节制、爱惜用度。",
+      "chunks": [
+        "今捨慈且勇；",
+        "捨俭且广；",
+        "捨后且先；",
+        "死矣！"
+      ],
+      "hints": [
+        "慈",
+        "俭",
+        "捨"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "慈",
+          "kind": "word",
+          "meaning": "慈爱、关怀生命。"
+        },
+        {
+          "id": "n2",
+          "quote": "俭",
+          "kind": "word",
+          "meaning": "节制、爱惜用度。"
+        },
+        {
+          "id": "n3",
+          "quote": "捨",
+          "kind": "word",
+          "meaning": "同「舍」，舍弃。"
+        },
+        {
+          "id": "n4",
+          "quote": "且",
+          "kind": "word",
+          "meaning": "这里只求、却想。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第六十七章》第7句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#六十七章",
+        "source_ref": {
+          "locator": "/content/66",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "今捨慈且勇；捨俭且广；捨后且先；死矣！"
+        }
+      }
+    },
+    {
+      "id": "s8",
+      "text": "夫慈以战则胜，以守则固。",
+      "translation": "怀着慈爱而行动，进取能够有力量，守护能够稳固。",
+      "explanation": "读词小提示：「慈」：慈爱、关怀生命；「固」：稳固。",
+      "chunks": [
+        "夫慈以战则胜，",
+        "以守则固。"
+      ],
+      "hints": [
+        "慈",
+        "固"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "慈",
+          "kind": "word",
+          "meaning": "慈爱、关怀生命。"
+        },
+        {
+          "id": "n2",
+          "quote": "固",
+          "kind": "word",
+          "meaning": "稳固。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第六十七章》第8句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#六十七章",
+        "source_ref": {
+          "locator": "/content/66",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "夫慈以战则胜，以守则固。"
+        }
+      }
+    },
+    {
+      "id": "s9",
+      "text": "天将救之，以慈卫之。",
+      "translation": "天要帮助谁，就好像以慈爱来保护他。",
+      "explanation": "结尾用天来表达劝诫，读时重点看三条可以实践的原则。",
+      "chunks": [
+        "天将救之，",
+        "以慈卫之。"
+      ],
+      "hints": [
+        "慈",
+        "卫之"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "慈",
+          "kind": "word",
+          "meaning": "慈爱、关怀生命。"
+        },
+        {
+          "id": "n2",
+          "quote": "卫之",
+          "kind": "word",
+          "meaning": "保护它。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第六十七章》第9句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#六十七章",
+        "source_ref": {
+          "locator": "/content/66",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "天将救之，以慈卫之。"
+        }
+      }
+    }
+  ],
+  "overview": {
+    "sequence": [
+      "先看本章开头：天下人都说道广大，好像不像一般事物。",
+      "本章说的三宝是慈爱、节俭与不争先，强调勇敢也需要关爱作根本。",
+      "再回到结尾：天要帮助谁，就好像以慈爱来保护他。"
+    ],
+    "question": "这一章为什么可以叫作「慈、俭与不争先」？",
+    "answer": "本章说的三宝是慈爱、节俭与不争先，强调勇敢也需要关爱作根本。可以引用本章开头或结尾的原句，说明你的依据。",
+    "takeaway": "本章说的三宝是慈爱、节俭与不争先，强调勇敢也需要关爱作根本。"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "choice",
+      "sentence": "s1",
+      "skill": "meaning",
+      "prompt": "开头的「不肖」在这里怎样理解？",
+      "choices": [
+        "只顾自己，不留意他人的处境。",
+        "不像一般具体事物的样子。",
+        "为了显示本领而处处炫耀。"
+      ],
+      "answer": 1,
+      "explanation": "把词放回原句看，「不肖」在本句中的意思是：不像一般具体事物的样子。"
+    },
+    {
+      "id": "q2",
+      "type": "choice",
+      "sentence": "s9",
+      "skill": "reason",
+      "prompt": "读完「慈、俭与不争先」，哪一种理解更合适？",
+      "choices": [
+        "只看名字，就能知道全部道理。",
+        "为达到自己的目标，可以不顾别人。",
+        "本章说的三宝是慈爱、节俭与不争先，强调勇敢也需要关爱作根本。"
+      ],
+      "answer": 2,
+      "explanation": "本章说的三宝是慈爱、节俭与不争先，强调勇敢也需要关爱作根本。"
+    },
+    {
+      "id": "q3",
+      "type": "selfcheck",
+      "sentence": "s9",
+      "skill": "retell",
+      "prompt": "选本章一句话，用自己的话解释，再说说它怎样帮助你理解「慈、俭与不争先」。",
+      "answer": "先说清原句中的对象和动作，再解释关键词。可以围绕这点来讲：本章说的三宝是慈爱、节俭与不争先，强调勇敢也需要关爱作根本。说完后，回到原文找一句作依据。",
+      "explanation": "不必背诵译文。重点看词义是否放回本句、有没有原文依据，以及是否把古人的比方误当成不分条件的结论。"
+    }
+  ]
+}

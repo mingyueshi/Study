@@ -1,0 +1,279 @@
+{
+  "schema_version": 1,
+  "id": "daodejing-34",
+  "title": "道德经·第三十四章",
+  "attribution": "老子",
+  "level": "challenge",
+  "genre": "reasoning",
+  "skills": [
+    "meaning",
+    "referent",
+    "reason",
+    "contrast",
+    "retell"
+  ],
+  "curriculum": null,
+  "intro": "帮助而不自居其功。本章反复说生养万物而不作主人，强调有贡献也不占有、控制别人。",
+  "background": "这是《道德经》道经·第三十四章。本章围绕「帮助而不自居其功」展开，可以先读原文，再对照译文，看看作者用了什么比方或对比。",
+  "editorial_note": "本馆用逐句译解帮助入门。读「道」「无为」等词时要看上下文；古代观念和理想化比方，可以边读边与家长讨论。",
+  "source": {
+    "work": "道德经（又名老子）",
+    "section": "道经·第三十四章",
+    "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#三十四章",
+    "note": "原文以本机简体《老子》为底本，统一引号，第七章移去括号异文提示。译文、词义和练习为本馆编写的入门读法，参考王弼注理解，不将不同底本混作同一文本。"
+  },
+  "source_ref": {
+    "locator": "/content/33",
+    "path": "poetry/simplified/诸子百家/老子.json",
+    "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+    "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+    "anchor_text": "大道泛兮，其可左右。万物恃之以生而不辞，功成而不有。衣养万物而不为主。常无欲，可名于小；万物归焉而不为主，可名为大。以其终不自为大，故能成其大。"
+  },
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "大道泛兮，其可左右。",
+      "translation": "大道广泛流行，可以向左，也可以向右。",
+      "explanation": "读词小提示：「泛」：广泛流行；「左右」：向左向右，无所不到。",
+      "chunks": [
+        "大道泛兮，",
+        "其可左右。"
+      ],
+      "hints": [
+        "泛",
+        "左右"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "泛",
+          "kind": "word",
+          "meaning": "广泛流行。"
+        },
+        {
+          "id": "n2",
+          "quote": "左右",
+          "kind": "word",
+          "meaning": "向左向右，无所不到。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第三十四章》第1句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#三十四章",
+        "source_ref": {
+          "locator": "/content/33",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "大道泛兮，其可左右。"
+        }
+      }
+    },
+    {
+      "id": "s2",
+      "text": "万物恃之以生而不辞，功成而不有。",
+      "translation": "万物依靠它生长，它并不推辞，做成事情也不据为己有。",
+      "explanation": "读词小提示：「恃」：依靠；「有」：占有。",
+      "chunks": [
+        "万物恃之以生而不辞，",
+        "功成而不有。"
+      ],
+      "hints": [
+        "恃",
+        "有"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "恃",
+          "kind": "word",
+          "meaning": "依靠。"
+        },
+        {
+          "id": "n2",
+          "quote": "有",
+          "kind": "word",
+          "meaning": "占有。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第三十四章》第2句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#三十四章",
+        "source_ref": {
+          "locator": "/content/33",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "万物恃之以生而不辞，功成而不有。"
+        }
+      }
+    },
+    {
+      "id": "s3",
+      "text": "衣养万物而不为主。",
+      "translation": "它养护万物，却不自作主人。",
+      "explanation": "读词小提示：「衣养」：供给衣食、养护；「主」：主人、支配者。",
+      "chunks": [
+        "衣养万物而不为主。"
+      ],
+      "hints": [
+        "衣养",
+        "主"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "衣养",
+          "kind": "word",
+          "meaning": "供给衣食、养护。"
+        },
+        {
+          "id": "n2",
+          "quote": "主",
+          "kind": "word",
+          "meaning": "主人、支配者。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第三十四章》第3句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#三十四章",
+        "source_ref": {
+          "locator": "/content/33",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "大道泛兮，其可左右。万物恃之以生而不辞，功成而不有。衣养万物而不为主。常无欲，可名于小；万物归焉而不为主，可名为大。以其终不自为大，故能成其大。"
+        }
+      }
+    },
+    {
+      "id": "s4",
+      "text": "常无欲，可名于小；万物归焉而不为主，可名为大。",
+      "translation": "它常没有私欲，可以说很小；万物归向它，而它不作主人，又可以说很大。",
+      "explanation": "读词小提示：「主」：主人、支配者；「小」：不自居其功、不张扬。",
+      "chunks": [
+        "常无欲，",
+        "可名于小；",
+        "万物归焉而不为主，",
+        "可名为大。"
+      ],
+      "hints": [
+        "主",
+        "小",
+        "归"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "主",
+          "kind": "word",
+          "meaning": "主人、支配者。"
+        },
+        {
+          "id": "n2",
+          "quote": "小",
+          "kind": "word",
+          "meaning": "不自居其功、不张扬。"
+        },
+        {
+          "id": "n3",
+          "quote": "归",
+          "kind": "word",
+          "meaning": "归依。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第三十四章》第4句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#三十四章",
+        "source_ref": {
+          "locator": "/content/33",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "常无欲，可名于小；万物归焉而不为主，可名为大。"
+        }
+      }
+    },
+    {
+      "id": "s5",
+      "text": "以其终不自为大，故能成其大。",
+      "translation": "正因为始终不自认伟大，才成就了它的广大。",
+      "explanation": "读词小提示：「自为大」：自认伟大、夸耀自己。",
+      "chunks": [
+        "以其终不自为大，",
+        "故能成其大。"
+      ],
+      "hints": [
+        "自为大"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "自为大",
+          "kind": "word",
+          "meaning": "自认伟大、夸耀自己。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第三十四章》第5句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#三十四章",
+        "source_ref": {
+          "locator": "/content/33",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "以其终不自为大，故能成其大。"
+        }
+      }
+    }
+  ],
+  "overview": {
+    "sequence": [
+      "先看本章开头：大道广泛流行，可以向左，也可以向右。",
+      "本章反复说生养万物而不作主人，强调有贡献也不占有、控制别人。",
+      "再回到结尾：正因为始终不自认伟大，才成就了它的广大。"
+    ],
+    "question": "这一章为什么可以叫作「帮助而不自居其功」？",
+    "answer": "本章反复说生养万物而不作主人，强调有贡献也不占有、控制别人。可以引用本章开头或结尾的原句，说明你的依据。",
+    "takeaway": "本章反复说生养万物而不作主人，强调有贡献也不占有、控制别人。"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "choice",
+      "sentence": "s1",
+      "skill": "meaning",
+      "prompt": "开头的「泛」在这里怎样理解？",
+      "choices": [
+        "只顾自己，不留意他人的处境。",
+        "广泛流行。",
+        "为了显示本领而处处炫耀。"
+      ],
+      "answer": 1,
+      "explanation": "把词放回原句看，「泛」在本句中的意思是：广泛流行。"
+    },
+    {
+      "id": "q2",
+      "type": "choice",
+      "sentence": "s5",
+      "skill": "reason",
+      "prompt": "读完「帮助而不自居其功」，哪一种理解更合适？",
+      "choices": [
+        "只有大声夸耀自己，才能显得有本领。",
+        "只要一次失败，就不必再试。",
+        "本章反复说生养万物而不作主人，强调有贡献也不占有、控制别人。"
+      ],
+      "answer": 2,
+      "explanation": "本章反复说生养万物而不作主人，强调有贡献也不占有、控制别人。"
+    },
+    {
+      "id": "q3",
+      "type": "selfcheck",
+      "sentence": "s5",
+      "skill": "retell",
+      "prompt": "选本章一句话，用自己的话解释，再说说它怎样帮助你理解「帮助而不自居其功」。",
+      "answer": "先说清原句中的对象和动作，再解释关键词。可以围绕这点来讲：本章反复说生养万物而不作主人，强调有贡献也不占有、控制别人。说完后，回到原文找一句作依据。",
+      "explanation": "不必背诵译文。重点看词义是否放回本句、有没有原文依据，以及是否把古人的比方误当成不分条件的结论。"
+    }
+  ]
+}

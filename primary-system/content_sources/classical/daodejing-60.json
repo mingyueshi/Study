@@ -1,0 +1,286 @@
+{
+  "schema_version": 1,
+  "id": "daodejing-60",
+  "title": "道德经·第六十章",
+  "attribution": "老子",
+  "level": "challenge",
+  "genre": "reasoning",
+  "skills": [
+    "meaning",
+    "referent",
+    "reason",
+    "contrast",
+    "retell"
+  ],
+  "curriculum": null,
+  "intro": "像烹小鱼一样留意分寸。烹小鱼不能任意翻搅，本章借此说明治理要有分寸、少扰动。",
+  "background": "这是《道德经》德经·第六十章。本章围绕「像烹小鱼一样留意分寸」展开，可以先读原文，再对照译文，看看作者用了什么比方或对比。",
+  "editorial_note": "本馆用逐句译解帮助入门。读「道」「无为」等词时要看上下文；古代观念和理想化比方，可以边读边与家长讨论。",
+  "source": {
+    "work": "道德经（又名老子）",
+    "section": "德经·第六十章",
+    "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#六十章",
+    "note": "原文以本机简体《老子》为底本，统一引号，第七章移去括号异文提示。译文、词义和练习为本馆编写的入门读法，参考王弼注理解，不将不同底本混作同一文本。"
+  },
+  "source_ref": {
+    "locator": "/content/59",
+    "path": "poetry/simplified/诸子百家/老子.json",
+    "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+    "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+    "anchor_text": "治大国，若烹小鲜。以道蒞天下，其鬼不神。非其鬼不神，其神不伤人。非其神不伤人，圣人亦不伤人。夫两不相伤，故德交归焉。"
+  },
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "治大国，若烹小鲜。",
+      "translation": "治理大国，好像烹煮小鱼。",
+      "explanation": "比方的重点是把握分寸、少作不必要的扰动，不是把百姓当作食物。",
+      "chunks": [
+        "治大国，",
+        "若烹小鲜。"
+      ],
+      "hints": [
+        "烹",
+        "小鲜"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "烹",
+          "kind": "word",
+          "meaning": "烹煮。"
+        },
+        {
+          "id": "n2",
+          "quote": "小鲜",
+          "kind": "word",
+          "meaning": "小鱼。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第六十章》第1句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#六十章",
+        "source_ref": {
+          "locator": "/content/59",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "治大国，若烹小鲜。以道蒞天下，其鬼不神。非其鬼不神，其神不伤人。非其神不伤人，圣人亦不伤人。夫两不相伤，故德交归焉。"
+        }
+      }
+    },
+    {
+      "id": "s2",
+      "text": "以道蒞天下，其鬼不神。",
+      "translation": "以道治理天下，鬼神便不能显出伤害作用。",
+      "explanation": "读词小提示：「蒞」：同「莅」，来到、治理；「鬼不神」：本章说鬼神不能显其伤害作用，是古人的观念。",
+      "chunks": [
+        "以道蒞天下，",
+        "其鬼不神。"
+      ],
+      "hints": [
+        "蒞",
+        "鬼不神"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "蒞",
+          "kind": "word",
+          "meaning": "同「莅」，来到、治理。",
+          "reading": "lì"
+        },
+        {
+          "id": "n2",
+          "quote": "鬼不神",
+          "kind": "word",
+          "meaning": "本章说鬼神不能显其伤害作用，是古人的观念。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第六十章》第2句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#六十章",
+        "source_ref": {
+          "locator": "/content/59",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "以道蒞天下，其鬼不神。"
+        }
+      }
+    },
+    {
+      "id": "s3",
+      "text": "非其鬼不神，其神不伤人。",
+      "translation": "不是鬼神没有作用，而是它不伤害人。",
+      "explanation": "读词小提示：「鬼不神」：本章说鬼神不能显其伤害作用，是古人的观念；「其神」：前文所说鬼神的作用。",
+      "chunks": [
+        "非其鬼不神，",
+        "其神不伤人。"
+      ],
+      "hints": [
+        "鬼不神",
+        "其神",
+        "不伤人"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "鬼不神",
+          "kind": "word",
+          "meaning": "本章说鬼神不能显其伤害作用，是古人的观念。"
+        },
+        {
+          "id": "n2",
+          "quote": "其神",
+          "kind": "word",
+          "meaning": "前文所说鬼神的作用。"
+        },
+        {
+          "id": "n3",
+          "quote": "不伤人",
+          "kind": "word",
+          "meaning": "不伤害百姓。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第六十章》第3句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#六十章",
+        "source_ref": {
+          "locator": "/content/59",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "非其鬼不神，其神不伤人。"
+        }
+      }
+    },
+    {
+      "id": "s4",
+      "text": "非其神不伤人，圣人亦不伤人。",
+      "translation": "不但鬼神不伤害人，有智慧的治理者也不伤害人。",
+      "explanation": "读词小提示：「其神」：前文所说鬼神的作用；「不伤人」：不伤害百姓。",
+      "chunks": [
+        "非其神不伤人，",
+        "圣人亦不伤人。"
+      ],
+      "hints": [
+        "其神",
+        "不伤人"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "其神",
+          "kind": "word",
+          "meaning": "前文所说鬼神的作用。"
+        },
+        {
+          "id": "n2",
+          "quote": "不伤人",
+          "kind": "word",
+          "meaning": "不伤害百姓。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第六十章》第4句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#六十章",
+        "source_ref": {
+          "locator": "/content/59",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "非其神不伤人，圣人亦不伤人。"
+        }
+      }
+    },
+    {
+      "id": "s5",
+      "text": "夫两不相伤，故德交归焉。",
+      "translation": "双方都不造成伤害，德的作用便一同归聚。",
+      "explanation": "鬼神是古代观念，理解这段可先抓住反复出现的「不伤人」。",
+      "chunks": [
+        "夫两不相伤，",
+        "故德交归焉。"
+      ],
+      "hints": [
+        "两不相伤",
+        "交归"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "两不相伤",
+          "kind": "word",
+          "meaning": "双方都不造成伤害。"
+        },
+        {
+          "id": "n2",
+          "quote": "交归",
+          "kind": "word",
+          "meaning": "一同归聚。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第六十章》第5句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#六十章",
+        "source_ref": {
+          "locator": "/content/59",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "夫两不相伤，故德交归焉。"
+        }
+      }
+    }
+  ],
+  "overview": {
+    "sequence": [
+      "先看本章开头：治理大国，好像烹煮小鱼。",
+      "烹小鱼不能任意翻搅，本章借此说明治理要有分寸、少扰动。",
+      "再回到结尾：双方都不造成伤害，德的作用便一同归聚。"
+    ],
+    "question": "这一章为什么可以叫作「像烹小鱼一样留意分寸」？",
+    "answer": "烹小鱼不能任意翻搅，本章借此说明治理要有分寸、少扰动。可以引用本章开头或结尾的原句，说明你的依据。",
+    "takeaway": "烹小鱼不能任意翻搅，本章借此说明治理要有分寸、少扰动。"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "choice",
+      "sentence": "s1",
+      "skill": "meaning",
+      "prompt": "开头的「烹」在这里怎样理解？",
+      "choices": [
+        "烹煮。",
+        "只顾自己，不留意他人的处境。",
+        "为了显示本领而处处炫耀。"
+      ],
+      "answer": 0,
+      "explanation": "把词放回原句看，「烹」在本句中的意思是：烹煮。"
+    },
+    {
+      "id": "q2",
+      "type": "choice",
+      "sentence": "s5",
+      "skill": "reason",
+      "prompt": "读完「像烹小鱼一样留意分寸」，哪一种理解更合适？",
+      "choices": [
+        "做事情永远越多越快越好。",
+        "烹小鱼不能任意翻搅，本章借此说明治理要有分寸、少扰动。",
+        "别人的想法一概不用听。"
+      ],
+      "answer": 1,
+      "explanation": "烹小鱼不能任意翻搅，本章借此说明治理要有分寸、少扰动。"
+    },
+    {
+      "id": "q3",
+      "type": "selfcheck",
+      "sentence": "s5",
+      "skill": "retell",
+      "prompt": "选本章一句话，用自己的话解释，再说说它怎样帮助你理解「像烹小鱼一样留意分寸」。",
+      "answer": "先说清原句中的对象和动作，再解释关键词。可以围绕这点来讲：烹小鱼不能任意翻搅，本章借此说明治理要有分寸、少扰动。说完后，回到原文找一句作依据。",
+      "explanation": "不必背诵译文。重点看词义是否放回本句、有没有原文依据，以及是否把古人的比方误当成不分条件的结论。"
+    }
+  ]
+}

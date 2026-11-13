@@ -1,0 +1,301 @@
+{
+  "schema_version": 1,
+  "id": "daodejing-21",
+  "title": "道德经·第二十一章",
+  "attribution": "老子",
+  "level": "challenge",
+  "genre": "reasoning",
+  "skills": [
+    "meaning",
+    "referent",
+    "reason",
+    "contrast",
+    "retell"
+  ],
+  "curriculum": null,
+  "intro": "由细微追寻根本。本章借恍惚、幽深的描写追问万物的根源，读时分清哲学思考与可验证的事实。",
+  "background": "这是《道德经》道经·第二十一章。本章围绕「由细微追寻根本」展开，可以先读原文，再对照译文，看看作者用了什么比方或对比。",
+  "editorial_note": "本馆用逐句译解帮助入门。读「道」「无为」等词时要看上下文；古代观念和理想化比方，可以边读边与家长讨论。",
+  "source": {
+    "work": "道德经（又名老子）",
+    "section": "道经·第二十一章",
+    "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#二十一章",
+    "note": "原文以本机简体《老子》为底本，统一引号，第七章移去括号异文提示。译文、词义和练习为本馆编写的入门读法，参考王弼注理解，不将不同底本混作同一文本。"
+  },
+  "source_ref": {
+    "locator": "/content/20",
+    "path": "poetry/simplified/诸子百家/老子.json",
+    "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+    "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+    "anchor_text": "孔德之容，惟道是从。道之为物，惟恍惟惚。惚兮恍兮，其中有象；恍兮惚兮，其中有物；窈兮冥兮，其中有精；其精甚真，其中有信。自今及古，其名不去，以阅眾甫。吾何以知眾甫之状哉？以此。"
+  },
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "孔德之容，惟道是从。",
+      "translation": "深厚德行的表现，只以道为依从。",
+      "explanation": "读词小提示：「孔德」：深厚的德行；「容」：表现、样子。",
+      "chunks": [
+        "孔德之容，",
+        "惟道是从。"
+      ],
+      "hints": [
+        "孔德",
+        "容"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "孔德",
+          "kind": "word",
+          "meaning": "深厚的德行。"
+        },
+        {
+          "id": "n2",
+          "quote": "容",
+          "kind": "word",
+          "meaning": "表现、样子。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第二十一章》第1句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#二十一章",
+        "source_ref": {
+          "locator": "/content/20",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "孔德之容，惟道是从。"
+        }
+      }
+    },
+    {
+      "id": "s2",
+      "text": "道之为物，惟恍惟惚。",
+      "translation": "道这个存在，好像恍惚不定。",
+      "explanation": "读词小提示：「惟恍惟惚」：恍惚不分明，难以把握的样子。",
+      "chunks": [
+        "道之为物，",
+        "惟恍惟惚。"
+      ],
+      "hints": [
+        "惟恍惟惚"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "惟恍惟惚",
+          "kind": "word",
+          "meaning": "恍惚不分明，难以把握的样子。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第二十一章》第2句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#二十一章",
+        "source_ref": {
+          "locator": "/content/20",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "道之为物，惟恍惟惚。"
+        }
+      }
+    },
+    {
+      "id": "s3",
+      "text": "惚兮恍兮，其中有象；恍兮惚兮，其中有物；窈兮冥兮，其中有精；其精甚真，其中有信。",
+      "translation": "恍惚之中有迹象，恍惚之中有事物；幽深之中有精微的实质，这实质真实，其中有可体会的根据。",
+      "explanation": "读词小提示：「象」：形象、迹象；「精」：精微的实质。",
+      "chunks": [
+        "惚兮恍兮，",
+        "其中有象；",
+        "恍兮惚兮，",
+        "其中有物；",
+        "窈兮冥兮，",
+        "其中有精；",
+        "其精甚真，",
+        "其中有信。"
+      ],
+      "hints": [
+        "象",
+        "精",
+        "信"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "象",
+          "kind": "word",
+          "meaning": "形象、迹象。"
+        },
+        {
+          "id": "n2",
+          "quote": "精",
+          "kind": "word",
+          "meaning": "精微的实质。"
+        },
+        {
+          "id": "n3",
+          "quote": "信",
+          "kind": "word",
+          "meaning": "可相信的根据。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第二十一章》第3句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#二十一章",
+        "source_ref": {
+          "locator": "/content/20",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "惚兮恍兮，其中有象；恍兮惚兮，其中有物；窈兮冥兮，其中有精；其精甚真，其中有信。"
+        }
+      }
+    },
+    {
+      "id": "s4",
+      "text": "自今及古，其名不去，以阅眾甫。",
+      "translation": "从今天追到古时，它的名号没有消失，人们借它观察万物的开端。",
+      "explanation": "读词小提示：「眾甫」：同「众甫」，万物的起始。",
+      "chunks": [
+        "自今及古，",
+        "其名不去，",
+        "以阅眾甫。"
+      ],
+      "hints": [
+        "眾甫"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "眾甫",
+          "kind": "word",
+          "meaning": "同「众甫」，万物的起始。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第二十一章》第4句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#二十一章",
+        "source_ref": {
+          "locator": "/content/20",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "自今及古，其名不去，以阅眾甫。"
+        }
+      }
+    },
+    {
+      "id": "s5",
+      "text": "吾何以知眾甫之状哉？",
+      "translation": "我凭什么体会万物开端的情形呢？",
+      "explanation": "读词小提示：「眾甫」：同「众甫」，万物的起始。",
+      "chunks": [
+        "吾何以知眾甫之状哉？"
+      ],
+      "hints": [
+        "眾甫"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "眾甫",
+          "kind": "word",
+          "meaning": "同「众甫」，万物的起始。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第二十一章》第5句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#二十一章",
+        "source_ref": {
+          "locator": "/content/20",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "吾何以知眾甫之状哉？"
+        }
+      }
+    },
+    {
+      "id": "s6",
+      "text": "以此。",
+      "translation": "就是凭借前面这些思考。",
+      "explanation": "读词小提示：「以此」：凭借前文对道的体会。",
+      "chunks": [
+        "以此。"
+      ],
+      "hints": [
+        "以此"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "以此",
+          "kind": "word",
+          "meaning": "凭借前文对道的体会。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第二十一章》第6句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#二十一章",
+        "source_ref": {
+          "locator": "/content/20",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "孔德之容，惟道是从。道之为物，惟恍惟惚。惚兮恍兮，其中有象；恍兮惚兮，其中有物；窈兮冥兮，其中有精；其精甚真，其中有信。自今及古，其名不去，以阅眾甫。吾何以知眾甫之状哉？以此。"
+        }
+      }
+    }
+  ],
+  "overview": {
+    "sequence": [
+      "先看本章开头：深厚德行的表现，只以道为依从。",
+      "本章借恍惚、幽深的描写追问万物的根源，读时分清哲学思考与可验证的事实。",
+      "再回到结尾：就是凭借前面这些思考。"
+    ],
+    "question": "这一章为什么可以叫作「由细微追寻根本」？",
+    "answer": "本章借恍惚、幽深的描写追问万物的根源，读时分清哲学思考与可验证的事实。可以引用本章开头或结尾的原句，说明你的依据。",
+    "takeaway": "本章借恍惚、幽深的描写追问万物的根源，读时分清哲学思考与可验证的事实。"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "choice",
+      "sentence": "s1",
+      "skill": "meaning",
+      "prompt": "开头的「孔德」在这里怎样理解？",
+      "choices": [
+        "深厚的德行。",
+        "只顾自己，不留意他人的处境。",
+        "为了显示本领而处处炫耀。"
+      ],
+      "answer": 0,
+      "explanation": "把词放回原句看，「孔德」在本句中的意思是：深厚的德行。"
+    },
+    {
+      "id": "q2",
+      "type": "choice",
+      "sentence": "s6",
+      "skill": "reason",
+      "prompt": "读完「由细微追寻根本」，哪一种理解更合适？",
+      "choices": [
+        "只要一次失败，就不必再试。",
+        "本章借恍惚、幽深的描写追问万物的根源，读时分清哲学思考与可验证的事实。",
+        "遇到问题不用观察，也不必行动。"
+      ],
+      "answer": 1,
+      "explanation": "本章借恍惚、幽深的描写追问万物的根源，读时分清哲学思考与可验证的事实。"
+    },
+    {
+      "id": "q3",
+      "type": "selfcheck",
+      "sentence": "s6",
+      "skill": "retell",
+      "prompt": "选本章一句话，用自己的话解释，再说说它怎样帮助你理解「由细微追寻根本」。",
+      "answer": "先说清原句中的对象和动作，再解释关键词。可以围绕这点来讲：本章借恍惚、幽深的描写追问万物的根源，读时分清哲学思考与可验证的事实。说完后，回到原文找一句作依据。",
+      "explanation": "不必背诵译文。重点看词义是否放回本句、有没有原文依据，以及是否把古人的比方误当成不分条件的结论。"
+    }
+  ]
+}

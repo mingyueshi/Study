@@ -1,0 +1,277 @@
+{
+  "schema_version": 1,
+  "id": "daodejing-37",
+  "title": "道德经·第三十七章",
+  "attribution": "老子",
+  "level": "challenge",
+  "genre": "reasoning",
+  "skills": [
+    "meaning",
+    "referent",
+    "reason",
+    "contrast",
+    "retell"
+  ],
+  "curriculum": null,
+  "intro": "少些强行干预。本章强调守住质朴与安静，让事物按自身条件发展。",
+  "background": "这是《道德经》道经·第三十七章。本章围绕「少些强行干预」展开，可以先读原文，再对照译文，看看作者用了什么比方或对比。",
+  "editorial_note": "本馆用逐句译解帮助入门。读「道」「无为」等词时要看上下文；古代观念和理想化比方，可以边读边与家长讨论。",
+  "source": {
+    "work": "道德经（又名老子）",
+    "section": "道经·第三十七章",
+    "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#三十七章",
+    "note": "原文以本机简体《老子》为底本，统一引号，第七章移去括号异文提示。译文、词义和练习为本馆编写的入门读法，参考王弼注理解，不将不同底本混作同一文本。"
+  },
+  "source_ref": {
+    "locator": "/content/36",
+    "path": "poetry/simplified/诸子百家/老子.json",
+    "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+    "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+    "anchor_text": "道常无为而无不为。侯王若能守之，万物将自化。化而欲作，吾将镇之以无名之朴。镇之以无名之朴，夫将不欲。不欲以静，天下将自正。"
+  },
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "道常无为而无不为。",
+      "translation": "道不强行干预，却没有什么不能成就。",
+      "explanation": "读词小提示：「无为」：不凭私意强行干预；「无不为」：并非没有作用，许多事情仍能成就。",
+      "chunks": [
+        "道常无为而无不为。"
+      ],
+      "hints": [
+        "无为",
+        "无不为"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "无为",
+          "kind": "word",
+          "meaning": "不凭私意强行干预。"
+        },
+        {
+          "id": "n2",
+          "quote": "无不为",
+          "kind": "word",
+          "meaning": "并非没有作用，许多事情仍能成就。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第三十七章》第1句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#三十七章",
+        "source_ref": {
+          "locator": "/content/36",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "道常无为而无不为。侯王若能守之，万物将自化。化而欲作，吾将镇之以无名之朴。镇之以无名之朴，夫将不欲。不欲以静，天下将自正。"
+        }
+      }
+    },
+    {
+      "id": "s2",
+      "text": "侯王若能守之，万物将自化。",
+      "translation": "侯王如果能守住这种原则，万物会自行发展。",
+      "explanation": "读词小提示：「自化」：自己发展、变化。",
+      "chunks": [
+        "侯王若能守之，",
+        "万物将自化。"
+      ],
+      "hints": [
+        "自化"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "自化",
+          "kind": "word",
+          "meaning": "自己发展、变化。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第三十七章》第2句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#三十七章",
+        "source_ref": {
+          "locator": "/content/36",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "侯王若能守之，万物将自化。"
+        }
+      }
+    },
+    {
+      "id": "s3",
+      "text": "化而欲作，吾将镇之以无名之朴。",
+      "translation": "发展中如果欲望兴起，就用质朴来使它安定。",
+      "explanation": "读词小提示：「欲作」：欲望开始兴起；「镇」：安定、约束。",
+      "chunks": [
+        "化而欲作，",
+        "吾将镇之以无名之朴。"
+      ],
+      "hints": [
+        "欲作",
+        "镇",
+        "无名之朴"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "欲作",
+          "kind": "word",
+          "meaning": "欲望开始兴起。"
+        },
+        {
+          "id": "n2",
+          "quote": "镇",
+          "kind": "word",
+          "meaning": "安定、约束。"
+        },
+        {
+          "id": "n3",
+          "quote": "无名之朴",
+          "kind": "word",
+          "meaning": "不加繁饰的质朴状态。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第三十七章》第3句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#三十七章",
+        "source_ref": {
+          "locator": "/content/36",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "化而欲作，吾将镇之以无名之朴。"
+        }
+      }
+    },
+    {
+      "id": "s4",
+      "text": "镇之以无名之朴，夫将不欲。",
+      "translation": "用质朴使它安定，就不会过分贪求。",
+      "explanation": "读词小提示：「镇」：安定、约束；「无名之朴」：不加繁饰的质朴状态。",
+      "chunks": [
+        "镇之以无名之朴，",
+        "夫将不欲。"
+      ],
+      "hints": [
+        "镇",
+        "无名之朴"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "镇",
+          "kind": "word",
+          "meaning": "安定、约束。"
+        },
+        {
+          "id": "n2",
+          "quote": "无名之朴",
+          "kind": "word",
+          "meaning": "不加繁饰的质朴状态。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第三十七章》第4句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#三十七章",
+        "source_ref": {
+          "locator": "/content/36",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "镇之以无名之朴，夫将不欲。"
+        }
+      }
+    },
+    {
+      "id": "s5",
+      "text": "不欲以静，天下将自正。",
+      "translation": "少贪求而安静，天下便能自行归于有序。",
+      "explanation": "读词小提示：「静」：安静，不被贪求扰动；「自正」：自行归于有序。",
+      "chunks": [
+        "不欲以静，",
+        "天下将自正。"
+      ],
+      "hints": [
+        "静",
+        "自正"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "静",
+          "kind": "word",
+          "meaning": "安静，不被贪求扰动。"
+        },
+        {
+          "id": "n2",
+          "quote": "自正",
+          "kind": "word",
+          "meaning": "自行归于有序。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第三十七章》第5句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#三十七章",
+        "source_ref": {
+          "locator": "/content/36",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "不欲以静，天下将自正。"
+        }
+      }
+    }
+  ],
+  "overview": {
+    "sequence": [
+      "先看本章开头：道不强行干预，却没有什么不能成就。",
+      "本章强调守住质朴与安静，让事物按自身条件发展。",
+      "再回到结尾：少贪求而安静，天下便能自行归于有序。"
+    ],
+    "question": "这一章为什么可以叫作「少些强行干预」？",
+    "answer": "本章强调守住质朴与安静，让事物按自身条件发展。可以引用本章开头或结尾的原句，说明你的依据。",
+    "takeaway": "本章强调守住质朴与安静，让事物按自身条件发展。"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "choice",
+      "sentence": "s1",
+      "skill": "meaning",
+      "prompt": "开头的「无为」在这里怎样理解？",
+      "choices": [
+        "只顾自己，不留意他人的处境。",
+        "不凭私意强行干预。",
+        "为了显示本领而处处炫耀。"
+      ],
+      "answer": 1,
+      "explanation": "把词放回原句看，「无为」在本句中的意思是：不凭私意强行干预。"
+    },
+    {
+      "id": "q2",
+      "type": "choice",
+      "sentence": "s5",
+      "skill": "reason",
+      "prompt": "读完「少些强行干预」，哪一种理解更合适？",
+      "choices": [
+        "只要一次失败，就不必再试。",
+        "遇到问题不用观察，也不必行动。",
+        "本章强调守住质朴与安静，让事物按自身条件发展。"
+      ],
+      "answer": 2,
+      "explanation": "本章强调守住质朴与安静，让事物按自身条件发展。"
+    },
+    {
+      "id": "q3",
+      "type": "selfcheck",
+      "sentence": "s5",
+      "skill": "retell",
+      "prompt": "选本章一句话，用自己的话解释，再说说它怎样帮助你理解「少些强行干预」。",
+      "answer": "先说清原句中的对象和动作，再解释关键词。可以围绕这点来讲：本章强调守住质朴与安静，让事物按自身条件发展。说完后，回到原文找一句作依据。",
+      "explanation": "不必背诵译文。重点看词义是否放回本句、有没有原文依据，以及是否把古人的比方误当成不分条件的结论。"
+    }
+  ]
+}

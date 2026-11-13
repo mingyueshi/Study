@@ -21,7 +21,7 @@ test: ## 跑全量测试（需先 install）
 	$(MANAGE) test
 
 test-frontend: ## 跑 Node 前端回归测试
-	node --test scripts/test_frontend.cjs scripts/test_feihualing_frontend.cjs
+	node --test scripts/test_frontend.cjs scripts/test_feihualing_frontend.cjs scripts/test_classical_frontend.cjs
 
 test-content-sources: ## 校验教材与专题的文件源
 	@set -e; for test in content_sources/test/test-*.js; do node "$$test"; done

@@ -10,6 +10,8 @@
 | `china.html` | 切换省级行政区、山河大地和邻居图层。认识 34 个省级行政区、45 处山河湖海和 20 个邻居，翻看 7 张口诀卡 |
 | `animals.html?animal=giant-panda` | 在中国地图上认识 30 种代表动物，点位覆盖 27 个省级行政区。可按 6 类栖息地筛选，查看本地照片和关联省域站 |
 | `world-animals.html?animal=emperor-penguin` | 在世界地图上认识七大洲和多片海域的 30 种代表动物，按 7 类栖息地筛选，查看本地照片和关联地点 |
+| `plants.html?plant=ginkgo` | 24 种中国代表植物，按森林、高山、荒漠、湿地、红树林、热带和农田 7 类环境筛选，查看照片、分布、适应方式和观察线索 |
+| `world-plants.html?plant=antarctic-hair-grass` | 24 种世界代表植物，覆盖七大洲，按 7 类生长环境筛选，查看学名和关联国家或地区 |
 | `world.html` | 看七大洲、四大洋、177 个国家和地区、10 处世界地标。在「中国与世界」图层找中国，也可以从对照卡直接定位 |
 | `province.html?adcode=110000` | 用同一页查看任意省域站的档案和五条「记一记」。迷你地图高亮本省，点其他省份可换站；省域目录按四大地理区域分组 |
 | `places.html` | 查 291 条地点档案，支持地名、简称、省会、英文名和地点类型，选中结果即打开相应地图 |
@@ -17,6 +19,8 @@
 | `gallery.html` | 按主题和类型看实景图册。13 张图片可离线看，3 项央视影片链接需联网。点素材下的地点可回到地图高亮 |
 
 中国与世界动物地图的选取区位于地图下方，以带照片、名称和编号的卡片展示。点照片和点地图标记会同步选中同一只动物，按栖息地筛选时，照片卡与地图一起变化。
+
+两张植物地图沿用地图下方的照片卡片，不使用下拉选择。地图编号、照片和档案联动，植物深链接使用 `?plant=植物ID`。窄屏或竖屏选择植物后会展开植物档案，便于阅读；宽屏档案默认在右侧，可切换到左侧并保存偏好。地图标记只表示代表分布或栽培地点，棉花、水稻、茶树等在正文中注明栽培情况。
 
 中国和世界地图都可以换图层、看图例、点选地点或用下拉框定位。放大后可拖动地图，或在地图获得焦点后按方向键平移。「找一找」每轮随机出 5 题，点错时可读提示，答对再进下一题。
 
@@ -35,6 +39,7 @@
 - `media-data.js` 用地点 ID 挂接素材，`media.js` 在地图档案、省域站和图册复用渲染。图册支持 `?place=地点ID`，例如 `gallery.html?place=f20`。素材保留来源页、作者和适用的授权链接。图片按原画面等比缩放，转成 JPEG 后保存在 `assets/`，影片只打开央视网。
 - `shared.js` 提供投影、SVG 路径、世界底图和省域站卡片。中国与世界地图页各自绘制图层，由 `map-ui.js` 处理定位、图层切换、档案关联、缩放和练习。目录和路线页只加载档案数据。
 - `animals-data.js`、`world-animals-data.js` 分别维护中国和世界的动物档案与栖息地图例，交互共用 `animals-app.js`。动物 ID 用于直达链接和 `assets/animals/` 下的同名 JPEG 照片。中国档案用 `adcode` 关联省域站，世界档案用 `mapPlace` 关联国家、地区或大洋。点位只标出代表栖息地。档案里的 `source` 是资料出处，照片来自另一页面时填写 `photoSource`。
+- `plants-data.js`、`world-plants-data.js` 维护植物档案，复用 `animals-app.js` 和 `animals.css` 的地图、筛选和照片交互。字段包括稳定 `id`、中文名 `name`、学名 `scientificName`、生境 `habitat`、代表地点 `place` 与经纬度 `point`，以及分布 `home`、适应方式 `adaptation`、观察线索 `clue`。中国用 `adcode`、世界用 `mapPlace` 关联原地图；`source` 链接植物智或邱园等资料，`photoSource` 链接照片来源页。本地 JPEG 保存在 `assets/plants/`，无需运行时联网。新增或改动字段时同步更新 `test/test-geo-map.js` 的结构与引用校验。
 - 地图链接用 `?place=地点ID#map`，例如 `china.html?place=f20#map`，自动选中对应地点和图层。需要保留路线时加上 `&route=路线ID`。同一地点也可以在另一可见图层打开，例如 `world.html?place=China&layer=home#map`。
 
 动物照片按原比例缩放并压缩为 JPEG。大熊猫照片由 J. Patrick Fischer 拍摄，采用 [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/) 许可。褐马鸡照片由 Somongkol Teng 拍摄，采用 [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/) 许可。原图及其他照片的出处见页面档案。

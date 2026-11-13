@@ -1,0 +1,266 @@
+{
+  "schema_version": 1,
+  "id": "daodejing-09",
+  "title": "道德经·第九章",
+  "attribution": "老子",
+  "level": "challenge",
+  "genre": "reasoning",
+  "skills": [
+    "meaning",
+    "referent",
+    "reason",
+    "contrast",
+    "retell"
+  ],
+  "curriculum": null,
+  "intro": "适可而止。事情做成后仍要懂得收敛，不要因已有的收获而骄傲贪求。",
+  "background": "这是《道德经》道经·第九章。本章围绕「适可而止」展开，可以先读原文，再对照译文，看看作者用了什么比方或对比。",
+  "editorial_note": "本馆用逐句译解帮助入门。读「道」「无为」等词时要看上下文；古代观念和理想化比方，可以边读边与家长讨论。",
+  "source": {
+    "work": "道德经（又名老子）",
+    "section": "道经·第九章",
+    "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#九章",
+    "note": "原文以本机简体《老子》为底本，统一引号，第七章移去括号异文提示。译文、词义和练习为本馆编写的入门读法，参考王弼注理解，不将不同底本混作同一文本。"
+  },
+  "source_ref": {
+    "locator": "/content/8",
+    "path": "poetry/simplified/诸子百家/老子.json",
+    "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+    "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+    "anchor_text": "持而盈之，不如其已。揣而锐之，不可长保。金玉满堂，莫之能守。富贵而骄，自遗其咎。功遂身退，天之道。"
+  },
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "持而盈之，不如其已。",
+      "translation": "不断把器物添得满满的，不如适时停下来。",
+      "explanation": "读词小提示：「持而盈之」：拿着器物，还不断把它添满；「已」：停止。",
+      "chunks": [
+        "持而盈之，",
+        "不如其已。"
+      ],
+      "hints": [
+        "持而盈之",
+        "已"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "持而盈之",
+          "kind": "word",
+          "meaning": "拿着器物，还不断把它添满。"
+        },
+        {
+          "id": "n2",
+          "quote": "已",
+          "kind": "word",
+          "meaning": "停止。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第九章》第1句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#九章",
+        "source_ref": {
+          "locator": "/content/8",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "持而盈之，不如其已。"
+        }
+      }
+    },
+    {
+      "id": "s2",
+      "text": "揣而锐之，不可长保。",
+      "translation": "把锋刃磨得过分尖锐，难以长久保持。",
+      "explanation": "读词小提示：「揣」：捶击、加工；「保」：保持。",
+      "chunks": [
+        "揣而锐之，",
+        "不可长保。"
+      ],
+      "hints": [
+        "揣",
+        "保"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "揣",
+          "kind": "word",
+          "meaning": "捶击、加工。",
+          "reading": "chuǎi"
+        },
+        {
+          "id": "n2",
+          "quote": "保",
+          "kind": "word",
+          "meaning": "保持。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第九章》第2句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#九章",
+        "source_ref": {
+          "locator": "/content/8",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "揣而锐之，不可长保。"
+        }
+      }
+    },
+    {
+      "id": "s3",
+      "text": "金玉满堂，莫之能守。",
+      "translation": "金玉堆满屋子，也未必能一直守住。",
+      "explanation": "读词小提示：「守」：守住。",
+      "chunks": [
+        "金玉满堂，",
+        "莫之能守。"
+      ],
+      "hints": [
+        "守"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "守",
+          "kind": "word",
+          "meaning": "守住。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第九章》第3句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#九章",
+        "source_ref": {
+          "locator": "/content/8",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "金玉满堂，莫之能守。"
+        }
+      }
+    },
+    {
+      "id": "s4",
+      "text": "富贵而骄，自遗其咎。",
+      "translation": "有了富贵便骄傲，会给自己留下祸患。",
+      "explanation": "读词小提示：「咎」：灾祸、过失。",
+      "chunks": [
+        "富贵而骄，",
+        "自遗其咎。"
+      ],
+      "hints": [
+        "咎"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "咎",
+          "kind": "word",
+          "meaning": "灾祸、过失。",
+          "reading": "jiù"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第九章》第4句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#九章",
+        "source_ref": {
+          "locator": "/content/8",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "富贵而骄，自遗其咎。"
+        }
+      }
+    },
+    {
+      "id": "s5",
+      "text": "功遂身退，天之道。",
+      "translation": "做成事情以后懂得退让，是合乎自然变化的道理。",
+      "explanation": "读词小提示：「遂」：完成；「退」：退让，不居功争进。",
+      "chunks": [
+        "功遂身退，",
+        "天之道。"
+      ],
+      "hints": [
+        "遂",
+        "退"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "遂",
+          "kind": "word",
+          "meaning": "完成。"
+        },
+        {
+          "id": "n2",
+          "quote": "退",
+          "kind": "word",
+          "meaning": "退让，不居功争进。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第九章》第5句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#九章",
+        "source_ref": {
+          "locator": "/content/8",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "持而盈之，不如其已。揣而锐之，不可长保。金玉满堂，莫之能守。富贵而骄，自遗其咎。功遂身退，天之道。"
+        }
+      }
+    }
+  ],
+  "overview": {
+    "sequence": [
+      "先看本章开头：不断把器物添得满满的，不如适时停下来。",
+      "事情做成后仍要懂得收敛，不要因已有的收获而骄傲贪求。",
+      "再回到结尾：做成事情以后懂得退让，是合乎自然变化的道理。"
+    ],
+    "question": "这一章为什么可以叫作「适可而止」？",
+    "answer": "事情做成后仍要懂得收敛，不要因已有的收获而骄傲贪求。可以引用本章开头或结尾的原句，说明你的依据。",
+    "takeaway": "事情做成后仍要懂得收敛，不要因已有的收获而骄傲贪求。"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "choice",
+      "sentence": "s1",
+      "skill": "meaning",
+      "prompt": "开头的「持而盈之」在这里怎样理解？",
+      "choices": [
+        "拿着器物，还不断把它添满。",
+        "只顾自己，不留意他人的处境。",
+        "为了显示本领而处处炫耀。"
+      ],
+      "answer": 0,
+      "explanation": "把词放回原句看，「持而盈之」在本句中的意思是：拿着器物，还不断把它添满。"
+    },
+    {
+      "id": "q2",
+      "type": "choice",
+      "sentence": "s5",
+      "skill": "reason",
+      "prompt": "读完「适可而止」，哪一种理解更合适？",
+      "choices": [
+        "无论什么情况，都应该争着抢先。",
+        "事情做成后仍要懂得收敛，不要因已有的收获而骄傲贪求。",
+        "做事情永远越多越快越好。"
+      ],
+      "answer": 1,
+      "explanation": "事情做成后仍要懂得收敛，不要因已有的收获而骄傲贪求。"
+    },
+    {
+      "id": "q3",
+      "type": "selfcheck",
+      "sentence": "s5",
+      "skill": "retell",
+      "prompt": "选本章一句话，用自己的话解释，再说说它怎样帮助你理解「适可而止」。",
+      "answer": "先说清原句中的对象和动作，再解释关键词。可以围绕这点来讲：事情做成后仍要懂得收敛，不要因已有的收获而骄傲贪求。说完后，回到原文找一句作依据。",
+      "explanation": "不必背诵译文。重点看词义是否放回本句、有没有原文依据，以及是否把古人的比方误当成不分条件的结论。"
+    }
+  ]
+}

@@ -1,0 +1,719 @@
+{
+  "schema_version": 1,
+  "title": "古文精读馆",
+  "intro": "读顺古人的一句话，弄懂几个词，再把整篇的故事与心意讲给别人听。",
+  "levels": [
+    {
+      "id": "starter",
+      "label": "短句入门"
+    },
+    {
+      "id": "story",
+      "label": "故事精读"
+    },
+    {
+      "id": "challenge",
+      "label": "思考进阶"
+    }
+  ],
+  "genres": [
+    {
+      "id": "myth",
+      "label": "神话"
+    },
+    {
+      "id": "people",
+      "label": "人物故事"
+    },
+    {
+      "id": "fable",
+      "label": "寓言"
+    },
+    {
+      "id": "reasoning",
+      "label": "说理"
+    },
+    {
+      "id": "prose",
+      "label": "写景抒情"
+    }
+  ],
+  "skills": [
+    {
+      "id": "meaning",
+      "label": "认词义"
+    },
+    {
+      "id": "referent",
+      "label": "找指代"
+    },
+    {
+      "id": "omission",
+      "label": "补省略"
+    },
+    {
+      "id": "reason",
+      "label": "找依据"
+    },
+    {
+      "id": "contrast",
+      "label": "作比较"
+    },
+    {
+      "id": "retell",
+      "label": "讲故事"
+    }
+  ],
+  "articles": [
+    "jingwei",
+    "wangrong",
+    "simaguang",
+    "shouzhudaitu",
+    "yangshizhizi",
+    "nangying",
+    "tiechu",
+    "zixiangmaodun",
+    "xueyi",
+    "liangxiaoer",
+    "tengwanggexu",
+    "lunyu-xueer",
+    "lunyu-weizheng",
+    "lunyu-bayi",
+    "lunyu-liren",
+    "lunyu-gongyechang",
+    "lunyu-yongye",
+    "lunyu-shuer",
+    "lunyu-taibo",
+    "lunyu-zihan",
+    "lunyu-xiangdang",
+    "lunyu-xianjin",
+    "lunyu-yanyuan",
+    "lunyu-zilu",
+    "lunyu-xianwen",
+    "lunyu-weilinggong",
+    "lunyu-jishi",
+    "lunyu-yanghuo",
+    "lunyu-weizi",
+    "lunyu-zizhang",
+    "lunyu-yaoyue",
+    "daodejing-01",
+    "daodejing-02",
+    "daodejing-03",
+    "daodejing-04",
+    "daodejing-05",
+    "daodejing-06",
+    "daodejing-07",
+    "daodejing-08",
+    "daodejing-09",
+    "daodejing-10",
+    "daodejing-11",
+    "daodejing-12",
+    "daodejing-13",
+    "daodejing-14",
+    "daodejing-15",
+    "daodejing-16",
+    "daodejing-17",
+    "daodejing-18",
+    "daodejing-19",
+    "daodejing-20",
+    "daodejing-21",
+    "daodejing-22",
+    "daodejing-23",
+    "daodejing-24",
+    "daodejing-25",
+    "daodejing-26",
+    "daodejing-27",
+    "daodejing-28",
+    "daodejing-29",
+    "daodejing-30",
+    "daodejing-31",
+    "daodejing-32",
+    "daodejing-33",
+    "daodejing-34",
+    "daodejing-35",
+    "daodejing-36",
+    "daodejing-37",
+    "daodejing-38",
+    "daodejing-39",
+    "daodejing-40",
+    "daodejing-41",
+    "daodejing-42",
+    "daodejing-43",
+    "daodejing-44",
+    "daodejing-45",
+    "daodejing-46",
+    "daodejing-47",
+    "daodejing-48",
+    "daodejing-49",
+    "daodejing-50",
+    "daodejing-51",
+    "daodejing-52",
+    "daodejing-53",
+    "daodejing-54",
+    "daodejing-55",
+    "daodejing-56",
+    "daodejing-57",
+    "daodejing-58",
+    "daodejing-59",
+    "daodejing-60",
+    "daodejing-61",
+    "daodejing-62",
+    "daodejing-63",
+    "daodejing-64",
+    "daodejing-65",
+    "daodejing-66",
+    "daodejing-67",
+    "daodejing-68",
+    "daodejing-69",
+    "daodejing-70",
+    "daodejing-71",
+    "daodejing-72",
+    "daodejing-73",
+    "daodejing-74",
+    "daodejing-75",
+    "daodejing-76",
+    "daodejing-77",
+    "daodejing-78",
+    "daodejing-79",
+    "daodejing-80",
+    "daodejing-81"
+  ],
+  "collections": [
+    {
+      "id": "lunyu",
+      "title": "论语二十篇",
+      "intro": "从学而读到尧曰，按二十篇逐则查读。每次挑一两则，读懂再往下走。",
+      "parts": [
+        {
+          "id": "lunyu-xueer",
+          "count": 16,
+          "text_sha256": "02cbfd161d4b1e5aafd2ecc020a6382b4b0d1fd5a223d55d0bd5bb94235120c9"
+        },
+        {
+          "id": "lunyu-weizheng",
+          "count": 24,
+          "text_sha256": "5cc34b9734290d38a7f0ec0c7420339a87ba8b8f2ca815346bbae77b0eec855c"
+        },
+        {
+          "id": "lunyu-bayi",
+          "count": 26,
+          "text_sha256": "a13af70072a5bead5976184916bd1d5ee51be8409881df833188fcc1b63f4b03"
+        },
+        {
+          "id": "lunyu-liren",
+          "count": 26,
+          "text_sha256": "23a256848996c7b7d4d7ac619fe90688c3136ba6a8339c620a031e6694917d4c"
+        },
+        {
+          "id": "lunyu-gongyechang",
+          "count": 28,
+          "text_sha256": "78e6b0c685edffe840f6ed51927e944317676c9cc42371f01b82563e404a6c04"
+        },
+        {
+          "id": "lunyu-yongye",
+          "count": 30,
+          "text_sha256": "a4a04b60973793ba99f33dfec35844e18cb2e5f862c2d93bdbd2d6d0adc96936"
+        },
+        {
+          "id": "lunyu-shuer",
+          "count": 38,
+          "text_sha256": "f65fc8b96601e755735f6803d3466d981d70ff9bc04fb6efa09b009f3c09d659"
+        },
+        {
+          "id": "lunyu-taibo",
+          "count": 21,
+          "text_sha256": "9c408b9d7f44373371b1432d2bd17e7bf45d7f82b65fa7713c2cdfaffe72c871"
+        },
+        {
+          "id": "lunyu-zihan",
+          "count": 31,
+          "text_sha256": "4cf0d9251e208df6a62d569d86560f95fa8c0c70993065264e38d3d5f29772f6"
+        },
+        {
+          "id": "lunyu-xiangdang",
+          "count": 28,
+          "text_sha256": "b358daa7e4b7fecae6eac516b491a6973a65083c5482f6e106287295490280b9"
+        },
+        {
+          "id": "lunyu-xianjin",
+          "count": 26,
+          "text_sha256": "01210201a1b03a681667f9d4e5089d17fae11bdd6a44e10f6e69ac331179b91a"
+        },
+        {
+          "id": "lunyu-yanyuan",
+          "count": 24,
+          "text_sha256": "cbdd11ff37bacb41434ce2ba4fc39eba31a1f979b9601454d39407b154bc1712"
+        },
+        {
+          "id": "lunyu-zilu",
+          "count": 30,
+          "text_sha256": "4446ba469a4305022bd726a98e32b8d0e0235e5254ae136c5f00ea27e0bb6aae"
+        },
+        {
+          "id": "lunyu-xianwen",
+          "count": 44,
+          "text_sha256": "c255accf63ee9639887d7dac1068bb0580031848d56907eab7779f618524d588"
+        },
+        {
+          "id": "lunyu-weilinggong",
+          "count": 42,
+          "text_sha256": "4add09f0e17425233e0a7a63bd91d662dfed15dff0a29711b5d5a7245359e952"
+        },
+        {
+          "id": "lunyu-jishi",
+          "count": 14,
+          "text_sha256": "e3e70ab3f7426566ad6fb23ce608e8c7d47c8d99082cc0799842c4c5375b19a5"
+        },
+        {
+          "id": "lunyu-yanghuo",
+          "count": 26,
+          "text_sha256": "ef3800e36024d4ea20fb830686d8c4b6bd0c131c53d80485cc488d8e69f4c400"
+        },
+        {
+          "id": "lunyu-weizi",
+          "count": 11,
+          "text_sha256": "8ba3b47ef2b570e2d17dfdcbb952a9fa5796ba409bf6398040e08ac7665d33c8"
+        },
+        {
+          "id": "lunyu-zizhang",
+          "count": 25,
+          "text_sha256": "770fccda66fecde99f44d5ef4f5f9b6689f3398c8ebfb46ac1d0be2bfaa5da52"
+        },
+        {
+          "id": "lunyu-yaoyue",
+          "count": 3,
+          "text_sha256": "da2655df60dcd8d5622629829f4c43d0ea69957ec3517b64310fb832817232a0"
+        }
+      ]
+    },
+    {
+      "id": "daodejing",
+      "title": "道德经八十一章",
+      "part_label": "章",
+      "intro": "上篇道经三十七章，下篇德经四十四章。每章一页，读一句、想一想，借比方和对照把古人的话读明白。",
+      "landmarks": [
+        {
+          "label": "上篇·道经（一至三十七章）",
+          "article": "daodejing-01"
+        },
+        {
+          "label": "下篇·德经（三十八至八十一章）",
+          "article": "daodejing-38"
+        }
+      ],
+      "parts": [
+        {
+          "id": "daodejing-01",
+          "count": 5,
+          "text_sha256": "0ebab0ed2c66e646aa5cd18b607f859f3a95aee4ff69719eef41afda647940e6"
+        },
+        {
+          "id": "daodejing-02",
+          "count": 5,
+          "text_sha256": "a6de793c5d679ab3e2b55b0b7cb12f5216492705f87da03d799a279981663c6b"
+        },
+        {
+          "id": "daodejing-03",
+          "count": 5,
+          "text_sha256": "942dd7ec6dc662c0be776a57bfd18d733efa95b331812a2abefeb92c98ae9170"
+        },
+        {
+          "id": "daodejing-04",
+          "count": 5,
+          "text_sha256": "979b71049de65cbb0f18ee1c9e872336a8094bbdc9b0b8f4756a18ce2005c1ca"
+        },
+        {
+          "id": "daodejing-05",
+          "count": 4,
+          "text_sha256": "1bd9e42b12a979dff3bf60f009c015ac9243b28a6d68f8d3c45dd92c8f93225e"
+        },
+        {
+          "id": "daodejing-06",
+          "count": 3,
+          "text_sha256": "530886512e98d838f90ccb1c48ce7dbc20edf1647233fb0c6ea69b2e02affc90"
+        },
+        {
+          "id": "daodejing-07",
+          "count": 5,
+          "text_sha256": "b4ca38e8c86016e574bc83a0d98f03e703ac9aed713cb42f4d1357ac5c8a7d82"
+        },
+        {
+          "id": "daodejing-08",
+          "count": 4,
+          "text_sha256": "31450ab695cc4f9242080cfed34e30a51830ddd93b41be45005b4bf9b528f0c3"
+        },
+        {
+          "id": "daodejing-09",
+          "count": 5,
+          "text_sha256": "0e1df23504b2e274ce9cdc428a118a19a090a4bfb711c86ed7c898762e05e198"
+        },
+        {
+          "id": "daodejing-10",
+          "count": 8,
+          "text_sha256": "16f00e0a38c999c16911e5d5d8a7b18376b75a33e39d7989e907fef5c6ea7207"
+        },
+        {
+          "id": "daodejing-11",
+          "count": 4,
+          "text_sha256": "ebe1c55afeaaf01ee814e2d2d2b084f1b4ac62f307b250551ee120a1ba087515"
+        },
+        {
+          "id": "daodejing-12",
+          "count": 2,
+          "text_sha256": "324ed45d7eed0500d589cfe585685943b4024190457a52a8f97a9dfb85f42908"
+        },
+        {
+          "id": "daodejing-13",
+          "count": 6,
+          "text_sha256": "b3c7f917828adf36369b0852fa43e0c59e67b67324062a77582ac4970be6c541"
+        },
+        {
+          "id": "daodejing-14",
+          "count": 7,
+          "text_sha256": "bb0481e1bd48c88711ea862c10095aeb6d39df31a8f5ccaf679f2fdd6b6a8633"
+        },
+        {
+          "id": "daodejing-15",
+          "count": 5,
+          "text_sha256": "3b57da4acc92b7145cd46871c28781308c39755b120c6d7f5913c7aeff770d18"
+        },
+        {
+          "id": "daodejing-16",
+          "count": 7,
+          "text_sha256": "ee9c9da7e5387b5a0144dad9e6f3ecae366cce00f7a5292275b57299533102cc"
+        },
+        {
+          "id": "daodejing-17",
+          "count": 4,
+          "text_sha256": "cdfe592b6bf05bc276b34188cea0e7f2bfdc8b47e08160d656598ccac20f1ce4"
+        },
+        {
+          "id": "daodejing-18",
+          "count": 4,
+          "text_sha256": "34a09ad5141cf68e8dbe878b38f730a4c86d20ee9f664e0a5504c551b6002269"
+        },
+        {
+          "id": "daodejing-19",
+          "count": 3,
+          "text_sha256": "b78811d2204f262dbc74e771347ea08325e26920058151339bfcf81695ff80f8"
+        },
+        {
+          "id": "daodejing-20",
+          "count": 13,
+          "text_sha256": "098daef5197e50dd806195d4348a6a53ef88eb0224ba664839461d2b456a5dd7"
+        },
+        {
+          "id": "daodejing-21",
+          "count": 6,
+          "text_sha256": "aa58ef31a99c87a5c9efc76215983b9054a5c7422118111e38fb0712a3d3c4b3"
+        },
+        {
+          "id": "daodejing-22",
+          "count": 6,
+          "text_sha256": "1164a121887ac487064293773a33a52db838e15f1f7dfdef88cbc861060e91ac"
+        },
+        {
+          "id": "daodejing-23",
+          "count": 8,
+          "text_sha256": "f62187095deb3aabaa2e2822819c3fe3e1244a4c4ec75f1a78f458477bfcc9e5"
+        },
+        {
+          "id": "daodejing-24",
+          "count": 2,
+          "text_sha256": "ea78af04f7e1ded4c76902ebdfb7ed97b05449276a3e3ffebd7e8e4b073b3bed"
+        },
+        {
+          "id": "daodejing-25",
+          "count": 7,
+          "text_sha256": "ff60b6336f68ab1f3f4cddbd7c48c9a17adfdf9d236a960ac87a894f433221fa"
+        },
+        {
+          "id": "daodejing-26",
+          "count": 3,
+          "text_sha256": "67d88bfed9cbce5c768b48007be122d4606adee0af4333fa28f9deb2a291212d"
+        },
+        {
+          "id": "daodejing-27",
+          "count": 6,
+          "text_sha256": "ebe8139b953353b7594486cd088c3192ee8ded1def093bd864d8a7590393d40c"
+        },
+        {
+          "id": "daodejing-28",
+          "count": 7,
+          "text_sha256": "120aeda107b5f376e0f2ccd607b135ea48458761886654aa69d9b5c8f4640f8d"
+        },
+        {
+          "id": "daodejing-29",
+          "count": 6,
+          "text_sha256": "7e58ad7ffb9f67dbb033dc4b27e3102926b65a3ae735d6ec78fcf26a181cc0fe"
+        },
+        {
+          "id": "daodejing-30",
+          "count": 8,
+          "text_sha256": "5ed04062fad09e24c8ddddf66d34e83098e341726a4cfc1680c6ce2c7f2be694"
+        },
+        {
+          "id": "daodejing-31",
+          "count": 8,
+          "text_sha256": "0ab39613c40d0f8b295d031a37f28b3b4a8a1e9f477e0bc6f3ef1c8b9134460c"
+        },
+        {
+          "id": "daodejing-32",
+          "count": 6,
+          "text_sha256": "6a59229bb7da5b128c1ff9ad0a57bd297321c9e987865da4529e31e460288b56"
+        },
+        {
+          "id": "daodejing-33",
+          "count": 6,
+          "text_sha256": "7c73f756ee9c8dcac756f9e3eb7d274604e6ed06bd8993b7eba3ae55146073b6"
+        },
+        {
+          "id": "daodejing-34",
+          "count": 5,
+          "text_sha256": "ffb3a309381264a581ce04ba74d28ed39a215e2ebf9bb9bf4fc2b49931fe37e9"
+        },
+        {
+          "id": "daodejing-35",
+          "count": 4,
+          "text_sha256": "b1b311f4a8f4af8d46cb1f9e5e0b08de438c5e2f4cd9b961b2305a588431f8ec"
+        },
+        {
+          "id": "daodejing-36",
+          "count": 4,
+          "text_sha256": "3a1ad91fb946e39922d6ef6328c883a78ff6387b58b738ef2ff287a238c2a1da"
+        },
+        {
+          "id": "daodejing-37",
+          "count": 5,
+          "text_sha256": "e70565e5f7a2efd5bb4b6398171d17585aa1a3f31f0a81eb4774d24475076c21"
+        },
+        {
+          "id": "daodejing-38",
+          "count": 9,
+          "text_sha256": "6ca1f256d74ef6f633e5d9209da698991cc480fc05f67598f1e535a065070286"
+        },
+        {
+          "id": "daodejing-39",
+          "count": 8,
+          "text_sha256": "1d353c97cc84c0869750e54fa9c47b6b1473e4a7625aee5148573234c540ef28"
+        },
+        {
+          "id": "daodejing-40",
+          "count": 2,
+          "text_sha256": "a0d11dc0012edfa8f4f05daeb83233319afc8e71f17ab98e59c24dc6792456ef"
+        },
+        {
+          "id": "daodejing-41",
+          "count": 6,
+          "text_sha256": "ae772aa0c2013c73efabdea8690f702933e12b23f6b16de8a698b170bc1565b3"
+        },
+        {
+          "id": "daodejing-42",
+          "count": 6,
+          "text_sha256": "6cfd1acfeaccbc722fe2be34c81033712200acc8562cf34f7968d5aacaba079b"
+        },
+        {
+          "id": "daodejing-43",
+          "count": 3,
+          "text_sha256": "68d90fc7e2768f2dd54b0d05b7f5055ce8189fa7ec2f4b04c4c11c7b91b3daed"
+        },
+        {
+          "id": "daodejing-44",
+          "count": 5,
+          "text_sha256": "83fb6165ab6d1b6056c541e1a7ae8fdac2fa331bc62d1df4625a542ae5d3663e"
+        },
+        {
+          "id": "daodejing-45",
+          "count": 5,
+          "text_sha256": "c88b30f77671ab17516c4ad909f99ec873707af8eedd45613591d804730428a9"
+        },
+        {
+          "id": "daodejing-46",
+          "count": 4,
+          "text_sha256": "d767d1aa32cf68cc73c51474c44c5fa25ccce3cee8579b8001e4c97c00c0fbb1"
+        },
+        {
+          "id": "daodejing-47",
+          "count": 3,
+          "text_sha256": "5a7756a8c3725cf64d7f693bbb34a8eeb807a740411a578be3ae8f8ebf067729"
+        },
+        {
+          "id": "daodejing-48",
+          "count": 4,
+          "text_sha256": "edea1765c3b10c66e32316d9f8ee60479a5e93d25db6cb8a4704db173b4c3e26"
+        },
+        {
+          "id": "daodejing-49",
+          "count": 4,
+          "text_sha256": "93c0c63c3df907c323c923658301f1b5bbf66faeb05bfa90aaa9d33b8e702904"
+        },
+        {
+          "id": "daodejing-50",
+          "count": 7,
+          "text_sha256": "1bf5b7e9d4ac7d994093fd342e131b9c04c0d0f8bacb8be30bf75d9fe7c4fdfa"
+        },
+        {
+          "id": "daodejing-51",
+          "count": 6,
+          "text_sha256": "145b92a2173a07f090a35d0b747fd34dc77533463a34f0806ac5c0df88f9e426"
+        },
+        {
+          "id": "daodejing-52",
+          "count": 6,
+          "text_sha256": "a4c92da86b98adc3145086dff49d067c867fa4a8bbfbb854e9302f6f5ef466ce"
+        },
+        {
+          "id": "daodejing-53",
+          "count": 4,
+          "text_sha256": "50353fde3fb61665de3a2c2885f26ad22926e61b2efa51a6a9180c4f836cb2f3"
+        },
+        {
+          "id": "daodejing-54",
+          "count": 5,
+          "text_sha256": "1db6339ecdf91b34ab40ed037fcf0e5e4bbe68311d1471e651f2dfd93656fa6f"
+        },
+        {
+          "id": "daodejing-55",
+          "count": 6,
+          "text_sha256": "ffb480fb41794fe8b8d1aecf805f1a436fefb656c7ff4bd9ead09b7cfb1d1286"
+        },
+        {
+          "id": "daodejing-56",
+          "count": 3,
+          "text_sha256": "918a054d25682152fa6ac3233c04c853c73baadcb7d900d1aa1bca08e8cdd04c"
+        },
+        {
+          "id": "daodejing-57",
+          "count": 4,
+          "text_sha256": "ae4242d15521814d78924bd85111757859968155b7ef2e5df8ed87411fbdf947"
+        },
+        {
+          "id": "daodejing-58",
+          "count": 7,
+          "text_sha256": "5b869c894400dad531cd1e6164d9d42188d0a7d75fc8f7a0e9740f6a2bd84570"
+        },
+        {
+          "id": "daodejing-59",
+          "count": 2,
+          "text_sha256": "d40174456b667871eddcd0170c5f37ddbc910b6ea47dd28d2e60e2991d4ae37a"
+        },
+        {
+          "id": "daodejing-60",
+          "count": 5,
+          "text_sha256": "f976ad6d4582cfea249f0c5517df565c8c09df0b50b903d2d005c77950a1b935"
+        },
+        {
+          "id": "daodejing-61",
+          "count": 6,
+          "text_sha256": "eaf87aa96bebb6873bef56947d241d0e2a20c6c9c39c744885d78bc14d56a079"
+        },
+        {
+          "id": "daodejing-62",
+          "count": 8,
+          "text_sha256": "cf5ef411c9506fc808e1d06a8c84130896962ba2092a696383d28dd3c34a18b5"
+        },
+        {
+          "id": "daodejing-63",
+          "count": 7,
+          "text_sha256": "e815ce4c533a46ccef30fb0e93c90e876f75c2725485d4e0f0e6dba3641ecd5a"
+        },
+        {
+          "id": "daodejing-64",
+          "count": 8,
+          "text_sha256": "4a759eb40c3c298a17cdddd18d21e38cb8f2c063484b0213e4437658ea656f60"
+        },
+        {
+          "id": "daodejing-65",
+          "count": 6,
+          "text_sha256": "d1f7de6c7b948a9778b32dbd307e45f5f0c7899246595eaa24e74d70bd151296"
+        },
+        {
+          "id": "daodejing-66",
+          "count": 5,
+          "text_sha256": "2e5560b0945a2bf0033f5ad88d44175fbb13d8d4770e6e8e05d2b2409f1fd93e"
+        },
+        {
+          "id": "daodejing-67",
+          "count": 9,
+          "text_sha256": "6437a377d5fb196ad17cb625775f727a75bdab105d1d56f61bc233e5467c1cc8"
+        },
+        {
+          "id": "daodejing-68",
+          "count": 2,
+          "text_sha256": "8c1cf7f4a870f9a6d1cdcfdd8f0b696ad1e58f37471d37f66b25af33bed2b97b"
+        },
+        {
+          "id": "daodejing-69",
+          "count": 4,
+          "text_sha256": "9bf0864fe17c5a8d7abf1084bcb6f3306c8edee21b15ebc73c8c69ac3e309b45"
+        },
+        {
+          "id": "daodejing-70",
+          "count": 6,
+          "text_sha256": "95008e761801c534317089c25ddd4c199120fd7e78a80643735641e14826222a"
+        },
+        {
+          "id": "daodejing-71",
+          "count": 3,
+          "text_sha256": "559d657a65ee353537056307afa6bff62184ebbfae19685042e8da3ba9cedd46"
+        },
+        {
+          "id": "daodejing-72",
+          "count": 5,
+          "text_sha256": "c02c60f90e6ef79edb70c236ac6929d6d771c54248cb1070146b6f85c0e778fc"
+        },
+        {
+          "id": "daodejing-73",
+          "count": 6,
+          "text_sha256": "8570ffb7c703941bd176fbf3d0e34e3bb35b701352523f4861c341f981d59555"
+        },
+        {
+          "id": "daodejing-74",
+          "count": 5,
+          "text_sha256": "8b959e214652ecea8a36da0f725db3d01ade95e646c67d890d9be335229e63ed"
+        },
+        {
+          "id": "daodejing-75",
+          "count": 4,
+          "text_sha256": "bcda9ff18c4c28e09d99f612cd5e4721839a0184e0ea8241258c55bedb974756"
+        },
+        {
+          "id": "daodejing-76",
+          "count": 5,
+          "text_sha256": "74378fc6680d48fc9ab9fc42ad887806b1a42b2cc922524a41b5915bdada5c91"
+        },
+        {
+          "id": "daodejing-77",
+          "count": 6,
+          "text_sha256": "4d291e96ea93e193a368072aea73b7def3099b9d774306a8c4d33c9a5159e3e1"
+        },
+        {
+          "id": "daodejing-78",
+          "count": 4,
+          "text_sha256": "496883806d6a04576aaf115cd1246fb6bd331238af520fa6a36730077cc05bad"
+        },
+        {
+          "id": "daodejing-79",
+          "count": 4,
+          "text_sha256": "08c414a011f1401338beae853fb9f2c0e5aca35f771f08890c5efdea5a77d870"
+        },
+        {
+          "id": "daodejing-80",
+          "count": 5,
+          "text_sha256": "7dc8ac0583c3b07b6e3e43faab65421e674051f73c8d44479442590257c61ffe"
+        },
+        {
+          "id": "daodejing-81",
+          "count": 5,
+          "text_sha256": "11e578f1e488fc499d33e3d506d71c528c37815ffff9919b42cadf31cc16486c"
+        }
+      ]
+    }
+  ],
+  "retired_articles": [
+    {
+      "id": "lunyu",
+      "collection": "lunyu"
+    }
+  ]
+}

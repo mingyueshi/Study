@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{ collection.title }} · 古文精读馆 · 乐学堂{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'classical/classical.css' %}?v=3">
+<script src="{% static 'classical/classical.js' %}?v=3" defer></script>
+<div class="classical-hall" data-classical-index>
+  {% include 'classical/_nav.html' %}
+  <header class="cw-article-hero"><div><p class="cw-eyebrow">语文 · 古文精读馆 · 全书阅读</p><h1>{{ collection.title }}</h1><p class="cw-lead">{{ collection.intro }}</p><a class="cw-button cw-primary" href="{% url 'classical-detail' articles.0.id %}">从《{{ articles.0.title }}》读起 →</a></div><span class="cw-number" aria-hidden="true">{{ collection.title|slice:':1' }}<br>{{ collection.title|slice:'1:2' }}</span></header>
+  <div class="cw-facts"><span><strong>{{ articles|length }}</strong> {{ collection.part_label }}</span><span><strong>{{ unit_count }}</strong> {{ articles.0.unit_label }}原文与译解</span><span><strong>{{ question_count }}</strong> 道理解练习</span><span>听读 · 遮挡背诵 · 打印</span></div>
+  <p class="cw-editorial">分段依本馆原典，其他版本的文字和分段可能不同。每次挑一小段慢慢读；遇到古代礼制、称谓和观念，可以与家长一起讨论。</p>
+  <form class="cw-filters" method="get" action="{% url 'classical-book' collection.id %}" role="search"><label class="cw-search">在全书里找原文、译文或词义<input type="search" name="q" value="{{ q }}" placeholder="试试原文里的词" maxlength="80"></label><button class="cw-button cw-primary" type="submit">搜全书</button><a class="cw-reset" href="{% url 'classical-book' collection.id %}">查看全书目录</a></form>
+  {% if q %}
+  <section class="cw-catalog" aria-labelledby="cw-search-title"><h2 id="cw-search-title">找到 {{ matches.paginator.count }} {{ articles.0.unit_label }}</h2><p class="cw-help">按原书顺序显示；点章句可以直接跳到精读位置。</p>
+    <div class="cw-search-results">{% for match in matches %}<article class="cw-card"><p class="cw-eyebrow">{{ match.article.title }} · 第 {{ match.number }} {{ match.article.unit_label }}</p><h3><a href="{% url 'classical-detail' match.article.id %}?line={{ match.unit.id }}#line-{{ match.unit.id }}">{{ match.unit.text|truncatechars:100 }}</a></h3><p>{{ match.unit.translation|truncatechars:160 }}</p><a class="cw-card-link" href="{% url 'classical-detail' match.article.id %}?line={{ match.unit.id }}#line-{{ match.unit.id }}">到这一{{ match.article.unit_label }}精读 →</a></article>{% empty %}<p class="cw-empty">没有找到，试试原文中的短词。</p>{% endfor %}</div>
+    {% if matches.has_other_pages %}<nav class="cw-next" aria-label="搜索结果分页">{% if matches.has_previous %}<a href="?q={{ q|urlencode }}&amp;page={{ matches.previous_page_number }}">← 上一页</a>{% endif %}<span>第 {{ matches.number }}／{{ matches.paginator.num_pages }} 页</span>{% if matches.has_next %}<a href="?q={{ q|urlencode }}&amp;page={{ matches.next_page_number }}">下一页 →</a>{% endif %}</nav>{% endif %}
+  </section>
+  {% endif %}
+  <section class="cw-catalog" aria-labelledby="cw-books-title"><h2 id="cw-books-title">{{ collection.title }}目录</h2><p class="cw-help">每{{ collection.part_label }}两道选择题、一题讲述自查。复习标记只保存在当前浏览器。</p>{% if collection.landmarks %}<nav class="cw-steps" aria-label="分卷跳转">{% for mark in collection.landmarks %}<a href="#book-{{ mark.article }}">{{ mark.label }} ↓</a>{% endfor %}</nav>{% endif %}<div class="cw-card-grid">
+    {% for item in articles %}<article class="cw-card" id="book-{{ item.id }}" data-article-card="{{ item.id }}" data-revision="{{ item.revision }}"><div class="cw-card-top"><span class="cw-badge">第 {{ forloop.counter }} {{ collection.part_label }}</span><span>{{ item.sentences|length }} {{ item.unit_label }} · {{ item.character_count }} 字</span></div><h3><a href="{% url 'classical-detail' item.id %}">{{ item.title }}</a></h3><p>{{ item.intro }}</p><footer><span class="cw-read-mark" data-card-mark></span><a class="cw-card-link" href="{% url 'classical-detail' item.id %}">打开这一{{ collection.part_label }} →</a></footer></article>{% endfor %}
+  </div></section>
+</div>
+{% endblock %}

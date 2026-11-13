@@ -1,0 +1,239 @@
+{
+  "schema_version": 1,
+  "id": "daodejing-17",
+  "title": "道德经·第十七章",
+  "attribution": "老子",
+  "level": "challenge",
+  "genre": "reasoning",
+  "skills": [
+    "meaning",
+    "referent",
+    "reason",
+    "contrast",
+    "retell"
+  ],
+  "curriculum": null,
+  "intro": "让事情自然做成。好的带领让大家发挥力量；事情做成，不必把每一份成果都说成自己的功劳。",
+  "background": "这是《道德经》道经·第十七章。本章围绕「让事情自然做成」展开，可以先读原文，再对照译文，看看作者用了什么比方或对比。",
+  "editorial_note": "本馆用逐句译解帮助入门。读「道」「无为」等词时要看上下文；古代观念和理想化比方，可以边读边与家长讨论。",
+  "source": {
+    "work": "道德经（又名老子）",
+    "section": "道经·第十七章",
+    "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#十七章",
+    "note": "原文以本机简体《老子》为底本，统一引号，第七章移去括号异文提示。译文、词义和练习为本馆编写的入门读法，参考王弼注理解，不将不同底本混作同一文本。"
+  },
+  "source_ref": {
+    "locator": "/content/16",
+    "path": "poetry/simplified/诸子百家/老子.json",
+    "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+    "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+    "anchor_text": "太上，不知有之；其次，亲而誉之；其次，畏之；其次，侮之。信不足焉，有不信焉。悠兮，其贵言。功成事遂，百姓皆谓：“我自然”。"
+  },
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "太上，不知有之；其次，亲而誉之；其次，畏之；其次，侮之。",
+      "translation": "最好的治理者，百姓不觉得他在干预；次一等的，百姓亲近并称赞他；再次一等的，百姓害怕他；更次的，百姓轻侮他。",
+      "explanation": "读词小提示：「太上」：最好的治理者；「其次」：比前一等稍次的情况。",
+      "chunks": [
+        "太上，",
+        "不知有之；",
+        "其次，",
+        "亲而誉之；",
+        "其次，",
+        "畏之；",
+        "其次，",
+        "侮之。"
+      ],
+      "hints": [
+        "太上",
+        "其次",
+        "誉"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "太上",
+          "kind": "word",
+          "meaning": "最好的治理者。"
+        },
+        {
+          "id": "n2",
+          "quote": "其次",
+          "kind": "word",
+          "meaning": "比前一等稍次的情况。"
+        },
+        {
+          "id": "n3",
+          "quote": "誉",
+          "kind": "word",
+          "meaning": "称赞。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第十七章》第1句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#十七章",
+        "source_ref": {
+          "locator": "/content/16",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "太上，不知有之；其次，亲而誉之；其次，畏之；其次，侮之。"
+        }
+      }
+    },
+    {
+      "id": "s2",
+      "text": "信不足焉，有不信焉。",
+      "translation": "信任不够，就会出现不信任。",
+      "explanation": "读词小提示：「信」：信任、信用。",
+      "chunks": [
+        "信不足焉，",
+        "有不信焉。"
+      ],
+      "hints": [
+        "信"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "信",
+          "kind": "word",
+          "meaning": "信任、信用。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第十七章》第2句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#十七章",
+        "source_ref": {
+          "locator": "/content/16",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "信不足焉，有不信焉。"
+        }
+      }
+    },
+    {
+      "id": "s3",
+      "text": "悠兮，其贵言。",
+      "translation": "他从容谨慎，珍惜言语，不轻易发号施令。",
+      "explanation": "读词小提示：「悠」：从容、谨慎；「贵言」：珍惜言语，不轻易发号施令。",
+      "chunks": [
+        "悠兮，",
+        "其贵言。"
+      ],
+      "hints": [
+        "悠",
+        "贵言"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "悠",
+          "kind": "word",
+          "meaning": "从容、谨慎。"
+        },
+        {
+          "id": "n2",
+          "quote": "贵言",
+          "kind": "word",
+          "meaning": "珍惜言语，不轻易发号施令。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第十七章》第3句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#十七章",
+        "source_ref": {
+          "locator": "/content/16",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "太上，不知有之；其次，亲而誉之；其次，畏之；其次，侮之。信不足焉，有不信焉。悠兮，其贵言。功成事遂，百姓皆谓：“我自然”。"
+        }
+      }
+    },
+    {
+      "id": "s4",
+      "text": "功成事遂，百姓皆谓：「我自然」。",
+      "translation": "事情做成以后，百姓都说：这是我们自己做到的。",
+      "explanation": "读词小提示：「自然」：自己如此，不是今天的「大自然」。",
+      "chunks": [
+        "功成事遂，",
+        "百姓皆谓：",
+        "「我自然」。"
+      ],
+      "hints": [
+        "自然"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "自然",
+          "kind": "word",
+          "meaning": "自己如此，不是今天的「大自然」。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第十七章》第4句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#十七章",
+        "source_ref": {
+          "locator": "/content/16",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "太上，不知有之；其次，亲而誉之；其次，畏之；其次，侮之。信不足焉，有不信焉。悠兮，其贵言。功成事遂，百姓皆谓：“我自然”。"
+        }
+      }
+    }
+  ],
+  "overview": {
+    "sequence": [
+      "先看本章开头：最好的治理者，百姓不觉得他在干预；次一等的，百姓亲近并称赞他；再次一等的，百姓害怕他；更次的，百姓轻侮他。",
+      "好的带领让大家发挥力量；事情做成，不必把每一份成果都说成自己的功劳。",
+      "再回到结尾：事情做成以后，百姓都说：这是我们自己做到的。"
+    ],
+    "question": "这一章为什么可以叫作「让事情自然做成」？",
+    "answer": "好的带领让大家发挥力量；事情做成，不必把每一份成果都说成自己的功劳。可以引用本章开头或结尾的原句，说明你的依据。",
+    "takeaway": "好的带领让大家发挥力量；事情做成，不必把每一份成果都说成自己的功劳。"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "choice",
+      "sentence": "s1",
+      "skill": "meaning",
+      "prompt": "开头的「太上」在这里怎样理解？",
+      "choices": [
+        "只顾自己，不留意他人的处境。",
+        "为了显示本领而处处炫耀。",
+        "最好的治理者。"
+      ],
+      "answer": 2,
+      "explanation": "把词放回原句看，「太上」在本句中的意思是：最好的治理者。"
+    },
+    {
+      "id": "q2",
+      "type": "choice",
+      "sentence": "s4",
+      "skill": "reason",
+      "prompt": "读完「让事情自然做成」，哪一种理解更合适？",
+      "choices": [
+        "好的带领让大家发挥力量；事情做成，不必把每一份成果都说成自己的功劳。",
+        "无论什么情况，都应该争着抢先。",
+        "做事情永远越多越快越好。"
+      ],
+      "answer": 0,
+      "explanation": "好的带领让大家发挥力量；事情做成，不必把每一份成果都说成自己的功劳。"
+    },
+    {
+      "id": "q3",
+      "type": "selfcheck",
+      "sentence": "s4",
+      "skill": "retell",
+      "prompt": "选本章一句话，用自己的话解释，再说说它怎样帮助你理解「让事情自然做成」。",
+      "answer": "先说清原句中的对象和动作，再解释关键词。可以围绕这点来讲：好的带领让大家发挥力量；事情做成，不必把每一份成果都说成自己的功劳。说完后，回到原文找一句作依据。",
+      "explanation": "不必背诵译文。重点看词义是否放回本句、有没有原文依据，以及是否把古人的比方误当成不分条件的结论。"
+    }
+  ]
+}

@@ -1,0 +1,243 @@
+{
+  "schema_version": 1,
+  "id": "daodejing-35",
+  "title": "道德经·第三十五章",
+  "attribution": "老子",
+  "level": "challenge",
+  "genre": "reasoning",
+  "skills": [
+    "meaning",
+    "referent",
+    "reason",
+    "contrast",
+    "retell"
+  ],
+  "curriculum": null,
+  "intro": "平淡的道理也有用。热闹悦耳的东西容易吸引人，平淡的道理却可能值得长久实践。",
+  "background": "这是《道德经》道经·第三十五章。本章围绕「平淡的道理也有用」展开，可以先读原文，再对照译文，看看作者用了什么比方或对比。",
+  "editorial_note": "本馆用逐句译解帮助入门。读「道」「无为」等词时要看上下文；古代观念和理想化比方，可以边读边与家长讨论。",
+  "source": {
+    "work": "道德经（又名老子）",
+    "section": "道经·第三十五章",
+    "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#三十五章",
+    "note": "原文以本机简体《老子》为底本，统一引号，第七章移去括号异文提示。译文、词义和练习为本馆编写的入门读法，参考王弼注理解，不将不同底本混作同一文本。"
+  },
+  "source_ref": {
+    "locator": "/content/34",
+    "path": "poetry/simplified/诸子百家/老子.json",
+    "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+    "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+    "anchor_text": "执大象，天下往。往而不害，安平泰。乐与饵，过客止。道之出口，淡乎其无味，视之不足见，听之不足闻，用之不足既。"
+  },
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "执大象，天下往。",
+      "translation": "守住根本道理，天下人愿意归往。",
+      "explanation": "读词小提示：「大象」：这里指道的整体形象、根本道理；「往」：归往、前往。",
+      "chunks": [
+        "执大象，",
+        "天下往。"
+      ],
+      "hints": [
+        "大象",
+        "往"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "大象",
+          "kind": "word",
+          "meaning": "这里指道的整体形象、根本道理。"
+        },
+        {
+          "id": "n2",
+          "quote": "往",
+          "kind": "word",
+          "meaning": "归往、前往。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第三十五章》第1句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#三十五章",
+        "source_ref": {
+          "locator": "/content/34",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "执大象，天下往。往而不害，安平泰。乐与饵，过客止。道之出口，淡乎其无味，视之不足见，听之不足闻，用之不足既。"
+        }
+      }
+    },
+    {
+      "id": "s2",
+      "text": "往而不害，安平泰。",
+      "translation": "来到这里不受伤害，能够安定平和。",
+      "explanation": "读词小提示：「往」：归往、前往；「安平泰」：安定、平和、舒适。",
+      "chunks": [
+        "往而不害，",
+        "安平泰。"
+      ],
+      "hints": [
+        "往",
+        "安平泰"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "往",
+          "kind": "word",
+          "meaning": "归往、前往。"
+        },
+        {
+          "id": "n2",
+          "quote": "安平泰",
+          "kind": "word",
+          "meaning": "安定、平和、舒适。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第三十五章》第2句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#三十五章",
+        "source_ref": {
+          "locator": "/content/34",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "执大象，天下往。往而不害，安平泰。乐与饵，过客止。道之出口，淡乎其无味，视之不足见，听之不足闻，用之不足既。"
+        }
+      }
+    },
+    {
+      "id": "s3",
+      "text": "乐与饵，过客止。",
+      "translation": "音乐和食物可以让过路人停下。",
+      "explanation": "读词小提示：「乐」：音乐；「饵」：食物。",
+      "chunks": [
+        "乐与饵，",
+        "过客止。"
+      ],
+      "hints": [
+        "乐",
+        "饵"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "乐",
+          "kind": "word",
+          "meaning": "音乐。",
+          "reading": "yuè"
+        },
+        {
+          "id": "n2",
+          "quote": "饵",
+          "kind": "word",
+          "meaning": "食物。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第三十五章》第3句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#三十五章",
+        "source_ref": {
+          "locator": "/content/34",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "执大象，天下往。往而不害，安平泰。乐与饵，过客止。道之出口，淡乎其无味，视之不足见，听之不足闻，用之不足既。"
+        }
+      }
+    },
+    {
+      "id": "s4",
+      "text": "道之出口，淡乎其无味，视之不足见，听之不足闻，用之不足既。",
+      "translation": "道讲出来却平淡得像没有滋味，看不出显眼的形状，听不见响亮的声音，运用起来却不会用尽。",
+      "explanation": "读词小提示：「淡」：平淡，不浓烈；「既」：尽、用完。",
+      "chunks": [
+        "道之出口，",
+        "淡乎其无味，",
+        "视之不足见，",
+        "听之不足闻，",
+        "用之不足既。"
+      ],
+      "hints": [
+        "淡",
+        "既"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "淡",
+          "kind": "word",
+          "meaning": "平淡，不浓烈。"
+        },
+        {
+          "id": "n2",
+          "quote": "既",
+          "kind": "word",
+          "meaning": "尽、用完。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第三十五章》第4句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#三十五章",
+        "source_ref": {
+          "locator": "/content/34",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "道之出口，淡乎其无味，视之不足见，听之不足闻，用之不足既。"
+        }
+      }
+    }
+  ],
+  "overview": {
+    "sequence": [
+      "先看本章开头：守住根本道理，天下人愿意归往。",
+      "热闹悦耳的东西容易吸引人，平淡的道理却可能值得长久实践。",
+      "再回到结尾：道讲出来却平淡得像没有滋味，看不出显眼的形状，听不见响亮的声音，运用起来却不会用尽。"
+    ],
+    "question": "这一章为什么可以叫作「平淡的道理也有用」？",
+    "answer": "热闹悦耳的东西容易吸引人，平淡的道理却可能值得长久实践。可以引用本章开头或结尾的原句，说明你的依据。",
+    "takeaway": "热闹悦耳的东西容易吸引人，平淡的道理却可能值得长久实践。"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "choice",
+      "sentence": "s1",
+      "skill": "meaning",
+      "prompt": "开头的「大象」在这里怎样理解？",
+      "choices": [
+        "只顾自己，不留意他人的处境。",
+        "为了显示本领而处处炫耀。",
+        "这里指道的整体形象、根本道理。"
+      ],
+      "answer": 2,
+      "explanation": "把词放回原句看，「大象」在本句中的意思是：这里指道的整体形象、根本道理。"
+    },
+    {
+      "id": "q2",
+      "type": "choice",
+      "sentence": "s4",
+      "skill": "reason",
+      "prompt": "读完「平淡的道理也有用」，哪一种理解更合适？",
+      "choices": [
+        "热闹悦耳的东西容易吸引人，平淡的道理却可能值得长久实践。",
+        "只看名字，就能知道全部道理。",
+        "为达到自己的目标，可以不顾别人。"
+      ],
+      "answer": 0,
+      "explanation": "热闹悦耳的东西容易吸引人，平淡的道理却可能值得长久实践。"
+    },
+    {
+      "id": "q3",
+      "type": "selfcheck",
+      "sentence": "s4",
+      "skill": "retell",
+      "prompt": "选本章一句话，用自己的话解释，再说说它怎样帮助你理解「平淡的道理也有用」。",
+      "answer": "先说清原句中的对象和动作，再解释关键词。可以围绕这点来讲：热闹悦耳的东西容易吸引人，平淡的道理却可能值得长久实践。说完后，回到原文找一句作依据。",
+      "explanation": "不必背诵译文。重点看词义是否放回本句、有没有原文依据，以及是否把古人的比方误当成不分条件的结论。"
+    }
+  ]
+}

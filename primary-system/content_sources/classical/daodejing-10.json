@@ -1,0 +1,386 @@
+{
+  "schema_version": 1,
+  "id": "daodejing-10",
+  "title": "道德经·第十章",
+  "attribution": "老子",
+  "level": "challenge",
+  "genre": "reasoning",
+  "skills": [
+    "meaning",
+    "referent",
+    "reason",
+    "contrast",
+    "retell"
+  ],
+  "curriculum": null,
+  "intro": "养护而不占有。本章连续发问，最后落在生养、帮助而不控制万物的态度上。",
+  "background": "这是《道德经》道经·第十章。本章围绕「养护而不占有」展开，可以先读原文，再对照译文，看看作者用了什么比方或对比。",
+  "editorial_note": "本馆用逐句译解帮助入门。读「道」「无为」等词时要看上下文；古代观念和理想化比方，可以边读边与家长讨论。",
+  "source": {
+    "work": "道德经（又名老子）",
+    "section": "道经·第十章",
+    "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#十章",
+    "note": "原文以本机简体《老子》为底本，统一引号，第七章移去括号异文提示。译文、词义和练习为本馆编写的入门读法，参考王弼注理解，不将不同底本混作同一文本。"
+  },
+  "source_ref": {
+    "locator": "/content/9",
+    "path": "poetry/simplified/诸子百家/老子.json",
+    "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+    "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+    "anchor_text": "载营魄抱一，能无离乎？专气致柔，能如婴儿乎？涤除玄览，能无疵乎？爱民治国，能无为乎？天门开阖，能为雌乎？明白四达，能无知乎？生之、畜之，生而不有，为而不恃，长而不宰。是谓玄德。"
+  },
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "载营魄抱一，能无离乎？",
+      "translation": "使精神与形体保持统一，能不分离吗？",
+      "explanation": "读词小提示：「营魄」：这里指人的精神与形体；「抱一」：保持身心的统一。",
+      "chunks": [
+        "载营魄抱一，",
+        "能无离乎？"
+      ],
+      "hints": [
+        "营魄",
+        "抱一"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "营魄",
+          "kind": "word",
+          "meaning": "这里指人的精神与形体。"
+        },
+        {
+          "id": "n2",
+          "quote": "抱一",
+          "kind": "word",
+          "meaning": "保持身心的统一。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第十章》第1句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#十章",
+        "source_ref": {
+          "locator": "/content/9",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "载营魄抱一，能无离乎？"
+        }
+      }
+    },
+    {
+      "id": "s2",
+      "text": "专气致柔，能如婴儿乎？",
+      "translation": "调和气息，保持柔和，能像婴儿那样吗？",
+      "explanation": "读词小提示：「专气」：调和气息。",
+      "chunks": [
+        "专气致柔，",
+        "能如婴儿乎？"
+      ],
+      "hints": [
+        "专气"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "专气",
+          "kind": "word",
+          "meaning": "调和气息。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第十章》第2句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#十章",
+        "source_ref": {
+          "locator": "/content/9",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "专气致柔，能如婴儿乎？"
+        }
+      }
+    },
+    {
+      "id": "s3",
+      "text": "涤除玄览，能无疵乎？",
+      "translation": "清除内心的杂念，能没有蒙蔽吗？",
+      "explanation": "读词小提示：「涤除」：洗去、清除；「玄览」：内心深处的观照。",
+      "chunks": [
+        "涤除玄览，",
+        "能无疵乎？"
+      ],
+      "hints": [
+        "涤除",
+        "玄览",
+        "疵"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "涤除",
+          "kind": "word",
+          "meaning": "洗去、清除。",
+          "reading": "dí chú"
+        },
+        {
+          "id": "n2",
+          "quote": "玄览",
+          "kind": "word",
+          "meaning": "内心深处的观照。"
+        },
+        {
+          "id": "n3",
+          "quote": "疵",
+          "kind": "word",
+          "meaning": "缺点、瑕疵。",
+          "reading": "cī"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第十章》第3句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#十章",
+        "source_ref": {
+          "locator": "/content/9",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "涤除玄览，能无疵乎？"
+        }
+      }
+    },
+    {
+      "id": "s4",
+      "text": "爱民治国，能无为乎？",
+      "translation": "爱护百姓、治理国家，能不任意干预吗？",
+      "explanation": "读词小提示：「无为」：不凭私意强行干预。",
+      "chunks": [
+        "爱民治国，",
+        "能无为乎？"
+      ],
+      "hints": [
+        "无为"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "无为",
+          "kind": "word",
+          "meaning": "不凭私意强行干预。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第十章》第4句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#十章",
+        "source_ref": {
+          "locator": "/content/9",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "爱民治国，能无为乎？"
+        }
+      }
+    },
+    {
+      "id": "s5",
+      "text": "天门开阖，能为雌乎？",
+      "translation": "面对开启和闭合的变化，能守住安静柔和吗？",
+      "explanation": "读词小提示：「开阖」：开启与闭合；「雌」：这里借雌柔比喻安静柔和。",
+      "chunks": [
+        "天门开阖，",
+        "能为雌乎？"
+      ],
+      "hints": [
+        "开阖",
+        "雌"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "开阖",
+          "kind": "word",
+          "meaning": "开启与闭合。",
+          "reading": "kāi hé"
+        },
+        {
+          "id": "n2",
+          "quote": "雌",
+          "kind": "word",
+          "meaning": "这里借雌柔比喻安静柔和。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第十章》第5句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#十章",
+        "source_ref": {
+          "locator": "/content/9",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "天门开阖，能为雌乎？"
+        }
+      }
+    },
+    {
+      "id": "s6",
+      "text": "明白四达，能无知乎？",
+      "translation": "明白通达四方，能不卖弄机巧吗？",
+      "explanation": "读词小提示：「无知」：这里指不逞机巧。",
+      "chunks": [
+        "明白四达，",
+        "能无知乎？"
+      ],
+      "hints": [
+        "无知"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "无知",
+          "kind": "word",
+          "meaning": "这里指不逞机巧。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第十章》第6句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#十章",
+        "source_ref": {
+          "locator": "/content/9",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "明白四达，能无知乎？"
+        }
+      }
+    },
+    {
+      "id": "s7",
+      "text": "生之、畜之，生而不有，为而不恃，长而不宰。",
+      "translation": "使万物生长、养育它们，生养却不占有，有所作为却不倚仗，帮助成长却不加支配。",
+      "explanation": "读词小提示：「畜」：养育；「恃」：倚仗。",
+      "chunks": [
+        "生之、畜之，",
+        "生而不有，",
+        "为而不恃，",
+        "长而不宰。"
+      ],
+      "hints": [
+        "畜",
+        "恃",
+        "宰"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "畜",
+          "kind": "word",
+          "meaning": "养育。",
+          "reading": "xù"
+        },
+        {
+          "id": "n2",
+          "quote": "恃",
+          "kind": "word",
+          "meaning": "倚仗。"
+        },
+        {
+          "id": "n3",
+          "quote": "宰",
+          "kind": "word",
+          "meaning": "支配、控制。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第十章》第7句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#十章",
+        "source_ref": {
+          "locator": "/content/9",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "生之、畜之，生而不有，为而不恃，长而不宰。"
+        }
+      }
+    },
+    {
+      "id": "s8",
+      "text": "是谓玄德。",
+      "translation": "这叫作深厚的德行。",
+      "explanation": "读词小提示：「玄德」：深厚而不张扬的德行。",
+      "chunks": [
+        "是谓玄德。"
+      ],
+      "hints": [
+        "玄德"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "玄德",
+          "kind": "word",
+          "meaning": "深厚而不张扬的德行。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第十章》第8句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#十章",
+        "source_ref": {
+          "locator": "/content/9",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "载营魄抱一，能无离乎？专气致柔，能如婴儿乎？涤除玄览，能无疵乎？爱民治国，能无为乎？天门开阖，能为雌乎？明白四达，能无知乎？生之、畜之，生而不有，为而不恃，长而不宰。是谓玄德。"
+        }
+      }
+    }
+  ],
+  "overview": {
+    "sequence": [
+      "先看本章开头：使精神与形体保持统一，能不分离吗？",
+      "本章连续发问，最后落在生养、帮助而不控制万物的态度上。",
+      "再回到结尾：这叫作深厚的德行。"
+    ],
+    "question": "这一章为什么可以叫作「养护而不占有」？",
+    "answer": "本章连续发问，最后落在生养、帮助而不控制万物的态度上。可以引用本章开头或结尾的原句，说明你的依据。",
+    "takeaway": "本章连续发问，最后落在生养、帮助而不控制万物的态度上。"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "choice",
+      "sentence": "s1",
+      "skill": "meaning",
+      "prompt": "开头的「营魄」在这里怎样理解？",
+      "choices": [
+        "只顾自己，不留意他人的处境。",
+        "这里指人的精神与形体。",
+        "为了显示本领而处处炫耀。"
+      ],
+      "answer": 1,
+      "explanation": "把词放回原句看，「营魄」在本句中的意思是：这里指人的精神与形体。"
+    },
+    {
+      "id": "q2",
+      "type": "choice",
+      "sentence": "s8",
+      "skill": "reason",
+      "prompt": "读完「养护而不占有」，哪一种理解更合适？",
+      "choices": [
+        "只有大声夸耀自己，才能显得有本领。",
+        "只要一次失败，就不必再试。",
+        "本章连续发问，最后落在生养、帮助而不控制万物的态度上。"
+      ],
+      "answer": 2,
+      "explanation": "本章连续发问，最后落在生养、帮助而不控制万物的态度上。"
+    },
+    {
+      "id": "q3",
+      "type": "selfcheck",
+      "sentence": "s8",
+      "skill": "retell",
+      "prompt": "选本章一句话，用自己的话解释，再说说它怎样帮助你理解「养护而不占有」。",
+      "answer": "先说清原句中的对象和动作，再解释关键词。可以围绕这点来讲：本章连续发问，最后落在生养、帮助而不控制万物的态度上。说完后，回到原文找一句作依据。",
+      "explanation": "不必背诵译文。重点看词义是否放回本句、有没有原文依据，以及是否把古人的比方误当成不分条件的结论。"
+    }
+  ]
+}

@@ -1,0 +1,379 @@
+{
+  "schema_version": 1,
+  "id": "daodejing-28",
+  "title": "道德经·第二十八章",
+  "attribution": "老子",
+  "level": "challenge",
+  "genre": "reasoning",
+  "skills": [
+    "meaning",
+    "referent",
+    "reason",
+    "contrast",
+    "retell"
+  ],
+  "curriculum": null,
+  "intro": "守柔与质朴。本章借溪谷、婴儿和原木作比方，提醒人有能力也不必总显强争先。",
+  "background": "这是《道德经》道经·第二十八章。本章围绕「守柔与质朴」展开，可以先读原文，再对照译文，看看作者用了什么比方或对比。",
+  "editorial_note": "本馆用逐句译解帮助入门。读「道」「无为」等词时要看上下文；古代观念和理想化比方，可以边读边与家长讨论。",
+  "source": {
+    "work": "道德经（又名老子）",
+    "section": "道经·第二十八章",
+    "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#二十八章",
+    "note": "原文以本机简体《老子》为底本，统一引号，第七章移去括号异文提示。译文、词义和练习为本馆编写的入门读法，参考王弼注理解，不将不同底本混作同一文本。"
+  },
+  "source_ref": {
+    "locator": "/content/27",
+    "path": "poetry/simplified/诸子百家/老子.json",
+    "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+    "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+    "anchor_text": "知其雄，守其雌，为天下谿。为天下谿，常德不离，复归于婴儿。知其白，守其黑，为天下式。为天下式，常德不忒，复归于无极。知其荣，守其辱，为天下谷。为天下谷，常德乃足，复归于朴。朴散则为器，圣人用之，则为官长，故大制不割。"
+  },
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "知其雄，守其雌，为天下谿。",
+      "translation": "知道雄强的一面，却守住柔和，成为天下低处的溪谷。",
+      "explanation": "读词小提示：「雄」：雄强的一面，是比方；「雌」：柔和、退让的一面，是比方。",
+      "chunks": [
+        "知其雄，",
+        "守其雌，",
+        "为天下谿。"
+      ],
+      "hints": [
+        "雄",
+        "雌",
+        "谿"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "雄",
+          "kind": "word",
+          "meaning": "雄强的一面，是比方。"
+        },
+        {
+          "id": "n2",
+          "quote": "雌",
+          "kind": "word",
+          "meaning": "柔和、退让的一面，是比方。"
+        },
+        {
+          "id": "n3",
+          "quote": "谿",
+          "kind": "word",
+          "meaning": "同「溪」，低处的溪谷。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第二十八章》第1句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#二十八章",
+        "source_ref": {
+          "locator": "/content/27",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "知其雄，守其雌，为天下谿。"
+        }
+      }
+    },
+    {
+      "id": "s2",
+      "text": "为天下谿，常德不离，复归于婴儿。",
+      "translation": "像溪谷那样处下，恒常的德行不会离开，又回到婴儿般的质朴。",
+      "explanation": "读词小提示：「谿」：同「溪」，低处的溪谷；「婴儿」：借婴儿比喻不逞强、少机巧的状态。",
+      "chunks": [
+        "为天下谿，",
+        "常德不离，",
+        "复归于婴儿。"
+      ],
+      "hints": [
+        "谿",
+        "婴儿"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "谿",
+          "kind": "word",
+          "meaning": "同「溪」，低处的溪谷。"
+        },
+        {
+          "id": "n2",
+          "quote": "婴儿",
+          "kind": "word",
+          "meaning": "借婴儿比喻不逞强、少机巧的状态。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第二十八章》第2句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#二十八章",
+        "source_ref": {
+          "locator": "/content/27",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "为天下谿，常德不离，复归于婴儿。"
+        }
+      }
+    },
+    {
+      "id": "s3",
+      "text": "知其白，守其黑，为天下式。",
+      "translation": "知道明亮显露的一面，却守住不显露，成为天下的榜样。",
+      "explanation": "读词小提示：「白」：明白显露的一面；「黑」：不显露的一面。",
+      "chunks": [
+        "知其白，",
+        "守其黑，",
+        "为天下式。"
+      ],
+      "hints": [
+        "白",
+        "黑",
+        "式"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "白",
+          "kind": "word",
+          "meaning": "明白显露的一面。"
+        },
+        {
+          "id": "n2",
+          "quote": "黑",
+          "kind": "word",
+          "meaning": "不显露的一面。"
+        },
+        {
+          "id": "n3",
+          "quote": "式",
+          "kind": "word",
+          "meaning": "榜样、准则。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第二十八章》第3句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#二十八章",
+        "source_ref": {
+          "locator": "/content/27",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "知其白，守其黑，为天下式。"
+        }
+      }
+    },
+    {
+      "id": "s4",
+      "text": "为天下式，常德不忒，复归于无极。",
+      "translation": "成为天下的榜样，德行不出差错，又回到没有穷尽的状态。",
+      "explanation": "读词小提示：「式」：榜样、准则；「忒」：差错。",
+      "chunks": [
+        "为天下式，",
+        "常德不忒，",
+        "复归于无极。"
+      ],
+      "hints": [
+        "式",
+        "忒",
+        "无极"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "式",
+          "kind": "word",
+          "meaning": "榜样、准则。"
+        },
+        {
+          "id": "n2",
+          "quote": "忒",
+          "kind": "word",
+          "meaning": "差错。",
+          "reading": "tè"
+        },
+        {
+          "id": "n3",
+          "quote": "无极",
+          "kind": "word",
+          "meaning": "没有穷尽的状态。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第二十八章》第4句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#二十八章",
+        "source_ref": {
+          "locator": "/content/27",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "为天下式，常德不忒，复归于无极。"
+        }
+      }
+    },
+    {
+      "id": "s5",
+      "text": "知其荣，守其辱，为天下谷。",
+      "translation": "知道荣耀，却愿意处在不显赫的位置，像天下的山谷。",
+      "explanation": "读词小提示：「荣」：荣耀；「辱」：低下、不显赫的位置。",
+      "chunks": [
+        "知其荣，",
+        "守其辱，",
+        "为天下谷。"
+      ],
+      "hints": [
+        "荣",
+        "辱"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "荣",
+          "kind": "word",
+          "meaning": "荣耀。"
+        },
+        {
+          "id": "n2",
+          "quote": "辱",
+          "kind": "word",
+          "meaning": "低下、不显赫的位置。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第二十八章》第5句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#二十八章",
+        "source_ref": {
+          "locator": "/content/27",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "知其荣，守其辱，为天下谷。"
+        }
+      }
+    },
+    {
+      "id": "s6",
+      "text": "为天下谷，常德乃足，复归于朴。",
+      "translation": "像山谷那样包容，德行才充足，又回到质朴。",
+      "explanation": "读词小提示：「朴」：未经雕琢的木材，比喻质朴。",
+      "chunks": [
+        "为天下谷，",
+        "常德乃足，",
+        "复归于朴。"
+      ],
+      "hints": [
+        "朴"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "朴",
+          "kind": "word",
+          "meaning": "未经雕琢的木材，比喻质朴。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第二十八章》第6句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#二十八章",
+        "source_ref": {
+          "locator": "/content/27",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "为天下谷，常德乃足，复归于朴。"
+        }
+      }
+    },
+    {
+      "id": "s7",
+      "text": "朴散则为器，圣人用之，则为官长，故大制不割。",
+      "translation": "原木分开可以制成器具，有智慧的人据此任用人才、设立职守，所以好的治理不割裂根本。",
+      "explanation": "这段从原木说到器具，再说到治理，读时注意比方转向了新的话题。",
+      "chunks": [
+        "朴散则为器，",
+        "圣人用之，",
+        "则为官长，",
+        "故大制不割。"
+      ],
+      "hints": [
+        "朴",
+        "大制不割"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "朴",
+          "kind": "word",
+          "meaning": "未经雕琢的木材，比喻质朴。"
+        },
+        {
+          "id": "n2",
+          "quote": "大制不割",
+          "kind": "word",
+          "meaning": "好的制度不把完整的根本割裂。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第二十八章》第7句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#二十八章",
+        "source_ref": {
+          "locator": "/content/27",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "朴散则为器，圣人用之，则为官长，故大制不割。"
+        }
+      }
+    }
+  ],
+  "overview": {
+    "sequence": [
+      "先看本章开头：知道雄强的一面，却守住柔和，成为天下低处的溪谷。",
+      "本章借溪谷、婴儿和原木作比方，提醒人有能力也不必总显强争先。",
+      "再回到结尾：原木分开可以制成器具，有智慧的人据此任用人才、设立职守，所以好的治理不割裂根本。"
+    ],
+    "question": "这一章为什么可以叫作「守柔与质朴」？",
+    "answer": "本章借溪谷、婴儿和原木作比方，提醒人有能力也不必总显强争先。可以引用本章开头或结尾的原句，说明你的依据。",
+    "takeaway": "本章借溪谷、婴儿和原木作比方，提醒人有能力也不必总显强争先。"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "choice",
+      "sentence": "s1",
+      "skill": "meaning",
+      "prompt": "开头的「雄」在这里怎样理解？",
+      "choices": [
+        "只顾自己，不留意他人的处境。",
+        "雄强的一面，是比方。",
+        "为了显示本领而处处炫耀。"
+      ],
+      "answer": 1,
+      "explanation": "把词放回原句看，「雄」在本句中的意思是：雄强的一面，是比方。"
+    },
+    {
+      "id": "q2",
+      "type": "choice",
+      "sentence": "s7",
+      "skill": "reason",
+      "prompt": "读完「守柔与质朴」，哪一种理解更合适？",
+      "choices": [
+        "做事情永远越多越快越好。",
+        "别人的想法一概不用听。",
+        "本章借溪谷、婴儿和原木作比方，提醒人有能力也不必总显强争先。"
+      ],
+      "answer": 2,
+      "explanation": "本章借溪谷、婴儿和原木作比方，提醒人有能力也不必总显强争先。"
+    },
+    {
+      "id": "q3",
+      "type": "selfcheck",
+      "sentence": "s7",
+      "skill": "retell",
+      "prompt": "选本章一句话，用自己的话解释，再说说它怎样帮助你理解「守柔与质朴」。",
+      "answer": "先说清原句中的对象和动作，再解释关键词。可以围绕这点来讲：本章借溪谷、婴儿和原木作比方，提醒人有能力也不必总显强争先。说完后，回到原文找一句作依据。",
+      "explanation": "不必背诵译文。重点看词义是否放回本句、有没有原文依据，以及是否把古人的比方误当成不分条件的结论。"
+    }
+  ]
+}

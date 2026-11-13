@@ -1,0 +1,1956 @@
+{
+  "schema_version": 1,
+  "id": "lunyu-weilinggong",
+  "title": "论语·卫灵公",
+  "unit_label": "则",
+  "attribution": "孔子及其弟子言行，弟子与再传弟子编纂",
+  "level": "challenge",
+  "genre": "reasoning",
+  "skills": [
+    "meaning",
+    "referent",
+    "reason",
+    "contrast"
+  ],
+  "curriculum": null,
+  "intro": "跟着周游列国时的问答，读懂守信、反省和推己及人。",
+  "background": "这是《论语》二十篇中的第15篇，话题围绕困境中的原则与学习展开。篇名取自开头的字，并不表示每一则都只讲同一个题目。",
+  "editorial_note": "每次可以只读一两则。分段依本机原典，共二十篇、五百一十三则；其他版本的分章和个别用字可能不同。古代身份、礼制和观念要结合当时背景来理解。",
+  "source": {
+    "work": "论语",
+    "section": "卫灵公篇",
+    "url": "https://zh.wikisource.org/wiki/論語/衞靈公第十五",
+    "note": "原文采用随项目保存的简体原典，统一引号样式。译文和部分词义据所列译注资料整理，疑难处配合本篇提示阅读。"
+  },
+  "source_ref": {
+    "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+    "path": "poetry/simplified/儒家经典/论语.json",
+    "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+    "locator": "/content/14",
+    "anchor_text": "卫灵公问陈于孔子，孔子对曰：“俎豆之事，则尝闻之矣；军旅之事，未之学也。”明日遂行。"
+  },
+  "edition": {
+    "label": "译注参考：ieduer/lunyu 所收《论语译注》资料",
+    "url": "https://github.com/ieduer/lunyu/blob/44f039ef8174b219b5f773a156b3d954ee65be25/data/dialogues.json",
+    "revision": "44f039ef8174b219b5f773a156b3d954ee65be25",
+    "license": "MIT，许可副本随内容源保存",
+    "note": "采用固定版本的译注，去除重复条目与注号，逐则配回本馆原文；词义保留简短释义，补充课堂提示。乡党两则分配译文，颜渊第二十则依完整原文呈现。"
+  },
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "卫灵公问陈于孔子，孔子对曰：「俎豆之事，则尝闻之矣；军旅之事，未之学也。」明日遂行。",
+      "translation": "卫灵公向孔子问军队陈列之法。孔子答道：「礼仪的事情，我曾经听到过；军队的事情，从来没学习过。」第二天便离开卫国。",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "陈",
+          "kind": "word",
+          "meaning": "就是今天的「阵」字。"
+        },
+        {
+          "id": "n2",
+          "quote": "俎豆之事",
+          "kind": "word",
+          "meaning": "俎和豆都是古代盛肉食的器皿，行礼时用它，因之藉以表示礼仪之事。"
+        }
+      ],
+      "chunks": [
+        "卫灵公问陈于孔子，",
+        "孔子对曰：",
+        "「俎豆之事，",
+        "则尝闻之矣；",
+        "军旅之事，",
+        "未之学也。",
+        "」明日遂行。"
+      ],
+      "reference": {
+        "label": "《论语·卫灵公》第1则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/衞靈公第十五",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/14",
+          "anchor_text": "卫灵公问陈于孔子，孔子对曰：“俎豆之事，则尝闻之矣；军旅之事，未之学也。”明日遂行。"
+        }
+      },
+      "explanation": "「陈」：就是今天的「阵」字；「俎豆之事」：俎和豆都是古代盛肉食的器皿，行礼时用它，因之藉以表示礼仪之事。",
+      "hints": [
+        "陈",
+        "俎豆之事"
+      ],
+      "translation_entry": 421
+    },
+    {
+      "id": "s2",
+      "text": "在陈绝粮，从者病莫能兴。子路愠见曰：「君子亦有穷乎？」子曰：「君子固穷，小人穷斯滥矣。」",
+      "translation": "孔子在陈国断绝了粮食，跟随的人都饿病了，爬不起床来。子路很不高兴地来见孔子，说道：「君子也有穷得毫无办法的时候吗？」孔子道：「君子虽然穷，还是坚持着；小人一穷便无所不为了。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "固穷",
+          "kind": "word",
+          "meaning": "处境困苦时仍守住原则。"
+        }
+      ],
+      "chunks": [
+        "在陈绝粮，",
+        "从者病莫能兴。",
+        "子路愠见曰：",
+        "「君子亦有穷乎？",
+        "」子曰：",
+        "「君子固穷，",
+        "小人穷斯滥矣。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·卫灵公》第2则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/衞靈公第十五",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/14",
+          "anchor_text": "在陈绝粮，从者病莫能兴。子路愠见曰：“君子亦有穷乎？”子曰：“君子固穷，小人穷斯滥矣。”"
+        }
+      },
+      "explanation": "孔子把身处困境与放弃原则分开：困难时也要想办法，不任意妄为。",
+      "hints": [
+        "固穷"
+      ],
+      "translation_entry": 422
+    },
+    {
+      "id": "s3",
+      "text": "子曰：「赐也，女以予为多学而识之者与？」对曰：「然，非与？」曰：「非也，予一以贯之。」",
+      "translation": "孔子道：「赐！你以为我是多多地学习又能够记得住的吗？」子贡答道：「对呀，难道不是这样吗？」孔子道：「不是的，我有一个基本观念来贯串它。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "一以贯之",
+          "kind": "word",
+          "meaning": "这和里仁篇的「夫子之道，忠恕而已矣」（4.15）的「一贯」相同。"
+        },
+        {
+          "id": "n2",
+          "quote": "予",
+          "meaning": "第一人称，意思是我。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "这一段接在「子曰」之后，尚未转述别人的话，指正在说话的孔子。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「赐也，",
+        "女以予为多学而识之者与？",
+        "」对曰：",
+        "「然，",
+        "非与？",
+        "」曰：",
+        "「非也，",
+        "予一以贯之。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·卫灵公》第3则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/衞靈公第十五",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/14",
+          "anchor_text": "子曰：“赐也，女以予为多学而识之者与？”对曰：“然，非与？”曰：“非也，予一以贯之。”"
+        }
+      },
+      "explanation": "「一以贯之」：这和里仁篇的「夫子之道，忠恕而已矣」（4.15）的「一贯」相同。",
+      "hints": [
+        "一以贯之"
+      ],
+      "translation_entry": 423
+    },
+    {
+      "id": "s4",
+      "text": "子曰：「由，知德者鲜矣。」",
+      "translation": "孔子对子路道：「由！懂得『德』的人可少啦。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "鲜",
+          "kind": "word",
+          "meaning": "少，读作「xiǎn」。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「由，",
+        "知德者鲜矣。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·卫灵公》第4则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/衞靈公第十五",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/14",
+          "anchor_text": "子曰：“由，知德者鲜矣。”"
+        }
+      },
+      "explanation": "这是一句感叹，孔子对仲由说，懂得德行的人并不多。",
+      "hints": [
+        "鲜"
+      ],
+      "translation_entry": 424
+    },
+    {
+      "id": "s5",
+      "text": "子曰：「无为而治者其舜也与！夫何为哉？恭己正南面而已矣。」",
+      "translation": "孔子说：「自己从容安静而使天下太平的人大概只有舜罢？他干了什么呢？庄严端正地坐朝廷罢了。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "无为而治",
+          "kind": "word",
+          "meaning": "舜何以能如此？"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「无为而治者其舜也与！",
+        "夫何为哉？",
+        "恭己正南面而已矣。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·卫灵公》第5则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/衞靈公第十五",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/14",
+          "anchor_text": "子曰：“无为而治者其舜也与！夫何为哉？恭己正南面而已矣。”"
+        }
+      },
+      "explanation": "「无为而治」：舜何以能如此？。",
+      "hints": [
+        "无为而治"
+      ],
+      "translation_entry": 425
+    },
+    {
+      "id": "s6",
+      "text": "子张问行，子曰：「言忠信，行笃敬，虽蛮貊之邦行矣；言不忠信，行不笃敬，虽州里行乎哉？立则见其参于前也；在舆则见其倚于衡也，夫然后行。」子张书诸绅。",
+      "translation": "子张问如何才能使自己到处行得通。孔子道：「言语忠诚老实，行为忠厚严肃，纵到了别的部族国家，也行得通。言语欺诈无信，行为刻薄轻浮，就是在本乡本土，能行得通吗？站立的时候，就（彷佛）看见「忠诚老实忠厚严肃」几个字在我们面前；在车箱里，也（彷佛）看见它刻在前面的横木上；（时时刻刻记着它，）这才能使自己到处行得通。」子张把这些话写在大带上。",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "笃敬",
+          "kind": "word",
+          "meaning": "忠厚认真，态度恭敬。"
+        }
+      ],
+      "chunks": [
+        "子张问行，",
+        "子曰：",
+        "「言忠信，",
+        "行笃敬，",
+        "虽蛮貊之邦行矣；",
+        "言不忠信，",
+        "行不笃敬，",
+        "虽州里行乎哉？",
+        "立则见其参于前也；",
+        "在舆则见其倚于衡也，",
+        "夫然后行。",
+        "」子张书诸绅。"
+      ],
+      "reference": {
+        "label": "《论语·卫灵公》第6则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/衞靈公第十五",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/14",
+          "anchor_text": "子张问行，子曰：“言忠信，行笃敬，虽蛮貊之邦行矣；言不忠信，行不笃敬，虽州里行乎哉？立则见其参于前也；在舆则见其倚于衡也，夫然后行。”子张书诸绅。"
+        }
+      },
+      "explanation": "先讲说话和行动，再用站立、乘车两个场景提醒子张时时记住。",
+      "hints": [
+        "笃敬"
+      ],
+      "translation_entry": 426
+    },
+    {
+      "id": "s7",
+      "text": "子曰：「直哉史鱼！邦有道如矢，邦无道如矢。君子哉蘧伯玉！邦有道则仕，邦无道则可卷而怀之。」",
+      "translation": "孔子说：「好一个刚直不屈的史鱼！政治清明也像箭一样直，政治黑暗也像箭一样直。好一个君子蘧伯玉！政治清明就出来做官，政治黑暗就可以把自己的本领收藏起来。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "史鱼",
+          "kind": "word",
+          "meaning": "卫国的大夫史鳅，字子鱼。"
+        },
+        {
+          "id": "n2",
+          "quote": "蘧伯玉",
+          "kind": "word",
+          "meaning": "事可参见《左传》襄公十四年和二十六年。"
+        },
+        {
+          "id": "n3",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「直哉史鱼！",
+        "邦有道如矢，",
+        "邦无道如矢。",
+        "君子哉蘧伯玉！",
+        "邦有道则仕，",
+        "邦无道则可卷而怀之。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·卫灵公》第7则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/衞靈公第十五",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/14",
+          "anchor_text": "子曰：“直哉史鱼！邦有道如矢，邦无道如矢。君子哉蘧伯玉！邦有道则仕，邦无道则可卷而怀之。”"
+        }
+      },
+      "explanation": "「史鱼」：卫国的大夫史鳅，字子鱼；「蘧伯玉」：事可参见《左传》襄公十四年和二十六年。",
+      "hints": [
+        "史鱼",
+        "蘧伯玉"
+      ],
+      "translation_entry": 427
+    },
+    {
+      "id": "s8",
+      "text": "子曰：「可与言而不与之言，失人；不可与言而与之言，失言。知者不失人亦不失言。」",
+      "translation": "孔子说：「可以同他谈，却不同他谈，这是错过人才；不可以同他谈，却同他谈，这是浪费言语。聪明人既不错过人才，也不浪费言语。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "失人",
+          "kind": "word",
+          "meaning": "错过可以交流、值得帮助的人。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「可与言而不与之言，",
+        "失人；",
+        "不可与言而与之言，",
+        "失言。",
+        "知者不失人亦不失言。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·卫灵公》第8则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/衞靈公第十五",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/14",
+          "anchor_text": "子曰：“可与言而不与之言，失人；不可与言而与之言，失言。知者不失人亦不失言。”"
+        }
+      },
+      "explanation": "说话要看对象和时机，既要愿意交流，也要认真判断对方的处境。",
+      "hints": [
+        "失人"
+      ],
+      "translation_entry": 428
+    },
+    {
+      "id": "s9",
+      "text": "子曰：「志士仁人无求生以害仁，有杀身以成仁。」",
+      "translation": "孔子说：「志士仁人，不贪生怕死因而损害仁德，只勇于牺牲来成全仁德。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "成仁",
+          "kind": "word",
+          "meaning": "成全仁德，守住心中的道义。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「志士仁人无求生以害仁，",
+        "有杀身以成仁。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·卫灵公》第9则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/衞靈公第十五",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/14",
+          "anchor_text": "子曰：“志士仁人无求生以害仁，有杀身以成仁。”"
+        }
+      },
+      "explanation": "这句放在古人的价值选择中理解。今天遇到危险，要珍惜生命，及时求助，用安全有效的办法帮助别人。",
+      "hints": [
+        "成仁"
+      ],
+      "translation_entry": 429
+    },
+    {
+      "id": "s10",
+      "text": "子贡问为仁，子曰：「工欲善其事，必先利其器。居是邦也，事其大夫之贤者，友其士之仁者。」",
+      "translation": "子贡问怎样去培养仁德。孔子道：「工人要搞好他的工作，一定先要搞好他的工具。我们住在一个国家，就要敬奉那些大官中的贤人，结交那些士人中的仁人。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "士",
+          "kind": "word",
+          "meaning": "《论语》中的「士」，有时指有一定修养的人，如「士志于道」（4.9）的「士」。"
+        }
+      ],
+      "chunks": [
+        "子贡问为仁，",
+        "子曰：",
+        "「工欲善其事，",
+        "必先利其器。",
+        "居是邦也，",
+        "事其大夫之贤者，",
+        "友其士之仁者。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·卫灵公》第10则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/衞靈公第十五",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/14",
+          "anchor_text": "子贡问为仁，子曰：“工欲善其事，必先利其器。居是邦也，事其大夫之贤者，友其士之仁者。”"
+        }
+      },
+      "explanation": "「士」：《论语》中的「士」，有时指有一定修养的人，如「士志于道」（4.9）的「士」。",
+      "hints": [
+        "士"
+      ],
+      "translation_entry": 430
+    },
+    {
+      "id": "s11",
+      "text": "颜渊问为邦，子曰：「行夏之时，乘殷之辂，服周之冕，乐则《韶》、《舞》；放郑声，远佞人。郑声淫，佞人殆。」",
+      "translation": "颜渊问怎样去治理国家。孔子道：「用夏朝的历法，坐殷朝的车子，戴周朝的礼帽，音乐就用韶和武。舍弃郑国的乐曲，斥退小人。郑国的乐曲靡曼淫秽，小人危险。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "行夏之时",
+          "kind": "word",
+          "meaning": "据古史记载，夏朝用的自然历，以建寅之月（旧历正月）为每年的第一月，春、夏、秋、冬合乎自然现象。"
+        },
+        {
+          "id": "n2",
+          "quote": "乘殷之辂",
+          "kind": "word",
+          "meaning": "辂音路，商代的车子，比周代的车子自然朴质些。"
+        },
+        {
+          "id": "n3",
+          "quote": "服周之冕",
+          "kind": "word",
+          "meaning": "周代的礼帽自然又比以前的华美，孔子是不反对礼服的华美的，赞美禹「致美乎黻冕」可见。"
+        },
+        {
+          "id": "n4",
+          "quote": "韶",
+          "kind": "word",
+          "meaning": "韶是舜时的音乐，「舞」同「武」，周武王时的音乐。"
+        },
+        {
+          "id": "n5",
+          "quote": "放郑声",
+          "kind": "word",
+          "meaning": "「郑声」和「郑诗」不同。"
+        }
+      ],
+      "chunks": [
+        "颜渊问为邦，",
+        "子曰：",
+        "「行夏之时，",
+        "乘殷之辂，",
+        "服周之冕，",
+        "乐则《韶》、《舞》；",
+        "放郑声，",
+        "远佞人。",
+        "郑声淫，",
+        "佞人殆。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·卫灵公》第11则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/衞靈公第十五",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/14",
+          "anchor_text": "颜渊问为邦，子曰：“行夏之时，乘殷之辂，服周之冕，乐则《韶》、《舞》；放郑声，远佞人。郑声淫，佞人殆。”"
+        }
+      },
+      "explanation": "「行夏之时」：据古史记载，夏朝用的自然历，以建寅之月（旧历正月）为每年的第一月，春、夏、秋、冬合乎自然现象；「乘殷之辂」：辂音路，商代的车子，比周代的车子自然朴质些。",
+      "hints": [
+        "行夏之时",
+        "乘殷之辂",
+        "服周之冕"
+      ],
+      "translation_entry": 431
+    },
+    {
+      "id": "s12",
+      "text": "子曰：「人无远虑，必有近忧。」",
+      "translation": "孔子说：「一个人没有长远的考虑，一定会有眼前的忧患。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "远虑",
+          "kind": "word",
+          "meaning": "为较远的将来作打算。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「人无远虑，",
+        "必有近忧。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·卫灵公》第12则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/衞靈公第十五",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/14",
+          "anchor_text": "子曰：“人无远虑，必有近忧。”"
+        }
+      },
+      "explanation": "长远打算能帮助人提前准备，但也要从眼前能做的一步开始。",
+      "hints": [
+        "远虑"
+      ],
+      "translation_entry": 432
+    },
+    {
+      "id": "s13",
+      "text": "子曰：「已矣乎！吾未见好德如好色者也。」",
+      "translation": "孔子说：「完了吧！我从没见过像喜欢美貌一般地喜欢美德的人哩。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "好色",
+          "kind": "word",
+          "meaning": "喜爱美色，这里与好德作比较。"
+        },
+        {
+          "id": "n2",
+          "quote": "吾",
+          "meaning": "第一人称，意思是我。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "这一段接在「子曰」之后，尚未转述别人的话，指正在说话的孔子。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「已矣乎！",
+        "吾未见好德如好色者也。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·卫灵公》第13则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/衞靈公第十五",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/14",
+          "anchor_text": "子曰：“已矣乎！吾未见好德如好色者也。”"
+        }
+      },
+      "explanation": "「好色」：喜爱美色，这里与好德作比较。",
+      "hints": [
+        "好色"
+      ],
+      "translation_entry": 433
+    },
+    {
+      "id": "s14",
+      "text": "子曰：「臧文仲其窃位者与！知柳下惠之贤而不与立也。」",
+      "translation": "孔子说：「臧文仲大概是个做官不管事的人，他明知柳下惠贤良，却不给他官位。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "臧文仲",
+          "kind": "word",
+          "meaning": "鲁国的大夫臧孙辰，历仕庄、闵、僖、文四朝。"
+        },
+        {
+          "id": "n2",
+          "quote": "柳下惠",
+          "kind": "word",
+          "meaning": "鲁国贤者，本名展获，字禽，又叫展季。"
+        },
+        {
+          "id": "n3",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「臧文仲其窃位者与！",
+        "知柳下惠之贤而不与立也。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·卫灵公》第14则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/衞靈公第十五",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/14",
+          "anchor_text": "子曰：“臧文仲其窃位者与！知柳下惠之贤而不与立也。”"
+        }
+      },
+      "explanation": "「臧文仲」：鲁国的大夫臧孙辰，历仕庄、闵、僖、文四朝；「柳下惠」：鲁国贤者，本名展获，字禽，又叫展季。",
+      "hints": [
+        "臧文仲",
+        "柳下惠"
+      ],
+      "translation_entry": 434
+    },
+    {
+      "id": "s15",
+      "text": "子曰：「躬自厚而薄责于人，则远怨矣。」",
+      "translation": "孔子说：「多责备自己，而少责备别人，怨恨自然不会来了。「",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "躬自厚",
+          "kind": "word",
+          "meaning": "本当作「躬自厚责」，「责」字探下文「薄责」之「责」而省略。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「躬自厚而薄责于人，",
+        "则远怨矣。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·卫灵公》第15则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/衞靈公第十五",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/14",
+          "anchor_text": "子曰：“躬自厚而薄责于人，则远怨矣。”"
+        }
+      },
+      "explanation": "「躬自厚」：本当作「躬自厚责」，「责」字探下文「薄责」之「责」而省略。",
+      "hints": [
+        "躬自厚"
+      ],
+      "translation_entry": 435
+    },
+    {
+      "id": "s16",
+      "text": "子曰：「不曰『如之何、如之何』者，吾末如之何也已矣。」",
+      "translation": "孔子说：「（一个人）不想想『怎么办，怎么办』的，对这种人，我也不知道怎么办了。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "如之何",
+          "kind": "word",
+          "meaning": "「不曰如之何」意思就是不动脑筋。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「不曰『如之何、如之何』者，",
+        "吾末如之何也已矣。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·卫灵公》第16则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/衞靈公第十五",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/14",
+          "anchor_text": "子曰：“不曰‘如之何、如之何’者，吾末如之何也已矣。”"
+        }
+      },
+      "explanation": "「如之何」：「不曰如之何」意思就是不动脑筋。",
+      "hints": [
+        "如之何"
+      ],
+      "translation_entry": 436
+    },
+    {
+      "id": "s17",
+      "text": "子曰：「群居终日，言不及义，好行小慧，难矣哉！」",
+      "translation": "孔子说：「同大家整天在一块，不说一句有道理的话，只喜欢卖弄小聪明，这种人真难教导！」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "小慧",
+          "kind": "word",
+          "meaning": "小聪明。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「群居终日，",
+        "言不及义，",
+        "好行小慧，",
+        "难矣哉！",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·卫灵公》第17则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/衞靈公第十五",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/14",
+          "anchor_text": "子曰：“群居终日，言不及义，好行小慧，难矣哉！”"
+        }
+      },
+      "explanation": "孔子担心的是整天只说无关道理的话，把聪明用在取巧上。",
+      "hints": [
+        "小慧"
+      ],
+      "translation_entry": 437
+    },
+    {
+      "id": "s18",
+      "text": "子曰：「君子义以为质，礼以行之，孙以出之，信以成之。君子哉！」",
+      "translation": "孔子说：「君子（对于事业），以合宜为原则，依礼节实行它，用谦逊的言语说出它，用诚实的态度完成它。真个是位君子呀！」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "孙以出之",
+          "kind": "word",
+          "meaning": "「出」谓出言。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「君子义以为质，",
+        "礼以行之，",
+        "孙以出之，",
+        "信以成之。",
+        "君子哉！",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·卫灵公》第18则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/衞靈公第十五",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/14",
+          "anchor_text": "子曰：“君子义以为质，礼以行之，孙以出之，信以成之。君子哉！”"
+        }
+      },
+      "explanation": "「孙以出之」：「出」谓出言。",
+      "hints": [
+        "孙以出之"
+      ],
+      "translation_entry": 438
+    },
+    {
+      "id": "s19",
+      "text": "子曰：「君子病无能焉，不病人之不己知也。」",
+      "translation": "孔子说：「君子只惭愧自己没有能力，不怨恨别人不知道自己。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "病",
+          "kind": "word",
+          "meaning": "担心、忧虑。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「君子病无能焉，",
+        "不病人之不己知也。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·卫灵公》第19则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/衞靈公第十五",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/14",
+          "anchor_text": "子曰：“君子病无能焉，不病人之不己知也。”"
+        }
+      },
+      "explanation": "这里的「病」不是生病，而是把自己本领不足当作需要改进的事。",
+      "hints": [
+        "病"
+      ],
+      "translation_entry": 439
+    },
+    {
+      "id": "s20",
+      "text": "子曰：「君子疾没世而名不称焉。」",
+      "translation": "孔子说：「到死而名声不被人家称述，君子引以为恨。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "没世",
+          "kind": "word",
+          "meaning": "生命结束。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「君子疾没世而名不称焉。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·卫灵公》第20则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/衞靈公第十五",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/14",
+          "anchor_text": "子曰：“君子疾没世而名不称焉。”"
+        }
+      },
+      "explanation": "这句谈古人对身后名声的看法，可以联系认真做有价值的事来理解。",
+      "hints": [
+        "没世"
+      ],
+      "translation_entry": 440
+    },
+    {
+      "id": "s21",
+      "text": "子曰：「君子求诸己，小人求诸人。」",
+      "translation": "孔子说：「君子要求自己，小人要求别人。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "求诸己",
+          "kind": "word",
+          "meaning": "从自己身上找原因、提要求。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「君子求诸己，",
+        "小人求诸人。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·卫灵公》第21则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/衞靈公第十五",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/14",
+          "anchor_text": "子曰：“君子求诸己，小人求诸人。”"
+        }
+      },
+      "explanation": "遇到问题，先看自己有哪些能改进的地方，而不是只责备别人。",
+      "hints": [
+        "求诸己"
+      ],
+      "translation_entry": 441
+    },
+    {
+      "id": "s22",
+      "text": "子曰：「君子矜而不争，群而不党。」",
+      "translation": "孔子说：「君子庄矜而不争执，合群而不闹宗派。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "群而不党",
+          "kind": "word",
+          "meaning": "「群而不党」可能包含着「周而不比」（2.14）以及「和而不同」（13.23）两个意思。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「君子矜而不争，",
+        "群而不党。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·卫灵公》第22则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/衞靈公第十五",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/14",
+          "anchor_text": "子曰：“君子矜而不争，群而不党。”"
+        }
+      },
+      "explanation": "「群而不党」：「群而不党」可能包含着「周而不比」（2.14）以及「和而不同」（13.23）两个意思。",
+      "hints": [
+        "群而不党"
+      ],
+      "translation_entry": 442
+    },
+    {
+      "id": "s23",
+      "text": "子曰：「君子不以言举人，不以人废言。」",
+      "translation": "孔子说：「君子不因为人家一句话（说得好）便提拔他，不因为他是坏人而鄙弃他的好话。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "举人",
+          "kind": "word",
+          "meaning": "推荐、选用一个人。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「君子不以言举人，",
+        "不以人废言。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·卫灵公》第23则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/衞靈公第十五",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/14",
+          "anchor_text": "子曰：“君子不以言举人，不以人废言。”"
+        }
+      },
+      "explanation": "评价人要看行为；判断话也要看道理，不能只凭谁说的就全盘接受或丢弃。",
+      "hints": [
+        "举人"
+      ],
+      "translation_entry": 443
+    },
+    {
+      "id": "s24",
+      "reuse": {
+        "article": "lunyu",
+        "sentence": "s6"
+      },
+      "reference": {
+        "label": "《论语·卫灵公》第24则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/衞靈公第十五",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/14",
+          "anchor_text": "子贡问曰：“有一言而可以终身行之者乎？”子曰：“其恕乎！己所不欲，勿施于人。”"
+        }
+      }
+    },
+    {
+      "id": "s25",
+      "text": "子曰：「吾之于人也，谁毁谁誉？如有所誉者，其有所试矣。斯民也，三代之所以直道而行也。」",
+      "translation": "孔子说：「我对于别人，诋毁了谁？称赞了谁？假若我有所称赞，必然是曾经考验过他的。夏、商、周三代的人都如此，所以三代能直道而行。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "试",
+          "kind": "word",
+          "meaning": "考察、验证。"
+        },
+        {
+          "id": "n2",
+          "quote": "吾",
+          "meaning": "第一人称，意思是我。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "这一段接在「子曰」之后，尚未转述别人的话，指正在说话的孔子。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「吾之于人也，",
+        "谁毁谁誉？",
+        "如有所誉者，",
+        "其有所试矣。",
+        "斯民也，",
+        "三代之所以直道而行也。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·卫灵公》第25则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/衞靈公第十五",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/14",
+          "anchor_text": "子曰：“吾之于人也，谁毁谁誉？如有所誉者，其有所试矣。斯民也，三代之所以直道而行也。”"
+        }
+      },
+      "explanation": "称赞别人应有实际依据，这与随意吹捧不同。",
+      "hints": [
+        "试"
+      ],
+      "translation_entry": 445
+    },
+    {
+      "id": "s26",
+      "text": "子曰：「吾犹及史之阙文也，有马者借人乘之，今亡矣夫！」",
+      "translation": "孔子说：「我还能够看到史书存疑的地方。有马的人（自己不会训练，）先给别人使用，这种精神，今天也没有了罢，」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "阙文",
+          "kind": "word",
+          "meaning": "把不清楚、有疑问的文字留空。"
+        },
+        {
+          "id": "n2",
+          "quote": "吾",
+          "meaning": "第一人称，意思是我。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "这一段接在「子曰」之后，尚未转述别人的话，指正在说话的孔子。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「吾犹及史之阙文也，",
+        "有马者借人乘之，",
+        "今亡矣夫！",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·卫灵公》第26则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/衞靈公第十五",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/14",
+          "anchor_text": "子曰：“吾犹及史之阙文也，有马者借人乘之，今亡矣夫！”"
+        }
+      },
+      "explanation": "不明白的事先保留疑问，是一种诚实；不能为了显得全懂就随意补写。",
+      "hints": [
+        "阙文"
+      ],
+      "translation_entry": 446
+    },
+    {
+      "id": "s27",
+      "text": "子曰：「巧言乱德，小不忍，则乱大谋。」",
+      "translation": "孔子说：「花言巧语足以败坏道德。小事情不忍耐，便会败坏大事情。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "小不忍",
+          "kind": "word",
+          "meaning": "「小不忍」不仅是不忍小忿怒，也包括不忍小仁小恩，没有「蝮蛇螫手，壮士断腕」的勇气，也包括吝财不忍舍，以及见小利而贪。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「巧言乱德，",
+        "小不忍，",
+        "则乱大谋。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·卫灵公》第27则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/衞靈公第十五",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/14",
+          "anchor_text": "子曰：“巧言乱德，小不忍，则乱大谋。”"
+        }
+      },
+      "explanation": "「小不忍」：「小不忍」不仅是不忍小忿怒，也包括不忍小仁小恩，没有「蝮蛇螫手，壮士断腕」的勇气，也包括吝财不忍舍，以及见小利而贪。",
+      "hints": [
+        "小不忍"
+      ],
+      "translation_entry": 447
+    },
+    {
+      "id": "s28",
+      "text": "子曰：「众恶之，必察焉；众好之，必察焉。」",
+      "translation": "孔子说：「大家厌恶他，一定要去考察；大家喜爱他，也一定要去考察。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "必察焉",
+          "kind": "word",
+          "meaning": "一定要仔细考察，不能只凭大家的说法。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「众恶之，",
+        "必察焉；",
+        "众好之，",
+        "必察焉。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·卫灵公》第28则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/衞靈公第十五",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/14",
+          "anchor_text": "子曰：“众恶之，必察焉；众好之，必察焉。”"
+        }
+      },
+      "explanation": "「必察焉」：一定要仔细考察，不能只凭大家的说法。",
+      "hints": [
+        "必察焉"
+      ],
+      "translation_entry": 448
+    },
+    {
+      "id": "s29",
+      "text": "子曰：「人能弘道，非道弘人。」",
+      "translation": "孔子说：「人能够把道廓大，不是用道来廓大人。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "弘",
+          "kind": "word",
+          "meaning": "扩大、发扬。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「人能弘道，",
+        "非道弘人。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·卫灵公》第29则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/衞靈公第十五",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/14",
+          "anchor_text": "子曰：“人能弘道，非道弘人。”"
+        }
+      },
+      "explanation": "这句把实行道理的责任放在人身上：道理要有人实践，才能发挥作用。",
+      "hints": [
+        "弘"
+      ],
+      "translation_entry": 449
+    },
+    {
+      "id": "s30",
+      "text": "子曰：「过而不改，是谓过矣。」",
+      "translation": "孔子说：「有错误而不改正，那个错误便真叫做错误了。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "是谓过矣",
+          "kind": "word",
+          "meaning": "这才叫真正的过错，强调不肯改正的问题。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「过而不改，",
+        "是谓过矣。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·卫灵公》第30则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/衞靈公第十五",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/14",
+          "anchor_text": "子曰：“过而不改，是谓过矣。”"
+        }
+      },
+      "explanation": "「是谓过矣」：这才叫真正的过错，强调不肯改正的问题。",
+      "hints": [
+        "是谓过矣"
+      ],
+      "translation_entry": 450
+    },
+    {
+      "id": "s31",
+      "text": "子曰：「吾尝终日不食、终夜不寝以思，无益，不如学也。」",
+      "translation": "孔子说：「我曾经整天不吃，整晚不睡，去想，没有益处，不如去学习。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "益",
+          "kind": "word",
+          "meaning": "好处、收获。"
+        },
+        {
+          "id": "n2",
+          "quote": "吾",
+          "meaning": "第一人称，意思是我。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "这一段接在「子曰」之后，尚未转述别人的话，指正在说话的孔子。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「吾尝终日不食、终夜不寝以思，",
+        "无益，",
+        "不如学也。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·卫灵公》第31则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/衞靈公第十五",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/14",
+          "anchor_text": "子曰：“吾尝终日不食、终夜不寝以思，无益，不如学也。”"
+        }
+      },
+      "explanation": "这句用孔子自己的尝试说明，空想不能代替学习，也不应为了想问题而不吃不睡。",
+      "hints": [
+        "益"
+      ],
+      "translation_entry": 451
+    },
+    {
+      "id": "s32",
+      "text": "子曰：「君子谋道不谋食。耕也馁在其中矣，学也禄在其中矣。君子忧道不忧贫。」",
+      "translation": "孔子说：「君子用心力于学术，不用心力于衣食。耕田，也常常饿着肚皮；学习，常常得到俸禄。君子只着急得不到道，不着急得不到财。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "禄在其中",
+          "kind": "word",
+          "meaning": "这一章可以和「樊迟请学稼」章（13.4）结合着看。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「君子谋道不谋食。",
+        "耕也馁在其中矣，",
+        "学也禄在其中矣。",
+        "君子忧道不忧贫。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·卫灵公》第32则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/衞靈公第十五",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/14",
+          "anchor_text": "子曰：“君子谋道不谋食。耕也馁在其中矣，学也禄在其中矣。君子忧道不忧贫。”"
+        }
+      },
+      "explanation": "「禄在其中」：这一章可以和「樊迟请学稼」章（13.4）结合着看。",
+      "hints": [
+        "禄在其中"
+      ],
+      "translation_entry": 452
+    },
+    {
+      "id": "s33",
+      "text": "子曰：「知及之，仁不能守之，虽得之，必失之；知及之，仁能守之，不庄以莅之，则民不敬；知及之，仁能守之，庄以莅之，动之不以礼，未善也。」",
+      "translation": "孔子说：「聪明才智足以得到它，仁德不能保持它；就是得到，一定会丧失。聪明才智足以得到它，仁德能保持它。不用严肃态度来治理百姓，百姓也不会认真（地生活和工作）。聪明才智足以得到它，仁德能保持它，能用严肃的态度来治理百姓，假若不合理合法地动员百姓，是不够好的。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "知及之",
+          "kind": "word",
+          "meaning": "「知及之」诸「之」字究竟何指，原文未曾说出。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「知及之，",
+        "仁不能守之，",
+        "虽得之，",
+        "必失之；",
+        "知及之，",
+        "仁能守之，",
+        "不庄以莅之，",
+        "则民不敬；",
+        "知及之，",
+        "仁能守之，",
+        "庄以莅之，",
+        "动之不以礼，",
+        "未善也。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·卫灵公》第33则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/衞靈公第十五",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/14",
+          "anchor_text": "子曰：“知及之，仁不能守之，虽得之，必失之；知及之，仁能守之，不庄以莅之，则民不敬；知及之，仁能守之，庄以莅之，动之不以礼，未善也。”"
+        }
+      },
+      "explanation": "「知及之」：「知及之」诸「之」字究竟何指，原文未曾说出。",
+      "hints": [
+        "知及之"
+      ],
+      "translation_entry": 453
+    },
+    {
+      "id": "s34",
+      "text": "子曰：「君子不可小知而可大受也，小人不可大受而可小知也。」",
+      "translation": "孔子道：「君子不可以用小事情考验他，却可以接受重大任务；小人不可以接受重大任务，却可以用小事情考验他。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "大受",
+          "kind": "word",
+          "meaning": "承担大的责任。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「君子不可小知而可大受也，",
+        "小人不可大受而可小知也。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·卫灵公》第34则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/衞靈公第十五",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/14",
+          "anchor_text": "子曰：“君子不可小知而可大受也，小人不可大受而可小知也。”"
+        }
+      },
+      "explanation": "评价人要看他适合承担什么，不能只凭一件小事就作出全部判断。",
+      "hints": [
+        "大受"
+      ],
+      "translation_entry": 454
+    },
+    {
+      "id": "s35",
+      "text": "子曰：「民之于仁也，甚于水火。水火，吾见蹈而死者矣，未见蹈仁而死者也。」",
+      "translation": "孔子说：「百姓需要仁德，更急于需要水火。往水火里去，我看见因而死了的，却从没有看见践履仁德因而死了的。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "甚于水火",
+          "kind": "word",
+          "meaning": "《孟子·尽心上》说：「民非水火不生活」，译文摘取此意，故加「需要」两字。"
+        },
+        {
+          "id": "n2",
+          "quote": "吾",
+          "meaning": "第一人称，意思是我。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "这一段接在「子曰」之后，尚未转述别人的话，指正在说话的孔子。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「民之于仁也，",
+        "甚于水火。",
+        "水火，",
+        "吾见蹈而死者矣，",
+        "未见蹈仁而死者也。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·卫灵公》第35则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/衞靈公第十五",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/14",
+          "anchor_text": "子曰：“民之于仁也，甚于水火。水火，吾见蹈而死者矣，未见蹈仁而死者也。”"
+        }
+      },
+      "explanation": "「甚于水火」：《孟子·尽心上》说：「民非水火不生活」，译文摘取此意，故加「需要」两字。",
+      "hints": [
+        "甚于水火"
+      ],
+      "translation_entry": 455
+    },
+    {
+      "id": "s36",
+      "text": "子曰：「当仁不让于师。」",
+      "translation": "孔子说：「面临着仁德，就是老师，也不同他谦让。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "当仁",
+          "kind": "word",
+          "meaning": "面对应该做的仁义之事。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「当仁不让于师。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·卫灵公》第36则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/衞靈公第十五",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/14",
+          "anchor_text": "子曰：“当仁不让于师。”"
+        }
+      },
+      "explanation": "该做的好事，要主动担起责任；尊敬老师也不妨碍自己积极行动。",
+      "hints": [
+        "当仁"
+      ],
+      "translation_entry": 456
+    },
+    {
+      "id": "s37",
+      "text": "子曰：「君子贞而不谅。」",
+      "translation": "孔子说：「君子讲大信，却不讲小信。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "贞",
+          "kind": "word",
+          "meaning": "坚守正道，言行一致。"
+        },
+        {
+          "id": "n2",
+          "quote": "谅",
+          "kind": "word",
+          "meaning": "朱骏声《说文通训定声说》这「谅」字假借为「勍」，犹固执也。"
+        },
+        {
+          "id": "n3",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「君子贞而不谅。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·卫灵公》第37则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/衞靈公第十五",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/14",
+          "anchor_text": "子曰：“君子贞而不谅。”"
+        }
+      },
+      "explanation": "「贞」：坚守正道，言行一致；「谅」：朱骏声《说文通训定声说》这「谅」字假借为「勍」，犹固执也。",
+      "hints": [
+        "贞",
+        "谅"
+      ],
+      "translation_entry": 457
+    },
+    {
+      "id": "s38",
+      "text": "子曰：「事君，敬其事而后其食。」",
+      "translation": "孔子说：「对待君上，认真工作，把拿俸禄的事放在后面。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "而后其食",
+          "kind": "word",
+          "meaning": "据宋晁公武《郡斋读书志》的记载，蜀石经作「而后食其禄」。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「事君，",
+        "敬其事而后其食。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·卫灵公》第38则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/衞靈公第十五",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/14",
+          "anchor_text": "子曰：“事君，敬其事而后其食。”"
+        }
+      },
+      "explanation": "「而后其食」：据宋晁公武《郡斋读书志》的记载，蜀石经作「而后食其禄」。",
+      "hints": [
+        "而后其食"
+      ],
+      "translation_entry": 458
+    },
+    {
+      "id": "s39",
+      "text": "子曰：「有教无类。」",
+      "translation": "孔子说：「人人我都教育，没有（贫富、地域等等）区别。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "无类",
+          "kind": "word",
+          "meaning": "不因出身、身份等差别而拒绝教人。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「有教无类。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·卫灵公》第39则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/衞靈公第十五",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/14",
+          "anchor_text": "子曰：“有教无类。”"
+        }
+      },
+      "explanation": "「无类」：不因出身、身份等差别而拒绝教人。",
+      "hints": [
+        "无类"
+      ],
+      "translation_entry": 459
+    },
+    {
+      "id": "s40",
+      "text": "子曰：「道不同，不相为谋。」",
+      "translation": "孔子说：「主张不同，不互相商议。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "谋",
+          "kind": "word",
+          "meaning": "商量、谋划。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「道不同，",
+        "不相为谋。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·卫灵公》第40则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/衞靈公第十五",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/14",
+          "anchor_text": "子曰：“道不同，不相为谋。”"
+        }
+      },
+      "explanation": "目标和原则差别很大时，不容易共同做事；这不妨碍彼此尊重、认真交流。",
+      "hints": [
+        "谋"
+      ],
+      "translation_entry": 460
+    },
+    {
+      "id": "s41",
+      "text": "子曰：「辞达而已矣。」",
+      "translation": "孔子说：「言辞，足以达意便罢了。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "辞达",
+          "kind": "word",
+          "meaning": "可以和「文胜质则史」（6.18）参看。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「辞达而已矣。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·卫灵公》第41则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/衞靈公第十五",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/14",
+          "anchor_text": "子曰：“辞达而已矣。”"
+        }
+      },
+      "explanation": "「辞达」：可以和「文胜质则史」（6.18）参看。",
+      "hints": [
+        "辞达"
+      ],
+      "translation_entry": 461
+    },
+    {
+      "id": "s42",
+      "text": "师冕见，及阶，子曰：「阶也。」及席，子曰：「席也。」皆坐，子告之曰：「某在斯，某在斯。」师冕出。子张问曰：「与师言之道与？」子曰：「然，固相师之道也。」",
+      "translation": "师冕来见孔子，走到阶沿，孔子道：「这是阶沿啦。」走到坐席旁，孔子道：「这是坐席啦。」都坐定了，孔子告诉他说：「某人在这里，某人在这里。」师冕辞了出来。子张问道：「这是同瞎子讲话的方式吗？」孔子道：「对的；这本来是帮助瞎子的方式。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "师冕",
+          "kind": "word",
+          "meaning": "师，乐师，冕，这人之名。"
+        }
+      ],
+      "chunks": [
+        "师冕见，",
+        "及阶，",
+        "子曰：",
+        "「阶也。",
+        "」及席，",
+        "子曰：",
+        "「席也。",
+        "」皆坐，",
+        "子告之曰：",
+        "「某在斯，",
+        "某在斯。",
+        "」师冕出。",
+        "子张问曰：",
+        "「与师言之道与？",
+        "」子曰：",
+        "「然，",
+        "固相师之道也。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·卫灵公》第42则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/衞靈公第十五",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/14",
+          "anchor_text": "师冕见，及阶，子曰：“阶也。”及席，子曰：“席也。”皆坐，子告之曰：“某在斯，某在斯。”师冕出。子张问曰：“与师言之道与？”子曰：“然，固相师之道也。”"
+        }
+      },
+      "explanation": "「师冕」：师，乐师，冕，这人之名。",
+      "hints": [
+        "师冕"
+      ],
+      "translation_entry": 462
+    }
+  ],
+  "overview": {
+    "sequence": [
+      "先分清说话的人，找出与「困境中的原则与学习」有关的场景。",
+      "把看不懂的词放回原文，再核对译文中的动作和对象。",
+      "挑一则用自己的话说明白，再找原句支持自己的理解。"
+    ],
+    "question": "这一篇中，哪一则最值得你再想一想？",
+    "answer": "选一则，先说清谁在什么情况下说了什么，再说明你赞同、疑惑或想进一步了解的地方，并指回原文。",
+    "takeaway": "遇到困难也继续学习，先要求自己，体谅别人。"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "choice",
+      "sentence": "s21",
+      "skill": "meaning",
+      "prompt": "「求诸己」是什么意思？",
+      "answer": 0,
+      "explanation": "「诸」可以理解为「之于」，这里把反省落在自己身上。",
+      "choices": [
+        "只找别人麻烦",
+        "先从自己身上找原因、提要求",
+        "什么事都不管"
+      ]
+    },
+    {
+      "id": "q2",
+      "type": "choice",
+      "sentence": "s24",
+      "skill": "reason",
+      "prompt": "「己所不欲，勿施于人」提醒什么？",
+      "answer": 1,
+      "explanation": "孔子用「恕」回答子贡，要能设身处地。",
+      "choices": [
+        "替别人决定所有事情",
+        "只要自己喜欢，别人一定喜欢",
+        "体谅别人，不把自己厌恶的事强加给人"
+      ]
+    },
+    {
+      "id": "q3",
+      "type": "selfcheck",
+      "sentence": "s23",
+      "skill": "reason",
+      "prompt": "判断一段话，为什么还要看它本身的道理？",
+      "answer": "不能只凭说话人的名声就全盘接受或否定。",
+      "explanation": "本则把评价人和评价话分别说明。"
+    }
+  ]
+}

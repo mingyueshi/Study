@@ -1,0 +1,280 @@
+{
+  "schema_version": 1,
+  "id": "daodejing-66",
+  "title": "道德经·第六十六章",
+  "attribution": "老子",
+  "level": "challenge",
+  "genre": "reasoning",
+  "skills": [
+    "meaning",
+    "referent",
+    "reason",
+    "contrast",
+    "retell"
+  ],
+  "curriculum": null,
+  "intro": "江海为什么能容纳百川。江海处下才能汇水，带领别人也应谦逊，留心是否给人带来负担。",
+  "background": "这是《道德经》德经·第六十六章。本章围绕「江海为什么能容纳百川」展开，可以先读原文，再对照译文，看看作者用了什么比方或对比。",
+  "editorial_note": "本馆用逐句译解帮助入门。读「道」「无为」等词时要看上下文；古代观念和理想化比方，可以边读边与家长讨论。",
+  "source": {
+    "work": "道德经（又名老子）",
+    "section": "德经·第六十六章",
+    "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#六十六章",
+    "note": "原文以本机简体《老子》为底本，统一引号，第七章移去括号异文提示。译文、词义和练习为本馆编写的入门读法，参考王弼注理解，不将不同底本混作同一文本。"
+  },
+  "source_ref": {
+    "locator": "/content/65",
+    "path": "poetry/simplified/诸子百家/老子.json",
+    "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+    "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+    "anchor_text": "江海之所以能为百谷王者，以其善下之，故能为百谷王。是以圣人欲上民，必以言下之；欲先民，必以身后之。是以圣人处上而民不重，处前而民不害。是以天下乐推而不厌。以其不争，故天下莫能与之争。"
+  },
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "江海之所以能为百谷王者，以其善下之，故能为百谷王。",
+      "translation": "江海能够成为众多溪流所归往的地方，是因为善于处低，所以能容纳百川。",
+      "explanation": "读词小提示：「百谷王」：众多山谷溪流所归往的地方；「善下之」：善于处在它们的低处。",
+      "chunks": [
+        "江海之所以能为百谷王者，",
+        "以其善下之，",
+        "故能为百谷王。"
+      ],
+      "hints": [
+        "百谷王",
+        "善下之"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "百谷王",
+          "kind": "word",
+          "meaning": "众多山谷溪流所归往的地方。"
+        },
+        {
+          "id": "n2",
+          "quote": "善下之",
+          "kind": "word",
+          "meaning": "善于处在它们的低处。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第六十六章》第1句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#六十六章",
+        "source_ref": {
+          "locator": "/content/65",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "江海之所以能为百谷王者，以其善下之，故能为百谷王。"
+        }
+      }
+    },
+    {
+      "id": "s2",
+      "text": "是以圣人欲上民，必以言下之；欲先民，必以身后之。",
+      "translation": "因此，想带领百姓，言语就要谦下；想走在百姓前面，自身就要愿意退后。",
+      "explanation": "读词小提示：「上民」：居于百姓之上；「言下之」：言语谦下。",
+      "chunks": [
+        "是以圣人欲上民，",
+        "必以言下之；",
+        "欲先民，",
+        "必以身后之。"
+      ],
+      "hints": [
+        "上民",
+        "言下之",
+        "身后之"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "上民",
+          "kind": "word",
+          "meaning": "居于百姓之上。"
+        },
+        {
+          "id": "n2",
+          "quote": "言下之",
+          "kind": "word",
+          "meaning": "言语谦下。"
+        },
+        {
+          "id": "n3",
+          "quote": "身后之",
+          "kind": "word",
+          "meaning": "把自身放在后面。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第六十六章》第2句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#六十六章",
+        "source_ref": {
+          "locator": "/content/65",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "是以圣人欲上民，必以言下之；欲先民，必以身后之。"
+        }
+      }
+    },
+    {
+      "id": "s3",
+      "text": "是以圣人处上而民不重，处前而民不害。",
+      "translation": "这样居于上位，百姓不感到负担；走在前面，百姓不感到受害。",
+      "explanation": "读词小提示：「不重」：不感到负担沉重；「不害」：不感到受妨碍。",
+      "chunks": [
+        "是以圣人处上而民不重，",
+        "处前而民不害。"
+      ],
+      "hints": [
+        "不重",
+        "不害"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "不重",
+          "kind": "word",
+          "meaning": "不感到负担沉重。"
+        },
+        {
+          "id": "n2",
+          "quote": "不害",
+          "kind": "word",
+          "meaning": "不感到受妨碍。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第六十六章》第3句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#六十六章",
+        "source_ref": {
+          "locator": "/content/65",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "是以圣人处上而民不重，处前而民不害。"
+        }
+      }
+    },
+    {
+      "id": "s4",
+      "text": "是以天下乐推而不厌。",
+      "translation": "所以天下人愿意推举他，而不厌烦。",
+      "explanation": "读词小提示：「乐推」：愿意推举；「不厌」：不厌烦。",
+      "chunks": [
+        "是以天下乐推而不厌。"
+      ],
+      "hints": [
+        "乐推",
+        "不厌"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "乐推",
+          "kind": "word",
+          "meaning": "愿意推举。"
+        },
+        {
+          "id": "n2",
+          "quote": "不厌",
+          "kind": "word",
+          "meaning": "不厌烦。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第六十六章》第4句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#六十六章",
+        "source_ref": {
+          "locator": "/content/65",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "是以天下乐推而不厌。"
+        }
+      }
+    },
+    {
+      "id": "s5",
+      "text": "以其不争，故天下莫能与之争。",
+      "translation": "因为不争先、争功，反而没有人能在这种做法上与他争。",
+      "explanation": "读词小提示：「不争」：不争先、争功。",
+      "chunks": [
+        "以其不争，",
+        "故天下莫能与之争。"
+      ],
+      "hints": [
+        "不争"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "不争",
+          "kind": "word",
+          "meaning": "不争先、争功。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第六十六章》第5句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#六十六章",
+        "source_ref": {
+          "locator": "/content/65",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "以其不争，故天下莫能与之争。"
+        }
+      }
+    }
+  ],
+  "overview": {
+    "sequence": [
+      "先看本章开头：江海能够成为众多溪流所归往的地方，是因为善于处低，所以能容纳百川。",
+      "江海处下才能汇水，带领别人也应谦逊，留心是否给人带来负担。",
+      "再回到结尾：因为不争先、争功，反而没有人能在这种做法上与他争。"
+    ],
+    "question": "这一章为什么可以叫作「江海为什么能容纳百川」？",
+    "answer": "江海处下才能汇水，带领别人也应谦逊，留心是否给人带来负担。可以引用本章开头或结尾的原句，说明你的依据。",
+    "takeaway": "江海处下才能汇水，带领别人也应谦逊，留心是否给人带来负担。"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "choice",
+      "sentence": "s1",
+      "skill": "meaning",
+      "prompt": "开头的「百谷王」在这里怎样理解？",
+      "choices": [
+        "众多山谷溪流所归往的地方。",
+        "只顾自己，不留意他人的处境。",
+        "为了显示本领而处处炫耀。"
+      ],
+      "answer": 0,
+      "explanation": "把词放回原句看，「百谷王」在本句中的意思是：众多山谷溪流所归往的地方。"
+    },
+    {
+      "id": "q2",
+      "type": "choice",
+      "sentence": "s5",
+      "skill": "reason",
+      "prompt": "读完「江海为什么能容纳百川」，哪一种理解更合适？",
+      "choices": [
+        "只有大声夸耀自己，才能显得有本领。",
+        "江海处下才能汇水，带领别人也应谦逊，留心是否给人带来负担。",
+        "只要一次失败，就不必再试。"
+      ],
+      "answer": 1,
+      "explanation": "江海处下才能汇水，带领别人也应谦逊，留心是否给人带来负担。"
+    },
+    {
+      "id": "q3",
+      "type": "selfcheck",
+      "sentence": "s5",
+      "skill": "retell",
+      "prompt": "选本章一句话，用自己的话解释，再说说它怎样帮助你理解「江海为什么能容纳百川」。",
+      "answer": "先说清原句中的对象和动作，再解释关键词。可以围绕这点来讲：江海处下才能汇水，带领别人也应谦逊，留心是否给人带来负担。说完后，回到原文找一句作依据。",
+      "explanation": "不必背诵译文。重点看词义是否放回本句、有没有原文依据，以及是否把古人的比方误当成不分条件的结论。"
+    }
+  ]
+}

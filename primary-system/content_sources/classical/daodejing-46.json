@@ -1,0 +1,233 @@
+{
+  "schema_version": 1,
+  "id": "daodejing-46",
+  "title": "道德经·第四十六章",
+  "attribution": "老子",
+  "level": "challenge",
+  "genre": "reasoning",
+  "skills": [
+    "meaning",
+    "referent",
+    "reason",
+    "contrast",
+    "retell"
+  ],
+  "curriculum": null,
+  "intro": "和平与知足。用马耕田与战马出现在郊野形成对照，写出和平的可贵与贪欲的代价。",
+  "background": "这是《道德经》德经·第四十六章。本章围绕「和平与知足」展开，可以先读原文，再对照译文，看看作者用了什么比方或对比。",
+  "editorial_note": "本馆用逐句译解帮助入门。读「道」「无为」等词时要看上下文；古代观念和理想化比方，可以边读边与家长讨论。",
+  "source": {
+    "work": "道德经（又名老子）",
+    "section": "德经·第四十六章",
+    "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#四十六章",
+    "note": "原文以本机简体《老子》为底本，统一引号，第七章移去括号异文提示。译文、词义和练习为本馆编写的入门读法，参考王弼注理解，不将不同底本混作同一文本。"
+  },
+  "source_ref": {
+    "locator": "/content/45",
+    "path": "poetry/simplified/诸子百家/老子.json",
+    "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+    "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+    "anchor_text": "天下有道，却走马以粪。天下无道，戎马生於郊。祸莫大于不知足；咎莫大于欲得。故知足之足，常足矣。"
+  },
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "天下有道，却走马以粪。",
+      "translation": "天下治理得好，战马退下来用于耕田。",
+      "explanation": "读词小提示：「却走马」：让战马退下来；「粪」：施肥、从事农耕。",
+      "chunks": [
+        "天下有道，",
+        "却走马以粪。"
+      ],
+      "hints": [
+        "却走马",
+        "粪"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "却走马",
+          "kind": "word",
+          "meaning": "让战马退下来。"
+        },
+        {
+          "id": "n2",
+          "quote": "粪",
+          "kind": "word",
+          "meaning": "施肥、从事农耕。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第四十六章》第1句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#四十六章",
+        "source_ref": {
+          "locator": "/content/45",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "天下有道，却走马以粪。"
+        }
+      }
+    },
+    {
+      "id": "s2",
+      "text": "天下无道，戎马生於郊。",
+      "translation": "天下失去秩序，战马在郊野繁生。",
+      "explanation": "读词小提示：「戎马」：战马。",
+      "chunks": [
+        "天下无道，",
+        "戎马生於郊。"
+      ],
+      "hints": [
+        "戎马"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "戎马",
+          "kind": "word",
+          "meaning": "战马。",
+          "reading": "róng mǎ"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第四十六章》第2句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#四十六章",
+        "source_ref": {
+          "locator": "/content/45",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "天下无道，戎马生於郊。"
+        }
+      }
+    },
+    {
+      "id": "s3",
+      "text": "祸莫大于不知足；咎莫大于欲得。",
+      "translation": "祸患莫过于不知满足，过失莫过于不断贪求。",
+      "explanation": "读词小提示：「咎」：祸患；「欲得」：贪求得到更多。",
+      "chunks": [
+        "祸莫大于不知足；",
+        "咎莫大于欲得。"
+      ],
+      "hints": [
+        "咎",
+        "欲得",
+        "知足"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "咎",
+          "kind": "word",
+          "meaning": "祸患。"
+        },
+        {
+          "id": "n2",
+          "quote": "欲得",
+          "kind": "word",
+          "meaning": "贪求得到更多。"
+        },
+        {
+          "id": "n3",
+          "quote": "知足",
+          "kind": "word",
+          "meaning": "明白什么已经足够。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第四十六章》第3句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#四十六章",
+        "source_ref": {
+          "locator": "/content/45",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "祸莫大于不知足；咎莫大于欲得。"
+        }
+      }
+    },
+    {
+      "id": "s4",
+      "text": "故知足之足，常足矣。",
+      "translation": "所以懂得满足的充足，才是持久的充足。",
+      "explanation": "读词小提示：「知足」：明白什么已经足够。",
+      "chunks": [
+        "故知足之足，",
+        "常足矣。"
+      ],
+      "hints": [
+        "知足"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "知足",
+          "kind": "word",
+          "meaning": "明白什么已经足够。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第四十六章》第4句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#四十六章",
+        "source_ref": {
+          "locator": "/content/45",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "故知足之足，常足矣。"
+        }
+      }
+    }
+  ],
+  "overview": {
+    "sequence": [
+      "先看本章开头：天下治理得好，战马退下来用于耕田。",
+      "用马耕田与战马出现在郊野形成对照，写出和平的可贵与贪欲的代价。",
+      "再回到结尾：所以懂得满足的充足，才是持久的充足。"
+    ],
+    "question": "这一章为什么可以叫作「和平与知足」？",
+    "answer": "用马耕田与战马出现在郊野形成对照，写出和平的可贵与贪欲的代价。可以引用本章开头或结尾的原句，说明你的依据。",
+    "takeaway": "用马耕田与战马出现在郊野形成对照，写出和平的可贵与贪欲的代价。"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "choice",
+      "sentence": "s1",
+      "skill": "meaning",
+      "prompt": "开头的「却走马」在这里怎样理解？",
+      "choices": [
+        "只顾自己，不留意他人的处境。",
+        "让战马退下来。",
+        "为了显示本领而处处炫耀。"
+      ],
+      "answer": 1,
+      "explanation": "把词放回原句看，「却走马」在本句中的意思是：让战马退下来。"
+    },
+    {
+      "id": "q2",
+      "type": "choice",
+      "sentence": "s4",
+      "skill": "reason",
+      "prompt": "读完「和平与知足」，哪一种理解更合适？",
+      "choices": [
+        "为达到自己的目标，可以不顾别人。",
+        "无论什么情况，都应该争着抢先。",
+        "用马耕田与战马出现在郊野形成对照，写出和平的可贵与贪欲的代价。"
+      ],
+      "answer": 2,
+      "explanation": "用马耕田与战马出现在郊野形成对照，写出和平的可贵与贪欲的代价。"
+    },
+    {
+      "id": "q3",
+      "type": "selfcheck",
+      "sentence": "s4",
+      "skill": "retell",
+      "prompt": "选本章一句话，用自己的话解释，再说说它怎样帮助你理解「和平与知足」。",
+      "answer": "先说清原句中的对象和动作，再解释关键词。可以围绕这点来讲：用马耕田与战马出现在郊野形成对照，写出和平的可贵与贪欲的代价。说完后，回到原文找一句作依据。",
+      "explanation": "不必背诵译文。重点看词义是否放回本句、有没有原文依据，以及是否把古人的比方误当成不分条件的结论。"
+    }
+  ]
+}

@@ -1,0 +1,1353 @@
+{
+  "schema_version": 1,
+  "id": "lunyu-xiangdang",
+  "title": "论语·乡党",
+  "unit_label": "则",
+  "attribution": "孔子及其弟子言行，弟子与再传弟子编纂",
+  "level": "challenge",
+  "genre": "reasoning",
+  "skills": [
+    "meaning",
+    "referent",
+    "reason",
+    "contrast"
+  ],
+  "curriculum": null,
+  "intro": "从衣食住行认识古代礼节，留意对人有礼和做事谨慎。",
+  "background": "这是《论语》二十篇中的第10篇，话题围绕日常生活里的细节展开。篇名取自开头的字，并不表示每一则都只讲同一个题目。",
+  "editorial_note": "每次可以只读一两则。分段依本机原典，共二十篇、五百一十三则；其他版本的分章和个别用字可能不同。古代身份、礼制和观念要结合当时背景来理解。",
+  "source": {
+    "work": "论语",
+    "section": "乡党篇",
+    "url": "https://zh.wikisource.org/wiki/論語/鄉黨第十",
+    "note": "原文采用随项目保存的简体原典，统一引号样式。译文和部分词义据所列译注资料整理，疑难处配合本篇提示阅读。"
+  },
+  "source_ref": {
+    "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+    "path": "poetry/simplified/儒家经典/论语.json",
+    "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+    "locator": "/content/9",
+    "anchor_text": "孔子于乡党，恂恂如也，似不能言者；其在宗庙朝庭，便便言，唯谨尔。"
+  },
+  "edition": {
+    "label": "译注参考：ieduer/lunyu 所收《论语译注》资料",
+    "url": "https://github.com/ieduer/lunyu/blob/44f039ef8174b219b5f773a156b3d954ee65be25/data/dialogues.json",
+    "revision": "44f039ef8174b219b5f773a156b3d954ee65be25",
+    "license": "MIT，许可副本随内容源保存",
+    "note": "采用固定版本的译注，去除重复条目与注号，逐则配回本馆原文；词义保留简短释义，补充课堂提示。乡党两则分配译文，颜渊第二十则依完整原文呈现。"
+  },
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "孔子于乡党，恂恂如也，似不能言者；其在宗庙朝庭，便便言，唯谨尔。",
+      "translation": "孔子在本乡的地方上非常恭顺，好像不能说话的样子。他在宗庙里、朝廷上，有话便明白而流畅地说出，只是说得很少。",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "恂恂",
+          "kind": "word",
+          "meaning": "恂音旬，xún，恭顺貌。"
+        },
+        {
+          "id": "n2",
+          "quote": "便便",
+          "kind": "word",
+          "meaning": "便旧读骈，pián。"
+        }
+      ],
+      "chunks": [
+        "孔子于乡党，",
+        "恂恂如也，",
+        "似不能言者；",
+        "其在宗庙朝庭，",
+        "便便言，",
+        "唯谨尔。"
+      ],
+      "reference": {
+        "label": "《论语·乡党》第1则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/鄉黨第十",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/9",
+          "anchor_text": "孔子于乡党，恂恂如也，似不能言者；其在宗庙朝庭，便便言，唯谨尔。"
+        }
+      },
+      "explanation": "「恂恂」：恂音旬，xún，恭顺貌；「便便」：便旧读骈，pián。",
+      "hints": [
+        "恂恂",
+        "便便"
+      ],
+      "translation_entry": 241
+    },
+    {
+      "id": "s2",
+      "text": "朝，与下大夫言，侃侃如也；与上大夫言，訚訚如也。君在，踧踖如也，与与如也。",
+      "translation": "上朝的时候，（君主还没有到来，）同下大夫说话，温和而快乐的样子；同上大夫说话，正直而恭敬的样子。君主已经来了，恭敬而心中不安的样子，行步安祥的样子。",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "侃侃如",
+          "kind": "word",
+          "meaning": "和乐从容的样子。"
+        }
+      ],
+      "chunks": [
+        "朝，",
+        "与下大夫言，",
+        "侃侃如也；",
+        "与上大夫言，",
+        "訚訚如也。",
+        "君在，",
+        "踧踖如也，",
+        "与与如也。"
+      ],
+      "reference": {
+        "label": "《论语·乡党》第2则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/鄉黨第十",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/9",
+          "anchor_text": "朝，与下大夫言，侃侃如也；与上大夫言，訚訚如也。君在，踧踖如也，与与如也。"
+        }
+      },
+      "explanation": "这里记录古代朝廷中面对不同身份者的举止，要先分清三个场景。",
+      "hints": [
+        "侃侃如"
+      ],
+      "translation_entry": 242
+    },
+    {
+      "id": "s3",
+      "text": "君召使摈，色勃如也，足躩如也。揖所与立，左右手，衣前后襜如也。趋进，翼如也。宾退，必复命曰：「宾不顾矣。」",
+      "translation": "鲁君召他去接待外国的贵宾，面色矜持庄重，脚步也快起来。向两旁的人作揖，或者向左拱手，或者向右拱手，衣裳一俯一仰，却很整齐。快步向前，好像鸟儿舒展了翅膀。贵宾辞别后一定向君主回报说：「客人已经不回头了。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "躩",
+          "kind": "word",
+          "meaning": "快步走，读作「jué」。"
+        },
+        {
+          "id": "n2",
+          "quote": "前后",
+          "kind": "word",
+          "meaning": "俯仰的意思。"
+        },
+        {
+          "id": "n3",
+          "quote": "襜",
+          "kind": "word",
+          "meaning": "音幨，chān，整齐之貌。"
+        },
+        {
+          "id": "n4",
+          "quote": "趋进",
+          "kind": "word",
+          "meaning": "在行步时一种表示敬意的行动。"
+        }
+      ],
+      "chunks": [
+        "君召使摈，",
+        "色勃如也，",
+        "足躩如也。",
+        "揖所与立，",
+        "左右手，",
+        "衣前后襜如也。",
+        "趋进，",
+        "翼如也。",
+        "宾退，",
+        "必复命曰：",
+        "「宾不顾矣。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·乡党》第3则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/鄉黨第十",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/9",
+          "anchor_text": "君召使摈，色勃如也，足躩如也。揖所与立，左右手，衣前后襜如也。趋进，翼如也。宾退，必复命曰：“宾不顾矣。”"
+        }
+      },
+      "explanation": "「躩」：快步走，读作「jué」；「前后」：俯仰的意思。",
+      "hints": [
+        "躩",
+        "前后",
+        "襜"
+      ],
+      "translation_entry": 243
+    },
+    {
+      "id": "s4",
+      "text": "入公门，鞠躬如也，如不容。立不中门，行不履阈。过位，色勃如也，足躩如也，其言似不足者。摄齐升堂，鞠躬如也，屏气似不息者。出，降一等，逞颜色，怡怡如也；没阶，趋进，翼如也；复其位，踧踖如也。",
+      "translation": "孔子走进朝廷的门，害怕而谨慎的样子，好像没有容身之地。站，不站在门的中间；走，不踩门坎。经过国君的坐位，面色便矜庄，脚步也快，言语也好像中气不足。提起下襬向堂上走，恭敬谨慎的样子，憋住气好像不呼吸一般。走出来，降下台阶一级，面色便放松，怡然自得。走完了台阶，快快地向前走几步，好像鸟儿舒展翅膀。回到自己的位置，恭敬而内心不安的样子。",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "鞠躬如",
+          "kind": "word",
+          "meaning": "这「鞠躬」两字不能当「曲身」讲。"
+        },
+        {
+          "id": "n2",
+          "quote": "过位",
+          "kind": "word",
+          "meaning": "过旧音戈，平声。"
+        },
+        {
+          "id": "n3",
+          "quote": "摄齐",
+          "kind": "word",
+          "meaning": "齐音咨，zī，衣裳缝了边的下襬；摄，提起。"
+        },
+        {
+          "id": "n4",
+          "quote": "屏",
+          "kind": "word",
+          "meaning": "音丙，又音并，bìng，屏气即屏息，压抑呼吸。"
+        },
+        {
+          "id": "n5",
+          "quote": "趋进",
+          "kind": "word",
+          "meaning": "有些本子无「进」字，不对。"
+        }
+      ],
+      "chunks": [
+        "入公门，",
+        "鞠躬如也，",
+        "如不容。",
+        "立不中门，",
+        "行不履阈。",
+        "过位，",
+        "色勃如也，",
+        "足躩如也，",
+        "其言似不足者。",
+        "摄齐升堂，",
+        "鞠躬如也，",
+        "屏气似不息者。",
+        "出，",
+        "降一等，",
+        "逞颜色，",
+        "怡怡如也；",
+        "没阶，",
+        "趋进，",
+        "翼如也；",
+        "复其位，",
+        "踧踖如也。"
+      ],
+      "reference": {
+        "label": "《论语·乡党》第4则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/鄉黨第十",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/9",
+          "anchor_text": "入公门，鞠躬如也，如不容。立不中门，行不履阈。过位，色勃如也，足躩如也，其言似不足者。摄齐升堂，鞠躬如也，屏气似不息者。出，降一等，逞颜色，怡怡如也；没阶，趋进，翼如也；复其位，踧踖如也。"
+        }
+      },
+      "explanation": "「鞠躬如」：这「鞠躬」两字不能当「曲身」讲；「过位」：过旧音戈，平声。",
+      "hints": [
+        "鞠躬如",
+        "过位",
+        "摄齐"
+      ],
+      "translation_entry": 244
+    },
+    {
+      "id": "s5",
+      "text": "执圭，鞠躬如也，如不胜。上如揖，下如授。勃如战色，足蹜蹜如有循。享礼，有容色。私觌，愉愉如也。",
+      "translation": "（孔子出使到外国，举行典礼，）拿着圭，恭敬谨慎地，好像举不起来。向上举好像在作揖，向下拿好像在交给别人。面色矜庄好像在作战。脚步也紧凑狭窄，好像在沿着（一条线）走过。献礼物的时候，满脸和气。用私人身分和外国君臣会见，显得轻松愉快。",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "圭",
+          "kind": "word",
+          "meaning": "一种玉器，上圆，或者作剑头形，下方，举行典礼的时候，君臣都拿着。"
+        },
+        {
+          "id": "n2",
+          "quote": "胜",
+          "kind": "word",
+          "meaning": "音升，shēng，能担负得了。"
+        },
+        {
+          "id": "n3",
+          "quote": "足蹜蹜如有循",
+          "kind": "word",
+          "meaning": "蹜音缩，「蹜蹜」，举脚密而狭的样子。"
+        },
+        {
+          "id": "n4",
+          "quote": "享礼",
+          "kind": "word",
+          "meaning": "古代出使外国，初到所聘问的国家，便行聘问礼。"
+        },
+        {
+          "id": "n5",
+          "quote": "有容色",
+          "kind": "word",
+          "meaning": "神色舒展，显出和悦的面容。"
+        },
+        {
+          "id": "n6",
+          "quote": "觌",
+          "kind": "word",
+          "meaning": "音狄，dí，相见。"
+        }
+      ],
+      "chunks": [
+        "执圭，",
+        "鞠躬如也，",
+        "如不胜。",
+        "上如揖，",
+        "下如授。",
+        "勃如战色，",
+        "足蹜蹜如有循。",
+        "享礼，",
+        "有容色。",
+        "私觌，",
+        "愉愉如也。"
+      ],
+      "reference": {
+        "label": "《论语·乡党》第5则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/鄉黨第十",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/9",
+          "anchor_text": "执圭，鞠躬如也，如不胜。上如揖，下如授。勃如战色，足蹜蹜如有循。享礼，有容色。私觌，愉愉如也。"
+        }
+      },
+      "explanation": "「圭」：一种玉器，上圆，或者作剑头形，下方，举行典礼的时候，君臣都拿着；「胜」：音升，shēng，能担负得了。",
+      "hints": [
+        "圭",
+        "胜",
+        "足蹜蹜如有循"
+      ],
+      "translation_entry": 245
+    },
+    {
+      "id": "s6",
+      "text": "君子不以绀緅饰，红紫不以为亵服。当暑袗絺绤，必表而出之。缁衣羔裘，素衣麑裘，黄衣狐裘。亵裘长，短右袂。必有寝衣，长一身有半。狐貉之厚以居。去丧，无所不佩。非帷裳，必杀之。羔裘玄冠不以吊。吉月，必朝服而朝。",
+      "translation": "君子不用（近乎黑色的）天青色和铁灰色作镶边，（近乎赤色的）浅红色和紫色不用来作平常居家的衣服。当暑，穿着粗的或者细的葛布单衣，但一定裹着衬衫，使它露在外面。黑色的衣配紫羔，白色的衣配麑裘，黄色的衣配狐裘。居家的皮袄身材较长，可是右边的袖子要做得短些。必有寝衣，长一身有半。狐貉之厚以居。去丧，无所不佩。非帷裳，必杀之。羔裘玄冠不以吊。吉月，必朝服而朝。",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "绀緅饰",
+          "kind": "word",
+          "meaning": "绀音赣，gàn；緅音邹，zōu；都是表示颜色的名称。"
+        },
+        {
+          "id": "n2",
+          "quote": "红紫不以为亵服",
+          "kind": "word",
+          "meaning": "古代大红色叫「朱」，这是很贵重的颜色。"
+        },
+        {
+          "id": "n3",
+          "quote": "袗絺绤",
+          "kind": "word",
+          "meaning": "袗音轸，zhěn，单也。"
+        },
+        {
+          "id": "n4",
+          "quote": "亵裘长",
+          "kind": "word",
+          "meaning": "亵裘长为着保暖。"
+        },
+        {
+          "id": "n5",
+          "quote": "短右袂",
+          "kind": "word",
+          "meaning": "袂，mèi，袖子。"
+        },
+        {
+          "id": "n6",
+          "quote": "寝衣",
+          "kind": "word",
+          "meaning": "即被。"
+        }
+      ],
+      "chunks": [
+        "君子不以绀緅饰，",
+        "红紫不以为亵服。",
+        "当暑袗絺绤，",
+        "必表而出之。",
+        "缁衣羔裘，",
+        "素衣麑裘，",
+        "黄衣狐裘。",
+        "亵裘长，",
+        "短右袂。",
+        "必有寝衣，",
+        "长一身有半。",
+        "狐貉之厚以居。",
+        "去丧，",
+        "无所不佩。",
+        "非帷裳，",
+        "必杀之。",
+        "羔裘玄冠不以吊。",
+        "吉月，",
+        "必朝服而朝。"
+      ],
+      "reference": {
+        "label": "《论语·乡党》第6则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/鄉黨第十",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/9",
+          "anchor_text": "君子不以绀緅饰，红紫不以为亵服。当暑袗絺绤，必表而出之。缁衣羔裘，素衣麑裘，黄衣狐裘。亵裘长，短右袂。必有寝衣，长一身有半。狐貉之厚以居。去丧，无所不佩。非帷裳，必杀之。羔裘玄冠不以吊。吉月，必朝服而朝。"
+        }
+      },
+      "explanation": "「绀緅饰」：绀音赣，gàn；緅音邹，zōu；都是表示颜色的名称；「红紫不以为亵服」：古代大红色叫「朱」，这是很贵重的颜色。",
+      "hints": [
+        "绀緅饰",
+        "红紫不以为亵服",
+        "袗絺绤"
+      ],
+      "translation_entry": 246
+    },
+    {
+      "id": "s7",
+      "text": "齐，必有明衣，布。齐必变食，居必迁坐。",
+      "translation": "斋戒沐浴的时候，一定有浴衣，用布做的。斋戒的时候，一定改变平常的饮食；居住也一定搬移地方（不和妻妾同房）。",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "布",
+          "kind": "word",
+          "meaning": "这里指古代的麻布等织物。"
+        },
+        {
+          "id": "n2",
+          "quote": "变食",
+          "kind": "word",
+          "meaning": "改变平日的饮食，遵守当时斋戒的要求。"
+        },
+        {
+          "id": "n3",
+          "quote": "迁坐",
+          "kind": "word",
+          "meaning": "等于说改变卧室。"
+        }
+      ],
+      "chunks": [
+        "齐，",
+        "必有明衣，",
+        "布。",
+        "齐必变食，",
+        "居必迁坐。"
+      ],
+      "reference": {
+        "label": "《论语·乡党》第7则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/鄉黨第十",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/9",
+          "anchor_text": "齐，必有明衣，布。齐必变食，居必迁坐。"
+        }
+      },
+      "explanation": "「布」：这里指古代的麻布等织物；「变食」：改变平日的饮食，遵守当时斋戒的要求。",
+      "hints": [
+        "布",
+        "变食",
+        "迁坐"
+      ],
+      "translation_entry": 247
+    },
+    {
+      "id": "s8",
+      "text": "食不厌精，脍不厌细。食饐而餲，鱼馁而肉败，不食；色恶，不食；臭恶，不食；失饪，不食；不时，不食；割不正，不食；不得其酱，不食。肉虽多，不使胜食气。唯酒无量，不及乱。沽酒市脯，不食。不撤姜食，不多食。",
+      "translation": "粮食不嫌舂得精，鱼和肉不嫌切得细。粮食霉烂发臭，鱼和肉腐烂，都不吃。食物颜色难看，不吃。气味难闻，不吃。烹调不当，不吃。不到该当吃食时候，不吃。不是按一定方法砍割的肉，不吃。没有一定调味的酱醋，不吃。席上肉虽然多，吃它不超过主食。只有酒不限量，却不至醉。买来的酒和肉干不吃。吃完了，姜不撤除，但吃得不多。",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "饐而餲",
+          "kind": "word",
+          "meaning": "饐音懿，yì；餲，ài；饮食经久而腐臭。"
+        },
+        {
+          "id": "n2",
+          "quote": "馁",
+          "kind": "word",
+          "meaning": "馁音「内」的上声，něi，鱼腐烂叫「馁」，肉腐烂叫「败」。"
+        },
+        {
+          "id": "n3",
+          "quote": "不时",
+          "kind": "word",
+          "meaning": "有两说：（甲）过早的食物，冬天在温室种菜蔬，在《汉书·循吏·召信臣传》和桓宽《盐铁论·散不足篇》里便称为「不时之物」。"
+        },
+        {
+          "id": "n4",
+          "quote": "割不正",
+          "kind": "word",
+          "meaning": "「割」和「切」不同。"
+        },
+        {
+          "id": "n5",
+          "quote": "食气",
+          "kind": "word",
+          "meaning": "食音嗣，「气」，说文引作「既」。"
+        },
+        {
+          "id": "n6",
+          "quote": "乱",
+          "kind": "word",
+          "meaning": "扰乱、使混乱。"
+        }
+      ],
+      "chunks": [
+        "食不厌精，",
+        "脍不厌细。",
+        "食饐而餲，",
+        "鱼馁而肉败，",
+        "不食；",
+        "色恶，",
+        "不食；",
+        "臭恶，",
+        "不食；",
+        "失饪，",
+        "不食；",
+        "不时，",
+        "不食；",
+        "割不正，",
+        "不食；",
+        "不得其酱，",
+        "不食。",
+        "肉虽多，",
+        "不使胜食气。",
+        "唯酒无量，",
+        "不及乱。",
+        "沽酒市脯，",
+        "不食。",
+        "不撤姜食，",
+        "不多食。"
+      ],
+      "reference": {
+        "label": "《论语·乡党》第8则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/鄉黨第十",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/9",
+          "anchor_text": "食不厌精，脍不厌细。食饐而餲，鱼馁而肉败，不食；色恶，不食；臭恶，不食；失饪，不食；不时，不食；割不正，不食；不得其酱，不食。肉虽多，不使胜食气。唯酒无量，不及乱。沽酒市脯，不食。不撤姜食，不多食。"
+        }
+      },
+      "explanation": "「饐而餲」：饐音懿，yì；餲，ài；饮食经久而腐臭；「馁」：馁音「内」的上声，něi，鱼腐烂叫「馁」，肉腐烂叫「败」。",
+      "hints": [
+        "饐而餲",
+        "馁",
+        "不时"
+      ],
+      "translation_entry": 248
+    },
+    {
+      "id": "s9",
+      "text": "祭于公，不宿肉。祭肉不出三日，出三日不食之矣。",
+      "translation": "参与国家祭祀典礼，不把祭肉留到第二天。别的祭肉留存不超过三天。若是存放过了三天，便不吃了。",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "不宿肉",
+          "kind": "word",
+          "meaning": "古代的大夫、士都有助君祭祀之礼。"
+        },
+        {
+          "id": "n2",
+          "quote": "祭肉",
+          "kind": "word",
+          "meaning": "这一祭肉或者指自己家中的，或者指朋友送来的，都可以。"
+        }
+      ],
+      "chunks": [
+        "祭于公，",
+        "不宿肉。",
+        "祭肉不出三日，",
+        "出三日不食之矣。"
+      ],
+      "reference": {
+        "label": "《论语·乡党》第9则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/鄉黨第十",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/9",
+          "anchor_text": "祭于公，不宿肉。祭肉不出三日，出三日不食之矣。"
+        }
+      },
+      "explanation": "「不宿肉」：古代的大夫、士都有助君祭祀之礼；「祭肉」：这一祭肉或者指自己家中的，或者指朋友送来的，都可以。",
+      "hints": [
+        "不宿肉",
+        "祭肉"
+      ],
+      "translation_entry": 249
+    },
+    {
+      "id": "s10",
+      "text": "食不语，寝不言。",
+      "translation": "吃饭的时候不交谈，睡觉的时候不说话。",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "寝",
+          "kind": "word",
+          "meaning": "睡觉。"
+        }
+      ],
+      "chunks": [
+        "食不语，",
+        "寝不言。"
+      ],
+      "reference": {
+        "label": "《论语·乡党》第10则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/鄉黨第十",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/9",
+          "anchor_text": "孔子于乡党，恂恂如也，似不能言者；其在宗庙朝庭，便便言，唯谨尔。"
+        }
+      },
+      "explanation": "这是记述孔子的生活习惯，可以联系安静吃饭、按时休息来理解。",
+      "hints": [
+        "寝"
+      ],
+      "translation_entry": 250
+    },
+    {
+      "id": "s11",
+      "text": "虽疏食菜羹，瓜祭，必齐如也。",
+      "translation": "虽然是糙米饭小菜汤，也一定得先祭一祭，而且祭的时候还一定恭恭敬敬，好像斋戒了的一样。",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "瓜祭",
+          "kind": "word",
+          "meaning": "有些本子作「必祭」，「瓜」恐怕是错字。"
+        }
+      ],
+      "chunks": [
+        "虽疏食菜羹，",
+        "瓜祭，",
+        "必齐如也。"
+      ],
+      "reference": {
+        "label": "《论语·乡党》第11则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/鄉黨第十",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/9",
+          "anchor_text": "虽疏食菜羹，瓜祭，必齐如也。"
+        }
+      },
+      "explanation": "「瓜祭」：有些本子作「必祭」，「瓜」恐怕是错字。",
+      "hints": [
+        "瓜祭"
+      ],
+      "translation_entry": 251
+    },
+    {
+      "id": "s12",
+      "text": "席不正，不坐。",
+      "translation": "坐席摆的方向不合礼制，不坐。",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "席",
+          "kind": "word",
+          "meaning": "古代没有椅和櫈，都是在地面上铺席子，坐在席子上。"
+        }
+      ],
+      "chunks": [
+        "席不正，",
+        "不坐。"
+      ],
+      "reference": {
+        "label": "《论语·乡党》第12则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/鄉黨第十",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/9",
+          "anchor_text": "孔子于乡党，恂恂如也，似不能言者；其在宗庙朝庭，便便言，唯谨尔。"
+        }
+      },
+      "explanation": "「席」：古代没有椅和櫈，都是在地面上铺席子，坐在席子上。",
+      "hints": [
+        "席"
+      ],
+      "translation_entry": 252
+    },
+    {
+      "id": "s13",
+      "text": "乡人饮酒，杖者出，斯出矣。",
+      "translation": "行乡饮酒礼后，要等老年人都出去了，自己这纔出去。",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "乡人饮酒",
+          "kind": "word",
+          "meaning": "即行乡饮酒礼，据《礼记·乡饮酒义》「少长以齿」。"
+        }
+      ],
+      "chunks": [
+        "乡人饮酒，",
+        "杖者出，",
+        "斯出矣。"
+      ],
+      "reference": {
+        "label": "《论语·乡党》第13则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/鄉黨第十",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/9",
+          "anchor_text": "乡人饮酒，杖者出，斯出矣。"
+        }
+      },
+      "explanation": "「乡人饮酒」：即行乡饮酒礼，据《礼记·乡饮酒义》「少长以齿」。",
+      "hints": [
+        "乡人饮酒"
+      ],
+      "translation_entry": 253
+    },
+    {
+      "id": "s14",
+      "text": "乡人傩，朝服而立于阼阶。",
+      "translation": "本地方人迎神驱鬼，穿着朝服站在东边的台阶上。",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "阼阶",
+          "kind": "word",
+          "meaning": "阼音祚，zuò，东面的台阶，主人所立之地。"
+        }
+      ],
+      "chunks": [
+        "乡人傩，",
+        "朝服而立于阼阶。"
+      ],
+      "reference": {
+        "label": "《论语·乡党》第14则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/鄉黨第十",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/9",
+          "anchor_text": "乡人傩，朝服而立于阼阶。"
+        }
+      },
+      "explanation": "「阼阶」：阼音祚，zuò，东面的台阶，主人所立之地。",
+      "hints": [
+        "阼阶"
+      ],
+      "translation_entry": 254
+    },
+    {
+      "id": "s15",
+      "text": "问人于他邦，再拜而送之。",
+      "translation": "托人给在外国的朋友问好送礼，便向受托者拜两次送行。",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "问",
+          "kind": "word",
+          "meaning": "问讯，问好。"
+        },
+        {
+          "id": "n2",
+          "quote": "拜",
+          "kind": "word",
+          "meaning": "拱手并弯腰。"
+        }
+      ],
+      "chunks": [
+        "问人于他邦，",
+        "再拜而送之。"
+      ],
+      "reference": {
+        "label": "《论语·乡党》第15则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/鄉黨第十",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/9",
+          "anchor_text": "问人于他邦，再拜而送之。"
+        }
+      },
+      "explanation": "「问」：问讯，问好；「拜」：拱手并弯腰。",
+      "hints": [
+        "问",
+        "拜"
+      ],
+      "translation_entry": 255
+    },
+    {
+      "id": "s16",
+      "text": "康子馈药，拜而受之。曰：「丘未达，不敢尝。」",
+      "translation": "季康子给孔子送药，孔子拜而接受，却说道：「我对这药性不很了解，不敢试服。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "达",
+          "kind": "word",
+          "meaning": "通晓、弄清楚。"
+        }
+      ],
+      "chunks": [
+        "康子馈药，",
+        "拜而受之。",
+        "曰：",
+        "「丘未达，",
+        "不敢尝。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·乡党》第16则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/鄉黨第十",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/9",
+          "anchor_text": "康子馈药，拜而受之。曰：“丘未达，不敢尝。”"
+        }
+      },
+      "explanation": "孔子感谢赠药，却不随便尝试自己不了解的药。这是他谨慎的生活细节。",
+      "hints": [
+        "达"
+      ],
+      "translation_entry": 256
+    },
+    {
+      "id": "s17",
+      "text": "厩焚，子退朝，曰：「伤人乎？」不问马。",
+      "translation": "孔子的马棚失了火。孔子从朝廷回来，道：「伤了人吗？」，不问到马。",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "厩",
+          "kind": "word",
+          "meaning": "马棚。"
+        }
+      ],
+      "chunks": [
+        "厩焚，",
+        "子退朝，",
+        "曰：",
+        "「伤人乎？",
+        "」不问马。"
+      ],
+      "reference": {
+        "label": "《论语·乡党》第17则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/鄉黨第十",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/9",
+          "anchor_text": "厩焚，子退朝，曰：“伤人乎？”不问马。"
+        }
+      },
+      "explanation": "先问人有没有受伤，表现出孔子对人的关心。",
+      "hints": [
+        "厩"
+      ],
+      "translation_entry": 257
+    },
+    {
+      "id": "s18",
+      "text": "君赐食，必正席先尝之；君赐腥，必熟而荐之；君赐生，必畜之。侍食于君，君祭，先饭。",
+      "translation": "国君赐以熟食，孔子一定摆正坐位先尝一尝。国君赐以生肉，一定煮熟了，先（给祖宗）进供。国君赐以活物，一定养着它。同国君一道吃饭，当他举行饭前祭礼的时候，自己先吃饭，（不吃菜。）",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "荐",
+          "kind": "word",
+          "meaning": "进奉。"
+        }
+      ],
+      "chunks": [
+        "君赐食，",
+        "必正席先尝之；",
+        "君赐腥，",
+        "必熟而荐之；",
+        "君赐生，",
+        "必畜之。",
+        "侍食于君，",
+        "君祭，",
+        "先饭。"
+      ],
+      "reference": {
+        "label": "《论语·乡党》第18则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/鄉黨第十",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/9",
+          "anchor_text": "君赐食，必正席先尝之；君赐腥，必熟而荐之；君赐生，必畜之。侍食于君，君祭，先饭。"
+        }
+      },
+      "explanation": "「荐」：进奉。",
+      "hints": [
+        "荐"
+      ],
+      "translation_entry": 258
+    },
+    {
+      "id": "s19",
+      "text": "疾，君视之，东首，加朝服，拖绅。",
+      "translation": "孔子病了，国君来探问，他便脑袋朝东，把上朝的礼服披在身上，拖着大带。",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "东首",
+          "kind": "word",
+          "meaning": "指孔子病中仍旧卧床而言。"
+        },
+        {
+          "id": "n2",
+          "quote": "加朝服",
+          "kind": "word",
+          "meaning": "孔子卧病在床，自不能穿朝服，只能盖在身上。"
+        }
+      ],
+      "chunks": [
+        "疾，",
+        "君视之，",
+        "东首，",
+        "加朝服，",
+        "拖绅。"
+      ],
+      "reference": {
+        "label": "《论语·乡党》第19则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/鄉黨第十",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/9",
+          "anchor_text": "疾，君视之，东首，加朝服，拖绅。"
+        }
+      },
+      "explanation": "「东首」：指孔子病中仍旧卧床而言；「加朝服」：孔子卧病在床，自不能穿朝服，只能盖在身上。",
+      "hints": [
+        "东首",
+        "加朝服"
+      ],
+      "translation_entry": 259
+    },
+    {
+      "id": "s20",
+      "text": "君命召，不俟驾行矣。",
+      "translation": "国君呼唤，孔子不等待车辆驾好马，立即先步行。",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "俟",
+          "kind": "word",
+          "meaning": "等候。"
+        }
+      ],
+      "chunks": [
+        "君命召，",
+        "不俟驾行矣。"
+      ],
+      "reference": {
+        "label": "《论语·乡党》第20则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/鄉黨第十",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/9",
+          "anchor_text": "君命召，不俟驾行矣。"
+        }
+      },
+      "explanation": "这一句放在古代君臣礼节中理解，记录的是孔子接到召见时的反应。",
+      "hints": [
+        "俟"
+      ],
+      "translation_entry": 260
+    },
+    {
+      "id": "s21",
+      "text": "入太庙，每事问。",
+      "translation": "入太庙，每事问。",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "太庙",
+          "kind": "word",
+          "meaning": "国君祭祀祖先的庙。"
+        }
+      ],
+      "chunks": [
+        "入太庙，",
+        "每事问。"
+      ],
+      "reference": {
+        "label": "《论语·乡党》第21则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/鄉黨第十",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/9",
+          "anchor_text": "孔子于乡党，恂恂如也，似不能言者；其在宗庙朝庭，便便言，唯谨尔。"
+        }
+      },
+      "explanation": "到了不熟悉的礼仪场景，孔子每件事都请教，表现出谨慎与好学。",
+      "hints": [
+        "太庙"
+      ],
+      "translation_entry": 261
+    },
+    {
+      "id": "s22",
+      "text": "朋友死，无所归，曰：「于我殡。」",
+      "translation": "朋友死亡，没有负责收敛的人，孔子便道：「丧葬由我来料理。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "殡",
+          "kind": "word",
+          "meaning": "停放灵柩叫殡，埋葬也可以叫殡，这里当指一切丧葬事务而言。"
+        }
+      ],
+      "chunks": [
+        "朋友死，",
+        "无所归，",
+        "曰：",
+        "「于我殡。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·乡党》第22则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/鄉黨第十",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/9",
+          "anchor_text": "朋友死，无所归，曰：“于我殡。”"
+        }
+      },
+      "explanation": "「殡」：停放灵柩叫殡，埋葬也可以叫殡，这里当指一切丧葬事务而言。",
+      "hints": [
+        "殡"
+      ],
+      "translation_entry": 262
+    },
+    {
+      "id": "s23",
+      "text": "朋友之馈，虽车马，非祭肉，不拜。",
+      "translation": "朋友的赠品，即使是车马，只要不是祭肉，孔子在接受的时候，不行礼。",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "馈",
+          "kind": "word",
+          "meaning": "赠送的礼物。"
+        }
+      ],
+      "chunks": [
+        "朋友之馈，",
+        "虽车马，",
+        "非祭肉，",
+        "不拜。"
+      ],
+      "reference": {
+        "label": "《论语·乡党》第23则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/鄉黨第十",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/9",
+          "anchor_text": "朋友之馈，虽车马，非祭肉，不拜。"
+        }
+      },
+      "explanation": "这段说明古代送礼、答谢的礼节，与今天的生活习惯有差别。",
+      "hints": [
+        "馈"
+      ],
+      "translation_entry": 263
+    },
+    {
+      "id": "s24",
+      "text": "寝不尸，居不客。",
+      "translation": "孔子睡觉不像死尸一样（直躺着），平日坐着，也不像接见客人或者自己做客人一样，（跪着两膝在席上。）",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "居不客",
+          "kind": "word",
+          "meaning": "「客」本作「容」，今从《释文》和《唐石经》校订作「客」。"
+        }
+      ],
+      "chunks": [
+        "寝不尸，",
+        "居不客。"
+      ],
+      "reference": {
+        "label": "《论语·乡党》第24则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/鄉黨第十",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/9",
+          "anchor_text": "孔子于乡党，恂恂如也，似不能言者；其在宗庙朝庭，便便言，唯谨尔。"
+        }
+      },
+      "explanation": "「居不客」：「客」本作「容」，今从《释文》和《唐石经》校订作「客」。",
+      "hints": [
+        "居不客"
+      ],
+      "translation_entry": 264
+    },
+    {
+      "id": "s25",
+      "text": "见齐衰者，虽狎，必变。见冕者与瞽者，虽亵，必以貌。凶服者式之，式负版者。",
+      "translation": "孔子见到穿丧服的人，即使很熟悉，也会改变态度，表示同情；见到戴礼帽的人和盲人，即使常见，也一定保持礼貌。在车上遇到送丧服的人，或背着国家图籍的人，会俯身扶住车前横木，表示敬意。",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "式",
+          "kind": "word",
+          "meaning": "同「轼」，古代车辆前的横木叫「轼」，这里作动词用，用手伏轼的意思。"
+        },
+        {
+          "id": "n2",
+          "quote": "版",
+          "kind": "word",
+          "meaning": "国家图籍。"
+        }
+      ],
+      "chunks": [
+        "见齐衰者，",
+        "虽狎，",
+        "必变。",
+        "见冕者与瞽者，",
+        "虽亵，",
+        "必以貌。",
+        "凶服者式之，",
+        "式负版者。"
+      ],
+      "reference": {
+        "label": "《论语·乡党》第25则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/鄉黨第十",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/9",
+          "anchor_text": "见齐衰者，虽狎，必变。见冕者与瞽者，虽亵，必以貌。凶服者式之，式负版者。"
+        }
+      },
+      "explanation": "「式」：同「轼」，古代车辆前的横木叫「轼」，这里作动词用，用手伏轼的意思；「版」：国家图籍。",
+      "hints": [
+        "式",
+        "版"
+      ],
+      "translation_entry": 265
+    },
+    {
+      "id": "s26",
+      "text": "有盛馔，必变色而作。迅雷风烈，必变。",
+      "translation": "有丰盛的菜肴时，孔子一定神色郑重地站起来；遇到疾雷大风时，也一定改变态度。",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "作",
+          "kind": "word",
+          "meaning": "站起来。"
+        },
+        {
+          "id": "n2",
+          "quote": "迅雷风烈",
+          "kind": "word",
+          "meaning": "疾雷、大风。"
+        }
+      ],
+      "chunks": [
+        "有盛馔，",
+        "必变色而作。",
+        "迅雷风烈，",
+        "必变。"
+      ],
+      "reference": {
+        "label": "《论语·乡党》第26则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/鄉黨第十",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/9",
+          "anchor_text": "有盛馔，必变色而作。迅雷风烈，必变。"
+        }
+      },
+      "explanation": "这两种反应都要放在古代礼仪场景中理解，先辨清面对丰盛菜肴与疾雷大风是两件事。",
+      "hints": [
+        "作",
+        "迅雷风烈"
+      ],
+      "translation_entry": 265
+    },
+    {
+      "id": "s27",
+      "text": "升车，必正立，执绥。车中不内顾，不疾言，不亲指。",
+      "translation": "孔子上车，一定先端正地站好，拉着扶手带（登车）。在车中，不向内回顾，不很快地说话，不用手指指画画。",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "绥",
+          "kind": "word",
+          "meaning": "上车时可以拉住的带子。"
+        }
+      ],
+      "chunks": [
+        "升车，",
+        "必正立，",
+        "执绥。",
+        "车中不内顾，",
+        "不疾言，",
+        "不亲指。"
+      ],
+      "reference": {
+        "label": "《论语·乡党》第27则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/鄉黨第十",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/9",
+          "anchor_text": "升车，必正立，执绥。车中不内顾，不疾言，不亲指。"
+        }
+      },
+      "explanation": "这些细节是古代乘车礼节。读时先看清上车和坐在车中是两个场景。",
+      "hints": [
+        "绥"
+      ],
+      "translation_entry": 266
+    },
+    {
+      "id": "s28",
+      "text": "色斯举矣，翔而后集。曰：「山梁雌雉，时哉时哉！」子路共之，三嗅而作。",
+      "translation": "（孔子在山谷中行走，看见几只野鸡。）孔子的脸色一动，野鸡便飞向天空，盘旋一阵，又都停在一处。孔子道：「这些山梁上雌雉，得其时呀，得其时呀，」子路向它们拱拱手，它们又振一振翅膀飞去了。",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "共",
+          "kind": "word",
+          "meaning": "同「拱」。"
+        },
+        {
+          "id": "n2",
+          "quote": "嗅",
+          "kind": "word",
+          "meaning": "当作狊，jù，张两翅之貌。"
+        }
+      ],
+      "chunks": [
+        "色斯举矣，",
+        "翔而后集。",
+        "曰：",
+        "「山梁雌雉，",
+        "时哉时哉！",
+        "」子路共之，",
+        "三嗅而作。"
+      ],
+      "reference": {
+        "label": "《论语·乡党》第28则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/鄉黨第十",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/9",
+          "anchor_text": "色斯举矣，翔而后集。曰：“山梁雌雉，时哉时哉！”子路共之，三嗅而作。"
+        }
+      },
+      "explanation": "「共」：同「拱」；「嗅」：当作狊，jù，张两翅之貌。",
+      "hints": [
+        "共",
+        "嗅"
+      ],
+      "translation_entry": 267
+    }
+  ],
+  "overview": {
+    "sequence": [
+      "先分清说话的人，找出与「日常生活里的细节」有关的场景。",
+      "把看不懂的词放回原文，再核对译文中的动作和对象。",
+      "挑一则用自己的话说明白，再找原句支持自己的理解。"
+    ],
+    "question": "这一篇中，哪一则最值得你再想一想？",
+    "answer": "选一则，先说清谁在什么情况下说了什么，再说明你赞同、疑惑或想进一步了解的地方，并指回原文。",
+    "takeaway": "读懂古代场景，再想哪些关心与谨慎今天仍有帮助。"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "choice",
+      "sentence": "s16",
+      "skill": "meaning",
+      "prompt": "孔子为什么不随便尝所赠的药？",
+      "answer": 1,
+      "explanation": "「丘未达，不敢尝」说明谨慎，不是拒绝礼貌。",
+      "choices": [
+        "还不了解这种药",
+        "因为礼物太小",
+        "因为不愿感谢别人"
+      ]
+    },
+    {
+      "id": "q2",
+      "type": "choice",
+      "sentence": "s17",
+      "skill": "reason",
+      "prompt": "马棚失火后，孔子先关心什么？",
+      "answer": 2,
+      "explanation": "「伤人乎」把对人的关心放在前面。",
+      "choices": [
+        "马棚有多高",
+        "有没有人受伤",
+        "马的颜色"
+      ]
+    },
+    {
+      "id": "q3",
+      "type": "selfcheck",
+      "sentence": "s28",
+      "skill": "reason",
+      "prompt": "读古代礼节时，可以怎样做？",
+      "answer": "先看清当时场景，再想其中的用意。",
+      "explanation": "本篇许多动作与古代衣食住行有关，要结合背景理解。"
+    }
+  ]
+}

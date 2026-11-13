@@ -12,7 +12,7 @@ literature_study = TemplateView.as_view(template_name='study_topics/course.html'
     'study_area': 'chinese', 'study_label': '语文',
     'course_slug': 'lit', 'course_title': '文学常识', 'course_section': '阅读主题',
     'course_intro': '沿着体裁、名著和作家读作品，学会在文章里寻找线索。',
-    'course_links': (('poetry-index', '查古诗文原文'), ('idiom-stories', '成语典故馆')),
+    'course_links': (('classical', '古文精读馆'), ('poetry-index', '查古诗文原文'), ('idiom-stories', '成语典故馆')),
 })
 
 science_lab = TemplateView.as_view(template_name='study_topics/course.html', extra_context={

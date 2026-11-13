@@ -1,0 +1,371 @@
+{
+  "schema_version": 1,
+  "id": "daodejing-58",
+  "title": "道德经·第五十八章",
+  "attribution": "老子",
+  "level": "challenge",
+  "genre": "reasoning",
+  "skills": [
+    "meaning",
+    "referent",
+    "reason",
+    "contrast",
+    "retell"
+  ],
+  "curriculum": null,
+  "intro": "福祸之间有变化。本章借福祸相依提醒人看变化，结尾则强调有原则也不伤人、不炫耀。",
+  "background": "这是《道德经》德经·第五十八章。本章围绕「福祸之间有变化」展开，可以先读原文，再对照译文，看看作者用了什么比方或对比。",
+  "editorial_note": "本馆用逐句译解帮助入门。读「道」「无为」等词时要看上下文；古代观念和理想化比方，可以边读边与家长讨论。",
+  "source": {
+    "work": "道德经（又名老子）",
+    "section": "德经·第五十八章",
+    "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#五十八章",
+    "note": "原文以本机简体《老子》为底本，统一引号，第七章移去括号异文提示。译文、词义和练习为本馆编写的入门读法，参考王弼注理解，不将不同底本混作同一文本。"
+  },
+  "source_ref": {
+    "locator": "/content/57",
+    "path": "poetry/simplified/诸子百家/老子.json",
+    "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+    "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+    "anchor_text": "其政闷闷，其民淳淳；其政察察，其民缺缺。祸兮福所倚；福兮祸所伏。孰知其极？其无正邪？正复为奇，善复为妖。人之迷，其日固久。是以圣人方而不割，廉而不刿，直而不肆，光而不耀。"
+  },
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "其政闷闷，其民淳淳；其政察察，其民缺缺。",
+      "translation": "治理宽厚，百姓便淳朴；治理苛刻，百姓反而受损不安。",
+      "explanation": "读词小提示：「闷闷」：宽厚、不苛察的样子；「淳淳」：淳朴。",
+      "chunks": [
+        "其政闷闷，",
+        "其民淳淳；",
+        "其政察察，",
+        "其民缺缺。"
+      ],
+      "hints": [
+        "闷闷",
+        "淳淳",
+        "察察"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "闷闷",
+          "kind": "word",
+          "meaning": "宽厚、不苛察的样子。"
+        },
+        {
+          "id": "n2",
+          "quote": "淳淳",
+          "kind": "word",
+          "meaning": "淳朴。"
+        },
+        {
+          "id": "n3",
+          "quote": "察察",
+          "kind": "word",
+          "meaning": "过分细察、苛刻。"
+        },
+        {
+          "id": "n4",
+          "quote": "缺缺",
+          "kind": "word",
+          "meaning": "受损、不安的样子。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第五十八章》第1句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#五十八章",
+        "source_ref": {
+          "locator": "/content/57",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "其政闷闷，其民淳淳；其政察察，其民缺缺。"
+        }
+      }
+    },
+    {
+      "id": "s2",
+      "text": "祸兮福所倚；福兮祸所伏。",
+      "translation": "祸可能藏着转机，福也可能藏着隐忧。",
+      "explanation": "读词小提示：「倚」：倚靠；「伏」：隐藏。",
+      "chunks": [
+        "祸兮福所倚；",
+        "福兮祸所伏。"
+      ],
+      "hints": [
+        "倚",
+        "伏"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "倚",
+          "kind": "word",
+          "meaning": "倚靠。"
+        },
+        {
+          "id": "n2",
+          "quote": "伏",
+          "kind": "word",
+          "meaning": "隐藏。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第五十八章》第2句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#五十八章",
+        "source_ref": {
+          "locator": "/content/57",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "祸兮福所倚；福兮祸所伏。"
+        }
+      }
+    },
+    {
+      "id": "s3",
+      "text": "孰知其极？",
+      "translation": "谁能一下看清它们变化的尽头呢？",
+      "explanation": "读词小提示：「极」：尽头、究竟。",
+      "chunks": [
+        "孰知其极？"
+      ],
+      "hints": [
+        "极"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "极",
+          "kind": "word",
+          "meaning": "尽头、究竟。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第五十八章》第3句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#五十八章",
+        "source_ref": {
+          "locator": "/content/57",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "其政闷闷，其民淳淳；其政察察，其民缺缺。祸兮福所倚；福兮祸所伏。孰知其极？其无正邪？正复为奇，善复为妖。人之迷，其日固久。是以圣人方而不割，廉而不刿，直而不肆，光而不耀。"
+        }
+      }
+    },
+    {
+      "id": "s4",
+      "text": "其无正邪？",
+      "translation": "难道有一条永远不变的判定吗？",
+      "explanation": "读词小提示：「正」：固定不变的准则。",
+      "chunks": [
+        "其无正邪？"
+      ],
+      "hints": [
+        "正"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "正",
+          "kind": "word",
+          "meaning": "固定不变的准则。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第五十八章》第4句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#五十八章",
+        "source_ref": {
+          "locator": "/content/57",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "其政闷闷，其民淳淳；其政察察，其民缺缺。祸兮福所倚；福兮祸所伏。孰知其极？其无正邪？正复为奇，善复为妖。人之迷，其日固久。是以圣人方而不割，廉而不刿，直而不肆，光而不耀。"
+        }
+      }
+    },
+    {
+      "id": "s5",
+      "text": "正复为奇，善复为妖。",
+      "translation": "正常也可能变成反常，好的也可能转成不好的。",
+      "explanation": "读词小提示：「正」：固定不变的准则；「奇」：反常。",
+      "chunks": [
+        "正复为奇，",
+        "善复为妖。"
+      ],
+      "hints": [
+        "正",
+        "奇",
+        "妖"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "正",
+          "kind": "word",
+          "meaning": "固定不变的准则。"
+        },
+        {
+          "id": "n2",
+          "quote": "奇",
+          "kind": "word",
+          "meaning": "反常。"
+        },
+        {
+          "id": "n3",
+          "quote": "妖",
+          "kind": "word",
+          "meaning": "不正常、反常的情形。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第五十八章》第5句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#五十八章",
+        "source_ref": {
+          "locator": "/content/57",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "正复为奇，善复为妖。"
+        }
+      }
+    },
+    {
+      "id": "s6",
+      "text": "人之迷，其日固久。",
+      "translation": "人们陷入这样的迷惑，已经很久。",
+      "explanation": "读词小提示：「迷」：迷惑。",
+      "chunks": [
+        "人之迷，",
+        "其日固久。"
+      ],
+      "hints": [
+        "迷"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "迷",
+          "kind": "word",
+          "meaning": "迷惑。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第五十八章》第6句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#五十八章",
+        "source_ref": {
+          "locator": "/content/57",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "其政闷闷，其民淳淳；其政察察，其民缺缺。祸兮福所倚；福兮祸所伏。孰知其极？其无正邪？正复为奇，善复为妖。人之迷，其日固久。是以圣人方而不割，廉而不刿，直而不肆，光而不耀。"
+        }
+      }
+    },
+    {
+      "id": "s7",
+      "text": "是以圣人方而不割，廉而不刿，直而不肆，光而不耀。",
+      "translation": "所以有智慧的人方正而不割伤人，清廉而不刺伤人，正直而不放肆，明亮而不炫耀。",
+      "explanation": "读词小提示：「割」：割伤；「刿」：刺伤。",
+      "chunks": [
+        "是以圣人方而不割，",
+        "廉而不刿，",
+        "直而不肆，",
+        "光而不耀。"
+      ],
+      "hints": [
+        "割",
+        "刿",
+        "肆"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "割",
+          "kind": "word",
+          "meaning": "割伤。"
+        },
+        {
+          "id": "n2",
+          "quote": "刿",
+          "kind": "word",
+          "meaning": "刺伤。",
+          "reading": "guì"
+        },
+        {
+          "id": "n3",
+          "quote": "肆",
+          "kind": "word",
+          "meaning": "放纵、伤人。"
+        },
+        {
+          "id": "n4",
+          "quote": "耀",
+          "kind": "word",
+          "meaning": "炫耀。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第五十八章》第7句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#五十八章",
+        "source_ref": {
+          "locator": "/content/57",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "是以圣人方而不割，廉而不刿，直而不肆，光而不耀。"
+        }
+      }
+    }
+  ],
+  "overview": {
+    "sequence": [
+      "先看本章开头：治理宽厚，百姓便淳朴；治理苛刻，百姓反而受损不安。",
+      "本章借福祸相依提醒人看变化，结尾则强调有原则也不伤人、不炫耀。",
+      "再回到结尾：所以有智慧的人方正而不割伤人，清廉而不刺伤人，正直而不放肆，明亮而不炫耀。"
+    ],
+    "question": "这一章为什么可以叫作「福祸之间有变化」？",
+    "answer": "本章借福祸相依提醒人看变化，结尾则强调有原则也不伤人、不炫耀。可以引用本章开头或结尾的原句，说明你的依据。",
+    "takeaway": "本章借福祸相依提醒人看变化，结尾则强调有原则也不伤人、不炫耀。"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "choice",
+      "sentence": "s1",
+      "skill": "meaning",
+      "prompt": "开头的「闷闷」在这里怎样理解？",
+      "choices": [
+        "只顾自己，不留意他人的处境。",
+        "宽厚、不苛察的样子。",
+        "为了显示本领而处处炫耀。"
+      ],
+      "answer": 1,
+      "explanation": "把词放回原句看，「闷闷」在本句中的意思是：宽厚、不苛察的样子。"
+    },
+    {
+      "id": "q2",
+      "type": "choice",
+      "sentence": "s7",
+      "skill": "reason",
+      "prompt": "读完「福祸之间有变化」，哪一种理解更合适？",
+      "choices": [
+        "只有大声夸耀自己，才能显得有本领。",
+        "只要一次失败，就不必再试。",
+        "本章借福祸相依提醒人看变化，结尾则强调有原则也不伤人、不炫耀。"
+      ],
+      "answer": 2,
+      "explanation": "本章借福祸相依提醒人看变化，结尾则强调有原则也不伤人、不炫耀。"
+    },
+    {
+      "id": "q3",
+      "type": "selfcheck",
+      "sentence": "s7",
+      "skill": "retell",
+      "prompt": "选本章一句话，用自己的话解释，再说说它怎样帮助你理解「福祸之间有变化」。",
+      "answer": "先说清原句中的对象和动作，再解释关键词。可以围绕这点来讲：本章借福祸相依提醒人看变化，结尾则强调有原则也不伤人、不炫耀。说完后，回到原文找一句作依据。",
+      "explanation": "不必背诵译文。重点看词义是否放回本句、有没有原文依据，以及是否把古人的比方误当成不分条件的结论。"
+    }
+  ]
+}

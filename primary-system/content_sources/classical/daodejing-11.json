@@ -1,0 +1,285 @@
+{
+  "schema_version": 1,
+  "id": "daodejing-11",
+  "title": "道德经·第十一章",
+  "attribution": "老子",
+  "level": "challenge",
+  "genre": "reasoning",
+  "skills": [
+    "meaning",
+    "referent",
+    "reason",
+    "contrast",
+    "retell"
+  ],
+  "curriculum": null,
+  "intro": "有与无的配合。轮毂、器皿和房屋都说明：材料有用，留出的空间也有用。",
+  "background": "这是《道德经》道经·第十一章。本章围绕「有与无的配合」展开，可以先读原文，再对照译文，看看作者用了什么比方或对比。",
+  "editorial_note": "本馆用逐句译解帮助入门。读「道」「无为」等词时要看上下文；古代观念和理想化比方，可以边读边与家长讨论。",
+  "source": {
+    "work": "道德经（又名老子）",
+    "section": "道经·第十一章",
+    "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#十一章",
+    "note": "原文以本机简体《老子》为底本，统一引号，第七章移去括号异文提示。译文、词义和练习为本馆编写的入门读法，参考王弼注理解，不将不同底本混作同一文本。"
+  },
+  "source_ref": {
+    "locator": "/content/10",
+    "path": "poetry/simplified/诸子百家/老子.json",
+    "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+    "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+    "anchor_text": "三十辐共一轂，当其无，有车之用。埏埴以为器，当其无，有器之用。凿户牖以为室，当其无，有室之用。故有之以为利，无之以为用。"
+  },
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "三十辐共一轂，当其无，有车之用。",
+      "translation": "三十根辐条合到一个轮毂上，正因为轮毂中间有空处，车轮才可以使用。",
+      "explanation": "读词小提示：「辐」：连接车轮外圈与轮毂的辐条；「轂」：车轮中心安装车轴的部分。",
+      "chunks": [
+        "三十辐共一轂，",
+        "当其无，",
+        "有车之用。"
+      ],
+      "hints": [
+        "辐",
+        "轂",
+        "其无"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "辐",
+          "kind": "word",
+          "meaning": "连接车轮外圈与轮毂的辐条。",
+          "reading": "fú"
+        },
+        {
+          "id": "n2",
+          "quote": "轂",
+          "kind": "word",
+          "meaning": "车轮中心安装车轴的部分。",
+          "reading": "gǔ"
+        },
+        {
+          "id": "n3",
+          "quote": "其无",
+          "kind": "referent",
+          "meaning": "其中空出来的地方。",
+          "refers_to": "轮毂中安放车轴的空处",
+          "reason": "前面说车轮的辐条和轮毂，这里的空处与车轴相接。"
+        },
+        {
+          "id": "n4",
+          "quote": "用",
+          "kind": "word",
+          "meaning": "发挥作用。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第十一章》第1句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#十一章",
+        "source_ref": {
+          "locator": "/content/10",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "三十辐共一轂，当其无，有车之用。"
+        }
+      }
+    },
+    {
+      "id": "s2",
+      "text": "埏埴以为器，当其无，有器之用。",
+      "translation": "揉和黏土做成器皿，正因为里面有空处，器皿才可以使用。",
+      "explanation": "读词小提示：「其无」：其中空出来的地方；「埏埴」：揉和黏土。",
+      "chunks": [
+        "埏埴以为器，",
+        "当其无，",
+        "有器之用。"
+      ],
+      "hints": [
+        "其无",
+        "埏埴",
+        "器"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "其无",
+          "kind": "referent",
+          "meaning": "其中空出来的地方。",
+          "refers_to": "器皿中可以容物的空处",
+          "reason": "这一句先说揉黏土做器皿，再说它里面的空处。"
+        },
+        {
+          "id": "n2",
+          "quote": "埏埴",
+          "kind": "word",
+          "meaning": "揉和黏土。",
+          "reading": "shān zhí"
+        },
+        {
+          "id": "n3",
+          "quote": "器",
+          "kind": "word",
+          "meaning": "器皿。"
+        },
+        {
+          "id": "n4",
+          "quote": "用",
+          "kind": "word",
+          "meaning": "发挥作用。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第十一章》第2句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#十一章",
+        "source_ref": {
+          "locator": "/content/10",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "埏埴以为器，当其无，有器之用。"
+        }
+      }
+    },
+    {
+      "id": "s3",
+      "text": "凿户牖以为室，当其无，有室之用。",
+      "translation": "开出门窗建成房屋，正因为里面有空处，房屋才可以使用。",
+      "explanation": "读词小提示：「其无」：其中空出来的地方；「户牖」：门和窗。",
+      "chunks": [
+        "凿户牖以为室，",
+        "当其无，",
+        "有室之用。"
+      ],
+      "hints": [
+        "其无",
+        "户牖",
+        "用"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "其无",
+          "kind": "referent",
+          "meaning": "其中空出来的地方。",
+          "refers_to": "房屋中可供出入、居住的空处",
+          "reason": "这一句的对象已经从车轮、器皿转到房屋。"
+        },
+        {
+          "id": "n2",
+          "quote": "户牖",
+          "kind": "word",
+          "meaning": "门和窗。",
+          "reading": "hù yǒu"
+        },
+        {
+          "id": "n3",
+          "quote": "用",
+          "kind": "word",
+          "meaning": "发挥作用。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第十一章》第3句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#十一章",
+        "source_ref": {
+          "locator": "/content/10",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "凿户牖以为室，当其无，有室之用。"
+        }
+      }
+    },
+    {
+      "id": "s4",
+      "text": "故有之以为利，无之以为用。",
+      "translation": "所以，有形的材料提供便利，空出来的部分也发挥作用。",
+      "explanation": "读词小提示：「利」：提供便利；「用」：发挥作用。",
+      "chunks": [
+        "故有之以为利，",
+        "无之以为用。"
+      ],
+      "hints": [
+        "利",
+        "用"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "利",
+          "kind": "word",
+          "meaning": "提供便利。"
+        },
+        {
+          "id": "n2",
+          "quote": "用",
+          "kind": "word",
+          "meaning": "发挥作用。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第十一章》第4句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#十一章",
+        "source_ref": {
+          "locator": "/content/10",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "故有之以为利，无之以为用。"
+        }
+      }
+    }
+  ],
+  "overview": {
+    "sequence": [
+      "先看本章开头：三十根辐条合到一个轮毂上，正因为轮毂中间有空处，车轮才可以使用。",
+      "轮毂、器皿和房屋都说明：材料有用，留出的空间也有用。",
+      "再回到结尾：所以，有形的材料提供便利，空出来的部分也发挥作用。"
+    ],
+    "question": "这一章为什么可以叫作「有与无的配合」？",
+    "answer": "轮毂、器皿和房屋都说明：材料有用，留出的空间也有用。可以引用本章开头或结尾的原句，说明你的依据。",
+    "takeaway": "轮毂、器皿和房屋都说明：材料有用，留出的空间也有用。"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "choice",
+      "sentence": "s1",
+      "skill": "meaning",
+      "prompt": "开头的「辐」在这里怎样理解？",
+      "choices": [
+        "只顾自己，不留意他人的处境。",
+        "为了显示本领而处处炫耀。",
+        "连接车轮外圈与轮毂的辐条。"
+      ],
+      "answer": 2,
+      "explanation": "把词放回原句看，「辐」在本句中的意思是：连接车轮外圈与轮毂的辐条。"
+    },
+    {
+      "id": "q2",
+      "type": "choice",
+      "sentence": "s4",
+      "skill": "reason",
+      "prompt": "读完「有与无的配合」，哪一种理解更合适？",
+      "choices": [
+        "轮毂、器皿和房屋都说明：材料有用，留出的空间也有用。",
+        "只看名字，就能知道全部道理。",
+        "为达到自己的目标，可以不顾别人。"
+      ],
+      "answer": 0,
+      "explanation": "轮毂、器皿和房屋都说明：材料有用，留出的空间也有用。"
+    },
+    {
+      "id": "q3",
+      "type": "selfcheck",
+      "sentence": "s4",
+      "skill": "retell",
+      "prompt": "选本章一句话，用自己的话解释，再说说它怎样帮助你理解「有与无的配合」。",
+      "answer": "先说清原句中的对象和动作，再解释关键词。可以围绕这点来讲：轮毂、器皿和房屋都说明：材料有用，留出的空间也有用。说完后，回到原文找一句作依据。",
+      "explanation": "不必背诵译文。重点看词义是否放回本句、有没有原文依据，以及是否把古人的比方误当成不分条件的结论。"
+    }
+  ]
+}

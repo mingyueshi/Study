@@ -1,0 +1,377 @@
+{
+  "schema_version": 1,
+  "id": "daodejing-16",
+  "title": "道德经·第十六章",
+  "attribution": "老子",
+  "level": "challenge",
+  "genre": "reasoning",
+  "skills": [
+    "meaning",
+    "referent",
+    "reason",
+    "contrast",
+    "retell"
+  ],
+  "curriculum": null,
+  "intro": "观察变化与往复。安静观察事物从生长到归根的变化，理解规律，再决定怎样行动。",
+  "background": "这是《道德经》道经·第十六章。本章围绕「观察变化与往复」展开，可以先读原文，再对照译文，看看作者用了什么比方或对比。",
+  "editorial_note": "本馆用逐句译解帮助入门。读「道」「无为」等词时要看上下文；古代观念和理想化比方，可以边读边与家长讨论。",
+  "source": {
+    "work": "道德经（又名老子）",
+    "section": "道经·第十六章",
+    "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#十六章",
+    "note": "原文以本机简体《老子》为底本，统一引号，第七章移去括号异文提示。译文、词义和练习为本馆编写的入门读法，参考王弼注理解，不将不同底本混作同一文本。"
+  },
+  "source_ref": {
+    "locator": "/content/15",
+    "path": "poetry/simplified/诸子百家/老子.json",
+    "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+    "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+    "anchor_text": "致虚，极；守静篤。万物并作，吾以观复。夫物芸芸，各复归其根。归根曰静，静曰复命。复命曰常，知常曰明。不知常，妄作凶。知常容，容乃公，公乃全，全乃天，天乃道，道乃久，歿身不殆。"
+  },
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "致虚，极；守静篤。",
+      "translation": "让内心尽量空明，让安静保持得深厚。",
+      "explanation": "读词小提示：「致虚」：使内心减少杂念；「篤」：坚定、深厚。",
+      "chunks": [
+        "致虚，",
+        "极；",
+        "守静篤。"
+      ],
+      "hints": [
+        "致虚",
+        "篤"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "致虚",
+          "kind": "word",
+          "meaning": "使内心减少杂念。"
+        },
+        {
+          "id": "n2",
+          "quote": "篤",
+          "kind": "word",
+          "meaning": "坚定、深厚。",
+          "reading": "dǔ"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第十六章》第1句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#十六章",
+        "source_ref": {
+          "locator": "/content/15",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "致虚，极；守静篤。万物并作，吾以观复。夫物芸芸，各复归其根。归根曰静，静曰复命。复命曰常，知常曰明。不知常，妄作凶。知常容，容乃公，公乃全，全乃天，天乃道，道乃久，歿身不殆。"
+        }
+      }
+    },
+    {
+      "id": "s2",
+      "text": "万物并作，吾以观复。",
+      "translation": "万物一齐生长，我借此观察它们的往复。",
+      "explanation": "读词小提示：「复」：返回、往复。",
+      "chunks": [
+        "万物并作，",
+        "吾以观复。"
+      ],
+      "hints": [
+        "复"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "复",
+          "kind": "word",
+          "meaning": "返回、往复。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第十六章》第2句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#十六章",
+        "source_ref": {
+          "locator": "/content/15",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "万物并作，吾以观复。"
+        }
+      }
+    },
+    {
+      "id": "s3",
+      "text": "夫物芸芸，各复归其根。",
+      "translation": "万物虽然繁多，各自又回到自己的根本。",
+      "explanation": "读词小提示：「复」：返回、往复；「芸芸」：繁多的样子。",
+      "chunks": [
+        "夫物芸芸，",
+        "各复归其根。"
+      ],
+      "hints": [
+        "复",
+        "芸芸"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "复",
+          "kind": "word",
+          "meaning": "返回、往复。"
+        },
+        {
+          "id": "n2",
+          "quote": "芸芸",
+          "kind": "word",
+          "meaning": "繁多的样子。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第十六章》第3句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#十六章",
+        "source_ref": {
+          "locator": "/content/15",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "夫物芸芸，各复归其根。"
+        }
+      }
+    },
+    {
+      "id": "s4",
+      "text": "归根曰静，静曰复命。",
+      "translation": "回到根本叫作静，静叫作回到生命的本源。",
+      "explanation": "读词小提示：「复」：返回、往复；「归根」：回到根本。",
+      "chunks": [
+        "归根曰静，",
+        "静曰复命。"
+      ],
+      "hints": [
+        "复",
+        "归根"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "复",
+          "kind": "word",
+          "meaning": "返回、往复。"
+        },
+        {
+          "id": "n2",
+          "quote": "归根",
+          "kind": "word",
+          "meaning": "回到根本。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第十六章》第4句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#十六章",
+        "source_ref": {
+          "locator": "/content/15",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "归根曰静，静曰复命。"
+        }
+      }
+    },
+    {
+      "id": "s5",
+      "text": "复命曰常，知常曰明。",
+      "translation": "回到本源称为常，认识这种规律称为明。",
+      "explanation": "读词小提示：「复」：返回、往复；「常」：恒常的规律。",
+      "chunks": [
+        "复命曰常，",
+        "知常曰明。"
+      ],
+      "hints": [
+        "复",
+        "常"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "复",
+          "kind": "word",
+          "meaning": "返回、往复。"
+        },
+        {
+          "id": "n2",
+          "quote": "常",
+          "kind": "word",
+          "meaning": "恒常的规律。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第十六章》第5句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#十六章",
+        "source_ref": {
+          "locator": "/content/15",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "复命曰常，知常曰明。"
+        }
+      }
+    },
+    {
+      "id": "s6",
+      "text": "不知常，妄作凶。",
+      "translation": "不了解规律而任意行动，会带来凶险。",
+      "explanation": "读词小提示：「常」：恒常的规律；「妄作」：不明情形就任意行动。",
+      "chunks": [
+        "不知常，",
+        "妄作凶。"
+      ],
+      "hints": [
+        "常",
+        "妄作"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "常",
+          "kind": "word",
+          "meaning": "恒常的规律。"
+        },
+        {
+          "id": "n2",
+          "quote": "妄作",
+          "kind": "word",
+          "meaning": "不明情形就任意行动。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第十六章》第6句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#十六章",
+        "source_ref": {
+          "locator": "/content/15",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "致虚，极；守静篤。万物并作，吾以观复。夫物芸芸，各复归其根。归根曰静，静曰复命。复命曰常，知常曰明。不知常，妄作凶。知常容，容乃公，公乃全，全乃天，天乃道，道乃久，歿身不殆。"
+        }
+      }
+    },
+    {
+      "id": "s7",
+      "text": "知常容，容乃公，公乃全，全乃天，天乃道，道乃久，歿身不殆。",
+      "translation": "了解规律便能包容，包容便能公正，由公正而周全，由周全而合于天、合于道，因而能够长久，终身少遇危险。",
+      "explanation": "这是古人的修养理想，不是保证一个人永远不会遇到困难。",
+      "chunks": [
+        "知常容，",
+        "容乃公，",
+        "公乃全，",
+        "全乃天，",
+        "天乃道，",
+        "道乃久，",
+        "歿身不殆。"
+      ],
+      "hints": [
+        "常",
+        "容",
+        "公"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "常",
+          "kind": "word",
+          "meaning": "恒常的规律。"
+        },
+        {
+          "id": "n2",
+          "quote": "容",
+          "kind": "word",
+          "meaning": "包容。"
+        },
+        {
+          "id": "n3",
+          "quote": "公",
+          "kind": "word",
+          "meaning": "公正、不偏私。"
+        },
+        {
+          "id": "n4",
+          "quote": "歿身",
+          "kind": "word",
+          "meaning": "终身。",
+          "reading": "mò shēn"
+        },
+        {
+          "id": "n5",
+          "quote": "殆",
+          "kind": "word",
+          "meaning": "危险。",
+          "reading": "dài"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第十六章》第7句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#十六章",
+        "source_ref": {
+          "locator": "/content/15",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "知常容，容乃公，公乃全，全乃天，天乃道，道乃久，歿身不殆。"
+        }
+      }
+    }
+  ],
+  "overview": {
+    "sequence": [
+      "先看本章开头：让内心尽量空明，让安静保持得深厚。",
+      "安静观察事物从生长到归根的变化，理解规律，再决定怎样行动。",
+      "再回到结尾：了解规律便能包容，包容便能公正，由公正而周全，由周全而合于天、合于道，因而能够长久，终身少遇危险。"
+    ],
+    "question": "这一章为什么可以叫作「观察变化与往复」？",
+    "answer": "安静观察事物从生长到归根的变化，理解规律，再决定怎样行动。可以引用本章开头或结尾的原句，说明你的依据。",
+    "takeaway": "安静观察事物从生长到归根的变化，理解规律，再决定怎样行动。"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "choice",
+      "sentence": "s1",
+      "skill": "meaning",
+      "prompt": "开头的「致虚」在这里怎样理解？",
+      "choices": [
+        "只顾自己，不留意他人的处境。",
+        "使内心减少杂念。",
+        "为了显示本领而处处炫耀。"
+      ],
+      "answer": 1,
+      "explanation": "把词放回原句看，「致虚」在本句中的意思是：使内心减少杂念。"
+    },
+    {
+      "id": "q2",
+      "type": "choice",
+      "sentence": "s7",
+      "skill": "reason",
+      "prompt": "读完「观察变化与往复」，哪一种理解更合适？",
+      "choices": [
+        "遇到问题不用观察，也不必行动。",
+        "只看名字，就能知道全部道理。",
+        "安静观察事物从生长到归根的变化，理解规律，再决定怎样行动。"
+      ],
+      "answer": 2,
+      "explanation": "安静观察事物从生长到归根的变化，理解规律，再决定怎样行动。"
+    },
+    {
+      "id": "q3",
+      "type": "selfcheck",
+      "sentence": "s7",
+      "skill": "retell",
+      "prompt": "选本章一句话，用自己的话解释，再说说它怎样帮助你理解「观察变化与往复」。",
+      "answer": "先说清原句中的对象和动作，再解释关键词。可以围绕这点来讲：安静观察事物从生长到归根的变化，理解规律，再决定怎样行动。说完后，回到原文找一句作依据。",
+      "explanation": "不必背诵译文。重点看词义是否放回本句、有没有原文依据，以及是否把古人的比方误当成不分条件的结论。"
+    }
+  ]
+}

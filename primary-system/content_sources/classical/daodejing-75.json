@@ -1,0 +1,256 @@
+{
+  "schema_version": 1,
+  "id": "daodejing-75",
+  "title": "道德经·第七十五章",
+  "attribution": "老子",
+  "level": "challenge",
+  "genre": "reasoning",
+  "skills": [
+    "meaning",
+    "referent",
+    "reason",
+    "contrast",
+    "retell"
+  ],
+  "curriculum": null,
+  "intro": "追问困苦的原因。本章把百姓的饥困与在上者的索取连起来，提醒人从责任和条件寻找原因。",
+  "background": "这是《道德经》德经·第七十五章。本章围绕「追问困苦的原因」展开，可以先读原文，再对照译文，看看作者用了什么比方或对比。",
+  "editorial_note": "本馆用逐句译解帮助入门。读「道」「无为」等词时要看上下文；古代观念和理想化比方，可以边读边与家长讨论。",
+  "source": {
+    "work": "道德经（又名老子）",
+    "section": "德经·第七十五章",
+    "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#七十五章",
+    "note": "原文以本机简体《老子》为底本，统一引号，第七章移去括号异文提示。译文、词义和练习为本馆编写的入门读法，参考王弼注理解，不将不同底本混作同一文本。"
+  },
+  "source_ref": {
+    "locator": "/content/74",
+    "path": "poetry/simplified/诸子百家/老子.json",
+    "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+    "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+    "anchor_text": "民之饥，以其上食税之多，是以饥。民之难治，以其上之有为，是以难治。民之轻死，以其上求生之厚，是以轻死。夫唯无以生为者，是贤於贵生。"
+  },
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "民之饥，以其上食税之多，是以饥。",
+      "translation": "百姓饥饿，是因为在上者赋税收取得太多，所以饥饿。",
+      "explanation": "读词小提示：「上」：在上位的治理者；「食税」：征取、享用赋税。",
+      "chunks": [
+        "民之饥，",
+        "以其上食税之多，",
+        "是以饥。"
+      ],
+      "hints": [
+        "上",
+        "食税"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "上",
+          "kind": "word",
+          "meaning": "在上位的治理者。"
+        },
+        {
+          "id": "n2",
+          "quote": "食税",
+          "kind": "word",
+          "meaning": "征取、享用赋税。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第七十五章》第1句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#七十五章",
+        "source_ref": {
+          "locator": "/content/74",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "民之饥，以其上食税之多，是以饥。"
+        }
+      }
+    },
+    {
+      "id": "s2",
+      "text": "民之难治，以其上之有为，是以难治。",
+      "translation": "百姓难治理，是因为在上者过分干预折腾，所以难治理。",
+      "explanation": "读词小提示：「上」：在上位的治理者；「有为」：这里指过多的干预、折腾。",
+      "chunks": [
+        "民之难治，",
+        "以其上之有为，",
+        "是以难治。"
+      ],
+      "hints": [
+        "上",
+        "有为"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "上",
+          "kind": "word",
+          "meaning": "在上位的治理者。"
+        },
+        {
+          "id": "n2",
+          "quote": "有为",
+          "kind": "word",
+          "meaning": "这里指过多的干预、折腾。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第七十五章》第2句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#七十五章",
+        "source_ref": {
+          "locator": "/content/74",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "民之难治，以其上之有为，是以难治。"
+        }
+      }
+    },
+    {
+      "id": "s3",
+      "text": "民之轻死，以其上求生之厚，是以轻死。",
+      "translation": "百姓不再顾惜生命，是因为在上者过分追求自己的优厚生活，才造成这样的结果。",
+      "explanation": "读词小提示：「上」：在上位的治理者；「轻死」：不再顾惜生命，反映困苦的处境。",
+      "chunks": [
+        "民之轻死，",
+        "以其上求生之厚，",
+        "是以轻死。"
+      ],
+      "hints": [
+        "上",
+        "轻死",
+        "求生之厚"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "上",
+          "kind": "word",
+          "meaning": "在上位的治理者。"
+        },
+        {
+          "id": "n2",
+          "quote": "轻死",
+          "kind": "word",
+          "meaning": "不再顾惜生命，反映困苦的处境。"
+        },
+        {
+          "id": "n3",
+          "quote": "求生之厚",
+          "kind": "word",
+          "meaning": "过分追求自己的优厚生活。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第七十五章》第3句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#七十五章",
+        "source_ref": {
+          "locator": "/content/74",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "民之轻死，以其上求生之厚，是以轻死。"
+        }
+      }
+    },
+    {
+      "id": "s4",
+      "text": "夫唯无以生为者，是贤於贵生。",
+      "translation": "只有不把厚养自己当作一切，才比一味追求自身优厚生活更可取。",
+      "explanation": "本章重在批评过度索取，不是否定生命的价值。",
+      "chunks": [
+        "夫唯无以生为者，",
+        "是贤於贵生。"
+      ],
+      "hints": [
+        "无以生为",
+        "贤",
+        "贵生"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "无以生为",
+          "kind": "word",
+          "meaning": "不把奉养自己当作一切。"
+        },
+        {
+          "id": "n2",
+          "quote": "贤",
+          "kind": "word",
+          "meaning": "更好、更可取。"
+        },
+        {
+          "id": "n3",
+          "quote": "贵生",
+          "kind": "word",
+          "meaning": "这里指过分看重自身的优厚奉养。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第七十五章》第4句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#七十五章",
+        "source_ref": {
+          "locator": "/content/74",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "夫唯无以生为者，是贤於贵生。"
+        }
+      }
+    }
+  ],
+  "overview": {
+    "sequence": [
+      "先看本章开头：百姓饥饿，是因为在上者赋税收取得太多，所以饥饿。",
+      "本章把百姓的饥困与在上者的索取连起来，提醒人从责任和条件寻找原因。",
+      "再回到结尾：只有不把厚养自己当作一切，才比一味追求自身优厚生活更可取。"
+    ],
+    "question": "这一章为什么可以叫作「追问困苦的原因」？",
+    "answer": "本章把百姓的饥困与在上者的索取连起来，提醒人从责任和条件寻找原因。可以引用本章开头或结尾的原句，说明你的依据。",
+    "takeaway": "本章把百姓的饥困与在上者的索取连起来，提醒人从责任和条件寻找原因。"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "choice",
+      "sentence": "s1",
+      "skill": "meaning",
+      "prompt": "开头的「上」在这里怎样理解？",
+      "choices": [
+        "在上位的治理者。",
+        "只顾自己，不留意他人的处境。",
+        "为了显示本领而处处炫耀。"
+      ],
+      "answer": 0,
+      "explanation": "把词放回原句看，「上」在本句中的意思是：在上位的治理者。"
+    },
+    {
+      "id": "q2",
+      "type": "choice",
+      "sentence": "s4",
+      "skill": "reason",
+      "prompt": "读完「追问困苦的原因」，哪一种理解更合适？",
+      "choices": [
+        "只看名字，就能知道全部道理。",
+        "本章把百姓的饥困与在上者的索取连起来，提醒人从责任和条件寻找原因。",
+        "为达到自己的目标，可以不顾别人。"
+      ],
+      "answer": 1,
+      "explanation": "本章把百姓的饥困与在上者的索取连起来，提醒人从责任和条件寻找原因。"
+    },
+    {
+      "id": "q3",
+      "type": "selfcheck",
+      "sentence": "s4",
+      "skill": "retell",
+      "prompt": "选本章一句话，用自己的话解释，再说说它怎样帮助你理解「追问困苦的原因」。",
+      "answer": "先说清原句中的对象和动作，再解释关键词。可以围绕这点来讲：本章把百姓的饥困与在上者的索取连起来，提醒人从责任和条件寻找原因。说完后，回到原文找一句作依据。",
+      "explanation": "不必背诵译文。重点看词义是否放回本句、有没有原文依据，以及是否把古人的比方误当成不分条件的结论。"
+    }
+  ]
+}

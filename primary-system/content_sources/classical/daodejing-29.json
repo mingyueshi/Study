@@ -1,0 +1,337 @@
+{
+  "schema_version": 1,
+  "id": "daodejing-29",
+  "title": "道德经·第二十九章",
+  "attribution": "老子",
+  "level": "challenge",
+  "genre": "reasoning",
+  "skills": [
+    "meaning",
+    "referent",
+    "reason",
+    "contrast",
+    "retell"
+  ],
+  "curriculum": null,
+  "intro": "不要强行摆布一切。万物有不同的状态，做事先看条件，减少过度、奢侈和自大。",
+  "background": "这是《道德经》道经·第二十九章。本章围绕「不要强行摆布一切」展开，可以先读原文，再对照译文，看看作者用了什么比方或对比。",
+  "editorial_note": "本馆用逐句译解帮助入门。读「道」「无为」等词时要看上下文；古代观念和理想化比方，可以边读边与家长讨论。",
+  "source": {
+    "work": "道德经（又名老子）",
+    "section": "道经·第二十九章",
+    "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#二十九章",
+    "note": "原文以本机简体《老子》为底本，统一引号，第七章移去括号异文提示。译文、词义和练习为本馆编写的入门读法，参考王弼注理解，不将不同底本混作同一文本。"
+  },
+  "source_ref": {
+    "locator": "/content/28",
+    "path": "poetry/simplified/诸子百家/老子.json",
+    "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+    "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+    "anchor_text": "将欲取天下而为之，吾见其不得已。天下神器，不可为也，不可执也。为者败之，执者失之。是以圣人无为，故无败；无执，故无失。夫物或行或随；或嘘或吹；或强或羸；或载或隳。是以圣人去甚，去奢，去泰。"
+  },
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "将欲取天下而为之，吾见其不得已。",
+      "translation": "想要取得天下，又凭自己的意愿强行摆布，我看他难以达到目的。",
+      "explanation": "读词小提示：「取天下」：取得、治理天下；「为之」：凭自己的意愿强行摆布。",
+      "chunks": [
+        "将欲取天下而为之，",
+        "吾见其不得已。"
+      ],
+      "hints": [
+        "取天下",
+        "为之"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "取天下",
+          "kind": "word",
+          "meaning": "取得、治理天下。"
+        },
+        {
+          "id": "n2",
+          "quote": "为之",
+          "kind": "word",
+          "meaning": "凭自己的意愿强行摆布。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第二十九章》第1句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#二十九章",
+        "source_ref": {
+          "locator": "/content/28",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "将欲取天下而为之，吾见其不得已。"
+        }
+      }
+    },
+    {
+      "id": "s2",
+      "text": "天下神器，不可为也，不可执也。",
+      "translation": "天下好像不可随意摆弄的神圣器物，不能强行改造，也不能牢牢控制。",
+      "explanation": "读词小提示：「神器」：神圣而不宜随意摆弄的器物，这里比喻天下；「执」：牢牢抓住、强行控制。",
+      "chunks": [
+        "天下神器，",
+        "不可为也，",
+        "不可执也。"
+      ],
+      "hints": [
+        "神器",
+        "执"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "神器",
+          "kind": "word",
+          "meaning": "神圣而不宜随意摆弄的器物，这里比喻天下。"
+        },
+        {
+          "id": "n2",
+          "quote": "执",
+          "kind": "word",
+          "meaning": "牢牢抓住、强行控制。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第二十九章》第2句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#二十九章",
+        "source_ref": {
+          "locator": "/content/28",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "天下神器，不可为也，不可执也。"
+        }
+      }
+    },
+    {
+      "id": "s3",
+      "text": "为者败之，执者失之。",
+      "translation": "强行摆布会把它弄坏，牢抓不放反会失去。",
+      "explanation": "读词小提示：「执」：牢牢抓住、强行控制。",
+      "chunks": [
+        "为者败之，",
+        "执者失之。"
+      ],
+      "hints": [
+        "执"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "执",
+          "kind": "word",
+          "meaning": "牢牢抓住、强行控制。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第二十九章》第3句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#二十九章",
+        "source_ref": {
+          "locator": "/content/28",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "为者败之，执者失之。"
+        }
+      }
+    },
+    {
+      "id": "s4",
+      "text": "是以圣人无为，故无败；无执，故无失。",
+      "translation": "所以，有智慧的人不强行干预，因而少有失败；不强行占有，因而少有失去。",
+      "explanation": "读词小提示：「执」：牢牢抓住、强行控制；「无为」：不强行干预。",
+      "chunks": [
+        "是以圣人无为，",
+        "故无败；",
+        "无执，",
+        "故无失。"
+      ],
+      "hints": [
+        "执",
+        "无为"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "执",
+          "kind": "word",
+          "meaning": "牢牢抓住、强行控制。"
+        },
+        {
+          "id": "n2",
+          "quote": "无为",
+          "kind": "word",
+          "meaning": "不强行干预。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第二十九章》第4句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#二十九章",
+        "source_ref": {
+          "locator": "/content/28",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "是以圣人无为，故无败；无执，故无失。"
+        }
+      }
+    },
+    {
+      "id": "s5",
+      "text": "夫物或行或随；或嘘或吹；或强或羸；或载或隳。",
+      "translation": "事物有的前行，有的跟随；有的缓缓吐气，有的急急吹气；有的强，有的弱；有的安稳，有的衰败。",
+      "explanation": "读词小提示：「行」：走在前面；「随」：跟随。",
+      "chunks": [
+        "夫物或行或随；",
+        "或嘘或吹；",
+        "或强或羸；",
+        "或载或隳。"
+      ],
+      "hints": [
+        "行",
+        "随",
+        "嘘"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "行",
+          "kind": "word",
+          "meaning": "走在前面。"
+        },
+        {
+          "id": "n2",
+          "quote": "随",
+          "kind": "word",
+          "meaning": "跟随。"
+        },
+        {
+          "id": "n3",
+          "quote": "嘘",
+          "kind": "word",
+          "meaning": "缓缓吐气。"
+        },
+        {
+          "id": "n4",
+          "quote": "羸",
+          "kind": "word",
+          "meaning": "弱。",
+          "reading": "léi"
+        },
+        {
+          "id": "n5",
+          "quote": "隳",
+          "kind": "word",
+          "meaning": "毁坏、衰败。",
+          "reading": "huī"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第二十九章》第5句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#二十九章",
+        "source_ref": {
+          "locator": "/content/28",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "夫物或行或随；或嘘或吹；或强或羸；或载或隳。"
+        }
+      }
+    },
+    {
+      "id": "s6",
+      "text": "是以圣人去甚，去奢，去泰。",
+      "translation": "因此，有智慧的人除去过分、奢侈与自大的做法。",
+      "explanation": "读词小提示：「去甚」：除去过分的做法；「泰」：过度、自大。",
+      "chunks": [
+        "是以圣人去甚，",
+        "去奢，",
+        "去泰。"
+      ],
+      "hints": [
+        "去甚",
+        "泰"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "去甚",
+          "kind": "word",
+          "meaning": "除去过分的做法。"
+        },
+        {
+          "id": "n2",
+          "quote": "泰",
+          "kind": "word",
+          "meaning": "过度、自大。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第二十九章》第6句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#二十九章",
+        "source_ref": {
+          "locator": "/content/28",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "是以圣人去甚，去奢，去泰。"
+        }
+      }
+    }
+  ],
+  "overview": {
+    "sequence": [
+      "先看本章开头：想要取得天下，又凭自己的意愿强行摆布，我看他难以达到目的。",
+      "万物有不同的状态，做事先看条件，减少过度、奢侈和自大。",
+      "再回到结尾：因此，有智慧的人除去过分、奢侈与自大的做法。"
+    ],
+    "question": "这一章为什么可以叫作「不要强行摆布一切」？",
+    "answer": "万物有不同的状态，做事先看条件，减少过度、奢侈和自大。可以引用本章开头或结尾的原句，说明你的依据。",
+    "takeaway": "万物有不同的状态，做事先看条件，减少过度、奢侈和自大。"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "choice",
+      "sentence": "s1",
+      "skill": "meaning",
+      "prompt": "开头的「取天下」在这里怎样理解？",
+      "choices": [
+        "只顾自己，不留意他人的处境。",
+        "为了显示本领而处处炫耀。",
+        "取得、治理天下。"
+      ],
+      "answer": 2,
+      "explanation": "把词放回原句看，「取天下」在本句中的意思是：取得、治理天下。"
+    },
+    {
+      "id": "q2",
+      "type": "choice",
+      "sentence": "s6",
+      "skill": "reason",
+      "prompt": "读完「不要强行摆布一切」，哪一种理解更合适？",
+      "choices": [
+        "万物有不同的状态，做事先看条件，减少过度、奢侈和自大。",
+        "只要一次失败，就不必再试。",
+        "遇到问题不用观察，也不必行动。"
+      ],
+      "answer": 0,
+      "explanation": "万物有不同的状态，做事先看条件，减少过度、奢侈和自大。"
+    },
+    {
+      "id": "q3",
+      "type": "selfcheck",
+      "sentence": "s6",
+      "skill": "retell",
+      "prompt": "选本章一句话，用自己的话解释，再说说它怎样帮助你理解「不要强行摆布一切」。",
+      "answer": "先说清原句中的对象和动作，再解释关键词。可以围绕这点来讲：万物有不同的状态，做事先看条件，减少过度、奢侈和自大。说完后，回到原文找一句作依据。",
+      "explanation": "不必背诵译文。重点看词义是否放回本句、有没有原文依据，以及是否把古人的比方误当成不分条件的结论。"
+    }
+  ]
+}

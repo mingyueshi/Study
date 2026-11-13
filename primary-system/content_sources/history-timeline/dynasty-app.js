@@ -54,7 +54,7 @@
       `<p class="dyn-line fall"><span>灭亡</span>${esc(band.fall)}</p>` +
       `<p class="dyn-capital">🏛️ 都城：${esc(band.capital)}</p>` +
       `${band.note ? `<p class="dyn-note">ℹ️ ${esc(band.note)}</p>` : ''}` +
-      `<nav class="tl-related" aria-label="${esc(band.name)}的时代"><a href="${eraHref(era)}">在「${esc(era.name)}」看中外大事 →</a></nav></li>`;
+      `<nav class="tl-related" aria-label="${esc(band.name)}的时代"><a href="dynasties.html?map=${esc(band.id)}#territory-maps">看${esc(band.name)}的版图 ↑</a><a href="${eraHref(era)}">在「${esc(era.name)}」看中外大事 →</a></nav></li>`;
   }
 
   function bridgeHTML(t) {

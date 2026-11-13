@@ -1,0 +1,8 @@
+<nav class="cw-nav" aria-label="古文专题导航">
+  <a href="{% url 'home' %}?area=chinese#modules-title">← 学习广场 · 语文</a>
+  <a href="{% url 'classical' %}"{% if request.resolver_match.url_name == 'classical' %} aria-current="page"{% endif %}>古文精读馆</a>
+  {% for group in catalog.collections %}<a href="{% url 'classical-book' group.id %}"{% if request.resolver_match.url_name == 'classical-book' and group.id == collection.id %} aria-current="page"{% endif %}>{{ group.title }}</a>{% endfor %}
+  <a href="{% url 'chinesebook' %}">语文教材</a>
+  <a href="{% url 'literature-study' %}">文学常识</a>
+  <a href="{% url 'poetry-index' %}">查古诗文原文 ↗</a>
+</nav>

@@ -1,0 +1,295 @@
+{
+  "schema_version": 1,
+  "id": "daodejing-02",
+  "title": "道德经·第二章",
+  "attribution": "老子",
+  "level": "challenge",
+  "genre": "reasoning",
+  "skills": [
+    "meaning",
+    "referent",
+    "reason",
+    "contrast",
+    "retell"
+  ],
+  "curriculum": null,
+  "intro": "在比较中看见联系。美丑、难易等说法相互联系，做成事情也不必急着把功劳据为己有。",
+  "background": "这是《道德经》道经·第二章。本章围绕「在比较中看见联系」展开，可以先读原文，再对照译文，看看作者用了什么比方或对比。",
+  "editorial_note": "本馆用逐句译解帮助入门。读「道」「无为」等词时要看上下文；古代观念和理想化比方，可以边读边与家长讨论。",
+  "source": {
+    "work": "道德经（又名老子）",
+    "section": "道经·第二章",
+    "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#二章",
+    "note": "原文以本机简体《老子》为底本，统一引号，第七章移去括号异文提示。译文、词义和练习为本馆编写的入门读法，参考王弼注理解，不将不同底本混作同一文本。"
+  },
+  "source_ref": {
+    "locator": "/content/1",
+    "path": "poetry/simplified/诸子百家/老子.json",
+    "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+    "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+    "anchor_text": "天下皆知美之为美，斯恶已。皆知善之为善，斯不善已。故有无相生，难易相成，长短相形，高下相倾，音声相和，前后相随，恒也。是以圣人处无为之事，行不言之教，万物作而弗始也，生而弗有，为而弗恃也，功成而弗居。夫惟弗居，是以弗去。"
+  },
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "天下皆知美之为美，斯恶已。",
+      "translation": "天下人都把某种样子认定为美，丑的说法也就随之出现。",
+      "explanation": "读词小提示：「斯」：就、于是；「恶」：丑，与美相对。",
+      "chunks": [
+        "天下皆知美之为美，",
+        "斯恶已。"
+      ],
+      "hints": [
+        "斯",
+        "恶"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "斯",
+          "kind": "word",
+          "meaning": "就、于是。"
+        },
+        {
+          "id": "n2",
+          "quote": "恶",
+          "kind": "word",
+          "meaning": "丑，与美相对。",
+          "reading": "è"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第二章》第1句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#二章",
+        "source_ref": {
+          "locator": "/content/1",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "天下皆知美之为美，斯恶已。"
+        }
+      }
+    },
+    {
+      "id": "s2",
+      "text": "皆知善之为善，斯不善已。",
+      "translation": "都把某种做法认定为善，不善的说法也就随之出现。",
+      "explanation": "读词小提示：「斯」：就、于是；「善」：这里指被称为好的事物。",
+      "chunks": [
+        "皆知善之为善，",
+        "斯不善已。"
+      ],
+      "hints": [
+        "斯",
+        "善"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "斯",
+          "kind": "word",
+          "meaning": "就、于是。"
+        },
+        {
+          "id": "n2",
+          "quote": "善",
+          "kind": "word",
+          "meaning": "这里指被称为好的事物。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第二章》第2句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#二章",
+        "source_ref": {
+          "locator": "/content/1",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "皆知善之为善，斯不善已。"
+        }
+      }
+    },
+    {
+      "id": "s3",
+      "text": "故有无相生，难易相成，长短相形，高下相倾，音声相和，前后相随，恒也。",
+      "translation": "有和无相互显现，难和易相互成就，长和短相互比较，高和低相互依存，音与声相互应和，前与后相互跟随，这是常见的关系。",
+      "explanation": "读词小提示：「相生」：相互产生、相互显现。",
+      "chunks": [
+        "故有无相生，",
+        "难易相成，",
+        "长短相形，",
+        "高下相倾，",
+        "音声相和，",
+        "前后相随，",
+        "恒也。"
+      ],
+      "hints": [
+        "相生"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "相生",
+          "kind": "word",
+          "meaning": "相互产生、相互显现。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第二章》第3句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#二章",
+        "source_ref": {
+          "locator": "/content/1",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "故有无相生，难易相成，长短相形，高下相倾，音声相和，前后相随，恒也。"
+        }
+      }
+    },
+    {
+      "id": "s4",
+      "text": "是以圣人处无为之事，行不言之教，万物作而弗始也，生而弗有，为而弗恃也，功成而弗居。",
+      "translation": "所以，有智慧的人不强行干预，以行动来教导；让万物兴起而不自称开创，生养而不占有，有所作为而不倚仗，做成事情而不独占功劳。",
+      "explanation": "读词小提示：「无为」：不凭私意强行干预，并非什么都不做；「弗」：不。",
+      "chunks": [
+        "是以圣人处无为之事，",
+        "行不言之教，",
+        "万物作而弗始也，",
+        "生而弗有，",
+        "为而弗恃也，",
+        "功成而弗居。"
+      ],
+      "hints": [
+        "无为",
+        "弗",
+        "居"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "无为",
+          "kind": "word",
+          "meaning": "不凭私意强行干预，并非什么都不做。"
+        },
+        {
+          "id": "n2",
+          "quote": "弗",
+          "kind": "word",
+          "meaning": "不。"
+        },
+        {
+          "id": "n3",
+          "quote": "居",
+          "kind": "word",
+          "meaning": "占有、据为己有。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第二章》第4句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#二章",
+        "source_ref": {
+          "locator": "/content/1",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "是以圣人处无为之事，行不言之教，万物作而弗始也，生而弗有，为而弗恃也，功成而弗居。"
+        }
+      }
+    },
+    {
+      "id": "s5",
+      "text": "夫惟弗居，是以弗去。",
+      "translation": "正因为不把功劳据为己有，这份功效反而能够留存。",
+      "explanation": "读词小提示：「弗」：不；「居」：占有、据为己有。",
+      "chunks": [
+        "夫惟弗居，",
+        "是以弗去。"
+      ],
+      "hints": [
+        "弗",
+        "居",
+        "去"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "弗",
+          "kind": "word",
+          "meaning": "不。"
+        },
+        {
+          "id": "n2",
+          "quote": "居",
+          "kind": "word",
+          "meaning": "占有、据为己有。"
+        },
+        {
+          "id": "n3",
+          "quote": "去",
+          "kind": "word",
+          "meaning": "离开、消失。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第二章》第5句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#二章",
+        "source_ref": {
+          "locator": "/content/1",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "夫惟弗居，是以弗去。"
+        }
+      }
+    }
+  ],
+  "overview": {
+    "sequence": [
+      "先看本章开头：天下人都把某种样子认定为美，丑的说法也就随之出现。",
+      "美丑、难易等说法相互联系，做成事情也不必急着把功劳据为己有。",
+      "再回到结尾：正因为不把功劳据为己有，这份功效反而能够留存。"
+    ],
+    "question": "这一章为什么可以叫作「在比较中看见联系」？",
+    "answer": "美丑、难易等说法相互联系，做成事情也不必急着把功劳据为己有。可以引用本章开头或结尾的原句，说明你的依据。",
+    "takeaway": "美丑、难易等说法相互联系，做成事情也不必急着把功劳据为己有。"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "choice",
+      "sentence": "s1",
+      "skill": "meaning",
+      "prompt": "开头的「斯」在这里怎样理解？",
+      "choices": [
+        "只顾自己，不留意他人的处境。",
+        "为了显示本领而处处炫耀。",
+        "就、于是。"
+      ],
+      "answer": 2,
+      "explanation": "把词放回原句看，「斯」在本句中的意思是：就、于是。"
+    },
+    {
+      "id": "q2",
+      "type": "choice",
+      "sentence": "s5",
+      "skill": "reason",
+      "prompt": "读完「在比较中看见联系」，哪一种理解更合适？",
+      "choices": [
+        "美丑、难易等说法相互联系，做成事情也不必急着把功劳据为己有。",
+        "只有大声夸耀自己，才能显得有本领。",
+        "只要一次失败，就不必再试。"
+      ],
+      "answer": 0,
+      "explanation": "美丑、难易等说法相互联系，做成事情也不必急着把功劳据为己有。"
+    },
+    {
+      "id": "q3",
+      "type": "selfcheck",
+      "sentence": "s5",
+      "skill": "retell",
+      "prompt": "选本章一句话，用自己的话解释，再说说它怎样帮助你理解「在比较中看见联系」。",
+      "answer": "先说清原句中的对象和动作，再解释关键词。可以围绕这点来讲：美丑、难易等说法相互联系，做成事情也不必急着把功劳据为己有。说完后，回到原文找一句作依据。",
+      "explanation": "不必背诵译文。重点看词义是否放回本句、有没有原文依据，以及是否把古人的比方误当成不分条件的结论。"
+    }
+  ]
+}

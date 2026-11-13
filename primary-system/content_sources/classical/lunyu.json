@@ -1,0 +1,163 @@
+{
+  "schema_version": 1,
+  "id": "lunyu",
+  "title": "论语六则",
+  "attribution": "《论语》",
+  "unit_label": "则",
+  "level": "challenge",
+  "genre": "reasoning",
+  "skills": ["meaning", "referent", "reason", "contrast"],
+  "curriculum": null,
+  "intro": "怎样学得明白、交友守信、替别人着想？读六则短章句，把古人的话用到身边的小事中。",
+  "background": "《论语》的「论」读 lún。这部书主要记录孔子和弟子的言行。本篇从《学而》《为政》《述而》《卫灵公》中选出六则，先读学习的方法，再想怎样检查自己、与人相处。",
+  "editorial_note": "六则来自不同篇章，并不是一个连续的故事。注意说话的人：第四则是曾子说的，第六则是子贡与孔子的对话。",
+  "source": {
+    "work": "《论语》",
+    "section": "《学而》《为政》《述而》《卫灵公》六则选读",
+    "url": "https://zh.wikisource.org/wiki/論語",
+    "note": "正文采用本机简体原典的选文，统一引号样式，保留「说」「汝」「知」等写法。每则单独标明出处，可查本机原典或联网对照；译文、词义和生活情境练习为本专题编写。"
+  },
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "子曰：「学而时习之，不亦说乎？有朋自远方来，不亦乐乎？人不知而不愠，不亦君子乎？」",
+      "chunks": ["子曰：", "「学而时习之，", "不亦说乎？", "有朋自远方来，", "不亦乐乎？", "人不知而不愠，", "不亦君子乎？」"],
+      "translation": "孔子说：「学过以后，按时温习和练习，不也很愉快吗？有朋友从远方来，不也很快乐吗？别人不了解自己，自己也不恼怒，不也是有修养的人吗？」",
+      "explanation": "这一则从学习、朋友和修养三个方面说起。先弄懂每个问句，再体会其中平和、愉快的语气。",
+      "supplement": "「人不知」没有写出不了解谁，结合后文可补出：别人不了解自己。",
+      "hints": ["时习之", "远方来", "不愠", "君子"],
+      "reference": {
+        "label": "《学而》·学而时习之",
+        "url": "https://zh.wikisource.org/wiki/論語/學而第一",
+        "source_ref": {"version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native", "path": "poetry/simplified/儒家经典/论语.json", "locator": "/content/0", "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934", "anchor_text": "学而时习之，不亦说乎？"}
+      },
+      "notes": [
+        {"id": "zi", "quote": "子", "kind": "referent", "meaning": "这里是对孔子的尊称。", "refers_to": "孔子", "reason": "《论语》中单说「子曰」时，通常是在引出孔子的话。"},
+        {"id": "shixi", "quote": "时习", "kind": "word", "meaning": "按一定的时候温习、练习学过的内容。可以读一读，也可以实际做一做。"},
+        {"id": "zhi", "quote": "之", "kind": "referent", "meaning": "代替要温习、练习的内容。", "refers_to": "已经学过的内容", "reason": "前面先说「学」，接着「习」的正是学到的东西。"},
+        {"id": "yue", "quote": "说", "kind": "word", "meaning": "同「悦」，愉快。这里读 yuè，不能按说话的「说」来读。", "reading": "yuè"},
+        {"id": "yun", "quote": "愠", "kind": "word", "meaning": "恼怒，生气。", "reading": "yùn"},
+        {"id": "junzi", "quote": "君子", "kind": "word", "meaning": "这里指有修养、有品德的人。"}
+      ]
+    },
+    {
+      "id": "s2",
+      "text": "子曰：「学而不思则罔，思而不学则殆。」",
+      "chunks": ["子曰：", "「学而不思则罔，", "思而不学则殆。」"],
+      "translation": "孔子说：「只学习却不思考，就会迷惑；只空想却不学习，也会疑惑。」",
+      "explanation": "前后两半把「学」和「思」交换位置来比较。学习提供材料，思考帮助理解，两件事要结合起来。",
+      "hints": ["学而不思", "罔", "思而不学", "殆"],
+      "reference": {
+        "label": "《为政》·学而不思则罔",
+        "url": "https://zh.wikisource.org/wiki/論語/為政第二",
+        "source_ref": {"version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native", "path": "poetry/simplified/儒家经典/论语.json", "locator": "/content/1", "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934", "anchor_text": "学而不思则罔，思而不学则殆。"}
+      },
+      "notes": [
+        {"id": "xue", "quote": "学", "kind": "word", "meaning": "学习，获取知识和经验。"},
+        {"id": "si", "quote": "思", "kind": "word", "meaning": "思考，想一想为什么、怎样理解。"},
+        {"id": "wang", "quote": "罔", "kind": "word", "meaning": "迷惑，不能明白其中的道理。", "reading": "wǎng"},
+        {"id": "dai", "quote": "殆", "kind": "word", "meaning": "这里按常见教学解释理解为疑惑。只凭空想而不学习，也难以弄明白。", "reading": "dài"}
+      ]
+    },
+    {
+      "id": "s3",
+      "text": "子曰：「由，诲汝知之乎！知之为知之，不知为不知，是知也。」",
+      "chunks": ["子曰：", "「由，", "诲汝知之乎！", "知之为知之，", "不知为不知，", "是知也。」"],
+      "translation": "孔子说：「仲由，我教给你对待知与不知的态度吧！知道就是知道，不知道就是不知道，这才是智慧。」",
+      "explanation": "前面的「知」主要说知道不知道，最后的「知」说的是智慧。承认不懂，才能继续问、继续学。",
+      "hints": ["由", "知之为知之", "不知为不知", "是知也"],
+      "reference": {
+        "label": "《为政》·知之为知之",
+        "url": "https://zh.wikisource.org/wiki/論語/為政第二",
+        "source_ref": {"version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native", "path": "poetry/simplified/儒家经典/论语.json", "locator": "/content/1", "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934", "anchor_text": "知之为知之，不知为不知，是知也。"}
+      },
+      "notes": [
+        {"id": "you", "quote": "由", "kind": "word", "meaning": "仲由，字子路，是孔子的弟子。孔子在这里直接叫他的名字。"},
+        {"id": "hui", "quote": "诲", "kind": "word", "meaning": "教导。", "reading": "huì"},
+        {"id": "ru", "quote": "汝", "kind": "referent", "meaning": "你。", "refers_to": "仲由，也就是子路", "reason": "开头先叫「由」，接着用「汝」称呼正在听话的这个人。", "reading": "rǔ"},
+        {"id": "wei", "quote": "为", "kind": "word", "meaning": "是。「知之为知之」就是知道便是知道。", "reading": "wéi"},
+        {"id": "shi", "quote": "是", "kind": "referent", "meaning": "这。", "refers_to": "知道就说知道，不知道就承认不知道的态度", "reason": "「是」承接前面两种情况，把实事求是的态度概括起来。"},
+        {"id": "zhi-wisdom", "quote": "知", "occurrence": 6, "kind": "word", "meaning": "同「智」，智慧。这是本则最后一个「知」，读 zhì。", "reading": "zhì"}
+      ]
+    },
+    {
+      "id": "s4",
+      "text": "曾子曰：「吾日三省吾身：为人谋而不忠乎？与朋友交而不信乎？传不习乎？」",
+      "chunks": ["曾子曰：", "「吾日三省吾身：", "为人谋而不忠乎？", "与朋友交而不信乎？", "传不习乎？」"],
+      "translation": "曾子说：「我每天多次反省自己：替别人办事有没有尽心？与朋友交往有没有守信？老师传授的知识有没有温习？」",
+      "explanation": "冒号后列出了三个检查的方面：办事是否尽心、交友是否守信、所学是否温习。反省要落到具体行动上。",
+      "hints": ["三省吾身", "忠", "信", "习"],
+      "reference": {
+        "label": "《学而》·吾日三省吾身",
+        "url": "https://zh.wikisource.org/wiki/論語/學而第一",
+        "source_ref": {"version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native", "path": "poetry/simplified/儒家经典/论语.json", "locator": "/content/0", "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934", "anchor_text": "吾日三省吾身：为人谋而不忠乎？"}
+      },
+      "notes": [
+        {"id": "wu", "quote": "吾", "kind": "referent", "meaning": "我。", "refers_to": "正在说话的曾子", "reason": "先看引语前写的是「曾子曰」，这里的「我」就指曾子。"},
+        {"id": "sansheng", "quote": "三省", "kind": "word", "meaning": "多次反省、检查自己。后面具体列出了三个方面。", "reading": "sān xǐng"},
+        {"id": "wei", "quote": "为", "kind": "word", "meaning": "替，给。为人谋就是替别人谋划、办事。", "reading": "wèi"},
+        {"id": "zhong", "quote": "忠", "kind": "word", "meaning": "这里指尽心尽力地做好受托的事情。"},
+        {"id": "xin", "quote": "信", "kind": "word", "meaning": "诚信，讲信用。"},
+        {"id": "chuan", "quote": "传", "kind": "word", "meaning": "老师传授的知识。这里读 chuán。", "reading": "chuán"}
+      ]
+    },
+    {
+      "id": "s5",
+      "text": "子曰：「三人行，必有我师焉。择其善者而从之，其不善者而改之。」",
+      "chunks": ["子曰：", "「三人行，", "必有我师焉。", "择其善者而从之，", "其不善者而改之。」"],
+      "translation": "孔子说：「几个人一起走，其中一定有值得我学习的人。选择他们好的方面来学习，看到他们不好的方面，就检查并改正自己同样的不足。」",
+      "explanation": "既从别人的优点中学习，也借别人的不足检查自己。「改之」要回到自己身上想。",
+      "supplement": "后半句可以补着理解为：看到别人不好的方面，自己若也有，就改正自己的这些不足。",
+      "hints": ["三人行", "我师", "善者", "改之"],
+      "reference": {
+        "label": "《述而》·三人行",
+        "url": "https://zh.wikisource.org/wiki/論語/述而第七",
+        "source_ref": {"version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native", "path": "poetry/simplified/儒家经典/论语.json", "locator": "/content/6", "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934", "anchor_text": "三人行，必有我师焉。择其善者而从之"}
+      },
+      "notes": [
+        {"id": "san", "quote": "三人", "kind": "word", "meaning": "几个人。重点是身边的人各有值得学习的地方。"},
+        {"id": "yan", "quote": "焉", "kind": "word", "meaning": "在其中。这里说在同行的人中。", "reading": "yān"},
+        {"id": "qi", "quote": "其", "kind": "referent", "meaning": "他们的。", "refers_to": "同行的其他人", "reason": "前面刚说同行的人中有自己的老师，接着就看他们的优点。"},
+        {"id": "shan", "quote": "善者", "kind": "word", "meaning": "好的方面，长处。"},
+        {"id": "zhi-good", "quote": "之", "occurrence": 1, "kind": "referent", "meaning": "代替要学习的内容。", "refers_to": "别人好的方面", "reason": "「从」是跟从、学习，这里的对象就是前面的「善者」。"},
+        {"id": "zhi-change", "quote": "之", "occurrence": 2, "kind": "referent", "meaning": "代替需要自己改正的不足。", "refers_to": "自己身上同样不好的方面", "reason": "见到别人的不足后，要检查自己有没有相似问题，再改正自己。"}
+      ]
+    },
+    {
+      "id": "s6",
+      "text": "子贡问曰：「有一言而可以终身行之者乎？」子曰：「其恕乎！己所不欲，勿施于人。」",
+      "chunks": ["子贡问曰：", "「有一言", "而可以终身行之者乎？」", "子曰：", "「其恕乎！", "己所不欲，", "勿施于人。」"],
+      "translation": "子贡问：「有没有一个字，可以让人终身照着实行呢？」孔子说：「大概是恕吧！自己不愿承受的事，不要强加给别人。」",
+      "explanation": "「恕」在这里提醒我们推己及人，替别人着想。想一想自己的感受，也要尊重别人的感受。",
+      "hints": ["终身行之", "恕", "己所不欲", "勿施于人"],
+      "reference": {
+        "label": "《卫灵公》·己所不欲",
+        "url": "https://zh.wikisource.org/wiki/論語/衛靈公第十五",
+        "source_ref": {"version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native", "path": "poetry/simplified/儒家经典/论语.json", "locator": "/content/14", "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934", "anchor_text": "其恕乎！己所不欲，勿施于人。"}
+      },
+      "notes": [
+        {"id": "yiyan", "quote": "一言", "kind": "word", "meaning": "一个字。孔子用「恕」这个字概括一个待人的准则。"},
+        {"id": "xing", "quote": "行", "kind": "word", "meaning": "实行，照着去做。", "reading": "xíng"},
+        {"id": "zhi", "quote": "之", "kind": "referent", "meaning": "代替想要终身实行的准则。", "refers_to": "前面所问的「一言」所代表的准则", "reason": "子贡问有没有这样一个字，后面的回答用「恕」来概括。"},
+        {"id": "qi", "quote": "其", "kind": "word", "meaning": "这里表示推测，可以理解为「大概」。不是指某一个人的「他的」。"},
+        {"id": "shu", "quote": "恕", "kind": "word", "meaning": "推己及人，根据自己的感受替别人着想。", "reading": "shù"},
+        {"id": "ji", "quote": "己", "kind": "word", "meaning": "自己。"},
+        {"id": "yu", "quote": "欲", "kind": "word", "meaning": "想要，愿意。"},
+        {"id": "shi", "quote": "施", "kind": "word", "meaning": "加给。不要把自己不愿意承受的事强加给别人。", "reading": "shī"}
+      ]
+    }
+  ],
+  "overview": {
+    "sequence": ["学习要温习练习，也要动脑思考；不懂时诚实承认。", "每天从办事尽心、交友守信、所学温习几个方面检查自己。", "向别人的长处学习，改正自己的不足，待人时也替别人着想。"],
+    "question": "选一则用到今天的学习或相处中，你会怎样做？",
+    "answer": "例如学过新知识后自己练一次，再问一问为什么；答应朋友的事认真完成；不喜欢被别人起外号，就也尊重同学，不随便给人起外号。说明行动时，要回到相应的原句找依据。",
+    "takeaway": "读格言，不只记住好听的话。说出它是什么意思，再用一件身边的小事试着实践。"
+  },
+  "questions": [
+    {"id": "q1", "type": "choice", "skill": "meaning", "sentence": "s1", "prompt": "「不亦说乎」中的「说」怎样读、怎样理解？", "choices": ["读 yuè，愉快", "读 shuō，说话", "读 shuì，劝说"], "answer": 0, "explanation": "这里的「说」同「悦」，表示愉快。把字放回温习学习内容的情境中理解。"},
+    {"id": "q2", "type": "choice", "skill": "contrast", "sentence": "s2", "prompt": "「学而不思则罔，思而不学则殆」提醒我们怎样学习？", "choices": ["只要多背，不必思考", "只凭自己想，不用学习新知识", "把学习和思考结合起来"], "answer": 2, "explanation": "前后比较了只学不思与只思不学，两种做法都有不足，学习与思考应该相互帮助。"},
+    {"id": "q3", "type": "choice", "skill": "referent", "sentence": "s4", "prompt": "「吾日三省吾身」中的「吾」指谁？", "choices": ["孔子", "曾子", "子贡"], "answer": 1, "explanation": "先看引语前写的是「曾子曰」。这是曾子谈自己的反省，「吾」就是曾子自己。"},
+    {"id": "q4", "type": "choice", "skill": "referent", "sentence": "s5", "prompt": "看到别人不好的方面，「改之」主要提醒自己做什么？", "choices": ["只盯着别人的缺点", "要求别人先改，自己不用检查", "检查并改正自己同样的不足"], "answer": 2, "explanation": "这一则既说向别人学习，也说借别人的不足反省自己。后一个「之」要联系自己身上的相似问题理解。"},
+    {"id": "q5", "type": "selfcheck", "skill": "reason", "sentence": "s6", "prompt": "用一件与同学相处的小事，解释「己所不欲，勿施于人」。", "answer": "例如，我不喜欢别人随便给我起外号，也就不随便给同学起外号。自己不愿承受的事，也不要强加给别人。", "explanation": "情境可以不同。检查有没有说清自己的感受、对别人的行动，并与原句的意思对应。"}
+  ]
+}

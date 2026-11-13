@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "id": "wangrong",
+  "title": "王戎不取道旁李",
+  "attribution": "刘义庆组织编写《世说新语》",
+  "level": "starter",
+  "genre": "people",
+  "skills": ["meaning", "referent", "reason", "contrast", "retell"],
+  "curriculum": {"book": "4a", "label": "统编版四上"},
+  "source_ref": {"version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native", "path": "poetry/simplified/笔记杂谈/世说新语.json", "locator": "/content/5", "sha256": "d3453a94cdf8f8205701f91b27cda5386b148c9935be76d9e5e56ef86149bcbe", "anchor_text": "王戎七岁，尝与诸小儿游。"},
+  "intro": "大家都跑去摘李子，王戎为什么站着不动？沿着他看到的线索，一步步想。",
+  "background": "《世说新语》记录汉末到东晋人物的言谈和故事。这一则选自《雅量》，写王戎小时候的一次判断。",
+  "editorial_note": "分清王戎看到的现象、作出的推断和最后的验证。故事中的判断有具体情境。",
+  "source": {"work": "《世说新语》", "section": "《雅量》王戎七岁条节选", "url": "https://zh.wikisource.org/wiki/世說新語/雅量", "note": "原文沿用本项目四上教材的必背古诗文选段，仅统一引号；逐句译文和阅读提示为本专题编写。"},
+  "sentences": [
+    {"id": "s1", "text": "王戎七岁，尝与诸小儿游。", "chunks": ["王戎七岁，", "尝与诸小儿游。"], "translation": "王戎七岁的时候，曾经和许多小伙伴一起玩耍。", "explanation": "开头交代年龄和一起玩的人。「尝」在这里与品尝没有关系。", "hints": ["七岁", "尝", "游"], "notes": [
+      {"id": "chang", "quote": "尝", "kind": "word", "meaning": "曾经。这里回忆过去发生的一件事。"},
+      {"id": "zhu", "quote": "诸", "kind": "word", "meaning": "众多，各个。诸小儿就是许多小孩子。"},
+      {"id": "you", "quote": "游", "kind": "word", "meaning": "游玩，玩耍。"}
+    ]},
+    {"id": "s2", "text": "看道边李树多子折枝，诸儿竞走取之，唯戎不动。", "chunks": ["看道边李树", "多子折枝，", "诸儿竞走取之，", "唯戎不动。"], "translation": "他们看见路边的李树果实很多，压弯了树枝。小伙伴们争着跑去摘李子，只有王戎没有动。", "explanation": "一边是「竞走」，一边是「不动」，把两种反应放在一起写。", "hints": ["多子折枝", "竞走", "唯戎不动"], "notes": [
+      {"id": "duozi", "quote": "多子折枝", "kind": "word", "meaning": "果实多得压弯了树枝。「子」在这里指果实。"},
+      {"id": "jingzou", "quote": "竞走", "kind": "word", "meaning": "争着跑过去。「走」的古义是跑。"},
+      {"id": "zhi", "quote": "之", "kind": "referent", "meaning": "代替前面说的李子。", "refers_to": "路边李树上的李子", "reason": "先找前面的事物，再想大家跑过去要取什么：取的是李子。"},
+      {"id": "wei", "quote": "唯", "kind": "word", "meaning": "只有。"}
+    ]},
+    {"id": "s3", "text": "人问之，答曰：「树在道边而多子，此必苦李。」", "chunks": ["人问之，", "答曰：", "「树在道边而多子，", "此必苦李。」"], "translation": "有人问王戎为什么不去，他回答说：「树长在路边，却还有这么多果实，这一定是苦李子。」", "explanation": "路边容易被人发现，可树上仍有很多果实。王戎把这两个现象连起来，作出推断。", "supplement": "「答曰」前省略了回答的人，结合上一句可知是王戎。", "hints": ["人问之", "道边", "苦李"], "notes": [
+      {"id": "zhi", "quote": "之", "kind": "referent", "meaning": "代替被问的人。", "refers_to": "王戎", "reason": "只有王戎没去摘，别人自然要问他；这里不是问李子。"},
+      {"id": "er", "quote": "而", "kind": "word", "meaning": "这里可以理解为「却」，提醒你留意路边与多子之间的不寻常。"},
+      {"id": "ci", "quote": "此", "kind": "referent", "meaning": "这，指眼前的李子。", "refers_to": "这棵树上的李子", "reason": "后面接着「苦李」，说明王戎正在判断果实的味道。"}
+    ]},
+    {"id": "s4", "text": "取之，信然。", "chunks": ["取之，", "信然。"], "translation": "摘来李子尝一尝，果然是这样。", "explanation": "结尾用实际结果验证前面的推断。", "hints": ["取之", "信然"], "notes": [
+      {"id": "zhi", "quote": "之", "kind": "referent", "meaning": "代替被摘取的东西。", "refers_to": "李子", "reason": "「取」的对象是树上的果实，不能把前一句「问之」的解释直接搬来。"},
+      {"id": "xinran", "quote": "信然", "kind": "word", "meaning": "确实这样。「这样」是说李子果然是苦的。"}
+    ]}
+  ],
+  "overview": {"sequence": ["大家看到路边李树果实很多。", "小伙伴跑去摘，王戎先观察、思考。", "王戎推断李子是苦的，摘来后得到验证。"], "question": "王戎的判断用了哪两条线索？", "answer": "树长在容易被看见的路边，而且果实还很多。他据此猜想果实不好吃；最后「信然」写出了验证结果。", "takeaway": "介绍一个人的判断，可以按「看到了什么—怎样想—结果怎样」来讲。"},
+  "questions": [
+    {"id": "q1", "type": "choice", "skill": "meaning", "sentence": "s2", "prompt": "「竞走」在这里是什么意思？", "choices": ["争着跑过去", "慢慢走过去", "参加竞走比赛"], "answer": 0, "explanation": "结合摘李子的动作理解：孩子们争着跑去摘。「走」在这里是跑。"},
+    {"id": "q2", "type": "choice", "skill": "referent", "sentence": "s3", "prompt": "「人问之」的「之」指谁？", "choices": ["李子", "李树", "王戎"], "answer": 2, "explanation": "大家询问的是没有去摘李子的王戎。同篇中「取之」的「之」才指李子。"},
+    {"id": "q3", "type": "choice", "skill": "reason", "sentence": "s4", "prompt": "哪句话写出了对王戎推断的验证？", "choices": ["唯戎不动", "取之，信然", "王戎七岁"], "answer": 1, "explanation": "「信然」表示确实这样，说明实际结果与王戎的判断一致。"},
+    {"id": "q4", "type": "selfcheck", "skill": "retell", "sentence": "s3", "prompt": "按「观察—推断—验证」讲讲王戎的故事。", "answer": "王戎看到路边的李树还有许多果实，推断李子是苦的，所以没有去摘。摘来一尝，果然如此。", "explanation": "检查是否包含两条观察线索、苦李的推断和最后的结果。"}
+  ]
+}

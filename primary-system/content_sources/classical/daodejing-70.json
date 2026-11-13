@@ -1,0 +1,312 @@
+{
+  "schema_version": 1,
+  "id": "daodejing-70",
+  "title": "道德经·第七十章",
+  "attribution": "老子",
+  "level": "challenge",
+  "genre": "reasoning",
+  "skills": [
+    "meaning",
+    "referent",
+    "reason",
+    "contrast",
+    "retell"
+  ],
+  "curriculum": null,
+  "intro": "朴素外表与内在价值。粗布衣服里也可以怀着美玉，判断价值不能只看外表。",
+  "background": "这是《道德经》德经·第七十章。本章围绕「朴素外表与内在价值」展开，可以先读原文，再对照译文，看看作者用了什么比方或对比。",
+  "editorial_note": "本馆用逐句译解帮助入门。读「道」「无为」等词时要看上下文；古代观念和理想化比方，可以边读边与家长讨论。",
+  "source": {
+    "work": "道德经（又名老子）",
+    "section": "德经·第七十章",
+    "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#七十章",
+    "note": "原文以本机简体《老子》为底本，统一引号，第七章移去括号异文提示。译文、词义和练习为本馆编写的入门读法，参考王弼注理解，不将不同底本混作同一文本。"
+  },
+  "source_ref": {
+    "locator": "/content/69",
+    "path": "poetry/simplified/诸子百家/老子.json",
+    "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+    "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+    "anchor_text": "吾言甚易知，甚易行。天下莫能知，莫能行。言有宗，事有君。夫唯无知，是以不我知。知我者希，则我者贵。是以圣人被褐而怀玉。"
+  },
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "吾言甚易知，甚易行。",
+      "translation": "我的话本来容易理解，也容易实行。",
+      "explanation": "读词小提示：「吾」：我，本章说话者自称；「易知」：容易理解。",
+      "chunks": [
+        "吾言甚易知，",
+        "甚易行。"
+      ],
+      "hints": [
+        "吾",
+        "易知"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "吾",
+          "kind": "referent",
+          "meaning": "我，本章说话者自称。",
+          "refers_to": "本章说话者老子",
+          "reason": "本章用第一人称谈自己的言语与道理。"
+        },
+        {
+          "id": "n2",
+          "quote": "易知",
+          "kind": "word",
+          "meaning": "容易理解。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第七十章》第1句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#七十章",
+        "source_ref": {
+          "locator": "/content/69",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "吾言甚易知，甚易行。"
+        }
+      }
+    },
+    {
+      "id": "s2",
+      "text": "天下莫能知，莫能行。",
+      "translation": "天下人却往往不能理解，也不能实行。",
+      "explanation": "读词小提示：「莫能」：没有谁能够。",
+      "chunks": [
+        "天下莫能知，",
+        "莫能行。"
+      ],
+      "hints": [
+        "莫能"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "莫能",
+          "kind": "word",
+          "meaning": "没有谁能够。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第七十章》第2句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#七十章",
+        "source_ref": {
+          "locator": "/content/69",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "天下莫能知，莫能行。"
+        }
+      }
+    },
+    {
+      "id": "s3",
+      "text": "言有宗，事有君。",
+      "translation": "言语有根本，做事有纲领。",
+      "explanation": "读词小提示：「宗」：根本、宗旨；「君」：主导、纲领。",
+      "chunks": [
+        "言有宗，",
+        "事有君。"
+      ],
+      "hints": [
+        "宗",
+        "君"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "宗",
+          "kind": "word",
+          "meaning": "根本、宗旨。"
+        },
+        {
+          "id": "n2",
+          "quote": "君",
+          "kind": "word",
+          "meaning": "主导、纲领。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第七十章》第3句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#七十章",
+        "source_ref": {
+          "locator": "/content/69",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "吾言甚易知，甚易行。天下莫能知，莫能行。言有宗，事有君。夫唯无知，是以不我知。知我者希，则我者贵。是以圣人被褐而怀玉。"
+        }
+      }
+    },
+    {
+      "id": "s4",
+      "text": "夫唯无知，是以不我知。",
+      "translation": "正因为没有理解这个根本，所以不了解我。",
+      "explanation": "读词小提示：「无知」：没有理解这种根本道理；「不我知」：不了解我，古文把「我」放在「知」前面。",
+      "chunks": [
+        "夫唯无知，",
+        "是以不我知。"
+      ],
+      "hints": [
+        "无知",
+        "不我知"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "无知",
+          "kind": "word",
+          "meaning": "没有理解这种根本道理。"
+        },
+        {
+          "id": "n2",
+          "quote": "不我知",
+          "kind": "word",
+          "meaning": "不了解我，古文把「我」放在「知」前面。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第七十章》第4句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#七十章",
+        "source_ref": {
+          "locator": "/content/69",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "夫唯无知，是以不我知。"
+        }
+      }
+    },
+    {
+      "id": "s5",
+      "text": "知我者希，则我者贵。",
+      "translation": "了解我的人少，能够遵循这种道理的人更可贵。",
+      "explanation": "读词小提示：「希」：少；「则我」：效法、遵循我的道理。",
+      "chunks": [
+        "知我者希，",
+        "则我者贵。"
+      ],
+      "hints": [
+        "希",
+        "则我"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "希",
+          "kind": "word",
+          "meaning": "少。"
+        },
+        {
+          "id": "n2",
+          "quote": "则我",
+          "kind": "word",
+          "meaning": "效法、遵循我的道理。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第七十章》第5句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#七十章",
+        "source_ref": {
+          "locator": "/content/69",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "知我者希，则我者贵。"
+        }
+      }
+    },
+    {
+      "id": "s6",
+      "text": "是以圣人被褐而怀玉。",
+      "translation": "因此，有智慧的人像穿粗布衣服却怀藏美玉。",
+      "explanation": "粗布和美玉一外一内，突出的是内在价值不由外表决定。",
+      "chunks": [
+        "是以圣人被褐而怀玉。"
+      ],
+      "hints": [
+        "被褐",
+        "怀玉"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "被褐",
+          "kind": "word",
+          "meaning": "穿着粗布衣服。",
+          "reading": "pī hè"
+        },
+        {
+          "id": "n2",
+          "quote": "怀玉",
+          "kind": "word",
+          "meaning": "怀藏美玉，比喻内在有可贵的品德。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第七十章》第6句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#七十章",
+        "source_ref": {
+          "locator": "/content/69",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "是以圣人被褐而怀玉。"
+        }
+      }
+    }
+  ],
+  "overview": {
+    "sequence": [
+      "先看本章开头：我的话本来容易理解，也容易实行。",
+      "粗布衣服里也可以怀着美玉，判断价值不能只看外表。",
+      "再回到结尾：因此，有智慧的人像穿粗布衣服却怀藏美玉。"
+    ],
+    "question": "这一章为什么可以叫作「朴素外表与内在价值」？",
+    "answer": "粗布衣服里也可以怀着美玉，判断价值不能只看外表。可以引用本章开头或结尾的原句，说明你的依据。",
+    "takeaway": "粗布衣服里也可以怀着美玉，判断价值不能只看外表。"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "choice",
+      "sentence": "s1",
+      "skill": "meaning",
+      "prompt": "开头的「吾」在这里怎样理解？",
+      "choices": [
+        "只顾自己，不留意他人的处境。",
+        "我，本章说话者自称。",
+        "为了显示本领而处处炫耀。"
+      ],
+      "answer": 1,
+      "explanation": "把词放回原句看，「吾」在本句中的意思是：我，本章说话者自称。"
+    },
+    {
+      "id": "q2",
+      "type": "choice",
+      "sentence": "s6",
+      "skill": "reason",
+      "prompt": "读完「朴素外表与内在价值」，哪一种理解更合适？",
+      "choices": [
+        "为达到自己的目标，可以不顾别人。",
+        "无论什么情况，都应该争着抢先。",
+        "粗布衣服里也可以怀着美玉，判断价值不能只看外表。"
+      ],
+      "answer": 2,
+      "explanation": "粗布衣服里也可以怀着美玉，判断价值不能只看外表。"
+    },
+    {
+      "id": "q3",
+      "type": "selfcheck",
+      "sentence": "s6",
+      "skill": "retell",
+      "prompt": "选本章一句话，用自己的话解释，再说说它怎样帮助你理解「朴素外表与内在价值」。",
+      "answer": "先说清原句中的对象和动作，再解释关键词。可以围绕这点来讲：粗布衣服里也可以怀着美玉，判断价值不能只看外表。说完后，回到原文找一句作依据。",
+      "explanation": "不必背诵译文。重点看词义是否放回本句、有没有原文依据，以及是否把古人的比方误当成不分条件的结论。"
+    }
+  ]
+}

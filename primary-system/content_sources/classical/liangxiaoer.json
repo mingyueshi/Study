@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "id": "liangxiaoer",
+  "title": "两小儿辩日",
+  "attribution": "《列子》",
+  "level": "challenge",
+  "genre": "reasoning",
+  "skills": ["meaning", "referent", "reason", "contrast", "retell"],
+  "curriculum": null,
+  "source_ref": {"version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native", "path": "poetry/simplified/诸子百家/列子.json", "locator": "/content/4", "sha256": "760b950fddf73d01c905971e7b3565fc010d320c8db44502735c24cfc174fceb", "anchor_text": "孔子东游，见两小儿辩斗。"},
+  "intro": "两个孩子都观察了太阳，却得出不同判断。先把「看到或感到什么」与「因此认为怎样」分开。",
+  "background": "故事选自《列子·汤问》。两个孩子围绕太阳早晨和中午离人远近展开争论，孔子也参与其中。",
+  "editorial_note": "文中两人的话是人物的判断。太阳看起来的大小与天气冷热，不能单独用来断定太阳离人的远近。",
+  "source": {"work": "《列子》", "section": "《汤问》孔子东游条节选", "url": "https://zh.wikisource.org/wiki/列子/湯問", "note": "采用常见教学选段，末句保留「知」字，注为同「智」；现代标点，未登记教材册次。"},
+  "sentences": [
+    {"id": "s1", "text": "孔子东游，见两小儿辩斗，问其故。", "chunks": ["孔子东游，", "见两小儿辩斗，", "问其故。"], "translation": "孔子到东方游历，见两个孩子在争辩，就问他们争辩的原因。", "explanation": "「辩斗」说的是争论，先别把它想成动手打架。", "hints": ["东游", "辩斗", "问其故"], "notes": [
+      {"id": "biandou", "quote": "辩斗", "kind": "word", "meaning": "争辩，争论。"},
+      {"id": "qi", "quote": "其", "kind": "referent", "meaning": "他们争辩这件事的。", "refers_to": "两个孩子的争辩", "reason": "孔子刚看见他们争论，接着询问争论的缘由。"},
+      {"id": "gu", "quote": "故", "kind": "word", "meaning": "原因。这里与「故为精卫」中表示因此的用法不同。"}
+    ]},
+    {"id": "s2", "text": "一儿曰：「我以日始出时去人近，而日中时远也。」", "chunks": ["一儿曰：", "「我以日始出时", "去人近，", "而日中时远也。」"], "translation": "一个孩子说：「我认为太阳刚出来时离人近，中午时离人远。」", "explanation": "先记录第一个孩子的判断，再往后找他提出的依据。", "hints": ["日始出", "近", "日中", "远"], "notes": [
+      {"id": "yi", "quote": "以", "kind": "word", "meaning": "认为。"},
+      {"id": "qu", "quote": "去", "kind": "word", "meaning": "距离。这里不是离开的意思。"},
+      {"id": "rizhong", "quote": "日中", "kind": "word", "meaning": "中午。"}
+    ]},
+    {"id": "s3", "text": "一儿曰：「我以日初出远，而日中时近也。」", "chunks": ["一儿曰：", "「我以日初出远，", "而日中时近也。」"], "translation": "另一个孩子说：「我认为太阳刚出来时离人远，中午时离人近。」", "explanation": "这与第一个孩子的判断正好相反，注意把两人的观点配对。", "hints": ["初出远", "日中时近"], "notes": [{"id": "chu", "quote": "初", "kind": "word", "meaning": "刚刚。日初出就是太阳刚升起来。"}]},
+    {"id": "s4", "text": "一儿曰：「日初出大如车盖，及日中则如盘盂，此不为远者小而近者大乎？」", "chunks": ["一儿曰：", "「日初出大如车盖，", "及日中则如盘盂，", "此不为", "远者小而近者大乎？」"], "translation": "第一个孩子说：「太阳刚出来时大得像车盖，到了中午就像盘子。这不是远的看起来小、近的看起来大吗？」", "explanation": "他用看起来的大小作依据，由大推近、由小推远。这是人物的推论。", "hints": ["车盖", "盘盂", "远者小", "近者大"], "notes": [
+      {"id": "ji", "quote": "及", "kind": "word", "meaning": "到，等到。"},
+      {"id": "panyu", "quote": "盘盂", "kind": "word", "meaning": "盛东西的器皿，这里用来比喻看起来的形状与大小。", "reading": "pán yú"},
+      {"id": "ci", "quote": "此", "kind": "referent", "meaning": "这。", "refers_to": "他描述的太阳早晨看着大、中午看着小的现象", "reason": "「此」承接前面的大小对比，然后引出远近判断。"}
+    ]},
+    {"id": "s5", "text": "一儿曰：「日初出沧沧凉凉，及其日中如探汤，此不为近者热而远者凉乎？」", "chunks": ["一儿曰：", "「日初出沧沧凉凉，", "及其日中如探汤，", "此不为", "近者热而远者凉乎？」"], "translation": "另一个孩子说：「太阳刚出来时清凉，到了中午热得像把手伸进热水。这不是近的热、远的凉吗？」", "explanation": "他用冷热感受作依据，由热推近、由凉推远。把它与大小的依据分开记录。", "hints": ["沧沧凉凉", "探汤", "近者热", "远者凉"], "notes": [
+      {"id": "cang", "quote": "沧沧凉凉", "kind": "word", "meaning": "清凉的样子。", "reading": "cāng cāng liáng liáng"},
+      {"id": "tang", "quote": "汤", "kind": "word", "meaning": "热水。「探汤」就是把手伸向热水，用来形容热。"},
+      {"id": "ci", "quote": "此", "kind": "referent", "meaning": "这。", "refers_to": "早晨凉、中午热的感受", "reason": "「此」接着本句的冷热比较，与上一句的「此」所指内容不同。"}
+    ]},
+    {"id": "s6", "text": "孔子不能决也。", "chunks": ["孔子", "不能决也。"], "translation": "孔子不能判定他们谁说得对。", "explanation": "文中没有让孔子随意选一方。遇到不能确定的问题，可以先承认还不知道。", "hints": ["孔子", "不能决"], "notes": [{"id": "jue", "quote": "决", "kind": "word", "meaning": "判定，判断。"}]},
+    {"id": "s7", "text": "两小儿笑曰：「孰为汝多知乎？」", "chunks": ["两小儿笑曰：", "「孰为汝多知乎？」"], "translation": "两个孩子笑着说：「谁说你知识渊博呢？」", "explanation": "这是故事里孩子的话。把结尾与孔子承认无法判断放在一起，想想求知应该怎样面对疑问。", "hints": ["孰", "汝", "多知"], "notes": [
+      {"id": "shu", "quote": "孰", "kind": "word", "meaning": "谁。", "reading": "shú"},
+      {"id": "ru", "quote": "汝", "kind": "referent", "meaning": "你。", "refers_to": "孔子", "reason": "孩子们正对着没有作出判定的孔子说话。", "reading": "rǔ"},
+      {"id": "zhi", "quote": "知", "kind": "word", "meaning": "同「智」，这里与知识、智慧有关。", "reading": "zhì"}
+    ]}
+  ],
+  "overview": {"sequence": ["两个孩子提出相反的太阳远近判断。", "一个根据视觉大小，另一个根据冷热感受。", "孔子没有判定谁对，故事留下继续求知的问题。"], "question": "两个孩子用了什么依据？有了依据就一定判断正确吗？", "answer": "一个用看起来的大小，一个用冷热感受。有观察还需要检查解释是否充分，不能仅凭这些现象断定太阳离人的远近。", "takeaway": "讨论问题时，把观察与解释分开；依据不够时，继续查证也是认真求知。"},
+  "questions": [
+    {"id": "q1", "type": "choice", "skill": "meaning", "sentence": "s5", "prompt": "「探汤」中的「汤」是什么意思？", "choices": ["菜汤", "热水", "河流"], "answer": 1, "explanation": "「汤」的古义是热水。放回句中，是用伸手接近热水形容中午的热。"},
+    {"id": "q2", "type": "choice", "skill": "contrast", "sentence": "s4", "prompt": "两个孩子分别用什么现象支持自己的判断？", "choices": ["看起来的大小、冷热感受", "太阳的颜色、月亮的形状", "风向、树的高矮"], "answer": 0, "explanation": "车盖与盘盂是大小比较，凉与探汤是冷热比较，先分清各自依据。"},
+    {"id": "q3", "type": "choice", "skill": "reason", "sentence": "s6", "prompt": "怎样理解「孔子不能决也」？", "choices": ["有名的人必须随便给个答案", "两个孩子的判断都已得到证明", "孔子没有判定谁对，还需要进一步求证"], "answer": 2, "explanation": "原文只写不能判定，没有替任何一方证实。面对疑问，要允许暂时不知道。"},
+    {"id": "q4", "type": "selfcheck", "skill": "retell", "sentence": "s5", "prompt": "分别用「他观察到……因此认为……」概括两人的想法。", "answer": "一人观察到早晨看着大，因此认为早近午远；另一人感到早凉午热，因此认为早远午近。这些是人物的推论，还需要查证。", "explanation": "检查是否把每个人的观察和判断配对，并把人物推论与确定事实分开。"}
+  ]
+}

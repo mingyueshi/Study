@@ -1,0 +1,375 @@
+{
+  "schema_version": 1,
+  "id": "daodejing-30",
+  "title": "道德经·第三十章",
+  "attribution": "老子",
+  "level": "challenge",
+  "genre": "reasoning",
+  "skills": [
+    "meaning",
+    "referent",
+    "reason",
+    "contrast",
+    "retell"
+  ],
+  "curriculum": null,
+  "intro": "战争的代价。本章从荆棘、荒年写战争的代价，反对靠武力逞强。",
+  "background": "这是《道德经》道经·第三十章。本章围绕「战争的代价」展开，可以先读原文，再对照译文，看看作者用了什么比方或对比。",
+  "editorial_note": "本馆用逐句译解帮助入门。读「道」「无为」等词时要看上下文；古代观念和理想化比方，可以边读边与家长讨论。",
+  "source": {
+    "work": "道德经（又名老子）",
+    "section": "道经·第三十章",
+    "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#三十章",
+    "note": "原文以本机简体《老子》为底本，统一引号，第七章移去括号异文提示。译文、词义和练习为本馆编写的入门读法，参考王弼注理解，不将不同底本混作同一文本。"
+  },
+  "source_ref": {
+    "locator": "/content/29",
+    "path": "poetry/simplified/诸子百家/老子.json",
+    "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+    "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+    "anchor_text": "以道佐人主者，不以兵强天下。其事好还。师之所处，荆棘生焉。大军之后，必有凶年。善者果而已，不敢以取强。果而勿矜，果而勿伐，果而勿骄。果而不得已，果而勿强。物壮则老，是谓不道，不道早已。"
+  },
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "以道佐人主者，不以兵强天下。",
+      "translation": "依道辅佐君主的人，不靠武力向天下逞强。",
+      "explanation": "读词小提示：「佐」：辅佐、帮助；「兵」：军队、战争。",
+      "chunks": [
+        "以道佐人主者，",
+        "不以兵强天下。"
+      ],
+      "hints": [
+        "佐",
+        "兵"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "佐",
+          "kind": "word",
+          "meaning": "辅佐、帮助。"
+        },
+        {
+          "id": "n2",
+          "quote": "兵",
+          "kind": "word",
+          "meaning": "军队、战争。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第三十章》第1句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#三十章",
+        "source_ref": {
+          "locator": "/content/29",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "以道佐人主者，不以兵强天下。"
+        }
+      }
+    },
+    {
+      "id": "s2",
+      "text": "其事好还。",
+      "translation": "这样的武力行为容易引来报复。",
+      "explanation": "读词小提示：「好还」：容易招来反过来的报复。",
+      "chunks": [
+        "其事好还。"
+      ],
+      "hints": [
+        "好还"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "好还",
+          "kind": "word",
+          "meaning": "容易招来反过来的报复。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第三十章》第2句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#三十章",
+        "source_ref": {
+          "locator": "/content/29",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "以道佐人主者，不以兵强天下。其事好还。师之所处，荆棘生焉。大军之后，必有凶年。善者果而已，不敢以取强。果而勿矜，果而勿伐，果而勿骄。果而不得已，果而勿强。物壮则老，是谓不道，不道早已。"
+        }
+      }
+    },
+    {
+      "id": "s3",
+      "text": "师之所处，荆棘生焉。",
+      "translation": "军队驻扎的地方，田地荒芜，荆棘丛生。",
+      "explanation": "读词小提示：「师」：军队。",
+      "chunks": [
+        "师之所处，",
+        "荆棘生焉。"
+      ],
+      "hints": [
+        "师"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "师",
+          "kind": "word",
+          "meaning": "军队。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第三十章》第3句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#三十章",
+        "source_ref": {
+          "locator": "/content/29",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "师之所处，荆棘生焉。"
+        }
+      }
+    },
+    {
+      "id": "s4",
+      "text": "大军之后，必有凶年。",
+      "translation": "大战之后，常有困苦的年景。",
+      "explanation": "读词小提示：「凶年」：收成不好、生活困难的年景。",
+      "chunks": [
+        "大军之后，",
+        "必有凶年。"
+      ],
+      "hints": [
+        "凶年"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "凶年",
+          "kind": "word",
+          "meaning": "收成不好、生活困难的年景。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第三十章》第4句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#三十章",
+        "source_ref": {
+          "locator": "/content/29",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "大军之后，必有凶年。"
+        }
+      }
+    },
+    {
+      "id": "s5",
+      "text": "善者果而已，不敢以取强。",
+      "translation": "善于处理的人达到必要目的就停，不敢借此逞强。",
+      "explanation": "读词小提示：「果」：达到必要的目的；「取强」：逞强称霸。",
+      "chunks": [
+        "善者果而已，",
+        "不敢以取强。"
+      ],
+      "hints": [
+        "果",
+        "取强"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "果",
+          "kind": "word",
+          "meaning": "达到必要的目的。"
+        },
+        {
+          "id": "n2",
+          "quote": "取强",
+          "kind": "word",
+          "meaning": "逞强称霸。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第三十章》第5句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#三十章",
+        "source_ref": {
+          "locator": "/content/29",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "善者果而已，不敢以取强。"
+        }
+      }
+    },
+    {
+      "id": "s6",
+      "text": "果而勿矜，果而勿伐，果而勿骄。",
+      "translation": "达到目的而不自夸、不夸功、不骄傲。",
+      "explanation": "读词小提示：「果」：达到必要的目的；「矜」：自夸。",
+      "chunks": [
+        "果而勿矜，",
+        "果而勿伐，",
+        "果而勿骄。"
+      ],
+      "hints": [
+        "果",
+        "矜",
+        "伐"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "果",
+          "kind": "word",
+          "meaning": "达到必要的目的。"
+        },
+        {
+          "id": "n2",
+          "quote": "矜",
+          "kind": "word",
+          "meaning": "自夸。"
+        },
+        {
+          "id": "n3",
+          "quote": "伐",
+          "kind": "word",
+          "meaning": "夸功。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第三十章》第6句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#三十章",
+        "source_ref": {
+          "locator": "/content/29",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "果而勿矜，果而勿伐，果而勿骄。"
+        }
+      }
+    },
+    {
+      "id": "s7",
+      "text": "果而不得已，果而勿强。",
+      "translation": "是不得已才行动，达到目的以后不再逞强。",
+      "explanation": "读词小提示：「果」：达到必要的目的；「不得已」：没有别的办法。",
+      "chunks": [
+        "果而不得已，",
+        "果而勿强。"
+      ],
+      "hints": [
+        "果",
+        "不得已"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "果",
+          "kind": "word",
+          "meaning": "达到必要的目的。"
+        },
+        {
+          "id": "n2",
+          "quote": "不得已",
+          "kind": "word",
+          "meaning": "没有别的办法。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第三十章》第7句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#三十章",
+        "source_ref": {
+          "locator": "/content/29",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "果而不得已，果而勿强。"
+        }
+      }
+    },
+    {
+      "id": "s8",
+      "text": "物壮则老，是谓不道，不道早已。",
+      "translation": "事物过分强盛就会走向衰老，这叫作不合于道，不合于道容易过早衰败。",
+      "explanation": "读词小提示：「早已」：过早停止、衰败。",
+      "chunks": [
+        "物壮则老，",
+        "是谓不道，",
+        "不道早已。"
+      ],
+      "hints": [
+        "早已"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "早已",
+          "kind": "word",
+          "meaning": "过早停止、衰败。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第三十章》第8句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#三十章",
+        "source_ref": {
+          "locator": "/content/29",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "物壮则老，是谓不道，不道早已。"
+        }
+      }
+    }
+  ],
+  "overview": {
+    "sequence": [
+      "先看本章开头：依道辅佐君主的人，不靠武力向天下逞强。",
+      "本章从荆棘、荒年写战争的代价，反对靠武力逞强。",
+      "再回到结尾：事物过分强盛就会走向衰老，这叫作不合于道，不合于道容易过早衰败。"
+    ],
+    "question": "这一章为什么可以叫作「战争的代价」？",
+    "answer": "本章从荆棘、荒年写战争的代价，反对靠武力逞强。可以引用本章开头或结尾的原句，说明你的依据。",
+    "takeaway": "本章从荆棘、荒年写战争的代价，反对靠武力逞强。"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "choice",
+      "sentence": "s1",
+      "skill": "meaning",
+      "prompt": "开头的「佐」在这里怎样理解？",
+      "choices": [
+        "辅佐、帮助。",
+        "只顾自己，不留意他人的处境。",
+        "为了显示本领而处处炫耀。"
+      ],
+      "answer": 0,
+      "explanation": "把词放回原句看，「佐」在本句中的意思是：辅佐、帮助。"
+    },
+    {
+      "id": "q2",
+      "type": "choice",
+      "sentence": "s8",
+      "skill": "reason",
+      "prompt": "读完「战争的代价」，哪一种理解更合适？",
+      "choices": [
+        "为达到自己的目标，可以不顾别人。",
+        "本章从荆棘、荒年写战争的代价，反对靠武力逞强。",
+        "无论什么情况，都应该争着抢先。"
+      ],
+      "answer": 1,
+      "explanation": "本章从荆棘、荒年写战争的代价，反对靠武力逞强。"
+    },
+    {
+      "id": "q3",
+      "type": "selfcheck",
+      "sentence": "s8",
+      "skill": "retell",
+      "prompt": "选本章一句话，用自己的话解释，再说说它怎样帮助你理解「战争的代价」。",
+      "answer": "先说清原句中的对象和动作，再解释关键词。可以围绕这点来讲：本章从荆棘、荒年写战争的代价，反对靠武力逞强。说完后，回到原文找一句作依据。",
+      "explanation": "不必背诵译文。重点看词义是否放回本句、有没有原文依据，以及是否把古人的比方误当成不分条件的结论。"
+    }
+  ]
+}

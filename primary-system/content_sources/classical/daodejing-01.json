@@ -1,0 +1,302 @@
+{
+  "schema_version": 1,
+  "id": "daodejing-01",
+  "title": "道德经·第一章",
+  "attribution": "老子",
+  "level": "challenge",
+  "genre": "reasoning",
+  "skills": [
+    "meaning",
+    "referent",
+    "reason",
+    "contrast",
+    "retell"
+  ],
+  "curriculum": null,
+  "intro": "名字与道理。名字能帮助我们说话，却不能代替对事物的继续观察。",
+  "background": "这是《道德经》道经·第一章。本章围绕「名字与道理」展开，可以先读原文，再对照译文，看看作者用了什么比方或对比。",
+  "editorial_note": "本馆用逐句译解帮助入门。读「道」「无为」等词时要看上下文；古代观念和理想化比方，可以边读边与家长讨论。",
+  "source": {
+    "work": "道德经（又名老子）",
+    "section": "道经·第一章",
+    "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#一章",
+    "note": "原文以本机简体《老子》为底本，统一引号，第七章移去括号异文提示。译文、词义和练习为本馆编写的入门读法，参考王弼注理解，不将不同底本混作同一文本。"
+  },
+  "source_ref": {
+    "locator": "/content/0",
+    "path": "poetry/simplified/诸子百家/老子.json",
+    "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+    "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+    "anchor_text": "道可道，非常道；名可名，非常名。无名天地之始，有名万物之母。故常无欲以观其妙；常有欲以观其徼。此两者同出而异名，同谓之玄。玄之又玄，众妙之门。"
+  },
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "道可道，非常道；名可名，非常名。",
+      "translation": "可以讲述的道理，并不就是恒常的道；可以叫出的名称，也不就是恒常的名。",
+      "explanation": "两个「道」和两个「名」的用法不同，前一个是所讨论的对象，后一个是讲述或命名的动作。",
+      "chunks": [
+        "道可道，",
+        "非常道；",
+        "名可名，",
+        "非常名。"
+      ],
+      "hints": [
+        "道",
+        "可道",
+        "名"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "道",
+          "kind": "word",
+          "meaning": "这里指万物运行的根本道理。"
+        },
+        {
+          "id": "n2",
+          "quote": "可道",
+          "kind": "word",
+          "meaning": "可以用言语说明。"
+        },
+        {
+          "id": "n3",
+          "quote": "名",
+          "kind": "word",
+          "meaning": "名称。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第一章》第1句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#一章",
+        "source_ref": {
+          "locator": "/content/0",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "道可道，非常道；名可名，非常名。"
+        }
+      }
+    },
+    {
+      "id": "s2",
+      "text": "无名天地之始，有名万物之母。",
+      "translation": "不加名称，是说天地的开端；有了名称，是说万物生成的根源。",
+      "explanation": "读词小提示：「名」：名称；「有名」：事物有了名称、可以分辨的状态。",
+      "chunks": [
+        "无名天地之始，",
+        "有名万物之母。"
+      ],
+      "hints": [
+        "名",
+        "有名"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "名",
+          "kind": "word",
+          "meaning": "名称。"
+        },
+        {
+          "id": "n2",
+          "quote": "有名",
+          "kind": "word",
+          "meaning": "事物有了名称、可以分辨的状态。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第一章》第2句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#一章",
+        "source_ref": {
+          "locator": "/content/0",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "无名天地之始，有名万物之母。"
+        }
+      }
+    },
+    {
+      "id": "s3",
+      "text": "故常无欲以观其妙；常有欲以观其徼。",
+      "translation": "所以，少一些欲求，可以观察其中细微的道理；带着欲求，也可以观察它显露的边界。",
+      "explanation": "读词小提示：「妙」：细微而深远的地方；「徼」：边界、显露出来的迹象。",
+      "chunks": [
+        "故常无欲以观其妙；",
+        "常有欲以观其徼。"
+      ],
+      "hints": [
+        "妙",
+        "徼"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "妙",
+          "kind": "word",
+          "meaning": "细微而深远的地方。"
+        },
+        {
+          "id": "n2",
+          "quote": "徼",
+          "kind": "word",
+          "meaning": "边界、显露出来的迹象。",
+          "reading": "jiào"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第一章》第3句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#一章",
+        "source_ref": {
+          "locator": "/content/0",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "故常无欲以观其妙；常有欲以观其徼。"
+        }
+      }
+    },
+    {
+      "id": "s4",
+      "text": "此两者同出而异名，同谓之玄。",
+      "translation": "这两个方面出自同一根源，名称却不同，都可以说是幽深的。",
+      "explanation": "读词小提示：「名」：名称；「此两者」：前文并举的两个方面。",
+      "chunks": [
+        "此两者同出而异名，",
+        "同谓之玄。"
+      ],
+      "hints": [
+        "名",
+        "此两者",
+        "玄"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "名",
+          "kind": "word",
+          "meaning": "名称。"
+        },
+        {
+          "id": "n2",
+          "quote": "此两者",
+          "kind": "word",
+          "meaning": "前文并举的两个方面。"
+        },
+        {
+          "id": "n3",
+          "quote": "玄",
+          "kind": "word",
+          "meaning": "幽深，不容易一下子看清。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第一章》第4句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#一章",
+        "source_ref": {
+          "locator": "/content/0",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "此两者同出而异名，同谓之玄。"
+        }
+      }
+    },
+    {
+      "id": "s5",
+      "text": "玄之又玄，众妙之门。",
+      "translation": "幽深而又幽深，好像是通往许多微妙道理的入口。",
+      "explanation": "「门」不是一扇真的门，而是帮助读者理解的比方。",
+      "chunks": [
+        "玄之又玄，",
+        "众妙之门。"
+      ],
+      "hints": [
+        "妙",
+        "玄",
+        "门"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "妙",
+          "kind": "word",
+          "meaning": "细微而深远的地方。"
+        },
+        {
+          "id": "n2",
+          "quote": "玄",
+          "kind": "word",
+          "meaning": "幽深，不容易一下子看清。"
+        },
+        {
+          "id": "n3",
+          "quote": "门",
+          "kind": "word",
+          "meaning": "入口，这里是比方。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第一章》第5句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#一章",
+        "source_ref": {
+          "locator": "/content/0",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "玄之又玄，众妙之门。"
+        }
+      }
+    }
+  ],
+  "overview": {
+    "sequence": [
+      "先看本章开头：可以讲述的道理，并不就是恒常的道；可以叫出的名称，也不就是恒常的名。",
+      "名字能帮助我们说话，却不能代替对事物的继续观察。",
+      "再回到结尾：幽深而又幽深，好像是通往许多微妙道理的入口。"
+    ],
+    "question": "这一章为什么可以叫作「名字与道理」？",
+    "answer": "名字能帮助我们说话，却不能代替对事物的继续观察。可以引用本章开头或结尾的原句，说明你的依据。",
+    "takeaway": "名字能帮助我们说话，却不能代替对事物的继续观察。"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "choice",
+      "sentence": "s1",
+      "skill": "meaning",
+      "prompt": "开头的「道」在这里怎样理解？",
+      "choices": [
+        "只顾自己，不留意他人的处境。",
+        "这里指万物运行的根本道理。",
+        "为了显示本领而处处炫耀。"
+      ],
+      "answer": 1,
+      "explanation": "把词放回原句看，「道」在本句中的意思是：这里指万物运行的根本道理。"
+    },
+    {
+      "id": "q2",
+      "type": "choice",
+      "sentence": "s5",
+      "skill": "reason",
+      "prompt": "读完「名字与道理」，哪一种理解更合适？",
+      "choices": [
+        "无论什么情况，都应该争着抢先。",
+        "做事情永远越多越快越好。",
+        "名字能帮助我们说话，却不能代替对事物的继续观察。"
+      ],
+      "answer": 2,
+      "explanation": "名字能帮助我们说话，却不能代替对事物的继续观察。"
+    },
+    {
+      "id": "q3",
+      "type": "selfcheck",
+      "sentence": "s5",
+      "skill": "retell",
+      "prompt": "选本章一句话，用自己的话解释，再说说它怎样帮助你理解「名字与道理」。",
+      "answer": "先说清原句中的对象和动作，再解释关键词。可以围绕这点来讲：名字能帮助我们说话，却不能代替对事物的继续观察。说完后，回到原文找一句作依据。",
+      "explanation": "不必背诵译文。重点看词义是否放回本句、有没有原文依据，以及是否把古人的比方误当成不分条件的结论。"
+    }
+  ]
+}

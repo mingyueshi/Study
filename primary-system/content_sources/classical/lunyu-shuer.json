@@ -1,0 +1,1811 @@
+{
+  "schema_version": 1,
+  "id": "lunyu-shuer",
+  "title": "论语·述而",
+  "unit_label": "则",
+  "attribution": "孔子及其弟子言行，弟子与再传弟子编纂",
+  "level": "challenge",
+  "genre": "reasoning",
+  "skills": [
+    "meaning",
+    "referent",
+    "reason",
+    "contrast"
+  ],
+  "curriculum": null,
+  "intro": "从孔子的言行中，找出勤学、善教、从人之长的线索。",
+  "background": "这是《论语》二十篇中的第7篇，话题围绕老师怎样学，怎样教展开。篇名取自开头的字，并不表示每一则都只讲同一个题目。",
+  "editorial_note": "每次可以只读一两则。分段依本机原典，共二十篇、五百一十三则；其他版本的分章和个别用字可能不同。古代身份、礼制和观念要结合当时背景来理解。",
+  "source": {
+    "work": "论语",
+    "section": "述而篇",
+    "url": "https://zh.wikisource.org/wiki/論語/述而第七",
+    "note": "原文采用随项目保存的简体原典，统一引号样式。译文和部分词义据所列译注资料整理，疑难处配合本篇提示阅读。"
+  },
+  "source_ref": {
+    "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+    "path": "poetry/simplified/儒家经典/论语.json",
+    "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+    "locator": "/content/6",
+    "anchor_text": "子曰：“述而不作，信而好古，窃比于我老彭。”"
+  },
+  "edition": {
+    "label": "译注参考：ieduer/lunyu 所收《论语译注》资料",
+    "url": "https://github.com/ieduer/lunyu/blob/44f039ef8174b219b5f773a156b3d954ee65be25/data/dialogues.json",
+    "revision": "44f039ef8174b219b5f773a156b3d954ee65be25",
+    "license": "MIT，许可副本随内容源保存",
+    "note": "采用固定版本的译注，去除重复条目与注号，逐则配回本馆原文；词义保留简短释义，补充课堂提示。乡党两则分配译文，颜渊第二十则依完整原文呈现。"
+  },
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "子曰：「述而不作，信而好古，窃比于我老彭。」",
+      "translation": "孔子说：「阐述而不创作，以相信的态度喜爱古代文化，我私自和我那老彭相比。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "作",
+          "kind": "word",
+          "meaning": "创作，这里指创立新的学说。"
+        },
+        {
+          "id": "n2",
+          "quote": "老彭",
+          "kind": "word",
+          "meaning": "人名。"
+        },
+        {
+          "id": "n3",
+          "quote": "我",
+          "meaning": "第一人称，意思是我。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "这一段接在「子曰」之后，尚未转述别人的话，指正在说话的孔子。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「述而不作，",
+        "信而好古，",
+        "窃比于我老彭。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·述而》第1则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/述而第七",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/6",
+          "anchor_text": "子曰：“述而不作，信而好古，窃比于我老彭。”"
+        }
+      },
+      "explanation": "「作」：创作，这里指创立新的学说；「老彭」：人名。",
+      "hints": [
+        "作",
+        "老彭"
+      ],
+      "translation_entry": 151
+    },
+    {
+      "id": "s2",
+      "text": "子曰：「默而识之，学而不厌，诲人不倦，何有于我哉？」",
+      "translation": "孔子说：「（把所见所闻的）默默地记在心里，努力学习而不厌弃，教导别人而不疲倦，这些事情我做到了哪些呢？」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "识",
+          "kind": "word",
+          "meaning": "音志，zhì，记住。"
+        },
+        {
+          "id": "n2",
+          "quote": "何有于我哉",
+          "kind": "word",
+          "meaning": "「何有」在古代是一常用语，在不同场合表示不同意义。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「默而识之，",
+        "学而不厌，",
+        "诲人不倦，",
+        "何有于我哉？",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·述而》第2则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/述而第七",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/6",
+          "anchor_text": "子曰：“默而识之，学而不厌，诲人不倦，何有于我哉？”"
+        }
+      },
+      "explanation": "「识」：音志，zhì，记住；「何有于我哉」：「何有」在古代是一常用语，在不同场合表示不同意义。",
+      "hints": [
+        "识",
+        "何有于我哉"
+      ],
+      "translation_entry": 152
+    },
+    {
+      "id": "s3",
+      "text": "子曰：「德之不修，学之不讲，闻义不能徙，不善不能改，是吾忧也。」",
+      "translation": "孔子说：「品德不培养；学问不讲习；听到义在那里，却不能亲身赴之；有缺点不能改正，这些都是我的忧虑哩！」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "徙",
+          "kind": "word",
+          "meaning": "迁移，这里指向好的方向改变。"
+        },
+        {
+          "id": "n2",
+          "quote": "吾",
+          "meaning": "第一人称，意思是我。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "这一段接在「子曰」之后，尚未转述别人的话，指正在说话的孔子。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「德之不修，",
+        "学之不讲，",
+        "闻义不能徙，",
+        "不善不能改，",
+        "是吾忧也。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·述而》第3则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/述而第七",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/6",
+          "anchor_text": "子曰：“德之不修，学之不讲，闻义不能徙，不善不能改，是吾忧也。”"
+        }
+      },
+      "explanation": "四件忧虑都落在自己能做的事上：修养、学习、从善、改过。",
+      "hints": [
+        "徙"
+      ],
+      "translation_entry": 153
+    },
+    {
+      "id": "s4",
+      "text": "子之燕居，申申如也，夭夭如也。",
+      "translation": "孔子在家闲居，很整齐的，很和乐而舒展的。",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "申申",
+          "kind": "word",
+          "meaning": "整敕之貌。"
+        },
+        {
+          "id": "n2",
+          "quote": "夭夭",
+          "kind": "word",
+          "meaning": "和舒之貌。"
+        }
+      ],
+      "chunks": [
+        "子之燕居，",
+        "申申如也，",
+        "夭夭如也。"
+      ],
+      "reference": {
+        "label": "《论语·述而》第4则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/述而第七",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/6",
+          "anchor_text": "子之燕居，申申如也，夭夭如也。"
+        }
+      },
+      "explanation": "「申申」：整敕之貌；「夭夭」：和舒之貌。",
+      "hints": [
+        "申申",
+        "夭夭"
+      ],
+      "translation_entry": 154
+    },
+    {
+      "id": "s5",
+      "text": "子曰：「甚矣吾衰也！久矣吾不复梦见周公。」",
+      "translation": "孔子说：「我衰老得多么厉害呀！我好长时间没再梦见周公了！」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "周公",
+          "kind": "word",
+          "meaning": "姓姬，名旦，周文王的儿子，武王的弟弟，成王的叔父，鲁国的始祖，又是孔子心目中最敬服的古代圣人之一。"
+        },
+        {
+          "id": "n2",
+          "quote": "吾",
+          "meaning": "第一人称，意思是我。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "这一段接在「子曰」之后，尚未转述别人的话，指正在说话的孔子。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「甚矣吾衰也！",
+        "久矣吾不复梦见周公。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·述而》第5则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/述而第七",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/6",
+          "anchor_text": "子曰：“甚矣吾衰也！久矣吾不复梦见周公。”"
+        }
+      },
+      "explanation": "「周公」：姓姬，名旦，周文王的儿子，武王的弟弟，成王的叔父，鲁国的始祖，又是孔子心目中最敬服的古代圣人之一。",
+      "hints": [
+        "周公"
+      ],
+      "translation_entry": 155
+    },
+    {
+      "id": "s6",
+      "text": "子曰：「志于道，据于德，依于仁，游于艺。」",
+      "translation": "孔子说：「目标在『道』，根据在『德』，依靠在『仁』，而游憩于礼、乐、射、御、书、数六艺之中。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "游于艺",
+          "kind": "word",
+          "meaning": "在礼、乐、射、御、书、数等技艺中学习实践。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「志于道，",
+        "据于德，",
+        "依于仁，",
+        "游于艺。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·述而》第6则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/述而第七",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/6",
+          "anchor_text": "子曰：“志于道，据于德，依于仁，游于艺。”"
+        }
+      },
+      "explanation": "「游于艺」：在礼、乐、射、御、书、数等技艺中学习实践。",
+      "hints": [
+        "游于艺"
+      ],
+      "translation_entry": 156
+    },
+    {
+      "id": "s7",
+      "text": "子曰：「自行束修以上，吾未尝无诲焉。」",
+      "translation": "孔子说：「只要是主动地给我一点见面薄礼，我从没有不教诲的。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "束修",
+          "kind": "word",
+          "meaning": "修是干肉，又叫脯。"
+        },
+        {
+          "id": "n2",
+          "quote": "吾",
+          "meaning": "第一人称，意思是我。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "这一段接在「子曰」之后，尚未转述别人的话，指正在说话的孔子。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「自行束修以上，",
+        "吾未尝无诲焉。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·述而》第7则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/述而第七",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/6",
+          "anchor_text": "子曰：“自行束修以上，吾未尝无诲焉。”"
+        }
+      },
+      "explanation": "「束修」：修是干肉，又叫脯。",
+      "hints": [
+        "束修"
+      ],
+      "translation_entry": 157
+    },
+    {
+      "id": "s8",
+      "text": "子曰：「不愤不启，不悱不发，举一隅不以三隅反，则不复也。」",
+      "translation": "孔子说：「教导学生，不到他想求明白而不得的时候，不去开导他；不到他想说出来却说不出的时候，不去启发他。教给他东方，他却不能由此推知西、南、北三方，便不再教他了。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "愤",
+          "kind": "word",
+          "meaning": "心求通而未得之意。"
+        },
+        {
+          "id": "n2",
+          "quote": "不启",
+          "kind": "word",
+          "meaning": "这是孔子自述其教学方法，必须受教者先发生困难，有求知的动机，然后去启发他。"
+        },
+        {
+          "id": "n3",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「不愤不启，",
+        "不悱不发，",
+        "举一隅不以三隅反，",
+        "则不复也。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·述而》第8则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/述而第七",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/6",
+          "anchor_text": "子曰：“不愤不启，不悱不发，举一隅不以三隅反，则不复也。”"
+        }
+      },
+      "explanation": "「愤」：心求通而未得之意；「不启」：这是孔子自述其教学方法，必须受教者先发生困难，有求知的动机，然后去启发他。",
+      "hints": [
+        "愤",
+        "不启"
+      ],
+      "translation_entry": 158
+    },
+    {
+      "id": "s9",
+      "text": "子食于有丧者之侧，未尝饱也。",
+      "translation": "孔子在死了亲属的人旁边吃饭，不曾吃饱过。",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "有丧者",
+          "kind": "word",
+          "meaning": "家中有人去世、正在服丧的人。"
+        }
+      ],
+      "chunks": [
+        "子食于有丧者之侧，",
+        "未尝饱也。"
+      ],
+      "reference": {
+        "label": "《论语·述而》第9则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/述而第七",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/6",
+          "anchor_text": "子食于有丧者之侧，未尝饱也。"
+        }
+      },
+      "explanation": "孔子留意身边人的悲伤，借自己的举止表达体谅。",
+      "hints": [
+        "有丧者"
+      ],
+      "translation_entry": 159
+    },
+    {
+      "id": "s10",
+      "text": "子于是日哭，则不歌。",
+      "translation": "孔子在这一天哭泣过，就不再唱歌。",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "哭",
+          "kind": "word",
+          "meaning": "因哀悼而哭。"
+        }
+      ],
+      "chunks": [
+        "子于是日哭，",
+        "则不歌。"
+      ],
+      "reference": {
+        "label": "《论语·述而》第10则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/述而第七",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/6",
+          "anchor_text": "子于是日哭，则不歌。"
+        }
+      },
+      "explanation": "这句记下的是哀悼时的举止，表现他对悲伤的认真和尊重。",
+      "hints": [
+        "哭"
+      ],
+      "translation_entry": 160
+    },
+    {
+      "id": "s11",
+      "text": "子谓颜渊曰：「用之则行，舍之则藏，惟我与尔有是夫！」子路曰：「子行三军，则谁与？」子曰：「暴虎冯河，死而无悔者，吾不与也。必也临事而惧，好谋而成者也。」",
+      "translation": "孔子对颜渊道：「用我呢，就干起来；不用呢，就藏起来。只有我和你才能这样吧！」子路道：「您若率领军队，找谁共事？」孔子道：「赤手空拳和老虎搏斗，不用船只去渡河，这样死了都不后悔的人，我是不和他共事的。（我所找他共事的，）一定是面临任务便恐惧谨慎，善于谋略而能完成的人哩！」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "子行三军",
+          "kind": "word",
+          "meaning": "「行」字古人用得很活，行军犹言行师。"
+        },
+        {
+          "id": "n2",
+          "quote": "暴虎冯河",
+          "kind": "word",
+          "meaning": "冯音凭，píng。"
+        }
+      ],
+      "chunks": [
+        "子谓颜渊曰：",
+        "「用之则行，",
+        "舍之则藏，",
+        "惟我与尔有是夫！",
+        "」子路曰：",
+        "「子行三军，",
+        "则谁与？",
+        "」子曰：",
+        "「暴虎冯河，",
+        "死而无悔者，",
+        "吾不与也。",
+        "必也临事而惧，",
+        "好谋而成者也。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·述而》第11则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/述而第七",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/6",
+          "anchor_text": "子谓颜渊曰：“用之则行，舍之则藏，惟我与尔有是夫！”子路曰：“子行三军，则谁与？”子曰：“暴虎冯河，死而无悔者，吾不与也。必也临事而惧，好谋而成者也。”"
+        }
+      },
+      "explanation": "「子行三军」：「行」字古人用得很活，行军犹言行师；「暴虎冯河」：冯音凭，píng。",
+      "hints": [
+        "子行三军",
+        "暴虎冯河"
+      ],
+      "translation_entry": 161
+    },
+    {
+      "id": "s12",
+      "text": "子曰：「富而可求也，虽执鞭之士，吾亦为之。如不可求，从吾所好。」",
+      "translation": "孔子说：「财富如果可以求得的话，就是做市场的守门卒我也干。如果求它不到，还是我干我的罢。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "而",
+          "kind": "word",
+          "meaning": "用法同「如」，假设连词。"
+        },
+        {
+          "id": "n2",
+          "quote": "执鞭之士",
+          "kind": "word",
+          "meaning": "根据《周礼》，有两种人拿着皮鞭，一种是古代天子以及诸侯出入之时，有二至八人拿着皮鞭使行路之人让道。"
+        },
+        {
+          "id": "n3",
+          "quote": "吾",
+          "meaning": "第一人称，意思是我。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "这一段接在「子曰」之后，尚未转述别人的话，指正在说话的孔子。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「富而可求也，",
+        "虽执鞭之士，",
+        "吾亦为之。",
+        "如不可求，",
+        "从吾所好。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·述而》第12则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/述而第七",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/6",
+          "anchor_text": "子曰：“富而可求也，虽执鞭之士，吾亦为之。如不可求，从吾所好。”"
+        }
+      },
+      "explanation": "「而」：用法同「如」，假设连词；「执鞭之士」：根据《周礼》，有两种人拿着皮鞭，一种是古代天子以及诸侯出入之时，有二至八人拿着皮鞭使行路之人让道。",
+      "hints": [
+        "而",
+        "执鞭之士"
+      ],
+      "translation_entry": 162
+    },
+    {
+      "id": "s13",
+      "text": "子之所慎：齐，战，疾。",
+      "translation": "孔子所小心慎重的事有三样：斋戒，战争，疾病。",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "齐",
+          "kind": "word",
+          "meaning": "同「斋」。"
+        },
+        {
+          "id": "n2",
+          "quote": "战",
+          "kind": "word",
+          "meaning": "上文说到孔子作战必求「临事而惧好谋而成」的人，因为它关系国家的存亡安危；乡党篇又描写孔子病了，不敢随便吃药，因为它关系个人的生死。"
+        }
+      ],
+      "chunks": [
+        "子之所慎：",
+        "齐，",
+        "战，",
+        "疾。"
+      ],
+      "reference": {
+        "label": "《论语·述而》第13则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/述而第七",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/6",
+          "anchor_text": "子之所慎：齐，战，疾。"
+        }
+      },
+      "explanation": "「齐」：同「斋」；「战」：上文说到孔子作战必求「临事而惧好谋而成」的人，因为它关系国家的存亡安危；乡党篇又描写孔子病了，不敢随便吃药，因为它关系个人的生死。",
+      "hints": [
+        "齐",
+        "战"
+      ],
+      "translation_entry": 163
+    },
+    {
+      "id": "s14",
+      "text": "子在齐闻《韶》，三月不知肉味，曰：「不图为乐之至於斯也。」",
+      "translation": "孔子在齐国听到韶的乐章，很长时间尝不出肉味，于是道：「想不到欣赏音乐竟到了这种境界。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "韶",
+          "kind": "word",
+          "meaning": "古代一种乐舞的名称。"
+        }
+      ],
+      "chunks": [
+        "子在齐闻《韶》，",
+        "三月不知肉味，",
+        "曰：",
+        "「不图为乐之至於斯也。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·述而》第14则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/述而第七",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/6",
+          "anchor_text": "子在齐闻《韶》，三月不知肉味，曰：“不图为乐之至於斯也。”"
+        }
+      },
+      "explanation": "「三月不知肉味」突出他专心欣赏音乐的感受，不是在规定吃饭的要求。",
+      "hints": [
+        "韶"
+      ],
+      "translation_entry": 164
+    },
+    {
+      "id": "s15",
+      "text": "冉有曰：「夫子为卫君乎？」子贡曰：「诺，吾将问之。」入，曰：「伯夷、叔齐何人也？」曰：「古之贤人也。」曰：「怨乎？」曰：「求仁而得仁，又何怨？」出，曰：「夫子不为也。」",
+      "translation": "冉有道：「老师赞成卫君吗？」子贡道：「好罢；我去问问他。」子贡进到孔子屋里，道：「伯夷、叔齐是什么样的人？」孔子道：「是古代的贤人。」子贡道：「（他们两人互相推让，都不肯做孤竹国的国君，结果都跑到国外，）是不是后来又怨悔呢？」孔子道：「他们求仁德，便得到了仁德，又怨悔什么呢？」子贡走出，答复冉有道：「老师不赞成卫君。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "为",
+          "kind": "word",
+          "meaning": "动词，去声，本意是帮助，这里译为「赞成」，似乎更合原意。"
+        },
+        {
+          "id": "n2",
+          "quote": "卫君",
+          "kind": "word",
+          "meaning": "指卫出公辄。"
+        }
+      ],
+      "chunks": [
+        "冉有曰：",
+        "「夫子为卫君乎？",
+        "」子贡曰：",
+        "「诺，",
+        "吾将问之。",
+        "」入，",
+        "曰：",
+        "「伯夷、叔齐何人也？",
+        "」曰：",
+        "「古之贤人也。",
+        "」曰：",
+        "「怨乎？",
+        "」曰：",
+        "「求仁而得仁，",
+        "又何怨？",
+        "」出，",
+        "曰：",
+        "「夫子不为也。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·述而》第15则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/述而第七",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/6",
+          "anchor_text": "冉有曰：“夫子为卫君乎？”子贡曰：“诺，吾将问之。”入，曰：“伯夷、叔齐何人也？”曰：“古之贤人也。”曰：“怨乎？”曰：“求仁而得仁，又何怨？”出，曰：“夫子不为也。”"
+        }
+      },
+      "explanation": "「为」：动词，去声，本意是帮助，这里译为「赞成」，似乎更合原意；「卫君」：指卫出公辄。",
+      "hints": [
+        "为",
+        "卫君"
+      ],
+      "translation_entry": 165
+    },
+    {
+      "id": "s16",
+      "text": "子曰：「饭疏食饮水，曲肱而枕之，乐亦在其中矣。不义而富且贵，于我如浮云。」",
+      "translation": "孔子说：「吃粗粮，喝冷水，弯着胳膊做枕头，也有着乐趣。干不正当的事而得来的富贵，我看来好像浮云。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "疏食",
+          "kind": "word",
+          "meaning": "有两个解释：（甲）粗粮。"
+        },
+        {
+          "id": "n2",
+          "quote": "水",
+          "kind": "word",
+          "meaning": "古代常以「汤」和「水」对言，「汤」的意义是热水，「水」就是冷水。"
+        },
+        {
+          "id": "n3",
+          "quote": "肱",
+          "kind": "word",
+          "meaning": "音宫，gōng，胳膊。"
+        },
+        {
+          "id": "n4",
+          "quote": "枕",
+          "kind": "word",
+          "meaning": "这里用作动词，旧读去声。"
+        },
+        {
+          "id": "n5",
+          "quote": "我",
+          "meaning": "第一人称，意思是我。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "这一段接在「子曰」之后，尚未转述别人的话，指正在说话的孔子。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「饭疏食饮水，",
+        "曲肱而枕之，",
+        "乐亦在其中矣。",
+        "不义而富且贵，",
+        "于我如浮云。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·述而》第16则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/述而第七",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/6",
+          "anchor_text": "子曰：“饭疏食饮水，曲肱而枕之，乐亦在其中矣。不义而富且贵，于我如浮云。”"
+        }
+      },
+      "explanation": "「疏食」：有两个解释：（甲）粗粮；「水」：古代常以「汤」和「水」对言，「汤」的意义是热水，「水」就是冷水。",
+      "hints": [
+        "疏食",
+        "水",
+        "肱"
+      ],
+      "translation_entry": 166
+    },
+    {
+      "id": "s17",
+      "text": "子曰：「加我数年，五十以学《易》，可以无大过矣。」",
+      "translation": "孔子说：「让我多活几年，到五十岁时候去学习《易经》，便可以没有大过错了。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "易",
+          "kind": "word",
+          "meaning": "古代一部用以占筮的书，其中的卦辞和爻辞是孔子以前的作品。"
+        },
+        {
+          "id": "n2",
+          "quote": "我",
+          "meaning": "第一人称，意思是我。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "这一段接在「子曰」之后，尚未转述别人的话，指正在说话的孔子。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「加我数年，",
+        "五十以学《易》，",
+        "可以无大过矣。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·述而》第17则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/述而第七",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/6",
+          "anchor_text": "子曰：“加我数年，五十以学《易》，可以无大过矣。”"
+        }
+      },
+      "explanation": "「易」：古代一部用以占筮的书，其中的卦辞和爻辞是孔子以前的作品。",
+      "hints": [
+        "易"
+      ],
+      "translation_entry": 167
+    },
+    {
+      "id": "s18",
+      "text": "子所雅言，《诗》、《书》、执礼，皆雅言也。",
+      "translation": "孔子有用普通话的时候，读《诗》，读《书》，行礼，都用普通话。",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "雅言",
+          "kind": "word",
+          "meaning": "当时中国所通行的语言。"
+        }
+      ],
+      "chunks": [
+        "子所雅言，",
+        "《诗》、《书》、执礼，",
+        "皆雅言也。"
+      ],
+      "reference": {
+        "label": "《论语·述而》第18则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/述而第七",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/6",
+          "anchor_text": "子所雅言，《诗》、《书》、执礼，皆雅言也。"
+        }
+      },
+      "explanation": "「雅言」：当时中国所通行的语言。",
+      "hints": [
+        "雅言"
+      ],
+      "translation_entry": 168
+    },
+    {
+      "id": "s19",
+      "text": "叶公问孔子于子路，子路不对。子曰：「女奚不曰：其为人也，发愤忘食，乐以忘忧，不知老之将至云尔。」",
+      "translation": "叶公向子路问孔子为人怎么样，子路不回答。孔子对子路道：「你为什么不这样说：他的为人，用功便忘记吃饭，快乐便忘记忧愁，不晓得衰老会要到来，如此罢了。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "叶",
+          "kind": "word",
+          "meaning": "旧音摄，shè，地名，当时属楚，今河南叶县南三十里有古叶城。"
+        },
+        {
+          "id": "n2",
+          "quote": "云尔",
+          "kind": "word",
+          "meaning": "云，如此；尔同「耳」，而已，罢了。"
+        }
+      ],
+      "chunks": [
+        "叶公问孔子于子路，",
+        "子路不对。",
+        "子曰：",
+        "「女奚不曰：",
+        "其为人也，",
+        "发愤忘食，",
+        "乐以忘忧，",
+        "不知老之将至云尔。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·述而》第19则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/述而第七",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/6",
+          "anchor_text": "叶公问孔子于子路，子路不对。子曰：“女奚不曰：其为人也，发愤忘食，乐以忘忧，不知老之将至云尔。”"
+        }
+      },
+      "explanation": "「叶」：旧音摄，shè，地名，当时属楚，今河南叶县南三十里有古叶城；「云尔」：云，如此；尔同「耳」，而已，罢了。",
+      "hints": [
+        "叶",
+        "云尔"
+      ],
+      "translation_entry": 169
+    },
+    {
+      "id": "s20",
+      "text": "子曰：「我非生而知之者，好古，敏以求之者也。」",
+      "translation": "孔子说：「我不是生来就有知识的人，而是爱好古代文化，勤奋敏捷去求得来的人。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "敏",
+          "kind": "word",
+          "meaning": "勤勉、努力。"
+        },
+        {
+          "id": "n2",
+          "quote": "我",
+          "meaning": "第一人称，意思是我。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "这一段接在「子曰」之后，尚未转述别人的话，指正在说话的孔子。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「我非生而知之者，",
+        "好古，",
+        "敏以求之者也。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·述而》第20则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/述而第七",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/6",
+          "anchor_text": "子曰：“我非生而知之者，好古，敏以求之者也。”"
+        }
+      },
+      "explanation": "孔子说自己的知识来自喜爱古代文化并勤奋探求，而不是生来就什么都懂。",
+      "hints": [
+        "敏"
+      ],
+      "translation_entry": 170
+    },
+    {
+      "id": "s21",
+      "text": "子不语怪、力、乱、神。",
+      "translation": "孔子不谈怪异、勇力、叛乱和鬼神。",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "语",
+          "kind": "word",
+          "meaning": "谈论。"
+        }
+      ],
+      "chunks": [
+        "子不语怪、力、乱、神。"
+      ],
+      "reference": {
+        "label": "《论语·述而》第21则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/述而第七",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/6",
+          "anchor_text": "子不语怪、力、乱、神。"
+        }
+      },
+      "explanation": "这句记录孔子平日谈话的取向，不能据此代替对自然现象的观察和验证。",
+      "hints": [
+        "语"
+      ],
+      "translation_entry": 171
+    },
+    {
+      "id": "s22",
+      "reuse": {
+        "article": "lunyu",
+        "sentence": "s5"
+      },
+      "reference": {
+        "label": "《论语·述而》第22则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/述而第七",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/6",
+          "anchor_text": "子曰：“三人行，必有我师焉。择其善者而从之，其不善者而改之。”"
+        }
+      }
+    },
+    {
+      "id": "s23",
+      "text": "子曰：「天生德于予，桓魋其如予何？」",
+      "translation": "孔子说：「天在我身上生了这样的品德，那桓魋将把我怎样？」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "桓魋",
+          "kind": "word",
+          "meaning": "「魋」音颓，tuí。"
+        },
+        {
+          "id": "n2",
+          "quote": "予",
+          "meaning": "第一人称，意思是我。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "这一段接在「子曰」之后，尚未转述别人的话，指正在说话的孔子。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「天生德于予，",
+        "桓魋其如予何？",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·述而》第23则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/述而第七",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/6",
+          "anchor_text": "子曰：“天生德于予，桓魋其如予何？”"
+        }
+      },
+      "explanation": "「桓魋」：「魋」音颓，tuí。",
+      "hints": [
+        "桓魋"
+      ],
+      "translation_entry": 173
+    },
+    {
+      "id": "s24",
+      "text": "子曰：「二三子以我为隐乎？吾无隐乎尔！吾无行而不与二三子者，是丘也。」",
+      "translation": "孔子说：「你们这些学生以为我有所隐瞒吗？我对你们是没有隐瞒的。我没有一点不向你们公开，这就是我孔丘的为人」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "二三子",
+          "kind": "word",
+          "meaning": "孔子对学生们的称呼，意思是你们几位。"
+        },
+        {
+          "id": "n2",
+          "quote": "吾",
+          "meaning": "第一人称，意思是我。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "这一段接在「子曰」之后，尚未转述别人的话，指正在说话的孔子。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「二三子以我为隐乎？",
+        "吾无隐乎尔！",
+        "吾无行而不与二三子者，",
+        "是丘也。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·述而》第24则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/述而第七",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/6",
+          "anchor_text": "子曰：“二三子以我为隐乎？吾无隐乎尔！吾无行而不与二三子者，是丘也。”"
+        }
+      },
+      "explanation": "孔子把自己的行动也当作教学，告诉学生不必只从言语中找答案。",
+      "hints": [
+        "二三子"
+      ],
+      "translation_entry": 174
+    },
+    {
+      "id": "s25",
+      "text": "子以四教：文，行，忠，信。",
+      "translation": "孔子用四种内容教育学生：历代文献，社会生活的实践，对待别人的忠心，与人交际的信实。",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "行",
+          "kind": "word",
+          "meaning": "作名词用，旧读去声。"
+        }
+      ],
+      "chunks": [
+        "子以四教：",
+        "文，",
+        "行，",
+        "忠，",
+        "信。"
+      ],
+      "reference": {
+        "label": "《论语·述而》第25则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/述而第七",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/6",
+          "anchor_text": "子以四教：文，行，忠，信。"
+        }
+      },
+      "explanation": "「行」：作名词用，旧读去声。",
+      "hints": [
+        "行"
+      ],
+      "translation_entry": 175
+    },
+    {
+      "id": "s26",
+      "text": "子曰：「圣人，吾不得而见之矣；得见君子者斯可矣。」子曰：「善人，吾不得而见之矣，得见有恒者斯可矣。亡而为有，虚而为盈，约而为泰，难乎有恒矣。」",
+      "translation": "孔子说：「圣人，我不能看见了；能看见君子，就可以了。」又说：「善人，我不能看见了，能看见有一定操守的人，就可以了。本来没有，却装做有；本来空虚，却装做充足；本来穷困，却要豪华，这样的人便难于保持一定操守了。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "有恒",
+          "kind": "word",
+          "meaning": "这个「恒」字和《孟子·梁惠王上》的「无恒产而有恒心」的「恒」是一个意义。"
+        },
+        {
+          "id": "n2",
+          "quote": "泰",
+          "kind": "word",
+          "meaning": "这「泰」字和《国语·晋语》的「恃其富宠，以泰于国」，《荀子·议兵篇》的「用财欲泰」的「泰」同义，用度豪华而不吝惜的意思。"
+        },
+        {
+          "id": "n3",
+          "quote": "吾",
+          "meaning": "第一人称，意思是我。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "这一段接在「子曰」之后，尚未转述别人的话，指正在说话的孔子。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「圣人，",
+        "吾不得而见之矣；",
+        "得见君子者斯可矣。",
+        "」子曰：",
+        "「善人，",
+        "吾不得而见之矣，",
+        "得见有恒者斯可矣。",
+        "亡而为有，",
+        "虚而为盈，",
+        "约而为泰，",
+        "难乎有恒矣。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·述而》第26则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/述而第七",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/6",
+          "anchor_text": "子曰：“圣人，吾不得而见之矣；得见君子者斯可矣。”子曰：“善人，吾不得而见之矣，得见有恒者斯可矣。亡而为有，虚而为盈，约而为泰，难乎有恒矣。”"
+        }
+      },
+      "explanation": "「有恒」：这个「恒」字和《孟子·梁惠王上》的「无恒产而有恒心」的「恒」是一个意义；「泰」：这「泰」字和《国语·晋语》的「恃其富宠，以泰于国」，《荀子·议兵篇》的「用财欲泰」的「泰」同义，用度豪华而不吝惜的意思。",
+      "hints": [
+        "有恒",
+        "泰"
+      ],
+      "translation_entry": 176
+    },
+    {
+      "id": "s27",
+      "text": "子钓而不纲，弋不射宿。",
+      "translation": "孔子钓鱼，不用大绳横断流水来取鱼；用带生丝的箭射鸟，不射归巢的鸟。",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "纲",
+          "kind": "word",
+          "meaning": "网上的大绳叫纲，用它来横断水流，再用生丝系钓，着于纲上来取鱼，这也叫纲。"
+        },
+        {
+          "id": "n2",
+          "quote": "弋",
+          "kind": "word",
+          "meaning": "音亦，yì，用带生丝的矢来射。"
+        },
+        {
+          "id": "n3",
+          "quote": "宿",
+          "kind": "word",
+          "meaning": "歇宿了的鸟。"
+        }
+      ],
+      "chunks": [
+        "子钓而不纲，",
+        "弋不射宿。"
+      ],
+      "reference": {
+        "label": "《论语·述而》第27则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/述而第七",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/6",
+          "anchor_text": "子钓而不纲，弋不射宿。"
+        }
+      },
+      "explanation": "「纲」：网上的大绳叫纲，用它来横断水流，再用生丝系钓，着于纲上来取鱼，这也叫纲；「弋」：音亦，yì，用带生丝的矢来射。",
+      "hints": [
+        "纲",
+        "弋",
+        "宿"
+      ],
+      "translation_entry": 177
+    },
+    {
+      "id": "s28",
+      "text": "子曰：「盖有不知而作之者，我无是也。多闻，择其善者而从之；多见而识之，知之次也。」",
+      "translation": "孔子说：「大概有一种自己不懂却凭空造作的人，我没有这种毛病。多多地听，选择其中好的加以接受；多多地看，全记在心里。这样的知，是仅次于『生而知之』的。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "次",
+          "kind": "word",
+          "meaning": "《论语》的「次」一共享了八次，都是当「差一等」、「次一等」讲。"
+        },
+        {
+          "id": "n2",
+          "quote": "我",
+          "meaning": "第一人称，意思是我。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "这一段接在「子曰」之后，尚未转述别人的话，指正在说话的孔子。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「盖有不知而作之者，",
+        "我无是也。",
+        "多闻，",
+        "择其善者而从之；",
+        "多见而识之，",
+        "知之次也。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·述而》第28则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/述而第七",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/6",
+          "anchor_text": "子曰：“盖有不知而作之者，我无是也。多闻，择其善者而从之；多见而识之，知之次也。”"
+        }
+      },
+      "explanation": "「次」：《论语》的「次」一共享了八次，都是当「差一等」、「次一等」讲。",
+      "hints": [
+        "次"
+      ],
+      "translation_entry": 178
+    },
+    {
+      "id": "s29",
+      "text": "互乡难与言，童子见，门人惑。子曰：「与其进也，不与其退也，唯何甚？人洁己以进，与其洁也，不保其往也。」",
+      "translation": "互乡这地方的人难于交谈，一个童子得到孔子的接见，弟子们疑惑。孔子道：「我们赞成他的进步，不赞成他的退步，何必做得太过？别人把自己弄得干干净净而来，便应当赞成他的干净，不要死记住他那过去。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "互乡",
+          "kind": "word",
+          "meaning": "地名，现在已不详其所在。"
+        },
+        {
+          "id": "n2",
+          "quote": "保",
+          "kind": "word",
+          "meaning": "守也，所以译为「死记住」。"
+        }
+      ],
+      "chunks": [
+        "互乡难与言，",
+        "童子见，",
+        "门人惑。",
+        "子曰：",
+        "「与其进也，",
+        "不与其退也，",
+        "唯何甚？",
+        "人洁己以进，",
+        "与其洁也，",
+        "不保其往也。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·述而》第29则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/述而第七",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/6",
+          "anchor_text": "互乡难与言，童子见，门人惑。子曰：“与其进也，不与其退也，唯何甚？人洁己以进，与其洁也，不保其往也。”"
+        }
+      },
+      "explanation": "「互乡」：地名，现在已不详其所在；「保」：守也，所以译为「死记住」。",
+      "hints": [
+        "互乡",
+        "保"
+      ],
+      "translation_entry": 179
+    },
+    {
+      "id": "s30",
+      "text": "子曰：「仁远乎哉？我欲仁，斯仁至矣。」",
+      "translation": "孔子道：「仁德难道离我们很远吗？我要它，它就来了。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "斯",
+          "kind": "word",
+          "meaning": "就。"
+        },
+        {
+          "id": "n2",
+          "quote": "我",
+          "meaning": "第一人称，意思是我。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "这一段接在「子曰」之后，尚未转述别人的话，指正在说话的孔子。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「仁远乎哉？",
+        "我欲仁，",
+        "斯仁至矣。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·述而》第30则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/述而第七",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/6",
+          "anchor_text": "子曰：“仁远乎哉？我欲仁，斯仁至矣。”"
+        }
+      },
+      "explanation": "「我欲仁」连到「斯仁至」：想要关爱别人，可以从眼前的一次行动开始。",
+      "hints": [
+        "斯"
+      ],
+      "translation_entry": 180
+    },
+    {
+      "id": "s31",
+      "text": "陈司败问：「昭公知礼乎？」孔子曰：「知礼。」孔子退，揖巫马期而进之，曰：「吾闻君子不党，君子亦党乎？君取于吴，为同姓，谓之吴孟子。君而知礼，孰不知礼？」巫马期以告，子曰：「丘也幸，苟有过，人必知之。」",
+      "translation": "陈司败向孔子问鲁昭公懂不懂礼，孔子道：「懂礼。」孔子走了出来，陈司败便向巫马期作了个揖。请他走近自己，然后说道：「我听说君子无所偏袒，难道孔子竟偏袒吗？鲁君从吴国娶了位夫人，吴和鲁是同姓国家，（不便叫她做吴姬，）于是叫她做吴孟子。鲁君若是懂得礼，谁不懂得礼呢？」巫马期把这话转告给孔子。孔子道：「我真幸运，假若有错误，人家一定给指出来，」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "陈司败",
+          "kind": "word",
+          "meaning": "人名。"
+        },
+        {
+          "id": "n2",
+          "quote": "昭公",
+          "kind": "word",
+          "meaning": "鲁昭公，名裯，襄公庶子，继襄公而为君。"
+        },
+        {
+          "id": "n3",
+          "quote": "巫马期",
+          "kind": "word",
+          "meaning": "孔子学生，姓巫马，名施，字子期，小于孔子三十岁。"
+        },
+        {
+          "id": "n4",
+          "quote": "君取于吴",
+          "kind": "word",
+          "meaning": "「取」这里用作「娶」字。"
+        },
+        {
+          "id": "n5",
+          "quote": "为同姓",
+          "kind": "word",
+          "meaning": "鲁为周公之后，姬姓；吴为太伯之后，也是姬姓。"
+        },
+        {
+          "id": "n6",
+          "quote": "吴孟子",
+          "kind": "word",
+          "meaning": "春秋时代，国君夫人的称号一般是所生长之国名加她的本姓。"
+        }
+      ],
+      "chunks": [
+        "陈司败问：",
+        "「昭公知礼乎？",
+        "」孔子曰：",
+        "「知礼。",
+        "」孔子退，",
+        "揖巫马期而进之，",
+        "曰：",
+        "「吾闻君子不党，",
+        "君子亦党乎？",
+        "君取于吴，",
+        "为同姓，",
+        "谓之吴孟子。",
+        "君而知礼，",
+        "孰不知礼？",
+        "」巫马期以告，",
+        "子曰：",
+        "「丘也幸，",
+        "苟有过，",
+        "人必知之。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·述而》第31则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/述而第七",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/6",
+          "anchor_text": "陈司败问：“昭公知礼乎？”孔子曰：“知礼。”孔子退，揖巫马期而进之，曰：“吾闻君子不党，君子亦党乎？君取于吴，为同姓，谓之吴孟子。君而知礼，孰不知礼？”巫马期以告，子曰：“丘也幸，苟有过，人必知之。”"
+        }
+      },
+      "explanation": "「陈司败」：人名；「昭公」：鲁昭公，名裯，襄公庶子，继襄公而为君。",
+      "hints": [
+        "陈司败",
+        "昭公",
+        "巫马期"
+      ],
+      "translation_entry": 181
+    },
+    {
+      "id": "s32",
+      "text": "子与人歌而善，必使反之，而后和之。",
+      "translation": "孔子同别人一道唱歌，如果唱得好，一定请他再唱一遍，然后自己又和他。",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "反之",
+          "kind": "word",
+          "meaning": "请对方再唱一遍。"
+        }
+      ],
+      "chunks": [
+        "子与人歌而善，",
+        "必使反之，",
+        "而后和之。"
+      ],
+      "reference": {
+        "label": "《论语·述而》第32则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/述而第七",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/6",
+          "anchor_text": "子与人歌而善，必使反之，而后和之。"
+        }
+      },
+      "explanation": "先认真欣赏、听熟，再跟着唱；这里能看到孔子学习时的耐心。",
+      "hints": [
+        "反之"
+      ],
+      "translation_entry": 182
+    },
+    {
+      "id": "s33",
+      "text": "子曰：「文，莫吾犹人也。躬行君子，则吾未之有得。」",
+      "translation": "孔子说：「书本上的学问，大约我同别人差不多。在生活实践中做一个君子，那我还没有成功。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "躬行",
+          "kind": "word",
+          "meaning": "亲身实践。"
+        },
+        {
+          "id": "n2",
+          "quote": "吾",
+          "meaning": "第一人称，意思是我。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "这一段接在「子曰」之后，尚未转述别人的话，指正在说话的孔子。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「文，",
+        "莫吾犹人也。",
+        "躬行君子，",
+        "则吾未之有得。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·述而》第33则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/述而第七",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/6",
+          "anchor_text": "子曰：“文，莫吾犹人也。躬行君子，则吾未之有得。”"
+        }
+      },
+      "explanation": "孔子将文化知识与亲身实行分开，提醒人懂得道理之后还要努力做到。",
+      "hints": [
+        "躬行"
+      ],
+      "translation_entry": 183
+    },
+    {
+      "id": "s34",
+      "text": "子曰：「若圣与仁，则吾岂敢？抑为之不厌，诲人不倦，则可谓云尔已矣。」公西华曰：「正唯弟子不能学也。」",
+      "translation": "孔子说道：「讲到圣和仁，我怎么敢当？不过是学习和工作总不厌倦，教导别人总不疲劳，就是如此如此罢了。」公西华道：「这正是我们学不到的。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "圣",
+          "kind": "word",
+          "meaning": "古人所称智慧、品德极高的人。"
+        },
+        {
+          "id": "n2",
+          "quote": "吾",
+          "meaning": "第一人称，意思是我。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "这一段接在「子曰」之后，尚未转述别人的话，指正在说话的孔子。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「若圣与仁，",
+        "则吾岂敢？",
+        "抑为之不厌，",
+        "诲人不倦，",
+        "则可谓云尔已矣。",
+        "」公西华曰：",
+        "「正唯弟子不能学也。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·述而》第34则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/述而第七",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/6",
+          "anchor_text": "子曰：“若圣与仁，则吾岂敢？抑为之不厌，诲人不倦，则可谓云尔已矣。”公西华曰：“正唯弟子不能学也。”"
+        }
+      },
+      "explanation": "「圣」：古人所称智慧、品德极高的人。",
+      "hints": [
+        "圣"
+      ],
+      "translation_entry": 184
+    },
+    {
+      "id": "s35",
+      "text": "子疾病，子路请祷。子曰：「有诸？」子路对曰：「有之。《诔》曰：『祷尔于上下神祇。』」子曰：「丘之祷久矣。」",
+      "translation": "孔子病重，子路请求祈祷。孔子道：「有这回事吗？」子路答道：「有的；〈诔文〉说过：『替你向天神地祇祈祷。』」孔子道：「我早就祈祷过了。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "疾病",
+          "kind": "word",
+          "meaning": "「疾病」连言，是重病。"
+        },
+        {
+          "id": "n2",
+          "quote": "诔",
+          "kind": "word",
+          "meaning": "音耒，lèi，本应作讄，祈祷文。"
+        },
+        {
+          "id": "n3",
+          "quote": "祇",
+          "kind": "word",
+          "meaning": "音祁，qí，地神。"
+        }
+      ],
+      "chunks": [
+        "子疾病，",
+        "子路请祷。",
+        "子曰：",
+        "「有诸？",
+        "」子路对曰：",
+        "「有之。",
+        "《诔》曰：",
+        "『祷尔于上下神祇。",
+        "』」子曰：",
+        "「丘之祷久矣。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·述而》第35则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/述而第七",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/6",
+          "anchor_text": "子疾病，子路请祷。子曰：“有诸？”子路对曰：“有之。《诔》曰：‘祷尔于上下神祇。’”子曰：“丘之祷久矣。”"
+        }
+      },
+      "explanation": "「疾病」：「疾病」连言，是重病；「诔」：音耒，lèi，本应作讄，祈祷文。",
+      "hints": [
+        "疾病",
+        "诔",
+        "祇"
+      ],
+      "translation_entry": 185
+    },
+    {
+      "id": "s36",
+      "text": "子曰：「奢则不孙，俭则固。与其不孙也，宁固。」",
+      "translation": "孔子说：「奢侈豪华就显得骄傲，省俭朴素就显得寒伧。与其骄傲，宁可寒伧。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "孙",
+          "kind": "word",
+          "meaning": "同「逊」。"
+        },
+        {
+          "id": "n2",
+          "quote": "固",
+          "kind": "word",
+          "meaning": "固陋，寒伧。"
+        },
+        {
+          "id": "n3",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「奢则不孙，",
+        "俭则固。",
+        "与其不孙也，",
+        "宁固。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·述而》第36则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/述而第七",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/6",
+          "anchor_text": "子曰：“奢则不孙，俭则固。与其不孙也，宁固。”"
+        }
+      },
+      "explanation": "「孙」：同「逊」；「固」：固陋，寒伧。",
+      "hints": [
+        "孙",
+        "固"
+      ],
+      "translation_entry": 186
+    },
+    {
+      "id": "s37",
+      "text": "子曰：「君子坦荡荡，小人长戚戚。」",
+      "translation": "孔子说：「君子心地平坦宽广，小人却经常局促忧愁。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "戚戚",
+          "kind": "word",
+          "meaning": "忧愁不安的样子。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「君子坦荡荡，",
+        "小人长戚戚。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·述而》第37则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/述而第七",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/6",
+          "anchor_text": "子曰：“君子坦荡荡，小人长戚戚。”"
+        }
+      },
+      "explanation": "坦荡荡与长戚戚形成对比，描写不同的处世心态。",
+      "hints": [
+        "戚戚"
+      ],
+      "translation_entry": 187
+    },
+    {
+      "id": "s38",
+      "text": "子温而厉，威而不猛，恭而安。",
+      "translation": "孔子温和而严厉，有威仪而不凶猛，庄严而安详。",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "厉",
+          "kind": "word",
+          "meaning": "严肃。"
+        }
+      ],
+      "chunks": [
+        "子温而厉，",
+        "威而不猛，",
+        "恭而安。"
+      ],
+      "reference": {
+        "label": "《论语·述而》第38则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/述而第七",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/6",
+          "anchor_text": "子温而厉，威而不猛，恭而安。"
+        }
+      },
+      "explanation": "三组词语配在一起，说明温和可以有原则，威严也可以不凶猛。",
+      "hints": [
+        "厉"
+      ],
+      "translation_entry": 188
+    }
+  ],
+  "overview": {
+    "sequence": [
+      "先分清说话的人，找出与「老师怎样学，怎样教」有关的场景。",
+      "把看不懂的词放回原文，再核对译文中的动作和对象。",
+      "挑一则用自己的话说明白，再找原句支持自己的理解。"
+    ],
+    "question": "这一篇中，哪一则最值得你再想一想？",
+    "answer": "选一则，先说清谁在什么情况下说了什么，再说明你赞同、疑惑或想进一步了解的地方，并指回原文。",
+    "takeaway": "乐于求知，也愿意向身边的人学习。"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "choice",
+      "sentence": "s22",
+      "skill": "meaning",
+      "prompt": "「择其善者而从之」的「从」是什么意思？",
+      "answer": 1,
+      "explanation": "孔子说要选择别人的优点来学习。",
+      "choices": [
+        "学习、跟从",
+        "走到后面",
+        "统计人数"
+      ]
+    },
+    {
+      "id": "q2",
+      "type": "choice",
+      "sentence": "s20",
+      "skill": "reason",
+      "prompt": "孔子把自己的知识归因于什么？",
+      "answer": 2,
+      "explanation": "「我非生而知之者」先否定天生全知，再说明求知的方法。",
+      "choices": [
+        "别人替他思考",
+        "好古并勤勉探求",
+        "生来什么都懂"
+      ]
+    },
+    {
+      "id": "q3",
+      "type": "selfcheck",
+      "sentence": "s37",
+      "skill": "reason",
+      "prompt": "「坦荡荡」与「长戚戚」有什么关系？",
+      "answer": "形成对比，表现不同的心态",
+      "explanation": "一边是心胸开阔，一边是常常忧愁不安。"
+    }
+  ]
+}

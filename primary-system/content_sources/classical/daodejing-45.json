@@ -1,0 +1,279 @@
+{
+  "schema_version": 1,
+  "id": "daodejing-45",
+  "title": "道德经·第四十五章",
+  "attribution": "老子",
+  "level": "challenge",
+  "genre": "reasoning",
+  "skills": [
+    "meaning",
+    "referent",
+    "reason",
+    "contrast",
+    "retell"
+  ],
+  "curriculum": null,
+  "intro": "不凭表面急着判断。圆满可能不显圆满，巧妙也可能不显灵巧；先看实际作用，再作判断。",
+  "background": "这是《道德经》德经·第四十五章。本章围绕「不凭表面急着判断」展开，可以先读原文，再对照译文，看看作者用了什么比方或对比。",
+  "editorial_note": "本馆用逐句译解帮助入门。读「道」「无为」等词时要看上下文；古代观念和理想化比方，可以边读边与家长讨论。",
+  "source": {
+    "work": "道德经（又名老子）",
+    "section": "德经·第四十五章",
+    "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#四十五章",
+    "note": "原文以本机简体《老子》为底本，统一引号，第七章移去括号异文提示。译文、词义和练习为本馆编写的入门读法，参考王弼注理解，不将不同底本混作同一文本。"
+  },
+  "source_ref": {
+    "locator": "/content/44",
+    "path": "poetry/simplified/诸子百家/老子.json",
+    "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+    "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+    "anchor_text": "大成若缺，其用不弊。大盈若冲，其用不穷。大直若屈，大巧若拙，大辩若訥。静胜躁，寒胜热。清静为天下正。"
+  },
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "大成若缺，其用不弊。",
+      "translation": "很大的成就好像还有欠缺，它的作用却不会因此衰竭。",
+      "explanation": "读词小提示：「若缺」：好像有所欠缺；「弊」：损坏、衰竭。",
+      "chunks": [
+        "大成若缺，",
+        "其用不弊。"
+      ],
+      "hints": [
+        "若缺",
+        "弊"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "若缺",
+          "kind": "word",
+          "meaning": "好像有所欠缺。"
+        },
+        {
+          "id": "n2",
+          "quote": "弊",
+          "kind": "word",
+          "meaning": "损坏、衰竭。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第四十五章》第1句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#四十五章",
+        "source_ref": {
+          "locator": "/content/44",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "大成若缺，其用不弊。"
+        }
+      }
+    },
+    {
+      "id": "s2",
+      "text": "大盈若冲，其用不穷。",
+      "translation": "很充盈的好像虚空，它的作用却没有穷尽。",
+      "explanation": "读词小提示：「冲」：虚空；「穷」：用尽。",
+      "chunks": [
+        "大盈若冲，",
+        "其用不穷。"
+      ],
+      "hints": [
+        "冲",
+        "穷"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "冲",
+          "kind": "word",
+          "meaning": "虚空。"
+        },
+        {
+          "id": "n2",
+          "quote": "穷",
+          "kind": "word",
+          "meaning": "用尽。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第四十五章》第2句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#四十五章",
+        "source_ref": {
+          "locator": "/content/44",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "大盈若冲，其用不穷。"
+        }
+      }
+    },
+    {
+      "id": "s3",
+      "text": "大直若屈，大巧若拙，大辩若訥。",
+      "translation": "极正直的好像弯曲，极巧妙的好像笨拙，极善辩的好像言语迟缓。",
+      "explanation": "读词小提示：「若屈」：好像弯曲；「若拙」：好像笨拙。",
+      "chunks": [
+        "大直若屈，",
+        "大巧若拙，",
+        "大辩若訥。"
+      ],
+      "hints": [
+        "若屈",
+        "若拙",
+        "訥"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "若屈",
+          "kind": "word",
+          "meaning": "好像弯曲。"
+        },
+        {
+          "id": "n2",
+          "quote": "若拙",
+          "kind": "word",
+          "meaning": "好像笨拙。"
+        },
+        {
+          "id": "n3",
+          "quote": "訥",
+          "kind": "word",
+          "meaning": "同「讷」，说话不流利。",
+          "reading": "nè"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第四十五章》第3句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#四十五章",
+        "source_ref": {
+          "locator": "/content/44",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "大直若屈，大巧若拙，大辩若訥。"
+        }
+      }
+    },
+    {
+      "id": "s4",
+      "text": "静胜躁，寒胜热。",
+      "translation": "安静能够胜过躁动，寒冷能够胜过炎热。",
+      "explanation": "读词小提示：「躁」：急躁、躁动。",
+      "chunks": [
+        "静胜躁，",
+        "寒胜热。"
+      ],
+      "hints": [
+        "躁"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "躁",
+          "kind": "word",
+          "meaning": "急躁、躁动。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第四十五章》第4句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#四十五章",
+        "source_ref": {
+          "locator": "/content/44",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "大成若缺，其用不弊。大盈若冲，其用不穷。大直若屈，大巧若拙，大辩若訥。静胜躁，寒胜热。清静为天下正。"
+        }
+      }
+    },
+    {
+      "id": "s5",
+      "text": "清静为天下正。",
+      "translation": "清明安静，可以作为天下的准则。",
+      "explanation": "这些对照是本章的修辞，理解时要结合具体情形，不机械套用。",
+      "chunks": [
+        "清静为天下正。"
+      ],
+      "hints": [
+        "清静",
+        "正"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "清静",
+          "kind": "word",
+          "meaning": "清明安静。"
+        },
+        {
+          "id": "n2",
+          "quote": "正",
+          "kind": "word",
+          "meaning": "准则。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第四十五章》第5句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#四十五章",
+        "source_ref": {
+          "locator": "/content/44",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "大成若缺，其用不弊。大盈若冲，其用不穷。大直若屈，大巧若拙，大辩若訥。静胜躁，寒胜热。清静为天下正。"
+        }
+      }
+    }
+  ],
+  "overview": {
+    "sequence": [
+      "先看本章开头：很大的成就好像还有欠缺，它的作用却不会因此衰竭。",
+      "圆满可能不显圆满，巧妙也可能不显灵巧；先看实际作用，再作判断。",
+      "再回到结尾：清明安静，可以作为天下的准则。"
+    ],
+    "question": "这一章为什么可以叫作「不凭表面急着判断」？",
+    "answer": "圆满可能不显圆满，巧妙也可能不显灵巧；先看实际作用，再作判断。可以引用本章开头或结尾的原句，说明你的依据。",
+    "takeaway": "圆满可能不显圆满，巧妙也可能不显灵巧；先看实际作用，再作判断。"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "choice",
+      "sentence": "s1",
+      "skill": "meaning",
+      "prompt": "开头的「若缺」在这里怎样理解？",
+      "choices": [
+        "好像有所欠缺。",
+        "只顾自己，不留意他人的处境。",
+        "为了显示本领而处处炫耀。"
+      ],
+      "answer": 0,
+      "explanation": "把词放回原句看，「若缺」在本句中的意思是：好像有所欠缺。"
+    },
+    {
+      "id": "q2",
+      "type": "choice",
+      "sentence": "s5",
+      "skill": "reason",
+      "prompt": "读完「不凭表面急着判断」，哪一种理解更合适？",
+      "choices": [
+        "只要一次失败，就不必再试。",
+        "圆满可能不显圆满，巧妙也可能不显灵巧；先看实际作用，再作判断。",
+        "遇到问题不用观察，也不必行动。"
+      ],
+      "answer": 1,
+      "explanation": "圆满可能不显圆满，巧妙也可能不显灵巧；先看实际作用，再作判断。"
+    },
+    {
+      "id": "q3",
+      "type": "selfcheck",
+      "sentence": "s5",
+      "skill": "retell",
+      "prompt": "选本章一句话，用自己的话解释，再说说它怎样帮助你理解「不凭表面急着判断」。",
+      "answer": "先说清原句中的对象和动作，再解释关键词。可以围绕这点来讲：圆满可能不显圆满，巧妙也可能不显灵巧；先看实际作用，再作判断。说完后，回到原文找一句作依据。",
+      "explanation": "不必背诵译文。重点看词义是否放回本句、有没有原文依据，以及是否把古人的比方误当成不分条件的结论。"
+    }
+  ]
+}

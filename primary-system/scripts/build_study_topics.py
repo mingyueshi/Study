@@ -13,7 +13,7 @@ TOPICS = {
     'history': ('', '', ('index',)),
     'geo': ('', '', ('index',)),
     'history-timeline': ('study-timeline', 'history-timeline', ('index', 'timeline', 'era', 'event', 'dynasties')),
-    'geo-map': ('study-atlas', 'geography-atlas', ('index', 'china', 'animals', 'world', 'world-animals', 'province', 'places', 'routes', 'gallery')),
+    'geo-map': ('study-atlas', 'geography-atlas', ('index', 'china', 'animals', 'plants', 'world', 'world-animals', 'world-plants', 'province', 'places', 'routes', 'gallery')),
 }
 COURSES = ('astro', 'lit', 'sci', 'hanzi-evo')
 # 数据全局名：slug 含连字符时 .upper() 不是合法 JS 标识符，需要单独映射。

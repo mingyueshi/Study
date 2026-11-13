@@ -1,0 +1,358 @@
+{
+  "schema_version": 1,
+  "id": "daodejing-14",
+  "title": "道德经·第十四章",
+  "attribution": "老子",
+  "level": "challenge",
+  "genre": "reasoning",
+  "skills": [
+    "meaning",
+    "referent",
+    "reason",
+    "contrast",
+    "retell"
+  ],
+  "curriculum": null,
+  "intro": "看不见的根本道理。本章用视觉、听觉与触觉的限制，说明道难以用一个具体形状说尽。",
+  "background": "这是《道德经》道经·第十四章。本章围绕「看不见的根本道理」展开，可以先读原文，再对照译文，看看作者用了什么比方或对比。",
+  "editorial_note": "本馆用逐句译解帮助入门。读「道」「无为」等词时要看上下文；古代观念和理想化比方，可以边读边与家长讨论。",
+  "source": {
+    "work": "道德经（又名老子）",
+    "section": "道经·第十四章",
+    "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#十四章",
+    "note": "原文以本机简体《老子》为底本，统一引号，第七章移去括号异文提示。译文、词义和练习为本馆编写的入门读法，参考王弼注理解，不将不同底本混作同一文本。"
+  },
+  "source_ref": {
+    "locator": "/content/13",
+    "path": "poetry/simplified/诸子百家/老子.json",
+    "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+    "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+    "anchor_text": "视之不见，名曰夷；听之不闻，名曰希；搏之不得，名曰微。此三者，不可致詰，故混而为一。其上不皦，其下不昧，绳绳兮不可名，复归於无物。是谓无状之状，无象之象，是谓惚恍。迎之不见其首，随之不见其后。执古之道，以御今之有。能知古始，是谓道纪。"
+  },
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "视之不见，名曰夷；听之不闻，名曰希；搏之不得，名曰微。",
+      "translation": "看它看不见，叫作夷；听它听不见，叫作希；摸它摸不到，叫作微。",
+      "explanation": "读词小提示：「夷」：这里指看不见的状态；「希」：这里指听不见的状态。",
+      "chunks": [
+        "视之不见，",
+        "名曰夷；",
+        "听之不闻，",
+        "名曰希；",
+        "搏之不得，",
+        "名曰微。"
+      ],
+      "hints": [
+        "夷",
+        "希",
+        "微"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "夷",
+          "kind": "word",
+          "meaning": "这里指看不见的状态。"
+        },
+        {
+          "id": "n2",
+          "quote": "希",
+          "kind": "word",
+          "meaning": "这里指听不见的状态。"
+        },
+        {
+          "id": "n3",
+          "quote": "微",
+          "kind": "word",
+          "meaning": "细微得难以把握。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第十四章》第1句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#十四章",
+        "source_ref": {
+          "locator": "/content/13",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "视之不见，名曰夷；听之不闻，名曰希；搏之不得，名曰微。"
+        }
+      }
+    },
+    {
+      "id": "s2",
+      "text": "此三者，不可致詰，故混而为一。",
+      "translation": "这三种描述不能分开穷究，所以合起来看作一体。",
+      "explanation": "读词小提示：「三者」：前文的夷、希、微三种描述；「致詰」：彻底追问、辨明。",
+      "chunks": [
+        "此三者，",
+        "不可致詰，",
+        "故混而为一。"
+      ],
+      "hints": [
+        "三者",
+        "致詰"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "三者",
+          "kind": "word",
+          "meaning": "前文的夷、希、微三种描述。"
+        },
+        {
+          "id": "n2",
+          "quote": "致詰",
+          "kind": "word",
+          "meaning": "彻底追问、辨明。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第十四章》第2句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#十四章",
+        "source_ref": {
+          "locator": "/content/13",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "此三者，不可致詰，故混而为一。"
+        }
+      }
+    },
+    {
+      "id": "s3",
+      "text": "其上不皦，其下不昧，绳绳兮不可名，复归於无物。",
+      "translation": "它的上方并不明亮，下方也不昏暗，绵延不绝而难以命名，又回到没有具体形体的状态。",
+      "explanation": "读词小提示：「皦」：明亮；「绳绳」：连续不绝。",
+      "chunks": [
+        "其上不皦，",
+        "其下不昧，",
+        "绳绳兮不可名，",
+        "复归於无物。"
+      ],
+      "hints": [
+        "皦",
+        "绳绳"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "皦",
+          "kind": "word",
+          "meaning": "明亮。",
+          "reading": "jiǎo"
+        },
+        {
+          "id": "n2",
+          "quote": "绳绳",
+          "kind": "word",
+          "meaning": "连续不绝。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第十四章》第3句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#十四章",
+        "source_ref": {
+          "locator": "/content/13",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "其上不皦，其下不昧，绳绳兮不可名，复归於无物。"
+        }
+      }
+    },
+    {
+      "id": "s4",
+      "text": "是谓无状之状，无象之象，是谓惚恍。",
+      "translation": "这是没有固定形状的形状，没有具体形象的形象，叫作恍惚。",
+      "explanation": "读词小提示：「无状」：没有可确定的形状；「惚恍」：若有若无，难以分明。",
+      "chunks": [
+        "是谓无状之状，",
+        "无象之象，",
+        "是谓惚恍。"
+      ],
+      "hints": [
+        "无状",
+        "惚恍"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "无状",
+          "kind": "word",
+          "meaning": "没有可确定的形状。"
+        },
+        {
+          "id": "n2",
+          "quote": "惚恍",
+          "kind": "word",
+          "meaning": "若有若无，难以分明。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第十四章》第4句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#十四章",
+        "source_ref": {
+          "locator": "/content/13",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "是谓无状之状，无象之象，是谓惚恍。"
+        }
+      }
+    },
+    {
+      "id": "s5",
+      "text": "迎之不见其首，随之不见其后。",
+      "translation": "迎着它看不到开头，跟着它看不到末尾。",
+      "explanation": "读词小提示：「首」：开端。",
+      "chunks": [
+        "迎之不见其首，",
+        "随之不见其后。"
+      ],
+      "hints": [
+        "首"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "首",
+          "kind": "word",
+          "meaning": "开端。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第十四章》第5句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#十四章",
+        "source_ref": {
+          "locator": "/content/13",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "迎之不见其首，随之不见其后。"
+        }
+      }
+    },
+    {
+      "id": "s6",
+      "text": "执古之道，以御今之有。",
+      "translation": "把握古来的根本道理，来应对眼前的事物。",
+      "explanation": "读词小提示：「执」：把握；「御」：应对、驾驭。",
+      "chunks": [
+        "执古之道，",
+        "以御今之有。"
+      ],
+      "hints": [
+        "执",
+        "御"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "执",
+          "kind": "word",
+          "meaning": "把握。"
+        },
+        {
+          "id": "n2",
+          "quote": "御",
+          "kind": "word",
+          "meaning": "应对、驾驭。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第十四章》第6句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#十四章",
+        "source_ref": {
+          "locator": "/content/13",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "执古之道，以御今之有。"
+        }
+      }
+    },
+    {
+      "id": "s7",
+      "text": "能知古始，是谓道纪。",
+      "translation": "能够认识古来的根源，就叫作把握了道的线索。",
+      "explanation": "读词小提示：「纪」：纲要、线索。",
+      "chunks": [
+        "能知古始，",
+        "是谓道纪。"
+      ],
+      "hints": [
+        "纪"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "纪",
+          "kind": "word",
+          "meaning": "纲要、线索。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第十四章》第7句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#十四章",
+        "source_ref": {
+          "locator": "/content/13",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "能知古始，是谓道纪。"
+        }
+      }
+    }
+  ],
+  "overview": {
+    "sequence": [
+      "先看本章开头：看它看不见，叫作夷；听它听不见，叫作希；摸它摸不到，叫作微。",
+      "本章用视觉、听觉与触觉的限制，说明道难以用一个具体形状说尽。",
+      "再回到结尾：能够认识古来的根源，就叫作把握了道的线索。"
+    ],
+    "question": "这一章为什么可以叫作「看不见的根本道理」？",
+    "answer": "本章用视觉、听觉与触觉的限制，说明道难以用一个具体形状说尽。可以引用本章开头或结尾的原句，说明你的依据。",
+    "takeaway": "本章用视觉、听觉与触觉的限制，说明道难以用一个具体形状说尽。"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "choice",
+      "sentence": "s1",
+      "skill": "meaning",
+      "prompt": "开头的「夷」在这里怎样理解？",
+      "choices": [
+        "只顾自己，不留意他人的处境。",
+        "为了显示本领而处处炫耀。",
+        "这里指看不见的状态。"
+      ],
+      "answer": 2,
+      "explanation": "把词放回原句看，「夷」在本句中的意思是：这里指看不见的状态。"
+    },
+    {
+      "id": "q2",
+      "type": "choice",
+      "sentence": "s7",
+      "skill": "reason",
+      "prompt": "读完「看不见的根本道理」，哪一种理解更合适？",
+      "choices": [
+        "本章用视觉、听觉与触觉的限制，说明道难以用一个具体形状说尽。",
+        "为达到自己的目标，可以不顾别人。",
+        "无论什么情况，都应该争着抢先。"
+      ],
+      "answer": 0,
+      "explanation": "本章用视觉、听觉与触觉的限制，说明道难以用一个具体形状说尽。"
+    },
+    {
+      "id": "q3",
+      "type": "selfcheck",
+      "sentence": "s7",
+      "skill": "retell",
+      "prompt": "选本章一句话，用自己的话解释，再说说它怎样帮助你理解「看不见的根本道理」。",
+      "answer": "先说清原句中的对象和动作，再解释关键词。可以围绕这点来讲：本章用视觉、听觉与触觉的限制，说明道难以用一个具体形状说尽。说完后，回到原文找一句作依据。",
+      "explanation": "不必背诵译文。重点看词义是否放回本句、有没有原文依据，以及是否把古人的比方误当成不分条件的结论。"
+    }
+  ]
+}

@@ -1,13 +1,17 @@
 {% extends "study_topics/page.html" %}
 {% load static %}
 {# 由 scripts/build_study_topics.py 生成。 #}
-{% block title %}中国朝代更替时间轴 · 乐学堂{% endblock %}
+{% block title %}中国朝代与版图 · 乐学堂{% endblock %}
 {% block study_assets %}
 <link rel="stylesheet" href="{% static 'study_topics/history-timeline/styles.css' %}">
 <link rel="stylesheet" href="{% static 'study_topics/history-timeline/dynasty.css' %}">
+<link rel="stylesheet" href="{% static 'study_topics/history-timeline/territory.css' %}">
 <script src="{% static 'study_topics/history-timeline/content.js' %}" defer></script>
 <script src="{% static 'study_topics/history-timeline/dynasty-data.js' %}" defer></script>
+<script src="{% static 'study_topics/history-timeline/territory-data.js' %}" defer></script>
+<script src="{% static 'study_topics/history-timeline/territory-geo.js' %}" defer></script>
 <script src="{% static 'study_topics/history-timeline/shared.js' %}" defer></script>
+<script src="{% static 'study_topics/history-timeline/territory-app.js' %}" defer></script>
 <script src="{% static 'study_topics/history-timeline/dynasty-app.js' %}" defer></script>
 {% endblock %}
 {% block study_content %}
@@ -18,14 +22,72 @@
         <a class="tl-sysnav-brand" href="{% url 'history-timeline' %}">🕰️ 历史时间轴<small>中国史与世界史</small></a>
         <a data-page href="timeline.html">双轨时间轴</a>
         <a data-page href="era.html">时代站</a>
-        <a data-page href="dynasties.html" aria-current="page">朝代更替</a>
+        <a data-page href="dynasties.html" aria-current="page">朝代与版图</a>
       </nav>
       <header class="tl-hero dyn-hero">
         <a class="tl-back" href="timeline.html">← 返回双轨时间轴</a>
-        <p class="tl-eyebrow">中国朝代 · 竖版更替</p>
-        <h1>中国<span class="tl-h1-china">朝代更替</span>时间轴</h1>
-        <p class="tl-intro">先花两分钟弄懂「公元前、公元后」这把时间尺子，再顺着一条竖轴看夏到清十六个朝代如何你方唱罢我登场：每张卡讲一个朝代怎么建立、怎么谢幕，卡片之间的紫色箭头就是改朝换代的关键事件。</p>
+        <p class="tl-eyebrow">中国朝代 · 地图与更替</p>
+        <h1>中国<span class="tl-h1-china">朝代与版图</span></h1>
+        <p class="tl-intro">在同一张地图上看各朝代的大致范围，比较圈线怎样改变，再看朝代故事和公元纪年。</p>
+        <nav class="tl-related" aria-label="朝代学习入口">
+          <a href="#territory-maps">看版图变化 ↓</a>
+          <a href="#dyn-title">看朝代更替 ↓</a>
+          <a href="#cal-title">学公元纪年 ↓</a>
+        </nav>
       </header>
+
+      <section class="territory-section" id="territory-maps" data-tl-anchor tabindex="-1" aria-labelledby="territory-title">
+        <h2 id="territory-title">跟着朝代看版图</h2>
+        <p class="territory-intro">选朝代或拖时间条，看地图上圈出的范围。点一个色块看它的名称，也可以叠上另一个阶段的轮廓。</p>
+        <div class="territory-workspace" data-sidebar-layout=".territory-aside" data-sidebar-width="clamp(210px, 23vw, 290px)" data-sidebar-breakpoint="760" data-sidebar-label="朝代目录" data-sidebar-fixed=".territory-aside-heading">
+          <div class="territory-stage">
+            <div class="territory-stage-heading">
+              <div><p class="tl-eyebrow" id="territory-period"></p><h3 id="territory-map-title"></h3></div>
+              <p class="territory-counter" id="territory-count" role="status"></p>
+            </div>
+            <div class="territory-transport">
+              <button type="button" id="territory-prev" aria-label="上一张版图">← 上一张</button>
+              <div class="territory-range"><label for="territory-range">时间向后 →</label><input type="range" id="territory-range" min="0" value="0" step="1"></div>
+              <button type="button" id="territory-next" aria-label="下一张版图">下一张 →</button>
+            </div>
+            <div class="territory-options">
+              <label><input type="checkbox" id="territory-compare"> 叠加另一阶段</label>
+              <label id="territory-compare-label" hidden>对照哪一张 <select id="territory-compare-select"></select></label>
+            </div>
+            <p class="territory-compare-note" id="territory-compare-note" hidden>紫色虚线是对照阶段，彩色实线与填色是当前阶段。两者共用同一底图和视角。</p>
+            <div class="territory-map-tools" role="group" aria-label="地图缩放与定位">
+              <button type="button" id="territory-zoom-in" aria-label="放大地图">＋ 放大</button>
+              <button type="button" id="territory-zoom-out" aria-label="缩小地图">－ 缩小</button>
+              <button type="button" id="territory-map-reset">看全图</button>
+              <button type="button" id="territory-map-focus">聚焦本阶段</button>
+            </div>
+            <div class="territory-canvas">
+              <span class="territory-compass" aria-hidden="true">北 ↑</span>
+              <svg id="territory-svg" xmlns="http://www.w3.org/2000/svg" role="group" tabindex="0" aria-label="中国历代范围交互地图" aria-describedby="territory-map-help"></svg>
+            </div>
+            <p class="territory-map-help" id="territory-map-help">拖动地图可移动，滚轮可缩放。键盘方向键可移动，加减号可缩放，Home 回全图。</p>
+            <div class="territory-legend" id="territory-legend" role="group" aria-label="地图区域图例"></div>
+            <p class="territory-selection" id="territory-selection" role="status"></p>
+            <p class="territory-note" id="territory-note"></p>
+            <p class="territory-credit" id="territory-credit"></p>
+            <nav class="tl-related" id="territory-related" aria-label="继续了解这个朝代"></nav>
+            <details class="territory-reference">
+              <summary>查看这一时期的教学参考图</summary>
+              <a id="territory-reference-image" target="_blank" rel="noopener"><img id="territory-reference-preview" alt="" loading="lazy"></a>
+              <p id="territory-reference-credit"></p>
+            </details>
+          </div>
+          <aside class="territory-aside">
+            <div class="territory-aside-heading"><h3>选朝代</h3><p>同一朝代，也有不同阶段。</p></div>
+            <nav class="territory-dynasties" id="territory-dynasties" aria-label="选择地图的朝代"></nav>
+            <section class="territory-observation" aria-labelledby="territory-observation-title">
+              <h3 id="territory-observation-title">在图上找一找</h3>
+              <ol id="territory-observe"></ol>
+              <details id="territory-question"><summary id="territory-question-text"></summary><p id="territory-answer"></p></details>
+            </section>
+          </aside>
+        </div>
+      </section>
 
       <section class="cal-class" aria-labelledby="cal-title">
         <h2 id="cal-title">先学个小工具：什么是公元前、公元后</h2>

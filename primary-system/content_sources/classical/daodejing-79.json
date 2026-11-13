@@ -1,0 +1,241 @@
+{
+  "schema_version": 1,
+  "id": "daodejing-79",
+  "title": "道德经·第七十九章",
+  "attribution": "老子",
+  "level": "challenge",
+  "genre": "reasoning",
+  "skills": [
+    "meaning",
+    "referent",
+    "reason",
+    "contrast",
+    "retell"
+  ],
+  "curriculum": null,
+  "intro": "少些索责，重在守信。争执平息后仍可能有余怨，遇事不只追讨别人，也先守住自己的诚信。",
+  "background": "这是《道德经》德经·第七十九章。本章围绕「少些索责，重在守信」展开，可以先读原文，再对照译文，看看作者用了什么比方或对比。",
+  "editorial_note": "本馆用逐句译解帮助入门。读「道」「无为」等词时要看上下文；古代观念和理想化比方，可以边读边与家长讨论。",
+  "source": {
+    "work": "道德经（又名老子）",
+    "section": "德经·第七十九章",
+    "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#七十九章",
+    "note": "原文以本机简体《老子》为底本，统一引号，第七章移去括号异文提示。译文、词义和练习为本馆编写的入门读法，参考王弼注理解，不将不同底本混作同一文本。"
+  },
+  "source_ref": {
+    "locator": "/content/78",
+    "path": "poetry/simplified/诸子百家/老子.json",
+    "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+    "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+    "anchor_text": "和大怨，必有余怨；报怨以德，安可以为善？是以圣人执左契，不责于人。故有德司契，无德司彻。天道无亲，常与善人。"
+  },
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "和大怨，必有余怨；报怨以德，安可以为善？",
+      "translation": "调解了很大的怨恨，也可能还留有余怨；单在事后用恩德化解，怎能说已经尽善呢？",
+      "explanation": "读词小提示：「和」：调解、平息；「余怨」：留下的怨恨。",
+      "chunks": [
+        "和大怨，",
+        "必有余怨；",
+        "报怨以德，",
+        "安可以为善？"
+      ],
+      "hints": [
+        "和",
+        "余怨"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "和",
+          "kind": "word",
+          "meaning": "调解、平息。"
+        },
+        {
+          "id": "n2",
+          "quote": "余怨",
+          "kind": "word",
+          "meaning": "留下的怨恨。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第七十九章》第1句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#七十九章",
+        "source_ref": {
+          "locator": "/content/78",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "和大怨，必有余怨；报怨以德，安可以为善？"
+        }
+      }
+    },
+    {
+      "id": "s2",
+      "text": "是以圣人执左契，不责于人。",
+      "translation": "所以有智慧的人即使持有可以索取的契约，也不只向别人追责。",
+      "explanation": "读词小提示：「左契」：古代契约的一半，通常由有权索取的一方保存；「责」：索取、责求。",
+      "chunks": [
+        "是以圣人执左契，",
+        "不责于人。"
+      ],
+      "hints": [
+        "左契",
+        "责"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "左契",
+          "kind": "word",
+          "meaning": "古代契约的一半，通常由有权索取的一方保存。"
+        },
+        {
+          "id": "n2",
+          "quote": "责",
+          "kind": "word",
+          "meaning": "索取、责求。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第七十九章》第2句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#七十九章",
+        "source_ref": {
+          "locator": "/content/78",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "是以圣人执左契，不责于人。"
+        }
+      }
+    },
+    {
+      "id": "s3",
+      "text": "故有德司契，无德司彻。",
+      "translation": "有德的人重在守约，无德的人只顾索取。",
+      "explanation": "读词小提示：「司契」：守好契约、重承诺；「司彻」：专注征取、追索。",
+      "chunks": [
+        "故有德司契，",
+        "无德司彻。"
+      ],
+      "hints": [
+        "司契",
+        "司彻"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "司契",
+          "kind": "word",
+          "meaning": "守好契约、重承诺。"
+        },
+        {
+          "id": "n2",
+          "quote": "司彻",
+          "kind": "word",
+          "meaning": "专注征取、追索。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第七十九章》第3句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#七十九章",
+        "source_ref": {
+          "locator": "/content/78",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "故有德司契，无德司彻。"
+        }
+      }
+    },
+    {
+      "id": "s4",
+      "text": "天道无亲，常与善人。",
+      "translation": "古人说天道不偏私，常帮助善良的人。",
+      "explanation": "读时可以把重点落在守信和减少怨恨，不把结尾当作所有好事坏事必然发生的保证。",
+      "chunks": [
+        "天道无亲，",
+        "常与善人。"
+      ],
+      "hints": [
+        "无亲",
+        "与"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "无亲",
+          "kind": "word",
+          "meaning": "不偏爱某个人。"
+        },
+        {
+          "id": "n2",
+          "quote": "与",
+          "kind": "word",
+          "meaning": "帮助、亲近。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第七十九章》第4句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#七十九章",
+        "source_ref": {
+          "locator": "/content/78",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "天道无亲，常与善人。"
+        }
+      }
+    }
+  ],
+  "overview": {
+    "sequence": [
+      "先看本章开头：调解了很大的怨恨，也可能还留有余怨；单在事后用恩德化解，怎能说已经尽善呢？",
+      "争执平息后仍可能有余怨，遇事不只追讨别人，也先守住自己的诚信。",
+      "再回到结尾：古人说天道不偏私，常帮助善良的人。"
+    ],
+    "question": "这一章为什么可以叫作「少些索责，重在守信」？",
+    "answer": "争执平息后仍可能有余怨，遇事不只追讨别人，也先守住自己的诚信。可以引用本章开头或结尾的原句，说明你的依据。",
+    "takeaway": "争执平息后仍可能有余怨，遇事不只追讨别人，也先守住自己的诚信。"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "choice",
+      "sentence": "s1",
+      "skill": "meaning",
+      "prompt": "开头的「和」在这里怎样理解？",
+      "choices": [
+        "只顾自己，不留意他人的处境。",
+        "调解、平息。",
+        "为了显示本领而处处炫耀。"
+      ],
+      "answer": 1,
+      "explanation": "把词放回原句看，「和」在本句中的意思是：调解、平息。"
+    },
+    {
+      "id": "q2",
+      "type": "choice",
+      "sentence": "s4",
+      "skill": "reason",
+      "prompt": "读完「少些索责，重在守信」，哪一种理解更合适？",
+      "choices": [
+        "别人的想法一概不用听。",
+        "只有大声夸耀自己，才能显得有本领。",
+        "争执平息后仍可能有余怨，遇事不只追讨别人，也先守住自己的诚信。"
+      ],
+      "answer": 2,
+      "explanation": "争执平息后仍可能有余怨，遇事不只追讨别人，也先守住自己的诚信。"
+    },
+    {
+      "id": "q3",
+      "type": "selfcheck",
+      "sentence": "s4",
+      "skill": "retell",
+      "prompt": "选本章一句话，用自己的话解释，再说说它怎样帮助你理解「少些索责，重在守信」。",
+      "answer": "先说清原句中的对象和动作，再解释关键词。可以围绕这点来讲：争执平息后仍可能有余怨，遇事不只追讨别人，也先守住自己的诚信。说完后，回到原文找一句作依据。",
+      "explanation": "不必背诵译文。重点看词义是否放回本句、有没有原文依据，以及是否把古人的比方误当成不分条件的结论。"
+    }
+  ]
+}

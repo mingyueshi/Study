@@ -1,0 +1,286 @@
+{
+  "schema_version": 1,
+  "id": "daodejing-74",
+  "title": "道德经·第七十四章",
+  "attribution": "老子",
+  "level": "challenge",
+  "genre": "reasoning",
+  "skills": [
+    "meaning",
+    "referent",
+    "reason",
+    "contrast",
+    "retell"
+  ],
+  "curriculum": null,
+  "intro": "不要用威吓代替治理。本章从古代刑罚出发反思杀戮，再以代木匠砍木的比方提醒不要越位妄为。",
+  "background": "这是《道德经》德经·第七十四章。本章围绕「不要用威吓代替治理」展开，可以先读原文，再对照译文，看看作者用了什么比方或对比。",
+  "editorial_note": "本馆用逐句译解帮助入门。读「道」「无为」等词时要看上下文；古代观念和理想化比方，可以边读边与家长讨论。",
+  "source": {
+    "work": "道德经（又名老子）",
+    "section": "德经·第七十四章",
+    "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#七十四章",
+    "note": "原文以本机简体《老子》为底本，统一引号，第七章移去括号异文提示。译文、词义和练习为本馆编写的入门读法，参考王弼注理解，不将不同底本混作同一文本。"
+  },
+  "source_ref": {
+    "locator": "/content/73",
+    "path": "poetry/simplified/诸子百家/老子.json",
+    "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+    "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+    "anchor_text": "民不畏死，奈何以死惧之？若使民常畏死，而为奇者，吾得执而杀之，孰敢？常有司杀者杀。夫代司杀者杀，是谓代大匠斲。夫代大匠斲者，希有不伤其手矣。"
+  },
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "民不畏死，奈何以死惧之？",
+      "translation": "百姓连死都不怕，怎么能只用死亡来威吓他们呢？",
+      "explanation": "读词小提示：「惧之」：使他们害怕。",
+      "chunks": [
+        "民不畏死，",
+        "奈何以死惧之？"
+      ],
+      "hints": [
+        "惧之"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "惧之",
+          "kind": "word",
+          "meaning": "使他们害怕。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第七十四章》第1句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#七十四章",
+        "source_ref": {
+          "locator": "/content/73",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "民不畏死，奈何以死惧之？"
+        }
+      }
+    },
+    {
+      "id": "s2",
+      "text": "若使民常畏死，而为奇者，吾得执而杀之，孰敢？",
+      "translation": "如果百姓常怕死，抓住作乱的人处死，又有谁敢作乱呢？",
+      "explanation": "这里是在古代刑罚语境中设问，不是给个人伤人或报复提供理由。",
+      "chunks": [
+        "若使民常畏死，",
+        "而为奇者，",
+        "吾得执而杀之，",
+        "孰敢？"
+      ],
+      "hints": [
+        "为奇"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "为奇",
+          "kind": "word",
+          "meaning": "做出反常、违法乱纪的行为。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第七十四章》第2句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#七十四章",
+        "source_ref": {
+          "locator": "/content/73",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "若使民常畏死，而为奇者，吾得执而杀之，孰敢？"
+        }
+      }
+    },
+    {
+      "id": "s3",
+      "text": "常有司杀者杀。",
+      "translation": "总有主管刑杀的职司。",
+      "explanation": "读词小提示：「司杀者」：古代掌管刑杀的职司，文中兼含天道的观念。",
+      "chunks": [
+        "常有司杀者杀。"
+      ],
+      "hints": [
+        "司杀者"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "司杀者",
+          "kind": "word",
+          "meaning": "古代掌管刑杀的职司，文中兼含天道的观念。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第七十四章》第3句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#七十四章",
+        "source_ref": {
+          "locator": "/content/73",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "民不畏死，奈何以死惧之？若使民常畏死，而为奇者，吾得执而杀之，孰敢？常有司杀者杀。夫代司杀者杀，是谓代大匠斲。夫代大匠斲者，希有不伤其手矣。"
+        }
+      }
+    },
+    {
+      "id": "s4",
+      "text": "夫代司杀者杀，是谓代大匠斲。",
+      "translation": "擅自代替这种职司去杀戮，就像代替大木匠砍削木头。",
+      "explanation": "读词小提示：「司杀者」：古代掌管刑杀的职司，文中兼含天道的观念；「代」：代替。",
+      "chunks": [
+        "夫代司杀者杀，",
+        "是谓代大匠斲。"
+      ],
+      "hints": [
+        "司杀者",
+        "代",
+        "大匠"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "司杀者",
+          "kind": "word",
+          "meaning": "古代掌管刑杀的职司，文中兼含天道的观念。"
+        },
+        {
+          "id": "n2",
+          "quote": "代",
+          "kind": "word",
+          "meaning": "代替。"
+        },
+        {
+          "id": "n3",
+          "quote": "大匠",
+          "kind": "word",
+          "meaning": "有经验的木匠。"
+        },
+        {
+          "id": "n4",
+          "quote": "斲",
+          "kind": "word",
+          "meaning": "砍削木材。",
+          "reading": "zhuó"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第七十四章》第4句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#七十四章",
+        "source_ref": {
+          "locator": "/content/73",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "夫代司杀者杀，是谓代大匠斲。"
+        }
+      }
+    },
+    {
+      "id": "s5",
+      "text": "夫代大匠斲者，希有不伤其手矣。",
+      "translation": "擅自代替大木匠砍削木头，很少有不伤到自己手的。",
+      "explanation": "读词小提示：「代」：代替；「大匠」：有经验的木匠。",
+      "chunks": [
+        "夫代大匠斲者，",
+        "希有不伤其手矣。"
+      ],
+      "hints": [
+        "代",
+        "大匠",
+        "斲"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "代",
+          "kind": "word",
+          "meaning": "代替。"
+        },
+        {
+          "id": "n2",
+          "quote": "大匠",
+          "kind": "word",
+          "meaning": "有经验的木匠。"
+        },
+        {
+          "id": "n3",
+          "quote": "斲",
+          "kind": "word",
+          "meaning": "砍削木材。",
+          "reading": "zhuó"
+        },
+        {
+          "id": "n4",
+          "quote": "希有",
+          "kind": "word",
+          "meaning": "很少有。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第七十四章》第5句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#七十四章",
+        "source_ref": {
+          "locator": "/content/73",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "夫代大匠斲者，希有不伤其手矣。"
+        }
+      }
+    }
+  ],
+  "overview": {
+    "sequence": [
+      "先看本章开头：百姓连死都不怕，怎么能只用死亡来威吓他们呢？",
+      "本章从古代刑罚出发反思杀戮，再以代木匠砍木的比方提醒不要越位妄为。",
+      "再回到结尾：擅自代替大木匠砍削木头，很少有不伤到自己手的。"
+    ],
+    "question": "这一章为什么可以叫作「不要用威吓代替治理」？",
+    "answer": "本章从古代刑罚出发反思杀戮，再以代木匠砍木的比方提醒不要越位妄为。可以引用本章开头或结尾的原句，说明你的依据。",
+    "takeaway": "本章从古代刑罚出发反思杀戮，再以代木匠砍木的比方提醒不要越位妄为。"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "choice",
+      "sentence": "s1",
+      "skill": "meaning",
+      "prompt": "开头的「惧之」在这里怎样理解？",
+      "choices": [
+        "只顾自己，不留意他人的处境。",
+        "为了显示本领而处处炫耀。",
+        "使他们害怕。"
+      ],
+      "answer": 2,
+      "explanation": "把词放回原句看，「惧之」在本句中的意思是：使他们害怕。"
+    },
+    {
+      "id": "q2",
+      "type": "choice",
+      "sentence": "s5",
+      "skill": "reason",
+      "prompt": "读完「不要用威吓代替治理」，哪一种理解更合适？",
+      "choices": [
+        "本章从古代刑罚出发反思杀戮，再以代木匠砍木的比方提醒不要越位妄为。",
+        "只有大声夸耀自己，才能显得有本领。",
+        "只要一次失败，就不必再试。"
+      ],
+      "answer": 0,
+      "explanation": "本章从古代刑罚出发反思杀戮，再以代木匠砍木的比方提醒不要越位妄为。"
+    },
+    {
+      "id": "q3",
+      "type": "selfcheck",
+      "sentence": "s5",
+      "skill": "retell",
+      "prompt": "选本章一句话，用自己的话解释，再说说它怎样帮助你理解「不要用威吓代替治理」。",
+      "answer": "先说清原句中的对象和动作，再解释关键词。可以围绕这点来讲：本章从古代刑罚出发反思杀戮，再以代木匠砍木的比方提醒不要越位妄为。说完后，回到原文找一句作依据。",
+      "explanation": "不必背诵译文。重点看词义是否放回本句、有没有原文依据，以及是否把古人的比方误当成不分条件的结论。"
+    }
+  ]
+}

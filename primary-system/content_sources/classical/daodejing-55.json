@@ -1,0 +1,339 @@
+{
+  "schema_version": 1,
+  "id": "daodejing-55",
+  "title": "道德经·第五十五章",
+  "attribution": "老子",
+  "level": "challenge",
+  "genre": "reasoning",
+  "skills": [
+    "meaning",
+    "referent",
+    "reason",
+    "contrast",
+    "retell"
+  ],
+  "curriculum": null,
+  "intro": "柔和与生机。本章借婴儿的柔和描写生机；这是古人的理想化比方，现实中的婴儿仍需要细心照护。",
+  "background": "这是《道德经》德经·第五十五章。本章围绕「柔和与生机」展开，可以先读原文，再对照译文，看看作者用了什么比方或对比。",
+  "editorial_note": "本馆用逐句译解帮助入门。读「道」「无为」等词时要看上下文；古代观念和理想化比方，可以边读边与家长讨论。",
+  "source": {
+    "work": "道德经（又名老子）",
+    "section": "德经·第五十五章",
+    "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#五十五章",
+    "note": "原文以本机简体《老子》为底本，统一引号，第七章移去括号异文提示。译文、词义和练习为本馆编写的入门读法，参考王弼注理解，不将不同底本混作同一文本。"
+  },
+  "source_ref": {
+    "locator": "/content/54",
+    "path": "poetry/simplified/诸子百家/老子.json",
+    "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+    "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+    "anchor_text": "含德之厚，比于赤子。毒虫不螫，猛兽不据，攫鸟不搏。骨弱筋柔而握固，未知牝牡之合而睃作，精之至也。终日号而不嗄，和之至也。知和曰常，知常曰明，益生曰祥，心使气曰强。物壮则老，谓之不道，不道早已。"
+  },
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "含德之厚，比于赤子。",
+      "translation": "德行深厚的人，好比初生的婴儿。",
+      "explanation": "读词小提示：「含德之厚」：德行深厚；「赤子」：初生的婴儿。",
+      "chunks": [
+        "含德之厚，",
+        "比于赤子。"
+      ],
+      "hints": [
+        "含德之厚",
+        "赤子"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "含德之厚",
+          "kind": "word",
+          "meaning": "德行深厚。"
+        },
+        {
+          "id": "n2",
+          "quote": "赤子",
+          "kind": "word",
+          "meaning": "初生的婴儿。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第五十五章》第1句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#五十五章",
+        "source_ref": {
+          "locator": "/content/54",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "含德之厚，比于赤子。"
+        }
+      }
+    },
+    {
+      "id": "s2",
+      "text": "毒虫不螫，猛兽不据，攫鸟不搏。",
+      "translation": "毒虫不刺，猛兽不抓，猛禽不扑。",
+      "explanation": "这是理想化的描写，不能理解成婴儿真的不会受到虫兽伤害。",
+      "chunks": [
+        "毒虫不螫，",
+        "猛兽不据，",
+        "攫鸟不搏。"
+      ],
+      "hints": [
+        "螫",
+        "据",
+        "攫鸟"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "螫",
+          "kind": "word",
+          "meaning": "毒虫刺人。",
+          "reading": "shì"
+        },
+        {
+          "id": "n2",
+          "quote": "据",
+          "kind": "word",
+          "meaning": "兽用爪抓。"
+        },
+        {
+          "id": "n3",
+          "quote": "攫鸟",
+          "kind": "word",
+          "meaning": "猛禽。",
+          "reading": "jué niǎo"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第五十五章》第2句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#五十五章",
+        "source_ref": {
+          "locator": "/content/54",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "毒虫不螫，猛兽不据，攫鸟不搏。"
+        }
+      }
+    },
+    {
+      "id": "s3",
+      "text": "骨弱筋柔而握固，未知牝牡之合而睃作，精之至也。",
+      "translation": "骨弱筋柔却握得紧，还不懂男女结合，身体已有自然的生理反应，文中借此描写生命精气充足。",
+      "explanation": "读词小提示：「握固」：握得紧；「睃作」：底本此处的用字，本馆按婴儿自然的生理反应来理解。",
+      "chunks": [
+        "骨弱筋柔而握固，",
+        "未知牝牡之合而睃作，",
+        "精之至也。"
+      ],
+      "hints": [
+        "握固",
+        "睃作",
+        "精"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "握固",
+          "kind": "word",
+          "meaning": "握得紧。"
+        },
+        {
+          "id": "n2",
+          "quote": "睃作",
+          "kind": "word",
+          "meaning": "底本此处的用字，本馆按婴儿自然的生理反应来理解。"
+        },
+        {
+          "id": "n3",
+          "quote": "精",
+          "kind": "word",
+          "meaning": "古人所说的生命精气。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第五十五章》第3句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#五十五章",
+        "source_ref": {
+          "locator": "/content/54",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "骨弱筋柔而握固，未知牝牡之合而睃作，精之至也。"
+        }
+      }
+    },
+    {
+      "id": "s4",
+      "text": "终日号而不嗄，和之至也。",
+      "translation": "整日啼哭而不嘶哑，文中借此描写调和充足。",
+      "explanation": "读词小提示：「嗄」：声音嘶哑；「和」：和谐、调和。",
+      "chunks": [
+        "终日号而不嗄，",
+        "和之至也。"
+      ],
+      "hints": [
+        "嗄",
+        "和"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "嗄",
+          "kind": "word",
+          "meaning": "声音嘶哑。",
+          "reading": "shà"
+        },
+        {
+          "id": "n2",
+          "quote": "和",
+          "kind": "word",
+          "meaning": "和谐、调和。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第五十五章》第4句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#五十五章",
+        "source_ref": {
+          "locator": "/content/54",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "终日号而不嗄，和之至也。"
+        }
+      }
+    },
+    {
+      "id": "s5",
+      "text": "知和曰常，知常曰明，益生曰祥，心使气曰强。",
+      "translation": "懂得调和叫作常，认识常叫作明；过分增益生命反有不祥，用意念强行驱使气息就是逞强。",
+      "explanation": "读词小提示：「和」：和谐、调和；「祥」：这里按不祥、祸兆来理解。",
+      "chunks": [
+        "知和曰常，",
+        "知常曰明，",
+        "益生曰祥，",
+        "心使气曰强。"
+      ],
+      "hints": [
+        "和",
+        "祥",
+        "心使气"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "和",
+          "kind": "word",
+          "meaning": "和谐、调和。"
+        },
+        {
+          "id": "n2",
+          "quote": "祥",
+          "kind": "word",
+          "meaning": "这里按不祥、祸兆来理解。"
+        },
+        {
+          "id": "n3",
+          "quote": "心使气",
+          "kind": "word",
+          "meaning": "用意念强行驱使气息。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第五十五章》第5句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#五十五章",
+        "source_ref": {
+          "locator": "/content/54",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "知和曰常，知常曰明，益生曰祥，心使气曰强。"
+        }
+      }
+    },
+    {
+      "id": "s6",
+      "text": "物壮则老，谓之不道，不道早已。",
+      "translation": "事物过分强盛就会走向衰老，这叫作不合于道，不合于道容易过早衰败。",
+      "explanation": "读词小提示：「早已」：过早衰败、停止。",
+      "chunks": [
+        "物壮则老，",
+        "谓之不道，",
+        "不道早已。"
+      ],
+      "hints": [
+        "早已"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "早已",
+          "kind": "word",
+          "meaning": "过早衰败、停止。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第五十五章》第6句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#五十五章",
+        "source_ref": {
+          "locator": "/content/54",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "物壮则老，谓之不道，不道早已。"
+        }
+      }
+    }
+  ],
+  "overview": {
+    "sequence": [
+      "先看本章开头：德行深厚的人，好比初生的婴儿。",
+      "本章借婴儿的柔和描写生机；这是古人的理想化比方，现实中的婴儿仍需要细心照护。",
+      "再回到结尾：事物过分强盛就会走向衰老，这叫作不合于道，不合于道容易过早衰败。"
+    ],
+    "question": "这一章为什么可以叫作「柔和与生机」？",
+    "answer": "本章借婴儿的柔和描写生机；这是古人的理想化比方，现实中的婴儿仍需要细心照护。可以引用本章开头或结尾的原句，说明你的依据。",
+    "takeaway": "本章借婴儿的柔和描写生机；这是古人的理想化比方，现实中的婴儿仍需要细心照护。"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "choice",
+      "sentence": "s1",
+      "skill": "meaning",
+      "prompt": "开头的「含德之厚」在这里怎样理解？",
+      "choices": [
+        "只顾自己，不留意他人的处境。",
+        "德行深厚。",
+        "为了显示本领而处处炫耀。"
+      ],
+      "answer": 1,
+      "explanation": "把词放回原句看，「含德之厚」在本句中的意思是：德行深厚。"
+    },
+    {
+      "id": "q2",
+      "type": "choice",
+      "sentence": "s6",
+      "skill": "reason",
+      "prompt": "读完「柔和与生机」，哪一种理解更合适？",
+      "choices": [
+        "别人的想法一概不用听。",
+        "只有大声夸耀自己，才能显得有本领。",
+        "本章借婴儿的柔和描写生机；这是古人的理想化比方，现实中的婴儿仍需要细心照护。"
+      ],
+      "answer": 2,
+      "explanation": "本章借婴儿的柔和描写生机；这是古人的理想化比方，现实中的婴儿仍需要细心照护。"
+    },
+    {
+      "id": "q3",
+      "type": "selfcheck",
+      "sentence": "s6",
+      "skill": "retell",
+      "prompt": "选本章一句话，用自己的话解释，再说说它怎样帮助你理解「柔和与生机」。",
+      "answer": "先说清原句中的对象和动作，再解释关键词。可以围绕这点来讲：本章借婴儿的柔和描写生机；这是古人的理想化比方，现实中的婴儿仍需要细心照护。说完后，回到原文找一句作依据。",
+      "explanation": "不必背诵译文。重点看词义是否放回本句、有没有原文依据，以及是否把古人的比方误当成不分条件的结论。"
+    }
+  ]
+}

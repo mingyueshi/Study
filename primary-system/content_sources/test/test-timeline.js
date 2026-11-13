@@ -16,6 +16,8 @@ require('../history-timeline/content.js');
 require('../history-timeline/timeline-data.js');
 require('../history-timeline/media-data.js');
 require('../history-timeline/dynasty-data.js');
+require('../history-timeline/territory-data.js');
+require('../history-timeline/territory-geo.js');
 require('../history-timeline/shared.js');
 const W = globalThis.window;
 
@@ -275,6 +277,65 @@ for (const [id, items] of Object.entries(W.TIMELINE_MEDIA)) {
 }
 ERAS.forEach(era => check(mediaEras.has(era.id), era.name + ' 应有可离线查看的图片素材'));
 
+/* ---------- 朝代版图 ---------- */
+console.log('— 朝代版图 —');
+const territoryIds = new Set();
+const territoryDynasties = new Set();
+const TERRITORIES = W.TERRITORY_MAPS;
+const TERRITORY_GEO = W.TERRITORY_GEO;
+const validPoint = point => Array.isArray(point) && point.length === 2 && point.every(Number.isFinite)
+  && Math.abs(point[0]) <= 180 && Math.abs(point[1]) <= 90;
+function validateRings(rings, label) {
+  check(Array.isArray(rings) && rings.length > 0, label + ' 应有轮廓');
+  rings.forEach(ring => {
+    check(ring.length >= 4 && ring.every(validPoint), label + ' 应有有效经纬度');
+    check(JSON.stringify(ring[0]) === JSON.stringify(ring.at(-1)), label + ' 轮廓应闭合');
+  });
+}
+check(TERRITORY_GEO?.meta.version === 'Cliopatria v0.2.1', '历史轮廓应记录数据版本');
+validateRings(TERRITORY_GEO.land, '底图陆地');
+check(Array.isArray(TERRITORY_GEO.rivers) && TERRITORY_GEO.rivers.some(river => river.name === '黄河')
+  && TERRITORY_GEO.rivers.some(river => river.name === '长江'), '底图应有黄河与长江定位线索');
+TERRITORY_GEO.rivers.forEach(river => {
+  check(isStr(river.name) && Array.isArray(river.lines) && river.lines.length > 0
+    && river.lines.every(line => line.length >= 2 && line.every(validPoint)), river.name + ' 河流线应有效');
+});
+Object.entries(TERRITORY_GEO.regions).forEach(([id, region]) => {
+  check(/^[a-z0-9-]+$/.test(id), '区域 id 有效：' + id);
+  check(isStr(region.name) && !hasBadPunct(region.name), id + ' 应有中文区域名称');
+  check(/^#[a-f0-9]{6}$/i.test(region.color), id + ' 应有颜色');
+  check(validPoint(region.label), id + ' 标签应有经纬度');
+  check(isStr(region.source), id + ' 应有轮廓来源');
+  validateRings(region.rings, id);
+});
+check(Array.isArray(TERRITORIES) && TERRITORIES.length > 0, 'TERRITORY_MAPS 应为非空数组');
+if (Array.isArray(TERRITORIES)) TERRITORIES.forEach((map, i) => {
+  const tag = '[版图 ' + map.id + ']';
+  check(/^[a-z-]+$/.test(map.id) && !territoryIds.has(map.id), tag + ' id 应有效且唯一');
+  territoryIds.add(map.id);
+  check(BANDS.some(band => band.id === map.dynasty), tag + ' 应关联存在的朝代');
+  territoryDynasties.add(map.dynasty);
+  check(Number.isInteger(map.year) && map.year !== 0, tag + ' 应有示意年份');
+  const band = BANDS.find(band => band.id === map.dynasty);
+  check(band && map.year >= band.startYear && map.year <= band.endYear, tag + ' 示意年份应在所属朝代内');
+  check(Array.isArray(map.regions) && map.regions.length > 0 && map.regions.every(id => TERRITORY_GEO.regions[id]),
+    tag + ' 应引用有效的地图轮廓');
+  check(new Set(map.regions).size === map.regions.length, tag + ' 区域引用不得重复');
+  check(Array.isArray(map.capitals) && map.capitals.length > 0 && map.capitals.every(capital =>
+    isStr(capital.name) && validPoint(capital.point)), tag + ' 应有都城或中心地点标记');
+  check(Number.isFinite(map.sort) && map.sort !== 0, tag + ' 应有排序年代');
+  if (i > 0) check(map.sort >= TERRITORIES[i - 1].sort, tag + ' 应按时间排列');
+  for (const field of ['title', 'period', 'alt', 'credit', 'note', 'question', 'answer']) {
+    check(isStr(map[field]) && !hasBadPunct(map[field]), tag + ' 应有中文 ' + field);
+  }
+  check(Array.isArray(map.observe) && map.observe.length >= 2 && map.observe.every(text => isStr(text) && !hasBadPunct(text)),
+    tag + ' 应有至少两条观察提示');
+  check(/^assets\/territory\/[a-z0-9-]+\.jpg$/.test(map.src) && fileExists(map.src), tag + ' 应引用本地地图');
+  check([map.width, map.height].every(n => Number.isInteger(n) && n > 0), tag + ' 应有图片宽高');
+  check(/^https:\/\/home\.olemiss\.edu\/~gg\/hstrymap\/[^\s]+\.jpg$/.test(map.source), tag + ' 应保存地图原始出处');
+});
+BANDS.forEach(band => check(territoryDynasties.has(band.id), band.name + ' 应有对应地图'));
+
 /* ---------- 入口文件（多页面系统） ---------- */
 console.log('— 入口文件（多页面系统） —');
 check(fileExists('README.md'), '缺少历史时间轴维护说明');
@@ -283,7 +344,7 @@ const PAGE_REFS = {
   'index.html': ['content.js', 'timeline-data.js', 'dynasty-data.js', 'shared.js', 'home-app.js', 'styles.css', 'timeline.html', 'dynasties.html', 'era.html'],
   'timeline.html': ['content.js', 'timeline-data.js', 'media-data.js', 'dynasty-data.js', 'shared.js', 'timeline-app.js', 'styles.css', 'timeline.css',
     'dynasties.html', 'era.html'],
-  'dynasties.html': ['content.js', 'dynasty-data.js', 'shared.js', 'dynasty-app.js', 'styles.css', 'dynasty.css',
+  'dynasties.html': ['content.js', 'dynasty-data.js', 'territory-data.js', 'territory-geo.js', 'shared.js', 'dynasty-app.js', 'territory-app.js', 'styles.css', 'dynasty.css', 'territory.css',
     'timeline.html'],
   'era.html': ['content.js', 'timeline-data.js', 'media-data.js', 'dynasty-data.js', 'shared.js', 'era-app.js', 'styles.css', 'era.css', 'media.css',
     'timeline.html'],
@@ -300,7 +361,7 @@ Object.entries(PAGE_REFS).forEach(([page, refs]) => {
   }
   check(html.includes('lang="zh-CN"'), page + ' 应声明 zh-CN');
   check(html.includes('tl-sysnav'), page + ' 应有系统导航条');
-  check(!/https?:\/\//.test(html.replace(/<!--[\s\S]*?-->/g, '')), page + ' 不应引用外部网络资源（离线优先）');
+  check(!/https?:\/\//.test(html.replace(/<!--[\s\S]*?-->/g, '').replace(/xmlns="http:\/\/www\.w3\.org\/2000\/svg"/g, '')), page + ' 不应引用外部网络资源（离线优先）');
 });
 
 /* ---------- 汇总 ---------- */

@@ -1,0 +1,349 @@
+{
+  "schema_version": 1,
+  "id": "daodejing-61",
+  "title": "道德经·第六十一章",
+  "attribution": "老子",
+  "level": "challenge",
+  "genre": "reasoning",
+  "skills": [
+    "meaning",
+    "referent",
+    "reason",
+    "contrast",
+    "retell"
+  ],
+  "curriculum": null,
+  "intro": "愿意处下，才易相交。本章用江河下流与安静柔和的比方，讨论大小国家怎样相处。",
+  "background": "这是《道德经》德经·第六十一章。本章围绕「愿意处下，才易相交」展开，可以先读原文，再对照译文，看看作者用了什么比方或对比。",
+  "editorial_note": "本馆用逐句译解帮助入门。读「道」「无为」等词时要看上下文；古代观念和理想化比方，可以边读边与家长讨论。",
+  "source": {
+    "work": "道德经（又名老子）",
+    "section": "德经·第六十一章",
+    "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#六十一章",
+    "note": "原文以本机简体《老子》为底本，统一引号，第七章移去括号异文提示。译文、词义和练习为本馆编写的入门读法，参考王弼注理解，不将不同底本混作同一文本。"
+  },
+  "source_ref": {
+    "locator": "/content/60",
+    "path": "poetry/simplified/诸子百家/老子.json",
+    "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+    "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+    "anchor_text": "大邦者下流，天下之牝，天下之交也。牝常以静胜牡，以静为下。故大邦以下小邦，则取小邦；小邦以下大邦，则取大邦。故或下以取，或下而取。大邦不过欲兼畜人，小邦不过欲入事人。夫两者各得所欲，大者宜为下。"
+  },
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "大邦者下流，天下之牝，天下之交也。",
+      "translation": "大国像江河的下流，是天下柔和、交汇的地方。",
+      "explanation": "读词小提示：「大邦」：大国；「下流」：江河的下游、低处，不是今天贬义的用法。",
+      "chunks": [
+        "大邦者下流，",
+        "天下之牝，",
+        "天下之交也。"
+      ],
+      "hints": [
+        "大邦",
+        "下流",
+        "牝"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "大邦",
+          "kind": "word",
+          "meaning": "大国。"
+        },
+        {
+          "id": "n2",
+          "quote": "下流",
+          "kind": "word",
+          "meaning": "江河的下游、低处，不是今天贬义的用法。"
+        },
+        {
+          "id": "n3",
+          "quote": "牝",
+          "kind": "word",
+          "meaning": "这里借雌柔比喻安静柔和。",
+          "reading": "pìn"
+        },
+        {
+          "id": "n4",
+          "quote": "交",
+          "kind": "word",
+          "meaning": "会合、交汇。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第六十一章》第1句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#六十一章",
+        "source_ref": {
+          "locator": "/content/60",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "大邦者下流，天下之牝，天下之交也。"
+        }
+      }
+    },
+    {
+      "id": "s2",
+      "text": "牝常以静胜牡，以静为下。",
+      "translation": "柔和常以安静胜过刚强，凭安静而处下。",
+      "explanation": "读词小提示：「牝」：这里借雌柔比喻安静柔和；「牡」：雄性，这里是相对的比方。",
+      "chunks": [
+        "牝常以静胜牡，",
+        "以静为下。"
+      ],
+      "hints": [
+        "牝",
+        "牡",
+        "为下"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "牝",
+          "kind": "word",
+          "meaning": "这里借雌柔比喻安静柔和。",
+          "reading": "pìn"
+        },
+        {
+          "id": "n2",
+          "quote": "牡",
+          "kind": "word",
+          "meaning": "雄性，这里是相对的比方。"
+        },
+        {
+          "id": "n3",
+          "quote": "为下",
+          "kind": "word",
+          "meaning": "愿意谦让。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第六十一章》第2句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#六十一章",
+        "source_ref": {
+          "locator": "/content/60",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "牝常以静胜牡，以静为下。"
+        }
+      }
+    },
+    {
+      "id": "s3",
+      "text": "故大邦以下小邦，则取小邦；小邦以下大邦，则取大邦。",
+      "translation": "所以大国谦下对待小国，能够得到小国接纳；小国谦下对待大国，能够得到大国接纳。",
+      "explanation": "读词小提示：「大邦」：大国；「以下」：以谦下的态度对待。",
+      "chunks": [
+        "故大邦以下小邦，",
+        "则取小邦；",
+        "小邦以下大邦，",
+        "则取大邦。"
+      ],
+      "hints": [
+        "大邦",
+        "以下",
+        "取"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "大邦",
+          "kind": "word",
+          "meaning": "大国。"
+        },
+        {
+          "id": "n2",
+          "quote": "以下",
+          "kind": "word",
+          "meaning": "以谦下的态度对待。"
+        },
+        {
+          "id": "n3",
+          "quote": "取",
+          "kind": "word",
+          "meaning": "获得接纳、归附。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第六十一章》第3句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#六十一章",
+        "source_ref": {
+          "locator": "/content/60",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "故大邦以下小邦，则取小邦；小邦以下大邦，则取大邦。"
+        }
+      }
+    },
+    {
+      "id": "s4",
+      "text": "故或下以取，或下而取。",
+      "translation": "有的是谦下而得到别人，有的是谦下而被别人接纳。",
+      "explanation": "读词小提示：「取」：获得接纳、归附。",
+      "chunks": [
+        "故或下以取，",
+        "或下而取。"
+      ],
+      "hints": [
+        "取"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "取",
+          "kind": "word",
+          "meaning": "获得接纳、归附。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第六十一章》第4句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#六十一章",
+        "source_ref": {
+          "locator": "/content/60",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "故或下以取，或下而取。"
+        }
+      }
+    },
+    {
+      "id": "s5",
+      "text": "大邦不过欲兼畜人，小邦不过欲入事人。",
+      "translation": "大国希望包容养护别人，小国希望参与、为人做事。",
+      "explanation": "读词小提示：「大邦」：大国；「兼畜人」：包容、养护他人。",
+      "chunks": [
+        "大邦不过欲兼畜人，",
+        "小邦不过欲入事人。"
+      ],
+      "hints": [
+        "大邦",
+        "兼畜人",
+        "入事人"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "大邦",
+          "kind": "word",
+          "meaning": "大国。"
+        },
+        {
+          "id": "n2",
+          "quote": "兼畜人",
+          "kind": "word",
+          "meaning": "包容、养护他人。"
+        },
+        {
+          "id": "n3",
+          "quote": "入事人",
+          "kind": "word",
+          "meaning": "参与并为人做事。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第六十一章》第5句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#六十一章",
+        "source_ref": {
+          "locator": "/content/60",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "大邦不过欲兼畜人，小邦不过欲入事人。"
+        }
+      }
+    },
+    {
+      "id": "s6",
+      "text": "夫两者各得所欲，大者宜为下。",
+      "translation": "要让双方都得到合理的所需，强大的一方更应愿意谦让。",
+      "explanation": "读词小提示：「各得所欲」：双方都得到合理的所需；「为下」：愿意谦让。",
+      "chunks": [
+        "夫两者各得所欲，",
+        "大者宜为下。"
+      ],
+      "hints": [
+        "各得所欲",
+        "为下"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "各得所欲",
+          "kind": "word",
+          "meaning": "双方都得到合理的所需。"
+        },
+        {
+          "id": "n2",
+          "quote": "为下",
+          "kind": "word",
+          "meaning": "愿意谦让。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第六十一章》第6句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#六十一章",
+        "source_ref": {
+          "locator": "/content/60",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "夫两者各得所欲，大者宜为下。"
+        }
+      }
+    }
+  ],
+  "overview": {
+    "sequence": [
+      "先看本章开头：大国像江河的下流，是天下柔和、交汇的地方。",
+      "本章用江河下流与安静柔和的比方，讨论大小国家怎样相处。",
+      "再回到结尾：要让双方都得到合理的所需，强大的一方更应愿意谦让。"
+    ],
+    "question": "这一章为什么可以叫作「愿意处下，才易相交」？",
+    "answer": "本章用江河下流与安静柔和的比方，讨论大小国家怎样相处。可以引用本章开头或结尾的原句，说明你的依据。",
+    "takeaway": "本章用江河下流与安静柔和的比方，讨论大小国家怎样相处。"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "choice",
+      "sentence": "s1",
+      "skill": "meaning",
+      "prompt": "开头的「大邦」在这里怎样理解？",
+      "choices": [
+        "只顾自己，不留意他人的处境。",
+        "大国。",
+        "为了显示本领而处处炫耀。"
+      ],
+      "answer": 1,
+      "explanation": "把词放回原句看，「大邦」在本句中的意思是：大国。"
+    },
+    {
+      "id": "q2",
+      "type": "choice",
+      "sentence": "s6",
+      "skill": "reason",
+      "prompt": "读完「愿意处下，才易相交」，哪一种理解更合适？",
+      "choices": [
+        "只要一次失败，就不必再试。",
+        "遇到问题不用观察，也不必行动。",
+        "本章用江河下流与安静柔和的比方，讨论大小国家怎样相处。"
+      ],
+      "answer": 2,
+      "explanation": "本章用江河下流与安静柔和的比方，讨论大小国家怎样相处。"
+    },
+    {
+      "id": "q3",
+      "type": "selfcheck",
+      "sentence": "s6",
+      "skill": "retell",
+      "prompt": "选本章一句话，用自己的话解释，再说说它怎样帮助你理解「愿意处下，才易相交」。",
+      "answer": "先说清原句中的对象和动作，再解释关键词。可以围绕这点来讲：本章用江河下流与安静柔和的比方，讨论大小国家怎样相处。说完后，回到原文找一句作依据。",
+      "explanation": "不必背诵译文。重点看词义是否放回本句、有没有原文依据，以及是否把古人的比方误当成不分条件的结论。"
+    }
+  ]
+}

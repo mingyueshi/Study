@@ -1,0 +1,373 @@
+{
+  "schema_version": 1,
+  "id": "daodejing-25",
+  "title": "道德经·第二十五章",
+  "attribution": "老子",
+  "level": "challenge",
+  "genre": "reasoning",
+  "skills": [
+    "meaning",
+    "referent",
+    "reason",
+    "contrast",
+    "retell"
+  ],
+  "curriculum": null,
+  "intro": "道法自然。从人到天地，层层追问所依循的道理；「自然」在这里说自然而然。",
+  "background": "这是《道德经》道经·第二十五章。本章围绕「道法自然」展开，可以先读原文，再对照译文，看看作者用了什么比方或对比。",
+  "editorial_note": "本馆用逐句译解帮助入门。读「道」「无为」等词时要看上下文；古代观念和理想化比方，可以边读边与家长讨论。",
+  "source": {
+    "work": "道德经（又名老子）",
+    "section": "道经·第二十五章",
+    "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#二十五章",
+    "note": "原文以本机简体《老子》为底本，统一引号，第七章移去括号异文提示。译文、词义和练习为本馆编写的入门读法，参考王弼注理解，不将不同底本混作同一文本。"
+  },
+  "source_ref": {
+    "locator": "/content/24",
+    "path": "poetry/simplified/诸子百家/老子.json",
+    "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+    "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+    "anchor_text": "有物混成，先天地生。寂兮寥兮，独立而不改，周行而不殆，可以为天地母。吾不知其名，字之曰道，强为之，名曰大。大曰逝，逝曰远，远曰反。故道大，天大，地大，人亦大。域中有四大，而人居其一焉。人法地，地法天，天法道，道法自然。"
+  },
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "有物混成，先天地生。",
+      "translation": "有一种浑然一体的存在，在天地形成以前就有了。",
+      "explanation": "读词小提示：「混成」：浑然一体而形成。",
+      "chunks": [
+        "有物混成，",
+        "先天地生。"
+      ],
+      "hints": [
+        "混成"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "混成",
+          "kind": "word",
+          "meaning": "浑然一体而形成。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第二十五章》第1句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#二十五章",
+        "source_ref": {
+          "locator": "/content/24",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "有物混成，先天地生。"
+        }
+      }
+    },
+    {
+      "id": "s2",
+      "text": "寂兮寥兮，独立而不改，周行而不殆，可以为天地母。",
+      "translation": "它安静空旷，独立存在而不改，循环运行而不止息，可以看作天地的根源。",
+      "explanation": "读词小提示：「殆」：衰竭、止息；「母」：根源，是比方。",
+      "chunks": [
+        "寂兮寥兮，",
+        "独立而不改，",
+        "周行而不殆，",
+        "可以为天地母。"
+      ],
+      "hints": [
+        "殆",
+        "母"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "殆",
+          "kind": "word",
+          "meaning": "衰竭、止息。"
+        },
+        {
+          "id": "n2",
+          "quote": "母",
+          "kind": "word",
+          "meaning": "根源，是比方。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第二十五章》第2句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#二十五章",
+        "source_ref": {
+          "locator": "/content/24",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "寂兮寥兮，独立而不改，周行而不殆，可以为天地母。"
+        }
+      }
+    },
+    {
+      "id": "s3",
+      "text": "吾不知其名，字之曰道，强为之，名曰大。",
+      "translation": "我不知道它的名字，就称它为道，勉强把它叫作大。",
+      "explanation": "读词小提示：「字之」：给它取一个称呼；「强」：勉强、姑且。",
+      "chunks": [
+        "吾不知其名，",
+        "字之曰道，",
+        "强为之，",
+        "名曰大。"
+      ],
+      "hints": [
+        "字之",
+        "强",
+        "大"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "字之",
+          "kind": "word",
+          "meaning": "给它取一个称呼。"
+        },
+        {
+          "id": "n2",
+          "quote": "强",
+          "kind": "word",
+          "meaning": "勉强、姑且。",
+          "reading": "qiǎng"
+        },
+        {
+          "id": "n3",
+          "quote": "大",
+          "kind": "word",
+          "meaning": "广大，不受一个具体形状限制。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第二十五章》第3句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#二十五章",
+        "source_ref": {
+          "locator": "/content/24",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "吾不知其名，字之曰道，强为之，名曰大。"
+        }
+      }
+    },
+    {
+      "id": "s4",
+      "text": "大曰逝，逝曰远，远曰反。",
+      "translation": "大而运行，运行而远去，远去又返回。",
+      "explanation": "读词小提示：「逝」：运行、远去；「反」：返回。",
+      "chunks": [
+        "大曰逝，",
+        "逝曰远，",
+        "远曰反。"
+      ],
+      "hints": [
+        "逝",
+        "反",
+        "大"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "逝",
+          "kind": "word",
+          "meaning": "运行、远去。"
+        },
+        {
+          "id": "n2",
+          "quote": "反",
+          "kind": "word",
+          "meaning": "返回。"
+        },
+        {
+          "id": "n3",
+          "quote": "大",
+          "kind": "word",
+          "meaning": "广大，不受一个具体形状限制。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第二十五章》第4句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#二十五章",
+        "source_ref": {
+          "locator": "/content/24",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "大曰逝，逝曰远，远曰反。"
+        }
+      }
+    },
+    {
+      "id": "s5",
+      "text": "故道大，天大，地大，人亦大。",
+      "translation": "所以道大，天大，地大，人也大。",
+      "explanation": "读词小提示：「大」：广大，不受一个具体形状限制。",
+      "chunks": [
+        "故道大，",
+        "天大，",
+        "地大，",
+        "人亦大。"
+      ],
+      "hints": [
+        "大"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "大",
+          "kind": "word",
+          "meaning": "广大，不受一个具体形状限制。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第二十五章》第5句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#二十五章",
+        "source_ref": {
+          "locator": "/content/24",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "故道大，天大，地大，人亦大。"
+        }
+      }
+    },
+    {
+      "id": "s6",
+      "text": "域中有四大，而人居其一焉。",
+      "translation": "天地之间有四大，而人居于其中一项。",
+      "explanation": "读词小提示：「域中」：天地之间；「居其一」：占其中一项。",
+      "chunks": [
+        "域中有四大，",
+        "而人居其一焉。"
+      ],
+      "hints": [
+        "域中",
+        "居其一",
+        "大"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "域中",
+          "kind": "word",
+          "meaning": "天地之间。"
+        },
+        {
+          "id": "n2",
+          "quote": "居其一",
+          "kind": "word",
+          "meaning": "占其中一项。"
+        },
+        {
+          "id": "n3",
+          "quote": "大",
+          "kind": "word",
+          "meaning": "广大，不受一个具体形状限制。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第二十五章》第6句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#二十五章",
+        "source_ref": {
+          "locator": "/content/24",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "域中有四大，而人居其一焉。"
+        }
+      }
+    },
+    {
+      "id": "s7",
+      "text": "人法地，地法天，天法道，道法自然。",
+      "translation": "人效法地，地效法天，天效法道，道顺其自然而然。",
+      "explanation": "这里的层次是古人的说理方式，不是自然科学中的分类表。",
+      "chunks": [
+        "人法地，",
+        "地法天，",
+        "天法道，",
+        "道法自然。"
+      ],
+      "hints": [
+        "法",
+        "自然"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "法",
+          "kind": "word",
+          "meaning": "效法、遵循。"
+        },
+        {
+          "id": "n2",
+          "quote": "自然",
+          "kind": "word",
+          "meaning": "自然而然、自己如此。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第二十五章》第7句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#二十五章",
+        "source_ref": {
+          "locator": "/content/24",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "人法地，地法天，天法道，道法自然。"
+        }
+      }
+    }
+  ],
+  "overview": {
+    "sequence": [
+      "先看本章开头：有一种浑然一体的存在，在天地形成以前就有了。",
+      "从人到天地，层层追问所依循的道理；「自然」在这里说自然而然。",
+      "再回到结尾：人效法地，地效法天，天效法道，道顺其自然而然。"
+    ],
+    "question": "这一章为什么可以叫作「道法自然」？",
+    "answer": "从人到天地，层层追问所依循的道理；「自然」在这里说自然而然。可以引用本章开头或结尾的原句，说明你的依据。",
+    "takeaway": "从人到天地，层层追问所依循的道理；「自然」在这里说自然而然。"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "choice",
+      "sentence": "s1",
+      "skill": "meaning",
+      "prompt": "开头的「混成」在这里怎样理解？",
+      "choices": [
+        "只顾自己，不留意他人的处境。",
+        "浑然一体而形成。",
+        "为了显示本领而处处炫耀。"
+      ],
+      "answer": 1,
+      "explanation": "把词放回原句看，「混成」在本句中的意思是：浑然一体而形成。"
+    },
+    {
+      "id": "q2",
+      "type": "choice",
+      "sentence": "s7",
+      "skill": "reason",
+      "prompt": "读完「道法自然」，哪一种理解更合适？",
+      "choices": [
+        "无论什么情况，都应该争着抢先。",
+        "做事情永远越多越快越好。",
+        "从人到天地，层层追问所依循的道理；「自然」在这里说自然而然。"
+      ],
+      "answer": 2,
+      "explanation": "从人到天地，层层追问所依循的道理；「自然」在这里说自然而然。"
+    },
+    {
+      "id": "q3",
+      "type": "selfcheck",
+      "sentence": "s7",
+      "skill": "retell",
+      "prompt": "选本章一句话，用自己的话解释，再说说它怎样帮助你理解「道法自然」。",
+      "answer": "先说清原句中的对象和动作，再解释关键词。可以围绕这点来讲：从人到天地，层层追问所依循的道理；「自然」在这里说自然而然。说完后，回到原文找一句作依据。",
+      "explanation": "不必背诵译文。重点看词义是否放回本句、有没有原文依据，以及是否把古人的比方误当成不分条件的结论。"
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "id": "yangshizhizi",
+  "title": "杨氏之子",
+  "attribution": "刘义庆组织编写《世说新语》",
+  "level": "story",
+  "genre": "people",
+  "skills": ["meaning", "referent", "omission", "reason", "retell"],
+  "curriculum": null,
+  "source_ref": {"version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native", "path": "poetry/simplified/笔记杂谈/世说新语.json", "locator": "/content/1", "sha256": "d3453a94cdf8f8205701f91b27cda5386b148c9935be76d9e5e56ef86149bcbe", "anchor_text": "梁国杨氏子，九岁，甚聪惠。"},
+  "intro": "一个姓杨的孩子，怎样接住姓孔的客人的玩笑？找出两个人话里的搭档。",
+  "background": "故事出自《世说新语·言语》，这一篇记录了许多巧妙的言谈。杨氏子指姓杨人家的儿子。",
+  "editorial_note": "保留「聪惠」的写法，「惠」同「慧」。古文中的「家禽」要理解为「您家的鸟」。",
+  "source": {"work": "《世说新语》", "section": "《言语》梁国杨氏子条", "url": "https://zh.wikisource.org/wiki/世說新語/言語", "note": "采用常见教学短篇文字，简体标点；译文和解读为本专题编写，未登记教材册次。"},
+  "sentences": [
+    {"id": "s1", "text": "梁国杨氏子九岁，甚聪惠。", "chunks": ["梁国杨氏子九岁，", "甚聪惠。"], "translation": "梁国有个姓杨人家的儿子，九岁，非常聪明。", "explanation": "开头先说孩子聪明，后面会用具体对话让我们看出来。", "hints": ["九岁", "聪惠"], "notes": [
+      {"id": "shi", "quote": "氏", "kind": "word", "meaning": "放在姓后面，表示某一家。"},
+      {"id": "hui", "quote": "惠", "kind": "word", "meaning": "同「慧」，聪明。", "reading": "huì"}
+    ]},
+    {"id": "s2", "text": "孔君平诣其父，父不在，乃呼儿出。", "chunks": ["孔君平诣其父，", "父不在，", "乃呼儿出。"], "translation": "孔君平来拜访孩子的父亲，父亲不在，于是孔君平叫孩子出来。", "explanation": "注意是谁来拜访、是谁叫孩子，古文没有在每个动作前都重复人物。", "supplement": "「乃呼儿出」省略的主语是孔君平。", "hints": ["诣其父", "父不在", "呼儿出"], "notes": [
+      {"id": "yi", "quote": "诣", "kind": "word", "meaning": "拜访。", "reading": "yì"},
+      {"id": "qi", "quote": "其", "kind": "referent", "meaning": "他的。", "refers_to": "杨氏之子", "reason": "孔君平来找的是孩子的父亲，沿着开头介绍的孩子来理解。"},
+      {"id": "nai", "quote": "乃", "kind": "word", "meaning": "于是，就。"}
+    ]},
+    {"id": "s3", "text": "为设果，果有杨梅。", "chunks": ["为设果，", "果有杨梅。"], "translation": "孩子为孔君平摆上水果，其中有杨梅。", "explanation": "「杨梅」为后面的玩笑作了铺垫。", "supplement": "把省略的内容补出来就是：孩子为孔君平摆上水果。", "hints": ["设果", "杨梅"], "notes": [
+      {"id": "wei", "quote": "为", "kind": "word", "meaning": "给，替。这里读 wèi。", "reading": "wèi"},
+      {"id": "she", "quote": "设", "kind": "word", "meaning": "摆设，摆上。"}
+    ]},
+    {"id": "s4", "text": "孔指以示儿曰：「此是君家果。」", "chunks": ["孔指以示儿曰：", "「此是君家果。」"], "translation": "孔君平指着杨梅给孩子看，说：「这是你家的水果。」", "explanation": "他把杨梅的「杨」与孩子的姓联系起来，开了个玩笑。", "hints": ["示儿", "君家果"], "notes": [
+      {"id": "shi", "quote": "示", "kind": "word", "meaning": "给人看。"},
+      {"id": "ci", "quote": "此", "kind": "referent", "meaning": "这。", "refers_to": "盘中的杨梅", "reason": "上一句特别提到杨梅，姓杨的孩子与杨梅的名字正好对应。"},
+      {"id": "jun", "quote": "君", "kind": "word", "meaning": "对对方的敬称，这里是「你」。"}
+    ]},
+    {"id": "s5", "text": "儿应声答曰：「未闻孔雀是夫子家禽。」", "chunks": ["儿应声答曰：", "「未闻", "孔雀是夫子家禽。」"], "translation": "孩子马上接着回答：「我没有听说孔雀是您家的鸟。」", "explanation": "杨对杨梅，孔对孔雀，孩子沿用了同一种联系。他用「未闻」回应，语气也很得体。", "hints": ["应声", "未闻", "孔雀"], "notes": [
+      {"id": "yingsheng", "quote": "应声", "kind": "word", "meaning": "紧接着对方的话作答，写出反应很快。", "reading": "yìng shēng"},
+      {"id": "fuzi", "quote": "夫子", "kind": "referent", "meaning": "古时对男子的敬称，这里指说话的客人。", "refers_to": "孔君平", "reason": "孩子正在回应孔君平，用敬称称呼对方。"},
+      {"id": "jiaqin", "quote": "家禽", "kind": "word", "meaning": "这里是「您家的鸟」，不能直接当成现代词语「家禽」来解释。"}
+    ]}
+  ],
+  "overview": {"sequence": ["孔君平来访，孩子摆水果待客。", "客人把杨梅与孩子的姓联系起来。", "孩子把孔雀与客人的姓对应，巧妙作答。"], "question": "从哪里能看出孩子既机智又有礼貌？", "answer": "「应声」说明反应快；杨梅与孔雀的对应很巧妙；用「未闻」和「夫子」回应，也保留了礼貌。", "takeaway": "读对话时，看清双方话语怎样呼应，并结合用词体会语气。"},
+  "questions": [
+    {"id": "q1", "type": "choice", "skill": "meaning", "sentence": "s5", "prompt": "这里的「家禽」怎样解释合适？", "choices": ["孩子家的杨梅", "家里饲养的所有动物", "您家的鸟"], "answer": 2, "explanation": "孩子把「孔雀」与「孔君平」的姓对应，是说孔雀并非孔君平家的鸟。"},
+    {"id": "q2", "type": "choice", "skill": "omission", "sentence": "s3", "prompt": "「为设果」补全后，哪一句符合上下文？", "choices": ["父亲为大家摘杨梅", "孩子为孔君平摆水果", "孔雀给孩子送水果"], "answer": 1, "explanation": "父亲不在，孩子出来招待客人，摆水果的是孩子。"},
+    {"id": "q3", "type": "choice", "skill": "reason", "sentence": "s5", "prompt": "孩子为什么提到孔雀？", "choices": ["用孔与孔雀回应杨与杨梅的联系", "孔雀吃掉了杨梅", "客人养了一只孔雀"], "answer": 0, "explanation": "找到两组相同的联系，才能理解对话的巧妙。文中没有说客人养孔雀。"},
+    {"id": "q4", "type": "selfcheck", "skill": "retell", "sentence": "s5", "prompt": "把两个人的玩笑讲给别人听，再说一句你的依据。", "answer": "孔君平见杨梅就说是姓杨孩子家的果子，孩子立刻用孔雀作回应。我从「应声」看出他反应很快。", "explanation": "复述要讲清姓与物名的对应，评价人物时要找到原文用词。"}
+  ]
+}

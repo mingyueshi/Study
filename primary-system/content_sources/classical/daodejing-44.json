@@ -1,0 +1,283 @@
+{
+  "schema_version": 1,
+  "id": "daodejing-44",
+  "title": "道德经·第四十四章",
+  "attribution": "老子",
+  "level": "challenge",
+  "genre": "reasoning",
+  "skills": [
+    "meaning",
+    "referent",
+    "reason",
+    "contrast",
+    "retell"
+  ],
+  "curriculum": null,
+  "intro": "名利与自身。比较声名、财货和生命，懂得适度，不让过多贪求损害自己。",
+  "background": "这是《道德经》德经·第四十四章。本章围绕「名利与自身」展开，可以先读原文，再对照译文，看看作者用了什么比方或对比。",
+  "editorial_note": "本馆用逐句译解帮助入门。读「道」「无为」等词时要看上下文；古代观念和理想化比方，可以边读边与家长讨论。",
+  "source": {
+    "work": "道德经（又名老子）",
+    "section": "德经·第四十四章",
+    "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#四十四章",
+    "note": "原文以本机简体《老子》为底本，统一引号，第七章移去括号异文提示。译文、词义和练习为本馆编写的入门读法，参考王弼注理解，不将不同底本混作同一文本。"
+  },
+  "source_ref": {
+    "locator": "/content/43",
+    "path": "poetry/simplified/诸子百家/老子.json",
+    "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+    "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+    "anchor_text": "名与身孰亲？身与货孰多？得与亡孰病？甚爱必大费；多藏必厚亡。故知足不辱，知止不殆，可以长久。"
+  },
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "名与身孰亲？",
+      "translation": "声名与自身，哪个更切身？",
+      "explanation": "读词小提示：「孰」：哪一个；「亲」：亲近、切身。",
+      "chunks": [
+        "名与身孰亲？"
+      ],
+      "hints": [
+        "孰",
+        "亲"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "孰",
+          "kind": "word",
+          "meaning": "哪一个。"
+        },
+        {
+          "id": "n2",
+          "quote": "亲",
+          "kind": "word",
+          "meaning": "亲近、切身。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第四十四章》第1句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#四十四章",
+        "source_ref": {
+          "locator": "/content/43",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "名与身孰亲？身与货孰多？得与亡孰病？甚爱必大费；多藏必厚亡。故知足不辱，知止不殆，可以长久。"
+        }
+      }
+    },
+    {
+      "id": "s2",
+      "text": "身与货孰多？",
+      "translation": "自身与财物，哪个更重要？",
+      "explanation": "读词小提示：「孰」：哪一个；「货」：财物。",
+      "chunks": [
+        "身与货孰多？"
+      ],
+      "hints": [
+        "孰",
+        "货"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "孰",
+          "kind": "word",
+          "meaning": "哪一个。"
+        },
+        {
+          "id": "n2",
+          "quote": "货",
+          "kind": "word",
+          "meaning": "财物。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第四十四章》第2句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#四十四章",
+        "source_ref": {
+          "locator": "/content/43",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "名与身孰亲？身与货孰多？得与亡孰病？甚爱必大费；多藏必厚亡。故知足不辱，知止不殆，可以长久。"
+        }
+      }
+    },
+    {
+      "id": "s3",
+      "text": "得与亡孰病？",
+      "translation": "得到与失去，哪个更容易造成损害？",
+      "explanation": "读词小提示：「孰」：哪一个；「病」：损害、忧患。",
+      "chunks": [
+        "得与亡孰病？"
+      ],
+      "hints": [
+        "孰",
+        "病"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "孰",
+          "kind": "word",
+          "meaning": "哪一个。"
+        },
+        {
+          "id": "n2",
+          "quote": "病",
+          "kind": "word",
+          "meaning": "损害、忧患。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第四十四章》第3句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#四十四章",
+        "source_ref": {
+          "locator": "/content/43",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "名与身孰亲？身与货孰多？得与亡孰病？甚爱必大费；多藏必厚亡。故知足不辱，知止不殆，可以长久。"
+        }
+      }
+    },
+    {
+      "id": "s4",
+      "text": "甚爱必大费；多藏必厚亡。",
+      "translation": "过分贪恋必有大的耗费，积藏太多也可能有大的损失。",
+      "explanation": "读词小提示：「甚爱」：过分爱惜、贪恋；「多藏」：过多积藏。",
+      "chunks": [
+        "甚爱必大费；",
+        "多藏必厚亡。"
+      ],
+      "hints": [
+        "甚爱",
+        "多藏"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "甚爱",
+          "kind": "word",
+          "meaning": "过分爱惜、贪恋。"
+        },
+        {
+          "id": "n2",
+          "quote": "多藏",
+          "kind": "word",
+          "meaning": "过多积藏。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第四十四章》第4句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#四十四章",
+        "source_ref": {
+          "locator": "/content/43",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "甚爱必大费；多藏必厚亡。"
+        }
+      }
+    },
+    {
+      "id": "s5",
+      "text": "故知足不辱，知止不殆，可以长久。",
+      "translation": "所以懂得满足就不容易受辱，懂得适度就少遇危险，因而能够长久。",
+      "explanation": "读词小提示：「知足」：知道满足；「知止」：知道适可而止。",
+      "chunks": [
+        "故知足不辱，",
+        "知止不殆，",
+        "可以长久。"
+      ],
+      "hints": [
+        "知足",
+        "知止",
+        "殆"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "知足",
+          "kind": "word",
+          "meaning": "知道满足。"
+        },
+        {
+          "id": "n2",
+          "quote": "知止",
+          "kind": "word",
+          "meaning": "知道适可而止。"
+        },
+        {
+          "id": "n3",
+          "quote": "殆",
+          "kind": "word",
+          "meaning": "危险。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第四十四章》第5句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#四十四章",
+        "source_ref": {
+          "locator": "/content/43",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "故知足不辱，知止不殆，可以长久。"
+        }
+      }
+    }
+  ],
+  "overview": {
+    "sequence": [
+      "先看本章开头：声名与自身，哪个更切身？",
+      "比较声名、财货和生命，懂得适度，不让过多贪求损害自己。",
+      "再回到结尾：所以懂得满足就不容易受辱，懂得适度就少遇危险，因而能够长久。"
+    ],
+    "question": "这一章为什么可以叫作「名利与自身」？",
+    "answer": "比较声名、财货和生命，懂得适度，不让过多贪求损害自己。可以引用本章开头或结尾的原句，说明你的依据。",
+    "takeaway": "比较声名、财货和生命，懂得适度，不让过多贪求损害自己。"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "choice",
+      "sentence": "s1",
+      "skill": "meaning",
+      "prompt": "开头的「孰」在这里怎样理解？",
+      "choices": [
+        "只顾自己，不留意他人的处境。",
+        "为了显示本领而处处炫耀。",
+        "哪一个。"
+      ],
+      "answer": 2,
+      "explanation": "把词放回原句看，「孰」在本句中的意思是：哪一个。"
+    },
+    {
+      "id": "q2",
+      "type": "choice",
+      "sentence": "s5",
+      "skill": "reason",
+      "prompt": "读完「名利与自身」，哪一种理解更合适？",
+      "choices": [
+        "比较声名、财货和生命，懂得适度，不让过多贪求损害自己。",
+        "做事情永远越多越快越好。",
+        "别人的想法一概不用听。"
+      ],
+      "answer": 0,
+      "explanation": "比较声名、财货和生命，懂得适度，不让过多贪求损害自己。"
+    },
+    {
+      "id": "q3",
+      "type": "selfcheck",
+      "sentence": "s5",
+      "skill": "retell",
+      "prompt": "选本章一句话，用自己的话解释，再说说它怎样帮助你理解「名利与自身」。",
+      "answer": "先说清原句中的对象和动作，再解释关键词。可以围绕这点来讲：比较声名、财货和生命，懂得适度，不让过多贪求损害自己。说完后，回到原文找一句作依据。",
+      "explanation": "不必背诵译文。重点看词义是否放回本句、有没有原文依据，以及是否把古人的比方误当成不分条件的结论。"
+    }
+  ]
+}

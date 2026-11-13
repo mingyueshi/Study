@@ -1,0 +1,380 @@
+{
+  "schema_version": 1,
+  "id": "daodejing-62",
+  "title": "道德经·第六十二章",
+  "attribution": "老子",
+  "level": "challenge",
+  "genre": "reasoning",
+  "skills": [
+    "meaning",
+    "referent",
+    "reason",
+    "contrast",
+    "retell"
+  ],
+  "curriculum": null,
+  "intro": "不轻易放弃犯过错的人。本章把道比作可依归的所在，强调改过的可能，不把人一次的不足当成全部。",
+  "background": "这是《道德经》德经·第六十二章。本章围绕「不轻易放弃犯过错的人」展开，可以先读原文，再对照译文，看看作者用了什么比方或对比。",
+  "editorial_note": "本馆用逐句译解帮助入门。读「道」「无为」等词时要看上下文；古代观念和理想化比方，可以边读边与家长讨论。",
+  "source": {
+    "work": "道德经（又名老子）",
+    "section": "德经·第六十二章",
+    "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#六十二章",
+    "note": "原文以本机简体《老子》为底本，统一引号，第七章移去括号异文提示。译文、词义和练习为本馆编写的入门读法，参考王弼注理解，不将不同底本混作同一文本。"
+  },
+  "source_ref": {
+    "locator": "/content/61",
+    "path": "poetry/simplified/诸子百家/老子.json",
+    "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+    "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+    "anchor_text": "道者万物之奥。善人之宝，不善人之所保。美言可以市尊，美行可以加人。人之不善，何弃之有？故立天子，置三公，虽有拱璧以先駟马，不如坐进此道。古之所以贵此道者何？不曰：求以得，有罪以免邪？故为天下贵。"
+  },
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "道者万物之奥。",
+      "translation": "道是万物深处的依归。",
+      "explanation": "读词小提示：「奥」：深处、可以依归的所在。",
+      "chunks": [
+        "道者万物之奥。"
+      ],
+      "hints": [
+        "奥"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "奥",
+          "kind": "word",
+          "meaning": "深处、可以依归的所在。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第六十二章》第1句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#六十二章",
+        "source_ref": {
+          "locator": "/content/61",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "道者万物之奥。善人之宝，不善人之所保。美言可以市尊，美行可以加人。人之不善，何弃之有？故立天子，置三公，虽有拱璧以先駟马，不如坐进此道。古之所以贵此道者何？不曰：求以得，有罪以免邪？故为天下贵。"
+        }
+      }
+    },
+    {
+      "id": "s2",
+      "text": "善人之宝，不善人之所保。",
+      "translation": "是善人珍重的宝物，也是不善者可以依靠的。",
+      "explanation": "读词小提示：「宝」：珍视的东西；「保」：保护、依靠。",
+      "chunks": [
+        "善人之宝，",
+        "不善人之所保。"
+      ],
+      "hints": [
+        "宝",
+        "保"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "宝",
+          "kind": "word",
+          "meaning": "珍视的东西。"
+        },
+        {
+          "id": "n2",
+          "quote": "保",
+          "kind": "word",
+          "meaning": "保护、依靠。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第六十二章》第2句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#六十二章",
+        "source_ref": {
+          "locator": "/content/61",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "善人之宝，不善人之所保。"
+        }
+      }
+    },
+    {
+      "id": "s3",
+      "text": "美言可以市尊，美行可以加人。",
+      "translation": "好的话可以获得尊重，好的行为可以得到推重。",
+      "explanation": "读词小提示：「市尊」：取得尊重；「加人」：受到他人推重。",
+      "chunks": [
+        "美言可以市尊，",
+        "美行可以加人。"
+      ],
+      "hints": [
+        "市尊",
+        "加人"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "市尊",
+          "kind": "word",
+          "meaning": "取得尊重。"
+        },
+        {
+          "id": "n2",
+          "quote": "加人",
+          "kind": "word",
+          "meaning": "受到他人推重。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第六十二章》第3句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#六十二章",
+        "source_ref": {
+          "locator": "/content/61",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "美言可以市尊，美行可以加人。"
+        }
+      }
+    },
+    {
+      "id": "s4",
+      "text": "人之不善，何弃之有？",
+      "translation": "一个人有不足，为什么就把他放弃呢？",
+      "explanation": "读词小提示：「何弃之有」：有什么理由就把他放弃呢。",
+      "chunks": [
+        "人之不善，",
+        "何弃之有？"
+      ],
+      "hints": [
+        "何弃之有"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "何弃之有",
+          "kind": "word",
+          "meaning": "有什么理由就把他放弃呢。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第六十二章》第4句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#六十二章",
+        "source_ref": {
+          "locator": "/content/61",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "人之不善，何弃之有？"
+        }
+      }
+    },
+    {
+      "id": "s5",
+      "text": "故立天子，置三公，虽有拱璧以先駟马，不如坐进此道。",
+      "translation": "所以设立天子、三公时，送上大玉璧与驷马，也不如献上并实践这种道理。",
+      "explanation": "读词小提示：「三公」：古代重要官职；「拱璧」：两手合抱的大玉璧。",
+      "chunks": [
+        "故立天子，",
+        "置三公，",
+        "虽有拱璧以先駟马，",
+        "不如坐进此道。"
+      ],
+      "hints": [
+        "三公",
+        "拱璧",
+        "駟马"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "三公",
+          "kind": "word",
+          "meaning": "古代重要官职。"
+        },
+        {
+          "id": "n2",
+          "quote": "拱璧",
+          "kind": "word",
+          "meaning": "两手合抱的大玉璧。"
+        },
+        {
+          "id": "n3",
+          "quote": "駟马",
+          "kind": "word",
+          "meaning": "同「驷马」，四匹马拉的车。"
+        },
+        {
+          "id": "n4",
+          "quote": "进此道",
+          "kind": "word",
+          "meaning": "献上、实践这种道理。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第六十二章》第5句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#六十二章",
+        "source_ref": {
+          "locator": "/content/61",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "故立天子，置三公，虽有拱璧以先駟马，不如坐进此道。"
+        }
+      }
+    },
+    {
+      "id": "s6",
+      "text": "古之所以贵此道者何？",
+      "translation": "古人为什么珍重这种道理呢？",
+      "explanation": "读词小提示：「贵」：珍重。",
+      "chunks": [
+        "古之所以贵此道者何？"
+      ],
+      "hints": [
+        "贵"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "贵",
+          "kind": "word",
+          "meaning": "珍重。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第六十二章》第6句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#六十二章",
+        "source_ref": {
+          "locator": "/content/61",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "古之所以贵此道者何？"
+        }
+      }
+    },
+    {
+      "id": "s7",
+      "text": "不曰：求以得，有罪以免邪？",
+      "translation": "不正是说，愿意追求便可能获得，犯了错也有改过的出路吗？",
+      "explanation": "读词小提示：「求以得」：愿意求取就可能获得；「免」：改过、免于继续陷在过错中。",
+      "chunks": [
+        "不曰：",
+        "求以得，",
+        "有罪以免邪？"
+      ],
+      "hints": [
+        "求以得",
+        "免"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "求以得",
+          "kind": "word",
+          "meaning": "愿意求取就可能获得。"
+        },
+        {
+          "id": "n2",
+          "quote": "免",
+          "kind": "word",
+          "meaning": "改过、免于继续陷在过错中。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第六十二章》第7句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#六十二章",
+        "source_ref": {
+          "locator": "/content/61",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "不曰：求以得，有罪以免邪？"
+        }
+      }
+    },
+    {
+      "id": "s8",
+      "text": "故为天下贵。",
+      "translation": "所以它受到天下人的珍重。",
+      "explanation": "读词小提示：「贵」：珍重。",
+      "chunks": [
+        "故为天下贵。"
+      ],
+      "hints": [
+        "贵"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "贵",
+          "kind": "word",
+          "meaning": "珍重。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第六十二章》第8句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#六十二章",
+        "source_ref": {
+          "locator": "/content/61",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "道者万物之奥。善人之宝，不善人之所保。美言可以市尊，美行可以加人。人之不善，何弃之有？故立天子，置三公，虽有拱璧以先駟马，不如坐进此道。古之所以贵此道者何？不曰：求以得，有罪以免邪？故为天下贵。"
+        }
+      }
+    }
+  ],
+  "overview": {
+    "sequence": [
+      "先看本章开头：道是万物深处的依归。",
+      "本章把道比作可依归的所在，强调改过的可能，不把人一次的不足当成全部。",
+      "再回到结尾：所以它受到天下人的珍重。"
+    ],
+    "question": "这一章为什么可以叫作「不轻易放弃犯过错的人」？",
+    "answer": "本章把道比作可依归的所在，强调改过的可能，不把人一次的不足当成全部。可以引用本章开头或结尾的原句，说明你的依据。",
+    "takeaway": "本章把道比作可依归的所在，强调改过的可能，不把人一次的不足当成全部。"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "choice",
+      "sentence": "s1",
+      "skill": "meaning",
+      "prompt": "开头的「奥」在这里怎样理解？",
+      "choices": [
+        "只顾自己，不留意他人的处境。",
+        "为了显示本领而处处炫耀。",
+        "深处、可以依归的所在。"
+      ],
+      "answer": 2,
+      "explanation": "把词放回原句看，「奥」在本句中的意思是：深处、可以依归的所在。"
+    },
+    {
+      "id": "q2",
+      "type": "choice",
+      "sentence": "s8",
+      "skill": "reason",
+      "prompt": "读完「不轻易放弃犯过错的人」，哪一种理解更合适？",
+      "choices": [
+        "本章把道比作可依归的所在，强调改过的可能，不把人一次的不足当成全部。",
+        "为达到自己的目标，可以不顾别人。",
+        "无论什么情况，都应该争着抢先。"
+      ],
+      "answer": 0,
+      "explanation": "本章把道比作可依归的所在，强调改过的可能，不把人一次的不足当成全部。"
+    },
+    {
+      "id": "q3",
+      "type": "selfcheck",
+      "sentence": "s8",
+      "skill": "retell",
+      "prompt": "选本章一句话，用自己的话解释，再说说它怎样帮助你理解「不轻易放弃犯过错的人」。",
+      "answer": "先说清原句中的对象和动作，再解释关键词。可以围绕这点来讲：本章把道比作可依归的所在，强调改过的可能，不把人一次的不足当成全部。说完后，回到原文找一句作依据。",
+      "explanation": "不必背诵译文。重点看词义是否放回本句、有没有原文依据，以及是否把古人的比方误当成不分条件的结论。"
+    }
+  ]
+}

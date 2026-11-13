@@ -1,0 +1,567 @@
+{
+  "schema_version": 1,
+  "id": "daodejing-20",
+  "title": "道德经·第二十章",
+  "attribution": "老子",
+  "level": "challenge",
+  "genre": "reasoning",
+  "skills": [
+    "meaning",
+    "referent",
+    "reason",
+    "contrast",
+    "retell"
+  ],
+  "curriculum": null,
+  "intro": "不只跟着热闹走。本章用众人与「我」的对照，表达珍重根本、不只追逐外面热闹的态度。",
+  "background": "这是《道德经》道经·第二十章。本章围绕「不只跟着热闹走」展开，可以先读原文，再对照译文，看看作者用了什么比方或对比。",
+  "editorial_note": "本馆用逐句译解帮助入门。读「道」「无为」等词时要看上下文；古代观念和理想化比方，可以边读边与家长讨论。",
+  "source": {
+    "work": "道德经（又名老子）",
+    "section": "道经·第二十章",
+    "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#二十章",
+    "note": "原文以本机简体《老子》为底本，统一引号，第七章移去括号异文提示。译文、词义和练习为本馆编写的入门读法，参考王弼注理解，不将不同底本混作同一文本。"
+  },
+  "source_ref": {
+    "locator": "/content/19",
+    "path": "poetry/simplified/诸子百家/老子.json",
+    "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+    "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+    "anchor_text": "唯之与阿，相去几何？善之与恶，相去若何？人之所畏，不可不畏。荒兮其未央哉！众人熙熙，如享太牢，如春登台。我独泊兮其未兆，如婴儿之未孩；儡儡兮若无所归。众人皆有馀，而我独若遗。我愚人之心也哉！沌沌兮。俗人昭昭，我独昏昏；俗人察察，我独闷闷。澹兮其若海；飂兮若无止。众人皆有以，而我独顽似鄙。我独异于人，而贵食母。"
+  },
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "唯之与阿，相去几何？",
+      "translation": "恭敬的应答与随便的应答，相差多少呢？",
+      "explanation": "读词小提示：「唯」：恭敬应答的声音；「阿」：较随便的应答声。",
+      "chunks": [
+        "唯之与阿，",
+        "相去几何？"
+      ],
+      "hints": [
+        "唯",
+        "阿",
+        "几何"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "唯",
+          "kind": "word",
+          "meaning": "恭敬应答的声音。"
+        },
+        {
+          "id": "n2",
+          "quote": "阿",
+          "kind": "word",
+          "meaning": "较随便的应答声。",
+          "reading": "ē"
+        },
+        {
+          "id": "n3",
+          "quote": "几何",
+          "kind": "word",
+          "meaning": "多少。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第二十章》第1句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#二十章",
+        "source_ref": {
+          "locator": "/content/19",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "唯之与阿，相去几何？"
+        }
+      }
+    },
+    {
+      "id": "s2",
+      "text": "善之与恶，相去若何？",
+      "translation": "善与恶，又相差多少呢？",
+      "explanation": "读词小提示：「若何」：怎么样、相差多少。",
+      "chunks": [
+        "善之与恶，",
+        "相去若何？"
+      ],
+      "hints": [
+        "若何"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "若何",
+          "kind": "word",
+          "meaning": "怎么样、相差多少。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第二十章》第2句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#二十章",
+        "source_ref": {
+          "locator": "/content/19",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "善之与恶，相去若何？"
+        }
+      }
+    },
+    {
+      "id": "s3",
+      "text": "人之所畏，不可不畏。",
+      "translation": "人们所畏惧的事，也不能全不留意。",
+      "explanation": "读词小提示：「所畏」：感到畏惧的事情。",
+      "chunks": [
+        "人之所畏，",
+        "不可不畏。"
+      ],
+      "hints": [
+        "所畏"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "所畏",
+          "kind": "word",
+          "meaning": "感到畏惧的事情。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第二十章》第3句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#二十章",
+        "source_ref": {
+          "locator": "/content/19",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "人之所畏，不可不畏。"
+        }
+      }
+    },
+    {
+      "id": "s4",
+      "text": "荒兮其未央哉！",
+      "translation": "这种追逐好像广大而没有尽头啊！",
+      "explanation": "读词小提示：「未央」：没有尽头。",
+      "chunks": [
+        "荒兮其未央哉！"
+      ],
+      "hints": [
+        "未央"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "未央",
+          "kind": "word",
+          "meaning": "没有尽头。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第二十章》第4句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#二十章",
+        "source_ref": {
+          "locator": "/content/19",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "唯之与阿，相去几何？善之与恶，相去若何？人之所畏，不可不畏。荒兮其未央哉！众人熙熙，如享太牢，如春登台。我独泊兮其未兆，如婴儿之未孩；儡儡兮若无所归。众人皆有馀，而我独若遗。我愚人之心也哉！沌沌兮。俗人昭昭，我独昏昏；俗人察察，我独闷闷。澹兮其若海；飂兮若无止。众人皆有以，而我独顽似鄙。我独异于人，而贵食母。"
+        }
+      }
+    },
+    {
+      "id": "s5",
+      "text": "众人熙熙，如享太牢，如春登台。",
+      "translation": "众人兴高采烈，好像参加盛宴，又像春日登台游赏。",
+      "explanation": "读词小提示：「熙熙」：兴高采烈的样子；「太牢」：古代丰盛的祭宴。",
+      "chunks": [
+        "众人熙熙，",
+        "如享太牢，",
+        "如春登台。"
+      ],
+      "hints": [
+        "熙熙",
+        "太牢"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "熙熙",
+          "kind": "word",
+          "meaning": "兴高采烈的样子。"
+        },
+        {
+          "id": "n2",
+          "quote": "太牢",
+          "kind": "word",
+          "meaning": "古代丰盛的祭宴。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第二十章》第5句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#二十章",
+        "source_ref": {
+          "locator": "/content/19",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "众人熙熙，如享太牢，如春登台。"
+        }
+      }
+    },
+    {
+      "id": "s6",
+      "text": "我独泊兮其未兆，如婴儿之未孩；儡儡兮若无所归。",
+      "translation": "唯独我安静淡泊，还没有显出追逐的样子，像还不会笑的婴儿；疲倦无依，好像不知道归向哪里。",
+      "explanation": "读词小提示：「泊」：淡泊、安静；「孩」：婴儿发笑。",
+      "chunks": [
+        "我独泊兮其未兆，",
+        "如婴儿之未孩；",
+        "儡儡兮若无所归。"
+      ],
+      "hints": [
+        "泊",
+        "孩",
+        "儡儡"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "泊",
+          "kind": "word",
+          "meaning": "淡泊、安静。"
+        },
+        {
+          "id": "n2",
+          "quote": "孩",
+          "kind": "word",
+          "meaning": "婴儿发笑。"
+        },
+        {
+          "id": "n3",
+          "quote": "儡儡",
+          "kind": "word",
+          "meaning": "困倦、无所依归的样子。",
+          "reading": "lěi lěi"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第二十章》第6句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#二十章",
+        "source_ref": {
+          "locator": "/content/19",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "我独泊兮其未兆，如婴儿之未孩；儡儡兮若无所归。"
+        }
+      }
+    },
+    {
+      "id": "s7",
+      "text": "众人皆有馀，而我独若遗。",
+      "translation": "众人都有余裕，唯独我好像有所失落。",
+      "explanation": "读词小提示：「馀」：同「余」，多余；「遗」：有所失落。",
+      "chunks": [
+        "众人皆有馀，",
+        "而我独若遗。"
+      ],
+      "hints": [
+        "馀",
+        "遗"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "馀",
+          "kind": "word",
+          "meaning": "同「余」，多余。"
+        },
+        {
+          "id": "n2",
+          "quote": "遗",
+          "kind": "word",
+          "meaning": "有所失落。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第二十章》第7句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#二十章",
+        "source_ref": {
+          "locator": "/content/19",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "众人皆有馀，而我独若遗。"
+        }
+      }
+    },
+    {
+      "id": "s8",
+      "text": "我愚人之心也哉！",
+      "translation": "我仿佛有一颗愚拙的心啊！",
+      "explanation": "读词小提示：「愚人」：这里是作者谦抑的自称。",
+      "chunks": [
+        "我愚人之心也哉！"
+      ],
+      "hints": [
+        "愚人"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "愚人",
+          "kind": "word",
+          "meaning": "这里是作者谦抑的自称。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第二十章》第8句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#二十章",
+        "source_ref": {
+          "locator": "/content/19",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "唯之与阿，相去几何？善之与恶，相去若何？人之所畏，不可不畏。荒兮其未央哉！众人熙熙，如享太牢，如春登台。我独泊兮其未兆，如婴儿之未孩；儡儡兮若无所归。众人皆有馀，而我独若遗。我愚人之心也哉！沌沌兮。俗人昭昭，我独昏昏；俗人察察，我独闷闷。澹兮其若海；飂兮若无止。众人皆有以，而我独顽似鄙。我独异于人，而贵食母。"
+        }
+      }
+    },
+    {
+      "id": "s9",
+      "text": "沌沌兮。",
+      "translation": "浑厚而不精明。",
+      "explanation": "读词小提示：「沌沌」：浑厚、不分明的样子。",
+      "chunks": [
+        "沌沌兮。"
+      ],
+      "hints": [
+        "沌沌"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "沌沌",
+          "kind": "word",
+          "meaning": "浑厚、不分明的样子。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第二十章》第9句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#二十章",
+        "source_ref": {
+          "locator": "/content/19",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "唯之与阿，相去几何？善之与恶，相去若何？人之所畏，不可不畏。荒兮其未央哉！众人熙熙，如享太牢，如春登台。我独泊兮其未兆，如婴儿之未孩；儡儡兮若无所归。众人皆有馀，而我独若遗。我愚人之心也哉！沌沌兮。俗人昭昭，我独昏昏；俗人察察，我独闷闷。澹兮其若海；飂兮若无止。众人皆有以，而我独顽似鄙。我独异于人，而贵食母。"
+        }
+      }
+    },
+    {
+      "id": "s10",
+      "text": "俗人昭昭，我独昏昏；俗人察察，我独闷闷。",
+      "translation": "别人显得明白精细，唯独我显得昏钝烦闷。",
+      "explanation": "读词小提示：「昭昭」：明白显露的样子；「察察」：精明细察的样子。",
+      "chunks": [
+        "俗人昭昭，",
+        "我独昏昏；",
+        "俗人察察，",
+        "我独闷闷。"
+      ],
+      "hints": [
+        "昭昭",
+        "察察"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "昭昭",
+          "kind": "word",
+          "meaning": "明白显露的样子。"
+        },
+        {
+          "id": "n2",
+          "quote": "察察",
+          "kind": "word",
+          "meaning": "精明细察的样子。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第二十章》第10句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#二十章",
+        "source_ref": {
+          "locator": "/content/19",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "俗人昭昭，我独昏昏；俗人察察，我独闷闷。"
+        }
+      }
+    },
+    {
+      "id": "s11",
+      "text": "澹兮其若海；飂兮若无止。",
+      "translation": "安静开阔如大海，又像风吹着不停行走。",
+      "explanation": "读词小提示：「澹」：安静开阔的样子；「飂」：风吹不停的样子。",
+      "chunks": [
+        "澹兮其若海；",
+        "飂兮若无止。"
+      ],
+      "hints": [
+        "澹",
+        "飂"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "澹",
+          "kind": "word",
+          "meaning": "安静开阔的样子。",
+          "reading": "dàn"
+        },
+        {
+          "id": "n2",
+          "quote": "飂",
+          "kind": "word",
+          "meaning": "风吹不停的样子。",
+          "reading": "liù"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第二十章》第11句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#二十章",
+        "source_ref": {
+          "locator": "/content/19",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "澹兮其若海；飂兮若无止。"
+        }
+      }
+    },
+    {
+      "id": "s12",
+      "text": "众人皆有以，而我独顽似鄙。",
+      "translation": "众人都各有打算，唯独我朴拙。",
+      "explanation": "读词小提示：「有以」：有所用处、各有打算；「鄙」：朴拙。",
+      "chunks": [
+        "众人皆有以，",
+        "而我独顽似鄙。"
+      ],
+      "hints": [
+        "有以",
+        "鄙"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "有以",
+          "kind": "word",
+          "meaning": "有所用处、各有打算。"
+        },
+        {
+          "id": "n2",
+          "quote": "鄙",
+          "kind": "word",
+          "meaning": "朴拙。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第二十章》第12句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#二十章",
+        "source_ref": {
+          "locator": "/content/19",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "众人皆有以，而我独顽似鄙。"
+        }
+      }
+    },
+    {
+      "id": "s13",
+      "text": "我独异于人，而贵食母。",
+      "translation": "我与众人不同，在于珍重养护万物的根本。",
+      "explanation": "这些是文学中的自我描写，不是让读者把孤立自己当成学习目标。",
+      "chunks": [
+        "我独异于人，",
+        "而贵食母。"
+      ],
+      "hints": [
+        "食母"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "食母",
+          "kind": "word",
+          "meaning": "养护根本，这里把道比作母亲。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第二十章》第13句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#二十章",
+        "source_ref": {
+          "locator": "/content/19",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "我独异于人，而贵食母。"
+        }
+      }
+    }
+  ],
+  "overview": {
+    "sequence": [
+      "先看本章开头：恭敬的应答与随便的应答，相差多少呢？",
+      "本章用众人与「我」的对照，表达珍重根本、不只追逐外面热闹的态度。",
+      "再回到结尾：我与众人不同，在于珍重养护万物的根本。"
+    ],
+    "question": "这一章为什么可以叫作「不只跟着热闹走」？",
+    "answer": "本章用众人与「我」的对照，表达珍重根本、不只追逐外面热闹的态度。可以引用本章开头或结尾的原句，说明你的依据。",
+    "takeaway": "本章用众人与「我」的对照，表达珍重根本、不只追逐外面热闹的态度。"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "choice",
+      "sentence": "s1",
+      "skill": "meaning",
+      "prompt": "开头的「唯」在这里怎样理解？",
+      "choices": [
+        "只顾自己，不留意他人的处境。",
+        "为了显示本领而处处炫耀。",
+        "恭敬应答的声音。"
+      ],
+      "answer": 2,
+      "explanation": "把词放回原句看，「唯」在本句中的意思是：恭敬应答的声音。"
+    },
+    {
+      "id": "q2",
+      "type": "choice",
+      "sentence": "s13",
+      "skill": "reason",
+      "prompt": "读完「不只跟着热闹走」，哪一种理解更合适？",
+      "choices": [
+        "本章用众人与「我」的对照，表达珍重根本、不只追逐外面热闹的态度。",
+        "做事情永远越多越快越好。",
+        "别人的想法一概不用听。"
+      ],
+      "answer": 0,
+      "explanation": "本章用众人与「我」的对照，表达珍重根本、不只追逐外面热闹的态度。"
+    },
+    {
+      "id": "q3",
+      "type": "selfcheck",
+      "sentence": "s13",
+      "skill": "retell",
+      "prompt": "选本章一句话，用自己的话解释，再说说它怎样帮助你理解「不只跟着热闹走」。",
+      "answer": "先说清原句中的对象和动作，再解释关键词。可以围绕这点来讲：本章用众人与「我」的对照，表达珍重根本、不只追逐外面热闹的态度。说完后，回到原文找一句作依据。",
+      "explanation": "不必背诵译文。重点看词义是否放回本句、有没有原文依据，以及是否把古人的比方误当成不分条件的结论。"
+    }
+  ]
+}

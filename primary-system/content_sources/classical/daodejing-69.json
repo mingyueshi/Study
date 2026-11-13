@@ -1,0 +1,259 @@
+{
+  "schema_version": 1,
+  "id": "daodejing-69",
+  "title": "道德经·第六十九章",
+  "attribution": "老子",
+  "level": "challenge",
+  "genre": "reasoning",
+  "skills": [
+    "meaning",
+    "referent",
+    "reason",
+    "contrast",
+    "retell"
+  ],
+  "curriculum": null,
+  "intro": "不轻敌，珍惜生命。本章引用兵家之言强调谨慎退让；结尾的哀悯也要放在战争代价中理解。",
+  "background": "这是《道德经》德经·第六十九章。本章围绕「不轻敌，珍惜生命」展开，可以先读原文，再对照译文，看看作者用了什么比方或对比。",
+  "editorial_note": "本馆用逐句译解帮助入门。读「道」「无为」等词时要看上下文；古代观念和理想化比方，可以边读边与家长讨论。",
+  "source": {
+    "work": "道德经（又名老子）",
+    "section": "德经·第六十九章",
+    "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#六十九章",
+    "note": "原文以本机简体《老子》为底本，统一引号，第七章移去括号异文提示。译文、词义和练习为本馆编写的入门读法，参考王弼注理解，不将不同底本混作同一文本。"
+  },
+  "source_ref": {
+    "locator": "/content/68",
+    "path": "poetry/simplified/诸子百家/老子.json",
+    "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+    "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+    "anchor_text": "用兵有言：“吾不敢为主，而为客；不敢进寸，而退尺。”是谓行无行；攘无臂；扔无敌；执无兵。祸莫大於轻敌，轻敌几丧吾宝。故抗兵相若，哀者胜矣。"
+  },
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "用兵有言：「吾不敢为主，而为客；不敢进寸，而退尺。」",
+      "translation": "用兵的人说：我不敢抢作进攻的一方，宁愿自守；不敢轻率前进一寸，宁愿退让一尺。",
+      "explanation": "读词小提示：「为主」：主动进攻的一方；「为客」：应对、自守的一方。",
+      "chunks": [
+        "用兵有言：",
+        "「吾不敢为主，",
+        "而为客；",
+        "不敢进寸，",
+        "而退尺。",
+        "」"
+      ],
+      "hints": [
+        "为主",
+        "为客"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "为主",
+          "kind": "word",
+          "meaning": "主动进攻的一方。"
+        },
+        {
+          "id": "n2",
+          "quote": "为客",
+          "kind": "word",
+          "meaning": "应对、自守的一方。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第六十九章》第1句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#六十九章",
+        "source_ref": {
+          "locator": "/content/68",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "用兵有言：“吾不敢为主，而为客；不敢进寸，而退尺。”是谓行无行；攘无臂；扔无敌；执无兵。祸莫大於轻敌，轻敌几丧吾宝。故抗兵相若，哀者胜矣。"
+        }
+      }
+    },
+    {
+      "id": "s2",
+      "text": "是谓行无行；攘无臂；扔无敌；执无兵。",
+      "translation": "这叫作行进却不炫示阵势，举臂却不显出攻击，面对敌人而不逞强，持兵而不炫武。",
+      "explanation": "读词小提示：「行无行」：行进却不摆出强攻的阵势；「攘」：伸出。",
+      "chunks": [
+        "是谓行无行；",
+        "攘无臂；",
+        "扔无敌；",
+        "执无兵。"
+      ],
+      "hints": [
+        "行无行",
+        "攘",
+        "扔"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "行无行",
+          "kind": "word",
+          "meaning": "行进却不摆出强攻的阵势。"
+        },
+        {
+          "id": "n2",
+          "quote": "攘",
+          "kind": "word",
+          "meaning": "伸出。",
+          "reading": "rǎng"
+        },
+        {
+          "id": "n3",
+          "quote": "扔",
+          "kind": "word",
+          "meaning": "这里联系迎击、对敌。"
+        },
+        {
+          "id": "n4",
+          "quote": "无兵",
+          "kind": "word",
+          "meaning": "不炫示兵器。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第六十九章》第2句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#六十九章",
+        "source_ref": {
+          "locator": "/content/68",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "是谓行无行；攘无臂；扔无敌；执无兵。"
+        }
+      }
+    },
+    {
+      "id": "s3",
+      "text": "祸莫大於轻敌，轻敌几丧吾宝。",
+      "translation": "最大的祸患莫过于轻视对方，轻敌几乎会失掉自己珍重的原则。",
+      "explanation": "读词小提示：「轻敌」：轻视对方；「宝」：前文所珍重的慈爱与谨慎。",
+      "chunks": [
+        "祸莫大於轻敌，",
+        "轻敌几丧吾宝。"
+      ],
+      "hints": [
+        "轻敌",
+        "宝"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "轻敌",
+          "kind": "word",
+          "meaning": "轻视对方。"
+        },
+        {
+          "id": "n2",
+          "quote": "宝",
+          "kind": "word",
+          "meaning": "前文所珍重的慈爱与谨慎。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第六十九章》第3句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#六十九章",
+        "source_ref": {
+          "locator": "/content/68",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "祸莫大於轻敌，轻敌几丧吾宝。"
+        }
+      }
+    },
+    {
+      "id": "s4",
+      "text": "故抗兵相若，哀者胜矣。",
+      "translation": "所以双方力量相当时，文中认为怀着哀悯、珍惜生命的一方更能取胜。",
+      "explanation": "这不是保证任何战争结果的公式，重点是克制与珍惜生命。",
+      "chunks": [
+        "故抗兵相若，",
+        "哀者胜矣。"
+      ],
+      "hints": [
+        "抗兵相若",
+        "哀者"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "抗兵相若",
+          "kind": "word",
+          "meaning": "双方力量相当。"
+        },
+        {
+          "id": "n2",
+          "quote": "哀者",
+          "kind": "word",
+          "meaning": "怀有哀悯、珍惜生命的一方。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第六十九章》第4句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#六十九章",
+        "source_ref": {
+          "locator": "/content/68",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "故抗兵相若，哀者胜矣。"
+        }
+      }
+    }
+  ],
+  "overview": {
+    "sequence": [
+      "先看本章开头：用兵的人说：我不敢抢作进攻的一方，宁愿自守；不敢轻率前进一寸，宁愿退让一尺。",
+      "本章引用兵家之言强调谨慎退让；结尾的哀悯也要放在战争代价中理解。",
+      "再回到结尾：所以双方力量相当时，文中认为怀着哀悯、珍惜生命的一方更能取胜。"
+    ],
+    "question": "这一章为什么可以叫作「不轻敌，珍惜生命」？",
+    "answer": "本章引用兵家之言强调谨慎退让；结尾的哀悯也要放在战争代价中理解。可以引用本章开头或结尾的原句，说明你的依据。",
+    "takeaway": "本章引用兵家之言强调谨慎退让；结尾的哀悯也要放在战争代价中理解。"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "choice",
+      "sentence": "s1",
+      "skill": "meaning",
+      "prompt": "开头的「为主」在这里怎样理解？",
+      "choices": [
+        "主动进攻的一方。",
+        "只顾自己，不留意他人的处境。",
+        "为了显示本领而处处炫耀。"
+      ],
+      "answer": 0,
+      "explanation": "把词放回原句看，「为主」在本句中的意思是：主动进攻的一方。"
+    },
+    {
+      "id": "q2",
+      "type": "choice",
+      "sentence": "s4",
+      "skill": "reason",
+      "prompt": "读完「不轻敌，珍惜生命」，哪一种理解更合适？",
+      "choices": [
+        "只要一次失败，就不必再试。",
+        "本章引用兵家之言强调谨慎退让；结尾的哀悯也要放在战争代价中理解。",
+        "遇到问题不用观察，也不必行动。"
+      ],
+      "answer": 1,
+      "explanation": "本章引用兵家之言强调谨慎退让；结尾的哀悯也要放在战争代价中理解。"
+    },
+    {
+      "id": "q3",
+      "type": "selfcheck",
+      "sentence": "s4",
+      "skill": "retell",
+      "prompt": "选本章一句话，用自己的话解释，再说说它怎样帮助你理解「不轻敌，珍惜生命」。",
+      "answer": "先说清原句中的对象和动作，再解释关键词。可以围绕这点来讲：本章引用兵家之言强调谨慎退让；结尾的哀悯也要放在战争代价中理解。说完后，回到原文找一句作依据。",
+      "explanation": "不必背诵译文。重点看词义是否放回本句、有没有原文依据，以及是否把古人的比方误当成不分条件的结论。"
+    }
+  ]
+}

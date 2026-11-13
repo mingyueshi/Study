@@ -1,0 +1,342 @@
+{
+  "schema_version": 1,
+  "id": "daodejing-13",
+  "title": "道德经·第十三章",
+  "attribution": "老子",
+  "level": "challenge",
+  "genre": "reasoning",
+  "skills": [
+    "meaning",
+    "referent",
+    "reason",
+    "contrast",
+    "retell"
+  ],
+  "curriculum": null,
+  "intro": "怎样面对得失。不要让一时的受宠、受辱牵着自己走，也认真看待自己与他人的生命。",
+  "background": "这是《道德经》道经·第十三章。本章围绕「怎样面对得失」展开，可以先读原文，再对照译文，看看作者用了什么比方或对比。",
+  "editorial_note": "本馆用逐句译解帮助入门。读「道」「无为」等词时要看上下文；古代观念和理想化比方，可以边读边与家长讨论。",
+  "source": {
+    "work": "道德经（又名老子）",
+    "section": "道经·第十三章",
+    "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#十三章",
+    "note": "原文以本机简体《老子》为底本，统一引号，第七章移去括号异文提示。译文、词义和练习为本馆编写的入门读法，参考王弼注理解，不将不同底本混作同一文本。"
+  },
+  "source_ref": {
+    "locator": "/content/12",
+    "path": "poetry/simplified/诸子百家/老子.json",
+    "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+    "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+    "anchor_text": "宠辱若惊，贵大患若身。何谓宠辱若惊？宠为下，得之若惊，失之若惊，是谓宠辱若惊。何谓贵大患若身？吾所以有大患者，为吾有身，及吾无身，吾有何患？故贵以身为天下者，若可寄天下；爱以身为天下者，若可託天下。"
+  },
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "宠辱若惊，贵大患若身。",
+      "translation": "受到宠爱或羞辱都让人惊惶，重视大的忧患如同重视自身。",
+      "explanation": "读词小提示：「宠辱」：受到宠爱与受到羞辱；「患」：忧患。",
+      "chunks": [
+        "宠辱若惊，",
+        "贵大患若身。"
+      ],
+      "hints": [
+        "宠辱",
+        "患",
+        "若身"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "宠辱",
+          "kind": "word",
+          "meaning": "受到宠爱与受到羞辱。"
+        },
+        {
+          "id": "n2",
+          "quote": "患",
+          "kind": "word",
+          "meaning": "忧患。"
+        },
+        {
+          "id": "n3",
+          "quote": "若身",
+          "kind": "word",
+          "meaning": "像重视自身一样。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第十三章》第1句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#十三章",
+        "source_ref": {
+          "locator": "/content/12",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "宠辱若惊，贵大患若身。"
+        }
+      }
+    },
+    {
+      "id": "s2",
+      "text": "何谓宠辱若惊？",
+      "translation": "什么叫作受到宠爱或羞辱都惊惶呢？",
+      "explanation": "读词小提示：「宠辱」：受到宠爱与受到羞辱；「何谓」：什么叫作。",
+      "chunks": [
+        "何谓宠辱若惊？"
+      ],
+      "hints": [
+        "宠辱",
+        "何谓"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "宠辱",
+          "kind": "word",
+          "meaning": "受到宠爱与受到羞辱。"
+        },
+        {
+          "id": "n2",
+          "quote": "何谓",
+          "kind": "word",
+          "meaning": "什么叫作。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第十三章》第2句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#十三章",
+        "source_ref": {
+          "locator": "/content/12",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "宠辱若惊，贵大患若身。何谓宠辱若惊？宠为下，得之若惊，失之若惊，是谓宠辱若惊。何谓贵大患若身？吾所以有大患者，为吾有身，及吾无身，吾有何患？故贵以身为天下者，若可寄天下；爱以身为天下者，若可託天下。"
+        }
+      }
+    },
+    {
+      "id": "s3",
+      "text": "宠为下，得之若惊，失之若惊，是谓宠辱若惊。",
+      "translation": "受宠的人处于被动的位置，得到时惊惶，失去时也惊惶，这就是宠辱若惊。",
+      "explanation": "读词小提示：「宠辱」：受到宠爱与受到羞辱；「下」：这里说受宠者处于被动的位置。",
+      "chunks": [
+        "宠为下，",
+        "得之若惊，",
+        "失之若惊，",
+        "是谓宠辱若惊。"
+      ],
+      "hints": [
+        "宠辱",
+        "下"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "宠辱",
+          "kind": "word",
+          "meaning": "受到宠爱与受到羞辱。"
+        },
+        {
+          "id": "n2",
+          "quote": "下",
+          "kind": "word",
+          "meaning": "这里说受宠者处于被动的位置。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第十三章》第3句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#十三章",
+        "source_ref": {
+          "locator": "/content/12",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "宠为下，得之若惊，失之若惊，是谓宠辱若惊。"
+        }
+      }
+    },
+    {
+      "id": "s4",
+      "text": "何谓贵大患若身？",
+      "translation": "什么叫作重视大的忧患如同重视自身呢？",
+      "explanation": "读词小提示：「患」：忧患；「若身」：像重视自身一样。",
+      "chunks": [
+        "何谓贵大患若身？"
+      ],
+      "hints": [
+        "患",
+        "若身",
+        "何谓"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "患",
+          "kind": "word",
+          "meaning": "忧患。"
+        },
+        {
+          "id": "n2",
+          "quote": "若身",
+          "kind": "word",
+          "meaning": "像重视自身一样。"
+        },
+        {
+          "id": "n3",
+          "quote": "何谓",
+          "kind": "word",
+          "meaning": "什么叫作。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第十三章》第4句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#十三章",
+        "source_ref": {
+          "locator": "/content/12",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "宠辱若惊，贵大患若身。何谓宠辱若惊？宠为下，得之若惊，失之若惊，是谓宠辱若惊。何谓贵大患若身？吾所以有大患者，为吾有身，及吾无身，吾有何患？故贵以身为天下者，若可寄天下；爱以身为天下者，若可託天下。"
+        }
+      }
+    },
+    {
+      "id": "s5",
+      "text": "吾所以有大患者，为吾有身，及吾无身，吾有何患？",
+      "translation": "我之所以有大的忧患，是因为把自身看得太重；如果不被自身得失束缚，又有什么这样的忧患呢？",
+      "explanation": "「无身」是关于放下私心的说法，不是伤害身体或忽视生命。",
+      "chunks": [
+        "吾所以有大患者，",
+        "为吾有身，",
+        "及吾无身，",
+        "吾有何患？"
+      ],
+      "hints": [
+        "患",
+        "有身"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "患",
+          "kind": "word",
+          "meaning": "忧患。"
+        },
+        {
+          "id": "n2",
+          "quote": "有身",
+          "kind": "word",
+          "meaning": "过分把自身得失放在心上。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第十三章》第5句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#十三章",
+        "source_ref": {
+          "locator": "/content/12",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "吾所以有大患者，为吾有身，及吾无身，吾有何患？"
+        }
+      }
+    },
+    {
+      "id": "s6",
+      "text": "故贵以身为天下者，若可寄天下；爱以身为天下者，若可託天下。",
+      "translation": "所以，像珍重自身一样珍重天下的人，可以把天下托付给他；像爱护自身一样爱护天下的人，可以担当天下的责任。",
+      "explanation": "读词小提示：「下」：这里说受宠者处于被动的位置；「寄」：托付。",
+      "chunks": [
+        "故贵以身为天下者，",
+        "若可寄天下；",
+        "爱以身为天下者，",
+        "若可託天下。"
+      ],
+      "hints": [
+        "下",
+        "寄",
+        "託"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "下",
+          "kind": "word",
+          "meaning": "这里说受宠者处于被动的位置。"
+        },
+        {
+          "id": "n2",
+          "quote": "寄",
+          "kind": "word",
+          "meaning": "托付。"
+        },
+        {
+          "id": "n3",
+          "quote": "託",
+          "kind": "word",
+          "meaning": "同「托」，托付。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第十三章》第6句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#十三章",
+        "source_ref": {
+          "locator": "/content/12",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "故贵以身为天下者，若可寄天下；爱以身为天下者，若可託天下。"
+        }
+      }
+    }
+  ],
+  "overview": {
+    "sequence": [
+      "先看本章开头：受到宠爱或羞辱都让人惊惶，重视大的忧患如同重视自身。",
+      "不要让一时的受宠、受辱牵着自己走，也认真看待自己与他人的生命。",
+      "再回到结尾：所以，像珍重自身一样珍重天下的人，可以把天下托付给他；像爱护自身一样爱护天下的人，可以担当天下的责任。"
+    ],
+    "question": "这一章为什么可以叫作「怎样面对得失」？",
+    "answer": "不要让一时的受宠、受辱牵着自己走，也认真看待自己与他人的生命。可以引用本章开头或结尾的原句，说明你的依据。",
+    "takeaway": "不要让一时的受宠、受辱牵着自己走，也认真看待自己与他人的生命。"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "choice",
+      "sentence": "s1",
+      "skill": "meaning",
+      "prompt": "开头的「宠辱」在这里怎样理解？",
+      "choices": [
+        "只顾自己，不留意他人的处境。",
+        "受到宠爱与受到羞辱。",
+        "为了显示本领而处处炫耀。"
+      ],
+      "answer": 1,
+      "explanation": "把词放回原句看，「宠辱」在本句中的意思是：受到宠爱与受到羞辱。"
+    },
+    {
+      "id": "q2",
+      "type": "choice",
+      "sentence": "s6",
+      "skill": "reason",
+      "prompt": "读完「怎样面对得失」，哪一种理解更合适？",
+      "choices": [
+        "只要一次失败，就不必再试。",
+        "遇到问题不用观察，也不必行动。",
+        "不要让一时的受宠、受辱牵着自己走，也认真看待自己与他人的生命。"
+      ],
+      "answer": 2,
+      "explanation": "不要让一时的受宠、受辱牵着自己走，也认真看待自己与他人的生命。"
+    },
+    {
+      "id": "q3",
+      "type": "selfcheck",
+      "sentence": "s6",
+      "skill": "retell",
+      "prompt": "选本章一句话，用自己的话解释，再说说它怎样帮助你理解「怎样面对得失」。",
+      "answer": "先说清原句中的对象和动作，再解释关键词。可以围绕这点来讲：不要让一时的受宠、受辱牵着自己走，也认真看待自己与他人的生命。说完后，回到原文找一句作依据。",
+      "explanation": "不必背诵译文。重点看词义是否放回本句、有没有原文依据，以及是否把古人的比方误当成不分条件的结论。"
+    }
+  ]
+}

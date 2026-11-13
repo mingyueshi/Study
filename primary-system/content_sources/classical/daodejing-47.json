@@ -1,0 +1,204 @@
+{
+  "schema_version": 1,
+  "id": "daodejing-47",
+  "title": "道德经·第四十七章",
+  "attribution": "老子",
+  "level": "challenge",
+  "genre": "reasoning",
+  "skills": [
+    "meaning",
+    "referent",
+    "reason",
+    "contrast",
+    "retell"
+  ],
+  "curriculum": null,
+  "intro": "从根本认识世界。本章强调把握根本的重要；不能照字面理解成不观察、不学习就会知道一切。",
+  "background": "这是《道德经》德经·第四十七章。本章围绕「从根本认识世界」展开，可以先读原文，再对照译文，看看作者用了什么比方或对比。",
+  "editorial_note": "本馆用逐句译解帮助入门。读「道」「无为」等词时要看上下文；古代观念和理想化比方，可以边读边与家长讨论。",
+  "source": {
+    "work": "道德经（又名老子）",
+    "section": "德经·第四十七章",
+    "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#四十七章",
+    "note": "原文以本机简体《老子》为底本，统一引号，第七章移去括号异文提示。译文、词义和练习为本馆编写的入门读法，参考王弼注理解，不将不同底本混作同一文本。"
+  },
+  "source_ref": {
+    "locator": "/content/46",
+    "path": "poetry/simplified/诸子百家/老子.json",
+    "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+    "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+    "anchor_text": "不出户，知天下；不窥牖，见天道。其出弥远，其知弥少。是以圣人不行而知，不见而明，不为而成。"
+  },
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "不出户，知天下；不窥牖，见天道。",
+      "translation": "不走出门，也能体会天下的道理；不向窗外看，也能思考天地运行。",
+      "explanation": "读词小提示：「户」：门；「牖」：窗。",
+      "chunks": [
+        "不出户，",
+        "知天下；",
+        "不窥牖，",
+        "见天道。"
+      ],
+      "hints": [
+        "户",
+        "牖",
+        "天道"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "户",
+          "kind": "word",
+          "meaning": "门。"
+        },
+        {
+          "id": "n2",
+          "quote": "牖",
+          "kind": "word",
+          "meaning": "窗。",
+          "reading": "yǒu"
+        },
+        {
+          "id": "n3",
+          "quote": "天道",
+          "kind": "word",
+          "meaning": "古人所说的天地运行的道理。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第四十七章》第1句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#四十七章",
+        "source_ref": {
+          "locator": "/content/46",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "不出户，知天下；不窥牖，见天道。"
+        }
+      }
+    },
+    {
+      "id": "s2",
+      "text": "其出弥远，其知弥少。",
+      "translation": "只一味向外追逐，走得越远，反而可能离根本越远。",
+      "explanation": "读词小提示：「弥」：更加。",
+      "chunks": [
+        "其出弥远，",
+        "其知弥少。"
+      ],
+      "hints": [
+        "弥"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "弥",
+          "kind": "word",
+          "meaning": "更加。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第四十七章》第2句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#四十七章",
+        "source_ref": {
+          "locator": "/content/46",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "其出弥远，其知弥少。"
+        }
+      }
+    },
+    {
+      "id": "s3",
+      "text": "是以圣人不行而知，不见而明，不为而成。",
+      "translation": "所以，有智慧的人不只靠奔走也能体会，不只靠外表也能明察，不强行干预也能使事情成就。",
+      "explanation": "读词小提示：「不行而知」：不只靠向外奔走，也从根本道理体会；「不为而成」：不强行摆布而使事情成就。",
+      "chunks": [
+        "是以圣人不行而知，",
+        "不见而明，",
+        "不为而成。"
+      ],
+      "hints": [
+        "不行而知",
+        "不为而成"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "不行而知",
+          "kind": "word",
+          "meaning": "不只靠向外奔走，也从根本道理体会。"
+        },
+        {
+          "id": "n2",
+          "quote": "不为而成",
+          "kind": "word",
+          "meaning": "不强行摆布而使事情成就。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第四十七章》第3句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#四十七章",
+        "source_ref": {
+          "locator": "/content/46",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "是以圣人不行而知，不见而明，不为而成。"
+        }
+      }
+    }
+  ],
+  "overview": {
+    "sequence": [
+      "先看本章开头：不走出门，也能体会天下的道理；不向窗外看，也能思考天地运行。",
+      "本章强调把握根本的重要；不能照字面理解成不观察、不学习就会知道一切。",
+      "再回到结尾：所以，有智慧的人不只靠奔走也能体会，不只靠外表也能明察，不强行干预也能使事情成就。"
+    ],
+    "question": "这一章为什么可以叫作「从根本认识世界」？",
+    "answer": "本章强调把握根本的重要；不能照字面理解成不观察、不学习就会知道一切。可以引用本章开头或结尾的原句，说明你的依据。",
+    "takeaway": "本章强调把握根本的重要；不能照字面理解成不观察、不学习就会知道一切。"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "choice",
+      "sentence": "s1",
+      "skill": "meaning",
+      "prompt": "开头的「户」在这里怎样理解？",
+      "choices": [
+        "只顾自己，不留意他人的处境。",
+        "为了显示本领而处处炫耀。",
+        "门。"
+      ],
+      "answer": 2,
+      "explanation": "把词放回原句看，「户」在本句中的意思是：门。"
+    },
+    {
+      "id": "q2",
+      "type": "choice",
+      "sentence": "s3",
+      "skill": "reason",
+      "prompt": "读完「从根本认识世界」，哪一种理解更合适？",
+      "choices": [
+        "本章强调把握根本的重要；不能照字面理解成不观察、不学习就会知道一切。",
+        "别人的想法一概不用听。",
+        "只有大声夸耀自己，才能显得有本领。"
+      ],
+      "answer": 0,
+      "explanation": "本章强调把握根本的重要；不能照字面理解成不观察、不学习就会知道一切。"
+    },
+    {
+      "id": "q3",
+      "type": "selfcheck",
+      "sentence": "s3",
+      "skill": "retell",
+      "prompt": "选本章一句话，用自己的话解释，再说说它怎样帮助你理解「从根本认识世界」。",
+      "answer": "先说清原句中的对象和动作，再解释关键词。可以围绕这点来讲：本章强调把握根本的重要；不能照字面理解成不观察、不学习就会知道一切。说完后，回到原文找一句作依据。",
+      "explanation": "不必背诵译文。重点看词义是否放回本句、有没有原文依据，以及是否把古人的比方误当成不分条件的结论。"
+    }
+  ]
+}

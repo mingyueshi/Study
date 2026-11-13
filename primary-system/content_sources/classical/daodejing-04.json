@@ -1,0 +1,274 @@
+{
+  "schema_version": 1,
+  "id": "daodejing-04",
+  "title": "道德经·第四章",
+  "attribution": "老子",
+  "level": "challenge",
+  "genre": "reasoning",
+  "skills": [
+    "meaning",
+    "referent",
+    "reason",
+    "contrast",
+    "retell"
+  ],
+  "curriculum": null,
+  "intro": "像深水一样留有余地。本章用空器、深水与光尘的比方描写道，提醒人收敛锋芒、化解纷争。",
+  "background": "这是《道德经》道经·第四章。本章围绕「像深水一样留有余地」展开，可以先读原文，再对照译文，看看作者用了什么比方或对比。",
+  "editorial_note": "本馆用逐句译解帮助入门。读「道」「无为」等词时要看上下文；古代观念和理想化比方，可以边读边与家长讨论。",
+  "source": {
+    "work": "道德经（又名老子）",
+    "section": "道经·第四章",
+    "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#四章",
+    "note": "原文以本机简体《老子》为底本，统一引号，第七章移去括号异文提示。译文、词义和练习为本馆编写的入门读法，参考王弼注理解，不将不同底本混作同一文本。"
+  },
+  "source_ref": {
+    "locator": "/content/3",
+    "path": "poetry/simplified/诸子百家/老子.json",
+    "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+    "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+    "anchor_text": "道冲，而用之或不盈。渊兮，似万物之宗。挫其锐，解其纷，和其光，同其尘。湛兮，似或存。吾不知谁之子，象帝之先。"
+  },
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "道冲，而用之或不盈。",
+      "translation": "道好像虚空的器皿，运用起来却不会满溢。",
+      "explanation": "读词小提示：「冲」：虚空而有容纳的余地；「盈」：满。",
+      "chunks": [
+        "道冲，",
+        "而用之或不盈。"
+      ],
+      "hints": [
+        "冲",
+        "盈"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "冲",
+          "kind": "word",
+          "meaning": "虚空而有容纳的余地。"
+        },
+        {
+          "id": "n2",
+          "quote": "盈",
+          "kind": "word",
+          "meaning": "满。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第四章》第1句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#四章",
+        "source_ref": {
+          "locator": "/content/3",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "道冲，而用之或不盈。"
+        }
+      }
+    },
+    {
+      "id": "s2",
+      "text": "渊兮，似万物之宗。",
+      "translation": "它深远啊，仿佛是万物的根源。",
+      "explanation": "读词小提示：「渊」：深水；「宗」：根源。",
+      "chunks": [
+        "渊兮，",
+        "似万物之宗。"
+      ],
+      "hints": [
+        "渊",
+        "宗"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "渊",
+          "kind": "word",
+          "meaning": "深水。"
+        },
+        {
+          "id": "n2",
+          "quote": "宗",
+          "kind": "word",
+          "meaning": "根源。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第四章》第2句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#四章",
+        "source_ref": {
+          "locator": "/content/3",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "道冲，而用之或不盈。渊兮，似万物之宗。挫其锐，解其纷，和其光，同其尘。湛兮，似或存。吾不知谁之子，象帝之先。"
+        }
+      }
+    },
+    {
+      "id": "s3",
+      "text": "挫其锐，解其纷，和其光，同其尘。",
+      "translation": "收敛锐利的锋芒，解开纷乱的纠结，调和耀眼的光芒，与尘世相处。",
+      "explanation": "读词小提示：「挫」：收敛、磨去；「纷」：纷乱。",
+      "chunks": [
+        "挫其锐，",
+        "解其纷，",
+        "和其光，",
+        "同其尘。"
+      ],
+      "hints": [
+        "挫",
+        "纷"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "挫",
+          "kind": "word",
+          "meaning": "收敛、磨去。"
+        },
+        {
+          "id": "n2",
+          "quote": "纷",
+          "kind": "word",
+          "meaning": "纷乱。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第四章》第3句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#四章",
+        "source_ref": {
+          "locator": "/content/3",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "挫其锐，解其纷，和其光，同其尘。"
+        }
+      }
+    },
+    {
+      "id": "s4",
+      "text": "湛兮，似或存。",
+      "translation": "它深沉而安静，仿佛一直存在。",
+      "explanation": "读词小提示：「湛」：深而清的样子。",
+      "chunks": [
+        "湛兮，",
+        "似或存。"
+      ],
+      "hints": [
+        "湛"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "湛",
+          "kind": "word",
+          "meaning": "深而清的样子。",
+          "reading": "zhàn"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第四章》第4句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#四章",
+        "source_ref": {
+          "locator": "/content/3",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "道冲，而用之或不盈。渊兮，似万物之宗。挫其锐，解其纷，和其光，同其尘。湛兮，似或存。吾不知谁之子，象帝之先。"
+        }
+      }
+    },
+    {
+      "id": "s5",
+      "text": "吾不知谁之子，象帝之先。",
+      "translation": "我不知道它从哪里产生，好像在天帝之前就有了。",
+      "explanation": "这是古人关于根源的思考，不能当作已经验证的宇宙年代说明。",
+      "chunks": [
+        "吾不知谁之子，",
+        "象帝之先。"
+      ],
+      "hints": [
+        "吾",
+        "象"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "吾",
+          "kind": "word",
+          "meaning": "我，这里是本章说话者自称。"
+        },
+        {
+          "id": "n2",
+          "quote": "象",
+          "kind": "word",
+          "meaning": "似乎、好像。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第四章》第5句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#四章",
+        "source_ref": {
+          "locator": "/content/3",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "吾不知谁之子，象帝之先。"
+        }
+      }
+    }
+  ],
+  "overview": {
+    "sequence": [
+      "先看本章开头：道好像虚空的器皿，运用起来却不会满溢。",
+      "本章用空器、深水与光尘的比方描写道，提醒人收敛锋芒、化解纷争。",
+      "再回到结尾：我不知道它从哪里产生，好像在天帝之前就有了。"
+    ],
+    "question": "这一章为什么可以叫作「像深水一样留有余地」？",
+    "answer": "本章用空器、深水与光尘的比方描写道，提醒人收敛锋芒、化解纷争。可以引用本章开头或结尾的原句，说明你的依据。",
+    "takeaway": "本章用空器、深水与光尘的比方描写道，提醒人收敛锋芒、化解纷争。"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "choice",
+      "sentence": "s1",
+      "skill": "meaning",
+      "prompt": "开头的「冲」在这里怎样理解？",
+      "choices": [
+        "只顾自己，不留意他人的处境。",
+        "虚空而有容纳的余地。",
+        "为了显示本领而处处炫耀。"
+      ],
+      "answer": 1,
+      "explanation": "把词放回原句看，「冲」在本句中的意思是：虚空而有容纳的余地。"
+    },
+    {
+      "id": "q2",
+      "type": "choice",
+      "sentence": "s5",
+      "skill": "reason",
+      "prompt": "读完「像深水一样留有余地」，哪一种理解更合适？",
+      "choices": [
+        "做事情永远越多越快越好。",
+        "别人的想法一概不用听。",
+        "本章用空器、深水与光尘的比方描写道，提醒人收敛锋芒、化解纷争。"
+      ],
+      "answer": 2,
+      "explanation": "本章用空器、深水与光尘的比方描写道，提醒人收敛锋芒、化解纷争。"
+    },
+    {
+      "id": "q3",
+      "type": "selfcheck",
+      "sentence": "s5",
+      "skill": "retell",
+      "prompt": "选本章一句话，用自己的话解释，再说说它怎样帮助你理解「像深水一样留有余地」。",
+      "answer": "先说清原句中的对象和动作，再解释关键词。可以围绕这点来讲：本章用空器、深水与光尘的比方描写道，提醒人收敛锋芒、化解纷争。说完后，回到原文找一句作依据。",
+      "explanation": "不必背诵译文。重点看词义是否放回本句、有没有原文依据，以及是否把古人的比方误当成不分条件的结论。"
+    }
+  ]
+}

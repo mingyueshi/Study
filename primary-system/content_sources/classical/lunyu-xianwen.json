@@ -1,0 +1,2252 @@
+{
+  "schema_version": 1,
+  "id": "lunyu-xianwen",
+  "title": "论语·宪问",
+  "unit_label": "则",
+  "attribution": "孔子及其弟子言行，弟子与再传弟子编纂",
+  "level": "challenge",
+  "genre": "reasoning",
+  "skills": [
+    "meaning",
+    "referent",
+    "reason",
+    "contrast"
+  ],
+  "curriculum": null,
+  "intro": "在人物评论和对话中，练习不凭一面判断。",
+  "background": "这是《论语》二十篇中的第14篇，话题围绕原则、判断与知人展开。篇名取自开头的字，并不表示每一则都只讲同一个题目。",
+  "editorial_note": "每次可以只读一两则。分段依本机原典，共二十篇、五百一十三则；其他版本的分章和个别用字可能不同。古代身份、礼制和观念要结合当时背景来理解。",
+  "source": {
+    "work": "论语",
+    "section": "宪问篇",
+    "url": "https://zh.wikisource.org/wiki/論語/憲問第十四",
+    "note": "原文采用随项目保存的简体原典，统一引号样式。译文和部分词义据所列译注资料整理，疑难处配合本篇提示阅读。"
+  },
+  "source_ref": {
+    "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+    "path": "poetry/simplified/儒家经典/论语.json",
+    "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+    "locator": "/content/13",
+    "anchor_text": "宪问耻，子曰：“邦有道，谷；邦无道，谷，耻也。”“克、伐、怨、欲不行焉，可以为仁矣？”子曰：“可以为难矣，仁则吾不知也。”"
+  },
+  "edition": {
+    "label": "译注参考：ieduer/lunyu 所收《论语译注》资料",
+    "url": "https://github.com/ieduer/lunyu/blob/44f039ef8174b219b5f773a156b3d954ee65be25/data/dialogues.json",
+    "revision": "44f039ef8174b219b5f773a156b3d954ee65be25",
+    "license": "MIT，许可副本随内容源保存",
+    "note": "采用固定版本的译注，去除重复条目与注号，逐则配回本馆原文；词义保留简短释义，补充课堂提示。乡党两则分配译文，颜渊第二十则依完整原文呈现。"
+  },
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "宪问耻，子曰：「邦有道，谷；邦无道，谷，耻也。」「克、伐、怨、欲不行焉，可以为仁矣？」子曰：「可以为难矣，仁则吾不知也。」",
+      "translation": "原宪问如何叫耻辱。孔子道：「国家政治清明，做官领薪俸；国家政治黑暗，做官领薪俸，这就是耻辱。」原宪又道：「好胜、自夸、怨恨和贪心四种毛病都不曾表现过，这可以说是仁人了吗？」孔子道：「可以说是难能可贵的了，若说是仁人，那我不能同意。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "可以为仁矣",
+          "kind": "word",
+          "meaning": "这句话从形式上看应是肯定句，但从上下文看，实际应是疑问句，不过疑问只从说话者的语势来表示，不藉助于别的表达形式而已。"
+        }
+      ],
+      "chunks": [
+        "宪问耻，",
+        "子曰：",
+        "「邦有道，",
+        "谷；",
+        "邦无道，",
+        "谷，",
+        "耻也。",
+        "」「克、伐、怨、欲不行焉，",
+        "可以为仁矣？",
+        "」子曰：",
+        "「可以为难矣，",
+        "仁则吾不知也。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·宪问》第1则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/憲問第十四",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/13",
+          "anchor_text": "宪问耻，子曰：“邦有道，谷；邦无道，谷，耻也。”“克、伐、怨、欲不行焉，可以为仁矣？”子曰：“可以为难矣，仁则吾不知也。”"
+        }
+      },
+      "explanation": "「可以为仁矣」：这句话从形式上看应是肯定句，但从上下文看，实际应是疑问句，不过疑问只从说话者的语势来表示，不藉助于别的表达形式而已。",
+      "hints": [
+        "可以为仁矣"
+      ],
+      "translation_entry": 377
+    },
+    {
+      "id": "s2",
+      "text": "子曰：「士而怀居，不足以为士矣。」",
+      "translation": "孔子说：「读书人而留恋安逸，便不配做读书人了。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "怀居",
+          "kind": "word",
+          "meaning": "怀，怀思，留恋；居，安居。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「士而怀居，",
+        "不足以为士矣。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·宪问》第2则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/憲問第十四",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/13",
+          "anchor_text": "子曰：“士而怀居，不足以为士矣。”"
+        }
+      },
+      "explanation": "「怀居」：怀，怀思，留恋；居，安居。",
+      "hints": [
+        "怀居"
+      ],
+      "translation_entry": 378
+    },
+    {
+      "id": "s3",
+      "text": "子曰：「邦有道，危言危行；邦无道，危行言孙。」",
+      "translation": "孔子说：「政治清明，言语正直，行为正直；政治黑暗，行为正直，言语谦顺。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "危",
+          "kind": "word",
+          "meaning": "正直，态度端正。"
+        },
+        {
+          "id": "n2",
+          "quote": "孙",
+          "kind": "word",
+          "meaning": "同逊。"
+        },
+        {
+          "id": "n3",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「邦有道，",
+        "危言危行；",
+        "邦无道，",
+        "危行言孙。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·宪问》第3则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/憲問第十四",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/13",
+          "anchor_text": "子曰：“邦有道，危言危行；邦无道，危行言孙。”"
+        }
+      },
+      "explanation": "「危」：正直，态度端正；「孙」：同逊。",
+      "hints": [
+        "危",
+        "孙"
+      ],
+      "translation_entry": 379
+    },
+    {
+      "id": "s4",
+      "text": "子曰：「有德者必有言，有言者不必有德。仁者必有勇，勇者不必有仁。」",
+      "translation": "孔子说：「有道德的人一定有名言，但有名言的人不一定有道德。仁人一定勇敢，但勇敢的人不一定仁。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "不必",
+          "kind": "word",
+          "meaning": "不一定。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「有德者必有言，",
+        "有言者不必有德。",
+        "仁者必有勇，",
+        "勇者不必有仁。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·宪问》第4则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/憲問第十四",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/13",
+          "anchor_text": "子曰：“有德者必有言，有言者不必有德。仁者必有勇，勇者不必有仁。”"
+        }
+      },
+      "explanation": "两个「必」与两个「不必」提醒我们，推断不能随便倒过来：会说话未必有德，勇敢未必仁爱。",
+      "hints": [
+        "不必"
+      ],
+      "translation_entry": 380
+    },
+    {
+      "id": "s5",
+      "text": "南宫适问于孔子曰：「羿善射，奡荡舟，俱不得其死然；禹、稷躬稼而有天下。」夫子不答。南宫适出，子曰：「君子哉若人！尚德哉若人！」",
+      "translation": "南宫适向孔子问道：「羿擅长射箭，奡擅长水战，都没有得到好死。禹和稷自己下地种田，却得到了天下。（怎样解释这些历史？）」孔子没有答复。南宫适退了出来。孔子道：「这个人，好一个君子！这个人，多么尊尚道德！」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "南宫适",
+          "kind": "word",
+          "meaning": "孔子学生南容。"
+        },
+        {
+          "id": "n2",
+          "quote": "羿",
+          "kind": "word",
+          "meaning": "音诣，yì。"
+        },
+        {
+          "id": "n3",
+          "quote": "奡",
+          "kind": "word",
+          "meaning": "音傲，aò。"
+        },
+        {
+          "id": "n4",
+          "quote": "荡舟",
+          "kind": "word",
+          "meaning": "用力推动船只，这里形容奡力气很大。"
+        },
+        {
+          "id": "n5",
+          "quote": "君子",
+          "kind": "word",
+          "meaning": "南宫适托古代的事来问孔子，中心思想是当今尚力不尚德，但按之历史，尚力者不得善终，尚德者终有天下。"
+        }
+      ],
+      "chunks": [
+        "南宫适问于孔子曰：",
+        "「羿善射，",
+        "奡荡舟，",
+        "俱不得其死然；",
+        "禹、稷躬稼而有天下。",
+        "」夫子不答。",
+        "南宫适出，",
+        "子曰：",
+        "「君子哉若人！",
+        "尚德哉若人！",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·宪问》第5则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/憲問第十四",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/13",
+          "anchor_text": "南宫适问于孔子曰：“羿善射，奡荡舟，俱不得其死然；禹、稷躬稼而有天下。”夫子不答。南宫适出，子曰：“君子哉若人！尚德哉若人！”"
+        }
+      },
+      "explanation": "「南宫适」：孔子学生南容；「羿」：音诣，yì。",
+      "hints": [
+        "南宫适",
+        "羿",
+        "奡"
+      ],
+      "translation_entry": 381
+    },
+    {
+      "id": "s6",
+      "text": "子曰：「君子而不仁者有矣夫，未有小人而仁者也。」",
+      "translation": "孔子说：「君子之中不仁的人有的罢，小人之中却不会有仁人。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "君子",
+          "kind": "word",
+          "meaning": "这个「君子」「小人」的含义不大清楚。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「君子而不仁者有矣夫，",
+        "未有小人而仁者也。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·宪问》第6则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/憲問第十四",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/13",
+          "anchor_text": "子曰：“君子而不仁者有矣夫，未有小人而仁者也。”"
+        }
+      },
+      "explanation": "「君子」：这个「君子」「小人」的含义不大清楚。",
+      "hints": [
+        "君子"
+      ],
+      "translation_entry": 382
+    },
+    {
+      "id": "s7",
+      "text": "子曰：「爱之，能勿劳乎？忠焉，能勿诲乎？」",
+      "translation": "孔子说：「爱他，能不叫他劳苦吗？忠于他，能够不教诲他吗？」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "能勿劳乎",
+          "kind": "word",
+          "meaning": "能够不让他经历必要的锻炼吗？"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「爱之，",
+        "能勿劳乎？",
+        "忠焉，",
+        "能勿诲乎？",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·宪问》第7则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/憲問第十四",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/13",
+          "anchor_text": "子曰：“爱之，能勿劳乎？忠焉，能勿诲乎？”"
+        }
+      },
+      "explanation": "「能勿劳乎」：能够不让他经历必要的锻炼吗？。",
+      "hints": [
+        "能勿劳乎"
+      ],
+      "translation_entry": 383
+    },
+    {
+      "id": "s8",
+      "text": "子曰：「为命，裨谌草创之，世叔讨论之，行人子羽修饰之，东里子产润色之。」",
+      "translation": "孔子说：「郑国外交辞令的创制，裨谌拟稿，世叔提意见，外交官子羽修改，子产作文词上的加工。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "为命",
+          "kind": "word",
+          "meaning": "制作外交辞令。"
+        },
+        {
+          "id": "n2",
+          "quote": "裨谌",
+          "kind": "word",
+          "meaning": "音庇臣，bìchén，郑国大夫，见《左传》。"
+        },
+        {
+          "id": "n3",
+          "quote": "世叔",
+          "kind": "word",
+          "meaning": "即《左传》的子太叔（古代，「太」和「世」两字通用），名游吉。"
+        },
+        {
+          "id": "n4",
+          "quote": "讨论",
+          "kind": "word",
+          "meaning": "意义和今天的「讨论」不同，这是一个人去研究而后提意见的意思。"
+        },
+        {
+          "id": "n5",
+          "quote": "行人子羽",
+          "kind": "word",
+          "meaning": "行人，官名，即古代的外交官。"
+        },
+        {
+          "id": "n6",
+          "quote": "东里子产",
+          "kind": "word",
+          "meaning": "东里，地名，今在郑州市，子产所居。"
+        },
+        {
+          "id": "n7",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「为命，",
+        "裨谌草创之，",
+        "世叔讨论之，",
+        "行人子羽修饰之，",
+        "东里子产润色之。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·宪问》第8则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/憲問第十四",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/13",
+          "anchor_text": "子曰：“为命，裨谌草创之，世叔讨论之，行人子羽修饰之，东里子产润色之。”"
+        }
+      },
+      "explanation": "「为命」：制作外交辞令；「裨谌」：音庇臣，bìchén，郑国大夫，见《左传》。",
+      "hints": [
+        "为命",
+        "裨谌",
+        "世叔"
+      ],
+      "translation_entry": 384
+    },
+    {
+      "id": "s9",
+      "text": "或问子产，子曰：「惠人也。」问子西，曰：「彼哉，彼哉！」问管仲，曰：「人也。夺伯氏骈邑三百，饭疏食，没齿无怨言。」",
+      "translation": "有人向孔子问子产是怎样的人物。孔子道：「是宽厚慈惠的人。」又问到子西。孔子道：「他呀，他呀！」又问到管仲。孔子道：「他是人才。剥夺了伯氏骈邑三百户的采地，使伯氏只能吃粗粮，到死没有怨恨的话。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "子西",
+          "kind": "word",
+          "meaning": "春秋时有三个子西，一是郑国的公孙夏，生当鲁襄公之世，为子产的同宗兄弟，子产便是继他而主持郑国政治的。"
+        },
+        {
+          "id": "n2",
+          "quote": "伯氏",
+          "kind": "word",
+          "meaning": "齐国的一位大夫。"
+        },
+        {
+          "id": "n3",
+          "quote": "骈邑",
+          "kind": "word",
+          "meaning": "地名。"
+        }
+      ],
+      "chunks": [
+        "或问子产，",
+        "子曰：",
+        "「惠人也。",
+        "」问子西，",
+        "曰：",
+        "「彼哉，",
+        "彼哉！",
+        "」问管仲，",
+        "曰：",
+        "「人也。",
+        "夺伯氏骈邑三百，",
+        "饭疏食，",
+        "没齿无怨言。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·宪问》第9则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/憲問第十四",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/13",
+          "anchor_text": "或问子产，子曰：“惠人也。”问子西，曰：“彼哉，彼哉！”问管仲，曰：“人也。夺伯氏骈邑三百，饭疏食，没齿无怨言。”"
+        }
+      },
+      "explanation": "「子西」：春秋时有三个子西，一是郑国的公孙夏，生当鲁襄公之世，为子产的同宗兄弟，子产便是继他而主持郑国政治的；「伯氏」：齐国的一位大夫。",
+      "hints": [
+        "子西",
+        "伯氏",
+        "骈邑"
+      ],
+      "translation_entry": 385
+    },
+    {
+      "id": "s10",
+      "text": "子曰：「贫而无怨难，富而无骄易。」",
+      "translation": "孔子说：「贫穷却没有怨恨，很难；富贵却不骄傲，倒容易做到」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "骄",
+          "kind": "word",
+          "meaning": "骄傲自大。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「贫而无怨难，",
+        "富而无骄易。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·宪问》第10则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/憲問第十四",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/13",
+          "anchor_text": "子曰：“贫而无怨难，富而无骄易。”"
+        }
+      },
+      "explanation": "这句比较两种处境里的修养难处，没有把贫富当作判断人的品德的标准。",
+      "hints": [
+        "骄"
+      ],
+      "translation_entry": 386
+    },
+    {
+      "id": "s11",
+      "text": "子曰：「孟公绰为赵、魏老则优，不可以为滕、薛大夫。」",
+      "translation": "孔子说：「孟公绰，若是叫他做晋国诸卿赵氏、魏氏的家臣，那是力有余裕的；却没有才能来做滕、薛这样小国的大夫。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "孟公绰",
+          "kind": "word",
+          "meaning": "鲁国大夫，《左传》襄公二十五年记载着他的一段事。"
+        },
+        {
+          "id": "n2",
+          "quote": "老",
+          "kind": "word",
+          "meaning": "古代，大夫的家臣称老，也称室老。"
+        },
+        {
+          "id": "n3",
+          "quote": "优",
+          "kind": "word",
+          "meaning": "本意是「优裕」，所以用「力有余裕」来译它。"
+        },
+        {
+          "id": "n4",
+          "quote": "滕",
+          "kind": "word",
+          "meaning": "当时的小国，都在鲁国附近。"
+        },
+        {
+          "id": "n5",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「孟公绰为赵、魏老则优，",
+        "不可以为滕、薛大夫。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·宪问》第11则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/憲問第十四",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/13",
+          "anchor_text": "子曰：“孟公绰为赵、魏老则优，不可以为滕、薛大夫。”"
+        }
+      },
+      "explanation": "「孟公绰」：鲁国大夫，《左传》襄公二十五年记载着他的一段事；「老」：古代，大夫的家臣称老，也称室老。",
+      "hints": [
+        "孟公绰",
+        "老",
+        "优"
+      ],
+      "translation_entry": 387
+    },
+    {
+      "id": "s12",
+      "text": "子路问成人，子曰：「若臧武仲之知、公绰之不欲、卞庄子之勇、冉求之艺，文之以礼乐，亦可以为成人矣。」曰：「今之成人者何必然？见利思义，见危授命，久要不忘平生之言，亦可以为成人矣。」",
+      "translation": "子路问怎样才是全人。孔子道：「智慧像臧武仲，清心寡欲像孟公绰，勇敢像卞庄子，多才多艺像冉求，再用礼乐来成就他的文采，也可以说是全人了。」等了一会，又道：「现在的全人哪里一定要这样？看见利益便能想起该得不该得，遇到危险便肯付出生命，经过长久的穷困日子都不忘记平日的诺言，也可以说是全人了。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "臧武仲",
+          "kind": "word",
+          "meaning": "鲁大夫臧孙纥。"
+        },
+        {
+          "id": "n2",
+          "quote": "卞庄子",
+          "kind": "word",
+          "meaning": "鲁国的勇士。"
+        },
+        {
+          "id": "n3",
+          "quote": "久要",
+          "kind": "word",
+          "meaning": "「要」为「约」的借字，「约」，穷困之意。"
+        }
+      ],
+      "chunks": [
+        "子路问成人，",
+        "子曰：",
+        "「若臧武仲之知、公绰之不欲、卞庄子之勇、冉求之艺，",
+        "文之以礼乐，",
+        "亦可以为成人矣。",
+        "」曰：",
+        "「今之成人者何必然？",
+        "见利思义，",
+        "见危授命，",
+        "久要不忘平生之言，",
+        "亦可以为成人矣。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·宪问》第12则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/憲問第十四",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/13",
+          "anchor_text": "子路问成人，子曰：“若臧武仲之知、公绰之不欲、卞庄子之勇、冉求之艺，文之以礼乐，亦可以为成人矣。”曰：“今之成人者何必然？见利思义，见危授命，久要不忘平生之言，亦可以为成人矣。”"
+        }
+      },
+      "explanation": "「臧武仲」：鲁大夫臧孙纥；「卞庄子」：鲁国的勇士。",
+      "hints": [
+        "臧武仲",
+        "卞庄子",
+        "久要"
+      ],
+      "translation_entry": 388
+    },
+    {
+      "id": "s13",
+      "text": "子问公叔文子于公明贾曰：「信乎，夫子不言，不笑，不取乎？」公明贾对曰：「以告者过也。夫子时然后言，人不厌其言；乐然后笑，人不厌其笑；义然后取，人不厌其取。」子曰：「其然？岂其然乎？」",
+      "translation": "孔子向公明贾问到公叔文子，说：「他老人家不言语，不笑，不取，是真的吗？」公明贾答道：「这是传话的人说错了。他老人家到应说话的时候才说话，别人不厌恶他的话；高兴了才笑，别人不厌恶他的笑；应该取才取，别人不厌恶他的取。」孔子道：「如此的吗？难道真是如此的吗？」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "公叔文子",
+          "kind": "word",
+          "meaning": "卫国大夫，《檀弓》载有他的故事。"
+        },
+        {
+          "id": "n2",
+          "quote": "公明贾",
+          "kind": "word",
+          "meaning": "卫人，姓公明，名贾。"
+        },
+        {
+          "id": "n3",
+          "quote": "以",
+          "kind": "word",
+          "meaning": "代词，此也。"
+        }
+      ],
+      "chunks": [
+        "子问公叔文子于公明贾曰：",
+        "「信乎，",
+        "夫子不言，",
+        "不笑，",
+        "不取乎？",
+        "」公明贾对曰：",
+        "「以告者过也。",
+        "夫子时然后言，",
+        "人不厌其言；",
+        "乐然后笑，",
+        "人不厌其笑；",
+        "义然后取，",
+        "人不厌其取。",
+        "」子曰：",
+        "「其然？",
+        "岂其然乎？",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·宪问》第13则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/憲問第十四",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/13",
+          "anchor_text": "子问公叔文子于公明贾曰：“信乎，夫子不言，不笑，不取乎？”公明贾对曰：“以告者过也。夫子时然后言，人不厌其言；乐然后笑，人不厌其笑；义然后取，人不厌其取。”子曰：“其然？岂其然乎？”"
+        }
+      },
+      "explanation": "「公叔文子」：卫国大夫，《檀弓》载有他的故事；「公明贾」：卫人，姓公明，名贾。",
+      "hints": [
+        "公叔文子",
+        "公明贾",
+        "以"
+      ],
+      "translation_entry": 389
+    },
+    {
+      "id": "s14",
+      "text": "子曰：「臧武仲以防求为后于鲁，虽曰不要君，吾不信也。」",
+      "translation": "孔子说：「臧武仲（逃到齐国之前，）凭借着他的采邑防城请求立其子弟嗣为鲁国卿大夫，纵然有人说他不是要挟，我是不相信的。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "臧武仲以防求为后于鲁",
+          "kind": "word",
+          "meaning": "事见《左传》襄公二十三年。"
+        },
+        {
+          "id": "n2",
+          "quote": "要",
+          "kind": "word",
+          "meaning": "平声，音腰，yāo。"
+        },
+        {
+          "id": "n3",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「臧武仲以防求为后于鲁，",
+        "虽曰不要君，",
+        "吾不信也。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·宪问》第14则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/憲問第十四",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/13",
+          "anchor_text": "子曰：“臧武仲以防求为后于鲁，虽曰不要君，吾不信也。”"
+        }
+      },
+      "explanation": "「臧武仲以防求为后于鲁」：事见《左传》襄公二十三年；「要」：平声，音腰，yāo。",
+      "hints": [
+        "臧武仲以防求为后于鲁",
+        "要"
+      ],
+      "translation_entry": 390
+    },
+    {
+      "id": "s15",
+      "text": "子曰：「晋文公谲而不正，齐桓公正而不谲。」",
+      "translation": "孔子说：「晋文公诡诈好耍手段，作风不正派；齐桓公作风正派，不用诡诈，不耍手段。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "晋文公",
+          "kind": "word",
+          "meaning": "晋文公名重耳，齐桓公名小白。"
+        },
+        {
+          "id": "n2",
+          "quote": "谲",
+          "kind": "word",
+          "meaning": "音决，jué，欺诈，玩弄权术阴谋。"
+        },
+        {
+          "id": "n3",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「晋文公谲而不正，",
+        "齐桓公正而不谲。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·宪问》第15则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/憲問第十四",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/13",
+          "anchor_text": "子曰：“晋文公谲而不正，齐桓公正而不谲。”"
+        }
+      },
+      "explanation": "「晋文公」：晋文公名重耳，齐桓公名小白；「谲」：音决，jué，欺诈，玩弄权术阴谋。",
+      "hints": [
+        "晋文公",
+        "谲"
+      ],
+      "translation_entry": 391
+    },
+    {
+      "id": "s16",
+      "text": "子路曰：「桓公杀公子纠，召忽死之，管仲不死，曰未仁乎？」子曰：「桓公九合诸侯不以兵车，管仲之力也。如其仁，如其仁！」",
+      "translation": "子路道：「齐桓公杀了他哥哥公子纠，（公子纠的师傅）召忽因此自杀，（但是他的另一师傅）管仲却活着。」接着又道：「管仲该不是有仁德的罢？」孔子道：「齐桓公多次地主持诸侯间的盟会，停止了战争，都是管仲的力量。这就是管仲的仁德，这就是管仲的仁德。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "管仲不死",
+          "kind": "word",
+          "meaning": "齐桓公和公子纠都是齐襄公的弟弟。"
+        },
+        {
+          "id": "n2",
+          "quote": "九合",
+          "kind": "word",
+          "meaning": "齐桓公纠合诸侯共计十一次。"
+        },
+        {
+          "id": "n3",
+          "quote": "如其仁",
+          "kind": "word",
+          "meaning": "称赞管仲的仁德，有「这就是他的仁德」的意思。"
+        }
+      ],
+      "chunks": [
+        "子路曰：",
+        "「桓公杀公子纠，",
+        "召忽死之，",
+        "管仲不死，",
+        "曰未仁乎？",
+        "」子曰：",
+        "「桓公九合诸侯不以兵车，",
+        "管仲之力也。",
+        "如其仁，",
+        "如其仁！",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·宪问》第16则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/憲問第十四",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/13",
+          "anchor_text": "子路曰：“桓公杀公子纠，召忽死之，管仲不死，曰未仁乎？”子曰：“桓公九合诸侯不以兵车，管仲之力也。如其仁，如其仁！”"
+        }
+      },
+      "explanation": "「管仲不死」：齐桓公和公子纠都是齐襄公的弟弟；「九合」：齐桓公纠合诸侯共计十一次。",
+      "hints": [
+        "管仲不死",
+        "九合",
+        "如其仁"
+      ],
+      "translation_entry": 392
+    },
+    {
+      "id": "s17",
+      "text": "子贡曰：「管仲非仁者与？桓公杀公子纠，不能死，又相之。」子曰：「管仲相桓公霸诸侯，一匡天下，民到于今受其赐。微管仲，吾其被发左衽矣。岂若匹夫匹妇之为谅也，自经于沟渎而莫之知也。」",
+      "translation": "子贡道：「管仲不是仁人罢？桓公杀掉了公子纠，他不但不以身殉难，还去辅相他。」孔子道：「管仲辅相桓公，称霸诸侯，使天下一切得到匡正，人民到今天还受到他的好处。假若没有管仲，我们都会披散着头发，衣襟向左边开，（沦为落后民族）了。他难道要像普通老百姓一样守着小节小信，在山沟中自杀，还没有人知道的吗？」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "微",
+          "kind": "word",
+          "meaning": "假若没有的意思，只用于和既成事实相反的假设句之首。"
+        },
+        {
+          "id": "n2",
+          "quote": "被",
+          "kind": "word",
+          "meaning": "同「披」。"
+        },
+        {
+          "id": "n3",
+          "quote": "自经",
+          "kind": "word",
+          "meaning": "自缢。"
+        },
+        {
+          "id": "n4",
+          "quote": "沟渎",
+          "kind": "word",
+          "meaning": "犹《孟子·梁惠王》的「沟壑」。"
+        }
+      ],
+      "chunks": [
+        "子贡曰：",
+        "「管仲非仁者与？",
+        "桓公杀公子纠，",
+        "不能死，",
+        "又相之。",
+        "」子曰：",
+        "「管仲相桓公霸诸侯，",
+        "一匡天下，",
+        "民到于今受其赐。",
+        "微管仲，",
+        "吾其被发左衽矣。",
+        "岂若匹夫匹妇之为谅也，",
+        "自经于沟渎而莫之知也。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·宪问》第17则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/憲問第十四",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/13",
+          "anchor_text": "子贡曰：“管仲非仁者与？桓公杀公子纠，不能死，又相之。”子曰：“管仲相桓公霸诸侯，一匡天下，民到于今受其赐。微管仲，吾其被发左衽矣。岂若匹夫匹妇之为谅也，自经于沟渎而莫之知也。”"
+        }
+      },
+      "explanation": "「微」：假若没有的意思，只用于和既成事实相反的假设句之首；「被」：同「披」。",
+      "hints": [
+        "微",
+        "被",
+        "自经"
+      ],
+      "translation_entry": 393
+    },
+    {
+      "id": "s18",
+      "text": "公叔文子之臣大夫僎与文子同升诸公，子闻之,曰：「可以为『文』矣。」",
+      "translation": "公叔文子的家臣大夫僎，（由于文子的推荐，）和文子一道做了国家的大臣。孔子知道这事，便道：「这便可以谥为『文』了。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "诸",
+          "kind": "word",
+          "meaning": "用法同「于」。"
+        }
+      ],
+      "chunks": [
+        "公叔文子之臣大夫僎与文子同升诸公，",
+        "子闻之,曰：",
+        "「可以为『文』矣。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·宪问》第18则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/憲問第十四",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/13",
+          "anchor_text": "公叔文子之臣大夫僎与文子同升诸公，子闻之,曰：“可以为‘文’矣。”"
+        }
+      },
+      "explanation": "「诸」：用法同「于」。",
+      "hints": [
+        "诸"
+      ],
+      "translation_entry": 394
+    },
+    {
+      "id": "s19",
+      "text": "子言卫灵公之无道也，康子曰：「夫如是，奚而不丧？」孔子曰：「仲叔圉治宾客，祝鮀治宗庙，王孙贾治军旅，夫如是，奚其丧？」",
+      "translation": "孔子讲到卫灵公的昏乱，康子道：「既然这样，为什么不败亡？」孔子道：「他有仲叔圉接待宾客，祝鮀管理祭祀，王孙贾统率军队，像这样，怎么会败亡？」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "奚而",
+          "kind": "word",
+          "meaning": "为什么。"
+        },
+        {
+          "id": "n2",
+          "quote": "仲叔圉",
+          "kind": "word",
+          "meaning": "就是孔文子。"
+        }
+      ],
+      "chunks": [
+        "子言卫灵公之无道也，",
+        "康子曰：",
+        "「夫如是，",
+        "奚而不丧？",
+        "」孔子曰：",
+        "「仲叔圉治宾客，",
+        "祝鮀治宗庙，",
+        "王孙贾治军旅，",
+        "夫如是，",
+        "奚其丧？",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·宪问》第19则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/憲問第十四",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/13",
+          "anchor_text": "子言卫灵公之无道也，康子曰：“夫如是，奚而不丧？”孔子曰：“仲叔圉治宾客，祝鮀治宗庙，王孙贾治军旅，夫如是，奚其丧？”"
+        }
+      },
+      "explanation": "「奚而」：为什么；「仲叔圉」：就是孔文子。",
+      "hints": [
+        "奚而",
+        "仲叔圉"
+      ],
+      "translation_entry": 395
+    },
+    {
+      "id": "s20",
+      "text": "子曰：「其言之不怍，则为之也难。」",
+      "translation": "孔子说：「那个人大言不惭，他实行就不容易。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "怍",
+          "kind": "word",
+          "meaning": "惭愧。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「其言之不怍，",
+        "则为之也难。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·宪问》第20则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/憲問第十四",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/13",
+          "anchor_text": "子曰：“其言之不怍，则为之也难。”"
+        }
+      },
+      "explanation": "说话时毫不觉得要谨慎，做起来就容易跟不上承诺。",
+      "hints": [
+        "怍"
+      ],
+      "translation_entry": 396
+    },
+    {
+      "id": "s21",
+      "text": "陈成子弑简公，孔子沐浴而朝，告于哀公曰：「陈恒弑其君，请讨之。」公曰：「告夫三子。」,孔子曰：「以吾从大夫之后，不敢不告也，君曰『告夫三子』者！」之三子告，不可。孔子曰：「以吾从大夫之后，不敢不告也。」",
+      "translation": "陈恒杀了齐简公。孔子斋戒沐浴而后朝见鲁哀公，报告道：「陈恒杀了他的君主，请你出兵讨伐他。」哀公道：「你向季孙、仲孙、孟孙三人去报告罢！」孔子（退了出来），道：「因为我曾忝为大夫，不敢不来报告，但是君上却对我说，『给那三人报告吧』！」孔子又去报告三位大臣，不肯出兵。孔子道：「因为我曾忝为大夫，不敢不报告。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "陈成子",
+          "kind": "word",
+          "meaning": "就是陈恒。"
+        },
+        {
+          "id": "n2",
+          "quote": "简公",
+          "kind": "word",
+          "meaning": "齐简公，名壬。"
+        },
+        {
+          "id": "n3",
+          "quote": "孔子沐浴而朝",
+          "kind": "word",
+          "meaning": "这时孔子已经告老还家，特为这事来朝见鲁君。"
+        },
+        {
+          "id": "n4",
+          "quote": "请讨之",
+          "kind": "word",
+          "meaning": "孔子请讨陈恒，主要地由于陈恒以臣杀君，依孔子的学说，非讨不可。"
+        },
+        {
+          "id": "n5",
+          "quote": "孔子曰",
+          "kind": "word",
+          "meaning": "这是孔子退朝后的话，参校《左传》哀公十四年的记载便可以知道。"
+        }
+      ],
+      "chunks": [
+        "陈成子弑简公，",
+        "孔子沐浴而朝，",
+        "告于哀公曰：",
+        "「陈恒弑其君，",
+        "请讨之。",
+        "」公曰：",
+        "「告夫三子。",
+        "」,孔子曰：",
+        "「以吾从大夫之后，",
+        "不敢不告也，",
+        "君曰『告夫三子』者！",
+        "」之三子告，",
+        "不可。",
+        "孔子曰：",
+        "「以吾从大夫之后，",
+        "不敢不告也。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·宪问》第21则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/憲問第十四",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/13",
+          "anchor_text": "陈成子弑简公，孔子沐浴而朝，告于哀公曰：“陈恒弑其君，请讨之。”公曰：“告夫三子。”,孔子曰：“以吾从大夫之后，不敢不告也，君曰‘告夫三子’者！”之三子告，不可。孔子曰：“以吾从大夫之后，不敢不告也。”"
+        }
+      },
+      "explanation": "「陈成子」：就是陈恒；「简公」：齐简公，名壬。",
+      "hints": [
+        "陈成子",
+        "简公",
+        "孔子沐浴而朝"
+      ],
+      "translation_entry": 397
+    },
+    {
+      "id": "s22",
+      "text": "子路问事君，子曰：「勿欺也，而犯之。」",
+      "translation": "子路问怎样服侍人君。孔子道：「不要（阳奉阴违地）欺骗他，却可以（当面）触犯他。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "犯之",
+          "kind": "word",
+          "meaning": "当面劝谏，指出对方的问题。"
+        }
+      ],
+      "chunks": [
+        "子路问事君，",
+        "子曰：",
+        "「勿欺也，",
+        "而犯之。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·宪问》第22则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/憲問第十四",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/13",
+          "anchor_text": "子路问事君，子曰：“勿欺也，而犯之。”"
+        }
+      },
+      "explanation": "诚实不是一味顺从；有问题时，也要负责任地提出意见。",
+      "hints": [
+        "犯之"
+      ],
+      "translation_entry": 398
+    },
+    {
+      "id": "s23",
+      "text": "子曰：「君子上达，小人下达。」",
+      "translation": "孔子说：「君子通达于仁义，小人通达于财利。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "上达",
+          "kind": "word",
+          "meaning": "向上通达，这里指追求更高的道义。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「君子上达，",
+        "小人下达。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·宪问》第23则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/憲問第十四",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/13",
+          "anchor_text": "子曰：“君子上达，小人下达。”"
+        }
+      },
+      "explanation": "上达与下达相对，比较的是人所追求的目标。",
+      "hints": [
+        "上达"
+      ],
+      "translation_entry": 399
+    },
+    {
+      "id": "s24",
+      "text": "子曰：「古之学者为己，今之学者为人。」",
+      "translation": "孔子说：「古代学者的目的在修养自己的学问道德，现代学者的目的却在装饰自己，给别人看。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "为己",
+          "kind": "word",
+          "meaning": "为了充实、完善自己。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「古之学者为己，",
+        "今之学者为人。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·宪问》第24则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/憲問第十四",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/13",
+          "anchor_text": "子曰：“古之学者为己，今之学者为人。”"
+        }
+      },
+      "explanation": "这里的为己与自私不同；孔子批评的是只想让别人看见、求取名声的学习。",
+      "hints": [
+        "为己"
+      ],
+      "translation_entry": 400
+    },
+    {
+      "id": "s25",
+      "text": "蘧伯玉使人于孔子，孔子与之坐而问焉，曰：「夫子何为？」对曰：「夫子欲寡其过而未能也。」使者出，子曰：「使乎！使乎！」",
+      "translation": "蘧伯玉派一位使者访问孔子。孔子给他坐位，而后问道：「他老人家干些什么？」使者答道：「他老人家想减少过错却还没能做到。」使者辞了出来。孔子道：「好一位使者！好一位使者！」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "蘧伯玉",
+          "kind": "word",
+          "meaning": "卫国的大夫，名瑗。"
+        },
+        {
+          "id": "n2",
+          "quote": "寡其过",
+          "kind": "word",
+          "meaning": "减少自己的过失。"
+        }
+      ],
+      "chunks": [
+        "蘧伯玉使人于孔子，",
+        "孔子与之坐而问焉，",
+        "曰：",
+        "「夫子何为？",
+        "」对曰：",
+        "「夫子欲寡其过而未能也。",
+        "」使者出，",
+        "子曰：",
+        "「使乎！",
+        "使乎！",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·宪问》第25则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/憲問第十四",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/13",
+          "anchor_text": "蘧伯玉使人于孔子，孔子与之坐而问焉，曰：“夫子何为？”对曰：“夫子欲寡其过而未能也。”使者出，子曰：“使乎！使乎！”"
+        }
+      },
+      "explanation": "「蘧伯玉」：卫国的大夫，名瑗；「寡其过」：减少自己的过失。",
+      "hints": [
+        "蘧伯玉",
+        "寡其过"
+      ],
+      "translation_entry": 401
+    },
+    {
+      "id": "s26",
+      "text": "子曰：「不在其位，不谋其政。」曾子曰：「君子思不出其位。」",
+      "translation": "曾子说：「君子所思虑的不超出自己的工作岗位。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "位",
+          "kind": "word",
+          "meaning": "所处的职位、承担的职责。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「不在其位，",
+        "不谋其政。",
+        "」曾子曰：",
+        "「君子思不出其位。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·宪问》第26则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/憲問第十四",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/13",
+          "anchor_text": "子曰：“不在其位，不谋其政。”曾子曰：“君子思不出其位。”"
+        }
+      },
+      "explanation": "孔子与曾子的话都在提醒人关注职责。今天做好分工，也可以负责任地关心公共事务。",
+      "hints": [
+        "位"
+      ],
+      "translation_entry": 402
+    },
+    {
+      "id": "s27",
+      "text": "子曰：「君子耻其言而过其行。」",
+      "translation": "孔子说：「说得多，做得少，君子以为耻。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "耻",
+          "kind": "word",
+          "meaning": "以某件事为羞耻。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「君子耻其言而过其行。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·宪问》第27则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/憲問第十四",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/13",
+          "anchor_text": "子曰：“君子耻其言而过其行。”"
+        }
+      },
+      "explanation": "说得多、做得少，是这句提醒人检查的差距。",
+      "hints": [
+        "耻"
+      ],
+      "translation_entry": 403
+    },
+    {
+      "id": "s28",
+      "text": "子曰：「君子道者三，我无能焉：仁者不忧，知者不惑，勇者不惧。」子贡曰：「夫子自道也。」",
+      "translation": "孔子说：「君子所行的三件事，我一件也没能做到：仁德的人不忧虑，智慧的人不迷惑，勇敢的人不惧怕。」子贡道：「这正是他老人家对自己的叙述哩。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "自道",
+          "kind": "word",
+          "meaning": "说他自己。"
+        },
+        {
+          "id": "n2",
+          "quote": "我",
+          "meaning": "第一人称，意思是我。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "这一段接在「子曰」之后，尚未转述别人的话，指正在说话的孔子。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「君子道者三，",
+        "我无能焉：",
+        "仁者不忧，",
+        "知者不惑，",
+        "勇者不惧。",
+        "」子贡曰：",
+        "「夫子自道也。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·宪问》第28则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/憲問第十四",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/13",
+          "anchor_text": "子曰：“君子道者三，我无能焉：仁者不忧，知者不惑，勇者不惧。”子贡曰：“夫子自道也。”"
+        }
+      },
+      "explanation": "孔子先谦称自己做不到，子贡却认为老师正在说自己的品德，读时注意说话人变化。",
+      "hints": [
+        "自道"
+      ],
+      "translation_entry": 404
+    },
+    {
+      "id": "s29",
+      "text": "子贡方人，子曰：「赐也贤乎哉？夫我则不暇。」",
+      "translation": "子贡讥评别人。孔子对他道：「你就够好了吗？我却没有这闲工夫。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "方人",
+          "kind": "word",
+          "meaning": "评论、比较别人。"
+        }
+      ],
+      "chunks": [
+        "子贡方人，",
+        "子曰：",
+        "「赐也贤乎哉？",
+        "夫我则不暇。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·宪问》第29则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/憲問第十四",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/13",
+          "anchor_text": "子贡方人，子曰：“赐也贤乎哉？夫我则不暇。”"
+        }
+      },
+      "explanation": "「方人」：评论、比较别人。",
+      "hints": [
+        "方人"
+      ],
+      "translation_entry": 405
+    },
+    {
+      "id": "s30",
+      "text": "子曰：「不患人之不己知，患其不能也。」",
+      "translation": "孔子说：「不着急别人不知道我，只着急自己没有能力。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "不能",
+          "kind": "word",
+          "meaning": "自己的本领不足。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「不患人之不己知，",
+        "患其不能也。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·宪问》第30则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/憲問第十四",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/13",
+          "anchor_text": "子曰：“不患人之不己知，患其不能也。”"
+        }
+      },
+      "explanation": "这段把注意力从别人是否了解自己，转到自己能否增长本领。",
+      "hints": [
+        "不能"
+      ],
+      "translation_entry": 406
+    },
+    {
+      "id": "s31",
+      "text": "子曰：「不逆诈，不亿不信，抑亦先觉者，是贤乎！」",
+      "translation": "孔子说：「不预先怀疑别人的欺诈，也不无根据地猜测别人的不老实，却能及早发觉，这样的人是一位贤者罢！」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "逆",
+          "kind": "word",
+          "meaning": "预先猜测。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「不逆诈，",
+        "不亿不信，",
+        "抑亦先觉者，",
+        "是贤乎！",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·宪问》第31则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/憲問第十四",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/13",
+          "anchor_text": "子曰：“不逆诈，不亿不信，抑亦先觉者，是贤乎！”"
+        }
+      },
+      "explanation": "不要先把别人想成坏人，也要保持观察和分辨，遇事看证据。",
+      "hints": [
+        "逆"
+      ],
+      "translation_entry": 407
+    },
+    {
+      "id": "s32",
+      "text": "微生亩谓孔子曰：「丘何为是栖栖者与？无乃为佞乎？」孔子曰：「非敢为佞也，疾固也。」",
+      "translation": "微生亩对孔子道：「你为什么这样忙忙碌碌的呢？不是要逞你的口才吗？」孔子道：「我不是敢逞口才，而是讨厌那种顽固不通的人。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "微生亩",
+          "kind": "word",
+          "meaning": "一位鲁国人，微生是姓，亩是名。"
+        },
+        {
+          "id": "n2",
+          "quote": "是",
+          "kind": "word",
+          "meaning": "这里作副词用，当「如此」解。"
+        }
+      ],
+      "chunks": [
+        "微生亩谓孔子曰：",
+        "「丘何为是栖栖者与？",
+        "无乃为佞乎？",
+        "」孔子曰：",
+        "「非敢为佞也，",
+        "疾固也。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·宪问》第32则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/憲問第十四",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/13",
+          "anchor_text": "微生亩谓孔子曰：“丘何为是栖栖者与？无乃为佞乎？”孔子曰：“非敢为佞也，疾固也。”"
+        }
+      },
+      "explanation": "「微生亩」：一位鲁国人，微生是姓，亩是名；「是」：这里作副词用，当「如此」解。",
+      "hints": [
+        "微生亩",
+        "是"
+      ],
+      "translation_entry": 408
+    },
+    {
+      "id": "s33",
+      "text": "曰：「骥不称其力，称其德也。」",
+      "translation": "孔子说：「称千里马叫做骥，并不是赞美它的气力，而是赞美他的质量。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "骥",
+          "kind": "word",
+          "meaning": "好马、千里马。"
+        }
+      ],
+      "chunks": [
+        "曰：",
+        "「骥不称其力，",
+        "称其德也。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·宪问》第33则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/憲問第十四",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/13",
+          "anchor_text": "曰：“骥不称其力，称其德也。”"
+        }
+      },
+      "explanation": "由马的力气说到驯良的品性，是借马说明评价不能只看一项本领。",
+      "hints": [
+        "骥"
+      ],
+      "translation_entry": 409
+    },
+    {
+      "id": "s34",
+      "text": "或曰：「以德报怨，何如？」子曰：「何以报德？以直报怨，以德报德。」",
+      "translation": "有人对孔子道：「拿恩惠来回答怨恨，怎么样？」孔子道：「拿什么来酬答恩惠呢？拿公平正直来回答怨恨，拿恩惠来酬答恩惠。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "以德报怨",
+          "kind": "word",
+          "meaning": "用恩惠来回报怨恨。"
+        }
+      ],
+      "chunks": [
+        "或曰：",
+        "「以德报怨，",
+        "何如？",
+        "」子曰：",
+        "「何以报德？",
+        "以直报怨，",
+        "以德报德。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·宪问》第34则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/憲問第十四",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/13",
+          "anchor_text": "或曰：“以德报怨，何如？”子曰：“何以报德？以直报怨，以德报德。”"
+        }
+      },
+      "explanation": "「以德报怨」：用恩惠来回报怨恨。",
+      "hints": [
+        "以德报怨"
+      ],
+      "translation_entry": 410
+    },
+    {
+      "id": "s35",
+      "text": "子曰：「莫我知也夫！」子贡曰：「何为其莫知子也？」子曰：「不怨天，不尤人，下学而上达。知我者其天乎！」",
+      "translation": "孔子叹道：「没有人知道我呀！」子贡道：「为什么没有人知道您呢？」孔子道：「不怨恨天，不责备人，学习一些平常的知识，却透澈了解很高的道理。知道我的，只是天罢！」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "下学而上达",
+          "kind": "word",
+          "meaning": "这句话具体的意义是什么，古今颇有不同解释，译文所言只能备参考。"
+        },
+        {
+          "id": "n2",
+          "quote": "我",
+          "meaning": "第一人称，意思是我。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "这一段接在「子曰」之后，尚未转述别人的话，指正在说话的孔子。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「莫我知也夫！",
+        "」子贡曰：",
+        "「何为其莫知子也？",
+        "」子曰：",
+        "「不怨天，",
+        "不尤人，",
+        "下学而上达。",
+        "知我者其天乎！",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·宪问》第35则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/憲問第十四",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/13",
+          "anchor_text": "子曰：“莫我知也夫！”子贡曰：“何为其莫知子也？”子曰：“不怨天，不尤人，下学而上达。知我者其天乎！”"
+        }
+      },
+      "explanation": "「下学而上达」：这句话具体的意义是什么，古今颇有不同解释，译文所言只能备参考。",
+      "hints": [
+        "下学而上达"
+      ],
+      "translation_entry": 411
+    },
+    {
+      "id": "s36",
+      "text": "公伯寮愬子路于季孙。子服景伯以告，曰：「夫子固有惑志于公伯寮，吾力犹能肆诸市朝。」子曰：「道之将行也与，命也；道之将废也与，命也。公伯寮其如命何？」",
+      "translation": "公伯寮向季孙毁谤子路。子服景伯告诉孔子，并且说：「他老人家已经被公伯寮所迷惑了，可是我的力量还能把他的尸首在街头示众。」孔子道：「我的主张将实现吗，听之于命运；我的主张将永不实现吗，也听之于命运。公伯寮能把我的命运怎样呢！」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "公伯寮",
+          "kind": "word",
+          "meaning": "《史记·仲尼弟子列传》作「公伯僚」云「字子周」。"
+        },
+        {
+          "id": "n2",
+          "quote": "愬",
+          "kind": "word",
+          "meaning": "同「诉」。"
+        },
+        {
+          "id": "n3",
+          "quote": "子服景伯",
+          "kind": "word",
+          "meaning": "鲁大夫，名何。"
+        },
+        {
+          "id": "n4",
+          "quote": "市朝",
+          "kind": "word",
+          "meaning": "古人把罪人之尸示众，或者于朝廷，或者于市集。"
+        }
+      ],
+      "chunks": [
+        "公伯寮愬子路于季孙。",
+        "子服景伯以告，",
+        "曰：",
+        "「夫子固有惑志于公伯寮，",
+        "吾力犹能肆诸市朝。",
+        "」子曰：",
+        "「道之将行也与，",
+        "命也；",
+        "道之将废也与，",
+        "命也。",
+        "公伯寮其如命何？",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·宪问》第36则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/憲問第十四",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/13",
+          "anchor_text": "公伯寮愬子路于季孙。子服景伯以告，曰：“夫子固有惑志于公伯寮，吾力犹能肆诸市朝。”子曰：“道之将行也与，命也；道之将废也与，命也。公伯寮其如命何？”"
+        }
+      },
+      "explanation": "「公伯寮」：《史记·仲尼弟子列传》作「公伯僚」云「字子周」；「愬」：同「诉」。",
+      "hints": [
+        "公伯寮",
+        "愬",
+        "子服景伯"
+      ],
+      "translation_entry": 412
+    },
+    {
+      "id": "s37",
+      "text": "子曰：「贤者辟世，其次辟地，其次辟色，其次辟言。」子曰：「作者七人矣。」",
+      "translation": "孔子说：「有些贤者逃避恶浊社会而隐居，次一等的择地而处，再次一等的避免不好的脸色，再次一等的迥避恶言。」孔子又说：「像这样的人已经有七位了。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "辟",
+          "kind": "word",
+          "meaning": "同「避」。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「贤者辟世，",
+        "其次辟地，",
+        "其次辟色，",
+        "其次辟言。",
+        "」子曰：",
+        "「作者七人矣。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·宪问》第37则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/憲問第十四",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/13",
+          "anchor_text": "子曰：“贤者辟世，其次辟地，其次辟色，其次辟言。”子曰：“作者七人矣。”"
+        }
+      },
+      "explanation": "「辟」：同「避」。",
+      "hints": [
+        "辟"
+      ],
+      "translation_entry": 413
+    },
+    {
+      "id": "s38",
+      "text": "子路宿于石门，晨门曰：「奚自？」子路曰：「自孔氏。」曰：「是知其不可而为之者与？」",
+      "translation": "子路在石门住了一宵，（第二天清早进城，）司门者道：「从哪儿来？」子路道：「从孔家来。」司门者道：「就是那位知道做不到却定要去做的人吗？」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "石门",
+          "kind": "word",
+          "meaning": "鲁国城外的一座门。"
+        }
+      ],
+      "chunks": [
+        "子路宿于石门，",
+        "晨门曰：",
+        "「奚自？",
+        "」子路曰：",
+        "「自孔氏。",
+        "」曰：",
+        "「是知其不可而为之者与？",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·宪问》第38则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/憲問第十四",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/13",
+          "anchor_text": "子路宿于石门，晨门曰：“奚自？”子路曰：“自孔氏。”曰：“是知其不可而为之者与？”"
+        }
+      },
+      "explanation": "「石门」：鲁国城外的一座门。",
+      "hints": [
+        "石门"
+      ],
+      "translation_entry": 414
+    },
+    {
+      "id": "s39",
+      "text": "子击磬于卫，有荷蒉而过孔氏之门者，曰：「有心哉，击磬乎！」既而曰：「鄙哉，硁硁乎！莫己知也，斯己而已矣。深则厉，浅则揭。」子曰：「果哉！末之难矣。」",
+      "translation": "孔子在卫国，一天正敲着磬，有一个挑着草筐子的汉子恰在门前走过，便说道：「这个敲磬是有深意的呀！」等一会又说道：「磬声踁踁的，可鄙呀，（它好像在说，没有人知道我呀！）没有人知道自己，这就罢休好了。水深，索性连衣裳走过去；水浅，无妨撩起衣裳走过去。」孔子道：「好坚决！没有办法说服他了。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "荷蒉",
+          "kind": "word",
+          "meaning": "背着草筐。"
+        }
+      ],
+      "chunks": [
+        "子击磬于卫，",
+        "有荷蒉而过孔氏之门者，",
+        "曰：",
+        "「有心哉，",
+        "击磬乎！",
+        "」既而曰：",
+        "「鄙哉，",
+        "硁硁乎！",
+        "莫己知也，",
+        "斯己而已矣。",
+        "深则厉，",
+        "浅则揭。",
+        "」子曰：",
+        "「果哉！",
+        "末之难矣。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·宪问》第39则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/憲問第十四",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/13",
+          "anchor_text": "子击磬于卫，有荷蒉而过孔氏之门者，曰：“有心哉，击磬乎！”既而曰：“鄙哉，硁硁乎！莫己知也，斯己而已矣。深则厉，浅则揭。”子曰：“果哉！末之难矣。”"
+        }
+      },
+      "explanation": "背筐人劝孔子不必太执着，孔子有自己的回应。读时可以比较两人面对理想的态度。",
+      "hints": [
+        "荷蒉"
+      ],
+      "translation_entry": 415
+    },
+    {
+      "id": "s40",
+      "text": "子张曰：「《书》云，『高宗谅阴，三年不言。』何谓也？」子曰：「何必高宗，古之人皆然。君薨，百官总己以听于冢宰三年。」",
+      "translation": "子张道：「《尚书》说：『殷高宗守孝，住在凶庐，三年不言语。』这是什么意思？」孔子道：「不仅仅高宗，古人都是这样：国君死了，继承的君王三年不问政治，各部门的官员听命于宰相。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "谅阴",
+          "kind": "word",
+          "meaning": "居丧时所住的房子，又叫「凶庐」。"
+        }
+      ],
+      "chunks": [
+        "子张曰：",
+        "「《书》云，",
+        "『高宗谅阴，",
+        "三年不言。",
+        "』何谓也？",
+        "」子曰：",
+        "「何必高宗，",
+        "古之人皆然。",
+        "君薨，",
+        "百官总己以听于冢宰三年。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·宪问》第40则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/憲問第十四",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/13",
+          "anchor_text": "子张曰：“《书》云，‘高宗谅阴，三年不言。’何谓也？”子曰：“何必高宗，古之人皆然。君薨，百官总己以听于冢宰三年。”"
+        }
+      },
+      "explanation": "「谅阴」：居丧时所住的房子，又叫「凶庐」。",
+      "hints": [
+        "谅阴"
+      ],
+      "translation_entry": 416
+    },
+    {
+      "id": "s41",
+      "text": "子曰：「上好礼，则民易使也。」",
+      "translation": "孔子说：「在上位的人若遇事依礼而行，就容易使百姓听从指挥。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "上",
+          "kind": "word",
+          "meaning": "在上位、带头的人。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「上好礼，",
+        "则民易使也。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·宪问》第41则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/憲問第十四",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/13",
+          "anchor_text": "子曰：“上好礼，则民易使也。”"
+        }
+      },
+      "explanation": "带头的人认真遵守礼节，会影响周围人的行动。",
+      "hints": [
+        "上"
+      ],
+      "translation_entry": 417
+    },
+    {
+      "id": "s42",
+      "text": "子路问君子，子曰：「修己以敬。」曰：「如斯而已乎？」曰：「修己以安人。」曰：「如斯而已乎？」曰：「修己以安百姓。修己以安百姓，尧、舜其犹病诸！」",
+      "translation": "子路问怎样才能算是一个君子。孔子道：「修养自己来严肃认真地对待工作。」子路道：「这样就够了吗？」孔子道：「修养自己来使上层人物安乐。」子路道：「这样就够了吗？」孔子道：「修养自己来使所有老百姓安乐。修养自己来使所有老百姓安乐，尧舜大概还没有完全做到哩！」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "人",
+          "kind": "word",
+          "meaning": "这个「人」字显然是狭义的「人」（参见1.5注四），没有把「百姓」包括在内。"
+        },
+        {
+          "id": "n2",
+          "quote": "修己以安百姓",
+          "kind": "word",
+          "meaning": "修养自己，努力使百姓生活安定。"
+        }
+      ],
+      "chunks": [
+        "子路问君子，",
+        "子曰：",
+        "「修己以敬。",
+        "」曰：",
+        "「如斯而已乎？",
+        "」曰：",
+        "「修己以安人。",
+        "」曰：",
+        "「如斯而已乎？",
+        "」曰：",
+        "「修己以安百姓。",
+        "修己以安百姓，",
+        "尧、舜其犹病诸！",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·宪问》第42则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/憲問第十四",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/13",
+          "anchor_text": "子路问君子，子曰：“修己以敬。”曰：“如斯而已乎？”曰：“修己以安人。”曰：“如斯而已乎？”曰：“修己以安百姓。修己以安百姓，尧、舜其犹病诸！”"
+        }
+      },
+      "explanation": "「人」：这个「人」字显然是狭义的「人」（参见1.5注四），没有把「百姓」包括在内；「修己以安百姓」：修养自己，努力使百姓生活安定。",
+      "hints": [
+        "人",
+        "修己以安百姓"
+      ],
+      "translation_entry": 418
+    },
+    {
+      "id": "s43",
+      "text": "原壤夷俟，子曰：「幼而不孙弟，长而无述焉，老而不死，是为贼！」以杖叩其胫。",
+      "translation": "原壤两腿像八字一样张开坐在地上，等着孔子。孔子骂道：「你幼小时候不懂礼节，长大了毫无贡献，老了还白吃粮食，真是个害人精。」说完，用拐杖敲了敲他的小腿。",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "原壤",
+          "kind": "word",
+          "meaning": "孔子的老朋友，《礼记·檀弓》记载他一段故事，说他母亲死了，孔子去帮助他治丧，他却站在棺材上唱起歌来了，孔子也只好装做没听见。"
+        },
+        {
+          "id": "n2",
+          "quote": "夷俟",
+          "kind": "word",
+          "meaning": "夷，箕踞；俟，等待。"
+        },
+        {
+          "id": "n3",
+          "quote": "孙弟",
+          "kind": "word",
+          "meaning": "同逊悌。"
+        }
+      ],
+      "chunks": [
+        "原壤夷俟，",
+        "子曰：",
+        "「幼而不孙弟，",
+        "长而无述焉，",
+        "老而不死，",
+        "是为贼！",
+        "」以杖叩其胫。"
+      ],
+      "reference": {
+        "label": "《论语·宪问》第43则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/憲問第十四",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/13",
+          "anchor_text": "原壤夷俟，子曰：“幼而不孙弟，长而无述焉，老而不死，是为贼！”以杖叩其胫。"
+        }
+      },
+      "explanation": "「原壤」：孔子的老朋友，《礼记·檀弓》记载他一段故事，说他母亲死了，孔子去帮助他治丧，他却站在棺材上唱起歌来了，孔子也只好装做没听见；「夷俟」：夷，箕踞；俟，等待。",
+      "hints": [
+        "原壤",
+        "夷俟",
+        "孙弟"
+      ],
+      "translation_entry": 419
+    },
+    {
+      "id": "s44",
+      "text": "阙党童子将命，或问之曰：「益者与？」子曰：「吾见其居于位也，见其与先生并行也。非求益者也，欲速成者也。」",
+      "translation": "阙党的一个童子来向孔子传达信息。有人问孔子道：「这小孩是肯求上进的人吗？孔子道：「我看见他[大模大样地]坐在位上，又看见他同长辈并肩而行。这不是个肯求上进的人，只是一个急于求成的人。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "阙党",
+          "kind": "word",
+          "meaning": "鲁国的一个地方。"
+        },
+        {
+          "id": "n2",
+          "quote": "居于位",
+          "kind": "word",
+          "meaning": "坐在座位上，这里指儿童坐在成人的座位。"
+        },
+        {
+          "id": "n3",
+          "quote": "与先生并行",
+          "kind": "word",
+          "meaning": "《礼记·曲礼》上篇说：「五年以长，则肩随之」（「肩随」就是与之并行而稍后），而童子的年龄相差甚远，依当日礼节，不能和成人并行。"
+        }
+      ],
+      "chunks": [
+        "阙党童子将命，",
+        "或问之曰：",
+        "「益者与？",
+        "」子曰：",
+        "「吾见其居于位也，",
+        "见其与先生并行也。",
+        "非求益者也，",
+        "欲速成者也。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·宪问》第44则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/憲問第十四",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/13",
+          "anchor_text": "阙党童子将命，或问之曰：“益者与？”子曰：“吾见其居于位也，见其与先生并行也。非求益者也，欲速成者也。”"
+        }
+      },
+      "explanation": "「阙党」：鲁国的一个地方；「居于位」：坐在座位上，这里指儿童坐在成人的座位。",
+      "hints": [
+        "阙党",
+        "居于位",
+        "与先生并行"
+      ],
+      "translation_entry": 420
+    }
+  ],
+  "overview": {
+    "sequence": [
+      "先分清说话的人，找出与「原则、判断与知人」有关的场景。",
+      "把看不懂的词放回原文，再核对译文中的动作和对象。",
+      "挑一则用自己的话说明白，再找原句支持自己的理解。"
+    ],
+    "question": "这一篇中，哪一则最值得你再想一想？",
+    "answer": "选一则，先说清谁在什么情况下说了什么，再说明你赞同、疑惑或想进一步了解的地方，并指回原文。",
+    "takeaway": "听言语，也看行动；下判断，要有依据。"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "choice",
+      "sentence": "s4",
+      "skill": "meaning",
+      "prompt": "「有言者不必有德」提醒我们什么？",
+      "answer": 2,
+      "explanation": "推断不能简单倒过来，要再观察行为。",
+      "choices": [
+        "会说话不等于有好品德",
+        "有品德的人不能说话",
+        "说话多就一定品德好"
+      ]
+    },
+    {
+      "id": "q2",
+      "type": "choice",
+      "sentence": "s22",
+      "skill": "reason",
+      "prompt": "「勿欺也，而犯之」中的「犯」怎样理解？",
+      "answer": 0,
+      "explanation": "诚实待人也包括负责任地提出不同意见。",
+      "choices": [
+        "随意伤害别人",
+        "故意说假话",
+        "当面劝谏、指出问题"
+      ]
+    },
+    {
+      "id": "q3",
+      "type": "selfcheck",
+      "sentence": "s31",
+      "skill": "reason",
+      "prompt": "怎样兼顾不猜疑与有分辨力？",
+      "answer": "不先认定别人骗人，遇事观察并核实依据。",
+      "explanation": "本则把不预先猜测与能够觉察放在一起。"
+    }
+  ]
+}

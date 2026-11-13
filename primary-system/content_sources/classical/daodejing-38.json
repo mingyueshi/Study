@@ -1,0 +1,456 @@
+{
+  "schema_version": 1,
+  "id": "daodejing-38",
+  "title": "道德经·第三十八章",
+  "attribution": "老子",
+  "level": "challenge",
+  "genre": "reasoning",
+  "skills": [
+    "meaning",
+    "referent",
+    "reason",
+    "contrast",
+    "retell"
+  ],
+  "curriculum": null,
+  "intro": "真诚比表面的名目重要。本章层层比较道、德、仁、义、礼，提醒人不要用外在排场代替真实的关心。",
+  "background": "这是《道德经》德经·第三十八章。本章围绕「真诚比表面的名目重要」展开，可以先读原文，再对照译文，看看作者用了什么比方或对比。",
+  "editorial_note": "本馆用逐句译解帮助入门。读「道」「无为」等词时要看上下文；古代观念和理想化比方，可以边读边与家长讨论。",
+  "source": {
+    "work": "道德经（又名老子）",
+    "section": "德经·第三十八章",
+    "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#三十八章",
+    "note": "原文以本机简体《老子》为底本，统一引号，第七章移去括号异文提示。译文、词义和练习为本馆编写的入门读法，参考王弼注理解，不将不同底本混作同一文本。"
+  },
+  "source_ref": {
+    "locator": "/content/37",
+    "path": "poetry/simplified/诸子百家/老子.json",
+    "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+    "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+    "anchor_text": "上德不德，是以有德；下德不失德，是以无德。上德无为而无以为；下德无为而有以为。上仁为之而无以为；上义为之而有以为。上礼为之而莫之应，则攘臂而扔之。故失道而后德，失德而后仁，失仁而后义，失义而后礼。夫礼者，忠信之薄，而乱之首。前识者，道之华，而愚之始。是以大丈夫处其厚，不居其薄；处其实，不居其华。故去彼取此。"
+  },
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "上德不德，是以有德；下德不失德，是以无德。",
+      "translation": "深厚的德行不刻意标榜自己有德，反而有德；浅薄的德行时时怕失去德的名声，反而缺少真德。",
+      "explanation": "读词小提示：「上德」：深厚而自然流露的德行；「不德」：不把自己的德行时时挂在心上。",
+      "chunks": [
+        "上德不德，",
+        "是以有德；",
+        "下德不失德，",
+        "是以无德。"
+      ],
+      "hints": [
+        "上德",
+        "不德",
+        "下德"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "上德",
+          "kind": "word",
+          "meaning": "深厚而自然流露的德行。"
+        },
+        {
+          "id": "n2",
+          "quote": "不德",
+          "kind": "word",
+          "meaning": "不把自己的德行时时挂在心上。"
+        },
+        {
+          "id": "n3",
+          "quote": "下德",
+          "kind": "word",
+          "meaning": "刻意维持名声的德行。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第三十八章》第1句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#三十八章",
+        "source_ref": {
+          "locator": "/content/37",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "上德不德，是以有德；下德不失德，是以无德。"
+        }
+      }
+    },
+    {
+      "id": "s2",
+      "text": "上德无为而无以为；下德无为而有以为。",
+      "translation": "深厚的德行顺其自然而不求回报，浅薄的德行虽称无为，却仍有所图。",
+      "explanation": "读词小提示：「上德」：深厚而自然流露的德行；「下德」：刻意维持名声的德行。",
+      "chunks": [
+        "上德无为而无以为；",
+        "下德无为而有以为。"
+      ],
+      "hints": [
+        "上德",
+        "下德",
+        "无以为"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "上德",
+          "kind": "word",
+          "meaning": "深厚而自然流露的德行。"
+        },
+        {
+          "id": "n2",
+          "quote": "下德",
+          "kind": "word",
+          "meaning": "刻意维持名声的德行。"
+        },
+        {
+          "id": "n3",
+          "quote": "无以为",
+          "kind": "word",
+          "meaning": "不带图报的目的。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第三十八章》第2句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#三十八章",
+        "source_ref": {
+          "locator": "/content/37",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "上德无为而无以为；下德无为而有以为。"
+        }
+      }
+    },
+    {
+      "id": "s3",
+      "text": "上仁为之而无以为；上义为之而有以为。",
+      "translation": "仁爱的人有所作为而不图回报，讲义的人有所作为而带着一定目的。",
+      "explanation": "读词小提示：「无以为」：不带图报的目的；「仁」：关爱别人。",
+      "chunks": [
+        "上仁为之而无以为；",
+        "上义为之而有以为。"
+      ],
+      "hints": [
+        "无以为",
+        "仁",
+        "义"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "无以为",
+          "kind": "word",
+          "meaning": "不带图报的目的。"
+        },
+        {
+          "id": "n2",
+          "quote": "仁",
+          "kind": "word",
+          "meaning": "关爱别人。"
+        },
+        {
+          "id": "n3",
+          "quote": "义",
+          "kind": "word",
+          "meaning": "合宜、公正的做法。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第三十八章》第3句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#三十八章",
+        "source_ref": {
+          "locator": "/content/37",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "上仁为之而无以为；上义为之而有以为。"
+        }
+      }
+    },
+    {
+      "id": "s4",
+      "text": "上礼为之而莫之应，则攘臂而扔之。",
+      "translation": "只重礼节的人做了而无人响应，就伸臂强拉别人。",
+      "explanation": "读词小提示：「攘臂」：伸出、举起胳膊；「扔之」：牵引、强拉别人。",
+      "chunks": [
+        "上礼为之而莫之应，",
+        "则攘臂而扔之。"
+      ],
+      "hints": [
+        "攘臂",
+        "扔之"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "攘臂",
+          "kind": "word",
+          "meaning": "伸出、举起胳膊。",
+          "reading": "rǎng bì"
+        },
+        {
+          "id": "n2",
+          "quote": "扔之",
+          "kind": "word",
+          "meaning": "牵引、强拉别人。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第三十八章》第4句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#三十八章",
+        "source_ref": {
+          "locator": "/content/37",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "上礼为之而莫之应，则攘臂而扔之。"
+        }
+      }
+    },
+    {
+      "id": "s5",
+      "text": "故失道而后德，失德而后仁，失仁而后义，失义而后礼。",
+      "translation": "所以失去道以后才突出德，失去德以后才突出仁，失去仁以后才突出义，失去义以后才突出礼。",
+      "explanation": "读词小提示：「仁」：关爱别人；「义」：合宜、公正的做法。",
+      "chunks": [
+        "故失道而后德，",
+        "失德而后仁，",
+        "失仁而后义，",
+        "失义而后礼。"
+      ],
+      "hints": [
+        "仁",
+        "义"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "仁",
+          "kind": "word",
+          "meaning": "关爱别人。"
+        },
+        {
+          "id": "n2",
+          "quote": "义",
+          "kind": "word",
+          "meaning": "合宜、公正的做法。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第三十八章》第5句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#三十八章",
+        "source_ref": {
+          "locator": "/content/37",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "故失道而后德，失德而后仁，失仁而后义，失义而后礼。"
+        }
+      }
+    },
+    {
+      "id": "s6",
+      "text": "夫礼者，忠信之薄，而乱之首。",
+      "translation": "如果礼只剩形式，就说明真诚和信用已经淡薄，混乱也可能从这里开始。",
+      "explanation": "读词小提示：「忠信之薄」：真诚和信用已经淡薄。",
+      "chunks": [
+        "夫礼者，",
+        "忠信之薄，",
+        "而乱之首。"
+      ],
+      "hints": [
+        "忠信之薄"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "忠信之薄",
+          "kind": "word",
+          "meaning": "真诚和信用已经淡薄。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第三十八章》第6句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#三十八章",
+        "source_ref": {
+          "locator": "/content/37",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "夫礼者，忠信之薄，而乱之首。"
+        }
+      }
+    },
+    {
+      "id": "s7",
+      "text": "前识者，道之华，而愚之始。",
+      "translation": "自作聪明的预先揣测，只是道的外在浮饰，也可能是愚昧的开端。",
+      "explanation": "读词小提示：「前识」：自作聪明、预先揣测；「华」：外在的浮饰。",
+      "chunks": [
+        "前识者，",
+        "道之华，",
+        "而愚之始。"
+      ],
+      "hints": [
+        "前识",
+        "华"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "前识",
+          "kind": "word",
+          "meaning": "自作聪明、预先揣测。"
+        },
+        {
+          "id": "n2",
+          "quote": "华",
+          "kind": "word",
+          "meaning": "外在的浮饰。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第三十八章》第7句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#三十八章",
+        "source_ref": {
+          "locator": "/content/37",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "前识者，道之华，而愚之始。"
+        }
+      }
+    },
+    {
+      "id": "s8",
+      "text": "是以大丈夫处其厚，不居其薄；处其实，不居其华。",
+      "translation": "因此，有修养的人重厚实，不重浮薄；重真实，不重华饰。",
+      "explanation": "读词小提示：「华」：外在的浮饰；「厚」：厚实、真诚。",
+      "chunks": [
+        "是以大丈夫处其厚，",
+        "不居其薄；",
+        "处其实，",
+        "不居其华。"
+      ],
+      "hints": [
+        "华",
+        "厚"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "华",
+          "kind": "word",
+          "meaning": "外在的浮饰。"
+        },
+        {
+          "id": "n2",
+          "quote": "厚",
+          "kind": "word",
+          "meaning": "厚实、真诚。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第三十八章》第8句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#三十八章",
+        "source_ref": {
+          "locator": "/content/37",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "是以大丈夫处其厚，不居其薄；处其实，不居其华。"
+        }
+      }
+    },
+    {
+      "id": "s9",
+      "text": "故去彼取此。",
+      "translation": "所以舍弃浮薄，选择厚实。",
+      "explanation": "读词小提示：「彼」：前文说的浮薄与华饰；「此」：厚实与真实。",
+      "chunks": [
+        "故去彼取此。"
+      ],
+      "hints": [
+        "彼",
+        "此"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "彼",
+          "kind": "word",
+          "meaning": "前文说的浮薄与华饰。"
+        },
+        {
+          "id": "n2",
+          "quote": "此",
+          "kind": "word",
+          "meaning": "厚实与真实。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第三十八章》第9句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#三十八章",
+        "source_ref": {
+          "locator": "/content/37",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "上德不德，是以有德；下德不失德，是以无德。上德无为而无以为；下德无为而有以为。上仁为之而无以为；上义为之而有以为。上礼为之而莫之应，则攘臂而扔之。故失道而后德，失德而后仁，失仁而后义，失义而后礼。夫礼者，忠信之薄，而乱之首。前识者，道之华，而愚之始。是以大丈夫处其厚，不居其薄；处其实，不居其华。故去彼取此。"
+        }
+      }
+    }
+  ],
+  "overview": {
+    "sequence": [
+      "先看本章开头：深厚的德行不刻意标榜自己有德，反而有德；浅薄的德行时时怕失去德的名声，反而缺少真德。",
+      "本章层层比较道、德、仁、义、礼，提醒人不要用外在排场代替真实的关心。",
+      "再回到结尾：所以舍弃浮薄，选择厚实。"
+    ],
+    "question": "这一章为什么可以叫作「真诚比表面的名目重要」？",
+    "answer": "本章层层比较道、德、仁、义、礼，提醒人不要用外在排场代替真实的关心。可以引用本章开头或结尾的原句，说明你的依据。",
+    "takeaway": "本章层层比较道、德、仁、义、礼，提醒人不要用外在排场代替真实的关心。"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "choice",
+      "sentence": "s1",
+      "skill": "meaning",
+      "prompt": "开头的「上德」在这里怎样理解？",
+      "choices": [
+        "只顾自己，不留意他人的处境。",
+        "为了显示本领而处处炫耀。",
+        "深厚而自然流露的德行。"
+      ],
+      "answer": 2,
+      "explanation": "把词放回原句看，「上德」在本句中的意思是：深厚而自然流露的德行。"
+    },
+    {
+      "id": "q2",
+      "type": "choice",
+      "sentence": "s9",
+      "skill": "reason",
+      "prompt": "读完「真诚比表面的名目重要」，哪一种理解更合适？",
+      "choices": [
+        "本章层层比较道、德、仁、义、礼，提醒人不要用外在排场代替真实的关心。",
+        "为达到自己的目标，可以不顾别人。",
+        "无论什么情况，都应该争着抢先。"
+      ],
+      "answer": 0,
+      "explanation": "本章层层比较道、德、仁、义、礼，提醒人不要用外在排场代替真实的关心。"
+    },
+    {
+      "id": "q3",
+      "type": "selfcheck",
+      "sentence": "s9",
+      "skill": "retell",
+      "prompt": "选本章一句话，用自己的话解释，再说说它怎样帮助你理解「真诚比表面的名目重要」。",
+      "answer": "先说清原句中的对象和动作，再解释关键词。可以围绕这点来讲：本章层层比较道、德、仁、义、礼，提醒人不要用外在排场代替真实的关心。说完后，回到原文找一句作依据。",
+      "explanation": "不必背诵译文。重点看词义是否放回本句、有没有原文依据，以及是否把古人的比方误当成不分条件的结论。"
+    }
+  ]
+}

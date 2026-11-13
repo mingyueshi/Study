@@ -1,0 +1,1122 @@
+{
+  "schema_version": 1,
+  "id": "lunyu-taibo",
+  "title": "论语·泰伯",
+  "unit_label": "则",
+  "attribution": "孔子及其弟子言行，弟子与再传弟子编纂",
+  "level": "challenge",
+  "genre": "reasoning",
+  "skills": [
+    "meaning",
+    "referent",
+    "reason",
+    "contrast"
+  ],
+  "curriculum": null,
+  "intro": "听孔子和曾子谈责任，思考才华与品德怎样相处。",
+  "background": "这是《论语》二十篇中的第8篇，话题围绕责任、谦让与坚持展开。篇名取自开头的字，并不表示每一则都只讲同一个题目。",
+  "editorial_note": "每次可以只读一两则。分段依本机原典，共二十篇、五百一十三则；其他版本的分章和个别用字可能不同。古代身份、礼制和观念要结合当时背景来理解。",
+  "source": {
+    "work": "论语",
+    "section": "泰伯篇",
+    "url": "https://zh.wikisource.org/wiki/論語/泰伯第八",
+    "note": "原文采用随项目保存的简体原典，统一引号样式。译文和部分词义据所列译注资料整理，疑难处配合本篇提示阅读。"
+  },
+  "source_ref": {
+    "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+    "path": "poetry/simplified/儒家经典/论语.json",
+    "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+    "locator": "/content/7",
+    "anchor_text": "子曰：“泰伯，其可谓至德也已矣。三以天下让，民无得而称焉。”"
+  },
+  "edition": {
+    "label": "译注参考：ieduer/lunyu 所收《论语译注》资料",
+    "url": "https://github.com/ieduer/lunyu/blob/44f039ef8174b219b5f773a156b3d954ee65be25/data/dialogues.json",
+    "revision": "44f039ef8174b219b5f773a156b3d954ee65be25",
+    "license": "MIT，许可副本随内容源保存",
+    "note": "采用固定版本的译注，去除重复条目与注号，逐则配回本馆原文；词义保留简短释义，补充课堂提示。乡党两则分配译文，颜渊第二十则依完整原文呈现。"
+  },
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "子曰：「泰伯，其可谓至德也已矣。三以天下让，民无得而称焉。」",
+      "translation": "孔子说：「泰伯，那可以说是品德极崇高了。屡次地把天下让给季历，老百姓简直找不出恰当的词语来称赞他。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "泰伯",
+          "kind": "word",
+          "meaning": "亦作「太伯」，周朝祖先古公亶父的长子。"
+        },
+        {
+          "id": "n2",
+          "quote": "天下",
+          "kind": "word",
+          "meaning": "当古公、泰伯之时，周室仅是一个小的部落，谈不上「天下」。"
+        },
+        {
+          "id": "n3",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「泰伯，",
+        "其可谓至德也已矣。",
+        "三以天下让，",
+        "民无得而称焉。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·泰伯》第1则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/泰伯第八",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/7",
+          "anchor_text": "子曰：“泰伯，其可谓至德也已矣。三以天下让，民无得而称焉。”"
+        }
+      },
+      "explanation": "「泰伯」：亦作「太伯」，周朝祖先古公亶父的长子；「天下」：当古公、泰伯之时，周室仅是一个小的部落，谈不上「天下」。",
+      "hints": [
+        "泰伯",
+        "天下"
+      ],
+      "translation_entry": 189
+    },
+    {
+      "id": "s2",
+      "text": "子曰：「恭而无礼则劳；慎而无礼则葸；勇而无礼则乱；直而无礼则绞。君子笃于亲，则民兴于仁；故旧不遗，则民不偷。」",
+      "translation": "孔子说：「注重容貌态度的端庄，却不知礼，就未免劳倦；只知谨慎，却不知礼，就流于畏葸懦弱；专凭敢作敢为的胆量，却不知礼，就会盲动闯祸；心直口快，却不知礼，就会尖刻刺人。在上位的人能用深厚感情对待亲族，老百姓就会走向仁德；在上位的人不遗弃他的老同事、老朋友，那老百姓就不致对人冷淡无情。",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "礼",
+          "kind": "word",
+          "meaning": "这里指的是礼的本质。"
+        },
+        {
+          "id": "n2",
+          "quote": "葸",
+          "kind": "word",
+          "meaning": "xǐ，胆怯，害怕。"
+        },
+        {
+          "id": "n3",
+          "quote": "绞",
+          "kind": "word",
+          "meaning": "尖刻刺人。"
+        },
+        {
+          "id": "n4",
+          "quote": "偷",
+          "kind": "word",
+          "meaning": "淡薄，这里指人与人的感情而言。"
+        },
+        {
+          "id": "n5",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「恭而无礼则劳；",
+        "慎而无礼则葸；",
+        "勇而无礼则乱；",
+        "直而无礼则绞。",
+        "君子笃于亲，",
+        "则民兴于仁；",
+        "故旧不遗，",
+        "则民不偷。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·泰伯》第2则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/泰伯第八",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/7",
+          "anchor_text": "子曰：“恭而无礼则劳；慎而无礼则葸；勇而无礼则乱；直而无礼则绞。君子笃于亲，则民兴于仁；故旧不遗，则民不偷。”"
+        }
+      },
+      "explanation": "「礼」：这里指的是礼的本质；「葸」：xǐ，胆怯，害怕。",
+      "hints": [
+        "礼",
+        "葸",
+        "绞"
+      ],
+      "translation_entry": 190
+    },
+    {
+      "id": "s3",
+      "text": "曾子有疾，召门弟子曰：「启予足，启予手。《诗》云：『战战兢兢，如临深渊，如履薄冰。』而今而后，吾知免夫，小子！」",
+      "translation": "曾参病了，把他的学生召集拢来，说道：「看看我的脚！看看我的手！《诗经》上说：『小心呀！谨慎呀！好像面临深深水坑之旁，好像行走薄薄冰层之上。』从今以后，我才晓得自己是可以免于祸害刑戮的了！学生们！」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "启",
+          "kind": "word",
+          "meaning": "打开，这里是请学生掀开被子查看。"
+        },
+        {
+          "id": "n2",
+          "quote": "诗",
+          "kind": "word",
+          "meaning": "三句诗见《诗经·小雅·小旻篇》。"
+        },
+        {
+          "id": "n3",
+          "quote": "履",
+          "kind": "word",
+          "meaning": "行走。"
+        }
+      ],
+      "chunks": [
+        "曾子有疾，",
+        "召门弟子曰：",
+        "「启予足，",
+        "启予手。",
+        "《诗》云：",
+        "『战战兢兢，",
+        "如临深渊，",
+        "如履薄冰。",
+        "』而今而后，",
+        "吾知免夫，",
+        "小子！",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·泰伯》第3则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/泰伯第八",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/7",
+          "anchor_text": "曾子有疾，召门弟子曰：“启予足，启予手。《诗》云：‘战战兢兢，如临深渊，如履薄冰。’而今而后，吾知免夫，小子！”"
+        }
+      },
+      "explanation": "「启」：打开，这里是请学生掀开被子查看；「诗」：三句诗见《诗经·小雅·小旻篇》。",
+      "hints": [
+        "启",
+        "诗",
+        "履"
+      ],
+      "translation_entry": 191
+    },
+    {
+      "id": "s4",
+      "text": "曾子有疾，孟敬子问之。曾子言曰：「鸟之将死，其鸣也哀；人之将死，其言也善。君子所贵乎道者三：动容貌，斯远暴慢矣；正颜色，斯近信矣；出辞气，斯远鄙倍矣。笾豆之事，则有司存。」",
+      "translation": "曾参病了，孟敬子探问他。曾子说：「鸟要死了，鸣声是悲哀的；人要死了，说出的话是善意的。在上位的人待人接物有三方面应该注重：严肃自己的容貌，就可以避免别人的粗暴和懈怠；端正自己的脸色，就容易使人相信；说话的时候，多考虑言辞和声调，就可以避免鄙陋粗野和错误。至于礼仪的细节，自有主管人员。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "孟敬子",
+          "kind": "word",
+          "meaning": "鲁国大夫仲孙捷。"
+        },
+        {
+          "id": "n2",
+          "quote": "暴慢",
+          "kind": "word",
+          "meaning": "暴是粗暴无礼，慢是懈怠不敬。"
+        },
+        {
+          "id": "n3",
+          "quote": "鄙倍",
+          "kind": "word",
+          "meaning": "鄙是粗野鄙陋；倍同「背」，不合理，错误。"
+        },
+        {
+          "id": "n4",
+          "quote": "笾豆之事",
+          "kind": "word",
+          "meaning": "笾音边，古代的一种竹器，高脚，上面圆口，有些像碗，祭祀时用以盛果实等食品。"
+        },
+        {
+          "id": "n5",
+          "quote": "有司",
+          "kind": "word",
+          "meaning": "主管其事的小吏。"
+        }
+      ],
+      "chunks": [
+        "曾子有疾，",
+        "孟敬子问之。",
+        "曾子言曰：",
+        "「鸟之将死，",
+        "其鸣也哀；",
+        "人之将死，",
+        "其言也善。",
+        "君子所贵乎道者三：",
+        "动容貌，",
+        "斯远暴慢矣；",
+        "正颜色，",
+        "斯近信矣；",
+        "出辞气，",
+        "斯远鄙倍矣。",
+        "笾豆之事，",
+        "则有司存。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·泰伯》第4则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/泰伯第八",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/7",
+          "anchor_text": "曾子有疾，孟敬子问之。曾子言曰：“鸟之将死，其鸣也哀；人之将死，其言也善。君子所贵乎道者三：动容貌，斯远暴慢矣；正颜色，斯近信矣；出辞气，斯远鄙倍矣。笾豆之事，则有司存。”"
+        }
+      },
+      "explanation": "「孟敬子」：鲁国大夫仲孙捷；「暴慢」：暴是粗暴无礼，慢是懈怠不敬。",
+      "hints": [
+        "孟敬子",
+        "暴慢",
+        "鄙倍"
+      ],
+      "translation_entry": 192
+    },
+    {
+      "id": "s5",
+      "text": "曾子曰：「以能问于不能；以多问于寡；有若无，实若虚，犯而不校。昔者吾友尝从事于斯矣。」",
+      "translation": "曾子说：「有能力却向无能力的人请教，知识丰富却向知识缺少的人请教；有学问像没学问一样，满腹知识像空无所有一样；纵被欺侮，也不计较——从前我的一位朋友便曾这样做了。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "吾友",
+          "kind": "word",
+          "meaning": "历来的注释家都以为是指颜回。"
+        }
+      ],
+      "chunks": [
+        "曾子曰：",
+        "「以能问于不能；",
+        "以多问于寡；",
+        "有若无，",
+        "实若虚，",
+        "犯而不校。",
+        "昔者吾友尝从事于斯矣。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·泰伯》第5则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/泰伯第八",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/7",
+          "anchor_text": "曾子曰：“以能问于不能；以多问于寡；有若无，实若虚，犯而不校。昔者吾友尝从事于斯矣。”"
+        }
+      },
+      "explanation": "「吾友」：历来的注释家都以为是指颜回。",
+      "hints": [
+        "吾友"
+      ],
+      "translation_entry": 193
+    },
+    {
+      "id": "s6",
+      "text": "曾子曰：「可以托六尺之孤，可以寄百里之命，临大节而不可夺也。君子人与？君子人也。」",
+      "translation": "曾子说：「可以把幼小的孤儿和国家的命脉都交付给他，面临安危存亡的紧要关头，却不动摇屈服——这种人，是君子人吗？是君子人哩。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "六尺",
+          "kind": "word",
+          "meaning": "古代尺短，六尺约合今日一百三十八厘米，市尺四尺一寸四分。"
+        }
+      ],
+      "chunks": [
+        "曾子曰：",
+        "「可以托六尺之孤，",
+        "可以寄百里之命，",
+        "临大节而不可夺也。",
+        "君子人与？",
+        "君子人也。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·泰伯》第6则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/泰伯第八",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/7",
+          "anchor_text": "曾子曰：“可以托六尺之孤，可以寄百里之命，临大节而不可夺也。君子人与？君子人也。”"
+        }
+      },
+      "explanation": "「六尺」：古代尺短，六尺约合今日一百三十八厘米，市尺四尺一寸四分。",
+      "hints": [
+        "六尺"
+      ],
+      "translation_entry": 194
+    },
+    {
+      "id": "s7",
+      "text": "曾子曰：「士不可以不弘毅，任重而道远。仁以为己任，不亦重乎？死而后已，不亦远乎？」",
+      "translation": "曾子说：「读书人不可以不刚强而有毅力，因为他负担沉重，路程遥远。以实现仁德于天下为己任，不也沉重吗？到死方休，不也遥远吗？」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "弘毅",
+          "kind": "word",
+          "meaning": "就是「强毅」。"
+        }
+      ],
+      "chunks": [
+        "曾子曰：",
+        "「士不可以不弘毅，",
+        "任重而道远。",
+        "仁以为己任，",
+        "不亦重乎？",
+        "死而后已，",
+        "不亦远乎？",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·泰伯》第7则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/泰伯第八",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/7",
+          "anchor_text": "曾子曰：“士不可以不弘毅，任重而道远。仁以为己任，不亦重乎？死而后已，不亦远乎？”"
+        }
+      },
+      "explanation": "「弘毅」：就是「强毅」。",
+      "hints": [
+        "弘毅"
+      ],
+      "translation_entry": 195
+    },
+    {
+      "id": "s8",
+      "text": "子曰：「兴于《诗》，立于礼，成于乐。」",
+      "translation": "孔子说：「诗篇使我振奋，礼使我能在社会上站得住，音乐使我的所学得以完成。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "成于乐",
+          "kind": "word",
+          "meaning": "孔子所谓「乐」的内容和本质都离不开「礼」，因此常常「礼乐」连言。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「兴于《诗》，",
+        "立于礼，",
+        "成于乐。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·泰伯》第8则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/泰伯第八",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/7",
+          "anchor_text": "子曰：“兴于《诗》，立于礼，成于乐。”"
+        }
+      },
+      "explanation": "「成于乐」：孔子所谓「乐」的内容和本质都离不开「礼」，因此常常「礼乐」连言。",
+      "hints": [
+        "成于乐"
+      ],
+      "translation_entry": 196
+    },
+    {
+      "id": "s9",
+      "text": "子曰：「民可，使由之。民不可，使知之。」",
+      "translation": "孔子说：「老百姓，可以使他们照着我们的道路走去，不可以使他们知道那是为什么。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "子曰",
+          "kind": "word",
+          "meaning": "这两句与「民可以乐成，不可与虑始」（《史记·滑稽列传》补所载西门豹之言，《商君列传》作「民不可与虑始，而可与乐成」）意思大致相同，不必深求。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「民可，",
+        "使由之。",
+        "民不可，",
+        "使知之。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·泰伯》第9则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/泰伯第八",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/7",
+          "anchor_text": "子曰：“民可，使由之。民不可，使知之。”"
+        }
+      },
+      "explanation": "「子曰」：这两句与「民可以乐成，不可与虑始」（《史记·滑稽列传》补所载西门豹之言，《商君列传》作「民不可与虑始，而可与乐成」）意思大致相同，不必深求。",
+      "hints": [
+        "子曰"
+      ],
+      "translation_entry": 197
+    },
+    {
+      "id": "s10",
+      "text": "子曰：「好勇疾贫，乱也。人而不仁，疾之已甚，乱也。」",
+      "translation": "孔子说：「以勇敢自喜却厌恶贫困，是一种祸害。对于不仁的人，痛恨太甚，也是一种祸害。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "疾",
+          "kind": "word",
+          "meaning": "厌恶、痛恨。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「好勇疾贫，",
+        "乱也。",
+        "人而不仁，",
+        "疾之已甚，",
+        "乱也。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·泰伯》第10则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/泰伯第八",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/7",
+          "anchor_text": "子曰：“好勇疾贫，乱也。人而不仁，疾之已甚，乱也。”"
+        }
+      },
+      "explanation": "这句提醒人们留意冲突怎样产生：一味逞勇或把人逼得太急，都可能带来混乱。",
+      "hints": [
+        "疾"
+      ],
+      "translation_entry": 198
+    },
+    {
+      "id": "s11",
+      "text": "子曰：「如有周公之才之美，使骄且吝，其余不足观也已。」",
+      "translation": "孔子说：「假如才能的美妙真比得上周公，只要骄傲而吝啬，别的方面也就不值得一看了。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "吝",
+          "kind": "word",
+          "meaning": "吝啬，不愿与人分享。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「如有周公之才之美，",
+        "使骄且吝，",
+        "其余不足观也已。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·泰伯》第11则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/泰伯第八",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/7",
+          "anchor_text": "子曰：“如有周公之才之美，使骄且吝，其余不足观也已。”"
+        }
+      },
+      "explanation": "才华再出众，也不能遮住骄傲和吝啬带来的问题。",
+      "hints": [
+        "吝"
+      ],
+      "translation_entry": 199
+    },
+    {
+      "id": "s12",
+      "text": "子曰：「三年学，不至于谷，不易得也。」",
+      "translation": "孔子说：「读书三年并不存做官的念头，这是难得的。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "至",
+          "kind": "word",
+          "meaning": "这「至」字和雍也篇第六「回也其心三月不违仁，其余则日月至焉而已矣」的「至」用法相同，指意念之所至。"
+        },
+        {
+          "id": "n2",
+          "quote": "谷",
+          "kind": "word",
+          "meaning": "古代以谷米为俸禄（作用相当于今日的工资），所以「谷」有「禄」的意义。"
+        },
+        {
+          "id": "n3",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「三年学，",
+        "不至于谷，",
+        "不易得也。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·泰伯》第12则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/泰伯第八",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/7",
+          "anchor_text": "子曰：“三年学，不至于谷，不易得也。”"
+        }
+      },
+      "explanation": "「至」：这「至」字和雍也篇第六「回也其心三月不违仁，其余则日月至焉而已矣」的「至」用法相同，指意念之所至；「谷」：古代以谷米为俸禄（作用相当于今日的工资），所以「谷」有「禄」的意义。",
+      "hints": [
+        "至",
+        "谷"
+      ],
+      "translation_entry": 200
+    },
+    {
+      "id": "s13",
+      "text": "子曰：「笃信好学，守死善道。危邦不入，乱邦不居。天下有道则见，无道则隐。邦有道，贫且贱焉，耻也；邦无道，富且贵焉，耻也。」",
+      "translation": "孔子说：「坚定地相信我们的道，努力学习它，誓死保全它。不进入危险的国家，不居住祸乱的国家。天下太平，就出来工作；不太平，就隐居。政治清明，自己贫贱，是耻辱；政治黑暗，自己富贵，也是耻辱。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "笃信",
+          "kind": "word",
+          "meaning": "坚定地相信、守住自己的信念。"
+        },
+        {
+          "id": "n2",
+          "quote": "见",
+          "kind": "word",
+          "meaning": "同「现」。"
+        },
+        {
+          "id": "n3",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「笃信好学，",
+        "守死善道。",
+        "危邦不入，",
+        "乱邦不居。",
+        "天下有道则见，",
+        "无道则隐。",
+        "邦有道，",
+        "贫且贱焉，",
+        "耻也；",
+        "邦无道，",
+        "富且贵焉，",
+        "耻也。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·泰伯》第13则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/泰伯第八",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/7",
+          "anchor_text": "子曰：“笃信好学，守死善道。危邦不入，乱邦不居。天下有道则见，无道则隐。邦有道，贫且贱焉，耻也；邦无道，富且贵焉，耻也。”"
+        }
+      },
+      "explanation": "「笃信」：坚定地相信、守住自己的信念；「见」：同「现」。",
+      "hints": [
+        "笃信",
+        "见"
+      ],
+      "translation_entry": 201
+    },
+    {
+      "id": "s14",
+      "text": "子曰：「不在其位，不谋其政。」",
+      "translation": "孔子说：「不居于那个职位，便不考虑它的政务。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "位",
+          "kind": "word",
+          "meaning": "职位、所承担的职责。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「不在其位，",
+        "不谋其政。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·泰伯》第14则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/泰伯第八",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/7",
+          "anchor_text": "子曰：“不在其位，不谋其政。”"
+        }
+      },
+      "explanation": "理解这句要看职责分工。做好自己负责的事，也可以用合适的方式提出建议。",
+      "hints": [
+        "位"
+      ],
+      "translation_entry": 202
+    },
+    {
+      "id": "s15",
+      "text": "子曰：「师挚之始，《关雎》之乱，洋洋乎盈耳哉！」",
+      "translation": "孔子说：「当太师挚开始演奏的时候，当结尾演奏《关雎》之曲的时候，满耳朵都是音乐呀！」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "师挚之始",
+          "kind": "word",
+          "meaning": "「始」是乐曲的开端，古代奏乐，开始叫做「升歌」，一般由太师演奏。"
+        },
+        {
+          "id": "n2",
+          "quote": "关雎",
+          "kind": "word",
+          "meaning": "「始」是乐的开端，「乱」是乐的结束。"
+        },
+        {
+          "id": "n3",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「师挚之始，",
+        "《关雎》之乱，",
+        "洋洋乎盈耳哉！",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·泰伯》第15则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/泰伯第八",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/7",
+          "anchor_text": "子曰：“师挚之始，《关雎》之乱，洋洋乎盈耳哉！”"
+        }
+      },
+      "explanation": "「师挚之始」：「始」是乐曲的开端，古代奏乐，开始叫做「升歌」，一般由太师演奏；「关雎」：「始」是乐的开端，「乱」是乐的结束。",
+      "hints": [
+        "师挚之始",
+        "关雎"
+      ],
+      "translation_entry": 203
+    },
+    {
+      "id": "s16",
+      "text": "子曰：「狂而不直，侗而不愿，悾悾而不信，吾不知之矣。」",
+      "translation": "孔子说：「狂妄而不直率，幼稚而不老实，无能而不讲信用，这种人我是不知道其所以然的。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "直",
+          "kind": "word",
+          "meaning": "正直、坦诚。"
+        },
+        {
+          "id": "n2",
+          "quote": "吾",
+          "meaning": "第一人称，意思是我。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "这一段接在「子曰」之后，尚未转述别人的话，指正在说话的孔子。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「狂而不直，",
+        "侗而不愿，",
+        "悾悾而不信，",
+        "吾不知之矣。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·泰伯》第16则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/泰伯第八",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/7",
+          "anchor_text": "子曰：“狂而不直，侗而不愿，悾悾而不信，吾不知之矣。”"
+        }
+      },
+      "explanation": "孔子把外在的样子和内里的品德放在一起看，提醒人不能只凭表面判断。",
+      "hints": [
+        "直"
+      ],
+      "translation_entry": 204
+    },
+    {
+      "id": "s17",
+      "text": "子曰：「学如不及，犹恐失之。」",
+      "translation": "孔子说：「做学问好像（追逐什么似的，）生怕赶不上；（赶上了，）还生怕丢掉了。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "不及",
+          "kind": "word",
+          "meaning": "赶不上。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「学如不及，",
+        "犹恐失之。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·泰伯》第17则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/泰伯第八",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/7",
+          "anchor_text": "子曰：“学如不及，犹恐失之。”"
+        }
+      },
+      "explanation": "这句用赶不上、怕失去的心情，形容学习时的勤奋和珍惜。",
+      "hints": [
+        "不及"
+      ],
+      "translation_entry": 205
+    },
+    {
+      "id": "s18",
+      "text": "子曰：「巍巍乎！舜、禹之有天下也而不与焉。」",
+      "translation": "孔子说：「舜和禹真是崇高得很呀！贵为天子，富有四海，（却整年地为百姓勤劳，）一点也不为自己。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "禹",
+          "kind": "word",
+          "meaning": "夏朝开国之君。"
+        },
+        {
+          "id": "n2",
+          "quote": "与",
+          "kind": "word",
+          "meaning": "音预yù，参与，关连。"
+        },
+        {
+          "id": "n3",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「巍巍乎！",
+        "舜、禹之有天下也而不与焉。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·泰伯》第18则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/泰伯第八",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/7",
+          "anchor_text": "子曰：“巍巍乎！舜、禹之有天下也而不与焉。”"
+        }
+      },
+      "explanation": "「禹」：夏朝开国之君；「与」：音预yù，参与，关连。",
+      "hints": [
+        "禹",
+        "与"
+      ],
+      "translation_entry": 206
+    },
+    {
+      "id": "s19",
+      "text": "子曰：「大哉尧之为君也！巍巍乎，唯天为大，唯尧则之。荡荡乎，民无能名焉。巍巍乎其有成功也，焕乎其有文章！」",
+      "translation": "孔子说：「尧真是了不得呀！真高大得很呀！只有天最高最大，只有尧能够学习天。他的恩惠真是广博呀！老百姓简直不知道怎样称赞他。他的功绩实在太崇高了，他的礼仪制度也真够美好了！」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "则之",
+          "kind": "word",
+          "meaning": "效法它。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「大哉尧之为君也！",
+        "巍巍乎，",
+        "唯天为大，",
+        "唯尧则之。",
+        "荡荡乎，",
+        "民无能名焉。",
+        "巍巍乎其有成功也，",
+        "焕乎其有文章！",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·泰伯》第19则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/泰伯第八",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/7",
+          "anchor_text": "子曰：“大哉尧之为君也！巍巍乎，唯天为大，唯尧则之。荡荡乎，民无能名焉。巍巍乎其有成功也，焕乎其有文章！”"
+        }
+      },
+      "explanation": "这一段赞美古代传说中的尧，读时可以找出赞美的对象、用词和依据。",
+      "hints": [
+        "则之"
+      ],
+      "translation_entry": 207
+    },
+    {
+      "id": "s20",
+      "text": "舜有臣五人而天下治。武王曰：「予有乱臣十人。」孔子曰：「才难，不其然乎？唐虞之际，于斯为盛；有妇人焉，九人而已。三分天下有其二，以服事殷。周之德，其可谓至德也已矣。」",
+      "translation": "舜有五位贤臣，天下便太平。武王也说过，「我有十位能治理天下的臣子。」孔子因此说道：「（常言道：）『人才不易得。』不是这样吗？唐尧和虞舜之间以及周武王说那话的时候，人才最兴盛。然而武王十位人才之中还有一位妇女，实际上只是九位罢了。周文王得了天下的三分之二，仍然向商纣称臣，周朝的道德，可以说是最高的了。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "乱臣",
+          "kind": "word",
+          "meaning": "能治理国家的臣子，这里的乱是治理的意思。"
+        },
+        {
+          "id": "n2",
+          "quote": "三分天下有其二",
+          "kind": "word",
+          "meaning": "《逸周书·程典篇》说：「文王合九州岛之侯，奉勤于商」。"
+        }
+      ],
+      "chunks": [
+        "舜有臣五人而天下治。",
+        "武王曰：",
+        "「予有乱臣十人。",
+        "」孔子曰：",
+        "「才难，",
+        "不其然乎？",
+        "唐虞之际，",
+        "于斯为盛；",
+        "有妇人焉，",
+        "九人而已。",
+        "三分天下有其二，",
+        "以服事殷。",
+        "周之德，",
+        "其可谓至德也已矣。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·泰伯》第20则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/泰伯第八",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/7",
+          "anchor_text": "舜有臣五人而天下治。武王曰：“予有乱臣十人。”孔子曰：“才难，不其然乎？唐虞之际，于斯为盛；有妇人焉，九人而已。三分天下有其二，以服事殷。周之德，其可谓至德也已矣。”"
+        }
+      },
+      "explanation": "「乱臣」：能治理国家的臣子，这里的乱是治理的意思；「三分天下有其二」：《逸周书·程典篇》说：「文王合九州岛之侯，奉勤于商」。",
+      "hints": [
+        "乱臣",
+        "三分天下有其二"
+      ],
+      "translation_entry": 208
+    },
+    {
+      "id": "s21",
+      "text": "子曰：「禹，吾无间然矣。菲饮食而致孝乎鬼神，恶衣服而致美乎黼冕，卑宫室而尽力乎沟洫。禹，吾无间然矣。」",
+      "translation": "孔子说：「禹，我对他没有批评了。他自己吃得很坏，却把祭品办得极丰盛；穿得很坏，却把祭服做得极华美；住得很坏，却把力量完全用于沟渠水利。禹，我对他没有批评了。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "沟洫",
+          "kind": "word",
+          "meaning": "就是沟渠，这里指农田水利而言。"
+        },
+        {
+          "id": "n2",
+          "quote": "吾",
+          "meaning": "第一人称，意思是我。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "这一段接在「子曰」之后，尚未转述别人的话，指正在说话的孔子。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「禹，",
+        "吾无间然矣。",
+        "菲饮食而致孝乎鬼神，",
+        "恶衣服而致美乎黼冕，",
+        "卑宫室而尽力乎沟洫。",
+        "禹，",
+        "吾无间然矣。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·泰伯》第21则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/泰伯第八",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/7",
+          "anchor_text": "子曰：“禹，吾无间然矣。菲饮食而致孝乎鬼神，恶衣服而致美乎黼冕，卑宫室而尽力乎沟洫。禹，吾无间然矣。”"
+        }
+      },
+      "explanation": "「沟洫」：就是沟渠，这里指农田水利而言。",
+      "hints": [
+        "沟洫"
+      ],
+      "translation_entry": 209
+    }
+  ],
+  "overview": {
+    "sequence": [
+      "先分清说话的人，找出与「责任、谦让与坚持」有关的场景。",
+      "把看不懂的词放回原文，再核对译文中的动作和对象。",
+      "挑一则用自己的话说明白，再找原句支持自己的理解。"
+    ],
+    "question": "这一篇中，哪一则最值得你再想一想？",
+    "answer": "选一则，先说清谁在什么情况下说了什么，再说明你赞同、疑惑或想进一步了解的地方，并指回原文。",
+    "takeaway": "有本领，也要谦逊；有责任，就认真坚持。"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "choice",
+      "sentence": "s11",
+      "skill": "meaning",
+      "prompt": "有才华却骄傲吝啬，孔子怎样看？",
+      "answer": 2,
+      "explanation": "文中把才美与骄吝放在一起比较。",
+      "choices": [
+        "品德问题仍然不能忽视",
+        "越骄傲越值得学",
+        "才华可以遮住一切"
+      ]
+    },
+    {
+      "id": "q2",
+      "type": "choice",
+      "sentence": "s17",
+      "skill": "reason",
+      "prompt": "「犹恐失之」表现怎样的学习心情？",
+      "answer": 0,
+      "explanation": "这是对勤学心情的形容。",
+      "choices": [
+        "学完就全部丢掉",
+        "害怕任何新知识",
+        "珍惜所学，愿意继续用功"
+      ]
+    },
+    {
+      "id": "q3",
+      "type": "selfcheck",
+      "sentence": "s14",
+      "skill": "reason",
+      "prompt": "怎样把「不在其位」放回职责分工来理解？",
+      "answer": "认真做好自己的职责，也以合适方式提出建议。",
+      "explanation": "理解古人的提醒，要留意它所处的职责背景。"
+    }
+  ]
+}

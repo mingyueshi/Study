@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "id": "simaguang",
+  "title": "司马光",
+  "attribution": "脱脱等《宋史》",
+  "level": "starter",
+  "genre": "people",
+  "skills": ["meaning", "referent", "contrast", "retell"],
+  "curriculum": null,
+  "intro": "小伙伴落进水里，其他孩子离开了，司马光做了什么？用动作词把经过串起来。",
+  "background": "这一段出自《宋史·司马光传》，记述司马光小时候的故事。文中的「光」就是司马光。",
+  "editorial_note": "这里读的是人物传记的短选段，篇名为选段题名。「瓮」是口小腹大的陶制容器。",
+  "source": {"work": "《宋史》", "section": "卷三百三十六《司马光传》节选", "url": "https://zh.wikisource.org/wiki/宋史/卷336", "note": "采用常见教学短选段「群儿戏于庭」至「儿得活」，简体标点；本篇未登记教材册次。"},
+  "sentences": [
+    {"id": "s1", "text": "群儿戏于庭，一儿登瓮，足跌没水中。", "chunks": ["群儿戏于庭，", "一儿登瓮，", "足跌没水中。"], "translation": "一群孩子在庭院里玩耍，一个孩子爬上水瓮，失足落入水中，被水淹没了。", "explanation": "先交代地点，再写意外。找出「登」「跌」「没」，就能说清发生了什么。", "hints": ["戏于庭", "登瓮", "没水中"], "notes": [
+      {"id": "ting", "quote": "庭", "kind": "word", "meaning": "庭院，院子。"},
+      {"id": "weng", "quote": "瓮", "kind": "word", "meaning": "口小腹大的陶制容器，这里盛着水。", "reading": "wèng"},
+      {"id": "mo", "quote": "没", "kind": "word", "meaning": "淹没。这里读 mò。", "reading": "mò"}
+    ]},
+    {"id": "s2", "text": "众皆弃去，光持石击瓮破之，水迸，儿得活。", "chunks": ["众皆弃去，", "光持石", "击瓮破之，", "水迸，", "儿得活。"], "translation": "其他孩子都丢下他离开了。司马光拿石头砸破水瓮，水涌了出来，落水的孩子得救了。", "explanation": "「众皆弃去」与「光持石」形成对照。砸破瓮、水流出、孩子得救，结果一环接一环。", "hints": ["众皆弃去", "持石", "水迸", "得活"], "notes": [
+      {"id": "jie", "quote": "皆", "kind": "word", "meaning": "全，都。"},
+      {"id": "chi", "quote": "持", "kind": "word", "meaning": "拿着。"},
+      {"id": "zhi", "quote": "之", "kind": "referent", "meaning": "代替被打破的东西。", "refers_to": "水瓮", "reason": "把动作连起来想：击瓮，也就是击打水瓮，因此打破的是瓮。"},
+      {"id": "beng", "quote": "迸", "kind": "word", "meaning": "向外涌出。", "reading": "bèng"}
+    ]}
+  ],
+  "overview": {"sequence": ["孩子们在院子里玩，一个孩子落进水瓮。", "其他孩子离开，司马光拿石头击瓮。", "瓮破水出，孩子得救。"], "question": "哪些动作最能帮助你复述救人的经过？", "answer": "「持石」「击瓮」「破之」写司马光的行动，「水迸」「儿得活」写行动带来的结果。", "takeaway": "读人物故事时，抓动作、看结果，再用原文说明人物的表现。"},
+  "questions": [
+    {"id": "q1", "type": "choice", "skill": "meaning", "sentence": "s1", "prompt": "「足跌没水中」的「没」在这里怎么理解？", "choices": ["没收", "没有", "淹没"], "answer": 2, "explanation": "孩子掉进盛水的瓮里，「没」写被水淹没，读 mò。"},
+    {"id": "q2", "type": "choice", "skill": "referent", "sentence": "s2", "prompt": "「击瓮破之」的「之」指什么？", "choices": ["庭院", "水瓮", "石头"], "answer": 1, "explanation": "「击瓮」说明击打的对象，接着的「破之」指把这个瓮打破。"},
+    {"id": "q3", "type": "choice", "skill": "contrast", "sentence": "s2", "prompt": "哪一组最能看出孩子们不同的反应？", "choices": ["众皆弃去与光持石击瓮", "庭与瓮", "水与石"], "answer": 0, "explanation": "前者写其他孩子离开，后者写司马光采取行动，把两种反应放在一起比较。"},
+    {"id": "q4", "type": "selfcheck", "skill": "retell", "sentence": "s2", "prompt": "用「先……接着……最后……」讲清故事。", "answer": "先是一个孩子掉进水瓮，接着司马光拿石头砸破瓮，最后水涌出来，孩子得救。", "explanation": "检查是否按事情发展的顺序讲清了意外、行动和结果。"}
+  ]
+}

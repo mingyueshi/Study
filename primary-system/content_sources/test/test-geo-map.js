@@ -23,6 +23,8 @@ require('../geo-map/atlas.js');
 require('../geo-map/media-data.js');
 require('../geo-map/animals-data.js');
 require('../geo-map/world-animals-data.js');
+require('../geo-map/plants-data.js');
+require('../geo-map/world-plants-data.js');
 require('../geo-map/shared.js');
 const W = globalThis.window;
 
@@ -500,11 +502,43 @@ for (const ocean of ['o1', 'o2', 'o3']) {
   check(worldAnimalPlaces.includes(ocean), '应有代表海洋动物：' + A.get(ocean).name);
 }
 
+/* ---------- 植物地图：分布、适应方式与离线照片 ---------- */
+console.log('— 中国与世界植物地图 —');
+function checkFlora({ habitats, plants }, bounds, checkPlace) {
+  // 与动物共用点位、图例和照片结构，植物另有学名与环境适应知识。
+  const habitatIds = new Set(habitats.map(item => item.id));
+  check(habitatIds.size === habitats.length && habitats.length >= 6, '植物生境应唯一且覆盖多种环境');
+  for (const habitat of habitats) {
+    check(/^[a-z-]+$/.test(habitat.id) && isStr(habitat.name) && !hasBadPunct(habitat.name) && /^#[0-9a-f]{6}$/.test(habitat.color), '植物生境结构无效：' + habitat.id);
+    check(plants.some(plant => plant.habitat === habitat.id), '每类生境应有植物：' + habitat.id);
+  }
+  const ids = new Set();
+  const [west, east, south, north] = bounds;
+  for (const plant of plants) {
+    check(/^[a-z-]+$/.test(plant.id) && !ids.has(plant.id), '植物 ID 应唯一：' + plant.id);
+    ids.add(plant.id);
+    check(habitatIds.has(plant.habitat) && checkPlace(plant), '植物应关联有效生境和地图档案：' + plant.id);
+    check(Array.isArray(plant.point) && plant.point.length === 2 && plant.point.every(Number.isFinite) && plant.point[0] >= west && plant.point[0] <= east && plant.point[1] >= south && plant.point[1] <= north, '植物坐标应在地图内：' + plant.id);
+    for (const field of ['name', 'scientificName', 'place', 'home', 'clue', 'adaptation']) {
+      check(isStr(plant[field]) && !hasBadPunct(plant[field]), '植物知识字段无效：' + plant.id + '/' + field);
+    }
+    check(plant.labelSide === undefined || ['left', 'right', 'top', 'top-right', 'bottom'].includes(plant.labelSide), '植物标签方向无效：' + plant.id);
+    for (const field of ['source', 'photoSource']) check(/^https:\/\/[^\s]+$/.test(plant[field]), '植物应有资料与照片出处：' + plant.id + '/' + field);
+    check(fileExists('assets/plants/' + plant.id + '.jpg'), '缺少本地植物照片：' + plant.id);
+  }
+  check(plants.length >= 24, '每张植物地图应至少有 24 种植物');
+}
+checkFlora(W.GM_FLORA, [73, 136, 17.8, 53.8], plant => provAdcodes.has(plant.adcode));
+checkFlora(W.GM_WORLD_FLORA, [-180, 180, -73, 87], plant => A.get(plant.mapPlace)?.map === 'world');
+for (const continent of CONTINENTS) {
+  check(W.GM_WORLD_FLORA.plants.some(plant => COUNTRY_META[plant.mapPlace]?.[1] === continent.id), '世界植物应覆盖：' + continent.name);
+}
+
 /* ---------- 入口文件（多页面系统） ---------- */
 console.log('— 入口文件（多页面系统） —');
-['index.html', 'china.html', 'animals.html', 'world-animals.html', 'province.html', 'world.html', 'places.html', 'routes.html', 'gallery.html',
+['index.html', 'china.html', 'animals.html', 'world-animals.html', 'plants.html', 'world-plants.html', 'province.html', 'world.html', 'places.html', 'routes.html', 'gallery.html',
   'content.js', 'china-geo.js', 'map-data.js', 'shared.js',
-  'china-app.js', 'home-app.js', 'province-app.js', 'world-app.js', 'animals-data.js', 'world-animals-data.js', 'animals-app.js', 'animals.css',
+  'china-app.js', 'home-app.js', 'province-app.js', 'world-app.js', 'animals-data.js', 'world-animals-data.js', 'plants-data.js', 'world-plants-data.js', 'animals-app.js', 'animals.css',
   'styles.css', 'province.css', 'README.md',
   'world-geo.js', 'world-data.js', 'atlas-data.js', 'atlas.js', 'map-ui.js',
   'places-app.js', 'routes-app.js', 'media-data.js', 'media.js', 'gallery-app.js',
@@ -512,15 +546,17 @@ console.log('— 入口文件（多页面系统） —');
   .forEach(f => check(fileExists(f), '缺少文件: ' + f));
 const PAGE_REFS = {
   'index.html': ['content.js', 'china-geo.js', 'map-data.js', 'shared.js', 'home-app.js', 'styles.css',
-    'china.html', 'province.html', 'world.html', 'animals.html', 'world-animals.html'],
+    'china.html', 'province.html', 'world.html', 'animals.html', 'world-animals.html', 'plants.html', 'world-plants.html'],
   'china.html': ['content.js', 'china-geo.js', 'map-data.js', 'shared.js', 'media-data.js', 'media.js', 'map-ui.js', 'china-app.js', 'styles.css',
-    'province.html', 'world.html', 'index.html', 'animals.html'],
+    'province.html', 'world.html', 'index.html', 'animals.html', 'plants.html'],
   'animals.html': ['animals-data.js', 'animals-app.js', 'animals.css', 'styles.css', 'china-geo.js', 'map-data.js', 'shared.js', 'china.html', 'world-animals.html'],
   'world-animals.html': ['world-animals-data.js', 'animals-app.js', 'animals.css', 'styles.css', 'world-geo.js', 'shared.js', 'world.html', 'animals.html'],
+  'plants.html': ['plants-data.js', 'animals-app.js', 'animals.css', 'styles.css', 'china-geo.js', 'map-data.js', 'shared.js', 'china.html', 'world-plants.html'],
+  'world-plants.html': ['world-plants-data.js', 'animals-app.js', 'animals.css', 'styles.css', 'world-geo.js', 'shared.js', 'world.html', 'plants.html'],
   'province.html': ['content.js', 'china-geo.js', 'map-data.js', 'shared.js', 'media-data.js', 'media.js', 'province-app.js',
     'styles.css', 'province.css', 'china.html', 'index.html'],
   'world.html': ['map-data.js', 'world-geo.js', 'world-data.js', 'shared.js', 'media-data.js', 'media.js', 'map-ui.js', 'world-app.js', 'styles.css',
-    'china.html', 'index.html', 'world-animals.html'],
+    'china.html', 'index.html', 'world-animals.html', 'world-plants.html'],
   'places.html': ['places-app.js', 'styles.css'],
   'routes.html': ['routes-app.js', 'styles.css'],
   'gallery.html': ['media-data.js', 'media.js', 'gallery-app.js', 'styles.css']
@@ -530,7 +566,7 @@ Object.entries(PAGE_REFS).forEach(([page, refs]) => {
   const html = fs.readFileSync(path.join(DIR, page), 'utf8');
   refs.forEach(f => check(html.includes(f), page + ' 应引用 ' + f));
   check(html.includes('lang="zh-CN"'), page + ' 应声明 zh-CN');
-  if (!page.endsWith('animals.html')) {
+  if (!/(?:animals|plants)\.html$/.test(page)) {
     ['atlas.js', 'atlas-data.js', 'places.html', 'routes.html', 'gallery.html'].forEach(f =>
       check(html.includes(f), page + ' 应引用 ' + f));
     check(html.includes('gm-sysnav'), page + ' 应有系统导航条');

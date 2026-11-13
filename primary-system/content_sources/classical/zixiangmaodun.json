@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "id": "zixiangmaodun",
+  "title": "自相矛盾",
+  "attribution": "韩非《韩非子》",
+  "level": "story",
+  "genre": "fable",
+  "skills": ["meaning", "referent", "reason", "contrast", "retell"],
+  "curriculum": null,
+  "source_ref": {"version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native", "path": "poetry/simplified/诸子百家/韩非子.json", "locator": "/content/35", "sha256": "7948dd3b58b49eb9c3420beb1a1dd32ba0ddf103a33994ab159940cff631b7d5", "anchor_text": "楚人有鬻盾与矛者，誉之曰"},
+  "intro": "盾什么也刺不穿，矛什么都能刺穿，这两句话能同时成立吗？把两种说法放到同一个问题里检验。",
+  "background": "故事选自《韩非子·难一》。矛用来刺，盾用来抵挡，先认清两种器物再读人物的话。",
+  "editorial_note": "保留「鬻」「弗」等字词，结尾的「不可同世而立」说明两种绝对说法不能同时成立。",
+  "source": {"work": "《韩非子》", "section": "《难一》鬻盾与矛条节选", "url": "https://zh.wikisource.org/wiki/韓非子/難一", "note": "采用常见教学选段，繁体转简体并加标点；译文与练习为本专题编写，未登记教材册次。"},
+  "sentences": [
+    {"id": "s1", "text": "楚人有鬻盾与矛者，誉之曰：「吾盾之坚，物莫能陷也。」", "chunks": ["楚人有鬻盾与矛者，", "誉之曰：", "「吾盾之坚，", "物莫能陷也。」"], "translation": "楚国有个卖盾和矛的人，夸他的盾说：「我的盾很坚固，没有什么能刺穿它。」", "explanation": "先记住第一种说法：没有东西能刺穿这面盾。", "hints": ["鬻", "盾之坚", "莫能陷"], "notes": [
+      {"id": "yu", "quote": "鬻", "kind": "word", "meaning": "卖。", "reading": "yù"},
+      {"id": "zhi", "quote": "之", "occurrence": 1, "kind": "referent", "meaning": "代替他正在夸赞的东西。", "refers_to": "盾", "reason": "后面的引语紧接着说「吾盾」，可知此处夸的是盾。"},
+      {"id": "mo", "quote": "莫", "kind": "word", "meaning": "没有什么。"},
+      {"id": "xian", "quote": "陷", "kind": "word", "meaning": "刺穿。"}
+    ]},
+    {"id": "s2", "text": "又誉其矛曰：「吾矛之利，于物无不陷也。」", "chunks": ["又誉其矛曰：", "「吾矛之利，", "于物无不陷也。」"], "translation": "他又夸自己的矛说：「我的矛非常锋利，什么东西都能刺穿。」", "explanation": "第二种说法也说得很满：「无不」把所有东西都包括进去了。", "hints": ["又誉", "矛之利", "无不陷"], "notes": [
+      {"id": "yu", "quote": "誉", "kind": "word", "meaning": "夸赞。"},
+      {"id": "qi", "quote": "其", "kind": "referent", "meaning": "他自己的。", "refers_to": "卖矛和盾的人", "reason": "「又」连接同一个人的两次夸赞。"},
+      {"id": "wubu", "quote": "无不", "kind": "word", "meaning": "没有不，合起来就是全都。"}
+    ]},
+    {"id": "s3", "text": "或曰：「以子之矛陷子之盾，何如？」", "chunks": ["或曰：", "「以子之矛", "陷子之盾，", "何如？」"], "translation": "有人问：「用你的矛刺你的盾，会怎么样呢？」", "explanation": "旁人把矛和盾放在一起，要求两句夸赞同时接受检验。", "hints": ["或曰", "子之矛", "子之盾"], "notes": [
+      {"id": "huo", "quote": "或", "kind": "word", "meaning": "有的人。这里不是表示选择的「或者」。"},
+      {"id": "zi", "quote": "子", "kind": "word", "meaning": "对对方的称呼，这里是「你」。"},
+      {"id": "heru", "quote": "何如", "kind": "word", "meaning": "怎么样。"}
+    ]},
+    {"id": "s4", "text": "其人弗能应也。", "chunks": ["其人", "弗能应也。"], "translation": "那个人回答不上来了。", "explanation": "无论矛刺不刺得穿盾，他前面的两句夸赞中总有一句站不住脚。", "hints": ["其人", "弗能应"], "notes": [
+      {"id": "qiren", "quote": "其人", "kind": "referent", "meaning": "那个人。", "refers_to": "卖矛和盾的人", "reason": "旁人的问题正是向卖矛盾者提出的，回答不上来的也是他。"},
+      {"id": "fu", "quote": "弗", "kind": "word", "meaning": "不。", "reading": "fú"},
+      {"id": "ying", "quote": "应", "kind": "word", "meaning": "回答。这里读 yìng。", "reading": "yìng"}
+    ]},
+    {"id": "s5", "text": "夫不可陷之盾与无不陷之矛，不可同世而立。", "chunks": ["夫不可陷之盾", "与无不陷之矛，", "不可同世而立。"], "translation": "什么也刺不穿的盾与什么都能刺穿的矛，不可能同时存在。", "explanation": "结尾点明矛盾所在：两种互相排斥的绝对说法，不能都是真的。", "hints": ["不可陷", "无不陷", "不可同世"], "notes": [
+      {"id": "fu", "quote": "夫", "kind": "word", "meaning": "放在句子开头，引出议论。这里读 fú。", "reading": "fú"},
+      {"id": "li", "quote": "立", "kind": "word", "meaning": "存在，成立。"}
+    ]}
+  ],
+  "overview": {"sequence": ["卖者先夸盾坚不可破。", "又夸矛能刺穿一切。", "旁人追问以矛刺盾，他无言以对。"], "question": "这个问题为什么让卖者无法回答？", "answer": "若刺穿了盾，盾无物能陷的说法就错了；若刺不穿，矛无不陷的说法就错了。两句不能同时成立。", "takeaway": "听到「全都」「绝不会」这样的说法，可以找一个具体情形检验。"},
+  "questions": [
+    {"id": "q1", "type": "choice", "skill": "meaning", "sentence": "s3", "prompt": "「或曰」中的「或」是什么意思？", "choices": ["或者", "有的人", "有时候"], "answer": 1, "explanation": "这里引出另一个说话的人，可以理解为有人问道。"},
+    {"id": "q2", "type": "choice", "skill": "referent", "sentence": "s4", "prompt": "「其人弗能应也」说的是谁？", "choices": ["卖矛和盾的人", "提出问题的人", "楚国所有人"], "answer": 0, "explanation": "旁人向卖者提问，卖者无法同时维护两种夸赞，因此回答不上来。"},
+    {"id": "q3", "type": "choice", "skill": "reason", "sentence": "s5", "prompt": "如果矛刺穿了盾，哪一句夸赞就不成立了？", "choices": ["有人在卖矛", "矛能刺穿东西", "盾没有东西能刺穿"], "answer": 2, "explanation": "出现一个能刺穿盾的东西，就推翻了没有什么能刺穿盾的说法。"},
+    {"id": "q4", "type": "selfcheck", "skill": "retell", "sentence": "s3", "prompt": "复述故事，再分别说说刺穿与刺不穿会怎样。", "answer": "卖者把盾和矛都夸得绝对，旁人问用矛刺盾会怎样。刺穿就否定盾的夸赞，刺不穿就否定矛的夸赞，所以他无法回答。", "explanation": "检查有没有把两种可能结果都说清楚。"}
+  ]
+}

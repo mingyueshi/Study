@@ -1,0 +1,1338 @@
+{
+  "schema_version": 1,
+  "id": "lunyu-liren",
+  "title": "论语·里仁",
+  "unit_label": "则",
+  "attribution": "孔子及其弟子言行，弟子与再传弟子编纂",
+  "level": "challenge",
+  "genre": "reasoning",
+  "skills": [
+    "meaning",
+    "referent",
+    "reason",
+    "contrast"
+  ],
+  "curriculum": null,
+  "intro": "把「见贤思齐」等短章放在一起，观察怎样作出选择。",
+  "background": "这是《论语》二十篇中的第4篇，话题围绕仁德、取舍与改过展开。篇名取自开头的字，并不表示每一则都只讲同一个题目。",
+  "editorial_note": "每次可以只读一两则。分段依本机原典，共二十篇、五百一十三则；其他版本的分章和个别用字可能不同。古代身份、礼制和观念要结合当时背景来理解。",
+  "source": {
+    "work": "论语",
+    "section": "里仁篇",
+    "url": "https://zh.wikisource.org/wiki/論語/里仁第四",
+    "note": "原文采用随项目保存的简体原典，统一引号样式。译文和部分词义据所列译注资料整理，疑难处配合本篇提示阅读。"
+  },
+  "source_ref": {
+    "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+    "path": "poetry/simplified/儒家经典/论语.json",
+    "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+    "locator": "/content/3",
+    "anchor_text": "子曰：“里仁为美，择不处仁，焉得知？”"
+  },
+  "edition": {
+    "label": "译注参考：ieduer/lunyu 所收《论语译注》资料",
+    "url": "https://github.com/ieduer/lunyu/blob/44f039ef8174b219b5f773a156b3d954ee65be25/data/dialogues.json",
+    "revision": "44f039ef8174b219b5f773a156b3d954ee65be25",
+    "license": "MIT，许可副本随内容源保存",
+    "note": "采用固定版本的译注，去除重复条目与注号，逐则配回本馆原文；词义保留简短释义，补充课堂提示。乡党两则分配译文，颜渊第二十则依完整原文呈现。"
+  },
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "子曰：「里仁为美，择不处仁，焉得知？」",
+      "translation": "孔子说：「住的地方，要有仁德这才好。选择住处，没有仁德，怎么能是聪明呢？」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "里",
+          "kind": "word",
+          "meaning": "这里可以看为动词。"
+        },
+        {
+          "id": "n2",
+          "quote": "处",
+          "kind": "word",
+          "meaning": "上声，音杵，chǔ，居住也。"
+        },
+        {
+          "id": "n3",
+          "quote": "知",
+          "kind": "word",
+          "meaning": "《论语》的「智」字都如此写。"
+        },
+        {
+          "id": "n4",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「里仁为美，",
+        "择不处仁，",
+        "焉得知？",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·里仁》第1则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/里仁第四",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/3",
+          "anchor_text": "子曰：“里仁为美，择不处仁，焉得知？”"
+        }
+      },
+      "explanation": "「里」：这里可以看为动词；「处」：上声，音杵，chǔ，居住也。",
+      "hints": [
+        "里",
+        "处",
+        "知"
+      ],
+      "translation_entry": 67
+    },
+    {
+      "id": "s2",
+      "text": "子曰：「不仁者不可以久处约，不可以长处乐。仁者安仁，知者利仁。」",
+      "translation": "孔子说：「不仁的人不可以长久地居于穷困中，也不可以长久地居于安乐中。有仁德的人安于仁（实行仁德便心安，不实行仁德心便不安）；聪明人利用仁（他认识到仁德对他长远而巨大的利益，他便实行仁德）。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "约",
+          "kind": "word",
+          "meaning": "穷困的处境。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「不仁者不可以久处约，",
+        "不可以长处乐。",
+        "仁者安仁，",
+        "知者利仁。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·里仁》第2则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/里仁第四",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/3",
+          "anchor_text": "子曰：“不仁者不可以久处约，不可以长处乐。仁者安仁，知者利仁。”"
+        }
+      },
+      "explanation": "这段比较人在困难和顺利时的表现，强调把仁德当作安身的根本。",
+      "hints": [
+        "约"
+      ],
+      "translation_entry": 68
+    },
+    {
+      "id": "s3",
+      "text": "子曰：「唯仁者能好人，能恶人。」",
+      "translation": "孔子说：「只有仁人才能够喜爱某人，厌恶某人。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "唯仁者能好人",
+          "kind": "word",
+          "meaning": "有仁德的人，才能合宜地喜爱、厌恶别人，不只凭私心。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「唯仁者能好人，",
+        "能恶人。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·里仁》第3则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/里仁第四",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/3",
+          "anchor_text": "子曰：“唯仁者能好人，能恶人。”"
+        }
+      },
+      "explanation": "「唯仁者能好人」：有仁德的人，才能合宜地喜爱、厌恶别人，不只凭私心。",
+      "hints": [
+        "唯仁者能好人"
+      ],
+      "translation_entry": 69
+    },
+    {
+      "id": "s4",
+      "text": "子曰：「苟志于仁矣，无恶也。」",
+      "translation": "孔子说：「假如立定志向实行仁德，总没有坏处。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "苟",
+          "kind": "word",
+          "meaning": "如果。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「苟志于仁矣，",
+        "无恶也。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·里仁》第4则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/里仁第四",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/3",
+          "anchor_text": "子曰：“苟志于仁矣，无恶也。”"
+        }
+      },
+      "explanation": "「苟」引出条件：真心向往仁德，就会努力避免作恶。",
+      "hints": [
+        "苟"
+      ],
+      "translation_entry": 70
+    },
+    {
+      "id": "s5",
+      "text": "子曰：「富与贵，是人之所欲也；不以其道得之，不处也。贫与贱，是人之所恶也；不以其道得之，不去也。君子去仁，恶乎成名？君子无终食之间违仁，造次必于是，颠沛必于是。」",
+      "translation": "孔子说：「发大财，做大官，这是人人所盼望的；不用正当的方法去得到它，君子不接受。穷困和下贱，这是人人所厌恶的；不用正当的方法去抛掉它，君子不摆脱。君子抛弃了仁德，怎样去成就他的声名呢？君子没有吃完一餐饭的时间离开仁德，就是在仓卒匆忙的时候一定和仁德同在，就是在颠沛流离的时候一定和仁德同在。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "贫与贱",
+          "kind": "word",
+          "meaning": "「富与贵」可以说「得之」，「贫与贱」却不是人人想「得之」的。"
+        },
+        {
+          "id": "n2",
+          "quote": "恶乎",
+          "kind": "word",
+          "meaning": "恶音乌，wū，何处。"
+        },
+        {
+          "id": "n3",
+          "quote": "违",
+          "kind": "word",
+          "meaning": "离开，和公冶长篇第五的「弃而违之」的「违」同义。"
+        },
+        {
+          "id": "n4",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「富与贵，",
+        "是人之所欲也；",
+        "不以其道得之，",
+        "不处也。",
+        "贫与贱，",
+        "是人之所恶也；",
+        "不以其道得之，",
+        "不去也。",
+        "君子去仁，",
+        "恶乎成名？",
+        "君子无终食之间违仁，",
+        "造次必于是，",
+        "颠沛必于是。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·里仁》第5则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/里仁第四",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/3",
+          "anchor_text": "子曰：“富与贵，是人之所欲也；不以其道得之，不处也。贫与贱，是人之所恶也；不以其道得之，不去也。君子去仁，恶乎成名？君子无终食之间违仁，造次必于是，颠沛必于是。”"
+        }
+      },
+      "explanation": "「贫与贱」：「富与贵」可以说「得之」，「贫与贱」却不是人人想「得之」的；「恶乎」：恶音乌，wū，何处。",
+      "hints": [
+        "贫与贱",
+        "恶乎",
+        "违"
+      ],
+      "translation_entry": 71
+    },
+    {
+      "id": "s6",
+      "text": "子曰：「我未见好仁者，恶不仁者。好仁者，无以尚之；恶不仁者，其为仁矣，不使不仁者加乎其身。有能一日用其力于仁矣乎？我未见力不足者。盖有之矣，我未之见也。」",
+      "translation": "孔子说：「我不曾见到过爱好仁德的人和厌恶不仁德的人。爱好仁德的人，那是再好也没有的了；厌恶不仁德的人，他行仁德只是不使不仁德的东西加在自己身上。有谁能在某一天使用他的力量于仁德呢？我没见过力量不够的。大概这样人还是有的，我不曾见到罢了。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "尚",
+          "kind": "word",
+          "meaning": "动词，超过之意。"
+        },
+        {
+          "id": "n2",
+          "quote": "矣",
+          "kind": "word",
+          "meaning": "这个「矣」字用法同「也」，表示停顿。"
+        },
+        {
+          "id": "n3",
+          "quote": "盖",
+          "kind": "word",
+          "meaning": "副词，大概之意。"
+        },
+        {
+          "id": "n4",
+          "quote": "我",
+          "meaning": "第一人称，意思是我。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "这一段接在「子曰」之后，尚未转述别人的话，指正在说话的孔子。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「我未见好仁者，",
+        "恶不仁者。",
+        "好仁者，",
+        "无以尚之；",
+        "恶不仁者，",
+        "其为仁矣，",
+        "不使不仁者加乎其身。",
+        "有能一日用其力于仁矣乎？",
+        "我未见力不足者。",
+        "盖有之矣，",
+        "我未之见也。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·里仁》第6则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/里仁第四",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/3",
+          "anchor_text": "子曰：“我未见好仁者，恶不仁者。好仁者，无以尚之；恶不仁者，其为仁矣，不使不仁者加乎其身。有能一日用其力于仁矣乎？我未见力不足者。盖有之矣，我未之见也。”"
+        }
+      },
+      "explanation": "「尚」：动词，超过之意；「矣」：这个「矣」字用法同「也」，表示停顿。",
+      "hints": [
+        "尚",
+        "矣",
+        "盖"
+      ],
+      "translation_entry": 72
+    },
+    {
+      "id": "s7",
+      "text": "子曰：「人之过也，各于其党。观过，斯知仁矣。」",
+      "translation": "孔子说：「（人是各种各样的，人的错误也是各种各样的。）什么样的错误就是由什么样的人犯的。仔细考察某人所犯的错误，就可以知道他是什么样式的人了。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "仁",
+          "kind": "word",
+          "meaning": "同「人」。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「人之过也，",
+        "各于其党。",
+        "观过，",
+        "斯知仁矣。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·里仁》第7则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/里仁第四",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/3",
+          "anchor_text": "子曰：“人之过也，各于其党。观过，斯知仁矣。”"
+        }
+      },
+      "explanation": "「仁」：同「人」。",
+      "hints": [
+        "仁"
+      ],
+      "translation_entry": 73
+    },
+    {
+      "id": "s8",
+      "text": "子曰：「朝闻道，夕死可矣。」",
+      "translation": "孔子说：「早晨得知真理，要我当晚死去，都可以。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "朝",
+          "kind": "word",
+          "meaning": "早晨。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「朝闻道，",
+        "夕死可矣。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·里仁》第8则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/里仁第四",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/3",
+          "anchor_text": "子曰：“朝闻道，夕死可矣。”"
+        }
+      },
+      "explanation": "早晨和晚上放在一起，是在突出求知道理的重要。读这句要珍惜学习，也珍惜生命。",
+      "hints": [
+        "朝"
+      ],
+      "translation_entry": 74
+    },
+    {
+      "id": "s9",
+      "text": "子曰：「士志于道，而耻恶衣恶食者，未足与议也。」",
+      "translation": "孔子说：「读书人有志于真理，但又以自己吃粗粮穿破衣为耻辱，这种人，不值得同他商议了。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "耻",
+          "kind": "word",
+          "meaning": "以某件事为羞耻。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「士志于道，",
+        "而耻恶衣恶食者，",
+        "未足与议也。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·里仁》第9则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/里仁第四",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/3",
+          "anchor_text": "子曰：“士志于道，而耻恶衣恶食者，未足与议也。”"
+        }
+      },
+      "explanation": "孔子批评的是只在意衣食排场，却忘了自己求学目标的人。",
+      "hints": [
+        "耻"
+      ],
+      "translation_entry": 75
+    },
+    {
+      "id": "s10",
+      "text": "子曰：「君子之于天下也，无适也，无莫也，义之与比。」",
+      "translation": "孔子说：「君子对于天下的事情，没规定要怎样干，也没规定不要怎样干，只要怎样干合理恰当，便怎样干。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "适",
+          "kind": "word",
+          "meaning": "这两字讲法很多，有的解为「亲疏厚薄」，「无适无莫」便是「情无亲疏厚薄」。"
+        },
+        {
+          "id": "n2",
+          "quote": "比",
+          "kind": "word",
+          "meaning": "去声，bì，挨着，靠拢，为邻。"
+        },
+        {
+          "id": "n3",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「君子之于天下也，",
+        "无适也，",
+        "无莫也，",
+        "义之与比。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·里仁》第10则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/里仁第四",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/3",
+          "anchor_text": "子曰：“君子之于天下也，无适也，无莫也，义之与比。”"
+        }
+      },
+      "explanation": "「适」：这两字讲法很多，有的解为「亲疏厚薄」，「无适无莫」便是「情无亲疏厚薄」；「比」：去声，bì，挨着，靠拢，为邻。",
+      "hints": [
+        "适",
+        "比"
+      ],
+      "translation_entry": 76
+    },
+    {
+      "id": "s11",
+      "text": "子曰：「君子怀德，小人怀土；君子怀刑，小人怀惠。」",
+      "translation": "孔子说：「君子怀念道德，小人怀念乡土；君子关心法度，小人关心恩惠。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "土",
+          "kind": "word",
+          "meaning": "如果解为田土，亦通。"
+        },
+        {
+          "id": "n2",
+          "quote": "刑",
+          "kind": "word",
+          "meaning": "古代法律制度的「刑」作「刑」，刑罚的「刑」作「」，从刀井，后来都写作「刑」了。"
+        },
+        {
+          "id": "n3",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「君子怀德，",
+        "小人怀土；",
+        "君子怀刑，",
+        "小人怀惠。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·里仁》第11则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/里仁第四",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/3",
+          "anchor_text": "子曰：“君子怀德，小人怀土；君子怀刑，小人怀惠。”"
+        }
+      },
+      "explanation": "「土」：如果解为田土，亦通；「刑」：古代法律制度的「刑」作「刑」，刑罚的「刑」作「」，从刀井，后来都写作「刑」了。",
+      "hints": [
+        "土",
+        "刑"
+      ],
+      "translation_entry": 77
+    },
+    {
+      "id": "s12",
+      "text": "子曰：「放于利而行，多怨。」",
+      "translation": "孔子说：「依据个人利益而行动，会招致很多的怨恨。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "放",
+          "kind": "word",
+          "meaning": "旧读上声，音仿，fǎng，依据。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「放于利而行，",
+        "多怨。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·里仁》第12则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/里仁第四",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/3",
+          "anchor_text": "子曰：“放于利而行，多怨。”"
+        }
+      },
+      "explanation": "「放」：旧读上声，音仿，fǎng，依据。",
+      "hints": [
+        "放"
+      ],
+      "translation_entry": 78
+    },
+    {
+      "id": "s13",
+      "text": "子曰：「能以礼让为国乎？何有？不能以礼让为国，如礼何？」",
+      "translation": "孔子说：「能够用礼让来治理国家吗？这有什么困难呢？如果不能用礼让来治理国家，又怎样来对待礼仪呢？」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "何有",
+          "kind": "word",
+          "meaning": "这是春秋时代的常用语，在这里是「有何困难」的意思。"
+        },
+        {
+          "id": "n2",
+          "quote": "如礼何",
+          "kind": "word",
+          "meaning": "依孔子的意见，国家的礼仪必有其「以礼让为国」的本质，它是内容和形式的统一体。"
+        },
+        {
+          "id": "n3",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「能以礼让为国乎？",
+        "何有？",
+        "不能以礼让为国，",
+        "如礼何？",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·里仁》第13则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/里仁第四",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/3",
+          "anchor_text": "子曰：“能以礼让为国乎？何有？不能以礼让为国，如礼何？”"
+        }
+      },
+      "explanation": "「何有」：这是春秋时代的常用语，在这里是「有何困难」的意思；「如礼何」：依孔子的意见，国家的礼仪必有其「以礼让为国」的本质，它是内容和形式的统一体。",
+      "hints": [
+        "何有",
+        "如礼何"
+      ],
+      "translation_entry": 79
+    },
+    {
+      "id": "s14",
+      "text": "子曰：「不患无位，患所以立；不患莫己知，求为可知也。」",
+      "translation": "孔子说：「不发愁没有职位，只发愁没有任职的本领；不怕没有人知道自己，去追求足以使别人知道自己的本领好了。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "患所以立",
+          "kind": "word",
+          "meaning": "「立」和「位」古通用，这「立」字便是「不患无位」的「位」字。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「不患无位，",
+        "患所以立；",
+        "不患莫己知，",
+        "求为可知也。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·里仁》第14则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/里仁第四",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/3",
+          "anchor_text": "子曰：“不患无位，患所以立；不患莫己知，求为可知也。”"
+        }
+      },
+      "explanation": "「患所以立」：「立」和「位」古通用，这「立」字便是「不患无位」的「位」字。",
+      "hints": [
+        "患所以立"
+      ],
+      "translation_entry": 80
+    },
+    {
+      "id": "s15",
+      "text": "子曰：「参乎！吾道一以贯之。」曾子曰：「唯。」子出，门人问曰：「何谓也？」曾子曰：「夫子之道，忠恕而已矣。」",
+      "translation": "孔子说：「参呀！我的学说贯穿着一个基本观念。」曾子说：「是。」孔子走出去以后，别的学生便问曾子道：「这是什么意思」曾子道：「他老人家的学说，只是忠和恕罢了。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "贯",
+          "kind": "word",
+          "meaning": "贯穿、统贯。"
+        },
+        {
+          "id": "n2",
+          "quote": "忠",
+          "kind": "word",
+          "meaning": "尽心尽力；与恕连说，强调尽心并体谅别人。"
+        },
+        {
+          "id": "n3",
+          "quote": "吾",
+          "meaning": "第一人称，意思是我。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "这一段接在「子曰」之后，尚未转述别人的话，指正在说话的孔子。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「参乎！",
+        "吾道一以贯之。",
+        "」曾子曰：",
+        "「唯。",
+        "」子出，",
+        "门人问曰：",
+        "「何谓也？",
+        "」曾子曰：",
+        "「夫子之道，",
+        "忠恕而已矣。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·里仁》第15则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/里仁第四",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/3",
+          "anchor_text": "子曰：“参乎！吾道一以贯之。”曾子曰：“唯。”子出，门人问曰：“何谓也？”曾子曰：“夫子之道，忠恕而已矣。”"
+        }
+      },
+      "explanation": "「贯」：贯穿、统贯；「忠」：尽心尽力；与恕连说，强调尽心并体谅别人。",
+      "hints": [
+        "贯",
+        "忠"
+      ],
+      "translation_entry": 81
+    },
+    {
+      "id": "s16",
+      "text": "子曰：「君子喻于义，小人喻于利。」",
+      "translation": "孔子说：「君子懂得的是义，小人懂得的是利。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "君子",
+          "kind": "word",
+          "meaning": "这里的「君子」、「小人」是指在位者，还是指有德者，还是两者兼指，孔子原意不得而知。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「君子喻于义，",
+        "小人喻于利。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·里仁》第16则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/里仁第四",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/3",
+          "anchor_text": "子曰：“君子喻于义，小人喻于利。”"
+        }
+      },
+      "explanation": "「君子」：这里的「君子」、「小人」是指在位者，还是指有德者，还是两者兼指，孔子原意不得而知。",
+      "hints": [
+        "君子"
+      ],
+      "translation_entry": 82
+    },
+    {
+      "id": "s17",
+      "text": "子曰：「见贤思齐焉，见不贤而内自省也。」",
+      "translation": "孔子说：「看见贤人，便应该想向他看齐；看见不贤的人，便应该自己反省，（有没有同他类似的毛病。）」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "齐",
+          "kind": "word",
+          "meaning": "向贤德的人看齐。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「见贤思齐焉，",
+        "见不贤而内自省也。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·里仁》第17则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/里仁第四",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/3",
+          "anchor_text": "子曰：“见贤思齐焉，见不贤而内自省也。”"
+        }
+      },
+      "explanation": "看见优点就学习，看见缺点就检查自己；注意两种「见」引出了两种行动。",
+      "hints": [
+        "齐"
+      ],
+      "translation_entry": 83
+    },
+    {
+      "id": "s18",
+      "text": "子曰：「事父母几谏，见志不从，又敬不违，劳而不怨。」",
+      "translation": "孔子说：「侍奉父母，（如果他们有不对的地方，）得轻微婉转地劝止，看到自己的心意没有被听从，仍然恭敬地不触犯他们，虽然忧愁，但不怨恨。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "几",
+          "kind": "word",
+          "meaning": "平声，音机，jī，轻微，婉转。"
+        },
+        {
+          "id": "n2",
+          "quote": "违",
+          "kind": "word",
+          "meaning": "触忤，冒犯。"
+        },
+        {
+          "id": "n3",
+          "quote": "劳",
+          "kind": "word",
+          "meaning": "忧愁。"
+        },
+        {
+          "id": "n4",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「事父母几谏，",
+        "见志不从，",
+        "又敬不违，",
+        "劳而不怨。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·里仁》第18则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/里仁第四",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/3",
+          "anchor_text": "子曰：“事父母几谏，见志不从，又敬不违，劳而不怨。”"
+        }
+      },
+      "explanation": "「几」：平声，音机，jī，轻微，婉转；「违」：触忤，冒犯。",
+      "hints": [
+        "几",
+        "违",
+        "劳"
+      ],
+      "translation_entry": 84
+    },
+    {
+      "id": "s19",
+      "text": "子曰：「父母在，不远游，游必有方。」",
+      "translation": "孔子说：「父母在世，不出远门，如果要出远门，必须有一定的去处。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "方",
+          "kind": "word",
+          "meaning": "确定的去处。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「父母在，",
+        "不远游，",
+        "游必有方。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·里仁》第19则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/里仁第四",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/3",
+          "anchor_text": "子曰：“父母在，不远游，游必有方。”"
+        }
+      },
+      "explanation": "这句放在古代交通通信不便的背景中理解。今天远行也应把去处和联系方式告诉家人。",
+      "hints": [
+        "方"
+      ],
+      "translation_entry": 85
+    },
+    {
+      "id": "s20",
+      "text": "子曰：「三年无改于父之道，可谓孝矣。」",
+      "translation": "孔子说：「三年无改于父之道，可谓孝矣。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "道",
+          "kind": "word",
+          "meaning": "做事的准则和办法。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「三年无改于父之道，",
+        "可谓孝矣。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·里仁》第20则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/里仁第四",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/3",
+          "anchor_text": "子曰：“三年无改于父之道，可谓孝矣。”"
+        }
+      },
+      "explanation": "这句放在古代孝道背景中理解。今天尊重家人，也可以通过沟通改进不合适的做法。",
+      "hints": [
+        "道"
+      ],
+      "translation_entry": 86
+    },
+    {
+      "id": "s21",
+      "text": "子曰：「父母之年，不可不知也。一则以喜，一则以惧。」",
+      "translation": "孔子说：「父母的年纪不能不时时记在心里：一方面因（其高寿）而喜欢，另一方面又因（其寿高）而有所恐惧。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "惧",
+          "kind": "word",
+          "meaning": "担忧。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「父母之年，",
+        "不可不知也。",
+        "一则以喜，",
+        "一则以惧。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·里仁》第21则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/里仁第四",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/3",
+          "anchor_text": "子曰：“父母之年，不可不知也。一则以喜，一则以惧。”"
+        }
+      },
+      "explanation": "喜与惧是两种心情：高兴父母健康长寿，也担心他们年岁渐长，需要更多照顾。",
+      "hints": [
+        "惧"
+      ],
+      "translation_entry": 87
+    },
+    {
+      "id": "s22",
+      "text": "子曰：「古者言之不出，耻躬之不逮也。」",
+      "translation": "孔子说：「古时候言语不轻易出口，就是怕自己的行动赶不上。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "耻",
+          "kind": "word",
+          "meaning": "动词的意动用法，以为可耻的意思。"
+        },
+        {
+          "id": "n2",
+          "quote": "逮",
+          "kind": "word",
+          "meaning": "音代，dài，及，赶上。"
+        },
+        {
+          "id": "n3",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「古者言之不出，",
+        "耻躬之不逮也。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·里仁》第22则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/里仁第四",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/3",
+          "anchor_text": "子曰：“古者言之不出，耻躬之不逮也。”"
+        }
+      },
+      "explanation": "「耻」：动词的意动用法，以为可耻的意思；「逮」：音代，dài，及，赶上。",
+      "hints": [
+        "耻",
+        "逮"
+      ],
+      "translation_entry": 88
+    },
+    {
+      "id": "s23",
+      "text": "子曰：「以约失之者鲜矣。」",
+      "translation": "孔子说：「因为对自己节制、约束而犯过失的，这种事情总不会多。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "约",
+          "kind": "word",
+          "meaning": "《论语》的「约」字不外两个意义：（甲）穷困，（乙）约束。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「以约失之者鲜矣。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·里仁》第23则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/里仁第四",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/3",
+          "anchor_text": "子曰：“以约失之者鲜矣。”"
+        }
+      },
+      "explanation": "「约」：《论语》的「约」字不外两个意义：（甲）穷困，（乙）约束。",
+      "hints": [
+        "约"
+      ],
+      "translation_entry": 89
+    },
+    {
+      "id": "s24",
+      "text": "子曰：「君子欲讷于言而敏于行。」",
+      "translation": "孔子说：「君子言语要谨慎迟钝，工作要勤劳敏捷。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "讷",
+          "kind": "word",
+          "meaning": "读nà，语言迟钝。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「君子欲讷于言而敏于行。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·里仁》第24则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/里仁第四",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/3",
+          "anchor_text": "子曰：“君子欲讷于言而敏于行。”"
+        }
+      },
+      "explanation": "「讷」：读nà，语言迟钝。",
+      "hints": [
+        "讷"
+      ],
+      "translation_entry": 90
+    },
+    {
+      "id": "s25",
+      "text": "子曰：「德不孤，必有邻。」",
+      "translation": "孔子说：「有道德的人不会孤单，一定会有（志同道合的人来和他做）伙伴。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "邻",
+          "kind": "word",
+          "meaning": "亲近、愿意相伴的人。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「德不孤，",
+        "必有邻。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·里仁》第25则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/里仁第四",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/3",
+          "anchor_text": "子曰：“德不孤，必有邻。”"
+        }
+      },
+      "explanation": "「不孤」与「有邻」互相呼应，说明好的品德能够吸引同道之人。",
+      "hints": [
+        "邻"
+      ],
+      "translation_entry": 91
+    },
+    {
+      "id": "s26",
+      "text": "子游曰：「事君数，斯辱矣；朋友数，斯疏矣。」",
+      "translation": "子游说：「对待君主过于烦琐，就会招致侮辱；对待朋友过于烦琐，就会反被疏远。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "数",
+          "kind": "word",
+          "meaning": "音朔，shuò，密，屡屡。"
+        }
+      ],
+      "chunks": [
+        "子游曰：",
+        "「事君数，",
+        "斯辱矣；",
+        "朋友数，",
+        "斯疏矣。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·里仁》第26则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/里仁第四",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/3",
+          "anchor_text": "子游曰：“事君数，斯辱矣；朋友数，斯疏矣。”"
+        }
+      },
+      "explanation": "「数」：音朔，shuò，密，屡屡。",
+      "hints": [
+        "数"
+      ],
+      "translation_entry": 92
+    }
+  ],
+  "overview": {
+    "sequence": [
+      "先分清说话的人，找出与「仁德、取舍与改过」有关的场景。",
+      "把看不懂的词放回原文，再核对译文中的动作和对象。",
+      "挑一则用自己的话说明白，再找原句支持自己的理解。"
+    ],
+    "question": "这一篇中，哪一则最值得你再想一想？",
+    "answer": "选一则，先说清谁在什么情况下说了什么，再说明你赞同、疑惑或想进一步了解的地方，并指回原文。",
+    "takeaway": "向优点学习，见到缺点也检查自己。"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "choice",
+      "sentence": "s17",
+      "skill": "meaning",
+      "prompt": "看见贤德的人，应该怎样做？",
+      "answer": 1,
+      "explanation": "「见贤思齐」的「齐」是看齐。",
+      "choices": [
+        "向他看齐，学习长处",
+        "立刻嫉妒他",
+        "只记住他的名字"
+      ]
+    },
+    {
+      "id": "q2",
+      "type": "choice",
+      "sentence": "s19",
+      "skill": "reason",
+      "prompt": "「游必有方」中「方」指什么？",
+      "answer": 2,
+      "explanation": "这句放在古代交通通信不便的背景下，提醒出门让家人安心。",
+      "choices": [
+        "方向盘",
+        "确定的去处",
+        "正方形"
+      ]
+    },
+    {
+      "id": "q3",
+      "type": "selfcheck",
+      "sentence": "s21",
+      "skill": "reason",
+      "prompt": "为什么「一则以喜，一则以惧」可以同时出现？",
+      "answer": "为父母长寿高兴，也担心他们年岁渐长",
+      "explanation": "两种心情都来自对父母的关心。"
+    }
+  ]
+}

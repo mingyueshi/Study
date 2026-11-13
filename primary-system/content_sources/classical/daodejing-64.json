@@ -1,0 +1,391 @@
+{
+  "schema_version": 1,
+  "id": "daodejing-64",
+  "title": "道德经·第六十四章",
+  "attribution": "老子",
+  "level": "challenge",
+  "genre": "reasoning",
+  "skills": [
+    "meaning",
+    "referent",
+    "reason",
+    "contrast",
+    "retell"
+  ],
+  "curriculum": null,
+  "intro": "千里之行，始于足下。看见细小的开端，及时准备，事情快成时也保持认真。",
+  "background": "这是《道德经》德经·第六十四章。本章围绕「千里之行，始于足下」展开，可以先读原文，再对照译文，看看作者用了什么比方或对比。",
+  "editorial_note": "本馆用逐句译解帮助入门。读「道」「无为」等词时要看上下文；古代观念和理想化比方，可以边读边与家长讨论。",
+  "source": {
+    "work": "道德经（又名老子）",
+    "section": "德经·第六十四章",
+    "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#六十四章",
+    "note": "原文以本机简体《老子》为底本，统一引号，第七章移去括号异文提示。译文、词义和练习为本馆编写的入门读法，参考王弼注理解，不将不同底本混作同一文本。"
+  },
+  "source_ref": {
+    "locator": "/content/63",
+    "path": "poetry/simplified/诸子百家/老子.json",
+    "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+    "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+    "anchor_text": "其安易持，其未兆易谋；其脆易泮，其微易散。为之于未有，治之于未乱。合抱之木，生于毫末；九层之台，起于累土；千里之行，始于足下。为者败之，执者失之。是以圣人无为故无败，无执故无失。民之从事，常于几成而败之。慎终如始，则无败事。是以圣人欲不欲，不贵难得之货，学不学，复众人之所过，以辅万物之自然而不敢为。"
+  },
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "其安易持，其未兆易谋；其脆易泮，其微易散。",
+      "translation": "安定时容易维持，尚未显出迹象时容易筹划；脆弱时容易分解，细小时容易化散。",
+      "explanation": "读词小提示：「未兆」：还没有显出迹象；「泮」：分解、散开。",
+      "chunks": [
+        "其安易持，",
+        "其未兆易谋；",
+        "其脆易泮，",
+        "其微易散。"
+      ],
+      "hints": [
+        "未兆",
+        "泮"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "未兆",
+          "kind": "word",
+          "meaning": "还没有显出迹象。"
+        },
+        {
+          "id": "n2",
+          "quote": "泮",
+          "kind": "word",
+          "meaning": "分解、散开。",
+          "reading": "pàn"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第六十四章》第1句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#六十四章",
+        "source_ref": {
+          "locator": "/content/63",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "其安易持，其未兆易谋；其脆易泮，其微易散。"
+        }
+      }
+    },
+    {
+      "id": "s2",
+      "text": "为之于未有，治之于未乱。",
+      "translation": "在问题还没形成时就准备，在尚未混乱时就处理。",
+      "explanation": "读词小提示：「未有」：问题还没有形成时；「未乱」：还没有混乱时。",
+      "chunks": [
+        "为之于未有，",
+        "治之于未乱。"
+      ],
+      "hints": [
+        "未有",
+        "未乱"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "未有",
+          "kind": "word",
+          "meaning": "问题还没有形成时。"
+        },
+        {
+          "id": "n2",
+          "quote": "未乱",
+          "kind": "word",
+          "meaning": "还没有混乱时。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第六十四章》第2句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#六十四章",
+        "source_ref": {
+          "locator": "/content/63",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "为之于未有，治之于未乱。"
+        }
+      }
+    },
+    {
+      "id": "s3",
+      "text": "合抱之木，生于毫末；九层之台，起于累土；千里之行，始于足下。",
+      "translation": "合抱的大树长自细小萌芽，九层高台起于一层层土，千里远行从脚下开始。",
+      "explanation": "读词小提示：「毫末」：极细小的萌芽；「累土」：一层层堆积的土。",
+      "chunks": [
+        "合抱之木，",
+        "生于毫末；",
+        "九层之台，",
+        "起于累土；",
+        "千里之行，",
+        "始于足下。"
+      ],
+      "hints": [
+        "毫末",
+        "累土",
+        "足下"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "毫末",
+          "kind": "word",
+          "meaning": "极细小的萌芽。"
+        },
+        {
+          "id": "n2",
+          "quote": "累土",
+          "kind": "word",
+          "meaning": "一层层堆积的土。"
+        },
+        {
+          "id": "n3",
+          "quote": "足下",
+          "kind": "word",
+          "meaning": "脚下、眼前的一步。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第六十四章》第3句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#六十四章",
+        "source_ref": {
+          "locator": "/content/63",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "合抱之木，生于毫末；九层之台，起于累土；千里之行，始于足下。"
+        }
+      }
+    },
+    {
+      "id": "s4",
+      "text": "为者败之，执者失之。",
+      "translation": "强行摆布容易弄坏，固执占有容易失去。",
+      "explanation": "读词小提示：「执」：强抓、固执占有。",
+      "chunks": [
+        "为者败之，",
+        "执者失之。"
+      ],
+      "hints": [
+        "执"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "执",
+          "kind": "word",
+          "meaning": "强抓、固执占有。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第六十四章》第4句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#六十四章",
+        "source_ref": {
+          "locator": "/content/63",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "为者败之，执者失之。"
+        }
+      }
+    },
+    {
+      "id": "s5",
+      "text": "是以圣人无为故无败，无执故无失。",
+      "translation": "所以有智慧的人不强行干预，便少有失败；不固执占有，便少有失去。",
+      "explanation": "读词小提示：「执」：强抓、固执占有；「无为」：不强行摆布。",
+      "chunks": [
+        "是以圣人无为故无败，",
+        "无执故无失。"
+      ],
+      "hints": [
+        "执",
+        "无为"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "执",
+          "kind": "word",
+          "meaning": "强抓、固执占有。"
+        },
+        {
+          "id": "n2",
+          "quote": "无为",
+          "kind": "word",
+          "meaning": "不强行摆布。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第六十四章》第5句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#六十四章",
+        "source_ref": {
+          "locator": "/content/63",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "是以圣人无为故无败，无执故无失。"
+        }
+      }
+    },
+    {
+      "id": "s6",
+      "text": "民之从事，常于几成而败之。",
+      "translation": "人们做事，常在快成的时候失败。",
+      "explanation": "读词小提示：「几成」：快要完成。",
+      "chunks": [
+        "民之从事，",
+        "常于几成而败之。"
+      ],
+      "hints": [
+        "几成"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "几成",
+          "kind": "word",
+          "meaning": "快要完成。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第六十四章》第6句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#六十四章",
+        "source_ref": {
+          "locator": "/content/63",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "民之从事，常于几成而败之。"
+        }
+      }
+    },
+    {
+      "id": "s7",
+      "text": "慎终如始，则无败事。",
+      "translation": "结束时仍像开始时那样认真，就能减少功亏一篑。",
+      "explanation": "读词小提示：「慎终如始」：结束时也像开始时一样谨慎。",
+      "chunks": [
+        "慎终如始，",
+        "则无败事。"
+      ],
+      "hints": [
+        "慎终如始"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "慎终如始",
+          "kind": "word",
+          "meaning": "结束时也像开始时一样谨慎。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第六十四章》第7句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#六十四章",
+        "source_ref": {
+          "locator": "/content/63",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "慎终如始，则无败事。"
+        }
+      }
+    },
+    {
+      "id": "s8",
+      "text": "是以圣人欲不欲，不贵难得之货，学不学，复众人之所过，以辅万物之自然而不敢为。",
+      "translation": "因此，有智慧的人不追逐过多欲望，不把稀有财货看得过重，学习不逞机巧，帮助众人改过，辅助万物按自身条件发展，不任意强求。",
+      "explanation": "读词小提示：「辅」：辅助、帮助；「不敢为」：不敢凭私意强行改变。",
+      "chunks": [
+        "是以圣人欲不欲，",
+        "不贵难得之货，",
+        "学不学，",
+        "复众人之所过，",
+        "以辅万物之自然而不敢为。"
+      ],
+      "hints": [
+        "辅",
+        "不敢为"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "辅",
+          "kind": "word",
+          "meaning": "辅助、帮助。"
+        },
+        {
+          "id": "n2",
+          "quote": "不敢为",
+          "kind": "word",
+          "meaning": "不敢凭私意强行改变。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第六十四章》第8句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#六十四章",
+        "source_ref": {
+          "locator": "/content/63",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "是以圣人欲不欲，不贵难得之货，学不学，复众人之所过，以辅万物之自然而不敢为。"
+        }
+      }
+    }
+  ],
+  "overview": {
+    "sequence": [
+      "先看本章开头：安定时容易维持，尚未显出迹象时容易筹划；脆弱时容易分解，细小时容易化散。",
+      "看见细小的开端，及时准备，事情快成时也保持认真。",
+      "再回到结尾：因此，有智慧的人不追逐过多欲望，不把稀有财货看得过重，学习不逞机巧，帮助众人改过，辅助万物按自身条件发展，不任意强求。"
+    ],
+    "question": "这一章为什么可以叫作「千里之行，始于足下」？",
+    "answer": "看见细小的开端，及时准备，事情快成时也保持认真。可以引用本章开头或结尾的原句，说明你的依据。",
+    "takeaway": "看见细小的开端，及时准备，事情快成时也保持认真。"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "choice",
+      "sentence": "s1",
+      "skill": "meaning",
+      "prompt": "开头的「未兆」在这里怎样理解？",
+      "choices": [
+        "只顾自己，不留意他人的处境。",
+        "还没有显出迹象。",
+        "为了显示本领而处处炫耀。"
+      ],
+      "answer": 1,
+      "explanation": "把词放回原句看，「未兆」在本句中的意思是：还没有显出迹象。"
+    },
+    {
+      "id": "q2",
+      "type": "choice",
+      "sentence": "s8",
+      "skill": "reason",
+      "prompt": "读完「千里之行，始于足下」，哪一种理解更合适？",
+      "choices": [
+        "遇到问题不用观察，也不必行动。",
+        "只看名字，就能知道全部道理。",
+        "看见细小的开端，及时准备，事情快成时也保持认真。"
+      ],
+      "answer": 2,
+      "explanation": "看见细小的开端，及时准备，事情快成时也保持认真。"
+    },
+    {
+      "id": "q3",
+      "type": "selfcheck",
+      "sentence": "s8",
+      "skill": "retell",
+      "prompt": "选本章一句话，用自己的话解释，再说说它怎样帮助你理解「千里之行，始于足下」。",
+      "answer": "先说清原句中的对象和动作，再解释关键词。可以围绕这点来讲：看见细小的开端，及时准备，事情快成时也保持认真。说完后，回到原文找一句作依据。",
+      "explanation": "不必背诵译文。重点看词义是否放回本句、有没有原文依据，以及是否把古人的比方误当成不分条件的结论。"
+    }
+  ]
+}

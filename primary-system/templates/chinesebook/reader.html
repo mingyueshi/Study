@@ -11,6 +11,7 @@
       <p class="sidebar-note"><span id="kb-edition">{{ textbook }}</span><br><a href="{% url 'mathbook' %}">🔢 数学教材</a><br>看要点 · 听课文 · 打印复习</p>
       {% if book == '4a' %}
       <nav class="sidebar-note" aria-label="语文练习">
+        <a href="{% url 'classical' %}?curriculum=4a">古文精读馆 →</a><br>
         <a href="{% url 'sentence-hospital' %}">病句医院 →</a><br>
         <a href="{% url 'typo-clinic' %}">错别字诊所 →</a>
       </nav>

@@ -1,0 +1,258 @@
+{
+  "schema_version": 1,
+  "id": "daodejing-53",
+  "title": "道德经·第五十三章",
+  "attribution": "老子",
+  "level": "challenge",
+  "genre": "reasoning",
+  "skills": [
+    "meaning",
+    "referent",
+    "reason",
+    "contrast",
+    "retell"
+  ],
+  "curriculum": null,
+  "intro": "大道与捷径。把宫廷奢华和田仓荒空并列，批评只顾自己享受、不顾百姓生活的做法。",
+  "background": "这是《道德经》德经·第五十三章。本章围绕「大道与捷径」展开，可以先读原文，再对照译文，看看作者用了什么比方或对比。",
+  "editorial_note": "本馆用逐句译解帮助入门。读「道」「无为」等词时要看上下文；古代观念和理想化比方，可以边读边与家长讨论。",
+  "source": {
+    "work": "道德经（又名老子）",
+    "section": "德经·第五十三章",
+    "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#五十三章",
+    "note": "原文以本机简体《老子》为底本，统一引号，第七章移去括号异文提示。译文、词义和练习为本馆编写的入门读法，参考王弼注理解，不将不同底本混作同一文本。"
+  },
+  "source_ref": {
+    "locator": "/content/52",
+    "path": "poetry/simplified/诸子百家/老子.json",
+    "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+    "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+    "anchor_text": "使我介然有知，行於大道，唯施是畏。大道甚夷，而人好径。朝甚除，田甚芜，仓甚虚；服文采，带利剑，厌饮食，财货有餘；是为盗夸。非道也哉！"
+  },
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "使我介然有知，行於大道，唯施是畏。",
+      "translation": "假使我稍有认识，走在大道上，最担心的就是偏离。",
+      "explanation": "读词小提示：「介然」：稍微、一点点；「施」：这里指偏离正道。",
+      "chunks": [
+        "使我介然有知，",
+        "行於大道，",
+        "唯施是畏。"
+      ],
+      "hints": [
+        "介然",
+        "施"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "介然",
+          "kind": "word",
+          "meaning": "稍微、一点点。"
+        },
+        {
+          "id": "n2",
+          "quote": "施",
+          "kind": "word",
+          "meaning": "这里指偏离正道。",
+          "reading": "yí"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第五十三章》第1句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#五十三章",
+        "source_ref": {
+          "locator": "/content/52",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "使我介然有知，行於大道，唯施是畏。"
+        }
+      }
+    },
+    {
+      "id": "s2",
+      "text": "大道甚夷，而人好径。",
+      "translation": "大道很平坦，人们却喜欢走捷径。",
+      "explanation": "读词小提示：「夷」：平坦；「径」：小路、捷径。",
+      "chunks": [
+        "大道甚夷，",
+        "而人好径。"
+      ],
+      "hints": [
+        "夷",
+        "径"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "夷",
+          "kind": "word",
+          "meaning": "平坦。"
+        },
+        {
+          "id": "n2",
+          "quote": "径",
+          "kind": "word",
+          "meaning": "小路、捷径。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第五十三章》第2句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#五十三章",
+        "source_ref": {
+          "locator": "/content/52",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "大道甚夷，而人好径。"
+        }
+      }
+    },
+    {
+      "id": "s3",
+      "text": "朝甚除，田甚芜，仓甚虚；服文采，带利剑，厌饮食，财货有餘；是为盗夸。",
+      "translation": "宫廷修整华美，田地却荒芜，仓库却空虚；穿着华服，佩着利剑，享受美食，积有多余财货，这就像盗贼夸耀赃物。",
+      "explanation": "读词小提示：「朝」：朝廷、宫廷；「除」：整齐、修治得好。",
+      "chunks": [
+        "朝甚除，",
+        "田甚芜，",
+        "仓甚虚；",
+        "服文采，",
+        "带利剑，",
+        "厌饮食，",
+        "财货有餘；",
+        "是为盗夸。"
+      ],
+      "hints": [
+        "朝",
+        "除",
+        "芜"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "朝",
+          "kind": "word",
+          "meaning": "朝廷、宫廷。"
+        },
+        {
+          "id": "n2",
+          "quote": "除",
+          "kind": "word",
+          "meaning": "整齐、修治得好。"
+        },
+        {
+          "id": "n3",
+          "quote": "芜",
+          "kind": "word",
+          "meaning": "荒芜。"
+        },
+        {
+          "id": "n4",
+          "quote": "厌饮食",
+          "kind": "word",
+          "meaning": "饱食丰盛的饮食。"
+        },
+        {
+          "id": "n5",
+          "quote": "盗夸",
+          "kind": "word",
+          "meaning": "像盗贼一样夸耀掠取的财富。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第五十三章》第3句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#五十三章",
+        "source_ref": {
+          "locator": "/content/52",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "朝甚除，田甚芜，仓甚虚；服文采，带利剑，厌饮食，财货有餘；是为盗夸。"
+        }
+      }
+    },
+    {
+      "id": "s4",
+      "text": "非道也哉！",
+      "translation": "这难道不是背离道吗？",
+      "explanation": "读词小提示：「非道」：不合于道。",
+      "chunks": [
+        "非道也哉！"
+      ],
+      "hints": [
+        "非道"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "非道",
+          "kind": "word",
+          "meaning": "不合于道。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第五十三章》第4句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#五十三章",
+        "source_ref": {
+          "locator": "/content/52",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "使我介然有知，行於大道，唯施是畏。大道甚夷，而人好径。朝甚除，田甚芜，仓甚虚；服文采，带利剑，厌饮食，财货有餘；是为盗夸。非道也哉！"
+        }
+      }
+    }
+  ],
+  "overview": {
+    "sequence": [
+      "先看本章开头：假使我稍有认识，走在大道上，最担心的就是偏离。",
+      "把宫廷奢华和田仓荒空并列，批评只顾自己享受、不顾百姓生活的做法。",
+      "再回到结尾：这难道不是背离道吗？"
+    ],
+    "question": "这一章为什么可以叫作「大道与捷径」？",
+    "answer": "把宫廷奢华和田仓荒空并列，批评只顾自己享受、不顾百姓生活的做法。可以引用本章开头或结尾的原句，说明你的依据。",
+    "takeaway": "把宫廷奢华和田仓荒空并列，批评只顾自己享受、不顾百姓生活的做法。"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "choice",
+      "sentence": "s1",
+      "skill": "meaning",
+      "prompt": "开头的「介然」在这里怎样理解？",
+      "choices": [
+        "只顾自己，不留意他人的处境。",
+        "为了显示本领而处处炫耀。",
+        "稍微、一点点。"
+      ],
+      "answer": 2,
+      "explanation": "把词放回原句看，「介然」在本句中的意思是：稍微、一点点。"
+    },
+    {
+      "id": "q2",
+      "type": "choice",
+      "sentence": "s4",
+      "skill": "reason",
+      "prompt": "读完「大道与捷径」，哪一种理解更合适？",
+      "choices": [
+        "把宫廷奢华和田仓荒空并列，批评只顾自己享受、不顾百姓生活的做法。",
+        "只要一次失败，就不必再试。",
+        "遇到问题不用观察，也不必行动。"
+      ],
+      "answer": 0,
+      "explanation": "把宫廷奢华和田仓荒空并列，批评只顾自己享受、不顾百姓生活的做法。"
+    },
+    {
+      "id": "q3",
+      "type": "selfcheck",
+      "sentence": "s4",
+      "skill": "retell",
+      "prompt": "选本章一句话，用自己的话解释，再说说它怎样帮助你理解「大道与捷径」。",
+      "answer": "先说清原句中的对象和动作，再解释关键词。可以围绕这点来讲：把宫廷奢华和田仓荒空并列，批评只顾自己享受、不顾百姓生活的做法。说完后，回到原文找一句作依据。",
+      "explanation": "不必背诵译文。重点看词义是否放回本句、有没有原文依据，以及是否把古人的比方误当成不分条件的结论。"
+    }
+  ]
+}

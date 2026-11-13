@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "id": "daodejing-40",
+  "title": "道德经·第四十章",
+  "attribution": "老子",
+  "level": "challenge",
+  "genre": "reasoning",
+  "skills": [
+    "meaning",
+    "referent",
+    "reason",
+    "contrast",
+    "retell"
+  ],
+  "curriculum": null,
+  "intro": "返回与柔和。本章借有无、强弱的关系追问事物的根源，是哲学思考的简短表达。",
+  "background": "这是《道德经》德经·第四十章。本章围绕「返回与柔和」展开，可以先读原文，再对照译文，看看作者用了什么比方或对比。",
+  "editorial_note": "本馆用逐句译解帮助入门。读「道」「无为」等词时要看上下文；古代观念和理想化比方，可以边读边与家长讨论。",
+  "source": {
+    "work": "道德经（又名老子）",
+    "section": "德经·第四十章",
+    "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#四十章",
+    "note": "原文以本机简体《老子》为底本，统一引号，第七章移去括号异文提示。译文、词义和练习为本馆编写的入门读法，参考王弼注理解，不将不同底本混作同一文本。"
+  },
+  "source_ref": {
+    "locator": "/content/39",
+    "path": "poetry/simplified/诸子百家/老子.json",
+    "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+    "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+    "anchor_text": "反者道之动；弱者道之用。天下万物生於有，有生於无。"
+  },
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "反者道之动；弱者道之用。",
+      "translation": "返回与转化，是道运行的方式；柔和，是道发挥作用的方式。",
+      "explanation": "读词小提示：「反」：返回、向相反方向转化；「动」：运行、变化。",
+      "chunks": [
+        "反者道之动；",
+        "弱者道之用。"
+      ],
+      "hints": [
+        "反",
+        "动",
+        "弱"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "反",
+          "kind": "word",
+          "meaning": "返回、向相反方向转化。"
+        },
+        {
+          "id": "n2",
+          "quote": "动",
+          "kind": "word",
+          "meaning": "运行、变化。"
+        },
+        {
+          "id": "n3",
+          "quote": "弱",
+          "kind": "word",
+          "meaning": "柔和，不硬逞强。"
+        },
+        {
+          "id": "n4",
+          "quote": "用",
+          "kind": "word",
+          "meaning": "发挥作用。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第四十章》第1句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#四十章",
+        "source_ref": {
+          "locator": "/content/39",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "反者道之动；弱者道之用。"
+        }
+      }
+    },
+    {
+      "id": "s2",
+      "text": "天下万物生於有，有生於无。",
+      "translation": "天下万物从已经形成的存在中产生，而这些存在又以无形的状态为根源。",
+      "explanation": "这是古人关于有无的思考，不能替代对事物生成过程的科学研究。",
+      "chunks": [
+        "天下万物生於有，",
+        "有生於无。"
+      ],
+      "hints": [
+        "有",
+        "无"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "有",
+          "kind": "word",
+          "meaning": "已经显现、形成的事物。"
+        },
+        {
+          "id": "n2",
+          "quote": "无",
+          "kind": "word",
+          "meaning": "还没有具体形体的状态。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第四十章》第2句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#四十章",
+        "source_ref": {
+          "locator": "/content/39",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "天下万物生於有，有生於无。"
+        }
+      }
+    }
+  ],
+  "overview": {
+    "sequence": [
+      "先看本章开头：返回与转化，是道运行的方式；柔和，是道发挥作用的方式。",
+      "本章借有无、强弱的关系追问事物的根源，是哲学思考的简短表达。",
+      "再回到结尾：天下万物从已经形成的存在中产生，而这些存在又以无形的状态为根源。"
+    ],
+    "question": "这一章为什么可以叫作「返回与柔和」？",
+    "answer": "本章借有无、强弱的关系追问事物的根源，是哲学思考的简短表达。可以引用本章开头或结尾的原句，说明你的依据。",
+    "takeaway": "本章借有无、强弱的关系追问事物的根源，是哲学思考的简短表达。"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "choice",
+      "sentence": "s1",
+      "skill": "meaning",
+      "prompt": "开头的「反」在这里怎样理解？",
+      "choices": [
+        "只顾自己，不留意他人的处境。",
+        "返回、向相反方向转化。",
+        "为了显示本领而处处炫耀。"
+      ],
+      "answer": 1,
+      "explanation": "把词放回原句看，「反」在本句中的意思是：返回、向相反方向转化。"
+    },
+    {
+      "id": "q2",
+      "type": "choice",
+      "sentence": "s2",
+      "skill": "reason",
+      "prompt": "读完「返回与柔和」，哪一种理解更合适？",
+      "choices": [
+        "遇到问题不用观察，也不必行动。",
+        "只看名字，就能知道全部道理。",
+        "本章借有无、强弱的关系追问事物的根源，是哲学思考的简短表达。"
+      ],
+      "answer": 2,
+      "explanation": "本章借有无、强弱的关系追问事物的根源，是哲学思考的简短表达。"
+    },
+    {
+      "id": "q3",
+      "type": "selfcheck",
+      "sentence": "s2",
+      "skill": "retell",
+      "prompt": "选本章一句话，用自己的话解释，再说说它怎样帮助你理解「返回与柔和」。",
+      "answer": "先说清原句中的对象和动作，再解释关键词。可以围绕这点来讲：本章借有无、强弱的关系追问事物的根源，是哲学思考的简短表达。说完后，回到原文找一句作依据。",
+      "explanation": "不必背诵译文。重点看词义是否放回本句、有没有原文依据，以及是否把古人的比方误当成不分条件的结论。"
+    }
+  ]
+}

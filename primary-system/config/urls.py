@@ -30,6 +30,7 @@ urlpatterns = [
     path('geography/', include('geography.urls')),
     path('astronomy/', include('astronomy.urls')),
     path('literature/', literature_study, name='literature-study'),
+    path('classical/', include('classical.urls')),
     path('couplets/', couplets.workshop, name='couplets'),
     path('hanzi-evolution/', hanzi_evolution, name='hanzi-evolution'),
     path('science/', include('science.urls')),

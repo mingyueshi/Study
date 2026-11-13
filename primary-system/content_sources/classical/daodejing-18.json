@@ -1,0 +1,225 @@
+{
+  "schema_version": 1,
+  "id": "daodejing-18",
+  "title": "道德经·第十八章",
+  "attribution": "老子",
+  "level": "challenge",
+  "genre": "reasoning",
+  "skills": [
+    "meaning",
+    "referent",
+    "reason",
+    "contrast",
+    "retell"
+  ],
+  "curriculum": null,
+  "intro": "从问题反看提醒。本章把失去根本与后来强调的名目并列，追问真情和好行为为什么变得稀少。",
+  "background": "这是《道德经》道经·第十八章。本章围绕「从问题反看提醒」展开，可以先读原文，再对照译文，看看作者用了什么比方或对比。",
+  "editorial_note": "本馆用逐句译解帮助入门。读「道」「无为」等词时要看上下文；古代观念和理想化比方，可以边读边与家长讨论。",
+  "source": {
+    "work": "道德经（又名老子）",
+    "section": "道经·第十八章",
+    "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#十八章",
+    "note": "原文以本机简体《老子》为底本，统一引号，第七章移去括号异文提示。译文、词义和练习为本馆编写的入门读法，参考王弼注理解，不将不同底本混作同一文本。"
+  },
+  "source_ref": {
+    "locator": "/content/17",
+    "path": "poetry/simplified/诸子百家/老子.json",
+    "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+    "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+    "anchor_text": "大道废，有仁义；智慧出，有大偽；六亲不和，有孝慈；国家昏乱，有忠臣。"
+  },
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "大道废，有仁义；",
+      "translation": "根本道理被丢开，仁义的名目才特别突出；",
+      "explanation": "读词小提示：「大道废」：共同遵循的根本道理被丢开。",
+      "chunks": [
+        "大道废，",
+        "有仁义；"
+      ],
+      "hints": [
+        "大道废"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "大道废",
+          "kind": "word",
+          "meaning": "共同遵循的根本道理被丢开。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第十八章》第1句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#十八章",
+        "source_ref": {
+          "locator": "/content/17",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "大道废，有仁义；智慧出，有大偽；六亲不和，有孝慈；国家昏乱，有忠臣。"
+        }
+      }
+    },
+    {
+      "id": "s2",
+      "text": "智慧出，有大偽；",
+      "translation": "机巧智慧被炫示，严重的虚伪也出现；",
+      "explanation": "读词小提示：「大偽」：严重的虚伪。",
+      "chunks": [
+        "智慧出，",
+        "有大偽；"
+      ],
+      "hints": [
+        "大偽"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "大偽",
+          "kind": "word",
+          "meaning": "严重的虚伪。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第十八章》第2句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#十八章",
+        "source_ref": {
+          "locator": "/content/17",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "大道废，有仁义；智慧出，有大偽；六亲不和，有孝慈；国家昏乱，有忠臣。"
+        }
+      }
+    },
+    {
+      "id": "s3",
+      "text": "六亲不和，有孝慈；",
+      "translation": "亲属之间不和，才格外称说孝与慈；",
+      "explanation": "读词小提示：「六亲」：泛指亲属；「孝慈」：子女的敬爱与长辈的慈爱。",
+      "chunks": [
+        "六亲不和，",
+        "有孝慈；"
+      ],
+      "hints": [
+        "六亲",
+        "孝慈"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "六亲",
+          "kind": "word",
+          "meaning": "泛指亲属。"
+        },
+        {
+          "id": "n2",
+          "quote": "孝慈",
+          "kind": "word",
+          "meaning": "子女的敬爱与长辈的慈爱。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第十八章》第3句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#十八章",
+        "source_ref": {
+          "locator": "/content/17",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "大道废，有仁义；智慧出，有大偽；六亲不和，有孝慈；国家昏乱，有忠臣。"
+        }
+      }
+    },
+    {
+      "id": "s4",
+      "text": "国家昏乱，有忠臣。",
+      "translation": "国家混乱，才突出忠臣。",
+      "explanation": "这不是说关爱、诚信没有用，而是追问为什么只剩口号、缺少实际行动。",
+      "chunks": [
+        "国家昏乱，",
+        "有忠臣。"
+      ],
+      "hints": [
+        "昏乱",
+        "忠臣"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "昏乱",
+          "kind": "word",
+          "meaning": "政治混乱、是非不明。"
+        },
+        {
+          "id": "n2",
+          "quote": "忠臣",
+          "kind": "word",
+          "meaning": "尽心负责的臣子。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第十八章》第4句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#十八章",
+        "source_ref": {
+          "locator": "/content/17",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "大道废，有仁义；智慧出，有大偽；六亲不和，有孝慈；国家昏乱，有忠臣。"
+        }
+      }
+    }
+  ],
+  "overview": {
+    "sequence": [
+      "先看本章开头：根本道理被丢开，仁义的名目才特别突出；",
+      "本章把失去根本与后来强调的名目并列，追问真情和好行为为什么变得稀少。",
+      "再回到结尾：国家混乱，才突出忠臣。"
+    ],
+    "question": "这一章为什么可以叫作「从问题反看提醒」？",
+    "answer": "本章把失去根本与后来强调的名目并列，追问真情和好行为为什么变得稀少。可以引用本章开头或结尾的原句，说明你的依据。",
+    "takeaway": "本章把失去根本与后来强调的名目并列，追问真情和好行为为什么变得稀少。"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "choice",
+      "sentence": "s1",
+      "skill": "meaning",
+      "prompt": "开头的「大道废」在这里怎样理解？",
+      "choices": [
+        "共同遵循的根本道理被丢开。",
+        "只顾自己，不留意他人的处境。",
+        "为了显示本领而处处炫耀。"
+      ],
+      "answer": 0,
+      "explanation": "把词放回原句看，「大道废」在本句中的意思是：共同遵循的根本道理被丢开。"
+    },
+    {
+      "id": "q2",
+      "type": "choice",
+      "sentence": "s4",
+      "skill": "reason",
+      "prompt": "读完「从问题反看提醒」，哪一种理解更合适？",
+      "choices": [
+        "只有大声夸耀自己，才能显得有本领。",
+        "本章把失去根本与后来强调的名目并列，追问真情和好行为为什么变得稀少。",
+        "只要一次失败，就不必再试。"
+      ],
+      "answer": 1,
+      "explanation": "本章把失去根本与后来强调的名目并列，追问真情和好行为为什么变得稀少。"
+    },
+    {
+      "id": "q3",
+      "type": "selfcheck",
+      "sentence": "s4",
+      "skill": "retell",
+      "prompt": "选本章一句话，用自己的话解释，再说说它怎样帮助你理解「从问题反看提醒」。",
+      "answer": "先说清原句中的对象和动作，再解释关键词。可以围绕这点来讲：本章把失去根本与后来强调的名目并列，追问真情和好行为为什么变得稀少。说完后，回到原文找一句作依据。",
+      "explanation": "不必背诵译文。重点看词义是否放回本句、有没有原文依据，以及是否把古人的比方误当成不分条件的结论。"
+    }
+  ]
+}

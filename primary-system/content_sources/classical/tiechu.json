@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "id": "tiechu",
+  "title": "铁杵成针",
+  "attribution": "祝穆《方舆胜览》",
+  "level": "story",
+  "genre": "people",
+  "skills": ["meaning", "referent", "omission", "reason", "retell"],
+  "curriculum": null,
+  "intro": "老妇人的一句话，让李白的做法发生了什么变化？对照「弃去」与「还卒业」。",
+  "background": "故事出自宋代地理著作《方舆胜览》关于磨针溪的记载。李太白就是李白。",
+  "editorial_note": "开头的「世传」说明这是流传的故事。阅读时保留这个提示，不把它当作已核实的李白生平。",
+  "source": {"work": "《方舆胜览》", "section": "《眉州》磨针溪条教学节选", "url": "https://zh.wikisource.org/wiki/方輿勝覽", "note": "采用常见教学短选段，保留「世传」「还卒业」等文字；繁体转简体并加标点，未登记教材册次。"},
+  "sentences": [
+    {"id": "s1", "text": "磨针溪，在象耳山下。", "chunks": ["磨针溪，", "在象耳山下。"], "translation": "磨针溪在象耳山脚下。", "explanation": "地理书先交代地点，接着讲与这个地方有关的故事。", "hints": ["磨针溪", "象耳山"], "notes": [{"id": "xi", "quote": "溪", "kind": "word", "meaning": "小河流。这里是地名「磨针溪」的一部分。"}]},
+    {"id": "s2", "text": "世传李太白读书山中，未成，弃去。", "chunks": ["世传", "李太白读书山中，", "未成，", "弃去。"], "translation": "世代相传，李白在山中读书，学业还没有完成，就放弃离开了。", "explanation": "注意「世传」是在说明消息的来历，「弃去」是人物最初的选择。", "hints": ["世传", "未成", "弃去"], "notes": [
+      {"id": "shichuan", "quote": "世传", "kind": "word", "meaning": "世代相传，提示下面说的是流传的故事。"},
+      {"id": "qiqu", "quote": "弃去", "kind": "word", "meaning": "放弃学习，离开。「去」在这里是离开。"}
+    ]},
+    {"id": "s3", "text": "过是溪，逢老媪方磨铁杵。", "chunks": ["过是溪，", "逢老媪", "方磨铁杵。"], "translation": "他经过这条小溪，遇到一位老妇人正在磨一根铁棒。", "explanation": "找出人物与动作：李白经过，老妇人正在磨。", "supplement": "「过是溪」前省略的主语是李太白。", "hints": ["过是溪", "老媪", "铁杵"], "notes": [
+      {"id": "shi", "quote": "是", "kind": "referent", "meaning": "这。", "refers_to": "开头提到的磨针溪", "reason": "故事仍在同一地点展开，这里的「是」指前文的小溪。"},
+      {"id": "ao", "quote": "老媪", "kind": "word", "meaning": "老妇人。", "reading": "lǎo ǎo"},
+      {"id": "fang", "quote": "方", "kind": "word", "meaning": "正在。"},
+      {"id": "chu", "quote": "铁杵", "kind": "word", "meaning": "铁棒，杵原是舂捣用的棒状工具。", "reading": "tiě chǔ"}
+    ]},
+    {"id": "s4", "text": "问之，曰：「欲作针。」", "chunks": ["问之，", "曰：", "「欲作针。」"], "translation": "李白问她在做什么，老妇人说：「想把它磨成针。」", "explanation": "短短一句里，说话的人发生了变化，要借助上下文补全。", "supplement": "问的是李白，回答的是老妇人；「欲作针」省略了想把铁杵磨成针。", "hints": ["问之", "欲作针"], "notes": [
+      {"id": "zhi", "quote": "之", "kind": "referent", "meaning": "代替被询问的人。", "refers_to": "老妇人", "reason": "前面李白遇到老妇人，接着向她发问。"},
+      {"id": "yu", "quote": "欲", "kind": "word", "meaning": "想要。"}
+    ]},
+    {"id": "s5", "text": "太白感其意，还卒业。", "chunks": ["太白感其意，", "还卒业。"], "translation": "李白被她的意志打动，回去完成了学业。", "explanation": "「还卒业」与前面的「弃去」相对照，写出故事中李白的转变。", "hints": ["感其意", "还卒业"], "notes": [
+      {"id": "qi", "quote": "其", "kind": "referent", "meaning": "她的。", "refers_to": "老妇人", "reason": "李白刚听完她磨杵作针的想法，被她坚持做事的意志打动。"},
+      {"id": "huan", "quote": "还", "kind": "word", "meaning": "返回。这里读 huán。", "reading": "huán"},
+      {"id": "zuye", "quote": "卒业", "kind": "word", "meaning": "完成学业。「卒」是完成。"}
+    ]}
+  ],
+  "overview": {"sequence": ["流传的故事说李白曾放弃学习。", "他遇到磨铁杵的老妇人，听说她想磨成针。", "他受到触动，回去完成学业。"], "question": "李白前后的做法有什么不同？用原文说明。", "answer": "起初是「未成，弃去」，后来是「还卒业」；中间老妇人的坚持触动了他。", "takeaway": "读人物转变，可以找前后的动作，再寻找变化的原因。"},
+  "questions": [
+    {"id": "q1", "type": "choice", "skill": "meaning", "sentence": "s3", "prompt": "「方磨铁杵」的「方」是什么意思？", "choices": ["方向", "方形", "正在"], "answer": 2, "explanation": "这里描述遇见老妇人时她正在做的事，「方」表示正在。"},
+    {"id": "q2", "type": "choice", "skill": "omission", "sentence": "s4", "prompt": "「问之，曰」中的问与答分别是谁？", "choices": ["都是李白自己说", "李白问，老妇人答", "老妇人问，李白答"], "answer": 1, "explanation": "先有李白遇见磨杵的老妇人，再有询问与回答，要顺着情境补全。"},
+    {"id": "q3", "type": "choice", "skill": "reason", "sentence": "s2", "prompt": "哪两个字提示这是流传的故事？", "choices": ["世传", "山中", "未成"], "answer": 0, "explanation": "「世传」说明故事是世代流传的，复述时也要保留这层意思。"},
+    {"id": "q4", "type": "selfcheck", "skill": "retell", "sentence": "s5", "prompt": "用「相传」开头，讲讲李白做法的变化。", "answer": "相传李白曾放弃学业，遇到磨铁杵的老妇人后，被她的意志打动，就回去完成了学业。", "explanation": "检查是否说清前后变化、转变的原因，并保留「相传」这个来源提示。"}
+  ]
+}

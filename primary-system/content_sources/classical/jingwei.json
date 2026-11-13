@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "id": "jingwei",
+  "title": "精卫填海",
+  "attribution": "《山海经》",
+  "level": "starter",
+  "genre": "myth",
+  "skills": ["meaning", "referent", "retell"],
+  "curriculum": {"book": "4a", "label": "统编版四上"},
+  "source_ref": {"version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native", "path": "poetry/simplified/史书典籍/山海经.json", "locator": "/content/2", "sha256": "a9298b4a7a8e1bc9602a0e7f0cd461f5b8e54dd6bd088dca8d2b338b37d91187", "anchor_text": "名曰女娃，女娃游于东海，溺而不返"},
+  "intro": "小小的精卫鸟，为什么不停地往海里投木石？抓住「故」字，把故事前后连起来。",
+  "background": "《山海经》记下了许多山川、奇异生物和神话。精卫的故事出自《北山经》，这里读的是课文选段。",
+  "editorial_note": "神话用想象讲故事。女娃化鸟是神话情节；读时体会人物的心愿和坚持。",
+  "source": {"work": "《山海经》", "section": "《北山经》精卫条节选", "url": "https://zh.wikisource.org/wiki/山海經/北山經", "note": "原文沿用本项目四上教材的必背古诗文选段，引号样式统一；逐句译文和阅读提示为本专题编写。"},
+  "sentences": [
+    {"id": "s1", "text": "炎帝之少女，名曰女娃。", "chunks": ["炎帝之少女，", "名曰女娃。"], "translation": "炎帝的小女儿，名字叫女娃。", "explanation": "先认清人物。「少女」要拆成「小女儿」来理解。", "hints": ["炎帝", "女娃"], "notes": [
+      {"id": "zhi", "quote": "之", "kind": "word", "meaning": "这里相当于「的」，连接炎帝和他的女儿。"},
+      {"id": "shaonv", "quote": "少女", "kind": "word", "meaning": "小女儿。这里的「少」读 shào。", "reading": "shào nǚ"},
+      {"id": "yue", "quote": "曰", "kind": "word", "meaning": "叫作。这里用来介绍名字。", "reading": "yuē"}
+    ]},
+    {"id": "s2", "text": "女娃游于东海，溺而不返，故为精卫，", "chunks": ["女娃游于东海，", "溺而不返，", "故为精卫，"], "translation": "女娃到东海游玩，溺水身亡，没有回来，因此化成了精卫鸟。", "explanation": "「故」把前面的遭遇与后面的变化连在一起。这一句接着下一句读。", "hints": ["东海", "故", "精卫"], "notes": [
+      {"id": "yu", "quote": "于", "kind": "word", "meaning": "在。结合前后语序，理解为在东海游玩。"},
+      {"id": "ni", "quote": "溺", "kind": "word", "meaning": "溺水，这里指溺水身亡。", "reading": "nì"},
+      {"id": "gu", "quote": "故", "kind": "word", "meaning": "因此，所以。它提示前后有因果关系。"},
+      {"id": "wei", "quote": "为", "kind": "word", "meaning": "成为，这里指化为精卫鸟。", "reading": "wéi"}
+    ]},
+    {"id": "s3", "text": "常衔西山之木石，以堙于东海。", "chunks": ["常衔", "西山之木石，", "以堙于东海。"], "translation": "精卫常常衔来西山的树枝和石块，用来填塞东海。", "explanation": "留意「常」：这件事反复发生，写出了精卫坚持不懈的样子。", "supplement": "这句话没有再写主语，做这些事的是前一句提到的精卫。", "hints": ["常衔", "木石", "堙"], "notes": [
+      {"id": "xian", "quote": "衔", "kind": "word", "meaning": "用嘴叼着。", "reading": "xián"},
+      {"id": "zhi", "quote": "之", "kind": "word", "meaning": "这里相当于「的」，西山之木石就是西山的树枝和石块。"},
+      {"id": "yin", "quote": "堙", "kind": "word", "meaning": "填塞。", "reading": "yīn"}
+    ]}
+  ],
+  "overview": {"sequence": ["女娃是炎帝的小女儿。", "女娃在东海溺水，化为精卫鸟。", "精卫不断衔来木石，想要填平东海。"], "question": "哪一个字最能让你看出精卫一直在做这件事？", "answer": "「常」字。「常衔」说明衔木石是反复进行的，可以据此体会它的坚持。", "takeaway": "讲神话时，既要讲清神奇的变化，也要抓住原文中的动作词。"},
+  "questions": [
+    {"id": "q1", "type": "choice", "skill": "meaning", "sentence": "s1", "prompt": "这里的「少女」是什么意思？", "choices": ["年轻的女子", "炎帝的小女儿", "很少说话的女孩"], "answer": 1, "explanation": "「炎帝之少女」介绍女娃与炎帝的关系，这里的「少女」指小女儿。"},
+    {"id": "q2", "type": "choice", "skill": "meaning", "sentence": "s2", "prompt": "「故为精卫」中的「故」把前后怎样连起来？", "choices": ["先说原因，再说结果", "先说今天，再说明天", "表示两个人一起行动"], "answer": 0, "explanation": "前面说女娃溺水不返，后面说化为精卫，「故」相当于因此。"},
+    {"id": "q3", "type": "choice", "skill": "referent", "sentence": "s3", "prompt": "「常衔西山之木石」写的是谁的行动？", "choices": ["炎帝", "西山", "精卫"], "answer": 2, "explanation": "沿着上一句找人物，最近出现并继续行动的是精卫。这里省略了主语。"},
+    {"id": "q4", "type": "selfcheck", "skill": "retell", "sentence": "s3", "prompt": "用自己的话讲故事，并用一个原文字说明精卫的特点。", "answer": "女娃是炎帝的小女儿，在东海溺水后化为精卫。它常衔木石填海。「常」写出了它的坚持。", "explanation": "检查自己有没有讲到人物、变化和填海行动，并找到了原文依据。表达可以不同。"}
+  ]
+}

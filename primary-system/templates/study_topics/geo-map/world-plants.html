@@ -1,0 +1,56 @@
+{% extends "study_topics/page.html" %}
+{% load static %}
+{# 由 scripts/build_study_topics.py 生成。 #}
+{% block title %}世界植物地图 · 地理图谱 · 乐学堂{% endblock %}
+{% block study_assets %}
+<link rel="stylesheet" href="{% static 'study_topics/geo-map/styles.css' %}">
+<link rel="stylesheet" href="{% static 'study_topics/geo-map/animals.css' %}">
+<script src="{% static 'study_topics/geo-map/world-geo.js' %}" defer></script>
+<script src="{% static 'study_topics/geo-map/shared.js' %}" defer></script>
+<script src="{% static 'study_topics/geo-map/world-plants-data.js' %}" defer></script>
+<script src="{% static 'study_topics/geo-map/animals-app.js' %}" defer></script>
+{% endblock %}
+{% block study_content %}
+<div class="study-atlas">
+<div class="gm-wildlife gm-flora" data-life="plant" data-map="world">
+    <header class="gm-wildlife-header">
+      <div>
+        <p class="gm-wildlife-kicker">地理图谱 <span aria-hidden="true">／</span> 野外观察</p>
+        <h1>世界植物地图</h1>
+        <p>从美洲的巨杉到非洲的猴面包树，再到南极的小草，看看七大洲的植物怎样生长。</p>
+      </div>
+      <nav class="gm-wildlife-links" aria-label="地图切换">
+        <a href="{% url 'geography-atlas' %}">图谱首页</a>
+        <a href="world.html">← 返回世界地图</a>
+        <a href="plants.html">去看中国植物 →</a>
+      </nav>
+    </header>
+
+    <div class="gm-wildlife-tools" hidden>
+      <div>
+        <h2 id="gm-habitat-title">按生长环境找</h2>
+        <div class="gm-habitat-filters" role="group" aria-labelledby="gm-habitat-title"></div>
+      </div>
+    </div>
+
+    <div class="gm-wildlife-workspace" data-sidebar-label="植物档案" hidden>
+      <div class="gm-animal-explore">
+        <figure class="gm-wildlife-map">
+          <svg id="gm-animal-map" role="group" aria-label="世界植物代表分布地点示意地图"></svg>
+          <figcaption><span id="gm-animal-count"></span>颜色表示生长环境，引线末端表示代表地点；并不是完整分布范围。</figcaption>
+        </figure>
+        <section class="gm-animal-catalog" aria-labelledby="gm-animal-choices-title">
+          <div class="gm-animal-catalog-head">
+            <div><h2 id="gm-animal-choices-title">选择植物</h2><p>点一张照片，找分布、认叶花，看看它怎样适应环境。</p></div>
+            <a href="#gm-animal-map">回到地图 ↑</a>
+          </div>
+          <div id="gm-animal-picker" role="group" aria-labelledby="gm-animal-choices-title"></div>
+        </section>
+      </div>
+      <article id="gm-animal-card" aria-labelledby="gm-animal-name"></article>
+    </div>
+    <noscript><p class="gm-notice">请启用 JavaScript 查看植物地图和照片。</p></noscript>
+  </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "id": "xueyi",
+  "title": "学弈",
+  "attribution": "孟子及其弟子《孟子》",
+  "level": "challenge",
+  "genre": "reasoning",
+  "skills": ["meaning", "referent", "reason", "contrast", "retell"],
+  "curriculum": null,
+  "source_ref": {"version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native", "path": "poetry/simplified/儒家经典/孟子.json", "locator": "/content/149", "sha256": "29070df94a95d480337aae8a7944ab87eda827ac502317d2fa7b3066674c2c6e", "anchor_text": "弈秋，通国之善弈者也。"},
+  "intro": "同一位老师教两个人，学习结果为什么不同？把两人的注意力放在一起比较。",
+  "background": "选段出自《孟子·告子上》，用学棋的例子说明专心的重要。弈秋是擅长下棋的人。",
+  "editorial_note": "选段从「弈秋」开始，保留「惟弈秋之为听」「为是其智弗若与」等句式，先在语境中理解。",
+  "source": {"work": "《孟子》", "section": "《告子上》第九章学弈选段", "url": "https://zh.wikisource.org/wiki/孟子/告子上", "note": "节选「弈秋，通国之善弈者也」至「非然也」，繁体转简体并加标点；未登记教材册次。"},
+  "sentences": [
+    {"id": "s1", "text": "弈秋，通国之善弈者也。", "chunks": ["弈秋，", "通国之善弈者也。"], "translation": "弈秋是全国擅长下围棋的人。", "explanation": "先说明老师棋艺高，为后面比较两位学生作准备。", "hints": ["弈秋", "善弈"], "notes": [
+      {"id": "yi", "quote": "弈", "kind": "word", "meaning": "下围棋。弈秋是以善弈著称的秋。", "reading": "yì"},
+      {"id": "tongguo", "quote": "通国", "kind": "word", "meaning": "全国。"},
+      {"id": "shan", "quote": "善", "kind": "word", "meaning": "擅长。"}
+    ]},
+    {"id": "s2", "text": "使弈秋诲二人弈，其一人专心致志，惟弈秋之为听；", "chunks": ["使弈秋", "诲二人弈，", "其一人专心致志，", "惟弈秋之为听；"], "translation": "让弈秋教两个人下棋，其中一个人专心致志，只听弈秋的教导。", "explanation": "先写第一人的学习状态：注意力放在老师的教导上。这一句与下一句对照着读。", "hints": ["诲二人", "专心致志", "惟"], "notes": [
+      {"id": "hui", "quote": "诲", "kind": "word", "meaning": "教导。", "reading": "huì"},
+      {"id": "qi", "quote": "其", "kind": "referent", "meaning": "其中的。", "refers_to": "弈秋教的两个人", "reason": "上文刚说「二人」，这里从这两人中先说一个。"},
+      {"id": "wei", "quote": "惟弈秋之为听", "kind": "word", "meaning": "只听弈秋的教导。整个短语一起理解，不逐字硬拼。"}
+    ]},
+    {"id": "s3", "text": "一人虽听之，一心以为有鸿鹄将至，思援弓缴而射之。", "chunks": ["一人虽听之，", "一心以为", "有鸿鹄将至，", "思援弓缴而射之。"], "translation": "另一个人虽然也听着教导，心里却总想着有天鹅要飞来，想拉弓搭箭把它射下来。", "explanation": "看似也在听，心思却跑到了别处。「虽」提醒我们往后看这种转折。", "hints": ["虽听之", "鸿鹄", "弓缴"], "notes": [
+      {"id": "zhi-listen", "quote": "之", "occurrence": 1, "kind": "referent", "meaning": "代替正在听的内容。", "refers_to": "弈秋的教导", "reason": "「听」的对象是老师的教导，后文才出现鸿鹄。"},
+      {"id": "honghu", "quote": "鸿鹄", "kind": "word", "meaning": "天鹅。", "reading": "hóng hú"},
+      {"id": "jiao", "quote": "缴", "kind": "word", "meaning": "系在箭上的丝绳，这里连同弓箭一起理解。", "reading": "zhuó"},
+      {"id": "zhi-bird", "quote": "之", "occurrence": 2, "kind": "referent", "meaning": "代替想要射的目标。", "refers_to": "鸿鹄", "reason": "紧接着「鸿鹄将至」理解，射的对象是想象中飞来的鸿鹄。"}
+    ]},
+    {"id": "s4", "text": "虽与之俱学，弗若之矣。", "chunks": ["虽与之俱学，", "弗若之矣。"], "translation": "虽然他和那个专心的人一起学习，学得却不如那个人。", "explanation": "这里说的是第二个人的结果，两处「之」都指专心学习的人。", "hints": ["俱学", "弗若"], "notes": [
+      {"id": "zhi-first", "quote": "之", "occurrence": 1, "kind": "referent", "meaning": "指与他一起学的人。", "refers_to": "专心致志的第一个人", "reason": "这句延续第二个人，与他对照的是第一个专心的人。"},
+      {"id": "ju", "quote": "俱", "kind": "word", "meaning": "一起。"},
+      {"id": "zhi-second", "quote": "之", "occurrence": 2, "kind": "referent", "meaning": "指用来比较的那个人。", "refers_to": "专心致志的第一个人", "reason": "「弗若」是不如，比较的是两人的学习结果。"}
+    ]},
+    {"id": "s5", "text": "为是其智弗若与？曰：非然也。", "chunks": ["为是其智", "弗若与？", "曰：", "非然也。"], "translation": "是因为他的智慧不如另一个人吗？回答是：不是这样的。", "explanation": "结尾先问再答，排除天生不聪明的解释，把我们引回学习是否专心。", "hints": ["智弗若", "非然"], "notes": [
+      {"id": "wei", "quote": "为", "kind": "word", "meaning": "因为。这里读 wèi。", "reading": "wèi"},
+      {"id": "qi", "quote": "其", "kind": "referent", "meaning": "他的。", "refers_to": "学习时想着鸿鹄的第二个人", "reason": "问题针对前面学得不如别人的那个人。"},
+      {"id": "yu", "quote": "与", "kind": "word", "meaning": "同「欤」，放在句末表示疑问。", "reading": "yú"},
+      {"id": "ran", "quote": "然", "kind": "word", "meaning": "这样。非然也就是不是这样。"}
+    ]}
+  ],
+  "overview": {"sequence": ["弈秋教两个人下棋。", "一人专心听讲，一人想着射鸿鹄。", "两人学得不同，文章把原因引向是否专心。"], "question": "比较两个人时，哪些条件相同，哪里不同？", "answer": "他们跟着同一位老师一起学习；不同的是注意力，一个专心听，一个想着别的事。选段用这个对照说明专心的重要。", "takeaway": "比较时先找相同条件，再找差别，并留意结尾怎样解释。"},
+  "questions": [
+    {"id": "q1", "type": "choice", "skill": "meaning", "sentence": "s1", "prompt": "「善弈」的「善」是什么意思？", "choices": ["善良", "擅长", "容易"], "answer": 1, "explanation": "这里在介绍弈秋的棋艺，「善弈」就是擅长下围棋。"},
+    {"id": "q2", "type": "choice", "skill": "referent", "sentence": "s3", "prompt": "「虽听之」与「而射之」中的「之」，分别指什么？", "choices": ["弈秋的教导、鸿鹄", "鸿鹄、弈秋的教导", "都指鸿鹄"], "answer": 0, "explanation": "要分别看动作：听的是教导，射的是鸿鹄，同一句里的同一个字也可能指不同内容。"},
+    {"id": "q3", "type": "choice", "skill": "reason", "sentence": "s5", "prompt": "结尾「非然也」否定的是哪种解释？", "choices": ["两人同一位老师", "专心听有帮助", "第二个人学不好是智慧不如人"], "answer": 2, "explanation": "前一句问是否智慧不如人，回答「不是这样」，把原因引回学习态度。"},
+    {"id": "q4", "type": "selfcheck", "skill": "retell", "sentence": "s4", "prompt": "用对比的方法概括两个人的学习过程与结果。", "answer": "两人同学于弈秋，一人专心听讲，另一人惦记射鸿鹄。后者学得不如前者，文章说明学习要专心。", "explanation": "检查是否交代共同条件、不同表现和学习结果。"}
+  ]
+}

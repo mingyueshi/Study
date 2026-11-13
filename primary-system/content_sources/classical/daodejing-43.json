@@ -1,0 +1,215 @@
+{
+  "schema_version": 1,
+  "id": "daodejing-43",
+  "title": "道德经·第四十三章",
+  "attribution": "老子",
+  "level": "challenge",
+  "genre": "reasoning",
+  "skills": [
+    "meaning",
+    "referent",
+    "reason",
+    "contrast",
+    "retell"
+  ],
+  "curriculum": null,
+  "intro": "柔和的作用。本章以柔入坚、以无入隙的反差说理，提醒人看到不靠强硬也能发挥的作用。",
+  "background": "这是《道德经》德经·第四十三章。本章围绕「柔和的作用」展开，可以先读原文，再对照译文，看看作者用了什么比方或对比。",
+  "editorial_note": "本馆用逐句译解帮助入门。读「道」「无为」等词时要看上下文；古代观念和理想化比方，可以边读边与家长讨论。",
+  "source": {
+    "work": "道德经（又名老子）",
+    "section": "德经·第四十三章",
+    "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#四十三章",
+    "note": "原文以本机简体《老子》为底本，统一引号，第七章移去括号异文提示。译文、词义和练习为本馆编写的入门读法，参考王弼注理解，不将不同底本混作同一文本。"
+  },
+  "source_ref": {
+    "locator": "/content/42",
+    "path": "poetry/simplified/诸子百家/老子.json",
+    "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+    "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+    "anchor_text": "天下之至柔，驰骋天下之至坚。无有入无间，吾是以知无为之有益。不言之教，无为之益，天下希及之。"
+  },
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "天下之至柔，驰骋天下之至坚。",
+      "translation": "天下极柔软的东西，能在极坚硬的东西中运行。",
+      "explanation": "读词小提示：「至柔」：极柔软的事物；「至坚」：极坚硬的事物。",
+      "chunks": [
+        "天下之至柔，",
+        "驰骋天下之至坚。"
+      ],
+      "hints": [
+        "至柔",
+        "至坚"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "至柔",
+          "kind": "word",
+          "meaning": "极柔软的事物。"
+        },
+        {
+          "id": "n2",
+          "quote": "至坚",
+          "kind": "word",
+          "meaning": "极坚硬的事物。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第四十三章》第1句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#四十三章",
+        "source_ref": {
+          "locator": "/content/42",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "天下之至柔，驰骋天下之至坚。"
+        }
+      }
+    },
+    {
+      "id": "s2",
+      "text": "无有入无间，吾是以知无为之有益。",
+      "translation": "无形的东西能进入看似没有缝隙的地方，我由此体会到不强行干预也有益处。",
+      "explanation": "读词小提示：「无有」：无形的东西；「无间」：没有缝隙的地方。",
+      "chunks": [
+        "无有入无间，",
+        "吾是以知无为之有益。"
+      ],
+      "hints": [
+        "无有",
+        "无间",
+        "无为"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "无有",
+          "kind": "word",
+          "meaning": "无形的东西。"
+        },
+        {
+          "id": "n2",
+          "quote": "无间",
+          "kind": "word",
+          "meaning": "没有缝隙的地方。"
+        },
+        {
+          "id": "n3",
+          "quote": "无为",
+          "kind": "word",
+          "meaning": "不强行干预。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第四十三章》第2句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#四十三章",
+        "source_ref": {
+          "locator": "/content/42",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "无有入无间，吾是以知无为之有益。"
+        }
+      }
+    },
+    {
+      "id": "s3",
+      "text": "不言之教，无为之益，天下希及之。",
+      "translation": "不用空言的教导、不强行干预的益处，天下很少有人能体会并做到。",
+      "explanation": "这里重在比方的启发，具体材料能否穿透仍要看实际条件。",
+      "chunks": [
+        "不言之教，",
+        "无为之益，",
+        "天下希及之。"
+      ],
+      "hints": [
+        "无为",
+        "不言之教",
+        "希"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "无为",
+          "kind": "word",
+          "meaning": "不强行干预。"
+        },
+        {
+          "id": "n2",
+          "quote": "不言之教",
+          "kind": "word",
+          "meaning": "用行动和环境来影响，而不只靠言语。"
+        },
+        {
+          "id": "n3",
+          "quote": "希",
+          "kind": "word",
+          "meaning": "少。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第四十三章》第3句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#四十三章",
+        "source_ref": {
+          "locator": "/content/42",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "不言之教，无为之益，天下希及之。"
+        }
+      }
+    }
+  ],
+  "overview": {
+    "sequence": [
+      "先看本章开头：天下极柔软的东西，能在极坚硬的东西中运行。",
+      "本章以柔入坚、以无入隙的反差说理，提醒人看到不靠强硬也能发挥的作用。",
+      "再回到结尾：不用空言的教导、不强行干预的益处，天下很少有人能体会并做到。"
+    ],
+    "question": "这一章为什么可以叫作「柔和的作用」？",
+    "answer": "本章以柔入坚、以无入隙的反差说理，提醒人看到不靠强硬也能发挥的作用。可以引用本章开头或结尾的原句，说明你的依据。",
+    "takeaway": "本章以柔入坚、以无入隙的反差说理，提醒人看到不靠强硬也能发挥的作用。"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "choice",
+      "sentence": "s1",
+      "skill": "meaning",
+      "prompt": "开头的「至柔」在这里怎样理解？",
+      "choices": [
+        "只顾自己，不留意他人的处境。",
+        "极柔软的事物。",
+        "为了显示本领而处处炫耀。"
+      ],
+      "answer": 1,
+      "explanation": "把词放回原句看，「至柔」在本句中的意思是：极柔软的事物。"
+    },
+    {
+      "id": "q2",
+      "type": "choice",
+      "sentence": "s3",
+      "skill": "reason",
+      "prompt": "读完「柔和的作用」，哪一种理解更合适？",
+      "choices": [
+        "只看名字，就能知道全部道理。",
+        "为达到自己的目标，可以不顾别人。",
+        "本章以柔入坚、以无入隙的反差说理，提醒人看到不靠强硬也能发挥的作用。"
+      ],
+      "answer": 2,
+      "explanation": "本章以柔入坚、以无入隙的反差说理，提醒人看到不靠强硬也能发挥的作用。"
+    },
+    {
+      "id": "q3",
+      "type": "selfcheck",
+      "sentence": "s3",
+      "skill": "retell",
+      "prompt": "选本章一句话，用自己的话解释，再说说它怎样帮助你理解「柔和的作用」。",
+      "answer": "先说清原句中的对象和动作，再解释关键词。可以围绕这点来讲：本章以柔入坚、以无入隙的反差说理，提醒人看到不靠强硬也能发挥的作用。说完后，回到原文找一句作依据。",
+      "explanation": "不必背诵译文。重点看词义是否放回本句、有没有原文依据，以及是否把古人的比方误当成不分条件的结论。"
+    }
+  ]
+}

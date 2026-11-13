@@ -1,0 +1,53 @@
+* { box-sizing: border-box; }
+body { margin: 0; color: #222; background: #f2f0e9; font: 19px/1.9 "PingFang SC", "Microsoft YaHei", sans-serif; overflow-wrap: anywhere; }
+main { width: min(calc(100% - 40px), 900px); padding: 44px 55px; margin: 24px auto; background: #fff; }
+h1 { font-size: 36px; text-align: center; margin: 12px 0; }
+h2 { font-size: 23px; line-height: 1.6; }
+h3 { font-size: 21px; }
+p { margin: 12px 0; }
+header { border-bottom: 1px solid #999; padding-bottom: 16px; margin-bottom: 26px; }
+header > p:not(.print-kicker) { text-align: center; font-size: 17px; }
+.print-kicker { color: #555; font-size: 16px; letter-spacing: .12em; }
+.print-toolbar { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 14px; padding: 18px; font-size: 16px; }
+.print-toolbar button, .print-toolbar a { font: inherit; min-height: 44px; padding: 8px 15px; border-radius: 8px; border: 1px solid #aaa; background: #fff; color: #254e3a; cursor: pointer; }
+.print-original { font: 27px/2 "Songti SC", SimSun, serif; letter-spacing: .05em; }
+.print-reference { color: #555; font: 15px/1.7 "PingFang SC", "Microsoft YaHei", sans-serif; }
+.print-text-block { break-inside: avoid; }
+.print-sentence { margin: 24px 0; border-bottom: 1px dashed #aaa; padding-bottom: 16px; break-inside: avoid; }
+.print-note { border-left: 3px solid #777; padding-left: 14px; font-size: 17px; }
+.print-question { margin: 24px 0; padding-block: 10px; break-inside: avoid; }
+.print-choices { margin: 12px 0; }
+.print-answer-space { height: 140px; background: repeating-linear-gradient(to bottom, transparent 0, transparent 38px, #bbb 39px, transparent 40px); }
+.print-writing-lines { height: 220px; background: repeating-linear-gradient(to bottom, transparent 0, transparent 42px, #ccc 43px, transparent 44px); }
+footer { margin-top: 34px; padding-top: 18px; border-top: 1px solid #aaa; font-size: 14px; color: #555; }
+@page { size: A4; margin: 18mm; }
+@media (max-width: 650px) { main { padding: 24px; width: calc(100% - 24px); } }
+@media print { body { background: #fff; font-size: 14pt; orphans: 3; widows: 3; } main { width: 100%; padding: 0; margin: 0; } .print-toolbar { display: none; } h1 { font-size: 25pt; } .print-original { font-size: 20pt; } h2 { font-size: 17pt; } :is(h1, h2, h3) { break-after: avoid-page; } footer { font-size: 10pt; } header { break-after: avoid; } .print-answer-space, .print-writing-lines { print-color-adjust: exact; -webkit-print-color-adjust: exact; } }
+@media print {
+  .print-reference { font-size: 11pt; }
+  .print-view-original .print-writing-lines { height: 70px; margin-top: 14px; break-inside: avoid; }
+  .print-view-study .print-sentence { break-inside: auto; }
+  .print-view-study .print-text-block, .print-view-study .print-sentence > p { break-inside: auto; orphans: 3; widows: 3; }
+  .print-view-study li { break-inside: avoid; }
+  footer { margin-top: 16px; padding-top: 10px; line-height: 1.6; break-inside: avoid; }
+  .print-view-practice { font-size: 13pt; line-height: 1.7; }
+  .print-view-practice .print-original { font-size: 18pt; line-height: 1.7; margin-block: 6px; }
+  .print-view-practice .print-question { margin-block: 14px; padding: 0; }
+  .print-view-answers .print-question { margin-block: 14px; padding: 0; }
+  .print-view-practice .print-choices { margin-block: 8px; }
+  .print-view-practice header { margin-bottom: 18px; padding-bottom: 10px; }
+}
+
+.print-section-heading { color: #164b5c; border-bottom: 1px solid #999; padding-bottom: 4px; break-after: avoid; }
+
+@media print {
+  .print-long .print-paragraph { break-inside: auto; }
+  .print-long .print-paragraph .print-original { orphans: 3; widows: 3; }
+  .print-long.print-view-original .print-original { margin-block: 10px; }
+  .print-scoped header { margin-bottom: 14px; padding-bottom: 10px; }
+  .print-scoped header > p { margin-block: 6px; }
+  .print-scoped h1 { font-size: 22pt; }
+  .print-scoped.print-view-answers { font-size: 13pt; line-height: 1.7; }
+  .print-scoped.print-view-answers h2 { font-size: 15pt; }
+  .print-scoped.print-view-answers .print-question { margin-block: 10px; }
+}

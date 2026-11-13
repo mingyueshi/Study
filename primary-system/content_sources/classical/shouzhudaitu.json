@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "id": "shouzhudaitu",
+  "title": "守株待兔",
+  "attribution": "韩非《韩非子》",
+  "level": "starter",
+  "genre": "fable",
+  "skills": ["meaning", "referent", "reason", "retell"],
+  "curriculum": null,
+  "source_ref": {"version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native", "path": "poetry/simplified/诸子百家/韩非子.json", "locator": "/content/48", "sha256": "7948dd3b58b49eb9c3420beb1a1dd32ba0ddf103a33994ab159940cff631b7d5", "anchor_text": "田中有株，兔走触株，折颈而死"},
+  "intro": "偶然捡到一只兔子，能不能天天这样等下去？找到故事中农夫改变做法的地方。",
+  "background": "故事选自《韩非子·五蠹》。寓言借一件短小的事，引导读者想一个道理。",
+  "editorial_note": "节选止于「身为宋国笑」，集中读农夫的故事。重点分清偶然发生的事与能反复奏效的办法。",
+  "source": {"work": "《韩非子》", "section": "《五蠹》守株故事节选", "url": "https://zh.wikisource.org/wiki/韓非子/五蠹", "note": "采用常见教学选段，繁体字转为简体并加现代标点；译文、问题为本专题编写。"},
+  "sentences": [
+    {"id": "s1", "text": "宋人有耕者。", "chunks": ["宋人", "有耕者。"], "translation": "宋国有一个种田的人。", "explanation": "先介绍故事中的人物。「者」把耕作这个动作与做这件事的人连起来。", "hints": ["宋人", "耕者"], "notes": [{"id": "gengzhe", "quote": "耕者", "kind": "word", "meaning": "种田的人。「耕」是耕作，「者」指做这件事的人。"}]},
+    {"id": "s2", "text": "田中有株，兔走触株，折颈而死。", "chunks": ["田中有株，", "兔走触株，", "折颈而死。"], "translation": "田里有一个树桩，一只兔子跑来撞在树桩上，折断脖子死了。", "explanation": "兔子撞死是农夫偶然遇到的一件事，还不能说明每天都会有兔子撞来。", "hints": ["有株", "走触株", "折颈"], "notes": [
+      {"id": "zhu", "quote": "株", "kind": "word", "meaning": "树桩。这里不是计算植物的量词。"},
+      {"id": "zou", "quote": "走", "kind": "word", "meaning": "跑。"},
+      {"id": "chu", "quote": "触", "kind": "word", "meaning": "碰，撞。"}
+    ]},
+    {"id": "s3", "text": "因释其耒而守株，冀复得兔。", "chunks": ["因释其耒", "而守株，", "冀复得兔。"], "translation": "于是农夫放下农具，守在树桩旁，希望再得到一只撞死的兔子。", "explanation": "「因」说明他改变做法的原因；「冀」写出他心里的盼望。", "hints": ["释其耒", "守株", "冀"], "notes": [
+      {"id": "shi", "quote": "释", "kind": "word", "meaning": "放下。这里放下的是耕作的农具。"},
+      {"id": "qi", "quote": "其", "kind": "referent", "meaning": "他的。", "refers_to": "种田的农夫", "reason": "前面的主人公是农夫，耒是他种田时使用的工具。"},
+      {"id": "lei", "quote": "耒", "kind": "word", "meaning": "古代翻土用的农具，这里泛指农具。", "reading": "lěi"},
+      {"id": "ji", "quote": "冀", "kind": "word", "meaning": "希望。", "reading": "jì"}
+    ]},
+    {"id": "s4", "text": "兔不可复得，而身为宋国笑。", "chunks": ["兔不可复得，", "而身为宋国笑。"], "translation": "兔子没有再得到，他自己反倒被宋国人笑话。", "explanation": "结局与农夫的希望相反。回到前面想一想：他把偶然的一次当成了常有的事。", "hints": ["不可复得", "宋国笑"], "notes": [
+      {"id": "fu", "quote": "复", "kind": "word", "meaning": "再，又。"},
+      {"id": "wei", "quote": "为", "kind": "word", "meaning": "被。「为宋国笑」就是被宋国人笑话。", "reading": "wéi"}
+    ]}
+  ],
+  "overview": {"sequence": ["农夫偶然得到一只撞死的兔子。", "他放下农具，守着树桩等兔子。", "他没再得到兔子，反而成了笑话。"], "question": "农夫错在等得不够久吗？", "answer": "不是。问题在于把一次偶然遇到的事，当成了可以天天依靠的办法，还因此放下了耕作。", "takeaway": "判断一个办法好不好，要想想它为什么有效，条件能不能再次出现。"},
+  "questions": [
+    {"id": "q1", "type": "choice", "skill": "meaning", "sentence": "s2", "prompt": "「兔走触株」可以怎样理解？", "choices": ["兔子跑来撞上树桩", "农夫跑着追兔子", "兔子走到一株花前"], "answer": 0, "explanation": "「走」是跑，「株」是树桩，把两个词放回句子就能读懂。"},
+    {"id": "q2", "type": "choice", "skill": "referent", "sentence": "s3", "prompt": "「其耒」是谁的农具？", "choices": ["兔子的", "旁观者的", "农夫的"], "answer": 2, "explanation": "这里延续前文种田的人，「其」指他的。"},
+    {"id": "q3", "type": "choice", "skill": "reason", "sentence": "s4", "prompt": "故事主要提醒我们什么？", "choices": ["所有等待都有错", "不能把偶然当成必然", "等得久就一定成功"], "answer": 1, "explanation": "故事针对的是把撞兔子的偶然事件当作固定收获方式。要结合具体情境理解道理。"},
+    {"id": "q4", "type": "selfcheck", "skill": "retell", "sentence": "s3", "prompt": "讲清农夫为什么放下农具，以及后来怎样了。", "answer": "他偶然捡到撞死的兔子，就想继续守株得兔，于是放下农具。后来没有再得到兔子，还被人笑话。", "explanation": "检查复述中有没有说出原因、改变的做法和结局。"}
+  ]
+}

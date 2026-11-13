@@ -1,0 +1,948 @@
+{
+  "schema_version": 1,
+  "id": "lunyu-xueer",
+  "title": "论语·学而",
+  "unit_label": "则",
+  "attribution": "孔子及其弟子言行，弟子与再传弟子编纂",
+  "level": "challenge",
+  "genre": "reasoning",
+  "skills": [
+    "meaning",
+    "referent",
+    "reason",
+    "contrast"
+  ],
+  "curriculum": null,
+  "intro": "从「学而时习之」出发，看看学习怎样连到每天的行动。",
+  "background": "这是《论语》二十篇中的第1篇，话题围绕学习、交友与自我检查展开。篇名取自开头的字，并不表示每一则都只讲同一个题目。",
+  "editorial_note": "每次可以只读一两则。分段依本机原典，共二十篇、五百一十三则；其他版本的分章和个别用字可能不同。古代身份、礼制和观念要结合当时背景来理解。",
+  "source": {
+    "work": "论语",
+    "section": "学而篇",
+    "url": "https://zh.wikisource.org/wiki/論語/學而第一",
+    "note": "原文采用随项目保存的简体原典，统一引号样式。译文和部分词义据所列译注资料整理，疑难处配合本篇提示阅读。"
+  },
+  "source_ref": {
+    "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+    "path": "poetry/simplified/儒家经典/论语.json",
+    "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+    "locator": "/content/0",
+    "anchor_text": "子曰：“学而时习之，不亦说乎？有朋自远方来，不亦乐乎？人不知而不愠，不亦君子乎？”"
+  },
+  "edition": {
+    "label": "译注参考：ieduer/lunyu 所收《论语译注》资料",
+    "url": "https://github.com/ieduer/lunyu/blob/44f039ef8174b219b5f773a156b3d954ee65be25/data/dialogues.json",
+    "revision": "44f039ef8174b219b5f773a156b3d954ee65be25",
+    "license": "MIT，许可副本随内容源保存",
+    "note": "采用固定版本的译注，去除重复条目与注号，逐则配回本馆原文；词义保留简短释义，补充课堂提示。乡党两则分配译文，颜渊第二十则依完整原文呈现。"
+  },
+  "sentences": [
+    {
+      "id": "s1",
+      "reuse": {
+        "article": "lunyu",
+        "sentence": "s1"
+      },
+      "reference": {
+        "label": "《论语·学而》第1则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/學而第一",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/0",
+          "anchor_text": "子曰：“学而时习之，不亦说乎？有朋自远方来，不亦乐乎？人不知而不愠，不亦君子乎？”"
+        }
+      }
+    },
+    {
+      "id": "s2",
+      "text": "有子曰：「其为人也孝弟，而好犯上者，鲜矣；不好犯上而好作乱者，未之有也。君子务本，本立而道生。孝弟也者，其为仁之本与！」",
+      "translation": "有子说：「他的为人，孝顺爹娘，敬爱兄长，却喜欢触犯上级，这种人是很少的；不喜欢触犯上级，却喜欢造反，这种人从来没有过。君子专心致力于基础工作，基础树立了，『道』就会产生。孝顺爹娘，敬爱兄长，这就是『仁』的基础吧！」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "有子",
+          "kind": "word",
+          "meaning": "孔子的学生有若。"
+        },
+        {
+          "id": "n2",
+          "quote": "孝弟",
+          "kind": "word",
+          "meaning": "孝是敬爱父母；弟同「悌」，读作「tì」，是敬爱兄长。"
+        },
+        {
+          "id": "n3",
+          "quote": "犯",
+          "kind": "word",
+          "meaning": "抵触，违反，冒犯。"
+        },
+        {
+          "id": "n4",
+          "quote": "鲜",
+          "kind": "word",
+          "meaning": "音显，xiǎn，少。"
+        },
+        {
+          "id": "n5",
+          "quote": "未之有也",
+          "kind": "word",
+          "meaning": "「未有之也」的倒装形式。"
+        },
+        {
+          "id": "n6",
+          "quote": "与",
+          "kind": "word",
+          "meaning": "音读和意义跟「欤」字一样，《论语》的「欤」字都写作「与」。"
+        }
+      ],
+      "chunks": [
+        "有子曰：",
+        "「其为人也孝弟，",
+        "而好犯上者，",
+        "鲜矣；",
+        "不好犯上而好作乱者，",
+        "未之有也。",
+        "君子务本，",
+        "本立而道生。",
+        "孝弟也者，",
+        "其为仁之本与！",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·学而》第2则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/學而第一",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/0",
+          "anchor_text": "有子曰：“其为人也孝弟，而好犯上者，鲜矣；不好犯上而好作乱者，未之有也。君子务本，本立而道生。孝弟也者，其为仁之本与！”"
+        }
+      },
+      "explanation": "「有子」：孔子的学生有若；「孝弟」：孝是敬爱父母；弟同「悌」，读作「tì」，是敬爱兄长。",
+      "hints": [
+        "有子",
+        "孝弟",
+        "犯"
+      ],
+      "translation_entry": 2
+    },
+    {
+      "id": "s3",
+      "text": "子曰：「巧言令色，鲜矣仁！」",
+      "translation": "孔子说：「花言巧语，伪善的面貌，这种人，『仁德』是不会多的。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "巧言令色",
+          "kind": "word",
+          "meaning": "花言巧语，摆出讨好的脸色。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「巧言令色，",
+        "鲜矣仁！",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·学而》第3则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/學而第一",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/0",
+          "anchor_text": "子曰：“巧言令色，鲜矣仁！”"
+        }
+      },
+      "explanation": "评价人不能只听好听的话，也要看是否真心关爱别人。",
+      "hints": [
+        "巧言令色"
+      ],
+      "translation_entry": 3
+    },
+    {
+      "id": "s4",
+      "reuse": {
+        "article": "lunyu",
+        "sentence": "s4"
+      },
+      "reference": {
+        "label": "《论语·学而》第4则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/學而第一",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/0",
+          "anchor_text": "曾子曰：“吾日三省吾身：为人谋而不忠乎？与朋友交而不信乎？传不习乎？”"
+        }
+      }
+    },
+    {
+      "id": "s5",
+      "text": "子曰：「道千乘之国，敬事而信，节用而爱人，使民以时。」",
+      "translation": "孔子说：「治理具有一千辆兵车的国家，就要严肃认真地对待工作，信实无欺，节约费用，爱护官吏，役使老百姓要在农闲时间。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "道",
+          "kind": "word",
+          "meaning": "动词，治理的意思。"
+        },
+        {
+          "id": "n2",
+          "quote": "千乘之国",
+          "kind": "word",
+          "meaning": "乘音剩，shèng，古代用四匹马拉着的兵车。"
+        },
+        {
+          "id": "n3",
+          "quote": "敬事",
+          "kind": "word",
+          "meaning": "「敬」字一般用于表示工作态度，因之常和「事」字连用，如卫灵公篇的「事君敬其事而后其食」。"
+        },
+        {
+          "id": "n4",
+          "quote": "爱人",
+          "kind": "word",
+          "meaning": "古代「人」字有广狭两义。"
+        },
+        {
+          "id": "n5",
+          "quote": "使民以时",
+          "kind": "word",
+          "meaning": "古代以农业为主，「使民以时」即是《孟子·梁惠王上》的「不违农时」，因此用意译。"
+        },
+        {
+          "id": "n6",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「道千乘之国，",
+        "敬事而信，",
+        "节用而爱人，",
+        "使民以时。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·学而》第5则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/學而第一",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/0",
+          "anchor_text": "子曰：“道千乘之国，敬事而信，节用而爱人，使民以时。”"
+        }
+      },
+      "explanation": "「道」：动词，治理的意思；「千乘之国」：乘音剩，shèng，古代用四匹马拉着的兵车。",
+      "hints": [
+        "道",
+        "千乘之国",
+        "敬事"
+      ],
+      "translation_entry": 5
+    },
+    {
+      "id": "s6",
+      "text": "子曰：「弟子入则孝，出则弟，谨而信，泛爱众，而亲仁，行有余力，则以学文。」",
+      "translation": "孔子说：「后生小子，在父母跟前，就孝顺父母；离开自己房子，便敬爱兄长；寡言少语，说则诚实可信，博爱大众，亲近有仁德的人。这样躬行实践之后，有剩余力量，就再去学习文献。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "弟子",
+          "kind": "word",
+          "meaning": "一般有两种意义：（甲）年纪幼小的人，（乙）学生。"
+        },
+        {
+          "id": "n2",
+          "quote": "入",
+          "kind": "word",
+          "meaning": "《礼记·内则》：「由命士以上，父子皆异宫」，则知这里的「弟子」是指「命士」以上的人物而言。"
+        },
+        {
+          "id": "n3",
+          "quote": "谨",
+          "kind": "word",
+          "meaning": "寡言叫做谨。"
+        },
+        {
+          "id": "n4",
+          "quote": "仁",
+          "kind": "word",
+          "meaning": "「仁」即「仁人」，和雍也篇第六的「井有仁焉」的「仁」一样。"
+        },
+        {
+          "id": "n5",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「弟子入则孝，",
+        "出则弟，",
+        "谨而信，",
+        "泛爱众，",
+        "而亲仁，",
+        "行有余力，",
+        "则以学文。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·学而》第6则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/學而第一",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/0",
+          "anchor_text": "子曰：“弟子入则孝，出则弟，谨而信，泛爱众，而亲仁，行有余力，则以学文。”"
+        }
+      },
+      "explanation": "「弟子」：一般有两种意义：（甲）年纪幼小的人，（乙）学生；「入」：《礼记·内则》：「由命士以上，父子皆异宫」，则知这里的「弟子」是指「命士」以上的人物而言。",
+      "hints": [
+        "弟子",
+        "入",
+        "谨"
+      ],
+      "translation_entry": 6
+    },
+    {
+      "id": "s7",
+      "text": "子夏曰：「贤贤易色；事父母，能竭其力；事君，能致其身；与朋友交，言而有信。虽曰未学，吾必谓之学矣。」",
+      "translation": "子夏说：「对妻子，重品德，不重容貌；侍奉爹娘，能尽心竭力；服事君上，能豁出生命；同朋友交往，说话诚实守信。这种人，虽说没学习过，我一定说他已经学习过了。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "子夏",
+          "kind": "word",
+          "meaning": "孔子学生，姓卜，名商，字子夏，比孔子小四十四岁。"
+        },
+        {
+          "id": "n2",
+          "quote": "贤贤易色",
+          "kind": "word",
+          "meaning": "看重贤德，超过对外貌的看重。"
+        },
+        {
+          "id": "n3",
+          "quote": "致",
+          "kind": "word",
+          "meaning": "有「委弃」、「献纳」等意义，所以用「豁出生命」来译它。"
+        }
+      ],
+      "chunks": [
+        "子夏曰：",
+        "「贤贤易色；",
+        "事父母，",
+        "能竭其力；",
+        "事君，",
+        "能致其身；",
+        "与朋友交，",
+        "言而有信。",
+        "虽曰未学，",
+        "吾必谓之学矣。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·学而》第7则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/學而第一",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/0",
+          "anchor_text": "子夏曰：“贤贤易色；事父母，能竭其力；事君，能致其身；与朋友交，言而有信。虽曰未学，吾必谓之学矣。”"
+        }
+      },
+      "explanation": "「子夏」：孔子学生，姓卜，名商，字子夏，比孔子小四十四岁；「贤贤易色」：看重贤德，超过对外貌的看重。",
+      "hints": [
+        "子夏",
+        "贤贤易色",
+        "致"
+      ],
+      "translation_entry": 7
+    },
+    {
+      "id": "s8",
+      "text": "子曰：「君子不重则不威，学则不固。主忠信，无友不如己者，过，则勿惮改。」",
+      "translation": "孔子说：「君子，如果不庄重，就没有威严；即使读书，所学的也不会巩固。要以忠和信两种道德为主。不要跟不如自己的人交朋友。有了过错，就不要怕改正。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "君子",
+          "kind": "word",
+          "meaning": "这一词一直贯串到末尾，因此译文将这两字作一停顿。"
+        },
+        {
+          "id": "n2",
+          "quote": "主忠信",
+          "kind": "word",
+          "meaning": "颜渊篇（12.10）也说，「主忠信，徙义，崇德也」，可见「忠信」是道德。"
+        },
+        {
+          "id": "n3",
+          "quote": "无友不如己者",
+          "kind": "word",
+          "meaning": "古今人对这一句发生不少怀疑，因而有一些不同的解释。"
+        },
+        {
+          "id": "n4",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「君子不重则不威，",
+        "学则不固。",
+        "主忠信，",
+        "无友不如己者，",
+        "过，",
+        "则勿惮改。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·学而》第8则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/學而第一",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/0",
+          "anchor_text": "子曰：“君子不重则不威，学则不固。主忠信，无友不如己者，过，则勿惮改。”"
+        }
+      },
+      "explanation": "「君子」：这一词一直贯串到末尾，因此译文将这两字作一停顿；「主忠信」：颜渊篇（12.10）也说，「主忠信，徙义，崇德也」，可见「忠信」是道德。",
+      "hints": [
+        "君子",
+        "主忠信",
+        "无友不如己者"
+      ],
+      "translation_entry": 8
+    },
+    {
+      "id": "s9",
+      "text": "曾子曰：「慎终追远，民德归厚矣。」",
+      "translation": "曾子说：「谨慎地对待父母的死亡，追念远代祖先，自然会导致老百姓归于忠厚老实了。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "慎终",
+          "kind": "word",
+          "meaning": "慎重地办理亲人的丧事。"
+        },
+        {
+          "id": "n2",
+          "quote": "追远",
+          "kind": "word",
+          "meaning": "具体地说是指「祭祀尽其敬」。"
+        }
+      ],
+      "chunks": [
+        "曾子曰：",
+        "「慎终追远，",
+        "民德归厚矣。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·学而》第9则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/學而第一",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/0",
+          "anchor_text": "曾子曰：“慎终追远，民德归厚矣。”"
+        }
+      },
+      "explanation": "「慎终」：慎重地办理亲人的丧事；「追远」：具体地说是指「祭祀尽其敬」。",
+      "hints": [
+        "慎终",
+        "追远"
+      ],
+      "translation_entry": 9
+    },
+    {
+      "id": "s10",
+      "text": "子禽问于子贡曰：「夫子至于是邦也，必闻其政，求之与，抑与之与？」子贡曰：「夫子温、良、恭、俭、让以得之。夫子之求之也，其诸异乎人之求之与？」",
+      "translation": "子禽向子贡问道：「他老人家一到哪个国家，必然听得到那个国家的政事，求来的呢？还是别人自动告诉他的呢？」子贡道：「他老人家是靠温和、善良、严肃、节俭、谦逊来取得的。他老人家获得的方法，和别人获得的方法，不相同吧？」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "子禽",
+          "kind": "word",
+          "meaning": "陈亢（kàng）字子禽。"
+        },
+        {
+          "id": "n2",
+          "quote": "子贡",
+          "kind": "word",
+          "meaning": "孔子学生，姓端木，名赐，字子贡，卫人，比孔子小三十一岁。"
+        },
+        {
+          "id": "n3",
+          "quote": "夫子",
+          "kind": "word",
+          "meaning": "这是古代的一种敬称，凡是做过大夫的人，都可以取得这一敬称。"
+        },
+        {
+          "id": "n4",
+          "quote": "其诸",
+          "kind": "word",
+          "meaning": "表示推测，大概、或许的意思。"
+        }
+      ],
+      "chunks": [
+        "子禽问于子贡曰：",
+        "「夫子至于是邦也，",
+        "必闻其政，",
+        "求之与，",
+        "抑与之与？",
+        "」子贡曰：",
+        "「夫子温、良、恭、俭、让以得之。",
+        "夫子之求之也，",
+        "其诸异乎人之求之与？",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·学而》第10则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/學而第一",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/0",
+          "anchor_text": "子禽问于子贡曰：“夫子至于是邦也，必闻其政，求之与，抑与之与？”子贡曰：“夫子温、良、恭、俭、让以得之。夫子之求之也，其诸异乎人之求之与？”"
+        }
+      },
+      "explanation": "「子禽」：陈亢（kàng）字子禽；「子贡」：孔子学生，姓端木，名赐，字子贡，卫人，比孔子小三十一岁。",
+      "hints": [
+        "子禽",
+        "子贡",
+        "夫子"
+      ],
+      "translation_entry": 10
+    },
+    {
+      "id": "s11",
+      "text": "子曰：「父在，观其志；父没，观其行；三年无改于父之道，可谓孝矣。」",
+      "translation": "孔子说：「当他父亲活着，（因为他无权独立行动，）要观察他的志向;他父亲死了，要考察他的行为；若是他对他父亲的合理部分，长期地不加改变，可以说做到孝了。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "其",
+          "kind": "word",
+          "meaning": "指儿子，不是指父亲。"
+        },
+        {
+          "id": "n2",
+          "quote": "行",
+          "kind": "word",
+          "meaning": "去声，xìng。"
+        },
+        {
+          "id": "n3",
+          "quote": "三年",
+          "kind": "word",
+          "meaning": "古人这种数字，有时不要看得太机械。"
+        },
+        {
+          "id": "n4",
+          "quote": "道",
+          "kind": "word",
+          "meaning": "有时候是一般意义的名词，无论好坏、善恶都可以叫做道。"
+        },
+        {
+          "id": "n5",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「父在，",
+        "观其志；",
+        "父没，",
+        "观其行；",
+        "三年无改于父之道，",
+        "可谓孝矣。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·学而》第11则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/學而第一",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/0",
+          "anchor_text": "子曰：“父在，观其志；父没，观其行；三年无改于父之道，可谓孝矣。”"
+        }
+      },
+      "explanation": "「其」：指儿子，不是指父亲；「行」：去声，xìng。",
+      "hints": [
+        "其",
+        "行",
+        "三年"
+      ],
+      "translation_entry": 11
+    },
+    {
+      "id": "s12",
+      "text": "有子曰：「礼之用，和为贵。先王之道，斯为美。小大由之。有所不行。知和而和，不以礼节之，亦不可行也。」",
+      "translation": "有子说：「礼的作用，以遇事都做得恰当为可贵。过去圣明君王的治理国家，可宝贵的地方就在这里；他们小事大事都做得恰当。但是，如有行不通的地方，便为恰当而求恰当，不用一定的规矩制度来加以节制，也是不可行的。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "和",
+          "kind": "word",
+          "meaning": "和谐，人与人相处协调融洽。"
+        },
+        {
+          "id": "n2",
+          "quote": "有所不行",
+          "kind": "word",
+          "meaning": "有些情况不能只求表面和气，还要有合宜的规矩。"
+        }
+      ],
+      "chunks": [
+        "有子曰：",
+        "「礼之用，",
+        "和为贵。",
+        "先王之道，",
+        "斯为美。",
+        "小大由之。",
+        "有所不行。",
+        "知和而和，",
+        "不以礼节之，",
+        "亦不可行也。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·学而》第12则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/學而第一",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/0",
+          "anchor_text": "有子曰：“礼之用，和为贵。先王之道，斯为美。小大由之。有所不行。知和而和，不以礼节之，亦不可行也。”"
+        }
+      },
+      "explanation": "「和」：和谐，人与人相处协调融洽；「有所不行」：有些情况不能只求表面和气，还要有合宜的规矩。",
+      "hints": [
+        "和",
+        "有所不行"
+      ],
+      "translation_entry": 12
+    },
+    {
+      "id": "s13",
+      "text": "有子曰：「信近于义，言可复也。恭近于礼，远耻辱也。因不失其亲，亦可宗也。」",
+      "translation": "有子说：「所守的约言符合义，说的话就能兑现。态度容貌的庄矜合于礼，就不致遭受侮辱。依靠关系深的人，也就可靠了。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "复",
+          "kind": "word",
+          "meaning": "实践、兑现说过的话。"
+        },
+        {
+          "id": "n2",
+          "quote": "远",
+          "kind": "word",
+          "meaning": "去声，音院，yuàn，动词，使动用法，使之远离的意思。"
+        },
+        {
+          "id": "n3",
+          "quote": "因",
+          "kind": "word",
+          "meaning": "依靠，凭借。"
+        },
+        {
+          "id": "n4",
+          "quote": "宗",
+          "kind": "word",
+          "meaning": "主，可靠。"
+        }
+      ],
+      "chunks": [
+        "有子曰：",
+        "「信近于义，",
+        "言可复也。",
+        "恭近于礼，",
+        "远耻辱也。",
+        "因不失其亲，",
+        "亦可宗也。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·学而》第13则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/學而第一",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/0",
+          "anchor_text": "有子曰：“信近于义，言可复也。恭近于礼，远耻辱也。因不失其亲，亦可宗也。”"
+        }
+      },
+      "explanation": "「复」：实践、兑现说过的话；「远」：去声，音院，yuàn，动词，使动用法，使之远离的意思。",
+      "hints": [
+        "复",
+        "远",
+        "因"
+      ],
+      "translation_entry": 13
+    },
+    {
+      "id": "s14",
+      "text": "子曰：「君子食无求饱，居无求安，敏于事而慎于言，就有道而正焉。可谓好学也已。」",
+      "translation": "孔子说：「君子，吃食不要求饱足，居住不要求舒适，对工作勤劳敏捷，说话却谨慎，到有道的人那里去匡正自己，这样，可以说是好学了。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "君子",
+          "kind": "word",
+          "meaning": "《论语》的「君子」有时指「有位之人」，有时指「有德之人」。"
+        },
+        {
+          "id": "n2",
+          "quote": "正",
+          "kind": "word",
+          "meaning": "《论语》「正」字用了很多次。"
+        },
+        {
+          "id": "n3",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「君子食无求饱，",
+        "居无求安，",
+        "敏于事而慎于言，",
+        "就有道而正焉。",
+        "可谓好学也已。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·学而》第14则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/學而第一",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/0",
+          "anchor_text": "子曰：“君子食无求饱，居无求安，敏于事而慎于言，就有道而正焉。可谓好学也已。”"
+        }
+      },
+      "explanation": "「君子」：《论语》的「君子」有时指「有位之人」，有时指「有德之人」；「正」：《论语》「正」字用了很多次。",
+      "hints": [
+        "君子",
+        "正"
+      ],
+      "translation_entry": 14
+    },
+    {
+      "id": "s15",
+      "text": "子贡曰：「贫而无谄，富而无骄，何如？」子曰：「可也。未若贫而乐，富而好礼者也。」子贡曰：「《诗》云：『如切如磋，如琢如磨』，其斯之谓与？」子曰：「赐也，始可与言《诗》已矣，告诸往而知来者。」",
+      "translation": "子贡说：「贫穷却不巴结奉承，有钱却不骄傲自大，怎么样？」孔子说：「可以了；但是还不如虽贫穷却乐于道，纵有钱却谦虚好礼哩。」子贡说：「《诗经》上说：『要像对待骨、角、象牙、玉石一样，先开料，再糙锉，细刻，然后磨光。』那就是这样的意思吧？」孔子道：「赐呀，现在可以同你讨论《诗经》了，告诉你一件，你能有所发挥，举一反三了。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "何如",
+          "kind": "word",
+          "meaning": "《论语》中的「何如」，都可以译为「怎么样」。"
+        },
+        {
+          "id": "n2",
+          "quote": "贫而乐",
+          "kind": "word",
+          "meaning": "皇侃本「乐」下有「道」字。"
+        },
+        {
+          "id": "n3",
+          "quote": "如切如磋",
+          "kind": "word",
+          "meaning": "两语见于《诗经·卫风·淇奥篇》。"
+        },
+        {
+          "id": "n4",
+          "quote": "赐",
+          "kind": "word",
+          "meaning": "子贡名。"
+        },
+        {
+          "id": "n5",
+          "quote": "告诸往而知来者",
+          "kind": "word",
+          "meaning": "「诸」，在这里用法同「之」一样。"
+        }
+      ],
+      "chunks": [
+        "子贡曰：",
+        "「贫而无谄，",
+        "富而无骄，",
+        "何如？",
+        "」子曰：",
+        "「可也。",
+        "未若贫而乐，",
+        "富而好礼者也。",
+        "」子贡曰：",
+        "「《诗》云：",
+        "『如切如磋，",
+        "如琢如磨』，",
+        "其斯之谓与？",
+        "」子曰：",
+        "「赐也，",
+        "始可与言《诗》已矣，",
+        "告诸往而知来者。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·学而》第15则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/學而第一",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/0",
+          "anchor_text": "子贡曰：“贫而无谄，富而无骄，何如？”子曰：“可也。未若贫而乐，富而好礼者也。”子贡曰：“《诗》云：‘如切如磋，如琢如磨’，其斯之谓与？”子曰：“赐也，始可与言《诗》已矣，告诸往而知来者。”"
+        }
+      },
+      "explanation": "「何如」：《论语》中的「何如」，都可以译为「怎么样」；「贫而乐」：皇侃本「乐」下有「道」字。",
+      "hints": [
+        "何如",
+        "贫而乐",
+        "如切如磋"
+      ],
+      "translation_entry": 15
+    },
+    {
+      "id": "s16",
+      "text": "子曰：「不患人之不己知，患不知人也。」",
+      "translation": "孔子说：「别人不了解我，我不急；我急的是自己不了解别人。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "患",
+          "kind": "word",
+          "meaning": "担心、忧虑。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「不患人之不己知，",
+        "患不知人也。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·学而》第16则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/學而第一",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/0",
+          "anchor_text": "子曰：“不患人之不己知，患不知人也。”"
+        }
+      },
+      "explanation": "这里把两件事作比较：不要只盼别人了解自己，也要学会了解别人。",
+      "hints": [
+        "患"
+      ],
+      "translation_entry": 16
+    }
+  ],
+  "overview": {
+    "sequence": [
+      "先分清说话的人，找出与「学习、交友与自我检查」有关的场景。",
+      "把看不懂的词放回原文，再核对译文中的动作和对象。",
+      "挑一则用自己的话说明白，再找原句支持自己的理解。"
+    ],
+    "question": "这一篇中，哪一则最值得你再想一想？",
+    "answer": "选一则，先说清谁在什么情况下说了什么，再说明你赞同、疑惑或想进一步了解的地方，并指回原文。",
+    "takeaway": "认真学，诚实交往，愿意每天检查自己。"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "choice",
+      "sentence": "s1",
+      "skill": "meaning",
+      "prompt": "「说」在「不亦说乎」中是什么意思？",
+      "answer": 1,
+      "explanation": "「说」在这里同「悦」，读作「yuè」。",
+      "choices": [
+        "解释一件事",
+        "愉快、高兴",
+        "劝说朋友"
+      ]
+    },
+    {
+      "id": "q2",
+      "type": "choice",
+      "sentence": "s4",
+      "skill": "reason",
+      "prompt": "曾子的自我检查涉及哪些方面？",
+      "answer": 2,
+      "explanation": "三个问句分别检查尽心、诚信与学习。",
+      "choices": [
+        "替人办事、与朋友交往、复习所学",
+        "衣服、住房、财物",
+        "背诵多少、吃饭多少、走路多少"
+      ]
+    },
+    {
+      "id": "q3",
+      "type": "selfcheck",
+      "sentence": "s16",
+      "skill": "reason",
+      "prompt": "别人暂时不了解你时，可以怎样做？",
+      "answer": "先认真了解别人，并继续做好自己。",
+      "explanation": "这句把注意力也放在自己怎样了解别人上。"
+    }
+  ]
+}

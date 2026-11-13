@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}古文精读馆 · 乐学堂{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'classical/classical.css' %}?v=3">
+<script src="{% static 'classical/classical.js' %}" defer></script>
+<div class="classical-hall" data-classical-index>
+  {% include 'classical/_nav.html' %}
+  <header class="cw-hero">
+    <div><p class="cw-eyebrow">语文 · 把古人的话读明白</p><h1>{{ catalog.title }}</h1><p class="cw-lead">{{ catalog.intro }}</p>
+      <a class="cw-button cw-primary" href="{% url 'classical-detail' 'jingwei' %}">从《精卫填海》读起 <span aria-hidden="true">→</span></a>
+    </div>
+    <div class="cw-hero-book" aria-label="精读小提示"><span class="cw-seal" aria-hidden="true">读</span><p>读顺一句<br>弄懂几个词<br><strong>讲清一个故事</strong></p><span class="cw-book-caption">听一听 · 想一想 · 试着背</span></div>
+  </header>
+  <div class="cw-facts"><span><strong>{{ total }}</strong> 篇精选古文</span><span><strong>{{ question_count }}</strong> 道理解练习</span><span><strong>2</strong> 篇衔接现有四上教材</span><span>阅读与自测无需登录</span></div>
+  {% for group in catalog.collections %}<section class="cw-book-entry"><div><p class="cw-eyebrow">整本慢慢读 · 新增全文</p><h2><a href="{% url 'classical-book' group.id %}">{{ group.title }}</a></h2><p>{{ group.intro }}</p></div><a class="cw-button cw-primary" href="{% url 'classical-book' group.id %}">进入全书目录 →</a></section>{% endfor %}
+  <section class="cw-catalog" aria-labelledby="cw-catalog-title">
+    <div class="cw-section-heading"><div><p class="cw-eyebrow">今天想读哪一篇？</p><h2 id="cw-catalog-title">挑一篇，慢慢读</h2></div><p>按难度、故事类型或要练的本领找。</p></div>
+    <form class="cw-filters" action="{% url 'classical' %}" method="get" role="search">
+      <label class="cw-search">找篇目或原文<input name="q" type="search" value="{{ q }}" placeholder="试试「王戎」「走」「之」" maxlength="80"></label>
+      <label>阅读难度<select name="level"><option value="">全部难度</option>{% for item in catalog.levels %}<option value="{{ item.id }}"{% if filters.level == item.id %} selected{% endif %}>{{ item.label }}</option>{% endfor %}</select></label>
+      <label>故事类型<select name="genre"><option value="">全部类型</option>{% for item in catalog.genres %}<option value="{{ item.id }}"{% if filters.genre == item.id %} selected{% endif %}>{{ item.label }}</option>{% endfor %}</select></label>
+      <label>想练的本领<select name="skill"><option value="">全部本领</option>{% for item in catalog.skills %}<option value="{{ item.id }}"{% if filters.skill == item.id %} selected{% endif %}>{{ item.label }}</option>{% endfor %}</select></label>
+      <label>教材关联<select name="curriculum"><option value="">全部篇目</option><option value="4a"{% if curriculum %} selected{% endif %}>现有四上两篇</option></select></label>
+      <button class="cw-button cw-primary" type="submit">找一找</button><a class="cw-reset" href="{% url 'classical' %}#cw-catalog-title">重置</a>
+    </form>
+    <p class="cw-result-count" role="status">找到 {{ articles|length }} 篇。复习标记只保存在当前浏览器。</p>
+    <div class="cw-card-grid">
+    {% for item in articles %}
+      <article class="cw-card" data-article-card="{{ item.id }}" data-revision="{{ item.revision }}">
+        <div class="cw-card-top"><span class="cw-badge">{{ item.level_label }}</span><span>{{ item.genre_label }}</span></div>
+        <h3><a href="{% url 'classical-detail' item.id %}">{{ item.title }}</a></h3><p class="cw-byline">{{ item.attribution }} · {{ item.character_count }} 字</p>
+        <p>{{ item.intro }}</p><div class="cw-tags">{% for label in item.skill_labels %}<span>{{ label }}</span>{% endfor %}</div>
+        <footer>{% if item.curriculum %}<span class="cw-curriculum">{{ item.curriculum.label }}</span>{% else %}<span class="cw-byline">选读</span>{% endif %}<span class="cw-read-mark" data-card-mark></span><a class="cw-card-link" href="{% url 'classical-detail' item.id %}">进入精读 →</a></footer>
+      </article>
+    {% empty %}<div class="cw-empty"><h3>这次还没有找到</h3><p>试试少选一个条件，或换一个原文里的词。</p><a class="cw-button" href="{% url 'classical' %}">看看全部篇目</a></div>{% endfor %}
+    </div>
+  </section>
+</div>
+{% endblock %}

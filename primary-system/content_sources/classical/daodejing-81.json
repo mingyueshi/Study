@@ -1,0 +1,276 @@
+{
+  "schema_version": 1,
+  "id": "daodejing-81",
+  "title": "道德经·第八十一章",
+  "attribution": "老子",
+  "level": "challenge",
+  "genre": "reasoning",
+  "skills": [
+    "meaning",
+    "referent",
+    "reason",
+    "contrast",
+    "retell"
+  ],
+  "curriculum": null,
+  "intro": "真诚、分享与不争。全书以真诚和帮助别人作结：重实际行动，不靠漂亮话与争功。",
+  "background": "这是《道德经》德经·第八十一章。本章围绕「真诚、分享与不争」展开，可以先读原文，再对照译文，看看作者用了什么比方或对比。",
+  "editorial_note": "本馆用逐句译解帮助入门。读「道」「无为」等词时要看上下文；古代观念和理想化比方，可以边读边与家长讨论。",
+  "source": {
+    "work": "道德经（又名老子）",
+    "section": "德经·第八十一章",
+    "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#八十一章",
+    "note": "原文以本机简体《老子》为底本，统一引号，第七章移去括号异文提示。译文、词义和练习为本馆编写的入门读法，参考王弼注理解，不将不同底本混作同一文本。"
+  },
+  "source_ref": {
+    "locator": "/content/80",
+    "path": "poetry/simplified/诸子百家/老子.json",
+    "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+    "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+    "anchor_text": "信言不美，美言不信。善者不辩，辩者不善。知者不博，博者不知。圣人不积，既以为人，己愈有，既以与人，己愈多。天之道，利而不害；圣人之道，为而不争。"
+  },
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "信言不美，美言不信。",
+      "translation": "真实可信的话未必漂亮，只求漂亮的话未必可信。",
+      "explanation": "读词小提示：「信言」：真实可信的话；「美言」：这里指只求悦耳的漂亮话。",
+      "chunks": [
+        "信言不美，",
+        "美言不信。"
+      ],
+      "hints": [
+        "信言",
+        "美言"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "信言",
+          "kind": "word",
+          "meaning": "真实可信的话。"
+        },
+        {
+          "id": "n2",
+          "quote": "美言",
+          "kind": "word",
+          "meaning": "这里指只求悦耳的漂亮话。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第八十一章》第1句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#八十一章",
+        "source_ref": {
+          "locator": "/content/80",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "信言不美，美言不信。"
+        }
+      }
+    },
+    {
+      "id": "s2",
+      "text": "善者不辩，辩者不善。",
+      "translation": "有善行的人不逞口舌，只逞口舌的人未必有善行。",
+      "explanation": "读词小提示：「辩」：逞口舌、争辩。",
+      "chunks": [
+        "善者不辩，",
+        "辩者不善。"
+      ],
+      "hints": [
+        "辩"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "辩",
+          "kind": "word",
+          "meaning": "逞口舌、争辩。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第八十一章》第2句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#八十一章",
+        "source_ref": {
+          "locator": "/content/80",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "善者不辩，辩者不善。"
+        }
+      }
+    },
+    {
+      "id": "s3",
+      "text": "知者不博，博者不知。",
+      "translation": "真正明白的人不夸耀博闻，只夸博闻的人未必真正明白。",
+      "explanation": "读词小提示：「博」：这里联系夸耀自己博闻。",
+      "chunks": [
+        "知者不博，",
+        "博者不知。"
+      ],
+      "hints": [
+        "博"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "博",
+          "kind": "word",
+          "meaning": "这里联系夸耀自己博闻。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第八十一章》第3句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#八十一章",
+        "source_ref": {
+          "locator": "/content/80",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "知者不博，博者不知。"
+        }
+      }
+    },
+    {
+      "id": "s4",
+      "text": "圣人不积，既以为人，己愈有，既以与人，己愈多。",
+      "translation": "有智慧的人不只为自己积藏，越帮助别人自己也越充实，越给予别人自己也越丰富。",
+      "explanation": "读词小提示：「不积」：不只为自己积藏；「为人」：帮助别人。",
+      "chunks": [
+        "圣人不积，",
+        "既以为人，",
+        "己愈有，",
+        "既以与人，",
+        "己愈多。"
+      ],
+      "hints": [
+        "不积",
+        "为人",
+        "与人"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "不积",
+          "kind": "word",
+          "meaning": "不只为自己积藏。"
+        },
+        {
+          "id": "n2",
+          "quote": "为人",
+          "kind": "word",
+          "meaning": "帮助别人。"
+        },
+        {
+          "id": "n3",
+          "quote": "与人",
+          "kind": "word",
+          "meaning": "给予别人。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第八十一章》第4句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#八十一章",
+        "source_ref": {
+          "locator": "/content/80",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "圣人不积，既以为人，己愈有，既以与人，己愈多。"
+        }
+      }
+    },
+    {
+      "id": "s5",
+      "text": "天之道，利而不害；圣人之道，为而不争。",
+      "translation": "天的道理，是有益而不伤害；有智慧的人的做法，是有所作为而不争功夺利。",
+      "explanation": "读词小提示：「利而不害」：使人受益而不伤害；「为而不争」：有所作为，却不争功夺利。",
+      "chunks": [
+        "天之道，",
+        "利而不害；",
+        "圣人之道，",
+        "为而不争。"
+      ],
+      "hints": [
+        "利而不害",
+        "为而不争"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "利而不害",
+          "kind": "word",
+          "meaning": "使人受益而不伤害。"
+        },
+        {
+          "id": "n2",
+          "quote": "为而不争",
+          "kind": "word",
+          "meaning": "有所作为，却不争功夺利。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第八十一章》第5句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#八十一章",
+        "source_ref": {
+          "locator": "/content/80",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "天之道，利而不害；圣人之道，为而不争。"
+        }
+      }
+    }
+  ],
+  "overview": {
+    "sequence": [
+      "先看本章开头：真实可信的话未必漂亮，只求漂亮的话未必可信。",
+      "全书以真诚和帮助别人作结：重实际行动，不靠漂亮话与争功。",
+      "再回到结尾：天的道理，是有益而不伤害；有智慧的人的做法，是有所作为而不争功夺利。"
+    ],
+    "question": "这一章为什么可以叫作「真诚、分享与不争」？",
+    "answer": "全书以真诚和帮助别人作结：重实际行动，不靠漂亮话与争功。可以引用本章开头或结尾的原句，说明你的依据。",
+    "takeaway": "全书以真诚和帮助别人作结：重实际行动，不靠漂亮话与争功。"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "choice",
+      "sentence": "s1",
+      "skill": "meaning",
+      "prompt": "开头的「信言」在这里怎样理解？",
+      "choices": [
+        "真实可信的话。",
+        "只顾自己，不留意他人的处境。",
+        "为了显示本领而处处炫耀。"
+      ],
+      "answer": 0,
+      "explanation": "把词放回原句看，「信言」在本句中的意思是：真实可信的话。"
+    },
+    {
+      "id": "q2",
+      "type": "choice",
+      "sentence": "s5",
+      "skill": "reason",
+      "prompt": "读完「真诚、分享与不争」，哪一种理解更合适？",
+      "choices": [
+        "无论什么情况，都应该争着抢先。",
+        "全书以真诚和帮助别人作结：重实际行动，不靠漂亮话与争功。",
+        "做事情永远越多越快越好。"
+      ],
+      "answer": 1,
+      "explanation": "全书以真诚和帮助别人作结：重实际行动，不靠漂亮话与争功。"
+    },
+    {
+      "id": "q3",
+      "type": "selfcheck",
+      "sentence": "s5",
+      "skill": "retell",
+      "prompt": "选本章一句话，用自己的话解释，再说说它怎样帮助你理解「真诚、分享与不争」。",
+      "answer": "先说清原句中的对象和动作，再解释关键词。可以围绕这点来讲：全书以真诚和帮助别人作结：重实际行动，不靠漂亮话与争功。说完后，回到原文找一句作依据。",
+      "explanation": "不必背诵译文。重点看词义是否放回本句、有没有原文依据，以及是否把古人的比方误当成不分条件的结论。"
+    }
+  ]
+}

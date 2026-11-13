@@ -1,0 +1,334 @@
+{
+  "schema_version": 1,
+  "id": "daodejing-51",
+  "title": "道德经·第五十一章",
+  "attribution": "老子",
+  "level": "challenge",
+  "genre": "reasoning",
+  "skills": [
+    "meaning",
+    "referent",
+    "reason",
+    "contrast",
+    "retell"
+  ],
+  "curriculum": null,
+  "intro": "生养而不控制。本章从生长、养育谈到不占有、不倚仗、不支配，强调帮助万物成长的态度。",
+  "background": "这是《道德经》德经·第五十一章。本章围绕「生养而不控制」展开，可以先读原文，再对照译文，看看作者用了什么比方或对比。",
+  "editorial_note": "本馆用逐句译解帮助入门。读「道」「无为」等词时要看上下文；古代观念和理想化比方，可以边读边与家长讨论。",
+  "source": {
+    "work": "道德经（又名老子）",
+    "section": "德经·第五十一章",
+    "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#五十一章",
+    "note": "原文以本机简体《老子》为底本，统一引号，第七章移去括号异文提示。译文、词义和练习为本馆编写的入门读法，参考王弼注理解，不将不同底本混作同一文本。"
+  },
+  "source_ref": {
+    "locator": "/content/50",
+    "path": "poetry/simplified/诸子百家/老子.json",
+    "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+    "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+    "anchor_text": "道生之，德畜之，物形之，势成之。是以万物莫不尊道而贵德。道之尊，德之贵，夫莫之命而常自然。故道生之，德畜之；长之育之；成之熟之；养之覆之。生而不有，为而不恃，长而不宰。是谓玄德。"
+  },
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "道生之，德畜之，物形之，势成之。",
+      "translation": "道使万物产生，德使万物成长，具体物质赋予形体，环境条件促使成熟。",
+      "explanation": "读词小提示：「生之」：使它们产生；「畜之」：养育它们。",
+      "chunks": [
+        "道生之，",
+        "德畜之，",
+        "物形之，",
+        "势成之。"
+      ],
+      "hints": [
+        "生之",
+        "畜之",
+        "形之"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "生之",
+          "kind": "referent",
+          "meaning": "使它们产生。",
+          "refers_to": "万物",
+          "reason": "后文紧接着说万物，几个「之」都承接所讨论的万物。"
+        },
+        {
+          "id": "n2",
+          "quote": "畜之",
+          "kind": "word",
+          "meaning": "养育它们。",
+          "reading": "xù zhī"
+        },
+        {
+          "id": "n3",
+          "quote": "形之",
+          "kind": "word",
+          "meaning": "使它们具有形体。"
+        },
+        {
+          "id": "n4",
+          "quote": "势",
+          "kind": "word",
+          "meaning": "成长所需的条件与环境。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第五十一章》第1句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#五十一章",
+        "source_ref": {
+          "locator": "/content/50",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "道生之，德畜之，物形之，势成之。"
+        }
+      }
+    },
+    {
+      "id": "s2",
+      "text": "是以万物莫不尊道而贵德。",
+      "translation": "所以万物都尊道而贵德。",
+      "explanation": "读词小提示：「贵德」：看重养育成就的德。",
+      "chunks": [
+        "是以万物莫不尊道而贵德。"
+      ],
+      "hints": [
+        "贵德"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "贵德",
+          "kind": "word",
+          "meaning": "看重养育成就的德。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第五十一章》第2句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#五十一章",
+        "source_ref": {
+          "locator": "/content/50",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "是以万物莫不尊道而贵德。"
+        }
+      }
+    },
+    {
+      "id": "s3",
+      "text": "道之尊，德之贵，夫莫之命而常自然。",
+      "translation": "道之所以受尊重、德之所以被看重，并没有谁发令，而是自然而然。",
+      "explanation": "读词小提示：「莫之命」：没有谁发出命令。",
+      "chunks": [
+        "道之尊，",
+        "德之贵，",
+        "夫莫之命而常自然。"
+      ],
+      "hints": [
+        "莫之命"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "莫之命",
+          "kind": "word",
+          "meaning": "没有谁发出命令。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第五十一章》第3句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#五十一章",
+        "source_ref": {
+          "locator": "/content/50",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "道之尊，德之贵，夫莫之命而常自然。"
+        }
+      }
+    },
+    {
+      "id": "s4",
+      "text": "故道生之，德畜之；长之育之；成之熟之；养之覆之。",
+      "translation": "因此，道使万物产生，德使万物成长，帮助生育成熟，养护庇护它们。",
+      "explanation": "读词小提示：「生之」：使它们产生；「畜之」：养育它们。",
+      "chunks": [
+        "故道生之，",
+        "德畜之；",
+        "长之育之；",
+        "成之熟之；",
+        "养之覆之。"
+      ],
+      "hints": [
+        "生之",
+        "畜之",
+        "覆之"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "生之",
+          "kind": "word",
+          "meaning": "使它们产生。"
+        },
+        {
+          "id": "n2",
+          "quote": "畜之",
+          "kind": "word",
+          "meaning": "养育它们。",
+          "reading": "xù zhī"
+        },
+        {
+          "id": "n3",
+          "quote": "覆之",
+          "kind": "referent",
+          "meaning": "庇护它们。",
+          "refers_to": "万物",
+          "reason": "这一组生养、庇护的动作，都以本章讨论的万物为对象。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第五十一章》第4句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#五十一章",
+        "source_ref": {
+          "locator": "/content/50",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "故道生之，德畜之；长之育之；成之熟之；养之覆之。"
+        }
+      }
+    },
+    {
+      "id": "s5",
+      "text": "生而不有，为而不恃，长而不宰。",
+      "translation": "生养而不占有，有所作为而不倚仗，帮助成长而不任意支配。",
+      "explanation": "读词小提示：「不有」：不据为己有；「不恃」：不倚仗功劳。",
+      "chunks": [
+        "生而不有，",
+        "为而不恃，",
+        "长而不宰。"
+      ],
+      "hints": [
+        "不有",
+        "不恃",
+        "不宰"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "不有",
+          "kind": "word",
+          "meaning": "不据为己有。"
+        },
+        {
+          "id": "n2",
+          "quote": "不恃",
+          "kind": "word",
+          "meaning": "不倚仗功劳。"
+        },
+        {
+          "id": "n3",
+          "quote": "不宰",
+          "kind": "word",
+          "meaning": "不任意支配。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第五十一章》第5句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#五十一章",
+        "source_ref": {
+          "locator": "/content/50",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "生而不有，为而不恃，长而不宰。"
+        }
+      }
+    },
+    {
+      "id": "s6",
+      "text": "是谓玄德。",
+      "translation": "这叫作深厚的德行。",
+      "explanation": "读词小提示：「玄德」：深厚而不张扬的德行。",
+      "chunks": [
+        "是谓玄德。"
+      ],
+      "hints": [
+        "玄德"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "玄德",
+          "kind": "word",
+          "meaning": "深厚而不张扬的德行。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第五十一章》第6句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#五十一章",
+        "source_ref": {
+          "locator": "/content/50",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "道生之，德畜之，物形之，势成之。是以万物莫不尊道而贵德。道之尊，德之贵，夫莫之命而常自然。故道生之，德畜之；长之育之；成之熟之；养之覆之。生而不有，为而不恃，长而不宰。是谓玄德。"
+        }
+      }
+    }
+  ],
+  "overview": {
+    "sequence": [
+      "先看本章开头：道使万物产生，德使万物成长，具体物质赋予形体，环境条件促使成熟。",
+      "本章从生长、养育谈到不占有、不倚仗、不支配，强调帮助万物成长的态度。",
+      "再回到结尾：这叫作深厚的德行。"
+    ],
+    "question": "这一章为什么可以叫作「生养而不控制」？",
+    "answer": "本章从生长、养育谈到不占有、不倚仗、不支配，强调帮助万物成长的态度。可以引用本章开头或结尾的原句，说明你的依据。",
+    "takeaway": "本章从生长、养育谈到不占有、不倚仗、不支配，强调帮助万物成长的态度。"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "choice",
+      "sentence": "s1",
+      "skill": "meaning",
+      "prompt": "开头的「生之」在这里怎样理解？",
+      "choices": [
+        "使它们产生。",
+        "只顾自己，不留意他人的处境。",
+        "为了显示本领而处处炫耀。"
+      ],
+      "answer": 0,
+      "explanation": "把词放回原句看，「生之」在本句中的意思是：使它们产生。"
+    },
+    {
+      "id": "q2",
+      "type": "choice",
+      "sentence": "s6",
+      "skill": "reason",
+      "prompt": "读完「生养而不控制」，哪一种理解更合适？",
+      "choices": [
+        "只看名字，就能知道全部道理。",
+        "本章从生长、养育谈到不占有、不倚仗、不支配，强调帮助万物成长的态度。",
+        "为达到自己的目标，可以不顾别人。"
+      ],
+      "answer": 1,
+      "explanation": "本章从生长、养育谈到不占有、不倚仗、不支配，强调帮助万物成长的态度。"
+    },
+    {
+      "id": "q3",
+      "type": "selfcheck",
+      "sentence": "s6",
+      "skill": "retell",
+      "prompt": "选本章一句话，用自己的话解释，再说说它怎样帮助你理解「生养而不控制」。",
+      "answer": "先说清原句中的对象和动作，再解释关键词。可以围绕这点来讲：本章从生长、养育谈到不占有、不倚仗、不支配，强调帮助万物成长的态度。说完后，回到原文找一句作依据。",
+      "explanation": "不必背诵译文。重点看词义是否放回本句、有没有原文依据，以及是否把古人的比方误当成不分条件的结论。"
+    }
+  ]
+}

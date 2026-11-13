@@ -1,0 +1,306 @@
+{
+  "schema_version": 1,
+  "id": "daodejing-73",
+  "title": "道德经·第七十三章",
+  "attribution": "老子",
+  "level": "challenge",
+  "genre": "reasoning",
+  "skills": [
+    "meaning",
+    "referent",
+    "reason",
+    "contrast",
+    "retell"
+  ],
+  "curriculum": null,
+  "intro": "勇敢也要有分寸。本章比较敢与不敢，用天网作劝诫的比方，提醒人谨慎看待行动后果。",
+  "background": "这是《道德经》德经·第七十三章。本章围绕「勇敢也要有分寸」展开，可以先读原文，再对照译文，看看作者用了什么比方或对比。",
+  "editorial_note": "本馆用逐句译解帮助入门。读「道」「无为」等词时要看上下文；古代观念和理想化比方，可以边读边与家长讨论。",
+  "source": {
+    "work": "道德经（又名老子）",
+    "section": "德经·第七十三章",
+    "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#七十三章",
+    "note": "原文以本机简体《老子》为底本，统一引号，第七章移去括号异文提示。译文、词义和练习为本馆编写的入门读法，参考王弼注理解，不将不同底本混作同一文本。"
+  },
+  "source_ref": {
+    "locator": "/content/72",
+    "path": "poetry/simplified/诸子百家/老子.json",
+    "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+    "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+    "anchor_text": "勇于敢则杀，勇于不敢则活。此两者，或利或害。天之所恶，孰知其故？是以圣人犹难之。天之道，不争而善胜，不言而善应，不召而自来，繟然而善谋。天网恢恢，疏而不失。"
+  },
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "勇于敢则杀，勇于不敢则活。",
+      "translation": "一味冒进的勇敢可能招来杀身之祸，有勇气克制反能保全生命。",
+      "explanation": "读词小提示：「勇于敢」：一味冒进、不顾后果地逞勇；「勇于不敢」：有勇气克制、不轻率冒险。",
+      "chunks": [
+        "勇于敢则杀，",
+        "勇于不敢则活。"
+      ],
+      "hints": [
+        "勇于敢",
+        "勇于不敢"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "勇于敢",
+          "kind": "word",
+          "meaning": "一味冒进、不顾后果地逞勇。"
+        },
+        {
+          "id": "n2",
+          "quote": "勇于不敢",
+          "kind": "word",
+          "meaning": "有勇气克制、不轻率冒险。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第七十三章》第1句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#七十三章",
+        "source_ref": {
+          "locator": "/content/72",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "勇于敢则杀，勇于不敢则活。"
+        }
+      }
+    },
+    {
+      "id": "s2",
+      "text": "此两者，或利或害。",
+      "translation": "这两种做法，有的带来好处，有的带来损害。",
+      "explanation": "读词小提示：「利」：有利的结果；「害」：有害的结果。",
+      "chunks": [
+        "此两者，",
+        "或利或害。"
+      ],
+      "hints": [
+        "利",
+        "害"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "利",
+          "kind": "word",
+          "meaning": "有利的结果。"
+        },
+        {
+          "id": "n2",
+          "quote": "害",
+          "kind": "word",
+          "meaning": "有害的结果。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第七十三章》第2句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#七十三章",
+        "source_ref": {
+          "locator": "/content/72",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "勇于敢则杀，勇于不敢则活。此两者，或利或害。天之所恶，孰知其故？是以圣人犹难之。天之道，不争而善胜，不言而善应，不召而自来，繟然而善谋。天网恢恢，疏而不失。"
+        }
+      }
+    },
+    {
+      "id": "s3",
+      "text": "天之所恶，孰知其故？",
+      "translation": "天为什么厌弃某些做法，谁能全知道缘故呢？",
+      "explanation": "读词小提示：「孰」：谁。",
+      "chunks": [
+        "天之所恶，",
+        "孰知其故？"
+      ],
+      "hints": [
+        "孰"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "孰",
+          "kind": "word",
+          "meaning": "谁。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第七十三章》第3句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#七十三章",
+        "source_ref": {
+          "locator": "/content/72",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "天之所恶，孰知其故？"
+        }
+      }
+    },
+    {
+      "id": "s4",
+      "text": "是以圣人犹难之。",
+      "translation": "所以有智慧的人也谨慎看待，不敢轻率。",
+      "explanation": "读词小提示：「犹难之」：仍认真看待，感到不能轻率决定。",
+      "chunks": [
+        "是以圣人犹难之。"
+      ],
+      "hints": [
+        "犹难之"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "犹难之",
+          "kind": "word",
+          "meaning": "仍认真看待，感到不能轻率决定。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第七十三章》第4句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#七十三章",
+        "source_ref": {
+          "locator": "/content/72",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "勇于敢则杀，勇于不敢则活。此两者，或利或害。天之所恶，孰知其故？是以圣人犹难之。天之道，不争而善胜，不言而善应，不召而自来，繟然而善谋。天网恢恢，疏而不失。"
+        }
+      }
+    },
+    {
+      "id": "s5",
+      "text": "天之道，不争而善胜，不言而善应，不召而自来，繟然而善谋。",
+      "translation": "古人所说的天道，不争而善于成就，不言而善于回应，不召而自来，从容却善于安排。",
+      "explanation": "读词小提示：「繟然」：宽缓、从容的样子。",
+      "chunks": [
+        "天之道，",
+        "不争而善胜，",
+        "不言而善应，",
+        "不召而自来，",
+        "繟然而善谋。"
+      ],
+      "hints": [
+        "繟然"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "繟然",
+          "kind": "word",
+          "meaning": "宽缓、从容的样子。",
+          "reading": "chǎn rán"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第七十三章》第5句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#七十三章",
+        "source_ref": {
+          "locator": "/content/72",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "天之道，不争而善胜，不言而善应，不召而自来，繟然而善谋。"
+        }
+      }
+    },
+    {
+      "id": "s6",
+      "text": "天网恢恢，疏而不失。",
+      "translation": "好像一张宽广的网，网眼虽疏，却不遗漏。",
+      "explanation": "「天网」是劝诫的比方，现实中的判断仍需事实和证据。",
+      "chunks": [
+        "天网恢恢，",
+        "疏而不失。"
+      ],
+      "hints": [
+        "天网",
+        "恢恢",
+        "失"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "天网",
+          "kind": "word",
+          "meaning": "比喻古人设想的自然秩序与报应。"
+        },
+        {
+          "id": "n2",
+          "quote": "恢恢",
+          "kind": "word",
+          "meaning": "广大宽阔。"
+        },
+        {
+          "id": "n3",
+          "quote": "失",
+          "kind": "word",
+          "meaning": "遗漏。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第七十三章》第6句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#七十三章",
+        "source_ref": {
+          "locator": "/content/72",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "天网恢恢，疏而不失。"
+        }
+      }
+    }
+  ],
+  "overview": {
+    "sequence": [
+      "先看本章开头：一味冒进的勇敢可能招来杀身之祸，有勇气克制反能保全生命。",
+      "本章比较敢与不敢，用天网作劝诫的比方，提醒人谨慎看待行动后果。",
+      "再回到结尾：好像一张宽广的网，网眼虽疏，却不遗漏。"
+    ],
+    "question": "这一章为什么可以叫作「勇敢也要有分寸」？",
+    "answer": "本章比较敢与不敢，用天网作劝诫的比方，提醒人谨慎看待行动后果。可以引用本章开头或结尾的原句，说明你的依据。",
+    "takeaway": "本章比较敢与不敢，用天网作劝诫的比方，提醒人谨慎看待行动后果。"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "choice",
+      "sentence": "s1",
+      "skill": "meaning",
+      "prompt": "开头的「勇于敢」在这里怎样理解？",
+      "choices": [
+        "只顾自己，不留意他人的处境。",
+        "一味冒进、不顾后果地逞勇。",
+        "为了显示本领而处处炫耀。"
+      ],
+      "answer": 1,
+      "explanation": "把词放回原句看，「勇于敢」在本句中的意思是：一味冒进、不顾后果地逞勇。"
+    },
+    {
+      "id": "q2",
+      "type": "choice",
+      "sentence": "s6",
+      "skill": "reason",
+      "prompt": "读完「勇敢也要有分寸」，哪一种理解更合适？",
+      "choices": [
+        "无论什么情况，都应该争着抢先。",
+        "做事情永远越多越快越好。",
+        "本章比较敢与不敢，用天网作劝诫的比方，提醒人谨慎看待行动后果。"
+      ],
+      "answer": 2,
+      "explanation": "本章比较敢与不敢，用天网作劝诫的比方，提醒人谨慎看待行动后果。"
+    },
+    {
+      "id": "q3",
+      "type": "selfcheck",
+      "sentence": "s6",
+      "skill": "retell",
+      "prompt": "选本章一句话，用自己的话解释，再说说它怎样帮助你理解「勇敢也要有分寸」。",
+      "answer": "先说清原句中的对象和动作，再解释关键词。可以围绕这点来讲：本章比较敢与不敢，用天网作劝诫的比方，提醒人谨慎看待行动后果。说完后，回到原文找一句作依据。",
+      "explanation": "不必背诵译文。重点看词义是否放回本句、有没有原文依据，以及是否把古人的比方误当成不分条件的结论。"
+    }
+  ]
+}

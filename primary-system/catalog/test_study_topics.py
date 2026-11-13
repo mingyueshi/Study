@@ -13,6 +13,7 @@ GEOGRAPHY_PAGES = (
     'geography-study', 'geography-atlas', 'geography-atlas-china',
     'geography-atlas-world', 'geography-atlas-province', 'geography-atlas-places',
     'geography-atlas-routes', 'geography-atlas-gallery', 'geography-atlas-animals', 'geography-atlas-world-animals',
+    'geography-atlas-plants', 'geography-atlas-world-plants',
 )
 COURSES = (
     ('geography', 'astronomy-study', 'astro', '天文探索', ('astronomy-index', 'mysteries')),
@@ -63,6 +64,8 @@ class StudyTopicPageTests(SimpleTestCase):
             ('geography-atlas-china', 'province.html', '?adcode=110000'),
             ('geography-atlas-china', 'animals.html', '?animal=giant-panda'),
             ('geography-atlas-world', 'world-animals.html', '?animal=emperor-penguin'),
+            ('geography-atlas-china', 'plants.html', '?plant=lotus'),
+            ('geography-atlas-world', 'world-plants.html', '?plant=antarctic-hair-grass'),
             ('geography-atlas-places', 'gallery.html', '?place=f20'),
         ):
             with self.subTest(name=name, target=target):
@@ -82,6 +85,8 @@ class StudyTopicPageTests(SimpleTestCase):
             ('geography-atlas-china', 'geography-study', '地理小课堂'),
             ('geography-atlas-china', 'geography-atlas-animals', '中国动物地图'),
             ('geography-atlas-world', 'geography-atlas-world-animals', '世界动物地图'),
+            ('geography-atlas-china', 'geography-atlas-plants', '中国植物地图'),
+            ('geography-atlas-world', 'geography-atlas-world-plants', '世界植物地图'),
         ):
             with self.subTest(main=main):
                 response = self.client.get(reverse(main))

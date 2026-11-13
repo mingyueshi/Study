@@ -1,0 +1,270 @@
+{
+  "schema_version": 1,
+  "id": "daodejing-72",
+  "title": "道德经·第七十二章",
+  "attribution": "老子",
+  "level": "challenge",
+  "genre": "reasoning",
+  "skills": [
+    "meaning",
+    "referent",
+    "reason",
+    "contrast",
+    "retell"
+  ],
+  "curriculum": null,
+  "intro": "不给别人压迫，也不自夸。本章先谈百姓的生活，再谈自知、自爱，提醒人尊重别人，也不炫耀自己。",
+  "background": "这是《道德经》德经·第七十二章。本章围绕「不给别人压迫，也不自夸」展开，可以先读原文，再对照译文，看看作者用了什么比方或对比。",
+  "editorial_note": "本馆用逐句译解帮助入门。读「道」「无为」等词时要看上下文；古代观念和理想化比方，可以边读边与家长讨论。",
+  "source": {
+    "work": "道德经（又名老子）",
+    "section": "德经·第七十二章",
+    "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#七十二章",
+    "note": "原文以本机简体《老子》为底本，统一引号，第七章移去括号异文提示。译文、词义和练习为本馆编写的入门读法，参考王弼注理解，不将不同底本混作同一文本。"
+  },
+  "source_ref": {
+    "locator": "/content/71",
+    "path": "poetry/simplified/诸子百家/老子.json",
+    "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+    "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+    "anchor_text": "民不畏威，则大威至。无狎其所居，无厌其所生。夫唯不厌，是以不厌。是以圣人自知不自见；自爱不自贵。故去彼取此。"
+  },
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "民不畏威，则大威至。",
+      "translation": "百姓不再害怕威压时，大的危机就可能到来。",
+      "explanation": "读词小提示：「威」：威压、压迫；「大威」：大的危机、严重的反抗。",
+      "chunks": [
+        "民不畏威，",
+        "则大威至。"
+      ],
+      "hints": [
+        "威",
+        "大威"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "威",
+          "kind": "word",
+          "meaning": "威压、压迫。"
+        },
+        {
+          "id": "n2",
+          "quote": "大威",
+          "kind": "word",
+          "meaning": "大的危机、严重的反抗。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第七十二章》第1句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#七十二章",
+        "source_ref": {
+          "locator": "/content/71",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "民不畏威，则大威至。"
+        }
+      }
+    },
+    {
+      "id": "s2",
+      "text": "无狎其所居，无厌其所生。",
+      "translation": "不要逼迫他们的居处，不要压迫他们的生活。",
+      "explanation": "读词小提示：「狎」：逼迫、轻慢；「厌」：压迫、使厌弃。",
+      "chunks": [
+        "无狎其所居，",
+        "无厌其所生。"
+      ],
+      "hints": [
+        "狎",
+        "厌"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "狎",
+          "kind": "word",
+          "meaning": "逼迫、轻慢。"
+        },
+        {
+          "id": "n2",
+          "quote": "厌",
+          "kind": "word",
+          "meaning": "压迫、使厌弃。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第七十二章》第2句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#七十二章",
+        "source_ref": {
+          "locator": "/content/71",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "无狎其所居，无厌其所生。"
+        }
+      }
+    },
+    {
+      "id": "s3",
+      "text": "夫唯不厌，是以不厌。",
+      "translation": "正因为不去压迫，才不会使人厌弃。",
+      "explanation": "读词小提示：「厌」：压迫、使厌弃。",
+      "chunks": [
+        "夫唯不厌，",
+        "是以不厌。"
+      ],
+      "hints": [
+        "厌"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "厌",
+          "kind": "word",
+          "meaning": "压迫、使厌弃。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第七十二章》第3句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#七十二章",
+        "source_ref": {
+          "locator": "/content/71",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "夫唯不厌，是以不厌。"
+        }
+      }
+    },
+    {
+      "id": "s4",
+      "text": "是以圣人自知不自见；自爱不自贵。",
+      "translation": "所以有智慧的人认识自己，却不炫示自己；爱护自己，却不自认高人一等。",
+      "explanation": "读词小提示：「自见」：炫示自己；「自贵」：自认高贵、看轻别人。",
+      "chunks": [
+        "是以圣人自知不自见；",
+        "自爱不自贵。"
+      ],
+      "hints": [
+        "自见",
+        "自贵"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "自见",
+          "kind": "word",
+          "meaning": "炫示自己。"
+        },
+        {
+          "id": "n2",
+          "quote": "自贵",
+          "kind": "word",
+          "meaning": "自认高贵、看轻别人。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第七十二章》第4句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#七十二章",
+        "source_ref": {
+          "locator": "/content/71",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "是以圣人自知不自见；自爱不自贵。"
+        }
+      }
+    },
+    {
+      "id": "s5",
+      "text": "故去彼取此。",
+      "translation": "因此舍弃自夸，选择自知与自爱。",
+      "explanation": "读词小提示：「彼」：前文说的自夸、自贵；「此」：自知与自爱。",
+      "chunks": [
+        "故去彼取此。"
+      ],
+      "hints": [
+        "彼",
+        "此"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "彼",
+          "kind": "word",
+          "meaning": "前文说的自夸、自贵。"
+        },
+        {
+          "id": "n2",
+          "quote": "此",
+          "kind": "word",
+          "meaning": "自知与自爱。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第七十二章》第5句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#七十二章",
+        "source_ref": {
+          "locator": "/content/71",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "民不畏威，则大威至。无狎其所居，无厌其所生。夫唯不厌，是以不厌。是以圣人自知不自见；自爱不自贵。故去彼取此。"
+        }
+      }
+    }
+  ],
+  "overview": {
+    "sequence": [
+      "先看本章开头：百姓不再害怕威压时，大的危机就可能到来。",
+      "本章先谈百姓的生活，再谈自知、自爱，提醒人尊重别人，也不炫耀自己。",
+      "再回到结尾：因此舍弃自夸，选择自知与自爱。"
+    ],
+    "question": "这一章为什么可以叫作「不给别人压迫，也不自夸」？",
+    "answer": "本章先谈百姓的生活，再谈自知、自爱，提醒人尊重别人，也不炫耀自己。可以引用本章开头或结尾的原句，说明你的依据。",
+    "takeaway": "本章先谈百姓的生活，再谈自知、自爱，提醒人尊重别人，也不炫耀自己。"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "choice",
+      "sentence": "s1",
+      "skill": "meaning",
+      "prompt": "开头的「威」在这里怎样理解？",
+      "choices": [
+        "威压、压迫。",
+        "只顾自己，不留意他人的处境。",
+        "为了显示本领而处处炫耀。"
+      ],
+      "answer": 0,
+      "explanation": "把词放回原句看，「威」在本句中的意思是：威压、压迫。"
+    },
+    {
+      "id": "q2",
+      "type": "choice",
+      "sentence": "s5",
+      "skill": "reason",
+      "prompt": "读完「不给别人压迫，也不自夸」，哪一种理解更合适？",
+      "choices": [
+        "遇到问题不用观察，也不必行动。",
+        "本章先谈百姓的生活，再谈自知、自爱，提醒人尊重别人，也不炫耀自己。",
+        "只看名字，就能知道全部道理。"
+      ],
+      "answer": 1,
+      "explanation": "本章先谈百姓的生活，再谈自知、自爱，提醒人尊重别人，也不炫耀自己。"
+    },
+    {
+      "id": "q3",
+      "type": "selfcheck",
+      "sentence": "s5",
+      "skill": "retell",
+      "prompt": "选本章一句话，用自己的话解释，再说说它怎样帮助你理解「不给别人压迫，也不自夸」。",
+      "answer": "先说清原句中的对象和动作，再解释关键词。可以围绕这点来讲：本章先谈百姓的生活，再谈自知、自爱，提醒人尊重别人，也不炫耀自己。说完后，回到原文找一句作依据。",
+      "explanation": "不必背诵译文。重点看词义是否放回本句、有没有原文依据，以及是否把古人的比方误当成不分条件的结论。"
+    }
+  ]
+}

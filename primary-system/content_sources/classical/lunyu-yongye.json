@@ -1,0 +1,1570 @@
+{
+  "schema_version": 1,
+  "id": "lunyu-yongye",
+  "title": "论语·雍也",
+  "unit_label": "则",
+  "attribution": "孔子及其弟子言行，弟子与再传弟子编纂",
+  "level": "challenge",
+  "genre": "reasoning",
+  "skills": [
+    "meaning",
+    "referent",
+    "reason",
+    "contrast"
+  ],
+  "curriculum": null,
+  "intro": "认识不同学生的本领，读懂学习态度和待人的分寸。",
+  "background": "这是《论语》二十篇中的第6篇，话题围绕各有长处，勤学向善展开。篇名取自开头的字，并不表示每一则都只讲同一个题目。",
+  "editorial_note": "每次可以只读一两则。分段依本机原典，共二十篇、五百一十三则；其他版本的分章和个别用字可能不同。古代身份、礼制和观念要结合当时背景来理解。",
+  "source": {
+    "work": "论语",
+    "section": "雍也篇",
+    "url": "https://zh.wikisource.org/wiki/論語/雍也第六",
+    "note": "原文采用随项目保存的简体原典，统一引号样式。译文和部分词义据所列译注资料整理，疑难处配合本篇提示阅读。"
+  },
+  "source_ref": {
+    "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+    "path": "poetry/simplified/儒家经典/论语.json",
+    "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+    "locator": "/content/5",
+    "anchor_text": "子曰：“雍也可使南面。”"
+  },
+  "edition": {
+    "label": "译注参考：ieduer/lunyu 所收《论语译注》资料",
+    "url": "https://github.com/ieduer/lunyu/blob/44f039ef8174b219b5f773a156b3d954ee65be25/data/dialogues.json",
+    "revision": "44f039ef8174b219b5f773a156b3d954ee65be25",
+    "license": "MIT，许可副本随内容源保存",
+    "note": "采用固定版本的译注，去除重复条目与注号，逐则配回本馆原文；词义保留简短释义，补充课堂提示。乡党两则分配译文，颜渊第二十则依完整原文呈现。"
+  },
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "子曰：「雍也可使南面。」",
+      "translation": "孔子说：「冉雍这个人，可以让他做一部门或一地方的长官。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "南面",
+          "kind": "word",
+          "meaning": "古代早就知道坐北朝南的方向是最好的，因此也以这个方向的位置最为尊贵，无论天子、诸侯、卿大夫，当他作为长官出现的时候，总是南面而坐的。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「雍也可使南面。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·雍也》第1则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/雍也第六",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/5",
+          "anchor_text": "子曰：“雍也可使南面。”"
+        }
+      },
+      "explanation": "「南面」：古代早就知道坐北朝南的方向是最好的，因此也以这个方向的位置最为尊贵，无论天子、诸侯、卿大夫，当他作为长官出现的时候，总是南面而坐的。",
+      "hints": [
+        "南面"
+      ],
+      "translation_entry": 121
+    },
+    {
+      "id": "s2",
+      "text": "仲弓问子桑伯子，子曰：「可也，简。」仲弓曰：「居敬而行简，以临其民，不亦可乎？居简而行简，无乃大简乎？」子曰：「雍之言然。」",
+      "translation": "仲弓问到子桑伯子这个人。孔子道：「他简单得好。」仲弓道：「若存心严肃认真，而以简单行之，（抓大体，不烦琐，）来治理百姓，不也可以吗？若存心简单，又以简单行之，不是太简单了吗？」孔子道：「你这番话正确。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "子桑伯子",
+          "kind": "word",
+          "meaning": "此人已经无可考。"
+        },
+        {
+          "id": "n2",
+          "quote": "简",
+          "kind": "word",
+          "meaning": "简略、不烦琐。"
+        },
+        {
+          "id": "n3",
+          "quote": "无乃",
+          "kind": "word",
+          "meaning": "相当于「不是」，但只用于反问句。"
+        },
+        {
+          "id": "n4",
+          "quote": "大",
+          "kind": "word",
+          "meaning": "同「太」。"
+        }
+      ],
+      "chunks": [
+        "仲弓问子桑伯子，",
+        "子曰：",
+        "「可也，",
+        "简。",
+        "」仲弓曰：",
+        "「居敬而行简，",
+        "以临其民，",
+        "不亦可乎？",
+        "居简而行简，",
+        "无乃大简乎？",
+        "」子曰：",
+        "「雍之言然。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·雍也》第2则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/雍也第六",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/5",
+          "anchor_text": "仲弓问子桑伯子，子曰：“可也，简。”仲弓曰：“居敬而行简，以临其民，不亦可乎？居简而行简，无乃大简乎？”子曰：“雍之言然。”"
+        }
+      },
+      "explanation": "「子桑伯子」：此人已经无可考；「简」：简略、不烦琐。",
+      "hints": [
+        "子桑伯子",
+        "简",
+        "无乃"
+      ],
+      "translation_entry": 122
+    },
+    {
+      "id": "s3",
+      "text": "哀公问：「弟子孰为好学？」孔子对曰：「有颜回者好学，不迁怒，不贰过，不幸短命死矣，今也则亡，未闻好学者也。」",
+      "translation": "鲁哀公问：「你的学生中，哪个好学？」孔子答道：「有一个叫颜回的人好学，不拿别人出气；也不再犯同样的过失。不幸短命死了，现在再没有这样的人了，再也没听过好学的人了。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "短命",
+          "kind": "word",
+          "meaning": "《公羊传》把颜渊的死列在鲁哀公十四年（公元前481年），其时孔子年七十一，依《史记·仲尼弟子列传》，颜渊少于孔子三十岁，则死时年四十一。"
+        }
+      ],
+      "chunks": [
+        "哀公问：",
+        "「弟子孰为好学？",
+        "」孔子对曰：",
+        "「有颜回者好学，",
+        "不迁怒，",
+        "不贰过，",
+        "不幸短命死矣，",
+        "今也则亡，",
+        "未闻好学者也。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·雍也》第3则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/雍也第六",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/5",
+          "anchor_text": "哀公问：“弟子孰为好学？”孔子对曰：“有颜回者好学，不迁怒，不贰过，不幸短命死矣，今也则亡，未闻好学者也。”"
+        }
+      },
+      "explanation": "「短命」：《公羊传》把颜渊的死列在鲁哀公十四年（公元前481年），其时孔子年七十一，依《史记·仲尼弟子列传》，颜渊少于孔子三十岁，则死时年四十一。",
+      "hints": [
+        "短命"
+      ],
+      "translation_entry": 123
+    },
+    {
+      "id": "s4",
+      "text": "子华使于齐，冉子为其母请粟，子曰：「与之釜。」请益，曰：「与之庾。」冉子与之粟五秉。子曰：「赤之适齐也，乘肥马，衣轻裘。吾闻之也，君子周急不继富。」",
+      "translation": "公西华被派到齐国去作使者，冉有替他母亲向孔子请求小米。孔子道：「给他六斗四升。」冉有请求增加。孔子道：「再给他二斗四升。」冉有却给了他八十石。孔子道：「公西赤到齐国去，坐着由肥马驾的车辆，穿着又轻又暖的皮袍。我听说过：君子只是雪里送炭，不去锦上添花。「",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "子华",
+          "kind": "word",
+          "meaning": "孔子学生，姓公西，名赤，字子华，比孔子小四十二岁。"
+        },
+        {
+          "id": "n2",
+          "quote": "使",
+          "kind": "word",
+          "meaning": "旧读去声，出使。"
+        },
+        {
+          "id": "n3",
+          "quote": "冉子",
+          "kind": "word",
+          "meaning": "《论语》中，孔子弟子称「子」的不过曾参、有若、闵子骞和冉有几个人，因之这冉子当然就是冉有。"
+        },
+        {
+          "id": "n4",
+          "quote": "粟",
+          "kind": "word",
+          "meaning": "小米（详新建设杂志1954年12月号胡静〈我国古代农艺史上的几个问题〉）。"
+        },
+        {
+          "id": "n5",
+          "quote": "釜",
+          "kind": "word",
+          "meaning": "fǔ，古代量名，容当时的量器六斗四升，约合今天的容量一斗二升八合。"
+        },
+        {
+          "id": "n6",
+          "quote": "庾",
+          "kind": "word",
+          "meaning": "yǔ，古代量名，容当日的二斗四升，约合今日的四升八合。"
+        }
+      ],
+      "chunks": [
+        "子华使于齐，",
+        "冉子为其母请粟，",
+        "子曰：",
+        "「与之釜。",
+        "」请益，",
+        "曰：",
+        "「与之庾。",
+        "」冉子与之粟五秉。",
+        "子曰：",
+        "「赤之适齐也，",
+        "乘肥马，",
+        "衣轻裘。",
+        "吾闻之也，",
+        "君子周急不继富。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·雍也》第4则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/雍也第六",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/5",
+          "anchor_text": "子华使于齐，冉子为其母请粟，子曰：“与之釜。”请益，曰：“与之庾。”冉子与之粟五秉。子曰：“赤之适齐也，乘肥马，衣轻裘。吾闻之也，君子周急不继富。”"
+        }
+      },
+      "explanation": "「子华」：孔子学生，姓公西，名赤，字子华，比孔子小四十二岁；「使」：旧读去声，出使。",
+      "hints": [
+        "子华",
+        "使",
+        "冉子"
+      ],
+      "translation_entry": 124
+    },
+    {
+      "id": "s5",
+      "text": "原思为之宰，与之粟九百，辞。子曰：「毋，以与尔邻里乡党乎！」",
+      "translation": "原思任孔子家的总管，孔子给他小米九百，他不肯受。孔子道：「别辞，有多的，给你地方上（的穷人）吧！」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "原思",
+          "kind": "word",
+          "meaning": "孔子弟子原宪，字子思。"
+        },
+        {
+          "id": "n2",
+          "quote": "之",
+          "kind": "word",
+          "meaning": "用法同「其」，他的，指孔子而言。"
+        },
+        {
+          "id": "n3",
+          "quote": "九百",
+          "kind": "word",
+          "meaning": "九百份俸粮，原文没有注明具体计量单位。"
+        },
+        {
+          "id": "n4",
+          "quote": "邻里乡党",
+          "kind": "word",
+          "meaning": "都是古代地方单位的名称，五家为邻，二十五家为里，万二千五百家为乡，五百家为党。"
+        }
+      ],
+      "chunks": [
+        "原思为之宰，",
+        "与之粟九百，",
+        "辞。",
+        "子曰：",
+        "「毋，",
+        "以与尔邻里乡党乎！",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·雍也》第5则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/雍也第六",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/5",
+          "anchor_text": "原思为之宰，与之粟九百，辞。子曰：“毋，以与尔邻里乡党乎！”"
+        }
+      },
+      "explanation": "「原思」：孔子弟子原宪，字子思；「之」：用法同「其」，他的，指孔子而言。",
+      "hints": [
+        "原思",
+        "之",
+        "九百"
+      ],
+      "translation_entry": 125
+    },
+    {
+      "id": "s6",
+      "text": "子谓仲弓曰：「犁牛之子骍且角，虽欲勿用，山川其舍诸？」",
+      "translation": "孔子谈到冉雍，说：「耕牛的儿子长着赤色的毛，整齐的角，虽然不想用它作牺牲来祭祀，山川之神难道会舍弃它吗？」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "骍",
+          "kind": "word",
+          "meaning": "赤色。"
+        },
+        {
+          "id": "n2",
+          "quote": "角",
+          "kind": "word",
+          "meaning": "意思是两角长得周正。"
+        },
+        {
+          "id": "n3",
+          "quote": "用",
+          "kind": "word",
+          "meaning": "义同《左传》「用牲于社」之「用」，杀之以祭也。"
+        },
+        {
+          "id": "n4",
+          "quote": "其",
+          "kind": "word",
+          "meaning": "意义同「岂」。"
+        },
+        {
+          "id": "n5",
+          "quote": "诸",
+          "kind": "word",
+          "meaning": "「之乎」两字的合音字。"
+        }
+      ],
+      "chunks": [
+        "子谓仲弓曰：",
+        "「犁牛之子骍且角，",
+        "虽欲勿用，",
+        "山川其舍诸？",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·雍也》第6则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/雍也第六",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/5",
+          "anchor_text": "子谓仲弓曰：“犁牛之子骍且角，虽欲勿用，山川其舍诸？”"
+        }
+      },
+      "explanation": "「骍」：赤色；「角」：意思是两角长得周正。",
+      "hints": [
+        "骍",
+        "角",
+        "用"
+      ],
+      "translation_entry": 126
+    },
+    {
+      "id": "s7",
+      "text": "子曰：「回也，其心三月不违仁，其余则日月至焉而已矣。」",
+      "translation": "孔子说：「颜回呀，他的心长久地不离开仁德，别的学生么，只是短时期偶然想起一下罢了。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "三月",
+          "kind": "word",
+          "meaning": "这种词语必须活看，不要被字面所拘束，因此译文用「长久地」译「三月」，用「短时期」「偶然」来译「日月」。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「回也，",
+        "其心三月不违仁，",
+        "其余则日月至焉而已矣。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·雍也》第7则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/雍也第六",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/5",
+          "anchor_text": "子曰：“回也，其心三月不违仁，其余则日月至焉而已矣。”"
+        }
+      },
+      "explanation": "「三月」：这种词语必须活看，不要被字面所拘束，因此译文用「长久地」译「三月」，用「短时期」「偶然」来译「日月」。",
+      "hints": [
+        "三月"
+      ],
+      "translation_entry": 127
+    },
+    {
+      "id": "s8",
+      "text": "季康子问：「仲由可使从政也与？」子曰：「由也果，于从政乎何有？」曰：「赐也可使从政也与？」曰：「赐也达，于从政乎何有？」曰：「求也可使从政也与？」曰：「求也艺，于从政乎何有？」",
+      "translation": "季康子问孔子：「仲由这人，可以使用他治理政事么？」孔子道：「仲由果敢决断，让他治理政事有什么困难呢？」又问：「端木赐可以使用他治理政事么？」孔子道：「端木赐通情达理，让他治理政事有什么困难呢？」又问：「冉求可以使用他治理政事么？」孔子道：「冉求多才多艺，让他治理政事有什么困难呢？」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "果",
+          "kind": "word",
+          "meaning": "果断。"
+        }
+      ],
+      "chunks": [
+        "季康子问：",
+        "「仲由可使从政也与？",
+        "」子曰：",
+        "「由也果，",
+        "于从政乎何有？",
+        "」曰：",
+        "「赐也可使从政也与？",
+        "」曰：",
+        "「赐也达，",
+        "于从政乎何有？",
+        "」曰：",
+        "「求也可使从政也与？",
+        "」曰：",
+        "「求也艺，",
+        "于从政乎何有？",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·雍也》第8则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/雍也第六",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/5",
+          "anchor_text": "季康子问：“仲由可使从政也与？”子曰：“由也果，于从政乎何有？”曰：“赐也可使从政也与？”曰：“赐也达，于从政乎何有？”曰：“求也可使从政也与？”曰：“求也艺，于从政乎何有？”"
+        }
+      },
+      "explanation": "三个学生各有长处：仲由果断，端木赐通达，冉求多才。评价人要看具体本领。",
+      "hints": [
+        "果"
+      ],
+      "translation_entry": 128
+    },
+    {
+      "id": "s9",
+      "text": "季氏使闵子骞为费宰，闵子骞曰：「善为我辞焉。如有复我者，则吾必在汶上矣。」",
+      "translation": "季氏叫闵子骞作他采邑费地的县长。闵子骞对来人说道：「好好地替我辞掉吧！若是再来找我的话，那我一定会逃到汶水之北去了。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "闵子骞",
+          "kind": "word",
+          "meaning": "孔子学生闵损，字子骞，比孔子小十五岁。"
+        },
+        {
+          "id": "n2",
+          "quote": "费",
+          "kind": "word",
+          "meaning": "旧音秘，故城在今山东费县西北二十里。"
+        },
+        {
+          "id": "n3",
+          "quote": "汶上",
+          "kind": "word",
+          "meaning": "汶音问，wèn，水名，就是山东的大汶河。"
+        }
+      ],
+      "chunks": [
+        "季氏使闵子骞为费宰，",
+        "闵子骞曰：",
+        "「善为我辞焉。",
+        "如有复我者，",
+        "则吾必在汶上矣。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·雍也》第9则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/雍也第六",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/5",
+          "anchor_text": "季氏使闵子骞为费宰，闵子骞曰：“善为我辞焉。如有复我者，则吾必在汶上矣。”"
+        }
+      },
+      "explanation": "「闵子骞」：孔子学生闵损，字子骞，比孔子小十五岁；「费」：旧音秘，故城在今山东费县西北二十里。",
+      "hints": [
+        "闵子骞",
+        "费",
+        "汶上"
+      ],
+      "translation_entry": 129
+    },
+    {
+      "id": "s10",
+      "text": "伯牛有疾，子问之，自牖执其手，曰：「亡之，命矣夫！斯人也而有斯疾也！斯人也而有斯疾也！」",
+      "translation": "伯牛生了病，孔子去探问他，从窗户里握着他的手，道：「难得活了，这是命呀，这样的人竟有这样的病！这样的人竟有这样的病！」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "伯牛",
+          "kind": "word",
+          "meaning": "孔子学生冉耕字伯牛。"
+        },
+        {
+          "id": "n2",
+          "quote": "亡之",
+          "kind": "word",
+          "meaning": "这「之」字不是代词，不是「亡」（死亡之意）的宾语，因为「亡」字在这里不应该有宾语，只是凑成一个音节罢了。"
+        }
+      ],
+      "chunks": [
+        "伯牛有疾，",
+        "子问之，",
+        "自牖执其手，",
+        "曰：",
+        "「亡之，",
+        "命矣夫！",
+        "斯人也而有斯疾也！",
+        "斯人也而有斯疾也！",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·雍也》第10则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/雍也第六",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/5",
+          "anchor_text": "伯牛有疾，子问之，自牖执其手，曰：“亡之，命矣夫！斯人也而有斯疾也！斯人也而有斯疾也！”"
+        }
+      },
+      "explanation": "「伯牛」：孔子学生冉耕字伯牛；「亡之」：这「之」字不是代词，不是「亡」（死亡之意）的宾语，因为「亡」字在这里不应该有宾语，只是凑成一个音节罢了。",
+      "hints": [
+        "伯牛",
+        "亡之"
+      ],
+      "translation_entry": 130
+    },
+    {
+      "id": "s11",
+      "text": "子曰：「贤哉回也！一箪食，一瓢饮，在陋巷，人不堪其忧，回也不改其乐。贤哉，回也！」",
+      "translation": "孔子说：「颜回多么有修养呀，一竹筐饭，一瓜瓢水，住在小巷子里，别人都受不了那穷苦的忧愁，颜回却不改变他自有的快乐。颜回多么有修养呀！」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "箪",
+          "kind": "word",
+          "meaning": "音单，dān，古代盛饭的竹器，圆形。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「贤哉回也！",
+        "一箪食，",
+        "一瓢饮，",
+        "在陋巷，",
+        "人不堪其忧，",
+        "回也不改其乐。",
+        "贤哉，",
+        "回也！",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·雍也》第11则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/雍也第六",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/5",
+          "anchor_text": "子曰：“贤哉回也！一箪食，一瓢饮，在陋巷，人不堪其忧，回也不改其乐。贤哉，回也！”"
+        }
+      },
+      "explanation": "「箪」：音单，dān，古代盛饭的竹器，圆形。",
+      "hints": [
+        "箪"
+      ],
+      "translation_entry": 131
+    },
+    {
+      "id": "s12",
+      "text": "冉求曰：「非不说子之道，力不足也。」子曰：「力不足者，中道而废，今女画。」",
+      "translation": "冉求道：「不是我不喜欢您的学说，是我力量不够。」孔子道：「如果真是力量不够，走到半道会再走不动了。现在你却没有开步走。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "力不足者",
+          "kind": "word",
+          "meaning": "「者」这一表示停顿的语气词，有时兼表假设语气，详《文言语法》。"
+        },
+        {
+          "id": "n2",
+          "quote": "画",
+          "kind": "word",
+          "meaning": "停止。"
+        }
+      ],
+      "chunks": [
+        "冉求曰：",
+        "「非不说子之道，",
+        "力不足也。",
+        "」子曰：",
+        "「力不足者，",
+        "中道而废，",
+        "今女画。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·雍也》第12则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/雍也第六",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/5",
+          "anchor_text": "冉求曰：“非不说子之道，力不足也。”子曰：“力不足者，中道而废，今女画。”"
+        }
+      },
+      "explanation": "「力不足者」：「者」这一表示停顿的语气词，有时兼表假设语气，详《文言语法》；「画」：停止。",
+      "hints": [
+        "力不足者",
+        "画"
+      ],
+      "translation_entry": 132
+    },
+    {
+      "id": "s13",
+      "text": "子谓子夏曰：「女为君子儒，无为小人儒。」",
+      "translation": "孔子对子夏道：「你要去做个君子式的儒者，不要去做那小人式的儒者！」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "儒",
+          "kind": "word",
+          "meaning": "学习礼乐、从事教化的人。"
+        }
+      ],
+      "chunks": [
+        "子谓子夏曰：",
+        "「女为君子儒，",
+        "无为小人儒。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·雍也》第13则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/雍也第六",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/5",
+          "anchor_text": "子谓子夏曰：“女为君子儒，无为小人儒。”"
+        }
+      },
+      "explanation": "这里比较的是学习的目的：用学问修养自己、帮助别人，还是只谋取私利。",
+      "hints": [
+        "儒"
+      ],
+      "translation_entry": 133
+    },
+    {
+      "id": "s14",
+      "text": "子游为武城宰，子曰：「女得人焉尔乎？」曰：「有澹台灭明者，行不由径，非公事，未尝至于偃之室也。」",
+      "translation": "子游做武城县县长。孔子道：「你在这儿得到什么人才没有？」他道：「有一个叫澹台灭明的人，走路不插小道，不是公事，从不到我屋里来。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "武城",
+          "kind": "word",
+          "meaning": "鲁国的城邑，在今山东费县西南。"
+        },
+        {
+          "id": "n2",
+          "quote": "有澹台灭明者",
+          "kind": "word",
+          "meaning": "澹台灭明字子羽，《史记·仲尼弟子列传》也把他列入弟子。"
+        }
+      ],
+      "chunks": [
+        "子游为武城宰，",
+        "子曰：",
+        "「女得人焉尔乎？",
+        "」曰：",
+        "「有澹台灭明者，",
+        "行不由径，",
+        "非公事，",
+        "未尝至于偃之室也。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·雍也》第14则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/雍也第六",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/5",
+          "anchor_text": "子游为武城宰，子曰：“女得人焉尔乎？”曰：“有澹台灭明者，行不由径，非公事，未尝至于偃之室也。”"
+        }
+      },
+      "explanation": "「武城」：鲁国的城邑，在今山东费县西南；「有澹台灭明者」：澹台灭明字子羽，《史记·仲尼弟子列传》也把他列入弟子。",
+      "hints": [
+        "武城",
+        "有澹台灭明者"
+      ],
+      "translation_entry": 134
+    },
+    {
+      "id": "s15",
+      "text": "子曰：「孟之反不伐，奔而殿，将入门，策其马曰：『非敢后也，马不进也。』」",
+      "translation": "孔子说：「孟之反不夸耀自己，（在抵御齐国的战役中，右翼的军队溃退了，）他走在最后，掩护全军，将进城门，便鞭打着马匹，一面说道：『不是我敢于殿后，是马匹不肯快走的缘故。』」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "孟之反",
+          "kind": "word",
+          "meaning": "《左传》哀公十一年作「孟之侧」，译文参照《左传》所叙述的事实有所增加。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「孟之反不伐，",
+        "奔而殿，",
+        "将入门，",
+        "策其马曰：",
+        "『非敢后也，",
+        "马不进也。",
+        "』」"
+      ],
+      "reference": {
+        "label": "《论语·雍也》第15则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/雍也第六",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/5",
+          "anchor_text": "子曰：“孟之反不伐，奔而殿，将入门，策其马曰：‘非敢后也，马不进也。’”"
+        }
+      },
+      "explanation": "「孟之反」：《左传》哀公十一年作「孟之侧」，译文参照《左传》所叙述的事实有所增加。",
+      "hints": [
+        "孟之反"
+      ],
+      "translation_entry": 135
+    },
+    {
+      "id": "s16",
+      "text": "子曰：「不有祝鮀之佞，而有宋朝之美，难乎免于今之世矣。」",
+      "translation": "孔子说：「假使没有祝鮀的口才，而仅有宋朝的美丽，在今天的社会里怕不易避免祸害了。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "不有",
+          "kind": "word",
+          "meaning": "这里用以表示假设语气，「假若没有」的意思。"
+        },
+        {
+          "id": "n2",
+          "quote": "而",
+          "kind": "word",
+          "meaning": "这里有「与」的意思，把两种条件连在一起。"
+        },
+        {
+          "id": "n3",
+          "quote": "宋朝",
+          "kind": "word",
+          "meaning": "宋国的公子朝，《左传》昭公二十年和定公十四年都曾记载着他因为美丽而惹起乱子的事情。"
+        },
+        {
+          "id": "n4",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「不有祝鮀之佞，",
+        "而有宋朝之美，",
+        "难乎免于今之世矣。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·雍也》第16则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/雍也第六",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/5",
+          "anchor_text": "子曰：“不有祝鮀之佞，而有宋朝之美，难乎免于今之世矣。”"
+        }
+      },
+      "explanation": "「不有」：这里用以表示假设语气，「假若没有」的意思；「而」：这里有「与」的意思，把两种条件连在一起。",
+      "hints": [
+        "不有",
+        "而",
+        "宋朝"
+      ],
+      "translation_entry": 136
+    },
+    {
+      "id": "s17",
+      "text": "子曰：「谁能出不由户？何莫由斯道也？」",
+      "translation": "孔子说：「谁能够走出屋外不从房门经过？为什么没有人从我这条路行走呢？」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "户",
+          "kind": "word",
+          "meaning": "门。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「谁能出不由户？",
+        "何莫由斯道也？",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·雍也》第17则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/雍也第六",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/5",
+          "anchor_text": "子曰：“谁能出不由户？何莫由斯道也？”"
+        }
+      },
+      "explanation": "出门要经过门，是眼前的比方；孔子借此追问，人为什么不走应当走的正道。",
+      "hints": [
+        "户"
+      ],
+      "translation_entry": 137
+    },
+    {
+      "id": "s18",
+      "text": "子曰：「质胜文则野，文胜质则史。文质彬彬，然后君子。」",
+      "translation": "孔子说：「朴实多于文采，就未免粗野；文采多于朴实，又未免虚浮。文采和朴实，配合适当，这才是个君子。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "文质彬彬",
+          "kind": "word",
+          "meaning": "此处形容人既文雅又朴实，后来多用来指人文雅有礼貌。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「质胜文则野，",
+        "文胜质则史。",
+        "文质彬彬，",
+        "然后君子。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·雍也》第18则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/雍也第六",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/5",
+          "anchor_text": "子曰：“质胜文则野，文胜质则史。文质彬彬，然后君子。”"
+        }
+      },
+      "explanation": "「文质彬彬」：此处形容人既文雅又朴实，后来多用来指人文雅有礼貌。",
+      "hints": [
+        "文质彬彬"
+      ],
+      "translation_entry": 138
+    },
+    {
+      "id": "s19",
+      "text": "子曰：「人之生也直，罔之生也幸而免。」",
+      "translation": "孔子说：「人的生存由于正直，不正直的人也可以生存，那是他侥幸地免于祸害。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "也",
+          "kind": "word",
+          "meaning": "语气词，表「人之生」是一词组作主语，这里无妨作一停顿，下文「直」是谓语。"
+        },
+        {
+          "id": "n2",
+          "quote": "罔",
+          "kind": "word",
+          "meaning": "诬罔的人，不直的人。"
+        },
+        {
+          "id": "n3",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「人之生也直，",
+        "罔之生也幸而免。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·雍也》第19则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/雍也第六",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/5",
+          "anchor_text": "子曰：“人之生也直，罔之生也幸而免。”"
+        }
+      },
+      "explanation": "「也」：语气词，表「人之生」是一词组作主语，这里无妨作一停顿，下文「直」是谓语；「罔」：诬罔的人，不直的人。",
+      "hints": [
+        "也",
+        "罔"
+      ],
+      "translation_entry": 139
+    },
+    {
+      "id": "s20",
+      "text": "子曰：「知之者不如好之者；好之者不如乐之者。」",
+      "translation": "孔子说：「（对于任何学问和事业，）懂得它的人不如喜爱它的人，喜爱它的人又不如以它为乐的人。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "乐之",
+          "kind": "word",
+          "meaning": "以这件事为快乐。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「知之者不如好之者；",
+        "好之者不如乐之者。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·雍也》第20则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/雍也第六",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/5",
+          "anchor_text": "子曰：“知之者不如好之者；好之者不如乐之者。”"
+        }
+      },
+      "explanation": "「知」「好」「乐」一层深过一层，把学习变成愿意主动做的事，更容易坚持。",
+      "hints": [
+        "乐之"
+      ],
+      "translation_entry": 140
+    },
+    {
+      "id": "s21",
+      "text": "子曰：「中人以上，可以语上也；中人以下，不可以语上也。」",
+      "translation": "孔子说：「中等水平以上的人，可以告诉他高深学问；中等水平以下的人，不可以告诉他高深学问。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "语上",
+          "kind": "word",
+          "meaning": "讲授较深的道理。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「中人以上，",
+        "可以语上也；",
+        "中人以下，",
+        "不可以语上也。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·雍也》第21则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/雍也第六",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/5",
+          "anchor_text": "子曰：“中人以上，可以语上也；中人以下，不可以语上也。”"
+        }
+      },
+      "explanation": "这段说教学要看学习者当下的理解程度。程度会随学习改变，不能把人固定分成几等。",
+      "hints": [
+        "语上"
+      ],
+      "translation_entry": 141
+    },
+    {
+      "id": "s22",
+      "text": "樊迟问知，子曰：「务民之义，敬鬼神而远之，可谓知矣。」问仁，曰：「仁者先难而后获，可谓仁矣。」",
+      "translation": "樊迟问怎么样才算聪明。孔子道：「把心力专一地放在使人民走向『义』上，严肃地对待鬼神，但并不打算接近他，可以说是聪明了。」又问怎么样才叫做有仁德。孔子道：「仁德的人付出一定的力量，然后收获果实，可以说是仁德了。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "远之",
+          "kind": "word",
+          "meaning": "远作及物动词，去声，yuàn。"
+        },
+        {
+          "id": "n2",
+          "quote": "先难",
+          "kind": "word",
+          "meaning": "先认真做困难的事。"
+        }
+      ],
+      "chunks": [
+        "樊迟问知，",
+        "子曰：",
+        "「务民之义，",
+        "敬鬼神而远之，",
+        "可谓知矣。",
+        "」问仁，",
+        "曰：",
+        "「仁者先难而后获，",
+        "可谓仁矣。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·雍也》第22则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/雍也第六",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/5",
+          "anchor_text": "樊迟问知，子曰：“务民之义，敬鬼神而远之，可谓知矣。”问仁，曰：“仁者先难而后获，可谓仁矣。”"
+        }
+      },
+      "explanation": "「远之」：远作及物动词，去声，yuàn；「先难」：先认真做困难的事。",
+      "hints": [
+        "远之",
+        "先难"
+      ],
+      "translation_entry": 142
+    },
+    {
+      "id": "s23",
+      "text": "子曰：「知者乐水，仁者乐山。知者动，仁者静。知者乐，仁者寿。」",
+      "translation": "孔子说：「聪明人乐于水，仁人乐于山。聪明人活动，仁人沉静。聪明人快乐，仁人长寿。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "知者",
+          "kind": "word",
+          "meaning": "有智慧的人，「知」同「智」。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「知者乐水，",
+        "仁者乐山。",
+        "知者动，",
+        "仁者静。",
+        "知者乐，",
+        "仁者寿。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·雍也》第23则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/雍也第六",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/5",
+          "anchor_text": "子曰：“知者乐水，仁者乐山。知者动，仁者静。知者乐，仁者寿。”"
+        }
+      },
+      "explanation": "山和水是比方，分别突出安静坚定与灵活通达的特点。",
+      "hints": [
+        "知者"
+      ],
+      "translation_entry": 143
+    },
+    {
+      "id": "s24",
+      "text": "子曰：「齐一变至于鲁，鲁一变至于道。」",
+      "translation": "孔子说：「齐国（的政治和教育）一有改革，便达到鲁国的样子；鲁国（的政治和教育）一有改革，便进而合于大道了。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "变",
+          "kind": "word",
+          "meaning": "改变、改进。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「齐一变至于鲁，",
+        "鲁一变至于道。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·雍也》第24则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/雍也第六",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/5",
+          "anchor_text": "子曰：“齐一变至于鲁，鲁一变至于道。”"
+        }
+      },
+      "explanation": "孔子借齐、鲁两国说明社会可以逐步改进。「道」在这里是他理想中的治理准则。",
+      "hints": [
+        "变"
+      ],
+      "translation_entry": 144
+    },
+    {
+      "id": "s25",
+      "text": "子曰：「觚不觚，觚哉！觚哉！」",
+      "translation": "孔子说：「觚不像个觚，这是觚吗！这是觚吗！」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "觚",
+          "kind": "word",
+          "meaning": "音孤，gū，古代盛酒的器皿，腹部作四条棱角，足部也作四条棱角。"
+        },
+        {
+          "id": "n2",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「觚不觚，",
+        "觚哉！",
+        "觚哉！",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·雍也》第25则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/雍也第六",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/5",
+          "anchor_text": "子曰：“觚不觚，觚哉！觚哉！”"
+        }
+      },
+      "explanation": "「觚」：音孤，gū，古代盛酒的器皿，腹部作四条棱角，足部也作四条棱角。",
+      "hints": [
+        "觚"
+      ],
+      "translation_entry": 145
+    },
+    {
+      "id": "s26",
+      "text": "宰我问曰：「仁者，虽告之曰：『井有仁焉。』其从之也？」子曰：「何为其然也？君子可逝也，不可陷也；可欺也，不可罔也。」",
+      "translation": "宰我问道：「有仁德的人，就是告诉他，『井里掉下一位仁人啦。』他是不是会跟着下去呢？」孔子道：「为什么你要这样做呢？君子可以叫他远远走开不再回来，却不可以陷害他；可以欺骗他，却不可以愚弄他。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "仁",
+          "kind": "word",
+          "meaning": "即「仁人」的意思，和学而篇第一「泛爱众而亲仁」的「仁」用法相同。"
+        },
+        {
+          "id": "n2",
+          "quote": "逝",
+          "kind": "word",
+          "meaning": "古代「逝」字的意义和「往」字有所不同，「往」而不复返才用「逝」字。"
+        },
+        {
+          "id": "n3",
+          "quote": "欺",
+          "kind": "word",
+          "meaning": "《孟子·万章上》有这样一段话，和这一段结合，正好说明「欺」和「罔」的区别。"
+        }
+      ],
+      "chunks": [
+        "宰我问曰：",
+        "「仁者，",
+        "虽告之曰：",
+        "『井有仁焉。",
+        "』其从之也？",
+        "」子曰：",
+        "「何为其然也？",
+        "君子可逝也，",
+        "不可陷也；",
+        "可欺也，",
+        "不可罔也。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·雍也》第26则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/雍也第六",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/5",
+          "anchor_text": "宰我问曰：“仁者，虽告之曰：‘井有仁焉。’其从之也？”子曰：“何为其然也？君子可逝也，不可陷也；可欺也，不可罔也。”"
+        }
+      },
+      "explanation": "「仁」：即「仁人」的意思，和学而篇第一「泛爱众而亲仁」的「仁」用法相同；「逝」：古代「逝」字的意义和「往」字有所不同，「往」而不复返才用「逝」字。",
+      "hints": [
+        "仁",
+        "逝",
+        "欺"
+      ],
+      "translation_entry": 146
+    },
+    {
+      "id": "s27",
+      "text": "子曰：「君子博学于文，约之以礼，亦可以弗畔矣夫。」",
+      "translation": "孔子说：「君子广泛地学习文献，再用礼节来加以约束，也就可以不致于离经叛道了。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "博学于文",
+          "kind": "word",
+          "meaning": "广泛学习文化典籍。"
+        },
+        {
+          "id": "n2",
+          "quote": "畔",
+          "kind": "word",
+          "meaning": "同「叛」。"
+        },
+        {
+          "id": "n3",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「君子博学于文，",
+        "约之以礼，",
+        "亦可以弗畔矣夫。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·雍也》第27则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/雍也第六",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/5",
+          "anchor_text": "子曰：“君子博学于文，约之以礼，亦可以弗畔矣夫。”"
+        }
+      },
+      "explanation": "「博学于文」：广泛学习文化典籍；「畔」：同「叛」。",
+      "hints": [
+        "博学于文",
+        "畔"
+      ],
+      "translation_entry": 147
+    },
+    {
+      "id": "s28",
+      "text": "子见南子，子路不说，夫子矢之曰：「予所否者，天厌之！天厌之！」",
+      "translation": "孔子去和南子相见，子路不高兴。孔子发誓道：「我假若不对的话，天厌弃我罢！天厌弃我罢！」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "南子",
+          "kind": "word",
+          "meaning": "卫灵公夫人，把持着当日卫国的政治，而且有不正当的行为，名声不好。"
+        },
+        {
+          "id": "n2",
+          "quote": "所",
+          "kind": "word",
+          "meaning": "如果，假若。"
+        }
+      ],
+      "chunks": [
+        "子见南子，",
+        "子路不说，",
+        "夫子矢之曰：",
+        "「予所否者，",
+        "天厌之！",
+        "天厌之！",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·雍也》第28则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/雍也第六",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/5",
+          "anchor_text": "子见南子，子路不说，夫子矢之曰：“予所否者，天厌之！天厌之！”"
+        }
+      },
+      "explanation": "「南子」：卫灵公夫人，把持着当日卫国的政治，而且有不正当的行为，名声不好；「所」：如果，假若。",
+      "hints": [
+        "南子",
+        "所"
+      ],
+      "translation_entry": 148
+    },
+    {
+      "id": "s29",
+      "text": "子曰：「中庸之为德也，其至矣乎！民鲜久矣。」",
+      "translation": "孔子说：「中庸这种道德，该是最高的了，大家已经是长久地缺乏它了。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "中庸",
+          "kind": "word",
+          "meaning": "这是孔子的最高道德标准。"
+        },
+        {
+          "id": "n2",
+          "quote": "民",
+          "kind": "word",
+          "meaning": "这「民」字不完全指老百姓，因以「大家」译之。"
+        },
+        {
+          "id": "n3",
+          "quote": "子",
+          "meaning": "这里是对老师的尊称。",
+          "kind": "referent",
+          "refers_to": "孔子",
+          "reason": "本则开头用「子曰」记下孔子的话。"
+        }
+      ],
+      "chunks": [
+        "子曰：",
+        "「中庸之为德也，",
+        "其至矣乎！",
+        "民鲜久矣。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·雍也》第29则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/雍也第六",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/5",
+          "anchor_text": "子曰：“中庸之为德也，其至矣乎！民鲜久矣。”"
+        }
+      },
+      "explanation": "「中庸」：这是孔子的最高道德标准；「民」：这「民」字不完全指老百姓，因以「大家」译之。",
+      "hints": [
+        "中庸",
+        "民"
+      ],
+      "translation_entry": 149
+    },
+    {
+      "id": "s30",
+      "text": "子贡曰：「如有博施于民而能济众，何如？可谓仁乎？」子曰：「何事于仁，必也圣乎！尧、舜其犹病诸！夫仁者，己欲立而立人，己欲达而达人。能近取譬，可谓仁之方也已。」",
+      "translation": "子贡道：「假若有这么一个人，广泛地给人民以好处，又能帮助大家生活得很好，怎么样？可以说是仁道了吗？」孔子道：「哪里仅是仁道！那一定是圣德了！尧舜或者都难以做到哩！仁是甚么呢？自己要站得住，同时也使别人站得住；自己要事事行得通，同时也使别人事事行得通。能够就眼下的事实选择例子一步步去做，可以说是实践仁道的方法了。」",
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "施",
+          "kind": "word",
+          "meaning": "旧读去声。"
+        },
+        {
+          "id": "n2",
+          "quote": "夫",
+          "kind": "word",
+          "meaning": "音扶，fú，文言中的提挈词。"
+        }
+      ],
+      "chunks": [
+        "子贡曰：",
+        "「如有博施于民而能济众，",
+        "何如？",
+        "可谓仁乎？",
+        "」子曰：",
+        "「何事于仁，",
+        "必也圣乎！",
+        "尧、舜其犹病诸！",
+        "夫仁者，",
+        "己欲立而立人，",
+        "己欲达而达人。",
+        "能近取譬，",
+        "可谓仁之方也已。",
+        "」"
+      ],
+      "reference": {
+        "label": "《论语·雍也》第30则（本馆分段）",
+        "url": "https://zh.wikisource.org/wiki/論語/雍也第六",
+        "source_ref": {
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "path": "poetry/simplified/儒家经典/论语.json",
+          "sha256": "c80bfc203b34f6d6fd365a6f318f067a63a1cde185b10f6007ab90c36d636934",
+          "locator": "/content/5",
+          "anchor_text": "子贡曰：“如有博施于民而能济众，何如？可谓仁乎？”子曰：“何事于仁，必也圣乎！尧、舜其犹病诸！夫仁者，己欲立而立人，己欲达而达人。能近取譬，可谓仁之方也已。”"
+        }
+      },
+      "explanation": "「施」：旧读去声；「夫」：音扶，fú，文言中的提挈词。",
+      "hints": [
+        "施",
+        "夫"
+      ],
+      "translation_entry": 150
+    }
+  ],
+  "overview": {
+    "sequence": [
+      "先分清说话的人，找出与「各有长处，勤学向善」有关的场景。",
+      "把看不懂的词放回原文，再核对译文中的动作和对象。",
+      "挑一则用自己的话说明白，再找原句支持自己的理解。"
+    ],
+    "question": "这一篇中，哪一则最值得你再想一想？",
+    "answer": "选一则，先说清谁在什么情况下说了什么，再说明你赞同、疑惑或想进一步了解的地方，并指回原文。",
+    "takeaway": "看见各人的长处，把喜欢学习变成主动行动。"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "choice",
+      "sentence": "s8",
+      "skill": "meaning",
+      "prompt": "仲由、赐、求被评价为各有长处，说明什么？",
+      "answer": 0,
+      "explanation": "孔子分别谈到果断、通达和多才。",
+      "choices": [
+        "所有人本领都一样",
+        "评价人要看具体特点",
+        "只要比较谁名字长"
+      ]
+    },
+    {
+      "id": "q2",
+      "type": "choice",
+      "sentence": "s20",
+      "skill": "reason",
+      "prompt": "知之、好之、乐之，哪一层最能表现主动投入？",
+      "answer": 1,
+      "explanation": "以学习为快乐，会更愿意主动投入。",
+      "choices": [
+        "都只表示认识",
+        "知之",
+        "乐之"
+      ]
+    },
+    {
+      "id": "q3",
+      "type": "selfcheck",
+      "sentence": "s17",
+      "skill": "reason",
+      "prompt": "用出门要经过门作比方，有什么作用？",
+      "answer": "从熟悉的小事启发人思考应走的正道。",
+      "explanation": "比方帮助读者把具体生活与抽象道理联系起来。"
+    }
+  ]
+}

@@ -1,0 +1,278 @@
+{
+  "schema_version": 1,
+  "id": "daodejing-76",
+  "title": "道德经·第七十六章",
+  "attribution": "老子",
+  "level": "challenge",
+  "genre": "reasoning",
+  "skills": [
+    "meaning",
+    "referent",
+    "reason",
+    "contrast",
+    "retell"
+  ],
+  "curriculum": null,
+  "intro": "柔韧与生长。本章借生命、草木的柔与硬作对照，提醒人保留弹性，不一味僵硬逞强。",
+  "background": "这是《道德经》德经·第七十六章。本章围绕「柔韧与生长」展开，可以先读原文，再对照译文，看看作者用了什么比方或对比。",
+  "editorial_note": "本馆用逐句译解帮助入门。读「道」「无为」等词时要看上下文；古代观念和理想化比方，可以边读边与家长讨论。",
+  "source": {
+    "work": "道德经（又名老子）",
+    "section": "德经·第七十六章",
+    "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#七十六章",
+    "note": "原文以本机简体《老子》为底本，统一引号，第七章移去括号异文提示。译文、词义和练习为本馆编写的入门读法，参考王弼注理解，不将不同底本混作同一文本。"
+  },
+  "source_ref": {
+    "locator": "/content/75",
+    "path": "poetry/simplified/诸子百家/老子.json",
+    "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+    "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+    "anchor_text": "人之生也柔弱，其死也坚强。草木之生也柔脆，其死也枯槁。故坚强者死之徒，柔弱者生之徒。是以兵强则灭，木强则折。强大处下，柔弱处上。"
+  },
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "人之生也柔弱，其死也坚强。",
+      "translation": "人活着时身体柔和，死后变得僵硬。",
+      "explanation": "读词小提示：「柔弱」：柔和、有弹性，不只指力量小。",
+      "chunks": [
+        "人之生也柔弱，",
+        "其死也坚强。"
+      ],
+      "hints": [
+        "柔弱"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "柔弱",
+          "kind": "word",
+          "meaning": "柔和、有弹性，不只指力量小。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第七十六章》第1句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#七十六章",
+        "source_ref": {
+          "locator": "/content/75",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "人之生也柔弱，其死也坚强。"
+        }
+      }
+    },
+    {
+      "id": "s2",
+      "text": "草木之生也柔脆，其死也枯槁。",
+      "translation": "草木生长时柔嫩，死后便干枯。",
+      "explanation": "读词小提示：「柔脆」：柔嫩；「枯槁」：干枯。",
+      "chunks": [
+        "草木之生也柔脆，",
+        "其死也枯槁。"
+      ],
+      "hints": [
+        "柔脆",
+        "枯槁"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "柔脆",
+          "kind": "word",
+          "meaning": "柔嫩。"
+        },
+        {
+          "id": "n2",
+          "quote": "枯槁",
+          "kind": "word",
+          "meaning": "干枯。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第七十六章》第2句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#七十六章",
+        "source_ref": {
+          "locator": "/content/75",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "草木之生也柔脆，其死也枯槁。"
+        }
+      }
+    },
+    {
+      "id": "s3",
+      "text": "故坚强者死之徒，柔弱者生之徒。",
+      "translation": "因此，僵硬可比作衰亡的一类，柔和可比作生长的一类。",
+      "explanation": "读词小提示：「柔弱」：柔和、有弹性，不只指力量小；「徒」：一类、同类。",
+      "chunks": [
+        "故坚强者死之徒，",
+        "柔弱者生之徒。"
+      ],
+      "hints": [
+        "柔弱",
+        "徒"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "柔弱",
+          "kind": "word",
+          "meaning": "柔和、有弹性，不只指力量小。"
+        },
+        {
+          "id": "n2",
+          "quote": "徒",
+          "kind": "word",
+          "meaning": "一类、同类。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第七十六章》第3句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#七十六章",
+        "source_ref": {
+          "locator": "/content/75",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "故坚强者死之徒，柔弱者生之徒。"
+        }
+      }
+    },
+    {
+      "id": "s4",
+      "text": "是以兵强则灭，木强则折。",
+      "translation": "一味用兵逞强容易失败，过硬不韧的树木容易折断。",
+      "explanation": "读词小提示：「兵强」：一味凭借武力逞强；「木强」：木质过于硬脆、不易弯曲。",
+      "chunks": [
+        "是以兵强则灭，",
+        "木强则折。"
+      ],
+      "hints": [
+        "兵强",
+        "木强"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "兵强",
+          "kind": "word",
+          "meaning": "一味凭借武力逞强。"
+        },
+        {
+          "id": "n2",
+          "quote": "木强",
+          "kind": "word",
+          "meaning": "木质过于硬脆、不易弯曲。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第七十六章》第4句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#七十六章",
+        "source_ref": {
+          "locator": "/content/75",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "是以兵强则灭，木强则折。"
+        }
+      }
+    },
+    {
+      "id": "s5",
+      "text": "强大处下，柔弱处上。",
+      "translation": "僵强居于下，柔和居于上。",
+      "explanation": "这里借常见现象说理，不能机械断言所有坚硬材料都没有生命或没有价值。",
+      "chunks": [
+        "强大处下，",
+        "柔弱处上。"
+      ],
+      "hints": [
+        "柔弱",
+        "处下",
+        "处上"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "柔弱",
+          "kind": "word",
+          "meaning": "柔和、有弹性，不只指力量小。"
+        },
+        {
+          "id": "n2",
+          "quote": "处下",
+          "kind": "word",
+          "meaning": "居于不利、低下的位置。"
+        },
+        {
+          "id": "n3",
+          "quote": "处上",
+          "kind": "word",
+          "meaning": "居于较有生命力的位置。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第七十六章》第5句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#七十六章",
+        "source_ref": {
+          "locator": "/content/75",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "强大处下，柔弱处上。"
+        }
+      }
+    }
+  ],
+  "overview": {
+    "sequence": [
+      "先看本章开头：人活着时身体柔和，死后变得僵硬。",
+      "本章借生命、草木的柔与硬作对照，提醒人保留弹性，不一味僵硬逞强。",
+      "再回到结尾：僵强居于下，柔和居于上。"
+    ],
+    "question": "这一章为什么可以叫作「柔韧与生长」？",
+    "answer": "本章借生命、草木的柔与硬作对照，提醒人保留弹性，不一味僵硬逞强。可以引用本章开头或结尾的原句，说明你的依据。",
+    "takeaway": "本章借生命、草木的柔与硬作对照，提醒人保留弹性，不一味僵硬逞强。"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "choice",
+      "sentence": "s1",
+      "skill": "meaning",
+      "prompt": "开头的「柔弱」在这里怎样理解？",
+      "choices": [
+        "只顾自己，不留意他人的处境。",
+        "柔和、有弹性，不只指力量小。",
+        "为了显示本领而处处炫耀。"
+      ],
+      "answer": 1,
+      "explanation": "把词放回原句看，「柔弱」在本句中的意思是：柔和、有弹性，不只指力量小。"
+    },
+    {
+      "id": "q2",
+      "type": "choice",
+      "sentence": "s5",
+      "skill": "reason",
+      "prompt": "读完「柔韧与生长」，哪一种理解更合适？",
+      "choices": [
+        "做事情永远越多越快越好。",
+        "别人的想法一概不用听。",
+        "本章借生命、草木的柔与硬作对照，提醒人保留弹性，不一味僵硬逞强。"
+      ],
+      "answer": 2,
+      "explanation": "本章借生命、草木的柔与硬作对照，提醒人保留弹性，不一味僵硬逞强。"
+    },
+    {
+      "id": "q3",
+      "type": "selfcheck",
+      "sentence": "s5",
+      "skill": "retell",
+      "prompt": "选本章一句话，用自己的话解释，再说说它怎样帮助你理解「柔韧与生长」。",
+      "answer": "先说清原句中的对象和动作，再解释关键词。可以围绕这点来讲：本章借生命、草木的柔与硬作对照，提醒人保留弹性，不一味僵硬逞强。说完后，回到原文找一句作依据。",
+      "explanation": "不必背诵译文。重点看词义是否放回本句、有没有原文依据，以及是否把古人的比方误当成不分条件的结论。"
+    }
+  ]
+}

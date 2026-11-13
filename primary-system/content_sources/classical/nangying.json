@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "id": "nangying",
+  "title": "囊萤夜读",
+  "attribution": "房玄龄等《晋书》",
+  "level": "story",
+  "genre": "people",
+  "skills": ["meaning", "omission", "reason", "retell"],
+  "curriculum": null,
+  "intro": "「练囊」是练习用的袋子吗？把词义放回车胤读书的处境中想一想。",
+  "background": "选段出自《晋书·车胤传》，先介绍车胤的学习态度，再讲家贫时读书的故事。",
+  "editorial_note": "故事写勤学。今天学习要有合适的照明，也要安排休息；理解人物精神即可。",
+  "source": {"work": "《晋书》", "section": "卷八十三《车胤传》节选", "url": "https://zh.wikisource.org/wiki/晉書/卷083", "note": "节选「胤恭勤不倦」至「以夜继日焉」，简体标点；「胤」指车胤，未登记教材册次。"},
+  "sentences": [
+    {"id": "s1", "text": "胤恭勤不倦，博学多通。", "chunks": ["胤恭勤不倦，", "博学多通。"], "translation": "车胤谦逊有礼，勤奋而不知疲倦，学识广博，通晓许多知识。", "explanation": "这句先概括人物的态度和学问。后文再讲他怎样勤学。", "hints": ["恭勤", "博学"], "notes": [
+      {"id": "yin", "quote": "胤", "kind": "word", "meaning": "人名，这里指车胤。", "reading": "yìn"},
+      {"id": "gong", "quote": "恭", "kind": "word", "meaning": "谦逊有礼。"},
+      {"id": "tong", "quote": "通", "kind": "word", "meaning": "通晓，明白。"}
+    ]},
+    {"id": "s2", "text": "家贫不常得油，夏月则练囊盛数十萤火以照书，以夜继日焉。", "chunks": ["家贫不常得油，", "夏月则练囊", "盛数十萤火以照书，", "以夜继日焉。"], "translation": "他家境贫寒，不能常常得到灯油。夏天便用白绢做袋子，装几十只萤火虫来照着书本，夜里接着白天学习。", "explanation": "先写困难，再写想的办法。「以夜继日」进一步写出学习的勤奋。", "supplement": "这句接着介绍车胤，省略的行动者都是车胤；「油」结合夜读情境理解为灯油。", "hints": ["家贫", "练囊", "照书", "以夜继日"], "notes": [
+      {"id": "liannang", "quote": "练囊", "kind": "word", "meaning": "用白绢做袋子。「练」是白绢，「囊」在这里是用袋子装。", "reading": "liàn náng"},
+      {"id": "sheng", "quote": "盛", "kind": "word", "meaning": "装。这里读 chéng。", "reading": "chéng"},
+      {"id": "yi", "quote": "以", "kind": "word", "meaning": "用来。第一处「以」说明装萤火虫的目的。"},
+      {"id": "ji", "quote": "继", "kind": "word", "meaning": "接续。用夜晚接着白天，指夜里继续读书。"}
+    ]}
+  ],
+  "overview": {"sequence": ["先概括车胤勤奋好学、知识广博。", "家贫缺少灯油，夜读遇到困难。", "他设法照书，夜里继续学习。"], "question": "第二句怎样把「勤」字写具体了？", "answer": "写出了缺灯油的困难、想办法照书的行动和夜里继续学习的表现，使开头的概括有了具体事例。", "takeaway": "概括人物特点之后，再找一个具体事例来支持它。"},
+  "questions": [
+    {"id": "q1", "type": "choice", "skill": "meaning", "sentence": "s2", "prompt": "「练囊」的「练」指什么？", "choices": ["白绢", "训练有素", "练习"], "answer": 0, "explanation": "这里的「练」是白绢，连起来说的是用白绢做袋子。"},
+    {"id": "q2", "type": "choice", "skill": "omission", "sentence": "s2", "prompt": "「家贫不常得油」接着在介绍谁？", "choices": ["编书的人", "另一个未出现的孩子", "车胤"], "answer": 2, "explanation": "两句围绕同一个人物展开，第二句省略了车胤这个主语。"},
+    {"id": "q3", "type": "choice", "skill": "reason", "sentence": "s2", "prompt": "哪一处最直接写出车胤夜里仍在读书？", "choices": ["家贫", "以夜继日", "博学多通"], "answer": 1, "explanation": "「以夜继日」就是用夜晚接着白天，结合上下文指继续读书。"},
+    {"id": "q4", "type": "selfcheck", "skill": "retell", "sentence": "s2", "prompt": "用「困难—办法—表现」概括这篇短文。", "answer": "车胤家贫，缺少灯油；他用白绢袋装萤火虫照书，夜里继续读书，表现出勤奋好学。", "explanation": "检查是否把人物特点与原文中的事例联系起来。"}
+  ]
+}

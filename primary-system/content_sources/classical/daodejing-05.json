@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "id": "daodejing-05",
+  "title": "道德经·第五章",
+  "attribution": "老子",
+  "level": "challenge",
+  "genre": "reasoning",
+  "skills": [
+    "meaning",
+    "referent",
+    "reason",
+    "contrast",
+    "retell"
+  ],
+  "curriculum": null,
+  "intro": "空处也能发挥作用。风箱的空处能够送风；理解「不仁」要看古人的自然观，不要把它读成可以伤害别人。",
+  "background": "这是《道德经》道经·第五章。本章围绕「空处也能发挥作用」展开，可以先读原文，再对照译文，看看作者用了什么比方或对比。",
+  "editorial_note": "本馆用逐句译解帮助入门。读「道」「无为」等词时要看上下文；古代观念和理想化比方，可以边读边与家长讨论。",
+  "source": {
+    "work": "道德经（又名老子）",
+    "section": "道经·第五章",
+    "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#五章",
+    "note": "原文以本机简体《老子》为底本，统一引号，第七章移去括号异文提示。译文、词义和练习为本馆编写的入门读法，参考王弼注理解，不将不同底本混作同一文本。"
+  },
+  "source_ref": {
+    "locator": "/content/4",
+    "path": "poetry/simplified/诸子百家/老子.json",
+    "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+    "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+    "anchor_text": "天地不仁，以万物为刍狗；圣人不仁，以百姓为刍狗。天地之间，其犹橐籥乎？虚而不屈，动而愈出。多言数穷，不如守中。"
+  },
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "天地不仁，以万物为刍狗；圣人不仁，以百姓为刍狗。",
+      "translation": "天地不按人的偏爱来安排万物，好比对待祭祀用的草狗；理想中的治理者也不偏私地对待百姓。",
+      "explanation": "读词小提示：「不仁」：这里指不按人的偏爱来安排万物；「刍狗」：古代祭祀时用草扎成的狗。",
+      "chunks": [
+        "天地不仁，",
+        "以万物为刍狗；",
+        "圣人不仁，",
+        "以百姓为刍狗。"
+      ],
+      "hints": [
+        "不仁",
+        "刍狗"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "不仁",
+          "kind": "word",
+          "meaning": "这里指不按人的偏爱来安排万物。"
+        },
+        {
+          "id": "n2",
+          "quote": "刍狗",
+          "kind": "word",
+          "meaning": "古代祭祀时用草扎成的狗。",
+          "reading": "chú gǒu"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第五章》第1句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#五章",
+        "source_ref": {
+          "locator": "/content/4",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "天地不仁，以万物为刍狗；圣人不仁，以百姓为刍狗。"
+        }
+      }
+    },
+    {
+      "id": "s2",
+      "text": "天地之间，其犹橐籥乎？",
+      "translation": "天地之间，不像一个大风箱吗？",
+      "explanation": "读词小提示：「橐籥」：古代鼓风的器具，类似风箱。",
+      "chunks": [
+        "天地之间，",
+        "其犹橐籥乎？"
+      ],
+      "hints": [
+        "橐籥"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "橐籥",
+          "kind": "word",
+          "meaning": "古代鼓风的器具，类似风箱。",
+          "reading": "tuó yuè"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第五章》第2句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#五章",
+        "source_ref": {
+          "locator": "/content/4",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "天地之间，其犹橐籥乎？"
+        }
+      }
+    },
+    {
+      "id": "s3",
+      "text": "虚而不屈，动而愈出。",
+      "translation": "里面虽然空，却不容易用尽，越鼓动越能送出风来。",
+      "explanation": "读词小提示：「屈」：竭尽。",
+      "chunks": [
+        "虚而不屈，",
+        "动而愈出。"
+      ],
+      "hints": [
+        "屈"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "屈",
+          "kind": "word",
+          "meaning": "竭尽。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第五章》第3句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#五章",
+        "source_ref": {
+          "locator": "/content/4",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "虚而不屈，动而愈出。"
+        }
+      }
+    },
+    {
+      "id": "s4",
+      "text": "多言数穷，不如守中。",
+      "translation": "过多的言说容易陷入困窘，不如守住内在的虚静与适度。",
+      "explanation": "读词小提示：「数穷」：屡次走到困窘的地步；「守中」：守住内在的虚静和适度。",
+      "chunks": [
+        "多言数穷，",
+        "不如守中。"
+      ],
+      "hints": [
+        "数穷",
+        "守中"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "数穷",
+          "kind": "word",
+          "meaning": "屡次走到困窘的地步。",
+          "reading": "shuò qióng"
+        },
+        {
+          "id": "n2",
+          "quote": "守中",
+          "kind": "word",
+          "meaning": "守住内在的虚静和适度。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第五章》第4句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#五章",
+        "source_ref": {
+          "locator": "/content/4",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "多言数穷，不如守中。"
+        }
+      }
+    }
+  ],
+  "overview": {
+    "sequence": [
+      "先看本章开头：天地不按人的偏爱来安排万物，好比对待祭祀用的草狗；理想中的治理者也不偏私地对待百姓。",
+      "风箱的空处能够送风；理解「不仁」要看古人的自然观，不要把它读成可以伤害别人。",
+      "再回到结尾：过多的言说容易陷入困窘，不如守住内在的虚静与适度。"
+    ],
+    "question": "这一章为什么可以叫作「空处也能发挥作用」？",
+    "answer": "风箱的空处能够送风；理解「不仁」要看古人的自然观，不要把它读成可以伤害别人。可以引用本章开头或结尾的原句，说明你的依据。",
+    "takeaway": "风箱的空处能够送风；理解「不仁」要看古人的自然观，不要把它读成可以伤害别人。"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "choice",
+      "sentence": "s1",
+      "skill": "meaning",
+      "prompt": "开头的「不仁」在这里怎样理解？",
+      "choices": [
+        "只顾自己，不留意他人的处境。",
+        "为了显示本领而处处炫耀。",
+        "这里指不按人的偏爱来安排万物。"
+      ],
+      "answer": 2,
+      "explanation": "把词放回原句看，「不仁」在本句中的意思是：这里指不按人的偏爱来安排万物。"
+    },
+    {
+      "id": "q2",
+      "type": "choice",
+      "sentence": "s4",
+      "skill": "reason",
+      "prompt": "读完「空处也能发挥作用」，哪一种理解更合适？",
+      "choices": [
+        "风箱的空处能够送风；理解「不仁」要看古人的自然观，不要把它读成可以伤害别人。",
+        "只要一次失败，就不必再试。",
+        "遇到问题不用观察，也不必行动。"
+      ],
+      "answer": 0,
+      "explanation": "风箱的空处能够送风；理解「不仁」要看古人的自然观，不要把它读成可以伤害别人。"
+    },
+    {
+      "id": "q3",
+      "type": "selfcheck",
+      "sentence": "s4",
+      "skill": "retell",
+      "prompt": "选本章一句话，用自己的话解释，再说说它怎样帮助你理解「空处也能发挥作用」。",
+      "answer": "先说清原句中的对象和动作，再解释关键词。可以围绕这点来讲：风箱的空处能够送风；理解「不仁」要看古人的自然观，不要把它读成可以伤害别人。说完后，回到原文找一句作依据。",
+      "explanation": "不必背诵译文。重点看词义是否放回本句、有没有原文依据，以及是否把古人的比方误当成不分条件的结论。"
+    }
+  ]
+}

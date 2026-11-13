@@ -1,0 +1,343 @@
+{
+  "schema_version": 1,
+  "id": "daodejing-77",
+  "title": "道德经·第七十七章",
+  "attribution": "老子",
+  "level": "challenge",
+  "genre": "reasoning",
+  "skills": [
+    "meaning",
+    "referent",
+    "reason",
+    "contrast",
+    "retell"
+  ],
+  "curriculum": null,
+  "intro": "像调弓一样补不足。拉弓时调节高低，本章借此讨论有余与不足，强调帮助有需要的人。",
+  "background": "这是《道德经》德经·第七十七章。本章围绕「像调弓一样补不足」展开，可以先读原文，再对照译文，看看作者用了什么比方或对比。",
+  "editorial_note": "本馆用逐句译解帮助入门。读「道」「无为」等词时要看上下文；古代观念和理想化比方，可以边读边与家长讨论。",
+  "source": {
+    "work": "道德经（又名老子）",
+    "section": "德经·第七十七章",
+    "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#七十七章",
+    "note": "原文以本机简体《老子》为底本，统一引号，第七章移去括号异文提示。译文、词义和练习为本馆编写的入门读法，参考王弼注理解，不将不同底本混作同一文本。"
+  },
+  "source_ref": {
+    "locator": "/content/76",
+    "path": "poetry/simplified/诸子百家/老子.json",
+    "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+    "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+    "anchor_text": "天之道，其犹张弓歟？高者抑之，下者举之；有餘者损之，不足者补之。天之道，损有餘而补不足。人之道，则不然，损不足以奉有餘。孰能有餘以奉天下，唯有道者。是以圣人为而不恃，功成而不处，其不欲见贤。"
+  },
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "天之道，其犹张弓歟？",
+      "translation": "天的道理，不像调节拉开的弓吗？",
+      "explanation": "读词小提示：「张弓」：拉开弓；「歟」：同「欤」，表示疑问。",
+      "chunks": [
+        "天之道，",
+        "其犹张弓歟？"
+      ],
+      "hints": [
+        "张弓",
+        "歟"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "张弓",
+          "kind": "word",
+          "meaning": "拉开弓。"
+        },
+        {
+          "id": "n2",
+          "quote": "歟",
+          "kind": "word",
+          "meaning": "同「欤」，表示疑问。",
+          "reading": "yú"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第七十七章》第1句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#七十七章",
+        "source_ref": {
+          "locator": "/content/76",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "天之道，其犹张弓歟？"
+        }
+      }
+    },
+    {
+      "id": "s2",
+      "text": "高者抑之，下者举之；有餘者损之，不足者补之。",
+      "translation": "高的压低些，低的抬高些；多余的减少些，不足的补充些。",
+      "explanation": "读词小提示：「抑」：压低；「举」：抬高。",
+      "chunks": [
+        "高者抑之，",
+        "下者举之；",
+        "有餘者损之，",
+        "不足者补之。"
+      ],
+      "hints": [
+        "抑",
+        "举",
+        "损"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "抑",
+          "kind": "word",
+          "meaning": "压低。"
+        },
+        {
+          "id": "n2",
+          "quote": "举",
+          "kind": "word",
+          "meaning": "抬高。"
+        },
+        {
+          "id": "n3",
+          "quote": "损",
+          "kind": "word",
+          "meaning": "减少。"
+        },
+        {
+          "id": "n4",
+          "quote": "补",
+          "kind": "word",
+          "meaning": "补充。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第七十七章》第2句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#七十七章",
+        "source_ref": {
+          "locator": "/content/76",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "高者抑之，下者举之；有餘者损之，不足者补之。"
+        }
+      }
+    },
+    {
+      "id": "s3",
+      "text": "天之道，损有餘而补不足。",
+      "translation": "古人所说的天道，是减少有余、补给不足。",
+      "explanation": "读词小提示：「损」：减少；「补」：补充。",
+      "chunks": [
+        "天之道，",
+        "损有餘而补不足。"
+      ],
+      "hints": [
+        "损",
+        "补"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "损",
+          "kind": "word",
+          "meaning": "减少。"
+        },
+        {
+          "id": "n2",
+          "quote": "补",
+          "kind": "word",
+          "meaning": "补充。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第七十七章》第3句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#七十七章",
+        "source_ref": {
+          "locator": "/content/76",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "天之道，损有餘而补不足。"
+        }
+      }
+    },
+    {
+      "id": "s4",
+      "text": "人之道，则不然，损不足以奉有餘。",
+      "translation": "人的一些做法却相反，拿不足者的东西奉给有余者。",
+      "explanation": "读词小提示：「损」：减少；「奉」：供奉、奉给。",
+      "chunks": [
+        "人之道，",
+        "则不然，",
+        "损不足以奉有餘。"
+      ],
+      "hints": [
+        "损",
+        "奉"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "损",
+          "kind": "word",
+          "meaning": "减少。"
+        },
+        {
+          "id": "n2",
+          "quote": "奉",
+          "kind": "word",
+          "meaning": "供奉、奉给。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第七十七章》第4句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#七十七章",
+        "source_ref": {
+          "locator": "/content/76",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "人之道，则不然，损不足以奉有餘。"
+        }
+      }
+    },
+    {
+      "id": "s5",
+      "text": "孰能有餘以奉天下，唯有道者。",
+      "translation": "谁能拿自己的有余来帮助天下呢？只有体会并实践道的人。",
+      "explanation": "读词小提示：「奉」：供奉、奉给；「有道者」：能够体会并实践道的人。",
+      "chunks": [
+        "孰能有餘以奉天下，",
+        "唯有道者。"
+      ],
+      "hints": [
+        "奉",
+        "有道者"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "奉",
+          "kind": "word",
+          "meaning": "供奉、奉给。"
+        },
+        {
+          "id": "n2",
+          "quote": "有道者",
+          "kind": "word",
+          "meaning": "能够体会并实践道的人。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第七十七章》第5句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#七十七章",
+        "source_ref": {
+          "locator": "/content/76",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "孰能有餘以奉天下，唯有道者。"
+        }
+      }
+    },
+    {
+      "id": "s6",
+      "text": "是以圣人为而不恃，功成而不处，其不欲见贤。",
+      "translation": "所以有智慧的人做事而不倚仗，成功而不占功，不想炫示自己贤能。",
+      "explanation": "读词小提示：「不恃」：不倚仗功劳；「不处」：不占据功劳。",
+      "chunks": [
+        "是以圣人为而不恃，",
+        "功成而不处，",
+        "其不欲见贤。"
+      ],
+      "hints": [
+        "不恃",
+        "不处",
+        "见贤"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "不恃",
+          "kind": "word",
+          "meaning": "不倚仗功劳。"
+        },
+        {
+          "id": "n2",
+          "quote": "不处",
+          "kind": "word",
+          "meaning": "不占据功劳。"
+        },
+        {
+          "id": "n3",
+          "quote": "见贤",
+          "kind": "word",
+          "meaning": "显示自己贤能。",
+          "reading": "xiàn xián"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·德经·第七十七章》第6句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#七十七章",
+        "source_ref": {
+          "locator": "/content/76",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "是以圣人为而不恃，功成而不处，其不欲见贤。"
+        }
+      }
+    }
+  ],
+  "overview": {
+    "sequence": [
+      "先看本章开头：天的道理，不像调节拉开的弓吗？",
+      "拉弓时调节高低，本章借此讨论有余与不足，强调帮助有需要的人。",
+      "再回到结尾：所以有智慧的人做事而不倚仗，成功而不占功，不想炫示自己贤能。"
+    ],
+    "question": "这一章为什么可以叫作「像调弓一样补不足」？",
+    "answer": "拉弓时调节高低，本章借此讨论有余与不足，强调帮助有需要的人。可以引用本章开头或结尾的原句，说明你的依据。",
+    "takeaway": "拉弓时调节高低，本章借此讨论有余与不足，强调帮助有需要的人。"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "choice",
+      "sentence": "s1",
+      "skill": "meaning",
+      "prompt": "开头的「张弓」在这里怎样理解？",
+      "choices": [
+        "只顾自己，不留意他人的处境。",
+        "为了显示本领而处处炫耀。",
+        "拉开弓。"
+      ],
+      "answer": 2,
+      "explanation": "把词放回原句看，「张弓」在本句中的意思是：拉开弓。"
+    },
+    {
+      "id": "q2",
+      "type": "choice",
+      "sentence": "s6",
+      "skill": "reason",
+      "prompt": "读完「像调弓一样补不足」，哪一种理解更合适？",
+      "choices": [
+        "拉弓时调节高低，本章借此讨论有余与不足，强调帮助有需要的人。",
+        "只要一次失败，就不必再试。",
+        "遇到问题不用观察，也不必行动。"
+      ],
+      "answer": 0,
+      "explanation": "拉弓时调节高低，本章借此讨论有余与不足，强调帮助有需要的人。"
+    },
+    {
+      "id": "q3",
+      "type": "selfcheck",
+      "sentence": "s6",
+      "skill": "retell",
+      "prompt": "选本章一句话，用自己的话解释，再说说它怎样帮助你理解「像调弓一样补不足」。",
+      "answer": "先说清原句中的对象和动作，再解释关键词。可以围绕这点来讲：拉弓时调节高低，本章借此讨论有余与不足，强调帮助有需要的人。说完后，回到原文找一句作依据。",
+      "explanation": "不必背诵译文。重点看词义是否放回本句、有没有原文依据，以及是否把古人的比方误当成不分条件的结论。"
+    }
+  ]
+}

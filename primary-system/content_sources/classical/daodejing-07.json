@@ -1,0 +1,255 @@
+{
+  "schema_version": 1,
+  "id": "daodejing-07",
+  "title": "道德经·第七章",
+  "attribution": "老子",
+  "level": "challenge",
+  "genre": "reasoning",
+  "skills": [
+    "meaning",
+    "referent",
+    "reason",
+    "contrast",
+    "retell"
+  ],
+  "curriculum": null,
+  "intro": "不总把自己放在前面。本章借天地作比方，提醒人在共同做事时少一些只顾自己的盘算。",
+  "background": "这是《道德经》道经·第七章。本章围绕「不总把自己放在前面」展开，可以先读原文，再对照译文，看看作者用了什么比方或对比。",
+  "editorial_note": "本馆用逐句译解帮助入门。读「道」「无为」等词时要看上下文；古代观念和理想化比方，可以边读边与家长讨论。本章括号内的异文提示移到来源说明，正文采用前一种写法。",
+  "source": {
+    "work": "道德经（又名老子）",
+    "section": "道经·第七章",
+    "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#七章",
+    "note": "原文以本机简体《老子》为底本，统一引号，第七章移去括号异文提示。译文、词义和练习为本馆编写的入门读法，参考王弼注理解，不将不同底本混作同一文本。"
+  },
+  "source_ref": {
+    "locator": "/content/6",
+    "path": "poetry/simplified/诸子百家/老子.json",
+    "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+    "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+    "anchor_text": "天长地久。天地所以能长且久者，以其不自生，故能长生。是以圣人后其身而身先，外其身而身存。非以其无私邪？故能成其私。(后其身 一作：退其身)"
+  },
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "天长地久。",
+      "translation": "天长久，地也长久。",
+      "explanation": "读词小提示：「天长地久」：天和地长久存在。",
+      "chunks": [
+        "天长地久。"
+      ],
+      "hints": [
+        "天长地久"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "天长地久",
+          "kind": "word",
+          "meaning": "天和地长久存在。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第七章》第1句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#七章",
+        "source_ref": {
+          "locator": "/content/6",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "天长地久。天地所以能长且久者，以其不自生，故能长生。是以圣人后其身而身先，外其身而身存。非以其无私邪？故能成其私。(后其身 一作：退其身)"
+        }
+      }
+    },
+    {
+      "id": "s2",
+      "text": "天地所以能长且久者，以其不自生，故能长生。",
+      "translation": "天地之所以能长久，是因为不专为自己而存在，所以能够长存。",
+      "explanation": "读词小提示：「所以」：……的原因；「不自生」：不专为自己而生。",
+      "chunks": [
+        "天地所以能长且久者，",
+        "以其不自生，",
+        "故能长生。"
+      ],
+      "hints": [
+        "所以",
+        "不自生"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "所以",
+          "kind": "word",
+          "meaning": "……的原因。"
+        },
+        {
+          "id": "n2",
+          "quote": "不自生",
+          "kind": "word",
+          "meaning": "不专为自己而生。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第七章》第2句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#七章",
+        "source_ref": {
+          "locator": "/content/6",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "天地所以能长且久者，以其不自生，故能长生。"
+        }
+      }
+    },
+    {
+      "id": "s3",
+      "text": "是以圣人后其身而身先，外其身而身存。",
+      "translation": "因此，有智慧的人把自己放在后面，反而受到推重；不只顾自身，反而能保全自身。",
+      "explanation": "读词小提示：「后其身」：把自己放在后面；「外其身」：把自己的私利放在考虑之外。",
+      "chunks": [
+        "是以圣人后其身而身先，",
+        "外其身而身存。"
+      ],
+      "hints": [
+        "后其身",
+        "外其身"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "后其身",
+          "kind": "word",
+          "meaning": "把自己放在后面。"
+        },
+        {
+          "id": "n2",
+          "quote": "外其身",
+          "kind": "word",
+          "meaning": "把自己的私利放在考虑之外。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第七章》第3句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#七章",
+        "source_ref": {
+          "locator": "/content/6",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "是以圣人后其身而身先，外其身而身存。"
+        }
+      }
+    },
+    {
+      "id": "s4",
+      "text": "非以其无私邪？",
+      "translation": "不正是因为不自私吗？",
+      "explanation": "读词小提示：「无私」：不只顾自己的私利。",
+      "chunks": [
+        "非以其无私邪？"
+      ],
+      "hints": [
+        "无私"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "无私",
+          "kind": "word",
+          "meaning": "不只顾自己的私利。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第七章》第4句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#七章",
+        "source_ref": {
+          "locator": "/content/6",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "天长地久。天地所以能长且久者，以其不自生，故能长生。是以圣人后其身而身先，外其身而身存。非以其无私邪？故能成其私。(后其身 一作：退其身)"
+        }
+      }
+    },
+    {
+      "id": "s5",
+      "text": "故能成其私。",
+      "translation": "所以反而能成全自己。",
+      "explanation": "读词小提示：「私」：这里指自身的存在与需要。",
+      "chunks": [
+        "故能成其私。"
+      ],
+      "hints": [
+        "私"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "私",
+          "kind": "word",
+          "meaning": "这里指自身的存在与需要。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第七章》第5句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#七章",
+        "source_ref": {
+          "locator": "/content/6",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "天长地久。天地所以能长且久者，以其不自生，故能长生。是以圣人后其身而身先，外其身而身存。非以其无私邪？故能成其私。(后其身 一作：退其身)"
+        }
+      }
+    }
+  ],
+  "overview": {
+    "sequence": [
+      "先看本章开头：天长久，地也长久。",
+      "本章借天地作比方，提醒人在共同做事时少一些只顾自己的盘算。",
+      "再回到结尾：所以反而能成全自己。"
+    ],
+    "question": "这一章为什么可以叫作「不总把自己放在前面」？",
+    "answer": "本章借天地作比方，提醒人在共同做事时少一些只顾自己的盘算。可以引用本章开头或结尾的原句，说明你的依据。",
+    "takeaway": "本章借天地作比方，提醒人在共同做事时少一些只顾自己的盘算。"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "choice",
+      "sentence": "s1",
+      "skill": "meaning",
+      "prompt": "开头的「天长地久」在这里怎样理解？",
+      "choices": [
+        "只顾自己，不留意他人的处境。",
+        "天和地长久存在。",
+        "为了显示本领而处处炫耀。"
+      ],
+      "answer": 1,
+      "explanation": "把词放回原句看，「天长地久」在本句中的意思是：天和地长久存在。"
+    },
+    {
+      "id": "q2",
+      "type": "choice",
+      "sentence": "s5",
+      "skill": "reason",
+      "prompt": "读完「不总把自己放在前面」，哪一种理解更合适？",
+      "choices": [
+        "别人的想法一概不用听。",
+        "只有大声夸耀自己，才能显得有本领。",
+        "本章借天地作比方，提醒人在共同做事时少一些只顾自己的盘算。"
+      ],
+      "answer": 2,
+      "explanation": "本章借天地作比方，提醒人在共同做事时少一些只顾自己的盘算。"
+    },
+    {
+      "id": "q3",
+      "type": "selfcheck",
+      "sentence": "s5",
+      "skill": "retell",
+      "prompt": "选本章一句话，用自己的话解释，再说说它怎样帮助你理解「不总把自己放在前面」。",
+      "answer": "先说清原句中的对象和动作，再解释关键词。可以围绕这点来讲：本章借天地作比方，提醒人在共同做事时少一些只顾自己的盘算。说完后，回到原文找一句作依据。",
+      "explanation": "不必背诵译文。重点看词义是否放回本句、有没有原文依据，以及是否把古人的比方误当成不分条件的结论。"
+    }
+  ]
+}

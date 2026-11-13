@@ -9,6 +9,13 @@
 
 .gm-wildlife [hidden] { display: none !important; }
 
+.gm-flora { --animal-land: #dce9c8; --animal-sea: #deeeeb; }
+.gm-flora:not([data-map="world"]) { --atlas-hero-start: #3d652a; --atlas-hero-end: #387b57; }
+.gm-plant-scientific { overflow-wrap: anywhere; color: var(--ink-soft); font-size: 15px; font-style: italic; }
+.gm-plant-leader { fill: none; stroke: var(--animal-color); stroke-width: 1.5; pointer-events: none; }
+.gm-plant-anchor { fill: var(--animal-color); pointer-events: none; }
+.gm-flora .gm-animal-marker:not(:hover):not(:focus-visible):not([aria-pressed="true"]) .gm-animal-label { display: none; }
+
 .gm-wildlife-header {
   display: flex;
   flex-wrap: wrap;

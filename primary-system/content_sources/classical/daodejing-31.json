@@ -1,0 +1,395 @@
+{
+  "schema_version": 1,
+  "id": "daodejing-31",
+  "title": "道德经·第三十一章",
+  "attribution": "老子",
+  "level": "challenge",
+  "genre": "reasoning",
+  "skills": [
+    "meaning",
+    "referent",
+    "reason",
+    "contrast",
+    "retell"
+  ],
+  "curriculum": null,
+  "intro": "不把战争当荣耀。本章把战胜与丧礼连在一起，强调对生命的珍惜与对伤亡的悲哀。",
+  "background": "这是《道德经》道经·第三十一章。本章围绕「不把战争当荣耀」展开，可以先读原文，再对照译文，看看作者用了什么比方或对比。",
+  "editorial_note": "本馆用逐句译解帮助入门。读「道」「无为」等词时要看上下文；古代观念和理想化比方，可以边读边与家长讨论。",
+  "source": {
+    "work": "道德经（又名老子）",
+    "section": "道经·第三十一章",
+    "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#三十一章",
+    "note": "原文以本机简体《老子》为底本，统一引号，第七章移去括号异文提示。译文、词义和练习为本馆编写的入门读法，参考王弼注理解，不将不同底本混作同一文本。"
+  },
+  "source_ref": {
+    "locator": "/content/30",
+    "path": "poetry/simplified/诸子百家/老子.json",
+    "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+    "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+    "anchor_text": "夫兵者，不祥之器，物或恶之，故有道者不处。君子居则贵左，用兵则贵右。兵者不祥之器，非君子之器，不得已而用之，恬淡为上。胜而不美，而美之者，是乐杀人。夫乐杀人者，则不可得志于天下矣。吉事尚左，凶事尚右。偏将军居左，上将军居右，言以丧礼处之。杀人之眾，以悲哀泣之，战胜以丧礼处之。"
+  },
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "夫兵者，不祥之器，物或恶之，故有道者不处。",
+      "translation": "武器是不吉祥的工具，常使人厌恶，所以体会道的人不依赖它。",
+      "explanation": "读词小提示：「不祥之器」：带来不幸的工具；「处」：采用、依赖。",
+      "chunks": [
+        "夫兵者，",
+        "不祥之器，",
+        "物或恶之，",
+        "故有道者不处。"
+      ],
+      "hints": [
+        "不祥之器",
+        "处"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "不祥之器",
+          "kind": "word",
+          "meaning": "带来不幸的工具。"
+        },
+        {
+          "id": "n2",
+          "quote": "处",
+          "kind": "word",
+          "meaning": "采用、依赖。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第三十一章》第1句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#三十一章",
+        "source_ref": {
+          "locator": "/content/30",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "夫兵者，不祥之器，物或恶之，故有道者不处。"
+        }
+      }
+    },
+    {
+      "id": "s2",
+      "text": "君子居则贵左，用兵则贵右。",
+      "translation": "平日以左为尊，用兵时以右为尊。",
+      "explanation": "读词小提示：「贵左」：以左边的位置为尊。",
+      "chunks": [
+        "君子居则贵左，",
+        "用兵则贵右。"
+      ],
+      "hints": [
+        "贵左"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "贵左",
+          "kind": "word",
+          "meaning": "以左边的位置为尊。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第三十一章》第2句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#三十一章",
+        "source_ref": {
+          "locator": "/content/30",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "君子居则贵左，用兵则贵右。"
+        }
+      }
+    },
+    {
+      "id": "s3",
+      "text": "兵者不祥之器，非君子之器，不得已而用之，恬淡为上。",
+      "translation": "武器不是君子所喜爱的器具，实在不得已才使用，以平和克制为上。",
+      "explanation": "读词小提示：「不祥之器」：带来不幸的工具；「恬淡」：平和，不沉迷争胜。",
+      "chunks": [
+        "兵者不祥之器，",
+        "非君子之器，",
+        "不得已而用之，",
+        "恬淡为上。"
+      ],
+      "hints": [
+        "不祥之器",
+        "恬淡"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "不祥之器",
+          "kind": "word",
+          "meaning": "带来不幸的工具。"
+        },
+        {
+          "id": "n2",
+          "quote": "恬淡",
+          "kind": "word",
+          "meaning": "平和，不沉迷争胜。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第三十一章》第3句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#三十一章",
+        "source_ref": {
+          "locator": "/content/30",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "兵者不祥之器，非君子之器，不得已而用之，恬淡为上。"
+        }
+      }
+    },
+    {
+      "id": "s4",
+      "text": "胜而不美，而美之者，是乐杀人。",
+      "translation": "取胜也不夸耀，夸耀战争胜利，就是把杀人当作快乐。",
+      "explanation": "读词小提示：「美」：赞美、夸耀；「乐杀人」：把杀人当作快乐。",
+      "chunks": [
+        "胜而不美，",
+        "而美之者，",
+        "是乐杀人。"
+      ],
+      "hints": [
+        "美",
+        "乐杀人"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "美",
+          "kind": "word",
+          "meaning": "赞美、夸耀。"
+        },
+        {
+          "id": "n2",
+          "quote": "乐杀人",
+          "kind": "word",
+          "meaning": "把杀人当作快乐。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第三十一章》第4句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#三十一章",
+        "source_ref": {
+          "locator": "/content/30",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "胜而不美，而美之者，是乐杀人。"
+        }
+      }
+    },
+    {
+      "id": "s5",
+      "text": "夫乐杀人者，则不可得志于天下矣。",
+      "translation": "以杀人为快乐的人，不能得到天下人的支持。",
+      "explanation": "读词小提示：「乐杀人」：把杀人当作快乐。",
+      "chunks": [
+        "夫乐杀人者，",
+        "则不可得志于天下矣。"
+      ],
+      "hints": [
+        "乐杀人"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "乐杀人",
+          "kind": "word",
+          "meaning": "把杀人当作快乐。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第三十一章》第5句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#三十一章",
+        "source_ref": {
+          "locator": "/content/30",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "夫乐杀人者，则不可得志于天下矣。"
+        }
+      }
+    },
+    {
+      "id": "s6",
+      "text": "吉事尚左，凶事尚右。",
+      "translation": "喜庆之事以左为尊，凶丧之事以右为尊。",
+      "explanation": "读词小提示：「吉事」：喜庆、吉利的事情。",
+      "chunks": [
+        "吉事尚左，",
+        "凶事尚右。"
+      ],
+      "hints": [
+        "吉事"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "吉事",
+          "kind": "word",
+          "meaning": "喜庆、吉利的事情。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第三十一章》第6句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#三十一章",
+        "source_ref": {
+          "locator": "/content/30",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "吉事尚左，凶事尚右。"
+        }
+      }
+    },
+    {
+      "id": "s7",
+      "text": "偏将军居左，上将军居右，言以丧礼处之。",
+      "translation": "副将在左，主将在右，是说用对待丧礼的态度对待战争。",
+      "explanation": "读词小提示：「处」：采用、依赖；「偏将军」：副将。",
+      "chunks": [
+        "偏将军居左，",
+        "上将军居右，",
+        "言以丧礼处之。"
+      ],
+      "hints": [
+        "处",
+        "偏将军",
+        "丧礼"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "处",
+          "kind": "word",
+          "meaning": "采用、依赖。"
+        },
+        {
+          "id": "n2",
+          "quote": "偏将军",
+          "kind": "word",
+          "meaning": "副将。"
+        },
+        {
+          "id": "n3",
+          "quote": "丧礼",
+          "kind": "word",
+          "meaning": "哀悼死者的礼节。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第三十一章》第7句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#三十一章",
+        "source_ref": {
+          "locator": "/content/30",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "偏将军居左，上将军居右，言以丧礼处之。"
+        }
+      }
+    },
+    {
+      "id": "s8",
+      "text": "杀人之眾，以悲哀泣之，战胜以丧礼处之。",
+      "translation": "很多人死去，应当悲哀哭泣；即使战胜，也应以哀悼的态度对待。",
+      "explanation": "读词小提示：「处」：采用、依赖；「丧礼」：哀悼死者的礼节。",
+      "chunks": [
+        "杀人之眾，",
+        "以悲哀泣之，",
+        "战胜以丧礼处之。"
+      ],
+      "hints": [
+        "处",
+        "丧礼",
+        "悲哀泣之"
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "quote": "处",
+          "kind": "word",
+          "meaning": "采用、依赖。"
+        },
+        {
+          "id": "n2",
+          "quote": "丧礼",
+          "kind": "word",
+          "meaning": "哀悼死者的礼节。"
+        },
+        {
+          "id": "n3",
+          "quote": "悲哀泣之",
+          "kind": "word",
+          "meaning": "怀着悲伤为死者哭泣。"
+        }
+      ],
+      "reference": {
+        "label": "《道德经·道经·第三十一章》第8句",
+        "url": "https://zh.wikisource.org/wiki/道德經_(王弼本)#三十一章",
+        "source_ref": {
+          "locator": "/content/30",
+          "path": "poetry/simplified/诸子百家/老子.json",
+          "version": "01a1183cd9bbc243bb156967043c32b6685c0d2f+native",
+          "sha256": "c4a08487b0421e1fecd626642bf0580a98671995134c3044e429387f50327893",
+          "anchor_text": "杀人之眾，以悲哀泣之，战胜以丧礼处之。"
+        }
+      }
+    }
+  ],
+  "overview": {
+    "sequence": [
+      "先看本章开头：武器是不吉祥的工具，常使人厌恶，所以体会道的人不依赖它。",
+      "本章把战胜与丧礼连在一起，强调对生命的珍惜与对伤亡的悲哀。",
+      "再回到结尾：很多人死去，应当悲哀哭泣；即使战胜，也应以哀悼的态度对待。"
+    ],
+    "question": "这一章为什么可以叫作「不把战争当荣耀」？",
+    "answer": "本章把战胜与丧礼连在一起，强调对生命的珍惜与对伤亡的悲哀。可以引用本章开头或结尾的原句，说明你的依据。",
+    "takeaway": "本章把战胜与丧礼连在一起，强调对生命的珍惜与对伤亡的悲哀。"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "choice",
+      "sentence": "s1",
+      "skill": "meaning",
+      "prompt": "开头的「不祥之器」在这里怎样理解？",
+      "choices": [
+        "只顾自己，不留意他人的处境。",
+        "带来不幸的工具。",
+        "为了显示本领而处处炫耀。"
+      ],
+      "answer": 1,
+      "explanation": "把词放回原句看，「不祥之器」在本句中的意思是：带来不幸的工具。"
+    },
+    {
+      "id": "q2",
+      "type": "choice",
+      "sentence": "s8",
+      "skill": "reason",
+      "prompt": "读完「不把战争当荣耀」，哪一种理解更合适？",
+      "choices": [
+        "别人的想法一概不用听。",
+        "只有大声夸耀自己，才能显得有本领。",
+        "本章把战胜与丧礼连在一起，强调对生命的珍惜与对伤亡的悲哀。"
+      ],
+      "answer": 2,
+      "explanation": "本章把战胜与丧礼连在一起，强调对生命的珍惜与对伤亡的悲哀。"
+    },
+    {
+      "id": "q3",
+      "type": "selfcheck",
+      "sentence": "s8",
+      "skill": "retell",
+      "prompt": "选本章一句话，用自己的话解释，再说说它怎样帮助你理解「不把战争当荣耀」。",
+      "answer": "先说清原句中的对象和动作，再解释关键词。可以围绕这点来讲：本章把战胜与丧礼连在一起，强调对生命的珍惜与对伤亡的悲哀。说完后，回到原文找一句作依据。",
+      "explanation": "不必背诵译文。重点看词义是否放回本句、有没有原文依据，以及是否把古人的比方误当成不分条件的结论。"
+    }
+  ]
+}
