@@ -18,4 +18,13 @@ def badges(request, available_apps):
     if user.has_perm('chain.view_chainword'):
         from chain.models import ChainWord
         counts['chain.chainword'] = ChainWord.objects.filter(game_eligible=True).count()
+    # 与首页待办使用同一 ModelAdmin 查看权限和查询集。
+    from django.contrib import admin
+    from incentives.models import Redemption
+    model_admin = admin.site._registry.get(Redemption)
+    if model_admin and model_admin.has_module_permission(request) and (
+        model_admin.has_view_permission(request) or model_admin.has_change_permission(request)
+    ):
+        counts['incentives.redemption'] = model_admin.get_queryset(request).filter(
+            status=Redemption.Status.PENDING).count()
     return counts

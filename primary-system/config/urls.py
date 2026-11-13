@@ -3,6 +3,7 @@ from django.contrib.auth import views as auth_views
 from django.urls import include, path
 from django.views.generic.base import RedirectView
 from nova_admin.slider import SliderCaptchaAdminAuthenticationForm
+from nova_admin.urls import for_admin
 from accounts import views as accounts_views
 from accounts.forms import LearnerAuthenticationForm
 from catalog import views as catalog
@@ -15,7 +16,7 @@ from config.health import health
 
 admin.site.site_header = '乐学堂 · 学习管理'
 admin.site.site_title = '乐学堂后台'
-admin.site.index_title = '内容、教材与账号'
+admin.site.index_title = '学习数据总览'
 admin.site.login_form = SliderCaptchaAdminAuthenticationForm
 admin.site.login_template = 'nova_admin/slider_login.html'
 
@@ -72,5 +73,6 @@ urlpatterns = [
     path('api/v1/lexicon/<uuid:pk>/', lexicon.entry_detail, name='lexicon-detail'),
     path('api/v1/me/progress/<uuid:pk>/', learning.progress_api),
     path('admin/_slider/', include('nova_slider_captcha.urls')),
+    path('admin/_nova/', include(for_admin(admin.site))),
     path('admin/', admin.site.urls),
 ]

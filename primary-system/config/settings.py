@@ -24,7 +24,7 @@ if not SECRET_KEY:
 ALLOWED_HOSTS = [s.strip() for s in os.environ.get('PRIMARY_ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',') if s.strip()]
 INSTALLED_APPS = [
     'nova_admin', 'nova_slider_captcha',
-    'django.contrib.admin', 'django.contrib.auth', 'django.contrib.contenttypes',
+    'config.apps.StudyAdminConfig', 'django.contrib.auth', 'django.contrib.contenttypes',
     'django.contrib.sessions', 'django.contrib.messages', 'django.contrib.staticfiles',
     'accounts', 'catalog', 'learning', 'lexicon', 'chain', 'words', 'reference_library', 'science','hanzi','poetry','geography','astronomy','arithmetic', 'idioms', 'phonetics', 'writing', 'questionbank', 'grammar', 'plurals', 'phrases', 'mathbook', 'chinesebook', 'mathformulas', 'incentives',
     'mysteries', 'humanorigins', 'historystudy', 'geographystudy', 'classical',
@@ -96,6 +96,7 @@ DATA_UPLOAD_MAX_MEMORY_SIZE = 256 * 1024
 NOVA_ADMIN_ENABLED = True
 NOVA_ADMIN_DEFAULT_MODE = 'light'
 NOVA_ADMIN_BRANDING = {'name': '乐学堂 · 学习管理'}
+NOVA_ADMIN_PRINT = False
 NOVA_ADMIN_CAPTCHA_POLICY = 'always'
 NOVA_SLIDER_PURPOSES = ['login']
 # 导航扩展：只重排 AdminSite 已按权限过滤的应用，不新增页面或查询。
@@ -106,6 +107,7 @@ NOVA_ADMIN_NAV_GROUPS = [
     {'key': 'lexicon', 'label': '基础词库', 'apps': ['lexicon']},
     {'key': 'chain', 'label': '游戏中心', 'apps': ['chain']},
     {'key': 'learning', 'label': '学习记录', 'apps': ['learning', 'incentives']},
+    {'key': 'questionbank', 'label': '挑战题库', 'apps': ['questionbank']},
     {'key': 'people', 'label': '账号与权限', 'apps': ['accounts', 'auth']},
 ]
 NOVA_ADMIN_NAV_COMMON_MODELS = ['catalog.contentitem', 'catalog.textbookbook', 'lexicon.lexicalentry', 'chain.chainword']

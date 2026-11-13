@@ -1,0 +1,40 @@
+/* 复用 Nova 令牌：后台首页采用上下结构，统计区与管理目录共用内容宽度。 */
+body.nova-admin.dashboard #content { max-width: none; }
+body.nova-admin.dashboard .study-model-directory #content-main { width: 100%; float: none; }
+#study-dashboard { --study-ink: var(--body-fg, #1f2937); color: var(--study-ink); }
+#study-dashboard *, .study-model-directory { box-sizing: border-box; }
+.study-dashboard-toolbar, #study-dashboard-filter { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; }
+.study-dashboard-toolbar { justify-content: space-between; margin: 6px 0 18px; }
+#study-dashboard-filter label { font-weight: 600; }
+#study-dashboard-filter select, #study-dashboard-filter button { min-height: 38px; font-size: 14px; }
+#study-dashboard-filter button { cursor: pointer; }
+#study-dashboard-filter button:disabled { cursor: wait; opacity: .65; }
+#study-refresh-status, #study-dashboard .study-stat-scope { margin: 0; color: var(--body-quiet-color, #475569); font-size: 13px; line-height: 1.6; }
+#study-dashboard .study-stat-scope { margin-bottom: 16px; }
+.study-metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin-bottom: 20px; }
+.study-metric { display: flex; flex-direction: column; gap: 8px; padding: 18px; border: 1px solid var(--hairline-color, #d9e0e8); border-radius: 12px; background: var(--body-bg, #fff); }
+body.nova-admin.dashboard #study-dashboard a.study-metric { color: var(--study-ink); text-decoration: none; }
+.study-metric:hover { border-color: var(--link-fg, #2563eb); }
+.study-metric:focus-visible, #study-dashboard a:focus-visible, #study-dashboard summary:focus-visible { outline: 2px solid var(--link-fg, #2563eb); outline-offset: 3px; }
+.study-metric > span { font-size: 15px; font-weight: 600; }
+.study-metric > strong { color: var(--link-fg, #2563eb); font-size: 30px; line-height: 1.25; font-variant-numeric: tabular-nums; }
+.study-metric > small { font-size: 12px; line-height: 1.6; color: var(--body-quiet-color, #475569); }
+.study-tasks { display: flex; align-items: center; flex-wrap: wrap; gap: 12px 24px; padding: 16px 20px; margin-bottom: 20px; border-radius: 12px; background: var(--darkened-bg, #f1f5f9); }
+#study-dashboard h2 { margin: 0; padding: 0; background: none; color: var(--study-ink); font-size: 17px; line-height: 1.5; }
+.study-tasks a { font-size: 14px; }
+.study-tasks strong { margin-left: 8px; }
+.study-charts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.study-chart { min-width: 0; padding: 20px; border: 1px solid var(--hairline-color, #d9e0e8); border-radius: 12px; background: var(--body-bg, #fff); }
+#study-dashboard .study-chart > p { min-height: 42px; margin: 8px 0 16px; color: var(--body-quiet-color, #475569); font-size: 13px; line-height: 1.6; }
+.study-chart-canvas { position: relative; height: 260px; }
+.study-chart-empty { min-height: 100px; display: grid; place-items: center; padding: 24px; color: var(--body-quiet-color, #475569); background: var(--darkened-bg, #f1f5f9); border-radius: 8px; font-size: 14px; }
+.study-chart-table { margin-top: 16px; }
+.study-chart-table summary, .study-model-directory > summary { cursor: pointer; padding: 8px 0; font-size: 14px; font-weight: 600; }
+.study-table-scroll { overflow: auto; max-height: 300px; margin-top: 8px; }
+#study-dashboard .study-table-scroll table { width: 100%; font-size: 13px; }
+#study-dashboard .study-table-scroll :is(th, td) { padding: 8px 10px; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.study-model-directory { clear: both; margin-top: 24px; }
+.study-model-directory > summary { margin-bottom: 12px; font-size: 16px; }
+.study-dashboard-empty { padding: 24px; background: var(--darkened-bg, #f1f5f9); line-height: 1.8; }
+@media (max-width: 1100px) { .study-charts { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 480px) { .study-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; } .study-metric { padding: 12px; } .study-chart { padding: 14px; } .study-metric > strong { font-size: 26px; } }

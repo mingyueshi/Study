@@ -1,0 +1,47 @@
+{% extends "admin/index.html" %}
+{% load static %}
+
+{% block extrastyle %}
+  {{ block.super }}
+  {% if study_dashboard_active %}<link rel="stylesheet" href="{% static 'admin/study-dashboard.css' %}">{% endif %}
+{% endblock %}
+
+{% block extrahead %}
+  {{ block.super }}
+  {% if study_dashboard_active %}
+    <script src="{% static 'admin/vendor/chartjs/chart.umd.min.js' %}" defer></script>
+    <script src="{% static 'admin/study-dashboard.js' %}" defer></script>
+  {% endif %}
+{% endblock %}
+
+{% block content_title %}
+  {% if study_dashboard_active %}
+    <h1>学习数据总览</h1>
+    <p class="nova-page-description">看看学习有没有坚持、内容是否齐备，还有哪些奖励等待安排。</p>
+  {% else %}{{ block.super }}{% endif %}
+{% endblock %}
+
+{% block content %}
+  {% if study_dashboard_active %}
+    <section id="study-dashboard" data-endpoint="{{ dashboard_url }}" aria-label="学习数据统计">
+      <div class="study-dashboard-toolbar">
+        <form method="get" id="study-dashboard-filter">
+          <label for="study-period">统计时段</label>
+          <select id="study-period" name="period">
+            {% for value in dashboard.periods %}<option value="{{ value }}"{% if value == dashboard.period %} selected{% endif %}>近 {{ value }} 天</option>{% endfor %}
+          </select>
+          <button type="submit" class="button">刷新数据</button>
+        </form>
+        <p id="study-refresh-status" role="status">更新于 {{ dashboard.updated_at }} · 每分钟自动刷新</p>
+      </div>
+      <noscript><p>自动刷新需要启用 JavaScript。你仍可选择时段并点击「刷新数据」，在下方数据表查看完整统计。</p></noscript>
+      <div id="study-dashboard-content">{% include "admin/study_dashboard.html" %}</div>
+    </section>
+    <details class="study-model-directory">
+      <summary>全部管理入口</summary>
+      {{ block.super }}
+    </details>
+  {% else %}{{ block.super }}{% endif %}
+{% endblock %}
+
+{% block sidebar %}{% if not study_dashboard_active %}{{ block.super }}{% endif %}{% endblock %}

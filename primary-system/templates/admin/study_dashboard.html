@@ -1,0 +1,40 @@
+{% if dashboard.metrics or dashboard.charts %}
+  <p class="study-stat-scope">时段统计：{{ dashboard.start }} 至 {{ dashboard.end }}（北京时间，含首尾两天）。标注「当前」和「全部」的数量不随时段变化。</p>
+  <div class="study-metrics">
+    {% for metric in dashboard.metrics %}
+      <a class="study-metric" href="{{ metric.url }}" data-metric="{{ metric.key }}">
+        <span>{{ metric.label }}</span><strong>{{ metric.value }}</strong><small>{{ metric.note }}</small>
+      </a>
+    {% endfor %}
+  </div>
+  {% if dashboard.tasks %}
+    <section class="study-tasks" aria-label="待办提醒">
+      <h2>接下来处理</h2>
+      {% for task in dashboard.tasks %}<a href="{{ task.url }}">{{ task.label }} <strong>{{ task.count }}</strong><span aria-hidden="true"> →</span></a>{% endfor %}
+    </section>
+  {% endif %}
+  <div class="study-charts">
+    {% for chart in dashboard.charts %}
+      <section class="study-chart" aria-labelledby="study-title-{{ chart.key }}">
+        <h2 id="study-title-{{ chart.key }}">{{ chart.title }}</h2>
+        <p>{{ chart.note }}</p>
+        {% if chart.has_data %}
+          <div class="study-chart-canvas" hidden><canvas id="study-chart-{{ chart.key }}" role="img" aria-label="{{ chart.title }}，详细数值见下方数据表"></canvas></div>
+        {% else %}<div class="study-chart-empty">还没有这类记录，有数据后会在这里显示。</div>{% endif %}
+        <details class="study-chart-table" data-chart="{{ chart.key }}" open>
+          <summary>查看数据表</summary>
+          <div class="study-table-scroll">
+            <table>
+              <caption class="visually-hidden">{{ chart.title }}</caption>
+              <thead><tr><th scope="col">日期／分类</th>{% for series in chart.series %}<th scope="col">{{ series.label }}</th>{% endfor %}</tr></thead>
+              <tbody>{% for row in chart.rows %}<tr><th scope="row">{{ row.label }}</th>{% for value in row.values %}<td>{{ value }}</td>{% endfor %}</tr>{% endfor %}</tbody>
+            </table>
+          </div>
+        </details>
+      </section>
+    {% endfor %}
+  </div>
+{% else %}
+  <p class="study-dashboard-empty">当前账号还没有可查看的统计数据，请从已有权限的管理入口开始，或联系管理员分配查看权限。</p>
+{% endif %}
+{{ dashboard.charts|json_script:"study-dashboard-charts" }}
