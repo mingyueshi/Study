@@ -6,27 +6,42 @@
   <meta name="theme-color" content="#f7faf5">
   <title>{% block title %}乐学堂 · 一起把世界读懂{% endblock %}</title>
   <link rel="icon" href="{% static 'icons/book.svg' %}" type="image/svg+xml">
-  <link rel="stylesheet" href="{% static 'platform.css' %}?v=4">
+  <link rel="stylesheet" href="{% static 'platform.css' %}?v=5">
   <link rel="stylesheet" href="{% static 'sidebar-layout.css' %}?v=3">
 </head>
 <body>
   <a class="skip-link" href="#main">跳到主要内容</a>
-  <header class="site-header">
-    <a class="brand" href="{% url 'home' %}"><img src="{% static 'icons/book.svg' %}" alt="" width="60" height="60"><span>乐学堂<small>每一点好奇，都有回响</small></span></a>
-    {% with current=request.resolver_match.url_name %}
-    <nav aria-label="主导航">
-      <a href="{% url 'home' %}" {% if current == 'home' or current == 'module' or current == 'collection' or current == 'item' or current == 'mathbook' or current == 'mathbook-book' or current == 'chinesebook' or current == 'chinesebook-book' or study_area %}aria-current="location"{% endif %}><img src="{% static 'icons/book.svg' %}" alt="" width="32" height="32"><span>学习广场</span></a>
-      <a href="{% url 'reference-library' %}" {% if current == 'reference-library' or current == 'dictionary' or current == 'dictionary-entry' or current == 'dictionary-sources' or current == 'idiom-scenes' or current == 'idiom-scene' or current == 'idiom-entry' or current == 'idiom-stories' or current == 'idiom-quiz' or current == 'idiom-emoji' or current == 'idiom-pairs' or current == 'reference-cedict-detail' or current == 'reference-cmu-detail' or current == 'hanzi-detail' or current == 'hanzi-polyphones' or current == 'questionbank' or current == 'questionbank-practice' or current == 'questionbank-wrong' or current == 'feihualing' or current == 'poetry-index' or current == 'poetry-detail' or current == 'poetry-exclusions' or current == 'poetry-map' or current == 'poetry-seasons' or current == 'scenario-words' or current == 'words-tree' or current == 'geography-index' or current == 'geography-detail' or current == 'science-elements' or current == 'science-element' or current == 'astronomy-index' or current == 'astronomy-detail' %}aria-current="location"{% endif %}>
-        <img src="{% static 'icons/globe.svg' %}" alt="" width="32" height="32"><span>资料探索</span>
-      </a>
-      {% if user.is_authenticated %}<a href="{% url 'my-learning' %}" {% if current == 'my-learning' %}aria-current="page"{% endif %}><img src="{% static 'icons/scenes.svg' %}" alt="" width="32" height="32"><span>我的学习</span></a>{% endif %}
-      {% if user.is_authenticated %}<a href="{% url 'rewards' %}" {% if current == 'rewards' %}aria-current="page"{% endif %}><img src="{% static 'icons/trophy.svg' %}" alt="" width="32" height="32"><span>我的奖励</span></a>{% endif %}
-      <a href="{% url 'rewards-shop' %}" {% if current == 'rewards-shop' %}aria-current="page"{% endif %}><span class="nav-gift" aria-hidden="true">🎁</span><span>积分兑换</span></a>
-      {% if user.is_staff %}<a href="{% url 'admin:index' %}">管理后台 ↗</a>{% endif %}
-    </nav>
-    <div class="account">{% if user.is_authenticated %}<a class="account-profile" href="{% url 'profile' %}" {% if current == 'profile' or current == 'password_change' or current == 'password_change_done' %}aria-current="location"{% endif %}><span class="account-avatar" aria-hidden="true">{{ user|stringformat:'s'|slice:':1' }}</span><span class="account-name">{{ user }}</span></a><form method="post" action="{% url 'logout' %}">{% csrf_token %}<button class="text-button" type="submit">退出</button></form>{% else %}<a class="button small" href="{% url 'login' %}">登录学习 <span aria-hidden="true">→</span></a>{% endif %}</div>
-    {% endwith %}
+  {% with current=request.resolver_match.url_name %}
+  <header class="site-masthead">
+    <div class="site-top">
+      <div class="site-top-inner">
+        <p class="site-top-welcome">{% if user.is_authenticated %}欢迎回来，一起探索新知识{% else %}欢迎来到乐学堂，一起探索新知识{% endif %}</p>
+        <div class="account">
+          {% if user.is_authenticated %}
+            <a class="account-profile" href="{% url 'profile' %}" title="{{ user }} · 学习偏好" {% if current == 'profile' or current == 'password_change' or current == 'password_change_done' %}aria-current="location"{% endif %}><span class="account-avatar" aria-hidden="true">{{ user|stringformat:'s'|slice:':1' }}</span><span class="account-name">{{ user }}</span><span class="account-profile-label">学习偏好</span></a>
+            {% if user.is_staff %}<a class="site-top-link" href="{% url 'admin:index' %}">管理后台 <span aria-hidden="true">↗</span></a>{% endif %}
+            <form method="post" action="{% url 'logout' %}">{% csrf_token %}<button class="text-button" type="submit">退出</button></form>
+          {% else %}
+            <a class="site-top-link" href="{% url 'register' %}">快速注册</a>
+            <a class="site-top-login" href="{% url 'login' %}">登录学习 <span aria-hidden="true">→</span></a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <div class="site-header">
+      <a class="brand" href="{% url 'home' %}"><img src="{% static 'icons/book.svg' %}" alt="" width="60" height="60"><span>乐学堂<small>每一点好奇，都有回响</small></span></a>
+      <nav aria-label="主导航">
+        <a href="{% url 'home' %}" {% if current == 'home' or current == 'module' or current == 'collection' or current == 'item' or current == 'mathbook' or current == 'mathbook-book' or current == 'chinesebook' or current == 'chinesebook-book' or study_area %}aria-current="location"{% endif %}><img src="{% static 'icons/book.svg' %}" alt="" width="32" height="32"><span>学习广场</span></a>
+        <a href="{% url 'reference-library' %}" {% if current == 'reference-library' or current == 'dictionary' or current == 'dictionary-entry' or current == 'dictionary-sources' or current == 'idiom-scenes' or current == 'idiom-scene' or current == 'idiom-entry' or current == 'idiom-stories' or current == 'idiom-quiz' or current == 'idiom-emoji' or current == 'idiom-pairs' or current == 'reference-cedict-detail' or current == 'reference-cmu-detail' or current == 'hanzi-detail' or current == 'hanzi-polyphones' or current == 'questionbank' or current == 'questionbank-practice' or current == 'questionbank-wrong' or current == 'feihualing' or current == 'poetry-index' or current == 'poetry-detail' or current == 'poetry-exclusions' or current == 'poetry-map' or current == 'poetry-seasons' or current == 'scenario-words' or current == 'words-tree' or current == 'geography-index' or current == 'geography-detail' or current == 'science-elements' or current == 'science-element' or current == 'astronomy-index' or current == 'astronomy-detail' %}aria-current="location"{% endif %}>
+          <img src="{% static 'icons/globe.svg' %}" alt="" width="32" height="32"><span>资料探索</span>
+        </a>
+        {% if user.is_authenticated %}<a href="{% url 'my-learning' %}" {% if current == 'my-learning' %}aria-current="page"{% endif %}><img src="{% static 'icons/scenes.svg' %}" alt="" width="32" height="32"><span>我的学习</span></a>{% endif %}
+        {% if user.is_authenticated %}<a href="{% url 'rewards' %}" {% if current == 'rewards' %}aria-current="page"{% endif %}><img src="{% static 'icons/trophy.svg' %}" alt="" width="32" height="32"><span>我的奖励</span></a>{% endif %}
+        <a href="{% url 'rewards-shop' %}" {% if current == 'rewards-shop' %}aria-current="page"{% endif %}><span class="nav-gift" aria-hidden="true">🎁</span><span>积分兑换</span></a>
+      </nav>
+    </div>
   </header>
+  {% endwith %}
   <main id="main" class="shell" tabindex="-1">
     {% for message in messages %}<div class="notice" role="status">{{ message }}</div>{% endfor %}
     {% block content %}{% endblock %}
