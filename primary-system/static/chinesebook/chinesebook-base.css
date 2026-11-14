@@ -3,7 +3,7 @@
    移植自 primary/layout.css 与 study-theme.css 的公共子集。
    与静态版的差异：裸元素规则（body 重置、:root 变量）全部收进
    .study-page 作用域，避免影响 base.html 的平台站点底座；
-   平台页宽 --page-width 已足够宽，学习壳直接沿用平台 .shell 容器。
+   册次页与阅读页沿用专题全宽规则，横向留白只由平台 .shell 提供。
    ============================================================ */
 .study-page {
   --red: #ff6b6b; --blue: #4d96ff; --green: #2fbf71; --orange: #ffa630; --purple: #9b5de5;
@@ -24,7 +24,7 @@
 .study-page :is(button, a, input, select, textarea, summary) { touch-action: manipulation; }
 .study-page :focus-visible { outline: 3px solid #315faa; outline-offset: 4px; }
 /* 学习页铺满平台内容区：底色随学习页主题，收窄平台底部留白 */
-body:has(.study-page) { background: #fffaf2; }
+body:has(.study-page) { --page-width: 100%; background: #fffaf2; }
 body:has(.study-page) .shell { padding-bottom: 40px; }
 
 /* ---------- 工具件（来自 layout.css） ---------- */
@@ -44,7 +44,7 @@ body:has(.study-page) .shell { padding-bottom: 40px; }
 /* ---------- 学习壳：侧栏目录 + 正文 ---------- */
 .study-page .study-shell {
   display: grid; grid-template-columns: 240px minmax(0, 1fr);
-  align-items: start; gap: clamp(20px, 2vw, 36px); padding: 24px var(--gutter) 40px;
+  align-items: start; gap: clamp(20px, 2vw, 36px); padding: 24px 0 40px;
 }
 .study-page .study-content, .study-page #cards { min-width: 0; }
 .study-page .sidebar {

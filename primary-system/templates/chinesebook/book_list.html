@@ -1,5 +1,5 @@
 {% extends 'base.html' %}{% load static %}{% block title %}语文教材册 · 乐学堂{% endblock %}
-{% block content %}<link rel="stylesheet" href="{% static 'chinesebook/chinesebook-base.css' %}?v=2"><link rel="stylesheet" href="{% static 'chinesebook/chinesebook.css' %}?v=2">
+{% block content %}<link rel="stylesheet" href="{% static 'chinesebook/chinesebook-base.css' %}?v=3"><link rel="stylesheet" href="{% static 'chinesebook/chinesebook.css' %}?v=2">
 <div class="study-page" data-subject="knowledge">
   <div class="book-list-wrap">
     <div class="textbook-banner textbook-banner-hero"><span>📖 语文教材册</span><strong>选一册开始</strong></div>
@@ -14,7 +14,7 @@
   </div>
 </div>
 <style>
-  /* 册次列表直接铺在平台 .shell 宽度上（study-shell 自带 gutter 会造成双层缩进） */
+  /* 册次列表与教材阅读共用平台 .shell 的一层外侧留白。 */
   .book-list-wrap { padding: 8px 0 48px; }
   .book-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 18px; }
   .book-card { display: flex; flex-direction: column; gap: 6px; padding: 22px 20px; background: var(--card);
