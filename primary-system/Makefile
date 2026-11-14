@@ -6,12 +6,15 @@ PORT ?= 8012
 PYTHON := $(if $(wildcard .venv/bin/python),.venv/bin/python,python3.12)
 ENV_FILE ?= .env.production
 PULL ?= 1
+COLOR ?= auto
 DEPLOY := ENV_FILE="$(ENV_FILE)" sh deploy/compose.sh
 BOOTSTRAP := $(if $(wildcard .venv/bin/python),.venv/bin/python bootstrap.py,python3.12 bootstrap.py)
 MANAGE := $(PYTHON) manage.py
 
-help: ## 显示可用命令
-	@awk 'BEGIN { FS = ":.*?## " } /^[a-zA-Z_-]+:.*?## / { printf "  \033[36m%-22s\033[0m %s\n", $$1, $$2 }' $(MAKEFILE_LIST)
+help: ## 显示分组命令与常用示例（COLOR=auto/always/never）
+	@COLOR="$(COLOR)" sh scripts/make_help.sh $(MAKEFILE_LIST)
+
+##@ Docker 部署与更新
 
 env: ## 创建生产配置和随机密钥：make env DOMAIN=study.example.com（已有配置不覆盖）
 	@DOMAIN="$(DOMAIN)" $(DEPLOY) env
@@ -28,32 +31,16 @@ pull: ## 只快进拉取代码，不改变运行中的容器
 update-app: ## 快速更新页面/代码/静态资源：拉取、构建、检查迁移、仅替换应用（支持 PULL=0）
 	@ENV_FILE="$(ENV_FILE)" PULL="$(PULL)" sh deploy/update.sh update-app
 
+build: ## 只构建 Docker 镜像，不停服
+	@$(DEPLOY) build
+
 apply: ## 启用已构建镜像：检查后仅替换应用，不拉取、不构建、不迁移
 	@$(DEPLOY) apply
 
 reload-config: ## 修改 .env.production 后重建应用容器，不构建镜像、不重建数据库
 	@$(DEPLOY) reload-config
 
-db-migrate: ## 已构建镜像的结构迁移：检查、停应用、备份、迁移、启用应用
-	@$(DEPLOY) db-migrate
-
-rewards-preview: ## 预览镜像内的积分兑换目录，不写数据库
-	@$(DEPLOY) rewards-preview
-
-rewards-import: ## 备份后补齐积分兑换目录，保留已有设置与兑换历史，不停应用
-	@$(DEPLOY) rewards-import
-
-questions-import: ## 备份后导入镜像内题库批次，不停应用
-	@$(DEPLOY) questions-import
-
-permissions-sync: ## 备份后同步基础目录和权限组，不停应用
-	@$(DEPLOY) permissions-sync
-
-index-rebuild: ## 仅原子重建飞花令缓存，不备份、不停应用
-	@$(DEPLOY) index-rebuild
-
-build: ## 只构建 Docker 镜像，不停服
-	@$(DEPLOY) build
+##@ Docker 服务与排查
 
 start: ## 启动已部署容器，等待健康检查（首次请用 deploy）
 	@$(DEPLOY) start
@@ -70,6 +57,29 @@ down: ## 删除容器与网络，保留数据库和备份卷
 status: ## 查看 Docker 服务状态
 	@$(DEPLOY) status
 
+logs: ## 持续查看最近 100 行容器日志（Ctrl+C 退出）
+	@$(DEPLOY) logs
+
+check-deploy: ## 检查线上安全配置和容器健康
+	@$(DEPLOY) check
+
+admin: ## 在 Docker 中交互创建管理员（无默认账号）
+	@$(DEPLOY) manage createsuperuser
+
+manage: ## 在运行容器中执行 Django 命令：make manage ARGS='showmigrations'
+	@$(DEPLOY) manage $(ARGS)
+
+app-shell: ## 进入 Docker 内的 Django shell
+	@$(DEPLOY) manage shell
+
+container-shell: ## 进入容器 sh
+	@$(DEPLOY) sh
+
+##@ PostgreSQL 与备份
+
+db-migrate: ## 已构建镜像的结构迁移：检查、停应用、备份、迁移、启用应用
+	@$(DEPLOY) db-migrate
+
 db-shell: ## 进入 PostgreSQL psql（应用账号）
 	@$(DEPLOY) db-shell
 
@@ -78,24 +88,6 @@ db-logs: ## 查看 PostgreSQL 容器日志
 
 db-update: ## 更新 PostgreSQL 16 小版本镜像：停应用、备份、更新数据库并恢复服务
 	@$(DEPLOY) db-update
-
-logs: ## 持续查看最近 100 行容器日志（Ctrl+C 退出）
-	@$(DEPLOY) logs
-
-check-deploy: ## 检查线上安全配置和容器健康
-	@$(DEPLOY) check
-
-manage: ## 在运行容器中执行 Django 命令：make manage ARGS='showmigrations'
-	@$(DEPLOY) manage $(ARGS)
-
-admin: ## 在 Docker 中交互创建管理员（无默认账号）
-	@$(DEPLOY) manage createsuperuser
-
-app-shell: ## 进入 Docker 内的 Django shell
-	@$(DEPLOY) manage shell
-
-container-shell: ## 进入容器 sh
-	@$(DEPLOY) sh
 
 backup: ## 备份线上数据库、私有资料与部署记录（pg_dump 一致快照）
 	@$(DEPLOY) backup
@@ -112,12 +104,24 @@ backup-import: ## 校验并导入宿主机备份：FILE=/安全目录/primary-*.
 restore: ## 恢复指定备份：BACKUP=文件名；先校验，再停服、备份当前库并替换
 	@BACKUP="$(BACKUP)" $(DEPLOY) restore
 
-test-deploy: ## 部署脚本与生产配置回归测试（不操作 Docker 或日常库）
-	$(PYTHON) -m unittest discover -s deploy/tests -v
-	$(MANAGE) test config.test_deployment
+##@ 线上内容与权限
 
-test-docker: ## Docker 完整演练：初始化、更新保留记录、备份恢复、重建持久化（独立卷）
-	$(PYTHON) deploy/smoke.py
+rewards-preview: ## 预览镜像内的积分兑换目录，不写数据库
+	@$(DEPLOY) rewards-preview
+
+rewards-import: ## 备份后补齐积分兑换目录，保留已有设置与兑换历史，不停应用
+	@$(DEPLOY) rewards-import
+
+questions-import: ## 备份后导入镜像内题库批次，不停应用
+	@$(DEPLOY) questions-import
+
+permissions-sync: ## 备份后同步基础目录和权限组，不停应用
+	@$(DEPLOY) permissions-sync
+
+index-rebuild: ## 仅原子重建飞花令缓存，不备份、不停应用
+	@$(DEPLOY) index-rebuild
+
+##@ 本地开发
 
 install: ## 初始化环境：建 .venv、装依赖、校验/恢复基础数据（bootstrap.py）
 	$(BOOTSTRAP)
@@ -125,18 +129,6 @@ install: ## 初始化环境：建 .venv、装依赖、校验/恢复基础数据�
 run: ## 启动开发服务器 http://127.0.0.1:$(PORT)（需先 install）
 	$(MANAGE) build_feihualing_index --if-needed
 	PRIMARY_DEBUG=1 $(MANAGE) runserver 127.0.0.1:$(PORT)
-
-test: ## 跑全量测试（需先 install）
-	$(MANAGE) test
-
-test-frontend: ## 跑 Node 前端回归测试
-	node --test scripts/test_frontend.cjs scripts/test_feihualing_frontend.cjs scripts/test_classical_frontend.cjs scripts/test_study_effects.cjs scripts/test_topic_motion.cjs scripts/test_sci_motion.cjs scripts/test_astro_observation.cjs scripts/test_sci_process.cjs scripts/test_sci_experiments.cjs scripts/test_legacy_motion.cjs scripts/test_geo_earth.cjs
-
-test-content-sources: ## 校验教材与专题的文件源
-	@set -e; for test in content_sources/test/test-*.js; do node "$$test"; done
-
-check: ## Django system check（快速体检）
-	$(MANAGE) check
 
 makemigrations: ## 生成迁移（按需 APP=writing 指定应用）
 	$(MANAGE) makemigrations $(APP)
@@ -155,6 +147,29 @@ shell: ## 进入 Django shell
 
 repair-data: ## 旧开发库修复：备份后恢复基础内容（先停服务；保护个人数据需库中可识别）
 	python3.12 bootstrap.py --refresh-data
+
+##@ 测试与检查
+
+check: ## Django system check（快速体检）
+	$(MANAGE) check
+
+test: ## 跑全量测试（需先 install）
+	$(MANAGE) test
+
+test-frontend: ## 跑 Node 前端回归测试
+	node --test scripts/test_frontend.cjs scripts/test_feihualing_frontend.cjs scripts/test_classical_frontend.cjs scripts/test_study_effects.cjs scripts/test_topic_motion.cjs scripts/test_sci_motion.cjs scripts/test_astro_observation.cjs scripts/test_sci_process.cjs scripts/test_sci_experiments.cjs scripts/test_legacy_motion.cjs scripts/test_geo_earth.cjs
+
+test-content-sources: ## 校验教材与专题的文件源
+	@set -e; for test in content_sources/test/test-*.js; do node "$$test"; done
+
+test-deploy: ## 部署脚本与生产配置回归测试（不操作 Docker 或日常库）
+	$(PYTHON) -m unittest discover -s deploy/tests -v
+	$(MANAGE) test config.test_deployment
+
+test-docker: ## Docker 完整演练：初始化、更新保留记录、备份恢复、重建持久化（独立卷）
+	$(PYTHON) deploy/smoke.py
+
+##@ 教材与资料生成
 
 content-data: ## 重生成教材、专题、作文坊、语法、日常用语和题库批次
 	$(MAKE) -j1 writing-data questionbank-data grammar-data phrases-data mathbook-data chinesebook-data study-topics-data

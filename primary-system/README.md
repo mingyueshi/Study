@@ -91,7 +91,7 @@ python3.12 bootstrap.py
 PRIMARY_DEBUG=1 .venv/bin/python manage.py runserver 127.0.0.1:8012
 ```
 
-也可以用 `make`：`make install` 初始化、`make run` 启动、`make test` 跑 Django 测试、`make test-frontend` 跑前端回归；直接运行 `make` 查看全部命令（迁移、seed、数据修复、作文坊与音标数据再生成等）。
+也可以用 `make`：`make install` 初始化、`make run` 启动、`make test` 跑 Django 测试、`make test-frontend` 跑前端回归；直接运行 `make` 或 `make help` 查看按部署更新、服务排查、数据库与备份、线上内容维护、本地开发、测试检查、资料生成分组的全部命令。帮助使用青色分组标题、绿色命令和黄色示例参数；终端自动显示颜色，管道或文件输出自动使用纯文本。`make help COLOR=always` 强制彩色，`make help COLOR=never` 或 `NO_COLOR=1 make help` 关闭颜色；`NO_COLOR` 非空时优先关闭。
 
 已有数据库默认只校验，不重置内容、用户或学习记录。旧初始化只导入部分教材／暂存词库时，先停止目标服务，再运行 `python3.12 bootstrap.py --refresh-data`：脚本在迁移前建立 SQLite backup 恢复点；需替换且含个人记录或人工修订时拒绝，并给出独立 `--database` 路径。迁移待应用且有个人记录时，在迁移前直接拒绝。详见 [本地开发与数据准备](docs/local-development.md)。
 
