@@ -59,7 +59,7 @@
 
 ## Docker 线上部署
 
-已有 Nginx／宝塔负责域名和 HTTPS 时，在本目录执行 `make deploy DOMAIN=自己的域名`：自动生成密钥、构建镜像、准备完整学习内容并等待健康检查；再用 `make admin` 创建管理员。代理转发到 `127.0.0.1:8012`，配置片段见 [Docker 部署与日常维护](docs/docker-deployment.md)。
+已有 Nginx／宝塔负责域名和 HTTPS 时，在本目录执行 `make deploy DOMAIN=自己的域名`：自动生成密钥、构建镜像、准备完整学习内容并等待健康检查；再用 `make admin` 创建管理员。代理转发到 `127.0.0.1:8012`，配置片段见 [Docker 部署与日常维护](docs/docker-deployment.md)，宝塔整站示例见 [nginx-baota.conf.example](deploy/nginx-baota.conf.example)。只改反向代理规则时，检查并重载宿主机 Nginx 即可，无需再次部署应用。
 
 后续 `make update` 快进拉取 Git 并在备份后升级；已同步代码用 `make update PULL=0`。生产使用独立的 **PostgreSQL 16 Docker 容器**，仅在容器内网连接；数据库、私有资料和备份分别保存在持久卷。`make status`、`make logs`、`make db-shell`、`make db-logs`、`make restart`、`make backup`、`make restore BACKUP=文件名` 提供日常维护，数据库小版本升级使用 `make db-update`。更新不重置账号或学习记录，新站点初始化使用发布基础包；本机仍默认 SQLite，个人数据不会自动上云。
 

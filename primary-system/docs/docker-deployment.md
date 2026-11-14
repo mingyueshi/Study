@@ -27,21 +27,39 @@ make admin
 ```nginx
 location / {
     proxy_pass http://127.0.0.1:8012;
+    proxy_http_version 1.1;
     proxy_set_header Host $host;
     proxy_set_header X-Real-IP $remote_addr;
-    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-For $remote_addr;
     proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_set_header Connection "";
+    proxy_set_header Upgrade "";
     proxy_connect_timeout 5s;
+    proxy_send_timeout 60s;
     proxy_read_timeout 90s;
     proxy_redirect off;
+    proxy_intercept_errors off;
+    proxy_cache off;
 }
 ```
 
 宝塔若已有匹配 CSS、JS、图片的正则 `location`，关闭这些规则或改为同样转发，避免它们绕过应用而产生 404。容器会提供 `/static/` 下的全部资源，无需在宿主机重复执行 `collectstatic`。私有资料不会作为静态目录公开。
 
-代理必须覆盖 `X-Forwarded-Proto`，不要直接透传客户端的同名请求头。默认仅绑定同机回环地址，不需要开放服务器 8012 防火墙端口。代理运行在另一台机器或另一个 Docker 网络时，需要自行配置可信内网连接并限制后端来源；不能一边公开后端端口，一边信任任意请求的代理头。
+`study.shimingyue.com` 使用宝塔时，可直接采用 [完整站点配置](../deploy/nginx-baota.conf.example)，替换「网站 → 设置 → 配置文件」中的整个站点配置，而不是粘到单条反向代理规则中。它保留宝塔证书及验证 include，使用 TLS 1.2／1.3、到应用的连接复用和较短的代理超时；普通 HTTP 请求以 308 跳转并保留路径、查询参数与请求方法，`/.well-known/` 留给证书文件验证。已有 `http2 on` 配置可继续使用；不同域名须同步更改文件中的域名及路径。
 
-上线后访问 `https://自己的域名/` 和 `/admin/`。`/healthz/` 返回最小数据库就绪结果，正常为 200，数据库异常为 503；该路径允许 HTTP，便于容器内部探测，其余路径仍强制 HTTPS。
+完整示例不使用 `location ^~ /`，让隐藏文件、配置文件及备份的正则拦截生效。移除无用的 `proxy_cache_path`（单有这一行并不表示已经缓存页面），并显式关闭代理缓存；登录、积分、学习记录和私有资料仍由应用鉴权。只对 `/static/` 下的文本资源启用 gzip，保留 WhiteNoise 的缓存与条件请求头，不强制给没有内容哈希的资源设置一年缓存。HSTS 由入口统一输出，隐藏应用的重复同名头。当前应用没有 WebSocket，不依赖额外的 `$connection_upgrade` 映射。
+
+应用前先备份原站点配置，再替换并检查：
+
+```sh
+/www/server/nginx/sbin/nginx -t && /www/server/nginx/sbin/nginx -s reload
+```
+
+只改宿主机 Nginx 配置无需执行 `make deploy`、重建镜像或重启应用。实际服务器上的 `extension/*.conf` 和证书验证 include 仍由宝塔管理；检查其中没有重复 location、旧的静态文件规则或单独启用的代理缓存。后续通过宝塔反向代理编辑器重新生成规则时，也要核对这些设置。
+
+以上示例面向直接接收公网请求的单层代理，覆盖 `X-Forwarded-For` 和 `X-Forwarded-Proto`，不直接透传客户端的同名请求头。前方另有 CDN／负载均衡时，应先配置可信来源的 Real IP 规则，再使用解析后的客户端地址。默认仅绑定同机回环地址，不需要开放服务器 8012 防火墙端口。代理运行在另一台机器或另一个 Docker 网络时，需要自行配置可信内网连接并限制后端来源；不能一边公开后端端口，一边信任任意请求的代理头。
+
+上线后访问 `https://自己的域名/` 和 `/admin/`。`/healthz/` 返回最小数据库就绪结果，正常为 200，数据库异常为 503；应用允许对该路径进行容器内部 HTTP 探测，宝塔完整示例的公网入口仍跳转 HTTPS。
 
 ## 配置
 
