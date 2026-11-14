@@ -101,6 +101,7 @@ window.GMMapUI = (() => {
       (!el.closest('[data-g]') || el.closest('[data-g]').dataset.g === root.dataset.layer));
     const quiz = { queue: null, index: 0, timer: null, layer: '' };
     let statusTimer;
+    let tour = null;
 
     function status(message) {
       statusBar.textContent = message;
@@ -173,6 +174,7 @@ window.GMMapUI = (() => {
     }
 
     function startQuiz() {
+      tour?.pause();
       clearTimeout(quiz.timer);
       quiz.timer = null;
       if (!quiz.queue) quiz.layer = root.dataset.layer;
@@ -205,7 +207,7 @@ window.GMMapUI = (() => {
 
     function activate(el) {
       const id = el.dataset.id;
-      if (!quiz.queue) { select(id, el); return; }
+      if (!quiz.queue) { tour?.pause(); select(id, el); return; }
       const expected = quiz.queue[quiz.index];
       if (!expected || quiz.timer !== null) return;
       if (id !== expected) {
@@ -243,11 +245,13 @@ window.GMMapUI = (() => {
     filters.addEventListener('click', (e) => {
       const layer = e.target.closest('button')?.dataset.layer;
       if (layer && !quiz.queue) {
+        tour?.pause();
         setLayer(layer);
         revealMap();
       }
     });
     picker.addEventListener('change', () => {
+      tour?.pause();
       if (!picker.value) { setLayer(root.dataset.layer); return; }
       resetView();
       select(picker.value, locateTarget(picker.value));
@@ -269,23 +273,110 @@ window.GMMapUI = (() => {
       if (!locateTarget(place.id)) setLayer(place.layer);
       select(place.id, locateTarget(place.id));
       const stop = A.routeStop(params);
-      if (stop) showRouteStop($('gm-route-stop'), stop);
+      if (stop) tour = mountRoute($('gm-route-stop'), stop, svg, map, (p) => {
+        if (quiz.queue) stopQuiz();
+        setLayer(p.layer);
+        select(p.id, locateTarget(p.id));
+        const url = new URL(location.href);
+        url.searchParams.set('place', p.id);
+        url.searchParams.delete('layer');
+        history.replaceState(null, '', url);
+      });
     } else if (params.has('place')) {
       status('这张地图上没找到这个地点。可以从地点索引重新选择。');
     }
     return { setLayer, revealMap };
   }
 
-  function showRouteStop(el, { route, index, step }) {
-    const hasNext = index + 1 < route.steps.length;
+  function mountRoute(el, { route, index }, svg, map, selectStep) {
+    let playing = false, timer = null, token = 0;
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const canPlay = () => window.StudyEffects ? window.StudyEffects.motion === 'full' : !reduced.matches;
     el.hidden = false;
-    el.innerHTML = `<div><p class="gm-kicker">${esc(route.icon)} ${esc(route.title)} · 第 ${index + 1}／${route.steps.length} 站</p>` +
-      `<h2>${esc(A.get(step.place).name)}</h2><p>${esc(step.observe)}</p>` +
-      (hasNext ? '' : `<p class="gm-route-question"><b>走完想一想</b> ${esc(route.question)}</p>`) +
-      '</div><nav aria-label="路线站点">' +
-      (index > 0 ? `<a href="${esc(A.stepHref(route, index - 1))}">← 上一站</a>` : '') +
-      `<a href="routes.html#${esc(route.id)}">路线总览</a>` +
-      (hasNext ? `<a class="gm-route-next" href="${esc(A.stepHref(route, index + 1))}">下一站 →</a>` : '') + '</nav>';
+    el.innerHTML = `<div class="gm-tour-copy" aria-live="polite"></div>
+      <div class="gm-tour-controls"><button type="button" class="gm-btn" data-tour-play aria-pressed="false">开始逐站导览</button>
+      <label>每站停留 <select data-tour-speed><option value="8000">8 秒</option><option value="15000">15 秒</option></select></label>
+      <progress data-tour-progress max="${route.steps.length}" aria-label="路线站点进度"></progress>
+      <p data-tour-status role="status"></p></div>
+      <nav aria-label="路线站点"></nav>`;
+    const control = el.querySelector('[data-tour-play]');
+    const speed = el.querySelector('[data-tour-speed]');
+    const nextPlace = () => A.get(route.steps[index + 1]?.place);
+    function clear() { token++; clearTimeout(timer); timer = null; }
+    function clearTrace() { svg.querySelectorAll('.gm-tour-trace').forEach(path => path.remove()); }
+    function render() {
+      const step = route.steps[index];
+      const next = nextPlace();
+      el.querySelector('.gm-tour-copy').innerHTML = `<p class="gm-kicker">${esc(route.icon)} ${esc(route.title)} · 第 ${index + 1}／${route.steps.length} 站</p>
+        <h2>${esc(A.get(step.place).name)}</h2><p>${esc(step.observe)}</p>` +
+        (next ? '' : `<p class="gm-route-question"><b>走完想一想</b> ${esc(route.question)}</p>`);
+      el.querySelector('nav').innerHTML = (index > 0 ? `<a data-tour-step="${index - 1}" href="${esc(A.stepHref(route, index - 1))}">← 上一站</a>` : '') +
+        `<a href="routes.html#${esc(route.id)}">路线总览</a>` +
+        (next ? `<a class="gm-route-next" data-tour-step="${index + 1}" href="${esc(A.stepHref(route, index + 1))}">下一站：${esc(next.name)} →</a>` :
+          `<a data-tour-step="0" href="${esc(A.stepHref(route, 0))}">回到第一站</a>`);
+      el.querySelector('[data-tour-progress]').value = index + 1;
+      control.disabled = !canPlay() || !next || next.map !== map;
+      control.textContent = playing ? '暂停导览' : '开始逐站导览';
+      control.setAttribute('aria-pressed', String(playing));
+      el.querySelector('[data-tour-status]').textContent = !next ? '这一条路线看完啦，试着回答上面的问题。'
+        : next.map !== map ? `下一站在${A.mapLabel(next)}，准备好后点「下一站」。`
+        : !canPlay() ? '已减少连续运动，可以用「下一站」逐站观察。'
+        : playing ? '正在导览。点暂停可以慢慢读，离开地图也会暂停。' : '点播放后按站点顺序看地图，也可以手动去下一站。';
+    }
+    function pause() { clear(); playing = false; clearTrace(); render(); }
+    function trace() {
+      clearTrace();
+      if (!canPlay()) return;
+      const line = svg.querySelector('.is-active .gm-river, .is-active .gm-mtn');
+      if (!line) return;
+      const path = line.cloneNode(false);
+      path.setAttribute('class', 'gm-tour-trace'); path.setAttribute('pathLength', '1');
+      path.setAttribute('aria-hidden', 'true');
+      line.parentNode.append(path);
+      path.addEventListener('animationend', () => path.remove(), {once: true});
+    }
+    function move(to) { index = to; selectStep(A.get(route.steps[index].place)); render(); trace(); }
+    function schedule() {
+      clear();
+      const ownToken = token;
+      timer = setTimeout(() => {
+        if (!playing || ownToken !== token || !canPlay() || document.hidden) return;
+        const next = nextPlace();
+        if (!next || next.map !== map) { pause(); return; }
+        move(index + 1);
+        if (nextPlace()?.map === map) schedule(); else { playing = false; clear(); render(); }
+      }, Number(speed.value));
+    }
+    control.addEventListener('click', () => {
+      if (playing) { pause(); return; }
+      if (!canPlay() || nextPlace()?.map !== map || document.hidden) return;
+      // 自由点图后重新播放时，先回到当前路线站点。
+      selectStep(A.get(route.steps[index].place));
+      playing = true; render(); trace(); schedule();
+    });
+    speed.addEventListener('change', () => { if (playing) schedule(); });
+    el.addEventListener('click', event => {
+      const link = event.target.closest('[data-tour-step]');
+      if (!link || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+      const to = Number(link.dataset.tourStep);
+      if (A.get(route.steps[to].place).map !== map) return;
+      const forward = to > index;
+      event.preventDefault(); pause(); move(to);
+      (el.querySelector(`[data-tour-step="${index + (forward ? 1 : -1)}"]`) || el.querySelector('nav a')).focus({preventScroll: true});
+    });
+    const preference = () => { if (!canPlay()) pause(); else render(); };
+    document.addEventListener('study:effects-change', preference);
+    reduced.addEventListener('change', preference);
+    const viewport = svg.closest('.gm-map-workspace') || svg;
+    if (window.StudyEffects) window.StudyEffects.watch(viewport, pause);
+    else {
+      const observer = typeof IntersectionObserver === 'function' ? new IntersectionObserver(entries => { if (entries.some(e => !e.isIntersecting)) pause(); }) : null;
+      observer?.observe(viewport);
+      document.addEventListener('visibilitychange', () => { if (document.hidden) pause(); });
+    }
+    window.addEventListener('pagehide', pause);
+    render();
+    return {pause};
   }
 
   return { mount };

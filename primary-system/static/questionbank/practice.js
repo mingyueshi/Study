@@ -19,6 +19,8 @@
   let selfcheckCount = 0;
   let selfcheckRight = 0;
   let locked = false;
+  let answeredCount = 0;
+  let finished = false;
   const selfcheckTotal = questions.filter((question) => question.type === 'selfcheck').length;
   const objectiveTotal = questions.length - selfcheckTotal;
 
@@ -109,6 +111,7 @@
       });
       return;
     }
+    answeredCount += 1;
     if (window.rewardToast && verdict.rewards) window.rewardToast(verdict.rewards);
     const selfcheck = question.type === 'selfcheck';
     if (selfcheck) {
@@ -170,12 +173,15 @@
   };
 
   const next = () => {
+    if (!locked || finished) return;
     if (index === questions.length - 1) return finish();
     index += 1;
     showQuestion();
   };
 
   const finish = () => {
+    if (finished || answeredCount !== questions.length) return;
+    finished = true;
     questionBox.hidden = true;
     feedback.hidden = true;
     const scores = [];
@@ -200,6 +206,11 @@
     again.href = board.dataset.practiceUrl + params;
     result.hidden = false;
     again.focus();
+    if (questions.every(question => question.area === 'math')) {
+      result.classList.add('is-complete');
+      // 成绩、错题与重练入口先显示，庆祝失败也不影响练习结果。
+      try { window.StudyEffects?.celebrate({key: 'math-round-complete', target: result}); } catch (error) { /* 可选反馈 */ }
+    }
   };
 
   /* ── 事件接线 ─────────────────────────────────────────────────────── */
@@ -230,6 +241,7 @@
   document.addEventListener('keydown', (event) => {
     if (event.defaultPrevented || event.ctrlKey || event.metaKey || event.altKey) return;
     const active = document.activeElement;
+    if (active?.matches?.('input, textarea, select, [contenteditable="true"]') || active?.closest?.('#study-effects-settings')) return;
     if (event.key === 'Enter') {
       if (!feedback.hidden) {
         const action = feedback.querySelector('[data-qb-next], [data-qb-retry]');

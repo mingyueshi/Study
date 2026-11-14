@@ -86,7 +86,7 @@ function pointCard(u, p) {
   const learned = !!akState.learned[key];
   const parts = [];
 
-  parts.push('<article class="kcard' + (learned ? ' learned' : '') + '" style="--c:' + u.color + '">');
+  parts.push('<article id="lesson-' + esc(p.id) + '" class="kcard' + (learned ? ' learned' : '') + '" style="--c:' + u.color + '">');
   parts.push('<div class="khead"><h3 class="ktitle">' + esc(p.title) + '</h3>' +
     '<span class="khead-gap"></span>' + sayBtn(p.title + '。' + p.overview) +
     '<button class="learn-btn' + (learned ? ' on' : '') + '" data-act="learn" data-unit="' + u.id + '" data-id="' + esc(p.id) + '" title="标记已掌握" aria-pressed="' + learned + '" aria-label="已掌握 ' + esc(p.title) + '">' + (learned ? '✓' : '') + '</button></div>');
@@ -218,6 +218,7 @@ function searchResults(q) {
 
 /* ---------- 渲染 ---------- */
 function renderMain() {
+  window.AstroObservation?.dispose();
   const box = document.getElementById('cards');
   if (window.AstroMedia) AstroMedia.dispose();
   if (query) {
@@ -299,7 +300,21 @@ window.AstroExplore = {
   render, selectView, toggleLearn, searchResults,
 };
 
-render();
+function openLessonFromHash() {
+  const anchor = location.hash.slice(1);
+  if (!anchor.startsWith('lesson-')) return false;
+  const id = anchor.slice('lesson-'.length);
+  const unit = ASTRO.units.find(item => item.points.some(point => point.id === id));
+  if (!unit) return false;
+  curView = unit.id;
+  query = '';
+  document.getElementById('search').value = '';
+  render();
+  document.getElementById(anchor)?.scrollIntoView({behavior: 'instant'});
+  return true;
+}
+window.addEventListener('hashchange', openLessonFromHash);
+if (!openLessonFromHash()) render();
 if (location.hash.startsWith('#roam-')) {
   requestAnimationFrame(() => document.getElementById(location.hash.slice(1))?.scrollIntoView({behavior: 'instant'}));
 }

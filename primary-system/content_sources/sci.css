@@ -236,6 +236,31 @@
 }
 
 /* ---------- 减少动画偏好 ---------- */
+.sci-demo-stage { overflow-x: auto; margin: 12px 0; border-radius: 12px; }
+.sci-demo-stage .fig-svg { min-width: 560px; }
+.sci-demo-stage:focus-visible { outline: 3px solid #4d96ff; outline-offset: 3px; }
+.sci-scroll-hint { display: none; }
+@media (max-width: 700px) {
+  .sci-scroll-hint { display: block; color: #4a5f6d; font-size: 14px; line-height: 1.6; }
+}
+.fig:has(.sci-demo-stage):hover { transform: none; }
+.fig:has(.sci-demo-stage):hover .fig-svg { transform: none; }
+.fig .sci-observation {
+  margin: 12px 0; padding: 12px 16px; border-left: 4px solid #2f9bd6;
+  border-radius: 4px 12px 12px 4px; background: #eaf6fd; color: #204d68;
+  font-size: 17px; line-height: 1.8; font-weight: 700;
+}
+.sci-motion-controls { margin: 12px 0; padding: 12px; border-radius: 12px; background: #f2f7fc; }
+.sci-motion-controls[hidden] { display: none; }
+.sci-motion-status, .fig .sci-model-note { margin: 8px 0; color: #4a5f6d; font-size: 15px; line-height: 1.75; }
+.sci-motion-controls .fig-ctrl { margin: 0; }
+.fig:has(.sci-demo-stage) .fig-btn { font-size: 15px; min-height: 40px; }
+.fig .fig-btn:disabled { opacity: .5; cursor: default; transform: none; }
+.sci-demo-sources { color: #4a5f6d; font-size: 14px; line-height: 1.8; }
+.sci-demo-sources summary { cursor: pointer; }
+.sci-demo-sources a { display: block; padding: 4px 0; }
+@media print { .sci-motion-controls, .sci-demo-sources, .fig:has(.sci-demo-stage) .fig-ctrl { display: none; } }
+
 @media (prefers-reduced-motion: reduce) {
   .kcard, .formula-card, .mistake-card, .unit-head,
   .bn-float, .bn-gear, .krecite, .fig {

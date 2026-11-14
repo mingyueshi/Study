@@ -80,6 +80,7 @@ function speak(text, opts) {
     if (!textStr.trim()) return fail('empty-text');
     const isZh = /[\u4e00-\u9fff]/.test(textStr) || opts.lang === 'zh-CN';
     const v = pickVoice(isZh ? 'zh' : 'en');
+    window.StudyEffects?.stopSound();
     if (window.speechSynthesis.speaking || window.speechSynthesis.pending) window.speechSynthesis.cancel();
     const u = new SpeechSynthesisUtterance(textStr);
     if (v) { u.voice = v; u.lang = v.lang; }

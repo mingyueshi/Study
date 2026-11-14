@@ -1,0 +1,22 @@
+.hanzi-writing { max-width: 860px; margin: 28px auto; padding: clamp(18px, 3vw, 32px); border: 2px solid #bce1d5; border-radius: 26px; background: linear-gradient(145deg, #f4fcf6, #fff9ed); }
+.hanzi-writing-heading { display: flex; align-items: center; gap: 18px; margin-bottom: 22px; }
+.hanzi-writing-heading h2 { margin: 0 0 6px; font-size: clamp(25px, 3vw, 32px); }
+.hanzi-writing-heading p { margin: 0; color: #52675d; font-size: 18px; }
+.hanzi-writing-icon { display: grid; place-items: center; flex: 0 0 64px; height: 64px; background: #ffe4b5; border-radius: 20px; font-size: 36px; }
+.hanzi-writing-workspace { text-align: center; }
+.hanzi-writing-board { position: relative; width: min(100%, 400px); aspect-ratio: 1; margin: auto; border: 2px solid #d9ba9b; border-radius: 18px; overflow: hidden; background-color: #fffdf8; background-image: linear-gradient(90deg, transparent calc(50% - .5px), #dfd4c6 50%, transparent calc(50% + .5px)), linear-gradient(transparent calc(50% - .5px), #dfd4c6 50%, transparent calc(50% + .5px)); }
+.hanzi-writing-board > svg { display: block; width: 100%; height: auto; }
+.hanzi-writing [hidden] { display: none !important; }
+.hanzi-writer { width: 100%; height: 100%; touch-action: none; }
+.hanzi-writer svg { display: block; }
+.hanzi-writer[data-paused="true"] { pointer-events: none; opacity: .55; }
+.hanzi-writing-status { min-height: 2em; margin: 18px 0 12px; font-size: 21px; font-weight: 700; line-height: 1.6; color: #226c59; }
+.hanzi-writing-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+.hanzi-writing-actions .button { font-size: 17px; }
+.hanzi-writing-actions .secondary { background: #fffdf8; color: #226c59; border: 1px solid #b9d5c9; box-shadow: 0 2px 0 #b9d5c9; }
+.hanzi-writing-actions [disabled] { opacity: .55; cursor: default; }
+.hanzi-writing-tip { max-width: 580px; margin: 18px auto; font-size: 16px; line-height: 1.8; color: #596b62; }
+.hanzi-writing .dictionary-evidence { margin-top: 22px; font-size: 15px; line-height: 1.75; }
+@media (max-width: 479px) { .hanzi-writing-heading { gap: 10px; }.hanzi-writing-icon { flex-basis: 46px; height: 46px; font-size: 27px; }.hanzi-writing-actions .button { padding: 10px 12px; } }
+@media print { .hanzi-writing-actions, .hanzi-writing-tip, .hanzi-writer { display: none !important; } #stroke-board[hidden] { display: block !important; } }
+.hanzi-page { max-width: 900px; margin-inline: auto; }

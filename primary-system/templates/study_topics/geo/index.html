@@ -5,13 +5,18 @@
 {% block study_assets %}
 <link rel="stylesheet" href="{% static 'study_topics/geo/styles.css' %}">
 <link rel="stylesheet" href="{% static 'study_topics/geo/lab.css' %}">
+<link rel="stylesheet" href="{% static 'study_topics/sci/sci-process.css' %}?v=20261114b9">
+<script src="{% static 'study_topics/sci/sci-process-data.js' %}?v=20261114b9" defer></script>
+<script src="{% static 'study_topics/sci/sci-process.js' %}?v=20261114b9" defer></script>
 <script src="{% static 'study_topics/geo/content.js' %}" defer></script>
 <script src="{% static 'study_topics/geo/knowledge-core.js' %}" defer></script>
 <script src="{% static 'study_topics/geo/knowledge-regions.js' %}" defer></script>
 <script src="{% static 'study_topics/geo/media.js' %}" defer></script>
 <script src="{% static 'study_topics/geo/diagrams.js' %}" defer></script>
 <script src="{% static 'study_topics/geo/app.js' %}" defer></script>
-<script src="{% static 'study_topics/geo/lab.js' %}" defer></script>
+<script src="{% static 'study_topics/geo/earth-data.js' %}?v=20261114b9" defer></script>
+<script src="{% static 'study_topics/geo/earth.js' %}?v=20261114b9" defer></script>
+<script src="{% static 'study_topics/geo/lab.js' %}?v=20261114b9" defer></script>
 {% endblock %}
 {% block study_content %}
     <div class="geography-topic color-geography" id="top">

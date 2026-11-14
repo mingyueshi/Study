@@ -185,6 +185,10 @@ const SciFigures = (() => {
 
   /* 简单机械 */
   const machine = () => {
+    if (typeof window !== 'undefined') {
+      const interactive = window.SciExperiments?.html('machine');
+      if (interactive) return interactive;
+    }
     let s = `<svg class="fig-svg" viewBox="0 0 640 212">`;
     /* 杠杆 */
     s += `<path d="M60,150 L200,138" stroke="${INK}" stroke-width="6" stroke-linecap="round"/>`;
@@ -203,7 +207,7 @@ const SciFigures = (() => {
     s += `<line x1="378" y1="56" x2="378" y2="96" stroke="${MUT}" stroke-width="2.5"/>`;
     s += `<rect x="328" y="140" width="28" height="22" rx="3" fill="${RED}" opacity=".85"/>`;
     s += `<rect x="366" y="96" width="24" height="18" rx="3" fill="${BLUE}" opacity=".85"/>`;
-    s += arrow(402, 108, 402, 84, BLUE);
+    s += arrow(402, 84, 402, 108, BLUE);
     s += txt(430, 96, '向下拉', { fs: 11.5, fill: BLUE });
     s += txt(366, 24, '定滑轮：改变方向不省力', { fs: 13, fw: 900 });
     s += txt(356, 186, '旗杆升旗', { fs: 11.5, fill: MUT });
@@ -258,6 +262,10 @@ const SciFigures = (() => {
 
   /* 声音的产生与传播 */
   const sound = () => {
+    if (typeof window !== 'undefined') {
+      const interactive = window.SciExperiments?.html('sound');
+      if (interactive) return interactive;
+    }
     let s = `<svg class="fig-svg" viewBox="0 0 640 200">`;
     /* 音叉 */
     s += `<line x1="96" y1="118" x2="96" y2="86" stroke="#8a6a33" stroke-width="7" stroke-linecap="round"/>`;
@@ -284,6 +292,10 @@ const SciFigures = (() => {
 
   /* 磁铁的两极 */
   const magnet = () => {
+    if (typeof window !== 'undefined') {
+      const interactive = window.SciExperiments?.html('magnet');
+      if (interactive) return interactive;
+    }
     let s = `<svg class="fig-svg" viewBox="0 0 640 208">`;
     /* 条形磁铁 */
     s += `<rect x="60" y="42" width="200" height="36" rx="6" fill="${RED}"/>`;
@@ -323,6 +335,10 @@ const SciFigures = (() => {
 
   /* 食物链 */
   const foodchain = () => {
+    if (typeof window !== 'undefined') {
+      const interactive = window.SciProcess?.html('foodchain');
+      if (interactive) return interactive;
+    }
     let s = `<svg class="fig-svg" viewBox="0 0 640 168">`;
     const links = [
       { emoji: '🌾', name: '稻谷', role: '生产者', color: GREEN },
@@ -594,7 +610,9 @@ const SciFigures = (() => {
 
   /* 重力与浮力 */
   const gravity = () => {
-    let s = `<svg class="fig-svg" viewBox="0 0 640 210">`;
+    const observation = window.SciExperiments?.html('buoyancy');
+    if (observation) return observation;
+    let s = `<svg class="fig-svg" viewBox="0 0 640 230">`;
     /* 左：重力 */
     s += `<circle cx="120" cy="60" r="18" fill="#8b65c9"/>`;
     s += arrow(120, 78, 120, 140, RED);
@@ -605,7 +623,7 @@ const SciFigures = (() => {
     s += `<rect x="222" y="120" width="196" height="58" fill="#c9e8f8"/>`;
     s += `<path d="M260,110 L300,110 L290,140 L270,140 Z" fill="#e6b23c" stroke="#c99a1f" stroke-width="1.5"/>`;
     s += arrow(280, 100, 280, 70, GREEN);
-    s += arrow(280, 150, 280, 172, RED);
+    s += arrow(280, 145, 280, 175, RED);
     s += txt(280, 62, '浮力 ↑', { fs: 12.5, fw: 900, fill: GREEN });
     s += txt(280, 188, '重力 ↓', { fs: 11.5, fill: RED });
     /* 右：沉浮对比 */
@@ -613,8 +631,8 @@ const SciFigures = (() => {
     s += `<rect x="452" y="120" width="166" height="58" fill="#c9e8f8"/>`;
     s += `<circle cx="480" cy="110" r="10" fill="#2fbf71"/><text x="480" y="114" text-anchor="middle" font-size="11" fill="#fff" font-weight="900">浮</text>`;
     s += `<circle cx="560" cy="150" r="10" fill="#e25563"/><text x="560" y="154" text-anchor="middle" font-size="11" fill="#fff" font-weight="900">沉</text>`;
-    s += txt(535, 194, '浮力 > 重力 → 浮', { fs: 11, fill: GREEN });
-    s += txt(320, 200, '排开的水越多，浮力越大——钢铁轮船做成空心大壳，排开很多水所以能浮', { fs: 12, fill: MUT });
+    s += txt(535, 194, '漂浮稳定：浮力＝重力', { fs: 11, fill: GREEN });
+    s += txt(320, 224, '沉下去的物体也受浮力；完全浸水而静止，是悬浮', { fs: 12, fill: MUT });
     return s + '</svg>';
   };
 
@@ -650,6 +668,10 @@ const SciFigures = (() => {
 
   /* 光的反射与折射 */
   const reflect = () => {
+    if (typeof window !== 'undefined') {
+      const interactive = window.SciProcess?.html('light');
+      if (interactive) return interactive;
+    }
     let s = `<svg class="fig-svg" viewBox="0 0 640 210">`;
     /* 左：反射 */
     s += txt(150, 30, '反射（照镜子）', { fs: 13, fw: 900, fill: BLUE });
@@ -704,6 +726,10 @@ const SciFigures = (() => {
 
   /* 音调响度与噪声 */
   const soundProps = () => {
+    if (typeof window !== 'undefined') {
+      const interactive = window.SciExperiments?.html('tone');
+      if (interactive) return interactive;
+    }
     let s = `<svg class="fig-svg" viewBox="0 0 640 200">`;
     s += txt(160, 28, '音调：振动快慢（频率）', { fs: 13, fw: 900, fill: BLUE });
     s += `<line x1="40" y1="70" x2="280" y2="70" stroke="${LINE}" stroke-width="1.5"/>`;
@@ -778,6 +804,10 @@ const SciFigures = (() => {
 
   /* 电磁铁 */
   const electromagnet = () => {
+    if (typeof window !== 'undefined') {
+      const interactive = window.SciExperiments?.html('electromagnet');
+      if (interactive) return interactive;
+    }
     let s = `<svg class="fig-svg" viewBox="0 0 640 200">`;
     /* 铁钉 + 线圈 */
     s += `<rect x="100" y="80" width="180" height="28" rx="14" fill="#8a6a33" stroke="#5a4422" stroke-width="2"/>`;
@@ -813,13 +843,17 @@ const SciFigures = (() => {
       s += txt(x + 37, 84, a.ico, { fs: 24 });
       s += txt(x + 37, 108, a.t, { fs: 10.5, fw: 700, fill: PURPLE });
     });
-    s += txt(470, 140, '断电 → 磁性消失', { fs: 12, fw: 900, fill: RED });
-    s += txt(320, 178, '电磁铁 = 铁芯 + 线圈 + 电源；电流越大、线圈越多，磁性越强', { fs: 12, fill: MUT });
+    s += txt(470, 140, '断电 → 磁性大大减弱', { fs: 12, fw: 900, fill: RED });
+    s += txt(320, 178, '电磁铁 = 铁芯 + 线圈 + 电源；其他条件相同，电流、匝数影响磁性', { fs: 12, fill: MUT });
     return s + '</svg>';
   };
 
   /* 光合作用 */
   const photosynthesis = () => {
+    if (typeof window !== 'undefined') {
+      const interactive = window.SciProcess?.html('photo');
+      if (interactive) return interactive;
+    }
     let s = `<svg class="fig-svg" viewBox="0 0 640 210">`;
     /* 太阳 */
     s += `<circle cx="80" cy="60" r="22" fill="${GOLD}"/>`;
@@ -1023,193 +1057,164 @@ const SciFigures = (() => {
 
   /* 三角形的稳定性 */
   const triangle = () => {
+    const observation = window.SciExperiments?.html('structure');
+    if (observation) return observation;
     let s = `<svg class="fig-svg" viewBox="0 0 640 210">`;
     /* 左：四边形易变形 */
     s += txt(120, 26, '四边形 · 会变形', { fs: 13, fw: 900, fill: RED });
-    s += `<rect x="40" y="60" width="160" height="100" fill="none" stroke="#e25563" stroke-width="3" stroke-dasharray="6 4"/>`;
-    s += `<path d="M40,60 L200,160" stroke="#e25563" stroke-width="1.5" stroke-dasharray="4 3"/>`;
-    s += `<path d="M50,70 L170,70 L190,150 L70,150 Z" fill="none" stroke="#e25563" stroke-width="3"/>`;
+    s += `<rect x="40" y="60" width="140" height="100" fill="none" stroke="#e25563" stroke-width="3" stroke-dasharray="6 4"/>`;
+    s += `<path d="M40,160 L180,160 L210,${160-Math.sqrt(100**2-30**2)} L70,${160-Math.sqrt(100**2-30**2)} Z" fill="none" stroke="#e25563" stroke-width="3"/>`;
     s += txt(120, 186, '一推就歪', { fs: 12, fill: MUT });
     /* 中：加斜杆变三角 */
-    s += arrow(210, 110, 260, 110, TEAL);
-    s += txt(235, 104, '加斜杆', { fs: 11, fill: TEAL });
+    s += arrow(240, 110, 300, 110, TEAL);
+    s += txt(270, 104, '加斜杆', { fs: 11, fill: TEAL });
     /* 右：三角形稳定 */
-    s += txt(440, 26, '三角形 · 不变形', { fs: 13, fw: 900, fill: GREEN });
-    s += `<path d="M360,160 L440,60 L520,160 Z" fill="#e9f9f0" stroke="#2fbf71" stroke-width="3"/>`;
-    s += txt(440, 124, '稳！', { fs: 16, fw: 900, fill: GREEN });
-    s += txt(440, 186, '三条边定死，形状不变', { fs: 12, fill: MUT });
+    s += txt(450, 26, '加斜杆 · 分成两个三角形', { fs: 13, fw: 900, fill: GREEN });
+    s += `<path d="M380,160V60H520V160Z" fill="#e9f9f0" stroke="#2fbf71" stroke-width="3"/><path d="M380,160L520,60" stroke="${TEAL}" stroke-width="3"/>`;
+    s += txt(450, 186, '杆件不伸缩，形状保持不变', { fs: 12, fill: MUT });
     /* 应用 */
-    s += txt(320, 202, '铁塔、自行车架、塔吊都用三角形；上小下大、上轻下重也更稳', { fs: 12, fill: MUT });
+    s += txt(320, 202, '这里假设杆长不变、接头可转；真实结构还要考虑材料和连接', { fs: 12, fill: MUT });
     return s + '</svg>';
   };
 
-  /* ================= 互动演示：水的三态变化 ================= */
-  const STATES = {
-    ice: {
-      name: '冰（固态）',
-      temp: '0℃ 以下',
-      note: '水分子排得整整齐齐，冰有固定的形状，摸起来硬邦邦。',
-      color: SKY,
-    },
-    water: {
-      name: '水（液态）',
-      temp: '0℃ ～ 100℃',
-      note: '水分子可以滑来滑去，水会流动，没有固定形状，但体积不变。',
-      color: BLUE,
-    },
-    vapor: {
-      name: '水蒸气（气态）',
-      temp: '100℃ 以上（标准大气压）',
-      note: '水分子到处乱跑，飞散到空气里，看不见也摸不着。',
-      color: ORANGE,
-    },
-  };
+  /* ================= 三态与电路：说明独立于渲染 ================= */
+  const DEMOS = typeof SCI_DEMOS === 'undefined' ? null : SCI_DEMOS;
   const STATE_ORDER = ['ice', 'water', 'vapor'];
-
-  const dot = (x, y, color) => `<circle cx="${x}" cy="${y}" r="4.5" fill="${color}" opacity=".85"/>`;
-
-  const particles = (kind, cx, cy) => {
-    if (kind === 'ice') {
-      let out = '';
-      for (let r = 0; r < 3; r++) for (let c = 0; c < 3; c++) out += dot(cx - 24 + c * 24, cy - 22 + r * 22, SKY);
-      return out;
-    }
-    if (kind === 'water') {
-      return dot(cx - 20, cy - 12, BLUE) + dot(cx + 4, cy - 20, BLUE) + dot(cx + 22, cy - 4, BLUE) +
-        dot(cx - 10, cy + 8, BLUE) + dot(cx + 14, cy + 16, BLUE) + dot(cx - 24, cy + 18, BLUE);
-    }
-    return dot(cx - 30, cy - 24, ORANGE) + dot(cx + 8, cy - 32, ORANGE) + dot(cx + 30, cy - 8, ORANGE) +
-      dot(cx - 12, cy + 2, ORANGE) + dot(cx - 34, cy + 22, ORANGE) + dot(cx + 18, cy + 28, ORANGE);
-  };
+  const escapeDemo = value => String(value).replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
+  const unavailable = () => '<p class="sci-model-note">演示资料暂未加载，请先阅读下方知识要点。</p>';
+  const sourcesHTML = key => '<details class="sci-demo-sources"><summary>看看资料出处（需联网）</summary>' +
+    DEMOS.sources[key].map(source => `<a href="${escapeDemo(source.url)}" target="_blank" rel="noopener noreferrer">${escapeDemo(source.title)}</a>`).join('') + '</details>';
+  const motionControls = () => '<div class="sci-motion-controls" hidden>' +
+    '<div class="fig-ctrl"><button type="button" class="fig-btn" data-sci-motion="play" aria-pressed="false">播放示意</button>' +
+    '<button type="button" class="fig-btn" data-sci-motion="step">前进一步</button>' +
+    '<button type="button" class="fig-btn" data-sci-motion="reset">回到起点</button></div>' +
+    '<p class="sci-motion-status" data-sci-motion-status role="status"></p></div>';
+  const scrollHint = '<p class="sci-scroll-hint">↔ 图示可左右滑动查看，也可以聚焦图示后按左右键。</p>';
+  const demoButton = (action, value, label) => `<button type="button" class="fig-btn" data-fig-act="${action}" data-v="${value}" aria-pressed="false">${escapeDemo(label)}</button>`;
 
   const demoStates = () => {
-    let s = `<svg class="fig-svg" viewBox="0 0 640 178">`;
-    STATE_ORDER.forEach((k, i) => {
-      const x = 24 + i * 206;
-      s += `<rect data-state="${k}" x="${x}" y="14" width="172" height="118" rx="14" fill="#fafbfe" stroke="#e3e7f2" stroke-width="2"/>`;
-      s += particles(k, x + 86, 62);
-      s += `<text class="state-name" data-state-name="${k}" x="${x + 86}" y="152" text-anchor="middle" font-size="14.5" font-weight="900" fill="${MUT}">${STATES[k].name}</text>`;
+    if (!DEMOS) return unavailable();
+    let s = scrollHint + '<div class="sci-demo-stage" tabindex="0" role="region" aria-label="水的三态微粒示意图，可横向滚动"><svg class="fig-svg" viewBox="0 0 640 170" role="img" aria-label="冰的微粒排列较整齐，水的微粒较靠近，水蒸气的微粒分散开">';
+    DEMOS.states.forEach((state, i) => {
+      const x = 24 + i * 206, cx = x + 86;
+      s += `<rect data-state="${state.id}" x="${x}" y="14" width="172" height="118" rx="14" fill="#fafbfe" stroke="#e3e7f2" stroke-width="2"/>`;
+      s += `<g data-sci-particles="${state.id}" data-cx="${cx}" aria-hidden="true">`;
+      for (let j = 0; j < 9; j++) s += `<circle cx="${cx + (j % 3 - 1) * (i === 2 ? 50 : 24)}" cy="${72 + (Math.floor(j / 3) - 1) * (i === 2 ? 34 : 22)}" r="5.3" fill="${state.color}"/>`;
+      s += '</g>';
+      s += `<text class="state-name" data-state-name="${state.id}" x="${cx}" y="155" text-anchor="middle" font-size="15" font-weight="900" fill="${MUT}">${escapeDemo(state.name)}</text>`;
     });
-    s += arrow(198, 72, 228, 72, ORANGE);
-    s += arrow(228, 96, 198, 96, SKY);
-    s += arrow(404, 72, 434, 72, ORANGE);
-    s += arrow(434, 96, 404, 96, SKY);
-    s += txt(213, 62, '熔化', { fs: 11, fill: ORANGE });
-    s += txt(213, 114, '凝固', { fs: 11, fill: SKY });
-    s += txt(419, 62, '汽化', { fs: 11, fill: ORANGE });
-    s += txt(419, 114, '凝结', { fs: 11, fill: SKY });
-    s += `<text class="state-temp" x="320" y="172" text-anchor="middle" font-size="12.5" font-weight="700" fill="${MUT}"></text>`;
-    return s + '</svg>' +
-      `<div class="fig-ctrl">` +
-      `<button class="fig-btn" data-fig-act="sci-state-cool">❄️ 冷却降温</button>` +
-      `<button class="fig-btn" data-fig-act="sci-state" data-v="ice">冰</button>` +
-      `<button class="fig-btn" data-fig-act="sci-state" data-v="water">水</button>` +
-      `<button class="fig-btn" data-fig-act="sci-state" data-v="vapor">水蒸气</button>` +
-      `<button class="fig-btn" data-fig-act="sci-state-heat">🔥 加热升温</button>` +
-      `</div>`;
+    [[198, 228, '熔化', '凝固'], [404, 434, '汽化', '凝结']].forEach(([a, b, heat, cool]) => {
+      s += arrow(a, 72, b, 72, ORANGE) + arrow(b, 96, a, 96, SKY);
+      s += txt((a + b) / 2, 62, heat, {fs: 11, fill: ORANGE}) + txt((a + b) / 2, 114, cool, {fs: 11, fill: SKY});
+    });
+    return s + '</svg></div><div class="fig-ctrl">' +
+      '<button type="button" class="fig-btn" data-fig-act="sci-state-cool">❄️ 冷却</button>' +
+      DEMOS.states.map(state => demoButton('sci-state', state.id, state.name)).join('') +
+      '<button type="button" class="fig-btn" data-fig-act="sci-state-heat">🔥 加热</button></div>' +
+      '<p class="sci-observation sci-state-description" role="status"></p>' + motionControls() +
+      `<p class="sci-model-note">${escapeDemo(DEMOS.stateModelNote)}</p><p class="sci-model-note">${escapeDemo(DEMOS.temperatureNote)}</p>` + sourcesHTML('states');
   };
 
   function statesApply(fig, key) {
-    if (!STATES[key]) return;
+    const state = DEMOS?.states.find(item => item.id === key);
+    if (!state) return;
+    window.SciDemoMotion?.pause(fig);
     fig.dataset.stateIdx = String(STATE_ORDER.indexOf(key));
-    fig.querySelectorAll('rect[data-state]').forEach(r => {
-      const on = r.dataset.state === key;
-      r.setAttribute('stroke', on ? STATES[key].color : '#e3e7f2');
-      r.setAttribute('stroke-width', on ? 3.5 : 2);
+    fig.querySelectorAll('rect[data-state]').forEach(rect => {
+      const on = rect.dataset.state === key;
+      rect.setAttribute('stroke', on ? state.color : '#e3e7f2');
+      rect.setAttribute('stroke-width', on ? 3.5 : 2);
     });
-    fig.querySelectorAll('.state-name').forEach(t => {
-      t.setAttribute('fill', t.dataset.stateName === key ? STATES[key].color : MUT);
+    fig.querySelectorAll('.state-name').forEach(node => node.setAttribute('fill', node.dataset.stateName === key ? state.color : MUT));
+    fig.querySelector('.sci-state-description').textContent = state.name + '：' + state.note + state.condition;
+    fig.querySelectorAll('[data-fig-act="sci-state"]').forEach(button => {
+      const on = button.dataset.v === key;
+      button.classList.toggle('fig-on', on);
+      button.setAttribute('aria-pressed', String(on));
     });
-    const info = fig.parentElement.querySelector('.fig-note');
-    if (info) info.textContent = STATES[key].name + '：' + STATES[key].note;
-    const temp = fig.querySelector('.state-temp');
-    if (temp) temp.textContent = '温度：' + STATES[key].temp;
-    fig.querySelectorAll('[data-fig-act="sci-state"]').forEach(b =>
-      b.classList.toggle('fig-on', b.dataset.v === key));
+    fig.querySelector('[data-fig-act="sci-state-cool"]').disabled = key === 'ice';
+    fig.querySelector('[data-fig-act="sci-state-heat"]').disabled = key === 'vapor';
+    // 仅移动窄屏图示自身，保持整页位置和键盘焦点。
+    const stage = fig.querySelector('.sci-demo-stage');
+    if (stage.scrollWidth > stage.clientWidth) {
+      const rect = fig.querySelector(`rect[data-state="${key}"]`).getBoundingClientRect();
+      stage.scrollLeft += rect.left - stage.getBoundingClientRect().left - (stage.clientWidth - rect.width) / 2;
+    }
   }
 
-  /* ================= 互动演示：电路串联并联 ================= */
-  const CIRCUIT = {
-    series: { name: '串联电路', note: '电流只有一条路：一处断，处处断，一灯灭全灭。' },
-    parallel: { name: '并联电路', note: '电流有多条路：各走各的，关一个另一个照样亮。' },
-    open: { name: '断路', note: '开关断开或线松了，电流走不动，灯全都不亮。' },
-  };
-  const LIT = '#ffd94d';
-  const DIM = '#c9cdd9';
-
-  const bulb = (x, y, lit) =>
-    `<circle cx="${x}" cy="${y}" r="16" fill="${lit ? LIT : DIM}" stroke="${INK}" stroke-width="2.5"/>` +
-    `<line x1="${x - 8}" y1="${y - 8}" x2="${x + 8}" y2="${y + 8}" stroke="${INK}" stroke-width="1.6"/>` +
-    `<line x1="${x + 8}" y1="${y - 8}" x2="${x - 8}" y2="${y + 8}" stroke="${INK}" stroke-width="1.6"/>`;
-
+  /* 通断只取决于连接方式与开关；不模拟电阻或定量亮度。 */
+  function circuitState(mode, one, two) {
+    const lamps = mode === 'parallel' ? [one, two] : [one && two, one && two];
+    const status = mode !== 'parallel' ? (lamps[0] ? 'seriesClosed' : 'seriesOpen')
+      : lamps.every(Boolean) ? 'parallelBoth' : lamps.some(Boolean) ? 'parallelOne' : 'parallelNone';
+    return {lamps, status};
+  }
+  const bulb = (x, y, lit, number) =>
+    `<g data-sci-lamp="${number}" data-lit="${lit}"><circle cx="${x}" cy="${y}" r="16" fill="${lit ? '#ffd94d' : '#c9cdd9'}" stroke="${INK}" stroke-width="2.5"/>` +
+    `<path d="M${x - 8} ${y - 8}l16 16m0 -16l-16 16" stroke="${INK}" stroke-width="1.6"/>` +
+    txt(x, y + 34, `灯 ${number} · ${lit ? '亮' : '灭'}`, {fs: 13, fw: 800}) + '</g>';
   const battery = () =>
-    `<line x1="70" y1="70" x2="70" y2="118" stroke="${INK}" stroke-width="4"/>` +
-    `<line x1="88" y1="58" x2="88" y2="130" stroke="${INK}" stroke-width="9"/>` +
-    `<line x1="106" y1="70" x2="106" y2="118" stroke="${INK}" stroke-width="4"/>` +
-    txt(79, 152, '电池', { fs: 12 }) +
-    txt(56, 62, '＋', { fs: 12, fill: RED }) +
-    txt(120, 62, '－', { fs: 12, fill: BLUE });
-
-  const wire = pts => `<polyline points="${pts}" fill="none" stroke="${INK}" stroke-width="2.5"/>`;
+    `<path d="M70 65V123M106 78V110" stroke="${INK}" stroke-width="4"/>` +
+    txt(88, 148, '电池', {fs: 13}) + txt(56, 56, '＋', {fs: 16, fill: RED}) + txt(120, 56, '－', {fs: 16, fill: BLUE});
+  const wire = points => `<polyline points="${points}" fill="none" stroke="${INK}" stroke-width="2.5"/>`;
   const junction = (x, y) => `<circle cx="${x}" cy="${y}" r="4.5" fill="${INK}"/>`;
+  const switchAt = (x, y, closed, number) =>
+    `<path d="M${x} ${y}L${x + (closed ? 56 : 50)} ${y - (closed ? 0 : 22)}" stroke="${INK}" stroke-width="3"/>` +
+    `<circle cx="${x}" cy="${y}" r="4.5" fill="#fff" stroke="${INK}" stroke-width="2.5"/>` +
+    `<circle cx="${x + 56}" cy="${y}" r="4.5" fill="#fff" stroke="${INK}" stroke-width="2.5"/>` +
+    txt(x + 28, y - 30, `开关 ${number}`, {fs: 13, fw: 800, fill: closed ? GREEN : RED});
+  const flow = (id, path, count) => `<g data-sci-flow="${id}" aria-hidden="true"><path d="${path}" fill="none" stroke="none"/>` +
+    Array.from({length: count}, () => '<circle r="4" fill="#d86115" stroke="#fff" stroke-width="1" visibility="hidden"/>').join('') + '</g>';
 
-  /* 接触点 + 开关闸刀：closed 时闸刀水平连通，open 时斜起 */
-  const switchAt = (x, y, closed) => {
-    const lever = closed
-      ? `<line x1="${x}" y1="${y}" x2="${x + 56}" y2="${y}" stroke="${INK}" stroke-width="3"/>`
-      : `<line x1="${x}" y1="${y}" x2="${x + 50}" y2="${y - 22}" stroke="${INK}" stroke-width="3"/>`;
-    return `<circle cx="${x}" cy="${y}" r="4.5" fill="#fff" stroke="${INK}" stroke-width="2.5"/>` +
-      `<circle cx="${x + 56}" cy="${y}" r="4.5" fill="#fff" stroke="${INK}" stroke-width="2.5"/>` + lever;
-  };
-
-  /* 主回路：电池 → 顶边（灯泡＋开关）→ 右边 → 底边（灯泡）→ 左边回电池 */
-  const loopLayout = (lit, closed) =>
-    battery() +
-    wire('106,94 284,94') + bulb(300, 94, lit) + wire('316,94 440,94') +
-    switchAt(440, 94, closed) +
-    wire('496,94 560,94 560,180 380,180') +
-    bulb(380, 180, lit) +
-    wire('344,180 70,180 70,94');
-
-  const parallelLayout = () =>
-    battery() +
-    wire('106,94 220,94') + junction(220, 94) +
-    /* 上支路 */
-    wire('220,94 220,60 300,60') + bulb(316, 60, true) + wire('332,60 460,60 460,94') +
-    /* 下支路 */
-    wire('220,94 220,150 300,150') + bulb(316, 150, true) + wire('332,150 460,150 460,94') +
-    junction(460, 94) +
-    /* 回电池 */
-    wire('460,94 560,94 560,180 70,180 70,94');
-
-  const circuitLayout = mode => {
-    if (mode === 'parallel') return parallelLayout();
-    if (mode === 'open') return loopLayout(false, false) +
-      txt(468, 56, '开关（断开）', { fs: 11.5, fill: RED });
-    return loopLayout(true, true) +
-      txt(468, 56, '开关（闭合）', { fs: 11.5, fill: GREEN });
-  };
-
+  function circuitLayout(mode, one, two) {
+    const {lamps} = circuitState(mode, one, two);
+    if (mode !== 'parallel') return battery() +
+      wire('106,94 284,94') + bulb(300, 94, lamps[0], 1) + wire('316,94 440,94') + switchAt(440, 94, one, 1) +
+      wire('496,94 560,94 560,180 396,180') + bulb(380, 180, lamps[1], 2) + wire('364,180 266,180') +
+      switchAt(210, 180, two, 2) + wire('210,180 70,180 70,94') +
+      (lamps[0] ? flow('series', 'M70 94V180H560V94H106', 11) : '');
+    return battery() + wire('106,94 220,94') + junction(220, 94) +
+      wire('220,94 220,60 300,60') + bulb(316, 60, lamps[0], 1) + wire('332,60 370,60') + switchAt(370, 60, one, 1) + wire('426,60 460,60 460,94') +
+      wire('220,94 220,145 300,145') + bulb(316, 145, lamps[1], 2) + wire('332,145 370,145') + switchAt(370, 145, two, 2) + wire('426,145 460,145 460,94') +
+      junction(460, 94) + wire('460,94 560,94 560,200 70,200 70,94') +
+      (lamps.some(Boolean) ? flow('positive', 'M70 94V200H560V94H460', 8) + flow('negative', 'M220 94H106', 2) : '') +
+      (lamps[0] ? flow('branch-1', 'M460 94V60H220V94', 3) : '') +
+      (lamps[1] ? flow('branch-2', 'M460 94V145H220V94', 3) : '');
+  }
   const demoCircuit = () => {
-    let s = `<svg class="fig-svg" viewBox="0 0 640 208">`;
-    s += `<g class="circuit-layout"></g>`;
-    s += `<text class="circuit-title" x="320" y="30" text-anchor="middle" font-size="16" font-weight="900" fill="${INK}"></text>`;
-    s += `<text class="circuit-note" x="320" y="204" text-anchor="middle" font-size="12.5" font-weight="600" fill="#4a4f63"></text>`;
-    return s + '</svg>' +
-      `<div class="fig-ctrl">` +
-      Object.keys(CIRCUIT).map(k => `<button class="fig-btn" data-fig-act="sci-circuit" data-v="${k}">${CIRCUIT[k].name}</button>`).join('') +
-      `</div>`;
+    if (!DEMOS) return unavailable();
+    return '<div class="fig-ctrl">' + DEMOS.circuits.map(item => demoButton('sci-circuit', item.id, item.name)).join('') +
+      '</div><p class="sci-circuit-hint sci-model-note"></p>' + scrollHint +
+      '<div class="sci-demo-stage" tabindex="0" role="region" aria-label="电路示意图，可横向滚动"><svg class="fig-svg" viewBox="0 0 640 230" role="img" aria-label="电池、两个灯泡和两个开关组成的电路"><g class="circuit-layout"></g></svg></div>' +
+      '<div class="fig-ctrl">' + demoButton('sci-switch', '1', '开关 1') + demoButton('sci-switch', '2', '开关 2') + '</div>' +
+      '<p class="sci-observation sci-circuit-status" role="status"></p>' + motionControls() +
+      `<p class="sci-model-note">${escapeDemo(DEMOS.circuitModelNote)}</p>` + sourcesHTML('circuit');
   };
-
-  function circuitApply(fig, key, btn) {
-    if (!CIRCUIT[key]) return;
-    const g = fig.querySelector('.circuit-layout');
-    if (g) g.innerHTML = circuitLayout(key);
-    const title = fig.querySelector('.circuit-title');
-    const note = fig.querySelector('.circuit-note');
-    if (title) title.textContent = CIRCUIT[key].name;
-    if (note) note.textContent = CIRCUIT[key].note;
-    fig.querySelectorAll('[data-fig-act="sci-circuit"]').forEach(b => b.classList.toggle('fig-on', b === btn));
+  function circuitApply(fig, key) {
+    if (!DEMOS || !DEMOS.circuits.some(item => item.id === key)) return;
+    window.SciDemoMotion?.pause(fig);
+    if (key !== fig.dataset.circuitMode) {
+      fig.dataset.circuitMode = key;
+      fig.dataset.switchOne = String(key !== 'open');
+      fig.dataset.switchTwo = 'true';
+    }
+    const one = fig.dataset.switchOne === 'true', two = fig.dataset.switchTwo === 'true';
+    const {status} = circuitState(key, one, two);
+    fig.querySelector('.circuit-layout').innerHTML = circuitLayout(key, one, two);
+    fig.querySelector('.sci-circuit-hint').textContent = DEMOS.circuits.find(item => item.id === key).note;
+    fig.querySelector('.sci-circuit-status').textContent = DEMOS.circuitStatus[status];
+    fig.querySelectorAll('[data-fig-act="sci-circuit"]').forEach(button => {
+      const on = button.dataset.v === key;
+      button.classList.toggle('fig-on', on);
+      button.setAttribute('aria-pressed', String(on));
+    });
+    fig.querySelectorAll('[data-fig-act="sci-switch"]').forEach(button => {
+      const closed = button.dataset.v === '1' ? one : two;
+      button.textContent = `开关 ${button.dataset.v}：${closed ? '闭合 · 点此断开' : '断开 · 点此闭合'}`;
+      button.setAttribute('aria-pressed', String(closed));
+      button.classList.toggle('fig-on', closed);
+    });
+    window.SciDemoMotion?.refresh(fig);
   }
 
   /* ---------- 注册表 ---------- */
@@ -1289,14 +1294,14 @@ const SciFigures = (() => {
     'sci-sound-props': '音调看振动频率（快慢），响度看振动幅度（大小），音色是声音指纹',
     'sci-static': '摩擦起电：同种电荷相斥，异种电荷相吸；脱毛衣噼啪是放电',
     'sci-conductor': '金属、人体、水是导体；塑料、橡胶、玻璃是绝缘体；安全用电记心中',
-    'sci-electromagnet': '电磁铁=铁芯+线圈+电源：通电有磁、断电消磁，应用广泛',
+    'sci-electromagnet': '电磁铁=铁芯+线圈+电源：通电磁性强、断电磁性弱，应用广泛',
     'sci-photo': '光合作用：阳光+水+二氧化碳 → 养料+氧气，养活了几乎所有生物',
     'sci-animal-class': '动物分脊椎与无脊椎：鱼两栖爬鸟哺乳；蝙蝠是哺乳不是鸟',
     'sci-body': '人体五大系统：消化供能、呼吸供氧、循环运输、运动支撑、神经指挥',
     'sci-earth-layers': '地球四大圈层：大气圈、水圈、岩石圈、生物圈互相依存',
     'sci-water-cycle': '水循环：蒸发→凝结→降水→径流，淡水珍贵要节约',
     'sci-weather': '观测天气四工具 + 预警四色（蓝黄橙红）+ 灾害自护口诀',
-    'sci-triangle': '三角形最稳定：铁塔、自行车架都靠它；上轻下重也更稳',
+    'sci-triangle': '杆长不变时，三角框架保持形状；加斜杆可把四边形分成两个三角形',
   };
 
   function figHTML(id, cap) {
@@ -1310,7 +1315,7 @@ const SciFigures = (() => {
   function bindDelegates(doc) {
     doc.addEventListener('click', e => {
       const b = e.target.closest('[data-fig-act]');
-      if (!b) return;
+      if (!b || b.disabled) return;
       const fig = b.closest('.fig');
       if (!fig) return;
       const act = b.dataset.figAct;
@@ -1322,7 +1327,15 @@ const SciFigures = (() => {
           ? Math.min(STATE_ORDER.length - 1, cur + 1)
           : Math.max(0, cur - 1);
         statesApply(fig, STATE_ORDER[next]);
-      } else if (act === 'sci-circuit') circuitApply(fig, b.dataset.v, b);
+      } else if (act === 'sci-circuit') {
+        // 重新选模式也恢复该模式的起始开关，便于重复比较。
+        delete fig.dataset.circuitMode;
+        circuitApply(fig, b.dataset.v);
+      } else if (act === 'sci-switch') {
+        const key = b.dataset.v === '1' ? 'switchOne' : 'switchTwo';
+        fig.dataset[key] = String(fig.dataset[key] !== 'true');
+        circuitApply(fig, fig.dataset.circuitMode);
+      }
     });
   }
 
@@ -1331,16 +1344,22 @@ const SciFigures = (() => {
     bindDelegates(document);
     const initIn = root => {
       root.querySelectorAll('.fig').forEach(fig => {
+        window.SciProcess?.mount(fig);
+        window.SciExperiments?.mount(fig);
         const id = fig.dataset.fig;
         const demo = DEMO_INIT[id];
         if (demo && !fig.dataset.init) {
           const btn = fig.querySelector('[data-fig-act="' + demo.act + '"][data-v="' + demo.key + '"]');
           demo.apply(fig, demo.key, btn);
           fig.dataset.init = '1';
+          window.SciDemoMotion?.mount(fig);
         }
       });
     };
     const mo = new MutationObserver(muts => {
+      window.SciDemoMotion?.prune();
+      window.SciProcess?.prune();
+      window.SciExperiments?.prune();
       muts.forEach(m => m.addedNodes.forEach(n => {
         if (n.nodeType === 1) {
           if (n.matches && n.matches('.fig')) initIn(n.parentElement || document);
@@ -1353,14 +1372,14 @@ const SciFigures = (() => {
   }
 
   return {
-    figHTML,
+    figHTML, circuitState, circuitLayout,
     get FIG_IDS() { return Object.keys(REG); },
     has(id) { return Object.prototype.hasOwnProperty.call(REG, id); },
   };
 })();
 
 if (typeof module !== 'undefined' && module.exports) {
-  module.exports = { FIG_IDS: SciFigures.FIG_IDS, has: SciFigures.has };
+  module.exports = SciFigures;
 }
 if (typeof window !== 'undefined') {
   window.SciFigures = SciFigures;

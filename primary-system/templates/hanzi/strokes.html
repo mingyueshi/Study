@@ -1,2 +1,27 @@
-<section><h2>来源笔顺图</h2><p>Make Me a Hanzi 固定字形；存在字形区域差异，不代表所有教材写法。来源拼音：{{ asset.pinyin|join:'、' }}；部件：{{ asset.decomposition }}。</p><svg id="stroke-board" viewBox="0 -124 1024 1024" role="img" aria-label="{{ asset.character }}笔顺图" style="width:min(100%,360px);height:auto;background:#fff;border:1px solid #ccd"><g transform="translate(0,776) scale(1,-1)">{% for path in asset.strokes %}<path d="{{ path }}" fill="#b8c4c3" data-stroke="{{ forloop.counter }}"/>{% endfor %}</g></svg><p id="stroke-status" role="status">显示全部 {{ asset.strokes|length }} 笔</p><button type="button" class="button small" id="stroke-next">逐笔显示</button> <button type="button" class="button secondary small" id="stroke-reset">重新开始</button><script>(()=>{const paths=[...document.querySelectorAll('[data-stroke]')],status=document.getElementById('stroke-status');let count=0;const paint=()=>{paths.forEach((p,i)=>p.setAttribute('fill',i<count?'#1c6250':'#e1e9e7'));status.textContent=`第 ${count} / ${paths.length} 笔`;};document.getElementById('stroke-next').addEventListener('click',()=>{count=count>=paths.length?1:count+1;paint();});document.getElementById('stroke-reset').addEventListener('click',()=>{count=0;paint();});})();</script></section>
-<details class="dictionary-evidence"><summary>笔顺来源与版本</summary><p>Make Me a Hanzi · {{ asset.version }}</p></details>
+{% load static %}
+<link rel="stylesheet" href="{% static 'hanzi/writing.css' %}?v=1">
+<section class="hanzi-writing" data-hanzi-writing>
+  <div class="hanzi-writing-heading"><span class="hanzi-writing-icon" aria-hidden="true">✍️</span><div><h2>看笔顺，试着写</h2><p>先看一看每一笔，再沿着浅色字形慢慢描。</p></div></div>
+  <div class="hanzi-writing-workspace">
+    <div class="hanzi-writing-board">
+      <svg id="stroke-board" viewBox="0 -124 1024 1024" role="img" aria-label="{{ asset.character }}笔顺图"><g transform="translate(0,776) scale(1,-1)">{% for path in asset.strokes %}<path d="{{ path }}" fill="#b8c4c3" data-stroke="{{ forloop.counter }}"/>{% endfor %}</g></svg>
+      <div id="hanzi-writer" class="hanzi-writer" hidden aria-label="{{ asset.character }}描红区，用鼠标或手指按顺序描写"></div>
+    </div>
+    <p id="stroke-status" class="hanzi-writing-status" role="status" aria-live="polite">显示全部 {{ asset.strokes|length }} 笔</p>
+    <div class="hanzi-writing-actions">
+      <button type="button" class="button" id="stroke-animate" hidden>播放笔顺</button>
+      <button type="button" class="button" id="stroke-practice" hidden>开始描红</button>
+      <button type="button" class="button secondary" id="stroke-pause" hidden>暂停</button>
+      <button type="button" class="button secondary" id="stroke-next">逐笔显示</button>
+      <button type="button" class="button secondary" id="stroke-reset">重新开始</button>
+    </div>
+    <p class="hanzi-writing-tip">描红时不着急，按住鼠标或手指写一笔，再抬起。也可以用「逐笔显示」观察笔顺。</p>
+    <noscript><p>当前显示完整笔顺图，开启浏览器脚本后可以逐笔查看和描红。</p></noscript>
+  </div>
+  <details class="dictionary-evidence"><summary>笔顺来源与版本</summary><p>Make Me a Hanzi · {{ asset.version }}</p><p>来源笔顺图采用固定字形；存在字形区域差异，不代表所有教材写法。来源拼音：{{ asset.pinyin|join:'、' }}；部件：{{ asset.decomposition }}。</p><p>描红是本页练习，不作为书写评分，也不会改变学习积分。</p></details>
+</section>
+{% if stroke_data %}
+  {{ stroke_data|json_script:"hanzi-stroke-data" }}
+  <script src="{% static 'vendor/hanzi-writer/hanzi-writer.min.js' %}" defer></script>
+{% endif %}
+<script src="{% static 'hanzi/writing.js' %}?v=1" defer></script>

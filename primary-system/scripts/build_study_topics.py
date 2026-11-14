@@ -101,7 +101,12 @@ def template(source, topic, page, theme, index_route):
     for path in HEAD_ASSET.findall(source.split('</head>', 1)[0]):
         if path == 'platform-theme.css':
             continue
-        asset_url = "{% static 'study_topics/" + topic + '/' + path + "' %}"
+        asset_path = 'sci/' + Path(path).name if topic == 'geo' and path.startswith('../sci-process') else topic + '/' + path
+        asset_url = "{% static 'study_topics/" + asset_path + "' %}"
+        if topic in ('geo', 'history') and path == 'lab.js':
+            asset_url += '?v=20261114b9' if topic == 'geo' else '?v=20261114b7'
+        if topic == 'geo' and (path.startswith('../sci-process') or path in ('earth-data.js', 'earth.js')):
+            asset_url += '?v=20261114b9'
         if path.endswith('.css'):
             assets.append(f'<link rel="stylesheet" href="{asset_url}">')
         else:
@@ -195,8 +200,12 @@ def course_outputs():
             yield dest / path, (SOURCE / path).read_bytes()
         if topic == 'hanzi-evo':
             yield EVOLUTION_CHARS, evolution_chars_module(data).encode('utf-8')
+            yield dest / 'hanzi-evo-player.js', (SOURCE / 'hanzi-evo-player.js').read_bytes()
+        if topic == 'sci':
+            for filename in ('sci-demo-data.js', 'sci-demo-motion.js', 'sci-process-data.js', 'sci-process.js', 'sci-process.css', 'sci-experiments-data.js', 'sci-experiments.js'):
+                yield dest / filename, (SOURCE / filename).read_bytes()
         if topic == 'astro':
-            for filename in ('astro-media-data.js', 'astro-media.js'):
+            for filename in ('astro-media-data.js', 'astro-media.js', 'astro-observation-data.js', 'astro-observation.js'):
                 yield dest / filename, (SOURCE / filename).read_bytes()
             photos = (SOURCE / 'astro-photos.js').read_text(encoding='utf-8')
             photos = replace_once(photos, "'images/astro/'", "new URL('images/astro/', document.currentScript.src).href")

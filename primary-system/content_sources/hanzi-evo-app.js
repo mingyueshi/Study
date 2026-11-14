@@ -100,12 +100,12 @@ function stageCell(stage, entry, color) {
   const body = entry.img
     ? '<img src="' + esc(new URL(entry.img, courseAssets).href) + '" alt="' + esc(meta.name) + '字形" loading="lazy">'
     : '<span class="stage-kai">' + esc(entry.text) + '</span>';
-  return '<div class="stage-cell stage-' + stage + '" style="--c:' + color + '">' +
-    '<div class="stage-box">' + body + '</div>' +
+  return '<button type="button" disabled data-evo-stage="' + stage + '" aria-pressed="false" class="stage-cell stage-kind-' + stage + '" style="--c:' + color + '">' +
+    '<span class="stage-box">' + body + '</span>' +
     '<span class="stage-name">' + meta.name + '</span>' +
     '<span class="stage-era">' + meta.era + '</span>' +
     (entry.note ? '<span class="stage-note">' + esc(entry.note) + '</span>' : '') +
-    '</div>';
+    '</button>';
 }
 
 function evoStrip(p, color) {
@@ -118,14 +118,20 @@ function evoStrip(p, color) {
     } else if (byStage[stage]) {
       cells.push(stageCell(stage, byStage[stage], color));
     } else {
-      cells.push('<div class="stage-cell stage-missing" style="--c:' + color + '">' +
-        '<div class="stage-box"><span class="stage-none">未见于' + STAGE_META[stage].name + '</span></div>' +
+      cells.push('<button type="button" disabled data-evo-stage="' + stage + '" aria-pressed="false" class="stage-cell stage-missing" style="--c:' + color + '">' +
+        '<span class="stage-box"><span class="stage-none">未见于' + STAGE_META[stage].name + '</span></span>' +
         '<span class="stage-name">' + STAGE_META[stage].name + '</span>' +
-        '<span class="stage-era">—</span></div>');
+        '<span class="stage-era">—</span></button>');
     }
     if (stage !== 'kai') cells.push('<span class="stage-arrow" aria-hidden="true">→</span>');
   });
-  return '<div class="evo-strip">' + cells.join('') + '</div>';
+  return '<div class="evo-player"><div class="evo-strip" role="group" aria-label="选择观察的字形阶段">' + cells.join('') + '</div>' +
+    '<div class="evo-controls" hidden><div class="evo-buttons">' +
+    '<button type="button" data-evo-action="play" aria-pressed="false">顺着看变化</button>' +
+    '<button type="button" data-evo-action="previous">← 上一段</button>' +
+    '<button type="button" data-evo-action="next">下一段 →</button>' +
+    '<button type="button" data-evo-action="reset">回到开头</button></div>' +
+    '<p data-evo-status role="status">点一个字形，看看它属于哪个时期。</p><small data-evo-motion-note></small></div></div>';
 }
 
 /* ---------- 字卡 ---------- */
@@ -227,13 +233,17 @@ function searchResults(q) {
 function guessClass() { return heState.guess ? ' guessing' : ''; }
 
 function renderMain() {
+  window.HanziEvolutionPlayer?.dispose();
   const box = document.getElementById('cards');
   box.className = 'hanzi-cards' + guessClass();
-  if (query) { box.innerHTML = searchResults(query); return; }
-  if (curView === 'hall') { box.innerHTML = renderHall(); return; }
-  if (curView === 'sixbooks') { box.innerHTML = renderSixbooks(); return; }
-  const u = HUNIT_BY_ID[curView];
-  box.innerHTML = u ? renderUnit(u, frameLinks()) : '';
+  if (query) box.innerHTML = searchResults(query);
+  else if (curView === 'hall') box.innerHTML = renderHall();
+  else if (curView === 'sixbooks') box.innerHTML = renderSixbooks();
+  else {
+    const u = HUNIT_BY_ID[curView];
+    box.innerHTML = u ? renderUnit(u, frameLinks()) : '';
+  }
+  window.HanziEvolutionPlayer?.mount(box);
 }
 
 function render() {
@@ -243,6 +253,7 @@ function render() {
   const btn = document.getElementById('guess-toggle');
   if (btn) {
     btn.classList.toggle('on', heState.guess);
+    btn.setAttribute('aria-pressed', String(heState.guess));
     btn.textContent = heState.guess ? '🙈 猜字模式：开' : '🙈 猜字模式：关';
   }
 }

@@ -165,3 +165,6 @@
   .qb-hero-deco { display: none; }
   .qb-stem { font-size: 22px; }
 }
+/* 完成一组才播放一次，统一动效偏好可将其关闭。 */
+.qb-result.is-complete { animation: qb-complete-in .28s ease-out; }
+@keyframes qb-complete-in { from { opacity: .65; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }

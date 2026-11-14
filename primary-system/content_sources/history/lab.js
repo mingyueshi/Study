@@ -23,6 +23,9 @@
     ['晾干成纸', '把薄层压平、晾干，就能得到可以书写的纸。', '<path d="M57 51l132 6-12 128-131-9Z"/><path d="M77 79l84 4M74 98l84 4M72 117l64 4"/><path class="lab-rays" d="M207 53v-12M217 64h12M202 82l8 9M186 40l-7-9"/>'],
   ];
   let stop = 0, glyph = 0, paper = 0, timer = null;
+  let tripGeneration = 0;
+  const motionMedia = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const canPlay = () => !motionMedia.matches && (!window.StudyEffects || window.StudyEffects.motion === 'full');
   host.innerHTML = `
     <div class="lab-tabs" role="tablist" aria-label="选择互动实验">
       <button type="button" class="lab-tab" id="lab-tab-route" role="tab" aria-controls="lab-panel-route" aria-selected="true" tabindex="0">01 <span>丝路旅行</span></button>
@@ -57,11 +60,25 @@
     </div>`;
   const $ = selector => host.querySelector(selector);
   const $$ = selector => [...host.querySelectorAll(selector)];
+  const motionStatus = document.createElement('p');
+  motionStatus.className = 'lab-note';
+  motionStatus.setAttribute('role', 'status');
+  motionStatus.id = 'lab-motion-status';
+  $('#lab-panel-route').appendChild(motionStatus);
+  const syncMotion = () => {
+    $('#lab-play').disabled = !canPlay();
+    $('#lab-play').setAttribute('aria-pressed', String(timer !== null));
+    motionStatus.textContent = canPlay() ? timer !== null ? '正在逐站旅行，可随时暂停。' : '已暂停，可逐站查看或播放旅行。' : '已减少动效，可使用前后站按钮观察。';
+  };
   const endTrip = () => {
+    tripGeneration++;
     clearInterval(timer);
     timer = null;
+    // 停在当前已选站点，结束尚未完成的 CSS 位移，避免暂停后仍在移动。
+    $('#lab-caravan').getAnimations?.().forEach(animation => animation.finish());
     $('#lab-play').innerHTML = '开始旅行 <span aria-hidden="true">▷</span>';
     $('#lab-play').setAttribute('aria-pressed', 'false');
+    syncMotion();
   };
   const showStop = () => {
     const s = stops[stop];
@@ -97,15 +114,20 @@
   $('#lab-prev').addEventListener('click', () => { endTrip(); stop = Math.max(0, stop-1); showStop(); });
   $('#lab-next').addEventListener('click', () => { endTrip(); stop = Math.min(stops.length-1, stop+1); showStop(); });
   $('#lab-play').addEventListener('click', () => {
+    if (!canPlay() || document.hidden) return;
     if (timer) { endTrip(); return; }
     if (stop === stops.length-1) stop = 0;
     showStop();
     $('#lab-play').innerHTML = '暂停旅行 <span aria-hidden="true">Ⅱ</span>';
     $('#lab-play').setAttribute('aria-pressed', 'true');
+    const token = ++tripGeneration;
     timer = setInterval(() => {
+      if (token !== tripGeneration) return;
+      if (!canPlay() || document.hidden || !host.isConnected) { endTrip(); return; }
       stop += 1; showStop();
       if (stop === stops.length-1) endTrip();
     }, 3600);
+    syncMotion();
   });
   const showGlyph = () => {
     const g = glyphs[glyph];
@@ -136,5 +158,16 @@
   };
   $$('[data-paper]').forEach(el => el.addEventListener('click', () => { paper = Number(el.dataset.paper); showPaper(); }));
   document.addEventListener('visibilitychange', () => { if (document.hidden) endTrip(); });
+  const preferencesChanged = () => { if (!canPlay()) endTrip(); syncMotion(); };
+  document.addEventListener('study:effects-change', preferencesChanged);
+  motionMedia.addEventListener('change', preferencesChanged);
+  window.addEventListener('pagehide', endTrip);
+  host.closest('dialog')?.addEventListener('close', endTrip);
+  if (window.StudyEffects?.watch) window.StudyEffects.watch($('#lab-panel-route'), endTrip);
+  else if (typeof IntersectionObserver === 'function') {
+    const observer = new IntersectionObserver(entries => { if (entries.some(entry => !entry.isIntersecting)) endTrip(); });
+    observer.observe($('#lab-panel-route'));
+  }
+  syncMotion();
   showStop(); showGlyph(); showPaper();
 })();

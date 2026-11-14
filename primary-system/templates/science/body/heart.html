@@ -9,8 +9,9 @@
       <button type="button" data-phase-choice="{{ phase.id }}" aria-pressed="false">{{ forloop.counter }} · {{ phase.label }}</button>
       {% endfor %}
     </div>
-    <button type="button" data-heart-play>连续播放</button>
+    <button type="button" data-heart-play aria-pressed="false">连续播放</button>
   </div>
+  <p data-heart-motion-status role="status"></p>
   {% include 'science/body/heart-anatomy.html' %}
   <details class="body-route-details">
     <summary>沿着箭头，追踪完整路线</summary>

@@ -29,7 +29,7 @@
     { name: '春分', month: '3月', north: '太阳又直射赤道，各地昼夜大致等长。北半球进入春季，新一年的季节变化继续。', south: '南半球：秋季', direct: '赤道', day: '各地昼夜大致等长', x: 460, y: 90 },
   ];
   const screenDirections = ['右边', '下方', '左边', '上方'];
-  let turns = 0, selectedPlace = 0, waterStep = 0, waterTimer = null, season = 0;
+  let turns = 0, selectedPlace = 0, waterStep = 0, season = 0;
   host.innerHTML = `
     <div class="geo-lab-tabs" role="tablist" aria-label="选择地理互动实验">
       <button type="button" id="geo-tab-map" class="geo-lab-tab" role="tab" aria-selected="true" aria-controls="geo-panel-map" tabindex="0"><span class="geo-lab-tab-number">01</span>地图小侦探</button>
@@ -102,12 +102,23 @@
 
   const $ = selector => host.querySelector(selector);
   const $$ = selector => [...host.querySelectorAll(selector)];
+  const waterPanel = $('#geo-panel-water');
+  const waterProcess = window.SciProcess?.html('water');
+  if (waterProcess) {
+    waterPanel.innerHTML = '<div class="geo-lab-heading"><div><p class="geo-lab-eyebrow">跟着水走一圈</p><h3>水怎样回到海洋？</h3></div></div>' + waterProcess;
+    window.SciProcess.mount(waterPanel);
+  }
   const stopWater = () => {
-    clearInterval(waterTimer); waterTimer = null;
-    $('#geo-water-play').innerHTML = '播放旅程 <span aria-hidden="true">▷</span>';
-    $('#geo-water-play').setAttribute('aria-pressed', 'false');
-    $('#geo-water-scene').classList.remove('geo-is-playing');
+    window.SciProcess?.pause(waterPanel);
+    window.GeoEarth?.pause();
   };
+  const seasonPanel = $('#geo-panel-seasons');
+  const earthObservation = window.GeoEarth?.html();
+  if (earthObservation) {
+    seasonPanel.innerHTML = earthObservation;
+    window.GeoEarth.mount(seasonPanel);
+  }
+  host.closest('dialog')?.addEventListener('close', stopWater);
   const tabs = $$('.geo-lab-tab');
   const selectTab = index => {
     stopWater();
@@ -154,6 +165,7 @@
   $('#geo-map-rotate').addEventListener('click', () => { turns = (turns + 1) % 4; showMap(); });
   $('#geo-map-reset').addEventListener('click', () => { turns = 0; showMap(); });
   const showWater = () => {
+    if (waterProcess) return;
     const step = waterSteps[waterStep];
     $('#geo-water-title').textContent = step.title;
     $('#geo-water-copy').textContent = step.copy;
@@ -172,16 +184,12 @@
     $('#geo-water-scene').setAttribute('aria-label', `水循环示意，当前步骤：${step.title}。${step.tip}`);
   };
   $$('[data-geo-water-step]').forEach(button => button.addEventListener('click', () => { stopWater(); waterStep = Number(button.dataset.geoWaterStep); showWater(); }));
-  $('#geo-water-prev').addEventListener('click', () => { stopWater(); waterStep = Math.max(0, waterStep - 1); showWater(); });
-  $('#geo-water-next').addEventListener('click', () => { stopWater(); waterStep = Math.min(waterSteps.length - 1, waterStep + 1); showWater(); });
-  $('#geo-water-play').addEventListener('click', () => {
-    if (waterTimer) { stopWater(); return; }
-    $('#geo-water-play').innerHTML = '暂停旅程 <span aria-hidden="true">Ⅱ</span>';
-    $('#geo-water-play').setAttribute('aria-pressed', 'true');
-    $('#geo-water-scene').classList.add('geo-is-playing');
-    waterTimer = setInterval(() => { waterStep = (waterStep + 1) % waterSteps.length; showWater(); }, 4800);
-  });
+  $('#geo-water-prev')?.addEventListener('click', () => { stopWater(); waterStep = Math.max(0, waterStep - 1); showWater(); });
+  $('#geo-water-next')?.addEventListener('click', () => { stopWater(); waterStep = Math.min(waterSteps.length - 1, waterStep + 1); showWater(); });
+  // 动效模块或说明数据失效时，保留原图的四步观察，不运行旧的无限循环。
+  if (!waterProcess) $('#geo-water-play').hidden = true;
   const showSeason = () => {
+    if (earthObservation) return;
     const current = seasons[season];
     $('#geo-season-title').textContent = `${current.name} · ${current.month}`;
     $('#geo-season-copy').textContent = current.north;

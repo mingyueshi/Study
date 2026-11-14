@@ -7,17 +7,31 @@
 {% with topic='study_topics/'|add:course_slug|add:'/'|add:course_slug %}
 <link rel="stylesheet" href="{% static 'mathbook/mathbook-base.css' %}">
 <link rel="stylesheet" href="{% static 'figures/figures.css' %}">
-<link rel="stylesheet" href="{% static topic|add:'.css' %}{% if course_slug == 'astro' %}?v=20261113{% endif %}">
+<link rel="stylesheet" href="{% static topic|add:'.css' %}{% if course_slug == 'astro' %}?v=20261114b5{% elif course_slug == 'sci' %}?v=20261114b10{% endif %}">
 <link rel="stylesheet" href="{% static 'study_topics/course.css' %}">
 <script src="{% static 'speech.js' %}" defer></script>
-<script src="{% static topic|add:'-data.js' %}{% if course_slug == 'sci' %}?v=2{% endif %}" defer></script>
-<script src="{% static topic|add:'-figures.js' %}{% if course_slug == 'sci' %}?v=2{% endif %}" defer></script>
+<script src="{% static topic|add:'-data.js' %}{% if course_slug == 'sci' %}?v=20261114b10{% endif %}" defer></script>
+{% if course_slug == 'sci' %}
+<link rel="stylesheet" href="{% static 'study_topics/sci/sci-process.css' %}?v=20261114b10">
+<script src="{% static 'study_topics/sci/sci-demo-data.js' %}" defer></script>
+<script src="{% static 'study_topics/sci/sci-demo-motion.js' %}?v=20261114b10" defer></script>
+<script src="{% static 'study_topics/sci/sci-process-data.js' %}?v=20261114b10" defer></script>
+<script src="{% static 'study_topics/sci/sci-process.js' %}?v=20261114b10" defer></script>
+<script src="{% static 'study_topics/sci/sci-experiments-data.js' %}?v=20261114b10" defer></script>
+<script src="{% static 'study_topics/sci/sci-experiments.js' %}?v=20261114b10" defer></script>
+{% endif %}
+{% if course_slug == 'astro' %}
+<script src="{% static 'study_topics/astro/astro-observation-data.js' %}" defer></script>
+<script src="{% static 'study_topics/astro/astro-observation.js' %}" defer></script>
+{% endif %}
+<script src="{% static topic|add:'-figures.js' %}{% if course_slug == 'sci' %}?v=20261114b10{% elif course_slug == 'astro' %}?v=20261114b5{% endif %}" defer></script>
 {% if course_slug == 'astro' %}
 <script src="{% static 'study_topics/astro/astro-photos.js' %}" defer></script>
 <script src="{% static 'study_topics/astro/astro-media-data.js' %}?v=20261113" defer></script>
 <script src="{% static 'study_topics/astro/astro-media.js' %}?v=20261113" defer></script>
 {% endif %}
-<script src="{% static topic|add:'-app.js' %}{% if course_slug == 'sci' %}?v=2{% elif course_slug == 'lit' %}?v=2{% elif course_slug == 'astro' %}?v=20261113{% endif %}" defer></script>
+{% if course_slug == 'hanzi-evo' %}<script src="{% static 'study_topics/hanzi-evo/hanzi-evo-player.js' %}" defer></script>{% endif %}
+<script src="{% static topic|add:'-app.js' %}{% if course_slug == 'sci' %}?v=20261114b10{% elif course_slug == 'lit' %}?v=2{% elif course_slug == 'astro' %}?v=20261114b5{% elif course_slug == 'hanzi-evo' %}?v=20261114{% endif %}" defer></script>
 <script src="{% static 'mathbook/layout.js' %}?v=2" defer></script>
 {% endwith %}
 {% endblock %}

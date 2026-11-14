@@ -1,0 +1,44 @@
+/* 分段过程共用的观察区，供科学课程和地理实验使用。 */
+.sci-process { text-align: left; }
+.sci-experiment-range { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; font-size: 17px; line-height: 1.7; margin: 12px 0; }
+.sci-experiment-range input { flex: 1 1 220px; min-width: 0; width: 100%; height: 32px; accent-color: #27806c; }
+.sci-experiment-range output { color: #216a58; font-weight: 800; min-width: 3em; }
+.sci-process-prompt, .sci-process-cause { font-size: 17px; line-height: 1.8; margin: 12px 0; }
+.sci-process .sci-demo-stage { border: 1px solid #dbe9ee; background: #fff; }
+.sci-process-svg text { font-size: 17px; font-weight: 700; fill: #344f60; }
+.sci-process-svg text.sci-life-detail { font-size: 13px; font-weight: 500; }
+.sci-process-svg text.sci-life-icon { font-size: 32px; }
+.sci-process-svg .sci-life-halo { fill: #fff; fill-opacity: .45; stroke: transparent; stroke-width: 2; }
+.sci-process-svg [data-active="true"] .sci-life-halo { fill: #fff3d9; stroke: #b65013; }
+.sci-process-guide { fill: none; stroke: #91a6b8; stroke-width: 2; stroke-dasharray: 4 5; opacity: .65; }
+.sci-process-svg [data-process-path] { fill: none; stroke-width: 4; stroke-linecap: round; }
+.sci-process-svg .sci-light-arc { fill: none; stroke-width: 2; }
+.sci-process-svg text.sci-light-in { fill: #b65013; }
+.sci-process-svg text.sci-light-out { fill: #246ba4; }
+.sci-process-svg path.sci-light-in { stroke: #b65013; }
+.sci-process-svg path.sci-light-out { stroke: #246ba4; }
+.sci-process-angle { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; font-size: 18px; font-weight: 800; }
+.sci-process-angle input { flex: 1 1 200px; min-width: 0; width: 100%; accent-color: #b65013; height: 36px; }
+.sci-process-angle output { min-width: 3em; color: #a44b16; }
+.sci-process-readout { font-size: 19px; font-weight: 800; line-height: 1.7; color: #245c83; }
+.sci-process .fig-btn { min-height: 42px; font-size: 16px; }
+.sci-process .fig-btn[aria-pressed="true"] { background: #e2f3ed; color: #155f4d; border-color: #288d70; }
+.sci-process .fig-btn:disabled { opacity: .5; cursor: default; }
+.sci-process .fig-btn:focus-visible { outline: 3px solid #277bc0; outline-offset: 3px; }
+.sci-process progress { display: block; width: 100%; height: 8px; margin: 14px 0; accent-color: #238468; }
+.sci-process-status { color: #526b79; line-height: 1.7; font-size: 15px; }
+
+.sci-process { max-width: 960px; margin: 0 auto; color: #344f60; }
+.sci-process .fig-ctrl { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 12px 0; }
+.sci-process .fig-btn { padding: 8px 13px; border: 1px solid #cedbd8; border-radius: 10px; background: #fff; color: #244c44; font-family: inherit; font-weight: 700; cursor: pointer; }
+.sci-process [hidden] { display: none !important; }
+.sci-process .sci-demo-stage { overflow-x: auto; margin: 12px 0; border-radius: 12px; }
+.sci-process .sci-demo-stage:focus-visible { outline: 3px solid #4d96ff; outline-offset: 3px; }
+.sci-process .fig-svg { display: block; width: 100%; height: auto; max-height: 360px; min-width: 560px; }
+.sci-process .sci-observation { margin: 12px 0; padding: 12px 16px; border-left: 4px solid #3f9bbd; background: #eaf6fc; border-radius: 8px; font-size: 17px; line-height: 1.8; color: #244f62; }
+.sci-process .sci-model-note, .sci-process .sci-demo-sources { font-size: 14px; line-height: 1.8; color: #526b79; }
+.sci-process .sci-demo-sources a { color: #246ba4; }
+.sci-process .sci-scroll-hint { display: none; }
+@media (max-width: 700px) {
+  .sci-process .sci-scroll-hint { display: block; font-size: 14px; line-height: 1.6; }
+}

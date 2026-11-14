@@ -196,6 +196,9 @@ function searchResults(q) {
 
 /* ---------- 渲染 ---------- */
 function renderMain() {
+  window.SciDemoMotion?.dispose();
+  window.SciProcess?.dispose();
+  window.SciExperiments?.dispose();
   const box = document.getElementById('cards');
   if (query) {
     box.innerHTML = searchResults(query);

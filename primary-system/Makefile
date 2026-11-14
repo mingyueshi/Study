@@ -130,7 +130,7 @@ test: ## 跑全量测试（需先 install）
 	$(MANAGE) test
 
 test-frontend: ## 跑 Node 前端回归测试
-	node --test scripts/test_frontend.cjs scripts/test_feihualing_frontend.cjs scripts/test_classical_frontend.cjs
+	node --test scripts/test_frontend.cjs scripts/test_feihualing_frontend.cjs scripts/test_classical_frontend.cjs scripts/test_study_effects.cjs scripts/test_topic_motion.cjs scripts/test_sci_motion.cjs scripts/test_astro_observation.cjs scripts/test_sci_process.cjs scripts/test_sci_experiments.cjs scripts/test_legacy_motion.cjs scripts/test_geo_earth.cjs
 
 test-content-sources: ## 校验教材与专题的文件源
 	@set -e; for test in content_sources/test/test-*.js; do node "$$test"; done

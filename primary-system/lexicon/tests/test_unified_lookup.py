@@ -278,7 +278,12 @@ class UnifiedDictionaryTests(TestCase):
     def test_provenance_hashes_are_in_disclosures_and_strokes_have_named_controls(self):
         response = self.client.get("/dictionary/", {"q": "木"})
         self.assertContains(response, 'aria-label="木笔顺图"')
-        self.assertContains(response, 'class="button small" id="stroke-next"')
+        for control_id, label in (("stroke-next", "逐笔显示"), ("stroke-reset", "重新开始")):
+            self.assertContains(
+                response,
+                f'<button type="button" class="button secondary" id="{control_id}">{label}</button>',
+                html=True,
+            )
         self.assertContains(response, "<summary>笔顺来源与版本</summary>")
         response = self.client.get("/dictionary/", {"q": "bank", "scope": "english"})
         self.assertContains(response, "<summary>CMU来源与版本</summary>")

@@ -28,6 +28,15 @@
     const scene = root.querySelector('[data-roam-scene]');
     let mode = 'orbits', selected = 2, running = false, years = 0, previous = 0;
     const control = root.querySelector('[data-roam-play]');
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const canPlay = () => window.StudyEffects ? window.StudyEffects.motion === 'full' : !reduced.matches;
+    control.insertAdjacentHTML('afterend', `<div class="roam-time-controls" data-roam-time-controls>
+      <label>演示速度 <select data-roam-speed aria-label="公转演示速度"><option value="1">慢慢看</option><option value="3">快一些</option></select></label>
+      <button type="button" data-roam-step>前进四分之一年</button><button type="button" data-roam-reset>回到起点</button>
+      <p><output data-roam-elapsed>已过 0.00 地球年</output><span data-roam-laps></span></p>
+      <p class="roam-motion-note" data-roam-motion-note role="status"></p></div>`);
+    const timeControls = root.querySelector('[data-roam-time-controls]');
+    const speed = root.querySelector('[data-roam-speed]');
     const NS = 'http://www.w3.org/2000/svg';
     function node(tag, attrs, text) {
       const el = document.createElementNS(NS, tag);
@@ -41,6 +50,8 @@
         const angle = (years / data.planets[index].period + index / 8) * Math.PI * 2;
         group.setAttribute('transform', `translate(${500 + Math.cos(angle) * radius} ${270 + Math.sin(angle) * radius * .54})`);
       });
+      root.querySelector('[data-roam-elapsed]').textContent = `已过 ${years.toFixed(2)} 地球年`;
+      root.querySelector('[data-roam-laps]').textContent = ` · ${data.planets[selected].name}约转了 ${(years / data.planets[selected].period).toFixed(2)} 圈`;
     }
     function draw() {
       scene.replaceChildren(); markers = [];
@@ -75,16 +86,24 @@
       });
       position();
       control.hidden = mode !== 'orbits';
+      timeControls.hidden = mode !== 'orbits';
       showInfo();
     }
     function showInfo() {
       const p=data.planets[selected];
       root.querySelector('.roam-planet-info').innerHTML=`<h3>${esc(p.name)}</h3><dl><div><dt>平均日距</dt><dd>${p.au} 倍日地距离</dd></div><div><dt>公转一圈</dt><dd>约 ${p.period} 地球年</dd></div><div><dt>平均直径</dt><dd>约 ${p.diameter.toLocaleString('zh-CN')} 千米</dd></div></dl><p>${esc(p.fact)}</p>`;
     }
-    function stop() { running=false; cancelAnimationFrame(frame); control.textContent='开始公转'; control.setAttribute('aria-pressed','false'); }
+    function stop() { running=false; previous=0; cancelAnimationFrame(frame); control.textContent=years ? '继续公转' : '开始公转'; control.setAttribute('aria-pressed','false'); }
+    function preference() {
+      if (!canPlay()) stop();
+      control.disabled = !canPlay();
+      root.querySelector('[data-roam-motion-note]').textContent = canPlay()
+        ? '可以暂停观察，或每次前进四分之一年。离开模型后会暂停。'
+        : '已减少连续运动。点「前进四分之一年」，也能比较行星走了多远。';
+    }
     function tick(time) {
-      if (!running || !root.isConnected) return;
-      if (previous) years+=(time-previous)/12000;
+      if (!running || !root.isConnected || !canPlay() || document.hidden) { stop(); return; }
+      if (previous) years+=Math.min(time-previous, 100) / 12000 * Number(speed.value);
       previous=time; position(); frame=requestAnimationFrame(tick);
     }
     function click(e) {
@@ -100,19 +119,27 @@
         draw();
       } else if (e.target.closest('[data-roam-play]')) {
         if (running) stop();
-        else { running=true; previous=0;control.textContent='暂停公转';control.setAttribute('aria-pressed','true');frame=requestAnimationFrame(tick); }
+        else if (canPlay() && !document.hidden) { running=true; previous=0;control.textContent='暂停公转';control.setAttribute('aria-pressed','true');frame=requestAnimationFrame(tick); }
+      } else if (e.target.closest('[data-roam-step]')) {
+        stop(); years+=.25; position(); stop();
+      } else if (e.target.closest('[data-roam-reset]')) {
+        years=0; stop(); position();
       }
     }
     function visibility() { if (document.hidden) { stop(); root.querySelectorAll('video').forEach(v=>v.pause()); } }
     function play(e) { if(e.target.tagName==='VIDEO') root.querySelectorAll('video').forEach(v=>{ if(v!==e.target)v.pause(); }); }
     function error(e) { if(e.target.tagName==='VIDEO') e.target.nextElementSibling.hidden=false; }
-    const observer = new IntersectionObserver(entries => entries.forEach(({target,isIntersecting})=>{ if(!isIntersecting) { if (target.tagName === 'VIDEO') target.pause(); else stop(); } }));
-    root.querySelectorAll('video').forEach(v=>observer.observe(v));
-    observer.observe(root.querySelector('.roam-solar-stage'));
+    const observer = typeof IntersectionObserver === 'function' ? new IntersectionObserver(entries => entries.forEach(({target,isIntersecting})=>{ if(!isIntersecting) { if (target.tagName === 'VIDEO') target.pause(); else stop(); } })) : null;
+    root.querySelectorAll('video').forEach(v=>observer?.observe(v));
+    const unwatch = window.StudyEffects?.watch(root.querySelector('.roam-lab'), stop);
+    if (!unwatch) observer?.observe(root.querySelector('.roam-lab'));
     root.addEventListener('click',click); root.addEventListener('play',play,true);root.addEventListener('error',error,true);
     document.addEventListener('visibilitychange',visibility);
-    draw(); // 动画只在主动播放后运行，也适用于减少动态效果偏好。
-    dispose=()=>{stop();observer.disconnect();root.querySelectorAll('video').forEach(v=>v.pause());root.removeEventListener('click',click);root.removeEventListener('play',play,true);root.removeEventListener('error',error,true);document.removeEventListener('visibilitychange',visibility);};
+    document.addEventListener('study:effects-change',preference);
+    reduced.addEventListener('change',preference);
+    window.addEventListener('pagehide',stop);
+    draw(); preference();
+    dispose=()=>{stop();unwatch?.();observer?.disconnect();root.querySelectorAll('video').forEach(v=>v.pause());root.removeEventListener('click',click);root.removeEventListener('play',play,true);root.removeEventListener('error',error,true);document.removeEventListener('visibilitychange',visibility);document.removeEventListener('study:effects-change',preference);reduced.removeEventListener('change',preference);window.removeEventListener('pagehide',stop);};
   }
   window.AstroMedia={render,mount,dispose:()=>dispose()};
 })();

@@ -1,0 +1,185 @@
+/* 前台共用下拉框。保留原生 select、动态选项、表单提交与键盘行为。 */
+:root {
+  --select-radius: 12px;
+  --select-height: 50px;
+  --select-padding: 10px;
+}
+
+/* 专题只提供颜色与密度，控件的结构和交互状态统一维护。 */
+.astro-page { --select-accent: #35678f; }
+.geo-page { --select-accent: #2d7886; }
+.sci-page { --select-accent: #397648; }
+.poetry-home { --select-accent: #80633f; }
+.origins { --select-accent: var(--origins-brown); --select-ink: var(--origins-ink); }
+.gm-topic { --select-accent: var(--atlas-hero-start); }
+.study-skin { --select-accent: var(--subject-ink); }
+:where(.tts-settings, .textbook-player, .origins-playback, .gm-view-bar, .gm-category,
+  .gm-media-filters, .gm-tour-controls, .territory-options, .roam-time-controls, .study-effects-panel) {
+  --select-height: 44px;
+  --select-padding: 8px;
+}
+.account-field { --select-height: 58px; }
+.account-field-invalid { --select-accent: #b24d39; --select-border: #b24d39; --select-surface: #fff9f5; }
+
+/* 仅覆盖单选下拉框，多选和 size 大于 1 的列表保持原有布局。 */
+body :where(.site-masthead, .shell) select:not([multiple]):is(:not([size]), [size="1"]) {
+  appearance: none;
+  -webkit-appearance: none;
+  min-width: 0;
+  max-width: 100%;
+  min-height: var(--select-height);
+  padding: var(--select-padding) 44px var(--select-padding) 14px;
+  border: 1px solid var(--select-border, #81998a);
+  border-radius: var(--select-radius);
+  background: var(--select-surface, #fffefa) url("icons/chevron-down.svg") no-repeat right 14px center / 16px;
+  color: var(--select-ink, var(--ink, #233e37));
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.5;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  transition: border-color 160ms ease-out, background-color 160ms ease-out, outline-color 160ms ease-out;
+}
+body :where(.site-masthead, .shell) select:not([multiple]):is(:not([size]), [size="1"]):not(:disabled):hover {
+  border-color: var(--select-accent, var(--green, #22634c));
+  background-color: var(--select-surface, #f5f9f3);
+}
+body :where(.site-masthead, .shell) select:not([multiple]):is(:not([size]), [size="1"]):focus-visible {
+  border-color: var(--select-accent, var(--green, #22634c));
+  outline: 3px solid color-mix(in srgb, var(--select-accent, var(--green, #22634c)) 35%, transparent);
+  outline-offset: 3px;
+}
+body :where(.site-masthead, .shell) select:not([multiple]):is(:not([size]), [size="1"]):disabled {
+  border-color: var(--line, #dce6d9);
+  background-color: var(--paper, #f7faf5);
+  color: var(--muted, #586b62);
+  cursor: not-allowed;
+}
+select[aria-invalid="true"], select:user-invalid {
+  --select-accent: #b24d39;
+  --select-border: #b24d39;
+  --select-surface: #fff9f5;
+}
+
+/* 支持时一起美化展开菜单，定位、滚动和焦点仍交给浏览器。 */
+@supports (appearance: base-select) {
+  body :where(.site-masthead, .shell) select:not([multiple]):is(:not([size]), [size="1"]),
+  body :where(.site-masthead, .shell) select:not([multiple]):is(:not([size]), [size="1"])::picker(select) {
+    appearance: base-select;
+  }
+  body :where(.site-masthead, .shell) select:not([multiple]):is(:not([size]), [size="1"]) {
+    gap: 12px;
+    padding-right: 14px;
+    background-image: none;
+  }
+  body :where(.site-masthead, .shell) select:not([multiple]):is(:not([size]), [size="1"]) > button {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    min-width: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    line-height: inherit;
+    text-align: start;
+    cursor: inherit;
+  }
+  body :where(.site-masthead, .shell) selectedcontent {
+    display: block;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  body :where(.site-masthead, .shell) select:not([multiple]):is(:not([size]), [size="1"])::picker-icon {
+    content: "";
+    flex: 0 0 16px;
+    width: 16px;
+    height: 16px;
+    margin-left: auto;
+    background-color: var(--select-accent, var(--green, #22634c));
+    mask: url("icons/chevron-down.svg") center / contain no-repeat;
+    transition: rotate 160ms ease-out;
+  }
+  body :where(.site-masthead, .shell) select:not([multiple]):is(:not([size]), [size="1"]):open {
+    border-color: var(--select-accent, var(--green, #22634c));
+  }
+  body :where(.site-masthead, .shell) select:not([multiple]):is(:not([size]), [size="1"]):open::picker-icon { rotate: 180deg; }
+  body :where(.site-masthead, .shell) select:not([multiple]):is(:not([size]), [size="1"])::picker(select) {
+    min-inline-size: anchor-size(self-inline);
+    max-inline-size: min(32rem, calc(100dvw - 24px));
+    max-block-size: min(22rem, 60dvh);
+    margin-block: 6px;
+    padding: 6px;
+    border: 1px solid var(--select-border, #c6d6c8);
+    border-radius: 14px;
+    background: var(--select-surface, #fffefa);
+    color: var(--select-ink, var(--ink, #233e37));
+    box-shadow: 0 4px 8px #233e3726;
+    font: inherit;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    opacity: 0;
+    transition: opacity 160ms ease-out, display 160ms allow-discrete, overlay 160ms allow-discrete;
+  }
+  body :where(.site-masthead, .shell) select:not([multiple]):is(:not([size]), [size="1"]):open::picker(select) { opacity: 1; }
+  @starting-style {
+    body :where(.site-masthead, .shell) select:not([multiple]):is(:not([size]), [size="1"]):open::picker(select) { opacity: 0; }
+  }
+  body :where(.site-masthead, .shell) select:not([multiple]):is(:not([size]), [size="1"]) option {
+    position: relative;
+    gap: 10px;
+    min-height: 44px;
+    padding: 10px 12px 10px 40px;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    color: inherit;
+    font-weight: 500;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    cursor: pointer;
+  }
+  body :where(.site-masthead, .shell) select:not([multiple]):is(:not([size]), [size="1"]) option:checked {
+    background: color-mix(in srgb, var(--select-accent, var(--green, #22634c)) 12%, #fffefa);
+    color: var(--select-accent, var(--green, #22634c));
+    font-weight: 700;
+  }
+  body :where(.site-masthead, .shell) select:not([multiple]):is(:not([size]), [size="1"]) option:not(:disabled):hover {
+    background: color-mix(in srgb, var(--select-accent, var(--green, #22634c)) 8%, #fffefa);
+  }
+  body :where(.site-masthead, .shell) select:not([multiple]):is(:not([size]), [size="1"]) option:focus-visible {
+    outline: 2px solid var(--select-accent, var(--green, #22634c));
+    outline-offset: -2px;
+  }
+  body :where(.site-masthead, .shell) select:not([multiple]):is(:not([size]), [size="1"]) option::checkmark {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--select-accent, var(--green, #22634c));
+  }
+  body :where(.site-masthead, .shell) select:not([multiple]):is(:not([size]), [size="1"]) option:disabled { color: var(--muted, #586b62); cursor: not-allowed; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body :where(.site-masthead, .shell) select:not([multiple]):is(:not([size]), [size="1"]),
+  body :where(.site-masthead, .shell) select:not([multiple]):is(:not([size]), [size="1"])::picker-icon,
+  body :where(.site-masthead, .shell) select:not([multiple]):is(:not([size]), [size="1"])::picker(select) { transition: none; }
+}
+:root:is([data-study-motion="gentle"], [data-study-motion="off"]) body :where(.site-masthead, .shell) select:not([multiple]):is(:not([size]), [size="1"]),
+:root:is([data-study-motion="gentle"], [data-study-motion="off"]) body :where(.site-masthead, .shell) select:not([multiple]):is(:not([size]), [size="1"])::picker-icon,
+:root:is([data-study-motion="gentle"], [data-study-motion="off"]) body :where(.site-masthead, .shell) select:not([multiple]):is(:not([size]), [size="1"])::picker(select) { transition: none; }
+
+@media (forced-colors: active) {
+  body :where(.site-masthead, .shell) select:not([multiple]):is(:not([size]), [size="1"]) {
+    appearance: auto;
+    -webkit-appearance: auto;
+    background-image: none;
+    border-color: ButtonText;
+    color: ButtonText;
+  }
+}

@@ -2,6 +2,7 @@ from django.test import TestCase
 from django.urls import reverse
 from reference_library.models import Dataset
 from .models import HanziAsset, UnihanCharacter, UnihanProperty
+from .strokes import writer_data
 
 
 class HanziViewTests(TestCase):
@@ -56,6 +57,34 @@ class HanziViewTests(TestCase):
         self.assertContains(response, "translate(0,776) scale(1,-1)")
         self.assertContains(response, "stroke-next")
         self.assertContains(response, "stroke-reset")
+        self.assertContains(response, 'hanzi-stroke-data')
+        self.assertContains(response, 'vendor/hanzi-writer/hanzi-writer.min.js')
+        self.assertEqual(response.context['stroke_data']['medians'], [[[0, 0], [1, 1]]])
+
+    def test_invalid_stroke_data_preserves_static_view_without_loading_writer(self):
+        asset = HanziAsset.objects.get(character='⺆')
+        for medians in ([], [[[0, 0]]], [[[0, 0], [True, 1]]], [[[0, 0], ['1', 1]]]):
+            with self.subTest(medians=medians):
+                asset.medians = medians
+                self.assertIsNone(writer_data(asset))
+        asset.medians = []
+        asset.save(update_fields=['medians'])
+        response = self.client.get('/hanzi/⺆/')
+        self.assertContains(response, 'stroke-board')
+        self.assertNotContains(response, 'vendor/hanzi-writer/hanzi-writer.min.js')
+        self.assertIsNone(response.context['stroke_data'])
+
+    def test_unihan_only_page_does_not_load_drawing_library(self):
+        response = self.client.get('/hanzi/学/')
+        self.assertNotContains(response, 'vendor/hanzi-writer/hanzi-writer.min.js')
+
+    def test_stroke_payload_escapes_script_content(self):
+        asset = HanziAsset.objects.get(character='⺆')
+        asset.strokes = ['</script><script>alert(1)</script>']
+        asset.save(update_fields=['strokes'])
+        response = self.client.get('/hanzi/⺆/')
+        self.assertNotContains(response, '</script><script>alert(1)</script>')
+        self.assertContains(response, '\\u003C/script\\u003E')
 
     def test_evolution_hall_backlink_only_for_selected_chars(self):
         """馆藏 100 字的详情页有「看字源」反链，非馆藏字没有。"""

@@ -620,6 +620,11 @@ body:has(.origins) {
 .origins-population .origins-population-era { padding: 4px 10px; border-radius: 6px; background: #e8f4ec; color: #285f52; font-size: 16px; font-weight: 750; }
 .origins-population:is([data-era-state="unknown"], [data-era-state="last"], [data-era-state="extinct"]) .origins-population-era { background: #f6ecd3; color: #80552a; }
 #atlas-routes .origins-route-arriving { stroke-dasharray: 1; animation: origins-route-arrive 1.3s ease-out both; }
+.origins-reading-progress { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; margin: 12px 0; font-size: 16px; }
+.origins-reading-progress progress { width: 150px; accent-color: #258b76; }
+.origins-reading-track { flex-basis: 100%; height: 5px; overflow: hidden; background: var(--line, #d9e3de); border-radius: 5px; }
+#atlas-reading-fill { display: block; width: 100%; height: 100%; background: #258b76; transform: scaleX(0); transform-origin: left; }
+.origins-playback button:disabled { opacity: .55; cursor: default; }
 @keyframes origins-route-arrive { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
 @media (prefers-reduced-motion: reduce) {
   #atlas-routes .origins-route-arriving { animation: none; }

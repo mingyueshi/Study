@@ -139,7 +139,7 @@ test('a mathbook exercise return anchor opens the original knowledge card withou
   assert.deepEqual(page.writes, []);
 });
 
-function questionPractice(questions, correct) {
+function questionPractice(questions, correct, effects = true) {
   const board = element(), fields = {};
   const get = (selector) => fields[selector] || (fields[selector] = element());
   board.querySelector = get;
@@ -152,21 +152,21 @@ function questionPractice(questions, correct) {
   get('[data-qb-progress-fill]').style = {};
   get('[data-qb-stars]').hidden = true;
   board.dataset = {answerUrl: '/questionbank/api/answer/', practiceUrl: '/questionbank/practice/', size: 5};
-  const requests = [];
+  const requests = [], celebrations = [];
   run('questionbank/practice.js', vm.createContext({
     document: {
       querySelector: () => board,
       getElementById: () => ({textContent: JSON.stringify(questions)}),
       addEventListener() {}, cookie: '',
     },
-    window: {},
+    window: effects ? {StudyEffects: {celebrate: event => celebrations.push(event)}} : {},
     fetch: async (url, request) => {
       requests.push(JSON.parse(request.body));
       return {ok: true, json: async () => ({correct: correct[requests.length - 1]})};
     },
   }));
   return {
-    get, requests,
+    get, requests, celebrations,
     answer: (value) => question.handlers.click({
       target: {closest: (selector) => selector === '[data-qb-option]' ? {dataset: {value}} : null},
     }),
@@ -195,6 +195,41 @@ test('a self-check-only round displays its assessment without objective stars', 
   page.next();
   assert.equal(page.get('[data-qb-final-score]').textContent, '自评做对 1／1 题');
   assert.equal(page.get('[data-qb-stars]').hidden, true);
+});
+
+test('math celebration occurs once only after the full round is acknowledged', async () => {
+  const q = {type: 'truefalse', stem: '计算判断', area: 'math'};
+  const page = questionPractice([{...q, uuid: 'a'}, {...q, uuid: 'b'}], [true, false]);
+  await page.answer('true');
+  assert.equal(page.celebrations.length, 0);
+  page.next();
+  page.next(); // 旧按钮的重复点击不能跳过未作答题。
+  assert.equal(page.celebrations.length, 0);
+  await page.answer('false');
+  assert.equal(page.celebrations.length, 0);
+  page.next(); page.next();
+  assert.equal(page.celebrations.length, 1);
+  assert.equal(page.get('[data-qb-final-score]').textContent, '答对 1／2 题');
+});
+
+test('failed answer retries do not count toward completion', async () => {
+  const page = questionPractice([{type: 'truefalse', stem: '计算判断', area: 'math'}], [undefined, true]);
+  await page.answer('true');
+  assert.match(page.get('[data-qb-feedback-head]').textContent, /上报没成功/);
+  assert.equal(page.celebrations.length, 0);
+  await page.answer('true');
+  page.next();
+  assert.equal(page.celebrations.length, 1);
+  assert.equal(page.get('[data-qb-final-score]').textContent, '答对 1／1 题');
+});
+
+test('non-math rounds and missing effects preserve normal result rendering', async () => {
+  for (const [area, effects] of [['english', true], ['math', false]]) {
+    const page = questionPractice([{type: 'truefalse', stem: '判断题', area}], [true], effects);
+    await page.answer('true'); page.next();
+    assert.equal(page.celebrations.length, 0);
+    assert.equal(page.get('[data-qb-final-score]').textContent, '答对 1／1 题');
+  }
 });
 
 function speechPage({ supported = true, throws = false, controls = false, sequenceControls = false, pausable = false, textbookKind = 'words', stored = {}, voices = [] } = {}) {
@@ -1386,7 +1421,7 @@ test('study topic links resolve to real events, places, lessons and chapters', (
   assert.equal(connections.related('events', 'unknown'), '');
 });
 
-function originsAtlasPage(query = '') {
+function originsAtlasPage(query = '', motion = 'full') {
   const data = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'humanorigins/data/stations.json'), 'utf8'));
   const atlas = data.stations.find(station => station.slug === 'migration').atlas;
   const chinaSites = data.stations.find(station => station.slug === 'china-sites').clues;
@@ -1429,21 +1464,22 @@ function originsAtlasPage(query = '') {
   routes.replaceChildren = () => { routes.children = []; };
   routes.append = child => routes.children.push(child);
   const location = new URL('http://study.test/human-origins/migration/' + query), events = {}, timers = new Map();
-  let timerId = 0;
+  let timerId = 0, now = 0, offscreen;
+  const effects = {motion, watch: (_, pause) => { offscreen = pause; }};
   const doc = {hidden: false, getElementById: get, querySelectorAll: () => groups,
     createElementNS: make, createElement: make, addEventListener: (type, handler) => { events[type] = handler; }};
-  run('humanorigins/migration.js', vm.createContext({URL,
+  run('humanorigins/migration.js', vm.createContext({URL, Date: {now: () => now},
     document: doc,
     setTimeout: (callback, delay) => { const id = ++timerId; timers.set(id, {callback, delay}); return id; },
     clearTimeout: id => timers.delete(id),
     localStorage: {getItem: () => null, setItem() {}},
-    window: {location, addEventListener: (type, handler) => { events[type] = handler; },
+    window: {location, StudyEffects: effects, addEventListener: (type, handler) => { events[type] = handler; },
       history: {replaceState: (_, __, url) => { location.href = url.href; }}},
   }));
   const click = node => node.handlers.click({preventDefault() {}});
-  const fireNext = () => { const [id, timer] = timers.entries().next().value; timers.delete(id); timer.callback(); };
+  const fireNext = () => { const [id, timer] = timers.entries().next().value; timers.delete(id); now += timer.delay; timer.callback(); };
   const indexOf = year => atlas.steps.findIndex(step => step.years_ago === year);
-  return {atlas, get, steps, links, records, groups, controls, location, routes, click, events, timers, fireNext, indexOf, doc, markerLabels};
+  return {atlas, get, steps, links, records, groups, controls, location, routes, click, events, timers, fireNext, indexOf, doc, markerLabels, effects, offscreen: () => offscreen(), advance: ms => { now += ms; }};
 }
 
 test('origins atlas restores a dated region link and distinguishes later evidence', () => {
@@ -1613,4 +1649,35 @@ test('origins map selection pauses playback, restores deep links and drops invis
   assert.equal(page.location.searchParams.has('marker'), false);
   const invalid = originsAtlasPage('?year=40000&marker=missing');
   assert.equal(invalid.get('atlas-marker-detail').hidden, true);
+});
+
+
+test('origins reduced motion keeps manual dates and restart available without starting timers', () => {
+  const page = originsAtlasPage('?year=45000&region=europe', 'gentle');
+  assert.equal(page.get('atlas-play').disabled, true);
+  assert.equal(page.get('atlas-motion-note').hidden, false);
+  page.click(page.get('atlas-next'));
+  assert.equal(Number(page.get('atlas-route-progress').value), page.indexOf(40000) + 1);
+  assert.equal(page.routes.children.some(path => path.class === 'origins-route-arriving'), false);
+  page.click(page.get('atlas-restart'));
+  assert.equal(page.get('atlas-year').value, '0');
+  assert.equal(page.timers.size, 0);
+});
+
+test('origins preserves remaining reading time on offscreen pause and does not auto resume', () => {
+  const page = originsAtlasPage('?year=300000');
+  page.click(page.get('atlas-play'));
+  const duration = [...page.timers.values()][0].delay;
+  page.advance(1700);
+  page.offscreen();
+  assert.equal(page.timers.size, 0);
+  assert.equal(page.get('atlas-play')['aria-pressed'], 'false');
+  page.click(page.get('atlas-play'));
+  assert.equal([...page.timers.values()][0].delay, duration - 1700);
+  page.effects.motion = 'off'; page.events['study:effects-change']();
+  assert.equal(page.timers.size, 0);
+  assert.equal(page.get('atlas-play').disabled, true);
+  page.effects.motion = 'full'; page.events['study:effects-change']();
+  assert.equal(page.get('atlas-play').disabled, false);
+  assert.equal(page.timers.size, 0);
 });

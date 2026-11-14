@@ -441,6 +441,15 @@
 .gm-route-stop { background: #fff8e2; border-color: #ded1a5; }
 .gm-route-stop nav { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
 .gm-route-stop h2 { font-size: 22px; }
+.gm-tour-copy { flex: 1 1 100%; }
+.gm-tour-controls { flex: 1 1 100%; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; }
+.gm-tour-controls select { font: inherit; padding: 6px; border: 1px solid var(--atlas-border); border-radius: 8px; color: var(--ink); background: var(--card); }
+.gm-tour-controls progress { width: 140px; max-width: 100%; accent-color: #279d86; }
+.gm-tour-controls p { flex-basis: 100%; margin: 0; font-size: 15px; color: #51675e; }
+.gm-tour-controls button:disabled { opacity: .55; cursor: default; }
+.gm-tour-trace { fill: none; stroke: #e98a26; stroke-width: 5; stroke-linecap: round; stroke-dasharray: 1; pointer-events: none; animation: gm-tour-draw 1.6s ease-out both; }
+@keyframes gm-tour-draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@media (prefers-reduced-motion: reduce) { .gm-tour-trace { animation: none; } }
 .gm-route-next { padding: 4px 14px; border-radius: 10px; background: #e1f2e8; }
 .gm-kicker { color: #51675e; font-size: 14px; font-weight: 700; }
 .gm-route-track {

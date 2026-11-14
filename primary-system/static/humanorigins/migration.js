@@ -25,6 +25,12 @@
   let markerId = null;
   let playing = false, timer = null, generation = 0, playbackState = 'ready';
   let lastYear = null;
+  let remaining = null, deadline = 0, fill = null, displayedStep = null;
+  const clock = () => Date.now();
+  const reduced = window.matchMedia?.('(prefers-reduced-motion: reduce)');
+  const canPlay = () => window.StudyEffects ? window.StudyEffects.motion === 'full' : !reduced?.matches;
+  const duration = () => words.speeds.find(item => String(item.milliseconds) === speed.value)?.milliseconds || words.default_milliseconds;
+  const readingBar = document.getElementById('atlas-reading-fill');
   speed.value = String(words.default_milliseconds);
 
   function readLocation() {
@@ -56,7 +62,7 @@
         if (segment.length < 2) return;
         const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
         path.setAttribute('d', segment.map(([x, y], i) => `${i ? 'L' : 'M'}${x * 7.2} ${y * 2.92}`).join(' '));
-        if (lastYear !== null && lastYear > route.years_ago) {
+        if (canPlay() && lastYear !== null && lastYear > route.years_ago) {
           path.setAttribute('class', 'origins-route-arriving');
           path.setAttribute('pathLength', '1');
         }
@@ -208,9 +214,17 @@
     root.dataset.playing = String(playing);
     document.getElementById('atlas-playback-status').textContent = words[playbackState];
     document.getElementById('atlas-progress').textContent = `${stepIndex + 1} / ${atlas.steps.length} 站`;
+    document.getElementById('atlas-route-progress').value = stepIndex + 1;
+    document.getElementById('atlas-next-preview').textContent = stepIndex + 1 < atlas.steps.length
+      ? `下一站：${atlas.steps[stepIndex + 1].label}` : '已经看到今天，回顾一下人们走过的地方吧。';
+    play.disabled = !canPlay();
+    document.getElementById('atlas-motion-note').hidden = canPlay();
   }
 
   function render(updateLocation = true) {
+    if (displayedStep !== stepIndex) {
+      remaining = null; fill?.cancel(); fill = null; displayedStep = stepIndex;
+    }
     const step = atlas.steps[stepIndex];
     const selected = regions.get(regionId);
     range.value = String(stepIndex);
@@ -269,6 +283,9 @@
   }
 
   function pause() {
+    if (playing && timer !== null) remaining = Math.max(0, deadline - clock());
+    fill?.pause();
+    [...routeLayer.children].forEach(path => { path.classList.remove('origins-route-arriving'); path.removeAttribute('pathLength'); });
     cancelTimer();
     if (playing) playbackState = 'paused';
     playing = false;
@@ -278,10 +295,13 @@
   function schedule() {
     cancelTimer();
     const token = generation;
-    const duration = words.speeds.find(item => String(item.milliseconds) === speed.value)?.milliseconds
-      || words.default_milliseconds;
+    const wait = remaining ?? duration();
+    remaining = null;
+    deadline = clock() + wait;
+    fill?.cancel();
+    fill = readingBar.animate?.([{transform: `scaleX(${1 - wait / duration()})`}, {transform: 'scaleX(1)'}], {duration: wait, fill: 'forwards'});
     timer = setTimeout(() => {
-      if (!playing || token !== generation) return;
+      if (!playing || token !== generation || !canPlay() || document.hidden) return;
       timer = null;
       stepIndex++;
       markerId = null;
@@ -292,24 +312,24 @@
       }
       render();
       if (playing) schedule();
-    }, duration);
+    }, wait);
   }
 
   function start(fromBeginning = false) {
     if (document.hidden) return;
     cancelTimer();
-    if (fromBeginning || stepIndex === atlas.steps.length - 1) stepIndex = 0;
+    if (fromBeginning || stepIndex === atlas.steps.length - 1) { stepIndex = 0; remaining = null; fill?.cancel(); }
     regionId = atlas.steps[stepIndex].focus_region;
     markerId = null;
-    playing = true;
-    playbackState = 'playing';
+    playing = canPlay();
+    playbackState = playing ? 'playing' : 'paused';
     render();
-    schedule();
+    if (playing) schedule();
   }
 
   play.addEventListener('click', () => { if (playing) pause(); else start(); });
   document.getElementById('atlas-restart').addEventListener('click', () => start(true));
-  speed.addEventListener('change', () => { if (playing) schedule(); });
+  speed.addEventListener('change', () => { remaining = null; fill?.cancel(); if (playing) schedule(); });
   range.addEventListener('input', () => { pause(); stepIndex = Number(range.value); render(); });
   previous.addEventListener('click', () => { pause(); stepIndex = Math.max(0, stepIndex - 1); render(); });
   next.addEventListener('click', () => { pause(); stepIndex = Math.min(atlas.steps.length - 1, stepIndex + 1); render(); });
@@ -339,6 +359,18 @@
   });
   document.addEventListener('visibilitychange', () => { if (document.hidden) pause(); });
   window.addEventListener('pagehide', pause);
+  const preference = () => {
+    if (!canPlay()) {
+      pause();
+    }
+    renderPlayback();
+  };
+  document.addEventListener('study:effects-change', preference);
+  reduced?.addEventListener('change', preference);
+  if (window.StudyEffects) window.StudyEffects.watch(document.getElementById('atlas-player'), pause);
+  else if (typeof IntersectionObserver === 'function') {
+    new IntersectionObserver(entries => { if (entries.some(entry => !entry.isIntersecting)) pause(); }).observe(document.getElementById('atlas-player'));
+  }
 
   readLocation();
   render(false);

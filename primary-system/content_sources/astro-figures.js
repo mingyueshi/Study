@@ -142,6 +142,8 @@ const AstroFigures = (() => {
 
   /* 日食与月食 */
   const eclipse = () => {
+    const interactive = typeof window !== 'undefined' && window.AstroObservation?.html('eclipse');
+    if (interactive) return interactive;
     const sun = (cx, cy) =>
       `<circle cx="${cx}" cy="${cy}" r="26" fill="${SUN}"/>` + rays(cx, cy, 30, 38, SUN, 30);
     const earth = (cx, cy) =>
@@ -396,16 +398,11 @@ const AstroFigures = (() => {
   }
 
   /* 月相变化 */
-  const MOON_PHASES = [
-    { key: 'new', label: '新月', cal: '农历初一', w: 0, bow: 0, side: 'right', n1: '月亮在地球和太阳之间，亮面背对我们', n2: '整晚几乎看不见月亮' },
-    { key: 'waxcres', label: '峨眉月', cal: '农历初三初四', w: 0.78, bow: 0, side: 'right', n1: '弯弯的月牙，亮面朝西（右）', n2: '日落后挂在西边天空' },
-    { key: 'firstq', label: '上弦月', cal: '农历初七初八', w: 0, bow: 0, side: 'right', half: true, n1: '右半边亮，亮面朝西', n2: '正午月出、半夜月落，前半夜可见' },
-    { key: 'waxgib', label: '盈凸月', cal: '农历十一十二', w: 0.5, bow: 1, side: 'right', n1: '大半个月亮亮着', n2: '傍晚升起，大半夜都能看到' },
-    { key: 'full', label: '满月', cal: '农历十五十六', full: true, n1: '亮面全对地球，通宵可见', n2: '这时地球在太阳和月球中间' },
-    { key: 'wanggib', label: '亏凸月', cal: '农历十八十九', w: 0.5, bow: 1, side: 'left', n1: '亮面从西边开始亏', n2: '月出推迟，后半夜可见' },
-    { key: 'lastq', label: '下弦月', cal: '农历廿二廿三', w: 0, bow: 0, side: 'left', half: true, n1: '左半边亮，亮面朝东（左）', n2: '半夜月出、正午月落，后半夜可见' },
-    { key: 'wancres', label: '残月', cal: '农历廿六廿七', w: 0.78, bow: 0, side: 'left', n1: '弯弯的月牙，亮面朝东', n2: '黎明前挂在东边天空' },
-  ];
+  // 月相说明只有一份，动效不可用时仍可点选静态图。
+  const MOON_PHASES = (typeof ASTRO_OBSERVATION === 'undefined' ? [] : ASTRO_OBSERVATION.phases).map((phase, i) => ({
+    ...phase, n1: phase.note, n2: phase.cal, full: i === 4, half: i === 2 || i === 6,
+    w: i === 0 ? 0 : Math.abs(Math.cos(i * Math.PI / 4)), bow: i > 2 && i < 6 ? 1 : 0, side: i < 4 ? 'right' : 'left',
+  }));
   /* 右侧受亮的月面路径；左侧受亮时整体镜像 */
   function moonLitPath(cx, cy, R, ph) {
     if (ph.full) {
@@ -419,18 +416,18 @@ const AstroFigures = (() => {
     return `M ${cx} ${cy - R} A ${R} ${R} 0 0 1 ${cx} ${cy + R} A ${w.toFixed(1)} ${R} 0 0 ${ph.bow} ${cx} ${cy - R} Z`;
   }
   const demoMoonphases = () => {
+    const interactive = typeof window !== 'undefined' && window.AstroObservation?.html('moon');
+    if (interactive) return interactive;
+    if (!MOON_PHASES.length) return '<p>月相资料暂未加载，请先阅读下方知识要点。</p>';
     const cx = 170, cy = 100, R = 70;
-    let s = `<svg class="fig-svg" viewBox="0 0 640 196">`;
+    let s = `<svg class="fig-svg" viewBox="0 0 640 215">`;
     s += starDots([[300, 30, 2], [360, 58, 1.5], [420, 24, 2.2], [500, 44, 1.6], [560, 26, 2], [610, 60, 1.5], [470, 84, 1.4], [600, 100, 1.8]]);
     s += `<circle cx="${cx}" cy="${cy}" r="${R}" fill="#3b405e" stroke="#565d85" stroke-width="2.5"/>`;
     s += `<g class="moon-lit"></g>`;
     s += txt(cx, cy + R + 30, '月相这样变，约 29.5 天一轮', { fs: 12.5, fill: MUT });
     /* 右侧信息 */
     s += `<text class="moon-name" x="330" y="66" font-size="18" font-weight="900" fill="${INK}"></text>`;
-    s += `<text class="moon-cal" x="330" y="94" font-size="13.5" font-weight="800" fill="#7a5b18"></text>`;
-    s += `<text class="moon-n1" x="330" y="126" font-size="13" font-weight="700" fill="#4a4f63"></text>`;
-    s += `<text class="moon-n2" x="330" y="150" font-size="13" font-weight="700" fill="#4a4f63"></text>`;
-    return s + '</svg>' +
+    return s + '</svg><p class="moon-cal astro-observe-cause"></p><p class="moon-n1 astro-observe-note"></p><p class="moon-n2 astro-observe-model"></p>' +
       `<div class="fig-ctrl">` +
       MOON_PHASES.map(ph =>
         `<button class="fig-btn" data-fig-act="astro-moon" data-v="${ph.key}">${ph.label}</button>`).join('') +
@@ -451,7 +448,7 @@ const AstroFigures = (() => {
     /* 新月：不画亮面 */
     fig.querySelector('.moon-lit').innerHTML = lit;
     fig.querySelector('.moon-name').textContent = ph.label;
-    fig.querySelector('.moon-cal').textContent = ph.cal + ' · 亮面比例在变，不是影子挡住';
+    fig.querySelector('.moon-cal').textContent = '亮面比例在变，不是地球影子挡住。';
     fig.querySelector('.moon-n1').textContent = '🌙 ' + ph.n1;
     fig.querySelector('.moon-n2').textContent = '⏰ ' + ph.n2;
     fig.querySelectorAll('[data-fig-act="astro-moon"]').forEach(b => b.classList.toggle('fig-on', b === btn));
@@ -1274,12 +1271,12 @@ const AstroFigures = (() => {
 
   const DEFAULT_CAPS = {
     'demo-astro-planets': '互动演示：点行星按钮，看它的档案和特点',
-    'demo-astro-moonphases': '互动演示：点月相名称，看月亮的样子和农历日期',
+    'demo-astro-moonphases': '月相观察：看位置关系与月面亮暗怎样一起变化',
     'astro-sun-facts': '太阳的数字档案：直径约 139 万千米，质量占太阳系 99.8% 以上',
     'astro-planet-bars': '八大行星直径排行：木星最大，能装下 1300 多个地球',
     'astro-asteroid-belt': '八大行星排队绕太阳，小行星带卡在火星和木星之间（不按真实比例）',
     'astro-moon-facts': '月球离地球约 38 万千米，直径约是地球的四分之一',
-    'astro-eclipse': '日食月球在中间（农历初一），月食地球在中间（农历十五）',
+    'astro-eclipse': '日食月球在中间，月食地球在中间；是否发生还要看影子有没有对准',
     'astro-star-life': '恒星的一生：太阳约 50 亿年后会变成红巨星，最后成为白矮星',
     'astro-lightyear': '光年是距离单位：光走一年约 9.5 万亿千米',
     'astro-meteor': '流星烧在大气里，陨石落在地面上，彗尾永远背向太阳',
@@ -1328,7 +1325,7 @@ const AstroFigures = (() => {
   function bindDelegates(doc) {
     doc.addEventListener('click', e => {
       const b = e.target.closest('[data-fig-act]');
-      if (!b) return;
+      if (!b || b.disabled) return;
       const fig = b.closest('.fig');
       if (!fig) return;
       const act = b.dataset.figAct;
@@ -1343,11 +1340,13 @@ const AstroFigures = (() => {
     const initIn = root => {
       root.querySelectorAll('.fig').forEach(fig => {
         const id = fig.dataset.fig;
+        if (fig.querySelector('.astro-observation')) { window.AstroObservation?.mount(fig); return; }
         if (id === 'demo-astro-planets' && !fig.dataset.init) { planetApply(fig, 'earth', fig.querySelector('[data-fig-act="astro-planet"][data-v="earth"]')); fig.dataset.init = '1'; }
         else if (id === 'demo-astro-moonphases' && !fig.dataset.init) { moonApply(fig, 'full', fig.querySelector('[data-fig-act="astro-moon"][data-v="full"]')); fig.dataset.init = '1'; }
       });
     };
     const mo = new MutationObserver(muts => {
+      window.AstroObservation?.prune();
       muts.forEach(m => m.addedNodes.forEach(n => {
         if (n.nodeType === 1) {
           if (n.matches && n.matches('.fig')) initIn(n.parentElement || document);

@@ -50,6 +50,14 @@
               <div class="territory-range"><label for="territory-range">时间向后 →</label><input type="range" id="territory-range" min="0" value="0" step="1"></div>
               <button type="button" id="territory-next" aria-label="下一张版图">下一张 →</button>
             </div>
+            <div class="territory-playback" id="territory-playback" hidden>
+              <button type="button" id="territory-play" aria-pressed="false">播放版图变化</button>
+              <button type="button" id="territory-restart">回到第一张</button>
+              <label>每张停留 <select id="territory-speed"><option value="6000">6 秒</option><option value="10000">10 秒</option></select></label>
+              <progress id="territory-progress" value="1" max="22" aria-label="版图阶段进度"></progress>
+              <p id="territory-play-status" role="status"></p>
+              <small>每一格是一个历史阶段，实际经历的年数不同。播放展示各阶段的示意范围。</small>
+            </div>
             <div class="territory-options">
               <label><input type="checkbox" id="territory-compare"> 叠加另一阶段</label>
               <label id="territory-compare-label" hidden>对照哪一张 <select id="territory-compare-select"></select></label>

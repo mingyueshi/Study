@@ -5,6 +5,31 @@
    ============================================================ */
 
 /* ---------- 站点横幅 ---------- */
+.astro-observe-stage { overflow-x: auto; margin: 12px 0; border-radius: 14px; }
+.astro-observe-stage svg { min-width: 560px; }
+.astro-observe-stage text { fill: #34384d; font-size: 15px; font-weight: 750; }
+.astro-observe-stage:focus-visible { outline: 3px solid #7b67b4; outline-offset: 2px; }
+.astro-observe-scroll { display: none; }
+.astro-observe-readout { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px 24px; font-size: 17px; font-weight: 800; color: #554181; font-variant-numeric: tabular-nums; }
+.astro-observe-range { display: grid; gap: 8px; margin: 16px 0; font-size: 15px; font-weight: 700; color: #554181; }
+.astro-observe-range input { width: 100%; accent-color: #7b67b4; min-height: 28px; }
+.astro-observe-note { padding: 12px 16px; margin: 12px 0; border-left: 4px solid #8b65c9; border-radius: 4px 12px 12px 4px; background: #f0edfa; color: #493569; font-size: 17px; font-weight: 700; line-height: 1.8; }
+.astro-observe-controls { padding: 12px; margin: 14px 0; background: #f4f5fc; border-radius: 12px; }
+.astro-observe-controls .fig-ctrl { margin: 0; }
+.astro-observe-controls p, .astro-observe-model { margin: 8px 0; font-size: 15px; line-height: 1.75; color: #536076; }
+.astro-observe-cause, .astro-observe-order { margin: 12px 0; font-size: 16px; line-height: 1.8; color: #4d4269; font-weight: 750; }
+.astro-observation .fig-btn { min-height: 40px; font-size: 15px; }
+.astro-observation .fig-btn:disabled { opacity: .5; transform: none; cursor: default; }
+.astro-observation [hidden] { display: none; }
+.astro-observe-source { font-size: 14px; line-height: 1.8; color: #536076; }
+.astro-observe-source summary { cursor: pointer; }
+.astro-observe-source a { display: block; padding: 4px 0; }
+.fig:has(.astro-observation):hover, .fig:has(.astro-observation):hover .fig-svg { transform: none; }
+[data-eclipse-moon] { transition: transform .3s ease; }
+@media (max-width: 700px) { .astro-observe-scroll { display: block; font-size: 14px; color: #536076; line-height: 1.6; } }
+@media (prefers-reduced-motion: reduce) { [data-eclipse-moon] { transition: none; } }
+@media print { .astro-observe-controls, .astro-observe-source, .astro-observe-range, .astro-observation .fig-ctrl { display: none; } }
+
 .textbook-banner {
   display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
   margin: 0 0 16px; padding: 12px 16px;
@@ -341,6 +366,13 @@
 .roam-controls button[aria-pressed="true"] { color: #fff; border-color: #365394; background: #365394; }
 .roam-controls button:hover, .roam-planet-picker button:hover { background: var(--soft); color: var(--ink); }
 .roam-controls [data-roam-play] { margin-left: auto; color: var(--course-action); font-weight: 750; }
+.roam-time-controls { flex-basis: 100%; display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding: 14px; border-radius: 10px; background: var(--soft); }
+.roam-time-controls[hidden] { display: none; }
+.roam-time-controls select { padding: 8px; background: var(--card); color: var(--ink); border: 1px solid var(--line); border-radius: 8px; font: inherit; }
+.roam-time-controls p { flex-basis: 100%; margin: 0; font-size: 17px; }
+.roam-time-controls output { font-weight: 750; font-variant-numeric: tabular-nums; }
+.roam-time-controls .roam-motion-note { font-size: 15px; color: var(--muted); }
+.roam-controls button:disabled { opacity: .55; cursor: default; }
 .astro-roam .roam-model-note { margin: 12px 0; font-size: 16px; min-height: 3.5em; }
 .roam-solar-stage { background: #101c32; border-radius: 12px; overflow: hidden; }
 .roam-solar-stage svg { display: block; width: 100%; max-height: 620px; }

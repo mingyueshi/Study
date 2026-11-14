@@ -71,6 +71,17 @@
     const all = heart.querySelector('[data-heart-all]');
     let current = -1;
     let playback = null;
+    let playbackGeneration = 0;
+    const motionMedia = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const canPlay = () => !motionMedia.matches && (!window.StudyEffects || window.StudyEffects.motion === 'full');
+    const motionStatus = heart.querySelector('[data-heart-motion-status]');
+    function syncMotion() {
+      play.disabled = !canPlay();
+      play.setAttribute('aria-pressed', String(playback !== null));
+      if (motionStatus) motionStatus.textContent = canPlay()
+        ? playback !== null ? '正在连续观察，可随时暂停。' : '已暂停，可选择阶段或连续观察。'
+        : '已减少动效，请点击阶段按钮逐步观察。';
+    }
 
     for (const route of flow.querySelectorAll('.flow-route')) {
       const particle = route.cloneNode();
@@ -90,12 +101,14 @@
     }
 
     function stopPlayback() {
+      playbackGeneration++;
       clearInterval(playback);
       playback = null;
       delete flow.dataset.playing;
       delete heart.dataset.playing;
       noteList.setAttribute('aria-live', 'polite');
       play.textContent = '连续播放';
+      syncMotion();
     }
 
     choices.forEach((button, index) => {
@@ -109,6 +122,7 @@
       showPhase(-1);
     });
     play.addEventListener('click', () => {
+      if (!canPlay() || document.hidden) return;
       if (playback !== null) {
         stopPlayback();
         return;
@@ -118,12 +132,28 @@
       heart.dataset.playing = '';
       play.textContent = '暂停播放';
       if (current < 0) showPhase(0);
-      playback = setInterval(() => showPhase((current + 1) % choices.length), 2600);
+      const token = ++playbackGeneration;
+      playback = setInterval(() => {
+        if (token !== playbackGeneration) return;
+        if (!canPlay() || document.hidden || !heart.isConnected) { stopPlayback(); return; }
+        showPhase((current + 1) % choices.length);
+      }, 2600);
+      syncMotion();
     });
     document.addEventListener('visibilitychange', () => {
       if (document.hidden && playback !== null) stopPlayback();
     });
     showPhase(-1);
+    const preferencesChanged = () => { if (!canPlay()) stopPlayback(); syncMotion(); };
+    document.addEventListener('study:effects-change', preferencesChanged);
+    motionMedia.addEventListener('change', preferencesChanged);
+    window.addEventListener('pagehide', stopPlayback);
+    if (window.StudyEffects?.watch) window.StudyEffects.watch(heart, stopPlayback);
+    else if (typeof IntersectionObserver === 'function') {
+      const observer = new IntersectionObserver(entries => { if (entries.some(entry => !entry.isIntersecting)) stopPlayback(); });
+      observer.observe(heart);
+    }
+    syncMotion();
     heart.querySelector('[data-heart-controls]').hidden = false;
   }
 

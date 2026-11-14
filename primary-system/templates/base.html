@@ -7,7 +7,11 @@
   <title>{% block title %}乐学堂 · 一起把世界读懂{% endblock %}</title>
   <link rel="icon" href="{% static 'icons/book.svg' %}" type="image/svg+xml">
   <link rel="stylesheet" href="{% static 'platform.css' %}?v=5">
+  <link rel="stylesheet" href="{% static 'select-controls.css' %}?v=1">
+  <script src="{% static 'select-controls.js' %}?v=1" defer></script>
   <link rel="stylesheet" href="{% static 'sidebar-layout.css' %}?v=3">
+  <link rel="stylesheet" href="{% static 'study-effects.css' %}?v=1">
+  <script src="{% static 'study-effects.js' %}?v=1" data-confetti-url="{% static 'vendor/canvas-confetti/confetti.browser.js' %}"></script>
 </head>
 <body>
   <a class="skip-link" href="#main">跳到主要内容</a>
@@ -17,6 +21,16 @@
       <div class="site-top-inner">
         <p class="site-top-welcome">{% if user.is_authenticated %}欢迎回来，一起探索新知识{% else %}欢迎来到乐学堂，一起探索新知识{% endif %}</p>
         <div class="account">
+          <details id="study-effects-settings" class="study-effects-settings" hidden>
+            <summary>动效与声音</summary>
+            <div class="study-effects-panel">
+              <label class="study-motion-label" for="study-motion">动效
+                <select id="study-motion"><option value="auto">跟随系统</option><option value="gentle">轻柔（减少动态）</option><option value="off">关闭动效</option></select>
+              </label>
+              <label><input id="study-sound" type="checkbox">完成时播放轻音效</label>
+              <p id="study-effects-note">设置保存在这个浏览器。音效不会打断朗读。</p>
+            </div>
+          </details>
           {% if user.is_authenticated %}
             <a class="account-profile" href="{% url 'profile' %}" title="{{ user }} · 学习偏好" {% if current == 'profile' or current == 'password_change' or current == 'password_change_done' %}aria-current="location"{% endif %}><span class="account-avatar" aria-hidden="true">{{ user|stringformat:'s'|slice:':1' }}</span><span class="account-name">{{ user }}</span><span class="account-profile-label">学习偏好</span></a>
             {% if user.is_staff %}<a class="site-top-link" href="{% url 'admin:index' %}">管理后台 <span aria-hidden="true">↗</span></a>{% endif %}

@@ -5,6 +5,7 @@
   <p>{{ station.atlas.intro }}</p>
   <p class="origins-identity">{{ station.atlas.identity_note }}</p>
 
+  <div id="atlas-player">
   <div class="origins-atlas-controls" hidden>
     <div class="origins-atlas-current">
       <label for="atlas-year">把时间拨到 <strong id="atlas-year-label">今天</strong></label>
@@ -17,6 +18,13 @@
       <span id="atlas-progress"></span>
     </div>
     <p id="atlas-playback-status" class="origins-note" role="status">{{ station.atlas.playback.ready }}</p>
+    <div class="origins-reading-progress">
+      <progress id="atlas-route-progress" max="{{ station.atlas.steps|length }}" value="{{ station.atlas.steps|length }}" aria-label="年代节点进度"></progress>
+      <span id="atlas-next-preview"></span>
+      <small>细进度条走完，就到下一站；暂停可以慢慢读。</small>
+      <span class="origins-reading-track" aria-hidden="true"><span id="atlas-reading-fill"></span></span>
+    </div>
+    <p id="atlas-motion-note" class="origins-note" hidden>已减少连续运动。用「更早／更晚」或年代按钮，一站一站看线索。</p>
     <input id="atlas-year" type="range" min="0" max="{{ station.atlas.steps|length|add:'-1' }}" value="{{ station.atlas.steps|length|add:'-1' }}" step="1" aria-describedby="atlas-scale-note">
     <div class="origins-atlas-steps" aria-label="选择年代">
       {% for step in station.atlas.steps %}<button type="button" data-atlas-step="{{ forloop.counter0 }}" aria-pressed="false">{{ step.label }}</button>{% endfor %}
@@ -56,6 +64,7 @@
       <ul id="atlas-local-people"></ul>
       <p class="origins-note">{{ station.atlas.playback.note }}</p>
     </section>
+  </div>
   </div>
   <section class="origins-map-uncertain" aria-labelledby="atlas-uncertain-heading" hidden>
     <h3 id="atlas-uncertain-heading">{{ station.atlas.map_key.uncertain_heading }}</h3>
@@ -105,4 +114,4 @@
   </div>
 </section>
 {{ station.atlas|json_script:'origins-atlas-data' }}
-<script src="{% static 'humanorigins/migration.js' %}?v=4" defer></script>
+<script src="{% static 'humanorigins/migration.js' %}?v=5" defer></script>

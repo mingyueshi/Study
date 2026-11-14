@@ -6,6 +6,7 @@ from lexicon.lookup_sources import ready_sources, source_rows
 from lexicon.reference_views import redirect_lookup
 
 from .property_labels import LABELS
+from .strokes import writer_data
 
 try:
     from .evolution_chars import CHARS as EVOLUTION_HALL_CHARS
@@ -73,6 +74,7 @@ def detail(request, character):
             },
             "has_unihan": row is not None,
             "asset": asset,
+            "stroke_data": writer_data(asset),
             "properties": properties,
             "in_evolution_hall": character in EVOLUTION_HALL_CHARS,
         },

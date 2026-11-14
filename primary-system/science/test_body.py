@@ -20,7 +20,7 @@ class HumanBodyStationTests(SimpleTestCase):
                 self.assertContains(index, f'href="{lesson_url}"')
                 lesson = self.client.get(lesson_url)
                 self.assertContains(lesson, f'{label} · 人体奥秘站')
-                self.assertContains(lesson, '/static/science/body.js?v=3')
+                self.assertContains(lesson, '/static/science/body.js?v=20261114b7')
                 self.assertContains(lesson, 'role="img"')
                 self.assertContains(lesson, 'id="gallery"')
                 self.assertContains(lesson, 'id="checkup"')
@@ -32,6 +32,7 @@ class HumanBodyStationTests(SimpleTestCase):
         response = self.client.get(url)
         self.assertContains(response, 'id="heart"')
         self.assertContains(response, 'id="pulse"')
+        self.assertContains(response, 'data-heart-motion-status role="status"')
         self.assertContains(response, 'data-seconds="30"')
         self.assertContains(response, '心脏正面简化剖面')
         for asset in ('science/body.css', 'science/body.js'):

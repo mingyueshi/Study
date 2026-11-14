@@ -1,7 +1,7 @@
 {% extends 'base.html' %}{% load static %}{% block title %}{{ eyebrow }} · 乐学堂{% endblock %}
-{% block content %}<link rel="stylesheet" href="{% static 'questionbank/bank.css' %}?v=4">
+{% block content %}<link rel="stylesheet" href="{% static 'questionbank/bank.css' %}?v=5">
 <script src="{% static 'speech.js' %}" defer></script><script src="{% static 'tts.js' %}" defer></script>
-<script src="{% static 'questionbank/practice.js' %}?v=3" defer></script>
+<script src="{% static 'questionbank/practice.js' %}?v=4" defer></script>
 <nav class="qb-crumb"><a href="{{ home_url }}">← 回{{ home_label }}</a></nav>
 <header class="qb-practice-head">
   <p class="eyebrow">{% if mode_wrong %}错题重练{% else %}{{ eyebrow }}{% endif %}</p>
@@ -64,6 +64,7 @@
       </section>
       <section class="qb-result" hidden data-qb-result>
         <p class="qb-result-emoji" aria-hidden="true">🏁</p>
+        <h2>这一组练完啦！</h2>
         <p class="qb-result-stars" data-qb-stars hidden></p>
         <p class="qb-result-score" data-qb-final-score></p>
         <p class="qb-result-praise" data-qb-praise></p>

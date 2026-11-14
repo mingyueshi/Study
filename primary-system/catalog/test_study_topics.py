@@ -41,6 +41,32 @@ class TopicMarkup(HTMLParser):
 
 
 class StudyTopicPageTests(SimpleTestCase):
+    def test_science_and_geography_share_local_process_observation_assets(self):
+        for route, consumer in (('science-lab', 'sci/sci-figures.js'), ('geography-study', 'geo/lab.js')):
+            with self.subTest(route=route):
+                page = TopicMarkup(self.client.get(reverse(route)).content.decode())
+                assets = [url.split('?')[0] for url in page.assets]
+                for filename in ('sci-process.css', 'sci-process-data.js', 'sci-process.js'):
+                    self.assertIn(f'/static/study_topics/sci/{filename}', assets)
+                self.assertLess(assets.index('/static/study_topics/sci/sci-process-data.js'),
+                                assets.index('/static/study_topics/sci/sci-process.js'))
+                self.assertLess(assets.index('/static/study_topics/sci/sci-process.js'),
+                                assets.index(f'/static/study_topics/{consumer}'))
+                if route == 'science-lab':
+                    data = '/static/study_topics/sci/sci-experiments-data.js'
+                    player = '/static/study_topics/sci/sci-experiments.js'
+                    self.assertIn(data, assets)
+                    self.assertIn(player, assets)
+                    self.assertLess(assets.index(data), assets.index(player))
+                    self.assertLess(assets.index(player), assets.index(f'/static/study_topics/{consumer}'))
+                else:
+                    data = '/static/study_topics/geo/earth-data.js'
+                    player = '/static/study_topics/geo/earth.js'
+                    self.assertIn(data, assets)
+                    self.assertIn(player, assets)
+                    self.assertLess(assets.index(data), assets.index(player))
+                    self.assertLess(assets.index(player), assets.index('/static/study_topics/geo/lab.js'))
+
     def test_pages_render_in_platform_shell_with_local_assets(self):
         for name in (*HISTORY_PAGES, *GEOGRAPHY_PAGES, *(course[1] for course in COURSES)):
             with self.subTest(name=name):
