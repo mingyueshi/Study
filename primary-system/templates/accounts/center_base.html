@@ -1,6 +1,6 @@
 {% extends 'base.html' %}{% load static %}
 {% block content %}
-<link rel="stylesheet" href="{% static 'accounts/center.css' %}?v=2">
+<link rel="stylesheet" href="{% static 'accounts/center.css' %}?v=3">
 <script src="{% static 'accounts/center.js' %}?v=1" defer></script>
 <div class="account-center {% block center_class %}{% endblock %}">
   <header class="account-heading">
@@ -11,7 +11,14 @@
     </div>
     <div class="account-heading-art" aria-hidden="true"><span>✦</span>{% block center_icon %}<img src="{% static 'icons/book.svg' %}" alt="" width="82" height="82">{% endblock %}<span>✧</span></div>
   </header>
-  {% block center_nav %}{% if user.is_authenticated %}{% include 'accounts/center_nav.html' %}{% endif %}{% endblock %}
-  {% block center_content %}{% endblock %}
+  <div class="account-center-layout" data-sidebar-label="用户中心导航" data-sidebar-collapsible="false">
+    <div class="account-center-content">{% block center_content %}{% endblock %}</div>
+    {% block center_nav %}{% if user.is_authenticated %}
+    <aside class="account-center-sidebar" aria-label="用户中心导航">
+      <p class="account-center-nav-title">用户中心</p>
+      {% include 'accounts/center_nav.html' %}
+    </aside>
+    {% endif %}{% endblock %}
+  </div>
 </div>
 {% endblock %}

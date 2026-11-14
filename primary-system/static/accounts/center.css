@@ -9,12 +9,17 @@
 .account-heading-art > img, .account-heading-key { display: grid; place-items: center; width: 116px; height: 116px; padding: 17px; border: 3px solid #fff9; border-radius: 28px; background: #ffe2a5; box-shadow: 0 7px 0 #5265370a; transform: rotate(8deg); }
 .account-heading-art > span { color: #a77925; font-size: 30px; }
 .account-heading-art > .account-heading-key { color: #6d6324; font-size: 62px; line-height: 1; }
-.account-center-nav { display: flex; flex-wrap: wrap; gap: 8px; padding: 8px; margin: 18px 0 30px; border: 1px solid var(--line); border-radius: 18px; background: var(--white); }
-.account-center-nav a { display: flex; flex: 1 1 180px; align-items: center; justify-content: center; gap: 10px; min-height: 52px; padding: 10px 18px; border: 1px solid transparent; border-radius: 12px; font-size: 18px; font-weight: 650; }
+.account-center-layout { min-width: 0; gap: 28px; margin-top: 28px; }
+.account-center-layout:has(> .account-center-sidebar) { display: grid; grid-template-columns: minmax(0, 1fr) clamp(240px, 20vw, 280px); align-items: start; }
+.account-center-content { min-width: 0; }
+.account-center-sidebar { min-width: 0; padding: 16px; border: 1px solid var(--line); border-radius: 16px; background: var(--white); }
+.account-center-nav-title { margin: 0 0 12px; color: var(--green-dark); font-size: 18px; font-weight: 750; }
+.account-center-nav { display: flex; flex-direction: column; gap: 8px; }
+.account-center-nav a { display: flex; align-items: center; justify-content: flex-start; gap: 10px; min-height: 56px; padding: 10px 14px; border: 1px solid transparent; border-radius: 12px; font-size: 18px; font-weight: 650; }
 .account-center-nav a:hover { background: #f0f5e9; color: var(--green); }
 .account-center-nav a[aria-current] { border-color: #c7dbbc; background: #eaf3e2; color: var(--green-dark); }
 .account-nav-key { display: grid; place-items: center; width: 26px; height: 26px; color: #8b6822; font-size: 29px; line-height: 1; }
-.account-settings { max-width: 1240px; margin-inline: auto; }
+.account-settings { min-width: 0; }
 .account-panel { min-width: 0; padding: clamp(24px, 2.8vw, 40px); border: 1px solid var(--line); border-radius: 25px; background: var(--white); }
 .account-panel + .account-panel { margin-top: 24px; }
 .account-panel-heading { display: flex; flex-wrap: wrap; align-items: start; gap: 12px 16px; margin-bottom: 26px; }
@@ -74,8 +79,10 @@
 .account-success h2 { margin: 0 0 14px; font-size: 29px; }
 .account-success p { margin-bottom: 26px; color: var(--muted); font-size: 18px; }
 .account-success-actions { display: grid; justify-items: center; gap: 16px; }
-.account-entry { max-width: 1100px; margin: 0 auto; }
+/* 欢迎区沿用平台宽度，填写区域由 account-form-card 单独约束。 */
+.account-entry { max-width: none; }
 .account-entry .account-heading { margin-bottom: 28px; }
+.account-entry .account-center-layout { margin-top: 0; }
 .account-entry .account-form-card { max-width: 700px; }
 .account-submit { width: 100%; margin-top: 30px; }
 .account-entry-switch { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 6px 16px; margin-top: 26px; padding: 18px; border: 1px solid #dbe5d0; border-radius: 14px; background: #f1f6e9; font-size: 16px; }
@@ -85,20 +92,23 @@
 .account-admin-link { display: inline-flex; align-items: center; gap: 12px; min-height: 44px; margin-top: 10px; color: var(--muted); font-size: 15px; }
 
 @media (max-width: 899px) {
+  .account-center-layout:has(> .account-center-sidebar) { grid-template-columns: minmax(0, 1fr); }
+  .account-center-sidebar { grid-row: 1; }
   .account-heading { padding: 28px; }
   .account-heading-art { gap: 8px; padding-inline: 0; }
   .account-heading-art > img, .account-heading-key { width: 92px; height: 92px; padding: 12px; border-radius: 23px; }
   .account-heading-art > span { font-size: 23px; }
   .account-heading-art > .account-heading-key { font-size: 50px; }
-  .account-center-nav a { flex-basis: 140px; padding-inline: 10px; }
+  .account-center-nav a { padding-inline: 10px; }
 }
 @media (max-width: 599px) {
   .account-center { padding-top: 20px; }
+  .account-center-layout { gap: 20px; margin-top: 20px; }
   .account-heading { gap: 12px; padding: 24px; border-radius: 23px; }
   .account-heading h1 { font-size: 32px; }
   .account-heading-note { font-size: 17px; }
   .account-heading-art { display: none; }
-  .account-center-nav { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; padding: 6px; margin: 14px 0 22px; }
+  .account-center-nav { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; }
   .account-center-nav a { gap: 8px; min-height: 50px; padding: 8px 6px; font-size: 16px; }
   .account-center-nav a:last-child:nth-child(5) { grid-column: 1 / -1; }
   .account-center-nav img { width: 24px; height: 24px; }

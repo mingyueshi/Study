@@ -4,6 +4,7 @@
   'use strict';
   const storageKey = 'english_textbook_sidebar_side_v1';
   const registrations = [
+    ['.account-center-layout', '.account-center-sidebar', 'clamp(240px, 20vw, 280px)', 900, '.account-center-nav-title'],
     ['.library-layout:not(.english-library-layout)', '.unit-nav', 'clamp(250px, 20vw, 330px)', 760, 'h2, .grammar-progress-row'],
     ['.study-page .study-shell', '.sidebar', 'clamp(240px, 20vw, 280px)', 1000, '.sidebar-label, .stats-pill'],
     ['.reader-layout', '.progress-panel', 'clamp(300px, 23vw, 400px)', 900],
