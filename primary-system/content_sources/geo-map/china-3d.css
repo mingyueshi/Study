@@ -84,7 +84,12 @@
 #gm3-flow-status { font-size: 14px; color: var(--ink-soft); }
 .gm3-label-leaders { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; stroke-width: 1; }
 .gm3-map-label { position: absolute; transform: translate(-50%, -50%); white-space: nowrap; color: #233d3b; font-size: clamp(12px, 1vw, 16px); font-weight: 750; line-height: 1.2; text-shadow: 0 1px 3px #fff, 1px 0 3px #fff, -1px 0 3px #fff; }
-.gm3-map-label.is-selected { color: #fff; background: #255d68; padding: 5px 10px; border-radius: 8px; text-shadow: none; z-index: 1; }
+.gm3-map-label[data-kind="province"] { padding: 4px 8px; border: 1px solid #73634d; border-radius: 7px; background: #fffdf5f5; color: #30291f; font-family: inherit; font-size: clamp(14px, 1vw, 18px); line-height: 1.2; font-weight: 850; text-shadow: none; box-shadow: 0 2px 4px #3c312225; pointer-events: auto; cursor: pointer; z-index: 1; }
+.gm3-map-label[data-kind="province"]:hover { background: #fff0d6; border-color: #b94b10; }
+.gm3-map-label[data-kind="province"]:focus-visible { outline: 3px solid #b94b10; outline-offset: 3px; }
+.gm3-label-leaders .is-province { stroke-width: 1.5; paint-order: stroke; filter: drop-shadow(0 1px 1px #fff); }
+.gm3-map-label.is-selected { color: #fff; background: #a44210; border-color: #a44210; padding: 5px 10px; border-radius: 8px; text-shadow: none; z-index: 2; }
+.gm3-map-label.is-selected:hover { color: #fff; background: #89380e; }
 .gm3-map-label.is-island { color: #406e79; font-size: 12px; }
 .gm3-map-label.is-terrain { color: #3b3428; font-size: clamp(12px, 1vw, 16px); font-weight: 850; background: #fffaf0e8; border: 1px solid #7d6c4844; border-radius: 6px; padding: 3px 7px; text-shadow: none; }
 .gm3-map-label.is-river { color: #075b9d; font-size: clamp(13px, 1vw, 16px); padding: 3px 7px; border-radius: 6px; background: #effaffef; border: 1px solid #8cc3e3; text-shadow: none; }
@@ -112,6 +117,7 @@
 .gm3-profile dd { margin: 0; font-weight: 750; }
 .gm3-profile a { display: inline-block; color: var(--ink); font-size: 16px; font-weight: 750; text-underline-offset: 4px; margin: 8px 12px 0 0; }
 .gm3-legend { display: flex; flex-wrap: wrap; gap: 10px 24px; list-style: none; margin: 18px 0 6px; padding: 0; }
+.gm3-legend[hidden] { display: none; }
 .gm3-legend li { display: flex; align-items: center; gap: 8px; font-size: 16px; }
 .gm3-legend i { display: block; width: 14px; height: 14px; border-radius: 4px; background: var(--region); border: 1px solid #0002; }
 .gm3-region-note, .gm3-model-note { font-size: 14px; line-height: 1.8; color: var(--ink-soft); }

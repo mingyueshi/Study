@@ -59,6 +59,7 @@
         <div class="gm3-terrain-tools">
           <div class="gm3-presets" role="group" aria-label="地图配色">
             <button type="button" data-color="terrain" aria-pressed="true">地形设色</button>
+            <button type="button" data-color="province" aria-pressed="false">省份分色</button>
             <button type="button" data-color="region" aria-pressed="false">区域配色</button>
           </div>
           <label class="gm3-height-control" for="gm3-height"><span>高度放大 <output id="gm3-height-output" for="gm3-height">50×</output></span><input id="gm3-height" type="range" min="1" max="80" step="1" value="50"><small>1× 近似原比例 · 海拔数值不变</small></label>
@@ -76,7 +77,7 @@
             <button type="button" data-action="reset">复位</button>
             <button type="button" id="gm3-rivers" aria-pressed="true">主要河流</button>
             <button type="button" id="gm3-landform-labels" aria-pressed="true">地形名称</button>
-            <button type="button" id="gm3-labels" aria-pressed="false">省份名称</button>
+            <button type="button" id="gm3-labels" aria-pressed="true">省份名称</button>
           </div>
         </div>
         <div class="gm3-flow-panel" aria-label="河水流向演示">
@@ -94,7 +95,7 @@
         <div class="gm3-viewport" id="gm3-viewport">
           <canvas id="gm3-canvas" tabindex="0" role="img" aria-label="可旋转的中国真实高程地形图，包含主要河流和地形名称，点选地形读取采样海拔" aria-describedby="gm3-help">浏览器无法显示立体画布时，可用省份列表或山河目录阅读档案，或打开平面地图。</canvas>
           <svg class="gm3-flow-layer" id="gm3-flow-layer" aria-hidden="true"></svg>
-          <div class="gm3-label-layer" id="gm3-label-layer" aria-hidden="true"></div>
+          <div class="gm3-label-layer" id="gm3-label-layer" role="group" aria-label="地图省名，点击查看省份"></div>
           <div class="gm3-stamp" aria-hidden="true"><b>山 · 河 · 大地</b><span>真实高程采样<br>高度放大 <span id="gm3-stamp-height">50×</span></span></div>
           <svg class="gm3-compass" viewBox="0 0 80 85" role="img" aria-label="随地图转动的指北针"><g id="gm3-north" transform="translate(40 43)"><path d="M0 -24L-9 12L0 6L9 12Z"/><text x="0" y="-30" text-anchor="middle">北</text></g></svg>
           <svg class="gm3-inset" id="gm3-inset" viewBox="1010 540 150 190" role="img" aria-label="南海诸岛与十段线示意，始终朝北"></svg>
@@ -114,7 +115,7 @@
           <div id="gm3-tour-story" aria-live="polite"></div>
           <p class="gm3-tour-note" id="gm3-tour-note"></p>
         </section>
-        <div class="gm3-map-footer"><p id="gm3-help">拖动旋转 · 滚轮缩放 · 点地形读海拔<br><small>键盘：方向键转动，＋／− 缩放，Home 复位。</small></p><div><span id="gm3-selection" role="status">等你点亮一个省份</span><p id="gm3-elevation" aria-live="polite">在地形上点一下，读出该处网格海拔。</p></div></div>
+        <div class="gm3-map-footer"><p id="gm3-help">拖动旋转 · 滚轮缩放 · 点省名看档案 · 点地形读海拔<br><small>键盘：方向键转动，＋／− 缩放，Home 复位。</small></p><div><span id="gm3-selection" role="status">等你点亮一个省份</span><p id="gm3-elevation" aria-live="polite">在地形上点一下，读出该处网格海拔。</p></div></div>
       </section>
       <ul class="gm3-legend" id="gm3-legend" aria-label="海拔与地形配色图例"></ul>
       <p class="gm3-region-note" id="gm3-region-note"></p>

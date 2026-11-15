@@ -16,7 +16,7 @@
   const profile = $('gm3-profile');
   const featureProfile = $('gm3-feature-profile');
   let selected = '', renderer, scene, camera, controls, frame = 0, failed = false;
-  let width = 1, height = 1, showLabels = false, showLandforms = true, showRivers = true;
+  let width = 1, height = 1, showLabels = true, showLandforms = true, showRivers = true;
   let exaggeration = data.terrain.defaultExaggeration, colorMode = 'terrain', focusedLandform = '';
   const features = new Map(window.GM_FEATURES.map(f => [f.id, f]));
   const models = new Map(), labels = [];
@@ -40,6 +40,7 @@
   const T = window.GMThree;
   const leaders = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
   leaders.classList.add('gm3-label-leaders');
+  leaders.setAttribute('aria-hidden', 'true');
   $('gm3-label-layer').append(leaders);
 
   $('gm3-intro').textContent = data.intro;
@@ -86,11 +87,7 @@
     // 深链接可能先于公共侧栏初始化；等待接入后再展开档案。
     if (root.dataset.slReady) revealProfile();
     else document.addEventListener('DOMContentLoaded', revealProfile, { once: true });
-    for (const [key, model] of models) {
-      model.top.emissive.set(key === id ? '#25200c' : '#000000');
-      model.edge.color.set(key === id ? '#ce561e' : '#345d48');
-      model.edge.opacity = key === id ? 1 : .38;
-    }
+    updateProvinces();
     if (updateURL) {
       const url = new URL(location.href);
       url.searchParams.set('place', id);
@@ -119,7 +116,22 @@
   function updateLegend() {
     const items = colorMode === 'terrain' ? data.terrain.stops.map(s => ({ name: s.label, color: s.color })) : [...regions.values()];
     $('gm3-legend').innerHTML = items.map(r => `<li><i style="--region:${esc(r.color)}"></i>${esc(r.name)}</li>`).join('');
-    $('gm3-region-note').textContent = colorMode === 'terrain' ? data.terrain.note : data.regionNote;
+    $('gm3-legend').hidden = colorMode === 'province';
+    $('gm3-region-note').textContent = colorMode === 'terrain' ? data.terrain.note : colorMode === 'province' ? data.provinceNote : data.regionNote;
+  }
+  function updateProvinces() {
+    for (const [id, model] of models) {
+      const active = id === selected;
+      model.top.vertexColors = colorMode === 'terrain';
+      model.top.color.set(colorMode === 'terrain' ? '#ffffff' : colorMode === 'province' ? data.provinceColors[id] : model.color);
+      model.top.emissive.set(active ? '#352000' : '#000000');
+      model.top.needsUpdate = true;
+      model.edge.color.set(active ? '#b94b10' : '#5c584b');
+      model.edge.linewidth = active ? 3.5 : 1.6;
+      model.halo.linewidth = active ? 6.5 : 3.8;
+      model.border.renderOrder = active ? 4 : 1;
+      model.outline.renderOrder = active ? 5 : 1.5;
+    }
   }
   function focusLandform(id, updateURL = true) {
     const mark = data.terrain.landmarks.find(item => item.feature === id);
@@ -187,7 +199,7 @@
     showRivers = true;
     $('gm3-rivers').setAttribute('aria-pressed', 'true');
     root.querySelectorAll('[data-landform], [data-river]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.river === id)));
-    for (const model of models.values()) { model.top.emissive.set('#000000'); model.edge.color.set('#345d48'); model.edge.opacity = .38; }
+    updateProvinces();
     const feature = features.get(id), river = rivers.get(id);
     $('gm3-selection').textContent = `${feature.name} · 真实河道`;
     $('gm3-flat-link').href = `china.html?place=${id}#map`;
@@ -415,17 +427,31 @@
     requestDraw();
   }
   function makeLabel(id, name, point, meters = 0, kind = 'province') {
-    const el = document.createElement('span');
+    const el = document.createElement(kind === 'province' ? 'button' : 'span');
     el.className = `gm3-map-label${kind === 'island' ? ' is-island' : ''}${kind === 'terrain' ? ' is-terrain' : ''}${kind === 'river' ? ' is-river' : ''}${kind === 'endpoint' ? ' is-endpoint' : ''}`;
     el.dataset.feature = id;
     el.dataset.kind = features.get(id)?.kind || kind;
     el.textContent = name;
+    if (kind === 'province') {
+      el.type = 'button';
+      el.setAttribute('aria-label', `查看${byId.get(id).name}`);
+      el.addEventListener('click', () => select(id));
+    } else el.setAttribute('aria-hidden', 'true');
     $('gm3-label-layer').append(el);
     const leader = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-    leader.setAttribute('stroke', kind === 'river' ? '#1477cf' : '#7b725b');
+    leader.setAttribute('stroke', kind === 'river' ? '#1477cf' : kind === 'province' ? '#554735' : '#7b725b');
+    if (kind === 'province') leader.classList.add('is-province');
     leaders.append(leader);
+    const anchor = kind === 'province' ? document.createElementNS('http://www.w3.org/2000/svg', 'circle') : null;
+    if (anchor) {
+      anchor.setAttribute('r', '2.5');
+      anchor.setAttribute('fill', '#554735');
+      anchor.setAttribute('stroke', '#fffdf5');
+      anchor.setAttribute('stroke-width', '1');
+      leaders.append(anchor);
+    }
     const [x, y] = xy(point);
-    const label = { id, el, leader, point: new T.Vector3(x, y, 0), meters, kind };
+    const label = { id, el, leader, anchor, point: new T.Vector3(x, y, 0), meters, kind };
     labels.push(label);
     return label;
   }
@@ -439,20 +465,24 @@
     renderer.render(scene, camera);
     const occupied = [];
     if (tourController) occupied.push([width / 2 - 25, height / 2 - 30, width / 2 + 180, height / 2 + 12]);
-    // 先摆放当前地点和主要山河；短引线避让相邻名称，空间不足时由目录定位。
+    // 省名默认优先，给小省区提供引线避让；聚焦山河时仍优先展示该地点。
     const priority = label => {
+      if (label.id === selected) return 20;
+      if (label.id === focusedLandform || label.id === focusedRiver) return 18;
+      // 大省区先保留地理中心，小省区通过短引线寻找空位。
+      if (label.kind === 'province') return 14 + Math.min(S.provLabel.get(label.id)?.[2] || 1, 500) / 1000;
       if (label.kind === 'endpoint') return 12;
-      if (label.id === focusedLandform || label.id === focusedRiver) return 10;
       if (['f20', 'f21'].includes(label.id)) return 7;
       if (label.kind === 'river') return 5;
       if (label.kind === 'terrain') {
         const kind = features.get(label.id).kind;
         return ['plateau', 'plain'].includes(kind) ? 6 : kind === 'mountain' ? 5.5 : 3;
       }
-      return label.id === selected ? 2 : 0;
+      return 0;
     };
     for (const label of [...labels].sort((a, b) => priority(b) - priority(a))) {
       label.el.classList.toggle('is-selected', label.id === selected);
+      if (label.kind === 'province') label.el.setAttribute('aria-pressed', String(label.id === selected));
       label.el.classList.toggle('is-focused', label.id === focusedLandform || label.id === focusedRiver);
       const point = label.point.clone();
       point.z = heightToZ(label.meters, exaggeration) + .2;
@@ -460,7 +490,9 @@
       const x = (point.x + 1) * width / 2, y = (1 - point.y) * height / 2;
       const labelWidth = label.el.offsetWidth || 50, labelHeight = label.el.offsetHeight || 20;
       const enabled = label.kind === 'endpoint' ? showRivers && showEnds && label.riverId === flowRiver : label.kind === 'terrain' ? showLandforms : label.kind === 'river' ? showRivers : showLabels || label.id === selected;
-      const offsets = label.kind === 'endpoint' ? [[0, -27], [0, 27], [-65, -27], [65, 27], [-100, 0], [100, 0], [0, -55], [0, 55]] : label.kind === 'terrain' || label.kind === 'river' ? [[0, 0], [0, -30], [0, 30], [-24, -48], [24, 48], [-38, 0], [38, 0], [0, -60], [0, 60], [-60, -30], [60, 30]] : [[0, 0]];
+      const gapX = labelWidth + 8, gapY = labelHeight + 8;
+      const provinceOffsets = [[0, 0], [0, -gapY], [0, gapY], [gapX, 0], [-gapX, 0], [-gapX, -gapY], [gapX, gapY], [gapX, -gapY], [-gapX, gapY], [0, -gapY * 2], [0, gapY * 2], [gapX * 2, 0], [-gapX * 2, 0], [gapX * 2, -gapY], [gapX * 2, gapY], [-gapX * 2, -gapY], [-gapX * 2, gapY], [gapX * 3, 0], [-gapX * 3, 0]];
+      const offsets = label.kind === 'province' ? provinceOffsets : label.kind === 'endpoint' ? [[0, -27], [0, 27], [-65, -27], [65, 27], [-100, 0], [100, 0], [0, -55], [0, 55], [140, 0], [-140, 0], [170, 0], [-170, 0]] : label.kind === 'terrain' || label.kind === 'river' ? [[0, 0], [0, -30], [0, 30], [-24, -48], [24, 48], [-38, 0], [38, 0], [0, -60], [0, 60], [-60, -30], [60, 30]] : [[0, 0]];
       let placement;
       if (enabled && point.z > -1 && point.z < 1 && x > 10 && x < width - 10 && y > 14 && y < height - 14) {
         for (const [dx, dy] of offsets) {
@@ -475,6 +507,10 @@
       label.el.style.left = `${x + (placement?.dx || 0)}px`;
       label.el.style.top = `${y + (placement?.dy || 0)}px`;
       label.leader.style.visibility = visible && (placement.dx || placement.dy) ? 'visible' : 'hidden';
+      if (label.anchor) {
+        label.anchor.style.visibility = label.leader.style.visibility;
+        label.anchor.setAttribute('cx', x); label.anchor.setAttribute('cy', y);
+      }
       if (visible) {
         occupied.push(placement.box);
         label.leader.setAttribute('x1', x); label.leader.setAttribute('y1', y);
@@ -588,12 +624,15 @@
       const side = new T.MeshLambertMaterial({ color: '#65745c' });
       const mesh = new T.Mesh(geometry.top, top);
       mesh.userData.province = p.id;
-      const edge = new T.LineBasicMaterial({ color: '#345d48', transparent: true, opacity: .38, depthTest: true });
-      const outline = new T.LineSegments(geometry.outline, edge);
-      // 贴着地形的边界稍微离面，避免与地形表面争夺深度。
-      outline.position.z = .00025;
-      group.add(mesh, new T.Mesh(geometry.side, side), outline);
-      models.set(p.id, { group, mesh, top, edge, color, geometry });
+      // 屏幕像素宽度保持省界清楚；浅色衬边隔开地形纹理，轮廓随真实地形起伏。
+      const boundary = new T.LineSegmentsGeometry().setPositions(geometry.outline.getAttribute('position').array);
+      const halo = new T.LineMaterial({ color: '#fff9e9', linewidth: 3.8, depthTest: false, depthWrite: false });
+      const edge = new T.LineMaterial({ color: '#5c584b', linewidth: 1.6, depthTest: false, depthWrite: false });
+      const border = new T.LineSegments2(boundary, halo), outline = new T.LineSegments2(boundary, edge);
+      border.position.z = outline.position.z = .00025;
+      border.renderOrder = 1; outline.renderOrder = 1.5;
+      group.add(mesh, new T.Mesh(geometry.side, side), border, outline);
+      models.set(p.id, { group, mesh, top, edge, halo, border, outline, color, geometry });
       scene.add(group);
       const point = data.labelPoints[p.id] || S.provLabel.get(p.id);
       makeLabel(p.id, S.displayName(p.name), point, labelHeight(geometry, point));
@@ -763,11 +802,7 @@
     const button = e.target.closest('[data-color]');
     if (!button || button.disabled) return;
     colorMode = button.dataset.color;
-    for (const model of models.values()) {
-      model.top.vertexColors = colorMode === 'terrain';
-      model.top.color.set(colorMode === 'terrain' ? '#ffffff' : model.color);
-      model.top.needsUpdate = true;
-    }
+    updateProvinces();
     root.querySelectorAll('[data-color]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.color === colorMode)));
     updateLegend(); requestDraw();
   });

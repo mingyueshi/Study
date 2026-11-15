@@ -78,6 +78,24 @@ test('相邻省份共享顶点的海拔一致，切换省份不能形成高度�
   assert.ok(shared > 9000, '应校验足够多的共享边界顶点');
 });
 
+test('省份分色让共享边界的省份使用不同颜色', () => {
+  const edges = new Map(), adjacent = new Set();
+  for (const [code, mesh] of meshes) {
+    const pointKey = id => `${mesh.positions[id * 3].toFixed(4)},${mesh.positions[id * 3 + 1].toFixed(4)}`;
+    for (let i = 0; i < mesh.edges.length; i += 2) {
+      const key = [pointKey(mesh.edges[i]), pointKey(mesh.edges[i + 1])].sort().join('|');
+      const other = edges.get(key);
+      if (other && other !== code) adjacent.add([code, other].sort().join(','));
+      edges.set(key, code);
+    }
+  }
+  assert.ok(adjacent.size > 50, '应覆盖全国主要相邻省份');
+  for (const pair of adjacent) {
+    const [a, b] = pair.split(',');
+    assert.notEqual(context.GM_CHINA_3D.provinceColors[`p${a}`], context.GM_CHINA_3D.provinceColors[`p${b}`], pair);
+  }
+});
+
 test('水系按全国地形采样，标签在原河线上，跨省仍能读取一致的高程', () => {
   const sample = G.createSurfaceSampler([...meshes.values()]);
   for (const mark of context.GM_CHINA_3D.terrain.landmarks) {

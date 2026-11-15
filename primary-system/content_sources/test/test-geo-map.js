@@ -541,8 +541,12 @@ for (const continent of CONTINENTS) {
 /* 立体地图继续引用原省份 ID，观察任务与标签位置单独维护。 */
 const threeData = W.GM_CHINA_3D;
 check(threeData && Array.isArray(threeData.observations), '立体地图应有观察任务');
-for (const key of ['intro', 'modelNote', 'regionNote']) {
+for (const key of ['intro', 'modelNote', 'regionNote', 'provinceNote']) {
   check(isStr(threeData[key]) && !hasBadPunct(threeData[key]), '立体地图说明无效：' + key);
+}
+check(Object.keys(threeData.provinceColors || {}).length === PROVINCES.length, '省份分色应完整覆盖省级行政区');
+for (const province of PROVINCES) {
+  check(/^#[0-9a-f]{6}$/.test(threeData.provinceColors?.[province.id]), '省份分色缺少有效颜色：' + province.name);
 }
 const observationIds = new Set();
 for (const item of threeData.observations) {
