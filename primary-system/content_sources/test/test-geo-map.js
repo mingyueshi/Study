@@ -26,6 +26,10 @@ require('../geo-map/world-animals-data.js');
 require('../geo-map/plants-data.js');
 require('../geo-map/world-plants-data.js');
 require('../geo-map/shared.js');
+require('../geo-map/china-3d-data.js');
+require('../geo-map/china-terrain-data.js');
+require('../geo-map/china-rivers-data.js');
+require('../geo-map/china-river-tour-data.js');
 const W = globalThis.window;
 
 let fails = 0;
@@ -534,6 +538,113 @@ for (const continent of CONTINENTS) {
   check(W.GM_WORLD_FLORA.plants.some(plant => COUNTRY_META[plant.mapPlace]?.[1] === continent.id), '世界植物应覆盖：' + continent.name);
 }
 
+/* 立体地图继续引用原省份 ID，观察任务与标签位置单独维护。 */
+const threeData = W.GM_CHINA_3D;
+check(threeData && Array.isArray(threeData.observations), '立体地图应有观察任务');
+for (const key of ['intro', 'modelNote', 'regionNote']) {
+  check(isStr(threeData[key]) && !hasBadPunct(threeData[key]), '立体地图说明无效：' + key);
+}
+const observationIds = new Set();
+for (const item of threeData.observations) {
+  check(isStr(item.id) && !observationIds.has(item.id), '立体观察任务 ID 应唯一');
+  observationIds.add(item.id);
+  check(PROVINCES.some(p => p.id === item.place), '立体观察任务应引用现有省份');
+  for (const key of ['title', 'prompt']) check(isStr(item[key]) && !hasBadPunct(item[key]), '立体观察任务正文无效：' + item.id);
+}
+for (const [id, point] of Object.entries(threeData.labelPoints)) {
+  check(PROVINCES.some(p => p.id === id), '立体标签应引用现有省份：' + id);
+  check(Array.isArray(point) && point.length === 2 && point.every(Number.isFinite) && point[0] >= 73 && point[0] <= 136 && point[1] >= 17 && point[1] <= 54, '立体标签经纬度无效：' + id);
+}
+const terrain = threeData.terrain;
+check(isStr(terrain.note) && !hasBadPunct(terrain.note), '地形说明应使用中文标点');
+check(terrain && Array.isArray(terrain.stops) && terrain.stops.length >= 5, '真实地形应有海拔色阶');
+check(terrain.defaultExaggeration >= 1 && terrain.defaultExaggeration <= 80, '地形默认高度倍率应在控件范围内');
+terrain.stops.forEach((stop, i) => {
+  check(Number.isFinite(stop.meters) && (i === 0 || stop.meters > terrain.stops[i - 1].meters), '海拔色阶应递增');
+  check(/^#[0-9a-f]{6}$/.test(stop.color) && isStr(stop.label) && !hasBadPunct(stop.label), '海拔色阶应有颜色与中文图例');
+});
+for (const item of terrain.landmarks) {
+  check(FEATURES.some(f => f.id === item.feature && ['mountain', 'plateau', 'plain', 'basin'].includes(f.kind)) && PROVINCES.some(p => p.id === item.province), '地形标注应引用原地形和省份');
+  check(item.point.length === 2 && item.point.every(Number.isFinite), '地形标注应有经纬度');
+}
+check(new Set(terrain.landmarks.map(item => item.feature)).size === terrain.landmarks.length, '地形标注不得重复');
+for (const feature of FEATURES.filter(f => ['mountain', 'plateau', 'plain', 'basin'].includes(f.kind))) {
+  check(terrain.landmarks.some(item => item.feature === feature.id), '立体地图应覆盖已有主要地形：' + feature.name);
+}
+check(Array.isArray(threeData.rivers) && threeData.rivers.length >= 5, '立体地图应包含主要水系');
+for (const item of threeData.rivers || []) {
+  const feature = FEATURES.find(f => f.id === item.feature);
+  check(feature?.kind === 'river', '立体水系应复用已有河流档案 ID');
+  const river = W.GM_CHINA_RIVERS.rivers[item.feature];
+  check(river && Array.isArray(river.paths) && river.paths.length > 0, '立体河道应有独立真实几何');
+  check(river.paths.flat().length > 100, '真实河道不能退回少数手工折线');
+  check(river.paths.every(part => part.length >= 2 && part.every(p => p.length === 3 && p.every(Number.isFinite) && p[0] >= 73 && p[0] <= 136 && p[1] >= 17 && p[1] <= 54 && p[2] >= -500 && p[2] <= 9000)), '河道应有有效经纬度与采样高程');
+  check(river.labelPoint.length === 3 && river.labelPoint.every(Number.isFinite), '河名应使用真实河道锚点');
+  check(river.paths.some(part => part.some(p => p[0] === river.labelPoint[0] && p[1] === river.labelPoint[1])), '河名必须落在交付河道上');
+  check(river.sourceIds.length > 0 && river.sourceIds.every(id => W.GM_CHINA_RIVERS.sources.some(s => s.id === id)), '每条河应保留来源引用');
+  check(isStr(river.coverage) && !hasBadPunct(river.coverage), '河道范围应有中文说明');
+  const flow = item.flow;
+  check(flow && ['downstream', 'managed'].includes(flow.mode), '水系应区分自然流向与人工调水');
+  check(Array.isArray(flow?.directions) && flow.directions.length === river.paths.length && flow.directions.every(d => flow.mode === 'managed' ? d === 0 : [1, -1].includes(d)), '每个河段应明确下游方向，不按经度或海拔猜测');
+  check(isStr(flow?.summary) && !hasBadPunct(flow.summary) && isStr(flow?.note) && !hasBadPunct(flow.note), '流向说明应使用中文标点');
+  check(flow?.endpoints?.length === 2, '每条水系应有上下游或南北端标记');
+  for (const endpoint of flow?.endpoints || []) {
+    check(['source', 'mouth', 'confluence', 'continuation', 'lake', 'canal'].includes(endpoint.kind), '端点必须区分源区、入海口与河段截取位置');
+    check(isStr(endpoint.label) && !hasBadPunct(endpoint.label), '端点应有中文名称');
+    check(Array.isArray(endpoint.point) && endpoint.point.length === 2 && endpoint.point.every(Number.isFinite) && endpoint.point[0] >= 73 && endpoint.point[0] <= 136 && endpoint.point[1] >= 17 && endpoint.point[1] <= 54, '端点应有图内经纬度');
+  }
+  check(Array.isArray(flow?.sources) && flow.sources.length > 0 && flow.sources.every(s => isStr(s.label) && /^https:\/\//.test(s.url)), '流向与端点应保留出处');
+}
+check(W.GM_CHINA_RIVERS.version === 1 && W.GM_CHINA_RIVERS.crs === 'EPSG:4326', '真实河道应声明版本与 WGS84 坐标系');
+check(W.GM_CHINA_RIVERS.sources.every(s => /^https:\/\//.test(s.url) && /^[a-f0-9]{64}$/.test(s.sha256) && isStr(s.license)), '河道应有原始来源、校验和与许可');
+check(/^[a-f0-9]{64}$/.test(W.GM_CHINA_RIVERS.centerlinesSHA256), '河道应绑定生成输入');
+check(new Set((threeData.rivers || []).map(item => item.feature)).size === threeData.rivers?.length, '水系标注不得重复');
+check(isStr(threeData.riverNote) && !hasBadPunct(threeData.riverNote), '水系说明应使用中文标点');
+check(isStr(threeData.flowNote) && !hasBadPunct(threeData.flowNote), '流向图例应说明演示速度和端点含义');
+check(threeData.flowCenterlinesSHA256 === W.GM_CHINA_RIVERS.centerlinesSHA256, '流向顺序必须绑定已核对的真实河道版本');
+const riverTours = W.GM_CHINA_RIVER_TOURS;
+check(riverTours?.centerlinesSHA256 === W.GM_CHINA_RIVERS.centerlinesSHA256, '漫游路线应绑定真实河道版本');
+check(riverTours?.routes?.length === 2 && riverTours.routes.map(r => r.river).join(',') === 'f20,f21', '漫游应覆盖长江与黄河');
+check(riverTours.holdSeconds >= 5 && riverTours.travelSeconds >= 30, '漫游应留出阅读与沿河观察时间');
+for (const source of riverTours.sources) check(isStr(source.label) && /^https:\/\//.test(source.url), '漫游解说出处应有效');
+for (const route of riverTours.routes) {
+  check(isStr(route.id) && isStr(route.name) && !hasBadPunct(route.name), '漫游路线应有稳定 ID 和中文名称');
+  check(route.stops.length >= 8 && new Set(route.stops.map(stop => stop.id)).size === route.stops.length, '漫游应有不重复的沿途站点');
+  check(route.stops[0].kind === 'source' && route.stops.at(-1).kind === 'mouth', '漫游应从源区开始，在海口结束');
+  const points = W.GM_CHINA_RIVERS.rivers[route.river].paths.flat();
+  let previous = -1;
+  for (const stop of route.stops) {
+    check(['source', 'city', 'landform', 'mouth'].includes(stop.kind), '漫游站点类型无效');
+    check(['name', 'terrain', 'description', 'observe'].every(key => isStr(stop[key]) && !hasBadPunct(stop[key])), '站点解说应使用中文标点：' + stop.id);
+    check(Array.isArray(stop.anchor) && stop.anchor.length === 2 && stop.anchor.every(Number.isFinite), '漫游站点应有定位坐标');
+    check(stop.related.every(id => FEATURES.some(feature => feature.id === id)), '漫游应复用已有地形档案：' + stop.id);
+    check(stop.sources.length > 0 && stop.sources.every(id => riverTours.sources.some(source => source.id === id)), '站点解说应有出处：' + stop.id);
+    let nearest = -1, distance = Infinity;
+    points.forEach((point, i) => { const d = Math.hypot(point[0] - stop.anchor[0], point[1] - stop.anchor[1]); if (d < distance) { nearest = i; distance = d; } });
+    check(distance < .2, '站点应在真实河道附近：' + stop.id);
+    check(nearest > previous, '站点必须按上游到下游排列：' + stop.id);
+    previous = nearest;
+  }
+}
+for (const credit of threeData.riverCredits) check(isStr(credit.label) && !hasBadPunct(credit.label) && /^https:\/\//.test(credit.url), '河道署名与来源链接应有效');
+check(threeData.featureGroups?.map(group => group.kind).join(',') === 'river,mountain,plateau,plain,basin', '山河目录应覆盖五类地理要素');
+for (const group of threeData.featureGroups || []) check(isStr(group.label) && !hasBadPunct(group.label), '山河目录分类应有中文名称');
+for (const item of threeData.observations) check(terrain.landmarks.some(mark => mark.feature === item.landform), '观察任务应关联地形');
+const elevation = W.GM_CHINA_TERRAIN;
+check(elevation.version === 2 && elevation.spacing === 0.08 && elevation.riverSpacing <= 0.01, '地形应保留全国底网并加密河谷');
+check(elevation.source.riverTiles?.length > 0 && elevation.source.riverZoom >= 9, '河谷应使用更高分辨率的真实 DEM');
+check(elevation.source.riverTiles.every(t => /^[a-f0-9]{64}$/.test(t.sha256) && isStr(t.version)), '河谷 DEM 应保留瓦片校验和');
+check(elevation.encoding === 'base64-le' && elevation.quantization === 1000, '地形坐标应为千分之一度的小端整数');
+check(/^https:\/\//.test(elevation.source.url) && Array.isArray(elevation.source.tiles) && elevation.source.tiles.length > 0, '真实高程应保留来源与瓦片清单');
+check(elevation.source.tiles.every(t => /^[a-f0-9]{64}$/.test(t.sha256) && isStr(t.version)), '源瓦片应保留校验和与版本');
+check(Object.keys(elevation.provinces).length === 34, '地形应覆盖全部 34 个省级行政区');
+for (const province of PROVINCES) {
+  const mesh = elevation.provinces[province.adcode];
+  check(mesh && Buffer.from(mesh.vertices, 'base64').length === mesh.vertexCount * 6, '地形顶点编码无效：' + province.name);
+  check(mesh && Buffer.from(mesh.triangles, 'base64').length === mesh.triangleCount * 3 * mesh.indexBytes, '地形三角形编码无效：' + province.name);
+  check(mesh && Buffer.from(mesh.edges, 'base64').length % (2 * mesh.indexBytes) === 0 && mesh.triangleCount > 0, '地形边界编码无效：' + province.name);
+}
+
 /* ---------- 入口文件（多页面系统） ---------- */
 console.log('— 入口文件（多页面系统） —');
 ['index.html', 'china.html', 'animals.html', 'world-animals.html', 'plants.html', 'world-plants.html', 'province.html', 'world.html', 'places.html', 'routes.html', 'gallery.html',
@@ -545,6 +656,7 @@ console.log('— 入口文件（多页面系统） —');
   'scripts/build-geo.py', 'scripts/build-world.py']
   .forEach(f => check(fileExists(f), '缺少文件: ' + f));
 const PAGE_REFS = {
+  'china-3d.html': ['content.js', 'china-geo.js', 'map-data.js', 'shared.js', 'china-3d-data.js', 'china-terrain-data.js', 'china-rivers-data.js', 'china-3d-geometry.js', 'china-river-flow.js', 'china-river-tour-data.js', 'china-river-tour.js', 'china-3d.js', 'china-3d.css', 'assets/vendor/three-map.js', 'china.html', 'province.html'],
   'index.html': ['content.js', 'china-geo.js', 'map-data.js', 'shared.js', 'home-app.js', 'styles.css',
     'china.html', 'province.html', 'world.html', 'animals.html', 'world-animals.html', 'plants.html', 'world-plants.html'],
   'china.html': ['content.js', 'china-geo.js', 'map-data.js', 'shared.js', 'media-data.js', 'media.js', 'map-ui.js', 'china-app.js', 'styles.css',

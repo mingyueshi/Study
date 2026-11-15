@@ -174,7 +174,7 @@ SPECIAL_ENTRIES = (
      'blurb': '沿时间对照 126 件中外大事。点开事件读故事，跟着相关精讲看制度、因果和史料。'},
     {'route': 'geography-atlas-china', 'subject': '地理', 'area': 'geography', 'icon': 'globe', 'color': 'geography',
      'name': '地理图谱', 'tag': '在地图上找一找 →',
-     'blurb': '从中国地图出发，找山河、访邻居、看世界。遇到想弄懂的问题，可以打开地理小课堂。'},
+     'blurb': '从中国地图出发，立体看地形，找山河、访邻居、看世界。遇到想弄懂的问题，可以打开地理小课堂。'},
     {'route': 'astronomy-study', 'subject': '地理', 'area': 'geography', 'icon': 'astro', 'color': 'geography',
      'name': '天文探索', 'tag': '出发看星空 →',
      'blurb': '9 个太空基地。看月相变化、找北极星，再跟着探测器走出太阳系。'},

@@ -1,0 +1,133 @@
+{% extends "study_topics/page.html" %}
+{% load static %}
+{# 由 scripts/build_study_topics.py 生成。 #}
+{% block title %}3D 中国地图 · 地理图谱 · 乐学堂{% endblock %}
+{% block study_assets %}
+<link rel="stylesheet" href="{% static 'study_topics/geo-map/styles.css' %}">
+<link rel="stylesheet" href="{% static 'study_topics/geo-map/china-3d.css' %}">
+<script src="{% static 'study_topics/geo-map/china-geo.js' %}" defer></script>
+<script src="{% static 'study_topics/geo-map/content.js' %}" defer></script>
+<script src="{% static 'study_topics/geo-map/map-data.js' %}" defer></script>
+<script src="{% static 'study_topics/geo-map/world-data.js' %}" defer></script>
+<script src="{% static 'study_topics/geo-map/atlas-data.js' %}" defer></script>
+<script src="{% static 'study_topics/geo-map/atlas.js' %}" defer></script>
+<script src="{% static 'study_topics/geo-map/shared.js' %}" defer></script>
+<script src="{% static 'study_topics/geo-map/china-3d-data.js' %}" defer></script>
+<script src="{% static 'study_topics/geo-map/china-terrain-data.js' %}" defer></script>
+<script src="{% static 'study_topics/geo-map/china-rivers-data.js' %}" defer></script>
+<script src="{% static 'study_topics/geo-map/assets/vendor/three-map.js' %}" defer></script>
+<script src="{% static 'study_topics/geo-map/china-3d-geometry.js' %}" defer></script>
+<script src="{% static 'study_topics/geo-map/china-river-flow.js' %}" defer></script>
+<script src="{% static 'study_topics/geo-map/china-river-tour-data.js' %}" defer></script>
+<script src="{% static 'study_topics/geo-map/china-river-tour.js' %}" defer></script>
+<script src="{% static 'study_topics/geo-map/china-3d.js' %}" defer></script>
+{% endblock %}
+{% block study_content %}
+<div class="study-atlas">
+<div class="gm-topic china-3d-topic">
+    <aside class="gm-sidebar" aria-label="导航和省份档案">
+      <nav class="gm-sysnav" aria-label="地理图谱页面导航">
+        <a class="gm-sysnav-brand" href="{% url 'geography-atlas' %}">🧭 地理图谱</a>
+        <a data-page href="china.html">中国地图</a>
+        <a data-page href="china-3d.html" aria-current="page">3D 中国地图</a>
+        <a data-page href="world.html">世界地图</a>
+        <a data-page href="province.html">省域站</a>
+        <a data-page href="places.html">地点索引</a>
+        <a data-page href="routes.html">主题路线</a>
+        <a data-page href="gallery.html">实景图册</a>
+      </nav>
+      <section class="gm-side-panel gm3-picker">
+        <label for="gm3-province">找一个省级行政区</label>
+        <select id="gm3-province"><option value="">请选择省份</option></select>
+        <p>小地方也能从这里点亮。</p>
+      </section>
+      <section class="gm3-profile gm3-feature-profile" id="gm3-feature-profile" aria-label="山河档案" aria-live="polite" hidden></section>
+      <section class="gm3-profile" id="gm3-profile" aria-label="省份档案" aria-live="polite">
+        <span class="gm3-kicker">我的地图发现</span>
+        <h2>先找找你的家乡</h2>
+        <p>点地图、选名字，或试试地图下方的观察任务。</p>
+        <a href="province.html">浏览全部省域站 →</a>
+      </section>
+    </aside>
+    <div id="content" class="gm-content" tabindex="-1">
+      <header class="gm3-heading">
+        <div><p class="gm3-kicker">地理图谱 / 走进真实地形</p><h1>3D 中国地图</h1><p id="gm3-intro"></p></div>
+        <a class="gm3-flat-link" id="gm3-flat-link" href="china.html#map">打开平面地图 ↗</a>
+      </header>
+      <section class="gm3-explorer" id="map" aria-label="立体地图探索">
+        <div class="gm3-terrain-tools">
+          <div class="gm3-presets" role="group" aria-label="地图配色">
+            <button type="button" data-color="terrain" aria-pressed="true">地形设色</button>
+            <button type="button" data-color="region" aria-pressed="false">区域配色</button>
+          </div>
+          <label class="gm3-height-control" for="gm3-height"><span>高度放大 <output id="gm3-height-output" for="gm3-height">50×</output></span><input id="gm3-height" type="range" min="1" max="80" step="1" value="50"><small>1× 近似原比例 · 海拔数值不变</small></label>
+        </div>
+        <div class="gm3-toolbar" role="group" aria-label="调整地图视角">
+          <div class="gm3-presets">
+            <button type="button" data-view="perspective" aria-pressed="true">立体视角</button>
+            <button type="button" data-view="top" aria-pressed="false">正上方</button>
+          </div>
+          <div class="gm3-actions">
+            <button type="button" data-action="left" aria-label="向左旋转地图">↶ 左转</button>
+            <button type="button" data-action="right" aria-label="向右旋转地图">右转 ↷</button>
+            <button type="button" data-action="zoom-in" aria-label="放大地图">＋</button>
+            <button type="button" data-action="zoom-out" aria-label="缩小地图">−</button>
+            <button type="button" data-action="reset">复位</button>
+            <button type="button" id="gm3-rivers" aria-pressed="true">主要河流</button>
+            <button type="button" id="gm3-landform-labels" aria-pressed="true">地形名称</button>
+            <button type="button" id="gm3-labels" aria-pressed="false">省份名称</button>
+          </div>
+        </div>
+        <div class="gm3-flow-panel" aria-label="河水流向演示">
+          <div class="gm3-flow-tools">
+            <label for="gm3-flow-river">跟着河水走 <select id="gm3-flow-river"></select></label>
+            <button type="button" id="gm3-flow-play" aria-pressed="false">播放流向</button>
+            <button type="button" id="gm3-flow-step">前进一步</button>
+            <button type="button" id="gm3-flow-ends" aria-pressed="true">源头与去向</button>
+            <button type="button" id="gm3-tour-start">沿河漫游</button>
+            <span id="gm3-flow-status" role="status"></span>
+          </div>
+          <p id="gm3-flow-summary"></p>
+          <p id="gm3-flow-note"></p>
+        </div>
+        <div class="gm3-viewport" id="gm3-viewport">
+          <canvas id="gm3-canvas" tabindex="0" role="img" aria-label="可旋转的中国真实高程地形图，包含主要河流和地形名称，点选地形读取采样海拔" aria-describedby="gm3-help">浏览器无法显示立体画布时，可用省份列表或山河目录阅读档案，或打开平面地图。</canvas>
+          <svg class="gm3-flow-layer" id="gm3-flow-layer" aria-hidden="true"></svg>
+          <div class="gm3-label-layer" id="gm3-label-layer" aria-hidden="true"></div>
+          <div class="gm3-stamp" aria-hidden="true"><b>山 · 河 · 大地</b><span>真实高程采样<br>高度放大 <span id="gm3-stamp-height">50×</span></span></div>
+          <svg class="gm3-compass" viewBox="0 0 80 85" role="img" aria-label="随地图转动的指北针"><g id="gm3-north" transform="translate(40 43)"><path d="M0 -24L-9 12L0 6L9 12Z"/><text x="0" y="-30" text-anchor="middle">北</text></g></svg>
+          <svg class="gm3-inset" id="gm3-inset" viewBox="1010 540 150 190" role="img" aria-label="南海诸岛与十段线示意，始终朝北"></svg>
+          <p class="gm3-fallback" id="gm3-fallback" role="status" hidden>当前浏览器无法显示 3D 地图。仍可从省份列表或山河目录阅读档案，或<a href="china.html#map">打开平面地图 →</a></p>
+        </div>
+        <section class="gm3-tour-panel" id="gm3-tour-panel" aria-label="沿河漫游" hidden>
+          <div class="gm3-tour-heading"><div><span class="gm3-kicker" id="gm3-tour-phase"></span><h2 id="gm3-tour-title"></h2></div><button type="button" id="gm3-tour-close">退出漫游</button></div>
+          <div class="gm3-tour-tools">
+            <label for="gm3-tour-route">路线 <select id="gm3-tour-route"></select></label>
+            <button type="button" id="gm3-tour-play" aria-pressed="false">开始漫游</button>
+            <button type="button" id="gm3-tour-prev">上一站</button><button type="button" id="gm3-tour-next">下一站</button>
+            <label for="gm3-tour-stop">到一站 <select id="gm3-tour-stop"></select></label>
+            <label for="gm3-tour-speed">速度 <select id="gm3-tour-speed"><option value="1">慢慢看</option><option value="2">快一点</option></select></label>
+          </div>
+          <div class="gm3-tour-progress"><progress id="gm3-tour-progress" max="1" value="0" aria-label="沿河漫游进度"></progress><span id="gm3-tour-progress-text"></span></div>
+          <p id="gm3-tour-status" role="status"></p>
+          <div id="gm3-tour-story" aria-live="polite"></div>
+          <p class="gm3-tour-note" id="gm3-tour-note"></p>
+        </section>
+        <div class="gm3-map-footer"><p id="gm3-help">拖动旋转 · 滚轮缩放 · 点地形读海拔<br><small>键盘：方向键转动，＋／− 缩放，Home 复位。</small></p><div><span id="gm3-selection" role="status">等你点亮一个省份</span><p id="gm3-elevation" aria-live="polite">在地形上点一下，读出该处网格海拔。</p></div></div>
+      </section>
+      <ul class="gm3-legend" id="gm3-legend" aria-label="海拔与地形配色图例"></ul>
+      <p class="gm3-region-note" id="gm3-region-note"></p>
+      <p class="gm3-region-note" id="gm3-flow-legend"></p>
+      <section class="gm3-feature-directory" aria-labelledby="gm3-directory-title">
+        <h2 id="gm3-directory-title">找到一条河、一座山</h2>
+        <p class="gm3-river-note" id="gm3-river-note"></p>
+        <div id="gm3-landmarks" aria-label="定位山河地形"></div>
+      </section>
+      <section class="gm3-observe" aria-labelledby="gm3-observe-title"><h2 id="gm3-observe-title">带着问题转一转</h2><div id="gm3-observations"></div></section>
+      <p class="gm3-model-note" id="gm3-model-note"></p>
+      <noscript><p class="gm-notice">请启用 JavaScript 操作 3D 地图。也可以前往<a href="province.html">省域站</a>。</p></noscript>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

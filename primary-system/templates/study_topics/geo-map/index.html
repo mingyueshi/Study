@@ -20,6 +20,7 @@
       <nav class="gm-sysnav" aria-label="地理图谱页面导航">
         <a class="gm-sysnav-brand" href="{% url 'geography-atlas' %}" aria-current="page">🧭 地理图谱</a>
         <a data-page href="china.html">中国地图</a>
+        <a data-page href="china-3d.html">3D 中国地图</a>
         <a data-page href="world.html">世界地图</a>
         <a data-page href="plants.html">中国植物地图</a>
         <a data-page href="world-plants.html">世界植物地图</a>
@@ -54,6 +55,11 @@
       <section class="gm-pages" aria-labelledby="pages-title">
         <h2 id="pages-title">下一站去哪儿？</h2>
         <div class="gm-page-cards">
+          <a class="gm-page-card" href="china-3d.html" style="--page-accent:#216b76">
+            <span class="gm-page-icon" aria-hidden="true">🧩</span>
+            <div><h3>3D 中国地图</h3><p>沿着长江、黄河看真实地形，认山脉、高原和平原，点一点读出采样海拔。</p></div>
+            <span class="gm-page-go" aria-hidden="true">立体看中国 →</span>
+          </a>
           <a class="gm-page-card" href="animals.html" style="--page-accent:#2e7d64">
             <span class="gm-page-icon" aria-hidden="true">🐾</span>
             <div><h3>中国动物地图</h3><p>跟着足迹找熊猫、雪豹和江豚，看看它们住在哪里。</p></div>

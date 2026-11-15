@@ -10,7 +10,7 @@ HISTORY_PAGES = (
     'history-timeline-era', 'history-timeline-event', 'history-timeline-dynasties',
 )
 GEOGRAPHY_PAGES = (
-    'geography-study', 'geography-atlas', 'geography-atlas-china',
+    'geography-study', 'geography-atlas', 'geography-atlas-china', 'geography-atlas-china-3d',
     'geography-atlas-world', 'geography-atlas-province', 'geography-atlas-places',
     'geography-atlas-routes', 'geography-atlas-gallery', 'geography-atlas-animals', 'geography-atlas-world-animals',
     'geography-atlas-plants', 'geography-atlas-world-plants',
@@ -88,6 +88,8 @@ class StudyTopicPageTests(SimpleTestCase):
             ('history-timeline-era', 'event.html', '?event=tc35'),
             ('geography-atlas', 'china.html', '?place=f20'),
             ('geography-atlas-china', 'province.html', '?adcode=110000'),
+            ('geography-atlas-china', 'china-3d.html', '?place=p710000'),
+            ('geography-atlas-china-3d', 'province.html', '?adcode=810000'),
             ('geography-atlas-china', 'animals.html', '?animal=giant-panda'),
             ('geography-atlas-world', 'world-animals.html', '?animal=emperor-penguin'),
             ('geography-atlas-china', 'plants.html', '?plant=lotus'),
@@ -109,6 +111,7 @@ class StudyTopicPageTests(SimpleTestCase):
         for main, lesson, label in (
             ('history-timeline-timeline', 'history-study', '历史精讲'),
             ('geography-atlas-china', 'geography-study', '地理小课堂'),
+            ('geography-atlas-china', 'geography-atlas-china-3d', '3D 中国地图'),
             ('geography-atlas-china', 'geography-atlas-animals', '中国动物地图'),
             ('geography-atlas-world', 'geography-atlas-world-animals', '世界动物地图'),
             ('geography-atlas-china', 'geography-atlas-plants', '中国植物地图'),
