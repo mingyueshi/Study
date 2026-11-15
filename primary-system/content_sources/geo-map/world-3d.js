@@ -20,6 +20,9 @@
   const featurePoint = f => f.point || f.line[Math.floor((f.line.length - 1) / 2)];
   let selected = '', selectedContinent = '', renderer, scene, camera, controls, globe, texture, marker, frame = 0, visible = true, lost = false, disposed = false;
   let layer = 'continent', activeLine = '';
+  let toolbox, toolOverlay, referencePoint = D.home;
+  let sunLab, ambient, sunlight, sunRing, sunSpot;
+  let detectiveCountry = '';
   const canvas = $('gw-canvas'), viewport = $('gw-viewport'), profile = $('gw-profile'), picker = $('gw-place');
   const paths = new Map(), tex = document.createElement('canvas');
   tex.width = 3072; tex.height = 1536;
@@ -48,7 +51,7 @@
     ctx.fillStyle = '#80cce1'; ctx.fillRect(0, 0, tex.width, tex.height);
     for (const country of countries) {
       const continent = continentMap.get(meta[country.name]?.[1]);
-      const dim = selectedContinent && continent?.id !== selectedContinent;
+      const dim = root.dataset.tool !== 'detective' && selectedContinent && continent?.id !== selectedContinent;
       ctx.fillStyle = layer === 'zones' ? '#f5f3dd' : dim ? '#dce3da' : (continent?.color || '#e5d5aa');
       ctx.fill(paths.get(country.name), 'evenodd');
       ctx.strokeStyle = '#536b665f'; ctx.lineWidth = 1.25; ctx.stroke(paths.get(country.name));
@@ -82,9 +85,10 @@
         ctx.beginPath(); G.unwrap(f.line).forEach((point, i) => { const [x, y] = px(point); if (i) ctx.lineTo(x, y); else ctx.moveTo(x, y); }); ctx.stroke();
       });
     }
-    if (paths.has(selected)) {
-      ctx.fillStyle = '#fff3b26b'; ctx.fill(paths.get(selected), 'evenodd');
-      ctx.strokeStyle = '#9b411a'; ctx.lineWidth = 4; ctx.stroke(paths.get(selected));
+    const marked = root.dataset.tool === 'detective' ? detectiveCountry : selected;
+    if (paths.has(marked)) {
+      ctx.fillStyle = '#fff3b26b'; ctx.fill(paths.get(marked), 'evenodd');
+      ctx.strokeStyle = '#9b411a'; ctx.lineWidth = 4; ctx.stroke(paths.get(marked));
     }
     if (texture) texture.needsUpdate = true;
     requestRender();
@@ -134,6 +138,7 @@
     if (!country && !continent && !ocean && !feature) return false;
     selected = continent ? '' : id; selectedContinent = continent ? id : '';
     const point = continent ? D.continentViews[id] : country ? G.center(country) : ocean ? ocean.point : featurePoint(feature);
+    referencePoint = point;
     if (feature && !$('gw-features').checked) $('gw-features').checked = true;
     showProfile(id); syncContinents(); paint();
     focus(point, continent?.name || ocean?.name || feature?.name || zh(id));
@@ -198,7 +203,7 @@
     const continent = event.target.closest('button[data-continent]');
     if (continent) choose(continent.dataset.continent);
     const view = event.target.closest('button[data-view]');
-    if (view) { root.dispatchEvent(new CustomEvent('gm-world-free-view')); const v = D.views.find(v => v.id === view.dataset.view); focus(v.point, v.name); view.setAttribute('aria-pressed', 'true'); }
+    if (view) { root.dispatchEvent(new CustomEvent('gm-world-free-view', {detail: {origin: 'camera'}})); const v = D.views.find(v => v.id === view.dataset.view); focus(v.point, v.name); view.setAttribute('aria-pressed', 'true'); }
     const observe = event.target.closest('button[data-observe]');
     if (observe) { choose(D.observations[Number(observe.dataset.observe)].place); viewport.scrollIntoView({block: 'center'}); }
   });
@@ -244,6 +249,50 @@
     if (!renderer || lost || disposed || !visible || document.hidden || frame) return;
     frame = requestAnimationFrame(() => { frame = 0; if (lost || disposed) return; renderer.render(scene, camera); placeLabels(); });
   }
+  function clearOverlay() {
+    if (!toolOverlay) return;
+    toolOverlay.traverse(object => { object.geometry?.dispose(); object.material?.dispose(); });
+    scene.remove(toolOverlay); toolOverlay = null;
+  }
+  function overlay(points, route = null) {
+    if (!scene || lost || disposed) return;
+    clearOverlay(); toolOverlay = new T.Group();
+    for (const {point, color} of points) {
+      const dot = new T.Mesh(G.sphere(T, 16, 8), new T.MeshLambertMaterial({color}));
+      dot.scale.setScalar(.019); dot.position.set(...G.xyz(point, 1.015)); toolOverlay.add(dot);
+    }
+    if (route) {
+      const vertices = G.arc(...route), positions = [];
+      for (let i = 1; i < vertices.length; i++) positions.push(...vertices[i - 1].map(v => v * 1.008), ...vertices[i].map(v => v * 1.008));
+      const geometry = new T.BufferGeometry(); geometry.setAttribute('position', new T.Float32BufferAttribute(positions, 3));
+      toolOverlay.add(new T.LineSegments(geometry, new T.LineBasicMaterial({color: '#903d16'})));
+    }
+    scene.add(toolOverlay);
+    if (marker) marker.visible = root.dataset.tool === 'browse' && !!selected && !selectedContinent;
+    requestRender();
+  }
+  function illuminate(model) {
+    if (!scene || lost || disposed) return;
+    if (!model) {
+      if (sunlight.parent !== camera) camera.add(sunlight);
+      sunlight.position.set(-3, 4, 5); sunlight.intensity = 2.4; ambient.intensity = 1.15;
+      if (sunRing) sunRing.visible = false; if (sunSpot) sunSpot.visible = false;
+    } else {
+      if (sunlight.parent !== scene) scene.add(sunlight);
+      sunlight.position.set(...G.xyz(model.sunPoint, 5)); sunlight.intensity = 3; ambient.intensity = .12;
+      if (!sunRing) {
+        const geometry = new T.LineGeometry().setPositions(new Float32Array(129 * 3));
+        sunRing = new T.Line2(geometry, new T.LineMaterial({color: '#ffd66a', linewidth: 3})); scene.add(sunRing);
+        sunSpot = new T.Mesh(G.sphere(T, 16, 8), new T.MeshLambertMaterial({color: '#ffe38a', emissive: '#cc851a'}));
+        sunSpot.scale.setScalar(.018); scene.add(sunSpot);
+      }
+      const circle = window.GMWorldSun.terminator(model.sunPoint), segments = sunRing.geometry.getAttribute('instanceStart').data;
+      circle.forEach((p, i) => { segments.array.set(p.map(v => v * 1.008), i * 6); segments.array.set(circle[(i + 1) % circle.length].map(v => v * 1.008), i * 6 + 3); });
+      segments.needsUpdate = true; sunRing.geometry.computeBoundingBox(); sunRing.geometry.computeBoundingSphere(); sunRing.visible = true;
+      sunSpot.position.set(...G.xyz(model.sunPoint, 1.02)); sunSpot.visible = true;
+    }
+    requestRender();
+  }
   function fallback(message) {
     lost = true; root.dataset.renderer = 'fallback';
     if (frame) cancelAnimationFrame(frame); frame = 0;
@@ -252,6 +301,7 @@
     for (const {button} of labelNodes) button.hidden = true;
     selectedLabel.hidden = true;
     for (const button of root.querySelectorAll('.gw-toolbar button')) button.disabled = true;
+    root.dispatchEvent(new CustomEvent('gm-world-renderer-change'));
   }
   function resize() {
     if (!renderer || lost || disposed) return;
@@ -264,7 +314,7 @@
     if (!camera || lost) return;
     camera.zoom = Math.max(.8, Math.min(3.2, camera.zoom * gain)); camera.updateProjectionMatrix(); controls.update(); requestRender();
   }
-  function reset() { root.dispatchEvent(new CustomEvent('gm-world-free-view')); if (camera) { camera.zoom = 1; camera.updateProjectionMatrix(); } focus(D.home, '从中国出发'); }
+  function reset() { root.dispatchEvent(new CustomEvent('gm-world-free-view', {detail: {origin: 'camera'}})); if (camera) { camera.zoom = 1; camera.updateProjectionMatrix(); } focus(D.home, '从中国出发'); }
   $('gw-in').addEventListener('click', () => zoom(1.2)); $('gw-out').addEventListener('click', () => zoom(1 / 1.2)); $('gw-reset').addEventListener('click', reset);
   let resizeObserver, intersectionObserver;
   try {
@@ -273,8 +323,8 @@
     renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 2));
     scene = new T.Scene(); camera = new T.OrthographicCamera(-2, 2, 1.3, -1.3, .1, 30);
     camera.position.set(...G.xyz(D.home, 5)); camera.lookAt(0, 0, 0);
-    scene.add(new T.AmbientLight('#ffffff', 1.15));
-    const sun = new T.DirectionalLight('#fff9e4', 2.4); camera.add(sun); sun.position.set(-3, 4, 5); scene.add(camera);
+    ambient = new T.AmbientLight('#ffffff', 1.15); scene.add(ambient);
+    sunlight = new T.DirectionalLight('#fff9e4', 2.4); camera.add(sunlight); sunlight.position.set(-3, 4, 5); scene.add(camera);
     texture = new T.CanvasTexture(tex); texture.colorSpace = T.SRGBColorSpace;
     globe = new T.Mesh(G.sphere(T), new T.MeshLambertMaterial({map: texture})); scene.add(globe);
     marker = new T.Mesh(G.sphere(T, 16, 8), new T.MeshLambertMaterial({color: '#aa4517'})); marker.scale.setScalar(.013); marker.visible = false; scene.add(marker);
@@ -297,6 +347,7 @@
       const hit = raycaster.intersectObject(globe)[0]; if (!hit) return;
       const point = G.lonLat(hit.point), [x, y] = px(point);
       const country = countries.find(c => ctx.isPointInPath(paths.get(c.name), x, y, 'evenodd'));
+      if (toolbox?.handlePoint(point, country?.name)) { readCoordinates(point, '点击位置'); return; }
       if (country) choose(country.name); else $('gw-status').textContent = '这里是海洋。点大洋名称，或从「想去哪里」选择一片大洋。';
       readCoordinates(point, '点击位置');
     });
@@ -323,13 +374,27 @@
     setLayer(params.get('layer'), false); setLine(params.get('line'), false, false);
   }
   fromAddress(); window.addEventListener('popstate', fromAddress);
-  window.GMWorldLearning?.mount({root, choose, setLine, setLayer});
+  sunLab = window.GMWorldSun.mount({root, focus, overlay, illuminate, currentPoint: () => referencePoint, readCoordinates});
+  const detective = window.GMWorldDetective.mount({root, countries, name: zh, choose, overlay,
+    highlight: id => { detectiveCountry = id; paint(); },
+    locate: id => { const country = countryMap.get(id); if (country) focus(G.center(country), zh(id)); }
+  });
+  toolbox = window.GMWorldTools.mount({root, focus, overlay, currentPoint: () => referencePoint, repaint: paint, readCoordinates, sun: sunLab, detective,
+    prepareDetective: () => { setLayer('continent'); setLine('', false); $('gw-view-label').textContent = '转动地球，寻找线索'; }
+  });
+  const learning = window.GMWorldLearning.mount({root, choose, setLine, setLayer, startSun: toolbox.startSun});
+  window.GMWorldDetective.mountProgress({root, open: kind => {
+    toolbox.resume(kind);
+    if (kind === 'quiz') learning.resumeQuiz();
+    else { $('gw-tool-modes').scrollIntoView({block: 'start'}); root.querySelector(`[data-tool="${kind}"]`).focus({preventScroll: true}); }
+  }});
   document.addEventListener('visibilitychange', requestRender);
   window.addEventListener('pagehide', event => {
     if (frame) cancelAnimationFrame(frame); frame = 0;
     if (event.persisted) return;
     disposed = true; resizeObserver?.disconnect(); intersectionObserver?.disconnect(); controls?.dispose();
-    globe?.geometry.dispose(); globe?.material.dispose(); marker?.geometry.dispose(); marker?.material.dispose(); texture?.dispose(); renderer?.dispose();
+    clearOverlay(); globe?.geometry.dispose(); globe?.material.dispose(); marker?.geometry.dispose(); marker?.material.dispose(); texture?.dispose(); renderer?.dispose();
+    sunRing?.geometry.dispose(); sunRing?.material.dispose(); sunSpot?.geometry.dispose(); sunSpot?.material.dispose();
   });
   window.addEventListener('pageshow', requestRender);
 })();

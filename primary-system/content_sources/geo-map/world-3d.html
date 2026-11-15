@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="转动地球仪，认识七大洲、四大洋，点选国家与世界地标，俯瞰南北两极。">
+  <meta name="description" content="转动地球仪认识七大洲与四大洋，动手测距、寻找经纬度，观察昼夜、四季和极昼极夜。">
   <title>3D 世界地图 · 乐学堂</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="world-3d.css">
@@ -12,10 +12,16 @@
   <script src="shared.js" defer></script>
   <script src="world-3d-data.js" defer></script>
   <script src="world-3d-learning-data.js" defer></script>
+  <script src="world-3d-tools-data.js" defer></script>
+  <script src="world-3d-sun-data.js" defer></script>
+  <script src="world-3d-detective-data.js" defer></script>
   <script src="world-3d-polar.js" defer></script>
   <script src="assets/vendor/three-map.js" defer></script>
   <script src="world-3d-geometry.js" defer></script>
   <script src="world-3d-learning.js" defer></script>
+  <script src="world-3d-tools.js" defer></script>
+  <script src="world-3d-sun.js" defer></script>
+  <script src="world-3d-detective.js" defer></script>
   <script src="world-3d.js" defer></script>
 </head>
 <body>
@@ -57,6 +63,7 @@
           <label>认识一条线 <select id="gw-line"><option value="">普通经纬网</option></select></label>
           <a href="#gw-tour-directory">选一条环球路线 ↓</a>
           <a href="#gw-quiz">挑战探索题 ↓</a>
+          <a href="#gw-records">我的探索记录 ↓</a>
         </div>
         <section id="gw-line-note" class="gw-line-note" aria-label="经纬线知识" aria-live="polite" hidden></section>
         <section id="gw-tour-panel" class="gw-tour-panel" aria-label="正在进行的环球导览" hidden>
@@ -64,9 +71,13 @@
           <p id="gw-tour-text"></p><p id="gw-tour-observe"></p>
           <div class="gw-buttons"><button type="button" id="gw-tour-prev">上一站</button><button type="button" id="gw-tour-next">下一站</button><button type="button" id="gw-tour-locate">重新定位本站</button><button type="button" id="gw-tour-close">结束导览</button></div>
         </section>
+        <div id="gw-tool-modes" class="gw-tool-modes gw-buttons" role="group" aria-label="探索玩法">
+          <button type="button" data-tool="browse" aria-pressed="true">自由看世界</button><button type="button" data-tool="measure" aria-pressed="false">📏 两点测距</button><button type="button" data-tool="hunt" aria-pressed="false">🧭 经纬度寻宝</button><button type="button" data-tool="daylight" aria-pressed="false">☀️ 昼夜与四季</button><button type="button" data-tool="detective" aria-pressed="false">🔎 地理侦探</button>
+        </div>
         <div class="gw-viewport" id="gw-viewport">
           <canvas id="gw-canvas" tabindex="0" role="img" aria-label="可旋转的 3D 地球仪。拖动旋转，滚轮缩放；方向键转动，＋、− 缩放，Home 复位。也可用想去哪里列表选择地点。" aria-describedby="gw-help"></canvas>
           <div class="gw-labels" id="gw-labels" role="group" aria-label="大洲、大洋与地标"></div>
+          <div id="gw-tool-readout" class="gw-tool-readout" hidden><strong id="gw-tool-goal"></strong><span id="gw-tool-result"></span><div id="gw-sun-inline" class="gw-buttons" hidden><button type="button" id="gw-sun-play" aria-pressed="false">播放一天</button><button type="button" id="gw-sun-step">前进 3 小时</button></div><div id="gw-detective-inline" class="gw-buttons" hidden><button type="button" id="gw-detective-hint">提示</button><button type="button" id="gw-detective-next">下一条线索</button></div><a href="#gw-tool-panel">展开工具与作答 ↓</a></div>
           <div class="gw-stamp" aria-hidden="true"><b>地球<br>观察台</b><span>七大洲 · 四大洋</span></div>
           <span class="gw-north" aria-hidden="true">转一转 🌐</span>
           <p class="gw-view-label" id="gw-view-label">从中国出发</p>
@@ -74,19 +85,77 @@
         </div>
         <div class="gw-footer"><p id="gw-help">拖动旋转 · 滚轮缩放 · 点陆地读档案<br><small>键盘：方向键转动，＋／− 缩放，Home 复位。</small></p><div class="gw-switches"><label><input type="checkbox" id="gw-grid" checked> 经纬网</label><label><input type="checkbox" id="gw-names" checked> 名称</label><label><input type="checkbox" id="gw-features"> 世界地标</label></div></div>
         <p id="gw-coordinates" class="gw-coordinates" role="status">点一下地球表面，读读这里的经纬度。</p>
+        <section id="gw-tool-panel" class="gw-tool-panel" aria-label="动手探索工具" hidden>
+          <div id="gw-measure-panel" hidden>
+            <h2>两点之间，沿地球走多远？</h2>
+            <div class="gw-measure-points gw-buttons"><button type="button" id="gw-point-a" aria-pressed="true">A 起点：待选择</button><button type="button" id="gw-point-b" aria-pressed="false">B 终点：待选择</button></div>
+            <p id="gw-distance" class="gw-distance" role="status">先在球面上点一个起点。</p>
+            <div class="gw-buttons"><button type="button" id="gw-point-current">使用当前地点参考点</button><button type="button" id="gw-measure-clear">清空两点</button><button type="button" id="gw-locate-a" disabled>看起点 A</button><button type="button" id="gw-locate-b" disabled>看终点 B</button></div>
+            <label class="gw-example-label" for="gw-measure-example">试一组坐标 <select id="gw-measure-example"><option value="">自己选两个点</option></select></label>
+            <p id="gw-measure-observe"></p><p id="gw-distance-note" class="gw-note"></p>
+          </div>
+          <div id="gw-hunt-panel" hidden>
+            <div class="gw-quiz-heading"><h2>经纬度寻宝</h2><span id="gw-hunt-progress" role="status"></span></div>
+            <label for="gw-hunt-mission">选择任务 <select id="gw-hunt-mission"></select></label>
+            <h3 id="gw-hunt-target"></h3><p id="gw-hunt-hint"></p><p id="gw-hunt-feedback" role="status"></p>
+            <div class="gw-buttons"><button type="button" id="gw-hunt-retry">重新找这一处</button><button type="button" id="gw-hunt-reveal">看看答案位置</button><button type="button" id="gw-hunt-next">下一处</button></div>
+            <p id="gw-hunt-note" class="gw-note"></p><p id="gw-hunt-storage" class="gw-note">找到记录保存在当前浏览器。</p>
+          </div>
+          <div id="gw-daylight-panel" hidden>
+            <h2>同一个地球，不一样的白天</h2><p id="gw-sun-intro"></p>
+            <div id="gw-sun-seasons" class="gw-buttons" role="group" aria-label="选择观察时节"></div>
+            <p id="gw-sun-season-text"></p>
+            <label class="gw-sun-time-label" for="gw-sun-time">演示时刻 <output id="gw-sun-time-value" for="gw-sun-time" aria-live="off"></output></label>
+            <input id="gw-sun-time" type="range" min="0" max="23.99" step="0.01" value="8" aria-describedby="gw-sun-play-status">
+            <p id="gw-sun-play-status" class="gw-note" role="status"></p>
+            <dl class="gw-sun-facts"><div><dt>观察点现在</dt><dd id="gw-sun-phase"></dd></div><div><dt>这一天的白昼</dt><dd id="gw-sun-length"></dd></div></dl>
+            <p>橙色观察点：<strong id="gw-sun-point"></strong><br>黄色直射点：<span id="gw-sun-direct"></span></p>
+            <div class="gw-buttons"><button type="button" id="gw-sun-current">使用当前地点参考点</button><button type="button" id="gw-sun-locate">看观察点</button><button type="button" id="gw-sun-noon">调到当地太阳正午</button></div>
+            <label class="gw-example-label" for="gw-sun-studies">跟着线索观察 <select id="gw-sun-studies"></select></label>
+            <p id="gw-sun-study-text"></p>
+            <h3>同一纬度，四个时节的白昼</h3><div id="gw-sun-comparison" class="gw-sun-comparison"></div>
+            <p id="gw-sun-note" class="gw-note"></p>
+          </div>
+          <div id="gw-detective-panel" hidden>
+            <div class="gw-quiz-heading"><h2>地理侦探 · 读线索，找国家</h2><span id="gw-detective-progress" role="status"></span></div>
+            <p id="gw-detective-intro"></p>
+            <div class="gw-detective-controls"><label for="gw-detective-task">选择线索 <select id="gw-detective-task"></select></label><div class="gw-buttons"><button type="button" id="gw-detective-pending">继续未完成</button><button type="button" id="gw-detective-retry">重新挑战</button></div></div>
+            <div class="gw-detective-clue"><p class="gw-eyebrow">线索卡</p><h3 id="gw-detective-title"></h3><p id="gw-detective-clue"></p><ol id="gw-detective-hints" hidden></ol><div class="gw-buttons"><button type="button" data-detective-action="hint">提示</button></div></div>
+            <form id="gw-detective-form" class="gw-detective-controls"><label for="gw-detective-answer">也可以从列表作答 <select id="gw-detective-answer"></select></label><div class="gw-buttons"><button type="submit" id="gw-detective-submit">提交这个国家</button></div></form>
+            <p id="gw-detective-feedback" role="status"></p>
+            <div class="gw-buttons"><button type="button" id="gw-detective-reveal">查看答案位置</button><button type="button" id="gw-detective-learn" disabled>打开关联档案</button><button type="button" data-detective-action="next">下一条线索</button></div>
+            <p id="gw-detective-note" class="gw-note"></p><p id="gw-detective-storage" class="gw-note">自己找到的记录保存在当前浏览器，重新挑战不会清除记录。</p>
+          </div>
+          <form id="gw-point-form" class="gw-point-form" novalidate>
+            <h3 id="gw-point-form-title">也可以输入经纬度</h3>
+            <label for="gw-point-lon">经度<input id="gw-point-lon" name="longitude" type="number" min="-180" max="180" step="any" inputmode="decimal" placeholder="例如 120" required></label>
+            <label for="gw-point-lat">纬度<input id="gw-point-lat" name="latitude" type="number" min="-90" max="90" step="any" inputmode="decimal" placeholder="例如 30" required></label>
+            <p class="gw-note">东经、北纬填正数；西经、南纬填负数。经度 −180～180，纬度 −90～90。</p>
+            <button type="submit" id="gw-point-submit">使用这个坐标</button><p id="gw-point-error" role="status"></p>
+          </form>
+        </section>
       </section>
       <section id="gw-zone-legend" class="gw-zone-legend" aria-label="地球五带图例" hidden></section>
       <div class="gw-continents" id="gw-continents" role="group" aria-label="按大洲定位"></div>
       <p class="gw-status" id="gw-status" role="status" aria-live="polite"></p>
       <section class="gw-profile" id="gw-profile" aria-label="地点档案" aria-live="polite"></section>
+      <section id="gw-records" class="gw-learning-section gw-records" aria-labelledby="gw-records-heading">
+        <h2 id="gw-records-heading">我的探索记录</h2><p>已经学会的会留下来，下次从还没完成的地方继续。</p>
+        <div class="gw-learning-cards">
+          <article><p class="gw-eyebrow">想一想 · 选一选</p><h3>探索题</h3><strong id="gw-record-quiz" class="gw-record-count"></strong><progress id="gw-record-quiz-bar" aria-label="探索题掌握进度"></progress><button type="button" data-record-open="quiz">继续探索 →</button></article>
+          <article><p class="gw-eyebrow">看坐标 · 找位置</p><h3>经纬度寻宝</h3><strong id="gw-record-hunt" class="gw-record-count"></strong><progress id="gw-record-hunt-bar" aria-label="经纬度寻宝完成进度"></progress><button type="button" data-record-open="hunt">继续探索 →</button></article>
+          <article><p class="gw-eyebrow">读线索 · 找国家</p><h3>地理侦探</h3><strong id="gw-record-detective" class="gw-record-count"></strong><progress id="gw-record-detective-bar" aria-label="地理侦探完成进度"></progress><button type="button" data-record-open="detective">继续探索 →</button></article>
+        </div><p class="gw-note">记录保存在当前浏览器。保存不可用时，本页仍会更新；查看答案不计入找到记录。</p>
+      </section>
       <section class="gw-tour-directory gw-learning-section" id="gw-tour-directory" aria-labelledby="gw-tour-heading"><h2 id="gw-tour-heading">带上好奇心，走一趟世界</h2><p>三条路线，每条五站。读一读、转一转，再自己走到下一站。</p><div id="gw-tour-cards" class="gw-learning-cards"></div></section>
       <section id="gw-quiz" class="gw-quiz gw-learning-section" aria-labelledby="gw-quiz-heading">
         <div class="gw-quiz-heading"><h2 id="gw-quiz-heading">地球探索挑战</h2><span id="gw-quiz-progress" role="status"></span></div>
+        <div class="gw-buttons gw-quiz-review"><button type="button" id="gw-quiz-restart">全部再练</button><button type="button" id="gw-quiz-mistakes">错题再练</button></div>
         <p id="gw-quiz-number" class="gw-eyebrow"></p><h3 id="gw-quiz-question" tabindex="-1"></h3>
         <div id="gw-quiz-options" class="gw-quiz-options" role="group" aria-label="选择答案"></div>
         <p id="gw-quiz-feedback" role="status" aria-live="polite"></p>
         <div class="gw-buttons"><button type="button" id="gw-quiz-look">在地球仪上观察 ↑</button><button type="button" id="gw-quiz-hint">给我一个提示</button><button type="button" id="gw-quiz-prev">上一题</button><button type="button" id="gw-quiz-next">下一题</button></div>
-        <p id="gw-quiz-storage" class="gw-note">答对记录保存在当前浏览器。</p>
+        <p id="gw-quiz-storage" class="gw-note">掌握与错题记录保存在当前浏览器，再练不会清除已掌握记录。</p>
       </section>
       <section class="gw-observe" aria-labelledby="gw-observe-title"><h2 id="gw-observe-title">带着问题转一转</h2><div id="gw-observations"></div></section>
       <p class="gw-note" id="gw-note"></p>

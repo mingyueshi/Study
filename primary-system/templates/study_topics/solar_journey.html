@@ -1,0 +1,13 @@
+{% load static %}
+{% if solar_journey %}
+<link rel="stylesheet" href="{% static 'study_topics/solar-learning.css' %}?v=1">
+<section class="solar-journey" aria-label="{{ solar_journey.name }}联读路线" data-term="{{ solar_journey.id }}" data-name="{{ solar_journey.name }}">
+  <div class="solar-journey-heading"><h2>从{{ solar_journey.name }}出发，串起来学</h2><a data-solar-return href="{{ solar_journey.url }}">回{{ solar_journey.name }}卡 · 记观察 →</a></div>
+  <p class="solar-journey-prompt">{% if solar_focus == 'geography' %}<b>带着问题读：</b>{{ solar_journey.learning.geography.question }}{% elif solar_focus == 'literature' %}<b>带着问题读：</b>{{ solar_journey.learning.literature.question }}{% else %}<b>这张节气卡的读诗任务：</b>{{ solar_journey.learning.poetry }}{% endif %}</p>
+  <nav aria-label="{{ solar_journey.name }}的跨学科任务">
+    <a href="{{ solar_journey.learning.geography.url }}"><span>看天气</span>{{ solar_journey.learning.geography.title }} ↗</a>
+    <a href="{{ solar_journey.learning.literature.url }}"><span>读文学</span>{{ solar_journey.learning.literature.title }} ↗</a>
+    {% if solar_poetry_ready %}<a href="{{ solar_journey.poetry_url }}"><span>寻诗景</span>{{ solar_journey.season_name }}季诗词 ↗</a>{% endif %}
+  </nav>
+</section>
+{% endif %}

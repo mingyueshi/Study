@@ -26,6 +26,9 @@
   const count = root.querySelector('#gm-animal-count');
   const params = new URL(location.href);
   let selected = animalById.get(params.searchParams.get(queryKey)) || animals[0];
+  let visible = animals;
+  let activeHabitat = '';
+  let learning;
   const labelPositions = {
     left: [-28, 1, 'end'],
     top: [0, -37, 'middle'],
@@ -114,6 +117,7 @@
         <h2 id="gm-animal-name">${esc(animal.name)}</h2>
         ${flora ? `<p class="gm-plant-scientific" lang="la">${esc(animal.scientificName)}</p>` : ''}
         <p class="gm-animal-place">${esc(animal.place)}</p>
+        ${learning ? learning.cardTools(animal) : ''}
         <dl>
           <dt>${flora ? '它长在哪里？' : '它住在哪里？'}</dt><dd>${esc(animal.home)}</dd>
           ${flora ? `<dt>怎样适应环境？</dt><dd>${esc(animal.adaptation)}</dd>` : ''}
@@ -128,33 +132,46 @@
   }
 
   function rememberSelection() {
-    if (location.protocol === 'file:') return;
+    if (!selected || location.protocol === 'file:') return;
     params.searchParams.set(queryKey, selected.id);
     history.replaceState(null, '', params);
   }
 
-  function filter(habitat) {
-    const visible = animals.filter(animal => !habitat || animal.habitat === habitat);
+  function filter(habitat = activeHabitat) {
+    activeHabitat = habitat;
+    visible = animals.filter(animal => (!habitat || animal.habitat === habitat)
+      && (!learning || learning.matches(animal)));
     const visibleIds = new Set(visible.map(animal => animal.id));
     for (const button of filters.querySelectorAll('button')) {
       button.setAttribute('aria-pressed', String(button.dataset.habitat === habitat));
     }
     for (const target of targets) target.toggleAttribute('hidden', !visibleIds.has(target.dataset.animal));
     count.textContent = `地图上有 ${visible.length} 种${noun}。`;
-    select(visibleIds.has(selected.id) ? selected : visible[0]);
+    if (visible.length) select(visibleIds.has(selected?.id) ? selected : visible[0]);
+    else {
+      selected = null;
+      for (const target of targets) target.setAttribute('aria-pressed', 'false');
+      card.innerHTML = `<div class="gm-animal-info"><h2 id="gm-animal-name">换个条件找找吧</h2><p>没有符合条件的${noun}，可以换个词，或查看全部${noun}。</p><button type="button" data-animal-reset>查看全部${noun}</button></div>`;
+    }
+    learning?.refresh(visible.length);
+  }
+
+  function showAnimal(animal) {
+    select(animal);
+    rememberSelection();
+    // 选择后展开档案，避免窄屏或收起侧栏时看不到更新。
+    const workspace = root.querySelector('.gm-wildlife-workspace');
+    if (workspace.dataset.slMode === 'compact' && workspace.dataset.slOpen !== 'true') {
+      workspace.querySelector('.sl-toggle:not(.sl-collapse)')?.click();
+    } else if (workspace.dataset.slMode === 'wide' && workspace.dataset.slCollapsed === 'true') {
+      workspace.querySelector('.sl-collapse')?.click();
+    }
+    if (workspace.dataset.slMode === 'compact') card.scrollIntoView({ block: 'start', behavior: 'instant' });
   }
 
   function chooseAnimal(event) {
     const pin = event.target.closest('[data-animal]');
-    if (!pin) return;
-    select(animalById.get(pin.dataset.animal));
-    rememberSelection();
-    // 竖屏里植物档案会收进辅助栏，选择后展开，方便立即阅读。
-    const workspace = root.querySelector('.gm-wildlife-workspace');
-    if (flora && workspace.dataset.slMode === 'compact') {
-      if (workspace.dataset.slOpen !== 'true') workspace.querySelector('.sl-toggle').click();
-      card.scrollIntoView({ block: 'start', behavior: 'smooth' });
-    }
+    if (pin) showAnimal(animalById.get(pin.dataset.animal));
   }
 
   filters.addEventListener('click', event => {
@@ -171,7 +188,17 @@
     if (!event.repeat) chooseAnimal(event);
   });
 
+  if (window.GMAnimalLearning) {
+    learning = window.GMAnimalLearning.mount({ root, animals, habitats, assets, esc,
+      getVisible: () => visible,
+      getSelected: () => selected,
+      onFilter: () => { filter(); rememberSelection(); },
+      onReset: () => { filter(''); rememberSelection(); },
+      onChoose: showAnimal,
+    });
+  }
   filter('');
   root.querySelector('.gm-wildlife-tools').hidden = false;
+  if (learning) root.querySelector('.gm-animal-progress-row').hidden = false;
   root.querySelector('.gm-wildlife-workspace').hidden = false;
 })();

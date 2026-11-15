@@ -5,12 +5,12 @@
 | 内容 | 编辑位置 | 生成命令 |
 |---|---|---|
 | 数学、语文教材 | `math-data.js`、`knowledge-data.js`、图示与 `images/` | `make mathbook-data chinesebook-data` |
-| 图形运动实验室 | `geometry-lab.json`（实验手记和挑战目标） | `make study-topics-data` |
+| 图形运动实验室 | `geometry-lab.json`（图形顶点、实验手记和挑战目标，生成时校验） | `make study-topics-data` |
 | 英语教材、日常用语 | `english-data.js` | `make phrases-data`；教材导出见项目 README |
 | 英语语法 | `grammar/` | `make grammar-data` |
 | 作文坊 | `writing-data.js` | `make writing-data` |
 | 积分兑换奖励 | `rewards.json`（版本 2，22 项，五类分类，50～5000 积分）；`rewards-activities.json`、`rewards-device-time.json` 保留旧活动和设备时长目录 | 先迁移，再用 `.venv/bin/python manage.py import_rewards --dry-run` 预览，去掉 `--dry-run` 导入并补齐空白分类；可用 `--retire-source` 下架未修改的旧项目，已有同名配置保留，见 [奖励目录维护](../incentives/data/README.md) |
-| 对联工坊 | `couplets.json`（入门线索、例联词组、练习、自查与出处） | Django 直接读取。保留规则、例联和练习的 `id` 以维持深链接，修改后运行 `node content_sources/test/test-couplets.js` |
+| 对联工坊 | `couplets.json`（入门线索、主题分类、例联词组与句尾拼音、选择题、拼联引用、词语素材、自查与出处） | Django 直接读取。保留规则、例联和练习的 `id` 以维持深链接，修改后运行 `node content_sources/test/test-couplets.js`。选择题的内容指纹变化后重新计进度；作品在当前浏览器按账号保存，草稿在当前标签页刷新后恢复 |
 | 古文精读馆 | `classical/catalog.json` 与一篇章一个 JSON（11 篇精选（含《滕王阁序》）、《论语》二十篇及《道德经》八十一章，共 1054 个精读段、367 道练习；《道德经》含 428 句自编译解、243 道章后练习；原六则已合并） | Django 直接读取并校验，无需入库。运行 `node content_sources/test/test-classical.js` 和 `.venv/bin/python manage.py test classical`；结构、逐段原典定位与打印见 [专题维护](../classical/README.md) |
 | 病句医院、错别字诊所 | `chinese-clinics.json`（病例、句子和辨析提示），形近字与多音字候选来自四上教材的 `knowledge-data.js` | 病例由 Django 直接读取。改教材字词后运行 `make chinesebook-data`，再运行 `.venv/bin/python manage.py test chinesebook.test_clinics` |
 | 场景单词导入来源 | `words-data.js` | `node scripts/export_words_scenario.cjs`，默认导出到 `data/words-scenario.json` |
@@ -18,9 +18,9 @@
 | 教材练习 | 与教材共用语数英数据 | `make questionbank-data` |
 | 历史、地理 | `history/`、`history-timeline/`、`geo/`、`geo-map/` | `make study-topics-data` |
 | 天文、文学、科学 | `astro-*`、`lit-*`、`sci-*` 及 `images/` | `make study-topics-data` |
-| 科学流言粉碎机 | `science-rumors.json`（24 项任务的说法、证据卡、判断、迁移题与出处，另含可选 `icon`、`media` 和 `activity`） | Django 直接读取。`media` 记录系统内素材路径、图注、署名与原始资料页，`activity` 记录材料、步骤和注意事项。新增媒体放在 `static/science/rumor-media/`，也可复用本系统已有素材。保留任务 `slug` 以维持深链接和进度，修改后运行 `node content_sources/test/test-science-rumors.js` |
-| 二十四节气馆 | `solar-terms.json`（节气、三候、习俗、农谚、出处与诗篇定位） | Django 直接读取。诗篇按题名、作者及从零开始的段落序号在当前简体语料中取句。保留季节与节气 `id` 以维持深链接。修改后运行 `node content_sources/test/test-solar-terms.js` |
-| 人体奥秘站 | `human-body.json`（六课、图解、12 幅本地图像及出处、小实验与 18 道自测） | Django 直接读取。保留课程 `slug` 和科学实验室的 `su6-5` 以维持深链接，修改后运行 `node content_sources/test/test-human-body.js` |
+| 科学流言粉碎机 | `science-rumors.json`（24 项任务的说法、证据卡、判断、迁移题与出处，另含可选 `icon`、`media` 和 `activity`） | Django 直接读取。`skills` 为四种查证方法，任务 `skill` 引用其 ID；`challenge` 为迁移题，含题干、三个稳定选项 ID、逐项反馈和正确选项，详情与五题训练共用；`toolkit_sources` 保存方法出处。`media` 记录本地素材路径、图注、署名与原始资料页，`activity` 记录材料、步骤和注意事项。新增媒体放在 `static/science/rumor-media/`，也可复用本系统已有素材。保留任务 `slug` 以维持深链接和旧版进度；本机收藏、手记、待巩固和训练轮次由 `static/science/rumors-learning.js` 管理，不写入题库或数据库。修改后运行 `node content_sources/test/test-science-rumors.js`、`node --test scripts/test_rumors_learning.cjs` 与 `.venv/bin/python manage.py test science.test_rumors` |
+| 二十四节气馆 | `solar-terms.json`（节气、三候、习俗、农谚、24 个观察任务、12 道挑战、72 个联读任务、课程关联、出处与诗篇定位） | Django 直接读取。诗篇按题名、作者及从零开始的段落序号在当前简体语料中取句。保留季节与节气 `id` 以维持深链接和本机观察笔记，挑战的 `term` 指向节气卡。`learning_lessons` 登记课程 ID 与标题，`learning` 维护每卡地理、文学与读诗问题，校验时核对课程源中的真实 ID 和标题；跨页 `solar_term` 只按已知节气 ID 恢复。修改后运行 `node content_sources/test/test-solar-terms.js` |
+| 人体奥秘站 | `human-body.json`（六课、12 幅本地图像及出处、18 道自测、3 种协作场景、7 道定位挑战、9 种过程动画与脉搏手册） | Django 直接读取。`animation.modes[].phases[]` 维护过程标题、观察提示、解释和演示时长，由 `static/science/body-process.js` 统一驱动。保留课程 `slug`、题目 `id` 和科学实验室的 `su6-5` 以维持深链接及本地学习足迹，修改后运行 `node content_sources/test/test-human-body.js` |
 | 汉字演变馆 | `hanzi-evo-*`、`images/glyphs/`（古字形 SVG）与 `hanzi-evo-availability.json` | `make study-topics-data`；字形重抓见 `scripts/fetch_hanzi_glyphs.py` |
 
 `make test-content-sources` 运行本目录的源文件校验。`make content-data` 重生成全部随项目维护的文件和题库批次；命令只写文件。题库题目发生变化时，按[题库数据说明](../questionbank/data/README.md)处理新批次。已发布批次的备注可能保留旧来源名称，以维持原有导入指纹。
@@ -74,3 +74,5 @@
 ### 月相与日月食观察
 
 `astro-observation-data.js` 是八种月相说明、两类日月食步骤、模型限制和出处的主来源；`astro-observation.js` 负责联动图示与播放清理。`astro-figures.js` 沿用 `demo-astro-moonphases`、`astro-eclipse`，动效脚本失效时读取同一份月相说明显示静态图；`astro-app.js` 支持原知识点 ID 的直达链接。修改后运行 `node content_sources/test/test-astro-observation.js`、`node content_sources/test/test-astro.js`、`make study-topics-data`、`make test-frontend` 与 `.venv/bin/python manage.py test catalog.test_study_topics`。不要把模型中的月相天数用作当日天象预报。
+
+天文漫游进阶功能：`astro-discovery-data.js` 维护五级宇宙地址、三条光信号路线与六道观察挑战；`astro-discovery.js` 计算传播时间并管理浏览器挑战记录（首次答案与最新答案分开，存储不可用时使用当前页面内存）。不计入账号积分或原课程掌握标记。增加 `node content_sources/test/test-astro-discovery.js` 校验数据、计算和存档过滤；新增锚点为 `#roam-address`、`#roam-light`、`#roam-challenges`。图片沿用本专题素材，传播时间使用真空光速与平均距离估算，非实时天体测距。

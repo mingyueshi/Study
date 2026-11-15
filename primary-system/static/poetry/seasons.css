@@ -56,6 +56,8 @@
 
 .season-card { display: flex; flex-direction: column; gap: 4px; padding: 22px 20px; border: 1px solid #e0e8d6; border-top: 6px solid var(--sc, #7fb069); border-radius: 22px; background: var(--white, #fff); box-shadow: 0 4px 0 #2a1a3806; transition: transform .12s ease, box-shadow .12s ease; }
 .season-card:hover { transform: translateY(-3px); box-shadow: 0 8px 0 #2a1a380a; }
+.season-poetry-link { display: flex; flex-direction: column; gap: 4px; margin-bottom: 16px; }
+.season-poetry-link:hover .season-name { text-decoration: underline; text-underline-offset: .15em; }
 .season-emoji { font-size: 44px; line-height: 1.2; }
 .season-name { font-size: 30px; font-weight: 900; color: #234b38; }
 .season-subtitle { font-style: normal; color: color-mix(in srgb, var(--sc, #7fb069) 60%, #33404d); font-size: 16px; font-weight: 700; }

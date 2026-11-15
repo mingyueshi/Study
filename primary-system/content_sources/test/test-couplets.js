@@ -16,7 +16,8 @@ function checkIds(items) {
 const han = /^[\p{Unified_Ideograph}〇]+$/u;
 
 assert.equal(content.schema_version, 1);
-for (const items of [content.rules, content.examples, content.questions]) checkIds(items);
+for (const items of [content.rules, content.examples, content.questions, content.categories, content.word_banks]) checkIds(items);
+content.categories.forEach(item => checkText(item.label));
 
 for (const rule of content.rules) {
   for (const field of ['title', 'text', 'clue']) checkText(rule[field]);
@@ -24,6 +25,12 @@ for (const rule of content.rules) {
 
 for (const example of content.examples) {
   for (const field of ['title', 'scene', 'note']) checkText(example[field]);
+  assert.ok(content.categories.some(category => category.id === example.category));
+  for (const [index, ending] of example.endings.entries()) {
+    checkText(ending.pinyin);
+    assert.ok((index === 0 ? [3, 4] : [1, 2]).includes(ending.tone));
+  }
+  assert.equal(example.endings.length, 2);
   assert.ok(example.upper.length > 0);
   assert.equal(example.upper.length, example.lower.length, example.id);
   example.upper.forEach((part, index) => {
@@ -34,6 +41,22 @@ for (const example of content.examples) {
   assert.ok([...example.upper.join('')].length <= 12);
   assert.match(example.banner, han);
   assert.ok([...example.banner].length <= 6);
+}
+
+assert.equal(new Set(content.puzzles).size, content.puzzles.length);
+for (const id of content.puzzles) {
+  const example = content.examples.find(item => item.id === id);
+  assert.ok(example && example.lower.length >= 3, '拼联必须引用至少三个词组的例联');
+}
+for (const bank of content.word_banks) {
+  checkText(bank.title);
+  checkText(bank.tip);
+  assert.ok(bank.pairs.length > 0);
+  for (const pair of bank.pairs) {
+    assert.equal(pair.length, 2);
+    pair.forEach(word => assert.match(word, han));
+    assert.equal([...pair[0]].length, [...pair[1]].length);
+  }
 }
 
 for (const question of content.questions) {

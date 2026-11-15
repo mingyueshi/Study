@@ -155,3 +155,43 @@ body:has(.geometry-lab) { --page-width: 100%; }
   .geometry-mode-number { display: none; }
   .geometry-modes a { justify-content: center; text-align: center; }
 }
+
+.geometry-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  padding: 10px clamp(10px, 1.6vw, 22px);
+  border-top: 1px solid var(--lab-line);
+}
+.geometry-tools select {
+  width: auto;
+  min-height: 44px;
+  max-width: 100%;
+  padding: 4px 30px 4px 12px;
+  border: 1px solid var(--lab-line);
+  border-radius: 9px;
+  color: var(--lab-ink);
+  background: var(--white);
+}
+.geometry-checkbox { display: inline-flex; align-items: center; gap: 8px; margin-inline-start: auto; }
+.geometry-checkbox input { width: 20px; height: 20px; min-height: 0; padding: 0; accent-color: var(--lab-blue); }
+.geometry-mission {
+  margin: 0 clamp(10px, 1.6vw, 22px) 14px;
+  padding: 14px 18px;
+  border-left: 4px solid #d48e24;
+  border-radius: 0 12px 12px 0;
+  background: #fff7df;
+}
+.geometry-mission > p:first-of-type { margin-bottom: 10px; font-size: 21px; font-weight: 750; }
+.geometry-button:disabled { cursor: default; opacity: .45; }
+.geometry-demo { margin-top: 14px; padding-top: 12px; border-top: 1px dashed var(--lab-line); }
+.geometry-demo p { font-size: 15px; margin: 8px 0 0; color: var(--lab-blue); }
+.geometry-save-note { font-size: 15px; color: var(--muted); }
+@media (min-width: 900px) {
+  .geometry-mission { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 18px; align-items: center; }
+  .geometry-mission > .geometry-kicker { grid-column: 1; }
+  .geometry-mission > p:first-of-type { grid-column: 1; margin-bottom: 0; }
+  .geometry-mission > .geometry-buttons { grid-column: 2; grid-row: 1 / span 2; }
+  .geometry-mission > .geometry-feedback { grid-column: 1 / -1; }
+}

@@ -2,7 +2,7 @@
 from django import template
 
 register = template.Library()
-FILTERS = ("q", "collection", "layer", "region", "category", "named", "con", "page")
+FILTERS = ("q", "collection", "layer", "region", "category", "named", "con", "page", "solar_term")
 
 
 @register.simple_tag(takes_context=True)

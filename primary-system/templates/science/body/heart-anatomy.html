@@ -15,7 +15,7 @@
       <path d="M231 218c4 56 27 91 75 121V218Z" fill="#80b6d3" stroke="#3e7d9d" stroke-width="3"/>
       <path d="M335 218v121c48-30 71-65 76-121Z" fill="#e88c7f" stroke="#b35f53" stroke-width="3"/>
     </g>
-    <path d="m250 199 16 10 16-10m78 0 16 10 16-10" fill="none" stroke="#faf0d8" stroke-width="5" stroke-linecap="round"/>
+    <path data-heart-valves d="m250 199 16 10 16-10m78 0 16 10 16-10" fill="none" stroke="#faf0d8" stroke-width="5" stroke-linecap="round"/>
     <g class="body-heart-vessels" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="11">
       <path d="M265 257C168 244 165 116 188 60" stroke="#93bfd5"/>
       <path d="M375 257C472 244 475 116 452 60" stroke="#dd9788"/>
@@ -24,16 +24,16 @@
     </g>
     <g fill="none" stroke-width="4">
       <g data-anatomy-phase="return">
-        <path d="M108 151h110" stroke="#2d719b" marker-end="url(#heart-blue)"/>
-        <path d="M532 151H424" stroke="#b84d48" marker-end="url(#heart-red)"/>
+        <path data-motion-path="cycle-return-blue" d="M108 151h158" stroke="#2d719b" marker-end="url(#heart-blue)"/>
+        <path data-motion-path="cycle-return-red" d="M532 151H376" stroke="#b84d48" marker-end="url(#heart-red)"/>
       </g>
       <g data-anatomy-phase="fill">
-        <path d="M266 182v52" stroke="#2d719b" marker-end="url(#heart-blue)"/>
-        <path d="M376 182v52" stroke="#b84d48" marker-end="url(#heart-red)"/>
+        <path data-motion-path="cycle-fill-blue" d="M266 182v52" stroke="#2d719b" marker-end="url(#heart-blue)"/>
+        <path data-motion-path="cycle-fill-red" d="M376 182v52" stroke="#b84d48" marker-end="url(#heart-red)"/>
       </g>
       <g data-anatomy-phase="pump">
-        <path d="M245 249C166 222 176 114 187 65" stroke="#2d719b" marker-end="url(#heart-blue)"/>
-        <path d="M394 249C473 222 463 114 453 65" stroke="#b84d48" marker-end="url(#heart-red)"/>
+        <path data-motion-path="cycle-pump-blue" d="M245 249C166 222 176 114 187 65" stroke="#2d719b" marker-end="url(#heart-blue)"/>
+        <path data-motion-path="cycle-pump-red" d="M394 249C473 222 463 114 453 65" stroke="#b84d48" marker-end="url(#heart-red)"/>
       </g>
     </g>
     <g class="body-svg-labels" text-anchor="middle">
@@ -48,5 +48,5 @@
     </g>
     <path d="M317 133v206" stroke="#9c5c56" stroke-width="6" stroke-linecap="round"/>
   </svg>
-  <figcaption>{{ lesson.diagram.caption }} {{ heart.legend }}</figcaption>
+  <figcaption>{{ lesson.diagram.caption }}</figcaption>
 </figure>

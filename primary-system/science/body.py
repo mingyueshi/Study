@@ -19,6 +19,12 @@ def load_content():
         'lesson_count': len(content['lessons']),
         'media_count': sum(len(lesson['gallery']) for lesson in content['lessons']),
         'question_count': sum(len(lesson['checkup']) for lesson in content['lessons']),
+        'body_progress': {
+            'lessons': [{'slug': lesson['slug'], 'label': lesson['label'],
+                         'questions': [question['id'] for question in lesson['checkup']]}
+                        for lesson in content['lessons']],
+            'challenges': [item['id'] for item in content['expedition']['challenges']],
+        },
     }
 
 

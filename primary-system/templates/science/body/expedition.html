@@ -1,0 +1,42 @@
+<section class="body-section body-missions" id="missions" aria-labelledby="missions-title">
+  <div class="body-section-heading"><p class="body-kicker">全身合作 · 互动任务站</p><h2 id="missions-title">{{ expedition.title }}</h2></div>
+  <p class="body-mission-intro">{{ expedition.intro }}</p>
+  <div data-expedition hidden>
+    <div class="body-controls body-mission-modes" role="group" aria-label="选择探索方式">
+      <button type="button" data-mission-mode="explore" aria-pressed="true">① 看身体合作</button>
+      <button type="button" data-mission-mode="challenge" aria-pressed="false">② 找器官挑战</button>
+    </div>
+    <div class="body-mission-workbench">
+      <figure class="body-mission-map">
+        {% include 'science/body/whole-body.html' %}
+        <figcaption>{{ expedition.caption }}</figcaption>
+      </figure>
+      <div class="body-mission-task">
+        <div data-scene-panel>
+          <div class="body-controls body-scene-choices" role="group" aria-label="选择生活场景">
+            {% for scene in expedition.scenarios %}<button type="button" data-scene="{{ scene.id }}" aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}">{{ scene.title }}</button>{% endfor %}
+          </div>
+          <h3 data-scene-question></h3>
+          <ol class="body-scene-steps" data-scene-steps aria-label="合作步骤"></ol>
+          <div class="body-mission-note" data-scene-note aria-live="polite"><p class="body-kicker" data-step-count></p><h4 data-step-title></h4><p data-step-body></p></div>
+          <div class="body-controls body-scene-playback">
+            <button type="button" data-scene-prev aria-label="上一步">← 上一步</button><button type="button" data-scene-play aria-pressed="false">播放这条路线</button><button type="button" data-scene-next>下一步 →</button>
+          </div>
+          <p class="body-small" data-scene-status role="status"></p>
+          <p class="body-scene-summary" data-scene-summary></p>
+        </div>
+        <div data-challenge-panel hidden>
+          <p class="body-kicker" data-challenge-count></p>
+          <h3 data-challenge-prompt></h3>
+          <p>点身体图的数字标签。也可以用键盘 Tab 选中标签，按回车作答。</p>
+          <details data-challenge-hint><summary>给我一点提示</summary><p></p></details>
+          <p class="body-challenge-feedback" data-challenge-feedback role="status"></p>
+          <div class="body-controls"><button type="button" class="body-button-primary" data-challenge-next disabled>下一题 →</button><button type="button" data-challenge-restart>重新挑战</button></div>
+        </div>
+        <div class="body-organ-file" data-organ-file aria-live="polite"><span class="body-kicker">器官小档案</span><h4 data-organ-name></h4><p data-organ-description></p><a class="body-inline-link" data-organ-link>到这一课仔细看 ↗</a></div>
+      </div>
+    </div>
+  </div>
+  <noscript><p>启用 JavaScript 后可以逐步点亮器官、参加定位挑战。也可以先读下面的合作线索。</p>{% for scene in expedition.scenarios %}<details class="body-panel"><summary>{{ scene.question }}</summary><p>{{ scene.summary }}</p><ol>{% for step in scene.steps %}<li>{{ step.title }}：{{ step.body }}</li>{% endfor %}</ol></details>{% endfor %}</noscript>
+  {{ expedition|json_script:"body-expedition-data" }}
+</section>

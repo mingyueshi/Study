@@ -49,6 +49,8 @@ class SeasonConfigTests(SimpleTestCase):
 
 class SeasonPageTests(TestCase):
     def setUp(self):
+        themes._catalog.cache_clear()
+        self.addCleanup(themes._catalog.cache_clear)
         self.dataset = Dataset.objects.create(code="poetry", title="古诗文", version="s", state="ready")
 
     def test_seasons_page_renders_cards_and_emotions(self):
@@ -60,12 +62,36 @@ class SeasonPageTests(TestCase):
         self.assertContains(response, "seasons-nav-link")  # 侧栏全量导航：四季与情感题材主题链接
         self.assertContains(response, "情感与题材")
         self.assertContains(response, 'href="/geography/solar-terms/"')
+        from geographystudy.solar_terms_content import load_content
+        for season in load_content()['seasons']:
+            for term in season['terms']:
+                self.assertContains(response, f'href="{term["url"]}"')
 
     def test_theme_detail_works_for_season_codes(self):
         response = self.client.get("/poetry/themes/chun/")
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "春")
         self.assertContains(response, 'href="/geography/solar-terms/#chun"')
+        self.assertContains(response, 'href="/geography/solar-terms/#guyu"')
+        self.assertNotContains(response, 'href="/geography/solar-terms/#lixia"')
+
+    def test_learning_context_survives_search_dynasty_pagination_and_poem_links(self):
+        from .models import PoetryText
+
+        document = PoetryDocument.objects.create(version='s', path='spring.json', layer='simplified', collection='全唐诗', original_data=[])
+        for index in range(27):
+            PoetryText.objects.create(document=document, locator=f'/{index}', title=f'春日观察{index}', author='测试', paragraphs=[f'第{index}首诗'], body=f'第{index}首，春风桃花燕子')
+        response = self.client.get('/poetry/themes/chun/', {'solar_term': 'yushui'})
+        self.assertContains(response, '从雨水出发，串起来学')
+        self.assertContains(response, 'name="solar_term" value="yushui"')
+        self.assertContains(response, '?dynasty=tang&amp;solar_term=yushui')
+        self.assertContains(response, '?solar_term=yushui&amp;page=2')
+        self.assertContains(response, '?dynasty=all&amp;solar_term=yushui')
+        for params in ({'q':'春日'}, {'dynasty':'tang'}, {'page':'2'}):
+            response = self.client.get('/poetry/themes/chun/', {'solar_term': 'yushui', **params})
+            self.assertContains(response, 'href="/geography/solar-terms/#yushui"')
+        response = self.client.get('/poetry/themes/chun/', {'solar_term': 'unknown'})
+        self.assertNotContains(response, 'class="solar-journey"')
 
     def test_dataset_gate(self):
         self.dataset.state = "importing"

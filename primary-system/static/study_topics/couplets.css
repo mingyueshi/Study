@@ -9,6 +9,7 @@ body:has(.couplets-workshop) { --page-width: 100%; }
   --couplet-serif: "Songti SC", "STSong", "Noto Serif CJK SC", SimSun, serif;
   color: var(--couplet-ink);
 }
+.couplets-workshop [hidden] { display: none !important; }
 .couplets-back {
   display: inline-flex;
   align-items: center;
@@ -236,6 +237,47 @@ body:has(.couplets-workshop) { --page-width: 100%; }
 .couplets-sources h2 { margin-bottom: 4px; font-size: 1.15rem; }
 .couplets-sources a { color: var(--green-dark); overflow-wrap: anywhere; }
 .couplets-sources details { margin-top: 8px; }
+
+.couplets-tools, .couplets-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; }
+.couplets-tools { margin-block: 20px; padding: 16px; border-radius: 12px; background: #e6eee0; }
+.couplets-tools label { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-weight: 650; }
+.couplets-tools input, .couplets-tools select, .couplets-puzzle select {
+  max-width: 100%;
+  min-height: 44px;
+  padding: 6px 10px;
+  border: 1px solid #b7bba6;
+  border-radius: 8px;
+  background: #fffdfa;
+  color: var(--couplet-ink);
+}
+.couplet-endings { padding-top: 14px; border-top: 1px dashed var(--couplet-line); color: var(--couplet-muted); }
+.couplet-endings strong { color: var(--couplet-red); }
+.couplets-progress { padding: 12px 18px; border-left: 4px solid #417771; background: #e6eee0; font-weight: 700; }
+.couplets-puzzle { margin-top: 28px; padding: clamp(18px, 3vw, 40px); border: 2px solid #d5b16f; border-radius: 20px; background: #fff3d6; }
+.couplet-puzzle-upper { margin-top: 20px; color: var(--couplet-red); font-size: 1.4rem; font-weight: 750; }
+.couplet-puzzle-answer { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; min-height: 80px; padding: 16px; margin-block: 16px; border: 2px dashed #bb9061; border-radius: 10px; }
+.couplets-word-bank { padding: 18px 22px; margin-block: 20px; border: 1px solid var(--couplet-line); border-radius: 12px; background: #e6eee0; }
+.couplets-word-bank summary { cursor: pointer; font-size: 1.15rem; font-weight: 750; }
+.couplets-word-bank .couplets-examples { margin-top: 20px; }
+.couplets-word-bank ul { display: flex; flex-wrap: wrap; gap: 8px; padding: 0; list-style: none; }
+.couplets-word-bank li { padding: 5px 12px; border-radius: 6px; background: #fffaf0; }
+.couplets-library { margin-top: 30px; }
+.couplets-library h4 { margin: 0 0 12px; color: var(--couplet-red); font-size: 1.2rem; }
+.couplets-library p { overflow-wrap: anywhere; }
+[data-draft-status] { margin-top: 14px; color: var(--couplet-muted); font-size: .9rem; }
+
+@media print {
+  html:has(.couplets-workshop), body:has(.couplets-workshop) { background: #fff; }
+  body:has(.couplets-workshop) > header,
+  .couplets-workshop > :not(#studio),
+  #studio > :not(.couplets-studio),
+  .couplets-studio > :not([data-door-preview]) { display: none !important; }
+  #studio { margin: 0; }
+  .couplets-studio { display: block; padding: 0; border: 0; background: #fff; }
+  .couplets-studio [data-door-preview] { width: 155mm; max-width: 100%; margin: 10mm auto; break-inside: avoid; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  .couplets-studio .couplet-scroll-text, .couplets-studio .couplet-banner { font-size: 20pt; }
+  .couplets-studio .couplet-door-frame { min-height: 95mm; }
+}
 
 @media (max-width: 1040px) {
   .couplets-rules, .couplets-examples, .couplets-questions { grid-template-columns: repeat(2, minmax(0, 1fr)); }

@@ -530,9 +530,10 @@ function checkFlora({ habitats, plants }, bounds, checkPlace) {
     for (const field of ['source', 'photoSource']) check(/^https:\/\/[^\s]+$/.test(plant[field]), '植物应有资料与照片出处：' + plant.id + '/' + field);
     check(fileExists('assets/plants/' + plant.id + '.jpg'), '缺少本地植物照片：' + plant.id);
   }
-  check(plants.length >= 24, '每张植物地图应至少有 24 种植物');
+  check(plants.length >= 30, '每张植物地图应至少有 30 种植物');
 }
 checkFlora(W.GM_FLORA, [73, 136, 17.8, 53.8], plant => provAdcodes.has(plant.adcode));
+check(new Set(W.GM_FLORA.plants.map(plant => plant.adcode)).size >= 26, '中国植物代表地点应覆盖至少 26 个省级行政区');
 checkFlora(W.GM_WORLD_FLORA, [-180, 180, -73, 87], plant => A.get(plant.mapPlace)?.map === 'world');
 for (const continent of CONTINENTS) {
   check(W.GM_WORLD_FLORA.plants.some(plant => COUNTRY_META[plant.mapPlace]?.[1] === continent.id), '世界植物应覆盖：' + continent.name);
@@ -653,7 +654,7 @@ for (const province of PROVINCES) {
 console.log('— 入口文件（多页面系统） —');
 ['index.html', 'china.html', 'animals.html', 'world-animals.html', 'plants.html', 'world-plants.html', 'province.html', 'world.html', 'places.html', 'routes.html', 'gallery.html',
   'content.js', 'china-geo.js', 'map-data.js', 'shared.js',
-  'china-app.js', 'home-app.js', 'province-app.js', 'world-app.js', 'animals-data.js', 'world-animals-data.js', 'plants-data.js', 'world-plants-data.js', 'animals-app.js', 'animals.css',
+  'china-app.js', 'home-app.js', 'province-app.js', 'world-app.js', 'animals-data.js', 'world-animals-data.js', 'plants-data.js', 'world-plants-data.js', 'animals-app.js', 'animals-learning.js', 'animals.css',
   'styles.css', 'province.css', 'README.md',
   'world-geo.js', 'world-data.js', 'atlas-data.js', 'atlas.js', 'map-ui.js',
   'places-app.js', 'routes-app.js', 'media-data.js', 'media.js', 'gallery-app.js',
@@ -665,10 +666,10 @@ const PAGE_REFS = {
     'china.html', 'province.html', 'world.html', 'animals.html', 'world-animals.html', 'plants.html', 'world-plants.html'],
   'china.html': ['content.js', 'china-geo.js', 'map-data.js', 'shared.js', 'media-data.js', 'media.js', 'map-ui.js', 'china-app.js', 'styles.css',
     'province.html', 'world.html', 'index.html', 'animals.html', 'plants.html'],
-  'animals.html': ['animals-data.js', 'animals-app.js', 'animals.css', 'styles.css', 'china-geo.js', 'map-data.js', 'shared.js', 'china.html', 'world-animals.html'],
-  'world-animals.html': ['world-animals-data.js', 'animals-app.js', 'animals.css', 'styles.css', 'world-geo.js', 'shared.js', 'world.html', 'animals.html'],
-  'plants.html': ['plants-data.js', 'animals-app.js', 'animals.css', 'styles.css', 'china-geo.js', 'map-data.js', 'shared.js', 'china.html', 'world-plants.html'],
-  'world-plants.html': ['world-plants-data.js', 'animals-app.js', 'animals.css', 'styles.css', 'world-geo.js', 'shared.js', 'world.html', 'plants.html'],
+  'animals.html': ['animals-data.js', 'animals-app.js', 'animals-learning.js', 'animals.css', 'styles.css', 'china-geo.js', 'map-data.js', 'shared.js', 'china.html', 'world-animals.html'],
+  'world-animals.html': ['world-animals-data.js', 'animals-app.js', 'animals-learning.js', 'animals.css', 'styles.css', 'world-geo.js', 'shared.js', 'world.html', 'animals.html'],
+  'plants.html': ['plants-data.js', 'animals-app.js', 'animals-learning.js', 'animals.css', 'styles.css', 'china-geo.js', 'map-data.js', 'shared.js', 'china.html', 'world-plants.html'],
+  'world-plants.html': ['world-plants-data.js', 'animals-app.js', 'animals-learning.js', 'animals.css', 'styles.css', 'world-geo.js', 'shared.js', 'world.html', 'plants.html'],
   'province.html': ['content.js', 'china-geo.js', 'map-data.js', 'shared.js', 'media-data.js', 'media.js', 'province-app.js',
     'styles.css', 'province.css', 'china.html', 'index.html'],
   'world.html': ['map-data.js', 'world-geo.js', 'world-data.js', 'shared.js', 'media-data.js', 'media.js', 'map-ui.js', 'world-app.js', 'styles.css',

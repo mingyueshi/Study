@@ -3,7 +3,7 @@
 {% block title %}未解之谜研究所 · 乐学堂{% endblock %}
 {% block content %}
 <link rel="stylesheet" href="{% static 'mysteries/mysteries.css' %}">
-<div class="mysteries">
+<div class="mysteries" data-mystery-library>
   <a class="mystery-back" href="{% url 'home' %}?area=science#modules-title">← 学习广场 · 科学</a>
   <header class="mystery-banner mystery-directory-hero">
     <div>
@@ -24,31 +24,82 @@
       <h2 id="case-list-heading">选择一份案卷</h2>
       <p>{{ case_count }} 份案卷 · 小学四到六年级 · 每篇约 5–8 分钟</p>
     </header>
+    <div class="mystery-library-tools" hidden data-library-tools>
+      <div class="mystery-library-topline">
+        <div><p class="mystery-kicker">今天想调查什么？</p><p data-library-progress></p></div>
+        <a class="mystery-tool-button" data-continue hidden>接着上次的案卷 →</a>
+      </div>
+      <form class="mystery-filter-form" role="search" aria-label="查找案卷">
+        <label class="mystery-search-field">搜索线索
+          <input type="search" name="q" placeholder="试试：外星人、海洋、文字……" maxlength="120" autocomplete="off">
+        </label>
+        <label>调查领域<select name="category"><option value="">全部领域</option>{% for category in groups %}<option>{{ category }}</option>{% endfor %}</select></label>
+        <label>素材类型<select name="kind"><option value="">全部素材</option>{% for value, label in media_filters.items %}<option value="{{ value }}">{{ label }}</option>{% endfor %}</select></label>
+        <label>我的调查<select name="status"><option value="">全部案卷</option><option value="saved">稍后读</option><option value="unread">还没读完</option><option value="completed">已读完</option><option value="notes">有我的笔记</option></select></label>
+      </form>
+      <div class="mystery-library-actions">
+        <p role="status" data-filter-count></p>
+        <button class="mystery-tool-button" type="button" data-clear-filters>清除筛选</button>
+        <button class="mystery-tool-button mystery-tool-primary" type="button" data-random-case>帮我抽一份</button>
+      </div>
+      <p class="mystery-local-notice" data-storage-notice>稍后读、阅读标记和笔记仅保存在当前浏览器。</p>
+    </div>
     <nav class="mystery-jumps" aria-label="案卷分类">
       {% for category, cases in groups.items %}
       <a href="#case-group-{{ forloop.counter }}">{{ category }} · {{ cases|length }} 份 ↓</a>
       {% endfor %}
     </nav>
     {% for category, cases in groups.items %}
-    <section class="mystery-section mystery-group" id="case-group-{{ forloop.counter }}" aria-labelledby="case-group-heading-{{ forloop.counter }}">
+    <section class="mystery-section mystery-group" id="case-group-{{ forloop.counter }}" aria-labelledby="case-group-heading-{{ forloop.counter }}" data-case-group>
       <h3 id="case-group-heading-{{ forloop.counter }}">{{ category }}</h3>
       <ul class="mystery-case-list">
         {% for case in cases %}
-        <li>
+        <li class="mystery-card-item" data-case-slug="{{ case.slug }}">
           <a class="mystery-case-card" href="{% url 'mystery-case' case.slug %}">
             <img class="mystery-card-image" src="{% static case.figure.path %}" alt="" loading="lazy">
             <span class="mystery-card-copy">
               <strong><span aria-hidden="true">{{ case.icon }}</span> {{ case.title }}</strong>
               <span>{{ case.summary }}</span>
+              {% if case.media_labels %}<span class="mystery-card-media">{% for label in case.media_labels %}<span>{{ label }}</span>{% endfor %}</span>{% endif %}
               <span class="mystery-card-question"><b>未解焦点</b>{{ case.open_questions.0.question }}</span>
               <span class="mystery-card-action" aria-hidden="true">打开案卷 →</span>
             </span>
           </a>
+          <div class="mystery-card-tools" hidden data-card-tools>
+            <button class="mystery-tool-button" type="button" data-save-case aria-pressed="false" aria-label="稍后读：{{ case.title }}">☆ 稍后读</button>
+            <button class="mystery-tool-button" type="button" data-compare-case aria-pressed="false" aria-label="加入对照：{{ case.title }}">＋ 加入对照</button>
+            <span class="mystery-card-status" data-card-status></span>
+          </div>
         </li>
         {% endfor %}
       </ul>
     </section>
     {% endfor %}
+    <div class="mystery-empty mystery-panel" hidden data-empty-results>
+      <h3>这组线索还没找到案卷</h3><p>换一个关键词，或者放宽领域、素材和阅读筛选再试试。</p>
+      <button class="mystery-tool-button" type="button" data-clear-filters>查看全部案卷</button>
+    </div>
   </section>
+  <aside class="mystery-compare-tray" aria-label="案卷对照台" hidden data-compare-tray>
+    <div><strong>案卷对照台</strong><p data-compare-selection></p></div>
+    <div class="mystery-library-actions"><button class="mystery-tool-button mystery-tool-primary" type="button" data-open-compare disabled>并排看两份案卷</button><button class="mystery-tool-button" type="button" data-clear-compare>清空对照</button></div>
+  </aside>
+  <p class="mystery-action-status" role="status" data-library-message></p>
+  <dialog class="mystery-compare-dialog" aria-labelledby="compare-heading" data-compare-dialog>
+    <div class="mystery-compare-heading"><div><p class="mystery-kicker">对照证据，找出还缺的线索</p><h2 id="compare-heading">两份案卷，一起看</h2></div><button class="mystery-tool-button" type="button" data-close-compare autofocus>关闭对照</button></div>
+    <p>它们分别知道了什么？又卡在哪一步？读完后，可以把自己的发现记进案卷。</p>
+    <div class="mystery-comparison" data-comparison></div>
+  </dialog>
+  <template id="mystery-comparison-card">
+    <article class="mystery-comparison-case">
+      <img loading="lazy" alt=""><h3></h3>
+      <h4>具体在问什么</h4><ul data-compare-questions></ul>
+      <dl><dt>已经知道</dt><dd data-compare-known></dd><dt>还没解开</dt><dd data-compare-unresolved></dd><dt>下一步怎么查</dt><dd data-compare-next></dd></dl>
+      <a class="mystery-tool-button" data-compare-link>打开案卷核对线索 →</a>
+    </article>
+  </template>
+  {{ directory_data|json_script:'mystery-directory-data' }}
+  <script src="{% static 'mysteries/notebook-store.js' %}" defer></script>
+  <script src="{% static 'mysteries/library.js' %}" defer></script>
 </div>
 {% endblock %}

@@ -176,6 +176,28 @@ class CatalogTests(PlatformFixture):
         self.assertNotIn('挑战题库', names)
         self.assertIn('奥数挑战', names)
 
+    def test_grammar_has_one_home_entry_and_follows_module_visibility(self):
+        grammar = Module.objects.get(code='grammar')
+        grammar_url = reverse('grammar')
+        for params in ({}, {'area': 'english'}):
+            with self.subTest(params=params):
+                response = self.client.get('/', params)
+                cards = response.context['entry_cards']
+                urls = [card['url'] for card in cards]
+                self.assertEqual(len(urls), len(set(urls)))
+                grammar_cards = [card for card in cards if card['url'] == grammar_url]
+                self.assertEqual(len(grammar_cards), 1)
+                self.assertEqual(grammar_cards[0]['name'], grammar.name)
+                english_chip = next(chip for chip in response.context['area_chips'] if chip['area'] == 'english')
+                self.assertEqual(english_chip['count'], sum(card['area'] == 'english' for card in cards))
+
+        grammar.is_active = False
+        grammar.save(update_fields=['is_active'])
+        for params in ({}, {'area': 'english'}):
+            with self.subTest(inactive=True, params=params):
+                response = self.client.get('/', params)
+                self.assertNotIn(grammar_url, [card['url'] for card in response.context['entry_cards']])
+
     def test_area_filter_single_select(self):
         """专题单选筛选：按 ?area= 过滤卡片，无效值回退全部。"""
         response = self.client.get('/?area=poetry')

@@ -3,7 +3,7 @@
 {% block title %}图形运动实验室 · 乐学堂{% endblock %}
 {% block content %}
 <link rel="stylesheet" href="{% static 'study_topics/platform-bridge.css' %}">
-<link rel="stylesheet" href="{% static 'mathbook/geometry-lab.css' %}">
+<link rel="stylesheet" href="{% static 'mathbook/geometry-lab.css' %}?v=3">
 <div class="geometry-lab color-math" id="geometry-lab">
   <nav class="study-topic-nav" aria-label="数学专题导航">
     <a href="{% url 'home' %}?area=math#modules-title">← 学习广场 · 数学</a>
@@ -14,7 +14,7 @@
     <div>
       <p class="geometry-kicker">四年级上 · 图形与几何拓展</p>
       <h1>图形运动实验室</h1>
-      <p>把箭头放上方格纸。拖一拖、转一转、折一折，看看同一个点跑到了哪里。</p>
+      <p>选一个图形放上方格纸。先动手试试，再慢慢看演示，看看同一个点跑到了哪里。</p>
     </div>
     <span class="geometry-stamp" aria-hidden="true">A <span>→</span> A′</span>
   </header>
@@ -29,13 +29,30 @@
   </nav>
   <noscript><p class="notice">打开浏览器的 JavaScript，就能动手操作方格纸上的图形。</p></noscript>
 
-  <div class="geometry-workspace">
+  <div class="geometry-workspace" data-sidebar-label="实验手记">
     <section class="geometry-bench" aria-label="方格实验台">
       <header class="geometry-bench-bar">
         <strong>方格实验台</strong>
         <span>跟着 A 点看变化</span>
         <button type="button" class="geometry-button geometry-reset" id="geometry-reset">↺ 重来</button>
       </header>
+      <div class="geometry-tools">
+        <label for="geometry-shape-choice">选个图形</label>
+        <select id="geometry-shape-choice">
+          {% for shape in shapes %}<option value="{{ shape.id }}">{{ shape.label }}</option>{% endfor %}
+        </select>
+        <label class="geometry-checkbox"><input id="geometry-show-origin" type="checkbox" checked> 对照原图</label>
+      </div>
+      <div class="geometry-mission">
+        <span class="geometry-kicker" id="geometry-challenge-number"></span>
+        <p id="geometry-task"></p>
+        <div class="geometry-buttons">
+          <button type="button" class="geometry-button" id="geometry-previous">上一题</button>
+          <button type="button" class="geometry-button" id="geometry-next">下一题</button>
+          <button type="button" class="geometry-button geometry-check" id="geometry-check">检查一下</button>
+        </div>
+        <p class="geometry-feedback" id="geometry-feedback" role="status"></p>
+      </div>
       <div class="geometry-paper">
         <svg id="geometry-board" viewBox="0 0 600 360" role="img" aria-labelledby="geometry-board-title">
           <title id="geometry-board-title">方格纸上的图形运动示意图</title>
@@ -46,7 +63,7 @@
             <pattern id="geometry-major-grid" width="150" height="150" patternUnits="userSpaceOnUse">
               <path d="M0 150 V0 H150" fill="none" stroke="#95b7c6" stroke-width="1.5"/>
             </pattern>
-            <polygon id="geometry-shape" points="-60,-30 0,-30 0,-60 60,0 0,60 0,30 -30,30 -60,0"/>
+            <polygon id="geometry-shape" points="{% for point in shapes.0.points %}{{ point.0 }},{{ point.1 }} {% endfor %}"/>
           </defs>
           <rect width="600" height="360" fill="url(#geometry-grid)"/>
           <rect width="600" height="360" fill="url(#geometry-major-grid)"/>
@@ -82,7 +99,7 @@
         </div>
         <div class="geometry-buttons" data-only="rotation" hidden>
           <button type="button" class="geometry-button" data-turn="-90">逆时针 90°</button>
-          <input id="geometry-angle" type="range" min="-180" max="180" step="1" value="0" aria-label="旋转角度">
+          <input id="geometry-angle" type="range" min="-360" max="360" step="1" value="0" aria-label="旋转角度">
           <button type="button" class="geometry-button" data-turn="90">顺时针 90°</button>
         </div>
         <div class="geometry-buttons geometry-fold-controls" data-only="reflection" hidden>
@@ -92,10 +109,19 @@
           </div>
           <input id="geometry-fold" type="range" min="0" max="100" value="0" aria-label="翻折进度">
         </div>
+        <div class="geometry-demo">
+          <div class="geometry-buttons">
+            <button type="button" class="geometry-button" id="geometry-play">▶ 看本题演示</button>
+            <button type="button" class="geometry-button" id="geometry-step">走一步</button>
+            <button type="button" class="geometry-button" id="geometry-practice">自己试试</button>
+          </div>
+          <p id="geometry-demo-status" role="status">演示会从起点开始，每一步都可以停下来看。</p>
+        </div>
       </div>
     </section>
 
     <aside class="geometry-notebook" aria-label="实验手记">
+      <div class="geometry-notebook-content">
       {% for mode, lesson in modes.items %}
       <div data-only="{{ mode }}"{% if not forloop.first %} hidden{% endif %}>
         <p class="geometry-kicker">实验 0{{ forloop.counter }} · {{ lesson.label }}</p>
@@ -106,15 +132,15 @@
           <p>{{ lesson.observation }}</p>
           <p>{{ lesson.example }}</p>
         </div>
-        <h3>小挑战</h3>
-        <p>{{ lesson.task }}</p>
       </div>
       {% endfor %}
-      <button type="button" class="geometry-button geometry-check" id="geometry-check">检查一下</button>
-      <p class="geometry-feedback" id="geometry-feedback" role="status"></p>
+      <h3>我的实验足迹</h3>
+      <p id="geometry-progress" aria-live="polite"></p>
+      <p class="geometry-save-note" id="geometry-save-note">完成记录保存在当前浏览器。</p>
+      </div>
     </aside>
   </div>
 </div>
-{{ modes|json_script:"geometry-lessons" }}
-<script src="{% static 'mathbook/geometry-lab.js' %}" defer></script>
+{{ lab_data|json_script:"geometry-lessons" }}
+<script src="{% static 'mathbook/geometry-lab.js' %}?v=3" defer></script>
 {% endblock %}

@@ -7,9 +7,10 @@
     <p class="body-kicker"><span></span> 生命世界 · 身体观察手册</p>
     <h1>{{ station.title }}</h1>
     <p class="body-intro">{{ station.intro }}</p>
-    <p class="body-station-stats"><span><strong>{{ lesson_count }}</strong> 张身体地图</span><span><strong>{{ media_count }}</strong> 幅观察图像</span><span><strong>{{ question_count }}</strong> 道小挑战</span></p>
+    <p class="body-station-stats"><span><strong>{{ lesson_count }}</strong> 张身体地图</span><span><strong>{{ media_count }}</strong> 幅观察图像</span><span><strong>{{ question_count }}</strong> 道课程自测</span><span><strong>{{ expedition.challenges|length }}</strong> 道定位挑战</span></p>
     <div class="body-hero-actions">
-      <a class="body-button body-button-primary" href="#lessons">打开六课目录 ↓</a>
+      <a class="body-button body-button-primary" href="#missions">进入身体协作任务 ↓</a>
+      <a class="body-button body-button-light" href="#lessons">六课目录</a>
       <a class="body-button body-button-light" href="{% url 'science-body-lesson' 'circulation' %}#heart">看心脏泵血 ↗</a>
     </div>
   </div>
@@ -31,6 +32,8 @@
     <figcaption><span>图 01</span> 点图上的标签，打开一个小剧场</figcaption>
   </figure>
 </header>
+{% include 'science/body/expedition.html' %}
+{% include 'science/body/passport.html' %}
 <section class="body-section" id="lessons" aria-labelledby="body-lessons-title">
   <div class="body-section-heading">
     <p class="body-kicker">观察路线</p>
@@ -45,7 +48,7 @@
         <span class="body-card-kind">{{ item.gallery.0.kind }} · 互动图解 · 小实验</span>
         <strong>{{ item.title }}</strong>
         <span class="body-card-teaser">{{ item.teaser }}</span>
-        <span class="body-card-link">动手试试 <span aria-hidden="true">↗</span></span>
+        <span class="body-card-link"><span data-course-progress="{{ item.slug }}">动手试试</span><span aria-hidden="true">↗</span></span>
       </a>
     </li>
     {% endfor %}
@@ -67,4 +70,7 @@
     </details>
   </section>
 </div>
+{% endblock %}
+{% block station_scripts %}
+<script src="{% static 'science/body-lab.js' %}?v=20261116" defer></script>
 {% endblock %}

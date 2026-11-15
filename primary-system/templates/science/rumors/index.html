@@ -8,7 +8,10 @@
     <p class="rumor-kicker">科学查证站</p>
     <h1>科学流言<span>粉碎机</span></h1>
     <p class="rumor-lead">听到一句很肯定的话，先问一句「证据在哪儿？」选一条身边的说法，看看证据能帮你判断到哪一步。</p>
-    <a class="rumor-button" href="#rumor-cases">挑一项查证任务 <span aria-hidden="true">↓</span></a>
+    <div class="rumor-actions">
+      <a class="rumor-button" href="#rumor-cases">挑一项查证任务 <span aria-hidden="true">↓</span></a>
+      <a class="rumor-button rumor-button-light" href="{% url 'science-rumors-training' %}">五题判断训练 →</a>
+    </div>
   </div>
   <img class="rumor-machine" src="{% static 'science/rumor-machine.svg' %}" width="550" height="370" alt="">
 </header>
@@ -18,6 +21,21 @@
   <li><span aria-hidden="true">02</span><div><strong>翻证据</strong><small>看看观察和实验告诉了我们什么</small></div></li>
   <li><span aria-hidden="true">03</span><div><strong>盖判断章</strong><small>想一想，这些证据够不够</small></div></li>
 </ol>
+
+<section class="rumor-learning-desk" data-learning-desk hidden aria-labelledby="rumor-desk-title">
+  <div><h2 id="rumor-desk-title">我的查证台</h2><p data-learning-tip>从一句好奇的说法开始。</p></div>
+  <div class="rumor-desk-counts">
+    <span><strong data-desk-done>0</strong>已查证</span>
+    <span><strong data-desk-review>0</strong>待巩固</span>
+    <span><strong data-desk-saved>0</strong>已收藏</span>
+  </div>
+  <div class="rumor-actions">
+    <a class="rumor-button" data-resume href="#rumor-cases">接着查证 →</a>
+    <button class="rumor-button rumor-button-light" type="button" data-random>随机挑一项</button>
+    <a class="rumor-text-link" href="{% url 'science-rumors-training' %}?mode=review">练练待巩固题 →</a>
+  </div>
+  <p class="rumor-local-tip" data-storage-tip>进度、收藏和手记保存在当前浏览器，换设备不会自动同步。</p>
+</section>
 
 <section id="rumor-cases" aria-labelledby="rumor-cases-title">
   <header class="rumor-board-heading">
@@ -31,26 +49,34 @@
     </div>
   </header>
   <nav class="rumor-categories" aria-label="按主题找任务">
-    <a href="?q={{ query|urlencode }}#rumor-cases" {% if not category %}aria-current="page"{% endif %}>全部任务</a>
+    <a href="?q={{ query|urlencode }}&amp;view={{ progress_filter }}#rumor-cases" {% if not category %}aria-current="page"{% endif %}>全部任务</a>
     {% for label in categories %}
-    <a href="?category={{ label|urlencode }}&amp;q={{ query|urlencode }}#rumor-cases" {% if category == label %}aria-current="page"{% endif %}>{{ label }}</a>
+    <a href="?category={{ label|urlencode }}&amp;q={{ query|urlencode }}&amp;view={{ progress_filter }}#rumor-cases" {% if category == label %}aria-current="page"{% endif %}>{{ label }}</a>
     {% endfor %}
   </nav>
   <form class="rumor-search" method="get" action="{% url 'science-rumors' %}#rumor-cases" role="search">
     {% if category %}<input type="hidden" name="category" value="{{ category }}">{% endif %}
+    <input type="hidden" name="view" value="{{ progress_filter }}" data-progress-query>
     <label for="rumor-query">找一句听过的说法</label>
     <input id="rumor-query" name="q" type="search" value="{{ query }}" placeholder="试试「企鹅」「水」「月亮」" maxlength="100">
     <button class="rumor-button" type="submit">找一找</button>
     {% if query or category %}<a href="{% url 'science-rumors' %}#rumor-cases">显示全部任务</a>{% endif %}
   </form>
-  <p class="rumor-results">{% if category %}{{ category }} · {% endif %}当前显示 {{ cases|length }} 项任务{% if query %} · 关键词「{{ query }}」{% endif %}</p>
+  <div class="rumor-progress-filters" data-progress-filters data-view="{{ progress_filter }}" role="group" aria-label="按本机学习记录筛选" hidden>
+    <button type="button" data-progress-filter="all" aria-pressed="true">全部</button>
+    <button type="button" data-progress-filter="unseen" aria-pressed="false">还没查证</button>
+    <button type="button" data-progress-filter="review" aria-pressed="false">待巩固</button>
+    <button type="button" data-progress-filter="saved" aria-pressed="false">我的收藏</button>
+  </div>
+  <p class="rumor-results" data-server-results>{% if category %}{{ category }} · {% endif %}主题与关键词匹配 {{ cases|length }} 项任务{% if query %} · 关键词「{{ query }}」{% endif %}</p>
+  <p class="rumor-results" data-local-results role="status" hidden></p>
   <ul class="rumor-cards">
     {% for case in cases %}
     <li>
       <a class="rumor-card" data-rumor-card="{{ case.slug }}" href="{% url 'science-rumor-case' case.slug %}">
         <div class="rumor-card-top">
           <span>{{ case.number|stringformat:'02d' }} <span aria-hidden="true">/</span> {{ case.category }}</span>
-          <span class="rumor-done" hidden>✓ 已查证</span>
+          <span class="rumor-card-badges"><span class="rumor-done" hidden>✓ 已查证</span><span class="rumor-review-badge" hidden>待巩固</span><span class="rumor-saved-badge" hidden>★ 收藏</span></span>
         </div>
         {% if case.media %}
         {% if case.media.0.kind == 'video' %}
@@ -68,7 +94,17 @@
     </li>
     {% endfor %}
   </ul>
+  <p class="rumor-empty" data-local-empty hidden>这个范围里暂时没有符合学习记录的任务。可以切换「全部」，或清除主题和关键词再看看。</p>
   {% if not cases %}<p class="rumor-empty">这次没找到。试着换个短一点的词，或者点「全部任务」看看。</p>{% endif %}
 </section>
+<section class="rumor-toolkit" id="rumor-tools" aria-labelledby="rumor-tools-title">
+  <h2 id="rumor-tools-title">把这四件工具带回生活里</h2>
+  <p>它们是查证的小帮手。面对不同问题，可以来回用、多次用。</p>
+  <div class="rumor-tool-grid">
+    {% for skill in skills %}<details><summary><span aria-hidden="true">0{{ forloop.counter }}</span> {{ skill.title }}</summary><p>{{ skill.summary }}</p><strong>{{ skill.question }}</strong></details>{% endfor %}
+  </div>
+  <details class="rumor-sources"><summary>查证方法的参考资料 · 需联网</summary><ul>{% for source in toolkit_sources %}<li><a href="{{ source.url }}" target="_blank" rel="noopener noreferrer">{{ source.label }} ↗</a></li>{% endfor %}</ul></details>
+</section>
 {{ all_slugs|json_script:'rumor-all-slugs' }}
+{{ directory_data|json_script:'rumor-directory-data' }}
 {% endblock %}

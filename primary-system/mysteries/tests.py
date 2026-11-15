@@ -128,6 +128,35 @@ class MysteryContentTests(SimpleTestCase):
 
 
 class MysteryPageTests(SimpleTestCase):
+    def test_directory_tools_reuse_case_text_and_local_media(self):
+        response = self.client.get(reverse('mysteries'), {'q': '海洋', 'compare': 'deep-ocean,milky-seas'})
+        cases = load_cases()
+        items = {item['slug']: item for item in response.context['directory_data']}
+        self.assertEqual(set(items), set(cases))
+        self.assertIn('depth', items['deep-ocean']['kinds'])
+        self.assertIn('video', items['ufo-evidence']['kinds'])
+        self.assertIn('animation', items['saturn-hexagon']['kinds'])
+        for slug, item in items.items():
+            self.assertEqual(item['unresolved'], cases[slug]['unresolved'])
+            self.assertEqual(item['url'], reverse('mystery-case', args=[slug]))
+            self.assertTrue(item['image'].startswith('/static/mysteries/'))
+            self.assertIn(cases[slug]['open_questions'][0]['gap'], item['search'])
+        self.assertContains(response, 'data-case-slug=', count=len(cases))
+        self.assertContains(response, 'data-library-tools')
+        self.assertContains(response, 'mystery-directory-data')
+        self.assertFalse(response.cookies)
+
+    def test_notebook_is_local_and_other_cases_stay_in_same_group(self):
+        response = self.client.get(reverse('mystery-case', args=['saturn-hexagon']))
+        case = response.context['case']
+        self.assertEqual(response.context['notebook_data']['slug'], case['slug'])
+        self.assertContains(response, 'maxlength="2000"', count=3)
+        self.assertContains(response, 'data-export-note')
+        self.assertEqual(len(response.context['other_cases']), 3)
+        self.assertTrue(all(item['category'] == case['category'] and item['slug'] != case['slug']
+                            for item in response.context['other_cases']))
+        self.assertFalse(response.cookies)
+
     def test_index_links_to_all_cases_without_session(self):
         response = self.client.get(reverse('mysteries'))
         self.assertContains(response, '未解之谜研究所')

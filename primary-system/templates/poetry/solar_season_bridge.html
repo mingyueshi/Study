@@ -1,0 +1,9 @@
+{% load static %}
+{% if solar_season %}
+<link rel="stylesheet" href="{% static 'study_topics/solar-learning.css' %}?v=1">
+<section class="solar-season-bridge{% if compact %} is-compact{% endif %}" aria-label="{{ solar_season.name }}季的六个节气">
+  <h2>{{ solar_season.name }}季的六个节气</h2>
+  <nav aria-label="去{{ solar_season.name }}季节气卡">{% for term in solar_season.terms %}<a href="{{ term.url }}">{{ term.name }} <span aria-hidden="true">→</span></a>{% endfor %}</nav>
+  {% if not compact %}<p>从诗里的景物出发，回节气卡看物候和习俗。</p>{% endif %}
+</section>
+{% endif %}

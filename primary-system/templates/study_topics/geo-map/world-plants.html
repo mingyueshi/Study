@@ -8,6 +8,7 @@
 <script src="{% static 'study_topics/geo-map/world-geo.js' %}" defer></script>
 <script src="{% static 'study_topics/geo-map/shared.js' %}" defer></script>
 <script src="{% static 'study_topics/geo-map/world-plants-data.js' %}" defer></script>
+<script src="{% static 'study_topics/geo-map/animals-learning.js' %}" defer></script>
 <script src="{% static 'study_topics/geo-map/animals-app.js' %}" defer></script>
 {% endblock %}
 {% block study_content %}
@@ -27,10 +28,21 @@
     </header>
 
     <div class="gm-wildlife-tools" hidden>
+      <div class="gm-animal-search-row">
+        <label for="gm-animal-search">找植物<input id="gm-animal-search" type="search" placeholder="搜名称、学名、地点或环境" autocomplete="off"></label>
+        <label for="gm-animal-record-filter">观察记录<select id="gm-animal-record-filter"><option value="all">全部植物</option><option value="unseen">还没观察</option><option value="seen">已观察</option></select></label>
+        <button type="button" data-animal-reset>清除筛选</button>
+        <span id="gm-animal-search-status" role="status"></span>
+      </div>
       <div>
         <h2 id="gm-habitat-title">按生长环境找</h2>
         <div class="gm-habitat-filters" role="group" aria-labelledby="gm-habitat-title"></div>
       </div>
+    </div>
+
+    <div class="gm-animal-progress-row" hidden>
+      <div><label id="gm-animal-progress-label" for="gm-animal-progress">已观察 0／30 种</label><progress id="gm-animal-progress" max="30" value="0"></progress><small id="gm-animal-storage-note"></small></div>
+      <div><a href="#gm-animal-quiz">植物小侦探 ↓</a><button type="button" data-animal-random>认识新朋友 ↗</button></div>
     </div>
 
     <div class="gm-wildlife-workspace" data-sidebar-label="植物档案" hidden>
@@ -39,11 +51,20 @@
           <svg id="gm-animal-map" role="group" aria-label="世界植物代表分布地点示意地图"></svg>
           <figcaption><span id="gm-animal-count"></span>颜色表示生长环境，引线末端表示代表地点；并不是完整分布范围。</figcaption>
         </figure>
+        <details id="gm-animal-quiz" class="gm-animal-quiz">
+          <summary>植物小侦探 <span>看照片 · 读线索 · 每轮最多 5 题</span></summary>
+          <div class="gm-quiz-inner">
+            <p>从当前筛选中抽题，不重复。答完可以看地图、重练错题；练习不会自动标记「已观察」。</p>
+            <div class="gm-quiz-toolbar"><label for="gm-animal-quiz-mode">练习方式</label><select id="gm-animal-quiz-mode"><option value="photo">看照片认植物</option><option value="clue">读线索找植物</option></select><button type="button" data-quiz-start>开始练习</button><button type="button" data-quiz-stop hidden>结束本轮</button></div>
+            <div id="gm-animal-quiz-body"></div>
+          </div>
+        </details>
         <section class="gm-animal-catalog" aria-labelledby="gm-animal-choices-title">
           <div class="gm-animal-catalog-head">
             <div><h2 id="gm-animal-choices-title">选择植物</h2><p>点一张照片，找分布、认叶花，看看它怎样适应环境。</p></div>
             <a href="#gm-animal-map">回到地图 ↑</a>
           </div>
+          <p id="gm-animal-empty" hidden>暂时没有符合条件的植物。<button type="button" data-animal-reset>查看全部植物</button></p>
           <div id="gm-animal-picker" role="group" aria-labelledby="gm-animal-choices-title"></div>
         </section>
       </div>

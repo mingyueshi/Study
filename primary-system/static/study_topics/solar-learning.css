@@ -1,0 +1,33 @@
+/* 课程与诗词共用的节气联读入口，不改变各页原有布局。 */
+.solar-journey, .solar-season-bridge {
+  margin-block: 18px;
+  padding: clamp(16px, 2vw, 26px);
+  border: 1px solid var(--line, #cbdcc5);
+  border-radius: 16px;
+  background: var(--white, #fffefa);
+  color: var(--ink, #253c30);
+  font-size: 18px;
+  line-height: 1.75;
+  overflow-wrap: anywhere;
+}
+.solar-journey-heading { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 10px 24px; }
+.solar-journey h2, .solar-season-bridge h2 { margin: 0; font-size: clamp(21px, 2vw, 27px); line-height: 1.5; }
+.solar-journey p, .solar-season-bridge p { margin: 10px 0 14px; }
+.solar-journey a, .solar-season-bridge a { color: var(--green-dark, #315b42); font-weight: 700; }
+.solar-journey-heading a { text-decoration: underline; text-underline-offset: .2em; }
+.solar-journey nav, .solar-season-bridge nav { display: flex; flex-wrap: wrap; gap: 10px; }
+.solar-journey nav a, .solar-season-bridge nav a {
+  display: inline-flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  padding: 9px 14px; min-height: 44px; border: 1px solid var(--line, #cbdcc5);
+  background: var(--bg, #f5f8f0); border-radius: 10px; text-decoration: none;
+}
+.solar-journey nav span { font-size: 15px; color: var(--muted, #5b6f60); }
+.solar-journey a:hover, .solar-season-bridge a:hover { text-decoration: underline; text-underline-offset: .2em; }
+.solar-season-bridge:not(.is-compact) { display: flex; align-items: center; flex-wrap: wrap; gap: 10px 20px; padding-block: 16px; }
+.solar-season-bridge:not(.is-compact) h2 { font-size: 21px; }
+.solar-season-bridge:not(.is-compact) p { margin: 0; font-size: 16px; }
+.solar-season-bridge.is-compact { margin: auto 0 0; padding: 16px 0 0; border: 0; border-top: 1px solid var(--line, #cbdcc5); border-radius: 0; background: transparent; }
+.solar-season-bridge.is-compact h2 { margin-bottom: 10px; font-size: 17px; }
+.solar-season-bridge.is-compact nav { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; }
+.solar-season-bridge.is-compact nav a { padding: 7px 10px; font-size: 16px; justify-content: space-between; }
+.solar-season-bridge.is-compact nav a span { display: none; }

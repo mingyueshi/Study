@@ -51,11 +51,24 @@ window.GM_WORLD_LEARNING = {
     {id: 'nile-direction', place: 'wf2', prompt: '尼罗河大致向哪个方向流入地中海？', options: ['向东', '向南', '向北'], answer: 2, hint: '地中海在非洲北边。', explanation: '尼罗河大致由南向北流，最终流入地中海。'},
     {id: 'amazon-ocean', place: 'wf3', prompt: '亚马孙河最终流入哪个大洋？', options: ['印度洋', '大西洋', '北冰洋'], answer: 1, hint: '找南美洲东边的大洋。', explanation: '亚马孙河流经南美洲北部，向东流入大西洋。'},
     {id: 'reef-location', place: 'wf7', prompt: '大堡礁在澳大利亚的哪一侧海上？', options: ['东北侧', '西南侧', '正西侧'], answer: 0, hint: '先找澳大利亚，再看地标在它的右上方还是左下方。', explanation: '大堡礁位于澳大利亚东北侧的海洋中。'},
-    {id: 'latitude-weather', place: 'wf5', prompt: '同一纬度的两个地方，气温一定相同吗？', options: ['一定相同', '只看地图颜色就知道', '不一定，还要看海拔等条件'], answer: 2, hint: '想想高山与平原。', explanation: '纬度影响太阳热量，但海拔、海陆位置等也影响冷暖。五带颜色不等于当天的气温。'}
+    {id: 'latitude-weather', place: 'wf5', prompt: '同一纬度的两个地方，气温一定相同吗？', options: ['一定相同', '只看地图颜色就知道', '不一定，还要看海拔等条件'], answer: 2, hint: '想想高山与平原。', explanation: '纬度影响太阳热量，但海拔、海陆位置等也影响冷暖。五带颜色不等于当天的气温。'},
+    {id: 'day-night-rotation', place: 'China', sunStudy: 'equal-day', prompt: '许多地方每天交替经历白天和黑夜，主要是因为？', options: ['月亮挡住了太阳', '地球自转', '太阳每天熄灭一次'], answer: 1, hint: '看观察点怎样轮流来到亮面和暗面。', explanation: '地球不停自转，让许多地方轮流朝向或背向太阳，形成昼夜交替。'},
+    {id: 'june-direct-sun', place: 'China', sunStudy: 'north-summer', prompt: '夏至前后，太阳直射点在哪条纬线附近？', options: ['北回归线', '南回归线', '北极圈'], answer: 0, hint: '看看黄色的太阳直射点落在赤道哪一侧。', explanation: '夏至前后，太阳直射点在北回归线附近，北半球白昼较长。'},
+    {id: 'north-day-length', place: 'United Kingdom', sunStudy: 'north-summer', prompt: '北纬 45° 的地方，夏至前后和冬至前后相比，通常什么时候白昼更长？', options: ['冬至前后', '一样长', '夏至前后'], answer: 2, hint: '保持观察点不变，切换两个时节，比较白昼时长。', explanation: '北半球夏至前后的白昼较长，冬至前后的白昼较短。'},
+    {id: 'polar-day-meaning', place: 'o4', sunStudy: 'polar-day', prompt: '极昼时，一个地方会出现什么现象？', options: ['一整天没有太阳升起', '一整天太阳不落到地平线以下', '全世界都是白天'], answer: 1, hint: '播放一天，看看北纬 80° 的点有没有进入暗面。', explanation: '极昼是太阳在一整天里不落到地平线以下，只会在一定时节的极地地区出现。'},
+    {id: 'opposite-seasons', place: 'Antarctica', sunStudy: 'south-summer', prompt: '北半球冬至前后，南极附近更可能出现什么现象？', options: ['极夜', '每天昼夜各半', '极昼'], answer: 2, hint: '南北半球的季节相反。', explanation: '北半球冬至前后，南半球朝向太阳的一侧获得更多光照，南极附近会出现极昼。'},
+    {id: 'equinox-light', place: 'Brazil', sunStudy: 'equal-day', prompt: '春分、秋分前后，大多数地方的昼夜长短怎样？', options: ['接近等长', '白昼总是 24 小时', '黑夜总是 24 小时'], answer: 0, hint: '太阳直射点在赤道附近，两半球获得的光照较均衡。', explanation: '春分、秋分前后，大多数地方昼夜接近等长；球面模型作了简化，实际日出日落还受其他因素影响。'}
   ],
   sources: [
     {name: '经纬度与重要纬线', url: 'https://education.nationalgeographic.org/resource/mapmaker-latitude-longitude/'},
     {name: '纬度和回归线', url: 'https://oceanservice.noaa.gov/facts/latitude.html'},
-    {name: '纬度、热量与环境', url: 'https://www.fao.org/4/Y4351E/y4351e05.htm'}
+    {name: '纬度、热量与环境', url: 'https://www.fao.org/4/Y4351E/y4351e05.htm'},
+    {name: 'NASA 地球资料：球面测距采用的平均半径', url: 'https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html'},
+    {name: '美国国家气象局：四季、分至点与昼夜长短', url: 'https://www.weather.gov/twc/Astronomical_Seasons'},
+    {name: '美国月球与行星研究所：地轴倾斜、四季和极昼', url: 'https://www.lpi.usra.edu/education/skytellers/seasons/'},
+    {name: '国家位置线索：加拿大', url: 'https://kids.nationalgeographic.com/geography/countries/article/canada'},
+    {name: '国家位置线索：印度', url: 'https://kids.nationalgeographic.com/geography/countries/article/india'},
+    {name: '国家位置线索：意大利', url: 'https://kids.nationalgeographic.com/geography/countries/article/italy'},
+    {name: '国家位置线索：南非', url: 'https://kids.nationalgeographic.com/geography/countries/article/south-africa'}
   ]
 };

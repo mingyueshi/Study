@@ -1,0 +1,47 @@
+{% extends 'science/rumors/base.html' %}
+{% load static %}
+{% block title %}五题判断训练 · 科学流言粉碎机{% endblock %}
+{% block station %}
+<a class="rumor-back" href="{% url 'science-rumors' %}#rumor-cases">← 科学流言粉碎机 · 任务目录</a>
+<header class="rumor-training-header">
+  <p class="rumor-kicker">查证训练场</p>
+  <h1>换个情境，<span>你会怎样查？</span></h1>
+  <p>每轮最多 5 题，不重复出题、不计时。先选做法，再看证据思路，把查证方法用到新问题上。</p>
+</header>
+<div data-training data-mode="{{ mode }}" hidden>
+  <p class="rumor-storage-notice" data-training-storage hidden>当前浏览器无法保存记录，可以继续练习；关闭页面后本轮记录可能丢失。</p>
+  <section class="rumor-panel rumor-training-lobby" data-training-lobby aria-labelledby="training-lobby-title">
+    <h2 id="training-lobby-title">选一种练法</h2>
+    <p>练习题来自 {{ deck|length }} 项任务的迁移小问题。答错的任务会进入「待巩固」，练对后自动移出。</p>
+    <div class="rumor-training-modes">
+      <button class="rumor-mode-card" type="button" data-start="all"><strong>随机五题 <span aria-hidden="true">↗</span></strong><span>从全部任务中抽取，练练不同查证方法。</span></button>
+      <button class="rumor-mode-card" type="button" data-start="review"><strong>巩固错题 <span data-review-size>0 项</span></strong><span>只抽待巩固任务；不足五项就练现有的。</span></button>
+    </div>
+    <p class="rumor-feedback" data-training-message role="status"></p>
+    <button class="rumor-button rumor-button-light" type="button" data-training-resume hidden>继续上一轮 →</button>
+    <p class="rumor-local-tip">同一标签页刷新后可以继续本轮。任务的待巩固记录保存在当前浏览器。</p>
+  </section>
+  <section class="rumor-panel rumor-training-question" data-training-question hidden aria-labelledby="training-question-title">
+    <div class="rumor-round-heading"><p class="rumor-kicker" data-training-position></p><button class="rumor-text-link" type="button" data-training-lobby-button>暂歇一下</button></div>
+    <progress data-training-progress aria-label="本轮已作答题数" value="0" max="5"></progress>
+    <p class="rumor-local-tip" data-training-skill></p>
+    <h2 id="training-question-title" tabindex="-1"></h2>
+    <form data-training-form>
+      <fieldset><legend class="visually-hidden">选择一个最有帮助的做法</legend><div class="rumor-quiz-options" data-training-options></div></fieldset>
+      <button class="rumor-button" type="submit" data-training-submit>提交想法 →</button>
+    </form>
+    <div class="rumor-feedback" data-training-feedback role="status"></div>
+    <div class="rumor-actions" data-training-after hidden><button class="rumor-button" type="button" data-training-next>下一题 →</button><a class="rumor-text-link" data-training-case target="_blank" rel="noopener">打开原任务 ↗</a></div>
+  </section>
+  <section class="rumor-panel rumor-training-result" data-training-result hidden aria-labelledby="training-result-title">
+    <p class="rumor-kicker">本轮查证报告</p>
+    <h2 id="training-result-title" tabindex="-1"></h2>
+    <p data-training-result-tip></p>
+    <ul class="rumor-round-report" data-training-report></ul>
+    <div class="rumor-actions"><button class="rumor-button" type="button" data-start="all">再抽一轮 →</button><button class="rumor-button rumor-button-light" type="button" data-retry-missed hidden>重练本轮错题</button><a class="rumor-text-link" href="{% url 'science-rumors' %}#rumor-cases">回任务目录 →</a></div>
+  </section>
+</div>
+<noscript><section class="rumor-panel"><h2>逐项练习也可以</h2><p>五题训练需要启用 JavaScript。你仍然可以打开任务目录，在每项任务的「下次怎么查」中阅读迁移题和思路。</p><a class="rumor-button" href="{% url 'science-rumors' %}#rumor-cases">打开任务目录 →</a></section></noscript>
+{{ deck|json_script:'rumor-training-deck' }}
+{% endblock %}
+{% block station_scripts %}<script src="{% static 'science/rumors-training.js' %}" defer></script>{% endblock %}

@@ -9,7 +9,7 @@
   </a>
   {% endfor %}
 </nav>
-<article class="body-{{ lesson.slug }}">
+<article class="body-{{ lesson.slug }}" data-body-lesson="{{ lesson.slug }}">
   <header class="body-lesson-header body-lesson-header-compact">
     <p class="body-kicker"><span></span> 第 {{ number }} 课 · {{ lesson.label }}</p>
     <h1>{{ lesson.title }}</h1>
@@ -18,7 +18,9 @@
   <nav class="body-section-jumps" aria-label="本课工具">
     <a href="{% if lesson.slug == 'circulation' %}#heart{% else %}#explore{% endif %}">动手图解</a>
     <a href="#gallery">看真实图像</a><a href="#experiment">做个小实验</a><a href="#checkup">三题小挑战</a>
+    {% if lesson.slug == 'circulation' %}<a href="#pulse">测脉搏</a><a href="#notebook">观察手册</a>{% endif %}
   </nav>
+  <p class="body-course-progress" data-current-progress hidden></p>
   <div class="body-workspace" data-sidebar-label="观察与思考">
     <div class="body-main">
       {% if lesson.slug == 'circulation' %}
@@ -66,7 +68,6 @@
   {% if lesson.slug == 'circulation' %}
     {% include 'science/body/pulse.html' %}
   {% endif %}
-  <script src="{% static 'science/body.js' %}?v=20261114b7" defer></script>
   <dialog class="body-media-dialog" id="body-media-dialog" aria-labelledby="body-media-title">
     <form method="dialog"><button type="submit" class="body-button" autofocus>关闭大图 ×</button></form>
     <h2 id="body-media-title"></h2>
@@ -91,4 +92,7 @@
     {% endif %}
   </nav>
 </article>
+{% endblock %}
+{% block station_scripts %}
+{% if lesson.slug == 'circulation' %}<script src="{% static 'science/body-notebook.js' %}?v=20261116" defer></script>{% endif %}
 {% endblock %}

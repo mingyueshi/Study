@@ -265,3 +265,93 @@
   .mystery-banner, .mystery-findings, .mystery-question-list { grid-template-columns: minmax(0, 1fr); }
   .mystery-emblem { display: none; }
 }
+
+/* Investigation tools share the casebook's green ink and warm paper palette. */
+.mysteries [hidden] { display: none !important; }
+.mystery-library-tools, .mystery-notebook {
+  margin-top: 1.25rem;
+  padding: clamp(1rem, 2.5vw, 2rem);
+  border: 1px solid var(--mystery-line);
+  border-radius: 1.3rem;
+  background: var(--mystery-tint);
+}
+.mystery-library-topline, .mystery-library-actions, .mystery-compare-heading {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: .6rem 1rem;
+}
+.mystery-library-topline, .mystery-compare-heading { justify-content: space-between; }
+.mystery-library-actions { margin-top: .8rem; }
+.mystery-library-actions p { flex: 1 1 14rem; margin: 0; }
+.mystery-filter-form { display: grid; grid-template-columns: minmax(15rem, 2fr) repeat(3, minmax(10rem, 1fr)); gap: .9rem; margin-top: 1.2rem; }
+.mystery-filter-form label, .mystery-note-fields label { display: flex; flex-direction: column; gap: .4rem; font-size: 1rem; font-weight: 750; min-width: 0; }
+.mysteries input[type="search"], .mysteries select, .mysteries textarea {
+  width: 100%; min-width: 0; box-sizing: border-box;
+  padding: .65rem .8rem; border: 1px solid #9ebeb3; border-radius: .7rem;
+  background: #fff; color: var(--mystery-ink); font: inherit; line-height: 1.6;
+}
+.mysteries textarea { resize: vertical; min-height: 9rem; font-size: 1.05rem; font-weight: 400; }
+.mysteries .mystery-tool-button {
+  display: inline-flex; align-items: center; justify-content: center; gap: .3rem;
+  max-width: 100%; min-height: 2.7rem; box-sizing: border-box;
+  padding: .5rem .8rem; border: 1px solid var(--mystery-line); border-radius: .7rem;
+  background: #fff; color: var(--mystery-accent); font: inherit; font-size: .95rem; font-weight: 750;
+  line-height: 1.5; text-decoration: none; cursor: pointer;
+}
+.mysteries .mystery-tool-button:hover { border-color: var(--mystery-accent); }
+.mysteries .mystery-tool-button:disabled { opacity: .55; cursor: default; }
+.mysteries .mystery-tool-primary, .mysteries .mystery-tool-button[aria-pressed="true"] { background: var(--mystery-accent); color: #fff; }
+.mysteries .mystery-local-notice { font-size: .9rem; color: var(--mystery-muted); }
+.mystery-card-item { display: flex; flex-direction: column; border: 1px solid var(--mystery-line); border-radius: 1.4rem; overflow: hidden; background: #fff; }
+.mystery-card-item .mystery-case-card { flex: 1; height: auto; border: 0; border-radius: 0; }
+.mystery-card-tools { display: flex; flex-wrap: wrap; gap: .45rem; padding: .75rem 1rem; border-top: 1px solid var(--mystery-line); }
+.mystery-card-tools .mystery-tool-button { font-size: .85rem; padding: .4rem .6rem; }
+.mystery-card-status { flex-basis: 100%; font-size: .85rem; color: var(--mystery-accent); }
+.mystery-card-status:empty { display: none; }
+.mystery-card-copy .mystery-card-media { display: flex; flex-wrap: wrap; gap: .3rem; margin-top: .35rem; }
+.mystery-card-media span { padding: .1rem .5rem; background: #eaf2ff; color: #25486a; border-radius: .4rem; font-size: .8rem; font-weight: 700; }
+.mystery-empty { margin-top: 1.5rem; text-align: center; background: #fff8e8; }
+.mystery-empty button { margin-top: 1rem; }
+.mysteries.has-comparison { padding-bottom: 15rem; }
+.mystery-compare-tray {
+  position: fixed; z-index: 30; inset-inline: max(1rem, 3vw); bottom: 1rem;
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem 1.5rem;
+  padding: .85rem 1.2rem; border: 2px solid var(--mystery-accent); border-radius: 1rem;
+  background: #fff9e9; box-shadow: 0 .4rem 2rem #18363b25;
+}
+.mystery-compare-tray > div:first-child { flex: 1 1 20rem; min-width: 0; }
+.mystery-compare-tray p { margin: .1rem 0 0; font-size: .95rem; }
+.mystery-compare-tray .mystery-library-actions { margin: 0; }
+.mystery-action-status { color: var(--mystery-accent); font-weight: 700; }
+.mystery-compare-dialog {
+  width: min(76rem, calc(100% - 2rem)); max-width: none; max-height: calc(100dvh - 2rem); box-sizing: border-box;
+  padding: clamp(1rem, 2.5vw, 2rem); border: 1px solid var(--mystery-line); border-radius: 1.3rem;
+  background: #f7fbf8; color: var(--mystery-ink); overflow: auto; overscroll-behavior: contain;
+}
+.mystery-compare-dialog::backdrop { background: #102f36b3; }
+.mystery-compare-heading { align-items: flex-start; position: sticky; top: 0; z-index: 2; background: #f7fbf8; padding-bottom: .75rem; }
+.mystery-comparison { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.2rem; margin-top: 1rem; }
+.mystery-comparison-case { min-width: 0; padding: 1.1rem; background: #fff; border: 1px solid var(--mystery-line); border-radius: 1rem; }
+.mystery-comparison-case img { display: block; width: 100%; height: 10rem; object-fit: contain; margin-bottom: 1rem; background: var(--mystery-tint); border-radius: .65rem; }
+.mystery-comparison-case h4 { margin: 1rem 0 .4rem; font-size: 1rem; }
+.mystery-comparison-case ul { margin: 0; padding-left: 1.4rem; }
+.mystery-comparison-case dl { margin: 1rem 0; }
+.mystery-comparison-case dt { margin-top: 1rem; font-weight: 800; color: var(--mystery-accent); }
+.mystery-comparison-case dd { margin: .3rem 0 0; }
+.mystery-comparison-case [data-compare-unresolved] { background: #fff4d9; padding: .65rem; border-radius: .5rem; }
+.mystery-case-tools { padding: 1rem 0; border-bottom: 1px solid var(--mystery-line); }
+.mystery-case-tools .mystery-library-actions { margin-top: 0; }
+.mystery-notebook { background: #fff8e8; border-color: #ebcb8c; }
+.mystery-note-fields { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+.mystery-note-fields label { font-size: 1.15rem; }
+.mystery-note-fields small { min-height: 3.3em; font-size: .9rem; font-weight: 400; color: var(--mystery-muted); }
+.mystery-note-fields textarea { flex: 1; }
+@media (max-width: 70rem) { .mystery-filter-form { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 58rem) { .mystery-note-fields { grid-template-columns: minmax(0, 1fr); } .mystery-note-fields small { min-height: 0; } }
+@media (max-width: 40rem) {
+  .mystery-filter-form, .mystery-comparison { grid-template-columns: minmax(0, 1fr); }
+  .mystery-compare-tray { padding: .65rem .8rem; inset-inline: .65rem; bottom: .65rem; }
+  .mystery-compare-tray p { font-size: .85rem; }
+  .mystery-compare-tray .mystery-library-actions { gap: .4rem; }
+}

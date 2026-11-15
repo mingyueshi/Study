@@ -1,0 +1,82 @@
+/* 身体协作任务站：一本可以点亮的观察手册。 */
+.body-mission-intro { font-size: 20px; max-width: 48em; }
+.body-mission-modes { margin-bottom: 16px; }
+.body-mission-modes button { padding: 12px 20px; font-size: 19px; border-radius: 40px; }
+.body-mission-workbench { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(20px, 3vw, 60px); padding: clamp(16px, 2.4vw, 44px); border: 1px solid var(--atlas-edge); border-radius: 25px; background: #f4f8eb; align-items: start; }
+.body-mission-map { margin: 0; min-width: 0; width: 100%; max-width: 690px; justify-self: center; }
+.body-map-canvas { position: relative; width: 100%; }
+.body-map-canvas svg { display: block; width: 100%; }
+.body-mission-map figcaption { font-size: 14px; color: var(--atlas-muted); padding: 6px 10px 0; }
+.body-map-pin { position: absolute; display: flex; align-items: center; gap: 5px; min-height: 44px; min-width: 44px; padding: 5px 8px; border: 1px solid #abc6b7; border-radius: 12px; background: var(--atlas-white); color: var(--atlas-ink); font-size: clamp(14px, 1.2vw, 19px); font-weight: 750; transform: translateY(-50%); box-shadow: 0 3px 0 #d8e3d5; }
+.body-map-pin > span:first-child { display: grid; place-items: center; width: 25px; height: 25px; border-radius: 50%; background: #e3eee1; font-variant-numeric: tabular-nums; }
+.body-map-pin[aria-pressed="true"] { background: #276b57; color: #fff; border-color: #276b57; box-shadow: 0 3px 0 #164335; }
+.body-map-pin[aria-pressed="true"] > span:first-child { background: #fff; color: #276b57; }
+.body-map-pin:disabled { cursor: default; opacity: 1; }
+.body-pin-brain { left: 1%; top: 11%; }.body-pin-eye { right: 1%; top: 20.5%; }.body-pin-lungs { left: 1%; top: 36%; }.body-pin-heart { right: 1%; top: 46%; }.body-pin-stomach { right: 1%; top: 58.3%; }.body-pin-intestine { left: 1%; top: 70.5%; }.body-pin-muscles { left: 1%; top: 53%; }
+[data-mode="challenge"][data-revealed="false"] [data-pin-name] { display: none; }
+[data-map-art][data-active="false"] { opacity: .45; }
+[data-map-art][data-active="true"] { filter: drop-shadow(0 0 5px #d6a935); stroke-width: 4px; }
+.body-mission-task { min-width: 0; }
+.body-mission-task h3 { font-size: clamp(25px, 2.4vw, 37px); line-height: 1.5; margin: 18px 0; }
+.body-mission-task h4 { margin: 0 0 8px; font-size: 24px; }
+.body-mission-task p { font-size: 18px; line-height: 1.8; }
+.body-scene-steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; padding: 0; margin: 16px 0; list-style: none; }
+.body-scene-steps button { display: grid; justify-items: start; gap: 8px; width: 100%; height: 100%; padding: 12px; border: 1px solid var(--atlas-edge); border-radius: 12px; background: var(--atlas-white); color: var(--atlas-ink); text-align: left; font-size: 15px; line-height: 1.6; }
+.body-scene-steps button > span { display: grid; place-items: center; border-radius: 50%; width: 26px; height: 26px; background: #dfebda; color: #276b57; font-weight: 750; }
+.body-scene-steps button[aria-pressed="true"] { background: #276b57; color: #fff; border-color: #276b57; }
+.body-mission-note { padding: 20px 24px; border-left: 5px solid #d5b158; border-radius: 0 14px 14px 0; background: #fff6dc; min-height: 200px; }
+.body-mission-note p:last-child { margin-bottom: 0; }
+.body-scene-playback { margin-top: 18px; }
+.body-scene-summary { padding-top: 15px; border-top: 1px dashed #adc9b7; }
+.body-organ-file { padding: 16px 20px; border: 1px solid #d4c394; border-radius: 14px; background: #fffdf3; margin-top: 18px; }
+.body-organ-file h4 { display: inline; margin-left: 10px; font-size: 21px; }
+.body-organ-file p { font-size: 17px; margin: 8px 0; }
+.body-mission-task .body-small, .body-small { font-size: 14px; line-height: 1.7; color: var(--atlas-muted); }
+[data-challenge-hint] { padding: 12px 16px; border: 1px dashed #9ab9aa; border-radius: 12px; background: #fffef7; }
+[data-challenge-hint] summary { cursor: pointer; font-size: 18px; }
+.body-challenge-feedback { min-height: 100px; padding: 16px; border-radius: 12px; background: #fff1d5; }
+.body-challenge-feedback:empty { background: transparent; }
+.body-challenge-feedback[data-correct="true"] { background: #e0efda; }
+.body-passport { margin-top: 25px; display: grid; grid-template-columns: minmax(200px, .75fr) minmax(0, 2fr); align-items: center; gap: 24px; background: #fff8e8; }
+.body-passport h2 { font-size: 28px; margin-bottom: 8px; }
+.body-passport p { font-size: 15px; }
+.body-passport progress { width: 100%; height: 12px; accent-color: #276b57; }
+.body-passport-stamps { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; }
+.body-passport-stamps a { display: grid; place-items: center; gap: 8px; padding: 18px 6px; border: 1px dashed #b5baa0; border-radius: 14px; background: #fffdf5; text-align: center; }
+.body-passport-stamps a > span { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: #eee9d8; font-weight: 800; }
+.body-passport-stamps a[data-complete="true"] { background: #e0efda; border: 2px solid #628d61; }
+.body-passport-stamps a[data-complete="true"] > span { color: #fff; background: #276b57; }
+.body-passport-stamps strong { font-size: 16px; }
+.body-passport-stamps small { font-size: 12px; }
+.body-passport-bottom { grid-column: 1 / -1; display: flex; gap: 14px; justify-content: space-between; align-items: center; }
+.body-passport-bottom p { margin: 0; }
+.body-text-button { background: transparent; border: 0; color: var(--lesson-accent); text-decoration: underline; text-underline-offset: 3px; padding: 10px 4px; font-size: 14px; white-space: nowrap; }
+.body-course-progress { font-size: 14px; color: var(--atlas-muted); padding: 10px 0 0; margin-bottom: 0; }
+.body-notebook { margin-top: 24px; }
+.body-notebook-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(20px, 4vw, 65px); margin: 24px 0; align-items: start; }
+.body-notebook form { display: grid; gap: 10px; }
+.body-notebook label { display: grid; gap: 8px; font-weight: 700; font-size: 18px; }
+.body-notebook input, .body-notebook textarea { min-width: 0; width: 100%; border: 1px solid #c6a6a0; border-radius: 9px; padding: 10px; color: var(--atlas-ink); background: var(--atlas-white); font: inherit; }
+.body-notebook input { max-width: 140px; min-height: 44px; }
+.body-notebook textarea { resize: vertical; }
+.body-notebook form > button { justify-self: start; }
+.body-pulse-chart { margin: 0; padding: clamp(16px, 2vw, 32px); border-radius: 20px; background: #fff3ea; border: 1px solid #e6c6b8; }
+.body-pulse-chart figcaption { display: grid; gap: 8px; margin-bottom: 25px; }
+.body-pulse-chart figcaption strong { font-size: 24px; }.body-pulse-chart figcaption > span { font-size: 15px; }
+.body-pulse-bar-row { margin-bottom: 22px; }
+.body-pulse-bar-row > div:first-child { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 4px 10px; font-size: 18px; margin-bottom: 7px; }
+.body-pulse-bar-track { height: 22px; border-radius: 6px; background: #e9ded1; overflow: hidden; }
+.body-pulse-bar-track span { display: block; height: 100%; background: #659d8a; border-radius: inherit; }
+.body-pulse-bar-row:nth-child(2) .body-pulse-bar-track span { background: #ca7c62; }.body-pulse-bar-row:nth-child(3) .body-pulse-bar-track span { background: #a38a52; }
+.body-notebook-history-head { display: flex; align-items: center; justify-content: space-between; gap: 15px; flex-wrap: wrap; border-top: 1px solid var(--atlas-edge); padding-top: 18px; }
+.body-notebook-history-head h3 { font-size: 23px; margin: 0; }
+.body-record-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 18px; }
+.body-record { min-width: 0; padding: 15px 20px; border: 1px solid var(--atlas-edge); border-radius: 12px; background: var(--atlas-white); }
+.body-record-heading { display: flex; align-items: center; justify-content: space-between; gap: 10px; font-size: 15px; }
+.body-record-values { display: flex; flex-wrap: wrap; gap: 8px 20px; font-size: 17px; font-weight: 750; }
+.body-record p { font-size: 16px; margin: 8px 0 0; overflow-wrap: anywhere; white-space: pre-wrap; }
+.body-missions button:focus-visible, .body-passport a:focus-visible { outline: 3px solid #9c6829; outline-offset: 4px; }
+@media (min-width: 1800px) { .body-mission-workbench { grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); }.body-mission-task { align-self: center; }.body-mission-map { max-width: 680px; } }
+@media (max-width: 1100px) { .body-passport { grid-template-columns: 1fr; }.body-passport-stamps { grid-template-columns: repeat(3, minmax(0, 1fr)); }.body-scene-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }.body-mission-workbench { gap: 20px; } }
+@media (max-width: 850px) { .body-mission-workbench, .body-notebook-grid { grid-template-columns: minmax(0, 1fr); }.body-mission-map { max-width: 500px; }.body-record-list { grid-template-columns: 1fr; }.body-mission-note { min-height: auto; } }
+@media (max-width: 480px) { .body-mission-workbench { padding: 12px; }.body-map-pin { font-size: 13px; padding: 4px; gap: 3px; }.body-map-pin > span:first-child { width: 22px; height: 22px; }.body-mission-modes button { font-size: 16px; padding: 10px 12px; }.body-passport { padding: 16px; }.body-passport-bottom { align-items: start; flex-direction: column; }.body-mission-task h3 { font-size: 25px; }.body-scene-playback { gap: 7px; }.body-scene-playback button { font-size: 14px; padding-inline: 8px; } }

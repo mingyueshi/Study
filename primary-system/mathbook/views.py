@@ -24,8 +24,10 @@ def index(request):
 
 @require_safe
 def geometry_lab(request):
-    modes = json.loads((BOOKS_DIR.parent / 'geometry-lab.json').read_text(encoding='utf-8'))
-    return render(request, 'mathbook/geometry_lab.html', {'modes': modes, 'study_area': 'math'})
+    data = json.loads((BOOKS_DIR.parent / 'geometry-lab.json').read_text(encoding='utf-8'))
+    return render(request, 'mathbook/geometry_lab.html', {
+        'lab_data': data, 'modes': data['modes'], 'shapes': data['shapes'], 'study_area': 'math',
+    })
 
 
 @never_cache

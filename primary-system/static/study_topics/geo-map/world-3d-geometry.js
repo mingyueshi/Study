@@ -56,5 +56,28 @@ window.GMWorld3DGeometry = (() => {
     const longitude = roundedLon === 0 ? '经度 0°' : `${roundedLon > 0 ? '东经' : '西经'} ${Math.abs(roundedLon).toFixed(1)}°`;
     return `${latitude}，${longitude}`;
   }
-  return {xyz, lonLat, wrap, unwrap, center, sphere, zoneAt, coordinates};
+  function angle(a, b) {
+    const u = xyz(a), v = xyz(b);
+    const cross = [u[1]*v[2]-u[2]*v[1], u[2]*v[0]-u[0]*v[2], u[0]*v[1]-u[1]*v[0]];
+    return Math.atan2(Math.hypot(...cross), u.reduce((sum, x, i) => sum + x*v[i], 0));
+  }
+  function arc(a, b, steps = 128) {
+    const u = xyz(a), v = xyz(b), theta = angle(a, b);
+    if (theta < 1e-10) return [u, v];
+    const dot = u.reduce((sum, x, i) => sum + x*v[i], 0);
+    let tangent = v.map((x, i) => x - dot*u[i]);
+    if (Math.hypot(...tangent) < 1e-10) {
+      const axis = Math.abs(u[1]) < .9 ? [0, 1, 0] : [1, 0, 0];
+      const projection = u.reduce((sum, x, i) => sum + x*axis[i], 0);
+      tangent = axis.map((x, i) => x - projection*u[i]);
+    }
+    const length = Math.hypot(...tangent); tangent = tangent.map(x => x/length);
+    return Array.from({length: steps + 1}, (_, i) => i === steps ? v : u.map((x, k) => x*Math.cos(theta*i/steps) + tangent[k]*Math.sin(theta*i/steps)));
+  }
+  function parsePoint(lon, lat) {
+    if ([lon, lat].some(value => !['string', 'number'].includes(typeof value) || String(value).trim() === '')) return null;
+    const p = [Number(lon), Number(lat)];
+    return p.every(Number.isFinite) && Math.abs(p[0]) <= 180 && Math.abs(p[1]) <= 90 ? p : null;
+  }
+  return {xyz, lonLat, wrap, unwrap, center, sphere, zoneAt, coordinates, angle, arc, parsePoint};
 })();

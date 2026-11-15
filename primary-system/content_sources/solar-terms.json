@@ -33,7 +33,19 @@
             "author": "杜审言",
             "paragraph": 1
           },
-          "source": "https://www.ihchina.cn/solar_details/40.html"
+          "source": "https://www.ihchina.cn/solar_details/40.html",
+          "observation": "选一棵家附近的树，看看枝头有没有芽。画下或写下芽的颜色和大小，过几天再来比较。",
+          "learning": {
+            "geography": {
+              "lesson": "gu4-4",
+              "question": "同样到了立春，南方与北方的树都发芽了吗？去看看气温为什么有地域差异。"
+            },
+            "literature": {
+              "lesson": "lu6-5",
+              "question": "立春的「立」是什么意思？把它与立夏、立秋、立冬放在一起读。"
+            },
+            "poetry": "读卡片上的应景诗，找找诗人写了哪些植物。到春季诗词中，再找一首写花木的诗。"
+          }
         },
         {
           "id": "yushui",
@@ -62,7 +74,19 @@
             "author": "杜甫",
             "paragraph": 1
           },
-          "source": "https://www.ihchina.cn/solar_details/41.html"
+          "source": "https://www.ihchina.cn/solar_details/41.html",
+          "observation": "隔着窗户看一场雨。记下雨开始和停下的时间，再看看地面哪里最先变干。",
+          "learning": {
+            "geography": {
+              "lesson": "gu4-2",
+              "question": "到了雨水就一定下雨吗？在家乡预报中找日期、气温和降水信息，再与实际观察比较。"
+            },
+            "literature": {
+              "lesson": "lu2-2",
+              "question": "读《春夜喜雨》全文，数一数有几句、每句几个字，再去认识绝句与律诗。"
+            },
+            "poetry": "在《春夜喜雨》中找写雨的动作。到春季诗词中，比较另一位诗人怎样写雨。"
+          }
         },
         {
           "id": "jingzhe",
@@ -91,7 +115,19 @@
             "author": "韦应物",
             "paragraph": 0
           },
-          "source": "https://www.ihchina.cn/solar_details/42.html"
+          "source": "https://www.ihchina.cn/solar_details/42.html",
+          "observation": "听一听窗外有什么鸟叫。用自己的话描述声音，也可以记下「今天没有听见」。",
+          "learning": {
+            "geography": {
+              "lesson": "gu4-1",
+              "question": "惊蛰的物候描述与今天的天气是一回事吗？试着分别说一句家乡今日天气和多年常见的春景。"
+            },
+            "literature": {
+              "lesson": "lu6-5",
+              "question": "三候里的动物会怎样变化？先分清观察与古人的想象，再看看节气怎样记录时间。"
+            },
+            "poetry": "读《观田家》，找找鸟声、雷声和田里的人。到春季诗词中，看看还有哪些声音。"
+          }
         },
         {
           "id": "chunfen",
@@ -120,7 +156,19 @@
             "author": "权德舆",
             "paragraph": 2
           },
-          "source": "https://www.ihchina.cn/solar_details/43.html"
+          "source": "https://www.ihchina.cn/solar_details/43.html",
+          "observation": "挑一个晴天，早晨和傍晚各看看窗外的光。记下哪一边更亮，想想太阳的位置怎样变了。",
+          "learning": {
+            "geography": {
+              "lesson": "gu4-3",
+              "question": "春分的白天和黑夜大致怎样分配？去四季图示中比较春分与夏至。"
+            },
+            "literature": {
+              "lesson": "lu6-5",
+              "question": "春分与秋分的「分」有什么联系？在节气顺序中找出这两个名字。"
+            },
+            "poetry": "读春分应景诗，找出诗人眼前的景物；再到春季诗词中比较不同人的春日心情。"
+          }
         },
         {
           "id": "qingming",
@@ -149,7 +197,19 @@
             "author": "（唐）杜牧",
             "paragraph": 0
           },
-          "source": "https://www.ihchina.cn/solar_details/44.html"
+          "source": "https://www.ihchina.cn/solar_details/44.html",
+          "observation": "散步时选一棵开花的树，观察花朵的颜色和花瓣形状。把看到的细节写下来。",
+          "learning": {
+            "geography": {
+              "lesson": "gu4-1",
+              "question": "诗里清明下雨，家乡每年清明都下雨吗？用天气与气候的区别想一想。"
+            },
+            "literature": {
+              "lesson": "lu6-6",
+              "question": "清明既出现在节气表里，也有节日习俗。去传统节日一课找找诗句与生活的联系。"
+            },
+            "poetry": "读《清明》，分别找写天气和写心情的词。再看看其他春季诗中的雨带来什么感受。"
+          }
         },
         {
           "id": "guyu",
@@ -178,7 +238,19 @@
             "author": "元稹",
             "paragraph": 1
           },
-          "source": "https://www.ihchina.cn/solar_details/45.html"
+          "source": "https://www.ihchina.cn/solar_details/45.html",
+          "observation": "在安全的岸边和大人一起看看水面，有没有漂着的小植物？写下它们是分散的还是挤在一起的。",
+          "learning": {
+            "geography": {
+              "lesson": "gu4-5",
+              "question": "一场雨下得久，就一定比另一场雨的雨量大吗？去学习降水量的单位与比较方法。"
+            },
+            "literature": {
+              "lesson": "lu6-5",
+              "question": "把雨水与谷雨的名字放在一起，找找它们怎样把雨与农事连起来。"
+            },
+            "poetry": "读谷雨应景诗，把看到的春日景物列出来；到春季诗词中再找一个相同的景物。"
+          }
         }
       ]
     },
@@ -214,7 +286,19 @@
             "author": "韦应物",
             "paragraph": 1
           },
-          "source": "https://www.ihchina.cn/solar_details/46.html"
+          "source": "https://www.ihchina.cn/solar_details/46.html",
+          "observation": "雨后沿着小路找找蚯蚓，观察它在哪里出现。把地面的干湿情况也记下来。",
+          "learning": {
+            "geography": {
+              "lesson": "gu4-4",
+              "question": "立夏到了，山上与山下会一样暖吗？去看看海拔和气温的关系。"
+            },
+            "literature": {
+              "lesson": "lu6-5",
+              "question": "四个带「立」的节气怎样排成一年？从立夏接着往后找。"
+            },
+            "poetry": "读《立夏日忆京师诸弟》，看看季节变化怎样引出思念；再找一首夏季诗作比较。"
+          }
         },
         {
           "id": "xiaoman",
@@ -243,7 +327,19 @@
             "author": "白居易",
             "paragraph": 1
           },
-          "source": "https://www.ihchina.cn/solar_details/6968.html"
+          "source": "https://www.ihchina.cn/solar_details/6968.html",
+          "observation": "和家人去市场看看当季的果蔬，选两样记录名字、颜色和产地。",
+          "learning": {
+            "geography": {
+              "lesson": "gu4-5",
+              "question": "麦田需要的雨，在各地都一样多吗？去看看我国降水与干湿差异。"
+            },
+            "literature": {
+              "lesson": "lu2-1",
+              "question": "《观刈麦》怎样用诗写劳动生活？读全文，再用自己的话说出一个场景。"
+            },
+            "poetry": "在《观刈麦》中找农忙的人和动作，再看看夏季诗词里还有哪些田园景象。"
+          }
         },
         {
           "id": "mangzhong",
@@ -272,7 +368,19 @@
             "author": "王维",
             "paragraph": 3
           },
-          "source": "https://www.ihchina.cn/solar_details/6969.html"
+          "source": "https://www.ihchina.cn/solar_details/6969.html",
+          "observation": "看看身边的饭碗里有哪些粮食。问问家人它们来自什么作物，再读卡片里的农谚。",
+          "learning": {
+            "geography": {
+              "lesson": "gu4-2",
+              "question": "如果要安排田间劳动，预报里哪些信息值得先看？练习一起读地点、时段、气温和降水。"
+            },
+            "literature": {
+              "lesson": "lu6-5",
+              "question": "把小满、芒种的名字与农谚对照，找出节气名里藏着的农事线索。"
+            },
+            "poetry": "读《新晴野望》，找田野的远景和近景；再到夏季诗词中找一首写田野的诗。"
+          }
         },
         {
           "id": "xiazhi",
@@ -301,7 +409,19 @@
             "author": "韦应物",
             "paragraph": 0
           },
-          "source": "https://www.ihchina.cn/solar_details/6970.html"
+          "source": "https://www.ihchina.cn/solar_details/6970.html",
+          "observation": "在同一位置、同一时刻观察自己的影子，记下影子的方向。隔一段日子再来比一比。",
+          "learning": {
+            "geography": {
+              "lesson": "gu4-3",
+              "question": "夏至的白天为什么长？去四季图示中比较北京与南半球的季节。"
+            },
+            "literature": {
+              "lesson": "lu6-5",
+              "question": "夏至与冬至在一年中相隔多远？沿节气表走一圈，找出二至二分。"
+            },
+            "poetry": "读《夏至避暑北池》，看看诗人到哪里避暑；再比较另一首夏季诗里的清凉景物。"
+          }
         },
         {
           "id": "xiaoshu",
@@ -330,7 +450,19 @@
             "author": "元稹",
             "paragraph": 0
           },
-          "source": "https://www.ihchina.cn/solar_details/6971.html"
+          "source": "https://www.ihchina.cn/solar_details/6971.html",
+          "observation": "在树荫下和开阔地各感受一下风，写下哪边更凉快。观察一会儿就回室内休息。",
+          "learning": {
+            "geography": {
+              "lesson": "gu4-2",
+              "question": "看小暑前后的预报，最高气温与最低气温分别表示什么？选一天算算温差。"
+            },
+            "literature": {
+              "lesson": "lu6-5",
+              "question": "小暑、大暑为什么前后相接？先读名字，再把诗句和家乡观察放在一起比较。"
+            },
+            "poetry": "读小暑应景诗，找出让你感到炎热的线索；到夏季诗词中比较不同的写法。"
+          }
         },
         {
           "id": "dashu",
@@ -359,7 +491,19 @@
             "author": "孟浩然",
             "paragraph": 2
           },
-          "source": "https://www.ihchina.cn/solar_details/6972.html"
+          "source": "https://www.ihchina.cn/solar_details/6972.html",
+          "observation": "傍晚从窗边看看云，画下云的轮廓，过十分钟再看它有没有变样。",
+          "learning": {
+            "geography": {
+              "lesson": "gu4-4",
+              "question": "阳光下的地面很烫，就代表预报气温也这么高吗？去了解气温的测量条件。"
+            },
+            "literature": {
+              "lesson": "lu2-2",
+              "question": "读《夏日南亭怀辛大》全文，数一数句子，再对照绝句和律诗的介绍。"
+            },
+            "poetry": "找出诗中的声音与气味，再到夏季诗词中读一首只用景物就能让人感到清凉的诗。"
+          }
         }
       ]
     },
@@ -395,7 +539,19 @@
             "author": "刘言史",
             "paragraph": 1
           },
-          "source": "https://www.ihchina.cn/solar_details/6973.html"
+          "source": "https://www.ihchina.cn/solar_details/6973.html",
+          "observation": "看看路边的一棵树，叶子有没有变色？记下你所在的城市，留到秋分时再比较。",
+          "learning": {
+            "geography": {
+              "lesson": "gu4-1",
+              "question": "立秋当天还很热，能说节气错了吗？先区分当天的天气与一年中的季节线索。"
+            },
+            "literature": {
+              "lesson": "lu6-5",
+              "question": "把立秋与白露、霜降连起来看，节气名记录了哪些变化？"
+            },
+            "poetry": "读《立秋》，找找诗人从哪些小变化察觉秋意；再到秋季诗词中寻找其他线索。"
+          }
         },
         {
           "id": "chushu",
@@ -424,7 +580,19 @@
             "author": "元稹",
             "paragraph": 2
           },
-          "source": "https://www.ihchina.cn/solar_details/6974.html"
+          "source": "https://www.ihchina.cn/solar_details/6974.html",
+          "observation": "到市场看看哪些谷物和水果上市了。选一样画下来，和家人聊聊它从哪里来。",
+          "learning": {
+            "geography": {
+              "lesson": "gu4-4",
+              "question": "处暑时家乡与高山上的气温一样吗？先选同一天的资料，再比较地点差异。"
+            },
+            "literature": {
+              "lesson": "lu6-5",
+              "question": "处暑之后接着哪些节气？看看它们的名字怎样从暑热走向秋凉。"
+            },
+            "poetry": "读处暑应景诗，挑一种景物画下来；到秋季诗词中找找它是否再次出现。"
+          }
         },
         {
           "id": "bailu",
@@ -453,7 +621,19 @@
             "author": "杜甫",
             "paragraph": 1
           },
-          "source": "https://www.ihchina.cn/solar_details/6975.html"
+          "source": "https://www.ihchina.cn/solar_details/6975.html",
+          "observation": "清晨和大人在附近找找露珠，看看它们停在草叶、栏杆还是别的地方。",
+          "learning": {
+            "geography": {
+              "lesson": "gu4-2",
+              "question": "白露前后的早晚与白天一样暖吗？先读最高、最低气温，再记一次自己的感受。"
+            },
+            "literature": {
+              "lesson": "lu2-2",
+              "question": "读《月夜忆舍弟》全文，数句数与字数，再去辨认诗的形式。"
+            },
+            "poetry": "找找诗中的月亮和思念。到秋季诗词中比较：相同的月亮会带来相同的心情吗？"
+          }
         },
         {
           "id": "qiufen",
@@ -482,7 +662,19 @@
             "author": "王维",
             "paragraph": 0
           },
-          "source": "https://www.ihchina.cn/solar_details/6976.html"
+          "source": "https://www.ihchina.cn/solar_details/6976.html",
+          "observation": "在一次傍晚散步时找三种不同颜色的叶子。记录它们长在哪棵树上。",
+          "learning": {
+            "geography": {
+              "lesson": "gu4-3",
+              "question": "秋分与春分的昼夜有哪些相似之处？去四季图示中找到它们各自的位置。"
+            },
+            "literature": {
+              "lesson": "lu6-5",
+              "question": "沿节气顺序从春分走到秋分，经过了哪些季节？试着说给家人听。"
+            },
+            "poetry": "在《山居秋暝》中找写雨后、山林和人物的句子，再到秋季诗词中比较另一幅秋景。"
+          }
         },
         {
           "id": "hanlu",
@@ -511,7 +703,19 @@
             "author": "元稹",
             "paragraph": 0
           },
-          "source": "https://www.ihchina.cn/solar_details/6977.html"
+          "source": "https://www.ihchina.cn/solar_details/6977.html",
+          "observation": "看看附近有没有菊花，写下花瓣的形状和颜色。想一想诗里的菊花是什么颜色。",
+          "learning": {
+            "geography": {
+              "lesson": "gu4-4",
+              "question": "寒露时各地都同样冷吗？找两个地方同一时段的气温，看看位置会带来什么差别。"
+            },
+            "literature": {
+              "lesson": "lu6-5",
+              "question": "白露与寒露的名字都带「露」，前后顺序怎样？结合三候找出变化。"
+            },
+            "poetry": "读寒露应景诗，找出秋天的植物或动物，再到秋季诗词中寻找同样的意象。"
+          }
         },
         {
           "id": "shuangjiang",
@@ -540,7 +744,19 @@
             "author": "杜牧",
             "paragraph": 1
           },
-          "source": "https://www.ihchina.cn/solar_details/6978.html"
+          "source": "https://www.ihchina.cn/solar_details/6978.html",
+          "observation": "找一片自然落下的叶子，观察叶脉和颜色。把它画下来，写下捡到它的日期。",
+          "learning": {
+            "geography": {
+              "lesson": "gu4-1",
+              "question": "霜降这个名字能当作家乡当天的天气预报吗？分别写下节气名称与实际天气。"
+            },
+            "literature": {
+              "lesson": "lu2-2",
+              "question": "读《山行》全文，数出句数与每句字数，再对照绝句与律诗的区别。"
+            },
+            "poetry": "在《山行》中找颜色与山路，再到秋季诗词中找一首同样写颜色的诗。"
+          }
         }
       ]
     },
@@ -576,7 +792,19 @@
             "author": "白居易",
             "paragraph": 0
           },
-          "source": "https://www.ihchina.cn/solar_details/6979.html"
+          "source": "https://www.ihchina.cn/solar_details/6979.html",
+          "observation": "看看家乡这天的树是绿的、黄的还是已经落叶。和诗里的江南冬景比较一下。",
+          "learning": {
+            "geography": {
+              "lesson": "gu4-4",
+              "question": "立冬时诗里的江南与家乡景色一样吗？从南北气温差异想想原因。"
+            },
+            "literature": {
+              "lesson": "lu6-5",
+              "question": "立冬之后还有哪五个节气？试着用名字排出冬天的顺序。"
+            },
+            "poetry": "读《早冬》，找出诗中仍有生机的景物；到冬季诗词中比较另一种冬天。"
+          }
         },
         {
           "id": "xiaoxue",
@@ -605,7 +833,19 @@
             "author": "白居易",
             "paragraph": 1
           },
-          "source": "https://www.ihchina.cn/solar_details/6980.html"
+          "source": "https://www.ihchina.cn/solar_details/6980.html",
+          "observation": "观察窗外的天气，是晴、雨、雪，还是阴天？用记录告诉大家小雪这天家乡的模样。",
+          "learning": {
+            "geography": {
+              "lesson": "gu4-2",
+              "question": "小雪到了，家乡会下雨还是下雪？先查看本地预报的地点和时段。"
+            },
+            "literature": {
+              "lesson": "lu2-2",
+              "question": "读《问刘十九》全文，数句子和每句字数，再去了解这种诗的形式。"
+            },
+            "poetry": "在《问刘十九》中找暖色与寒意。再读一首冬季诗，比较它带来的感觉。"
+          }
         },
         {
           "id": "daxue",
@@ -634,7 +874,19 @@
             "author": "柳宗元",
             "paragraph": 1
           },
-          "source": "https://www.ihchina.cn/solar_details/6981.html"
+          "source": "https://www.ihchina.cn/solar_details/6981.html",
+          "observation": "如果遇到雪，就从安全的窗边看地面的积雪。没有雪时，也如实记下你看到的冬景。",
+          "learning": {
+            "geography": {
+              "lesson": "gu4-5",
+              "question": "节气名里的「大雪」能直接当作一次降水量吗？去看看降水量怎样记录。"
+            },
+            "literature": {
+              "lesson": "lu2-2",
+              "question": "《江雪》有几句、每句几个字？读完全文，再和《山行》的形式作比较。"
+            },
+            "poetry": "读《江雪》，找大场景与小人物。再到冬季诗词中比较诗人怎样写雪。"
+          }
         },
         {
           "id": "dongzhi",
@@ -663,7 +915,19 @@
             "author": "白居易",
             "paragraph": 0
           },
-          "source": "https://www.ihchina.cn/solar_details/6982.html"
+          "source": "https://www.ihchina.cn/solar_details/6982.html",
+          "observation": "晚饭前看看天黑了没有，记下时刻。隔几周在同一时刻再看一次，比较天色。",
+          "learning": {
+            "geography": {
+              "lesson": "gu4-3",
+              "question": "冬至与夏至的白昼有什么不同？在四季图示中比较两次太阳照射的位置。"
+            },
+            "literature": {
+              "lesson": "lu6-6",
+              "question": "冬至的地方习俗怎样写进诗里？读节日课程时，留意团聚与思念。"
+            },
+            "poetry": "读《邯郸冬至夜思家》，找眼前的场景与诗人想象的场景，再比较其他冬季诗。"
+          }
         },
         {
           "id": "xiaohan",
@@ -692,7 +956,19 @@
             "author": "元稹",
             "paragraph": 0
           },
-          "source": "https://www.ihchina.cn/solar_details/6983.html"
+          "source": "https://www.ihchina.cn/solar_details/6983.html",
+          "observation": "从远处观察树上的鸟巢，看看有没有鸟衔来树枝。观察时保持安静。",
+          "learning": {
+            "geography": {
+              "lesson": "gu4-2",
+              "question": "读小寒前后的预报，北风从哪里来？把风向和温度分别记清楚。"
+            },
+            "literature": {
+              "lesson": "lu6-5",
+              "question": "小寒与大寒排在一年节气序列的哪里？回头看看前面还有哪些名字写冷暖。"
+            },
+            "poetry": "读小寒应景诗，找严寒中的生命线索，再到冬季诗词中寻找相似的景物。"
+          }
         },
         {
           "id": "dahan",
@@ -721,7 +997,19 @@
             "author": "刘长卿",
             "paragraph": 1
           },
-          "source": "https://www.ihchina.cn/solar_details/6984.html"
+          "source": "https://www.ihchina.cn/solar_details/6984.html",
+          "observation": "和家人一起找找家里的年货，写下一样食物或装饰，问问它寄托着什么心愿。",
+          "learning": {
+            "geography": {
+              "lesson": "gu4-1",
+              "question": "大寒当天一定比小寒更冷吗？比较实际记录，记得把地点、日期与天气写清楚。"
+            },
+            "literature": {
+              "lesson": "lu6-5",
+              "question": "大寒之后又回到哪个节气？用一句话说说一年怎样首尾相接。"
+            },
+            "poetry": "在《逢雪宿芙蓉山主人》中找声音与人物。再到冬季诗词中比较雪夜和白天的雪景。"
+          }
         }
       ]
     }
@@ -747,5 +1035,166 @@
       "label": "中国气象报 · 大寒食俗",
       "url": "https://www.cma.gov.cn/ztbd/2024zt/jq/xz/202501/P020250120408040105388.pdf"
     }
-  ]
+  ],
+  "challenges": [
+    {
+      "id": "spring-buds",
+      "term": "lichun",
+      "question": "立春到了，家乡的树还没有发芽。怎样记观察笔记？",
+      "options": [
+        "如实记下树的样子和地点",
+        "改写成已经发芽",
+        "等所有树发芽才记录"
+      ],
+      "answer": 0,
+      "explanation": "各地冷暖不同，同一种植物萌芽也有早有晚。记下真实的地点和现象，才方便以后比较。"
+    },
+    {
+      "id": "rain-weather",
+      "term": "yushui",
+      "question": "雨水节气这天晴空万里，最合适的解释是什么？",
+      "options": [
+        "日期记错了",
+        "当地这一天可以是晴天",
+        "所有地方都应该下雨"
+      ],
+      "answer": 1,
+      "explanation": "节气记录一年中的时令变化，当天的天气还受当地条件影响。可以把晴天如实写进观察册。"
+    },
+    {
+      "id": "bird-change",
+      "term": "jingzhe",
+      "question": "读到「鹰化为鸠」，怎样理解比较合适？",
+      "options": [
+        "鹰长大后变成鸠",
+        "所有鸟春天都会变样",
+        "这是古人对季节变化的旧说"
+      ],
+      "answer": 2,
+      "explanation": "古人把春天见到鸠鸟的变化写成了鹰变样。读物候时，要分清观察到的景象和古人的想象。"
+    },
+    {
+      "id": "festival",
+      "term": "qingming",
+      "question": "下面哪个节气也是传统节日？",
+      "options": [
+        "芒种",
+        "小满",
+        "清明"
+      ],
+      "answer": 2,
+      "explanation": "清明既是节气，也是传统节日。人们会扫墓祭祖、踏青，表达思念，亲近春天。"
+    },
+    {
+      "id": "harvest-word",
+      "term": "xiaoman",
+      "question": "小满的「麦秋至」中，「秋」指什么？",
+      "options": [
+        "麦子快到收获时节",
+        "天气已经进入秋季",
+        "树叶全变黄了"
+      ],
+      "answer": 0,
+      "explanation": "「秋」在这里指收获。虽然还是初夏，小麦已经快成熟了。"
+    },
+    {
+      "id": "busy-fields",
+      "term": "mangzhong",
+      "question": "「芒种忙忙栽」提醒农人忙什么？",
+      "options": [
+        "只等雨来",
+        "抓紧插秧或播种",
+        "准备冬天的冰灯"
+      ],
+      "answer": 1,
+      "explanation": "一些地方在芒种前后既要收麦，也要插秧或播种，收和种常常赶在一起。"
+    },
+    {
+      "id": "fireflies",
+      "term": "dashu",
+      "question": "「腐草为萤」是怎样的说法？",
+      "options": [
+        "腐草会长出翅膀",
+        "古人见到萤火虫在湿草附近后的想象",
+        "所有草都能发光"
+      ],
+      "answer": 1,
+      "explanation": "古人常在湿草丛附近见到萤火虫，便想象它由腐草变来。这一候可以引导我们分开观察与解释。"
+    },
+    {
+      "id": "white-dew",
+      "term": "bailu",
+      "question": "「群鸟养羞」里的「羞」是什么意思？",
+      "options": [
+        "害羞",
+        "颜色",
+        "食物"
+      ],
+      "answer": 2,
+      "explanation": "「羞」在古文里有食物的意思。这一候写一些鸟为过冬准备食物。"
+    },
+    {
+      "id": "leaf-record",
+      "term": "shuangjiang",
+      "question": "想比较家乡树叶的变化，哪份笔记更有帮助？",
+      "options": [
+        "同一棵树、不同日期的叶子颜色",
+        "只写秋天真好看",
+        "只抄书里的叶子颜色"
+      ],
+      "answer": 0,
+      "explanation": "选同一棵树，记清日期、地点和看到的颜色，过几天就能认真比较变化。"
+    },
+    {
+      "id": "winter-place",
+      "term": "lidong",
+      "question": "诗里写「十月江南天气好」，我们能想到什么？",
+      "options": [
+        "冬天所有地方都在下雪",
+        "江南永远没有冬天",
+        "不同地方的冬景可能差很多"
+      ],
+      "answer": 2,
+      "explanation": "诗里的江南冬景还带着暖意。把它和自己家乡的观察放在一起，可以发现地方之间的差异。"
+    },
+    {
+      "id": "snow-wheat",
+      "term": "daxue",
+      "question": "农谚说给麦子盖「被」，这里的「被」指什么？",
+      "options": [
+        "棉布",
+        "合适的积雪",
+        "落下的麦粒"
+      ],
+      "answer": 1,
+      "explanation": "田里合适的积雪可以挡风保温，融化后给土壤补水，农人就把它比作被子。"
+    },
+    {
+      "id": "cycle",
+      "term": "dahan",
+      "question": "按节气顺序，大寒之后又到了哪一个？",
+      "options": [
+        "立春",
+        "雨水",
+        "冬至"
+      ],
+      "answer": 0,
+      "explanation": "二十四节气一年一轮。大寒之后接立春，新的四季循环开始了。"
+    }
+  ],
+  "learning_lessons": {
+    "geography": {
+      "gu4-1": "天气与气候",
+      "gu4-2": "读天气预报：气温、风与降水概率",
+      "gu4-3": "自转、公转与四季",
+      "gu4-4": "我国气温差异与影响因素",
+      "gu4-5": "降水量、干湿差异与分布因素"
+    },
+    "literature": {
+      "lu2-1": "诗与词",
+      "lu2-2": "绝句与律诗",
+      "lu6-5": "二十四节气",
+      "lu6-6": "传统节日与诗句"
+    }
+  }
 }

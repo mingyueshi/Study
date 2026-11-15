@@ -1,7 +1,7 @@
-{% extends 'base.html' %}{% load static %}
+{% extends 'base.html' %}{% load static solar_learning %}
 {% block title %}诗词四季 · 乐学堂{% endblock %}
 {% block content %}
-<link rel="stylesheet" href="{% static 'poetry/seasons.css' %}?v=5">
+<link rel="stylesheet" href="{% static 'poetry/seasons.css' %}?v=6">
 <div class="fh-topline"><a class="back" href="{% url 'poetry-index' %}">← 古诗文</a><span>跟着季节读诗</span></div>
 <header class="seasons-hero">
   <div class="seasons-hero-copy">
@@ -37,13 +37,16 @@
   <div class="seasons-main">
     <div class="seasons-grid">
       {% for season in seasons %}
-      <a class="season-card season-{{ season.code }}" href="{% url 'poetry-theme' season.code %}?dynasty={{ dynasty }}">
+      <article class="season-card season-{{ season.code }}">
+      <a class="season-poetry-link" href="{% url 'poetry-theme' season.code %}?dynasty={{ dynasty }}">
         <span class="season-emoji" aria-hidden="true">{{ season.emoji }}</span>
         <b class="season-name">{{ season.title }}</b>
         <i class="season-subtitle">{{ season.subtitle }}</i>
         <span class="season-count">{{ season.counts.all }} 首{% if dynasty != 'all' %}（{{ season.counts.tang }} 唐 · {{ season.counts.song }} 宋）{% endif %}</span>
         <p class="season-desc">{{ season.description }}</p>
       </a>
+      {% solar_season_bridge season.code True %}
+      </article>
       {% endfor %}
     </div>
   </div>

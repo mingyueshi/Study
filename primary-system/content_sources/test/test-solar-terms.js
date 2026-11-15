@@ -1,4 +1,6 @@
 const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const path = require('node:path');
 const content = require('../solar-terms.json');
 
 const calendar = {
@@ -13,6 +15,18 @@ const plainText = text => {
 };
 
 assert.equal(content.schema_version, 1);
+const lessonSources = {
+  geography: fs.readFileSync(path.join(__dirname, '../geo/knowledge-core.js'), 'utf8'),
+  literature: fs.readFileSync(path.join(__dirname, '../lit-data.js'), 'utf8'),
+};
+for (const [subject, lessons] of Object.entries(content.learning_lessons)) {
+  assert.ok(lessonSources[subject], subject);
+  for (const [id, title] of Object.entries(lessons)) {
+    plainText(title);
+    assert.ok(lessonSources[subject].includes(`id: '${id}', title: '${title}'`), id);
+  }
+}
+assert.deepEqual(Object.keys(content.learning_lessons).sort(), ['geography', 'literature']);
 assert.deepEqual(content.seasons.map(season => season.id), Object.keys(calendar));
 const termIds = new Set();
 const poemKeys = new Set();
@@ -25,7 +39,13 @@ for (const season of content.seasons) {
     assert.ok(!termIds.has(term.id), term.id);
     termIds.add(term.id);
     assert.match(term.date, /^(?:[1-9]|1[012])月(?:[1-9]|[12][0-9]|3[01])日$/);
-    for (const key of ['symbol', 'custom', 'proverb', 'proverb_note']) plainText(term[key]);
+    for (const key of ['symbol', 'custom', 'proverb', 'proverb_note', 'observation']) plainText(term[key]);
+    assert.deepEqual(Object.keys(term.learning).sort(), ['geography', 'literature', 'poetry']);
+    for (const subject of ['geography', 'literature']) {
+      assert.ok(content.learning_lessons[subject][term.learning[subject].lesson], term.id);
+      plainText(term.learning[subject].question);
+    }
+    plainText(term.learning.poetry);
     assert.equal(term.phenology.length, 3, term.name);
     for (const item of term.phenology) {
       plainText(item.name);
@@ -40,6 +60,21 @@ for (const season of content.seasons) {
     assert.ok(Number.isInteger(term.poem.paragraph) && term.poem.paragraph >= 0, term.name);
     assert.equal(new URL(term.source).protocol, 'https:');
   }
+}
+
+const challengeIds = new Set();
+assert.equal(content.challenges.length, 12);
+for (const challenge of content.challenges) {
+  assert.match(challenge.id, /^[a-z-]+$/);
+  assert.ok(!challengeIds.has(challenge.id));
+  challengeIds.add(challenge.id);
+  assert.ok(termIds.has(challenge.term));
+  plainText(challenge.question);
+  plainText(challenge.explanation);
+  assert.equal(challenge.options.length, 3);
+  assert.equal(new Set(challenge.options).size, 3);
+  challenge.options.forEach(plainText);
+  assert.ok(Number.isInteger(challenge.answer) && challenge.answer >= 0 && challenge.answer < 3);
 }
 
 assert.ok(content.sources.length >= 2);

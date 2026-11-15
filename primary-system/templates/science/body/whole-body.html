@@ -1,0 +1,22 @@
+<div class="body-map-canvas">
+  <svg viewBox="0 0 600 600" role="img" aria-labelledby="mission-map-title mission-map-desc">
+    <title id="mission-map-title">人体器官位置地图</title><desc id="mission-map-desc">面向你的简化人体：头部有大脑和眼睛，胸部有肺和心脏，腹部有胃和小肠，手臂标出骨骼肌。数字标签可以点击。</desc>
+    <defs><pattern id="body-map-grid" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#aec9bf"/></pattern></defs>
+    <rect width="600" height="600" rx="25" fill="url(#body-map-grid)"/>
+    <circle cx="300" cy="280" r="205" fill="#ecf4dc"/>
+    <path d="M272 163V181Q241 181 220 201L167 300Q155 326 175 334Q190 338 201 316L230 265L222 369L245 542Q247 560 264 554L283 402H317L336 554Q353 560 355 542L378 369L370 265L399 316Q410 338 425 334Q445 326 433 300L380 201Q359 181 328 181V163" fill="#fff1d7" stroke="#bfa97f" stroke-width="3"/>
+    <ellipse cx="300" cy="112" rx="58" ry="68" fill="#fff1d7" stroke="#bfa97f" stroke-width="3"/>
+    <g data-map-art="brain" fill="#dfafa9" stroke="#ad6764" stroke-width="2.5"><path d="M263 92Q247 77 266 66Q265 49 286 53Q300 38 313 53Q333 48 335 65Q351 73 338 92Q330 106 313 98Q299 109 285 98Q269 106 263 92Z"/><path d="M298 52V96M273 68Q288 65 285 82M320 62Q309 76 327 83" fill="none"/></g>
+    <g data-map-art="eye" fill="#fff" stroke="#447d80" stroke-width="3"><path d="M263 117Q278 101 291 117Q276 133 263 117ZM309 117Q324 101 337 117Q324 133 309 117Z"/><circle cx="277" cy="117" r="5" fill="#447d80"/><circle cx="323" cy="117" r="5" fill="#447d80"/></g>
+    <path d="M285 145Q300 154 315 145" stroke="#ad886c" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M300 172V226M300 209L278 229M300 209L322 229" stroke="#9ab1a3" stroke-width="9" fill="none" stroke-linecap="round"/>
+    <g data-map-art="lungs" fill="#94c8bd" stroke="#4c8d82" stroke-width="3"><path d="M286 214Q267 202 254 223Q233 256 247 295Q264 305 286 286Z"/><path d="M314 214Q333 202 346 223Q367 256 353 295Q336 305 314 286Z"/></g>
+    <path data-map-art="heart" d="M299 263Q284 247 297 241Q309 235 315 250Q329 236 339 250Q355 272 316 296Q305 284 299 263Z" fill="#df7673" stroke="#a13f48" stroke-width="3"/>
+    <path d="M300 186V309Q306 325 322 325" stroke="#d5a572" stroke-width="8" fill="none"/>
+    <path data-map-art="stomach" d="M319 314Q325 327 335 319Q363 304 361 336Q362 369 327 366Q308 361 303 343Q301 332 314 329Z" fill="#e9ba67" stroke="#a17a35" stroke-width="3"/>
+    <g data-map-art="intestine"><rect x="255" y="375" width="91" height="73" rx="20" fill="#f8e3b9" stroke="#c68c55" stroke-width="3"/><path d="M267 387H326Q343 396 326 403H275Q259 413 279 419H326Q339 430 321 435H271" fill="none" stroke="#cb9266" stroke-width="10" stroke-linecap="round"/></g>
+    <g data-map-art="muscles" fill="#da9261" stroke="#a86840" stroke-width="3"><path d="M204 238Q222 237 211 267L187 307Q172 317 181 293Z"/><path d="M396 238Q378 237 389 267L413 307Q428 317 419 293Z"/></g>
+    <g stroke="#5c8579" stroke-width="2" fill="none"><path d="M114 65H208L263 79"/><path d="M486 123H364L337 117"/><path d="M114 216H205L251 250"/><path d="M486 276H367L335 271"/><path d="M486 350H384L359 341"/><path d="M114 423H221L257 412"/><path d="M114 319H155L190 285"/></g>
+  </svg>
+  {% for organ in expedition.organs %}<button type="button" class="body-map-pin body-pin-{{ organ.id }}" data-map-organ="{{ organ.id }}" data-lesson-url="{% url 'science-body-lesson' organ.lesson %}" aria-pressed="false"><span>{{ forloop.counter }}</span><span data-pin-name>{{ organ.name }}</span></button>{% endfor %}
+</div>

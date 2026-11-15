@@ -53,7 +53,7 @@
   <p class="body-kicker">把发现用起来</p>
   <h2 id="checkup-title">三题小挑战</h2>
   {% for question in lesson.checkup %}
-  <fieldset class="body-check-question" data-body-question>
+  <fieldset class="body-check-question" data-body-question="{{ question.id }}">
     <legend>{{ forloop.counter }} · {{ question.prompt }}</legend>
     <div class="body-check-options" hidden>
       {% for option in question.options %}

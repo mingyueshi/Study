@@ -18,9 +18,18 @@ window.StudyTopicConnections = (() => {
     return panel(heading, links[id]?.map(([suffix, label]) => [route, suffix, label]));
   }
 
+  function references(id, heading = '看图查资料') {
+    const links = [...(backlinks[id] || [])];
+    const journey = document.querySelector('.solar-journey');
+    if (journey?.dataset.term && /^(gu|lu)/.test(id)) {
+      links.unshift(['solarTerms', '#' + journey.dataset.term, '回' + journey.dataset.name + '卡，记下联读发现']);
+    }
+    return panel(heading, links);
+  }
+
   return {
     related,
-    references: (id, heading = '看图查资料') => panel(heading, backlinks[id]),
+    references,
     lesson: item => ({ ...item, ...lessonEdits[item.id] }),
   };
 })();

@@ -1,11 +1,14 @@
 {% extends 'base.html' %}{% load static %}{% block title %}英语音标 · 乐学堂{% endblock %}
-{% block content %}<link rel="stylesheet" href="{% static 'phonetics/phonetics.css' %}?v=4"><script src="{% static 'speech.js' %}" defer></script><script src="{% static 'tts.js' %}" defer></script><script src="{% static 'phonetics/phonetics.js' %}?v=3" defer></script>
-<header class="page-heading page-heading-compact"><p class="eyebrow">英语 · 44 个音</p><h1>英语音标</h1><p>从发音基础开始，再到各组音标卡看口型、听原声、跟读例词。</p></header>{% include 'includes/tts_controls.html' %}
-<div class="library-layout"><aside class="unit-nav" aria-label="音标学习导航"><h2>音标学习</h2><a href="#group-theory">发音基础</a>{% for group in groups %}<a href="#group-{{ group.code }}">{% if group.emoji %}<span class="unit-dot">{{ group.emoji }}</span>{% endif %}{{ group.name }}<span class="unit-count">{{ group.phonemes|length }}</span></a>{% endfor %}</aside>
+{% block content %}<link rel="stylesheet" href="{% static 'phonetics/phonetics.css' %}?v=5"><script src="{% static 'speech.js' %}" defer></script><script src="{% static 'tts.js' %}" defer></script><script src="{% static 'phonetics/phonetics.js' %}?v=4" defer></script><script src="{% static 'phonetics/practice.js' %}?v=1" defer></script>
+<header class="page-heading page-heading-compact"><p class="eyebrow">英语 · 44 个音</p><h1>英语音标</h1><p>读懂音标，听出差别，再用小挑战检验收获。每天练一组，慢慢读得更清楚。</p></header>{% include 'includes/tts_controls.html' with sequence_settings=True %}
+<p id="ph-audio-status" class="ph-local-note" role="status"></p>
+<div class="library-layout"><aside class="unit-nav" aria-label="音标学习导航"><h2>音标学习</h2><a href="#group-theory">发音基础<span class="unit-count">6</span></a><a href="#group-contrasts">易混音对比<span class="unit-count">8</span></a><a href="#group-practice">听音与理论自测<span class="unit-count">28</span></a>{% for group in groups %}<a href="#group-{{ group.code }}">{% if group.emoji %}<span class="unit-dot">{{ group.emoji }}</span>{% endif %}{{ group.name }}<span class="unit-count">{{ group.phonemes|length }}</span></a>{% endfor %}</aside>
 <section class="ph-board">
 {% include 'phonetics/theory.html' %}
+{% include 'phonetics/contrasts.html' %}
+{% include 'phonetics/practice.html' %}
 {% for group in groups %}<section class="ph-group" id="group-{{ group.code }}">
-  <div class="section-heading"><div><h2>{{ group.emoji }} {{ group.name }}</h2><p>{{ group.hint }}</p></div><button class="button small" type="button" data-tts-sequence="#group-{{ group.code }}" data-tts-rate="0.78">▶ 连读本组</button></div>
+  <div class="section-heading"><div><h2>{{ group.emoji }} {{ group.name }}</h2><p>{{ group.hint }}</p></div><div class="ph-group-controls"><button class="button small" type="button" data-tts-sequence="#group-{{ group.code }}" data-tts-pausable="true" data-tts-rate="0.78">▶ 连读本组</button><button class="button small secondary" type="button" data-ph-restart>从头跟读</button><button class="button small secondary" type="button" data-ph-stop>停止</button></div></div>
   <div class="ph-grid">{% for card in group.phonemes %}<article class="ph-card" id="ph-{{ card.id }}">
     <div class="ph-symbol"><button class="ph-symbol-text" type="button" data-audio="{% static card.audio %}" data-fallback="{{ card.key_word }}" aria-label="听音标 {{ card.symbol }}">{{ card.symbol }}</button><button class="ph-hear" type="button" data-audio="{% static card.audio %}" data-fallback="{{ card.key_word }}" aria-label="听音标 {{ card.symbol }}，读不准时听例词 {{ card.key_word }}">🔊</button></div>
     <p class="ph-tip">{{ card.tip }}</p>

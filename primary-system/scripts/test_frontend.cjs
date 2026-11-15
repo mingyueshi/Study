@@ -1363,7 +1363,8 @@ test('study topic links resolve to real events, places, lessons and chapters', (
     chinaMap: data.GMAtlas.places.map(place => `?place=${place.id}#map`),
     historyLesson: lessonAnchors(history), geographyLesson: lessonAnchors(geography),
     historyEvent: data.TIMELINE_EVENTS.map(event => '?event=' + event.id),
-    marsLife: [''], darkMatter: [''], stars: [''], poetry: [''], idiomStories: [''], elements: [''], bodyStation: [''], solarTerms: [''],
+    marsLife: [''], darkMatter: [''], stars: [''], poetry: [''], idiomStories: [''], elements: [''], bodyStation: [''],
+    solarTerms: ['', ...JSON.parse(fs.readFileSync(path.join(__dirname, '../content_sources/solar-terms.json'), 'utf8')).seasons.flatMap(season => season.terms.map(term => '#' + term.id))],
   };
   for (const [key, source, targets] of [
     ['events', data.TIMELINE_EVENTS, history.map(lesson => '#lesson-' + lesson.id)],
@@ -1413,12 +1414,20 @@ test('study topic links resolve to real events, places, lessons and chapters', (
   assert.match(connections.references('gu5-2'), /china\.html\?place=f20#map/);
   assert.match(connections.references('au8-3', '接着学'), /href="\/mysteries\/mars-life\/"/);
   assert.match(connections.references('lu6-3', '接着学'), /href="\/history\/#lesson-hu7-2"/);
-  for (const id of ['gu4-1', 'gu4-3', 'lu6-5']) {
-    assert.match(connections.references(id), /href="\/geography\/solar-terms\/"/);
+  for (const id of ['gu4-1', 'gu4-2', 'gu4-3', 'gu4-4', 'gu4-5', 'lu2-1', 'lu2-2', 'lu6-5', 'lu6-6']) {
+    assert.match(connections.references(id), /href="\/geography\/solar-terms\/(?:#[a-z]+)?"/);
   }
   assert.match(connections.references('su6-5', '接着学'), /href="\/science\/body\/"/);
   assert.match(connections.references('su7-3', '接着学'), /href="\/geography\/study\/#lesson-gu5-1"/);
   assert.equal(connections.related('events', 'unknown'), '');
+  const originalQuery = context.document.querySelector;
+  context.document.querySelector = selector => selector === '.solar-journey'
+    ? {dataset: {term: 'yushui', name: '雨水'}} : originalQuery(selector);
+  assert.match(connections.references('gu4-2'), /回雨水卡，记下联读发现/);
+  assert.match(connections.references('lu2-2'), /href="\/geography\/solar-terms\/#yushui"/);
+  assert.doesNotMatch(connections.references('au3-4'), /回雨水卡/);
+  context.document.querySelector = originalQuery;
+  assert.doesNotMatch(connections.references('lu2-2'), /记下联读发现/);
 });
 
 function originsAtlasPage(query = '', motion = 'full') {

@@ -2,7 +2,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 
-const { schema_version, station, lessons, heart, pulse, reaction, blindspot } = require('../human-body.json');
+const { schema_version, station, lessons, heart, pulse, reaction, blindspot, expedition, notebook } = require('../human-body.json');
 const art = fs.readFileSync(path.join(__dirname, '../../static/science/body-atlas.svg'), 'utf8');
 
 function text(value) {
@@ -36,19 +36,34 @@ for (const lesson of lessons) {
   assert.equal(new Set(lesson.stops.map(stop => stop.title)).size, lesson.stops.length);
   texts(lesson.quiz, ['question', 'answer']);
   const diagram = lesson.diagram;
-  texts(diagram, ['title', 'prompt', 'caption']);
-  const expectedSteps = {
-    breathing: ['inhale', 'exhale'],
-    digestion: ['mouth', 'esophagus', 'stomach', 'intestine', 'colon'],
-    movement: ['extend', 'bend'],
-    nerves: ['sense', 'process', 'respond'],
-    senses: ['eye', 'ear', 'smell'],
-  };
-  if (lesson.slug !== 'circulation') {
-    assert.deepEqual(diagram.steps.map(step => step.id), expectedSteps[lesson.slug]);
-    diagram.steps.forEach(step => texts(step, ['label', 'headline', 'body']));
-  }
+  texts(diagram, ['title', 'caption']);
   Object.values(diagram.labels).forEach(text);
+  const animation = lesson.animation;
+  texts(animation, ['intro', 'note']);
+  assert.ok(animation.modes.length >= 1);
+  assert.equal(new Set(animation.modes.map(mode => mode.id)).size, animation.modes.length);
+  for (const mode of animation.modes) {
+    assert.match(mode.id, /^[a-z-]+$/);
+    texts(mode, ['label', 'caption']);
+    assert.ok(mode.phases.length >= 2);
+    assert.equal(new Set(mode.phases.map(phase => phase.id)).size, mode.phases.length);
+    for (const phase of mode.phases) {
+      assert.match(phase.id, /^[a-z-]+$/);
+      texts(phase, ['label', 'title', 'body', 'cue']);
+      assert.ok(Number.isInteger(phase.duration) && phase.duration >= 2000 && phase.duration <= 10000);
+    }
+  }
+  const expectedPhases = {
+    breathing: [['inhale', 'exchange', 'exhale']],
+    digestion: [['mouth', 'esophagus', 'stomach', 'intestine', 'colon', 'exit']],
+    circulation: [['return', 'fill', 'pump'], ['return-body', 'fill-right', 'to-lungs', 'oxygenate', 'return-lungs', 'fill-left', 'to-body', 'deliver']],
+    movement: [['bend', 'extend']], nerves: [['sense', 'process', 'respond']],
+    senses: [['light', 'vision'], ['sound', 'vibrate', 'hearing'], ['smell', 'taste']],
+  };
+  assert.deepEqual(animation.modes.map(mode => mode.phases.map(phase => phase.id)), expectedPhases[lesson.slug]);
+  if (lesson.slug === 'circulation') {
+    texts(animation.modes[1].labels, ['title', 'lungs', 'body', 'getOxygen', 'releaseCarbon', 'giveOxygen', 'carryCarbon', 'fillRight', 'sendLungs', 'fillLeft', 'sendBody', 'returnBody', 'returnLungs', 'follow']);
+  }
   const requiredLabels = {
     breathing: ['airway', 'lungs', 'diaphragm', 'alveoli', 'oxygen', 'carbon', 'air', 'blood'],
     digestion: ['mouth', 'esophagus', 'stomach', 'intestine', 'colon', 'nutrients', 'water', 'exit'],
@@ -74,6 +89,7 @@ for (const lesson of lessons) {
   lesson.experiment.steps.forEach(text);
   assert.equal(lesson.checkup.length, 3);
   for (const question of lesson.checkup) {
+    assert.match(question.id, new RegExp(`^${lesson.slug}-[a-z-]+$`));
     texts(question, ['prompt', 'explanation']);
     assert.equal(question.options.length, 3);
     question.options.forEach(text);
@@ -86,9 +102,7 @@ texts(reaction, ['title', 'intro', 'start', 'waiting', 'go', 'early', 'again', '
 texts(blindspot, ['title', 'intro', 'explanation']);
 blindspot.steps.forEach(text);
 
-texts(heart, ['title', 'intro', 'route', 'legend']);
-assert.deepEqual(heart.phases.map(phase => phase.id), ['return', 'fill', 'pump']);
-for (const phase of heart.phases) texts(phase, ['label', 'description']);
+texts(heart, ['route', 'legend']);
 
 texts(pulse, ['title', 'teaser', 'intro', 'comparison', 'safety']);
 texts(pulse.wrist, ['caption', 'thumb', 'spot', 'fingers']);
@@ -97,4 +111,37 @@ assert.equal(pulse.steps.length, 3);
 for (const step of pulse.steps) texts(step, ['title', 'body']);
 sources(pulse.sources);
 
-console.log('人体奥秘站：六课、十二幅外部图像、小实验与十八道自测通过结构校验。');
+const questionIds = lessons.flatMap(lesson => lesson.checkup.map(question => question.id));
+assert.equal(new Set(questionIds).size, questionIds.length);
+texts(expedition, ['title', 'intro', 'caption']);
+assert.equal(expedition.organs.length, 7);
+const organIds = expedition.organs.map(organ => organ.id);
+assert.equal(new Set(organIds).size, organIds.length);
+for (const organ of expedition.organs) {
+  assert.match(organ.id, /^[a-z-]+$/);
+  texts(organ, ['name', 'description']);
+  assert.ok(lessons.some(lesson => lesson.slug === organ.lesson));
+}
+assert.equal(expedition.scenarios.length, 3);
+assert.equal(new Set(expedition.scenarios.map(scene => scene.id)).size, 3);
+for (const scene of expedition.scenarios) {
+  assert.match(scene.id, /^[a-z-]+$/);
+  texts(scene, ['title', 'question', 'summary']);
+  assert.ok(scene.steps.length >= 4);
+  for (const step of scene.steps) {
+    texts(step, ['title', 'body']);
+    assert.ok(organIds.includes(step.organ));
+  }
+}
+assert.equal(expedition.challenges.length, 7);
+assert.equal(new Set(expedition.challenges.map(item => item.id)).size, 7);
+assert.deepEqual([...expedition.challenges.map(item => item.organ)].sort(), [...organIds].sort());
+for (const item of expedition.challenges) {
+  assert.match(item.id, /^locate-[a-z-]+$/);
+  texts(item, ['prompt', 'hint', 'explanation']);
+}
+texts(notebook, ['title', 'intro', 'caption', 'recovery']);
+assert.deepEqual(notebook.stages.map(stage => stage.id), ['rest', 'active', 'recovery']);
+notebook.stages.forEach(stage => text(stage.label));
+
+console.log('人体奥秘站：六课、十二幅图像、十八道自测、三种协作场景、七道定位挑战、九种过程演示与实验手册通过结构校验。');

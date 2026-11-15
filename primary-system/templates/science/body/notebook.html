@@ -1,0 +1,20 @@
+<section class="body-panel body-notebook" id="notebook" data-body-notebook hidden aria-labelledby="notebook-title">
+  <div class="body-section-heading"><p class="body-kicker">记录 · 比较 · 再观察</p><h2 id="notebook-title">{{ notebook.title }}</h2></div>
+  <p>{{ notebook.intro }}</p>
+  <div class="body-notebook-grid">
+    <form data-notebook-form>
+      <p>先在<a class="body-inline-link" href="#pulse">上方计时器与记录表 ↑</a>填写「静坐时」和「活动后」的次数，再保存到手册。</p>
+      <label>休息后（三十秒次数，可不填）<input type="number" min="1" max="999" step="1" inputmode="numeric" data-pulse-recovery></label>
+      <p class="body-small">{{ notebook.recovery }}</p>
+      <label>我观察到……<textarea maxlength="120" rows="3" placeholder="例如：慢走一分钟，休息两分钟后又数了一次。" data-pulse-note></textarea></label>
+      <button type="submit" class="body-button body-button-primary">保存这组观察</button>
+      <p data-notebook-status role="status"></p>
+    </form>
+    <figure class="body-pulse-chart"><figcaption><strong>这一次，脉搏有什么变化？</strong><span>按三十秒次数 × ２，估算每分钟次数</span></figcaption><div data-pulse-bars></div><p class="body-small">长条从零开始，只比较本次填写的结果。</p></figure>
+  </div>
+  <p class="body-small" data-notebook-storage>{{ notebook.caption }}</p>
+  <div class="body-notebook-history-head"><h3>已经记录的观察 <span data-record-count>0</span>／20</h3><button class="body-button" type="button" data-notebook-export disabled>导出表格</button></div>
+  <p data-notebook-empty>手册还是空的，记录第一组发现吧。</p>
+  <div class="body-record-list" data-notebook-list></div>
+  {{ notebook|json_script:"body-notebook-data" }}
+</section>

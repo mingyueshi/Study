@@ -16,7 +16,7 @@
   </div>
   <div class="body-pulse-workbench">
     <div data-pulse-timer data-seconds="{{ pulse.seconds }}" hidden>
-      <p class="body-kicker">两次都数 {{ pulse.seconds }} 秒</p>
+      <p class="body-kicker">每次都数 {{ pulse.seconds }} 秒</p>
       <p class="body-timer"><span data-pulse-time role="timer">{{ pulse.seconds }}</span><span>秒</span></p>
       <div class="body-controls">
         <button class="body-button-primary" type="button" data-pulse-start>开始计时</button>
@@ -40,3 +40,4 @@
     </div>
   </div>
 </section>
+{% include 'science/body/notebook.html' %}

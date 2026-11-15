@@ -1,0 +1,32 @@
+.body-process .body-stage { margin-bottom: 10px; }
+.body-process-controls { margin-bottom: 16px; }
+.body-process-modes { margin-bottom: 12px; }
+.body-process-modes button { font-size: 18px; border-radius: 30px; padding: 9px 20px; }
+.body-process-phases { display: flex; flex-wrap: wrap; gap: 8px; }
+.body-process-phases button { display: inline-flex; align-items: center; gap: 7px; padding: 8px 12px; min-height: 44px; border: 1px solid var(--atlas-edge); border-radius: 9px; background: var(--atlas-white); color: var(--atlas-ink); font-size: 16px; text-align: left; }
+.body-process-phases button > span { display: grid; place-items: center; min-width: 24px; height: 24px; border-radius: 50%; background: var(--lesson-tint); color: var(--lesson-accent); font-size: 13px; font-weight: 750; }
+.body-process-phases button[aria-pressed="true"] { background: var(--lesson-accent); border-color: var(--lesson-accent); color: #fff; }
+.body-process-legend { font-size: 15px; color: var(--atlas-muted); padding: 0 4px; line-height: 1.7; }
+.body-process-player { padding: 16px 18px; border: 1px solid var(--atlas-edge); border-radius: 15px; background: var(--atlas-white); margin: 14px 0; }
+.body-process-speed { display: flex; align-items: center; gap: 8px; color: var(--atlas-muted); font-size: 15px; margin-left: auto; }
+.body-process-speed select { min-height: 44px; padding: 6px 30px 6px 10px; border: 1px solid var(--atlas-edge); border-radius: 8px; background: var(--atlas-white); color: var(--atlas-ink); font: inherit; }
+.body-process-scrub { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 14px; margin-top: 14px; font-size: 16px; font-weight: 700; }
+.body-process-scrub output { color: var(--lesson-accent); }
+.body-process-scrub input { grid-column: 1/-1; width: 100%; margin: 0; min-height: 35px; accent-color: var(--lesson-accent); cursor: pointer; }
+.body-process-status { font-size: 14px; color: var(--atlas-muted); min-height: 1.8em; margin: 0; }
+.body-process-note { margin: 12px 0 0; font-size: 14px; color: var(--atlas-muted); line-height: 1.7; }
+.body-process .body-process-cue { display: inline-block; padding: 4px 10px; margin-bottom: 10px; border-radius: 6px; background: var(--atlas-white); color: var(--lesson-accent); font-size: 16px; font-weight: 700; }
+.body-process .body-breath-lungs, .body-process .body-diaphragm, .body-process .body-food-dot, .body-process .body-heart-ventricles, .body-process .body-heart-atria { transition: none; }
+.body-process [data-nutrient-particles] circle { animation: none; }
+.body-process[data-state="exchange"] [data-breath-in], .body-process[data-state="exchange"] [data-breath-out] { display: none; }
+.body-process-focus > rect { stroke: #79944a; stroke-width: 5px; }
+.body-process .body-stage > svg { max-height: 360px; }
+.body-process .body-circuit-stage > svg { max-height: 410px; }
+.body-process [data-ear-drum] { transform-box: fill-box; transform-origin: center; }
+.body-process button:focus-visible, .body-process input:focus-visible, .body-process select:focus-visible { outline: 3px solid #a4772c; outline-offset: 3px; }
+@media (min-width: 1800px) { .body-process .body-stage > svg { max-height: 430px; } }
+@media (max-width: 600px) { .body-process-player { padding: 12px; }.body-process-speed { margin-left: 0; }.body-process-scrub { grid-template-columns: 1fr; }.body-process-scrub output { font-size: 14px; }.body-process-phases { gap: 6px; }.body-process-phases button { font-size: 14px; padding: 7px 8px; }.body-process .body-controls button { font-size: 14px; padding: 8px 10px; }.body-process .body-demo-caption { padding: 13px; } }
+
+.body-process-speed { flex-shrink: 0; white-space: nowrap; }
+.body-process .body-demo-heading h2 { margin: 0 0 7px; }
+.body-process .body-demo-heading .body-kicker { margin-bottom: 5px; }

@@ -5,5 +5,7 @@
 <div class="rumor-station">
   {% block station %}{% endblock %}
 </div>
+<script src="{% static 'science/rumors-learning.js' %}" defer></script>
 <script src="{% static 'science/rumors.js' %}" defer></script>
+{% block station_scripts %}{% endblock %}
 {% endblock %}

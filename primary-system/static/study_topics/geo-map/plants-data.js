@@ -33,7 +33,7 @@ window.GM_FLORA = {
     },
     {
       "id": "farmland",
-      "name": "农田与茶园",
+      "name": "农田与园圃",
       "color": "#64751d"
     }
   ],
@@ -445,6 +445,108 @@ window.GM_FLORA = {
       "adcode": "620000",
       "source": "https://www.iplant.cn/info/Picea%20crassifolia",
       "photoSource": "https://commons.wikimedia.org/wiki/File:Picea_crassifolia%2C_Qunjiaxiang%2C_Qinghai%2C_China.jpg"
+    },
+    {
+      "id": "oriental-arborvitae",
+      "name": "侧柏",
+      "scientificName": "Platycladus orientalis",
+      "habitat": "forest",
+      "place": "北京 · 天坛",
+      "adcode": "110000",
+      "point": [
+        116.41,
+        39.88
+      ],
+      "home": "侧柏是北京的市树之一。天坛里有成片的古侧柏，它也常被种在北方的园林中。",
+      "adaptation": "它能耐寒，也能适应较干旱、贫瘠的土壤，在北方冬天仍保持绿色。",
+      "clue": "小叶像细小的鳞片，紧贴在扁平的小枝上，一片片枝条像绿色的小扇子。",
+      "source": "https://www.forestry.gov.cn/c/www/sl/607463.jhtml",
+      "photoSource": "https://commons.wikimedia.org/wiki/File:Platycladus_orientalis_2zz.jpg"
+    },
+    {
+      "id": "huangshan-pine",
+      "name": "黄山松",
+      "scientificName": "Pinus hwangshanensis",
+      "habitat": "forest",
+      "place": "安徽 · 黄山",
+      "adcode": "340000",
+      "point": [
+        118.17,
+        30.13
+      ],
+      "home": "黄山松生长在我国东部和中部的一些山地。安徽黄山的迎客松就是其中著名的一株。",
+      "adaptation": "它喜欢凉爽、湿润和阳光充足的山地，也能在比较贫瘠的山坡上生长。",
+      "clue": "针叶通常两根成一束，老树的枝条向外平展，树冠常像撑开的伞。",
+      "source": "https://www.jaf.ac.cn/index.php?s=/Show/index/cid/41/id/776.html",
+      "photoSource": "https://commons.wikimedia.org/wiki/File:Huang_shan_resa_huangshan6.jpg"
+    },
+    {
+      "id": "tree-peony",
+      "name": "牡丹",
+      "scientificName": "Paeonia × suffruticosa",
+      "habitat": "farmland",
+      "place": "河南 · 洛阳",
+      "adcode": "410000",
+      "point": [
+        112.44,
+        34.71
+      ],
+      "home": "洛阳是著名的牡丹栽培地。春天，园圃里能看到许多不同花色和花型的牡丹。",
+      "adaptation": "它是落叶灌木，根系较发达，可以吸收较深土层里的水分。",
+      "clue": "花朵长在枝条顶端，许多栽培品种有层层叠叠的花瓣；花下连着木质的枝干。",
+      "source": "https://www.ly.gov.cn/2018/01-22/34246.html",
+      "photoSource": "https://commons.wikimedia.org/wiki/File:Paeonia_suffruticosa_red070503B.jpg"
+    },
+    {
+      "id": "kapok",
+      "name": "木棉",
+      "scientificName": "Bombax ceiba",
+      "habitat": "tropical",
+      "place": "广东 · 广州",
+      "adcode": "440000",
+      "point": [
+        113.27,
+        23.13
+      ],
+      "home": "木棉喜欢温暖的气候，在我国南方常见。广州的市花就是木棉花。",
+      "adaptation": "成熟的果实会裂开，轻软的棉絮带着种子随风飘散，帮助种子到新的地方去。",
+      "clue": "红色或橙红色的大花像小碗，花瓣厚厚的；花开时，枝头往往还没有长满叶子。",
+      "source": "https://scbg.cas.cn/kp/202412/t20241201_7448808.html",
+      "photoSource": "https://commons.wikimedia.org/wiki/File:Bombax_ceiba_Flower_in_Lantau_island,_Hong_Kong.JPG"
+    },
+    {
+      "id": "highland-barley",
+      "name": "青稞",
+      "scientificName": "Hordeum vulgare var. nudum",
+      "habitat": "farmland",
+      "place": "西藏 · 日喀则江孜",
+      "adcode": "540000",
+      "point": [
+        89.6,
+        28.93
+      ],
+      "home": "青稞是青藏高原的重要粮食作物，日喀则的河谷农田是代表种植地之一。",
+      "adaptation": "它比较耐寒，能适应高原凉爽的生长环境，人们把它种在适合耕作的河谷和平地。",
+      "clue": "穗子上伸出许多细长的芒，像一把小刷子。它也叫裸大麦，成熟籽粒容易和外壳分开。",
+      "source": "https://nynct.xizang.gov.cn/xwzx/xzsn/202508/t20250820_496043.html",
+      "photoSource": "https://www.guinan.gov.cn/xwpd/gnkb/content_1013642599"
+    },
+    {
+      "id": "goji",
+      "name": "宁夏枸杞",
+      "scientificName": "Lycium barbarum",
+      "habitat": "farmland",
+      "place": "宁夏 · 中宁",
+      "adcode": "640000",
+      "point": [
+        105.68,
+        37.49
+      ],
+      "home": "宁夏中宁是著名的枸杞种植地，种植园里一行行灌木会结出橙红色的果实。",
+      "adaptation": "它喜欢阳光，能耐干旱，却怕根部长时间积水。适合的土地还需要合适的排水条件。",
+      "clue": "细长的枝条上挂着橙红色的椭圆形小果。开花时，还能找到紫色的小花。",
+      "source": "https://www.wbg.cas.cn/xwdt/kydt/yjjz/201704/t20170428_4781552.html",
+      "photoSource": "https://commons.wikimedia.org/wiki/File:Lycium_barbarum_RHu_fruit.JPG"
     }
   ]
 };

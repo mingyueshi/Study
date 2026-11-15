@@ -1,0 +1,30 @@
+{% load static %}
+<section class="ph-group" id="group-practice" aria-labelledby="ph-practice-title" data-practice-storage="{{ practice_storage_key }}" data-static-root="{% get_static_prefix %}">
+  <div class="section-heading"><div><h2 id="ph-practice-title">听音与理论自测</h2><p>每轮最多 8 题，答完看解析，再回到知识卡试一试。</p></div></div>
+  <noscript><p class="notice">开启 JavaScript 后可以自测。上面的理论课与对比卡仍可阅读。</p></noscript>
+  <div class="ph-practice-app" hidden>
+    <div class="ph-practice-toolbar">
+      <label for="ph-practice-mode">练什么 <select id="ph-practice-mode"><option value="mixed">混合挑战</option><option value="listening">听音辨音 · 16 题</option><option value="theory">理论小问答 · 12 题</option></select></label>
+      <button class="button" type="button" id="ph-practice-start">开始一轮</button>
+      <button class="button secondary" type="button" id="ph-practice-wrong" disabled>复习错题</button>
+    </div>
+    <p class="ph-progress-note" id="ph-practice-progress" role="status"></p>
+    <p class="ph-local-note" id="ph-practice-storage-note">练习结果只保存在当前浏览器，按账号区分，访客共用访客记录。刷新后重新开一轮，已答结果仍保留。</p>
+    <div class="ph-quiz-card" id="ph-quiz" hidden>
+      <p class="eyebrow" id="ph-quiz-position"></p>
+      <h3 id="ph-quiz-prompt" tabindex="-1"></h3>
+      <button class="button" type="button" id="ph-quiz-listen" hidden>🔊 听题目声音</button>
+      <p id="ph-quiz-audio-status" role="status"></p>
+      <div class="ph-quiz-choices" id="ph-quiz-choices" role="group" aria-labelledby="ph-quiz-prompt"></div>
+      <div class="ph-quiz-feedback" id="ph-quiz-feedback" role="status" hidden></div>
+      <div class="ph-quiz-actions"><a id="ph-quiz-review" class="ph-review-link" hidden>回知识卡复习</a><button class="button" type="button" id="ph-quiz-next" hidden>下一题</button></div>
+    </div>
+    <div class="ph-quiz-card" id="ph-quiz-result" hidden>
+      <h3 id="ph-quiz-result-title" tabindex="-1"></h3><p id="ph-quiz-result-note"></p>
+      <ul id="ph-quiz-result-links"></ul>
+      <button class="button" type="button" id="ph-quiz-retry" hidden>再练本轮错题</button>
+    </div>
+    <details class="ph-wrong-notebook"><summary id="ph-wrong-heading">我的待巩固题目</summary><ul id="ph-wrong-list"></ul></details>
+  </div>
+</section>
+{{ practice.questions|json_script:'phonetics-practice-data' }}

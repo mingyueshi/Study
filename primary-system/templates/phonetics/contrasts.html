@@ -1,0 +1,22 @@
+{% load static %}
+<section class="ph-group" id="group-contrasts" aria-labelledby="ph-contrasts-title">
+  <div class="section-heading"><div><h2 id="ph-contrasts-title">易混音对比</h2><p>先交替听两个音，再看口型和气流的差别。例词沿用音标卡，点一下就能听。</p></div><a class="button small" href="#group-practice">去听音挑战</a></div>
+  <div class="ph-grid ph-contrast-grid">
+    {% for contrast in practice.contrasts %}
+    <article class="ph-theory-card ph-contrast-card" id="contrast-{{ contrast.id }}">
+      <h3>{{ contrast.title }}</h3><p>{{ contrast.focus }}</p>
+      <div class="ph-compare">
+        {% for sound in contrast.sounds %}
+        <div class="ph-compare-sound">
+          <button class="ph-symbol-text" type="button" data-audio="{% static sound.audio %}" data-fallback="{{ sound.key_word }}" aria-label="听音标 {{ sound.symbol }}">{{ sound.symbol }}</button>
+          <div class="ph-examples">{% for ex in sound.examples|slice:':2' %}<button class="ph-word{% if not ex.resolved %} extended{% endif %}" type="button" data-say="{{ ex.en }}" title="{% if ex.resolved %}{{ ex.source_name }}{% else %}拓展例词，待词库核对{% endif %}"><b lang="en">{{ ex.en }}</b><i>{{ ex.reading }}</i><i>{{ ex.zh }}</i></button>{% endfor %}</div>
+          <a class="ph-review-link" href="#ph-{{ sound.id }}">看完整音标卡</a>
+        </div>
+        {% endfor %}
+      </div>
+      <p class="ph-theory-practice"><strong>试一试</strong> {{ contrast.practice }}</p>
+    </article>
+    {% endfor %}
+  </div>
+  <details class="ph-theory-sources"><summary>参考资料（需联网）</summary><ul>{% for source in practice.sources %}<li><a href="{{ source.url }}">{{ source.label }}</a></li>{% endfor %}</ul></details>
+</section>

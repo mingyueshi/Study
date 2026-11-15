@@ -3,7 +3,7 @@
 {% block title %}{{ case.title }} · 未解之谜研究所{% endblock %}
 {% block content %}
 <link rel="stylesheet" href="{% static 'mysteries/mysteries.css' %}">
-<article class="mysteries">
+<article class="mysteries" data-mystery-case="{{ case.slug }}">
   <a class="mystery-back" href="{% url 'mysteries' %}">← 未解之谜研究所</a>
   <header class="mystery-banner mystery-case-hero">
     <div>
@@ -22,6 +22,15 @@
     </div>
     {% include 'mysteries/figure.html' with figure=case.figure only %}
   </header>
+  <div class="mystery-case-tools" hidden data-notebook-tools>
+    <div class="mystery-library-actions">
+      <button class="mystery-tool-button" type="button" data-save-case aria-pressed="false">☆ 稍后读</button>
+      <button class="mystery-tool-button" type="button" data-complete-case aria-pressed="false">标记为已读完</button>
+      <a class="mystery-tool-button" href="#my-notebook">写调查笔记 ↓</a>
+      <a class="mystery-tool-button" href="{% url 'mysteries' %}?compare={{ case.slug }}#case-list-heading">找另一份案卷对照 →</a>
+    </div>
+    <p class="mystery-local-notice" data-reading-status></p>
+  </div>
   <section id="open-questions" class="mystery-section mystery-questions" aria-labelledby="open-questions-heading">
     <header class="mystery-section-heading">
       <p class="mystery-kicker">带着问题出发</p>
@@ -148,6 +157,16 @@
     </details>
   </section>
 
+  <section id="my-notebook" class="mystery-section mystery-notebook" aria-labelledby="notebook-heading" tabindex="-1" hidden data-notebook>
+    <header class="mystery-section-heading"><p class="mystery-kicker">我的调查手记</p><h2 id="notebook-heading">留下自己的发现</h2><p>把亲眼看到的线索和自己的猜想分开，再想一想怎样继续查。</p></header>
+    <div class="mystery-note-fields">
+      <label><span>① 我看到的线索</span><small>记下图片、观察记录或资料里可以核对的细节。</small><textarea name="observation" rows="5" maxlength="2000" placeholder="我在第几条线索中看到……"></textarea></label>
+      <label><span>② 我的猜想</span><small>用「我猜……」开头，先不要把猜想当成结论。</small><textarea name="hypothesis" rows="5" maxlength="2000" placeholder="我猜可能是因为……还不能确定的是……"></textarea></label>
+      <label><span>③ 下一步想查什么</span><small>还缺哪条证据？用什么方法可以区分不同解释？</small><textarea name="next" rows="5" maxlength="2000" placeholder="如果能再找到……就可以检查……"></textarea></label>
+    </div>
+    <div class="mystery-library-actions"><p role="status" data-note-status>笔记自动保存在当前浏览器，每栏最多 2000 字。</p><button class="mystery-tool-button" type="button" data-export-note>导出这份笔记</button></div>
+  </section>
+
   <section class="mystery-section mystery-panel mystery-sources" aria-labelledby="sources-heading">
     <h2 id="sources-heading">线索从哪里来</h2>
     <p>资料核对日期 <time datetime="{{ case.checked_on }}">{{ case.checked_on }}</time> · 原文需联网</p>
@@ -158,11 +177,14 @@
     </ol>
   </section>
 
-  <nav class="mystery-section mystery-next" aria-label="其他案卷">
+  <nav class="mystery-section mystery-next" aria-label="同组其他案卷">
     <a href="{% url 'mysteries' %}">← 返回全部案卷</a>
     {% for other in other_cases %}
     <a href="{% url 'mystery-case' other.slug %}"><span aria-hidden="true">{{ other.icon }}</span> {{ other.title }}</a>
     {% endfor %}
   </nav>
+  {{ notebook_data|json_script:'mystery-notebook-data' }}
+  <script src="{% static 'mysteries/notebook-store.js' %}" defer></script>
+  <script src="{% static 'mysteries/notebook.js' %}" defer></script>
 </article>
 {% endblock %}

@@ -6,6 +6,42 @@
     "depends": "要看条件",
     "unclear": "证据还不够"
   },
+  "skills": [
+    {
+      "id": "counterexample",
+      "title": "找一个反例",
+      "summary": "一句话说「全都这样」，就找找有没有例外。",
+      "question": "这个例子也属于同一类吗？它的表现一样吗？"
+    },
+    {
+      "id": "conditions",
+      "title": "把条件补齐",
+      "summary": "先问哪一种、在什么地方、什么时候，再判断。",
+      "question": "换了条件，这个结论还站得住吗？"
+    },
+    {
+      "id": "comparison",
+      "title": "做公平比较",
+      "summary": "想研究一个因素，尽量让其他条件保持一样。",
+      "question": "这次只改变了什么？还需要重复几次？"
+    },
+    {
+      "id": "evidence",
+      "title": "追问证据",
+      "summary": "分清看到的现象和想到的解释，找原始记录。",
+      "question": "这条线索能说明什么？还有什么没有查清？"
+    }
+  ],
+  "toolkit_sources": [
+    {
+      "label": "Science Buddies · 公平比较与变量",
+      "url": "https://www.sciencebuddies.org/science-fair-projects/science-fair/doing-a-fair-test-variables-for-beginners"
+    },
+    {
+      "label": "加州大学伯克利分校 · 科学怎样用证据检验想法",
+      "url": "https://undsci.berkeley.edu/understanding-science-101/how-science-works/"
+    }
+  ],
   "cases": [
     {
       "slug": "magnets",
@@ -43,6 +79,28 @@
           "把能吸起和不能吸起的材料放成两组，检查铝箔属于哪一组。"
         ],
         "note": "使用大块普通教学磁铁，不使用小颗强磁铁。材料不放进嘴里。"
+      },
+      "skill": "counterexample",
+      "challenge": {
+        "prompt": "有人说「所有红色物品都能被磁铁吸住」。怎样找一条最有用的反例？",
+        "answer": "b",
+        "options": [
+          {
+            "id": "a",
+            "text": "再找一个能被吸住的红色物品。",
+            "feedback": "这只能增加一个相同的例子，还不能检查「所有」有没有例外。"
+          },
+          {
+            "id": "b",
+            "text": "找一个红色、却不能被磁铁吸住的物品。",
+            "feedback": "它属于红色物品，表现却不一样，就能推翻「所有」这个说法。"
+          },
+          {
+            "id": "c",
+            "text": "找一个蓝色、不能被磁铁吸住的物品。",
+            "feedback": "蓝色物品不在这句话说的范围里，不能作为它的反例。"
+          }
+        ]
       }
     },
     {
@@ -81,6 +139,28 @@
           "把杯子和原来的小碟一起放回秤上，比较总重量。"
         ],
         "note": "把同样的杯、碟、水和糖都算进去。没有洒出或明显蒸发时，总重量应当基本相同。"
+      },
+      "skill": "evidence",
+      "challenge": {
+        "prompt": "透明液体里看不见颗粒。小明说「里面肯定只有水」。你会怎样继续查？",
+        "answer": "c",
+        "options": [
+          {
+            "id": "a",
+            "text": "只要再仔细看一眼就够了。",
+            "feedback": "有些溶解的物质用眼睛仍然看不见，需要别的证据。"
+          },
+          {
+            "id": "b",
+            "text": "给液体拍一张更清楚的照片。",
+            "feedback": "照片能记录外观，却不能单凭透明就确定成分。"
+          },
+          {
+            "id": "c",
+            "text": "先查液体来源和配制记录，再选合适的检测办法。",
+            "feedback": "外观相同不等于成分相同。先弄清来源，再检测；不品尝不明液体。"
+          }
+        ]
       }
     },
     {
@@ -113,7 +193,29 @@
           "label": "NASA 海平面变化资料站 · 海水和杯中淡水的区别",
           "url": "https://sealevel.nasa.gov/news/261/melting-ocean-ice-affects-sea-level-unlike-ice-cubes-in-a-glass"
         }
-      ]
+      ],
+      "skill": "conditions",
+      "challenge": {
+        "prompt": "小宁记录「冰化了，水面没有升高」。写实验记录时，哪条信息最不能漏？",
+        "answer": "a",
+        "options": [
+          {
+            "id": "a",
+            "text": "冰起初浮在水里，还是放在水面外的支架上。",
+            "feedback": "冰原来在哪里会影响结果，把这个条件写清楚，别人才能理解记录。"
+          },
+          {
+            "id": "b",
+            "text": "杯子上画的图案是什么颜色。",
+            "feedback": "图案通常不是这次要研究的条件，不能代替冰的起始位置。"
+          },
+          {
+            "id": "c",
+            "text": "记录用的是铅笔还是水笔。",
+            "feedback": "书写工具不能说明冰化前后水量的变化。"
+          }
+        ]
+      }
     },
     {
       "slug": "moon",
@@ -161,7 +263,29 @@
           "credit": "NASA／Goddard／Arizona State University",
           "source_url": "https://science.nasa.gov/moon/facts/"
         }
-      ]
+      ],
+      "skill": "evidence",
+      "challenge": {
+        "prompt": "用手电筒照纸球，能看到纸球的亮面。这个模型最直接帮助我们理解什么？",
+        "answer": "b",
+        "options": [
+          {
+            "id": "a",
+            "text": "月球表面每一座山的高度。",
+            "feedback": "纸球没有月球的真实地形，不能用它测月球上的山。"
+          },
+          {
+            "id": "b",
+            "text": "不自己发光的物体也能把照来的光反射出来。",
+            "feedback": "纸球的亮面来自手电筒照射。模型能帮助理解反射，但不代替真实观测。"
+          },
+          {
+            "id": "c",
+            "text": "今晚月亮一定在几点升起。",
+            "feedback": "模型没有当地日期和方位资料，不能用来预报月出时间。"
+          }
+        ]
+      }
     },
     {
       "slug": "falling",
@@ -210,7 +334,29 @@
           "credit": "NASA",
           "source_url": "https://science.nasa.gov/resource/the-apollo-15-hammer-feather-drop/"
         }
-      ]
+      ],
+      "skill": "comparison",
+      "challenge": {
+        "prompt": "想比较同一张纸平铺和揉成团时的下落情况，怎样安排比较更公平？",
+        "answer": "c",
+        "options": [
+          {
+            "id": "a",
+            "text": "纸团从高处放，平纸从低处放。",
+            "feedback": "同时改变形状和高度，就难以分清差别来自哪里。"
+          },
+          {
+            "id": "b",
+            "text": "把纸团向下扔，平纸轻轻松手。",
+            "feedback": "向下用力会改变出发情况，不能只比较形状的影响。"
+          },
+          {
+            "id": "c",
+            "text": "用相同的纸，从同一高度松手，并重复观察。",
+            "feedback": "纸、释放高度和释放方式尽量一样，只比较形状，还要多做几次。"
+          }
+        ]
+      }
     },
     {
       "slug": "plant-video",
@@ -248,6 +394,28 @@
           "说一说，如果只看最后高度，哪些原本不同的地方会被忽略。"
         ],
         "note": "这是实验设计练习。真做生长实验时，每组要有多盆，并持续记录。"
+      },
+      "skill": "comparison",
+      "challenge": {
+        "prompt": "要查「换花盆会不会影响豆苗生长」，哪组安排更合适？",
+        "answer": "a",
+        "options": [
+          {
+            "id": "a",
+            "text": "用长势接近的同种豆苗，只换花盆，光照和浇水尽量相同。",
+            "feedback": "先把其他条件控制好，再多种几株、连续记录，才更容易判断花盆的影响。"
+          },
+          {
+            "id": "b",
+            "text": "换花盆的豆苗放窗边，另一盆放柜子里。",
+            "feedback": "花盆和光照同时变了，长势差别不能只算在花盆上。"
+          },
+          {
+            "id": "c",
+            "text": "只拍换花盆后最高的那一株。",
+            "feedback": "挑最好的一株会漏掉其他结果，而且缺少可比较的一组。"
+          }
+        ]
       }
     },
     {
@@ -291,6 +459,28 @@
           "记下哪只杯子先变湿。换一天再试，看看空气干湿会不会影响结果。"
         ],
         "note": "先垫好托盘，实验后擦干桌面。空气很干时，水珠可能不明显。"
+      },
+      "skill": "comparison",
+      "challenge": {
+        "prompt": "想查杯外水珠是不是与杯子冷有关，哪组观察更有帮助？",
+        "answer": "b",
+        "options": [
+          {
+            "id": "a",
+            "text": "冰水用玻璃杯，温水用纸杯，分别放在两个房间。",
+            "feedback": "材料和房间也变了，难以只比较杯子冷不冷。"
+          },
+          {
+            "id": "b",
+            "text": "相同杯子外壁擦干，分别装冰水和室温水，放在同一处观察。",
+            "feedback": "让杯子、位置和观察时间尽量一样，能更好比较温度条件的影响。"
+          },
+          {
+            "id": "c",
+            "text": "只观察一杯冰水，等到水珠最多时拍照。",
+            "feedback": "照片记录了现象，却没有另一杯作比较，还要补证据。"
+          }
+        ]
       }
     },
     {
@@ -334,6 +524,28 @@
           "记录船开始进水前各装了多少枚硬币，再改一次船形。"
         ],
         "note": "用浅水盆，轻拿铝箔边缘和硬币。比较时使用同一种硬币。"
+      },
+      "skill": "comparison",
+      "challenge": {
+        "prompt": "想比较两种铝箔船形谁能装更多硬币，怎样安排？",
+        "answer": "c",
+        "options": [
+          {
+            "id": "a",
+            "text": "大船用双层铝箔，小船用一层铝箔。",
+            "feedback": "材料用量和层数也变了，不只是船形在变。"
+          },
+          {
+            "id": "b",
+            "text": "一艘放大硬币，另一艘放小硬币，只数枚数。",
+            "feedback": "硬币重量不同，枚数不能直接代表承载的重量。"
+          },
+          {
+            "id": "c",
+            "text": "用同样大小、同样层数的铝箔，装同一种硬币。",
+            "feedback": "把材料和硬币统一，再改变船形，比较才更公平；还可以重复制作。"
+          }
+        ]
       }
     },
     {
@@ -363,7 +575,29 @@
           "label": "国际水与水蒸气性质协会 · 压力如何影响沸腾",
           "url": "https://iapws.org/faqs/faq1"
         }
-      ]
+      ],
+      "skill": "conditions",
+      "challenge": {
+        "prompt": "资料写「电动车可行驶约 60 千米」。要理解这个数字，你还会找什么？",
+        "answer": "a",
+        "options": [
+          {
+            "id": "a",
+            "text": "测试时的载重、速度、温度和路况。",
+            "feedback": "数字常带着测量条件。条件不同，结果也可能不同。"
+          },
+          {
+            "id": "b",
+            "text": "宣传页标题用了多大的字。",
+            "feedback": "字大不等于证据更充分，仍要看测试条件。"
+          },
+          {
+            "id": "c",
+            "text": "只找其他人有没有转发这个数字。",
+            "feedback": "转发人数不能补上测量条件，也不能代替测试记录。"
+          }
+        ]
+      }
     },
     {
       "slug": "cold-metal",
@@ -406,6 +640,28 @@
           "把你的解释画出来，标出热量从手传向勺子的方向。"
         ],
         "note": "只用常温物品，避开刚晒过、冷冻过或装过热水的物品。"
+      },
+      "skill": "comparison",
+      "challenge": {
+        "prompt": "两块材料在同一房间放了很久。小雨说「摸起来更凉，所以温度肯定更低」。下一步怎样查？",
+        "answer": "b",
+        "options": [
+          {
+            "id": "a",
+            "text": "换另一只手再摸一次，就直接下结论。",
+            "feedback": "触摸仍受热量传递影响，换手不能代替温度测量。"
+          },
+          {
+            "id": "b",
+            "text": "用适合测表面温度的工具，在相同条件下测量。",
+            "feedback": "把触觉和测量结果对照，能帮助分清「感觉凉」与「温度低」。"
+          },
+          {
+            "id": "c",
+            "text": "把两块材料移到不同的房间后再摸。",
+            "feedback": "换房间会改变环境条件，更难比较原来的判断。"
+          }
+        ]
       }
     },
     {
@@ -449,7 +705,29 @@
           "credit": "美国国家公园管理局",
           "source_url": "https://www.nps.gov/articles/bats-brief.htm"
         }
-      ]
+      ],
+      "skill": "evidence",
+      "challenge": {
+        "prompt": "资料说某种动物听觉很灵敏。能不能由此推出它没有视力？",
+        "answer": "c",
+        "options": [
+          {
+            "id": "a",
+            "text": "能，有一种灵敏的感觉就用不着其他感觉。",
+            "feedback": "动物可能同时使用多种感觉，一项本领强不能排除其他本领。"
+          },
+          {
+            "id": "b",
+            "text": "只要再找一段它用听觉认路的视频，就能推出。",
+            "feedback": "这仍然只检验了听觉，没有直接检查视力。"
+          },
+          {
+            "id": "c",
+            "text": "不能，要另外查眼睛结构和视觉行为的证据。",
+            "feedback": "要判断有没有视力，就找与视觉直接有关的观察，不能从另一种本领跳过去。"
+          }
+        ]
+      }
     },
     {
       "slug": "chameleons",
@@ -488,7 +766,29 @@
           "credit": "圣迭戈动物园野生动物联盟",
           "source_url": "https://animals.sandiegozoo.org/animals/chameleon"
         }
-      ]
+      ],
+      "skill": "evidence",
+      "challenge": {
+        "prompt": "一段短视频里，动物身上的颜色突然变化。你最想先补哪份资料？",
+        "answer": "a",
+        "options": [
+          {
+            "id": "a",
+            "text": "拍摄物种、连续原片，以及是否调色或剪辑的说明。",
+            "feedback": "先检查画面怎样产生，才能判断视频能支持到哪一步。"
+          },
+          {
+            "id": "b",
+            "text": "视频获得了多少个赞。",
+            "feedback": "点赞能说明受欢迎，不能证明颜色变化的原因或真实性。"
+          },
+          {
+            "id": "c",
+            "text": "配乐的名字和播放次数。",
+            "feedback": "配乐资料与动物真实的变色能力没有直接关系。"
+          }
+        ]
+      }
     },
     {
       "slug": "whales",
@@ -531,7 +831,29 @@
           "credit": "Wikimedia Commons",
           "source_url": "https://commons.wikimedia.org/wiki/File:Humpback_whale_breaching_off_Cabo_San_Lucas.jpg"
         }
-      ]
+      ],
+      "skill": "evidence",
+      "challenge": {
+        "prompt": "一个动物名字里带「鲸」字。只凭名字能判断它用肺还是用鳃呼吸吗？",
+        "answer": "b",
+        "options": [
+          {
+            "id": "a",
+            "text": "能，名字相像的动物一定用同样的器官呼吸。",
+            "feedback": "日常名字不等于科学分类，不能代替结构证据。"
+          },
+          {
+            "id": "b",
+            "text": "不能，要查它的呼吸器官和实际呼吸行为。",
+            "feedback": "让结构与行为证据互相核对，比只看名字可靠。"
+          },
+          {
+            "id": "c",
+            "text": "只要它生活在海里，就能判断用鳃呼吸。",
+            "feedback": "生活环境不能单独决定呼吸方式，鲸就是需要继续查结构的提醒。"
+          }
+        ]
+      }
     },
     {
       "slug": "penguins",
@@ -570,7 +892,29 @@
           "credit": "Sam Rowley／加拉帕戈斯保护信托",
           "source_url": "https://galapagosconservation.org.uk/species/galapagos-penguin/"
         }
-      ]
+      ],
+      "skill": "counterexample",
+      "challenge": {
+        "prompt": "听到「所有鸟都会飞」，哪条证据最能直接检查这个说法？",
+        "answer": "c",
+        "options": [
+          {
+            "id": "a",
+            "text": "一只麻雀从树上飞走了。",
+            "feedback": "一个会飞的例子不能说明所有鸟都能飞。"
+          },
+          {
+            "id": "b",
+            "text": "一只蝴蝶在花旁飞来飞去。",
+            "feedback": "蝴蝶不属于鸟类，不能用来检验这句话中的「所有鸟」。"
+          },
+          {
+            "id": "c",
+            "text": "有一种属于鸟类的动物，成年后也不能飞。",
+            "feedback": "同一类里只要有符合条件的例外，「所有」就需要改写。"
+          }
+        ]
+      }
     },
     {
       "slug": "living-dinosaurs",
@@ -599,7 +943,29 @@
           "label": "英国自然历史博物馆 · 为什么鸟类是存活至今的恐龙",
           "url": "https://www.nhm.ac.uk/discover/why-are-birds-the-only-surviving-dinosaurs.html"
         }
-      ]
+      ],
+      "skill": "evidence",
+      "challenge": {
+        "prompt": "两种动物身上都看到羽毛样的结构，就能说它们完全一样吗？",
+        "answer": "a",
+        "options": [
+          {
+            "id": "a",
+            "text": "不能，还要比较更多结构和可靠资料。",
+            "feedback": "一个共同点是一条线索，不等于所有特征都相同；分类需要多条证据。"
+          },
+          {
+            "id": "b",
+            "text": "能，有一个共同点就能把它们看成同一种。",
+            "feedback": "一种共同特征不够区分许多动物，还需要检查其他特征。"
+          },
+          {
+            "id": "c",
+            "text": "只比较图片的背景颜色就可以。",
+            "feedback": "背景颜色不属于动物本身的结构，不能帮助判断亲缘关系。"
+          }
+        ]
+      }
     },
     {
       "slug": "seeds",
@@ -638,6 +1004,28 @@
           "每天同一时间画下小根变化，记录有几颗发芽，比较不同种子。"
         ],
         "note": "这份材料用于观察，实验种子和发霉种子都不食用。观察后可以请家长帮忙移栽。"
+      },
+      "skill": "conditions",
+      "challenge": {
+        "prompt": "豆子在湿纸巾上长出了小根。哪句话没有超出这次观察？",
+        "answer": "b",
+        "options": [
+          {
+            "id": "a",
+            "text": "所有植物都能只靠水一直长大。",
+            "feedback": "一次发芽观察不能推到所有植物，也不能推到整个生长过程。"
+          },
+          {
+            "id": "b",
+            "text": "这颗豆子在这次条件下，没有埋进土里也开始发芽。",
+            "feedback": "把对象、阶段和条件说清楚，结论就与看到的证据相配。"
+          },
+          {
+            "id": "c",
+            "text": "这颗豆子以后不需要任何养分。",
+            "feedback": "发芽与长期生长是不同阶段，还没有长期观察来支持这句话。"
+          }
+        ]
       }
     },
     {
@@ -687,7 +1075,29 @@
           "credit": "NASA／JPL-Caltech",
           "source_url": "https://spaceplace.nasa.gov/seasons/en/"
         }
-      ]
+      ],
+      "skill": "conditions",
+      "challenge": {
+        "prompt": "解释四季时，为什么要把南、北半球同一时期的季节放在一起看？",
+        "answer": "c",
+        "options": [
+          {
+            "id": "a",
+            "text": "只要选最热的一座城市，就可以代表整个地球。",
+            "feedback": "一处气温受多种条件影响，不能独自代表整个地球的季节。"
+          },
+          {
+            "id": "b",
+            "text": "这样就不用再观察阳光和昼长。",
+            "feedback": "多处季节资料不能代替所有观察，还要互相核对。"
+          },
+          {
+            "id": "c",
+            "text": "一个好解释要同时符合多处观察，不能只解释一地。",
+            "feedback": "把范围扩大，看看解释有没有遗漏或矛盾，是检验想法的好办法。"
+          }
+        ]
+      }
     },
     {
       "slug": "far-side",
@@ -737,7 +1147,29 @@
           "credit": "NASA／NOAA／Goddard",
           "source_url": "https://svs.gsfc.nasa.gov/11924/"
         }
-      ]
+      ],
+      "skill": "conditions",
+      "challenge": {
+        "prompt": "说「这个球的背面一直是黑的」时，最该先问清什么？",
+        "answer": "a",
+        "options": [
+          {
+            "id": "a",
+            "text": "背面相对谁来说？光源在哪里，球和观察者怎样移动？",
+            "feedback": "「背面」需要参照对象，亮不亮还与光照方向有关，先把条件补齐。"
+          },
+          {
+            "id": "b",
+            "text": "这个球的名字是不是很特别。",
+            "feedback": "名字不能说明朝向与光照，仍然要看位置关系。"
+          },
+          {
+            "id": "c",
+            "text": "照片边框是圆形还是方形。",
+            "feedback": "边框不说明球的光照条件，不能解决「一直」的判断。"
+          }
+        ]
+      }
     },
     {
       "slug": "space-gravity",
@@ -776,7 +1208,29 @@
           "credit": "NASA",
           "source_url": "https://www.nasa.gov/learning-resources/for-kids-and-students/what-is-microgravity-grades-5-8/"
         }
-      ]
+      ],
+      "skill": "evidence",
+      "challenge": {
+        "prompt": "哪句话只是在描述观察，还没有解释原因？",
+        "answer": "b",
+        "options": [
+          {
+            "id": "a",
+            "text": "航天员漂起来，是因为那里完全没有引力。",
+            "feedback": "「因为」后面加入了原因解释，需要额外证据检验。"
+          },
+          {
+            "id": "b",
+            "text": "视频里，航天员松手后没有站回地板上。",
+            "feedback": "这句话记录了画面中看到的表现，尚未直接认定原因。"
+          },
+          {
+            "id": "c",
+            "text": "航天员漂起来，一定是穿了特殊的衣服。",
+            "feedback": "这里已经提出了衣服这个原因，而且「一定」需要证据。"
+          }
+        ]
+      }
     },
     {
       "slug": "cold-deserts",
@@ -815,7 +1269,29 @@
           "credit": "Robert Simmon／NASA GSFC／Landsat 7 科学团队",
           "source_url": "https://science.nasa.gov/earth/earth-observatory/mcmurdo-dry-valleys-2140/"
         }
-      ]
+      ],
+      "skill": "conditions",
+      "challenge": {
+        "prompt": "一张照片里满是冰，能单凭照片判断那里每年降水很多吗？",
+        "answer": "c",
+        "options": [
+          {
+            "id": "a",
+            "text": "能，冰越厚就表示今年下雪越多。",
+            "feedback": "厚冰可能积累了很久，不能只看厚度判断一年的降水。"
+          },
+          {
+            "id": "b",
+            "text": "能，只要把照片放大就能知道。",
+            "feedback": "放大能看清外观，不能补上时间和降水记录。"
+          },
+          {
+            "id": "c",
+            "text": "不能，还要查降水记录和冰形成的时间。",
+            "feedback": "把现在的样子与形成过程分开，才能判断一年里的降水情况。"
+          }
+        ]
+      }
     },
     {
       "slug": "lightning",
@@ -858,7 +1334,29 @@
           "credit": "美国国家气象局",
           "source_url": "https://www.weather.gov/safety/lightning-myths"
         }
-      ]
+      ],
+      "skill": "counterexample",
+      "challenge": {
+        "prompt": "有人说「同一地点不会再发生同一种事」。怎样的记录最能检查这句话？",
+        "answer": "a",
+        "options": [
+          {
+            "id": "a",
+            "text": "核对过地点与时间、显示同一地点发生两次的原始记录。",
+            "feedback": "只要可靠记录表明它重复发生过，就找到了反例。"
+          },
+          {
+            "id": "b",
+            "text": "两个不同地点各发生过一次的记录。",
+            "feedback": "地点不同，还没有检查「同一地点」会不会重复。"
+          },
+          {
+            "id": "c",
+            "text": "同一张照片被两个人转发的记录。",
+            "feedback": "转发两次不等于事件发生两次，要区分记录和转发。"
+          }
+        ]
+      }
     },
     {
       "slug": "clouds",
@@ -897,7 +1395,29 @@
           "credit": "Kr-val／Wikimedia Commons",
           "source_url": "https://commons.wikimedia.org/wiki/File:Cumulus_humilis_sweden_2009.jpg"
         }
-      ]
+      ],
+      "skill": "evidence",
+      "challenge": {
+        "prompt": "想判断一团看得见的白雾由什么组成，只看它是白色的够吗？",
+        "answer": "b",
+        "options": [
+          {
+            "id": "a",
+            "text": "够，颜色相同的东西成分都相同。",
+            "feedback": "颜色相同不等于组成相同，外观只提供一部分线索。"
+          },
+          {
+            "id": "b",
+            "text": "不够，还要查形成条件以及有关小水滴或冰晶的资料。",
+            "feedback": "把形成过程与组成资料对照，比只看颜色更有帮助。"
+          },
+          {
+            "id": "c",
+            "text": "不够，只要问谁更喜欢白色就能补足证据。",
+            "feedback": "个人喜好不能检测组成，仍需要与物质本身有关的证据。"
+          }
+        ]
+      }
     },
     {
       "slug": "rainbows",
@@ -950,7 +1470,29 @@
           "credit": "Erik Christensen／NOAA 收录",
           "source_url": "https://www.nesdis.noaa.gov/about/k-12-education/optical-phenomena/what-causes-rainbow"
         }
-      ]
+      ],
+      "skill": "evidence",
+      "challenge": {
+        "prompt": "白光经过两种不同的分光工具，都能出现多种颜色。这对原来的解释有什么帮助？",
+        "answer": "c",
+        "options": [
+          {
+            "id": "a",
+            "text": "可以证明世界上所有白色物品都是同样的材料。",
+            "feedback": "光与白色物品的材料不是同一问题，结论不能跨得这么远。"
+          },
+          {
+            "id": "b",
+            "text": "说明只要颜色多，工具就完全一样。",
+            "feedback": "不同工具可能有不同结构，结果相似不代表工具相同。"
+          },
+          {
+            "id": "c",
+            "text": "提供另一种观察办法，检查结果是否相互支持。",
+            "feedback": "不同办法得到相符结果，可以增加支持，但仍要说明工具和光源条件。"
+          }
+        ]
+      }
     },
     {
       "slug": "moon-photo",
@@ -989,7 +1531,29 @@
           "credit": "NASA／Bill Dunford",
           "source_url": "https://science.nasa.gov/solar-system/moon/the-moon-illusion-why-does-the-moon-look-so-big-sometimes/"
         }
-      ]
+      ],
+      "skill": "evidence",
+      "challenge": {
+        "prompt": "两张照片里的同一辆玩具车看起来大小不同。比较前最该补哪组信息？",
+        "answer": "a",
+        "options": [
+          {
+            "id": "a",
+            "text": "相机离车多远、镜头焦距，以及照片有没有裁剪。",
+            "feedback": "拍摄与处理条件会影响画面中的大小，补齐后才适合比较。"
+          },
+          {
+            "id": "b",
+            "text": "两张照片分别收到了多少评论。",
+            "feedback": "评论数量不能说明成像条件，也不能测量车的真实大小。"
+          },
+          {
+            "id": "c",
+            "text": "照片文件名是不是一样长。",
+            "feedback": "文件名的长度与拍摄比例没有直接关系。"
+          }
+        ]
+      }
     }
   ]
 }

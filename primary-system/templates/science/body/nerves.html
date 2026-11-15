@@ -10,9 +10,10 @@
   <path d="M285 139v214" stroke="#c49e73" stroke-width="19" stroke-linecap="round"/>
   <path d="M285 147v202" stroke="#ead19d" stroke-width="11" stroke-dasharray="7 6" stroke-linecap="round"/>
   <circle cx="505" cy="282" r="28" fill="#a4cbbb" stroke="#448f77" stroke-width="3"/>
-  <path d="M481 275q11-17 21-5m-22 13q12-14 23-5m-17 14q10-11 21-3" fill="none" stroke="#967452" stroke-width="6" stroke-linecap="round"/>
-  <path class="body-nerve-route body-nerve-in" d="M478 283 386 261 273 244V145" fill="none" stroke="#b2731c" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#nerve-yellow)"/>
-  <path class="body-nerve-route body-nerve-out" d="M299 147V227L397 245 480 264" fill="none" stroke="#327e9d" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#nerve-blue)"/>
+  <path data-hand-fingers d="M481 275q11-17 21-5m-22 13q12-14 23-5m-17 14q10-11 21-3" fill="none" stroke="#967452" stroke-width="6" stroke-linecap="round"/>
+  <path data-motion-path="nerve-in" class="body-nerve-route body-nerve-in" d="M478 283 386 261 273 244V145Q273 120 280 105" fill="none" stroke="#b2731c" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#nerve-yellow)"/>
+  <path data-motion-path="nerve-out" class="body-nerve-route body-nerve-out" d="M280 105Q299 123 299 147V227L397 245 480 264" fill="none" stroke="#327e9d" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#nerve-blue)"/>
+  <circle data-brain-halo cx="280" cy="100" r="51" fill="none" stroke="#bb8a2a" stroke-width="4" opacity="0"/>
   <g class="body-svg-labels">
     <path class="body-leader" d="M114 79h111M118 197h139M473 309v30"/>
     <text x="73" y="86">{{ diagram.labels.brain }}</text>

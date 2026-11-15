@@ -1,4 +1,5 @@
 from django.contrib.staticfiles import finders
+from django.contrib.auth import get_user_model
 from django.test import SimpleTestCase, TestCase
 from django.urls import reverse
 
@@ -25,6 +26,17 @@ class CoupletsWorkshopTests(SimpleTestCase):
 
 
 class CoupletsEntryTests(TestCase):
+    def test_browser_storage_is_scoped_to_the_current_account_and_page_is_not_cached(self):
+        user = get_user_model().objects.create_user(username='couplet-learner')
+        self.client.force_login(user)
+        response = self.client.get(reverse('couplets'))
+        self.assertContains(response, f'data-storage-scope="user-{user.pk}"')
+        self.assertIn('no-store', response['Cache-Control'])
+        self.client.logout()
+        response = self.client.get(reverse('couplets'))
+        self.assertContains(response, 'data-storage-scope="guest"')
+        self.assertNotContains(response, f'data-storage-scope="user-{user.pk}"')
+
     def test_learning_square_lists_workshop_under_chinese(self):
         url = reverse('couplets')
         chinese = self.client.get(reverse('home'), {'area': 'chinese'})

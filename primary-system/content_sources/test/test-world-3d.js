@@ -8,6 +8,9 @@ require('../geo-map/world-data.js');
 require('../geo-map/world-3d-data.js');
 require('../geo-map/world-3d-polar.js');
 require('../geo-map/world-3d-learning-data.js');
+require('../geo-map/world-3d-tools-data.js');
+require('../geo-map/world-3d-sun-data.js');
+require('../geo-map/world-3d-detective-data.js');
 const data = GM_WORLD_3D;
 const point = p => Array.isArray(p) && p.length === 2 && p.every(Number.isFinite) && Math.abs(p[0]) <= 180 && Math.abs(p[1]) <= 90;
 assert.ok(point(data.home));
@@ -33,6 +36,18 @@ const dir = path.join(__dirname, '../geo-map');
 const learning = GM_WORLD_LEARNING;
 const unique = rows => assert.equal(new Set(rows.map(r => r.id)).size, rows.length);
 const prose = value => assert.ok(typeof value === 'string' && value.trim() && !/["\r\n]/.test(value));
+const detective = GM_WORLD_DETECTIVE;
+assert.equal(detective.missions.length, 8); unique(detective.missions);
+assert.equal(new Set(detective.missions.map(m => m.answer)).size, 8);
+detective.missions.forEach(m => {
+  assert.match(m.id, /^[a-z][a-z-]+$/);
+  assert.ok(GEO_WORLD_GEO.countries.some(c => c.name === m.answer));
+  if (m.accepts) { assert.ok(m.accepts.includes(m.answer)); m.accepts.forEach(id => assert.ok(GEO_WORLD_GEO.countries.some(c => c.name === id))); }
+  ['title', 'clue', 'explanation'].forEach(key => prose(m[key]));
+  assert.equal(m.hints.length, 2); m.hints.forEach(prose);
+  assert.ok(ids.has(m.learnPlace));
+});
+prose(detective.intro); prose(detective.note);
 assert.equal(learning.lines.length, 6); unique(learning.lines);
 learning.lines.forEach(line => {
   assert.ok(['latitude', 'longitude'].includes(line.axis));
@@ -55,14 +70,29 @@ learning.tours.forEach(tour => {
   prose(tour.name); prose(tour.intro); assert.equal(tour.stops.length, 5); unique(tour.stops);
   tour.stops.forEach(stop => { assert.ok(ids.has(stop.place)); prose(stop.title); prose(stop.text); prose(stop.observe); if (stop.line) assert.ok(lineIds.has(stop.line)); });
 });
-assert.equal(learning.questions.length, 12); unique(learning.questions);
+const sun = GM_WORLD_SUN;
+assert.equal(sun.seasons.length, 4); unique(sun.seasons);
+sun.seasons.forEach(s => { prose(s.name); prose(s.text); assert.ok(Number.isFinite(s.declination) && Math.abs(s.declination) <= 23.5); });
+assert.equal(sun.studies.length, 4); unique(sun.studies);
+sun.studies.forEach(s => { prose(s.name); prose(s.text); assert.ok(point(s.point)); assert.ok(sun.seasons.some(season => season.id === s.season)); assert.ok(Number.isFinite(s.hour) && s.hour >= 0 && s.hour < 24); });
+prose(sun.note); prose(sun.intro);
+assert.equal(learning.questions.length, 18); unique(learning.questions);
 learning.questions.forEach(q => {
   prose(q.prompt); prose(q.hint); prose(q.explanation); assert.ok(ids.has(q.place));
   assert.equal(q.options.length, 3); q.options.forEach(prose); assert.equal(new Set(q.options).size, 3);
   assert.ok(Number.isInteger(q.answer) && q.answer >= 0 && q.answer < q.options.length);
   if (q.line) assert.ok(lineIds.has(q.line));
+  if (q.sunStudy) assert.ok(sun.studies.some(s => s.id === q.sunStudy));
 });
 learning.sources.forEach(s => { prose(s.name); assert.ok(/^https:\/\//.test(s.url)); });
+const tools = GM_WORLD_TOOLS;
+assert.equal(tools.radiusKm, 6371);
+assert.ok(tools.toleranceDegrees > 0 && tools.toleranceDegrees <= 10);
+assert.equal(tools.missions.length, 6); unique(tools.missions);
+tools.missions.forEach(m => { assert.ok(point(m.point)); prose(m.name); prose(m.hint); prose(m.explanation); });
+assert.equal(tools.examples.length, 3); unique(tools.examples);
+tools.examples.forEach(e => { assert.ok(point(e.from) && point(e.to)); prose(e.name); prose(e.observe); });
+prose(tools.distanceNote); prose(tools.huntNote);
 const html = fs.readFileSync(path.join(dir, 'world-3d.html'), 'utf8');
 for (const match of html.matchAll(/<(?:script|link)[^>]+(?:src|href)="([^"]+)"/g)) {
   assert.ok(!/^https?:/.test(match[1]), '地球仪资源应在本地提供');

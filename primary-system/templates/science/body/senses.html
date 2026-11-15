@@ -1,6 +1,15 @@
 <svg viewBox="0 0 640 400" role="img" aria-labelledby="senses-title">
   <title id="senses-title">{{ diagram.title }}</title>
   <defs><marker id="sense-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="3" markerHeight="3" orient="auto"><path d="M0 0 10 5 0 10" fill="#a77522"/></marker></defs>
+  <g fill="none" stroke="none" aria-hidden="true">
+    <path data-motion-path="eye-light" d="M41 174H125L354 207"/><path data-motion-path="eye-light-lower" d="M41 241H125L354 207"/>
+    <path data-motion-path="eye-signal" d="M354 207L463 238"/>
+    <path data-motion-path="ear-sound" d="M22 213H287"/><path data-motion-path="ear-vibrate" d="M287 213L322 173L343 193L384 190"/>
+    <path data-motion-path="ear-signal" d="M438 244Q466 242 485 223H568"/>
+    <path data-motion-path="nose-air" d="M71 145Q140 160 217 161"/>
+    <path data-motion-path="nose-signal" d="M217 161L248 174Q308 173 313 117"/>
+    <path data-motion-path="taste-signal" d="M217 232H247Q311 218 316 133"/>
+  </g>
   <g data-sense-art="eye">
     <path d="M230 89c-61 0-116 58-116 118s55 118 116 118c78 0 137-50 137-118S308 89 230 89Z" fill="#fff7e7" stroke="#bd9674" stroke-width="6"/>
     <path d="M230 99c73 0 125 49 125 108s-52 108-125 108" fill="none" stroke="#d7856f" stroke-width="8"/>
@@ -21,7 +30,7 @@
     <path d="M108 124c-27 11-25 54-1 74m5-30q24-26 29-2" fill="none" stroke="#b8795b" stroke-width="7" stroke-linecap="round"/>
     <path d="M132 213h149" stroke="#c99477" stroke-width="36" stroke-linecap="round"/>
     <path d="M132 213h149" stroke="#f4dab2" stroke-width="24" stroke-linecap="round"/>
-    <path d="m287 180 10 66" stroke="#ab706a" stroke-width="9"/>
+    <path data-ear-drum d="m287 180 10 66" stroke="#ab706a" stroke-width="9"/>
     <path d="m300 195 22-22 21 20 24-11" fill="none" stroke="#937957" stroke-width="9" stroke-linecap="round"/>
     <path d="M384 190c64-52 137 21 85 68-47 42-96-16-59-42 24-16 50 13 28 28" fill="none" stroke="#b9b2d8" stroke-width="25" stroke-linecap="round"/>
     <path d="M485 223h83" stroke="#ddb86d" stroke-width="14"/>

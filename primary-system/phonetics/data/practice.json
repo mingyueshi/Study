@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "contrasts": [
+    {"id": "i-ee", "title": "短一点，还是长一点？", "phoneme_ids": ["01-i", "08-ee"], "focus": "/ɪ/ 比较放松，/iː/ 的舌位更高、声音通常更长。除了长短，也要听声音本身的差别。", "practice": "先交替听两个音，再跟着读。照镜子看看嘴角的变化。"},
+    {"id": "e-ae", "title": "嘴巴张多大？", "phoneme_ids": ["02-e", "03-ae"], "focus": "从 /e/ 到 /æ/，嘴巴张得更大，舌头放得更低。两个都是单元音。", "practice": "手放在下巴附近，交替读两个音，感受下巴往下移动。"},
+    {"id": "uu-oo", "title": "圆唇也有不同", "phoneme_ids": ["06-uu", "11-oo"], "focus": "/ʊ/ 比较短、放松，/uː/ 通常更长，舌位也不同。不要只把一个音机械地拉长。", "practice": "听完一个音，停下来模仿，再换另一个。留意嘴唇和舌头的感觉。"},
+    {"id": "f-v", "title": "给气流加上振动", "phoneme_ids": ["27-f", "28-v"], "focus": "两个音都是上牙轻触下唇。/f/ 只有摩擦气流，/v/ 还有声带振动。", "practice": "手指轻搭喉咙，先发 /f/，再发 /v/，不要用力压。"},
+    {"id": "s-z", "title": "小蛇和小马达", "phoneme_ids": ["31-s", "32-z"], "focus": "/s/ 和 /z/ 的口型很接近，/z/ 的声带会振动。保持细细的气流，听振动有没有加入。", "practice": "轮流发两个音，轻触喉咙找振动。读完就停，不加一个多余的元音。"},
+    {"id": "s-sh", "title": "舌头往后一点", "phoneme_ids": ["31-s", "33-sh"], "focus": "从 /s/ 到 /ʃ/，舌头形成窄通道的位置向后移，嘴唇通常也更突出。两个音的声带都不振动。", "practice": "照镜子交替读，留意 /ʃ/ 时嘴唇的变化，再听两个音的气流声。"},
+    {"id": "th-s", "title": "舌尖藏在哪里？", "phoneme_ids": ["29-th", "31-s"], "focus": "发 /θ/ 时舌尖轻放在牙齿之间，发 /s/ 时舌头留在牙齿后面。两种气流声不一样。", "practice": "对着镜子读 /θ/，只轻轻露出一点舌尖。再把舌头收回去读 /s/。"},
+    {"id": "n-ng", "title": "鼻音的前后站", "phoneme_ids": ["38-n", "39-ng"], "focus": "两个音都让气流从鼻子通过。/n/ 用舌尖抵住上齿龈，/ŋ/ 用舌头后部抵住软腭。", "practice": "先读 /n/，再读 /ŋ/，感觉接触位置从前面换到后面。/ŋ/ 结束后不要再补一个 /ɡ/。"}
+  ],
+  "questions": [
+    {"id": "symbols-purpose", "lesson_id": "symbols", "prompt": "看到 /ʃɪp/，这串音标主要在告诉我们什么？", "choices": [{"id": "sound", "text": "这个词怎么读"}, {"id": "meaning", "text": "这个词是什么意思"}, {"id": "letters", "text": "这个词怎样按字母表排序"}], "answer_id": "sound", "explanation": "音标帮助我们读出声音。词的意思要看释义，拼写要看字母。"},
+    {"id": "ship-sounds", "lesson_id": "symbols", "prompt": "ship 有四个字母，/ʃɪp/ 里有几个音素？", "choices": [{"id": "three", "text": "三个，/ʃ/、/ɪ/、/p/"}, {"id": "four", "text": "四个，每个字母各读一个音"}, {"id": "one", "text": "一个，整个词就是一个音素"}], "answer_id": "three", "explanation": "sh 两个字母一起表示 /ʃ/。数音素要听声音，不能直接数字母。"},
+    {"id": "map-vowel", "lesson_id": "vowels-consonants", "prompt": "map /mæp/ 中间哪个音是元音？", "choices": [{"id": "m", "text": "/m/"}, {"id": "ae", "text": "/æ/"}, {"id": "p", "text": "/p/"}], "answer_id": "ae", "explanation": "发 /æ/ 时嘴里的气流比较通畅。/m/ 和 /p/ 都需要双唇的配合。"},
+    {"id": "m-air", "lesson_id": "vowels-consonants", "prompt": "轻轻拉长读 /m/ 时，气流主要从哪里出来？", "choices": [{"id": "nose", "text": "鼻子"}, {"id": "lips", "text": "张开的双唇之间"}, {"id": "none", "text": "完全没有气流"}], "answer_id": "nose", "explanation": "/m/ 是鼻音。双唇闭合，气流仍能从鼻子通过。"},
+    {"id": "day-syllable", "lesson_id": "vowel-glide", "prompt": "day /deɪ/ 中的 /eɪ/ 从一个位置滑向另一个位置，它算几个音节？", "choices": [{"id": "one", "text": "一个音节"}, {"id": "two", "text": "两个音节"}, {"id": "letters", "text": "要看有几个字母才能决定"}], "answer_id": "one", "explanation": "双元音在一个音节里滑动。day 整个词只拍一下手。"},
+    {"id": "steady-vowel", "lesson_id": "vowel-glide", "prompt": "下面哪个音的口型大致保持稳定？", "choices": [{"id": "e", "text": "/e/"}, {"id": "ay", "text": "/eɪ/"}, {"id": "igh", "text": "/aɪ/"}], "answer_id": "e", "explanation": "/e/ 是单元音，/eɪ/ 和 /aɪ/ 都有口型滑动。"},
+    {"id": "voicing-v", "lesson_id": "voicing", "prompt": "轻触喉咙读 /f/ 和 /v/，哪个音会让声带振动？", "choices": [{"id": "v", "text": "/v/"}, {"id": "f", "text": "/f/"}, {"id": "neither", "text": "两个都不振动"}], "answer_id": "v", "explanation": "/v/ 是浊辅音，/f/ 是清辅音。两者口型接近，振动是关键线索。"},
+    {"id": "voicing-loudness", "lesson_id": "voicing", "prompt": "把 /f/ 读得更响，就一定变成 /v/ 了吗？", "choices": [{"id": "no", "text": "没有，还要看声带是否振动"}, {"id": "yes", "text": "是，响亮就是浊音"}, {"id": "long", "text": "只要读得更长就是浊音"}], "answer_id": "no", "explanation": "音量、时长和声带振动是不同的线索。辨清浊音时，要留意振动。"},
+    {"id": "banana-stress", "lesson_id": "stress", "prompt": "banana /bəˈnɑː.nə/ 的主重音落在哪一拍？", "choices": [{"id": "first", "text": "第一拍"}, {"id": "second", "text": "第二拍"}, {"id": "third", "text": "第三拍"}], "answer_id": "second", "explanation": "ˈ 写在重读音节前。banana 的中间一拍更突出，前后是轻读的 /ə/。"},
+    {"id": "stress-mark", "lesson_id": "stress", "prompt": "词典音标里的 ˈ 是什么提示？", "choices": [{"id": "stress", "text": "后面开始的是主重读音节"}, {"id": "stop", "text": "必须在这里停很久"}, {"id": "letter", "text": "这里漏写了一个字母"}], "answer_id": "stress", "explanation": "重音符号提醒我们突出后面的音节，不表示停顿。"},
+    {"id": "ship-sheep", "lesson_id": "minimal-pairs", "prompt": "ship /ʃɪp/ 和 sheep /ʃiːp/，哪一部分的声音变了？", "choices": [{"id": "middle", "text": "中间的元音"}, {"id": "start", "text": "开头的辅音"}, {"id": "end", "text": "结尾的辅音"}], "answer_id": "middle", "explanation": "开头都是 /ʃ/，结尾都是 /p/，只有中间的 /ɪ/ 和 /iː/ 不同。"},
+    {"id": "length-quality", "lesson_id": "minimal-pairs", "prompt": "练 /ɪ/ 和 /iː/ 时，怎样听得更仔细？", "choices": [{"id": "both", "text": "既听长短，也听声音和口型的差别"}, {"id": "length", "text": "只要把 /ɪ/ 拉长就行"}, {"id": "volume", "text": "只比较哪个声音更大"}], "answer_id": "both", "explanation": "长音符号 ː 是一个线索，但两个元音的舌位和听感也有差别。"}
+  ],
+  "sources": [
+    {"label": "英国文化教育协会 · 用对比练辨音", "url": "https://www.teachingenglish.org.uk/professional-development/teachers/teaching-knowledge-database/d-h/minimal-pair"},
+    {"label": "BBC · 英语音素表", "url": "https://downloads.bbc.co.uk/worldservice/learningenglish/pronunciation/pdf/sounds/sounds_chart.pdf"}
+  ]
+}

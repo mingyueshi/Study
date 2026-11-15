@@ -1,10 +1,11 @@
 {% extends 'reference_library/layout.html' %}
-{% load static reference_ui %}
+{% load static reference_ui solar_learning %}
 {% block title %}{{ record.title|default:'无题' }} · 古诗文{% endblock %}
 {% block reference_content %}
 <link rel="stylesheet" href="{% static 'poetry/detail.css' %}">
 {% url 'poetry-index' as list_url %}
 {% include 'reference_library/breadcrumbs.html' with subject_title='古诗文' subject_url=list_url current_title=record.title %}
+{% solar_journey request.GET.solar_term 'poetry' %}
 <article class="ref-poem" id="poem-top">
   <header class="ref-header ref-poem-head"><div><p class="ref-kicker">{{ record.document.collection }}{% if record.document.collection %} · {% endif %}<span class="ref-poem-layer">{{ layer_label }}</span>{% if pair %} · <a href="{% url 'poetry-detail' pair.pk %}{% reference_query %}">{% if current_layer == 'simplified' %}查看繁体原文{% else %}查看简体展示{% endif %}</a>{% endif %}</p>
 <h1{% if record.title %} title="{{ record.title }}"{% endif %}>{{ record.title|default:'无题' }}</h1><p class="ref-poem-byline">{% if record.author %}{{ record.author }}{% else %}来源未标注作者{% endif %}</p></div>

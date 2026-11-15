@@ -2,7 +2,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 
-const { schema_version, verdicts, cases } = require('../science-rumors.json');
+const { schema_version, verdicts, skills, toolkit_sources, cases } = require('../science-rumors.json');
 const illustrations = fs.readFileSync(path.join(__dirname, '../../static/science/rumors.svg'), 'utf8');
 const slugPattern = /^[a-z]+(?:-[a-z]+)*$/;
 const staticRoot = path.join(__dirname, '../../static');
@@ -26,9 +26,21 @@ Object.values(verdicts).forEach(checkText);
 assert.ok(cases.length > 0);
 assert.equal(new Set(cases.map(item => item.slug)).size, cases.length);
 assert.deepEqual(new Set(cases.map(item => item.verdict)), new Set(Object.keys(verdicts)));
+assert.equal(skills.length, 4);
+assert.equal(new Set(skills.map(skill => skill.id)).size, skills.length);
+for (const skill of skills) {
+  assert.match(skill.id, slugPattern);
+  for (const field of ['title', 'summary', 'question']) checkText(skill[field]);
+}
+assert.ok(toolkit_sources.length >= 1);
+for (const source of toolkit_sources) {
+  checkText(source.label);
+  assert.equal(new URL(source.url).protocol, 'https:');
+}
 
 for (const item of cases) {
   assert.match(item.slug, slugPattern);
+  assert.ok(skills.some(skill => skill.id === item.skill), `${item.slug} 缺少对应的查证方法`);
   assert.ok(illustrations.includes(`<symbol id="${item.icon || item.slug}"`), `${item.slug} 缺少本地图示`);
   for (const field of ['category', 'claim', 'teaser', 'scenario', 'explanation', 'hint', 'method', 'transfer']) {
     checkText(item[field]);
@@ -57,6 +69,16 @@ for (const item of cases) {
     for (const field of ['title', 'materials', 'note']) checkText(item.activity[field]);
     assert.ok(item.activity.steps.length >= 2);
     item.activity.steps.forEach(checkText);
+  }
+  const question = item.challenge;
+  checkText(question.prompt);
+  assert.equal(question.options.length, 3);
+  assert.deepEqual(question.options.map(option => option.id), ['a', 'b', 'c']);
+  assert.ok(question.options.some(option => option.id === question.answer));
+  assert.equal(new Set(question.options.map(option => option.text)).size, 3);
+  for (const option of question.options) {
+    checkText(option.text);
+    checkText(option.feedback);
   }
 }
 

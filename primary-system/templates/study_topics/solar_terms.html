@@ -2,7 +2,10 @@
 {% load static %}
 {% block title %}二十四节气馆 · 乐学堂{% endblock %}
 {% block content %}
-<link rel="stylesheet" href="{% static 'study_topics/solar-terms.css' %}?v=1">
+<link rel="stylesheet" href="{% static 'study_topics/solar-terms.css' %}?v=3">
+<script src="{% static 'speech.js' %}" defer></script>
+<script src="{% static 'study_topics/solar-terms.js' %}?v=1" defer></script>
+{{ challenges|json_script:'solar-challenges' }}
 <div class="solar-hall" id="solar-top">
   <nav class="solar-breadcrumbs" aria-label="专题路径">
     <a href="{% url 'home' %}?area=geography#modules-title">← 学习广场 · 地理</a>
@@ -17,6 +20,25 @@
     <img class="solar-landscape" src="{% static 'study_topics/solar-landscape.svg' %}" width="620" height="284" alt="">
   </header>
 
+  <section class="solar-tools solar-interactive" aria-label="游馆工具" hidden>
+    <div class="solar-tool-heading">
+      <div><h2>带着好奇，逛一圈四季</h2><p>找一找节气，留下一页观察，再来试试小挑战。</p></div>
+      <div class="solar-actions">
+        <button type="button" data-action="notebook">我的观察册 <span id="solar-note-count">0 / 24</span></button>
+        <button type="button" data-action="challenge" class="solar-primary">节气小挑战 →</button>
+      </div>
+    </div>
+    <div class="solar-filter-row">
+      <label class="solar-search">找节气、物候或诗句<input id="solar-search" type="search" maxlength="80" placeholder="试试燕子、麦子、雪……" autocomplete="off"></label>
+      <div class="solar-filters" role="group" aria-label="按季节筛选">
+        <button type="button" data-season="all" aria-pressed="true">全部</button>
+        {% for season in seasons %}<button type="button" data-season="{{ season.id }}" aria-pressed="false">{{ season.name }}季</button>{% endfor %}
+      </div>
+      <button type="button" data-action="reset">清除筛选</button>
+    </div>
+    <p id="solar-filter-status" role="status">共 24 张节气卡</p>
+    <p id="solar-status" role="status"></p>
+  </section>
   <nav class="solar-index" aria-label="按四季查找节气">
     {% for season in seasons %}
     <div class="solar-index-season solar-{{ season.id }}">
@@ -37,6 +59,8 @@
     {% if poetry_ready %}<a href="{% url 'poetry-seasons' %}"><span>古诗词</span> 诗词四季 <span aria-hidden="true">↗</span></a>{% endif %}
   </nav>
   <p class="solar-note">一候约五天，一个节气分三候。三候里有古人的观察，也有他们的想象。各地冷暖不同，家乡的花鸟和农事会有自己的时钟。</p>
+  <p class="solar-learning-guide">每张卡都有「串起来学」：先带着问题看天气、读文学、寻诗景，再回到这张卡记下自己的发现。</p>
+  <p class="solar-empty" id="solar-empty" hidden>暂时没有找到，试试换个词，或点「清除筛选」。</p>
 
   {% for season in seasons %}
   <section id="{{ season.id }}" class="solar-season solar-{{ season.id }}" aria-labelledby="season-{{ season.id }}" tabindex="-1">
@@ -73,7 +97,8 @@
             <h4>应景诗词</h4>
             {% if term.quote %}
             <blockquote>{{ term.quote.line }}</blockquote>
-            <figcaption>{{ term.quote.author }} · <a href="{% url 'poetry-detail' term.quote.pk %}">《{{ term.quote.title }}》 <span aria-hidden="true">↗</span></a></figcaption>
+            <figcaption>{{ term.quote.author }} · <a href="{% url 'poetry-detail' term.quote.pk %}?solar_term={{ term.id }}">《{{ term.quote.title }}》 <span aria-hidden="true">↗</span></a></figcaption>
+            <button type="button" class="solar-read solar-interactive" data-read="{{ term.id }}" aria-pressed="false" aria-label="朗读{{ term.name }}的应景诗句" hidden>听诗句</button>
             {% else %}
             <p>当前诗词库暂时读不到这首诗。</p>
             {% endif %}
@@ -81,6 +106,19 @@
           <h4>农谚</h4>
           <p class="solar-proverb">「{{ term.proverb }}」</p>
           <p>{{ term.proverb_note }}</p>
+          <details class="solar-learning">
+            <summary>串起来学 <span>天气 · 文学 · 诗词</span></summary>
+            <ol>
+              <li><h4>看天气</h4><p>{{ term.learning.geography.question }}</p><a href="{{ term.learning.geography.url }}">{{ term.learning.geography.title }} →</a></li>
+              <li><h4>读文学</h4><p>{{ term.learning.literature.question }}</p><a href="{{ term.learning.literature.url }}">{{ term.learning.literature.title }} →</a></li>
+              <li><h4>寻诗景</h4><p>{{ term.learning.poetry }}</p>{% if poetry_ready %}<a href="{{ term.poetry_url }}">到{{ season.name }}季诗词找一找 →</a>{% else %}<p class="solar-note">诗词库准备好后，就能接着读更多诗。</p>{% endif %}</li>
+            </ol>
+          </details>
+          <section class="solar-observation">
+            <h4>去观察</h4>
+            <p>{{ term.observation }}</p>
+            <button type="button" class="solar-interactive" data-note="{{ term.id }}" hidden>记一笔 <span class="solar-note-badge">未记录</span></button>
+          </section>
           <a class="solar-source" href="{{ term.source }}" target="_blank" rel="noopener noreferrer">{{ term.name }}资料 · 需联网 <span aria-hidden="true">↗</span></a>
         </div>
       </article>
@@ -88,6 +126,55 @@
     </div>
   </section>
   {% endfor %}
+
+  <dialog class="solar-dialog" id="solar-notebook" aria-labelledby="solar-notebook-title">
+    <div class="solar-dialog-heading"><h2 id="solar-notebook-title">我的四季观察册</h2><button type="button" data-close aria-label="关闭观察册">关闭</button></div>
+    <p>每个节气留一页，可以随时修改。笔记保存在当前浏览器，同一浏览器的使用者可共同查看。</p>
+    <p id="solar-storage-status" role="status"></p>
+    <div id="solar-notebook-list" class="solar-notebook-list"></div>
+    <button type="button" id="solar-export">下载观察册</button>
+  </dialog>
+
+  <dialog class="solar-dialog" id="solar-note-editor" aria-labelledby="solar-note-title">
+    <div class="solar-dialog-heading"><h2 id="solar-note-title">记一笔</h2><button type="button" data-close aria-label="关闭笔记">关闭</button></div>
+    <p id="solar-note-prompt"></p>
+    <form id="solar-note-form">
+      <div class="solar-note-fields">
+        <label>观察日期<input type="date" name="date" required></label>
+        <label>观察地点<input name="place" maxlength="60" placeholder="例如家门口的小花园" required></label>
+      </div>
+      <label>我看到了什么<textarea name="text" rows="5" maxlength="1200" placeholder="写下颜色、声音、天气或你发现的变化，也可以写「今天没看见」……" required></textarea></label>
+      <p class="solar-note">每页最多 1200 字，保存后可以再来修改。</p>
+      <p id="solar-save-status" role="status"></p>
+      <div class="solar-actions">
+        <button type="submit" class="solar-primary" id="solar-save">保存这一页</button>
+        <button type="button" id="solar-delete" hidden>删除这一页</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog class="solar-dialog" id="solar-challenge" aria-labelledby="solar-challenge-title">
+    <div class="solar-dialog-heading"><h2 id="solar-challenge-title">节气小挑战</h2><button type="button" data-close aria-label="关闭挑战">关闭</button></div>
+    <p>每轮 5 题，选完看讲解。答错的题，可以再练一遍。</p>
+    <div id="solar-quiz-round">
+      <p id="solar-quiz-progress"></p>
+      <h3 id="solar-quiz-question" tabindex="-1"></h3>
+      <div id="solar-quiz-options" class="solar-quiz-options"></div>
+      <p id="solar-quiz-feedback" role="status"></p>
+      <div class="solar-actions">
+        <a id="solar-quiz-reference" hidden>回节气卡看看 →</a>
+        <button type="button" id="solar-quiz-next" class="solar-primary" hidden>下一题 →</button>
+      </div>
+    </div>
+    <div id="solar-quiz-result" hidden>
+      <h3 id="solar-quiz-score" tabindex="-1"></h3>
+      <ul id="solar-quiz-review"></ul>
+      <div class="solar-actions">
+        <button type="button" id="solar-quiz-retry" hidden>再练错题</button>
+        <button type="button" id="solar-quiz-restart" class="solar-primary">再来 5 题</button>
+      </div>
+    </div>
+  </dialog>
 
   <footer class="solar-references">
     <h2>资料出处</h2>

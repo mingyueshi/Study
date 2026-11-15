@@ -2,6 +2,7 @@
 + 页面和账号进度。内容源头在 content_sources/，源数据测试管源头质量；这里管生成物与页面
 的契约，按册遍历（册次注册在 scripts/build_mathbook.cjs 的 BOOKS 映射）。"""
 import json
+from copy import deepcopy
 
 from django.conf import settings
 from django.contrib.auth import get_user_model
@@ -14,6 +15,33 @@ from questionbank.models import AnswerRecord, Question
 
 from .content import available_books, load_book, validate
 from .models import BookProgress
+from scripts.build_study_topics import geometry_lab_data, validate_geometry_lab
+
+
+class GeometryLabDataTests(SimpleTestCase):
+    def test_source_and_generated_challenges_match(self):
+        source = geometry_lab_data()
+        self.assertEqual((settings.BASE_DIR / 'mathbook/data/geometry-lab.json').read_bytes(), source)
+
+    def test_invalid_targets_and_shape_coordinates_are_rejected(self):
+        original = json.loads(geometry_lab_data())
+        for mode, target in (
+            ('translation', [13, 0]), ('translation', [True, 0]),
+            ('rotation', 361), ('rotation', 91), ('reflection', 'diagonal'),
+        ):
+            with self.subTest(mode=mode, target=target):
+                data = deepcopy(original)
+                data['modes'][mode]['challenges'][0]['target'] = target
+                with self.assertRaises(ValueError):
+                    validate_geometry_lab(data)
+        data = deepcopy(original)
+        data['shapes'][0]['points'][0] = [-90, 0]
+        with self.assertRaises(ValueError):
+            validate_geometry_lab(data)
+        data = deepcopy(original)
+        data['modes']['rotation']['challenges'][0]['id'] = data['modes']['translation']['challenges'][0]['id']
+        with self.assertRaises(ValueError):
+            validate_geometry_lab(data)
 
 
 class MathbookDataTests(SimpleTestCase):

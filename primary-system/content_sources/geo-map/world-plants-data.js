@@ -8,7 +8,7 @@ window.GM_WORLD_FLORA = {
     },
     {
       "id": "rainforest",
-      "name": "热带雨林",
+      "name": "热带森林",
       "color": "#93602a"
     },
     {
@@ -23,7 +23,7 @@ window.GM_WORLD_FLORA = {
     },
     {
       "id": "mediterranean",
-      "name": "地中海林地",
+      "name": "冬雨林地与灌丛",
       "color": "#62751d"
     },
     {
@@ -445,6 +445,108 @@ window.GM_WORLD_FLORA = {
       "mapPlace": "Antarctica",
       "source": "https://powo.science.kew.org/results?q=Deschampsia%20antarctica",
       "photoSource": "https://commons.wikimedia.org/wiki/File:Deschampsia_antarctica.jpg"
+    },
+    {
+      "id": "banyan",
+      "name": "印度榕",
+      "scientificName": "Ficus benghalensis",
+      "habitat": "rainforest",
+      "place": "亚洲 · 印度加尔各答附近",
+      "mapPlace": "India",
+      "point": [
+        88.29,
+        22.56
+      ],
+      "home": "印度榕原生于印度次大陆，在公园和寺庙旁也常见。加尔各答附近的植物园里有著名的大榕树。",
+      "adaptation": "枝条垂下气生根，接触土壤后能长成柱子般的支撑根，让树冠继续向四周伸展。",
+      "clue": "看看树冠下面，有许多像树干的柱子。它们可能都是同一棵树长出的根。",
+      "source": "https://powo.science.kew.org/taxon/urn:lsid:ipni.org:names:852482-1/general-information",
+      "photoSource": "https://commons.wikimedia.org/wiki/File:Great_banyan_tree_kol.jpg"
+    },
+    {
+      "id": "japanese-cedar",
+      "name": "日本柳杉",
+      "scientificName": "Cryptomeria japonica",
+      "habitat": "forest",
+      "place": "亚洲 · 日本屋久岛",
+      "mapPlace": "Japan",
+      "point": [
+        130.52,
+        30.35
+      ],
+      "home": "日本柳杉原生于日本。多雨的屋久岛保存着一些古老的天然柳杉林。",
+      "adaptation": "它适合温暖湿润、降雨充足的环境，屋久岛潮湿的山林为它提供了生长条件。",
+      "clue": "树干高大，红褐色树皮会纵向裂开；短短的尖叶沿着小枝四周排列。",
+      "source": "https://threatenedconifers.rbge.org.uk/conifers/cryptomeria-japonica",
+      "photoSource": "https://commons.wikimedia.org/wiki/File:Cryptomeria_japonica_Yakushima_10.jpg"
+    },
+    {
+      "id": "king-protea",
+      "name": "帝王花",
+      "scientificName": "Protea cynaroides",
+      "habitat": "mediterranean",
+      "place": "非洲 · 南非开普敦附近",
+      "mapPlace": "South Africa",
+      "point": [
+        18.43,
+        -33.98
+      ],
+      "home": "帝王花原生于南非，是当地灌丛中的代表植物，也是南非的国花。",
+      "adaptation": "粗厚的地下茎保存着芽，一些植株能在火后重新长出新枝。",
+      "clue": "看起来像一朵大花，其实是许多小花聚成的大花序，外面围着一圈像花瓣的苞片。",
+      "source": "https://pza.sanbi.org/protea-cynaroides",
+      "photoSource": "https://commons.wikimedia.org/wiki/File:Peninsula_Sandstone_Fynbos_-_KingProtea_-_Table_Mountain.JPG"
+    },
+    {
+      "id": "european-beech",
+      "name": "欧洲山毛榉",
+      "scientificName": "Fagus sylvatica",
+      "habitat": "forest",
+      "place": "欧洲 · 德国中部森林",
+      "mapPlace": "Germany",
+      "point": [
+        10.43,
+        51.08
+      ],
+      "home": "欧洲山毛榉分布在欧洲许多地区，德国等地有大片山毛榉林。",
+      "adaptation": "成年树会在秋冬落叶，春天再长出新叶；密密的树冠会让夏天的林下变得阴凉。",
+      "clue": "树皮较平滑，呈灰色；椭圆形叶片的边缘轻轻起伏，叶脉一条条伸向两侧。",
+      "source": "https://www.kew.org/plants/european-beech",
+      "photoSource": "https://commons.wikimedia.org/wiki/File:Fagus_sylvatica_leaves.jpg"
+    },
+    {
+      "id": "queen-of-andes",
+      "name": "巨型凤梨",
+      "scientificName": "Puya raimondii",
+      "habitat": "alpine",
+      "place": "南美洲 · 秘鲁瓦斯卡兰山区",
+      "mapPlace": "Peru",
+      "point": [
+        -77.22,
+        -9.85
+      ],
+      "home": "巨型凤梨生长在秘鲁和玻利维亚的安第斯高山，秘鲁瓦斯卡兰国家公园有它的代表种群。",
+      "adaptation": "它能在海拔约 3000—4800 米的高山环境中生长，硬叶密集成丛，花序从叶丛中央向上伸出。",
+      "clue": "底下是一大团带刺的长叶，上面竖着高高的花序，远看像一座植物小塔。",
+      "source": "https://puyaraimondii.inaigem.gob.pe/",
+      "photoSource": "https://commons.wikimedia.org/wiki/File:Puya_raimondii_hábito.jpg"
+    },
+    {
+      "id": "balga",
+      "name": "西澳草树",
+      "scientificName": "Xanthorrhoea preissii",
+      "habitat": "mediterranean",
+      "place": "大洋洲 · 澳大利亚西南部",
+      "mapPlace": "Australia",
+      "point": [
+        115.86,
+        -32.05
+      ],
+      "home": "西澳草树生长在澳大利亚西南部的沙地和林地，长得像顶着一大丛草的小树。",
+      "adaptation": "它能从顶部保留下来的芽重新抽出叶子，有些植株在火后也能恢复生长。",
+      "clue": "细长的叶子从顶端向四周散开，开花时还会抽出一根很长、像蜡烛一样的花穗。",
+      "source": "https://www.dbca.wa.gov.au/media/3701/download",
+      "photoSource": "https://commons.wikimedia.org/wiki/File:Xanthorrhoea_preissii.jpg"
     }
   ]
 };

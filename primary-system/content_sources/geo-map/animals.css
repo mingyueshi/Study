@@ -236,6 +236,72 @@
 .gm-animal-sources { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 8px; }
 .gm-animal-sources a { color: var(--ink-soft); font-size: 14px; }
 
+/* 动物与植物的探索工具沿用各自地图主题。 */
+.gm-wildlife-tools:has(.gm-animal-search-row) { align-items: center; }
+.gm-wildlife-tools:has(.gm-animal-search-row) > div { flex: 1 1 650px; }
+.gm-animal-search-row { display: flex; flex-wrap: wrap; align-items: end; gap: 12px; min-width: 0; }
+.gm-animal-search-row label { display: grid; gap: 5px; font-weight: 800; }
+.gm-animal-search-row label:first-child { flex: 1 1 280px; }
+.gm-animal-search-row input,
+.gm-animal-search-row select,
+.gm-quiz-toolbar select {
+  min-width: 0; max-width: 100%; min-height: 44px; padding: 8px 12px;
+  border: 1px solid var(--atlas-border); border-radius: 10px; background: var(--card); color: var(--ink); font: inherit;
+}
+.gm-animal-search-row input { width: 100%; }
+.gm-wildlife button:focus-visible,
+.gm-wildlife input:focus-visible,
+.gm-wildlife select:focus-visible,
+.gm-wildlife summary:focus-visible { outline: 3px solid var(--animal-green); outline-offset: 3px; }
+.gm-animal-search-row button,
+.gm-animal-progress-row button,
+.gm-animal-record-tools button,
+.gm-animal-quiz button,
+[data-animal-reset] {
+  min-height: 44px; padding: 8px 12px; border: 1px solid var(--atlas-border); border-radius: 10px;
+  background: var(--card); color: var(--animal-green); font: inherit; font-weight: 750; cursor: pointer;
+}
+.gm-wildlife button:disabled { opacity: .55; cursor: default; }
+#gm-animal-search-status { padding-block: 10px; color: var(--ink-soft); font-size: 15px; }
+.gm-animal-progress-row {
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+  padding: 12px 18px; margin-bottom: 16px; border: 1px solid var(--atlas-border); border-radius: 16px; background: var(--card);
+}
+.gm-animal-progress-row > div { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 14px; }
+.gm-animal-progress-row a { color: var(--animal-green); font-weight: 750; }
+#gm-animal-progress-label { font-size: 18px; font-weight: 850; color: var(--animal-green); }
+#gm-animal-progress { width: 140px; height: 10px; accent-color: #387451; }
+#gm-animal-storage-note { font-size: 14px; color: var(--ink-soft); }
+.gm-animal-record-tools { display: grid; gap: 10px; margin-top: 14px; }
+.gm-animal-record-tools [data-observe][aria-pressed="true"] { background: #e4edda; border-color: #6f8964; }
+.gm-animal-browse { display: flex; align-items: center; justify-content: space-between; gap: 6px; }
+.gm-animal-browse button { padding-inline: 8px; font-size: 14px; }
+.gm-animal-browse span { font-size: 14px; white-space: nowrap; color: var(--ink-soft); }
+.gm-animal-choice[data-observed="true"] .gm-animal-choice-caption::after { content: '✓ 已观察'; color: var(--animal-green); font-weight: 800; font-size: 13px; }
+.gm-animal-marker[data-observed="true"] .gm-animal-dot { stroke: #234c3b; stroke-width: 3; stroke-dasharray: 4 2; }
+.gm-animal-quiz { border: 1px solid var(--atlas-border); border-radius: 16px; background: var(--atlas-tint); overflow: hidden; }
+.gm-animal-quiz > summary { padding: 16px 20px; color: var(--animal-green); font-size: 21px; font-weight: 850; cursor: pointer; }
+.gm-animal-quiz > summary span { margin-left: 10px; font-size: 15px; font-weight: 600; color: var(--ink-soft); }
+.gm-quiz-inner { padding: 0 20px 20px; }
+.gm-quiz-inner > p { color: var(--ink-soft); font-size: 15px; }
+.gm-quiz-toolbar, .gm-quiz-actions, .gm-quiz-review { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-block: 12px; }
+.gm-quiz-heading { margin: 16px 0; font-size: 22px; }
+.gm-quiz-question { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 20px; align-items: center; }
+.gm-quiz-photo { width: 100%; max-height: 260px; aspect-ratio: 4 / 3; object-fit: contain; border-radius: 12px; background: #23362d; }
+.gm-quiz-clue, .gm-quiz-photo-fallback { padding: 20px; border-left: 4px solid #c68a32; background: var(--card); font-size: 21px; line-height: 1.8; }
+.gm-quiz-options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.gm-quiz-options button { min-height: 58px; font-size: 18px; }
+.gm-quiz-options [data-result="correct"] { background: #e4edda; border: 2px solid #387451; color: #234c3b; opacity: 1; }
+.gm-quiz-options [data-result="wrong"] { background: #fbe8de; border: 2px solid #a44a27; color: #713018; opacity: 1; }
+.gm-quiz-hint { margin-top: 14px; color: var(--ink-soft); }
+.gm-quiz-hint summary { cursor: pointer; }
+.gm-quiz-feedback { margin-top: 16px; font-size: 18px; line-height: 1.8; }
+@media (max-width: 680px) {
+  .gm-animal-quiz > summary span { display: block; margin: 6px 0 0; }
+  .gm-quiz-question { grid-template-columns: minmax(0, 1fr); }
+  .gm-quiz-inner { padding-inline: 12px; }
+}
+
 @media (min-width: 1100px) {
   .gm-wildlife-workspace { grid-template-columns: minmax(0, 1fr) clamp(284px, 23vw, 424px); }
   #gm-animal-map { max-height: max(490px, calc(100svh - 490px)); }

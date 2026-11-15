@@ -3,7 +3,7 @@
 {% block title %}对联工坊 · 乐学堂{% endblock %}
 {% block content %}
 <link rel="stylesheet" href="{% static 'study_topics/couplets.css' %}">
-<div class="couplets-workshop">
+<div class="couplets-workshop" data-storage-scope="{% if user.is_authenticated %}user-{{ user.pk }}{% else %}guest{% endif %}">
   <a class="couplets-back" href="{% url 'home' %}?area=chinese#modules-title">← 学习广场 · 语文</a>
   <header class="couplets-hero">
     <div>
@@ -39,10 +39,15 @@
   <section class="couplets-section" id="examples" aria-labelledby="couplets-examples-title">
     <p class="couplets-kicker">02 · 读例联</p>
     <h2 id="couplets-examples-title">把两行字拆开看</h2>
-    <p class="couplets-intro">同一列里的词是一对搭档。先上下对照，再把整副联连起来读。</p>
+    <p class="couplets-intro">{{ course.examples|length }} 副为入门练习编写的例联。同一列里的词是一对搭档，先上下对照，再把整副联连起来读。</p>
+    <div class="couplets-tools" data-example-tools hidden>
+      <label>选个主题 <select data-category><option value="">全部主题</option>{% for category in course.categories %}<option value="{{ category.id }}">{{ category.label }}</option>{% endfor %}</select></label>
+      <label>找一找 <input type="search" data-search placeholder="输入花、校园、春风……"></label>
+      <span role="status" data-example-count></span>
+    </div>
     <div class="couplets-examples">
       {% for example in course.examples %}
-      <article class="couplet-example" id="example-{{ example.id }}" aria-labelledby="example-title-{{ example.id }}">
+      <article class="couplet-example" id="example-{{ example.id }}" data-example="{{ example.id }}" aria-labelledby="example-title-{{ example.id }}">
         <header><h3 id="example-title-{{ example.id }}">{{ example.title }}</h3><span>{{ example.scene }}</span></header>
         <table class="couplet-pair" aria-label="{{ example.title }}的上下联对照">
           <tbody>
@@ -52,6 +57,11 @@
         </table>
         <p class="couplets-clue">横批 · {{ example.banner }}</p>
         <p>{{ example.note }}</p>
+        <p class="couplet-endings">上联收在 <strong>{{ example.upper_end }}（{{ example.endings.0.pinyin }}）</strong> · 仄声<br>下联收在 <strong>{{ example.lower_end }}（{{ example.endings.1.pinyin }}）</strong> · 平声</p>
+        <div class="couplets-actions" data-example-actions hidden>
+          <button class="couplets-plain" type="button" data-read="{{ example.id }}">听一听</button>
+          <button class="couplets-plain" type="button" data-use="{{ example.id }}">用这副联改一改</button>
+        </div>
       </article>
       {% endfor %}
     </div>
@@ -61,12 +71,13 @@
     <p class="couplets-kicker">03 · 对一对</p>
     <h2 id="couplets-practice-title">给上下联找搭档</h2>
     <p class="couplets-intro">拿不准时，先读一读，再找词语和句尾的线索。</p>
+    <p class="couplets-progress" role="status" data-progress hidden></p>
     <div class="couplets-questions">
       {% for question in course.questions %}
       <article class="couplet-question" id="question-{{ question.id }}" aria-labelledby="question-title-{{ question.id }}" data-question>
         <p class="couplets-kicker">{{ forloop.counter|stringformat:'02d' }} · {{ question.skill }}</p>
         <h3 id="question-title-{{ question.id }}">{{ question.prompt }}</h3>
-        <form data-quiz data-answer="{{ question.answer }}" hidden>
+        <form data-quiz data-answer="{{ question.answer }}" data-question-id="{{ question.id }}" data-revision="{{ question.revision }}" hidden>
           <fieldset aria-labelledby="question-title-{{ question.id }}">
             {% for choice in question.choices %}
             <label class="couplet-option"><input type="radio" name="choice" value="{{ forloop.counter0 }}" required> {{ choice }}</label>
@@ -80,7 +91,7 @@
           <summary>看提示</summary>
           <p data-hint>{{ question.hint }}</p>
         </details>
-        <details>
+        <details data-reveal>
           <summary>看答案</summary>
           <p><strong>{{ question.answer_text }}</strong></p>
           <p data-explanation>{{ question.explanation }}</p>
@@ -88,28 +99,48 @@
       </article>
       {% endfor %}
     </div>
+    <div class="couplets-puzzle" id="puzzle" data-puzzle hidden>
+      <p class="couplets-kicker">动动手 · 拼下联</p>
+      <h3>把词语放回合适的位置</h3>
+      <label>选一关 <select data-puzzle-select>{% for example in course.examples %}{% if example.id in course.puzzles %}<option value="{{ example.id }}">{{ example.title }}</option>{% endif %}{% endfor %}</select></label>
+      <p class="couplet-puzzle-upper" data-puzzle-upper></p>
+      <p>依次点词语组成下联。点已经放好的词，可以把它拿回来。</p>
+      <div class="couplets-actions" data-puzzle-bank aria-label="待选词语"></div>
+      <div class="couplet-puzzle-answer" data-puzzle-answer aria-label="我拼的下联"></div>
+      <div class="couplets-actions"><button type="button" class="couplets-button" data-puzzle-check>检查拼联</button><button type="button" class="couplets-plain" data-puzzle-reset>重新拼</button></div>
+      <p role="status" data-puzzle-feedback></p>
+    </div>
   </section>
 
   <section class="couplets-section" id="studio" aria-labelledby="couplets-studio-title">
     <p class="couplets-kicker">04 · 写一副</p>
     <h2 id="couplets-studio-title">把自己的对联贴上门</h2>
     <p class="couplets-intro">挑一个你熟悉的场景，比如校门、书桌或过年的小院，试着用两句话把它写出来。</p>
+    <details class="couplets-word-bank"><summary>打开词语百宝箱</summary><div class="couplets-examples">
+      {% for bank in course.word_banks %}<section><h3>{{ bank.title }}</h3><p>{{ bank.tip }}</p><ul>{% for pair in bank.pairs %}<li>{{ pair.0 }} <span aria-hidden="true">↔</span> {{ pair.1 }}</li>{% endfor %}</ul></section>{% endfor %}
+    </div></details>
     <div class="couplets-studio" data-studio>
       <div>
         <div class="couplets-editor" data-editor hidden>
           <p id="couplets-editor-help">可以从示例改起。红纸只排汉字，上下联各排前 12 个字，横批排前 6 个字。</p>
           <div class="couplets-fields" role="group" aria-label="填写联文" aria-describedby="couplets-editor-help">
-            <label>上联<input type="text" data-ink="upper" value="{{ demo.upper|join:'' }}"></label>
-            <label>下联<input type="text" data-ink="lower" value="{{ demo.lower|join:'' }}"></label>
-            <label>横批 <small>（选填）</small><input type="text" data-ink="banner" value="{{ demo.banner }}"></label>
+            <label>上联<input type="text" maxlength="80" data-ink="upper" value="{{ demo.upper|join:'' }}"></label>
+            <label>下联<input type="text" maxlength="80" data-ink="lower" value="{{ demo.lower|join:'' }}"></label>
+            <label>横批 <small>（选填）</small><input type="text" maxlength="80" data-ink="banner" value="{{ demo.banner }}"></label>
           </div>
           <p class="couplet-feedback" role="status" data-counts></p>
+          <p role="status" data-draft-status>草稿刷新可接着写。收藏的作品保存在当前浏览器，按账号区分；游客共用游客作品集。</p>
           <fieldset class="couplets-directions">
             <legend>横批从哪边读？</legend>
             <label class="couplet-option"><input type="radio" name="direction" value="right" checked> 从右往左</label>
             <label class="couplet-option"><input type="radio" name="direction" value="left"> 从左往右</label>
           </fieldset>
-          <button class="couplets-plain" type="button" data-clear>换一张空红纸</button>
+          <div class="couplets-actions">
+            <button class="couplets-button" type="button" data-save>收藏这副作品</button>
+            <button class="couplets-plain" type="button" data-print>打印作品</button>
+            <button class="couplets-plain" type="button" data-clear>换一张空红纸</button>
+          </div>
+          <p role="status" data-save-status></p>
         </div>
         <noscript><p>拿一张纸写下自己的上下联，再照着示例排一排。</p></noscript>
         <aside class="couplets-checklist" aria-label="写完自查">
@@ -119,6 +150,11 @@
       </div>
       {% include 'study_topics/_couplet_door.html' with preview=True %}
     </div>
+    <section class="couplets-library" data-library hidden aria-labelledby="couplets-library-title">
+      <h3 id="couplets-library-title">我的作品集 <span data-work-count></span></h3>
+      <p>打开作品可以接着改，修改后可再收藏一个版本。清除浏览器数据会一并清除作品。</p>
+      <div class="couplets-examples" data-works></div>
+    </section>
   </section>
 
   <footer class="couplets-sources">
@@ -130,5 +166,7 @@
     </details>
   </footer>
 </div>
+{{ course|json_script:'couplets-data' }}
+<script src="{% static 'speech.js' %}" defer></script>
 <script src="{% static 'study_topics/couplets.js' %}" defer></script>
 {% endblock %}

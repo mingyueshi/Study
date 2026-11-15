@@ -20,8 +20,12 @@ class HumanBodyStationTests(SimpleTestCase):
                 self.assertContains(index, f'href="{lesson_url}"')
                 lesson = self.client.get(lesson_url)
                 self.assertContains(lesson, f'{label} · 人体奥秘站')
-                self.assertContains(lesson, '/static/science/body.js?v=20261114b7')
+                self.assertContains(lesson, '/static/science/body.js?v=20261116p2')
                 self.assertContains(lesson, 'role="img"')
+                self.assertContains(lesson, f'data-body-process="{slug}"')
+                self.assertContains(lesson, 'data-process-progress')
+                self.assertContains(lesson, 'data-process-speed')
+                self.assertContains(lesson, 'science/body-process.js')
                 self.assertContains(lesson, 'id="gallery"')
                 self.assertContains(lesson, 'id="checkup"')
                 self.assertContains(lesson, '翻开答案')
@@ -32,9 +36,11 @@ class HumanBodyStationTests(SimpleTestCase):
         response = self.client.get(url)
         self.assertContains(response, 'id="heart"')
         self.assertContains(response, 'id="pulse"')
-        self.assertContains(response, 'data-heart-motion-status role="status"')
+        self.assertContains(response, 'data-process-status role="status"')
         self.assertContains(response, 'data-seconds="30"')
         self.assertContains(response, '心脏正面简化剖面')
+        self.assertContains(response, 'data-process-mode="circuit"')
+        self.assertContains(response, 'data-circuit-track=', count=8)
         for asset in ('science/body.css', 'science/body.js'):
             self.assertContains(response, f'/static/{asset}')
             self.assertTrue(finders.find(asset))
@@ -42,3 +48,26 @@ class HumanBodyStationTests(SimpleTestCase):
     def test_unknown_lesson_and_unsupported_method(self):
         self.assertEqual(self.client.get(reverse('science-body-lesson', args=['missing'])).status_code, 404)
         self.assertEqual(self.client.post(reverse('science-body')).status_code, 405)
+
+    def test_missions_progress_and_notebook_are_connected(self):
+        index = self.client.get(reverse('science-body'))
+        self.assertContains(index, 'id="missions"')
+        self.assertContains(index, 'data-map-organ=', count=7)
+        self.assertContains(index, 'data-scene=', count=3)
+        self.assertContains(index, 'data-stamp=', count=6)
+        progress = index.context['body_progress']
+        self.assertEqual(len(progress['challenges']), 7)
+        self.assertEqual(sum(len(item['questions']) for item in progress['lessons']), 18)
+        self.assertContains(index, '<noscript>')
+        for lesson in index.context['lessons']:
+            response = self.client.get(reverse('science-body-lesson', args=[lesson['slug']]))
+            for question in lesson['checkup']:
+                self.assertContains(response, f'data-body-question="{question["id"]}"')
+            if lesson['slug'] == 'circulation':
+                self.assertContains(response, 'id="notebook"')
+                self.assertContains(response, 'data-notebook-export')
+            else:
+                self.assertNotContains(response, 'id="notebook"')
+        for asset in ('science/body-lab.js', 'science/body-lab.css',
+                      'science/body-progress.js', 'science/body-notebook.js'):
+            self.assertTrue(finders.find(asset))

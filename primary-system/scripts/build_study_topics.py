@@ -205,7 +205,7 @@ def course_outputs():
             for filename in ('sci-demo-data.js', 'sci-demo-motion.js', 'sci-process-data.js', 'sci-process.js', 'sci-process.css', 'sci-experiments-data.js', 'sci-experiments.js'):
                 yield dest / filename, (SOURCE / filename).read_bytes()
         if topic == 'astro':
-            for filename in ('astro-media-data.js', 'astro-media.js', 'astro-observation-data.js', 'astro-observation.js'):
+            for filename in ('astro-discovery-data.js', 'astro-discovery.js', 'astro-media-data.js', 'astro-media.js', 'astro-observation-data.js', 'astro-observation.js'):
                 yield dest / filename, (SOURCE / filename).read_bytes()
             photos = (SOURCE / 'astro-photos.js').read_text(encoding='utf-8')
             photos = replace_once(photos, "'images/astro/'", "new URL('images/astro/', document.currentScript.src).href")
@@ -216,28 +216,66 @@ def course_outputs():
                 yield dest / path.relative_to(SOURCE), path.read_bytes()
 
 
+def validate_geometry_lab(data):
+    """在生成前核对图形坐标、稳定 ID 和能实际完成的挑战目标。"""
+    def require(condition, message):
+        if not condition:
+            raise ValueError('图形运动实验室数据有误：' + message)
+
+    def text(value):
+        return isinstance(value, str) and bool(value.strip()) and not any(
+            char in value for char in '"\r\n')
+
+    require(isinstance(data, dict) and set(data) == {'shapes', 'modes'}, '缺少图形或实验。')
+    shapes = data['shapes']
+    require(isinstance(shapes, list) and bool(shapes), '图形为空。')
+    ids = set()
+    for shape in shapes:
+        require(isinstance(shape, dict) and set(shape) == {'id', 'label', 'points'}, '图形字段。')
+        sid = shape['id']
+        require(isinstance(sid, str) and re.fullmatch(r'[a-z][a-z-]*', sid) and sid not in ids, '图形 ID。')
+        ids.add(sid)
+        require(text(shape['label']), '图形名称。')
+        points = shape['points']
+        require(isinstance(points, list) and len(points) >= 3, '图形顶点不足。')
+        for point in points:
+            require(isinstance(point, list) and len(point) == 2
+                    and all(type(n) is int and -60 <= n <= 60 and n % 30 == 0 for n in point),
+                    '顶点需在中心两格内，并落在格点上。')
+        require([60, 0] in points and len(set(map(tuple, points))) == len(points), '标记点或重复顶点。')
+        area = sum(x * ny - nx * y for (x, y), (nx, ny) in zip(points, points[1:] + points[:1]))
+        require(area != 0, '图形面积为零。')
+    modes = data['modes']
+    require(isinstance(modes, dict) and tuple(modes) == ('translation', 'rotation', 'reflection'), '实验顺序。')
+    text_fields = {'label', 'action', 'instruction', 'observation', 'example'}
+    challenge_ids = set()
+    for name, mode in modes.items():
+        require(isinstance(mode, dict) and set(mode) == text_fields | {'challenges'}, '实验字段。')
+        require(all(text(mode[field]) for field in text_fields), '实验文案。')
+        challenges = mode['challenges']
+        require(isinstance(challenges, list) and bool(challenges), '缺少挑战。')
+        for challenge in challenges:
+            require(isinstance(challenge, dict) and set(challenge) == {'id', 'task', 'target', 'success', 'hint'}, '挑战字段。')
+            cid = challenge['id']
+            require(isinstance(cid, str) and re.fullmatch(r'[a-z][a-z0-9-]*', cid)
+                    and cid not in challenge_ids, '挑战 ID。')
+            challenge_ids.add(cid)
+            require(all(text(challenge[field]) for field in ('task', 'success', 'hint')), '挑战文案。')
+            target = challenge['target']
+            if name == 'translation':
+                require(isinstance(target, list) and len(target) == 2
+                        and all(type(n) is int for n in target)
+                        and -2 <= target[0] <= 12 and -2 <= target[1] <= 4
+                        and target != [0, 0], '平移目标超出方格纸。')
+            elif name == 'rotation':
+                require(type(target) is int and 0 < abs(target) <= 360 and target % 15 == 0, '旋转目标。')
+            else:
+                require(target in ('vertical', 'horizontal'), '折痕方向。')
+
+
 def geometry_lab_data():
     content = (SOURCE / 'geometry-lab.json').read_bytes()
-    modes = json.loads(content)
-    if not isinstance(modes, dict) or tuple(modes) != ('translation', 'rotation', 'reflection'):
-        raise ValueError('图形运动实验室需按顺序提供平移、旋转和轴对称。')
-    text_fields = ('label', 'action', 'instruction', 'observation', 'example', 'task', 'success', 'hint')
-    for name, mode in modes.items():
-        if not isinstance(mode, dict) or set(mode) != {*text_fields, 'target'}:
-            raise ValueError(f'图形运动实验室字段有误：{name}')
-        for field in text_fields:
-            value = mode[field]
-            if not isinstance(value, str) or not value.strip() or any(char in value for char in '"\r\n'):
-                raise ValueError(f'图形运动实验室文案有误：{name}.{field}')
-    shift, angle, axis = (mode['target'] for mode in modes.values())
-    if not (
-        isinstance(shift, list) and len(shift) == 2
-        and all(type(count) is int for count in shift)
-        and -2 <= shift[0] <= 12 and -2 <= shift[1] <= 4
-        and type(angle) is int and -180 <= angle <= 180
-        and axis in ('vertical', 'horizontal')
-    ):
-        raise ValueError('图形运动实验室的挑战目标超出操作范围。')
+    validate_geometry_lab(json.loads(content))
     return content
 
 

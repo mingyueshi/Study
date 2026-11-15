@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
-{% load static %}
+{% load static solar_learning %}
 {% block content %}
-<script src="{% static 'study_topics/connections-data.js' %}?v=3" defer></script>
-<script src="{% static 'study_topics/connections.js' %}" defer></script>
+<script src="{% static 'study_topics/connections-data.js' %}?v=4" defer></script>
+<script src="{% static 'study_topics/connections.js' %}?v=2" defer></script>
 {% block study_assets %}{% endblock %}
 <link rel="stylesheet" href="{% static 'study_topics/platform-bridge.css' %}">
 <div class="study-topic-frame color-{{ study_area }}"
@@ -42,6 +42,7 @@
     {% endif %}
     {% endwith %}
   </nav>
+  {% if request.resolver_match.url_name == 'geography-study' %}{% solar_journey request.GET.solar_term 'geography' %}{% elif course_slug == 'lit' %}{% solar_journey request.GET.solar_term 'literature' %}{% endif %}
   {% block study_content %}{% endblock %}
 </div>
 {% endblock %}
