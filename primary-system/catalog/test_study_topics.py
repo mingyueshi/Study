@@ -11,7 +11,7 @@ HISTORY_PAGES = (
 )
 GEOGRAPHY_PAGES = (
     'geography-study', 'geography-atlas', 'geography-atlas-china', 'geography-atlas-china-3d',
-    'geography-atlas-world', 'geography-atlas-province', 'geography-atlas-places',
+    'geography-atlas-world', 'geography-atlas-world-3d', 'geography-atlas-province', 'geography-atlas-places',
     'geography-atlas-routes', 'geography-atlas-gallery', 'geography-atlas-animals', 'geography-atlas-world-animals',
     'geography-atlas-plants', 'geography-atlas-world-plants',
 )
@@ -92,6 +92,8 @@ class StudyTopicPageTests(SimpleTestCase):
             ('geography-atlas-china-3d', 'province.html', '?adcode=810000'),
             ('geography-atlas-china', 'animals.html', '?animal=giant-panda'),
             ('geography-atlas-world', 'world-animals.html', '?animal=emperor-penguin'),
+            ('geography-atlas-world', 'world-3d.html', '?place=China'),
+            ('geography-atlas-world-3d', 'world-3d.html', '?continent=antarctica'),
             ('geography-atlas-china', 'plants.html', '?plant=lotus'),
             ('geography-atlas-world', 'world-plants.html', '?plant=antarctic-hair-grass'),
             ('geography-atlas-places', 'gallery.html', '?place=f20'),
@@ -112,6 +114,7 @@ class StudyTopicPageTests(SimpleTestCase):
             ('history-timeline-timeline', 'history-study', '历史精讲'),
             ('geography-atlas-china', 'geography-study', '地理小课堂'),
             ('geography-atlas-china', 'geography-atlas-china-3d', '3D 中国地图'),
+            ('geography-atlas-world', 'geography-atlas-world-3d', '3D 世界地图'),
             ('geography-atlas-china', 'geography-atlas-animals', '中国动物地图'),
             ('geography-atlas-world', 'geography-atlas-world-animals', '世界动物地图'),
             ('geography-atlas-china', 'geography-atlas-plants', '中国植物地图'),

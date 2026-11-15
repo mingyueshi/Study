@@ -13,6 +13,7 @@
 | `world-animals.html?animal=emperor-penguin` | 在世界地图上认识七大洲和多片海域的 30 种代表动物，按 7 类栖息地筛选，查看本地照片和关联地点 |
 | `plants.html?plant=ginkgo` | 24 种中国代表植物，按森林、高山、荒漠、湿地、红树林、热带和农田 7 类环境筛选，查看照片、分布、适应方式和观察线索 |
 | `world-plants.html?plant=antarctic-hair-grass` | 24 种世界代表植物，覆盖七大洲，按 7 类生长环境筛选，查看学名和关联国家或地区 |
+| `world-3d.html?place=China` | 可旋转缩放的球面地球仪，点国家读原档案，逐洲定位、经纬网与地标显隐，俯瞰完整南北极；支持 `?continent=antarctica` |
 | `world.html` | 看七大洲、四大洋、177 个国家和地区、10 处世界地标。在「中国与世界」图层找中国，也可以从对照卡直接定位 |
 | `province.html?adcode=110000` | 用同一页查看任意省域站的档案和五条「记一记」。迷你地图高亮本省，点其他省份可换站；省域目录按四大地理区域分组 |
 | `places.html` | 查 291 条地点档案，支持地名、简称、省会、英文名和地点类型，选中结果即打开相应地图 |
@@ -91,3 +92,26 @@ make study-topics-data
 站点数据与出处集中在 `china-river-tour-data.js`，并绑定 `centerlinesSHA256`。锚点用来找附近真实河段，不把城市中心当作水上位置。每条路线保留原河道分段，黄河湖区缺口直接切到下一段，不生成补线。地形档案通过稳定 ID 关联。`china-river-tour.js` 管理河道定位、停站与行进计时，不修改地形数据。
 
 深链接如 `china-3d.html?river=f20&tour=yangtze&stop=yibin`、`china-3d.html?river=f21&tour=yellow&stop=hukou` 可直接打开一站，刷新后保持该站且不自动播放；途中刷新回到最近到达的站点。原有省份、地形与河流深链接继续可用。
+
+## 3D 世界地图
+
+从图谱首页、专题导航和世界地图进入 `world-3d.html`。地球仪复用 `world-geo.js` 的 177 个国家和地区及 `world-data.js` 的七大洲、四大洋和 10 处地标档案，不重复维护正文。支持鼠标或触摸旋转、滚轮或按钮缩放、方向键转动、Home 复位、点选国家、名称和地标定位；不自动旋转，按需绘制，离屏或后台不持续绘制。统一页面沿用右侧栏、左右切换与浏览器记忆。WebGL 不可用或上下文丢失时仍可从列表选择地点、读档案和进入平面图。
+
+`world-3d-data.js` 维护默认视角、七洲定位点和三项观察任务，先由 `test/test-world-3d.js` 校验。地点链接使用原 ID，如 `?place=China`、`?place=o1`、`?place=wf2`，大洲使用 `?continent=africa`；选择后地址自动更新，刷新保留选择，不自动播放。经纬网以 30° 为间隔，金线为赤道，颜色只表示洲别，不模拟海拔、昼夜或季节。
+
+平面底图的南极洲截到南纬 73°，地球仪单独使用 `world-3d-polar.js` 补上完整南极洲，来源同为 [world-atlas / Natural Earth](https://github.com/topojson/world-atlas)，固定版本 2.0.2，记录源文件 SHA-256。`scripts/build-world-3d.py` 只复用原底图生成器的解码函数，不改变平面图和原国家 ID。渲染通过本地 Three.js 的 CanvasTexture 将简化轮廓绘制到球面，经日期变更线的岛屿用连续经度处理。球面坐标、三角面朝向、纹理方向和日期变更线由 `scripts/test_world_3d.cjs` 校验。
+
+```sh
+python3 content_sources/geo-map/scripts/build-world-3d.py <countries-110m.json 路径>
+node content_sources/test/test-world-3d.js
+make study-topics-data
+node --test scripts/test_world_3d.cjs
+```
+
+### 地球仪学习扩展
+
+地图工具新增「地球五带」配色和六条重要线（赤道、南北回归线、南北极圈、本初子午线），各配说明与观察问题。五带采用约 23.5°、66.5° 的教学边界，色带覆盖陆地与海洋，不表示实时气温。点球面显示点击位置的近似经纬度和所属带；从目录定位显示的是参考点，不能用来代表整个国家的纬度范围。
+
+新增「从中国去看海」「从赤道走向两极」「世界地标观察员」三条手动导览，共 15 站，支持前后站、重新定位、结束与 `?tour=latitude-trip&stop=antarctic` 深链接。每站读同一份地点档案；自主选择其他地点或工具视角会结束导览，手动拖动可继续观察本站。学习配色与重点线由 `layer=zones`、`line=equator` 保留。
+
+12 道探索题提供地图观察、重试、提示和解析。答对记录使用稳定题目 ID 保存在本浏览器的 `study_world_globe_mastered_v1`；无法使用存储时保留本次状态。题目、五带、重点线与导览内容在 `world-3d-learning-data.js`，交互在 `world-3d-learning.js`，结构与原地点引用由 `test/test-world-3d.js` 校验；无 WebGL 时仍可阅读导览与答题。搜索支持原地点中文名和英文名，选中的国家在球面优先显示名称。

@@ -201,7 +201,7 @@ SPECIAL_ENTRIES = (
      'blurb': '从火山灰里的脚印出发，读懂人类家谱、远古生活和中国遗址里的线索。'},
     {'route': 'mysteries', 'subject': '科学', 'area': 'science', 'icon': 'mysteries', 'color': 'science',
      'name': '未解之谜研究所', 'tag': '打开案卷 →',
-     'blurb': '27 份案卷，追问 54 个未解问题。看实物、听鲸歌，找出还缺哪条线索。'},
+     'blurb': '30 份案卷，追问 60 个未解问题。寻找外星生命、辨读 UFO 影像，看看还缺哪条线索。'},
     {'route': 'science-rumors', 'subject': '科学', 'area': 'science', 'icon': 'rumors', 'color': 'science',
      'name': '科学流言粉碎机', 'tag': '开始查证 →',
      'blurb': '蝙蝠看不见吗？夏天热是离太阳近吗？翻实拍、看实验，给 24 条说法盖判断章。'},
