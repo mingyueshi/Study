@@ -19,6 +19,10 @@ window.GMChinaTerrainPlay = (() => {
     }
     return output;
   }
+  function lakeLevel(rings, sample, minimum = -Infinity) {
+    const values = lakeTriangles(rings, sample).flat().map(p => p.meters).sort((a,b) => a-b);
+    return values.length ? Math.max(minimum, values[Math.floor((values.length - 1) * .3)]) : null;
+  }
   function create({ root, models, rivers, scene, sample, locate, requestDraw, fullMotion, canAnimate, gain }) {
     const T = window.GMThree, G = window.GMChina3DGeometry, D = window.GM_CHINA_ADVENTURES;
     let selected = '', lifted = true, flat = false, start = null, rise = 1, moving = false, entrancePending = true;
@@ -26,21 +30,48 @@ window.GMChinaTerrainPlay = (() => {
     const snow = new T.Color('#f4fcff');
     const originals = new Map([...models].map(([id, m]) => [id, m.geometry.top.getAttribute('color').array.slice()]));
     const owner = point => locate(point)?.mesh.province || '';
+    const waterOriginals = new Map(), waterBeds = new Map(), levels = {};
     for (const lake of D.lakes) {
+      const level = lakeLevel(lake.rings, sample, window.GM_CHINA_HYDROLOGY?.lakeFloorMeters ?? 0); if (level === null) continue;
+      levels[lake.feature] = Math.round(level);
       const buckets = new Map();
-      for (const triangle of lakeTriangles(lake.rings, sample)) {
-        const id = owner(triangle[0].point);
-        if (!buckets.has(id)) buckets.set(id, []);
-        buckets.get(id).push(...triangle.flatMap(p => [...G.xy(p.point), (p.meters + 5) / G.metersPerUnit]));
+      const record = window.GM_CHINA_HYDROLOGY_GEO?.lakes[lake.feature];
+      if (record) {
+        for (const patch of record.patches) buckets.set(patch.province, patch.triangles.flatMap(t => t.flatMap(p => [...G.xy(p), (level + 3) / G.metersPerUnit])));
+        for (const [id, mask] of Object.entries(record.bedMasks)) {
+          const model = models.get(id); if (!model) continue;
+          if (!waterOriginals.has(id)) {
+            const positions = model.geometry.top.getAttribute('position').array;
+            waterOriginals.set(id, positions.slice()); waterBeds.set(id, positions.slice());
+          }
+          const bed = waterBeds.get(id);
+          for (const index of window.GMChinaHydrology.maskIndices(mask, model.geometry.indices)) bed[index * 3 + 2] = Math.min(bed[index * 3 + 2], (level - 25) / G.metersPerUnit);
+        }
+      } else for (const triangle of lakeTriangles(lake.rings, sample)) {
+        const id = owner(triangle[0].point); if (!buckets.has(id)) buckets.set(id, []);
+        buckets.get(id).push(...triangle.flatMap(p => [...G.xy(p.point), (level + 3) / G.metersPerUnit]));
       }
       for (const [id, positions] of buckets) {
         const geo = new T.BufferGeometry(); geo.setAttribute('position', new T.Float32BufferAttribute(positions, 3)); geo.computeVertexNormals();
-        const mesh = new T.Mesh(geo, new T.MeshLambertMaterial({ color: '#278ec3', polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -2 }));
+        const mesh = new T.Mesh(geo, new T.MeshLambertMaterial({ color: '#269cc8', emissive: '#073044', transparent: true, opacity: .82, depthWrite: false, polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -2 }));
         mesh.userData.province = id; mesh.userData.feature = lake.feature; lakeGroup.add(mesh);
       }
     }
     root.dataset.lakeCount = String(D.lakes.length);
-    root.querySelector('#gm3-lake-note').innerHTML = window.GMShared.esc(D.lakeNote) + ` <a href="${D.lakeSource.url}" target="_blank" rel="noopener">${window.GMShared.esc(D.lakeSource.label)}（需联网）↗</a>`;
+    root.dataset.lakeSurface = 'level'; root.dataset.lakeLevels = JSON.stringify(levels);
+    root.querySelector('#gm3-lake-note').innerHTML = window.GMShared.esc(window.GM_CHINA_HYDROLOGY?.lakeNote || D.lakeNote) + ` <a href="${D.lakeSource.url}" target="_blank" rel="noopener">${window.GMShared.esc(D.lakeSource.label)}（需联网）↗</a>`;
+    function applyWater(on) {
+      lakeGroup.visible = on;
+      for (const [id, original] of waterOriginals) {
+        const geo = models.get(id).geometry.top;
+        // 只替换显示顶点。原始 positions、elevations 与采样器保留原始高程。
+        let positions = geo.getAttribute('position');
+        if (positions.array === models.get(id).geometry.positions) { positions = new T.BufferAttribute(original.slice(), 3); geo.setAttribute('position', positions); }
+        positions.array.set(on ? waterBeds.get(id) : original); positions.needsUpdate = true; geo.computeVertexNormals(); geo.computeBoundingSphere();
+      }
+      root.dataset.lakesVisible = String(on); requestDraw();
+    }
+    applyWater(true);
     root.querySelector('#gm3-snow-note').textContent = D.snowNote;
     const offset = id => (models.get(id)?.group.position.z || G.datum) - G.datum;
     function tick(now) {
@@ -69,9 +100,9 @@ window.GMChinaTerrainPlay = (() => {
       root.dataset.rise = rise.toFixed(3); root.dataset.lifted = selected && lifted && !flat ? selected : '';
       if (moving) requestDraw();
     }
-    function settle() { start = null; rise = 1; moving = false; tick(performance.now()); }
+    function settle(stopEntrance = false) { if (stopEntrance) entrancePending = false; start = null; rise = 1; moving = false; tick(performance.now()); }
     root.querySelector('#gm3-lift').addEventListener('click', e => { lifted = !lifted; e.currentTarget.setAttribute('aria-pressed', String(lifted)); requestDraw(); });
-    root.querySelector('#gm3-lakes').addEventListener('click', e => { lakeGroup.visible = !lakeGroup.visible; e.currentTarget.setAttribute('aria-pressed', String(lakeGroup.visible)); requestDraw(); });
+    root.querySelector('#gm3-lakes').addEventListener('click', e => { applyWater(!lakeGroup.visible); e.currentTarget.setAttribute('aria-pressed', String(lakeGroup.visible)); });
     root.querySelector('#gm3-snow').addEventListener('click', e => {
       const on = e.currentTarget.getAttribute('aria-pressed') !== 'true'; e.currentTarget.setAttribute('aria-pressed', String(on));
       for (const [id, model] of models) {
@@ -89,5 +120,5 @@ window.GMChinaTerrainPlay = (() => {
       flatten(on) { if (flat === on) return; flat = on; if (on) { entrancePending = false; start = null; rise = 1; for (const m of models.values()) m.group.position.z = G.datum; } requestDraw(); },
     };
   }
-  return { inside, lakeTriangles, create };
+  return { inside, lakeTriangles, lakeLevel, create };
 })();

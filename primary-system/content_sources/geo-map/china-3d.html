@@ -23,6 +23,12 @@
   <script src="china-river-tour.js" defer></script>
   <script src="china-terrain-section.js" defer></script>
   <script src="china-adventures-data.js" defer></script>
+  <script src="china-hydrology-data.js" defer></script>
+  <script src="china-hydrology-geo.js" defer></script>
+  <script src="china-hydrology.js" defer></script>
+  <script src="china-learning-data.js" defer></script>
+  <script src="china-learning.js" defer></script>
+  <script src="china-learning-visual.js" defer></script>
   <script src="china-adventures.js" defer></script>
   <script src="china-terrain-play.js" defer></script>
   <script src="china-3d.js" defer></script>
@@ -81,6 +87,7 @@
             <button type="button" data-color="region" aria-pressed="false">区域配色</button>
           </div>
           <label class="gm3-height-control" for="gm3-height"><span>高度放大 <output id="gm3-height-output" for="gm3-height">50×</output></span><input id="gm3-height" type="range" min="1" max="80" step="1" value="50"><small>1× 近似原比例 · 海拔数值不变</small></label>
+          <div class="gm3-presets"><button type="button" id="gm3-true-height">看 1× 原比例</button><button type="button" id="gm3-height-50">放大到 50×</button><button type="button" id="gm3-compare" aria-pressed="false">1×／50× 左右对照</button></div>
         </div>
         <div class="gm3-toolbar" role="group" aria-label="调整地图视角">
           <div class="gm3-presets">
@@ -106,7 +113,7 @@
         </div>
         <div class="gm3-play-tools" role="group" aria-label="地图彩蛋">
           <button type="button" id="gm3-lift" aria-pressed="true">🧩 省份抬起</button>
-          <button type="button" id="gm3-lakes" aria-pressed="true">💧 湖泊贴地</button>
+          <button type="button" id="gm3-lakes" aria-pressed="true">💧 立体湖面</button>
           <button type="button" id="gm3-snow" aria-pressed="false">❄ 雪线观察</button>
           <button type="button" id="gm3-stand">✨ 地图站起来</button>
         </div>
@@ -142,11 +149,14 @@
         </section>
         <div class="gm3-viewport" id="gm3-viewport">
           <p id="gm3-game-map-clue" class="gm3-game-map-clue" hidden></p>
+          <div id="gm3-learn-hud" class="gm3-game-map-clue gm3-learn-hud" hidden><p id="gm3-learn-map-clue"></p><div id="gm3-step-inline" class="gm3-play-tools" role="group" aria-label="在地图上选择阶梯" hidden></div><a id="gm3-learn-back" href="#gm3-learning-lab">提示与说明 ↓</a></div>
+          <div id="gm3-compare-captions" class="gm3-compare-captions" hidden><strong>1× · 不放大高度</strong><strong>50× · 放大高低差</strong></div>
           <canvas id="gm3-canvas" tabindex="0" role="img" aria-label="可旋转的中国真实高程地形图，包含主要河流和地形名称，点选地形读取采样海拔" aria-describedby="gm3-help">浏览器无法显示立体画布时，可用省份列表或山河目录阅读档案，或打开平面地图。</canvas>
           <svg class="gm3-flow-layer" id="gm3-flow-layer" aria-hidden="true"></svg>
           <svg id="gm3-game-marker" class="gm3-section-layer" aria-hidden="true"></svg>
           <svg class="gm3-section-layer" id="gm3-section-layer" aria-hidden="true"></svg>
           <div class="gm3-label-layer" id="gm3-label-layer" role="group" aria-label="地图省名，点击查看省份"></div>
+          <div class="gm3-pin-labels" id="gm3-pin-labels" role="group" aria-label="海拔柱读数与移除"></div>
           <div class="gm3-stamp" aria-hidden="true"><b>山 · 河 · 大地</b><span>真实高程采样<br>高度放大 <span id="gm3-stamp-height">50×</span></span></div>
           <svg class="gm3-compass" viewBox="0 0 80 85" role="img" aria-label="随地图转动的指北针"><g id="gm3-north" transform="translate(40 43)"><path d="M0 -24L-9 12L0 6L9 12Z"/><text x="0" y="-30" text-anchor="middle">北</text></g></svg>
           <svg class="gm3-inset" id="gm3-inset" viewBox="1010 540 150 190" role="img" aria-label="南海诸岛与十段线示意，始终朝北"></svg>
@@ -167,6 +177,25 @@
           <p class="gm3-tour-note" id="gm3-tour-note"></p>
         </section>
         <div class="gm3-map-footer"><p id="gm3-help">拖动旋转 · 滚轮缩放 · 点省名看档案 · 点地形读海拔<br><small>键盘：方向键转动，＋／− 缩放，Home 复位。</small></p><div><span id="gm3-selection" role="status">等你点亮一个省份</span><p id="gm3-elevation" aria-live="polite">在地形上点一下，读出该处网格海拔。</p></div></div>
+        <section class="gm3-pin-tools" aria-label="海拔柱与倍率观察"><div class="gm3-play-tools"><button type="button" id="gm3-pin-add" disabled>📌 钉住刚才的海拔</button><button type="button" id="gm3-pin-clear" disabled>清除海拔柱</button><span id="gm3-pin-count">已钉 0／6 根</span></div><p id="gm3-pin-last" role="status">先在地形上点一个位置。</p><ul id="gm3-pin-list"></ul><p id="gm3-pin-note" class="gm3-hydro-note"></p><p id="gm3-compare-note" class="gm3-hydro-note"></p></section>
+        <section class="gm3-hydrology" aria-labelledby="gm3-hydro-title">
+          <div class="gm3-hydro-heading"><div><span class="gm3-kicker">河流的集水大地图</span><h2 id="gm3-hydro-title">一滴雨，汇向哪里？</h2></div><div class="gm3-water-legend" id="gm3-water-legend" aria-label="水系颜色图例"></div></div>
+          <p id="gm3-hydro-intro"></p>
+          <div class="gm3-play-tools"><label for="gm3-basin">选择水系 <select id="gm3-basin"></select></label><button type="button" id="gm3-basins" aria-pressed="false">显示流域范围</button><button type="button" id="gm3-tributaries" aria-pressed="true">显示支流</button></div>
+          <div class="gm3-basin-card"><strong id="gm3-basin-area"></strong><p id="gm3-basin-scope"></p><p id="gm3-basin-text"></p><p id="gm3-basin-observe"></p><a id="gm3-basin-source" target="_blank" rel="noopener">面积与资料出处（需联网）↗</a></div>
+          <p class="gm3-hydro-note" id="gm3-basin-note"></p>
+          <h3>顺着支流找干流</h3><div id="gm3-tributary-list" class="gm3-play-tools" role="group" aria-label="选择代表支流"></div><p id="gm3-tributary-empty" hidden>这条人工水路不按天然支流树编排。</p><p class="gm3-hydro-note" id="gm3-tributary-note"></p>
+          <h3>把入海口放大看</h3><div class="gm3-play-tools" id="gm3-estuaries" role="group" aria-label="入海口快捷视角"></div><div class="gm3-play-tools"><button type="button" id="gm3-estuary-overview">回到这条河的全貌</button></div>
+          <article id="gm3-hydro-detail" class="gm3-hydro-detail" aria-live="polite" hidden></article>
+        </section>
+        <section class="gm3-learning-lab" id="gm3-learning-lab" aria-labelledby="gm3-learning-title">
+          <div class="gm3-hydro-heading"><div><span class="gm3-kicker">不只看地图，还要会观察</span><h2 id="gm3-learning-title">地图小研究员</h2></div><strong id="gm3-learn-progress" role="status"></strong></div>
+          <div class="gm3-play-tools" role="group" aria-label="地图教学玩法"><button type="button" data-learning-mode="browse" aria-pressed="true">自由观察</button><button type="button" data-learning-mode="steps" aria-pressed="false">💡 三级阶梯挑战</button><button type="button" data-learning-mode="puzzle" aria-pressed="false">🧩 长江水系拼图</button><button type="button" data-learning-mode="questions" aria-pressed="false">🔎 省界与山河观察题</button></div>
+          <div id="gm3-step-panel" hidden><h3>三个阶梯，各找一处</h3><div id="gm3-step-lights" class="gm3-play-tools" role="group" aria-label="选择要找的阶梯"></div><p id="gm3-step-goal"></p><p id="gm3-step-feedback" class="gm3-learning-feedback" role="status">选一个阶梯，再到地图上点位置。</p><div class="gm3-play-tools"><button type="button" id="gm3-step-hint">给我一个方向</button><button type="button" id="gm3-step-reveal">看参考位置</button><button type="button" id="gm3-step-retry">重新挑战这一阶</button></div><details><summary>也可以填经纬度作答</summary><form id="gm3-step-coordinates"><label>东经 <input id="gm3-step-lon" type="number" min="73" max="136" step="any" required> °</label><label>北纬 <input id="gm3-step-lat" type="number" min="18" max="54" step="any" required> °</label><button type="submit">提交位置</button></form></details><p id="gm3-step-note" class="gm3-hydro-note"></p></div>
+          <div id="gm3-puzzle-panel" hidden><h3>把支流拼回长江水系</h3><p id="gm3-puzzle-count" role="status"></p><svg id="gm3-puzzle-board" viewBox="0 0 980 620" role="img" aria-label="长江水系拼图板，拖动待拼区支流到对应虚线位置，也可使用下方按钮"></svg><p>不用拖动也可以：先选一条支流，再选地图上的位置字母。</p><div id="gm3-puzzle-choice" class="gm3-play-tools" role="group" aria-label="选择待拼支流"></div><div id="gm3-puzzle-slots" class="gm3-play-tools" role="group" aria-label="选择拼图位置"></div><p id="gm3-puzzle-feedback" class="gm3-learning-feedback" role="status">比较形状和方向，把四条支流接好。</p><div class="gm3-play-tools"><button type="button" id="gm3-puzzle-reveal">看参考位置</button><button type="button" id="gm3-puzzle-restart">重新拼</button><button type="button" id="gm3-puzzle-map">回主图看完整水系 ↑</button></div><p id="gm3-puzzle-note" class="gm3-hydro-note"></p></div>
+          <div id="gm3-relation-panel" hidden><div id="gm3-relation-list" class="gm3-play-tools" role="group" aria-label="选择山河关系观察题"></div><h3 id="gm3-relation-title"></h3><p id="gm3-relation-prompt"></p><div id="gm3-relation-options" class="gm3-play-tools" role="group" aria-label="选择解释"></div><ol id="gm3-relation-hints"></ol><p id="gm3-relation-feedback" class="gm3-learning-feedback" role="status">先观察地图，再选一个解释。</p><div class="gm3-play-tools"><button type="button" id="gm3-relation-hint">给我一个提示</button><button type="button" id="gm3-relation-reveal">揭示答案</button><button type="button" id="gm3-relation-retry">重新观察作答</button></div><div id="gm3-relation-sources" class="gm3-hydro-note"></div></div>
+          <p id="gm3-learn-storage" class="gm3-hydro-note">记录保存在当前浏览器；查看参考位置或答案不计入独立完成。</p>
+        </section>
       </section>
       <ul class="gm3-legend" id="gm3-legend" aria-label="海拔与地形配色图例"></ul>
       <p class="gm3-region-note" id="gm3-region-note"></p>

@@ -2,6 +2,7 @@
 export {
   Scene, Color, Group, Vector2, Vector3, Shape, Path, ExtrudeGeometry,
   BufferGeometry, BufferAttribute, Float32BufferAttribute, LineBasicMaterial, LineLoop, LineSegments, Mesh, MeshLambertMaterial,
+  MeshBasicMaterial, ShaderMaterial, BackSide, AdditiveBlending,
   OrthographicCamera, WebGLRenderer, AmbientLight, DirectionalLight, Raycaster,
   GridHelper, CanvasTexture, SRGBColorSpace,
 } from 'three';

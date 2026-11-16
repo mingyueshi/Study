@@ -31,6 +31,17 @@
 .gw-switches { display: flex; flex-wrap: wrap; align-items: center; gap: 18px; font-size: 16px; }
 .gw-switches label { display: flex; gap: 7px; align-items: center; min-height: 44px; cursor: pointer; }
 .gw-switches input { width: 18px; height: 18px; accent-color: #17677c; }
+.gw-visual-tools { display: grid; gap: 12px; padding: 18px 20px; border-top: 1px solid var(--atlas-border); background: var(--atlas-tint); }
+.gw-visual-tools .gw-buttons { align-items: center; gap: 14px; }
+.gw-visual-tools p, .gw-visual-tools details { margin: 0; font-size: 16px; line-height: 1.8; color: var(--ink-soft); }
+.gw-visual-tools summary { cursor: pointer; color: var(--ink); font-weight: 750; }
+.gw-visual-tools details p { margin-top: 10px; }
+#gw-visual-sources { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-top: 10px; }
+#gw-visual-sources a { color: var(--ink); text-underline-offset: .2em; }
+.gw-sun-direction { position: absolute; transform: translateX(-50%); padding: 7px 12px; border: 1px solid #efb966; border-radius: 20px; background: #fff1cdeb; color: #754014; font-size: 15px; font-weight: 800; white-space: nowrap; pointer-events: none; }
+.gw-sun-direction[hidden] { display: none; }
+.world-3d-topic[data-lighting="daylight"] .gw-viewport { background: radial-gradient(ellipse at 45% 45%, #203b59, #09162c 80%); }
+.world-3d-topic[data-lighting="daylight"] :is(.gw-stamp, .gw-stamp b, .gw-north) { color: #bedeea; }
 .gw-continents { display: flex; flex-wrap: wrap; gap: 9px; padding: 18px 0 10px; }
 .gw-continents button { border-bottom: 5px solid var(--continent-color); }
 .gw-continents button[aria-pressed="true"] { background: var(--continent-color); color: #233531; border-color: #445e63; }

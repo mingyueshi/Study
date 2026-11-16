@@ -111,12 +111,8 @@ def template(source, topic, page, theme, index_route):
             asset_url += '?v=20261114b9' if topic == 'geo' else '?v=20261114b7'
         if topic == 'geo' and (path.startswith('../sci-process') or path in ('earth-data.js', 'earth.js')):
             asset_url += '?v=20261114b9'
-        if topic == 'geo-map' and page == 'china-3d' and path in (
-                'china-3d.js', 'china-3d.css', 'china-3d-data.js', 'china-3d-geometry.js',
-                'china-river-tour.js', 'china-adventures-data.js', 'china-adventures.js', 'china-terrain-play.js'):
-            asset_url += '?v=' + sha256((SOURCE / topic / path).read_bytes()).hexdigest()[:12]
-        if topic == 'geo-map' and page == 'world-3d' and path.endswith(('.css', '.js')):
-            asset_url += '?v=' + sha256((SOURCE / topic / path).read_bytes()).hexdigest()[:12]
+        if topic == 'geo-map' and page in ('china-3d', 'world-3d') and path.endswith(('.css', '.js')):
+            asset_url += '?v=' + sha256(resource_content(SOURCE / topic / path, topic, theme)).hexdigest()[:12]
         if path.endswith('.css'):
             assets.append(f'<link rel="stylesheet" href="{asset_url}">')
         else:
@@ -311,21 +307,26 @@ def outputs():
         for path in resources:
             if path.name == 'platform-theme.css':
                 continue
-            content = path.read_bytes()
-            if path.name == 'styles.css' and theme:
-                content = scope_styles(content.decode('utf-8'), theme).encode('utf-8')
-            media_item = MEDIA_RENDERERS.get((topic, path.name))
-            if media_item:
-                content = resolve_media_from_script(content.decode('utf-8'), media_item).encode('utf-8')
-            hooks = SCRIPT_HOOKS.get((topic, path.name))
-            if hooks:
-                script = content.decode('utf-8')
-                for original, replacement in hooks:
-                    script = replace_once(script, original, replacement)
-                content = script.encode('utf-8')
-            yield STATIC / topic / path.relative_to(source_dir), content
+            yield STATIC / topic / path.relative_to(source_dir), resource_content(path, topic, theme)
     yield from course_outputs()
     yield PROJECT / 'mathbook' / 'data' / 'geometry-lab.json', geometry_lab_data()
+
+
+def resource_content(path, topic, theme):
+    """指纹与发布资源共用转换，避免把源样式的哈希误当成最终文件哈希。"""
+    content = path.read_bytes()
+    if path.name == 'styles.css' and theme:
+        content = scope_styles(content.decode('utf-8'), theme).encode('utf-8')
+    media_item = MEDIA_RENDERERS.get((topic, path.name))
+    if media_item:
+        content = resolve_media_from_script(content.decode('utf-8'), media_item).encode('utf-8')
+    hooks = SCRIPT_HOOKS.get((topic, path.name))
+    if hooks:
+        script = content.decode('utf-8')
+        for original, replacement in hooks:
+            script = replace_once(script, original, replacement)
+        content = script.encode('utf-8')
+    return content
 
 
 def main():

@@ -157,6 +157,8 @@ test: ## 跑全量测试（需先 install）
 	$(MANAGE) test
 
 test-frontend: ## 跑 Node 前端回归测试
+	node --test scripts/test_china_learning.cjs
+	node --test scripts/test_china_hydrology.cjs
 	node --test scripts/test_phonetics_practice.cjs
 	node --test scripts/test_body_process.cjs scripts/test_animals_learning.cjs scripts/test_frontend.cjs scripts/test_feihualing_frontend.cjs scripts/test_classical_frontend.cjs scripts/test_study_effects.cjs scripts/test_topic_motion.cjs scripts/test_sci_motion.cjs scripts/test_astro_observation.cjs scripts/test_sci_process.cjs scripts/test_sci_experiments.cjs scripts/test_legacy_motion.cjs scripts/test_geo_earth.cjs scripts/test_china_3d.cjs scripts/test_china_river_flow.cjs scripts/test_china_river_tour.cjs scripts/test_china_terrain_section.cjs scripts/test_china_adventures.cjs scripts/test_world_3d.cjs scripts/test_world_expeditions.cjs scripts/test_rumors_learning.cjs scripts/test_mysteries_notebook.cjs
 

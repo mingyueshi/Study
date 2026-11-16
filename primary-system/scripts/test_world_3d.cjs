@@ -6,9 +6,38 @@ const vm = require('node:vm');
 const base = path.join(__dirname, '../static/study_topics/geo-map');
 const context = vm.createContext({console, AbortController, URLSearchParams});
 context.window = context;
-for (const file of ['assets/vendor/three-map.js', 'world-geo.js', 'world-3d-geometry.js', 'world-3d-learning-data.js', 'world-3d-learning.js', 'world-3d-tools-data.js', 'world-3d-tools.js', 'world-3d-sun-data.js', 'world-3d-sun.js', 'world-3d-detective-data.js', 'world-3d-detective.js']) vm.runInContext(fs.readFileSync(path.join(base, file), 'utf8'), context);
+for (const file of ['assets/vendor/three-map.js', 'world-geo.js', 'world-3d-geometry.js', 'world-3d-learning-data.js', 'world-3d-learning.js', 'world-3d-tools-data.js', 'world-3d-tools.js', 'world-3d-sun-data.js', 'world-3d-sun.js', 'world-3d-detective-data.js', 'world-3d-detective.js', 'world-3d-visual-data.js', 'world-3d-visual.js']) vm.runInContext(fs.readFileSync(path.join(base, file), 'utf8'), context);
 const G = context.GMWorld3DGeometry;
 const S = context.GMWorldSun;
+test('地形采样保持南北方向、双线性插值和经度接缝，起伏有界且符号正确', () => {
+  const pixels = new Uint8Array([0,0,0,255, 100,0,0,255, 0,0,0,255, 200,0,0,255, 255,0,0,255, 200,0,0,255]);
+  const V = context.GMWorldVisual, sample = V.sampler(pixels, 3, 2, 0, 255);
+  assert.equal(sample([-180,90]), 0); assert.equal(sample([0,-90]), 255); assert.equal(sample([-90,0]), 138.75);
+  for (const lat of [-90,0,90]) assert.equal(sample([-180,lat]), sample([180,lat]));
+  for (const height of [-12000,-8000,-100,0,100,5500,10000]) {
+    const value = V.offset(height, .02); assert.ok(Math.abs(value) <= .02); assert.equal(Math.sign(value), Math.sign(height));
+  }
+  for (const name of ['ShaderMaterial','MeshBasicMaterial']) assert.equal(typeof context.GMThree[name], 'function');
+});
+test('慢速自转只有一个循环，暂停、失效帧与离屏不跳转，恢复需手动播放', () => {
+  const V = context.GMWorldVisual, frames = new Map(); let id = 0, available = true, seconds = 0;
+  const spin = V.createRotation({request: fn => { frames.set(++id, fn); return id; }, cancel: key => frames.delete(key), available: () => available, advance: dt => { seconds += dt; }, changed() {}});
+  const tick = time => { const callbacks = [...frames.values()]; frames.clear(); callbacks.forEach(fn => fn(time)); };
+  spin.play(); spin.play(); assert.equal(frames.size, 1); tick(0); tick(50); assert.equal(seconds, .05);
+  const stale = [...frames.values()][0]; spin.pause(); spin.play(); stale(100); assert.equal(frames.size, 1);
+  tick(5000); assert.equal(seconds, .05); tick(10000); assert.ok(Math.abs(seconds - .15) < 1e-12);
+  available = false; spin.refresh(); assert.equal(spin.running(), false); assert.equal(frames.size, 0);
+  available = true; spin.refresh(); assert.equal(spin.running(), false);
+});
+test('昼夜慢转时太阳和镜头同步绕轴，朝外太阳与直射点同向', () => {
+  const T = context.GMThree, camera = new T.OrthographicCamera(-2,2,1.3,-1.3,.1,30);
+  camera.position.set(...G.xyz([110,25],5)); camera.lookAt(0,0,0); camera.updateMatrixWorld();
+  const initial = S.model([110,25],8,23.5).sunPoint;
+  const before = new T.Vector3(...G.xyz(initial,2.3)).project(camera);
+  camera.position.set(...G.xyz([110-3,25],5)); camera.lookAt(0,0,0); camera.updateMatrixWorld();
+  const after = new T.Vector3(...G.xyz(S.model([110,25],8+1/5,23.5).sunPoint,2.3)).project(camera);
+  assert.ok(before.distanceTo(after) < 1e-8);
+});
 test('地理侦探区分猜错、海洋和找到，重复提交不会重复累计', () => {
   const missions = context.GM_WORLD_DETECTIVE.missions, round = context.GMWorldDetective.createRound(missions);
   assert.equal(round.guess(undefined), 'ocean'); assert.equal(round.guess('Brazil'), 'wrong'); assert.equal(round.state().found.size, 0);

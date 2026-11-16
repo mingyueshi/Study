@@ -1,4 +1,4 @@
-/* 本地球面地球仪：复用世界档案，按需绘制，不持续播放。 */
+/* 本地球面地球仪：复用世界档案，静止时按需绘制，自转由孩子主动开启。 */
 (() => {
   'use strict';
   const root = document.querySelector('.world-3d-topic');
@@ -10,7 +10,7 @@
   const countries = window.GEO_WORLD_GEO?.countries || [];
   const continents = window.GM_CONTINENTS || [], oceans = window.GM_OCEANS || [], features = window.GM_WORLD_FEATURES || [];
   const meta = window.GM_COUNTRY_META || {}, esc = window.GMShared?.esc;
-  if (!D || !G || !L || !esc || !countries.length || !window.GM_WORLD_3D_POLAR) {
+  if (!D || !G || !L || !esc || !countries.length || !window.GM_WORLD_3D_POLAR || !window.GM_WORLD_VISUAL || !window.GMWorldVisual) {
     $('gw-fallback').hidden = false;
     $('gw-status').textContent = '地图资料没有完整加载，请刷新页面，或打开平面世界地图。';
     return;
@@ -22,7 +22,9 @@
   let selected = '', selectedContinent = '', renderer, scene, camera, controls, globe, texture, marker, frame = 0, visible = true, lost = false, disposed = false;
   let layer = 'continent', activeLine = '';
   let addons, toolbox, toolOverlay, referencePoint = D.home;
-  let sunLab, ambient, sunlight, sunRing, sunSpot;
+  let sunLab, ambient, sunlight, sunRing, sunSpot, visuals, rotation, sunModel;
+  let overlayState = {points: [], route: null}, markerPoint;
+  const surface = (point, clearance = 0) => visuals ? visuals.radius(point, clearance) : 1 + clearance;
   let detectiveCountry = '';
   const canvas = $('gw-canvas'), viewport = $('gw-viewport'), profile = $('gw-profile'), picker = $('gw-place');
   const paths = new Map(), tex = document.createElement('canvas');
@@ -65,6 +67,15 @@
       }
       ctx.globalAlpha = 1;
       for (const path of paths.values()) { ctx.strokeStyle = '#365b6080'; ctx.lineWidth = 1.4; ctx.stroke(path); }
+    }
+    if ($('gw-ice').checked) for (const cap of window.GM_WORLD_VISUAL.iceCaps) {
+      const gradient = ctx.createLinearGradient(0, 0, 0, tex.height);
+      gradient.addColorStop(0, '#f1fcffed'); gradient.addColorStop(.5, '#b8dfedda'); gradient.addColorStop(1, '#f5fdfff2');
+      ctx.save(); ctx.clip(paths.get(cap.country), 'evenodd'); ctx.fillStyle = gradient;
+      if (cap.ring) {
+        ctx.beginPath(); cap.ring.forEach((p, i) => { const [x, y] = px(p); if (i) ctx.lineTo(x, y); else ctx.moveTo(x, y); }); ctx.closePath(); ctx.fill();
+      } else ctx.fillRect(0, 0, tex.width, tex.height);
+      ctx.restore();
     }
     if ($('gw-grid').checked) {
       ctx.beginPath();
@@ -128,6 +139,7 @@
     $('gw-continents').querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.continent === selectedContinent)));
   }
   function focus(point, title) {
+    rotation?.pause();
     $('gw-view-label').textContent = title;
     $('gw-views').querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', 'false'));
     if (!camera || !controls || lost) return;
@@ -144,7 +156,7 @@
     showProfile(id); syncContinents(); paint();
     focus(point, continent?.name || ocean?.name || feature?.name || zh(id));
     $('gw-status').textContent = `已定位${continent?.name || ocean?.name || feature?.name || zh(id)}，下方可以阅读档案。`;
-    if (marker) { marker.position.set(...G.xyz(point, 1.012)); marker.visible = !continent; }
+    if (marker) { markerPoint = point; marker.position.set(...G.xyz(point, surface(point, .012))); marker.visible = !continent; }
     readCoordinates(point, '定位参考点');
     if (writeURL) address();
     root.dispatchEvent(new CustomEvent('gm-world-selection', {detail: {id, origin}}));
@@ -209,6 +221,7 @@
     if (observe) { choose(D.observations[Number(observe.dataset.observe)].place); viewport.scrollIntoView({block: 'center'}); }
   });
   $('gw-grid').addEventListener('change', paint);
+  $('gw-ice').addEventListener('change', paint);
   $('gw-names').addEventListener('change', requestRender);
   $('gw-features').addEventListener('change', () => { paint(); requestRender(); });
 
@@ -237,7 +250,7 @@
       const point = new T.Vector3(...G.xyz(label.point));
       const isVisible = !['life','outline'].includes(root.dataset.tool) && !lost && $('gw-names').checked && (label.kind !== 'feature' || $('gw-features').checked) && point.dot(facing) > .19;
       if (!isVisible) { button.hidden = true; continue; }
-      point.multiplyScalar(1.015).project(camera);
+      point.multiplyScalar(surface(label.point, .025)).project(camera);
       const x = (point.x + 1) / 2 * width, y = (1 - point.y) / 2 * height;
       button.hidden = false;
       const w = button.offsetWidth, h = button.offsetHeight;
@@ -248,7 +261,7 @@
   }
   function requestRender() {
     if (!renderer || lost || disposed || !visible || document.hidden || frame) return;
-    frame = requestAnimationFrame(() => { frame = 0; if (lost || disposed) return; renderer.render(scene, camera); placeLabels(); addons?.life.position(); });
+    frame = requestAnimationFrame(() => { frame = 0; if (lost || disposed || !visible || document.hidden) return; visuals?.update(camera); renderer.render(scene, camera); placeLabels(); addons?.life.position(); });
   }
   function clearOverlay() {
     if (!toolOverlay) return;
@@ -256,17 +269,18 @@
     scene.remove(toolOverlay); toolOverlay = null;
   }
   function overlay(points, route = null) {
+    overlayState = {points, route};
     if (!scene || lost || disposed) return;
     clearOverlay(); toolOverlay = new T.Group();
     for (const {point, color} of points) {
       const dot = new T.Mesh(G.sphere(T, 16, 8), new T.MeshLambertMaterial({color}));
-      dot.scale.setScalar(.019); dot.position.set(...G.xyz(point, 1.015)); toolOverlay.add(dot);
+      dot.scale.setScalar(.019); dot.position.set(...G.xyz(point, surface(point, .015))); toolOverlay.add(dot);
     }
     if (route) {
       const positions = [];
       for (let leg = 1; leg < route.length; leg++) {
         const vertices = G.arc(route[leg-1],route[leg]);
-        for (let i = 1; i < vertices.length; i++) positions.push(...vertices[i - 1].map(v => v * 1.008), ...vertices[i].map(v => v * 1.008));
+        for (let i = 1; i < vertices.length; i++) for (const v of [vertices[i - 1], vertices[i]]) positions.push(...v.map(x => x * surface(G.lonLat({x:v[0], y:v[1], z:v[2]}), .008)));
       }
       const geometry = new T.BufferGeometry(); geometry.setAttribute('position', new T.Float32BufferAttribute(positions, 3));
       toolOverlay.add(new T.LineSegments(geometry, new T.LineBasicMaterial({color: '#903d16'})));
@@ -276,7 +290,9 @@
     requestRender();
   }
   function illuminate(model) {
+    sunModel = model;
     if (!scene || lost || disposed) return;
+    visuals?.illuminate(model);
     if (!model) {
       if (sunlight.parent !== camera) camera.add(sunlight);
       sunlight.position.set(-3, 4, 5); sunlight.intensity = 2.4; ambient.intensity = 1.15;
@@ -291,20 +307,24 @@
         sunSpot.scale.setScalar(.018); scene.add(sunSpot);
       }
       const circle = window.GMWorldSun.terminator(model.sunPoint), segments = sunRing.geometry.getAttribute('instanceStart').data;
-      circle.forEach((p, i) => { segments.array.set(p.map(v => v * 1.008), i * 6); segments.array.set(circle[(i + 1) % circle.length].map(v => v * 1.008), i * 6 + 3); });
+      const lift = p => p.map(v => v * surface(G.lonLat({x:p[0], y:p[1], z:p[2]}), .008));
+      circle.forEach((p, i) => { segments.array.set(lift(p), i * 6); segments.array.set(lift(circle[(i + 1) % circle.length]), i * 6 + 3); });
       segments.needsUpdate = true; sunRing.geometry.computeBoundingBox(); sunRing.geometry.computeBoundingSphere(); sunRing.visible = true;
-      sunSpot.position.set(...G.xyz(model.sunPoint, 1.02)); sunSpot.visible = true;
+      sunSpot.position.set(...G.xyz(model.sunPoint, surface(model.sunPoint, .02))); sunSpot.visible = true;
     }
     requestRender();
   }
   function fallback(message) {
     lost = true; root.dataset.renderer = 'fallback';
+    rotation?.pause();
     if (frame) cancelAnimationFrame(frame); frame = 0;
     canvas.hidden = true; $('gw-fallback').hidden = false;
     $('gw-fallback').firstChild.textContent = message + '仍可从「想去哪里」选择地点阅读档案，或';
     for (const {button} of labelNodes) button.hidden = true;
     selectedLabel.hidden = true;
     for (const button of root.querySelectorAll('.gw-toolbar button')) button.disabled = true;
+    for (const control of root.querySelectorAll('.gw-visual-tools input, #gw-rotate')) control.disabled = true;
+    $('gw-sun-direction').hidden = true;
     root.dispatchEvent(new CustomEvent('gm-world-renderer-change'));
   }
   function resize() {
@@ -315,6 +335,7 @@
     renderer.setSize(width, height, false); requestRender();
   }
   function zoom(gain) {
+    rotation?.pause();
     if (!camera || lost) return;
     camera.zoom = Math.max(.8, Math.min(3.2, camera.zoom * gain)); camera.updateProjectionMatrix(); controls.update(); requestRender();
   }
@@ -330,11 +351,18 @@
     ambient = new T.AmbientLight('#ffffff', 1.15); scene.add(ambient);
     sunlight = new T.DirectionalLight('#fff9e4', 2.4); camera.add(sunlight); sunlight.position.set(-3, 4, 5); scene.add(camera);
     texture = new T.CanvasTexture(tex); texture.colorSpace = T.SRGBColorSpace;
-    globe = new T.Mesh(G.sphere(T), new T.MeshLambertMaterial({map: texture})); scene.add(globe);
+    const landMask = document.createElement('canvas'); landMask.width = tex.width; landMask.height = tex.height;
+    const mask = landMask.getContext('2d'); mask.fillStyle = '#fff'; for (const path of paths.values()) mask.fill(path, 'evenodd');
+    visuals = window.GMWorldVisual.create({T, G, scene, texture, landMask, assets: root.dataset.globeAssets, root, render: requestRender, terrainChanged: () => {
+      const markerVisible = marker?.visible;
+      if (marker && markerPoint) marker.position.set(...G.xyz(markerPoint, surface(markerPoint, .018)));
+      overlay(overlayState.points, overlayState.route); if (marker) marker.visible = markerVisible; illuminate(sunModel);
+    }});
+    globe = new T.Mesh(visuals.geometry, visuals.material); scene.add(globe);
     marker = new T.Mesh(G.sphere(T, 16, 8), new T.MeshLambertMaterial({color: '#aa4517'})); marker.scale.setScalar(.013); marker.visible = false; scene.add(marker);
     controls = new T.OrbitControls(camera, canvas); controls.enablePan = false; controls.enableDamping = false; controls.minZoom = .8; controls.maxZoom = 3.2; controls.rotateSpeed = .65;
     controls.addEventListener('change', requestRender);
-    controls.addEventListener('start', () => { root.dispatchEvent(new CustomEvent('gm-world-manual-camera')); $('gw-view-label').textContent = '自由探索'; $('gw-views').querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', 'false')); });
+    controls.addEventListener('start', () => { rotation?.pause(); root.dispatchEvent(new CustomEvent('gm-world-manual-camera')); $('gw-view-label').textContent = '自由探索'; $('gw-views').querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', 'false')); });
     const raycaster = new T.Raycaster(); let pointer;
     canvas.addEventListener('pointerdown', event => {
       pointer = event.isPrimary && event.button === 0 ? {x: event.clientX, y: event.clientY, id: event.pointerId, moved: false} : null;
@@ -367,7 +395,7 @@
     });
     canvas.addEventListener('webglcontextlost', event => { event.preventDefault(); fallback('3D 显示已中断，请刷新页面重试。'); });
     resizeObserver = new ResizeObserver(resize); resizeObserver.observe(viewport);
-    intersectionObserver = new IntersectionObserver(entries => { visible = entries[0].isIntersecting; if (visible) requestRender(); }); intersectionObserver.observe(viewport);
+    intersectionObserver = new IntersectionObserver(entries => { visible = entries[0].isIntersecting; if (rotation) { rotation.refresh(); rotationStatus(rotation.running()); } if (visible) requestRender(); }); intersectionObserver.observe(viewport);
     root.dataset.renderer = 'webgl'; resize();
   } catch (error) {
     fallback('当前浏览器无法显示 3D 地球仪。');
@@ -380,19 +408,42 @@
   }
   fromAddress(); window.addEventListener('popstate', fromAddress);
   sunLab = window.GMWorldSun.mount({root, focus, overlay, illuminate, currentPoint: () => referencePoint, readCoordinates});
+  const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const canRotate = () => !disposed && !lost && visible && !document.hidden && !motion.matches && (!window.StudyEffects || window.StudyEffects.motion === 'full') && root.dataset.renderer === 'webgl';
+  function rotationStatus(running) {
+    if (controls) controls.autoRotate = running;
+    $('gw-rotate').setAttribute('aria-pressed', String(running)); $('gw-rotate').textContent = running ? '⏸ 暂停自转' : '🌍 让地球自己转';
+    $('gw-rotate').disabled = !canRotate();
+    $('gw-rotate-status').textContent = !canRotate() ? '当前已暂停动态效果，可拖动或单步观察。' : running ? '正在慢慢转动' : '已暂停，可随时开始';
+  }
+  rotation = window.GMWorldVisual.createRotation({request: requestAnimationFrame, cancel: cancelAnimationFrame, available: canRotate,
+    advance: seconds => { controls.update(seconds); sunLab.advance(seconds / 5); requestRender(); }, changed: rotationStatus});
+  if (controls) controls.autoRotateSpeed = .5;
+  $('gw-rotate').addEventListener('click', () => {
+    if (rotation.running()) rotation.pause();
+    else { root.dispatchEvent(new CustomEvent('gm-world-free-view', {detail: {origin: 'camera'}})); sunLab.pause(); rotation.play(); }
+  });
+  const refreshRotation = () => { rotation.refresh(); rotationStatus(rotation.running()); };
+  for (const event of ['gm-world-free-view', 'gm-world-manual-camera', 'gm-world-sun-play', 'gm-world-selection']) root.addEventListener(event, rotation.pause);
+  for (const node of [$('gw-tool-panel'), $('gw-sun-inline')]) for (const event of ['pointerdown', 'click', 'input', 'change']) node.addEventListener(event, rotation.pause, true);
+  document.addEventListener('visibilitychange', refreshRotation); document.addEventListener('study:effects-change', refreshRotation); motion.addEventListener('change', refreshRotation);
+  const visualData = window.GM_WORLD_VISUAL;
+  $('gw-visual-note').textContent = visualData.note; $('gw-rotate-note').textContent = visualData.rotationNote; $('gw-visual-sun-note').textContent = visualData.sunNote;
+  $('gw-visual-sources').innerHTML = visualData.sources.map(s => `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.name)} ↗</a>`).join('');
+  rotationStatus(false);
   const detective = window.GMWorldDetective.mount({root, countries, name: zh, choose, overlay,
     highlight: id => { detectiveCountry = id; paint(); },
     locate: id => { const country = countryMap.get(id); if (country) focus(G.center(country), zh(id)); }
   });
   const activate = mode => toolbox?.activate(mode);
   const voyages = window.GMWorldVoyages.mount({root, focus, overlay, activate,
-    ship: point => { if (marker) { marker.visible = Boolean(point); if (point) marker.position.set(...G.xyz(point,1.018)); requestRender(); } }
+    ship: point => { if (marker) { markerPoint = point; marker.visible = Boolean(point); if (point) marker.position.set(...G.xyz(point,surface(point,.018))); requestRender(); } }
   });
   const life = window.GMWorldExplorers.mountLife({root,focus,activate,render:requestRender,
     project: point => {
       if (!camera || lost) return null;
       const v = new T.Vector3(...G.xyz(point)), facing = camera.position.clone().normalize();
-      const front = v.dot(facing) > .18; v.multiplyScalar(1.024).project(camera);
+      const front = v.dot(facing) > .18; v.multiplyScalar(surface(point, .024)).project(camera);
       const x = (v.x+1)/2*viewport.clientWidth, y=(1-v.y)/2*viewport.clientHeight;
       return {x,y,visible:front && x>20 && y>20 && x<viewport.clientWidth-20 && y<viewport.clientHeight-20};
     }
@@ -416,9 +467,11 @@
   voyages.restore(); window.addEventListener('popstate',()=>voyages.restore());
   document.addEventListener('visibilitychange', requestRender);
   window.addEventListener('pagehide', event => {
+    rotation.pause();
     if (frame) cancelAnimationFrame(frame); frame = 0;
     if (event.persisted) return;
     disposed = true; resizeObserver?.disconnect(); intersectionObserver?.disconnect(); controls?.dispose();
+    visuals?.dispose(); motion.removeEventListener('change', refreshRotation); document.removeEventListener('visibilitychange', refreshRotation); document.removeEventListener('study:effects-change', refreshRotation);
     clearOverlay(); globe?.geometry.dispose(); globe?.material.dispose(); marker?.geometry.dispose(); marker?.material.dispose(); texture?.dispose(); renderer?.dispose();
     sunRing?.geometry.dispose(); sunRing?.material.dispose(); sunSpot?.geometry.dispose(); sunSpot?.material.dispose();
   });

@@ -118,7 +118,7 @@ window.GMWorldSun = (() => {
       $('gw-sun-studies').value = ''; $('gw-sun-study-text').textContent = ''; updateSeason();
     });
     $('gw-sun-time').addEventListener('input', () => clock.setHour(Number($('gw-sun-time').value)));
-    $('gw-sun-play').addEventListener('click', () => clock.state().playing ? clock.pause() : clock.play());
+    $('gw-sun-play').addEventListener('click', () => { root.dispatchEvent(new CustomEvent('gm-world-sun-play')); clock.state().playing ? clock.pause() : clock.play(); });
     $('gw-sun-step').addEventListener('click', () => clock.setHour(clock.state().hour + 3));
     $('gw-sun-studies').addEventListener('change', () => showStudy($('gw-sun-studies').value));
     $('gw-sun-current').addEventListener('click', () => pick(currentPoint(), true));
@@ -135,7 +135,7 @@ window.GMWorldSun = (() => {
       document.removeEventListener('visibilitychange', refresh); document.removeEventListener('study:effects-change', refresh);
       root.removeEventListener('gm-world-renderer-change', refresh); window.removeEventListener('pageshow', refresh);
     });
-    return {setActive, pick, showStudy, setUTC: value => clock.setHour(value)};
+    return {setActive, pick, showStudy, pause: () => clock.pause(), advance: hours => { if (active) clock.setHour(clock.state().hour + hours); }, setUTC: value => clock.setHour(value)};
   }
   return {daylight, model, terminator, createClock, mount};
 })();

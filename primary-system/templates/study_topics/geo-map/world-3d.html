@@ -3,22 +3,24 @@
 {# 由 scripts/build_study_topics.py 生成。 #}
 {% block title %}3D 世界地图 · 乐学堂{% endblock %}
 {% block study_assets %}
-<link rel="stylesheet" href="{% static 'study_topics/geo-map/styles.css' %}?v=23bd410053ab">
-<link rel="stylesheet" href="{% static 'study_topics/geo-map/world-3d.css' %}?v=7ecc0bfec531">
+<link rel="stylesheet" href="{% static 'study_topics/geo-map/styles.css' %}?v=bba721fb450c">
+<link rel="stylesheet" href="{% static 'study_topics/geo-map/world-3d.css' %}?v=c420a787eb43">
 <script src="{% static 'study_topics/geo-map/world-geo.js' %}?v=6d109d202301" defer></script>
 <script src="{% static 'study_topics/geo-map/world-data.js' %}?v=9b7765ca7392" defer></script>
 <script src="{% static 'study_topics/geo-map/shared.js' %}?v=d2bebbfd2a0b" defer></script>
-<script src="{% static 'study_topics/geo-map/world-3d-data.js' %}?v=9cbbadeb56d7" defer></script>
+<script src="{% static 'study_topics/geo-map/world-3d-data.js' %}?v=57b54bf8b510" defer></script>
 <script src="{% static 'study_topics/geo-map/world-3d-learning-data.js' %}?v=fdd318196e16" defer></script>
 <script src="{% static 'study_topics/geo-map/world-3d-tools-data.js' %}?v=819889a4e10c" defer></script>
-<script src="{% static 'study_topics/geo-map/world-3d-sun-data.js' %}?v=e5dfa0907632" defer></script>
+<script src="{% static 'study_topics/geo-map/world-3d-sun-data.js' %}?v=1f73fa2bee96" defer></script>
 <script src="{% static 'study_topics/geo-map/world-3d-detective-data.js' %}?v=644ed69bc676" defer></script>
 <script src="{% static 'study_topics/geo-map/world-3d-polar.js' %}?v=1975a4891868" defer></script>
-<script src="{% static 'study_topics/geo-map/assets/vendor/three-map.js' %}?v=b331b0a5a547" defer></script>
+<script src="{% static 'study_topics/geo-map/world-3d-visual-data.js' %}?v=d9bfd6246be4" defer></script>
+<script src="{% static 'study_topics/geo-map/assets/vendor/three-map.js' %}?v=9aacf1bea884" defer></script>
 <script src="{% static 'study_topics/geo-map/world-3d-geometry.js' %}?v=6099f6105632" defer></script>
+<script src="{% static 'study_topics/geo-map/world-3d-visual.js' %}?v=c609306ce03f" defer></script>
 <script src="{% static 'study_topics/geo-map/world-3d-learning.js' %}?v=820c40b2b480" defer></script>
 <script src="{% static 'study_topics/geo-map/world-3d-tools.js' %}?v=53ae6bdbcce0" defer></script>
-<script src="{% static 'study_topics/geo-map/world-3d-sun.js' %}?v=90bed6244f9b" defer></script>
+<script src="{% static 'study_topics/geo-map/world-3d-sun.js' %}?v=77e8adcbcb37" defer></script>
 <script src="{% static 'study_topics/geo-map/world-3d-detective.js' %}?v=5a396a2c5fa4" defer></script>
 <script src="{% static 'study_topics/geo-map/world-animals-data.js' %}?v=73617a56adb1" defer></script>
 <script src="{% static 'study_topics/geo-map/world-plants-data.js' %}?v=a3d602337fae" defer></script>
@@ -29,7 +31,7 @@
 <script src="{% static 'study_topics/geo-map/china-river-tour.js' %}?v=1747f40e4f53" defer></script>
 <script src="{% static 'study_topics/geo-map/world-voyages.js' %}?v=e882b6ef9710" defer></script>
 <script src="{% static 'study_topics/geo-map/world-explorers.js' %}?v=bcc3859ab2b3" defer></script>
-<script src="{% static 'study_topics/geo-map/world-3d.js' %}?v=79a04ecbd27a" defer></script>
+<script src="{% static 'study_topics/geo-map/world-3d.js' %}?v=0bb568f597e1" defer></script>
 {% endblock %}
 {% block study_content %}
 <div class="study-atlas">
@@ -85,6 +87,7 @@
           <canvas id="gw-canvas" tabindex="0" role="img" aria-label="可旋转的 3D 地球仪。拖动旋转，滚轮缩放；方向键转动，＋、− 缩放，Home 复位。也可用想去哪里列表选择地点。" aria-describedby="gw-help"></canvas>
           <div id="gw-life-markers" class="gw-labels" role="group" aria-label="动植物代表地点照片"></div>
           <div class="gw-labels" id="gw-labels" role="group" aria-label="大洲、大洋与地标"></div>
+          <span id="gw-sun-direction" class="gw-sun-direction" hidden></span>
           <div id="gw-tool-readout" class="gw-tool-readout" hidden><strong id="gw-tool-goal"></strong><span id="gw-tool-result"></span><div id="gw-sun-inline" class="gw-buttons" hidden><button type="button" id="gw-sun-play" aria-pressed="false">播放一天</button><button type="button" id="gw-sun-step">前进 3 小时</button></div><div id="gw-detective-inline" class="gw-buttons" hidden><button type="button" id="gw-detective-hint">提示</button><button type="button" id="gw-detective-next">下一条线索</button></div><div id="gw-voyage-inline" class="gw-buttons" hidden><button type="button" id="gw-voyage-toggle">继续航行</button><button type="button" id="gw-voyage-forward">下一站</button></div><a href="#gw-tool-panel">展开工具与作答 ↓</a></div>
           <div class="gw-stamp" aria-hidden="true"><b>地球<br>观察台</b><span>七大洲 · 四大洋</span></div>
           <span class="gw-north" aria-hidden="true">转一转 🌐</span>
@@ -92,6 +95,12 @@
           <p class="gw-fallback" id="gw-fallback" role="status" hidden>当前浏览器无法显示 3D 地球仪。仍可从「想去哪里」选择地点阅读档案，或<a href="world.html#map">打开平面世界地图 →</a></p>
         </div>
         <div class="gw-footer"><p id="gw-help">拖动旋转 · 滚轮缩放 · 点陆地读档案<br><small>键盘：方向键转动，＋／− 缩放，Home 复位。</small></p><div class="gw-switches"><label><input type="checkbox" id="gw-grid" checked> 经纬网</label><label><input type="checkbox" id="gw-names" checked> 名称</label><label><input type="checkbox" id="gw-features"> 世界地标</label></div></div>
+        <div class="gw-visual-tools">
+          <div class="gw-buttons"><button type="button" id="gw-rotate" aria-pressed="false" aria-describedby="gw-rotate-note">🌍 让地球自己转</button><span id="gw-rotate-status" role="status">默认暂停</span></div>
+          <div class="gw-switches"><label><input type="checkbox" id="gw-atmosphere" checked> 大气光晕</label><label><input type="checkbox" id="gw-relief" checked> 起伏地形</label><label><input type="checkbox" id="gw-ice" checked> 极地冰盖</label><label><input type="checkbox" id="gw-lights" checked> 夜间灯光</label></div>
+          <p id="gw-rotate-note"></p><p id="gw-visual-status" role="status">切换「昼夜与四季」，观察太阳和城市灯光。</p>
+          <details><summary>这些效果告诉我们什么？</summary><p id="gw-visual-note"></p><p id="gw-visual-sun-note"></p><div id="gw-visual-sources"></div></details>
+        </div>
         <p id="gw-coordinates" class="gw-coordinates" role="status">点一下地球表面，读读这里的经纬度。</p>
         <section id="gw-tool-panel" class="gw-tool-panel" aria-label="动手探索工具" hidden>
           <div id="gw-measure-panel" hidden>

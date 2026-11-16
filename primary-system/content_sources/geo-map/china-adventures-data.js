@@ -5412,7 +5412,7 @@ window.GM_CHINA_ADVENTURES = {
     "url": "https://www.naturalearthdata.com/downloads/10m-physical-vectors/10m-lakes/",
     "sha256": "2d036f53dedec578001c5c30c2959ee7d4eebc1306900fa4367c49929ec8f2d9"
   },
-  "lakeNote": "蓝色湖面沿地形采样贴合，轮廓来自 Natural Earth，并经网格简化，不表示实时水位、水深或当前岸线。",
+  "lakeNote": "蓝色湖面按 Natural Earth 轮廓绘制，显示高度参考本地地形；平整水面与示意湖盆便于观察，不表示实时水位、水深或当前岸线。",
   "snowMeters": 5000,
   "snowNote": "雪线观察：暂把海拔约 5000 米以上染白，方便找高地。这是统一高度的观察示意；真实雪线随纬度、气候、坡向和季节变化，并不是全国一条线。"
 };

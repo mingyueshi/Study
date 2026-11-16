@@ -1,4 +1,6 @@
 from html.parser import HTMLParser
+from hashlib import sha256
+from pathlib import Path
 
 from django.contrib.staticfiles import finders
 from django.test import SimpleTestCase, TestCase
@@ -41,6 +43,17 @@ class TopicMarkup(HTMLParser):
 
 
 class StudyTopicPageTests(SimpleTestCase):
+    def test_3d_maps_version_local_dependencies_with_their_contents(self):
+        for route in ('geography-atlas-china-3d', 'geography-atlas-world-3d'):
+            page = TopicMarkup(self.client.get(reverse(route)).content.decode())
+            assets = [url for url in page.assets if url.startswith('/static/study_topics/geo-map/')]
+            self.assertTrue(any('assets/vendor/three-map.js?' in url for url in assets))
+            for url in assets:
+                with self.subTest(route=route, asset=url):
+                    asset_path = url.removeprefix('/static/').split('?')[0]
+                    digest = sha256(Path(finders.find(asset_path)).read_bytes()).hexdigest()[:12]
+                    self.assertEqual(url.split('?', 1)[1:], [f'v={digest}'])
+
     def test_science_and_geography_share_local_process_observation_assets(self):
         for route, consumer in (('science-lab', 'sci/sci-figures.js'), ('geography-study', 'geo/lab.js')):
             with self.subTest(route=route):
