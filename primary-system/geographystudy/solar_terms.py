@@ -53,5 +53,10 @@ def index(request):
         'seasons': seasons,
         'sources': content['sources'],
         'challenges': content['challenges'],
+        'experience': content['experience'],
+        'term_experience': [
+            {key: term[key] for key in ('id', 'name', 'date', 'solarLongitude', 'phenology', 'custom', 'custom_scene')}
+            for season in seasons for term in season['terms']
+        ],
         'poetry_ready': dataset is not None,
     })

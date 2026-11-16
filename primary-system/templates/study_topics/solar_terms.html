@@ -2,10 +2,16 @@
 {% load static %}
 {% block title %}二十四节气馆 · 乐学堂{% endblock %}
 {% block content %}
-<link rel="stylesheet" href="{% static 'study_topics/solar-terms.css' %}?v=3">
+<link rel="stylesheet" href="{% static 'study_topics/solar-terms.css' %}?v=20261117b1">
 <script src="{% static 'speech.js' %}" defer></script>
-<script src="{% static 'study_topics/solar-terms.js' %}?v=1" defer></script>
+<script src="{% static 'study_topics/astro/vendor/astronomy-engine/astronomy.browser.min.js' %}?v=2.1.19" defer></script>
+<script src="{% static 'study_topics/solar-calendar.js' %}?v=20261117b1" defer></script>
+<script src="{% static 'study_topics/solar-diary.js' %}?v=20261117b1" defer></script>
+<script src="{% static 'study_topics/solar-scenes.js' %}?v=20261117b1" defer></script>
+<script src="{% static 'study_topics/solar-terms.js' %}?v=20261117b1" defer></script>
 {{ challenges|json_script:'solar-challenges' }}
+{{ experience|json_script:'solar-experience' }}
+{{ term_experience|json_script:'solar-term-experience' }}
 <div class="solar-hall" id="solar-top">
   <nav class="solar-breadcrumbs" aria-label="专题路径">
     <a href="{% url 'home' %}?area=geography#modules-title">← 学习广场 · 地理</a>
@@ -20,11 +26,18 @@
     <img class="solar-landscape" src="{% static 'study_topics/solar-landscape.svg' %}" width="620" height="284" alt="">
   </header>
 
+  <section class="solar-live solar-interactive" id="solar-current-panel" aria-labelledby="solar-current-title" hidden>
+    <div><p class="solar-live-date" id="solar-current-date"></p><h2 id="solar-current-title">今天在 <strong id="solar-current-name">计算节气中……</strong></h2><p id="solar-current-range"></p></div>
+    <div class="solar-countdown"><p>距离下个节气 <b id="solar-next-name">—</b></p><output id="solar-countdown">—</output></div>
+    <div class="solar-actions"><button type="button" id="solar-current-jump">看当前节气卡 →</button><button type="button" id="solar-current-observe" class="solar-primary">为家乡记下今天</button></div>
+    <p class="solar-note">{{ experience.calendar.note }} <a href="{{ experience.calendar.source }}" target="_blank" rel="noopener noreferrer">节气与黄经 · 需联网 ↗</a></p>
+  </section>
+
   <section class="solar-tools solar-interactive" aria-label="游馆工具" hidden>
     <div class="solar-tool-heading">
       <div><h2>带着好奇，逛一圈四季</h2><p>找一找节气，留下一页观察，再来试试小挑战。</p></div>
       <div class="solar-actions">
-        <button type="button" data-action="notebook">我的观察册 <span id="solar-note-count">0 / 24</span></button>
+        <button type="button" data-action="notebook">家乡四季日记 <span id="solar-note-count">0 条 · 0 / 24 节气</span></button>
         <button type="button" data-action="challenge" class="solar-primary">节气小挑战 →</button>
       </div>
     </div>
@@ -77,7 +90,7 @@
         <header class="solar-card-head">
           <div>
             <p class="solar-date">{{ term.number|stringformat:'02d' }} <span aria-hidden="true">·</span> 公历 {{ term.date }}前后</p>
-            <h3 id="term-{{ term.id }}">{{ term.name }}</h3>
+            <h3 id="term-{{ term.id }}">{{ term.name }}</h3><span class="solar-current-badge" hidden>今天在这里</span>
           </div>
           <span class="solar-symbol" aria-hidden="true">{{ term.symbol }}</span>
         </header>
@@ -93,6 +106,16 @@
           </ol>
           <h4>地方习俗</h4>
           <p>{{ term.custom }}</p>
+          <details class="solar-scenes solar-interactive" data-scenes hidden>
+            <summary>画里看三候与习俗 <span>4 幅简笔画</span></summary>
+            <div class="solar-scene-body">
+              <div class="solar-scene-picture" data-scene-picture></div>
+              <div class="solar-scene-choices" role="group" aria-label="{{ term.name }}的四幅画"><button type="button" data-scene-step="0" aria-pressed="true">初候</button><button type="button" data-scene-step="1" aria-pressed="false">二候</button><button type="button" data-scene-step="2" aria-pressed="false">三候</button><button type="button" data-scene-step="3" aria-pressed="false">地方习俗</button></div>
+              <p data-scene-note role="status"></p>
+              <div class="solar-actions"><button type="button" data-scene-play="single" aria-pressed="false">播放这一幅</button><button type="button" data-scene-play="all" aria-pressed="false">连看四幅</button></div>
+              <p class="solar-note" data-scene-status></p>
+            </div>
+          </details>
           <figure class="solar-poem">
             <h4>应景诗词</h4>
             {% if term.quote %}
@@ -128,11 +151,13 @@
   {% endfor %}
 
   <dialog class="solar-dialog" id="solar-notebook" aria-labelledby="solar-notebook-title">
-    <div class="solar-dialog-heading"><h2 id="solar-notebook-title">我的四季观察册</h2><button type="button" data-close aria-label="关闭观察册">关闭</button></div>
-    <p>每个节气留一页，可以随时修改。笔记保存在当前浏览器，同一浏览器的使用者可共同查看。</p>
+    <div class="solar-dialog-heading"><h2 id="solar-notebook-title">我的家乡四季日记</h2><button type="button" data-close aria-label="关闭观察册">关闭</button></div>
+    <p>同一个节气可以多次记录，明年再来比较家乡的变化。{{ experience.diary.note }}</p>
     <p id="solar-storage-status" role="status"></p>
+    <div class="solar-diary-filters"><div id="solar-diary-years" class="solar-actions" role="group" aria-label="按年份看日记"></div><div id="solar-diary-homes" class="solar-actions" role="group" aria-label="按家乡看日记"></div><div class="solar-actions" role="group" aria-label="按季节看日记"><button type="button" data-diary-filter="season" data-value="all" aria-pressed="true">四季</button>{% for season in seasons %}<button type="button" data-diary-filter="season" data-value="{{ season.id }}" aria-pressed="false">{{ season.name }}季</button>{% endfor %}</div></div>
+    <p id="solar-diary-summary" role="status"></p>
     <div id="solar-notebook-list" class="solar-notebook-list"></div>
-    <button type="button" id="solar-export">下载观察册</button>
+    <button type="button" id="solar-export">下载全部日记</button>
   </dialog>
 
   <dialog class="solar-dialog" id="solar-note-editor" aria-labelledby="solar-note-title">
@@ -140,15 +165,19 @@
     <p id="solar-note-prompt"></p>
     <form id="solar-note-form">
       <div class="solar-note-fields">
-        <label>观察日期<input type="date" name="date" required></label>
-        <label>观察地点<input name="place" maxlength="60" placeholder="例如家门口的小花园" required></label>
+        <label>观察日期<input type="date" name="date" min="1900-01-01" max="2100-12-31" required></label>
+        <label>我的家乡<input name="hometown" maxlength="60" placeholder="例如浙江杭州、河北正定" required></label>
+        <label>观察地点（可选）<input name="place" maxlength="60" placeholder="例如家门口的小花园"></label>
+        <label>测得气温／℃（可选）<input type="number" name="temperature" min="-60" max="60" step="0.1" placeholder="不知道就留空"></label>
       </div>
-      <label>我看到了什么<textarea name="text" rows="5" maxlength="1200" placeholder="写下颜色、声音、天气或你发现的变化，也可以写「今天没看见」……" required></textarea></label>
-      <p class="solar-note">每页最多 1200 字，保存后可以再来修改。</p>
+      <fieldset class="solar-weather"><legend>家乡的天气（可选）</legend>{% for weather in experience.diary.weather %}<label><input type="radio" name="weather" value="{{ weather }}"><span>{{ weather }}</span></label>{% endfor %}</fieldset>
+      <div class="solar-note-fields"><label>植物有什么变化（可选）<input name="plants" maxlength="300" placeholder="发芽、开花、果熟、落叶，也可以记未观察到"></label><label>看见或听见什么动物（可选）<input name="animals" maxlength="300" placeholder="例如燕子、蝉声、越冬的鸟"></label></div>
+      <label>我还想记下什么<textarea name="text" rows="4" maxlength="1200" placeholder="写下颜色、声音、农事或自己的疑问，也可以写「今天没看见」……"></textarea></label>
+      <p class="solar-note">至少留下一项天气、气温或物候观察；这段手记最多 1200 字，保存后可以修改，也可以为同一节气添新记录。</p>
       <p id="solar-save-status" role="status"></p>
       <div class="solar-actions">
-        <button type="submit" class="solar-primary" id="solar-save">保存这一页</button>
-        <button type="button" id="solar-delete" hidden>删除这一页</button>
+        <button type="submit" class="solar-primary" id="solar-save">保存这条观察</button>
+        <button type="button" id="solar-delete" hidden>删除这一条</button>
       </div>
     </form>
   </dialog>
@@ -179,6 +208,7 @@
   <footer class="solar-references">
     <h2>资料出处</h2>
     <p>三候采用《月令七十二候集解》的说法，农谚和习俗按各地资料整理。诗句打开页面时从乐学堂已入库的简体诗文中读取。</p>
+    <p>{{ experience.scenes.note }}</p>
     <ul>
       {% for source in sources %}<li><a href="{{ source.url }}" target="_blank" rel="noopener noreferrer">{{ source.label }} <span aria-hidden="true">↗</span></a></li>{% endfor %}
     </ul>

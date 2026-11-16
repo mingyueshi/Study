@@ -77,6 +77,20 @@
 
 天文漫游进阶功能：`astro-discovery-data.js` 维护五级宇宙地址、三条光信号路线与六道观察挑战；`astro-discovery.js` 计算传播时间并管理浏览器挑战记录（首次答案与最新答案分开，存储不可用时使用当前页面内存）。不计入账号积分或原课程掌握标记。增加 `node content_sources/test/test-astro-discovery.js` 校验数据、计算和存档过滤；新增锚点为 `#roam-address`、`#roam-light`、`#roam-challenges`。图片沿用本专题素材，传播时间使用真空光速与平均距离估算，非实时天体测距。
 
+### 二十四节气馆：交节、简笔画与家乡日记
+
+`solar-terms.json` 的 `solarLongitude` 为每节气的太阳黄经，`phenology[].scene` 与 `custom_scene` 引用 `experience.scenes.kinds` 的简笔画类型；说明继续读原三候、地方习俗，不再复制正文。`experience` 维护北京时间、支持年份、模型说明、6 秒单幅时长与天气选项。新增结构由 `test/test-solar-terms.js` 先校验，Django 直接读取，不需要生成或导入数据库。
+
+`static/study_topics/solar-calendar.js` 复用本系统 Astronomy Engine 2.1.19，用太阳视黄经每 15°的交节时刻判断当前区间。计算覆盖当前及相邻年份，避免一月与冬至跨年出错；支持 1900—2100 年，统一显示北京时间。当前卡和目录入口同时突出，顶部倒计时可直接回卡或记今天；每分钟与返回前台时刷新，保留原季节筛选和深链接。节气含义参照[香港天文台](https://www.hko.gov.hk/tc/gts/time/24solarterms.htm)，2026 年立冬与小雪时刻对照其年历；不拿卡片常见日期硬套每一年。
+
+`solar-scenes.js` 为 24 张卡提供共 96 幅简笔画。每卡按初候、二候、三候和习俗点选，单幅 6 秒、连看 24 秒，到尾停止，多个播放器互斥；收起、离屏、筛掉卡片、开日记或挑战、后台和离页时暂停。减少动态仍可读画面与原说明。解冻、隐虹与雷收声分别减少冰面或淡出，旧说用书页和想象提示，不把动物互变画成现代生物学事实。
+
+`solar-diary.js` 按条目保存 `study_solar_diary_v2:<条目ID>`，字段为节气、日期、家乡、可选地点、天气、可选实测气温、植物、动物和手记。家乡以城市或乡镇自由填写，不读取定位或外部天气。可以按年、季节和家乡组合筛选，按日期倒序阅读，同节气跨年、连续多天均可记；导出包含全部条目，不受当前筛选限制。新记录不覆盖同节气的旧页。
+
+旧键 `study_solar_note_v1:<节气ID>` 只在读取时适配，不自动迁移、删除或改写。编辑旧页仍写原键并保留版本 1 的日期、地点和文字，同时增加可选日记字段，让旧窗口仍能读取基本笔记；删除旧页需主动确认。新旧记录的保存、删除都比对打开时的原值，遇到其他窗口修改先提示，不静默覆盖。存储受限或已满时保留表单并显示未保存；坏记录留在原存储，不当作空记录覆盖。家乡预填单独保存在 `study_solar_hometown_v1`，观察记录仍由当前浏览器的使用者共同查看。
+
+验证：`node content_sources/test/test-solar-terms.js`、`node --test scripts/test_solar_terms.cjs`、`make test-frontend` 与 `.venv/bin/python manage.py test geographystudy.test_solar_terms catalog.test_study_topics`。行为测试覆盖独立交节时刻、跨年、闰日、旧笔记兼容、多条保存、并发修改、坏存储、筛选导出和有限场景帧。
+
 ### 天文实验室
 
 入口 `/astronomy/study/?view=lab`，四项玩法分别使用 `#sky-moon`、`#sky-planets`、`#sky-polaris` 和 `#sky-missions`。侧栏直接进入实验室，太阳系、月球、恒星、航天课程也提供对应链接；原知识点 ID、搜索、宇宙漫游与掌握记录继续使用。

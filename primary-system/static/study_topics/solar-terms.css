@@ -294,3 +294,44 @@ body:has(.solar-hall) { --page-width: 100%; }
   .solar-tools { padding: 16px; }
   .solar-note-fields { grid-template-columns: minmax(0, 1fr); }
 }
+
+/* 今日交节、四幅简笔画与家乡日记。 */
+.solar-hall button { font: inherit; font-weight: 750; cursor: pointer; max-width: 100%; overflow-wrap: anywhere; }
+.solar-live { display: grid; grid-template-columns: minmax(0,1.3fr) minmax(220px,.8fr); align-items: center; gap: 18px 34px; margin-top: 22px; padding: clamp(20px,2vw,34px); border: 2px solid #d4ba78; border-radius: 20px; background: #fff8e5; }
+.solar-live h2 { margin: 4px 0 12px; font-size: clamp(26px,2.5vw,38px); }
+.solar-live h2 strong { color: #875b18; }
+.solar-live p { margin: 0; }
+.solar-live-date { color: #74694e; font-weight: 750; }
+.solar-live>.solar-actions,.solar-live>.solar-note { grid-column: 1/-1; }
+.solar-live>.solar-note { font-size: 14px; line-height: 1.8; max-width: 96ch; }
+.solar-countdown { padding: 18px 22px; border: 1px solid #e0c88f; border-radius: 14px; background: #fffdf4; }
+.solar-countdown b { color: #875b18; }
+.solar-countdown output { display: block; font-size: clamp(27px,2.6vw,42px); font-weight: 800; color: #79511c; font-variant-numeric: tabular-nums; line-height: 1.6; }
+.solar-card.is-current-term { border: 3px solid #c79439; box-shadow: 0 0 0 4px #e9d8a866; }
+.solar-current-badge { display: inline-block; margin-top: 7px; padding: 3px 10px; border: 1px solid #cda758; border-radius: 18px; background: #fff3c7; color: #78501b; font-size: 15px; font-weight: 800; }
+.solar-index a[aria-current="date"] { outline: 2px solid #a47a2b; outline-offset: 1px; background: #fff1bd; color: #62471c; }
+.solar-scenes { margin-top: 16px; border: 1px solid var(--season-line); border-radius: 12px; background: #fbfcf7; }
+.solar-scenes summary { padding: 13px; color: var(--season-ink); font-weight: 800; cursor: pointer; }
+.solar-scenes summary span { display: inline-block; font-size: 14px; font-weight: 500; margin-left: 7px; }
+.solar-scene-body { padding: 0 12px 14px; }
+.solar-scene-picture { border: 1px solid var(--season-line); border-radius: 12px; background: var(--season-soft); margin-bottom: 12px; }
+.solar-scene-picture svg { display: block; width: 100%; max-height: 230px; }
+.solar-scene-choices { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+.solar-scenes button { padding: 7px 10px; font-size: 16px; }
+.solar-scene-choices button[aria-pressed="true"],.solar-scenes [data-scene-play][aria-pressed="true"] { background: var(--season-ink); border-color: var(--season-ink); color: #fff; }
+.solar-scenes [data-scene-note] { padding: 10px 12px; border-radius: 9px; background: #fff; font-size: 16px; line-height: 1.8; margin-bottom: 12px; }
+.solar-scenes .solar-note { font-size: 14px; line-height: 1.7; margin-top: 10px; }
+.solar-hall button:disabled { opacity: .55; }
+.solar-diary-filters { display: grid; gap: 12px; margin-block: 20px; padding: 16px; border: 1px solid #cfdfc5; border-radius: 12px; background: #f2f6ea; }
+.solar-diary-filters button[aria-pressed="true"] { background: #315f47; color: #fff; border-color: #315f47; }
+.solar-weather { display: flex; flex-wrap: wrap; gap: 8px; padding: 14px; margin: 8px 0 20px; border: 1px solid #bfceb5; border-radius: 12px; }
+.solar-weather legend { font-weight: 750; padding: 0 6px; }
+.solar-weather label { display: flex; align-items: center; gap: 0; cursor: pointer; }
+.solar-weather input { position: absolute; width: 1px; height: 1px; opacity: 0; padding: 0; }
+.solar-weather span { display: block; padding: 8px 14px; border: 1px solid #becdb6; border-radius: 10px; background: #f8faf2; font-size: 17px; }
+.solar-weather input:checked+span { background: #315f47; color: #fff; border-color: #315f47; }
+.solar-weather input:focus-visible+span { outline: 3px solid #af7b29; outline-offset: 2px; }
+.solar-notebook-list article>p { margin-block: 8px; }
+.solar-notebook-list .solar-actions { margin-top: 14px; }
+@media(max-width:900px) { .solar-live { grid-template-columns: minmax(0,1fr); gap: 16px; } }
+@media print { .solar-scenes,.solar-live .solar-actions { display: none; } .solar-card.is-current-term { box-shadow: none; } }

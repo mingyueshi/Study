@@ -1,4 +1,4 @@
-/* 节气筛选、每节气一页的观察册与五题小挑战。正文由 Django 渲染。 */
+/* 节气筛选与五题小挑战，接入交节时钟、简笔画和家乡日记。正文由 Django 渲染。 */
 (() => {
   'use strict';
   const hall = document.querySelector('.solar-hall');
@@ -29,6 +29,7 @@
     seasonButtons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.season === season)));
     get('solar-filter-status').textContent = `找到 ${count} / 24 张节气卡`;
     get('solar-empty').hidden = count !== 0;
+    hall.dispatchEvent(new Event('solar:filter'));
     if (writeURL) {
       const url = new URL(location.href);
       url.hash = '';
@@ -79,187 +80,19 @@
   window.addEventListener('popstate', restoreURL);
   hall.querySelector('[data-action="reset"]').addEventListener('click', resetFilter);
 
-  const storagePrefix = 'study_solar_note_v1:';
-  const notebook = get('solar-notebook');
-  const editor = get('solar-note-editor');
-  const form = get('solar-note-form');
-  let editingId = '';
-  let loadedRaw = null;
-  let initialForm = '';
-  let conflictRaw;
-
-  function storageFailure(message) {
-    get('solar-storage-status').textContent = message;
-    get('solar-status').textContent = message;
-  }
-
-  function readNote(id) {
-    try {
-      const raw = localStorage.getItem(storagePrefix + id);
-      if (!raw) return null;
-      const note = JSON.parse(raw);
-      if (note?.version !== 1 || !/^\d{4}-\d{2}-\d{2}$/.test(note.date) ||
-          typeof note.place !== 'string' || typeof note.text !== 'string') {
-        throw new Error('invalid note');
-      }
-      return note;
-    } catch {
-      storageFailure('有一页笔记暂时读不到，或浏览器限制了存储。保存前请留意提示。');
-      return null;
-    }
-  }
-
-  function refreshNotes() {
-    let count = 0;
-    const list = get('solar-notebook-list');
-    list.replaceChildren();
-    for (const [id, term] of terms) {
-      const note = readNote(id);
-      term.card.querySelector('.solar-note-badge').textContent = note ? '已记录' : '未记录';
-      if (!note) continue;
-      count += 1;
-      const item = document.createElement('article');
-      const title = document.createElement('h3');
-      title.textContent = term.name;
-      const meta = document.createElement('p');
-      meta.className = 'solar-note';
-      meta.textContent = `${note.date} · ${note.place}`;
-      const text = document.createElement('p');
-      text.className = 'solar-note-text';
-      text.textContent = note.text;
-      const edit = document.createElement('button');
-      edit.type = 'button';
-      edit.dataset.note = id;
-      edit.textContent = `修改${term.name}这一页`;
-      item.append(title, meta, text, edit);
-      list.append(item);
-    }
-    if (!count) {
-      const empty = document.createElement('p');
-      empty.textContent = '观察册还是空的。挑一张节气卡，照着「去观察」试一试，再点「记一笔」。';
-      list.append(empty);
-    }
-    get('solar-note-count').textContent = `${count} / 24`;
-    get('solar-export').disabled = count === 0;
-  }
-
-  function formSnapshot() {
-    return JSON.stringify([form.elements.date.value, form.elements.place.value, form.elements.text.value]);
-  }
-
-  function openNote(id) {
-    const term = terms.get(id);
-    if (!term) return;
-    editingId = id;
-    const note = readNote(id);
-    try { loadedRaw = localStorage.getItem(storagePrefix + id); } catch { loadedRaw = null; }
-    const today = new Date();
-    const date = [today.getFullYear(), String(today.getMonth() + 1).padStart(2, '0'), String(today.getDate()).padStart(2, '0')].join('-');
-    form.elements.date.value = note?.date || date;
-    form.elements.place.value = note?.place || '';
-    form.elements.text.value = note?.text || '';
-    initialForm = formSnapshot();
-    conflictRaw = undefined;
-    get('solar-save').textContent = '保存这一页';
-    get('solar-save-status').textContent = '';
-    get('solar-delete').hidden = !note;
-    get('solar-note-title').textContent = `${term.name} · 我的观察`;
-    get('solar-note-prompt').textContent = term.prompt;
-    editor.showModal();
-  }
-
-  function closeDialog(dialog) {
-    if (dialog === editor && formSnapshot() !== initialForm &&
-        !window.confirm('这一页还有未保存的内容，确定离开吗？')) return;
-    dialog.close();
-  }
-
-  hall.querySelectorAll('dialog').forEach(dialog => {
-    dialog.querySelector('[data-close]').addEventListener('click', () => closeDialog(dialog));
-    dialog.addEventListener('cancel', event => {
-      event.preventDefault();
-      closeDialog(dialog);
-    });
-  });
-  hall.addEventListener('click', event => {
-    const button = event.target.closest('[data-note]');
-    if (button) openNote(button.dataset.note);
-  });
-  hall.querySelector('[data-action="notebook"]').addEventListener('click', () => {
-    refreshNotes();
-    notebook.showModal();
-  });
-
-  form.addEventListener('submit', event => {
-    event.preventDefault();
-    const note = {
-      version: 1, date: form.elements.date.value,
-      place: form.elements.place.value.trim(), text: form.elements.text.value.trim(),
-    };
-    if (!note.place || !note.text) {
-      get('solar-save-status').textContent = '写下观察地点和看到的现象，再保存吧。';
-      return;
-    }
-    try {
-      const current = localStorage.getItem(storagePrefix + editingId);
-      if (current !== loadedRaw && current !== conflictRaw) {
-        conflictRaw = current;
-        get('solar-save-status').textContent = '另一页窗口刚修改过这份笔记。再次保存会用眼前的内容替换它，也可以关闭后重新打开查看。';
-        get('solar-save').textContent = '仍然保存眼前的内容';
-        return;
-      }
-      localStorage.setItem(storagePrefix + editingId, JSON.stringify(note));
-      loadedRaw = JSON.stringify(note);
-      initialForm = formSnapshot();
-      conflictRaw = undefined;
-      get('solar-save').textContent = '保存这一页';
-      get('solar-save-status').textContent = '已保存，下一次打开这个浏览器还能看到。';
-      get('solar-delete').hidden = false;
-      refreshNotes();
-    } catch {
-      get('solar-save-status').textContent = '这次没能保存。浏览器存储可能已满或被限制，请先复制文字留存，再试一次。';
-    }
-  });
-  get('solar-delete').addEventListener('click', () => {
-    if (!window.confirm('确定删除这个节气的观察笔记吗？')) return;
-    try {
-      if (localStorage.getItem(storagePrefix + editingId) !== loadedRaw) {
-        get('solar-save-status').textContent = '另一页窗口修改过这份笔记，请关闭后重新打开，再确认删除。';
-        return;
-      }
-      localStorage.removeItem(storagePrefix + editingId);
-      initialForm = formSnapshot();
-      editor.close();
-      refreshNotes();
-    } catch {
-      get('solar-save-status').textContent = '这次没能删除，请稍后再试。';
-    }
-  });
-  window.addEventListener('storage', event => {
-    if (event.key === null || event.key.startsWith(storagePrefix)) refreshNotes();
-  });
-  window.addEventListener('beforeunload', event => {
-    if (editor.open && formSnapshot() !== initialForm) {
-      event.preventDefault();
-      event.returnValue = '';
-    }
-  });
-  get('solar-export').addEventListener('click', () => {
-    const pages = ['我的四季观察册'];
-    for (const [id, term] of terms) {
-      const note = readNote(id);
-      if (note) pages.push(`${term.name}\n${note.date} · ${note.place}\n${note.text}`);
-    }
-    const url = URL.createObjectURL(new Blob(['\uFEFF' + pages.join('\n\n')], {type: 'text/plain;charset=utf-8'}));
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = '我的四季观察册.txt';
-    link.click();
-    setTimeout(() => URL.revokeObjectURL(url), 1000);
-  });
+  const experience = JSON.parse(get('solar-experience').textContent);
+  const termData = JSON.parse(get('solar-term-experience').textContent);
+  const diary = window.SolarDiary.mount({hall,terms,config:experience.diary});
+  window.SolarScenes.mount({hall,data:termData,config:experience.scenes});
+  window.SolarCalendar.mount({hall,terms,data:termData,onCurrent(id) {
+    resetFilter();
+    location.hash = id;
+    revealHash();
+  },onObserve:id => diary.open(id)});
 
   const challenges = JSON.parse(get('solar-challenges').textContent);
   const quiz = get('solar-challenge');
+  quiz.querySelector('[data-close]').addEventListener('click', () => quiz.close());
   let round = [];
   let questionIndex = 0;
   let wrong = [];
@@ -305,6 +138,7 @@
   }
 
   hall.querySelector('[data-action="challenge"]').addEventListener('click', () => {
+    hall.dispatchEvent(new Event('solar:pause'));
     quiz.showModal();
     if (!round.length) startRound(challenges);
   });
@@ -391,7 +225,6 @@
     });
   }));
   window.addEventListener('pagehide', stopReading);
-  refreshNotes();
   hall.querySelectorAll('.solar-interactive').forEach(element => { element.hidden = false; });
   restoreURL();
 })();

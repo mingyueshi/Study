@@ -6,6 +6,21 @@ from reference_library.models import Dataset
 
 
 class SolarTermsTests(TestCase):
+    def test_clock_scenes_and_diary_have_local_data_and_accessible_controls(self):
+        response = self.client.get(reverse('solar-terms'))
+        self.assertContains(response, 'id="solar-current-panel"')
+        self.assertContains(response, 'data-scenes', count=24)
+        self.assertContains(response, 'name="hometown"')
+        self.assertContains(response, 'name="temperature"')
+        self.assertContains(response, 'name="plants"')
+        self.assertContains(response, 'name="animals"')
+        self.assertContains(response, 'solar-calendar.js')
+        self.assertContains(response, 'solar-diary.js')
+        self.assertContains(response, 'solar-scenes.js')
+        self.assertEqual(len(response.context['term_experience']), 24)
+        self.assertEqual({t['solarLongitude'] for t in response.context['term_experience']}, set(range(0, 360, 15)))
+        self.assertEqual(response.context['experience']['calendar']['timeZone'], 'Asia/Shanghai')
+
     def test_calendar_and_learning_links_work_before_poetry_is_imported(self):
         response = self.client.get(reverse('solar-terms'))
         self.assertContains(response, '<article class="solar-card"', count=24)

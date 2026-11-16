@@ -15,6 +15,18 @@ const plainText = text => {
 };
 
 assert.equal(content.schema_version, 1);
+assert.equal(content.experience.calendar.timeZone, 'Asia/Shanghai');
+assert.equal(content.experience.calendar.minYear, 1900);
+assert.equal(content.experience.calendar.maxYear, 2100);
+assert.equal(new URL(content.experience.calendar.source).protocol, 'https:');
+plainText(content.experience.calendar.note);
+assert.equal(content.experience.scenes.seconds, 6);
+const sceneKinds = new Set(content.experience.scenes.kinds);
+assert.equal(sceneKinds.size, content.experience.scenes.kinds.length);
+plainText(content.experience.scenes.note);
+assert.ok(content.experience.diary.weather.length >= 7);
+content.experience.diary.weather.forEach(plainText);
+const longitudes = new Set();
 const lessonSources = {
   geography: fs.readFileSync(path.join(__dirname, '../geo/knowledge-core.js'), 'utf8'),
   literature: fs.readFileSync(path.join(__dirname, '../lit-data.js'), 'utf8'),
@@ -39,6 +51,9 @@ for (const season of content.seasons) {
     assert.ok(!termIds.has(term.id), term.id);
     termIds.add(term.id);
     assert.match(term.date, /^(?:[1-9]|1[012])月(?:[1-9]|[12][0-9]|3[01])日$/);
+    assert.ok(Number.isInteger(term.solarLongitude) && term.solarLongitude >= 0 && term.solarLongitude < 360 && term.solarLongitude % 15 === 0);
+    longitudes.add(term.solarLongitude);
+    assert.ok(sceneKinds.has(term.custom_scene), term.id + ' 习俗场景');
     for (const key of ['symbol', 'custom', 'proverb', 'proverb_note', 'observation']) plainText(term[key]);
     assert.deepEqual(Object.keys(term.learning).sort(), ['geography', 'literature', 'poetry']);
     for (const subject of ['geography', 'literature']) {
@@ -48,6 +63,7 @@ for (const season of content.seasons) {
     plainText(term.learning.poetry);
     assert.equal(term.phenology.length, 3, term.name);
     for (const item of term.phenology) {
+      assert.ok(sceneKinds.has(item.scene), term.id + ' 三候场景');
       plainText(item.name);
       plainText(item.note);
     }
@@ -61,6 +77,7 @@ for (const season of content.seasons) {
     assert.equal(new URL(term.source).protocol, 'https:');
   }
 }
+assert.equal(longitudes.size, 24);
 
 const challengeIds = new Set();
 assert.equal(content.challenges.length, 12);
