@@ -171,6 +171,7 @@ window.GMChinaLearning = (() => {
     const steps = createSteps(saved.steps),
       puzzle = createPuzzle(),
       questions = createQuestions(saved.questions);
+    let sampleVersion = 0;
     let mode = 'browse',
       selectedPiece = D.puzzle.pieces[0].id,
       drag = null;
@@ -333,6 +334,7 @@ window.GMChinaLearning = (() => {
     }
     function setMode(next) {
       if (!['browse', 'steps', 'puzzle', 'questions'].includes(next)) return;
+      sampleVersion++;
       drag = null;
       if (next !== 'browse') prepare();
       mode = next;
@@ -452,6 +454,7 @@ window.GMChinaLearning = (() => {
       node.addEventListener('click', (e) => {
         const b = e.target.closest('[data-step]');
         if (b) {
+          sampleVersion++;
           steps.select(Number(b.dataset.step));
           $('step-feedback').textContent = '找一处你认为合适的位置，点地形提交。';
           renderSteps();
@@ -461,6 +464,7 @@ window.GMChinaLearning = (() => {
       $('step-feedback').textContent = D.steps.find((s) => s.no === steps.state().active).hint;
     });
     $('step-reveal').addEventListener('click', () => {
+      sampleVersion++;
       steps.reveal();
       const step = D.steps.find((s) => s.no === steps.state().active);
       observe({ point: step.example, zoom: 2 });
@@ -468,11 +472,12 @@ window.GMChinaLearning = (() => {
       renderSteps();
     });
     $('step-retry').addEventListener('click', () => {
+      sampleVersion++;
       steps.retry();
       $('step-feedback').textContent = '再找一处这个阶梯里的位置吧。';
       renderSteps();
     });
-    $('step-coordinates').addEventListener('submit', (e) => {
+    $('step-coordinates').addEventListener('submit', async (e) => {
       e.preventDefault();
       const lon = $('step-lon').value.trim(),
         lat = $('step-lat').value.trim();
@@ -480,9 +485,12 @@ window.GMChinaLearning = (() => {
         $('step-feedback').textContent = '经度和纬度都要填好哦。';
         return;
       }
-      const p = [Number(lon), Number(lat)],
-        meters = p.every(Number.isFinite) ? sample(p) : null;
-      inspect(p, meters);
+      const p = [Number(lon), Number(lat)], token=++sampleVersion;
+      $('step-feedback').textContent='正在看清这里的地形……';
+      try {
+        const meters=p.every(Number.isFinite)?await sample(p):null;
+        if(token===sampleVersion)inspect(p,meters);
+      } catch {if(token===sampleVersion)$('step-feedback').textContent='这里的地形暂时没读到，请稍后再提交一次。';}
     });
     $('relation-list').addEventListener('click', (e) => {
       const b = e.target.closest('[data-relation]');

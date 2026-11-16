@@ -32,7 +32,7 @@ window.GMChinaTerrainPlay = (() => {
     const owner = point => locate(point)?.mesh.province || '';
     const waterOriginals = new Map(), waterBeds = new Map(), levels = {};
     for (const lake of D.lakes) {
-      const level = lakeLevel(lake.rings, sample, window.GM_CHINA_HYDROLOGY?.lakeFloorMeters ?? 0); if (level === null) continue;
+      const level = window.GM_CHINA_TERRAIN_INDEX?.lakeLevels?.[lake.feature] ?? lakeLevel(lake.rings, sample, window.GM_CHINA_HYDROLOGY?.lakeFloorMeters ?? 0); if (level === null) continue;
       levels[lake.feature] = Math.round(level);
       const buckets = new Map();
       const record = window.GM_CHINA_HYDROLOGY_GEO?.lakes[lake.feature];
@@ -45,7 +45,8 @@ window.GMChinaTerrainPlay = (() => {
             waterOriginals.set(id, positions.slice()); waterBeds.set(id, positions.slice());
           }
           const bed = waterBeds.get(id);
-          for (const index of window.GMChinaHydrology.maskIndices(mask, model.geometry.indices)) bed[index * 3 + 2] = Math.min(bed[index * 3 + 2], (level - 25) / G.metersPerUnit);
+          const ids=model.geometry.lakeFlags ? G.maskedIndices(model.geometry,'lake',D.lakes.findIndex(l=>l.feature===lake.feature)) : window.GMChinaHydrology.maskIndices(mask, model.geometry.indices);
+          for (const index of ids) bed[index * 3 + 2] = Math.min(bed[index * 3 + 2], (level - 25) / G.metersPerUnit);
         }
       } else for (const triangle of lakeTriangles(lake.rings, sample)) {
         const id = owner(triangle[0].point); if (!buckets.has(id)) buckets.set(id, []);
@@ -72,6 +73,23 @@ window.GMChinaTerrainPlay = (() => {
       root.dataset.lakesVisible = String(on); requestDraw();
     }
     applyWater(true);
+    function refreshGeometry(ids) {
+      for(const id of ids) {
+        const model=models.get(id);if(!model)continue;
+        originals.set(id,model.geometry.top.getAttribute('color').array.slice());
+        waterOriginals.delete(id);waterBeds.delete(id);
+        for(let bit=0;bit<D.lakes.length;bit++) {
+          const level=levels[D.lakes[bit].feature];if(level===undefined)continue;
+          const indices=G.maskedIndices(model.geometry,'lake',bit);if(!indices.length)continue;
+          if(!waterOriginals.has(id)){const p=model.geometry.positions;waterOriginals.set(id,p.slice());waterBeds.set(id,p.slice());}
+          const bed=waterBeds.get(id);for(const i of indices)bed[i*3+2]=Math.min(bed[i*3+2],(level-25)/G.metersPerUnit);
+        }
+        if(root.querySelector('#gm3-snow').getAttribute('aria-pressed')==='true'){
+          const attr=model.geometry.top.getAttribute('color');for(let i=0;i<model.geometry.elevations.length;i++)if(model.geometry.elevations[i]>=D.snowMeters)snow.toArray(attr.array,i*3);attr.needsUpdate=true;
+        }
+      }
+      applyWater(lakeGroup.visible);
+    }
     root.querySelector('#gm3-snow-note').textContent = D.snowNote;
     const offset = id => (models.get(id)?.group.position.z || G.datum) - G.datum;
     function tick(now) {
@@ -115,7 +133,7 @@ window.GMChinaTerrainPlay = (() => {
     function stand() { entrancePending = false; start = fullMotion() ? performance.now() : null; rise = start === null ? 1 : 0; requestDraw(); }
     root.querySelector('#gm3-stand').addEventListener('click', stand);
     requestDraw();
-    return { tick, settle, owner, offset, get gain() { return gain() * rise; },
+    return { tick, settle, owner, offset, refreshGeometry, get gain() { return gain() * rise; },
       select(id) { selected = id; requestDraw(); },
       flatten(on) { if (flat === on) return; flat = on; if (on) { entrancePending = false; start = null; rise = 1; for (const m of models.values()) m.group.position.z = G.datum; } requestDraw(); },
     };

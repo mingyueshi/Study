@@ -665,7 +665,7 @@ console.log('— 入口文件（多页面系统） —');
   'scripts/build-geo.py', 'scripts/build-world.py']
   .forEach(f => check(fileExists(f), '缺少文件: ' + f));
 const PAGE_REFS = {
-  'china-3d.html': ['content.js', 'china-geo.js', 'map-data.js', 'shared.js', 'china-3d-data.js', 'china-terrain-data.js', 'china-rivers-data.js', 'china-3d-geometry.js', 'china-river-flow.js', 'china-river-tour-data.js', 'china-river-tour.js', 'china-terrain-section.js', 'china-adventures-data.js', 'china-adventures.js', 'china-terrain-play.js', 'china-3d.js', 'china-3d.css', 'assets/vendor/three-map.js', 'china.html', 'province.html'],
+  'china-3d.html': ['content.js', 'china-geo.js', 'map-data.js', 'shared.js', 'china-3d-data.js', 'china-terrain-index.js', 'china-terrain-stream.js', 'china-rivers-data.js', 'china-3d-geometry.js', 'china-river-flow.js', 'china-river-tour-data.js', 'china-river-tour.js', 'china-terrain-section.js', 'china-adventures-data.js', 'china-adventures.js', 'china-terrain-play.js', 'china-3d.js', 'china-3d.css', 'assets/vendor/three-map.js', 'china.html', 'province.html'],
   'index.html': ['content.js', 'china-geo.js', 'map-data.js', 'shared.js', 'home-app.js', 'styles.css',
     'china.html', 'province.html', 'world.html', 'animals.html', 'world-animals.html', 'plants.html', 'world-plants.html'],
   'china.html': ['content.js', 'china-geo.js', 'map-data.js', 'shared.js', 'media-data.js', 'media.js', 'map-ui.js', 'china-app.js', 'styles.css',

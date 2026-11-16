@@ -53,11 +53,11 @@ window.GMTerrainSection = (() => {
     return svg;
   }
 
-  function create({ root, canvas, sample, pick, project, requestDraw, setDrawing, prepare, presetView }) {
+  function create({ root, canvas, sample, pick, project, requestDraw, setDrawing, prepare, presetView, sampleReady }) {
     const $ = id => root.querySelector('#gm3-section-' + id);
     const data = window.GM_CHINA_3D.section;
     const esc = window.GMShared.esc;
-    let drawing = false, start = null, end = null, gesture = null, frame = 0, current = null, available = true;
+    let drawing = false, start = null, end = null, gesture = null, frame = 0, current = null, available = true, generation = 0;
     const coords = point => `${point[0].toFixed(2)}°E，${point[1].toFixed(2)}°N`;
     const say = text => { $('status').textContent = text; $('hint').textContent = text; };
     $('intro').textContent = data.intro;
@@ -78,6 +78,7 @@ window.GMTerrainSection = (() => {
       if (id !== undefined && canvas.hasPointerCapture(id)) canvas.releasePointerCapture(id);
     }
     function cancel() {
+      generation++;
       stopGesture(); start = end = null; mode(false); requestDraw();
       say(current ? '保留上次剖面，可重新拉线。' : '选择西向东示范，或在地图上拉一条线。');
     }
@@ -88,7 +89,12 @@ window.GMTerrainSection = (() => {
       panel.focus({ preventScroll: true });
       requestAnimationFrame(() => $('chart').scrollIntoView({ block: 'center', behavior: 'instant' }));
     }
-    function finish(a, b, demo = false) {
+    function finish(a,b,demo=false) {
+      if(!sampleReady){renderResult(a,b,demo);return;}
+      const token=++generation;stopGesture();mode(false);say('正在看清沿线的地形……');
+      sampleReady(a,b,()=>{if(token===generation&&available)renderResult(a,b,demo);}).catch(()=>{if(token===generation)say('沿线地形暂时没读到，请稍后重新拉线。');});
+    }
+    function renderResult(a, b, demo = false) {
       if (distance(a, b) < 1) { say('A、B 太近了，请把 B 放远一点。'); return; }
       const result = sampleLine(a, b, sample);
       current = { ...result, from: a, to: b };

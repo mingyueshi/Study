@@ -5,7 +5,7 @@
 {% block study_assets %}
 <script src="{% static 'speech.js' %}" defer></script>
 <link rel="stylesheet" href="{% static 'study_topics/geo-map/styles.css' %}?v=bba721fb450c">
-<link rel="stylesheet" href="{% static 'study_topics/geo-map/china-3d.css' %}?v=9f3f597a0aa6">
+<link rel="stylesheet" href="{% static 'study_topics/geo-map/china-3d.css' %}?v=be2e071b66fb">
 <script src="{% static 'study_topics/geo-map/china-geo.js' %}?v=d8402343bd1d" defer></script>
 <script src="{% static 'study_topics/geo-map/content.js' %}?v=e86ddc18e05f" defer></script>
 <script src="{% static 'study_topics/geo-map/map-data.js' %}?v=27ebda785125" defer></script>
@@ -13,25 +13,26 @@
 <script src="{% static 'study_topics/geo-map/atlas-data.js' %}?v=041dec261237" defer></script>
 <script src="{% static 'study_topics/geo-map/atlas.js' %}?v=60e5f6a93f55" defer></script>
 <script src="{% static 'study_topics/geo-map/shared.js' %}?v=d2bebbfd2a0b" defer></script>
-<script src="{% static 'study_topics/geo-map/china-3d-data.js' %}?v=b48d06c75e88" defer></script>
-<script src="{% static 'study_topics/geo-map/china-terrain-data.js' %}?v=f48bde6c14e8" defer></script>
+<script src="{% static 'study_topics/geo-map/china-3d-data.js' %}?v=9ffb09eab6a2" defer></script>
+<script src="{% static 'study_topics/geo-map/china-terrain-index.js' %}?v=6718c8e769eb" defer></script>
 <script src="{% static 'study_topics/geo-map/china-rivers-data.js' %}?v=427ed9089e17" defer></script>
 <script src="{% static 'study_topics/geo-map/assets/vendor/three-map.js' %}?v=9aacf1bea884" defer></script>
-<script src="{% static 'study_topics/geo-map/china-3d-geometry.js' %}?v=7f5337b2d3c7" defer></script>
+<script src="{% static 'study_topics/geo-map/china-3d-geometry.js' %}?v=5c2e1f37a6ad" defer></script>
+<script src="{% static 'study_topics/geo-map/china-terrain-stream.js' %}?v=2d4701a4d60c" defer></script>
 <script src="{% static 'study_topics/geo-map/china-river-flow.js' %}?v=f990596e872d" defer></script>
 <script src="{% static 'study_topics/geo-map/china-river-tour-data.js' %}?v=1836f325c20b" defer></script>
 <script src="{% static 'study_topics/geo-map/china-river-tour.js' %}?v=1747f40e4f53" defer></script>
-<script src="{% static 'study_topics/geo-map/china-terrain-section.js' %}?v=1d20cb4e8b35" defer></script>
+<script src="{% static 'study_topics/geo-map/china-terrain-section.js' %}?v=076f6dbc563f" defer></script>
 <script src="{% static 'study_topics/geo-map/china-adventures-data.js' %}?v=41ed7a69593c" defer></script>
 <script src="{% static 'study_topics/geo-map/china-hydrology-data.js' %}?v=5cf924e6b704" defer></script>
 <script src="{% static 'study_topics/geo-map/china-hydrology-geo.js' %}?v=dab1b107a9fe" defer></script>
-<script src="{% static 'study_topics/geo-map/china-hydrology.js' %}?v=ea3fcda83c56" defer></script>
+<script src="{% static 'study_topics/geo-map/china-hydrology.js' %}?v=b621958e79a7" defer></script>
 <script src="{% static 'study_topics/geo-map/china-learning-data.js' %}?v=8935d6f8c90e" defer></script>
-<script src="{% static 'study_topics/geo-map/china-learning.js' %}?v=2a5e2dd33a9c" defer></script>
+<script src="{% static 'study_topics/geo-map/china-learning.js' %}?v=e6d5e315509a" defer></script>
 <script src="{% static 'study_topics/geo-map/china-learning-visual.js' %}?v=f304c19ff4a9" defer></script>
 <script src="{% static 'study_topics/geo-map/china-adventures.js' %}?v=8cc1b1c44e3d" defer></script>
-<script src="{% static 'study_topics/geo-map/china-terrain-play.js' %}?v=23cb76c780a4" defer></script>
-<script src="{% static 'study_topics/geo-map/china-3d.js' %}?v=4b2ed3ca9743" defer></script>
+<script src="{% static 'study_topics/geo-map/china-terrain-play.js' %}?v=752d919a849f" defer></script>
+<script src="{% static 'study_topics/geo-map/china-3d.js' %}?v=ba906b519f26" defer></script>
 {% endblock %}
 {% block study_content %}
 <div class="study-atlas">
@@ -105,6 +106,7 @@
             <button type="button" id="gm3-labels" aria-pressed="true">省份名称</button>
           </div>
         </div>
+        <div class="gm3-stream-tools"><p id="gm3-terrain-status" role="status"></p><button type="button" id="gm3-terrain-retry" hidden>再试一次</button></div>
         <div class="gm3-section-tools" role="group" aria-label="地形剖面仪">
           <button type="button" id="gm3-section-draw" aria-pressed="false" disabled>拉线画剖面</button>
           <button type="button" id="gm3-section-demo" disabled>西向东示范</button>

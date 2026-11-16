@@ -9,7 +9,7 @@ window.GMChinaHydrology = (() => {
     if (selected.length !== record.selectedCount * 3) throw new Error('流域掩膜计数无效');
     return selected;
   }
-  function mount({root, focusRiver, focusPoint, focusEstuary, requestDraw, available, reveal}) {
+  function mount({root, focusRiver, focusPoint, focusEstuary, requestDraw, available, reveal, terrainParts}) {
     const D = window.GM_CHINA_HYDROLOGY, source = window.GM_CHINA_HYDROLOGY_GEO, esc = window.GMShared.esc;
     const $ = id => root.querySelector('#' + id);
     let river = 'f20', basinVisible = false, tributariesVisible = true, activeBranch = '', context = null;
@@ -60,7 +60,7 @@ window.GMChinaHydrology = (() => {
         const geometry = new T.BufferGeometry();
         geometry.setAttribute('position', model.geometry.top.getAttribute('position'));
         geometry.setAttribute('normal', model.geometry.top.getAttribute('normal'));
-        geometry.setIndex(maskIndices(record, model.geometry.indices));
+        geometry.setIndex(model.geometry.basinFlags ? window.GMChina3DGeometry.maskedIndices(model.geometry,'basin',D.basins.findIndex(b=>b.feature===id)) : maskIndices(record, model.geometry.indices));
         const material = new T.MeshBasicMaterial({color: '#41b2d1', transparent: true, opacity: .32, depthWrite: false, polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -2});
         const mesh = new T.Mesh(geometry, material); mesh.userData.province = province; group.add(mesh);
       }
@@ -73,13 +73,23 @@ window.GMChinaHydrology = (() => {
         const record = source.tributaries[branch.id], group = new T.Group();
         const ink = new T.LineMaterial({color: D.colors.tributary, linewidth: 2, depthWrite: false});
         const halo = new T.LineMaterial({color: '#e7faff', linewidth: 3.5, depthWrite: false});
-        const paths = record.paths.map(path => path.map(p => [...p, sample(p) ?? 0]));
-        const draped = G.drapeRiver(paths, sample), buckets = new Map();
-        for (const path of draped.paths) for (let i = 1; i < path.length; i++) {
-          if (!path[i - 1].onTerrain || !path[i].onTerrain) continue;
-          const owner = sample.locate(path[i].point)?.mesh.province || '';
-          if (!buckets.has(owner)) buckets.set(owner, []);
-          buckets.get(owner).push(...[path[i - 1], path[i]].flatMap(p => [...G.xy(p.point), (p.meters + 5) / G.metersPerUnit]));
+        const buckets = new Map();
+        if(terrainParts) {
+          for(const {code,record:part}of terrainParts()) {
+            const encoded=part.render?.tributaries[branch.id];if(!encoded)continue;
+            const owner='p'+code;if(!buckets.has(owner))buckets.set(owner,[]);
+            buckets.get(owner).push(G.decodeFloats(encoded));
+          }
+          for(const [owner,arrays]of buckets)buckets.set(owner,G.mergeFloats(arrays));
+        } else {
+          const paths = record.paths.map(path => path.map(p => [...p, sample(p) ?? 0]));
+          const draped = G.drapeRiver(paths, sample);
+          for (const path of draped.paths) for (let i = 1; i < path.length; i++) {
+            if (!path[i - 1].onTerrain || !path[i].onTerrain) continue;
+            const owner = sample.locate(path[i].point)?.mesh.province || '';
+            if (!buckets.has(owner)) buckets.set(owner, []);
+            buckets.get(owner).push(...[path[i - 1], path[i]].flatMap(p => [...G.xy(p.point), (p.meters + 5) / G.metersPerUnit]));
+          }
         }
         for (const [province, positions] of buckets) {
           const geometry = new T.LineSegmentsGeometry().setPositions(positions);
@@ -90,6 +100,13 @@ window.GMChinaHydrology = (() => {
         scene.add(group); branches.set(branch.id, {group, ink, halo});
       }
       root.dataset.tributaryCount = String(branches.size); render();
+    }
+    function refreshTerrain() {
+      if(!context)return;
+      for(const group of basinGroups.values()){context.scene.remove(group);for(const m of group.children){m.geometry.dispose();m.material.dispose();}}
+      basinGroups.clear();
+      for(const r of branches.values()){context.scene.remove(r.group);const geometries=new Set(r.group.children.map(m=>m.geometry));for(const g of geometries)g.dispose();r.ink.dispose();r.halo.dispose();}
+      branches.clear();attach(context);
     }
     function tick(gain, offset, showRivers) {
       if (!context) return;
@@ -122,7 +139,7 @@ window.GMChinaHydrology = (() => {
     $('gm3-estuaries').addEventListener('click', event => { const button = event.target.closest('[data-estuary]'); if (button) focusEstuary(button.dataset.estuary); });
     $('gm3-estuary-overview').addEventListener('click', () => focusRiver(river));
     render();
-    return {attach, tick, select, setVisible, showEstuary, refresh: render, setPuzzleMissing(ids) {puzzleMissing=new Set(ids);requestDraw();}, get basin() {return basinVisible ? river : '';}};
+    return {attach, tick, select, setVisible, showEstuary, refreshTerrain, refresh: render, setPuzzleMissing(ids) {puzzleMissing=new Set(ids);requestDraw();}, get basin() {return basinVisible ? river : '';}};
   }
   return {maskIndices, mount};
 })();

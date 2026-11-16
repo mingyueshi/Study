@@ -4,6 +4,8 @@
   const root = document.querySelector('.china-3d-topic');
   if (!root) return;
   const learningReady = Boolean(window.GMChinaLearning && window.GMChinaLearningVisual && window.GM_CHINA_LEARNING && root.querySelector('#gm3-learning-lab'));
+  const terrainIndex = window.GM_CHINA_TERRAIN_INDEX;
+  const streamingReady = Boolean(terrainIndex?.waterBaked && window.GMChinaTerrainStream && root.querySelector('#gm3-terrain-status'));
   const $ = id => root.querySelector(`#${id}`);
   const S = window.GMShared;
   const data = window.GM_CHINA_3D;
@@ -19,6 +21,8 @@
   let selected = '', renderer, scene, camera, controls, frame = 0, failed = false;
   let sectionController = null, terrainPlay = null, adventure = null, narrator = null, surfaceSampler = null, gamePoint = null, hydrology = null, activities = null, pins = null;
   let comparison = false, comparisonSaved = null, renderGain = null;
+  let terrainStreaming = null, viewTimer = 0, pickGeneration = 0;
+  const decodedParts = new WeakMap(), waterCache = new WeakMap(), rawModels = new Map();
   root.dataset.compare = 'false';
   const extraData = window.GM_CHINA_ADVENTURES;
   const visualGain = () => terrainPlay?.gain ?? (renderGain ?? exaggeration);
@@ -55,7 +59,7 @@
   $('gm3-intro').textContent = data.intro;
   for (const field of ['intro', 'note', 'observe']) $('gm3-section-' + field).textContent = data.section[field];
   $('gm3-section-steps').innerHTML = window.GM_STEPS.map(step => `<li style="--step-color:${step.color}"><b>${esc(step.name)}</b><span>${esc(step.altitude)}</span></li>`).join('');
-  $('gm3-model-note').innerHTML = `${esc(data.modelNote)} <a href="${esc(window.GM_CHINA_TERRAIN?.source.url || '#')}" target="_blank" rel="noopener">高程来源（需联网）↗</a>`;
+  $('gm3-model-note').innerHTML = `${esc(data.modelNote)} <a href="${esc((terrainIndex || window.GM_CHINA_TERRAIN)?.source.url || '#')}" target="_blank" rel="noopener">高程来源（需联网）↗</a>`;
   $('gm3-region-note').textContent = data.terrain.note;
   $('gm3-inset').innerHTML = S.insetSVG();
   updateLegend();
@@ -163,17 +167,19 @@
     }
   }
   function focusLandform(id, updateURL = true) {
+    const sampleToken=++pickGeneration;
     activities?.stop(); setComparison(false);
     adventure?.stop(); sectionController?.cancel();
     const mark = data.terrain.landmarks.find(item => item.feature === id);
     if (!mark) return;
     const model = models.get(mark.province);
-    const meters = model ? heightAt(model.geometry, mark.point) : null;
+    const meters = !streamingReady && model ? heightAt(model.geometry, mark.point) : null;
     select(mark.province, false, meters);
     focusedLandform = id;
     showLandforms = true;
     $('gm3-landform-labels').setAttribute('aria-pressed', 'true');
     showFeature(id);
+    if(streamingReady)sampleForLearning(mark.point).then(value=>{if(sampleToken===pickGeneration&&focusedLandform===id)showElevation(value);}).catch(()=>{});
     root.querySelectorAll('[data-landform]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.landform === id)));
     if (controls && !failed) {
       const [x, y] = xy(mark.point), z = heightToZ(meters || 0, exaggeration);
@@ -274,6 +280,7 @@
     $('map').scrollIntoView({ block: 'start', behavior: 'instant' });
   });
   function readLocation() {
+    pickGeneration++;
     const params = new URLSearchParams(location.search);
     activities?.stop(); setComparison(false);
     adventure?.stop(); sectionController?.cancel();
@@ -297,7 +304,23 @@
   window.addEventListener('popstate', readLocation);
 
   const { xy, buildTerrain, datum, metersPerUnit, heightToZ, elevationFromZ, heightAt, labelHeight, createSurfaceSampler, drapeRiver } = window.GMChina3DGeometry || {};
-  function sampleForLearning(point) {
+  function decodedPart(record) {
+    if(!decodedParts.has(record)) {
+      const value=window.GMChina3DGeometry.decode(record,terrainIndex);
+      if(value.basinFlags?.length*3!==value.indices.length||value.lakeFlags?.length*3!==value.indices.length)throw new Error('地形图层版本不符');
+      decodedParts.set(record,value);
+    }
+    return decodedParts.get(record);
+  }
+  function combinedTerrain(code) {
+    return streamingReady ? window.GMChina3DGeometry.mergeDecoded(terrainStreaming.records(code).map(decodedPart)) : window.GMChina3DGeometry.decode(window.GM_CHINA_TERRAIN.provinces[code]);
+  }
+  function ensureSampler() {
+    if(surfaceSampler)return;
+    for(const p of provinces)rawModels.set(p.id,{...combinedTerrain(p.adcode),province:p.id});
+    surfaceSampler=createSurfaceSampler([...rawModels.values()]);
+  }
+  async function sampleForLearning(point) {
     if (
       !Array.isArray(point) ||
       point.length !== 2 ||
@@ -308,14 +331,78 @@
       point[1] > 54
     )
       return null;
-    if (!surfaceSampler && window.GM_CHINA_TERRAIN)
-      surfaceSampler = createSurfaceSampler(
-        Object.entries(window.GM_CHINA_TERRAIN.provinces).map(([code, record]) => ({
-          ...window.GMChina3DGeometry.decode(record),
-          province: 'p' + code,
-        })),
-      );
-    return surfaceSampler?.(point) ?? null;
+    ensureSampler();
+    return terrainStreaming ? terrainStreaming.withPoints([point],()=>surfaceSampler(point)) : surfaceSampler(point);
+  }
+  function baked(record,kind,id) {
+    if(!waterCache.has(record))waterCache.set(record,new Map());
+    const cache=waterCache.get(record),key=kind+':'+id;
+    if(!cache.has(key))cache.set(key,window.GMChina3DGeometry.decodeFloats(record.render[kind][id]));
+    return cache.get(key);
+  }
+  function waterBuckets(id) {
+    const buckets=new Map();
+    for(const {code,record}of terrainStreaming.parts()) {
+      if(!record.render.rivers[id])continue;
+      if(!buckets.has('p'+code))buckets.set('p'+code,[]);
+      buckets.get('p'+code).push(baked(record,'rivers',id));
+    }
+    for(const [code,arrays]of buckets)buckets.set(code,window.GMChina3DGeometry.mergeFloats(arrays));
+    if(terrainIndex.outside.rivers[id])buckets.set('',window.GMChina3DGeometry.decodeFloats(terrainIndex.outside.rivers[id]));
+    return buckets;
+  }
+  function addRiverLines(group,halo,ink,buckets) {
+    for(const [owner,positions]of buckets) {
+      const geometry=new T.LineSegmentsGeometry().setPositions(positions);
+      const border=new T.LineSegments2(geometry,halo),line=new T.LineSegments2(geometry,ink);
+      border.userData.province=line.userData.province=owner;border.renderOrder=2;line.renderOrder=3;group.add(border,line);
+    }
+  }
+  function refreshTerrain(codes) {
+    if(!surfaceSampler)return;
+    const ids=[];
+    for(const code of codes) {
+      const id='p'+code,model=models.get(id),raw={...combinedTerrain(code),province:id};ids.push(id);
+      if(!model){surfaceSampler.replace(rawModels.get(id),raw);rawModels.set(id,raw);continue;}
+      const previous=model.geometry,next=buildTerrain(raw),boundary=model.border.geometry;
+      model.mesh.geometry=next.top;
+      model.group.children.find(child=>child.isMesh&&child!==model.mesh).geometry=next.side;
+      const edge=new T.LineSegmentsGeometry().setPositions(next.outline.getAttribute('position').array);
+      model.border.geometry=model.outline.geometry=edge;model.geometry=next;
+      surfaceSampler.replace(previous,next);
+      for(const key of ['top','side','outline'])previous[key].dispose();boundary.dispose();
+    }
+    if(models.size) {
+      terrainPlay?.refreshGeometry(ids);
+      for(const [id,r]of rivers) {
+        for(const geo of new Set(r.group.children.map(m=>m.geometry)))geo.dispose();r.group.clear();
+        addRiverLines(r.group,r.halo,r.ink,waterBuckets(id));
+      }
+      hydrology?.refreshTerrain();
+      for(const label of labels){const point=[label.point.x+104.5,label.point.y/1.22+35.8];label.meters=surfaceSampler(point)??label.meters;}
+      updateProvinces();updateRivers();requestDraw();
+    }
+  }
+  function queueTerrainView() {
+    if(!terrainStreaming||!camera||failed)return;
+    clearTimeout(viewTimer);viewTimer=setTimeout(()=>{
+      if(failed)return;
+      camera.updateMatrixWorld(true);
+      const keys=window.GMChinaTerrainStream.visibleTiles(terrainIndex,(p,meters)=>{
+        const [x,y]=xy(p);return new T.Vector3(x,y,heightToZ(meters,comparison?50:exaggeration)).project(camera);
+      },comparison?width/2:width,height);
+      terrainStreaming.setVisible(keys);
+    },120);
+  }
+  if(streamingReady) {
+    terrainStreaming=window.GMChinaTerrainStream.create({index:terrainIndex,changed:refreshTerrain,validate:payload=>Object.values(payload.provinces).forEach(decodedPart),status:state=>{
+      root.dataset.demCached=String(state.cached);root.dataset.demActive=String(state.active);root.dataset.demPending=String(state.pending);
+      $('gm3-terrain-status').textContent=state.pending?'正在看清这一带的山河……':state.failed?'这块地形暂时没读到，还可以看全图。':state.active?'这一带的山河细节已清晰。':'先看全貌，放大后看更细的山河。';
+      $('gm3-terrain-retry').hidden=!state.failed;
+    }});
+    $('gm3-terrain-retry').addEventListener('click',()=>terrainStreaming.retry());
+    root.addEventListener('click',e=>{if(e.target.closest('button,select,input'))pickGeneration++;},true);
+    root.addEventListener('change',()=>pickGeneration++,true);
   }
   function refreshComparison() {
     if (!learningReady) return;
@@ -430,7 +517,7 @@
     }
     requestDraw();
   }
-  hydrology = window.GMChinaHydrology.mount({root, focusRiver, focusPoint: focusWaterPoint, focusEstuary, requestDraw, available: () => Boolean(renderer) && !failed, reveal: () => viewport.scrollIntoView({block:'center',behavior:'instant'})});
+  hydrology = window.GMChinaHydrology.mount({root, focusRiver, focusPoint: focusWaterPoint, focusEstuary, requestDraw, available: () => Boolean(renderer) && !failed, reveal: () => viewport.scrollIntoView({block:'center',behavior:'instant'}),terrainParts:streamingReady?()=>terrainStreaming.parts():null});
   if (learningReady) {
     pins = window.GMChinaLearningVisual.mount({
       root,
@@ -524,7 +611,7 @@
   }
   function projectFlow(sample) {
     const [x, y] = xy(sample.point);
-    const vector = new T.Vector3(x, y, heightToZ(sample.meters + 3, visualGain()) + (terrainPlay?.offset(terrainPlay.owner(sample.point)) || 0) + .001).project(camera);
+    const vector = new T.Vector3(x, y, heightToZ((surfaceSampler?.(sample.point)??sample.meters) + 3, visualGain()) + (terrainPlay?.offset(terrainPlay.owner(sample.point)) || 0) + .001).project(camera);
     return { x: (vector.x + 1) * width / 2, y: (1 - vector.y) * height / 2,
       visible: vector.z > -1 && vector.z < 1 && Math.abs(vector.x) < .99 && Math.abs(vector.y) < .99 };
   }
@@ -605,7 +692,7 @@
     const state = tourController.snapshot();
     if (!force && state.distance === tourLastDistance) return;
     tourLastDistance = state.distance;
-    const [x, y] = xy(tourPoint.point), z = heightToZ(tourPoint.meters, exaggeration);
+    const [x, y] = xy(tourPoint.point), z = heightToZ(surfaceSampler?.(tourPoint.point)??tourPoint.meters, exaggeration);
     controls.target.set(x, y, z);
     camera.position.copy(controls.target).add(tourOffset);
     camera.zoom = tourZoom;
@@ -728,6 +815,7 @@
     frame = 0;
     if (!renderer || failed) return;
     applyDisplay();renderMap();pins?.layout(comparison);
+    root.dataset.renderCalls=String(renderer.info.render.calls);root.dataset.renderTriangles=String(renderer.info.render.triangles);
     const occupied = [];
     if (tourController) occupied.push([width / 2 - 25, height / 2 - 30, width / 2 + 180, height / 2 + 12]);
     // 省名默认优先，给小省区提供引线避让；聚焦山河时仍优先展示该地点。
@@ -810,6 +898,7 @@
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
     renderer.setSize(width, height, false);
     requestDraw();
+    queueTerrainView();
   }
   function setView(view) {
     if (!controls || failed) return;
@@ -891,6 +980,7 @@
     controls.maxZoom = 3.5;
     controls.rotateSpeed = .65;
     controls.addEventListener('change', requestDraw);
+    controls.addEventListener('change', queueTerrainView);
     controls.addEventListener('start', markCustomView);
     scene.add(new T.AmbientLight('#ffffff', .9));
     const sun = new T.DirectionalLight('#fff5e5', 2.6);
@@ -900,10 +990,10 @@
     grid.rotation.x = Math.PI / 2;
     grid.position.z = -.25;
     scene.add(grid);
-    if (!window.GM_CHINA_TERRAIN) throw new Error('高程数据未加载');
+    if (!streamingReady && !window.GM_CHINA_TERRAIN) throw new Error('高程数据未加载');
     for (const p of provinces) {
       const color = regions.get(p.region).color;
-      const geometry = buildTerrain(window.GM_CHINA_TERRAIN.provinces[p.adcode]);
+      const geometry = buildTerrain(combinedTerrain(p.adcode));
       geometry.province = p.id;
       const group = new T.Group();
       group.position.z = datum;
@@ -933,13 +1023,14 @@
     for (const config of data.rivers) {
       const feature = features.get(config.feature), record = window.GM_CHINA_RIVERS?.rivers[config.feature];
       if (!record) throw new Error(`真实河道未加载：${feature.name}`);
-      const draped = drapeRiver(record.paths, sampleSurface);
+      const draped = streamingReady ? (()=>{const paths=record.paths.map(path=>path.map(p=>({point:p.slice(0,2),meters:p[2]})));return{paths,samples:paths.flat()};})() : drapeRiver(record.paths, sampleSurface);
       if (!draped.paths.length) throw new Error(`水系未能贴合地形：${feature.name}`);
       const group = new T.Group();
       group.position.z = datum + .001;
       const halo = new T.LineMaterial({ color: '#effbff', linewidth: 5.2, depthWrite: false });
       const ink = new T.LineMaterial({ color: '#1477cf', linewidth: 3.2, depthWrite: false });
-      for (const path of draped.paths) {
+      if(streamingReady)addRiverLines(group,halo,ink,waterBuckets(config.feature));
+      else for (const path of draped.paths) {
         const buckets = new Map();
         for (let i = 1; i < path.length; i++) {
           const previous = path[i - 1], next = path[i];
@@ -1050,6 +1141,7 @@
     };
     sectionController = window.GMTerrainSection.create({
       root, canvas, sample: sampleSurface, requestDraw, project: projectFlow,
+      sampleReady: terrainStreaming ? (a,b,run)=>terrainStreaming.withLine(a,b,run) : null,
       pick: event => {
         if (failed) return null;
         const hit = pickTerrain(event);
@@ -1069,12 +1161,20 @@
       if (gesture && Math.hypot(e.clientX - gesture.x, e.clientY - gesture.y) > 6) gesture.moved = true;
     });
     canvas.addEventListener('pointercancel', () => { gesture = null; });
-    canvas.addEventListener('pointerup', e => {
+    canvas.addEventListener('pointerup', async e => {
       const start = gesture;
       gesture = null;
       if (!start || start.id !== e.pointerId || start.moved || failed) return;
       const hit = pickTerrain(e);
-      if (hit) { const point = [hit.point.x + 104.5, hit.point.y / 1.22 + 35.8],meters=surfaceSampler(point);pins?.setLast(point,meters);chooseProvince(hit.object.userData.province, point, meters); }
+      if (hit) {
+        const point=[hit.point.x+104.5,hit.point.y/1.22+35.8],owner=hit.object.userData.province,token=++pickGeneration;
+        if(terrainStreaming)$('gm3-elevation').textContent='正在看清这里的地形……';
+        try {
+          const meters=await sampleForLearning(point);
+          if(token!==pickGeneration)return;
+          pins?.setLast(point,meters);chooseProvince(owner,point,meters);
+        } catch {if(token===pickGeneration)$('gm3-elevation').textContent='这里的地形暂时没读到，请稍后再点一次。';}
+      }
     });
     canvas.addEventListener('webglcontextlost', e => {
       e.preventDefault();
@@ -1103,6 +1203,7 @@
       flowPlayback?.pause();
       tourController?.pause();
       if (e.persisted) return;
+      clearTimeout(viewTimer);terrainStreaming?.dispose();
       flowPlayback?.dispose();
       tourController?.dispose();
       observer.disconnect(); controls.dispose();
@@ -1189,7 +1290,7 @@
     available: flowAvailable, canAnimate: () => fullMotion() && !document.hidden && inView,
     render: drawFlow, changed: syncFlow,
   });
-  const refreshFlow = () => { flowPlayback.refresh(); tourController?.refresh(); if (document.hidden || !inView || !fullMotion()) { narrator?.stop(); terrainPlay?.settle(); } requestDraw(); };
+  const refreshFlow = () => { flowPlayback.refresh(); tourController?.refresh(); if (document.hidden || !inView || !fullMotion()) { narrator?.stop(); terrainPlay?.settle(); } if(terrainStreaming){if(document.hidden||!inView)terrainStreaming.setVisible([]);else queueTerrainView();}requestDraw(); };
   const flowObserver = new IntersectionObserver(entries => {
     inView = entries[0].isIntersecting;
     refreshFlow();

@@ -18,7 +18,17 @@ window.GMChina3DGeometry = (() => {
     }
     return colorStops.at(-1).color.clone();
   }
-  function decode(record, source = window.GM_CHINA_TERRAIN) {
+  const paletteMin = -500, paletteMax = 9000;
+  const palette = new Float32Array((paletteMax - paletteMin + 1) * 3);
+  for (let meters = paletteMin; meters <= paletteMax; meters++) terrainColor(meters).toArray(palette, (meters - paletteMin) * 3);
+  function fillTerrainColors(elevations, colors = new Float32Array(elevations.length * 3)) {
+    for (let i = 0; i < elevations.length; i++) {
+      const offset = (Math.max(paletteMin, Math.min(paletteMax, Math.round(elevations[i]))) - paletteMin) * 3;
+      colors[i * 3] = palette[offset]; colors[i * 3 + 1] = palette[offset + 1]; colors[i * 3 + 2] = palette[offset + 2];
+    }
+    return colors;
+  }
+  function decode(record, source = window.GM_CHINA_TERRAIN || window.GM_CHINA_TERRAIN_INDEX) {
     const raw = bytes(record.vertices), trianglesRaw = bytes(record.triangles), edgesRaw = bytes(record.edges);
     if (raw.length !== record.vertexCount * 6 || trianglesRaw.length !== record.triangleCount * 3 * record.indexBytes) throw new Error('高程网格长度不符');
     const view = new DataView(raw.buffer);
@@ -40,16 +50,16 @@ window.GMChina3DGeometry = (() => {
       }
       return indices;
     };
-    return { positions, elevations, indices: readIndices(trianglesRaw), edges: readIndices(edgesRaw) };
+    return { positions, elevations, indices: readIndices(trianglesRaw), edges: readIndices(edgesRaw),
+      basinFlags: record.basinFlags ? bytes(record.basinFlags) : null, lakeFlags: record.lakeFlags ? bytes(record.lakeFlags) : null };
   }
   function buildTerrain(record) {
-    const decoded = decode(record);
+    const decoded = record.positions ? record : decode(record);
     const { positions, elevations, indices, edges } = decoded;
     const top = new T.BufferGeometry();
     top.setAttribute('position', new T.BufferAttribute(positions, 3));
     top.setIndex(new T.BufferAttribute(indices, 1));
-    const colors = new Float32Array(positions.length);
-    for (let i = 0; i < elevations.length; i++) terrainColor(elevations[i]).toArray(colors, i * 3);
+    const colors = fillTerrainColors(elevations);
     top.setAttribute('color', new T.BufferAttribute(colors, 3));
     top.computeVertexNormals();
     top.computeBoundingSphere();
@@ -69,6 +79,40 @@ window.GMChina3DGeometry = (() => {
     side.setAttribute('position', new T.Float32BufferAttribute(walls, 3));
     side.computeVertexNormals();
     return { ...decoded, top, side, outline };
+  }
+  function mergeDecoded(parts) {
+    const size = parts.reduce((n, p) => n + p.elevations.length, 0);
+    const positions = new Float32Array(size * 3), elevations = new Int16Array(size);
+    const indices = new Uint32Array(parts.reduce((n,p)=>n+p.indices.length,0));
+    const edges = new Uint32Array(parts.reduce((n,p)=>n+p.edges.length,0));
+    const basinFlags = new Uint8Array(indices.length/3), lakeFlags = new Uint8Array(indices.length/3);
+    let vertex=0, triangle=0, edge=0;
+    for (const part of parts) {
+      positions.set(part.positions,vertex*3); elevations.set(part.elevations,vertex);
+      for(let i=0;i<part.indices.length;i++)indices[triangle+i]=part.indices[i]+vertex;
+      for(let i=0;i<part.edges.length;i++)edges[edge+i]=part.edges[i]+vertex;
+      if(part.basinFlags)basinFlags.set(part.basinFlags,triangle/3);
+      if(part.lakeFlags)lakeFlags.set(part.lakeFlags,triangle/3);
+      vertex+=part.elevations.length;triangle+=part.indices.length;edge+=part.edges.length;
+    }
+    return {positions,elevations,indices,edges,basinFlags,lakeFlags};
+  }
+  function decodeFloats(text) {
+    const raw=bytes(text), view=new DataView(raw.buffer);
+    if(raw.length%24)throw new Error('河线数据长度不符');
+    const values=new Float32Array(raw.length/4);
+    for(let i=0;i<values.length;i++) { values[i]=view.getFloat32(i*4,true); if(!Number.isFinite(values[i]))throw new Error('河线坐标无效'); }
+    return values;
+  }
+  function maskedIndices(mesh, kind, bit) {
+    const flags=mesh[kind+'Flags'], selected=[];
+    if(!flags || flags.length*3!==mesh.indices.length)throw new Error('地形图层掩膜不符');
+    for(let i=0;i<flags.length;i++)if(flags[i]&(1<<bit))selected.push(mesh.indices[i*3],mesh.indices[i*3+1],mesh.indices[i*3+2]);
+    return selected;
+  }
+  function mergeFloats(arrays) {
+    const result=new Float32Array(arrays.reduce((n,a)=>n+a.length,0));let offset=0;
+    for(const a of arrays){result.set(a,offset);offset+=a.length;}return result;
   }
   function heightAt(mesh, point) {
     const [x, y] = xy(point), p = mesh.positions, ids = mesh.indices;
@@ -98,9 +142,10 @@ window.GMChina3DGeometry = (() => {
   }
   function createSurfaceSampler(meshes) {
     // 建立三角形空间索引，河流的密集采样不逐点扫描全国网格。
-    const cells = new Map(), cellSize = .1;
+    const cells = new Map(), meshCells = new Map(), cellSize = .1;
     const cell = value => Math.floor(value / cellSize);
-    for (const mesh of meshes) {
+    function add(mesh) {
+      const touched = new Set();
       const p = mesh.positions, ids = mesh.indices;
       for (let i = 0; i < ids.length; i += 3) {
         const a = ids[i] * 3, b = ids[i + 1] * 3, c = ids[i + 2] * 3;
@@ -110,10 +155,13 @@ window.GMChina3DGeometry = (() => {
             const key = `${x},${y}`;
             if (!cells.has(key)) cells.set(key, []);
             cells.get(key).push(entry);
+            touched.add(key);
           }
         }
       }
+      meshCells.set(mesh, touched);
     }
+    meshes.forEach(add);
     const locate = point => {
       const [x, y] = xy(point);
       let highest = null, owner = null;
@@ -134,6 +182,13 @@ window.GMChina3DGeometry = (() => {
     };
     const sample = point => locate(point)?.meters ?? null;
     sample.locate = locate;
+    sample.replace = (previous, next) => {
+      for (const key of meshCells.get(previous) || []) {
+        const remaining = cells.get(key).filter(entry => entry.mesh !== previous);
+        if (remaining.length) cells.set(key, remaining); else cells.delete(key);
+      }
+      meshCells.delete(previous); if (next) add(next);
+    };
     // 将河段在地形三角形边上切开，线段中部也贴住表面，而非只贴住两个端点。
     sample.cuts = (from, to) => {
       const [x0, y0] = xy(from), [x1, y1] = xy(to), candidates = new Set();
@@ -226,5 +281,5 @@ window.GMChina3DGeometry = (() => {
     }
     return { paths, samples };
   }
-  return { xy, metersPerUnit, datum, heightToZ, elevationFromZ, decode, buildTerrain, heightAt, labelHeight, terrainColor, createSurfaceSampler, drapeLine, drapeRiver };
+  return { xy, metersPerUnit, datum, heightToZ, elevationFromZ, decode, buildTerrain, heightAt, labelHeight, terrainColor, fillTerrainColors, mergeDecoded, decodeFloats, maskedIndices, mergeFloats, createSurfaceSampler, drapeLine, drapeRiver };
 })();
