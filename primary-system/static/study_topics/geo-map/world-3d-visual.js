@@ -68,7 +68,7 @@ window.GMWorldVisual = (() => {
     }`;
   function create({T, G, scene, texture, landMask, assets, root, render, terrainChanged}) {
     const D = window.GM_WORLD_VISUAL, $ = id => root.querySelector('#' + id);
-    let elevation = () => 0, terrain = true, disposed = false, sunPoint = null;
+    let elevation = () => 0, terrain = true, ancient = false, disposed = false, sunPoint = null;
     const nightCanvas = document.createElement('canvas'); nightCanvas.width = 2048; nightCanvas.height = 1024;
     const ctx = nightCanvas.getContext('2d');
     if (ctx) {
@@ -142,9 +142,9 @@ window.GMWorldVisual = (() => {
     };
     function noRelief() { root.dataset.relief = 'unavailable'; $('gw-relief').checked = false; $('gw-relief').disabled = true; $('gw-visual-status').textContent = '地形资料暂时无法读取，仍可在平滑地球上探索。'; }
     image.onerror = noRelief; image.src = new URL(D.relief.file, assets).href;
-    $('gw-relief').addEventListener('change', () => { terrain = $('gw-relief').checked; applyTerrain(); });
+    $('gw-relief').addEventListener('change', () => { terrain = $('gw-relief').checked && !ancient; applyTerrain(); });
     $('gw-atmosphere').addEventListener('change', () => { atmosphere.visible = $('gw-atmosphere').checked; render(); });
-    $('gw-lights').addEventListener('change', () => { uniforms.lightsEnabled.value = Number($('gw-lights').checked); render(); });
+    $('gw-lights').addEventListener('change', () => { uniforms.lightsEnabled.value = Number($('gw-lights').checked && !ancient); render(); });
     function illuminate(model) {
       sunPoint = model?.sunPoint || null; uniforms.daylightMode.value = Number(Boolean(model)); sun.visible = Boolean(model);
       root.dataset.lighting = model ? 'daylight' : 'studio'; $('gw-sun-direction').hidden = !model;
@@ -169,7 +169,7 @@ window.GMWorldVisual = (() => {
       for (const mesh of [atmosphere, sun, corona]) { mesh.geometry.dispose(); mesh.material.dispose(); }
       nightTexture.dispose(); scene.remove(atmosphere, sun);
     }
-    return {geometry, material, radius, illuminate, update, dispose};
+    return {geometry, material, radius, illuminate, update, dispose,setAncient(on){ancient=on;terrain=$('gw-relief').checked&&!ancient;uniforms.lightsEnabled.value=Number($('gw-lights').checked&&!ancient);applyTerrain();}};
   }
   return {sampler, offset, createRotation, create};
 })();

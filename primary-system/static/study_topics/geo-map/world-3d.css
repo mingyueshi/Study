@@ -217,3 +217,42 @@
 #gw-outline-image path { fill: #307b70; stroke: #154d49; stroke-width: 1; stroke-linejoin: round; }
 #gw-outline-feedback { padding: 12px; border-left: 5px solid #da9c47; background: #fff7e7; border-radius: 8px; }
 @media (max-width: 600px) { #gw-voyage-panel, #gw-life-panel, #gw-outline-panel { padding: 13px; } .gw-zone-times { grid-template-columns: repeat(2,minmax(0,1fr)); } .gw-life-list { grid-template-columns: repeat(2,minmax(0,1fr)); } }
+
+/* 新图层继续沿用大字号与右侧档案，星点只绘制一次。 */
+.gw-lab, .gw-timer, #gw-my-trips { padding: 22px; border-block: 1px solid #bed7dc; background: var(--card); }
+.gw-lab { background: #f0f8f7; }
+.gw-lab h2, .gw-timer h2 { margin: 0 0 14px; color: var(--ink); font-size: 24px; }
+.gw-lab-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; }
+.gw-lab-controls label, #gw-my-trips label { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; font-size: 18px; font-weight: 750; }
+#gw-lab-layer, #gw-trip-name { max-width: 100%; min-width: 0; padding: 10px; border: 1px solid #9ab9b8; border-radius: 10px; background: var(--card); color: var(--ink); font: inherit; }
+.gw-lab p, .gw-timer p { line-height: 1.8; }
+#gw-lab-detail { color: #92501d; font-size: 20px; font-weight: 750; }
+#gw-lab-plates button { border-left: 8px solid var(--plate-color); }
+.gw-rain-legend { display: flex; flex-wrap: wrap; gap: 12px; font-size: 16px; }
+.gw-rain-legend span { display: flex; gap: 6px; align-items: center; }
+.gw-rain-legend i { width: 24px; height: 18px; border-radius: 4px; border: 1px solid #375b6250; }
+#gw-gyro-status { flex: 1 1 250px; align-self: center; font-size: 16px; line-height: 1.7; }
+#gw-stars { position: absolute; inset: 0; pointer-events: none; opacity: 0; background-size: 1200px 800px; }
+.world-3d-topic[data-stars="true"] .gw-viewport { background: radial-gradient(ellipse at 55% 40%,#1b3b56,#08152b 80%); color: #d5e7f4; }
+.world-3d-topic[data-stars="true"] #gw-stars { opacity: 1; }
+.world-3d-topic[data-stars="true"] .gw-stamp b { color: #cee8f7; }
+#gw-canvas { position: relative; }
+#gw-population-markers, #gw-sky-labels { z-index: 2; }
+.gw-population-dot { position: absolute; min-width: 0; min-height: 0; padding: 0; transform: translate(-50%,-50%); border: 2px solid #fff0dc; border-radius: 50%; background: #f2602ca8; box-shadow: 0 0 12px #ffb03ba0; pointer-events: auto; }
+.gw-population-dot:hover, .gw-population-dot:focus-visible { background: #e44624d4; }
+.gw-sky-label { position: absolute; transform: translate(-50%,-50%); white-space: nowrap; color: #fff0c6; background: #152b489c; padding: 3px 8px; border-radius: 6px; font-size: 17px; }
+.gw-ancient-label { color: #24473d; background: #fff4dde8; font-size: 18px; font-weight: 750; border: 1px solid #a48453; }
+.gw-ship { position: absolute; z-index: 3; transform: translate(-50%,-75%); font-size: 36px; line-height: 1; filter: drop-shadow(0 2px 3px #082539); pointer-events: none; }
+.gw-arrival { position: absolute; top: 65px; left: 50%; z-index: 3; transform: translateX(-50%); padding: 9px 18px; max-width: 80%; border-radius: 20px; background: #fff1c7; color: #6c3d12; font-size: 20px; font-weight: 800; pointer-events: none; }
+.gw-arrival.is-arriving { animation: gw-arrive 3.5s ease both; }
+@keyframes gw-arrive { 0%,100% { opacity: 0; } 15%,80% { opacity: 1; } }
+.gw-timer { background: #fff5dc; }
+#gw-timer-value { display: inline-block; font-size: 32px; color: #8c4b18; font-variant-numeric: tabular-nums; margin-right: 20px; }
+#gw-timer-count { font-size: 19px; font-weight: 750; }
+#gw-trip-list { padding-left: 22px; line-height: 2.3; font-size: 18px; }
+#gw-trip-list button { padding: 5px 10px; background: var(--card); border: 1px solid #a7c7bd; border-radius: 8px; color: var(--ink); }
+#gw-my-trips .gw-buttons { margin-top: 14px; }
+.gw-voyage-follow { display: flex; gap: 8px; align-items: center; margin-block: 15px; font-size: 17px; }
+.gw-view-label { color: #205467; }
+@media (prefers-reduced-motion: reduce) { .gw-arrival.is-arriving { animation: none; } }
+@media (max-width: 600px) { .gw-lab, .gw-timer, #gw-my-trips { padding: 14px; } .gw-lab-controls label { width: 100%; } #gw-lab-layer { width: 100%; } }

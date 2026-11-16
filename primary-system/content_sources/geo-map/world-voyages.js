@@ -25,21 +25,22 @@ window.GMWorldVoyages = (() => {
     const v = theta < 1e-8 ? a : a.map((x,i) => (x*Math.sin((1-fraction)*theta) + b[i]*Math.sin(fraction*theta))/Math.sin(theta));
     return {point:window.GMWorld3DGeometry.lonLat({x:v[0],y:v[1],z:v[2]}), meters:0};
   }
-  function mount({root, focus, overlay, ship, activate}) {
+  function mount({root, focus, overlay, ship, activate, follow=focus}) {
     const D = window.GM_WORLD_EXPEDITIONS, esc = window.GMShared.esc, $ = id => root.querySelector('#gw-voyage-' + id);
-    let active = false, route = null, controller = null, visible = false, writing = false;
+    let active = false, route = null, controller = null, visible = false, writing = false, arrival = '';
     const media = matchMedia('(prefers-reduced-motion: reduce)');
     const fullMotion = () => !media.matches && (!window.StudyEffects || window.StudyEffects.motion === 'full');
     const canPlay = () => active && visible && !document.hidden && fullMotion() && root.dataset.renderer === 'webgl';
     $('routes').innerHTML = D.voyages.map(v => `<button type="button" data-voyage="${v.id}">${esc(v.name)}</button>`).join('');
     function address(state) {
       if (writing || !active || !route) return;
-      const url = new URL(location.href); url.searchParams.set('voyage', route.id); url.searchParams.set('port', route.stops[state.index].id);
+      const url = new URL(location.href); if(route.custom){url.searchParams.delete('voyage');url.searchParams.delete('port');}else{url.searchParams.set('voyage', route.id); url.searchParams.set('port', route.stops[state.index].id);}
       url.searchParams.delete('tour'); url.searchParams.delete('stop'); history.replaceState(null, '', url);
     }
     function changed(state) {
       if (!route || !active) return;
       const stop = route.stops[state.index];
+      $('history').hidden=Boolean(route.custom);
       $('count').textContent = `${route.name} · 第 ${state.index+1}／${route.stops.length} 站`;
       $('title').textContent = stop.name; $('text').textContent = stop.text; $('observe').textContent = '看一看：' + stop.observe;
       $('history').href = root.dataset.historyEvent + '?id=' + stop.history;
@@ -52,26 +53,33 @@ window.GMWorldVoyages = (() => {
       root.querySelector('#gw-tool-goal').textContent = `${route.name} · ${stop.name}`;
       root.querySelector('#gw-tool-result').textContent = $('status').textContent;
       root.dataset.voyage = route.id; root.dataset.voyageStation = stop.id; root.dataset.voyagePlaying = String(state.playing); root.dataset.voyagePhase = state.phase;
+      const badge=root.querySelector('#gw-arrival'),stamp=state.phase==='travel'?'':stop.id;
+      if(stamp!==arrival){arrival=stamp;badge.hidden=!stamp;badge.textContent=stamp?'已到达 · '+stop.name:'';badge.classList.remove('is-arriving');if(stamp){void badge.offsetWidth;badge.classList.add('is-arriving');}}
       address(state);
     }
     function start(id, play = false, port = '') {
       const config = D.voyages.find(v => v.id === id); if (!config) return;
+      begin(config,play,port);
+    }
+    function begin(config,play=false,port=''){
       writing = true; controller?.dispose(); writing = false;
+      arrival='';root.querySelector('#gw-arrival').hidden=true;
       route = buildRoute(config); $('speed').textContent='速度：慢慢看'; $('note').textContent = config.note;
       $('stops').innerHTML = route.stops.map((s,i) => `<button type="button" data-port="${i}" aria-pressed="false">${i+1} · ${esc(s.name)}</button>`).join('');
-      $('routes').querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.voyage === id)));
+      $('routes').querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.voyage === config.id)));
       overlay(route.stops.map(s => ({point:s.point,color:'#a45220'})),route.nodes);
       controller = window.GMRiverTour.createTour({route, positionAt:position, holdSeconds:8, travelSeconds:150, request:requestAnimationFrame, cancel:cancelAnimationFrame, canPlay, changed,
-        moved: (sample,state) => { ship(sample.point); focus(sample.point, state.phase === 'travel' ? '沿航线前进' : route.stops[state.index].name); $('progress').value = state.progress; root.dataset.voyageProgress = state.progress.toFixed(6); }
+        moved: (sample,state) => { ship(sample.point);if($('follow').checked)follow(sample.point,state.phase==='travel'?'沿航线前进':route.stops[state.index].name); $('progress').value = state.progress; root.dataset.voyageProgress = state.progress.toFixed(6);root.dataset.shipPoint=sample.point.map(n=>n.toFixed(4)).join(','); }
       });
       controller.jump(Math.max(0, route.stops.findIndex(s => s.id === port)));
+      focus(route.stops[controller.snapshot().index].point,route.stops[controller.snapshot().index].name);
       if (play) { root.querySelector('#gw-viewport').scrollIntoView({block:'center'}); visible = true; controller.play(); }
     }
     function setActive(value) {
       if (active === value) return;
       active = value; $('panel').hidden = !active;
       if (!active) {
-        controller?.pause(); ship(null); root.dataset.voyagePlaying='false';
+        controller?.pause(); ship(null);root.querySelector('#gw-arrival').hidden=true; root.dataset.voyagePlaying='false';
         const url = new URL(location.href); url.searchParams.delete('voyage'); url.searchParams.delete('port'); history.replaceState(null,'',url);
       } else if (!route) start(D.voyages[0].id);
       else { overlay(route.stops.map(s => ({point:s.point,color:'#a45220'})),route.nodes); controller.jump(controller.snapshot().index); }
@@ -91,7 +99,7 @@ window.GMWorldVoyages = (() => {
     const observer=new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;refresh();});observer.observe(root.querySelector('#gw-viewport'));
     document.addEventListener('visibilitychange',refresh);document.addEventListener('study:effects-change',refresh);media.addEventListener('change',refresh);root.addEventListener('gm-world-renderer-change',refresh);
     window.addEventListener('pagehide',e=>{pause();if(e.persisted)return;controller?.dispose();observer.disconnect();document.removeEventListener('visibilitychange',refresh);document.removeEventListener('study:effects-change',refresh);media.removeEventListener('change',refresh);root.removeEventListener('gm-world-renderer-change',refresh);});
-    return {setActive, restore() { const p=new URLSearchParams(location.search); if(D.voyages.some(v=>v.id===p.get('voyage'))){activate('voyage');start(p.get('voyage'),false,p.get('port'));} else if(active) activate('browse'); }, pause};
+    return {setActive, custom(trip){activate('voyage');begin({id:'my-trip',custom:true,name:trip.name,note:window.GM_WORLD_EXPEDITIONS.routeNote,stops:trip.stops.map((s,i)=>({id:'my-'+i,name:s.name,point:s.point,via:i?[s.point]:[],text:`我的环球旅行 · 第 ${i+1} 站`,observe:'这一路跨过了哪些陆地和海洋？',history:'',sources:[]}))},true);},restore() { const p=new URLSearchParams(location.search); if(D.voyages.some(v=>v.id===p.get('voyage'))){activate('voyage');start(p.get('voyage'),false,p.get('port'));} else if(active) activate('browse'); }, pause};
   }
   return {buildRoute, position, mount};
 })();

@@ -29,5 +29,7 @@ for (const c of O.continents) {
 }
 assert.match(O.source.sha256, /^[a-f0-9]{64}$/);
 const html=fs.readFileSync(path.join(__dirname,'../geo-map/world-3d.html'),'utf8');
-for (const f of ['world-expeditions-data.js','world-outlines-data.js','world-voyages.js','world-explorers.js','world-animals-data.js','world-plants-data.js','animals-learning.js']) assert.ok(html.includes(f));
+const pack=JSON.parse(fs.readFileSync(path.join(__dirname,'../geo-map/world-3d-pack.json'),'utf8'));
+assert.ok(html.includes('world-3d-pack.js'));
+for (const f of ['world-expeditions-data.js','world-outlines-data.js','world-voyages.js','world-explorers.js','world-animals-data.js','world-plants-data.js','animals-learning.js']) assert.ok(pack.includes(f));
 console.log('世界地球仪航线、城市时区、七洲轮廓和历史关联校验通过');

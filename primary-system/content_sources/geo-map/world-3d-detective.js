@@ -67,6 +67,7 @@ window.GMWorldDetective = (() => {
         try { localStorage.setItem(KEY, JSON.stringify([...state.found])); }
         catch { $('gw-detective-storage').textContent = '本次已记下，浏览器未能保存到下次。'; }
         feedback('找到啦！' + state.mission.explanation + (state.found.size === D.missions.length ? ' 全部线索都完成啦！' : ''), `找到了${name(state.mission.answer)}！下方有解析，也可以继续下一条。`);
+        root.dispatchEvent(new CustomEvent('gm-world-answer',{detail:{kind:'detective',id:state.mission.id}}));
       } else if (result === 'ocean') feedback('这里没有点到国家陆地，转一转再找找；小国家也可以用下方列表作答。');
       else feedback(`你选了${name(country)}。再对照线索里的大洲、海洋或形状找找，也可以点「提示」。`, `你选了${name(country)}。再对照线索找找，或点「提示」。`);
       return true;
@@ -86,6 +87,7 @@ window.GMWorldDetective = (() => {
     $('gw-detective-pending').addEventListener('click', () => { round.resume(); begin(round.state().mission.id); });
     $('gw-detective-reveal').addEventListener('click', () => {
       round.reveal(); const s = round.state(); highlight(s.mission.answer); locate(s.mission.answer); render();
+      root.dispatchEvent(new CustomEvent('gm-world-answer',{detail:{kind:'detective',id:s.mission.id,revealed:true}}));
       feedback(`答案是${name(s.mission.answer)}。${s.mission.explanation}这次查看不计入找到记录，可点「重新挑战」再找一次。`, `答案是${name(s.mission.answer)}。查看不计入完成，可在下方重新挑战。`);
     });
     $('gw-detective-learn').addEventListener('click', () => {
@@ -97,7 +99,7 @@ window.GMWorldDetective = (() => {
       if (value) { round.resume(); begin(round.state().mission.id); }
       else highlight('');
     }
-    return {setActive, guess};
+    return {setActive, guess,startTimed:()=>begin(D.missions[0].id)};
   }
   function mountProgress({root, open}) {
     const tracks = [

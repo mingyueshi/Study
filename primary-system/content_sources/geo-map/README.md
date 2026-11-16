@@ -190,3 +190,13 @@ node --test scripts/test_world_3d.cjs
 七洲轮廓侦探用 `world-outlines-data.js` 的无国界轮廓，不按国家分组拼洲。来源为 Natural Earth `ne_110m_geography_regions_polys.geojson` 的 Continent 多边形，原输入 SHA-256 在元数据中；大洋洲另补原世界底图中的部分岛屿。`python3 content_sources/geo-map/scripts/build-world-outlines.py <原始 GeoJSON>` 可重新生成。通常北朝上，南极洲用极区俯视；卡片在作答前不显示洲名，提示、看答案、重新挑战与打开原大洲档案分开。查看答案不计完成，记录用 `study_world_globe_outlines_v1`，与原国家侦探互不影响。
 
 新增数据先运行 `node content_sources/test/test-world-expeditions.js`；回归为 `node --test scripts/test_world_expeditions.cjs`。生成器为地球仪本地资源附内容指纹，以免模板或浏览器继续使用旧播放器。修改后运行 `make study-topics-data` 并核对生成物。
+
+### 环球旅行、计时与主题图层
+
+航线用船只图标逐帧沿大圆弧移动，到站提示淡入淡出；可在画面内切换「镜头跟船」，匀速按球面里程推进，不逐帧重画地表。多点行程可命名并保存最多 8 趟「我的环球旅行」，下次打开、编辑、删除或回放；每趟 2—20 站，保存失败有明确反馈。
+
+寻宝与国家侦探均提供主动开始的前 5 处计时挑战，本轮与历史掌握记录分开，暂停和继续累计，看答案后转为练习。`world-play.js` 集中管理存储校验、计时与设备倾斜授权。倾斜控制默认关闭，需要安全来源、设备支持及按钮授权；换玩法、离屏、后台与手动操作会关闭，仍保留原鼠标、触摸和键盘。
+
+`world-lab-data.js`、`world-lab.js` 提供 18 城人口规模圆点、六大板块教学分组、约 2 亿年前的粗略古陆拼图、亚洲冬夏季风、台风转向示意、NASA 多年平均年降水及 4 个星座的示意天球。各层互斥切换，`?lab=population`、`?lab=plates`、`?lab=pangaea`、`?lab=rain`、`?lab=sky` 可直达。星空背景独立开关；天球链接原天文探索。数据口径、原始输入指纹、简化规则与边界见 [主题图层说明](WORLD-LAB-SOURCES.md)。
+
+页面沿用既有专题发布命令，按 `world-3d-pack.json` 生成并保存合并脚本，专题脚本从 27 个降为 3 个；直接打开无需构建或联网。完整纹理只在内容键变化时重画，镜头、船只和光照动画不触发重画。新增源校验 `node content_sources/test/test-world-lab.js`，行为回归 `node --test scripts/test_world_play.cjs`，并接入 `make test-frontend`。
