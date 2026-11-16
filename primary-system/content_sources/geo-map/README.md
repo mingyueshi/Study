@@ -130,3 +130,33 @@ node --test scripts/test_world_3d.cjs
 两点测距与 6 个经纬度寻宝任务由 `world-3d-tools-data.js`、`world-3d-tools.js` 维护；「昼夜与四季」由 `world-3d-sun-data.js`、`world-3d-sun.js` 维护，提供四个时节、4 组观察线索、一天播放与暂停、3 小时单步和四时昼长对照。减少动态、离屏、后台及 WebGL 中断时暂停，数值与坐标输入仍可使用。
 
 「地理侦探」的 8 条线索集中在 `world-3d-detective-data.js`，判题与探索记录在 `world-3d-detective.js`。孩子可点球面国家或从列表作答，两步提示不扣分，查看答案不算找到，重新挑战保留已有记录。国家、地标和学习档案引用原 ID；中国任务接受原底图中的中国大陆与中国台湾省图形。记录使用 `study_world_globe_detective_v1`，只保存完成任务 ID。探索记录面板同时读取原探索题、寻宝记录，支持继续未完成或完成后重练；存储不可用时仍显示本页进度。五种玩法之间互斥切换，切换快捷视角或复位保留当前玩法，打开地点档案或导览时回到普通浏览。
+
+
+## 中国地形互动玩法
+
+`china-adventures-data.js` 集中维护 8 条猜省区线索、4 个坐标寻宝任务、5 站山地飞行和 8 站大运河虚拟行船。先运行 `node content_sources/test/test-china-adventures.js` 校验结构与稳定引用。地图、省名和答案按钮统一交给 `china-adventures.js` 判定；寻宝按球面距离与任务允许误差判定，也可输入坐标。记录仅保存稳定任务 ID，键为 `study_china_3d_missions_v1`，与世界版分开；提示不扣分，展示答案不计入完成，重新挑战保留已有完成记录。无 WebGL 时仍可用省名按钮与坐标输入。
+
+山地飞行串联昆仑山、祁连山、黄土高原、太行山与华北平原，是包含低地跨越的虚拟观察路线；运河行船沿原 `f43` 河道，保留原有分段，不表示实际全线通航或水流方向。两条路线共用 `GMRiverTour.createTour` 的暂停、逐站、速度与后台停止规则，支持 `?tour=ridge-flight&stop=qilian`、`?tour=canal-boat&stop=hangzhou`。与剖面和侦探玩法互斥，入口使用直接选择按钮。
+
+`china-terrain-play.js` 管理显示效果。省份抬起用分组位置动画，所属河段、湖面与标签同步移动；读海拔时扣除显示位移。剖面、漫游和挑战时归位，保证坐标与采样稳定。地形缓升和省份动画遵守减少动态、离屏、后台与 WebGL 中断规则，不修改 DEM。
+
+湖面取自 [Natural Earth 1∶1000 万湖泊数据](https://www.naturalearthdata.com/downloads/10m-physical-vectors/10m-lakes/)，原输入为 `nvkelso/natural-earth-vector` 仓库的 `geojson/ne_10m_lakes.geojson`，完整输入 SHA-256 保存在 `lakeSource`。选取青海湖、鄱阳湖、洞庭湖、太湖、洪泽湖和巢湖六处轮廓，用约 0.025°网格在湖内逐点读取 DEM，缺数据不补面；不表示实时岸线、水位或水深。雪线开关只把海拔约 5000 米以上染白，明确为教学观察示意，不能当作真实雪线。
+
+统一模板由生成器接入现有 `static/speech.js`。配音由用户主动开始，可读剖面或当前站点，也可开启到站讲解；讲解时等待，读完后继续停站计时，避免解说被行程截断；默认不发声。停止、换玩法、后台、离屏和上下文中断使旧回调失效；没有语音服务时按钮禁用，文字继续可读。自动化使用语音桩检查状态，设备实际发声需用本机中文语音试听。
+
+回归：`node --test scripts/test_china_adventures.cjs`，以及原地形、剖面与漫游回归。修改后运行 `make study-topics-data` 同步模板和本地静态资源。
+
+
+## 世界地球仪航海与观察扩展
+
+`world-expeditions-data.js` 维护郑和下西洋的 9 站观察路线、麦哲伦—埃尔卡诺环球航行的 10 站路线，以及 12 座参考城市。郑和路线汇总七次远航的代表地点，不假装是一次完整航次；环球航行区分麦哲伦发起与埃尔卡诺等人完成。每站连接历史双轨的 `tc27` 或 `tw32` 档案，来源留在数据中。坐标与分段大圆弧只作教学联系示意，不是精确历史航迹或真实交通里程。
+
+`world-voyages.js` 将沿球面短弧生成的路线交给原 `GMRiverTour.createTour` 时钟，新增可注入的 `positionAt` 不改变中国版的默认定位。停站约 8 秒，支持播放、暂停、两档速度、前后站、直接选站、重播和 `?voyage=zhenghe&port=malacca` 深链接。打开深链接不自动播放；手动转动、后台、离屏、减少动态和 WebGL 中断时暂停，恢复后不自动续播。无 WebGL 时仍可逐站读档案。
+
+两点测距保留，同时增加最多 20 站的多点行程。可点参考城市、球面、当前位置或输入坐标，显示逐段与总里程，并可移除、撤销、清空。累计值是各段较短大圆弧之和，穿过海陆的线也不代表可通行道路或航班。时区对比与昼夜模块共用 UTC 时钟，按所选完整日期通过浏览器 `Intl` 读取 8 城法定区时，显示前一天或后一天；北京早上 8 点可比较纽约冬夏差异，包含半小时时差城市。法定区时与经度估算的太阳时分开说明。
+
+动植物上球面直接读取 `world-animals-data.js` 与 `world-plants-data.js` 的各 30 个代表点、本地照片和原档案，不复制正文；过滤生境后可点球面照片或照片卡。观察标记通过 `GMAnimalLearning.recordPrefix/createStore` 共用原世界动物、植物地图的本机键，跨页面恢复时重读，存储不可用时保留本页状态。点位并不表示完整分布范围。
+
+七洲轮廓侦探用 `world-outlines-data.js` 的无国界轮廓，不按国家分组拼洲。来源为 Natural Earth `ne_110m_geography_regions_polys.geojson` 的 Continent 多边形，原输入 SHA-256 在元数据中；大洋洲另补原世界底图中的部分岛屿。`python3 content_sources/geo-map/scripts/build-world-outlines.py <原始 GeoJSON>` 可重新生成。通常北朝上，南极洲用极区俯视；卡片在作答前不显示洲名，提示、看答案、重新挑战与打开原大洲档案分开。查看答案不计完成，记录用 `study_world_globe_outlines_v1`，与原国家侦探互不影响。
+
+新增数据先运行 `node content_sources/test/test-world-expeditions.js`；回归为 `node --test scripts/test_world_expeditions.cjs`。生成器为地球仪本地资源附内容指纹，以免模板或浏览器继续使用旧播放器。修改后运行 `make study-topics-data` 并核对生成物。

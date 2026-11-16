@@ -3,28 +3,37 @@
 {# 由 scripts/build_study_topics.py 生成。 #}
 {% block title %}3D 世界地图 · 乐学堂{% endblock %}
 {% block study_assets %}
-<link rel="stylesheet" href="{% static 'study_topics/geo-map/styles.css' %}">
-<link rel="stylesheet" href="{% static 'study_topics/geo-map/world-3d.css' %}">
-<script src="{% static 'study_topics/geo-map/world-geo.js' %}" defer></script>
-<script src="{% static 'study_topics/geo-map/world-data.js' %}" defer></script>
-<script src="{% static 'study_topics/geo-map/shared.js' %}" defer></script>
-<script src="{% static 'study_topics/geo-map/world-3d-data.js' %}" defer></script>
-<script src="{% static 'study_topics/geo-map/world-3d-learning-data.js' %}" defer></script>
-<script src="{% static 'study_topics/geo-map/world-3d-tools-data.js' %}" defer></script>
-<script src="{% static 'study_topics/geo-map/world-3d-sun-data.js' %}" defer></script>
-<script src="{% static 'study_topics/geo-map/world-3d-detective-data.js' %}" defer></script>
-<script src="{% static 'study_topics/geo-map/world-3d-polar.js' %}" defer></script>
-<script src="{% static 'study_topics/geo-map/assets/vendor/three-map.js' %}" defer></script>
-<script src="{% static 'study_topics/geo-map/world-3d-geometry.js' %}" defer></script>
-<script src="{% static 'study_topics/geo-map/world-3d-learning.js' %}" defer></script>
-<script src="{% static 'study_topics/geo-map/world-3d-tools.js' %}" defer></script>
-<script src="{% static 'study_topics/geo-map/world-3d-sun.js' %}" defer></script>
-<script src="{% static 'study_topics/geo-map/world-3d-detective.js' %}" defer></script>
-<script src="{% static 'study_topics/geo-map/world-3d.js' %}" defer></script>
+<link rel="stylesheet" href="{% static 'study_topics/geo-map/styles.css' %}?v=23bd410053ab">
+<link rel="stylesheet" href="{% static 'study_topics/geo-map/world-3d.css' %}?v=7ecc0bfec531">
+<script src="{% static 'study_topics/geo-map/world-geo.js' %}?v=6d109d202301" defer></script>
+<script src="{% static 'study_topics/geo-map/world-data.js' %}?v=9b7765ca7392" defer></script>
+<script src="{% static 'study_topics/geo-map/shared.js' %}?v=d2bebbfd2a0b" defer></script>
+<script src="{% static 'study_topics/geo-map/world-3d-data.js' %}?v=9cbbadeb56d7" defer></script>
+<script src="{% static 'study_topics/geo-map/world-3d-learning-data.js' %}?v=fdd318196e16" defer></script>
+<script src="{% static 'study_topics/geo-map/world-3d-tools-data.js' %}?v=819889a4e10c" defer></script>
+<script src="{% static 'study_topics/geo-map/world-3d-sun-data.js' %}?v=e5dfa0907632" defer></script>
+<script src="{% static 'study_topics/geo-map/world-3d-detective-data.js' %}?v=644ed69bc676" defer></script>
+<script src="{% static 'study_topics/geo-map/world-3d-polar.js' %}?v=1975a4891868" defer></script>
+<script src="{% static 'study_topics/geo-map/assets/vendor/three-map.js' %}?v=b331b0a5a547" defer></script>
+<script src="{% static 'study_topics/geo-map/world-3d-geometry.js' %}?v=6099f6105632" defer></script>
+<script src="{% static 'study_topics/geo-map/world-3d-learning.js' %}?v=820c40b2b480" defer></script>
+<script src="{% static 'study_topics/geo-map/world-3d-tools.js' %}?v=53ae6bdbcce0" defer></script>
+<script src="{% static 'study_topics/geo-map/world-3d-sun.js' %}?v=90bed6244f9b" defer></script>
+<script src="{% static 'study_topics/geo-map/world-3d-detective.js' %}?v=5a396a2c5fa4" defer></script>
+<script src="{% static 'study_topics/geo-map/world-animals-data.js' %}?v=73617a56adb1" defer></script>
+<script src="{% static 'study_topics/geo-map/world-plants-data.js' %}?v=a3d602337fae" defer></script>
+<script src="{% static 'study_topics/geo-map/animals-learning.js' %}?v=5b277bbe07a2" defer></script>
+<script src="{% static 'study_topics/geo-map/world-expeditions-data.js' %}?v=c2fe23e967fe" defer></script>
+<script src="{% static 'study_topics/geo-map/world-outlines-data.js' %}?v=ad4e68ae2045" defer></script>
+<script src="{% static 'study_topics/geo-map/china-river-flow.js' %}?v=f990596e872d" defer></script>
+<script src="{% static 'study_topics/geo-map/china-river-tour.js' %}?v=1747f40e4f53" defer></script>
+<script src="{% static 'study_topics/geo-map/world-voyages.js' %}?v=e882b6ef9710" defer></script>
+<script src="{% static 'study_topics/geo-map/world-explorers.js' %}?v=bcc3859ab2b3" defer></script>
+<script src="{% static 'study_topics/geo-map/world-3d.js' %}?v=79a04ecbd27a" defer></script>
 {% endblock %}
 {% block study_content %}
 <div class="study-atlas">
-<div class="gm-topic world-3d-topic">
+<div class="gm-topic world-3d-topic" data-history-event="{% url 'history-timeline-event' %}">
     <aside class="gm-sidebar" aria-label="导航和地球仪工具">
       <nav class="gm-sysnav" aria-label="地理图谱页面导航">
         <a class="gm-sysnav-brand" href="{% url 'geography-atlas' %}">🧭 地理图谱</a>
@@ -70,12 +79,13 @@
           <div class="gw-buttons"><button type="button" id="gw-tour-prev">上一站</button><button type="button" id="gw-tour-next">下一站</button><button type="button" id="gw-tour-locate">重新定位本站</button><button type="button" id="gw-tour-close">结束导览</button></div>
         </section>
         <div id="gw-tool-modes" class="gw-tool-modes gw-buttons" role="group" aria-label="探索玩法">
-          <button type="button" data-tool="browse" aria-pressed="true">自由看世界</button><button type="button" data-tool="measure" aria-pressed="false">📏 两点测距</button><button type="button" data-tool="hunt" aria-pressed="false">🧭 经纬度寻宝</button><button type="button" data-tool="daylight" aria-pressed="false">☀️ 昼夜与四季</button><button type="button" data-tool="detective" aria-pressed="false">🔎 地理侦探</button>
+          <button type="button" data-tool="browse" aria-pressed="true">自由看世界</button><button type="button" data-tool="measure" aria-pressed="false">📏 测距与行程</button><button type="button" data-tool="hunt" aria-pressed="false">🧭 经纬度寻宝</button><button type="button" data-tool="daylight" aria-pressed="false">☀️ 昼夜与四季</button><button type="button" data-tool="detective" aria-pressed="false">🔎 地理侦探</button><button type="button" data-tool="voyage" aria-pressed="false">⛵ 航线漫游</button><button type="button" data-tool="life" aria-pressed="false">🌿 动植物</button><button type="button" data-tool="outline" aria-pressed="false">🧩 轮廓侦探</button>
         </div>
         <div class="gw-viewport" id="gw-viewport">
           <canvas id="gw-canvas" tabindex="0" role="img" aria-label="可旋转的 3D 地球仪。拖动旋转，滚轮缩放；方向键转动，＋、− 缩放，Home 复位。也可用想去哪里列表选择地点。" aria-describedby="gw-help"></canvas>
+          <div id="gw-life-markers" class="gw-labels" role="group" aria-label="动植物代表地点照片"></div>
           <div class="gw-labels" id="gw-labels" role="group" aria-label="大洲、大洋与地标"></div>
-          <div id="gw-tool-readout" class="gw-tool-readout" hidden><strong id="gw-tool-goal"></strong><span id="gw-tool-result"></span><div id="gw-sun-inline" class="gw-buttons" hidden><button type="button" id="gw-sun-play" aria-pressed="false">播放一天</button><button type="button" id="gw-sun-step">前进 3 小时</button></div><div id="gw-detective-inline" class="gw-buttons" hidden><button type="button" id="gw-detective-hint">提示</button><button type="button" id="gw-detective-next">下一条线索</button></div><a href="#gw-tool-panel">展开工具与作答 ↓</a></div>
+          <div id="gw-tool-readout" class="gw-tool-readout" hidden><strong id="gw-tool-goal"></strong><span id="gw-tool-result"></span><div id="gw-sun-inline" class="gw-buttons" hidden><button type="button" id="gw-sun-play" aria-pressed="false">播放一天</button><button type="button" id="gw-sun-step">前进 3 小时</button></div><div id="gw-detective-inline" class="gw-buttons" hidden><button type="button" id="gw-detective-hint">提示</button><button type="button" id="gw-detective-next">下一条线索</button></div><div id="gw-voyage-inline" class="gw-buttons" hidden><button type="button" id="gw-voyage-toggle">继续航行</button><button type="button" id="gw-voyage-forward">下一站</button></div><a href="#gw-tool-panel">展开工具与作答 ↓</a></div>
           <div class="gw-stamp" aria-hidden="true"><b>地球<br>观察台</b><span>七大洲 · 四大洋</span></div>
           <span class="gw-north" aria-hidden="true">转一转 🌐</span>
           <p class="gw-view-label" id="gw-view-label">从中国出发</p>
@@ -85,7 +95,9 @@
         <p id="gw-coordinates" class="gw-coordinates" role="status">点一下地球表面，读读这里的经纬度。</p>
         <section id="gw-tool-panel" class="gw-tool-panel" aria-label="动手探索工具" hidden>
           <div id="gw-measure-panel" hidden>
-            <h2>两点之间，沿地球走多远？</h2>
+            <h2>沿地球走多远？</h2>
+            <div class="gw-buttons" id="gw-measure-kinds" role="group" aria-label="测距方式"><button type="button" data-measure-kind="pair" aria-pressed="true">两点测距</button><button type="button" data-measure-kind="route" aria-pressed="false">多点行程</button></div>
+            <div id="gw-itinerary" hidden><h3>连点城市，算一程又一程</h3><div id="gw-itinerary-cities" class="gw-buttons" role="group" aria-label="加入一座城市"></div><ol id="gw-itinerary-stops"></ol><button type="button" id="gw-itinerary-undo">撤销最后一站</button><p id="gw-itinerary-note" class="gw-note"></p></div>
             <div class="gw-measure-points gw-buttons"><button type="button" id="gw-point-a" aria-pressed="true">A 起点：待选择</button><button type="button" id="gw-point-b" aria-pressed="false">B 终点：待选择</button></div>
             <p id="gw-distance" class="gw-distance" role="status">先在球面上点一个起点。</p>
             <div class="gw-buttons"><button type="button" id="gw-point-current">使用当前地点参考点</button><button type="button" id="gw-measure-clear">清空两点</button><button type="button" id="gw-locate-a" disabled>看起点 A</button><button type="button" id="gw-locate-b" disabled>看终点 B</button></div>
@@ -111,6 +123,7 @@
             <div class="gw-buttons"><button type="button" id="gw-sun-current">使用当前地点参考点</button><button type="button" id="gw-sun-locate">看观察点</button><button type="button" id="gw-sun-noon">调到当地太阳正午</button></div>
             <label class="gw-example-label" for="gw-sun-studies">跟着线索观察 <select id="gw-sun-studies"></select></label>
             <p id="gw-sun-study-text"></p>
+            <section class="gw-zones-time" aria-label="城市时区对比"><h3>北京早上 8 点，其他城市几点？</h3><label>比较日期 <input type="date" id="gw-zone-date" min="2000-01-01" max="2100-12-31"></label><div class="gw-buttons"><button type="button" id="gw-zone-beijing">设为北京早上 8 点</button><button type="button" id="gw-zone-winter">看看冬季</button><button type="button" id="gw-zone-summer">看看夏季</button></div><div id="gw-zone-result" class="gw-zone-times" role="status"></div><p id="gw-zone-note" class="gw-note"></p></section>
             <h3>同一纬度，四个时节的白昼</h3><div id="gw-sun-comparison" class="gw-sun-comparison"></div>
             <p id="gw-sun-note" class="gw-note"></p>
           </div>
@@ -124,6 +137,22 @@
             <div class="gw-buttons"><button type="button" id="gw-detective-reveal">查看答案位置</button><button type="button" id="gw-detective-learn" disabled>打开关联档案</button><button type="button" data-detective-action="next">下一条线索</button></div>
             <p id="gw-detective-note" class="gw-note"></p><p id="gw-detective-storage" class="gw-note">自己找到的记录保存在当前浏览器，重新挑战不会清除记录。</p>
           </div>
+          <section id="gw-voyage-panel" hidden aria-label="球面航线漫游">
+            <h2>跟着船队走向远方</h2><div id="gw-voyage-routes" class="gw-buttons" role="group" aria-label="选择航海路线"></div>
+            <p id="gw-voyage-count"></p><h3 id="gw-voyage-title"></h3><p id="gw-voyage-text"></p><p id="gw-voyage-observe"></p>
+            <div class="gw-buttons"><button type="button" id="gw-voyage-play">继续航行</button><button type="button" id="gw-voyage-prev">上一站</button><button type="button" id="gw-voyage-next">下一站</button><button type="button" id="gw-voyage-speed">速度：慢慢看</button></div>
+            <progress id="gw-voyage-progress" value="0" max="1" aria-label="航线漫游进度"></progress><p id="gw-voyage-status" role="status"></p><div id="gw-voyage-stops" class="gw-buttons" role="group" aria-label="直接到一站"></div>
+            <p><a id="gw-voyage-history" href="{% url 'history-timeline-event' %}">打开历史档案 →</a></p><p id="gw-voyage-sources" class="gw-note"></p><p id="gw-voyage-note" class="gw-note"></p>
+          </section>
+          <section id="gw-life-panel" hidden aria-label="球面动植物观察">
+            <div class="gw-quiz-heading"><h2>把生命的家放到地球上</h2><span id="gw-life-count"></span></div><div id="gw-life-kind" class="gw-buttons" role="group" aria-label="选择动物或植物"><button type="button" data-life-kind="animal" aria-pressed="true">动物</button><button type="button" data-life-kind="plant" aria-pressed="false">植物</button></div>
+            <div id="gw-life-habitats" class="gw-buttons" role="group" aria-label="按环境筛选"></div><div id="gw-life-card" class="gw-life-card"></div><div id="gw-life-list" class="gw-life-list" role="group" aria-label="点照片认识动植物"></div><p id="gw-life-note" class="gw-note"></p><p id="gw-life-storage" class="gw-note"></p>
+          </section>
+          <section id="gw-outline-panel" hidden aria-label="大洲轮廓侦探">
+            <div class="gw-quiz-heading"><h2>只看形状，猜猜是哪个洲？</h2><span id="gw-outline-progress"></span></div><svg id="gw-outline-image" viewBox="0 0 500 320" role="img" aria-label="待辨认的大洲轮廓，没有地名和国界"></svg>
+            <div id="gw-outline-answers" class="gw-buttons" role="group" aria-label="选择大洲答案"></div><p id="gw-outline-hint-text"></p><p id="gw-outline-feedback" role="status"></p>
+            <div class="gw-buttons"><button type="button" id="gw-outline-hint">提示</button><button type="button" id="gw-outline-reveal">看答案</button><button type="button" id="gw-outline-retry">重新挑战</button><button type="button" id="gw-outline-next">下一洲</button><button type="button" id="gw-outline-learn" disabled>打开大洲档案</button></div><p id="gw-outline-note" class="gw-note"></p>
+          </section>
           <form id="gw-point-form" class="gw-point-form" novalidate>
             <h3 id="gw-point-form-title">也可以输入经纬度</h3>
             <label for="gw-point-lon">经度<input id="gw-point-lon" name="longitude" type="number" min="-180" max="180" step="any" inputmode="decimal" placeholder="例如 120" required></label>
@@ -143,6 +172,9 @@
           <article><p class="gw-eyebrow">想一想 · 选一选</p><h3>探索题</h3><strong id="gw-record-quiz" class="gw-record-count"></strong><progress id="gw-record-quiz-bar" aria-label="探索题掌握进度"></progress><button type="button" data-record-open="quiz">继续探索 →</button></article>
           <article><p class="gw-eyebrow">看坐标 · 找位置</p><h3>经纬度寻宝</h3><strong id="gw-record-hunt" class="gw-record-count"></strong><progress id="gw-record-hunt-bar" aria-label="经纬度寻宝完成进度"></progress><button type="button" data-record-open="hunt">继续探索 →</button></article>
           <article><p class="gw-eyebrow">读线索 · 找国家</p><h3>地理侦探</h3><strong id="gw-record-detective" class="gw-record-count"></strong><progress id="gw-record-detective-bar" aria-label="地理侦探完成进度"></progress><button type="button" data-record-open="detective">继续探索 →</button></article>
+          <article><p class="gw-eyebrow">看照片 · 找环境</p><h3>世界动物观察</h3><strong id="gw-record-animal" class="gw-record-count"></strong><button type="button" data-life-open="animal">继续观察 →</button></article>
+          <article><p class="gw-eyebrow">看分布 · 找适应</p><h3>世界植物观察</h3><strong id="gw-record-plant" class="gw-record-count"></strong><button type="button" data-life-open="plant">继续观察 →</button></article>
+          <article><p class="gw-eyebrow">只看形状</p><h3>大洲轮廓侦探</h3><strong id="gw-record-outline" class="gw-record-count"></strong><button type="button" data-outline-open>继续辨形 →</button></article>
         </div><p class="gw-note">记录保存在当前浏览器。保存不可用时，本页仍会更新；查看答案不计入找到记录。</p>
       </section>
       <section class="gw-tour-directory gw-learning-section" id="gw-tour-directory" aria-labelledby="gw-tour-heading"><h2 id="gw-tour-heading">带上好奇心，走一趟世界</h2><p>三条路线，每条五站。读一读、转一转，再自己走到下一站。</p><div id="gw-tour-cards" class="gw-learning-cards"></div></section>

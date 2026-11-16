@@ -4,6 +4,7 @@
   const root = document.querySelector('.world-3d-topic');
   if (!root) return;
   const $ = id => root.querySelector(`#${id}`);
+  root.dataset.globeAssets = new URL('.', document.currentScript.src).href;
   const D = window.GM_WORLD_3D, G = window.GMWorld3DGeometry, T = window.GMThree;
   const L = window.GM_WORLD_LEARNING;
   const countries = window.GEO_WORLD_GEO?.countries || [];
@@ -20,7 +21,7 @@
   const featurePoint = f => f.point || f.line[Math.floor((f.line.length - 1) / 2)];
   let selected = '', selectedContinent = '', renderer, scene, camera, controls, globe, texture, marker, frame = 0, visible = true, lost = false, disposed = false;
   let layer = 'continent', activeLine = '';
-  let toolbox, toolOverlay, referencePoint = D.home;
+  let addons, toolbox, toolOverlay, referencePoint = D.home;
   let sunLab, ambient, sunlight, sunRing, sunSpot;
   let detectiveCountry = '';
   const canvas = $('gw-canvas'), viewport = $('gw-viewport'), profile = $('gw-profile'), picker = $('gw-place');
@@ -234,7 +235,7 @@
     }
     for (const {label, button} of list) {
       const point = new T.Vector3(...G.xyz(label.point));
-      const isVisible = !lost && $('gw-names').checked && (label.kind !== 'feature' || $('gw-features').checked) && point.dot(facing) > .19;
+      const isVisible = !['life','outline'].includes(root.dataset.tool) && !lost && $('gw-names').checked && (label.kind !== 'feature' || $('gw-features').checked) && point.dot(facing) > .19;
       if (!isVisible) { button.hidden = true; continue; }
       point.multiplyScalar(1.015).project(camera);
       const x = (point.x + 1) / 2 * width, y = (1 - point.y) / 2 * height;
@@ -247,7 +248,7 @@
   }
   function requestRender() {
     if (!renderer || lost || disposed || !visible || document.hidden || frame) return;
-    frame = requestAnimationFrame(() => { frame = 0; if (lost || disposed) return; renderer.render(scene, camera); placeLabels(); });
+    frame = requestAnimationFrame(() => { frame = 0; if (lost || disposed) return; renderer.render(scene, camera); placeLabels(); addons?.life.position(); });
   }
   function clearOverlay() {
     if (!toolOverlay) return;
@@ -262,8 +263,11 @@
       dot.scale.setScalar(.019); dot.position.set(...G.xyz(point, 1.015)); toolOverlay.add(dot);
     }
     if (route) {
-      const vertices = G.arc(...route), positions = [];
-      for (let i = 1; i < vertices.length; i++) positions.push(...vertices[i - 1].map(v => v * 1.008), ...vertices[i].map(v => v * 1.008));
+      const positions = [];
+      for (let leg = 1; leg < route.length; leg++) {
+        const vertices = G.arc(route[leg-1],route[leg]);
+        for (let i = 1; i < vertices.length; i++) positions.push(...vertices[i - 1].map(v => v * 1.008), ...vertices[i].map(v => v * 1.008));
+      }
       const geometry = new T.BufferGeometry(); geometry.setAttribute('position', new T.Float32BufferAttribute(positions, 3));
       toolOverlay.add(new T.LineSegments(geometry, new T.LineBasicMaterial({color: '#903d16'})));
     }
@@ -330,7 +334,7 @@
     marker = new T.Mesh(G.sphere(T, 16, 8), new T.MeshLambertMaterial({color: '#aa4517'})); marker.scale.setScalar(.013); marker.visible = false; scene.add(marker);
     controls = new T.OrbitControls(camera, canvas); controls.enablePan = false; controls.enableDamping = false; controls.minZoom = .8; controls.maxZoom = 3.2; controls.rotateSpeed = .65;
     controls.addEventListener('change', requestRender);
-    controls.addEventListener('start', () => { $('gw-view-label').textContent = '自由探索'; $('gw-views').querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', 'false')); });
+    controls.addEventListener('start', () => { root.dispatchEvent(new CustomEvent('gm-world-manual-camera')); $('gw-view-label').textContent = '自由探索'; $('gw-views').querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', 'false')); });
     const raycaster = new T.Raycaster(); let pointer;
     canvas.addEventListener('pointerdown', event => {
       pointer = event.isPrimary && event.button === 0 ? {x: event.clientX, y: event.clientY, id: event.pointerId, moved: false} : null;
@@ -353,6 +357,7 @@
     });
     canvas.addEventListener('keydown', event => {
       if (lost) return;
+      root.dispatchEvent(new CustomEvent('gm-world-manual-camera'));
       if (['+', '=', '-', '_'].includes(event.key)) { event.preventDefault(); zoom(['+', '='].includes(event.key) ? 1.15 : 1 / 1.15); }
       else if (event.key === 'Home') { event.preventDefault(); reset(); }
       else if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(event.key)) {
@@ -369,7 +374,7 @@
   }
   function fromAddress() {
     const params = new URLSearchParams(location.search), id = params.get('place') || params.get('continent');
-    if (!choose(id || 'China', false)) { choose('China', false); $('gw-status').textContent = '没有找到链接里的地点，已回到中国。请从列表重新选择。'; }
+    if (!choose(id || 'China', false, 'address')) { choose('China', false, 'address'); $('gw-status').textContent = '没有找到链接里的地点，已回到中国。请从列表重新选择。'; }
     if (!id) focus(D.home, '从中国出发');
     setLayer(params.get('layer'), false); setLine(params.get('line'), false, false);
   }
@@ -379,8 +384,28 @@
     highlight: id => { detectiveCountry = id; paint(); },
     locate: id => { const country = countryMap.get(id); if (country) focus(G.center(country), zh(id)); }
   });
+  const activate = mode => toolbox?.activate(mode);
+  const voyages = window.GMWorldVoyages.mount({root, focus, overlay, activate,
+    ship: point => { if (marker) { marker.visible = Boolean(point); if (point) marker.position.set(...G.xyz(point,1.018)); requestRender(); } }
+  });
+  const life = window.GMWorldExplorers.mountLife({root,focus,activate,render:requestRender,
+    project: point => {
+      if (!camera || lost) return null;
+      const v = new T.Vector3(...G.xyz(point)), facing = camera.position.clone().normalize();
+      const front = v.dot(facing) > .18; v.multiplyScalar(1.024).project(camera);
+      const x = (v.x+1)/2*viewport.clientWidth, y=(1-v.y)/2*viewport.clientHeight;
+      return {x,y,visible:front && x>20 && y>20 && x<viewport.clientWidth-20 && y<viewport.clientHeight-20};
+    }
+  });
+  const outlines = window.GMWorldExplorers.mountOutline({root,activate,choose});
+  addons = {life, setActive: mode => {
+    if (['voyage','life','outline'].includes(mode)) { selectedContinent=''; selected=''; paint(); }
+    voyages.setActive(mode==='voyage'); life.setActive(mode==='life'); outlines.setActive(mode==='outline');
+    $('gw-voyage-inline').hidden = mode!=='voyage';
+  }, handlePoint: (mode,point) => mode==='life' ? life.pick(point) : mode==='outline'};
+  window.GMWorldExplorers.mountTime({root,setUTC:sunLab.setUTC});
   toolbox = window.GMWorldTools.mount({root, focus, overlay, currentPoint: () => referencePoint, repaint: paint, readCoordinates, sun: sunLab, detective,
-    prepareDetective: () => { setLayer('continent'); setLine('', false); $('gw-view-label').textContent = '转动地球，寻找线索'; }
+    extras:addons, prepareDetective: () => { setLayer('continent'); setLine('', false); $('gw-view-label').textContent = '转动地球，寻找线索'; }
   });
   const learning = window.GMWorldLearning.mount({root, choose, setLine, setLayer, startSun: toolbox.startSun});
   window.GMWorldDetective.mountProgress({root, open: kind => {
@@ -388,6 +413,7 @@
     if (kind === 'quiz') learning.resumeQuiz();
     else { $('gw-tool-modes').scrollIntoView({block: 'start'}); root.querySelector(`[data-tool="${kind}"]`).focus({preventScroll: true}); }
   }});
+  voyages.restore(); window.addEventListener('popstate',()=>voyages.restore());
   document.addEventListener('visibilitychange', requestRender);
   window.addEventListener('pagehide', event => {
     if (frame) cancelAnimationFrame(frame); frame = 0;

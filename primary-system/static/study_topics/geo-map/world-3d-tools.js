@@ -6,9 +6,10 @@ window.GMWorldTools = (() => {
     const degrees = window.GMWorld3DGeometry.angle(point, target) * 180 / Math.PI;
     return {degrees, found: degrees <= tolerance + 1e-8};
   }
-  function mount({root, focus, overlay, currentPoint, repaint, readCoordinates, sun, detective, prepareDetective}) {
+  function mount({root, focus, overlay, currentPoint, repaint, readCoordinates, sun, detective, prepareDetective, extras}) {
     const D = window.GM_WORLD_TOOLS, G = window.GMWorld3DGeometry, esc = window.GMShared.esc;
     const $ = id => root.querySelector(`#${id}`);
+    let measureKind = 'pair', itineraryPoints = [];
     let mode = 'browse', points = [null, null], active = 0, mission = 0, solved = false, revealed = false, found = new Set();
     try { found = window.GMWorldLearning.readProgress(localStorage.getItem(KEY), D.missions); }
     catch { $('gw-hunt-storage').textContent = '浏览器无法保存记录，本次仍可完成寻宝。'; }
@@ -16,7 +17,22 @@ window.GMWorldTools = (() => {
     $('gw-hunt-note').textContent = D.huntNote;
     $('gw-measure-example').insertAdjacentHTML('beforeend', D.examples.map(e => `<option value="${e.id}">${esc(e.name)}</option>`).join(''));
     $('gw-hunt-mission').innerHTML = D.missions.map((m, i) => `<option value="${m.id}">第 ${i + 1} 处 · ${esc(m.name)}</option>`).join('');
+    function drawItinerary() {
+      const result = window.GMWorldExplorers.itinerary(itineraryPoints.map(p => p.point));
+      $('gw-itinerary-stops').innerHTML = itineraryPoints.map((p,i) => `<li><b>${i+1} · ${esc(p.name)}</b>${i ? ` · 本段约 ${Math.round(result.legs[i-1])} 千米` : ''} <button type="button" data-remove-stop="${i}" aria-label="移除第 ${i+1} 站">移除</button></li>`).join('');
+      $('gw-distance').textContent = `共 ${itineraryPoints.length} 站 · 累计约 ${Math.round(result.total).toLocaleString('zh-CN')} 千米`;
+      $('gw-tool-goal').textContent = $('gw-distance').textContent;
+      $('gw-tool-result').textContent = '继续点城市或球面添加下一站；也可以移除或撤销。';
+      $('gw-point-submit').textContent = '加入行程';
+      $('gw-itinerary-undo').disabled = !itineraryPoints.length;
+      overlay(itineraryPoints.map((p,i) => ({point:p.point,color:i?'#1762a5':'#b94a1e'})), itineraryPoints.length>1 ? itineraryPoints.map(p=>p.point) : null);
+    }
     function drawMeasure() {
+      root.dataset.measureKind = measureKind;
+      $('gw-measure-clear').textContent = measureKind === 'route' ? '清空行程' : '清空两点';
+      $('gw-itinerary').hidden = measureKind !== 'route';
+      $('gw-measure-kinds').querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.measureKind===measureKind)));
+      if (measureKind === 'route') { drawItinerary(); return; }
       points.forEach((p, i) => {
         const label = i ? 'B 终点' : 'A 起点';
         const button = $(i ? 'gw-point-b' : 'gw-point-a');
@@ -51,29 +67,37 @@ window.GMWorldTools = (() => {
       sun.setActive(mode === 'daylight');
       if (mode === 'detective') prepareDetective();
       detective.setActive(mode === 'detective');
+      if (['voyage','life','outline'].includes(mode)) overlay([]);
+      extras?.setActive(mode);
       $('gw-tool-modes').querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.tool === mode)));
       $('gw-tool-panel').hidden = mode === 'browse';
       $('gw-tool-readout').hidden = mode === 'browse';
       $('gw-measure-panel').hidden = mode !== 'measure'; $('gw-hunt-panel').hidden = mode !== 'hunt';
       $('gw-daylight-panel').hidden = mode !== 'daylight';
-      $('gw-detective-panel').hidden = mode !== 'detective'; $('gw-point-form').hidden = mode === 'detective';
+      $('gw-detective-panel').hidden = mode !== 'detective'; $('gw-point-form').hidden = ['detective','voyage','life','outline'].includes(mode);
       $('gw-point-error').textContent = ''; $('gw-point-submit').disabled = false;
       if (mode === 'measure') drawMeasure();
       else if (mode === 'hunt') {
         $('gw-grid').checked = true; repaint();
         $('gw-point-submit').textContent = '提交寻宝位置'; startMission();
       } else if (mode === 'daylight') $('gw-point-submit').textContent = '设为昼夜观察点';
-      else overlay([]);
+      else if (!['voyage','life','outline'].includes(mode)) overlay([]);
     }
-    function handlePoint(point, country) {
+    function handlePoint(point, country, label = '') {
       if (mode === 'browse') return false;
       if (mode === 'detective') return detective.guess(country);
+      if (['voyage','life','outline'].includes(mode)) return extras?.handlePoint(mode,point,country) || false;
       if (mode === 'daylight') { sun.pick(point); return true; }
       if (mode === 'measure') {
+        if (measureKind === 'route') {
+          if (itineraryPoints.length >= 20) { $('gw-tool-result').textContent = '最多放 20 站，请先移除一站。'; return true; }
+          if (itineraryPoints.length && G.angle(itineraryPoints.at(-1).point, point)*D.radiusKm < 1) { $('gw-tool-result').textContent = '这一站和上一站太近啦，请换一个地方。'; return true; }
+          itineraryPoints.push({point:point.slice(),name:label || G.coordinates(point)}); drawMeasure(); return true;
+        }
         points[active] = point.slice(); active = points[0] ? 1 : 0;
         $('gw-measure-example').value = ''; $('gw-measure-observe').textContent = '';
         drawMeasure();
-      } else {
+      } else if (mode === 'hunt') {
         if (revealed || solved) return true;
         const m = D.missions[mission], result = judge(point, m.point, D.toleranceDegrees);
         overlay([{point, color: '#b94a1e'}, ...(result.found ? [{point: m.point, color: '#39754f'}] : [])]);
@@ -94,13 +118,19 @@ window.GMWorldTools = (() => {
       }
       return true;
     }
+    $('gw-itinerary-note').textContent = window.GM_WORLD_EXPEDITIONS.routeNote;
+    $('gw-itinerary-cities').innerHTML = window.GM_WORLD_EXPEDITIONS.cities.map(c=>`<button type="button" data-city="${c.id}">${esc(c.name)}</button>`).join('');
+    $('gw-itinerary-cities').addEventListener('click',e=>{const b=e.target.closest('[data-city]');if(b){const c=window.GM_WORLD_EXPEDITIONS.cities.find(c=>c.id===b.dataset.city);handlePoint(c.point,null,c.name);focus(c.point,c.name);}});
+    $('gw-itinerary-stops').addEventListener('click',e=>{const b=e.target.closest('[data-remove-stop]');if(b){itineraryPoints.splice(Number(b.dataset.removeStop),1);drawMeasure();}});
+    $('gw-itinerary-undo').addEventListener('click',()=>{itineraryPoints.pop();drawMeasure();});
+    $('gw-measure-kinds').addEventListener('click',e=>{const b=e.target.closest('[data-measure-kind]');if(b){measureKind=b.dataset.measureKind;drawMeasure();}});
     $('gw-tool-modes').addEventListener('click', event => { const b = event.target.closest('[data-tool]'); if (b) setMode(b.dataset.tool); });
     ['a', 'b'].forEach((letter, i) => {
       $(`gw-point-${letter}`).addEventListener('click', () => { active = i; drawMeasure(); });
       $(`gw-locate-${letter}`).addEventListener('click', () => { if (points[i]) focus(points[i], i ? '终点 B · 蓝色' : '起点 A · 橙色'); });
     });
     $('gw-point-current').addEventListener('click', () => { const p = currentPoint(); if (p) handlePoint(p); });
-    $('gw-measure-clear').addEventListener('click', () => { points = [null, null]; active = 0; $('gw-measure-example').value = ''; $('gw-measure-observe').textContent = ''; drawMeasure(); });
+    $('gw-measure-clear').addEventListener('click', () => { itineraryPoints = []; points = [null, null]; active = 0; $('gw-measure-example').value = ''; $('gw-measure-observe').textContent = ''; drawMeasure(); });
     $('gw-measure-example').addEventListener('change', () => {
       const e = D.examples.find(e => e.id === $('gw-measure-example').value); if (!e) return;
       points = [e.from.slice(), e.to.slice()]; active = 1;
@@ -123,10 +153,10 @@ window.GMWorldTools = (() => {
       $('gw-tool-result').textContent = '绿色点是答案位置。本次查看不计入找到记录。';
       $('gw-point-submit').disabled = true; $('gw-hunt-reveal').disabled = true;
     });
-    root.addEventListener('gm-world-selection', () => { if (mode !== 'browse') setMode('browse', false); });
+    root.addEventListener('gm-world-selection', event => { if (event.detail?.origin === 'address') return; if (mode !== 'browse') setMode('browse', false); });
     root.addEventListener('gm-world-free-view', event => { if (!['tools', 'camera'].includes(event.detail?.origin) && mode !== 'browse') setMode('browse', false); });
     setMode('browse', false);
-    return {handlePoint, startSun: id => { setMode('daylight'); sun.showStudy(id); }, resume: kind => {
+    return {handlePoint, activate:setMode, startSun: id => { setMode('daylight'); sun.showStudy(id); }, resume: kind => {
       if (kind === 'hunt') { const first = D.missions.findIndex(m => !found.has(m.id)); mission = first < 0 ? 0 : first; }
       setMode(kind === 'quiz' ? 'browse' : kind);
     }};

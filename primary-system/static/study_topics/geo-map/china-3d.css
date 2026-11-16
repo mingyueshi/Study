@@ -183,3 +183,30 @@
 .gm3-section-layer text { fill: #fff; font-size: 15px; font-weight: 800; }
 .china-3d-topic[data-section-drawing="true"] canvas { cursor: crosshair; }
 .china-3d-topic[data-section-drawing="true"] .gm3-label-layer { opacity: 0; }
+
+/* 玩法按钮直接选，竖屏按可用宽度换行。 */
+.gm3-play-tools { display: flex; align-items: center; flex-wrap: wrap; gap: 9px; padding: 12px 18px; }
+.gm3-play-tools button, #gm3-game-coordinates button { min-height: 44px; padding: 9px 14px; border: 1px solid #aac7bc; border-radius: 12px; background: var(--card); color: var(--ink); font: inherit; font-size: 16px; font-weight: 750; cursor: pointer; }
+.gm3-play-tools button:hover { border-color: #33856b; background: var(--atlas-tint); }
+.gm3-play-tools button[aria-pressed="true"] { color: #fff; background: #256d58; border-color: #256d58; }
+.gm3-play-tools button:disabled { opacity: .5; cursor: default; }
+.gm3-voice { background: #fff6df; border-block: 1px solid #e3d3a8; }
+#gm3-voice-status { font-size: 15px; }
+.gm3-game { padding: 18px; background: #eef7f5; border-block: 1px solid #bedad0; }
+.gm3-game-heading { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; }
+.gm3-game h2 { margin: 0; font-size: 25px; }
+.gm3-game .gm3-play-tools { padding-inline: 0; }
+.gm3-game p { font-size: 17px; line-height: 1.75; margin: 8px 0; }
+.gm3-game .gm3-game-clue { font-size: 20px; font-weight: 750; }
+#gm3-game-feedback { padding: 10px 14px; background: var(--card); border-left: 5px solid #d48b3c; border-radius: 8px; }
+#gm3-game-storage:empty { display: none; }
+#gm3-game-coordinates { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+#gm3-game-coordinates[hidden], #gm3-game-body[hidden] { display: none; }
+#gm3-game-coordinates input { width: 110px; max-width: 100%; padding: 8px; border: 1px solid #9abaaf; border-radius: 8px; background: var(--card); color: var(--ink); font: inherit; }
+#gm3-game-marker circle { fill: #dc7130; stroke: #fff; stroke-width: 2; }
+#gm3-game-marker text { fill: #7d3412; font-size: 16px; font-weight: 800; paint-order: stroke; stroke: white; stroke-width: 4px; }
+
+.china-3d-topic[data-game-mode="hunt"] .gm3-label-layer { opacity: .35; }
+
+.gm3-game-map-clue { position: absolute; z-index: 3; top: 12px; left: 14px; width: calc(100% - 110px); max-width: 720px; box-sizing: border-box; margin: 0; padding: 9px 13px; border: 1px solid #8cb4a5; border-radius: 12px; background: #fffff4ef; color: #284e40; font-size: 16px; font-weight: 750; line-height: 1.6; pointer-events: none; }
+.china-3d-topic[data-game-mode="hunt"] .gm3-stamp, .china-3d-topic[data-game-mode="detective"] .gm3-stamp { display: none; }

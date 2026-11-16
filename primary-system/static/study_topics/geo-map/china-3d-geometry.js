@@ -114,9 +114,9 @@ window.GMChina3DGeometry = (() => {
         }
       }
     }
-    const sample = point => {
+    const locate = point => {
       const [x, y] = xy(point);
-      let highest = null;
+      let highest = null, owner = null;
       for (const { mesh, i } of cells.get(`${cell(x)},${cell(y)}`) || []) {
         const p = mesh.positions, ids = mesh.indices;
         const a = ids[i] * 3, b = ids[i + 1] * 3, c = ids[i + 2] * 3;
@@ -127,11 +127,13 @@ window.GMChina3DGeometry = (() => {
         if (u >= -1e-5 && v >= -1e-5 && u + v <= 1.00001) {
           const meters = u * mesh.elevations[ids[i]] + v * mesh.elevations[ids[i + 1]] + (1 - u - v) * mesh.elevations[ids[i + 2]];
           // 简化省界可能微量重叠，河道应贴可见的上表面。
-          highest = highest === null ? meters : Math.max(highest, meters);
+          if (highest === null || meters > highest) { highest = meters; owner = mesh; }
         }
       }
-      return highest;
+      return highest === null ? null : { meters: highest, mesh: owner };
     };
+    const sample = point => locate(point)?.meters ?? null;
+    sample.locate = locate;
     // 将河段在地形三角形边上切开，线段中部也贴住表面，而非只贴住两个端点。
     sample.cuts = (from, to) => {
       const [x0, y0] = xy(from), [x1, y1] = xy(to), candidates = new Set();

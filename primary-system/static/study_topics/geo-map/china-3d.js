@@ -16,20 +16,25 @@
   const profile = $('gm3-profile');
   const featureProfile = $('gm3-feature-profile');
   let selected = '', renderer, scene, camera, controls, frame = 0, failed = false;
-  let sectionController = null;
+  let sectionController = null, terrainPlay = null, adventure = null, narrator = null, surfaceSampler = null, gamePoint = null;
+  const extraData = window.GM_CHINA_ADVENTURES;
+  const visualGain = () => terrainPlay?.gain ?? exaggeration;
   let width = 1, height = 1, showLabels = true, showLandforms = true, showRivers = true;
   let exaggeration = data.terrain.defaultExaggeration, colorMode = 'terrain', focusedLandform = '';
   const features = new Map(window.GM_FEATURES.map(f => [f.id, f]));
   const models = new Map(), labels = [];
   const rivers = new Map();
   let focusedRiver = '';
-  let flowRiver = 'f20', showEnds = true, flowPlayback, inView = true;
+  let flowRiver = 'f20', showEnds = true, flowPlayback, inView = viewport.getBoundingClientRect().top < innerHeight && viewport.getBoundingClientRect().bottom > 0;
   const flowLayer = $('gm3-flow-layer'), flowArrows = [], flowEndpoints = [];
   const motionMedia = window.matchMedia('(prefers-reduced-motion: reduce)');
   const fullMotion = () => !motionMedia.matches && (!window.StudyEffects || window.StudyEffects.motion === 'full');
   const flowConfig = () => data.rivers.find(item => item.feature === flowRiver).flow;
   const flowAvailable = () => !failed && Boolean(renderer) && showRivers && flowConfig().mode === 'downstream' && rivers.has(flowRiver);
   const tourData = window.GM_CHINA_RIVER_TOURS;
+  const allTours = [...tourData.routes, ...extraData.routes];
+  const allSources = [...tourData.sources, ...extraData.sources];
+  let narratedStation = '';
   let tourController = null, tourRoute = null, tourView = null, tourPoint = null, tourLastDistance = null, tourStory = '';
   let tourZoom = 6, tourOffset, tourWritingURL = false;
   const tourRoutes = new Map();
@@ -56,8 +61,8 @@
   $('gm3-flow-legend').textContent = data.flowNote;
   $('gm3-flow-river').innerHTML = data.rivers.map(item => `<option value="${item.feature}">${esc(features.get(item.feature).name)}</option>`).join('');
   $('gm3-landmarks').innerHTML = data.featureGroups.map(group => {
-    const entries = group.kind === 'river' ? data.rivers : data.terrain.landmarks.filter(mark => features.get(mark.feature).kind === group.kind);
-    return `<div class="gm3-feature-group"><h3>${esc(group.label)}</h3><div class="gm3-landmark-tools" role="group" aria-label="${esc(group.label)}">` + entries.map(mark => `<button type="button" data-${group.kind === 'river' ? 'river' : 'landform'}="${mark.feature}" aria-pressed="false">${esc(features.get(mark.feature).name)}</button>`).join('') + '</div></div>';
+    const entries = group.kind === 'river' ? data.rivers : group.kind === 'lake' ? extraData.lakes : data.terrain.landmarks.filter(mark => features.get(mark.feature).kind === group.kind);
+    return `<div class="gm3-feature-group"><h3>${esc(group.label)}</h3><div class="gm3-landmark-tools" role="group" aria-label="${esc(group.label)}">` + entries.map(mark => `<button type="button" data-${group.kind === 'river' ? 'river' : group.kind === 'lake' ? 'lake' : 'landform'}="${mark.feature}" aria-pressed="false">${esc(features.get(mark.feature).name)}</button>`).join('') + '</div></div>';
   }).join('');
   picker.insertAdjacentHTML('beforeend', [...regions.values()].map(r => `<optgroup label="${esc(r.name)}">` +
     provinces.filter(p => p.region === r.id).map(p => `<option value="${p.id}">${esc(p.name)}</option>`).join('') + '</optgroup>').join(''));
@@ -109,7 +114,7 @@
       root.querySelector('.sl-collapse')?.click();
     }
   }
-  picker.addEventListener('change', () => { if (picker.value) select(picker.value); else picker.value = selected; });
+  picker.addEventListener('change', () => { if (picker.value) chooseProvince(picker.value); else picker.value = selected; });
   function showElevation(meters) {
     $('gm3-elevation').textContent = meters === null ? '在地形上点一下，读出该处网格海拔。' :
       `此处网格海拔约 ${Math.round(meters / 10) * 10} 米 · 高度放大不改变读数`;
@@ -122,7 +127,21 @@
     $('gm3-legend').hidden = colorMode === 'province';
     $('gm3-region-note').textContent = colorMode === 'terrain' ? data.terrain.note : colorMode === 'province' ? data.provinceNote : data.regionNote;
   }
+  function chooseProvince(id, point = null, meters = null) {
+    if (adventure?.guess(id, point)) return;
+    select(id, true, meters);
+  }
+  function syncFlat() {
+    $('gm3-label-layer').inert = Boolean(adventure?.mode === 'hunt' || root.dataset.sectionDrawing === 'true');
+    terrainPlay?.flatten(Boolean(adventure?.active || tourController || root.dataset.sectionDrawing === 'true' || root.dataset.sectionFrom));
+  }
+  function tourText() {
+    if (!tourRoute || !tourController) return '';
+    const stop = tourRoute.stops[tourController.snapshot().index];
+    return `${stop.name}。${stop.description}。看一看，${stop.observe}`;
+  }
   function updateProvinces() {
+    terrainPlay?.select(selected);
     for (const [id, model] of models) {
       const active = id === selected;
       model.top.vertexColors = colorMode === 'terrain';
@@ -137,6 +156,7 @@
     }
   }
   function focusLandform(id, updateURL = true) {
+    adventure?.stop(); sectionController?.cancel();
     const mark = data.terrain.landmarks.find(item => item.feature === id);
     if (!mark) return;
     const model = models.get(mark.province);
@@ -189,6 +209,7 @@
     }
   }
   function focusRiver(id, updateURL = true) {
+    adventure?.stop(); sectionController?.cancel();
     const config = data.rivers.find(item => item.feature === id);
     if (!config) return;
     closeTour(false, false);
@@ -238,6 +259,7 @@
     $('map').scrollIntoView({ block: 'start', behavior: 'instant' });
   });
   function readLocation() {
+    adventure?.stop(); sectionController?.cancel();
     closeTour(false, false);
     const params = new URLSearchParams(location.search);
     const id = params.get('place') || (params.has('adcode') ? `p${params.get('adcode')}` : '');
@@ -247,7 +269,7 @@
     else if (data.terrain.landmarks.some(mark => mark.feature === landform)) focusLandform(landform, false);
     else if (byId.has(id)) select(id, false);
     else if (id) $('gm3-selection').textContent = '没有找到这个省份，请从列表重新选择。';
-    const route = tourData.routes.find(item => item.id === params.get('tour'));
+    const route = allTours.find(item => item.id === params.get('tour'));
     if (route) startTour(route.id, false, params.get('stop'));
   }
   window.addEventListener('popstate', readLocation);
@@ -279,7 +301,7 @@
   }
   function projectFlow(sample) {
     const [x, y] = xy(sample.point);
-    const vector = new T.Vector3(x, y, heightToZ(sample.meters + 3, exaggeration) + .001).project(camera);
+    const vector = new T.Vector3(x, y, heightToZ(sample.meters + 3, visualGain()) + (terrainPlay?.offset(terrainPlay.owner(sample.point)) || 0) + .001).project(camera);
     return { x: (vector.x + 1) * width / 2, y: (1 - vector.y) * height / 2,
       visible: vector.z > -1 && vector.z < 1 && Math.abs(vector.x) < .99 && Math.abs(vector.y) < .99 };
   }
@@ -301,7 +323,11 @@
       endpoint.el.setAttribute('cx', point.x); endpoint.el.setAttribute('cy', point.y);
     }
     root.dataset.flowSeconds = seconds.toFixed(3);
-    if (tourPoint && tourController && showRivers) {
+    if (gamePoint) {
+      const p = projectFlow({ point: gamePoint, meters: surfaceSampler?.(gamePoint) ?? 0 });
+      $('gm3-game-marker').innerHTML = p.visible ? `<g transform="translate(${p.x} ${p.y})"><circle r="9"/><text x="14" y="-12">我的位置</text></g>` : '';
+    } else $('gm3-game-marker').innerHTML = '';
+    if (tourPoint && tourController && (showRivers || tourRoute.kind === 'flight')) {
       const point = projectFlow(tourPoint);
       tourMarker.style.display = point.visible ? '' : 'none';
       tourMarker.setAttribute('transform', `translate(${point.x} ${point.y})`);
@@ -311,14 +337,14 @@
     if (!tourController || tourWritingURL) return;
     const state = tourController.snapshot();
     const url = new URL(location.href);
-    url.searchParams.set('river', tourRoute.river);
+    if (tourRoute.river) url.searchParams.set('river', tourRoute.river); else url.searchParams.delete('river');
     url.searchParams.set('tour', tourRoute.id);
     url.searchParams.set('stop', tourRoute.stops[state.index].id);
     url.searchParams.delete('place'); url.searchParams.delete('landform');
     try { history.replaceState(null, '', url); } catch (_) { /* 保留手动漫游 */ }
   }
   function syncTour(state = tourController?.snapshot()) {
-    $('gm3-tour-start').hidden = !tourData.routes.some(route => route.river === flowRiver);
+    $('gm3-tour-start').hidden = !allTours.some(route => route.river === flowRiver);
     if (!tourController || !state) return;
     const target = state.phase === 'travel' ? Math.min(state.index + 1, tourRoute.stops.length - 1) : state.index;
     const stop = tourRoute.stops[target];
@@ -326,22 +352,25 @@
     $('gm3-tour-title').textContent = stop.name;
     $('gm3-tour-play').textContent = state.playing ? '暂停漫游' : state.phase === 'complete' ? '重新漫游' : '继续漫游';
     $('gm3-tour-play').setAttribute('aria-pressed', String(state.playing));
-    $('gm3-tour-play').disabled = failed || !showRivers || !fullMotion();
+    $('gm3-tour-play').disabled = failed || (!showRivers && tourRoute.kind !== 'flight') || !fullMotion();
     $('gm3-tour-prev').disabled = state.index === 0 && state.phase !== 'travel';
     $('gm3-tour-next').disabled = state.index === tourRoute.stops.length - 1;
     $('gm3-tour-stop').value = String(state.index);
     $('gm3-tour-speed').value = String(state.speed);
-    $('gm3-tour-status').textContent = failed ? '立体画面不可用，仍可逐站阅读介绍。' : !showRivers ? '河流已隐藏，打开「主要河流」后可继续。' :
-      !fullMotion() ? '已减少动效，可用「上一站／下一站」静态查看。' : state.phase === 'complete' ? '已到达入海口，这次沿河漫游完成啦！' :
-      !state.playing ? '已暂停，可慢慢阅读、转动地图，或继续沿河前进。' : state.phase === 'stop' ? '停站观察约 8 秒，再继续向下游走。' : `沿河前进，下一站是${stop.name}。`;
+    $('gm3-tour-status').textContent = failed ? '立体画面不可用，仍可逐站阅读介绍。' : !showRivers && tourRoute.kind !== 'flight' ? '河流已隐藏，打开「主要河流」后可继续。' :
+      !fullMotion() ? '已减少动效，可用「上一站／下一站」静态查看。' : state.phase === 'complete' ? '已到达终点，这次漫游完成啦！' :
+      !state.playing ? '已暂停，可慢慢阅读、转动地图，或继续沿河前进。' : state.phase === 'stop' ? '停站观察约 8 秒，再继续前进。' : `沿路线前进，下一站是${stop.name}。`;
     const storyKey = `${tourRoute.id}:${stop.id}`;
     if (tourStory !== storyKey) {
       tourStory = storyKey;
       const links = stop.related.map(id => `<a href="china.html?place=${id}#map">${esc(features.get(id).name)}档案 ↗</a>`);
-      const sources = stop.sources.map(id => tourData.sources.find(source => source.id === id));
+      const sources = stop.sources.map(id => allSources.find(source => source.id === id));
       $('gm3-tour-story').innerHTML = `<p>${esc(stop.description)}</p><p><strong>看一看：</strong>${esc(stop.observe)}</p><div class="gm3-tour-links">${links.join('')}${sources.map(source => `<a href="${esc(source.url)}" target="_blank" rel="noopener">${esc(source.label)}（需联网）↗</a>`).join('')}</div>`;
     }
-    tourMarker.querySelector('text').textContent = state.phase === 'travel' ? '沿河前进' : tourRoute.stops[state.index].name;
+    const voiceKey = `${tourRoute.id}:${state.index}`;
+    if (state.phase === 'travel') narrator?.stop();
+    else if (narratedStation !== voiceKey) { narratedStation = voiceKey; narrator?.station(tourText()); }
+    tourMarker.querySelector('text').textContent = state.phase === 'travel' ? (tourRoute.kind === 'flight' ? '✈ 山地飞行' : tourRoute.kind === 'canal' ? '⛵ 虚拟行船' : '沿河前进') : tourRoute.stops[state.index].name;
     root.dataset.tourPlaying = String(state.playing);
     root.dataset.tourPhase = state.phase;
     root.dataset.tourStation = tourRoute.stops[state.index].id;
@@ -363,6 +392,7 @@
   }
   function closeTour(restore = true, updateURL = true) {
     if (!tourController) return;
+    narrator?.stop(); narratedStation = '';
     const saved = tourView;
     tourWritingURL = true;
     tourController.dispose(); tourController = null;
@@ -385,16 +415,19 @@
     requestDraw();
   }
   function startTour(id, autoplay = true, stopId = null) {
-    const config = tourData.routes.find(route => route.id === id);
+    const config = allTours.find(route => route.id === id);
     if (!config || !window.GMRiverTour) return;
-    sectionController?.cancel();
+    adventure?.stop(); narrator?.stop(); sectionController?.cancel();
+    terrainPlay?.flatten(true);
     const saved = tourView || (controls && !failed ? { position: camera.position.clone(), target: controls.target.clone(), zoom: camera.zoom, maxZoom: controls.maxZoom } : null);
     closeTour(false, false);
-    focusRiver(config.river, false);
+    if (config.river) focusRiver(config.river, false);
+    else { selected = ''; updateProvinces(); }
     flowPlayback?.pause();
     if (!tourRoutes.has(id)) {
-      const paths = rivers.get(config.river)?.paths || window.GM_CHINA_RIVERS.rivers[config.river].paths.map(path => path.map(p => ({ point: p.slice(0, 2), meters: p[2] })));
-      const directions = data.rivers.find(river => river.feature === config.river).flow.directions;
+      const paths = config.kind === 'flight' ? window.GMChina3DGeometry.drapeLine(config.path, point => surfaceSampler?.(point) ?? 0).paths :
+        rivers.get(config.river)?.paths || window.GM_CHINA_RIVERS.rivers[config.river].paths.map(path => path.map(p => ({ point: p.slice(0, 2), meters: p[2] })));
+      const directions = config.kind ? paths.map(() => 1) : data.rivers.find(river => river.feature === config.river).flow.directions;
       tourRoutes.set(id, { ...config, ...window.GMRiverTour.buildRoute(paths, config.stops, directions) });
     }
     tourRoute = tourRoutes.get(id); tourView = saved;
@@ -403,15 +436,16 @@
     if (controls) controls.maxZoom = 8;
     $('gm3-tour-panel').hidden = false;
     root.dataset.tourActive = 'true'; root.dataset.tourRoute = id;
-    $('gm3-tour-route').innerHTML = tourData.routes.map(route => `<option value="${route.id}">${esc(route.name)}</option>`).join('');
+    $('gm3-tour-route').innerHTML = allTours.map(route => `<option value="${route.id}">${esc(route.name)}</option>`).join('');
     $('gm3-tour-route').value = id;
     $('gm3-tour-stop').innerHTML = tourRoute.stops.map((stop, i) => `<option value="${i}">${i + 1} · ${esc(stop.name)}</option>`).join('');
-    $('gm3-tour-note').textContent = tourData.note;
+    $('gm3-tour-note').textContent = tourRoute.note || tourData.note;
     tourController = window.GMRiverTour.createTour({
       route: tourRoute, holdSeconds: tourData.holdSeconds, travelSeconds: tourData.travelSeconds,
       request: callback => requestAnimationFrame(callback), cancel: id => cancelAnimationFrame(id),
-      canPlay: () => !failed && showRivers && fullMotion() && !document.hidden && inView,
+      canPlay: () => !failed && (showRivers || tourRoute?.kind === 'flight') && fullMotion() && !document.hidden && inView,
       changed: syncTour,
+      holdWhile: () => Boolean(narrator?.reading),
       moved: (point, state) => {
         tourPoint = point;
         $('gm3-tour-progress').value = state.progress;
@@ -439,7 +473,7 @@
     if (kind === 'province') {
       el.type = 'button';
       el.setAttribute('aria-label', `查看${byId.get(id).name}`);
-      el.addEventListener('click', () => select(id));
+      el.addEventListener('click', () => chooseProvince(id));
     } else el.setAttribute('aria-hidden', 'true');
     $('gm3-label-layer').append(el);
     const leader = document.createElementNS('http://www.w3.org/2000/svg', 'line');
@@ -466,6 +500,7 @@
   function draw() {
     frame = 0;
     if (!renderer || failed) return;
+    syncFlat(); terrainPlay?.tick(performance.now());
     renderer.render(scene, camera);
     const occupied = [];
     if (tourController) occupied.push([width / 2 - 25, height / 2 - 30, width / 2 + 180, height / 2 + 12]);
@@ -489,7 +524,7 @@
       if (label.kind === 'province') label.el.setAttribute('aria-pressed', String(label.id === selected));
       label.el.classList.toggle('is-focused', label.id === focusedLandform || label.id === focusedRiver);
       const point = label.point.clone();
-      point.z = heightToZ(label.meters, exaggeration) + .2;
+      point.z = heightToZ(label.meters, visualGain()) + .2 + (terrainPlay?.offset(label.kind === 'province' ? label.id : terrainPlay.owner([point.x + 104.5, point.y / 1.22 + 35.8])) || 0);
       point.project(camera);
       const x = (point.x + 1) * width / 2, y = (1 - point.y) * height / 2;
       const labelWidth = label.el.offsetWidth || 50, labelHeight = label.el.offsetHeight || 20;
@@ -530,6 +565,7 @@
     root.dataset.exaggeration = String(exaggeration);
     root.dataset.colorMode = colorMode;
     root.dataset.riversVisible = String(showRivers);
+    root.dataset.liftOffset = String(terrainPlay?.offset(selected) || 0);
     drawFlow();
     sectionController?.redraw();
   }
@@ -584,6 +620,8 @@
   function fallback(message) {
     failed = true;
     root.dataset.renderer = 'unavailable';
+    narrator?.stop(); terrainPlay?.settle();
+    root.querySelectorAll('#gm3-lift, #gm3-lakes, #gm3-snow, #gm3-stand').forEach(b => { b.disabled = true; });
     flowPlayback?.pause();
     tourController?.pause();
     sectionController?.suspend();
@@ -596,6 +634,19 @@
     canvas.hidden = true;
     root.querySelectorAll('.gm3-toolbar button, .gm3-terrain-tools button, #gm3-height').forEach(b => { b.disabled = true; });
   }
+  narrator = window.GMChinaNarrator.create(root, tourText);
+  adventure = window.GMChinaAdventures.mount({ root,
+    prepare: () => { sectionController?.cancel(); narrator?.stop(); closeTour(); flowPlayback?.pause(); terrainPlay?.flatten(true); setView('perspective'); },
+    highlight: id => { selected = id; updateProvinces(); },
+    mark: point => { gamePoint = point; requestDraw(); },
+    locate: point => {
+      if (!controls || failed) return;
+      const [x, y] = xy(point); controls.target.set(x, y, datum); camera.position.set(x, y - 60, 80); camera.zoom = 1.8;
+      camera.updateProjectionMatrix(); controls.update(); requestDraw();
+    },
+  });
+  $('gm3-route-buttons').innerHTML = allTours.map(route => `<button type="button" data-route="${route.id}">${route.kind === 'flight' ? '✈ ' : route.kind === 'canal' ? '⛵ ' : ''}${esc(route.name)}</button>`).join('');
+  $('gm3-route-buttons').addEventListener('click', e => { const b = e.target.closest('[data-route]'); if (b) startTour(b.dataset.route); });
   try {
     renderer = new T.WebGLRenderer({ canvas, antialias: true, alpha: true });
     renderer.setClearColor(0x000000, 0);
@@ -624,6 +675,7 @@
     for (const p of provinces) {
       const color = regions.get(p.region).color;
       const geometry = buildTerrain(window.GM_CHINA_TERRAIN.provinces[p.adcode]);
+      geometry.province = p.id;
       const group = new T.Group();
       group.position.z = datum;
       group.scale.z = exaggeration;
@@ -648,7 +700,7 @@
       const geometry = models.get(mark.province).geometry;
       makeLabel(mark.feature, features.get(mark.feature).name, mark.point, labelHeight(geometry, mark.point), 'terrain');
     }
-    const sampleSurface = createSurfaceSampler([...models.values()].map(model => model.geometry));
+    const sampleSurface = surfaceSampler = createSurfaceSampler([...models.values()].map(model => model.geometry));
     for (const config of data.rivers) {
       const feature = features.get(config.feature), record = window.GM_CHINA_RIVERS?.rivers[config.feature];
       if (!record) throw new Error(`真实河道未加载：${feature.name}`);
@@ -659,11 +711,19 @@
       const halo = new T.LineMaterial({ color: '#effbff', linewidth: 5.2, depthWrite: false });
       const ink = new T.LineMaterial({ color: '#1477cf', linewidth: 3.2, depthWrite: false });
       for (const path of draped.paths) {
-        const positions = path.flatMap(sample => [...xy(sample.point), (sample.meters + 3) / metersPerUnit]);
-        const geometry = new T.LineGeometry(); geometry.setPositions(positions);
-        const border = new T.Line2(geometry, halo), line = new T.Line2(geometry, ink);
-        border.renderOrder = 2; line.renderOrder = 3;
-        group.add(border, line);
+        const buckets = new Map();
+        for (let i = 1; i < path.length; i++) {
+          const previous = path[i - 1], next = path[i];
+          const owner = sampleSurface.locate(next.point)?.mesh.province || '';
+          if (!buckets.has(owner)) buckets.set(owner, []);
+          buckets.get(owner).push(...[previous, next].flatMap(sample => [...xy(sample.point), (sample.meters + 3) / metersPerUnit]));
+        }
+        for (const [owner, positions] of buckets) {
+          const geometry = new T.LineSegmentsGeometry().setPositions(positions);
+          const border = new T.LineSegments2(geometry, halo), line = new T.LineSegments2(geometry, ink);
+          border.userData.province = line.userData.province = owner;
+          border.renderOrder = 2; line.renderOrder = 3; group.add(border, line);
+        }
       }
       rivers.set(config.feature, { group, halo, ink, samples: draped.samples, paths: draped.paths });
       for (let i = 0; i < draped.paths.length; i++) {
@@ -698,6 +758,8 @@
       const meters = sampleSurface(point) ?? point[2];
       makeLabel(config.feature, feature.name, point, meters, 'river');
     }
+    terrainPlay = window.GMChinaTerrainPlay.create({ root, models, rivers, scene, sample: sampleSurface, locate: sampleSurface.locate,
+      requestDraw, fullMotion, canAnimate: () => !failed && !document.hidden && inView, gain: () => exaggeration });
     updateRivers();
     for (const feature of window.GM_FEATURES.filter(f => ['钓鱼岛', '赤尾屿'].includes(f.name))) {
       makeLabel(feature.id, `· ${feature.name}`, feature.point, 0, 'island');
@@ -723,8 +785,8 @@
         const hit = pickTerrain(event);
         return hit ? [hit.point.x + 104.5, hit.point.y / 1.22 + 35.8] : null;
       },
-      setDrawing: on => { controls.enabled = !on; $('gm3-label-layer').inert = on; },
-      prepare: () => { closeTour(); flowPlayback?.pause(); },
+      setDrawing: on => { controls.enabled = !on; $('gm3-label-layer').inert = on; syncFlat(); },
+      prepare: () => { adventure?.stop(); narrator?.stop(); closeTour(); flowPlayback?.pause(); terrainPlay?.flatten(true); },
       presetView: () => setView('top'),
     });
     let gesture = null;
@@ -742,7 +804,7 @@
       gesture = null;
       if (!start || start.id !== e.pointerId || start.moved || failed) return;
       const hit = pickTerrain(e);
-      if (hit) select(hit.object.userData.province, true, elevationFromZ(hit.point.z, exaggeration));
+      if (hit) chooseProvince(hit.object.userData.province, [hit.point.x + 104.5, hit.point.y / 1.22 + 35.8], elevationFromZ(hit.point.z - (terrainPlay?.offset(hit.object.userData.province) || 0), visualGain() || exaggeration));
     });
     canvas.addEventListener('webglcontextlost', e => {
       e.preventDefault();
@@ -755,6 +817,8 @@
       $('gm3-label-layer').hidden = false;
       flowLayer.style.display = '';
       sectionController?.resume();
+      root.querySelectorAll('#gm3-lift, #gm3-lakes, #gm3-snow, #gm3-stand').forEach(b => { b.disabled = false; });
+      terrainPlay?.settle();
       canvas.hidden = false;
       root.querySelectorAll('.gm3-toolbar button, .gm3-terrain-tools button, #gm3-height').forEach(b => { b.disabled = false; });
       resize();
@@ -812,6 +876,12 @@
       requestDraw();
     }
   });
+  $('gm3-snow').addEventListener('click', () => { if ($('gm3-snow').getAttribute('aria-pressed') === 'true') root.querySelector('[data-color="terrain"]').click(); });
+  $('gm3-stand').addEventListener('click', () => {
+    adventure?.stop(); closeTour(); narrator?.stop(); flowPlayback?.pause(); sectionController?.cancel();
+    viewport.scrollIntoView({ block: 'center', behavior: 'instant' });
+    const rect = viewport.getBoundingClientRect(); inView = rect.bottom > 0 && rect.top < innerHeight;
+  });
   $('gm3-height').addEventListener('input', e => {
     exaggeration = Math.max(1, Math.min(80, Number(e.target.value)));
     $('gm3-height-output').value = `${exaggeration}×`;
@@ -833,6 +903,18 @@
     const actions = { ArrowLeft: () => rotate(-.12), ArrowRight: () => rotate(.12), ArrowUp: () => rotate(0, -.12), ArrowDown: () => rotate(0, .12), '+': () => zoom(1.2), '=': () => zoom(1.2), '-': () => zoom(1 / 1.2), Home: () => setView('perspective') };
     if (actions[e.key]) { e.preventDefault(); tourController?.pause(); actions[e.key](); }
   });
+  root.addEventListener('click', e => {
+    const b = e.target.closest('[data-lake]');
+    if (!b) return;
+    adventure?.stop(); closeTour(); sectionController?.cancel();
+    const f = features.get(b.dataset.lake);
+    showFeature(f.id);
+    if (controls && !failed) {
+      const [x, y] = xy(f.point); controls.target.set(x, y, heightToZ(surfaceSampler?.(f.point) ?? 0, exaggeration));
+      camera.position.copy(controls.target).add(new T.Vector3(0, -65, 75)); camera.zoom = 2; camera.updateProjectionMatrix(); controls.update();
+    }
+    requestDraw();
+  });
   readLocation();
   if (!window.GMRiverFlow) { syncFlow(); return; }
   flowPlayback = window.GMRiverFlow.createPlayback({
@@ -840,7 +922,7 @@
     available: flowAvailable, canAnimate: () => fullMotion() && !document.hidden && inView,
     render: drawFlow, changed: syncFlow,
   });
-  const refreshFlow = () => { flowPlayback.refresh(); tourController?.refresh(); };
+  const refreshFlow = () => { flowPlayback.refresh(); tourController?.refresh(); if (document.hidden || !inView || !fullMotion()) { narrator?.stop(); terrainPlay?.settle(); } requestDraw(); };
   const flowObserver = new IntersectionObserver(entries => {
     inView = entries[0].isIntersecting;
     refreshFlow();
@@ -867,12 +949,12 @@
     $('gm3-flow-ends').setAttribute('aria-pressed', String(showEnds));
     requestDraw();
   });
-  $('gm3-tour-start').addEventListener('click', () => startTour(tourData.routes.find(route => route.river === flowRiver)?.id));
+  $('gm3-tour-start').addEventListener('click', () => startTour(allTours.find(route => route.river === flowRiver)?.id));
   $('gm3-tour-close').addEventListener('click', () => { closeTour(); $('gm3-tour-start').focus({ preventScroll: true }); });
   $('gm3-tour-route').addEventListener('change', event => startTour(event.target.value, false));
   $('gm3-tour-play').addEventListener('click', () => {
     if (!tourController) return;
-    if (tourController.snapshot().playing) tourController.pause();
+    if (tourController.snapshot().playing) { tourController.pause(); narrator?.stop(); }
     else {
       flowPlayback.pause();
       if (controls && !failed) { tourOffset.copy(camera.position).sub(controls.target); tourZoom = camera.zoom; }

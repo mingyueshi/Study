@@ -68,6 +68,7 @@ window.GMWorldSun = (() => {
       if (!active) return;
       const result = model(point, state.hour, season.declination);
       illuminate(result);
+      root.dispatchEvent(new CustomEvent('gm-world-utc', {detail:{hour:state.hour}}));
       $('gw-sun-time').value = state.hour; $('gw-sun-time-value').textContent = 'UTC ' + timeText(state.hour);
       $('gw-sun-time').setAttribute('aria-valuetext', 'UTC ' + timeText(state.hour));
       const phase = {day: '白天', night: '黑夜', boundary: '晨昏交界'}[result.phase];
@@ -134,7 +135,7 @@ window.GMWorldSun = (() => {
       document.removeEventListener('visibilitychange', refresh); document.removeEventListener('study:effects-change', refresh);
       root.removeEventListener('gm-world-renderer-change', refresh); window.removeEventListener('pageshow', refresh);
     });
-    return {setActive, pick, showStudy};
+    return {setActive, pick, showStudy, setUTC: value => clock.setHour(value)};
   }
   return {daylight, model, terminator, createClock, mount};
 })();

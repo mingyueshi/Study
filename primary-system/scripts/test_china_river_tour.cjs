@@ -84,3 +84,17 @@ test('减少动效、后台或离屏不能播放，但可逐站阅读，恢复�
   setEnabled(true); tour.play(); const stale = [...frames.values()][0]; tour.dispose(); stale(5000); tour.play();
   assert.equal(frames.size, 0);
 });
+
+
+test('到站配音时等待，朗读结束后继续停站计时，途中暂停仍可用', () => {
+  const route = Tour.buildRoute([[point(100, 30), point(101, 30)]], stops([[100, 30], [101, 30]]), [1]);
+  const frames = new Map(); let id = 0, reading = true, time = 0;
+  const tour = Tour.createTour({ route, holdSeconds: 1, travelSeconds: 2,
+    request: fn => { frames.set(++id, fn); return id; }, cancel: key => frames.delete(key), canPlay: () => true,
+    moved() {}, changed() {}, holdWhile: () => reading,
+  });
+  function advance(n) { for (let i = 0; i < n && frames.size; i++) { const [key, fn] = frames.entries().next().value; frames.delete(key); fn(time); time += 100; } }
+  tour.play(); advance(30); assert.equal(tour.snapshot().distance, 0); assert.equal(tour.snapshot().remaining, 1);
+  reading = false; advance(20); assert.ok(tour.snapshot().distance > 0);
+  tour.pause(); assert.equal(frames.size, 0); tour.dispose();
+});

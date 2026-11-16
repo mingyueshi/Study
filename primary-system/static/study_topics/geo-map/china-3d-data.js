@@ -34,6 +34,7 @@ window.GM_CHINA_3D = {
     { kind: 'plateau', label: '四大高原' },
     { kind: 'plain', label: '三大平原' },
     { kind: 'basin', label: '四大盆地' },
+    { kind: 'lake', label: '六处主要湖泊' },
   ],
   flowCenterlinesSHA256: '3f2750f509e8ae539b59e7cfa1cb993ce000a9e83941b7ead83332bd2dfd2158',
   flowNote: '绿色标记看源区或上游，橙色标记看入海口或后续去向。小箭头沿蓝线向下游走，速度只为演示，不代表真实流速；源区和入海区域为大致位置。',

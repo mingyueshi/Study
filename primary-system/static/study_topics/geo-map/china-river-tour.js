@@ -34,11 +34,11 @@
     const { track, start } = route.tracks[part];
     return { ...Flow.atDistance(track, target - start), part };
   }
-  function createTour({ route, holdSeconds = 8, travelSeconds = 90, request, cancel, canPlay, moved, changed }) {
+  function createTour({ route, holdSeconds = 8, travelSeconds = 90, request, cancel, canPlay, moved, changed, holdWhile = () => false, positionAt = position }) {
     let index = 0, distance = 0, phase = 'stop', remaining = holdSeconds, speed = 1;
     let playing = false, frame = null, previous = null, generation = 0, disposed = false, lastPaint = null;
     const snapshot = () => ({ index, distance, phase, remaining, speed, playing, progress: distance / route.length });
-    const paint = () => moved(position(route, distance), snapshot());
+    const paint = () => moved(positionAt(route, distance), snapshot());
     const clear = () => { generation++; if (frame !== null) cancel(frame); frame = previous = lastPaint = null; };
     const pause = () => { playing = false; clear(); changed(snapshot()); };
     const jump = target => {
@@ -64,7 +64,7 @@
         previous = now;
         let phaseChanged = false;
         if (phase === 'stop') {
-          remaining = Math.max(0, remaining - elapsed);
+          if (!holdWhile()) remaining = Math.max(0, remaining - elapsed);
           if (remaining === 0) { phase = 'travel'; phaseChanged = true; }
         } else {
           const next = route.stops[index + 1].distance;

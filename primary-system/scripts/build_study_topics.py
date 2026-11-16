@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """从 content_sources 生成专题与学习册。服务直接读取生成的文件。"""
 import argparse
+from hashlib import sha256
 import json
 import re
 from pathlib import Path
@@ -97,6 +98,9 @@ def template(source, topic, page, theme, index_route):
         anchor = '<p class="gm-layer-hint" id="gm-layer-hint"></p>'
         link = """<a class="study-map-tool" href="{% url 'geography-study' %}#lesson-gu2-3">地图三要素与比例尺 →</a>"""
         content = replace_once(content, anchor, anchor + '\n        ' + link)
+    if topic == 'geo-map' and page == 'world-3d':
+        content = content.replace('../history-timeline/event.html', "{% url 'history-timeline-event' %}")
+        attrs = attrs.replace('../history-timeline/event.html', "{% url 'history-timeline-event' %}")
     assets = []
     for path in HEAD_ASSET.findall(source.split('</head>', 1)[0]):
         if path == 'platform-theme.css':
@@ -107,10 +111,19 @@ def template(source, topic, page, theme, index_route):
             asset_url += '?v=20261114b9' if topic == 'geo' else '?v=20261114b7'
         if topic == 'geo' and (path.startswith('../sci-process') or path in ('earth-data.js', 'earth.js')):
             asset_url += '?v=20261114b9'
+        if topic == 'geo-map' and page == 'china-3d' and path in (
+                'china-3d.js', 'china-3d.css', 'china-3d-data.js', 'china-3d-geometry.js',
+                'china-river-tour.js', 'china-adventures-data.js', 'china-adventures.js', 'china-terrain-play.js'):
+            asset_url += '?v=' + sha256((SOURCE / topic / path).read_bytes()).hexdigest()[:12]
+        if topic == 'geo-map' and page == 'world-3d' and path.endswith(('.css', '.js')):
+            asset_url += '?v=' + sha256((SOURCE / topic / path).read_bytes()).hexdigest()[:12]
         if path.endswith('.css'):
             assets.append(f'<link rel="stylesheet" href="{asset_url}">')
         else:
             assets.append(f'<script src="{asset_url}" defer></script>')
+
+    if topic == 'geo-map' and page == 'china-3d':
+        assets.insert(0, "<script src=\"{% static 'speech.js' %}\" defer></script>")
 
     if theme:
         attrs = attrs.replace(' id="main"', '').replace(' tabindex="-1"', '')
