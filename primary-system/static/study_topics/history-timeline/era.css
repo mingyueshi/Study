@@ -81,6 +81,14 @@
 .event-compare-side.world { background: var(--tl-world-soft); color: var(--tl-world-deep); }
 .event-compare-side b { font-size: 18px; }
 .event-compare-side[href]:hover { outline: 2px solid currentColor; }
+.event-reading-chain { margin: 24px 0; padding: clamp(18px, 3vw, 28px); border: 1px solid var(--tl-line); border-radius: 18px; background: var(--tl-card, #fff); }
+.event-reading-chain h2 { margin: 4px 0 10px; font-size: 25px; }
+.event-reading-chain p { font-size: 18px; line-height: 1.8; }
+.event-reading-link { display: grid; gap: 8px; padding: 18px; border-radius: 13px; color: var(--tl-china-deep); background: var(--tl-china-soft); text-decoration: none; }
+.event-reading-link.world { color: var(--tl-world-deep); background: var(--tl-world-soft); }
+.event-reading-link small { font-size: 15px; }
+.event-reading-link b { font-size: 22px; }
+.event-reading-link:hover, .event-reading-link:focus-visible { outline: 2px solid currentColor; }
 @media (max-width: 860px) {
   .era-section-links { margin-left: 0; }
 }

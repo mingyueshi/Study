@@ -21,6 +21,7 @@
   const events = ctx.byEra.get(era.id).flat();
   const index = events.indexOf(ev);
   const cardHash = '#card-' + encodeURIComponent(ev.id);
+  const next = window.TLNavigation.nextReading(ev, window.TIMELINE_EVENTS, window.TIMELINE_READING_LINKS);
   document.title = ev.title + ' · 历史大事';
   const eraCrumb = document.getElementById('event-era');
   eraCrumb.textContent = era.name;
@@ -82,6 +83,15 @@
       </a>
     </div>
   </section>` : ''}
+  <section class="event-reading-chain" aria-labelledby="reading-next-title">
+    <p class="tl-eyebrow">顺着线索继续读</p>
+    <h2 id="reading-next-title">${next ? '下一件相关大事' : '这条阅读线索读到这里'}</h2>
+    ${next ? `<p>${esc(next.reason)}</p>
+      <a class="event-reading-link ${next.event.track}" href="${eventHref(next.event)}">
+        <small>${next.curated ? '相关线索' : '按时间继续'} · ${trackName[next.event.track]} · ${esc(next.event.year)}</small>
+        <b>${esc(next.event.icon || '•')} ${esc(next.event.title)} →</b>
+      </a>` : '<p>已经读到目前收录的最后年代。回时间轴选择另一个时代或新的线索。</p><a class="tl-primary-action" href="timeline.html">回到双轨时间轴 →</a>'}
+  </section>
   <nav class="era-pager" aria-label="本时代前后的大事">
     ${nearby(events[index - 1], '上一件')}
     <a class="era-pager-btn era-pager-home" href="${eraHref(era)}">回到时代站</a>

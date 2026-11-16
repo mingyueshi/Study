@@ -54,7 +54,7 @@ window.TLShared = (() => {
     function rowsHTML(era, { compact = false } = {}) {
       return `<div class="tl-date-flow">
         <div class="tl-date-legend"><span class="tl-track-label china-label">中国史</span><span class="tl-track-label world-label">世界史</span></div>
-        ${byEra.get(era.id).map(row => `<div class="tl-date-row">
+        ${byEra.get(era.id).map(row => `<div class="tl-date-row" data-year="${row[0].sort}">
           ${['china', 'world'].map(track => `<div class="tl-date-track ${track}">${row.filter(ev => ev.track === track).map(ev => cardHTML(ev, compact)).join('')}</div>`).join('')}
         </div>`).join('')}
       </div>`;

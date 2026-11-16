@@ -18,6 +18,7 @@ require('../history-timeline/media-data.js');
 require('../history-timeline/dynasty-data.js');
 require('../history-timeline/territory-data.js');
 require('../history-timeline/territory-geo.js');
+require('../history-timeline/reading-data.js');
 require('../history-timeline/shared.js');
 const W = globalThis.window;
 
@@ -156,6 +157,19 @@ EVENTS.forEach(ev => {
   check(ctx.eventMap.get(ev.id) === ev, ev.id + ' 应能按稳定 id 定位事件');
   check(ctx.pairOfEvent.get(ev.id) === pairOfEvent.get(ev.id), ev.id + ' 的同期对照应与数据一致');
   check(W.TLShared.eventHref(ev) === 'event.html?event=' + ev.id, ev.id + ' 应有独立详情入口');
+});
+
+/* ---------- 事件阅读链 ---------- */
+const readingSources = new Set();
+check(Array.isArray(W.TIMELINE_READING_LINKS) && W.TIMELINE_READING_LINKS.length > 0, '应有事件阅读链');
+W.TIMELINE_READING_LINKS.forEach(link => {
+  const from = ctx.eventMap.get(link.from), to = ctx.eventMap.get(link.to);
+  check(Boolean(from && to), '阅读链应引用有效事件：' + link.from + ' → ' + link.to);
+  check(!readingSources.has(link.from), link.from + ' 只设置一件首选关联大事');
+  readingSources.add(link.from);
+  check(from && to && to.sort > from.sort, link.from + ' 阅读链应向后推进，不形成回环');
+  check(isStr(link.reason) && !hasBadPunct(link.reason) && link.reason.length <= 80,
+    link.from + ' 应有不超过 80 字的中文关联说明');
 });
 
 /* ---------- 朝代更替子页 ---------- */
@@ -325,9 +339,10 @@ if (Array.isArray(TERRITORIES)) TERRITORIES.forEach((map, i) => {
     isStr(capital.name) && validPoint(capital.point)), tag + ' 应有都城或中心地点标记');
   check(Number.isFinite(map.sort) && map.sort !== 0, tag + ' 应有排序年代');
   if (i > 0) check(map.sort >= TERRITORIES[i - 1].sort, tag + ' 应按时间排列');
-  for (const field of ['title', 'period', 'alt', 'credit', 'note', 'question', 'answer']) {
+  for (const field of ['title', 'period', 'alt', 'credit', 'note', 'question', 'answer', 'change']) {
     check(isStr(map[field]) && !hasBadPunct(map[field]), tag + ' 应有中文 ' + field);
   }
+  check(isStr(map.change) && map.change.length <= 100, tag + ' 阶段变化说明应简短，不超过 100 字');
   check(Array.isArray(map.observe) && map.observe.length >= 2 && map.observe.every(text => isStr(text) && !hasBadPunct(text)),
     tag + ' 应有至少两条观察提示');
   check(/^assets\/territory\/[a-z0-9-]+\.jpg$/.test(map.src) && fileExists(map.src), tag + ' 应引用本地地图');
@@ -342,13 +357,13 @@ check(fileExists('README.md'), '缺少历史时间轴维护说明');
 /* 页面引用均应在可独立拷走的目录内。 */
 const PAGE_REFS = {
   'index.html': ['content.js', 'timeline-data.js', 'dynasty-data.js', 'shared.js', 'home-app.js', 'styles.css', 'timeline.html', 'dynasties.html', 'era.html'],
-  'timeline.html': ['content.js', 'timeline-data.js', 'media-data.js', 'dynasty-data.js', 'shared.js', 'timeline-app.js', 'styles.css', 'timeline.css',
+  'timeline.html': ['content.js', 'timeline-data.js', 'media-data.js', 'dynasty-data.js', 'shared.js', 'navigation.js', 'timeline-app.js', 'styles.css', 'timeline.css',
     'dynasties.html', 'era.html'],
   'dynasties.html': ['content.js', 'dynasty-data.js', 'territory-data.js', 'territory-geo.js', 'shared.js', 'dynasty-app.js', 'territory-app.js', 'styles.css', 'dynasty.css', 'territory.css',
     'timeline.html'],
   'era.html': ['content.js', 'timeline-data.js', 'media-data.js', 'dynasty-data.js', 'shared.js', 'era-app.js', 'styles.css', 'era.css', 'media.css',
     'timeline.html'],
-  'event.html': ['content.js', 'timeline-data.js', 'media-data.js', 'shared.js', 'event-app.js', 'styles.css', 'era.css', 'media.css',
+  'event.html': ['content.js', 'timeline-data.js', 'media-data.js', 'reading-data.js', 'shared.js', 'navigation.js', 'event-app.js', 'styles.css', 'era.css', 'media.css',
     'timeline.html', 'era.html']
 };
 Object.entries(PAGE_REFS).forEach(([page, refs]) => {

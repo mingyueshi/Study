@@ -13,6 +13,7 @@
   const slider = $('territory-range');
   const compare = $('territory-compare');
   const compareSelect = $('territory-compare-select');
+  const changes = $('territory-changes');
   const svg = $('territory-svg');
   const fullView = { x: 0, y: 0, w: 1000, h: 830 };
   const project = ([lng, lat]) => [(lng - 64) * 1000 / 81, (64 - lat) * 830 / 56];
@@ -27,37 +28,57 @@
   let drag = null;
   let moved = false;
   let playing = false, timer = null, generation = 0, transition = null;
+  let remaining = null, deadline = 0;
   const play = $('territory-play');
   const speed = $('territory-speed');
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
   const canPlay = () => window.StudyEffects ? window.StudyEffects.motion === 'full' : !reduced.matches;
+  const duration = () => speed.value === '10000' ? 10000 : 6000;
 
   function playbackState() {
     play.disabled = !canPlay();
     play.setAttribute('aria-pressed', String(playing));
-    play.textContent = playing ? '暂停播放' : index === maps.length - 1 ? '从头再看' : '播放版图变化';
+    play.textContent = playing ? '暂停播放' : index === maps.length - 1 ? '从头再看' : remaining !== null ? '继续播放' : '自动播放';
+    $('territory-restart').textContent = canPlay() ? '从头播放' : '回到第一张';
     $('territory-progress').max = maps.length;
     $('territory-progress').value = index + 1;
+    const next = maps[index + 1];
     $('territory-play-status').textContent = !canPlay() ? '已减少连续运动，可以用「上一张／下一张」逐张比较。'
-      : playing ? `正在看第 ${index + 1} 张。点地图、拖动视角或选择对照阶段都会暂停。`
-      : index === maps.length - 1 ? '已经看到最后一个阶段。可以从头再看，或选择两张版图比较。'
-      : '准备好后点播放；暂停后可以慢慢读，离开演示区域也会暂停。';
+      : !next ? '已经看到最后一个阶段，播放已停止。可以从头再看，或选择两张版图比较。'
+      : playing ? `正在看第 ${index + 1} 个阶段，接下来：${next.title}。点地图或「暂停播放」可停下查看。`
+      : remaining !== null ? `已暂停在${maps[index].title}，可以慢慢读。继续后接着看：${next.title}。`
+      : `按时间顺序播放，接下来：${next.title}。播放时地图视角保持不变。`;
+  }
+  function cancelTimer() {
+    generation++; clearTimeout(timer); timer = null;
   }
   function pause() {
-    generation++; clearTimeout(timer); timer = null; playing = false;
+    if (playing && timer !== null) remaining = Math.max(0, deadline - performance.now());
+    cancelTimer(); playing = false;
     transition?.cancel(); transition = null;
     playbackState();
   }
   function schedule() {
-    clearTimeout(timer);
-    const token = ++generation;
+    cancelTimer();
+    const token = generation;
+    const wait = remaining ?? duration();
+    remaining = null;
+    deadline = performance.now() + wait;
     timer = setTimeout(() => {
       if (!playing || token !== generation || !canPlay() || document.hidden) return;
       timer = null;
+      if (index + 1 === maps.length - 1) playing = false;
       select(index + 1);
-      if (index === maps.length - 1) { playing = false; playbackState(); }
-      else schedule();
-    }, speed.value === '10000' ? 10000 : 6000);
+      if (playing) schedule();
+    }, wait);
+  }
+  function start(fromBeginning = false) {
+    if (document.hidden) return;
+    cancelTimer();
+    if (fromBeginning || index === maps.length - 1) { remaining = null; select(0); }
+    playing = canPlay();
+    playbackState();
+    if (playing) schedule();
   }
 
   $('territory-dynasties').innerHTML = bands.map(band =>
@@ -84,7 +105,8 @@
     <g class="territory-graticule">${grid.join('')}</g>
     <g class="territory-rivers">${geo.rivers.flatMap(river => river.lines.map(line =>
       `<path d="${pathOf(line, false)}"><title>${esc(river.name)}</title></path>`)).join('')}</g>
-    <g id="territory-regions"></g><g id="territory-outlines"></g>
+    <defs id="territory-change-defs"></defs>
+    <g id="territory-regions"></g><g id="territory-differences" pointer-events="none" aria-hidden="true"></g><g id="territory-outlines"></g>
     <g class="territory-water-labels">${[[[109,37], '黄河'], [[113,29.6], '长江'], [[128,29], '东海'], [[118,17], '南海'], [[134,52], '黑龙江']].map(([point,name]) =>
       `<text x="${project(point)[0]}" y="${project(point)[1]}">${name}</text>`).join('')}</g>
     <g id="territory-region-labels"></g><g id="territory-capitals"></g>`;
@@ -115,6 +137,33 @@
     $('territory-selection').textContent = selected ? `${geo.regions[selected].name} · 已突出显示圈线范围` : '点地图色块或图例，可突出一个区域。★ 表示都城或中心地点。';
   }
 
+  function renderChanges() {
+    const previous = maps[index - 1];
+    const active = changes.checked && !!previous;
+    $('territory-change-panel').hidden = !changes.checked;
+    $('territory-change-key').hidden = !previous;
+    $('territory-change-title').textContent = previous
+      ? `${previous.title} → ${maps[index].title}` : '第一阶段 · 先记住起点';
+    $('territory-change-summary').textContent = maps[index].change;
+    svg.classList.toggle('is-showing-changes', active);
+    if (!active) {
+      $('territory-change-defs').innerHTML = '';
+      $('territory-differences').innerHTML = '';
+      return;
+    }
+    // 每个阶段先合看全部政权的覆盖范围，再扣除另一阶段；同一范围内更换政权不算增减。
+    // 各区域分别使用 evenodd 保留孔洞，蒙版叠加则保留各区域的并集。
+    const paths = (map, fill) => map.regions.map(id =>
+      `<path d="${regionPath(id)}" fill="${fill}" fill-rule="evenodd"/>`).join('');
+    const mask = (id, excluded) => `<mask id="${id}" maskUnits="userSpaceOnUse" x="-2000" y="-2000" width="5000" height="5000" style="mask-type:luminance">
+      <rect x="-2000" y="-2000" width="5000" height="5000" fill="white"/>${paths(excluded, 'black')}</mask>`;
+    $('territory-change-defs').innerHTML = mask('territory-gain-mask', previous) + mask('territory-loss-mask', maps[index]) +
+      '<pattern id="territory-loss-pattern" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="9" height="9" fill="#f6ae62"/><path d="M0 0V9" stroke="#9b4513" stroke-width="3"/></pattern>';
+    $('territory-differences').innerHTML =
+      `<g class="territory-loss" mask="url(#territory-loss-mask)">${paths(previous, 'url(#territory-loss-pattern)')}</g>` +
+      `<g class="territory-gain" mask="url(#territory-gain-mask)">${paths(maps[index], '#0b9e86')}</g>`;
+  }
+
   function render(animate = false) {
     const map = maps[index];
     const band = bands.find(band => band.id === map.dynasty);
@@ -140,6 +189,7 @@
       const region = geo.regions[id];
       return `<path class="territory-region${map.id === 'xia' ? ' is-approximate' : ''}" data-region="${esc(id)}" tabindex="0" role="button" aria-label="突出${esc(region.name)}的范围" d="${regionPath(id)}" fill="${region.color}" stroke="${region.color}" fill-rule="evenodd"><title>${esc(region.name)}</title></path>`;
     }).join('');
+    renderChanges();
     $('territory-region-labels').innerHTML = map.regions.map(id => {
       const region = geo.regions[id];
       const [x, y] = project(region.label);
@@ -186,12 +236,13 @@
 
   function restore() {
     pause();
+    remaining = null;
     const value = new URLSearchParams(location.search).get('map');
     const match = maps.findIndex(map => map.id === value || map.dynasty === value);
     select(match < 0 ? 0 : match, false);
   }
 
-  const manualSelect = next => { pause(); select(next); };
+  const manualSelect = next => { pause(); remaining = null; select(next); };
   slider.addEventListener('input', () => manualSelect(Number(slider.value)));
   $('territory-prev').addEventListener('click', () => manualSelect(index - 1));
   $('territory-next').addEventListener('click', () => manualSelect(index + 1));
@@ -200,6 +251,7 @@
     if (button) manualSelect(maps.findIndex(map => map.dynasty === button.dataset.dynasty));
   });
   compare.addEventListener('change', () => { pause(); render(); });
+  changes.addEventListener('change', () => { pause(); renderChanges(); });
   compareSelect.addEventListener('change', () => { pause(); compareIndex = Number(compareSelect.value); render(); });
   $('territory-legend').addEventListener('click', event => {
     const button = event.target.closest('[data-region]');
@@ -267,12 +319,10 @@
   window.addEventListener('popstate', restore);
   play.addEventListener('click', () => {
     if (playing) { pause(); return; }
-    if (!canPlay() || document.hidden) return;
-    if (index === maps.length - 1) select(0);
-    playing = true; playbackState(); schedule();
+    start();
   });
-  $('territory-restart').addEventListener('click', () => manualSelect(0));
-  speed.addEventListener('change', () => { if (playing) schedule(); });
+  $('territory-restart').addEventListener('click', () => start(true));
+  speed.addEventListener('change', () => { remaining = null; if (playing) schedule(); playbackState(); });
   $('territory-question').addEventListener('toggle', () => { if ($('territory-question').open) pause(); });
   root.querySelector('.territory-reference').addEventListener('toggle', event => { if (event.currentTarget.open) pause(); });
   const preference = () => { if (!canPlay()) pause(); else playbackState(); };

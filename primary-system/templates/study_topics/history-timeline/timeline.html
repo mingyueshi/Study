@@ -10,12 +10,13 @@
 <script src="{% static 'study_topics/history-timeline/media-data.js' %}" defer></script>
 <script src="{% static 'study_topics/history-timeline/dynasty-data.js' %}" defer></script>
 <script src="{% static 'study_topics/history-timeline/shared.js' %}" defer></script>
+<script src="{% static 'study_topics/history-timeline/navigation.js' %}" defer></script>
 <script src="{% static 'study_topics/history-timeline/timeline-app.js' %}" defer></script>
 {% endblock %}
 {% block study_content %}
 <div class="study-timeline">
 <div class="tl-shell tl-workspace-shell">
-    <div class="timeline-topic" id="top">
+    <div class="timeline-topic" id="top" data-sidebar-label="时间轴工具">
       <aside class="timeline-sidebar" aria-label="时间轴导航与工具">
         <header class="timeline-heading">
           <p class="tl-eyebrow">中国史 × 世界史</p>
@@ -35,11 +36,27 @@
             <input type="search" id="event-search" placeholder="如郑和、1405">
             <span id="event-count" role="status"></span>
           </div>
+          <form class="timeline-jump" id="year-jump-form">
+            <label for="year-jump">跳到某年或朝代</label>
+            <div><input id="year-jump" type="text" placeholder="公元前 221 年、唐朝" autocomplete="off"><button type="submit">前往</button></div>
+            <p id="year-jump-status" role="status">公元前年份可写「前 221」或「−221」。没有公元 0 年。</p>
+          </form>
+          <fieldset class="timeline-zoom">
+            <legend>时间轴缩放</legend>
+            <div class="timeline-zoom-buttons" role="group" aria-label="选择年代窗口">
+              <button type="button" data-zoom="all" aria-pressed="true">全历史</button>
+              <button type="button" data-zoom="500" aria-pressed="false">前后 500 年</button>
+              <button type="button" data-zoom="100" aria-pressed="false">前后 100 年</button>
+            </div>
+            <label for="year-slider">拖动选择年代</label>
+            <output id="year-slider-label" for="year-slider"></output>
+            <input id="year-slider" type="range" step="1" aria-label="选择中心年代">
+          </fieldset>
           <div class="tl-filters" role="group" aria-label="选择查看视角">
             <button type="button" data-mode="all" aria-pressed="true">双轨全览</button>
             <button type="button" data-mode="china" aria-pressed="false">中国史</button>
             <button type="button" data-mode="world" aria-pressed="false">世界史</button>
-            <button type="button" data-mode="pair" aria-pressed="false">同期对照</button>
+            <button type="button" data-mode="pair" aria-pressed="false">同期对比</button>
           </div>
           <label class="tl-media-filter"><input id="media-only" type="checkbox"> 只看带素材的大事</label>
           <a class="tl-mobile-results" href="#timeline-results">查看结果 ↓</a>
@@ -53,8 +70,15 @@
       <section class="timeline-content" aria-labelledby="timeline-results">
         <header class="timeline-reading-head">
           <h2 id="timeline-results" data-tl-anchor tabindex="-1">沿时间读大事</h2>
-          <p>越往下越接近今天。点标题读故事，点「同期对照」跳到另一件大事。</p>
+          <p>越往下越接近今天。可按年代缩放，或切到「同期对比」并排读中外故事。</p>
         </header>
+
+        <nav class="timeline-dynasty-ribbon" id="dynasty-ribbon" aria-label="朝代色带与年代定位">
+          <div class="timeline-ribbon-head"><b id="dynasty-current">朝代刻度</b><a href="dynasties.html">更替故事与版图 →</a></div>
+          <div class="tl-dynasty-strip" id="dynasty-strip"></div>
+          <small>按顺序排列，色块宽度不表示时长；交接或并立时可同时高亮。</small>
+        </nav>
+        <div class="timeline-range-status"><p id="time-window-status" role="status"></p><button type="button" id="reset-time" hidden>查看全部年代</button></div>
 
         <div class="timeline-extras">
           <details class="timeline-extra">
@@ -63,8 +87,7 @@
           </details>
 
           <details class="timeline-extra">
-            <summary>朝代速览 <span>夏到清</span></summary>
-            <div class="tl-dynasty-strip" id="dynasty-strip"></div>
+            <summary>朝代歌与更替故事 <span>夏到清</span></summary>
             <p class="tl-dynasty-song"><strong>朝代歌</strong>：夏商与西周，东周分两段；三分魏蜀吴，二晋前后延；南北朝并立，隋唐五代传；宋元明清后，皇朝至此完。</p>
             <a class="tl-dynasty-more" href="dynasties.html">朝代更替与公元纪年 →</a>
           </details>
@@ -75,6 +98,10 @@
           <button class="tl-secondary-action" id="reset-filters" type="button">清空筛选</button>
         </div>
         <div class="tl-flow" id="timeline-flow"></div>
+        <section class="timeline-pair-view" id="timeline-pairs" aria-label="同一时期的中外并列对比" hidden>
+          <p class="timeline-pair-guide">两边发生在同一时期，未必是同一年。看清各自年代，再比较相同与不同；筛选命中一侧时保留整组。</p>
+          <div id="timeline-pair-groups"></div>
+        </section>
         <p class="tl-guide-note">上下间距只表示先后。「约」表示大致年代。标有「传说」的是流传下来的故事。长时段按其中的代表年代排序。</p>
         <noscript><p class="tl-notice">请启用 JavaScript 查看时间轴；内容数据保存在本目录的 content.js 与 timeline-data.js 中。</p></noscript>
       </section>

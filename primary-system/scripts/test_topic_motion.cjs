@@ -155,15 +155,17 @@ test('evolution preferences and offscreen pause retain manual stages without aut
 });
 
 function territoryPage(query = '', motion = 'full') {
-  const nodes = new Map(), events = {}, timers = new Map(); let nextId = 0, offscreen;
+  const nodes = new Map(), events = {}, timers = new Map(); let nextId = 0, offscreen, now = 0;
   const get = id => {
-    if (!nodes.has(id)) nodes.set(id, {id, attrs: {}, handlers: {}, dataset: {}, style: {setProperty() {}}, clientWidth: 1000, clientHeight: 830,
+    if (!nodes.has(id)) nodes.set(id, {id, attrs: {}, handlers: {}, dataset: {}, style: {setProperty() {}}, classes: new Set(),
+      classList: {toggle(name, on) { if (on) get(id).classes.add(name); else get(id).classes.delete(name); }}, clientWidth: 1000, clientHeight: 830,
       checked: false, textContent: '', innerHTML: '', value: '', hidden: false,
       setAttribute(k, v) { this.attrs[k] = v; }, after() {}, querySelectorAll: () => [], querySelector: s => get(s),
       addEventListener(type, fn) { this.handlers[type] = fn; }});
     return nodes.get(id);
   };
   get('territory-speed').value = '6000';
+  get('territory-changes').checked = true;
   const effects = {motion, watch: (_, fn) => { offscreen = fn; }};
   const location = new URL('https://study.test/history/dynasties.html' + query);
   const window = {StudyEffects: effects, matchMedia: () => ({matches: false, addEventListener() {}}),
@@ -172,13 +174,14 @@ function territoryPage(query = '', motion = 'full') {
     document: {hidden: false, getElementById: get, currentScript: {src: 'https://study.test/territory-app.js'}, createElement: () => get('created'),
       addEventListener: (type, fn) => { events[type] = fn; }}, ResizeObserver: class { observe() {} },
     setTimeout: (fn, ms) => { timers.set(++nextId, {fn, ms}); return nextId; }, clearTimeout: id => timers.delete(id),
+    performance: {now: () => now},
   });
   for (const file of ['content', 'dynasty-data', 'territory-data', 'territory-geo', 'territory-app']) {
     vm.runInContext(fs.readFileSync(path.join(__dirname, `../content_sources/history-timeline/${file}.js`), 'utf8'), context);
   }
   const click = id => get(id).handlers.click();
-  const tick = () => { const [id, timer] = timers.entries().next().value; timers.delete(id); timer.fn(); };
-  return {get, click, tick, timers, events, effects, offscreen: () => offscreen(), maps: window.TERRITORY_MAPS, location};
+  const tick = () => { const [id, timer] = timers.entries().next().value; timers.delete(id); now += timer.ms; timer.fn(); };
+  return {get, click, tick, timers, events, effects, elapse: ms => { now += ms; }, offscreen: () => offscreen(), maps: window.TERRITORY_MAPS, location};
 }
 
 test('territory playback advances existing stages with stable view and preserves deep links', () => {
@@ -201,6 +204,82 @@ test('territory comparison, manual dates and offscreen stop pending playback', (
   p.click('territory-play'); p.get('territory-speed').value = '10000'; p.get('territory-speed').handlers.change();
   assert.equal(p.timers.size, 1); assert.equal([...p.timers.values()][0].ms, 10000);
   p.offscreen(); assert.equal(p.timers.size, 0);
+});
+
+test('territory pause keeps its remaining time and manual selection starts a fresh interval', () => {
+  const p = territoryPage('?map=qin');
+  const initial = Number(p.get('territory-range').value);
+  p.click('territory-play'); p.elapse(2000); p.click('territory-play');
+  assert.equal(p.timers.size, 0);
+  assert.equal(p.get('territory-play').textContent, '继续播放');
+  assert.match(p.get('territory-play-status').textContent, /已暂停/);
+  p.elapse(40000); p.click('territory-play');
+  assert.equal([...p.timers.values()][0].ms, 4000);
+  p.tick(); assert.equal(Number(p.get('territory-range').value), initial + 1);
+  assert.equal([...p.timers.values()][0].ms, 6000);
+  p.elapse(1500); p.click('territory-next'); p.click('territory-play');
+  assert.equal([...p.timers.values()][0].ms, 6000);
+  assert.match(p.get('territory-play-status').textContent, new RegExp(p.maps[initial + 3].title));
+});
+
+test('territory restart plays every stage once without moving the map or reviving an old timer', () => {
+  const p = territoryPage('?map=qin');
+  p.click('territory-zoom-in'); const view = p.get('territory-svg').attrs.viewBox;
+  p.click('territory-play'); const stale = [...p.timers.values()][0].fn;
+  p.elapse(2000); p.click('territory-restart');
+  assert.equal(Number(p.get('territory-range').value), 0);
+  assert.equal(p.timers.size, 1); assert.equal([...p.timers.values()][0].ms, 6000);
+  stale(); assert.equal(Number(p.get('territory-range').value), 0);
+  for (let i = 1; i < p.maps.length; i++) {
+    p.tick();
+    assert.equal(Number(p.get('territory-range').value), i);
+    assert.equal(p.location.searchParams.get('map'), p.maps[i].id);
+    assert.equal(p.get('territory-svg').attrs.viewBox, view);
+  }
+  assert.equal(p.timers.size, 0);
+  assert.match(p.get('territory-play-status').textContent, /播放已停止/);
+  p.click('territory-play');
+  assert.equal(Number(p.get('territory-range').value), 0);
+  assert.equal(p.timers.size, 1);
+});
+
+test('territory changes always compare the preceding chronological stage and remain available while paused', () => {
+  const p = territoryPage('?map=qin');
+  const initial = Number(p.get('territory-range').value);
+  const summary = () => p.get('territory-change-summary').textContent;
+  assert.equal(summary(), p.maps[initial].change);
+  assert.equal(p.get('territory-change-title').textContent, p.maps[initial - 1].title + ' → ' + p.maps[initial].title);
+  const masks = p.get('territory-change-defs').innerHTML;
+  assert.match(masks, /territory-gain-mask/);
+  assert.match(masks, /territory-loss-mask/);
+  assert.match(p.get('territory-differences').innerHTML, /mask="url\(#territory-gain-mask\)"/);
+  p.get('territory-compare').checked = true; p.get('territory-compare').handlers.change();
+  p.get('territory-compare-select').value = String(p.maps.length - 1); p.get('territory-compare-select').handlers.change();
+  assert.equal(p.get('territory-change-defs').innerHTML, masks);
+  p.click('territory-play'); p.tick(); p.click('territory-play');
+  assert.equal(summary(), p.maps[initial + 1].change);
+  assert.ok(p.get('territory-svg').classes.has('is-showing-changes'));
+  p.click('territory-play'); const stale = [...p.timers.values()][0].fn;
+  p.get('territory-changes').checked = false; p.get('territory-changes').handlers.change();
+  assert.equal(p.timers.size, 0);
+  assert.equal(p.get('territory-differences').innerHTML, '');
+  assert.equal(p.get('territory-change-panel').hidden, true);
+  stale(); assert.equal(Number(p.get('territory-range').value), initial + 1);
+  p.get('territory-changes').checked = true; p.get('territory-changes').handlers.change();
+  assert.equal(p.get('territory-change-panel').hidden, false);
+  assert.match(p.get('territory-differences').innerHTML, /territory-loss-pattern/);
+  assert.equal(p.timers.size, 0);
+});
+
+test('territory first stage and restart do not claim newly gained or lost territory', () => {
+  const p = territoryPage();
+  assert.equal(p.get('territory-differences').innerHTML, '');
+  assert.equal(p.get('territory-change-key').hidden, true);
+  p.click('territory-play'); p.tick();
+  assert.equal(p.get('territory-change-key').hidden, false);
+  p.click('territory-restart');
+  assert.equal(p.get('territory-differences').innerHTML, '');
+  assert.equal(p.get('territory-change-key').hidden, true);
 });
 
 test('territory stops at the last stage and reduced motion retains previous and restart controls', () => {

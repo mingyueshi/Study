@@ -1,12 +1,13 @@
 /* 总轴：侧栏负责定位，正文按可用宽度切换双轨和单列。 */
 .tl-workspace-shell {
-  max-width: 1760px; padding: clamp(12px, 2.1vw, 32px);
+  max-width: none; padding: clamp(12px, 2.1vw, 32px);
 }
 .timeline-topic {
-  display: grid; grid-template-columns: clamp(176px, 21vw, 264px) minmax(0, 1fr);
+  display: grid; grid-template-columns: minmax(0, 1fr) clamp(220px, 23vw, 300px);
   align-items: start; gap: clamp(14px, 2vw, 32px);
 }
 .timeline-sidebar {
+  grid-column: 2; grid-row: 1;
   position: sticky; top: 14px; max-height: calc(100dvh - 28px); overflow: auto;
   scrollbar-width: thin; padding: 14px;
   border: 1px solid var(--tl-line); border-radius: 18px;
@@ -59,7 +60,7 @@
 }
 .tl-era-chip:hover { background: color-mix(in srgb, var(--era-accent) 12%, #fff); }
 
-.timeline-content { min-width: 0; container: timeline-reading / inline-size; }
+.timeline-content { grid-column: 1; grid-row: 1; min-width: 0; container: timeline-reading / inline-size; }
 .timeline-reading-head { margin-bottom: 12px; }
 .timeline-reading-head h2 { margin: 0; font-size: 23px; line-height: 1.35; }
 .timeline-reading-head p { margin: 4px 0 0; color: var(--tl-ink-soft); font-size: 15.5px; }
@@ -89,7 +90,7 @@
   display: grid; gap: 1px; padding: 5px 10px; border-radius: 9px;
   background: color-mix(in srgb, var(--era-accent) 10%, #fff);
   border: 1px solid color-mix(in srgb, var(--era-accent) 50%, #fff);
-  color: var(--tl-ink);
+  color: var(--tl-ink); font: inherit; text-align: left; cursor: pointer;
 }
 .tl-dynasty-chip:hover { border-color: var(--era-accent); }
 .tl-dynasty-chip small { font-size: 13px; color: var(--tl-ink-soft); white-space: nowrap; }
@@ -155,3 +156,52 @@
   font-size: 14px; font-weight: 700; cursor: pointer;
 }
 .tl-media-filter input { accent-color: var(--tl-pair-deep); width: 16px; height: 16px; }
+
+.timeline-jump { margin-top: 14px; }
+.timeline-jump label, .timeline-zoom legend { display: block; font-size: 16px; font-weight: 800; }
+.timeline-jump > div { display: flex; gap: 6px; margin-top: 6px; }
+.timeline-jump input { min-width: 0; width: 100%; padding: 8px; border: 1px solid var(--tl-line); border-radius: 9px; font: inherit; font-size: 16px; background: var(--tl-card); color: var(--tl-ink); }
+.timeline-jump input[aria-invalid="true"] { outline: 2px solid #bd4236; }
+.timeline-jump p { margin: 7px 0 0; font-size: 14px; line-height: 1.7; color: var(--tl-ink-soft); }
+.timeline-jump button, .timeline-zoom button, #reset-time { min-height: 40px; padding: 6px 10px; border: 1px solid var(--tl-line); border-radius: 9px; font: inherit; font-size: 15px; font-weight: 750; background: var(--tl-card); color: var(--tl-pair-deep); cursor: pointer; }
+.timeline-jump button { flex-shrink: 0; }
+.timeline-zoom { min-width: 0; margin: 16px 0; padding: 0; border: 0; }
+.timeline-zoom-buttons { display: flex; flex-wrap: wrap; gap: 6px; margin: 7px 0 12px; }
+.timeline-zoom button[aria-pressed="true"] { color: white; background: var(--tl-pair-deep); border-color: var(--tl-pair-deep); }
+.timeline-zoom label { font-size: 15px; }
+.timeline-zoom output { display: block; margin-top: 4px; color: var(--tl-pair-deep); font-size: 17px; font-weight: 800; }
+#year-slider { width: 100%; margin: 10px 0 0; accent-color: var(--tl-pair-deep); }
+.timeline-dynasty-ribbon { position: sticky; top: 8px; z-index: 10; margin-bottom: 14px; padding: 12px; border: 1px solid var(--tl-line); border-radius: 14px; background: var(--tl-card); box-shadow: 0 5px 16px #1e30251a; }
+.timeline-ribbon-head { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 5px 12px; margin-bottom: 7px; }
+.timeline-ribbon-head b { color: var(--tl-pair-deep); font-size: 17px; }
+.timeline-ribbon-head a { color: var(--tl-pair-deep); font-size: 15px; }
+.timeline-dynasty-ribbon > small { display: block; font-size: 13px; color: var(--tl-ink-soft); }
+.timeline-dynasty-ribbon .tl-dynasty-chip { min-width: 86px; min-height: 54px; }
+.tl-dynasty-chip[aria-current="true"] { outline: 3px solid var(--tl-pair-deep); outline-offset: -3px; background: var(--tl-pair-soft); }
+.tl-dynasty-chip[aria-current="true"] b::before { content: '● '; }
+.timeline-range-status { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 14px; margin-bottom: 14px; }
+.timeline-range-status p { margin: 0; font-size: 16px; color: var(--tl-ink-soft); }
+.timeline-pair-view[hidden], .tl-flow[hidden] { display: none; }
+.timeline-pair-guide { padding: 14px 18px; border-radius: 12px; background: var(--tl-pair-soft); color: var(--tl-pair-deep); font-size: 17px; line-height: 1.8; }
+.timeline-pair-era > h2 { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; margin: 24px 0 12px; font-size: 25px; }
+.timeline-pair-era > h2 small { font-size: 16px; font-weight: 500; color: var(--tl-ink-soft); }
+.timeline-pair { margin-bottom: 22px; padding: clamp(12px, 2vw, 22px); border: 1px solid var(--tl-line); border-radius: 18px; background: var(--tl-card); }
+.timeline-pair > header h3 { margin: 10px 0 16px; font-size: 20px; line-height: 1.7; }
+.timeline-pair-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.timeline-pair-card { min-width: 0; display: flex; flex-direction: column; align-items: start; padding: 18px; border-radius: 13px; border-top: 4px solid var(--tl-china); background: var(--tl-china-soft); }
+.timeline-pair-card.world { border-color: var(--tl-world); background: var(--tl-world-soft); }
+.timeline-pair-card .timeline-pair-date { margin: 0; font-size: 16px; color: var(--tl-china-deep); font-weight: 800; }
+.timeline-pair-card.world .timeline-pair-date { color: var(--tl-world-deep); }
+.timeline-pair-card h4 { margin: 12px 0 0; font-size: 23px; line-height: 1.6; }
+.timeline-pair-card h4 a { color: var(--tl-ink); text-decoration: none; }
+.timeline-pair-card > p:not(.timeline-pair-date) { flex: 1; margin: 12px 0 16px; font-size: 18px; line-height: 1.9; }
+.timeline-pair-locate { font-size: 15px; color: var(--tl-pair-deep); }
+@container timeline-reading (max-width: 540px) {
+  .timeline-pair-cards { grid-template-columns: 1fr; }
+  .timeline-pair-card { padding: 15px; }
+  .timeline-pair-card h4 { font-size: 21px; }
+}
+@media (max-width: 480px) {
+  .timeline-dynasty-ribbon { padding: 10px; }
+  .timeline-ribbon-head b { font-size: 15px; }
+}
