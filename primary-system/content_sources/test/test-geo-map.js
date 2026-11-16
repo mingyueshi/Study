@@ -541,6 +541,10 @@ for (const continent of CONTINENTS) {
 
 /* 立体地图继续引用原省份 ID，观察任务与标签位置单独维护。 */
 const threeData = W.GM_CHINA_3D;
+const section = threeData.section;
+for (const key of ['intro', 'note', 'observe', 'presetName', 'presetNote']) check(isStr(section?.[key]) && !hasBadPunct(section[key]), '剖面说明应有中文正文：' + key);
+for (const point of [section?.from, section?.to]) check(Array.isArray(point) && point.length === 2 && point.every(Number.isFinite) && point[0] >= 73 && point[0] <= 136 && point[1] >= 18 && point[1] <= 54, '示范剖面端点应为中国范围经纬度');
+check(section.to[0] > section.from[0] && section.to[1] === section.from[1], '西向东示范应沿同一纬线向东');
 check(threeData && Array.isArray(threeData.observations), '立体地图应有观察任务');
 for (const key of ['intro', 'modelNote', 'regionNote', 'provinceNote']) {
   check(isStr(threeData[key]) && !hasBadPunct(threeData[key]), '立体地图说明无效：' + key);
@@ -661,7 +665,7 @@ console.log('— 入口文件（多页面系统） —');
   'scripts/build-geo.py', 'scripts/build-world.py']
   .forEach(f => check(fileExists(f), '缺少文件: ' + f));
 const PAGE_REFS = {
-  'china-3d.html': ['content.js', 'china-geo.js', 'map-data.js', 'shared.js', 'china-3d-data.js', 'china-terrain-data.js', 'china-rivers-data.js', 'china-3d-geometry.js', 'china-river-flow.js', 'china-river-tour-data.js', 'china-river-tour.js', 'china-3d.js', 'china-3d.css', 'assets/vendor/three-map.js', 'china.html', 'province.html'],
+  'china-3d.html': ['content.js', 'china-geo.js', 'map-data.js', 'shared.js', 'china-3d-data.js', 'china-terrain-data.js', 'china-rivers-data.js', 'china-3d-geometry.js', 'china-river-flow.js', 'china-river-tour-data.js', 'china-river-tour.js', 'china-terrain-section.js', 'china-3d.js', 'china-3d.css', 'assets/vendor/three-map.js', 'china.html', 'province.html'],
   'index.html': ['content.js', 'china-geo.js', 'map-data.js', 'shared.js', 'home-app.js', 'styles.css',
     'china.html', 'province.html', 'world.html', 'animals.html', 'world-animals.html', 'plants.html', 'world-plants.html'],
   'china.html': ['content.js', 'china-geo.js', 'map-data.js', 'shared.js', 'media-data.js', 'media.js', 'map-ui.js', 'china-app.js', 'styles.css',

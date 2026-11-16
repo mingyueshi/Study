@@ -21,6 +21,7 @@
   <script src="china-river-flow.js" defer></script>
   <script src="china-river-tour-data.js" defer></script>
   <script src="china-river-tour.js" defer></script>
+  <script src="china-terrain-section.js" defer></script>
   <script src="china-3d.js" defer></script>
 </head>
 <body>
@@ -38,6 +39,19 @@
         <a data-page href="routes.html">主题路线</a>
         <a data-page href="gallery.html">实景图册</a>
       </nav>
+      <section class="gm3-section" id="gm3-section" aria-labelledby="gm3-section-title" tabindex="-1">
+        <span class="gm3-kicker">把大地切开看</span><h2 id="gm3-section-title">地形剖面仪</h2>
+        <p id="gm3-section-intro"></p>
+        <p id="gm3-section-status" role="status">选择西向东示范，或在地图上拉一条线。</p>
+        <div id="gm3-section-result" hidden>
+          <svg id="gm3-section-chart" viewBox="0 0 400 280" role="img" aria-label="从 A 到 B 的地形海拔剖面"></svg>
+          <p id="gm3-section-summary"></p>
+          <p id="gm3-section-route"></p>
+        </div>
+        <p id="gm3-section-observe"></p>
+        <ol id="gm3-section-steps"></ol>
+        <p class="gm3-section-note" id="gm3-section-note"></p>
+      </section>
       <section class="gm-side-panel gm3-picker">
         <label for="gm3-province">找一个省级行政区</label>
         <select id="gm3-province"><option value="">请选择省份</option></select>
@@ -81,6 +95,12 @@
             <button type="button" id="gm3-labels" aria-pressed="true">省份名称</button>
           </div>
         </div>
+        <div class="gm3-section-tools" role="group" aria-label="地形剖面仪">
+          <button type="button" id="gm3-section-draw" aria-pressed="false" disabled>拉线画剖面</button>
+          <button type="button" id="gm3-section-demo" disabled>西向东示范</button>
+          <button type="button" id="gm3-section-clear" disabled>清除剖面</button>
+          <span id="gm3-section-hint" role="status">剖面会显示在侧栏。</span>
+        </div>
         <div class="gm3-flow-panel" aria-label="河水流向演示">
           <div class="gm3-flow-tools">
             <label for="gm3-flow-river">跟着河水走 <select id="gm3-flow-river"></select></label>
@@ -96,6 +116,7 @@
         <div class="gm3-viewport" id="gm3-viewport">
           <canvas id="gm3-canvas" tabindex="0" role="img" aria-label="可旋转的中国真实高程地形图，包含主要河流和地形名称，点选地形读取采样海拔" aria-describedby="gm3-help">浏览器无法显示立体画布时，可用省份列表或山河目录阅读档案，或打开平面地图。</canvas>
           <svg class="gm3-flow-layer" id="gm3-flow-layer" aria-hidden="true"></svg>
+          <svg class="gm3-section-layer" id="gm3-section-layer" aria-hidden="true"></svg>
           <div class="gm3-label-layer" id="gm3-label-layer" role="group" aria-label="地图省名，点击查看省份"></div>
           <div class="gm3-stamp" aria-hidden="true"><b>山 · 河 · 大地</b><span>真实高程采样<br>高度放大 <span id="gm3-stamp-height">50×</span></span></div>
           <svg class="gm3-compass" viewBox="0 0 80 85" role="img" aria-label="随地图转动的指北针"><g id="gm3-north" transform="translate(40 43)"><path d="M0 -24L-9 12L0 6L9 12Z"/><text x="0" y="-30" text-anchor="middle">北</text></g></svg>

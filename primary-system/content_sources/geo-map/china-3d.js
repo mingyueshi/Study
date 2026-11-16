@@ -16,6 +16,7 @@
   const profile = $('gm3-profile');
   const featureProfile = $('gm3-feature-profile');
   let selected = '', renderer, scene, camera, controls, frame = 0, failed = false;
+  let sectionController = null;
   let width = 1, height = 1, showLabels = true, showLandforms = true, showRivers = true;
   let exaggeration = data.terrain.defaultExaggeration, colorMode = 'terrain', focusedLandform = '';
   const features = new Map(window.GM_FEATURES.map(f => [f.id, f]));
@@ -44,6 +45,8 @@
   $('gm3-label-layer').append(leaders);
 
   $('gm3-intro').textContent = data.intro;
+  for (const field of ['intro', 'note', 'observe']) $('gm3-section-' + field).textContent = data.section[field];
+  $('gm3-section-steps').innerHTML = window.GM_STEPS.map(step => `<li style="--step-color:${step.color}"><b>${esc(step.name)}</b><span>${esc(step.altitude)}</span></li>`).join('');
   $('gm3-model-note').innerHTML = `${esc(data.modelNote)} <a href="${esc(window.GM_CHINA_TERRAIN?.source.url || '#')}" target="_blank" rel="noopener">高程来源（需联网）↗</a>`;
   $('gm3-region-note').textContent = data.terrain.note;
   $('gm3-inset').innerHTML = S.insetSVG();
@@ -384,6 +387,7 @@
   function startTour(id, autoplay = true, stopId = null) {
     const config = tourData.routes.find(route => route.id === id);
     if (!config || !window.GMRiverTour) return;
+    sectionController?.cancel();
     const saved = tourView || (controls && !failed ? { position: camera.position.clone(), target: controls.target.clone(), zoom: camera.zoom, maxZoom: controls.maxZoom } : null);
     closeTour(false, false);
     focusRiver(config.river, false);
@@ -527,6 +531,7 @@
     root.dataset.colorMode = colorMode;
     root.dataset.riversVisible = String(showRivers);
     drawFlow();
+    sectionController?.redraw();
   }
   function resize() {
     if (!renderer) return;
@@ -581,6 +586,8 @@
     root.dataset.renderer = 'unavailable';
     flowPlayback?.pause();
     tourController?.pause();
+    sectionController?.suspend();
+    $('gm3-section-hint').textContent = '3D 画面不可用，恢复画面后可拉线。';
     flowLayer.style.display = 'none';
     syncFlow();
     $('gm3-fallback').hidden = false;
@@ -703,6 +710,23 @@
     const observer = new ResizeObserver(resize);
     observer.observe(viewport);
     const raycaster = new T.Raycaster();
+    const pickTerrain = event => {
+      const rect = canvas.getBoundingClientRect();
+      if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) return null;
+      raycaster.setFromCamera(new T.Vector2((event.clientX - rect.left) / rect.width * 2 - 1, -(event.clientY - rect.top) / rect.height * 2 + 1), camera);
+      return raycaster.intersectObjects([...models.values()].map(m => m.mesh), false)[0] || null;
+    };
+    sectionController = window.GMTerrainSection.create({
+      root, canvas, sample: sampleSurface, requestDraw, project: projectFlow,
+      pick: event => {
+        if (failed) return null;
+        const hit = pickTerrain(event);
+        return hit ? [hit.point.x + 104.5, hit.point.y / 1.22 + 35.8] : null;
+      },
+      setDrawing: on => { controls.enabled = !on; $('gm3-label-layer').inert = on; },
+      prepare: () => { closeTour(); flowPlayback?.pause(); },
+      presetView: () => setView('top'),
+    });
     let gesture = null;
     canvas.addEventListener('pointerdown', e => {
       tourController?.pause();
@@ -717,9 +741,7 @@
       const start = gesture;
       gesture = null;
       if (!start || start.id !== e.pointerId || start.moved || failed) return;
-      const rect = canvas.getBoundingClientRect();
-      raycaster.setFromCamera(new T.Vector2((e.clientX - rect.left) / rect.width * 2 - 1, -(e.clientY - rect.top) / rect.height * 2 + 1), camera);
-      const hit = raycaster.intersectObjects([...models.values()].map(m => m.mesh), false)[0];
+      const hit = pickTerrain(e);
       if (hit) select(hit.object.userData.province, true, elevationFromZ(hit.point.z, exaggeration));
     });
     canvas.addEventListener('webglcontextlost', e => {
@@ -732,6 +754,7 @@
       $('gm3-fallback').hidden = true;
       $('gm3-label-layer').hidden = false;
       flowLayer.style.display = '';
+      sectionController?.resume();
       canvas.hidden = false;
       root.querySelectorAll('.gm3-toolbar button, .gm3-terrain-tools button, #gm3-height').forEach(b => { b.disabled = false; });
       resize();
