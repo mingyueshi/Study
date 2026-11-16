@@ -22,6 +22,7 @@
   let sectionController = null, terrainPlay = null, adventure = null, narrator = null, surfaceSampler = null, gamePoint = null, hydrology = null, activities = null, pins = null;
   let comparison = false, comparisonSaved = null, renderGain = null;
   let terrainStreaming = null, viewTimer = 0, pickGeneration = 0;
+  let terrainVisual = null;
   const decodedParts = new WeakMap(), waterCache = new WeakMap(), rawModels = new Map();
   root.dataset.compare = 'false';
   const extraData = window.GM_CHINA_ADVENTURES;
@@ -57,6 +58,7 @@
   $('gm3-label-layer').append(leaders);
 
   $('gm3-intro').textContent = data.intro;
+  window.GMChinaTerrainVisual?.describe(root);
   for (const field of ['intro', 'note', 'observe']) $('gm3-section-' + field).textContent = data.section[field];
   $('gm3-section-steps').innerHTML = window.GM_STEPS.map(step => `<li style="--step-color:${step.color}"><b>${esc(step.name)}</b><span>${esc(step.altitude)}</span></li>`).join('');
   $('gm3-model-note').innerHTML = `${esc(data.modelNote)} <a href="${esc((terrainIndex || window.GM_CHINA_TERRAIN)?.source.url || '#')}" target="_blank" rel="noopener">高程来源（需联网）↗</a>`;
@@ -374,6 +376,7 @@
     }
     if(models.size) {
       terrainPlay?.refreshGeometry(ids);
+      terrainVisual?.refreshTerrain(ids);
       for(const [id,r]of rivers) {
         for(const geo of new Set(r.group.children.map(m=>m.geometry)))geo.dispose();r.group.clear();
         addRiverLines(r.group,r.halo,r.ink,waterBuckets(id));
@@ -784,6 +787,7 @@
     el.dataset.feature = id;
     el.dataset.kind = features.get(id)?.kind || kind;
     el.textContent = name;
+    if(kind==='terrain'&&features.get(id)?.kind==='mountain'&&window.GM_CHINA_TERRAIN_VISUAL){const icon=document.createElement('span');icon.className='gm3-mountain-icon';icon.setAttribute('aria-hidden','true');icon.textContent=window.GM_CHINA_TERRAIN_VISUAL.mountainIcon+' ';el.prepend(icon);}
     if (kind === 'province') {
       el.type = 'button';
       el.setAttribute('aria-label', `查看${byId.get(id).name}`);
@@ -938,6 +942,9 @@
     hydrology?.refresh();
     pins?.refresh();
     root.dataset.renderer = 'unavailable';
+    terrainVisual?.setAvailable(false);
+    root.querySelectorAll('.gm3-visual-controls input,.gm3-visual-controls button').forEach(n=>n.disabled=true);
+    if($('gm3-terrain-visual-status'))$('gm3-terrain-visual-status').textContent='3D 画面暂不可用，仍可阅读观察提示。';
     narrator?.stop(); terrainPlay?.settle();
     root.querySelectorAll('#gm3-lift, #gm3-lakes, #gm3-snow, #gm3-stand').forEach(b => { b.disabled = true; });
     flowPlayback?.pause();
@@ -1078,8 +1085,9 @@
       const meters = sampleSurface(point) ?? point[2];
       makeLabel(config.feature, feature.name, point, meters, 'river');
     }
+    terrainVisual = window.GMChinaTerrainVisual?.create({root,models,sun,requestDraw,parts:streamingReady?id=>terrainStreaming.records(id.slice(1)).map(decodedPart):null});
     terrainPlay = window.GMChinaTerrainPlay.create({ root, models, rivers, scene, sample: sampleSurface, locate: sampleSurface.locate,
-      requestDraw, fullMotion, canAnimate: () => !failed && !document.hidden && inView, gain: () => renderGain ?? exaggeration });
+      requestDraw, fullMotion, canAnimate: () => !failed && !document.hidden && inView, gain: () => renderGain ?? exaggeration, appearance:terrainVisual });
     hydrology.attach({T, G: window.GMChina3DGeometry, models, scene, sample: sampleSurface});
     pins?.attach({T,G:window.GMChina3DGeometry,scene,camera,viewport,owner:point=>sampleSurface.locate(point)?.mesh.province||''});
     updateRivers();
@@ -1182,6 +1190,7 @@
     });
     canvas.addEventListener('webglcontextrestored', () => {
       failed = false;
+      terrainVisual?.setAvailable(true);
       hydrology?.refresh();
       pins?.refresh();
       root.dataset.renderer = 'webgl';
@@ -1199,11 +1208,13 @@
       syncTour();
     });
     window.addEventListener('pagehide', e => {
+      terrainVisual?.pause();
       cancelAnimationFrame(frame); frame = 0;
       flowPlayback?.pause();
       tourController?.pause();
       if (e.persisted) return;
       clearTimeout(viewTimer);terrainStreaming?.dispose();
+      terrainVisual?.dispose();
       flowPlayback?.dispose();
       tourController?.dispose();
       observer.disconnect(); controls.dispose();
@@ -1215,6 +1226,7 @@
       geometries.forEach(g => g.dispose()); materials.forEach(m => m.dispose()); renderer.dispose();
     });
     window.addEventListener('pageshow', resize);
+    window.addEventListener('pageshow',()=>terrainVisual?.resume());
   } catch (error) {
     controls?.dispose();
     renderer?.dispose();
@@ -1250,7 +1262,7 @@
       requestDraw();
     }
   });
-  $('gm3-snow').addEventListener('click', () => { if ($('gm3-snow').getAttribute('aria-pressed') === 'true') root.querySelector('[data-color="terrain"]').click(); });
+  $('gm3-snow').addEventListener('click', () => { if (!terrainVisual && $('gm3-snow').getAttribute('aria-pressed') === 'true') root.querySelector('[data-color="terrain"]').click(); });
   $('gm3-stand').addEventListener('click', () => {
     activities?.stop(); setComparison(false);
     adventure?.stop(); closeTour(); narrator?.stop(); flowPlayback?.pause(); sectionController?.cancel();

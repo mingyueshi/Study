@@ -23,12 +23,12 @@ window.GMChinaTerrainPlay = (() => {
     const values = lakeTriangles(rings, sample).flat().map(p => p.meters).sort((a,b) => a-b);
     return values.length ? Math.max(minimum, values[Math.floor((values.length - 1) * .3)]) : null;
   }
-  function create({ root, models, rivers, scene, sample, locate, requestDraw, fullMotion, canAnimate, gain }) {
+  function create({ root, models, rivers, scene, sample, locate, requestDraw, fullMotion, canAnimate, gain, appearance }) {
     const T = window.GMThree, G = window.GMChina3DGeometry, D = window.GM_CHINA_ADVENTURES;
     let selected = '', lifted = true, flat = false, start = null, rise = 1, moving = false, entrancePending = true;
     const lakeGroup = new T.Group(); scene.add(lakeGroup);
     const snow = new T.Color('#f4fcff');
-    const originals = new Map([...models].map(([id, m]) => [id, m.geometry.top.getAttribute('color').array.slice()]));
+    const originals = appearance ? null : new Map([...models].map(([id, m]) => [id, m.geometry.top.getAttribute('color').array.slice()]));
     const owner = point => locate(point)?.mesh.province || '';
     const waterOriginals = new Map(), waterBeds = new Map(), levels = {};
     for (const lake of D.lakes) {
@@ -76,7 +76,7 @@ window.GMChinaTerrainPlay = (() => {
     function refreshGeometry(ids) {
       for(const id of ids) {
         const model=models.get(id);if(!model)continue;
-        originals.set(id,model.geometry.top.getAttribute('color').array.slice());
+        if(!appearance)originals.set(id,model.geometry.top.getAttribute('color').array.slice());
         waterOriginals.delete(id);waterBeds.delete(id);
         for(let bit=0;bit<D.lakes.length;bit++) {
           const level=levels[D.lakes[bit].feature];if(level===undefined)continue;
@@ -84,13 +84,13 @@ window.GMChinaTerrainPlay = (() => {
           if(!waterOriginals.has(id)){const p=model.geometry.positions;waterOriginals.set(id,p.slice());waterBeds.set(id,p.slice());}
           const bed=waterBeds.get(id);for(const i of indices)bed[i*3+2]=Math.min(bed[i*3+2],(level-25)/G.metersPerUnit);
         }
-        if(root.querySelector('#gm3-snow').getAttribute('aria-pressed')==='true'){
+        if(!appearance&&root.querySelector('#gm3-snow').getAttribute('aria-pressed')==='true'){
           const attr=model.geometry.top.getAttribute('color');for(let i=0;i<model.geometry.elevations.length;i++)if(model.geometry.elevations[i]>=D.snowMeters)snow.toArray(attr.array,i*3);attr.needsUpdate=true;
         }
       }
       applyWater(lakeGroup.visible);
     }
-    root.querySelector('#gm3-snow-note').textContent = D.snowNote;
+    if(!appearance)root.querySelector('#gm3-snow-note').textContent = D.snowNote;
     const offset = id => (models.get(id)?.group.position.z || G.datum) - G.datum;
     function tick(now) {
       const animate = fullMotion() && canAnimate();
@@ -121,7 +121,7 @@ window.GMChinaTerrainPlay = (() => {
     function settle(stopEntrance = false) { if (stopEntrance) entrancePending = false; start = null; rise = 1; moving = false; tick(performance.now()); }
     root.querySelector('#gm3-lift').addEventListener('click', e => { lifted = !lifted; e.currentTarget.setAttribute('aria-pressed', String(lifted)); requestDraw(); });
     root.querySelector('#gm3-lakes').addEventListener('click', e => { applyWater(!lakeGroup.visible); e.currentTarget.setAttribute('aria-pressed', String(lakeGroup.visible)); });
-    root.querySelector('#gm3-snow').addEventListener('click', e => {
+    if(!appearance)root.querySelector('#gm3-snow').addEventListener('click', e => {
       const on = e.currentTarget.getAttribute('aria-pressed') !== 'true'; e.currentTarget.setAttribute('aria-pressed', String(on));
       for (const [id, model] of models) {
         const attr = model.geometry.top.getAttribute('color'); attr.array.set(originals.get(id));

@@ -95,6 +95,23 @@
 .gm3-map-label.is-river { color: #075b9d; font-size: clamp(13px, 1vw, 16px); padding: 3px 7px; border-radius: 6px; background: #effaffef; border: 1px solid #8cc3e3; text-shadow: none; }
 .gm3-map-label[data-kind="plain"] { color: #285533; background: #f2ffe9e8; }
 .gm3-map-label.is-focused { box-shadow: 0 0 0 2px #d77826; z-index: 2; }
+.gm3-mountain-icon { display: inline-block; font-size: 1.05em; color: #816234; }
+.gm3-visual-controls { padding: 16px; margin-block: 16px; border: 1px solid #b6cfc2; border-radius: 16px; background: var(--card); }
+.gm3-visual-controls > summary { color: var(--ink); font-size: 22px; font-weight: 850; cursor: pointer; padding: 6px 0; }
+.gm3-visual-grid { display: grid; gap: 14px; margin-top: 16px; }
+.gm3-visual-card { border: 1px solid #cadbc8; border-radius: 13px; padding: 14px; background: color-mix(in srgb,var(--card) 90%,#b4dbb5 10%); }
+.gm3-visual-card h3 { margin: 0 0 12px; font-size: 20px; color: var(--ink); }
+.gm3-visual-card p { font-size: 15px; line-height: 1.8; margin: 10px 0 0; }
+.gm3-visual-card label { display: block; font-size: 17px; line-height: 1.8; color: var(--ink); }
+.gm3-visual-card output { color: #9b541c; font-weight: 850; font-variant-numeric: tabular-nums; }
+.gm3-visual-card input[type="range"] { display: block; width: 100%; accent-color: #317e69; margin: 13px 0; min-height: 26px; }
+.gm3-visual-card button { font: inherit; font-size: 16px; min-height: 42px; padding: 8px 11px; border: 1px solid #a2b99e; border-radius: 10px; color: var(--ink); background: var(--card); cursor: pointer; }
+.gm3-visual-card button[aria-pressed="true"] { background: #2c7663; border-color: #2c7663; color: #fff; }
+.gm3-visual-card :is(button,input):disabled { opacity: .45; cursor: default; }
+.gm3-light-control { display: flex; align-items: center; gap: 12px; }
+#gm3-light-compass { width: 110px; min-width: 80px; flex: 0 0 95px; height: 110px; overflow: visible; }
+#gm3-light-compass text { fill: var(--ink); font-size: 15px; text-anchor: middle; }
+#gm3-light-presets { display: flex; flex-wrap: wrap; gap: 6px; }
 .gm3-stamp { position: absolute; left: 24px; top: 22px; display: flex; align-items: center; gap: 10px; pointer-events: none; }
 .gm3-stamp b { font-size: 21px; line-height: 1; color: #256676; }
 .gm3-stamp span { font-size: 13px; line-height: 1.5; }

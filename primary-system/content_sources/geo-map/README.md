@@ -170,7 +170,7 @@ node --test scripts/test_world_3d.cjs
 
 `china-terrain-play.js` 管理显示效果。省份抬起用分组位置动画，所属河段、湖面与标签同步移动；读海拔时扣除显示位移。剖面、漫游和挑战时归位，保证坐标与采样稳定。地形缓升和省份动画遵守减少动态、离屏、后台与 WebGL 中断规则，不修改 DEM。
 
-湖面取自 [Natural Earth 1∶1000 万湖泊数据](https://www.naturalearthdata.com/downloads/10m-physical-vectors/10m-lakes/)，原输入为 `nvkelso/natural-earth-vector` 仓库的 `geojson/ne_10m_lakes.geojson`，完整输入 SHA-256 保存在 `lakeSource`。选取青海湖、鄱阳湖、洞庭湖、太湖、洪泽湖和巢湖六处轮廓，用约 0.025°网格在湖内读取 DEM 来估计统一水面高度；水面按湖泊与省界轮廓裁切剖分，湖盆只修改显示面片。没有有效高程时不生成水面；不表示实时岸线、水位或水深。雪线开关只把海拔约 5000 米以上染白，明确为教学观察示意，不能当作真实雪线。
+湖面取自 [Natural Earth 1∶1000 万湖泊数据](https://www.naturalearthdata.com/downloads/10m-physical-vectors/10m-lakes/)，原输入为 `nvkelso/natural-earth-vector` 仓库的 `geojson/ne_10m_lakes.geojson`，完整输入 SHA-256 保存在 `lakeSource`。选取青海湖、鄱阳湖、洞庭湖、太湖、洪泽湖和巢湖六处轮廓，用约 0.025°网格在湖内读取 DEM 来估计统一水面高度；水面按湖泊与省界轮廓裁切剖分，湖盆只修改显示面片。没有有效高程时不生成水面；不表示实时岸线、水位或水深。雪线观察默认以 5000 米为界，现可拖动滑块在 0—9000 米间调节；白色是统一海拔观察示意，不能据此判断真实雪线或永久积雪。
 
 统一模板由生成器接入现有 `static/speech.js`。配音由用户主动开始，可读剖面或当前站点，也可开启到站讲解；讲解时等待，读完后继续停站计时，避免解说被行程截断；默认不发声。停止、换玩法、后台、离屏和上下文中断使旧回调失效；没有语音服务时按钮禁用，文字继续可读。自动化使用语音桩检查状态，设备实际发声需用本机中文语音试听。
 
@@ -200,3 +200,13 @@ node --test scripts/test_world_3d.cjs
 `world-lab-data.js`、`world-lab.js` 提供 18 城人口规模圆点、六大板块教学分组、约 2 亿年前的粗略古陆拼图、亚洲冬夏季风、台风转向示意、NASA 多年平均年降水及 4 个星座的示意天球。各层互斥切换，`?lab=population`、`?lab=plates`、`?lab=pangaea`、`?lab=rain`、`?lab=sky` 可直达。星空背景独立开关；天球链接原天文探索。数据口径、原始输入指纹、简化规则与边界见 [主题图层说明](WORLD-LAB-SOURCES.md)。
 
 页面沿用既有专题发布命令，按 `world-3d-pack.json` 生成并保存合并脚本，专题脚本从 27 个降为 3 个；直接打开无需构建或联网。完整纹理只在内容键变化时重画，镜头、船只和光照动画不触发重画。新增源校验 `node content_sources/test/test-world-lab.js`，行为回归 `node --test scripts/test_world_play.cjs`，并接入 `make test-frontend`。
+
+### 中国地形视觉观察
+
+右侧独立滚动栏新增「地形观察工具」，可边看地图边调节。每 500 米一档的等高线直接沿当前三角网线性插值，默认关闭，打开后按省份分帧生成；按需 DEM 切换时只重建涉及省份，已解码块的线段用弱引用缓存。线随倍率、左右对照和省份抬起同步，不触发全国详细 DEM 下载。
+
+光照有东、南、西、北及恢复西南方向预设，也可拖动 0—359°方位滑块，指南圈显示光从哪边来；它改变坡面明暗，不改地形。14 个山脉标签加 ⛰ 微图标，名称与稳定 ID 沿用原档案。
+
+动态变白高度范围为 0—9000 米、每 100 米一档，默认 5000 米，拖动自动开启，原「雪线观察」按钮可关闭。着色器按原始海拔插值作阈值判断，不逐次重写顶点颜色或高度，三种地图配色都可使用；详细块更新时同步原海拔属性。地形不透明度从 100％到 0％，只控制上表面与模型侧面；省界、河线、湖面和等高线继续可观察。全部显示效果保留原始海拔、剖面和判题。
+
+参数与文案在 `china-terrain-visual-data.js`，显示代码在 `china-terrain-visual.js`，来源与边界见 [地形视觉说明](TERRAIN-VISUAL-SOURCES.md)。新源契约 `node content_sources/test/test-china-terrain-visual.js`，几何回归 `node --test scripts/test_china_terrain_visual.cjs`；原 `china-terrain-play.js` 保留旧页面与测试需要的静态雪线回退。

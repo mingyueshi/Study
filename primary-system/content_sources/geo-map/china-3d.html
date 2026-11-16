@@ -14,6 +14,7 @@
   <script src="atlas.js" defer></script>
   <script src="shared.js" defer></script>
   <script src="china-3d-data.js" defer></script>
+  <script src="china-terrain-visual-data.js" defer></script>
   <script src="china-terrain-index.js" defer></script>
   <script src="china-rivers-data.js" defer></script>
   <script src="assets/vendor/three-map.js" defer></script>
@@ -32,6 +33,7 @@
   <script src="china-learning-visual.js" defer></script>
   <script src="china-adventures.js" defer></script>
   <script src="china-terrain-play.js" defer></script>
+  <script src="china-terrain-visual.js" defer></script>
   <script src="china-3d.js" defer></script>
 </head>
 <body>
@@ -49,6 +51,15 @@
         <a data-page href="routes.html">主题路线</a>
         <a data-page href="gallery.html">实景图册</a>
       </nav>
+        <details class="gm3-visual-controls" open>
+          <summary id="gm3-visual-title">地形观察工具</summary>
+          <div class="gm3-visual-grid">
+            <div class="gm3-visual-card"><h3>山坡上的线</h3><button type="button" id="gm3-contours" aria-pressed="false">叠加 500 米等高线</button><p id="gm3-contour-note"></p><p id="gm3-terrain-visual-status" role="status"></p></div>
+            <div class="gm3-visual-card"><h3>让光从另一边来</h3><div class="gm3-light-control"><svg id="gm3-light-compass" viewBox="0 0 130 130" role="img" aria-label="光照方向指南圈，箭头指向地形"><defs><marker id="gm3-light-arrowhead" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#b76819"/></marker></defs><circle cx="65" cy="65" r="40" fill="#fff4cf" stroke="#c3a365"/><text x="65" y="13">北</text><text x="119" y="70">东</text><text x="65" y="127">南</text><text x="11" y="70">西</text><circle cx="65" cy="65" r="7" fill="#5c9987"/><line x1="100" y1="65" x2="80" y2="65" stroke="#b76819" stroke-width="5" marker-end="url(#gm3-light-arrowhead)"/></svg><div id="gm3-light-presets" class="gm3-presets" role="group" aria-label="光照方向"></div></div><label for="gm3-light-azimuth"><output id="gm3-light-azimuth-output" for="gm3-light-azimuth"></output><input id="gm3-light-azimuth" type="range" min="0" max="359" step="1" value="218"></label><p id="gm3-light-note"></p></div>
+            <div class="gm3-visual-card"><h3>给高处铺一层白色</h3><label for="gm3-snow-altitude">海拔 <output id="gm3-snow-altitude-output" for="gm3-snow-altitude">5000 米</output> 以上变白<input id="gm3-snow-altitude" type="range" min="0" max="9000" step="100" value="5000" aria-describedby="gm3-snow-note"></label><p id="gm3-snow-note"></p><p>拖动就打开；用下方「雪线观察」按钮可以关闭。</p></div>
+            <div class="gm3-visual-card"><h3>透过地形看水系</h3><label for="gm3-terrain-opacity">地形不透明度 <output id="gm3-terrain-opacity-output" for="gm3-terrain-opacity">100％</output><input id="gm3-terrain-opacity" type="range" min="0" max="100" step="1" value="100"></label><p id="gm3-opacity-note"></p></div>
+          </div>
+        </details>
       <section class="gm3-section" id="gm3-section" aria-labelledby="gm3-section-title" tabindex="-1">
         <span class="gm3-kicker">把大地切开看</span><h2 id="gm3-section-title">地形剖面仪</h2>
         <p id="gm3-section-intro"></p>
@@ -106,6 +117,7 @@
             <button type="button" id="gm3-labels" aria-pressed="true">省份名称</button>
           </div>
         </div>
+
         <div class="gm3-stream-tools"><p id="gm3-terrain-status" role="status"></p><button type="button" id="gm3-terrain-retry" hidden>再试一次</button></div>
         <div class="gm3-section-tools" role="group" aria-label="地形剖面仪">
           <button type="button" id="gm3-section-draw" aria-pressed="false" disabled>拉线画剖面</button>
@@ -203,7 +215,6 @@
       <p class="gm3-region-note" id="gm3-region-note"></p>
       <p class="gm3-region-note" id="gm3-flow-legend"></p>
       <p class="gm3-region-note" id="gm3-lake-note"></p>
-      <p class="gm3-region-note" id="gm3-snow-note"></p>
       <section class="gm3-feature-directory" aria-labelledby="gm3-directory-title">
         <h2 id="gm3-directory-title">找到一条河、一座山</h2>
         <p class="gm3-river-note" id="gm3-river-note"></p>
