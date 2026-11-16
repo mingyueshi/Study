@@ -15,6 +15,10 @@
   <script src="shared.js" defer></script>
   <script src="media-data.js" defer></script>
   <script src="media.js" defer></script>
+  <script src="china-rivers-data.js" defer></script>
+  <script src="china-river-tour-data.js" defer></script>
+  <script src="map-discovery-data.js" defer></script>
+  <script src="map-discovery.js" defer></script>
   <script src="map-ui.js" defer></script>
   <script src="china-app.js" defer></script>
 </head>
@@ -53,6 +57,7 @@
         </div>
       </section>
 
+      <section class="gm-side-panel gm-discovery-tools" aria-label="河流从源头到海口"><h2 class="gm-side-title">跟着河水走</h2><div id="gm-river-choices" class="gm-discovery-buttons" role="group" aria-label="选择回放河流"></div><p id="gm-river-note" class="gm-discovery-note"></p><p id="gm-capital-note" class="gm-discovery-note"></p></section>
       <div class="gm-stats" aria-label="内容规模">
         <span><b id="stat-provinces">34</b>个省级行政区</span>
         <span><b id="stat-features">45</b>处山河湖海</span>
@@ -73,6 +78,8 @@
               <ul class="gm-legend" id="gm-legend" aria-label="图例"></ul>
               <a class="gm-tools-jump" href="#map-tools">图层与找地点 ↑</a>
             </div>
+            <div id="gm-province-readout" class="gm-discovery-readout" aria-live="polite" hidden><p><b id="gm-province-name"></b> <span id="gm-province-capital"></span></p><p id="gm-province-feature"></p></div>
+            <section id="gm-river-readout" class="gm-discovery-readout gm-river-readout" aria-label="河流走向回放" hidden><h2 id="gm-river-title"></h2><div class="gm-discovery-buttons"><button type="button" data-river-action="play" aria-pressed="false">播放到入海口</button><button type="button" data-river-action="restart">从源头重看</button><output id="gm-river-percent" aria-live="off">0％</output></div><label for="gm-river-progress">拖动进度，看看水走到了哪里<input type="range" id="gm-river-progress" min="0" max="1000" value="0" step="1"></label><p id="gm-river-city" role="status"></p><p id="gm-river-state" class="gm-discovery-note" role="status"></p><div id="gm-river-stops" class="gm-discovery-buttons" role="group" aria-label="直接看沿途一站"></div></section>
             <svg id="gm-svg" role="group" tabindex="0" aria-label="中国示意地图，包含省级行政区、山河大地与邻居图层"></svg>
             <figcaption class="gm-map-note" id="gm-map-note">示意教学地图：省级行政区轮廓来自公开边界数据并做了简化，山脉与河道位置为近似示意；南海诸岛与十段线按制图惯例画在右下小图中。</figcaption>
           </figure>

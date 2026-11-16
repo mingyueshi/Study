@@ -542,7 +542,7 @@ for (const continent of CONTINENTS) {
 /* 立体地图继续引用原省份 ID，观察任务与标签位置单独维护。 */
 const threeData = W.GM_CHINA_3D;
 const section = threeData.section;
-for (const key of ['intro', 'note', 'observe', 'presetName', 'presetNote']) check(isStr(section?.[key]) && !hasBadPunct(section[key]), '剖面说明应有中文正文：' + key);
+for (const key of ['intro', 'note', 'observe', 'presetName', 'presetNote', 'scrubNote']) check(isStr(section?.[key]) && !hasBadPunct(section[key]), '剖面说明应有中文正文：' + key);
 for (const point of [section?.from, section?.to]) check(Array.isArray(point) && point.length === 2 && point.every(Number.isFinite) && point[0] >= 73 && point[0] <= 136 && point[1] >= 18 && point[1] <= 54, '示范剖面端点应为中国范围经纬度');
 check(section.to[0] > section.from[0] && section.to[1] === section.from[1], '西向东示范应沿同一纬线向东');
 check(threeData && Array.isArray(threeData.observations), '立体地图应有观察任务');
@@ -668,7 +668,7 @@ const PAGE_REFS = {
   'china-3d.html': ['content.js', 'china-geo.js', 'map-data.js', 'shared.js', 'china-3d-data.js', 'china-terrain-index.js', 'china-terrain-stream.js', 'china-rivers-data.js', 'china-3d-geometry.js', 'china-river-flow.js', 'china-river-tour-data.js', 'china-river-tour.js', 'china-terrain-section.js', 'china-adventures-data.js', 'china-adventures.js', 'china-terrain-play.js', 'china-3d.js', 'china-3d.css', 'assets/vendor/three-map.js', 'china.html', 'province.html'],
   'index.html': ['content.js', 'china-geo.js', 'map-data.js', 'shared.js', 'home-app.js', 'styles.css',
     'china.html', 'province.html', 'world.html', 'animals.html', 'world-animals.html', 'plants.html', 'world-plants.html'],
-  'china.html': ['content.js', 'china-geo.js', 'map-data.js', 'shared.js', 'media-data.js', 'media.js', 'map-ui.js', 'china-app.js', 'styles.css',
+  'china.html': ['content.js', 'china-geo.js', 'map-data.js', 'shared.js', 'media-data.js', 'media.js', 'map-ui.js', 'map-discovery.js', 'map-discovery-data.js', 'china-rivers-data.js', 'china-river-tour-data.js', 'china-app.js', 'styles.css',
     'province.html', 'world.html', 'index.html', 'animals.html', 'plants.html'],
   'animals.html': ['animals-data.js', 'animals-app.js', 'animals-learning.js', 'animals.css', 'styles.css', 'china-geo.js', 'map-data.js', 'shared.js', 'china.html', 'world-animals.html'],
   'world-animals.html': ['world-animals-data.js', 'animals-app.js', 'animals-learning.js', 'animals.css', 'styles.css', 'world-geo.js', 'shared.js', 'world.html', 'animals.html'],
@@ -676,7 +676,7 @@ const PAGE_REFS = {
   'world-plants.html': ['world-plants-data.js', 'animals-app.js', 'animals-learning.js', 'animals.css', 'styles.css', 'world-geo.js', 'shared.js', 'world.html', 'plants.html'],
   'province.html': ['content.js', 'china-geo.js', 'map-data.js', 'shared.js', 'media-data.js', 'media.js', 'province-app.js',
     'styles.css', 'province.css', 'china.html', 'index.html'],
-  'world.html': ['map-data.js', 'world-geo.js', 'world-data.js', 'shared.js', 'media-data.js', 'media.js', 'map-ui.js', 'world-app.js', 'styles.css',
+  'world.html': ['map-data.js', 'world-geo.js', 'world-data.js', 'shared.js', 'media-data.js', 'media.js', 'map-ui.js', 'map-discovery.js', 'map-discovery-data.js', 'world-app.js', 'styles.css',
     'china.html', 'index.html', 'world-animals.html', 'world-plants.html'],
   'places.html': ['places-app.js', 'styles.css'],
   'routes.html': ['routes-app.js', 'styles.css'],

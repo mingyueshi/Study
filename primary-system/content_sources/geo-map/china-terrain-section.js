@@ -21,12 +21,25 @@ window.GMTerrainSection = (() => {
     return { points, km, min: valid.length ? Math.min(...valid.map(p => p.meters)) : null,
       max: valid.length ? Math.max(...valid.map(p => p.meters)) : null, missing: points.length - valid.length };
   }
-  function chartSVG(result) {
+  function chartScale(result) {
     const left = 54, right = 382, top = 24, bottom = 225;
     const low = Math.min(0, Math.floor((result.min ?? 0) / 500) * 500);
     const high = Math.max(500, Math.ceil((result.max ?? 0) / 1000) * 1000);
     const x = km => left + km / (result.km || 1) * (right - left);
     const y = meters => bottom - (meters - low) / (high - low) * (bottom - top);
+    return {left,right,top,bottom,low,high,x,y};
+  }
+  function inspect(result,index) {
+    const at = Math.max(0,Math.min(result.points.length-1,Math.round(Number(index)||0))), p=result.points[at], scale=chartScale(result);
+    return {...p,index:at,x:scale.x(p.km),y:p.meters===null?null:scale.y(p.meters),delta:p.meters===null||result.points[0].meters===null?null:p.meters-result.points[0].meters};
+  }
+  function indexAt(result,fraction) {
+    const km=Math.max(0,Math.min(1,fraction))*result.km;
+    let lo=0,hi=result.points.length-1;while(lo+1<hi){const mid=(lo+hi)>>1;if(result.points[mid].km<km)lo=mid;else hi=mid;}
+    return Math.abs(result.points[lo].km-km)<Math.abs(result.points[hi].km-km)?lo:hi;
+  }
+  function chartSVG(result) {
+    const {left,right,top,bottom,low,high,x,y}=chartScale(result);
     const paths = []; let part = [];
     const flush = () => { if (part.length) paths.push(part); part = []; };
     for (const p of result.points) {
@@ -57,12 +70,13 @@ window.GMTerrainSection = (() => {
     const $ = id => root.querySelector('#gm3-section-' + id);
     const data = window.GM_CHINA_3D.section;
     const esc = window.GMShared.esc;
-    let drawing = false, start = null, end = null, gesture = null, frame = 0, current = null, available = true, generation = 0;
+    let drawing = false, start = null, end = null, gesture = null, frame = 0, current = null, available = true, generation = 0, probeIndex = 0;
     const coords = point => `${point[0].toFixed(2)}°E，${point[1].toFixed(2)}°N`;
     const say = text => { $('status').textContent = text; $('hint').textContent = text; };
     $('intro').textContent = data.intro;
     $('observe').textContent = data.observe;
     $('note').textContent = data.note;
+    $('scrub-note').textContent = data.scrubNote;
     $('demo').textContent = data.presetName;
     $('steps').innerHTML = window.GM_STEPS.map(step => `<li style="--step-color:${step.color}"><b>${esc(step.name)}</b><span>${esc(step.altitude)}</span></li>`).join('');
     function mode(on) {
@@ -94,6 +108,25 @@ window.GMTerrainSection = (() => {
       const token=++generation;stopGesture();mode(false);say('正在看清沿线的地形……');
       sampleReady(a,b,()=>{if(token===generation&&available)renderResult(a,b,demo);}).catch(()=>{if(token===generation)say('沿线地形暂时没读到，请稍后重新拉线。');});
     }
+    function updateProbe() {
+      if(!current)return;
+      const p=inspect(current,probeIndex);probeIndex=p.index;$('position').value=probeIndex;
+      const elevation=p.meters===null?'这里缺少地形资料，曲线留空。':`海拔约 ${Math.round(p.meters)} 米。`;
+      const difference=p.delta===null?'':Math.abs(p.delta)<10?'与 A 点差不多高。':`比 A 点${p.delta>0?'高':'低'}约 ${Math.round(Math.abs(p.delta))} 米。`;
+      $('probe-readout').textContent=`从 A 走了约 ${Math.round(p.km)} 千米，${elevation}${difference}`;
+      $('position').setAttribute('aria-valuetext',$('probe-readout').textContent);
+      let cursor=$('chart').querySelector('#gm3-section-cursor');if(!cursor){cursor=document.createElementNS('http://www.w3.org/2000/svg','g');cursor.id='gm3-section-cursor';cursor.setAttribute('aria-hidden','true');$('chart').append(cursor);}
+      cursor.innerHTML=`<path d="M${p.x} 24V225"/>${p.y===null?'':`<circle cx="${p.x}" cy="${p.y}" r="5"/>`}`;
+      root.dataset.sectionProbe=String(probeIndex);root.dataset.sectionProbeKm=p.km.toFixed(2);
+      if(p.meters===null)delete root.dataset.sectionProbeMeters;else root.dataset.sectionProbeMeters=p.meters.toFixed(2);
+      requestDraw();
+    }
+    $('position').addEventListener('input',e=>{probeIndex=Number(e.target.value);updateProbe();});
+    for(const target of ['highest','lowest'])$(target).addEventListener('click',()=>{if(!current)return;const meters=target==='highest'?current.max:current.min;if(meters===null)return;probeIndex=current.points.findIndex(p=>p.meters===meters);updateProbe();});
+    function pickChart(e){if(!current)return;const matrix=$('chart').getScreenCTM();if(!matrix)return;const p=new DOMPoint(e.clientX,e.clientY).matrixTransform(matrix.inverse());probeIndex=indexAt(current,(p.x-54)/(382-54));updateProbe();}
+    $('chart').addEventListener('pointerdown',e=>{if(!current||e.button!==0||!e.isPrimary)return;e.preventDefault();$('chart').setPointerCapture(e.pointerId);pickChart(e);});
+    $('chart').addEventListener('pointermove',e=>{if($('chart').hasPointerCapture(e.pointerId))pickChart(e);});
+    for(const event of ['pointerup','pointercancel'])$('chart').addEventListener(event,e=>{if($('chart').hasPointerCapture(e.pointerId))$('chart').releasePointerCapture(e.pointerId);});
     function renderResult(a, b, demo = false) {
       if (distance(a, b) < 1) { say('A、B 太近了，请把 B 放远一点。'); return; }
       const result = sampleLine(a, b, sample);
@@ -103,6 +136,7 @@ window.GMTerrainSection = (() => {
       $('summary').textContent = `全长约 ${Math.round(result.km)} 千米` + (result.min === null ? '，沿线没有地形数据。' : ` · 沿线海拔约 ${Math.round(result.min)}—${Math.round(result.max)} 米。`) + (result.missing ? ' 空白段缺少地形数据。' : '');
       $('route').textContent = `A：${coords(a)} → B：${coords(b)}。${demo ? data.presetNote : ''}`;
       $('result').hidden = false; $('clear').disabled = false;
+      probeIndex=0;$('position').max=String(result.points.length-1);$('highest').disabled=$('lowest').disabled=result.min===null;updateProbe();
       root.dataset.sectionFrom = a.join(','); root.dataset.sectionTo = b.join(',');
       root.dataset.sectionKm = result.km.toFixed(2);
       start = end = null; stopGesture(); mode(false);
@@ -120,6 +154,8 @@ window.GMTerrainSection = (() => {
         d += `${pen ? 'L' : 'M'}${p.x.toFixed(2)} ${p.y.toFixed(2)}`; pen = true;
       }
       layer.innerHTML = `<path class="gm3-section-trace" d="${d}"/>` + [projected[0], projected.length > 1 ? projected.at(-1) : null].map((p, i) => !p?.visible ? '' : `<g transform="translate(${p.x} ${p.y})"><circle r="12"/><text y="5" text-anchor="middle">${i ? 'B' : 'A'}</text></g>`).join('');
+      const probe=!start&&current?projected[probeIndex]:null;
+      if(probe?.visible)layer.insertAdjacentHTML('beforeend',`<circle class="gm3-section-probe" cx="${probe.x}" cy="${probe.y}" r="7"/>`);
     }
     $('draw').disabled = $('demo').disabled = false;
     $('draw').addEventListener('click', () => {
@@ -131,6 +167,7 @@ window.GMTerrainSection = (() => {
     $('demo').addEventListener('click', () => { cancel(); prepare(); presetView(); finish(data.from, data.to, true); });
     $('clear').addEventListener('click', () => {
       current = null; cancel(); $('result').hidden = true; $('clear').disabled = true;
+      delete root.dataset.sectionProbe;delete root.dataset.sectionProbeKm;delete root.dataset.sectionProbeMeters;
       delete root.dataset.sectionFrom; delete root.dataset.sectionTo; delete root.dataset.sectionKm;
     });
     const take = e => { e.preventDefault(); e.stopImmediatePropagation(); };
@@ -169,5 +206,5 @@ window.GMTerrainSection = (() => {
     return { redraw, cancel, suspend() { cancel(); available = false; $('draw').disabled = $('demo').disabled = true; $('layer').innerHTML = ''; say('3D 画面不可用，恢复画面后可拉线。已有剖面仍可阅读。'); },
       resume() { available = true; $('draw').disabled = $('demo').disabled = false; say('选择西向东示范，或在地图上拉一条线。'); requestDraw(); } };
   }
-  return { distance, sampleLine, chartSVG, create };
+  return { distance, sampleLine, chartSVG, inspect, indexAt, create };
 })();

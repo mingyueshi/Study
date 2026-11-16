@@ -3,18 +3,20 @@
 {# 由 scripts/build_study_topics.py 生成。 #}
 {% block title %}世界地图 · 乐学堂{% endblock %}
 {% block study_assets %}
-<link rel="stylesheet" href="{% static 'study_topics/geo-map/styles.css' %}">
-<script src="{% static 'study_topics/geo-map/world-geo.js' %}" defer></script>
-<script src="{% static 'study_topics/geo-map/content.js' %}" defer></script>
-<script src="{% static 'study_topics/geo-map/map-data.js' %}" defer></script>
-<script src="{% static 'study_topics/geo-map/world-data.js' %}" defer></script>
-<script src="{% static 'study_topics/geo-map/atlas-data.js' %}" defer></script>
-<script src="{% static 'study_topics/geo-map/atlas.js' %}" defer></script>
-<script src="{% static 'study_topics/geo-map/shared.js' %}" defer></script>
-<script src="{% static 'study_topics/geo-map/media-data.js' %}" defer></script>
-<script src="{% static 'study_topics/geo-map/media.js' %}" defer></script>
-<script src="{% static 'study_topics/geo-map/map-ui.js' %}" defer></script>
-<script src="{% static 'study_topics/geo-map/world-app.js' %}" defer></script>
+<link rel="stylesheet" href="{% static 'study_topics/geo-map/styles.css' %}?v=1bbf3a639edd">
+<script src="{% static 'study_topics/geo-map/world-geo.js' %}?v=6d109d202301" defer></script>
+<script src="{% static 'study_topics/geo-map/content.js' %}?v=e86ddc18e05f" defer></script>
+<script src="{% static 'study_topics/geo-map/map-data.js' %}?v=27ebda785125" defer></script>
+<script src="{% static 'study_topics/geo-map/world-data.js' %}?v=9b7765ca7392" defer></script>
+<script src="{% static 'study_topics/geo-map/atlas-data.js' %}?v=041dec261237" defer></script>
+<script src="{% static 'study_topics/geo-map/atlas.js' %}?v=60e5f6a93f55" defer></script>
+<script src="{% static 'study_topics/geo-map/shared.js' %}?v=d2bebbfd2a0b" defer></script>
+<script src="{% static 'study_topics/geo-map/media-data.js' %}?v=b665c8643f6e" defer></script>
+<script src="{% static 'study_topics/geo-map/media.js' %}?v=9a8cc0c6caf0" defer></script>
+<script src="{% static 'study_topics/geo-map/map-discovery-data.js' %}?v=43339db0e7e3" defer></script>
+<script src="{% static 'study_topics/geo-map/map-discovery.js' %}?v=62bca0d0db4d" defer></script>
+<script src="{% static 'study_topics/geo-map/map-ui.js' %}?v=e6f9b2f34ec0" defer></script>
+<script src="{% static 'study_topics/geo-map/world-app.js' %}?v=42b7667cdac4" defer></script>
 {% endblock %}
 {% block study_content %}
 <div class="study-atlas">
@@ -52,6 +54,7 @@
         </div>
       </section>
 
+      <section class="gm-side-panel gm-discovery-tools" aria-label="中国的邻居"><h2 class="gm-side-title">从中国看邻居</h2><p id="gm-neighbor-intro" class="gm-discovery-note"></p><div class="gm-discovery-buttons" role="group" aria-label="邻居关系"><button type="button" data-neighbor-scope="land" aria-pressed="true">陆上邻国 · 14</button><button type="button" data-neighbor-scope="sea" aria-pressed="false">隔海相望 · 6</button></div><div id="gm-neighbor-list" class="gm-discovery-buttons" role="group" aria-label="点一个邻居"></div></section>
       <div class="gm-stats" aria-label="内容规模">
         <span><b id="stat-continents">7</b>大洲</span>
         <span><b id="stat-oceans">4</b>大洋</span>
@@ -72,6 +75,7 @@
               <ul class="gm-legend" id="gm-legend" aria-label="图例"></ul>
               <a class="gm-tools-jump" href="#map-tools">图层与找地点 ↑</a>
             </div>
+            <div class="gm-neighbor-entry"><button type="button" id="gm-neighbor-start">🇨🇳 从中国出发看邻居</button></div><div id="gm-neighbor-readout" class="gm-discovery-readout" aria-live="polite" hidden><h2 id="gm-neighbor-name"></h2><p id="gm-neighbor-feature"></p><div class="gm-discovery-buttons"><button type="button" data-neighbor-step="-1">上一位邻居</button><button type="button" data-neighbor-step="1">下一位邻居</button></div></div>
             <svg id="gm-svg" role="group" tabindex="0" aria-label="世界示意地图，包含七大洲、世界地标与中国与世界图层"></svg>
             <figcaption class="gm-map-note" id="gm-map-note">示意教学地图：国家轮廓经过简化，山脉与大河位置为近似示意；南极洲按制图惯例截至南纬 73°；国家中文名与英文名对照见档案卡，个别地区沿用地图集通行写法。</figcaption>
           </figure>

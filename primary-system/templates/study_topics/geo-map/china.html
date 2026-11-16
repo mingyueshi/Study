@@ -3,18 +3,22 @@
 {# 由 scripts/build_study_topics.py 生成。 #}
 {% block title %}中国地图 · 乐学堂{% endblock %}
 {% block study_assets %}
-<link rel="stylesheet" href="{% static 'study_topics/geo-map/styles.css' %}">
-<script src="{% static 'study_topics/geo-map/china-geo.js' %}" defer></script>
-<script src="{% static 'study_topics/geo-map/content.js' %}" defer></script>
-<script src="{% static 'study_topics/geo-map/map-data.js' %}" defer></script>
-<script src="{% static 'study_topics/geo-map/world-data.js' %}" defer></script>
-<script src="{% static 'study_topics/geo-map/atlas-data.js' %}" defer></script>
-<script src="{% static 'study_topics/geo-map/atlas.js' %}" defer></script>
-<script src="{% static 'study_topics/geo-map/shared.js' %}" defer></script>
-<script src="{% static 'study_topics/geo-map/media-data.js' %}" defer></script>
-<script src="{% static 'study_topics/geo-map/media.js' %}" defer></script>
-<script src="{% static 'study_topics/geo-map/map-ui.js' %}" defer></script>
-<script src="{% static 'study_topics/geo-map/china-app.js' %}" defer></script>
+<link rel="stylesheet" href="{% static 'study_topics/geo-map/styles.css' %}?v=1bbf3a639edd">
+<script src="{% static 'study_topics/geo-map/china-geo.js' %}?v=d8402343bd1d" defer></script>
+<script src="{% static 'study_topics/geo-map/content.js' %}?v=e86ddc18e05f" defer></script>
+<script src="{% static 'study_topics/geo-map/map-data.js' %}?v=27ebda785125" defer></script>
+<script src="{% static 'study_topics/geo-map/world-data.js' %}?v=9b7765ca7392" defer></script>
+<script src="{% static 'study_topics/geo-map/atlas-data.js' %}?v=041dec261237" defer></script>
+<script src="{% static 'study_topics/geo-map/atlas.js' %}?v=60e5f6a93f55" defer></script>
+<script src="{% static 'study_topics/geo-map/shared.js' %}?v=d2bebbfd2a0b" defer></script>
+<script src="{% static 'study_topics/geo-map/media-data.js' %}?v=b665c8643f6e" defer></script>
+<script src="{% static 'study_topics/geo-map/media.js' %}?v=9a8cc0c6caf0" defer></script>
+<script src="{% static 'study_topics/geo-map/china-rivers-data.js' %}?v=427ed9089e17" defer></script>
+<script src="{% static 'study_topics/geo-map/china-river-tour-data.js' %}?v=1836f325c20b" defer></script>
+<script src="{% static 'study_topics/geo-map/map-discovery-data.js' %}?v=43339db0e7e3" defer></script>
+<script src="{% static 'study_topics/geo-map/map-discovery.js' %}?v=62bca0d0db4d" defer></script>
+<script src="{% static 'study_topics/geo-map/map-ui.js' %}?v=e6f9b2f34ec0" defer></script>
+<script src="{% static 'study_topics/geo-map/china-app.js' %}?v=f16c093e12a9" defer></script>
 {% endblock %}
 {% block study_content %}
 <div class="study-atlas">
@@ -52,6 +56,7 @@
         </div>
       </section>
 
+      <section class="gm-side-panel gm-discovery-tools" aria-label="河流从源头到海口"><h2 class="gm-side-title">跟着河水走</h2><div id="gm-river-choices" class="gm-discovery-buttons" role="group" aria-label="选择回放河流"></div><p id="gm-river-note" class="gm-discovery-note"></p><p id="gm-capital-note" class="gm-discovery-note"></p></section>
       <div class="gm-stats" aria-label="内容规模">
         <span><b id="stat-provinces">34</b>个省级行政区</span>
         <span><b id="stat-features">45</b>处山河湖海</span>
@@ -72,6 +77,8 @@
               <ul class="gm-legend" id="gm-legend" aria-label="图例"></ul>
               <a class="gm-tools-jump" href="#map-tools">图层与找地点 ↑</a>
             </div>
+            <div id="gm-province-readout" class="gm-discovery-readout" aria-live="polite" hidden><p><b id="gm-province-name"></b> <span id="gm-province-capital"></span></p><p id="gm-province-feature"></p></div>
+            <section id="gm-river-readout" class="gm-discovery-readout gm-river-readout" aria-label="河流走向回放" hidden><h2 id="gm-river-title"></h2><div class="gm-discovery-buttons"><button type="button" data-river-action="play" aria-pressed="false">播放到入海口</button><button type="button" data-river-action="restart">从源头重看</button><output id="gm-river-percent" aria-live="off">0％</output></div><label for="gm-river-progress">拖动进度，看看水走到了哪里<input type="range" id="gm-river-progress" min="0" max="1000" value="0" step="1"></label><p id="gm-river-city" role="status"></p><p id="gm-river-state" class="gm-discovery-note" role="status"></p><div id="gm-river-stops" class="gm-discovery-buttons" role="group" aria-label="直接看沿途一站"></div></section>
             <svg id="gm-svg" role="group" tabindex="0" aria-label="中国示意地图，包含省级行政区、山河大地与邻居图层"></svg>
             <figcaption class="gm-map-note" id="gm-map-note">示意教学地图：省级行政区轮廓来自公开边界数据并做了简化，山脉与河道位置为近似示意；南海诸岛与十段线按制图惯例画在右下小图中。</figcaption>
           </figure>

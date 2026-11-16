@@ -302,3 +302,11 @@
 .china-3d-topic[data-compare="true"] :is(.gm3-label-layer,.gm3-flow-layer,.gm3-section-layer,.gm3-stamp,.gm3-inset,.gm3-pin-labels,.gm3-game-map-clue) { display: none !important; }
 @media (max-width: 520px) { .gm3-learning-lab, .gm3-pin-tools { padding: 14px; } .gm3-compare-captions strong { padding: 5px; } }
 .china-3d-topic[data-game-mode="hunt"] .gm3-stamp, .china-3d-topic[data-game-mode="detective"] .gm3-stamp { display: none; }
+.gm3-section-scrubber { display: block; margin-top: 12px; font-size: 17px; font-weight: 750; }
+#gm3-section-position { display: block; width: 100%; min-height: 38px; accent-color: #ad6422; }
+#gm3-section-cursor path { stroke: #ac6420; stroke-width: 1.5; stroke-dasharray: 4 3; }
+#gm3-section-cursor circle { fill: #ffcb47; stroke: #754216; stroke-width: 2; }
+#gm3-section-chart { touch-action: none; cursor: crosshair; }
+.gm3-section-probe { fill: #ffcd3d !important; stroke: #875222 !important; stroke-width: 3 !important; }
+.gm3-section-probe-tools { display: flex; flex-wrap: wrap; gap: 8px; }
+.gm3-section-probe-tools button { padding: 8px 12px; color: var(--ink); background: var(--card); border: 1px solid #b7c9b6; border-radius: 10px; font: inherit; font-size: 16px; }

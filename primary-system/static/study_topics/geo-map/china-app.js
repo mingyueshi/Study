@@ -73,7 +73,8 @@
   const featureSVG = () => FEATURES.filter(f => f.id !== 'f28').map((f) => {
     const color = S.KIND_COLOR[f.kind] || '#666';
     if (f.kind === 'river') {
-      const d = S.lineD(f.line);
+      const real = window.GM_MAP_DISCOVERY.rivers.includes(f.id) && window.GM_CHINA_RIVERS.rivers[f.id];
+      const d = real ? real.paths.map(path=>S.lineD(path)).join(' ') : S.lineD(f.line);
       const at = RIVER_LABEL_AT[f.id] || S.midOf(f.line);
       return `<g data-id="${f.id}" tabindex="0" role="button" aria-label="${esc(f.name)}">` +
         `<path class="gm-river-hit" d="${d}"/>` +
@@ -199,8 +200,11 @@
     return `看看${p.where}一带`;
   };
 
-  window.GMMapUI.mount({
+  let mapUI;
+  const discovery = window.GMMapDiscovery.mountChina({root,svg,getUI:()=>mapUI});
+  mapUI = window.GMMapUI.mount({
     root, svg, map: 'china', layers: LAYERS, pool: POOL, openCard, hintFor,
+    onSelect: discovery.select, onLayerChange: discovery.layerChanged,
     legends: {
       province: REGIONS,
       land: STEPS,

@@ -66,6 +66,8 @@
         <p id="gm3-section-status" role="status">选择西向东示范，或在地图上拉一条线。</p>
         <div id="gm3-section-result" hidden>
           <svg id="gm3-section-chart" viewBox="0 0 400 280" role="img" aria-label="从 A 到 B 的地形海拔剖面"></svg>
+          <label class="gm3-section-scrubber" for="gm3-section-position">沿着 A → B 找高低<input id="gm3-section-position" type="range" min="0" max="1" step="1" value="0" aria-describedby="gm3-section-scrub-note"></label>
+          <p id="gm3-section-probe-readout" aria-live="off"></p><div class="gm3-section-probe-tools"><button type="button" id="gm3-section-highest">看最高处</button><button type="button" id="gm3-section-lowest">看最低处</button></div><p id="gm3-section-scrub-note" class="gm3-section-note"></p>
           <p id="gm3-section-summary"></p>
           <p id="gm3-section-route"></p>
         </div>

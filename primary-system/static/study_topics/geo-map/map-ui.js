@@ -86,7 +86,7 @@ window.GMMapUI = (() => {
     return reset;
   }
 
-  function mount({ root, svg, map, layers, legends, pool, openCard, hintFor, onLayerChange }) {
+  function mount({ root, svg, map, layers, legends, pool, openCard, hintFor, onLayerChange, onSelect }) {
     const $ = (id) => root.querySelector('#' + id);
     const card = $('gm-card');
     const filters = $('gm-filters');
@@ -114,7 +114,8 @@ window.GMMapUI = (() => {
       `<button type="button" data-layer="${esc(l.id)}" aria-pressed="false">${esc(l.icon)} ${esc(l.name)}</button>`).join('');
 
     function clearHighlight() {
-      svg.querySelector('.is-active')?.classList.remove('is-active');
+      svg.querySelectorAll('.is-active').forEach(el=>el.classList.remove('is-active'));
+      delete root.dataset.selected;
     }
 
     function setLayer(id) {
@@ -155,6 +156,8 @@ window.GMMapUI = (() => {
           links.map(p => `<li><a href="${esc(A.mapHref(p))}">${esc(p.name)}<small>${A.mapLabel(p)}</small></a></li>`).join('') +
           '</ul></div>');
       }
+      root.dataset.selected = id;
+      onSelect?.(id, el);
     }
 
     function renderQuestion() {
@@ -286,7 +289,15 @@ window.GMMapUI = (() => {
     } else if (params.has('place')) {
       status('这张地图上没找到这个地点。可以从地点索引重新选择。');
     }
-    return { setLayer, revealMap };
+    return { setLayer, revealMap, choose(id, options = {}) {
+      const p = A.get(id); if (quiz.queue || p?.map !== map) return false;
+      tour?.pause();
+      const next = options.layer || p.layer;
+      if (root.dataset.layer !== next) setLayer(next);
+      resetView(); select(id, locateTarget(id));
+      if (options.reveal !== false) revealMap();
+      return true;
+    }};
   }
 
   function mountRoute(el, { route, index }, svg, map, selectStep) {

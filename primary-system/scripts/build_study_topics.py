@@ -112,7 +112,7 @@ def template(source, topic, page, theme, index_route):
             asset_url += '?v=20261114b9' if topic == 'geo' else '?v=20261114b7'
         if topic == 'geo' and (path.startswith('../sci-process') or path in ('earth-data.js', 'earth.js')):
             asset_url += '?v=20261114b9'
-        if topic == 'geo-map' and page in ('china-3d', 'world-3d') and path.endswith(('.css', '.js')):
+        if topic == 'geo-map' and page in ('china', 'world', 'china-3d', 'world-3d') and path.endswith(('.css', '.js')):
             asset_url += '?v=' + sha256(resource_content(SOURCE / topic / path, topic, theme)).hexdigest()[:12]
         if path.endswith('.css'):
             assets.append(f'<link rel="stylesheet" href="{asset_url}">')

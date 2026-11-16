@@ -565,3 +565,43 @@ body {
 .gm-media-thumbs { display: grid; gap: 8px; }
 .gm-media-thumbs--pair { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .gm-media-cover img { max-height: 225px; margin-bottom: 4px; }
+
+/* 点选后先读一小句，再进入原地点档案。 */
+.gm-discovery-tools { padding: 18px; border: 1px solid var(--line); border-radius: 16px; background: var(--card); }
+.gm-discovery-buttons { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; }
+.gm-discovery-buttons button, .gm-neighbor-entry button { min-height: 42px; padding: 8px 13px; border: 1px solid #a4c3b3; border-radius: 11px; background: var(--card); color: var(--ink); font: inherit; font-weight: 750; cursor: pointer; }
+.gm-discovery-buttons button[aria-pressed="true"] { background: #286d55; border-color: #286d55; color: #fff; }
+.gm-discovery-buttons button:disabled { opacity: .5; cursor: default; }
+.gm-discovery-readout { padding: 16px 20px; border-block: 1px solid #b6d5c4; background: #eff8ed; color: #234c37; font-size: 18px; line-height: 1.8; }
+.gm-discovery-readout[hidden] { display: none; }
+.gm-discovery-readout h2 { font-size: 23px; margin: 0 0 7px; }
+#gm-province-name { font-size: 23px; margin-right: 12px; }
+#gm-province-capital { color: #9e4f18; font-weight: 800; }
+.gm-discovery-note { font-size: 14px; color: var(--ink-soft); line-height: 1.8; margin-top: 10px; }
+.gm-discovery-readout .gm-discovery-note { color: #426252; }
+#gm-river-progress { display: block; width: 100%; min-height: 36px; accent-color: #216a9a; }
+#gm-river-percent { margin-left: auto; font-weight: 800; }
+#gm-river-stops button { font-size: 15px; min-height: 38px; }
+.gm-capital-annotation, .gm-river-play-layer { pointer-events: none; }
+.gm-capital-annotation circle { fill: #d7761b; stroke: #fff; stroke-width: 3; }
+.gm-capital-annotation rect { fill: #fff9e8; stroke: #a56d31; stroke-width: 1.5; }
+.gm-capital-annotation text { fill: #824315; font-size: 20px; font-weight: 800; }
+.gm-capital-leader { stroke: #986329; stroke-width: 2; fill: none; }
+.gm-river-reveal { stroke: #0f8dc0; stroke-width: 6; fill: none; stroke-linecap: round; }
+.gm-river-water { fill: #f6ca43; stroke: #075d86; stroke-width: 3; }
+.gm-river-play-layer [data-river-city] path { stroke: #6b97a2; stroke-width: 1; fill: none; }
+.gm-river-play-layer [data-river-city] circle { fill: #f6f8ef; stroke: #5b8e99; stroke-width: 2; }
+.gm-river-play-layer [data-river-city] rect { fill: #fffefaee; stroke: #9fbcb8; stroke-width: 1; }
+.gm-river-play-layer [data-river-city] text { fill: #42636a; font-size: 17px; font-weight: 750; }
+.gm-river-play-layer [data-river-city].is-reached circle { fill: #e99830; stroke: #85521b; }
+.gm-river-play-layer [data-river-city].is-reached text { fill: #814319; }
+.gm-river-replaying [data-g="land"] .gm-mark-label { opacity: 0; }
+.gm-river-replaying [data-g="land"] > [data-id]:not(.gm-replay-river) { opacity: .22; }
+.gm-neighbor-entry { padding: 12px 18px; border-top: 1px solid var(--line); background: #f1f7ea; }
+.world-topic.gm-neighbor-exploring .gm-country.is-neighbor-land { fill: #80ba9b; stroke: #2b6953; stroke-width: 1.6; }
+.world-topic.gm-neighbor-exploring .gm-country.is-neighbor-sea { fill: #85c3d6; stroke: #286f84; stroke-width: 1.6; }
+.world-topic.gm-neighbor-exploring .gm-country.is-neighbor-muted { opacity: .28; }
+.world-topic.gm-neighbor-exploring .gm-country.is-active { fill: #f5d486; stroke: #9d491f; stroke-width: 3; opacity: 1; }
+.gm-neighbor-country-feature { margin-top: 12px; padding: 12px; background: #f4f8e7; color: #304e34; border-left: 5px solid #8eb066; border-radius: 8px; font-size: 18px; line-height: 1.8; }
+
+.china-topic[data-layer="province"] .gm-prov.is-active { fill: #ffe5ae; stroke: #984317; stroke-width: 3; }

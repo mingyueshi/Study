@@ -93,6 +93,8 @@
   const row = (label, value) => `<div class="gm-row"><span class="gm-row-label">${esc(label)}</span><span class="gm-row-value">${esc(value)}</span></div>`;
   const list = (items) => items.map((f) => `<p class="gm-card-text">${esc(f)}</p>`).join('');
 
+  let mapUI;
+  const neighborExplorer = window.GMMapDiscovery.mountNeighbors({root,svg,getUI:()=>mapUI});
   function openCard(id) {
     const place = A.get(id);
     const card = $('gm-card');
@@ -117,6 +119,7 @@
       const name = id;
       const zh = zhOf(name);
       const cont = continentOf(name);
+      const neighbor = neighborExplorer.byCountry.get(id);
       const isChinaHome = root.dataset.layer === 'home' && (name === 'China' || name === 'Taiwan');
       if (isChinaHome) {
         card.innerHTML =
@@ -131,7 +134,7 @@
           `<h2 class="gm-card-title">${esc(zh)}</h2>` +
           `<div class="gm-chips">${badge(name, '#8a7a55')}${badge(continentName[cont] || '', continentColor[cont])}</div>` +
           row('属于', continentName[cont] || '') +
-          (continentHint[cont] ? `<p class="gm-card-text">${esc(continentHint[cont])}</p>` : '') +
+          (neighbor ? `<p class="gm-neighbor-country-feature"><b>一句特色：</b>${esc(neighbor.note)}</p><p class="gm-card-text">与中国${neighbor.rel === 'land' ? '陆上接壤' : '隔海相望'}。</p>` : continentHint[cont] ? `<p class="gm-card-text">${esc(continentHint[cont])}</p>` : '') +
           `<p class="gm-card-foot">英文名「${esc(name)}」就是它在世界地图集里的通行写法。</p>`;
       }
     }
@@ -179,9 +182,10 @@
       `<a href="${esc(continent.source)}" target="_blank" rel="noopener noreferrer">内容出处（需联网）</a></p>`;
   }
 
-  const mapUI = window.GMMapUI.mount({
+  mapUI = window.GMMapUI.mount({
     root, svg, map: 'world', layers: LAYERS, pool: POOL, openCard, hintFor,
-    onLayerChange: showContinent,
+    onSelect: neighborExplorer.select,
+    onLayerChange: (layer,quiz) => { showContinent(layer,quiz); neighborExplorer.layerChanged(layer,quiz); },
     legends: {
       continent: CONTINENTS,
       extreme: [{ name: '地标', color: '#fffdf5' }, { name: '河流', color: KIND_COLOR.river }],
@@ -196,6 +200,7 @@
     mapUI.revealMap();
   });
 
+  neighborExplorer.restore();
   /* ---------- 静态区块 ---------- */
   $('stat-continents').textContent = CONTINENTS.length;
   $('stat-oceans').textContent = OCEANS.length;
