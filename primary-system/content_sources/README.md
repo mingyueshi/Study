@@ -76,3 +76,15 @@
 `astro-observation-data.js` 是八种月相说明、两类日月食步骤、模型限制和出处的主来源；`astro-observation.js` 负责联动图示与播放清理。`astro-figures.js` 沿用 `demo-astro-moonphases`、`astro-eclipse`，动效脚本失效时读取同一份月相说明显示静态图；`astro-app.js` 支持原知识点 ID 的直达链接。修改后运行 `node content_sources/test/test-astro-observation.js`、`node content_sources/test/test-astro.js`、`make study-topics-data`、`make test-frontend` 与 `.venv/bin/python manage.py test catalog.test_study_topics`。不要把模型中的月相天数用作当日天象预报。
 
 天文漫游进阶功能：`astro-discovery-data.js` 维护五级宇宙地址、三条光信号路线与六道观察挑战；`astro-discovery.js` 计算传播时间并管理浏览器挑战记录（首次答案与最新答案分开，存储不可用时使用当前页面内存）。不计入账号积分或原课程掌握标记。增加 `node content_sources/test/test-astro-discovery.js` 校验数据、计算和存档过滤；新增锚点为 `#roam-address`、`#roam-light`、`#roam-challenges`。图片沿用本专题素材，传播时间使用真空光速与平均距离估算，非实时天体测距。
+
+### 天文实验室
+
+入口 `/astronomy/study/?view=lab`，四项玩法分别使用 `#sky-moon`、`#sky-planets`、`#sky-polaris` 和 `#sky-missions`。侧栏直接进入实验室，太阳系、月球、恒星、航天课程也提供对应链接；原知识点 ID、搜索、宇宙漫游与掌握记录继续使用。
+
+`astro-lab-data.js` 维护日期范围与说明、冥王星、3 道比较题、北斗七星的示意坐标和四步找星说明，以及 7 个探月、7 个探火星代表性里程碑。任务日期区分发射、入轨、着陆、返回；成果不是都发生在同一天。14 站是已发生的精选清单，不代表完整或最新任务名录。每站保存 NASA 或国家航天局出处。原八行星数值集中在 `astro-media-data.js`，补充稳定 ID、平均参考温度与公转天数，直径统一为 NASA 数据表的近似赤道直径。冥王星属于矮行星，不写成九大行星；岩石表面温度和四颗巨行星约 1 巴大气处温度分开说明。
+
+`astro-moon-calendar.js` 在原 `astro-observation.js` 图示上挂接日期。选日期统一取北京时间 20 时，前后换日不受电脑所在时区或夏令时影响；此刻使用系统时间，每分钟刷新，后台暂停刷新，手动选月相、拖滑块或播放模型后退出日期同步。月相角和亮面比例由本地 Astronomy Engine 2.1.19 计算，避免把固定 29.5 天模型直接当成日期月相。引擎原文件与 MIT 许可放在 `vendor/astronomy-engine/`，生成时复制到本专题；校验元数据保存原文件 SHA-256。来源为官方 npm `astronomy-engine@2.1.19`，下载包完整性以 npm 发布的 SHA-512 核对，无需运行时联网或 npm 构建。
+
+`astro-lab.js` 负责排序、三题反馈、目的地筛选和有限找星播放。星位经过简化，天璇指向天枢、从天枢继续约五倍的方向由坐标校验；不是实时星图。播放遵循系统减少动态和统一偏好，离屏、后台、离页和切换课程会清理。数据结构与引用先由 `node content_sources/test/test-astro-lab.js` 校验；`scripts/test_astro_lab.cjs` 对照[美国海军天文台 2024 月相历表](https://aa.usno.navy.mil/api/moon/phases/year?year=2024)，并验证闰日、时区、日期控制清理、数值排序和时间顺序。
+
+修改后运行上述源校验、`node content_sources/test/test-astro-media.js`、`node content_sources/test/test-astro-observation.js`、`node content_sources/test/test-astro.js`、`make study-topics-data`、`make test-frontend` 与 `.venv/bin/python manage.py test catalog.test_study_topics`。

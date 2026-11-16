@@ -25,6 +25,7 @@ ASTRO.units.forEach(u => { AUNIT_BY_ID[u.id] = u; });
 const ATOTAL_POINTS = ASTRO.units.reduce((n, u) => n + u.points.length, 0);
 const AEXTRA_VIEWS = [
   { id: 'universe', name: '宇宙漫游 · 图像与动画', emoji: '🌌', color: '#4766b5', count: 3 },
+  { id: 'lab', name: '天文实验室 · 四个新玩法', emoji: '🔭', color: '#476e94', count: 4 },
   { id: 'facts', name: '宇宙数据速查', emoji: '🏆', color: '#b5893a', count: ASTRO.facts.reduce((n, f) => n + f.items.length, 0) },
   { id: 'clinic', name: '天文小诊所', emoji: '🩺', color: '#c2557d', count: ASTRO.mistakes.length },
 ];
@@ -67,7 +68,7 @@ function renderChips() {
     '<button class="chip' + (v.id === curView && !query ? ' on' : '') + '" style="--c:' + v.color + '" data-act="unit" data-id="' + v.id + '">' +
     '<span class="chip-emoji">' + v.emoji + '</span><span class="chip-name">' + esc(v.name) + '</span>' +
     '<span class="chip-num">' + v.count + '</span></button>');
-  document.getElementById('chips').innerHTML = extraChips[0] + unitChips.join('') + extraChips.slice(1).join('');
+  document.getElementById('chips').innerHTML = extraChips.slice(0,2).join('') + unitChips.join('') + extraChips.slice(2).join('');
 }
 
 function renderStats() {
@@ -139,6 +140,7 @@ function renderUnit(u) {
     '<div class="goal-tags">' + u.goals.map(g => '<span>🎯 ' + esc(g) + '</span>').join('') + '</div></div></div>' +
     banner +
     (u.id === 'au1' || u.id === 'au5' ? '<p class="roam-course-link">🌌 <a href="?view=universe#roam-' + (u.id === 'au1' ? 'solar' : 'galaxy') + '">打开宇宙漫游：看大图、动画与外部资料 →</a></p>' : '') +
+    (window.AstroLab && ['au1','au2','au3','au6','au7'].includes(u.id) ? '<p class="sky-course-link">🔭 <a href="?view=lab#sky-' + ({au1:'planets',au2:'moon',au3:'polaris',au6:'missions',au7:'missions'}[u.id]) + '">打开天文实验室：' + ({au1:'比较行星与冥王星',au2:'选日期看月相',au3:'跟着北斗找北极星',au6:'追踪探月与探火星任务',au7:'追踪探月与探火星任务'}[u.id]) + ' →</a></p>' : '') +
     u.points.map(p => pointCard(u, p)).join('');
 }
 
@@ -192,6 +194,7 @@ function searchResults(q) {
     (m.unit + m.wrong + m.right).toLowerCase().includes(ql));
 
   const out = [];
+  if (window.AstroLab && /月相|月亮|日期|行星|冥王星|北极星|北斗|探测|探月|火星|嫦娥|祝融|水手|海盗|好奇|毅力|旅居|月球/.test(q)) out.push('<nav class="sky-course-link" aria-label="天文实验室搜索入口"><a href="?view=lab">🔭 打开天文实验室：日期月相、行星对比、找北极星与探测器时间线 →</a></nav>');
   if (window.AstroMedia) {
     const mediaHits = ASTRO_MEDIA.chapters.filter(c => [c.title, c.intro, ...c.images.map(i => i.title + i.caption)].join(' ').toLowerCase().includes(ql));
     if (mediaHits.length) out.push('<nav class="roam-search" aria-label="匹配的影像资料"><h2>🌌 图像与动画</h2>' + mediaHits.map(c => '<a href="?view=universe#roam-' + c.id + '">' + esc(c.title) + ' →</a>').join('') + '</nav>');
@@ -224,6 +227,7 @@ function searchResults(q) {
 /* ---------- 渲染 ---------- */
 function renderMain() {
   window.AstroObservation?.dispose();
+  window.AstroLab?.dispose();
   const box = document.getElementById('cards');
   if (window.AstroMedia) AstroMedia.dispose();
   if (query) {
@@ -232,6 +236,7 @@ function renderMain() {
   }
   if (curView === 'facts') { box.innerHTML = renderFacts(); return; }
   if (curView === 'clinic') { box.innerHTML = renderClinic(); return; }
+  if (curView === 'lab' && window.AstroLab) { box.innerHTML = AstroLab.render(); AstroLab.mount(); return; }
   if (curView === 'universe' && window.AstroMedia) {
     box.innerHTML = AstroMedia.render();
     AstroMedia.mount();
@@ -319,6 +324,6 @@ function openLessonFromHash() {
 }
 window.addEventListener('hashchange', openLessonFromHash);
 if (!openLessonFromHash()) render();
-if (location.hash.startsWith('#roam-')) {
+if (location.hash.startsWith('#roam-') || location.hash.startsWith('#sky-') || location.hash.startsWith('#mission-')) {
   requestAnimationFrame(() => document.getElementById(location.hash.slice(1))?.scrollIntoView({behavior: 'instant'}));
 }

@@ -178,7 +178,10 @@ const ASTRO_MEDIA = {
       "period": 0.241,
       "diameter": 4879,
       "color": "#b0aaa0",
-      "fact": "离太阳最近，表面有许多撞击坑。"
+      "fact": "离太阳最近，表面有许多撞击坑。",
+      "id": "mercury",
+      "periodDays": 88,
+      "temperatureC": 167
     },
     {
       "name": "金星",
@@ -186,63 +189,84 @@ const ASTRO_MEDIA = {
       "period": 0.615,
       "diameter": 12104,
       "color": "#e5b66f",
-      "fact": "厚厚的大气层让它表面非常炎热。"
+      "fact": "厚厚的大气层让它表面非常炎热。",
+      "id": "venus",
+      "periodDays": 224.7,
+      "temperatureC": 464
     },
     {
       "name": "地球",
       "au": 1,
-      "period": 1,
-      "diameter": 12742,
+      "period": 1.0,
+      "diameter": 12756,
       "color": "#51a9e5",
-      "fact": "我们的家，表面有大片液态水。"
+      "fact": "我们的家，表面有大片液态水。",
+      "id": "earth",
+      "periodDays": 365.2,
+      "temperatureC": 15
     },
     {
       "name": "火星",
       "au": 1.52,
       "period": 1.881,
-      "diameter": 6779,
+      "diameter": 6792,
       "color": "#df795b",
-      "fact": "铁氧化物让表面显出红色。"
+      "fact": "铁氧化物让表面显出红色。",
+      "id": "mars",
+      "periodDays": 687,
+      "temperatureC": -65
     },
     {
       "name": "木星",
       "au": 5.2,
-      "period": 11.86,
-      "diameter": 139820,
+      "period": 11.858,
+      "diameter": 142984,
       "color": "#d9b18b",
-      "fact": "太阳系最大的行星，拥有醒目的云带。"
+      "fact": "太阳系最大的行星，拥有醒目的云带。",
+      "id": "jupiter",
+      "periodDays": 4331,
+      "temperatureC": -110
     },
     {
       "name": "土星",
       "au": 9.58,
-      "period": 29.46,
-      "diameter": 116460,
+      "period": 29.424,
+      "diameter": 120536,
       "color": "#e5cc8e",
-      "fact": "宽阔的光环主要由冰粒和碎块组成。"
+      "fact": "宽阔的光环主要由冰粒和碎块组成。",
+      "id": "saturn",
+      "periodDays": 10747,
+      "temperatureC": -140
     },
     {
       "name": "天王星",
       "au": 19.2,
-      "period": 84.01,
-      "diameter": 50724,
+      "period": 83.748,
+      "diameter": 51118,
       "color": "#8cd6db",
-      "fact": "自转轴倾斜很大，像躺着转。"
+      "fact": "自转轴倾斜很大，像躺着转。",
+      "id": "uranus",
+      "periodDays": 30589,
+      "temperatureC": -195
     },
     {
       "name": "海王星",
       "au": 30.05,
-      "period": 164.8,
-      "diameter": 49244,
+      "period": 163.723,
+      "diameter": 49528,
       "color": "#6c8fe3",
-      "fact": "离太阳最远的八大行星，公转一圈约需 165 年。"
+      "fact": "八大行星中离太阳最远，绕太阳一圈要一个多世纪。",
+      "id": "neptune",
+      "periodDays": 59800,
+      "temperatureC": -200
     }
   ],
   "planetSource": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/",
-  "checked": "2026-11-13",
+  "checked": "2026-11-17",
   "modelNotes": {
     "orbits": "公转示意：轨道间距被压缩、行星被放大；周期比例按数据计算。圆轨道简化了真实的椭圆轨道，起始位置是任意排布。选「慢慢看」时地球约 12 秒转一圈，选「快一些」时约 4 秒。",
     "distance": "距离比例：横向位置按平均日距绘制，太阳到海王星约 30 份日地距离。圆点大小和上下错开的标签不表示真实尺寸与轨道位置。",
-    "size": "大小比例：八颗行星的圆面直径按同一比例绘制，单位是千米。太阳直径约是木星的 10 倍，这里没有画进来；位置与间距仅用于排版。"
+    "size": "大小比例：八颗行星的圆面直径按同一比例绘制，采用近似赤道直径，单位是千米。太阳直径约是木星的 10 倍，这里没有画进来；位置与间距仅用于排版。"
   }
 };
 if (typeof module !== 'undefined') module.exports = ASTRO_MEDIA;

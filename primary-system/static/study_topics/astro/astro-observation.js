@@ -8,8 +8,8 @@
       lit: (1 - Math.cos(angle)) / 2, waxing: phase <= .5,
       index: Math.round(phase * 8) % 8};
   }
-  function moonPath(value, radius = 66) {
-    const phase = clamp(value), cosine = Math.cos(phase * Math.PI * 2);
+  function moonPath(value, radius = 66, fraction = null) {
+    const phase = clamp(value), cosine = fraction === null ? Math.cos(phase * Math.PI * 2) : 1 - 2 * fraction;
     if (phase === 0 || phase === 1) return '';
     return `M0 ${-radius}A${radius} ${radius} 0 0 1 0 ${radius}` +
       `A${(Math.abs(cosine) * radius).toFixed(4)} ${radius} 0 0 ${cosine < 0 ? 1 : 0} 0 ${-radius}Z`;
@@ -39,7 +39,7 @@
     if (!data) return null;
     let body;
     if (kind === 'moon') {
-      body = '<div class="astro-observe-stage" tabindex="0" role="region" aria-label="月球位置与月相联动示意，可横向滚动">' +
+      body = (window.AstroMoonCalendar?.html() || '') + '<div class="astro-observe-stage" tabindex="0" role="region" aria-label="月球位置与月相联动示意，可横向滚动">' +
         '<svg class="fig-svg astro-observe-moon" viewBox="0 0 640 270" role="img" aria-label="左侧是太阳方向、地球和月球位置，右侧是从地球看到的月面">' +
         '<rect x="380" y="20" width="244" height="230" rx="18" fill="#f0edfa"/>' +
         '<text x="240" y="26" text-anchor="middle">从北极上方看</text><text x="502" y="49" text-anchor="middle">从地球看月亮</text>' +
@@ -93,16 +93,18 @@
       const sight = root.querySelector('[data-moon-sight]');
       sight.setAttribute('x2', model.x); sight.setAttribute('y2', model.y);
       const face = root.querySelector('[data-moon-face]');
-      face.setAttribute('d', moonPath(value)); face.setAttribute('transform', model.waxing ? '' : 'scale(-1 1)');
+      face.setAttribute('d', moonPath(value, 66, record.actual?.fraction ?? null)); face.setAttribute('transform', model.waxing ? '' : 'scale(-1 1)');
       const near = Math.abs(value * 8 - Math.round(value * 8)) > .04;
       const name = phase.label + (near ? '附近' : '');
       write(root.querySelector('[data-moon-name]'), name);
-      write(root.querySelector('[data-moon-time]'), `从新月起约 ${(value * data.cycleDays).toFixed(1)} 天`);
-      write(root.querySelector('[data-moon-percent]'), `看到的亮面约 ${Math.round(model.lit * 100)}%`);
-      write(root.querySelector('[data-observe-note]'), `${name}：${phase.note}${near ? '' : `（${phase.cal}）`}`);
+      const lit = record.actual?.fraction ?? model.lit;
+      write(root.querySelector('[data-moon-time]'), record.actual ? record.actual.label : `从新月起约 ${(value * data.cycleDays).toFixed(1)} 天`);
+      write(root.querySelector('[data-moon-percent]'), `看到的亮面约 ${Math.round(lit * 100)}%`);
+      write(root.querySelector('[data-observe-note]'), `${name}：${phase.note}${near || record.actual ? '' : `（${phase.cal}）`}`);
+      root.dataset.moonPhase = String(value); root.dataset.moonIllumination = String(lit);
       const range = root.querySelector('[data-observe-range]');
       range.value = String(Math.round(value * 1000));
-      range.setAttribute('aria-valuetext', `${name}，从新月起约 ${(value * data.cycleDays).toFixed(1)} 天，亮面约 ${Math.round(model.lit * 100)}%`);
+      range.setAttribute('aria-valuetext', `${name}，${record.actual ? record.actual.label : `从新月起约 ${(value * data.cycleDays).toFixed(1)} 天`}，亮面约 ${Math.round(lit * 100)}%`);
       root.querySelectorAll('[data-observe="phase"]').forEach(b => pressed(b, Number(b.dataset.value) === model.index));
     } else {
       const stage = eclipseStage(value);
@@ -136,10 +138,12 @@
     if (frame !== null) window.cancelAnimationFrame(frame);
     frame = previous = null; sync(record);
   }
-  function seek(record, value) { pause(); record.progress = clamp(value); draw(record); sync(record); }
+  function manual(record) { record.actual = null; record.calendar?.manual(); }
+  function seek(record, value) { pause(); manual(record); record.progress = clamp(value); draw(record); sync(record); }
   function play(record) {
     if (!canPlay() || document.hidden || !record.fig.isConnected) return;
     pause();
+    manual(record);
     if (record.progress >= 1) record.progress = 0;
     active = record; sync(record); draw(record);
     const token = ++generation, duration = record.kind === 'moon' ? 24000 : 9000;
@@ -182,10 +186,14 @@
     records.set(fig, record);
     if (record.kind === 'eclipse') eclipseScene(record);
     draw(record); sync(record);
+    if (record.kind === 'moon') record.calendar = window.AstroMoonCalendar?.mount(root, (result, passive) => {
+      if (!passive || active === record) pause(); record.actual = result; record.progress = result.phase; draw(record); sync(record);
+    });
   }
   function remove(record) {
     if (active === record) pause();
     record.unwatch?.();
+    record.calendar?.dispose();
     record.root.removeEventListener('click', record.click); record.root.removeEventListener('input', record.input);
     records.delete(record.fig);
   }

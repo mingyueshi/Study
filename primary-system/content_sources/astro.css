@@ -443,3 +443,57 @@
 .discovery-questions [data-result="correct"] { border-color: var(--course-action); }
 @media(max-width: 900px) { .discovery-address, .discovery-questions { grid-template-columns: 1fr; } .discovery-address img { height: 260px; } }
 @media print { .discovery-stops,.discovery-slider,.discovery-inputs { display: none; } .discovery-section { break-inside: avoid; } .discovery-questions { display: block; } }
+
+/* 日期、对比、找星和任务时间线沿用同一课程外壳。 */
+.astro-sky-lab { min-width: 0; font-size: 19px; line-height: 1.85; }
+.sky-hero { padding: clamp(22px,3vw,44px); border: 1px solid #486a98; border-radius: 20px; background: radial-gradient(ellipse at 90% 0,#42658b 0,transparent 58%),#172b4c; color: #eef5ff; }
+.sky-hero h1 { margin: 6px 0 14px; font-size: clamp(32px,3.5vw,52px); color: #fff; }
+.sky-hero p { max-width: 52ch; }
+.sky-hero nav { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+.sky-hero nav a { padding: 8px 16px; border: 1px solid #819cc0; border-radius: 12px; color: #fff; background: #254569; text-decoration: none; font-weight: 750; }
+.sky-panel { margin-block: 30px; padding: clamp(16px,2.4vw,32px); border: 1px solid var(--line); border-radius: 18px; background: var(--card); scroll-margin-top: 20px; }
+.sky-panel h2 { font-size: clamp(25px,2.2vw,34px); line-height: 1.45; margin: 4px 0 16px; }
+.sky-panel h3 { font-size: 23px; line-height: 1.6; margin: 6px 0 12px; }
+.sky-panel>p { max-width: 90ch; }
+.sky-kicker { color: var(--muted); font-size: 15px; font-weight: 750; letter-spacing: .03em; }
+.sky-tools { display: flex; flex-wrap: wrap; gap: 10px; margin-block: 18px; }
+.sky-tools button,.sky-quiz>button,.sky-planet-table button { min-height: 44px; padding: 8px 14px; border: 1px solid var(--line); border-radius: 10px; font: inherit; color: var(--ink); background: var(--card); cursor: pointer; }
+.sky-tools button[aria-pressed="true"] { background: #365c83; color: #fff; border-color: #365c83; }
+.sky-tools button:disabled { opacity: .55; cursor: default; }
+.sky-tools button:hover:not(:disabled) { box-shadow: 0 0 0 2px #88aac4; }
+.sky-note,.sky-source { font-size: 15px; line-height: 1.85; }
+.sky-note { color: var(--muted); }
+.sky-source { display: inline-block; padding-block: 6px; color: var(--course-action); overflow-wrap: anywhere; }
+.sky-table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; margin-block: 16px; }
+.sky-planet-table { width: 100%; min-width: 700px; border-collapse: collapse; font-variant-numeric: tabular-nums; text-align: left; }
+.sky-planet-table caption { text-align: left; padding: 12px 18px; background: var(--soft); font-size: 16px; }
+.sky-planet-table :is(th,td) { padding: 12px 18px; border-bottom: 1px solid var(--line); }
+.sky-planet-table thead { background: var(--card-tint); font-size: 16px; }
+.sky-planet-table th { font-weight: 750; }
+.sky-planet-table td { font-size: 20px; }
+.sky-planet-table small { display: block; font-size: 14px; font-weight: 500; color: var(--muted); }
+.sky-planet-table tr.is-selected { background: var(--soft); }
+.sky-planet-table button[aria-pressed="true"] { border-color: var(--course-action); box-shadow: 0 0 0 1px var(--course-action); }
+.sky-planet-dot { display: inline-block; width: 20px; height: 20px; background: var(--planet); border: 1px solid #66768a; border-radius: 50%; vertical-align: middle; margin-right: 8px; }
+.sky-size-track { display: block; width: min(160px,100%); height: 6px; background: var(--line); border-radius: 6px; margin-top: 8px; }
+.sky-size-track i { display: block; height: 100%; background: #6484a4; border-radius: 6px; }
+.sky-planet-detail,.sky-star-readout { padding: 16px 20px; border-left: 5px solid #7297b4; border-radius: 10px; background: var(--soft); }
+.sky-quiz { margin-top: 24px; padding: 22px; background: var(--card-tint); border: 1px solid var(--line); border-radius: 14px; }
+.sky-feedback { padding: 16px; border: 1px solid var(--line); border-radius: 10px; background: var(--card); }
+.sky-night { margin-top: 22px; border: 1px solid #446184; border-radius: 18px; background: radial-gradient(ellipse at 70% 0,#203f68 0,transparent 70%),#0c192f; overflow: hidden; }
+.sky-night svg { display: block; width: 100%; max-height: 660px; }
+.sky-night text { font-family: inherit; font-size: 17px; }
+.sky-timeline { list-style: none; padding: 0; margin: 20px 0 0; }
+.sky-timeline li { position: relative; padding: 0 0 24px 28px; border-left: 3px solid #8daac5; }
+.sky-timeline li::before { content: ''; position: absolute; left: -8px; top: 23px; width: 13px; height: 13px; border-radius: 50%; background: #deb96b; border: 2px solid var(--card); }
+.sky-timeline article { display: grid; grid-template-columns: minmax(120px,170px) minmax(0,1fr); gap: 22px; padding: 20px 24px; border: 1px solid var(--line); border-radius: 14px; background: var(--soft); scroll-margin-top: 20px; }
+.sky-timeline time { font-weight: 800; font-size: 21px; color: var(--course-action); font-variant-numeric: tabular-nums; }
+.sky-timeline article p { margin-block: 6px; }
+.sky-course-link { padding: 16px; background: var(--card-tint); border: 1px solid var(--line); border-radius: 12px; font-size: 18px; margin-bottom: 22px; }
+.astro-date-tools { padding: 18px; margin-bottom: 16px; border: 1px solid var(--line); border-radius: 14px; background: var(--soft); font-size: 17px; }
+.astro-date-tools label { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; font-weight: 750; }
+.astro-date-tools input { min-width: 0; max-width: 100%; min-height: 44px; padding: 7px 10px; border: 1px solid var(--line); border-radius: 8px; color: var(--ink); background: var(--card); font: inherit; }
+.astro-date-tools [data-moon-date-status] { font-weight: 750; color: var(--course-action); }
+@media(max-width:900px) { .sky-timeline article { grid-template-columns: 1fr; gap: 4px; } }
+@media(max-width:500px) { .astro-sky-lab { font-size: 17px; } .sky-hero { padding: 20px; } .sky-tools { gap: 8px; } .sky-tools button { padding-inline: 10px; } .sky-timeline li { padding-left: 16px; } .sky-timeline article { padding: 14px; } .sky-quiz { padding: 16px; } }
+@media print { .sky-tools,.sky-hero nav,.astro-date-tools,.sky-quiz { display: none; } .sky-planet-table button { border: 0; background: none; padding: 0; box-shadow: none; } .sky-table-wrap { overflow: visible; } .sky-planet-table { min-width: 0; } .sky-panel { break-inside: auto; } .sky-timeline article { break-inside: avoid; } }
