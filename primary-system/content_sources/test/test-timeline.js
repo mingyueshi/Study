@@ -370,7 +370,9 @@ const PAGE_REFS = {
   'civilizations.html': ['content.js', 'timeline-data.js', 'media-data.js', 'civilizations-data.js', 'shared.js', 'civilizations-shared.js', 'civilizations-app.js', 'styles.css', 'people.css', 'civilizations.css', 'timeline.html'],
   'civilization.html': ['content.js', 'timeline-data.js', 'media-data.js', 'civilizations-data.js', 'shared.js', 'civilizations-shared.js', 'civilization-app.js', 'styles.css', 'people.css', 'civilizations.css', 'civilizations.html'],
   'ancient-science.html': ['content.js', 'timeline-data.js', 'media-data.js', 'people-data.js', 'ancient-science-data.js', 'shared.js', 'ancient-science-shared.js', 'ancient-science-app.js', 'styles.css', 'people.css', 'ancient-science.css', 'technology.html'],
-  'technology.html': ['content.js', 'timeline-data.js', 'media-data.js', 'people-data.js', 'ancient-science-data.js', 'shared.js', 'ancient-science-shared.js', 'technology-app.js', 'styles.css', 'people.css', 'ancient-science.css', 'ancient-science.html']
+  'technology.html': ['content.js', 'timeline-data.js', 'media-data.js', 'people-data.js', 'ancient-science-data.js', 'shared.js', 'ancient-science-shared.js', 'technology-app.js', 'styles.css', 'people.css', 'ancient-science.css', 'ancient-science.html'],
+  'silk-road.html': ['content.js', 'timeline-data.js', 'media-data.js', 'people-data.js', '../history/knowledge-dynasties.js', '../history/media.js', 'silk-road-data.js', 'silk-road-geo.js', 'shared.js', 'silk-road-shared.js', 'silk-road-app.js', 'styles.css', 'people.css', 'silk-road.css'],
+  'silk-city.html': ['silk-road-data.js', 'silk-road-geo.js', 'silk-road-shared.js', 'silk-city-app.js', 'silk-road.html', 'silk-road.css']
 };
 Object.entries(PAGE_REFS).forEach(([page, refs]) => {
   check(fileExists(page), '缺少页面 ' + page);
@@ -378,7 +380,8 @@ Object.entries(PAGE_REFS).forEach(([page, refs]) => {
   const html = fs.readFileSync(path.join(DIR, page), 'utf8');
   refs.forEach(f => check(html.includes(f), page + ' 应引用 ' + f));
   for (const [, target] of html.matchAll(/(?:href|src)="([^"#?]+)(?:[#?][^"]*)?"/g)) {
-    check(!/[/:]/.test(target) && fileExists(target), page + ' 应引用目录内存在的文件：' + target);
+    const sharedHistory = /^\.\.\/history\/(knowledge-dynasties|media)\.js$/.test(target);
+    check((!/[/:]/.test(target) || sharedHistory) && fileExists(target), page + ' 应引用系统内存在的文件：' + target);
   }
   check(html.includes('lang="zh-CN"'), page + ' 应声明 zh-CN');
   check(html.includes('tl-sysnav'), page + ' 应有系统导航条');

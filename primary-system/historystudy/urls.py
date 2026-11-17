@@ -14,6 +14,6 @@ urlpatterns = [
     path('timeline/', page('history-timeline/index'), name='history-timeline'),
     *[
         path(f'timeline/{name}.html', page(f'history-timeline/{name}'), name=f'history-timeline-{name}')
-        for name in ('timeline', 'era', 'event', 'dynasties', 'people', 'person', 'civilizations', 'civilization', 'ancient-science', 'technology')
+        for name in ('timeline', 'era', 'event', 'dynasties', 'people', 'person', 'civilizations', 'civilization', 'ancient-science', 'technology', 'silk-road', 'silk-city')
     ],
 ]

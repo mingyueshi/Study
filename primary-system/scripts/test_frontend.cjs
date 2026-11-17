@@ -1398,6 +1398,7 @@ test('study topic links resolve to real events, places, lessons and chapters', (
       stars: '/astronomy/', poetry: '/poetry/', idiomStories: '/idioms/stories/',
       elements: '/science/elements/', bodyStation: '/science/body/',
       solarTerms: '/geography/solar-terms/',
+      silkRoad: '/history/timeline/silk-road.html',
     }})},
   });
   [
@@ -1424,7 +1425,9 @@ test('study topic links resolve to real events, places, lessons and chapters', (
     historyEvent: data.TIMELINE_EVENTS.map(event => '?event=' + event.id),
     marsLife: [''], darkMatter: [''], stars: [''], poetry: [''], idiomStories: [''], elements: [''], bodyStation: [''],
     solarTerms: ['', ...JSON.parse(fs.readFileSync(path.join(__dirname, '../content_sources/solar-terms.json'), 'utf8')).seasons.flatMap(season => season.terms.map(term => '#' + term.id))],
+    silkRoad: [''],
   };
+  assert.ok(connections.references('hu5-3').includes('/history/timeline/silk-road.html'));
   for (const [key, source, targets] of [
     ['events', data.TIMELINE_EVENTS, history.map(lesson => '#lesson-' + lesson.id)],
     ['eras', data.TIMELINE_ERAS, [

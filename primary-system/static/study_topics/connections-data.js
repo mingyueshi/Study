@@ -70,6 +70,7 @@ window.STUDY_TOPIC_CONNECTIONS = {
     },
   },
   backlinks: {
+    'hu5-3': [['silkRoad', '', '打开陆上与海上丝路专题，找城市、贸易品和文化交流']],
     'hu1-2': [['calendar', '#cal-title', '看公元纪年和跨年计算']],
     'hu1-3': [['calendar', '#dyn-title', '按时间看十六个朝代更替']],
     'gu4-1': [['solarTerms', '#liqiu', '立秋还很热？比较节气与当天的天气'], ['solarTerms', '#qingming', '清明一定下雨吗？带着诗句想一想']],

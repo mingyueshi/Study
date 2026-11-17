@@ -26,6 +26,7 @@
   const people = window.HistoryPeople.peopleForEvent(ev.id);
   const civilizations = window.HistoryCivilizations.forEvent(ev.id);
   const technologies = window.AncientScience.forEvent(ev.id);
+  const silkRoutes = window.SilkRoad.forEvent(ev.id);
   document.title = ev.title + ' · 历史大事';
   const eraCrumb = document.getElementById('event-era');
   eraCrumb.textContent = era.name;
@@ -91,6 +92,7 @@
   ${people.length ? `<section class="hp-event-people" aria-labelledby="event-people-title"><h2 id="event-people-title">走进这件大事里的人物</h2><nav aria-label="相关人物名片">${people.map(person=>`<a href="${window.HistoryPeople.personHref(person)}">${esc(person.name)} · 关系与关键决策 →</a>`).join('')}</nav></section>` : ''}
   ${civilizations.length ? `<section class="hp-event-people" aria-labelledby="event-civilizations-title"><h2 id="event-civilizations-title">走进相关文明</h2><nav aria-label="相关文明档案">${civilizations.map(c=>`<a href="${window.HistoryCivilizations.detailHref(c)}">${esc(c.name)} · 建筑、文字与制度 →</a>`).join('')}</nav></section>` : ''}
   ${technologies.length ? `<section class="hp-event-people" aria-labelledby="event-science-title"><h2 id="event-science-title">走进相关科技</h2><nav aria-label="相关科技档案">${technologies.map(t=>`<a href="${window.AncientScience.detailHref(t)}">${esc(t.title)} →</a>`).join('')}</nav></section>` : ''}
+  ${silkRoutes.length?`<section class="hp-event-people" aria-labelledby="event-silk-title"><h2 id="event-silk-title">沿丝路继续探索</h2><nav aria-label="相关丝路路线">${silkRoutes.map(r=>`<a href="${window.SilkRoad.routeHref(r.id)}">${esc(r.title)} · 城市、贸易品与文化交流 →</a>`).join('')}</nav></section>`:''}
   <section class="event-reading-chain" aria-labelledby="reading-next-title">
     <p class="tl-eyebrow">顺着线索继续读</p>
     <h2 id="reading-next-title">${next ? '下一件相关大事' : '这条阅读线索读到这里'}</h2>

@@ -13,7 +13,7 @@ STATIC = PROJECT / 'static' / 'study_topics'
 TOPICS = {
     'history': ('', '', ('index',)),
     'geo': ('', '', ('index',)),
-    'history-timeline': ('study-timeline', 'history-timeline', ('index', 'timeline', 'era', 'event', 'dynasties', 'people', 'person', 'civilizations', 'civilization', 'ancient-science', 'technology')),
+    'history-timeline': ('study-timeline', 'history-timeline', ('index', 'timeline', 'era', 'event', 'dynasties', 'people', 'person', 'civilizations', 'civilization', 'ancient-science', 'technology', 'silk-road', 'silk-city')),
     'geo-map': ('study-atlas', 'geography-atlas', ('index', 'china', 'china-3d', 'animals', 'plants', 'world', 'world-3d', 'world-animals', 'world-plants', 'province', 'places', 'routes', 'gallery')),
 }
 COURSES = ('astro', 'lit', 'sci', 'hanzi-evo')
@@ -107,12 +107,16 @@ def template(source, topic, page, theme, index_route):
         if path == 'platform-theme.css':
             continue
         asset_path = 'sci/' + Path(path).name if topic == 'geo' and path.startswith('../sci-process') else topic + '/' + path
+        if topic == 'history-timeline' and path in ('../history/media.js', '../history/knowledge-dynasties.js'):
+            asset_path = 'history/' + Path(path).name
         asset_url = "{% static 'study_topics/" + asset_path + "' %}"
         if topic in ('geo', 'history') and path == 'lab.js':
             asset_url += '?v=20261114b9' if topic == 'geo' else '?v=20261114b7'
         if topic == 'geo' and (path.startswith('../sci-process') or path in ('earth-data.js', 'earth.js')):
             asset_url += '?v=20261114b9'
         if topic == 'geo-map' and page in ('china', 'world', 'china-3d', 'world-3d') and path.endswith(('.css', '.js')):
+            asset_url += '?v=' + sha256(resource_content(SOURCE / topic / path, topic, theme)).hexdigest()[:12]
+        if topic == 'history-timeline' and Path(path).name.startswith(('silk-road', 'silk-city')) and path.endswith(('.css', '.js')):
             asset_url += '?v=' + sha256(resource_content(SOURCE / topic / path, topic, theme)).hexdigest()[:12]
         if path.endswith('.css'):
             assets.append(f'<link rel="stylesheet" href="{asset_url}">')

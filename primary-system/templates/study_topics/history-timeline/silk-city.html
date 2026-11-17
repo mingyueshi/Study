@@ -1,0 +1,29 @@
+{% extends "study_topics/page.html" %}
+{% load static %}
+{# 由 scripts/build_study_topics.py 生成。 #}
+{% block title %}城市档案 · 丝绸之路 · 乐学堂{% endblock %}
+{% block study_assets %}
+<link rel="stylesheet" href="{% static 'study_topics/history-timeline/styles.css' %}">
+<link rel="stylesheet" href="{% static 'study_topics/history-timeline/people.css' %}">
+<link rel="stylesheet" href="{% static 'study_topics/history-timeline/silk-road.css' %}?v=468d774d1b9a">
+<script src="{% static 'study_topics/history-timeline/content.js' %}" defer></script>
+<script src="{% static 'study_topics/history-timeline/timeline-data.js' %}" defer></script>
+<script src="{% static 'study_topics/history-timeline/media-data.js' %}" defer></script>
+<script src="{% static 'study_topics/history-timeline/people-data.js' %}" defer></script>
+<script src="{% static 'study_topics/history/knowledge-dynasties.js' %}" defer></script>
+<script src="{% static 'study_topics/history/media.js' %}" defer></script>
+<script src="{% static 'study_topics/history-timeline/silk-road-data.js' %}?v=6aea47cc2b60" defer></script>
+<script src="{% static 'study_topics/history-timeline/silk-road-geo.js' %}?v=17999024b82e" defer></script>
+<script src="{% static 'study_topics/history-timeline/shared.js' %}" defer></script>
+<script src="{% static 'study_topics/history-timeline/silk-road-shared.js' %}?v=66f72023475c" defer></script>
+<script src="{% static 'study_topics/history-timeline/silk-city-app.js' %}?v=80997a718f3c" defer></script>
+{% endblock %}
+{% block study_content %}
+<div class="study-timeline">
+<div class="tl-shell hp-shell"><div class="silk-city-topic" id="top"><nav class="tl-sysnav" aria-label="历史时间轴系统页面导航"><a class="tl-sysnav-brand" href="{% url 'history-timeline' %}">历史时间轴<small>中国史与世界史</small></a><a data-page href="timeline.html">双轨时间轴</a><a data-page href="era.html">时代站</a><a data-page href="dynasties.html">朝代与版图</a><a data-page href="people.html">历史人物馆</a><a data-page href="civilizations.html">世界文明巡礼</a><a data-page href="ancient-science.html">中国古代科技</a><a data-page href="silk-road.html" aria-current="page">丝绸之路</a></nav>
+<nav class="tl-breadcrumb" aria-label="所在位置"><a href="silk-road.html">丝绸之路</a><b id="silk-city-crumb" aria-current="page">城市档案</b></nav><div id="silk-city-page"></div>
+<noscript><p class="tl-notice">请启用 JavaScript 阅读路线图与城市档案。基础资料、图片与录音保存在本系统。</p></noscript>
+</div></div>
+<div class="tl-footer"><a href="silk-road.html">丝绸之路</a> · <a href="timeline.html">双轨时间轴</a> · <a href="#top">回到顶部 ↑</a></div>
+</div>
+{% endblock %}

@@ -1,0 +1,62 @@
+/* 丝路：自然底图、城市节点与贸易证据。 */
+.sr-section { margin-bottom: 26px; padding: clamp(18px,2.4vw,30px); border: 1px solid var(--tl-line); border-radius: 20px; background: var(--tl-card,#fff); }
+.sr-section > h2 { margin: 0 0 12px; font-size: 29px; }
+.sr-section p,.sr-section li { font-size: 19px; line-height: 1.9; }
+.sr-section > p,.sr-city-context > p { max-width: 78ch; }
+.sr-controls,.sr-stops,.sr-pager { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin-block: 16px; }
+.sr-controls button,.sr-stops button,.sr-pager button { padding: 10px 15px; min-height: 44px; border: 1px solid var(--tl-line); border-radius: 10px; font: inherit; font-size: 17px; font-weight: 750; color: var(--tl-pair-deep); background: var(--tl-card,#fff); cursor: pointer; }
+.sr-controls button[aria-pressed="true"],.sr-stops button[aria-pressed="true"] { color: #fff; background: var(--tl-pair-deep); border-color: var(--tl-pair-deep); }
+.sr-pager button:disabled { opacity: .45; cursor: default; }
+.sr-map-wrap { overflow: hidden; border: 1px solid var(--tl-line); border-radius: 16px; background: #eaf3f5; }
+.sr-map { display: block; width: 100%; max-height: 780px; height: auto; background: #eaf3f5; }
+.sr-map-labels text { fill: #637c75; font-size: 21px; font-weight: 700; text-anchor: middle; paint-order: stroke; stroke: #edf5e9; stroke-width: 4; stroke-linejoin: round; }
+.sr-map-cities > g { cursor: pointer; }
+.sr-map-cities > g:focus { outline: none; }
+.sr-map-cities > g:focus circle { stroke: #da7622; stroke-width: 7px; }
+.sr-map-number { font-size: 19px; font-weight: 800; text-anchor: middle; dominant-baseline: middle; }
+.sr-map-current { fill: #284b42; font-size: 25px; font-weight: 800; paint-order: stroke; stroke: #fffdf4; stroke-width: 6; stroke-linejoin: round; }
+.sr-legend { display: flex; flex-wrap: wrap; gap: 10px 24px; margin-block: 14px; font-size: 16px; }
+.sr-legend span::before { display: inline-block; width: 35px; margin-right: 9px; border-top: 4px solid #a86732; content: ''; vertical-align: middle; }
+.sr-legend span:last-child::before { border-top: 4px dashed #277e97; }
+.sr-note { padding: 15px 19px; border-left: 4px solid var(--person-color,var(--tl-pair-deep)); border-radius: 8px; color: var(--tl-ink); background: var(--tl-pair-soft); font-size: 17px !important; line-height: 1.85; }
+.sr-route-grid,.sr-good-grid,.sr-city-grid,.sr-exchange-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,310px),1fr)); gap: 20px; }
+.sr-exchange-grid { grid-template-columns: repeat(auto-fit,minmax(min(100%,480px),1fr)); align-items: start; }
+.sr-route-intro,.sr-good,.sr-city-card,.sr-exchange { min-width: 0; padding: 22px; border: 1px solid var(--tl-line); border-top: 4px solid var(--person-color,var(--tl-pair-deep)); border-radius: 14px; background: var(--tl-card,#fff); }
+.sr-route-intro h3,.sr-good h3,.sr-city-card h3,.sr-exchange h3 { margin: 0 0 12px; font-size: 25px; line-height: 1.6; }
+.sr-route-intro p,.sr-good p,.sr-city-card p,.sr-exchange p { margin: 10px 0; font-size: 18px; line-height: 1.85; }
+.sr-route-intro h4,.sr-good h4 { margin: 18px 0 4px; font-size: 18px; }
+.sr-city-card a,.sr-preview a { color: var(--tl-pair-deep); }
+.sr-alias,.sr-period { color: var(--tl-ink-soft); font-size: 16px !important; }
+.sr-preview { margin-top: 20px; padding: 20px 24px; border-left: 5px solid var(--person-color); border-radius: 12px; background: var(--tl-pair-soft); }
+.sr-preview h3 { margin: 6px 0; font-size: 28px; }
+.sr-preview p { margin: 8px 0; font-size: 19px; line-height: 1.85; }
+.sr-branches { padding: 0; list-style: none; }
+.sr-branches li { padding: 15px 0; border-top: 1px solid var(--tl-line); }
+.sr-branches b { display: block; font-size: 19px; }
+.sr-branches p { margin: 5px 0; font-size: 17px; }
+.sr-exchange details summary { padding-block: 12px; color: var(--tl-pair-deep); font-size: 18px; font-weight: 750; cursor: pointer; }
+.sr-evidence { display: grid; grid-template-columns: minmax(170px,40%) minmax(0,1fr); gap: 24px; align-items: center; margin: 24px 0; padding: 20px; border: 1px solid var(--tl-line); border-radius: 14px; }
+.sr-evidence img { display: block; width: 100%; height: auto; max-height: 430px; object-fit: contain; }
+.sr-evidence b { font-size: 22px; }
+.sr-evidence p { margin: 12px 0; font-size: 18px; line-height: 1.85; }
+.sr-evidence small { font-size: 14px; line-height: 1.75; color: var(--tl-ink-soft); overflow-wrap: anywhere; }
+.sr-evidence a { min-width: 0; color: var(--tl-pair-deep); }
+.sr-exchange .sr-evidence { grid-template-columns: 1fr; padding: 16px; }
+.silk-city-topic .hp-profile-section > p,.silk-city-topic .hp-profile-section details > p { max-width: 78ch; font-size: 19px; line-height: 1.9; }
+.sr-city-context > div > p { max-width: 65ch; }
+.sr-milestones { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,270px),1fr)); gap: 16px; }
+.sr-milestones li { padding: 20px; border-left: 4px solid var(--tl-pair); background: var(--tl-pair-soft); border-radius: 12px; }
+.sr-milestones p { margin: 8px 0; font-size: 18px; }
+.sr-milestones a { color: var(--tl-pair-deep); font-size: 17px; font-weight: 750; }
+.sr-audio { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-block: 18px; }
+.sr-audio audio { width: min(100%,430px); }
+.sr-audio a { color: var(--tl-pair-deep); font-size: 16px; }
+#silk-search { width: 100%; min-width: 0; padding: 12px; border: 1px solid var(--tl-line); border-radius: 10px; color: var(--tl-ink); background: var(--tl-card,#fff); font: inherit; font-size: 17px; }
+.sr-city-hero { grid-template-columns: 1fr; }
+.sr-city-hero h1 { line-height: 1.5; }
+.sr-city-context { display: grid; grid-template-columns: minmax(0,1.3fr) minmax(240px,1fr); gap: 25px; align-items: start; }
+.sr-city-context p { margin-top: 0; font-size: 20px; line-height: 1.9; }
+.sr-city-context .sr-map { max-height: 520px; }
+.sr-source-fold summary { color: var(--tl-pair-deep); font-size: 16px; cursor: pointer; }
+@container people-reading (max-width: 800px) { .sr-city-context,.sr-evidence { grid-template-columns: 1fr; } }
+@media(max-width: 480px) { .sr-section { padding: 16px; } .sr-good,.sr-exchange,.sr-city-card,.sr-route-intro { padding: 17px; } .sr-controls button,.sr-stops button { padding-inline: 10px; } .sr-preview { padding: 16px; } }

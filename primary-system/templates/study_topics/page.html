@@ -1,13 +1,14 @@
 {% extends 'base.html' %}
 {% load static solar_learning %}
 {% block content %}
-<script src="{% static 'study_topics/connections-data.js' %}?v=4" defer></script>
+<script src="{% static 'study_topics/connections-data.js' %}?v=5" defer></script>
 <script src="{% static 'study_topics/connections.js' %}?v=2" defer></script>
 {% block study_assets %}{% endblock %}
 <link rel="stylesheet" href="{% static 'study_topics/platform-bridge.css' %}">
 <div class="study-topic-frame color-{{ study_area }}"
      data-history-lesson="{% url 'history-study' %}" data-geography-lesson="{% url 'geography-study' %}"
      data-calendar="{% url 'history-timeline-dynasties' %}" data-china-map="{% url 'geography-atlas-china' %}"
+     data-silk-road="{% url 'history-timeline-silk-road' %}"
      data-solar-terms="{% url 'solar-terms' %}"
      {% if course_slug %}
      data-history-event="{% url 'history-timeline-event' %}"
@@ -27,10 +28,11 @@
     <a href="{% url route %}">{{ label }} ↗</a>
     {% endfor %}
     {% elif study_area == 'history' %}
-    <a href="{% url 'history-timeline-timeline' %}" {% if current == 'history-timeline-timeline' %}aria-current="page"{% elif current != 'history-study' and current != 'history-timeline-people' and current != 'history-timeline-person' and current != 'history-timeline-civilizations' and current != 'history-timeline-civilization' and current != 'history-timeline-ancient-science' and current != 'history-timeline-technology' %}aria-current="location"{% endif %}>历史双轨时间轴</a>
+    <a href="{% url 'history-timeline-timeline' %}" {% if current == 'history-timeline-timeline' %}aria-current="page"{% elif current != 'history-study' and current != 'history-timeline-people' and current != 'history-timeline-person' and current != 'history-timeline-civilizations' and current != 'history-timeline-civilization' and current != 'history-timeline-ancient-science' and current != 'history-timeline-technology' and current != 'history-timeline-silk-road' and current != 'history-timeline-silk-city' %}aria-current="location"{% endif %}>历史双轨时间轴</a>
     <a href="{% url 'history-timeline-people' %}" {% if current == 'history-timeline-people' %}aria-current="page"{% elif current == 'history-timeline-person' %}aria-current="location"{% endif %}>历史人物馆</a>
     <a href="{% url 'history-timeline-civilizations' %}" {% if current == 'history-timeline-civilizations' %}aria-current="page"{% elif current == 'history-timeline-civilization' %}aria-current="location"{% endif %}>世界文明巡礼</a>
     <a href="{% url 'history-timeline-ancient-science' %}" {% if current == 'history-timeline-ancient-science' %}aria-current="page"{% elif current == 'history-timeline-technology' %}aria-current="location"{% endif %}>中国古代科技</a>
+    <a href="{% url 'history-timeline-silk-road' %}" {% if current == 'history-timeline-silk-road' %}aria-current="page"{% elif current == 'history-timeline-silk-city' %}aria-current="location"{% endif %}>丝绸之路</a>
     <a href="{% url 'history-study' %}" {% if current == 'history-study' %}aria-current="page"{% endif %}>历史精讲</a>
     {% elif study_area == 'geography' %}
     <a href="{% url 'geography-atlas-china' %}" {% if current == 'geography-atlas-china' %}aria-current="page"{% elif current != 'geography-study' and current != 'geography-atlas-animals' and current != 'geography-atlas-world-animals' and current != 'geography-atlas-china-3d' and current != 'geography-atlas-world-3d' and current != 'geography-atlas-plants' and current != 'geography-atlas-world-plants' %}aria-current="location"{% endif %}>地理图谱</a>

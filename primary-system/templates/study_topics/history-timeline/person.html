@@ -13,13 +13,15 @@
 <script src="{% static 'study_topics/history-timeline/shared.js' %}" defer></script>
 <script src="{% static 'study_topics/history-timeline/people-shared.js' %}" defer></script>
 <script src="{% static 'study_topics/history-timeline/ancient-science-shared.js' %}" defer></script>
+<script src="{% static 'study_topics/history-timeline/silk-road-data.js' %}?v=6aea47cc2b60" defer></script>
+<script src="{% static 'study_topics/history-timeline/silk-road-shared.js' %}?v=66f72023475c" defer></script>
 <script src="{% static 'study_topics/history-timeline/person-app.js' %}" defer></script>
 {% endblock %}
 {% block study_content %}
 <div class="study-timeline">
 <div class="tl-shell hp-shell">
     <div class="person-topic" id="top">
-      <nav class="tl-sysnav" aria-label="历史时间轴系统页面导航"><a class="tl-sysnav-brand" href="people.html">历史人物馆<small>名片、关系与选择</small></a><a href="timeline.html">双轨时间轴</a><a href="era.html">时代站</a><a href="dynasties.html">朝代与版图</a><a href="civilizations.html">世界文明巡礼</a><a data-page href="ancient-science.html">中国古代科技</a></nav>
+      <nav class="tl-sysnav" aria-label="历史时间轴系统页面导航"><a class="tl-sysnav-brand" href="people.html">历史人物馆<small>名片、关系与选择</small></a><a href="timeline.html">双轨时间轴</a><a href="era.html">时代站</a><a href="dynasties.html">朝代与版图</a><a href="civilizations.html">世界文明巡礼</a><a data-page href="ancient-science.html">中国古代科技</a><a data-page href="silk-road.html">丝绸之路</a></nav>
       <nav class="tl-breadcrumb" aria-label="所在位置"><a href="people.html">历史人物馆</a><b id="person-crumb" aria-current="page">人物档案</b></nav>
       <div id="person-page"></div>
       <noscript><p class="tl-notice">请启用 JavaScript 阅读人物档案。</p></noscript>

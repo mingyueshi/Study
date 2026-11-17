@@ -6,6 +6,8 @@
 
 | 页面 | 可以做什么 |
 | --- | --- |
+| `silk-road.html` | 切换陆海路网、地图点选城市、聚焦或全览，探索贸易品、文化交流和已有精讲。 |
+| `silk-city.html?city=quanzhou` | 城市的地理、贸易作用、材料证据、讨论问题与时间轴入口。 |
 | `ancient-science.html` | 按六个领域与关键词浏览 12 个科技档案，直达三个原理演示。 |
 | `technology.html?topic=pi` | 阅读原理、分步解释、实物材料、影响、辨误与讨论题，联系人物和中外时间轴。 |
 | `index.html` | 按时间选时代站，或进入总时间轴查找大事。 |
@@ -62,6 +64,12 @@
 
 8 张新增图片在 `assets/ancient-science/`，另有 5 项复用已有事件与人物图像的主出处，图注区分实物、拓片、模型与后世纪念像。详见[科技资料与素材说明](ancient-science-SOURCES.md)。科技首页、档案与演示适应宽屏和竖屏，目录默认在右，可切换左右并保存。
 
+## 丝绸之路
+
+两类路网、7 条代表性分支、12 座城市、6 类贸易品与 4 组文化交流，维护在 `silk-road-data.js`。地图支持选城、前后浏览、聚焦与全览；侧栏路线同时筛选地图、商品与交流，关键词只筛城市目录。`silk-road.html?route=sea&city=quanzhou#route-map` 可恢复路线与城市，`silk-city.html?city=quanzhou#city-evidence` 直达材料部分。目录与档案默认在右侧，可切换左右并记忆。
+
+直接复用历史精讲 `hu5-3` 的定义、稳定 ID、录音与文字稿，以及既有宝船模型与航海图；精讲、人物与事件提供反向入口。4 张新增图像含出处，路线注明年代与概略性质，不把目录顺序当作一趟航行。自然底图由项目内保存的 Natural Earth 输入生成，没有在线地图依赖。详细维护、素材和证据边界见[丝路资料说明](silk-road-SOURCES.md)。
+
 ## 数据与链接
 
 文明巡礼共 8 站、32 个知识站、16 项图像材料。`civilizations-data.js` 是正文、主题、观察问题、年代与事件关联的主出处；11 张新增图片放在 `assets/civilizations/`，其余 5 项用 `mediaEvent` 复用已有事件素材与元数据。详见[文明巡礼资料说明](civilizations-SOURCES.md)。
@@ -77,6 +85,8 @@
 | `people-shared.js` | 人物筛选、事件反向关联、关系索引及无外部依赖的 SVG 关系图。 |
 | `civilizations-data.js` / `assets/civilizations/` | 文明名片、四主题知识站、图像与原始出处、观察问答、材料边界、年代节点和事件关联。 |
 | `ancient-science-data.js` / `assets/ancient-science/` | 科技正文、六类索引、原理演示说明、图像来源和证据边界。 |
+| `silk-road-data.js` / `silk-road-geo.js` | 丝路路线、城市、商品、文化交流、材料出处及本地自然底图。 |
+| `silk-road-shared.js` | 丝路索引、经纬度投影、地图与城市检索、精讲与图像复用。 |
 | `ancient-science-shared.js` | 科技检索、人物与事件反向索引、共享图像解析、割圆界限与演示状态。 |
 | `civilizations-shared.js` | 文明索引、共享素材解析、主题检索、比较状态与阅读链接。 |
 | `media-data.js` / `assets/history/` | 按事件 id 归档的教学素材和本地媒体文件。图片为缩放或压缩后的教学副本，出处可查看原件与授权。 |
@@ -99,8 +109,10 @@ node content_sources/test/test-timeline.js
 node content_sources/test/test-history-people.js
 node content_sources/test/test-civilizations.js
 node content_sources/test/test-ancient-science.js
+node content_sources/test/test-silk-road.js
 node --test scripts/test_timeline_navigation.cjs
 node --test scripts/test_history_people.cjs
 node --test scripts/test_civilizations.cjs
 node --test scripts/test_ancient_science.cjs
+node --test scripts/test_silk_road.cjs
 ```

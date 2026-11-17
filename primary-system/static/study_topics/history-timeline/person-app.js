@@ -10,6 +10,7 @@
   const group=H.groupMap.get(person.group), era=window.TIMELINE_ERAS.find(era=>era.id===person.era);
   const image=person.image, links=H.relationsFor(person.id);
   const technologies=window.AncientScience.forPerson(person.id);
+  const silkRoutes=window.SilkRoad.forPerson(person.id);
   const events=person.eventIds.map(id=>window.TIMELINE_EVENTS.find(event=>event.id===id));
   const imageURL=new URL(image.src,H.assetBase).href;
   document.title=person.name+' · 历史人物馆';document.getElementById('person-crumb').textContent=person.name;
@@ -29,9 +30,10 @@
       <section class="hp-profile-section" id="relationships" data-tl-anchor tabindex="-1"><p class="tl-eyebrow">一个人连着许多人</p><h2>人物关系网</h2><p class="hp-section-intro">实线表示任职或交往，虚线表示学术承接、书写推重或比较背景。点人物打开名片，下方可核查关系依据。</p>${H.graphHTML(person.id)}${H.relationListHTML(person.id)}<a class="hp-text-link" href="people.html?view=network&person=${esc(person.id)}">到关系网里逐人展开 →</a></section>
       <section class="hp-profile-section" id="person-events" data-tl-anchor tabindex="-1"><p class="tl-eyebrow">人物放回时间轴</p><h2>相关大事与时代</h2><nav class="hp-event-links">${events.map(event=>`<a href="${eventHref(event)}"><small>${esc(event.year)}</small><b>${esc(event.title)} →</b></a>`).join('')}<a href="timeline.html?year=${person.anchorYear}&zoom=100"><small>前后 100 年</small><b>到 ${person.anchorYear<0?'公元前 '+(-person.anchorYear):person.anchorYear} 年前后看中外大事 →</b></a><a href="${eraHref(era)}"><small>${esc(era.span)}</small><b>进入${esc(era.name)}时代站 →</b></a></nav></section>
       ${technologies.length?`<section class="hp-profile-section" id="person-science" data-tl-anchor tabindex="-1"><h2>从人物走进科技</h2><nav class="hp-event-links">${technologies.map(t=>`<a href="${window.AncientScience.detailHref(t)}"><small>${esc(t.people.find(p=>p.id===person.id).role)}</small><b>${esc(t.title)} →</b></a>`).join('')}</nav></section>`:''}
+      ${silkRoutes.length?`<section class="hp-profile-section" id="person-silk" data-tl-anchor tabindex="-1"><h2>沿丝路继续探索</h2><nav class="hp-event-links">${silkRoutes.map(r=>`<a href="${window.SilkRoad.routeHref(r.id)}"><small>${esc(r.period)}</small><b>${esc(r.title)} · 路线与交流 →</b></a>`).join('')}</nav></section>`:''}
       <section class="hp-profile-section" id="person-sources" data-tl-anchor tabindex="-1"><h2>资料出处</h2><p>事实依据与讲解分开看；延伸核查需要联网，基础内容与图像已保存在本地。</p>${H.sourcesHTML(person.sources)}</section>
     </article>
-    <aside class="hp-profile-sidebar"><div class="hp-side-title"><h2>${esc(person.name)}</h2><p>${esc(group.label)} · ${esc(person.role)}</p></div><nav class="hp-profile-nav" aria-label="人物档案目录"><a href="#profile">人物名片</a><a href="#person-facts">主要事迹</a><a href="#decisions">关键决策</a><a href="#relationships">人物关系网 · ${links.length} 条</a><a href="#person-events">相关大事</a>${technologies.length?'<a href="#person-science">相关科技</a>':''}<a href="#person-sources">核查出处</a></nav><a class="hp-text-link" href="people.html?group=${esc(person.group)}">回到${esc(group.label)}名片 →</a></aside>
+    <aside class="hp-profile-sidebar"><div class="hp-side-title"><h2>${esc(person.name)}</h2><p>${esc(group.label)} · ${esc(person.role)}</p></div><nav class="hp-profile-nav" aria-label="人物档案目录"><a href="#profile">人物名片</a><a href="#person-facts">主要事迹</a><a href="#decisions">关键决策</a><a href="#relationships">人物关系网 · ${links.length} 条</a><a href="#person-events">相关大事</a>${technologies.length?'<a href="#person-science">相关科技</a>':''}${silkRoutes.length?'<a href="#person-silk">丝路专题</a>':''}<a href="#person-sources">核查出处</a></nav><a class="hp-text-link" href="people.html?group=${esc(person.group)}">回到${esc(group.label)}名片 →</a></aside>
   </div>`;
   bindAnchors(root);
 })();

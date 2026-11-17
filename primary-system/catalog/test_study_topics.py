@@ -13,6 +13,7 @@ HISTORY_PAGES = (
     'history-timeline-people', 'history-timeline-person',
     'history-timeline-civilizations', 'history-timeline-civilization',
     'history-timeline-ancient-science', 'history-timeline-technology',
+    'history-timeline-silk-road', 'history-timeline-silk-city',
 )
 GEOGRAPHY_PAGES = (
     'geography-study', 'geography-atlas', 'geography-atlas-china', 'geography-atlas-china-3d',
@@ -129,6 +130,8 @@ class StudyTopicPageTests(SimpleTestCase):
             ('history-timeline-civilizations', 'civilizations.html', '?view=compare&left=egypt&right=maya&theme=writing'),
             ('history-timeline-ancient-science', 'technology.html', '?topic=pi&sides=96#principle'),
             ('history-timeline-technology', 'ancient-science.html', '?category=mathematics'),
+            ('history-timeline-silk-road', 'silk-city.html', '?city=quanzhou#city-evidence'),
+            ('history-timeline-silk-city', 'silk-road.html', '?route=sea&city=quanzhou#route-map'),
             ('geography-atlas', 'china.html', '?place=f20'),
             ('geography-atlas-china', 'province.html', '?adcode=110000'),
             ('geography-atlas-china', 'china-3d.html', '?place=p710000'),
@@ -157,6 +160,7 @@ class StudyTopicPageTests(SimpleTestCase):
             ('history-timeline-timeline', 'history-study', '历史精讲'),
             ('history-study', 'history-timeline-people', '历史人物馆'),
             ('history-study', 'history-timeline-civilizations', '世界文明巡礼'),
+            ('history-study', 'history-timeline-silk-road', '丝绸之路'),
             ('geography-atlas-china', 'geography-study', '地理小课堂'),
             ('geography-atlas-china', 'geography-atlas-china-3d', '3D 中国地图'),
             ('geography-atlas-world', 'geography-atlas-world-3d', '3D 世界地图'),
@@ -215,6 +219,22 @@ class StudyTopicPageTests(SimpleTestCase):
         response = self.client.get(reverse('history-timeline-technology') + '?topic=pi')
         self.assertContains(response, f'href="{reverse("history-timeline-ancient-science")}" aria-current="location"')
 
+    def test_silk_road_reuses_lesson_assets_and_loads_data_before_apps(self):
+        prefix = '/static/study_topics/'
+        for route, consumer in (
+            ('history-timeline-silk-road', 'silk-road-app.js'),
+            ('history-timeline-silk-city', 'silk-city-app.js'),
+        ):
+            with self.subTest(route=route):
+                response = self.client.get(reverse(route))
+                assets = [asset.split('?')[0] for asset in TopicMarkup(response.content.decode()).assets]
+                for dependency in ('history/knowledge-dynasties.js', 'history/media.js', 'history-timeline/silk-road-data.js', 'history-timeline/silk-road-geo.js', 'history-timeline/silk-road-shared.js'):
+                    self.assertLess(assets.index(prefix + dependency), assets.index(prefix + 'history-timeline/' + consumer))
+                self.assertContains(response, '丝绸之路')
+        response = self.client.get(reverse('history-timeline-silk-city') + '?city=quanzhou')
+        self.assertContains(response, f'href="{reverse("history-timeline-silk-road")}" aria-current="location"')
+        self.assertContains(response, f'data-silk-road="{reverse("history-timeline-silk-road")}"')
+
     def test_calendar_hosts_local_audio_and_atlas_links_to_map_skills(self):
         response = self.client.get(reverse('history-timeline-dynasties'))
         self.assertContains(response, 'id="cal-title"')
@@ -260,7 +280,7 @@ class StudyTopicEntryTests(TestCase):
 
     def test_history_and_geography_keep_their_primary_cards_first(self):
         for area, shown, hidden in (
-            ('history', ('history-timeline-timeline', 'history-timeline-people', 'history-timeline-civilizations', 'history-timeline-ancient-science'), ('geography-atlas-china', 'astronomy-study')),
+            ('history', ('history-timeline-timeline', 'history-timeline-people', 'history-timeline-civilizations', 'history-timeline-ancient-science', 'history-timeline-silk-road'), ('geography-atlas-china', 'astronomy-study')),
             ('geography', ('geography-atlas-china', 'astronomy-study', 'solar-terms'), ('history-timeline-timeline', 'literature-study')),
         ):
             with self.subTest(area=area):
