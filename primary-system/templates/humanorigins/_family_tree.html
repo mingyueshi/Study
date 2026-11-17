@@ -1,0 +1,30 @@
+<section id="origins-family-tree" class="origins-panel origins-family-tree" aria-labelledby="origins-tree-heading">
+  <p class="origins-kicker">用树枝认识分支</p>
+  <h2 id="origins-tree-heading">{{ station.family_tree.title }}</h2>
+  <p>{{ station.family_tree.intro }}</p>
+  <div data-tree-visual hidden>
+    <div class="origins-tree-controls">
+      <button type="button" data-tree-minus aria-label="缩小家谱图">− 缩小</button>
+      <button type="button" data-tree-fit>适应窗口</button>
+      <button type="button" data-tree-plus aria-label="放大家谱图">＋ 放大</button>
+      <output data-tree-scale aria-live="polite"></output>
+    </div>
+    <p id="origins-tree-help" class="origins-note">点人群名称展开详情。放大后可拖动空白处或滚动图面，也可聚焦图面后用方向键移动。</p>
+    <div class="origins-tree-viewport" tabindex="0" role="region" aria-label="可缩放的人类家谱图" aria-describedby="origins-tree-help">
+      <div class="origins-tree-frame">
+        <div class="origins-tree-surface">
+          <svg viewBox="0 0 900 520" width="900" height="520" aria-hidden="true">
+            <path class="origins-tree-trunk" d="M210 235C250 235 245 70 285 70M210 235C250 235 245 330 285 330"/>
+            {% for node in comparison_groups %}<path d="M465 330Q550 330 635 {{ node.tree_y }}" style="stroke: {{ node.person.color }}"/>{% endfor %}
+          </svg>
+          <span class="origins-tree-root">{{ station.family_tree.root_label }}</span>
+          <span class="origins-tree-chimp">{{ station.family_tree.chimp_label }}</span>
+          <span class="origins-tree-human">{{ station.family_tree.human_label }}</span>
+          {% for node in comparison_groups %}<a class="origins-tree-node" href="#family-{{ node.group }}" data-tree-person="{{ node.group }}" style="--node-y: {{ node.tree_y }}px; --person-color: {{ node.person.color }}"><span aria-hidden="true"></span>{{ node.person.label }}</a>{% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div data-tree-fallback>{% include 'humanorigins/_figure.html' with lazy=True %}</div>
+  <p class="origins-note">{{ station.family_tree.note }} <a class="origins-source-link" href="#source-{{ station.family_tree.source }}">分支示意的出处 ↘</a></p>
+</section>

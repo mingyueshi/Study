@@ -38,11 +38,12 @@ def detail(request, slug):
     atlas_groups = []
     comparison_groups = []
     if station.get('comparison'):
-        for card in station['comparison']['cards']:
+        for index, card in enumerate(station['comparison']['cards']):
             person = shared_groups[card['group']]
             start = (400000 - min(person['oldest'], 400000)) / 4000
             related_sites = [clue for clue in china['clues'] if clue.get('group') == card['group']]
-            comparison_groups.append({**card, 'person': person, 'sites': related_sites, 'start': start,
+            comparison_groups.append({**card, 'person': person, 'sites': related_sites,
+                                      'tree_y': 95 + index * 60, 'start': start,
                                       'width': (400000 - person['youngest']) / 4000 - start})
         for bar in station['timeline']['bars']:
             if bar.get('group'):

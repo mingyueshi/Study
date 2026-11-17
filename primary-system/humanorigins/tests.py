@@ -30,6 +30,8 @@ class OriginsContentTests(SimpleTestCase):
                     self.assert_text_fields(figure, 'alt', 'caption', 'credit')
                     self.assertTrue(finders.find(figure['path']), figure['path'])
                     self.assertIn(figure['source'], source_numbers)
+                    if figure.get('observation'):
+                        self.assert_text_fields(figure['observation'], 'prompt', 'answer')
                 self.assertTrue(station['figures'])
                 self.assertEqual(len(station['clues']), 5 if station['slug'] == 'china-sites' else 3)
                 for clue in station['clues']:
@@ -118,6 +120,10 @@ class OriginsContentTests(SimpleTestCase):
         groups = {group['id']: group for group in atlas['groups']}
         markers = {marker['id']: marker for marker in atlas['map_markers']}
         comparison = family['comparison']
+        tree = family['family_tree']
+        self.assert_text_fields(tree, 'title', 'intro', 'root_label', 'chimp_label', 'human_label', 'note')
+        self.assertIn(tree['source'], range(1, len(family['sources']) + 1))
+        self.assertEqual(family['figures'][1]['path'], 'humanorigins/family-tree.svg')
         self.assert_text_fields(comparison, 'title', 'intro', 'note', 'timeline_title', 'timeline_note')
         self.assertEqual({card['group'] for card in comparison['cards']}, set(groups))
         self.assertEqual(len(comparison['cards']), len(groups))
@@ -340,6 +346,22 @@ class OriginsPageTests(SimpleTestCase):
         text = china.content.decode()
         self.assertLess(text.index('id="clue-2"'), text.index('id="site-baishiya"'))
         self.assertLess(text.index('id="site-harbin"'), text.index('id="clue-3"'))
+
+    def test_observation_tools_tree_nodes_and_site_preview_are_connected(self):
+        family = self.client.get(reverse('human-origins-station', args=['family-tree']))
+        self.assertContains(family, 'id="origins-family-tree"', count=1)
+        self.assertContains(family, 'data-tree-person=', count=7)
+        self.assertContains(family, 'humanorigins/family-tree.js')
+        self.assertContains(family, 'id="origins-inspector-stage"', count=1)
+        self.assertContains(family, 'id="origins-detail-lens"', count=1)
+        self.assertContains(family, 'id="origins-inspector-question"', count=1)
+        china = self.client.get(reverse('human-origins-station', args=['china-sites']))
+        self.assertContains(china, 'id="origins-site-preview"', count=1)
+        self.assertContains(china, 'data-site-select', count=10)
+        self.assertContains(china, 'humanorigins/sites.js')
+        first = self.client.get(reverse('human-origins-station', args=['footprints']))
+        self.assertNotContains(first, 'humanorigins/sites.js')
+        self.assertNotContains(first, 'humanorigins/family-tree.js')
 
 
 class OriginsHomeEntryTests(TestCase):

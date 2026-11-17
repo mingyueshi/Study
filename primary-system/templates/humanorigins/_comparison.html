@@ -20,7 +20,7 @@
 
   <div class="origins-family-cards">
     {% for card in comparison_groups %}
-    <details id="family-{{ card.group }}" class="origins-family-card" style="--person-color: {{ card.person.color }}">
+    <details id="family-{{ card.group }}" class="origins-family-card" tabindex="-1" style="--person-color: {{ card.person.color }}">
       <summary><strong><span aria-hidden="true"></span>{{ card.person.label }}</strong><span>{{ card.person.period }}</span><em>展开比较</em></summary>
       <div>
         <p><strong>在哪里发现：</strong>{{ card.person.place }}</p>
@@ -32,6 +32,7 @@
         {% if card.sites %}<nav class="origins-related-links" aria-label="{{ card.person.label }}在中国的实物线索">
           {% for site in card.sites %}<a href="{% url 'human-origins-station' 'china-sites' %}#{{ site.anchor }}">看{{ site.title }}的实物 ↗</a>{% endfor %}
         </nav>{% endif %}
+        {% if station.family_tree %}<a class="origins-tree-return" href="#origins-family-tree">↑ 回到家谱图</a>{% endif %}
       </div>
     </details>
     {% endfor %}

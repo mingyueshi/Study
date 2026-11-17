@@ -682,7 +682,6 @@ body:has(.origins) {
 .origins-image-dialog header { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; align-items: center; margin-bottom: 15px; }
 .origins-image-dialog h2 { margin: 0; font-size: 25px; }
 .origins-image-dialog button { min-height: 44px; padding: 8px 15px; border: 1px solid #bca16b; border-radius: 8px; background: #f7edd4; color: #593f22; font: inherit; cursor: pointer; }
-.origins-image-dialog > img { display: block; width: 100%; max-height: 65dvh; object-fit: contain; }
 .origins-image-dialog > p { font-size: 17px; line-height: 1.8; }
 .origins-image-dialog > a { color: #285f52; text-decoration: underline; }
 body:has(.origins-image-dialog[open]) { overflow: hidden; }
@@ -702,3 +701,48 @@ body:has(.origins-image-dialog[open]) { overflow: hidden; }
 .origins-related-links a:hover { background: #dceee1; }
 .origins-related-links a:focus-visible { outline: 3px solid #246658; outline-offset: 3px; }
 .origins-site-return { display: inline-block; margin-top: 12px; padding: 5px 0; color: var(--origins-brown); font-size: 16px; font-weight: 750; text-decoration: underline; text-underline-offset: .2em; }
+
+/* 观察室：在同一张原图上查看局部，再展开原有观察问题。 */
+.origins-inspector-controls, .origins-tree-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; margin-block: 12px; }
+.origins-inspector-controls label { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; font-size: 17px; }
+.origins-inspector-controls select { width: auto; min-height: 44px; padding: 6px 10px; border: 1px solid #bca16b; border-radius: 8px; background: #fffdf4; color: #593f22; font: inherit; }
+#origins-lens-status { color: #245c4a; font-size: 16px; font-weight: 750; }
+.origins-inspector-stage { position: relative; display: grid; place-items: center; min-height: 90px; margin-top: 14px; overflow: hidden; background: #f6f1e4; border-radius: 10px; }
+.origins-inspector-stage > img { display: block; width: auto; height: auto; max-width: 100%; max-height: 55dvh; user-select: none; }
+.origins-inspector-stage[data-lens="true"] { cursor: crosshair; touch-action: none; }
+.origins-inspector-stage:focus-visible { outline: 3px solid #246658; outline-offset: 3px; }
+.origins-detail-lens { position: absolute; z-index: 2; box-sizing: border-box; border: 4px solid #2a6956; border-radius: 50%; background-color: #f6f1e4; background-repeat: no-repeat; background-origin: border-box; box-shadow: 0 2px 12px #152c2770, inset 0 0 0 2px #fffef8; pointer-events: none; }
+.origins-detail-lens::after { position: absolute; left: calc(50% - 6px); top: calc(50% - 6px); width: 12px; height: 12px; border: 1px solid #fff; box-shadow: 0 0 0 1px #2a6956; content: ""; }
+.origins-image-dialog header { position: sticky; top: 0; z-index: 4; padding-block: 4px; background: #fffef8; }
+#origins-inspector-question { padding: 14px; border: 1px solid #bad3c2; border-radius: 10px; background: #edf7ef; }
+.origins-image-dialog [hidden], .origins-family-tree [hidden], .origins-site-preview[hidden] { display: none !important; }
+
+/* 图面内部可缩放和平移，详情仍在图的下方阅读。 */
+.origins-tree-controls button { min-height: 44px; padding: 8px 13px; border: 1px solid #bca16b; border-radius: 8px; background: #fff9e9; color: #593f22; font: inherit; font-weight: 750; cursor: pointer; }
+.origins-tree-controls button:hover { background: #f4e2b5; }
+.origins-tree-controls button:disabled { opacity: .5; cursor: default; }
+.origins-tree-controls output { color: #245c4a; font-size: 18px; font-weight: 800; font-variant-numeric: tabular-nums; }
+.origins-tree-viewport { height: clamp(280px, 55vw, 560px); width: 100%; min-width: 0; overflow: auto; border: 1px solid #d7c9a6; border-radius: 14px; background: radial-gradient(#d5d8bf 1px, transparent 1px) 0 0 / 18px 18px, #faf6e8; cursor: grab; overscroll-behavior: contain; }
+.origins-tree-viewport[data-dragging="true"] { cursor: grabbing; user-select: none; }
+.origins-tree-frame { position: relative; margin-inline: auto; overflow: hidden; }
+.origins-tree-surface { position: absolute; width: 900px; height: 520px; transform-origin: top left; }
+.origins-tree-surface > svg { position: absolute; inset: 0; width: 900px; height: 520px; fill: none; stroke-width: 4; }
+.origins-tree-surface .origins-tree-trunk { stroke: #937040; stroke-width: 6; }
+.origins-tree-root, .origins-tree-chimp, .origins-tree-human { position: absolute; display: grid; place-items: center; width: 180px; height: 60px; border: 2px solid #ad8b50; border-radius: 16px; background: #f6df9f; color: #65421b; font-size: 23px; font-weight: 800; }
+.origins-tree-root { left: 30px; top: 205px; }
+.origins-tree-chimp { left: 285px; top: 40px; background: #e2efe0; border-color: #69937b; color: #245c4a; }
+.origins-tree-human { left: 285px; top: 300px; }
+.origins-tree-node { position: absolute; left: 635px; top: calc(var(--node-y) - 25px); display: flex; justify-content: center; align-items: center; gap: 9px; width: 210px; height: 50px; border: 2px solid var(--person-color); border-radius: 13px; background: #fffef8; color: var(--person-color); font-size: 23px; font-weight: 800; box-shadow: 0 2px 5px #302d2210; }
+.origins-tree-node > span { width: 16px; height: 16px; background: var(--person-color); border-radius: 50%; }
+.origins-tree-node:hover, .origins-tree-node[aria-current] { outline: 3px solid var(--person-color); outline-offset: 3px; }
+.origins-tree-viewport:focus-visible, .origins-tree-controls button:focus-visible, .origins-tree-node:focus-visible { outline: 3px solid #246658; outline-offset: 3px; }
+.origins-tree-return { display: inline-block; margin-top: 14px; color: #245c4a; text-decoration: underline; text-underline-offset: .2em; font-weight: 750; }
+.origins-family-card:focus, .origins-clue-list > li:focus { outline: 3px solid #246658; outline-offset: 3px; }
+
+.origins-site-preview { padding: clamp(16px, 2.5vw, 24px); border: 2px solid #83b8a6; border-radius: 14px; background: #f3f9ee; scroll-margin-block: 26px; }
+.origins-site-preview:focus { outline: 3px solid #246658; outline-offset: 3px; }
+.origins-site-preview h3 { margin: 0 0 8px; font-size: 25px; }
+.origins-site-preview dt { color: var(--origins-brown); font-size: 15px; font-weight: 800; }
+.origins-site-preview dd { margin: 0 0 10px; font-size: 18px; line-height: 1.8; }
+.origins-site-pin a[aria-current] { outline: 3px solid #246658; outline-offset: 3px; }
+.origins-sites a[aria-current] { background: #e3f1df; outline: 2px solid #83b8a6; }

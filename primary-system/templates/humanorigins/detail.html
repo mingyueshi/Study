@@ -2,7 +2,7 @@
 {% load static %}
 {% block title %}{{ station.title }} · 人类起源 · 乐学堂{% endblock %}
 {% block content %}
-<link rel="stylesheet" href="{% static 'humanorigins/origins.css' %}?v=5">
+<link rel="stylesheet" href="{% static 'humanorigins/origins.css' %}?v=6">
 <div class="origins">
   <a class="origins-back" href="{% url 'human-origins' %}">← 人类起源 · 全部学习站</a>
   <div class="origins-reading" data-sidebar-layout=".origins-station-nav" data-sidebar-width="250px" data-sidebar-breakpoint="900" data-sidebar-collapsible="true" data-sidebar-collapse-key="humanorigins_navigation_collapsed_v1" data-sidebar-label="专题导航">
@@ -25,6 +25,7 @@
         <nav class="origins-jumps" aria-label="本页小节">
           {% if station.atlas %}<a href="#migration-atlas">年代地图 ↓</a><a href="#origins-populations">古人类何时消失 ↓</a>{% endif %}
           {% if station.comparison %}<a href="#origins-comparison">七组人群对照 ↓</a>{% endif %}
+          {% if station.family_tree %}<a href="#origins-family-tree">互动家谱 ↓</a>{% endif %}
           {% if station.map_pins %}<a href="#origins-sites-heading">遗址地图 ↓</a>{% endif %}
           <a href="#origins-clues">看线索 ↓</a>
           <a href="#origins-quiz">做判断 ↓</a>
@@ -43,7 +44,11 @@
         {% include 'humanorigins/_figure.html' with figure=station.figures.0 %}
       {% endif %}
       {% for figure in station.figures|slice:'1:' %}
-        {% include 'humanorigins/_figure.html' with lazy=True %}
+        {% if station.family_tree and forloop.first %}
+          {% include 'humanorigins/_family_tree.html' %}
+        {% else %}
+          {% include 'humanorigins/_figure.html' with lazy=True %}
+        {% endif %}
       {% endfor %}
 
       {% if station.timeline %}
@@ -74,13 +79,20 @@
             <img src="{% static 'poetry/china-map.svg' %}" width="773" height="892" alt="{{ station.site_map.alt }}" loading="lazy">
             {% for pin in china_pins %}
             <div class="origins-site-pin" style="--x: {{ pin.x }}%; --y: {{ pin.y }}%">
-              {% for site in pin.records %}<a class="origins-pin-label" href="#{{ site.anchor }}" aria-label="{{ site.number }} · {{ site.title }}，查看线索"{% if site.person %} style="--person-color: {{ site.person.color }}"{% endif %}>{{ site.number }}</a>{% endfor %}
+              {% for site in pin.records %}<a class="origins-pin-label" href="#{{ site.anchor }}" data-site-select aria-controls="origins-site-preview" aria-label="{{ site.number }} · {{ site.title }}，查看线索"{% if site.person %} style="--person-color: {{ site.person.color }}"{% endif %}>{{ site.number }}</a>{% endfor %}
             </div>
             {% endfor %}
           </div>
+          <section id="origins-site-preview" class="origins-site-preview" tabindex="-1" aria-labelledby="origins-site-preview-heading" hidden>
+            <p class="origins-kicker">已选中 · 遗址介绍</p>
+            <h3 id="origins-site-preview-heading"></h3>
+            <p id="origins-site-preview-period" class="origins-clue-place"></p>
+            <dl><dt>观察到了什么</dt><dd id="origins-site-preview-observation"></dd><dt>它能说明什么</dt><dd id="origins-site-preview-meaning"></dd></dl>
+            <a id="origins-site-preview-full" class="origins-family-map-link">打开完整线索与观察问题 ↓</a>
+          </section>
           <ol class="origins-sites" aria-label="{{ station.site_map.list_label }}">
             {% for clue in reading_clues %}
-            <li><a href="#{{ clue.anchor }}">
+            <li><a href="#{{ clue.anchor }}" data-site-select aria-controls="origins-site-preview">
               <span class="origins-pin-label" aria-hidden="true">{{ forloop.counter }}</span>
               <span><strong>{{ clue.title }}</strong><small>{{ clue.place }}</small><small>{{ clue.period }}</small></span>
             </a></li>
@@ -96,7 +108,7 @@
         <h2 id="origins-clues-heading">看看这些线索</h2>
         <ol class="origins-clue-list">
           {% for clue in reading_clues %}
-          <li id="{{ clue.anchor }}"{% if clue.person %} class="origins-linked-site" style="--person-color: {{ clue.person.color }}"{% endif %}>
+          <li id="{{ clue.anchor }}" tabindex="-1"{% if clue.person %} class="origins-linked-site" style="--person-color: {{ clue.person.color }}"{% endif %}>
             <span class="origins-clue-number" aria-hidden="true">0{{ forloop.counter }}</span>
             <div>
               <h3>{{ clue.title }}</h3>
@@ -175,13 +187,25 @@
         {% endif %}
       </nav>
       <dialog id="origins-image-dialog" class="origins-image-dialog" aria-labelledby="origins-image-heading">
-        <header><h2 id="origins-image-heading">观察大图</h2><button type="button" data-origins-image-close autofocus>关闭大图 ×</button></header>
-        <img id="origins-large-image" alt="">
+        <header><h2 id="origins-image-heading">化石与图像观察室</h2><button type="button" data-origins-image-close autofocus>关闭大图 ×</button></header>
+        <div class="origins-inspector-controls">
+          <button type="button" id="origins-lens-toggle" aria-pressed="true">收起放大镜</button>
+          <label for="origins-lens-power">放大倍数 <select id="origins-lens-power"><option value="2">2 倍</option><option value="3" selected>3 倍</option><option value="4">4 倍</option></select></label>
+          <span id="origins-lens-status" role="status"></span>
+        </div>
+        <p id="origins-lens-help" class="origins-note">在图上移动或拖动放大镜，仔细看局部；也可点观察区，用方向键移动。</p>
+        <div id="origins-inspector-stage" class="origins-inspector-stage" tabindex="0" role="region" aria-label="图像细节观察区" aria-describedby="origins-lens-help">
+          <img id="origins-large-image" alt="" draggable="false">
+          <div id="origins-detail-lens" class="origins-detail-lens" aria-hidden="true" hidden></div>
+        </div>
         <p id="origins-large-caption"></p>
+        <details id="origins-inspector-question" class="origins-observation" hidden><summary></summary><p></p></details>
         <a id="origins-original-image" target="_blank" rel="noopener noreferrer">在新页面看原图 ↗</a>
       </dialog>
     </article>
   </div>
 </div>
-<script src="{% static 'humanorigins/figures.js' %}" defer></script>
+<script src="{% static 'humanorigins/figures.js' %}?v=2" defer></script>
+{% if station.family_tree %}<script src="{% static 'humanorigins/family-tree.js' %}" defer></script>{% endif %}
+{% if station.map_pins %}<script src="{% static 'humanorigins/sites.js' %}" defer></script>{% endif %}
 {% endblock %}
