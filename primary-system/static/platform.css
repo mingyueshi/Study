@@ -361,6 +361,8 @@ textarea { resize: vertical; line-height: 1.9; }
 .pagination a:hover { background: #dbe8cc; }
 .site-footer { display: grid; gap: 12px; padding-block: 28px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
 .site-footer-meta { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; }
+.site-footer-links { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 20px; }
+.site-footer-links a { display: inline-flex; align-items: center; min-height: 44px; color: var(--green); text-decoration: underline; text-underline-offset: 4px; }
 .site-footer-notice { margin: 0; line-height: 1.9; overflow-wrap: anywhere; }
 .site-footer-notice strong { margin-right: .6em; color: var(--ink); font-weight: 650; }
 .site-footer-notice a { color: var(--green); text-decoration: underline; text-underline-offset: .2em; }

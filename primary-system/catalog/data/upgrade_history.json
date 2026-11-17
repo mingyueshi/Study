@@ -1,0 +1,765 @@
+{
+  "schema_version": 1,
+  "records": [
+    {
+      "revision": "239e9c464936a210c0247e96889a4a80dda17edd",
+      "date": "2026-11-17",
+      "title": "新增人物馆文明巡礼与古代科技"
+    },
+    {
+      "revision": "25b2756d68ae83ec2c5344ba3e1f6bfc605bd555",
+      "date": "2026-11-17",
+      "title": "增加页脚版权声明"
+    },
+    {
+      "revision": "9c599ee9385fba213d3948d08e3f3406cffdbecb",
+      "date": "2026-11-17",
+      "title": "完善人体探索图与身体成长时间线"
+    },
+    {
+      "revision": "588476da011aef50be876eef83d6a4841f23a0b9",
+      "date": "2026-11-17",
+      "title": "完善阅读设置并统一前端样式"
+    },
+    {
+      "revision": "385219a83015dd57a54a1df53d520f47a00642e8",
+      "date": "2026-11-17",
+      "title": "完善数学公式例题收藏与搜索"
+    },
+    {
+      "revision": "5b02d43e347bd9d10eabac55564eb2af28186454",
+      "date": "2026-11-17",
+      "title": "升级奥数分步提示与挑战榜"
+    },
+    {
+      "revision": "d16f942e3704bdb499989c95ff8c240b4d9961e3",
+      "date": "2026-11-17",
+      "title": "优化英语专题互动学习"
+    },
+    {
+      "revision": "209e89e1aad9f8535789faf7c1f9bd659402859b",
+      "date": "2026-11-17",
+      "title": "完善人类起源观察交互"
+    },
+    {
+      "revision": "3bb72c14e77a51bea4c244caee6c6deafadcf3e1",
+      "date": "2026-11-17",
+      "title": "完善文学人物关系图和作家名片"
+    },
+    {
+      "revision": "9c979ca4894ebee13461de9cd63f1e7f48d67a96",
+      "date": "2026-11-17",
+      "title": "升级节气馆观察与互动玩法"
+    },
+    {
+      "revision": "018324223d5a589469535d9a94f9ff432e5b5210",
+      "date": "2026-11-17",
+      "title": "升级天文探索互动玩法"
+    },
+    {
+      "revision": "9cffea9f25297695e31f04922232471fb029a1f6",
+      "date": "2026-11-16",
+      "title": "优化地理图谱交互探索"
+    },
+    {
+      "revision": "d339c08d1d54321eafa3377ffba69276f1b95616",
+      "date": "2026-11-16",
+      "title": "完善历史时间轴与版图演示"
+    },
+    {
+      "revision": "07c8a8a71b7875a4fe93763fbb45acafbf0a2a15",
+      "date": "2026-11-16",
+      "title": "深化中国三维地形视觉"
+    },
+    {
+      "revision": "f459899c43e4b7216cae4f00f0865da0f1ebb9d3",
+      "date": "2026-11-16",
+      "title": "完善地球仪互动与主题图层"
+    },
+    {
+      "revision": "c213e271e9a66b045c879d27d69f88b48b9885e1",
+      "date": "2026-11-16",
+      "title": "优化三维地图按需加载与渲染"
+    },
+    {
+      "revision": "c82c9b71465b053f890efbc233d784b755d41c4f",
+      "date": "2026-11-16",
+      "title": "完善三维地图教学与地球仪视觉"
+    },
+    {
+      "revision": "2c9289da076803c73af61b6ec48e709f8b27b1a2",
+      "date": "2026-11-16",
+      "title": "完善中国地形图与世界地球仪互动玩法"
+    },
+    {
+      "revision": "b2813182dccd831e706a8b5c97c32f10dedd42b8",
+      "date": "2026-11-16",
+      "title": "增加中国地图地形剖面仪"
+    },
+    {
+      "revision": "510e37e78616c62e83cb8e8dad5ab924520df2cd",
+      "date": "2026-11-16",
+      "title": "完善专题学习内容与互动功能"
+    },
+    {
+      "revision": "7c5e14bcac76ee34da35ce8c84c11f4762e86340",
+      "date": "2026-11-15",
+      "title": "扩充外星生命案卷与立体世界地图"
+    },
+    {
+      "revision": "6e18c275545e3daeae61162549db0a74397dcecd",
+      "date": "2026-11-15",
+      "title": "优化中国立体地图省份显示"
+    },
+    {
+      "revision": "1b2668c1993d21a2b3446822c3fadbd3194eb68d",
+      "date": "2026-11-15",
+      "title": "增加中国立体地图与沿河漫游"
+    },
+    {
+      "revision": "14c529e37d8bdd1c5508394f2438386bf5c1732d",
+      "date": "2026-11-14",
+      "title": "优化用户中心分栏与登录注册页宽度"
+    },
+    {
+      "revision": "55fb1b53dcbd697785fe4682dbd09e35411acbe0",
+      "date": "2026-11-14",
+      "title": "完善命令帮助分组与配色"
+    },
+    {
+      "revision": "9ac41c20a0b6e83ee36aeb95d4257f031d23efcb",
+      "date": "2026-11-14",
+      "title": "统一语文数学教材页面宽度"
+    },
+    {
+      "revision": "5fbc0526538bfe7d6cc941937fd873654e751f55",
+      "date": "2026-11-14",
+      "title": "完善学习动效与互动演示"
+    },
+    {
+      "revision": "a704a2caee3bd8fe47b2e375b9c2770e8f6b8080",
+      "date": "2026-11-14",
+      "title": "优化宝塔反向代理配置与部署说明"
+    },
+    {
+      "revision": "e47a49278db2cd17a4bacde18a2e5a1ce94d7643",
+      "date": "2026-11-14",
+      "title": "完善部署快捷更新与单项维护"
+    },
+    {
+      "revision": "de8982a56a77ae49dd6598e0b41e77f770a64b0d",
+      "date": "2026-11-14",
+      "title": "优化顶部账号区域与主导航布局"
+    },
+    {
+      "revision": "ebdd2332b5505860c75c0104873210a7c7e81800",
+      "date": "2026-11-14",
+      "title": "升级 Nova 并完善后台数据统计"
+    },
+    {
+      "revision": "7cca3896ede6e1107eb2664a1037cb72154d6e92",
+      "date": "2026-11-14",
+      "title": "完善 Docker 和 PostgreSQL 一键部署"
+    },
+    {
+      "revision": "3e81b9093cdb5726fdd61757831d3f76c3f6eec2",
+      "date": "2026-11-13",
+      "title": "丰富学习专题媒体与优化侧栏交互"
+    },
+    {
+      "revision": "beb09901b1c82208a969b24683ead306b1309883",
+      "date": "2026-11-13",
+      "title": "完善古文精读与历史地理专题"
+    },
+    {
+      "revision": "3bfc828afb9e543ae6ebe59a66147b4d1c9cc60e",
+      "date": "2026-11-13",
+      "title": "完善学习专题与用户中心"
+    },
+    {
+      "revision": "48978dc8ce96bef77aa1e4d765a923ac3cc9fe26",
+      "date": "2026-11-12",
+      "title": "完善教材与场景词句朗读交互"
+    },
+    {
+      "revision": "97f21b997700f1a9e041b33ac80ac35d45e46186",
+      "date": "2026-11-12",
+      "title": "统一优化学习页面侧栏布局"
+    },
+    {
+      "revision": "a59100f492da110d04d2f68b9ac14a18a3aec0ba",
+      "date": "2026-11-12",
+      "title": "优化教材与场景跟读及自适应侧栏"
+    },
+    {
+      "revision": "9354e4de8c60470c019d8a9b4ad931926c1dd06a",
+      "date": "2026-11-11",
+      "title": "扩充个人开发学习内容，完善教材跟读设置"
+    },
+    {
+      "revision": "48b5eb1823a3a03726597207b4ea6cc852d5806a",
+      "date": "2026-11-10",
+      "title": "新增学习专题，扩充奥数题库和未解之谜"
+    },
+    {
+      "revision": "ac653a054384e5d54ff239eccd764df59cbe2d52",
+      "date": "2026-11-10",
+      "title": "新增拼写家族与语文诊室，完善多音字练习"
+    },
+    {
+      "revision": "ac8cabaac769ef0c68e4f24cf503254927ce6059",
+      "date": "2026-11-10",
+      "title": "新增汉字演变馆专题，更新学习文档"
+    },
+    {
+      "revision": "95f0d104a4391d929a54ff260b63df49d1da09b5",
+      "date": "2026-11-10",
+      "title": "扩充未解之谜案卷和深海互动"
+    },
+    {
+      "revision": "b0fbb11d6f2b365e7f6eb10fc595fc1119e49d4a",
+      "date": "2026-11-10",
+      "title": "新增图形运动实验室和动物地图，更新学习文档"
+    },
+    {
+      "revision": "9ee1aae2a3a306f32ed18c33bff7a7bced7834c8",
+      "date": "2026-11-09",
+      "title": "补充英语音标发音基础"
+    },
+    {
+      "revision": "235a21b9ec33c767891f80cee58146e4bad3f90b",
+      "date": "2026-11-09",
+      "title": "整合乐学堂专题与课程文件源"
+    },
+    {
+      "revision": "fb47d0b5f5981f2a4ce9a794cd48bbf9b544578e",
+      "date": "2026-11-09",
+      "title": "完善地理图谱和历史时间轴，修复乐学堂基础数据"
+    },
+    {
+      "revision": "fdb51e873e3acc75d3cefe116d65a04c0472da33",
+      "date": "2026-11-09",
+      "title": "新增未解之谜研究所"
+    },
+    {
+      "revision": "0c417d3b0e0495bb2288f6f5ecf5ef5050bedbe5",
+      "date": "2026-11-09",
+      "title": "优化乐学堂学习流程"
+    },
+    {
+      "revision": "c38aba7231ba1141de733e114e823479a67658da",
+      "date": "2026-11-09",
+      "title": "修复乐学堂初始化与学习流程"
+    },
+    {
+      "revision": "e85cab7611937e145163a8dff2ff3cf72c58a6da",
+      "date": "2026-11-09",
+      "title": "数学公式专题：小学全覆盖速查手册，初高中整理中"
+    },
+    {
+      "revision": "297536ad8c9b4193b140fabf28f2c9b239a20734",
+      "date": "2026-11-09",
+      "title": "激励系统：积分、勋章、连续打卡与兑换奖励"
+    },
+    {
+      "revision": "9088f433ac16ad8c0104157dc8b1ce06338625bc",
+      "date": "2026-11-08",
+      "title": "补交 catalog ContentItem 字段元数据迁移"
+    },
+    {
+      "revision": "de2808a96c56541266950e4a446621cafe13bf0e",
+      "date": "2026-11-08",
+      "title": "资料页 UI 统一优化：四科标题卡与工具栏随科着色、飞花令令字三列、诗词地图两列布局、古诗文详情不限宽"
+    },
+    {
+      "revision": "87f48398aabeb24ce46f63afff9a47b3f32cc718",
+      "date": "2026-11-08",
+      "title": "多专题页 UI 统一优化：左右工作区布局、渐变标题卡、点读与筛选交互补齐"
+    },
+    {
+      "revision": "dc54b549f790ba771c5f51ef5c221fdd43927281",
+      "date": "2026-11-08",
+      "title": "教材册列表页对齐平台内容宽度：去掉 study-shell 双层缩进"
+    },
+    {
+      "revision": "778601feaa619a842c84cc5142cc2ff17bd5fdb0",
+      "date": "2026-11-08",
+      "title": "首页登录态不再放学习总览：完整足迹收进「我的学习」，只留游客统计条"
+    },
+    {
+      "revision": "2b7d86196b66cb4fa85b7b91e3a2b884f4f63aae",
+      "date": "2026-11-08",
+      "title": "注册与改密取消密码复制度限制：自用系统只保留两次输入一致"
+    },
+    {
+      "revision": "3cdca1e92a45b0feff23c2136bc9a347a22a045a",
+      "date": "2026-11-08",
+      "title": "首页书架与科目筛选下线：英语模块页成教材同步册专属书架"
+    },
+    {
+      "revision": "92c83825b79f9bc4a5dfb0a9f37d6b21c247f495",
+      "date": "2026-11-08",
+      "title": "英语阅读器套学习页皮肤：保留 DB 编排与词义绑定，视觉与教材册统一"
+    },
+    {
+      "revision": "bd18a16a86506e498a081b4fbab78a15d2231ec1",
+      "date": "2026-11-08",
+      "title": "语文教材改为文件编排：chinesebook 册页（列表优先）、下架语文同步册入口"
+    },
+    {
+      "revision": "0f1edfdf7462650093d1101de5cac7bc306a5083",
+      "date": "2026-11-07",
+      "title": "数学教材改为文件编排：mathbook 零模型册页（/mathbook/4a/ 按册可扩展）、图示库同步与旧同步册下架"
+    },
+    {
+      "revision": "425c9a0e083ff12c77eb67f144a6d9a2f2c32c46",
+      "date": "2026-11-07",
+      "title": "专题页样式与词库优化：场景成语词库扩充至v4、题库练习与日常用语/飞花令/成语页样式交互优化"
+    },
+    {
+      "revision": "f9bbb858fb389c94a546d0414be33b7a87418fe1",
+      "date": "2026-11-07",
+      "title": "专题页面样式与交互统一优化：成语emoji词库扩充、四季与接龙hero同构、导航去重"
+    },
+    {
+      "revision": "673be1d98fa9b9dc83060c183fdab7cd695f327e",
+      "date": "2026-11-07",
+      "title": "奥数挑战上网页首页专题网格"
+    },
+    {
+      "revision": "1ebb6b5bfabe50a87c9254bfce077f6b0344dcba",
+      "date": "2026-11-07",
+      "title": "教材模块更名：语文教材、数学教材、英语教材"
+    },
+    {
+      "revision": "d682493809f857a677f29a771002b4ab6d8fbaa7",
+      "date": "2026-11-07",
+      "title": "去掉书架筛选的查看全部链接"
+    },
+    {
+      "revision": "ff142b00c887c482ffc4b985cb18f16907edbb6f",
+      "date": "2026-11-07",
+      "title": "书架筛选回退下拉布局"
+    },
+    {
+      "revision": "106aedc9e79a11ca226ed679d029ebe0d355957f",
+      "date": "2026-11-07",
+      "title": "教材书架更名并筛选改chips布局"
+    },
+    {
+      "revision": "7f702c420005bc482ddc54ef797f18a86c2084fb",
+      "date": "2026-11-07",
+      "title": "书架区去掉内层组标题只留区块标题"
+    },
+    {
+      "revision": "bf5d316de510f22480acde1736bf835f9f8fa404",
+      "date": "2026-11-07",
+      "title": "教材书架整理为白底面板，组头加色条并删冗余句"
+    },
+    {
+      "revision": "18b5a20a7efc5272967dbeda6aad75fd79867cc7",
+      "date": "2026-11-07",
+      "title": "专题区加背景面板并删冗余说明句"
+    },
+    {
+      "revision": "872be5406c92d2cae3af78074b3d411fb3d39935",
+      "date": "2026-11-07",
+      "title": "专题标题侧题库入口改为品牌药丸样式"
+    },
+    {
+      "revision": "a823e4df6dda35fb08aa0c0c3bfdda18ab79c46f",
+      "date": "2026-11-07",
+      "title": "题库改为专题标题侧特殊入口，库内数学语文英语奥数四域同级"
+    },
+    {
+      "revision": "bdc9b7378877cebfe322d3331fd005c62c114cd1",
+      "date": "2026-11-07",
+      "title": "首页题库合并为一张卡内双入口，按学科与玩法双维度组织"
+    },
+    {
+      "revision": "dc4a1263aabacb1ade9b8093e047d11c59190f03",
+      "date": "2026-11-07",
+      "title": "题库分组改回专题网格内就地成组"
+    },
+    {
+      "revision": "eeed4f2c24c372495e5229570babba2e01601481",
+      "date": "2026-11-07",
+      "title": "首页新增题库分组区，题库两张专题卡单独成组"
+    },
+    {
+      "revision": "7ff24d11c77ab4646efe6a6ab152c4c100739903",
+      "date": "2026-11-07",
+      "title": "挑战题库拆分普通与奥数双轨，新增奥数挑战专题入口"
+    },
+    {
+      "revision": "4f09ebebe71f7dd55dbb9520ab03c2f24aadcfbc",
+      "date": "2026-11-07",
+      "title": "新增日常用语专题：教材词卡 597 条短语按句式与话题双视图浏览，看中文选英文进总览"
+    },
+    {
+      "revision": "c33387fdcbf39472a4384d8cc5690912773aeea2",
+      "date": "2026-11-07",
+      "title": "新增不规则复数专题：70 对词六组浏览、核心 27 词给单数选复数，服务端复核记录进总览"
+    },
+    {
+      "revision": "49658c97aedf21998a5c4ff78abfa858d1aafaa6",
+      "date": "2026-11-07",
+      "title": "新增英语语法专题：8 章 31 点只读精讲页，巩固题页内判分并同步进挑战题库"
+    },
+    {
+      "revision": "5af2cc8bacdc005681feee251952497f613450a0",
+      "date": "2026-11-07",
+      "title": "新增挑战题库：独立 questionbank 应用统一存题、服务端判分与错题本，首批 150 题来自内部数据规则转换"
+    },
+    {
+      "revision": "a63cc44e5e63f471a96f1b71c6f1dd924125e852",
+      "date": "2026-11-07",
+      "title": "数学单一数据源导入适配：情境照片、单元与板块横幅、视频清单，元信息不立卡"
+    },
+    {
+      "revision": "7f83130c906bc271de20abc7589007c31d9177aa",
+      "date": "2026-11-07",
+      "title": "语文数学内容重排为单一数据源；系统导入适配图片块与素材字段，首页专题支持单选筛选"
+    },
+    {
+      "revision": "5177446c0271267909affde67a3af67758760649",
+      "date": "2026-11-07",
+      "title": "成语接龙支持家长对决双人模式；首页玩法入口统一注册并更换专题图标"
+    },
+    {
+      "revision": "c769417f275337d5f1377473fa294e303ed3d08d",
+      "date": "2026-11-07",
+      "title": "学习总览升级：首页与我的学习分领域汇总，成语小游戏、飞花令、多音字补学习记录"
+    },
+    {
+      "revision": "0534f034ca71cf18b159c641073048b3bac92d45",
+      "date": "2026-11-07",
+      "title": "中文义项批次17：maths book与study经确认采用，场景侧577全部完成"
+    },
+    {
+      "revision": "f45c8cb0ee18a1981b0bb07d5d5d74dc31304779",
+      "date": "2026-11-07",
+      "title": "中文义项批次15、16：季节16条与方位12条加light，场景侧仅剩2条暂缓"
+    },
+    {
+      "revision": "e2c78ec25f272e1b0db81e5528cc7e82d873f522",
+      "date": "2026-11-07",
+      "title": "中文义项批次14：服装17条，场景+教材并存结构确认后采用"
+    },
+    {
+      "revision": "baad3650481e42a0fa9cf11dc245abff779dd901",
+      "date": "2026-11-07",
+      "title": "中文义项批次13：情绪感受13条，6个多义词逐词判断"
+    },
+    {
+      "revision": "9750fe59d5a4d73845f7f67eda8ad46d4fd4398e",
+      "date": "2026-11-07",
+      "title": "中文义项批次12：交通、职业与植物37条，15个多义词逐词判断"
+    },
+    {
+      "revision": "c397edf5e8cd560d03f1a7ef209177ce50c0e001",
+      "date": "2026-11-07",
+      "title": "中文义项批次11：城镇、运动、天空与动作50条"
+    },
+    {
+      "revision": "d93c5f364a594c1c80436017ff93c90b7ae32dc8",
+      "date": "2026-11-07",
+      "title": "中文义项批次10：反义、疾病、海洋、旅行、节日与零食72条，覆盖率过半"
+    },
+    {
+      "revision": "afd319f7b608cec5199cb61d019eb2657252b037",
+      "date": "2026-11-07",
+      "title": "中文义项批次09：时间、问候、露营、家务、玩具与学校70条"
+    },
+    {
+      "revision": "df02bfb8dc580493a2ef1a27351e3d52f03f02ae",
+      "date": "2026-11-07",
+      "title": "中文义项批次08：家庭、朋友、动物与月份51条，义项版本累计300"
+    },
+    {
+      "revision": "845b7e4ef4b85f29953abc59b2ac2274651158d2",
+      "date": "2026-11-07",
+      "title": "中文义项批次07：宠物、农场、浴室与购物48条，多义阶段首批"
+    },
+    {
+      "revision": "c664b87c0c81df80e9e4916ff231e61adabd063f",
+      "date": "2026-11-07",
+      "title": "中文义项批次06：昆虫、乐器、自然与学科48条显式采用，零多义场景清完"
+    },
+    {
+      "revision": "243319b404bb9dd2080dcb0af2671c86205dc2d8",
+      "date": "2026-11-07",
+      "title": "中文义项批次05：食物、蔬菜与形状37条显式采用"
+    },
+    {
+      "revision": "6273ea589fe28361da2f98888b52867a1b6f7d8c",
+      "date": "2026-11-07",
+      "title": "中文义项批次04：身体部位与水果29条显式采用"
+    },
+    {
+      "revision": "72c68d380c7fca6bf1d520f5a579dba496e6756a",
+      "date": "2026-11-07",
+      "title": "中文义项批次03：颜色与数字27条显式采用，orange暂缓消解"
+    },
+    {
+      "revision": "81d349d10d469a5904fc112772dcbccf35361bbe",
+      "date": "2026-11-07",
+      "title": "成语数据集88条自带损坏处置完毕：词头修正、归并与读音补全"
+    },
+    {
+      "revision": "1db826c91154613ae32bb7f66a452d9323bf1dbb",
+      "date": "2026-11-07",
+      "title": "成语读音批量核对：格式门槛分级入库，接龙对局开始展示拼音"
+    },
+    {
+      "revision": "a049b71867d15f8343b3f83375445895bfbb0a39",
+      "date": "2026-11-07",
+      "title": "文档同步：中文义项批次02导入与接龙释义异常修复"
+    },
+    {
+      "revision": "7b15094d1078be75e9b54be45538858b450cb37d",
+      "date": "2026-11-07",
+      "title": "Unihan 全量属性升 18.0.0：01f 资料包替换 01c，unihan18 数据集生效"
+    },
+    {
+      "revision": "295c46d8e2714562f825b9a3039d2be1345082c0",
+      "date": "2026-11-06",
+      "title": "设计规范对齐：注册页去显示名称、Token 规范文档、CSS 优化"
+    },
+    {
+      "revision": "3c18bf0b7b790cb6e5ce6cf40570f78a5600fdac",
+      "date": "2026-11-06",
+      "title": "乐学堂系统优化：入口注册、教材检索、中文义项第二批、游客数据保留"
+    },
+    {
+      "revision": "92b8055cbed531a72564892713944d3ad18e7233",
+      "date": "2026-11-06",
+      "title": "优化修复"
+    },
+    {
+      "revision": "d4724167fa43fc6f8d1ee2cc4a65958323c9ade4",
+      "date": "2026-11-06",
+      "title": "调优诗词四季词表：夏组补高精度夏词，修正 README 秋冬计数"
+    },
+    {
+      "revision": "7973fb3e8062aba2f3a43e1ac9eee9d331fddd47",
+      "date": "2026-11-06",
+      "title": "新增古文经典专题：chinese-ancient-text 62 册简体古籍入库"
+    },
+    {
+      "revision": "b14badbc1db989308b4eb5bd18e37e4f6c2cf9cf",
+      "date": "2026-11-06",
+      "title": "新增诗词四季与成语配对专题，英语教材同步扩展课文"
+    },
+    {
+      "revision": "fcd400145717dc0788f3e5ec2d923bc95566447c",
+      "date": "2026-11-05",
+      "title": "移除各专题页返回学习广场链接"
+    },
+    {
+      "revision": "8f772b8edd610cb9f0ceee60f242dc79fcb67e92",
+      "date": "2026-11-05",
+      "title": "词以类聚专题前端优化"
+    },
+    {
+      "revision": "d3a837f3b906bba35ceb7e74e051a5c6f25eab24",
+      "date": "2026-11-05",
+      "title": "成语典故馆与猜谜专题前端优化"
+    },
+    {
+      "revision": "e3524c3a4fb542f21bda12da26ff56596ca88998",
+      "date": "2026-11-05",
+      "title": "多音字专题前端优化：hero 横幅、读音放大、字组分段"
+    },
+    {
+      "revision": "738243c72fa2889d86304311b8a9500aadf04b48",
+      "date": "2026-11-05",
+      "title": "新增多音字专题：CC-CEDICT 推导 1010 字，浏览与选读音练习"
+    },
+    {
+      "revision": "c75b50abaf2585f190b442bae25a1b9e791894b0",
+      "date": "2026-11-05",
+      "title": "新增看释义猜成语专题：释义补字，难度 0-3 提示字"
+    },
+    {
+      "revision": "c361a8e9adb426b4d740f6ce0ab1c05d420ad2b0",
+      "date": "2026-11-05",
+      "title": "词以类聚交互优化：枝干一点直达词墙，点词免刷新"
+    },
+    {
+      "revision": "33db8529e0c4bc3a02a5012f2f7c5a5e4a97aec9",
+      "date": "2026-11-05",
+      "title": "重新导出基础数据包：收录诗词简体化语料与新增迁移"
+    },
+    {
+      "revision": "0f288654db613b9e9a844cb79def0d30140dec20",
+      "date": "2026-11-05",
+      "title": "新增词以类聚专题：WordNet 上下位关系把单词挂成树"
+    },
+    {
+      "revision": "dcea4ab174f5efbe7717359baf316622035a7f68",
+      "date": "2026-11-05",
+      "title": "新增诗词地图与成语典故馆专题，账号快捷注册与 make 入口"
+    },
+    {
+      "revision": "0ef207db783d85f85753d9f1709fed768d028367",
+      "date": "2026-11-04",
+      "title": "写作界面与共享样式完善"
+    },
+    {
+      "revision": "10e30c7777b24d3bc0385d0e0fd5ee7b113f889c",
+      "date": "2026-11-04",
+      "title": "诗词题材分类专题与首页入口"
+    },
+    {
+      "revision": "1351e10b8dae88a1835c076b04eaae33c1c0c238",
+      "date": "2026-11-04",
+      "title": "诗词简体化数据接入与详情页完善"
+    },
+    {
+      "revision": "ef1adb3274efe238acd8a191182b63a3de2ad4ff",
+      "date": "2026-11-04",
+      "title": "优化编排"
+    },
+    {
+      "revision": "50f0365de6f30701e007f7af2f08ab14af86af8c",
+      "date": "2026-11-04",
+      "title": "功能完善"
+    },
+    {
+      "revision": "f9295c911858ae96c1edde4291daf147164f5b02",
+      "date": "2026-11-03",
+      "title": "功能完善"
+    },
+    {
+      "revision": "c906735864cf443819349beb2473151dccb6ec58",
+      "date": "2026-11-03",
+      "title": "Restore portable baseline data during bootstrap"
+    },
+    {
+      "revision": "5db3e337b06dd10c945a13346df4cc9034c617a0",
+      "date": "2026-11-02",
+      "title": "优化完善"
+    },
+    {
+      "revision": "49b00fc9be1fe6934df82b31880fc4cfa4a71eab",
+      "date": "2026-11-01",
+      "title": "系统优化"
+    },
+    {
+      "revision": "8d4c75e619255515034e4b2970c026597a201a75",
+      "date": "2026-11-01",
+      "title": "style(lexicon): 单选组选项 contents 化，修正 Django RadioSelect 嵌套 div 导致的竖排"
+    },
+    {
+      "revision": "58b21445cd85f9f285d7b45cc532bf339e3473cc",
+      "date": "2026-11-01",
+      "title": "style(lexicon): 查询范围单选组布局优化，修复页面撑爆"
+    },
+    {
+      "revision": "b1c3da0b484e711335944a5ec8a612fc2b6cab8f",
+      "date": "2026-11-01",
+      "title": "feat(lexicon): 查词页查询范围下拉改单选按钮组"
+    },
+    {
+      "revision": "ada7c15cc8dc65c1d800fadb748b0cd3fc942bea",
+      "date": "2026-11-01",
+      "title": "feat(catalog): 首页玩法卡一次直达（接龙/场景单词不再经目录中转页）"
+    },
+    {
+      "revision": "eecd0a5b478f1e364ad5cd7f21f5a5824429eda8",
+      "date": "2026-11-01",
+      "title": "fix(lexicon): 连写拼音检索修复，补齐接龙与场景单词后台"
+    },
+    {
+      "revision": "abdd6cf06074d199140db05e9b7fb0200d770a39",
+      "date": "2026-11-01",
+      "title": "feat(chain,lexicon): 接龙词典桥接与同形词判定辅助"
+    },
+    {
+      "revision": "a9e7e865619104a7676beca9baeec7d5d9ca7c75",
+      "date": "2026-11-01",
+      "title": "feat(words): 关联词显示中文翻译与音标"
+    },
+    {
+      "revision": "74c62111de5ce445f020598b9a4b52ce53006868",
+      "date": "2026-11-01",
+      "title": "docs: README 补场景单词玩法与教材单词词典驱动条目"
+    },
+    {
+      "revision": "5a9f5dab1132a865beaf00b04217ef0132d5cec8",
+      "date": "2026-11-01",
+      "title": "feat(words): 场景单词玩法应用，词典全量驱动"
+    },
+    {
+      "revision": "88e31e7348853e3d9f06f87e3a6c5328927dc3de",
+      "date": "2026-11-01",
+      "title": "refactor(catalog): 专题内容退场，目录教材专用化"
+    },
+    {
+      "revision": "cd519229d9354c14cff0b3df2560f08324a88103",
+      "date": "2026-11-01",
+      "title": "test(accounts): 后台列表渲染用例跟随册分表更新模型清单"
+    },
+    {
+      "revision": "a443b8471196ed2090ec262f4fa5f60c5e8662d2",
+      "date": "2026-11-01",
+      "title": "refactor(catalog): 教材同步册与主题探索册分表"
+    },
+    {
+      "revision": "ffdabc40aeefa858f5e643fba7e0024b5e42e2d3",
+      "date": "2026-11-01",
+      "title": "feat(catalog): 教材同步与主题探索分区"
+    },
+    {
+      "revision": "e86a8cecf2e042336508959700a59591413b0c54",
+      "date": "2026-11-01",
+      "title": "feat(static): 阅读页打印版式"
+    },
+    {
+      "revision": "be27e6de27cf8fffe74cb8c4dc37acfb2690e4df",
+      "date": "2026-11-01",
+      "title": "feat(learning): 教材单词同构接入词典驱动词卡"
+    },
+    {
+      "revision": "7929c55c3d2c57240cc2a0d319a99c0ed1d6a231",
+      "date": "2026-11-01",
+      "title": "feat(learning): 场景单词词典驱动，词卡以词典为内容源"
+    },
+    {
+      "revision": "3eb61b44da13864a1688627626a691c778a10dc1",
+      "date": "2026-10-31",
+      "title": "fix(chain): 提示面板被提示次数覆盖的重复 DOM id"
+    },
+    {
+      "revision": "1c0a13fff9d6727711c1ef6e1008b67272c2bbf6",
+      "date": "2026-10-31",
+      "title": "fix(chain): 修复游客对局 CSRF 全线 403"
+    },
+    {
+      "revision": "f02d9c1544218ac8314b8f811bb0256576a210a0",
+      "date": "2026-10-31",
+      "title": "refactor(chain): 应用 games 更名 chain，路由同步 /chain/"
+    },
+    {
+      "revision": "7b2f360919d5a1d3199e4e3afe7e28c8f7c19639",
+      "date": "2026-10-31",
+      "title": "feat(catalog): 内容块 schema v2，课文图示与点读完整接入"
+    },
+    {
+      "revision": "d0d19a3621c86a314eb11d7beb29989785289bbf",
+      "date": "2026-10-31",
+      "title": "feat(games): 成语接龙统一账号对局与陪练，成语本软下架"
+    },
+    {
+      "revision": "aaf51ab8f92d78b587fb6eebfb02fac46bac7345",
+      "date": "2026-10-31",
+      "title": "feat(lexicon): chinese-xinhua 三数据集入库、激活并公开"
+    },
+    {
+      "revision": "1c13cf7ab70c959e5d87167ac65fc7ace116453d",
+      "date": "2026-10-30",
+      "title": "新增学习系统"
+    }
+  ]
+}

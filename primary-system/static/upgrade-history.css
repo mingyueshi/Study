@@ -1,0 +1,73 @@
+.upgrade-page { padding-bottom: 12px; }
+.upgrade-page .back { margin-bottom: 18px; }
+.upgrade-hero { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 32px; padding: clamp(24px, 3vw, 52px); border: 1px solid var(--line); border-radius: 28px; background: var(--soft); }
+.upgrade-hero .eyebrow { margin-bottom: 8px; }
+.upgrade-hero h1 { display: flex; align-items: center; gap: 18px; margin-bottom: 16px; }
+.upgrade-hero h1 span { color: var(--orange); font-size: .7em; }
+.upgrade-lead { margin-bottom: 16px; font-size: 1.12em; }
+.upgrade-range { margin: 0; color: var(--muted); font-size: .86em; }
+.upgrade-stats { display: flex; gap: clamp(16px, 3vw, 48px); margin: 0; padding: 24px; border: 1px solid var(--line); border-radius: 22px; background: var(--white); }
+.upgrade-stats > div { display: flex; flex-direction: column-reverse; }
+.upgrade-stats dt { color: var(--muted); font-size: .85em; }
+.upgrade-stats dd { margin: 0; color: var(--green); font-size: 2.5em; font-weight: 800; line-height: 1.3; font-variant-numeric: tabular-nums; }
+.upgrade-filters { display: flex; flex-wrap: wrap; align-items: end; gap: 16px; margin: 28px 0 36px; padding: 24px; border: 1px solid var(--line); border-radius: 22px; background: var(--white); }
+.upgrade-filters > div { flex: 1 1 200px; min-width: 0; }
+.upgrade-filters .upgrade-search { flex-grow: 3; }
+.upgrade-filters label { display: block; margin-bottom: 8px; font-weight: 650; }
+.upgrade-filters input, .upgrade-filters select, .upgrade-filters .button { font-size: 1em; }
+.upgrade-clear { display: inline-flex; align-items: center; min-height: 56px; padding: 8px; color: var(--green); text-decoration: underline; text-underline-offset: 4px; }
+.upgrade-results { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 24px; margin-bottom: 24px; }
+.upgrade-results h2 { margin: 0; font-size: 1.6em; }
+.upgrade-results p { margin: 0; color: var(--muted); font-size: .9em; }
+.upgrade-toggles { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.upgrade-toggles[hidden] { display: none; }
+.upgrade-toggles > span { color: var(--muted); font-size: .85em; }
+.upgrade-toggles button { min-height: 44px; padding: 8px 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--white); color: var(--green); font-size: .88em; font-weight: 650; }
+.upgrade-toggles button:hover:not(:disabled) { background: var(--soft); border-color: var(--green); }
+.upgrade-toggles button:disabled { color: var(--muted); opacity: .55; cursor: default; }
+.upgrade-day { position: relative; padding: 0 0 28px 36px; margin-left: 8px; border-left: 2px solid var(--line); }
+.upgrade-day::before { content: ''; position: absolute; left: -8px; top: 21px; width: 14px; height: 14px; border: 3px solid var(--paper); border-radius: 50%; background: var(--green); box-shadow: 0 0 0 2px var(--green); }
+.upgrade-day:last-of-type { padding-bottom: 0; }
+.upgrade-day-heading { padding: 10px 18px; border: 1px solid var(--line); border-radius: 16px; background: var(--white); }
+.upgrade-day-heading:hover, .upgrade-day-details[open] > .upgrade-day-heading { background: var(--soft); }
+.upgrade-day-details[open] > .upgrade-day-heading { margin-bottom: 16px; }
+.upgrade-day-heading h3 { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 18px; min-width: 0; margin: 0; font-size: 1.18em; }
+.upgrade-day-count { padding: 3px 12px; border-radius: 20px; background: var(--paper); color: var(--green); font-size: .68em; font-weight: 600; white-space: nowrap; }
+.upgrade-entries { padding: 0; margin: 0; list-style: none; border: 1px solid var(--line); border-radius: 20px; background: var(--white); }
+.upgrade-entries li { display: flex; gap: 14px; padding: 18px 24px; scroll-margin-top: 24px; }
+.upgrade-entries li + li { border-top: 1px solid var(--line); }
+.upgrade-entries li:target { border-radius: 18px; background: var(--soft); outline: 2px solid var(--green); }
+.upgrade-entries li > div { min-width: 0; }
+.upgrade-entry-dot { flex: 0 0 7px; width: 7px; height: 7px; margin-top: .75em; border-radius: 50%; background: var(--orange); }
+.upgrade-entries p { margin: 0; font-weight: 600; overflow-wrap: anywhere; }
+.upgrade-revision { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; color: var(--muted); font-size: .76em; }
+.upgrade-revision code { font: inherit; font-variant-numeric: tabular-nums; }
+.upgrade-revision:hover { color: var(--green); text-decoration: underline; text-underline-offset: 4px; }
+.upgrade-empty { padding: 40px 24px; border: 1px dashed var(--line); border-radius: 22px; background: var(--white); text-align: center; }
+.upgrade-empty > span { color: var(--green); font-size: 3em; }
+.upgrade-empty h3 { margin: 8px 0; }
+.upgrade-empty p { color: var(--muted); }
+.upgrade-empty a { display: inline-flex; align-items: center; min-height: 48px; color: var(--green); font-weight: 650; }
+.upgrade-source { margin-top: 36px; padding: 16px 24px; border: 1px solid var(--line); border-radius: 18px; background: var(--white); }
+.upgrade-source summary { min-height: 44px; font-weight: 650; }
+.upgrade-source p { max-width: 65em; margin: 12px 0 0; color: var(--muted); font-size: .9em; }
+@media (max-width: 900px) {
+  .upgrade-hero { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  .upgrade-stats { width: fit-content; max-width: 100%; }
+}
+@media (max-width: 600px) {
+  .upgrade-hero { border-radius: 22px; }
+  .upgrade-lead br { display: none; }
+  .upgrade-stats { width: 100%; justify-content: space-between; padding: 18px; }
+  .upgrade-stats dd { font-size: 2em; }
+  .upgrade-filters { padding: 18px; }
+  .upgrade-filters .button { flex-grow: 1; }
+  .upgrade-day { padding-left: 20px; }
+  .upgrade-entries li { padding: 14px; gap: 10px; }
+}
+@media print {
+  .upgrade-page .back, .upgrade-filters, .upgrade-source, .upgrade-revision, .upgrade-page .pagination, .upgrade-toggles { display: none; }
+  .upgrade-hero { display: block; padding: 18px; }
+  .upgrade-stats { display: none; }
+  .upgrade-day { break-inside: avoid; }
+}

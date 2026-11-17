@@ -7,6 +7,7 @@ from nova_admin.urls import for_admin
 from accounts import views as accounts_views
 from accounts.forms import LearnerAuthenticationForm
 from catalog import views as catalog
+from catalog.upgrade_views import upgrade_history
 from catalog.study_courses import hanzi_evolution, literature_study
 from chinesebook import couplets
 from learning import views as learning
@@ -24,6 +25,7 @@ urlpatterns = [
     path('healthz/', health, name='health'),
     path('favicon.ico', RedirectView.as_view(url='/static/icons/book.svg', permanent=False)),
     path('', catalog.home, name='home'),
+    path('updates/', upgrade_history, name='upgrade-history'),
     path('references/', include('reference_library.urls')),
     path('references/lexicon/', include('lexicon.reference_urls')),
     path('hanzi/', include('hanzi.urls')),

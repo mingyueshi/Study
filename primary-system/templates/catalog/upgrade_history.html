@@ -1,0 +1,60 @@
+{% extends 'base.html' %}{% load static %}
+{% block title %}升级记录 · 乐学堂{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'upgrade-history.css' %}?v=2">
+<script src="{% static 'upgrade-history.js' %}?v=1" defer></script>
+<div class="upgrade-page">
+  <a class="back" href="{% url 'home' %}">← 返回学习广场</a>
+  <header class="upgrade-hero">
+    <div>
+      <p class="eyebrow">乐学堂 · 一路成长</p>
+      <h1>升级记录<span aria-hidden="true">✦</span></h1>
+      <p class="upgrade-lead">让学习更有趣，也让使用更顺手。<br>在这里，看看乐学堂一步步长大的足迹。</p>
+      <p class="upgrade-range">{{ first_date|date:'Y 年 n 月 j 日' }}起步 · 记录至{{ latest_date|date:'Y 年 n 月 j 日' }}</p>
+    </div>
+    <dl class="upgrade-stats" aria-label="改进统计">
+      <div><dt>次改进记录</dt><dd>{{ total }}</dd></div>
+      <div><dt>个有更新的日子</dt><dd>{{ day_count }}</dd></div>
+    </dl>
+  </header>
+
+  <form class="upgrade-filters" method="get" action="{% url 'upgrade-history' %}" role="search" aria-label="查找升级记录">
+    <div class="upgrade-search"><label for="upgrade-query">找一找改进</label><input type="search" id="upgrade-query" name="q" value="{{ query }}" maxlength="160" placeholder="试试「地图」「阅读」或「英语」"></div>
+    <div><label for="upgrade-month">更新月份</label><select id="upgrade-month" name="month"><option value="">全部月份</option>{% for month in months %}<option value="{{ month.value }}" {% if selected_month == month.value %}selected{% endif %}>{{ month.label }}</option>{% endfor %}</select></div>
+    <button class="button" type="submit">查找记录</button>
+    {% if query or selected_month %}<a class="upgrade-clear" href="{% url 'upgrade-history' %}#history">查看全部</a>{% endif %}
+  </form>
+
+  <section class="upgrade-history" id="history" aria-labelledby="history-title">
+    <div class="upgrade-results">
+      <div><h2 id="history-title">{% if query or selected_month %}找到的改进{% else %}成长时间线{% endif %}</h2><p>共 {{ result_count }} 条 · 最新的在前面</p></div>
+      <div class="upgrade-toggles" role="group" aria-label="展开或收起本页的日期" hidden><span>本页：</span><button type="button" data-upgrade-toggle="expand" aria-controls="upgrade-days">全部展开</button><button type="button" data-upgrade-toggle="collapse" aria-controls="upgrade-days">全部收起</button></div>
+    </div>
+    <div id="upgrade-days">
+    {% for group in page %}
+    <section class="upgrade-day" aria-labelledby="day-{{ group.date|date:'Y-m-d' }}">
+      <details class="upgrade-day-details" {% if forloop.first or query %}open{% endif %}>
+      <summary class="upgrade-day-heading"><h3 id="day-{{ group.date|date:'Y-m-d' }}"><time datetime="{{ group.date|date:'Y-m-d' }}">{{ group.date|date:'Y 年 n 月 j 日' }}</time><span class="upgrade-day-count">{{ group.records|length }} 条改进</span></h3></summary>
+      <ul class="upgrade-entries">
+        {% for entry in group.records %}
+        <li id="change-{{ entry.revision }}"><span class="upgrade-entry-dot" aria-hidden="true"></span><div><p>{{ entry.title }}</p><a class="upgrade-revision" href="{% url 'upgrade-history' %}?q={{ entry.revision }}#change-{{ entry.revision }}" aria-label="查看这条记录的固定链接：{{ entry.title }}">记录 <code>{{ entry.short_revision }}</code><span aria-hidden="true"> ↗</span></a></div></li>
+        {% endfor %}
+      </ul>
+      </details>
+    </section>
+    {% empty %}
+    <div class="upgrade-empty"><span aria-hidden="true">⌕</span><h3>暂时没有找到这条足迹</h3><p>换个关键词，或看看其他月份的改进。</p><a href="{% url 'upgrade-history' %}">查看全部升级记录 →</a></div>
+    {% endfor %}
+    </div>
+    {% if page.paginator.num_pages > 1 %}
+    <nav class="pagination" aria-label="升级记录翻页">
+      {% if previous_url %}<a href="{{ previous_url }}">← 较新的记录</a>{% endif %}
+      <span>第 {{ page.number }} / {{ page.paginator.num_pages }} 页</span>
+      {% if next_url %}<a href="{{ next_url }}">更早的记录 →</a>{% endif %}
+    </nav>
+    {% endif %}
+  </section>
+
+  <details class="upgrade-source"><summary>这些记录从哪里来？</summary><p>依据乐学堂的 Git 提交历史整理，保留当时的改进说明，按提交日期倒序展示。日期表示项目记录时间，不代表线上发布时间；尚未提交的改动会在后续同步时补入。</p></details>
+</div>
+{% endblock %}
