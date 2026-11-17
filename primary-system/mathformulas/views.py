@@ -24,6 +24,16 @@ def index(request):
     groups = content.chapter_groups(chapter['code'])
     nav = [{'code': c['code'], 'emoji': c['emoji'], 'title': c['title'],
             'group_count': len(content.chapter_groups(c['code']))} for c in chapters]
+    query = ' '.join(request.GET.get('q', '')[:80].split())
+    tokens = query.lower().split()
+    all_groups = content.searchable_groups()
+    shown = 0
+    for group in all_groups:
+        for item in group['items']:
+            item['visible'] = (all(token in item['search_text'] for token in tokens) if tokens
+                               else group['chapter'] == chapter['code'])
+            shown += item['visible']
+        group['visible'] = any(item['visible'] for item in group['items'])
     return render(request, 'mathformulas/index.html', {
         'stages': stages,
         'stage': stage,
@@ -31,6 +41,8 @@ def index(request):
         'chapter': dict(chapter, group_count=len(groups), item_count=sum(len(g['items']) for g in groups),
                         no=position + 1),
         'groups': groups,
+        'all_groups': all_groups, 'query': query, 'visible_count': shown,
+        'favorite_scope': f'user-{request.user.pk}' if request.user.is_authenticated else 'guest',
         'chapter_total': len(chapters),
         'prev_chapter': chapters[position - 1] if position > 0 else None,
         'next_chapter': chapters[position + 1] if position + 1 < len(chapters) else None,

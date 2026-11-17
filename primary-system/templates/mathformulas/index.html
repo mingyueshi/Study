@@ -1,10 +1,11 @@
 {% extends 'base.html' %}{% load static %}{% block title %}数学公式 · 乐学堂{% endblock %}
-{% block content %}<link rel="stylesheet" href="{% static 'mathformulas/formulas.css' %}?v=1"><script src="{% static 'mathformulas/formulas.js' %}?v=1" defer></script>
+{% block content %}<link rel="stylesheet" href="{% static 'mathformulas/formulas.css' %}?v=2"><script src="{% static 'mathformulas/formulas.js' %}?v=2" defer></script>
 <header class="mform-hero">
   <div class="mform-hero-copy">
     <p class="eyebrow">数学 · 公式速查</p>
     <h1>数学公式</h1>
     <p class="mform-hero-lead">{{ stage.blurb }}</p>
+    <p class="mform-hero-lead">每条都有「什么时候用」和小例题，搜一搜、收一收，把公式用起来。</p>
   </div>
   <nav class="mform-stages" aria-label="切换学段">
     {% for item in stages %}
@@ -29,36 +30,54 @@
       {% endfor %}
     </nav>
     <div class="mform-side-tools">
-      <input class="mform-search" type="search" data-mform-search placeholder="查公式，如 梯形、速度" aria-label="搜索本章公式">
-      <span class="mform-count"><b data-mform-visible>{{ chapter.item_count }}</b> 条公式</span>
+      <span class="mform-count">本章共 <b>{{ chapter.item_count }}</b> 条公式</span>
+      <p>在正文上方搜索全部学段，也可以打开收藏夹集中查阅。</p>
     </div>
   </aside>
 
-  <div class="mform-main">
+  <div class="mform-main" data-mform-app data-chapter="{{ chapter.code }}" data-stage="{{ stage.code }}" data-scope="{{ favorite_scope }}">
+    <section class="mform-tools" aria-label="查找与收藏">
+      <form class="mform-search-form" method="get" data-mform-search-form>
+        <input type="hidden" name="stage" value="{{ stage.code }}"><input type="hidden" name="chapter" value="{{ chapter.code }}">
+        <label for="formula-search">搜索全部公式<span>跨学段、跨章节查找，试试「面积」或「速度」</span></label>
+        <div class="mform-search-actions"><input id="formula-search" name="q" class="mform-search" type="search" maxlength="80" data-mform-search value="{{ query }}" placeholder="输入名称、公式或使用场景"><button class="button small" type="submit">搜索</button><button class="button small ghost" type="button" data-mform-clear hidden>清除关键词</button></div>
+      </form>
+      <div class="mform-view-actions" data-mform-enhanced hidden>
+        <button type="button" class="mform-view" data-mform-chapter-view aria-pressed="true">本章公式</button>
+        <button type="button" class="mform-view" data-mform-favorites-view aria-pressed="false">⭐ 我的收藏（0）</button>
+      </div>
+      <p class="mform-count" role="status" data-mform-count-note>当前显示 <b data-mform-visible>{{ visible_count }}</b> 条公式{% if query %}，搜索范围为全部学段{% endif %}。</p>
+      <p class="mform-storage-note" data-mform-storage-note role="status">收藏只保存在当前浏览器，按学习账号分别保存，游客单独保存。</p>
+      <noscript><p>搜索和例题可以直接使用；收藏夹需要启用浏览器脚本。</p></noscript>
+    </section>
     <header class="mform-chapter-head">
       <span class="mform-chapter-emoji" aria-hidden="true">{{ chapter.emoji }}</span>
       <div>
-        <h2>{{ chapter.no }}. {{ chapter.title }}</h2>
-        <p>{{ chapter.intro }}</p>
+        <h2 data-mform-heading>{% if query %}搜索结果 · 全部学段{% else %}{{ chapter.no }}. {{ chapter.title }}{% endif %}</h2>
+        <p data-mform-intro data-chapter-title="{{ chapter.no }}. {{ chapter.title }}" data-chapter-intro="{{ chapter.intro }}">{% if query %}按名称、公式和使用场景查找，点击出处可回到原章节。{% else %}{{ chapter.intro }}{% endif %}</p>
       </div>
     </header>
     <div data-mform-groups>
-      {% for group in groups %}
-      <section class="mform-group" data-mform-group>
+      {% for group in all_groups %}
+      <section class="mform-group" data-mform-group {% if not group.visible %}hidden{% endif %}>
+        <p class="mform-source">{{ group.source_label }}</p>
         <h3>{{ group.title }}</h3>
         {% if group.note %}<p class="mform-group-note">{{ group.note }}</p>{% endif %}
         <ul class="mform-rows">
           {% for item in group.items %}
-          <li class="mform-row" data-mform-row>
-            <span class="mform-row-name">{{ item.0 }}</span>
-            <span class="mform-row-formula">{{ item.1 }}</span>
+          <li class="mform-row" id="formula-{{ item.id }}" data-mform-row data-id="{{ item.id }}" data-chapter="{{ group.chapter }}" data-search="{{ item.search_text }}" {% if not item.visible %}hidden{% endif %}>
+            <div class="mform-row-head"><h4 class="mform-row-name" data-mform-name>{{ item.name }}</h4><button type="button" class="mform-favorite" data-mform-favorite aria-pressed="false" aria-label="收藏{{ item.name }}" hidden>☆ 收藏</button></div>
+            <p class="mform-row-formula">{{ item.formula }}</p>
+            <p class="mform-usage"><b>什么时候用</b>{{ item.usage }}</p>
+            <details class="mform-example"><summary>✏️ 看一个小例题</summary><p class="mform-example-question">{{ item.example.question }}</p><p><b>这样算：</b>{{ item.example.solution }}</p></details>
+            <a class="mform-source-link" href="?stage={{ group.stage }}&amp;chapter={{ group.chapter }}#formula-{{ item.id }}">{{ group.source_label }} · 回到这条公式 →</a>
           </li>
           {% endfor %}
         </ul>
       </section>
       {% endfor %}
     </div>
-    <p class="mform-empty" data-mform-empty hidden>这一章没有匹配的公式，换个关键词试试。</p>
+    <p class="mform-empty" data-mform-empty {% if visible_count %}hidden{% endif %}>没有找到匹配的公式，换个关键词试试。</p>
     <nav class="mform-pager" aria-label="上一章下一章">
       {% if prev_chapter %}<a class="mform-pager-link" href="?stage={{ stage.code }}&chapter={{ prev_chapter.code }}">← {{ prev_chapter.emoji }} {{ prev_chapter.title }}</a>{% endif %}
       {% if next_chapter %}<a class="mform-pager-link mform-pager-right" href="?stage={{ stage.code }}&chapter={{ next_chapter.code }}">{{ next_chapter.emoji }} {{ next_chapter.title }} →</a>{% endif %}

@@ -1,7 +1,6 @@
 """数学公式专题的内容加载与契约校验（零模型只读，数据在本目录 formulas.json）。
 
-公式组沿用 content_sources/math-data.js 公式速查的形状：组 = {title, items: [[名称,
-公式], …], note}；再按学段（小学/初中/高中）组织章节。文本契约与 plurals
+每条公式带稳定 ID、使用场景和例题，再按学段（小学/初中/高中）组织章节。文本契约与 plurals
 同口径：字符串值里禁英文双引号、裸换行与 HTML 标签，改数据先过校验。
 """
 import json
@@ -45,8 +44,8 @@ def validate(data):
     """契约校验：结构、学段归属、公式组形状与规模下限；违规抛 ImproperlyConfigured。"""
     if not isinstance(data, dict):
         raise ImproperlyConfigured('数据顶层必须是对象。')
-    if data.get('schema_version') != 1:
-        raise ImproperlyConfigured('schema_version 必须是 1。')
+    if data.get('schema_version') != 2:
+        raise ImproperlyConfigured('schema_version 必须是 2。')
     stages = data.get('stages')
     if not isinstance(stages, list) or [s.get('code') for s in stages] != list(STAGE_CODES):
         raise ImproperlyConfigured(f'stages 必须依次包含 {STAGE_CODES}。')
@@ -82,6 +81,7 @@ def validate(data):
         raise ImproperlyConfigured('groups 不能为空。')
     per_stage_groups = {code: 0 for code in STAGE_CODES}
     per_stage_items = {code: 0 for code in STAGE_CODES}
+    seen_items = set()
     for group in groups:
         chapter = group.get('chapter')
         if chapter not in seen_chapters:
@@ -90,18 +90,30 @@ def validate(data):
         per_stage_groups[stage] += 1
         _require_text(group.get('title'), f'{chapter}/{group.get("title")}', 40)
         note = group.get('note', '')
-        if note and not isinstance(note, str):
+        if not isinstance(note, str):
             raise ImproperlyConfigured(f'{chapter} 组 note 必须是字符串。')
+        if note:
+            _require_text(note, f'{chapter}.note', 160)
         items = group.get('items')
         if not isinstance(items, list) or not items:
             raise ImproperlyConfigured(f'{chapter}/{group.get("title")} 的 items 不能为空。')
         per_stage_items[stage] += len(items)
         for item in items:
-            if (not isinstance(item, list) or len(item) != 2
-                    or not all(isinstance(cell, str) and cell.strip() for cell in item)):
-                raise ImproperlyConfigured(f'{chapter}/{group.get("title")} 的公式条必须是 [名称, 公式] 二元组。')
-            _require_text(item[0], f'{chapter}.name', 30)
-            _require_text(item[1], f'{chapter}.formula', 140)
+            if not isinstance(item, dict):
+                raise ImproperlyConfigured(f'{chapter} 的公式条必须是对象。')
+            item_id = item.get('id')
+            if not isinstance(item_id, str) or not re.fullmatch(r'[a-z][a-z0-9-]{2,63}', item_id):
+                raise ImproperlyConfigured(f'{chapter} 的公式 ID 不合法。')
+            if item_id in seen_items:
+                raise ImproperlyConfigured(f'公式 ID 重复：{item_id}')
+            seen_items.add(item_id)
+            for field, limit in (('name', 30), ('formula', 140), ('usage', 120)):
+                _require_text(item.get(field), f'{item_id}.{field}', limit)
+            example = item.get('example')
+            if not isinstance(example, dict):
+                raise ImproperlyConfigured(f'{item_id} 缺少例题。')
+            for field, limit in (('question', 180), ('solution', 240)):
+                _require_text(example.get(field), f'{item_id}.example.{field}', limit)
     if per_stage_groups['primary'] < 36 or per_stage_items['primary'] < 150:
         raise ImproperlyConfigured('小学公式规模不足（至少 36 组、150 条）。')
     if per_stage_groups['junior'] < 4 or per_stage_groups['senior'] < 4:
@@ -136,3 +148,21 @@ def stages_with_counts():
 def chapter_groups(chapter_code):
     """某章节下的公式组列表（保持数据文件顺序）。"""
     return [group for group in load_data()['groups'] if group['chapter'] == chapter_code]
+
+
+def searchable_groups():
+    """为全库搜索补上章节出处；不修改缓存的源数据。"""
+    data = load_data()
+    chapters = {chapter['code']: chapter for chapter in data['chapters']}
+    stages = {stage['code']: stage['name'] for stage in data['stages']}
+    groups = []
+    for group in data['groups']:
+        chapter = chapters[group['chapter']]
+        label = f"{stages[chapter['stage']]} · {chapter['title']}"
+        items = []
+        for item in group['items']:
+            search_text = ' '.join((label, group['title'], item['name'], item['formula'],
+                                    item['usage'], item['example']['question'], item['example']['solution']))
+            items.append({**item, 'search_text': search_text.lower()})
+        groups.append({**group, 'items': items, 'stage': chapter['stage'], 'source_label': label})
+    return groups

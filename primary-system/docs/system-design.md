@@ -289,14 +289,17 @@ DB 里的两科内容行暂不删除：待静态教材册有全局检索层后�
 
 独立 `mathformulas` 应用承接跨学段的公式速查手册（照 grammar 零模型先例）：
 无模型、无迁移、无学习记录，页面 GET 零写入零会话；`/mathformulas/` 前端
-左右工作区布局（照 phrases/plurals 的 87f4839 统一模式）——左栏 sticky 章节
-导航与页内搜索（纯前端渐进增强），右栏公式组卡流，hero 卡上的学段切换走
+左右工作区布局，章节侧栏复用平台换边组件（默认右侧、可记住位置），正文上方
+提供全库搜索和本机收藏夹，下方为公式卡流；hero 卡上的学段切换走
 服务端 `?stage=`（小学/初中/高中，非法参数回退、跨学段 chapter 回退）。
 
 内容全部在 Git 跟踪的 `mathformulas/data/formulas.json`（`content.py::validate`
 契约校验：学段归属、文本契约禁英文双引号/裸换行/HTML 标签、规模下限），公式
-组沿用 `content_sources/math-data.js` 公式速查的 `{title, items: [[名称, 公式], …],
-note}` 形状。小学按 1-6 年级全覆盖（10 章 42 组 157 条：数的认识、运算、
+组为 `{chapter, title, items, note?}`，schema 2 的每条公式包含稳定 `id`、`name`、
+`formula`、`usage` 和 `example: {question, solution}`。196 条内容各有一道例题。
+`?q=` 服务端和前端均可跨全库搜索，`?view=favorites` 按本机收藏 ID 筛选；收藏
+按账号或游客隔离存在当前浏览器，不入库，来源链接以 `#formula-<ID>` 直达。
+小学按 1-6 年级全覆盖（10 章 42 组 157 条：数的认识、运算、
 方程、分数百分数、比与比例、平面/立体图形、常考数量关系、单位换算、统计）；
 初中高中先搭 5 章框架 + 打底公式（标「整理中」），后续按需补齐。首页数学
 区专题卡经 `SPECIAL_ENTRIES` 注册（route `math-formulas`，新图标 formula.svg）；
