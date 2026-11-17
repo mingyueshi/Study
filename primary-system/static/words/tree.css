@@ -134,3 +134,70 @@
   .tree-modes, .tree-root-chips, .tree-word-actions, .say-chip, .back { display: none !important; }
   .tree-shell { display: block; }
 }
+
+/* 原生 details 保留折叠与键盘操作，连线把上下位关系画出来。 */
+.tree-outline[hidden], .family-memory[hidden], .tree-family-views[hidden], .tree-tools[hidden] { display: none; }
+.tree-diagram { padding: 8px 0; }
+.tree-diagram-root { position: relative; display: flex; align-items: center; flex-wrap: wrap; gap: 8px 12px; width: fit-content; max-width: 100%; margin-bottom: 20px; padding: 14px 20px; border: 2px solid #80b96d; border-radius: 18px; background: #eaf7db; color: #234b38; font-size: 20px; }
+.tree-diagram-root::after { content: ""; position: absolute; left: 26px; top: 100%; height: 22px; border-left: 2px solid #a9ce92; }
+.tree-diagram-root > span:first-child { font-size: 32px; }
+.tree-diagram-root > span[lang] { color: #526749; font-size: 17px; overflow-wrap: anywhere; }
+.tree-diagram-root small { flex-basis: 100%; font-size: 15px; }
+.tree-diagram .tree-nodes { padding-left: 22px; }
+.tree-diagram > .tree-nodes { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 20px; margin-left: 28px; padding: 20px 0 0; border-top: 2px solid #a9ce92; }
+.tree-diagram .tree-branch { padding: 6px 0 6px 4px; }
+.tree-diagram .tree-branch::before { left: -14px; border-color: #a9ce92; }
+.tree-diagram .tree-branch::after { content: ""; position: absolute; top: 29px; left: -14px; width: 18px; border-top: 2px solid #a9ce92; }
+.tree-diagram .tree-branch:last-child::before { bottom: auto; height: 29px; }
+.tree-diagram > .tree-nodes > .tree-branch::before { left: 20px; top: -20px; bottom: auto; height: 26px; }
+.tree-diagram > .tree-nodes > .tree-branch::after { display: none; }
+.tree-diagram summary { max-width: 100%; box-sizing: border-box; padding: 10px 12px; border: 1px solid #c8ddb7; border-radius: 14px; background: #f1f9e9; color: #234b38; font-size: 18px; }
+.tree-diagram details[open] > summary { border-color: #83b66f; background: #e6f3da; }
+.tree-diagram .tree-branch-name { min-width: 0; overflow-wrap: anywhere; }
+.tree-diagram .tree-branch-en { display: block; margin-left: 0; font-size: 15px; }
+.tree-diagram .tree-node-words { position: relative; margin: 12px 0 8px 16px; padding-left: 14px; border-left: 2px dotted #b8ccdf; }
+.tree-diagram .tree-word { background: #eff6ff; border-color: #c6daec; }
+.tree-diagram .tree-word.on { background: var(--green); color: #fff; }
+.tree-diagram .tree-root-words { margin-left: 20px; }
+.tree-diagram summary:focus-visible, .family-memory-flip:focus-visible, .tree-tool:focus-visible { outline: 3px solid #5082d5; outline-offset: 3px; }
+
+/* 一次练一个词尾，正面猜意思，背面核对读音和释义。 */
+.tree-family-views { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 22px; }
+.tree-family-views .tree-tool { padding: 10px 16px; font-size: 17px; font-weight: 750; }
+.tree-family-views [aria-pressed="true"] { border-color: #6952b2; background: #eee6ff; color: #51368e; }
+.family-memory h3 { margin: 0 0 8px; font-size: 25px; }
+.family-memory-tools { display: flex; flex-wrap: wrap; align-items: end; gap: 12px; }
+.family-memory-tools label { display: grid; gap: 6px; min-width: 0; max-width: 100%; font-size: 16px; font-weight: 700; }
+.family-memory-tools select { max-width: 100%; padding: 9px 12px; border: 1px solid #d0c5e5; border-radius: 12px; background: var(--white, #fff); color: var(--ink); font: inherit; }
+.family-memory-progress { margin: 16px 0; color: #66518a; font-size: 16px; font-weight: 650; }
+.family-memory-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 190px), 1fr)); gap: 16px; }
+.family-memory-card { min-width: 0; padding: 8px; border: 1px solid #dcd1ed; border-radius: 22px; background: #faf7ff; }
+.family-memory-flip { display: grid; width: 100%; min-height: 218px; padding: 0; border: 0; border-radius: 16px; background: transparent; cursor: pointer; font: inherit; perspective: 900px; }
+.family-memory-face { grid-area: 1 / 1; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 12px; padding: 22px 12px; border-radius: 16px; backface-visibility: hidden; transition: transform .4s ease; overflow-wrap: anywhere; }
+.family-memory-face b { font-size: clamp(28px, 3vw, 38px); font-weight: 850; }
+.family-memory-face small { color: #65547e; font-size: 15px; }
+.family-memory-front { background: linear-gradient(135deg, #eee5ff, #e3efff); color: #33294b; transform: rotateY(0); }
+.family-memory-back { background: #e8f5de; color: #244f34; transform: rotateY(180deg); }
+.family-memory-back strong { font-size: 24px; }
+.family-memory-ipa { font-size: 19px; color: #57517d; }
+.family-memory-hint { padding: 6px 12px; border-radius: 999px; background: #fff9; font-size: 15px; color: #5c447e; }
+.is-flipped .family-memory-front { transform: rotateY(-180deg); }
+.is-flipped .family-memory-back { transform: rotateY(0); }
+.family-memory-actions { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 8px 4px 0; }
+.family-memory-detail { font-size: 16px; font-weight: 700; }
+.family-memory-listen { width: auto; padding: 10px 16px; font-size: 17px; }
+.tree-memory-guide h3 { margin: 0 0 12px; font-size: 28px; color: #51368e; }
+.tree-memory-guide .tree-family-tip { margin-top: 18px; line-height: 1.8; }
+.family-memory-nav { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; margin-top: 20px; }
+.family-memory-nav .tree-tool { min-height: 44px; font-size: 16px; }
+.family-memory-nav button:disabled { opacity: .45; cursor: default; }
+@media (max-width: 560px) {
+  .tree-board { padding: 16px 12px; }
+  .tree-diagram .tree-nodes { padding-left: 14px; }
+  .tree-diagram > .tree-nodes { margin-left: 8px; }
+  .tree-diagram .tree-branch::before, .tree-diagram .tree-branch::after { left: -10px; }
+  .tree-diagram .tree-branch::after { width: 14px; }
+  .family-memory-grid { grid-template-columns: minmax(0, 1fr); }
+}
+@media (prefers-reduced-motion: reduce) { .family-memory-face { transition: none; } }
+html[data-study-motion="gentle"] .family-memory-face, html[data-study-motion="off"] .family-memory-face { transition: none; }

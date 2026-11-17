@@ -5,6 +5,66 @@
 'use strict';
 
 (() => {
+  /* 变身游戏只揭晓词形，不作为答题上报。题池复用页面的核心词卡。 */
+  const transform = document.querySelector('[data-plural-transform]');
+  if (transform) {
+    const pool = Array.from(document.querySelectorAll('[data-plural-card][data-tier="core"]'))
+      .map(card => ({...card.dataset, note: card.querySelector('.plural-note')?.textContent || ''}));
+    if (pool.length) {
+      const get = name => transform.querySelector(`[data-transform-${name}]`);
+      const flip = get('flip');
+      const seen = new Set();
+      let deck = [], index = 0, revealed = false;
+      const render = () => {
+        const card = deck[index];
+        transform.hidden = false;
+        flip.classList.toggle('is-transformed', revealed);
+        flip.setAttribute('aria-pressed', String(revealed));
+        flip.setAttribute('aria-label', revealed ? `${card.singular} 的复数是 ${card.plural}，点击变回单数` : `${card.singular}，点击变成复数`);
+        get('word').textContent = revealed ? card.plural : card.singular;
+        get('ipa').textContent = revealed ? card.pluralIpa : card.singularIpa;
+        get('count').textContent = revealed ? '多个 · 复数' : '一个 · 单数';
+        get('emoji').textContent = (card.emoji || '🔤').repeat(revealed ? 3 : 1);
+        get('zh').textContent = card.zh;
+        get('cue').textContent = revealed ? '↶ 点一下变回单数' : '🪄 点一下，变身！';
+        get('say').dataset.say = revealed ? card.plural : card.singular;
+        get('say').setAttribute('aria-label', `朗读 ${get('say').dataset.say}`);
+        get('result').textContent = revealed
+          ? `${card.singular} → ${card.plural}。${card.singular === card.plural ? '数量变多，单词的样子不变！' : card.note || '把单数和复数连起来读一读。'}`
+          : '先想一想：它的复数是什么？';
+        get('progress').textContent = `第 ${index + 1}／${deck.length} 个 · 已变身 ${seen.size}／${deck.length}${seen.size === deck.length ? '，全都看过啦！' : ''}`;
+        get('next').disabled = index === deck.length - 1;
+        get('restart').hidden = index !== deck.length - 1;
+      };
+      const restart = () => {
+        const lastWord = deck[index]?.singular;
+        deck = [...pool];
+        for (let i = deck.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [deck[i], deck[j]] = [deck[j], deck[i]];
+        }
+        if (deck.length > 1 && deck[0].singular === lastWord) [deck[0], deck[1]] = [deck[1], deck[0]];
+        index = 0;
+        revealed = false;
+        seen.clear();
+        render();
+      };
+      flip.addEventListener('click', () => {
+        revealed = !revealed;
+        if (revealed) seen.add(deck[index].singular);
+        render();
+      });
+      get('next').addEventListener('click', () => {
+        if (index >= deck.length - 1) return;
+        index += 1;
+        revealed = false;
+        render();
+      });
+      get('restart').addEventListener('click', () => { restart(); flip.focus(); });
+      restart();
+    }
+  }
+
   /* ── 练习：判分 + 上报 + 计分 ─────────────────────────────────────── */
   const round = document.querySelector('[data-plural-round]');
   if (round) {
@@ -79,7 +139,7 @@
     /* 键盘：输入框里不抢按键；数字 1~4 作答，答完 Enter 换一题。 */
     document.addEventListener('keydown', (event) => {
       if (event.defaultPrevented || event.ctrlKey || event.metaKey || event.altKey) return;
-      if (event.target.closest?.('input, textarea, select')) return;
+      if (event.target.closest?.('input, textarea, select, button, a, [contenteditable="true"]')) return;
       if (event.key === 'Enter') {
         if (answered && nextLink) {
           event.preventDefault();
@@ -108,7 +168,7 @@
       cards.forEach((card) => {
         const matchBucket = bucket === 'all' || card.dataset.group === bucket;
         const matchQuery = !query || card.dataset.singular.toLowerCase().includes(query)
-          || (card.dataset.zh || '').includes(query);
+          || (card.dataset.plural || '').toLowerCase().includes(query) || (card.dataset.zh || '').includes(query);
         card.hidden = !(matchBucket && matchQuery);
       });
       groups.forEach((group) => {

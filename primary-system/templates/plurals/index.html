@@ -1,5 +1,5 @@
 {% extends 'base.html' %}{% load static %}{% block title %}不规则复数 · 乐学堂{% endblock %}
-{% block content %}<link rel="stylesheet" href="{% static 'plurals/plurals.css' %}?v=7"><script src="{% static 'speech.js' %}" defer></script><script src="{% static 'tts.js' %}" defer></script><script src="{% static 'plurals/plurals.js' %}?v=2" defer></script>
+{% block content %}<link rel="stylesheet" href="{% static 'plurals/plurals.css' %}?v=8"><script src="{% static 'speech.js' %}" defer></script><script src="{% static 'tts.js' %}" defer></script><script src="{% static 'plurals/plurals.js' %}?v=3" defer></script>
 <header class="plural-hero">
   <div class="plural-hero-copy">
     <p class="eyebrow">英语 · 认词形</p>
@@ -12,6 +12,17 @@
     <span class="plural-demo-card right">men<i>一群男人</i></span>
   </div>
 </header>
+
+<section class="plural-transform" id="transform" data-plural-transform hidden aria-labelledby="transform-title">
+  <div class="plural-transform-intro"><p class="eyebrow">🪄 单词变身屋</p><h2 id="transform-title">一个变多个，单词怎么变？</h2><p>先在心里说出复数，再点单词看它变身。遇到单复同形的词，记得观察数量哦。</p><p class="plural-transform-progress" data-transform-progress role="status" aria-live="polite"></p></div>
+  <div class="plural-transform-stage">
+    <button class="plural-transform-card" type="button" data-transform-flip aria-pressed="false">
+      <span class="plural-transform-count" data-transform-count></span><span class="plural-transform-emoji" data-transform-emoji aria-hidden="true"></span><b lang="en" data-transform-word></b><span class="plural-ipa" data-transform-ipa></span><span data-transform-zh></span><span class="plural-transform-cue" data-transform-cue></span>
+    </button>
+    <p class="plural-transform-result" data-transform-result role="status" aria-live="polite"></p>
+    <div class="plural-transform-actions"><button class="say-chip" type="button" data-transform-say>🔊 听读音</button><button class="button small" type="button" data-transform-next>下一个 →</button><button type="button" data-transform-restart hidden>再玩一轮 ↻</button></div>
+  </div>
+</section>
 
 <div class="plural-workspace">
   <div class="plural-side">
@@ -44,7 +55,7 @@
       <div class="section-heading"><div><h2>{{ group.name }}</h2><p>{{ group.hint }}</p></div></div>
       <div class="plural-grid">
         {% for card in group.rows %}
-        <article class="plural-card" data-plural-card data-singular="{{ card.singular }}" data-zh="{{ card.zh }}" data-group="{{ card.group }}">
+        <article class="plural-card" data-plural-card data-singular="{{ card.singular }}" data-plural="{{ card.plural }}" data-zh="{{ card.zh }}" data-group="{{ card.group }}" data-tier="{{ card.tier }}" data-emoji="{{ card.emoji }}" data-singular-ipa="{{ card.singular_ipa }}" data-plural-ipa="{{ card.plural_ipa }}">
           {% if card.tier == 'extended' %}<span class="plural-tier">拓展</span>{% endif %}
           <p class="plural-pair"><button type="button" class="plural-say" data-say="{{ card.singular }}" aria-label="朗读 {{ card.singular }}"><b class="plural-singular">{{ card.singular }}</b></button>{% if card.singular_ipa %}<i class="plural-ipa">{{ card.singular_ipa }}</i>{% endif %}<span class="plural-arrow" aria-hidden="true">→</span><button type="button" class="plural-say" data-say="{{ card.plural }}" aria-label="朗读 {{ card.plural }}"><b class="plural-plural">{{ card.plural }}</b></button>{% if card.plural_ipa %}<i class="plural-ipa">{{ card.plural_ipa }}</i>{% endif %}</p>
           <p class="plural-zh">{% if card.emoji %}{{ card.emoji }} {% endif %}{{ card.zh }}

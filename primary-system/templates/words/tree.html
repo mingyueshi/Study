@@ -1,5 +1,5 @@
 {% extends 'base.html' %}{% load static %}{% block title %}词以类聚 · 乐学堂{% endblock %}
-{% block content %}<link rel="stylesheet" href="{% static 'words/tree.css' %}?v=3"><script src="{% static 'speech.js' %}" defer></script><script src="{% static 'tts.js' %}" defer></script><script src="{% static 'words/tree.js' %}?v=2" defer></script>
+{% block content %}<link rel="stylesheet" href="{% static 'words/tree.css' %}?v=4"><script src="{% static 'speech.js' %}" defer></script><script src="{% static 'tts.js' %}" defer></script><script src="{% static 'words/tree.js' %}?v=3" defer></script>
 <header class="tree-hero">
   <div class="tree-hero-copy">
     <p class="eyebrow">英语 · 看结构</p>
@@ -22,11 +22,30 @@
   <section class="tree-board">
     <div class="tree-board-head">
       <h2 class="tree-title">{{ selected_root.emoji }} {{ selected_root.zh }} <span class="muted">{% if is_spelling %}{{ selected_root.children|length }} 组 · {% endif %}{{ selected_root.total }} 词</span></h2>
-      <div class="tree-tools"><button type="button" class="tree-tool" data-tree-expand>展开全部</button><button type="button" class="tree-tool" data-tree-collapse>全部收起</button></div>
+      <div class="tree-tools" data-tree-outline-tools><button type="button" class="tree-tool" data-tree-expand>展开全部</button><button type="button" class="tree-tool" data-tree-collapse>全部收起</button></div>
     </div>
-    {% if is_spelling %}<p class="tree-family-tip">挑一个词尾，点单词听一听。换掉开头，再读一个词，听听哪一段声音一样。</p>{% endif %}
+    {% if is_spelling %}
+    <div class="tree-family-views" data-family-views hidden aria-label="拼写家族学习方式">
+      <button class="tree-tool" type="button" data-family-view="memory" aria-pressed="true">🃏 翻卡记单词</button>
+      <button class="tree-tool" type="button" data-family-view="outline" aria-pressed="false">🔤 词尾目录</button>
+    </div>
+    <section class="family-memory" data-family-memory hidden aria-label="单词家族记忆卡">
+      <h3>单词家族记忆卡</h3>
+      <p class="tree-family-tip">先读正面的单词，猜猜意思，再翻过来核对。彩色部分是这一家的共同词尾。</p>
+      <div class="family-memory-tools">
+        <label>挑一个家族 <select data-family-select aria-label="选择拼写家族">{% for family in selected_root.children %}<option value="{{ family.id }}">{{ family.zh }} · {{ family.ipa }} · {{ family.total }} 词</option>{% endfor %}</select></label>
+        <button type="button" class="tree-tool" data-family-reset>全部翻回</button>
+      </div>
+      <p class="family-memory-progress" data-family-progress role="status" aria-live="polite"></p>
+      <div class="family-memory-grid" data-family-deck></div>
+      <div class="family-memory-nav"><button class="tree-tool" type="button" data-family-prev>← 上一家族</button><button class="tree-tool" type="button" data-family-next>下一家族 →</button></div>
+    </section>
+    {% else %}<p class="tree-family-tip">顺着连线，从大类找到小类，再找到单词。点枝干展开或收起，点单词看词卡。</p>{% endif %}
+    <div class="tree-outline{% if not is_spelling %} tree-diagram{% endif %}" data-tree-outline>
+    {% if not is_spelling %}<div class="tree-diagram-root"><span aria-hidden="true">{{ selected_root.emoji }}</span><strong>{{ selected_root.zh }}</strong><span lang="en">{{ selected_root.en }}</span><small>大类 → 小类 → 单词</small></div>{% endif %}
     {% if selected_root.words %}<div class="tree-node-words tree-root-words">{% for word in selected_root.words %}{% include 'words/tree_word.html' %}{% endfor %}</div>{% endif %}
     {% include 'words/tree_nodes.html' with node=selected_root path_ids=path_ids %}
+    </div>
   </section>
   <aside class="tree-word-panel" id="tree-panel">{% if selected_word %}
     <article class="tree-word-card" id="tree-word-card">

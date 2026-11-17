@@ -14,6 +14,7 @@
   const rootEmoji = shell.dataset.rootEmoji || '';
   const sceneUrl = shell.dataset.sceneUrl;
   const dictUrl = shell.dataset.dictUrl || '/dictionary/';
+  const outline = board.querySelector('[data-tree-outline]') || board;
 
   const el = (tag, className, text) => {
     const node = document.createElement(tag);
@@ -25,7 +26,10 @@
   /* —— 展开状态记忆：按枝干 id 存（key v2，与旧版文本键不兼容）—— */
   const STORE_KEY = 'words_tree_expand_v2';
   let saved = {};
-  try { saved = JSON.parse(localStorage.getItem(STORE_KEY) || '{}') || {}; } catch (e) { /* 忽略 */ }
+  try {
+    const value = JSON.parse(localStorage.getItem(STORE_KEY) || '{}');
+    if (value && typeof value === 'object' && !Array.isArray(value)) saved = value;
+  } catch (e) { /* 忽略 */ }
   const save = () => {
     try { localStorage.setItem(STORE_KEY, JSON.stringify(saved)); } catch (e) { /* 忽略 */ }
   };
@@ -33,6 +37,8 @@
     const id = details.closest('.tree-branch')?.id;
     if (!id) return;
     if (id in saved && !details.hasAttribute('data-path-open')) details.open = saved[id];
+    else if (rootKey !== 'spelling' && !location.search.includes('branch=')
+      && !location.search.includes('word=') && details.closest('.tree-branch').parentElement.parentElement === outline) details.open = true;
     details.addEventListener('toggle', () => { saved[id] = details.open; save(); });
   });
 
@@ -61,11 +67,11 @@
     return button;
   };
 
-  // 一个 details 的直属词（:scope > 避开嵌套枝干和末尾 leaves 的重复渲染）
+  // 一个 details 的直属词（:scope > 避开嵌套枝干）
   const ownChips = (details) =>
     Array.from(details.querySelectorAll(':scope > .tree-node-words .tree-word'));
   const rootOwnChips = () =>
-    Array.from(board.querySelectorAll(':scope > .tree-root-words .tree-word'));
+    Array.from(outline.querySelectorAll(':scope > .tree-root-words .tree-word'));
 
   // 枝干子树全部词：直属 + 子枝递归
   const subtreeChips = (details) => {
@@ -108,7 +114,7 @@
     if (own.length) groups.push({ title: active?.branchIpa ? active.branchZh : '本级', ipa: active?.branchIpa, chips: own });
     const lis = branchLi
       ? branchLi.querySelectorAll(':scope > details > ul.tree-nodes > li.tree-branch')
-      : board.querySelectorAll(':scope > .tree-nodes > li.tree-branch');
+      : outline.querySelectorAll(':scope > .tree-nodes > li.tree-branch');
     lis.forEach((li) => {
       const chips = subtreeChips(li.querySelector('details'));
       if (chips.length) {
@@ -260,4 +266,130 @@
       : null;
     renderWall(branchLi?.classList.contains('tree-branch') ? branchLi : null, false);
   }
+
+  /* 拼写家族：复用目录中的例词，不另存释义或读音。 */
+  const memory = board.querySelector('[data-family-memory]');
+  if (!memory) return;
+  const views = board.querySelector('[data-family-views]');
+  const select = memory.querySelector('[data-family-select]');
+  const deck = memory.querySelector('[data-family-deck]');
+  const progress = memory.querySelector('[data-family-progress]');
+  const previous = memory.querySelector('[data-family-prev]');
+  const next = memory.querySelector('[data-family-next]');
+  const families = Array.from(outline.querySelectorAll(':scope > .tree-nodes > .tree-branch'));
+  const viewed = new Set();
+  let flips = [];
+  const updateProgress = () => {
+    progress.textContent = `这一家族已翻看 ${viewed.size}／${flips.length} 张${viewed.size === flips.length ? '，试着把它们连起来读一读！' : '，先猜一猜，再翻卡。'}`;
+  };
+  const renderMemory = (family) => {
+    select.value = family.id;
+    viewed.clear();
+    flips = [];
+    deck.replaceChildren();
+    ownChips(family.querySelector('details')).forEach((source) => {
+      const data = chipData(source);
+      const card = el('article', 'family-memory-card');
+      const flip = el('button', 'family-memory-flip');
+      flip.type = 'button';
+      const front = el('span', 'family-memory-face family-memory-front');
+      const word = el('b');
+      addSpelling(word, data);
+      front.append(el('small', '', '读单词，猜意思'), word, el('span', 'family-memory-hint', '点一下翻卡 ↻'));
+      const back = el('span', 'family-memory-face family-memory-back');
+      const backWord = el('b');
+      addSpelling(backWord, data);
+      back.append(backWord, el('span', 'family-memory-ipa', data.ipa), el('strong', '', data.zh), el('small', '', '再点一下回正面'));
+      front.setAttribute('aria-hidden', 'true');
+      back.setAttribute('aria-hidden', 'true');
+      flip.append(front, back);
+      const setFlipped = (on) => {
+        flip.classList.toggle('is-flipped', on);
+        flip.setAttribute('aria-pressed', String(on));
+        flip.setAttribute('aria-label', on ? `${data.en}，${data.ipa}，${data.zh}。翻回单词正面` : `${data.en}，翻卡看意思和读音`);
+      };
+      setFlipped(false);
+      flip.addEventListener('click', () => {
+        const on = flip.getAttribute('aria-pressed') !== 'true';
+        setFlipped(on);
+        if (on) viewed.add(data.en);
+        updateProgress();
+      });
+      flips.push(setFlipped);
+      const actions = el('div', 'family-memory-actions');
+      const detail = el('a', 'family-memory-detail', '看词卡 →');
+      detail.href = source.href;
+      detail.addEventListener('click', (event) => {
+        event.preventDefault();
+        wallBranch = family;
+        renderCard(data);
+      });
+      actions.append(sayButton(data.en), detail);
+      card.append(flip, actions);
+      deck.append(card);
+    });
+    const index = families.indexOf(family);
+    previous.disabled = index === 0;
+    next.disabled = index === families.length - 1;
+    updateProgress();
+  };
+  const renderMemoryGuide = (family) => {
+    const guide = el('section', 'tree-wall tree-memory-guide');
+    const data = family.querySelector('summary').dataset;
+    guide.append(el('h3', '', `${data.branchZh} 家族`), el('p', 'tree-word-ipa', data.branchIpa),
+      el('p', 'tree-family-tip', '保留彩色词尾，换个开头读一读。先猜意思，再翻卡核对。'));
+    const words = ownChips(family.querySelector('details')).map(chip => chipData(chip).en);
+    const say = sayButton(words.join(', '));
+    say.textContent = '🔊 听这一家';
+    say.classList.add('family-memory-listen');
+    say.setAttribute('aria-label', `朗读 ${data.branchZh} 家族的单词`);
+    guide.append(say, el('p', 'tree-family-tip', '翻完后点「全部翻回」，看看这次能不能自己说出每个词的意思。'));
+    panel.replaceChildren(guide);
+  };
+  const chooseFamily = (family) => {
+    renderMemory(family);
+    wallBranch = family;
+    setUrl(`root=${encodeURIComponent(rootKey)}&branch=${encodeURIComponent(family.id)}`);
+    renderMemoryGuide(family);
+  };
+  select.addEventListener('change', () => chooseFamily(families.find(family => family.id === select.value)));
+  previous.addEventListener('click', () => {
+    const index = families.findIndex(family => family.id === select.value);
+    if (index > 0) chooseFamily(families[index - 1]);
+  });
+  next.addEventListener('click', () => {
+    const index = families.findIndex(family => family.id === select.value);
+    if (index < families.length - 1) chooseFamily(families[index + 1]);
+  });
+  memory.querySelector('[data-family-reset]').addEventListener('click', () => {
+    flips.forEach(setFlipped => setFlipped(false));
+    viewed.clear();
+    updateProgress();
+  });
+  const viewKey = 'words_family_view_v1';
+  const showView = (view) => {
+    const isMemory = view !== 'outline';
+    memory.hidden = !isMemory;
+    outline.hidden = isMemory;
+    board.querySelector('[data-tree-outline-tools]').hidden = isMemory;
+    views.querySelectorAll('[data-family-view]').forEach(button => {
+      button.setAttribute('aria-pressed', String(button.dataset.familyView === (isMemory ? 'memory' : 'outline')));
+    });
+    if (isMemory) {
+      const family = wallBranch || families[0];
+      renderMemory(family);
+      if (!panel.querySelector('.tree-word-card')) renderMemoryGuide(family);
+    } else renderWall(wallBranch, false);
+  };
+  views.hidden = false;
+  renderMemory(wallBranch || families[0]);
+  let initialView = 'memory';
+  try { initialView = localStorage.getItem(viewKey) || 'memory'; } catch (e) { /* 默认翻卡 */ }
+  showView(initialView);
+  views.addEventListener('click', (event) => {
+    const button = event.target.closest('[data-family-view]');
+    if (!button) return;
+    showView(button.dataset.familyView);
+    try { localStorage.setItem(viewKey, button.dataset.familyView); } catch (e) { /* 本页仍可切换 */ }
+  });
 })();
