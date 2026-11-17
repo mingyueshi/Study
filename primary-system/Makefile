@@ -164,6 +164,9 @@ test-frontend: ## 跑 Node 前端回归测试
 	node --test scripts/test_origins_interactions.cjs
 	node --test scripts/test_lit_explore.cjs
 	node --test scripts/test_timeline_navigation.cjs
+	node --test scripts/test_history_people.cjs
+	node --test scripts/test_civilizations.cjs
+	node --test scripts/test_ancient_science.cjs
 	node --test scripts/test_china_terrain_visual.cjs
 	node --test scripts/test_world_play.cjs
 	node --test scripts/test_china_terrain_stream.cjs

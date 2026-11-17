@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="看历史人物名片，核查人物关系，讨论关键决策的背景、影响与局限。">
+  <title>历史人物馆 · 乐学堂</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="people.css">
+  <script src="content.js" defer></script>
+  <script src="timeline-data.js" defer></script>
+  <script src="people-data.js" defer></script>
+  <script src="shared.js" defer></script>
+  <script src="navigation.js" defer></script>
+  <script src="people-shared.js" defer></script>
+  <script src="people-app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#people-results">跳到人物名片</a>
+  <main id="main" class="tl-shell hp-shell">
+    <div class="people-topic" id="top">
+      <nav class="tl-sysnav" aria-label="历史时间轴系统页面导航">
+        <a class="tl-sysnav-brand" href="index.html">历史时间轴<small>中国史与世界史</small></a>
+        <a href="timeline.html">双轨时间轴</a><a href="era.html">时代站</a><a href="dynasties.html">朝代与版图</a><a href="people.html" aria-current="page">历史人物馆</a>
+      <a href="civilizations.html">世界文明巡礼</a><a data-page href="ancient-science.html">中国古代科技</a></nav>
+      <header class="hp-hero">
+        <div><p class="tl-eyebrow">从一个人的选择，走进一个时代</p><h1>历史人物馆</h1>
+          <p>先认识人物，再沿关系找线索；把他面对的问题、实际做法和后来的影响放在一起看。</p></div>
+        <div class="hp-stats" id="people-stats" aria-label="人物馆内容规模"></div>
+      </header>
+      <div class="hp-workspace" data-sidebar-layout=".hp-sidebar" data-sidebar-width="clamp(240px, 23vw, 300px)" data-sidebar-breakpoint="760" data-sidebar-label="人物筛选" data-sidebar-fixed=".hp-side-title">
+        <section class="hp-main" aria-labelledby="people-results">
+          <div class="hp-reading-head"><h2 id="people-results" data-tl-anchor tabindex="-1">认识人物</h2><p id="people-count" role="status"></p></div>
+          <div class="hp-view-tabs" role="group" aria-label="选择人物馆视图">
+            <button type="button" data-view="cards" aria-pressed="true">人物名片</button><button type="button" data-view="network" aria-pressed="false">人物关系网</button>
+          </div>
+          <p class="hp-image-note">图像可能是后世画像、纪念雕塑或相关作品。打开名片看图注与出处，不能只凭画像认定真实相貌。</p>
+          <div class="hp-empty" id="people-empty" hidden><h3>没有找到符合条件的人物</h3><p>试着少输入几个字，或放开分类和时代。</p><button type="button" data-reset>清空筛选</button></div>
+          <div class="hp-card-grid" id="people-cards"></div>
+          <section class="hp-network" id="people-network" aria-label="人物关系网" hidden>
+            <div class="hp-network-intro"><h3 id="network-title"></h3><p>每次围绕一人看关系。点图中人物继续展开，或从下方关系说明打开完整名片。</p></div>
+            <details class="hp-picker-wrap"><summary>换一位中心人物</summary><div class="hp-focus-picker" id="network-picker" role="group" aria-label="选择关系网的中心人物"></div></details>
+            <div class="hp-kind-filter" id="network-kinds" role="group" aria-label="筛选关系类型"></div>
+            <p class="hp-graph-note">实线表示已收录的任职或交往关系；虚线表示学术承接、书写推重或比较背景。同代不等于相识。</p>
+            <div id="network-graph"></div>
+            <p class="hp-network-status" id="network-status" role="status"></p>
+            <div id="network-relations"></div>
+          </section>
+        </section>
+        <aside class="hp-sidebar">
+          <div class="hp-side-title"><h2>选一条线索</h2><p>身份只是入口，同一个人可以跨越多个领域。</p></div>
+          <label class="hp-search-label" for="people-search">找名字、作品或问题</label><input id="people-search" type="search" placeholder="如李白、几何、书法" autocomplete="off">
+          <h3>按身份看</h3><div class="hp-filter-buttons" id="people-groups" role="group" aria-label="按身份筛选"></div>
+          <h3>按时代看</h3><div class="hp-filter-buttons" id="people-eras" role="group" aria-label="按时代筛选"></div>
+          <button type="button" class="hp-reset" data-reset>清空筛选</button>
+          <details class="hp-reading-tips"><summary>怎样看人物和关系？</summary><p>先看年代，避免把跨时代的影响误读为见面；再看出处，区分史实、解释与讨论问题。</p></details>
+        </aside>
+      </div>
+      <noscript><p class="tl-notice">请启用 JavaScript 查看人物名片与关系网。资料和图片保存在本目录。</p></noscript>
+    </div>
+  </main>
+  <footer class="tl-footer"><a href="timeline.html">双轨时间轴</a> · <a href="people.html">历史人物馆</a> · <a href="#top">回到顶部 ↑</a></footer>
+</body>
+</html>

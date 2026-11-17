@@ -13,7 +13,7 @@ STATIC = PROJECT / 'static' / 'study_topics'
 TOPICS = {
     'history': ('', '', ('index',)),
     'geo': ('', '', ('index',)),
-    'history-timeline': ('study-timeline', 'history-timeline', ('index', 'timeline', 'era', 'event', 'dynasties')),
+    'history-timeline': ('study-timeline', 'history-timeline', ('index', 'timeline', 'era', 'event', 'dynasties', 'people', 'person', 'civilizations', 'civilization', 'ancient-science', 'technology')),
     'geo-map': ('study-atlas', 'geography-atlas', ('index', 'china', 'china-3d', 'animals', 'plants', 'world', 'world-3d', 'world-animals', 'world-plants', 'province', 'places', 'routes', 'gallery')),
 }
 COURSES = ('astro', 'lit', 'sci', 'hanzi-evo')

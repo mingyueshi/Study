@@ -1,0 +1,57 @@
+/* 科技档案：实物观察与可操作的原理模型。 */
+.as-card h3 { font-size: 25px; }
+#science-search { width: 100%; min-width: 0; padding: 11px; border: 1px solid var(--tl-line); border-radius: 10px; color: var(--tl-ink); background: var(--tl-card,#fff); font: inherit; font-size: 17px; }
+.as-directory { display: grid; gap: 12px; font-size: 17px; }
+.as-directory a { color: var(--tl-pair-deep); line-height: 1.6; }
+.as-note { padding: 16px 20px; border-left: 4px solid var(--person-color,var(--tl-pair-deep)); border-radius: 8px; background: var(--tl-pair-soft); font-size: 17px; line-height: 1.85; }
+.as-hero { grid-template-columns: 1fr; }
+.as-hero h1 { max-width: 24em; font-size: clamp(32px,3.2vw,48px); line-height: 1.5; }
+.as-hero h2 { font-size: 23px; line-height: 1.7; }
+.technology-topic .as-hero p,.technology-topic .hp-profile-section > p,.as-impact,.as-reflection > details { max-width: 76ch; }
+.as-steps { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,280px),1fr)); gap: 18px; list-style: none; padding: 0; counter-reset: science-steps; }
+.as-steps li { padding: 20px; border-radius: 12px; background: var(--tl-pair-soft); counter-increment: science-steps; }
+.as-steps h3 { margin: 0 0 12px; font-size: 21px; }
+.as-steps h3::before { content: counter(science-steps) ' · '; color: var(--tl-pair-deep); }
+.as-steps p,.as-impact li,.as-reflection p,.as-reflection summary { font-size: 19px; line-height: 1.85; }
+.as-impact li { margin-block: 12px; }
+.as-reflection summary { padding-top: 12px; cursor: pointer; color: var(--tl-pair-deep); font-weight: 750; }
+.as-evidence { display: grid; grid-template-columns: minmax(160px,35%) minmax(0,1fr); gap: 26px; align-items: center; padding: 22px; margin: 24px 0; border: 1px solid var(--tl-line); border-radius: 16px; }
+.as-evidence > a { min-width: 0; }
+.as-evidence img { display: block; width: 100%; height: auto; max-height: 460px; object-fit: contain; }
+.as-evidence figcaption { font-size: 18px; line-height: 1.85; overflow-wrap: anywhere; }
+.as-evidence p { margin: 10px 0; }
+.as-evidence b { font-size: 22px; }
+.as-evidence small { font-size: 14px; color: var(--tl-ink-soft); }
+.as-evidence a { color: var(--tl-pair-deep); }
+.as-demo { margin: 24px 0; padding: clamp(16px,2vw,26px); border: 2px solid var(--tl-line); border-radius: 18px; background: color-mix(in srgb,var(--tl-pair-soft) 35%,var(--tl-card,#fff)); }
+.as-demo h3 { margin: 0 0 12px; font-size: 25px; }
+.as-demo p { font-size: 18px; line-height: 1.85; }
+.as-controls { display: flex; flex-wrap: wrap; gap: 10px; margin-block: 15px; }
+.as-controls button { padding: 10px 15px; min-height: 44px; border: 1px solid var(--tl-line); border-radius: 10px; color: var(--tl-pair-deep); background: var(--tl-card,#fff); font: inherit; font-size: 17px; font-weight: 750; cursor: pointer; }
+.as-controls button[aria-pressed="true"] { background: var(--tl-pair-deep); color: #fff; border-color: var(--tl-pair-deep); }
+.as-demo-visual { display: grid; grid-template-columns: minmax(0,1fr) minmax(240px,1fr); gap: 24px; align-items: center; }
+.as-diagram { width: 100%; max-width: 650px; height: auto; margin: auto; display: block; background: #f5f8f7; border-radius: 12px; }
+.as-pi-results { padding: 18px; border-radius: 12px; background: var(--tl-card,#fff); }
+.as-pi-results p { font-size: 20px; }
+.as-pi-results b { display: block; font-size: clamp(21px,2vw,28px); font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.as-lower { color: var(--tl-world-deep); }.as-upper { color: var(--tl-china-deep); }
+.as-print-pair { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 20px; }
+.as-print-pair h4 { margin: 8px 0 12px; font-size: 19px; }
+.as-print-board { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); padding: 12px; gap: 6px; border: 3px solid #86623f; border-radius: 8px; background: #dcc39e; }
+.as-print-board.is-face { transform: scaleX(-1); }
+.as-print-board.is-block { gap: 0; background: #bb956d; }
+.as-print-board span { padding: 15px 2px; border: 1px solid #86623f; color: #69492c; background: #e9d5b4; text-align: center; font-family: serif; font-size: clamp(28px,4cqw,58px); font-weight: 800; }
+.as-print-board.is-block span { border: 0; background: transparent; }
+.as-print-board.is-inked span { color: #211d19; }
+.as-print-board.is-changed span:nth-child(3) { background: #f6db83; outline: 2px solid #8c6323; }
+.as-print-board.is-block.is-changed { outline: 2px solid #8c6323; outline-offset: 2px; }
+.as-print-board.is-block.is-changed span:nth-child(3) { outline: none; background: #f6db8355; }
+.as-print-board.is-paper { border-color: #aaa48e; background: #fffdf0; gap: 0; }
+.as-print-board.is-paper span { border: 0; color: #211d19; background: transparent; }
+.as-print-board.is-blank span { visibility: hidden; }
+.as-print-pair > div { min-width: 0; }
+.as-demo-status { padding: 14px 18px; border-radius: 10px; background: var(--tl-card,#fff); }
+.as-water-key { padding-left: 22px; font-size: 18px; line-height: 1.85; }
+.as-water-key li { margin-block: 12px; }
+@container people-reading (max-width: 780px) { .as-demo-visual,.as-print-pair,.as-evidence { grid-template-columns: 1fr; } .as-evidence img { max-height: 380px; } }
+@media(max-width: 480px) { .as-evidence { padding: 14px; } .as-demo { padding: 14px; } .as-controls button { padding-inline: 11px; } }

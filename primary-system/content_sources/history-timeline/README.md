@@ -6,11 +6,17 @@
 
 | 页面 | 可以做什么 |
 | --- | --- |
+| `ancient-science.html` | 按六个领域与关键词浏览 12 个科技档案，直达三个原理演示。 |
+| `technology.html?topic=pi` | 阅读原理、分步解释、实物材料、影响、辨误与讨论题，联系人物和中外时间轴。 |
 | `index.html` | 按时间选时代站，或进入总时间轴查找大事。 |
 | `timeline.html` | 浏览 9 个时代里的 126 件大事，按年代窗口缩放、滑动选年，输入年份或朝代定位；可切换 30 组中外并列对比，顶部朝代色带随阅读位置高亮。搜索和素材筛选可叠加。 |
 | `era.html?era=voyage` | 顺着年代读一个时代的完整事件卡片，看这个时代的教学图集、中外对照和相关朝代，向前或向后换一站。 |
 | `event.html?event=tc27` | 单独打开一件大事。带素材的详情可以看大图、读图注和观察提示，部分素材可听录音。也能查看同一时期另一边发生了什么，沿关联阅读链跨时代继续读，或回到总轴上的原位置。 |
 | `dynasties.html` | 切换夏到清 16 个朝代、22 个阶段的地图，在底图上圈出范围，可顺序播放、暂停续播、叠加对照、缩放和平移。再读朝代怎样建立和结束，回到各自的时代站看中外大事。公元纪年小课堂有数轴、算法和练习。 |
+| `people.html` | 历史人物馆：按身份、时代和名字或作品筛选 24 位人物，切换名片与人物关系网，沿 18 条有出处的关系继续阅读。 |
+| `person.html?person=li-bai` | 人物档案：名片、图注、主要事迹、关键决策与创作选择、人物关系、相关事件和时代入口。 |
+| `civilizations.html` | 世界文明巡礼：八座文明站，可搜文明、地区与知识线索，按建筑、文字、制度、成就浏览，或选择两座文明围绕同一问题比较。 |
+| `civilization.html?civilization=maya` | 文明档案：范围与年代、四个主题知识站、图像观察、讲解参考、材料局限、出处及时间轴入口。 |
 
 总轴沿用统一系统默认右侧的工具栏，可移到左侧并保存选择；竖屏和窄屏可展开工具。正文够宽时，中国史在左，世界史在右。竖屏空间较紧时，两轨按同一年代顺序排成单列，卡片标出各自所属的轨道。上下间距用来表示先后，长时段采用代表年代排序。同一行使用相同的排序年代。
 
@@ -40,13 +46,39 @@
 
 朝代目录使用统一系统的右侧栏，可移到左侧并在当前浏览器记忆。
 
+## 历史人物馆
+
+首批 24 位人物分为帝王将相、科学家、文学家、艺术家四类，每类 6 位，包括中国与世界人物。身份是浏览入口，不排除人物跨领域活动。24 个决策与创作选择案例均按「背景—讨论问题—实际做法—影响—材料局限」展开，讨论题不伪装成人物当时的原话或心理。
+
+关系分为任职、交往、学术承接、后世书写推重、同代背景与主题比较。实线只表示前两类，虚线不表示见过面或直接师承。关系图每次围绕一人，宽列环绕展开，窄列向下展开，无需横向拖动；图下完整说明和出处始终可读。点关联人物可继续展开，跨出当前筛选时清空筛选。名片和人物目录使用右侧栏，可切换左右并保存位置。
+
+`people.html?view=network&person=li-bai` 可分享关系网，`person.html?person=li-bai#decisions` 可直达决策。人物的 `eventIds` 连接已有大事，相关事件页反向提供人物入口；所有人物都可按代表年份返回中外时间轴。人物日期不详时保留 `null` 与显示说明，不用假定年份填满生平。图像、署名及关系依据见 [人物馆资料说明](people-SOURCES.md)。
+
+## 中国古代科技
+
+首批 12 个档案覆盖四大发明、天文历法、数学、医学与本草、水利、建筑六类。每篇保留原理、分步解释、实物或文献线索、材料局限、影响、辨误和讨论题。人物与事件用稳定 ID 双向关联；代表年代是定位入口，不作为唯一发明年。
+
+三个原理演示支持手动操作与网址恢复：`technology.html?topic=printing&mode=type&stage=2` 观察镜像印面与正向纸面；`technology.html?topic=pi&sides=96#principle` 观察内接、外切周长界限；`technology.html?topic=dujiangyan&water=high#principle` 对照丰水与枯水情境。割圆模型用现代三角函数计算，不冒充祖冲之失传算法的复原；水利图只表示部件联系，不提供实测流量、固定分水比例或现状地图。
+
+8 张新增图片在 `assets/ancient-science/`，另有 5 项复用已有事件与人物图像的主出处，图注区分实物、拓片、模型与后世纪念像。详见[科技资料与素材说明](ancient-science-SOURCES.md)。科技首页、档案与演示适应宽屏和竖屏，目录默认在右，可切换左右并保存。
+
 ## 数据与链接
+
+文明巡礼共 8 站、32 个知识站、16 项图像材料。`civilizations-data.js` 是正文、主题、观察问题、年代与事件关联的主出处；11 张新增图片放在 `assets/civilizations/`，其余 5 项用 `mediaEvent` 复用已有事件素材与元数据。详见[文明巡礼资料说明](civilizations-SOURCES.md)。
+
+比较深链接示例为 `civilizations.html?view=compare&left=egypt&right=maya&theme=writing`；同一文明被选到另一侧时交换对象，始终保留两个不同文明。主题在宽屏左右配对、窄列上下配对。档案的 `#station-maya-writing` 可直接定位文字站。年代均为选读窗口，不能理解为文化精确的诞生与消失日期。相关事件页反向提供文明入口，保留原事件编号与正文。
 
 | 文件 | 负责什么 |
 | --- | --- |
 | `content.js` | 时代站的 id、顺序、名称、年代范围、主题色和中外导读。 |
 | `timeline-data.js` | 中国史和世界史事件、同期对照与精选对照。 |
 | `reading-data.js` | 按稳定事件 id 连接的首选后续事件与关联理由。 |
+| `people-data.js` / `assets/people/` | 人物名片、生平不确定性、本地图像与署名、关系类型与出处、关键决策及事件关联。王羲之复用本目录已有的《兰亭序》摹本图片。 |
+| `people-shared.js` | 人物筛选、事件反向关联、关系索引及无外部依赖的 SVG 关系图。 |
+| `civilizations-data.js` / `assets/civilizations/` | 文明名片、四主题知识站、图像与原始出处、观察问答、材料边界、年代节点和事件关联。 |
+| `ancient-science-data.js` / `assets/ancient-science/` | 科技正文、六类索引、原理演示说明、图像来源和证据边界。 |
+| `ancient-science-shared.js` | 科技检索、人物与事件反向索引、共享图像解析、割圆界限与演示状态。 |
+| `civilizations-shared.js` | 文明索引、共享素材解析、主题检索、比较状态与阅读链接。 |
 | `media-data.js` / `assets/history/` | 按事件 id 归档的教学素材和本地媒体文件。图片为缩放或压缩后的教学副本，出处可查看原件与授权。 |
 | `territory-data.js` / `territory-geo.js` | 阶段、年份、轮廓关联、中心地点、观察问答与简短变化说明；历史区域、自然陆地与河流的经纬度坐标。 |
 | `assets/territory/` | 原有教学扫描图，供相关时期参考。 |
@@ -64,5 +96,11 @@
 
 ```sh
 node content_sources/test/test-timeline.js
+node content_sources/test/test-history-people.js
+node content_sources/test/test-civilizations.js
+node content_sources/test/test-ancient-science.js
 node --test scripts/test_timeline_navigation.cjs
+node --test scripts/test_history_people.cjs
+node --test scripts/test_civilizations.cjs
+node --test scripts/test_ancient_science.cjs
 ```

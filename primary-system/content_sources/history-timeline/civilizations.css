@@ -1,0 +1,63 @@
+/* 文明巡礼沿用人物馆的大字号工作区和统一侧栏，增加材料站与主题比较。 */
+#civ-search { width:100%; min-width:0; padding:11px; border:1px solid var(--tl-line); border-radius:10px; color:var(--tl-ink); background:var(--tl-card,#fff); font:inherit; font-size:17px; }
+#civ-search:disabled { opacity:.65; }
+.cv-control-help,.cv-period-note { color:var(--tl-ink-soft); font-size:15px; line-height:1.8; }
+.cv-directory { display:grid; gap:8px; }
+.cv-directory a { padding:9px 10px; border-radius:8px; color:var(--tl-pair-deep); background:var(--tl-pair-soft); font-size:17px; text-decoration:none; }
+.cv-card .hp-card-image { height:230px; }
+.cv-card .hp-card-image img { max-height:206px; }
+.cv-topic-links { display:flex; flex-wrap:wrap; gap:8px; margin:16px 0; }
+.cv-topic-links a { padding:9px 13px; border:1px solid var(--tl-line); border-radius:9px; color:var(--tl-pair-deep); background:var(--tl-card,#fff); font-size:17px; font-weight:750; text-decoration:none; }
+.cv-evidence { margin:22px 0; border:1px solid var(--tl-line); border-radius:15px; overflow:hidden; background:var(--tl-card,#fff); }
+.cv-evidence > a { display:block; padding:16px; background:color-mix(in srgb,var(--person-color) 6%,var(--tl-card,#fff)); }
+.cv-evidence img { display:block; width:100%; height:auto; max-height:600px; object-fit:contain; }
+.cv-evidence figcaption { padding:18px 22px; line-height:1.85; }
+.cv-evidence figcaption b { font-size:21px; }
+.cv-evidence figcaption p { margin:10px 0; font-size:18px; }
+.cv-evidence small { color:var(--tl-ink-soft); font-size:14px; overflow-wrap:anywhere; }
+.cv-evidence small a { color:var(--tl-pair-deep); }
+.cv-observe { color:var(--tl-pair-deep); }
+.cv-person-hero { grid-template-columns:minmax(0,1fr) minmax(270px,34%); }
+.cv-person-hero h2 { font-size:25px; line-height:1.6; }
+.cv-person-hero .cv-evidence { margin:0; }
+.cv-person-hero .cv-evidence img { max-height:330px; }
+.cv-person-hero .cv-evidence figcaption p { font-size:16px; }
+.cv-person-hero .cv-evidence figcaption { padding:14px 16px; }
+.cv-scope { font-size:18px; line-height:1.9; color:var(--tl-ink-soft); }
+.cv-milestones { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr)); gap:16px; padding:0; list-style:none; }
+.cv-milestones li { padding:18px; border-left:4px solid var(--person-color); border-radius:10px; background:var(--tl-pair-soft); }
+.cv-milestones b { color:var(--tl-pair-deep); font-size:18px; }
+.cv-milestones p { margin:10px 0 0; font-size:18px; line-height:1.9; }
+.cv-points { padding-left:1.4em; font-size:21px; line-height:2; }
+.cv-points li { margin:10px 0; }
+.cv-example { margin:24px 0; padding:20px 24px; border-radius:13px; background:var(--tl-pair-soft); }
+.cv-example h3 { margin:0 0 12px; font-size:22px; line-height:1.7; }
+.cv-example p { margin:0; font-size:20px; line-height:1.95; }
+.cv-boundary { padding:16px 20px; border-left:4px solid var(--person-color,var(--tl-pair-deep)); border-radius:10px; color:var(--tl-ink-soft); background:var(--tl-pair-soft); font-size:18px; line-height:1.9; }
+.cv-answer { margin-top:16px; }
+.cv-answer summary,.cv-source-fold summary { width:fit-content; min-height:44px; padding:10px 16px; border:1px solid var(--tl-line); border-radius:9px; color:var(--tl-pair-deep); background:var(--tl-card,#fff); font-size:17px; font-weight:750; cursor:pointer; }
+.cv-source-fold { margin:18px 0; }
+.cv-compare-toolbar { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:15px; }
+.cv-compare-toolbar h3 { margin:16px 0; font-size:27px; line-height:1.6; }
+.cv-compare-toolbar button,.cv-choice-buttons button { min-height:44px; padding:9px 13px; border:1px solid var(--tl-line); border-radius:9px; background:var(--tl-card,#fff); color:var(--tl-pair-deep); font:inherit; font-size:16px; font-weight:750; cursor:pointer; }
+.cv-choose { margin:12px 0 22px; padding:18px; border:1px solid var(--tl-line); border-radius:13px; background:var(--tl-card,#fff); }
+.cv-choose summary { font-size:18px; font-weight:750; color:var(--tl-pair-deep); cursor:pointer; }
+.cv-choose fieldset { min-width:0; margin-top:18px; padding:14px; border:1px solid var(--tl-line); border-radius:10px; }
+.cv-choose legend { padding-inline:8px; font-weight:800; }
+.cv-choice-buttons { display:flex; flex-wrap:wrap; gap:8px; }
+.cv-choice-buttons button[aria-pressed="true"] { color:white; background:var(--tl-pair-deep); border-color:var(--tl-pair-deep); }
+.cv-compare-pair { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px; }
+.cv-compare-pair > article { min-width:0; padding:24px; border:1px solid var(--tl-line); border-top:5px solid var(--person-color); border-radius:15px; background:var(--tl-card,#fff); }
+.cv-compare-pair h3 { margin:6px 0 14px; font-size:28px; }
+.cv-compare-pair h3 a { color:var(--tl-ink); text-decoration:none; }
+.cv-compare-pair h4 { margin:8px 0 16px; font-size:24px; line-height:1.7; }
+.cv-compare-pair p,.cv-compare-pair li { font-size:19px; line-height:1.95; }
+.cv-compare-pair ul { padding-left:1.3em; }
+.cv-compare-pair li + li { margin-top:12px; }
+.cv-compare-pair .hp-category { font-size:17px; }
+.cv-compare-pair .cv-boundary { font-size:17px; }
+.cv-comparison-note { padding:15px 18px; border-radius:12px; background:var(--tl-pair-soft); font-size:18px; line-height:1.9; color:var(--tl-pair-deep); }
+.cv-compare-row { margin:28px 0; }
+.cv-compare-row > header h3 { margin:0; font-size:27px; }
+.cv-compare-row > header p { margin:10px 0 18px; font-size:20px; line-height:1.8; }
+@container people-reading (max-width:850px) { .cv-compare-pair,.cv-person-hero { grid-template-columns:1fr; } .cv-person-hero > .cv-evidence { max-width:560px; } }

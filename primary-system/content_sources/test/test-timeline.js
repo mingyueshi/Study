@@ -364,7 +364,13 @@ const PAGE_REFS = {
   'era.html': ['content.js', 'timeline-data.js', 'media-data.js', 'dynasty-data.js', 'shared.js', 'era-app.js', 'styles.css', 'era.css', 'media.css',
     'timeline.html'],
   'event.html': ['content.js', 'timeline-data.js', 'media-data.js', 'reading-data.js', 'shared.js', 'navigation.js', 'event-app.js', 'styles.css', 'era.css', 'media.css',
-    'timeline.html', 'era.html']
+    'timeline.html', 'era.html', 'people-data.js', 'people-shared.js'],
+  'people.html': ['content.js', 'timeline-data.js', 'people-data.js', 'shared.js', 'people-shared.js', 'people-app.js', 'styles.css', 'people.css', 'timeline.html'],
+  'person.html': ['content.js', 'timeline-data.js', 'people-data.js', 'shared.js', 'people-shared.js', 'person-app.js', 'styles.css', 'people.css', 'people.html'],
+  'civilizations.html': ['content.js', 'timeline-data.js', 'media-data.js', 'civilizations-data.js', 'shared.js', 'civilizations-shared.js', 'civilizations-app.js', 'styles.css', 'people.css', 'civilizations.css', 'timeline.html'],
+  'civilization.html': ['content.js', 'timeline-data.js', 'media-data.js', 'civilizations-data.js', 'shared.js', 'civilizations-shared.js', 'civilization-app.js', 'styles.css', 'people.css', 'civilizations.css', 'civilizations.html'],
+  'ancient-science.html': ['content.js', 'timeline-data.js', 'media-data.js', 'people-data.js', 'ancient-science-data.js', 'shared.js', 'ancient-science-shared.js', 'ancient-science-app.js', 'styles.css', 'people.css', 'ancient-science.css', 'technology.html'],
+  'technology.html': ['content.js', 'timeline-data.js', 'media-data.js', 'people-data.js', 'ancient-science-data.js', 'shared.js', 'ancient-science-shared.js', 'technology-app.js', 'styles.css', 'people.css', 'ancient-science.css', 'ancient-science.html']
 };
 Object.entries(PAGE_REFS).forEach(([page, refs]) => {
   check(fileExists(page), '缺少页面 ' + page);

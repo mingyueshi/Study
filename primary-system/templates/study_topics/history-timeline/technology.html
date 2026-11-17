@@ -1,0 +1,27 @@
+{% extends "study_topics/page.html" %}
+{% load static %}
+{# 由 scripts/build_study_topics.py 生成。 #}
+{% block title %}科技档案 · 中国古代科技 · 乐学堂{% endblock %}
+{% block study_assets %}
+<link rel="stylesheet" href="{% static 'study_topics/history-timeline/styles.css' %}">
+<link rel="stylesheet" href="{% static 'study_topics/history-timeline/people.css' %}">
+<link rel="stylesheet" href="{% static 'study_topics/history-timeline/ancient-science.css' %}">
+<script src="{% static 'study_topics/history-timeline/content.js' %}" defer></script>
+<script src="{% static 'study_topics/history-timeline/timeline-data.js' %}" defer></script>
+<script src="{% static 'study_topics/history-timeline/media-data.js' %}" defer></script>
+<script src="{% static 'study_topics/history-timeline/people-data.js' %}" defer></script>
+<script src="{% static 'study_topics/history-timeline/ancient-science-data.js' %}" defer></script>
+<script src="{% static 'study_topics/history-timeline/shared.js' %}" defer></script>
+<script src="{% static 'study_topics/history-timeline/ancient-science-shared.js' %}" defer></script>
+<script src="{% static 'study_topics/history-timeline/technology-app.js' %}" defer></script>
+{% endblock %}
+{% block study_content %}
+<div class="study-timeline">
+<div class="tl-shell hp-shell"><div class="technology-topic" id="top">
+<nav class="tl-sysnav" aria-label="历史时间轴系统页面导航"><a class="tl-sysnav-brand" href="{% url 'history-timeline' %}">历史时间轴<small>中国史与世界史</small></a><a data-page href="timeline.html">双轨时间轴</a><a data-page href="era.html">时代站</a><a data-page href="dynasties.html">朝代与版图</a><a data-page href="people.html">历史人物馆</a><a data-page href="civilizations.html">世界文明巡礼</a><a data-page href="ancient-science.html" aria-current="page">中国古代科技</a></nav>
+<nav class="tl-breadcrumb" aria-label="所在位置"><a data-page href="ancient-science.html">中国古代科技</a><b id="technology-crumb" aria-current="page">科技档案</b></nav><div id="technology-page"></div>
+<noscript><p class="tl-notice">请启用 JavaScript 阅读科技档案与操作演示。资料与图片保存在本目录。</p></noscript>
+</div></div>
+<div class="tl-footer"><a data-page href="ancient-science.html">中国古代科技</a> · <a href="timeline.html">双轨时间轴</a> · <a href="#top">回到顶部 ↑</a></div>
+</div>
+{% endblock %}

@@ -10,6 +10,9 @@ from django.urls import reverse
 HISTORY_PAGES = (
     'history-study', 'history-timeline', 'history-timeline-timeline',
     'history-timeline-era', 'history-timeline-event', 'history-timeline-dynasties',
+    'history-timeline-people', 'history-timeline-person',
+    'history-timeline-civilizations', 'history-timeline-civilization',
+    'history-timeline-ancient-science', 'history-timeline-technology',
 )
 GEOGRAPHY_PAGES = (
     'geography-study', 'geography-atlas', 'geography-atlas-china', 'geography-atlas-china-3d',
@@ -120,6 +123,12 @@ class StudyTopicPageTests(SimpleTestCase):
             ('history-timeline', 'timeline.html', ''),
             ('history-timeline-timeline', 'era.html', '?era=dawn'),
             ('history-timeline-era', 'event.html', '?event=tc35'),
+            ('history-timeline-people', 'people.html', '?view=network&person=li-bai'),
+            ('history-timeline-people', 'person.html', '?person=li-bai#decisions'),
+            ('history-timeline-civilizations', 'civilization.html', '?civilization=maya#station-maya-writing'),
+            ('history-timeline-civilizations', 'civilizations.html', '?view=compare&left=egypt&right=maya&theme=writing'),
+            ('history-timeline-ancient-science', 'technology.html', '?topic=pi&sides=96#principle'),
+            ('history-timeline-technology', 'ancient-science.html', '?category=mathematics'),
             ('geography-atlas', 'china.html', '?place=f20'),
             ('geography-atlas-china', 'province.html', '?adcode=110000'),
             ('geography-atlas-china', 'china-3d.html', '?place=p710000'),
@@ -146,6 +155,8 @@ class StudyTopicPageTests(SimpleTestCase):
     def test_main_views_link_to_related_topics(self):
         for main, lesson, label in (
             ('history-timeline-timeline', 'history-study', '历史精讲'),
+            ('history-study', 'history-timeline-people', '历史人物馆'),
+            ('history-study', 'history-timeline-civilizations', '世界文明巡礼'),
             ('geography-atlas-china', 'geography-study', '地理小课堂'),
             ('geography-atlas-china', 'geography-atlas-china-3d', '3D 中国地图'),
             ('geography-atlas-world', 'geography-atlas-world-3d', '3D 世界地图'),
@@ -158,6 +169,51 @@ class StudyTopicPageTests(SimpleTestCase):
                 response = self.client.get(reverse(main))
                 self.assertContains(response, f'href="{reverse(lesson)}"')
                 self.assertContains(response, label)
+
+    def test_history_people_entry_and_data_load_before_consumers(self):
+        response = self.client.get(reverse('history-timeline-timeline'))
+        self.assertContains(response, 'href="people.html"')
+        self.assertContains(response, '历史人物馆')
+        for name, consumer in (
+            ('history-timeline-people', 'people-app.js'),
+            ('history-timeline-person', 'person-app.js'),
+            ('history-timeline-event', 'event-app.js'),
+        ):
+            with self.subTest(name=name):
+                response = self.client.get(reverse(name))
+                assets = TopicMarkup(response.content.decode()).assets
+                prefix = '/static/study_topics/history-timeline/'
+                for dependency in ('people-data.js', 'people-shared.js'):
+                    self.assertLess(assets.index(prefix + dependency), assets.index(prefix + consumer))
+
+    def test_civilization_data_and_images_are_loaded_before_page_apps(self):
+        for name, consumer in (
+            ('history-timeline-civilizations', 'civilizations-app.js'),
+            ('history-timeline-civilization', 'civilization-app.js'),
+            ('history-timeline-event', 'event-app.js'),
+        ):
+            with self.subTest(name=name):
+                assets = TopicMarkup(self.client.get(reverse(name)).content.decode()).assets
+                prefix = '/static/study_topics/history-timeline/'
+                for dependency in ('media-data.js', 'civilizations-data.js', 'civilizations-shared.js'):
+                    self.assertLess(assets.index(prefix + dependency), assets.index(prefix + consumer))
+
+    def test_ancient_science_dependencies_and_active_navigation(self):
+        prefix = '/static/study_topics/history-timeline/'
+        for name, consumer in (
+            ('history-timeline-ancient-science', 'ancient-science-app.js'),
+            ('history-timeline-technology', 'technology-app.js'),
+            ('history-timeline-event', 'event-app.js'),
+            ('history-timeline-person', 'person-app.js'),
+        ):
+            with self.subTest(name=name):
+                response = self.client.get(reverse(name))
+                assets = TopicMarkup(response.content.decode()).assets
+                for dependency in ('media-data.js', 'people-data.js', 'ancient-science-data.js', 'ancient-science-shared.js'):
+                    self.assertLess(assets.index(prefix + dependency), assets.index(prefix + consumer))
+                self.assertContains(response, '中国古代科技')
+        response = self.client.get(reverse('history-timeline-technology') + '?topic=pi')
+        self.assertContains(response, f'href="{reverse("history-timeline-ancient-science")}" aria-current="location"')
 
     def test_calendar_hosts_local_audio_and_atlas_links_to_map_skills(self):
         response = self.client.get(reverse('history-timeline-dynasties'))
@@ -204,7 +260,7 @@ class StudyTopicEntryTests(TestCase):
 
     def test_history_and_geography_keep_their_primary_cards_first(self):
         for area, shown, hidden in (
-            ('history', ('history-timeline-timeline',), ('geography-atlas-china', 'astronomy-study')),
+            ('history', ('history-timeline-timeline', 'history-timeline-people', 'history-timeline-civilizations', 'history-timeline-ancient-science'), ('geography-atlas-china', 'astronomy-study')),
             ('geography', ('geography-atlas-china', 'astronomy-study', 'solar-terms'), ('history-timeline-timeline', 'literature-study')),
         ):
             with self.subTest(area=area):

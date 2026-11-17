@@ -6,11 +6,18 @@
 <link rel="stylesheet" href="{% static 'study_topics/history-timeline/styles.css' %}">
 <link rel="stylesheet" href="{% static 'study_topics/history-timeline/era.css' %}">
 <link rel="stylesheet" href="{% static 'study_topics/history-timeline/media.css' %}">
+<link rel="stylesheet" href="{% static 'study_topics/history-timeline/people.css' %}">
 <script src="{% static 'study_topics/history-timeline/content.js' %}" defer></script>
 <script src="{% static 'study_topics/history-timeline/timeline-data.js' %}" defer></script>
 <script src="{% static 'study_topics/history-timeline/media-data.js' %}" defer></script>
 <script src="{% static 'study_topics/history-timeline/reading-data.js' %}" defer></script>
+<script src="{% static 'study_topics/history-timeline/people-data.js' %}" defer></script>
+<script src="{% static 'study_topics/history-timeline/civilizations-data.js' %}" defer></script>
+<script src="{% static 'study_topics/history-timeline/ancient-science-data.js' %}" defer></script>
 <script src="{% static 'study_topics/history-timeline/shared.js' %}" defer></script>
+<script src="{% static 'study_topics/history-timeline/people-shared.js' %}" defer></script>
+<script src="{% static 'study_topics/history-timeline/civilizations-shared.js' %}" defer></script>
+<script src="{% static 'study_topics/history-timeline/ancient-science-shared.js' %}" defer></script>
 <script src="{% static 'study_topics/history-timeline/navigation.js' %}" defer></script>
 <script src="{% static 'study_topics/history-timeline/event-app.js' %}" defer></script>
 {% endblock %}
@@ -23,7 +30,8 @@
         <a data-page href="timeline.html">双轨时间轴</a>
         <a data-page href="era.html">时代站</a>
         <a data-page href="dynasties.html">朝代与版图</a>
-      </nav>
+        <a data-page href="people.html">历史人物馆</a>
+      <a href="civilizations.html">世界文明巡礼</a><a data-page href="ancient-science.html">中国古代科技</a></nav>
       <nav class="tl-breadcrumb" aria-label="所在位置">
         <a href="timeline.html">双轨时间轴</a><a id="event-era" href="era.html" hidden></a>
         <b aria-current="page">历史大事</b>

@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="从建筑、文字、制度和成就认识世界文明，读材料、看图像、比较不同社会的选择。">
+  <title>世界文明巡礼 · 乐学堂</title>
+  <link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="people.css"><link rel="stylesheet" href="civilizations.css">
+  <script src="content.js" defer></script><script src="timeline-data.js" defer></script><script src="media-data.js" defer></script>
+  <script src="civilizations-data.js" defer></script><script src="shared.js" defer></script><script src="civilizations-shared.js" defer></script>
+  <script src="civilizations-app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#civ-results">跳到文明内容</a>
+  <main id="main" class="tl-shell hp-shell">
+    <div class="civilizations-topic" id="top">
+      <nav class="tl-sysnav" aria-label="历史时间轴系统页面导航"><a class="tl-sysnav-brand" href="index.html">历史时间轴<small>中国史与世界史</small></a><a href="timeline.html">双轨时间轴</a><a href="era.html">时代站</a><a href="dynasties.html">朝代与版图</a><a href="people.html">历史人物馆</a><a href="civilizations.html" aria-current="page">世界文明巡礼</a><a data-page href="ancient-science.html">中国古代科技</a></nav>
+      <header class="hp-hero"><div><p class="tl-eyebrow">看见不同社会，怎样回答共同的问题</p><h1>世界文明巡礼</h1><p>从一座建筑、一段文字出发，认识制度与成就。按文明深入阅读，也能围绕同一个主题并排比较。</p></div><div class="hp-stats" id="civilization-stats" aria-label="巡礼内容规模"></div></header>
+      <div class="hp-workspace" data-sidebar-layout=".hp-sidebar" data-sidebar-width="clamp(240px,23vw,300px)" data-sidebar-breakpoint="760" data-sidebar-label="巡礼工具" data-sidebar-fixed=".hp-side-title">
+        <section class="hp-main" aria-labelledby="civ-results">
+          <div class="hp-reading-head"><h2 id="civ-results" data-tl-anchor tabindex="-1">选择一站开始巡礼</h2><p id="civ-count" role="status"></p></div>
+          <div class="hp-view-tabs" role="group" aria-label="文明巡礼视图"><button type="button" data-view="catalog" aria-pressed="true">逐站巡礼</button><button type="button" data-view="compare" aria-pressed="false">文明比较</button></div>
+          <p class="hp-image-note">年代是本次选读范围；文明与现代国家的边界并不相同。照片中的遗址、文物和修复部分，需结合档案图注判断。</p>
+          <div class="hp-empty" id="civ-empty" hidden><h3>没有找到这条线索</h3><p>试着换一个名字、材料或关键词。</p><button type="button" data-reset>清空筛选</button></div>
+          <div class="hp-card-grid" id="civ-cards"></div>
+          <section id="civ-comparison" hidden aria-label="两个文明的主题比较">
+            <div class="cv-compare-toolbar"><h3 id="civ-compare-title"></h3><button type="button" data-swap>交换 A、B</button></div>
+            <details class="cv-choose"><summary>换一组文明来比较</summary><fieldset><legend>文明 A</legend><div id="civ-choices-left" class="cv-choice-buttons"></div></fieldset><fieldset><legend>文明 B</legend><div id="civ-choices-right" class="cv-choice-buttons"></div></fieldset></details>
+            <div id="civ-compare-content"></div>
+          </section>
+        </section>
+        <aside class="hp-sidebar">
+          <div class="hp-side-title"><h2>巡礼工具</h2><p>先选共同问题，再进入具体材料。</p></div>
+          <label class="hp-search-label" for="civ-search">找文明或知识线索</label><input id="civ-search" type="search" placeholder="如玛雅、字母、城市" autocomplete="off" aria-describedby="civ-search-help"><p class="cv-control-help" id="civ-search-help"></p>
+          <h3>围绕哪个主题看？</h3><div class="hp-filter-buttons" id="civ-themes" role="group" aria-label="文明主题筛选"></div><button type="button" class="hp-reset" data-reset>清空筛选</button>
+          <h3>直接去文明站</h3><nav class="cv-directory" id="civ-directory" aria-label="八座文明站"></nav>
+          <details class="hp-reading-tips"><summary>怎样比较才有帮助？</summary><p>先核对年代与范围，再比较材料、用途和参与者。相似不一定来自直接交流，成就也不能只归功于一位统治者。</p></details>
+        </aside>
+      </div>
+      <noscript><p class="tl-notice">请启用 JavaScript 阅读文明档案与比较内容。资料和图片保存在本目录。</p></noscript>
+    </div>
+  </main>
+  <footer class="tl-footer"><a href="civilizations.html">世界文明巡礼</a> · <a href="timeline.html">双轨时间轴</a> · <a href="#top">回到顶部 ↑</a></footer>
+</body>
+</html>
