@@ -2,7 +2,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 
-const { schema_version, station, lessons, heart, pulse, reaction, blindspot, expedition, notebook } = require('../human-body.json');
+const { schema_version, station, lessons, heart, pulse, reaction, blindspot, expedition, growth, notebook } = require('../human-body.json');
 const art = fs.readFileSync(path.join(__dirname, '../../static/science/body-atlas.svg'), 'utf8');
 
 function text(value) {
@@ -114,12 +114,16 @@ sources(pulse.sources);
 const questionIds = lessons.flatMap(lesson => lesson.checkup.map(question => question.id));
 assert.equal(new Set(questionIds).size, questionIds.length);
 texts(expedition, ['title', 'intro', 'caption']);
+texts(expedition.explorer, ['title', 'intro', 'prompt']);
 assert.equal(expedition.organs.length, 7);
 const organIds = expedition.organs.map(organ => organ.id);
 assert.equal(new Set(organIds).size, organIds.length);
+const bodyMap = fs.readFileSync(path.join(__dirname, '../../templates/science/body/whole-body.html'), 'utf8');
+const mapOrganIds = [...bodyMap.matchAll(/data-organ-shape="([a-z-]+)"/g)].map(match => match[1]);
+assert.deepEqual(mapOrganIds.sort(), [...organIds].sort(), '人体图的可点击区域须与器官档案一一对应');
 for (const organ of expedition.organs) {
   assert.match(organ.id, /^[a-z-]+$/);
-  texts(organ, ['name', 'description']);
+  texts(organ, ['name', 'description', 'location']);
   assert.ok(lessons.some(lesson => lesson.slug === organ.lesson));
 }
 assert.equal(expedition.scenarios.length, 3);
@@ -144,4 +148,9 @@ texts(notebook, ['title', 'intro', 'caption', 'recovery']);
 assert.deepEqual(notebook.stages.map(stage => stage.id), ['rest', 'active', 'recovery']);
 notebook.stages.forEach(stage => text(stage.label));
 
-console.log('人体奥秘站：六课、十二幅图像、十八道自测、三种协作场景、七道定位挑战、九种过程演示与实验手册通过结构校验。');
+texts(growth, ['title', 'intro', 'note', 'question', 'answer']);
+assert.deepEqual(growth.stages.map(stage => stage.id), ['infancy', 'early-childhood', 'school-age', 'puberty', 'adult']);
+for (const stage of growth.stages) texts(stage, ['label', 'age', 'icon', 'title', 'body']);
+sources(growth.sources);
+
+console.log('人体奥秘站：六课、七个器官档案、五阶段成长时间线、十二幅图像、十八道自测、三种协作场景、七道定位挑战、九种过程演示与实验手册通过结构校验。');

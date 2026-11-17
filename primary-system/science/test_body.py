@@ -53,6 +53,9 @@ class HumanBodyStationTests(SimpleTestCase):
         index = self.client.get(reverse('science-body'))
         self.assertContains(index, 'id="missions"')
         self.assertContains(index, 'data-map-organ=', count=7)
+        self.assertContains(index, 'data-organ-shape=', count=7)
+        self.assertContains(index, 'data-organ-dialog>')
+        self.assertContains(index, 'data-mission-mode="anatomy" aria-pressed="true"')
         self.assertContains(index, 'data-scene=', count=3)
         self.assertContains(index, 'data-stamp=', count=6)
         progress = index.context['body_progress']
@@ -71,3 +74,19 @@ class HumanBodyStationTests(SimpleTestCase):
         for asset in ('science/body-lab.js', 'science/body-lab.css',
                       'science/body-progress.js', 'science/body-notebook.js'):
             self.assertTrue(finders.find(asset))
+
+    def test_growth_and_organ_reading_are_available_without_javascript(self):
+        response = self.client.get(reverse('science-body'))
+        self.assertContains(response, 'href="#growth"')
+        self.assertContains(response, 'id="growth"')
+        growth = response.context['growth']
+        self.assertEqual(len(growth['stages']), 5)
+        for stage in growth['stages']:
+            self.assertContains(response, f'id="growth-{stage["id"]}"')
+            self.assertContains(response, stage['body'])
+        self.assertContains(response, growth['note'])
+        for source in growth['sources']:
+            self.assertContains(response, f'href="{source["url"]}"')
+        for organ in response.context['expedition']['organs']:
+            self.assertContains(response, organ['location'])
+            self.assertContains(response, organ['description'])

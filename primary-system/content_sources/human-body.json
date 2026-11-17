@@ -1282,51 +1282,58 @@
     "explanation": "视神经离开视网膜的地方没有感光细胞，叫生理盲点。圆点的像刚好落在那里时，这只眼睛就看不到它。日常双眼和大脑一起工作，我们通常感觉不到这个缺口。"
   },
   "expedition": {
-    "title": "身体是怎样一起工作的？",
-    "intro": "选一个生活场景，点亮身体里的接力伙伴。看懂以后，藏起名字，来找器官！",
+    "title": "点开身体里的小伙伴",
+    "intro": "先点人体图上的器官，看看它在哪里、有什么本领。再选一个生活场景，看身体怎样合作，最后挑战找器官！",
     "caption": "这是简化的位置示意，大小不按真实比例。步骤把合作过程拆开看，身体里的许多工作其实在同时进行。",
     "organs": [
       {
         "id": "brain",
         "name": "大脑",
         "lesson": "nerves",
-        "description": "大脑接收和处理信息，也会向身体发出行动指令。"
+        "description": "大脑接收和处理信息，也会向身体发出行动指令。",
+        "location": "在头部，头骨像一顶结实的头盔，把它保护起来。"
       },
       {
         "id": "eye",
         "name": "眼睛",
         "lesson": "senses",
-        "description": "眼睛接收光的信息，通过神经把消息送给大脑。"
+        "description": "眼睛接收光的信息，通过神经把消息送给大脑。",
+        "location": "在脸部。两只眼睛把看到的信息送向大脑。"
       },
       {
         "id": "lungs",
         "name": "肺",
         "lesson": "breathing",
-        "description": "肺里有许多肺泡，氧气和二氧化碳在这里与血液交换。"
+        "description": "肺里有许多肺泡，氧气和二氧化碳在这里与血液交换。",
+        "location": "在胸部，左右各有一侧，肋骨围在外面保护它们。"
       },
       {
         "id": "heart",
         "name": "心脏",
         "lesson": "circulation",
-        "description": "心脏像不停工作的泵，推动血液流向肺和全身。"
+        "description": "心脏像不停工作的泵，推动血液流向肺和全身。",
+        "location": "在胸部两肺之间，稍微偏向自己的左侧。图中身体面向你，所以自己的左侧在画面右边。"
       },
       {
         "id": "stomach",
         "name": "胃",
         "lesson": "digestion",
-        "description": "胃会搅拌食物，让食物和消化液混合。"
+        "description": "胃会搅拌食物，让食物和消化液混合。",
+        "location": "在腹部上方，主要偏向自己的左侧，连着食管和小肠。"
       },
       {
         "id": "intestine",
         "name": "小肠",
         "lesson": "digestion",
-        "description": "小肠继续消化食物，并吸收大部分营养。"
+        "description": "小肠继续消化食物，并吸收大部分营养。",
+        "location": "在腹部，弯弯曲曲地盘在一起。"
       },
       {
         "id": "muscles",
         "name": "骨骼肌",
         "lesson": "movement",
-        "description": "骨骼肌收缩时，通过肌腱拉动骨头，让身体运动。"
+        "description": "骨骼肌收缩时，通过肌腱拉动骨头，让身体运动。",
+        "location": "身体许多地方都有骨骼肌，图中标出了手臂上的一部分。"
       }
     ],
     "scenarios": [
@@ -1465,7 +1472,12 @@
         "hint": "看看头部前方接收光的小窗口。",
         "explanation": "眼睛的视网膜接收光的信息，再通过视神经把信号送往大脑。"
       }
-    ]
+    ],
+    "explorer": {
+      "title": "你想先认识哪位身体伙伴？",
+      "intro": "点图上的彩色器官，或点旁边的名字，器官小档案就会弹出来。用键盘 Tab 选中器官后，按回车或空格也能打开。",
+      "prompt": "试着找一找：哪位伙伴推动血液？哪位伙伴吸收大部分营养？"
+    }
   },
   "notebook": {
     "title": "我的脉搏观察手册",
@@ -1484,6 +1496,73 @@
       {
         "id": "recovery",
         "label": "休息后"
+      }
+    ]
+  },
+  "growth": {
+    "title": "我们的身体怎么长大？",
+    "intro": "身体一点点长大，能做的事情也越来越多。沿着这条时间线，一起看看从婴儿到成人的变化。",
+    "note": "每个人都有自己的成长节奏。这是常见的成长顺序，不是按年龄打分的表格；青春期可能在小学阶段开始，同龄伙伴的身高和变化也会不同。",
+    "question": "长大，只是个子变高吗？",
+    "answer": "不只是！身体的动作会更协调，语言和思考本领也在发展。看看以前的照片，和家人说一说：你又学会了什么新本领？",
+    "stages": [
+      {
+        "id": "infancy",
+        "label": "婴儿",
+        "age": "约 0～1 岁",
+        "icon": "👶",
+        "title": "身体开始学配合",
+        "body": "宝宝在大人的照顾下成长，慢慢学会坐起、抓东西，再试着扶住家具站起来。每一个小动作，都是新本领。"
+      },
+      {
+        "id": "early-childhood",
+        "label": "幼儿",
+        "age": "约 1～6 岁",
+        "icon": "🧒",
+        "title": "动作越来越灵活",
+        "body": "从学走路到跑跳，身体越来越会配合。小手慢慢学会扣纽扣，嘴巴也能讲出自己的小故事。"
+      },
+      {
+        "id": "school-age",
+        "label": "学龄儿童",
+        "age": "约 6 岁起",
+        "icon": "🎒",
+        "title": "练出更多新本领",
+        "body": "上学以后，我们继续长高，也在练习写字、运动和思考。同样的动作，多练习就会越来越熟练。"
+      },
+      {
+        "id": "puberty",
+        "label": "青春期",
+        "age": "开始时间因人而异",
+        "icon": "🌱",
+        "title": "迎来一轮新变化",
+        "body": "身体可能长高更快，体形、体毛和声音也会慢慢变化。每个人开始的时间和变化的顺序会有差别。"
+      },
+      {
+        "id": "adult",
+        "label": "成人",
+        "age": "身体逐渐成熟后",
+        "icon": "🧑",
+        "title": "长大后也能学新本领",
+        "body": "身高通常不再明显增加，身体仍然需要照顾。长大后，我们也能继续学习、练习，掌握新的本领。"
+      }
+    ],
+    "sources": [
+      {
+        "label": "CDC：一岁前后的成长线索（英文，需联网）",
+        "url": "https://www.cdc.gov/act-early/milestones/1-year.html"
+      },
+      {
+        "label": "CDC：五岁前后的成长线索（英文，需联网）",
+        "url": "https://www.cdc.gov/act-early/milestones/5-years.html"
+      },
+      {
+        "label": "NICHD：青春期的开始时间（英文，需联网）",
+        "url": "https://www.nichd.nih.gov/health/topics/puberty/conditioninfo"
+      },
+      {
+        "label": "NICHD：青春期的身体变化（英文，需联网）",
+        "url": "https://www.nichd.nih.gov/health/topics/puberty/conditioninfo/symptoms"
       }
     ]
   }

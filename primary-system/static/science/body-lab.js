@@ -5,6 +5,10 @@
   const content = JSON.parse(document.getElementById('body-expedition-data').textContent);
   const get = selector => root.querySelector(selector);
   const pins = [...root.querySelectorAll('[data-map-organ]')];
+  const shapes = [...root.querySelectorAll('[data-organ-shape]')];
+  const dialog = document.querySelector('[data-organ-dialog]');
+  const anatomyPanel = get('[data-anatomy-panel]');
+  let dialogTrigger = null;
   const modes = [...root.querySelectorAll('[data-mission-mode]')];
   const sceneButtons = [...root.querySelectorAll('[data-scene]')];
   const steps = get('[data-scene-steps]');
@@ -12,7 +16,7 @@
   const media = matchMedia('(prefers-reduced-motion: reduce)');
   let scene = content.scenarios[0];
   let step = 0;
-  let mode = 'explore';
+  let mode = anatomyPanel ? 'anatomy' : 'explore';
   let playing = null;
   let generation = 0;
   let question = 0;
@@ -33,7 +37,7 @@
     syncPlayback();
   }
   function light(organId, showFile = true) {
-    root.querySelectorAll('[data-map-art]').forEach(art => { art.dataset.active = String(art.dataset.mapArt === organId); });
+    root.querySelectorAll('[data-map-art]').forEach(art => { art.dataset.active = organId ? String(art.dataset.mapArt === organId) : ''; });
     pins.forEach(pin => pin.setAttribute('aria-pressed', String(pin.dataset.mapOrgan === organId)));
     get('[data-organ-file]').hidden = !showFile;
     if (!showFile) return;
@@ -42,6 +46,25 @@
     get('[data-organ-description]').textContent = organ.description;
     get('[data-organ-link]').href = pins.find(pin => pin.dataset.mapOrgan === organId).dataset.lessonUrl;
   }
+  function openOrgan(organId, trigger) {
+    stop();
+    light(organId);
+    const organ = content.organs.find(item => item.id === organId);
+    if (typeof dialog?.showModal !== 'function') {
+      get('[data-organ-file]').scrollIntoView({ block: 'nearest' });
+      return;
+    }
+    dialog.querySelector('[data-dialog-name]').textContent = organ.name;
+    dialog.querySelector('[data-dialog-location]').textContent = organ.location;
+    dialog.querySelector('[data-dialog-description]').textContent = organ.description;
+    dialog.querySelector('[data-dialog-link]').href = get('[data-organ-link]').href;
+    dialogTrigger = trigger;
+    dialog.showModal();
+  }
+  dialog?.addEventListener('close', () => {
+    dialogTrigger?.focus({ preventScroll: true });
+    dialogTrigger = null;
+  });
   function showStep(index) {
     step = index;
     const item = scene.steps[index];
@@ -95,20 +118,43 @@
     mode = next;
     root.dataset.mode = mode;
     modes.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.missionMode === mode)));
+    if (anatomyPanel) anatomyPanel.hidden = mode !== 'anatomy';
     get('[data-scene-panel]').hidden = mode !== 'explore';
     get('[data-challenge-panel]').hidden = mode !== 'challenge';
     pins.forEach((pin, i) => {
       pin.disabled = false;
       pin.setAttribute('aria-label', mode === 'challenge' ? `位置 ${i + 1}` : content.organs[i].name);
+      if (mode === 'challenge' || typeof dialog?.showModal !== 'function') {
+        pin.removeAttribute('aria-haspopup');
+        pin.removeAttribute('aria-controls');
+      } else {
+        pin.setAttribute('aria-haspopup', 'dialog');
+        pin.setAttribute('aria-controls', dialog.id);
+      }
+    });
+    shapes.forEach(shape => {
+      const enabled = mode !== 'challenge';
+      shape.setAttribute('tabindex', enabled ? '0' : '-1');
+      shape.setAttribute('role', enabled ? 'button' : 'presentation');
+      if (enabled) {
+        shape.setAttribute('aria-label', content.organs.find(organ => organ.id === shape.dataset.organShape).name);
+        shape.setAttribute('aria-haspopup', 'dialog');
+        shape.setAttribute('aria-controls', dialog.id);
+      } else {
+        shape.removeAttribute('aria-label');
+        shape.removeAttribute('aria-haspopup');
+        shape.removeAttribute('aria-controls');
+      }
     });
     if (mode === 'explore') showStep(step);
-    else showQuestion();
+    else if (mode === 'challenge') showQuestion();
+    else light('', false);
   }
   modes.forEach(button => button.addEventListener('click', () => switchMode(button.dataset.missionMode)));
   sceneButtons.forEach(button => button.addEventListener('click', () => showScene(button.dataset.scene)));
   pins.forEach(pin => pin.addEventListener('click', () => {
     const organ = pin.dataset.mapOrgan;
-    if (mode === 'explore') { stop(); light(organ); return; }
+    if (mode !== 'challenge') { openOrgan(organ, pin); return; }
     if (answered || finished) return;
     const item = content.challenges[question];
     const correct = organ === item.organ;
@@ -125,6 +171,16 @@
       get('[data-challenge-next]').focus({ preventScroll: true });
     }
   }));
+  shapes.forEach(shape => {
+    const activate = () => { if (mode !== 'challenge') openOrgan(shape.dataset.organShape, shape); };
+    shape.addEventListener('click', activate);
+    shape.addEventListener('keydown', event => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        activate();
+      }
+    });
+  });
   get('[data-challenge-next]').addEventListener('click', () => {
     if (!answered) return;
     if (question < content.challenges.length - 1) { question++; showQuestion(); pins[0].focus({ preventScroll: true }); }
@@ -162,6 +218,6 @@
   if (window.StudyEffects?.watch) window.StudyEffects.watch(root, stop);
   else if (typeof IntersectionObserver === 'function') new IntersectionObserver(entries => { if (entries.some(entry => !entry.isIntersecting)) stop(); }).observe(root);
   showScene(scene.id);
-  switchMode('explore');
+  switchMode(anatomyPanel ? 'anatomy' : 'explore');
   root.hidden = false;
 })();

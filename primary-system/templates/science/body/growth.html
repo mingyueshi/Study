@@ -1,0 +1,21 @@
+<section class="body-section body-growth" id="growth" aria-labelledby="body-growth-title">
+  <div class="body-section-heading"><p class="body-kicker">成长足迹 · 从小小的我到长大的我</p><h2 id="body-growth-title">{{ growth.title }}</h2></div>
+  <p class="body-growth-intro">{{ growth.intro }}</p>
+  <ol class="body-growth-timeline" aria-label="身体成长的五个阶段">
+    {% for stage in growth.stages %}
+    <li class="body-growth-stage" id="growth-{{ stage.id }}">
+      <span class="body-growth-marker" aria-hidden="true">{{ stage.icon }}</span>
+      <div class="body-growth-card">
+        <p class="body-kicker">第 {{ forloop.counter }} 站</p>
+        <h3>{{ stage.label }}</h3>
+        <p class="body-growth-age">{{ stage.age }}</p>
+        <h4>{{ stage.title }}</h4>
+        <p>{{ stage.body }}</p>
+      </div>
+    </li>
+    {% endfor %}
+  </ol>
+  <p class="body-growth-note">🌿 {{ growth.note }}</p>
+  <details class="body-answer"><summary>{{ growth.question }}</summary><p>{{ growth.answer }}</p></details>
+  <details class="body-growth-sources"><summary>给家长的资料出处</summary><ul>{% for source in growth.sources %}<li><a href="{{ source.url }}" target="_blank" rel="noopener noreferrer">{{ source.label }} ↗</a></li>{% endfor %}</ul></details>
+</section>
