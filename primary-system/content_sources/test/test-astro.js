@@ -20,6 +20,12 @@ console.log('— 基地与知识点结构 —');
 check(Array.isArray(ASTRO.units) && ASTRO.units.length === 9, '应有 9 个太空基地，实际 ' + (ASTRO.units || []).length);
 check(isStr(ASTRO.textbook), '缺少 textbook');
 check(isStr(ASTRO.edition), '缺少 edition');
+check(ASTRO.portal && isStr(ASTRO.portal.intro), '总入口缺少导语');
+check(Array.isArray(ASTRO.portal?.tools) && ASTRO.portal.tools.length === 4, '总入口应有 4 个工具入口');
+(ASTRO.portal?.tools || []).forEach((tool, i) => {
+  check(tool.id === ['universe', 'lab', 'facts', 'clinic'][i], '总入口工具 ID 与现有视图对应');
+  check([tool.title, tool.emoji, tool.intro].every(isStr), '总入口工具说明完整');
+});
 
 const EXPECT_IDS = ['au1', 'au2', 'au3', 'au4', 'au5', 'au6', 'au7', 'au8', 'au9'];
 const EXPECT_NAMES = ['太阳系大家庭', '我们的月球', '恒星与星星', '仰望星空', '银河系与宇宙', '飞出地球', '中国航天足迹', '宇宙里的问号', '未解之谜'];
@@ -94,6 +100,7 @@ function walk(v, path) {
 walk(ASTRO.units, 'units');
 walk(ASTRO.facts, 'facts');
 walk(ASTRO.mistakes, 'mistakes');
+walk(ASTRO.portal, 'portal');
 
 /* ---------- 图示库 ---------- */
 console.log('— 天文图示库 —');

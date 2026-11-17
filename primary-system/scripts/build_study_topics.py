@@ -100,7 +100,7 @@ def template(source, topic, page, theme, index_route):
         content = replace_once(content, anchor, anchor + '\n        ' + link)
     if topic == 'geo-map' and page == 'world-3d':
         content = content.replace('../history-timeline/event.html', "{% url 'history-timeline-event' %}")
-        content = content.replace('../astro.html', "{% url 'astronomy-study' %}")
+        content = content.replace('../astro.html', "{% url 'astronomy-explore' %}")
         attrs = attrs.replace('../history-timeline/event.html', "{% url 'history-timeline-event' %}")
     assets = []
     for path in HEAD_ASSET.findall(source.split('</head>', 1)[0]):
@@ -219,7 +219,7 @@ def course_outputs():
             for filename in ('sci-demo-data.js', 'sci-demo-motion.js', 'sci-process-data.js', 'sci-process.js', 'sci-process.css', 'sci-experiments-data.js', 'sci-experiments.js'):
                 yield dest / filename, (SOURCE / filename).read_bytes()
         if topic == 'astro':
-            for filename in ('astro-discovery-data.js', 'astro-discovery.js', 'astro-media-data.js', 'astro-media.js', 'astro-observation-data.js', 'astro-observation.js', 'astro-lab-data.js', 'astro-lab.js', 'astro-moon-calendar.js'):
+            for filename in ('astro-discovery-data.js', 'astro-discovery.js', 'astro-media-data.js', 'astro-media.js', 'astro-observation-data.js', 'astro-observation.js', 'astro-lab-data.js', 'astro-lab.js', 'astro-moon-calendar.js', 'astro-portal.js', 'astro-portal.css'):
                 yield dest / filename, (SOURCE / filename).read_bytes()
             for filename in ('astronomy.browser.min.js', 'LICENSE.txt'):
                 yield dest / 'vendor' / 'astronomy-engine' / filename, (SOURCE / 'vendor' / 'astronomy-engine' / filename).read_bytes()

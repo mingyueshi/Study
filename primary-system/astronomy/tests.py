@@ -88,13 +88,13 @@ class AstronomyImportTests(TestCase):
             record=sun, source_path="named", source_row=2, source_hash="a" * 64
         )
         self.assertContains(
-            self.client.get("/astronomy/?q=太阳&named=1&con=Ori"), "太阳"
+            self.client.get("/astronomy/stars/?q=太阳&named=1&con=Ori"), "太阳"
         )
         response = self.client.get("/astronomy/0/")
         self.assertContains(response, "J2000.0")
         self.assertContains(response, "小时")
-        self.assertEqual(self.client.get("/astronomy/?con=bad").status_code, 400)
-        self.assertEqual(self.client.get("/astronomy/?q=²").status_code, 200)
+        self.assertEqual(self.client.get("/astronomy/stars/?con=bad").status_code, 400)
+        self.assertEqual(self.client.get("/astronomy/stars/?q=²").status_code, 200)
         Dataset.objects.filter(pk="hyg").update(state="pending")
         self.assertEqual(self.client.get("/astronomy/0/").status_code, 404)
 

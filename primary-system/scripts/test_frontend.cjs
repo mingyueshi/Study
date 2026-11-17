@@ -1395,7 +1395,7 @@ test('study topic links resolve to real events, places, lessons and chapters', (
       chinaMap: '/geography/atlas/china.html',
       historyEvent: '/history/timeline/event.html',
       marsLife: '/mysteries/mars-life/', darkMatter: '/mysteries/dark-matter/',
-      stars: '/astronomy/', poetry: '/poetry/', idiomStories: '/idioms/stories/',
+      stars: '/astronomy/stars/', poetry: '/poetry/', idiomStories: '/idioms/stories/',
       elements: '/science/elements/', bodyStation: '/science/body/',
       solarTerms: '/geography/solar-terms/',
       silkRoad: '/history/timeline/silk-road.html',

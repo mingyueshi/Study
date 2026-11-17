@@ -1,12 +1,33 @@
 from django.views.generic import TemplateView
+from django.shortcuts import redirect
+from django.urls import reverse
 
 
-astronomy_study = TemplateView.as_view(template_name='study_topics/course.html', extra_context={
+ASTRONOMY_CONTEXT = {
     'study_area': 'geography', 'study_label': '地理',
-    'course_slug': 'astro', 'course_title': '天文探索', 'course_section': '太空基地',
+    'course_slug': 'astro', 'course_title': '天文探索', 'course_section': '专题',
     'course_intro': '从太阳系到银河系和深空，看大图、动画，动手比较宇宙尺度。',
     'course_links': (('astronomy-index', '查恒星与星座'), ('mysteries', '未解之谜研究所')),
-})
+}
+
+
+class AstronomyExploreView(TemplateView):
+    extra_context = ASTRONOMY_CONTEXT
+
+    def get(self, request, *args, **kwargs):
+        # 保留原星表筛选书签；无筛选的根地址现在是天文总入口。
+        if 'view' not in request.GET and any(key in request.GET for key in ('q', 'con', 'named', 'page')):
+            return redirect(reverse('astronomy-index') + '?' + request.META['QUERY_STRING'], permanent=True)
+        return super().get(request, *args, **kwargs)
+
+    def get_template_names(self):
+        views = {f'au{i}' for i in range(1, 10)} | {'universe', 'lab', 'facts', 'clinic'}
+        if self.request.GET.get('view') in views:
+            return ['study_topics/course.html']
+        return ['study_topics/astronomy_portal.html']
+
+
+astronomy_explore = AstronomyExploreView.as_view()
 
 literature_study = TemplateView.as_view(template_name='study_topics/course.html', extra_context={
     'study_area': 'chinese', 'study_label': '语文',

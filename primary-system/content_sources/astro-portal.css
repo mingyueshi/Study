@@ -1,0 +1,39 @@
+body:has(.astro-portal) { --page-width: 100%; }
+.astro-portal { padding-block: 24px 40px; font-size: 18px; line-height: 1.8; color: var(--ink); }
+.astro-portal *, .astro-portal *::before, .astro-portal *::after { box-sizing: border-box; min-width: 0; }
+.astro-portal :is(h1,h2,h3,p,ul) { margin: 0; }
+.astro-portal [hidden] { display: none; }
+.astro-portal a { text-decoration: none; }
+.astro-portal :is(a,summary,input):focus-visible { outline: 3px solid var(--green); outline-offset: 4px; }
+.astro-portal-hero { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: clamp(24px,3vw,44px); border: 1px solid var(--card-line); border-radius: 22px; background: linear-gradient(115deg,var(--card-tint),var(--soft)); }
+.astro-portal-hero h1 { font-size: clamp(32px,3vw,48px); line-height: 1.4; margin-bottom: 8px; }
+.astro-portal-hero p { font-size: 20px; color: var(--muted); }
+.astro-portal-orbit { display: grid; place-items: center; flex: none; width: 104px; aspect-ratio: 1; border: 1px solid var(--card-line); border-radius: 50%; font-size: 54px; color: var(--green); transform: rotate(-15deg); }
+.astro-portal-search { display: flex; align-items: center; flex-wrap: wrap; gap: 12px 20px; margin-block: 24px; }
+.astro-portal-search label { font-weight: 750; }
+.astro-portal-search input { flex: 1 1 250px; max-width: 640px; padding: 12px 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--white); color: var(--ink); font: inherit; }
+.astro-portal-search p { color: var(--muted); font-size: 16px; }
+.astro-topic-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,330px),1fr)); gap: 20px; align-items: start; }
+.astro-topic { overflow: hidden; border: 1px solid var(--line); border-top: 4px solid var(--topic-color); border-radius: 18px; background: var(--white); }
+.astro-topic-link { display: block; padding: 22px 24px 18px; color: inherit; }
+.astro-topic-link:hover { background: var(--soft); }
+.astro-topic-icon { font-size: 32px; }
+.astro-topic h2 { margin-block: 6px 8px; font-size: 25px; line-height: 1.5; }
+.astro-topic-link p { color: var(--muted); font-size: 17px; line-height: 1.8; }
+.astro-topic-enter { display: block; margin-top: 14px; color: var(--green); font-size: 16px; font-weight: 750; }
+.astro-topic details { padding: 10px 24px 14px; border-top: 1px solid var(--line); background: var(--soft); font-size: 16px; }
+.astro-topic summary { cursor: pointer; padding-block: 4px; font-weight: 700; }
+.astro-topic ul { padding: 10px 0 0 20px; }
+.astro-topic li + li { margin-top: 6px; }
+.astro-topic li a { display: block; padding-block: 6px; color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
+.astro-portal-tools { margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--line); }
+.astro-portal-tools h2 { font-size: 24px; margin-bottom: 16px; }
+#astro-tools { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,250px),1fr)); gap: 16px; }
+.astro-tool { display: flex; align-items: start; gap: 14px; padding: 20px; border: 1px solid var(--card-line); border-radius: 14px; background: var(--card-tint); color: inherit; }
+.astro-tool:hover { background: var(--soft); }
+.astro-tool > span { font-size: 28px; }
+.astro-tool h3 { font-size: 20px; }
+.astro-tool p { margin-top: 4px; color: var(--muted); font-size: 16px; }
+.astro-portal-empty { padding: 30px; border: 1px dashed var(--line); border-radius: 14px; background: var(--soft); }
+@media(max-width:500px) { .astro-portal-orbit { display: none; } .astro-portal-hero p { font-size: 18px; } .astro-topic-link { padding: 18px; } .astro-topic details { padding-inline: 18px; } }
+@media print { .astro-portal-search, .astro-portal-orbit { display: none; } .astro-topic { break-inside: avoid; } }

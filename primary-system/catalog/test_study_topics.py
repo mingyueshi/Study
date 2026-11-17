@@ -22,7 +22,7 @@ GEOGRAPHY_PAGES = (
     'geography-atlas-plants', 'geography-atlas-world-plants',
 )
 COURSES = (
-    ('geography', 'astronomy-study', 'astro', '天文探索', ('astronomy-index', 'mysteries')),
+    ('geography', 'astronomy-explore', 'astro', '天文探索', ('astronomy-index', 'mysteries')),
     ('chinese', 'literature-study', 'lit', '文学常识', ('poetry-index', 'idiom-stories')),
     ('science', 'science-lab', 'sci', '科学实验室', ('science-elements',)),
     ('chinese', 'hanzi-evolution', 'hanzi-evo', '汉字演变馆', ('dictionary', 'hanzi-polyphones')),
@@ -156,6 +156,25 @@ class StudyTopicPageTests(SimpleTestCase):
         self.assertEqual(reverse('geography-index'), '/geography/')
         self.assertEqual(reverse('geography-detail', args=['CHN']), '/geography/CHN/')
 
+    def test_astronomy_portal_has_short_url_and_preserves_old_entry_parameters(self):
+        self.assertEqual(reverse('astronomy-explore'), '/astronomy/')
+        self.assertEqual(reverse('astronomy-index'), '/astronomy/stars/')
+        self.assertEqual(reverse('astronomy-detail', args=[42]), '/astronomy/42/')
+        self.assertRedirects(self.client.get('/astronomy/study/?view=lab&solar_term=lichun'),
+                             '/astronomy/?view=lab&solar_term=lichun', status_code=301)
+        self.assertRedirects(self.client.get('/astronomy/?q=%E5%A4%AA%E9%98%B3&named=1&con=Ori'),
+                             '/astronomy/stars/?q=%E5%A4%AA%E9%98%B3&named=1&con=Ori',
+                             status_code=301, fetch_redirect_response=False)
+        portal = self.client.get('/astronomy/')
+        self.assertTemplateUsed(portal, 'study_topics/astronomy_portal.html')
+        self.assertContains(portal, 'id="astro-topics"')
+        self.assertNotContains(portal, 'class="sidebar"')
+        self.assertNotContains(portal, 'astronomy.browser.min.js')
+        for view in ('au1', 'au9', 'lab', 'universe', 'facts', 'clinic'):
+            response = self.client.get('/astronomy/', {'view': view})
+            self.assertTemplateUsed(response, 'study_topics/course.html')
+            self.assertContains(response, 'id="cards"')
+
     def test_main_views_link_to_related_topics(self):
         for main, lesson, label in (
             ('history-timeline-timeline', 'history-study', '历史精讲'),
@@ -270,7 +289,7 @@ class StudyTopicPageTests(SimpleTestCase):
                 self.assertContains(response, title)
                 self.assertContains(response, f'/static/study_topics/{slug}/{slug}-data.js')
                 self.assertContains(response, f'href="{reverse("home")}?area={area}#modules-title"')
-                self.assertContains(response, 'id="cards"')
+                self.assertContains(response, 'id="astro-topics"' if slug == 'astro' else 'id="cards"')
                 for reference in references:
                     self.assertContains(response, f'href="{reverse(reference)}"')
                 self.assertEqual(self.client.post(reverse(name)).status_code, 405)
@@ -300,8 +319,8 @@ class StudyTopicEntryTests(TestCase):
 
     def test_history_and_geography_keep_their_primary_cards_first(self):
         for area, shown, hidden in (
-            ('history', ('history-timeline-timeline', 'history-timeline-territory', 'history-timeline-people', 'history-timeline-civilizations', 'history-timeline-ancient-science', 'history-timeline-silk-road'), ('geography-atlas-china', 'astronomy-study')),
-            ('geography', ('geography-atlas-china', 'astronomy-study', 'solar-terms'), ('history-timeline-timeline', 'literature-study')),
+            ('history', ('history-timeline-timeline', 'history-timeline-territory', 'history-timeline-people', 'history-timeline-civilizations', 'history-timeline-ancient-science', 'history-timeline-silk-road'), ('geography-atlas-china', 'astronomy-explore')),
+            ('geography', ('geography-atlas-china', 'astronomy-explore', 'solar-terms'), ('history-timeline-timeline', 'literature-study')),
         ):
             with self.subTest(area=area):
                 response = self.client.get(reverse('home'), {'area': area})

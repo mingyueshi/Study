@@ -1,0 +1,35 @@
+{% extends 'study_topics/page.html' %}
+{% load static %}
+
+{% block title %}天文探索 · 乐学堂{% endblock %}
+{% block study_assets %}
+<link rel="stylesheet" href="{% static 'study_topics/astro/astro-portal.css' %}?v=20261117">
+<script src="{% static 'study_topics/astro/astro-data.js' %}?v=20261117portal" defer></script>
+<script src="{% static 'study_topics/astro/astro-portal.js' %}?v=20261117b1" defer></script>
+{% endblock %}
+
+{% block study_content %}
+<div class="astro-portal">
+  <header class="astro-portal-hero">
+    <div>
+      <h1>天文探索</h1>
+      <p id="astro-portal-intro"></p>
+    </div>
+    <span class="astro-portal-orbit" aria-hidden="true">✦</span>
+  </header>
+  <div class="astro-portal-search" role="search">
+    <label for="astro-topic-search">找一个问题</label>
+    <input id="astro-topic-search" type="search" placeholder="试试「月相」「黑洞」「火箭」…" autocomplete="off">
+    <p id="astro-search-status" role="status"></p>
+  </div>
+  <section aria-label="天文专题目录">
+    <div class="astro-topic-grid" id="astro-topics"></div>
+    <p class="astro-portal-empty" id="astro-topic-empty" hidden>暂时没有找到，换一个词试试。</p>
+  </section>
+  <section class="astro-portal-tools" aria-labelledby="astro-tools-title">
+    <h2 id="astro-tools-title">动手探索与查阅</h2>
+    <div id="astro-tools"></div>
+  </section>
+  <noscript>请启用 JavaScript，查看专题目录和互动内容。</noscript>
+</div>
+{% endblock %}

@@ -42,7 +42,7 @@
 
 `astro-media-data.js` 维护 3 个主题的中文图注、观察任务、原始媒体与外部资料链接，以及 8 颗行星的近似数值和模型说明；`astro-media.js` 负责大图、原生视频和三种比例视图。6 幅图、2 张额外视频封面和 3 段 WebM 动画保存在 `images/astro/roam-*`，随 `make study-topics-data` 发布，页面无需连接外部图库即可看图和播放。各素材的 `source` 是说明页，`original` 是原始下载地址，核对日期记录在 `checked`。外部探索明确标为需联网。
 
-修改后运行 `node content_sources/test/test-astro-media.js`、`node content_sources/test/test-astro.js`、`make study-topics-data`、`make test-frontend` 与 `.venv/bin/python manage.py test catalog.test_study_topics`。入口为 `/astronomy/study/?view=universe`，可用 `#roam-solar`、`#roam-galaxy`、`#roam-deep` 直达各主题；课程仍使用原知识点与学习记录。
+修改后运行 `node content_sources/test/test-astro-media.js`、`node content_sources/test/test-astro.js`、`make study-topics-data`、`make test-frontend` 与 `.venv/bin/python manage.py test catalog.test_study_topics`。入口为 `/astronomy/?view=universe`，可用 `#roam-solar`、`#roam-galaxy`、`#roam-deep` 直达各主题；课程仍使用原知识点与学习记录。
 
 ### 科学微粒与电路演示
 
@@ -102,7 +102,7 @@
 
 ### 天文实验室
 
-入口 `/astronomy/study/?view=lab`，四项玩法分别使用 `#sky-moon`、`#sky-planets`、`#sky-polaris` 和 `#sky-missions`。侧栏直接进入实验室，太阳系、月球、恒星、航天课程也提供对应链接；原知识点 ID、搜索、宇宙漫游与掌握记录继续使用。
+入口 `/astronomy/?view=lab`，四项玩法分别使用 `#sky-moon`、`#sky-planets`、`#sky-polaris` 和 `#sky-missions`。侧栏直接进入实验室，太阳系、月球、恒星、航天课程也提供对应链接；原知识点 ID、搜索、宇宙漫游与掌握记录继续使用。
 
 `astro-lab-data.js` 维护日期范围与说明、冥王星、3 道比较题、北斗七星的示意坐标和四步找星说明，以及 7 个探月、7 个探火星代表性里程碑。任务日期区分发射、入轨、着陆、返回；成果不是都发生在同一天。14 站是已发生的精选清单，不代表完整或最新任务名录。每站保存 NASA 或国家航天局出处。原八行星数值集中在 `astro-media-data.js`，补充稳定 ID、平均参考温度与公转天数，直径统一为 NASA 数据表的近似赤道直径。冥王星属于矮行星，不写成九大行星；岩石表面温度和四颗巨行星约 1 巴大气处温度分开说明。
 
@@ -111,3 +111,7 @@
 `astro-lab.js` 负责排序、三题反馈、目的地筛选和有限找星播放。星位经过简化，天璇指向天枢、从天枢继续约五倍的方向由坐标校验；不是实时星图。播放遵循系统减少动态和统一偏好，离屏、后台、离页和切换课程会清理。数据结构与引用先由 `node content_sources/test/test-astro-lab.js` 校验；`scripts/test_astro_lab.cjs` 对照[美国海军天文台 2024 月相历表](https://aa.usno.navy.mil/api/moon/phases/year?year=2024)，并验证闰日、时区、日期控制清理、数值排序和时间顺序。
 
 修改后运行上述源校验、`node content_sources/test/test-astro-media.js`、`node content_sources/test/test-astro-observation.js`、`node content_sources/test/test-astro.js`、`make study-topics-data`、`make test-frontend` 与 `.venv/bin/python manage.py test catalog.test_study_topics`。
+
+### 天文专题总入口
+
+`/astronomy/` 使用独立的轻量目录模板 `astronomy_portal.html`，只加载 `astro-data.js`、`astro-portal.js` 与 `astro-portal.css`。9 个主题和 46 个问题复用原 `units`，四个工具入口的文案维护在 `ASTRO.portal`，由 `test/test-astro.js` 校验；搜索按主题与问题内容筛选并展开对应问题。具体讲解及互动通过 `?view=au1`、`?view=lab` 等原视图打开。旧 `/astronomy/study/` 保留永久跳转，参数与锚点继续解析；无视图参数的 `#lesson-*`、`#roam-*`、`#sky-*`、`#mission-*` 在目录中补齐视图后定位。星表独立为 `/astronomy/stars/`，原 `/astronomy/<编号>/` 不变，旧根地址的星表筛选参数转到新星表入口。修改后运行源校验、`make study-topics-data`、`make test-frontend` 与 `.venv/bin/python manage.py test catalog.test_study_topics astronomy`。

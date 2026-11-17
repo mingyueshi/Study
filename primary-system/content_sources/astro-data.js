@@ -14,6 +14,15 @@
 const ASTRO = {
   textbook: '小学天文启蒙 · 主题式学习',
   edition: '适合小学中高年级 · 九大太空基地',
+  portal: {
+    intro: '选一个感兴趣的主题，或从一个问题开始探索。',
+    tools: [
+      { id: 'universe', title: '宇宙漫游', emoji: '🌌', intro: '看真实影像，比较宇宙尺度。' },
+      { id: 'lab', title: '天文实验室', emoji: '🔭', intro: '看月相、比行星、找北极星、追踪探测器。' },
+      { id: 'facts', title: '数据速查', emoji: '📊', intro: '查距离、大小与时间。' },
+      { id: 'clinic', title: '辨一辨', emoji: '💡', intro: '看看常见说法哪里需要修正。' },
+    ],
+  },
   units: [
     /* ================= 第一站 · 太阳系大家庭 ================= */
     {
