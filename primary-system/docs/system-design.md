@@ -285,6 +285,14 @@ DB 里的两科内容行暂不删除：待静态教材册有全局检索层后�
 
 用 `.venv/bin/python scripts/build_study_topics.py --check` 核对同步结果，用 `.venv/bin/python manage.py test catalog.test_study_topics` 核对页面与入口。改动专题关联后运行 `make test-frontend`，校验事件、地点、章节和知识点的引用。
 
+## 数学之美专题（2026-11-17）
+
+`mathbeauty` 为零模型只读应用，入口 `/mathbeauty/` 与五个稳定 slug 子页在学习广场数学区注册。黄金分割、斐波那契数列、对称与分形、莫比乌斯环、拓扑入门按问题递进，不限制学段；先操作，再读解释和深入内容。
+
+唯一内容源是 `mathbeauty/data/topics.json`，`content.py` 校验控件、读数、反馈键、题目答案和本地图示路径。`static/mathbeauty/models.js` 提供纯数学函数与 SVG 绘图，`app.js` 只接线控件与反馈；生成脚本复用相同模型输出 8 张默认 SVG。8 个实验与 15 道探索判断均无需运行时联网，不写学习记录，也没有自动播放。无脚本仍能阅读静态示意、讲解和答案。页面继承公共主题、字号和可换边侧栏，目录与子页共用宽屏规则。
+
+`make mathbeauty-data` 同步本地 SVG，`node scripts/build_mathbeauty.cjs --check` 核对生成物；Django 测试 `mathbeauty` 与数学模型／交互测试 `scripts/test_mathbeauty.cjs` 验证数据契约和只读路径。具体模型精度与教学边界见 [内容与模型说明](../mathbeauty/data/README.md)。
+
 ## 数学公式专题（2026-11-09）
 
 独立 `mathformulas` 应用承接跨学段的公式速查手册（照 grammar 零模型先例）：

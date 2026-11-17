@@ -1,0 +1,17 @@
+{% load static %}
+<section class="mb-lab" id="lab-{{ lab.id }}" data-mb-lab="{{ lab.id }}" aria-labelledby="title-{{ lab.id }}">
+  <header><p class="mb-eyebrow">动手实验</p><h2 id="title-{{ lab.id }}">{{ lab.title }}</h2><p>{{ lab.lead }}</p></header>
+  <div class="mb-controls" data-mb-enhanced hidden>
+    {% for control in lab.controls %}
+      {% if control.type == 'range' %}<label for="mb-{{ lab.id }}-{{ control.id }}"><span>{{ control.label }} <output data-mb-control-value="{{ control.id }}">{{ control.value }}</output></span><input id="mb-{{ lab.id }}-{{ control.id }}" type="range" min="{{ control.min }}" max="{{ control.max }}" step="{{ control.step }}" value="{{ control.value }}" data-mb-control="{{ control.id }}"></label>
+      {% elif control.type == 'select' %}<label for="mb-{{ lab.id }}-{{ control.id }}"><span>{{ control.label }}</span><select id="mb-{{ lab.id }}-{{ control.id }}" data-mb-control="{{ control.id }}">{% for option in control.options %}<option value="{{ option.value }}"{% if option.value == control.value %} selected{% endif %}>{{ option.label }}</option>{% endfor %}</select></label>
+      {% else %}<label class="mb-checkbox"><input type="checkbox" data-mb-control="{{ control.id }}"{% if control.value %} checked{% endif %}> {{ control.label }}</label>{% endif %}
+    {% endfor %}
+    <div class="mb-actions">{% for action in lab.actions %}<button type="button" data-mb-action="{{ action.id }}">{{ action.label }}</button>{% endfor %}</div>
+  </div>
+  <figure class="mb-figure"><img src="{% static lab.figure %}" alt="{{ lab.title }}的默认状态示意图" data-mb-fallback><div class="mb-live" data-mb-live data-mb-enhanced hidden></div><figcaption>{{ lab.caption }}</figcaption></figure>
+  <p class="mb-observation" data-mb-fallback><b>静态示意的读数：</b>{{ lab.fallback }}</p>
+  <dl class="mb-readouts" data-mb-enhanced hidden>{% for reading in lab.readouts %}<div data-mb-reading="{{ reading.id }}"><dt>{{ reading.label }}</dt><dd><output data-mb-output="{{ reading.id }}">—</output></dd></div>{% endfor %}</dl>
+  <p class="mb-observation" data-mb-status role="status" hidden></p>
+  {% if lab.kind == 'fibonacci' %}<div class="mb-table-wrap" data-mb-enhanced hidden><table><caption>后几组相邻项比值</caption><thead><tr><th scope="col">n</th><th scope="col">Fₙ₊₁ ÷ Fₙ</th><th scope="col">比值</th><th scope="col">与 φ 的距离</th></tr></thead><tbody data-mb-ratio-table></tbody></table></div>{% endif %}
+</section>

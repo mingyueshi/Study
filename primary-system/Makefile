@@ -157,6 +157,7 @@ test: ## 跑全量测试（需先 install）
 	$(MANAGE) test
 
 test-frontend: ## 跑 Node 前端回归测试
+	node --test scripts/test_mathbeauty.cjs
 	node --test scripts/test_reading_preferences.cjs
 	node --test scripts/test_mathformulas_frontend.cjs
 	node --test scripts/test_olympiad_frontend.cjs
@@ -191,7 +192,13 @@ test-docker: ## Docker 完整演练：初始化、更新保留记录、备份恢
 ##@ 教材与资料生成
 
 content-data: ## 重生成教材、专题、作文坊、语法、日常用语和题库批次
-	$(MAKE) -j1 writing-data questionbank-data grammar-data phrases-data mathbook-data chinesebook-data study-topics-data
+	$(MAKE) -j1 writing-data questionbank-data grammar-data phrases-data mathbook-data chinesebook-data study-topics-data mathbeauty-data
+
+mathbeauty-data: ## 从数学之美模型生成八张本地 SVG 图示
+	$(PYTHON) -c 'from mathbeauty.content import load_data; load_data()'
+	node scripts/build_mathbeauty.cjs
+
+.PHONY: mathbeauty-data
 
 writing-data: ## 从 content_sources/ 重新生成作文坊 topics.json（需 node）
 	node scripts/convert_writing_data.js

@@ -1,0 +1,13 @@
+{% extends 'mathbeauty/base.html' %}{% load static %}
+{% block mb_content %}
+<header class="mb-hero mb-home-hero">
+  <div><p class="mb-eyebrow">数学 · 模式、形状与空间</p><h1>{{ data.title }}</h1><p class="mb-lead">{{ data.lead }}</p><p>先用眼睛看，用手改变，再问一句：为什么？从直观实验出发，也可以继续读到方程、分形维数与拓扑。</p><a class="button" href="{% url 'math-beauty-topic' 'golden' %}">从黄金分割开始 →</a></div>
+  <figure class="mb-cover"><img src="{% static 'mathbeauty/figures/fibonacci.svg' %}" alt="边长为斐波那契数的正方形拼图与圆弧"><figcaption>一个相加规则，可以长成一幅几何拼图。</figcaption></figure>
+</header>
+<div class="mb-intro-strip"><span>5 个主题</span><span>8 个动手实验</span><span>15 道探索判断</span><span>本地图示 · 无需外部资源</span></div>
+<section aria-labelledby="mb-map-title"><div class="mb-section-heading"><div><p class="mb-eyebrow">跟着问题走</p><h2 id="mb-map-title">选一站，打开一个新问题</h2></div><p>顺着学，也可以从最想动手的地方开始。</p></div>
+  <div class="mb-topic-grid">{% for item in data.topics %}<a class="mb-topic-card mb-color-{{ item.color }}" href="{% url 'math-beauty-topic' item.id %}"><div class="mb-card-top"><span class="mb-topic-number">0{{ forloop.counter }}</span><span class="mb-symbol" aria-hidden="true">{{ item.emoji }}</span></div><h3>{{ item.title }}</h3><p>{{ item.blurb }}</p><strong>{{ item.question }}</strong><span class="mb-card-go">进入探索 →</span></a>{% endfor %}</div>
+</section>
+<section class="mb-route-card" aria-labelledby="mb-route-title"><h2 id="mb-route-title">把规律连起来</h2><p>黄金分割与斐波那契数列，用方程连接比例与递推；对称与分形，用变换和尺度观察形状；莫比乌斯环与拓扑，把注意力转向边界、朝向和不变量。</p><div class="mb-route-links"><a href="{% url 'geometry-lab' %}">先复习平移、旋转与翻折 ↗</a><a href="{% url 'math-formulas' %}?q=比例">查比与比例的公式 ↗</a></div></section>
+<section class="mb-reading-guide"><h2>每站都有三条进入方式</h2><div class="mb-guide-grid"><article><b>01 · 先动手</b><p>滑动、拼接、走一步。只需少量前置知识，就能先观察变化。</p></article><article><b>02 · 看解释</b><p>把现象和概念连起来，用数值检查自己的猜想。</p></article><article><b>03 · 继续深入</b><p>想多问一步时，再读方程、极限、维数或曲面的整体性质。</p></article></div><p class="mb-note">基础阅读、图示和答案随项目保存；每站末尾的原始资料链接需联网。年龄不作为进入专题的门槛。</p></section>
+{% endblock %}

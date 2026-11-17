@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 420" role="img" aria-label="数学实验示意图"><rect width="760" height="420" rx="18" fill="#f5f9fb"/><rect x="40" y="55" width="442" height="55" rx="8" fill="#ffc857"/><rect x="482" y="55" width="238" height="55" rx="8" fill="#57c5b6"/>
+      <line x1="482" y1="35" x2="482" y2="130" stroke="#334a47" stroke-width="3"/>
+      <text x="261" y="91" fill="#24443f" font-size="22" text-anchor="middle" font-family="system-ui,sans-serif">a</text><text x="601" y="91" fill="#24443f" font-size="22" text-anchor="middle" font-family="system-ui,sans-serif">b</text><text x="380" y="151" fill="#24443f" font-size="22" text-anchor="middle" font-family="system-ui,sans-serif">a + b = 100</text>
+      <rect x="241.538" y="195" width="276.923" height="180" fill="#b69ae8" stroke="#374c56" stroke-width="2"/>
+      <rect x="241.538" y="195" width="180" height="180" fill="#ffc857" stroke="#374c56" stroke-width="2"/>
+      <text x="331.538" y="298" fill="#24443f" font-size="22" text-anchor="middle" font-family="system-ui,sans-serif">a × a</text><text x="470" y="298" fill="#24443f" font-size="18" text-anchor="middle" font-family="system-ui,sans-serif">a × b</text></svg>

@@ -1,0 +1,9 @@
+{% extends 'base.html' %}{% load static %}
+{% block title %}{% if topic %}{{ topic.title }} · {% endif %}数学之美 · 乐学堂{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'mathbeauty/beauty.css' %}?v=1">
+<div class="math-beauty{% if topic %} mb-color-{{ topic.color }}{% endif %}">
+  <nav class="mb-crumb" aria-label="数学专题导航"><a href="{% url 'home' %}?area=math#modules-title">← 学习广场 · 数学</a>{% if topic %}<a href="{% url 'math-beauty' %}">数学之美 · 五站目录</a>{% endif %}<a href="{% url 'math-formulas' %}">公式速查 ↗</a></nav>
+  {% block mb_content %}{% endblock %}
+</div>
+{% endblock %}
