@@ -55,6 +55,9 @@ def client_question(question):
     elif question.type == 'selfcheck':
         item['answer'] = question.payload.get('answer', '')
         item['steps'] = question.payload.get('steps', '')
+    if question.track == Question.Track.OLYMPIAD:
+        from .hints import question_hints
+        item['hints'] = question_hints(question)
     return item
 
 

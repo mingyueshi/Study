@@ -1,0 +1,12 @@
+<section class="qb-leaderboard" data-qb-leaderboard data-scope="{{ leaderboard_scope }}" data-tag="{{ tag }}" data-size="{{ questions|length|default:10 }}" data-mode="{{ mode_wrong|yesno:'wrong,challenge' }}" aria-labelledby="qb-leaderboard-title">
+  <header class="qb-leaderboard-head"><span aria-hidden="true">🏆</span><div><h2 id="qb-leaderboard-title">本机挑战榜</h2><p>和上一次的自己比一比，每次进步都值得开心。</p></div></header>
+  <div class="qb-leaderboard-filters">
+    <label>题型<select data-qb-rank-tag><option value="">混合挑战</option>{% for name in leaderboard_tags %}<option value="{{ name }}">{{ name }}</option>{% endfor %}</select></label>
+    <label>题数<select data-qb-rank-size><option value="5">5 题</option><option value="10">10 题</option><option value="20">20 题</option>{% if questions and questions|length != 5 and questions|length != 10 and questions|length != 20 %}<option value="{{ questions|length }}">{{ questions|length }} 题</option>{% endif %}</select></label>
+    <label>练习方式<select data-qb-rank-mode><option value="challenge">挑战练习</option><option value="wrong">错题重练</option></select></label>
+  </div>
+  <p class="qb-rank-rule">同题型、同题数、同方式各排前 10 名：先比答对题数，再比用时。提示不扣分，榜中标记使用情况。</p>
+  <p data-qb-rank-status role="status"></p>
+  <ol class="qb-rank-list" data-qb-rank-list aria-label="挑战成绩"></ol>
+  <p class="qb-note">只保存在当前浏览器，按当前学习账号分别记录；游客单独记录。清理浏览器数据后会清空。</p>
+</section>

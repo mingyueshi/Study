@@ -139,34 +139,47 @@ test('a mathbook exercise return anchor opens the original knowledge card withou
   assert.deepEqual(page.writes, []);
 });
 
-function questionPractice(questions, correct, effects = true) {
+function questionPractice(questions, correct, effects = true, settings = {}) {
   const board = element(), fields = {};
   const get = (selector) => fields[selector] || (fields[selector] = element());
   board.querySelector = get;
   const question = get('[data-qb-question]');
   question.querySelector = get;
+  let markup = '';
+  Object.defineProperty(question, 'innerHTML', {
+    get: () => markup,
+    set(value) { markup = value; get('[data-qb-hint-list]').innerHTML = ''; },
+  });
   const feedback = get('[data-qb-feedback]');
   const actions = element(), next = element();
   actions.querySelector = () => next;
   feedback.querySelector = (selector) => selector === '.qb-feedback-actions' ? actions : get(selector);
   get('[data-qb-progress-fill]').style = {};
   get('[data-qb-stars]').hidden = true;
-  board.dataset = {answerUrl: '/questionbank/api/answer/', practiceUrl: '/questionbank/practice/', size: 5};
-  const requests = [], celebrations = [];
+  board.dataset = {answerUrl: '/questionbank/api/answer/', practiceUrl: '/questionbank/practice/', size: 5, ...settings};
+  const requests = [], celebrations = [], ranks = [];
+  let time = 0, timerRunning = false;
   run('questionbank/practice.js', vm.createContext({
+    URLSearchParams, performance: {now: () => time},
+    setInterval() { timerRunning = true; return 1; }, clearInterval() { timerRunning = false; },
     document: {
       querySelector: () => board,
       getElementById: () => ({textContent: JSON.stringify(questions)}),
       addEventListener() {}, cookie: '',
     },
-    window: effects ? {StudyEffects: {celebrate: event => celebrations.push(event)}} : {},
+    window: {
+      ...(effects ? {StudyEffects: {celebrate: event => celebrations.push(event)}} : {}),
+      OlympiadChallenge: {record(round) { ranks.push(round); return {saved: true, rank: 1}; }, duration: value => `${Math.ceil(value / 1000)} 秒`},
+      addEventListener() {},
+    },
     fetch: async (url, request) => {
       requests.push(JSON.parse(request.body));
       return {ok: true, json: async () => ({correct: correct[requests.length - 1]})};
     },
   }));
   return {
-    get, requests, celebrations,
+    get, requests, celebrations, ranks, tick: ms => { time += ms; }, timerRunning: () => timerRunning,
+    hint: () => question.handlers.click({target: {closest: selector => selector === '[data-qb-hint]' ? {} : null}}),
     answer: (value) => question.handlers.click({
       target: {closest: (selector) => selector === '[data-qb-option]' ? {dataset: {value}} : null},
     }),
@@ -230,6 +243,52 @@ test('non-math rounds and missing effects preserve normal result rendering', asy
     assert.equal(page.celebrations.length, 0);
     assert.equal(page.get('[data-qb-final-score]').textContent, '答对 1／1 题');
   }
+});
+
+test('olympiad reveals one hint at a time, resets per question and counts hinted questions once', async () => {
+  const questions = ['a', 'b'].map(uuid => ({type: 'choice', stem: '想一想', area: 'math', uuid,
+    options: ['甲', '乙'], attempt_id: uuid, hints: ['先观察条件。', '再列式＜试一试＞。']}));
+  const page = questionPractice(questions, [true, false], true, {track: 'olympiad', tag: '鸡兔同笼', modeWrong: '1'});
+  assert.doesNotMatch(page.get('[data-qb-question]').innerHTML, /先观察条件/);
+  page.hint();
+  assert.equal(page.get('[data-qb-hint-list]').innerHTML, '<li>先观察条件。</li>');
+  page.hint(); page.hint();
+  assert.equal((page.get('[data-qb-hint-list]').innerHTML.match(/<li>/g) || []).length, 2);
+  page.tick(3000);
+  await page.answer('0');
+  page.next();
+  assert.equal(page.get('[data-qb-hint-list]').innerHTML, '');
+  page.tick(1200);
+  await page.answer('1');
+  assert.equal(page.timerRunning(), false);
+  assert.equal(page.ranks.length, 0);
+  page.tick(10000); // 读最终反馈、点击看结果的等待不计入用时。
+  page.next(); page.next();
+  assert.equal(page.ranks.length, 1);
+  assert.equal(page.ranks[0].elapsedMs, 4200);
+  assert.equal(page.ranks[0].hintsUsed, 1);
+  assert.equal(page.ranks[0].correct, 1);
+  assert.equal(page.ranks[0].total, 2);
+  assert.equal(page.ranks[0].mode, 'wrong');
+  const again = new URL(page.get('[data-qb-again]').href, 'http://localhost');
+  assert.equal(again.searchParams.get('tag'), '鸡兔同笼');
+  assert.equal(again.searchParams.get('mode'), 'wrong');
+});
+
+test('olympiad failed submissions keep the timer and hints without adding a rank', async () => {
+  const page = questionPractice([{type: 'truefalse', stem: '想一想', uuid: 'a', attempt_id: 'attempt', hints: ['方向。', '列式。']}],
+    [undefined, true], true, {track: 'olympiad'});
+  page.tick(1000);
+  await page.answer('true');
+  page.hint();
+  assert.match(page.get('[data-qb-hint-list]').innerHTML, /方向/);
+  assert.equal(page.timerRunning(), true);
+  assert.equal(page.ranks.length, 0);
+  page.tick(1000);
+  await page.answer('true');
+  page.next();
+  assert.equal(page.ranks.length, 1);
+  assert.equal(page.ranks[0].elapsedMs, 2000);
 });
 
 function speechPage({ supported = true, throws = false, controls = false, sequenceControls = false, pausable = false, textbookKind = 'words', stored = {}, voices = [] } = {}) {

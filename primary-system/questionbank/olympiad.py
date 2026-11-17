@@ -13,7 +13,14 @@ from . import records, services
 from .models import Question
 
 HERO_TAG = ('课本外的思维题：速算巧算、鸡兔同笼、盈亏还原、行程与逻辑推理。'
-            '每题四个选项，答完马上看思路解析，答错自动收进奥数错题本。')
+            '卡住时看一步提示，练完一组挑战自己，答错自动收进奥数错题本。')
+
+
+def leaderboard_context(request):
+    return {
+        'leaderboard_scope': f'user-{request.user.pk}' if request.user.is_authenticated else 'guest',
+        'leaderboard_tags': [tag for tag, _ in services.tag_counts(Question.Track.OLYMPIAD)],
+    }
 
 
 @never_cache
@@ -31,4 +38,5 @@ def page(request):
         'practice_url': reverse('questionbank-olympiad-practice'),
         'wrong_url': reverse('questionbank-wrong') + '?track=olympiad',
         'hero_tag': HERO_TAG,
+        **leaderboard_context(request),
     })

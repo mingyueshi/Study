@@ -266,6 +266,37 @@ class WrongViewTests(TestCase):
 
 
 class OlympiadViewTests(TestCase):
+    def test_hints_are_available_before_answer_without_revealing_full_solution(self):
+        from .test_data import load_batches
+
+        entry = next(entry for _, batch in load_batches() for entry in batch['questions']
+                     if entry['source_ref'] == 'olympiad:practice:jitu:01')
+        question = Question(**entry)
+        question.save()
+        page = self.client.get(reverse('questionbank-olympiad-practice'), {'tag': '鸡兔同笼', 'count': 5})
+        item = page.context['questions'][0]
+        self.assertEqual(len(item['hints']), 2)
+        for secret in ('answer', 'explanation', 'steps'):
+            self.assertNotIn(secret, item)
+        self.assertNotContains(page, entry['payload']['explanation'])
+        self.assertContains(page, '本机挑战榜')
+        self.assertContains(page, 'sidebar-layout.js')
+        self.assertEqual(AnswerRecord.objects.count(), 0)
+        self.assertNotIn(settings.SESSION_COOKIE_NAME, page.cookies)
+        verdict = post_answer(self.client, {'uuid': item['uuid'], 'attempt_id': item['attempt_id'],
+                                           'given': {'value': entry['payload']['answer']}}).json()
+        self.assertTrue(verdict['correct'])
+        self.assertEqual(verdict['explanation'], entry['payload']['explanation'])
+
+    def test_leaderboard_scope_separates_accounts_and_guests(self):
+        from accounts.models import User
+
+        url = reverse('questionbank-olympiad')
+        self.assertEqual(self.client.get(url).context['leaderboard_scope'], 'guest')
+        user = User.objects.create_user(username='rank-student')
+        self.client.force_login(user)
+        self.assertEqual(self.client.get(url).context['leaderboard_scope'], f'user-{user.pk}')
+
     def test_landing_renders_track_stats(self):
         seed_olympiad()
         response = self.client.get(reverse('questionbank-olympiad'))

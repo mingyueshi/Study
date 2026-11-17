@@ -1,5 +1,6 @@
 {% extends 'base.html' %}{% load static %}{% block title %}奥数挑战 · 乐学堂{% endblock %}
-{% block content %}<link rel="stylesheet" href="{% static 'questionbank/bank.css' %}?v=4">
+{% block content %}<link rel="stylesheet" href="{% static 'questionbank/bank.css' %}?v=6">
+<script src="{% static 'questionbank/olympiad.js' %}?v=1" defer></script>
 <header class="qb-hero">
   <div class="qb-hero-copy">
     <p class="eyebrow">数学 · 思维挑战</p>
@@ -24,22 +25,31 @@
       <img src="{% static 'icons/quiz.svg' %}" alt="" width="52" height="52">
       <div><h2>开始挑战</h2><p class="qb-area-count">{{ total }} 道题</p></div>
     </header>
-    <p class="qb-area-intro">从各个主题里随机抽一组。每题四个选项，选完马上知道对错，还能看思路解析。</p>
+    <p class="qb-area-intro">选一个薄弱题型专门练，或者来一组混合挑战。先自己想，卡住再看一步提示，答完可对照完整解析。</p>
+    <form class="qb-challenge-picker" action="{{ practice_url }}" method="get">
+      <label>专攻题型<select name="tag"><option value="">全部题型 · 混合挑战</option>{% for item in tags %}<option value="{{ item.tag }}">{{ item.tag }} · {{ item.count }} 题</option>{% endfor %}</select></label>
+      <label>每组题数<select name="count"><option value="5">5 题 · 热热身</option><option value="10" selected>10 题 · 小挑战</option><option value="20">20 题 · 大挑战</option></select></label>
+      <button class="button" type="submit">开始挑战 →</button>
+    </form>
     <div class="qb-area-actions">
-      <a class="button small" href="{{ practice_url }}?count=10">开始挑战 →</a>
       <a class="button small ghost" href="{{ wrong_url }}">奥数错题本</a>
+      <a class="button small ghost" href="#qb-leaderboard-title">看看挑战榜 ↓</a>
     </div>
   </article>
 </section>
 
 {% if tags %}
-<section class="qb-toolbar">
-  <span class="qb-label">主题</span>
+<section class="qb-topic-section" aria-labelledby="qb-topics-title">
+  <h2 id="qb-topics-title">专攻一个题型</h2>
+  <p class="qb-note">哪里需要多想一想，就从哪里练起。点击题型开始一组 10 题。</p>
+  <div class="qb-topic-grid">
   {% for item in tags %}
-  <a class="chip" href="{{ practice_url }}?tag={{ item.tag }}&amp;count=10">{{ item.tag }} · {{ item.count }} 题</a>
+  <a class="qb-topic-card" href="{{ practice_url }}?tag={{ item.tag|urlencode }}&amp;count=10"><b>{{ item.tag }}</b><span>{{ item.count }} 道可练题 <span aria-hidden="true">→</span></span></a>
   {% endfor %}
+  </div>
 </section>
 {% endif %}
 
-<p class="qb-note">可以从一个主题开始练，也可以来一组混合挑战。答错的题会进错题本，重练答对后自动移出。</p>
+{% include 'questionbank/_leaderboard.html' %}
+<p class="qb-note">一组题不重复抽取；题目不足所选数量时，按实际题数练习和入榜。答错的题会进错题本，重练答对后自动移出。</p>
 {% endblock %}

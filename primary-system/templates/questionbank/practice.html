@@ -1,7 +1,8 @@
 {% extends 'base.html' %}{% load static %}{% block title %}{{ eyebrow }} · 乐学堂{% endblock %}
-{% block content %}<link rel="stylesheet" href="{% static 'questionbank/bank.css' %}?v=5">
+{% block content %}<link rel="stylesheet" href="{% static 'questionbank/bank.css' %}?v=6">
 <script src="{% static 'speech.js' %}" defer></script><script src="{% static 'tts.js' %}" defer></script>
-<script src="{% static 'questionbank/practice.js' %}?v=4" defer></script>
+{% if track == 'olympiad' %}<script src="{% static 'questionbank/olympiad.js' %}?v=1" defer></script>{% endif %}
+<script src="{% static 'questionbank/practice.js' %}?v=5" defer></script>
 <nav class="qb-crumb"><a href="{{ home_url }}">← 回{{ home_label }}</a></nav>
 <header class="qb-practice-head">
   <p class="eyebrow">{% if mode_wrong %}错题重练{% else %}{{ eyebrow }}{% endif %}</p>
@@ -22,11 +23,11 @@
     </div>
     {% endif %}
     {% if tag_chips %}
-    <p class="qb-label">主题</p>
+    <p class="qb-label">专攻题型</p>
     <div class="qb-side-chips qb-side-wrap">
-      <a class="chip{% if not tag %} on{% endif %}" href="?count={{ size }}{% if mode_wrong %}&amp;mode=wrong{% endif %}">全部</a>
+      <a class="chip{% if not tag %} on{% endif %}" {% if not tag %}aria-current="true"{% endif %} href="?count={{ size }}{% if mode_wrong %}&amp;mode=wrong{% endif %}">混合挑战</a>
       {% for chip in tag_chips %}
-      <a class="chip{% if tag == chip.tag %} on{% endif %}" href="?tag={{ chip.tag }}&amp;count={{ size }}{% if mode_wrong %}&amp;mode=wrong{% endif %}">{{ chip.tag }}</a>
+      <a class="chip{% if tag == chip.tag %} on{% endif %}" {% if tag == chip.tag %}aria-current="true"{% endif %} href="?tag={{ chip.tag|urlencode }}&amp;count={{ size }}{% if mode_wrong %}&amp;mode=wrong{% endif %}">{{ chip.tag }} · {{ chip.count }}</a>
       {% endfor %}
     </div>
     {% endif %}
@@ -34,30 +35,40 @@
     <p class="qb-side-note"><a href="{{ wrong_url }}">看看本章错题本</a></p>
     {% elif mathbook_title %}
     <p class="qb-side-note"><a href="{{ home_url }}">回数学教材</a></p>
+    {% elif track == 'olympiad' %}
+    <p class="qb-side-note">本次：{% if mode_wrong %}错题重练 · {% endif %}{{ area_label }}，共 {{ questions|length }} 题。题目不足所选数量时，按实际题数入榜。</p>
+    <p class="qb-side-note">第一题出现后开始计时，最后一题提交成功后停止。看提示和中途停留也计时。慢慢想，先求做对！</p>
     {% else %}
     <p class="qb-side-note">换学科回<a href="{{ home_url }}">题库主页</a>挑选。</p>
     {% endif %}
   </aside>
-  <div class="qb-practice-main">
+  <div class="qb-practice-main{% if track == 'olympiad' %} qb-olympiad-main{% endif %}">
     {% if empty_wrong and grammar_chapter %}
     <div class="notice">本章没有待重练的错题。<a class="button small" href="{{ practice_url }}">练本章 →</a></div>
     {% elif grammar_chapter and not questions %}
     <div class="notice">本章的练习题还在准备中。<a class="button small" href="{{ home_url }}">回本章讲解 →</a></div>
     {% elif mathbook_title and not questions %}
     <div class="notice">这里暂时没有可练的题。<a class="button small" href="{{ home_url }}">回数学教材 →</a></div>
+    {% elif empty_wrong and tag %}
+    <div class="notice">{{ tag }}没有待重练的错题。<a class="button small" href="{{ practice_url }}?tag={{ tag|urlencode }}&amp;count={{ size }}">练这个题型 →</a></div>
     {% elif empty_wrong %}
     <div class="notice">错题本是空的——先去练一组，答错的题会自动收进来。<a class="button small" href="{{ home_url }}">回{{ home_label }}挑一组 →</a></div>
+    {% elif not questions %}
+    <div class="notice">这里暂时没有可练的题。<a href="{{ home_url }}">回{{ home_label }}看看 →</a></div>
     {% else %}
     {{ questions|json_script:"qb-questions" }}
-    <section class="qb-board" data-qb-practice data-answer-url="{% url 'questionbank-answer' %}" data-practice-url="{{ practice_url }}" data-area="{{ area }}" data-tag="{{ tag }}" data-mode-wrong="{{ mode_wrong|yesno:'1,0' }}" data-size="{{ size }}">
+    <section class="qb-board" data-qb-practice data-answer-url="{% url 'questionbank-answer' %}" data-practice-url="{{ practice_url }}" data-area="{{ area }}" data-tag="{{ tag }}" data-mode-wrong="{{ mode_wrong|yesno:'1,0' }}" data-size="{{ size }}" data-track="{{ track }}">
       <p class="qb-progress">第 <b data-qb-index>1</b>／<b data-qb-total>0</b> 题<span data-qb-tally></span></p>
+      {% if track == 'olympiad' %}<p class="qb-timer">⏱ 用时 <b data-qb-timer>0 秒</b><span> · 先想清楚，再选答案</span></p>{% endif %}
       <div class="qb-progress-bar" aria-hidden="true"><span data-qb-progress-fill></span></div>
       <div class="qb-question" data-qb-question></div>
       <section class="qb-feedback" hidden data-qb-feedback aria-live="polite">
         <p class="qb-feedback-head" data-qb-feedback-head></p>
         <p class="qb-feedback-answer" data-qb-feedback-answer></p>
-        <p class="qb-feedback-explain" data-qb-feedback-explain></p>
-        <p class="qb-feedback-steps" data-qb-feedback-steps></p>
+        {% if track == 'olympiad' %}<details class="qb-full-explanation" data-qb-full-explanation><summary>对照完整解析</summary>{% endif %}
+          <p class="qb-feedback-explain" data-qb-feedback-explain></p>
+          <p class="qb-feedback-steps" data-qb-feedback-steps></p>
+        {% if track == 'olympiad' %}</details>{% endif %}
         <div class="qb-feedback-actions">
           <button class="button small" type="button" data-qb-next>下一题 →</button>
         </div>
@@ -68,6 +79,7 @@
         <p class="qb-result-stars" data-qb-stars hidden></p>
         <p class="qb-result-score" data-qb-final-score></p>
         <p class="qb-result-praise" data-qb-praise></p>
+        {% if track == 'olympiad' %}<p class="qb-result-praise" data-qb-round-result role="status"></p>{% endif %}
         <div class="qb-result-actions">
           <a class="button small" data-qb-again>{% if single_question %}再练一次{% else %}再练一组{% endif %} ↻</a>
           <a class="button small ghost" href="{{ wrong_url }}">看看错题本</a>
@@ -76,6 +88,7 @@
       </section>
     </section>
     {% endif %}
+    {% if track == 'olympiad' %}{% include 'questionbank/_leaderboard.html' %}{% endif %}
   </div>
 </div>
 {% endblock %}

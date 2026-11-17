@@ -21,6 +21,16 @@
   let locked = false;
   let answeredCount = 0;
   let finished = false;
+  const olympiad = board.dataset.track === 'olympiad';
+  const hintedQuestions = new Set();
+  let hintStep = 0;
+  let elapsedMs = 0;
+  let startedAt = 0;
+  let timer;
+  const updateTimer = () => {
+    elapsedMs = Math.max(1, Math.round(performance.now() - startedAt));
+    $('[data-qb-timer]').textContent = window.OlympiadChallenge.duration(elapsedMs);
+  };
   const selfcheckTotal = questions.filter((question) => question.type === 'selfcheck').length;
   const objectiveTotal = questions.length - selfcheckTotal;
 
@@ -75,6 +85,7 @@
     feedback.hidden = true;
     feedback.classList.remove('good', 'bad');
     const question = questions[index];
+    hintStep = 0;
     const tags = (question.tags || []).map((tag) => `<span class="qb-tag">${escapeHtml(tag)}</span>`).join('');
     /* 朗读只给英语题：读引号里的单词本身，不读整句题干。 */
     let readButton = '';
@@ -85,7 +96,12 @@
     questionBox.innerHTML = `
       <div class="qb-tag-row">${tags}</div>
       <p class="qb-stem">${escapeHtml(question.stem)}${readButton}</p>
-      ${renderers[question.type](question)}`;
+      ${renderers[question.type](question)}
+      ${olympiad && question.hints?.length ? `<section class="qb-hints" aria-label="分步提示">
+        <h2>💡 卡住了？看一步就好</h2><p>先自己想一想，提示会一步一步打开。</p>
+        <ol id="qb-hint-list" data-qb-hint-list aria-live="polite"></ol>
+        <button class="button small ghost" type="button" data-qb-hint aria-controls="qb-hint-list">看第 1 步提示（共 ${question.hints.length} 步）</button>
+      </section>` : ''}`;
     updateProgress();
     const focusTarget = questionBox.querySelector('[data-qb-option], [data-qb-reveal]');
     if (focusTarget) focusTarget.focus();
@@ -112,6 +128,14 @@
       return;
     }
     answeredCount += 1;
+    if (olympiad) {
+      const hintButton = questionBox.querySelector('[data-qb-hint]');
+      if (hintButton) hintButton.disabled = true;
+      if (answeredCount === questions.length) {
+        updateTimer();
+        clearInterval(timer);
+      }
+    }
     if (window.rewardToast && verdict.rewards) window.rewardToast(verdict.rewards);
     const selfcheck = question.type === 'selfcheck';
     if (selfcheck) {
@@ -138,6 +162,8 @@
     feedback.querySelector('[data-qb-feedback-answer]').textContent = reveal ? `${selfcheck ? '参考答案' : '正确答案'}：${reveal}` : '';
     feedback.querySelector('[data-qb-feedback-explain]').textContent = explanation;
     feedback.querySelector('[data-qb-feedback-steps]').textContent = steps;
+    const explanationPanel = feedback.querySelector('[data-qb-full-explanation]');
+    if (explanationPanel) explanationPanel.open = false;
     const actions = feedback.querySelector('.qb-feedback-actions');
     if (retry) {
       actions.innerHTML = '<button class="button small" type="button" data-qb-retry>重试 ↻</button>';
@@ -200,10 +226,20 @@
       ? '这一组练完啦，给自己一个大拇指 👍'
       : '需要再想一想的题已收进错题本。';
     const again = $('[data-qb-again]');
-    const params = board.dataset.modeWrong === '1'
-      ? `?mode=wrong&count=${board.dataset.size}`
-      : `?${board.dataset.area ? `area=${board.dataset.area}&` : ''}${board.dataset.tag ? `tag=${board.dataset.tag}&` : ''}count=${board.dataset.size}`;
-    again.href = board.dataset.practiceUrl + params;
+    const params = new URLSearchParams({count: board.dataset.size});
+    if (board.dataset.modeWrong === '1') params.set('mode', 'wrong');
+    if (board.dataset.area) params.set('area', board.dataset.area);
+    if (board.dataset.tag) params.set('tag', board.dataset.tag);
+    again.href = board.dataset.practiceUrl + '?' + params;
+    if (olympiad) {
+      const {saved, rank} = window.OlympiadChallenge.record({
+        id: questions[0].attempt_id, tag: board.dataset.tag || '', total: questions.length,
+        correct: correctCount, elapsedMs, hintsUsed: hintedQuestions.size,
+        mode: board.dataset.modeWrong === '1' ? 'wrong' : 'challenge', completedAt: new Date().toISOString(),
+      });
+      $('[data-qb-round-result]').textContent = `用时 ${window.OlympiadChallenge.duration(elapsedMs)} · ${hintedQuestions.size ? `${hintedQuestions.size} 题看过提示` : '独立完成'}。`
+        + (!saved ? '浏览器未能保存成绩，本次结果仍在这里。' : rank ? `本机同组第 ${rank} 名！` : '本次未进入前 10 名，再来挑战吧！');
+    }
     result.hidden = false;
     again.focus();
     if (questions.every(question => question.area === 'math')) {
@@ -215,6 +251,18 @@
 
   /* ── 事件接线 ─────────────────────────────────────────────────────── */
   questionBox.addEventListener('click', (event) => {
+    if (event.target.closest('[data-qb-hint]')) {
+      if (locked) return;
+      const question = questions[index];
+      if (hintStep >= (question.hints || []).length) return;
+      hintedQuestions.add(question.uuid);
+      questionBox.querySelector('[data-qb-hint-list]').innerHTML += `<li>${escapeHtml(question.hints[hintStep])}</li>`;
+      hintStep += 1;
+      const button = questionBox.querySelector('[data-qb-hint]');
+      button.disabled = hintStep === question.hints.length;
+      button.textContent = button.disabled ? '提示看完啦，试着自己算一算' : `再看第 ${hintStep + 1} 步提示（共 ${question.hints.length} 步）`;
+      return;
+    }
     const option = event.target.closest('[data-qb-option]');
     if (option) return submit(givenFor[questions[index].type](option.dataset.value));
     if (event.target.closest('[data-qb-reveal]')) return revealSelfcheck();
@@ -258,4 +306,15 @@
   });
 
   showQuestion();
+  if (olympiad) {
+    startedAt = performance.now();
+    timer = setInterval(updateTimer, 1000);
+    window.addEventListener('pagehide', () => clearInterval(timer));
+    window.addEventListener('pageshow', (event) => {
+      if (event.persisted && answeredCount < questions.length) {
+        updateTimer();
+        timer = setInterval(updateTimer, 1000);
+      }
+    });
+  }
 })();

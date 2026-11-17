@@ -82,16 +82,20 @@ def _practice(request, *, track, pool=None, scoped_page=None):
     if mode_wrong:
         pool = services.latest_wrong_ids(records.read_scope(request), track=track, ids=pool)
     questions = services.pick_questions(area=area, track=track, count=size, ids=pool, tag=tag)
+    olympiad_context = {}
+    if track == Question.Track.OLYMPIAD:
+        from .olympiad import leaderboard_context
+        olympiad_context = leaderboard_context(request)
     return render(request, 'questionbank/practice.html', {
         'questions': [services.client_question(question) for question in questions],
         'area': area, 'tag': tag,
         'area_label': tag or (dict(Question.Area.choices).get(area) or page['mix_label']),
         'area_chips': [] if track == Question.Track.OLYMPIAD else AREA_CHIPS,
-        'tag_chips': ([{'tag': name} for name, _ in services.tag_counts(track)]
+        'tag_chips': ([{'tag': name, 'count': count} for name, count in services.tag_counts(track)]
                       if track == Question.Track.OLYMPIAD else None),
         'sizes': services.SIZES,
         'size': size, 'mode_wrong': mode_wrong, 'empty_wrong': mode_wrong and not questions,
-        'track': track, **page,
+        'track': track, **page, **olympiad_context,
     })
 
 

@@ -49,7 +49,7 @@
 
 .qb-note { margin-top: 28px; color: var(--muted); font-size: 15px; }
 
-/* ── 练习页：页头卡 + 左设置栏／右答题板 ──────────────────────────────── */
+/* ── 练习页：页头卡 + 可换边设置栏 ───────────────────────────────────── */
 .qb-practice-head {
   padding: 18px 26px; margin: 14px 0 20px;
   background: linear-gradient(120deg, #f1f8ea, #eaf3e0);
@@ -63,7 +63,7 @@
 .qb-practice-layout { display: grid; grid-template-columns: 250px minmax(0, 1fr); gap: 22px; align-items: start; }
 .qb-side { position: sticky; top: 16px; padding: 18px; border: 1px solid var(--line); border-radius: 18px; background: var(--white); }
 .qb-side h2 { margin: 0 0 14px; font-size: 18px; }
-.qb-side .qb-label { display: block; margin: 0 0 8px; color: var(--muted); font-size: 13px; font-weight: 800; letter-spacing: .08em; }
+.qb-side .qb-label { display: block; margin: 0 0 8px; color: var(--muted); font-size: 16px; font-weight: 800; }
 .qb-side-chips + .qb-label { margin-top: 18px; }
 .qb-side-chips { display: flex; flex-direction: column; gap: 8px; }
 .qb-side-wrap { flex-direction: row; flex-wrap: wrap; }
@@ -78,13 +78,16 @@
 }
 .qb-side .chip:hover, .qb-toolbar .chip:hover { border-color: var(--green); background: var(--soft); }
 .qb-side .chip.on, .qb-toolbar .chip.on { border-color: var(--green); background: var(--green); color: #fff; font-weight: 750; }
-.qb-side-note { margin: 16px 0 0; color: var(--muted); font-size: 13px; line-height: 1.7; }
+.qb-side-note { margin: 16px 0 0; color: var(--muted); font-size: 16px; line-height: 1.8; }
 .qb-side-note a { color: var(--green); font-weight: 650; }
 
 .qb-practice-main { min-width: 0; max-width: 1100px; }
+.qb-olympiad-main { max-width: none; }
 .qb-board { padding: 26px 30px; border: 1px solid var(--line); border-radius: 24px; background: var(--white); box-shadow: 0 8px 20px #233e3708; }
 .qb-progress { margin: 0 0 12px; color: var(--muted); font-size: 17px; }
 .qb-progress b { color: var(--green); font-size: 22px; }
+.qb-timer { margin: 0 0 16px; color: var(--muted); font-size: 17px; }
+.qb-timer b { color: var(--ink); font-variant-numeric: tabular-nums; }
 .qb-progress-bar { height: 10px; margin: 0 0 22px; border-radius: 999px; background: var(--soft); overflow: hidden; }
 .qb-progress-bar span { display: block; height: 100%; width: 0; border-radius: 999px; background: linear-gradient(90deg, #3daf92, var(--green)); transition: width .18s ease; }
 
@@ -128,6 +131,13 @@
 .qb-feedback-steps { color: var(--muted); }
 .qb-feedback-error { margin: 0 0 6px; color: #b4483a; font-weight: 700; }
 .qb-feedback-actions { margin-top: 12px; }
+.qb-full-explanation summary { cursor: pointer; margin: 10px 0; color: var(--ink); font-size: 18px; font-weight: 700; }
+.qb-hints { margin-top: 24px; padding: 20px 24px; border: 2px dashed var(--line); border-radius: 18px; background: var(--soft); }
+.qb-hints h2 { margin: 0; font-size: 22px; }
+.qb-hints p { margin: 6px 0 14px; font-size: 17px; color: var(--muted); }
+.qb-hints ol { padding-left: 1.6em; font-size: 20px; line-height: 1.9; }
+.qb-hints li + li { margin-top: 10px; }
+.qb-hints button:disabled { cursor: default; opacity: .75; }
 
 .qb-result { text-align: center; }
 .qb-result-emoji { margin: 12px 0 0; font-size: 52px; }
@@ -142,6 +152,38 @@
 .qb-result-praise { color: var(--muted); font-size: 19px; }
 .qb-result-actions { display: flex; justify-content: center; gap: 14px; margin-top: 18px; }
 .qb-result-actions .button[href=''] { visibility: hidden; }
+
+/* 题型入口与本机榜，不占用答题时的侧栏空间。 */
+.qb-challenge-picker, .qb-leaderboard-filters { display: flex; flex-wrap: wrap; align-items: end; gap: 16px; }
+.qb-challenge-picker { margin: 20px 0; }
+.qb-challenge-picker label, .qb-leaderboard-filters label { display: grid; gap: 7px; font-size: 17px; font-weight: 700; min-width: 0; }
+.qb-challenge-picker select, .qb-leaderboard-filters select { max-width: 100%; min-height: 48px; padding: 10px 14px; border: 1.5px solid var(--line); border-radius: 12px; background: var(--paper); color: var(--ink); font: inherit; }
+.qb-topic-section { margin: 30px 0; }
+.qb-topic-section h2 { margin-bottom: 8px; font-size: 28px; }
+.qb-topic-section .qb-note { margin: 0 0 18px; font-size: 18px; }
+.qb-topic-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; }
+.qb-topic-card { display: grid; gap: 6px; padding: 20px; border: 2px solid var(--line); border-radius: 18px; background: var(--white); }
+.qb-topic-card b { font-size: 22px; color: var(--green); }
+.qb-topic-card span { font-size: 16px; color: var(--muted); }
+.qb-topic-card:hover { background: var(--soft); border-color: var(--green); }
+.qb-topic-card:nth-child(3n+2) { border-top: 5px solid #efb94d; }
+.qb-topic-card:nth-child(3n) { border-top: 5px solid #79b8d7; }
+.qb-topic-card:nth-child(3n+1) { border-top: 5px solid #95c77c; }
+.qb-leaderboard { margin-top: 28px; padding: 24px 28px; border: 1px solid var(--line); border-radius: 24px; background: var(--white); }
+.qb-leaderboard-head { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
+.qb-leaderboard-head > span { font-size: 42px; }
+.qb-leaderboard h2 { margin: 0; font-size: 27px; }
+.qb-leaderboard-head p { margin: 4px 0 0; color: var(--muted); font-size: 18px; }
+.qb-rank-rule, [data-qb-rank-status] { font-size: 17px; line-height: 1.8; color: var(--muted); }
+.qb-rank-list { display: grid; gap: 12px; padding: 0; list-style: none; }
+.qb-rank-list li { display: flex; align-items: center; gap: 14px; padding: 14px 18px; border: 1px solid var(--line); border-radius: 14px; }
+.qb-rank-list li.is-current { background: var(--soft); border-color: var(--green); }
+.qb-rank-place { display: grid; place-items: center; flex: 0 0 36px; height: 36px; border-radius: 50%; background: var(--soft); color: var(--green); font-size: 22px; font-weight: 800; }
+.qb-rank-list li:first-child .qb-rank-place { background: #ffe8a8; color: #795312; }
+.qb-rank-list b { display: block; font-size: 21px; }
+.qb-rank-list div > span, .qb-rank-list time { display: block; color: var(--muted); font-size: 16px; }
+.qb-rank-list time { margin-left: auto; }
+.qb-leaderboard .qb-note { font-size: 16px; line-height: 1.8; }
 
 /* ── 错题本 ────────────────────────────────────────────────────────────── */
 .qb-wrong-list { display: grid; gap: 20px; max-width: 900px; }
@@ -164,6 +206,13 @@
   .qb-hero { flex-direction: column; align-items: flex-start; }
   .qb-hero-deco { display: none; }
   .qb-stem { font-size: 22px; }
+  .qb-board, .qb-leaderboard { padding: 20px 18px; }
+  .qb-areas { grid-template-columns: minmax(0, 1fr); }
+  .qb-options { grid-template-columns: minmax(0, 1fr); }
+  .qb-challenge-picker > *, .qb-leaderboard-filters label { width: 100%; }
+  .qb-area-actions, .qb-result-actions { flex-wrap: wrap; }
+  .qb-rank-list li { flex-wrap: wrap; padding: 12px; }
+  .qb-rank-list time { width: 100%; margin-left: 50px; }
 }
 /* 完成一组才播放一次，统一动效偏好可将其关闭。 */
 .qb-result.is-complete { animation: qb-complete-in .28s ease-out; }
