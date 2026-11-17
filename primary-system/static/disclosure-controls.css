@@ -1,0 +1,67 @@
+/* 全站展开／收起控件：复用 select 的本地图标，保留各专题正文和容器布局。 */
+:root :is(.site-masthead, .shell) details > summary {
+  min-height: 44px;
+  list-style: none;
+  cursor: pointer;
+  overflow-wrap: anywhere;
+}
+:root :is(.site-masthead, .shell) details > summary::marker { content: ''; }
+:root :is(.site-masthead, .shell) details > summary::-webkit-details-marker { display: none; }
+
+/* 教材目录由原断点决定是否显示；带选项字母的答案卡保留三列网格。 */
+:root :is(.site-masthead, .shell) details:not(:is(.category-nav, .origins-choice, .mystery-choice, .tts-details)) > summary {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+:root :is(.site-masthead, .shell) details:is(.tree-branch details) > summary {
+  display: inline-flex;
+}
+
+:root :is(.site-masthead, .shell) details > summary::after,
+:root :is(.site-masthead, .shell) details:is(.cal-quiz-item, .tree-branch details) > summary::before {
+  content: '';
+  display: inline-block;
+  flex: 0 0 var(--control-icon-size);
+  width: var(--control-icon-size);
+  height: var(--control-icon-size);
+  margin: 0 0 0 auto;
+  padding: 0;
+  border: 0;
+  background: currentColor;
+  mask: var(--control-chevron) center / contain no-repeat;
+  position: static;
+  vertical-align: middle;
+  transform: rotate(0deg);
+  transition: transform 160ms ease-out;
+}
+:root :is(.site-masthead, .shell) details[open] > summary::after { transform: rotate(180deg); }
+
+/* 树形目录和时间轴小问答保留前置方向提示，避免同一行出现两个箭头。 */
+:root :is(.site-masthead, .shell) details:is(.cal-quiz-item, .tree-branch details) > summary::after { display: none; }
+:root :is(.site-masthead, .shell) details:is(.cal-quiz-item, .tree-branch details) > summary::before {
+  margin: 0;
+  transform: rotate(-90deg);
+}
+:root :is(.site-masthead, .shell) details:is(.cal-quiz-item, .tree-branch details)[open] > summary::before { transform: rotate(0deg); }
+:root :is(.site-masthead, .shell) details > summary :is(.phrase-practice-arrow, .learning-more-chevron, .rules-chevron) { display: none; }
+:root :is(.site-masthead, .shell) details > summary[hidden] { display: none !important; }
+
+/* 全部通用控件沿用平台橙色键盘焦点；鼠标悬停和展开状态仍使用专题色。 */
+:root :is(.site-masthead, .shell) :is(a, button, input, textarea, select, summary):focus-visible {
+  outline: 3px solid var(--control-focus);
+  outline-offset: 4px;
+}
+@media (prefers-reduced-motion: reduce) {
+  :root :is(.site-masthead, .shell) details > summary::after,
+  :root :is(.site-masthead, .shell) details > summary::before { transition: none; }
+}
+:root:is([data-study-motion="gentle"], [data-study-motion="off"]) :is(.site-masthead, .shell) details > summary::after,
+:root:is([data-study-motion="gentle"], [data-study-motion="off"]) :is(.site-masthead, .shell) details > summary::before { transition: none; }
+@media (forced-colors: active) {
+  :root :is(.site-masthead, .shell) details > summary::after,
+  :root :is(.site-masthead, .shell) details:is(.cal-quiz-item, .tree-branch details) > summary::before {
+    background: ButtonText;
+    forced-color-adjust: none;
+  }
+}

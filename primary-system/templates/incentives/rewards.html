@@ -62,7 +62,7 @@
   </section>
 
   <details class="reward-panel rules-section" id="reward-rules">
-    <summary><div><p class="eyebrow">小小收获指南</p><h2>积分怎么攒</h2></div><span class="reward-rules-toggle"><span class="rules-open-label">展开看看</span><span class="rules-close-label">收起规则</span><span class="rules-chevron" aria-hidden="true">⌄</span></span></summary>
+    <summary><div><p class="eyebrow">小小收获指南</p><h2>积分怎么攒</h2></div><span class="reward-rules-toggle"><span class="rules-open-label">展开看看</span><span class="rules-close-label">收起规则</span><span class="rules-chevron" aria-hidden="true"></span></span></summary>
     <p class="rules-note">完成整课、整局给大分，答对题目给小分；答错不扣分，每类每天有上限，放心大胆学。</p>
     <table class="rules-table"><caption class="reward-sr-only">学习动作的每次得分和每日奖励次数上限</caption><thead><tr><th scope="col">学习动作</th><th scope="col">每次得分</th><th scope="col">每日上限</th></tr></thead><tbody>{% for rule in rules_rows %}<tr><th scope="row">{{ rule.label }}</th><td>+{{ rule.points }}</td><td>{{ rule.cap }} 次 <span class="cap">今日已得 {{ rule.today_used }} 次</span></td></tr>{% endfor %}</tbody></table>
   </details>

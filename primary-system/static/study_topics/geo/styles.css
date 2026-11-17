@@ -161,7 +161,6 @@
  .geography-topic .chapter-select { height:100%; font-size:16px; }
  .geography-topic .knowledge-heading { flex-wrap:wrap; gap:20px; }
  .geography-topic .knowledge-tools { max-width:none; justify-content:start; }
- .geography-topic .knowledge-directory summary:after { content:'⌄'; color:var(--green); }
  .geography-topic .chapter-heading { margin-top:0; }
  .geography-topic .knowledge-heading p:last-child { font-size:16px; }
 }

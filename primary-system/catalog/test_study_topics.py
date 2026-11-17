@@ -43,6 +43,27 @@ class TopicMarkup(HTMLParser):
 
 
 class StudyTopicPageTests(SimpleTestCase):
+    def test_shared_controls_and_learning_settings_across_topics(self):
+        routes = HISTORY_PAGES + GEOGRAPHY_PAGES + tuple(course[1] for course in COURSES) + (
+            'human-origins', 'science-body', 'science-rumors', 'mysteries',
+        )
+        for route in routes:
+            with self.subTest(route=route):
+                response = self.client.get(reverse(route))
+                self.assertContains(response, 'id="reading-settings"', count=1)
+                self.assertContains(response, '<span>学习设置</span>', count=1)
+                self.assertNotContains(response, '<details id="study-effects-settings"')
+                self.assertContains(response, '<fieldset id="study-effects-settings"', count=1)
+                self.assertContains(response, 'id="study-motion"', count=1)
+                self.assertContains(response, 'id="study-sound"', count=1)
+                self.assertContains(response, 'data-reading-theme="warm"')
+                self.assertContains(response, 'data-reading-size="large"')
+                assets = TopicMarkup(response.content.decode()).assets
+                self.assertTrue(any('/static/reading-preferences.js?' in asset for asset in assets))
+                self.assertTrue(any('/static/reading-preferences.css?' in asset for asset in assets))
+                self.assertTrue(any('/static/select-controls.css?' in asset for asset in assets))
+                self.assertTrue(any('/static/disclosure-controls.css?' in asset for asset in assets))
+
     def test_3d_maps_version_local_dependencies_with_their_contents(self):
         for route in ('geography-atlas-china-3d', 'geography-atlas-world-3d'):
             page = TopicMarkup(self.client.get(reverse(route)).content.decode())

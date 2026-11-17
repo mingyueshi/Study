@@ -40,8 +40,6 @@
 .phrase-practice-summary-title { flex: 1; color: var(--green); font-size: 17px; font-weight: 800; }
 .phrase-practice-summary-meta { color: var(--muted); font-size: 14px; }
 .phrase-practice-summary-meta b { color: var(--green); }
-.phrase-practice-arrow { color: var(--muted); font-size: 13px; transition: transform .14s ease; }
-.phrase-practice-details[open] .phrase-practice-arrow { transform: rotate(180deg); }
 .phrase-practice-details[open] summary { border-bottom: 1px dashed #cddcee; }
 .phrase-practice-details .phrase-practice { margin: 0; border: 0; background: none; padding: 14px 20px 18px; }
 /* 词卡分组区：浅底分带，与蓝虚线练习卡形成功能色区分 */

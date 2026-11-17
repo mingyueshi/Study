@@ -515,7 +515,6 @@
   .study-page .study-shell { grid-template-columns: minmax(0, 1fr); gap: 24px; padding-top: 24px; }
   .study-page .sidebar { position: static; max-height: none; padding: 0; border-radius: 18px; }
   .study-page .category-nav > summary { min-height: 64px; gap: 14px; padding: 15px 20px; color: var(--subject-ink); font-size: 17px; }
-  .study-page .category-nav > summary::after { color: var(--subject-ink); font-size: 24px; }
   .study-page .nav-current { color: var(--subject-ink); }
   .study-page #chips { gap: 8px; padding: 0 12px 14px; }
   .study-page .chip { min-height: 60px; }

@@ -410,7 +410,7 @@ body:has(.origins) {
 
 .origins-choice summary {
   display: grid;
-  grid-template-columns: 32px minmax(0, 1fr) 18px;
+  grid-template-columns: 32px minmax(0, 1fr) var(--control-icon-size, 20px);
   align-items: center;
   gap: 10px;
   min-height: 52px;
@@ -421,8 +421,6 @@ body:has(.origins) {
 }
 
 .origins-choice summary::-webkit-details-marker { display: none; }
-.origins-choice summary::after { content: "+"; color: var(--origins-brown); font-weight: 700; }
-.origins-choice[open] summary::after { content: "−"; }
 .origins-choice summary:hover { background: #f7edd4; }
 .origins-choice-letter { width: 32px; height: 32px; font-size: 17px; }
 .origins-feedback {

@@ -21,7 +21,7 @@
       <div class="wr-outline"><span class="wr-seclabel">结构锦囊</span><ol>{% for step in topic.outline %}<li><b>{{ step.label }}</b><span>{{ step.text }}</span></li>{% endfor %}</ol></div>
       <div class="wr-chips"><span class="wr-seclabel">好词</span>{% for word in topic.words %}<button class="wr-chip" type="button" data-say="{{ word }}" aria-label="朗读 {{ word }}">{{ word }}</button>{% endfor %}</div>
       <div class="wr-chips"><span class="wr-seclabel">好句</span>{% for sentence in topic.sentences %}<button class="wr-chip wr-sentence" type="button" data-say="{{ sentence }}" aria-label="朗读好句">{{ sentence }}</button>{% endfor %}</div>
-      <details class="wr-model"><summary>▸ 范文赏析<em>点开看范文和点评</em></summary><p class="wr-model-text">{{ topic.model|linebreaksbr }}</p><button class="button small" type="button" data-say="{{ topic.model }}" aria-label="朗读范文">🔊 读范文</button><p class="wr-comment">{{ topic.comment }}</p></details>
+      <details class="wr-model"><summary>范文赏析<em>点开看范文和点评</em></summary><p class="wr-model-text">{{ topic.model|linebreaksbr }}</p><button class="button small" type="button" data-say="{{ topic.model }}" aria-label="朗读范文">🔊 读范文</button><p class="wr-comment">{{ topic.comment }}</p></details>
       <div class="wr-task"><span class="wr-seclabel">小练笔</span><p>{{ topic.task }}</p><button class="button small wr-write" type="button" data-topic="{{ topic.title }}" data-goal="{{ topic.goal }}">去写 ➜</button></div>
     </article>{% endfor %}</div>
   </section>{% endfor %}

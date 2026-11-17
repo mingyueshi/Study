@@ -18,9 +18,7 @@
 .tts-details summary { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 8px 18px; border: 1px solid var(--w-line, #c3ddeb); border-radius: 999px; background: #fff; color: #365f77; font-size: 15px; font-weight: 700; cursor: pointer; list-style: none; transition: border-color .14s ease, background .14s ease; }
 .tts-details summary::-webkit-details-marker { display: none; }
 .tts-details summary::marker { content: ""; }
-.tts-details summary::after { content: "▸"; font-size: 12px; }
 .tts-details summary:hover { border-color: #487e9c; background: #f2f8fb; }
-.tts-details[open] summary::after { content: "▾"; }
 .tts-details[open] summary { margin-bottom: 12px; }
 .tts-details .tts-settings { margin-bottom: 0; }
 

@@ -231,8 +231,6 @@ body:has(.rumor-station) { --page-width: 100%; }
   font-weight: 760;
 }
 .rumor-clue summary::-webkit-details-marker { display: none; }
-.rumor-clue summary::after { content: ''; width: .46em; height: .46em; margin: 0 4px 4px auto; flex: none; border: solid currentColor; border-width: 0 2px 2px 0; transform: rotate(45deg); }
-.rumor-clue[open] summary::after { margin-bottom: 0; transform: rotate(225deg); }
 .rumor-clue summary:hover, .rumor-clue[open] summary { color: #314782; }
 .rumor-clue p { padding: 0 14px 14px; margin-bottom: 0; }
 

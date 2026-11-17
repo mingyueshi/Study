@@ -1,0 +1,60 @@
+/* 通用阅读偏好：调整文字与界面，不做整页缩放或滤镜反色。 */
+:root { --reading-scale: 1; }
+svg { --reading-scale: 1; }
+@media screen {
+  body { font-size: calc(18px * var(--reading-scale)); }
+  html[data-reading-size="small"] { --reading-scale: .9; }
+  html[data-reading-size="large"] { --reading-scale: 1.2; }
+  html[data-reading-theme="dark"] { color-scheme: dark; }
+  html[data-reading-theme="light"], html[data-reading-theme="warm"] { color-scheme: light; }
+  /* 教学图的深色标注原本画在浅纸上，单独保留画纸，避免落在深色底上。 */
+  html[data-reading-theme="dark"] #main svg:has(text),
+  html[data-reading-theme="warm"] #main svg:has(text) {
+    --ink: #233e37;
+    --lab-ink: #163e53;
+    --atlas-ink: #183e36;
+    --animal-land: #dce8ca;
+    --animal-sea: #dceceb;
+    color: #233e37;
+    background-color: #fff7e6;
+  }
+}
+
+.reading-settings { position: relative; flex-shrink: 0; color: var(--ink); font: inherit; }
+.reading-settings[hidden] { display: none; }
+.reading-settings > summary { cursor: pointer; list-style: none; }
+.reading-settings > summary::-webkit-details-marker { display: none; }
+.reading-settings[open] > summary { outline: 2px solid var(--green); outline-offset: 2px; }
+.reading-current { padding-left: 10px; border-left: 1px solid var(--line); font-size: .8em; color: var(--muted); font-weight: 500; }
+.reading-panel { position: absolute; right: 0; top: calc(100% + 12px); z-index: 10002; width: min(430px, calc(100vw - 32px)); max-height: calc(100dvh - 100px); overflow-y: auto; overscroll-behavior: contain; padding: 24px; border: 1px solid var(--line); border-radius: 22px; background: var(--white); color: var(--ink); box-shadow: 0 14px 40px #183b3226; font-size: 16px; }
+.reading-panel-heading { margin-bottom: 22px; }
+.reading-panel-heading > strong { font-size: 21px; }
+.reading-panel-heading > p { margin-top: 4px; }
+.reading-panel fieldset { min-width: 0; margin: 0 0 22px; padding: 0; border: 0; }
+.reading-panel fieldset[hidden] { display: none; }
+.reading-panel legend { padding: 0; margin-bottom: 10px; font-size: 18px; font-weight: 750; }
+.reading-choices { display: flex; flex-wrap: wrap; gap: 8px; }
+.reading-choices button { flex: 1 1 auto; min-height: 48px; padding: 8px 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--paper); color: var(--ink); font: inherit; font-weight: 650; }
+.reading-choices button:hover { border-color: var(--green); }
+.reading-choices button[aria-pressed="true"] { border-color: var(--green); background: var(--soft); color: var(--green-dark); box-shadow: inset 0 0 0 1px var(--green); }
+.reading-panel p { margin: 0; font-size: 14px; line-height: 1.8; color: var(--muted); }
+.reading-panel .reading-effects { padding-top: 18px; border-top: 1px solid var(--line); }
+.reading-motion { display: grid; gap: 8px; margin-bottom: 14px; font-weight: 650; }
+.reading-panel .reading-sound { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 14px; margin-bottom: 8px; border: 1px solid var(--line); border-radius: 14px; background: var(--paper); cursor: pointer; }
+.reading-sound strong { display: block; font-size: 16px; font-weight: 650; }
+.reading-sound small { display: block; margin-top: 3px; color: var(--muted); font-size: 13px; line-height: 1.7; }
+.reading-sound input[type="checkbox"] { flex: 0 0 24px; width: 24px; height: 24px; min-height: 24px; margin: 0; }
+.reading-panel-footer { padding-top: 16px; border-top: 1px solid var(--line); }
+.reading-panel .reading-reminder { margin-top: 8px; }
+@media (max-width: 1100px) {
+  .reading-panel { position: fixed; top: 76px; right: 16px; max-height: calc(100dvh - 92px); }
+}
+@media (max-width: 600px) {
+  .account { flex-wrap: wrap; gap: 8px 12px; }
+  .reading-current { display: none; }
+  .reading-panel { position: fixed; inset: 76px 16px auto; width: auto; max-height: calc(100dvh - 92px); }
+}
+@media print {
+  :root { --reading-scale: 1 !important; color-scheme: light; }
+  .reading-settings { display: none !important; }
+}

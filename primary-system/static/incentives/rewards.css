@@ -145,10 +145,8 @@
 .rules-section summary { display: flex; align-items: center; justify-content: space-between; gap: 20px; list-style: none; cursor: pointer; }
 .rules-section summary::-webkit-details-marker { display: none; }
 .reward-rules-toggle { display: flex; align-items: center; gap: 12px; color: var(--green); font-size: 16px; font-weight: 650; white-space: nowrap; }
-.reward-rules-toggle > .rules-chevron { display: inline-block; font-size: 24px; transition: transform .18s; }
 .rules-close-label, .rules-section[open] .rules-open-label { display: none; }
 .rules-section[open] .rules-close-label { display: inline; }
-.rules-section[open] .rules-chevron { transform: rotate(180deg); }
 .rules-note { margin: 24px 0; color: var(--muted); font-size: 17px; }
 .rules-table { width: 100%; border-collapse: collapse; font-size: 17px; }
 .rules-table th, .rules-table td { padding: 16px; border-bottom: 1px solid #dbe5d1; text-align: left; overflow-wrap: anywhere; }

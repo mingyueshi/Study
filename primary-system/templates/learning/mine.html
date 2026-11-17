@@ -41,7 +41,7 @@
     </div>
     {% if digest.recent|length > 3 %}
     <details class="learning-more">
-      <summary>查看更多学习足迹 <span>还有 {{ digest.recent|length|add:'-3' }} 条</span><span class="learning-more-chevron" aria-hidden="true">⌄</span></summary>
+      <summary>查看更多学习足迹 <span>还有 {{ digest.recent|length|add:'-3' }} 条</span><span class="learning-more-chevron" aria-hidden="true"></span></summary>
       <div class="learning-recent-grid">{% for row in digest.recent|slice:'3:' %}{% include 'learning/recent_card.html' %}{% endfor %}</div>
     </details>
     {% endif %}

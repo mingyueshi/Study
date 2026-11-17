@@ -6,12 +6,15 @@
   <meta name="theme-color" content="#f7faf5">
   <title>{% block title %}乐学堂 · 一起把世界读懂{% endblock %}</title>
   <link rel="icon" href="{% static 'icons/book.svg' %}" type="image/svg+xml">
-  <link rel="stylesheet" href="{% static 'platform.css' %}?v=5">
-  <link rel="stylesheet" href="{% static 'select-controls.css' %}?v=1">
+  <script src="{% static 'reading-preferences.js' %}?v=2"></script>
+  <link rel="stylesheet" href="{% static 'platform.css' %}?v=6">
+  <link rel="stylesheet" href="{% static 'reading-preferences.css' %}?v=3">
+  <link rel="stylesheet" href="{% static 'select-controls.css' %}?v=4">
+  <link rel="stylesheet" href="{% static 'disclosure-controls.css' %}?v=2">
   <script src="{% static 'select-controls.js' %}?v=1" defer></script>
   <link rel="stylesheet" href="{% static 'sidebar-layout.css' %}?v=3">
-  <link rel="stylesheet" href="{% static 'study-effects.css' %}?v=1">
-  <script src="{% static 'study-effects.js' %}?v=1" data-confetti-url="{% static 'vendor/canvas-confetti/confetti.browser.js' %}"></script>
+  <link rel="stylesheet" href="{% static 'study-effects.css' %}?v=2">
+  <script src="{% static 'study-effects.js' %}?v=2" data-confetti-url="{% static 'vendor/canvas-confetti/confetti.browser.js' %}"></script>
 </head>
 <body>
   <a class="skip-link" href="#main">跳到主要内容</a>
@@ -19,25 +22,46 @@
   <header class="site-masthead">
     <div class="site-top">
       <div class="site-top-inner">
-        <p class="site-top-welcome">{% if user.is_authenticated %}欢迎回来，一起探索新知识{% else %}欢迎来到乐学堂，一起探索新知识{% endif %}</p>
+        <p class="site-top-welcome"><span aria-hidden="true">✦</span>{% if user.is_authenticated %}欢迎回来，一起探索新知识{% else %}欢迎来到乐学堂，一起探索新知识{% endif %}</p>
         <div class="account">
-          <details id="study-effects-settings" class="study-effects-settings" hidden>
-            <summary>动效与声音</summary>
-            <div class="study-effects-panel">
-              <label class="study-motion-label" for="study-motion">动效
-                <select id="study-motion"><option value="auto">跟随系统</option><option value="gentle">轻柔（减少动态）</option><option value="off">关闭动效</option></select>
-              </label>
-              <label><input id="study-sound" type="checkbox">完成时播放轻音效</label>
-              <p id="study-effects-note">设置保存在这个浏览器。音效不会打断朗读。</p>
+          <details id="reading-settings" class="reading-settings" hidden>
+            <summary class="site-top-action"><span class="site-top-action-icon" aria-hidden="true">⚙</span><span>学习设置</span><span id="reading-current" class="reading-current">浅色 · 中字</span></summary>
+            <div class="reading-panel" aria-label="学习设置">
+              <div class="reading-panel-heading"><strong>把学习调得更舒服</strong><p>颜色、字号、动效和声音，都在这里选。</p></div>
+              <fieldset>
+                <legend>页面颜色</legend>
+                <div class="reading-choices">
+                  <button type="button" data-reading-theme="light" aria-pressed="true">☀ 浅色</button>
+                  <button type="button" data-reading-theme="dark" aria-pressed="false">☾ 深色</button>
+                  <button type="button" data-reading-theme="warm" aria-pressed="false">♧ 暖色护眼</button>
+                </div>
+              </fieldset>
+              <fieldset>
+                <legend>字体大小</legend>
+                <div class="reading-choices">
+                  <button type="button" data-reading-size="small" aria-pressed="false">小</button>
+                  <button type="button" data-reading-size="medium" aria-pressed="true">中</button>
+                  <button type="button" data-reading-size="large" aria-pressed="false">大</button>
+                </div>
+              </fieldset>
+              <fieldset id="study-effects-settings" class="reading-effects" hidden>
+                <legend>动效与声音</legend>
+                <label class="reading-motion" for="study-motion"><span>页面动效</span>
+                  <select id="study-motion" aria-describedby="study-effects-note"><option value="auto">跟随系统</option><option value="gentle">轻柔（减少动态）</option><option value="off">关闭动效</option></select>
+                </label>
+                <label class="reading-sound" for="study-sound"><span><strong>完成时播放轻音效</strong><small>答题完成时，听一声小小的鼓励。</small></span><input id="study-sound" type="checkbox" aria-describedby="study-effects-note"></label>
+                <p id="study-effects-note">音效不会打断朗读。</p>
+              </fieldset>
+              <div class="reading-panel-footer"><p id="reading-note">所有专题一起调整，设置保存在这个浏览器。</p><p class="reading-reminder">读一会儿，也记得看看远处，让眼睛休息一下。</p></div>
             </div>
           </details>
           {% if user.is_authenticated %}
-            <a class="account-profile" href="{% url 'profile' %}" title="{{ user }} · 学习偏好" {% if current == 'profile' or current == 'password_change' or current == 'password_change_done' %}aria-current="location"{% endif %}><span class="account-avatar" aria-hidden="true">{{ user|stringformat:'s'|slice:':1' }}</span><span class="account-name">{{ user }}</span><span class="account-profile-label">学习偏好</span></a>
-            {% if user.is_staff %}<a class="site-top-link" href="{% url 'admin:index' %}">管理后台 <span aria-hidden="true">↗</span></a>{% endif %}
-            <form method="post" action="{% url 'logout' %}">{% csrf_token %}<button class="text-button" type="submit">退出</button></form>
+            <a class="account-profile site-top-action" href="{% url 'profile' %}" title="{{ user }} · 学习偏好" {% if current == 'profile' or current == 'password_change' or current == 'password_change_done' %}aria-current="location"{% endif %}><span class="account-avatar" aria-hidden="true">{{ user|stringformat:'s'|slice:':1' }}</span><span class="account-name">{{ user }}</span><span class="account-profile-label">学习偏好</span></a>
+            {% if user.is_staff %}<a class="site-top-link site-top-action" href="{% url 'admin:index' %}">管理后台 <span aria-hidden="true">↗</span></a>{% endif %}
+            <form method="post" action="{% url 'logout' %}">{% csrf_token %}<button class="text-button site-top-action" type="submit">退出</button></form>
           {% else %}
-            <a class="site-top-link" href="{% url 'register' %}">快速注册</a>
-            <a class="site-top-login" href="{% url 'login' %}">登录学习 <span aria-hidden="true">→</span></a>
+            <a class="site-top-link site-top-action" href="{% url 'register' %}">快速注册</a>
+            <a class="site-top-login site-top-action" href="{% url 'login' %}">登录学习 <span aria-hidden="true">→</span></a>
           {% endif %}
         </div>
       </div>

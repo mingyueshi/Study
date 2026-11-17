@@ -241,8 +241,6 @@
   cursor: pointer;
 }
 .mystery-choice summary::-webkit-details-marker { display: none; }
-.mystery-choice summary::after { content: '+'; color: var(--mystery-accent); font-size: 1.35rem; }
-.mystery-choice[open] summary::after { content: '−'; }
 .mystery-choice summary:hover { background: #f5fbf8; }
 .mystery-feedback { background: #fff4d9; border-radius: .65rem; padding: .7rem 1rem; margin: 0 .75rem .75rem; }
 .mystery-feedback-correct { background: #e0f3e5; }

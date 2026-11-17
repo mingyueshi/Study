@@ -62,8 +62,6 @@
 .learning-more summary { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; min-height: 58px; padding-top: 8px; color: var(--green); font-size: 16px; font-weight: 650; list-style: none; cursor: pointer; }
 .learning-more summary::-webkit-details-marker { display: none; }
 .learning-more summary > span:not(.learning-more-chevron) { color: var(--muted); font-size: 14px; font-weight: 400; }
-.learning-more-chevron { margin-left: auto; font-size: 26px; line-height: 1; transition: transform .18s; }
-.learning-more[open] .learning-more-chevron { transform: rotate(180deg); }
 .learning-more .learning-recent-grid { padding-top: 12px; }
 
 .learning-overview { background: #f0f5e9; border-color: #dce6d0; }

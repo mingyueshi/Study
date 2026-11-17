@@ -161,7 +161,6 @@
  .history-topic .chapter-select { height:100%; font-size:16px; }
  .history-topic .knowledge-heading { flex-wrap:wrap; gap:20px; }
  .history-topic .knowledge-tools { max-width:none; justify-content:start; }
- .history-topic .knowledge-directory summary:after { content:'⌄'; color:var(--green); }
  .history-topic .chapter-heading { margin-top:0; }
  .history-topic .knowledge-heading p:last-child { font-size:16px; }
 }

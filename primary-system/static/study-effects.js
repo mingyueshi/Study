@@ -46,7 +46,7 @@
     if (sound) sound.checked = prefs.sound;
     if (note) note.textContent = media.matches
       ? '已跟随系统减少动态效果。教学演示仍可逐步查看。'
-      : '设置保存在这个浏览器。音效不会打断朗读。';
+      : '音效默认关闭，开启后也不会打断朗读。';
   }
 
   function change(value, save = true) {
@@ -154,9 +154,5 @@
     settings.hidden = false;
     document.getElementById('study-motion').addEventListener('change', event => change({...prefs, motion: event.target.value}));
     document.getElementById('study-sound').addEventListener('change', event => change({...prefs, sound: event.target.checked}));
-    settings.addEventListener('keydown', event => {
-      if (event.key === 'Escape') { settings.open = false; settings.querySelector('summary').focus(); }
-    });
-    document.addEventListener('click', event => { if (!settings.contains(event.target)) settings.open = false; });
   });
 })();

@@ -51,8 +51,9 @@ h3 { font-size: 23px; line-height: 1.5; }
   margin-inline: auto;
 }
 .site-top { border-bottom: 1px solid var(--line); background: var(--soft); }
-.site-top-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 4px 24px; min-height: 56px; padding-block: 6px; }
-.site-top-welcome { margin: 0; color: var(--green-dark); font-size: 16px; }
+.site-top-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 24px; min-height: 68px; padding-block: 10px; }
+.site-top-welcome { display: flex; align-items: center; gap: 10px; margin: 0; color: var(--green-dark); font-size: 16px; font-weight: 600; }
+.site-top-welcome > span { color: var(--orange); font-size: 23px; line-height: 1; }
 .site-header {
   display: flex;
   flex-wrap: wrap;
@@ -80,7 +81,7 @@ h3 { font-size: 23px; line-height: 1.5; }
 .site-header nav img { flex-shrink: 0; }
 .site-header .nav-gift { display: inline-grid; place-items: center; flex: 0 0 32px; width: 32px; height: 32px; font-size: 28px; line-height: 1; }
 .site-header nav a:hover, .site-header nav a[aria-current] { background: var(--soft); color: var(--green-dark); }
-.account { display: flex; align-items: center; justify-content: flex-end; gap: 16px; min-width: 0; max-width: 100%; margin-left: auto; font-size: 16px; }
+.account { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 8px; min-width: 0; max-width: 100%; margin-left: auto; font-size: 16px; }
 .account-profile { display: inline-flex; align-items: center; gap: 8px; min-width: 0; min-height: 44px; font-weight: 650; }
 .account-profile:hover, .account-profile[aria-current] { color: var(--green); }
 .account-avatar { display: grid; place-items: center; flex: 0 0 32px; height: 32px; border: 1px solid #decfa6; background: #fff0c8; color: #805218; border-radius: 50%; }
@@ -92,6 +93,13 @@ h3 { font-size: 23px; line-height: 1.5; }
 .site-top-login:hover { background: var(--green-dark); }
 .account form { flex-shrink: 0; }
 .account .text-button { min-height: 44px; padding-block: 6px; }
+.account .site-top-action { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 7px 14px; border: 1px solid var(--line); border-radius: 14px; background: var(--white); color: var(--ink); font: inherit; font-weight: 650; line-height: 1.5; text-decoration: none; white-space: nowrap; transition: background .15s, border-color .15s; }
+.account .site-top-action:hover, .account .site-top-action[aria-current] { border-color: var(--green); background: var(--paper); color: var(--green-dark); text-decoration: none; }
+.site-top-action-icon { display: grid; place-items: center; width: 24px; height: 24px; color: var(--green); font-size: 21px; line-height: 1; }
+.account .site-top-login { border-color: var(--green); background: var(--green); color: #fff; }
+.account .site-top-login:hover { border-color: var(--green-dark); background: var(--green-dark); color: #fff; }
+.account .account-profile { padding: 5px 12px 5px 6px; }
+.account .account-avatar { flex-basis: 32px; border-color: var(--line); background: var(--soft); color: var(--green-dark); border-radius: 10px; }
 .text-button { min-height: 48px; padding: 10px 8px; border: 0; background: none; color: var(--muted); font-size: 16px; }
 .text-button:hover { color: var(--green); text-decoration: underline; text-underline-offset: 5px; }
 .shell { min-height: 65vh; padding-bottom: 88px; }
@@ -430,6 +438,8 @@ textarea { resize: vertical; line-height: 1.9; }
   .account-profile { gap: 6px; }
   .account-profile-label { margin-left: 0; font-size: 14px; }
   .site-top-link, .account .text-button { font-size: 15px; padding-inline: 4px; }
+  .account .site-top-action { gap: 6px; padding-inline: 10px; }
+  .account .account-profile { margin-right: 0; }
   .site-header nav { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; width: 100%; }
   .site-header nav:has(> :last-child:nth-child(3)) { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .site-header nav a { flex-direction: column; gap: 3px; min-height: 76px; padding: 8px 4px; border-radius: 14px; font-size: 16px; }

@@ -5,13 +5,15 @@ const fs = require('node:fs');
 const vm = require('node:vm');
 const path = require('node:path');
 
-function setup({saved, reduced = false, blocked = false} = {}) {
+function setup({saved, reduced = false, blocked = false, controls = false} = {}) {
   const events = {}, windowEvents = {}, scripts = [], canvases = [], writes = [], bursts = [];
   const media = {matches: reduced, addEventListener: (_, callback) => { media.change = callback; }};
+  const elements = Object.fromEntries(['study-effects-settings', 'study-motion', 'study-sound', 'study-effects-note'].map(id =>
+    [id, {hidden: true, handlers: {}, addEventListener(event, fn) { this.handlers[event] = fn; }}]));
   const document = {
     documentElement: {dataset: {}}, hidden: false,
     currentScript: {dataset: {confettiUrl: '/static/vendor/canvas-confetti/confetti.browser.js'}},
-    getElementById: () => null, querySelectorAll: () => [],
+    getElementById: id => controls ? elements[id] : null, querySelectorAll: () => [],
     addEventListener: (name, callback) => { events[name] = callback; },
     dispatchEvent: () => {},
     head: {append: node => scripts.push(node)}, body: {append: node => canvases.push(node)},
@@ -31,8 +33,20 @@ function setup({saved, reduced = false, blocked = false} = {}) {
     window.confetti = {create: () => { const burst = options => { bursts.push(options); return Promise.resolve(); }; burst.reset = () => {}; return burst; }};
     scripts.at(-1).onload();
   };
-  return {effects: window.StudyEffects, window, document, media, scripts, canvases, writes, bursts, events, windowEvents, load};
+  return {effects: window.StudyEffects, window, document, media, scripts, canvases, writes, bursts, events, windowEvents, elements, load};
 }
+
+test('controls work as a fieldset in the unified panel and retain saved effect preferences', () => {
+  const page = setup({controls: true, saved: '{"motion":"gentle","sound":true}'});
+  page.events.DOMContentLoaded();
+  assert.equal(page.elements['study-effects-settings'].hidden, false);
+  assert.equal(page.elements['study-motion'].value, 'gentle');
+  assert.equal(page.elements['study-sound'].checked, true);
+  page.elements['study-motion'].handlers.change({target: {value: 'off'}});
+  page.elements['study-sound'].handlers.change({target: {checked: false}});
+  assert.equal(page.effects.motion, 'off');
+  assert.deepEqual(page.writes.at(-1), {motion: 'off', sound: false});
+});
 
 test('invalid or unavailable storage retains usable defaults and controls', () => {
   for (const options of [{saved: 'broken'}, {saved: '{"motion":"bad","sound":"yes"}'}, {blocked: true}]) {
