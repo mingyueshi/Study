@@ -15,6 +15,7 @@ TOPICS = {
     'geo': ('', '', ('index',)),
     'history-timeline': ('study-timeline', 'history-timeline', ('index', 'timeline', 'era', 'event', 'dynasties', 'people', 'person', 'civilizations', 'civilization', 'ancient-science', 'technology', 'silk-road', 'silk-city', 'territory')),
     'geo-map': ('study-atlas', 'geography-atlas', ('index', 'china', 'china-3d', 'animals', 'plants', 'world', 'world-3d', 'world-animals', 'world-plants', 'province', 'province-culture', 'places', 'routes', 'gallery')),
+    'earth': ('study-earth', 'geography-earth', ('index', 'rocks', 'quakes', 'plates', 'age')),
 }
 COURSES = ('astro', 'lit', 'sci', 'hanzi-evo')
 # 数据全局名：slug 含连字符时 .upper() 不是合法 JS 标识符，需要单独映射。
@@ -116,6 +117,8 @@ def template(source, topic, page, theme, index_route):
             asset_url += '?v=20261114b9'
         if topic == 'geo-map' and page in ('china', 'world', 'china-3d', 'world-3d', 'province', 'province-culture') and path.endswith(('.css', '.js')):
             asset_url += '?v=' + sha256(resource_content(SOURCE / topic / path, topic, theme)).hexdigest()[:12]
+        if topic == 'earth' and path.endswith(('.css', '.js')):
+            asset_url += '?v=' + sha256(resource_content(SOURCE / topic / path, topic, theme)).hexdigest()[:12]
         if topic == 'history-timeline' and (Path(path).name.startswith(('silk-road', 'silk-city', 'territory')) or path in ('dynasty-app.js', 'dynasty.css')) and path.endswith(('.css', '.js')):
             asset_url += '?v=' + sha256(resource_content(SOURCE / topic / path, topic, theme)).hexdigest()[:12]
         if path.endswith('.css'):
@@ -149,6 +152,8 @@ def template(source, topic, page, theme, index_route):
 
 
 def scope_styles(source, theme):
+    if theme == 'study-earth':
+        return source
     if theme == 'study-atlas':
         return source[source.index('.gm-topic {'):]
     tokens = re.search(r':root \{(.*?)\}', source, re.DOTALL).group(1)

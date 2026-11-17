@@ -1,0 +1,26 @@
+{% extends "study_topics/page.html" %}
+{% load static %}
+{# 由 scripts/build_study_topics.py 生成。 #}
+{% block title %}地震与火山 · 地球内部 · 乐学堂{% endblock %}
+{% block study_assets %}
+<link rel="stylesheet" href="{% static 'study_topics/earth/styles.css' %}?v=219e54d07a9f">
+<script src="{% static 'study_topics/earth/earth-data.js' %}?v=792a5c55d422" defer></script>
+<script src="{% static 'study_topics/earth/earth-model.js' %}?v=e5d5b0b097c5" defer></script>
+<script src="{% static 'study_topics/earth/earth-motion.js' %}?v=9212f3c19812" defer></script>
+<script src="{% static 'study_topics/earth/earth-app.js' %}?v=f63b06585507" defer></script>
+{% endblock %}
+{% block study_content %}
+<div class="study-earth">
+<div class="earth-topic" data-earth-page="quakes" data-sidebar-layout=".earth-sidebar" data-sidebar-width="clamp(260px,23vw,310px)" data-sidebar-breakpoint="900" data-sidebar-label="专题目录" data-sidebar-fixed=".earth-heading, .earth-nav">
+<aside class="earth-sidebar" aria-label="地球内部专题目录"><header class="earth-heading"><a href="{% url 'geography-earth' %}" class="earth-brand">◉ 地球内部</a><p>从材料到运动，从证据到时间。</p></header><nav class="earth-nav" aria-label="地球内部各站"><a href="{% url 'geography-earth' %}"><span>00</span>地球内部</a>
+<a href="rocks.html"><span>01</span>岩石与矿物</a>
+<a href="quakes.html" aria-current="page"><span>02</span>地震与火山</a>
+<a href="plates.html"><span>03</span>板块构造</a>
+<a href="age.html"><span>04</span>地球年龄</a></nav><div class="earth-side-note"><b>带着问题观察</b><p id="earth-side-question"></p><a href="../atlas/china.html">返回中国地图 ↗</a></div></aside>
+<div class="earth-content" id="earth-content" tabindex="-1"><header class="earth-hero"><div><p class="earth-kicker" id="earth-eyebrow"></p><h1>地震与火山</h1><p id="earth-intro">观察地球释放的能量</p></div><span class="earth-hero-symbol" aria-hidden="true">◎</span></header>
+<section class="earth-panel" id="wave-lab" aria-labelledby="wave-title"><div class="earth-panel-head"><p class="earth-kicker">地震波实验桌 · 同时出发，谁先到？</p><h2 id="wave-title">从震源到观测站</h2></div><label class="earth-range">观测站距震中的水平距离 <output id="station-value"></output><input id="station-distance" type="range" min="40" max="200" step="10" value="120"></label><figure class="earth-diagram"><svg id="wave-diagram" viewBox="0 0 760 340" role="img" aria-label="震源、震中、观测站与P波S波传播示意"></svg><figcaption>均匀介质、直线路径模型：震源深度固定 20 千米，P 波取 6 千米／秒，S 波取 3.5 千米／秒。忽略折射、地层差异与表面波，圆圈表示波前，并非岩石颗粒移动的轨迹。</figcaption></figure><div id="wave-readout" class="earth-readout" aria-live="polite"></div><div class="earth-player" data-player><div class="earth-actions"><button type="button" data-play aria-pressed="false">播放示意</button><button type="button" data-step>前进一格</button><button type="button" data-reset>重新开始</button></div><label>观察进度<input type="range" min="0" max="100" value="0" step="1" data-progress aria-label="地震波进度"></label><p class="earth-muted" data-motion-status role="status">默认暂停，可播放或拖动进度。</p></div></section><section aria-labelledby="volcano-title"><h2 id="volcano-title" class="earth-section-title">两种喷发现场，各留什么线索？</h2><div id="volcano-gallery" class="earth-card-grid"></div></section>
+<section id="earth-explain" class="earth-card-grid" aria-label="概念与证据"></section><details class="earth-question"><summary id="earth-question-title">想一想</summary><p id="earth-answer"></p></details><details class="earth-sources"><summary>查看本页依据与素材来源（外部链接需联网）</summary><ul id="earth-source-list"></ul></details><noscript><p class="earth-model-note">请启用 JavaScript 使用交互图、查看分层说明与完整正文。可从专题目录打开另外四站。</p></noscript></div>
+</div>
+
+</div>
+{% endblock %}

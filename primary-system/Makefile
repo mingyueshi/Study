@@ -157,6 +157,7 @@ test: ## 跑全量测试（需先 install）
 	$(MANAGE) test
 
 test-frontend: ## 跑 Node 前端回归测试
+	node --test scripts/test_earth_interior.cjs
 	node --test scripts/test_mathcamp.cjs
 	node --test scripts/test_mathbeauty.cjs
 	node --test scripts/test_reading_preferences.cjs

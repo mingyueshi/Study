@@ -20,6 +20,7 @@ GEOGRAPHY_PAGES = (
     'geography-atlas-world', 'geography-atlas-world-3d', 'geography-atlas-province', 'geography-atlas-places',
     'geography-atlas-routes', 'geography-atlas-gallery', 'geography-atlas-animals', 'geography-atlas-world-animals',
     'geography-atlas-plants', 'geography-atlas-world-plants', 'geography-atlas-province-culture',
+    'geography-earth', 'geography-earth-rocks', 'geography-earth-quakes', 'geography-earth-plates', 'geography-earth-age',
 )
 COURSES = (
     ('geography', 'astronomy-explore', 'astro', '天文探索', ('astronomy-index', 'mysteries')),
@@ -47,6 +48,25 @@ class TopicMarkup(HTMLParser):
 
 
 class StudyTopicPageTests(SimpleTestCase):
+    def test_earth_interior_routes_share_local_versioned_assets(self):
+        for suffix in ('', '-rocks', '-quakes', '-plates', '-age'):
+            route = 'geography-earth' + suffix
+            response = self.client.get(reverse(route))
+            self.assertContains(response, 'data-sidebar-layout=".earth-sidebar"')
+            self.assertContains(response, 'href="/geography/earth/"')
+            self.assertContains(response, 'href="rocks.html"')
+            topic = response.content.decode().split('data-earth-page=', 1)[1].split('</noscript>', 1)[0]
+            self.assertNotIn('<select', topic)
+            assets = [url for url in TopicMarkup(response.content.decode()).assets
+                      if url.startswith('/static/study_topics/earth/')]
+            self.assertEqual(len(assets), 5)
+            for url in assets:
+                asset_path = url.removeprefix('/static/').split('?')[0]
+                digest = sha256(Path(finders.find(asset_path)).read_bytes()).hexdigest()[:12]
+                self.assertEqual(url.split('?', 1)[1:], [f'v={digest}'])
+        self.assertContains(self.client.get(reverse('geography-earth-plates')),
+                            'href="../atlas/world-3d.html?lab=plates"')
+
     def test_shared_controls_and_learning_settings_across_topics(self):
         routes = HISTORY_PAGES + GEOGRAPHY_PAGES + tuple(course[1] for course in COURSES) + (
             'human-origins', 'science-body', 'science-rumors', 'mysteries',
@@ -336,7 +356,7 @@ class StudyTopicEntryTests(TestCase):
     def test_history_and_geography_keep_their_primary_cards_first(self):
         for area, shown, hidden in (
             ('history', ('history-timeline-timeline', 'history-timeline-territory', 'history-timeline-people', 'history-timeline-civilizations', 'history-timeline-ancient-science', 'history-timeline-silk-road'), ('geography-atlas-china', 'astronomy-explore')),
-            ('geography', ('geography-atlas-china', 'geography-atlas-province-culture', 'astronomy-explore', 'solar-terms'), ('history-timeline-timeline', 'literature-study')),
+            ('geography', ('geography-atlas-china', 'geography-atlas-province-culture', 'geography-earth', 'astronomy-explore', 'solar-terms'), ('history-timeline-timeline', 'literature-study')),
         ):
             with self.subTest(area=area):
                 response = self.client.get(reverse('home'), {'area': area})

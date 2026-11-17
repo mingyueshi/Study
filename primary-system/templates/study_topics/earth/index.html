@@ -1,0 +1,26 @@
+{% extends "study_topics/page.html" %}
+{% load static %}
+{# 由 scripts/build_study_topics.py 生成。 #}
+{% block title %}地球内部 · 乐学堂{% endblock %}
+{% block study_assets %}
+<link rel="stylesheet" href="{% static 'study_topics/earth/styles.css' %}?v=219e54d07a9f">
+<script src="{% static 'study_topics/earth/earth-data.js' %}?v=792a5c55d422" defer></script>
+<script src="{% static 'study_topics/earth/earth-model.js' %}?v=e5d5b0b097c5" defer></script>
+<script src="{% static 'study_topics/earth/earth-motion.js' %}?v=9212f3c19812" defer></script>
+<script src="{% static 'study_topics/earth/earth-app.js' %}?v=f63b06585507" defer></script>
+{% endblock %}
+{% block study_content %}
+<div class="study-earth">
+<div class="earth-topic" data-earth-page="index" data-sidebar-layout=".earth-sidebar" data-sidebar-width="clamp(260px,23vw,310px)" data-sidebar-breakpoint="900" data-sidebar-label="专题目录" data-sidebar-fixed=".earth-heading, .earth-nav">
+<aside class="earth-sidebar" aria-label="地球内部专题目录"><header class="earth-heading"><a href="{% url 'geography-earth' %}" class="earth-brand">◉ 地球内部</a><p>从材料到运动，从证据到时间。</p></header><nav class="earth-nav" aria-label="地球内部各站"><a href="{% url 'geography-earth' %}" aria-current="page"><span>00</span>地球内部</a>
+<a href="rocks.html"><span>01</span>岩石与矿物</a>
+<a href="quakes.html"><span>02</span>地震与火山</a>
+<a href="plates.html"><span>03</span>板块构造</a>
+<a href="age.html"><span>04</span>地球年龄</a></nav><div class="earth-side-note"><b>带着问题观察</b><p id="earth-side-question"></p><a href="../atlas/china.html">返回中国地图 ↗</a></div></aside>
+<div class="earth-content" id="earth-content" tabindex="-1"><header class="earth-hero"><div><p class="earth-kicker" id="earth-eyebrow"></p><h1>地球内部</h1><p id="earth-intro">从脚下的石头，走进深时间</p></div><span class="earth-hero-symbol" aria-hidden="true">◎</span></header>
+<section class="earth-panel" aria-labelledby="cutaway-title"><div class="earth-panel-head"><p class="earth-kicker">打开剖面 · 点选一层</p><h2 id="cutaway-title">脚下，直到地心</h2></div><div class="earth-controls" id="layer-picker" role="group" aria-label="选择地球内部圈层"></div><div class="earth-split"><figure class="earth-diagram"><svg id="earth-cutaway" viewBox="0 0 720 480" role="img" aria-label="地球内部四层结构示意图"></svg><figcaption id="earth-scale-note"></figcaption></figure><article id="layer-detail" class="earth-inset" aria-live="polite"></article></div><div class="earth-controls" id="scale-picker" role="group" aria-label="剖面比例"><button type="button" data-scale="real" aria-pressed="true">按半径比例</button><button type="button" data-scale="enlarged" aria-pressed="false">放大地壳看清楚</button></div></section><section aria-labelledby="journey-title"><h2 id="journey-title" class="earth-section-title">沿四条线索继续探索</h2><div id="earth-journeys" class="earth-card-grid"></div></section>
+<section id="earth-explain" class="earth-card-grid" aria-label="概念与证据"></section><details class="earth-question"><summary id="earth-question-title">想一想</summary><p id="earth-answer"></p></details><details class="earth-sources"><summary>查看本页依据与素材来源（外部链接需联网）</summary><ul id="earth-source-list"></ul></details><noscript><p class="earth-model-note">请启用 JavaScript 使用交互图、查看分层说明与完整正文。可从专题目录打开另外四站。</p></noscript></div>
+</div>
+
+</div>
+{% endblock %}
