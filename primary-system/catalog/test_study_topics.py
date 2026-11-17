@@ -13,7 +13,7 @@ HISTORY_PAGES = (
     'history-timeline-people', 'history-timeline-person',
     'history-timeline-civilizations', 'history-timeline-civilization',
     'history-timeline-ancient-science', 'history-timeline-technology',
-    'history-timeline-silk-road', 'history-timeline-silk-city',
+    'history-timeline-silk-road', 'history-timeline-silk-city', 'history-timeline-territory',
 )
 GEOGRAPHY_PAGES = (
     'geography-study', 'geography-atlas', 'geography-atlas-china', 'geography-atlas-china-3d',
@@ -124,6 +124,7 @@ class StudyTopicPageTests(SimpleTestCase):
             ('history-timeline', 'timeline.html', ''),
             ('history-timeline-timeline', 'era.html', '?era=dawn'),
             ('history-timeline-era', 'event.html', '?event=tc35'),
+            ('history-timeline-timeline', 'territory.html', '?map=western-han#territory-maps'),
             ('history-timeline-people', 'people.html', '?view=network&person=li-bai'),
             ('history-timeline-people', 'person.html', '?person=li-bai#decisions'),
             ('history-timeline-civilizations', 'civilization.html', '?civilization=maya#station-maya-writing'),
@@ -235,6 +236,25 @@ class StudyTopicPageTests(SimpleTestCase):
         self.assertContains(response, f'href="{reverse("history-timeline-silk-road")}" aria-current="location"')
         self.assertContains(response, f'data-silk-road="{reverse("history-timeline-silk-road")}"')
 
+    def test_territory_is_the_single_map_page_and_dynasties_keeps_legacy_routing(self):
+        prefix = '/static/study_topics/history-timeline/'
+        response = self.client.get(reverse('history-timeline-territory'))
+        self.assertContains(response, '<h1>历史疆域地图</h1>')
+        self.assertContains(response, 'id="territory-svg"', count=1)
+        self.assertContains(response, 'id="territory-play"', count=1)
+        assets = [url.split('?')[0] for url in TopicMarkup(response.content.decode()).assets]
+        for name in ('content.js', 'dynasty-data.js', 'territory-data.js', 'territory-geo.js', 'shared.js'):
+            self.assertLess(assets.index(prefix + name), assets.index(prefix + 'territory-app.js'))
+        self.assertNotIn(prefix + 'dynasty-app.js', assets)
+        self.assertContains(response, f'href="{reverse("history-timeline-territory")}" aria-current="page"')
+        old = self.client.get(reverse('history-timeline-dynasties'))
+        self.assertNotContains(old, 'id="territory-svg"')
+        old_assets = [url.split('?')[0] for url in TopicMarkup(old.content.decode()).assets]
+        self.assertLess(old_assets.index(prefix + 'territory-links.js'), old_assets.index(prefix + 'dynasty-app.js'))
+        self.assertNotIn(prefix + 'territory-geo.js', old_assets)
+        self.assertContains(old, 'id="cal-title"')
+        self.assertContains(old, 'id="dyn-flow"')
+
     def test_calendar_hosts_local_audio_and_atlas_links_to_map_skills(self):
         response = self.client.get(reverse('history-timeline-dynasties'))
         self.assertContains(response, 'id="cal-title"')
@@ -280,7 +300,7 @@ class StudyTopicEntryTests(TestCase):
 
     def test_history_and_geography_keep_their_primary_cards_first(self):
         for area, shown, hidden in (
-            ('history', ('history-timeline-timeline', 'history-timeline-people', 'history-timeline-civilizations', 'history-timeline-ancient-science', 'history-timeline-silk-road'), ('geography-atlas-china', 'astronomy-study')),
+            ('history', ('history-timeline-timeline', 'history-timeline-territory', 'history-timeline-people', 'history-timeline-civilizations', 'history-timeline-ancient-science', 'history-timeline-silk-road'), ('geography-atlas-china', 'astronomy-study')),
             ('geography', ('geography-atlas-china', 'astronomy-study', 'solar-terms'), ('history-timeline-timeline', 'literature-study')),
         ):
             with self.subTest(area=area):

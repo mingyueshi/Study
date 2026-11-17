@@ -210,8 +210,9 @@
     $('territory-question').open = false;
     $('territory-question-text').textContent = map.question;
     $('territory-answer').textContent = map.answer;
-    $('territory-related').innerHTML = `<a href="#dyn-${esc(band.id)}">读${esc(band.name)}的朝代故事 ↓</a>
-      <a href="${eraHref(eras.get(band.era))}">回时代站看大事 →</a>`;
+    $('territory-related').innerHTML = `<a href="dynasties.html#dyn-${esc(band.id)}">读${esc(band.name)}的朝代故事 →</a>
+      <a href="${eraHref(eras.get(band.era))}">回时代站看大事 →</a>
+      <a href="timeline.html?year=${map.year}&zoom=500">看这个年代前后的中外大事 →</a>`;
     const image = new URL(map.src, assetBase).href;
     $('territory-reference-image').href = image;
     const preview = $('territory-reference-preview');
@@ -338,4 +339,5 @@
   $('territory-playback').hidden = false;
   updateView();
   new ResizeObserver(updateView).observe(svg);
+  window.TLShared.bindAnchors?.(root);
 })();

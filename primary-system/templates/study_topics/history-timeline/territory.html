@@ -1,0 +1,101 @@
+{% extends "study_topics/page.html" %}
+{% load static %}
+{# 由 scripts/build_study_topics.py 生成。 #}
+{% block title %}历史疆域地图 · 乐学堂{% endblock %}
+{% block study_assets %}
+<link rel="stylesheet" href="{% static 'study_topics/history-timeline/styles.css' %}">
+<link rel="stylesheet" href="{% static 'study_topics/history-timeline/territory.css' %}?v=9e8fef8b51cb">
+<link rel="stylesheet" href="{% static 'study_topics/history-timeline/territory-page.css' %}?v=8b4bb0079f38">
+<script src="{% static 'study_topics/history-timeline/content.js' %}" defer></script>
+<script src="{% static 'study_topics/history-timeline/dynasty-data.js' %}" defer></script>
+<script src="{% static 'study_topics/history-timeline/territory-data.js' %}?v=a15732fea483" defer></script>
+<script src="{% static 'study_topics/history-timeline/territory-geo.js' %}?v=a19535e8bbf4" defer></script>
+<script src="{% static 'study_topics/history-timeline/shared.js' %}" defer></script>
+<script src="{% static 'study_topics/history-timeline/territory-app.js' %}?v=d8cedcdcf2e1" defer></script>
+{% endblock %}
+{% block study_content %}
+<div class="study-timeline">
+<div class="tl-shell"><div class="territory-topic" id="top">
+<nav class="tl-sysnav" aria-label="历史时间轴系统页面导航">
+        <a class="tl-sysnav-brand" href="{% url 'history-timeline' %}">🕰️ 历史时间轴<small>中国史与世界史</small></a>
+        <a data-page href="timeline.html">双轨时间轴</a>
+        <a data-page href="era.html">时代站</a>
+        <a data-page href="dynasties.html">朝代更替</a><a data-page href="territory.html" aria-current="page">疆域地图</a>
+        <a data-page href="people.html">历史人物馆</a>
+      <a href="civilizations.html">世界文明巡礼</a><a data-page href="ancient-science.html">中国古代科技</a><a data-page href="silk-road.html">丝绸之路</a></nav>
+<section class="territory-section" id="territory-maps" data-tl-anchor tabindex="-1" aria-label="历史疆域地图工作区">
+<div class="territory-workspace" data-sidebar-layout=".territory-aside" data-sidebar-width="clamp(240px, 23vw, 300px)" data-sidebar-breakpoint="760" data-sidebar-label="朝代目录" data-sidebar-fixed=".territory-aside-heading">
+<aside class="territory-aside">
+            <div class="territory-aside-heading"><p class="tl-eyebrow">在同一张底图上看历史</p><h1>历史疆域地图</h1><p>夏到清 · 16 个朝代 · 22 个观察阶段</p><nav class="territory-page-links"><a href="dynasties.html#dyn-title">朝代更替 →</a><a href="timeline.html">双轨时间轴 →</a></nav></div>
+            <div class="territory-playback" id="territory-playback" hidden>
+              <button type="button" id="territory-play" aria-pressed="false" aria-controls="territory-svg">自动播放</button>
+              <button type="button" id="territory-restart">从头播放</button>
+              <label>每张停留 <select id="territory-speed"><option value="6000">6 秒</option><option value="10000">10 秒</option></select></label>
+              <progress id="territory-progress" value="1" max="22" aria-label="版图阶段进度"></progress>
+              <p id="territory-play-status" role="status"></p>
+              <details class="territory-play-help"><summary>播放与查看提示</summary><p>播放时地图视角保持不变，可随时暂停、继续；手动选朝代、缩放或拖动地图也会暂停。每一格是一个历史阶段，实际经历的年数不同。</p></details>
+            </div>
+            <h2 class="territory-directory-title">选择朝代</h2>
+            <nav class="territory-dynasties" id="territory-dynasties" aria-label="选择地图的朝代"></nav>
+            <section class="territory-observation" aria-labelledby="territory-observation-title">
+              <h3 id="territory-observation-title">在图上找一找</h3>
+              <ol id="territory-observe"></ol>
+              <details id="territory-question"><summary id="territory-question-text"></summary><p id="territory-answer"></p></details>
+            </section>
+          </aside>
+<div class="territory-stage">
+            <div class="territory-stage-heading">
+              <div><p class="tl-eyebrow" id="territory-period"></p><h2 id="territory-map-title"></h2></div>
+              <p class="territory-counter" id="territory-count" role="status"></p>
+            </div>
+            <div class="territory-transport">
+              <button type="button" id="territory-prev" aria-label="上一张版图">← 上一张</button>
+              <div class="territory-range"><label for="territory-range">时间向后 →</label><input type="range" id="territory-range" min="0" value="0" step="1"></div>
+              <button type="button" id="territory-next" aria-label="下一张版图">下一张 →</button>
+            </div>
+
+            <div class="territory-options">
+              <label><input type="checkbox" id="territory-changes" checked> 标出相比上一阶段的变化</label>
+              <label><input type="checkbox" id="territory-compare"> 叠加另一阶段</label>
+              <label id="territory-compare-label" hidden>对照哪一张 <select id="territory-compare-select"></select></label>
+            </div>
+            <p class="territory-compare-note" id="territory-compare-note" hidden>紫色虚线是对照阶段，彩色实线与填色是当前阶段。两者共用同一底图和视角。</p>
+            <div class="territory-map-tools" role="group" aria-label="地图缩放与定位">
+              <button type="button" id="territory-zoom-in" aria-label="放大地图">＋ 放大</button>
+              <button type="button" id="territory-zoom-out" aria-label="缩小地图">－ 缩小</button>
+              <button type="button" id="territory-map-reset">看全图</button>
+              <button type="button" id="territory-map-focus">聚焦本阶段</button>
+            </div>
+
+            <div class="territory-canvas">
+              <span class="territory-compass" aria-hidden="true">北 ↑</span>
+              <svg id="territory-svg" xmlns="http://www.w3.org/2000/svg" role="group" tabindex="0" aria-label="中国历代范围交互地图" aria-describedby="territory-map-help territory-change-summary"></svg>
+            </div>
+            <section class="territory-change-panel" id="territory-change-panel" aria-labelledby="territory-change-title" hidden>
+              <h4 id="territory-change-title"></h4>
+              <div class="territory-change-key" id="territory-change-key" aria-label="范围变化图例">
+                <span><i class="territory-gain-key" aria-hidden="true">＋</i> 新增范围</span>
+                <span><i class="territory-loss-key" aria-hidden="true">−</i> 减少范围</span>
+                <span><i class="territory-shared-key" aria-hidden="true"></i> 两阶段都有的范围保留原色</span>
+              </div>
+              <p id="territory-change-summary" role="status"></p>
+              <small>比较两张图中全部圈线覆盖的范围，包含并立政权；颜色表示示意图的差别，不能当作一次扩张或失地。</small>
+            </section>
+            <p class="territory-map-help" id="territory-map-help">拖动地图可移动，滚轮可缩放。键盘方向键可移动，加减号可缩放，Home 回全图。</p>
+            <div class="territory-legend" id="territory-legend" role="group" aria-label="地图区域图例"></div>
+            <p class="territory-selection" id="territory-selection" role="status"></p>
+            <p class="territory-note" id="territory-note"></p>
+            <p class="territory-credit" id="territory-credit"></p>
+            <nav class="tl-related" id="territory-related" aria-label="继续了解这个朝代"></nav>
+            <details class="territory-reference">
+              <summary>查看这一时期的教学参考图</summary>
+              <a id="territory-reference-image" target="_blank" rel="noopener"><img id="territory-reference-preview" alt="" loading="lazy"></a>
+              <p id="territory-reference-credit"></p>
+            </details>
+          </div>
+</div></section>
+<noscript><p class="tl-notice">请启用 JavaScript 使用疆域地图。阶段、轮廓与教学参考图均保存在本目录，可从朝代更替页继续阅读。</p><a href="dynasties.html">打开朝代更替与公元纪年 →</a></noscript>
+</div></div>
+<div class="tl-footer"><a href="dynasties.html#dyn-title">朝代更替</a> · <a href="timeline.html">双轨时间轴</a> · <a href="#top">回到顶部 ↑</a></div>
+</div>
+{% endblock %}

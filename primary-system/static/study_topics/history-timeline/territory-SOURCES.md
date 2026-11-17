@@ -1,4 +1,6 @@
-# 朝代版图的轮廓与底图来源
+# 历史疆域地图的轮廓与底图来源
+
+地图主入口为 `territory.html`，阶段和轮廓继续在原有 `territory-data.js`、`territory-geo.js` 中维护。`dynasties.html` 保留朝代故事和纪年内容，原地图书签由 `territory-links.js` 兼容到独立专题。
 
 ## 历史范围
 

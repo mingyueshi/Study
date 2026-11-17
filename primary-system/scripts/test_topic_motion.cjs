@@ -167,7 +167,7 @@ function territoryPage(query = '', motion = 'full') {
   get('territory-speed').value = '6000';
   get('territory-changes').checked = true;
   const effects = {motion, watch: (_, fn) => { offscreen = fn; }};
-  const location = new URL('https://study.test/history/dynasties.html' + query);
+  const location = new URL('https://study.test/history/timeline/territory.html' + query);
   const window = {StudyEffects: effects, matchMedia: () => ({matches: false, addEventListener() {}}),
     TLShared: {esc: String, eraHref: era => 'era.html?era=' + era.id}, addEventListener: (type, fn) => { events[type] = fn; }};
   const context = vm.createContext({URL, URLSearchParams, window, location, history: {replaceState: (_, __, url) => { location.href = url.href; }},

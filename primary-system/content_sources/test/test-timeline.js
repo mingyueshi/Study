@@ -359,8 +359,8 @@ const PAGE_REFS = {
   'index.html': ['content.js', 'timeline-data.js', 'dynasty-data.js', 'shared.js', 'home-app.js', 'styles.css', 'timeline.html', 'dynasties.html', 'era.html'],
   'timeline.html': ['content.js', 'timeline-data.js', 'media-data.js', 'dynasty-data.js', 'shared.js', 'navigation.js', 'timeline-app.js', 'styles.css', 'timeline.css',
     'dynasties.html', 'era.html'],
-  'dynasties.html': ['content.js', 'dynasty-data.js', 'territory-data.js', 'territory-geo.js', 'shared.js', 'dynasty-app.js', 'territory-app.js', 'styles.css', 'dynasty.css', 'territory.css',
-    'timeline.html'],
+  'dynasties.html': ['content.js', 'dynasty-data.js', 'shared.js', 'territory-links.js', 'dynasty-app.js', 'styles.css', 'dynasty.css', 'territory.html', 'timeline.html'],
+  'territory.html': ['content.js', 'dynasty-data.js', 'territory-data.js', 'territory-geo.js', 'shared.js', 'territory-app.js', 'styles.css', 'territory.css', 'territory-page.css', 'dynasties.html', 'timeline.html'],
   'era.html': ['content.js', 'timeline-data.js', 'media-data.js', 'dynasty-data.js', 'shared.js', 'era-app.js', 'styles.css', 'era.css', 'media.css',
     'timeline.html'],
   'event.html': ['content.js', 'timeline-data.js', 'media-data.js', 'reading-data.js', 'shared.js', 'navigation.js', 'event-app.js', 'styles.css', 'era.css', 'media.css',
@@ -374,6 +374,9 @@ const PAGE_REFS = {
   'silk-road.html': ['content.js', 'timeline-data.js', 'media-data.js', 'people-data.js', '../history/knowledge-dynasties.js', '../history/media.js', 'silk-road-data.js', 'silk-road-geo.js', 'shared.js', 'silk-road-shared.js', 'silk-road-app.js', 'styles.css', 'people.css', 'silk-road.css'],
   'silk-city.html': ['silk-road-data.js', 'silk-road-geo.js', 'silk-road-shared.js', 'silk-city-app.js', 'silk-road.html', 'silk-road.css']
 };
+const territoryPageHTML = fs.readFileSync(path.join(DIR, 'territory.html'), 'utf8');
+check(territoryPageHTML.includes('id="territory-svg"'), '独立疆域专题应承载交互地图');
+check(!fs.readFileSync(path.join(DIR, 'dynasties.html'), 'utf8').includes('id="territory-svg"'), '地图控件只在独立专题维护');
 Object.entries(PAGE_REFS).forEach(([page, refs]) => {
   check(fileExists(page), '缺少页面 ' + page);
   if (!fileExists(page)) return;

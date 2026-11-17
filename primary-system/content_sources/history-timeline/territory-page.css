@@ -1,0 +1,35 @@
+/* 独立疆域专题：标题、播放与朝代目录放侧边，地图随工作区展开。 */
+.territory-topic { --tl-anchor-offset: 16px; }
+.territory-topic .territory-section { margin-top: 24px; }
+.territory-topic .territory-workspace { grid-template-columns: minmax(0,1fr) clamp(240px,23vw,300px); }
+.territory-topic .territory-stage { grid-column: 1; grid-row: 1; }
+.territory-topic .territory-aside { grid-column: 2; grid-row: 1; }
+.territory-topic .territory-aside-heading h1 { margin: 4px 0 8px; font-size: 30px; line-height: 1.5; color: var(--tl-pair-deep); }
+.territory-topic .territory-aside-heading p { font-size: 15px; line-height: 1.8; }
+.territory-topic .territory-page-links { display: flex; flex-wrap: wrap; gap: 7px 14px; margin-top: 12px; font-size: 15px; font-weight: 750; }
+.territory-page-links a { color: var(--tl-pair-deep); }
+.territory-topic .territory-stage-heading { padding: 16px 20px; border: 1px solid var(--tl-line); border-radius: 15px; background: var(--tl-card); }
+.territory-topic .territory-stage-heading h2 { margin: 0; font-size: clamp(26px,2.3vw,34px); line-height: 1.6; }
+.territory-topic .territory-stage-heading .tl-eyebrow { font-size: 16px; }
+.territory-topic .territory-counter { font-size: 16px; }
+.territory-topic .territory-playback { padding: 12px; gap: 10px; }
+.territory-topic .territory-playback label { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 16px; }
+.territory-topic .territory-playback button { min-height: 44px; }
+.territory-topic .territory-playback progress { width: 100%; }
+.territory-topic .territory-playback small { font-size: 14px; }
+.territory-topic .territory-play-help { flex-basis: 100%; color: var(--tl-pair-deep); font-size: 15px; line-height: 1.8; }
+.territory-play-help summary { cursor: pointer; font-weight: 750; }
+.territory-play-help p { margin: 10px 0 0; font-size: 16px; }
+.territory-topic .territory-directory-title { margin: 20px 0 0; font-size: 21px; }
+.territory-topic .territory-transport button,.territory-topic .territory-map-tools button,.territory-topic .territory-legend button { min-height: 44px; font-size: 16px; }
+.territory-topic .territory-range label { font-size: 15px; }
+.territory-topic #territory-svg { max-height: min(70vh,900px); }
+.territory-topic .territory-observation li,.territory-topic .territory-observation details p { font-size: 17px; line-height: 1.85; }
+.territory-topic .territory-change-panel { margin-top: 16px; }
+.territory-topic .territory-map-help { font-size: 15px; line-height: 1.8; }
+@media (max-width: 759px) {
+  .territory-topic .territory-workspace { display: flex; flex-direction: column; }
+  .territory-topic .territory-stage,.territory-topic .territory-aside { width: 100%; }
+  .territory-topic .territory-stage-heading { padding: 14px; }
+  .territory-topic .territory-transport button { padding-inline: 8px; font-size: 14px; }
+}
