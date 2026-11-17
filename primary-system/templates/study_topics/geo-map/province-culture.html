@@ -1,0 +1,63 @@
+{% extends "study_topics/page.html" %}
+{% load static %}
+{# 由 scripts/build_study_topics.py 生成。 #}
+{% block title %}中国省份文化 · 地理图谱 · 乐学堂{% endblock %}
+{% block study_assets %}
+<link rel="stylesheet" href="{% static 'study_topics/geo-map/styles.css' %}?v=1bbf3a639edd">
+<link rel="stylesheet" href="{% static 'study_topics/geo-map/province-culture.css' %}?v=715ad16a0321">
+<script src="{% static 'study_topics/geo-map/china-geo.js' %}?v=d8402343bd1d" defer></script>
+<script src="{% static 'study_topics/geo-map/content.js' %}?v=e86ddc18e05f" defer></script>
+<script src="{% static 'study_topics/geo-map/map-data.js' %}?v=27ebda785125" defer></script>
+<script src="{% static 'study_topics/geo-map/map-discovery-data.js' %}?v=43339db0e7e3" defer></script>
+<script src="{% static 'study_topics/geo-map/shared.js' %}?v=d2bebbfd2a0b" defer></script>
+<script src="{% static 'study_topics/geo-map/province-culture-data.js' %}?v=658c2158afd5" defer></script>
+<script src="{% static 'study_topics/geo-map/province-culture.js' %}?v=8ab515623b86" defer></script>
+{% endblock %}
+{% block study_content %}
+<div class="study-atlas">
+<div class="gm-topic culture-topic">
+    <aside class="gm-sidebar" aria-label="省份文化导航与筛选">
+      <nav class="gm-sysnav" aria-label="地理图谱页面导航">
+        <a class="gm-sysnav-brand" href="{% url 'geography-atlas' %}">🧭 地理图谱</a>
+        <a data-page href="china.html">中国地图</a>
+        <a data-page href="china-3d.html">3D 中国地图</a>
+        <a data-page href="province.html">省域站</a>
+        <a data-page href="province-culture.html" aria-current="page">中国省份文化</a>
+        <a data-page href="places.html">地点索引</a>
+        <a data-page href="routes.html">主题路线</a>
+        <a data-page href="gallery.html">实景图册</a>
+      </nav>
+      <header class="gm-hero">
+        <p class="gm-eyebrow">从家乡出发 · 34 个省级行政区</p>
+        <h1 class="gm-title">中国省份文化</h1>
+        <p class="gm-intro" id="culture-intro"></p>
+      </header>
+      <section class="gm-side-panel culture-filters" aria-label="筛选省级行政区">
+        <label for="culture-search">找省名、简称、城市或文化</label>
+        <input id="culture-search" type="search" placeholder="试试「蜀」「南宁」「风筝」…" autocomplete="off">
+        <div id="culture-types" class="culture-chips" role="group" aria-label="行政区类型"></div>
+        <button type="button" id="culture-clear">清空筛选</button>
+        <p id="culture-result" role="status"></p>
+        <div id="culture-picker" class="culture-picker" role="group" aria-label="直接选择省级行政区"></div>
+      </section>
+    </aside>
+    <div id="content" class="gm-content" tabindex="-1">
+      <header class="culture-compact-heading"><div><h1>中国省份文化</h1><p>在地图上走访 34 个省级行政区</p></div><button type="button" id="culture-open-picker">按省名选择</button></header>
+      <p id="culture-notice" class="gm-notice" role="status" hidden></p>
+      <div class="culture-workspace">
+        <section class="culture-map-panel" aria-labelledby="culture-map-title">
+          <div class="culture-map-heading"><h2 id="culture-map-title">在地图上认识家乡</h2><span id="culture-map-selected"></span></div>
+          <figure>
+            <svg id="culture-map" role="group" aria-label="点击省份，查看文化档案"></svg>
+            <figcaption>橙色为选中的省级行政区；圆点是省会或行政区中心的参考位置。小面积地区也可从省名按钮选择。边界为学习示意，南海诸岛见右下小图。</figcaption>
+          </figure>
+        </section>
+        <article id="culture-profile" class="culture-profile" tabindex="-1" aria-label="当前省份文化档案"></article>
+      </div>
+      <details class="culture-scope"><summary>怎样使用这份文化地图？</summary><p id="culture-scope-note"></p><p id="culture-capital-note"></p></details>
+      <noscript><p class="gm-notice">请启用 JavaScript，选择省份并查看文化档案。</p></noscript>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

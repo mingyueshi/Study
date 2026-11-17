@@ -16,6 +16,7 @@
 | `world-3d.html?place=China` | 可旋转缩放的球面地球仪，点国家读原档案，逐洲定位、经纬网与地标显隐，俯瞰完整南北极；新增大气光晕、夜间灯光、柔和晨昏、太阳、真实地形起伏、冰盖与主动慢速自转；支持 `?continent=antarctica` |
 | `world.html` | 看七大洲、四大洋、177 个国家和地区、10 处世界地标。在「中国与世界」图层找中国，直接点选 14 个陆上邻国与 6 个隔海相望国家读一句特色，也可以从对照卡直接定位 |
 | `province.html?adcode=110000` | 用同一页查看任意省域站的档案和五条「记一记」。迷你地图高亮本省，点其他省份可换站；省域目录按四大地理区域分组 |
+| `province-culture.html?adcode=810000` | 34 个省级行政区的简称、省会或行政中心、特产、民俗与代表景观。地图和省名直接点选，搜索与行政区类型筛选可组合，资料与省域站双向关联 |
 | `places.html` | 查 291 条地点档案，支持地名、简称、省会、英文名和地点类型，选中结果即打开相应地图 |
 | `routes.html` | 三条主题路线，分别跟长江走到海边、登上世界屋脊、沿着边界去串门。每站都有观察问题、对应影像和前后站跳转 |
 | `gallery.html` | 按主题和类型看实景图册。13 张图片可离线看，3 项央视影片链接需联网。点素材下的地点可回到地图高亮 |
@@ -221,3 +222,11 @@ node --test scripts/test_world_3d.cjs
 世界地图增加从中国出发的 14 个陆上邻国与 6 个隔海相望国家探索。通过原邻居档案与国家档案的稳定关联着色、选国与阅读一句特色，正文继续使用 `GM_NEIGHBORS.note`。支持直接点地图、国名按钮和前后浏览；陆上和隔海分开说明。`world.html?neighbors=land&layer=home&place=India` 可直接进入邻居视图。切到其他图层或找一找时退出提示，不影响七洲选择与原档案深链接。
 
 共享 `GMMapUI.mount` 增加 `onSelect` 回调与公开的 `choose`，沿用原图层、缩放、档案与游戏规则；地图外的按钮也走同一套选择流程。新增数据校验为 `node content_sources/test/test-map-discovery.js`，行为回归为 `node --test scripts/test_map_discovery.cjs`。发布继续用 `make study-topics-data`，两张平面地图的资源也附带内容指纹。
+
+## 中国省份文化
+
+`province-culture-data.js` 是文化正文的主来源，按稳定 `adcode` 关联原 `GM_PROVINCES`，不重复维护行政区名称、类型、省会与地图。每省列出 `shortNames`（既有简称与常用别称）、两项 `specialties`、一项 `customs`、两项 `landscapes`、`question` 与 `explanation`。每条内容都有 `name`、具体 `location`、`detail` 与指向来源索引的 `sources`。共 170 项文化条目和 62 项来源索引；特产也包括食品与工艺品，不把全部特产都称为地理标志产品。民俗和传统技艺标明流传地区，跨省项目保留共同传承说明，观察问题用于继续查证。
+
+`province-culture.js` 渲染与筛选，`province-culture.css` 控制界限、字号与宽屏布局。底图、南海小图复用 `china-geo.js` 与 `shared.js`，行政区中心参考点复用 `map-discovery-data.js`。省会／首府读原字段，直辖市和特别行政区不设省会，显示本身名称作为识记参考。`?adcode=` 指定档案，`q` 与 `type` 可组合筛选；无效省码提示后展示北京。换省份使用浏览器历史，过滤只更新当前历史项，刷新和前后退保留当前状态。无本机学习存档或数据库写入。原省域站仍为自然地理正文主出处。
+
+新增字段先由 `node content_sources/test/test-province-culture.js` 校验 34 省码、简称兼容、五类资料、地图位置和来源引用，再运行 `node content_sources/test/test-geo-map.js`、`make study-topics-data`、`make test-frontend` 与 `.venv/bin/python manage.py test catalog.test_study_topics`。外部资料由读者主动打开，阅读正文和地图无需联网。

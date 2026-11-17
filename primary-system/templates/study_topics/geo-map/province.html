@@ -3,18 +3,18 @@
 {# 由 scripts/build_study_topics.py 生成。 #}
 {% block title %}省域站 · 地理图谱 · 乐学堂{% endblock %}
 {% block study_assets %}
-<link rel="stylesheet" href="{% static 'study_topics/geo-map/styles.css' %}">
-<link rel="stylesheet" href="{% static 'study_topics/geo-map/province.css' %}">
-<script src="{% static 'study_topics/geo-map/china-geo.js' %}" defer></script>
-<script src="{% static 'study_topics/geo-map/content.js' %}" defer></script>
-<script src="{% static 'study_topics/geo-map/map-data.js' %}" defer></script>
-<script src="{% static 'study_topics/geo-map/world-data.js' %}" defer></script>
-<script src="{% static 'study_topics/geo-map/atlas-data.js' %}" defer></script>
-<script src="{% static 'study_topics/geo-map/atlas.js' %}" defer></script>
-<script src="{% static 'study_topics/geo-map/shared.js' %}" defer></script>
-<script src="{% static 'study_topics/geo-map/media-data.js' %}" defer></script>
-<script src="{% static 'study_topics/geo-map/media.js' %}" defer></script>
-<script src="{% static 'study_topics/geo-map/province-app.js' %}" defer></script>
+<link rel="stylesheet" href="{% static 'study_topics/geo-map/styles.css' %}?v=1bbf3a639edd">
+<link rel="stylesheet" href="{% static 'study_topics/geo-map/province.css' %}?v=e8a217f8fad8">
+<script src="{% static 'study_topics/geo-map/china-geo.js' %}?v=d8402343bd1d" defer></script>
+<script src="{% static 'study_topics/geo-map/content.js' %}?v=e86ddc18e05f" defer></script>
+<script src="{% static 'study_topics/geo-map/map-data.js' %}?v=27ebda785125" defer></script>
+<script src="{% static 'study_topics/geo-map/world-data.js' %}?v=9b7765ca7392" defer></script>
+<script src="{% static 'study_topics/geo-map/atlas-data.js' %}?v=041dec261237" defer></script>
+<script src="{% static 'study_topics/geo-map/atlas.js' %}?v=60e5f6a93f55" defer></script>
+<script src="{% static 'study_topics/geo-map/shared.js' %}?v=d2bebbfd2a0b" defer></script>
+<script src="{% static 'study_topics/geo-map/media-data.js' %}?v=b665c8643f6e" defer></script>
+<script src="{% static 'study_topics/geo-map/media.js' %}?v=9a8cc0c6caf0" defer></script>
+<script src="{% static 'study_topics/geo-map/province-app.js' %}?v=e6822f16e37e" defer></script>
 {% endblock %}
 {% block study_content %}
 <div class="study-atlas">
@@ -29,6 +29,7 @@
         <a data-page href="plants.html">中国植物地图</a>
         <a data-page href="world-plants.html">世界植物地图</a>
         <a data-page href="province.html" aria-current="page">省域站</a>
+        <a data-page href="province-culture.html">中国省份文化</a>
         <a data-page href="places.html">地点索引</a>
         <a data-page href="routes.html">主题路线</a>
         <a data-page href="gallery.html">实景图册</a>

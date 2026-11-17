@@ -19,7 +19,7 @@ GEOGRAPHY_PAGES = (
     'geography-study', 'geography-atlas', 'geography-atlas-china', 'geography-atlas-china-3d',
     'geography-atlas-world', 'geography-atlas-world-3d', 'geography-atlas-province', 'geography-atlas-places',
     'geography-atlas-routes', 'geography-atlas-gallery', 'geography-atlas-animals', 'geography-atlas-world-animals',
-    'geography-atlas-plants', 'geography-atlas-world-plants',
+    'geography-atlas-plants', 'geography-atlas-world-plants', 'geography-atlas-province-culture',
 )
 COURSES = (
     ('geography', 'astronomy-explore', 'astro', '天文探索', ('astronomy-index', 'mysteries')),
@@ -156,6 +156,21 @@ class StudyTopicPageTests(SimpleTestCase):
         self.assertEqual(reverse('geography-index'), '/geography/')
         self.assertEqual(reverse('geography-detail', args=['CHN']), '/geography/CHN/')
 
+    def test_province_culture_uses_map_assets_and_has_integrated_entries(self):
+        route = reverse('geography-atlas-province-culture')
+        self.assertEqual(route, '/geography/atlas/province-culture.html')
+        response = self.client.get(route + '?adcode=810000')
+        self.assertContains(response, '中国省份文化')
+        self.assertContains(response, 'id="culture-map"', count=1)
+        self.assertContains(response, 'id="culture-picker"', count=1)
+        assets = [url.split('?')[0] for url in TopicMarkup(response.content.decode()).assets]
+        for filename in ('china-geo.js', 'map-data.js', 'map-discovery-data.js', 'shared.js', 'province-culture-data.js', 'province-culture.js'):
+            self.assertIn('/static/study_topics/geo-map/' + filename, assets)
+        self.assertLess(assets.index('/static/study_topics/geo-map/province-culture-data.js'),
+                        assets.index('/static/study_topics/geo-map/province-culture.js'))
+        for page in ('geography-atlas', 'geography-atlas-china', 'geography-atlas-province'):
+            self.assertContains(self.client.get(reverse(page)), 'href="province-culture.html"')
+
     def test_astronomy_portal_has_short_url_and_preserves_old_entry_parameters(self):
         self.assertEqual(reverse('astronomy-explore'), '/astronomy/')
         self.assertEqual(reverse('astronomy-index'), '/astronomy/stars/')
@@ -188,6 +203,7 @@ class StudyTopicPageTests(SimpleTestCase):
             ('geography-atlas-world', 'geography-atlas-world-animals', '世界动物地图'),
             ('geography-atlas-china', 'geography-atlas-plants', '中国植物地图'),
             ('geography-atlas-world', 'geography-atlas-world-plants', '世界植物地图'),
+            ('geography-atlas-china', 'geography-atlas-province-culture', '中国省份文化'),
         ):
             with self.subTest(main=main):
                 response = self.client.get(reverse(main))
@@ -320,7 +336,7 @@ class StudyTopicEntryTests(TestCase):
     def test_history_and_geography_keep_their_primary_cards_first(self):
         for area, shown, hidden in (
             ('history', ('history-timeline-timeline', 'history-timeline-territory', 'history-timeline-people', 'history-timeline-civilizations', 'history-timeline-ancient-science', 'history-timeline-silk-road'), ('geography-atlas-china', 'astronomy-explore')),
-            ('geography', ('geography-atlas-china', 'astronomy-explore', 'solar-terms'), ('history-timeline-timeline', 'literature-study')),
+            ('geography', ('geography-atlas-china', 'geography-atlas-province-culture', 'astronomy-explore', 'solar-terms'), ('history-timeline-timeline', 'literature-study')),
         ):
             with self.subTest(area=area):
                 response = self.client.get(reverse('home'), {'area': area})

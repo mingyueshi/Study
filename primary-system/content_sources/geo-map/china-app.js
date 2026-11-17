@@ -163,7 +163,8 @@
         (p.capital ? row(capLabel, p.capital) : '') +
         `<p class="gm-card-text">${esc(p.note)}</p>` +
         (r.hint ? `<p class="gm-card-foot">${esc(r.name)}：${esc(r.hint)}</p>` : '') +
-        `<a class="gm-card-link" href="province.html?adcode=${esc(p.adcode)}">进省域站细看 →</a>`;
+        `<a class="gm-card-link" href="province.html?adcode=${esc(p.adcode)}">进省域站细看 →</a>` +
+        `<a class="gm-card-link" href="province-culture.html?adcode=${esc(p.adcode)}">看特产、民俗与景观 →</a>`;
     } else if (kind === 'f') {
       const f = A.get(id);
       if (!f) return;

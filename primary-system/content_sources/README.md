@@ -115,3 +115,7 @@
 ### 天文专题总入口
 
 `/astronomy/` 使用独立的轻量目录模板 `astronomy_portal.html`，只加载 `astro-data.js`、`astro-portal.js` 与 `astro-portal.css`。9 个主题和 46 个问题复用原 `units`，四个工具入口的文案维护在 `ASTRO.portal`，由 `test/test-astro.js` 校验；搜索按主题与问题内容筛选并展开对应问题。具体讲解及互动通过 `?view=au1`、`?view=lab` 等原视图打开。旧 `/astronomy/study/` 保留永久跳转，参数与锚点继续解析；无视图参数的 `#lesson-*`、`#roam-*`、`#sky-*`、`#mission-*` 在目录中补齐视图后定位。星表独立为 `/astronomy/stars/`，原 `/astronomy/<编号>/` 不变，旧根地址的星表筛选参数转到新星表入口。修改后运行源校验、`make study-topics-data`、`make test-frontend` 与 `.venv/bin/python manage.py test catalog.test_study_topics astronomy`。
+
+### 中国省份文化
+
+`geo-map/province-culture-data.js` 按 34 个原省级行政区代码维护简称别称、特产、民俗技艺、代表景观、观察问题与来源索引。行政区、地图和中心参考点复用原文件；页面为 `geo-map/province-culture.html`，发布入口 `/geography/atlas/province-culture.html`。先运行 `node content_sources/test/test-province-culture.js`，再按[图谱说明](geo-map/README.md)生成与验证。
