@@ -1,7 +1,8 @@
-"""词以类聚：WordNet 上下位树和拼写家族。
+"""词以类聚：WordNet 上下位树、拼写家族与词根词缀树。
 
 词义树来自 ``tree_data/tree.json``（开发期从 OEWN 2025 生成）。叶词按词头连接
-场景单词，运行时复用 ``state_payload`` 的中文、音标和状态。拼写家族自带拼读例词。
+场景单词，运行时复用 ``state_payload`` 的中文、音标和状态。
+拼写家族自带拼读例词，词根词缀树使用单独校验的构词内容源。
 """
 import json
 from functools import lru_cache
@@ -13,6 +14,7 @@ from django.views.decorators.cache import never_cache
 from django.views.decorators.http import require_GET
 
 from .families import ROOT_KEY as SPELLING_ROOT_KEY, load_spelling_root
+from .morphology import ROOT_KEY as MORPHOLOGY_ROOT_KEY, load_data as load_morphology_data, load_morphology_root
 from .services import state_payload
 
 TREE_PATH = Path(__file__).resolve().parent / "tree_data" / "tree.json"
@@ -141,10 +143,18 @@ def tree_page(request):
     word = request.GET.get("word", "").strip()[:60]
     branch = request.GET.get("branch", "").strip()[:80]
     root_key = request.GET.get("root", "")
+    entry_id = request.GET.get("entry", "").strip()[:100]
     spelling_root = load_spelling_root()
+    morphology_root = load_morphology_root()
     spelling_branch, _ = find_branch([spelling_root], branch) if branch else (None, [])
+    morphology_branch, _ = find_branch([morphology_root], branch) if branch else (None, [])
     is_spelling = root_key == SPELLING_ROOT_KEY or (not root_key and spelling_branch is not None)
-    roots = [spelling_root] if is_spelling else enrich(load_tree_cached()["roots"])
+    is_morphology = not is_spelling and (root_key == MORPHOLOGY_ROOT_KEY or (not root_key and (
+        morphology_branch is not None or bool(entry_id))))
+    roots = ([spelling_root] if is_spelling else [morphology_root] if is_morphology
+             else enrich(load_tree_cached()["roots"]))
+
+    entry = next((row for row in iter_words(roots) if row.get("morph_id") == entry_id), None) if is_morphology and entry_id else None
 
     selected_root, path_ids = find_path(roots, word) if word else (None, [])
     if selected_root is None and branch:
@@ -154,10 +164,24 @@ def tree_page(request):
     selected_word = None
     if word:
         selected_word = next((row for row in iter_words([selected_root]) if row["en"].lower() == word.lower()), None)
+    if entry:
+        selected_root, path_ids = find_branch(roots, entry["family_id"])
+        selected_word = entry
+    morphology_payload = None
+    if is_morphology:
+        morphology_payload = {
+            "entries": list(iter_words(roots)),
+            "families": [{"id": family["id"], "kind": family["kind"], "form": family["zh"],
+                          "forms": family["forms"], "meaning": family["meaning"]}
+                         for category in morphology_root["children"] for family in category["children"]],
+        }
     return render(request, "words/tree.html", {
         "roots": roots, "selected_root": selected_root, "path_ids": path_ids,
         "selected_word": selected_word, "is_spelling": is_spelling,
-        "spelling_root": spelling_root,
+        "spelling_root": spelling_root, "is_morphology": is_morphology,
+        "is_wordnet": not is_spelling and not is_morphology,
+        "morphology_root": morphology_root, "morphology_data": load_morphology_data() if is_morphology else None,
+        "morphology_payload": morphology_payload,
     })
 
 

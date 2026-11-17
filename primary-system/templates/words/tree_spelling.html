@@ -1,1 +1,1 @@
-{% if word.ending %}{{ word.stem }}<span class="tree-word-ending">{{ word.ending }}</span>{% else %}{{ word.en }}{% endif %}
+{% if word.parts %}{% for part in word.parts %}<span class="morph-part morph-part-{{ part.kind }}{% if part.focus %} morph-part-focus{% endif %}" title="{{ part.meaning }}">{{ part.text }}</span>{% endfor %}{% elif word.ending %}{{ word.stem }}<span class="tree-word-ending">{{ word.ending }}</span>{% else %}{{ word.en }}{% endif %}

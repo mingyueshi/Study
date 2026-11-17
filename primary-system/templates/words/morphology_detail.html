@@ -1,0 +1,9 @@
+<section class="morph-analysis" aria-label="构词解析">
+  <p class="morph-family-label">{{ word.family_form }} · {{ word.family_meaning }}<span>{{ word.pos }}</span></p>
+  <p class="morph-build" lang="en">{{ word.build }}</p>
+  <dl class="morph-parts-list">{% for part in word.parts %}<div><dt lang="en">{{ part.text }}</dt><dd>{{ part.meaning }}</dd></div>{% endfor %}</dl>
+  <p class="morph-word-note">{{ word.note }}</p>
+  <blockquote class="morph-example"><p lang="en">{{ word.example.en }}</p><p>{{ word.example.zh }}</p><button class="say-chip" type="button" data-say="{{ word.example.en }}" aria-label="朗读例句">🔊 读例句</button></blockquote>
+  <p class="morph-family-return"><a href="?root=morphology&amp;branch={{ word.family_id }}">看这一家族 →</a></p>
+  <details class="morph-word-sources"><summary>本家族参考资料（需联网）</summary><ul>{% for source in word.sources %}<li><a href="{{ source.url }}" target="_blank" rel="noopener noreferrer">{{ source.title }} ↗</a></li>{% endfor %}</ul></details>
+</section>

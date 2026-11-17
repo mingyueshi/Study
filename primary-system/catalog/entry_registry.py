@@ -237,7 +237,7 @@ SPECIAL_ENTRIES = (
      'blurb': '春风、夏蝉、秋月、冬雪——按季节读诗，也按思乡、送别、边塞这些心情找。'},
     {'route': 'words-tree', 'subject': '英语', 'area': 'english', 'icon': 'tree', 'color': 'english',
      'name': '词以类聚', 'tag': '看单词的结构 →',
-     'blurb': '猫和狗按意思挂在 WordNet 词义树上。cat、hat、mat 按共同的词尾挂进拼写家族。'},
+     'blurb': '按意思看 WordNet 词义树，翻卡练拼写家族，再从词根词缀认识派生词，拆词、点读、读例句。'},
     {'route': 'idiom-scenes', 'subject': '语文', 'area': 'chinese', 'icon': 'idioms', 'color': 'chinese',
      'name': '场景成语', 'tag': '看看生活里的成语 →',
      'blurb': '从学习、心情和身边的小事出发，读懂成语，学会在一句话里用它。'},

@@ -1,0 +1,2830 @@
+{
+  "schema_version": 1,
+  "title": "词根词缀树",
+  "intro": "从单词里的构词成分出发，看看一个意思怎样连接起一群词。前缀常改变方向或意义，后缀常改变词性，词根保留一条核心意义线索。",
+  "steps": [
+    "挑一条枝干，先认识这个构词成分。",
+    "点派生词，看拆词、拼写变化与例句。",
+    "把猜到的意思放回句子，再用词典核对。"
+  ],
+  "limits": [
+    "这里的连线表示构词联系，与 WordNet 的上下位分类不同，也不等同于拼写家族的共同词尾。",
+    "相同字母不一定属于同一个词根；构词线索不能代替全词释义，前后缀也不能任意拼接。",
+    "词根部分包含常见希腊语组合成分。拆分是帮助理解的教学展示，遇到拼写变化、连接元音或历史词源，会单独说明。"
+  ],
+  "sources": [
+    {
+      "id": "cambridge-prefix",
+      "title": "Cambridge English Grammar Today：Prefixes",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/prefixes"
+    },
+    {
+      "id": "cambridge-suffix",
+      "title": "Cambridge English Grammar Today：Suffixes",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/suffixes"
+    },
+    {
+      "id": "british-prefix",
+      "title": "British Council：Prefixes",
+      "url": "https://africa.teachingenglish.org.uk/classroom/grammar/prefixes"
+    },
+    {
+      "id": "glasgow-affixes",
+      "title": "格拉斯哥大学：Word Formation，Affixes",
+      "url": "https://stella.glasgow.ac.uk/grammar/unit-4-3-affixes.html"
+    },
+    {
+      "id": "khan-roots",
+      "title": "Khan Academy：Common roots and affixes",
+      "url": "https://www.khanacademy.org/ela/10th-grade-reading-and-vocabulary/xd89aabc5d5847a2b:vocabulary-10th/xd89aabc5d5847a2b:roots-and-affixes-10th-vocab/a/common-roots-and-affixes-grammar-9"
+    },
+    {
+      "id": "ku-roots",
+      "title": "Teaching Vocabulary Explicitly：Common Greek and Latin Roots，附录 G",
+      "url": "https://simvilledev.ku.edu/sites/default/files/Learning%20Strategies/Teaching%20Vocabulary%20Explicitly_Hanson%20%26%20Padua%202011.pdf"
+    },
+    {
+      "id": "uk-spelling",
+      "title": "英国教育部：英语拼写附录，-ion 与 -tion 的区别",
+      "url": "https://assets.publishing.service.gov.uk/media/5a7ba555e5274a7318b90006/NC_framework_document_-_FINAL.pdf"
+    }
+  ],
+  "categories": [
+    {
+      "id": "prefix",
+      "zh": "前缀",
+      "en": "Prefixes",
+      "emoji": "⏪",
+      "intro": "加在词基前面，常改变意义、时间、位置或程度。",
+      "families": [
+        {
+          "id": "prefix-un",
+          "form": "un-",
+          "forms": [
+            "un"
+          ],
+          "meaning": "不；相反；解除",
+          "origin": "常见前缀",
+          "hint": "放在形容词前常表示「不」；放在一些动词前，可以表示把动作反过来。",
+          "sources": [
+            "cambridge-prefix",
+            "british-prefix"
+          ],
+          "words": [
+            {
+              "id": "prefix-un-unhappy",
+              "en": "unhappy",
+              "zh": "不开心的",
+              "pos": "形容词",
+              "parts": [
+                {
+                  "text": "un",
+                  "kind": "prefix",
+                  "meaning": "不"
+                },
+                {
+                  "text": "happy",
+                  "kind": "base",
+                  "meaning": "开心的"
+                }
+              ],
+              "build": "un- + happy → unhappy",
+              "note": "这里的 un- 表示「不」，不是数量。",
+              "example": {
+                "en": "The child looks unhappy.",
+                "zh": "这个孩子看起来不开心。"
+              }
+            },
+            {
+              "id": "prefix-un-unfair",
+              "en": "unfair",
+              "zh": "不公平的",
+              "pos": "形容词",
+              "parts": [
+                {
+                  "text": "un",
+                  "kind": "prefix",
+                  "meaning": "不"
+                },
+                {
+                  "text": "fair",
+                  "kind": "base",
+                  "meaning": "公平的"
+                }
+              ],
+              "build": "un- + fair → unfair",
+              "note": "fair 在这里取「公平的」这个意思。",
+              "example": {
+                "en": "That rule is unfair.",
+                "zh": "那条规则不公平。"
+              }
+            },
+            {
+              "id": "prefix-un-untie",
+              "en": "untie",
+              "zh": "解开",
+              "pos": "动词",
+              "parts": [
+                {
+                  "text": "un",
+                  "kind": "prefix",
+                  "meaning": "解除动作"
+                },
+                {
+                  "text": "tie",
+                  "kind": "base",
+                  "meaning": "系上"
+                }
+              ],
+              "build": "un- + tie → untie",
+              "note": "un- 把「系上」这个动作反过来，表示解开。",
+              "example": {
+                "en": "Please untie the rope.",
+                "zh": "请解开绳子。"
+              }
+            },
+            {
+              "id": "prefix-un-unpack",
+              "en": "unpack",
+              "zh": "打开行李；从包中取出",
+              "pos": "动词",
+              "parts": [
+                {
+                  "text": "un",
+                  "kind": "prefix",
+                  "meaning": "解除动作"
+                },
+                {
+                  "text": "pack",
+                  "kind": "base",
+                  "meaning": "打包"
+                }
+              ],
+              "build": "un- + pack → unpack",
+              "note": "它可以表示把打包好的东西取出来。",
+              "example": {
+                "en": "We unpack our bags.",
+                "zh": "我们打开行李，取出东西。"
+              }
+            }
+          ]
+        },
+        {
+          "id": "prefix-re",
+          "form": "re-",
+          "forms": [
+            "re"
+          ],
+          "meaning": "再一次；重新",
+          "origin": "常见前缀",
+          "hint": "先找原来的动作，再想想把这个动作重新做一遍。",
+          "sources": [
+            "cambridge-prefix",
+            "british-prefix"
+          ],
+          "words": [
+            {
+              "id": "prefix-re-rewrite",
+              "en": "rewrite",
+              "zh": "重写",
+              "pos": "动词",
+              "parts": [
+                {
+                  "text": "re",
+                  "kind": "prefix",
+                  "meaning": "重新"
+                },
+                {
+                  "text": "write",
+                  "kind": "base",
+                  "meaning": "写"
+                }
+              ],
+              "build": "re- + write → rewrite",
+              "note": "这里表示重新写，可能是为了修改内容。",
+              "example": {
+                "en": "Please rewrite this sentence.",
+                "zh": "请重写这个句子。"
+              }
+            },
+            {
+              "id": "prefix-re-reread",
+              "en": "reread",
+              "zh": "重读",
+              "pos": "动词",
+              "parts": [
+                {
+                  "text": "re",
+                  "kind": "prefix",
+                  "meaning": "再一次"
+                },
+                {
+                  "text": "read",
+                  "kind": "base",
+                  "meaning": "读"
+                }
+              ],
+              "build": "re- + read → reread",
+              "note": "read 的发音会随时态变化；构词时仍保留 read 的拼写。",
+              "example": {
+                "en": "I reread the story every winter.",
+                "zh": "我每年冬天都会重读这个故事。"
+              }
+            },
+            {
+              "id": "prefix-re-reuse",
+              "en": "reuse",
+              "zh": "再次使用",
+              "pos": "动词",
+              "parts": [
+                {
+                  "text": "re",
+                  "kind": "prefix",
+                  "meaning": "再次"
+                },
+                {
+                  "text": "use",
+                  "kind": "base",
+                  "meaning": "使用"
+                }
+              ],
+              "build": "re- + use → reuse",
+              "note": "这里表示再次使用，不必每次都换新的。",
+              "example": {
+                "en": "We reuse these boxes.",
+                "zh": "我们重复使用这些盒子。"
+              }
+            },
+            {
+              "id": "prefix-re-rebuild",
+              "en": "rebuild",
+              "zh": "重建",
+              "pos": "动词",
+              "parts": [
+                {
+                  "text": "re",
+                  "kind": "prefix",
+                  "meaning": "重新"
+                },
+                {
+                  "text": "build",
+                  "kind": "base",
+                  "meaning": "建造"
+                }
+              ],
+              "build": "re- + build → rebuild",
+              "note": "可以是把坏掉的东西重新建好。",
+              "example": {
+                "en": "They rebuild the bridge.",
+                "zh": "他们重建这座桥。"
+              }
+            }
+          ]
+        },
+        {
+          "id": "prefix-dis",
+          "form": "dis-",
+          "forms": [
+            "dis"
+          ],
+          "meaning": "不；相反；分开",
+          "origin": "常见前缀",
+          "hint": "这一组有否定和分开等意思，要结合整个单词判断。",
+          "sources": [
+            "cambridge-prefix",
+            "british-prefix"
+          ],
+          "words": [
+            {
+              "id": "prefix-dis-dislike",
+              "en": "dislike",
+              "zh": "不喜欢",
+              "pos": "动词",
+              "parts": [
+                {
+                  "text": "dis",
+                  "kind": "prefix",
+                  "meaning": "不"
+                },
+                {
+                  "text": "like",
+                  "kind": "base",
+                  "meaning": "喜欢"
+                }
+              ],
+              "build": "dis- + like → dislike",
+              "note": "dislike 表示不喜欢，程度不一定像 hate 那样强。",
+              "example": {
+                "en": "I dislike loud noise.",
+                "zh": "我不喜欢很大的噪声。"
+              }
+            },
+            {
+              "id": "prefix-dis-disagree",
+              "en": "disagree",
+              "zh": "不同意",
+              "pos": "动词",
+              "parts": [
+                {
+                  "text": "dis",
+                  "kind": "prefix",
+                  "meaning": "不"
+                },
+                {
+                  "text": "agree",
+                  "kind": "base",
+                  "meaning": "同意"
+                }
+              ],
+              "build": "dis- + agree → disagree",
+              "note": "不同意时仍可以好好讨论。",
+              "example": {
+                "en": "We disagree about the answer.",
+                "zh": "我们对这个答案有不同意见。"
+              }
+            },
+            {
+              "id": "prefix-dis-disappear",
+              "en": "disappear",
+              "zh": "消失",
+              "pos": "动词",
+              "parts": [
+                {
+                  "text": "dis",
+                  "kind": "prefix",
+                  "meaning": "相反"
+                },
+                {
+                  "text": "appear",
+                  "kind": "base",
+                  "meaning": "出现"
+                }
+              ],
+              "build": "dis- + appear → disappear",
+              "note": "可以理解为从「出现」转为看不见。",
+              "example": {
+                "en": "The stars disappear at dawn.",
+                "zh": "黎明时，星星从视野中消失了。"
+              }
+            },
+            {
+              "id": "prefix-dis-disconnect",
+              "en": "disconnect",
+              "zh": "断开连接",
+              "pos": "动词",
+              "parts": [
+                {
+                  "text": "dis",
+                  "kind": "prefix",
+                  "meaning": "分开"
+                },
+                {
+                  "text": "connect",
+                  "kind": "base",
+                  "meaning": "连接"
+                }
+              ],
+              "build": "dis- + connect → disconnect",
+              "note": "这里的 dis- 表示把连接分开。",
+              "example": {
+                "en": "Please disconnect the cable.",
+                "zh": "请断开这根连接线。"
+              }
+            }
+          ]
+        },
+        {
+          "id": "prefix-mis",
+          "form": "mis-",
+          "forms": [
+            "mis"
+          ],
+          "meaning": "错误地；不当地",
+          "origin": "常见前缀",
+          "hint": "不是没做，而是做错了。把原来的动作找出来。",
+          "sources": [
+            "cambridge-prefix",
+            "british-prefix"
+          ],
+          "words": [
+            {
+              "id": "prefix-mis-misread",
+              "en": "misread",
+              "zh": "读错；理解错",
+              "pos": "动词",
+              "parts": [
+                {
+                  "text": "mis",
+                  "kind": "prefix",
+                  "meaning": "错误地"
+                },
+                {
+                  "text": "read",
+                  "kind": "base",
+                  "meaning": "读"
+                }
+              ],
+              "build": "mis- + read → misread",
+              "note": "misread 的具体读音也会随时态变化。",
+              "example": {
+                "en": "I sometimes misread the map.",
+                "zh": "我有时会看错地图。"
+              }
+            },
+            {
+              "id": "prefix-mis-misspell",
+              "en": "misspell",
+              "zh": "拼写错误",
+              "pos": "动词",
+              "parts": [
+                {
+                  "text": "mis",
+                  "kind": "prefix",
+                  "meaning": "错误地"
+                },
+                {
+                  "text": "spell",
+                  "kind": "base",
+                  "meaning": "拼写"
+                }
+              ],
+              "build": "mis- + spell → misspell",
+              "note": "mis 和 spell 相接，所以中间保留两个 s。",
+              "example": {
+                "en": "I often misspell this word.",
+                "zh": "我经常拼错这个单词。"
+              }
+            },
+            {
+              "id": "prefix-mis-misunderstand",
+              "en": "misunderstand",
+              "zh": "误解",
+              "pos": "动词",
+              "parts": [
+                {
+                  "text": "mis",
+                  "kind": "prefix",
+                  "meaning": "错误地"
+                },
+                {
+                  "text": "understand",
+                  "kind": "base",
+                  "meaning": "理解"
+                }
+              ],
+              "build": "mis- + understand → misunderstand",
+              "note": "understand 在这里作为完整词基，不拆成「下面站着」。",
+              "example": {
+                "en": "People sometimes misunderstand a joke.",
+                "zh": "人们有时会误解一个玩笑。"
+              }
+            },
+            {
+              "id": "prefix-mis-misplace",
+              "en": "misplace",
+              "zh": "放错地方",
+              "pos": "动词",
+              "parts": [
+                {
+                  "text": "mis",
+                  "kind": "prefix",
+                  "meaning": "错误地"
+                },
+                {
+                  "text": "place",
+                  "kind": "base",
+                  "meaning": "放置"
+                }
+              ],
+              "build": "mis- + place → misplace",
+              "note": "常指暂时想不起把东西放到哪里了。",
+              "example": {
+                "en": "I sometimes misplace my keys.",
+                "zh": "我有时会把钥匙放错地方。"
+              }
+            }
+          ]
+        },
+        {
+          "id": "prefix-pre",
+          "form": "pre-",
+          "forms": [
+            "pre"
+          ],
+          "meaning": "在……之前；预先",
+          "origin": "常见前缀",
+          "hint": "沿着时间往前看：有些事情在正式开始前就做好了。",
+          "sources": [
+            "cambridge-prefix",
+            "british-prefix"
+          ],
+          "words": [
+            {
+              "id": "prefix-pre-preview",
+              "en": "preview",
+              "zh": "预先观看；预览",
+              "pos": "名词／动词",
+              "parts": [
+                {
+                  "text": "pre",
+                  "kind": "prefix",
+                  "meaning": "预先"
+                },
+                {
+                  "text": "view",
+                  "kind": "base",
+                  "meaning": "观看"
+                }
+              ],
+              "build": "pre- + view → preview",
+              "note": "可以指正式观看前先看一部分。",
+              "example": {
+                "en": "We preview the film today.",
+                "zh": "我们今天预先观看这部电影。"
+              }
+            },
+            {
+              "id": "prefix-pre-prepay",
+              "en": "prepay",
+              "zh": "预先付款",
+              "pos": "动词",
+              "parts": [
+                {
+                  "text": "pre",
+                  "kind": "prefix",
+                  "meaning": "预先"
+                },
+                {
+                  "text": "pay",
+                  "kind": "base",
+                  "meaning": "付款"
+                }
+              ],
+              "build": "pre- + pay → prepay",
+              "note": "强调付款在使用服务或收到东西之前。",
+              "example": {
+                "en": "You can prepay for lunch.",
+                "zh": "你可以预先支付午餐费。"
+              }
+            },
+            {
+              "id": "prefix-pre-preschool",
+              "en": "preschool",
+              "zh": "学前班；学前教育的",
+              "pos": "名词／形容词",
+              "parts": [
+                {
+                  "text": "pre",
+                  "kind": "prefix",
+                  "meaning": "在……之前"
+                },
+                {
+                  "text": "school",
+                  "kind": "base",
+                  "meaning": "学校"
+                }
+              ],
+              "build": "pre- + school → preschool",
+              "note": "这里与正式小学教育之前的阶段有关。",
+              "example": {
+                "en": "My sister goes to preschool.",
+                "zh": "我妹妹上学前班。"
+              }
+            },
+            {
+              "id": "prefix-pre-preheat",
+              "en": "preheat",
+              "zh": "预热",
+              "pos": "动词",
+              "parts": [
+                {
+                  "text": "pre",
+                  "kind": "prefix",
+                  "meaning": "预先"
+                },
+                {
+                  "text": "heat",
+                  "kind": "base",
+                  "meaning": "加热"
+                }
+              ],
+              "build": "pre- + heat → preheat",
+              "note": "例如烘烤前先把烤箱加热；操作电器需要成年人指导。",
+              "example": {
+                "en": "We preheat the oven before baking.",
+                "zh": "我们在烘烤前预热烤箱。"
+              }
+            }
+          ]
+        },
+        {
+          "id": "prefix-over",
+          "form": "over-",
+          "forms": [
+            "over"
+          ],
+          "meaning": "过度；过量",
+          "origin": "常见前缀",
+          "hint": "这一组主要看「超过合适程度」的用法。",
+          "sources": [
+            "cambridge-prefix",
+            "british-prefix"
+          ],
+          "words": [
+            {
+              "id": "prefix-over-overcook",
+              "en": "overcook",
+              "zh": "烹调过度",
+              "pos": "动词",
+              "parts": [
+                {
+                  "text": "over",
+                  "kind": "prefix",
+                  "meaning": "过度"
+                },
+                {
+                  "text": "cook",
+                  "kind": "base",
+                  "meaning": "烹调"
+                }
+              ],
+              "build": "over- + cook → overcook",
+              "note": "时间太长或火候过大，都可能把食物做过头。",
+              "example": {
+                "en": "Do not overcook the beans.",
+                "zh": "别把豆子煮过头。"
+              }
+            },
+            {
+              "id": "prefix-over-overeat",
+              "en": "overeat",
+              "zh": "吃得过多",
+              "pos": "动词",
+              "parts": [
+                {
+                  "text": "over",
+                  "kind": "prefix",
+                  "meaning": "过量"
+                },
+                {
+                  "text": "eat",
+                  "kind": "base",
+                  "meaning": "吃"
+                }
+              ],
+              "build": "over- + eat → overeat",
+              "note": "这里强调吃的数量超过合适程度。",
+              "example": {
+                "en": "Try not to overeat.",
+                "zh": "尽量不要吃得过多。"
+              }
+            },
+            {
+              "id": "prefix-over-oversleep",
+              "en": "oversleep",
+              "zh": "睡过头",
+              "pos": "动词",
+              "parts": [
+                {
+                  "text": "over",
+                  "kind": "prefix",
+                  "meaning": "超过合适程度"
+                },
+                {
+                  "text": "sleep",
+                  "kind": "base",
+                  "meaning": "睡觉"
+                }
+              ],
+              "build": "over- + sleep → oversleep",
+              "note": "通常指睡得比打算起床的时间更晚。",
+              "example": {
+                "en": "I sometimes oversleep on Sundays.",
+                "zh": "我星期天有时会睡过头。"
+              }
+            },
+            {
+              "id": "prefix-over-overload",
+              "en": "overload",
+              "zh": "使超载",
+              "pos": "动词",
+              "parts": [
+                {
+                  "text": "over",
+                  "kind": "prefix",
+                  "meaning": "过量"
+                },
+                {
+                  "text": "load",
+                  "kind": "base",
+                  "meaning": "装载"
+                }
+              ],
+              "build": "over- + load → overload",
+              "note": "载重或负担超过能承受的范围。",
+              "example": {
+                "en": "Do not overload the boat.",
+                "zh": "不要让这条船超载。"
+              }
+            }
+          ]
+        },
+        {
+          "id": "prefix-under",
+          "form": "under-",
+          "forms": [
+            "under"
+          ],
+          "meaning": "不足；在……下面",
+          "origin": "常见前缀",
+          "hint": "它既能说程度不足，也能说位置在下面；别把所有 under 开头的词都硬拆。",
+          "sources": [
+            "cambridge-prefix",
+            "british-prefix"
+          ],
+          "words": [
+            {
+              "id": "prefix-under-undercook",
+              "en": "undercook",
+              "zh": "烹调不足",
+              "pos": "动词",
+              "parts": [
+                {
+                  "text": "under",
+                  "kind": "prefix",
+                  "meaning": "不足"
+                },
+                {
+                  "text": "cook",
+                  "kind": "base",
+                  "meaning": "烹调"
+                }
+              ],
+              "build": "under- + cook → undercook",
+              "note": "与 overcook 对照：一个没做够，一个做过头。",
+              "example": {
+                "en": "Do not undercook the chicken.",
+                "zh": "不要把鸡肉做得不够熟。"
+              }
+            },
+            {
+              "id": "prefix-under-underestimate",
+              "en": "underestimate",
+              "zh": "低估",
+              "pos": "动词",
+              "parts": [
+                {
+                  "text": "under",
+                  "kind": "prefix",
+                  "meaning": "估得不足"
+                },
+                {
+                  "text": "estimate",
+                  "kind": "base",
+                  "meaning": "估计"
+                }
+              ],
+              "build": "under- + estimate → underestimate",
+              "note": "估计的数量、难度或能力比实际情况低。",
+              "example": {
+                "en": "Do not underestimate this task.",
+                "zh": "不要低估这项任务。"
+              }
+            },
+            {
+              "id": "prefix-under-underpay",
+              "en": "underpay",
+              "zh": "给的报酬过低",
+              "pos": "动词",
+              "parts": [
+                {
+                  "text": "under",
+                  "kind": "prefix",
+                  "meaning": "不足"
+                },
+                {
+                  "text": "pay",
+                  "kind": "base",
+                  "meaning": "支付报酬"
+                }
+              ],
+              "build": "under- + pay → underpay",
+              "note": "表示支付的报酬低于应有或合理水平。",
+              "example": {
+                "en": "Some employers underpay their workers.",
+                "zh": "有些雇主给工人的报酬过低。"
+              }
+            },
+            {
+              "id": "prefix-under-underground",
+              "en": "underground",
+              "zh": "地下的；在地下",
+              "pos": "形容词／副词",
+              "parts": [
+                {
+                  "text": "under",
+                  "kind": "prefix",
+                  "meaning": "在……下面"
+                },
+                {
+                  "text": "ground",
+                  "kind": "base",
+                  "meaning": "地面"
+                }
+              ],
+              "build": "under- + ground → underground",
+              "note": "这里取空间位置的意思，不是数量不足。",
+              "example": {
+                "en": "Some trains run underground.",
+                "zh": "有些列车在地下行驶。"
+              }
+            }
+          ]
+        },
+        {
+          "id": "prefix-non",
+          "form": "non-",
+          "forms": [
+            "non"
+          ],
+          "meaning": "非；不",
+          "origin": "常见前缀",
+          "hint": "常用来表示「不属于这一类」；是否加连字符，要看词典中的常用拼写。",
+          "sources": [
+            "cambridge-prefix",
+            "british-prefix"
+          ],
+          "words": [
+            {
+              "id": "prefix-non-nonfiction",
+              "en": "nonfiction",
+              "zh": "非虚构作品",
+              "pos": "名词",
+              "parts": [
+                {
+                  "text": "non",
+                  "kind": "prefix",
+                  "meaning": "非"
+                },
+                {
+                  "text": "fiction",
+                  "kind": "base",
+                  "meaning": "虚构作品"
+                }
+              ],
+              "build": "non- + fiction → nonfiction",
+              "note": "传记、科普等常属于非虚构作品；这不等于其中每句话都不会出错。",
+              "example": {
+                "en": "I enjoy reading nonfiction.",
+                "zh": "我喜欢阅读非虚构作品。"
+              }
+            },
+            {
+              "id": "prefix-non-nonstop",
+              "en": "nonstop",
+              "zh": "不停的；不停地",
+              "pos": "形容词／副词",
+              "parts": [
+                {
+                  "text": "non",
+                  "kind": "prefix",
+                  "meaning": "不"
+                },
+                {
+                  "text": "stop",
+                  "kind": "base",
+                  "meaning": "停止"
+                }
+              ],
+              "build": "non- + stop → nonstop",
+              "note": "可以描述中途不停的活动或行程。",
+              "example": {
+                "en": "The rain continued nonstop.",
+                "zh": "雨一直下个不停。"
+              }
+            },
+            {
+              "id": "prefix-non-nonverbal",
+              "en": "nonverbal",
+              "zh": "非言语的",
+              "pos": "形容词",
+              "parts": [
+                {
+                  "text": "non",
+                  "kind": "prefix",
+                  "meaning": "非"
+                },
+                {
+                  "text": "verbal",
+                  "kind": "base",
+                  "meaning": "言语的"
+                }
+              ],
+              "build": "non- + verbal → nonverbal",
+              "note": "手势和表情可以传递非言语信息。",
+              "example": {
+                "en": "A smile is a nonverbal message.",
+                "zh": "微笑是一种非言语信息。"
+              }
+            },
+            {
+              "id": "prefix-non-nonmetal",
+              "en": "nonmetal",
+              "zh": "非金属",
+              "pos": "名词",
+              "parts": [
+                {
+                  "text": "non",
+                  "kind": "prefix",
+                  "meaning": "非"
+                },
+                {
+                  "text": "metal",
+                  "kind": "base",
+                  "meaning": "金属"
+                }
+              ],
+              "build": "non- + metal → nonmetal",
+              "note": "这是物质分类名称，不能只靠外观来判断。",
+              "example": {
+                "en": "Sulfur is a nonmetal.",
+                "zh": "硫是一种非金属。"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "suffix",
+      "zh": "后缀",
+      "en": "Suffixes",
+      "emoji": "⏩",
+      "intro": "加在词基后面，常派生出新的词性，也可能需要调整拼写。",
+      "families": [
+        {
+          "id": "suffix-ful",
+          "form": "-ful",
+          "forms": [
+            "ful"
+          ],
+          "meaning": "有……特点的；充满……的",
+          "origin": "形容词后缀",
+          "hint": "在这些例词中，-ful 把词基变成描述特点的形容词。",
+          "sources": [
+            "cambridge-suffix",
+            "glasgow-affixes"
+          ],
+          "words": [
+            {
+              "id": "suffix-ful-helpful",
+              "en": "helpful",
+              "zh": "有帮助的",
+              "pos": "形容词",
+              "parts": [
+                {
+                  "text": "help",
+                  "kind": "base",
+                  "meaning": "帮助"
+                },
+                {
+                  "text": "ful",
+                  "kind": "suffix",
+                  "meaning": "有……特点的"
+                }
+              ],
+              "build": "help + -ful → helpful",
+              "note": "-ful 只有一个 l，不写成完整单词 full。",
+              "example": {
+                "en": "Your advice is helpful.",
+                "zh": "你的建议很有帮助。"
+              }
+            },
+            {
+              "id": "suffix-ful-careful",
+              "en": "careful",
+              "zh": "小心的；认真的",
+              "pos": "形容词",
+              "parts": [
+                {
+                  "text": "care",
+                  "kind": "base",
+                  "meaning": "留心"
+                },
+                {
+                  "text": "ful",
+                  "kind": "suffix",
+                  "meaning": "有……特点的"
+                }
+              ],
+              "build": "care + -ful → careful",
+              "note": "care 保留词尾 e，再加 -ful。",
+              "example": {
+                "en": "Be careful on the stairs.",
+                "zh": "在楼梯上要小心。"
+              }
+            },
+            {
+              "id": "suffix-ful-useful",
+              "en": "useful",
+              "zh": "有用的",
+              "pos": "形容词",
+              "parts": [
+                {
+                  "text": "use",
+                  "kind": "base",
+                  "meaning": "用处"
+                },
+                {
+                  "text": "ful",
+                  "kind": "suffix",
+                  "meaning": "有……特点的"
+                }
+              ],
+              "build": "use + -ful → useful",
+              "note": "表示有用处，不是使用的过去式。",
+              "example": {
+                "en": "This map is useful.",
+                "zh": "这张地图很有用。"
+              }
+            },
+            {
+              "id": "suffix-ful-hopeful",
+              "en": "hopeful",
+              "zh": "抱有希望的",
+              "pos": "形容词",
+              "parts": [
+                {
+                  "text": "hope",
+                  "kind": "base",
+                  "meaning": "希望"
+                },
+                {
+                  "text": "ful",
+                  "kind": "suffix",
+                  "meaning": "充满……的"
+                }
+              ],
+              "build": "hope + -ful → hopeful",
+              "note": "可以描述人对未来抱有希望的心情。",
+              "example": {
+                "en": "We feel hopeful about tomorrow.",
+                "zh": "我们对明天充满希望。"
+              }
+            }
+          ]
+        },
+        {
+          "id": "suffix-less",
+          "form": "-less",
+          "forms": [
+            "less"
+          ],
+          "meaning": "没有；缺少",
+          "origin": "形容词后缀",
+          "hint": "拿 -ful 和 -less 对照，观察同一个词基怎样改变意思。",
+          "sources": [
+            "cambridge-suffix",
+            "glasgow-affixes"
+          ],
+          "words": [
+            {
+              "id": "suffix-less-careless",
+              "en": "careless",
+              "zh": "粗心的",
+              "pos": "形容词",
+              "parts": [
+                {
+                  "text": "care",
+                  "kind": "base",
+                  "meaning": "留心"
+                },
+                {
+                  "text": "less",
+                  "kind": "suffix",
+                  "meaning": "缺少"
+                }
+              ],
+              "build": "care + -less → careless",
+              "note": "careful 与 careless 都来自 care，但意思不同。",
+              "example": {
+                "en": "That was a careless mistake.",
+                "zh": "那是一个粗心造成的错误。"
+              }
+            },
+            {
+              "id": "suffix-less-hopeless",
+              "en": "hopeless",
+              "zh": "没有希望的",
+              "pos": "形容词",
+              "parts": [
+                {
+                  "text": "hope",
+                  "kind": "base",
+                  "meaning": "希望"
+                },
+                {
+                  "text": "less",
+                  "kind": "suffix",
+                  "meaning": "没有"
+                }
+              ],
+              "build": "hope + -less → hopeless",
+              "note": "也有「极差的」等用法；这里先学习没有希望这一义。",
+              "example": {
+                "en": "The situation seemed hopeless.",
+                "zh": "当时的情况似乎没有希望。"
+              }
+            },
+            {
+              "id": "suffix-less-homeless",
+              "en": "homeless",
+              "zh": "无家可归的",
+              "pos": "形容词",
+              "parts": [
+                {
+                  "text": "home",
+                  "kind": "base",
+                  "meaning": "家"
+                },
+                {
+                  "text": "less",
+                  "kind": "suffix",
+                  "meaning": "没有"
+                }
+              ],
+              "build": "home + -less → homeless",
+              "note": "说的是缺少稳定住所的处境。",
+              "example": {
+                "en": "The storm left many people homeless.",
+                "zh": "暴风雨使许多人无家可归。"
+              }
+            },
+            {
+              "id": "suffix-less-useless",
+              "en": "useless",
+              "zh": "无用的",
+              "pos": "形容词",
+              "parts": [
+                {
+                  "text": "use",
+                  "kind": "base",
+                  "meaning": "用处"
+                },
+                {
+                  "text": "less",
+                  "kind": "suffix",
+                  "meaning": "没有"
+                }
+              ],
+              "build": "use + -less → useless",
+              "note": "-less 在这里不是比较级里的「更少」。",
+              "example": {
+                "en": "A broken compass is useless.",
+                "zh": "坏掉的指南针没有用。"
+              }
+            }
+          ]
+        },
+        {
+          "id": "suffix-ness",
+          "form": "-ness",
+          "forms": [
+            "ness"
+          ],
+          "meaning": "性质；状态",
+          "origin": "名词后缀",
+          "hint": "常把形容词变成表示性质或状态的名词；有时要先调整拼写。",
+          "sources": [
+            "cambridge-suffix",
+            "glasgow-affixes"
+          ],
+          "words": [
+            {
+              "id": "suffix-ness-kindness",
+              "en": "kindness",
+              "zh": "善意；善良",
+              "pos": "名词",
+              "parts": [
+                {
+                  "text": "kind",
+                  "kind": "base",
+                  "meaning": "友善的"
+                },
+                {
+                  "text": "ness",
+                  "kind": "suffix",
+                  "meaning": "性质或状态"
+                }
+              ],
+              "build": "kind + -ness → kindness",
+              "note": "kindness 把「友善的」变成可以谈论的品质。",
+              "example": {
+                "en": "Thank you for your kindness.",
+                "zh": "谢谢你的善意。"
+              }
+            },
+            {
+              "id": "suffix-ness-happiness",
+              "en": "happiness",
+              "zh": "幸福；快乐",
+              "pos": "名词",
+              "parts": [
+                {
+                  "text": "happi",
+                  "kind": "base",
+                  "meaning": "happy 的变形"
+                },
+                {
+                  "text": "ness",
+                  "kind": "suffix",
+                  "meaning": "性质或状态"
+                }
+              ],
+              "build": "happy + -ness → happiness",
+              "note": "happy 末尾的 y 在这里变成 i，再加 -ness。",
+              "example": {
+                "en": "Her smile showed real happiness.",
+                "zh": "她的笑容显露出真切的快乐。"
+              }
+            },
+            {
+              "id": "suffix-ness-darkness",
+              "en": "darkness",
+              "zh": "黑暗",
+              "pos": "名词",
+              "parts": [
+                {
+                  "text": "dark",
+                  "kind": "base",
+                  "meaning": "黑暗的"
+                },
+                {
+                  "text": "ness",
+                  "kind": "suffix",
+                  "meaning": "状态"
+                }
+              ],
+              "build": "dark + -ness → darkness",
+              "note": "表示黑暗这种状态。",
+              "example": {
+                "en": "We waited in the darkness.",
+                "zh": "我们在黑暗中等待。"
+              }
+            },
+            {
+              "id": "suffix-ness-sadness",
+              "en": "sadness",
+              "zh": "悲伤",
+              "pos": "名词",
+              "parts": [
+                {
+                  "text": "sad",
+                  "kind": "base",
+                  "meaning": "悲伤的"
+                },
+                {
+                  "text": "ness",
+                  "kind": "suffix",
+                  "meaning": "状态"
+                }
+              ],
+              "build": "sad + -ness → sadness",
+              "note": "这里不双写 d，直接加 -ness。",
+              "example": {
+                "en": "Music helped him express sadness.",
+                "zh": "音乐帮助他表达悲伤。"
+              }
+            }
+          ]
+        },
+        {
+          "id": "suffix-ment",
+          "form": "-ment",
+          "forms": [
+            "ment"
+          ],
+          "meaning": "行为；过程；结果",
+          "origin": "名词后缀",
+          "hint": "常跟在动词后组成名词，具体表示行为、过程还是结果，要看整个词。",
+          "sources": [
+            "cambridge-suffix",
+            "glasgow-affixes"
+          ],
+          "words": [
+            {
+              "id": "suffix-ment-enjoyment",
+              "en": "enjoyment",
+              "zh": "乐趣；享受",
+              "pos": "名词",
+              "parts": [
+                {
+                  "text": "enjoy",
+                  "kind": "base",
+                  "meaning": "享受"
+                },
+                {
+                  "text": "ment",
+                  "kind": "suffix",
+                  "meaning": "行为或状态"
+                }
+              ],
+              "build": "enjoy + -ment → enjoyment",
+              "note": "这里保留 enjoy 的 y，不改成 i。",
+              "example": {
+                "en": "We read for enjoyment.",
+                "zh": "我们为获得乐趣而阅读。"
+              }
+            },
+            {
+              "id": "suffix-ment-movement",
+              "en": "movement",
+              "zh": "移动；运动",
+              "pos": "名词",
+              "parts": [
+                {
+                  "text": "move",
+                  "kind": "base",
+                  "meaning": "移动"
+                },
+                {
+                  "text": "ment",
+                  "kind": "suffix",
+                  "meaning": "行为或过程"
+                }
+              ],
+              "build": "move + -ment → movement",
+              "note": "move 末尾的 e 保留。",
+              "example": {
+                "en": "The camera records every movement.",
+                "zh": "相机记录每一个动作。"
+              }
+            },
+            {
+              "id": "suffix-ment-agreement",
+              "en": "agreement",
+              "zh": "同意；协议",
+              "pos": "名词",
+              "parts": [
+                {
+                  "text": "agree",
+                  "kind": "base",
+                  "meaning": "同意"
+                },
+                {
+                  "text": "ment",
+                  "kind": "suffix",
+                  "meaning": "结果或状态"
+                }
+              ],
+              "build": "agree + -ment → agreement",
+              "note": "agree 的拼写完整保留。",
+              "example": {
+                "en": "We reached an agreement.",
+                "zh": "我们达成了一项协议。"
+              }
+            },
+            {
+              "id": "suffix-ment-improvement",
+              "en": "improvement",
+              "zh": "改进；改善",
+              "pos": "名词",
+              "parts": [
+                {
+                  "text": "improve",
+                  "kind": "base",
+                  "meaning": "改善"
+                },
+                {
+                  "text": "ment",
+                  "kind": "suffix",
+                  "meaning": "过程或结果"
+                }
+              ],
+              "build": "improve + -ment → improvement",
+              "note": "improve 末尾的 e 保留。",
+              "example": {
+                "en": "Your work shows real improvement.",
+                "zh": "你的作品有了明显进步。"
+              }
+            }
+          ]
+        },
+        {
+          "id": "suffix-er",
+          "form": "-er",
+          "forms": [
+            "er"
+          ],
+          "meaning": "做某事的人或物",
+          "origin": "名词后缀",
+          "hint": "这里学习「做某事的人」，与 taller 里表示比较级的 -er 区分开。",
+          "sources": [
+            "cambridge-suffix",
+            "glasgow-affixes"
+          ],
+          "words": [
+            {
+              "id": "suffix-er-teacher",
+              "en": "teacher",
+              "zh": "教师",
+              "pos": "名词",
+              "parts": [
+                {
+                  "text": "teach",
+                  "kind": "base",
+                  "meaning": "教"
+                },
+                {
+                  "text": "er",
+                  "kind": "suffix",
+                  "meaning": "做某事的人"
+                }
+              ],
+              "build": "teach + -er → teacher",
+              "note": "不是所有职业都用 -er；这只是一个常见构词方式。",
+              "example": {
+                "en": "Our teacher loves science.",
+                "zh": "我们的老师喜欢科学。"
+              }
+            },
+            {
+              "id": "suffix-er-reader",
+              "en": "reader",
+              "zh": "读者",
+              "pos": "名词",
+              "parts": [
+                {
+                  "text": "read",
+                  "kind": "base",
+                  "meaning": "阅读"
+                },
+                {
+                  "text": "er",
+                  "kind": "suffix",
+                  "meaning": "做某事的人"
+                }
+              ],
+              "build": "read + -er → reader",
+              "note": "这里指阅读的人。",
+              "example": {
+                "en": "This book helps a new reader.",
+                "zh": "这本书帮助刚开始阅读的人。"
+              }
+            },
+            {
+              "id": "suffix-er-writer",
+              "en": "writer",
+              "zh": "作者；作家",
+              "pos": "名词",
+              "parts": [
+                {
+                  "text": "writ",
+                  "kind": "base",
+                  "meaning": "write 的变形"
+                },
+                {
+                  "text": "er",
+                  "kind": "suffix",
+                  "meaning": "做某事的人"
+                }
+              ],
+              "build": "write + -er → writer",
+              "note": "write 末尾的 e 去掉，再加 -er。",
+              "example": {
+                "en": "The writer lives nearby.",
+                "zh": "这位作家住在附近。"
+              }
+            },
+            {
+              "id": "suffix-er-runner",
+              "en": "runner",
+              "zh": "跑步者",
+              "pos": "名词",
+              "parts": [
+                {
+                  "text": "runn",
+                  "kind": "base",
+                  "meaning": "run 的变形"
+                },
+                {
+                  "text": "er",
+                  "kind": "suffix",
+                  "meaning": "做某事的人"
+                }
+              ],
+              "build": "run + -er → runner",
+              "note": "run 在这里双写末尾 n，再加 -er。",
+              "example": {
+                "en": "The runner crossed the finish line.",
+                "zh": "这位跑步者冲过了终点线。"
+              }
+            }
+          ]
+        },
+        {
+          "id": "suffix-able",
+          "form": "-able",
+          "forms": [
+            "able"
+          ],
+          "meaning": "可以……的；适合……的",
+          "origin": "形容词后缀",
+          "hint": "先找动作，再理解「能被这样做」或「适合这样做」。",
+          "sources": [
+            "cambridge-suffix",
+            "glasgow-affixes"
+          ],
+          "words": [
+            {
+              "id": "suffix-able-readable",
+              "en": "readable",
+              "zh": "易读的；可读的",
+              "pos": "形容词",
+              "parts": [
+                {
+                  "text": "read",
+                  "kind": "base",
+                  "meaning": "阅读"
+                },
+                {
+                  "text": "able",
+                  "kind": "suffix",
+                  "meaning": "适合或可以……的"
+                }
+              ],
+              "build": "read + -able → readable",
+              "note": "常表示内容容易阅读，不只表示眼睛能看见文字。",
+              "example": {
+                "en": "The guide is clear and readable.",
+                "zh": "这本指南清楚易读。"
+              }
+            },
+            {
+              "id": "suffix-able-washable",
+              "en": "washable",
+              "zh": "可洗的",
+              "pos": "形容词",
+              "parts": [
+                {
+                  "text": "wash",
+                  "kind": "base",
+                  "meaning": "洗"
+                },
+                {
+                  "text": "able",
+                  "kind": "suffix",
+                  "meaning": "可以……的"
+                }
+              ],
+              "build": "wash + -able → washable",
+              "note": "衣物是否能机洗，还要看具体洗涤标识。",
+              "example": {
+                "en": "This jacket is washable.",
+                "zh": "这件夹克可以洗。"
+              }
+            },
+            {
+              "id": "suffix-able-drinkable",
+              "en": "drinkable",
+              "zh": "可以饮用的",
+              "pos": "形容词",
+              "parts": [
+                {
+                  "text": "drink",
+                  "kind": "base",
+                  "meaning": "喝"
+                },
+                {
+                  "text": "able",
+                  "kind": "suffix",
+                  "meaning": "可以……的"
+                }
+              ],
+              "build": "drink + -able → drinkable",
+              "note": "不能只凭水很清澈，就判断它可以饮用。",
+              "example": {
+                "en": "The filter makes the water drinkable.",
+                "zh": "过滤器使这些水可以饮用。"
+              }
+            },
+            {
+              "id": "suffix-able-reusable",
+              "en": "reusable",
+              "zh": "可重复使用的",
+              "pos": "形容词",
+              "parts": [
+                {
+                  "text": "re",
+                  "kind": "prefix",
+                  "meaning": "再次"
+                },
+                {
+                  "text": "us",
+                  "kind": "base",
+                  "meaning": "use 的变形"
+                },
+                {
+                  "text": "able",
+                  "kind": "suffix",
+                  "meaning": "可以……的"
+                }
+              ],
+              "build": "reuse + -able → reusable",
+              "note": "reuse 末尾的 e 去掉，再加 -able；也能看见 re- 表示再次。",
+              "example": {
+                "en": "Bring a reusable bottle.",
+                "zh": "带上一个可重复使用的水瓶。"
+              }
+            }
+          ]
+        },
+        {
+          "id": "suffix-ly",
+          "form": "-ly",
+          "forms": [
+            "ly"
+          ],
+          "meaning": "以……的方式",
+          "origin": "副词后缀",
+          "hint": "这一组把描述特点的词变成说明动作方式的词；friendly 等 -ly 词不照搬这个解释。",
+          "sources": [
+            "cambridge-suffix",
+            "glasgow-affixes"
+          ],
+          "words": [
+            {
+              "id": "suffix-ly-slowly",
+              "en": "slowly",
+              "zh": "慢慢地",
+              "pos": "副词",
+              "parts": [
+                {
+                  "text": "slow",
+                  "kind": "base",
+                  "meaning": "慢的"
+                },
+                {
+                  "text": "ly",
+                  "kind": "suffix",
+                  "meaning": "以……的方式"
+                }
+              ],
+              "build": "slow + -ly → slowly",
+              "note": "用来说明动作怎样进行。",
+              "example": {
+                "en": "The turtle moves slowly.",
+                "zh": "乌龟慢慢地移动。"
+              }
+            },
+            {
+              "id": "suffix-ly-quickly",
+              "en": "quickly",
+              "zh": "迅速地",
+              "pos": "副词",
+              "parts": [
+                {
+                  "text": "quick",
+                  "kind": "base",
+                  "meaning": "快的"
+                },
+                {
+                  "text": "ly",
+                  "kind": "suffix",
+                  "meaning": "以……的方式"
+                }
+              ],
+              "build": "quick + -ly → quickly",
+              "note": "它可以修饰完成动作的方式。",
+              "example": {
+                "en": "She quickly found the key.",
+                "zh": "她很快找到了钥匙。"
+              }
+            },
+            {
+              "id": "suffix-ly-happily",
+              "en": "happily",
+              "zh": "快乐地",
+              "pos": "副词",
+              "parts": [
+                {
+                  "text": "happi",
+                  "kind": "base",
+                  "meaning": "happy 的变形"
+                },
+                {
+                  "text": "ly",
+                  "kind": "suffix",
+                  "meaning": "以……的方式"
+                }
+              ],
+              "build": "happy + -ly → happily",
+              "note": "happy 末尾的 y 在这里变成 i。",
+              "example": {
+                "en": "The children played happily.",
+                "zh": "孩子们玩得很开心。"
+              }
+            },
+            {
+              "id": "suffix-ly-carefully",
+              "en": "carefully",
+              "zh": "小心地；认真地",
+              "pos": "副词",
+              "parts": [
+                {
+                  "text": "care",
+                  "kind": "base",
+                  "meaning": "留心"
+                },
+                {
+                  "text": "ful",
+                  "kind": "suffix",
+                  "meaning": "有……特点的"
+                },
+                {
+                  "text": "ly",
+                  "kind": "suffix",
+                  "meaning": "以……的方式"
+                }
+              ],
+              "build": "careful + -ly → carefully",
+              "note": "先有 care + -ful → careful，再加 -ly；两个 l 来自两段相接。",
+              "example": {
+                "en": "Please read the instructions carefully.",
+                "zh": "请认真阅读说明。"
+              }
+            }
+          ]
+        },
+        {
+          "id": "suffix-ion",
+          "form": "-ion",
+          "forms": [
+            "ion"
+          ],
+          "meaning": "行为；过程；结果",
+          "origin": "名词后缀",
+          "hint": "常见拼写结尾包括 -tion；拆词时区分后缀 -ion 和词基保留的字母 t。",
+          "sources": [
+            "cambridge-suffix",
+            "uk-spelling"
+          ],
+          "words": [
+            {
+              "id": "suffix-ion-action",
+              "en": "action",
+              "zh": "行动；动作",
+              "pos": "名词",
+              "parts": [
+                {
+                  "text": "act",
+                  "kind": "base",
+                  "meaning": "行动"
+                },
+                {
+                  "text": "ion",
+                  "kind": "suffix",
+                  "meaning": "行为或过程"
+                }
+              ],
+              "build": "act + -ion → action",
+              "note": "action 的 t 来自 act，不把整个 -tion 都从词基剪掉。",
+              "example": {
+                "en": "We need action now.",
+                "zh": "我们现在需要行动。"
+              }
+            },
+            {
+              "id": "suffix-ion-invention",
+              "en": "invention",
+              "zh": "发明；发明物",
+              "pos": "名词",
+              "parts": [
+                {
+                  "text": "invent",
+                  "kind": "base",
+                  "meaning": "发明"
+                },
+                {
+                  "text": "ion",
+                  "kind": "suffix",
+                  "meaning": "行为或结果"
+                }
+              ],
+              "build": "invent + -ion → invention",
+              "note": "invent 的拼写保留，末尾加 -ion。",
+              "example": {
+                "en": "The wheel was an important invention.",
+                "zh": "车轮是一项重要的发明。"
+              }
+            },
+            {
+              "id": "suffix-ion-collection",
+              "en": "collection",
+              "zh": "收集；收藏品",
+              "pos": "名词",
+              "parts": [
+                {
+                  "text": "collect",
+                  "kind": "base",
+                  "meaning": "收集"
+                },
+                {
+                  "text": "ion",
+                  "kind": "suffix",
+                  "meaning": "行为或结果"
+                }
+              ],
+              "build": "collect + -ion → collection",
+              "note": "既能指收集这个行为，也能指收集起来的一组东西。",
+              "example": {
+                "en": "Her collection includes old coins.",
+                "zh": "她的收藏品中有旧硬币。"
+              }
+            },
+            {
+              "id": "suffix-ion-creation",
+              "en": "creation",
+              "zh": "创造；作品",
+              "pos": "名词",
+              "parts": [
+                {
+                  "text": "creat",
+                  "kind": "base",
+                  "meaning": "create 的变形"
+                },
+                {
+                  "text": "ion",
+                  "kind": "suffix",
+                  "meaning": "行为或结果"
+                }
+              ],
+              "build": "create + -ion → creation",
+              "note": "create 末尾的 e 去掉，再加 -ion。",
+              "example": {
+                "en": "The model is her own creation.",
+                "zh": "这个模型是她自己的作品。"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "root",
+      "zh": "词根与组合成分",
+      "en": "Roots",
+      "emoji": "🌱",
+      "intro": "从核心意义联系多个词，探索声音、生命、观察与建造。",
+      "families": [
+        {
+          "id": "root-port",
+          "form": "port",
+          "forms": [
+            "port"
+          ],
+          "meaning": "携带；运送",
+          "origin": "拉丁语词根",
+          "hint": "从「携带、运送」出发，看词根怎样连接交通、贸易和工具。",
+          "sources": [
+            "khan-roots",
+            "ku-roots"
+          ],
+          "words": [
+            {
+              "id": "root-port-transport",
+              "en": "transport",
+              "zh": "运输；运送",
+              "pos": "名词／动词",
+              "parts": [
+                {
+                  "text": "trans",
+                  "kind": "prefix",
+                  "meaning": "跨越"
+                },
+                {
+                  "text": "port",
+                  "kind": "root",
+                  "meaning": "携带或运送"
+                }
+              ],
+              "build": "trans- + port → transport",
+              "note": "跨越一段距离运送东西；这是记义线索，不是逐字翻译公式。",
+              "example": {
+                "en": "Trains transport goods.",
+                "zh": "火车运送货物。"
+              }
+            },
+            {
+              "id": "root-port-portable",
+              "en": "portable",
+              "zh": "便携的",
+              "pos": "形容词",
+              "parts": [
+                {
+                  "text": "port",
+                  "kind": "root",
+                  "meaning": "携带"
+                },
+                {
+                  "text": "able",
+                  "kind": "suffix",
+                  "meaning": "可以……的"
+                }
+              ],
+              "build": "port + -able → portable",
+              "note": "可以携带，由此理解「便携」。",
+              "example": {
+                "en": "This radio is portable.",
+                "zh": "这台收音机是便携式的。"
+              }
+            },
+            {
+              "id": "root-port-import",
+              "en": "import",
+              "zh": "进口；输入",
+              "pos": "名词／动词",
+              "parts": [
+                {
+                  "text": "im",
+                  "kind": "prefix",
+                  "meaning": "向内"
+                },
+                {
+                  "text": "port",
+                  "kind": "root",
+                  "meaning": "运送"
+                }
+              ],
+              "build": "im- + port → import",
+              "note": "这里的 im- 表示向内，不是 impossible 中的否定前缀。",
+              "example": {
+                "en": "These ships import fruit.",
+                "zh": "这些船进口水果。"
+              }
+            },
+            {
+              "id": "root-port-export",
+              "en": "export",
+              "zh": "出口；输出",
+              "pos": "名词／动词",
+              "parts": [
+                {
+                  "text": "ex",
+                  "kind": "prefix",
+                  "meaning": "向外"
+                },
+                {
+                  "text": "port",
+                  "kind": "root",
+                  "meaning": "运送"
+                }
+              ],
+              "build": "ex- + port → export",
+              "note": "与 import 对照，运输的方向变成向外。",
+              "example": {
+                "en": "They export tea.",
+                "zh": "他们出口茶叶。"
+              }
+            }
+          ]
+        },
+        {
+          "id": "root-spect",
+          "form": "spect",
+          "forms": [
+            "spect"
+          ],
+          "meaning": "看；观察",
+          "origin": "拉丁语词根",
+          "hint": "从 inspect 开始，再看检查的人和检查这件事怎样表达。",
+          "sources": [
+            "khan-roots",
+            "ku-roots"
+          ],
+          "words": [
+            {
+              "id": "root-spect-inspect",
+              "en": "inspect",
+              "zh": "检查；仔细查看",
+              "pos": "动词",
+              "parts": [
+                {
+                  "text": "in",
+                  "kind": "prefix",
+                  "meaning": "向内"
+                },
+                {
+                  "text": "spect",
+                  "kind": "root",
+                  "meaning": "看"
+                }
+              ],
+              "build": "in- + spect → inspect",
+              "note": "这里的 in- 不是「不」，全词表示仔细查看。",
+              "example": {
+                "en": "Please inspect the bridge.",
+                "zh": "请检查这座桥。"
+              }
+            },
+            {
+              "id": "root-spect-inspector",
+              "en": "inspector",
+              "zh": "检查员",
+              "pos": "名词",
+              "parts": [
+                {
+                  "text": "in",
+                  "kind": "prefix",
+                  "meaning": "向内"
+                },
+                {
+                  "text": "spect",
+                  "kind": "root",
+                  "meaning": "看"
+                },
+                {
+                  "text": "or",
+                  "kind": "suffix",
+                  "meaning": "做某事的人"
+                }
+              ],
+              "build": "inspect + -or → inspector",
+              "note": "从 inspect 继续派生，-or 在这里表示做这件事的人。",
+              "example": {
+                "en": "The inspector checks the lift.",
+                "zh": "检查员检查电梯。"
+              }
+            },
+            {
+              "id": "root-spect-inspection",
+              "en": "inspection",
+              "zh": "检查",
+              "pos": "名词",
+              "parts": [
+                {
+                  "text": "in",
+                  "kind": "prefix",
+                  "meaning": "向内"
+                },
+                {
+                  "text": "spect",
+                  "kind": "root",
+                  "meaning": "看"
+                },
+                {
+                  "text": "ion",
+                  "kind": "suffix",
+                  "meaning": "行为或过程"
+                }
+              ],
+              "build": "inspect + -ion → inspection",
+              "note": "从 inspect 继续派生，表示检查这一行为。",
+              "example": {
+                "en": "The car needs an inspection.",
+                "zh": "这辆车需要一次检查。"
+              }
+            },
+            {
+              "id": "root-spect-spectator",
+              "en": "spectator",
+              "zh": "观众",
+              "pos": "名词",
+              "parts": [
+                {
+                  "text": "spect",
+                  "kind": "root",
+                  "meaning": "看"
+                },
+                {
+                  "text": "ator",
+                  "kind": "suffix",
+                  "meaning": "做某事的人"
+                }
+              ],
+              "build": "spect + -ator → spectator",
+              "note": "表示观看的人；它不一定表示参加比赛的人。",
+              "example": {
+                "en": "A spectator waved a flag.",
+                "zh": "一位观众挥了挥旗子。"
+              }
+            }
+          ]
+        },
+        {
+          "id": "root-struct",
+          "form": "struct",
+          "forms": [
+            "struct"
+          ],
+          "meaning": "建造；组织",
+          "origin": "拉丁语词根",
+          "hint": "从搭建的动作联想到建筑、结构与重建。",
+          "sources": [
+            "khan-roots",
+            "ku-roots"
+          ],
+          "words": [
+            {
+              "id": "root-struct-construct",
+              "en": "construct",
+              "zh": "建造；构建",
+              "pos": "动词",
+              "parts": [
+                {
+                  "text": "con",
+                  "kind": "prefix",
+                  "meaning": "共同或一起"
+                },
+                {
+                  "text": "struct",
+                  "kind": "root",
+                  "meaning": "建造"
+                }
+              ],
+              "build": "con- + struct → construct",
+              "note": "可以建造实物，也可以构建想法或论证。",
+              "example": {
+                "en": "They construct a model bridge.",
+                "zh": "他们搭建一座桥梁模型。"
+              }
+            },
+            {
+              "id": "root-struct-construction",
+              "en": "construction",
+              "zh": "建造；施工",
+              "pos": "名词",
+              "parts": [
+                {
+                  "text": "con",
+                  "kind": "prefix",
+                  "meaning": "共同或一起"
+                },
+                {
+                  "text": "struct",
+                  "kind": "root",
+                  "meaning": "建造"
+                },
+                {
+                  "text": "ion",
+                  "kind": "suffix",
+                  "meaning": "行为或过程"
+                }
+              ],
+              "build": "construct + -ion → construction",
+              "note": "从 construct 继续派生，表示建造的过程等。",
+              "example": {
+                "en": "The road is under construction.",
+                "zh": "这条路正在施工。"
+              }
+            },
+            {
+              "id": "root-struct-reconstruct",
+              "en": "reconstruct",
+              "zh": "重建；重现",
+              "pos": "动词",
+              "parts": [
+                {
+                  "text": "re",
+                  "kind": "prefix",
+                  "meaning": "重新"
+                },
+                {
+                  "text": "con",
+                  "kind": "prefix",
+                  "meaning": "共同或一起"
+                },
+                {
+                  "text": "struct",
+                  "kind": "root",
+                  "meaning": "建造"
+                }
+              ],
+              "build": "re- + construct → reconstruct",
+              "note": "先认识 construct，再加 re-，容易理解重新构建。",
+              "example": {
+                "en": "Scientists reconstruct the ancient animal.",
+                "zh": "科学家重建这种古代动物的形象。"
+              }
+            },
+            {
+              "id": "root-struct-structure",
+              "en": "structure",
+              "zh": "结构；构造",
+              "pos": "名词",
+              "parts": [
+                {
+                  "text": "struct",
+                  "kind": "root",
+                  "meaning": "建造或组织"
+                },
+                {
+                  "text": "ure",
+                  "kind": "suffix",
+                  "meaning": "结果或状态"
+                }
+              ],
+              "build": "struct + -ure → structure",
+              "note": "关注各部分怎样组织在一起，不只指建筑物。",
+              "example": {
+                "en": "We studied the structure of a leaf.",
+                "zh": "我们研究了一片叶子的结构。"
+              }
+            }
+          ]
+        },
+        {
+          "id": "root-dict",
+          "form": "dict",
+          "forms": [
+            "dict"
+          ],
+          "meaning": "说；讲述",
+          "origin": "拉丁语词根",
+          "hint": "从说话、口述连接到预测和反驳；注意词义会随使用发展。",
+          "sources": [
+            "khan-roots",
+            "ku-roots"
+          ],
+          "words": [
+            {
+              "id": "root-dict-predict",
+              "en": "predict",
+              "zh": "预测",
+              "pos": "动词",
+              "parts": [
+                {
+                  "text": "pre",
+                  "kind": "prefix",
+                  "meaning": "在……之前"
+                },
+                {
+                  "text": "dict",
+                  "kind": "root",
+                  "meaning": "说"
+                }
+              ],
+              "build": "pre- + dict → predict",
+              "note": "可以用「事先说出」帮助记忆，但预测需要根据证据判断。",
+              "example": {
+                "en": "Scientists predict the weather.",
+                "zh": "科学家预测天气。"
+              }
+            },
+            {
+              "id": "root-dict-prediction",
+              "en": "prediction",
+              "zh": "预测；预言",
+              "pos": "名词",
+              "parts": [
+                {
+                  "text": "pre",
+                  "kind": "prefix",
+                  "meaning": "在……之前"
+                },
+                {
+                  "text": "dict",
+                  "kind": "root",
+                  "meaning": "说"
+                },
+                {
+                  "text": "ion",
+                  "kind": "suffix",
+                  "meaning": "行为或结果"
+                }
+              ],
+              "build": "predict + -ion → prediction",
+              "note": "从 predict 继续派生，表示预测这一行为或结果。",
+              "example": {
+                "en": "Her prediction was correct.",
+                "zh": "她的预测是对的。"
+              }
+            },
+            {
+              "id": "root-dict-dictate",
+              "en": "dictate",
+              "zh": "口述；命令",
+              "pos": "动词",
+              "parts": [
+                {
+                  "text": "dict",
+                  "kind": "root",
+                  "meaning": "说"
+                },
+                {
+                  "text": "ate",
+                  "kind": "suffix",
+                  "meaning": "构成动词"
+                }
+              ],
+              "build": "dict + -ate → dictate",
+              "note": "这里先学习一个人说、另一个人记录的「口述」义。",
+              "example": {
+                "en": "Please dictate a short sentence.",
+                "zh": "请口述一个短句。"
+              }
+            },
+            {
+              "id": "root-dict-contradict",
+              "en": "contradict",
+              "zh": "反驳；与……矛盾",
+              "pos": "动词",
+              "parts": [
+                {
+                  "text": "contra",
+                  "kind": "prefix",
+                  "meaning": "相反或反对"
+                },
+                {
+                  "text": "dict",
+                  "kind": "root",
+                  "meaning": "说"
+                }
+              ],
+              "build": "contra- + dict → contradict",
+              "note": "可以是说法互相矛盾，不一定指吵架。",
+              "example": {
+                "en": "These two reports contradict each other.",
+                "zh": "这两份报告相互矛盾。"
+              }
+            }
+          ]
+        },
+        {
+          "id": "root-graph",
+          "form": "graph",
+          "forms": [
+            "graph"
+          ],
+          "meaning": "写；记录；画",
+          "origin": "希腊语词根或组合成分",
+          "hint": "观察文字、图像和记录方式之间的联系；词根含义只是理解全词的一条线索。",
+          "sources": [
+            "khan-roots",
+            "ku-roots"
+          ],
+          "words": [
+            {
+              "id": "root-graph-autograph",
+              "en": "autograph",
+              "zh": "亲笔签名",
+              "pos": "名词",
+              "parts": [
+                {
+                  "text": "auto",
+                  "kind": "prefix",
+                  "meaning": "自己"
+                },
+                {
+                  "text": "graph",
+                  "kind": "root",
+                  "meaning": "写"
+                }
+              ],
+              "build": "auto- + graph → autograph",
+              "note": "强调本人亲笔写下的签名。",
+              "example": {
+                "en": "May I have your autograph?",
+                "zh": "可以给我签个名吗？"
+              }
+            },
+            {
+              "id": "root-graph-photograph",
+              "en": "photograph",
+              "zh": "照片",
+              "pos": "名词",
+              "parts": [
+                {
+                  "text": "photo",
+                  "kind": "root",
+                  "meaning": "光"
+                },
+                {
+                  "text": "graph",
+                  "kind": "root",
+                  "meaning": "记录或画"
+                }
+              ],
+              "build": "photo- + graph → photograph",
+              "note": "可以用「用光记录图像」帮助记忆。",
+              "example": {
+                "en": "This photograph shows our school.",
+                "zh": "这张照片展示了我们的学校。"
+              }
+            },
+            {
+              "id": "root-graph-graphic",
+              "en": "graphic",
+              "zh": "图像的；图示的",
+              "pos": "形容词",
+              "parts": [
+                {
+                  "text": "graph",
+                  "kind": "root",
+                  "meaning": "画或写"
+                },
+                {
+                  "text": "ic",
+                  "kind": "suffix",
+                  "meaning": "与……有关的"
+                }
+              ],
+              "build": "graph + -ic → graphic",
+              "note": "这里取与图像有关这一义；全词还有别的用法。",
+              "example": {
+                "en": "She studies graphic design.",
+                "zh": "她学习平面设计。"
+              }
+            },
+            {
+              "id": "root-graph-biography",
+              "en": "biography",
+              "zh": "传记",
+              "pos": "名词",
+              "parts": [
+                {
+                  "text": "bio",
+                  "kind": "root",
+                  "meaning": "生命或生活"
+                },
+                {
+                  "text": "graph",
+                  "kind": "root",
+                  "meaning": "写"
+                },
+                {
+                  "text": "y",
+                  "kind": "suffix",
+                  "meaning": "构成名词"
+                }
+              ],
+              "build": "bio- + graph + -y → biography",
+              "note": "记录一个人的生平；也能到 bio 家族继续观察。",
+              "example": {
+                "en": "I read a biography of a scientist.",
+                "zh": "我读了一位科学家的传记。"
+              }
+            }
+          ]
+        },
+        {
+          "id": "root-phon",
+          "form": "phon／phone",
+          "forms": [
+            "phon",
+            "phone"
+          ],
+          "meaning": "声音",
+          "origin": "希腊语词根或组合成分",
+          "hint": "这一家族的拼写有 phon 和 phone 两种展示形式，围绕声音理解。",
+          "sources": [
+            "khan-roots",
+            "ku-roots"
+          ],
+          "words": [
+            {
+              "id": "root-phon-telephone",
+              "en": "telephone",
+              "zh": "电话",
+              "pos": "名词",
+              "parts": [
+                {
+                  "text": "tele",
+                  "kind": "root",
+                  "meaning": "远距离"
+                },
+                {
+                  "text": "phone",
+                  "kind": "root",
+                  "meaning": "声音"
+                }
+              ],
+              "build": "tele- + phone → telephone",
+              "note": "远距离传递声音；phone 在这里作为声音这一构词成分。",
+              "example": {
+                "en": "The telephone rang.",
+                "zh": "电话铃响了。"
+              }
+            },
+            {
+              "id": "root-phon-microphone",
+              "en": "microphone",
+              "zh": "麦克风；传声器",
+              "pos": "名词",
+              "parts": [
+                {
+                  "text": "micro",
+                  "kind": "root",
+                  "meaning": "微小"
+                },
+                {
+                  "text": "phone",
+                  "kind": "root",
+                  "meaning": "声音"
+                }
+              ],
+              "build": "micro- + phone → microphone",
+              "note": "它把声音转换为信号；micro- 的意义不能直接当成完整科学解释。",
+              "example": {
+                "en": "Please speak into the microphone.",
+                "zh": "请对着麦克风讲话。"
+              }
+            },
+            {
+              "id": "root-phon-phonics",
+              "en": "phonics",
+              "zh": "自然拼读；字母与读音关系的教学法",
+              "pos": "名词",
+              "parts": [
+                {
+                  "text": "phon",
+                  "kind": "root",
+                  "meaning": "声音"
+                },
+                {
+                  "text": "ics",
+                  "kind": "suffix",
+                  "meaning": "相关方法或学科"
+                }
+              ],
+              "build": "phon + -ics → phonics",
+              "note": "学习字母或字母组合与语音之间的联系，不是把每个字母永远读成同一个音。",
+              "example": {
+                "en": "We practise phonics at school.",
+                "zh": "我们在学校练习自然拼读。"
+              }
+            },
+            {
+              "id": "root-phon-phonograph",
+              "en": "phonograph",
+              "zh": "留声机",
+              "pos": "名词",
+              "parts": [
+                {
+                  "text": "phon",
+                  "kind": "root",
+                  "meaning": "声音"
+                },
+                {
+                  "text": "o",
+                  "kind": "component",
+                  "meaning": "连接元音"
+                },
+                {
+                  "text": "graph",
+                  "kind": "root",
+                  "meaning": "记录"
+                }
+              ],
+              "build": "phon + o + graph → phonograph",
+              "note": "中间的 o 起连接作用，不单独解释成一个意思。",
+              "example": {
+                "en": "The museum has an old phonograph.",
+                "zh": "博物馆里有一台老留声机。"
+              }
+            }
+          ]
+        },
+        {
+          "id": "root-tele",
+          "form": "tele-",
+          "forms": [
+            "tele"
+          ],
+          "meaning": "远；远距离",
+          "origin": "希腊语组合成分",
+          "hint": "它能与不同构词成分相接，连接声音、观看、图像与通信。",
+          "sources": [
+            "khan-roots",
+            "ku-roots"
+          ],
+          "words": [
+            {
+              "id": "root-tele-telephone",
+              "en": "telephone",
+              "zh": "电话",
+              "pos": "名词",
+              "parts": [
+                {
+                  "text": "tele",
+                  "kind": "root",
+                  "meaning": "远距离"
+                },
+                {
+                  "text": "phone",
+                  "kind": "root",
+                  "meaning": "声音"
+                }
+              ],
+              "build": "tele- + phone → telephone",
+              "note": "同一个词也属于 phon 家族；不同枝干关注的成分不同。",
+              "example": {
+                "en": "We talked on the telephone.",
+                "zh": "我们通过电话交谈。"
+              }
+            },
+            {
+              "id": "root-tele-telescope",
+              "en": "telescope",
+              "zh": "望远镜",
+              "pos": "名词",
+              "parts": [
+                {
+                  "text": "tele",
+                  "kind": "root",
+                  "meaning": "远距离"
+                },
+                {
+                  "text": "scope",
+                  "kind": "root",
+                  "meaning": "观看的仪器"
+                }
+              ],
+              "build": "tele- + scope → telescope",
+              "note": "利用远与看的线索记住名称，工作原理还需要光学知识。",
+              "example": {
+                "en": "We looked through a telescope.",
+                "zh": "我们透过望远镜观察。"
+              }
+            },
+            {
+              "id": "root-tele-television",
+              "en": "television",
+              "zh": "电视",
+              "pos": "名词",
+              "parts": [
+                {
+                  "text": "tele",
+                  "kind": "root",
+                  "meaning": "远距离"
+                },
+                {
+                  "text": "vis",
+                  "kind": "root",
+                  "meaning": "看"
+                },
+                {
+                  "text": "ion",
+                  "kind": "suffix",
+                  "meaning": "行为或结果"
+                }
+              ],
+              "build": "tele- + vision → television",
+              "note": "可以先认出 vision，再认识其中与「看」有关的 vis。",
+              "example": {
+                "en": "The news is on television.",
+                "zh": "电视正在播新闻。"
+              }
+            },
+            {
+              "id": "root-tele-telegraph",
+              "en": "telegraph",
+              "zh": "电报；电报机",
+              "pos": "名词",
+              "parts": [
+                {
+                  "text": "tele",
+                  "kind": "root",
+                  "meaning": "远距离"
+                },
+                {
+                  "text": "graph",
+                  "kind": "root",
+                  "meaning": "记录或写"
+                }
+              ],
+              "build": "tele- + graph → telegraph",
+              "note": "名称提示远距离传递文字信息；电报不等同于电话。",
+              "example": {
+                "en": "The telegraph changed communication.",
+                "zh": "电报改变了通信方式。"
+              }
+            }
+          ]
+        },
+        {
+          "id": "root-bio",
+          "form": "bio-",
+          "forms": [
+            "bio"
+          ],
+          "meaning": "生命；生物；生平",
+          "origin": "希腊语组合成分",
+          "hint": "可连接生物学、传记与地球上的生命环境，同一个成分会进入不同学科。",
+          "sources": [
+            "khan-roots",
+            "ku-roots"
+          ],
+          "words": [
+            {
+              "id": "root-bio-biology",
+              "en": "biology",
+              "zh": "生物学",
+              "pos": "名词",
+              "parts": [
+                {
+                  "text": "bio",
+                  "kind": "root",
+                  "meaning": "生命或生物"
+                },
+                {
+                  "text": "logy",
+                  "kind": "component",
+                  "meaning": "研究或学科"
+                }
+              ],
+              "build": "bio- + -logy → biology",
+              "note": "研究生命与生物的学科；-logy 是常见学科名称构词成分。",
+              "example": {
+                "en": "Biology is the study of life.",
+                "zh": "生物学研究生命。"
+              }
+            },
+            {
+              "id": "root-bio-biography",
+              "en": "biography",
+              "zh": "传记",
+              "pos": "名词",
+              "parts": [
+                {
+                  "text": "bio",
+                  "kind": "root",
+                  "meaning": "生平或生活"
+                },
+                {
+                  "text": "graph",
+                  "kind": "root",
+                  "meaning": "写"
+                },
+                {
+                  "text": "y",
+                  "kind": "suffix",
+                  "meaning": "构成名词"
+                }
+              ],
+              "build": "bio- + graph + -y → biography",
+              "note": "这里侧重人的生平，不把 bio- 一律译成某种具体生物。",
+              "example": {
+                "en": "This biography describes her childhood.",
+                "zh": "这本传记描述了她的童年。"
+              }
+            },
+            {
+              "id": "root-bio-biologist",
+              "en": "biologist",
+              "zh": "生物学家",
+              "pos": "名词",
+              "parts": [
+                {
+                  "text": "bio",
+                  "kind": "root",
+                  "meaning": "生命或生物"
+                },
+                {
+                  "text": "log",
+                  "kind": "root",
+                  "meaning": "研究"
+                },
+                {
+                  "text": "ist",
+                  "kind": "suffix",
+                  "meaning": "从事相关工作的人"
+                }
+              ],
+              "build": "bio- + log + -ist → biologist",
+              "note": "与 biology 同属一个学科词族；不要机械写成 biologyist。",
+              "example": {
+                "en": "The biologist studies insects.",
+                "zh": "这位生物学家研究昆虫。"
+              }
+            },
+            {
+              "id": "root-bio-biosphere",
+              "en": "biosphere",
+              "zh": "生物圈",
+              "pos": "名词",
+              "parts": [
+                {
+                  "text": "bio",
+                  "kind": "root",
+                  "meaning": "生命或生物"
+                },
+                {
+                  "text": "sphere",
+                  "kind": "root",
+                  "meaning": "圈或领域"
+                }
+              ],
+              "build": "bio- + sphere → biosphere",
+              "note": "指地球上生命存在和活动的范围，不是一个实心球体。",
+              "example": {
+                "en": "The biosphere includes many ecosystems.",
+                "zh": "生物圈包含许多生态系统。"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

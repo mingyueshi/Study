@@ -15,6 +15,9 @@
   const sceneUrl = shell.dataset.sceneUrl;
   const dictUrl = shell.dataset.dictUrl || '/dictionary/';
   const outline = board.querySelector('[data-tree-outline]') || board;
+  const morphPayload = document.getElementById('word-morphology-data');
+  const morphology = morphPayload ? JSON.parse(morphPayload.textContent) : {entries: [], families: []};
+  const morphEntries = new Map(morphology.entries.map(word => [word.morph_id, word]));
 
   const el = (tag, className, text) => {
     const node = document.createElement(tag);
@@ -51,11 +54,18 @@
     scene: chip.dataset.scene || '',
     status: chip.dataset.status || '',
     ending: chip.dataset.ending || '',
+    morphId: chip.dataset.morphId || '',
   });
 
-  const addSpelling = (node, { en, ending }) => {
+  const addSpelling = (node, { en, ending, morphId }) => {
     node.lang = 'en';
-    if (ending) node.append(en.slice(0, -ending.length), el('span', 'tree-word-ending', ending));
+    const word = morphEntries.get(morphId);
+    if (word) word.parts.forEach(part => {
+      const segment = el('span', `morph-part morph-part-${part.kind}${part.focus ? ' morph-part-focus' : ''}`, part.text);
+      segment.title = part.meaning;
+      node.append(segment);
+    });
+    else if (ending) node.append(en.slice(0, -ending.length), el('span', 'tree-word-ending', ending));
     else node.textContent = en;
   };
 
@@ -85,10 +95,10 @@
   // 词 chip 所在枝干（li.tree-branch）；根直属词返回 null
   const containingBranch = (chip) => chip.closest('.tree-branch');
 
-  const markOn = (en) => {
+  const markOn = (en, morphId = '') => {
     const low = en.toLowerCase();
     board.querySelectorAll('.tree-word').forEach((chip) => {
-      chip.classList.toggle('on', (chip.dataset.en || '').toLowerCase() === low);
+      chip.classList.toggle('on', morphId ? chip.dataset.morphId === morphId : (chip.dataset.en || '').toLowerCase() === low);
     });
   };
 
@@ -111,15 +121,15 @@
     const groups = [];
     const own = branchLi ? ownChips(branchLi.querySelector('details')) : rootOwnChips();
     const active = branchLi?.querySelector('summary')?.dataset;
-    if (own.length) groups.push({ title: active?.branchIpa ? active.branchZh : '本级', ipa: active?.branchIpa, chips: own });
+    if (own.length) groups.push({ title: active?.branchIpa || active?.branchMeaning ? active.branchZh : '本级', ipa: active?.branchIpa, meaning: active?.branchMeaning, chips: own });
     const lis = branchLi
       ? branchLi.querySelectorAll(':scope > details > ul.tree-nodes > li.tree-branch')
       : outline.querySelectorAll(':scope > .tree-nodes > li.tree-branch');
     lis.forEach((li) => {
       const chips = subtreeChips(li.querySelector('details'));
       if (chips.length) {
-        const { branchZh, branchIpa } = li.querySelector('summary').dataset;
-        groups.push({ title: branchZh, ipa: branchIpa, chips });
+        const { branchZh, branchIpa, branchMeaning } = li.querySelector('summary').dataset;
+        groups.push({ title: branchZh, ipa: branchIpa, meaning: branchMeaning, chips });
       }
     });
     return groups;
@@ -164,6 +174,7 @@
       const head = el('p', 'tree-wall-group-title');
       head.append(el('span', '', group.title));
       if (group.ipa) head.append(el('i', 'tree-family-sound', group.ipa));
+      if (group.meaning) head.append(el('span', 'morph-wall-meaning', group.meaning));
       head.append(el('i', '', `${group.chips.length} 词`));
       const chips = el('div', 'tree-wall-words');
       group.chips.forEach((source) => chips.append(wallEntry(source)));
@@ -190,6 +201,70 @@
   };
 
   /* —— 词卡 —— */
+  const morphLink = (label, query) => {
+    const link = el('a', 'morph-related-link', label);
+    link.href = `?root=morphology&${query}`;
+    return link;
+  };
+  const renderMorphology = (word) => {
+    const section = el('section', 'morph-analysis');
+    section.setAttribute('aria-label', '构词解析');
+    const family = el('p', 'morph-family-label', `${word.family_form} · ${word.family_meaning}`);
+    family.append(el('span', '', word.pos));
+    const build = el('p', 'morph-build', word.build);
+    build.lang = 'en';
+    const parts = el('dl', 'morph-parts-list');
+    word.parts.forEach(part => {
+      const row = el('div');
+      const term = el('dt', `morph-part-${part.kind}`, part.text);
+      term.lang = 'en';
+      row.append(term, el('dd', '', part.meaning));
+      parts.append(row);
+    });
+    const example = el('blockquote', 'morph-example');
+    const sentence = el('p', '', word.example.en);
+    sentence.lang = 'en';
+    const say = sayButton(word.example.en, 'say-chip morph-example-say');
+    say.textContent = '🔊 读例句';
+    say.setAttribute('aria-label', '朗读例句');
+    example.append(sentence, el('p', '', word.example.zh), say);
+    const siblings = el('nav', 'morph-related');
+    siblings.setAttribute('aria-label', '同一家族的派生词');
+    siblings.append(el('b', '', '这一家族'));
+    morphology.entries.filter(entry => entry.family_id === word.family_id && entry.morph_id !== word.morph_id)
+      .forEach(entry => siblings.append(morphLink(entry.en, `entry=${encodeURIComponent(entry.morph_id)}`)));
+    const related = morphology.families.filter(family => family.id !== word.family_id
+      && word.parts.some(part => part.kind === family.kind && family.forms.includes(part.text)));
+    section.append(family, build, parts, el('p', 'morph-word-note', word.note), example, siblings);
+    if (related.length) {
+      const links = el('nav', 'morph-related');
+      links.setAttribute('aria-label', '关联构词成分');
+      links.append(el('b', '', '继续看这些成分'));
+      related.forEach(family => links.append(morphLink(`${family.form} · ${family.meaning}`, `branch=${encodeURIComponent(family.id)}`)));
+      section.append(links);
+    }
+    const sources = el('details', 'morph-word-sources');
+    sources.append(el('summary', '', '本家族参考资料（需联网）'));
+    const list = el('ul');
+    word.sources.forEach(source => {
+      const item = el('li');
+      const link = el('a', '', `${source.title} ↗`);
+      link.href = source.url;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      item.append(link);
+      list.append(item);
+    });
+    sources.append(list);
+    section.append(sources);
+    return section;
+  };
+  const revealMorphPanel = () => {
+    const selector = shell.dataset.slMode === 'compact'
+      ? '.sl-toggle:not(.sl-collapse)[aria-expanded="false"]'
+      : '.sl-collapse[aria-expanded="false"]';
+    shell.querySelector(selector)?.click();
+  };
   const renderCard = (data) => {
     const card = el('article', 'tree-word-card');
     card.append(el('p', 'tree-word-emoji', data.emoji || '🔤'));
@@ -200,6 +275,8 @@
     card.append(headline);
     if (data.ipa) card.append(el('p', 'tree-word-ipa', data.ipa));
     if (data.zh) card.append(el('p', 'tree-word-zh', data.zh));
+    const morphWord = morphEntries.get(data.morphId);
+    if (morphWord) card.append(renderMorphology(morphWord));
     if (data.scene) card.append(el('p', 'tree-word-scene', `场景：${data.scene}`));
     if (data.status && data.status !== '来源一致') {
       card.append(el('p', 'tree-word-status', data.status));
@@ -217,8 +294,9 @@
     actions.append(dict, back);
     card.append(actions);
     panel.replaceChildren(card);
-    markOn(data.en);
-    setUrl(`root=${encodeURIComponent(rootKey)}&word=${encodeURIComponent(data.en)}`);
+    if (morphWord) revealMorphPanel();
+    markOn(data.en, data.morphId);
+    setUrl(`root=${encodeURIComponent(rootKey)}&${data.morphId ? 'entry=' + encodeURIComponent(data.morphId) : 'word=' + encodeURIComponent(data.en)}`);
     back.addEventListener('click', () => renderWall(wallBranch));
     panel.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
   };
@@ -253,13 +331,18 @@
   const params = new URLSearchParams(location.search);
   const onChip = board.querySelector('.tree-word.on');
   if (onChip) {
-    onChip.scrollIntoView({ block: 'center' });
     wallBranch = containingBranch(onChip);
+    if (onChip.dataset.morphId) renderCard(chipData(onChip));
+    onChip.scrollIntoView({ block: 'center' });
     const back = panel.querySelector('.tree-back');
-    if (back) {
+    if (back && !onChip.dataset.morphId) {
       back.hidden = false;
       back.addEventListener('click', () => renderWall(wallBranch));
     }
+    if (onChip.dataset.morphId) document.addEventListener('DOMContentLoaded', () => {
+      revealMorphPanel();
+      panel.scrollIntoView({block: 'nearest'});
+    }, {once: true});
   } else {
     const branchLi = params.get('branch')
       ? document.getElementById(params.get('branch'))

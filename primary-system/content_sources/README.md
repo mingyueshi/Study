@@ -15,6 +15,7 @@
 | 病句医院、错别字诊所 | `chinese-clinics.json`（病例、句子和辨析提示），形近字与多音字候选来自四上教材的 `knowledge-data.js` | 病例由 Django 直接读取。改教材字词后运行 `make chinesebook-data`，再运行 `.venv/bin/python manage.py test chinesebook.test_clinics` |
 | 场景单词导入来源 | `words-data.js` | `node scripts/export_words_scenario.cjs`，默认导出到 `data/words-scenario.json` |
 | 词以类聚 · 拼写家族 | `word-families.json`（词尾、例词、音标和释义） | Django 直接读取。改后运行 `.venv/bin/python manage.py test words.test_tree` |
+| 词以类聚 · 词根词缀树 | `word-morphology.json`（前缀、后缀、词根家族、拆分、拼写说明、双语例句与出处） | Django 直接读取并校验，无需生成或入库。保留家族及例词 ID，修改后运行 `.venv/bin/python manage.py test words.test_morphology words.test_tree` |
 | 教材练习 | 与教材共用语数英数据 | `make questionbank-data` |
 | 历史、地理 | `history/`、`history-timeline/`、`geo/`、`geo-map/` | `make study-topics-data` |
 | 天文、文学、科学 | `astro-*`、`lit-*`、`sci-*` 及 `images/` | `make study-topics-data` |

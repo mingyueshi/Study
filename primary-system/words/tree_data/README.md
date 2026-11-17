@@ -50,3 +50,31 @@
 当前练习中计数，同一张反复翻转不会累加；切换家族或全部翻回后重新计数，不写学习记录。
 右栏提供拼读提示，点击「看词卡」才显示该词释义。可切回「词尾目录」，学习方式记在
 `words_family_view_v1`。前端从服务端已渲染的例词读取数据，不维护第二份词表。
+
+## 词根词缀树
+
+第三种关系是构词联系，入口为 `/words/tree/?root=morphology`。内容源为
+[`content_sources/word-morphology.json`](../../content_sources/word-morphology.json)，
+由 `words/morphology.py` 直接读取与校验，不依赖数据库，不从 WordNet 推断构词。
+首批前缀、后缀和词根各 8 个家族，共 24 个家族、96 条家族例词，覆盖 94 个不同单词。
+telephone、biography 分别出现在两个家族中，各自用不同稳定 ID 保留所关注的构词成分。
+
+- 分类深链接：`/words/tree/?root=morphology&branch=morph-prefix`
+- 家族深链接：`/words/tree/?branch=morph-suffix-ness`
+- 例词深链接：`/words/tree/?root=morphology&entry=root-tele-telephone`
+- 普通拼写查询：`/words/tree/?root=morphology&word=happiness`，同形词默认命中源文件顺序中的第一个家族；要固定某个家族请用 `entry`。
+
+源文件记录资料出处、学习步骤和使用边界，分类下维护 `families`。每个家族的
+`forms` 指定本家族可识别的实际拼写（例如 phon、phone）；例词的 `parts` 分别记录
+`text`、`kind`、`meaning`。`kind` 可为前缀、后缀、词根、词基或其他构词组成部分，
+对应 `prefix`、`suffix`、`root`、`base`、`component`。各段必须恰好拼回整个单词；
+前后缀位置、本家族成分、双语例句的目标词、稳定 ID 与出处引用均经过校验。
+
+`build` 展示构词式，`note` 解释具体词义、拼写变化与不能机械套用的条件，`example`
+记录自编双语例句。-ion 与拼写结尾 -tion、同形前缀的不同意思、连接元音和希腊语
+组合成分均单独说明，不把相同字母自动认作同一个语素。新增词时先核对词典与构词资料，
+不只检查字母能否拼合。页面用完整词与例句点读，不把构词切分当作音节或发音切分。
+
+修改后运行 `.venv/bin/python manage.py test words.test_morphology words.test_tree`，
+并核对首页、分类、家族与例词深链接，以及原有词义树和拼写家族入口。这里没有生成命令；
+改内容源后需要让服务重新加载其缓存。新增交互复用 `tree.js`、`tree.css` 与共用侧栏。

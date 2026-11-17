@@ -11,7 +11,7 @@
 .tree-hero-copy .eyebrow { margin-bottom: 6px; }
 .tree-hero-copy h1 { margin: 0 0 8px; font-size: clamp(32px, 3.6vw, 44px); }
 .tree-hero-tag { margin: 0 0 18px; color: var(--muted, #586b62); font-size: 17px; line-height: 1.7; }
-.tree-modes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.tree-modes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
 .tree-modes a {
   display: flex;
   align-items: center;
@@ -199,3 +199,55 @@
 }
 @media (prefers-reduced-motion: reduce) { .family-memory-face { transition: none; } }
 html[data-study-motion="gentle"] .family-memory-face, html[data-study-motion="off"] .family-memory-face { transition: none; }
+
+/* 构词关系独立于 WordNet 分类；颜色区分前缀、词根、词基和后缀。 */
+.morph-intro { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(240px, 1fr); gap: 12px 28px; margin: 0 0 18px; padding: 22px 26px; border: 1px solid #d2c5ef; border-radius: 22px; background: linear-gradient(120deg, #f5efff, #edf5ff); }
+.morph-intro h2 { margin: 6px 0 10px; font-size: 27px; }
+.morph-intro p, .morph-intro li { font-size: 17px; line-height: 1.8; }
+.morph-intro ol { align-self: center; margin: 0; padding-left: 26px; }
+.morph-legend { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 8px; }
+.morph-legend span { padding: 4px 10px; border-radius: 8px; font-size: 15px; font-weight: 700; }
+.morph-intro-note { grid-column: 1 / -1; margin: 0; padding-top: 12px; border-top: 1px dashed #cec1e4; color: #66517e; }
+.morph-categories { background: #f8f4ff; border-color: #ded2ef; }
+.morph-branch-meaning { display: block; margin-top: 4px; color: #63517d; font-size: 16px; font-weight: 600; }
+.morph-branch-hint { margin: 10px 0 12px 8px; color: var(--muted); font-size: 16px; line-height: 1.8; overflow-wrap: anywhere; }
+.tree-shell-morphology .tree-branch-name > .muted { display: inline-block; margin: 6px 0 0; }
+.tree-shell-morphology .tree-diagram > .tree-nodes { align-items: start; }
+.tree-shell-morphology .tree-diagram .tree-node-words { margin-left: 8px; padding-left: 8px; }
+.tree-shell-morphology .tree-diagram .tree-word { padding: 7px 10px; font-size: 19px; }
+.tree-shell-morphology .tree-word { overflow-wrap: anywhere; }
+.morph-part { border-radius: .16em; }
+.morph-part-prefix { background: #e7e0ff; color: #634699; }
+.morph-part-suffix { background: #ffead3; color: #9a541e; }
+.morph-part-root { background: #daf1e8; color: #236753; }
+.morph-part-base { color: #2d405d; }
+.morph-part-component { background: #eaf0f6; color: #556677; }
+.morph-part-focus { box-shadow: 0 2px 0 currentColor; font-weight: 850; }
+.tree-word.on .morph-part { color: inherit; background: transparent; }
+.tree-shell-morphology .tree-word-headline b { min-width: 0; font-size: clamp(27px, 2.8vw, 38px); overflow-wrap: anywhere; }
+.morph-analysis { margin-top: 18px; text-align: left; }
+.morph-family-label { margin: 0 0 12px; color: #66517e; font-size: 17px; font-weight: 750; }
+.morph-family-label > span { display: block; margin-top: 6px; color: var(--muted); font-size: 15px; font-weight: 500; }
+.morph-build { margin: 0 0 16px; padding: 12px 14px; border-radius: 14px; background: #f3ecff; color: #533e79; font-size: 21px; font-weight: 800; line-height: 1.7; overflow-wrap: anywhere; }
+.morph-parts-list { display: grid; gap: 8px; margin: 0; }
+.morph-parts-list > div { display: grid; grid-template-columns: minmax(65px, auto) minmax(0, 1fr); align-items: baseline; gap: 12px; padding: 8px 0; border-bottom: 1px solid var(--line); }
+.morph-parts-list dt { padding: 2px 6px; border-radius: 6px; font-size: 20px; font-weight: 800; overflow-wrap: anywhere; }
+.morph-parts-list dd { margin: 0; font-size: 17px; line-height: 1.6; overflow-wrap: anywhere; }
+.morph-word-note { color: #66517e; font-size: 16px; line-height: 1.8; }
+.morph-example { margin: 16px 0; padding: 14px; border-left: 4px solid #8eaecf; border-radius: 0 14px 14px 0; background: #f0f6fd; }
+.morph-example p { margin: 0 0 8px; font-size: 17px; line-height: 1.8; overflow-wrap: anywhere; }
+.morph-example [lang="en"] { font-size: 20px; font-weight: 650; }
+.morph-example .say-chip { display: inline-flex; width: auto; min-height: 44px; padding: 8px 12px; font-size: 16px; }
+.morph-related { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 18px 0; }
+.morph-related > b { flex-basis: 100%; font-size: 16px; }
+.morph-related-link { max-width: 100%; padding: 6px 10px; border: 1px solid #d4c7e5; border-radius: 10px; background: #faf6ff; font-size: 16px; overflow-wrap: anywhere; }
+.morph-word-sources { margin-top: 18px; padding-top: 12px; border-top: 1px dashed var(--line); font-size: 14px; }
+.morph-word-sources summary, .morph-sources summary { cursor: pointer; font-weight: 700; }
+.morph-word-sources ul, .morph-sources ul { padding-left: 20px; line-height: 1.9; }
+.morph-word-sources a { overflow-wrap: anywhere; }
+.morph-sources { margin: 22px 0; padding: 16px 20px; border: 1px solid var(--line); border-radius: 16px; font-size: 16px; line-height: 1.8; }
+.morph-wall-meaning { font-size: 15px; font-weight: 500; color: #66517e; }
+.tree-wall-group-title { flex-wrap: wrap; }
+@media (max-width: 900px) { .morph-intro { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 820px) { .tree-modes { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 560px) { .morph-intro { padding: 18px 16px; } }
