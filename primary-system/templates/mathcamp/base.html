@@ -1,0 +1,13 @@
+{% extends 'base.html' %}{% load static %}
+{% block title %}{% if track %}{{ track.title }} · {% endif %}数学思维训练营 · 乐学堂{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'mathcamp/camp.css' %}?v=1">
+<div class="math-camp{% if track %} mc-track-{{ track.id }}{% endif %}" data-mc-app data-scope="{{ camp_scope }}">
+  <nav class="mc-crumb" aria-label="数学专题导航"><a href="{% url 'home' %}?area=math#modules-title">← 学习广场 · 数学</a>{% if track %}<a href="{% url 'math-camp' %}">训练营 · 五条路线</a>{% endif %}<a href="{% url 'math-beauty' %}">数学之美 ↗</a><a href="{% url 'questionbank-olympiad' %}">奥数挑战 ↗</a></nav>
+  {% block mc_content %}{% endblock %}
+  <p class="mc-storage-note" data-mc-storage role="status">完成标记只保存在当前浏览器，学习账号与游客分别保存；不计入积分或账号学习足迹。</p>
+  <noscript><p class="mc-note">当前未启用脚本，仍可阅读方法、题设和线索，在纸上作答，再逐条展开提示或答案。启用脚本后可在页面填写、检查并保存完成标记。</p></noscript>
+</div>
+{{ data|json_script:'mc-data' }}
+<script src="{% static 'mathcamp/engine.js' %}?v=1" defer></script><script src="{% static 'mathcamp/camp.js' %}?v=1" defer></script>
+{% endblock %}

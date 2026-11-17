@@ -1,0 +1,22 @@
+<section class="mc-drill" id="drill-{{ drill.id }}" data-mc-drill="{{ drill.id }}" aria-labelledby="title-{{ drill.id }}">
+  <header><div class="mc-drill-top"><span class="mc-level">0{{ drill.level }} · {{ drill.level_name }}</span><span class="mc-completion" data-mc-completion="{{ drill.id }}">待探索</span></div><h2 id="title-{{ drill.id }}">{{ drill.title }}</h2><p class="mc-goal">练什么：{{ drill.goal }}</p><p>{{ drill.prompt }}</p></header>
+  <div class="mc-play-area">
+    <div class="mc-puzzle">
+      {% if drill.kind == 'logic' %}
+      <ul class="mc-clues">{% for clue in drill.puzzle.constraints %}<li data-mc-clue="{{ forloop.counter0 }}">{{ clue.text }}</li>{% endfor %}</ul>
+      <div class="mc-matching">{% for label in drill.puzzle.labels %}<label for="mc-{{ drill.id }}-{{ forloop.counter0 }}"><b>{{ label }}</b><select id="mc-{{ drill.id }}-{{ forloop.counter0 }}" data-mc-input disabled><option value="">请选择</option>{% for choice in drill.puzzle.choices %}<option value="{{ forloop.counter0 }}">{{ choice }}</option>{% endfor %}</select></label>{% endfor %}</div>
+      {% elif drill.kind == 'sudoku' or drill.kind == 'magic' %}
+      <div class="mc-board mc-board-{{ drill.puzzle.size }}" style="--mc-size:{{ drill.puzzle.size }}" role="group" aria-label="{{ drill.title }}棋盘">{% for cell in drill.cells %}<div class="mc-cell{% if cell.value %} is-given{% endif %}{% if cell.right %} box-right{% endif %}{% if cell.bottom %} box-bottom{% endif %}"><input type="text" inputmode="numeric" autocomplete="off" spellcheck="false" aria-label="第 {{ cell.row }} 行第 {{ cell.col }} 列{% if cell.value %}，题设{% endif %}" aria-describedby="help-{{ drill.id }}" data-mc-input data-index="{{ cell.index }}"{% if cell.value %} value="{{ cell.value }}" readonly data-mc-given{% else %} placeholder="·"{% endif %} disabled><small data-mc-candidate hidden></small></div>{% endfor %}</div>
+      <p class="mc-note" id="help-{{ drill.id }}">可点击空格输入数字，Backspace 或 Delete 擦除。深色背景为题设。{% if drill.kind == 'sudoku' %}粗线分隔每个宫；候选数只代表目前没有被行、列、宫直接排除的数。{% endif %}</p>
+      {% if drill.kind == 'sudoku' %}<label class="mc-candidate-toggle" data-mc-enhanced hidden><input type="checkbox" data-mc-candidates> 显示候选数</label>{% endif %}
+      <div class="mc-line-totals" data-mc-totals hidden aria-label="幻方各条线的和"></div>
+      {% else %}
+      {% if drill.kind == 'sequence' %}<div class="mc-sequence" aria-label="已知项">{% for value in drill.puzzle.shown %}<span>{{ value }}</span>{% endfor %}<span class="is-unknown">?</span><span class="is-unknown">?</span></div><p class="mc-rule">{{ drill.puzzle.rule }}</p><div class="mc-number-answers"><label for="mc-{{ drill.id }}-0">下一项<input id="mc-{{ drill.id }}-0" type="text" inputmode="numeric" autocomplete="off" data-mc-input disabled></label><label for="mc-{{ drill.id }}-1">再下一项<input id="mc-{{ drill.id }}-1" type="text" inputmode="numeric" autocomplete="off" data-mc-input disabled></label></div>
+      {% else %}<div class="mc-number-answers"><label for="mc-{{ drill.id }}-0">我的计算结果<input id="mc-{{ drill.id }}-0" type="text" inputmode="numeric" autocomplete="off" data-mc-input disabled></label></div>{% endif %}
+      {% endif %}
+      <div class="mc-actions" data-mc-enhanced hidden><button type="button" data-mc-check>检查答案</button><button type="button" data-mc-reset>重填本题</button></div>
+      <p class="mc-feedback" data-mc-feedback role="status" hidden></p>
+    </div>
+    <div class="mc-support"><div class="mc-hints"><h3>卡住了？只看下一步</h3><p class="mc-note">先试着想一想，再展开一条提示。</p><div data-mc-hint-list aria-live="polite"></div><button type="button" data-mc-hint data-mc-enhanced hidden>看第 1 步提示</button><noscript>{% for hint in drill.hints %}<details><summary>第 {{ forloop.counter }} 步提示</summary><p>{{ hint }}</p></details>{% endfor %}</noscript></div><details class="mc-answer" data-mc-answer><summary>查看答案与完整讲解</summary><p class="mc-answer-value">{{ drill.answer_text }}</p>{% for paragraph in drill.explanation %}<p>{{ paragraph }}</p>{% endfor %}</details><div class="mc-reflection"><h3>做完，再多想一步</h3><p>{{ drill.reflection }}</p></div></div>
+  </div>
+</section>

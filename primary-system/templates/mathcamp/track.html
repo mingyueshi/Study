@@ -1,0 +1,15 @@
+{% extends 'mathcamp/base.html' %}
+{% block mc_content %}
+<header class="mc-hero mc-track-{{ track.id }}"><div><p class="mc-eyebrow">数学思维训练营 · 第 0{{ number }} 条路线</p><h1>{{ track.title }}</h1><p class="mc-lead">{{ track.lead }}</p><p><b>需要的基础：</b>{{ track.foundation }}</p><p data-mc-track-progress="{{ track.id }}">入门 → 进阶 → 挑战</p></div><span class="mc-hero-symbol" aria-hidden="true">{{ track.symbol }}</span></header>
+<div class="mc-workspace" data-sidebar-layout=".mc-side" data-sidebar-width="300px" data-sidebar-breakpoint="1050" data-sidebar-label="训练路线">
+<div class="mc-main">
+  <section class="mc-section" id="methods"><p class="mc-eyebrow">先备好工具</p><h2>三种方法，三个小例子</h2><div class="mc-method-grid">{% for method in track.methods %}<article><span class="mc-step-number">0{{ forloop.counter }}</span><h3>{{ method.title }}</h3><p><b>什么时候用：</b>{{ method.when }}</p><p class="mc-example">{{ method.example }}</p><ol>{% for step in method.steps %}<li>{{ step }}</li>{% endfor %}</ol></article>{% endfor %}</div></section>
+  <section class="mc-section mc-habits" id="habits"><h2>先约定三个好习惯</h2><ul>{% for habit in track.habits %}<li>{{ habit }}</li>{% endfor %}</ul></section>
+  {% for drill in drills %}{% include 'mathcamp/drill.html' %}{% endfor %}
+  <section class="mc-section" id="transfer"><h2>把方法带走</h2><p>{{ track.transfer }}</p><div class="mc-links"><a href="{% url 'questionbank-olympiad' %}">继续奥数挑战 ↗</a><a href="{% url 'math-beauty' %}">从数学之美找联系 ↗</a></div></section>
+  <section class="mc-section mc-sources" id="sources"><h2>资料与延伸阅读</h2><p>方法参考以下资料，训练题为本站编排。基础内容无需外部资源；资料原文需联网。</p><ul>{% for source in track.sources %}<li><a href="{{ source.url }}" target="_blank" rel="noopener noreferrer">{{ source.title }} ↗</a></li>{% endfor %}</ul></section>
+  <nav class="mc-pager" aria-label="前后训练路线">{% if previous %}<a href="{% url 'math-camp-track' previous.id %}">← {{ previous.title }}</a>{% endif %}<a href="{% url 'math-camp' %}">返回训练营</a>{% if next %}<a href="{% url 'math-camp-track' next.id %}">{{ next.title }} →</a>{% endif %}</nav>
+</div>
+<aside class="mc-side" aria-label="训练路线"><p class="mc-eyebrow">数学思维训练营</p><nav aria-label="五条路线">{% for item in data.tracks %}<a href="{% url 'math-camp-track' item.id %}"{% if item.id == track.id %} aria-current="page"{% endif %}><span aria-hidden="true">{{ item.symbol }}</span>{{ item.title }}</a>{% endfor %}</nav><div class="mc-side-anchors"><a href="#methods">先学方法</a><a href="#habits">三个好习惯</a>{% for drill in drills %}<a href="#drill-{{ drill.id }}">{{ drill.level_name }} · {{ drill.title }}</a>{% endfor %}<a href="#transfer">迁移与复盘</a><a href="#sources">资料出处</a></div><p class="mc-note">遇到难题可以退回方法区，也可以换一条路线；难度只作参考。</p></aside>
+</div>
+{% endblock %}

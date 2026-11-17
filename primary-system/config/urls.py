@@ -59,6 +59,7 @@ urlpatterns = [
     path('chinesebook/', include('chinesebook.urls')),
     path('mathformulas/', include('mathformulas.urls')),
     path('mathbeauty/', include('mathbeauty.urls')),
+    path('mathcamp/', include('mathcamp.urls')),
     path('mysteries/', include('mysteries.urls')),
     path('human-origins/', include('humanorigins.urls')),
     path('rewards/', include('incentives.urls')),
