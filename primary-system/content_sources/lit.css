@@ -125,6 +125,113 @@
 .wrong-row-text { color: #a4453f; text-decoration: line-through; text-decoration-color: #e4b6b2; text-decoration-thickness: 2px; }
 .right-row-text { color: #187749; font-weight: 700; }
 
+/* ---------- 人物关系图与作家名片，沿用平台主题 ---------- */
+.lit-feature-links, .lit-character-results {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  gap: 16px; margin-block: 18px;
+}
+.lit-feature-links a, .lit-character-results a {
+  display: grid; gap: 8px; padding: 20px; border-radius: 18px;
+  border: 1px solid var(--line); background: var(--card); color: var(--ink);
+  text-decoration: none; overflow-wrap: anywhere; font-size: 18px;
+}
+.lit-feature-links a:first-child { border-top: 5px solid #ce6538; }
+.lit-feature-links a:last-child { border-top: 5px solid #8b65c9; }
+.lit-feature-links span { font-size: 22px; font-weight: 850; }
+.lit-feature-links small, .lit-character-results small { font-size: 16px; color: var(--muted); }
+.lit-lesson-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+.lit-lesson-links a {
+  color: var(--course-action, #157d73); background: var(--soft, #f4f7fa);
+  border: 1px solid var(--line); border-radius: 10px; padding: 7px 12px;
+  font-size: 16px; line-height: 1.6; text-decoration: none;
+}
+.lit-filters, .lit-book-picker, .lit-tree-tools { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 18px; }
+.lit-filters button, .lit-book-picker button, .lit-tree-tools button {
+  border: 1px solid var(--line); background: var(--card); color: var(--ink);
+  padding: 10px 16px; min-height: 44px; border-radius: 12px; font-size: 17px; font-weight: 750;
+}
+.lit-book-picker button { flex: 1 1 190px; font-size: 19px; }
+.lit-filters button[aria-pressed="true"], .lit-book-picker button[aria-pressed="true"] {
+  border-color: var(--course-action, #157d73); color: var(--course-action, #157d73);
+  background: var(--soft, #edf8f3); box-shadow: inset 0 -3px var(--course-action, #157d73);
+}
+.lit-result-count { margin-bottom: 20px; font-size: 16px; color: var(--muted); }
+.lit-author-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 22px; margin-bottom: 24px; }
+.lit-author-card {
+  display: flex; flex-direction: column; min-width: 0; gap: 16px; padding: 24px;
+  border: 1px solid var(--line); border-top: 5px solid #8b65c9; border-radius: 20px;
+  background: var(--card); overflow-wrap: anywhere; scroll-margin-top: 110px;
+}
+.lit-author-heading, .lit-character-heading { display: flex; align-items: center; flex-wrap: wrap; gap: 14px; }
+.lit-author-heading > .say, .lit-character-heading > .say { margin-left: auto; }
+.lit-monogram {
+  display: grid; place-items: center; flex: none; width: 58px; height: 58px; border-radius: 18px;
+  background: color-mix(in srgb, #8b65c9 15%, var(--card)); color: var(--ink); font-size: 32px; font-weight: 900;
+}
+.lit-eyebrow { color: var(--muted); font-size: 15px; margin: 0 0 4px; }
+.lit-author-heading h2, .lit-character-heading h2 { font-size: 28px; line-height: 1.4; }
+.lit-author-era { font-size: 18px; line-height: 1.7; }
+.lit-author-era b { margin-right: 8px; }
+.lit-author-works h3 { font-size: 17px; margin-bottom: 6px; color: var(--muted); }
+.lit-author-works ul { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; padding: 0; }
+.lit-author-works li { border: 1px solid var(--line); border-radius: 8px; padding: 4px 8px; font-size: 18px; line-height: 1.6; }
+.lit-fun-fact { padding: 14px; border-radius: 12px; background: var(--soft, #f6f3fb); font-size: 18px; line-height: 1.85; }
+.lit-fun-fact b { display: block; margin-bottom: 5px; }
+.lit-author-card .lit-lesson-links { margin-top: auto; }
+.lit-source-note { margin-top: 12px; font-size: 16px; line-height: 1.8; overflow-wrap: anywhere; }
+.lit-source-note summary { cursor: pointer; color: var(--course-action, #157d73); min-height: 36px; }
+.lit-source { color: var(--course-action, #157d73); font-size: 16px; line-height: 1.8; }
+.lit-relationship-book { min-width: 0; padding: clamp(12px, 2vw, 28px); border: 1px solid var(--line); border-top: 5px solid var(--c); border-radius: 20px; background: var(--card); }
+.lit-book-heading { display: flex; align-items: start; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.lit-book-heading h2 { font-size: 28px; }
+.lit-book-heading p, .lit-reading-note { font-size: 17px; line-height: 1.9; margin-top: 10px; }
+.lit-reading-note { border-left: 4px solid var(--c); padding: 12px 16px; border-radius: 8px; background: var(--soft, #f6f8fa); margin-bottom: 20px; }
+.lit-tree-tools span { margin-right: auto; font-size: 16px; color: var(--muted); }
+.lit-tree-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); align-items: start; gap: 18px; margin-bottom: 24px; }
+.lit-tree-branch { min-width: 0; border: 1px solid var(--line); border-radius: 16px; background: var(--card); overflow-wrap: anywhere; }
+.lit-tree-branch > summary { padding: 16px; font-size: 21px; font-weight: 850; cursor: pointer; border-radius: 16px; background: color-mix(in srgb, var(--c) 10%, var(--card)); }
+.lit-tree-branch > summary span { display: inline-block; margin-left: 10px; font-size: 14px; font-weight: 500; color: var(--muted); }
+.lit-tree-branch > p { padding: 12px 16px 0; font-size: 16px; line-height: 1.8; color: var(--muted); }
+.lit-tree { padding: 12px 16px 18px; }
+.lit-tree, .lit-tree ul { list-style: none; margin: 0; }
+.lit-tree ul { padding: 8px 0 0 16px; margin-left: 14px; border-left: 2px solid var(--line); }
+.lit-tree li { position: relative; margin-block: 10px; min-width: 0; }
+.lit-tree ul > li::before { content: ''; position: absolute; top: 17px; left: -16px; width: 12px; border-top: 2px solid var(--line); }
+.lit-edge-label { display: block; padding: 0 0 6px 2px; font-size: 16px; line-height: 1.7; color: var(--muted); }
+.lit-edge-label::before { content: '↓ '; color: var(--c); }
+.lit-person {
+  min-height: 44px; max-width: 100%; padding: 8px 18px; border: 2px solid var(--line); border-radius: 12px;
+  background: var(--card); color: var(--ink); font-size: 22px; font-weight: 850; overflow-wrap: anywhere;
+}
+.lit-person[aria-pressed="true"] { border-color: var(--c); background: color-mix(in srgb, var(--c) 13%, var(--card)); box-shadow: 0 3px 0 color-mix(in srgb, var(--c) 35%, transparent); }
+.lit-character-card { padding: clamp(16px, 2vw, 26px); border: 2px solid var(--c); border-radius: 18px; background: var(--card); scroll-margin-top: 110px; font-size: 18px; line-height: 1.9; }
+.lit-character-card > p { margin-block: 12px; }
+.lit-person-relations { display: flex; flex-wrap: wrap; gap: 8px 20px; list-style: none; padding: 0; }
+.lit-person-relations li { padding: 6px 10px; border: 1px solid var(--line); border-radius: 10px; }
+.lit-person-relations span { color: var(--muted); font-size: 16px; }
+.lit-episode { background: var(--soft, #f6f8fa); padding: 18px; border-radius: 12px; margin-top: 18px; }
+.lit-episode h3 { font-size: 21px; margin-bottom: 8px; }
+.lit-chapter { margin-top: 12px; }
+:is(.lit-author-card, .lit-character-card):focus { outline: 3px solid var(--course-action, #157d73); outline-offset: 4px; }
+:is(.lit-person, .lit-tree-branch summary, .lit-source-note summary, .lit-book-picker button, .lit-filters button, .lit-tree-tools button, .lit-lesson-links a, .lit-feature-links a):focus-visible { outline: 3px solid var(--course-action, #157d73); outline-offset: 3px; }
+@media (max-width: 600px) {
+  .lit-author-card { padding: 18px; }
+  .lit-book-picker { gap: 8px; }
+  .lit-book-picker button { flex-basis: 130px; padding: 10px 6px; font-size: 17px; }
+  .lit-tree-grid { grid-template-columns: minmax(0, 1fr); }
+  .lit-tree-tools span { flex-basis: 100%; }
+}
+@media print {
+  .lit-book-picker, .lit-filters, .lit-tree-tools, .lit-feature-links, .lit-lesson-links, .lit-source-note { display: none !important; }
+  .lit-author-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .lit-author-card, .lit-character-card, .lit-tree-branch { break-inside: avoid; box-shadow: none; }
+  .lit-tree-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .lit-tree-branch::details-content { content-visibility: visible; }
+  .lit-tree-branch > summary span { display: none; }
+  .lit-author-heading h2 { font-size: 22px; }
+  .lit-person { font-size: 18px; }
+}
+
 /* ---------- 屏幕动画（打印不受影响） ---------- */
 @media screen {
   @keyframes fadeInUp {

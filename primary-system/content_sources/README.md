@@ -29,6 +29,14 @@
 
 音标、成语场景和接龙的现行实现及测试分别在 `phonetics`、`idioms` 和 `chain`。旧离线页面、旧音标数据和旧成语玩法的实现与测试随离线版归档。
 
+### 文学人物关系与作家名片
+
+`lit-data.js` 的 `authors` 保存 41 张名片（稳定 ID、年代、代表作、趣闻、课程 ID 与出处），`classics` 保存四大名著 31 位人物的情节、回目、版本和关系分支。每条 `links` 用 `from`、`to`、`label` 标明两个人的关系，分支需从 `rootId` 连通且无环；人物只在一个分支出现。小说中的关系与历史事实分开说明，作者署名沿用课程通行说法，格林兄弟注明共同搜集整理。外部原文标注需联网，本地情节和名片不依赖网络。
+
+新增字段先补 `test/test-lit.js` 的结构、关系完整性与课程引用校验。`lit-app.js` 负责展开、人物选择、分类、搜索与深链接，`lit.css` 负责卡片和关系树，沿用共用侧栏的右侧默认位置与位置记忆。入口为 `/literature/#view-relationships`、`/literature/#view-authors`；人物可用 `#relationships-sanguo-zhugeliang`，作家可用 `#author-sushi`，原有 `#lesson-lu6-5` 等课程链接和掌握记录继续可用。
+
+修改后运行 `node content_sources/test/test-lit.js`、`make study-topics-data`、`.venv/bin/python scripts/build_study_topics.py --check`、`make test-frontend` 和 `.venv/bin/python manage.py test catalog.test_study_topics`。交互回归在 `scripts/test_lit_explore.cjs`，覆盖切书、选人物、分类、搜索、深链接、旧记录与不可用的浏览器存储。
+
 ### 天文宇宙漫游
 
 `astro-media-data.js` 维护 3 个主题的中文图注、观察任务、原始媒体与外部资料链接，以及 8 颗行星的近似数值和模型说明；`astro-media.js` 负责大图、原生视频和三种比例视图。6 幅图、2 张额外视频封面和 3 段 WebM 动画保存在 `images/astro/roam-*`，随 `make study-topics-data` 发布，页面无需连接外部图库即可看图和播放。各素材的 `source` 是说明页，`original` 是原始下载地址，核对日期记录在 `checked`。外部探索明确标为需联网。

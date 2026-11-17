@@ -53,6 +53,75 @@ LIT.units.forEach((u, i) => {
 });
 check(seenPoints.size === 41, '全册应为 41 个知识点，实际 ' + seenPoints.size);
 
+/* ---------- 作家名片与人物关系树：先校验字段和稳定引用 ---------- */
+console.log('— 作家名片与名著关系 —');
+const authors = Array.isArray(LIT.authors) ? LIT.authors : [];
+const classics = Array.isArray(LIT.classics) ? LIT.classics : [];
+const authorIds = new Set();
+function sourceOK(source) {
+  return source && isStr(source.title) && /^https:\/\//.test(source.url);
+}
+check(authors.length >= 30, '作家名片应覆盖课程中的主要中外作家');
+authors.forEach(a => {
+  const tag = '作家 ' + a.id;
+  check(/^[a-z][a-z-]+$/.test(a.id) && !authorIds.has(a.id), tag + ' ID 非法或重复');
+  authorIds.add(a.id);
+  ['name', 'era', 'group', 'funFact'].forEach(key => check(isStr(a[key]), tag + ' 缺少 ' + key));
+  check(['古代作家', '近现代作家', '外国作家'].includes(a.group), tag + ' 分组无效');
+  check(Array.isArray(a.works) && a.works.length >= 1 && a.works.every(isStr), tag + ' 缺代表作');
+  check(Array.isArray(a.lessonIds) && a.lessonIds.length >= 1 && a.lessonIds.every(id => seenPoints.has(id)), tag + ' 课程引用无效');
+  check(sourceOK(a.source), tag + ' 缺少可查阅的出处');
+});
+['吴承恩', '罗贯中', '施耐庵', '曹雪芹', '孔子', '司马迁', '李白', '杜甫', '白居易', '李贺', '王维',
+  '李清照', '辛弃疾', '马致远', '关汉卿', '韩愈', '柳宗元', '欧阳修', '苏洵', '苏轼', '苏辙', '王安石', '曾巩',
+  '鲁迅', '老舍', '冰心', '叶圣陶', '朱自清', '安徒生', '雅各布·格林', '威廉·格林']
+  .forEach(name => check(authors.some(a => a.name === name), '缺少作家名片：' + name));
+check(classics.length === 4, '四大名著各有一棵关系树');
+const classicIds = new Set();
+classics.forEach(book => {
+  const tag = '名著 ' + book.id;
+  check(/^[a-z][a-z-]+$/.test(book.id) && !classicIds.has(book.id), tag + ' ID 非法或重复');
+  classicIds.add(book.id);
+  ['title', 'emoji', 'intro', 'note'].forEach(key => check(isStr(book[key]), tag + ' 缺少 ' + key));
+  check(/^#[0-9a-f]{6}$/i.test(book.color), tag + ' 颜色无效');
+  check(authorIds.has(book.authorId), tag + ' 作者引用无效');
+  check(seenPoints.has(book.lessonId), tag + ' 课程引用无效');
+  check(sourceOK(book.source), tag + ' 缺少版本出处');
+  const characters = Array.isArray(book.characters) ? book.characters : [];
+  const ids = new Set();
+  check(characters.length >= 5, tag + ' 至少五位人物');
+  characters.forEach(c => {
+    check(/^[a-z][a-z-]+$/.test(c.id) && !ids.has(c.id), tag + ' 人物 ID 非法或重复');
+    ids.add(c.id);
+    check(isStr(c.name) && isStr(c.role), tag + ' 人物名片不完整');
+    check(c.episode && ['title', 'summary', 'chapter'].every(key => isStr(c.episode[key])), tag + ' 人物情节缺少标题、说明或回目');
+    check(c.episode && /^https:\/\//.test(c.episode.url), tag + ' 情节缺少原著链接');
+  });
+  const branches = Array.isArray(book.branches) ? book.branches : [];
+  check(branches.length >= 2, tag + ' 至少两组可展开分支');
+  const covered = new Set(), branchIds = new Set();
+  branches.forEach(branch => {
+    check(/^[a-z][a-z-]+$/.test(branch.id) && !branchIds.has(branch.id), tag + ' 分支 ID 非法或重复');
+    branchIds.add(branch.id);
+    check(isStr(branch.title) && isStr(branch.intro), tag + ' 分支缺少说明');
+    check(ids.has(branch.rootId), tag + ' 分支起点不存在');
+    const reached = new Set([branch.rootId]);
+    const links = Array.isArray(branch.links) ? branch.links : [];
+    const targets = new Set();
+    check(links.length >= 1, tag + ' 分支缺少关系');
+    links.forEach(link => {
+      check(ids.has(link.from) && ids.has(link.to) && link.from !== link.to && isStr(link.label), tag + ' 人物关系无效');
+      check(link.to !== branch.rootId && !targets.has(link.to), tag + ' 树中出现重复父节点或环');
+      targets.add(link.to);
+    });
+    for (let i = 0; i < characters.length; i++) links.forEach(link => { if (reached.has(link.from)) reached.add(link.to); });
+    check(links.every(link => reached.has(link.from) && reached.has(link.to)), tag + ' 分支不连通或存在环');
+    reached.forEach(id => { check(!covered.has(id), tag + ' 人物在多个分支重复'); covered.add(id); });
+  });
+  check(covered.size === ids.size && [...ids].every(id => covered.has(id)), tag + ' 有人物未出现在关系树中');
+});
+['sanguo', 'shuihu', 'xiyou', 'honglou'].forEach(id => check(classicIds.has(id), '缺少名著关系树：' + id));
+
 /* ---------- 与其他模块分开：独立的数据与苑地结构 ---------- */
 console.log('— 模块独立检查 —');
 check(seenPoints.size !== 37, '不应是地理 / 历史模块的 37 个知识点');
@@ -97,6 +166,8 @@ function walk(v, path) {
 walk(LIT.units, 'units');
 walk(LIT.facts, 'facts');
 walk(LIT.mistakes, 'mistakes');
+walk(LIT.authors, 'authors');
+walk(LIT.classics, 'classics');
 
 /* ---------- 图示库 ---------- */
 console.log('— 文学图示库 —');

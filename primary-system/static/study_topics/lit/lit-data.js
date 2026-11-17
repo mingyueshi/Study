@@ -2,13 +2,13 @@
    乐学堂 · 文学常识 —— 小学生文学常识学习
    主题式分苑学习（不依赖某套教材，适合小学中高年级）：
    八大文学苑，共 41 个知识点，
-   另附「文学速查」与「文学小诊所」。
+   另附四大名著人物关系、作家名片、「文学速查」与「文学小诊所」。
 
    家长注意：
    - 每条按「知识点总结」精编：要点、想一想、易错提醒、记忆口诀；
      典故与称号采用通行说法（如「诗仙」李白、「杏林」代称医界），
      孩子升学后再了解学术细节即可。
-   - 想增加或修改内容，照下面的格式改 units / facts / mistakes 即可。
+   - 正文维护 units / facts / mistakes，名片与关系维护 authors / classics。
    ============================================================ */
 'use strict';
 
@@ -611,6 +611,135 @@ const LIT = {
           mistakes: ['以为写景就是单纯写景——古人写景常常为了抒情，景物里藏着感情'],
           recall: '月是思念柳送别，梅花傲雪寄高洁。',
         },
+      ],
+    },
+  ],
+
+  /* ================= 作家名片：作品与趣闻的主出处 ================= */
+  authors: [
+    { id: 'kongzi', name: '孔子', era: '春秋', group: '古代作家', works: ['《论语》（弟子等整理）'], funFact: '他提醒我们：一起走路的人，也可能有值得自己学习的长处。', lessonIds: ['lu4-1'], source: { title: '《论语·述而》', url: 'https://zh.wikisource.org/zh-hans/論語/述而' } },
+    { id: 'quyuan', name: '屈原', era: '战国', group: '古代作家', works: ['《离骚》', '《九歌》'], funFact: '读他的《离骚》，会遇到兰花、香草，像走进一座会说心事的花园。', lessonIds: ['lu2-3'], source: { title: '《离骚》', url: 'https://zh.wikisource.org/zh-hans/離騷' } },
+    { id: 'simaqian', name: '司马迁', era: '西汉', group: '古代作家', works: ['《史记》'], funFact: '一本《史记》有一百三十篇，许多成语故事就藏在里面。', lessonIds: ['lu4-2'], source: { title: '《史记·太史公自序》', url: 'https://zh.wikisource.org/zh-hans/史記/卷130' } },
+    { id: 'libai', name: '李白', era: '唐代', group: '古代作家', works: ['《静夜思》', '《望庐山瀑布》'], funFact: '他把瀑布想象成落下来的银河，难怪后人叫他「诗仙」。', lessonIds: ['lu2-4', 'lu4-3'], source: { title: '《望庐山瀑布》', url: 'https://zh.wikisource.org/zh-hans/望廬山瀑布' } },
+    { id: 'dufu', name: '杜甫', era: '唐代', group: '古代作家', works: ['《春夜喜雨》', '《春望》'], funFact: '他写春雨会「知时节」，还会趁夜悄悄滋润万物。', lessonIds: ['lu2-4', 'lu4-3'], source: { title: '《春夜喜雨》', url: 'https://zh.wikisource.org/zh-hans/春夜喜雨' } },
+    { id: 'wangwei', name: '王维', era: '唐代', group: '古代作家', works: ['《鹿柴》', '《九月九日忆山东兄弟》'], funFact: '他的《鹿柴》只有二十个字，却让人仿佛看见森林里的一束光。', lessonIds: ['lu2-4', 'lu6-6'], source: { title: '《鹿柴》', url: 'https://zh.wikisource.org/zh-hans/鹿柴' } },
+    { id: 'baijuyi', name: '白居易', era: '唐代', group: '古代作家', works: ['《暮江吟》', '《赋得古原草送别》'], funFact: '他眼中的傍晚江水，一半碧绿，一半像红宝石。', lessonIds: ['lu2-4'], source: { title: '《暮江吟》', url: 'https://zh.wikisource.org/zh-hans/暮江吟' } },
+    { id: 'lihe', name: '李贺', era: '唐代', group: '古代作家', works: ['《雁门太守行》', '《马诗》'], funFact: '他把边塞的沙地比作雪，把弯月比作钩，想象特别奇妙。', lessonIds: ['lu2-4'], source: { title: '《马诗二十三首》', url: 'https://zh.wikisource.org/zh-hans/馬詩二十三首' } },
+    { id: 'wangchangling', name: '王昌龄', era: '唐代', group: '古代作家', works: ['《芙蓉楼送辛渐》', '《出塞》'], funFact: '他的「一片冰心在玉壶」，后来给作家冰心的笔名带来了灵感。', lessonIds: ['lu5-3'], source: { title: '《芙蓉楼送辛渐》', url: 'https://zh.wikisource.org/zh-hans/芙蓉樓送辛漸' } },
+    { id: 'wangzhihuan', name: '王之涣', era: '唐代', group: '古代作家', works: ['《登鹳雀楼》', '《凉州词》'], funFact: '他用登楼看远方的小动作，写出「站高一点，看远一点」的道理。', lessonIds: ['lu7-5'], source: { title: '《登鹳雀楼》', url: 'https://zh.wikisource.org/zh-hans/登鸛雀樓' } },
+    { id: 'wangbo', name: '王勃', era: '唐代', group: '古代作家', works: ['《滕王阁序》', '《送杜少府之任蜀州》'], funFact: '他把晚霞、飞鸟、秋水和天空写在一起，像展开一幅大画。', lessonIds: ['lu7-1'], source: { title: '《滕王阁序》', url: 'https://zh.wikisource.org/zh-hans/滕王閣序' } },
+    { id: 'dumu', name: '杜牧', era: '唐代', group: '古代作家', works: ['《山行》', '《清明》'], funFact: '他和李商隐合称「小李杜」，记住他不是杜甫哦。', lessonIds: ['lu4-3', 'lu6-6'], source: { title: '杜牧作品目录', url: 'https://zh.wikisource.org/zh-hans/Author:杜牧' } },
+    { id: 'lishangyin', name: '李商隐', era: '唐代', group: '古代作家', works: ['《夜雨寄北》', '《乐游原》'], funFact: '他的《夜雨寄北》把眼前的雨夜和将来团聚的想象连在了一起。', lessonIds: ['lu4-3'], source: { title: '《夜雨寄北》', url: 'https://zh.wikisource.org/zh-hans/夜雨寄北' } },
+    { id: 'hanyu', name: '韩愈', era: '唐代', group: '古代作家', works: ['《师说》', '《进学解》'], funFact: '我们常说的「业精于勤」，就藏在他的《进学解》里。', lessonIds: ['lu4-5'], source: { title: '《进学解》', url: 'https://zh.wikisource.org/zh-hans/進學解' } },
+    { id: 'liuzongyuan', name: '柳宗元', era: '唐代', group: '古代作家', works: ['《小石潭记》', '《黔之驴》'], funFact: '他写小石潭里的鱼，好像在空中游来游去，原来是水太清了。', lessonIds: ['lu4-5'], source: { title: '《小石潭记》', url: 'https://zh.wikisource.org/zh-hans/小石潭記' } },
+    { id: 'fanzhongyan', name: '范仲淹', era: '北宋', group: '古代作家', works: ['《岳阳楼记》', '《渔家傲·秋思》'], funFact: '读《岳阳楼记》时，会发现他先写风景，最后把心思转向天下人。', lessonIds: ['lu7-1'], source: { title: '《岳阳楼记》', url: 'https://zh.wikisource.org/zh-hans/岳陽樓記' } },
+    { id: 'ouyangxiu', name: '欧阳修', era: '北宋', group: '古代作家', works: ['《醉翁亭记》', '《卖油翁》'], funFact: '《醉翁亭记》里的「醉翁」，就是他给自己起的别号。', lessonIds: ['lu4-5'], source: { title: '《醉翁亭记》', url: 'https://zh.wikisource.org/zh-hans/醉翁亭記' } },
+    { id: 'suxun', name: '苏洵', era: '北宋', group: '古代作家', works: ['《六国论》'], funFact: '他是苏轼和苏辙的父亲，父子三人一起走进了「唐宋八大家」。', lessonIds: ['lu4-4', 'lu4-5'], source: { title: '苏洵生平与作品目录', url: 'https://zh.wikisource.org/zh-hans/Author:蘇洵' } },
+    { id: 'sushi', name: '苏轼', era: '北宋', group: '古代作家', works: ['《水调歌头·明月几时有》', '《题西林壁》'], funFact: '那首祝人长久的中秋词，小序里说他也在想念弟弟苏辙。', lessonIds: ['lu2-5', 'lu4-4', 'lu4-5', 'lu7-1'], source: { title: '《水调歌头·明月几时有》', url: 'https://zh.wikisource.org/zh-hans/水調歌頭_(明月幾時有)' } },
+    { id: 'suzhe', name: '苏辙', era: '北宋', group: '古代作家', works: ['《黄州快哉亭记》'], funFact: '苏轼在词前小序中写的「子由」，就是弟弟苏辙的字。', lessonIds: ['lu4-4', 'lu4-5'], source: { title: '《水调歌头·明月几时有》小序', url: 'https://zh.wikisource.org/zh-hans/水調歌頭_(明月幾時有)' } },
+    { id: 'wanganshi', name: '王安石', era: '北宋', group: '古代作家', works: ['《泊船瓜洲》', '《元日》'], funFact: '写春风、写爆竹，他的诗能把普通的一天写得特别有画面。', lessonIds: ['lu4-5', 'lu6-6'], source: { title: '王安石作品目录', url: 'https://zh.wikisource.org/zh-hans/Author:王安石' } },
+    { id: 'zenggong', name: '曾巩', era: '北宋', group: '古代作家', works: ['《墨池记》'], funFact: '他借一方传说中的洗墨池，提醒读者学习要靠自己的努力。', lessonIds: ['lu4-5'], source: { title: '《墨池记》', url: 'https://zh.wikisource.org/zh-hans/墨池記' } },
+    { id: 'simaguang', name: '司马光', era: '北宋', group: '古代作家', works: ['《资治通鉴》（主持编写）'], funFact: '他主持编写的《资治通鉴》按时间讲历史，与司马迁的《史记》编排不同。', lessonIds: ['lu4-2'], source: { title: '《资治通鉴》', url: 'https://zh.wikisource.org/zh-hans/資治通鑑' } },
+    { id: 'liqingzhao', name: '李清照', era: '宋代', group: '古代作家', works: ['《如梦令·常记溪亭日暮》', '《声声慢·寻寻觅觅》'], funFact: '她写过一次划船迷路，船儿竟闯进荷花深处，惊起一群水鸟。', lessonIds: ['lu2-5'], source: { title: '《如梦令·常记溪亭日暮》', url: 'https://zh.wikisource.org/zh-hans/如夢令_(常記溪亭日暮)' } },
+    { id: 'xinqiji', name: '辛弃疾', era: '南宋', group: '古代作家', works: ['《西江月·夜行黄沙道中》', '《青玉案·元夕》'], funFact: '在他的乡村夜景里，稻花香和蛙声都在告诉人们：丰收有希望啦。', lessonIds: ['lu2-5'], source: { title: '《西江月·夜行黄沙道中》', url: 'https://zh.wikisource.org/zh-hans/西江月_(明月別枝驚鵲)' } },
+    { id: 'zhuxi', name: '朱熹', era: '南宋', group: '古代作家', works: ['《四书章句集注》', '《观书有感》'], funFact: '他用池塘里的「源头活水」，打了一个读书求知的巧妙比方。', lessonIds: ['lu8-4'], source: { title: '《观书有感》', url: 'https://zh.wikisource.org/zh-hans/觀書有感' } },
+    { id: 'wentianxiang', name: '文天祥', era: '南宋', group: '古代作家', works: ['《过零丁洋》', '《正气歌》'], funFact: '他把自己的志向写进诗里，「丹心」是赤诚的心，「汗青」指史册。', lessonIds: ['lu7-1'], source: { title: '《过零丁洋》', url: 'https://zh.wikisource.org/zh-hans/過零丁洋' } },
+    { id: 'mazhiyuan', name: '马致远', era: '元代', group: '古代作家', works: ['《天净沙·秋思》'], funFact: '一首二十八字的小曲，就排出了枯藤、老树、小桥、流水等秋日画面。', lessonIds: ['lu2-5'], source: { title: '《天净沙·秋思》', url: 'https://zh.wikisource.org/zh-hans/天淨沙_(秋思)' } },
+    { id: 'guanhanqing', name: '关汉卿', era: '元代', group: '古代作家', works: ['《窦娥冤》', '《望江亭》'], funFact: '他的作品能搬上戏台：人物开口说话、唱曲，故事就在眼前发生。', lessonIds: ['lu2-5'], source: { title: '《望江亭》', url: 'https://zh.wikisource.org/zh-hans/望江亭' } },
+    { id: 'luoguanzhong', name: '罗贯中', era: '元末明初', group: '古代作家', works: ['《三国演义》'], funFact: '他的小说把刘备、关羽、张飞安排在桃园相识结义，这是文学里的名场面。', lessonIds: ['lu3-1', 'lu3-3'], source: { title: '《三国演义》第一回', url: 'https://zh.wikisource.org/zh-hans/三國演義/第001回' } },
+    { id: 'shinaian', name: '施耐庵', era: '元末明初', group: '古代作家', works: ['《水浒传》'], funFact: '读《水浒传》像认外号：豹子头是林冲，花和尚是鲁智深。', lessonIds: ['lu3-1', 'lu3-4'], source: { title: '《水浒传》通行回本目录', url: 'https://zh.wikisource.org/zh-hans/水滸傳_(120回本)' } },
+    { id: 'wuchengen', name: '吴承恩', era: '明代', group: '古代作家', works: ['《西游记》'], funFact: '小说里的孙悟空不只叫美猴王，还被称为「齐天大圣」。', lessonIds: ['lu3-1', 'lu3-2'], source: { title: '《西游记》第四回', url: 'https://zh.wikisource.org/zh-hans/西遊記/第004回' } },
+    { id: 'caoxueqin', name: '曹雪芹', era: '清代', group: '古代作家', works: ['《红楼梦》'], funFact: '《红楼梦》也叫《石头记》，故事开头就有一块特别的石头。', lessonIds: ['lu3-1', 'lu3-5'], source: { title: '《红楼梦》第一回', url: 'https://zh.wikisource.org/zh-hans/紅樓夢/第001回' } },
+    { id: 'luxun', name: '鲁迅', era: '近现代 · 1881—1936 年', group: '近现代作家', works: ['《呐喊》', '《朝花夕拾》'], funFact: '他在《从百草园到三味书屋》里，写下童年听故事、认虫草的乐趣。', lessonIds: ['lu5-1'], source: { title: '《从百草园到三味书屋》', url: 'https://zh.wikisource.org/zh-hans/從百草園到三味書屋' } },
+    { id: 'laoshe', name: '老舍', era: '近现代 · 1899—1966 年', group: '近现代作家', works: ['《骆驼祥子》', '《茶馆》'], funFact: '「老舍」是笔名，他原名舒庆春，课文里的《猫》也是他写的。', lessonIds: ['lu5-2'], source: { title: '老舍生平与作品目录', url: 'https://zh.wikisource.org/zh-hans/Author:老舍' } },
+    { id: 'bingxin', name: '冰心', era: '近现代 · 1900—1999 年', group: '近现代作家', works: ['《繁星》', '《春水》', '《寄小读者》'], funFact: '她从「一片冰心在玉壶」这句唐诗里，挑出了自己的笔名。', lessonIds: ['lu5-3'], source: { title: '人民网与人民文学出版社：云游冰心文学馆', url: 'https://culture.people.com.cn/n1/2020/0719/c1013-31788756.html' } },
+    { id: 'yeshengtao', name: '叶圣陶', era: '近现代 · 1894—1988 年', group: '近现代作家', works: ['《稻草人》', '《荷花》', '《爬山虎的脚》'], funFact: '他让田里的稻草人做童话主角，也把小小的爬山虎观察得清清楚楚。', lessonIds: ['lu5-4'], source: { title: '中国作家网：叶圣陶生平与作品', url: 'https://www.chinawriter.com.cn/xdzj/122.shtml' } },
+    { id: 'zhuziqing', name: '朱自清', era: '近现代 · 1898—1948 年', group: '近现代作家', works: ['《背影》', '《春》'], funFact: '他的《背影》用父亲买橘子这样的小事，写出了浓浓的亲情。', lessonIds: ['lu5-1'], source: { title: '《背影》', url: 'https://zh.wikisource.org/zh-hans/背影' } },
+    { id: 'andersen', name: '安徒生', era: '丹麦 · 1805—1875 年', group: '外国作家', works: ['《丑小鸭》', '《卖火柴的小女孩》', '《海的女儿》'], funFact: '他不只会写童话，还会用剪刀和纸剪出奇妙的图案。', lessonIds: ['lu5-5'], source: { title: '丹麦皇家图书馆：安徒生的手作', url: 'https://www.kb.dk/en/inspiration/hans-christian-andersens-manuscripts-and-letters/hans-christian-andersens-own-hand' } },
+    { id: 'jacob-grimm', name: '雅各布·格林', era: '德国 · 1785—1863 年', group: '外国作家', works: ['《格林童话》（与弟弟共同搜集整理）'], funFact: '他是格林兄弟中的哥哥，除了收故事，还研究语言。', lessonIds: ['lu5-5'], source: { title: '格林世界博物馆：格林兄弟', url: 'https://www.grimmwelt.de/de/journal/die-brueder-grimm' } },
+    { id: 'wilhelm-grimm', name: '威廉·格林', era: '德国 · 1786—1859 年', group: '外国作家', works: ['《格林童话》（与哥哥共同搜集整理）'], funFact: '他和哥哥把流传的民间故事整理成书，让白雪公主等人物走进更多家庭。', lessonIds: ['lu5-5'], source: { title: '格林世界博物馆：格林兄弟', url: 'https://www.grimmwelt.de/de/journal/die-brueder-grimm' } },
+  ],
+
+  /* ================= 四大名著人物树：关系是原著中的关系 ================= */
+  classics: [
+    {
+      id: 'sanguo', title: '《三国演义》', emoji: '⚔️', color: '#ce6538', authorId: 'luoguanzhong', lessonId: 'lu3-3',
+      intro: '先分清刘备、曹操、孙权三方，再顺着连线认朋友、亲人和谋士。',
+      note: '这是小说人物关系简图。桃园结义、草船借箭等按小说讲述，不能直接当作真实历史；人物归属也会随情节变化。',
+      source: { title: '毛宗岗评本，一百二十回', url: 'https://zh.wikisource.org/zh-hans/三國演義' },
+      characters: [
+        { id: 'liubei', name: '刘备', role: '字玄德，后来建立蜀汉。', episode: { title: '三顾茅庐', summary: '为了请诸葛亮出山，刘备一次次到隆中拜访，表现出求贤的诚意。', chapter: '第三十七至三十八回', url: 'https://zh.wikisource.org/zh-hans/三國演義/第038回' } },
+        { id: 'guanyu', name: '关羽', role: '字云长，刘备的结义兄弟。', episode: { title: '温酒斩华雄', summary: '诸侯讨伐董卓时，关羽出战华雄，回来时杯中的酒还是温的。', chapter: '第五回', url: 'https://zh.wikisource.org/zh-hans/三國演義/第005回' } },
+        { id: 'zhangfei', name: '张飞', role: '字翼德，刘备的结义兄弟。', episode: { title: '长坂桥退敌', summary: '张飞守在长坂桥头大喝，使追来的曹军不敢贸然向前。', chapter: '第四十二回', url: 'https://zh.wikisource.org/zh-hans/三國演義/第042回' } },
+        { id: 'zhugeliang', name: '诸葛亮', role: '字孔明，辅佐刘备的谋士。', episode: { title: '草船借箭', summary: '诸葛亮借着大雾，让草船靠近曹军水寨，利用对方射来的箭完成任务。', chapter: '第四十六回', url: 'https://zh.wikisource.org/zh-hans/三國演義/第046回' } },
+        { id: 'zhaoyun', name: '赵云', role: '字子龙，刘备麾下的将领。', episode: { title: '长坂坡救阿斗', summary: '混战中，赵云保护刘备的儿子阿斗，冲出重围。', chapter: '第四十一回', url: 'https://zh.wikisource.org/zh-hans/三國演義/第041回' } },
+        { id: 'caocao', name: '曹操', role: '字孟德，是刘备、孙权的重要对手。', episode: { title: '煮酒论英雄', summary: '曹操请刘备喝酒，谈论天下英雄，刘备小心应对。', chapter: '第二十一回', url: 'https://zh.wikisource.org/zh-hans/三國演義/第021回' } },
+        { id: 'caopi', name: '曹丕', role: '曹操的儿子，后来建立曹魏。', episode: { title: '曹丕称帝', summary: '曹丕代汉称帝，三国故事中的魏国由此正式建立。', chapter: '第八十回', url: 'https://zh.wikisource.org/zh-hans/三國演義/第080回' } },
+        { id: 'sunquan', name: '孙权', role: '字仲谋，统领江东，后来建立孙吴。', episode: { title: '决定联刘抗曹', summary: '面对曹操大军，孙权听取意见，决定与刘备一方合作抵抗曹操。', chapter: '第四十四回', url: 'https://zh.wikisource.org/zh-hans/三國演義/第044回' } },
+        { id: 'zhouyu', name: '周瑜', role: '字公瑾，孙权麾下的统帅。', episode: { title: '赤壁用兵', summary: '周瑜指挥水军，与盟友一起用火攻对付曹军。', chapter: '第四十九回', url: 'https://zh.wikisource.org/zh-hans/三國演義/第049回' } },
+        { id: 'lusu', name: '鲁肃', role: '字子敬，帮助孙刘两方联络。', episode: { title: '力排众议', summary: '鲁肃支持联合刘备抵抗曹操，帮助双方商议合作。', chapter: '第四十三回', url: 'https://zh.wikisource.org/zh-hans/三國演義/第043回' } },
+      ],
+      branches: [
+        { id: 'shu', title: '刘备一方', intro: '结义兄弟与一起打天下的伙伴。', rootId: 'liubei', links: [{ from: 'liubei', to: 'guanyu', label: '结义兄弟' }, { from: 'liubei', to: 'zhangfei', label: '结义兄弟' }, { from: 'liubei', to: 'zhugeliang', label: '请来辅佐' }, { from: 'liubei', to: 'zhaoyun', label: '麾下将领' }] },
+        { id: 'wei', title: '曹操一方', intro: '曹操的事业由儿子曹丕接续。', rootId: 'caocao', links: [{ from: 'caocao', to: 'caopi', label: '父子' }] },
+        { id: 'wu', title: '孙权一方', intro: '江东的重要伙伴，赤壁时与刘备一方合作。', rootId: 'sunquan', links: [{ from: 'sunquan', to: 'zhouyu', label: '麾下统帅' }, { from: 'sunquan', to: 'lusu', label: '倚重的谋士' }] },
+      ],
+    },
+    {
+      id: 'shuihu', title: '《水浒传》', emoji: '🏔️', color: '#23816e', authorId: 'shinaian', lessonId: 'lu3-4',
+      intro: '梁山好汉不只靠武艺，也有朋友相助、同伴出谋划策的故事。',
+      note: '这里只选部分人物，按小说中的交往分组，不是梁山座次表。故事里有古代冲突，读故事时想想人物的选择和后果。',
+      source: { title: '一百二十回本，回目含开篇楔引', url: 'https://zh.wikisource.org/zh-hans/水滸傳_(120回本)' },
+      characters: [
+        { id: 'songjiang', name: '宋江', role: '绰号及时雨，梁山的重要首领。', episode: { title: '私放晁盖', summary: '得知官府要捉拿晁盖，宋江赶去通风报信。', chapter: '第十八回', url: 'https://zh.wikisource.org/zh-hans/水滸傳_(120回本)/第018回' } },
+        { id: 'wuyong', name: '吴用', role: '绰号智多星，善于谋划。', episode: { title: '智取生辰纲', summary: '吴用与晁盖等人配合，利用押送队伍的疏忽取走生辰纲。', chapter: '第十六回', url: 'https://zh.wikisource.org/zh-hans/水滸傳_(120回本)/第016回' } },
+        { id: 'likui', name: '李逵', role: '绰号黑旋风，性子急直。', episode: { title: '真假李逵', summary: '有人冒用李逵的名号拦路，李逵发现后识破了对方。', chapter: '第四十三回', url: 'https://zh.wikisource.org/zh-hans/水滸傳_(120回本)/第043回' } },
+        { id: 'luzhishen', name: '鲁智深', role: '绰号花和尚，重情重义。', episode: { title: '大闹野猪林', summary: '林冲被押送途中遇险，鲁智深及时出现，救下朋友。', chapter: '第八回', url: 'https://zh.wikisource.org/zh-hans/水滸傳_(120回本)/第008回' } },
+        { id: 'linchong', name: '林冲', role: '绰号豹子头，原是禁军教头。', episode: { title: '风雪山神庙', summary: '风雪夜里，林冲偶然听见害自己的阴谋，人生从此转向。', chapter: '第十回', url: 'https://zh.wikisource.org/zh-hans/水滸傳_(120回本)/第010回' } },
+        { id: 'wusong', name: '武松', role: '绰号行者，以勇武闻名。', episode: { title: '景阳冈打虎', summary: '武松在景阳冈遇上老虎，奋力脱险。这是小说情节，遇见野生动物要远离并求助。', chapter: '第二十三回', url: 'https://zh.wikisource.org/zh-hans/水滸傳_(120回本)/第023回' } },
+      ],
+      branches: [
+        { id: 'liangshan', title: '梁山伙伴', intro: '宋江、吴用、李逵一起经历梁山故事。', rootId: 'songjiang', links: [{ from: 'songjiang', to: 'wuyong', label: '共事的军师' }, { from: 'songjiang', to: 'likui', label: '追随的同伴' }] },
+        { id: 'friends', title: '相助的好汉', intro: '鲁智深曾救林冲，也与武松结为兄弟。', rootId: 'luzhishen', links: [{ from: 'luzhishen', to: 'linchong', label: '朋友，曾救他脱险' }, { from: 'luzhishen', to: 'wusong', label: '结义兄弟' }] },
+      ],
+    },
+    {
+      id: 'xiyou', title: '《西游记》', emoji: '🐒', color: '#b97914', authorId: 'wuchengen', lessonId: 'lu3-2',
+      intro: '跟着取经队伍认师徒，再看看一路上帮助他们的神仙。',
+      note: '这是神魔小说中的关系。白龙马也是取经队伍的一员；神通和法术属于故事想象。',
+      source: { title: '一百回本', url: 'https://zh.wikisource.org/zh-hans/西遊記' },
+      characters: [
+        { id: 'tangseng', name: '唐僧', role: '法号玄奘，带领取经队伍。', episode: { title: '收孙悟空为徒', summary: '唐僧来到五行山，救出被压在山下的孙悟空，师徒一起上路。', chapter: '第十四回', url: 'https://zh.wikisource.org/zh-hans/西遊記/第014回' } },
+        { id: 'sunwukong', name: '孙悟空', role: '又称美猴王、齐天大圣，护送师父取经。', episode: { title: '三打白骨精', summary: '孙悟空识破白骨精的变化，唐僧却一时误解了他。', chapter: '第二十七回', url: 'https://zh.wikisource.org/zh-hans/西遊記/第027回' } },
+        { id: 'zhubajie', name: '猪八戒', role: '法名悟能，取经队伍中的二师兄。', episode: { title: '高老庄收八戒', summary: '孙悟空在高老庄与猪八戒相遇，随后引他拜唐僧为师。', chapter: '第十八至十九回', url: 'https://zh.wikisource.org/zh-hans/西遊記/第019回' } },
+        { id: 'shaseng', name: '沙僧', role: '法名悟净，取经路上的可靠伙伴。', episode: { title: '流沙河拜师', summary: '经过流沙河时，师徒与沙僧相遇，在帮助下化解冲突，队伍又添一员。', chapter: '第二十二回', url: 'https://zh.wikisource.org/zh-hans/西遊記/第022回' } },
+        { id: 'bailongma', name: '白龙马', role: '西海龙王的儿子，化作白马驮着唐僧。', episode: { title: '鹰愁涧化马', summary: '小白龙在鹰愁涧与取经人相遇，后来化成白马加入队伍。', chapter: '第十五回', url: 'https://zh.wikisource.org/zh-hans/西遊記/第015回' } },
+        { id: 'guanyin', name: '观音菩萨', role: '指引取经队伍，也帮助他们渡过难关。', episode: { title: '收服红孩儿', summary: '孙悟空向观音求助，观音帮助取经队伍解困，并收红孩儿为善财童子。', chapter: '第四十二回', url: 'https://zh.wikisource.org/zh-hans/西遊記/第042回' } },
+        { id: 'honghaier', name: '红孩儿', role: '牛魔王和铁扇公主的儿子。', episode: { title: '火云洞遇取经人', summary: '红孩儿用三昧真火阻挡取经人，孙悟空后来请观音帮忙。', chapter: '第四十至四十二回', url: 'https://zh.wikisource.org/zh-hans/西遊記/第041回' } },
+      ],
+      branches: [
+        { id: 'team', title: '取经队伍', intro: '认师父、徒弟和驮着师父的白龙马。', rootId: 'tangseng', links: [{ from: 'tangseng', to: 'sunwukong', label: '师徒，大徒弟' }, { from: 'tangseng', to: 'zhubajie', label: '师徒，二徒弟' }, { from: 'tangseng', to: 'shaseng', label: '师徒，三徒弟' }, { from: 'tangseng', to: 'bailongma', label: '化作坐骑，护送取经' }] },
+        { id: 'helpers', title: '取经路上的相遇', intro: '观音帮助师徒，也收服了红孩儿。', rootId: 'guanyin', links: [{ from: 'guanyin', to: 'honghaier', label: '收为善财童子' }] },
+      ],
+    },
+    {
+      id: 'honglou', title: '《红楼梦》', emoji: '🌸', color: '#b54f7b', authorId: 'caoxueqin', lessonId: 'lu3-5',
+      intro: '先找到贾母，再认儿孙；分清姑表亲、姨表亲和家中长辈。',
+      note: '只画荣国府的部分人物。贾宝玉与林黛玉是姑表亲，与薛宝钗是姨表亲；人物情节选自前八十回。',
+      source: { title: '前八十回以庚辰本为底本的汇校本', url: 'https://zh.wikisource.org/zh-hans/紅樓夢' },
+      characters: [
+        { id: 'jiamu', name: '贾母', role: '贾宝玉的祖母，也是林黛玉的外祖母。', episode: { title: '接林黛玉进府', summary: '林黛玉初到贾府，贾母疼爱地接待外孙女，安排她的生活。', chapter: '第三回', url: 'https://zh.wikisource.org/zh-hans/紅樓夢/第003回' } },
+        { id: 'jiazheng', name: '贾政', role: '贾母的儿子，贾宝玉的父亲。', episode: { title: '大观园试才', summary: '贾政游览大观园，让宝玉为景物题字，借此考查儿子的学问。', chapter: '第十七回', url: 'https://zh.wikisource.org/zh-hans/紅樓夢/第017回' } },
+        { id: 'jiabaoyu', name: '贾宝玉', role: '贾政与王夫人的儿子，关心身边的姐妹。', episode: { title: '初见林黛玉', summary: '宝玉第一次见到黛玉，却觉得似曾相识，留下了特别的初见场面。', chapter: '第三回', url: 'https://zh.wikisource.org/zh-hans/紅樓夢/第003回' } },
+        { id: 'jiamin', name: '贾敏', role: '贾母的女儿，林黛玉的母亲。', episode: { title: '黛玉进府前的身世', summary: '小说交代贾敏去世，黛玉失去母亲后，外祖母贾母接她到贾府生活。', chapter: '第二至三回', url: 'https://zh.wikisource.org/zh-hans/紅樓夢/第002回' } },
+        { id: 'lindaiyu', name: '林黛玉', role: '贾敏与林如海的女儿，贾宝玉的姑表妹。', episode: { title: '菊花诗夺魁', summary: '海棠社一起咏菊，黛玉的诗受到赞赏，显出她的才情。', chapter: '第三十八回', url: 'https://zh.wikisource.org/zh-hans/紅樓夢/第038回' } },
+        { id: 'wangfuren', name: '王夫人', role: '贾宝玉的母亲，与薛姨妈是姐妹。', episode: { title: '黛玉初见舅母', summary: '黛玉进府后拜见王夫人，认识这个大家庭里的长辈。', chapter: '第三回', url: 'https://zh.wikisource.org/zh-hans/紅樓夢/第003回' } },
+        { id: 'xueyima', name: '薛姨妈', role: '王夫人的姐妹，薛宝钗的母亲。', episode: { title: '薛家住进梨香院', summary: '薛姨妈带着家人来到贾府，住进梨香院，与亲人相聚。', chapter: '第四回', url: 'https://zh.wikisource.org/zh-hans/紅樓夢/第004回' } },
+        { id: 'xuebaochai', name: '薛宝钗', role: '薛姨妈的女儿，贾宝玉的姨表姐。', episode: { title: '海棠社咏诗', summary: '宝钗与姐妹们一起写海棠诗，展现大观园里的读书与诗社生活。', chapter: '第三十七回', url: 'https://zh.wikisource.org/zh-hans/紅樓夢/第037回' } },
+      ],
+      branches: [
+        { id: 'jia', title: '贾母的儿孙', intro: '从祖母和外祖母两条线，找到宝玉与黛玉。', rootId: 'jiamu', links: [{ from: 'jiamu', to: 'jiazheng', label: '母子' }, { from: 'jiazheng', to: 'jiabaoyu', label: '父子' }, { from: 'jiamu', to: 'jiamin', label: '母女' }, { from: 'jiamin', to: 'lindaiyu', label: '母女' }] },
+        { id: 'wang', title: '王夫人与薛家', intro: '宝玉的母亲与宝钗的母亲是姐妹。', rootId: 'wangfuren', links: [{ from: 'wangfuren', to: 'xueyima', label: '姐妹' }, { from: 'xueyima', to: 'xuebaochai', label: '母女' }] },
       ],
     },
   ],
