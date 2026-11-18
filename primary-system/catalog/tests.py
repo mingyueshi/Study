@@ -122,6 +122,7 @@ class CatalogTests(PlatformFixture):
         self.assertContains(response, f'href="{reverse("time-story")}"')
         self.assertContains(response, f'href="{reverse("great-works")}"')
         self.assertContains(response, f'href="{reverse("money-trade")}"')
+        self.assertContains(response, f'href="{reverse("energy-environment")}"')
 
     def test_cross_module_placement_cannot_publish_hidden_content(self):
         import_snapshot(english_snapshot(), publish=True)

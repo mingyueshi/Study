@@ -7,6 +7,7 @@ from nova_admin.urls import for_admin
 from accounts import views as accounts_views
 from accounts.forms import LearnerAuthenticationForm
 from catalog import views as catalog
+from catalog.energy_environment import energy_environment
 from catalog.great_works import great_works
 from catalog.money_trade import money_trade
 from catalog.time_story import time_story
@@ -32,6 +33,7 @@ urlpatterns = [
     path('interdisciplinary/great-works/', great_works, name='great-works'),
     path('interdisciplinary/great-works/<slug:work_id>/', great_works, name='great-work-detail'),
     path('interdisciplinary/money-trade/', money_trade, name='money-trade'),
+    path('interdisciplinary/energy-environment/', energy_environment, name='energy-environment'),
     path('updates/', upgrade_history, name='upgrade-history'),
     path('references/', include('reference_library.urls')),
     path('references/lexicon/', include('lexicon.reference_urls')),

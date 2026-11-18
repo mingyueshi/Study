@@ -54,6 +54,22 @@ class TopicMarkup(HTMLParser):
 
 
 class StudyTopicPageTests(SimpleTestCase):
+    def test_energy_environment_has_five_stations_with_local_media_and_demos(self):
+        response = self.client.get(reverse('energy-environment'))
+        self.assertContains(response, '<h1>能源与环境</h1>', html=True)
+        for station in response.context['course']['stations']:
+            self.assertContains(response, f'href="#{station["id"]}"')
+            self.assertContains(response, f'id="{station["id"]}"')
+            self.assertContains(response, station['answer'])
+            for link in station.get('links', ()):
+                fragment = f'#{link["fragment"]}' if link.get('fragment') else ''
+                self.assertContains(response, f'href="{reverse(link["route"])}{fragment}"')
+        for tool in ('energy-turbine', 'energy-electricity', 'energy-carbon'):
+            self.assertContains(response, f'id="{tool}"')
+        for asset in ('energy-turbine.js', 'energy-environment.js', 'energy-environment.css', 'geo-map/assets/three-gorges.jpg'):
+            self.assertTrue(finders.find(f'study_topics/{asset}'), asset)
+            self.assertContains(response, f'study_topics/{asset}')
+
     def test_money_trade_links_all_five_stations_and_loads_local_lab_assets(self):
         response = self.client.get(reverse('money-trade'))
         self.assertContains(response, '<h1>货币与贸易</h1>', html=True)

@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "title": "能源与环境",
+  "intro": "教室的灯亮了，电从哪里来？沿着一度电往回找，看看自然界提供什么、发电机怎样工作，再算算我们能节省多少电，以及这些变化怎样影响环境。",
+  "stations": [
+    {
+      "id": "sources",
+      "label": "能源类型",
+      "question": "风和煤都能发电，它们有什么不同？",
+      "intro": "风吹动叶片，煤燃烧释放热量。判断一种能源能不能再生，要看自然过程补回它的速度，以及我们用得有多快。",
+      "notes": [
+        {"title": "可再生能源", "text": "日照、风和流动的水由自然过程不断补充。光伏、风电和水电都能利用它们，但某个地点、某个时刻能用多少，仍取决于天气、季节和地理条件。"},
+        {"title": "不可再生能源", "text": "煤、石油和天然气是化石能源，形成时间远比人类大量开采它们的时间长。核电常用的铀也需要开采，属于不可再生资源，燃料来源和发电排放要分别比较。"},
+        {"title": "电是一种二次能源", "text": "太阳能、煤等来自自然界，属于一次能源。电通常经发电设备转换得到，属于二次能源。同一只插座的电可能来自电网接入的多种电源。"}
+      ],
+      "challenge": "太阳能是可再生能源，为什么有太阳能板的地方，夜里还要考虑怎样供电？",
+      "answer": "可再生说的是能量来源可以补充。夜里没有日照，光伏板不能靠太阳发电。夜间供电可以由储能、其他电源或与外地互联的电网共同承担，具体取决于用电和调度条件。",
+      "links": [{"label": "地理小课堂 · 自然资源怎样更新", "route": "geography-study", "fragment": "lesson-gu8-2"}],
+      "sources": [{"label": "美国能源信息署 · 能源形式与来源", "url": "https://www.eia.gov/energyexplained/what-is-energy/"}, {"label": "美国能源信息署 · 电与一次能源", "url": "https://www.eia.gov/energyexplained/electricity/"}]
+    },
+    {
+      "id": "generation",
+      "label": "发电",
+      "question": "扇叶已经转了，电又是从哪里来的？",
+      "intro": "风先带动叶片，叶片带动轴，轴把转动传给发电机。发电机内部，线圈里的磁场发生变化，可以产生电压，接入合适的闭合电路后就能输出电能。",
+      "notes": [
+        {"title": "风和水都能带动旋转", "text": "风力机靠空气作用在叶片上转动，水轮机则利用流过的水。它们都可以带动发电机。燃煤电站常先把水加热成蒸汽，让蒸汽推动汽轮机，再带动发电机。"},
+        {"title": "光伏有另一条路", "text": "光伏电池吸收光后，在半导体里产生可以移动的电荷，形成直流电。接入交流电网通常还要用逆变器把直流变成交流。"},
+        {"title": "发了多少，什么时候用", "text": "电网要随时让发电和用电保持平衡。看发电方案时，除了问一天能发多少，还要问什么时候能发、用电高峰何时到来，以及能否用储能或其他电源补足。"}
+      ],
+      "challenge": "两种装置里，风机和光伏板都能输出电，哪一种不需要转动发电机？",
+      "answer": "光伏板用半导体直接把光能转为电能。风机利用空气推动叶片，把转动传给发电机。",
+      "links": [{"label": "科学实验室 · 闭合电路怎样点亮灯泡", "route": "science-lab", "fragment": "lesson-su5-2"}],
+      "sources": [{"label": "美国能源信息署 · 电是怎样发出来的", "url": "https://www.eia.gov/energyexplained/electricity/how-electricity-is-generated.php"}, {"label": "美国能源部 · 风机的内部结构", "url": "https://www.energy.gov/cmei/systems/explore-wind-turbine-text-version"}]
+    },
+    {
+      "id": "saving",
+      "label": "节能",
+      "question": "要省一度电，换灯和少开灯分别怎样算？",
+      "intro": "瓦（W）表示功率，也就是用电的快慢。千瓦时（kWh）表示一段时间累计用了多少电，1 千瓦时也叫 1 度电。",
+      "notes": [
+        {"title": "用电量＝功率×时间", "text": "功率先除以 1000 换成千瓦，再乘使用的小时数。假设一盏灯持续以 60 W 工作 4 小时，就是 0.060×4＝0.24 度。每天都这样用，30 天就是 7.2 度。"},
+        {"title": "在相同需要下比较", "text": "对照两盏灯时，先确认照明效果接近。较高效的灯用更低的功率提供所需亮度。人在教室时要有足够照明，无人时可以关灯，减少不必使用的时间。"},
+        {"title": "铭牌可以估算，实际用量靠测量", "text": "冰箱、空调等设备的功率会随运行状态变化。固定功率公式适用于稳定运行或已知平均功率的情形，家庭总用电量可比较电表同期读数。"}
+      ],
+      "challenge": "同等照明下，用 10 W 的灯换下 60 W 的灯。每天用 4 小时，用 30 天，能省多少度电？",
+      "answer": "少用 50 W，也就是 0.05 kW。0.05×4×30＝6 度。换不同的使用时长试试，看节电量怎样变化。",
+      "sources": [{"label": "美国能源信息署 · 瓦与千瓦时", "url": "https://www.eia.gov/energyexplained/electricity/measuring-electricity.php"}]
+    },
+    {
+      "id": "environment",
+      "label": "环境保护",
+      "question": "发电时少排碳，就可以放心不管河流和废物了吗？",
+      "intro": "评价一个方案，可以沿着原料、制造、运输、使用和报废逐段看。每一步都可能占用资源，影响水、空气、土壤或生物栖息地。",
+      "notes": [
+        {"title": "在两张图上找变化", "text": "观察三峡大坝附近的两张卫星图，找同一段支流。蓄水能帮助调节水量，但筑坝也会改变河流的水位和连通性，可能影响鱼类迁移。照片能指出哪里发生了变化，鱼类数量的变化还要靠调查。"},
+        {"title": "从源头减量，到修理和回收", "text": "例如先把还能写的本子用完，保留可继续使用的文具，再把废纸按当地分类要求处理。少买不需要的东西可以减少一部分生产和运输。回收有价值，也需要收集、分类和加工。"},
+        {"title": "问两个不同的问题", "text": "减排主要问少排了多少温室气体，环保还要问是否减少了污染、节约了哪些资源、保住了什么栖息地。做选择时，可以分别记录这些变化。"}
+      ],
+      "challenge": "小组要比较自带水杯和一次性杯。除了杯子怎么丢，还要问什么？",
+      "answer": "可以问自带杯用了多少次、怎样清洗、制作和运输分别用了哪些材料。先让两种方案提供同样多的饮水服务，再比较各自的用料、用水和废弃量。",
+      "links": [{"label": "地理小课堂 · 环保会算账", "route": "geography-study", "fragment": "lesson-gu8-4"}],
+      "sources": [{"label": "美国能源信息署 · 水电对环境的影响", "url": "https://www.eia.gov/energyexplained/hydropower/hydropower-and-the-environment.php"}, {"label": "美国环保署 · 源头减量、重复使用与回收", "url": "https://www.epa.gov/smm/sustainable-materials-management-non-hazardous-materials-and-waste-management-hierarchy"}]
+    },
+    {
+      "id": "carbon",
+      "label": "碳中和",
+      "question": "还有二氧化碳排出去，怎样才算净零？",
+      "intro": "先说明算谁、算哪段时间、算哪些排放。这个练习只算一年的二氧化碳。同期的人为排放量与人为移除量相等时，净排放为零。",
+      "notes": [
+        {"title": "先减少排放，再处理难减的部分", "text": "提高能源效率、采用低排放电源，能减少排到大气里的二氧化碳。减排后难以避免的剩余排放，需要用经核算的人为移除来平衡。"},
+        {"title": "实际移除要能核算", "text": "恢复森林能在生长过程中吸收二氧化碳，但生长需要时间，火灾等事件也可能让碳重新释放。要看实际增加的储存量、能保存多久，以及是否被重复计入。"},
+        {"title": "扩大范围要重算", "text": "只算用电，和把供暖、交通等一起算，结果可能不同。若要讨论全部温室气体的净零，还要考虑甲烷等气体，并使用说明过的换算口径。"}
+      ],
+      "challenge": "一个教学账本原来一年排放 100 千克二氧化碳。措施少排了 70 千克，同年另外移除了 20 千克。还差多少才到净零？",
+      "answer": "减排后还排放 30 千克，扣除移除的 20 千克，净排放为 10 千克。可以再减掉这 10 千克排放，或在同一核算口径下增加经确认的移除量。",
+      "links": [{"label": "气象与气候 · 比较不同地区的气候", "route": "geography-climate"}],
+      "sources": [{"label": "IPCC · 全球净零排放的定义", "url": "https://www.ipcc.ch/report/ar6/wg1/chapter/chapter-1/"}, {"label": "IPCC · 深度减排与二氧化碳移除", "url": "https://www.ipcc.ch/report/ar6/syr/summary-for-policymakers/"}, {"label": "IPCC · 碳移除的储存时长和限制", "url": "https://www.ipcc.ch/report/ar6/wg3/chapter/technical-summary/"}]
+    }
+  ],
+  "photo": {
+    "path": "study_topics/geo-map/assets/three-gorges.jpg",
+    "width": 980,
+    "height": 1280,
+    "alt": "上下两张三峡大坝附近的卫星影像，上图可见更宽的水面与支流",
+    "caption": "三峡大坝附近的 Landsat 影像。上图拍于 2006 年 11 月 7 日，下图拍于 1987 年 4 月 17 日。找找水面伸进支流的位置。",
+    "credit": "Jesse Allen · NASA Earth Observatory · Landsat",
+    "source": "https://science.nasa.gov/earth/earth-observatory/three-gorges-dam-china-7769/"
+  },
+  "turbine": {
+    "task": "转到侧面，然后转一下叶片。沿着转轴找一找，转动传到了哪里？",
+    "note": "教学模型用透明虚线标出机舱，采用简化的直驱结构。手动转动用来观察传动关系。",
+    "blades": "叶片受到空气作用，带动轮毂绕轴转动。",
+    "shaft": "转轴把轮毂和发电机的转子连起来。",
+    "generator": "发电机的转子跟着轴转，外壳固定在机舱内。"
+  },
+  "electricity": {"before": 60, "after": 10, "hours": 4, "days": 30},
+  "carbon": {"baseline": 100, "reduced": 70, "removed": 20}
+}
