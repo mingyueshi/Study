@@ -1,0 +1,260 @@
+{
+  "schema_version": 1,
+  "intro": "同一片荷叶，可以是一把小伞，也可以在风里点头。从例句里找线索，看看一句话怎样写出画面、声音和语气。",
+  "techniques": [
+    {
+      "id": "simile", "name": "比喻",
+      "definition": "借另一种事物的形象来写眼前的事物，让读者借相似之处看得更清楚。",
+      "test": "找找写的是什么、拿什么来比、哪里相似。只有「像」字，或只是比较同类事物，还不够。",
+      "examples": [
+        {"id": "lotus-umbrella", "parts": [{"text": "水面上那片荷叶，"}, {"text": "像一把撑开的绿伞", "focus": true}, {"text": "。"}], "effect": "荷叶和伞都圆圆地展开。「绿伞」把形状和颜色一起写了出来。"},
+        {"id": "silver-road", "parts": [{"text": "夜里的山路是"}, {"text": "一条弯弯的银带", "focus": true}, {"text": "。"}], "effect": "用银带写出月下山路的弯曲和微亮。这个比喻没有用「像」，仍有相似点。"}
+      ]
+    },
+    {
+      "id": "personification", "name": "拟人",
+      "definition": "把事物当作人来写，赋予它人的动作、神态、感情或想法。",
+      "test": "谁在做什么？用在这个事物身上时，这个动作或心情是不是把它写成了人？",
+      "examples": [
+        {"id": "lotus-greets", "parts": [{"text": "荷叶在风里"}, {"text": "向我点了点头", "focus": true}, {"text": "。"}], "effect": "把荷叶摇动写成点头问候，显得亲切。"},
+        {"id": "patient-light", "parts": [{"text": "路灯"}, {"text": "耐心地守着", "focus": true}, {"text": "还没回家的行人。"}], "effect": "把路灯长时间亮着写成人在守候，带出温暖的感受。"}
+      ]
+    },
+    {
+      "id": "parallelism", "name": "排比",
+      "definition": "接连安排三个或更多意思相关、结构相同或相近的成分，让节奏更鲜明。",
+      "test": "先数并列的成分，再找共同的句式。普通地列出三样东西，不一定用了排比。",
+      "examples": [
+        {"id": "walked-through", "parts": [{"text": "我们走过", "focus": true}, {"text": "田埂，"}, {"text": "我们走过", "focus": true}, {"text": "木桥，"}, {"text": "我们走过", "focus": true}, {"text": "山脚的小路。"}], "effect": "三个相近句式依次展开，把沿途的地方串成一段有节奏的行程。"},
+        {"id": "spring-work", "parts": [{"text": "把种子种进泥土", "focus": true}, {"text": "，"}, {"text": "把汗水洒在田头", "focus": true}, {"text": "，"}, {"text": "把希望留在春天", "focus": true}, {"text": "。"}], "effect": "三个「把……」的结构把动作连起来，最后一句把劳动写到了对未来的期盼。"}
+      ]
+    },
+    {
+      "id": "hyperbole", "name": "夸张",
+      "definition": "为了突出特点，有意把程度、数量、大小或时间说得比实际更大、更小、更快或更久。",
+      "test": "按字面理解真实吗？这里是不是故意超过或缩小事实，让人感受到某种程度？",
+      "examples": [
+        {"id": "shake-the-roof", "parts": [{"text": "这一声欢呼，简直要"}, {"text": "把屋顶掀翻", "focus": true}, {"text": "。"}], "effect": "屋顶没有真的掀翻，夸大结果写出了欢呼声响和激动的气氛。"},
+        {"id": "drum-and-thunder", "parts": [{"text": "小鼓敲得"}, {"text": "像打雷", "focus": true}, {"text": "，"}, {"text": "连天上的云都被震散了", "focus": true}, {"text": "。"}], "effect": "借雷声写鼓声的响亮，用「震散云」夸大鼓声的威力。"}
+      ]
+    },
+    {
+      "id": "antithesis", "name": "对偶",
+      "definition": "把字数相等、结构相称、意思相关的两部分配成一对。",
+      "test": "把上下两句拆成小组，看看对应的词语、位置和意思是否相称。只有字数一样还不够。",
+      "examples": [
+        {"id": "birds-and-fish", "parts": [{"text": "山间听鸟语", "focus": true}, {"text": "，"}, {"text": "溪畔看游鱼", "focus": true}, {"text": "。"}], "effect": "地点对地点，动作对动作，所见所闻相配，读起来整齐。"},
+        {"id": "mountains-and-rivers", "parts": [{"text": "山高路远", "focus": true}, {"text": "，"}, {"text": "水阔舟轻", "focus": true}, {"text": "。"}], "effect": "「山高」对「水阔」，「路远」对「舟轻」，两幅画面相映。"}
+      ]
+    },
+    {
+      "id": "repetition", "name": "反复",
+      "definition": "为了强调意思或感情，有意把同一个词语或句子再说一遍，既可相连，也可相隔。",
+      "test": "重复的是哪段话？重复出现后，哪一种感情、声音或节奏变得更明显？",
+      "examples": [
+        {"id": "boat-is-back", "parts": [{"text": "回来了", "focus": true}, {"text": "，"}, {"text": "回来了", "focus": true}, {"text": "！许久未归的渔船靠岸了。"}], "effect": "连续重说「回来了」，写出盼望终于实现时的兴奋。"},
+        {"id": "wait-for-sun", "parts": [{"text": "再等等", "focus": true}, {"text": "，天边才露出一点亮。"}, {"text": "再等等", "focus": true}, {"text": "，太阳就要出来了。"}], "effect": "隔开重复「再等等」，让读者也体会到等待日出的节奏。"}
+      ]
+    },
+    {
+      "id": "hypophora", "name": "设问",
+      "definition": "写话的人主动提出问题，再给出答案或在后文展开回答，引导读者留意要说的内容。",
+      "test": "向后找，作者有没有接着回答？答案可能紧跟在问句后，也可能在后面一段。",
+      "examples": [
+        {"id": "seed-travel", "parts": [{"text": "种子怎么旅行？", "focus": true}, {"text": "蒲公英借风，苍耳搭上动物的皮毛。"}], "effect": "先把读者的注意力引到种子怎么传播，再给出两种方式。"},
+        {"id": "morning-run", "parts": [{"text": "谁最早来到操场？", "focus": true}, {"text": "是每天晨跑的林老师。"}], "effect": "把答案留到后一句，让人先猜一猜，再注意到林老师。"}
+      ]
+    },
+    {
+      "id": "rhetorical-question", "name": "反问",
+      "definition": "用问句加强一个已经含在话里的判断，通常无需对方回答。",
+      "test": "试改成陈述句。先确认原句实际上在肯定还是否定，再比较语气强弱。",
+      "examples": [
+        {"id": "leave-no-trash", "parts": [{"text": "难道", "focus": true}, {"text": "我们能把垃圾留在山上"}, {"text": "吗？", "focus": true}], "effect": "实际说的是「我们不能把垃圾留在山上」，比直接陈述更有提醒的力量。"},
+        {"id": "birdsong", "parts": [{"text": "这样清亮的鸟鸣，"}, {"text": "谁能不喜欢呢？", "focus": true}], "effect": "说话人用问的方式表达自己相信大家都会喜欢，语气比直接说明更强。"}
+      ]
+    }
+  ],
+  "cases": [
+    {
+      "id": "not-every-like", "title": "都有「像」，哪句在打比方？", "techniques": ["simile"],
+      "sentences": [{"example": "lotus-umbrella"}, "今天的天气很像昨天，都是晴天。"],
+      "prompt": "哪一句借另一种事物来描写眼前的事物？",
+      "choices": [
+        {"id": "first", "label": "只有甲句", "feedback": "对，荷叶和伞是两类事物，圆圆展开的样子相似。"},
+        {"id": "second", "label": "只有乙句", "feedback": "乙句在比较两天的天气。再找哪一句借用了另一种事物的形象。"},
+        {"id": "both", "label": "两句都是", "feedback": "「像」能表示相似，但也可以用在普通比较里。重点看两句比较了什么。"}
+      ],
+      "answer": "first", "explanation": "甲句用绿伞写荷叶的颜色和形状。乙句只是说两天的天气相近，没有借用其他事物的形象。"
+    },
+    {
+      "id": "without-like", "title": "没有「像」，还能打比方吗？", "techniques": ["simile"],
+      "sentences": [{"example": "silver-road"}, "售货员把一条银色的缎带交给了我。"],
+      "prompt": "甲句用哪个形象表现了什么？",
+      "choices": [
+        {"id": "literal", "label": "山路上真的铺着一条缎带", "feedback": "甲句描写的是整条山路。想想远远望去，月光下的路是什么样。"},
+        {"id": "metaphor", "label": "用银带表现山路的弯曲和微亮", "feedback": "对，作者借银带的形状和光泽写山路。"},
+        {"id": "none", "label": "没有「像」，所以没有用比喻", "feedback": "比喻也可以用「是」来联结两个形象，关键在相似之处。"}
+      ],
+      "answer": "metaphor", "explanation": "山路和银带并非同一种东西，弯曲、泛亮是它们的相似之处。甲句是常见的暗喻写法。乙句中的缎带是实物。"
+    },
+    {
+      "id": "lotus-pair", "title": "一片荷叶，两种写法", "techniques": ["simile", "personification"],
+      "sentences": [{"example": "lotus-umbrella"}, {"example": "lotus-greets"}],
+      "prompt": "按照甲、乙的顺序，哪一项判断正确？",
+      "choices": [
+        {"id": "same", "label": "都是拟人", "feedback": "甲句里的绿伞是物品，荷叶没有被赋予人的动作。"},
+        {"id": "swapped", "label": "拟人、比喻", "feedback": "先找「借什么来写」和「谁做了人的动作」，再按甲乙排序。"},
+        {"id": "ordered", "label": "比喻、拟人", "feedback": "对，甲句借伞的形象，乙句给荷叶人的动作。"}
+      ],
+      "answer": "ordered", "explanation": "甲写荷叶展开的样子，乙把风吹动的荷叶写成在向人问候。两句写的是同一种事物，观察角度和表达效果不同。"
+    },
+    {
+      "id": "who-greets", "title": "事物真的在做这个动作吗？", "techniques": ["personification"],
+      "sentences": ["晓晓微笑着向我招手。", "窗边的柳枝向我招手。", "窗边的柳枝被风吹得来回摆动。"],
+      "prompt": "哪一句把事物当作人来写？",
+      "choices": [
+        {"id": "first", "label": "甲句", "feedback": "晓晓本来就是人，招手是她真实做出的动作。"},
+        {"id": "second", "label": "乙句", "feedback": "对，「招手」把柳枝摆动写成了人的问候。"},
+        {"id": "third", "label": "丙句", "feedback": "「来回摆动」是柳枝真的会发生的运动，没有赋予它人的特征。"}
+      ],
+      "answer": "second", "explanation": "同一个「招手」，放在晓晓身上是实写，放在柳枝身上就像柳枝有了人的动作和情意。"
+    },
+    {
+      "id": "list-or-parallel", "title": "都有三项，为什么读起来不一样？", "techniques": ["parallelism"],
+      "sentences": ["书包里有课本、铅笔和尺子。", "我带上读了一半的课本，带上削好的铅笔，带上亲手做的书签。"],
+      "prompt": "哪一句更明显地用排比安排了三部分？",
+      "choices": [
+        {"id": "first", "label": "甲句有三个名称，所以更像排比", "feedback": "甲句只列了三种物品。再找句式也有规律的一句。"},
+        {"id": "both", "label": "两句一样，数到三就可以了", "feedback": "除了数量，还要看成分之间的结构和表达节奏。"},
+        {"id": "second", "label": "乙句，三个「带上……」依次展开", "feedback": "对，三个并列的动词短语结构相近，读起来有明显的节奏。"}
+      ],
+      "answer": "second", "explanation": "甲句是普通的名词列举。乙句用相同的动作引领三组描写，把收拾书包的过程写得更有节奏。"
+    },
+    {
+      "id": "two-or-three", "title": "两句相对，三项铺开", "techniques": ["antithesis", "parallelism"],
+      "sentences": [{"example": "birds-and-fish"}, {"example": "walked-through"}],
+      "prompt": "甲句和乙句分别着重用了什么手法？",
+      "choices": [
+        {"id": "ordered", "label": "对偶、排比", "feedback": "对，甲句两部分相配，乙句三个相近句式连用。"},
+        {"id": "swapped", "label": "排比、对偶", "feedback": "甲句是成对的两部分，乙句连用了三部分。再看哪一种重在成双对应。"},
+        {"id": "same", "label": "都是对偶", "feedback": "乙句三项并列展开，它的节奏来自接连使用三个相近句式。"}
+      ],
+      "answer": "ordered", "explanation": "甲句按地点、动作和感知对象逐项对应。乙句接连写走过的三个地点，句式反复带来连贯的节奏。"
+    },
+    {
+      "id": "read-aloud", "title": "这一句为什么要再说一遍？", "techniques": ["repetition", "parallelism"],
+      "sentences": [{"example": "boat-is-back"}],
+      "prompt": "两个「回来了」在这里主要起什么作用？",
+      "choices": [
+        {"id": "parallel", "label": "用三个同类句式组成排比", "feedback": "这里只重复了两次，「渔船靠岸了」另有作用，并不加入同一组句式。"},
+        {"id": "size", "label": "夸大渔船的数量", "feedback": "句中没有改动数量，听听重说这几个字时的语气。"},
+        {"id": "emotion", "label": "用反复表现盼到渔船时的兴奋", "feedback": "对，连续重复让兴奋和急切更容易被听见。"}
+      ],
+      "answer": "emotion", "explanation": "去掉一个「回来了」，事情没变，欢呼的节奏和激动的程度却弱了。反复的作用正落在这两处。"
+    },
+    {
+      "id": "repeated-pattern", "title": "反复和排比能同句出现吗？", "techniques": ["repetition", "parallelism"],
+      "sentences": ["出发吧，出发吧！去看初升的太阳，去听第一声鸟鸣，去闻清晨的青草香。"],
+      "prompt": "哪一种解释能同时说明两段文字的作用？",
+      "choices": [
+        {"id": "only", "label": "只有反复，凡有相同的词都算反复", "feedback": "后三个「去」后面接的是不同内容，比较三个完整的结构。"},
+        {"id": "both", "label": "「出发吧」反复强调行动，三个「去……」排比铺开景象", "feedback": "对，强调和铺陈发生在不同位置，能一起发挥作用。"},
+        {"id": "must", "label": "全句必须只选一种，所以只能算排比", "feedback": "一句话可以兼用手法，分开看开头的重复和后面的三个句式。"}
+      ],
+      "answer": "both", "explanation": "开头重复同一句话，催促出发。后半部用三个结构相近的短语，从不同感官展开早晨的体验。"
+    },
+    {
+      "id": "loud-or-literal", "title": "屋顶真的被掀翻了吗？", "techniques": ["hyperbole"],
+      "sentences": [{"example": "shake-the-roof"}, "昨夜的大风吹落了屋顶的两片瓦。"],
+      "prompt": "甲句为什么提到「掀翻屋顶」？",
+      "choices": [
+        {"id": "express", "label": "有意夸大结果，突出欢呼声响和兴奋气氛", "feedback": "对，写的是声音给人的强烈感受。"},
+        {"id": "report", "label": "报告一次真实的屋顶损坏事件", "feedback": "乙句才在报告实际损坏。甲句有「简直要」，是对欢呼的描写。"},
+        {"id": "person", "label": "把屋顶写成了会欢呼的人", "feedback": "欢呼的并非屋顶。现在看「声音把屋顶掀翻」是否是作者故意夸大。"}
+      ],
+      "answer": "express", "explanation": "甲句把声势说到了不可能按字面发生的程度，目的是突出现场热烈。乙句按事实描述风吹掉瓦片，没有这种夸大。"
+    },
+    {
+      "id": "drum-sound", "title": "一句能同时比喻和夸张吗？", "techniques": ["simile", "hyperbole"],
+      "sentences": [{"example": "drum-and-thunder"}],
+      "prompt": "哪个解释最完整？",
+      "choices": [
+        {"id": "literal", "label": "在记录鼓声改变天气的事实", "feedback": "鼓声并不会震散天空的云。想想这处夸大的结果要突出什么。"},
+        {"id": "one", "label": "只有比喻，因为句子有「像」", "feedback": "「像」提示了鼓声与雷声的相似，再看鼓声能不能真的震散云。"},
+        {"id": "two", "label": "借雷声来作比，又夸大鼓声能造成的影响", "feedback": "对，借雷声和夸大影响，都在表现鼓声响亮。"}
+      ],
+      "answer": "two", "explanation": "前半句借雷声说明鼓声给人的听觉感受，后半句把鼓声的影响说得极大。两种手法共同突出鼓声的响亮。"
+    },
+    {
+      "id": "asked-and-answered", "title": "作者提出问题后做了什么？", "techniques": ["hypophora", "rhetorical-question"],
+      "sentences": [{"example": "seed-travel"}],
+      "prompt": "从整个语段判断，问句有什么作用？",
+      "choices": [
+        {"id": "reply", "label": "等读者真的来回答", "feedback": "读完后半段看看，作者已给出了两种传播方式。"},
+        {"id": "lead", "label": "用设问引出后文对传播方式的说明", "feedback": "对，问句把注意力引向后面展开的答案。"},
+        {"id": "insist", "label": "用反问强调种子不能旅行", "feedback": "后文写的是种子怎样传播，并未否定种子可以传播。"}
+      ],
+      "answer": "lead", "explanation": "前句提出读者可能好奇的问题，后句回答，这组问答让说明有了清楚的起点。"
+    },
+    {
+      "id": "statement-in-question", "title": "问句里藏着怎样的判断？", "techniques": ["hypophora", "rhetorical-question"],
+      "sentences": [{"example": "leave-no-trash"}],
+      "prompt": "在提醒同伴保护环境时，这句话实际在强调什么？",
+      "choices": [
+        {"id": "negative", "label": "我们不能把垃圾留在山上", "feedback": "对，反问加强了「不能留下垃圾」的提醒。"},
+        {"id": "positive", "label": "我们可以把垃圾留在山上", "feedback": "原句里的「能」出现在反问中，实际态度要结合整句判断。"},
+        {"id": "ask", "label": "是否可以留下垃圾，目前还不知道", "feedback": "这里在提醒同伴，答案已经含在问句里。试着改成陈述句。"}
+      ],
+      "answer": "negative", "explanation": "问句表面上用了「能」，实际否定这种做法。改成普通陈述句后，意思保留，语气缓和下来。"
+    },
+    {
+      "id": "three-questions", "title": "同一个问号，三种用意", "techniques": ["hypophora", "rhetorical-question"],
+      "sentences": ["【向同学问路】请问，图书馆在哪里？", "【介绍班级图书角】借到一本书要几步？只用两步：登记，取书。", "【提醒同伴爱护图书】书是大家的，难道能随便撕页吗？"],
+      "prompt": "按甲、乙、丙的顺序，三处问句各有什么用意？",
+      "choices": [
+        {"id": "all", "label": "都是普通提问", "feedback": "乙句作者自己回答，丙句答案已经含在提醒里。"},
+        {"id": "reverse", "label": "普通提问、反问、设问", "feedback": "乙句后面有明确答案，丙句本身表达「不能随便撕页」。"},
+        {"id": "ordered", "label": "普通提问、设问、反问", "feedback": "对，分别在寻求信息、引出下文和加强判断。"}
+      ],
+      "answer": "ordered", "explanation": "甲需要别人提供地点。乙自己提出并回答问题。丙的用意是加强已经明确的态度。是否有问号无法单独决定是哪一种。"
+    },
+    {
+      "id": "equal-length", "title": "字数一样就算对偶吗？", "techniques": ["antithesis"],
+      "sentences": ["庭前花影动，门外雨声来。", "今天不下雨，小李去公园。"],
+      "prompt": "为什么甲句更能体现对偶的特点？",
+      "choices": [
+        {"id": "punctuation", "label": "因为甲句用了逗号", "feedback": "乙句也用了逗号。把甲句拆成几小部分看看。"},
+        {"id": "aligned", "label": "「庭前／门外」「花影／雨声」「动／来」逐一相称", "feedback": "对，位置、事物和动作都能找到对应，两句意思也相关。"},
+        {"id": "sound", "label": "只有结尾押韵才算对偶", "feedback": "判断一般对偶先看结构、字数和意思，不把押韵作为必要条件。"}
+      ],
+      "answer": "aligned", "explanation": "甲句两个五字分句按地点、事物、动作一一对应，把庭院里的景象和门外的声音写到一起。乙句只是并排讲了两件事，结构并不对应。"
+    },
+    {
+      "id": "choose-a-rewrite", "title": "按想写的效果选句子", "techniques": ["simile", "personification", "hyperbole"],
+      "sentences": ["原句：小溪流过村口。"],
+      "prompt": "如果想突出小溪待人亲切，哪种改写最贴合目标？",
+      "choices": [
+        {"id": "welcome", "label": "小溪迎到村口，和归来的孩子打招呼。", "feedback": "对，「迎」「打招呼」让小溪有了待人的动作。"},
+        {"id": "shape", "label": "小溪像一条细带，从村口绕过去。", "feedback": "这个比喻写出了水道细长弯曲的形状，和亲切感的目标不同。"},
+        {"id": "loud", "label": "小溪的响声像要震动整座山。", "feedback": "这句夸大了声音的影响，突出声响，更适合写气势。"}
+      ],
+      "answer": "welcome", "explanation": "同一个场景能写出不同特点。要写亲切，可以给小溪人的举动。要写形状或声势，就要换一条观察线索。"
+    },
+    {
+      "id": "two-in-one", "title": "从词语和句式各找一次", "techniques": ["personification", "parallelism"],
+      "sentences": ["春雨给草叶洗脸，给花苞梳头，给瓦片擦背。"],
+      "prompt": "哪一项把这句话的两层写法都说清楚了？",
+      "choices": [
+        {"id": "half", "label": "只有排比，描写的全是春雨真实做的事", "feedback": "找到了三个相近句式，再看春雨真的会梳头、擦背吗？"},
+        {"id": "other", "label": "只有拟人，三个部分的句式并不相近", "feedback": "找到了人的动作。再比较三处「给……」后面的结构。"},
+        {"id": "both", "label": "拟人给春雨人的动作，排比用三个相近句式写出节奏", "feedback": "对，既能看人的动作，也能看三个并列成分的结构。"}
+      ],
+      "answer": "both", "explanation": "「洗脸、梳头、擦背」把春雨当作人写，雨中的景物也显得活泼。三个「给……」的结构把不同画面有节奏地排在一起。"
+    }
+  ],
+  "sources": [
+    {"label": "教育部《义务教育语文课程标准（2022年版）》附录 3 · 常见修辞手法", "url": "https://www.moe.gov.cn/srcsite/A26/s8001/202204/W020220420582344386456.pdf"},
+    {"label": "长治市教育局《修辞与表现手法》· 从形象、句式和语气体会表达效果", "url": "https://jyj.changzhi.gov.cn/jyzc/202402/t20240201_2863760.html"}
+  ]
+}

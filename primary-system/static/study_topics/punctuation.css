@@ -1,0 +1,90 @@
+body:has(.punctuation-lab) { --page-width: 100%; }
+.punctuation-lab { --punct-accent: #a34b25; --punct-tint: #fff0e4; --punct-border: #e9d4bf; }
+.punctuation-lab [hidden] { display: none !important; }
+.punct-back { display: inline-block; margin: 14px 0 22px; color: var(--green-dark); font-weight: 650; }
+.punct-hero { display: grid; grid-template-columns: 1.25fr 1fr; align-items: center; gap: clamp(24px, 5vw, 100px); padding: clamp(24px, 3vw, 66px); border: 1px solid var(--punct-border); border-radius: 24px; background: linear-gradient(115deg, var(--white), var(--punct-tint)); }
+.punct-eyebrow { margin-bottom: 10px; color: var(--punct-accent); font-size: .85em; font-weight: 750; letter-spacing: .06em; }
+.punct-hero h1 { margin-bottom: 18px; font-size: clamp(34px, 3.4vw, 66px); letter-spacing: -.03em; }
+.punct-lead { max-width: 36em; margin-bottom: 24px; font-size: 1.15em; }
+.punct-counts { margin-bottom: 0; font-size: .9em; color: var(--muted); }
+.punct-counts span { margin-inline: .4em; color: var(--punct-accent); }
+.punct-demo { min-width: 0; padding: clamp(20px, 2.5vw, 44px); border: 1px solid var(--punct-border); border-radius: 16px; background: var(--white); box-shadow: 7px 7px 0 var(--punct-border); }
+.punct-demo > p:first-child { margin-bottom: 0; color: var(--muted); font-size: .85em; }
+.punct-demo .punct-demo-sentence { margin: 4px 0 16px; color: var(--green-dark); font: 750 clamp(30px, 2.8vw, 56px)/1.6 "Songti SC", SimSun, serif; }
+.punct-demo [data-demo-meaning] { min-height: 3.7em; margin: 16px 0 0; font-size: .92em; }
+.punct-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.punctuation-lab button, .punct-tools input, .punct-tools select, .punct-question-select select { min-height: 44px; padding: 8px 14px; border: 1px solid var(--line); border-radius: 8px; background: var(--white); color: var(--ink); }
+.punctuation-lab button:hover { border-color: var(--green); background: var(--soft); }
+.punctuation-lab button:disabled { cursor: default; opacity: .5; }
+.punctuation-lab button[aria-pressed="true"], .punctuation-lab .punct-primary { background: var(--green); color: #fff; border-color: var(--green); }
+.punct-nav { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin: 24px 0 40px; }
+.punct-nav a { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; min-width: 0; padding: 18px 22px; border: 1px solid var(--line); border-radius: 12px; background: var(--white); font-size: 1.1em; font-weight: 750; }
+.punct-nav a span { color: var(--punct-accent); font-size: .8em; }
+.punct-nav small { margin-left: auto; font-size: .75em; font-weight: 500; color: var(--muted); }
+.punct-nav a[aria-current] { background: var(--soft); border-color: var(--green); box-shadow: inset 0 -3px var(--green); }
+.punct-workbench { scroll-margin-top: 24px; }
+.punct-section-head { display: flex; justify-content: space-between; align-items: end; flex-wrap: wrap; gap: 12px; margin-bottom: 24px; }
+.punct-section-head h2 { margin: 0; font-size: 1.75em; }
+.punct-section-head p { margin-bottom: 0; }
+.punct-section-head a, .punct-card footer a, .punct-sources a, .punct-related a { color: var(--green-dark); text-decoration: underline; text-underline-offset: .2em; }
+.punct-tools { display: flex; align-items: end; flex-wrap: wrap; gap: 14px 24px; padding: 20px; margin-bottom: 24px; border-radius: 12px; background: var(--soft); }
+.punct-tools label { display: grid; gap: 6px; font-weight: 650; font-size: .9em; }
+.punct-tools label > * { font-weight: 400; max-width: 100%; }
+.punct-tools p { margin: 0 0 8px auto; color: var(--muted); font-size: .9em; }
+.punct-mark-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr)); gap: 22px; }
+.punct-card { min-width: 0; padding: clamp(20px, 1.8vw, 32px); border: 1px solid var(--line); border-radius: 16px; background: var(--white); scroll-margin-top: 30px; overflow-wrap: anywhere; }
+.punct-card h3 { margin-bottom: 16px; font-size: 1.25em; }
+.punct-card:target { outline: 3px solid var(--punct-accent); outline-offset: 3px; }
+.punct-mark header { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
+.punct-mark header h3 { margin: 0; }
+.punct-mark header a { margin-left: auto; color: var(--muted); }
+.punct-symbol { display: grid; place-items: center; min-width: 80px; height: 76px; padding: 4px; background: var(--punct-tint); border-radius: 12px; font: 700 38px/1 "Songti SC", SimSun, serif; color: var(--punct-accent); }
+.punct-examples { border-left: 3px solid var(--green); padding-left: 16px; }
+.punct-examples p { margin-bottom: 16px; }
+.punct-examples strong { display: block; font-size: 1.1em; font-weight: 650; }
+.punct-examples small { display: block; margin-top: 4px; color: var(--muted); font-size: .85em; }
+.punct-note { padding: 16px; margin-block: 20px; border-radius: 10px; background: var(--soft); font-size: .92em; }
+.punct-card .punct-note { margin-bottom: 16px; }
+.punct-card footer { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; font-size: .8em; }
+.punct-card footer small { color: var(--muted); font-size: 1em; }
+.punct-error-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 480px), 1fr)); gap: 22px; }
+.punct-compare { border-block: 1px solid var(--line); padding: 16px 0 0; margin-bottom: 14px; }
+.punct-compare p { display: grid; grid-template-columns: 4em minmax(0, 1fr); gap: 8px; }
+.punct-compare p > span { font-size: .8em; color: var(--muted); padding-top: .2em; }
+.punct-compare strong { color: var(--green-dark); font-weight: 650; }
+.punct-card details { margin: 16px 0 20px; }
+.punct-card details p { margin-top: 12px; }
+.punct-progress { font-weight: 750; margin-bottom: 4px; }
+.punct-storage { color: var(--muted); font-size: .8em; }
+.punct-question-select { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin: 24px 0 16px; }
+.punct-question-select label { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; min-width: 0; }
+.punct-question-select select { max-width: 100%; }
+.punct-question-select > span { color: var(--muted); font-size: .9em; }
+.punct-exercise { padding: clamp(20px, 3vw, 56px); border: 1px solid var(--line); border-radius: 20px; background: var(--white); }
+.punct-exercise h3 { font-size: 1.6em; }
+.punct-context { max-width: 60em; padding: 16px 20px; border-left: 4px solid var(--punct-accent); background: var(--punct-tint); }
+.punct-exercise form > p { color: var(--muted); font-size: .85em; }
+.punct-sentence { margin: 26px 0; font: 600 clamp(23px, 1.9vw, 38px)/2.4 "Songti SC", SimSun, serif; overflow-wrap: anywhere; }
+.punct-sentence input { width: 3.3em; max-width: 100%; height: 2em; padding: 0 3px; margin-inline: .18em; vertical-align: baseline; border: 1px solid var(--punct-border); border-bottom: 3px solid var(--punct-accent); border-radius: 6px; background: var(--punct-tint); color: var(--ink); text-align: center; font: inherit; font-family: inherit; line-height: 1.4; }
+.punct-sentence input::placeholder { font: 400 15px/1.4 system-ui; color: var(--muted); }
+.punct-sentence input[data-result="correct"] { border-color: var(--green); background: var(--soft); }
+.punct-sentence input[data-result="wrong"] { border: 2px dashed var(--punct-accent); }
+.punct-palette { display: flex; flex-wrap: wrap; gap: 8px; padding-block: 18px; border-block: 1px solid var(--line); }
+.punct-palette button { min-width: 50px; font-size: 1.1em; }
+.punct-answer-actions { margin-top: 24px; }
+.punct-feedback { margin: 22px 0 0; font-weight: 650; }
+.punct-feedback[data-result="correct"] { color: var(--green-dark); }
+.punct-feedback[data-result="wrong"] { color: var(--punct-accent); }
+.punct-reference { padding: 20px; margin-top: 20px; border: 1px solid var(--punct-border); border-radius: 10px; background: var(--punct-tint); }
+.punct-reference p:last-child { margin: 0; }
+.punct-reference strong { font-size: 1.2em; }
+.punct-related { margin: 24px 0 0; font-size: .9em; }
+.punct-page-actions { justify-content: center; margin: 24px 0; }
+.punct-sources { padding: 30px 0; margin-top: 40px; border-top: 1px solid var(--line); }
+.punct-sources > p { font-weight: 650; }
+.punct-sources details { margin-top: 24px; font-size: .85em; }
+.punct-sources details p { margin-top: 16px; max-width: 70em; }
+@media (min-width: 2400px) { .punct-mark-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } .punct-error-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 1000px) { .punct-hero { grid-template-columns: 1fr; } .punct-demo { max-width: 650px; width: 100%; } .punct-nav a { padding: 14px; } .punct-nav small { width: 100%; margin-left: 0; } }
+@media (max-width: 550px) { .punct-nav { gap: 8px; } .punct-nav a { font-size: .85em; padding: 12px 8px; gap: 4px; } .punct-nav a span { display: none; } .punct-nav small { font-size: .8em; } .punct-counts { line-height: 2; } .punct-tools { padding: 14px; } .punct-tools label { width: 100%; } .punct-tools p { margin-left: 0; } .punct-exercise { padding: 18px; } .punct-hero { padding: 22px; } }
+@media print { .punct-hero { display: block; } .punct-demo, .punct-nav, .punct-tools, .punct-palette, .punct-actions, .punct-back { display: none !important; } .punct-card { break-inside: avoid; } .punct-mark-grid, .punct-error-grid { display: block; } .punct-card { margin-bottom: 20px; } }

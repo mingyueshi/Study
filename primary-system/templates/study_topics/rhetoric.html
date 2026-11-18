@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}修辞手法馆 · 乐学堂{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'study_topics/rhetoric.css' %}?v=1">
+<div class="rhetoric-gallery" data-rhetoric-gallery>
+  <a class="rhetoric-back" href="{% url 'home' %}?area=chinese#modules-title">← 学习广场 · 语文</a>
+  <header class="rhetoric-hero">
+    <div>
+      <h1>修辞手法馆</h1>
+      <p>{{ course.intro }}</p>
+      <nav class="rhetoric-actions" aria-label="馆内导航">
+        <a class="rhetoric-primary" href="#techniques">认识 {{ course.techniques|length }} 种手法</a>
+        <a href="#cases">做例句辨析 ↓</a>
+      </nav>
+    </div>
+    <figure class="rhetoric-hero-example">
+      <figcaption>同一片荷叶，两种写法</figcaption>
+      {% for example in hero_examples %}<p class="rhetoric-line">{% for part in example.parts %}{% if part.focus %}<mark>{{ part.text }}</mark>{% else %}{{ part.text }}{% endif %}{% endfor %}</p>{% endfor %}
+      <a href="{% url 'rhetoric-gallery' %}#case-lotus-pair">看看两句差在哪里 →</a>
+    </figure>
+  </header>
+
+  <section id="techniques" class="rhetoric-section" aria-labelledby="rhetoric-techniques-title">
+    <h2 id="rhetoric-techniques-title">认识常见手法</h2>
+    <nav class="rhetoric-chips" aria-label="手法速查">
+      {% for technique in course.techniques %}<a href="#technique-{{ technique.id }}">{{ technique.name }}</a>{% endfor %}
+    </nav>
+    <div class="rhetoric-techniques">
+      {% for technique in course.techniques %}
+      <article class="rhetoric-card rhetoric-technique" id="technique-{{ technique.id }}">
+        <h3>{{ technique.name }}</h3>
+        <p>{{ technique.definition }}</p>
+        <div class="rhetoric-examples">
+          {% for example in technique.examples %}
+          <figure>
+            <blockquote class="rhetoric-line">{% for part in example.parts %}{% if part.focus %}<mark>{{ part.text }}</mark>{% else %}{{ part.text }}{% endif %}{% endfor %}</blockquote>
+            <figcaption>{{ example.effect }}</figcaption>
+          </figure>
+          {% endfor %}
+        </div>
+        <p class="rhetoric-clue"><strong>怎么辨认</strong>{{ technique.test }}</p>
+        <a class="rhetoric-technique-link" href="?technique={{ technique.id }}#cases">辨析{{ technique.name }}的例句 →</a>
+      </article>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section id="cases" class="rhetoric-section" aria-labelledby="rhetoric-cases-title">
+    <h2 id="rhetoric-cases-title">例句辨析</h2>
+    <p class="rhetoric-case-intro">先读完整句子和语境，再找依据。一句话也可能同时用几种手法。</p>
+    <nav class="rhetoric-chips" aria-label="按手法筛选辨析">
+      <a href="{% url 'rhetoric-gallery' %}#cases"{% if not selected %} aria-current="location"{% endif %}>全部</a>
+      {% for technique in course.techniques %}<a href="?technique={{ technique.id }}#cases"{% if selected.id == technique.id %} aria-current="location"{% endif %} aria-label="只看{{ technique.name }}相关辨析">{{ technique.name }}</a>{% endfor %}
+    </nav>
+    <p class="rhetoric-count" data-case-count>{% if selected %}{{ selected.name }}相关辨析 · {% endif %}{{ cases|length }} 组</p>
+    <div class="rhetoric-cases">
+      {% for case in cases %}
+      <article class="rhetoric-card rhetoric-case" id="case-{{ case.id }}" data-rhetoric-case>
+        <h3>{{ case.title }}</h3>
+        <div class="rhetoric-samples">
+          {% for label, sentence in case.samples %}<p class="rhetoric-line">{% if case.samples|length > 1 %}<span class="rhetoric-sample-label">{{ label }}</span>{% endif %}<span>{{ sentence }}</span></p>{% endfor %}
+        </div>
+        <p id="prompt-{{ case.id }}" class="rhetoric-prompt">{{ case.prompt }}</p>
+        <form data-rhetoric-quiz data-answer="{{ case.answer }}" hidden>
+          <fieldset aria-labelledby="prompt-{{ case.id }}">
+            {% for choice in case.choices %}<label class="rhetoric-choice"><input type="radio" name="choice" value="{{ choice.id }}" data-feedback="{{ choice.feedback }}"><span>{{ choice.label }}</span></label>{% endfor %}
+          </fieldset>
+          <button class="rhetoric-primary" type="submit">检查判断</button>
+          <p class="rhetoric-feedback" data-rhetoric-feedback role="status"></p>
+        </form>
+        <noscript><ol class="rhetoric-paper-choices">{% for choice in case.choices %}<li>{{ choice.label }}</li>{% endfor %}</ol></noscript>
+        <details class="rhetoric-reason">
+          <summary>看答案与理由</summary>
+          <p><strong>{{ case.answer_label }}</strong></p>
+          <p>{{ case.explanation }}</p>
+          <p>回看手法：{% for technique in case.related %}<a href="#technique-{{ technique.id }}">{{ technique.name }}</a>{% if not forloop.last %} · {% endif %}{% endfor %}</p>
+        </details>
+      </article>
+      {% endfor %}
+    </div>
+  </section>
+
+  <footer class="rhetoric-footer">
+    <nav class="rhetoric-actions" aria-label="关联专题">
+      <a href="{% url 'writing' %}">去作文坊试着用一用 →</a>
+      <a href="{% url 'literature-study' %}">文学常识 →</a>
+    </nav>
+    <details>
+      <summary>学习依据与资料出处（原文需联网）</summary>
+      <p>手法范围参照义务教育语文课程标准，馆内例句和辨析题为教学自编。</p>
+      <ul>{% for source in course.sources %}<li><a href="{{ source.url }}" target="_blank" rel="noopener noreferrer">{{ source.label }} ↗</a></li>{% endfor %}</ul>
+    </details>
+  </footer>
+</div>
+<script src="{% static 'study_topics/rhetoric.js' %}?v=1" defer></script>
+{% endblock %}

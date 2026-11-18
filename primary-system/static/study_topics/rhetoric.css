@@ -1,0 +1,159 @@
+body:has(.rhetoric-gallery) { --page-width: 100%; }
+
+.rhetoric-gallery {
+  --rhetoric-accent: #854620;
+  --rhetoric-tint: #fbe8cd;
+  --rhetoric-rule: #ded2ba;
+  --rhetoric-serif: "Songti SC", "Noto Serif CJK SC", SimSun, serif;
+}
+
+.rhetoric-gallery [hidden] { display: none !important; }
+.rhetoric-back {
+  display: inline-block;
+  margin: 16px 0 24px;
+  color: var(--green-dark);
+  font-weight: 650;
+}
+
+.rhetoric-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(24px, 4vw, 88px);
+  padding: clamp(24px, 3.5vw, 84px);
+  border: 1px solid var(--rhetoric-rule);
+  border-radius: 24px;
+  background: linear-gradient(135deg, var(--white), var(--rhetoric-tint));
+}
+.rhetoric-hero h1 { margin-bottom: 14px; font-size: clamp(34px, 3.5vw, 70px); line-height: 1.25; }
+.rhetoric-hero > div > p { max-width: 35em; margin-bottom: 22px; font-size: 1.12em; }
+.rhetoric-hero-example {
+  max-width: 900px;
+  margin: 0;
+  padding: clamp(16px, 2.1vw, 38px);
+  border: 1px solid var(--rhetoric-rule);
+  border-left: 5px solid var(--green);
+  border-radius: 12px;
+  background: var(--white);
+}
+.rhetoric-hero-example figcaption { margin-bottom: 12px; color: var(--muted); font-weight: 650; }
+.rhetoric-hero-example p { margin-bottom: 12px; }
+.rhetoric-hero-example a { font-size: .87em; }
+.rhetoric-line { font-family: var(--rhetoric-serif); font-size: 1.2em; font-weight: 675; line-height: 1.85; }
+.rhetoric-hero .rhetoric-line { font-size: 1.3em; }
+.rhetoric-line mark {
+  padding: .04em .05em;
+  border-bottom: 2px solid var(--rhetoric-accent);
+  border-radius: 2px;
+  background: var(--rhetoric-tint);
+  color: var(--ink);
+}
+.rhetoric-actions, .rhetoric-chips { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; }
+.rhetoric-actions a { min-height: 44px; padding: 8px 14px; }
+.rhetoric-gallery .rhetoric-primary {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 8px 16px;
+  border: 1px solid var(--green);
+  border-radius: 8px;
+  background: var(--green);
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+}
+.rhetoric-primary:hover { outline: 2px solid var(--green); outline-offset: 2px; }
+
+.rhetoric-section { margin-top: clamp(34px, 4vw, 70px); scroll-margin-top: 20px; }
+.rhetoric-section h2 { margin-bottom: 14px; font-size: 1.65em; }
+.rhetoric-chips { margin-bottom: 22px; }
+.rhetoric-chips a {
+  min-height: 44px;
+  padding: 7px 16px;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: var(--white);
+  color: var(--green-dark);
+  font-size: .9em;
+  font-weight: 650;
+}
+.rhetoric-chips a:hover, .rhetoric-chips a[aria-current] { border-color: var(--green); background: var(--soft); }
+.rhetoric-chips a[aria-current] { box-shadow: inset 0 0 0 1px var(--green); }
+
+.rhetoric-techniques, .rhetoric-cases {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 350px), 1fr));
+  align-items: start;
+  gap: 20px;
+}
+.rhetoric-techniques { align-items: stretch; }
+.rhetoric-cases { grid-template-columns: repeat(auto-fill, minmax(min(100%, 470px), 1fr)); }
+.rhetoric-card {
+  min-width: 0;
+  padding: clamp(18px, 1.7vw, 32px);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--white);
+  overflow-wrap: anywhere;
+  scroll-margin-top: 25px;
+}
+.rhetoric-card:target { outline: 3px solid var(--rhetoric-accent); outline-offset: 4px; }
+.rhetoric-card h3 { margin-bottom: 12px; color: var(--green-dark); font-size: 1.2em; }
+.rhetoric-technique { display: flex; flex-direction: column; }
+.rhetoric-technique-link { align-self: start; margin-top: auto; }
+.rhetoric-examples { margin-block: 0 16px; }
+.rhetoric-examples figure { margin: 0 0 14px; padding: 4px 0 4px 14px; border-left: 2px solid var(--rhetoric-rule); }
+.rhetoric-examples figure:last-child { margin-bottom: 0; }
+.rhetoric-examples blockquote { margin: 0 0 4px; }
+.rhetoric-examples figcaption { font-size: .9em; color: var(--muted); }
+.rhetoric-clue { padding: 12px 14px; border-radius: 8px; background: var(--soft); font-size: .92em; }
+.rhetoric-clue strong { display: block; color: var(--green-dark); }
+.rhetoric-count { margin: -8px 0 16px; color: var(--muted); font-size: .9em; }
+.rhetoric-samples { margin: 16px 0; padding: 12px 16px; border-radius: 8px; background: var(--paper); }
+.rhetoric-samples p { display: flex; align-items: baseline; gap: 10px; margin: 0; }
+.rhetoric-samples p + p { margin-top: 10px; }
+.rhetoric-sample-label { flex: 0 0 auto; color: var(--rhetoric-accent); font: 700 .68em/1.5 system-ui; }
+.rhetoric-prompt { margin-bottom: 12px; font-weight: 700; }
+.rhetoric-case fieldset { min-width: 0; padding: 0; margin: 0 0 14px; border: 0; }
+.rhetoric-choice {
+  display: flex;
+  align-items: start;
+  gap: 10px;
+  min-height: 44px;
+  margin-bottom: 8px;
+  padding: 9px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  cursor: pointer;
+}
+.rhetoric-choice:last-child { margin-bottom: 0; }
+.rhetoric-choice:hover, .rhetoric-choice:has(input:checked) { border-color: var(--green); background: var(--soft); }
+.rhetoric-choice input { flex: 0 0 1em; width: 1em; height: 1em; min-height: 0; padding: 0; margin: .35em 0 0; accent-color: var(--green-dark); }
+.rhetoric-paper-choices { padding-inline-start: 1.75em; }
+.rhetoric-feedback { margin: 8px 0 0; font-weight: 650; }
+.rhetoric-feedback:empty { margin: 0; }
+.rhetoric-feedback[data-result="correct"] { color: var(--green-dark); }
+.rhetoric-feedback[data-result="retry"] { color: var(--rhetoric-accent); }
+.rhetoric-reason { margin-top: 14px; }
+.rhetoric-reason p { margin-block: 8px; }
+.rhetoric-reason p:last-child { margin-bottom: 0; font-size: .88em; }
+.rhetoric-hero-example a, .rhetoric-technique-link, .rhetoric-reason a, .rhetoric-footer a {
+  color: var(--green-dark);
+  text-decoration: underline;
+  text-underline-offset: .22em;
+}
+.rhetoric-footer { margin-top: 36px; padding: 24px 0; border-top: 1px solid var(--line); }
+.rhetoric-footer details { margin: 14px 0; font-size: .88em; }
+
+@media (min-width: 2400px) {
+  .rhetoric-techniques { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .rhetoric-cases { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+@media (max-width: 850px) {
+  .rhetoric-hero { grid-template-columns: 1fr; }
+}
+@media (max-width: 500px) {
+  .rhetoric-hero { padding: 18px; }
+  .rhetoric-chips { gap: 6px; }
+  .rhetoric-chips a { padding-inline: 12px; }
+}

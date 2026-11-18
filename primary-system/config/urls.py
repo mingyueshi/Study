@@ -9,7 +9,7 @@ from accounts.forms import LearnerAuthenticationForm
 from catalog import views as catalog
 from catalog.upgrade_views import upgrade_history
 from catalog.study_courses import hanzi_evolution, literature_study
-from chinesebook import couplets
+from chinesebook import couplets, punctuation, rhetoric
 from learning import views as learning
 from lexicon import views as lexicon
 from lexicon import pages as dictionary
@@ -37,6 +37,8 @@ urlpatterns = [
     path('literature/', literature_study, name='literature-study'),
     path('classical/', include('classical.urls')),
     path('couplets/', couplets.workshop, name='couplets'),
+    path('punctuation/', punctuation.laboratory, name='punctuation-lab'),
+    path('rhetoric/', rhetoric.gallery, name='rhetoric-gallery'),
     path('hanzi-evolution/', hanzi_evolution, name='hanzi-evolution'),
     path('science/', include('science.urls')),
     path('dictionary/', dictionary.lookup, name='dictionary'),

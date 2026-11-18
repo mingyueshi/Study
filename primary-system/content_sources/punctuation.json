@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "title": "标点符号实验室",
+  "intro": "字没有变，意思却可能变了。先读懂一句话，再让标点帮你说清停顿、语气和关系。",
+  "groups": [
+    {"id": "sentence", "label": "句末与语气"},
+    {"id": "inside", "label": "句内与层次"},
+    {"id": "pair", "label": "成对与引用"},
+    {"id": "special", "label": "补充与省略"}
+  ],
+  "levels": [
+    {"id": "start", "label": "入门 · 认语气"},
+    {"id": "apply", "label": "应用 · 看关系"},
+    {"id": "deep", "label": "进阶 · 辨条件"}
+  ],
+  "demo": {
+    "text": "你今天来",
+    "variants": [
+      {"id": "tell", "label": "。 告知", "text": "你今天来。", "meaning": "平静地说明或确认一件事。"},
+      {"id": "ask", "label": "？ 询问", "text": "你今天来？", "meaning": "想向对方确认：是不是今天来？"},
+      {"id": "surprise", "label": "！ 惊喜", "text": "你今天来！", "meaning": "盼到了朋友，用强烈的语气表达惊喜。具体情绪仍要结合上下文。"}
+    ]
+  },
+  "marks": [
+    {"id": "period", "symbol": "。", "name": "句号", "group": "sentence", "summary": "一件事说完整了，用平静的语气收住。", "examples": [{"text": "今天的天空很蓝。", "note": "陈述一个完整的意思。"}, {"text": "请把书放回书架。", "note": "语气缓和的请求，也可以用句号。"}], "tip": "句号看表达是否完整、语气是否陈述，不按字数多少决定。", "reference": "4.1"},
+    {"id": "question", "symbol": "？", "name": "问号", "group": "sentence", "summary": "句子在发问，或用反问表达意思，句末用问号。", "examples": [{"text": "你找到那本书了吗？", "note": "直接向对方提问。"}, {"text": "难道我们不该爱护花草吗？", "note": "反问也带有疑问语气。"}], "tip": "有「谁、什么、哪里」不一定要用问号，要看整句是不是在问。", "reference": "4.2、A.2"},
+    {"id": "exclamation", "symbol": "！", "name": "叹号（感叹号）", "group": "sentence", "summary": "表达强烈的感情，或强烈的呼唤、命令。", "examples": [{"text": "这片星空真美啊！", "note": "赞叹的语气很强。"}, {"text": "危险，快停下！", "note": "急切地提醒和制止。"}], "tip": "带「啊、呀」也不一定用叹号，仍要听整句话的语气。", "reference": "4.3"},
+    {"id": "comma", "symbol": "，", "name": "逗号", "group": "inside", "summary": "句子还没说完，在有关系的语段之间稍作停顿。", "examples": [{"text": "雨停了，我们继续出发。", "note": "两个分句意思相连。"}, {"text": "清晨，校园里响起了读书声。", "note": "时间提示语后有停顿。"}], "tip": "逗号不只是换气记号。先分清句子结构，避免一路逗号写到底。", "reference": "4.4"},
+    {"id": "enumeration", "symbol": "、", "name": "顿号", "group": "inside", "summary": "把句内并列的词语分开，常用于简短的清单。", "examples": [{"text": "桌上有铅笔、橡皮和尺子。", "note": "三个并列物品，最后一项前用了「和」。"}, {"text": "一、观察；二、记录。", "note": "汉字序次语后可以用顿号。"}], "tip": "约数「三四天」不插顿号；带语气词的并列成分一般改用逗号。", "reference": "4.5"},
+    {"id": "semicolon", "symbol": "；", "name": "分号", "group": "inside", "summary": "在复句中分清较大的层次，常把并列的分句分开。", "examples": [{"text": "春天，柳树抽出新芽；秋天，枫叶染红山坡。", "note": "分句内部已有逗号，分号把两层分清。"}, {"text": "实验前，要检查器材；实验后，要整理桌面。", "note": "前后两项要求相互对应。"}], "tip": "分号不是「哪里停得久就放哪里」。本专题先练并列分句这一常见用法。", "reference": "4.6"},
+    {"id": "colon", "symbol": "：", "name": "冒号", "group": "inside", "summary": "提示后面的说明、列举或话语，也可以引出总结。", "examples": [{"text": "书包里有三样东西：课本、铅笔盒和水杯。", "note": "冒号后列出「三样东西」。"}, {"text": "老师说：“请仔细观察。”", "note": "提示语在前，引出完整的话。"}], "tip": "提示的范围要清楚。不要见到「说」就加冒号，也不要让它管到无关的话。", "reference": "4.7"},
+    {"id": "quotation", "symbol": "“ ”", "name": "引号", "group": "pair", "summary": "标出直接引用的话，或需要特别指出的词语。", "examples": [{"text": "小雨说：“我准备好了。”", "note": "独立引用完整的一句话，句号在后引号里面。"}, {"text": "我们给小树取名叫“希望”。", "note": "只标出名称，整句的句号在引号外面。"}], "tip": "引号要成对。引文中还要再引用时，通常外双内单，如“我选‘春’字”。", "reference": "4.8、B.2.1"},
+    {"id": "parentheses", "symbol": "（ ）", "name": "括号", "group": "pair", "summary": "把注释或补充说明括起来，帮助读者查明意思。", "examples": [{"text": "银杏（也叫白果树）的叶子像小扇子。", "note": "解释「银杏」，括号紧跟被解释的词。"}, {"text": "请带好观察本。（观察地点见通知。）", "note": "补充说明整个句子，放在句末点号之后。"}], "tip": "先看是在注释词语还是整句。句内括号末尾通常不用句号。", "reference": "4.9、A.8、B.2.2"},
+    {"id": "book-title", "symbol": "《 》", "name": "书名号", "group": "pair", "summary": "标出书籍、篇章、报刊、影视等作品的名称。", "examples": [{"text": "我正在读《西游记》。", "note": "标出一本书的名称。"}, {"text": "今天读了《静夜思》。", "note": "一首诗的题目也是作品名。"}], "tip": "活动、奖项或普通物品的名称不随意套书名号；书名号要成对。", "reference": "4.15、A.13"},
+    {"id": "dash", "symbol": "——", "name": "破折号", "group": "special", "summary": "可以引出解释，也可以表示话题转折、声音延长等。", "examples": [{"text": "我最喜欢一种花——向日葵。", "note": "后面解释是哪一种花。"}, {"text": "“呜——”小火车开动了。", "note": "表示声音延长。"}], "tip": "破折号写作两字长的「——」，不要用连字符或一小横代替。", "reference": "4.10、5.1.4"},
+    {"id": "ellipsis", "symbol": "……", "name": "省略号", "group": "special", "summary": "可以表示列举未完、话未说完，或说话断断续续。", "examples": [{"text": "花园里有月季、菊花、凤仙花……", "note": "还有别的花，列举没有写完。"}, {"text": "“我……我有点紧张。”", "note": "说话断续，省略号在话语中间。"}], "tip": "常用省略号是六个点「……」。表示列举省略时，不和「等、等等」重复使用。", "reference": "4.11、A.9、5.1.5"}
+  ],
+  "pitfalls": [
+    {"id": "hidden-question", "title": "有疑问词，就一定用问号吗？", "wrong": "我还不知道他住在哪里？", "right": "我还不知道他住在哪里。", "reason": "整句在陈述「不知道」这件事，并没有向别人发问。别只盯着「哪里」。", "mark_ids": ["question", "period"], "reference": "A.2", "question_id": "indirect-question"},
+    {"id": "choice-question", "title": "两个选项，要两个问号吗？", "wrong": "（平常的一次询问）你想画画？还是看书？", "right": "你想画画，还是看书？", "reason": "普通选择问句通常只在最后用问号。若要刻意突出各选项的独立性，也可分别用问号，不能脱离语境判错。", "mark_ids": ["question", "comma"], "reference": "4.2.3.2", "question_id": "choose-activity"},
+    {"id": "words-or-clauses", "title": "并列词语和并列分句，停顿一样吗？", "wrong": "天蓝了、风停了、太阳出来了。", "right": "天蓝了，风停了，太阳出来了。", "reason": "每部分都在说一件事，是分句。简短物品清单常用顿号，分句之间这里用逗号。", "mark_ids": ["comma", "enumeration"], "reference": "4.4、4.5", "question_id": "weather-clauses"},
+    {"id": "approximate-number", "title": "三四天，还是三、四天？", "wrong": "（大约的天数）这项观察要做三、四天。", "right": "这项观察要做三四天。", "reason": "相邻数字表示约数时不用顿号；若指第三、第四两项，就要另看并列关系。", "mark_ids": ["enumeration"], "reference": "4.5.3.4", "question_id": "approximate-days"},
+    {"id": "speaker-middle", "title": "「说」在中间，还用冒号吗？", "wrong": "“快来，”小雨说：“我们发现了一只蜗牛。”", "right": "“快来，”小雨说，“我们发现了一只蜗牛。”", "reason": "提示语插在同一个人的话中间，提示语后用逗号。提示语在前才常用冒号引出下文。", "mark_ids": ["colon", "quotation", "comma"], "reference": "B.1.5", "question_id": "speaker-between"},
+    {"id": "speaker-end", "title": "提示语在后，怎样收尾？", "wrong": "“我们出发吧。”小雨说：", "right": "“我们出发吧。”小雨说。", "reason": "话语已在前面说出，后面的提示语不再引出下文，句末用句号。", "mark_ids": ["colon", "period", "quotation"], "reference": "B.1.5", "question_id": "speaker-after"},
+    {"id": "quote-period", "title": "句号究竟放在引号哪边？", "wrong": "小雨说：“我准备好了”。", "right": "小雨说：“我准备好了。”", "reason": "独立引用完整话语，句号放引号里；若只是句中的名称或片段，整句的点号通常放外面。引文本身的问号、叹号应保留。", "mark_ids": ["quotation", "period"], "reference": "B.2.1", "question_id": "complete-quote"},
+    {"id": "ellipsis-and-etc", "title": "「……」和「等」需要一起写吗？", "wrong": "篮子里有苹果、梨、桃子……等。", "right": "篮子里有苹果、梨、桃子等。", "reason": "表示同一处列举省略，用「等」或省略号就够了；也可写成「篮子里有苹果、梨、桃子……」。", "mark_ids": ["ellipsis"], "reference": "A.9.2", "question_id": "keep-etc"},
+    {"id": "colon-range", "title": "冒号能一直管到句末吗？", "wrong": "书包里有三样东西：课本、铅笔盒和水杯，明天我们去春游。", "right": "书包里有三样东西：课本、铅笔盒和水杯。明天我们去春游。", "reason": "「明天去春游」不属于「三样东西」的列举，另起一句，结束冒号提示的范围。", "mark_ids": ["colon", "period"], "reference": "A.6.2", "question_id": "colon-scope"},
+    {"id": "book-or-event", "title": "所有名称都加书名号吗？", "wrong": "学校举行《读书分享会》活动。", "right": "学校举行读书分享会活动。", "reason": "这里是活动名称，不是作品名称，不用书名号。若要特别标出活动名，可按表达需要用引号。", "mark_ids": ["book-title", "quotation"], "reference": "A.13.1", "question_id": "event-name"},
+    {"id": "nested-levels", "title": "分句里已有逗号，怎样看清大层次？", "wrong": "春天，柳树抽出新芽、秋天，枫叶染红山坡。", "right": "春天，柳树抽出新芽；秋天，枫叶染红山坡。", "reason": "按季节分成两层，每层里面有逗号；用分号标出并列层次，比顿号清楚。", "mark_ids": ["semicolon", "comma"], "reference": "4.6.3.1", "question_id": "season-levels"},
+    {"id": "bracket-position", "title": "解释一个词，括号该跟谁？", "wrong": "银杏的叶子像小扇子（也叫白果树）。", "right": "银杏（也叫白果树）的叶子像小扇子。", "reason": "「也叫白果树」解释的是银杏，不是叶子。句内括号紧跟被解释的词。", "mark_ids": ["parentheses"], "reference": "A.8", "question_id": "explain-name"}
+  ],
+  "questions": [
+    {"id": "plain-statement", "title": "把一件事说完整", "group": "sentence", "level": "start", "context": "用平静的语气告诉同学一个事实。", "chunks": ["今天轮到我们值日", ""], "answers": [["。"]], "hint": "整句是在陈述事情。", "explanation": "意思完整、语气平静，用句号收尾。", "mark_ids": ["period"]},
+    {"id": "direct-question", "title": "问清楚地点", "group": "sentence", "level": "start", "context": "你想请对方告诉你观察地点。", "chunks": ["我们在哪里集合", ""], "answers": [["？"]], "hint": "对方需要回答你的问题。", "explanation": "整句在询问集合地点，用问号。", "mark_ids": ["question"]},
+    {"id": "strong-praise", "title": "忍不住赞叹", "group": "sentence", "level": "start", "context": "眼前的景色让你很激动，请用强烈的赞叹语气。", "chunks": ["这片星空真美啊", ""], "answers": [["！"]], "hint": "题目要求强烈的赞叹语气。", "explanation": "这里用叹号表达强烈赞美；不是因为出现了「啊」就机械地用叹号。", "mark_ids": ["exclamation"]},
+    {"id": "gentle-request", "title": "轻声提醒", "group": "sentence", "level": "start", "context": "图书馆里，轻声、缓和地请朋友把书放回去。", "chunks": ["请把书放回书架", ""], "answers": [["。"]], "hint": "缓和的请求可以用句号。", "explanation": "祈使句也要看语气。这里语气缓和，用句号。", "mark_ids": ["period"]},
+    {"id": "indirect-question", "title": "有「哪里」却没在发问", "group": "sentence", "level": "apply", "context": "小雨在陈述自己还不知道的事情。", "chunks": ["我还不知道他住在哪里", ""], "answers": [["。"]], "hint": "把整句连起来读：我还不知道……", "explanation": "「他住在哪里」是「不知道」的内容，整句没有疑问语气，用句号。", "mark_ids": ["question", "period"]},
+    {"id": "choose-activity", "title": "一次询问，两个选项", "group": "sentence", "level": "apply", "context": "平常地问一次选择，不刻意把两个选项分成独立的提问。", "chunks": ["你想画画", "还是看书", ""], "answers": [["，", "？"]], "hint": "通常只在最后一个选项末尾用问号。", "explanation": "按题目给出的普通选择问句语境，中间用逗号，句末用问号。刻意强调独立选项时可采用别的断法。", "mark_ids": ["question", "comma"]},
+    {"id": "rhetorical-question", "title": "反问也有问号", "group": "sentence", "level": "apply", "context": "用反问语气强调应该爱护花草。", "chunks": ["难道我们不该爱护花草吗", ""], "answers": [["？"]], "hint": "不需要真的等答案，但句子仍有疑问语气。", "explanation": "反问用问的形式表达肯定意思，句末用问号。", "mark_ids": ["question"]},
+    {"id": "list-tools", "title": "整理文具清单", "group": "inside", "level": "start", "context": "在一句话内列出三个并列的物品，不拆成几个句子。", "chunks": ["桌上有铅笔", "橡皮和尺子", ""], "answers": [["、", "。"]], "hint": "并列词语之间常用顿号。", "explanation": "「铅笔、橡皮、尺子」是并列物品，前两项间用顿号，最后一项由「和」连接。", "mark_ids": ["enumeration", "period"]},
+    {"id": "weather-clauses", "title": "三件事接着说", "group": "inside", "level": "apply", "context": "把三种天气变化连成一个陈述句，不拆开成句。", "chunks": ["天蓝了", "风停了", "太阳出来了", ""], "answers": [["，", "，", "。"]], "hint": "各部分都有自己的陈述内容，是分句。", "explanation": "并列分句之间这里用逗号，不用分隔词语的顿号，整句末尾用句号。", "mark_ids": ["comma", "period"]},
+    {"id": "approximate-days", "title": "大约要多久", "group": "inside", "level": "apply", "context": "「三四」表示大约三天或四天。无需标点的空格请选「不加」。", "chunks": ["这项观察要做三", "四天", ""], "answers": [["", "。"]], "hint": "相邻数字连用表示约数时，中间不加顿号。", "explanation": "「三四天」是约数，中间不加标点。若指第三、第四项，含义就不同了。", "mark_ids": ["enumeration", "period"]},
+    {"id": "introduce-list", "title": "引出三样东西", "group": "inside", "level": "apply", "context": "用冒号引出对「三样东西」的具体列举。", "chunks": ["书包里有三样东西", "课本", "铅笔盒和水杯", ""], "answers": [["：", "、", "。"]], "hint": "先提示，后列举；并列物品再用顿号分开。", "explanation": "冒号引出具体内容，课本与铅笔盒之间用顿号，列举完成后用句号。", "mark_ids": ["colon", "enumeration", "period"]},
+    {"id": "season-levels", "title": "分清两个大层次", "group": "inside", "level": "deep", "context": "写成一个复句，用分号分开两个并列的季节场景。", "chunks": ["春天", "柳树抽出新芽", "秋天", "枫叶染红山坡", ""], "answers": [["，", "；", "，", "。"]], "hint": "每个季节内部有小停顿，两个季节之间标出大层次。", "explanation": "每个分句内部用逗号，两组并列内容之间用分号，最后用句号。", "mark_ids": ["semicolon", "comma", "period"]},
+    {"id": "colon-scope", "title": "结束冒号的范围", "group": "inside", "level": "deep", "context": "前面列举书包物品，后面另起一句说明明天的安排。", "chunks": ["书包里有三样东西", "课本", "铅笔盒和水杯", "明天我们去春游", ""], "answers": [["：", "、", "。", "。"]], "hint": "去春游不是「三样东西」之一。", "explanation": "用句号结束列举，再说下一件事，避免让冒号的提示范围包含无关内容。", "mark_ids": ["colon", "enumeration", "period"]},
+    {"id": "complete-quote", "title": "提示语在前", "group": "pair", "level": "apply", "context": "小雨先被介绍，后面直接引用她完整、平静的一句话。一个空里可以放几个标点。", "chunks": ["小雨说", "我准备好了", ""], "answers": [["：“", "。”"]], "hint": "冒号引出话语；前后引号成对；完整话语的句号放里面。", "explanation": "提示语在前，用冒号；引号包住完整话语，句号位于后引号里面。", "mark_ids": ["colon", "quotation", "period"]},
+    {"id": "speaker-between", "title": "提示语在中间", "group": "pair", "level": "deep", "context": "同一个人连续说话，提示语插在中间。用逗号连接，不把前后拆成两次发言。", "chunks": ["", "快来", "小雨说", "我们发现了一只蜗牛", ""], "answers": [["“", "，”", "，“", "。”"]], "hint": "中间的「小雨说」后用逗号。", "explanation": "前半句话以逗号和后引号暂收，提示语后用逗号再接前引号，最后以句号和后引号收住。", "mark_ids": ["quotation", "comma", "period"]},
+    {"id": "speaker-after", "title": "提示语在后", "group": "pair", "level": "deep", "context": "先平静地说出一句话，最后才交代是谁说的。", "chunks": ["", "我们出发吧", "小雨说", ""], "answers": [["“", "。”", "。"]], "hint": "后面的提示语没有再引出话语，不用冒号。", "explanation": "完整话语在引号内用句号结束；后置提示语末尾也用句号。", "mark_ids": ["quotation", "period"]},
+    {"id": "quoted-name", "title": "只是句中的一个名称", "group": "pair", "level": "apply", "context": "用引号标出小树的名字「希望」。", "chunks": ["我们给小树取名叫", "希望", ""], "answers": [["“", "”。"]], "hint": "被引用的是名称，不是独立的一句话。", "explanation": "引号只包住名字，整句话的句号放在后引号外面。", "mark_ids": ["quotation", "period"]},
+    {"id": "read-book", "title": "标出书名", "group": "pair", "level": "start", "context": "你读的是一本书，书名是「西游记」。", "chunks": ["我正在读", "西游记", ""], "answers": [["《", "》。"]], "hint": "作品名用书名号，句号在书名号外。", "explanation": "《西游记》是书的名称，用成对的书名号标出。", "mark_ids": ["book-title", "period"]},
+    {"id": "event-name", "title": "活动名不是书名", "group": "pair", "level": "deep", "context": "这里的「读书分享会」是活动名。可直接写，也可用引号特别标出；不用的空格选「不加」。", "chunks": ["学校举行", "读书分享会", "活动", ""], "answers": [["", "", "。"], ["“", "”", "。"]], "hint": "活动名不属于作品名；两种写法需要前后一致。", "explanation": "本题接受不加标号和使用成对引号两种写法，都不使用书名号。", "mark_ids": ["book-title", "quotation", "period"]},
+    {"id": "explain-name", "title": "给一个词补说明", "group": "pair", "level": "apply", "context": "用括号解释银杏的别名，整句保持连贯。", "chunks": ["银杏", "也叫白果树", "的叶子像小扇子", ""], "answers": [["（", "）", "。"]], "hint": "注释要紧跟「银杏」，句内括号里不加句号。", "explanation": "「也叫白果树」是对词语的注释，用句内括号；整句在最后用句号。", "mark_ids": ["parentheses", "period"]},
+    {"id": "dash-explanation", "title": "揭晓是哪一种花", "group": "special", "level": "apply", "context": "用破折号引出解释，平静地介绍你最喜欢的花。", "chunks": ["我最喜欢一种花", "向日葵", ""], "answers": [["——", "。"]], "hint": "用两字长的破折号引出具体名称。", "explanation": "「向日葵」解释前面的「一种花」，这里用破折号。", "mark_ids": ["dash", "period"]},
+    {"id": "list-unfinished", "title": "还有没列完的花", "group": "special", "level": "apply", "context": "在一句话中列举花名，最后用省略号表示还有其他花，本题末尾只填省略号。", "chunks": ["花园里有月季", "菊花", "凤仙花", ""], "answers": [["、", "、", "……"]], "hint": "花名之间用顿号，未列完处用六个点。", "explanation": "顿号分隔并列花名，省略号表示列举未完。省略号前后是否还需点号，要结合具体语境。", "mark_ids": ["enumeration", "ellipsis"]},
+    {"id": "keep-etc", "title": "已经有「等」了", "group": "special", "level": "deep", "context": "保留原句的「等」字，不再重复表示省略。不需要标点的地方选「不加」。", "chunks": ["篮子里有苹果", "梨", "桃子", "等", ""], "answers": [["、", "、", "", "。"]], "hint": "「等」已经表示列举没有写全。", "explanation": "用顿号分隔水果名，「桃子」与「等」之间不加省略号，整句末尾用句号。", "mark_ids": ["ellipsis", "enumeration", "period"]},
+    {"id": "hesitant-speech", "title": "断断续续地说", "group": "special", "level": "apply", "context": "用引号标出话语，用省略号表示说话断续，结尾语气平静。", "chunks": ["", "我", "我有点紧张", ""], "answers": [["“", "……", "。”"]], "hint": "省略号在两次「我」之间；完整话语的句号放引号内。", "explanation": "这里省略号表示话语断续，不能改成破折号表示解释；最后句号与后引号按顺序收尾。", "mark_ids": ["ellipsis", "quotation", "period"]}
+  ],
+  "sources": [
+    {"label": "教育部：《标点符号用法》GB/T 15834—2011（全文 PDF；卡片条款号对应此标准）", "url": "https://www.moe.gov.cn/jyb_sjzl/ziliao/A19/201001/W020190128580990138234.pdf"},
+    {"label": "国家语言资源服务平台：《标点符号用法》查询", "url": "https://gf.ywky.edu.cn/punctuation_cn_text"},
+    {"label": "国家标准全文公开系统：标准信息与状态", "url": "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=22EA6D162E4110E752259661E1A0D0A8"}
+  ]
+}

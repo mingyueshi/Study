@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}标点符号实验室 · 乐学堂{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="{% static assets.css.path %}?v={{ assets.css.version }}">
+<div class="punctuation-lab" data-storage-scope="{% if user.is_authenticated %}user-{{ user.pk }}{% else %}guest{% endif %}">
+  <a class="punct-back" href="{% url 'home' %}?area=chinese#modules-title">← 学习广场 · 语文</a>
+  <header class="punct-hero">
+    <div>
+      <p class="punct-eyebrow">语言观察站 / 把一句话说清楚</p>
+      <h1>{{ course.title }}</h1>
+      <p class="punct-lead">{{ course.intro }}</p>
+      <p class="punct-counts">{{ course.marks|length }} 种常见标点 <span>／</span> {{ course.pitfalls|length }} 组易错辨析 <span>／</span> {{ course.questions|length }} 道加标点练习</p>
+    </div>
+    <section class="punct-demo" aria-labelledby="demo-title">
+      <p id="demo-title">同样的字，换个语气</p>
+      <p class="punct-demo-sentence" data-demo-sentence>{{ course.demo.variants.0.text }}</p>
+      <div class="punct-actions" data-demo-controls hidden>{% for variant in course.demo.variants %}<button type="button" data-demo="{{ variant.id }}" aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}">{{ variant.label }}</button>{% endfor %}</div>
+      <p data-demo-meaning>{{ course.demo.variants.0.meaning }}</p>
+      <noscript><p>{% for variant in course.demo.variants %}{{ variant.text }} {{ variant.meaning }} {% endfor %}</p></noscript>
+    </section>
+  </header>
+
+  <nav class="punct-nav" aria-label="实验室目录">
+    <a href="?view=usage#workbench" {% if view == 'usage' %}aria-current="page"{% endif %}><span>01</span> 认识标点 <small>常见用法</small></a>
+    <a href="?view=errors#workbench" {% if view == 'errors' %}aria-current="page"{% endif %}><span>02</span> 易错辨析 <small>看懂条件</small></a>
+    <a href="?view=practice#workbench" {% if view == 'practice' %}aria-current="page"{% endif %}><span>03</span> 动手加标点 <small>边练边想</small></a>
+  </nav>
+
+  <section id="workbench" class="punct-workbench" aria-labelledby="workbench-title">
+  {% if view == 'usage' %}
+    <div class="punct-section-head"><div><p class="punct-eyebrow">01 / 常见用法</p><h2 id="workbench-title">先看意思，再选标点</h2></div><a href="?view=practice#workbench">直接练一练 →</a></div>
+    <div class="punct-tools" data-usage-tools hidden>
+      <label>按作用看 <select data-mark-group><option value="">全部标点</option>{% for group in course.groups %}<option value="{{ group.id }}">{{ group.label }}</option>{% endfor %}</select></label>
+      <label>找用法 <input type="search" data-mark-search placeholder="如：引号、列举、问号"></label>
+      <p role="status" data-mark-count></p>
+    </div>
+    <div class="punct-mark-grid">
+      {% for mark in course.marks %}
+      <article class="punct-card punct-mark" id="mark-{{ mark.id }}" data-mark="{{ mark.id }}" data-group="{{ mark.group }}">
+        <header><span class="punct-symbol" aria-hidden="true">{{ mark.symbol }}</span><h3>{{ mark.name }}</h3><a href="#mark-{{ mark.id }}" aria-label="{{ mark.name }}的直达链接">#</a></header>
+        <p>{{ mark.summary }}</p>
+        <div class="punct-examples">{% for example in mark.examples %}<p><strong>{{ example.text }}</strong><small>{{ example.note }}</small></p>{% endfor %}</div>
+        <p class="punct-note">{{ mark.tip }}</p>
+        <footer><small>依据条款 {{ mark.reference }}</small><a href="?view=practice&amp;mark={{ mark.id }}#workbench">练这个标点 →</a></footer>
+      </article>
+      {% endfor %}
+    </div>
+    <p class="punct-note">这里先认识 12 种常用标点。标点还有其他种类与用法；排版时，句号、逗号等点号不放行首，前引号不放行末，后引号不放行首。破折号、省略号各占两个字的位置，中间不拆行。（第 5 章）</p>
+  {% elif view == 'errors' %}
+    <div class="punct-section-head"><div><p class="punct-eyebrow">02 / 易错辨析</p><h2 id="workbench-title">差一个标点，差在哪里？</h2></div><p>先比较，再展开理由。</p></div>
+    <p>「待修改」一栏按标出的语境判断。表达目的不同，合理的断句也可能不同。</p>
+    <div class="punct-error-grid">
+      {% for item in course.pitfalls %}
+      <article class="punct-card" id="pitfall-{{ item.id }}">
+        <p class="punct-eyebrow">观察 {{ forloop.counter|stringformat:'02d' }}</p><h3>{{ item.title }}</h3>
+        <div class="punct-compare"><p><span>待修改</span>{{ item.wrong }}</p><p><span>这样写</span><strong>{{ item.right }}</strong></p></div>
+        <details><summary>为什么？</summary><p>{{ item.reason }}</p><small>依据条款 {{ item.reference }}</small></details>
+        <footer><span>{% for id in item.mark_ids %}<a href="?view=usage#mark-{{ id }}">回看用法</a>{% if not forloop.last %} · {% endif %}{% endfor %}</span><a href="?view=practice&amp;question={{ item.question_id }}#workbench">用一道题试试 →</a></footer>
+      </article>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="punct-section-head"><div><p class="punct-eyebrow">03 / 动手加标点</p><h2 id="workbench-title">让标点回到合适的位置</h2></div><a href="?view=errors#workbench">拿不准？看看易错辨析 →</a></div>
+    <div data-practice hidden>
+      <div class="punct-tools">
+        <label>练什么 <select data-practice-group><option value="">全部用法</option>{% for group in course.groups %}<option value="{{ group.id }}">{{ group.label }}</option>{% endfor %}</select></label>
+        <label>所需基础 <select data-practice-level><option value="">全部层次</option>{% for level in course.levels %}<option value="{{ level.id }}">{{ level.label }}</option>{% endfor %}</select></label>
+        <label>练习范围 <select data-practice-mode><option value="all">全部题目</option><option value="wrong">待巩固题</option></select></label>
+        <button type="button" data-clear-filter hidden>取消标点筛选</button>
+      </div>
+      <p class="punct-progress" role="status" data-progress></p>
+      <p class="punct-storage" data-storage-note>练习记录只保存在当前浏览器，按账号区分；游客共用游客记录，清除浏览器数据会清除记录。</p>
+      <div class="punct-question-select"><label>选一道题 <select data-question-select></select></label><span data-position></span></div>
+      <div class="punct-exercise" data-exercise>
+        <p class="punct-eyebrow" data-question-level></p>
+        <h3 data-question-title tabindex="-1"></h3>
+        <p class="punct-context" data-context></p>
+        <form data-answer-form>
+          <p id="punct-input-help">点选一个空格，再点下方符号；也可直接输入。一个空格能放多个标点，需要留空时选「不加」。</p>
+          <div class="punct-sentence" data-sentence role="group" aria-label="给句子加标点" aria-describedby="punct-input-help"></div>
+          <div class="punct-palette" role="group" aria-label="可用的标点符号" data-palette></div>
+          <div class="punct-actions punct-answer-actions"><button class="punct-primary" type="submit">检查标点</button><button type="button" data-reset>重新填写</button><button type="button" data-hint>给我一点提示</button><button type="button" data-reveal>看参考答案</button></div>
+        </form>
+        <p class="punct-feedback" role="status" data-feedback></p>
+        <div class="punct-reference" data-reference hidden></div>
+        <p class="punct-related" data-related></p>
+      </div>
+      <p class="punct-note" data-empty hidden>当前没有符合条件的题目。可以切换为全部题目，或调整用法与层次。</p>
+      <div class="punct-actions punct-page-actions"><button type="button" data-previous>← 上一题</button><button type="button" data-next>下一题 →</button><button type="button" data-retry>重练待巩固题</button></div>
+    </div>
+    <noscript>
+      <p>开启 JavaScript 可逐题填写并即时检查；也可在纸上练习，再展开参考答案。</p>
+      {% for question in course.questions %}<article class="punct-card" id="question-{{ question.id }}"><h3>{{ forloop.counter }}. {{ question.title }}</h3><p>{{ question.context }}</p><p class="punct-sentence">{{ question.chunks|join:'［　］' }}</p><details><summary>看提示与参考答案</summary><p>{{ question.hint }}</p>{% for sentence in question.references %}<p><strong>{{ sentence }}</strong></p>{% endfor %}<p>{{ question.explanation }}</p></details></article>{% endfor %}
+    </noscript>
+  {% endif %}
+  </section>
+  <footer class="punct-sources">
+    <p>再把句子读一遍：意思完整吗？语气合适吗？层次清楚吗？成对标点齐了吗？</p>
+    <div class="punct-actions"><a href="{% url 'chinesebook' %}">语文教材 →</a><a href="{% url 'writing' %}">去作文坊用一用 →</a><a href="{% url 'literature-study' %}">文学常识 →</a></div>
+    <details><summary>学习依据与资料出处（原文需联网）</summary><p>用法按 GB/T 15834—2011 编写，例句与练习为本专题自编。答案按题目语境设置；真实写作中，合理断句可以不止一种。</p><ul>{% for source in course.sources %}<li><a href="{{ source.url }}" target="_blank" rel="noopener noreferrer">{{ source.label }} ↗</a></li>{% endfor %}</ul></details>
+  </footer>
+</div>
+{{ course|json_script:'punctuation-data' }}
+<script src="{% static assets.js.path %}?v={{ assets.js.version }}" defer></script>
+{% endblock %}
