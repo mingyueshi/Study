@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}近反义词迷宫 · 乐学堂{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'study_topics/word-maze.css' %}?v=1">
+<div class="word-maze" data-word-maze data-storage-scope="{% if user.is_authenticated %}user-{{ user.pk }}{% else %}guest{% endif %}">
+  <a class="maze-back" href="{% url 'home' %}?area=chinese#modules-title">← 学习广场 · 语文</a>
+  <header class="maze-hero">
+    <h1>近反义词迷宫</h1>
+    <p>{{ intro }}</p>
+    <nav class="maze-route-choices" aria-label="选择词语路线">
+      {% for item in routes %}
+      <a href="?route={{ item.id }}#play"{% if route.id == item.id %} aria-current="location"{% endif %}>
+        <strong>{{ item.name }}</strong><span>{{ item.subtitle }}</span><small>{{ item.gates|length }} 关 <span aria-hidden="true">→</span></small>
+      </a>
+      {% endfor %}
+    </nav>
+  </header>
+
+  <section id="play" class="maze-play" aria-labelledby="maze-play-title">
+    <header class="maze-play-header">
+      <div><h2 id="maze-play-title">{{ route.name }}路线</h2><p>{{ route.method }}</p></div>
+      <p class="maze-progress" data-maze-progress aria-live="polite" hidden></p>
+    </header>
+    <nav class="maze-map" aria-label="当前路线关卡" data-maze-map hidden>
+      <ol>
+        {% for gate in gates %}
+        <li><button type="button" data-maze-stop aria-controls="gate-{{ gate.id }}"><span class="maze-stop-number">{{ forloop.counter }}</span><span data-stop-state>未到达</span></button></li>
+        {% endfor %}
+        <li><button type="button" data-maze-exit aria-controls="maze-exit"><span class="maze-stop-number" aria-hidden="true">✓</span><span>出口</span></button></li>
+      </ol>
+    </nav>
+    <noscript><p>可以先读句子并选出答案，再展开参考理由。启用 JavaScript 后可以逐关开门。</p></noscript>
+    <div class="maze-gates">
+      {% for gate in gates %}
+      <article class="maze-gate" id="gate-{{ gate.id }}" data-maze-gate data-id="{{ gate.id }}" data-revision="{{ gate.revision }}" data-answer="{{ gate.answer }}">
+        <h3 tabindex="-1">第 {{ forloop.counter }} 关 · {{ gate.title }}</h3>
+        <div class="maze-samples">
+          {% for label, sample in gate.samples %}<p>{% if gate.samples|length > 1 %}<span class="maze-sample-label">{{ label }}</span>{% endif %}<span>{{ sample.0 }}<mark>{{ sample.1 }}</mark>{{ sample.2 }}</span></p>{% endfor %}
+        </div>
+        <p class="maze-prompt" id="prompt-{{ gate.id }}">{{ gate.prompt }}</p>
+        <div class="maze-doors" data-maze-doors role="group" aria-labelledby="prompt-{{ gate.id }}" hidden>
+          {% for choice in gate.choices %}
+          <button type="button" data-maze-choice="{{ choice.id }}" data-feedback="{{ choice.feedback }}"><span class="maze-door-letter" aria-hidden="true">{{ choice.id|upper }}</span><span>{{ choice.label }}</span></button>
+          {% endfor %}
+        </div>
+        <noscript><ol type="A">{% for choice in gate.choices %}<li>{{ choice.label }}</li>{% endfor %}</ol></noscript>
+        <p class="maze-feedback" data-maze-feedback role="status"></p>
+        <div class="maze-actions" data-maze-actions hidden>
+          <button type="button" data-maze-hint aria-controls="hint-{{ gate.id }}" aria-expanded="false">给我一点提示</button>
+          <button type="button" data-maze-reveal aria-controls="reason-{{ gate.id }}" aria-expanded="false">看参考答案</button>
+          <button type="button" class="maze-primary" data-maze-next hidden>{% if forloop.last %}走出迷宫 →{% else %}进入下一关 →{% endif %}</button>
+        </div>
+        <p id="hint-{{ gate.id }}" class="maze-note" data-maze-clue hidden>{{ gate.hint }}</p>
+        <details id="reason-{{ gate.id }}" class="maze-reason" data-maze-reason>
+          <summary>参考答案与理由</summary><p><strong>{{ gate.answer_label }}</strong></p><p>{{ gate.explanation }}</p>
+        </details>
+      </article>
+      {% endfor %}
+    </div>
+    <article id="maze-exit" class="maze-gate maze-exit" data-maze-finish hidden>
+      <h3 tabindex="-1">走完{{ route.name }}路线了！</h3>
+      <p data-maze-finish-count></p>
+      <div class="maze-actions">
+        <a class="maze-primary" href="?route={{ next_route.id }}#play">去{{ next_route.name }}路线 →</a>
+        <button type="button" data-maze-replay>从第一关再走一次</button>
+      </div>
+    </article>
+    <p class="maze-storage" data-maze-storage hidden>进度保存在当前浏览器，登录后按账号区分，未登录时共用游客进度。</p>
+  </section>
+
+  <footer class="maze-footer">
+    <a href="{% url 'dictionary' %}">查字查词 →</a>
+    <a href="{% url 'chinesebook' %}">语文教材 →</a>
+    <details>
+      <summary>学习依据（资料链接需联网）</summary>
+      <p>练习采用联系上下文理解词句的方法，题目和解释为教学自编。</p>
+      <ul>{% for source in sources %}<li><a href="{{ source.url }}" target="_blank" rel="noopener noreferrer">{{ source.label }} ↗</a></li>{% endfor %}</ul>
+    </details>
+  </footer>
+</div>
+<script src="{% static 'study_topics/word-maze.js' %}?v=1" defer></script>
+{% endblock %}
