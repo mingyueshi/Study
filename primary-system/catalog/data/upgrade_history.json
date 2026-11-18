@@ -2,6 +2,61 @@
   "schema_version": 1,
   "records": [
     {
+      "revision": "7321385696470a07ce622f37d492c02902b8a8c4",
+      "date": "2026-11-18",
+      "title": "新增单位与测量专题"
+    },
+    {
+      "revision": "e3bda37d8771279630eb3f3e746865b47dfde345",
+      "date": "2026-11-18",
+      "title": "新增标点符号和修辞手法专题"
+    },
+    {
+      "revision": "622e01f26ee26f28c2212cdcec41b2dc59c6ef2e",
+      "date": "2026-11-17",
+      "title": "新增地球内部专题"
+    },
+    {
+      "revision": "178950aca4cfeb071130fcbed3b654239633abe7",
+      "date": "2026-11-17",
+      "title": "新增中国省份文化专题"
+    },
+    {
+      "revision": "f51ecd61d87a65b53c2f3944fcfb5b5f3e773e5b",
+      "date": "2026-11-17",
+      "title": "简化天文探索入口与地址"
+    },
+    {
+      "revision": "d054c6501f1e65b998d807fb7ee1785f9d5d24b9",
+      "date": "2026-11-17",
+      "title": "新增词根词缀树"
+    },
+    {
+      "revision": "14fbb81358128b7893fdbd281db84d8b83b73892",
+      "date": "2026-11-17",
+      "title": "新增历史疆域地图专题"
+    },
+    {
+      "revision": "616721ca0a2e64263dbdf41f062fb17c5fdfb031",
+      "date": "2026-11-17",
+      "title": "新增数学思维训练营"
+    },
+    {
+      "revision": "8d2d130dc8bc2a8d6dbb44a35713450bf55a2815",
+      "date": "2026-11-17",
+      "title": "新增数学之美专题"
+    },
+    {
+      "revision": "89aeddb797610202cbc1c488e6b703b0f9b82043",
+      "date": "2026-11-17",
+      "title": "新增丝绸之路专题"
+    },
+    {
+      "revision": "5c0e764b1274c42801152861301be75f70afd25a",
+      "date": "2026-11-17",
+      "title": "新增升级记录与时间线折叠"
+    },
+    {
       "revision": "239e9c464936a210c0247e96889a4a80dda17edd",
       "date": "2026-11-17",
       "title": "新增人物馆文明巡礼与古代科技"

@@ -105,6 +105,19 @@ class UpgradeHistoryPageTests(SimpleTestCase):
         self.assertContains(last, '新增学习系统')
         self.assertEqual(last.context['selected_month'], '')
 
+    def test_load_older_link_returns_only_the_next_matching_dates(self):
+        response = self.client.get(self.url, {'month': '2026-11', 'q': '学习'})
+        self.assertContains(response, 'data-upgrade-next')
+        first_dates = {group['date'] for group in response.context['page']}
+        older = self.client.get(self.url + response.context['next_url'])
+        self.assertEqual(older.status_code, 200)
+        older_dates = {group['date'] for group in older.context['page']}
+        self.assertEqual(len(older_dates), 1)
+        self.assertLess(max(older_dates), min(first_dates))
+        self.assertContains(older, '完善学习体验（第 7 次）')
+        self.assertNotContains(older, '新增学习系统')
+        self.assertNotContains(older, 'data-upgrade-next')
+
     def test_empty_search_is_escaped_and_can_be_cleared(self):
         response = self.client.get(self.url, {'q': '<script>alert(1)</script>'})
         self.assertContains(response, '暂时没有找到这条足迹')

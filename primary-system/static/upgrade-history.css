@@ -21,7 +21,6 @@
 .upgrade-results p { margin: 0; color: var(--muted); font-size: .9em; }
 .upgrade-toggles { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
 .upgrade-toggles[hidden] { display: none; }
-.upgrade-toggles > span { color: var(--muted); font-size: .85em; }
 .upgrade-toggles button { min-height: 44px; padding: 8px 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--white); color: var(--green); font-size: .88em; font-weight: 650; }
 .upgrade-toggles button:hover:not(:disabled) { background: var(--soft); border-color: var(--green); }
 .upgrade-toggles button:disabled { color: var(--muted); opacity: .55; cursor: default; }
@@ -48,6 +47,15 @@
 .upgrade-empty h3 { margin: 8px 0; }
 .upgrade-empty p { color: var(--muted); }
 .upgrade-empty a { display: inline-flex; align-items: center; min-height: 48px; color: var(--green); font-weight: 650; }
+.upgrade-newer { display: inline-flex; align-items: center; min-height: 44px; margin-bottom: 12px; color: var(--green); font-weight: 650; }
+.upgrade-newer:hover { text-decoration: underline; text-underline-offset: 4px; }
+.upgrade-more { margin-top: 24px; text-align: center; }
+.upgrade-more a { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 8px 20px; border: 1px solid var(--line); border-radius: 14px; background: var(--soft); color: var(--green); font-weight: 650; }
+.upgrade-more a:hover { border-color: var(--green); }
+.upgrade-more a[aria-disabled="true"] { color: var(--muted); cursor: progress; }
+.upgrade-more a[hidden] { display: none; }
+.upgrade-load-status { margin: 8px 0 0; color: var(--muted); font-size: .85em; }
+.upgrade-load-status:empty { margin: 0; }
 .upgrade-source { margin-top: 36px; padding: 16px 24px; border: 1px solid var(--line); border-radius: 18px; background: var(--white); }
 .upgrade-source summary { min-height: 44px; font-weight: 650; }
 .upgrade-source p { max-width: 65em; margin: 12px 0 0; color: var(--muted); font-size: .9em; }
@@ -66,7 +74,7 @@
   .upgrade-entries li { padding: 14px; gap: 10px; }
 }
 @media print {
-  .upgrade-page .back, .upgrade-filters, .upgrade-source, .upgrade-revision, .upgrade-page .pagination, .upgrade-toggles { display: none; }
+  .upgrade-page .back, .upgrade-filters, .upgrade-source, .upgrade-revision, .upgrade-newer, .upgrade-more, .upgrade-toggles { display: none; }
   .upgrade-hero { display: block; padding: 18px; }
   .upgrade-stats { display: none; }
   .upgrade-day { break-inside: avoid; }

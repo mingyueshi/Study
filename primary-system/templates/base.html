@@ -7,7 +7,7 @@
   <title>{% block title %}乐学堂 · 一起把世界读懂{% endblock %}</title>
   <link rel="icon" href="{% static 'icons/book.svg' %}" type="image/svg+xml">
   <script src="{% static 'reading-preferences.js' %}?v=2"></script>
-  <link rel="stylesheet" href="{% static 'platform.css' %}?v=8">
+  <link rel="stylesheet" href="{% static 'platform.css' %}?v=10">
   <link rel="stylesheet" href="{% static 'reading-preferences.css' %}?v=3">
   <link rel="stylesheet" href="{% static 'select-controls.css' %}?v=4">
   <link rel="stylesheet" href="{% static 'disclosure-controls.css' %}?v=2">
@@ -19,7 +19,7 @@
 <body>
   <a class="skip-link" href="#main">跳到主要内容</a>
   {% with current=request.resolver_match.url_name %}
-  <header class="site-masthead">
+  <header class="site-masthead" tabindex="-1">
     <div class="site-top">
       <div class="site-top-inner">
         <p class="site-top-welcome"><span aria-hidden="true">✦</span>{% if user.is_authenticated %}欢迎回来，一起探索新知识{% else %}欢迎来到乐学堂，一起探索新知识{% endif %}</p>
@@ -88,7 +88,9 @@
     <div class="site-footer-meta"><span>乐学堂 · 让知识慢慢长成自己的力量</span><div class="site-footer-links"><span>语文 / 数学 / 英语 / 更大的世界</span><a href="{% url 'upgrade-history' %}" {% if request.resolver_match.url_name == 'upgrade-history' %}aria-current="page"{% endif %}>升级记录</a></div></div>
     <p class="site-footer-notice"><strong>版权声明</strong>本系统仅供个人学习与自用，基础数据来源于网络公开资源。如有侵权，请访问 <a href="https://shimingyue.com/" target="_blank" rel="noopener noreferrer">shimingyue.com</a> 联系作者删除。</p>
   </footer>
+  <button type="button" class="site-back-to-top" aria-label="回到顶部" hidden></button>
   {% if user.is_authenticated %}<script src="{% static 'incentives/reward-toast.js' %}" defer></script>{% endif %}
   <script src="{% static 'sidebar-layout.js' %}?v=4" defer></script>
+  <script src="{% static 'back-to-top.js' %}?v=1" defer></script>
 </body>
 </html>
