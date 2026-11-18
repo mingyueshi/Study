@@ -17,6 +17,7 @@ TOPICS = {
     'geo-map': ('study-atlas', 'geography-atlas', ('index', 'china', 'china-3d', 'animals', 'plants', 'world', 'world-3d', 'world-animals', 'world-plants', 'province', 'province-culture', 'places', 'routes', 'gallery')),
     'earth': ('study-earth', 'geography-earth', ('index', 'rocks', 'quakes', 'plates', 'age')),
     'ocean': ('study-ocean', 'geography-ocean', ('index', 'currents', 'tides', 'life', 'seafloor')),
+    'climate': ('study-climate', 'geography-climate', ('index', 'weather', 'types', 'china')),
 }
 COURSES = ('astro', 'lit', 'sci', 'hanzi-evo')
 # 数据全局名：slug 含连字符时 .upper() 不是合法 JS 标识符，需要单独映射。
@@ -113,6 +114,8 @@ def template(source, topic, page, theme, index_route):
             asset_path = 'history/' + Path(path).name
         if topic == 'ocean' and path == '../geo-map/world-geo.js':
             asset_path = 'geo-map/world-geo.js'
+        if topic == 'climate' and path == '../geo-map/china-geo.js':
+            asset_path = 'geo-map/china-geo.js'
         asset_url = "{% static 'study_topics/" + asset_path + "' %}"
         if topic in ('geo', 'history') and path == 'lab.js':
             asset_url += '?v=20261114b9' if topic == 'geo' else '?v=20261114b7'
@@ -120,7 +123,7 @@ def template(source, topic, page, theme, index_route):
             asset_url += '?v=20261114b9'
         if topic == 'geo-map' and page in ('china', 'world', 'china-3d', 'world-3d', 'province', 'province-culture') and path.endswith(('.css', '.js')):
             asset_url += '?v=' + sha256(resource_content(SOURCE / topic / path, topic, theme)).hexdigest()[:12]
-        if topic in ('earth', 'ocean') and path.endswith(('.css', '.js')):
+        if topic in ('earth', 'ocean', 'climate') and path.endswith(('.css', '.js')):
             asset_url += '?v=' + sha256(resource_content(SOURCE / topic / path, topic, theme)).hexdigest()[:12]
         if topic == 'history-timeline' and (Path(path).name.startswith(('silk-road', 'silk-city', 'territory')) or path in ('dynasty-app.js', 'dynasty.css')) and path.endswith(('.css', '.js')):
             asset_url += '?v=' + sha256(resource_content(SOURCE / topic / path, topic, theme)).hexdigest()[:12]
@@ -155,7 +158,7 @@ def template(source, topic, page, theme, index_route):
 
 
 def scope_styles(source, theme):
-    if theme in ('study-earth', 'study-ocean'):
+    if theme in ('study-earth', 'study-ocean', 'study-climate'):
         return source
     if theme == 'study-atlas':
         return source[source.index('.gm-topic {'):]

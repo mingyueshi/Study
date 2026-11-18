@@ -1,0 +1,55 @@
+{% extends "study_topics/page.html" %}
+{% load static %}
+{# 由 scripts/build_study_topics.py 生成。 #}
+{% block title %}气候类型 · 气象与气候 · 乐学堂{% endblock %}
+{% block study_assets %}
+<link rel="stylesheet" href="{% static 'study_topics/climate/styles.css' %}?v=1e6a6a1d6d5f">
+<script src="{% static 'study_topics/climate/station-normals.js' %}?v=284dec9ba864" defer></script>
+<script src="{% static 'study_topics/climate/climate-data.js' %}?v=0fa98eafe8fe" defer></script>
+<script src="{% static 'study_topics/climate/climate-model.js' %}?v=3c83f6814d86" defer></script>
+<script src="{% static 'study_topics/climate/climate-app.js' %}?v=3b56f1bee869" defer></script>
+{% endblock %}
+{% block study_content %}
+<div class="study-climate">
+<div class="climate-topic" data-climate-page="types"
+        data-sidebar-layout=".climate-sidebar" data-sidebar-width="clamp(240px, 22vw, 295px)"
+        data-sidebar-breakpoint="900" data-sidebar-label="专题目录" data-sidebar-fixed=".climate-nav">
+    <aside class="climate-sidebar" aria-label="气象与气候专题目录">
+      <nav class="climate-nav" aria-label="气象与气候各站">
+        <strong>气象与气候</strong>
+          <a href="{% url 'geography-climate' %}">专题总览</a>
+          <a href="weather.html">天气现象</a>
+          <a href="types.html" aria-current="page">气候类型</a>
+          <a href="china.html">中国气候分区</a>
+      </nav>
+      <a class="climate-back" href="../atlas/china.html">返回中国地图 ↗</a>
+    </aside>
+    <div class="climate-content">
+      <header class="climate-hero">
+        <h1>气候类型</h1>
+        <p id="climate-intro"></p>
+      </header>
+      <section class="climate-panel" aria-labelledby="charts-heading">
+        <h2 id="charts-heading">比较真实站点的气温与降水</h2>
+        <p>折线读左轴气温（℃），柱子读右轴降水（毫米）。所有图使用同样的刻度。</p>
+        <div id="station-choices" class="climate-choices" role="group" aria-label="选择气象站"></div>
+        <h3>并排对照</h3>
+        <div id="compare-choices" class="climate-choices" role="group" aria-label="选择对照站点"></div>
+        <p class="climate-note" id="compare-prompt" hidden></p>
+        <label class="climate-range" for="chart-month">
+          <span>观察月份 <output id="month-value" for="chart-month"></output></span>
+          <input id="chart-month" type="range" min="1" max="12" step="1" value="1">
+        </label>
+        <div class="climate-legend"><span class="temp-key">月均温</span><span class="rain-key">月降水量</span><span>1991–2020 年常年值</span></div>
+        <div id="station-charts" class="climate-charts"></div>
+      </section>
+      <a class="climate-link" href="china.html">回到中国地图看气候的空间分布 →</a>
+      <div id="climate-knowledge" class="climate-grid" aria-label="概念与证据"></div>
+      <details class="climate-panel climate-details"><summary id="climate-question">想一想</summary><p id="climate-answer"></p></details>
+      <details class="climate-panel climate-details"><summary>资料与图片出处</summary><ul id="climate-sources"></ul></details>
+      <noscript><p>请启用 JavaScript 查看正文、图表和地图。</p></noscript>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

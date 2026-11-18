@@ -22,6 +22,7 @@ GEOGRAPHY_PAGES = (
     'geography-atlas-plants', 'geography-atlas-world-plants', 'geography-atlas-province-culture',
     'geography-earth', 'geography-earth-rocks', 'geography-earth-quakes', 'geography-earth-plates', 'geography-earth-age',
     'geography-ocean', 'geography-ocean-currents', 'geography-ocean-tides', 'geography-ocean-life', 'geography-ocean-seafloor',
+    'geography-climate', 'geography-climate-weather', 'geography-climate-types', 'geography-climate-china',
 )
 COURSES = (
     ('geography', 'astronomy-explore', 'astro', '天文探索', ('astronomy-index', 'mysteries')),
@@ -49,6 +50,19 @@ class TopicMarkup(HTMLParser):
 
 
 class StudyTopicPageTests(SimpleTestCase):
+    def test_climate_map_and_station_charts_use_local_data(self):
+        for route, data_files in (
+            ('geography-climate-china', ('geo-map/china-geo.js', 'climate/china-climate-grid.js', 'climate/station-normals.js')),
+            ('geography-climate-types', ('climate/station-normals.js',)),
+        ):
+            with self.subTest(route=route):
+                response = self.client.get(reverse(route))
+                self.assertContains(response, 'href="/geography/climate/"')
+                assets = [url.split('?')[0] for url in TopicMarkup(response.content.decode()).assets]
+                for filename in data_files:
+                    self.assertLess(assets.index('/static/study_topics/' + filename),
+                                    assets.index('/static/study_topics/climate/climate-app.js'))
+
     def test_ocean_uses_local_outline_and_links_related_stations(self):
         for route in ('geography-ocean', 'geography-ocean-currents'):
             response = self.client.get(reverse(route))
@@ -372,7 +386,7 @@ class StudyTopicEntryTests(TestCase):
     def test_history_and_geography_keep_their_primary_cards_first(self):
         for area, shown, hidden in (
             ('history', ('history-timeline-timeline', 'history-timeline-territory', 'history-timeline-people', 'history-timeline-civilizations', 'history-timeline-ancient-science', 'history-timeline-silk-road'), ('geography-atlas-china', 'astronomy-explore')),
-            ('geography', ('geography-atlas-china', 'geography-atlas-province-culture', 'geography-earth', 'geography-ocean', 'astronomy-explore', 'solar-terms'), ('history-timeline-timeline', 'literature-study')),
+            ('geography', ('geography-atlas-china', 'geography-atlas-province-culture', 'geography-earth', 'geography-ocean', 'geography-climate', 'astronomy-explore', 'solar-terms'), ('history-timeline-timeline', 'literature-study')),
         ):
             with self.subTest(area=area):
                 response = self.client.get(reverse('home'), {'area': area})

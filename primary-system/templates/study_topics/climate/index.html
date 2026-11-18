@@ -1,0 +1,40 @@
+{% extends "study_topics/page.html" %}
+{% load static %}
+{# 由 scripts/build_study_topics.py 生成。 #}
+{% block title %}气象与气候 · 乐学堂{% endblock %}
+{% block study_assets %}
+<link rel="stylesheet" href="{% static 'study_topics/climate/styles.css' %}?v=1e6a6a1d6d5f">
+<script src="{% static 'study_topics/climate/climate-data.js' %}?v=0fa98eafe8fe" defer></script>
+<script src="{% static 'study_topics/climate/climate-model.js' %}?v=3c83f6814d86" defer></script>
+<script src="{% static 'study_topics/climate/climate-app.js' %}?v=3b56f1bee869" defer></script>
+{% endblock %}
+{% block study_content %}
+<div class="study-climate">
+<div class="climate-topic" data-climate-page="index"
+        data-sidebar-layout=".climate-sidebar" data-sidebar-width="clamp(240px, 22vw, 295px)"
+        data-sidebar-breakpoint="900" data-sidebar-label="专题目录" data-sidebar-fixed=".climate-nav">
+    <aside class="climate-sidebar" aria-label="气象与气候专题目录">
+      <nav class="climate-nav" aria-label="气象与气候各站">
+        <strong>气象与气候</strong>
+          <a href="{% url 'geography-climate' %}" aria-current="page">专题总览</a>
+          <a href="weather.html">天气现象</a>
+          <a href="types.html">气候类型</a>
+          <a href="china.html">中国气候分区</a>
+      </nav>
+      <a class="climate-back" href="../atlas/china.html">返回中国地图 ↗</a>
+    </aside>
+    <div class="climate-content">
+      <header class="climate-hero">
+        <h1>气象与气候</h1>
+        <p id="climate-intro"></p>
+      </header>
+      <section class="climate-stations" id="climate-stations" aria-label="三个分站"></section>
+      <div id="climate-knowledge" class="climate-grid" aria-label="概念与证据"></div>
+      <details class="climate-panel climate-details"><summary id="climate-question">想一想</summary><p id="climate-answer"></p></details>
+      <details class="climate-panel climate-details"><summary>资料与图片出处</summary><ul id="climate-sources"></ul></details>
+      <noscript><p>请启用 JavaScript 查看正文、图表和地图。</p></noscript>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

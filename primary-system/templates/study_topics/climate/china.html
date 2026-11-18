@@ -1,0 +1,56 @@
+{% extends "study_topics/page.html" %}
+{% load static %}
+{# 由 scripts/build_study_topics.py 生成。 #}
+{% block title %}中国气候分区 · 气象与气候 · 乐学堂{% endblock %}
+{% block study_assets %}
+<link rel="stylesheet" href="{% static 'study_topics/climate/styles.css' %}?v=1e6a6a1d6d5f">
+<script src="{% static 'study_topics/geo-map/china-geo.js' %}?v=d8402343bd1d" defer></script>
+<script src="{% static 'study_topics/climate/china-climate-grid.js' %}?v=b175f7cbc0ab" defer></script>
+<script src="{% static 'study_topics/climate/station-normals.js' %}?v=284dec9ba864" defer></script>
+<script src="{% static 'study_topics/climate/climate-data.js' %}?v=0fa98eafe8fe" defer></script>
+<script src="{% static 'study_topics/climate/climate-model.js' %}?v=3c83f6814d86" defer></script>
+<script src="{% static 'study_topics/climate/climate-app.js' %}?v=3b56f1bee869" defer></script>
+{% endblock %}
+{% block study_content %}
+<div class="study-climate">
+<div class="climate-topic" data-climate-page="china"
+        data-sidebar-layout=".climate-sidebar" data-sidebar-width="clamp(240px, 22vw, 295px)"
+        data-sidebar-breakpoint="900" data-sidebar-label="专题目录" data-sidebar-fixed=".climate-nav">
+    <aside class="climate-sidebar" aria-label="气象与气候专题目录">
+      <nav class="climate-nav" aria-label="气象与气候各站">
+        <strong>气象与气候</strong>
+          <a href="{% url 'geography-climate' %}">专题总览</a>
+          <a href="weather.html">天气现象</a>
+          <a href="types.html">气候类型</a>
+          <a href="china.html" aria-current="page">中国气候分区</a>
+      </nav>
+      <a class="climate-back" href="../atlas/china.html">返回中国地图 ↗</a>
+    </aside>
+    <div class="climate-content">
+      <header class="climate-hero">
+        <h1>中国气候分区</h1>
+        <p id="climate-intro"></p>
+      </header>
+      <section class="climate-panel" aria-labelledby="map-heading">
+        <h2 id="map-heading">在中国地图上读气候</h2>
+        <p>颜色是柯本五个大类，圆点是课本常见气候类型的观测站实例。两套名称各有依据。</p>
+        <div id="class-choices" class="climate-choices climate-classes" role="group" aria-label="按柯本大类突出显示"></div>
+        <figure>
+          <canvas id="china-climate-map" class="climate-map" role="img" aria-label="中国陆地气候格网，以颜色区分五个柯本大类，标出五个代表站。按钮可突出类别或切换代表站。"></canvas>
+          <figcaption>Beck 等（2023）1991–2020 年分类，CC BY 4.0。按 0.25° 格心取样，细小边界已简化。点击陆地读格点，点击圆点读代表站。南海诸岛另见地理图谱。</figcaption>
+        </figure>
+        <p class="climate-result" id="class-result" aria-live="polite"></p>
+        <h3 class="climate-section-label">按中国常见气候类型找代表地区</h3>
+        <div id="zone-choices" class="climate-choices" role="group" aria-label="选择中国气候类型实例"></div>
+        <article id="zone-result" class="climate-result" aria-live="polite"></article>
+      </section>
+      <a class="climate-link" href="../atlas/china-3d.html">去 3D 中国地图看地势差异 →</a>
+      <div id="climate-knowledge" class="climate-grid" aria-label="概念与证据"></div>
+      <details class="climate-panel climate-details"><summary id="climate-question">想一想</summary><p id="climate-answer"></p></details>
+      <details class="climate-panel climate-details"><summary>资料与图片出处</summary><ul id="climate-sources"></ul></details>
+      <noscript><p>请启用 JavaScript 查看正文、图表和地图。</p></noscript>
+    </div>
+  </div>
+
+</div>
+{% endblock %}
