@@ -18,6 +18,7 @@ TOPICS = {
     'earth': ('study-earth', 'geography-earth', ('index', 'rocks', 'quakes', 'plates', 'age')),
     'ocean': ('study-ocean', 'geography-ocean', ('index', 'currents', 'tides', 'life', 'seafloor')),
     'climate': ('study-climate', 'geography-climate', ('index', 'weather', 'types', 'china')),
+    'map-skills': ('study-map-skills', 'geography-map-skills', ('index', 'scale', 'direction', 'legend', 'contours', 'profile')),
 }
 COURSES = ('astro', 'lit', 'sci', 'hanzi-evo')
 # 数据全局名：slug 含连字符时 .upper() 不是合法 JS 标识符，需要单独映射。
@@ -123,7 +124,7 @@ def template(source, topic, page, theme, index_route):
             asset_url += '?v=20261114b9'
         if topic == 'geo-map' and page in ('china', 'world', 'china-3d', 'world-3d', 'province', 'province-culture') and path.endswith(('.css', '.js')):
             asset_url += '?v=' + sha256(resource_content(SOURCE / topic / path, topic, theme)).hexdigest()[:12]
-        if topic in ('earth', 'ocean', 'climate') and path.endswith(('.css', '.js')):
+        if topic in ('earth', 'ocean', 'climate', 'map-skills') and path.endswith(('.css', '.js')):
             asset_url += '?v=' + sha256(resource_content(SOURCE / topic / path, topic, theme)).hexdigest()[:12]
         if topic == 'history-timeline' and (Path(path).name.startswith(('silk-road', 'silk-city', 'territory')) or path in ('dynasty-app.js', 'dynasty.css')) and path.endswith(('.css', '.js')):
             asset_url += '?v=' + sha256(resource_content(SOURCE / topic / path, topic, theme)).hexdigest()[:12]
@@ -158,7 +159,7 @@ def template(source, topic, page, theme, index_route):
 
 
 def scope_styles(source, theme):
-    if theme in ('study-earth', 'study-ocean', 'study-climate'):
+    if theme in ('study-earth', 'study-ocean', 'study-climate', 'study-map-skills'):
         return source
     if theme == 'study-atlas':
         return source[source.index('.gm-topic {'):]

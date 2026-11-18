@@ -38,7 +38,8 @@
     {% elif study_area == 'geography' and current|slice:':15' == 'geography-earth' %}
     <a href="{% url 'geography-earth' %}" {% if current == 'geography-earth' %}aria-current="page"{% else %}aria-current="location"{% endif %}>地球内部</a>
     <a href="{% url 'geography-atlas-china' %}">地理图谱 ↗</a>
-    {% elif study_area == 'geography' and current|slice:':15' != 'geography-ocean' and current|slice:':17' != 'geography-climate' %}
+    {% elif study_area == 'geography' and current|slice:':15' != 'geography-ocean' and current|slice:':17' != 'geography-climate' and current|slice:':20' != 'geography-map-skills' %}
+    <a href="{% url 'geography-map-skills' %}">地图技能</a>
     <a href="{% url 'geography-earth' %}">地球内部</a>
     <a href="{% url 'geography-ocean' %}">海洋世界</a>
     <a href="{% url 'geography-climate' %}">气象与气候</a>

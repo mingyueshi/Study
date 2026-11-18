@@ -18,6 +18,11 @@ urlpatterns = [
     path('earth/', page('earth/index'), name='geography-earth'),
     path('ocean/', page('ocean/index'), name='geography-ocean'),
     path('climate/', page('climate/index'), name='geography-climate'),
+    path('map-skills/', page('map-skills/index'), name='geography-map-skills'),
+    *[
+        path(f'map-skills/{name}.html', page(f'map-skills/{name}'), name=f'geography-map-skills-{name}')
+        for name in ('scale', 'direction', 'legend', 'contours', 'profile')
+    ],
     *[
         path(f'climate/{name}.html', page(f'climate/{name}'), name=f'geography-climate-{name}')
         for name in ('weather', 'types', 'china')

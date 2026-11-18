@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>等高线 · 地图技能</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="skills-data.js" defer></script>
+  <script src="skills-model.js" defer></script>
+  <script src="skills-diagrams.js" defer></script>
+  <script src="skills-app.js" defer></script>
+</head>
+<body>
+  <main id="main" class="skills-topic" data-skills-page="contours"
+        data-sidebar-layout=".skills-sidebar" data-sidebar-width="clamp(230px, 22vw, 290px)"
+        data-sidebar-breakpoint="900" data-sidebar-label="专题目录" data-sidebar-fixed=".skills-nav">
+    <aside class="skills-sidebar" aria-label="地图技能专题目录">
+      <nav aria-label="地图技能各站" class="skills-nav">
+        <strong>地图技能</strong>
+          <a href="index.html">专题总览</a>
+          <a href="scale.html">比例尺</a>
+          <a href="direction.html">方向</a>
+          <a href="legend.html">图例</a>
+          <a href="contours.html" aria-current="page">等高线</a>
+          <a href="profile.html">地形剖面图</a>
+      </nav>
+      <a href="../atlas/china.html">打开地理图谱 ↗</a>
+    </aside>
+    <div class="skills-content">
+      <header class="skills-hero">
+        <h1>等高线</h1>
+        <p id="skills-intro"></p>
+      </header>
+      <section class="skills-panel" aria-labelledby="contour-title">
+        <h2 id="contour-title">等高线怎样画出山和谷？</h2>
+        <div id="interval-choices" class="skills-choices" role="group" aria-label="选择等高距"></div>
+        <div id="form-choices" class="skills-choices" role="group" aria-label="定位地形形态"></div>
+        <figure>
+          <canvas id="skills-map" class="skills-map" role="img" aria-label="同一地形的等高线地图。点击地图读海拔，或选择山顶、鞍部、山脊和山谷。"></canvas>
+          <figcaption>棕线数字是海拔（米）。等高距可变，地形和点位的海拔保持不变。</figcaption>
+        </figure>
+        <div id="contour-result" class="skills-result" aria-live="polite"></div>
+      </section>
+      <details id="sample-map" class="skills-panel skills-details"></details>
+      <a class="skills-link" href="profile.html">沿这片地形画一条剖面线 →</a>
+      <div id="skills-knowledge" class="skills-grid" aria-label="知识要点"></div>
+      <section class="skills-panel" aria-labelledby="quiz-title">
+        <h2 id="quiz-title">读图小考</h2>
+        <p id="quiz-question"></p>
+        <div id="quiz-choices" class="skills-choices" role="group" aria-label="选择答案"></div>
+        <p id="quiz-feedback" class="skills-result" role="status" hidden></p>
+      </section>
+      <details class="skills-panel skills-details"><summary>资料与图例出处</summary><ul id="skills-references"></ul></details>
+      <noscript><p>请启用 JavaScript 查看练习地图、正文与题目。</p></noscript>
+    </div>
+  </main>
+</body>
+</html>
