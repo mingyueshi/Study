@@ -367,6 +367,7 @@
   };
   const renderMemory = (family) => {
     select.value = family.id;
+    window.StudyChoices?.sync(select);
     viewed.clear();
     flips = [];
     deck.replaceChildren();

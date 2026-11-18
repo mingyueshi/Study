@@ -17,7 +17,11 @@
     if (!root) continue;
     const controls = Object.fromEntries(definition.controls.map(control => [control.id, root.querySelector(`[data-mb-control="${control.id}"]`)]));
     const values = () => Object.fromEntries(definition.controls.map(control => [control.id, control.type === 'checkbox' ? controls[control.id].checked : control.type === 'range' ? Number(controls[control.id].value) : controls[control.id].value]));
-    const set = (id, value) => { controls[id].value = String(value); };
+    const set = (id, value) => {
+      const control = controls[id];
+      control.value = String(value);
+      if (control.tagName === 'SELECT') window.StudyChoices?.sync(control);
+    };
     const output = (id, value) => { root.querySelector(`[data-mb-output="${id}"]`).textContent = value; };
     const render = () => {
       const c = values(), status = root.querySelector('[data-mb-status]');

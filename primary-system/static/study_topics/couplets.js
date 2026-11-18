@@ -88,6 +88,7 @@
     const card = cards.find(item => '#' + item.id === location.hash);
     if (!card) return;
     category.value = '';
+    window.StudyChoices?.sync(category);
     search.value = '';
     filterExamples();
     card.scrollIntoView({block: 'start'});

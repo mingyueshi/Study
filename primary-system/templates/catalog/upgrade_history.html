@@ -20,7 +20,7 @@
 
   <form class="upgrade-filters" method="get" action="{% url 'upgrade-history' %}" role="search" aria-label="查找升级记录">
     <div class="upgrade-search"><label for="upgrade-query">找一找改进</label><input type="search" id="upgrade-query" name="q" value="{{ query }}" maxlength="160" placeholder="试试「地图」「阅读」或「英语」"></div>
-    <div><label for="upgrade-month">更新月份</label><select id="upgrade-month" name="month"><option value="">全部月份</option>{% for month in months %}<option value="{{ month.value }}" {% if selected_month == month.value %}selected{% endif %}>{{ month.label }}</option>{% endfor %}</select></div>
+    <div><div class="inline-choice" data-inline-choice><label for="upgrade-month">更新月份</label><select id="upgrade-month" name="month"><option value="">全部月份</option>{% for month in months %}<option value="{{ month.value }}" {% if selected_month == month.value %}selected{% endif %}>{{ month.label }}</option>{% endfor %}</select></div></div>
     <button class="button" type="submit">查找记录</button>
     {% if query or selected_month %}<a class="upgrade-clear" href="{% url 'upgrade-history' %}#history">查看全部</a>{% endif %}
   </form>

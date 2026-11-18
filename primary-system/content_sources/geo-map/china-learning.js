@@ -157,7 +157,7 @@ window.GMChinaLearning = (() => {
       },
     };
   }
-  function mount({ root, prepare, observe, sample, available, changed, puzzleMissing, puzzleComplete }) {
+  function mount({ root, prepare, observe, sample, available, changed, puzzleMissing, puzzleComplete, replaceMapLocation }) {
     const D = window.GM_CHINA_LEARNING,
       esc = window.GMShared.esc,
       $ = (id) => root.querySelector('#gm3-' + id);
@@ -348,9 +348,7 @@ window.GMChinaLearning = (() => {
       const url = new URL(location.href);
       if (mode === 'browse') url.searchParams.delete('learn');
       else url.searchParams.set('learn', mode);
-      try {
-        history.replaceState(null, '', url);
-      } catch {}
+      replaceMapLocation(url);
     }
     function inspect(point, meters) {
       if (mode !== 'steps') return false;

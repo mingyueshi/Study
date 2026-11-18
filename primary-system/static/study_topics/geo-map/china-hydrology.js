@@ -9,24 +9,26 @@ window.GMChinaHydrology = (() => {
     if (selected.length !== record.selectedCount * 3) throw new Error('流域掩膜计数无效');
     return selected;
   }
-  function mount({root, focusRiver, focusPoint, focusEstuary, requestDraw, available, reveal, terrainParts}) {
+  function mount({root, focusRiver, focusPoint, focusEstuary, requestDraw, replaceMapLocation, available, reveal, terrainParts}) {
     const D = window.GM_CHINA_HYDROLOGY, source = window.GM_CHINA_HYDROLOGY_GEO, esc = window.GMShared.esc;
     const $ = id => root.querySelector('#' + id);
     let river = 'f20', basinVisible = false, tributariesVisible = true, activeBranch = '', context = null;
     const basinGroups = new Map(), branches = new Map(); let puzzleMissing = new Set();
     $('gm3-hydro-intro').textContent = D.intro; $('gm3-basin-note').textContent = D.basinNote;
     $('gm3-tributary-note').textContent = D.tributaryNote;
-    $('gm3-basin').innerHTML = D.basins.map(b => `<option value="${b.feature}">${esc(b.name)}</option>`).join('') + '<option value="f43">京杭大运河 · 跨流域水路</option>';
+    const waterways = [...D.basins, {feature: 'f43', name: '京杭大运河'}];
+    $('gm3-basin').innerHTML = waterways.map(b =>
+      `<button type="button" value="${b.feature}" aria-pressed="false">${esc(b.name)}</button>`).join('');
     $('gm3-estuaries').innerHTML = D.estuaries.map(e => `<button type="button" data-estuary="${e.id}" aria-pressed="false">🔍 ${esc(e.name)}</button>`).join('');
     $('gm3-water-legend').innerHTML = [ ['main','主要干流'], ['tributary','支流／水系支干'], ['lake','湖泊水面'] ].map(([key,name]) => `<span><i style="--water-color:${D.colors[key]}"></i>${name}</span>`).join('');
     function writeBasinURL() {
       const url = new URL(location.href);
       if (basinVisible && D.basins.some(b => b.feature === river)) url.searchParams.set('basin', river); else url.searchParams.delete('basin');
-      try { history.replaceState(null, '', url); } catch (_) { /* 文件页面仍可观察 */ }
+      replaceMapLocation(url);
     }
     function render() {
       const basin = D.basins.find(b => b.feature === river);
-      $('gm3-basin').value = river;
+      for (const button of $('gm3-basin').children) button.setAttribute('aria-pressed', String(button.value === river));
       $('gm3-basin-area').textContent = basin?.areaLabel || '人工水路 · 跨越流域';
       $('gm3-basin-scope').textContent = basin?.scope || D.canalNote;
       $('gm3-basin-text').textContent = basin?.text || D.canalNote;
@@ -125,7 +127,13 @@ window.GMChinaHydrology = (() => {
       $('gm3-hydro-detail').innerHTML = `<h3>${esc(e.name)}</h3><p>${esc(e.text)}</p><p><b>想一想：</b>${esc(e.observe)}</p><p>这里的地形与河道经过简化，不表示实时岸线、潮位或泥沙沉积速度。</p><a href="${esc(e.source)}" target="_blank" rel="noopener">资料出处（需联网）↗</a>`;
       root.querySelectorAll('[data-estuary]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.estuary === id)));
     }
-    $('gm3-basin').addEventListener('change', event => { focusRiver(event.target.value); writeBasinURL(); reveal(); });
+    $('gm3-basin').addEventListener('click', event => {
+      const button = event.target.closest('button');
+      if (!button) return;
+      focusRiver(button.value);
+      writeBasinURL();
+      reveal();
+    });
     $('gm3-basins').addEventListener('click', () => { setVisible(!basinVisible); reveal(); });
     $('gm3-tributaries').addEventListener('click', () => { tributariesVisible = !tributariesVisible; render(); reveal(); });
     $('gm3-tributary-list').addEventListener('click', event => {

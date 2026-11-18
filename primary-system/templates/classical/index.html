@@ -3,7 +3,7 @@
 {% block title %}古文精读馆 · 乐学堂{% endblock %}
 {% block content %}
 <link rel="stylesheet" href="{% static 'classical/classical.css' %}?v=3">
-<script src="{% static 'classical/classical.js' %}" defer></script>
+<script src="{% static 'classical/classical.js' %}?v=4" defer></script>
 <div class="classical-hall" data-classical-index>
   {% include 'classical/_nav.html' %}
   <header class="cw-hero">
@@ -18,10 +18,10 @@
     <div class="cw-section-heading"><div><p class="cw-eyebrow">今天想读哪一篇？</p><h2 id="cw-catalog-title">挑一篇，慢慢读</h2></div><p>按难度、故事类型或要练的本领找。</p></div>
     <form class="cw-filters" action="{% url 'classical' %}" method="get" role="search">
       <label class="cw-search">找篇目或原文<input name="q" type="search" value="{{ q }}" placeholder="试试「王戎」「走」「之」" maxlength="80"></label>
-      <label>阅读难度<select name="level"><option value="">全部难度</option>{% for item in catalog.levels %}<option value="{{ item.id }}"{% if filters.level == item.id %} selected{% endif %}>{{ item.label }}</option>{% endfor %}</select></label>
-      <label>故事类型<select name="genre"><option value="">全部类型</option>{% for item in catalog.genres %}<option value="{{ item.id }}"{% if filters.genre == item.id %} selected{% endif %}>{{ item.label }}</option>{% endfor %}</select></label>
-      <label>想练的本领<select name="skill"><option value="">全部本领</option>{% for item in catalog.skills %}<option value="{{ item.id }}"{% if filters.skill == item.id %} selected{% endif %}>{{ item.label }}</option>{% endfor %}</select></label>
-      <label>教材关联<select name="curriculum"><option value="">全部篇目</option><option value="4a"{% if curriculum %} selected{% endif %}>现有四上两篇</option></select></label>
+      <div class="inline-choice" data-inline-choice><label>阅读难度<select name="level"><option value="">全部难度</option>{% for item in catalog.levels %}<option value="{{ item.id }}"{% if filters.level == item.id %} selected{% endif %}>{{ item.label }}</option>{% endfor %}</select></label></div>
+      <div class="inline-choice" data-inline-choice><label>故事类型<select name="genre"><option value="">全部类型</option>{% for item in catalog.genres %}<option value="{{ item.id }}"{% if filters.genre == item.id %} selected{% endif %}>{{ item.label }}</option>{% endfor %}</select></label></div>
+      <div class="inline-choice" data-inline-choice><label>想练的本领<select name="skill"><option value="">全部本领</option>{% for item in catalog.skills %}<option value="{{ item.id }}"{% if filters.skill == item.id %} selected{% endif %}>{{ item.label }}</option>{% endfor %}</select></label></div>
+      <div class="inline-choice" data-inline-choice><label>教材关联<select name="curriculum"><option value="">全部篇目</option><option value="4a"{% if curriculum %} selected{% endif %}>现有四上两篇</option></select></label></div>
       <button class="cw-button cw-primary" type="submit">找一找</button><a class="cw-reset" href="{% url 'classical' %}#cw-catalog-title">重置</a>
     </form>
     <p class="cw-result-count" role="status">找到 {{ articles|length }} 篇。复习标记只保存在当前浏览器。</p>

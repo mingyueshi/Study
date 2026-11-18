@@ -33,9 +33,9 @@
         <label class="mystery-search-field">搜索线索
           <input type="search" name="q" placeholder="试试：外星人、海洋、文字……" maxlength="120" autocomplete="off">
         </label>
-        <label>调查领域<select name="category"><option value="">全部领域</option>{% for category in groups %}<option>{{ category }}</option>{% endfor %}</select></label>
-        <label>素材类型<select name="kind"><option value="">全部素材</option>{% for value, label in media_filters.items %}<option value="{{ value }}">{{ label }}</option>{% endfor %}</select></label>
-        <label>我的调查<select name="status"><option value="">全部案卷</option><option value="saved">稍后读</option><option value="unread">还没读完</option><option value="completed">已读完</option><option value="notes">有我的笔记</option></select></label>
+        <div class="inline-choice" data-inline-choice><label>调查领域<select name="category"><option value="">全部领域</option>{% for category in groups %}<option>{{ category }}</option>{% endfor %}</select></label></div>
+        <div class="inline-choice" data-inline-choice><label>素材类型<select name="kind"><option value="">全部素材</option>{% for value, label in media_filters.items %}<option value="{{ value }}">{{ label }}</option>{% endfor %}</select></label></div>
+        <div class="inline-choice" data-inline-choice><label>我的调查<select name="status"><option value="">全部案卷</option><option value="saved">稍后读</option><option value="unread">还没读完</option><option value="completed">已读完</option><option value="notes">有我的笔记</option></select></label></div>
       </form>
       <div class="mystery-library-actions">
         <p role="status" data-filter-count></p>

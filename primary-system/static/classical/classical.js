@@ -136,6 +136,7 @@
     const select = one(selector);
     if (!select) continue;
     select.value = reader.dataset.initialSection || '';
+    window.StudyChoices?.sync(select);
     function filterSection() {
       const ids = new Set(sectionSentences(article, select.value).map(row => row.id));
       const visible = attribute === 'data-question' ? article.questions.filter(row => ids.has(row.sentence)).map(row => row.id) : [...ids];
@@ -209,6 +210,7 @@
     const prefs = JSON.parse(getStored(speechKey) || '{}');
     if (['0.65', '0.85', '1'].includes(String(prefs.rate))) rate.value = String(prefs.rate);
     if (['1', '2', '3'].includes(String(prefs.repeat))) repeat.value = String(prefs.repeat);
+    for (const control of [rate, repeat]) window.StudyChoices?.sync(control);
   } catch (_) { /* 使用默认值 */ }
   function stopSpeech(message) {
     speechToken++;

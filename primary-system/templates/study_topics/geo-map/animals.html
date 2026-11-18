@@ -4,12 +4,12 @@
 {% block title %}中国动物地图 · 动植物地图 · 乐学堂{% endblock %}
 {% block study_assets %}
 <link rel="stylesheet" href="{% static 'study_topics/geo-map/styles.css' %}?v=5b8e2fb415da">
-<link rel="stylesheet" href="{% static 'study_topics/geo-map/animals.css' %}?v=49e500c1bfa4">
+<link rel="stylesheet" href="{% static 'study_topics/geo-map/animals.css' %}?v=3881112d0ecb">
 <script src="{% static 'study_topics/geo-map/china-geo.js' %}?v=d8402343bd1d" defer></script>
 <script src="{% static 'study_topics/geo-map/map-data.js' %}?v=27ebda785125" defer></script>
 <script src="{% static 'study_topics/geo-map/shared.js' %}?v=d2bebbfd2a0b" defer></script>
 <script src="{% static 'study_topics/geo-map/animals-data.js' %}?v=556fcc74febf" defer></script>
-<script src="{% static 'study_topics/geo-map/animals-learning.js' %}?v=5b277bbe07a2" defer></script>
+<script src="{% static 'study_topics/geo-map/animals-learning.js' %}?v=abd3733ba1f5" defer></script>
 <script src="{% static 'study_topics/geo-map/animals-app.js' %}?v=439cbc154966" defer></script>
 {% endblock %}
 {% block study_content %}
@@ -31,35 +31,36 @@
       </nav>
     </header>
 
-    <div class="gm-wildlife-tools" hidden>
-      <div class="gm-animal-search-row">
-        <label for="gm-animal-search">找动物<input id="gm-animal-search" type="search" placeholder="搜名称、地点或生活环境" autocomplete="off"></label>
-        <label for="gm-animal-record-filter">观察记录<select id="gm-animal-record-filter"><option value="all">全部动物</option><option value="unseen">还没观察</option><option value="seen">已观察</option></select></label>
-        <button type="button" data-animal-reset>清除筛选</button>
-        <span id="gm-animal-search-status" role="status"></span>
-      </div>
-      <div>
-        <h2 id="gm-habitat-title">按栖息地找</h2>
-        <div class="gm-habitat-filters" role="group" aria-labelledby="gm-habitat-title"></div>
-      </div>
-    </div>
-
-    <div class="gm-animal-progress-row" hidden>
-      <div><label id="gm-animal-progress-label" for="gm-animal-progress">已观察 0／30 种</label><progress id="gm-animal-progress" max="30" value="0"></progress><small id="gm-animal-storage-note"></small></div>
-      <div><a href="#gm-animal-quiz">动物小侦探 ↓</a><button type="button" data-animal-random>认识新朋友 ↗</button></div>
-    </div>
-
     <div class="gm-wildlife-workspace" data-sidebar-label="动物档案" hidden>
       <div class="gm-animal-explore">
+        <div class="gm-wildlife-map-links"><a href="#gm-wildlife-tools">筛选与观察记录 ↓</a><a href="#gm-animal-quiz">小侦探练习 ↓</a></div>
         <figure class="gm-wildlife-map">
           <svg id="gm-animal-map" role="group" aria-label="中国野生动物代表栖息地示意地图"></svg>
           <figcaption><span id="gm-animal-count"></span>地图上的点表示代表地点，动物还可能在其他地方生活。</figcaption>
         </figure>
+        <div id="gm-wildlife-tools" class="gm-wildlife-tools" hidden>
+          <div class="gm-animal-search-row">
+            <label for="gm-animal-search">找动物<input id="gm-animal-search" type="search" placeholder="搜名称、地点或生活环境" autocomplete="off"></label>
+            <div class="inline-choice" data-inline-choice><label for="gm-animal-record-filter">观察记录<select id="gm-animal-record-filter"><option value="all">全部动物</option><option value="unseen">还没观察</option><option value="seen">已观察</option></select></label></div>
+            <button type="button" data-animal-reset>清除筛选</button>
+            <span id="gm-animal-search-status" role="status"></span>
+          </div>
+          <div>
+            <h2 id="gm-habitat-title">按栖息地找</h2>
+            <div class="gm-habitat-filters" role="group" aria-labelledby="gm-habitat-title"></div>
+          </div>
+        </div>
+
+        <div class="gm-animal-progress-row" hidden>
+          <div><label id="gm-animal-progress-label" for="gm-animal-progress">已观察 0／30 种</label><progress id="gm-animal-progress" max="30" value="0"></progress><small id="gm-animal-storage-note"></small></div>
+          <div><a href="#gm-animal-quiz">动物小侦探 ↓</a><button type="button" data-animal-random>认识新朋友 ↗</button></div>
+        </div>
+
         <details id="gm-animal-quiz" class="gm-animal-quiz">
           <summary>动物小侦探 <span>看照片 · 读线索 · 每轮最多 5 题</span></summary>
           <div class="gm-quiz-inner">
             <p>从当前筛选中抽题，不重复。答完可以看地图、重练错题；练习不会自动标记「已观察」。</p>
-            <div class="gm-quiz-toolbar"><label for="gm-animal-quiz-mode">练习方式</label><select id="gm-animal-quiz-mode"><option value="photo">看照片认动物</option><option value="clue">读线索找动物</option></select><button type="button" data-quiz-start>开始练习</button><button type="button" data-quiz-stop hidden>结束本轮</button></div>
+            <div class="gm-quiz-toolbar"><div class="inline-choice" data-inline-choice><label for="gm-animal-quiz-mode">练习方式</label><select id="gm-animal-quiz-mode"><option value="photo">看照片认动物</option><option value="clue">读线索找动物</option></select></div><button type="button" data-quiz-start>开始练习</button><button type="button" data-quiz-stop hidden>结束本轮</button></div>
             <div id="gm-animal-quiz-body"></div>
           </div>
         </details>

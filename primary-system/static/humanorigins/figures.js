@@ -54,6 +54,7 @@
   power.addEventListener('change', () => {
     magnification = [2, 3, 4].includes(Number(power.value)) ? Number(power.value) : 3;
     power.value = String(magnification);
+    window.StudyChoices?.sync(power);
     renderControls();
   });
   stage.addEventListener('pointermove', moveLens);

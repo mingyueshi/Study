@@ -43,6 +43,7 @@
     const sound = document.getElementById('study-sound');
     const note = document.getElementById('study-effects-note');
     if (select) select.value = prefs.motion;
+    if (select) window.StudyChoices?.sync(select);
     if (sound) sound.checked = prefs.sound;
     if (note) note.textContent = media.matches
       ? '已跟随系统减少动态效果。教学演示仍可逐步查看。'

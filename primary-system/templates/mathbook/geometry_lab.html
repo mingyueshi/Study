@@ -37,10 +37,10 @@
         <button type="button" class="geometry-button geometry-reset" id="geometry-reset">↺ 重来</button>
       </header>
       <div class="geometry-tools">
-        <label for="geometry-shape-choice">选个图形</label>
+        <div class="inline-choice" data-inline-choice><label for="geometry-shape-choice">选个图形</label>
         <select id="geometry-shape-choice">
           {% for shape in shapes %}<option value="{{ shape.id }}">{{ shape.label }}</option>{% endfor %}
-        </select>
+        </select></div>
         <label class="geometry-checkbox"><input id="geometry-show-origin" type="checkbox" checked> 对照原图</label>
       </div>
       <div class="geometry-mission">

@@ -31,7 +31,7 @@
     </fieldset>
     {% elif station.id == 'eras' %}
     <fieldset class="time-tool" id="era-tool" data-name="{{ course.era.name }}" data-first="{{ course.era.first }}" data-last="{{ course.era.last }}" hidden><legend>动手算 · 纪年换算尺</legend>
-      <label>纪年方式<select name="system"><option value="reign">唐 · {{ course.era.name }}</option><option value="ce">公元</option><option value="bce">公元前</option></select></label>
+      <div class="inline-choice" data-inline-choice><label>纪年方式<select name="system"><option value="reign">唐 · {{ course.era.name }}</option><option value="ce">公元</option><option value="bce">公元前</option></select></label></div>
       <label>第几年<input name="year" type="number" min="1" value="10" required></label>
       <output aria-live="polite"></output><p>按通常的整年对照换算，不换算具体月日。</p>
     </fieldset>

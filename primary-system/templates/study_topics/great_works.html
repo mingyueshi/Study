@@ -26,7 +26,7 @@
     <p class="works-kicker">工程师的对照笔记</p><h2 id="compare-title">比较两项工程</h2>
     <p>先猜猜它们面对的是不是同一种难题，再逐行比较：为什么同样是过水，有时要架桥，有时却要把车道放到海底？</p>
     <form method="get" action="{% url 'great-works' %}#compare" class="works-form">
-      {% for field in form %}<div>{{ field.label_tag }}{{ field }}{{ field.errors }}</div>{% endfor %}
+      {% for field in form %}<div class="inline-choice" data-inline-choice>{{ field.label_tag }}{{ field }}{{ field.errors }}</div>{% endfor %}
       <button class="button small" type="submit">比较设计</button>
     </form>
     {% if left and right %}

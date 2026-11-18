@@ -32,7 +32,7 @@
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
     const canPlay = () => window.StudyEffects ? window.StudyEffects.motion === 'full' : !reduced.matches;
     control.insertAdjacentHTML('afterend', `<div class="roam-time-controls" data-roam-time-controls>
-      <label>演示速度 <select data-roam-speed aria-label="公转演示速度"><option value="1">慢慢看</option><option value="3">快一些</option></select></label>
+      <div class="inline-choice" data-inline-choice><label>演示速度 <select data-roam-speed aria-label="公转演示速度"><option value="1">慢慢看</option><option value="3">快一些</option></select></label></div>
       <button type="button" data-roam-step>前进四分之一年</button><button type="button" data-roam-reset>回到起点</button>
       <p><output data-roam-elapsed>已过 0.00 地球年</output><span data-roam-laps></span></p>
       <p class="roam-motion-note" data-roam-motion-note role="status"></p></div>`);

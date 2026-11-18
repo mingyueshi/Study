@@ -63,12 +63,14 @@
     tagSelect.value = round.tag;
     sizeSelect.value = String(round.total);
     modeSelect.value = round.mode;
+    for (const control of [sizeSelect, modeSelect]) window.StudyChoices?.sync(control);
     render();
     return {saved, rank: ranked(kept, round.tag, round.total, round.mode).findIndex(row => row.id === round.id) + 1};
   };
   tagSelect.value = root.dataset.tag || '';
   sizeSelect.value = root.dataset.size || '10';
   modeSelect.value = root.dataset.mode || 'challenge';
+  for (const control of [sizeSelect, modeSelect]) window.StudyChoices?.sync(control);
   [tagSelect, sizeSelect, modeSelect].forEach(select => select.addEventListener('change', render));
   window.addEventListener('storage', event => { if (event.key === key || event.key === null) render(); });
   window.OlympiadChallenge = {record, duration};

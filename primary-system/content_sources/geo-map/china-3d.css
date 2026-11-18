@@ -1,23 +1,56 @@
-/* 立体中国：明亮的地图观察台，沿用课程主题与统一右侧栏。 */
-.china-3d-topic { --atlas-hero-start: #216b76; --atlas-tint: #eef7f7; --atlas-border: #c6dedf; }
-.gm3-heading { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 8px 0 24px; }
-.gm3-kicker { color: var(--ink-soft); font-weight: 750; font-size: 14px; letter-spacing: .06em; }
-.gm3-heading h1 { font-size: clamp(32px, 3vw, 50px); line-height: 1.2; margin: 8px 0 12px; color: var(--ink); }
-.gm3-heading p:last-child { max-width: 48em; font-size: 18px; line-height: 1.8; margin: 0; }
-.gm3-flat-link { flex-shrink: 0; color: #216473; background: #e2f1f1; border: 1px solid #bedbdf; border-radius: 14px; padding: 12px 18px; font-weight: 750; text-decoration: none; }
-.gm3-explorer { border: 1px solid var(--atlas-border); border-radius: 22px; overflow: hidden; background: var(--card); box-shadow: 0 12px 35px #1c596b0b; }
-.gm3-toolbar, .gm3-terrain-tools { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; padding: 14px 18px; border-bottom: 1px solid var(--atlas-border); }
-.gm3-terrain-tools { align-items: center; background: var(--atlas-tint); }
-.gm3-height-control { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; font-size: 16px; }
-.gm3-height-control > span { font-weight: 750; min-width: 125px; }
-.gm3-height-control output { color: #a35421; font-variant-numeric: tabular-nums; }
-.gm3-height-control input { width: clamp(130px, 16vw, 270px); accent-color: #276c67; cursor: pointer; min-height: 32px; }
-.gm3-height-control small { color: var(--ink-soft); font-size: 13px; }
+/* 地图优先呈现，视角、设置与学习任务各有入口。 */
+.china-3d-topic {
+  --atlas-tint: #eef7f7;
+  --atlas-border: #c6dedf;
+  --gm3-accent: #236877;
+  --gm3-pad: clamp(14px, 2cqi, 24px);
+  --select-height: 36px;
+  --select-padding: 4px;
+  --select-radius: 8px;
+  --select-surface: var(--card);
+  --control-icon-size: 16px;
+}
+.china-3d-topic :is(h1, h2, h3) { text-wrap: balance; }
+.china-3d-topic p { text-wrap: pretty; }
+.gm3-heading { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 8px 24px; padding-bottom: 18px; }
+.gm3-kicker { color: var(--ink-soft); font-weight: 750; font-size: 14px; }
+.gm3-heading h1 { font-size: clamp(30px, 3vw, 46px); line-height: 1.2; margin: 0 0 8px; color: var(--ink); }
+#gm3-intro { max-width: 46em; font-size: 16px; line-height: 1.65; margin: 0; }
+.gm3-related, .gm3-jump { display: flex; align-items: center; flex-wrap: wrap; gap: 4px 14px; }
+.gm3-related a, .gm3-jump a, .gm3-picker a, .gm3-section a {
+  color: var(--ink); font-weight: 700; text-underline-offset: .2em;
+}
+.gm3-related a { font-size: 15px; }
+.gm3-related a:hover, .gm3-jump a:hover { color: var(--gm3-accent); }
+.gm3-explorer, .gm3-activity {
+  border: 1px solid var(--atlas-border); border-radius: 16px; background: var(--card);
+}
+.gm3-activity { padding: var(--gm3-pad); margin-top: 20px; }
+.gm3-activity h2 { font-size: clamp(22px, 3cqi, 28px); margin: 0; }
+.gm3-activity .gm3-play-tools { padding-inline: 0; }
+.gm3-explorer { scroll-margin-top: 16px; }
+.gm3-toolbar {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 16px;
+  padding: 10px var(--gm3-pad); border-radius: 16px 16px 0 0;
+  border-bottom: 1px solid var(--atlas-border);
+}
+.gm3-jump { padding: 12px 0 0; }
+.gm3-jump a { display: inline-flex; align-items: center; min-height: 38px; padding: 4px 0; }
+.gm3-height-control { display: grid; gap: 4px; font-size: 16px; }
+.gm3-height-control > span { display: flex; justify-content: space-between; font-weight: 750; }
+.gm3-height-control output, .gm3-stamp { font-variant-numeric: tabular-nums; }
+.gm3-height-control input { width: 100%; margin: 0; accent-color: var(--gm3-accent); cursor: pointer; min-height: 32px; }
+.gm3-height-control small, .gm3-setting-note { color: var(--ink-soft); font-size: 14px; }
 .gm3-presets, .gm3-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; }
 .china-3d-topic button { cursor: pointer; font: inherit; }
-.gm3-toolbar button, .gm3-terrain-tools button, .gm3-landmark-tools button { min-height: 42px; padding: 7px 13px; color: var(--ink); background: var(--card); border: 1px solid var(--atlas-border); border-radius: 10px; font-size: 16px; font-weight: 700; }
-.gm3-toolbar button[aria-pressed="true"], .gm3-terrain-tools button[aria-pressed="true"], .gm3-landmark-tools button[aria-pressed="true"] { color: #fff; background: #236877; border-color: #236877; }
-.gm3-toolbar button:hover, .gm3-landmark-tools button:hover { border-color: #236877; }
+.gm3-toolbar button, .gm3-terrain-tools button, .gm3-landmark-tools button {
+  min-height: 40px; padding: 6px 12px; color: var(--ink); background: var(--card);
+  border: 1px solid var(--atlas-border); border-radius: 8px; font-size: 15px; font-weight: 700;
+}
+:is(.gm3-toolbar, .gm3-terrain-tools, .gm3-landmark-tools) button[aria-pressed="true"] {
+  color: #fff; background: var(--gm3-accent); border-color: var(--gm3-accent);
+}
+:is(.gm3-toolbar, .gm3-terrain-tools, .gm3-landmark-tools) button:hover { border-color: var(--gm3-accent); }
 .gm3-toolbar button:disabled, .gm3-terrain-tools :disabled { opacity: .45; cursor: default; }
 .gm3-landmark-tools { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
 .gm3-feature-directory { margin-top: 24px; padding: 22px; background: var(--card); border: 1px solid var(--atlas-border); border-radius: 18px; }
@@ -27,11 +60,11 @@
 .gm3-feature-group { display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 12px; padding: 12px 0; border-top: 1px solid var(--atlas-border); }
 .gm3-feature-group h3 { font-size: 16px; margin: 10px 0; color: var(--ink-soft); }
 .gm3-feature-group .gm3-landmark-tools { margin: 0; }
-.gm3-feature-profile { --province-color: #258cc3; margin-top: 16px; }
+.gm3-feature-profile { --province-color: #258cc3; }
 .gm3-feature-profile[hidden], .gm3-profile[hidden] { display: none; }
 .gm3-feature-profile .gm3-coverage { font-size: 14px; color: var(--ink-soft); border-top: 1px solid var(--atlas-border); padding-top: 12px; }
-.china-3d-topic :is(button, a, select, canvas):focus-visible { outline: 3px solid #d77826; outline-offset: 3px; }
-.gm3-viewport { position: relative; height: clamp(470px, 66vh, 820px); overflow: hidden; background: radial-gradient(ellipse at 50% 40%, #f5fcfc 0%, #deeff1 70%, #cfe5e9 100%); color: #244953; }
+.china-3d-topic :is(button, a, select, input, summary, canvas):focus-visible { outline: 3px solid #d77826; outline-offset: 3px; }
+.gm3-viewport { position: relative; height: clamp(440px, 60dvh, 820px); overflow: hidden; background: #e6f2f3; color: #244953; }
 .gm3-viewport canvas { display: block; width: 100%; height: 100%; touch-action: none; cursor: grab; }
 .gm3-viewport canvas:active { cursor: grabbing; }
 .gm3-viewport canvas[hidden] { display: none; }
@@ -43,26 +76,44 @@
 .gm3-flow-point.is-downstream { fill: #d2661a; }
 .gm3-map-label.is-endpoint { color: #165b34; background: #f0fff1; border: 1px solid #66a97d; border-radius: 7px; padding: 5px 8px; text-shadow: none; }
 .gm3-map-label.is-endpoint.is-downstream { color: #873d0c; border-color: #df9c64; background: #fff5e6; }
-.gm3-flow-panel { padding: 12px 18px; border-bottom: 1px solid var(--atlas-border); background: var(--atlas-tint); }
-.gm3-flow-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
-.gm3-flow-tools label { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; font-size: 17px; font-weight: 750; }
-.gm3-flow-tools :is(button, select) { min-height: 42px; padding: 7px 12px; font: inherit; color: var(--ink); background: var(--card); border: 1px solid var(--atlas-border); border-radius: 9px; }
-.gm3-flow-tools button[aria-pressed="true"] { color: #fff; background: #236877; border-color: #236877; }
-.gm3-flow-tools :disabled { opacity: .5; cursor: default; }
-.gm3-flow-tools #gm3-tour-start { color: #fff; background: #a34e20; border-color: #a34e20; font-weight: 750; }
-.gm3-tour-panel { padding: 18px 22px; background: var(--card); border-top: 1px solid var(--atlas-border); }
+.gm3-choices, .gm3-option-line, .gm3-narration {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 6px; min-width: 0;
+}
+.gm3-option-line { gap: 6px 10px; }
+.gm3-option-line > span, .gm3-tour-tools label { font-size: 15px; font-weight: 700; }
+:is(.gm3-choices, .gm3-narration, .gm3-flow-tools, .gm3-tour-heading, .gm3-tour-tools) > button {
+  min-height: 36px; padding: 4px 10px; border: 1px solid var(--atlas-border); border-radius: 8px;
+  background: var(--card); color: var(--ink); font-size: 15px; font-weight: 700; line-height: 1.4;
+}
+:is(.gm3-choices, .gm3-narration, .gm3-flow-tools, .gm3-tour-heading, .gm3-tour-tools) > button:enabled:hover {
+  border-color: var(--gm3-accent);
+}
+:is(.gm3-choices, .gm3-narration, .gm3-flow-tools, .gm3-tour-tools) > button[aria-pressed="true"] {
+  color: #fff; background: var(--gm3-accent); border-color: var(--gm3-accent);
+}
+:is(.gm3-choices, .gm3-narration, .gm3-flow-tools, .gm3-tour-tools) > button:disabled {
+  opacity: .5; cursor: default;
+}
+.gm3-narration { margin-top: 10px; }
+.gm3-narration span, .gm3-pin-tools span { color: var(--ink-soft); font-size: 14px; }
+.gm3-narration span:empty, #gm3-pin-count:empty { display: none; }
+.china-3d-topic select {
+  min-height: var(--select-height); max-width: 100%; padding: var(--select-padding) 8px;
+  color: var(--ink); background: var(--card); border: 1px solid var(--atlas-border); border-radius: var(--select-radius);
+}
+.gm3-flow-panel { margin-top: 12px; }
+.gm3-flow-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 8px; }
+.gm3-flow-tools #gm3-tour-start { color: #fff; background: var(--gm3-accent); border-color: var(--gm3-accent); }
+.gm3-tour-panel { padding: var(--gm3-pad); background: var(--card); border-top: 1px solid var(--atlas-border); }
 .gm3-tour-panel[hidden] { display: none; }
 .gm3-tour-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .gm3-tour-heading h2 { margin: 5px 0 12px; font-size: 24px; color: var(--ink); }
 .gm3-tour-heading button { white-space: nowrap; flex-shrink: 0; }
 .gm3-tour-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
-.gm3-tour-tools label { display: flex; align-items: center; gap: 6px; font-size: 15px; white-space: nowrap; flex-shrink: 0; }
-#gm3-tour-route { width: 130px; }
-#gm3-tour-stop { width: 220px; }
-#gm3-tour-speed { width: 115px; }
-.gm3-tour-panel :is(button, select) { min-height: 40px; padding: 7px 10px; color: var(--ink); background: var(--card); font: inherit; border: 1px solid var(--atlas-border); border-radius: 9px; }
-.gm3-tour-panel button[aria-pressed="true"] { color: #fff; background: #236877; }
-.gm3-tour-panel :disabled { opacity: .45; cursor: default; }
+.gm3-tour-tools label { display: flex; align-items: center; gap: 6px; max-width: 100%; white-space: nowrap; }
+#gm3-tour-stop { width: 13rem; }
+.gm3-tour-routes, .gm3-tour-stops { margin-top: 8px; }
+#gm3-tour-stop-field[hidden], .gm3-tour-stops[hidden] { display: none; }
 .gm3-tour-progress { display: flex; align-items: center; gap: 12px; margin: 12px 0 5px; }
 .gm3-tour-progress progress { flex: 1; min-width: 60px; height: 10px; accent-color: #258568; }
 .gm3-tour-progress span { color: var(--ink-soft); font-size: 14px; font-variant-numeric: tabular-nums; }
@@ -73,15 +124,14 @@
 .gm3-tour-marker { fill: #f9d56d; stroke: #733d0e; stroke-width: 2; }
 .gm3-tour-map-name { fill: #713f0f; stroke: #fff9ea; stroke-width: 4px; paint-order: stroke; font-size: 17px; font-weight: 800; }
 .china-3d-topic[data-tour-active="true"] .gm3-flow-panel { display: none; }
-.china-3d-topic[data-tour-active="true"] .gm3-viewport { height: clamp(390px, 48vh, 620px); }
+.china-3d-topic[data-tour-active="true"] .gm3-viewport { height: clamp(300px, 46dvh, 620px); }
 @media (max-width: 520px) {
-  .gm3-tour-panel { padding: 14px; }
-  .gm3-tour-panel :is(button, select) { font-size: 14px; }
   .gm3-tour-heading h2 { font-size: 21px; }
 }
 .gm3-flow-panel p { margin: 8px 0 0; font-size: 15px; line-height: 1.7; color: var(--ink-soft); }
 #gm3-flow-summary { font-size: 17px; font-weight: 750; color: var(--ink); }
 #gm3-flow-status { font-size: 14px; color: var(--ink-soft); }
+#gm3-route-buttons { margin-top: 12px; padding-block: 12px 0; }
 .gm3-label-leaders { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; stroke-width: 1; }
 .gm3-map-label { position: absolute; transform: translate(-50%, -50%); white-space: nowrap; color: #233d3b; font-size: clamp(12px, 1vw, 16px); font-weight: 750; line-height: 1.2; text-shadow: 0 1px 3px #fff, 1px 0 3px #fff, -1px 0 3px #fff; }
 .gm3-map-label[data-kind="province"] { padding: 4px 8px; border: 1px solid #73634d; border-radius: 7px; background: #fffdf5f5; color: #30291f; font-family: inherit; font-size: clamp(14px, 1vw, 18px); line-height: 1.2; font-weight: 850; text-shadow: none; box-shadow: 0 2px 4px #3c312225; pointer-events: auto; cursor: pointer; z-index: 1; }
@@ -96,36 +146,47 @@
 .gm3-map-label[data-kind="plain"] { color: #285533; background: #f2ffe9e8; }
 .gm3-map-label.is-focused { box-shadow: 0 0 0 2px #d77826; z-index: 2; }
 .gm3-mountain-icon { display: inline-block; font-size: 1.05em; color: #816234; }
-.gm3-visual-controls { padding: 16px; margin-block: 16px; border: 1px solid #b6cfc2; border-radius: 16px; background: var(--card); }
-.gm3-visual-controls > summary { color: var(--ink); font-size: 22px; font-weight: 850; cursor: pointer; padding: 6px 0; }
-.gm3-visual-grid { display: grid; gap: 14px; margin-top: 16px; }
-.gm3-visual-card { border: 1px solid #cadbc8; border-radius: 13px; padding: 14px; background: color-mix(in srgb,var(--card) 90%,#b4dbb5 10%); }
+.gm3-settings, .gm3-visual-controls, .gm3-section, .gm3-picker {
+  border: 1px solid var(--atlas-border); border-radius: 12px; background: var(--card);
+}
+.gm3-section, .gm3-picker { padding: 12px; }
+:root .china-3d-topic details > summary { min-height: 36px; }
+.china-3d-topic :is(.gm3-settings, .gm3-visual-controls, .gm3-section-guide, .gm3-map-notes) > summary {
+  padding-block: 4px; color: var(--ink); font-size: 15px; font-weight: 750; cursor: pointer;
+}
+.gm3-settings > summary, .gm3-visual-controls > summary { padding-inline: 12px; }
+.gm3-terrain-tools, .gm3-visual-grid { display: grid; gap: 12px; padding: 12px; border-top: 1px solid var(--atlas-border); }
+.gm3-visual-card + .gm3-visual-card { padding-top: 12px; border-top: 1px solid var(--atlas-border); }
 .gm3-visual-card h3 { margin: 0 0 12px; font-size: 20px; color: var(--ink); }
 .gm3-visual-card p { font-size: 15px; line-height: 1.8; margin: 10px 0 0; }
 .gm3-visual-card label { display: block; font-size: 17px; line-height: 1.8; color: var(--ink); }
 .gm3-visual-card output { color: #9b541c; font-weight: 850; font-variant-numeric: tabular-nums; }
 .gm3-visual-card input[type="range"] { display: block; width: 100%; accent-color: #317e69; margin: 13px 0; min-height: 26px; }
 .gm3-visual-card button { font: inherit; font-size: 16px; min-height: 42px; padding: 8px 11px; border: 1px solid #a2b99e; border-radius: 10px; color: var(--ink); background: var(--card); cursor: pointer; }
+#gm3-snow { margin-top: 10px; }
 .gm3-visual-card button[aria-pressed="true"] { background: #2c7663; border-color: #2c7663; color: #fff; }
 .gm3-visual-card :is(button,input):disabled { opacity: .45; cursor: default; }
 .gm3-light-control { display: flex; align-items: center; gap: 12px; }
 #gm3-light-compass { width: 110px; min-width: 80px; flex: 0 0 95px; height: 110px; overflow: visible; }
 #gm3-light-compass text { fill: var(--ink); font-size: 15px; text-anchor: middle; }
 #gm3-light-presets { display: flex; flex-wrap: wrap; gap: 6px; }
-.gm3-stamp { position: absolute; left: 24px; top: 22px; display: flex; align-items: center; gap: 10px; pointer-events: none; }
-.gm3-stamp b { font-size: 21px; line-height: 1; color: #256676; }
-.gm3-stamp span { font-size: 13px; line-height: 1.5; }
+.gm3-stamp {
+  position: absolute; inset: 14px auto auto 16px; padding: 3px 9px;
+  border: 1px solid #a9c7ca; border-radius: 6px; background: #f7fcfbee;
+  color: #244953; font-size: 14px; font-weight: 700; pointer-events: none;
+}
 .gm3-inset { position: absolute; right: 16px; bottom: 16px; width: clamp(78px, 9vw, 125px); height: auto; pointer-events: none; }
 .gm3-inset .gm-inset-frame { fill: #eff8f9; stroke: #97b8c3; }
 .gm3-compass { position: absolute; top: 12px; right: 18px; width: 70px; height: 75px; pointer-events: none; fill: #276775; font-size: 15px; font-weight: 800; }
-.gm3-map-footer { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; padding: 14px 20px; border-top: 1px solid var(--atlas-border); font-size: 16px; }
+.gm3-map-footer { display: flex; justify-content: space-between; align-items: start; flex-wrap: wrap; gap: 10px 20px; padding: 12px var(--gm3-pad); border-top: 1px solid var(--atlas-border); font-size: 15px; }
 .gm3-map-footer p { margin: 0; line-height: 1.6; }
 .gm3-map-footer small { color: var(--ink-soft); font-size: 13px; }
 #gm3-selection { font-weight: 750; color: var(--ink); }
 #gm3-elevation { color: var(--ink-soft); font-size: 14px; margin-top: 4px; }
-.gm3-picker label { display: block; font-size: 17px; font-weight: 750; margin-bottom: 10px; }
-.gm3-picker select { width: 100%; min-width: 0; font: inherit; min-height: 44px; }
-.gm3-picker p { margin: 7px 0 0; font-size: 14px; color: var(--ink-soft); }
+.gm3-picker-heading { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 4px 8px; margin-bottom: 6px; }
+.gm3-picker label { font-size: 16px; font-weight: 750; }
+.gm3-picker select { width: 100%; }
+.gm3-picker a { font-size: 14px; }
 .gm3-profile { padding: 20px; border: 1px solid var(--atlas-border); border-top: 5px solid var(--province-color, #3c8590); background: var(--card); border-radius: 16px; }
 .gm3-profile h2 { margin: 8px 0 12px; font-size: 26px; line-height: 1.4; }
 .gm3-profile p { font-size: 17px; line-height: 1.85; margin: 14px 0; }
@@ -133,9 +194,9 @@
 .gm3-profile dt { color: var(--ink-soft); }
 .gm3-profile dd { margin: 0; font-weight: 750; }
 .gm3-profile a { display: inline-block; color: var(--ink); font-size: 16px; font-weight: 750; text-underline-offset: 4px; margin: 8px 12px 0 0; }
-.gm3-legend { display: flex; flex-wrap: wrap; gap: 10px 24px; list-style: none; margin: 18px 0 6px; padding: 0; }
+.gm3-legend { display: flex; flex-wrap: wrap; gap: 6px 18px; list-style: none; margin: 0; padding: 0 var(--gm3-pad) 12px; }
 .gm3-legend[hidden] { display: none; }
-.gm3-legend li { display: flex; align-items: center; gap: 8px; font-size: 16px; }
+.gm3-legend li { display: flex; align-items: center; gap: 6px; font-size: 14px; font-variant-numeric: tabular-nums; }
 .gm3-legend i { display: block; width: 14px; height: 14px; border-radius: 4px; background: var(--region); border: 1px solid #0002; }
 .gm3-region-note, .gm3-model-note { font-size: 14px; line-height: 1.8; color: var(--ink-soft); }
 .gm3-observe { margin-top: 30px; }
@@ -146,24 +207,22 @@
 .gm3-observation h3 { font-size: 20px; margin: 8px 0; }
 .gm3-observation p { font-size: 16px; line-height: 1.8; margin-bottom: 12px; }
 .gm3-observation button { border: 0; border-radius: 9px; padding: 9px 14px; background: #e3f1ef; color: #245b61; font-weight: 750; }
-.gm3-model-note { margin: 22px 0 0; border-top: 1px dashed var(--atlas-border); padding-top: 16px; }
+.gm3-map-notes { margin-top: 24px; padding-block: 12px; border-top: 1px solid var(--atlas-border); }
+.gm3-map-notes p { margin-top: 8px; }
 .gm3-fallback { position: absolute; inset: 25% 12% auto; background: var(--card); color: var(--ink); border-radius: 16px; padding: 24px; font-size: 18px; line-height: 1.9; }
 .gm3-fallback[hidden] { display: none; }
 @media (max-width: 1000px) {
-  .gm3-heading { align-items: flex-start; flex-direction: column; gap: 14px; }
-  .gm3-viewport { height: 560px; }
   #gm3-observations { grid-template-columns: 1fr; }
 }
 @media (max-width: 520px) {
   .gm3-heading h1 { font-size: 32px; }
-  .gm3-heading p:last-child { font-size: 16px; }
-  .gm3-toolbar { padding: 12px; }
-  .gm3-toolbar button { padding-inline: 10px; font-size: 14px; }
-  .gm3-viewport { height: 420px; }
-  .gm3-stamp { left: 15px; top: 20px; }
-  .gm3-stamp b { font-size: 15px; }
-  .gm3-height-control { gap: 6px 10px; }
-  .gm3-height-control small { flex-basis: 100%; }
+  .gm3-toolbar { gap: 8px; padding-inline: 10px; }
+  .gm3-toolbar :is(.gm3-presets, .gm3-actions) { gap: 4px; }
+  .gm3-toolbar button { min-width: 32px; padding-inline: 7px; font-size: 14px; }
+  .gm3-actions button span { display: none; }
+  .gm3-viewport { height: clamp(320px, 49dvh, 440px); }
+  .gm3-compass { right: 7px; width: 52px; height: 55px; }
+  .gm3-inset { right: 10px; bottom: 10px; }
   .gm3-map-label { font-size: 12px; }
   .gm3-map-footer { padding: 12px; font-size: 14px; }
   .gm3-feature-directory { padding: 16px; }
@@ -171,15 +230,16 @@
 }
 
 /* 剖面图和地图共用 A、B；曲线海拔不跟随视觉放大倍率。 */
-.china-3d-topic[data-sl-mode="wide"] { --sl-width: clamp(360px, 29vw, 460px) !important; }
-.gm3-section { padding: 16px; border: 1px solid #c7dcd3; border-radius: 16px; background: var(--card); min-width: 0; }
-.gm3-section h2 { font-size: 25px; margin: 5px 0 10px; }
+.china-3d-topic[data-sl-mode="wide"] { --sl-width: clamp(280px, 24vw, 360px) !important; }
+.gm3-section h2 { font-size: 19px; margin: 0; }
+.gm3-section-guide { margin-top: 10px; }
 .gm3-section p { margin: 9px 0; font-size: 16px; line-height: 1.7; }
-.gm3-section-tools { padding: 12px 18px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; background: #f4f2e5; border-bottom: 1px solid var(--atlas-border); }
-.gm3-section-tools button { min-height: 44px; padding: 8px 12px; font-weight: 750; color: var(--ink); border: 1px solid #a7c3b6; border-radius: 10px; background: var(--card); }
+.gm3-section-tools { padding: 10px var(--gm3-pad); display: flex; flex-wrap: wrap; align-items: center; gap: 8px; background: var(--atlas-tint); border-top: 1px solid var(--atlas-border); }
+.gm3-section-tools button { min-height: 40px; padding: 7px 11px; font-weight: 750; color: var(--ink); border: 1px solid #a7c3b6; border-radius: 10px; background: var(--card); }
 .gm3-section-tools button[aria-pressed="true"] { background: #9b3f24; color: #fff; }
 .gm3-section-tools button:disabled { opacity: .5; cursor: default; }
-#gm3-section-hint { font-size: 15px; color: var(--ink-soft); }
+#gm3-section-hint { font-size: 14px; color: var(--ink-soft); }
+#gm3-section-draw { scroll-margin-top: 12px; }
 #gm3-section-status { color: #873f20; font-weight: 700; }
 #gm3-section-chart { width: 100%; max-width: 430px; display: block; margin-inline: auto; background: #fbfcf7; border: 1px solid var(--atlas-border); border-radius: 10px; }
 .china-3d-topic[data-section-from][data-sl-mode="wide"][data-sl-collapsed="false"] > .sl-sidebar,
@@ -207,12 +267,7 @@
 .gm3-play-tools button:hover { border-color: #33856b; background: var(--atlas-tint); }
 .gm3-play-tools button[aria-pressed="true"] { color: #fff; background: #256d58; border-color: #256d58; }
 .gm3-play-tools button:disabled { opacity: .5; cursor: default; }
-.gm3-voice { background: #fff6df; border-block: 1px solid #e3d3a8; }
-#gm3-voice-status { font-size: 15px; }
-.gm3-game { padding: 18px; background: #eef7f5; border-block: 1px solid #bedad0; }
 .gm3-game-heading { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; }
-.gm3-game h2 { margin: 0; font-size: 25px; }
-.gm3-game .gm3-play-tools { padding-inline: 0; }
 .gm3-game p { font-size: 17px; line-height: 1.75; margin: 8px 0; }
 .gm3-game .gm3-game-clue { font-size: 20px; font-weight: 750; }
 #gm3-game-feedback { padding: 10px 14px; background: var(--card); border-left: 5px solid #d48b3c; border-radius: 8px; }
@@ -226,14 +281,14 @@
 .china-3d-topic[data-game-mode="hunt"] .gm3-label-layer { opacity: .35; }
 
 .gm3-game-map-clue { position: absolute; z-index: 3; top: 12px; left: 14px; width: calc(100% - 110px); max-width: 720px; box-sizing: border-box; margin: 0; padding: 9px 13px; border: 1px solid #8cb4a5; border-radius: 12px; background: #fffff4ef; color: #284e40; font-size: 16px; font-weight: 750; line-height: 1.6; pointer-events: none; }
-.gm3-hydrology { padding: 22px; border-block: 1px solid #b5d6df; background: var(--card); }
+.gm3-draw-instruction { display: none; }
+.china-3d-topic[data-section-drawing="true"] .gm3-draw-instruction { display: block; }
 .gm3-hydro-heading { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 18px; align-items: center; }
-.gm3-hydrology h2 { margin: 6px 0 12px; font-size: 28px; }
+.gm3-hydrology h2 { margin-top: 4px; }
 .gm3-hydrology h3 { margin: 20px 0 8px; font-size: 22px; }
 .gm3-hydrology p { margin: 10px 0; font-size: 18px; line-height: 1.85; }
 .gm3-hydrology p.gm3-hydro-note { font-size: 16px; color: var(--ink-soft); }
-.gm3-hydrology .gm3-play-tools { padding-inline: 0; border: 0; }
-.gm3-hydrology select { max-width: 100%; min-height: 44px; padding: 8px 12px; border: 1px solid #87b5c6; border-radius: 9px; font: inherit; color: var(--ink); background: var(--card); }
+.gm3-basin-choices { margin-top: 12px; }
 .gm3-hydrology a { color: var(--ink); text-underline-offset: .2em; }
 .gm3-basin-card a, .gm3-hydro-detail a { color: inherit; }
 .gm3-water-legend { display: flex; flex-wrap: wrap; gap: 12px 22px; font-size: 16px; }
@@ -245,17 +300,17 @@
 .gm3-hydrology #gm3-basin-scope { font-size: 16px; }
 .gm3-hydro-detail { border: 1px solid #dfbb77; border-radius: 14px; padding: 0 20px 15px; background: #fff7e8; color: #4e4a35; }
 .gm3-hydro-detail[hidden] { display: none; }
-@media (max-width: 520px) { .gm3-hydrology { padding: 14px; } .gm3-basin-card { padding: 14px; } }
-.gm3-learning-lab, .gm3-pin-tools { padding: 22px; border-top: 1px solid var(--atlas-border); background: var(--card); }
-.gm3-stream-tools { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; padding: 10px 20px; border-top: 1px solid var(--atlas-border); color: var(--ink-soft); font-size: 16px; }
+@media (max-width: 520px) { .gm3-basin-card { padding: 14px; } }
+.gm3-pin-tools { padding: 8px var(--gm3-pad); border-top: 1px solid var(--atlas-border); }
+.gm3-stream-tools { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; padding: 7px var(--gm3-pad); color: var(--ink-soft); font-size: 14px; }
 .gm3-stream-tools p { margin: 0; }
 .gm3-stream-tools button { padding: 6px 12px; min-height: 40px; font: inherit; color: var(--ink); background: var(--card); border: 1px solid var(--atlas-border); border-radius: 9px; }
 .gm3-stream-tools button[hidden] { display: none; }
-.gm3-learning-lab h2 { margin: 6px 0 12px; font-size: 28px; }
+.gm3-learning-lab h2 { margin-top: 4px; }
 .gm3-learning-lab h3 { margin: 16px 0 12px; font-size: 23px; }
-.gm3-learning-lab p, .gm3-pin-tools p { margin: 10px 0; font-size: 18px; line-height: 1.85; }
-.gm3-learning-lab .gm3-play-tools, .gm3-pin-tools .gm3-play-tools { padding-inline: 0; border: 0; }
-.gm3-learning-lab p.gm3-hydro-note, .gm3-pin-tools p.gm3-hydro-note { font-size: 16px; color: var(--ink-soft); }
+.gm3-learning-lab p { margin: 10px 0; font-size: 18px; line-height: 1.85; }
+.gm3-learning-lab .gm3-play-tools { padding-inline: 0; border: 0; }
+.gm3-learning-lab p.gm3-hydro-note, .gm3-pin-tools p.gm3-hydro-note { font-size: 15px; color: var(--ink-soft); }
 .gm3-learning-lab [hidden], .gm3-compare-captions[hidden] { display: none !important; }
 .gm3-learn-hud[hidden], #gm3-step-inline[hidden] { display: none; }
 .gm3-learn-hud p { margin: 0; }
@@ -266,9 +321,8 @@
 #gm3-step-lights button { font-size: 20px; }
 #gm3-step-lights button.is-found { box-shadow: inset 0 -4px 0 #a7d15f; }
 #gm3-step-coordinates { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 12px 0; }
-#gm3-step-coordinates input { max-width: 100%; width: 105px; padding: 8px; font: inherit; border: 1px solid var(--atlas-border); border-radius: 8px; color: var(--ink); background: var(--card); }
+#gm3-step-coordinates input { max-width: 100%; width: 96px; min-height: 36px; padding: 4px 8px; font: inherit; border: 1px solid var(--atlas-border); border-radius: 8px; color: var(--ink); background: var(--card); }
 #gm3-step-coordinates button, #gm3-pin-list button { padding: 8px 12px; min-height: 42px; font: inherit; border: 1px solid var(--atlas-border); border-radius: 9px; color: var(--ink); background: var(--card); }
-.gm3-learning-lab details summary { cursor: pointer; padding: 10px 0; font-size: 17px; }
 #gm3-relation-options { display: grid; grid-template-columns: 1fr; }
 #gm3-relation-options button { text-align: left; font-size: 18px; line-height: 1.7; }
 #gm3-relation-hints { font-size: 18px; line-height: 1.9; padding-left: 30px; }
@@ -300,7 +354,7 @@
 .gm3-compare-captions strong { justify-self: center; align-self: start; margin-top: 16px; padding: 7px 12px; border: 1px solid #9cc6c9; border-radius: 10px; background: #fffff5ed; color: #215664; font-size: clamp(14px,1.2vw,21px); }
 .gm3-compare-captions::after { content: ''; position: absolute; top: 0; bottom: 0; left: 50%; border-left: 3px dashed #8cb9c5; }
 .china-3d-topic[data-compare="true"] :is(.gm3-label-layer,.gm3-flow-layer,.gm3-section-layer,.gm3-stamp,.gm3-inset,.gm3-pin-labels,.gm3-game-map-clue) { display: none !important; }
-@media (max-width: 520px) { .gm3-learning-lab, .gm3-pin-tools { padding: 14px; } .gm3-compare-captions strong { padding: 5px; } }
+@media (max-width: 520px) { .gm3-compare-captions strong { padding: 5px; } }
 .china-3d-topic[data-game-mode="hunt"] .gm3-stamp, .china-3d-topic[data-game-mode="detective"] .gm3-stamp { display: none; }
 .gm3-section-scrubber { display: block; margin-top: 12px; font-size: 17px; font-weight: 750; }
 #gm3-section-position { display: block; width: 100%; min-height: 38px; accent-color: #ad6422; }

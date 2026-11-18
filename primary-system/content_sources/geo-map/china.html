@@ -85,9 +85,9 @@
               <ul class="gm-legend" id="gm-legend" aria-label="图例"></ul>
               <a class="gm-tools-jump" href="#map-tools">图层与找地点 ↑</a>
             </div>
+            <svg id="gm-svg" role="group" tabindex="0" aria-label="中国示意地图，包含省级行政区、山河大地与邻居图层"></svg>
             <div id="gm-province-readout" class="gm-discovery-readout" aria-live="polite" hidden><p><b id="gm-province-name"></b> <span id="gm-province-capital"></span></p><p id="gm-province-feature"></p></div>
             <section id="gm-river-readout" class="gm-discovery-readout gm-river-readout" aria-label="河流走向回放" hidden><h2 id="gm-river-title"></h2><div class="gm-discovery-buttons"><button type="button" data-river-action="play" aria-pressed="false">播放到入海口</button><button type="button" data-river-action="restart">从源头重看</button><output id="gm-river-percent" aria-live="off">0％</output></div><label for="gm-river-progress">拖动进度，看看水走到了哪里<input type="range" id="gm-river-progress" min="0" max="1000" value="0" step="1"></label><p id="gm-river-city" role="status"></p><p id="gm-river-state" class="gm-discovery-note" role="status"></p><div id="gm-river-stops" class="gm-discovery-buttons" role="group" aria-label="直接看沿途一站"></div></section>
-            <svg id="gm-svg" role="group" tabindex="0" aria-label="中国示意地图，包含省级行政区、山河大地与邻居图层"></svg>
             <figcaption class="gm-map-note" id="gm-map-note">示意教学地图：省级行政区轮廓来自公开边界数据并做了简化，山脉与河道位置为近似示意；南海诸岛与十段线按制图惯例画在右下小图中。</figcaption>
           </figure>
           <aside class="gm-card gm-card--blank" id="gm-card" aria-label="地点档案" aria-live="polite"></aside>

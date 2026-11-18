@@ -88,7 +88,12 @@ window.GMWorldSun = (() => {
     const clock = createClock({request: fn => requestAnimationFrame(fn), cancel: id => cancelAnimationFrame(id), available, render, changed});
     $('gw-sun-intro').textContent = D.intro; $('gw-sun-note').textContent = D.note;
     $('gw-sun-seasons').innerHTML = D.seasons.map(s => `<button type="button" data-season="${s.id}" aria-pressed="${s.id === season.id}">${esc(s.name)}</button>`).join('');
-    $('gw-sun-studies').innerHTML = '<option value="">自由选择观察点</option>' + D.studies.map(s => `<option value="${s.id}">${esc(s.name)}</option>`).join('');
+    $('gw-sun-studies').innerHTML = D.studies.map(s =>
+      `<button type="button" value="${s.id}" aria-pressed="false">${esc(s.name)}</button>`).join('');
+    function updateStudy(study = null) {
+      for (const button of $('gw-sun-studies').children) button.setAttribute('aria-pressed', String(button.value === study?.id));
+      $('gw-sun-study-text').textContent = study?.text || '';
+    }
     function updateSeason() {
       $('gw-sun-season-text').textContent = season.text;
       $('gw-sun-seasons').querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.season === season.id)));
@@ -96,7 +101,7 @@ window.GMWorldSun = (() => {
     }
     function pick(value, turn = false) {
       clock.pause(); point = value.slice();
-      $('gw-sun-studies').value = ''; $('gw-sun-study-text').textContent = '';
+      updateStudy();
       overlay([{point, color: '#e67334'}]); comparison(); render(clock.state());
       readCoordinates(point, '昼夜观察点'); if (turn) focus(point, '昼夜观察点');
     }
@@ -104,7 +109,7 @@ window.GMWorldSun = (() => {
       const study = D.studies.find(s => s.id === id); if (!study) return;
       season = D.seasons.find(s => s.id === study.season); pick(study.point, true);
       clock.setHour(study.hour); updateSeason();
-      $('gw-sun-studies').value = id; $('gw-sun-study-text').textContent = study.text;
+      updateStudy(study);
     }
     function setActive(value) {
       clock.pause(); active = value; $('gw-sun-inline').hidden = !active;
@@ -115,12 +120,15 @@ window.GMWorldSun = (() => {
     $('gw-sun-seasons').addEventListener('click', event => {
       const button = event.target.closest('[data-season]'); if (!button) return;
       clock.pause(); season = D.seasons.find(s => s.id === button.dataset.season);
-      $('gw-sun-studies').value = ''; $('gw-sun-study-text').textContent = ''; updateSeason();
+      updateStudy(); updateSeason();
     });
     $('gw-sun-time').addEventListener('input', () => clock.setHour(Number($('gw-sun-time').value)));
     $('gw-sun-play').addEventListener('click', () => { root.dispatchEvent(new CustomEvent('gm-world-sun-play')); clock.state().playing ? clock.pause() : clock.play(); });
     $('gw-sun-step').addEventListener('click', () => clock.setHour(clock.state().hour + 3));
-    $('gw-sun-studies').addEventListener('change', () => showStudy($('gw-sun-studies').value));
+    $('gw-sun-studies').addEventListener('click', event => {
+      const button = event.target.closest('button');
+      if (button) showStudy(button.value);
+    });
     $('gw-sun-current').addEventListener('click', () => pick(currentPoint(), true));
     $('gw-sun-locate').addEventListener('click', () => focus(point, '昼夜观察点'));
     $('gw-sun-noon').addEventListener('click', () => { clock.setHour(12 - point[0] / 15); focus(point, '观察点的太阳正午'); });

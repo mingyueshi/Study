@@ -24,8 +24,10 @@ window.GMWorldTools = (() => {
     catch { $('gw-hunt-storage').textContent = '浏览器无法保存记录，本次仍可完成寻宝。'; }
     $('gw-distance-note').textContent = D.distanceNote;
     $('gw-hunt-note').textContent = D.huntNote;
-    $('gw-measure-example').insertAdjacentHTML('beforeend', D.examples.map(e => `<option value="${e.id}">${esc(e.name)}</option>`).join(''));
-    $('gw-hunt-mission').innerHTML = D.missions.map((m, i) => `<option value="${m.id}">第 ${i + 1} 处 · ${esc(m.name)}</option>`).join('');
+    $('gw-measure-example').innerHTML = D.examples.map(e =>
+      `<button type="button" value="${e.id}">${esc(e.name)}</button>`).join('');
+    $('gw-hunt-mission').innerHTML = D.missions.map((m, i) =>
+      `<button type="button" value="${m.id}" aria-pressed="false">第 ${i + 1} 处 · ${esc(m.name)}</button>`).join('');
     function drawItinerary() {
       const result = window.GMWorldExplorers.itinerary(itineraryPoints.map(p => p.point));
       $('gw-itinerary-stops').innerHTML = itineraryPoints.map((p,i) => `<li><b>${i+1} · ${esc(p.name)}</b>${i ? ` · 本段约 ${Math.round(result.legs[i-1])} 千米` : ''} <button type="button" data-remove-stop="${i}" aria-label="移除第 ${i+1} 站">移除</button></li>`).join('');
@@ -42,6 +44,7 @@ window.GMWorldTools = (() => {
       $('gw-measure-clear').textContent = measureKind === 'route' ? '清空行程' : '清空两点';
       $('gw-itinerary').hidden = measureKind !== 'route';
       $('gw-my-trips').hidden = measureKind !== 'route';
+      for (const id of ['gw-measure-points', 'gw-measure-examples', 'gw-locate-a', 'gw-locate-b']) $(id).hidden = measureKind === 'route';
       $('gw-measure-kinds').querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.measureKind===measureKind)));
       if (measureKind === 'route') { drawItinerary(); return; }
       points.forEach((p, i) => {
@@ -61,7 +64,7 @@ window.GMWorldTools = (() => {
     function startMission() {
       solved = false; revealed = false;
       const m = D.missions[mission];
-      $('gw-hunt-mission').value = m.id;
+      for (const button of $('gw-hunt-mission').children) button.setAttribute('aria-pressed', String(button.value === m.id));
       $('gw-hunt-target').textContent = '目标：' + G.coordinates(m.point);
       $('gw-tool-goal').textContent = $('gw-hunt-target').textContent;
       $('gw-tool-result').textContent = '第 ' + (mission + 1) + ' / ' + D.missions.length + ' 处 · 点球面提交位置';
@@ -107,7 +110,7 @@ window.GMWorldTools = (() => {
           itineraryPoints.push({point:point.slice(),name:label || G.coordinates(point)}); drawMeasure(); return true;
         }
         points[active] = point.slice(); active = points[0] ? 1 : 0;
-        $('gw-measure-example').value = ''; $('gw-measure-observe').textContent = '';
+        $('gw-measure-observe').textContent = '';
         drawMeasure();
       } else if (mode === 'hunt') {
         if (revealed || solved) return true;
@@ -143,9 +146,11 @@ window.GMWorldTools = (() => {
       $(`gw-locate-${letter}`).addEventListener('click', () => { if (points[i]) focus(points[i], i ? '终点 B · 蓝色' : '起点 A · 橙色'); });
     });
     $('gw-point-current').addEventListener('click', () => { const p = currentPoint(); if (p) handlePoint(p); });
-    $('gw-measure-clear').addEventListener('click', () => { itineraryPoints = []; points = [null, null]; active = 0; $('gw-measure-example').value = ''; $('gw-measure-observe').textContent = ''; drawMeasure(); });
-    $('gw-measure-example').addEventListener('change', () => {
-      const e = D.examples.find(e => e.id === $('gw-measure-example').value); if (!e) return;
+    $('gw-measure-clear').addEventListener('click', () => { itineraryPoints = []; points = [null, null]; active = 0; $('gw-measure-observe').textContent = ''; drawMeasure(); });
+    $('gw-measure-example').addEventListener('click', event => {
+      const button = event.target.closest('button');
+      const e = D.examples.find(example => example.id === button?.value);
+      if (!e) return;
       points = [e.from.slice(), e.to.slice()]; active = 1;
       $('gw-measure-observe').textContent = e.observe; drawMeasure();
       const midpoint = G.arc(...points, 2)[1]; focus(G.lonLat({x: midpoint[0], y: midpoint[1], z: midpoint[2]}), e.name);
@@ -157,7 +162,12 @@ window.GMWorldTools = (() => {
       $('gw-point-error').textContent = '';
       handlePoint(point); focus(point, '输入的坐标'); readCoordinates(point, '输入坐标');
     });
-    $('gw-hunt-mission').addEventListener('change', () => { mission = D.missions.findIndex(m => m.id === $('gw-hunt-mission').value); startMission(); });
+    $('gw-hunt-mission').addEventListener('click', event => {
+      const button = event.target.closest('button[aria-pressed="false"]');
+      if (!button) return;
+      mission = D.missions.findIndex(m => m.id === button.value);
+      startMission();
+    });
     $('gw-hunt-next').addEventListener('click', () => { if (mission < D.missions.length - 1) { mission++; startMission(); } });
     $('gw-hunt-retry').addEventListener('click', startMission);
     $('gw-hunt-reveal').addEventListener('click', () => {

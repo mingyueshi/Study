@@ -14,7 +14,7 @@
     <div class="origins-playback">
       <button type="button" id="atlas-play" aria-pressed="false">{{ station.atlas.playback.play }}</button>
       <button type="button" id="atlas-restart">↻ 从非洲重新开始</button>
-      <label for="atlas-speed"><span>播放速度</span><select id="atlas-speed">{% for speed in station.atlas.playback.speeds %}<option value="{{ speed.milliseconds }}"{% if speed.milliseconds == station.atlas.playback.default_milliseconds %} selected{% endif %}>{{ speed.label }}</option>{% endfor %}</select></label>
+      <div class="inline-choice" data-inline-choice><label for="atlas-speed"><span>播放速度</span><select id="atlas-speed">{% for speed in station.atlas.playback.speeds %}<option value="{{ speed.milliseconds }}"{% if speed.milliseconds == station.atlas.playback.default_milliseconds %} selected{% endif %}>{{ speed.label }}</option>{% endfor %}</select></label></div>
       <span id="atlas-progress"></span>
     </div>
     <p id="atlas-playback-status" class="origins-note" role="status">{{ station.atlas.playback.ready }}</p>
@@ -114,4 +114,4 @@
   </div>
 </section>
 {{ station.atlas|json_script:'origins-atlas-data' }}
-<script src="{% static 'humanorigins/migration.js' %}?v=5" defer></script>
+<script src="{% static 'humanorigins/migration.js' %}?v=6" defer></script>

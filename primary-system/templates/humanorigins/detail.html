@@ -190,7 +190,7 @@
         <header><h2 id="origins-image-heading">化石与图像观察室</h2><button type="button" data-origins-image-close autofocus>关闭大图 ×</button></header>
         <div class="origins-inspector-controls">
           <button type="button" id="origins-lens-toggle" aria-pressed="true">收起放大镜</button>
-          <label for="origins-lens-power">放大倍数 <select id="origins-lens-power"><option value="2">2 倍</option><option value="3" selected>3 倍</option><option value="4">4 倍</option></select></label>
+          <div class="inline-choice" data-inline-choice><label for="origins-lens-power">放大倍数 <select id="origins-lens-power"><option value="2">2 倍</option><option value="3" selected>3 倍</option><option value="4">4 倍</option></select></label></div>
           <span id="origins-lens-status" role="status"></span>
         </div>
         <p id="origins-lens-help" class="origins-note">在图上移动或拖动放大镜，仔细看局部；也可点观察区，用方向键移动。</p>
@@ -205,7 +205,7 @@
     </article>
   </div>
 </div>
-<script src="{% static 'humanorigins/figures.js' %}?v=2" defer></script>
+<script src="{% static 'humanorigins/figures.js' %}?v=3" defer></script>
 {% if station.family_tree %}<script src="{% static 'humanorigins/family-tree.js' %}" defer></script>{% endif %}
 {% if station.map_pins %}<script src="{% static 'humanorigins/sites.js' %}" defer></script>{% endif %}
 {% endblock %}

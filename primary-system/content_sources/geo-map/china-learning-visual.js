@@ -58,8 +58,9 @@ window.GMChinaLearningVisual = (() => {
     function render() {
       $('pin-last').textContent = last ? `刚才的位置：${caption(last)}` : '先在地形上点一个位置。';
       $('pin-add').disabled = !last || !available() || pins.length >= 6;
-      $('pin-clear').disabled = pins.length === 0;
-      $('pin-count').textContent = `已钉 ${pins.length}／6 根`;
+      $('pin-clear').hidden = $('pin-clear').disabled = pins.length === 0;
+      $('pin-note').hidden = pins.length === 0;
+      $('pin-count').textContent = pins.length ? `已钉 ${pins.length}／6 根` : '';
       $('pin-list').innerHTML = pins
         .map(
           (p) =>
@@ -153,7 +154,9 @@ window.GMChinaLearningVisual = (() => {
     }
     $('pin-add').addEventListener('click', add);
     $('pin-clear').addEventListener('click', () => {
+      const hadFocus = document.activeElement === $('pin-clear');
       for (const p of [...pins]) remove(p.id);
+      if (hadFocus && !$('pin-add').disabled) $('pin-add').focus({ preventScroll: true });
     });
     for (const node of [$('pin-list'), $('pin-labels')])
       node.addEventListener('click', (event) => {

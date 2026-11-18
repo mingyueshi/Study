@@ -1,5 +1,5 @@
 {% extends 'base.html' %}{% load static %}{% block title %}词以类聚 · 乐学堂{% endblock %}
-{% block content %}<link rel="stylesheet" href="{% static 'words/tree.css' %}?v=5"><script src="{% static 'speech.js' %}" defer></script><script src="{% static 'tts.js' %}" defer></script><script src="{% static 'words/tree.js' %}?v=4" defer></script>
+{% block content %}<link rel="stylesheet" href="{% static 'words/tree.css' %}?v=5"><script src="{% static 'speech.js' %}" defer></script><script src="{% static 'tts.js' %}" defer></script><script src="{% static 'words/tree.js' %}?v=5" defer></script>
 <header class="tree-hero">
   <div class="tree-hero-copy">
     <p class="eyebrow">英语 · 看结构</p>
@@ -38,7 +38,7 @@
       <h3>单词家族记忆卡</h3>
       <p class="tree-family-tip">先读正面的单词，猜猜意思，再翻过来核对。彩色部分是这一家的共同词尾。</p>
       <div class="family-memory-tools">
-        <label>挑一个家族 <select data-family-select aria-label="选择拼写家族">{% for family in selected_root.children %}<option value="{{ family.id }}">{{ family.zh }} · {{ family.ipa }} · {{ family.total }} 词</option>{% endfor %}</select></label>
+        <div class="inline-choice" data-inline-choice><label>挑一个家族 <select data-family-select aria-label="选择拼写家族">{% for family in selected_root.children %}<option value="{{ family.id }}">{{ family.zh }} · {{ family.ipa }} · {{ family.total }} 词</option>{% endfor %}</select></label></div>
         <button type="button" class="tree-tool" data-family-reset>全部翻回</button>
       </div>
       <p class="family-memory-progress" data-family-progress role="status" aria-live="polite"></p>

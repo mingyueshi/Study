@@ -73,6 +73,7 @@
       const card = cards.find(item => '#' + item.id === location.hash);
       if (!card) return;
       $('[data-mark-group]').value = '';
+      window.StudyChoices?.sync($('[data-mark-group]'));
       $('[data-mark-search]').value = '';
       filterMarks();
       card.scrollIntoView({ block: 'start', behavior: 'instant' });
@@ -296,6 +297,7 @@
   $('[data-retry]').addEventListener('click', () => {
     saveDraft();
     group.value = ''; level.value = ''; markFilter = null; mode.value = 'wrong';
+    for (const control of [group, level, mode]) window.StudyChoices?.sync(control);
     questions.filter(question => records[question.id]?.wrong).forEach(question => drafts.delete(question.id));
     filterQuestions();
   });

@@ -5,8 +5,8 @@
   --control-icon-size: 20px;
   --control-focus: var(--orange, #b75e2c);
   --select-radius: var(--control-radius);
-  --select-height: 50px;
-  --select-padding: 10px;
+  --select-height: 44px;
+  --select-padding: 7px;
 }
 
 /* 专题只提供颜色与密度，控件的结构和交互状态统一维护。 */
@@ -66,6 +66,33 @@ select[aria-invalid="true"], select:user-invalid {
   --select-surface: #fff9f5;
 }
 
+.inline-choice { display: grid; align-content: start; gap: 6px; min-width: 0; }
+.inline-choice select[hidden] { display: none !important; }
+.inline-choice-options { display: flex; flex-wrap: wrap; align-items: center; gap: 5px; }
+html body .inline-choice-options > button {
+  min-height: 36px;
+  min-width: 0;
+  max-width: 100%;
+  padding: 5px 9px;
+  border: 1px solid var(--select-border, var(--line, #c9dccc));
+  border-radius: 8px;
+  background: var(--select-surface, var(--card, var(--white, #fffefa)));
+  color: var(--select-ink, var(--ink));
+  font: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.45;
+  text-align: start;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+}
+html body .inline-choice-options > button[aria-pressed="true"] {
+  border-color: var(--select-accent, var(--green, #22634c));
+  background: var(--select-accent, var(--green, #22634c));
+  color: #fff;
+}
+html body .inline-choice-options > button:disabled { opacity: .5; cursor: default; }
+
 /* 支持时一起美化展开菜单，定位、滚动和焦点仍交给浏览器。 */
 @supports (appearance: base-select) {
   body :where(.site-masthead, .shell) select:not([multiple]):is(:not([size]), [size="1"]),
@@ -84,6 +111,8 @@ select[aria-invalid="true"], select:user-invalid {
     flex: 1;
     align-items: center;
     min-width: 0;
+    min-height: 0;
+    margin: 0;
     padding: 0;
     border: 0;
     background: transparent;

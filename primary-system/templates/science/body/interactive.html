@@ -15,7 +15,7 @@
       <button class="body-button-primary" type="button" data-process-play aria-pressed="false">播放过程</button>
       <button type="button" data-process-prev>上一步</button><button type="button" data-process-next>下一步</button>
       <button type="button" data-process-reset>从头再看</button>
-      <label class="body-process-speed">演示速度<select data-process-speed><option value="0.5">慢慢看</option><option value="1" selected>正常</option><option value="1.5">快一点</option></select></label>
+      <div class="inline-choice" data-inline-choice><label class="body-process-speed">演示速度<select data-process-speed><option value="0.5">慢慢看</option><option value="1" selected>正常</option><option value="1.5">快一点</option></select></label></div>
     </div>
     <label class="body-process-scrub">拖动进度，停下来细看 <output data-process-position>第 1 步</output><input type="range" min="0" max="1000" step="1" value="0" data-process-progress></label>
     <p class="body-process-status" data-process-status role="status"></p>

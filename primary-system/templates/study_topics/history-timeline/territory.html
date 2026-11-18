@@ -30,7 +30,7 @@
             <div class="territory-playback" id="territory-playback" hidden>
               <button type="button" id="territory-play" aria-pressed="false" aria-controls="territory-svg">自动播放</button>
               <button type="button" id="territory-restart">从头播放</button>
-              <label>每张停留 <select id="territory-speed"><option value="6000">6 秒</option><option value="10000">10 秒</option></select></label>
+              <div class="inline-choice" data-inline-choice><label>每张停留 <select id="territory-speed"><option value="6000">6 秒</option><option value="10000">10 秒</option></select></label></div>
               <progress id="territory-progress" value="1" max="22" aria-label="版图阶段进度"></progress>
               <p id="territory-play-status" role="status"></p>
               <details class="territory-play-help"><summary>播放与查看提示</summary><p>播放时地图视角保持不变，可随时暂停、继续；手动选朝代、缩放或拖动地图也会暂停。每一格是一个历史阶段，实际经历的年数不同。</p></details>

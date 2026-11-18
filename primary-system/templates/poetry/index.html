@@ -14,8 +14,8 @@
 </label>
   <label class="ref-field">来源子集<select name="collection"><option value="">全部子集</option>{% for value in collections %}<option {% if selected_collection == value %}selected{% endif %}>{{ value }}</option>{% endfor %}</select>
 </label>
-  <label class="ref-field">文本层<select name="layer"><option value="">全部文本</option><option value="simplified" {% if layer == 'simplified' %}selected{% endif %}>简体（默认）</option><option value="raw" {% if layer == 'raw' %}selected{% endif %}>原始选集</option><option value="derived" {% if layer == 'derived' %}selected{% endif %}>保守筛选来源</option></select>
-</label>
+  <div class="inline-choice" data-inline-choice><label class="ref-field">文本层<select name="layer"><option value="">全部文本</option><option value="simplified" {% if layer == 'simplified' %}selected{% endif %}>简体（默认）</option><option value="raw" {% if layer == 'raw' %}selected{% endif %}>原始选集</option><option value="derived" {% if layer == 'derived' %}selected{% endif %}>保守筛选来源</option></select>
+</label></div>
   <div class="ref-actions"><button class="button" type="submit">查找</button><a class="ref-clear" href="{% url 'poetry-index' %}">清除筛选</a></div>
 </form>
 {% include 'reference_library/result_count.html' with result_unit='个文本入口' result_note='总集、选集及章节各自保留' %}

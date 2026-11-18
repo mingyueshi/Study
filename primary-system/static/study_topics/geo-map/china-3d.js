@@ -7,6 +7,7 @@
   const terrainIndex = window.GM_CHINA_TERRAIN_INDEX;
   const streamingReady = Boolean(terrainIndex?.waterBaked && window.GMChinaTerrainStream && root.querySelector('#gm3-terrain-status'));
   const $ = id => root.querySelector(`#${id}`);
+  let mapSearch = location.search;
   const S = window.GMShared;
   const data = window.GM_CHINA_3D;
   const provinces = window.GM_PROVINCES;
@@ -70,7 +71,8 @@
   $('gm3-height').value = exaggeration;
   $('gm3-river-note').innerHTML = `${esc(data.riverNote)}<br>` + data.riverCredits.map(credit => `<a href="${esc(credit.url)}" target="_blank" rel="noopener">${esc(credit.label)}（需联网）↗</a>`).join(' · ');
   $('gm3-flow-legend').textContent = data.flowNote;
-  $('gm3-flow-river').innerHTML = data.rivers.map(item => `<option value="${item.feature}">${esc(features.get(item.feature).name)}</option>`).join('');
+  $('gm3-flow-river').innerHTML = data.rivers.map(item =>
+    `<button type="button" value="${item.feature}" aria-pressed="false">${esc(features.get(item.feature).name)}</button>`).join('');
   $('gm3-landmarks').innerHTML = data.featureGroups.map(group => {
     const entries = group.kind === 'river' ? data.rivers : group.kind === 'lake' ? extraData.lakes : data.terrain.landmarks.filter(mark => features.get(mark.feature).kind === group.kind);
     return `<div class="gm3-feature-group"><h3>${esc(group.label)}</h3><div class="gm3-landmark-tools" role="group" aria-label="${esc(group.label)}">` + entries.map(mark => `<button type="button" data-${group.kind === 'river' ? 'river' : group.kind === 'lake' ? 'lake' : 'landform'}="${mark.feature}" aria-pressed="false">${esc(features.get(mark.feature).name)}</button>`).join('') + '</div></div>';
@@ -116,8 +118,7 @@
       url.searchParams.delete('river');
       url.searchParams.delete('tour'); url.searchParams.delete('stop');
       url.searchParams.delete('estuary'); url.searchParams.delete('lake');
-      // file:// 下浏览器可能限制 History API，不影响选中与档案。
-      try { history.replaceState(null, '', url); } catch (_) { /* 保留当前地址 */ }
+      replaceMapLocation(url);
     }
     requestDraw();
   }
@@ -201,7 +202,7 @@
       url.searchParams.delete('river');
       url.searchParams.delete('tour'); url.searchParams.delete('stop');
       url.searchParams.delete('estuary'); url.searchParams.delete('lake');
-      try { history.replaceState(null, '', url); } catch (_) { /* file 协议保持可用 */ }
+      replaceMapLocation(url);
     }
     requestDraw();
   }
@@ -272,7 +273,7 @@
       url.searchParams.delete('tour'); url.searchParams.delete('stop');
       url.searchParams.delete('estuary'); url.searchParams.delete('lake');
       if (hydrology?.basin && id !== 'f43') url.searchParams.set('basin', id); else url.searchParams.delete('basin');
-      try { history.replaceState(null, '', url); } catch (_) { /* 保留当前地址 */ }
+      replaceMapLocation(url);
     }
     requestDraw();
   }
@@ -283,7 +284,14 @@
     else focusLandform(button.dataset.landform);
     $('map').scrollIntoView({ block: 'start', behavior: 'instant' });
   });
+  function replaceMapLocation(url) {
+    try {
+      history.replaceState(null, '', url);
+      mapSearch = location.search;
+    } catch (_) { /* file:// 下仍可操作地图 */ }
+  }
   function readLocation() {
+    mapSearch = location.search;
     pickGeneration++;
     const params = new URLSearchParams(location.search);
     activities?.stop(); setComparison(false);
@@ -305,7 +313,10 @@
     if (route) startTour(route.id, false, params.get('stop'));
     if (activities && ['steps','puzzle','questions'].includes(params.get('learn'))) activities.open(params.get('learn'));
   }
-  window.addEventListener('popstate', readLocation);
+  window.addEventListener('popstate', () => {
+    // 页内锚点只滚动页面，继续保留当前挑战、剖面和相机位置。
+    if (location.search !== mapSearch) readLocation();
+  });
 
   const { xy, buildTerrain, datum, metersPerUnit, heightToZ, elevationFromZ, heightAt, labelHeight, createSurfaceSampler, drapeRiver } = window.GMChina3DGeometry || {};
   function decodedPart(record) {
@@ -501,7 +512,7 @@
       const url = new URL(location.href); url.searchParams.set('river', estuary.river); url.searchParams.set('estuary', id);
       for (const key of ['place','landform','tour','stop','lake']) url.searchParams.delete(key);
       if (hydrology.basin) url.searchParams.set('basin', estuary.river); else url.searchParams.delete('basin');
-      try { history.replaceState(null,'',url); } catch (_) { /* 文件页面仍可观察 */ }
+      replaceMapLocation(url);
     }
     requestDraw();
   }
@@ -518,11 +529,11 @@
     focusWaterPoint(point, 12, features.get(id).name + ' · 平整水面与周围地势');
     if (updateURL) {
       const url = new URL(location.href); for (const key of ['place','landform','river','tour','stop','estuary']) url.searchParams.delete(key); url.searchParams.set('lake',id);
-      try { history.replaceState(null,'',url); } catch (_) { /* 文件页面仍可观察 */ }
+      replaceMapLocation(url);
     }
     requestDraw();
   }
-  hydrology = window.GMChinaHydrology.mount({root, focusRiver, focusPoint: focusWaterPoint, focusEstuary, requestDraw, available: () => Boolean(renderer) && !failed, reveal: () => viewport.scrollIntoView({block:'center',behavior:'instant'}),terrainParts:streamingReady?()=>terrainStreaming.parts():null});
+  hydrology = window.GMChinaHydrology.mount({root, focusRiver, focusPoint: focusWaterPoint, focusEstuary, requestDraw, replaceMapLocation, available: () => Boolean(renderer) && !failed, reveal: () => viewport.scrollIntoView({block:'center',behavior:'instant'}),terrainParts:streamingReady?()=>terrainStreaming.parts():null});
   if (learningReady) {
     pins = window.GMChinaLearningVisual.mount({
       root,
@@ -536,6 +547,7 @@
     $('gm3-compare-note').textContent = window.GM_CHINA_LEARNING.compareNote;
     activities = window.GMChinaLearning.mount({
       root,
+      replaceMapLocation,
       available: () => Boolean(renderer) && !failed,
       sample: sampleForLearning,
       changed: () => {
@@ -555,9 +567,7 @@
         const url = new URL(location.href);
         for (const key of ['estuary', 'lake', 'tour', 'stop', 'place', 'landform'])
           url.searchParams.delete(key);
-        try {
-          history.replaceState(null, '', url);
-        } catch {}
+        replaceMapLocation(url);
       },
       observe: (config) => {
         selected = '';
@@ -591,7 +601,7 @@
   }
   function syncFlow() {
     const flow = flowConfig(), available = flowAvailable(), playing = Boolean(flowPlayback?.playing);
-    $('gm3-flow-river').value = flowRiver;
+    for (const button of $('gm3-flow-river').children) button.setAttribute('aria-pressed', String(button.value === flowRiver));
     $('gm3-flow-play').disabled = !available || !fullMotion();
     $('gm3-flow-play').textContent = playing ? '暂停流向' : '播放流向';
     $('gm3-flow-play').setAttribute('aria-pressed', String(playing));
@@ -657,7 +667,7 @@
     url.searchParams.set('stop', tourRoute.stops[state.index].id);
     url.searchParams.delete('place'); url.searchParams.delete('landform');
     url.searchParams.delete('estuary'); url.searchParams.delete('lake');
-    try { history.replaceState(null, '', url); } catch (_) { /* 保留手动漫游 */ }
+    replaceMapLocation(url);
   }
   function syncTour(state = tourController?.snapshot()) {
     $('gm3-tour-start').hidden = !allTours.some(route => route.river === flowRiver);
@@ -672,7 +682,8 @@
     $('gm3-tour-prev').disabled = state.index === 0 && state.phase !== 'travel';
     $('gm3-tour-next').disabled = state.index === tourRoute.stops.length - 1;
     $('gm3-tour-stop').value = String(state.index);
-    $('gm3-tour-speed').value = String(state.speed);
+    for (const button of $('gm3-tour-stop-choices').children) button.setAttribute('aria-pressed', String(Number(button.value) === state.index));
+    for (const button of $('gm3-tour-speed').children) button.setAttribute('aria-pressed', String(Number(button.value) === state.speed));
     $('gm3-tour-status').textContent = failed ? '立体画面不可用，仍可逐站阅读介绍。' : !showRivers && tourRoute.kind !== 'flight' ? '河流已隐藏，打开「主要河流」后可继续。' :
       !fullMotion() ? '已减少动效，可用「上一站／下一站」静态查看。' : state.phase === 'complete' ? '已到达终点，这次漫游完成啦！' :
       !state.playing ? '已暂停，可慢慢阅读、转动地图，或继续沿河前进。' : state.phase === 'stop' ? '停站观察约 8 秒，再继续前进。' : `沿路线前进，下一站是${stop.name}。`;
@@ -726,7 +737,7 @@
     }
     if (updateURL) {
       const url = new URL(location.href); url.searchParams.delete('tour'); url.searchParams.delete('stop');
-      try { history.replaceState(null, '', url); } catch (_) { /* file 协议 */ }
+      replaceMapLocation(url);
     }
     requestDraw();
   }
@@ -755,9 +766,14 @@
     if (controls) controls.maxZoom = 8;
     $('gm3-tour-panel').hidden = false;
     root.dataset.tourActive = 'true'; root.dataset.tourRoute = id;
-    $('gm3-tour-route').innerHTML = allTours.map(route => `<option value="${route.id}">${esc(route.name)}</option>`).join('');
-    $('gm3-tour-route').value = id;
-    $('gm3-tour-stop').innerHTML = tourRoute.stops.map((stop, i) => `<option value="${i}">${i + 1} · ${esc(stop.name)}</option>`).join('');
+    for (const button of $('gm3-tour-route').children) button.setAttribute('aria-pressed', String(button.value === id));
+    const showStopButtons = tourRoute.stops.length <= 6;
+    $('gm3-tour-stop-field').hidden = showStopButtons;
+    $('gm3-tour-stops').hidden = !showStopButtons;
+    $('gm3-tour-stop-choices').innerHTML = showStopButtons ? tourRoute.stops.map((stop, i) =>
+      `<button type="button" value="${i}" aria-pressed="false">${esc(stop.name)}</button>`).join('') : '';
+    $('gm3-tour-stop').innerHTML = showStopButtons ? '' : tourRoute.stops.map((stop, i) =>
+      `<option value="${i}">${i + 1} · ${esc(stop.name)}</option>`).join('');
     $('gm3-tour-note').textContent = tourRoute.note || tourData.note;
     tourController = window.GMRiverTour.createTour({
       route: tourRoute, holdSeconds: tourData.holdSeconds, travelSeconds: tourData.travelSeconds,
@@ -962,6 +978,7 @@
     root.querySelectorAll('.gm3-toolbar button, .gm3-terrain-tools button, #gm3-height').forEach(b => { b.disabled = true; });
   }
   narrator = window.GMChinaNarrator.create(root, tourText);
+  $('gm3-section-clear').addEventListener('click', narrator.stop);
   adventure = window.GMChinaAdventures.mount({ root,
     prepare: () => { activities?.stop();setComparison(false);sectionController?.cancel(); narrator?.stop(); closeTour(); flowPlayback?.pause(); terrainPlay?.flatten(true); setView('perspective'); },
     highlight: id => { selected = id; updateProvinces(); },
@@ -974,6 +991,8 @@
   });
   $('gm3-route-buttons').innerHTML = allTours.map(route => `<button type="button" data-route="${route.id}">${route.kind === 'flight' ? '✈ ' : route.kind === 'canal' ? '⛵ ' : ''}${esc(route.name)}</button>`).join('');
   $('gm3-route-buttons').addEventListener('click', e => { const b = e.target.closest('[data-route]'); if (b) startTour(b.dataset.route); });
+  $('gm3-tour-route').innerHTML = allTours.map(route =>
+    `<button type="button" value="${route.id}" aria-pressed="false">${esc(route.name)}</button>`).join('');
   try {
     renderer = new T.WebGLRenderer({ canvas, antialias: true, alpha: true });
     renderer.setClearColor(0x000000, 0);
@@ -1246,6 +1265,16 @@
     if (action === 'zoom-in') zoom(1.2);
     if (action === 'zoom-out') zoom(1 / 1.2);
     if (action === 'reset') setView('perspective');
+  });
+  root.querySelector('.gm3-terrain-tools').addEventListener('click', e => {
+    const button = e.target.closest('button');
+    if (!button || button.disabled) return;
+    if (button.dataset.color) {
+      colorMode = button.dataset.color;
+      updateProvinces();
+      root.querySelectorAll('[data-color]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.color === colorMode)));
+      updateLegend(); requestDraw();
+    }
     if (button.id === 'gm3-rivers') {
       showRivers = !showRivers;
       button.setAttribute('aria-pressed', String(showRivers));
@@ -1279,14 +1308,6 @@
     updateRivers();
     followTour(true);
     requestDraw();
-  });
-  root.querySelector('.gm3-terrain-tools').addEventListener('click', e => {
-    const button = e.target.closest('[data-color]');
-    if (!button || button.disabled) return;
-    colorMode = button.dataset.color;
-    updateProvinces();
-    root.querySelectorAll('[data-color]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.color === colorMode)));
-    updateLegend(); requestDraw();
   });
   canvas.addEventListener('keydown', e => {
     const actions = { ArrowLeft: () => rotate(-.12), ArrowRight: () => rotate(.12), ArrowUp: () => rotate(0, -.12), ArrowDown: () => rotate(0, .12), '+': () => zoom(1.2), '=': () => zoom(1.2), '-': () => zoom(1 / 1.2), Home: () => setView('perspective') };
@@ -1323,17 +1344,38 @@
     motionMedia.removeEventListener('change', refreshFlow);
   });
   window.addEventListener('pageshow', refreshFlow);
-  $('gm3-flow-river').addEventListener('change', event => focusRiver(event.target.value));
-  $('gm3-flow-play').addEventListener('click', () => { tourController?.pause(); flowPlayback.playing ? flowPlayback.pause() : flowPlayback.play(); });
-  $('gm3-flow-step').addEventListener('click', () => { tourController?.pause(); flowPlayback.step(); });
+  $('gm3-flow-river').addEventListener('click', event => {
+    const button = event.target.closest('button');
+    if (button) focusRiver(button.value);
+  });
+  function revealFlow() {
+    tourController?.pause();
+    const rect = viewport.getBoundingClientRect();
+    if (rect.bottom < Math.min(180, rect.height / 2) || rect.top >= innerHeight) {
+      viewport.scrollIntoView({ block: 'start', behavior: 'instant' });
+      inView = true;
+    }
+  }
+  $('gm3-flow-play').addEventListener('click', () => {
+    if (flowPlayback.playing) flowPlayback.pause();
+    else { revealFlow(); flowPlayback.play(); }
+  });
+  $('gm3-flow-step').addEventListener('click', () => { revealFlow(); flowPlayback.step(); });
   $('gm3-flow-ends').addEventListener('click', () => {
     showEnds = !showEnds;
     $('gm3-flow-ends').setAttribute('aria-pressed', String(showEnds));
     requestDraw();
   });
   $('gm3-tour-start').addEventListener('click', () => startTour(allTours.find(route => route.river === flowRiver)?.id));
-  $('gm3-tour-close').addEventListener('click', () => { closeTour(); $('gm3-tour-start').focus({ preventScroll: true }); });
-  $('gm3-tour-route').addEventListener('change', event => startTour(event.target.value, false));
+  $('gm3-tour-close').addEventListener('click', () => {
+    closeTour();
+    $('map').scrollIntoView({ block: 'start', behavior: 'instant' });
+    $('map').focus({ preventScroll: true });
+  });
+  $('gm3-tour-route').addEventListener('click', event => {
+    const button = event.target.closest('button[aria-pressed="false"]');
+    if (button) startTour(button.value, false);
+  });
   $('gm3-tour-play').addEventListener('click', () => {
     if (!tourController) return;
     if (tourController.snapshot().playing) { tourController.pause(); narrator?.stop(); }
@@ -1351,6 +1393,13 @@
   });
   $('gm3-tour-next').addEventListener('click', () => { if (tourController) jumpTour(tourController.snapshot().index + 1); });
   $('gm3-tour-stop').addEventListener('change', event => jumpTour(Number(event.target.value)));
-  $('gm3-tour-speed').addEventListener('change', event => tourController?.setSpeed(Number(event.target.value)));
+  $('gm3-tour-stop-choices').addEventListener('click', event => {
+    const button = event.target.closest('button[aria-pressed="false"]');
+    if (button) jumpTour(Number(button.value));
+  });
+  $('gm3-tour-speed').addEventListener('click', event => {
+    const button = event.target.closest('button[aria-pressed="false"]');
+    if (button) tourController?.setSpeed(Number(button.value));
+  });
   syncFlow();
 })();

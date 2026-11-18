@@ -307,7 +307,7 @@ window.GMMapUI = (() => {
     el.hidden = false;
     el.innerHTML = `<div class="gm-tour-copy" aria-live="polite"></div>
       <div class="gm-tour-controls"><button type="button" class="gm-btn" data-tour-play aria-pressed="false">开始逐站导览</button>
-      <label>每站停留 <select data-tour-speed><option value="8000">8 秒</option><option value="15000">15 秒</option></select></label>
+      <div class="inline-choice" data-inline-choice><label>每站停留 <select data-tour-speed><option value="8000">8 秒</option><option value="15000">15 秒</option></select></label></div>
       <progress data-tour-progress max="${route.steps.length}" aria-label="路线站点进度"></progress>
       <p data-tour-status role="status"></p></div>
       <nav aria-label="路线站点"></nav>`;

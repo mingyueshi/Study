@@ -41,7 +41,7 @@
     <h2 id="couplets-examples-title">把两行字拆开看</h2>
     <p class="couplets-intro">{{ course.examples|length }} 副为入门练习编写的例联。同一列里的词是一对搭档，先上下对照，再把整副联连起来读。</p>
     <div class="couplets-tools" data-example-tools hidden>
-      <label>选个主题 <select data-category><option value="">全部主题</option>{% for category in course.categories %}<option value="{{ category.id }}">{{ category.label }}</option>{% endfor %}</select></label>
+      <div class="inline-choice" data-inline-choice><label>选个主题 <select data-category><option value="">全部主题</option>{% for category in course.categories %}<option value="{{ category.id }}">{{ category.label }}</option>{% endfor %}</select></label></div>
       <label>找一找 <input type="search" data-search placeholder="输入花、校园、春风……"></label>
       <span role="status" data-example-count></span>
     </div>
@@ -102,7 +102,7 @@
     <div class="couplets-puzzle" id="puzzle" data-puzzle hidden>
       <p class="couplets-kicker">动动手 · 拼下联</p>
       <h3>把词语放回合适的位置</h3>
-      <label>选一关 <select data-puzzle-select>{% for example in course.examples %}{% if example.id in course.puzzles %}<option value="{{ example.id }}">{{ example.title }}</option>{% endif %}{% endfor %}</select></label>
+      <div class="inline-choice" data-inline-choice><label>选一关 <select data-puzzle-select>{% for example in course.examples %}{% if example.id in course.puzzles %}<option value="{{ example.id }}">{{ example.title }}</option>{% endif %}{% endfor %}</select></label></div>
       <p class="couplet-puzzle-upper" data-puzzle-upper></p>
       <p>依次点词语组成下联。点已经放好的词，可以把它拿回来。</p>
       <div class="couplets-actions" data-puzzle-bank aria-label="待选词语"></div>
@@ -168,5 +168,5 @@
 </div>
 {{ course|json_script:'couplets-data' }}
 <script src="{% static 'speech.js' %}" defer></script>
-<script src="{% static 'study_topics/couplets.js' %}" defer></script>
+<script src="{% static 'study_topics/couplets.js' %}?v=2" defer></script>
 {% endblock %}

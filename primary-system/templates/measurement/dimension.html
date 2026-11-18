@@ -10,12 +10,12 @@
       <p>示例：{{ sample.amount }} {{ sample.source.symbol }}＝{{ sample.result }} {{ sample.target.symbol }}。改一改数值或单位，看看进率怎样用。</p>
       <form class="measure-form" method="get" action="{% url 'measurement-dimension' topic.id %}#converter">
         <label for="measure-amount">数值<input id="measure-amount" name="amount" type="text" inputmode="decimal" maxlength="32" value="{{ raw }}" required></label>
-        <label for="measure-from">从<select id="measure-from" name="from">
+        <div class="inline-choice" data-inline-choice><label for="measure-from">从<select id="measure-from" name="from">
           {% for unit in topic.units %}<option value="{{ unit.id }}"{% if unit.id == source.id %} selected{% endif %}>{{ unit.name }}（{{ unit.symbol }}）</option>{% endfor %}
-        </select></label>
-        <label for="measure-to">换到<select id="measure-to" name="to">
+        </select></label></div>
+        <div class="inline-choice" data-inline-choice><label for="measure-to">换到<select id="measure-to" name="to">
           {% for unit in topic.units %}<option value="{{ unit.id }}"{% if unit.id == target.id %} selected{% endif %}>{{ unit.name }}（{{ unit.symbol }}）</option>{% endfor %}
-        </select></label>
+        </select></label></div>
         <div class="measure-actions"><button class="button" type="submit">换算</button><button class="measure-secondary" type="submit" name="op" value="swap">交换单位</button></div>
       </form>
       {% if errors %}<div class="measure-alert" role="alert">{% for error in errors %}<p>{{ error }}</p>{% endfor %}</div>{% endif %}

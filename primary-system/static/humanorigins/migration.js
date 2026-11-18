@@ -32,6 +32,7 @@
   const duration = () => words.speeds.find(item => String(item.milliseconds) === speed.value)?.milliseconds || words.default_milliseconds;
   const readingBar = document.getElementById('atlas-reading-fill');
   speed.value = String(words.default_milliseconds);
+  window.StudyChoices?.sync(speed);
 
   function readLocation() {
     const url = new URL(window.location.href);

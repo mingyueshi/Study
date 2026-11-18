@@ -42,7 +42,10 @@ window.GMWorldLearning = (() => {
       $('gw-tour-prev').disabled = step === 0; $('gw-tour-next').disabled = step === tour.stops.length - 1;
       $('gw-tour-next').textContent = step === tour.stops.length - 1 ? '已到最后一站' : '下一站';
       const url = new URL(location.href); url.searchParams.set('tour', tour.id); url.searchParams.set('stop', stop.id); history.replaceState(null, '', url);
-      if (moveFocus) { $('gw-tour-panel').scrollIntoView({block: 'start'}); $('gw-tour-title').focus({preventScroll: true}); }
+      if (moveFocus) {
+        $('gw-viewport').scrollIntoView({block: 'start', behavior: 'instant'});
+        $('gw-tour-title').focus({preventScroll: true});
+      }
     }
     $('gw-tour-cards').addEventListener('click', event => {
       const button = event.target.closest('[data-tour]'); if (!button) return;

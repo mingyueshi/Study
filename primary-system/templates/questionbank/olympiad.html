@@ -1,6 +1,6 @@
 {% extends 'base.html' %}{% load static %}{% block title %}奥数挑战 · 乐学堂{% endblock %}
 {% block content %}<link rel="stylesheet" href="{% static 'questionbank/bank.css' %}?v=6">
-<script src="{% static 'questionbank/olympiad.js' %}?v=1" defer></script>
+<script src="{% static 'questionbank/olympiad.js' %}?v=2" defer></script>
 <header class="qb-hero">
   <div class="qb-hero-copy">
     <p class="eyebrow">数学 · 思维挑战</p>
@@ -28,7 +28,7 @@
     <p class="qb-area-intro">选一个薄弱题型专门练，或者来一组混合挑战。先自己想，卡住再看一步提示，答完可对照完整解析。</p>
     <form class="qb-challenge-picker" action="{{ practice_url }}" method="get">
       <label>专攻题型<select name="tag"><option value="">全部题型 · 混合挑战</option>{% for item in tags %}<option value="{{ item.tag }}">{{ item.tag }} · {{ item.count }} 题</option>{% endfor %}</select></label>
-      <label>每组题数<select name="count"><option value="5">5 题 · 热热身</option><option value="10" selected>10 题 · 小挑战</option><option value="20">20 题 · 大挑战</option></select></label>
+      <div class="inline-choice" data-inline-choice><label>每组题数<select name="count"><option value="5">5 题 · 热热身</option><option value="10" selected>10 题 · 小挑战</option><option value="20">20 题 · 大挑战</option></select></label></div>
       <button class="button" type="submit">开始挑战 →</button>
     </form>
     <div class="qb-area-actions">

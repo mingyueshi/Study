@@ -101,29 +101,53 @@ window.GMChinaAdventures = (() => {
 window.GMChinaNarrator = (() => {
   function create(root, tourText) {
     const $ = id => root.querySelector('#gm3-voice-' + id);
-    let token = 0, reading = false, auto = false;
+    let token = 0, active = null, auto = false;
     const supported = Boolean(window.SpeechKit && window.speechSynthesis);
-    function stop() { token++; reading = false; window.speechSynthesis?.cancel(); $('status').textContent = supported ? '可朗读剖面或当前站点。' : '当前浏览器没有语音服务，仍可阅读文字。'; }
-    function read(text) {
-      stop(); if (!supported || !text) return;
-      const current = ++token; reading = true; $('status').textContent = '正在朗读…';
+    const section = { button: $('section'), status: $('section-status'), label: '读剖面' };
+    const tour = { button: $('tour'), status: $('tour-status'), label: '读这一站' };
+    function finish(message) {
+      active.button.textContent = active.label;
+      active.status.textContent = message;
+      active = null;
+    }
+    function stop() {
+      if (!active) return;
+      token++;
+      finish('');
+      window.speechSynthesis.cancel();
+    }
+    function read(player, text) {
+      stop();
+      if (!supported || !text) return;
+      const current = ++token;
+      active = player;
+      player.button.textContent = '停止朗读';
+      player.status.textContent = '正在朗读…';
       window.SpeechKit.speak(text, { lang: 'zh-CN', rate: .88,
-        onend() { if (current === token) { reading = false; $('status').textContent = '读完啦。'; } },
-        onerror() { if (current === token) { reading = false; $('status').textContent = '语音未能播放，请确认设备上有中文语音。'; } },
+        onend() { if (current === token && active === player) finish('读完啦。'); },
+        onerror() { if (current === token && active === player) finish('语音未能播放，请确认设备上有中文语音。'); },
       });
     }
-    $('section').disabled = $('tour').disabled = $('auto').disabled = !supported;
-    $('section').addEventListener('click', () => {
+    for (const player of [section, tour]) {
+      player.button.disabled = !supported;
+      if (!supported) player.status.textContent = '当前浏览器没有语音服务，仍可阅读文字。';
+    }
+    $('auto').disabled = !supported;
+    section.button.addEventListener('click', () => {
+      if (active === section) { stop(); return; }
       const summary = root.querySelector('#gm3-section-summary').textContent;
-      read([summary, root.querySelector('#gm3-section-route').textContent, window.GM_CHINA_3D.section.observe].join('。'));
+      read(section, [summary, root.querySelector('#gm3-section-route').textContent, window.GM_CHINA_3D.section.observe].join('。'));
     });
-    $('tour').addEventListener('click', () => { const text = tourText(); if (text) read(text); else $('status').textContent = '先选一条漫游路线，再听这一站。'; });
-    $('auto').addEventListener('click', () => { auto = !auto; $('auto').setAttribute('aria-pressed', String(auto)); if (auto) read(tourText()); else stop(); });
-    $('stop').addEventListener('click', stop);
+    tour.button.addEventListener('click', () => { if (active === tour) stop(); else read(tour, tourText()); });
+    $('auto').addEventListener('click', () => {
+      auto = !auto;
+      $('auto').setAttribute('aria-pressed', String(auto));
+      if (auto) read(tour, tourText());
+      else if (active === tour) stop();
+    });
     document.addEventListener('visibilitychange', () => { if (document.hidden) stop(); });
     window.addEventListener('pagehide', stop);
-    stop();
-    return { stop, station(text) { if (auto) read(text); }, get reading() { return reading; } };
+    return { stop, station(text) { if (auto) read(tour, text); }, get reading() { return active !== null; } };
   }
   return { create };
 })();

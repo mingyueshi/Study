@@ -1,7 +1,7 @@
 {% extends 'base.html' %}{% load static %}{% block title %}{{ eyebrow }} · 乐学堂{% endblock %}
 {% block content %}<link rel="stylesheet" href="{% static 'questionbank/bank.css' %}?v=6">
 <script src="{% static 'speech.js' %}" defer></script><script src="{% static 'tts.js' %}" defer></script>
-{% if track == 'olympiad' %}<script src="{% static 'questionbank/olympiad.js' %}?v=1" defer></script>{% endif %}
+{% if track == 'olympiad' %}<script src="{% static 'questionbank/olympiad.js' %}?v=2" defer></script>{% endif %}
 <script src="{% static 'questionbank/practice.js' %}?v=5" defer></script>
 <nav class="qb-crumb"><a href="{{ home_url }}">← 回{{ home_label }}</a></nav>
 <header class="qb-practice-head">

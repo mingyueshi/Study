@@ -40,6 +40,8 @@ svg { --reading-scale: 1; }
 .reading-panel p { margin: 0; font-size: 14px; line-height: 1.8; color: var(--muted); }
 .reading-panel .reading-effects { padding-top: 18px; border-top: 1px solid var(--line); }
 .reading-motion { display: grid; gap: 8px; margin-bottom: 14px; font-weight: 650; }
+.inline-choice .reading-motion { margin-bottom: 0; }
+.reading-effects > .inline-choice { margin-bottom: 14px; }
 .reading-panel .reading-sound { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 14px; margin-bottom: 8px; border: 1px solid var(--line); border-radius: 14px; background: var(--paper); cursor: pointer; }
 .reading-sound strong { display: block; font-size: 16px; font-weight: 650; }
 .reading-sound small { display: block; margin-top: 3px; color: var(--muted); font-size: 13px; line-height: 1.7; }

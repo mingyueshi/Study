@@ -4,7 +4,7 @@
   <div class="mb-controls" data-mb-enhanced hidden>
     {% for control in lab.controls %}
       {% if control.type == 'range' %}<label for="mb-{{ lab.id }}-{{ control.id }}"><span>{{ control.label }} <output data-mb-control-value="{{ control.id }}">{{ control.value }}</output></span><input id="mb-{{ lab.id }}-{{ control.id }}" type="range" min="{{ control.min }}" max="{{ control.max }}" step="{{ control.step }}" value="{{ control.value }}" data-mb-control="{{ control.id }}"></label>
-      {% elif control.type == 'select' %}<label for="mb-{{ lab.id }}-{{ control.id }}"><span>{{ control.label }}</span><select id="mb-{{ lab.id }}-{{ control.id }}" data-mb-control="{{ control.id }}">{% for option in control.options %}<option value="{{ option.value }}"{% if option.value == control.value %} selected{% endif %}>{{ option.label }}</option>{% endfor %}</select></label>
+      {% elif control.type == 'select' %}<div class="inline-choice" data-inline-choice><label for="mb-{{ lab.id }}-{{ control.id }}"><span>{{ control.label }}</span><select id="mb-{{ lab.id }}-{{ control.id }}" data-mb-control="{{ control.id }}">{% for option in control.options %}<option value="{{ option.value }}"{% if option.value == control.value %} selected{% endif %}>{{ option.label }}</option>{% endfor %}</select></label></div>
       {% else %}<label class="mb-checkbox"><input type="checkbox" data-mb-control="{{ control.id }}"{% if control.value %} checked{% endif %}> {{ control.label }}</label>{% endif %}
     {% endfor %}
     <div class="mb-actions">{% for action in lab.actions %}<button type="button" data-mb-action="{{ action.id }}">{{ action.label }}</button>{% endfor %}</div>

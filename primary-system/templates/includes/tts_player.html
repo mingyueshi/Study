@@ -5,12 +5,14 @@
 <section class="textbook-player" id="tts-sequence-player" data-state="idle"{% if player_mode == 'idiom' %} data-tts-language="zh-CN"{% endif %} aria-label="连读控制">
     {% if player_mode == 'idiom' %}
     <div class="reading-scope"><p>本组跟读 · {{ available_count }} 个成语</p><h2>{{ scene.title }}</h2></div>
+    <div class="inline-choice" data-inline-choice>
     <label class="textbook-scope" for="tts-text-scope">朗读内容
       <select id="tts-text-scope">
         <option value="#idiom-cards" data-tts-text-key="saySeq" data-tts-focus-label="🔊 听这个成语">成语</option>
         <option value="#idiom-cards" data-tts-text-key="sayExample" data-tts-focus-label="🔊 听这句例句">场景例句</option>
       </select>
     </label>
+    </div>
     {% elif player_mode == 'scenario' %}
     <div class="reading-scope"><p>本组跟读</p><h2 id="words-player-scope">场景单词</h2></div>
     {% else %}
@@ -19,12 +21,14 @@
       <a class="tab{% if tab == 'texts' %} on{% endif %}" role="tab" aria-selected="{% if tab == 'texts' %}true{% else %}false{% endif %}" href="?unit={{ selected_unit.code }}&amp;tab=texts">💬 课文 <i>{{ dialogue_items|length }}</i></a>
     </div>
     {% if tab == 'texts' and dialogue_items %}
+    <div class="inline-choice" data-inline-choice>
     <label class="textbook-scope" for="tts-text-scope">朗读范围
       <select id="tts-text-scope">
         <option value="#english-dialogues">本单元全部课文</option>
         {% for item in dialogue_items %}<option value="#dialogue-{{ item.pk }} .dialogue-lines">{{ item.title }}</option>{% endfor %}
       </select>
     </label>
+    </div>
     {% endif %}
     {% endif %}
     <div class="textbook-player-actions">

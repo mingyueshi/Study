@@ -3,7 +3,7 @@
 {% block title %}{{ collection.title }} · 古文精读馆 · 乐学堂{% endblock %}
 {% block content %}
 <link rel="stylesheet" href="{% static 'classical/classical.css' %}?v=3">
-<script src="{% static 'classical/classical.js' %}?v=3" defer></script>
+<script src="{% static 'classical/classical.js' %}?v=4" defer></script>
 <div class="classical-hall" data-classical-index>
   {% include 'classical/_nav.html' %}
   <header class="cw-article-hero"><div><p class="cw-eyebrow">语文 · 古文精读馆 · 全书阅读</p><h1>{{ collection.title }}</h1><p class="cw-lead">{{ collection.intro }}</p><a class="cw-button cw-primary" href="{% url 'classical-detail' articles.0.id %}">从《{{ articles.0.title }}》读起 →</a></div><span class="cw-number" aria-hidden="true">{{ collection.title|slice:':1' }}<br>{{ collection.title|slice:'1:2' }}</span></header>

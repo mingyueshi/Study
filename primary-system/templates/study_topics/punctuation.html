@@ -31,7 +31,7 @@
   {% if view == 'usage' %}
     <div class="punct-section-head"><div><p class="punct-eyebrow">01 / 常见用法</p><h2 id="workbench-title">先看意思，再选标点</h2></div><a href="?view=practice#workbench">直接练一练 →</a></div>
     <div class="punct-tools" data-usage-tools hidden>
-      <label>按作用看 <select data-mark-group><option value="">全部标点</option>{% for group in course.groups %}<option value="{{ group.id }}">{{ group.label }}</option>{% endfor %}</select></label>
+      <div class="inline-choice" data-inline-choice><label>按作用看 <select data-mark-group><option value="">全部标点</option>{% for group in course.groups %}<option value="{{ group.id }}">{{ group.label }}</option>{% endfor %}</select></label></div>
       <label>找用法 <input type="search" data-mark-search placeholder="如：引号、列举、问号"></label>
       <p role="status" data-mark-count></p>
     </div>
@@ -64,9 +64,9 @@
     <div class="punct-section-head"><div><p class="punct-eyebrow">03 / 动手加标点</p><h2 id="workbench-title">让标点回到合适的位置</h2></div><a href="?view=errors#workbench">拿不准？看看易错辨析 →</a></div>
     <div data-practice hidden>
       <div class="punct-tools">
-        <label>练什么 <select data-practice-group><option value="">全部用法</option>{% for group in course.groups %}<option value="{{ group.id }}">{{ group.label }}</option>{% endfor %}</select></label>
-        <label>所需基础 <select data-practice-level><option value="">全部层次</option>{% for level in course.levels %}<option value="{{ level.id }}">{{ level.label }}</option>{% endfor %}</select></label>
-        <label>练习范围 <select data-practice-mode><option value="all">全部题目</option><option value="wrong">待巩固题</option></select></label>
+        <div class="inline-choice" data-inline-choice><label>练什么 <select data-practice-group><option value="">全部用法</option>{% for group in course.groups %}<option value="{{ group.id }}">{{ group.label }}</option>{% endfor %}</select></label></div>
+        <div class="inline-choice" data-inline-choice><label>所需基础 <select data-practice-level><option value="">全部层次</option>{% for level in course.levels %}<option value="{{ level.id }}">{{ level.label }}</option>{% endfor %}</select></label></div>
+        <div class="inline-choice" data-inline-choice><label>练习范围 <select data-practice-mode><option value="all">全部题目</option><option value="wrong">待巩固题</option></select></label></div>
         <button type="button" data-clear-filter hidden>取消标点筛选</button>
       </div>
       <p class="punct-progress" role="status" data-progress></p>

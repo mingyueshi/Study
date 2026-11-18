@@ -1115,7 +1115,10 @@ window.GMWorldLearning = (() => {
       $('gw-tour-prev').disabled = step === 0; $('gw-tour-next').disabled = step === tour.stops.length - 1;
       $('gw-tour-next').textContent = step === tour.stops.length - 1 ? '已到最后一站' : '下一站';
       const url = new URL(location.href); url.searchParams.set('tour', tour.id); url.searchParams.set('stop', stop.id); history.replaceState(null, '', url);
-      if (moveFocus) { $('gw-tour-panel').scrollIntoView({block: 'start'}); $('gw-tour-title').focus({preventScroll: true}); }
+      if (moveFocus) {
+        $('gw-viewport').scrollIntoView({block: 'start', behavior: 'instant'});
+        $('gw-tour-title').focus({preventScroll: true});
+      }
     }
     $('gw-tour-cards').addEventListener('click', event => {
       const button = event.target.closest('[data-tour]'); if (!button) return;
@@ -1223,8 +1226,10 @@ window.GMWorldTools = (() => {
     catch { $('gw-hunt-storage').textContent = '浏览器无法保存记录，本次仍可完成寻宝。'; }
     $('gw-distance-note').textContent = D.distanceNote;
     $('gw-hunt-note').textContent = D.huntNote;
-    $('gw-measure-example').insertAdjacentHTML('beforeend', D.examples.map(e => `<option value="${e.id}">${esc(e.name)}</option>`).join(''));
-    $('gw-hunt-mission').innerHTML = D.missions.map((m, i) => `<option value="${m.id}">第 ${i + 1} 处 · ${esc(m.name)}</option>`).join('');
+    $('gw-measure-example').innerHTML = D.examples.map(e =>
+      `<button type="button" value="${e.id}">${esc(e.name)}</button>`).join('');
+    $('gw-hunt-mission').innerHTML = D.missions.map((m, i) =>
+      `<button type="button" value="${m.id}" aria-pressed="false">第 ${i + 1} 处 · ${esc(m.name)}</button>`).join('');
     function drawItinerary() {
       const result = window.GMWorldExplorers.itinerary(itineraryPoints.map(p => p.point));
       $('gw-itinerary-stops').innerHTML = itineraryPoints.map((p,i) => `<li><b>${i+1} · ${esc(p.name)}</b>${i ? ` · 本段约 ${Math.round(result.legs[i-1])} 千米` : ''} <button type="button" data-remove-stop="${i}" aria-label="移除第 ${i+1} 站">移除</button></li>`).join('');
@@ -1241,6 +1246,7 @@ window.GMWorldTools = (() => {
       $('gw-measure-clear').textContent = measureKind === 'route' ? '清空行程' : '清空两点';
       $('gw-itinerary').hidden = measureKind !== 'route';
       $('gw-my-trips').hidden = measureKind !== 'route';
+      for (const id of ['gw-measure-points', 'gw-measure-examples', 'gw-locate-a', 'gw-locate-b']) $(id).hidden = measureKind === 'route';
       $('gw-measure-kinds').querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.measureKind===measureKind)));
       if (measureKind === 'route') { drawItinerary(); return; }
       points.forEach((p, i) => {
@@ -1260,7 +1266,7 @@ window.GMWorldTools = (() => {
     function startMission() {
       solved = false; revealed = false;
       const m = D.missions[mission];
-      $('gw-hunt-mission').value = m.id;
+      for (const button of $('gw-hunt-mission').children) button.setAttribute('aria-pressed', String(button.value === m.id));
       $('gw-hunt-target').textContent = '目标：' + G.coordinates(m.point);
       $('gw-tool-goal').textContent = $('gw-hunt-target').textContent;
       $('gw-tool-result').textContent = '第 ' + (mission + 1) + ' / ' + D.missions.length + ' 处 · 点球面提交位置';
@@ -1306,7 +1312,7 @@ window.GMWorldTools = (() => {
           itineraryPoints.push({point:point.slice(),name:label || G.coordinates(point)}); drawMeasure(); return true;
         }
         points[active] = point.slice(); active = points[0] ? 1 : 0;
-        $('gw-measure-example').value = ''; $('gw-measure-observe').textContent = '';
+        $('gw-measure-observe').textContent = '';
         drawMeasure();
       } else if (mode === 'hunt') {
         if (revealed || solved) return true;
@@ -1342,9 +1348,11 @@ window.GMWorldTools = (() => {
       $(`gw-locate-${letter}`).addEventListener('click', () => { if (points[i]) focus(points[i], i ? '终点 B · 蓝色' : '起点 A · 橙色'); });
     });
     $('gw-point-current').addEventListener('click', () => { const p = currentPoint(); if (p) handlePoint(p); });
-    $('gw-measure-clear').addEventListener('click', () => { itineraryPoints = []; points = [null, null]; active = 0; $('gw-measure-example').value = ''; $('gw-measure-observe').textContent = ''; drawMeasure(); });
-    $('gw-measure-example').addEventListener('change', () => {
-      const e = D.examples.find(e => e.id === $('gw-measure-example').value); if (!e) return;
+    $('gw-measure-clear').addEventListener('click', () => { itineraryPoints = []; points = [null, null]; active = 0; $('gw-measure-observe').textContent = ''; drawMeasure(); });
+    $('gw-measure-example').addEventListener('click', event => {
+      const button = event.target.closest('button');
+      const e = D.examples.find(example => example.id === button?.value);
+      if (!e) return;
       points = [e.from.slice(), e.to.slice()]; active = 1;
       $('gw-measure-observe').textContent = e.observe; drawMeasure();
       const midpoint = G.arc(...points, 2)[1]; focus(G.lonLat({x: midpoint[0], y: midpoint[1], z: midpoint[2]}), e.name);
@@ -1356,7 +1364,12 @@ window.GMWorldTools = (() => {
       $('gw-point-error').textContent = '';
       handlePoint(point); focus(point, '输入的坐标'); readCoordinates(point, '输入坐标');
     });
-    $('gw-hunt-mission').addEventListener('change', () => { mission = D.missions.findIndex(m => m.id === $('gw-hunt-mission').value); startMission(); });
+    $('gw-hunt-mission').addEventListener('click', event => {
+      const button = event.target.closest('button[aria-pressed="false"]');
+      if (!button) return;
+      mission = D.missions.findIndex(m => m.id === button.value);
+      startMission();
+    });
     $('gw-hunt-next').addEventListener('click', () => { if (mission < D.missions.length - 1) { mission++; startMission(); } });
     $('gw-hunt-retry').addEventListener('click', startMission);
     $('gw-hunt-reveal').addEventListener('click', () => {
@@ -1469,7 +1482,12 @@ window.GMWorldSun = (() => {
     const clock = createClock({request: fn => requestAnimationFrame(fn), cancel: id => cancelAnimationFrame(id), available, render, changed});
     $('gw-sun-intro').textContent = D.intro; $('gw-sun-note').textContent = D.note;
     $('gw-sun-seasons').innerHTML = D.seasons.map(s => `<button type="button" data-season="${s.id}" aria-pressed="${s.id === season.id}">${esc(s.name)}</button>`).join('');
-    $('gw-sun-studies').innerHTML = '<option value="">自由选择观察点</option>' + D.studies.map(s => `<option value="${s.id}">${esc(s.name)}</option>`).join('');
+    $('gw-sun-studies').innerHTML = D.studies.map(s =>
+      `<button type="button" value="${s.id}" aria-pressed="false">${esc(s.name)}</button>`).join('');
+    function updateStudy(study = null) {
+      for (const button of $('gw-sun-studies').children) button.setAttribute('aria-pressed', String(button.value === study?.id));
+      $('gw-sun-study-text').textContent = study?.text || '';
+    }
     function updateSeason() {
       $('gw-sun-season-text').textContent = season.text;
       $('gw-sun-seasons').querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.season === season.id)));
@@ -1477,7 +1495,7 @@ window.GMWorldSun = (() => {
     }
     function pick(value, turn = false) {
       clock.pause(); point = value.slice();
-      $('gw-sun-studies').value = ''; $('gw-sun-study-text').textContent = '';
+      updateStudy();
       overlay([{point, color: '#e67334'}]); comparison(); render(clock.state());
       readCoordinates(point, '昼夜观察点'); if (turn) focus(point, '昼夜观察点');
     }
@@ -1485,7 +1503,7 @@ window.GMWorldSun = (() => {
       const study = D.studies.find(s => s.id === id); if (!study) return;
       season = D.seasons.find(s => s.id === study.season); pick(study.point, true);
       clock.setHour(study.hour); updateSeason();
-      $('gw-sun-studies').value = id; $('gw-sun-study-text').textContent = study.text;
+      updateStudy(study);
     }
     function setActive(value) {
       clock.pause(); active = value; $('gw-sun-inline').hidden = !active;
@@ -1496,12 +1514,15 @@ window.GMWorldSun = (() => {
     $('gw-sun-seasons').addEventListener('click', event => {
       const button = event.target.closest('[data-season]'); if (!button) return;
       clock.pause(); season = D.seasons.find(s => s.id === button.dataset.season);
-      $('gw-sun-studies').value = ''; $('gw-sun-study-text').textContent = ''; updateSeason();
+      updateStudy(); updateSeason();
     });
     $('gw-sun-time').addEventListener('input', () => clock.setHour(Number($('gw-sun-time').value)));
     $('gw-sun-play').addEventListener('click', () => { root.dispatchEvent(new CustomEvent('gm-world-sun-play')); clock.state().playing ? clock.pause() : clock.play(); });
     $('gw-sun-step').addEventListener('click', () => clock.setHour(clock.state().hour + 3));
-    $('gw-sun-studies').addEventListener('change', () => showStudy($('gw-sun-studies').value));
+    $('gw-sun-studies').addEventListener('click', event => {
+      const button = event.target.closest('button');
+      if (button) showStudy(button.value);
+    });
     $('gw-sun-current').addEventListener('click', () => pick(currentPoint(), true));
     $('gw-sun-locate').addEventListener('click', () => focus(point, '昼夜观察点'));
     $('gw-sun-noon').addEventListener('click', () => { clock.setHour(12 - point[0] / 15); focus(point, '观察点的太阳正午'); });
@@ -1543,7 +1564,7 @@ window.GMWorldDetective = (() => {
     function resume() { select((missions.find(m => !found.has(m.id)) || missions[0]).id); }
     return {state, select, guess, hint, reveal, resume};
   }
-  function mount({root, countries, name, highlight, locate, choose, overlay}) {
+  function mount({root, countries, name, highlight, locate, choose, overlay, revealProfile}) {
     const D = window.GM_WORLD_DETECTIVE, esc = window.GMShared.esc, $ = id => root.querySelector(`#${id}`);
     const hintButtons = [...root.querySelectorAll('#gw-detective-hint, [data-detective-action="hint"]')];
     const nextButtons = [...root.querySelectorAll('#gw-detective-next, [data-detective-action="next"]')];
@@ -1617,7 +1638,7 @@ window.GMWorldDetective = (() => {
     });
     $('gw-detective-learn').addEventListener('click', () => {
       if (round.state().status === 'asking') return;
-      choose(round.state().mission.learnPlace); $('gw-profile').scrollIntoView({block: 'center'});
+      choose(round.state().mission.learnPlace); revealProfile();
     });
     function setActive(value) {
       active = value; $('gw-detective-inline').hidden = !value;
@@ -2563,6 +2584,7 @@ window.GM_WORLD_FLORA = {
     function reset() {
       search.value = '';
       recordFilter.value = 'all';
+      window.StudyChoices?.sync(recordFilter);
       onReset();
     }
 
@@ -4645,7 +4667,16 @@ window.GMWorldLab = (() => {
       html = `<p class="gw-eyebrow">${ocean ? '四大洋' : '世界地标'}</p><h2>${esc(place.name)}</h2><p><b>在哪里：</b>${esc(place.where)}</p><p>${esc(place.note)}</p><a href="${worldMapUrl}?place=${encodeURIComponent(id)}#map">在平面地图上查看${esc(place.name)} →</a>`;
     }
     profile.innerHTML = html;
+    $('gw-profile-link').hidden = !html;
     picker.value = id;
+  }
+  function jumpTo(target) {
+    if (target === profile) {
+      if (root.dataset.slMode === 'compact' && root.dataset.slOpen !== 'true') root.querySelector('.sl-toggle:not(.sl-collapse)')?.click();
+      if (root.dataset.slMode === 'wide' && root.dataset.slCollapsed === 'true') root.querySelector('.sl-collapse')?.click();
+    }
+    target.scrollIntoView({block: target === viewport ? 'center' : 'start', behavior: 'instant'});
+    target.focus({preventScroll: true});
   }
   function address() {
     const url = new URL(location.href);
@@ -4676,7 +4707,7 @@ window.GMWorldLab = (() => {
     if (feature && !$('gw-features').checked) $('gw-features').checked = true;
     showProfile(id); syncContinents(); paint();
     focus(point, continent?.name || ocean?.name || feature?.name || zh(id));
-    $('gw-status').textContent = `已定位${continent?.name || ocean?.name || feature?.name || zh(id)}，下方可以阅读档案。`;
+    $('gw-status').textContent = `已定位${continent?.name || ocean?.name || feature?.name || zh(id)}。`;
     if (marker) { markerPoint = point; marker.position.set(...G.xyz(point, surface(point, .012))); marker.visible = !continent; }
     readCoordinates(point, '定位参考点');
     if (writeURL) address();
@@ -4695,12 +4726,14 @@ window.GMWorldLab = (() => {
     history.replaceState(null, '', url);
   }
   function setLayer(value, writeURL = true) {
-    layer = value === 'zones' ? 'zones' : 'continent'; $('gw-layer').value = layer;
+    layer = value === 'zones' ? 'zones' : 'continent';
+    for (const button of $('gw-layer').children) button.setAttribute('aria-pressed', String(button.value === layer));
     $('gw-zone-legend').hidden = layer !== 'zones';
     paint(); if (writeURL) studyAddress();
   }
   function setLine(id, turn = true, writeURL = true) {
-    const line = L.lines.find(l => l.id === id); activeLine = line?.id || ''; $('gw-line').value = activeLine;
+    const line = L.lines.find(l => l.id === id); activeLine = line?.id || '';
+    for (const button of $('gw-line').children) button.setAttribute('aria-pressed', String(button.value === activeLine));
     $('gw-line-note').hidden = !line;
     if (line) {
       $('gw-line-note').innerHTML = `<b>${esc(line.name)} · ${line.axis === 'latitude' ? G.coordinates([0, line.value]).split('，')[0] : '经度 0°'}</b><p>${esc(line.text)}</p><p>看图想一想：${esc(line.observe)}</p>`;
@@ -4708,10 +4741,21 @@ window.GMWorldLab = (() => {
     }
     paint(); if (writeURL) studyAddress();
   }
-  $('gw-line').insertAdjacentHTML('beforeend', L.lines.map(l => `<option value="${l.id}">${esc(l.name)}</option>`).join(''));
+  $('gw-line').insertAdjacentHTML('beforeend', L.lines.map(l =>
+    `<button type="button" value="${l.id}" aria-pressed="false">${esc(l.name)}</button>`).join(''));
   $('gw-zone-legend').innerHTML = `<div>${[...L.zones].reverse().map(z => `<p style="--zone-color:${z.color}"><b>${esc(z.name)}</b><span>${esc(z.text)}</span></p>`).join('')}</div><p>${esc(L.zoneNote)}</p>`;
-  $('gw-layer').addEventListener('change', () => { root.dispatchEvent(new CustomEvent('gm-world-free-view')); setLayer($('gw-layer').value); });
-  $('gw-line').addEventListener('change', () => { root.dispatchEvent(new CustomEvent('gm-world-free-view')); setLine($('gw-line').value); });
+  $('gw-layer').addEventListener('click', event => {
+    const button = event.target.closest('button[aria-pressed="false"]');
+    if (!button) return;
+    root.dispatchEvent(new CustomEvent('gm-world-free-view'));
+    setLayer(button.value);
+  });
+  $('gw-line').addEventListener('click', event => {
+    const button = event.target.closest('button[aria-pressed="false"]');
+    if (!button) return;
+    root.dispatchEvent(new CustomEvent('gm-world-free-view'));
+    setLine(button.value);
+  });
 
   picker.innerHTML += `<optgroup label="七大洲">${continents.map(c => `<option value="${esc(c.id)}">${esc(c.name)}</option>`).join('')}</optgroup>` +
     `<optgroup label="四大洋">${oceans.map(o => `<option value="${o.id}">${esc(o.name)}</option>`).join('')}</optgroup>` +
@@ -4734,6 +4778,8 @@ window.GMWorldLab = (() => {
   $('gw-observations').innerHTML = D.observations.map((o, i) => `<article><h3>${esc(o.title)}</h3><p>${esc(o.text)}</p><button type="button" data-observe="${i}">转过去看看 →</button></article>`).join('');
   $('gw-note').textContent = D.note;
   root.addEventListener('click', event => {
+    const jump = event.target.closest('[data-globe-jump]');
+    if (jump) jumpTo($(jump.dataset.globeJump));
     const continent = event.target.closest('button[data-continent]');
     if (continent) choose(continent.dataset.continent);
     const view = event.target.closest('button[data-view]');
@@ -4924,7 +4970,7 @@ window.GMWorldLab = (() => {
       if(lab?.ancient){$('gw-status').textContent=window.GM_WORLD_LAB.ancientNote;return;}
       const country = countries.find(c => ctx.isPointInPath(paths.get(c.name), x, y, 'evenodd'));
       if (toolbox?.handlePoint(point, country?.name)) { readCoordinates(point, '点击位置'); return; }
-      if (country) choose(country.name); else $('gw-status').textContent = '这里是海洋。点大洋名称，或从「想去哪里」选择一片大洋。';
+      if (country) choose(country.name); else $('gw-status').textContent = '这里是海洋。点大洋名称，或从侧栏选择一片大洋。';
       readCoordinates(point, '点击位置');
     });
     canvas.addEventListener('keydown', event => {
@@ -4975,7 +5021,7 @@ window.GMWorldLab = (() => {
   $('gw-visual-note').textContent = visualData.note; $('gw-rotate-note').textContent = visualData.rotationNote; $('gw-visual-sun-note').textContent = visualData.sunNote;
   $('gw-visual-sources').innerHTML = visualData.sources.map(s => `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.name)} ↗</a>`).join('');
   rotationStatus(false);
-  const detective = window.GMWorldDetective.mount({root, countries, name: zh, choose, overlay,
+  const detective = window.GMWorldDetective.mount({root, countries, name: zh, choose, overlay, revealProfile: () => jumpTo(profile),
     highlight: id => { detectiveCountry = id; paint(); },
     locate: id => { const country = countryMap.get(id); if (country) focus(G.center(country), zh(id)); }
   });
@@ -5004,7 +5050,7 @@ window.GMWorldLab = (() => {
     extras:addons, replayTrip:trip=>voyages.custom(trip), prepareDetective: () => { setLayer('continent'); setLine('', false); $('gw-view-label').textContent = '转动地球，寻找线索'; }
   });
   lab=window.GMWorldLab.mount({root,focus,render:requestRender,repaint:paint,project:projectPoint,attachSky,
-    prepare:()=>{rotation.pause();toolbox.activate('browse');},ancientChanged:on=>{profile.hidden=on;visuals?.setAncient(on);if(on){overlay([]);shipPoint=null;if(marker)marker.visible=false;}}
+    prepare:()=>{rotation.pause();toolbox.activate('browse');},ancientChanged:on=>{profile.hidden=on;$('gw-profile-link').hidden=on;visuals?.setAncient(on);if(on){overlay([]);shipPoint=null;if(marker)marker.visible=false;}}
   });paint();
   window.GMWorldPlay.mountTimer({root,start:kind=>toolbox.startTimed(kind)});
   gyro=window.GMWorldPlay.mountGyro({root,prepare:()=>{rotation.pause();toolbox.activate('browse');root.dispatchEvent(new CustomEvent('gm-world-manual-camera'));$('gw-view-label').textContent='轻轻倾斜手机转地球';return camera?G.lonLat(camera.position):[0,0];},move:(delta,origin)=>{if(!camera||lost)return;const p=[G.wrap(origin[0]-delta[0]*1.5),Math.max(-85,Math.min(85,origin[1]+delta[1]*1.1))];camera.position.set(...G.xyz(p,5));camera.up.set(0,1,0);camera.lookAt(0,0,0);controls.update();requestRender();}});

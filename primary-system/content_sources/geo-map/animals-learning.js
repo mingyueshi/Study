@@ -94,6 +94,7 @@
     function reset() {
       search.value = '';
       recordFilter.value = 'all';
+      window.StudyChoices?.sync(recordFilter);
       onReset();
     }
 

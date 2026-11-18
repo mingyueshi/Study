@@ -18,7 +18,7 @@ window.GMWorldDetective = (() => {
     function resume() { select((missions.find(m => !found.has(m.id)) || missions[0]).id); }
     return {state, select, guess, hint, reveal, resume};
   }
-  function mount({root, countries, name, highlight, locate, choose, overlay}) {
+  function mount({root, countries, name, highlight, locate, choose, overlay, revealProfile}) {
     const D = window.GM_WORLD_DETECTIVE, esc = window.GMShared.esc, $ = id => root.querySelector(`#${id}`);
     const hintButtons = [...root.querySelectorAll('#gw-detective-hint, [data-detective-action="hint"]')];
     const nextButtons = [...root.querySelectorAll('#gw-detective-next, [data-detective-action="next"]')];
@@ -92,7 +92,7 @@ window.GMWorldDetective = (() => {
     });
     $('gw-detective-learn').addEventListener('click', () => {
       if (round.state().status === 'asking') return;
-      choose(round.state().mission.learnPlace); $('gw-profile').scrollIntoView({block: 'center'});
+      choose(round.state().mission.learnPlace); revealProfile();
     });
     function setActive(value) {
       active = value; $('gw-detective-inline').hidden = !value;
