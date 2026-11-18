@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>洋流 · 海洋世界</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="../geo-map/world-geo.js" defer></script>
+  <script src="ocean-data.js" defer></script>
+  <script src="ocean-model.js" defer></script>
+  <script src="ocean-app.js" defer></script>
+</head>
+<body>
+  <main id="main" class="ocean-topic" data-ocean-page="currents"
+        data-sidebar-layout=".ocean-sidebar" data-sidebar-width="clamp(240px, 22vw, 300px)"
+        data-sidebar-breakpoint="900" data-sidebar-label="专题目录" data-sidebar-fixed=".ocean-nav">
+    <aside class="ocean-sidebar" aria-label="海洋世界专题目录">
+      <nav class="ocean-nav" aria-label="海洋世界各站">
+        <strong>海洋世界</strong>
+          <a href="index.html">海洋总览</a>
+          <a href="currents.html" aria-current="page">洋流</a>
+          <a href="tides.html">潮汐</a>
+          <a href="life.html">海洋生物</a>
+          <a href="seafloor.html">海底地形</a>
+      </nav>
+      <a class="ocean-map-link" href="../atlas/world.html">返回世界地图 ↗</a>
+    </aside>
+    <div class="ocean-content">
+      <header class="ocean-hero">
+        <h1>洋流</h1>
+        <p id="ocean-intro"></p>
+      </header>
+      <section class="ocean-panel" aria-labelledby="current-heading">
+        <h2 id="current-heading">沿着箭头追洋流</h2>
+        <div class="ocean-choices" id="current-choices" role="group" aria-label="选择洋流"></div>
+        <figure>
+          <canvas id="ocean-map" role="img" aria-label="洋流教学地图，箭头指向下游。可点击路径或用上方按钮选择。"></canvas>
+          <figcaption class="ocean-legend">
+            <span class="ocean-swatch warm">暖流</span><span class="ocean-swatch cold">寒流</span><span class="ocean-swatch circumpolar">南极绕极流</span>
+            <span>路线为代表性示意，实际位置和强度会变化。</span>
+          </figcaption>
+        </figure>
+        <label class="ocean-range" for="current-position"><span>沿当前洋流移动 <output id="current-position-value"></output></span>
+          <input id="current-position" type="range" min="0" max="100" value="0" step="1">
+        </label>
+        <article class="ocean-result" id="current-result" aria-live="polite"></article>
+      </section>
+      <div class="ocean-grid" id="ocean-knowledge" aria-label="概念与证据"></div>
+      <details class="ocean-panel ocean-details"><summary id="ocean-question">想一想</summary><p id="ocean-answer"></p></details>
+      <details class="ocean-panel ocean-details"><summary>资料和图片出处</summary><ul id="ocean-references"></ul></details>
+      <noscript><p>请启用 JavaScript 查看专题正文和交互图。</p></noscript>
+    </div>
+  </main>
+</body>
+</html>

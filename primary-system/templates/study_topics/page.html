@@ -38,8 +38,9 @@
     {% elif study_area == 'geography' and current|slice:':15' == 'geography-earth' %}
     <a href="{% url 'geography-earth' %}" {% if current == 'geography-earth' %}aria-current="page"{% else %}aria-current="location"{% endif %}>地球内部</a>
     <a href="{% url 'geography-atlas-china' %}">地理图谱 ↗</a>
-    {% elif study_area == 'geography' %}
+    {% elif study_area == 'geography' and current|slice:':15' != 'geography-ocean' %}
     <a href="{% url 'geography-earth' %}">地球内部</a>
+    <a href="{% url 'geography-ocean' %}">海洋世界</a>
     <a href="{% url 'geography-atlas-china' %}" {% if current == 'geography-atlas-china' %}aria-current="page"{% elif current != 'geography-study' and current != 'geography-atlas-animals' and current != 'geography-atlas-world-animals' and current != 'geography-atlas-china-3d' and current != 'geography-atlas-world-3d' and current != 'geography-atlas-plants' and current != 'geography-atlas-world-plants' and current != 'geography-atlas-province-culture' %}aria-current="location"{% endif %}>地理图谱</a>
     <a href="{% url 'geography-atlas-china-3d' %}" {% if current == 'geography-atlas-china-3d' %}aria-current="page"{% endif %}>3D 中国地图</a>
     <a href="{% url 'geography-atlas-province-culture' %}" {% if current == 'geography-atlas-province-culture' %}aria-current="page"{% endif %}>中国省份文化</a>

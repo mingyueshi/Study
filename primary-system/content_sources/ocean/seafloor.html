@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>海底地形 · 海洋世界</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="ocean-data.js" defer></script>
+  <script src="ocean-model.js" defer></script>
+  <script src="ocean-app.js" defer></script>
+</head>
+<body>
+  <main id="main" class="ocean-topic" data-ocean-page="seafloor"
+        data-sidebar-layout=".ocean-sidebar" data-sidebar-width="clamp(240px, 22vw, 300px)"
+        data-sidebar-breakpoint="900" data-sidebar-label="专题目录" data-sidebar-fixed=".ocean-nav">
+    <aside class="ocean-sidebar" aria-label="海洋世界专题目录">
+      <nav class="ocean-nav" aria-label="海洋世界各站">
+        <strong>海洋世界</strong>
+          <a href="index.html">海洋总览</a>
+          <a href="currents.html">洋流</a>
+          <a href="tides.html">潮汐</a>
+          <a href="life.html">海洋生物</a>
+          <a href="seafloor.html" aria-current="page">海底地形</a>
+      </nav>
+      <a class="ocean-map-link" href="../atlas/world.html">返回世界地图 ↗</a>
+    </aside>
+    <div class="ocean-content">
+      <header class="ocean-hero">
+        <h1>海底地形</h1>
+        <p id="ocean-intro"></p>
+      </header>
+      <section class="ocean-panel" aria-labelledby="profile-heading">
+        <h2 id="profile-heading">拖动测深点，读海底剖面</h2>
+        <div class="ocean-choices" id="profile-choices" role="group" aria-label="选择海底剖面"></div>
+        <figure>
+          <canvas id="floor-profile" role="img" aria-label="沿剖面显示水平距起点距离和水深。可在图中点选位置，或用下方滑块读数。"></canvas>
+          <figcaption>两个剖面均为教学模型，纵向起伏经过放大，两图共用水深刻度。图内读数用于比较地形。</figcaption>
+        </figure>
+        <label class="ocean-range" for="floor-distance"><span>沿剖面平移 <output id="floor-distance-value"></output></span>
+          <input id="floor-distance" type="range" min="0" max="6000" value="235" step="5">
+        </label>
+        <div class="ocean-choices" id="floor-stops" role="group" aria-label="跳到地形观察点"></div>
+        <article class="ocean-result" id="floor-result" aria-live="polite"></article>
+      </section>
+      <section class="ocean-panel ocean-observation" id="ridge-map" aria-label="真实洋中脊分布图"></section>
+      <a class="ocean-link-card" href="../earth/plates.html?boundary=subduction">去板块构造观察海沟是怎样形成的 →</a>
+      <div class="ocean-grid" id="ocean-knowledge" aria-label="概念与证据"></div>
+      <details class="ocean-panel ocean-details"><summary id="ocean-question">想一想</summary><p id="ocean-answer"></p></details>
+      <details class="ocean-panel ocean-details"><summary>资料和图片出处</summary><ul id="ocean-references"></ul></details>
+      <noscript><p>请启用 JavaScript 查看专题正文和交互图。</p></noscript>
+    </div>
+  </main>
+</body>
+</html>
