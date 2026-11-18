@@ -1,0 +1,16 @@
+<aside class="measure-side" aria-label="单位与测量目录">
+  <nav aria-label="六站目录">
+    <a href="{% url 'measurement' %}">专题首页</a>
+    {% for item in data.dimensions %}
+      <a href="{% url 'measurement-dimension' item.id %}"{% if topic.id == item.id %} aria-current="page"{% endif %}>{{ item.title }}</a>
+    {% endfor %}
+    <a href="{% url 'measurement-estimates' %}"{% if cases %} aria-current="page"{% endif %}>生活估算</a>
+  </nav>
+  <nav class="measure-jumps" aria-label="本页内容">
+    {% if topic %}
+      <a href="#converter">单位换算器</a><a href="#units">单位与进率</a><a href="#practice">先想再看答案</a><a href="#activity">动手测一测</a>
+    {% else %}
+      {% for case in cases %}<a href="#case-{{ case.id }}">{{ case.title }}</a>{% endfor %}
+    {% endif %}
+  </nav>
+</aside>

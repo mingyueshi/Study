@@ -1,0 +1,46 @@
+{% extends "measurement/base.html" %}
+{% block measure_content %}
+<header class="measure-hero measure-estimation"><div><h1>生活估算</h1><p>{{ data.estimate_lead }}</p></div></header>
+<div class="measure-workspace measure-estimation" data-sidebar-layout=".measure-side" data-sidebar-width="280px" data-sidebar-breakpoint="1000" data-sidebar-label="单位与测量目录">
+  <div class="measure-main">
+    <section class="measure-panel">
+      <h2>怎样把估计变成有根据的范围？</h2>
+      <ol class="measure-steps">
+        <li><strong>选参照</strong>。用熟悉的一步、一杯或一页作比较，先定单位。</li>
+        <li><strong>拆开算</strong>。把总量拆成几部分，或用每份乘份数。用上下限保留变化的余地。</li>
+        <li><strong>再核对</strong>。用尺、秤、量杯或计时器实测，看看主要偏差来自哪里。</li>
+      </ol>
+      <p class="measure-note">下面的范围来自各题的假设。实际遇到相似情境，可以根据自己的参照调整。</p>
+      {% if estimate_error %}<p class="measure-alert" role="alert">{{ estimate_error }}</p>{% endif %}
+    </section>
+    {% for case in cases %}
+      <section class="measure-panel measure-accent" id="case-{{ case.id }}">
+        <h2>{{ case.title }}</h2><p>{{ case.question }}</p>
+        <details class="measure-hint"><summary>想不到参照？看提示</summary><p>{{ case.hint }}</p></details>
+        <form class="measure-form measure-guess" method="get" action="{% url 'measurement-estimates' %}#case-{{ case.id }}">
+          <input type="hidden" name="case" value="{{ case.id }}">
+          <label for="guess-{{ case.id }}">我的估值（{{ case.measure.name }}）<input id="guess-{{ case.id }}" name="guess" type="text" inputmode="decimal" maxlength="32" value="{{ case.raw|default:'' }}" required></label>
+          <button class="button" type="submit">比较估值</button>
+        </form>
+        {% if case.error %}<p class="measure-alert" role="alert">{{ case.error }}</p>{% endif %}
+        {% if case.feedback %}
+          <div class="measure-result" role="status">
+            <p class="measure-equation">你估了 {{ case.feedback.guess }} {{ case.measure.symbol }}，参考值是 {{ case.reference }} {{ case.measure.symbol }}。</p>
+            {% if case.feedback.direction %}
+              <p>比参考值{% if case.feedback.direction > 0 %}高{% else %}低{% endif %} {{ case.feedback.gap }} {{ case.measure.symbol }}。相对偏差{% if case.feedback.small_percent %}小于 0.1%{% else %}{% if case.feedback.percent.exact %}为{% else %}约为{% endif %} {{ case.feedback.percent.number }}%{% endif %}。</p>
+            {% else %}<p>你的估值与参考值相同。</p>{% endif %}
+            <p>{% if case.feedback.inside %}落在{% else %}超出{% endif %}本题参考范围 {{ case.lower }}～{{ case.upper }} {{ case.measure.symbol }}。{{ case.explanation }}</p>
+          </div>
+        {% else %}
+          <details class="measure-hint"><summary>看参考范围和测法</summary>
+            <p>参考范围 {{ case.lower }}～{{ case.upper }} {{ case.measure.symbol }}。{{ case.explanation }}</p>
+          </details>
+        {% endif %}
+        <p class="measure-note"><strong>自己试试</strong>。{{ case.try }}</p>
+        <a href="{% url 'measurement-dimension' case.dimension %}#converter">去换算{{ case.measure.name }} →</a>
+      </section>
+    {% endfor %}
+  </div>
+  {% include "measurement/sidebar.html" %}
+</div>
+{% endblock %}

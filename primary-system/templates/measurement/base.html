@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}{% if topic %}{{ topic.title }} · {% elif cases %}生活估算 · {% endif %}{{ data.title }} · 乐学堂{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'measurement/measurement.css' %}?v=1">
+<div class="measurement">
+  <nav class="measure-crumb" aria-label="专题导航">
+    <a href="{% url 'home' %}?area=math#modules-title">← 学习广场 · 数学</a>
+    {% if topic or cases %}<a href="{% url 'measurement' %}">单位与测量</a>{% endif %}
+    <a href="{% url 'math-formulas' %}?q=单位换算">相关公式 ↗</a>
+  </nav>
+  {% block measure_content %}{% endblock %}
+</div>
+{% endblock %}

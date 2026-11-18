@@ -1,0 +1,43 @@
+{% extends "measurement/base.html" %}
+{% block measure_content %}
+<header class="measure-hero measure-cover">
+  <div>
+    <h1>{{ data.title }}</h1>
+    <p>{{ data.lead }}</p>
+    <div class="measure-links">
+      <a class="button" href="{% url 'measurement-dimension' 'length' %}#converter">开始换算</a>
+      <a href="{% url 'measurement-estimates' %}">去做生活估算 →</a>
+    </div>
+  </div>
+  <div class="measure-scale" aria-label="比较分米换成厘米时的进率">
+    <p>同样从分米改用厘米</p>
+    <dl>
+      <div><dt>一条边</dt><dd>10<small>1 dm 有 10 cm</small></dd></div>
+      <div><dt>一个面</dt><dd>10 × 10<small>1 dm² 有 100 cm²</small></dd></div>
+      <div><dt>一整块</dt><dd>10 × 10 × 10<small>1 dm³ 有 1000 cm³</small></dd></div>
+    </dl>
+  </div>
+</header>
+<section aria-labelledby="measure-topics">
+  <h2 id="measure-topics">选择要测的量</h2>
+  <div class="measure-cards">
+    {% for item in data.dimensions %}
+      <a class="measure-card measure-{{ item.id }}" href="{% url 'measurement-dimension' item.id %}">
+        <span class="measure-symbol" aria-hidden="true">{{ item.units.2.symbol }}</span>
+        <h3>{{ item.title }}</h3><p>{{ item.lead }}</p>
+        <strong>{{ item.units|length }} 种单位 · 进率与练习 →</strong>
+      </a>
+    {% endfor %}
+    <a class="measure-card measure-estimation" href="{% url 'measurement-estimates' %}">
+      <span class="measure-symbol" aria-hidden="true">≈</span>
+      <h3>生活估算</h3><p>从步数、量杯到阅读时间，先猜一个量，再用参照核对。</p>
+      <strong>{{ data.estimates|length }} 个情境 · 估值比较 →</strong>
+    </a>
+  </div>
+</section>
+<section class="measure-panel measure-sources">
+  <h2>资料出处</h2>
+  <p>换算关系参考国际单位制手册。生活题采用题设中的样本数值，实际测量结果会随对象和测法变化。</p>
+  {% for item in data.sources %}<a href="{{ item.url }}" target="_blank" rel="noopener noreferrer">{{ item.title }} ↗</a>{% endfor %}
+</section>
+{% endblock %}

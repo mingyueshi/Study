@@ -1,0 +1,57 @@
+{% extends "measurement/base.html" %}
+{% block measure_content %}
+<header class="measure-hero measure-{{ topic.id }}"><div>
+  <h1>{{ topic.title }}</h1><p>{{ topic.lead }}</p>
+</div></header>
+<div class="measure-workspace measure-{{ topic.id }}" data-sidebar-layout=".measure-side" data-sidebar-width="280px" data-sidebar-breakpoint="1000" data-sidebar-label="单位与测量目录">
+  <div class="measure-main">
+    <section class="measure-panel measure-accent" id="converter">
+      <h2>{{ topic.title }}换算器</h2>
+      <p>示例：{{ sample.amount }} {{ sample.source.symbol }}＝{{ sample.result }} {{ sample.target.symbol }}。改一改数值或单位，看看进率怎样用。</p>
+      <form class="measure-form" method="get" action="{% url 'measurement-dimension' topic.id %}#converter">
+        <label for="measure-amount">数值<input id="measure-amount" name="amount" type="text" inputmode="decimal" maxlength="32" value="{{ raw }}" required></label>
+        <label for="measure-from">从<select id="measure-from" name="from">
+          {% for unit in topic.units %}<option value="{{ unit.id }}"{% if unit.id == source.id %} selected{% endif %}>{{ unit.name }}（{{ unit.symbol }}）</option>{% endfor %}
+        </select></label>
+        <label for="measure-to">换到<select id="measure-to" name="to">
+          {% for unit in topic.units %}<option value="{{ unit.id }}"{% if unit.id == target.id %} selected{% endif %}>{{ unit.name }}（{{ unit.symbol }}）</option>{% endfor %}
+        </select></label>
+        <div class="measure-actions"><button class="button" type="submit">换算</button><button class="measure-secondary" type="submit" name="op" value="swap">交换单位</button></div>
+      </form>
+      {% if errors %}<div class="measure-alert" role="alert">{% for error in errors %}<p>{{ error }}</p>{% endfor %}</div>{% endif %}
+      {% if result %}
+        <div class="measure-result" id="conversion-result" role="status">
+          <p class="measure-equation">{{ result.input }} {{ source.symbol }} {% if result.value.exact %}＝{% else %}≈{% endif %} {{ result.value.number }} {{ target.symbol }}</p>
+          <p>数值的计算：{{ result.input }} {{ result.factor }}。换了单位，量的大小保持相同。</p>
+          {% if result.value.fraction %}<p>上方为小数近似值。用分数可精确写为 {{ result.value.fraction }} {{ target.symbol }}。</p>{% endif %}
+        </div>
+      {% endif %}
+    </section>
+    <section class="measure-panel" id="units">
+      <h2>单位与进率</h2>
+      <p class="measure-rule">{{ topic.rule }}</p>
+      <ul class="measure-unit-list">
+        {% for unit in unit_rows %}
+          <li><strong>{{ unit.name }} <span>{{ unit.symbol }}</span></strong>
+            {% if unit.relation %}<p>{{ unit.relation }}</p>{% endif %}
+            <p>{{ unit.scene }}</p>
+          </li>
+        {% endfor %}
+      </ul>
+      <p class="measure-note">{{ topic.boundary }}</p>
+    </section>
+    <section class="measure-panel" id="practice">
+      <h2>先想再看答案</h2>
+      {% for question in topic.practice %}
+        <article class="measure-question" id="practice-{{ question.id }}">
+          <h3>{{ question.question }}</h3>
+          <details><summary>看提示</summary><p>{{ question.hint }}</p></details>
+          <details><summary>看答案与算式</summary><p>{{ question.answer }}</p></details>
+        </article>
+      {% endfor %}
+    </section>
+    <section class="measure-panel" id="activity"><h2>动手测一测</h2><p>{{ topic.activity }}</p><a href="{% url 'measurement-estimates' %}">继续做生活估算 →</a></section>
+  </div>
+  {% include "measurement/sidebar.html" %}
+</div>
+{% endblock %}
