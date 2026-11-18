@@ -158,6 +158,7 @@ test: ## 跑全量测试（需先 install）
 
 test-frontend: ## 跑 Node 前端回归测试
 	node --test scripts/test_time_story.cjs
+	node --test scripts/test_money_trade.cjs
 	node --test scripts/test_punctuation.cjs
 	node --test scripts/test_earth_interior.cjs
 	node --test scripts/test_mathcamp.cjs

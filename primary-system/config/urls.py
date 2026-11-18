@@ -8,6 +8,7 @@ from accounts import views as accounts_views
 from accounts.forms import LearnerAuthenticationForm
 from catalog import views as catalog
 from catalog.great_works import great_works
+from catalog.money_trade import money_trade
 from catalog.time_story import time_story
 from catalog.upgrade_views import upgrade_history
 from catalog.study_courses import hanzi_evolution, literature_study
@@ -30,6 +31,7 @@ urlpatterns = [
     path('interdisciplinary/time-story/', time_story, name='time-story'),
     path('interdisciplinary/great-works/', great_works, name='great-works'),
     path('interdisciplinary/great-works/<slug:work_id>/', great_works, name='great-work-detail'),
+    path('interdisciplinary/money-trade/', money_trade, name='money-trade'),
     path('updates/', upgrade_history, name='upgrade-history'),
     path('references/', include('reference_library.urls')),
     path('references/lexicon/', include('lexicon.reference_urls')),

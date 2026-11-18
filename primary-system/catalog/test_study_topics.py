@@ -54,6 +54,22 @@ class TopicMarkup(HTMLParser):
 
 
 class StudyTopicPageTests(SimpleTestCase):
+    def test_money_trade_links_all_five_stations_and_loads_local_lab_assets(self):
+        response = self.client.get(reverse('money-trade'))
+        self.assertContains(response, '<h1>货币与贸易</h1>', html=True)
+        for station in response.context['course']['stations']:
+            self.assertContains(response, f'href="#{station["id"]}"')
+            self.assertContains(response, f'id="{station["id"]}"')
+            self.assertContains(response, station['answer'])
+        for name in ('basket', 'market'):
+            self.assertContains(response, f'id="money-{name}-data" type="application/json"')
+        for asset in ('money-trade/banliang.jpg', 'money-trade.js', 'money-trade.css'):
+            asset = f'study_topics/{asset}'
+            self.assertTrue(finders.find(asset), asset)
+            self.assertContains(response, asset)
+        self.assertContains(response, reverse('mathbook-book', args=['4a']) + '#mu7-2')
+        self.assertContains(response, reverse('history-timeline-silk-city') + '?city=quanzhou')
+
     def test_great_works_directory_and_illustrated_files(self):
         directory = self.client.get(reverse('great-works'))
         self.assertContains(directory, '<h1>伟大工程</h1>', html=True)

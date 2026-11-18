@@ -121,6 +121,7 @@ class CatalogTests(PlatformFixture):
         self.assertEqual((chip['label'], chip['count'], chip['on']), ('跨学科', len(cards), True))
         self.assertContains(response, f'href="{reverse("time-story")}"')
         self.assertContains(response, f'href="{reverse("great-works")}"')
+        self.assertContains(response, f'href="{reverse("money-trade")}"')
 
     def test_cross_module_placement_cannot_publish_hidden_content(self):
         import_snapshot(english_snapshot(), publish=True)

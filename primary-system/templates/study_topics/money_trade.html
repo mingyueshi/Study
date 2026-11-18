@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{ course.title }} · 乐学堂{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'study_topics/money-trade.css' %}">
+<article class="money-trade" id="money-top">
+  <a class="money-link" href="{% url 'home' %}?area=interdisciplinary#modules-title">← 学习广场 · 跨学科</a>
+  <header class="money-hero">
+    <h1>{{ course.title }}</h1>
+    <p>{{ course.intro }}</p>
+    <nav class="money-index" aria-label="专题目录">
+      {% for station in course.stations %}<a href="#{{ station.id }}">{{ station.label }}</a>{% endfor %}
+    </nav>
+  </header>
+  {% for station in course.stations %}
+  <section class="money-station" id="{{ station.id }}" aria-labelledby="{{ station.id }}-heading">
+    <p class="money-label">{{ station.label }}</p>
+    <h2 id="{{ station.id }}-heading">{{ station.question }}</h2>
+    <p class="money-prose">{{ station.intro }}</p>
+    <div class="money-notes">
+      {% for note in station.notes %}<div><h3>{{ note.title }}</h3><p>{{ note.text }}</p></div>{% endfor %}
+    </div>
+    {% if station.id == 'money' %}
+    <figure class="money-photo">
+      <img src="{% static course.photo.path %}" alt="{{ course.photo.alt }}" width="960" height="640" loading="lazy">
+      <figcaption>{{ course.photo.caption }} <a class="money-link" href="{{ course.photo.source }}" target="_blank" rel="noopener noreferrer">{{ course.photo.credit }} ↗</a></figcaption>
+    </figure>
+    {% elif station.id == 'prices' %}
+    <fieldset class="money-tool" id="money-basket" hidden>
+      <legend>试算购物篮</legend>
+      <label class="money-field">预算（元）<input id="money-budget" type="number" min="0" max="999.99" step="0.01" inputmode="decimal"></label>
+      <div class="money-items">
+        {% for item in course.basket.items %}
+        <div class="money-item">
+          <label class="money-field" for="basket-{{ item.id }}">{{ item.name }}数量<input id="basket-{{ item.id }}" type="number" min="0" max="99" step="1" inputmode="numeric"></label>
+          <span data-unit-price></span><span data-subtotal></span>
+        </div>
+        {% endfor %}
+      </div>
+      <output class="money-result" aria-live="polite"></output>
+    </fieldset>
+    {% elif station.id == 'market' %}
+    <fieldset class="money-tool" id="money-market" hidden>
+      <legend>苹果摊的供需实验</legend>
+      <div class="money-controls">
+        <div class="inline-choice" data-inline-choice>
+          <label class="money-field">市场情境<select name="scenario">
+            {% for scenario in course.market.scenarios %}<option value="{{ scenario.id }}">{{ scenario.label }}</option>{% endfor %}
+          </select></label>
+        </div>
+        <div class="inline-choice" data-inline-choice>
+          <label class="money-field">每份价格<select name="price">
+            {% for price in course.market.prices %}<option value="{{ price }}"{% if price == course.market.initial_price %} selected{% endif %}>{{ price }} 元</option>{% endfor %}
+          </select></label>
+        </div>
+      </div>
+      <div class="money-bars" aria-hidden="true">
+        <div><span>供给量</span><meter id="money-supply" min="0"></meter><strong data-supply></strong></div>
+        <div><span>需求量</span><meter id="money-demand" min="0"></meter><strong data-demand></strong></div>
+      </div>
+      <output class="money-result" aria-live="polite"></output>
+      <p class="money-model">先只换情境，再调价格。两条用同一刻度，数量为教学假设。</p>
+    </fieldset>
+    {% endif %}
+    <details class="money-check"><summary>想一想：{{ station.challenge }}</summary><p>{{ station.answer }}</p></details>
+    {% if station.links or station.sources %}
+    <div class="money-resources">
+      {% for link in station.links %}<a class="money-link" href="{{ link.url }}">{{ link.label }} →</a>{% endfor %}
+      {% if station.sources %}
+      <details><summary>查出处（需联网）</summary>
+        <ul>{% for source in station.sources %}<li><a class="money-link" href="{{ source.url }}" target="_blank" rel="noopener noreferrer">{{ source.label }} ↗</a></li>{% endfor %}</ul>
+      </details>
+      {% endif %}
+    </div>
+    {% endif %}
+  </section>
+  {% endfor %}
+  <a class="money-link" href="#money-top">↑ 回到专题目录</a>
+</article>
+{{ course.basket|json_script:'money-basket-data' }}
+{{ course.market|json_script:'money-market-data' }}
+<script src="{% static 'study_topics/money-trade.js' %}" defer></script>
+{% endblock %}

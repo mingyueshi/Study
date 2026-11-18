@@ -1,0 +1,41 @@
+:root:has(.money-trade) { --page-width: 100%; }
+.money-trade { padding-block: 1.2rem; }
+.money-link { color: var(--green); font-weight: 650; text-decoration: underline; text-underline-offset: .2em; }
+.money-hero { margin: 1rem 0 1.5rem; padding: clamp(1rem, 3vw, 3rem); border-radius: 1rem; background: var(--soft); border-left: .35rem solid var(--green); }
+.money-hero h1, .money-station h2, .money-station h3 { margin-bottom: .45rem; }
+.money-hero p, .money-prose, .money-notes p, .money-check p { max-width: 46em; }
+.money-index { display: flex; flex-wrap: wrap; gap: .55rem; }
+.money-index a { border: 1px solid var(--line); border-radius: .55rem; background: var(--white); padding: .35rem .7rem; color: var(--green-dark); font-weight: 700; }
+.money-index a:hover { border-color: var(--green); }
+.money-station { padding-block: clamp(1.5rem, 3vw, 3rem); border-top: 1px solid var(--line); }
+.money-label { margin-bottom: .3rem; color: var(--green); font-weight: 750; letter-spacing: .05em; }
+.money-notes { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)); gap: 1rem; margin-block: 1rem; }
+.money-notes > div, .money-item { padding: .9rem 1rem; border: 1px solid var(--line); border-radius: .7rem; background: var(--white); }
+.money-notes p { margin-bottom: 0; }
+.money-notes h3 { font-size: 1.1em; }
+.money-photo { margin: 1.15rem 0; max-width: 34rem; }
+.money-photo img { display: block; width: 100%; height: auto; border-radius: .6rem; }
+.money-photo figcaption { color: var(--muted); margin-top: .55rem; }
+.money-tool { min-width: 0; margin: 1rem 0; padding: clamp(.8rem, 2vw, 1.5rem); border: 1px solid var(--line); border-radius: .8rem; background: var(--soft); }
+.money-tool legend { color: var(--green-dark); font-weight: 750; }
+.money-field { display: grid; gap: .25rem; width: fit-content; max-width: 100%; font-weight: 650; }
+.money-field :is(input, select) { min-height: 2.4rem; min-width: 0; max-width: 100%; padding: .3rem .5rem; color: var(--ink); background-color: var(--white); border: 1px solid var(--line); border-radius: .45rem; }
+.money-field input { width: 8rem; }
+.money-items { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr)); gap: .7rem; max-width: 46rem; margin-block: .75rem; }
+.money-item span { display: block; margin-top: .2rem; }
+.money-item [data-subtotal] { font-weight: 650; }
+.money-result { display: block; margin-top: .7rem; font-weight: 750; font-variant-numeric: tabular-nums; }
+.money-controls { display: flex; flex-wrap: wrap; gap: .6rem 1rem; }
+.money-bars { display: grid; gap: .5rem; max-width: 35rem; margin-top: .85rem; }
+.money-bars > div { display: grid; grid-template-columns: max-content minmax(0, 1fr) 4.3rem; gap: .6rem; align-items: center; }
+.money-bars meter { display: block; width: 100%; accent-color: var(--green); }
+.money-bars meter::-webkit-meter-optimum-value { background: var(--green); }
+.money-bars #money-demand::-webkit-meter-optimum-value { background: var(--orange); }
+.money-bars meter::-moz-meter-bar { background: var(--green); }
+.money-bars #money-demand::-moz-meter-bar { background: var(--orange); }
+.money-model { margin: .35rem 0 0; color: var(--muted); }
+.money-check { margin-top: .9rem; padding: .65rem .9rem; border-left: 3px solid var(--orange); background: var(--white); }
+.money-trade summary { cursor: pointer; font-weight: 650; }
+.money-check p { margin: .5rem 0 0; }
+.money-resources { display: flex; flex-wrap: wrap; align-items: baseline; gap: .4rem 1.3rem; margin-top: .85rem; }
+.money-resources ul { padding-left: 1.2em; margin: .45rem 0 0; }

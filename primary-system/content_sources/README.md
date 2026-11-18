@@ -4,6 +4,7 @@
 
 | 内容 | 编辑位置 | 生成命令 |
 |---|---|---|
+| 跨学科 · 货币与贸易 | `money-trade.json`（五站正文、购物篮分值、供需模型、照片署名及出处）；实物照片在 `static/study_topics/money-trade/` | Django 直接读取，`node content_sources/test/test-money-trade.js` 校验 |
 | 跨学科 · 伟大工程 | `great-works.json`（六项工程的档案、图注、读图点位、推理任务与出处）；对应原理图在 `static/study_topics/great-works.svg`，编号按同一 360 × 160 坐标系叠加 | Django 直接读取；`node content_sources/test/test-great-works.js` 校验 |
 | 跨学科 · 时间的故事 | `time-story.json`（五站正文、自测、换算参数及出处）；四张节气卡引用 `solar-terms.json` | Django 直接读取；`node content_sources/test/test-time-story.js` 校验 |
 | 数学、语文教材 | `math-data.js`、`knowledge-data.js`、图示与 `images/` | `make mathbook-data chinesebook-data` |
