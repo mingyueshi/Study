@@ -4194,6 +4194,7 @@ window.GMWorldLab = (() => {
       "sky",
     ];
     let mode = "none";
+    const relatedLinks = root.querySelectorAll("[data-lab-modes]");
     const markers = root.querySelector("#gw-population-markers"),
       stars = root.querySelector("#gw-stars");
     const dots = D.population.cities.map((city) => {
@@ -4310,6 +4311,8 @@ window.GMWorldLab = (() => {
       mode = next;
       root.dataset.lab = mode;
       $("layer").value = mode;
+      for (const link of relatedLinks)
+        link.hidden = !link.dataset.labModes.split(" ").includes(mode);
       $("cities").hidden = mode !== "population";
       $("plates").hidden = mode !== "plates";
       $("rain-legend").hidden = mode !== "rain";
@@ -4622,6 +4625,7 @@ window.GMWorldLab = (() => {
     requestRender();
   }
 
+  const worldMapUrl = esc((root.dataset.atlasBase || '') + 'world.html');
   function showProfile(id) {
     const country = countryMap.get(id), continent = continentMap.get(id);
     const ocean = oceans.find(o => o.id === id), feature = features.find(f => f.id === id);
@@ -4629,16 +4633,16 @@ window.GMWorldLab = (() => {
     if (continent) {
       html = `<p class="gw-eyebrow">七大洲 · ${esc(continent.hint)}</p><h2>${esc(continent.name)}</h2><p>${esc(continent.location)}</p>` +
         continent.facts.map(f => `<p><b>${esc(f.title)}：</b>${esc(f.text)}</p>`).join('') +
-        `<p><b>看图想一想：</b>${esc(continent.observe)}</p><a href="world.html?continent=${encodeURIComponent(id)}#map">在平面地图上对照${esc(continent.name)} →</a>`;
+        `<p><b>看图想一想：</b>${esc(continent.observe)}</p><a href="${worldMapUrl}?continent=${encodeURIComponent(id)}#map">在平面地图上对照${esc(continent.name)} →</a>`;
     } else if (country) {
       const c = continentMap.get(meta[id]?.[1]);
       html = `<p class="gw-eyebrow">国家与地区 · ${esc(c?.name || '')}</p><h2>${esc(zh(id))}</h2><p>${esc(c?.hint || '')}</p>` +
         ((id === 'China' || id === 'Taiwan') ? window.GM_CHINA_CARD.facts.map(f => `<p>${esc(f)}</p>`).join('') : '') +
-        `<a href="world.html?place=${encodeURIComponent(id)}#map">在平面地图上查看${esc(zh(id))} →</a>` +
+        `<a href="${worldMapUrl}?place=${encodeURIComponent(id)}#map">在平面地图上查看${esc(zh(id))} →</a>` +
         (c ? `<p><button type="button" class="gw-profile-continent" data-continent="${esc(c.id)}">认识${esc(c.name)} →</button></p>` : '');
     } else if (ocean || feature) {
       const place = ocean || feature;
-      html = `<p class="gw-eyebrow">${ocean ? '四大洋' : '世界地标'}</p><h2>${esc(place.name)}</h2><p><b>在哪里：</b>${esc(place.where)}</p><p>${esc(place.note)}</p><a href="world.html?place=${encodeURIComponent(id)}#map">在平面地图上查看${esc(place.name)} →</a>`;
+      html = `<p class="gw-eyebrow">${ocean ? '四大洋' : '世界地标'}</p><h2>${esc(place.name)}</h2><p><b>在哪里：</b>${esc(place.where)}</p><p>${esc(place.note)}</p><a href="${worldMapUrl}?place=${encodeURIComponent(id)}#map">在平面地图上查看${esc(place.name)} →</a>`;
     }
     profile.innerHTML = html;
     picker.value = id;

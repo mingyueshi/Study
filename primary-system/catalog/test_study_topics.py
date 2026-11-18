@@ -16,8 +16,8 @@ HISTORY_PAGES = (
     'history-timeline-silk-road', 'history-timeline-silk-city', 'history-timeline-territory',
 )
 GEOGRAPHY_PAGES = (
-    'geography-study', 'geography-atlas', 'geography-atlas-china', 'geography-atlas-china-3d',
-    'geography-atlas-world', 'geography-atlas-world-3d', 'geography-atlas-province', 'geography-atlas-places',
+    'geography-study', 'geography-atlas', 'geography-atlas-china', 'geography-china-terrain',
+    'geography-atlas-world', 'geography-globe', 'geography-atlas-province', 'geography-atlas-places',
     'geography-atlas-routes', 'geography-atlas-gallery',
     'geography-life-maps', 'geography-life-maps-animals', 'geography-life-maps-plants',
     'geography-life-maps-world-animals', 'geography-life-maps-world-plants', 'geography-province-culture',
@@ -110,7 +110,7 @@ class StudyTopicPageTests(SimpleTestCase):
             ('direction', '../study/#lesson-gu2-2'),
             ('legend', '../study/#lesson-gu2-4'),
             ('contours', 'profile.html'),
-            ('profile', '../atlas/china-3d.html#gm3-section-draw'),
+            ('profile', reverse('geography-china-terrain') + '#gm3-section-draw'),
         ):
             with self.subTest(suffix=suffix):
                 response = self.client.get(reverse('geography-map-skills-' + suffix))
@@ -163,7 +163,7 @@ class StudyTopicPageTests(SimpleTestCase):
                 digest = sha256(Path(finders.find(asset_path)).read_bytes()).hexdigest()[:12]
                 self.assertEqual(url.split('?', 1)[1:], [f'v={digest}'])
         self.assertContains(self.client.get(reverse('geography-earth-plates')),
-                            'href="../atlas/world-3d.html?lab=plates"')
+                            f'href="{reverse("geography-globe")}?lab=plates"')
 
     def test_shared_controls_and_learning_settings_across_topics(self):
         routes = HISTORY_PAGES + GEOGRAPHY_PAGES + tuple(course[1] for course in COURSES) + (
@@ -187,7 +187,7 @@ class StudyTopicPageTests(SimpleTestCase):
                 self.assertTrue(any('/static/disclosure-controls.css?' in asset for asset in assets))
 
     def test_3d_maps_version_local_dependencies_with_their_contents(self):
-        for route in ('geography-atlas-china-3d', 'geography-atlas-world-3d'):
+        for route in ('geography-china-terrain', 'geography-globe'):
             page = TopicMarkup(self.client.get(reverse(route)).content.decode())
             assets = [url for url in page.assets if url.startswith('/static/study_topics/geo-map/')]
             self.assertTrue(any('assets/vendor/three-map.js?' in url for url in assets))
@@ -253,12 +253,9 @@ class StudyTopicPageTests(SimpleTestCase):
             ('history-timeline-silk-city', 'silk-road.html', '?route=sea&city=quanzhou#route-map'),
             ('geography-atlas', 'china.html', '?place=f20'),
             ('geography-atlas-china', 'province.html', '?adcode=110000'),
-            ('geography-atlas-china', 'china-3d.html', '?place=p710000'),
-            ('geography-atlas-china-3d', 'province.html', '?adcode=810000'),
+            ('geography-atlas-china', 'province.html', '?adcode=810000'),
             ('geography-life-maps', 'animals.html', '?animal=giant-panda'),
             ('geography-life-maps', 'world-animals.html', '?animal=emperor-penguin'),
-            ('geography-atlas-world', 'world-3d.html', '?place=China'),
-            ('geography-atlas-world-3d', 'world-3d.html', '?continent=antarctica'),
             ('geography-life-maps', 'plants.html', '?plant=lotus'),
             ('geography-life-maps', 'world-plants.html', '?plant=antarctic-hair-grass'),
             ('geography-atlas-places', 'gallery.html', '?place=f20'),
@@ -292,6 +289,8 @@ class StudyTopicPageTests(SimpleTestCase):
 
     def test_atlas_bookmarks_redirect_to_independent_topics(self):
         for slug, target, query in (
+            ('china-3d', 'geography-china-terrain', '?river=f20&tour=yangtze&stop=yibin'),
+            ('world-3d', 'geography-globe', '?voyage=zhenghe&port=malacca'),
             ('animals', 'geography-life-maps-animals', '?animal=giant-panda&bookmark=%2Fmap%2BX'),
             ('plants', 'geography-life-maps-plants', '?plant=ginkgo'),
             ('world-animals', 'geography-life-maps-world-animals', '?animal=emperor-penguin'),
@@ -309,26 +308,66 @@ class StudyTopicPageTests(SimpleTestCase):
                     self.assertEqual(response['Location'], new_url)
 
     def test_terrain_and_voyage_guides_link_to_canonical_map_tools(self):
-        atlas = reverse('geography-atlas')
+        terrain_tool = reverse('geography-china-terrain')
+        globe = reverse('geography-globe')
         terrain_url = reverse('geography-china-landscapes')
         voyage_url = reverse('geography-voyages')
         terrain = self.client.get(terrain_url)
         voyages = self.client.get(voyage_url)
         self.assertContains(terrain, 'data-routes="mountains rivers"')
-        self.assertContains(terrain, f'href="{atlas}china-3d.html#gm3-section"')
+        self.assertContains(terrain, f'href="{terrain_tool}#gm3-section"')
         self.assertContains(voyages, 'id="voyage-map"')
         self.assertContains(voyages, f'data-history-event="{reverse("history-timeline-event")}"')
-        self.assertContains(voyages, f'href="{atlas}world-3d.html?voyage=zhenghe&amp;port=liujiagang#gw-viewport"')
-        self.assertContains(voyages, f'href="{atlas}world-3d.html?voyage=magellan-elcano&amp;port=sanlucar#gw-viewport"')
+        self.assertContains(voyages, f'data-globe-url="{globe}"')
+        self.assertContains(voyages, f'href="{globe}?voyage=zhenghe&amp;port=liujiagang#gw-viewport"')
+        self.assertContains(voyages, f'href="{globe}?voyage=magellan-elcano&amp;port=sanlucar#gw-viewport"')
         for guide, filename in ((terrain, 'china-landscapes.js'), (voyages, 'voyages-guide.js')):
             self.assertContains(guide, f'/static/study_topics/geo-map/{filename}?v=')
         for target, url in (
             ('geography-atlas-routes', terrain_url + '#field-trails'),
-            ('geography-atlas-china-3d', terrain_url + '#terrain-steps'),
-            ('geography-atlas-world-3d', voyage_url + '#compare'),
+            ('geography-china-terrain', terrain_url + '#terrain-steps'),
+            ('geography-globe', voyage_url + '#compare'),
         ):
             self.assertContains(self.client.get(reverse(target)), f'href="{url}"')
         self.assertEqual(self.client.get(reverse('geography-atlas-routes')).status_code, 200)
+
+    def test_atlas_and_3d_topics_link_directly_to_each_other(self):
+        atlas = self.client.get(reverse('geography-atlas-china'))
+        for route, flat in (
+            ('geography-china-terrain', 'geography-atlas-china'),
+            ('geography-globe', 'geography-atlas-world'),
+        ):
+            with self.subTest(route=route):
+                url = reverse(route)
+                self.assertContains(atlas, f'href="{url}"')
+                page = self.client.get(url)
+                self.assertContains(page, f'href="{reverse(flat)}#map"')
+                self.assertContains(page, f'data-atlas-base="{reverse("geography-atlas")}"')
+                self.assertNotContains(page, 'class="gm-atlas-more"')
+
+    def test_globe_links_layers_and_tools_to_existing_topic_sections(self):
+        globe = self.client.get(reverse('geography-globe'))
+        for modes, route, anchor in (
+            ('rain', 'geography-climate-types', 'charts-heading'),
+            ('summer winter', 'geography-climate-china', 'zone-choices'),
+            ('typhoon', 'geography-climate-weather', 'climate-knowledge'),
+            ('plates', 'geography-earth-plates', 'plate-lab'),
+            ('pangaea', 'geography-earth-plates', 'earth-explain'),
+        ):
+            with self.subTest(modes=modes):
+                url = reverse(route)
+                self.assertContains(globe, f'data-lab-modes="{modes}" href="{url}#{anchor}"')
+                self.assertContains(self.client.get(url), f'id="{anchor}"')
+        for route, anchor in (
+            ('geography-map-skills-scale', 'measure-title'),
+            ('geography-map-skills-direction', 'skills-knowledge'),
+        ):
+            url = reverse(route)
+            self.assertContains(globe, f'href="{url}#{anchor}"')
+            self.assertContains(self.client.get(url), f'id="{anchor}"')
+        astronomy = reverse('astronomy-explore')
+        self.assertContains(globe, f'href="{astronomy}?view=au4#lesson-au4-5"')
+        self.assertContains(globe, f'data-lab-modes="sky" href="{astronomy}?view=au1"')
 
     def test_astronomy_portal_has_short_url_and_preserves_old_entry_parameters(self):
         self.assertEqual(reverse('astronomy-explore'), '/astronomy/')
@@ -494,7 +533,7 @@ class StudyTopicEntryTests(TestCase):
     def test_history_and_geography_keep_their_primary_cards_first(self):
         for area, shown, hidden in (
             ('history', ('history-timeline-timeline', 'history-timeline-territory', 'history-timeline-people', 'history-timeline-civilizations', 'history-timeline-ancient-science', 'history-timeline-silk-road'), ('geography-atlas-china', 'astronomy-explore')),
-            ('geography', ('geography-atlas-china', 'geography-map-skills', 'geography-life-maps', 'geography-province-culture', 'geography-china-landscapes', 'geography-voyages', 'geography-earth', 'geography-ocean', 'geography-climate', 'astronomy-explore', 'solar-terms'), ('history-timeline-timeline', 'literature-study')),
+            ('geography', ('geography-atlas-china', 'geography-china-terrain', 'geography-globe', 'geography-map-skills', 'geography-life-maps', 'geography-province-culture', 'geography-china-landscapes', 'geography-voyages', 'geography-earth', 'geography-ocean', 'geography-climate', 'astronomy-explore', 'solar-terms'), ('history-timeline-timeline', 'literature-study')),
         ):
             with self.subTest(area=area):
                 response = self.client.get(reverse('home'), {'area': area})

@@ -694,7 +694,7 @@ Object.entries(PAGE_REFS).forEach(([page, refs]) => {
   const html = fs.readFileSync(path.join(DIR, page), 'utf8');
   refs.forEach(f => check(html.includes(f), page + ' 应引用 ' + f));
   check(html.includes('lang="zh-CN"'), page + ' 应声明 zh-CN');
-  if (['life-maps.html', 'china-landscapes.html', 'voyages.html'].includes(page)) {
+  if (['life-maps.html', 'china-landscapes.html', 'voyages.html', 'china-3d.html'].includes(page)) {
     for (const ref of refs) check(fileExists(ref), '专题入口应使用本地文件：' + ref);
   } else if (!/(?:animals|plants|province-culture)\.html$/.test(page)) {
     ['atlas.js', 'atlas-data.js', 'places.html', 'routes.html', 'gallery.html'].forEach(f =>

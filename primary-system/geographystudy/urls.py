@@ -16,12 +16,20 @@ def page(name, *, local_navigation=False):
 
 
 LIFE_MAPS = ('animals', 'plants', 'world-animals', 'world-plants')
+ATLAS_REDIRECTS = {
+    'china-3d': 'geography-china-terrain',
+    'world-3d': 'geography-globe',
+    **{name: f'geography-life-maps-{name}' for name in LIFE_MAPS},
+    'province-culture': 'geography-province-culture',
+}
 
 
 urlpatterns = [
     path('study/', page('geo/index'), name='geography-study'),
     path('solar-terms/', solar_terms.index, name='solar-terms'),
     path('atlas/', page('geo-map/index', local_navigation=True), name='geography-atlas'),
+    path('china-terrain/', page('geo-map/china-3d', local_navigation=True), name='geography-china-terrain'),
+    path('globe/', page('geo-map/world-3d', local_navigation=True), name='geography-globe'),
     path('life-maps/', page('geo-map/life-maps', local_navigation=True), name='geography-life-maps'),
     path('province-culture/', page('geo-map/province-culture', local_navigation=True), name='geography-province-culture'),
     path('china-landscapes/', page('geo-map/china-landscapes', local_navigation=True), name='geography-china-landscapes'),
@@ -48,7 +56,7 @@ urlpatterns = [
     ],
     *[
         path(f'atlas/{name}.html', page(f'geo-map/{name}', local_navigation=True), name=f'geography-atlas-{name}')
-        for name in ('china', 'china-3d', 'world', 'world-3d', 'province', 'places', 'routes', 'gallery')
+        for name in ('china', 'world', 'province', 'places', 'routes', 'gallery')
     ],
     *[
         path(f'life-maps/{name}.html', page(f'geo-map/{name}', local_navigation=True), name=f'geography-life-maps-{name}')
@@ -57,14 +65,9 @@ urlpatterns = [
     *[
         path(
             f'atlas/{name}.html',
-            RedirectView.as_view(pattern_name=f'geography-life-maps-{name}', permanent=True, query_string=True),
+            RedirectView.as_view(pattern_name=target, permanent=True, query_string=True),
             name=f'geography-atlas-{name}',
         )
-        for name in LIFE_MAPS
+        for name, target in ATLAS_REDIRECTS.items()
     ],
-    path(
-        'atlas/province-culture.html',
-        RedirectView.as_view(pattern_name='geography-province-culture', permanent=True, query_string=True),
-        name='geography-atlas-province-culture',
-    ),
 ]

@@ -29,11 +29,16 @@ HEAD_ASSET = re.compile(r'<(?:link rel="stylesheet" href|script src)="([^"]+)"[^
 MAIN = re.compile(r'<main\b([^>]*)>(.*?)</main>', re.DOTALL)
 LIFE_MAP_PAGES = ('animals', 'plants', 'world-animals', 'world-plants')
 ATLAS_GUIDES = ('china-landscapes', 'voyages')
+ATLAS_3D_ROUTES = {
+    'china-3d.html': 'geography-china-terrain',
+    'world-3d.html': 'geography-globe',
+}
 ATLAS_TOPIC_ROUTES = {
     'life-maps.html': 'geography-life-maps',
     **{f'{name}.html': f'geography-life-maps-{name}' for name in LIFE_MAP_PAGES},
     'province-culture.html': 'geography-province-culture',
     **{f'{name}.html': f'geography-{name}' for name in ATLAS_GUIDES},
+    **ATLAS_3D_ROUTES,
     '../geo/index.html': 'geography-study',
 }
 MEDIA_RENDERERS = {
@@ -96,19 +101,37 @@ def replace_once(source, original, replacement):
     return source.replace(original, replacement, 1)
 
 
-def atlas_topic_links(page, attrs, content):
-    """发布地址拆分后，源页面仍能用相对路径离线互访。"""
-    routes = ATLAS_TOPIC_ROUTES.copy()
-    if page in (*LIFE_MAP_PAGES, 'province-culture', *ATLAS_GUIDES):
-        routes.update({f'{name}.html': f'geography-atlas-{name}' for name in ('china', 'china-3d', 'world', 'world-3d', 'province', 'gallery', 'routes')})
-        attrs += ''' data-atlas-base="{% url 'geography-atlas' %}"'''
-    if page in ('china', 'province'):
-        attrs += ''' data-culture-url="{% url 'geography-province-culture' %}"'''
-    if page == 'world-3d':
-        attrs += ''' data-life-base="{% url 'geography-life-maps' %}"'''
+def rewrite_page_links(content, routes):
     for href, route in routes.items():
         target = "{% url '" + route + "' %}"
         content = re.sub(r'href="' + re.escape(href) + r'(?=["?#])', 'href="' + target, content)
+    return content
+
+
+def atlas_topic_links(page, attrs, content):
+    """发布地址拆分后，源页面仍能用相对路径离线互访。"""
+    routes = ATLAS_TOPIC_ROUTES.copy()
+    if page in (*LIFE_MAP_PAGES, 'province-culture', *ATLAS_GUIDES, 'china-3d', 'world-3d'):
+        routes.update({f'{name}.html': f'geography-atlas-{name}' for name in ('china', 'world', 'province', 'gallery', 'routes')})
+    if page in (*LIFE_MAP_PAGES, 'province-culture', 'china-landscapes', 'china-3d', 'world-3d'):
+        attrs += ''' data-atlas-base="{% url 'geography-atlas' %}"'''
+    if page in ('china', 'province'):
+        attrs += ''' data-culture-url="{% url 'geography-province-culture' %}"'''
+    if page == 'province':
+        attrs += ''' data-terrain-url="{% url 'geography-china-terrain' %}"'''
+    if page == 'voyages':
+        attrs += ''' data-globe-url="{% url 'geography-globe' %}"'''
+    if page == 'world-3d':
+        attrs += ''' data-life-base="{% url 'geography-life-maps' %}"'''
+        routes.update({
+            '../climate/types.html': 'geography-climate-types',
+            '../climate/china.html': 'geography-climate-china',
+            '../climate/weather.html': 'geography-climate-weather',
+            '../earth/plates.html': 'geography-earth-plates',
+            '../map-skills/scale.html': 'geography-map-skills-scale',
+            '../map-skills/direction.html': 'geography-map-skills-direction',
+        })
+    content = rewrite_page_links(content, routes)
     if page in ('life-maps', 'china-landscapes'):
         content = re.sub(r'src="(assets/[^"]+\.jpg)"', r'''src="{% static 'study_topics/geo-map/\1' %}"''', content)
     return attrs, content
@@ -121,6 +144,8 @@ def template(source, topic, page, theme, index_route):
     [(attrs, content)] = MAIN.findall(source)
     if topic == 'geo-map':
         attrs, content = atlas_topic_links(page, attrs, content)
+    if topic in ('climate', 'earth', 'map-skills'):
+        content = rewrite_page_links(content, {'../geo-map/' + href: route for href, route in ATLAS_3D_ROUTES.items()})
     if (topic, page) == ('ocean', 'life'):
         content = content.replace('../geo-map/world-animals.html', "{% url 'geography-life-maps-world-animals' %}")
     if topic == 'geo':

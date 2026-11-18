@@ -38,6 +38,10 @@
 
 动植物地图发布入口为 `/geography/life-maps/`，四张地图保留表中原文件名，页头可以直接切换。省份文化入口为 `/geography/province-culture/`。图谱下对应的五个旧地址继续保留永久跳转和原查询参数、页面锚点。四张动植物地图与地球仪继续使用原浏览器观察记录和物种 ID，同一浏览器在相同站点打开即可读取。源页面仍可在本目录离线直接打开。
 
+## 独立的 3D 中国地形与世界地球仪
+
+学习广场和图谱导航直达 `/geography/china-terrain/` 与 `/geography/globe/`。立体页侧栏提供平面地图和相关专题的入口，按原规则记忆左右位置。旧图谱地址 `/geography/atlas/china-3d.html`、`/geography/atlas/world-3d.html` 永久跳转，保留地点、漫游、图层等查询参数和页面锚点，继续使用原浏览器记录。两个源页面和共用素材仍在本目录，直接打开源文件时继续通过相对路径访问。
+
 ## 中国山河与航海专题
 
 - `china-landscapes.html` 发布为 `/geography/china-landscapes/`。阶梯卡读取 `GM_STEPS`，山河路线使用 `atlas-data.js` 的 `mountains`、`rivers` 站点，不另存地点档案。原主题路线页继续展示全部路线；原站点链接由平面地图识别。实地操作通过既有 `river`、`tour`、`stop`、`landform` 参数和剖面仪锚点打开 3D 地形。两张影像的来源由实景图册维护。
@@ -210,6 +214,8 @@ node --test scripts/test_world_3d.cjs
 `world-lab-data.js`、`world-lab.js` 提供 18 城人口规模圆点、六大板块教学分组、约 2 亿年前的粗略古陆拼图、亚洲冬夏季风、台风转向示意、NASA 多年平均年降水及 4 个星座的示意天球。各层互斥切换，`?lab=population`、`?lab=plates`、`?lab=pangaea`、`?lab=rain`、`?lab=sky` 可直达。星空背景独立开关；天球链接原天文探索。数据口径、原始输入指纹、简化规则与边界见 [主题图层说明](WORLD-LAB-SOURCES.md)。
 
 页面沿用既有专题发布命令，按 `world-3d-pack.json` 生成并保存合并脚本，专题脚本从 27 个降为 3 个；直接打开无需构建或联网。完整纹理只在内容键变化时重画，镜头、船只和光照动画不触发重画。新增源校验 `node content_sources/test/test-world-lab.js`，行为回归 `node --test scripts/test_world_play.cjs`，并接入 `make test-frontend`。
+
+地球仪按所选图层提供专题入口。多年降水连到气候图，冬夏季风连到中国气候分区，台风连到天气现象，板块和古陆连到板块构造。昼夜与四季、经纬度寻宝和测距面板分别连到天文探索的自转与公转，以及地图技能的经纬网和比例尺。
 
 ### 中国地形视觉观察
 

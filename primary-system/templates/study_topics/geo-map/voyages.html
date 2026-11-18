@@ -10,11 +10,11 @@
 <script src="{% static 'study_topics/geo-map/world-3d-geometry.js' %}?v=6099f6105632" defer></script>
 <script src="{% static 'study_topics/geo-map/world-expeditions-data.js' %}?v=c2fe23e967fe" defer></script>
 <script src="{% static 'study_topics/geo-map/world-voyages.js' %}?v=e8e85851ae72" defer></script>
-<script src="{% static 'study_topics/geo-map/voyages-guide.js' %}?v=244eb6867a0a" defer></script>
+<script src="{% static 'study_topics/geo-map/voyages-guide.js' %}?v=1a1b5e2149d9" defer></script>
 {% endblock %}
 {% block study_content %}
 <div class="study-atlas">
-<div class="gm-topic geo-guide voyages-topic" data-history-event="{% url 'history-timeline-event' %}" data-atlas-base="{% url 'geography-atlas' %}">
+<div class="gm-topic geo-guide voyages-topic" data-history-event="{% url 'history-timeline-event' %}" data-globe-url="{% url 'geography-globe' %}">
     <aside class="gm-sidebar" aria-label="航海专题目录">
       <nav class="gm-side-panel gm-side-links" aria-label="专题章节">
         <h2 class="gm-side-title">专题目录</h2>
@@ -22,7 +22,7 @@
         <a href="#zhenghe">郑和下西洋</a>
         <a href="#magellan-elcano">麦哲伦—埃尔卡诺环球航行</a>
         <a href="#voyage-questions">看图想一想</a>
-        <a href="{% url 'geography-atlas-world-3d' %}">返回地球仪 ↗</a>
+        <a href="{% url 'geography-globe' %}">返回地球仪 ↗</a>
       </nav>
     </aside>
 
@@ -66,7 +66,7 @@
         <h2 id="zhenghe-title">郑和下西洋</h2>
         <p>顺着「候风、过海峡、跨大洋」三个线索走。对比刘家港、长乐与满剌加在海岸上的位置，看看船队在哪里等风、在哪里换一片海。</p>
         <div class="geo-guide-actions">
-          <a href="{% url 'geography-atlas-world-3d' %}?voyage=zhenghe&amp;port=liujiagang#gw-viewport">从刘家港开始地球仪漫游 →</a>
+          <a href="{% url 'geography-globe' %}?voyage=zhenghe&amp;port=liujiagang#gw-viewport">从刘家港开始地球仪漫游 →</a>
         </div>
         <div class="geo-voyage-ports" data-voyage-guide="zhenghe"></div>
       </section>
@@ -75,7 +75,7 @@
         <h2 id="magellan-elcano-title">麦哲伦—埃尔卡诺环球航行</h2>
         <p>先找南美洲南端的海峡，再看太平洋两岸相隔多远。到船队返回西班牙的一站，回顾是谁发起航行、是谁完成全程。</p>
         <div class="geo-guide-actions">
-          <a href="{% url 'geography-atlas-world-3d' %}?voyage=magellan-elcano&amp;port=sanlucar#gw-viewport">从西班牙出海口开始漫游 →</a>
+          <a href="{% url 'geography-globe' %}?voyage=magellan-elcano&amp;port=sanlucar#gw-viewport">从西班牙出海口开始漫游 →</a>
         </div>
         <div class="geo-voyage-ports" data-voyage-guide="magellan-elcano"></div>
       </section>

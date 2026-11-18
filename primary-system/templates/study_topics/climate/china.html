@@ -7,7 +7,7 @@
 <script src="{% static 'study_topics/geo-map/china-geo.js' %}?v=d8402343bd1d" defer></script>
 <script src="{% static 'study_topics/climate/china-climate-grid.js' %}?v=b175f7cbc0ab" defer></script>
 <script src="{% static 'study_topics/climate/station-normals.js' %}?v=284dec9ba864" defer></script>
-<script src="{% static 'study_topics/climate/climate-data.js' %}?v=0fa98eafe8fe" defer></script>
+<script src="{% static 'study_topics/climate/climate-data.js' %}?v=d2d78ac5bf04" defer></script>
 <script src="{% static 'study_topics/climate/climate-model.js' %}?v=3c83f6814d86" defer></script>
 <script src="{% static 'study_topics/climate/climate-app.js' %}?v=3b56f1bee869" defer></script>
 {% endblock %}
@@ -44,7 +44,7 @@
         <div id="zone-choices" class="climate-choices" role="group" aria-label="选择中国气候类型实例"></div>
         <article id="zone-result" class="climate-result" aria-live="polite"></article>
       </section>
-      <a class="climate-link" href="../atlas/china-3d.html">去 3D 中国地图看地势差异 →</a>
+      <a class="climate-link" href="{% url 'geography-china-terrain' %}">去 3D 中国地图看地势差异 →</a>
       <div id="climate-knowledge" class="climate-grid" aria-label="概念与证据"></div>
       <details class="climate-panel climate-details"><summary id="climate-question">想一想</summary><p id="climate-answer"></p></details>
       <details class="climate-panel climate-details"><summary>资料与图片出处</summary><ul id="climate-sources"></ul></details>

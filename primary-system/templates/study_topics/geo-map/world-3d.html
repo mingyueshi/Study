@@ -1,38 +1,22 @@
 {% extends "study_topics/page.html" %}
 {% load static %}
 {# 由 scripts/build_study_topics.py 生成。 #}
-{% block title %}3D 世界地图 · 乐学堂{% endblock %}
+{% block title %}世界地球仪 · 乐学堂{% endblock %}
 {% block study_assets %}
 <link rel="stylesheet" href="{% static 'study_topics/geo-map/styles.css' %}?v=5b8e2fb415da">
 <link rel="stylesheet" href="{% static 'study_topics/geo-map/world-3d.css' %}?v=1c011bac76d2">
 <script src="{% static 'study_topics/geo-map/world-geo.js' %}?v=6d109d202301" defer></script>
 <script src="{% static 'study_topics/geo-map/assets/vendor/three-map.js' %}?v=9aacf1bea884" defer></script>
-<script src="{% static 'study_topics/geo-map/world-3d-pack.js' %}?v=06b17682f98d" defer></script>
+<script src="{% static 'study_topics/geo-map/world-3d-pack.js' %}?v=dc203b0585a2" defer></script>
 {% endblock %}
 {% block study_content %}
 <div class="study-atlas">
-<div class="gm-topic world-3d-topic" data-history-event="{% url 'history-timeline-event' %}" data-life-base="{% url 'geography-life-maps' %}">
+<div class="gm-topic world-3d-topic" data-history-event="{% url 'history-timeline-event' %}" data-atlas-base="{% url 'geography-atlas' %}" data-life-base="{% url 'geography-life-maps' %}">
     <aside class="gm-sidebar" aria-label="导航和地球仪工具">
-      <nav class="gm-sysnav" aria-label="地理图谱页面导航">
-        <a class="gm-sysnav-brand" href="{% url 'geography-atlas' %}">🧭 地理图谱</a>
-        <a data-page href="china.html">中国地图</a>
-        <a data-page href="world.html">世界地图</a>
-        <a data-page href="china-3d.html">3D 地形</a>
-        <a data-page href="world-3d.html" aria-current="page">地球仪</a>
-        <a data-page href="places.html">地点索引</a>
-        <details class="gm-atlas-more">
-          <summary>专题与资料</summary>
-          <div class="gm-side-links">
-            <a href="province.html">省域站</a>
-            <a href="routes.html">主题路线</a>
-            <a href="gallery.html">实景图册</a>
-            <a href="{% url 'geography-life-maps' %}">动植物地图</a>
-            <a href="{% url 'geography-province-culture' %}">中国省份文化</a>
-            <a href="{% url 'geography-china-landscapes' %}">中国山河</a>
-            <a href="{% url 'geography-voyages' %}">航海与世界探索</a>
-            <a href="{% url 'geography-study' %}">地理小课堂</a>
-          </div>
-        </details>
+      <nav class="gm-sysnav" aria-label="相关地图与专题">
+        <a class="gm-sysnav-brand" href="{% url 'geography-atlas' %}">← 地理图谱</a>
+        <a data-page href="{% url 'geography-atlas-world' %}#map">平面世界地图</a>
+        <a data-page href="{% url 'geography-voyages' %}">航海与世界探索</a>
       </nav>
       <section class="gm-side-panel gw-picker">
         <label for="gw-search">搜一搜地点</label>
@@ -43,10 +27,10 @@
         <select id="gw-place"><option value="">选择国家、大洋或地标</option></select>
         <p>从列表选择，地球就会转到它面前。</p>
       </section>
-      <section class="gm-side-panel gw-side-note"><h2>转一转，看世界</h2><p>大洲像拼图，大洋把它们相连。试试转到地球背面，再看看南北两极。</p><a href="world.html#map">对照平面世界地图 →</a></section>
+      <section class="gm-side-panel gw-side-note"><h2>转一转，看世界</h2><p>大洲像拼图，大洋把它们相连。试试转到地球背面，再看看南北两极。</p></section>
     </aside>
     <div id="content" class="gm-content" tabindex="-1">
-      <header class="gw-heading"><div><p class="gw-eyebrow">地理图谱 · 把世界捧在手心</p><h1>3D 世界地图</h1><p>用手转动地球，从中国出发，去看看七大洲与四大洋。</p></div><span class="gw-heading-mark" aria-hidden="true">🌏</span></header>
+      <header class="gw-heading"><div><p class="gw-eyebrow">七大洲 · 四大洋</p><h1>世界地球仪</h1><p>用手转动地球，从中国出发，去看看七大洲与四大洋。</p></div><span class="gw-heading-mark" aria-hidden="true">🌏</span></header>
       <section id="map" class="gw-explorer" aria-label="地球仪观察台">
         <div class="gw-toolbar"><div id="gw-views" class="gw-buttons" role="group" aria-label="地球仪视角"></div><div class="gw-buttons"><button type="button" id="gw-out" aria-label="缩小地球仪">−</button><button type="button" id="gw-in" aria-label="放大地球仪">＋</button><button type="button" id="gw-reset">复位</button></div></div>
         <div class="gw-learning-tools">
@@ -78,7 +62,7 @@
           <div class="gw-stamp" aria-hidden="true"><b>地球<br>观察台</b><span>七大洲 · 四大洋</span></div>
           <span class="gw-north" aria-hidden="true">转一转 🌐</span>
           <p class="gw-view-label" id="gw-view-label">从中国出发</p>
-          <p class="gw-fallback" id="gw-fallback" role="status" hidden>当前浏览器无法显示 3D 地球仪。仍可从「想去哪里」选择地点阅读档案，或<a href="world.html#map">打开平面世界地图 →</a></p>
+          <p class="gw-fallback" id="gw-fallback" role="status" hidden>当前浏览器无法显示 3D 地球仪。仍可从「想去哪里」选择地点阅读档案，或<a href="{% url 'geography-atlas-world' %}#map">打开平面世界地图 →</a></p>
         </div>
         <div class="gw-footer"><p id="gw-help">拖动旋转 · 滚轮缩放 · 点陆地读档案<br><small>键盘：方向键转动，＋／− 缩放，Home 复位。</small></p><div class="gw-switches"><label><input type="checkbox" id="gw-grid" checked> 经纬网</label><label><input type="checkbox" id="gw-names" checked> 名称</label><label><input type="checkbox" id="gw-features"> 世界地标</label></div></div>
         <div class="gw-visual-tools">
@@ -89,8 +73,14 @@
         </div>
         <section class="gw-lab" aria-labelledby="gw-lab-heading">
           <h2 id="gw-lab-heading">给地球换一副观察眼镜</h2>
-          <div class="gw-lab-controls"><label for="gw-lab-layer">主题图层 <select id="gw-lab-layer"><option value="none">普通地球</option><option value="population">看看哪里人多</option><option value="plates">六大板块分区</option><option value="pangaea">约 2 亿年前的古陆拼图</option><option value="summer">亚洲夏季风</option><option value="winter">亚洲冬季风</option><option value="typhoon">台风转向示意</option><option value="rain">多年平均年降水</option><option value="sky">天球与星座</option></select></label><div class="gw-buttons"><button type="button" id="gw-lab-ancient">对照现在／约 2 亿年前</button><a href="{% url 'astronomy-explore' %}?view=au1">去天文探索接着看 →</a></div></div>
+          <div class="gw-lab-controls"><label for="gw-lab-layer">主题图层 <select id="gw-lab-layer"><option value="none">普通地球</option><option value="population">看看哪里人多</option><option value="plates">六大板块分区</option><option value="pangaea">约 2 亿年前的古陆拼图</option><option value="summer">亚洲夏季风</option><option value="winter">亚洲冬季风</option><option value="typhoon">台风转向示意</option><option value="rain">多年平均年降水</option><option value="sky">天球与星座</option></select></label><div class="gw-buttons"><button type="button" id="gw-lab-ancient">对照现在／约 2 亿年前</button></div></div>
           <p id="gw-lab-note" class="gw-note"></p><p id="gw-lab-detail" role="status"></p>
+          <a class="gm-card-link" data-lab-modes="rain" href="{% url 'geography-climate-types' %}#charts-heading" hidden>气象与气候 · 比较各地的月降水 →</a>
+          <a class="gm-card-link" data-lab-modes="summer winter" href="{% url 'geography-climate-china' %}#zone-choices" hidden>气象与气候 · 对照中国的季风气候 →</a>
+          <a class="gm-card-link" data-lab-modes="typhoon" href="{% url 'geography-climate-weather' %}#climate-knowledge" hidden>气象与气候 · 看云图怎样追踪台风 →</a>
+          <a class="gm-card-link" data-lab-modes="plates" href="{% url 'geography-earth-plates' %}#plate-lab" hidden>地球内部 · 看板块边界怎样运动 →</a>
+          <a class="gm-card-link" data-lab-modes="pangaea" href="{% url 'geography-earth-plates' %}#earth-explain" hidden>地球内部 · 找大陆移动的证据 →</a>
+          <a class="gm-card-link" data-lab-modes="sky" href="{% url 'astronomy-explore' %}?view=au1" hidden>天文探索 · 认识天球与星座 →</a>
           <div id="gw-lab-cities" class="gw-buttons" role="group" aria-label="定位人口样本城市" hidden></div>
           <div id="gw-lab-plates" class="gw-buttons" role="group" aria-label="认识板块" hidden></div>
           <p id="gw-lab-rain-unit" hidden>颜色表示毫米／年：</p><div id="gw-lab-rain-legend" class="gw-rain-legend" hidden></div>
@@ -103,6 +93,7 @@
         <section id="gw-tool-panel" class="gw-tool-panel" aria-label="动手探索工具" hidden>
           <div id="gw-measure-panel" hidden>
             <h2>沿地球走多远？</h2>
+            <a class="gm-card-link" href="{% url 'geography-map-skills-scale' %}#measure-title">地图技能 · 用比例尺练习测距 →</a>
             <div class="gw-buttons" id="gw-measure-kinds" role="group" aria-label="测距方式"><button type="button" data-measure-kind="pair" aria-pressed="true">两点测距</button><button type="button" data-measure-kind="route" aria-pressed="false">多点行程</button></div>
             <div id="gw-itinerary" hidden><h3>连点城市，算一程又一程</h3><div id="gw-itinerary-cities" class="gw-buttons" role="group" aria-label="加入一座城市"></div><ol id="gw-itinerary-stops"></ol><button type="button" id="gw-itinerary-undo">撤销最后一站</button><p id="gw-itinerary-note" class="gw-note"></p></div>
             <section id="gw-my-trips" hidden aria-labelledby="gw-my-trips-heading"><h3 id="gw-my-trips-heading">我的环球旅行</h3><label for="gw-trip-name">给这趟旅行起名字 <input id="gw-trip-name" maxlength="30" placeholder="例如：从北京出发的一圈"></label><div class="gw-buttons"><button type="button" id="gw-trip-save">保存当前行程</button><button type="button" id="gw-trip-replay">回放当前行程</button></div><p id="gw-trip-status" role="status"></p><ul id="gw-trip-list"></ul><p class="gw-note">最多保存 8 趟，每趟 2—20 站。保存在当前浏览器；连线是球面较短弧，可能穿过陆地，不是可直接照走的交通路线。</p></section>
@@ -114,6 +105,7 @@
           </div>
           <div id="gw-hunt-panel" hidden>
             <div class="gw-quiz-heading"><h2>经纬度寻宝</h2><span id="gw-hunt-progress" role="status"></span></div>
+            <a class="gm-card-link" href="{% url 'geography-map-skills-direction' %}#skills-knowledge">地图技能 · 读经纬网与方向 →</a>
             <label for="gw-hunt-mission">选择任务 <select id="gw-hunt-mission"></select></label>
             <h3 id="gw-hunt-target"></h3><p id="gw-hunt-hint"></p><p id="gw-hunt-feedback" role="status"></p>
             <div class="gw-buttons"><button type="button" id="gw-hunt-retry">重新找这一处</button><button type="button" id="gw-hunt-reveal">看看答案位置</button><button type="button" id="gw-hunt-next">下一处</button></div>
@@ -121,6 +113,7 @@
           </div>
           <div id="gw-daylight-panel" hidden>
             <h2>同一个地球，不一样的白天</h2><p id="gw-sun-intro"></p>
+            <a class="gm-card-link" href="{% url 'astronomy-explore' %}?view=au4#lesson-au4-5">天文探索 · 自转、公转与四季星空 →</a>
             <div id="gw-sun-seasons" class="gw-buttons" role="group" aria-label="选择观察时节"></div>
             <p id="gw-sun-season-text"></p>
             <label class="gw-sun-time-label" for="gw-sun-time">演示时刻 <output id="gw-sun-time-value" for="gw-sun-time" aria-live="off"></output></label>
@@ -198,7 +191,7 @@
       <section class="gw-observe" aria-labelledby="gw-observe-title"><h2 id="gw-observe-title">带着问题转一转</h2><div id="gw-observations"></div></section>
       <p class="gw-note" id="gw-note"></p>
       <details class="gw-sources"><summary>资料从哪里来？</summary><div id="gw-sources"></div></details>
-      <noscript><p class="gm-notice">请启用 JavaScript 操作地球仪，也可以<a href="world.html">打开平面世界地图</a>。</p></noscript>
+      <noscript><p class="gm-notice">请启用 JavaScript 操作地球仪，也可以<a href="{% url 'geography-atlas-world' %}">打开平面世界地图</a>。</p></noscript>
     </div>
   </div>
 

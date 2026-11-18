@@ -13,6 +13,8 @@
   const regions = new Map(window.GM_REGIONS.map(r => [r.id, r]));
   const byId = new Map(provinces.map(p => [p.id, p]));
   const esc = S.esc;
+  const atlasBase = root.dataset.atlasBase || '';
+  const flatMapHref = id => `${atlasBase}china.html?place=${encodeURIComponent(id)}#map`;
   const picker = $('gm3-province');
   const canvas = $('gm3-canvas');
   const viewport = $('gm3-viewport');
@@ -99,8 +101,8 @@
       `<dl><dt>简称</dt><dd>${esc(p.short)}</dd><dt>类型</dt><dd>${esc(p.type)}</dd>` +
       (p.capital ? `<dt>${p.type === '自治区' ? '首府' : '省会'}</dt><dd>${esc(p.capital)}</dd>` : '') +
       `</dl><p><strong>${esc(p.where)}</strong><br>${esc(p.note)}</p>` +
-      `<a href="province.html?adcode=${p.adcode}">进省域站细看 →</a><a href="china.html?place=${p.id}#map">在平面地图上看 ↗</a>`;
-    $('gm3-flat-link').href = `china.html?place=${p.id}#map`;
+      `<a href="${esc(atlasBase)}province.html?adcode=${p.adcode}">进省域站细看 →</a><a href="${esc(flatMapHref(p.id))}">在平面地图上看 ↗</a>`;
+    $('gm3-flat-link').href = flatMapHref(p.id);
     $('gm3-selection').textContent = `${p.name} · 简称${p.short}`;
     root.dataset.selected = id;
     // 深链接可能先于公共侧栏初始化；等待接入后再展开档案。
@@ -206,7 +208,7 @@
   function showFeature(id) {
     const feature = features.get(id);
     featureProfile.hidden = false;
-    featureProfile.innerHTML = `<span class="gm3-kicker">${esc(data.featureGroups.find(group => group.kind === feature.kind).label)}</span><h2>${esc(feature.name)}</h2><p><strong>${esc(feature.where)}</strong><br>${esc(feature.note)}</p><a href="china.html?place=${id}#map">在平面地图上细看 ↗</a>`;
+    featureProfile.innerHTML = `<span class="gm3-kicker">${esc(data.featureGroups.find(group => group.kind === feature.kind).label)}</span><h2>${esc(feature.name)}</h2><p><strong>${esc(feature.where)}</strong><br>${esc(feature.note)}</p><a href="${esc(flatMapHref(id))}">在平面地图上细看 ↗</a>`;
     const coverage = window.GM_CHINA_RIVERS?.rivers[id]?.coverage;
     if (coverage) featureProfile.insertAdjacentHTML('beforeend', `<p class="gm3-coverage">本图河道：${esc(coverage)}</p>`);
     const flow = data.rivers.find(item => item.feature === id)?.flow;
@@ -247,7 +249,7 @@
     updateProvinces();
     const feature = features.get(id), river = rivers.get(id);
     $('gm3-selection').textContent = `${feature.name} · 真实河道`;
-    $('gm3-flat-link').href = `china.html?place=${id}#map`;
+    $('gm3-flat-link').href = flatMapHref(id);
     if (river && controls && !failed) {
       let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
       for (const sample of river.samples) {
@@ -677,7 +679,7 @@
     const storyKey = `${tourRoute.id}:${stop.id}`;
     if (tourStory !== storyKey) {
       tourStory = storyKey;
-      const links = stop.related.map(id => `<a href="china.html?place=${id}#map">${esc(features.get(id).name)}档案 ↗</a>`);
+      const links = stop.related.map(id => `<a href="${esc(flatMapHref(id))}">${esc(features.get(id).name)}档案 ↗</a>`);
       const sources = stop.sources.map(id => allSources.find(source => source.id === id));
       $('gm3-tour-story').innerHTML = `<p>${esc(stop.description)}</p><p><strong>看一看：</strong>${esc(stop.observe)}</p><div class="gm3-tour-links">${links.join('')}${sources.map(source => `<a href="${esc(source.url)}" target="_blank" rel="noopener">${esc(source.label)}（需联网）↗</a>`).join('')}</div>`;
     }

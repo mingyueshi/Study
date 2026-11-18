@@ -21,8 +21,8 @@
         <a class="gm-sysnav-brand" href="{% url 'geography-atlas' %}" aria-current="page">🧭 地理图谱</a>
         <a data-page href="china.html">中国地图</a>
         <a data-page href="world.html">世界地图</a>
-        <a data-page href="china-3d.html">3D 地形</a>
-        <a data-page href="world-3d.html">地球仪</a>
+        <a data-page href="{% url 'geography-china-terrain' %}">3D 地形</a>
+        <a data-page href="{% url 'geography-globe' %}">地球仪</a>
         <a data-page href="places.html">地点索引</a>
         <details class="gm-atlas-more">
           <summary>专题与资料</summary>
@@ -64,12 +64,12 @@
       <section class="gm-pages" aria-labelledby="pages-title">
         <h2 id="pages-title">地图与工具</h2>
         <div class="gm-page-cards">
-          <a class="gm-page-card" href="china-3d.html" style="--page-accent:#216b76">
+          <a class="gm-page-card" href="{% url 'geography-china-terrain' %}" style="--page-accent:#216b76">
             <span class="gm-page-icon" aria-hidden="true">🧩</span>
             <div><h3>3D 地形</h3><p>沿着长江、黄河看真实地形，认山脉、高原和平原，点一点读出采样海拔。</p></div>
             <span class="gm-page-go" aria-hidden="true">立体看中国 →</span>
           </a>
-          <a class="gm-page-card" href="world-3d.html" style="--page-accent:#17677c">
+          <a class="gm-page-card" href="{% url 'geography-globe' %}" style="--page-accent:#17677c">
             <span class="gm-page-icon" aria-hidden="true">🌐</span>
             <div><h3>地球仪</h3><p>转动地球认识七大洲与四大洋，动手测距离、找坐标，再观察昼夜与四季。</p></div>
             <span class="gm-page-go" aria-hidden="true">转动地球 →</span>

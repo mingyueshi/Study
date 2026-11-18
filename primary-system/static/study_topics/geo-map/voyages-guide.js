@@ -7,7 +7,7 @@
   const {m, W, H, paths, ringPath} = worldMap();
   const {lonLat} = window.GMWorld3DGeometry;
   const map = document.getElementById('voyage-map');
-  const atlasBase = root.dataset.atlasBase || '';
+  const globeUrl = root.dataset.globeUrl || 'world-3d.html';
   const historyBase = root.dataset.historyEvent;
 
   function drawRoute(voyage) {
@@ -37,7 +37,7 @@
       .map(source => `<a href="${esc(source.url)}" target="_blank" rel="noopener">${esc(source.name)}（需联网）↗</a>`);
     const ports = voyage.stops.map((stop, index) => {
       const query = new URLSearchParams({voyage: voyage.id, port: stop.id});
-      const href = atlasBase + 'world-3d.html?' + query + '#gw-viewport';
+      const href = globeUrl + '?' + query + '#gw-viewport';
       return `<li>
         <h3>${index + 1} · ${esc(stop.name)}</h3>
         <p>${esc(stop.text)}</p>

@@ -20,8 +20,8 @@
         <a class="gm-sysnav-brand" href="{% url 'geography-atlas' %}">🧭 地理图谱</a>
         <a data-page href="china.html">中国地图</a>
         <a data-page href="world.html">世界地图</a>
-        <a data-page href="china-3d.html">3D 地形</a>
-        <a data-page href="world-3d.html">地球仪</a>
+        <a data-page href="{% url 'geography-china-terrain' %}">3D 地形</a>
+        <a data-page href="{% url 'geography-globe' %}">地球仪</a>
         <a data-page href="places.html">地点索引</a>
         <details class="gm-atlas-more" open>
           <summary>专题与资料</summary>

@@ -1,7 +1,7 @@
 {% extends "study_topics/page.html" %}
 {% load static %}
 {# 由 scripts/build_study_topics.py 生成。 #}
-{% block title %}3D 中国地图 · 地理图谱 · 乐学堂{% endblock %}
+{% block title %}3D 中国地形 · 乐学堂{% endblock %}
 {% block study_assets %}
 <script src="{% static 'speech.js' %}" defer></script>
 <link rel="stylesheet" href="{% static 'study_topics/geo-map/styles.css' %}?v=5b8e2fb415da">
@@ -34,32 +34,16 @@
 <script src="{% static 'study_topics/geo-map/china-adventures.js' %}?v=8cc1b1c44e3d" defer></script>
 <script src="{% static 'study_topics/geo-map/china-terrain-play.js' %}?v=f6cb5888b707" defer></script>
 <script src="{% static 'study_topics/geo-map/china-terrain-visual.js' %}?v=4c149f583944" defer></script>
-<script src="{% static 'study_topics/geo-map/china-3d.js' %}?v=e2eeea047d83" defer></script>
+<script src="{% static 'study_topics/geo-map/china-3d.js' %}?v=a3e92cb84667" defer></script>
 {% endblock %}
 {% block study_content %}
 <div class="study-atlas">
-<div class="gm-topic china-3d-topic">
+<div class="gm-topic china-3d-topic" data-atlas-base="{% url 'geography-atlas' %}">
     <aside class="gm-sidebar" aria-label="导航和省份档案">
-      <nav class="gm-sysnav" aria-label="地理图谱页面导航">
-        <a class="gm-sysnav-brand" href="{% url 'geography-atlas' %}">🧭 地理图谱</a>
-        <a data-page href="china.html">中国地图</a>
-        <a data-page href="world.html">世界地图</a>
-        <a data-page href="china-3d.html" aria-current="page">3D 地形</a>
-        <a data-page href="world-3d.html">地球仪</a>
-        <a data-page href="places.html">地点索引</a>
-        <details class="gm-atlas-more">
-          <summary>专题与资料</summary>
-          <div class="gm-side-links">
-            <a href="province.html">省域站</a>
-            <a href="routes.html">主题路线</a>
-            <a href="gallery.html">实景图册</a>
-            <a href="{% url 'geography-life-maps' %}">动植物地图</a>
-            <a href="{% url 'geography-province-culture' %}">中国省份文化</a>
-            <a href="{% url 'geography-china-landscapes' %}">中国山河</a>
-            <a href="{% url 'geography-voyages' %}">航海与世界探索</a>
-            <a href="{% url 'geography-study' %}">地理小课堂</a>
-          </div>
-        </details>
+      <nav class="gm-sysnav" aria-label="相关地图与专题">
+        <a class="gm-sysnav-brand" href="{% url 'geography-atlas' %}">← 地理图谱</a>
+        <a data-page href="{% url 'geography-atlas-china' %}#map">平面中国地图</a>
+        <a data-page href="{% url 'geography-china-landscapes' %}">中国山河</a>
       </nav>
         <details class="gm3-visual-controls" open>
           <summary id="gm3-visual-title">地形观察工具</summary>
@@ -96,13 +80,13 @@
         <span class="gm3-kicker">我的地图发现</span>
         <h2>先找找你的家乡</h2>
         <p>点地图、选名字，或试试地图下方的观察任务。</p>
-        <a href="province.html">浏览全部省域站 →</a>
+        <a href="{% url 'geography-atlas-province' %}">浏览全部省域站 →</a>
       </section>
     </aside>
     <div id="content" class="gm-content" tabindex="-1">
       <header class="gm3-heading">
-        <div><p class="gm3-kicker">地理图谱 / 走进真实地形</p><h1>3D 中国地图</h1><p id="gm3-intro"></p></div>
-        <a class="gm3-flat-link" id="gm3-flat-link" href="china.html#map">打开平面地图 ↗</a>
+        <div><p class="gm3-kicker">从高程认识山河</p><h1>3D 中国地形</h1><p id="gm3-intro"></p></div>
+        <a class="gm3-flat-link" id="gm3-flat-link" href="{% url 'geography-atlas-china' %}#map">打开平面地图 ↗</a>
       </header>
       <section class="gm3-explorer" id="map" aria-label="立体地图探索">
         <div class="gm3-terrain-tools">
@@ -187,7 +171,7 @@
           <div class="gm3-stamp" aria-hidden="true"><b>山 · 河 · 大地</b><span>真实高程采样<br>高度放大 <span id="gm3-stamp-height">50×</span></span></div>
           <svg class="gm3-compass" viewBox="0 0 80 85" role="img" aria-label="随地图转动的指北针"><g id="gm3-north" transform="translate(40 43)"><path d="M0 -24L-9 12L0 6L9 12Z"/><text x="0" y="-30" text-anchor="middle">北</text></g></svg>
           <svg class="gm3-inset" id="gm3-inset" viewBox="1010 540 150 190" role="img" aria-label="南海诸岛与十段线示意，始终朝北"></svg>
-          <p class="gm3-fallback" id="gm3-fallback" role="status" hidden>当前浏览器无法显示 3D 地图。仍可从省份列表或山河目录阅读档案，或<a href="china.html#map">打开平面地图 →</a></p>
+          <p class="gm3-fallback" id="gm3-fallback" role="status" hidden>当前浏览器无法显示 3D 地图。仍可从省份列表或山河目录阅读档案，或<a href="{% url 'geography-atlas-china' %}#map">打开平面地图 →</a></p>
         </div>
         <section class="gm3-tour-panel" id="gm3-tour-panel" aria-label="沿河漫游" hidden>
           <div class="gm3-tour-heading"><div><span class="gm3-kicker" id="gm3-tour-phase"></span><h2 id="gm3-tour-title"></h2></div><button type="button" id="gm3-tour-close">退出漫游</button></div>
@@ -235,7 +219,7 @@
       </section>
       <section class="gm3-observe" aria-labelledby="gm3-observe-title"><h2 id="gm3-observe-title">带着问题转一转</h2><div id="gm3-observations"></div></section>
       <p class="gm3-model-note" id="gm3-model-note"></p>
-      <noscript><p class="gm-notice">请启用 JavaScript 操作 3D 地图。也可以前往<a href="province.html">省域站</a>。</p></noscript>
+      <noscript><p class="gm-notice">请启用 JavaScript 操作 3D 地图。也可以前往<a href="{% url 'geography-atlas-province' %}">省域站</a>。</p></noscript>
     </div>
   </div>
 

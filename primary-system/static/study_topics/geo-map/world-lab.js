@@ -42,6 +42,7 @@ window.GMWorldLab = (() => {
       "sky",
     ];
     let mode = "none";
+    const relatedLinks = root.querySelectorAll("[data-lab-modes]");
     const markers = root.querySelector("#gw-population-markers"),
       stars = root.querySelector("#gw-stars");
     const dots = D.population.cities.map((city) => {
@@ -158,6 +159,8 @@ window.GMWorldLab = (() => {
       mode = next;
       root.dataset.lab = mode;
       $("layer").value = mode;
+      for (const link of relatedLinks)
+        link.hidden = !link.dataset.labModes.split(" ").includes(mode);
       $("cities").hidden = mode !== "population";
       $("plates").hidden = mode !== "plates";
       $("rain-legend").hidden = mode !== "rain";

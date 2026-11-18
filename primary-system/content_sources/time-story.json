@@ -39,7 +39,7 @@
       ],
       "challenge": "北京星期一 00:15 发出消息，UTC 的日历上还是星期一吗？",
       "answer": "不是。减去 8 小时，得到前一天，也就是星期日 16:15。查询真实城市时，还要看日期和当地是否实行夏令时。",
-      "links": [{"label": "到 3D 地球仪选「昼夜与四季」比较城市时间", "route": "geography-atlas-world-3d"}],
+      "links": [{"label": "到 3D 地球仪选「昼夜与四季」比较城市时间", "route": "geography-globe"}],
       "sources": [{"label": "香港天文台 · 世界各地标准时间", "url": "https://www.hko.gov.hk/sc/gts/time/time_text.htm"}, {"label": "IANA · 时区和夏令时资料", "url": "https://www.iana.org/time-zones"}]
     },
     {

@@ -33,6 +33,8 @@
 - 光路与水循环：科学实验室的光路（`/science/lab/#lesson-su4-2`）可调 0～75° 入射角，切换平面镜反射和空气入水折射，逐段观察并显示角度；同步修正垂直入射的课文说明。地理小课堂（`/geography/study/#lesson-gu5-1`）点击「动画：水循环过程」进入原有「水滴旅行」，按蒸发、凝结、降水、径流四步播放与回看，一轮结束自动停止。科学 `su7-3` 仍保留节水测量活动和地理关联链接。两处共用 `sci-process-data.js`、`sci-process.js` 与 `sci-process.css`，遵守统一动效偏好；脚本或数据失效时保留静态图或原有分步观察。
 - 动植物地图：`/geography/life-maps/` 集中打开中国动物、中国植物、世界动物和世界植物四张地图，沿用物种照片、分布地点、筛选、观察记录和练习。四张地图与省份文化的旧图谱地址会跳转到独立专题，并保留物种、省份和筛选参数。地理图谱侧栏保留中国地图、世界地图、3D 地形、地球仪和地点索引，展开「专题与资料」可进入省域站、主题路线、实景图册和相关专题。
 - 中国山河：`/geography/china-landscapes/` 把三级阶梯、山脉与高原、河流与流域、湖泊与河口串成一条学习线。复用「走上世界屋脊」「顺着长江去看海」两条路线和本地影像，可直接打开 3D 地形剖面、宜宾汇流和长江入海站。
+- 3D 中国地形与世界地球仪在学习广场设独立入口，分别位于 `/geography/china-terrain/` 与 `/geography/globe/`。图谱保留直达链接，旧 3D 地址保留参数和锚点跳转，原玩法记录继续沿用。
+- 地球仪按当前图层和玩法提供跨专题入口。降水、季风、台风对应气象与气候，板块和古陆对应地球内部，昼夜四季对应天文探索，经纬度和测距对应地图技能。
 - 航海与世界探索：`/geography/voyages/` 在同一张平面图上对照郑和下西洋与麦哲伦—埃尔卡诺环球航行。9 站与 10 站沿用地球仪的数据，支持从港口跳到对应的漫游站，关联原历史时间轴档案。
 - 中国省份文化：`/geography/province-culture/` 覆盖 34 个省级行政区，复用原地图边界、简称和省会档案，补充常用别称、68 项特产、34 项民俗与传统技艺、68 处代表景观以及每省一个观察问题。点地图或省名按钮同步高亮与档案，可按名称、简称、城市、物产文化搜索，按行政区类型筛选；支持 `?adcode=810000` 深链接和浏览器前后退。省、自治区、直辖市与特别行政区分开标注省会、首府或行政区中心，资料附 62 项来源索引与流传范围说明。学习广场、地图首页、中国地图和省域站均可进入；不写学习记录。
 - 天文总入口：`/astronomy/` 采用简洁专题目录，9 个主题下可展开 46 个探索问题，搜索直接定位问题；宇宙漫游、天文实验室、数据速查和常见误解作为独立入口。首页按需进入具体内容，保留知识点 ID 和本机掌握记录。旧 `/astronomy/study/` 自动跳转并保留参数与锚点；星表入口调整为 `/astronomy/stars/`，原天体详情地址及带筛选的星表书签继续可用。
@@ -137,7 +139,7 @@ PRIMARY_DEBUG=1 .venv/bin/python manage.py runserver 127.0.0.1:8012
 - [查字查词](http://127.0.0.1:8012/dictionary/)
 - [资料探索](http://127.0.0.1:8012/references/)
 - [历史双轨时间轴](http://127.0.0.1:8012/history/timeline/timeline.html) · [历史人物馆](http://127.0.0.1:8012/history/timeline/people.html) · [世界文明巡礼](http://127.0.0.1:8012/history/timeline/civilizations.html) · [中国古代科技](http://127.0.0.1:8012/history/timeline/ancient-science.html) · [丝绸之路](http://127.0.0.1:8012/history/timeline/silk-road.html) · [历史疆域地图](http://127.0.0.1:8012/history/timeline/territory.html#territory-maps) · [朝代更替](http://127.0.0.1:8012/history/timeline/dynasties.html#dyn-title) · [历史精讲](http://127.0.0.1:8012/history/)
-- [地理图谱](http://127.0.0.1:8012/geography/atlas/china.html) · [3D 中国地图](http://127.0.0.1:8012/geography/atlas/china-3d.html) · [3D 世界地图](http://127.0.0.1:8012/geography/atlas/world-3d.html) · [动植物地图](http://127.0.0.1:8012/geography/life-maps/) · [地理小课堂](http://127.0.0.1:8012/geography/study/)
+- [地理图谱](http://127.0.0.1:8012/geography/atlas/china.html) · [3D 中国地形](http://127.0.0.1:8012/geography/china-terrain/) · [世界地球仪](http://127.0.0.1:8012/geography/globe/) · [动植物地图](http://127.0.0.1:8012/geography/life-maps/) · [地理小课堂](http://127.0.0.1:8012/geography/study/)
 - [中国山河](http://127.0.0.1:8012/geography/china-landscapes/) · [航海与世界探索](http://127.0.0.1:8012/geography/voyages/)
 - [地图技能](http://127.0.0.1:8012/geography/map-skills/) · [中国省份文化](http://127.0.0.1:8012/geography/province-culture/) · [地球内部](http://127.0.0.1:8012/geography/earth/) · [海洋世界](http://127.0.0.1:8012/geography/ocean/) · [气象与气候](http://127.0.0.1:8012/geography/climate/)
 - [天文探索](http://127.0.0.1:8012/astronomy/) · [文学常识](http://127.0.0.1:8012/literature/) · [科学实验室](http://127.0.0.1:8012/science/lab/) · [汉字演变馆](http://127.0.0.1:8012/hanzi-evolution/)
