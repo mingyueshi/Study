@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>航海与世界探索 · 乐学堂</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="geo-guide.css">
+  <script src="world-geo.js" defer></script>
+  <script src="shared.js" defer></script>
+  <script src="world-3d-geometry.js" defer></script>
+  <script src="world-expeditions-data.js" defer></script>
+  <script src="world-voyages.js" defer></script>
+  <script src="voyages-guide.js" defer></script>
+</head>
+<body>
+  <main id="main" class="gm-topic geo-guide voyages-topic" data-history-event="../history-timeline/event.html" tabindex="-1">
+    <aside class="gm-sidebar" aria-label="航海专题目录">
+      <nav class="gm-side-panel gm-side-links" aria-label="专题章节">
+        <h2 class="gm-side-title">专题目录</h2>
+        <a href="#compare">两条航线对照</a>
+        <a href="#zhenghe">郑和下西洋</a>
+        <a href="#magellan-elcano">麦哲伦—埃尔卡诺环球航行</a>
+        <a href="#voyage-questions">看图想一想</a>
+        <a href="world-3d.html">返回地球仪 ↗</a>
+      </nav>
+    </aside>
+
+    <div class="gm-content" id="content" tabindex="-1">
+      <header class="gm-hero geo-guide-hero">
+        <h1 class="gm-title">航海与世界探索</h1>
+        <p>把两条历史航线放在同一张世界地图上。沿海岸认港口，过海峡进大洋，再到地球仪上逐站观察。</p>
+        <div class="geo-guide-actions">
+          <a href="#zhenghe">郑和下西洋 ↓</a>
+          <a href="#magellan-elcano">环球航行 ↓</a>
+        </div>
+      </header>
+
+      <section class="geo-guide-panel" id="compare" aria-labelledby="compare-title">
+        <h2 id="compare-title">两条航线对照</h2>
+        <figure>
+          <svg class="geo-voyage-map" id="voyage-map" viewBox="0 0 1280 569" role="img" aria-label="世界地图上的两条示意航线。郑和从中国东部驶向印度洋和东非。麦哲伦和埃尔卡诺的船队从西班牙绕行地球。"></svg>
+          <figcaption>棕色实线是郑和路线，蓝色虚线是环球航线，圆点标出代表站。示意线用于对照大洲、大洋与站点之间的位置。</figcaption>
+        </figure>
+        <div class="geo-guide-grid geo-voyage-compare">
+          <article class="geo-voyage-zhenghe">
+            <h3><a href="#zhenghe">郑和下西洋</a></h3>
+            <dl>
+              <dt>时代</dt><dd>1405—1433 年，明朝七次远航。</dd>
+              <dt>航向</dt><dd>从中国沿海进入南海，向西穿过马六甲一带，横过印度洋抵达东非。</dd>
+              <dt>观察</dt><dd>对照长乐候风与满剌加，找出季风和海峡怎样影响航行。</dd>
+            </dl>
+          </article>
+          <article class="geo-voyage-magellan-elcano">
+            <h3><a href="#magellan-elcano">麦哲伦—埃尔卡诺环球航行</a></h3>
+            <dl>
+              <dt>时代</dt><dd>1519—1522 年，从西班牙出发，寻找通往香料群岛的西行航路。</dd>
+              <dt>航向</dt><dd>向西越过大西洋，从南美洲南端的海峡进入太平洋。埃尔卡诺等人继续经印度洋、绕非洲南端回到西班牙。</dd>
+              <dt>观察</dt><dd>找麦哲伦海峡与返回港，区分驶向目的地和绕行一周的路线。</dd>
+            </dl>
+          </article>
+        </div>
+      </section>
+
+      <section class="geo-guide-panel" id="zhenghe" aria-labelledby="zhenghe-title">
+        <h2 id="zhenghe-title">郑和下西洋</h2>
+        <p>顺着「候风、过海峡、跨大洋」三个线索走。对比刘家港、长乐与满剌加在海岸上的位置，看看船队在哪里等风、在哪里换一片海。</p>
+        <div class="geo-guide-actions">
+          <a href="world-3d.html?voyage=zhenghe&amp;port=liujiagang#gw-viewport">从刘家港开始地球仪漫游 →</a>
+        </div>
+        <div class="geo-voyage-ports" data-voyage-guide="zhenghe"></div>
+      </section>
+
+      <section class="geo-guide-panel" id="magellan-elcano" aria-labelledby="magellan-elcano-title">
+        <h2 id="magellan-elcano-title">麦哲伦—埃尔卡诺环球航行</h2>
+        <p>先找南美洲南端的海峡，再看太平洋两岸相隔多远。到船队返回西班牙的一站，回顾是谁发起航行、是谁完成全程。</p>
+        <div class="geo-guide-actions">
+          <a href="world-3d.html?voyage=magellan-elcano&amp;port=sanlucar#gw-viewport">从西班牙出海口开始漫游 →</a>
+        </div>
+        <div class="geo-voyage-ports" data-voyage-guide="magellan-elcano"></div>
+      </section>
+
+      <section class="geo-guide-panel" id="voyage-questions" aria-labelledby="voyage-questions-title">
+        <h2 id="voyage-questions-title">看图想一想</h2>
+        <details class="geo-guide-details">
+          <summary>从南海进印度洋、从大西洋进太平洋，两支船队各经过什么海峡？</summary>
+          <p>郑和路线经过马六甲海峡一带，环球航行的船队从麦哲伦海峡进入太平洋。找找两处狭窄水道各夹在哪些陆地之间。</p>
+        </details>
+        <details class="geo-guide-details">
+          <summary>为什么环球航线在平面图上从一边出去，又从另一边出现？</summary>
+          <p>平面世界地图在经度约 180° 处展开，图的两边在球面上相接。打开地球仪，从麦哲伦海峡向关岛逐站看。</p>
+        </details>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

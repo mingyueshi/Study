@@ -1,0 +1,105 @@
+{% extends "study_topics/page.html" %}
+{% load static %}
+{# 由 scripts/build_study_topics.py 生成。 #}
+{% block title %}中国山河 · 乐学堂{% endblock %}
+{% block study_assets %}
+<link rel="stylesheet" href="{% static 'study_topics/geo-map/styles.css' %}?v=5b8e2fb415da">
+<link rel="stylesheet" href="{% static 'study_topics/geo-map/geo-guide.css' %}?v=c056f3dc26d6">
+<script src="{% static 'study_topics/geo-map/content.js' %}?v=e86ddc18e05f" defer></script>
+<script src="{% static 'study_topics/geo-map/map-data.js' %}?v=27ebda785125" defer></script>
+<script src="{% static 'study_topics/geo-map/world-data.js' %}?v=9b7765ca7392" defer></script>
+<script src="{% static 'study_topics/geo-map/atlas-data.js' %}?v=041dec261237" defer></script>
+<script src="{% static 'study_topics/geo-map/atlas.js' %}?v=60e5f6a93f55" defer></script>
+<script src="{% static 'study_topics/geo-map/shared.js' %}?v=d2bebbfd2a0b" defer></script>
+<script src="{% static 'study_topics/geo-map/china-landscapes.js' %}?v=be2545db1d30" defer></script>
+<script src="{% static 'study_topics/geo-map/routes-app.js' %}?v=f6c29c2d8a8e" defer></script>
+{% endblock %}
+{% block study_content %}
+<div class="study-atlas">
+<div class="gm-topic geo-guide china-landscapes-topic" data-atlas-base="{% url 'geography-atlas' %}">
+    <aside class="gm-sidebar" aria-label="中国山河目录">
+      <nav class="gm-side-panel gm-side-links" aria-label="专题章节">
+        <h2 class="gm-side-title">专题目录</h2>
+        <a href="#terrain-steps">地势三级阶梯</a>
+        <a href="#mountains-plateaus">山脉、高原和山峰</a>
+        <a href="#river-basins">河流和流域</a>
+        <a href="#lakes-estuaries">湖泊和河口</a>
+        <a href="#field-trails">两条地图路线</a>
+        <a href="{% url 'geography-atlas' %}">返回地理图谱 ↗</a>
+      </nav>
+    </aside>
+
+    <div class="gm-content" id="content" tabindex="-1">
+      <header class="gm-hero geo-guide-hero">
+        <h1 class="gm-title">中国山河</h1>
+        <p>从西向东切一条剖面，看大地怎样降低。再顺着长江找支流、湖泊和入海口。</p>
+        <div class="geo-guide-actions">
+          <a href="#field-trails">选一条地图路线 ↓</a>
+          <a href="{% url 'geography-atlas-china-3d' %}#gm3-section">打开 3D 地形 ↗</a>
+        </div>
+      </header>
+
+      <section class="geo-guide-panel" id="terrain-steps" aria-labelledby="terrain-steps-title">
+        <h2 id="terrain-steps-title">地势三级阶梯</h2>
+        <p>地势看的是一大片地区的高低趋势。从西向东，中国地势总体降低，局部仍有高山、谷地和盆地。</p>
+        <ol class="geo-guide-grid geo-guide-steps" id="landscape-steps" aria-label="三级阶梯"></ol>
+        <p>打开剖面仪，点「西向东示范」，拖动海拔滑块。从 A 到 B，哪里降得最明显？再找一段局部重新升高的地方。</p>
+        <div class="geo-guide-actions">
+          <a href="{% url 'geography-atlas-china-3d' %}#gm3-section">用剖面仪找高低 →</a>
+          <a href="{% url 'geography-study' %}#lesson-gu3-2">查阶梯分界和知识点 →</a>
+        </div>
+      </section>
+
+      <section class="geo-guide-panel geo-guide-illustrated" id="mountains-plateaus" aria-labelledby="mountains-plateaus-title">
+        <div>
+          <h2 id="mountains-plateaus-title">山脉、高原和山峰</h2>
+          <p>高原是一大片海拔较高的地面。山脉是一组连绵成带的山，山峰则是其中一处突出的高点。</p>
+          <p>先把青藏高原看成一片区域，再沿它南缘找喜马拉雅山脉，最后缩小到珠穆朗玛峰这个点。观察同一张影像里能不能同时认出山峰和山谷。</p>
+          <div class="geo-guide-actions">
+            <a href="{% url 'geography-atlas-china-3d' %}?landform=f9">辨认青藏高原 →</a>
+            <a href="{% url 'geography-atlas-china' %}?place=f1#map">沿喜马拉雅山脉看 →</a>
+          </div>
+        </div>
+        <figure>
+          <img src="{% static 'study_topics/geo-map/assets/himalayas-orbit.jpg' %}" alt="国际空间站斜拍的喜马拉雅，雪白山脊和深色山谷相间" loading="lazy">
+          <figcaption>喜马拉雅山脉的山脊与山谷。<a href="{% url 'geography-atlas-gallery' %}?place=f1">查看影像和 NASA 出处 ↗</a></figcaption>
+        </figure>
+      </section>
+
+      <section class="geo-guide-panel" id="river-basins" aria-labelledby="river-basins-title">
+        <h2 id="river-basins-title">河流和流域</h2>
+        <p>干流是河流的主干，支流从旁边汇入。流域是向同一河流或水系汇水的陆地范围，分水岭两侧的水通常流向不同水系。</p>
+        <p>到宜宾看看金沙江与岷江汇合，再打开流域显示。比较代表河道的蓝线和有面积的流域色块，想想一滴雨离干流很远时，怎样通过支流到达干流。</p>
+        <div class="geo-guide-actions">
+          <a href="{% url 'geography-atlas-china-3d' %}?river=f20&amp;tour=yangtze&amp;stop=yibin">到宜宾看两江汇流 →</a>
+          <a href="{% url 'geography-atlas-china-3d' %}?river=f21">换黄河看流向 →</a>
+        </div>
+      </section>
+
+      <section class="geo-guide-panel geo-guide-illustrated" id="lakes-estuaries" aria-labelledby="lakes-estuaries-title">
+        <div>
+          <h2 id="lakes-estuaries-title">湖泊和河口</h2>
+          <p>湘江经洞庭湖汇入长江。湖泊能接纳来水，出湖水道又把水送回河网。沿长江继续向下游走，到河水与海水相遇的长江口。</p>
+          <p>看看卫星影像里浅棕色的水怎样向东海铺开。河口水色受泥沙、潮汐等影响，单张照片只能看到拍摄时的情形。</p>
+          <div class="geo-guide-actions">
+            <a href="{% url 'geography-atlas-china-3d' %}?landform=f24">找洞庭湖 →</a>
+            <a href="{% url 'geography-atlas-china-3d' %}?river=f20&amp;tour=yangtze&amp;stop=yangtze-mouth">沿长江走到入海区域 →</a>
+          </div>
+        </div>
+        <figure>
+          <img src="{% static 'study_topics/geo-map/assets/yangtze-mouth.jpg' %}" alt="长江口外浅色泥沙在深色海水中铺开的卫星影像" loading="lazy">
+          <figcaption>长江口外的泥沙。<a href="{% url 'geography-atlas-gallery' %}?place=f27">查看影像和 NASA 出处 ↗</a></figcaption>
+        </figure>
+      </section>
+
+      <section class="geo-guide-panel" id="field-trails" aria-labelledby="field-trails-title">
+        <h2 id="field-trails-title">选一条路线去验证</h2>
+        <p>点一站，在图谱上定位地点。用地图里的上一站和下一站把线索连起来。</p>
+        <div id="route-list" class="gm-routes" data-routes="mountains rivers"></div>
+        <noscript><a href="{% url 'geography-atlas-routes' %}#mountains">打开原主题路线 →</a></noscript>
+      </section>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

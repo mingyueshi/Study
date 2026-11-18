@@ -1,0 +1,115 @@
+.geo-guide {
+  --atlas-hero-start: #3b5838;
+  --atlas-hero-end: #436b5b;
+  --atlas-tint: #edf3e9;
+  --atlas-border: #cdd9c9;
+}
+
+.voyages-topic {
+  --atlas-hero-start: #174b61;
+  --atlas-hero-end: #256277;
+  --atlas-tint: #edf3f5;
+  --atlas-border: #c8d8de;
+}
+
+.geo-guide:not([data-sl-ready]) {
+  grid-template-columns: minmax(0, 1fr) clamp(204px, 24vw, 264px);
+}
+.geo-guide:not([data-sl-ready]) > .gm-sidebar { grid-column: 2; grid-row: 1; }
+.geo-guide:not([data-sl-ready]) > .gm-content { grid-column: 1; grid-row: 1; }
+.geo-guide .gm-side-links a { padding: 9px 7px; }
+
+.geo-guide .geo-guide-hero {
+  padding: clamp(20px, 2.8vw, 40px);
+  margin-bottom: 16px;
+}
+.geo-guide .gm-title {
+  color: #fff;
+  font-size: clamp(32px, 4vw, 54px);
+  margin-bottom: 8px;
+}
+
+.geo-guide-panel {
+  padding: clamp(16px, 2.4vw, 30px);
+  margin-bottom: clamp(12px, 2vw, 24px);
+  border: 1px solid var(--atlas-border);
+  border-radius: 18px;
+  background: var(--card);
+  scroll-margin-top: 16px;
+}
+.geo-guide-panel h2 { margin-bottom: 8px; font-size: clamp(23px, 2.5vw, 34px); }
+.geo-guide p + p { margin-top: .7em; }
+
+.geo-guide-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.geo-guide-actions a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 6px 12px;
+  border: 1px solid var(--atlas-border);
+  border-radius: 10px;
+  text-underline-offset: .18em;
+}
+.geo-guide-hero .geo-guide-actions a { color: #fff; background: #ffffff18; }
+
+.geo-guide-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 235px), 1fr));
+  gap: 12px;
+  margin: 12px 0;
+}
+.geo-guide-steps, .geo-voyage-stops { list-style: none; padding: 0; }
+.geo-guide-steps li, .geo-voyage-compare article, .geo-voyage-stops li {
+  min-width: 0;
+  padding: 12px 14px;
+  border: 1px solid var(--atlas-border);
+  border-radius: 12px;
+}
+.geo-guide-steps li { border-top: 6px solid var(--guide-step); }
+.geo-guide-steps h3, .geo-voyage-stops h3 { font-size: 18px; margin-bottom: 4px; }
+
+.geo-guide-illustrated {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, .95fr);
+  align-items: start;
+  gap: clamp(14px, 2vw, 26px);
+}
+.geo-guide figure { min-width: 0; }
+.geo-guide figure img, .geo-voyage-map {
+  display: block;
+  width: 100%;
+  border-radius: 12px;
+}
+.geo-guide figure img { max-height: 440px; object-fit: cover; }
+.geo-guide figcaption { margin-top: 5px; color: var(--ink-soft); font-size: 15px; }
+
+.geo-voyage-map {
+  background: #dfedf2;
+  overflow: hidden;
+}
+.geo-voyage-land { fill: #f5f0e2; stroke: #b9c6bf; stroke-width: 1.2; }
+.geo-voyage-zhenghe { --voyage-color: #9b4418; }
+.geo-voyage-magellan-elcano { --voyage-color: #1d5899; }
+.geo-voyage-line {
+  fill: none;
+  stroke: var(--voyage-color);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+.geo-voyage-map circle { fill: var(--voyage-color); stroke: #fff; stroke-width: 1.8; }
+.geo-voyage-magellan-elcano .geo-voyage-line { stroke-dasharray: 5 3; }
+.geo-voyage-compare article { border-top: 6px solid var(--voyage-color); }
+.geo-voyage-compare .geo-voyage-magellan-elcano { border-top-style: dashed; }
+.geo-voyage-compare dl { margin: 10px 0 0; }
+.geo-voyage-compare dt { font-weight: 750; }
+.geo-voyage-compare dd { margin: 0 0 6px; }
+.geo-guide .geo-guide-note { margin-top: 12px; color: var(--ink-soft); }
+.geo-guide-details { margin-top: 12px; padding: 8px 12px; border: 1px solid var(--atlas-border); border-radius: 10px; }
+.geo-guide-details summary { cursor: pointer; padding-block: 6px; font-weight: 700; }
+
+@media (max-width: 900px) {
+  .geo-guide:not([data-sl-ready]), .geo-guide-illustrated { grid-template-columns: minmax(0, 1fr); }
+  .geo-guide:not([data-sl-ready]) > :is(.gm-sidebar, .gm-content) { grid-column: 1; grid-row: auto; }
+}

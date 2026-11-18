@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="{% static 'study_topics/geo-map/world-3d.css' %}?v=1c011bac76d2">
 <script src="{% static 'study_topics/geo-map/world-geo.js' %}?v=6d109d202301" defer></script>
 <script src="{% static 'study_topics/geo-map/assets/vendor/three-map.js' %}?v=9aacf1bea884" defer></script>
-<script src="{% static 'study_topics/geo-map/world-3d-pack.js' %}?v=42a7a39f0d47" defer></script>
+<script src="{% static 'study_topics/geo-map/world-3d-pack.js' %}?v=06b17682f98d" defer></script>
 {% endblock %}
 {% block study_content %}
 <div class="study-atlas">
@@ -28,6 +28,8 @@
             <a href="gallery.html">实景图册</a>
             <a href="{% url 'geography-life-maps' %}">动植物地图</a>
             <a href="{% url 'geography-province-culture' %}">中国省份文化</a>
+            <a href="{% url 'geography-china-landscapes' %}">中国山河</a>
+            <a href="{% url 'geography-voyages' %}">航海与世界探索</a>
             <a href="{% url 'geography-study' %}">地理小课堂</a>
           </div>
         </details>
@@ -148,7 +150,7 @@
             <p id="gw-voyage-count"></p><h3 id="gw-voyage-title"></h3><p id="gw-voyage-text"></p><p id="gw-voyage-observe"></p>
             <div class="gw-buttons"><button type="button" id="gw-voyage-play">继续航行</button><button type="button" id="gw-voyage-prev">上一站</button><button type="button" id="gw-voyage-next">下一站</button><button type="button" id="gw-voyage-speed">速度：慢慢看</button></div>
             <progress id="gw-voyage-progress" value="0" max="1" aria-label="航线漫游进度"></progress><p id="gw-voyage-status" role="status"></p><div id="gw-voyage-stops" class="gw-buttons" role="group" aria-label="直接到一站"></div>
-            <p><a id="gw-voyage-history" href="{% url 'history-timeline-event' %}">打开历史档案 →</a></p><p id="gw-voyage-sources" class="gw-note"></p><p id="gw-voyage-note" class="gw-note"></p>
+            <p><a href="{% url 'geography-voyages' %}#compare">回专题对照两条航线 →</a> · <a id="gw-voyage-history" href="{% url 'history-timeline-event' %}">打开历史档案 →</a></p><p id="gw-voyage-sources" class="gw-note"></p><p id="gw-voyage-note" class="gw-note"></p>
           </section>
           <section id="gw-life-panel" hidden aria-label="球面动植物观察">
             <div class="gw-quiz-heading"><h2>把生命的家放到地球上</h2><span id="gw-life-count"></span></div><div id="gw-life-kind" class="gw-buttons" role="group" aria-label="选择动物或植物"><button type="button" data-life-kind="animal" aria-pressed="true">动物</button><button type="button" data-life-kind="plant" aria-pressed="false">植物</button></div>

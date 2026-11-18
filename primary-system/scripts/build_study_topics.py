@@ -14,7 +14,7 @@ TOPICS = {
     'history': ('', '', ('index',)),
     'geo': ('', '', ('index',)),
     'history-timeline': ('study-timeline', 'history-timeline', ('index', 'timeline', 'era', 'event', 'dynasties', 'people', 'person', 'civilizations', 'civilization', 'ancient-science', 'technology', 'silk-road', 'silk-city', 'territory')),
-    'geo-map': ('study-atlas', 'geography-atlas', ('index', 'china', 'china-3d', 'life-maps', 'animals', 'plants', 'world', 'world-3d', 'world-animals', 'world-plants', 'province', 'province-culture', 'places', 'routes', 'gallery')),
+    'geo-map': ('study-atlas', 'geography-atlas', ('index', 'china', 'china-3d', 'life-maps', 'animals', 'plants', 'world', 'world-3d', 'world-animals', 'world-plants', 'province', 'province-culture', 'china-landscapes', 'voyages', 'places', 'routes', 'gallery')),
     'earth': ('study-earth', 'geography-earth', ('index', 'rocks', 'quakes', 'plates', 'age')),
     'ocean': ('study-ocean', 'geography-ocean', ('index', 'currents', 'tides', 'life', 'seafloor')),
     'climate': ('study-climate', 'geography-climate', ('index', 'weather', 'types', 'china')),
@@ -28,10 +28,12 @@ COURSE_IMAGE = re.compile(r"(?:img|hero): '(images/[^']+)'")
 HEAD_ASSET = re.compile(r'<(?:link rel="stylesheet" href|script src)="([^"]+)"[^>]*>')
 MAIN = re.compile(r'<main\b([^>]*)>(.*?)</main>', re.DOTALL)
 LIFE_MAP_PAGES = ('animals', 'plants', 'world-animals', 'world-plants')
+ATLAS_GUIDES = ('china-landscapes', 'voyages')
 ATLAS_TOPIC_ROUTES = {
     'life-maps.html': 'geography-life-maps',
     **{f'{name}.html': f'geography-life-maps-{name}' for name in LIFE_MAP_PAGES},
     'province-culture.html': 'geography-province-culture',
+    **{f'{name}.html': f'geography-{name}' for name in ATLAS_GUIDES},
     '../geo/index.html': 'geography-study',
 }
 MEDIA_RENDERERS = {
@@ -97,8 +99,8 @@ def replace_once(source, original, replacement):
 def atlas_topic_links(page, attrs, content):
     """发布地址拆分后，源页面仍能用相对路径离线互访。"""
     routes = ATLAS_TOPIC_ROUTES.copy()
-    if page in (*LIFE_MAP_PAGES, 'province-culture'):
-        routes.update({f'{name}.html': f'geography-atlas-{name}' for name in ('china', 'world', 'province')})
+    if page in (*LIFE_MAP_PAGES, 'province-culture', *ATLAS_GUIDES):
+        routes.update({f'{name}.html': f'geography-atlas-{name}' for name in ('china', 'china-3d', 'world', 'world-3d', 'province', 'gallery', 'routes')})
         attrs += ''' data-atlas-base="{% url 'geography-atlas' %}"'''
     if page in ('china', 'province'):
         attrs += ''' data-culture-url="{% url 'geography-province-culture' %}"'''
@@ -107,7 +109,7 @@ def atlas_topic_links(page, attrs, content):
     for href, route in routes.items():
         target = "{% url '" + route + "' %}"
         content = re.sub(r'href="' + re.escape(href) + r'(?=["?#])', 'href="' + target, content)
-    if page == 'life-maps':
+    if page in ('life-maps', 'china-landscapes'):
         content = re.sub(r'src="(assets/[^"]+\.jpg)"', r'''src="{% static 'study_topics/geo-map/\1' %}"''', content)
     return attrs, content
 
@@ -134,6 +136,8 @@ def template(source, topic, page, theme, index_route):
     if topic == 'geo-map' and page == 'world-3d':
         content = content.replace('../history-timeline/event.html', "{% url 'history-timeline-event' %}")
         content = content.replace('../astro.html', "{% url 'astronomy-explore' %}")
+        attrs = attrs.replace('../history-timeline/event.html', "{% url 'history-timeline-event' %}")
+    if topic == 'geo-map' and page == 'voyages':
         attrs = attrs.replace('../history-timeline/event.html', "{% url 'history-timeline-event' %}")
     assets = []
     for path in HEAD_ASSET.findall(source.split('</head>', 1)[0]):

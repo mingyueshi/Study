@@ -55,6 +55,8 @@
             <a href="gallery.html">实景图册</a>
             <a href="{% url 'geography-life-maps' %}">动植物地图</a>
             <a href="{% url 'geography-province-culture' %}">中国省份文化</a>
+            <a href="{% url 'geography-china-landscapes' %}">中国山河</a>
+            <a href="{% url 'geography-voyages' %}">航海与世界探索</a>
             <a href="{% url 'geography-study' %}">地理小课堂</a>
           </div>
         </details>
@@ -71,6 +73,7 @@
       <section class="gm3-section" id="gm3-section" aria-labelledby="gm3-section-title" tabindex="-1">
         <span class="gm3-kicker">把大地切开看</span><h2 id="gm3-section-title">地形剖面仪</h2>
         <p id="gm3-section-intro"></p>
+        <p><a href="{% url 'geography-china-landscapes' %}#terrain-steps">读中国山河的三级阶梯 →</a></p>
         <p id="gm3-section-status" role="status">选择西向东示范，或在地图上拉一条线。</p>
         <div id="gm3-section-result" hidden>
           <svg id="gm3-section-chart" viewBox="0 0 400 280" role="img" aria-label="从 A 到 B 的地形海拔剖面"></svg>

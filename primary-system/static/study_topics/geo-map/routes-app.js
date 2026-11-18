@@ -4,10 +4,19 @@
   const A = window.GMAtlas;
   const { esc } = window.GMShared;
 
-  document.getElementById('route-nav').innerHTML = '<h2 class="gm-side-title">挑一条路线</h2>' +
-    A.routes.map(route => `<a href="#${esc(route.id)}">${esc(route.icon)} ${esc(route.title)}</a>`).join('');
+  const list = document.getElementById('route-list');
+  const nav = document.getElementById('route-nav');
+  const atlasBase = list.closest('[data-atlas-base]')?.dataset.atlasBase || '';
+  const routes = list.dataset.routes
+    ? list.dataset.routes.split(' ').map(id => A.routes.find(route => route.id === id)).filter(Boolean)
+    : A.routes;
+  const stepHref = (route, index) => esc(atlasBase + A.stepHref(route, index));
+  if (nav) {
+    nav.innerHTML = '<h2 class="gm-side-title">挑一条路线</h2>' +
+      routes.map(route => `<a href="#${esc(route.id)}">${esc(route.icon)} ${esc(route.title)}</a>`).join('');
+  }
 
-  document.getElementById('route-list').innerHTML = A.routes.map(route => `
+  list.innerHTML = routes.map(route => `
     <article class="gm-route" id="${esc(route.id)}" aria-labelledby="${esc(route.id)}-title">
       <header class="gm-route-head">
         <div>
@@ -15,12 +24,12 @@
           <h2 id="${esc(route.id)}-title">${esc(route.title)}</h2>
           <p>${esc(route.intro)}</p>
         </div>
-        <a class="gm-card-link" href="${esc(A.stepHref(route, 0))}">从第一站出发 →</a>
+        <a class="gm-card-link" href="${stepHref(route, 0)}">从第一站出发 →</a>
       </header>
       <ol class="gm-route-track">
         ${route.steps.map((step, i) => {
           const p = A.get(step.place);
-          return `<li><a href="${esc(A.stepHref(route, i))}">` +
+          return `<li><a href="${stepHref(route, i)}">` +
             `<small>第 ${i + 1} 站 · ${A.mapLabel(p)}</small><b>${esc(p.name)}</b><span>${esc(step.observe)}</span></a></li>`;
         }).join('')}
       </ol>
@@ -28,6 +37,6 @@
     </article>`).join('');
 
   // 离线直达路线锚点时，站点列表可能在浏览器首次定位之后才生成。
-  const route = A.routes.find(r => '#' + r.id === location.hash);
+  const route = routes.find(r => '#' + r.id === location.hash);
   if (route) document.getElementById(route.id).scrollIntoView();
 })();

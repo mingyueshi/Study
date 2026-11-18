@@ -43,7 +43,7 @@ window.GMWorldVoyages = (() => {
       $('history').hidden=Boolean(route.custom);
       $('count').textContent = `${route.name} · 第 ${state.index+1}／${route.stops.length} 站`;
       $('title').textContent = stop.name; $('text').textContent = stop.text; $('observe').textContent = '看一看：' + stop.observe;
-      $('history').href = root.dataset.historyEvent + '?id=' + stop.history;
+      $('history').href = root.dataset.historyEvent + '?' + new URLSearchParams({event: stop.history});
       $('sources').innerHTML = stop.sources.map(id => D.sources.find(s => s.id === id)).map(s => `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.name)}（需联网）↗</a>`).join(' · ');
       $('play').textContent = state.playing ? '暂停航行' : state.phase === 'complete' ? '重新航行' : '继续航行'; $('play').disabled = root.dataset.renderer !== 'webgl' || !fullMotion();
       $('toggle').textContent = $('play').textContent; $('toggle').disabled = $('play').disabled;

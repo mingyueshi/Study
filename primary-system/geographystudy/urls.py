@@ -24,6 +24,8 @@ urlpatterns = [
     path('atlas/', page('geo-map/index', local_navigation=True), name='geography-atlas'),
     path('life-maps/', page('geo-map/life-maps', local_navigation=True), name='geography-life-maps'),
     path('province-culture/', page('geo-map/province-culture', local_navigation=True), name='geography-province-culture'),
+    path('china-landscapes/', page('geo-map/china-landscapes', local_navigation=True), name='geography-china-landscapes'),
+    path('voyages/', page('geo-map/voyages', local_navigation=True), name='geography-voyages'),
     path('earth/', page('earth/index'), name='geography-earth'),
     path('ocean/', page('ocean/index'), name='geography-ocean'),
     path('climate/', page('climate/index'), name='geography-climate'),

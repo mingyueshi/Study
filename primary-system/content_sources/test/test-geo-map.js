@@ -656,7 +656,7 @@ for (const province of PROVINCES) {
 
 /* ---------- 入口文件（多页面系统） ---------- */
 console.log('— 入口文件（多页面系统） —');
-['index.html', 'china.html', 'life-maps.html', 'animals.html', 'world-animals.html', 'plants.html', 'world-plants.html', 'province.html', 'world.html', 'places.html', 'routes.html', 'gallery.html',
+['index.html', 'china.html', 'life-maps.html', 'animals.html', 'world-animals.html', 'plants.html', 'world-plants.html', 'province.html', 'world.html', 'places.html', 'routes.html', 'gallery.html', 'china-landscapes.html', 'voyages.html',
   'content.js', 'china-geo.js', 'map-data.js', 'shared.js',
   'china-app.js', 'home-app.js', 'province-app.js', 'world-app.js', 'animals-data.js', 'world-animals-data.js', 'plants-data.js', 'world-plants-data.js', 'animals-app.js', 'animals-learning.js', 'animals.css',
   'styles.css', 'province.css', 'README.md',
@@ -672,6 +672,10 @@ const PAGE_REFS = {
     'province.html', 'world.html', 'index.html', 'life-maps.html', 'province-culture.html'],
   'life-maps.html': ['styles.css', 'animals.css', 'animals.html', 'plants.html', 'world-animals.html', 'world-plants.html',
     'assets/animals/giant-panda.jpg', 'assets/plants/ginkgo.jpg', 'assets/animals/emperor-penguin.jpg', 'assets/plants/antarctic-hair-grass.jpg'],
+  'china-landscapes.html': ['styles.css', 'geo-guide.css', 'routes-app.js', 'china-landscapes.js', 'china-3d.html',
+    'assets/himalayas-orbit.jpg', 'assets/yangtze-mouth.jpg'],
+  'voyages.html': ['styles.css', 'geo-guide.css', 'world-geo.js', 'world-expeditions-data.js', 'world-3d-geometry.js',
+    'world-voyages.js', 'voyages-guide.js', 'world-3d.html', '../history-timeline/event.html'],
   'animals.html': ['animals-data.js', 'animals-app.js', 'animals-learning.js', 'animals.css', 'styles.css', 'china-geo.js', 'map-data.js', 'shared.js', 'china.html', 'world-animals.html'],
   'world-animals.html': ['world-animals-data.js', 'animals-app.js', 'animals-learning.js', 'animals.css', 'styles.css', 'world-geo.js', 'shared.js', 'world.html', 'animals.html'],
   'plants.html': ['plants-data.js', 'animals-app.js', 'animals-learning.js', 'animals.css', 'styles.css', 'china-geo.js', 'map-data.js', 'shared.js', 'china.html', 'world-plants.html'],
@@ -690,7 +694,7 @@ Object.entries(PAGE_REFS).forEach(([page, refs]) => {
   const html = fs.readFileSync(path.join(DIR, page), 'utf8');
   refs.forEach(f => check(html.includes(f), page + ' 应引用 ' + f));
   check(html.includes('lang="zh-CN"'), page + ' 应声明 zh-CN');
-  if (page === 'life-maps.html') {
+  if (['life-maps.html', 'china-landscapes.html', 'voyages.html'].includes(page)) {
     for (const ref of refs) check(fileExists(ref), '专题入口应使用本地文件：' + ref);
   } else if (!/(?:animals|plants|province-culture)\.html$/.test(page)) {
     ['atlas.js', 'atlas-data.js', 'places.html', 'routes.html', 'gallery.html'].forEach(f =>
