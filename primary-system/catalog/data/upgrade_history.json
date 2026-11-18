@@ -2,6 +2,61 @@
   "schema_version": 1,
   "records": [
     {
+      "revision": "d3768b01c7bddabce3871e1825ca4654e005f2a5",
+      "date": "2026-11-18",
+      "title": "独立地形与地球仪专题并补齐关联入口"
+    },
+    {
+      "revision": "4c56d01b89a3562e46d2eae71e336883755e7a1f",
+      "date": "2026-11-18",
+      "title": "完善页面滚动与专题图标"
+    },
+    {
+      "revision": "90a8139cc14be21ff9de69f9d53015d5682ed32b",
+      "date": "2026-11-18",
+      "title": "拆分地理图谱第二批专题"
+    },
+    {
+      "revision": "3849dc9deda7153e6e8c2e79ed7d14ac492c5dab",
+      "date": "2026-11-18",
+      "title": "拆分地理图谱首批专题"
+    },
+    {
+      "revision": "53a445a7e30abfb89a4c8fc66678602d4ffa9eec",
+      "date": "2026-11-18",
+      "title": "新增跨学科伟大工程专题"
+    },
+    {
+      "revision": "4255a931d623bd43074e76afc00d8cc894bd7aaf",
+      "date": "2026-11-18",
+      "title": "新增跨学科分类与时间的故事专题"
+    },
+    {
+      "revision": "972471e66a00c02116ee2ae37de421beefa1d6dd",
+      "date": "2026-11-18",
+      "title": "新增近反义词迷宫"
+    },
+    {
+      "revision": "4b169fbac78971826906606b08b927f623e404ec",
+      "date": "2026-11-18",
+      "title": "新增地图技能专题"
+    },
+    {
+      "revision": "7b76f8d4691cd02e7aad35be7f52147e47ad6cae",
+      "date": "2026-11-18",
+      "title": "新增气象与气候专题"
+    },
+    {
+      "revision": "ddbe55b92bacd4c76405329b9ab3d84ded25a4dc",
+      "date": "2026-11-18",
+      "title": "新增海洋世界专题"
+    },
+    {
+      "revision": "685f0bbcde168518cd92afd9044738f233d292b3",
+      "date": "2026-11-18",
+      "title": "更新升级记录并优化滚动体验"
+    },
+    {
       "revision": "7321385696470a07ce622f37d492c02902b8a8c4",
       "date": "2026-11-18",
       "title": "新增单位与测量专题"
