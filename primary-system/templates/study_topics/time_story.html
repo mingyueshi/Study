@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{ course.title }} · 乐学堂{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'study_topics/time-story.css' %}">
+<article class="time-story" id="time-top">
+  <a class="time-back" href="{% url 'home' %}?area=interdisciplinary#modules-title">← 学习广场 · 跨学科</a>
+  <header class="time-hero">
+    <div><p class="time-kicker">跨学科手记　/　天文 × 地理 × 历史 × 数学</p><h1>{{ course.title }}</h1><p>{{ course.intro }}</p></div>
+    <img src="{% static 'icons/time-story.svg' %}" width="136" height="136" alt="">
+  </header>
+  <nav class="time-index" aria-label="五站学习路线">{% for station in course.stations %}<a href="#{{ station.id }}"><span>0{{ forloop.counter }}</span> {{ station.label }}</a>{% endfor %}</nav>
+  {% for station in course.stations %}
+  <section class="time-station" id="{{ station.id }}" aria-labelledby="{{ station.id }}-title">
+    <p class="time-kicker">第 {{ forloop.counter }} 站　/　{{ station.label }}</p>
+    <h2 id="{{ station.id }}-title">{{ station.question }}</h2><p class="time-lead">{{ station.intro }}</p>
+    <ol class="time-cards{% if station.id == 'clocks' %} time-timeline{% endif %}">{% for card in station.cards %}<li><h3>{{ card.title }}</h3><p>{{ card.text }}</p></li>{% endfor %}</ol>
+    {% if station.id == 'solar-terms' %}
+    <nav class="time-markers" aria-label="沿黄经读节气卡">{% for term in markers %}<a href="{{ term.url }}"><small>黄经 {{ term.solarLongitude }}°</small><strong>{{ term.name }} →</strong></a>{% endfor %}</nav>
+    {% elif station.id == 'calendars' %}
+    <fieldset class="time-tool" id="leap-tool" hidden><legend>动手算 · 闰年判断器</legend>
+      <label>公历年份<input name="year" type="number" min="1" max="9999" value="2000" required></label>
+      <output aria-live="polite"></output><p>按现代公历规则推算，不代表历史上各地当时使用的历法。</p>
+    </fieldset>
+    {% elif station.id == 'time-zones' %}
+    <fieldset class="time-tool" id="zone-tool" hidden><legend>动手算 · 同一刻的两只钟</legend>
+      <label>出发地偏移<select name="origin">{% for offset in offsets %}<option value="{{ offset.minutes }}"{% if offset.minutes == 480 %} selected{% endif %}>{{ offset.label }}</option>{% endfor %}</select></label>
+      <label>出发地钟面<input name="clock" type="time" value="00:15" required></label>
+      <label>目的地偏移<select name="destination">{% for offset in offsets %}<option value="{{ offset.minutes }}"{% if offset.minutes == 0 %} selected{% endif %}>{{ offset.label }}</option>{% endfor %}</select></label>
+      <output aria-live="polite"></output><p>这是固定 UTC 偏移练习，不模拟城市的夏令时。</p>
+    </fieldset>
+    {% elif station.id == 'eras' %}
+    <fieldset class="time-tool" id="era-tool" data-name="{{ course.era.name }}" data-first="{{ course.era.first }}" data-last="{{ course.era.last }}" hidden><legend>动手算 · 纪年换算尺</legend>
+      <label>纪年方式<select name="system"><option value="reign">唐 · {{ course.era.name }}</option><option value="ce">公元</option><option value="bce">公元前</option></select></label>
+      <label>第几年<input name="year" type="number" min="1" value="10" required></label>
+      <output aria-live="polite"></output><p>按通常的整年对照换算，不换算具体月日。</p>
+    </fieldset>
+    {% endif %}
+    <details class="time-check"><summary>想一想：{{ station.challenge }}</summary><p>{{ station.answer }}</p></details>
+    <footer class="time-foot"><nav aria-label="{{ station.label }}延伸探索">{% for link in station.links %}<a href="{{ link.url }}">{{ link.label }} →</a>{% endfor %}</nav><details><summary>查出处（需联网）</summary><ul>{% for source in station.sources %}<li><a href="{{ source.url }}" target="_blank" rel="noopener noreferrer">{{ source.label }} ↗</a></li>{% endfor %}</ul></details></footer>
+  </section>
+  {% endfor %}
+  <a class="time-back" href="#time-top">↑ 回到五站路线</a>
+</article>
+<script src="{% static 'study_topics/time-story.js' %}" defer></script>
+{% endblock %}

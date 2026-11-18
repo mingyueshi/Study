@@ -4,6 +4,7 @@
 
 | 内容 | 编辑位置 | 生成命令 |
 |---|---|---|
+| 跨学科 · 时间的故事 | `time-story.json`（五站正文、自测、换算参数及出处）；四张节气卡引用 `solar-terms.json` | Django 直接读取；`node content_sources/test/test-time-story.js` 校验 |
 | 数学、语文教材 | `math-data.js`、`knowledge-data.js`、图示与 `images/` | `make mathbook-data chinesebook-data` |
 | 图形运动实验室 | `geometry-lab.json`（图形顶点、实验手记和挑战目标，生成时校验） | `make study-topics-data` |
 | 英语教材、日常用语 | `english-data.js` | `make phrases-data`；教材导出见项目 README |

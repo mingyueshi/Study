@@ -52,6 +52,22 @@ class TopicMarkup(HTMLParser):
 
 
 class StudyTopicPageTests(SimpleTestCase):
+    def test_time_story_stations_tools_and_crosslinks(self):
+        response = self.client.get(reverse('time-story'))
+        self.assertContains(response, '<h1>时间的故事</h1>', html=True)
+        for station in response.context['course']['stations']:
+            self.assertContains(response, f'href="#{station["id"]}"')
+            self.assertContains(response, f'id="{station["id"]}"')
+            for link in station['links']:
+                self.assertContains(response, f'href="{link["url"]}"')
+        for slug in ('chunfen', 'xiazhi', 'qiufen', 'dongzhi'):
+            self.assertContains(response, f'href="{reverse("solar-terms")}#{slug}"')
+        for tool in ('leap', 'zone', 'era'):
+            self.assertContains(response, f'id="{tool}-tool"')
+        for asset in ('icons/time-story.svg', 'study_topics/time-story.js', 'study_topics/time-story.css'):
+            self.assertTrue(finders.find(asset), asset)
+            self.assertContains(response, asset)
+
     def test_map_skills_connects_existing_lessons_and_terrain_tool(self):
         for suffix, target in (
             ('scale', '../study/#lesson-gu2-3'),

@@ -1,0 +1,36 @@
+:root:has(.time-story) { --page-width: 100%; }
+.time-story { padding-block: 1.25rem 0; }
+.time-back, .time-foot a { color: var(--green); font-weight: 700; text-decoration: underline; text-underline-offset: .2em; }
+.time-hero { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; margin-top: 1rem; padding: clamp(1.2rem, 3vw, 3rem); background: var(--soft); border-radius: 1.1rem; border-bottom: 4px solid var(--green); }
+.time-hero img { flex: none; width: clamp(5rem, 10vw, 8rem); height: auto; }
+.time-hero h1 { margin-bottom: .4rem; }
+.time-hero p:last-child, .time-lead { max-width: 44em; margin-bottom: 0; }
+.time-kicker { font-weight: 700; color: var(--green); margin: 0 0 .35rem; letter-spacing: .05em; }
+.time-index, .time-markers { display: flex; flex-wrap: wrap; gap: .6rem; margin: 1rem 0; }
+.time-index a, .time-markers a { border: 1px solid var(--line); border-radius: .65rem; background: var(--white); padding: .5rem .85rem; font-weight: 700; }
+.time-index span, .time-markers small { color: var(--green); font-variant-numeric: tabular-nums; }
+.time-index a:hover, .time-markers a:hover { border-color: var(--green); background: var(--soft); }
+.time-station { padding-block: clamp(1.6rem, 3vw, 3rem); border-top: 1px solid var(--line); }
+.time-station h2 { margin-bottom: .45rem; }
+.time-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); gap: 1rem; margin: 1rem 0; padding: 0; list-style: none; }
+.time-cards li { padding: 1rem; border: 1px solid var(--line); border-radius: .7rem; background: var(--white); }
+.time-cards h3 { font-size: 1.1em; margin-bottom: .3rem; }
+.time-cards p, .time-tool p { margin: 0; max-width: 45em; }
+.time-timeline { counter-reset: clock-step; }
+.time-timeline li { border-top: 3px solid var(--orange); counter-increment: clock-step; }
+.time-timeline li::before { content: '0' counter(clock-step); display: block; color: var(--orange); font-size: 1.3em; font-weight: 750; }
+.time-markers a { flex: 1 1 7rem; }
+.time-markers small, .time-markers strong { display: block; }
+.time-tool { min-width: 0; margin: 1rem 0; padding: 1rem; border: 1px solid var(--green); border-radius: .7rem; background: var(--soft); }
+.time-tool:not([hidden]) { display: flex; flex-wrap: wrap; align-items: end; gap: .7rem 1rem; }
+.time-tool legend { color: var(--green-dark); font-weight: 750; }
+.time-tool label { display: grid; gap: .25rem; font-weight: 650; }
+.time-tool :is(input, select) { width: 9rem; max-width: 100%; min-height: 2.7rem; padding: .25rem .5rem; border: 1px solid var(--line); border-radius: .45rem; background-color: var(--white); color: var(--ink); }
+.time-tool output, .time-tool p { flex-basis: 100%; }
+.time-tool output { font-weight: 700; font-variant-numeric: tabular-nums; }
+.time-check { padding: .8rem 1rem; background: var(--white); border-left: 3px solid var(--orange); }
+.time-story summary { cursor: pointer; font-weight: 650; }
+.time-check p { margin: .5rem 0 0; max-width: 50em; }
+.time-foot { display: flex; align-items: baseline; flex-wrap: wrap; gap: .5rem 1.4rem; margin-top: 1rem; }
+.time-foot ul { margin: .5rem 0 0; padding-left: 1.2rem; }
+@media (max-width: 600px) { .time-hero img { display: none; } }
