@@ -14,7 +14,7 @@ TOPICS = {
     'history': ('', '', ('index',)),
     'geo': ('', '', ('index',)),
     'history-timeline': ('study-timeline', 'history-timeline', ('index', 'timeline', 'era', 'event', 'dynasties', 'people', 'person', 'civilizations', 'civilization', 'ancient-science', 'technology', 'silk-road', 'silk-city', 'territory')),
-    'geo-map': ('study-atlas', 'geography-atlas', ('index', 'china', 'china-3d', 'animals', 'plants', 'world', 'world-3d', 'world-animals', 'world-plants', 'province', 'province-culture', 'places', 'routes', 'gallery')),
+    'geo-map': ('study-atlas', 'geography-atlas', ('index', 'china', 'china-3d', 'life-maps', 'animals', 'plants', 'world', 'world-3d', 'world-animals', 'world-plants', 'province', 'province-culture', 'places', 'routes', 'gallery')),
     'earth': ('study-earth', 'geography-earth', ('index', 'rocks', 'quakes', 'plates', 'age')),
     'ocean': ('study-ocean', 'geography-ocean', ('index', 'currents', 'tides', 'life', 'seafloor')),
     'climate': ('study-climate', 'geography-climate', ('index', 'weather', 'types', 'china')),
@@ -27,6 +27,13 @@ EVOLUTION_CHARS = PROJECT / 'hanzi' / 'evolution_chars.py'
 COURSE_IMAGE = re.compile(r"(?:img|hero): '(images/[^']+)'")
 HEAD_ASSET = re.compile(r'<(?:link rel="stylesheet" href|script src)="([^"]+)"[^>]*>')
 MAIN = re.compile(r'<main\b([^>]*)>(.*?)</main>', re.DOTALL)
+LIFE_MAP_PAGES = ('animals', 'plants', 'world-animals', 'world-plants')
+ATLAS_TOPIC_ROUTES = {
+    'life-maps.html': 'geography-life-maps',
+    **{f'{name}.html': f'geography-life-maps-{name}' for name in LIFE_MAP_PAGES},
+    'province-culture.html': 'geography-province-culture',
+    '../geo/index.html': 'geography-study',
+}
 MEDIA_RENDERERS = {
     ('history-timeline', 'era-app.js'): 'image',
     ('history-timeline', 'event-app.js'): 'item',
@@ -87,11 +94,33 @@ def replace_once(source, original, replacement):
     return source.replace(original, replacement, 1)
 
 
+def atlas_topic_links(page, attrs, content):
+    """发布地址拆分后，源页面仍能用相对路径离线互访。"""
+    routes = ATLAS_TOPIC_ROUTES.copy()
+    if page in (*LIFE_MAP_PAGES, 'province-culture'):
+        routes.update({f'{name}.html': f'geography-atlas-{name}' for name in ('china', 'world', 'province')})
+        attrs += ''' data-atlas-base="{% url 'geography-atlas' %}"'''
+    if page in ('china', 'province'):
+        attrs += ''' data-culture-url="{% url 'geography-province-culture' %}"'''
+    if page == 'world-3d':
+        attrs += ''' data-life-base="{% url 'geography-life-maps' %}"'''
+    for href, route in routes.items():
+        target = "{% url '" + route + "' %}"
+        content = re.sub(r'href="' + re.escape(href) + r'(?=["?#])', 'href="' + target, content)
+    if page == 'life-maps':
+        content = re.sub(r'src="(assets/[^"]+\.jpg)"', r'''src="{% static 'study_topics/geo-map/\1' %}"''', content)
+    return attrs, content
+
+
 def template(source, topic, page, theme, index_route):
     title = re.search(r'<title>(.*?)</title>', source).group(1)
     if '乐学堂' not in title:
         title += ' · 乐学堂'
     [(attrs, content)] = MAIN.findall(source)
+    if topic == 'geo-map':
+        attrs, content = atlas_topic_links(page, attrs, content)
+    if (topic, page) == ('ocean', 'life'):
+        content = content.replace('../geo-map/world-animals.html', "{% url 'geography-life-maps-world-animals' %}")
     if topic == 'geo':
         title = title.replace('地理知识精讲', '地理小课堂')
         content = replace_once(content, '>地理知识精讲</h1>', '>地理小课堂</h1>')
@@ -122,7 +151,7 @@ def template(source, topic, page, theme, index_route):
             asset_url += '?v=20261114b9' if topic == 'geo' else '?v=20261114b7'
         if topic == 'geo' and (path.startswith('../sci-process') or path in ('earth-data.js', 'earth.js')):
             asset_url += '?v=20261114b9'
-        if topic == 'geo-map' and page in ('china', 'world', 'china-3d', 'world-3d', 'province', 'province-culture') and path.endswith(('.css', '.js')):
+        if topic == 'geo-map' and path.endswith(('.css', '.js')):
             asset_url += '?v=' + sha256(resource_content(SOURCE / topic / path, topic, theme)).hexdigest()[:12]
         if topic in ('earth', 'ocean', 'climate', 'map-skills') and path.endswith(('.css', '.js')):
             asset_url += '?v=' + sha256(resource_content(SOURCE / topic / path, topic, theme)).hexdigest()[:12]

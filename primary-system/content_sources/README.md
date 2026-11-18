@@ -123,4 +123,4 @@
 
 ### 中国省份文化
 
-`geo-map/province-culture-data.js` 按 34 个原省级行政区代码维护简称别称、特产、民俗技艺、代表景观、观察问题与来源索引。行政区、地图和中心参考点复用原文件；页面为 `geo-map/province-culture.html`，发布入口 `/geography/atlas/province-culture.html`。先运行 `node content_sources/test/test-province-culture.js`，再按[图谱说明](geo-map/README.md)生成与验证。
+`geo-map/province-culture-data.js` 按 34 个原省级行政区代码维护简称别称、特产、民俗技艺、代表景观、观察问题与来源索引。行政区、地图和中心参考点复用原文件；页面为 `geo-map/province-culture.html`，发布入口 `/geography/province-culture/`，旧 `/geography/atlas/province-culture.html` 继续跳转。先运行 `node content_sources/test/test-province-culture.js`，再按[图谱说明](geo-map/README.md)生成与验证。

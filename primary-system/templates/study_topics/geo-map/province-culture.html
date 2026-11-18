@@ -1,9 +1,9 @@
 {% extends "study_topics/page.html" %}
 {% load static %}
 {# 由 scripts/build_study_topics.py 生成。 #}
-{% block title %}中国省份文化 · 地理图谱 · 乐学堂{% endblock %}
+{% block title %}中国省份文化 · 乐学堂{% endblock %}
 {% block study_assets %}
-<link rel="stylesheet" href="{% static 'study_topics/geo-map/styles.css' %}?v=1bbf3a639edd">
+<link rel="stylesheet" href="{% static 'study_topics/geo-map/styles.css' %}?v=5b8e2fb415da">
 <link rel="stylesheet" href="{% static 'study_topics/geo-map/province-culture.css' %}?v=715ad16a0321">
 <script src="{% static 'study_topics/geo-map/china-geo.js' %}?v=d8402343bd1d" defer></script>
 <script src="{% static 'study_topics/geo-map/content.js' %}?v=e86ddc18e05f" defer></script>
@@ -11,21 +11,15 @@
 <script src="{% static 'study_topics/geo-map/map-discovery-data.js' %}?v=43339db0e7e3" defer></script>
 <script src="{% static 'study_topics/geo-map/shared.js' %}?v=d2bebbfd2a0b" defer></script>
 <script src="{% static 'study_topics/geo-map/province-culture-data.js' %}?v=658c2158afd5" defer></script>
-<script src="{% static 'study_topics/geo-map/province-culture.js' %}?v=8ab515623b86" defer></script>
+<script src="{% static 'study_topics/geo-map/province-culture.js' %}?v=6e9131e0358d" defer></script>
 {% endblock %}
 {% block study_content %}
 <div class="study-atlas">
-<div class="gm-topic culture-topic">
+<div class="gm-topic culture-topic" data-atlas-base="{% url 'geography-atlas' %}">
     <aside class="gm-sidebar" aria-label="省份文化导航与筛选">
-      <nav class="gm-sysnav" aria-label="地理图谱页面导航">
-        <a class="gm-sysnav-brand" href="{% url 'geography-atlas' %}">🧭 地理图谱</a>
-        <a data-page href="china.html">中国地图</a>
-        <a data-page href="china-3d.html">3D 中国地图</a>
-        <a data-page href="province.html">省域站</a>
-        <a data-page href="province-culture.html" aria-current="page">中国省份文化</a>
-        <a data-page href="places.html">地点索引</a>
-        <a data-page href="routes.html">主题路线</a>
-        <a data-page href="gallery.html">实景图册</a>
+      <nav class="gm-sysnav" aria-label="关联地图">
+        <a data-page href="{% url 'geography-atlas-china' %}">中国地图 ↗</a>
+        <a data-page href="{% url 'geography-atlas-province' %}">省域站 ↗</a>
       </nav>
       <header class="gm-hero">
         <p class="gm-eyebrow">从家乡出发 · 34 个省级行政区</p>

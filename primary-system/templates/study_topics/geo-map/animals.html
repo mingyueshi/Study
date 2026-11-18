@@ -1,31 +1,33 @@
 {% extends "study_topics/page.html" %}
 {% load static %}
 {# 由 scripts/build_study_topics.py 生成。 #}
-{% block title %}中国动物地图 · 地理图谱 · 乐学堂{% endblock %}
+{% block title %}中国动物地图 · 动植物地图 · 乐学堂{% endblock %}
 {% block study_assets %}
-<link rel="stylesheet" href="{% static 'study_topics/geo-map/styles.css' %}">
-<link rel="stylesheet" href="{% static 'study_topics/geo-map/animals.css' %}">
-<script src="{% static 'study_topics/geo-map/china-geo.js' %}" defer></script>
-<script src="{% static 'study_topics/geo-map/map-data.js' %}" defer></script>
-<script src="{% static 'study_topics/geo-map/shared.js' %}" defer></script>
-<script src="{% static 'study_topics/geo-map/animals-data.js' %}" defer></script>
-<script src="{% static 'study_topics/geo-map/animals-learning.js' %}" defer></script>
-<script src="{% static 'study_topics/geo-map/animals-app.js' %}" defer></script>
+<link rel="stylesheet" href="{% static 'study_topics/geo-map/styles.css' %}?v=5b8e2fb415da">
+<link rel="stylesheet" href="{% static 'study_topics/geo-map/animals.css' %}?v=49e500c1bfa4">
+<script src="{% static 'study_topics/geo-map/china-geo.js' %}?v=d8402343bd1d" defer></script>
+<script src="{% static 'study_topics/geo-map/map-data.js' %}?v=27ebda785125" defer></script>
+<script src="{% static 'study_topics/geo-map/shared.js' %}?v=d2bebbfd2a0b" defer></script>
+<script src="{% static 'study_topics/geo-map/animals-data.js' %}?v=556fcc74febf" defer></script>
+<script src="{% static 'study_topics/geo-map/animals-learning.js' %}?v=5b277bbe07a2" defer></script>
+<script src="{% static 'study_topics/geo-map/animals-app.js' %}?v=439cbc154966" defer></script>
 {% endblock %}
 {% block study_content %}
 <div class="study-atlas">
-<div class="gm-wildlife">
+<div class="gm-wildlife" data-atlas-base="{% url 'geography-atlas' %}">
     <header class="gm-wildlife-header">
       <div>
-        <p class="gm-wildlife-kicker">地理图谱 <span aria-hidden="true">／</span> 野外观察</p>
+        <p class="gm-wildlife-kicker">动植物地图</p>
         <h1>中国动物地图</h1>
         <p>从北方的森林到南方的海岸，点一点地图，看看动物们把家安在哪里。</p>
       </div>
-      <nav class="gm-wildlife-links" aria-label="地图切换">
-        <a href="{% url 'geography-atlas' %}">图谱首页</a>
-        <a href="plants.html">中国植物地图</a>
-        <a href="china.html">← 返回中国地图</a>
-        <a href="world-animals.html">去看世界动物 →</a>
+      <nav class="gm-wildlife-links" aria-label="动植物地图导航">
+        <a href="{% url 'geography-life-maps' %}">专题首页</a>
+        <a href="{% url 'geography-life-maps-animals' %}" aria-current="page">中国动物地图</a>
+        <a href="{% url 'geography-life-maps-plants' %}">中国植物地图</a>
+        <a href="{% url 'geography-life-maps-world-animals' %}">世界动物地图</a>
+        <a href="{% url 'geography-life-maps-world-plants' %}">世界植物地图</a>
+        <a href="{% url 'geography-atlas-china' %}">返回中国地图 ↗</a>
       </nav>
     </header>
 

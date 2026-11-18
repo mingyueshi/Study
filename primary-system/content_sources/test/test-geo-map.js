@@ -656,7 +656,7 @@ for (const province of PROVINCES) {
 
 /* ---------- 入口文件（多页面系统） ---------- */
 console.log('— 入口文件（多页面系统） —');
-['index.html', 'china.html', 'animals.html', 'world-animals.html', 'plants.html', 'world-plants.html', 'province.html', 'world.html', 'places.html', 'routes.html', 'gallery.html',
+['index.html', 'china.html', 'life-maps.html', 'animals.html', 'world-animals.html', 'plants.html', 'world-plants.html', 'province.html', 'world.html', 'places.html', 'routes.html', 'gallery.html',
   'content.js', 'china-geo.js', 'map-data.js', 'shared.js',
   'china-app.js', 'home-app.js', 'province-app.js', 'world-app.js', 'animals-data.js', 'world-animals-data.js', 'plants-data.js', 'world-plants-data.js', 'animals-app.js', 'animals-learning.js', 'animals.css',
   'styles.css', 'province.css', 'README.md',
@@ -667,9 +667,11 @@ console.log('— 入口文件（多页面系统） —');
 const PAGE_REFS = {
   'china-3d.html': ['content.js', 'china-geo.js', 'map-data.js', 'shared.js', 'china-3d-data.js', 'china-terrain-index.js', 'china-terrain-stream.js', 'china-rivers-data.js', 'china-3d-geometry.js', 'china-river-flow.js', 'china-river-tour-data.js', 'china-river-tour.js', 'china-terrain-section.js', 'china-adventures-data.js', 'china-adventures.js', 'china-terrain-play.js', 'china-3d.js', 'china-3d.css', 'assets/vendor/three-map.js', 'china.html', 'province.html'],
   'index.html': ['content.js', 'china-geo.js', 'map-data.js', 'shared.js', 'home-app.js', 'styles.css',
-    'china.html', 'province.html', 'world.html', 'animals.html', 'world-animals.html', 'plants.html', 'world-plants.html'],
+    'china.html', 'province.html', 'world.html', 'life-maps.html', 'province-culture.html'],
   'china.html': ['content.js', 'china-geo.js', 'map-data.js', 'shared.js', 'media-data.js', 'media.js', 'map-ui.js', 'map-discovery.js', 'map-discovery-data.js', 'china-rivers-data.js', 'china-river-tour-data.js', 'china-app.js', 'styles.css',
-    'province.html', 'world.html', 'index.html', 'animals.html', 'plants.html'],
+    'province.html', 'world.html', 'index.html', 'life-maps.html', 'province-culture.html'],
+  'life-maps.html': ['styles.css', 'animals.css', 'animals.html', 'plants.html', 'world-animals.html', 'world-plants.html',
+    'assets/animals/giant-panda.jpg', 'assets/plants/ginkgo.jpg', 'assets/animals/emperor-penguin.jpg', 'assets/plants/antarctic-hair-grass.jpg'],
   'animals.html': ['animals-data.js', 'animals-app.js', 'animals-learning.js', 'animals.css', 'styles.css', 'china-geo.js', 'map-data.js', 'shared.js', 'china.html', 'world-animals.html'],
   'world-animals.html': ['world-animals-data.js', 'animals-app.js', 'animals-learning.js', 'animals.css', 'styles.css', 'world-geo.js', 'shared.js', 'world.html', 'animals.html'],
   'plants.html': ['plants-data.js', 'animals-app.js', 'animals-learning.js', 'animals.css', 'styles.css', 'china-geo.js', 'map-data.js', 'shared.js', 'china.html', 'world-plants.html'],
@@ -678,7 +680,7 @@ const PAGE_REFS = {
     'styles.css', 'province.css', 'china.html', 'index.html'],
   'province-culture.html': ['content.js', 'china-geo.js', 'map-data.js', 'shared.js', 'province-culture-data.js', 'province-culture.js', 'province-culture.css', 'styles.css', 'province.html', 'china.html'],
   'world.html': ['map-data.js', 'world-geo.js', 'world-data.js', 'shared.js', 'media-data.js', 'media.js', 'map-ui.js', 'map-discovery.js', 'map-discovery-data.js', 'world-app.js', 'styles.css',
-    'china.html', 'index.html', 'world-animals.html', 'world-plants.html'],
+    'china.html', 'index.html', 'life-maps.html'],
   'places.html': ['places-app.js', 'styles.css'],
   'routes.html': ['routes-app.js', 'styles.css'],
   'gallery.html': ['media-data.js', 'media.js', 'gallery-app.js', 'styles.css']
@@ -688,10 +690,14 @@ Object.entries(PAGE_REFS).forEach(([page, refs]) => {
   const html = fs.readFileSync(path.join(DIR, page), 'utf8');
   refs.forEach(f => check(html.includes(f), page + ' 应引用 ' + f));
   check(html.includes('lang="zh-CN"'), page + ' 应声明 zh-CN');
-  if (!/(?:animals|plants|province-culture)\.html$/.test(page)) {
+  if (page === 'life-maps.html') {
+    for (const ref of refs) check(fileExists(ref), '专题入口应使用本地文件：' + ref);
+  } else if (!/(?:animals|plants|province-culture)\.html$/.test(page)) {
     ['atlas.js', 'atlas-data.js', 'places.html', 'routes.html', 'gallery.html'].forEach(f =>
       check(html.includes(f), page + ' 应引用 ' + f));
     check(html.includes('gm-sysnav'), page + ' 应有系统导航条');
+    check((html.match(/<a data-page /g) || []).length === 5 && html.includes('gm-atlas-more'),
+      page + ' 应保留五个主入口并折叠专题与资料');
     check(html.includes('class="gm-sidebar"') && html.includes('id="content" class="gm-content"'),
       page + ' 应使用共用侧栏和内容区');
   }

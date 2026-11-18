@@ -6,6 +6,7 @@
 
   const S = window.GMShared;
   const esc = S.esc;
+  const atlasBase = esc(root.dataset.atlasBase || '');
   const world = root.dataset.map === 'world';
   const flora = root.dataset.life === 'plant';
   const noun = flora ? '植物' : '动物';
@@ -106,8 +107,8 @@
     const habitat = habitatById.get(animal.habitat);
     const province = provinceByCode.get(animal.adcode);
     const placeLink = world
-      ? `<a class="gm-animal-station" href="world.html?place=${encodeURIComponent(animal.mapPlace)}#map">在世界地图上看 →</a>`
-      : `<a class="gm-animal-station" href="province.html?adcode=${province.adcode}">看${esc(S.displayName(province.name))}省域站 →</a>`;
+      ? `<a class="gm-animal-station" href="${atlasBase}world.html?place=${encodeURIComponent(animal.mapPlace)}#map">在世界地图上看 →</a>`
+      : `<a class="gm-animal-station" href="${atlasBase}province.html?adcode=${province.adcode}">看${esc(S.displayName(province.name))}省域站 →</a>`;
     for (const target of targets) target.setAttribute('aria-pressed', String(target.dataset.animal === animal.id));
     card.style.setProperty('--animal-color', habitat.color);
     card.innerHTML = `

@@ -61,6 +61,9 @@
 .gm-sysnav a[data-page] { text-align: center; }
 .gm-sysnav a[data-page]:hover, .gm-side-links a:hover { background: #e9f4ee; }
 .gm-sysnav a[data-page][aria-current="page"] { background: #dcefe5; color: #155642; }
+.gm-atlas-more { grid-column: 1 / -1; margin-top: 4px; border-top: 1px solid var(--atlas-border); }
+.gm-atlas-more summary { cursor: pointer; font-size: 15px; font-weight: 700; padding: 8px 7px 4px; }
+.gm-atlas-more a[aria-current="page"] { background: #dcefe5; color: #155642; }
 .gm-side-title { font-size: 16px; line-height: 1.4; margin-bottom: 7px; }
 .gm-side-links { display: grid; }
 .gm-side-links a { padding-inline: 7px; }

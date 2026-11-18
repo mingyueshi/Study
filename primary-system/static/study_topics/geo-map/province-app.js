@@ -7,6 +7,7 @@
   const $ = (id) => root.querySelector(`#${id}`);
   const S = window.GMShared;
   const esc = S.esc;
+  const cultureUrl = esc(root.dataset.cultureUrl || 'province-culture.html');
   const A = window.GMAtlas;
 
   const REGIONS = window.GM_REGIONS || [];
@@ -47,7 +48,7 @@
     `<a href="province.html?adcode=${esc(prev.adcode)}"><small>上一站</small> ${esc(prev.name)}</a>` +
     `<a href="province.html?adcode=${esc(next.adcode)}"><small>下一站</small> ${esc(next.name)}</a>` +
     `<a href="china-3d.html?place=${p.id}">在 3D 中国地图上看 →</a>` +
-    `<a href="province-culture.html?adcode=${p.adcode}">看特产、民俗与景观 →</a>` +
+    `<a href="${cultureUrl}?adcode=${p.adcode}">看特产、民俗与景观 →</a>` +
     '<a href="province.html">全部省域站</a>';
 
   slot.innerHTML =

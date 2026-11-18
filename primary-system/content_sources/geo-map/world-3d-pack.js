@@ -3770,8 +3770,8 @@ window.GMWorldExplorers = (() => {
       $('habitats').innerHTML=`<button type="button" data-habitat="" aria-pressed="${!habitat}">全部环境</button>`+data.habitats.map(h=>`<button type="button" data-habitat="${h.id}" aria-pressed="${h.id===habitat}">${esc(h.name)}</button>`).join('');
       $('count').textContent=`已观察 ${stores[kind].count}／${groups[kind].length} · 当前 ${entries.length} 种`;
       $('kind').querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.lifeKind===kind)));
-      if(selected){const a=selected;const page=kind==='plant'?'world-plants.html?plant=':'world-animals.html?animal=';
-        $('card').innerHTML=`<img src="${esc(photo(kind,a.id))}" alt="${esc(a.name)}"><div><h3>${esc(a.name)}</h3><p>${esc(a.place)}</p><p>${esc(a.home)}</p>${a.adaptation?`<p>${esc(a.adaptation)}</p>`:''}<p>${esc(a.clue)}</p><button type="button" id="gw-life-check" aria-pressed="${stores[kind].has(a.id)}">${stores[kind].has(a.id)?'✓ 已观察，点此取消':'记为已观察'}</button> <a href="${page}${encodeURIComponent(a.id)}">打开原地图档案 →</a> <a href="${esc(a.source)}" target="_blank" rel="noopener">资料出处（需联网）↗</a></div>`;
+      if(selected){const a=selected;const page=(root.dataset.lifeBase || '')+(kind==='plant'?'world-plants.html?plant=':'world-animals.html?animal=');
+        $('card').innerHTML=`<img src="${esc(photo(kind,a.id))}" alt="${esc(a.name)}"><div><h3>${esc(a.name)}</h3><p>${esc(a.place)}</p><p>${esc(a.home)}</p>${a.adaptation?`<p>${esc(a.adaptation)}</p>`:''}<p>${esc(a.clue)}</p><button type="button" id="gw-life-check" aria-pressed="${stores[kind].has(a.id)}">${stores[kind].has(a.id)?'✓ 已观察，点此取消':'记为已观察'}</button> <a href="${esc(page)}${encodeURIComponent(a.id)}">打开原地图档案 →</a> <a href="${esc(a.source)}" target="_blank" rel="noopener">资料出处（需联网）↗</a></div>`;
         $('check').addEventListener('click',()=>{stores[kind].toggle(a.id);update();});
       }else $('card').innerHTML='<p>点球面照片或下方照片，认识一个新朋友。</p>';
       for(const k of ['animal','plant']) root.querySelector('#gw-record-'+k).textContent=`${stores[k].count}／${groups[k].length}`;

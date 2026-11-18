@@ -1,0 +1,40 @@
+{% extends "study_topics/page.html" %}
+{% load static %}
+{# 由 scripts/build_study_topics.py 生成。 #}
+{% block title %}动植物地图 · 乐学堂{% endblock %}
+{% block study_assets %}
+<link rel="stylesheet" href="{% static 'study_topics/geo-map/styles.css' %}?v=5b8e2fb415da">
+<link rel="stylesheet" href="{% static 'study_topics/geo-map/animals.css' %}?v=49e500c1bfa4">
+{% endblock %}
+{% block study_content %}
+<div class="study-atlas">
+<div class="gm-wildlife">
+    <header class="gm-wildlife-header">
+      <div>
+        <h1>动植物地图</h1>
+        <p>选一张地图，在实景照片和地点档案中找物种，记下你观察过的动植物。</p>
+      </div>
+      <a href="{% url 'geography-atlas' %}">打开地理图谱 ↗</a>
+    </header>
+    <nav class="gm-life-grid" aria-label="选择动植物地图">
+      <a href="{% url 'geography-life-maps-animals' %}">
+        <img src="{% static 'study_topics/geo-map/assets/animals/giant-panda.jpg' %}" alt="大熊猫">
+        <div><h2>中国动物地图</h2><p>从竹林到长江，找大熊猫、雪豹和江豚的家。</p></div>
+      </a>
+      <a href="{% url 'geography-life-maps-plants' %}">
+        <img src="{% static 'study_topics/geo-map/assets/plants/ginkgo.jpg' %}" alt="银杏">
+        <div><h2>中国植物地图</h2><p>走过湿地、茶园和荒漠，认银杏、荷花和胡杨。</p></div>
+      </a>
+      <a href="{% url 'geography-life-maps-world-animals' %}">
+        <img src="{% static 'study_topics/geo-map/assets/animals/emperor-penguin.jpg' %}" alt="帝企鹅">
+        <div><h2>世界动物地图</h2><p>去南极找帝企鹅，到大洋里看鲸。</p></div>
+      </a>
+      <a href="{% url 'geography-life-maps-world-plants' %}">
+        <img src="{% static 'study_topics/geo-map/assets/plants/antarctic-hair-grass.jpg' %}" alt="南极发草">
+        <div><h2>世界植物地图</h2><p>看看巨杉、猴面包树和南极发草各自怎样生长。</p></div>
+      </a>
+    </nav>
+  </div>
+
+</div>
+{% endblock %}

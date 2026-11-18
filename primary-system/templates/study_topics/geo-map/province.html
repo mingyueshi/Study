@@ -3,7 +3,7 @@
 {# 由 scripts/build_study_topics.py 生成。 #}
 {% block title %}省域站 · 地理图谱 · 乐学堂{% endblock %}
 {% block study_assets %}
-<link rel="stylesheet" href="{% static 'study_topics/geo-map/styles.css' %}?v=1bbf3a639edd">
+<link rel="stylesheet" href="{% static 'study_topics/geo-map/styles.css' %}?v=5b8e2fb415da">
 <link rel="stylesheet" href="{% static 'study_topics/geo-map/province.css' %}?v=e8a217f8fad8">
 <script src="{% static 'study_topics/geo-map/china-geo.js' %}?v=d8402343bd1d" defer></script>
 <script src="{% static 'study_topics/geo-map/content.js' %}?v=e86ddc18e05f" defer></script>
@@ -14,25 +14,30 @@
 <script src="{% static 'study_topics/geo-map/shared.js' %}?v=d2bebbfd2a0b" defer></script>
 <script src="{% static 'study_topics/geo-map/media-data.js' %}?v=b665c8643f6e" defer></script>
 <script src="{% static 'study_topics/geo-map/media.js' %}?v=9a8cc0c6caf0" defer></script>
-<script src="{% static 'study_topics/geo-map/province-app.js' %}?v=e6822f16e37e" defer></script>
+<script src="{% static 'study_topics/geo-map/province-app.js' %}?v=ec31229f49a5" defer></script>
 {% endblock %}
 {% block study_content %}
 <div class="study-atlas">
-<div class="gm-topic province-topic">
+<div class="gm-topic province-topic" data-culture-url="{% url 'geography-province-culture' %}">
     <aside class="gm-sidebar" aria-label="导航和页面工具">
       <nav class="gm-sysnav" aria-label="地理图谱页面导航">
         <a class="gm-sysnav-brand" href="{% url 'geography-atlas' %}">🧭 地理图谱</a>
         <a data-page href="china.html">中国地图</a>
-        <a data-page href="china-3d.html">3D 中国地图</a>
         <a data-page href="world.html">世界地图</a>
-        <a data-page href="world-3d.html">3D 世界地图</a>
-        <a data-page href="plants.html">中国植物地图</a>
-        <a data-page href="world-plants.html">世界植物地图</a>
-        <a data-page href="province.html" aria-current="page">省域站</a>
-        <a data-page href="province-culture.html">中国省份文化</a>
+        <a data-page href="china-3d.html">3D 地形</a>
+        <a data-page href="world-3d.html">地球仪</a>
         <a data-page href="places.html">地点索引</a>
-        <a data-page href="routes.html">主题路线</a>
-        <a data-page href="gallery.html">实景图册</a>
+        <details class="gm-atlas-more" open>
+          <summary>专题与资料</summary>
+          <div class="gm-side-links">
+            <a href="province.html" aria-current="page">省域站</a>
+            <a href="routes.html">主题路线</a>
+            <a href="gallery.html">实景图册</a>
+            <a href="{% url 'geography-life-maps' %}">动植物地图</a>
+            <a href="{% url 'geography-province-culture' %}">中国省份文化</a>
+            <a href="{% url 'geography-study' %}">地理小课堂</a>
+          </div>
+        </details>
       </nav>
 
       <header class="gm-hero" id="province-heading">

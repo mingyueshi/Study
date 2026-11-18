@@ -3,31 +3,34 @@
 {# 由 scripts/build_study_topics.py 生成。 #}
 {% block title %}3D 世界地图 · 乐学堂{% endblock %}
 {% block study_assets %}
-<link rel="stylesheet" href="{% static 'study_topics/geo-map/styles.css' %}?v=1bbf3a639edd">
+<link rel="stylesheet" href="{% static 'study_topics/geo-map/styles.css' %}?v=5b8e2fb415da">
 <link rel="stylesheet" href="{% static 'study_topics/geo-map/world-3d.css' %}?v=1c011bac76d2">
 <script src="{% static 'study_topics/geo-map/world-geo.js' %}?v=6d109d202301" defer></script>
 <script src="{% static 'study_topics/geo-map/assets/vendor/three-map.js' %}?v=9aacf1bea884" defer></script>
-<script src="{% static 'study_topics/geo-map/world-3d-pack.js' %}?v=1a32625404d3" defer></script>
+<script src="{% static 'study_topics/geo-map/world-3d-pack.js' %}?v=42a7a39f0d47" defer></script>
 {% endblock %}
 {% block study_content %}
 <div class="study-atlas">
-<div class="gm-topic world-3d-topic" data-history-event="{% url 'history-timeline-event' %}">
+<div class="gm-topic world-3d-topic" data-history-event="{% url 'history-timeline-event' %}" data-life-base="{% url 'geography-life-maps' %}">
     <aside class="gm-sidebar" aria-label="导航和地球仪工具">
       <nav class="gm-sysnav" aria-label="地理图谱页面导航">
         <a class="gm-sysnav-brand" href="{% url 'geography-atlas' %}">🧭 地理图谱</a>
         <a data-page href="china.html">中国地图</a>
-        <a data-page href="china-3d.html">3D 中国地图</a>
         <a data-page href="world.html">世界地图</a>
-        <a data-page href="world-3d.html" aria-current="page">3D 世界地图</a>
-        <a data-page href="animals.html">中国动物地图</a>
-        <a data-page href="world-animals.html">世界动物地图</a>
-        <a data-page href="plants.html">中国植物地图</a>
-        <a data-page href="world-plants.html">世界植物地图</a>
-        <a data-page href="province.html">省域站</a>
-        <a data-page href="province-culture.html">中国省份文化</a>
+        <a data-page href="china-3d.html">3D 地形</a>
+        <a data-page href="world-3d.html" aria-current="page">地球仪</a>
         <a data-page href="places.html">地点索引</a>
-        <a data-page href="routes.html">主题路线</a>
-        <a data-page href="gallery.html">实景图册</a>
+        <details class="gm-atlas-more">
+          <summary>专题与资料</summary>
+          <div class="gm-side-links">
+            <a href="province.html">省域站</a>
+            <a href="routes.html">主题路线</a>
+            <a href="gallery.html">实景图册</a>
+            <a href="{% url 'geography-life-maps' %}">动植物地图</a>
+            <a href="{% url 'geography-province-culture' %}">中国省份文化</a>
+            <a href="{% url 'geography-study' %}">地理小课堂</a>
+          </div>
+        </details>
       </nav>
       <section class="gm-side-panel gw-picker">
         <label for="gw-search">搜一搜地点</label>

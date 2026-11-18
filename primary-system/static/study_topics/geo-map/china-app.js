@@ -7,6 +7,7 @@
   const $ = (id) => root.querySelector(`#${id}`);
   const S = window.GMShared;
   const esc = S.esc;
+  const cultureUrl = esc(root.dataset.cultureUrl || 'province-culture.html');
   const A = window.GMAtlas;
 
   const LAYERS = window.GM_LAYERS || [];
@@ -164,7 +165,7 @@
         `<p class="gm-card-text">${esc(p.note)}</p>` +
         (r.hint ? `<p class="gm-card-foot">${esc(r.name)}：${esc(r.hint)}</p>` : '') +
         `<a class="gm-card-link" href="province.html?adcode=${esc(p.adcode)}">进省域站细看 →</a>` +
-        `<a class="gm-card-link" href="province-culture.html?adcode=${esc(p.adcode)}">看特产、民俗与景观 →</a>`;
+        `<a class="gm-card-link" href="${cultureUrl}?adcode=${esc(p.adcode)}">看特产、民俗与景观 →</a>`;
     } else if (kind === 'f') {
       const f = A.get(id);
       if (!f) return;

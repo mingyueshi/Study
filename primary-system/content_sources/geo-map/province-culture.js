@@ -5,6 +5,7 @@
   if (!root) return;
   const $ = id => root.querySelector('#' + id);
   const D = window.GM_PROVINCE_CULTURE, S = window.GMShared, esc = S.esc;
+  const atlasBase = esc(root.dataset.atlasBase || '');
   const provinces = window.GM_PROVINCES;
   const cultures = new Map(D.provinces.map(p => [p.adcode, p]));
   const sources = new Map(D.sources.map(s => [s.id, s]));
@@ -64,7 +65,7 @@
       '<section class="culture-section culture-section--' + key + '"><h3><span aria-hidden="true">' + icon + '</span> ' + title + '</h3><div class="culture-item-grid">' + c[key].map(item => '<div class="culture-item"><h4>' + esc(item.name) + '</h4><p class="culture-place">' + esc(item.location) + '</p><p>' + esc(item.detail) + '</p></div>').join('') + '</div></section>').join('');
     $('culture-profile').innerHTML = '<header class="culture-profile-head"><p class="culture-kicker">' + esc(p.type) + ' · 文化档案</p><h2>' + esc(p.name) + '</h2><dl><div><dt>简称／常用别称</dt><dd>' + esc(c.shortNames.join('／')) + '</dd></div><div><dt>' + cap.label + '</dt><dd>' + esc(cap.name) + '</dd></div></dl>' +
       (['直辖市','特别行政区'].includes(p.type) ? '<p class="culture-center-note">' + esc(p.type) + '不设省会，这里用本身名称作行政区中心识记。</p>' : '') +
-      '<nav aria-label="当前省份关联档案"><a href="province.html?adcode=' + p.adcode + '">看自然地理档案 →</a><a href="china.html?place=' + p.id + '#map">回中国地图 →</a></nav></header>' + sections +
+      '<nav aria-label="当前省份关联档案"><a href="' + atlasBase + 'province.html?adcode=' + p.adcode + '">看自然地理档案 →</a><a href="' + atlasBase + 'china.html?place=' + p.id + '#map">回中国地图 →</a></nav></header>' + sections +
       '<details class="culture-question"><summary>想一想：' + esc(c.question) + '</summary><p>' + esc(c.explanation) + '</p></details>' +
       '<details class="culture-references"><summary>资料与延伸阅读（需联网）</summary><ul>' + referenceIds.map(id => {const s=sources.get(id);return '<li><a target="_blank" rel="noopener noreferrer" href="' + esc(s.url) + '">' + esc(s.title) + ' ↗</a><p>' + esc(s.scope) + '</p></li>';}).join('') + '</ul><p>资料核对：2026-11-17。此处是代表性选读，观察问题的提示用于继续查证。</p></details>';
   }
