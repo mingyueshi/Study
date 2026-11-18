@@ -1,0 +1,47 @@
+:root:has(.works-page) { --page-width: 100%; }
+.works-page { padding-block: 1.2rem; }
+.works-path { display: flex; flex-wrap: wrap; gap: .4rem 1.3rem; margin-bottom: 1rem; }
+.works-path a, .works-references a, .works-compare a { color: var(--green); text-decoration: underline; text-underline-offset: .2em; }
+.works-path [aria-current="page"] { font-weight: 750; }
+.works-hero, .works-panel { padding: clamp(1rem, 2.6vw, 2.5rem); background: var(--soft); border-radius: 1rem; margin-block: 1rem 1.6rem; }
+.works-hero { border-left: .4rem solid var(--green); }
+.works-kicker { color: var(--green-dark); font-weight: 700; letter-spacing: .06em; margin: 0; }
+.works-hero h1, .works-page h2, .works-page h3 { margin-bottom: .45rem; }
+.works-hero p:last-child, .works-card p, .works-clues p { margin-bottom: 0; }
+.works-lead, .works-hero p, .works-panel > p, .works-panel details { max-width: 46em; }
+.works-grid, .works-clues { display: grid; gap: 1rem; grid-template-columns: repeat(3,minmax(0,1fr)); }
+.works-card { overflow: hidden; background: var(--white); border: 1px solid var(--line); border-radius: .85rem; }
+.works-card:hover { border-color: var(--green); }
+.works-card > div { padding: 1rem; }
+.works-card small { color: var(--muted); font-weight: 650; }
+.works-card h3 { color: var(--green-dark); }
+.works-art { display: block; width: 100%; height: auto; background: #f7efdf; }
+.works-card .works-art { max-height: 11rem; border-bottom: 1px solid var(--line); }
+.works-figure { margin: 1rem 0; padding: 1rem; border-radius: .8rem; border: 1px solid var(--line); background: var(--white); }
+.works-figure .works-art { max-width: 46rem; margin: auto; border-radius: .6rem; }
+.works-art a { cursor: pointer; }
+.works-art a circle { fill: #233e37; stroke: #fff; stroke-width: 1.5; }
+.works-art a:hover circle, .works-art a:focus circle { fill: #974f24; }
+.works-art text { fill: #fff; font: bold 10px system-ui,sans-serif; }
+.works-figure figcaption { max-width: 46rem; margin: .65rem auto 0; color: var(--muted); }
+.works-clues { list-style: none; padding: 0; margin: 0 0 1rem; }
+.works-clues li { padding: .85rem; border: 1px solid var(--line); border-radius: .65rem; background: var(--white); }
+.works-clues li:target { outline: 3px solid var(--green); }
+.works-page summary { cursor: pointer; font-weight: 700; color: var(--green-dark); }
+.works-page details p { margin: .5rem 0 0; }
+.works-references { margin-block: 1.5rem; }
+.works-references details { margin-top: .6rem; }
+.works-form { display: flex; flex-wrap: wrap; align-items: end; gap: .75rem; margin-bottom: 1rem; }
+.works-form label { display: block; font-weight: 650; }
+.works-form select { padding: .45rem; color: var(--ink); background-color: var(--white); border: 1px solid var(--line); border-radius: .45rem; }
+.works-form .errorlist { margin: .35rem 0 0; padding-left: 1.2em; }
+.works-compare { border-collapse: collapse; width: 100%; table-layout: fixed; background: var(--white); }
+.works-compare caption { text-align: left; font-weight: 700; padding-bottom: .5rem; }
+.works-compare th, .works-compare td { text-align: left; vertical-align: top; border: 1px solid var(--line); padding: .8rem; overflow-wrap: anywhere; }
+.works-compare thead th:first-child { width: clamp(4rem, 15%, 11rem); }
+@media (max-width: 1000px) { .works-grid { grid-template-columns: repeat(2,minmax(0,1fr)); } }
+@media (max-width: 640px) {
+  .works-grid, .works-clues { grid-template-columns: 1fr; }
+  .works-compare th, .works-compare td { padding: .4rem; }
+  .works-figure { padding: .4rem; }
+}

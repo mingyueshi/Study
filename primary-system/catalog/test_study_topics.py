@@ -52,6 +52,40 @@ class TopicMarkup(HTMLParser):
 
 
 class StudyTopicPageTests(SimpleTestCase):
+    def test_great_works_directory_and_illustrated_files(self):
+        directory = self.client.get(reverse('great-works'))
+        self.assertContains(directory, '<h1>伟大工程</h1>', html=True)
+        self.assertEqual(len(directory.context['course']['works']), 6)
+        for work in directory.context['course']['works']:
+            with self.subTest(work=work['id']):
+                url = reverse('great-work-detail', args=[work['id']])
+                self.assertContains(directory, f'href="{url}"')
+                page = self.client.get(url)
+                self.assertContains(page, f'<h1>{work["name"]}</h1>', html=True)
+                self.assertContains(page, f'great-works.svg#{work["id"]}')
+                self.assertContains(page, work['answer'])
+                related = work['related']
+                self.assertContains(page, f'href="{reverse(related["route"])}{related["suffix"]}"')
+                for number in (1, 2, 3):
+                    self.assertContains(page, f'href="#clue-{number}"')
+                    self.assertContains(page, f'id="clue-{number}"')
+        self.assertEqual(self.client.get(reverse('great-work-detail', args=['unknown'])).status_code, 404)
+        for asset in ('icons/great-works.svg', 'study_topics/great-works.svg', 'study_topics/great-works.css'):
+            self.assertTrue(finders.find(asset), asset)
+
+    def test_great_works_compares_only_two_distinct_known_works(self):
+        url = reverse('great-works')
+        for query, pair in (({}, ('zhaozhou-bridge', 'hzmb')),
+                            ({'left': 'grand-canal', 'right': 'dujiangyan'}, ('grand-canal', 'dujiangyan'))):
+            page = self.client.get(url, query)
+            self.assertEqual((page.context['left']['id'], page.context['right']['id']), pair)
+            self.assertContains(page, '<table')
+            self.assertContains(page, page.context['right']['tradeoff'])
+        for other in ('grand-canal', 'not-a-work', ''):
+            page = self.client.get(url, {'left': 'grand-canal', 'right': other})
+            self.assertIn('right', page.context['form'].errors)
+            self.assertNotContains(page, '<table')
+
     def test_time_story_stations_tools_and_crosslinks(self):
         response = self.client.get(reverse('time-story'))
         self.assertContains(response, '<h1>时间的故事</h1>', html=True)

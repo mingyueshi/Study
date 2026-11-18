@@ -113,13 +113,14 @@ class EnglishTextbookTests(PlatformFixture):
 
 
 class CatalogTests(PlatformFixture):
-    def test_interdisciplinary_filter_opens_time_story_without_a_textbook_module(self):
+    def test_interdisciplinary_filter_opens_file_topics_without_a_textbook_module(self):
         response = self.client.get(reverse('home'), {'area': 'interdisciplinary'})
         cards = response.context['entry_cards']
         self.assertTrue(all(card['area'] == 'interdisciplinary' for card in cards))
         chip = next(chip for chip in response.context['area_chips'] if chip['area'] == 'interdisciplinary')
         self.assertEqual((chip['label'], chip['count'], chip['on']), ('跨学科', len(cards), True))
         self.assertContains(response, f'href="{reverse("time-story")}"')
+        self.assertContains(response, f'href="{reverse("great-works")}"')
 
     def test_cross_module_placement_cannot_publish_hidden_content(self):
         import_snapshot(english_snapshot(), publish=True)

@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg">
+  <symbol id="great-wall" viewBox="0 0 360 160">
+    <path fill="#d8e8d4" d="M0 80 60 28l44 28 46-32 79 65 65-70 66 23v118H0Z"/>
+    <path fill="#82a48a" d="M0 94 78 46l91 43 41 1 85-62 65 39v93H0Z"/>
+    <path fill="#577e68" d="m0 122 89-50 84 44 47-9 89-57 51 23v87H0Z"/>
+    <path d="m-5 100 83-46 92 43 39 1 90-60 66 34" fill="none" stroke="#574a38" stroke-width="11" stroke-linejoin="round"/>
+    <path d="m-5 96 83-46 92 43 39 1 90-60 66 34" fill="none" stroke="#ddbf89" stroke-width="7" stroke-linejoin="round"/>
+    <path d="M172 99V76h5v4h5v-4h6v4h6v-4h6v23h-9v-6a5 5 0 0 0-10 0v6Z" fill="#b48b5c" stroke="#514735" stroke-width="2"/>
+    <path d="m185 99-4 15 10 10-18 36" fill="none" stroke="#ccbd92" stroke-width="6"/>
+  </symbol>
+  <symbol id="grand-canal" viewBox="0 0 360 160">
+    <path d="M0 120h99V94h163V71h98v89H0Z" fill="#81c9d3"/>
+    <path d="M0 120h99m4-26h153m9-23h95" fill="none" stroke="#237380" stroke-width="3"/>
+    <path d="M0 147h93v-14h176v-18h91v45H0Z" fill="#a08b67"/>
+    <path d="M96 135V62m166 72V48" stroke="#675b49" stroke-width="9"/>
+    <path d="M140 82h80l-12 12h-52Z" fill="#875437"/><path d="M157 69h29v13h-29Z" fill="#dfb35f"/><path d="M163 72h7v5h-7Zm10 0h7v5h-7Z" fill="#375a64"/>
+    <path d="M227 114V88m-5 6 5-7 5 7" stroke="#266880" stroke-width="3" fill="none"/>
+    <path d="M19 133h29m10 4h19m206-49h28m13 6h17" stroke="#f4ffff" stroke-width="2" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="dujiangyan" viewBox="0 0 360 160">
+    <path fill="#dce9cb" d="M0 0h360v160H0Z"/>
+    <g stroke="#72bcc5" fill="none" stroke-linecap="round">
+      <path d="M-12 75Q59 75 88 73Q137 49 185 45T370 34" stroke-width="43"/>
+      <path d="M74 74q56 27 112 37t108 1q28-2 71 15" stroke-width="29"/>
+      <path d="M181 110q29-16 43-61" stroke-width="11"/>
+    </g>
+    <path fill="#b3976c" d="m87 76 46-13-4 7-23 9 26 9-2 7Z"/>
+    <path d="m186 93 19 10" stroke="#95774e" stroke-width="4" stroke-dasharray="4 2"/>
+    <path d="m263 92 40 13-17-26Zm3 44 37-17-9 24Z" fill="#839572"/>
+    <g stroke="#22646f" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M23 75h35l-7-5m7 5-7 5m208-42 29-1-7-5m7 5-7 5m-155 54 30 8-6-7m6 7-8 3m180 9 19 5-4-6m4 6-7 3"/>
+      <path d="m199 94 15-23-7 4m7-4-1 8"/>
+    </g>
+  </symbol>
+  <symbol id="zhaozhou-bridge" viewBox="0 0 360 160">
+    <path d="M0 128q60-3 109 3t100 0 151-3v32H0Z" fill="#86c5cc"/>
+    <path fill="#a99572" d="M0 108h40v24H0Zm320-2h40v26h-40Z"/>
+    <path fill="#c5a479" fill-rule="evenodd" stroke="#665340" stroke-width="2" d="M26 81Q180 20 334 81v35h-18Q180 13 44 116H26Z M46 88q10-32 28-17v3Zm37-19q10-20 23-10v2Zm171-8v-2q13-10 23 10Zm32 13v-3q18-15 28 17Z"/>
+    <path d="M28 76Q180 16 332 76M40 116Q180 4 320 116" fill="none" stroke="#806547" stroke-width="3"/>
+    <path d="M64 138h50m24 6h37m76-9h39" stroke="#dff7ef" stroke-width="2" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="forbidden-city" viewBox="0 0 360 160">
+    <path fill="#e7d7b6" d="M73 8h214v144H73Z"/><path d="M82 8v144M278 8v144" stroke="#a86149" stroke-width="5"/>
+    <path d="M140 20h80v21h-17v10h11v29h-12v9h48v36H110V89h47v-9h-11V51h11V41h-17Z" fill="#f8edd5" stroke="#b39c77" stroke-width="2"/>
+    <path d="M180 0v160" stroke="#996748" stroke-width="2" stroke-dasharray="4 4"/>
+    <g fill="#c3964d" stroke="#825535" stroke-width="2">
+      <path d="m147 26 8-6h50l8 6v11h-66Z"/><path d="m163 58 9-5h16l9 5v12h-34Z"/><path d="m121 98 11-7h95l12 7v15H121Z"/>
+    </g>
+    <path d="M124 104h112m-70-42h28m-42-34h55" stroke="#e6c06b" stroke-width="3"/>
+    <g stroke="#367a85" fill="none" stroke-width="3" stroke-linejoin="round"><path d="M247 94h18l-4-4m4 4-4 4m-149-4H96l4-4m-4 4 4 4m166-24v60l-5-6m5 6 4-6"/></g>
+  </symbol>
+  <symbol id="hzmb" viewBox="0 0 360 160">
+    <path d="M0 78h360v82H0Z" fill="#87c6d2"/>
+    <path d="M0 137q64-49 117-27t129 1q57-25 114 16v33H0Z" fill="#ae9976"/>
+    <path d="m78 94 21-33 20 1 18 37Zm145 5 23-37 20-1 21 34Z" fill="#9b946b"/>
+    <path d="M0 62h99q12 0 23 29t33 40h48q22-5 34-39t22-30h101" fill="none" stroke="#495c60" stroke-width="7"/>
+    <path d="M0 61h99q12 0 23 29t33 40h48q22-5 34-39t22-30h101" fill="none" stroke="#f6e1a8" stroke-width="2"/>
+    <path d="M16 65v52m37-52v40m249-40v43m32-43v49" stroke="#586c70" stroke-width="4"/>
+    <path d="M151 67h63l-10 11h-43Z" fill="#854e39"/><path d="M170 57h20v10h-20Z" fill="#e2ba6a"/>
+    <path d="M15 88h22m117 2h29m25-5h19m82 12h34" stroke="#e9f8f1" stroke-width="2" stroke-linecap="round"/>
+  </symbol>
+</svg>

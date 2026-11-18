@@ -138,6 +138,7 @@ PRIMARY_DEBUG=1 .venv/bin/python manage.py runserver 127.0.0.1:8012
 - [天文探索](http://127.0.0.1:8012/astronomy/) · [文学常识](http://127.0.0.1:8012/literature/) · [科学实验室](http://127.0.0.1:8012/science/lab/) · [汉字演变馆](http://127.0.0.1:8012/hanzi-evolution/)
 - [人体奥秘站](http://127.0.0.1:8012/science/body/) · [未解之谜研究所](http://127.0.0.1:8012/mysteries/) · [科学流言粉碎机](http://127.0.0.1:8012/science/rumors/)
 - [人类起源](http://127.0.0.1:8012/human-origins/)
+- [伟大工程](http://127.0.0.1:8012/interdisciplinary/great-works/) · 学习广场「跨学科」下设长城、大运河、都江堰、赵州桥、故宫和港珠澳大桥六份工程档案。每份可按三个编号读本地原理示意图、做现场推理、回到相关历史或科学课程查证。总览可选任意两项并排比较地理条件、设计与取舍，也可分享比较链接。无需导入数据或启用 JavaScript。
 - [时间的故事](http://127.0.0.1:8012/interdisciplinary/time-story/) · 学习广场「跨学科」分类的五站路线：历法、节气、时区、计时工具发展史、纪年换算。可判断公历闰年、换算固定 UTC 偏移（含跨日）、对照唐贞观年号与公元年份并查世纪；节气卡、月相、地球仪与朝代纪年链接到原专题。正文、自测与出处见[课程文件源](content_sources/time-story.json)，无需导入数据库。
 - [场景单词](http://127.0.0.1:8012/words/)
 - [词以类聚 · WordNet 词义树](http://127.0.0.1:8012/words/tree/) · [拼写家族](http://127.0.0.1:8012/words/tree/?root=spelling) · [词根词缀树](http://127.0.0.1:8012/words/tree/?root=morphology)
