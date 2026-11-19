@@ -1,0 +1,38 @@
+{% with reading=card.reading %}
+<article class="story-card" id="story-{{ card.id }}" data-hall-story tabindex="-1" aria-labelledby="story-title-{{ card.id }}">
+  <header class="story-head">
+    <div>
+      <h3 class="story-title" id="story-title-{{ card.id }}">{{ card.headword }}</h3>
+      {% if reading %}{% include 'idioms/pinyin.html' %}{% endif %}
+      <p class="story-book">{{ card.source_book }} · {{ card.source_chapter }}</p>
+    </div>
+    {% if reading %}
+    <div class="story-actions">
+      <button class="study-reading-control" type="button" data-hall-say="{{ card.headword }}。{{ card.meaning }}" aria-pressed="false" hidden>朗读成语与释义</button>
+      <a href="{% url 'idiom-entry' card.entry_id %}">查词典 <span aria-hidden="true">↗</span></a>
+    </div>
+    {% endif %}
+  </header>
+  {% if reading %}
+  <p class="story-audio-status" role="status" data-hall-speech-status></p>
+  <blockquote class="story-quote">「{{ card.quote }}」</blockquote>
+  <section class="story-body" aria-labelledby="story-body-{{ card.id }}">
+    <h4 id="story-body-{{ card.id }}">典故</h4>
+    <p>{{ card.story }}</p>
+  </section>
+  <dl class="story-explanation">
+    <div><dt>释义</dt><dd>{{ card.meaning }}</dd></div>
+    {% if reading.properties.example %}<div><dt>例句</dt><dd>{{ reading.properties.example }}</dd></div>{% endif %}
+  </dl>
+  {% if card.figures %}
+  <nav class="story-figures" aria-label="{{ card.headword }}的人物线索">
+    {% for figure in card.figures %}
+    <a class="figure-mini" href="?figure={{ figure.id }}#hall-results"><span aria-hidden="true">{{ figure.emoji }}</span>{{ figure.name }}</a>
+    {% endfor %}
+  </nav>
+  {% endif %}
+  {% else %}
+  <p class="story-paused">词典记录变动，这则典故待核对。</p>
+  {% endif %}
+</article>
+{% endwith %}

@@ -1,8 +1,7 @@
 """成语典故馆：故事卡、人物线索与钉词校验（只读浏览，不写学习记录）。
 
-故事复述、人物档案与人物线索是编辑内容，来自 ``data/stories.json``；
-成语的拼音、释义、出处与例句永远来自词库当前生效记录（chinese-xinhua-idioms），
-逐条经 ``matches_pin`` 校验，钉词漂移的卡片如实降级为「待核对」。
+故事复述、简明释义和人物档案来自 ``data/stories.json``。
+词库生效记录经 ``matches_pin`` 校验后提供读音和例句，漂移的卡片显示「待核对」。
 """
 import json
 from pathlib import Path
@@ -13,6 +12,7 @@ from django.views.decorators.cache import never_cache
 from django.views.decorators.http import require_safe
 
 from .catalog import SOURCE_CODE, matches_pin, pinned_records
+from .views import reading
 
 STORIES_PATH = Path(__file__).resolve().parent / "data" / "stories.json"
 
@@ -67,7 +67,7 @@ def story_cards():
         cards.append({
             **story,
             "figures": [figures[fid] for fid in story.get("figure_ids", [])],
-            "reading": record,
+            "reading": reading(record) if valid else None,
             "valid": valid,
         })
     return cards
@@ -95,22 +95,38 @@ def figure_clues(cards):
     return clues
 
 
+def matches_query(card, query):
+    fields = [
+        card["headword"], card["source_book"], card["source_chapter"],
+        *(figure["name"] for figure in card["figures"]),
+    ]
+    if card["valid"]:
+        fields.extend((card["quote"], card["story"], card["meaning"], card["reading"]["properties"].get("example") or ""))
+    return any(query in str(value).casefold() for value in fields)
+
+
 @never_cache
 @require_safe
 def page(request):
-    """典故馆主页：?book= 按典籍过滤，?figure= 展开人物线索视图。"""
+    """按典籍或人物筛选，检索当前范围中的典故。"""
     cards = story_cards()
     figure_id = request.GET.get("figure", "")
     book = request.GET.get("book", "")
+    q = request.GET.get("q", "").strip()[:80]
     clues = figure_clues(cards)
     clue = next((c for c in clues if c["id"] == figure_id), None)
     if clue is not None:
         shown = clue["stories"]
+        book = ""
     elif book:
         shown = [card for card in cards if card["source_book"] == book]
     else:
         shown = cards
+    if q:
+        query = q.casefold()
+        shown = [card for card in shown if matches_query(card, query)]
+        shown.sort(key=lambda card: (card["headword"] != q, q not in card["headword"]))
     return render(request, "idioms/hall.html", {
-        "cards": cards, "shown": shown, "books": books(cards), "book": book,
-        "clues": clues, "clue": clue, "figure_id": figure_id,
+        "shown": shown, "books": books(cards), "book": book, "q": q,
+        "clues": clues, "clue": clue,
     })

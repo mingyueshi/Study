@@ -68,6 +68,7 @@ class StoryPinTests(TestCase):
                                                    external_key=story["source_key"])
             record = SourceRecord.objects.create(id=uuid.UUID(story["evidence_id"]), release=cls.release, binding=binding,
                                                  headword=story["headword"], definition="测试释义",
+                                                 pronunciation_value="fù jīng qǐng zuì" if story["id"] == "fujing-qingzui" else "",
                                                  lexical_hash=story["lexical_hash"],
                                                  properties={"derivation": story["quote"], "example": "例句。"})
             cls.records[story["headword"]] = record
@@ -120,3 +121,35 @@ class StoryPageTests(TestCase):
         before = SourceRecord.objects.count()
         self.client.get("/idioms/stories/")
         self.assertEqual(SourceRecord.objects.count(), before)
+
+    def test_reading_sidebar_and_main_sections(self):
+        response = self.client.get("/idioms/stories/")
+        html = response.content.decode()
+        sidebar = html.split('<aside class="hall-sidebar ', 1)[1].split('</aside>', 1)[0]
+        for label in ("成语目录", "搜索典故", "分类筛选", "专题导航"):
+            self.assertIn(label, sidebar)
+        self.assertIn('href="#story-fujing-qingzui"', sidebar)
+        self.assertNotIn("data-hall-say", sidebar)
+        self.assertContains(response, 'id="story-fujing-qingzui"')
+        self.assertContains(response, "fù jīng qǐng zuì")
+        self.assertContains(response, "例句。")
+        self.assertContains(response, "这则典故待核对")
+
+    def test_search_keeps_the_effective_filter_and_prioritizes_the_headword(self):
+        response = self.client.get("/idioms/stories/", {"q": "  负荆请罪  "})
+        self.assertEqual(response.context["shown"][0]["id"], "fujing-qingzui")
+        self.assertEqual(response.context["q"], "负荆请罪")
+        response = self.client.get("/idioms/stories/", {"q": "例句", "figure": "lin-xiangru", "book": "《三国志》"})
+        self.assertEqual([card["id"] for card in response.context["shown"]], ["fujing-qingzui", "wanbi-guizhao"])
+        self.assertContains(response, 'type="hidden" name="figure" value="lin-xiangru"')
+        self.assertNotContains(response, 'type="hidden" name="book"')
+        empty = self.client.get("/idioms/stories/", {"q": "<没有结果>", "book": "《史记》"})
+        self.assertEqual(empty.context["shown"], [])
+        self.assertContains(empty, "&lt;没有结果&gt;")
+        self.assertContains(empty, "清除分类筛选")
+
+    def test_unverified_story_is_searchable_by_title_without_indexing_its_body(self):
+        response = self.client.get("/idioms/stories/", {"q": "指鹿为马"})
+        self.assertContains(response, 'id="story-zhilu-weima"')
+        self.assertNotContains(response, "data-hall-say")
+        self.assertEqual(self.client.get("/idioms/stories/", {"q": "颠倒黑白、混淆是非"}).context["shown"], [])
