@@ -3,6 +3,25 @@
   'use strict';
   const clamp = value => Math.max(0, Math.min(1, Number.isFinite(value) ? value : 0));
   const smooth = value => { const t = clamp(value); return t * t * (3 - 2 * t); };
+  const armMaximum = 110;
+  function armAngleAt(frame) {
+    return armMaximum * smooth(frame.phase.id === 'bend' ? frame.fraction : 1 - frame.fraction);
+  }
+  function armTimeAtAngle(phases, angle, extending) {
+    const target = clamp(angle / armMaximum);
+    let fraction = target;
+    if (target > 0 && target < 1) {
+      let low = 0, high = 1;
+      for (let i = 0; i < 24; i++) {
+        const middle = (low + high) / 2;
+        if (smooth(middle) < target) low = middle;
+        else high = middle;
+      }
+      fraction = (low + high) / 2;
+    }
+    const [bend, extend] = phases;
+    return extending ? bend.duration + (1 - fraction) * extend.duration : fraction * bend.duration;
+  }
   function frameAt(phases, milliseconds) {
     const total = phases.reduce((sum, phase) => sum + phase.duration, 0);
     const time = Math.max(0, Math.min(total, Number.isFinite(milliseconds) ? milliseconds : 0));
@@ -48,7 +67,7 @@
     }
     return {state, play, pause, seek, setSpeed(value) { if ([.5, 1, 1.5].includes(value)) speed = value; changed(state()); }};
   }
-  if (typeof module !== 'undefined') module.exports = {frameAt, createPlayer, smooth};
+  if (typeof module !== 'undefined') module.exports = {frameAt, createPlayer, smooth, armAngleAt, armTimeAtAngle};
   if (typeof document === 'undefined') return;
   const root = document.querySelector('[data-body-process]');
   if (!root) return;
@@ -67,6 +86,7 @@
   const modeButtons = [...settings.querySelectorAll('[data-process-mode]')];
   const oxygenReading = $('[data-circuit-oxygen]');
   const arm = $('[data-arm-angle]');
+  const armReading = $('[data-arm-value]');
   const paths = new Map();
   const dots = new Map();
   let mode, player, lastPhase = -1;
@@ -99,17 +119,24 @@
   }
   function armShape(value) {
     const radians = value * Math.PI / 180;
-    const x = 227 + 8 * Math.cos(radians) + 30 * Math.sin(radians);
-    const y = 270 - 8 * Math.sin(radians) + 30 * Math.cos(radians);
+    const sin = Math.sin(radians), cos = Math.cos(radians);
+    const x = 227 + 8 * cos + 30 * sin;
+    const y = 270 - 8 * sin + 30 * cos;
     const width = 16 + value / 8;
     const middle = (112 + y - 20) / 2;
+    const bend = value / armMaximum;
+    const tricepsX = 203 + 4 * bend, tricepsY = 242 + 16 * bend;
+    const tricepsEndX = 227 - 16 * cos + 5 * sin, tricepsEndY = 270 + 16 * sin + 5 * cos;
     attr($('.body-forearm'), 'transform', `rotate(${-value} 227 270)`);
     attr($('.body-biceps'), 'd', `M247 112Q${247 + width} ${middle} ${x} ${y - 20}Q${247 - width} ${middle} 247 112Z`);
     attr($('.body-biceps-tendon'), 'd', `M${x} ${y - 20}L${x} ${y}`);
-    attr($('.body-triceps'), 'd', `M207 105Q${160 + value / 6} 175 202 256Q${229 - value / 10} 191 207 105Z`);
+    attr($('.body-triceps'), 'd', `M207 105Q${163 + 22 * bend} 175 ${tricepsX} ${tricepsY}Q${225 - 6 * bend} 179 207 105Z`);
+    attr($('.body-triceps-tendon'), 'd', `M${tricepsX} ${tricepsY}L${tricepsEndX} ${tricepsEndY}`);
     attr($('.body-tendon-leader'), 'd', `M88 359H162L${x} ${y - 8}`);
-    arm.value = value;
-    arm.setAttribute('aria-valuetext', `${Math.round(value / 110 * 100)}％`);
+    const angle = Math.round(value);
+    arm.value = angle;
+    arm.setAttribute('aria-valuetext', `弯曲 ${angle} 度`);
+    if (armReading && armReading.textContent !== `${angle}°`) armReading.textContent = `${angle}°`;
   }
   function draw(frame) {
     const {phase, fraction: t, index} = frame;
@@ -159,7 +186,7 @@
       if (oxygenReading && oxygenReading.textContent !== reading) oxygenReading.textContent = reading;
       all('[data-circuit-track]').forEach(path => { path.style.opacity = path.dataset.circuitTrack === id ? '1' : '.28'; path.style.strokeWidth = path.dataset.circuitTrack === id ? '11' : '7'; });
     } else if (kind === 'movement') {
-      armShape(110 * (id === 'bend' ? eased : 1 - eased));
+      armShape(armAngleAt(frame));
     } else if (kind === 'nerves') {
       attr($('[data-hand-fingers]'), 'transform', `rotate(${id === 'respond' ? -12 * eased : 0} 485 282)`);
       attr($('[data-brain-halo]'), 'opacity', id === 'process' ? .25 + .65 * Math.sin(Math.PI * t) : 0);
@@ -236,11 +263,10 @@
   progress.addEventListener('input', () => player.seek(Number(progress.value) / 1000 * player.state().duration));
   speed.addEventListener('change', () => player.setSpeed(Number(speed.value)));
   arm?.addEventListener('input', () => {
-    const volume = Number(arm.value) / 110;
-    // Inverse of smoothstep keeps the manual angle slider aligned with the timeline.
-    let low = 0, high = 1;
-    for (let i = 0; i < 24; i++) { const mid = (low + high) / 2; if (smooth(mid) < volume) low = mid; else high = mid; }
-    player.seek((low + high) / 2 * mode.phases[0].duration);
+    const current = Math.round(armAngleAt(frameAt(mode.phases, player.state().time)));
+    const target = arm.valueAsNumber;
+    if (target === current) player.pause();
+    else player.seek(armTimeAtAngle(mode.phases, target, target < current));
   });
   modeButtons.forEach(button => button.addEventListener('click', () => chooseMode(button.dataset.processMode)));
   const preferencesChanged = () => { if (!fullMotion()) player.pause(); sync(player.state()); };

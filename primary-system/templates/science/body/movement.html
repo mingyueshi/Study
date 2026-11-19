@@ -1,4 +1,5 @@
-<svg viewBox="0 0 640 450" role="img" aria-labelledby="movement-title movement-desc">
+<figure class="body-stage body-process-stage body-movement-stage">
+<svg viewBox="16 0 454 456" role="img" aria-labelledby="movement-title movement-desc">
   <title id="movement-title">{{ diagram.title }}</title>
   <desc id="movement-desc">{{ lesson.takeaway }}</desc>
   <path d="M227 45v45m0 0v180" fill="none" stroke="#ecd6b9" stroke-width="70" stroke-linecap="round"/>
@@ -10,20 +11,24 @@
   </g>
   <path d="M227 93v177" fill="none" stroke="#947957" stroke-width="21" stroke-linecap="round"/>
   <path d="M227 93v177" fill="none" stroke="#fff9dc" stroke-width="14" stroke-linecap="round"/>
-  <path class="body-triceps" d="M207 105Q160 175 202 256Q229 191 207 105Z" fill="#98acdd" stroke="#506795" stroke-width="3"/>
+  <path class="body-triceps" d="M207 105Q163 175 203 242Q225 179 207 105Z" fill="#98acdd" stroke="#506795" stroke-width="3"/>
   <path class="body-biceps" d="M247 112Q284 180 243 277Q226 183 247 112Z" fill="#dc857c" stroke="#a65150" stroke-width="3"/>
   <path class="body-biceps-tendon" d="M243 253 235 293" stroke="#b99072" stroke-width="6" stroke-linecap="round"/>
+  <path class="body-triceps-tendon" d="M203 242L211 275" stroke="#7185ad" stroke-width="6" stroke-linecap="round"/>
   <circle cx="227" cy="270" r="14" fill="#fff5ce" stroke="#947957" stroke-width="4"/>
   <g class="body-svg-labels">
-    <path d="M76 166h92M78 297h129M335 164h-65M364 216H237" class="body-leader"/>
+    <path d="M76 166h92M78 297h129M321 164h-51M354 101H238" class="body-leader"/>
     <text x="30" y="150">{{ diagram.labels.triceps }}</text>
     <text x="28" y="323">{{ diagram.labels.joint }}</text>
-    <text x="350" y="169">{{ diagram.labels.biceps }}</text>
-    <text x="379" y="224">{{ diagram.labels.bone }}</text>
+    <text x="336" y="169">{{ diagram.labels.biceps }}</text>
+    <text x="366" y="106">{{ diagram.labels.bone }}</text>
     <text x="33" y="379">{{ diagram.labels.tendon }}</text>
   </g>
   <path class="body-tendon-leader" d="M88 359H162L235 282" fill="none" stroke="#7d8872" stroke-width="2" stroke-dasharray="4 5"/>
   <g class="body-motion-indicator" fill="none" stroke="#a85b59" stroke-width="3" stroke-linecap="round">
-    <path d="M330 350q52-45 46-95m-10 10 10-12 9 14"/>
+    <path data-arm-bend d="M330 350q52-45 46-95m-10 10 10-12 9 14"/>
+    <path data-arm-extend d="M376 255Q382 305 330 350m3-14-3 14 15-4" visibility="hidden"/>
   </g>
 </svg>
+<figcaption>{{ diagram.caption }}</figcaption>
+</figure>

@@ -48,6 +48,9 @@
 .body-circulation.body-process-lab.geo-experiment .experiment-heading {
   background: linear-gradient(120deg, oklch(25% .064 24), oklch(41% .085 27));
 }
+.body-movement.body-process-lab.geo-experiment .experiment-heading {
+  background: linear-gradient(120deg, oklch(25% .065 302), oklch(41% .09 310));
+}
 .body-process-lab .experiment-heading :is(.body-kicker, .body-lesson-lead) { color: inherit; }
 .body-process-lab .experiment-heading h1 { font-size: clamp(30px, 3.5vw, 52px); }
 .body-process-lab :is(#explore, #heart, #gallery, #experiment, #checkup, #pulse, #notebook, #body-notes-title, [data-process-settings]) { scroll-margin-top: 16px; }
@@ -63,7 +66,7 @@
 .body-process-lab .body-process:not([data-process-mode]) .experiment-jump { display: none; }
 .body-process-lab .body-demo-heading .experiment-jump { margin-top: 4px; }
 .body-process-lab .body-process-scrub input { min-height: 44px; }
-.body-process-lab .body-breath-takeaway { margin: 14px 0 0; font-weight: 750; color: var(--lesson-accent); }
+.body-process-lab .body-process-takeaway { margin: 14px 0 0; font-weight: 750; color: var(--lesson-accent); }
 .body-process-lab :is(a, button, summary, input):focus-visible { outline: 2px solid var(--lesson-accent); outline-offset: 3px; }
 
 .body-breath-model { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, .8fr); align-items: center; gap: 8px; }
@@ -71,6 +74,14 @@
 .body-process-lab .body-process-stage { margin: 0; }
 .body-process-lab .body-process-stage figcaption { text-align: center; }
 .body-digestion-stage .body-svg-labels { font-size: 26px; }
+.body-movement-stage > svg { border-radius: 12px; }
+.body-movement .body-arm-slider { margin-block-end: 14px; padding: 0; }
+.body-movement .body-arm-slider input { min-height: 44px; }
+.body-movement .body-arm-reading output { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.body-movement [data-phase="bend"] .body-biceps,
+.body-movement [data-phase="extend"] .body-triceps { stroke-width: 4; }
+.body-movement [data-phase="extend"] [data-arm-bend] { visibility: hidden; }
+.body-movement [data-phase="extend"] [data-arm-extend] { visibility: visible; }
 .body-circulation.body-process-lab .body-process-stage .body-stage { margin: 0; }
 .body-circulation.body-process-lab #notebook { margin-top: 0; }
 .body-circuit-oxygen {

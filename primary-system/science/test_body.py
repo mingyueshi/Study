@@ -51,7 +51,11 @@ class HumanBodyStationTests(SimpleTestCase):
             self.assertTrue(finders.find(asset))
 
     def test_experiment_sidebar_preserves_bookmarks_and_static_diagrams(self):
-        for slug, settings_id in (('breathing', 'breath-observation'), ('digestion', 'digestion-observation')):
+        for slug, settings_id in (
+            ('breathing', 'breath-observation'),
+            ('digestion', 'digestion-observation'),
+            ('movement', 'movement-observation'),
+        ):
             with self.subTest(slug=slug):
                 response = self.client.get(reverse('science-body-lesson', args=[slug]))
                 for anchor in ('explore', 'gallery', 'experiment', 'checkup', 'body-notes-title', f'{slug}-title'):
@@ -63,10 +67,14 @@ class HumanBodyStationTests(SimpleTestCase):
                 if slug == 'breathing':
                     self.assertContains(response, 'class="body-breath-thorax"')
                     self.assertContains(response, 'class="body-breath-alveoli"')
-                else:
+                elif slug == 'digestion':
                     self.assertContains(response, 'href="#digestion-intestine-path"', count=2)
-        movement = self.client.get(reverse('science-body-lesson', args=['movement']))
-        self.assertNotContains(movement, 'data-process-settings')
+                else:
+                    self.assertContains(response, 'data-arm-angle', count=1)
+                    self.assertContains(response, 'data-arm-value', count=1)
+                    self.assertContains(response, 'class="body-triceps-tendon"')
+        nerves = self.client.get(reverse('science-body-lesson', args=['nerves']))
+        self.assertNotContains(nerves, 'data-process-settings')
 
     def test_unknown_lesson_and_unsupported_method(self):
         self.assertEqual(self.client.get(reverse('science-body-lesson', args=['missing'])).status_code, 404)

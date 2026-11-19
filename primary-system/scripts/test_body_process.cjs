@@ -1,6 +1,6 @@
 const {test} = require('node:test');
 const assert = require('node:assert/strict');
-const {frameAt, createPlayer, smooth} = require('../static/science/body-process.js');
+const {frameAt, createPlayer, smooth, armAngleAt, armTimeAtAngle} = require('../static/science/body-process.js');
 const content = require('../content_sources/human-body.json');
 
 function harness(duration = 2000) {
@@ -82,4 +82,23 @@ test('重置和切换过程使旧动画失效；平滑形变在两端连续', ()
   assert.equal(smooth(0), 0); assert.equal(smooth(1), 1);
   assert.equal(smooth(.5), .5);
   assert.ok(smooth(.001) < .00001);
+});
+
+test('屈伸滑块在两个方向都能定位相同角度，并与时间轴的端点对齐', () => {
+  const phases = content.lessons.find(lesson => lesson.slug === 'movement').animation.modes[0].phases;
+  const turningPoint = phases[0].duration;
+  const end = turningPoint + phases[1].duration;
+  for (let angle = 1; angle < 110; angle++) {
+    for (const extending of [false, true]) {
+      const frame = frameAt(phases, armTimeAtAngle(phases, angle, extending));
+      assert.equal(frame.phase.id, extending ? 'extend' : 'bend');
+      assert.ok(Math.abs(armAngleAt(frame) - angle) < .00001);
+    }
+  }
+  assert.equal(armTimeAtAngle(phases, 0, false), 0);
+  assert.equal(armTimeAtAngle(phases, 110, false), turningPoint);
+  assert.equal(armTimeAtAngle(phases, 110, true), turningPoint);
+  assert.equal(armTimeAtAngle(phases, 0, true), end);
+  assert.equal(armAngleAt(frameAt(phases, turningPoint)), 110);
+  assert.equal(armAngleAt(frameAt(phases, end)), 0);
 });

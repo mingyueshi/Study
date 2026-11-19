@@ -8,6 +8,7 @@
   {% if process_observation_id %}
     {% if lesson.slug == 'breathing' %}{% include 'science/body/breathing.html' with diagram=lesson.diagram %}
     {% elif lesson.slug == 'digestion' %}{% include 'science/body/digestion.html' with diagram=lesson.diagram %}
+    {% elif lesson.slug == 'movement' %}{% include 'science/body/movement.html' with diagram=lesson.diagram %}
     {% elif lesson.slug == 'circulation' %}
     <div class="body-process-stage">
       <div data-process-view="pump">{% include 'science/body/heart-anatomy.html' %}</div>
@@ -20,6 +21,13 @@
   </div>
   {% endif %}
   <div class="body-process-player" data-process-player hidden>
+    {% if lesson.slug == 'movement' %}
+    <label class="body-arm-slider">
+      <span class="body-arm-reading">{{ lesson.diagram.labels.slider }} <output data-arm-value aria-live="off">0°</output></span>
+      <input type="range" min="0" max="110" value="0" step="1" data-arm-angle aria-label="{{ lesson.diagram.labels.slider }}">
+      <span><span>{{ lesson.diagram.labels.straight }}</span><span>{{ lesson.diagram.labels.bent }}</span></span>
+    </label>
+    {% endif %}
     <div class="body-controls">
       <button class="body-button-primary" type="button" data-process-play aria-pressed="false">播放过程</button>
       <button type="button" data-process-prev>上一步</button><button type="button" data-process-next>下一步</button>
@@ -28,13 +36,11 @@
     </div>
     <label class="body-process-scrub">拖动进度，停下来细看 <output data-process-position>第 1 步</output><input type="range" min="0" max="1000" step="1" value="0" data-process-progress></label>
     <p class="body-process-status" data-process-status role="status"></p>
-    {% if lesson.slug == 'movement' %}<label class="body-arm-slider">{{ lesson.diagram.labels.slider }}<input type="range" min="0" max="110" value="0" step="1" data-arm-angle><span><span>{{ lesson.diagram.labels.straight }}</span><span>{{ lesson.diagram.labels.bent }}</span></span></label>{% endif %}
   </div>
   {% if not process_observation_id %}
     <figure class="body-stage">
       {% if lesson.slug == 'nerves' %}{% include 'science/body/nerves.html' with diagram=lesson.diagram %}
-      {% elif lesson.slug == 'senses' %}{% include 'science/body/senses.html' with diagram=lesson.diagram %}
-      {% else %}{% include 'science/body/movement.html' with diagram=lesson.diagram %}{% endif %}
+      {% else %}{% include 'science/body/senses.html' with diagram=lesson.diagram %}{% endif %}
       <figcaption>{{ lesson.diagram.caption }}</figcaption>
     </figure>
   {% endif %}

@@ -12,6 +12,7 @@ PROCESS_OBSERVATION_IDS = {
     'breathing': 'breath-observation',
     'digestion': 'digestion-observation',
     'circulation': 'circulation-observation',
+    'movement': 'movement-observation',
 }
 
 
