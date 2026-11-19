@@ -13,13 +13,16 @@
     return;
   }
   const ctx = makeContext(eras, events, pairs);
-  const search = $('event-search'), mediaOnly = $('media-only'), tools = $('timeline-tools');
+  const search = $('event-search'), mediaOnly = $('media-only'), sidebar = $('timeline-tools');
+  const localTools = sidebar.querySelector('.timeline-local-tools'), filterTools = $('timeline-filters');
   const results = $('timeline-results'), slider = $('year-slider'), ribbon = $('dynasty-ribbon');
-  const narrow = matchMedia('(width < 720px)');
+  const pairView = $('timeline-pairs');
+  const standalone = !root.closest('.study-timeline');
+  const narrow = matchMedia('(width < 900px)');
   const minYear = Math.min(...events.map(ev => ev.sort)), maxYear = Math.max(...events.map(ev => ev.sort));
   const inBounds = year => Number.isInteger(year) && year !== 0 && year >= minYear && year <= maxYear;
   let mode = 'all', radius = 'all', focusYear = minYear, band = null, readingYear = minYear;
-  let frame = 0, activeBandKey = null;
+  let frame = 0, activeBandKey = null, currentEraLink = null;
   $('stat-eras').textContent = eras.length;
   $('stat-events').textContent = events.length;
   $('stat-pairs').textContent = pairs.length;
@@ -58,11 +61,12 @@
       .map(pairHTML).join('')}
   </section>`).join('');
   const buttons = [...root.querySelectorAll('.tl-filters button')];
+  const eraLinks = [...$('era-nav').children];
   const zoomButtons = [...root.querySelectorAll('[data-zoom]')];
   const sections = [...flow.querySelectorAll('.tl-era')], rows = [...flow.querySelectorAll('.tl-date-row')];
   const cards = [...flow.querySelectorAll('.tl-card')];
-  const pairCards = [...$('timeline-pairs').querySelectorAll('.timeline-pair')];
-  const pairSections = [...$('timeline-pairs').querySelectorAll('.timeline-pair-era')];
+  const pairCards = [...pairView.querySelectorAll('.timeline-pair')];
+  const pairSections = [...pairView.querySelectorAll('.timeline-pair-era')];
   const bandButtons = [...$('dynasty-strip').querySelectorAll('[data-band]')];
   const searchIndex = new Map(events.map(ev => [ev.id, normalize(ev.title + ev.tag + ev.year + ev.text)]));
   slider.min = ordinal(minYear); slider.max = ordinal(maxYear);
@@ -82,11 +86,19 @@
       ['zoom', radius === 'all' ? null : radius], ['dynasty', band?.id || null]]) {
       if (value === null) url.searchParams.delete(key); else url.searchParams.set(key, value);
     }
-    history.replaceState(null, '', url);
+    const anchor = $(url.hash.slice(1));
+    // 筛选隐藏当前卡片时解除定位，刷新可保留新的视角和年代窗口。
+    if (anchor?.matches('[data-tl-anchor]') && anchor.closest('[hidden]')) url.hash = '';
+    history.replaceState(history.state, '', url);
   }
-  function syncTools() { tools.open = !narrow.matches || location.hash === '#timeline-tools'; }
+  function openFilters() {
+    localTools.open = true;
+    filterTools.open = true;
+    if (root.dataset.slMode === 'compact' && root.dataset.slOpen !== 'true') root.querySelector('.sl-header .sl-toggle:not(.sl-collapse)')?.click();
+    if (root.dataset.slMode === 'wide' && root.dataset.slCollapsed === 'true') root.querySelector('.sl-header .sl-collapse')?.click();
+  }
   function closeCompactTools() {
-    if (narrow.matches) tools.open = false;
+    if (standalone && narrow.matches) localTools.open = false;
     if (root.dataset.slMode === 'compact' && root.dataset.slOpen === 'true') root.querySelector('.sl-header .sl-toggle:not(.sl-collapse)')?.click();
   }
   function measureRibbon() {
@@ -94,7 +106,7 @@
   }
   function settleAnchor() {
     const target = document.getElementById(location.hash.slice(1));
-    if (!target?.hasAttribute('data-tl-anchor') || !root.contains(target) || target.closest('[hidden]')) return;
+    if (!target?.hasAttribute('data-tl-anchor') || !root.contains(target) || sidebar.contains(target) || target.closest('[hidden]')) return;
     measureRibbon();
     target.scrollIntoView({block: 'start', behavior: 'instant'});
     queuePosition();
@@ -105,6 +117,13 @@
     // 跳过吸顶色带下面仅剩一小截的上一张卡片，跟随实际阅读区域。
     const line = Math.max(0, ribbon.getBoundingClientRect().bottom) + 64;
     const current = list.find(item => item.getBoundingClientRect().bottom > line) || list.at(-1);
+    const era = current?.closest('.tl-era, .timeline-pair-era');
+    const eraLink = eraLinks.find(link => link.hash === '#' + era?.id);
+    if (eraLink !== currentEraLink) {
+      currentEraLink?.removeAttribute('aria-current');
+      eraLink?.setAttribute('aria-current', 'location');
+      currentEraLink = eraLink;
+    }
     if (!current) { $('dynasty-current').textContent = '当前筛选没有大事'; bandButtons.forEach(button => button.removeAttribute('aria-current')); activeBandKey = null; return; }
     readingYear = Number(current.dataset.year);
     const active = bandsAt(bands, readingYear);
@@ -143,11 +162,11 @@
       pairCount += Number(!card.hidden);
     }
     pairSections.forEach(section => { section.hidden = !section.querySelector('.timeline-pair:not([hidden])'); });
-    [...$('era-nav').children].forEach((link, i) => {
+    eraLinks.forEach((link, i) => {
       link.hidden = (mode === 'pair' ? pairSections : sections)[i].hidden;
       link.href = '#' + (mode === 'pair' ? 'pair-era-' : 'era-') + eras[i].id;
     });
-    flow.hidden = mode === 'pair'; $('timeline-pairs').hidden = mode !== 'pair'; flow.dataset.mode = mode;
+    flow.hidden = mode === 'pair'; pairView.hidden = mode !== 'pair'; flow.dataset.mode = mode;
     $('event-count').textContent = mode === 'pair' ? `显示 ${pairCount} / ${pairs.length} 组中外对比` : `显示 ${count} / ${events.length} 件大事`;
     $('no-events').hidden = (mode === 'pair' ? pairCount : count) > 0;
     buttons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.mode === mode)));
@@ -170,7 +189,7 @@
     const target = mode === 'pair' ? $('pair-' + ctx.pairOfEvent.get(item.id).id) : $('card-' + item.id);
     readingYear = item.sort;
     closeCompactTools(); measureRibbon();
-    const url = new URL(location.href); url.hash = target.id; history.replaceState(null, '', url);
+    const url = new URL(location.href); url.hash = target.id; history.replaceState(history.state, '', url);
     if (focus) target.focus({preventScroll: true});
     target.scrollIntoView({block: 'start', behavior: 'instant'});
     requestAnimationFrame(settleAnchor);
@@ -206,21 +225,39 @@
   search.addEventListener('input', showFilteredResults);
   mediaOnly.addEventListener('change', showFilteredResults);
   $('reset-filters').addEventListener('click', () => {
-    resetFilters(); tools.open = true;
-    if (root.dataset.slMode === 'compact' && root.dataset.slOpen !== 'true') root.querySelector('.sl-header .sl-toggle:not(.sl-collapse)')?.click();
+    resetFilters(); openFilters();
     search.focus();
   });
   buttons.forEach(button => button.addEventListener('click', () => { mode = button.dataset.mode; showFilteredResults(); }));
-  syncTools(); narrow.addEventListener('change', syncTools);
-  window.addEventListener('hashchange', () => { if (location.hash === '#timeline-tools') tools.open = true; });
+  if (standalone) {
+    const syncLocalTools = () => { localTools.open = !narrow.matches || location.hash === '#timeline-tools'; };
+    syncLocalTools();
+    narrow.addEventListener('change', syncLocalTools);
+  }
   window.addEventListener('scroll', queuePosition, {passive: true});
   window.addEventListener('resize', queuePosition);
   window.addEventListener('popstate', () => { readURL(); filter(false); });
   new ResizeObserver(() => { measureRibbon(); queuePosition(); }).observe(ribbon);
   readURL(); filter(false); measureRibbon();
   bindAnchors(root, target => {
+    if (target === sidebar) { openFilters(); return; }
     closeCompactTools();
-    if (target.closest('[hidden]')) resetFilters();
+    // 优先保留年代窗口和筛选，只有遮住书签目标时才放宽条件。
+    const inPairView = pairView.contains(target);
+    if (inPairView !== (mode === 'pair') && (inPairView || flow.contains(target))) {
+      mode = inPairView ? 'pair' : 'all';
+      filter(false);
+    }
+    if (target.closest('[hidden]')) {
+      mode = inPairView ? 'pair' : 'all';
+      search.value = ''; mediaOnly.checked = false;
+      filter(false);
+    }
+    if (target.closest('[hidden]')) {
+      radius = 'all'; band = null;
+      filter(false);
+    }
+    saveURL();
     requestAnimationFrame(settleAnchor);
   });
   // 统一侧栏在初始化时会重排页面；完成后再对齐一次已有书签。

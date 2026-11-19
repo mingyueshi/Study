@@ -472,6 +472,12 @@ class StudyTopicPageTests(SimpleTestCase):
 
     def test_history_people_entry_and_data_load_before_consumers(self):
         response = self.client.get(reverse('history-timeline-timeline'))
+        for anchor in ('timeline-tools', 'timeline-results', 'timeline-flow', 'timeline-pairs', 'era-nav'):
+            self.assertContains(response, f'id="{anchor}"', count=1)
+        for label in ('事件筛选', '时代与年代', '相关专题'):
+            self.assertContains(response, f'<summary>{label}</summary>', html=True)
+        self.assertContains(response, 'history-timeline/timeline.css?v=')
+        self.assertContains(response, 'history-timeline/timeline-app.js?v=')
         self.assertContains(response, 'href="people.html"')
         self.assertContains(response, '历史人物馆')
         for name, consumer in (

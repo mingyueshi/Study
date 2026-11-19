@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="沿着时间轴读中国史和世界史，用侧栏查找大事、切换视角，或直达九个时代。">
+  <meta name="description" content="沿同一条年代顺序读中国史和世界史。用侧栏筛选大事、定位时代，在主区阅读同期对照。">
   <title>历史双轨时间轴 · 乐学堂</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="timeline.css">
@@ -18,62 +18,82 @@
 <body>
   <a class="skip-link" href="#timeline-results">跳到时间轴</a>
   <main class="tl-shell tl-workspace-shell" id="main">
-    <div class="timeline-topic" id="top" data-sidebar-label="时间轴工具">
-      <aside class="timeline-sidebar" aria-label="时间轴导航与工具">
-        <header class="timeline-heading">
-          <p class="tl-eyebrow">中国史 × 世界史</p>
-          <h1>历史双轨<br class="tl-sidebar-break">时间轴</h1>
-          <p class="timeline-totals"><b id="stat-eras">9</b> 个时代 · <b id="stat-events">126</b> 件大事</p>
-        </header>
-        <nav class="tl-sysnav" aria-label="历史时间轴系统页面导航">
-          <a data-page href="index.html">首页</a>
-          <a data-page href="era.html">时代站</a>
-          <a data-page href="dynasties.html">朝代更替</a><a data-page href="territory.html">疆域地图</a>
-        <a data-page href="people.html">历史人物馆</a>
-        <a href="civilizations.html">世界文明巡礼</a><a data-page href="ancient-science.html">中国古代科技</a><a data-page href="silk-road.html">丝绸之路</a></nav>
-
-        <details class="timeline-tools" id="timeline-tools" open>
-          <summary>搜索、筛选和时代导航</summary>
-          <div class="tl-search">
-            <label for="event-search">找大事</label>
-            <input type="search" id="event-search" placeholder="如郑和、1405">
-            <span id="event-count" role="status"></span>
-          </div>
-          <form class="timeline-jump" id="year-jump-form">
-            <label for="year-jump">跳到某年或朝代</label>
-            <div><input id="year-jump" type="text" placeholder="公元前 221 年、唐朝" autocomplete="off"><button type="submit">前往</button></div>
-            <p id="year-jump-status" role="status">公元前年份可写「前 221」或「−221」。没有公元 0 年。</p>
-          </form>
-          <fieldset class="timeline-zoom">
-            <legend>时间轴缩放</legend>
-            <div class="timeline-zoom-buttons" role="group" aria-label="选择年代窗口">
-              <button type="button" data-zoom="all" aria-pressed="true">全历史</button>
-              <button type="button" data-zoom="500" aria-pressed="false">前后 500 年</button>
-              <button type="button" data-zoom="100" aria-pressed="false">前后 100 年</button>
+    <header class="timeline-heading" id="top">
+      <p class="tl-eyebrow">中国史 × 世界史</p>
+      <h1>历史双轨时间轴</h1>
+      <p class="timeline-lead">沿同一条年代顺序读中外大事，看看同一时期，两边各发生了什么。</p>
+      <p class="timeline-totals"><b id="stat-eras">9</b> 个时代 · <b id="stat-events">126</b> 件大事</p>
+    </header>
+    <div class="timeline-topic" data-sidebar-label="时间轴工具">
+      <aside class="timeline-sidebar" id="timeline-tools" data-tl-anchor tabindex="-1" aria-label="时间轴导航与工具">
+        <details class="timeline-local-tools" open>
+          <summary>时间轴工具</summary>
+          <details class="timeline-tool-group" id="timeline-filters" open>
+            <summary>事件筛选</summary>
+            <div class="timeline-tool-body">
+              <div class="tl-search">
+                <label for="event-search">找大事</label>
+                <input type="search" id="event-search" placeholder="如郑和、1405">
+              </div>
+              <div class="tl-filters" role="group" aria-label="选择查看视角">
+                <button type="button" data-mode="all" aria-pressed="true">双轨全览</button>
+                <button type="button" data-mode="china" aria-pressed="false">中国史</button>
+                <button type="button" data-mode="world" aria-pressed="false">世界史</button>
+                <button type="button" data-mode="pair" aria-pressed="false">同期对比</button>
+              </div>
+              <label class="tl-media-filter"><input id="media-only" type="checkbox"> 只看带素材的大事</label>
+              <a class="timeline-side-link" href="#timeline-results">查看结果 ↓</a>
             </div>
-            <label for="year-slider">拖动选择年代</label>
-            <output id="year-slider-label" for="year-slider"></output>
-            <input id="year-slider" type="range" step="1" aria-label="选择中心年代">
-          </fieldset>
-          <div class="tl-filters" role="group" aria-label="选择查看视角">
-            <button type="button" data-mode="all" aria-pressed="true">双轨全览</button>
-            <button type="button" data-mode="china" aria-pressed="false">中国史</button>
-            <button type="button" data-mode="world" aria-pressed="false">世界史</button>
-            <button type="button" data-mode="pair" aria-pressed="false">同期对比</button>
-          </div>
-          <label class="tl-media-filter"><input id="media-only" type="checkbox"> 只看带素材的大事</label>
-          <a class="tl-mobile-results" href="#timeline-results">查看结果 ↓</a>
-          <nav aria-label="跳到指定时代">
-            <h2 class="tl-sidebar-label">跳到时代</h2>
-            <div class="tl-era-nav" id="era-nav"></div>
-          </nav>
+          </details>
+          <details class="timeline-tool-group" id="timeline-eras">
+            <summary>时代与年代</summary>
+            <div class="timeline-tool-body">
+              <nav aria-label="跳到指定时代">
+                <h2 class="tl-sidebar-label">跳到时代</h2>
+                <div class="tl-era-nav" id="era-nav"></div>
+              </nav>
+              <form class="timeline-jump" id="year-jump-form">
+                <label for="year-jump">跳到某年或朝代</label>
+                <div><input id="year-jump" type="text" placeholder="前 221 年、唐朝" autocomplete="off"><button type="submit">前往</button></div>
+                <p id="year-jump-status" role="status">公元前年份可写「前 221」或「−221」。没有公元 0 年。</p>
+              </form>
+              <fieldset class="timeline-zoom">
+                <legend>时间轴缩放</legend>
+                <div class="timeline-zoom-buttons" role="group" aria-label="选择年代窗口">
+                  <button type="button" data-zoom="all" aria-pressed="true">全历史</button>
+                  <button type="button" data-zoom="500" aria-pressed="false">前后 500 年</button>
+                  <button type="button" data-zoom="100" aria-pressed="false">前后 100 年</button>
+                </div>
+                <label for="year-slider">拖动选择年代</label>
+                <output id="year-slider-label" for="year-slider"></output>
+                <input id="year-slider" type="range" step="1" aria-label="选择中心年代">
+              </fieldset>
+            </div>
+          </details>
+          <details class="timeline-tool-group">
+            <summary>相关专题</summary>
+            <nav class="timeline-tool-body timeline-topic-links" aria-label="历史专题">
+              <a href="index.html">历史时间轴首页 ↗</a>
+              <a href="era.html">时代站 ↗</a>
+              <a href="dynasties.html">朝代更替 ↗</a>
+              <a href="territory.html">疆域地图 ↗</a>
+              <a href="people.html">历史人物馆 ↗</a>
+              <a href="civilizations.html">世界文明巡礼 ↗</a>
+              <a href="ancient-science.html">中国古代科技 ↗</a>
+              <a href="silk-road.html">丝绸之路 ↗</a>
+              <a href="../history/index.html">历史精讲 ↗</a>
+            </nav>
+          </details>
         </details>
       </aside>
 
       <section class="timeline-content" aria-labelledby="timeline-results">
         <header class="timeline-reading-head">
-          <h2 id="timeline-results" data-tl-anchor tabindex="-1">沿时间读大事</h2>
-          <p>越往下越接近今天。可按年代缩放，或切到「同期对比」并排读中外故事。</p>
+          <div>
+            <h2 id="timeline-results" data-tl-anchor tabindex="-1">沿时间读大事</h2>
+            <p id="event-count" role="status"></p>
+          </div>
+          <a class="timeline-side-link" href="#timeline-tools">筛选与定位 ↗</a>
         </header>
 
         <nav class="timeline-dynasty-ribbon" id="dynasty-ribbon" aria-label="朝代色带与年代定位">
@@ -110,6 +130,6 @@
       </section>
     </div>
   </main>
-  <footer class="tl-footer">历史时间轴系统 · <a href="index.html">系统首页</a> · <a href="dynasties.html">朝代更替</a> · <a href="#top">回到顶部 ↑</a></footer>
+  <footer class="tl-footer"><a href="#top">回到顶部 ↑</a></footer>
 </body>
 </html>

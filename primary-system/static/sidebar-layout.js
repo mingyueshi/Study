@@ -25,7 +25,7 @@
     ['.geometry-workspace', '.geometry-notebook', 'clamp(280px, 24vw, 400px)', 900],
     ['.body-workspace', '.body-side', 'clamp(300px, 30vw, 460px)', 900],
     ['.gm-topic', '.gm-sidebar', 'clamp(240px, 24vw, 290px)', 900, '.gm-sysnav, .gm-toolbar, .gm-search, .gm-media-filters'],
-    ['.timeline-topic', '.timeline-sidebar', 'clamp(250px, 23vw, 300px)', 900, '.timeline-heading, .tl-sysnav'],
+    ['.timeline-topic', '.timeline-sidebar', 'clamp(250px, 23vw, 300px)', 900],
     ['.history-topic .lesson-layout, .geography-topic .lesson-layout', '.lesson-resources', 'clamp(280px, 24vw, 340px)', 1000],
     ['.poly-shell', '.poly-browse', 'clamp(365px, 32vw, 480px)', 1000, '.poly-card-heading, .poly-search-row, .poly-buckets, .poly-alphabet'],
     ['.tree-shell', '.tree-word-panel', 'clamp(320px, 32vw, 520px)', 1000],
@@ -201,6 +201,9 @@
   const changes = new MutationObserver(scan);
   changes.observe(document.body, {childList: true, subtree: true});
   document.addEventListener('load', schedule, true);
+  document.addEventListener('toggle', event => {
+    if (event.target.closest?.('.sl-panel')) schedule();
+  }, true);
   window.addEventListener('resize', schedule, {passive: true});
   window.visualViewport?.addEventListener('resize', schedule, {passive: true});
   window.addEventListener('scroll', schedule, {passive: true});

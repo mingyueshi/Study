@@ -386,12 +386,16 @@ Object.entries(PAGE_REFS).forEach(([page, refs]) => {
   for (const [, target] of html.matchAll(/(?:href|src)="([^"#?]+)(?:[#?][^"]*)?"/g)) {
     const sharedHistory = /^\.\.\/history\/(knowledge-dynasties|media)\.js$/.test(target);
     const sharedTerritory = page === 'territory.html' &&
-      ['../map-skills/experiment.css', '../map-skills/experiment.js', '../history/index.html'].includes(target);
-    check((!/[/:]/.test(target) || sharedHistory || sharedTerritory) && fileExists(target), page + ' 应引用系统内存在的文件：' + target);
+      ['../map-skills/experiment.css', '../map-skills/experiment.js'].includes(target);
+    const lesson = ['timeline.html', 'territory.html'].includes(page) && target === '../history/index.html';
+    check((!/[/:]/.test(target) || sharedHistory || sharedTerritory || lesson) && fileExists(target), page + ' 应引用系统内存在的文件：' + target);
   }
   check(html.includes('lang="zh-CN"'), page + ' 应声明 zh-CN');
-  const hasNavigation = page === 'territory.html' ? html.includes('class="experiment-links" aria-label="历史时间轴系统页面导航"') : html.includes('tl-sysnav');
-  check(hasNavigation, page + ' 应有系统导航条');
+  const navigation = {
+    'timeline.html': 'class="timeline-tool-body timeline-topic-links" aria-label="历史专题"',
+    'territory.html': 'class="experiment-links" aria-label="历史时间轴系统页面导航"',
+  };
+  check(html.includes(navigation[page] || 'tl-sysnav'), page + ' 应有系统导航条');
   check(!/https?:\/\//.test(html.replace(/<!--[\s\S]*?-->/g, '').replace(/xmlns="http:\/\/www\.w3\.org\/2000\/svg"/g, '')), page + ' 不应引用外部网络资源（离线优先）');
 });
 

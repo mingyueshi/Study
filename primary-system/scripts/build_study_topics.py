@@ -163,6 +163,8 @@ def template(source, topic, page, theme, index_route):
     if (topic, page) == ('history-timeline', 'territory'):
         content = rewrite_page_links(content, {'territory.html': 'history-timeline-territory',
                                                '../history/index.html': 'history-study'})
+    if (topic, page) == ('history-timeline', 'timeline'):
+        content = rewrite_page_links(content, {'../history/index.html': 'history-study'})
     if topic == 'geo-map' and page in ('china', 'world'):
         anchor = '<p class="gm-layer-hint" id="gm-layer-hint"></p>'
         link = """<a class="study-map-tool" href="{% url 'geography-study' %}#lesson-gu2-3">地图三要素与比例尺 →</a>"""
@@ -196,7 +198,7 @@ def template(source, topic, page, theme, index_route):
             asset_url += '?v=' + sha256(resource_content(SOURCE / topic / path, topic, theme)).hexdigest()[:12]
         if shared_experiment or (topic in ('earth', 'ocean', 'climate', 'map-skills') and path.endswith(('.css', '.js'))):
             asset_url += '?v=' + sha256(resource_content(SOURCE / topic / path, topic, theme)).hexdigest()[:12]
-        if topic == 'history-timeline' and (Path(path).name.startswith(('silk-road', 'silk-city', 'territory')) or path in ('dynasty-app.js', 'dynasty.css')) and path.endswith(('.css', '.js')):
+        if topic == 'history-timeline' and (Path(path).name.startswith(('silk-road', 'silk-city', 'territory')) or path in ('dynasty-app.js', 'dynasty.css', 'timeline-app.js', 'timeline.css')) and path.endswith(('.css', '.js')):
             asset_url += '?v=' + sha256(resource_content(SOURCE / topic / path, topic, theme)).hexdigest()[:12]
         if path.endswith('.css'):
             assets.append(f'<link rel="stylesheet" href="{asset_url}">')
