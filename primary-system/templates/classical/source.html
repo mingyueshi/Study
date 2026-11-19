@@ -1,3 +1,14 @@
-{% extends 'base.html' %}{% load static %}
+{% extends 'classical/base.html' %}
 {% block title %}查阅原典 · {{ article.title }}{% endblock %}
-{% block content %}<link rel="stylesheet" href="{% static 'classical/classical.css' %}?v=2"><div class="classical-hall">{% include 'classical/_nav.html' %}<section class="cw-section"><h1>本机原典暂未就绪</h1><p>还没有找到与本篇登记版本一致的原典篇章。你可以继续精读，也可以联网查阅出处。</p><p>《{{ article.title }}》的原文、解读和练习仍可正常使用。</p><p><a class="cw-button cw-primary" href="{% url 'classical-detail' article.id %}">回到精读</a></p><a href="{{ source_url }}" target="_blank" rel="noopener noreferrer">查阅原典出处（需联网）↗</a></section></div>{% endblock %}
+{% block classical_hero %}
+<header class="study-reading-hero"><h1>查阅《{{ article.title }}》原典</h1></header>
+{% endblock %}
+{% block classical_main %}
+<section class="cw-section" aria-labelledby="cw-source-fallback">
+  <h2 id="cw-source-fallback">本机原典暂未就绪</h2>
+  <p>还没有找到与本篇登记版本一致的原典篇章。你可以继续精读，也可以联网查阅出处。</p>
+  <p>《{{ article.title }}》的原文、解读和练习仍可正常使用。</p>
+  <p><a class="cw-button cw-primary" href="{% url 'classical-detail' article.id %}">回到精读</a></p>
+  <a href="{{ source_url }}" target="_blank" rel="noopener noreferrer">查阅原典出处（需联网）↗</a>
+</section>
+{% endblock %}

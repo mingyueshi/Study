@@ -1,0 +1,11 @@
+<details class="study-reading-group" id="cw-search"{% if q or open_search %} open{% endif %}>
+  <summary>{{ search_label }}</summary>
+  <form class="cw-filters" method="get" action="{{ search_url }}#cw-search-title" role="search" aria-label="{{ search_label }}">
+    <label>原文、译文或词义<input type="search" name="q" value="{{ q }}" placeholder="输入要找的词句" maxlength="80"></label>
+    {% if initial_section %}<input type="hidden" name="section" value="{{ initial_section }}">{% endif %}
+    <div class="cw-filter-actions">
+      <button class="cw-button cw-primary" type="submit">搜索</button>
+      {% if q %}<a class="cw-reset" href="{{ search_url }}">清除搜索</a>{% endif %}
+    </div>
+  </form>
+</details>

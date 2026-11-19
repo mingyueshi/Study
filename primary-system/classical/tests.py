@@ -288,6 +288,30 @@ class ClassicalPageTests(SimpleTestCase):
         self.assertNotContains(response, '<script>')
         self.assertContains(self.client.get(reverse('classical'), {'q': '没有这篇文章'}), '这次还没有找到')
 
+    def test_search_controls_and_chapter_links_stay_in_the_sidebar(self):
+        for route, args in (('classical', []), ('classical-book', ['lunyu']), ('classical-detail', ['lunyu-weizheng'])):
+            with self.subTest(route=route):
+                response = self.client.get(reverse(route, args=args))
+                html = response.content.decode()
+                sidebar = html.split('<aside class="cw-sidebar ', 1)[1].split('</aside>', 1)[0]
+                self.assertIn('role="search"', sidebar)
+                self.assertIn('id="cw-contents"', sidebar)
+                self.assertIn('古文专题导航', sidebar)
+                self.assertNotIn('data-speak-all', sidebar)
+                if route == 'classical-detail':
+                    self.assertIn('aria-current="page"', sidebar)
+                    self.assertContains(response, 'data-speak-all')
+                    self.assertContains(response, 'id="line-s11"')
+
+    def test_index_and_article_search_link_directly_to_matching_units(self):
+        index = self.client.get(reverse('classical'), {'q': '温故而知新'})
+        self.assertContains(index, '/classical/lunyu-weizheng/?line=s11#line-s11')
+        detail_url = reverse('classical-detail', args=['lunyu-weizheng'])
+        detail = self.client.get(detail_url, {'q': '温故而知新'})
+        self.assertEqual([m['unit']['id'] for m in detail.context['matches']], ['s11'])
+        self.assertContains(detail, 'href="#line-s11" data-cw-jump')
+        self.assertContains(self.client.get(detail_url, {'q': '<完全没有匹配>'}), '&lt;完全没有匹配&gt;')
+
     def test_deep_links_and_unknown_articles(self):
         url = reverse('classical-detail', args=['xueyi'])
         response = self.client.get(url, {'mode': 'recite', 'line': 's3'})

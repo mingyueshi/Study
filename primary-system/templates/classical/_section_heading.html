@@ -1,0 +1,18 @@
+<header class="cw-paragraph-heading" id="section-{{ section.id }}" tabindex="-1">
+  <h3>{{ section.title }}</h3>
+  <p>{{ section.intro }}</p>
+  <div class="cw-section-actions">
+    <button type="button" class="cw-button" data-speak-section="{{ section.id }}" data-js-only hidden>听本段 ♪</button>
+    <a href="?section={{ section.id }}&amp;mode=recite#recite">背本段</a>
+    <a href="?section={{ section.id }}&amp;mode=practice#practice">练本段</a>
+  </div>
+  <details>
+    <summary>打印本段</summary>
+    <div class="cw-print-links">
+      <a href="{% url 'classical-print' article.id %}?section={{ section.id }}&amp;view=original" target="_blank" rel="noopener">原文 ↗</a>
+      <a href="{% url 'classical-print' article.id %}?section={{ section.id }}&amp;view=study" target="_blank" rel="noopener">讲解 ↗</a>
+      <a href="{% url 'classical-print' article.id %}?section={{ section.id }}&amp;view=practice" target="_blank" rel="noopener">练习 ↗</a>
+      <a href="{% url 'classical-print' article.id %}?section={{ section.id }}&amp;view=answers" target="_blank" rel="noopener">答案 ↗</a>
+    </div>
+  </details>
+</header>

@@ -1,27 +1,94 @@
-{% extends 'base.html' %}
+{% extends 'classical/base.html' %}
 {% load static %}
 {% block title %}{{ article.title }} · 古文精读馆 · 乐学堂{% endblock %}
-{% block content %}
-<link rel="stylesheet" href="{% static 'classical/classical.css' %}?v=4">
+{% block classical_assets %}
 <script src="{% static 'speech.js' %}" defer></script>
-<script src="{% static 'classical/classical.js' %}?v=4" defer></script>
 {{ article|json_script:'classical-data' }}
-<div class="classical-hall" data-classical-reader data-initial-mode="{{ initial_mode }}" data-initial-line="{{ initial_line }}" data-initial-section="{{ initial_section }}">
-  {% include 'classical/_nav.html' %}
-  <header class="cw-article-hero"><div><p class="cw-eyebrow">古文精读馆 · {{ article.level_label }} · {{ article.genre_label }}</p><h1>{{ article.title }}</h1><p class="cw-byline">{{ article.attribution }} · {{ article.character_count }} 字{% if article.curriculum %} · {{ article.curriculum.label }}{% endif %}</p><p class="cw-lead">{{ article.intro }}</p></div><span class="cw-number" aria-hidden="true">文<br>言</span></header>
-  {% if collection %}<p class="cw-book-breadcrumb"><a href="{% url 'classical-book' collection.id %}">← {{ collection.title }}目录与全书搜索</a></p>{% endif %}
-  <nav class="cw-steps" aria-label="本篇学习步骤"><a href="#read">01 逐{{ article.unit_label }}读懂</a><a href="#story">02 串起整篇</a><a href="#recite">03 试着背诵</a><a href="#practice">04 练一练</a></nav>
-  <div class="cw-workspace" data-sidebar-layout=".cw-sidebar" data-sidebar-width="clamp(270px, 22vw, 360px)" data-sidebar-breakpoint="1000" data-sidebar-label="篇目与工具">
-    <div class="cw-main">
+{% endblock %}
+{% block classical_attributes %}data-classical-reader data-initial-mode="{{ initial_mode }}" data-initial-line="{{ initial_line }}" data-initial-section="{{ initial_section }}"{% endblock %}
+{% block classical_hero %}
+<header class="study-reading-hero">
+  <h1>{{ article.title }}</h1>
+  <p class="cw-hero-meta">{{ article.attribution }} · {{ article.character_count }} 字{% if article.curriculum %} · {{ article.curriculum.label }}{% endif %}</p>
+  <p>{{ article.intro }}</p>
+</header>
+{% endblock %}
+{% block classical_sidebar %}
+{% url 'classical-detail' article.id as search_url %}
+{% include 'classical/_search.html' with search_label='搜索本篇' %}
+<details class="study-reading-group" id="cw-contents" open>
+  <summary>本篇目录</summary>
+  <nav class="study-reading-links" aria-label="本篇学习步骤">
+    <a href="#read">逐{{ article.unit_label }}精读 <span aria-hidden="true">↓</span></a>
+    <a href="#story">串起整篇 <span aria-hidden="true">↓</span></a>
+    <a href="#recite">试着背诵 <span aria-hidden="true">↓</span></a>
+    <a href="#practice">练一练 <span aria-hidden="true">↓</span></a>
+  </nav>
+  {% if article.sections %}
+  <nav class="study-reading-links cw-subdirectory" aria-label="分段精读目录">
+    {% for section in article.sections %}<a href="#section-{{ section.id }}">{{ section.title }} <span aria-hidden="true">↓</span></a>{% endfor %}
+  </nav>
+  {% endif %}
+  <details class="cw-subdirectory" id="cw-lines">
+    <summary>按章句跳读 · {{ article.sentences|length }} {{ article.unit_label }}</summary>
+    <nav class="study-reading-links" aria-label="本篇章句">
+      {% for sentence in article.sentences %}<a href="#line-{{ sentence.id }}" data-directory-line="{{ sentence.id }}">{{ sentence.number }} · {{ sentence.text|truncatechars:24 }} <span aria-hidden="true">↓</span></a>{% endfor %}
+    </nav>
+  </details>
+</details>
+<details class="study-reading-group" id="cw-articles">
+  <summary>切换篇目</summary>
+  <nav class="study-reading-links" aria-label="切换篇目">
+    {% if collection %}<a href="{% url 'classical-book' collection.id %}">{{ collection.title }}全书目录 <span aria-hidden="true">↗</span></a>{% endif %}
+    {% for item in articles %}<a href="{% url 'classical-detail' item.id %}"{% if item.id == article.id %} aria-current="page"{% endif %}>{{ item.title }}{% if item.curriculum %}<small>四上</small>{% endif %}</a>{% endfor %}
+  </nav>
+</details>
+<details class="study-reading-group">
+  <summary>打印与复习标记</summary>
+  <nav class="study-reading-links" aria-label="打印本篇">
+    <a href="{% url 'classical-print' article.id %}?view=original" target="_blank" rel="noopener">原文版 ↗</a>
+    <a href="{% url 'classical-print' article.id %}?view=study" target="_blank" rel="noopener">讲解版 ↗</a>
+    <a href="{% url 'classical-print' article.id %}?view=practice" target="_blank" rel="noopener">练习版 ↗</a>
+    <a href="{% url 'classical-print' article.id %}?view=answers" target="_blank" rel="noopener">答案版 ↗</a>
+  </nav>
+  <div class="cw-reading-mark">
+    <button class="cw-button" type="button" data-toggle-read aria-pressed="false" data-js-only hidden>标记为已复习</button>
+    <p class="cw-help" data-storage-status role="status">复习标记和自测只保存在当前浏览器。</p>
+  </div>
+</details>
+{% endblock %}
+{% block classical_main %}
+<div class="study-reading-tools" data-js-only hidden>
+  <button type="button" data-cw-open aria-controls="cw-contents">打开本篇目录</button>
+</div>
+{% if q %}{% include 'classical/_matches.html' with unit_label=article.unit_label same_article=True %}{% endif %}
       <section id="read" class="cw-section" aria-labelledby="cw-read-title">
         <div class="cw-section-heading"><div><p class="cw-eyebrow">01 · 先读顺，再读懂</p><h2 id="cw-read-title">一{{ article.unit_label }}一{{ article.unit_label }}，找线索</h2></div><span class="cw-badge">{{ article.sentences|length }} {{ article.unit_label }}</span></div>
         <p>{{ article.background }}</p><p class="cw-editorial">{{ article.editorial_note }}</p>
-        {% if collection %}<details class="cw-unit-picker"><summary>按章句跳读 · 本篇 {{ article.sentences|length }} {{ article.unit_label }}</summary><nav class="cw-unit-grid" aria-label="本篇章句">{% for sentence in article.sentences %}<a href="?line={{ sentence.id }}#line-{{ sentence.id }}">{{ sentence.number }} · {{ sentence.text|truncatechars:20 }}</a>{% endfor %}</nav></details>{% endif %}
-        {% if article.sections %}<nav class="cw-section-directory" aria-label="分段精读目录"><h3>一次学一段</h3><p>从目录选一段，先读懂，再背诵、练习；也可只打印这一段。</p><div class="cw-section-cards">{% for section in article.sections %}<div class="cw-section-card"><h4><a href="#section-{{ section.id }}">{{ section.title }}</a></h4><p>{{ section.intro }}</p><div class="cw-section-actions"><button type="button" class="cw-button" data-speak-section="{{ section.id }}" data-js-only hidden>听本段 ♪</button><a href="?section={{ section.id }}&amp;mode=recite#recite">背本段</a><a href="?section={{ section.id }}&amp;mode=practice#practice">练本段</a></div><details><summary>打印本段</summary><div class="cw-print-links"><a href="{% url 'classical-print' article.id %}?section={{ section.id }}&amp;view=original" target="_blank" rel="noopener">原文 ↗</a><a href="{% url 'classical-print' article.id %}?section={{ section.id }}&amp;view=study" target="_blank" rel="noopener">讲解 ↗</a><a href="{% url 'classical-print' article.id %}?section={{ section.id }}&amp;view=practice" target="_blank" rel="noopener">练习 ↗</a><a href="{% url 'classical-print' article.id %}?section={{ section.id }}&amp;view=answers" target="_blank" rel="noopener">答案 ↗</a></div></details></div>{% endfor %}</div></nav>{% endif %}
+        <section class="cw-speech" aria-labelledby="cw-voice-title">
+          <h3 id="cw-voice-title">朗读</h3>
+          <div class="cw-voice-settings" data-js-only hidden>
+            <div class="inline-choice" data-inline-choice>
+              <label>朗读速度<select data-speech-rate>
+                <option value="0.65">慢一点</option><option value="0.85" selected>平常速度</option><option value="1">稍快一点</option>
+              </select></label>
+            </div>
+            <div class="inline-choice" data-inline-choice>
+              <label>每{{ article.unit_label }}次数<select data-speech-repeat>
+                <option value="1">1 遍</option><option value="2">2 遍</option><option value="3">3 遍</option>
+              </select></label>
+            </div>
+            <div class="cw-side-actions">
+              <button class="cw-button cw-primary" type="button" data-speak-all>全文朗读 ♪</button>
+              <button class="cw-button" type="button" data-stop-speech>停止</button>
+            </div>
+          </div>
+          <p class="cw-help" data-speech-status role="status">朗读使用设备语音，难读字以本篇注音为准。</p>
+        </section>
         <div class="cw-reading-tools" data-js-only hidden><label><input type="checkbox" data-show-breaks> 显示朗读停顿</label><label><input type="checkbox" data-show-referents> 标出指代词</label><button type="button" class="cw-button" data-expand-translations>展开全部译文</button></div>
         <p class="cw-help">点有下划线的词看这里的解释；展开「读懂这一{{ article.unit_label }}」，核对你自己的理解。</p>
         {% for sentence in article.sentences %}
-        {% if sentence.section_heading %}<header class="cw-paragraph-heading" id="section-{{ sentence.section_heading.id }}"><p class="cw-eyebrow">分段精读</p><h3>{{ sentence.section_heading.title }}</h3><p>{{ sentence.section_heading.intro }}</p><a href="#read">回到分段目录 ↑</a></header>{% endif %}
+        {% if sentence.section_heading %}{% include 'classical/_section_heading.html' with section=sentence.section_heading %}{% endif %}
         <article class="cw-sentence" id="line-{{ sentence.id }}" data-sentence="{{ sentence.id }}" tabindex="-1">
           <div class="cw-line-heading"><span class="cw-line-no">{{ forloop.counter|stringformat:'02d' }}</span><button type="button" class="cw-audio cw-button" data-speak="{{ sentence.id }}" data-js-only hidden aria-label="朗读第{{ forloop.counter }}{{ article.unit_label }}">听这一{{ article.unit_label }} ♪</button><a class="cw-line-anchor" href="?line={{ sentence.id }}#line-{{ sentence.id }}" aria-label="第{{ forloop.counter }}{{ article.unit_label }}的固定链接">本{{ article.unit_label }}链接</a></div>
           <p class="cw-original">{% for part in sentence.parts %}{% if part.note %}<a class="cw-word{% if part.note.kind == 'referent' %} cw-referent{% endif %}" href="#note-{{ sentence.id }}-{{ part.note.id }}" data-word aria-controls="note-{{ sentence.id }}-{{ part.note.id }}" aria-expanded="false">{{ part.text }}</a>{% else %}{{ part.text }}{% endif %}{% endfor %}</p>
@@ -29,7 +96,7 @@
           {% if collection %}<details class="cw-unit-print"><summary>打印这一{{ article.unit_label }}</summary><div class="cw-print-links"><a href="{% url 'classical-print' article.id %}?view=original&amp;unit={{ sentence.id }}" target="_blank" rel="noopener">本{{ article.unit_label }}原文 ↗</a><a href="{% url 'classical-print' article.id %}?view=study&amp;unit={{ sentence.id }}" target="_blank" rel="noopener">本{{ article.unit_label }}讲解 ↗</a></div></details>{% endif %}
           <p class="cw-breaks" data-breaks hidden><span class="cw-small-label">停顿参考</span>{% for chunk in sentence.chunks %}{{ chunk }}{% if not forloop.last %}<span aria-label="停顿"> / </span>{% endif %}{% endfor %}</p>
           <details class="cw-translation"><summary>读懂这一{{ article.unit_label }}</summary><p class="cw-translation-text">{{ sentence.translation }}</p><p>{{ sentence.explanation }}</p>{% if sentence.supplement %}<p class="cw-supplement"><strong>补一补省略：</strong>{{ sentence.supplement }}</p>{% endif %}</details>
-          <div class="cw-notes">{% for note in sentence.notes %}<details class="cw-note{% if note.kind == 'referent' %} cw-note-referent{% endif %}" id="note-{{ sentence.id }}-{{ note.id }}"><summary><strong>{{ note.quote }}</strong>{% if note.reading %}<span class="cw-pinyin">{{ note.reading }}</span>{% endif %}<span class="cw-small-label">{% if note.kind == 'referent' %}指的是谁或什么？{% else %}本句词义{% endif %}</span></summary><p>{{ note.meaning }}</p>{% if note.refers_to %}<p class="cw-reference-target"><strong>指向 → {{ note.refers_to }}</strong></p><p>线索：{{ note.reason }}</p>{% endif %}</details>{% endfor %}</div>
+          <div class="cw-notes">{% for note in sentence.notes %}<details class="cw-note{% if note.kind == 'referent' %} cw-note-referent{% endif %}" id="note-{{ sentence.id }}-{{ note.id }}"><summary><span class="cw-note-labels"><strong>{{ note.quote }}</strong>{% if note.reading %}<span class="cw-pinyin">{{ note.reading }}</span>{% endif %}<span class="cw-small-label">{% if note.kind == 'referent' %}指的是谁或什么？{% else %}本句词义{% endif %}</span></span></summary><p>{{ note.meaning }}</p>{% if note.refers_to %}<p class="cw-reference-target"><strong>指向 → {{ note.refers_to }}</strong></p><p>线索：{{ note.reason }}</p>{% endif %}</details>{% endfor %}</div>
         </article>
         {% endfor %}
       </section>
@@ -48,14 +115,5 @@
       </section>
       <section class="cw-section cw-sources" aria-labelledby="cw-source-title"><h2 id="cw-source-title">这一篇从哪里来？</h2><p><strong>{{ article.source.work }}</strong> · {{ article.source.section }}</p><p>{{ article.source.note }}</p>{% if article.source_ref %}<p><a href="{% url 'classical-source' article.id %}">查本机原典所在篇章 →</a></p><p class="cw-help">原典与教学选段可能有文字、节选和标点差别，学习时以本篇选用文本为准。</p>{% endif %}<a href="{{ article.source.url }}" target="_blank" rel="noopener noreferrer">查阅原典出处（需联网）↗</a>{% if article.edition %}<p><a href="{{ article.edition.url }}" target="_blank" rel="noopener noreferrer">{{ article.edition.label }}（需联网）↗</a></p><p>{{ article.edition.note }}</p>{% endif %}<p class="cw-help">正文、解释和练习随项目保存，阅读时无需访问外部网站。</p></section>
       <nav class="cw-next" aria-label="前后篇目">{% if previous %}<a href="{% url 'classical-detail' previous.id %}">← {{ previous.title }}</a>{% endif %}{% if collection %}<a href="{% url 'classical-book' collection.id %}">回到全书目录</a>{% else %}<a href="{% url 'classical' %}">回到篇目目录</a>{% endif %}{% if following %}<a href="{% url 'classical-detail' following.id %}">{{ following.title }} →</a>{% endif %}</nav>
-    </div>
-    <aside class="cw-sidebar" aria-label="篇目与工具">
-      <section class="cw-side-block"><p class="cw-eyebrow">听一听，再自己读</p><h2>朗读小助手</h2><div data-js-only hidden><div class="inline-choice" data-inline-choice><label>朗读速度<select data-speech-rate><option value="0.65">慢一点</option><option value="0.85" selected>平常速度</option><option value="1">稍快一点</option></select></label></div><div class="inline-choice" data-inline-choice><label>每{{ article.unit_label }}次数<select data-speech-repeat><option value="1">1 遍</option><option value="2">2 遍</option><option value="3">3 遍</option></select></label></div><div class="cw-side-actions"><button class="cw-button cw-primary" type="button" data-speak-all>全文朗读 ♪</button><button class="cw-button" type="button" data-stop-speech>停止</button></div></div><p class="cw-help" data-speech-status role="status">朗读使用设备语音；难读字以本篇注音为准。</p></section>
-      <section class="cw-side-block"><h2>带走一张复习纸</h2><div class="cw-print-links"><a href="{% url 'classical-print' article.id %}?view=original" target="_blank" rel="noopener">原文版 ↗</a><a href="{% url 'classical-print' article.id %}?view=study" target="_blank" rel="noopener">讲解版 ↗</a><a href="{% url 'classical-print' article.id %}?view=practice" target="_blank" rel="noopener">练习版 ↗</a><a href="{% url 'classical-print' article.id %}?view=answers" target="_blank" rel="noopener">答案版 ↗</a></div></section>
-      <section class="cw-side-block"><h2>我的小标记</h2><button class="cw-button" type="button" data-toggle-read aria-pressed="false" data-js-only hidden>标记为已复习</button><p class="cw-help" data-storage-status role="status">复习标记和自测只保存在当前浏览器。</p></section>
-      <nav class="cw-side-block cw-directory" aria-label="换一篇古文"><h2>换一篇读</h2>{% for item in articles %}<a href="{% url 'classical-detail' item.id %}"{% if item.id == article.id %} aria-current="page"{% endif %}>{{ item.title }}{% if item.curriculum %}<small>四上</small>{% endif %}</a>{% endfor %}</nav>
-    </aside>
-  </div>
   <noscript><p class="cw-editorial">当前未启用脚本，仍可阅读原文、展开讲解、查看练习答案与打开打印页。朗读、遮挡背诵和即时判题需要启用脚本。</p></noscript>
-</div>
 {% endblock %}

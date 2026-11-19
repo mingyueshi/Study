@@ -60,6 +60,15 @@ def unit_matches(unit, q):
     return q in ' '.join([unit['text'], unit['translation'], unit['explanation'], *(note['meaning'] for note in unit['notes'])])
 
 
+def find_units(articles, q):
+    return (
+        {'article': article, 'unit': unit, 'number': number}
+        for article in articles
+        for number, unit in enumerate(article['sentences'], 1)
+        if unit_matches(unit, q)
+    )
+
+
 @require_safe
 def book(request, slug):
     catalog, articles = library()
@@ -68,12 +77,7 @@ def book(request, slug):
         raise Http404('还没有这部古文。')
     parts = [next(article for article in articles if article['id'] == part['id']) for part in selected['parts']]
     q = request.GET.get('q', '').strip()[:80]
-    matches = []
-    if q:
-        for article in parts:
-            for number, unit in enumerate(article['sentences'], 1):
-                if unit_matches(unit, q):
-                    matches.append({'article': article, 'unit': unit, 'number': number})
+    matches = list(find_units(parts, q)) if q else []
     return render(request, 'classical/book.html', {
         'study_area': 'chinese', 'catalog': catalog, 'collection': selected, 'articles': parts,
         'unit_count': sum(len(row['sentences']) for row in parts),
@@ -92,15 +96,9 @@ def index(request):
         filters[field] = value if value in {row['id'] for row in catalog[group]} else ''
     curriculum = request.GET.get('curriculum') == '4a'
     book_ids = {part['id'] for group in catalog.get('collections', []) for part in group['parts']}
+    featured = [article for article in articles if article['id'] not in book_ids]
     shown = []
-    for article in articles:
-        if not q and article['id'] in book_ids:
-            continue
-        searchable = ' '.join([article['title'], article['attribution'], article['intro'],
-                               *(row['text'] + row['translation'] for row in article['sentences']),
-                               *(note['meaning'] for row in article['sentences'] for note in row['notes'])])
-        if q and q not in searchable:
-            continue
+    for article in articles if q else featured:
         if filters['level'] and article['level'] != filters['level']:
             continue
         if filters['genre'] and article['genre'] != filters['genre']:
@@ -109,10 +107,13 @@ def index(request):
             continue
         if curriculum and not article.get('curriculum'):
             continue
-        shown.append(article)
+        match = next(find_units([article], q), None) if q else None
+        if q and not match and q not in ' '.join([article['title'], article['attribution'], article['intro']]):
+            continue
+        shown.append({**article, 'matching_unit': match['unit']} if match else article)
     return render(request, 'classical/index.html', {
         'study_area': 'chinese', 'catalog': catalog, 'articles': shown,
-        'total': len(articles) - len(book_ids), 'q': q, 'filters': filters, 'curriculum': curriculum,
+        'featured': featured, 'total': len(featured), 'q': q, 'filters': filters, 'curriculum': curriculum,
         'question_count': sum(len(article['questions']) for article in articles),
     })
 
@@ -125,6 +126,9 @@ def detail(request, slug):
     modes = ('read', 'recite', 'practice')
     context['initial_mode'] = request.GET.get('mode') if request.GET.get('mode') in modes else 'read'
     context['initial_line'] = next((row['id'] for row in context['article']['sentences'] if row['id'] == request.GET.get('line')), '')
+    q = request.GET.get('q', '').strip()[:80]
+    if q:
+        context.update(q=q, matches=list(find_units([context['article']], q)))
     if 'section' in request.GET:
         section = next((row for row in context['article'].get('sections', []) if row['id'] == request.GET['section']), None)
         if section is None:

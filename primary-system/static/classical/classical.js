@@ -56,47 +56,95 @@
     if (getStored(markKey(card.dataset.articleCard, card.dataset.revision)) === 'true') card.querySelector('[data-card-mark]').textContent = '已复习 ✓';
   }
 
-  const reader = document.querySelector('[data-classical-reader]');
-  if (!reader) return;
+  const hall = document.querySelector('.classical-hall');
+  if (!hall) return;
+  const workspace = hall.querySelector('.cw-workspace');
+  const reading = workspace.querySelector('.cw-main');
+  const all = selector => Array.from(hall.querySelectorAll(selector));
+  const one = selector => hall.querySelector(selector);
+
+  function selectLine(id) {
+    all('[data-sentence]').forEach(element => element.classList.toggle('is-selected', element.dataset.sentence === id));
+    all('[data-directory-line]').forEach(link => {
+      if (link.dataset.directoryLine === id) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
+  }
+
+  function focusReading(target) {
+    if (workspace.dataset.slMode === 'compact' && workspace.dataset.slOpen === 'true') {
+      one('.sl-toggle:not(.sl-collapse)').click();
+    }
+    const note = target.matches('.cw-note');
+    const sentence = target.closest('[data-sentence]');
+    selectLine(sentence?.dataset.sentence);
+    if (note) target.open = true;
+    else target.setAttribute('tabindex', '-1');
+    target.scrollIntoView({block: note ? 'nearest' : 'start', behavior: 'instant'});
+    (note ? target.querySelector('summary') : target).focus({preventScroll: true});
+  }
+
+  function resolveTarget(hash) {
+    let id;
+    try { id = decodeURIComponent(hash.slice(1)); } catch (_) { return null; }
+    const target = document.getElementById(id);
+    return target && reading.contains(target) ? target : null;
+  }
+  function restoreHash() {
+    const target = resolveTarget(location.hash);
+    if (target) focusReading(target);
+    return !!target;
+  }
+
+  workspace.addEventListener('click', event => {
+    const opener = event.target.closest('[data-cw-open]');
+    if (opener) {
+      if (workspace.dataset.slMode === 'compact' && workspace.dataset.slOpen === 'false') one('.sl-toggle:not(.sl-collapse)').click();
+      if (workspace.dataset.slMode === 'wide' && workspace.dataset.slCollapsed === 'true') one('.sl-collapse').click();
+      const group = document.getElementById(opener.getAttribute('aria-controls'));
+      group.open = true;
+      const summary = group.querySelector('summary');
+      requestAnimationFrame(() => {
+        summary.scrollIntoView({block: 'nearest'});
+        summary.focus({preventScroll: true});
+      });
+      return;
+    }
+    if (event.defaultPrevented || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    const link = event.target.closest('.cw-sidebar a[href^="#"], a[data-cw-jump]');
+    const target = link && resolveTarget(link.hash);
+    if (!target) return;
+    event.preventDefault();
+    if (location.hash !== link.hash) history.pushState(null, '', link.hash);
+    focusReading(target);
+  });
+  window.addEventListener('hashchange', () => { if (!restoreHash()) selectLine(); });
+
+  const reader = hall.matches('[data-classical-reader]') ? hall : null;
+  if (!reader) {
+    window.addEventListener('pageshow', () => requestAnimationFrame(restoreHash), {once: true});
+    return;
+  }
   let article;
   try { article = JSON.parse(document.getElementById('classical-data').textContent); } catch (_) { return; }
   const unitLabel = article.unit_label === '则' ? '则' : '句';
-  const all = selector => Array.from(reader.querySelectorAll(selector));
-  const one = selector => reader.querySelector(selector);
   all('[data-js-only]').forEach(element => { element.hidden = false; });
   const storageStatus = one('[data-storage-status]');
   function updateStorageStatus() {
     if (!storageWorks) storageStatus.textContent = '浏览器暂不允许保存，本页仍可使用；离开后不会保留标记与自测。';
   }
 
-  function selectLine(id, focus) {
-    all('[data-sentence]').forEach(element => element.classList.toggle('is-selected', element.dataset.sentence === id));
-    const line = document.getElementById(`line-${id}`);
-    if (focus && line) { line.scrollIntoView({block: 'start'}); line.focus({preventScroll: true}); }
-  }
-  function openNote(id, focus) {
-    const note = document.getElementById(id);
-    if (!note?.classList.contains('cw-note')) return false;
-    note.open = true;
-    selectLine(note.closest('[data-sentence]').dataset.sentence, false);
-    if (focus) { note.scrollIntoView({block: 'nearest'}); note.querySelector('summary').focus({preventScroll: true}); }
-    return true;
-  }
-  function restoreHash() {
-    try { return openNote(decodeURIComponent(location.hash.slice(1)), false); } catch (_) { return false; }
-  }
   all('[data-word]').forEach(link => {
     const id = link.getAttribute('aria-controls');
     const note = document.getElementById(id);
     note.addEventListener('toggle', () => link.setAttribute('aria-expanded', String(note.open)));
     link.addEventListener('click', event => {
+      if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
       event.preventDefault();
       if (location.hash !== link.hash) history.pushState(null, '', link.hash);
-      openNote(id, true);
+      focusReading(note);
     });
   });
-  window.addEventListener('hashchange', restoreHash);
-  window.addEventListener('popstate', restoreHash);
   one('[data-show-breaks]').addEventListener('change', event => all('[data-breaks]').forEach(element => { element.hidden = !event.target.checked; }));
   one('[data-show-referents]').addEventListener('change', event => reader.classList.toggle('show-referents', event.target.checked));
   const translations = all('.cw-translation');
@@ -104,10 +152,13 @@
   const updateExpand = () => { expand.textContent = translations.every(element => element.open) ? '收起全部译文' : '展开全部译文'; };
   translations.forEach(element => element.addEventListener('toggle', updateExpand));
   expand.addEventListener('click', () => { const open = !translations.every(element => element.open); translations.forEach(element => { element.open = open; }); updateExpand(); });
-  all('[data-evidence]').forEach(link => link.addEventListener('click', () => {
-    const id = link.dataset.evidence;
-    selectLine(id, true);
-    document.getElementById(`line-${id}`).querySelector('.cw-translation').open = true;
+  all('[data-evidence]').forEach(link => link.addEventListener('click', event => {
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    event.preventDefault();
+    if (location.hash !== link.hash) history.pushState(null, '', link.hash);
+    const line = document.getElementById(`line-${link.dataset.evidence}`);
+    line.querySelector('.cw-translation').open = true;
+    focusReading(line);
   }));
 
   let maskMode = 'full';
@@ -202,7 +253,7 @@
   mark.addEventListener('click', () => { read = !read; putStored(markKey(article.id, article.revision), String(read)); renderMark(); updateStorageStatus(); });
   renderMark(); updateStorageStatus();
 
-  let speechToken = 0, speechTimer = null;
+  let speechToken = 0, speechTimer = null, activeSpeech = null;
   const speechStatus = one('[data-speech-status]');
   const rate = one('[data-speech-rate]'), repeat = one('[data-speech-repeat]');
   const speechKey = 'classical_speech_v1';
@@ -217,11 +268,20 @@
     clearTimeout(speechTimer); speechTimer = null;
     try { window.speechSynthesis?.cancel(); } catch (_) { /* 取消失败不影响阅读 */ }
     all('[data-sentence]').forEach(element => element.classList.remove('is-speaking'));
+    if (activeSpeech) {
+      activeSpeech.button.textContent = activeSpeech.label;
+      activeSpeech.button.setAttribute('aria-pressed', 'false');
+      activeSpeech = null;
+    }
     if (message) speechStatus.textContent = message;
   }
-  function startSpeech(id, section) {
+  function startSpeech(button, id, section) {
+    if (activeSpeech?.button === button) { stopSpeech('已停止朗读。'); return; }
     stopSpeech();
     if (!window.SpeechKit || !window.speechSynthesis) { speechStatus.textContent = '这台设备暂不支持朗读，可以看注音自己读。'; return; }
+    activeSpeech = {button, label: button.textContent};
+    button.textContent = '停止朗读';
+    button.setAttribute('aria-pressed', 'true');
     const token = speechToken;
     const sentences = id ? article.sentences.filter(sentence => sentence.id === id) : sectionSentences(article, section);
     const times = Number(repeat.value);
@@ -244,9 +304,10 @@
     }
     next();
   }
-  all('[data-speak]').forEach(button => button.addEventListener('click', () => startSpeech(button.dataset.speak)));
-  all('[data-speak-section]').forEach(button => button.addEventListener('click', () => startSpeech(null, button.dataset.speakSection)));
-  one('[data-speak-all]').addEventListener('click', () => startSpeech());
+  all('[data-speak], [data-speak-section], [data-speak-all]').forEach(button => {
+    button.setAttribute('aria-pressed', 'false');
+    button.addEventListener('click', () => startSpeech(button, button.dataset.speak, button.dataset.speakSection));
+  });
   one('[data-stop-speech]').addEventListener('click', () => stopSpeech('已停止朗读。'));
   for (const select of [rate, repeat]) select.addEventListener('change', () => {
     stopSpeech('设置已更新，可以重新开始朗读。');
@@ -256,9 +317,9 @@
   window.addEventListener('pagehide', () => stopSpeech());
   document.addEventListener('keydown', event => { if (event.key === 'Escape') stopSpeech('已停止朗读。'); });
 
-  requestAnimationFrame(() => {
+  window.addEventListener('pageshow', () => requestAnimationFrame(() => {
     if (restoreHash()) return;
-    if (reader.dataset.initialLine) selectLine(reader.dataset.initialLine, true);
-    else if (!location.hash && ['recite', 'practice'].includes(reader.dataset.initialMode)) document.getElementById(reader.dataset.initialMode).scrollIntoView({block: 'start'});
-  });
+    if (reader.dataset.initialLine) focusReading(document.getElementById(`line-${reader.dataset.initialLine}`));
+    else if (!location.hash && ['recite', 'practice'].includes(reader.dataset.initialMode)) focusReading(document.getElementById(reader.dataset.initialMode));
+  }), {once: true});
 })();

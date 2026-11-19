@@ -1,0 +1,20 @@
+<section class="cw-catalog cw-matches" aria-labelledby="cw-search-title">
+  <h2 id="cw-search-title" tabindex="-1">找到 {% if same_article %}{{ matches|length }}{% else %}{{ matches.paginator.count }}{% endif %} {{ unit_label }}</h2>
+  <div class="cw-search-results">
+    {% for match in matches %}
+    {% url 'classical-detail' match.article.id as match_url %}
+    <article class="cw-card">
+      <p class="cw-eyebrow">{% if not same_article %}{{ match.article.title }} · {% endif %}第 {{ match.number }} {{ unit_label }}</p>
+      <h3><a href="{% if not same_article %}{{ match_url }}?line={{ match.unit.id }}{% endif %}#line-{{ match.unit.id }}"{% if same_article %} data-cw-jump{% endif %}>{{ match.unit.text|truncatechars:100 }}</a></h3>
+      <p>{{ match.unit.translation|truncatechars:160 }}</p>
+    </article>
+    {% empty %}<p class="cw-empty">没有找到「{{ q }}」。试试原文中的短词。</p>{% endfor %}
+  </div>
+  {% if matches.has_other_pages %}
+  <nav class="cw-next" aria-label="搜索结果分页">
+    {% if matches.has_previous %}<a href="?q={{ q|urlencode }}&amp;page={{ matches.previous_page_number }}#cw-search-title">← 上一页</a>{% endif %}
+    <span>第 {{ matches.number }}／{{ matches.paginator.num_pages }} 页</span>
+    {% if matches.has_next %}<a href="?q={{ q|urlencode }}&amp;page={{ matches.next_page_number }}#cw-search-title">下一页 →</a>{% endif %}
+  </nav>
+  {% endif %}
+</section>
