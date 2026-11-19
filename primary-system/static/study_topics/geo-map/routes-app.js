@@ -12,12 +12,20 @@
     : A.routes;
   const stepHref = (route, index) => esc(atlasBase + A.stepHref(route, index));
   if (nav) {
-    nav.innerHTML = '<h2 class="gm-side-title">挑一条路线</h2>' +
-      routes.map(route => `<a href="#${esc(route.id)}">${esc(route.icon)} ${esc(route.title)}</a>`).join('');
+    nav.innerHTML = routes.map(route => `<a href="#${esc(route.id)}">${esc(route.icon)} ${esc(route.title)}</a>`).join('');
+    const links = nav.querySelectorAll('a');
+    function updateCurrentRoute() {
+      for (const link of links) {
+        if (link.hash === location.hash) link.setAttribute('aria-current', 'location');
+        else link.removeAttribute('aria-current');
+      }
+    }
+    window.addEventListener('hashchange', updateCurrentRoute);
+    updateCurrentRoute();
   }
 
   list.innerHTML = routes.map(route => `
-    <article class="gm-route" id="${esc(route.id)}" aria-labelledby="${esc(route.id)}-title">
+    <article class="gm-route" id="${esc(route.id)}" aria-labelledby="${esc(route.id)}-title" tabindex="-1">
       <header class="gm-route-head">
         <div>
           <p class="gm-kicker">${esc(route.icon)} ${route.steps.length} 站 · 地图观察</p>

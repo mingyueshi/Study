@@ -6,6 +6,8 @@
   <meta name="description" content="看照片、读卫星影像、跟着影片找山河，再回地图上认位置。">
   <title>实景图册 · 地理图谱</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="flat-map.css">
+  <link rel="stylesheet" href="atlas-reference.css">
   <script src="content.js" defer></script>
   <script src="map-data.js" defer></script>
   <script src="world-data.js" defer></script>
@@ -14,55 +16,60 @@
   <script src="shared.js" defer></script>
   <script src="media-data.js" defer></script>
   <script src="media.js" defer></script>
+  <script src="atlas-reference.js" defer></script>
   <script src="gallery-app.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#content">跳到主要内容</a>
-  <main id="main" class="gm-topic gallery-topic" tabindex="-1">
-    <aside class="gm-sidebar" aria-label="导航和页面工具">
-      <nav class="gm-sysnav" aria-label="地理图谱页面导航">
-        <a class="gm-sysnav-brand" href="index.html">🧭 地理图谱</a>
-        <a data-page href="china.html">中国地图</a>
-        <a data-page href="world.html">世界地图</a>
-        <a data-page href="china-3d.html">3D 地形</a>
-        <a data-page href="world-3d.html">地球仪</a>
-        <a data-page href="places.html">地点索引</a>
-        <details class="gm-atlas-more" open>
-          <summary>专题与资料</summary>
-          <div class="gm-side-links">
+  <main id="main" class="gm-topic gm-map-topic gm-atlas-reference gallery-topic" tabindex="-1">
+    <header class="gm-flat-heading">
+      <h1 class="gm-title">实景图册</h1>
+      <p class="gm-intro" id="media-intro">看照片、读卫星影像、跟着影片找山河，再回地图上认位置。</p>
+      <a href="gallery.html?place=wf2">尼罗河三角洲影像 · NASA</a>
+    </header>
+
+    <div class="gm-flat-workspace" data-sidebar-layout=".gm-sidebar" data-sidebar-width="clamp(280px, 24vw, 320px)" data-sidebar-label="图谱工具">
+      <aside class="gm-sidebar" aria-label="图谱工具与相关专题">
+        <details id="media-tools" class="gm-flat-tools" open tabindex="-1">
+          <summary id="media-tools-title">挑素材</summary>
+          <div class="gm-flat-controls gm-media-filters">
+            <div class="inline-choice" data-inline-choice><label>素材类型 <select id="media-kind"><option value="">全部类型</option></select></label></div>
+            <div class="inline-choice" data-inline-choice><label>观察主题 <select id="media-group"><option value="">全部主题</option></select></label></div>
+            <a class="gm-media-link" id="media-all" href="gallery.html" hidden>看全部地点的素材 →</a>
+            <p>照片与太空影像可离线看，影片需要联网。</p>
+            <a class="gm-flat-back" href="#content">查看图册 ↓</a>
+          </div>
+        </details>
+        <details class="gm-flat-tools">
+          <summary>相关专题</summary>
+          <nav class="gm-flat-links" aria-label="地理图谱页面导航">
+            <a href="index.html">图谱首页</a>
+            <a href="china.html">中国地图</a>
+            <a href="world.html">世界地图</a>
+            <a href="china-3d.html">中国 3D 地形</a>
+            <a href="world-3d.html">3D 地球仪</a>
+            <a href="places.html">地点索引</a>
             <a href="province.html">省域站</a>
             <a href="routes.html">主题路线</a>
-            <a href="gallery.html" aria-current="page">实景图册</a>
             <a href="life-maps.html">动植物地图</a>
             <a href="province-culture.html">中国省份文化</a>
             <a href="china-landscapes.html">中国山河</a>
             <a href="voyages.html">航海与世界探索</a>
             <a href="../geo/index.html">地理小课堂</a>
-          </div>
+          </nav>
         </details>
-      </nav>
+      </aside>
 
-      <header class="gm-hero">
-        <p class="gm-eyebrow">从地图走进真实世界</p>
-        <h1 class="gm-title">实景图册</h1>
-        <p class="gm-intro" id="media-intro">看照片、读卫星影像、跟着影片找山河，再回地图上认位置。</p>
-      </header>
+      <div id="content" class="gm-content" tabindex="-1">
+        <div class="gm-view-bar gm-reference-bar">
+          <p class="gm-result-count" id="media-count" role="status"></p>
+          <a class="gm-tools-jump" href="#media-tools">筛选素材 ↑</a>
+        </div>
+        <div class="gm-media-groups" id="media-list"></div>
+        <p class="gm-notice" id="media-empty" hidden>这里没有符合条件的素材。换一种类型或主题试试。</p>
 
-      <section class="gm-side-panel gm-media-filters" aria-labelledby="media-tools-title">
-        <h2 class="gm-side-title" id="media-tools-title">挑素材</h2>
-        <div class="inline-choice" data-inline-choice><label>素材类型 <select id="media-kind"><option value="">全部类型</option></select></label></div>
-        <div class="inline-choice" data-inline-choice><label>观察主题 <select id="media-group"><option value="">全部主题</option></select></label></div>
-        <a class="gm-media-link" id="media-all" href="gallery.html" hidden>看全部地点的素材 →</a>
-        <p>照片与太空影像可离线看，影片需要联网。</p>
-      </section>
-    </aside>
-
-    <div id="content" class="gm-content" tabindex="-1">
-      <p class="gm-result-count" id="media-count" role="status"></p>
-      <div class="gm-media-groups" id="media-list"></div>
-      <p class="gm-notice" id="media-empty" hidden>这里没有符合条件的素材。换一种类型或主题试试。</p>
-
-      <noscript><p class="gm-notice">请启用 JavaScript 查看地点和地图。</p></noscript>
+        <noscript><p class="gm-notice">请启用 JavaScript 查看地点和地图。</p></noscript>
+      </div>
     </div>
   </main>
 </body>

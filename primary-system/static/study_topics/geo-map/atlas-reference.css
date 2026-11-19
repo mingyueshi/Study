@@ -1,0 +1,30 @@
+/* 地点、路线和图册共用页头、工具栏与资料卡。 */
+.places-topic .gm-flat-heading { --flat-hero-photo: url("assets/qutang.jpg"); }
+.routes-topic .gm-flat-heading { --flat-hero-photo: url("assets/yangtze-mouth.jpg"); }
+.gallery-topic .gm-flat-heading { --flat-hero-photo: url("assets/nile-day.jpg"); }
+.gm-reference-bar { padding-block: 0; border: 0; background: transparent; }
+.gm-reference-bar .gm-result-count { margin: 0; }
+.gm-atlas-reference :is(#content, #place-results, #media-list, .gm-route) { scroll-margin-top: 16px; }
+
+.gm-atlas-reference .gm-search > div { grid-template-columns: minmax(0, 1fr) auto; }
+.gm-atlas-reference .gm-search input {
+  min-height: 44px; font-size: 16px; background: var(--card); border-color: var(--atlas-border);
+}
+.gm-atlas-reference .gm-search .gm-category { margin: 0; }
+.gm-atlas-reference .gm-search select { min-height: 44px; max-width: 100%; }
+.gm-atlas-reference .gm-media-filters label { margin: 0; font-size: 16px; }
+.gm-atlas-reference #media-all { display: inline-flex; align-items: center; min-height: 44px; text-decoration: underline; text-underline-offset: .18em; }
+
+.gm-atlas-reference #route-nav a::after { content: '↓' / ''; }
+.gm-atlas-reference #route-nav a[aria-current="location"] { color: var(--ink); background: var(--atlas-tint); }
+.gm-atlas-reference .gm-route:target { border-color: var(--atlas-hero-start); }
+.gm-atlas-reference .gm-route-track b { text-decoration: underline; text-underline-offset: .18em; }
+.gm-atlas-reference :is(.gm-place-links a, .gm-media-places a, .gm-media-credit a, .gm-more, .gm-route-head .gm-card-link) {
+  display: inline-flex; align-items: center; min-height: 44px;
+}
+.gm-atlas-reference .gm-more { display: flex; }
+
+@media (max-width: 520px) {
+  .study-atlas .gm-atlas-reference :is(.gm-place-card, .gm-route, .gm-media-card) { padding-inline-end: 38px; }
+  .gm-atlas-reference .gm-media-grid { grid-template-columns: minmax(0, 1fr); }
+}

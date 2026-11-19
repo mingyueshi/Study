@@ -33,7 +33,5 @@
     }).join('');
   }
 
-  kind.addEventListener('change', render);
-  group.addEventListener('change', render);
-  render();
+  window.GMAtlasReference.bindFilters({kind, group}, render);
 })();

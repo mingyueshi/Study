@@ -9,15 +9,12 @@
   const category = $('place-category');
   const list = $('place-results');
   const more = $('place-more');
-  const params = new URLSearchParams(location.search);
   const batch = 24;
   let matches = [];
   let shown = 0;
 
   category.insertAdjacentHTML('beforeend', A.categories.map(([id, label]) =>
     `<option value="${esc(id)}">${esc(label)}</option>`).join(''));
-  category.value = A.categories.some(([id]) => id === params.get('type')) ? params.get('type') : '';
-  search.value = params.get('q') || '';
 
   const resultCard = (p) =>
     `<li class="gm-place-card"><small>${A.mapLabel(p)} · ${esc(p.context)}</small>` +
@@ -44,12 +41,13 @@
     $('place-empty').hidden = matches.length > 0;
     appendResults();
   }
-  search.addEventListener('input', refresh);
-  category.addEventListener('change', refresh);
-  root.querySelector('form').addEventListener('submit', (e) => {
+  const update = window.GMAtlasReference.bindFilters({q: search, type: category}, refresh);
+  search.form.addEventListener('submit', (e) => {
     e.preventDefault();
-    refresh();
+    update();
+    const results = $('content');
+    results.focus({preventScroll: true});
+    results.scrollIntoView({block: 'start'});
   });
   more.addEventListener('click', () => appendResults()?.focus());
-  refresh();
 })();

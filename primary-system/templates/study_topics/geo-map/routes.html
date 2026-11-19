@@ -4,54 +4,60 @@
 {% block title %}主题路线 · 地理图谱 · 乐学堂{% endblock %}
 {% block study_assets %}
 <link rel="stylesheet" href="{% static 'study_topics/geo-map/styles.css' %}?v=5b8e2fb415da">
+<link rel="stylesheet" href="{% static 'study_topics/geo-map/flat-map.css' %}?v=51aaac8e6522">
+<link rel="stylesheet" href="{% static 'study_topics/geo-map/atlas-reference.css' %}?v=89924a74067d">
 <script src="{% static 'study_topics/geo-map/content.js' %}?v=e86ddc18e05f" defer></script>
 <script src="{% static 'study_topics/geo-map/map-data.js' %}?v=27ebda785125" defer></script>
 <script src="{% static 'study_topics/geo-map/world-data.js' %}?v=9b7765ca7392" defer></script>
 <script src="{% static 'study_topics/geo-map/atlas-data.js' %}?v=041dec261237" defer></script>
 <script src="{% static 'study_topics/geo-map/atlas.js' %}?v=60e5f6a93f55" defer></script>
 <script src="{% static 'study_topics/geo-map/shared.js' %}?v=d2bebbfd2a0b" defer></script>
-<script src="{% static 'study_topics/geo-map/routes-app.js' %}?v=f6c29c2d8a8e" defer></script>
+<script src="{% static 'study_topics/geo-map/atlas-reference.js' %}?v=27bac2c2d92c" defer></script>
+<script src="{% static 'study_topics/geo-map/routes-app.js' %}?v=5f7397391dbf" defer></script>
 {% endblock %}
 {% block study_content %}
 <div class="study-atlas">
-<div class="gm-topic routes-topic">
-    <aside class="gm-sidebar" aria-label="导航和页面工具">
-      <nav class="gm-sysnav" aria-label="地理图谱页面导航">
-        <a class="gm-sysnav-brand" href="{% url 'geography-atlas' %}">🧭 地理图谱</a>
-        <a data-page href="china.html">中国地图</a>
-        <a data-page href="world.html">世界地图</a>
-        <a data-page href="{% url 'geography-china-terrain' %}">3D 地形</a>
-        <a data-page href="{% url 'geography-globe' %}">地球仪</a>
-        <a data-page href="places.html">地点索引</a>
-        <details class="gm-atlas-more" open>
-          <summary>专题与资料</summary>
-          <div class="gm-side-links">
+<div class="gm-topic gm-map-topic gm-atlas-reference routes-topic">
+    <header class="gm-flat-heading">
+      <h1 class="gm-title">主题路线</h1>
+      <p class="gm-intro">一站一个地点，带着问题看地图。每到一站，都可以接着走到下一站。</p>
+      <a href="gallery.html?place=f27">长江口影像 · NASA</a>
+    </header>
+
+    <div class="gm-flat-workspace" data-sidebar-layout=".gm-sidebar" data-sidebar-width="clamp(280px, 24vw, 320px)" data-sidebar-label="图谱工具">
+      <aside class="gm-sidebar" aria-label="图谱工具与相关专题">
+        <details id="route-tools" class="gm-flat-tools" open tabindex="-1">
+          <summary>路线目录</summary>
+          <nav class="gm-flat-links" id="route-nav" aria-label="跳到主题路线"></nav>
+        </details>
+        <details class="gm-flat-tools">
+          <summary>相关专题</summary>
+          <nav class="gm-flat-links" aria-label="地理图谱页面导航">
+            <a href="{% url 'geography-atlas' %}">图谱首页</a>
+            <a href="china.html">中国地图</a>
+            <a href="world.html">世界地图</a>
+            <a href="{% url 'geography-china-terrain' %}">中国 3D 地形</a>
+            <a href="{% url 'geography-globe' %}">3D 地球仪</a>
+            <a href="places.html">地点索引</a>
             <a href="province.html">省域站</a>
-            <a href="routes.html" aria-current="page">主题路线</a>
             <a href="gallery.html">实景图册</a>
             <a href="{% url 'geography-life-maps' %}">动植物地图</a>
             <a href="{% url 'geography-province-culture' %}">中国省份文化</a>
-            <a href="{% url 'geography-china-landscapes' %}">中国山河</a>
+            <a href="{% url 'geography-china-landscapes' %}#field-trails">中国山河 · 实地路线</a>
             <a href="{% url 'geography-voyages' %}">航海与世界探索</a>
             <a href="{% url 'geography-study' %}">地理小课堂</a>
-          </div>
+          </nav>
         </details>
-      </nav>
+      </aside>
 
-      <header class="gm-hero">
-        <p class="gm-eyebrow">跟着地图走 · 把地点连起来</p>
-        <h1 class="gm-title">主题路线</h1>
-        <p class="gm-intro">一站一个地点，带着问题看地图。每到一站，都可以接着走到下一站。</p>
-        <a class="gm-card-link" href="{% url 'geography-china-landscapes' %}#field-trails">从中国山河专题走这两条路线 →</a>
-      </header>
+      <div id="content" class="gm-content" tabindex="-1">
+        <div class="gm-view-bar gm-reference-bar">
+          <a class="gm-tools-jump" href="#route-tools">路线目录 ↑</a>
+        </div>
+        <div class="gm-routes" id="route-list"></div>
 
-      <nav class="gm-side-panel gm-side-links" id="route-nav" aria-label="跳到主题路线"></nav>
-    </aside>
-
-    <div id="content" class="gm-content" tabindex="-1">
-      <div class="gm-routes" id="route-list"></div>
-
-      <noscript><p class="gm-notice">请启用 JavaScript 查看地点和地图。</p></noscript>
+        <noscript><p class="gm-notice">请启用 JavaScript 查看地点和地图。</p></noscript>
+      </div>
     </div>
   </div>
 

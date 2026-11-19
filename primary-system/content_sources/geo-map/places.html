@@ -6,28 +6,45 @@
   <meta name="description" content="找家乡、山河、大洋和世界地标，点结果就能打开地图上的档案。">
   <title>地点索引 · 地理图谱</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="flat-map.css">
+  <link rel="stylesheet" href="atlas-reference.css">
   <script src="content.js" defer></script>
   <script src="map-data.js" defer></script>
   <script src="world-data.js" defer></script>
   <script src="atlas-data.js" defer></script>
   <script src="atlas.js" defer></script>
   <script src="shared.js" defer></script>
+  <script src="atlas-reference.js" defer></script>
   <script src="places-app.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#content">跳到主要内容</a>
-  <main id="main" class="gm-topic places-topic" tabindex="-1">
-    <aside class="gm-sidebar" aria-label="导航和页面工具">
-      <nav class="gm-sysnav" aria-label="地理图谱页面导航">
-        <a class="gm-sysnav-brand" href="index.html">🧭 地理图谱</a>
-        <a data-page href="china.html">中国地图</a>
-        <a data-page href="world.html">世界地图</a>
-        <a data-page href="china-3d.html">3D 地形</a>
-        <a data-page href="world-3d.html">地球仪</a>
-        <a data-page href="places.html" aria-current="page">地点索引</a>
-        <details class="gm-atlas-more">
-          <summary>专题与资料</summary>
-          <div class="gm-side-links">
+  <main id="main" class="gm-topic gm-map-topic gm-atlas-reference places-topic" tabindex="-1">
+    <header class="gm-flat-heading">
+      <h1 class="gm-title">地点索引</h1>
+      <p class="gm-intro">找家乡、山河、大洋和世界地标，点结果就能打开地图上的档案。</p>
+      <a href="gallery.html?place=f20">长江瞿塘峡照片与来源</a>
+    </header>
+
+    <div class="gm-flat-workspace" data-sidebar-layout=".gm-sidebar" data-sidebar-width="clamp(280px, 24vw, 320px)" data-sidebar-label="图谱工具">
+      <aside class="gm-sidebar" aria-label="图谱工具与相关专题">
+        <details id="place-tools" class="gm-flat-tools" open tabindex="-1">
+          <summary>搜索与筛选</summary>
+          <form class="gm-search gm-flat-controls" action="places.html" role="search">
+            <label for="place-search">输入地名、简称或英文名</label>
+            <div><input type="search" id="place-search" name="q" placeholder="试试长江或 Japan"><button type="submit">查找</button></div>
+            <label class="gm-category" for="place-category">地点类型 <select id="place-category" name="type"><option value="">全部类型</option></select></label>
+            <a class="gm-flat-back" href="#content">查看结果 ↓</a>
+          </form>
+        </details>
+        <details class="gm-flat-tools">
+          <summary>相关专题</summary>
+          <nav class="gm-flat-links" aria-label="地理图谱页面导航">
+            <a href="index.html">图谱首页</a>
+            <a href="china.html">中国地图</a>
+            <a href="world.html">世界地图</a>
+            <a href="china-3d.html">中国 3D 地形</a>
+            <a href="world-3d.html">3D 地球仪</a>
             <a href="province.html">省域站</a>
             <a href="routes.html">主题路线</a>
             <a href="gallery.html">实景图册</a>
@@ -36,32 +53,23 @@
             <a href="china-landscapes.html">中国山河</a>
             <a href="voyages.html">航海与世界探索</a>
             <a href="../geo/index.html">地理小课堂</a>
-          </div>
+          </nav>
         </details>
-      </nav>
+      </aside>
 
-      <header class="gm-hero">
-        <p class="gm-eyebrow">找地点 · 从名字到位置</p>
-        <h1 class="gm-title">地点索引</h1>
-        <p class="gm-intro">找家乡、山河、大洋和世界地标，点结果就能打开地图上的档案。</p>
-      </header>
+      <div id="content" class="gm-content" tabindex="-1">
+        <div class="gm-view-bar gm-reference-bar">
+          <p class="gm-result-count" id="place-count" role="status"></p>
+          <a class="gm-tools-jump" href="#place-tools">修改搜索 ↑</a>
+        </div>
+        <section class="gm-section gm-catalog" aria-label="查找地点">
+          <ul class="gm-place-grid" id="place-results"></ul>
+          <p class="gm-notice" id="place-empty" hidden>没有找到这个地点。试试短一点的名字，或者选「全部类型」再找。</p>
+          <button class="gm-btn gm-more" id="place-more" type="button" hidden>显示更多地点</button>
+        </section>
 
-      <form class="gm-search gm-side-panel" role="search">
-        <label for="place-search">输入地名、简称或英文名</label>
-        <div><input type="search" id="place-search" name="q" placeholder="试试长江或 Japan"><button type="submit">查找</button></div>
-        <label class="gm-category" for="place-category">地点类型 <select id="place-category" name="type"><option value="">全部类型</option></select></label>
-      </form>
-    </aside>
-
-    <div id="content" class="gm-content" tabindex="-1">
-      <section class="gm-section gm-catalog" aria-label="查找地点">
-        <p class="gm-result-count" id="place-count" role="status"></p>
-        <ul class="gm-place-grid" id="place-results"></ul>
-        <p class="gm-notice" id="place-empty" hidden>没有找到这个地点。试试短一点的名字，或者选「全部类型」再找。</p>
-        <button class="gm-btn gm-more" id="place-more" type="button" hidden>显示更多地点</button>
-      </section>
-
-      <noscript><p class="gm-notice">请启用 JavaScript 查看地点和地图。</p></noscript>
+        <noscript><p class="gm-notice">请启用 JavaScript 查看地点和地图。</p></noscript>
+      </div>
     </div>
   </main>
 </body>

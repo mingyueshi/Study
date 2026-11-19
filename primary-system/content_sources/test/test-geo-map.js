@@ -685,9 +685,14 @@ const PAGE_REFS = {
   'province-culture.html': ['content.js', 'china-geo.js', 'map-data.js', 'shared.js', 'province-culture-data.js', 'province-culture.js', 'province-culture.css', 'styles.css', 'province.html', 'china.html'],
   'world.html': ['map-data.js', 'world-geo.js', 'world-data.js', 'shared.js', 'media-data.js', 'media.js', 'map-ui.js', 'map-discovery.js', 'map-discovery-data.js', 'world-app.js', 'styles.css',
     'flat-map.css', 'china.html', 'index.html', 'life-maps.html'],
-  'places.html': ['places-app.js', 'styles.css'],
-  'routes.html': ['routes-app.js', 'styles.css'],
-  'gallery.html': ['media-data.js', 'media.js', 'gallery-app.js', 'styles.css']
+  'places.html': ['places-app.js', 'styles.css', 'flat-map.css', 'atlas-reference.css', 'atlas-reference.js'],
+  'routes.html': ['routes-app.js', 'styles.css', 'flat-map.css', 'atlas-reference.css', 'atlas-reference.js'],
+  'gallery.html': ['media-data.js', 'media.js', 'gallery-app.js', 'styles.css', 'flat-map.css', 'atlas-reference.css', 'atlas-reference.js']
+};
+const referencePanels = {
+  'places.html': ['place-tools', ['place-search', 'place-category'], 'place-results'],
+  'routes.html': ['route-tools', ['route-nav'], 'route-list'],
+  'gallery.html': ['media-tools', ['media-tools-title', 'media-kind', 'media-group'], 'media-list']
 };
 Object.entries(PAGE_REFS).forEach(([page, refs]) => {
   if (!fileExists(page)) return;
@@ -708,6 +713,16 @@ Object.entries(PAGE_REFS).forEach(([page, refs]) => {
     check(tools.includes('data-sidebar-layout=".gm-sidebar"') && tools.includes('id="province-nav"') && tools.includes('id="province-search"'),
       '省域站应在共用侧栏保留筛选和导航');
     check(main.includes('id="province-page"'), '省域站应在主区显示目录或档案');
+  } else if (referencePanels[page]) {
+    const [sidebar, main = ''] = html.split('</aside>');
+    const [tools, fields, results] = referencePanels[page];
+    check(sidebar.includes('data-sidebar-layout=".gm-sidebar"') && fields.every(id => sidebar.includes(`id="${id}"`)),
+      page + ' 应在可折叠侧栏保留原有筛选或目录');
+    check(main.includes(`href="#${tools}"`) && main.includes(`id="${results}"`),
+      page + ' 的主区应保留结果锚点和返回工具的入口');
+    for (const link of ['index.html', 'china-3d.html', 'world-3d.html', 'province.html']) {
+      check(sidebar.includes(`href="${link}"`), page + ' 应保留导航链接：' + link);
+    }
   } else if (/^(?:world-)?(?:animals|plants)\.html$/.test(page)) {
     const [toolArea, mapArea = ''] = html.split('</aside>');
     check(toolArea.includes('data-sidebar-layout=".gm-sidebar"') && toolArea.includes('id="gm-wildlife-tools"'),
