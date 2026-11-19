@@ -1,75 +1,82 @@
 {% extends 'base.html' %}{% load static %}{% block title %}词以类聚 · 乐学堂{% endblock %}
-{% block content %}<link rel="stylesheet" href="{% static 'words/tree.css' %}?v=5"><script src="{% static 'speech.js' %}" defer></script><script src="{% static 'tts.js' %}" defer></script><script src="{% static 'words/tree.js' %}?v=5" defer></script>
-<header class="tree-hero">
-  <div class="tree-hero-copy">
-    <p class="eyebrow">英语 · 看结构</p>
+{% block content %}
+<link rel="stylesheet" href="{% static 'study_topics/reading.css' %}?v=37b1aaceb767">
+<link rel="stylesheet" href="{% static 'words/tree.css' %}?v=4a9cd65aaf3d"><script src="{% static 'speech.js' %}" defer></script><script src="{% static 'tts.js' %}" defer></script><script src="{% static 'words/tree.js' %}?v=4e865abe9287" defer></script>
+<div class="tree-page">
+  <header class="study-reading-hero">
     <h1>词以类聚</h1>
-    <p class="tree-hero-tag">单词也有亲戚。按意思找分类，顺着词尾练拼读，再用词根词缀拆一拆、记一群。</p>
+    <p>按意思认识单词，顺着词尾练拼读，再用词根词缀拆一拆、记一群。</p>
+  </header>
+  {% if is_morphology %}{{ morphology_payload|json_script:'word-morphology-data' }}{% endif %}
+  <div class="study-reading-layout tree-layout" data-sidebar-layout=".tree-sidebar" data-sidebar-width="280px" data-sidebar-label="词树侧栏" data-sidebar-collapse-key="primary_sidebar_collapsed_v1:.tree-word-panel">
+    {% include 'words/tree_sidebar.html' %}
+    <div class="tree-main study-reading-main">
+      {% if query %}
+      <section class="tree-search-results" id="tree-results" tabindex="-1" aria-labelledby="tree-results-title">
+        <header>
+          <h2 id="tree-results-title">搜索结果 <small>{{ match_count }} 项</small></h2>
+          <a href="{{ clear_search_url }}" data-tree-clear-search>清除搜索</a>
+        </header>
+        {% if search_results %}
+        <ul>{% for result in search_results %}
+          <li><a href="{{ result.url }}"><b lang="en">{{ result.en }}</b>{% if result.zh %} {{ result.zh }}{% endif %}<small>{{ result.path }}</small></a></li>
+        {% endfor %}</ul>
+        {% if match_count > search_results|length %}<p>已显示前 {{ search_results|length }} 项，输入更完整的词可以缩小结果。</p>{% endif %}
+        {% else %}<p>没有找到「{{ query }}」。可以换一个关键词或调整搜索范围。</p>{% endif %}
+      </section>
+      {% endif %}
+      {% if is_morphology %}
+      <details class="tree-intro"><summary>怎样看词根词缀树</summary>{% include 'words/morphology_intro.html' %}</details>
+      {% endif %}
+      <div class="tree-shell{% if is_spelling %} tree-shell-spelling{% endif %}{% if is_morphology %} tree-shell-morphology{% endif %}" id="tree-workspace" data-root-key="{{ selected_root.key }}" data-root-zh="{{ selected_root.zh }}" data-root-emoji="{{ selected_root.emoji }}"{% if is_wordnet %} data-scene-url="{% url 'scenario-words' %}"{% endif %} data-dict-url="{% url 'dictionary' %}">
+        <section class="tree-board">
+          <div class="tree-board-head">
+            <h2 class="tree-title">{{ selected_root.emoji }} {{ selected_root.zh }} <span class="muted">{% if is_spelling %}{{ selected_root.children|length }} 组 · {% endif %}{% if is_morphology %}{{ selected_root.family_count }} 个家族 · {% endif %}{{ selected_root.total }} {% if is_morphology %}条例词{% else %}词{% endif %}</span></h2>
+            <div class="tree-tools" data-tree-outline-tools><button type="button" class="tree-tool" data-tree-expand>展开全部</button><button type="button" class="tree-tool" data-tree-collapse>全部收起</button><a class="tree-tool" href="#tree-panel">看词墙／词卡 ↓</a></div>
+          </div>
+          {% if is_spelling %}
+          <div class="tree-family-views" data-family-views hidden aria-label="拼写家族学习方式">
+            <button class="tree-tool" type="button" data-family-view="memory" aria-pressed="true">🃏 翻卡记单词</button>
+            <button class="tree-tool" type="button" data-family-view="outline" aria-pressed="false">🔤 词尾目录</button>
+          </div>
+          <section class="family-memory" data-family-memory hidden aria-label="单词家族记忆卡">
+            <h3 data-family-title>单词家族记忆卡</h3>
+            <p class="tree-family-tip">先读正面的单词，猜猜意思，再翻过来核对。彩色部分是这一家的共同词尾。</p>
+            <div class="family-memory-tools">
+              <button type="button" class="tree-tool" data-family-reset>全部翻回</button>
+            </div>
+            <p class="family-memory-progress" data-family-progress role="status" aria-live="polite"></p>
+            <div class="family-memory-grid" data-family-deck></div>
+            <div class="family-memory-nav"><button class="tree-tool" type="button" data-family-prev>← 上一家族</button><button class="tree-tool" type="button" data-family-next>下一家族 →</button></div>
+          </section>
+          {% elif is_morphology %}<p class="tree-family-tip">先展开前缀、后缀或词根，再点一个家族。点彩色拆词卡，看它怎样构成、怎样用。</p>
+          {% else %}<p class="tree-family-tip">顺着连线，从大类找到小类，再找到单词。点枝干展开或收起，点单词看词卡。</p>{% endif %}
+          <div class="tree-outline{% if not is_spelling %} tree-diagram{% endif %}" data-tree-outline>
+          {% if not is_spelling %}<div class="tree-diagram-root"><span aria-hidden="true">{{ selected_root.emoji }}</span><strong>{{ selected_root.zh }}</strong><span lang="en">{{ selected_root.en }}</span><small>{% if is_morphology %}构词成分 → 家族 → 派生词{% else %}大类 → 小类 → 单词{% endif %}</small></div>{% endif %}
+          {% if selected_root.words %}<div class="tree-node-words tree-root-words">{% for word in selected_root.words %}{% include 'words/tree_word.html' with node_id=selected_root.id %}{% endfor %}</div>{% endif %}
+          {% include 'words/tree_nodes.html' with node=selected_root path_ids=path_ids %}
+          </div>
+        </section>
+        <section class="tree-word-panel" id="tree-panel" tabindex="-1" aria-label="单词详情与词墙">{% if selected_word %}
+          <article class="tree-word-card" id="tree-word-card">
+            <p class="tree-word-emoji">{{ selected_word.emoji|default:"🔤" }}</p>
+            <p class="tree-word-headline"><b lang="en">{% include 'words/tree_spelling.html' with word=selected_word %}</b> <button class="say-chip" type="button" data-say="{{ selected_word.en }}" aria-label="朗读 {{ selected_word.en }}">🔊</button></p>
+            {% if selected_word.ipa %}<p class="tree-word-ipa">{{ selected_word.ipa }}</p>{% endif %}
+            {% if selected_word.zh %}<p class="tree-word-zh">{{ selected_word.zh }}</p>{% endif %}
+            {% if is_morphology %}{% include 'words/morphology_detail.html' with word=selected_word %}{% endif %}
+            {% if selected_word.scenario_zh %}<p class="tree-word-scene">场景：{{ selected_word.scenario_zh }}</p>{% endif %}
+            {% if selected_word.source_status and selected_word.source_status != '来源一致' %}<p class="tree-word-status">{{ selected_word.source_status }}</p>{% endif %}
+            <div class="tree-word-actions">
+              {% if is_wordnet %}<a class="button small" href="{% url 'scenario-words' %}?word={{ selected_word.en|urlencode }}">去场景页学会它 →</a>{% endif %}
+              <a class="button small ghost" href="{% url 'dictionary' %}?q={{ selected_word.en|urlencode }}">查词典 →</a>
+              <button class="button small ghost tree-back" type="button" hidden>← 返回词墙</button>
+            </div>
+          </article>
+        {% else %}<p class="tree-word-empty">点树上的单词，这里会显示词卡；选中的枝干里共 <b>{{ selected_root.total }}</b> 个词。</p>{% endif %}</section>
+      </div>
+      {% if is_morphology %}<details class="morph-sources"><summary>构词资料与使用说明</summary><ul>{% for note in morphology_data.limits %}<li>{{ note }}</li>{% endfor %}</ul><p>中文释义、说明与例句为学习编写，构词资料参照以下来源。外部资料需联网，本页内容和交互无需连接外部网站。</p><ul>{% for source in morphology_data.sources %}<li><a href="{{ source.url }}" target="_blank" rel="noopener noreferrer">{{ source.title }} ↗</a></li>{% endfor %}</ul></details>
+      {% else %}<p class="tree-source">{% if is_spelling %}例词按共同的拼写和读音分组，音标采用常见英式标法。{% else %}词树结构来自 Open English Wordnet 2025（CC-BY-4.0）上下位关系，中文释义与音标随场景单词词库实时更新。{% endif %}</p>{% endif %}
+    </div>
   </div>
-  <nav class="tree-modes" aria-label="词树分类">
-    <a href="{% url 'words-tree' %}"{% if is_wordnet %} aria-current="page"{% endif %}>
-      <span class="tree-mode-icon" aria-hidden="true">🌳</span>
-      <span><b>WordNet 词义树</b><small>按意思找亲戚，猫和狗都挂在动物枝上。</small></span>
-    </a>
-    <a href="{% url 'words-tree' %}?root={{ spelling_root.key }}"{% if is_spelling %} aria-current="page"{% endif %}>
-      <span class="tree-mode-icon" aria-hidden="true">{{ spelling_root.emoji }}</span>
-      <span><b>{{ spelling_root.zh }}</b><small><span lang="en">Word families</span> · 保留词尾，换个开头读一读。</small></span>
-    </a>
-    <a href="{% url 'words-tree' %}?root=morphology"{% if is_morphology %} aria-current="page"{% endif %}>
-      <span class="tree-mode-icon" aria-hidden="true">🧩</span>
-      <span><b>词根词缀树</b><small><span lang="en">Word parts</span> · 从一个构词成分，认识一群词。</small></span>
-    </a>
-  </nav>
-</header>
-{% if is_wordnet %}<nav class="tree-root-chips" aria-label="词义树枝干">{% for root in roots %}<a class="chip{% if root.key == selected_root.key %} on{% endif %}" href="?root={{ root.key }}"{% if root.key == selected_root.key %} aria-current="page"{% endif %}>{{ root.emoji }} {{ root.zh }}<i>{{ root.total }}</i></a>{% endfor %}</nav>{% endif %}
-{% if is_morphology %}{% include 'words/morphology_intro.html' %}{{ morphology_payload|json_script:'word-morphology-data' }}{% endif %}
-<div class="tree-shell{% if is_spelling %} tree-shell-spelling{% endif %}{% if is_morphology %} tree-shell-morphology{% endif %}" data-root-key="{{ selected_root.key }}" data-root-zh="{{ selected_root.zh }}" data-root-emoji="{{ selected_root.emoji }}"{% if is_wordnet %} data-scene-url="{% url 'scenario-words' %}"{% endif %} data-dict-url="{% url 'dictionary' %}">
-  <section class="tree-board">
-    <div class="tree-board-head">
-      <h2 class="tree-title">{{ selected_root.emoji }} {{ selected_root.zh }} <span class="muted">{% if is_spelling %}{{ selected_root.children|length }} 组 · {% endif %}{% if is_morphology %}{{ selected_root.family_count }} 个家族 · {% endif %}{{ selected_root.total }} {% if is_morphology %}条例词{% else %}词{% endif %}</span></h2>
-      <div class="tree-tools" data-tree-outline-tools><button type="button" class="tree-tool" data-tree-expand>展开全部</button><button type="button" class="tree-tool" data-tree-collapse>全部收起</button></div>
-    </div>
-    {% if is_spelling %}
-    <div class="tree-family-views" data-family-views hidden aria-label="拼写家族学习方式">
-      <button class="tree-tool" type="button" data-family-view="memory" aria-pressed="true">🃏 翻卡记单词</button>
-      <button class="tree-tool" type="button" data-family-view="outline" aria-pressed="false">🔤 词尾目录</button>
-    </div>
-    <section class="family-memory" data-family-memory hidden aria-label="单词家族记忆卡">
-      <h3>单词家族记忆卡</h3>
-      <p class="tree-family-tip">先读正面的单词，猜猜意思，再翻过来核对。彩色部分是这一家的共同词尾。</p>
-      <div class="family-memory-tools">
-        <div class="inline-choice" data-inline-choice><label>挑一个家族 <select data-family-select aria-label="选择拼写家族">{% for family in selected_root.children %}<option value="{{ family.id }}">{{ family.zh }} · {{ family.ipa }} · {{ family.total }} 词</option>{% endfor %}</select></label></div>
-        <button type="button" class="tree-tool" data-family-reset>全部翻回</button>
-      </div>
-      <p class="family-memory-progress" data-family-progress role="status" aria-live="polite"></p>
-      <div class="family-memory-grid" data-family-deck></div>
-      <div class="family-memory-nav"><button class="tree-tool" type="button" data-family-prev>← 上一家族</button><button class="tree-tool" type="button" data-family-next>下一家族 →</button></div>
-    </section>
-    {% elif is_morphology %}<p class="tree-family-tip">先展开前缀、后缀或词根，再点一个家族。点彩色拆词卡，看它怎样构成、怎样用。</p>
-    {% else %}<p class="tree-family-tip">顺着连线，从大类找到小类，再找到单词。点枝干展开或收起，点单词看词卡。</p>{% endif %}
-    <div class="tree-outline{% if not is_spelling %} tree-diagram{% endif %}" data-tree-outline>
-    {% if not is_spelling %}<div class="tree-diagram-root"><span aria-hidden="true">{{ selected_root.emoji }}</span><strong>{{ selected_root.zh }}</strong><span lang="en">{{ selected_root.en }}</span><small>{% if is_morphology %}构词成分 → 家族 → 派生词{% else %}大类 → 小类 → 单词{% endif %}</small></div>{% endif %}
-    {% if selected_root.words %}<div class="tree-node-words tree-root-words">{% for word in selected_root.words %}{% include 'words/tree_word.html' %}{% endfor %}</div>{% endif %}
-    {% include 'words/tree_nodes.html' with node=selected_root path_ids=path_ids %}
-    </div>
-  </section>
-  <aside class="tree-word-panel" id="tree-panel">{% if selected_word %}
-    <article class="tree-word-card" id="tree-word-card">
-      <p class="tree-word-emoji">{{ selected_word.emoji|default:"🔤" }}</p>
-      <p class="tree-word-headline"><b lang="en">{% include 'words/tree_spelling.html' with word=selected_word %}</b> <button class="say-chip" type="button" data-say="{{ selected_word.en }}" aria-label="朗读 {{ selected_word.en }}">🔊</button></p>
-      {% if selected_word.ipa %}<p class="tree-word-ipa">{{ selected_word.ipa }}</p>{% endif %}
-      {% if selected_word.zh %}<p class="tree-word-zh">{{ selected_word.zh }}</p>{% endif %}
-      {% if is_morphology %}{% include 'words/morphology_detail.html' with word=selected_word %}{% endif %}
-      {% if selected_word.scenario_zh %}<p class="tree-word-scene">场景：{{ selected_word.scenario_zh }}</p>{% endif %}
-      {% if selected_word.source_status and selected_word.source_status != '来源一致' %}<p class="tree-word-status">{{ selected_word.source_status }}</p>{% endif %}
-      <div class="tree-word-actions">
-        {% if is_wordnet %}<a class="button small" href="{% url 'scenario-words' %}?word={{ selected_word.en|urlencode }}">去场景页学会它 →</a>{% endif %}
-        <a class="button small ghost" href="{% url 'dictionary' %}?q={{ selected_word.en|urlencode }}">查词典 →</a>
-        <button class="button small ghost tree-back" type="button" hidden>← 返回词墙</button>
-      </div>
-    </article>
-  {% else %}<p class="tree-word-empty">点树上的单词，这里会显示词卡；选中的枝干里共 <b>{{ selected_root.total }}</b> 个词。</p>{% endif %}</aside>
 </div>
-{% if is_morphology %}<details class="morph-sources"><summary>构词资料与使用说明</summary><ul>{% for note in morphology_data.limits %}<li>{{ note }}</li>{% endfor %}</ul><p>中文释义、说明与例句为学习编写，构词资料参照以下来源。外部资料需联网，本页内容和交互无需连接外部网站。</p><ul>{% for source in morphology_data.sources %}<li><a href="{{ source.url }}" target="_blank" rel="noopener noreferrer">{{ source.title }} ↗</a></li>{% endfor %}</ul></details>
-{% else %}<p class="tree-source">{% if is_spelling %}例词按共同的拼写和读音分组，音标采用常见英式标法。{% else %}词树结构来自 Open English Wordnet 2025（CC-BY-4.0）上下位关系，中文释义与音标随场景单词词库实时更新。{% endif %}</p>{% endif %}
 {% endblock %}

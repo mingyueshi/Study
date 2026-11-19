@@ -4,7 +4,3 @@
   <div class="morph-legend" aria-label="拆词颜色说明"><span class="morph-part-prefix">前缀</span><span class="morph-part-base">完整词基</span><span class="morph-part-root">词根</span><span class="morph-part-suffix">后缀</span><span class="morph-part-component">其他组成部分</span></div>
   <p class="morph-intro-note">{{ morphology_data.limits.0 }}</p>
 </section>
-<nav class="tree-root-chips morph-categories" aria-label="构词分类">
-  <a class="chip" href="?root=morphology">🧩 看全部</a>
-  {% for category in morphology_data.categories %}<a class="chip" href="?root=morphology&amp;branch=morph-{{ category.id }}">{{ category.emoji }} {{ category.zh }}<i>{{ category.families|length }} 个家族</i></a>{% endfor %}
-</nav>

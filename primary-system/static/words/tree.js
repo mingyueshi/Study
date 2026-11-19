@@ -7,7 +7,8 @@
   const shell = document.querySelector('.tree-shell');
   const board = document.querySelector('.tree-board');
   const panel = document.getElementById('tree-panel');
-  if (!shell || !board || !panel) return;
+  const sidebar = document.querySelector('.tree-sidebar');
+  if (!shell || !board || !panel || !sidebar) return;
 
   const rootKey = shell.dataset.rootKey || '';
   const rootZh = shell.dataset.rootZh || '';
@@ -15,6 +16,10 @@
   const sceneUrl = shell.dataset.sceneUrl;
   const dictUrl = shell.dataset.dictUrl || '/dictionary/';
   const outline = board.querySelector('[data-tree-outline]') || board;
+  const params = new URLSearchParams(location.search);
+  const searchBranch = sidebar.querySelector('[name="branch"]');
+  const searchScope = sidebar.querySelector('[name="within"]');
+  const clearSearch = document.querySelector('[data-tree-clear-search]');
   const morphPayload = document.getElementById('word-morphology-data');
   const morphology = morphPayload ? JSON.parse(morphPayload.textContent) : {entries: [], families: []};
   const morphEntries = new Map(morphology.entries.map(word => [word.morph_id, word]));
@@ -40,8 +45,8 @@
     const id = details.closest('.tree-branch')?.id;
     if (!id) return;
     if (id in saved && !details.hasAttribute('data-path-open')) details.open = saved[id];
-    else if (rootKey !== 'spelling' && !location.search.includes('branch=')
-      && !location.search.includes('word=') && details.closest('.tree-branch').parentElement.parentElement === outline) details.open = true;
+    else if (rootKey !== 'spelling' && !['branch', 'word', 'entry'].some(key => params.get(key))
+      && details.closest('.tree-branch').parentElement.parentElement === outline) details.open = true;
     details.addEventListener('toggle', () => { saved[id] = details.open; save(); });
   });
 
@@ -55,6 +60,7 @@
     status: chip.dataset.status || '',
     ending: chip.dataset.ending || '',
     morphId: chip.dataset.morphId || '',
+    nodeId: chip.dataset.nodeId || '',
   });
 
   const addSpelling = (node, { en, ending, morphId }) => {
@@ -95,14 +101,62 @@
   // 词 chip 所在枝干（li.tree-branch）；根直属词返回 null
   const containingBranch = (chip) => chip.closest('.tree-branch');
 
-  const markOn = (en, morphId = '') => {
-    const low = en.toLowerCase();
-    board.querySelectorAll('.tree-word').forEach((chip) => {
-      chip.classList.toggle('on', morphId ? chip.dataset.morphId === morphId : (chip.dataset.en || '').toLowerCase() === low);
+  const markOn = (word) => {
+    shell.querySelectorAll('.tree-word').forEach((chip) => {
+      const selected = word && chip.dataset.en === word.en && chip.dataset.nodeId === word.nodeId;
+      chip.classList.toggle('on', Boolean(selected));
+      if (selected) chip.setAttribute('aria-current', 'true');
+      else chip.removeAttribute('aria-current');
     });
   };
 
-  const setUrl = (query) => history.replaceState(null, '', `?${query}`);
+  const setUrl = (selection) => {
+    const url = new URL(location.href);
+    for (const key of ['branch', 'word', 'entry']) url.searchParams.delete(key);
+    url.searchParams.set('root', rootKey);
+    for (const [key, value] of Object.entries(selection)) if (value) url.searchParams.set(key, value);
+    url.hash = '';
+    history.replaceState(history.state, '', url);
+    if (clearSearch) {
+      url.searchParams.delete('q');
+      url.searchParams.delete('within');
+      url.hash = selection.word || selection.entry ? 'tree-panel' : 'tree-workspace';
+      clearSearch.href = url;
+    }
+  };
+
+  const openPath = (branch) => {
+    for (let node = branch; node; node = node.parentElement.closest('.tree-branch')) {
+      node.querySelector(':scope > details').open = true;
+    }
+  };
+
+  const syncBranch = (branch, updateScope = true) => {
+    const id = branch?.id || '';
+    board.querySelector('[data-branch-id][aria-current]')?.removeAttribute('aria-current');
+    branch?.querySelector('summary')?.setAttribute('aria-current', 'true');
+    sidebar.querySelectorAll('[data-tree-branch-link]').forEach(link => {
+      if (link.dataset.treeBranchLink === id) {
+        link.setAttribute('aria-current', 'true');
+        const group = link.closest('.tree-side-families');
+        if (group) group.open = true;
+      } else link.removeAttribute('aria-current');
+    });
+    searchBranch.value = id;
+    if (updateScope) {
+      if (searchScope.value !== id) searchScope.checked = false;
+      searchScope.value = id;
+      searchScope.disabled = !id;
+      searchScope.parentElement.hidden = !id;
+    }
+  };
+
+  const showPanel = () => {
+    panel.focus({preventScroll: true});
+    panel.scrollIntoView({block: 'nearest'});
+  };
+
+  const primaryClick = event => event.button === 0 && !event.ctrlKey && !event.metaKey && !event.shiftKey && !event.altKey;
 
   /* —— 词墙 —— */
   let wallBranch = null; // 当前词墙对应枝干 li；null = 根
@@ -152,11 +206,12 @@
     return entry;
   };
 
-  const renderWall = (branchLi, scroll = true) => {
+  const renderWall = (branchLi, scroll = true, update = true) => {
     wallBranch = branchLi;
-    setUrl(branchLi
-      ? `root=${encodeURIComponent(rootKey)}&branch=${encodeURIComponent(branchLi.id)}`
-      : `root=${encodeURIComponent(rootKey)}`);
+    if (update) setUrl({branch: branchLi?.id});
+    syncBranch(branchLi, update);
+    markOn();
+    window.TTS?.stopSequence();
     const wall = el('div', 'tree-wall');
     const crumb = el('p', 'tree-crumb');
     const names = crumbOf(branchLi);
@@ -164,10 +219,6 @@
       if (index) crumb.append(el('span', 'tree-crumb-sep', '›'));
       crumb.append(el('span', index === names.length - 1 ? 'tree-crumb-here' : '', name));
     });
-    const filter = el('input', 'tree-filter');
-    filter.type = 'search';
-    filter.placeholder = '筛选：英文或中文';
-    filter.setAttribute('aria-label', '筛选本枝单词');
     const wrap = el('div', 'tree-wall-groups');
     groupsOf(branchLi).forEach((group) => {
       const box = el('div', 'tree-wall-group');
@@ -181,23 +232,9 @@
       box.append(head, chips);
       wrap.append(box);
     });
-    wall.append(crumb, filter, wrap);
+    wall.append(crumb, wrap);
     panel.replaceChildren(wall);
-    filter.addEventListener('input', () => {
-      const q = filter.value.trim().toLowerCase();
-      wrap.querySelectorAll('.tree-wall-group').forEach((box) => {
-        let visible = 0;
-        box.querySelectorAll('.tree-word').forEach((chip) => {
-          const hay = `${chip.dataset.en} ${chip.dataset.zh}`.toLowerCase();
-          const show = !q || hay.includes(q);
-          const entry = chip.closest('.tree-wall-entry') || chip;
-          entry.hidden = !show;
-          if (show) visible += 1;
-        });
-        box.hidden = visible === 0;
-      });
-    });
-    if (scroll) panel.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    if (scroll) showPanel();
   };
 
   /* —— 词卡 —— */
@@ -259,14 +296,15 @@
     section.append(sources);
     return section;
   };
-  const revealMorphPanel = () => {
-    const selector = shell.dataset.slMode === 'compact'
-      ? '.sl-toggle:not(.sl-collapse)[aria-expanded="false"]'
-      : '.sl-collapse[aria-expanded="false"]';
-    shell.querySelector(selector)?.click();
+  const findBranch = (id) => {
+    const node = document.getElementById(id);
+    return node?.classList.contains('tree-branch') && outline.contains(node) ? node : null;
   };
-  const renderCard = (data) => {
+
+  const renderCard = (data, update = true) => {
+    window.TTS?.stopSequence();
     const card = el('article', 'tree-word-card');
+    card.id = 'tree-word-card';
     card.append(el('p', 'tree-word-emoji', data.emoji || '🔤'));
     const headline = el('p', 'tree-word-headline');
     const word = el('b');
@@ -289,28 +327,41 @@
     }
     const dict = el('a', 'button small ghost', '查词典 →');
     dict.href = `${dictUrl}?q=${encodeURIComponent(data.en)}`;
+    const locate = el('button', 'button small ghost', '定位到树上 ↑');
+    locate.type = 'button';
+    locate.addEventListener('click', () => {
+      if (outline.hidden) board.querySelector('[data-family-view="outline"]')?.click();
+      const chip = outline.querySelector('.tree-word.on');
+      openPath(findBranch(data.nodeId));
+      chip?.focus({preventScroll: true});
+      chip?.scrollIntoView({block: 'nearest'});
+    });
     const back = el('button', 'button small ghost tree-back', '← 返回词墙');
     back.type = 'button';
-    actions.append(dict, back);
+    actions.append(dict, locate, back);
     card.append(actions);
     panel.replaceChildren(card);
-    if (morphWord) revealMorphPanel();
-    markOn(data.en, data.morphId);
-    setUrl(`root=${encodeURIComponent(rootKey)}&${data.morphId ? 'entry=' + encodeURIComponent(data.morphId) : 'word=' + encodeURIComponent(data.en)}`);
+    const branch = findBranch(data.nodeId);
+    openPath(branch);
+    syncBranch(branch, update);
+    markOn(data);
     back.addEventListener('click', () => renderWall(wallBranch));
-    panel.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    if (update) {
+      setUrl(data.morphId ? {entry: data.morphId} : {word: data.en, branch: data.nodeId});
+      showPanel();
+    }
   };
 
   /* —— 事件：点枝干选词墙，点词出卡 —— */
-  document.addEventListener('click', (event) => {
+  shell.addEventListener('click', (event) => {
     const summary = event.target.closest('.tree-branch summary');
     if (summary) {
       const li = summary.closest('.tree-branch');
-      if (li) renderWall(li);
+      if (li) renderWall(li, false);
       return;
     }
     const chip = event.target.closest('.tree-word');
-    if (chip) {
+    if (chip && primaryClick(event)) {
       event.preventDefault();
       if (board.contains(chip)) wallBranch = containingBranch(chip);
       renderCard(chipData(chip));
@@ -328,33 +379,37 @@
   });
 
   /* —— 载入：深链词出卡并记住词墙；否则默认根词墙 —— */
-  const params = new URLSearchParams(location.search);
   const onChip = board.querySelector('.tree-word.on');
   if (onChip) {
     wallBranch = containingBranch(onChip);
-    if (onChip.dataset.morphId) renderCard(chipData(onChip));
-    onChip.scrollIntoView({ block: 'center' });
-    const back = panel.querySelector('.tree-back');
-    if (back && !onChip.dataset.morphId) {
-      back.hidden = false;
-      back.addEventListener('click', () => renderWall(wallBranch));
-    }
-    if (onChip.dataset.morphId) document.addEventListener('DOMContentLoaded', () => {
-      revealMorphPanel();
-      panel.scrollIntoView({block: 'nearest'});
-    }, {once: true});
-  } else {
-    const branchLi = params.get('branch')
-      ? document.getElementById(params.get('branch'))
-      : null;
-    renderWall(branchLi?.classList.contains('tree-branch') ? branchLi : null, false);
-  }
+    renderCard(chipData(onChip), false);
+    if (!location.hash) requestAnimationFrame(() => panel.scrollIntoView({block: 'nearest'}));
+  } else renderWall(findBranch(params.get('branch')), false, false);
+
+  const closeCompactSidebar = () => {
+    sidebar.closest('.tree-layout[data-sl-mode="compact"][data-sl-open="true"]')
+      ?.querySelector('.sl-toggle:not(.sl-collapse)')?.click();
+  };
+  const connectFamilyLinks = (choose) => {
+    sidebar.addEventListener('click', event => {
+      const link = event.target.closest('[data-tree-branch-link]');
+      if (!link || !primaryClick(event)) return;
+      event.preventDefault();
+      closeCompactSidebar();
+      choose(findBranch(link.dataset.treeBranchLink));
+    });
+  };
 
   /* 拼写家族：复用目录中的例词，不另存释义或读音。 */
   const memory = board.querySelector('[data-family-memory]');
-  if (!memory) return;
+  if (!memory) {
+    connectFamilyLinks(branch => {
+      openPath(branch);
+      renderWall(branch);
+    });
+    return;
+  }
   const views = board.querySelector('[data-family-views]');
-  const select = memory.querySelector('[data-family-select]');
   const deck = memory.querySelector('[data-family-deck]');
   const progress = memory.querySelector('[data-family-progress]');
   const previous = memory.querySelector('[data-family-prev]');
@@ -362,12 +417,13 @@
   const families = Array.from(outline.querySelectorAll(':scope > .tree-nodes > .tree-branch'));
   const viewed = new Set();
   let flips = [];
+  let activeFamily;
   const updateProgress = () => {
     progress.textContent = `这一家族已翻看 ${viewed.size}／${flips.length} 张${viewed.size === flips.length ? '，试着把它们连起来读一读！' : '，先猜一猜，再翻卡。'}`;
   };
   const renderMemory = (family) => {
-    select.value = family.id;
-    window.StudyChoices?.sync(select);
+    activeFamily = family;
+    memory.querySelector('[data-family-title]').textContent = `${family.querySelector('summary').dataset.branchZh} 家族记忆卡`;
     viewed.clear();
     flips = [];
     deck.replaceChildren();
@@ -404,6 +460,7 @@
       const detail = el('a', 'family-memory-detail', '看词卡 →');
       detail.href = source.href;
       detail.addEventListener('click', (event) => {
+        if (!primaryClick(event)) return;
         event.preventDefault();
         wallBranch = family;
         renderCard(data);
@@ -431,18 +488,34 @@
     panel.replaceChildren(guide);
   };
   const chooseFamily = (family) => {
-    renderMemory(family);
-    wallBranch = family;
-    setUrl(`root=${encodeURIComponent(rootKey)}&branch=${encodeURIComponent(family.id)}`);
-    renderMemoryGuide(family);
+    openPath(family);
+    if (activeFamily !== family) renderMemory(family);
+    if (memory.hidden) renderWall(family);
+    else {
+      wallBranch = family;
+      syncBranch(family);
+      markOn();
+      window.TTS?.stopSequence();
+      setUrl({branch: family.id});
+      renderMemoryGuide(family);
+    }
   };
-  select.addEventListener('change', () => chooseFamily(families.find(family => family.id === select.value)));
+  connectFamilyLinks(family => {
+    if (!family) return;
+    chooseFamily(family);
+    if (!memory.hidden) {
+      const title = memory.querySelector('[data-family-title]');
+      title.tabIndex = -1;
+      title.focus({preventScroll: true});
+      title.scrollIntoView({block: 'nearest'});
+    }
+  });
   previous.addEventListener('click', () => {
-    const index = families.findIndex(family => family.id === select.value);
+    const index = families.indexOf(activeFamily);
     if (index > 0) chooseFamily(families[index - 1]);
   });
   next.addEventListener('click', () => {
-    const index = families.findIndex(family => family.id === select.value);
+    const index = families.indexOf(activeFamily);
     if (index < families.length - 1) chooseFamily(families[index + 1]);
   });
   memory.querySelector('[data-family-reset]').addEventListener('click', () => {
@@ -459,14 +532,14 @@
     views.querySelectorAll('[data-family-view]').forEach(button => {
       button.setAttribute('aria-pressed', String(button.dataset.familyView === (isMemory ? 'memory' : 'outline')));
     });
+    const family = wallBranch || families[0];
     if (isMemory) {
-      const family = wallBranch || families[0];
-      renderMemory(family);
+      if (family !== activeFamily) renderMemory(family);
+      if (!params.has('within')) syncBranch(family);
       if (!panel.querySelector('.tree-word-card')) renderMemoryGuide(family);
-    } else renderWall(wallBranch, false);
+    } else if (!panel.querySelector('.tree-word-card')) renderWall(wallBranch, false, false);
   };
   views.hidden = false;
-  renderMemory(wallBranch || families[0]);
   let initialView = 'memory';
   try { initialView = localStorage.getItem(viewKey) || 'memory'; } catch (e) { /* 默认翻卡 */ }
   showView(initialView);

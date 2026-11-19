@@ -28,7 +28,6 @@
     ['.timeline-topic', '.timeline-sidebar', 'clamp(250px, 23vw, 300px)', 900],
     ['.history-topic .lesson-layout, .geography-topic .lesson-layout', '.lesson-resources', 'clamp(280px, 24vw, 340px)', 1000],
     ['.poly-shell', '.poly-browse', 'clamp(365px, 32vw, 480px)', 1000, '.poly-card-heading, .poly-search-row, .poly-buckets, .poly-alphabet'],
-    ['.tree-shell', '.tree-word-panel', 'clamp(320px, 32vw, 520px)', 1000],
     ['.gm-wildlife-workspace', '#gm-animal-card', 'clamp(284px, 26vw, 424px)', 1000],
     ['.fh-layout', '.fh-choices, .fh-notebook', 'clamp(300px, 26vw, 380px)', 900],
 

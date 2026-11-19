@@ -10,6 +10,7 @@ from pathlib import Path
 
 from django.core.exceptions import ImproperlyConfigured
 from django.shortcuts import render
+from django.urls import reverse
 from django.views.decorators.cache import never_cache
 from django.views.decorators.http import require_GET
 
@@ -137,6 +138,48 @@ def find_branch(roots, branch_id):
     return None, []
 
 
+def node_at_path(root, path):
+    node = root
+    for node_id in path[1:]:
+        node = next(child for child in node['children'] if child['id'] == node_id)
+    return node
+
+
+def search_words(roots, query, within):
+    """从当前关系类型的词树查词，保留同形词各自所在的枝干。"""
+    if not query:
+        return [], 0
+    needle = query.casefold()
+    matches = []
+
+    def walk(root, node, labels, in_scope):
+        in_scope = in_scope or node['id'] == within
+        labels = (*labels, node['zh'] or node['en'])
+        if in_scope:
+            for word in node['words']:
+                en, zh = word['en'].casefold(), word['zh'].casefold()
+                if needle in en or needle in zh:
+                    matches.append((needle not in (en, zh), root, node, labels, word))
+        for child in node['children']:
+            walk(root, child, labels, in_scope)
+
+    for root in roots:
+        walk(root, root, (), not within)
+    matches.sort(key=lambda match: match[0])
+    results = []
+    for _, root, node, labels, word in matches[:30]:
+        params = {'root': root['key'], 'q': query}
+        if within:
+            params['within'] = within
+        if word.get('morph_id'):
+            params['entry'] = word['morph_id']
+        else:
+            params.update(word=word['en'], branch=node['id'])
+        results.append({'en': word['en'], 'zh': word['zh'], 'path': ' › '.join(labels),
+                        'url': reverse('words-tree', query=params, fragment='tree-panel')})
+    return results, len(matches)
+
+
 @never_cache
 @require_GET
 def tree_page(request):
@@ -144,6 +187,8 @@ def tree_page(request):
     branch = request.GET.get("branch", "").strip()[:80]
     root_key = request.GET.get("root", "")
     entry_id = request.GET.get("entry", "").strip()[:100]
+    query = request.GET.get('q', '').strip()[:60]
+    within = request.GET.get('within', '').strip()[:80]
     spelling_root = load_spelling_root()
     morphology_root = load_morphology_root()
     spelling_branch, _ = find_branch([spelling_root], branch) if branch else (None, [])
@@ -156,17 +201,42 @@ def tree_page(request):
 
     entry = next((row for row in iter_words(roots) if row.get("morph_id") == entry_id), None) if is_morphology and entry_id else None
 
-    selected_root, path_ids = find_path(roots, word) if word else (None, [])
-    if selected_root is None and branch:
-        selected_root, path_ids = find_branch(roots, branch)
-    if selected_root is None:
-        selected_root = next((root for root in roots if root["key"] == root_key), roots[0])
-    selected_word = None
+    preferred_root = next((root for root in roots if root['key'] == root_key), None)
+    branch_root, branch_path = find_branch(roots, branch) if branch else (None, [])
+    selected_root, path_ids = None, []
     if word:
-        selected_word = next((row for row in iter_words([selected_root]) if row["en"].lower() == word.lower()), None)
+        if branch_root and preferred_root in (None, branch_root):
+            node = node_at_path(branch_root, branch_path)
+            _, relative_path = find_path([node], word)
+            if relative_path:
+                selected_root, path_ids = branch_root, branch_path[:-1] + relative_path
+        if selected_root is None and preferred_root:
+            selected_root, path_ids = find_path([preferred_root], word)
+        if selected_root is None:
+            selected_root, path_ids = find_path(roots, word)
+    if selected_root is None and branch:
+        selected_root, path_ids = branch_root, branch_path
+    if selected_root is None:
+        selected_root = preferred_root or roots[0]
+    selected_word = None
+    if word and path_ids:
+        selected_word = next((row for row in node_at_path(selected_root, path_ids)['words']
+                              if row['en'].lower() == word.lower()), None)
     if entry:
         selected_root, path_ids = find_branch(roots, entry["family_id"])
         selected_word = entry
+    if within and find_branch(roots, within)[0] is None:
+        within = ''
+    results, match_count = search_words(roots, query, within)
+    active_branch = path_ids[-1] if len(path_ids) > 1 else ''
+    clear_params = {'root': selected_root['key']}
+    if active_branch:
+        clear_params['branch'] = active_branch
+    if selected_word:
+        if selected_word.get('morph_id'):
+            clear_params['entry'] = selected_word['morph_id']
+        else:
+            clear_params['word'] = selected_word['en']
     morphology_payload = None
     if is_morphology:
         morphology_payload = {
@@ -177,6 +247,9 @@ def tree_page(request):
         }
     return render(request, "words/tree.html", {
         "roots": roots, "selected_root": selected_root, "path_ids": path_ids,
+        "active_branch": active_branch,
+        "query": query, "within": within, "search_results": results, "match_count": match_count,
+        "clear_search_url": reverse('words-tree', query=clear_params, fragment='tree-panel' if selected_word else 'tree-workspace'),
         "selected_word": selected_word, "is_spelling": is_spelling,
         "spelling_root": spelling_root, "is_morphology": is_morphology,
         "is_wordnet": not is_spelling and not is_morphology,

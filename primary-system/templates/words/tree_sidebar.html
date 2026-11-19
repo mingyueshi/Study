@@ -1,0 +1,57 @@
+<aside class="tree-sidebar study-reading-sidebar" aria-label="词树工具">
+  <details class="study-reading-group" open>
+    <summary>搜索</summary>
+    <form class="study-reading-search tree-search" action="{% url 'words-tree' %}#tree-results" method="get">
+      <input type="hidden" name="root" value="{{ selected_root.key }}">
+      <input type="hidden" name="branch" value="{{ active_branch }}">
+      <label for="tree-query">搜英文或中文释义</label>
+      <input id="tree-query" type="search" name="q" value="{{ query }}" maxlength="60" required>
+      <label class="tree-search-scope"{% if not active_branch and not within %} hidden{% endif %}>
+        <input type="checkbox" name="within" value="{{ within|default:active_branch }}"{% if within %} checked{% endif %}{% if not active_branch and not within %} disabled{% endif %}>
+        只搜当前枝干或家族
+      </label>
+      <button type="submit">搜索词树</button>
+    </form>
+  </details>
+  <details class="study-reading-group" open>
+    <summary>关系类型</summary>
+    <nav class="study-reading-links" aria-label="词树分类">
+      <a href="{% url 'words-tree' %}"{% if is_wordnet %} aria-current="page"{% endif %}>WordNet 词义树</a>
+      <a href="{% url 'words-tree' %}?root={{ spelling_root.key }}"{% if is_spelling %} aria-current="page"{% endif %}>{{ spelling_root.zh }}</a>
+      <a href="{% url 'words-tree' %}?root=morphology"{% if is_morphology %} aria-current="page"{% endif %}>词根词缀树</a>
+    </nav>
+  </details>
+  <details class="study-reading-group"{% if not query %} open{% endif %}>
+    <summary>{% if is_wordnet %}选择词义枝干{% else %}选择词族{% endif %}</summary>
+    {% if is_wordnet %}
+    <nav class="study-reading-links" aria-label="词义树枝干">
+      {% for root in roots %}<a href="?root={{ root.key }}"{% if root.key == selected_root.key %} aria-current="true"{% endif %}><span>{{ root.emoji }} {{ root.zh }}</span><small>{{ root.total }} 词</small></a>{% endfor %}
+    </nav>
+    {% elif is_spelling %}
+    <nav class="study-reading-links" aria-label="拼写家族">
+      {% for family in selected_root.children %}<a href="?root=spelling&amp;branch={{ family.id }}" data-tree-branch-link="{{ family.id }}"{% if family.id == active_branch %} aria-current="true"{% endif %}><span lang="en">{{ family.zh }}</span><small>{{ family.ipa }}</small></a>{% endfor %}
+    </nav>
+    {% else %}
+    <nav class="study-reading-links" aria-label="构词家族">
+      <a href="?root=morphology" data-tree-branch-link=""{% if not active_branch %} aria-current="true"{% endif %}>查看全部家族</a>
+      {% for category in selected_root.children %}
+      <details class="tree-side-families"{% if category.id in path_ids %} open{% endif %}>
+        <summary>{{ category.zh }}</summary>
+        <div class="study-reading-links">
+          <a href="?root=morphology&amp;branch={{ category.id }}" data-tree-branch-link="{{ category.id }}"{% if category.id == active_branch %} aria-current="true"{% endif %}>全部{{ category.zh }}</a>
+          {% for family in category.children %}<a href="?root=morphology&amp;branch={{ family.id }}" data-tree-branch-link="{{ family.id }}"{% if family.id == active_branch %} aria-current="true"{% endif %}><span lang="en">{{ family.zh }}</span><small>{{ family.meaning }}</small></a>{% endfor %}
+        </div>
+      </details>
+      {% endfor %}
+    </nav>
+    {% endif %}
+  </details>
+  <details class="study-reading-group">
+    <summary>相关专题</summary>
+    <nav class="study-reading-links" aria-label="专题导航">
+      <a href="{% url 'scenario-words' %}">场景单词 <span aria-hidden="true">↗</span></a>
+      <a href="{% url 'phonetics' %}">英语音标 <span aria-hidden="true">↗</span></a>
+      <a href="{% url 'dictionary' %}">查字查词 <span aria-hidden="true">↗</span></a>
+    </nav>
+  </details>
+</aside>

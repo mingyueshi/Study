@@ -81,3 +81,10 @@ class MorphologyPageTests(SimpleTestCase):
                 response = self.client.get("/words/tree/?" + query)
                 self.assertEqual(response.status_code, 200)
                 self.assertFalse(response.context["is_spelling"] and response.context["is_morphology"])
+
+    def test_search_keeps_both_families_of_the_same_spelling(self):
+        response = self.client.get('/words/tree/', {'root': 'morphology', 'q': 'telephone'})
+        links = [row['url'] for row in response.context['search_results']]
+        self.assertEqual(len(links), 2)
+        self.assertEqual({self.client.get(link).context['selected_word']['morph_id'] for link in links},
+                         {'root-phon-telephone', 'root-tele-telephone'})

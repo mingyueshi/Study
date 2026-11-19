@@ -6,7 +6,7 @@
     <details{% if child.id in path_ids %} open data-path-open{% endif %}>
       <summary data-branch-id="{{ child.id }}" data-branch-zh="{{ child.zh|default:child.en }}"{% if child.ipa %} data-branch-ipa="{{ child.ipa }}"{% endif %}{% if child.meaning %} data-branch-meaning="{{ child.meaning }}"{% endif %}><span class="tree-branch-name">{% if child.ipa %}<span lang="en">{{ child.zh }}</span><i class="tree-family-sound">{{ child.ipa }}</i>{% else %}{{ child.zh|default:child.en }}{% if child.en and child.zh and child.en != child.zh %}<i class="tree-branch-en">{{ child.en }}</i>{% endif %}{% endif %}{% if child.meaning %}<span class="morph-branch-meaning">{{ child.meaning }}</span>{% endif %}<i class="muted">{{ child.total }} {% if is_morphology %}例词{% else %}词{% endif %}</i></span></summary>
       {% if child.hint %}<p class="morph-branch-hint">{% if child.origin %}<b>{{ child.origin }}</b> · {% endif %}{{ child.hint }}</p>{% endif %}
-      {% if child.words %}<div class="tree-node-words">{% for word in child.words %}{% include 'words/tree_word.html' %}{% endfor %}</div>{% endif %}
+      {% if child.words %}<div class="tree-node-words">{% for word in child.words %}{% include 'words/tree_word.html' with node_id=child.id %}{% endfor %}</div>{% endif %}
       {% if child.children %}{% include 'words/tree_nodes.html' with node=child path_ids=path_ids %}{% endif %}
     </details>
   </li>

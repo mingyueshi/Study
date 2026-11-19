@@ -94,6 +94,17 @@ class SpellingFamiliesTests(SimpleTestCase):
         self.assertContains(response, "?q=cat")
         self.assertNotContains(response, "去场景页学会它")
 
+    def test_search_accepts_chinese_and_respects_the_family_scope(self):
+        response = self.client.get('/words/tree/', {'root': 'spelling', 'q': '猫', 'within': 'spelling-at'})
+        self.assertEqual([row['en'] for row in response.context['search_results']], ['cat'])
+        link = response.context['search_results'][0]['url']
+        self.assertIn('within=spelling-at', link)
+        card = self.client.get(link)
+        self.assertEqual(card.context['selected_word']['en'], 'cat')
+        self.assertEqual(card.context['active_branch'], 'spelling-at')
+        empty = self.client.get('/words/tree/', {'root': 'spelling', 'q': 'CAT', 'within': 'spelling-ake'})
+        self.assertEqual(empty.context['match_count'], 0)
+
 
 class TreePageTests(TestCase):
     """页面：真实场景词库联动的深链与根切换。"""
@@ -116,6 +127,16 @@ class TreePageTests(TestCase):
         response = self.client.get("/words/tree/?root=vehicle")
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "交通工具")
+
+    def test_search_links_open_each_wordnet_occurrence_in_its_own_branch(self):
+        response = self.client.get('/words/tree/', {'q': 'APPLE'})
+        links = [row['url'] for row in response.context['search_results'] if row['en'] == 'apple']
+        self.assertGreaterEqual(len(links), 2)
+        for link in links:
+            with self.subTest(link=link):
+                result = self.client.get(link)
+                self.assertEqual(result.context['selected_word']['en'], 'apple')
+                self.assertEqual(result.context['path_ids'][-1], result.wsgi_request.GET['branch'])
 
     def test_deep_link_word_card_fully_populated(self):
         from words.services import state_payload
