@@ -23,6 +23,8 @@ window.GMWorldLab = (() => {
     repaint,
     prepare,
     ancientChanged,
+    changed,
+    replaceMapAddress,
     project,
     attachSky,
   }) {
@@ -144,6 +146,7 @@ window.GMWorldLab = (() => {
         prepare();
         focus(p.point, p.name);
         $("detail").textContent = p.note;
+        changed(mode, true);
       }
     });
     function cityInfo(city) {
@@ -151,6 +154,7 @@ window.GMWorldLab = (() => {
       focus(city.point, city.name);
       $("detail").textContent =
         `${city.name}：2025 年城区估计约 ${Math.round(city.people / 10000).toLocaleString("zh-CN")} 万人。`;
+      changed(mode, true);
     }
     function setMode(next, write = true, prep = true) {
       if (!modes.includes(next)) next = "none";
@@ -191,13 +195,12 @@ window.GMWorldLab = (() => {
       repaint();
       render();
       if (mode === "pangaea") focus([10, 5], "联合古陆粗略拼图");
+      changed(mode, prep);
       if (write) {
         const url = new URL(location.href);
         if (mode === "none") url.searchParams.delete("lab");
         else url.searchParams.set("lab", mode);
-        try {
-          history.replaceState(null, "", url);
-        } catch {}
+        replaceMapAddress(url);
       }
     }
     $("layer").addEventListener("change", () => setMode($("layer").value));
@@ -332,15 +335,8 @@ window.GMWorldLab = (() => {
       if (mode === "pangaea" && root.dataset.tool !== "browse")
         setMode("plates", true, false);
     });
-    const restore = () =>
-      setMode(
-        new URLSearchParams(location.search).get("lab") || "none",
-        false,
-        false,
-      );
-    window.addEventListener("popstate", restore);
-    restore();
     return {
+      restore: (params) => setMode(params.get("lab") || "none", false, false),
       paint,
       position,
       get mode() {

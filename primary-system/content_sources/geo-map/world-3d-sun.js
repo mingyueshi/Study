@@ -55,7 +55,8 @@ window.GMWorldSun = (() => {
     let active = false, inView = true, season = D.seasons[0], point = currentPoint().slice();
     const media = window.matchMedia('(prefers-reduced-motion: reduce)');
     const fullMotion = () => !media.matches && (!window.StudyEffects || window.StudyEffects.motion === 'full');
-    const available = () => active && inView && !document.hidden && fullMotion() && root.dataset.renderer === 'webgl';
+    const canPlay = () => active && !document.hidden && fullMotion() && root.dataset.renderer === 'webgl';
+    const available = () => inView && canPlay();
     const hoursText = hours => hours === null ? '太阳在地平线附近' : hours === 24 ? '约 24 小时 · 极昼' : hours === 0 ? '约 0 小时 · 极夜' : `约 ${hours.toFixed(1)} 小时`;
     const timeText = hour => { const minutes = Math.floor(wrapHour(hour) * 60 + 1e-7) % 1440; return `${String(Math.floor(minutes / 60)).padStart(2, '0')}：${String(minutes % 60).padStart(2, '0')}`; };
     function comparison() {
@@ -80,7 +81,7 @@ window.GMWorldSun = (() => {
       $('gw-tool-result').textContent = `观察点：${phase} · ${result.hours === null ? hoursText(null) : '白昼' + hoursText(result.hours)}`;
     }
     function changed(state) {
-      $('gw-sun-play').disabled = !available();
+      $('gw-sun-play').disabled = !canPlay();
       $('gw-sun-play').textContent = state.playing ? '暂停演示' : state.elapsed >= 24 ? '再看一天' : state.elapsed > 0 ? '继续演示' : '播放一天';
       $('gw-sun-play').setAttribute('aria-pressed', String(state.playing));
       $('gw-sun-play-status').textContent = !fullMotion() ? '已减少动态效果，可拖动时间或点「前进 3 小时」。' : root.dataset.renderer !== 'webgl' ? '当前无法显示 3D，仍可切换时节和时间读取结果。' : state.playing ? '一天压缩为约 24 秒，随时可以暂停。' : state.elapsed >= 24 ? '一天演示完成，停在起始时刻。' : '演示默认暂停；离开地球仪或切到后台会暂停。';
@@ -123,7 +124,15 @@ window.GMWorldSun = (() => {
       updateStudy(); updateSeason();
     });
     $('gw-sun-time').addEventListener('input', () => clock.setHour(Number($('gw-sun-time').value)));
-    $('gw-sun-play').addEventListener('click', () => { root.dispatchEvent(new CustomEvent('gm-world-sun-play')); clock.state().playing ? clock.pause() : clock.play(); });
+    $('gw-sun-play').addEventListener('click', () => {
+      root.dispatchEvent(new CustomEvent('gm-world-sun-play'));
+      if (clock.state().playing) { clock.pause(); return; }
+      const viewport = $('gw-viewport');
+      viewport.scrollIntoView({block:'center', behavior:'instant'});
+      const bounds = viewport.getBoundingClientRect();
+      inView = bounds.bottom > 0 && bounds.top < innerHeight;
+      clock.play();
+    });
     $('gw-sun-step').addEventListener('click', () => clock.setHour(clock.state().hour + 3));
     $('gw-sun-studies').addEventListener('click', event => {
       const button = event.target.closest('button');

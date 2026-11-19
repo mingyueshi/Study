@@ -28,6 +28,36 @@
   const surface = (point, clearance = 0) => visuals ? visuals.radius(point, clearance) : 1 + clearance;
   let detectiveCountry = '';
   const canvas = $('gw-canvas'), viewport = $('gw-viewport'), profile = $('gw-profile'), picker = $('gw-place');
+  const workspace = root.querySelector('.gw-workspace'), content = $('gw-content-panels');
+  const panels = [...content.querySelectorAll('[data-gw-panel]')];
+  const contentLink = $('gw-profile-link'), toolsLink = $('gw-map-tools-link');
+  const flatLink = $('gw-flat-link'), flatMapStart = flatLink.getAttribute('href');
+  let activePanel = '';
+  let addressSearch, restoringAddress = false;
+  function replaceMapAddress(url) {
+    if (restoringAddress || url.href === location.href) return;
+    try {
+      history.replaceState(null, '', url);
+      addressSearch = location.search;
+    } catch { /* file:// 下仍可在本页操作。 */ }
+  }
+  function showContent(id = '') {
+    activePanel = id;
+    for (const panel of panels) panel.hidden = panel.id !== id;
+    content.hidden = !id;
+    contentLink.hidden = !id;
+    if (id) contentLink.textContent = `查看${$(id).dataset.gwPanel} ↓`;
+    const [target, title] = {
+      'gw-tools': ['gw-activity-tools', '探索控制'],
+      'gw-tour-panel': ['gw-tour-tools', '导览控制'],
+      'gw-lab': ['gw-layer-tools', '图层控制'],
+    }[id] || ['gw-view-tools', '地球仪工具'];
+    toolsLink.href = '#' + target;
+    toolsLink.textContent = title;
+  }
+  function closeContent(id) {
+    if (activePanel === id) showContent();
+  }
   const paths = new Map(), tex = document.createElement('canvas');
   tex.width = 3072; tex.height = 1536;
   const ctx = tex.getContext('2d');
@@ -132,16 +162,31 @@
       html = `<p class="gw-eyebrow">${ocean ? '四大洋' : '世界地标'}</p><h2>${esc(place.name)}</h2><p><b>在哪里：</b>${esc(place.where)}</p><p>${esc(place.note)}</p><a href="${worldMapUrl}?place=${encodeURIComponent(id)}#map">在平面地图上查看${esc(place.name)} →</a>`;
     }
     profile.innerHTML = html;
-    $('gw-profile-link').hidden = !html;
+    flatLink.href = `${worldMapUrl}?${new URLSearchParams({[continent ? 'continent' : 'place']: id})}#map`;
     picker.value = id;
   }
+  function revealSidebar(target) {
+    const side = target.closest('.gm-sidebar');
+    if (!side) return;
+    for (let group = target.closest('details'); group && side.contains(group); group = group.parentElement.closest('details')) group.open = true;
+    if (workspace.dataset.slMode === 'compact' && workspace.dataset.slOpen !== 'true') workspace.querySelector('.sl-toggle:not(.sl-collapse)')?.click();
+    if (workspace.dataset.slMode === 'wide' && workspace.dataset.slCollapsed === 'true') workspace.querySelector('.sl-collapse')?.click();
+  }
+  const toolEntries = {'gw-tools':'gw-activity-tools', 'gw-tour-panel':'gw-tour-tools', 'gw-lab':'gw-layer-tools', 'gw-tool-panel':'gw-activity-tools'};
   function jumpTo(target) {
-    if (target === profile) {
-      if (root.dataset.slMode === 'compact' && root.dataset.slOpen !== 'true') root.querySelector('.sl-toggle:not(.sl-collapse)')?.click();
-      if (root.dataset.slMode === 'wide' && root.dataset.slCollapsed === 'true') root.querySelector('.sl-collapse')?.click();
+    if (!target) return;
+    const panel = target.closest('[data-gw-panel]');
+    if (panel?.hidden) {
+      if (toolEntries[panel.id]) target = $(toolEntries[panel.id]);
+      else if (['gw-quiz', 'gw-records', 'gw-observe', 'gw-map-sources', 'gw-tour-directory'].includes(panel.id)) {
+        root.dispatchEvent(new CustomEvent('gm-world-free-view'));
+        showContent(panel.id);
+        target = content;
+      } else return;
     }
+    revealSidebar(target);
     target.scrollIntoView({block: target === viewport ? 'center' : 'start', behavior: 'instant'});
-    target.focus({preventScroll: true});
+    (target.matches('details') ? target.querySelector('summary') : target).focus({preventScroll: true});
   }
   function address() {
     const url = new URL(location.href);
@@ -149,7 +194,7 @@
     url.searchParams.delete('tour'); url.searchParams.delete('stop');
     if (selectedContinent) url.searchParams.set('continent', selectedContinent);
     else if (selected) url.searchParams.set('place', selected);
-    history.replaceState(null, '', url);
+    replaceMapAddress(url);
   }
   function syncContinents() {
     $('gw-continents').querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.continent === selectedContinent)));
@@ -165,7 +210,7 @@
   function choose(id, writeURL = true, origin = '') {
     const country = countryMap.get(id), continent = continentMap.get(id), ocean = oceans.find(o => o.id === id), feature = features.find(f => f.id === id);
     if (!country && !continent && !ocean && !feature) return false;
-    lab?.modern();
+    if (origin !== 'address') lab?.modern();
     selected = continent ? '' : id; selectedContinent = continent ? id : '';
     const point = continent ? D.continentViews[id] : country ? G.center(country) : ocean ? ocean.point : featurePoint(feature);
     referencePoint = point;
@@ -177,6 +222,7 @@
     readCoordinates(point, '定位参考点');
     if (writeURL) address();
     root.dispatchEvent(new CustomEvent('gm-world-selection', {detail: {id, origin}}));
+    if (origin !== 'tour') showContent('gw-profile');
     return true;
   }
 
@@ -188,36 +234,39 @@
     const url = new URL(location.href);
     if (layer === 'zones') url.searchParams.set('layer', layer); else url.searchParams.delete('layer');
     if (activeLine) url.searchParams.set('line', activeLine); else url.searchParams.delete('line');
-    history.replaceState(null, '', url);
+    replaceMapAddress(url);
   }
-  function setLayer(value, writeURL = true) {
+  function setLayer(value, writeURL = true, reveal = true) {
     layer = value === 'zones' ? 'zones' : 'continent';
     for (const button of $('gw-layer').children) button.setAttribute('aria-pressed', String(button.value === layer));
-    $('gw-zone-legend').hidden = layer !== 'zones';
+    if (reveal && layer === 'zones') showContent('gw-zone-legend');
+    else if (layer !== 'zones') closeContent('gw-zone-legend');
     paint(); if (writeURL) studyAddress();
   }
-  function setLine(id, turn = true, writeURL = true) {
+  function setLine(id, turn = true, writeURL = true, reveal = true) {
     const line = L.lines.find(l => l.id === id); activeLine = line?.id || '';
     for (const button of $('gw-line').children) button.setAttribute('aria-pressed', String(button.value === activeLine));
-    $('gw-line-note').hidden = !line;
     if (line) {
       $('gw-line-note').innerHTML = `<b>${esc(line.name)} · ${line.axis === 'latitude' ? G.coordinates([0, line.value]).split('，')[0] : '经度 0°'}</b><p>${esc(line.text)}</p><p>看图想一想：${esc(line.observe)}</p>`;
       if (turn) { focus(line.point, line.name); if (marker) marker.visible = false; }
-    }
+      if (reveal) showContent('gw-line-note');
+    } else closeContent('gw-line-note');
     paint(); if (writeURL) studyAddress();
   }
   $('gw-line').insertAdjacentHTML('beforeend', L.lines.map(l =>
     `<button type="button" value="${l.id}" aria-pressed="false">${esc(l.name)}</button>`).join(''));
   $('gw-zone-legend').innerHTML = `<div>${[...L.zones].reverse().map(z => `<p style="--zone-color:${z.color}"><b>${esc(z.name)}</b><span>${esc(z.text)}</span></p>`).join('')}</div><p>${esc(L.zoneNote)}</p>`;
   $('gw-layer').addEventListener('click', event => {
-    const button = event.target.closest('button[aria-pressed="false"]');
+    const button = event.target.closest('button');
     if (!button) return;
+    if (button.getAttribute('aria-pressed') === 'true' && button.value !== 'zones') return;
     root.dispatchEvent(new CustomEvent('gm-world-free-view'));
     setLayer(button.value);
   });
   $('gw-line').addEventListener('click', event => {
-    const button = event.target.closest('button[aria-pressed="false"]');
+    const button = event.target.closest('button');
     if (!button) return;
+    if (button.getAttribute('aria-pressed') === 'true' && !button.value) return;
     root.dispatchEvent(new CustomEvent('gm-world-free-view'));
     setLine(button.value);
   });
@@ -242,9 +291,33 @@
   $('gw-views').innerHTML = D.views.map(v => `<button type="button" data-view="${v.id}" aria-pressed="false">${esc(v.name)}</button>`).join('');
   $('gw-observations').innerHTML = D.observations.map((o, i) => `<article><h3>${esc(o.title)}</h3><p>${esc(o.text)}</p><button type="button" data-observe="${i}">转过去看看 →</button></article>`).join('');
   $('gw-note').textContent = D.note;
+  function hashTarget(hash) {
+    try {
+      const id = decodeURIComponent(hash.slice(1));
+      const target = document.getElementById(['gw-voyage-inline', 'gw-voyage-toggle', 'gw-voyage-forward'].includes(id) ? 'gw-activity-tools' : id);
+      return root.contains(target) ? target : null;
+    } catch { return null; }
+  }
+  $('gw-content-close').addEventListener('click', () => {
+    root.dispatchEvent(new CustomEvent('gm-world-free-view'));
+    showContent();
+    jumpTo(viewport);
+  });
   root.addEventListener('click', event => {
     const jump = event.target.closest('[data-globe-jump]');
-    if (jump) jumpTo($(jump.dataset.globeJump));
+    if (jump) {
+      const target = $(jump.dataset.globeJump);
+      if (target?.id === 'gw-lab' && root.dataset.lab !== 'none') {
+        root.dispatchEvent(new CustomEvent('gm-world-free-view'));
+        showContent('gw-lab');
+      }
+      jumpTo(target);
+    }
+    const link = event.target.closest('a[href^="#"]');
+    if (link && !event.ctrlKey && !event.metaKey && !event.shiftKey && !event.altKey) {
+      const target = hashTarget(link.hash);
+      if (target) { event.preventDefault(); jumpTo(target); }
+    }
     const continent = event.target.closest('button[data-continent]');
     if (continent) choose(continent.dataset.continent);
     const view = event.target.closest('button[data-view]');
@@ -455,28 +528,40 @@
   } catch (error) {
     fallback('当前浏览器无法显示 3D 地球仪。');
   }
-  function fromAddress() {
-    const params = new URLSearchParams(location.search), id = params.get('place') || params.get('continent');
+  function restoreLocation(params) {
+    const id = params.get('place') || params.get('continent');
     if (!choose(id || 'China', false, 'address')) { choose('China', false, 'address'); $('gw-status').textContent = '没有找到链接里的地点，已回到中国。请从列表重新选择。'; }
-    if (!id) focus(D.home, '从中国出发');
-    setLayer(params.get('layer'), false); setLine(params.get('line'), false, false);
+    if (!id) {
+      focus(D.home, '从中国出发');
+      picker.value = '';
+      flatLink.setAttribute('href', flatMapStart);
+      showContent();
+    }
+    setLayer(params.get('layer'), false, !id);
+    setLine(params.get('line'), false, false, !id);
   }
-  fromAddress(); window.addEventListener('popstate', fromAddress);
   sunLab = window.GMWorldSun.mount({root, focus, overlay, illuminate, currentPoint: () => referencePoint, readCoordinates});
   const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const canRotate = () => !disposed && !lost && visible && !document.hidden && !motion.matches && (!window.StudyEffects || window.StudyEffects.motion === 'full') && root.dataset.renderer === 'webgl';
+  const rotationAllowed = () => !disposed && !lost && !document.hidden && !motion.matches && (!window.StudyEffects || window.StudyEffects.motion === 'full') && root.dataset.renderer === 'webgl';
+  const canRotate = () => visible && rotationAllowed();
   function rotationStatus(running) {
     if (controls) controls.autoRotate = running;
     $('gw-rotate').setAttribute('aria-pressed', String(running)); $('gw-rotate').textContent = running ? '⏸ 暂停自转' : '🌍 让地球自己转';
-    $('gw-rotate').disabled = !canRotate();
-    $('gw-rotate-status').textContent = !canRotate() ? '当前已暂停动态效果，可拖动或单步观察。' : running ? '正在慢慢转动' : '已暂停，可随时开始';
+    $('gw-rotate').disabled = !rotationAllowed();
+    $('gw-rotate-status').textContent = !rotationAllowed() ? '当前已暂停动态效果，可拖动或单步观察。' : running ? '正在慢慢转动' : '已暂停，可随时开始';
   }
   rotation = window.GMWorldVisual.createRotation({request: requestAnimationFrame, cancel: cancelAnimationFrame, available: canRotate,
     advance: seconds => { controls.update(seconds); sunLab.advance(seconds / 5); requestRender(); }, changed: rotationStatus});
   if (controls) controls.autoRotateSpeed = .5;
   $('gw-rotate').addEventListener('click', () => {
     if (rotation.running()) rotation.pause();
-    else { root.dispatchEvent(new CustomEvent('gm-world-free-view', {detail: {origin: 'camera'}})); sunLab.pause(); rotation.play(); }
+    else {
+      root.dispatchEvent(new CustomEvent('gm-world-free-view', {detail: {origin: 'camera'}})); sunLab.pause();
+      viewport.scrollIntoView({block:'center', behavior:'instant'});
+      const bounds = viewport.getBoundingClientRect();
+      visible = bounds.bottom > 0 && bounds.top < innerHeight;
+      rotation.play();
+    }
   });
   const refreshRotation = () => { rotation.refresh(); rotationStatus(rotation.running()); };
   for (const event of ['gm-world-free-view', 'gm-world-manual-camera', 'gm-world-sun-play', 'gm-world-selection']) root.addEventListener(event, rotation.pause);
@@ -491,7 +576,7 @@
     locate: id => { const country = countryMap.get(id); if (country) focus(G.center(country), zh(id)); }
   });
   const activate = mode => toolbox?.activate(mode);
-  const voyages = window.GMWorldVoyages.mount({root, focus, overlay, activate,
+  const voyages = window.GMWorldVoyages.mount({root, focus, overlay, activate, replaceMapAddress,
     follow: (point,title)=>{if(!camera||lost)return;camera.position.set(...G.xyz(point,5));camera.up.set(0,1,0);camera.lookAt(0,0,0);controls.update();if($('gw-view-label').textContent!==title)$('gw-view-label').textContent=title;requestRender();},
     ship: point => {shipPoint=point; if (marker) { markerPoint = point; marker.visible = Boolean(point); if (point) marker.position.set(...G.xyz(point,surface(point,.018))); requestRender(); } }
   });
@@ -508,24 +593,59 @@
   addons = {life, setActive: mode => {
     if (['voyage','life','outline'].includes(mode)) { selectedContinent=''; selected=''; paint(); }
     voyages.setActive(mode==='voyage'); life.setActive(mode==='life'); outlines.setActive(mode==='outline');
-    $('gw-voyage-inline').hidden = mode!=='voyage';
   }, handlePoint: (mode,point) => mode==='life' ? life.pick(point) : mode==='outline'};
   window.GMWorldExplorers.mountTime({root,setUTC:sunLab.setUTC});
+  root.addEventListener('gm-world-tool-change', ({detail: {mode}}) => {
+    for (const group of workspace.querySelectorAll('[data-gw-mode]')) group.hidden = group.dataset.gwMode !== mode;
+    if (mode === 'browse') closeContent('gw-tools');
+    else showContent('gw-tools');
+  });
   toolbox = window.GMWorldTools.mount({root, focus, overlay, currentPoint: () => referencePoint, repaint: paint, readCoordinates, sun: sunLab, detective,
     extras:addons, replayTrip:trip=>voyages.custom(trip), prepareDetective: () => { setLayer('continent'); setLine('', false); $('gw-view-label').textContent = '转动地球，寻找线索'; }
   });
-  lab=window.GMWorldLab.mount({root,focus,render:requestRender,repaint:paint,project:projectPoint,attachSky,
-    prepare:()=>{rotation.pause();toolbox.activate('browse');},ancientChanged:on=>{profile.hidden=on;$('gw-profile-link').hidden=on;visuals?.setAncient(on);if(on){overlay([]);shipPoint=null;if(marker)marker.visible=false;}}
+  $('gw-tool-modes').addEventListener('click', event => {
+    if (event.target.closest('button[data-tool]') && activePanel === 'gw-tools') jumpTo(content);
+  });
+  lab=window.GMWorldLab.mount({root,focus,render:requestRender,repaint:paint,project:projectPoint,attachSky,replaceMapAddress,
+    prepare:()=>{rotation.pause();toolbox.activate('browse');},
+    ancientChanged:on=>{visuals?.setAncient(on);if(on){overlay([]);shipPoint=null;if(marker)marker.visible=false;}},
+    changed: (mode, interactive) => {
+      $('gw-lab-info').hidden = mode === 'none';
+      if (mode === 'none') closeContent('gw-lab');
+      else if (interactive || !activePanel || mode === 'pangaea') showContent('gw-lab');
+    }
   });paint();
   window.GMWorldPlay.mountTimer({root,start:kind=>toolbox.startTimed(kind)});
   gyro=window.GMWorldPlay.mountGyro({root,prepare:()=>{rotation.pause();toolbox.activate('browse');root.dispatchEvent(new CustomEvent('gm-world-manual-camera'));$('gw-view-label').textContent='轻轻倾斜手机转地球';return camera?G.lonLat(camera.position):[0,0];},move:(delta,origin)=>{if(!camera||lost)return;const p=[G.wrap(origin[0]-delta[0]*1.5),Math.max(-85,Math.min(85,origin[1]+delta[1]*1.1))];camera.position.set(...G.xyz(p,5));camera.up.set(0,1,0);camera.lookAt(0,0,0);controls.update();requestRender();}});
-  const learning = window.GMWorldLearning.mount({root, choose, setLine, setLayer, startSun: toolbox.startSun});
+  const learning = window.GMWorldLearning.mount({root, choose, setLine, setLayer, startSun: toolbox.startSun, showContent, closeContent, replaceMapAddress});
   window.GMWorldDetective.mountProgress({root, open: kind => {
     toolbox.resume(kind);
     if (kind === 'quiz') learning.resumeQuiz();
-    else { $('gw-tool-modes').scrollIntoView({block: 'start'}); root.querySelector(`[data-tool="${kind}"]`).focus({preventScroll: true}); }
+    else jumpTo(content);
   }});
-  voyages.restore(); window.addEventListener('popstate',()=>voyages.restore());
+  function restoreAddress() {
+    if (location.search === addressSearch) return;
+    addressSearch = location.search;
+    const params = new URLSearchParams(addressSearch);
+    restoringAddress = true;
+    try {
+      if (root.dataset.tool !== 'browse') toolbox.activate('browse');
+      restoreLocation(params);
+      lab.restore(params);
+      learning.restore(params);
+      voyages.restore(params);
+    } finally { restoringAddress = false; }
+  }
+  restoreAddress();
+  window.addEventListener('popstate', restoreAddress);
+  document.addEventListener('DOMContentLoaded', () => {
+    const target = hashTarget(location.hash);
+    if (target) jumpTo(target);
+  }, {once: true});
+  window.addEventListener('hashchange', () => {
+    const target = hashTarget(location.hash);
+    if (target) jumpTo(target);
+  });
   document.addEventListener('visibilitychange', requestRender);
   window.addEventListener('pagehide', event => {
     rotation.pause();

@@ -15,46 +15,53 @@ window.GMWorldLearning = (() => {
     const index = tour.stops.findIndex(s => s.id === params.get('stop'));
     return {tour, index: index < 0 ? 0 : index};
   }
-  function mount({root, choose, setLine, setLayer, startSun}) {
+  function mount({root, choose, setLine, setLayer, startSun, showContent, closeContent, replaceMapAddress}) {
     const D = window.GM_WORLD_LEARNING, esc = window.GMShared.esc, $ = id => root.querySelector(`#${id}`);
     let tour = null, step = 0, question = 0, mastered = new Set(), mistakes = new Set(), queue = D.questions, practice = false;
     try { mastered = readProgress(localStorage.getItem(KEY), D.questions); mistakes = readProgress(localStorage.getItem(MISTAKES_KEY), D.questions); }
     catch { $('gw-quiz-storage').textContent = '当前浏览器无法保存记录，本次仍可完成挑战。'; }
     let roundSolved = new Set(mastered);
     $('gw-tour-cards').innerHTML = D.tours.map((t, i) => `<article><p class="gw-eyebrow">路线 ${i + 1} · ${t.stops.length} 站</p><h3>${esc(t.name)}</h3><p>${esc(t.intro)}</p><button type="button" data-tour="${esc(t.id)}">出发探索 →</button></article>`).join('');
+    $('gw-tour-picks').innerHTML = D.tours.map(t => `<button type="button" data-tour="${esc(t.id)}" aria-pressed="false">${esc(t.name)}</button>`).join('');
     $('gw-sources').innerHTML = D.sources.map(s => `<p><a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">${esc(s.name)}（需联网）↗</a></p>`).join('') + '<p>大洲、国家、大洋与地标正文沿用平面世界地图的同一份资料。</p>';
     function stopTour(clearURL = true) {
-      tour = null; $('gw-tour-panel').hidden = true;
+      tour = null; $('gw-tour-controls').hidden = true;
+      for (const button of $('gw-tour-picks').children) button.setAttribute('aria-pressed', 'false');
+      closeContent('gw-tour-panel');
       if (clearURL) {
-        const url = new URL(location.href); url.searchParams.delete('tour'); url.searchParams.delete('stop'); history.replaceState(null, '', url);
+        const url = new URL(location.href); url.searchParams.delete('tour'); url.searchParams.delete('stop'); replaceMapAddress(url);
       }
     }
-    function showStop(moveFocus = false) {
+    function showStop() {
       const stop = tour.stops[step];
       choose(stop.place, true, 'tour');
-      setLayer(tour.id === 'latitude-trip' ? 'zones' : 'continent');
-      setLine(stop.line || '', false);
-      $('gw-tour-panel').hidden = false;
+      setLayer(tour.id === 'latitude-trip' ? 'zones' : 'continent', true, false);
+      setLine(stop.line || '', false, true, false);
+      $('gw-tour-controls').hidden = false;
+      for (const button of $('gw-tour-picks').children) button.setAttribute('aria-pressed', String(button.dataset.tour === tour.id));
       $('gw-tour-count').textContent = `${tour.name} · 第 ${step + 1} / ${tour.stops.length} 站`;
       $('gw-tour-title').textContent = stop.title;
       $('gw-tour-text').textContent = stop.text;
       $('gw-tour-observe').textContent = '看图想一想：' + stop.observe;
       $('gw-tour-prev').disabled = step === 0; $('gw-tour-next').disabled = step === tour.stops.length - 1;
       $('gw-tour-next').textContent = step === tour.stops.length - 1 ? '已到最后一站' : '下一站';
-      const url = new URL(location.href); url.searchParams.set('tour', tour.id); url.searchParams.set('stop', stop.id); history.replaceState(null, '', url);
-      if (moveFocus) {
-        $('gw-viewport').scrollIntoView({block: 'start', behavior: 'instant'});
-        $('gw-tour-title').focus({preventScroll: true});
-      }
+      const url = new URL(location.href); url.searchParams.set('tour', tour.id); url.searchParams.set('stop', stop.id); replaceMapAddress(url);
+      showContent('gw-tour-panel');
     }
-    $('gw-tour-cards').addEventListener('click', event => {
+    function startTour(event) {
       const button = event.target.closest('[data-tour]'); if (!button) return;
-      tour = D.tours.find(t => t.id === button.dataset.tour); step = 0; showStop(true);
-    });
-    $('gw-tour-prev').addEventListener('click', () => { if (tour && step > 0) { step--; showStop(true); } });
-    $('gw-tour-next').addEventListener('click', () => { if (tour && step < tour.stops.length - 1) { step++; showStop(true); } });
+      tour = D.tours.find(t => t.id === button.dataset.tour); step = 0; showStop();
+      $('gw-viewport').scrollIntoView({block: 'start', behavior: 'instant'});
+    }
+    $('gw-tour-cards').addEventListener('click', startTour);
+    $('gw-tour-picks').addEventListener('click', startTour);
+    $('gw-tour-prev').addEventListener('click', () => { if (tour && step > 0) { step--; showStop(); } });
+    $('gw-tour-next').addEventListener('click', () => { if (tour && step < tour.stops.length - 1) { step++; showStop(); } });
     $('gw-tour-locate').addEventListener('click', () => { if (tour) showStop(); });
-    $('gw-tour-close').addEventListener('click', () => { stopTour(); $('gw-tour-heading').scrollIntoView({block: 'center'}); });
+    $('gw-tour-close').addEventListener('click', () => {
+      stopTour();
+      $('gw-tour-tools').querySelector('summary').focus({preventScroll: true});
+    });
     root.addEventListener('gm-world-selection', event => { if (event.detail.origin !== 'tour') stopTour(false); });
     root.addEventListener('gm-world-free-view', () => stopTour());
     function renderQuiz(moveFocus = false) {
@@ -104,22 +111,24 @@ window.GMWorldLearning = (() => {
     $('gw-quiz-mistakes').addEventListener('click', () => review(true));
     $('gw-quiz-look').addEventListener('click', () => {
       const q = queue[question]; if (!q) return; choose(q.place, true, 'quiz');
-      setLayer(q.id === 'tropics' || q.id === 'latitude-weather' ? 'zones' : 'continent'); setLine(q.line || '', false);
+      setLayer(q.id === 'tropics' || q.id === 'latitude-weather' ? 'zones' : 'continent', true, false);
+      setLine(q.line || '', false, true, false);
+      showContent('gw-quiz');
       if (q.sunStudy) startSun(q.sunStudy);
       $('map').scrollIntoView({block: 'start'});
     });
-    function restore() {
-      const state = resolveTour(new URLSearchParams(location.search), D.tours);
+    function restore(params) {
+      const state = resolveTour(params, D.tours);
       if (state) { tour = state.tour; step = state.index; showStop(); }
       else stopTour();
     }
-    renderQuiz(); restore(); window.addEventListener('popstate', restore);
-    return {stopTour, resumeQuiz: () => {
+    renderQuiz();
+    return {restore, resumeQuiz: () => {
       queue = D.questions; question = queue.findIndex(q => !mastered.has(q.id));
       practice = question < 0;
       if (practice) question = 0;
       roundSolved = practice ? new Set() : new Set(mastered);
-      renderQuiz(true); $('gw-quiz').scrollIntoView({block: 'start'});
+      showContent('gw-quiz'); renderQuiz(true); $('gw-quiz').scrollIntoView({block: 'start'});
     }};
   }
   return {readProgress, resolveTour, mount};

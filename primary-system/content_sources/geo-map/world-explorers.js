@@ -76,7 +76,7 @@ window.GMWorldExplorers = (() => {
     $('kind').addEventListener('click',e=>{const b=e.target.closest('[data-life-kind]');if(b){kind=b.dataset.lifeKind;selected=null;habitat='';update();}});
     $('habitats').addEventListener('click',e=>{const b=e.target.closest('[data-habitat]');if(b){habitat=b.dataset.habitat;update();}});
     $('list').addEventListener('click',e=>{const b=e.target.closest('[data-life-id]');if(b)select(kind,b.dataset.lifeId);});
-    root.querySelectorAll('[data-life-open]').forEach(b=>b.addEventListener('click',()=>{activate('life');kind=b.dataset.lifeOpen;selected=null;habitat='';update();root.querySelector('#gw-tool-modes').scrollIntoView({block:'start'});}));
+    root.querySelectorAll('[data-life-open]').forEach(b=>b.addEventListener('click',()=>{activate('life');kind=b.dataset.lifeOpen;selected=null;habitat='';update();$('panel').scrollIntoView({block:'start'});}));
     function reload(){Object.values(stores).forEach(s=>s.reload());update();}
     window.addEventListener('storage',reload);window.addEventListener('pageshow',reload);window.addEventListener('focus',reload);
     $('note').textContent=window.GM_WORLD_EXPEDITIONS.lifeNote;update();
