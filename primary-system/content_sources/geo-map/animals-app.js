@@ -25,8 +25,12 @@
   const picker = root.querySelector('#gm-animal-picker');
   const card = root.querySelector('#gm-animal-card');
   const count = root.querySelector('#gm-animal-count');
-  const params = new URL(location.href);
-  let selected = animalById.get(params.searchParams.get(queryKey)) || animals[0];
+  const workspace = root.querySelector('.gm-wildlife-workspace');
+  const hasToolSidebar = workspace.matches('[data-sidebar-layout]');
+  const quizPanel = root.querySelector('#gm-animal-quiz');
+  const linkedId = () => new URLSearchParams(location.search).get(queryKey);
+  let requestedId = linkedId();
+  let selected = animalById.get(requestedId) || (!hasToolSidebar || location.hash === '#gm-animal-card' ? animals[0] : null);
   let visible = animals;
   let activeHabitat = '';
   let learning;
@@ -110,6 +114,7 @@
       ? `<a class="gm-animal-station" href="${atlasBase}world.html?place=${encodeURIComponent(animal.mapPlace)}#map">在世界地图上看 →</a>`
       : `<a class="gm-animal-station" href="${atlasBase}province.html?adcode=${province.adcode}">看${esc(S.displayName(province.name))}省域站 →</a>`;
     for (const target of targets) target.setAttribute('aria-pressed', String(target.dataset.animal === animal.id));
+    if (hasToolSidebar) card.hidden = !quizPanel.hidden;
     card.style.setProperty('--animal-color', habitat.color);
     card.innerHTML = `
       <img class="gm-animal-photo" src="${esc(new URL(animal.id + '.jpg', assets).href)}" alt="${esc(animal.name)}">
@@ -134,8 +139,10 @@
 
   function rememberSelection() {
     if (!selected || location.protocol === 'file:') return;
-    params.searchParams.set(queryKey, selected.id);
-    history.replaceState(null, '', params);
+    const url = new URL(location.href);
+    requestedId = selected.id;
+    url.searchParams.set(queryKey, selected.id);
+    history.replaceState(history.state, '', url);
   }
 
   function filter(habitat = activeHabitat) {
@@ -148,26 +155,51 @@
     }
     for (const target of targets) target.toggleAttribute('hidden', !visibleIds.has(target.dataset.animal));
     count.textContent = `地图上有 ${visible.length} 种${noun}。`;
-    if (visible.length) select(visibleIds.has(selected?.id) ? selected : visible[0]);
+    if (visibleIds.has(selected?.id)) select(selected);
+    else if (!hasToolSidebar && visible.length) select(visible[0]);
     else {
       selected = null;
       for (const target of targets) target.setAttribute('aria-pressed', 'false');
-      card.innerHTML = `<div class="gm-animal-info"><h2 id="gm-animal-name">换个条件找找吧</h2><p>没有符合条件的${noun}，可以换个词，或查看全部${noun}。</p><button type="button" data-animal-reset>查看全部${noun}</button></div>`;
+      if (hasToolSidebar) {
+        card.hidden = true;
+        card.replaceChildren();
+      } else {
+        card.innerHTML = `<div class="gm-animal-info"><h2 id="gm-animal-name">换个条件找找吧</h2><p>没有符合条件的${noun}，可以换个词，或查看全部${noun}。</p><button type="button" data-animal-reset>查看全部${noun}</button></div>`;
+      }
     }
     learning?.refresh(visible.length);
   }
 
   function showAnimal(animal) {
+    if (hasToolSidebar) closeQuizPanel();
     select(animal);
     rememberSelection();
+    if (hasToolSidebar) {
+      card.scrollIntoView({ block: 'nearest', behavior: 'instant' });
+      card.focus({preventScroll: true});
+      return;
+    }
     // 选择后展开档案，避免窄屏或收起侧栏时看不到更新。
-    const workspace = root.querySelector('.gm-wildlife-workspace');
     if (workspace.dataset.slMode === 'compact' && workspace.dataset.slOpen !== 'true') {
       workspace.querySelector('.sl-toggle:not(.sl-collapse)')?.click();
     } else if (workspace.dataset.slMode === 'wide' && workspace.dataset.slCollapsed === 'true') {
       workspace.querySelector('.sl-collapse')?.click();
     }
     if (workspace.dataset.slMode === 'compact') card.scrollIntoView({ block: 'start', behavior: 'instant' });
+  }
+
+  function showQuizPanel() {
+    card.hidden = true;
+    quizPanel.hidden = false;
+  }
+
+  function closeQuizPanel() {
+    quizPanel.hidden = true;
+    card.hidden = !selected;
+    if (location.hash !== '#gm-animal-quiz' || location.protocol === 'file:') return;
+    const url = new URL(location.href);
+    url.hash = '#gm-animal-map';
+    history.replaceState(history.state, '', url);
   }
 
   function chooseAnimal(event) {
@@ -179,7 +211,7 @@
     const button = event.target.closest('[data-habitat]');
     if (!button) return;
     filter(button.dataset.habitat);
-    rememberSelection();
+    if (!hasToolSidebar) rememberSelection();
   });
   picker.addEventListener('click', chooseAnimal);
   map.addEventListener('click', chooseAnimal);
@@ -193,13 +225,53 @@
     learning = window.GMAnimalLearning.mount({ root, animals, habitats, assets, esc,
       getVisible: () => visible,
       getSelected: () => selected,
-      onFilter: () => { filter(); rememberSelection(); },
-      onReset: () => { filter(''); rememberSelection(); },
+      onFilter: () => { filter(); if (!hasToolSidebar) rememberSelection(); },
+      onReset: () => { filter(''); if (!hasToolSidebar) rememberSelection(); },
       onChoose: showAnimal,
+      onShowQuiz: hasToolSidebar ? showQuizPanel : null,
+      onHideQuiz: hasToolSidebar ? closeQuizPanel : null,
     });
   }
   filter('');
   root.querySelector('.gm-wildlife-tools').hidden = false;
   if (learning) root.querySelector('.gm-animal-progress-row').hidden = false;
-  root.querySelector('.gm-wildlife-workspace').hidden = false;
+  workspace.hidden = false;
+
+  if (hasToolSidebar) {
+    function anchorTarget(hash) {
+      const target = document.getElementById(hash.slice(1));
+      if (target === quizPanel) showQuizPanel();
+      if (target === card && selected) { quizPanel.hidden = true; card.hidden = false; }
+      if (target?.matches('.gm-flat-tools')) {
+        target.open = true;
+        if (workspace.dataset.slMode === 'compact' && workspace.dataset.slOpen === 'false') {
+          workspace.querySelector('.sl-toggle:not(.sl-collapse)').click();
+        } else if (workspace.dataset.slMode === 'wide' && workspace.dataset.slCollapsed === 'true') {
+          workspace.querySelector('.sl-collapse').click();
+        }
+        return target.querySelector('summary');
+      }
+      return target === quizPanel || target === card ? target : null;
+    }
+    root.addEventListener('click', event => {
+      const link = event.target.closest('a[href^="#"]');
+      if (!link || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+      const target = anchorTarget(link.hash);
+      if (target) requestAnimationFrame(() => target.focus());
+    });
+    function restoreAnchor() {
+      const id = linkedId();
+      if (id !== requestedId) {
+        requestedId = id;
+        selected = animalById.get(id) || null;
+        if (selected && !visible.includes(selected) && learning) learning.reset();
+        else filter();
+      }
+      const target = anchorTarget(location.hash);
+      if (target) requestAnimationFrame(() => target.scrollIntoView({block: 'nearest'}));
+    }
+    window.addEventListener('hashchange', restoreAnchor);
+    window.addEventListener('popstate', restoreAnchor);
+    restoreAnchor();
+  }
 })();

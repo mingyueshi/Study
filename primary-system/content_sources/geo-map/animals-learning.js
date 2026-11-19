@@ -66,7 +66,7 @@
     };
   }
 
-  function mount({root, animals, habitats, assets, esc, getVisible, getSelected, onFilter, onReset, onChoose}) {
+  function mount({root, animals, habitats, assets, esc, getVisible, getSelected, onFilter, onReset, onChoose, onShowQuiz, onHideQuiz}) {
     const flora = root.dataset.life === 'plant';
     const noun = flora ? '植物' : '动物';
     const find = selector => root.querySelector(selector);
@@ -90,6 +90,10 @@
     const habitatNames = new Map(habitats.map(habitat => [habitat.id, habitat.name]));
     let round = null;
     let roundMode = 'photo';
+
+    function focusControl(control) {
+      (control?.getClientRects().length ? control : find('.gm-tools-jump'))?.focus({preventScroll: true});
+    }
 
     function reset() {
       search.value = '';
@@ -162,20 +166,21 @@
       roundMode = mode.value;
       mode.disabled = true;
       start.disabled = true;
-      quiz.open = true;
+      if (onShowQuiz) onShowQuiz();
+      else quiz.open = true;
       find('[data-quiz-stop]').hidden = false;
       renderQuestion();
     }
 
     search.addEventListener('input', onFilter);
     recordFilter.addEventListener('change', onFilter);
-    find('[href="#gm-animal-quiz"]').addEventListener('click', () => { quiz.open = true; });
+    if (!onShowQuiz) find('[href="#gm-animal-quiz"]').addEventListener('click', () => { quiz.open = true; });
     root.addEventListener('click', event => {
       const button = event.target.closest('button');
       if (!button || button.disabled) return;
       if (button.hasAttribute('data-animal-reset')) {
         reset();
-        if (!button.isConnected) search.focus({preventScroll: true});
+        if (!button.getClientRects().length) focusControl(search);
       }
       if (button.hasAttribute('data-animal-random')) {
         const visible = getVisible();
@@ -188,7 +193,7 @@
       if (button.dataset.observe) {
         store.toggle(button.dataset.observe);
         onFilter();
-        (find('[data-observe]') || find('#gm-animal-card [data-animal-reset]'))?.focus({preventScroll: true});
+        focusControl(find('[data-observe]') || find('#gm-animal-card [data-animal-reset]'));
       }
       if (button.dataset.animalStep) {
         const visible = getVisible();
@@ -203,11 +208,17 @@
       if (button.hasAttribute('data-quiz-retry') && round?.finished) startRound(round.missed);
       if (button.hasAttribute('data-quiz-stop')) {
         round = null;
-        quizBody.innerHTML = '<p>练习已结束，可以换一种方式再试试。</p>';
         mode.disabled = false;
-        button.hidden = true;
+        if (onHideQuiz) {
+          quizBody.replaceChildren();
+          start.textContent = '开始练习';
+          onHideQuiz();
+        } else {
+          quizBody.innerHTML = '<p>练习已结束，可以换一种方式再试试。</p>';
+          button.hidden = true;
+        }
         refresh(getVisible().length);
-        start.focus({preventScroll: true});
+        focusControl(start);
       }
       if (button.dataset.quizAnswer && round?.answer(button.dataset.quizAnswer)) {
         const animal = round.current.animal;
@@ -223,7 +234,7 @@
       if (button.hasAttribute('data-quiz-next') && round) {
         round.next();
         renderQuestion();
-        if (round.finished) find('[data-quiz-stop]').hidden = true;
+        if (round.finished && !onHideQuiz) find('[data-quiz-stop]').hidden = true;
       }
       if (button.dataset.quizReveal) {
         const animal = byId.get(button.dataset.quizReveal);
@@ -235,7 +246,7 @@
       if (event.key === null || event.key.startsWith(prefix)) { store.reload(); onFilter(); }
     });
     return {
-      cardTools, refresh,
+      cardTools, refresh, reset,
       matches(animal) {
         const words = search.value.trim().toLocaleLowerCase().split(/\s+/).filter(Boolean);
         const haystack = [animal.name, animal.scientificName, animal.place, animal.home, animal.adaptation, animal.clue, habitatNames.get(animal.habitat)].join(' ').toLocaleLowerCase();

@@ -1,5 +1,5 @@
 /* 平面地图的页头、工具侧栏与地图工作区。 */
-.gm-topic.gm-map-topic {
+.gm-map-topic:is(.gm-topic, .gm-wildlife) {
   display: block;
   padding-block-start: 0;
   --select-surface: var(--card);
@@ -22,6 +22,8 @@
 }
 .china-topic .gm-flat-heading { --flat-hero-photo: url("assets/himalayas-orbit.jpg"); }
 .world-topic .gm-flat-heading { --flat-hero-photo: url("assets/nile-day.jpg"); }
+.gm-wildlife .gm-flat-heading { --flat-hero-photo: url("assets/animals/giant-panda.jpg"); background-position: center, 50% 40%; }
+.gm-flora .gm-flat-heading { --flat-hero-photo: url("assets/plants/ginkgo.jpg"); }
 .gm-flat-heading .gm-title { margin: 0; color: inherit; font-size: clamp(30px, 3.5vw, 50px); }
 .gm-flat-heading .gm-intro { max-width: 38em; line-height: 1.65; }
 .gm-flat-heading a { padding: 2px 8px; border-radius: 6px; background: oklch(23% .04 239 / .93); color: inherit; font-size: 13px; text-decoration: underline; text-underline-offset: .2em; }
@@ -59,7 +61,7 @@ html body .gm-flat-workspace[data-sl-mode="compact"][data-sl-open] > .sl-sidebar
 .gm-flat-controls .gm-btn { justify-self: start; }
 .gm-flat-controls .gm-continent-choices button { justify-content: start; }
 .gm-flat-links { gap: 0; }
-.gm-map-topic :is(.gm-flat-links a, .gm-tools-jump, .gm-flat-back, .study-map-tool) {
+.gm-map-topic :is(.gm-flat-links a, .gm-view-bar a, .gm-flat-back, .study-map-tool, .gm-life-quiz-options a) {
   display: inline-flex; align-items: center; gap: 6px; min-height: 44px; color: var(--blue); font-size: 16px;
   font-weight: 650; text-decoration: underline; text-underline-offset: .19em;
 }
@@ -78,6 +80,27 @@ html body .gm-flat-workspace[data-sl-mode="compact"][data-sl-open] > .sl-sidebar
 .gm-flat-workspace .gm-discovery-readout .gm-discovery-note { color: var(--ink-soft); }
 .gm-flat-workspace .gm-chip text { fill: #33413b; }
 
+.gm-wildlife .gm-flat-workspace .gm-wildlife-tools { display: block; margin: 0; padding: 0; }
+.gm-flat-workspace .gm-animal-search-row, .gm-flat-workspace .gm-life-quiz-options { display: grid; gap: 8px; }
+.gm-flat-workspace .gm-animal-search-row label { font-size: 16px; }
+html body .gm-flat-workspace .inline-choice-options > button { min-height: 44px; font-size: 16px; }
+.gm-flat-workspace #gm-animal-search-status { padding: 0; }
+.gm-flat-workspace .gm-animal-progress-row { display: grid; margin: 0; padding: 0; border: 0; gap: 6px; }
+.gm-flat-workspace .gm-animal-progress-row button { justify-self: start; }
+.gm-flat-workspace .gm-wildlife-map .gm-view-bar { margin: 8px; }
+.gm-flat-workspace :is(#gm-animal-card, #gm-animal-quiz, #gm-animal-map) { scroll-margin-top: 16px; }
+.gm-flat-workspace #gm-animal-map { max-height: min(70svh, 720px); }
+.gm-flat-workspace #gm-animal-card { display: grid; grid-template-columns: minmax(0, 1fr); }
+.gm-flat-workspace .gm-animal-photo { max-height: min(52svh, 440px); }
+.gm-flat-workspace .gm-animal-browse { flex-wrap: wrap; }
+.gm-flat-workspace .gm-life-quiz-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; padding-top: 12px; }
+.gm-flat-workspace .gm-life-quiz-head h2 { font-size: 22px; }
+.gm-flat-workspace #gm-animal-quiz:has(.gm-quiz-heading) .gm-life-quiz-ready { display: none; }
+
+@container (min-width: 620px) {
+  .gm-flat-workspace #gm-animal-card { grid-template-columns: minmax(0, 40%) minmax(0, 1fr); align-items: start; }
+}
+
 @media (max-width: 899px) {
   .gm-flat-workspace:not([data-sl-ready]) { grid-template-columns: minmax(0, 1fr); }
   .gm-flat-workspace:not([data-sl-ready]) > :is(.gm-sidebar, .gm-content) { position: static; grid-column: 1; grid-row: auto; max-height: none; }
@@ -88,6 +111,6 @@ html body .gm-flat-workspace[data-sl-mode="compact"][data-sl-open] > .sl-sidebar
   .gm-flat-heading { background-image: linear-gradient(90deg, oklch(17% .034 239 / .96), oklch(20% .044 239 / .72)), var(--flat-hero-photo); }
   .gm-flat-workspace .gm-view-bar { gap: 4px 8px; padding: 6px; }
   /* 让阅读页的悬浮翻页按钮避开标题文字与地图操作。 */
-  .study-atlas .gm-map-topic :is(.gm-flat-heading, .gm-view-bar, .gm-discovery-readout, .gm-quiz) { padding-inline-end: 40px; }
+  .study-atlas .gm-map-topic :is(.gm-flat-heading, .gm-view-bar, .gm-discovery-readout, .gm-quiz, .gm-quiz-inner, .gm-animal-info) { padding-inline-end: 40px; }
   .gm-flat-workspace .gm-legend { order: 1; width: 100%; }
 }
