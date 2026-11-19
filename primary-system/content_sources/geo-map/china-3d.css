@@ -11,6 +11,7 @@
   --select-surface: var(--card);
   --control-icon-size: 16px;
 }
+.study-topic-nav:has(+ .study-atlas > .china-3d-topic) { border-bottom: 0; }
 .china-3d-topic :is(h1, h2, h3) { text-wrap: balance; }
 .china-3d-topic p { text-wrap: pretty; }
 .gm3-heading {
