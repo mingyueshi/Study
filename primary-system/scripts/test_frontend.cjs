@@ -139,7 +139,7 @@ test('a mathbook exercise return anchor opens the original knowledge card withou
   assert.deepEqual(page.writes, []);
 });
 
-function questionPractice(questions, correct, effects = true, settings = {}) {
+function questionPractice(questions, correct, effects = true, settings = {}, storage) {
   const board = element(), fields = {};
   const get = (selector) => fields[selector] || (fields[selector] = element());
   board.querySelector = get;
@@ -157,6 +157,10 @@ function questionPractice(questions, correct, effects = true, settings = {}) {
   get('[data-qb-progress-fill]').style = {};
   get('[data-qb-stars]').hidden = true;
   board.dataset = {answerUrl: '/questionbank/api/answer/', practiceUrl: '/questionbank/practice/', size: 5, ...settings};
+  const params = new URLSearchParams({count: board.dataset.size, new: '1'});
+  if (board.dataset.tag) params.set('tag', board.dataset.tag);
+  if (board.dataset.modeWrong === '1') params.set('mode', 'wrong');
+  board.dataset.restartUrl = board.dataset.practiceUrl + '?' + params + '#qb-practice';
   const requests = [], celebrations = [], ranks = [];
   let time = 0, timerRunning = false;
   run('questionbank/practice.js', vm.createContext({
@@ -164,12 +168,16 @@ function questionPractice(questions, correct, effects = true, settings = {}) {
     setInterval() { timerRunning = true; return 1; }, clearInterval() { timerRunning = false; },
     document: {
       querySelector: () => board,
-      getElementById: () => ({textContent: JSON.stringify(questions)}),
+      getElementById: (id) => id === 'qb-questions' ? {textContent: JSON.stringify(questions)} : get(id),
       addEventListener() {}, cookie: '',
     },
     window: {
       ...(effects ? {StudyEffects: {celebrate: event => celebrations.push(event)}} : {}),
       OlympiadChallenge: {record(round) { ranks.push(round); return {saved: true, rank: 1}; }, duration: value => `${Math.ceil(value / 1000)} 秒`},
+      sessionStorage: storage ? {
+        getItem: key => storage.get(key) || null,
+        setItem: (key, value) => storage.set(key, value),
+      } : undefined,
       addEventListener() {},
     },
     fetch: async (url, request) => {
@@ -234,6 +242,30 @@ test('failed answer retries do not count toward completion', async () => {
   page.next();
   assert.equal(page.celebrations.length, 1);
   assert.equal(page.get('[data-qb-final-score]').textContent, '答对 1／1 题');
+});
+
+test('practice restores confirmed feedback, pending submissions and completion without double scoring', async () => {
+  const storage = new Map();
+  const settings = {owner: 'guest'};
+  const questions = ['first', 'second'].map(uuid => ({type: 'truefalse', stem: uuid, uuid, attempt_id: 'attempt-' + uuid}));
+  const initial = questionPractice(questions, [false, undefined], true, settings, storage);
+  await initial.answer('false');
+  const withFeedback = questionPractice([], [], true, settings, storage);
+  assert.match(withFeedback.get('[data-qb-feedback-head]').textContent, /再想一想/);
+  assert.equal(withFeedback.requests.length, 0);
+  initial.next();
+  await initial.answer('true');
+  const withPending = questionPractice([], [true], true, settings, storage);
+  assert.equal(withPending.get('[data-qb-index]').textContent, 2);
+  assert.match(withPending.get('[data-qb-feedback-head]').textContent, /还未确认/);
+  await withPending.next(); // 反馈区现为重试按钮。
+  assert.deepEqual(withPending.requests[0], initial.requests[1]);
+  withPending.next();
+  const finished = questionPractice([], [], true, settings, storage);
+  assert.equal(finished.get('[data-qb-final-score]').textContent, '答对 1／2 题');
+  assert.equal(finished.requests.length, 0);
+  const differentOwner = questionPractice([], [], true, {owner: 'user-1'}, storage);
+  assert.equal(differentOwner.get('[data-qb-final-score]').textContent, '');
 });
 
 test('non-math rounds and missing effects preserve normal result rendering', async () => {

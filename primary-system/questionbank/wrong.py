@@ -46,7 +46,7 @@ def _page(request, *, track, grammar_chapter_id=None):
             for question in questions]
     regular_count = sum(1 for row in rows if not row['track'])
     olympiad_count = len(rows) - regular_count
-    params = {'mode': 'wrong', 'count': services.DEFAULT_SIZE}
+    params = {'mode': 'wrong', 'count': services.DEFAULT_SIZE, 'new': '1'}
     chapter_practice_url = ''
     if chapter:
         chapter_practice_url = reverse('questionbank-grammar-practice', args=[chapter['id']])

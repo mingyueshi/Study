@@ -60,29 +60,27 @@
 .qb-toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 26px; }
 .qb-label { color: var(--muted); font-size: 16px; }
 
-.qb-practice-layout { display: grid; grid-template-columns: 250px minmax(0, 1fr); gap: 22px; align-items: start; }
-.qb-side { position: sticky; top: 16px; padding: 18px; border: 1px solid var(--line); border-radius: 18px; background: var(--white); }
-.qb-side h2 { margin: 0 0 14px; font-size: 18px; }
-.qb-side .qb-label { display: block; margin: 0 0 8px; color: var(--muted); font-size: 16px; font-weight: 800; }
-.qb-side-chips + .qb-label { margin-top: 18px; }
-.qb-side-chips { display: flex; flex-direction: column; gap: 8px; }
-.qb-side-wrap { flex-direction: row; flex-wrap: wrap; }
-/* 筛选 chips：题库此前从未定义过 chip 样式，侧栏与工具条统一补齐。 */
-.qb-side .chip, .qb-toolbar .chip {
+body:has(.qb-practice-page) { --page-width: 100%; }
+.qb-practice-page {
+  --card: var(--white);
+  --study-reading-hero-bg: radial-gradient(ellipse at top right, #466a52, transparent 68%), linear-gradient(125deg, #203d3a, #294839);
+}
+.qb-practice-page .study-reading-hero h1 { margin: 0; }
+.qb-practice-page .study-reading-hero p { margin-bottom: 0; }
+.qb-side .qb-side-note { margin: 4px 8px 8px; color: var(--muted); font-size: 15px; }
+.qb-side .study-reading-links small { color: var(--muted); white-space: nowrap; }
+.qb-side .qb-round-sizes { grid-template-columns: repeat(3, minmax(0, 1fr)); margin-bottom: 6px; }
+.qb-side .qb-round-sizes a { justify-content: center; padding-inline: 4px; }
+.qb-practice-main { min-width: 0; scroll-margin-top: 20px; overflow-wrap: anywhere; }
+.qb-toolbar .chip {
   display: inline-flex; align-items: center; justify-content: center;
   min-height: 42px; padding: 8px 16px;
   border: 1.5px solid var(--line); border-radius: 10px;
   background: var(--white); color: var(--ink);
   font-size: 16px; font-weight: 700;
-  transition: border-color .14s ease, background .14s ease;
 }
-.qb-side .chip:hover, .qb-toolbar .chip:hover { border-color: var(--green); background: var(--soft); }
-.qb-side .chip.on, .qb-toolbar .chip.on { border-color: var(--green); background: var(--green); color: #fff; font-weight: 750; }
-.qb-side-note { margin: 16px 0 0; color: var(--muted); font-size: 16px; line-height: 1.8; }
-.qb-side-note a { color: var(--green); font-weight: 650; }
-
-.qb-practice-main { min-width: 0; max-width: 1100px; }
-.qb-olympiad-main { max-width: none; }
+.qb-toolbar .chip:hover { border-color: var(--green); background: var(--soft); }
+.qb-toolbar .chip.on { border-color: var(--green); background: var(--green); color: #fff; }
 .qb-board { padding: 26px 30px; border: 1px solid var(--line); border-radius: 24px; background: var(--white); box-shadow: 0 8px 20px #233e3708; }
 .qb-progress { margin: 0 0 12px; color: var(--muted); font-size: 17px; }
 .qb-progress b { color: var(--green); font-size: 22px; }
@@ -98,16 +96,16 @@
 .qb-tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 16px; }
 .qb-tag { padding: 3px 12px; border-radius: 999px; background: var(--soft); color: var(--green); font-size: 14px; }
 
-.qb-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+.qb-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 14px; }
 .qb-option {
   display: flex; align-items: center; gap: 14px;
   padding: 16px 20px; border: 2px solid var(--line); border-radius: 18px; background: var(--paper);
-  font-size: 22px; font-weight: 700; text-align: left; cursor: pointer;
+  color: var(--ink); font-size: 22px; font-weight: 700; text-align: left; cursor: pointer;
   transition: transform .14s ease, border-color .14s ease, background .14s ease;
 }
-.qb-option:hover { border-color: var(--green); background: var(--soft); transform: translateY(-2px); }
+.qb-option:not(:disabled):hover { border-color: var(--green); background: var(--soft); transform: translateY(-2px); }
 .qb-key { display: grid; place-items: center; flex: none; width: 30px; height: 30px; border: 1.5px solid var(--line); border-radius: 9px; background: var(--white); color: var(--muted); font-size: 15px; font-style: normal; font-weight: 750; transition: border-color .14s ease, color .14s ease; }
-.qb-option:hover .qb-key { border-color: #bfd8b4; color: var(--green); }
+.qb-option:not(:disabled):hover .qb-key { border-color: #bfd8b4; color: var(--green); }
 .qb-option.right .qb-key { border-color: #2c7a4b; background: #2c7a4b; color: #fff; }
 .qb-option.wrong .qb-key { border-color: #d9a49d; color: #8f3a2f; }
 .qb-boolean .qb-option { justify-content: center; }
@@ -118,7 +116,7 @@
 .qb-boolean { display: flex; gap: 18px; }
 .qb-boolean .qb-option { flex: 1; min-height: 84px; text-align: center; font-size: 26px; }
 
-.qb-selfcheck { display: flex; gap: 14px; align-items: center; }
+.qb-selfcheck { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
 
 .qb-feedback { margin-top: 22px; padding: 20px 24px; border-radius: 18px; }
 .qb-feedback.good { background: #e2f0dc; }
@@ -126,6 +124,8 @@
 .qb-feedback-head { margin: 0 0 8px; font-size: 24px; font-weight: 800; }
 .qb-feedback.good .qb-feedback-head { color: #2c7a4b; }
 .qb-feedback.bad .qb-feedback-head { color: #b4483a; }
+html[data-reading-theme="dark"] .qb-feedback.good .qb-feedback-head { color: oklch(.82 .074 160); }
+html[data-reading-theme="dark"] .qb-feedback.bad .qb-feedback-head { color: oklch(.81 .092 25); }
 .qb-feedback-answer { margin: 0 0 8px; font-size: 22px; font-weight: 750; }
 .qb-feedback-explain, .qb-feedback-steps { margin: 0 0 6px; font-size: 18px; line-height: 1.8; }
 .qb-feedback-steps { color: var(--muted); }
@@ -197,11 +197,6 @@
 .qb-wrong-answer b { font-size: 22px; }
 .qb-wrong-explain { margin: 0; color: var(--muted); font-size: 17px; line-height: 1.8; }
 
-@media (max-width: 900px) {
-  .qb-practice-layout { grid-template-columns: minmax(0, 1fr); }
-  .qb-side { position: static; }
-  .qb-side-chips { flex-direction: row; flex-wrap: wrap; }
-}
 @media (max-width: 720px) {
   .qb-hero { flex-direction: column; align-items: flex-start; }
   .qb-hero-deco { display: none; }

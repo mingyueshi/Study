@@ -11,6 +11,7 @@ from uuid import uuid4
 from django.db.models import Count, Q
 from django.http import Http404
 from django.utils import timezone
+from django.utils.crypto import salted_hmac
 
 from . import types
 from .models import AnswerRecord, Question
@@ -42,13 +43,17 @@ def pick_questions(*, area='', track='', count=DEFAULT_SIZE, ids=None, tag=''):
     return list(rows.order_by('?')[:count])
 
 
+def question_revision(question):
+    return salted_hmac('questionbank.question-revision', question.checksum).hexdigest()
+
+
 def client_question(question):
     """练习页内嵌给前端的题目形状。
 
     选择/判断题不带答案与解析，判分走服务端；自评题的答案与思路本来就是
     给孩子对照用的，直接内嵌（与多音字页内嵌读音表同思路）。
     """
-    item = {'uuid': str(question.uuid), 'attempt_id': str(uuid4()), 'type': question.type,
+    item = {'uuid': str(question.uuid), 'attempt_id': str(uuid4()), 'revision': question_revision(question), 'type': question.type,
             'area': question.area, 'stem': question.stem, 'tags': question.tags or []}
     if question.type == 'choice':
         item['options'] = question.payload.get('options', [])

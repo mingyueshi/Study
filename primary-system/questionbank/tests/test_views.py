@@ -108,6 +108,12 @@ class PracticeViewTests(TestCase):
         self.assertEqual(len(response.context['questions']), 1)
         self.assertEqual(response.context['questions'][0]['area'], 'math')
         self.assertEqual(response.context['area'], 'math')
+        sidebar = response.content.decode().split('<aside class="qb-side ', 1)[1].split('</aside>', 1)[0]
+        self.assertIn('aria-label="学科筛选"', sidebar)
+        self.assertIn('aria-label="每组题量"', sidebar)
+        self.assertIn('aria-label="专题导航"', sidebar)
+        self.assertNotIn('data-qb-feedback', sidebar)
+        self.assertContains(response, 'data-qb-feedback')
 
     def test_unknown_area_falls_back_to_all(self):
         seed_choice()
@@ -238,7 +244,8 @@ class AnswerApiTests(TestCase):
         seed_choice()
         url = reverse('questionbank-practice')
         question = self.client.get(url).context['questions'][0]
-        submission = {'uuid': question['uuid'], 'attempt_id': question['attempt_id'], 'given': {'value': 0}}
+        submission = {'uuid': question['uuid'], 'attempt_id': question['attempt_id'],
+                      'revision': question['revision'], 'given': {'value': 0}}
         self.assertTrue(post_answer(self.client, submission).json()['correct'])
         self.assertTrue(post_answer(self.client, submission).json()['correct'])
         self.assertEqual(post_answer(self.client, {**submission, 'given': {'value': 1}}).status_code, 409)
@@ -247,6 +254,18 @@ class AnswerApiTests(TestCase):
         submission['attempt_id'] = self.client.get(url).context['questions'][0]['attempt_id']
         self.assertTrue(post_answer(self.client, submission).json()['correct'])
         self.assertEqual(AnswerRecord.objects.count(), 2)
+
+    def test_saved_question_revision_prevents_answering_changed_content(self):
+        question = seed_choice()
+        client_question = self.client.get(reverse('questionbank-practice')).context['questions'][0]
+        question.stem += '（已修订）'
+        question.save(update_fields=['stem'])
+        response = post_answer(self.client, {
+            'uuid': client_question['uuid'], 'attempt_id': client_question['attempt_id'],
+            'revision': client_question['revision'], 'given': {'value': 0},
+        })
+        self.assertEqual(response.status_code, 409)
+        self.assertEqual(AnswerRecord.objects.count(), 0)
 
 
 class WrongViewTests(TestCase):
@@ -311,7 +330,8 @@ class OlympiadViewTests(TestCase):
         response = self.client.get(reverse('questionbank-olympiad-practice'))
         self.assertEqual([item['uuid'] for item in response.context['questions']],
                          [str(olympiad.uuid)])
-        self.assertEqual(response.context['area_chips'], [])
+        self.assertNotContains(response, 'aria-label="学科筛选"')
+        self.assertContains(response, 'aria-label="题型筛选"')
 
     def test_regular_practice_excludes_olympiad(self):
         regular = seed_choice()
@@ -319,7 +339,7 @@ class OlympiadViewTests(TestCase):
         response = self.client.get(reverse('questionbank-practice'))
         self.assertEqual([item['uuid'] for item in response.context['questions']],
                          [str(regular.uuid)])
-        self.assertIsNone(response.context['tag_chips'])
+        self.assertNotContains(response, 'aria-label="题型筛选"')
 
     def test_tag_filter_and_unknown_tag_ignored(self):
         seed_olympiad()

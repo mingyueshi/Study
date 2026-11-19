@@ -1,0 +1,35 @@
+<aside class="qb-side study-reading-sidebar" aria-label="练习筛选、设置和导航">
+  {% if area_choices or tag_choices %}
+  <details class="study-reading-group" open>
+    <summary>选题筛选</summary>
+    <nav class="study-reading-links" aria-label="{% if tag_choices %}题型筛选{% else %}学科筛选{% endif %}">
+      {% for item in area_choices %}<a href="{{ item.url }}"{% if item.selected %} aria-current="true"{% endif %}>{{ item.label }}</a>{% endfor %}
+      {% for item in tag_choices %}<a href="{{ item.url }}"{% if item.selected %} aria-current="true"{% endif %}>{{ item.label }}{% if item.count %}<small>{{ item.count }} 题</small>{% endif %}</a>{% endfor %}
+    </nav>
+  </details>
+  {% endif %}
+  <details class="study-reading-group" open>
+    <summary>练习设置</summary>
+    {% if single_question %}
+    <p class="qb-side-note">先自己做，再对照参考答案。</p>
+    {% else %}
+    <nav class="study-reading-links qb-round-sizes" aria-label="每组题量">
+      {% for option in size_choices %}<a href="{{ option.url }}"{% if option.selected %} aria-current="true"{% endif %}>{{ option.size }} 题</a>{% endfor %}
+    </nav>
+    {% endif %}
+    <nav class="study-reading-links" aria-label="新一组练习">
+      <a href="{{ restart_url }}">{% if single_question %}重新练这道题{% else %}重新抽题{% endif %} <span aria-hidden="true">↗</span></a>
+    </nav>
+  </details>
+  <details class="study-reading-group">
+    <summary>相关专题</summary>
+    <nav class="study-reading-links" aria-label="专题导航">
+      {% if grammar_chapter or mathbook_title or track == 'olympiad' %}
+      <a href="{{ home_url }}">回{{ home_label }} <span aria-hidden="true">↗</span></a>
+      {% endif %}
+      <a href="{% url 'questionbank' %}">挑战题库 <span aria-hidden="true">↗</span></a>
+      <a href="{{ wrong_url }}">{% if grammar_chapter %}本章错题本{% elif track == 'olympiad' %}奥数错题本{% else %}错题本{% endif %} <span aria-hidden="true">↗</span></a>
+      {% if track == 'olympiad' %}<a href="#qb-leaderboard-title">本机挑战榜 <span aria-hidden="true">↓</span></a>{% else %}<a href="{% url 'questionbank-olympiad' %}">奥数挑战 <span aria-hidden="true">↗</span></a>{% endif %}
+    </nav>
+  </details>
+</aside>

@@ -15,8 +15,8 @@
     {% if track and count %}
     <a class="button small" href="{{ practice_url }}">开始重练 · 共 {{ count }} 道错题 →</a>
     {% elif not track %}
-    {% if regular_count %}<a class="button small" href="{% url 'questionbank-practice' %}?mode=wrong&amp;count=10">重练普通错题 · 共 {{ regular_count }} 道 →</a>{% endif %}
-    {% if olympiad_count %}<a class="button small" href="{% url 'questionbank-olympiad-practice' %}?mode=wrong&amp;count=10">重练奥数错题 · 共 {{ olympiad_count }} 道 →</a>{% endif %}
+    {% if regular_count %}<a class="button small" href="{% url 'questionbank-practice' %}?mode=wrong&amp;count=10&amp;new=1">重练普通错题 · 共 {{ regular_count }} 道 →</a>{% endif %}
+    {% if olympiad_count %}<a class="button small" href="{% url 'questionbank-olympiad-practice' %}?mode=wrong&amp;count=10&amp;new=1">重练奥数错题 · 共 {{ olympiad_count }} 道 →</a>{% endif %}
     {% endif %}
   </div>
 </header>

@@ -9,6 +9,7 @@
 ``?tag=`` 主题过滤。判分端点共用，按题目 uuid 定位，不区分轨别。
 """
 import json
+from urllib.parse import urlencode
 from uuid import UUID
 
 from django.db import transaction
@@ -82,6 +83,24 @@ def _practice(request, *, track, pool=None, scoped_page=None):
     if mode_wrong:
         pool = services.latest_wrong_ids(records.read_scope(request), track=track, ids=pool)
     questions = services.pick_questions(area=area, track=track, count=size, ids=pool, tag=tag)
+    params = {'area': area, 'tag': tag, 'count': size, 'mode': 'wrong' if mode_wrong else ''}
+
+    def setting_url(**changes):
+        query = urlencode({key: value for key, value in {**params, **changes}.items() if value})
+        return f"{page['practice_url']}?{query}#qb-practice"
+
+    area_choices = []
+    if track == Question.Track.REGULAR and not scoped_page:
+        area_choices = [
+            {**item, 'url': setting_url(area=item['area']), 'selected': item['area'] == area}
+            for item in [{'area': '', 'label': '全科混合'}, *AREA_CHIPS]
+        ]
+    tag_choices = []
+    if track == Question.Track.OLYMPIAD:
+        tag_choices = [{'label': '混合挑战', 'url': setting_url(tag=''), 'selected': not tag}]
+        tag_choices.extend({
+            'label': name, 'count': count, 'url': setting_url(tag=name), 'selected': name == tag,
+        } for name, count in services.tag_counts(track))
     olympiad_context = {}
     if track == Question.Track.OLYMPIAD:
         from .olympiad import leaderboard_context
@@ -90,10 +109,12 @@ def _practice(request, *, track, pool=None, scoped_page=None):
         'questions': [services.client_question(question) for question in questions],
         'area': area, 'tag': tag,
         'area_label': tag or (dict(Question.Area.choices).get(area) or page['mix_label']),
-        'area_chips': [] if track == Question.Track.OLYMPIAD else AREA_CHIPS,
-        'tag_chips': ([{'tag': name, 'count': count} for name, count in services.tag_counts(track)]
-                      if track == Question.Track.OLYMPIAD else None),
-        'sizes': services.SIZES,
+        'area_choices': area_choices, 'tag_choices': tag_choices,
+        'size_choices': [
+            {'size': option, 'url': setting_url(count=option), 'selected': option == size}
+            for option in services.SIZES
+        ],
+        'restart_url': setting_url(new=1),
         'size': size, 'mode_wrong': mode_wrong, 'empty_wrong': mode_wrong and not questions,
         'track': track, **page, **olympiad_context,
     })
@@ -170,6 +191,8 @@ def answer(request):
     question = Question.objects.filter(active=True, uuid=question_id).first()
     if question is None:
         return JsonResponse({'error': '这道题不在题库里，请刷新页面后再试。'}, status=400)
+    if 'revision' in data and data['revision'] != services.question_revision(question):
+        return JsonResponse({'error': '这道题的内容已经更新，请重新抽题。'}, status=409)
     from incentives.services import take_awards
     try:
         with transaction.atomic():
