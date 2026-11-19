@@ -51,9 +51,12 @@
 .body-movement.body-process-lab.geo-experiment .experiment-heading {
   background: linear-gradient(120deg, oklch(25% .065 302), oklch(41% .09 310));
 }
+.body-nerves.body-process-lab.geo-experiment .experiment-heading {
+  background: linear-gradient(120deg, oklch(25% .048 224), oklch(40% .067 208));
+}
 .body-process-lab .experiment-heading :is(.body-kicker, .body-lesson-lead) { color: inherit; }
 .body-process-lab .experiment-heading h1 { font-size: clamp(30px, 3.5vw, 52px); }
-.body-process-lab :is(#explore, #heart, #gallery, #experiment, #checkup, #pulse, #notebook, #body-notes-title, [data-process-settings]) { scroll-margin-top: 16px; }
+.body-process-lab :is(#explore, #heart, #gallery, #experiment, #checkup, #pulse, #notebook, #reaction, #body-notes-title, [data-process-settings]) { scroll-margin-top: 16px; }
 .body-process-lab .sl-scroll > .experiment-tools + .experiment-tools { margin-block-start: 8px; }
 .body-process-lab .body-process-phases { display: grid; }
 .body-process-lab .experiment-controls .body-process-modes { display: grid; margin: 0; }
@@ -74,7 +77,7 @@
 .body-process-lab .body-process-stage { margin: 0; }
 .body-process-lab .body-process-stage figcaption { text-align: center; }
 .body-digestion-stage .body-svg-labels { font-size: 26px; }
-.body-movement-stage > svg { border-radius: 12px; }
+:is(.body-movement-stage, .body-nerves-stage) > svg { border-radius: 12px; }
 .body-movement .body-arm-slider { margin-block-end: 14px; padding: 0; }
 .body-movement .body-arm-slider input { min-height: 44px; }
 .body-movement .body-arm-reading output { font-variant-numeric: tabular-nums; white-space: nowrap; }

@@ -1,0 +1,12 @@
+<section class="body-panel body-reaction" id="reaction" aria-labelledby="reaction-title">
+  <p class="body-kicker">反应小游戏</p>
+  <h2 id="reaction-title">{{ reaction.title }}</h2>
+  <p>{{ reaction.intro }}</p>
+  <div data-body-reaction data-state="idle" hidden>
+    <button type="button" class="body-reaction-target" data-reaction-button>{{ reaction.start }}</button>
+    <p data-reaction-result role="status"></p>
+    {{ reaction|json_script:"body-reaction-copy" }}
+  </div>
+  <noscript><p>启用 JavaScript 后，可以做屏幕上的反应小游戏。</p></noscript>
+  <p class="body-media-credit">{{ reaction.caption }}</p>
+</section>

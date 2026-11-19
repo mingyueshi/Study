@@ -188,9 +188,12 @@
     } else if (kind === 'movement') {
       armShape(armAngleAt(frame));
     } else if (kind === 'nerves') {
-      attr($('[data-hand-fingers]'), 'transform', `rotate(${id === 'respond' ? -12 * eased : 0} 485 282)`);
+      const arrival = .7;
+      const grip = id === 'respond' ? smooth((t - arrival) / (1 - arrival)) : 0;
+      attr($('[data-hand-fingers]'), 'transform', `rotate(${-12 * grip} 485 282)`);
       attr($('[data-brain-halo]'), 'opacity', id === 'process' ? .25 + .65 * Math.sin(Math.PI * t) : 0);
-      if (id !== 'process') particles(id === 'sense' ? 'nerve-in' : 'nerve-out', t, 1, id === 'sense' ? '#c28a27' : '#327e9d', 9, false);
+      if (id === 'respond') particles('nerve-out', t / arrival, 1, '#327e9d', 9, false);
+      else particles('nerve-in', id === 'process' ? 1 : t, 1, '#c28a27', 9, false);
     } else if (kind === 'senses') {
       attr($('[data-ear-drum]'), 'transform', `translate(${id === 'vibrate' ? 3 * Math.sin(t * Math.PI * 16) : 0} 0)`);
       if (id === 'light') { particles('eye-light', t, 1, '#c79428', 7, false); particles('eye-light-lower', t, 1, '#c79428', 7, false); }

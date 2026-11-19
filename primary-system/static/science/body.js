@@ -50,6 +50,7 @@
       const state = reaction.dataset.state;
       if (state === 'waiting') {
         clearTimeout(waiting);
+        waiting = null;
         reaction.dataset.state = 'done';
         button.textContent = copy.again;
         result.textContent = copy.early;
@@ -63,20 +64,25 @@
         result.textContent = '';
         button.textContent = copy.waiting;
         waiting = setTimeout(() => {
+          waiting = null;
           appearedAt = performance.now();
           reaction.dataset.state = 'ready';
           button.textContent = copy.go;
         }, 1500 + Math.random() * 2500);
       }
     });
+    function interruptRound() {
+      if (!['waiting', 'ready'].includes(reaction.dataset.state)) return;
+      clearTimeout(waiting);
+      waiting = null;
+      reaction.dataset.state = 'idle';
+      button.textContent = copy.start;
+      result.textContent = copy.interrupted;
+    }
     document.addEventListener('visibilitychange', () => {
-      if (document.hidden && ['waiting', 'ready'].includes(reaction.dataset.state)) {
-        clearTimeout(waiting);
-        reaction.dataset.state = 'idle';
-        button.textContent = copy.start;
-        result.textContent = copy.interrupted;
-      }
+      if (document.hidden) interruptRound();
     });
+    window.addEventListener('pagehide', interruptRound);
     reaction.hidden = false;
   }
 

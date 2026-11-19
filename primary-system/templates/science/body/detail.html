@@ -13,7 +13,7 @@
   <p class="body-course-progress" data-current-progress hidden></p>
   {% if process_observation_id %}
   <div class="experiment-workspace" data-sidebar-layout=".experiment-side" data-sidebar-width="clamp(260px, 24vw, 320px)"
-       data-sidebar-label="{% if lesson.slug == 'circulation' %}循环{% elif lesson.slug == 'movement' %}屈伸{% else %}{{ lesson.label }}{% endif %}实验工具" data-sidebar-collapse-key="primary_sidebar_collapsed_v1:.body-side">
+       data-sidebar-label="{% if lesson.slug == 'circulation' %}循环{% elif lesson.slug == 'movement' %}屈伸{% elif lesson.slug == 'nerves' %}神经{% else %}{{ lesson.label }}{% endif %}实验工具" data-sidebar-collapse-key="primary_sidebar_collapsed_v1:.body-side">
   {% else %}
   <div class="body-workspace" data-sidebar-label="观察与思考">
   {% endif %}
@@ -23,6 +23,7 @@
       {% else %}
         {% include 'science/body/interactive.html' %}
       {% endif %}
+      {% if lesson.slug == 'nerves' %}{% include 'science/body/reaction.html' %}{% endif %}
       {% include 'science/body/gallery.html' %}
       {% include 'science/body/extras.html' %}
       <details class="body-panel body-notes">

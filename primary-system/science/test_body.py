@@ -20,7 +20,7 @@ class HumanBodyStationTests(SimpleTestCase):
                 self.assertContains(index, f'href="{lesson_url}"')
                 lesson = self.client.get(lesson_url)
                 self.assertContains(lesson, f'{label} · 人体奥秘站')
-                self.assertContains(lesson, '/static/science/body.js?v=20261116p2')
+                self.assertContains(lesson, '/static/science/body.js?v=8512878a18b7')
                 self.assertContains(lesson, 'role="img"')
                 self.assertContains(lesson, f'data-body-process="{slug}"')
                 self.assertContains(lesson, 'data-process-progress')
@@ -55,6 +55,7 @@ class HumanBodyStationTests(SimpleTestCase):
             ('breathing', 'breath-observation'),
             ('digestion', 'digestion-observation'),
             ('movement', 'movement-observation'),
+            ('nerves', 'nerves-observation'),
         ):
             with self.subTest(slug=slug):
                 response = self.client.get(reverse('science-body-lesson', args=[slug]))
@@ -69,12 +70,17 @@ class HumanBodyStationTests(SimpleTestCase):
                     self.assertContains(response, 'class="body-breath-alveoli"')
                 elif slug == 'digestion':
                     self.assertContains(response, 'href="#digestion-intestine-path"', count=2)
-                else:
+                elif slug == 'movement':
                     self.assertContains(response, 'data-arm-angle', count=1)
                     self.assertContains(response, 'data-arm-value', count=1)
                     self.assertContains(response, 'class="body-triceps-tendon"')
-        nerves = self.client.get(reverse('science-body-lesson', args=['nerves']))
-        self.assertNotContains(nerves, 'data-process-settings')
+                else:
+                    self.assertContains(response, 'id="reaction"', count=1)
+                    self.assertContains(response, 'href="#reaction"', count=1)
+                    self.assertContains(response, 'class="body-stage body-process-stage body-nerves-stage"')
+                    self.assertContains(response, '<figcaption data-process-caption>', count=1)
+        senses = self.client.get(reverse('science-body-lesson', args=['senses']))
+        self.assertNotContains(senses, 'data-process-settings')
 
     def test_unknown_lesson_and_unsupported_method(self):
         self.assertEqual(self.client.get(reverse('science-body-lesson', args=['missing'])).status_code, 404)

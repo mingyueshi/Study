@@ -1,5 +1,7 @@
-<svg viewBox="0 0 640 420" role="img" aria-labelledby="nerves-title">
+<figure class="body-stage body-process-stage body-nerves-stage">
+<svg viewBox="43 15 515 395" role="img" aria-labelledby="nerves-title" aria-describedby="nerves-desc">
   <title id="nerves-title">{{ diagram.title }}</title>
+  <desc id="nerves-desc">{{ diagram.caption }}</desc>
   <defs>
     <marker id="nerve-yellow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="3" markerHeight="3" orient="auto"><path d="M0 0 10 5 0 10" fill="#b2731c"/></marker>
     <marker id="nerve-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="3" markerHeight="3" orient="auto"><path d="M0 0 10 5 0 10" fill="#327e9d"/></marker>
@@ -23,3 +25,5 @@
     <text x="355" y="195" fill="#286c88">{{ diagram.labels.motor }} ↓</text>
   </g>
 </svg>
+<figcaption data-process-caption>{{ lesson.animation.modes.0.caption }}</figcaption>
+</figure>
