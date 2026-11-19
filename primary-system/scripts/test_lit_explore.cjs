@@ -12,6 +12,7 @@ function page({hash = '', state = {last: 'lu1', learned: {}}, storageBlocked = f
       innerHTML: '', value: '', textContent: '', dataset: {},
       focus() { this.focused = true; }, scrollIntoView() { this.scrolled = true; },
       setAttribute(name, value) { this[name] = value; },
+      querySelector() { return null; },
     });
     return elements.get(id);
   };
@@ -26,7 +27,10 @@ function page({hash = '', state = {last: 'lu1', learned: {}}, storageBlocked = f
     },
     document: {
       getElementById: get,
-      querySelector() { return {focus() {}, setAttribute() {}}; },
+      querySelector(selector) {
+        if (selector.startsWith('.lit-workspace')) return null;
+        return get(selector);
+      },
       querySelectorAll(selector) { return selector === '.lit-person' ? people : branches; },
       addEventListener(type, fn) { handlers[type] = fn; },
     },
@@ -38,6 +42,7 @@ function page({hash = '', state = {last: 'lu1', learned: {}}, storageBlocked = f
   for (const file of ['lit-data.js', 'lit-app.js']) {
     vm.runInContext(fs.readFileSync(path.join(__dirname, '..', 'content_sources', file), 'utf8'), context);
   }
+  handlers.DOMContentLoaded();
   return {
     app: context.window.LitExplore, get, writes, location,
     click(dataset) { handlers.click({target: {closest() { return {dataset}; }}, preventDefault() {}}); },
@@ -127,4 +132,28 @@ test('new views restore without changing old mastery keys and work when storage 
   blocked.app.selectBook('invalid');
   blocked.app.selectCharacter('invalid');
   assert.equal(blocked.app.selectedBook, 'honglou');
+});
+
+test('chapter and lesson navigation keep their own directories and retrace reading links', () => {
+  const p = page({state: {last: 'lu4', learned: {}}});
+  assert.match(p.get('chips').innerHTML, /data-id="lu4" aria-current="true"/);
+  assert.doesNotMatch(p.get('chips').innerHTML, /文学速查/);
+  assert.match(p.get('lit-extras').innerHTML, /文学速查/);
+  p.app.selectView('lu6');
+  assert.equal(p.location.hash, '#view-lu6');
+  assert.match(p.get('lit-points').innerHTML, /href="#lesson-lu6-5"/);
+  p.follow('#lesson-lu6-5');
+  assert.match(p.get('lit-points').innerHTML, /href="#lesson-lu6-5" data-act="lesson" aria-current="location"/);
+  p.search('杜甫');
+  assert.equal(p.get('lit-directory').hidden, true);
+  p.search('');
+  assert.equal(p.get('lit-directory').hidden, false);
+  p.follow('#view-clinic');
+  assert.equal(p.get('lit-directory').hidden, true);
+  assert.match(p.get('cards').innerHTML, /文学小诊所/);
+  p.follow('#view-constructor');
+  assert.equal(p.app.view, 'clinic');
+  p.follow('');
+  assert.equal(p.app.view, 'lu4');
+  assert.match(p.get('lit-points').innerHTML, /href="#lesson-lu4-/);
 });

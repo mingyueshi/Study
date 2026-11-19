@@ -595,6 +595,22 @@ class StudyTopicPageTests(SimpleTestCase):
                     self.assertContains(response, f'href="{reverse(reference)}"')
                 self.assertEqual(self.client.post(reverse(name)).status_code, 405)
 
+    def test_literature_course_uses_the_reading_sidebar_and_current_assets(self):
+        response = self.client.get(reverse('literature-study'))
+        self.assertContains(response, 'data-sidebar-layout=".lit-sidebar"')
+        self.assertNotContains(response, 'class="study-topic-nav"')
+        sidebar = response.content.decode().split('<aside class="lit-sidebar"', 1)[1].split('</aside>', 1)[0]
+        for section in ('chips', 'lit-points', 'lit-extras', 'search'):
+            self.assertIn(f'id="{section}"', sidebar)
+        for name in ('classical', 'poetry-index', 'idiom-stories'):
+            self.assertIn(f'href="{reverse(name)}"', sidebar)
+        self.assertNotIn('id="cards"', sidebar)
+        assets = TopicMarkup(response.content.decode()).assets
+        for filename in ('lit.css', 'lit-app.js'):
+            path = f'study_topics/lit/{filename}'
+            digest = sha256(Path(finders.find(path)).read_bytes()).hexdigest()[:12]
+            self.assertIn(f'/static/{path}?v={digest}', assets)
+
 
 class StudyTopicEntryTests(TestCase):
     def test_science_includes_the_evidence_topics_and_accepts_the_old_filter(self):

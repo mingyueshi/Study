@@ -21,7 +21,7 @@ try {
 function lkSave() { try { localStorage.setItem(LIT_STORE_KEY, JSON.stringify(lkState)); } catch (e) {} }
 
 /* ---------- 索引与视图状态 ---------- */
-const LUNIT_BY_ID = {};
+const LUNIT_BY_ID = Object.create(null);
 LIT.units.forEach(u => { LUNIT_BY_ID[u.id] = u; });
 const LTOTAL_POINTS = LIT.units.reduce((n, u) => n + u.points.length, 0);
 const LEXTRA_VIEWS = [
@@ -33,7 +33,9 @@ const LEXTRA_VIEWS = [
 
 function validView(id) { return !!LUNIT_BY_ID[id] || LEXTRA_VIEWS.some(v => v.id === id); }
 let curView = validView(lkState.last) ? lkState.last : 'lu1';
+const initialView = curView;
 let query = '';
+let currentLesson = '';
 let selectedBook = LIT.classics[0].id;
 let selectedCharacter = LIT.classics[0].characters[0].id;
 let authorGroup = '全部';
@@ -63,15 +65,30 @@ function renderChips() {
     const learned = u.points.filter(p => lkState.learned[pointKey(u, p)]).length;
     const done = learned === u.points.length;
     const shortName = u.no.replace('第', '').replace('苑', '') + ' ' + u.name;
-    return '<button class="chip' + (u.id === curView && !query ? ' on' : '') + '" style="--c:' + u.color + '" data-act="unit" data-id="' + u.id + '">' +
-      '<span class="chip-emoji">' + u.emoji + '</span><span class="chip-name">' + esc(shortName) + '</span>' +
+    const active = u.id === curView && !query;
+    return '<button type="button" class="chip' + (active ? ' on' : '') + '" style="--c:' + u.color + '" data-act="unit" data-id="' + u.id + '"' +
+      (active ? ' aria-current="true"' : '') + '><span class="chip-emoji" aria-hidden="true">' + u.emoji + '</span><span class="chip-name">' + esc(shortName) + '</span>' +
       '<span class="chip-num' + (done ? ' full' : '') + '">' + learned + '/' + u.points.length + '</span></button>';
   });
-  const extraChips = LEXTRA_VIEWS.map(v =>
-    '<button class="chip' + (v.id === curView && !query ? ' on' : '') + '" style="--c:' + v.color + '" data-act="unit" data-id="' + v.id + '">' +
-    '<span class="chip-emoji">' + v.emoji + '</span><span class="chip-name">' + esc(v.name) + '</span>' +
-    '<span class="chip-num">' + v.count + '</span></button>');
-  document.getElementById('chips').innerHTML = unitChips.join('') + extraChips.join('');
+  const extraChips = LEXTRA_VIEWS.map(v => {
+    const active = v.id === curView && !query;
+    return '<button type="button" class="chip' + (active ? ' on' : '') + '" style="--c:' + v.color + '" data-act="unit" data-id="' + v.id + '"' +
+      (active ? ' aria-current="true"' : '') + '><span class="chip-emoji" aria-hidden="true">' + v.emoji + '</span><span class="chip-name">' + esc(v.name) + '</span>' +
+      '<span class="chip-num">' + v.count + '</span></button>';
+  });
+  document.getElementById('chips').innerHTML = unitChips.join('');
+  document.getElementById('lit-extras').innerHTML = extraChips.join('');
+}
+
+function renderDirectory() {
+  const unit = !query && lunitById(curView);
+  document.getElementById('lit-directory').hidden = !unit;
+  document.querySelector('[data-act="open-directory"]').hidden = !unit;
+  document.querySelector('[data-act="show-results"]').hidden = !query;
+  document.getElementById('lit-points').innerHTML = unit ? unit.points.map(p =>
+    '<a href="#lesson-' + esc(p.id) + '" data-act="lesson"' +
+    (p.id === currentLesson ? ' aria-current="location"' : '') + '>' + esc(p.title) + ' <span aria-hidden="true">↓</span></a>'
+  ).join('') : '';
 }
 
 function renderStats() {
@@ -138,11 +155,10 @@ function renderUnit(u) {
     : '';
   return '<div class="unit-head" style="--c:' + u.color + '">' +
     '<span class="unit-emoji">' + u.emoji + '</span>' +
-    '<div><h1>' + esc(u.no) + ' · ' + esc(u.name) + '</h1>' +
+    '<div><h2>' + esc(u.no) + ' · ' + esc(u.name) + '</h2>' +
     '<p>' + esc(u.intro) + '</p>' +
     '<div class="goal-tags">' + u.goals.map(g => '<span>🎯 ' + esc(g) + '</span>').join('') + '</div></div></div>' +
-    (u.id === 'lu1' ? '<nav class="lit-feature-links" aria-label="文学新玩法"><a href="#view-relationships"><span>🌳 四大名著人物关系图</span><small>展开分支，认人物，找故事出处 →</small></a><a href="#view-authors"><span>✉️ 作家名片收藏册</span><small>年代、作品、一句趣闻，连着记 →</small></a></nav>' : '') + banner +
-    u.points.map(p => pointCard(u, p)).join('');
+    banner + u.points.map(p => pointCard(u, p)).join('');
 }
 
 /* ---------- 作家名片 ---------- */
@@ -168,7 +184,7 @@ function authorCard(a) {
 function renderAuthors() {
   const groups = ['全部', '古代作家', '近现代作家', '外国作家'];
   const authors = LIT.authors.filter(a => authorGroup === '全部' || a.group === authorGroup);
-  return '<div class="unit-head" style="--c:#8b65c9"><span class="unit-emoji">✉️</span><div><h1>作家名片收藏册</h1>' +
+  return '<div class="unit-head" style="--c:#8b65c9"><span class="unit-emoji">✉️</span><div><h2>作家名片收藏册</h2>' +
     '<p>' + LIT.authors.length + ' 张名片 · 把年代、代表作和一句趣闻连在一起记。</p></div></div>' +
     '<div class="lit-filters" role="group" aria-label="按作家类别筛选">' + groups.map(g =>
       '<button type="button" data-act="author-group" data-group="' + g + '" aria-pressed="' + (g === authorGroup) + '">' + g + '</button>').join('') +
@@ -207,7 +223,7 @@ function renderRelationships() {
   const book = LIT.classics.find(b => b.id === selectedBook);
   const person = book.characters.find(c => c.id === selectedCharacter) || book.characters[0];
   selectedCharacter = person.id;
-  return '<div class="unit-head" style="--c:#ce6538"><span class="unit-emoji">🌳</span><div><h1>四大名著人物关系图</h1>' +
+  return '<div class="unit-head" style="--c:#ce6538"><span class="unit-emoji">🌳</span><div><h2>四大名著人物关系图</h2>' +
     '<p>选一本书 → 展开分支 → 点人物，看看他和谁有关、在哪个故事出场。</p></div></div>' +
     '<div class="lit-book-picker" role="group" aria-label="选择名著">' + LIT.classics.map(b =>
       '<button type="button" data-act="book" data-id="' + b.id + '" aria-pressed="' + (b.id === book.id) + '"><span aria-hidden="true">' + b.emoji + '</span> ' + esc(b.title) + '</button>').join('') + '</div>' +
@@ -234,22 +250,25 @@ function factCard(f) {
 
 function renderFacts() {
   return '<div class="unit-head" style="--c:#b5893a">' +
-    '<span class="unit-emoji">🏆</span><div><h1>文学速查</h1>' +
+    '<span class="unit-emoji">🏆</span><div><h2>文学速查</h2>' +
     '<p>' + LIT.facts.length + ' 组 · 点一行读一行</p></div></div>' +
     LIT.facts.map(factCard).join('');
 }
 
 /* ---------- 文学小诊所 ---------- */
+function mistakeCard(m) {
+  return '<article class="mistake-card">' +
+    '<span class="unit-tag">' + esc(m.unit) + '</span>' +
+    '<button class="mist-row wrong-row-text" data-act="say" data-t="' + esc(m.wrong) + '"><span class="mist-mark">❌</span>' + esc(m.wrong) + '</button>' +
+    '<button class="mist-row right-row-text" data-act="say" data-t="' + esc(m.right) + '"><span class="mist-mark">✅</span>' + esc(m.right) + '</button>' +
+    '</article>';
+}
+
 function renderClinic() {
   return '<div class="unit-head" style="--c:#c2557d">' +
-    '<span class="unit-emoji">🩺</span><div><h1>文学小诊所</h1>' +
+    '<span class="unit-emoji">🩺</span><div><h2>文学小诊所</h2>' +
     '<p>考前把这张「错处清单」过一遍</p></div></div>' +
-    '<div class="wgrid">' + LIT.mistakes.map(m =>
-      '<article class="mistake-card" style="--c:#c2557d">' +
-      '<span class="unit-tag" style="background:#c2557d">' + esc(m.unit) + '</span>' +
-      '<button class="mist-row wrong-row-text" data-act="say" data-t="' + esc(m.wrong) + '"><span class="mist-mark">❌</span>' + esc(m.wrong) + '</button>' +
-      '<button class="mist-row right-row-text" data-act="say" data-t="' + esc(m.right) + '"><span class="mist-mark">✅</span>' + esc(m.right) + '</button>' +
-      '</article>').join('') + '</div>';
+    '<div class="wgrid">' + LIT.mistakes.map(mistakeCard).join('') + '</div>';
 }
 
 /* ---------- 搜索 ---------- */
@@ -291,12 +310,7 @@ function searchResults(q) {
         '<button class="frow" data-act="say" data-t="' + esc(it[0] + '，' + it[1]) + '"><b>' + esc(it[0]) + '</b><span>' + esc(it[1]) + '</span></button>').join('') + '</div></article>').join(''));
   }
   if (mistakeHits.length) {
-    out.push('<div class="search-head">🩺 匹配的易错点</div><div class="wgrid">' + mistakeHits.map(m =>
-      '<article class="mistake-card" style="--c:#c2557d">' +
-      '<span class="unit-tag" style="background:#c2557d">' + esc(m.unit) + '</span>' +
-      '<button class="mist-row wrong-row-text" data-act="say" data-t="' + esc(m.wrong) + '"><span class="mist-mark">❌</span>' + esc(m.wrong) + '</button>' +
-      '<button class="mist-row right-row-text" data-act="say" data-t="' + esc(m.right) + '"><span class="mist-mark">✅</span>' + esc(m.right) + '</button>' +
-      '</article>').join('') + '</div>');
+    out.push('<div class="search-head">🩺 匹配的易错点</div><div class="wgrid">' + mistakeHits.map(mistakeCard).join('') + '</div>');
   }
   if (!out.length) out.push('<div class="empty">📚 没有找到「' + esc(q) + '」，换个词试试～</div>');
   return out.join('');
@@ -306,7 +320,7 @@ function searchResults(q) {
 function renderMain() {
   const box = document.getElementById('cards');
   if (query) {
-    box.innerHTML = searchResults(query);
+    box.innerHTML = '<h2 class="lit-search-heading">“' + esc(query) + '”的搜索结果</h2>' + searchResults(query);
     return;
   }
   if (curView === 'facts') { box.innerHTML = renderFacts(); return; }
@@ -319,22 +333,42 @@ function renderMain() {
 
 function render() {
   renderChips();
+  renderDirectory();
   renderMain();
   renderStats();
 }
 
 /* ---------- 交互 ---------- */
+function focusReading(target) {
+  const compactSidebar = document.querySelector('.lit-workspace[data-sl-mode="compact"][data-sl-open="true"] .sl-toggle:not(.sl-collapse)');
+  compactSidebar?.click();
+  target.setAttribute('tabindex', '-1');
+  target.scrollIntoView({ block: 'start', behavior: 'instant' });
+  target.focus({ preventScroll: true });
+}
+
+function openDirectory() {
+  const group = document.getElementById('lit-directory');
+  const closedSidebar = document.querySelector(
+    '.lit-workspace[data-sl-mode="compact"][data-sl-open="false"] .sl-toggle:not(.sl-collapse), ' +
+    '.lit-workspace[data-sl-mode="wide"][data-sl-collapsed="true"] .sl-collapse'
+  );
+  closedSidebar?.click();
+  group.open = true;
+  const summary = group.querySelector('summary');
+  window.requestAnimationFrame(() => {
+    summary.scrollIntoView({ block: 'nearest' });
+    summary.focus({ preventScroll: true });
+  });
+}
+
+function followReadingLink(hash) {
+  if (window.location.hash !== hash) window.history.pushState(null, '', hash);
+  openLinkedContent();
+}
+
 function selectView(id) {
-  if (!validView(id)) return;
-  curView = id;
-  lkState.last = id;
-  lkSave();
-  query = '';
-  const search = document.getElementById('search');
-  if (search) search.value = '';
-  render();
-  window.history.pushState(null, '', '#view-' + id);
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  if (validView(id)) followReadingLink('#view-' + id);
 }
 
 function selectBook(id) {
@@ -365,17 +399,38 @@ function toggleLearn(unitId, pointId) {
   if (lkState.learned[key]) delete lkState.learned[key];
   else lkState.learned[key] = true;
   lkSave();
-  render();
+  renderChips();
+  renderStats();
+  const card = document.getElementById('lesson-' + pointId);
+  const button = card?.querySelector('.learn-btn');
+  if (button) {
+    const learned = !!lkState.learned[key];
+    card.classList.toggle('learned', learned);
+    button.classList.toggle('on', learned);
+    button.setAttribute('aria-pressed', String(learned));
+    button.textContent = learned ? '✓' : '';
+  }
 }
 
 document.addEventListener('click', e => {
   const el = e.target.closest('[data-act]');
-  if (!el) return;
+  if (!el) {
+    const link = e.target.closest('#cards a[href^="#"]');
+    if (link && query && link.hash === window.location.hash &&
+        !e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && openLinkedContent()) e.preventDefault();
+    return;
+  }
   const act = el.dataset.act;
   try {
     if (act === 'say') { e.preventDefault(); speak(el.dataset.t); }
     else if (act === 'learn') { e.preventDefault(); toggleLearn(el.dataset.unit, el.dataset.id); }
     else if (act === 'unit') { e.preventDefault(); selectView(el.dataset.id); }
+    else if (act === 'lesson' && !e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey) {
+      e.preventDefault();
+      followReadingLink(el.hash);
+    }
+    else if (act === 'open-directory') openDirectory();
+    else if (act === 'show-results') focusReading(document.getElementById('cards'));
     else if (act === 'book') { e.preventDefault(); selectBook(el.dataset.id); }
     else if (act === 'character') { e.preventDefault(); selectCharacter(el.dataset.id); }
     else if (act === 'branches') {
@@ -396,6 +451,7 @@ document.addEventListener('input', e => {
   if (e.target && e.target.id === 'search') {
     query = e.target.value.trim();
     renderChips();
+    renderDirectory();
     renderMain();
   }
 });
@@ -431,24 +487,24 @@ function openLinkedContent() {
     if (relation[2]) targetId = 'character-' + book.id + '-' + selectedCharacter;
   }
   else if (validView(viewId)) curView = viewId;
+  else if (!hash) curView = initialView;
   else return false;
+  currentLesson = unit ? lessonId : '';
   lkState.last = curView;
   lkSave();
   query = '';
   document.getElementById('search').value = '';
   render();
+  document.getElementById(lunitById(curView) ? 'lit-library' : 'lit-reference').open = true;
   const card = targetId && document.getElementById(targetId);
-  if (card) {
-    card.scrollIntoView({ block: 'start' });
-    card.focus({ preventScroll: true });
-  } else {
-    window.scrollTo({ top: 0, behavior: 'instant' });
-    const heading = document.querySelector('#cards h1');
-    heading?.setAttribute('tabindex', '-1');
-    heading?.focus({ preventScroll: true });
-  }
+  focusReading(card || document.querySelector('#cards .unit-head h2') || document.getElementById('cards'));
   return true;
 }
 
 window.addEventListener('hashchange', openLinkedContent);
-if (!openLinkedContent()) render();
+document.addEventListener('DOMContentLoaded', () => {
+  if (!window.location.hash || !openLinkedContent()) {
+    render();
+    if (!lunitById(curView)) document.getElementById('lit-reference').open = true;
+  }
+});

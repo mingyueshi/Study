@@ -7,7 +7,7 @@
 {% with topic='study_topics/'|add:course_slug|add:'/'|add:course_slug %}
 <link rel="stylesheet" href="{% static 'mathbook/mathbook-base.css' %}">
 <link rel="stylesheet" href="{% static 'figures/figures.css' %}">
-<link rel="stylesheet" href="{% static topic|add:'.css' %}{% if course_slug == 'astro' %}?v=d86753a8f453{% elif course_slug == 'lit' %}?v=20261117{% elif course_slug == 'sci' %}?v=d64a7b5ae142{% endif %}">
+<link rel="stylesheet" href="{% static topic|add:'.css' %}{% if course_slug == 'astro' %}?v=d86753a8f453{% elif course_slug == 'lit' %}?v=79c551bc4a92{% elif course_slug == 'sci' %}?v=d64a7b5ae142{% endif %}">
 <link rel="stylesheet" href="{% static 'study_topics/course.css' %}">
 {% if course_slug == 'astro' or course_slug == 'sci' %}
 <link rel="stylesheet" href="{% static 'study_topics/map-skills/experiment.css' %}?v=1d0d085a4e06">
@@ -40,15 +40,18 @@
 <script src="{% static 'study_topics/astro/astro-lab.js' %}?v=20261117" defer></script>
 {% endif %}
 {% if course_slug == 'hanzi-evo' %}<script src="{% static 'study_topics/hanzi-evo/hanzi-evo-player.js' %}" defer></script>{% endif %}
-<script src="{% static topic|add:'-app.js' %}{% if course_slug == 'sci' %}?v=8e69fed01da4{% elif course_slug == 'lit' %}?v=20261117{% elif course_slug == 'astro' %}?v=3df1f89050ba{% elif course_slug == 'hanzi-evo' %}?v=20261114{% endif %}" defer></script>
+<script src="{% static topic|add:'-app.js' %}{% if course_slug == 'sci' %}?v=8e69fed01da4{% elif course_slug == 'lit' %}?v=179b579cb29d{% elif course_slug == 'astro' %}?v=3df1f89050ba{% elif course_slug == 'hanzi-evo' %}?v=20261114{% endif %}" defer></script>
 {% if course_slug == 'astro' or course_slug == 'sci' %}
 <script src="{% static 'study_topics/map-skills/experiment.js' %}?v=c2884b21d5bb" defer></script>
 {% endif %}
-<script src="{% static 'mathbook/layout.js' %}?v=2" defer></script>
+{% if course_slug != 'lit' %}<script src="{% static 'mathbook/layout.js' %}?v=2" defer></script>{% endif %}
 {% endwith %}
 {% endblock %}
 
 {% block study_content %}
+{% if course_slug == 'lit' %}
+{% include 'study_topics/_literature_reading.html' %}
+{% else %}
 <div class="study-course">
   <div class="study-page" data-subject="{{ course_slug }}">
     <div class="study-shell">
@@ -66,7 +69,7 @@
         <div class="toolbar" role="search" aria-label="{{ course_title }}学习工具">
           <div class="search-box">
             <span aria-hidden="true">🔎</span>
-            <input id="search" type="search" aria-label="{% if course_slug == 'lit' %}搜索知识点、人物、作家和作品{% else %}搜索全部知识点{% endif %}" placeholder="{% if course_slug == 'hanzi-evo' %}搜索字、拼音或故事里的词…{% elif course_slug == 'lit' %}搜索人物、作家、作品和知识点…{% else %}搜索知识点、例题和易错点…{% endif %}" autocomplete="off">
+            <input id="search" type="search" aria-label="搜索全部知识点" placeholder="{% if course_slug == 'hanzi-evo' %}搜索字、拼音或故事里的词…{% else %}搜索知识点、例题和易错点…{% endif %}" autocomplete="off">
           </div>
           <button type="button" class="play-btn" data-act="print">打印当前内容</button>
         </div>
@@ -76,4 +79,5 @@
     </div>
   </div>
 </div>
+{% endif %}
 {% endblock %}

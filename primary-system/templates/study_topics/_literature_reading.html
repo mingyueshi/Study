@@ -1,0 +1,51 @@
+<div class="study-course">
+  <div class="study-page" data-subject="lit">
+    <div class="lit-hero">
+      <h1>{{ course_title }}</h1>
+      <p>{{ course_intro }}</p>
+    </div>
+    <div class="lit-workspace" data-sidebar-layout=".lit-sidebar"
+         data-sidebar-label="阅读侧栏" data-sidebar-width="clamp(250px, 24vw, 320px)"
+         data-sidebar-collapse-key="primary_sidebar_collapsed_v1:.sidebar">
+      <aside class="lit-sidebar" aria-label="文学常识目录和导航">
+        <details class="lit-sidebar-group" id="lit-library" open>
+          <summary>文学苑</summary>
+          <nav id="chips" aria-label="文学苑切换"></nav>
+        </details>
+        <details class="lit-sidebar-group" id="lit-directory" hidden>
+          <summary>本苑知识点</summary>
+          <nav id="lit-points" class="lit-side-links" aria-label="本苑知识点目录"></nav>
+        </details>
+        <details class="lit-sidebar-group" id="lit-reference">
+          <summary>速查、小诊所与拓展</summary>
+          <nav id="lit-extras" class="lit-side-views" aria-label="速查与拓展"></nav>
+        </details>
+        <details class="lit-sidebar-group">
+          <summary>搜索文学常识</summary>
+          <div class="lit-search" role="search" aria-label="搜索文学常识">
+            <input id="search" type="search" aria-label="搜索知识点、人物、作家和作品" placeholder="知识点、人物、作家或作品" autocomplete="off" aria-controls="cards">
+            <button type="button" data-act="show-results" hidden>查看结果 <span aria-hidden="true">↓</span></button>
+          </div>
+        </details>
+        <details class="lit-sidebar-group">
+          <summary>相关专题</summary>
+          <nav class="lit-side-links" aria-label="相关专题">
+            <a href="{% url 'home' %}?area={{ study_area }}#modules-title">学习广场 · {{ study_label }} <span aria-hidden="true">↗</span></a>
+            {% for route, label in course_links %}
+            <a href="{% url route %}">{{ label }} <span aria-hidden="true">↗</span></a>
+            {% endfor %}
+          </nav>
+        </details>
+      </aside>
+      <div class="study-content lit-reading">
+        <div class="lit-reading-tools">
+          <p id="stats" role="status"></p>
+          <button type="button" data-act="open-directory" aria-controls="lit-directory" hidden>定位知识点</button>
+          <button type="button" data-act="print">打印当前内容</button>
+        </div>
+        <div id="cards" tabindex="-1"></div>
+        <noscript>请启用 JavaScript，查看知识卡和互动图示。</noscript>
+      </div>
+    </div>
+  </div>
+</div>
