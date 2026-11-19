@@ -4,15 +4,12 @@
    配色：宣纸暖底 + 印章红点缀
    ============================================================ */
 
-/* ---------- 专题横幅 ---------- */
-.textbook-banner {
-  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
-  margin: 0 0 16px; padding: 12px 16px;
-  background: linear-gradient(135deg, #fdf3e7, #faf1e0);
-  border: 1px solid #eeddc4; border-radius: 14px;
-  color: #9a3412; font-size: 14px; font-weight: 700;
+/* ---------- 专题页与目录 ---------- */
+[data-subject="hanzi-evo"] {
+  --study-reading-hero-bg: radial-gradient(ellipse at top right, #875d38, transparent 65%), linear-gradient(125deg, #40241d, #593321);
 }
-.textbook-banner strong { font-size: 16px; }
+.hanzi-sidebar #hanzi-points { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.hanzi-reading #cards, .hanzi-reading #cards :is(.hanzi-card, h2) { scroll-margin-top: 20px; }
 
 .goal-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
 .goal-tags span {
@@ -23,8 +20,7 @@
 }
 
 /* ---------- 猜字模式开关 ---------- */
-.guess-btn { border: 2px dashed #c2571f; color: #c2571f; }
-.guess-btn.on { background: #c2571f; border-style: solid; color: #fff; }
+.hanzi-sidebar .guess-btn[aria-pressed="true"] { border-color: var(--green); background: var(--soft); }
 
 /* ---------- 字卡 ---------- */
 .hanzi-cards { display: block; }
@@ -36,19 +32,12 @@
   box-shadow: 0 2px 10px rgba(90, 60, 20, 0.06);
   margin-bottom: 18px;
 }
-.hanzi-card.learned { opacity: 0.72; }
-.hanzi-card.learned::after {
-  content: '已认全';
-  position: absolute; top: 12px; right: -6px;
-  background: #4c8a1f; color: #fff; font-size: 11.5px; font-weight: 700;
-  padding: 3px 10px; border-radius: 999px;
-}
-.hanzi-card.flash { outline: 3px solid #c2571f; outline-offset: 2px; }
+.hanzi-card.learned { border-inline-start: 4px solid var(--green); }
 
 .hhead { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 12px; }
 .hchar-block {
   position: relative; flex: 0 0 auto;
-  width: 92px; height: 92px; border-radius: 16px;
+  width: 100px; min-height: 100px; padding: 6px; border-radius: 16px;
   background: color-mix(in srgb, var(--c) 9%, white);
   border: 2px solid color-mix(in srgb, var(--c) 34%, white);
   display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -57,8 +46,11 @@
   font-family: 'Kaiti SC', 'STKaiti', 'KaiTi', '楷体', serif;
   font-size: 54px; line-height: 1; font-weight: 700; color: var(--ink, #33302b);
 }
-.hpinyin { margin-top: 4px; font-size: 15px; font-weight: 700; color: var(--c); }
-.reveal-btn { display: none; margin-top: 5px; }
+.hpinyin { margin-top: 4px; font-size: 15px; font-weight: 700; color: var(--muted); }
+.reveal-btn {
+  display: none; min-height: 40px; padding-inline: 6px;
+  border: 1px solid var(--line); border-radius: 8px; background: var(--card);
+}
 
 .hmeta { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 8px; }
 .hbadges { display: flex; flex-wrap: wrap; gap: 6px; }
@@ -70,10 +62,16 @@
 }
 .hbadge.type-badge { background: var(--c); border-color: var(--c); color: #fff; }
 .hbadge.poly-badge { background: #fff7ed; border-color: #c2571f; color: #b4530f; }
-.htools { display: flex; align-items: center; gap: 8px; }
-.htools .learn-btn { margin-left: auto; }
+.htools { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; }
+.hanzi-card .learn-btn {
+  min-height: 44px; margin-inline-start: auto; padding: 4px 8px;
+  border: 1px solid var(--line); border-radius: 9px; background: var(--card);
+  color: var(--green-dark); font-size: 14px; font-weight: 700;
+}
+.hanzi-card .learn-btn:hover, .hanzi-card .learn-btn[aria-pressed="true"] { background: var(--soft); border-color: var(--green); }
 
 /* ---------- 四段演变条 ---------- */
+.evo-player { container-type: inline-size; }
 .evo-strip {
   display: flex; align-items: stretch; gap: 6px;
   overflow-x: auto; padding: 4px 2px 6px;
@@ -94,17 +92,17 @@
 .stage-box {
   width: 84px; height: 84px; border-radius: 12px;
   display: flex; align-items: center; justify-content: center;
-  background: #fff; border: 1px solid color-mix(in srgb, var(--c) 24%, white);
+  background: oklch(.98 .01 85); border: 1px solid color-mix(in srgb, var(--c) 24%, white);
 }
 .stage-box img { width: 74px; height: 74px; object-fit: contain; }
 .stage-kai {
   font-family: 'Kaiti SC', 'STKaiti', 'KaiTi', '楷体', serif;
-  font-size: 46px; font-weight: 700; color: #9a3412; line-height: 1;
+  font-size: 46px; font-weight: 700; color: oklch(.42 .12 39); line-height: 1;
 }
-.stage-none { font-size: 12.5px; color: #a0988c; font-weight: 700; padding: 0 6px; }
+.stage-none { font-size: 12.5px; color: var(--muted); font-weight: 700; padding: 0 6px; }
 .stage-name { font-size: 13.5px; font-weight: 800; color: var(--ink, #33302b); }
-.stage-era { font-size: 11.5px; color: #8f8779; }
-.stage-note { font-size: 12px; color: #6f6a60; line-height: 1.45; margin-top: 2px; }
+.stage-era { font-size: 12px; color: var(--muted); }
+.stage-note { font-size: 13px; color: var(--muted); line-height: 1.45; margin-top: 2px; }
 .stage-missing .stage-box { background: #f7f4ee; border-style: dashed; }
 .stage-cell { font: inherit; color: inherit; cursor: pointer; transition: border-color .2s ease, background .2s ease; }
 .stage-cell:disabled { opacity: 1; cursor: default; }
@@ -113,12 +111,19 @@
 .evo-controls { padding: 12px; margin-top: 8px; border-radius: 12px; background: color-mix(in srgb, var(--c) 6%, var(--card)); }
 .evo-controls[hidden] { display: none; }
 .evo-buttons { display: flex; flex-wrap: wrap; gap: 7px; }
-.evo-buttons button { min-height: 40px; padding: 6px 11px; border-radius: 9px; border: 1px solid color-mix(in srgb, var(--c) 40%, white); background: var(--card); color: var(--c); font: inherit; font-size: 15px; font-weight: 750; cursor: pointer; }
-.evo-buttons button[aria-pressed="true"] { color: white; background: var(--c); }
+.evo-buttons button { min-height: 44px; padding: 6px 11px; border-radius: 9px; border: 1px solid color-mix(in srgb, var(--c) 40%, white); background: var(--card); color: var(--ink); font: inherit; font-size: 15px; font-weight: 750; cursor: pointer; }
+.evo-buttons button[aria-pressed="true"] { border-color: var(--c); background: var(--soft); }
 .evo-buttons button:disabled { opacity: .5; cursor: default; }
 .evo-controls p { margin: 10px 0 4px; color: var(--ink); font-size: 16px; line-height: 1.7; }
 .evo-controls small { display: block; color: var(--muted); font-size: 14px; }
 @media print { .evo-controls { display: none; } }
+
+@container (max-width: 500px) {
+  .evo-strip { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .stage-arrow { display: none; }
+  .stage-cell { min-width: 0; overflow-wrap: anywhere; }
+  .stage-box, .stage-box img { max-width: 100%; }
+}
 
 /* ---------- 故事与组词 ---------- */
 .seclabel {
@@ -126,7 +131,7 @@
   color: var(--c); letter-spacing: 1px; margin-bottom: 4px;
 }
 .hstory { margin-top: 10px; }
-.hstory p { margin: 2px 0 0; font-size: 16.5px; line-height: 1.75; color: #3c3a35; }
+.hstory p { max-width: 56em; margin: 2px 0 0; font-size: 17px; line-height: 1.75; color: var(--ink); }
 .hwords { margin-top: 10px; display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
 .word-chip {
   background: color-mix(in srgb, var(--c) 10%, white);
@@ -141,12 +146,13 @@
 .hlink {
   background: #fff; border: 1.5px solid var(--c); color: var(--c);
   border-radius: 999px; padding: 4px 14px;
-  font-size: 13.5px; font-weight: 700; text-decoration: none;
+  font-size: 14.5px; font-weight: 700; text-decoration: underline; text-underline-offset: .18em;
 }
 .hlink:hover { background: var(--c); color: #fff; }
 
 /* ---------- 猜字模式 ---------- */
 .guessing .hanzi-card:not([data-revealed]) .hchar {
+  position: relative; width: 100%; text-align: center;
   color: transparent;
   background: repeating-linear-gradient(45deg, #efe6d8 0 6px, #f7f1e6 6px 12px);
   border-radius: 10px; text-shadow: none;
@@ -155,10 +161,11 @@
   content: '猜猜看？';
   position: absolute; inset: 0;
   display: flex; align-items: center; justify-content: center;
+  pointer-events: none;
   color: #c2571f; font-size: 17px; font-weight: 800;
   font-family: inherit;
 }
-.guessing .hanzi-card:not([data-revealed]) .hpinyin { visibility: hidden; }
+.guessing .hanzi-card:not([data-revealed]) .hpinyin { display: none; }
 .guessing .hanzi-card:not([data-revealed]) .reveal-btn { display: inline-block; }
 .guessing .hanzi-card:not([data-revealed]) .stage-kai {
   position: relative;
@@ -208,6 +215,7 @@
 .bk-examples { display: flex; flex-wrap: wrap; gap: 6px; }
 .ex-char {
   width: 40px; height: 40px; border-radius: 10px;
+  display: grid; place-items: center;
   font-family: 'Kaiti SC', 'STKaiti', 'KaiTi', '楷体', serif;
   font-size: 24px; font-weight: 700; color: var(--ink, #33302b);
   background: color-mix(in srgb, var(--c) 10%, white);
@@ -217,8 +225,8 @@
 .ex-char:hover { background: color-mix(in srgb, var(--c) 22%, white); }
 
 /* ---------- 搜索与空态 ---------- */
-.search-head {
-  margin: 4px 2px 14px; font-size: 14px; font-weight: 800; color: #9a3412;
+.hanzi-reading .search-head {
+  margin: 4px 2px 14px; font-size: 22px; font-weight: 800; color: var(--ink);
 }
 .empty {
   background: var(--card); border-radius: 16px; padding: 26px 18px;
@@ -227,7 +235,7 @@
 
 /* ---------- 打印 ---------- */
 @media print {
-  .study-topic-nav, .sidebar, .toolbar, .hlinks, .reveal-btn, .say, .learn-btn { display: none !important; }
+  .hlinks, .reveal-btn, .say, .learn-btn { display: none !important; }
   .hanzi-card, .stage-timeline, .hall-card, .book-card { break-inside: avoid; box-shadow: none; }
   .evo-strip { overflow: visible; }
 }

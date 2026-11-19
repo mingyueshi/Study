@@ -22,9 +22,9 @@ function heSave() { try { localStorage.setItem(HE_STORE_KEY, JSON.stringify(heSt
 
 /* ---------- 索引与视图状态 ---------- */
 const D = window.HANZI_EVO;
-const HUNIT_BY_ID = {};
+const HUNIT_BY_ID = Object.create(null);
 D.units.forEach(u => { HUNIT_BY_ID[u.id] = u; });
-const POINT_BY_CHAR = {};
+const POINT_BY_CHAR = Object.create(null);
 D.units.forEach(u => u.points.forEach(p => { POINT_BY_CHAR[p.char] = { u, p }; }));
 const HE_TOTAL = D.units.reduce((n, u) => n + u.points.length, 0);
 const STAGE_META = {
@@ -38,8 +38,13 @@ const HEXTRA_VIEWS = [
   { id: 'sixbooks', name: '六书速查', emoji: '🧩', color: '#5b21b6', count: D.sixbooks.length },
 ];
 
-let curView = HUNIT_BY_ID[heState.last] || HEXTRA_VIEWS.some(v => v.id === heState.last) ? heState.last : 'hall';
+function validView(id) { return !!HUNIT_BY_ID[id] || HEXTRA_VIEWS.some(v => v.id === id); }
+
+const initialView = validView(heState.last) ? heState.last : 'hall';
+let curView = initialView;
+let currentChar = '';
 let query = '';
+let renderedUrl = '';
 
 /* ---------- 朗读 ---------- */
 function speak(text) {
@@ -73,20 +78,33 @@ function frameLinks() {
 }
 
 /* ---------- 侧栏目录 ---------- */
+function viewChip(view, label, count, done = false) {
+  const active = view.id === curView && !query;
+  return '<button type="button" class="chip' + (active ? ' on' : '') + '" style="--c:' + view.color + '" data-act="unit" data-id="' + view.id + '"' +
+    (active ? ' aria-current="true"' : '') + '><span class="chip-emoji" aria-hidden="true">' + view.emoji + '</span>' +
+    '<span class="chip-name">' + esc(label) + '</span><span class="chip-num' + (done ? ' full' : '') + '">' + count + '</span></button>';
+}
+
 function renderChips() {
-  const unitChips = D.units.map(u => {
+  document.getElementById('chips').innerHTML = D.units.map(u => {
     const learned = u.points.filter(p => heState.learned[p.id]).length;
-    const done = learned === u.points.length;
-    const shortName = u.no.replace('第', '').replace('族', '') + ' ' + u.name;
-    return '<button class="chip' + (u.id === curView && !query ? ' on' : '') + '" style="--c:' + u.color + '" data-act="unit" data-id="' + u.id + '">' +
-      '<span class="chip-emoji">' + u.emoji + '</span><span class="chip-name">' + esc(shortName) + '</span>' +
-      '<span class="chip-num' + (done ? ' full' : '') + '">' + learned + '/' + u.points.length + '</span></button>';
-  });
-  const extraChips = HEXTRA_VIEWS.map(v =>
-    '<button class="chip' + (v.id === curView && !query ? ' on' : '') + '" style="--c:' + v.color + '" data-act="unit" data-id="' + v.id + '">' +
-    '<span class="chip-emoji">' + v.emoji + '</span><span class="chip-name">' + esc(v.name) + '</span>' +
-    '<span class="chip-num">' + v.count + '</span></button>');
-  document.getElementById('chips').innerHTML = extraChips.join('') + unitChips.join('');
+    return viewChip(u, u.no + ' · ' + u.name, learned + '/' + u.points.length, learned === u.points.length);
+  }).join('');
+  document.getElementById('hanzi-extras').innerHTML = HEXTRA_VIEWS.map(v => viewChip(v, v.name, v.count)).join('');
+}
+
+function charHref(ch) { return '#char-' + encodeURIComponent(ch); }
+
+function renderDirectory() {
+  const unit = !query && HUNIT_BY_ID[curView];
+  document.getElementById('hanzi-directory').hidden = !unit;
+  document.querySelector('[data-act="open-directory"]').hidden = !unit;
+  document.querySelector('#hanzi-search-form button').hidden = !query;
+  document.getElementById('hanzi-points').innerHTML = unit ? unit.points.map((p, i) => {
+    const label = heState.guess ? '第 ' + (i + 1) + ' 字' : p.char + ' · ' + p.pinyin;
+    return '<a href="' + charHref(p.char) + '" data-act="char" data-char="' + esc(p.char) + '"' +
+      (p.char === currentChar ? ' aria-current="location"' : '') + '>' + esc(label) + ' <span aria-hidden="true">↓</span></a>';
+  }).join('') : '';
 }
 
 function renderStats() {
@@ -145,10 +163,10 @@ function wordChips(p, links) {
   return words.join('');
 }
 
-function charCard(p, color, links) {
+function charCard(p, color, links, family) {
   const learned = !!heState.learned[p.id];
   const parts = [];
-  parts.push('<article class="hanzi-card' + (learned ? ' learned' : '') + '" id="char-' + esc(p.char) + '" style="--c:' + color + '">');
+  parts.push('<article class="hanzi-card' + (learned ? ' learned' : '') + '" id="char-' + esc(p.char) + '" tabindex="-1" style="--c:' + color + '">');
   parts.push('<div class="hhead">' +
     '<div class="hchar-block"><span class="hchar">' + esc(p.char) + '</span><span class="hpinyin">' + esc(p.pinyin) + '</span>' +
     '<button class="reveal-btn" data-act="reveal" data-id="' + esc(p.char) + '">👀 揭晓</button></div>' +
@@ -158,7 +176,7 @@ function charCard(p, color, links) {
     (p.poly ? '<a class="hbadge poly-badge" href="' + esc(links.polyphones) + '?char=' + encodeURIComponent(p.char) + '">多音字 ↗</a>' : '') +
     '</div>' +
     '<div class="htools">' + sayBtn('「' + p.char + '」，' + p.pinyin + '。' + p.story) +
-    '<button class="learn-btn' + (learned ? ' on' : '') + '" data-act="learn" data-id="' + esc(p.id) + '" title="标记已认全" aria-pressed="' + learned + '" aria-label="已认全 ' + esc(p.char) + '">' + (learned ? '✓' : '') + '</button></div>' +
+    '<button type="button" class="learn-btn" data-act="learn" data-id="' + esc(p.id) + '" aria-pressed="' + learned + '" aria-label="标记已认全 ' + esc(p.char) + '">' + (learned ? '✓ 已认全' : '标记认全') + '</button></div>' +
     '</div></div>');
   parts.push(evoStrip(p, color));
   parts.push('<div class="hstory"><span class="seclabel">📖 字理小故事</span>' +
@@ -167,6 +185,7 @@ function charCard(p, color, links) {
   parts.push('<div class="hlinks">' +
     '<a class="hlink" href="' + esc(links.dictionary) + '?q=' + encodeURIComponent(p.char) + '&scope=character" target="_blank" rel="noopener">📖 查字查词 ↗</a>' +
     '<a class="hlink" href="' + esc(links.strokes) + encodeURIComponent(p.char) + '" target="_blank" rel="noopener">✍️ 看笔顺 ↗</a>' +
+    (family ? '<a class="hlink" href="' + charHref(p.char) + '" data-act="char" data-char="' + esc(p.char) + '">在「' + esc(family) + '」字族中查看 ↓</a>' : '') +
     '</div>');
   parts.push(window.StudyTopicConnections.references(p.id, '接着学'));
   parts.push('</article>');
@@ -177,7 +196,7 @@ function charCard(p, color, links) {
 function renderUnit(u, links) {
   return '<div class="unit-head" style="--c:' + u.color + '">' +
     '<span class="unit-emoji">' + u.emoji + '</span>' +
-    '<div><h1>' + esc(u.no) + ' · ' + esc(u.name) + '</h1>' +
+    '<div><h2>' + esc(u.no) + ' · ' + esc(u.name) + '</h2>' +
     '<p>' + esc(u.intro) + '</p>' +
     '<div class="goal-tags">' + u.goals.map(g => '<span>🎯 ' + esc(g) + '</span>').join('') + '</div></div></div>' +
     u.points.map(p => charCard(p, u.color, links)).join('');
@@ -192,7 +211,7 @@ function renderHall() {
     '<p>' + esc(s.text) + '</p></article>');
   return '<div class="unit-head" style="--c:#9a3412">' +
     '<span class="unit-emoji">🏛️</span>' +
-    '<div><h1>馆前必读</h1><p>' + esc(D.hall.lead) + '</p></div></div>' +
+    '<div><h2>馆前必读</h2><p>' + esc(D.hall.lead) + '</p></div></div>' +
     '<article class="hall-card" style="--c:#9a3412">' +
     '<h3>🏛️ ' + esc(D.hall.discovery.title) + '</h3><p>' + esc(D.hall.discovery.text) + '</p></article>' +
     stageCards.join('') +
@@ -205,7 +224,7 @@ function renderSixbooks() {
     const examples = (b.examples || []).map(ch => {
       const hit = POINT_BY_CHAR[ch];
       if (!hit) return '';
-      return '<button class="ex-char" data-act="char" data-char="' + esc(ch) + '" style="--c:' + hit.u.color + '" title="到「' + esc(hit.u.name) + '」看这个字">' + esc(ch) + '</button>';
+      return '<a class="ex-char" href="' + charHref(ch) + '" data-act="char" data-char="' + esc(ch) + '" style="--c:' + hit.u.color + '" title="到「' + esc(hit.u.name) + '」看这个字">' + esc(ch) + '</a>';
     }).join('');
     return '<article class="book-card" style="--c:#5b21b6">' +
       '<div class="bk-head"><span class="bk-emoji">' + b.emoji + '</span><h3>' + esc(b.name) + '</h3>' + sayBtn(b.name + '。' + b.text) + '</div>' +
@@ -214,7 +233,7 @@ function renderSixbooks() {
       '</article>';
   });
   return '<div class="unit-head" style="--c:#5b21b6">' +
-    '<span class="unit-emoji">🧩</span><div><h1>六书速查</h1>' +
+    '<span class="unit-emoji">🧩</span><div><h2>六书速查</h2>' +
     '<p>古人造字的六种办法，馆里的每个字都能归进其中一两类</p></div></div>' +
     '<div class="wgrid">' + cards.join('') + '</div>';
 }
@@ -228,19 +247,18 @@ function searchResults(q) {
       (p.forms || []).map(f => f.note || '').join('')].join(' ').toLowerCase();
     if (hay.includes(ql)) hits.push({ u, p });
   }));
-  if (!hits.length) return '<div class="empty">🏛️ 没有找到「' + esc(q) + '」，试试字、拼音或故事里的词～</div>';
+  if (!hits.length) return '<div class="empty">没有找到「' + esc(q) + '」。试试汉字、拼音或故事里的词。</div>';
   const links = frameLinks();
-  return '<div class="search-head">🔎 找到 ' + hits.length + ' 个字</div>' +
-    hits.map(h => charCard(h.p, h.u.color, links)).join('');
+  return '<h2 class="search-head">找到 ' + hits.length + ' 个字</h2>' +
+    hits.map(h => charCard(h.p, h.u.color, links, h.u.name)).join('');
 }
 
 /* ---------- 渲染 ---------- */
-function guessClass() { return heState.guess ? ' guessing' : ''; }
-
 function renderMain() {
   window.HanziEvolutionPlayer?.dispose();
   const box = document.getElementById('cards');
-  box.className = 'hanzi-cards' + guessClass();
+  box.classList.add('hanzi-cards');
+  box.classList.toggle('guessing', heState.guess);
   if (query) box.innerHTML = searchResults(query);
   else if (curView === 'hall') box.innerHTML = renderHall();
   else if (curView === 'sixbooks') box.innerHTML = renderSixbooks();
@@ -253,69 +271,97 @@ function renderMain() {
 
 function render() {
   renderChips();
+  renderDirectory();
   renderMain();
   renderStats();
+  renderGuessToggle();
+}
+
+function renderGuessToggle() {
   const btn = document.getElementById('guess-toggle');
-  if (btn) {
-    btn.classList.toggle('on', heState.guess);
-    btn.setAttribute('aria-pressed', String(heState.guess));
-    btn.textContent = heState.guess ? '🙈 猜字模式：开' : '🙈 猜字模式：关';
-  }
+  btn.setAttribute('aria-pressed', String(heState.guess));
+  btn.textContent = heState.guess ? '猜字模式：开' : '猜字模式：关';
 }
 
 /* ---------- 交互 ---------- */
-function selectView(id) {
+function focusReading(target) {
+  document.querySelector('.hanzi-workspace[data-sl-mode="compact"][data-sl-open="true"] .sl-toggle:not(.sl-collapse)')?.click();
+  target.setAttribute('tabindex', '-1');
+  target.scrollIntoView({ block: 'start', behavior: 'instant' });
+  target.focus({ preventScroll: true });
+}
+
+function openDirectory() {
+  document.querySelector(
+    '.hanzi-workspace[data-sl-mode="compact"][data-sl-open="false"] .sl-toggle:not(.sl-collapse), ' +
+    '.hanzi-workspace[data-sl-mode="wide"][data-sl-collapsed="true"] .sl-collapse'
+  )?.click();
+  const directory = document.getElementById('hanzi-directory');
+  directory.open = true;
+  const summary = directory.querySelector('summary');
+  window.requestAnimationFrame(() => {
+    summary.scrollIntoView({ block: 'nearest' });
+    summary.focus({ preventScroll: true });
+  });
+}
+
+function showView(id, ch = '') {
   curView = id;
-  if (HUNIT_BY_ID[id]) heState.last = id;
-  heSave();
+  currentChar = ch;
   query = '';
-  const search = document.getElementById('search');
-  if (search) search.value = '';
+  document.getElementById('search').value = '';
+  document.getElementById(HUNIT_BY_ID[id] ? 'hanzi-families' : 'hanzi-reference').open = true;
   render();
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  const target = ch ? document.getElementById('char-' + ch) : document.querySelector('#cards .unit-head h2');
+  focusReading(target);
+}
+
+function navigate(id, ch = '') {
+  const url = new URL(window.location.href);
+  if (url.searchParams.has('char')) url.searchParams.delete('char');
+  url.hash = ch ? charHref(ch) : '#view-' + id;
+  if (url.href !== window.location.href) window.history.pushState(null, '', url);
+  renderedUrl = window.location.href;
+  if (HUNIT_BY_ID[id]) {
+    heState.last = id;
+    heSave();
+  }
+  showView(id, ch);
+}
+
+function selectView(id) {
+  if (validView(id)) navigate(id);
 }
 
 function jumpToChar(ch) {
   const hit = POINT_BY_CHAR[ch];
-  if (!hit) return false;
-  heSave();
-  query = '';
-  const search = document.getElementById('search');
-  if (search) search.value = '';
-  curView = hit.u.id;
-  render();
-  const card = document.getElementById('char-' + ch);
-  if (card) {
-    card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    card.classList.add('flash');
-    setTimeout(() => card.classList.remove('flash'), 2200);
-  }
-  return true;
+  if (hit) navigate(hit.u.id, ch);
+  return !!hit;
 }
 
 function toggleLearn(pointId) {
-  if (heState.learned[pointId]) delete heState.learned[pointId];
-  else heState.learned[pointId] = true;
+  const learned = !heState.learned[pointId];
+  if (learned) heState.learned[pointId] = true;
+  else delete heState.learned[pointId];
   heSave();
-  render();
+  renderChips();
+  renderStats();
+  const button = document.querySelector('#cards [data-act="learn"][data-id="' + CSS.escape(pointId) + '"]');
+  if (button) {
+    button.closest('.hanzi-card').classList.toggle('learned', learned);
+    button.setAttribute('aria-pressed', String(learned));
+    button.textContent = learned ? '✓ 已认全' : '标记认全';
+  }
 }
 
 function toggleGuess() {
   heState.guess = !heState.guess;
   heSave();
-  render();
-}
-
-function installGuessToggle() {
-  const toolbar = document.querySelector('.toolbar');
-  if (!toolbar || document.getElementById('guess-toggle')) return;
-  const btn = document.createElement('button');
-  btn.type = 'button';
-  btn.id = 'guess-toggle';
-  btn.className = 'play-btn guess-btn';
-  btn.dataset.act = 'guess';
-  btn.setAttribute('aria-pressed', String(!!heState.guess));
-  toolbar.insertBefore(btn, toolbar.firstChild);
+  const cards = document.getElementById('cards');
+  cards.classList.toggle('guessing', heState.guess);
+  cards.querySelectorAll('[data-revealed]').forEach(card => card.removeAttribute('data-revealed'));
+  renderGuessToggle();
+  renderDirectory();
 }
 
 document.addEventListener('click', e => {
@@ -332,7 +378,11 @@ document.addEventListener('click', e => {
       if (card) card.dataset.revealed = '1';
     }
     else if (act === 'guess') { e.preventDefault(); toggleGuess(); }
-    else if (act === 'char') { e.preventDefault(); jumpToChar(el.dataset.char); }
+    else if (act === 'char' && !e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey) {
+      e.preventDefault();
+      jumpToChar(el.dataset.char);
+    }
+    else if (act === 'open-directory') openDirectory();
     else if (act === 'print') { e.preventDefault(); window.print(); }
   } catch (err) {
     console.error('[汉字演变馆] 操作出错:', err);
@@ -343,8 +393,14 @@ document.addEventListener('input', e => {
   if (e.target && e.target.id === 'search') {
     query = e.target.value.trim();
     renderChips();
+    renderDirectory();
     renderMain();
   }
+});
+
+document.getElementById('hanzi-search-form').addEventListener('submit', event => {
+  event.preventDefault();
+  if (query) focusReading(document.getElementById('cards'));
 });
 
 /* 供自动化测试使用 */
@@ -357,12 +413,26 @@ window.HanziEvolution = {
   render, selectView, toggleLearn, toggleGuess, jumpToChar, searchResults,
 };
 
-installGuessToggle();
-
-/* 深链接：/hanzi-evolution/?char=日 直达该字并高亮 */
-const deepChar = new URLSearchParams(location.search).get('char');
-if (deepChar && POINT_BY_CHAR[deepChar]) {
-  jumpToChar(deepChar);
-} else {
-  render();
+/* 原有 ?char=日 与新目录书签均直接定位字卡。 */
+function syncLocation(initial = false) {
+  const url = new URL(window.location.href);
+  if (url.href === renderedUrl) return;
+  renderedUrl = url.href;
+  let hash = url.hash;
+  try { hash = decodeURIComponent(hash); } catch { /* 无效片段保留浏览器行为 */ }
+  const view = hash.startsWith('#view-') ? hash.slice(6) : '';
+  const char = hash.startsWith('#char-') ? hash.slice(6) : '';
+  const oldChar = url.searchParams.get('char');
+  const linkedChar = (initial || !hash) && POINT_BY_CHAR[oldChar] ? oldChar : '';
+  const targetChar = POINT_BY_CHAR[char] ? char : linkedChar;
+  if (validView(view)) showView(view);
+  else if (targetChar) showView(POINT_BY_CHAR[targetChar].u.id, targetChar);
+  else if (initial) {
+    document.getElementById(HUNIT_BY_ID[curView] ? 'hanzi-families' : 'hanzi-reference').open = true;
+    render();
+  } else if (!hash) showView(initialView);
 }
+
+document.addEventListener('DOMContentLoaded', () => syncLocation(true));
+window.addEventListener('popstate', () => syncLocation());
+window.addEventListener('hashchange', () => syncLocation());

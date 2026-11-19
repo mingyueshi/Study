@@ -19,7 +19,7 @@
      data-polyphones="{% url 'hanzi-polyphones' %}"
      {% if course_slug == 'sci' %}data-body-station="{% url 'science-body' %}"{% endif %}
      {% endif %}>
-  {% if course_slug != 'lit' %}
+  {% if course_slug != 'lit' and course_slug != 'hanzi-evo' %}
   <nav class="study-topic-nav" aria-label="{{ study_label }}专题导航">
     <a href="{% url 'home' %}?area={{ study_area }}#modules-title">← 学习广场 · {{ study_label }}</a>
     {% with current=request.resolver_match.url_name %}

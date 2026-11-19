@@ -1,0 +1,9 @@
+<details class="study-reading-group">
+  <summary>相关专题</summary>
+  <nav class="study-reading-links" aria-label="相关专题">
+    <a href="{% url 'home' %}?area={{ study_area }}#modules-title">学习广场 · {{ study_label }} <span aria-hidden="true">↗</span></a>
+    {% for route, label in course_links %}
+    <a href="{% url route %}">{{ label }} <span aria-hidden="true">↗</span></a>
+    {% endfor %}
+  </nav>
+</details>

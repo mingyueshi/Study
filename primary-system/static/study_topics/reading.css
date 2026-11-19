@@ -1,0 +1,116 @@
+/* ---------- 专题页与目录 ---------- */
+.study-page .study-reading-hero {
+  margin: 0 0 clamp(16px, 2vw, 26px);
+  padding: clamp(22px, 4vw, 54px);
+  border-radius: 20px;
+  background: var(--study-reading-hero-bg, radial-gradient(ellipse at top right, #805a42, transparent 65%), linear-gradient(125deg, #39272d, #52382f));
+  color: #fff8e9;
+}
+.study-reading-hero h1 { font-size: clamp(28px, 4vw, 52px); line-height: 1.2; }
+.study-page .study-reading-hero p {
+  max-width: 34em;
+  margin-top: 10px;
+  color: #f6e5cc;
+  font-size: calc(17px * var(--reading-scale, 1));
+}
+.study-reading-layout { display: grid; gap: clamp(12px, 2vw, 28px); }
+.study-reading-sidebar {
+  --study-reading-link: var(--green-dark, #215b4b);
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--card);
+}
+.study-reading-group {
+  padding: 0 6px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+.study-reading-sidebar .study-reading-group + .study-reading-group { margin-block-start: 8px; }
+.study-reading-group > summary {
+  min-height: 44px;
+  padding: 8px;
+  color: var(--ink);
+  cursor: pointer;
+  font-size: calc(16px * var(--reading-scale, 1));
+  font-weight: 750;
+}
+.study-reading-group[open] { padding-bottom: 6px; }
+.study-reading-sidebar #chips, .study-reading-sidebar .study-reading-choices, .study-reading-links {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2px;
+  padding: 0;
+}
+.study-reading-sidebar .chip {
+  gap: 6px;
+  min-height: 44px;
+  padding: 7px 6px;
+  color: var(--ink);
+  font-size: calc(15px * var(--reading-scale, 1));
+  line-height: 1.4;
+}
+.study-reading-sidebar .chip:hover, .study-reading-sidebar .chip.on, .study-reading-links a:hover { background: var(--soft); }
+.study-reading-sidebar .chip.on, .study-reading-links a[aria-current] {
+  border-color: var(--green);
+  box-shadow: inset 3px 0 var(--green);
+}
+.study-reading-sidebar .study-reading-links a[aria-current] { background: var(--soft); }
+.study-reading-sidebar .chip-num { color: var(--muted); background: var(--soft); font-size: .8em; }
+.study-reading-sidebar .chip-num.full { color: var(--study-reading-link); }
+.study-reading-sidebar .study-reading-links a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  min-height: 44px;
+  padding: 7px 10px;
+  border-radius: 8px;
+  color: var(--study-reading-link);
+  font-size: calc(15px * var(--reading-scale, 1));
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+  text-decoration: underline;
+  text-underline-offset: .18em;
+}
+.study-reading-search input, .study-reading-search button, .study-reading-tools button, .study-reading-control {
+  min-height: 44px;
+  padding: 7px 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--card);
+  font-size: calc(15px * var(--reading-scale, 1));
+}
+.study-reading-search input { width: 100%; }
+.study-reading-search button { margin-top: 6px; }
+.study-reading-search button, .study-reading-tools button, .study-reading-control {
+  color: var(--green-dark, #215b4b);
+  font-weight: 700;
+}
+.study-reading-search button:hover, .study-reading-tools button:hover, .study-reading-control:hover { background: var(--soft); }
+.study-reading-main .study-reading-tools {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.study-reading-main #stats { margin-inline-end: auto; color: var(--muted); font-size: calc(15px * var(--reading-scale, 1)); }
+.study-reading-main .unit-head h2 {
+  font-size: clamp(22px, calc(2.1vw * var(--reading-scale, 1)), 36px);
+  line-height: 1.3;
+}
+@media screen and (max-width: 540px) {
+  html:has(.study-reading-layout) { scroll-padding-bottom: 62px; }
+  body:has(.study-reading-layout) .site-scroll-tools {
+    top: auto;
+    bottom: max(8px, env(safe-area-inset-bottom));
+    grid-auto-flow: column;
+    transform: none;
+  }
+}
+
+@media print {
+  .study-reading-hero, .study-reading-sidebar, .study-reading-tools { display: none !important; }
+  .study-reading-layout { display: block; }
+}

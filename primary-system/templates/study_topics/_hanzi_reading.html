@@ -1,0 +1,47 @@
+<div class="study-course">
+  <div class="study-page" data-subject="hanzi-evo">
+    <div class="study-reading-hero">
+      <h1>{{ course_title }}</h1>
+      <p>{{ course_intro }}</p>
+    </div>
+    <div class="study-reading-layout hanzi-workspace" data-sidebar-layout=".hanzi-sidebar"
+         data-sidebar-label="阅读侧栏" data-sidebar-width="clamp(250px, 24vw, 320px)"
+         data-sidebar-collapse-key="primary_sidebar_collapsed_v1:.sidebar">
+      <aside class="hanzi-sidebar study-reading-sidebar" aria-label="汉字演变馆目录和导航">
+        <details class="study-reading-group">
+          <summary>搜索汉字</summary>
+          <form class="study-reading-search" id="hanzi-search-form" role="search" aria-label="搜索汉字">
+            <input id="search" type="search" aria-label="搜索汉字、拼音或故事里的词" placeholder="汉字、拼音或故事里的词" autocomplete="off" aria-controls="cards">
+            <button type="submit" hidden>查看结果 <span aria-hidden="true">↓</span></button>
+          </form>
+        </details>
+        <details class="study-reading-group" id="hanzi-families" open>
+          <summary>字族</summary>
+          <nav id="chips" aria-label="字族切换"></nav>
+        </details>
+        <details class="study-reading-group" id="hanzi-directory" hidden>
+          <summary>本族汉字</summary>
+          <nav class="study-reading-links" id="hanzi-points" aria-label="本族汉字目录"></nav>
+        </details>
+        <details class="study-reading-group" id="hanzi-reference">
+          <summary>馆前必读与六书</summary>
+          <nav class="study-reading-choices" id="hanzi-extras" aria-label="馆前必读与六书"></nav>
+        </details>
+        <details class="study-reading-group">
+          <summary>观察设置</summary>
+          <button type="button" class="study-reading-control guess-btn" id="guess-toggle" data-act="guess" aria-pressed="false">猜字模式：关</button>
+        </details>
+        {% include 'study_topics/_reading_topic_links.html' %}
+      </aside>
+      <div class="study-content study-reading-main hanzi-reading">
+        <div class="study-reading-tools">
+          <p id="stats" role="status"></p>
+          <button type="button" data-act="open-directory" aria-controls="hanzi-directory" hidden>定位汉字</button>
+          <button type="button" data-act="print">打印当前内容</button>
+        </div>
+        <div id="cards" tabindex="-1"></div>
+        <noscript>请启用 JavaScript，查看字卡和演变图示。</noscript>
+      </div>
+    </div>
+  </div>
+</div>

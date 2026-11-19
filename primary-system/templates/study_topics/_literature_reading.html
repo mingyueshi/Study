@@ -1,44 +1,36 @@
 <div class="study-course">
   <div class="study-page" data-subject="lit">
-    <div class="lit-hero">
+    <div class="lit-hero study-reading-hero">
       <h1>{{ course_title }}</h1>
       <p>{{ course_intro }}</p>
     </div>
-    <div class="lit-workspace" data-sidebar-layout=".lit-sidebar"
+    <div class="lit-workspace study-reading-layout" data-sidebar-layout=".lit-sidebar"
          data-sidebar-label="阅读侧栏" data-sidebar-width="clamp(250px, 24vw, 320px)"
          data-sidebar-collapse-key="primary_sidebar_collapsed_v1:.sidebar">
-      <aside class="lit-sidebar" aria-label="文学常识目录和导航">
-        <details class="lit-sidebar-group" id="lit-library" open>
+      <aside class="lit-sidebar study-reading-sidebar" aria-label="文学常识目录和导航">
+        <details class="study-reading-group" id="lit-library" open>
           <summary>文学苑</summary>
           <nav id="chips" aria-label="文学苑切换"></nav>
         </details>
-        <details class="lit-sidebar-group" id="lit-directory" hidden>
+        <details class="study-reading-group" id="lit-directory" hidden>
           <summary>本苑知识点</summary>
-          <nav id="lit-points" class="lit-side-links" aria-label="本苑知识点目录"></nav>
+          <nav id="lit-points" class="study-reading-links" aria-label="本苑知识点目录"></nav>
         </details>
-        <details class="lit-sidebar-group" id="lit-reference">
+        <details class="study-reading-group" id="lit-reference">
           <summary>速查、小诊所与拓展</summary>
-          <nav id="lit-extras" class="lit-side-views" aria-label="速查与拓展"></nav>
+          <nav id="lit-extras" class="study-reading-choices" aria-label="速查与拓展"></nav>
         </details>
-        <details class="lit-sidebar-group">
+        <details class="study-reading-group">
           <summary>搜索文学常识</summary>
-          <div class="lit-search" role="search" aria-label="搜索文学常识">
+          <div class="study-reading-search" role="search" aria-label="搜索文学常识">
             <input id="search" type="search" aria-label="搜索知识点、人物、作家和作品" placeholder="知识点、人物、作家或作品" autocomplete="off" aria-controls="cards">
             <button type="button" data-act="show-results" hidden>查看结果 <span aria-hidden="true">↓</span></button>
           </div>
         </details>
-        <details class="lit-sidebar-group">
-          <summary>相关专题</summary>
-          <nav class="lit-side-links" aria-label="相关专题">
-            <a href="{% url 'home' %}?area={{ study_area }}#modules-title">学习广场 · {{ study_label }} <span aria-hidden="true">↗</span></a>
-            {% for route, label in course_links %}
-            <a href="{% url route %}">{{ label }} <span aria-hidden="true">↗</span></a>
-            {% endfor %}
-          </nav>
-        </details>
+        {% include 'study_topics/_reading_topic_links.html' %}
       </aside>
-      <div class="study-content lit-reading">
-        <div class="lit-reading-tools">
+      <div class="study-content lit-reading study-reading-main">
+        <div class="study-reading-tools">
           <p id="stats" role="status"></p>
           <button type="button" data-act="open-directory" aria-controls="lit-directory" hidden>定位知识点</button>
           <button type="button" data-act="print">打印当前内容</button>

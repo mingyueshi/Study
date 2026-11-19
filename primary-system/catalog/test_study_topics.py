@@ -595,21 +595,28 @@ class StudyTopicPageTests(SimpleTestCase):
                     self.assertContains(response, f'href="{reverse(reference)}"')
                 self.assertEqual(self.client.post(reverse(name)).status_code, 405)
 
-    def test_literature_course_uses_the_reading_sidebar_and_current_assets(self):
-        response = self.client.get(reverse('literature-study'))
-        self.assertContains(response, 'data-sidebar-layout=".lit-sidebar"')
-        self.assertNotContains(response, 'class="study-topic-nav"')
-        sidebar = response.content.decode().split('<aside class="lit-sidebar"', 1)[1].split('</aside>', 1)[0]
-        for section in ('chips', 'lit-points', 'lit-extras', 'search'):
-            self.assertIn(f'id="{section}"', sidebar)
-        for name in ('classical', 'poetry-index', 'idiom-stories'):
-            self.assertIn(f'href="{reverse(name)}"', sidebar)
-        self.assertNotIn('id="cards"', sidebar)
-        assets = TopicMarkup(response.content.decode()).assets
-        for filename in ('lit.css', 'lit-app.js'):
-            path = f'study_topics/lit/{filename}'
-            digest = sha256(Path(finders.find(path)).read_bytes()).hexdigest()[:12]
-            self.assertIn(f'/static/{path}?v={digest}', assets)
+    def test_reading_courses_use_the_reading_sidebar_and_current_assets(self):
+        courses = (
+            ('literature-study', 'lit', 'lit', ('classical', 'poetry-index', 'idiom-stories'), ()),
+            ('hanzi-evolution', 'hanzi-evo', 'hanzi', ('dictionary', 'hanzi-polyphones'), ('hanzi-evo/hanzi-evo-player.js',)),
+        )
+        for route, slug, prefix, links, extra_assets in courses:
+            with self.subTest(route=route):
+                response = self.client.get(reverse(route))
+                self.assertContains(response, f'data-sidebar-layout=".{prefix}-sidebar"')
+                self.assertNotContains(response, 'class="study-topic-nav"')
+                html = response.content.decode()
+                sidebar = html.split(f'<aside class="{prefix}-sidebar ', 1)[1].split('</aside>', 1)[0]
+                for section in ('chips', f'{prefix}-points', f'{prefix}-extras', 'search'):
+                    self.assertIn(f'id="{section}"', sidebar)
+                for name in links:
+                    self.assertIn(f'href="{reverse(name)}"', sidebar)
+                self.assertNotIn('id="cards"', sidebar)
+                assets = TopicMarkup(html).assets
+                for asset in ('reading.css', f'{slug}/{slug}.css', f'{slug}/{slug}-app.js', *extra_assets):
+                    path = f'study_topics/{asset}'
+                    digest = sha256(Path(finders.find(path)).read_bytes()).hexdigest()[:12]
+                    self.assertIn(f'/static/{path}?v={digest}', assets)
 
 
 class StudyTopicEntryTests(TestCase):
