@@ -30,3 +30,60 @@
 .body-process-speed { flex-shrink: 0; white-space: nowrap; }
 .body-process .body-demo-heading h2 { margin: 0 0 7px; }
 .body-process .body-demo-heading .body-kicker { margin-bottom: 5px; }
+
+/* 呼吸课沿用实验页侧栏，播放器和当前观察留在图旁。 */
+.body-breath-lab {
+  --experiment-accent: var(--lesson-accent);
+  --experiment-line: var(--atlas-edge);
+  --experiment-tint: var(--lesson-tint);
+  --experiment-card: var(--atlas-white);
+}
+.body-breath-lab.geo-experiment .experiment-heading {
+  margin-top: 0;
+  background: linear-gradient(120deg, oklch(25% .05 168), oklch(39% .073 164));
+}
+.body-breath-lab .experiment-heading :is(.body-kicker, .body-lesson-lead) { color: inherit; }
+.body-breath-lab .experiment-heading h1 { font-size: clamp(30px, 3.5vw, 52px); }
+.body-breath-lab :is(#explore, #gallery, #experiment, #checkup, #body-notes-title, #breath-observation) { scroll-margin-top: 16px; }
+.body-breath-lab .sl-scroll > .experiment-tools + .experiment-tools { margin-block-start: 8px; }
+.body-breath-lab .body-process-phases { display: grid; }
+.body-breath-lab .body-process-phases button { font-size: 16px; }
+.body-breath-lab .experiment-controls .body-process-speed { margin: 0; font-size: 16px; font-weight: 750; white-space: normal; }
+.body-breath-lab .experiment-controls .inline-choice-options button { min-height: 44px; }
+.body-breath-lab.geo-experiment .experiment-return[href="#explore"] { display: inline-flex; }
+.body-breath-lab .body-process:not([data-process-mode]) .experiment-jump { display: none; }
+.body-breath-lab .body-demo-heading .experiment-jump { margin-top: 4px; }
+.body-breath-lab .body-process-scrub input { min-height: 44px; }
+.body-breath-lab .body-breath-takeaway { margin: 14px 0 0; font-weight: 750; color: var(--lesson-accent); }
+.body-breath-lab :is(a, button, summary, input):focus-visible { outline: 2px solid var(--lesson-accent); outline-offset: 3px; }
+
+.body-breath-model { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, .8fr); align-items: center; gap: 8px; }
+.body-breath-model > svg { display: block; width: 100%; height: auto; max-height: 410px; margin: auto; border-radius: 12px; }
+.body-breath-lab .body-breath-stage { margin: 0; }
+.body-breath-lab .body-breath-stage figcaption { text-align: center; }
+
+@media (min-width: 1280px) {
+  .body-breath-lab .body-process {
+    display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(290px, 1fr); align-items: start; gap: 12px 16px;
+  }
+  .body-breath-lab .body-demo-heading { grid-column: 1 / -1; }
+  .body-breath-lab .body-breath-stage { grid-area: 2 / 1 / 4 / 2; align-self: center; }
+  .body-breath-lab .body-process-player { grid-area: 2 / 2; margin: 0; }
+  .body-breath-lab .body-demo-caption { grid-area: 3 / 2; }
+  .body-breath-lab .body-process-legend { grid-area: 4 / 1 / 5 / -1; }
+  .body-breath-lab :is(.body-process-note, noscript) { grid-column: 1 / -1; }
+}
+@media screen and (max-width: 640px) {
+  .body-breath-lab [data-process-mode] .body-breath-model { grid-template-columns: minmax(0, 1fr); max-width: 340px; margin-inline: auto; }
+  .body-breath-lab [data-process-mode] .body-breath-model > svg { grid-area: 1 / 1; aspect-ratio: 363 / 390; }
+  .body-breath-lab [data-process-mode][data-state="exchange"] .body-breath-thorax,
+  .body-breath-lab [data-process-mode]:not([data-state="exchange"]) .body-breath-alveoli {
+    visibility: hidden;
+    opacity: 0; /* SVG 粒子单独设置了 visibility，随整张图一起隐藏。 */
+  }
+}
+@media print {
+  .body-breath-lab .body-process { display: block; }
+  .body-breath-lab .experiment-heading { min-height: 0; background: transparent !important; color: #183e36; }
+  .body-breath-lab .body-process-player { display: none; }
+}

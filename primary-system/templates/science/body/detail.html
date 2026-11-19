@@ -2,27 +2,22 @@
 {% load static %}
 {% block title %}{{ lesson.label }} · {{ station.title }} · 乐学堂{% endblock %}
 {% block station %}
-<nav class="body-lesson-nav" aria-label="身体地图目录">
-  {% for item in lessons %}
-  <a class="body-{{ item.slug }}" href="{% url 'science-body-lesson' item.slug %}" {% if item.slug == lesson.slug %}aria-current="page"{% endif %}>
-    <span>0{{ forloop.counter }}</span> {{ item.label }}
-  </a>
-  {% endfor %}
-</nav>
-<article class="body-{{ lesson.slug }}" data-body-lesson="{{ lesson.slug }}">
-  <header class="body-lesson-header body-lesson-header-compact">
+{% if lesson.slug != 'breathing' %}{% include 'science/body/lesson-navigation.html' with group='lessons' %}{% endif %}
+<article class="body-{{ lesson.slug }}{% if lesson.slug == 'breathing' %} body-breath-lab geo-experiment{% endif %}" data-body-lesson="{{ lesson.slug }}">
+  <header class="body-lesson-header body-lesson-header-compact{% if lesson.slug == 'breathing' %} experiment-heading{% endif %}">
     <p class="body-kicker"><span></span> 第 {{ number }} 课 · {{ lesson.label }}</p>
     <h1>{{ lesson.title }}</h1>
     <p class="body-lesson-lead">{{ lesson.teaser }}</p>
   </header>
-  <nav class="body-section-jumps" aria-label="本课工具">
-    <a href="{% if lesson.slug == 'circulation' %}#heart{% else %}#explore{% endif %}">动手图解</a>
-    <a href="#gallery">看真实图像</a><a href="#experiment">做个小实验</a><a href="#checkup">三题小挑战</a>
-    {% if lesson.slug == 'circulation' %}<a href="#pulse">测脉搏</a><a href="#notebook">观察手册</a>{% endif %}
-  </nav>
+  {% if lesson.slug != 'breathing' %}{% include 'science/body/lesson-navigation.html' with group='sections' %}{% endif %}
   <p class="body-course-progress" data-current-progress hidden></p>
+  {% if lesson.slug == 'breathing' %}
+  <div class="experiment-workspace" data-sidebar-layout=".experiment-side" data-sidebar-width="clamp(260px, 24vw, 320px)"
+       data-sidebar-label="呼吸实验工具" data-sidebar-collapse-key="primary_sidebar_collapsed_v1:.body-side">
+  {% else %}
   <div class="body-workspace" data-sidebar-label="观察与思考">
-    <div class="body-main">
+  {% endif %}
+    <div class="body-main{% if lesson.slug == 'breathing' %} experiment-content{% endif %}">
       {% if lesson.slug == 'circulation' %}
         {% include 'science/body/heart.html' %}
       {% else %}
@@ -35,6 +30,7 @@
         <p class="body-kicker">顺着线索找</p>
         <h2 id="body-notes-title">身体里发生了什么？</h2>
         <p>{{ lesson.intro }}</p>
+        {% if lesson.slug == 'breathing' %}<p>{{ lesson.observe }}</p>{% endif %}
         <ol class="body-stops">
           {% for stop in lesson.stops %}
           <li>
@@ -43,8 +39,37 @@
           </li>
           {% endfor %}
         </ol>
+        {% if lesson.slug == 'breathing' %}
+        <details class="body-answer"><summary>{{ lesson.quiz.question }}</summary><p>{{ lesson.quiz.answer }}</p></details>
+        <p class="body-breath-takeaway">{{ lesson.takeaway }}</p>
+        {% endif %}
       </details>
     </div>
+    {% if lesson.slug == 'breathing' %}
+    <aside class="experiment-side" aria-label="呼吸观察设置与专题导航">
+      <details class="experiment-tools" id="breath-observation" data-breath-observation data-process-controls open hidden>
+        <summary>观察设置</summary>
+        <div class="experiment-controls">
+          <p class="experiment-label" id="breath-phase-label">观察阶段</p>
+          <div class="body-process-phases" data-process-phases role="group" aria-labelledby="breath-phase-label"></div>
+          {% include 'science/body/process-speed.html' %}
+          <a class="experiment-return" href="#explore" data-experiment-return>返回呼吸图 ↓</a>
+        </div>
+      </details>
+      <details class="experiment-tools">
+        <summary>本课内容</summary>
+        {% include 'science/body/lesson-navigation.html' with group='sections' sidebar=True %}
+      </details>
+      <details class="experiment-tools">
+        <summary>人体奥秘站课程</summary>
+        {% include 'science/body/lesson-navigation.html' with group='lessons' sidebar=True %}
+      </details>
+      <details class="experiment-tools">
+        <summary>相关专题</summary>
+        <nav class="experiment-links" aria-label="人体奥秘站导航">{% include 'science/body/station-links.html' with sidebar=True %}</nav>
+      </details>
+    </aside>
+    {% else %}
     <aside class="body-side">
       <section class="body-panel body-observe">
         <p class="body-kicker">先观察</p>
@@ -64,6 +89,7 @@
         <p>{{ lesson.takeaway }}</p>
       </section>
     </aside>
+    {% endif %}
   </div>
   {% if lesson.slug == 'circulation' %}
     {% include 'science/body/pulse.html' %}

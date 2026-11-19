@@ -45,6 +45,20 @@ class HumanBodyStationTests(SimpleTestCase):
             self.assertContains(response, f'/static/{asset}')
             self.assertTrue(finders.find(asset))
 
+    def test_breathing_sidebar_preserves_bookmarks_and_static_diagrams(self):
+        url = reverse('science-body-lesson', args=['breathing'])
+        response = self.client.get(url)
+        for anchor in ('explore', 'gallery', 'experiment', 'checkup', 'body-notes-title'):
+            self.assertContains(response, f'id="{anchor}"', count=1)
+        self.assertContains(response, 'id="breath-observation" data-breath-observation')
+        self.assertContains(response, 'data-process-speed', count=1)
+        self.assertContains(response, 'data-process-phases', count=1)
+        self.assertContains(response, 'class="body-breath-thorax"')
+        self.assertContains(response, 'class="body-breath-alveoli"')
+        self.assertContains(response, '当前显示静态图')
+        digestion = self.client.get(reverse('science-body-lesson', args=['digestion']))
+        self.assertNotContains(digestion, 'data-breath-observation')
+
     def test_unknown_lesson_and_unsupported_method(self):
         self.assertEqual(self.client.get(reverse('science-body-lesson', args=['missing'])).status_code, 404)
         self.assertEqual(self.client.post(reverse('science-body')).status_code, 405)

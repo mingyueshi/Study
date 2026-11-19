@@ -1,10 +1,10 @@
-<svg viewBox="0 0 640 410" role="img" aria-labelledby="breathing-title breathing-desc">
+<figure class="body-stage body-breath-stage">
+<div class="body-breath-model">
+<svg class="body-breath-thorax" viewBox="25 12 363 390" role="img" aria-labelledby="breathing-title breathing-desc">
   <title id="breathing-title">{{ diagram.title }}</title>
   <desc id="breathing-desc">{{ lesson.takeaway }}</desc>
   <defs>
     <marker id="breath-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="3" markerHeight="3" orient="auto"><path d="M0 0 10 5 0 10" fill="#246a5c"/></marker>
-    <marker id="gas-red" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="3" markerHeight="3" orient="auto"><path d="M0 0 10 5 0 10" fill="#b34845"/></marker>
-  <marker id="gas-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="3" markerHeight="3" orient="auto"><path d="M0 0 10 5 0 10" fill="#327b9e"/></marker>
   </defs>
   <g fill="none" stroke="none" aria-hidden="true">
     <path data-motion-path="air-left" d="M236 58V130L188 190L177 244"/>
@@ -26,7 +26,13 @@
     <text x="44" y="212">{{ diagram.labels.lungs }}</text>
     <text x="42" y="395">{{ diagram.labels.diaphragm }}</text>
   </g>
-  <path d="M322 227 409 172" stroke="#85a893" stroke-width="2" stroke-dasharray="5 6"/>
+</svg>
+<svg class="body-breath-alveoli" viewBox="395 50 238 334" role="img" aria-labelledby="breathing-alveoli-title">
+  <title id="breathing-alveoli-title">{{ diagram.labels.alveoli }}</title>
+  <defs>
+    <marker id="gas-red" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="3" markerHeight="3" orient="auto"><path d="M0 0 10 5 0 10" fill="#b34845"/></marker>
+    <marker id="gas-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="3" markerHeight="3" orient="auto"><path d="M0 0 10 5 0 10" fill="#327b9e"/></marker>
+  </defs>
   <g class="body-gas-inset">
     <rect x="403" y="59" width="222" height="316" rx="24" fill="#fffdf2" stroke="#bad4c1" stroke-width="2"/>
     <text x="514" y="94" text-anchor="middle" class="body-svg-label">{{ diagram.labels.alveoli }}</text>
@@ -42,3 +48,6 @@
     </g>
   </g>
 </svg>
+</div>
+<figcaption>{{ diagram.caption }}</figcaption>
+</figure>

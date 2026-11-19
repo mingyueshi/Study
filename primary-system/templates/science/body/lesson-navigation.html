@@ -1,0 +1,15 @@
+{% if group == 'sections' %}
+<nav class="{% if sidebar %}experiment-links{% else %}body-section-jumps{% endif %}" aria-label="本课工具">
+  <a href="{% if lesson.slug == 'circulation' %}#heart{% else %}#explore{% endif %}">动手图解</a>
+  <a href="#gallery">看真实图像</a><a href="#experiment">做个小实验</a><a href="#checkup">三题小挑战</a>
+  {% if lesson.slug == 'circulation' %}<a href="#pulse">测脉搏</a><a href="#notebook">观察手册</a>{% endif %}
+</nav>
+{% else %}
+<nav class="{% if sidebar %}experiment-links{% else %}body-lesson-nav{% endif %}" aria-label="身体地图目录">
+  {% for item in lessons %}
+  <a class="body-{{ item.slug }}" href="{% url 'science-body-lesson' item.slug %}" {% if item.slug == lesson.slug %}aria-current="page"{% endif %}>
+    {% if not sidebar %}<span>0{{ forloop.counter }}</span>{% endif %} {{ item.label }}
+  </a>
+  {% endfor %}
+</nav>
+{% endif %}

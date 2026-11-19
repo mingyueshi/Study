@@ -1,0 +1,3 @@
+<a href="{% url 'home' %}?area=science#modules-title">← 学习广场 · 科学</a>
+<a href="{% url 'science-body' %}" {% if not lesson %}aria-current="page"{% endif %}>人体奥秘站</a>
+<a href="{% url 'science-lab' %}#lesson-su6-5">科学实验室 · 我们的身体{% if sidebar %} ↗{% endif %}</a>

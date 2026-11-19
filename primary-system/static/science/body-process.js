@@ -54,6 +54,7 @@
   if (!root) return;
   const content = JSON.parse(document.getElementById('body-animation-data').textContent);
   const kind = root.dataset.bodyProcess;
+  const settings = root.closest('.experiment-workspace')?.querySelector('[data-breath-observation]') || root;
   const $ = selector => root.querySelector(selector);
   const all = selector => [...root.querySelectorAll(selector)];
   const media = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -61,7 +62,8 @@
   const playButton = $('[data-process-play]');
   const progress = $('[data-process-progress]');
   const explanation = $('[data-process-explanation]');
-  const speed = $('[data-process-speed]');
+  const speed = settings.querySelector('[data-process-speed]');
+  const phaseList = settings.querySelector('[data-process-phases]');
   const arm = $('[data-arm-angle]');
   const paths = new Map();
   const dots = new Map();
@@ -181,7 +183,7 @@
     $('[data-process-next]').disabled = frame.index === mode.phases.length - 1;
     if (frame.index !== lastPhase) {
       lastPhase = frame.index;
-      all('[data-process-phase]').forEach((button, index) => button.setAttribute('aria-pressed', String(index === frame.index)));
+      [...phaseList.children].forEach((button, index) => button.setAttribute('aria-pressed', String(index === frame.index)));
       $('[data-process-title]').textContent = frame.phase.title;
       $('[data-process-body]').textContent = frame.phase.body;
       $('[data-process-cue]').textContent = frame.phase.cue;
@@ -207,7 +209,6 @@
     all('[data-process-mode]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.processMode === id)));
     all('[data-process-view]').forEach(view => { view.hidden = view.dataset.processView !== id; });
     $('[data-process-caption]').textContent = mode.caption;
-    const phaseList = $('[data-process-phases]');
     phaseList.replaceChildren();
     mode.phases.forEach((phase, index) => {
       const button = document.createElement('button');
@@ -245,6 +246,6 @@
   chooseMode(content.modes[0].id);
   if (window.StudyEffects?.watch) window.StudyEffects.watch(root, () => player.pause());
   else if (typeof IntersectionObserver === 'function') new IntersectionObserver(entries => { if (entries.some(entry => !entry.isIntersecting)) player.pause(); }).observe(root);
-  $('[data-process-controls]').hidden = false;
+  (settings === root ? $('[data-process-controls]') : settings).hidden = false;
   $('[data-process-player]').hidden = false;
 })();
