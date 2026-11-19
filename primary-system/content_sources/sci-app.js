@@ -47,12 +47,13 @@ function sayBtn(text) {
 }
 
 /* ---------- 侧栏目录 ---------- */
-function renderChips() {
+function chipsHTML() {
   const unitChips = SCI.units.map(u => {
     const learned = u.points.filter(p => scState.learned[pointKey(u, p)]).length;
     const done = learned === u.points.length;
     const shortName = u.no.replace('第', '').replace('实验室', '') + ' ' + u.name;
-    return '<button class="chip' + (u.id === curView && !query ? ' on' : '') + '" style="--c:' + u.color + '" data-act="unit" data-id="' + u.id + '">' +
+    const active = u.id === curView && !query;
+    return '<button type="button" class="chip' + (active ? ' on' : '') + '"' + (active ? ' aria-current="true"' : '') + ' style="--c:' + u.color + '" data-act="unit" data-id="' + u.id + '">' +
       '<span class="chip-emoji">' + u.emoji + '</span><span class="chip-name">' + esc(shortName) + '</span>' +
       '<span class="chip-num' + (done ? ' full' : '') + '">' + learned + '/' + u.points.length + '</span></button>';
   });
@@ -60,12 +61,17 @@ function renderChips() {
     '<button class="chip' + (v.id === curView && !query ? ' on' : '') + '" style="--c:' + v.color + '" data-act="unit" data-id="' + v.id + '">' +
     '<span class="chip-emoji">' + v.emoji + '</span><span class="chip-name">' + esc(v.name) + '</span>' +
     '<span class="chip-num">' + v.count + '</span></button>');
-  document.getElementById('chips').innerHTML = unitChips.join('') + extraChips.join('');
+  return unitChips.join('') + extraChips.join('');
+}
+
+function renderChips() {
+  const html = chipsHTML();
+  document.querySelectorAll('#chips, #sci-circuit-chips').forEach(nav => { nav.innerHTML = html; });
 }
 
 function renderStats() {
-  const el = document.getElementById('stats');
-  if (el) el.textContent = '已掌握 ' + totalLearned() + ' / ' + TOTAL_POINTS + ' 个知识点';
+  const text = '已掌握 ' + totalLearned() + ' / ' + TOTAL_POINTS + ' 个知识点';
+  document.querySelectorAll('#stats, #sci-circuit-stats').forEach(el => { el.textContent = text; });
 }
 
 /* ---------- 知识点卡 ---------- */
@@ -73,17 +79,20 @@ function msec(label, inner) {
   return '<div class="ksec"><span class="seclabel">' + label + '</span>' + inner + '</div>';
 }
 
-function pointCard(u, p) {
+function pointCard(u, p, sideCircuitSettings = false) {
   const key = pointKey(u, p);
   const learned = !!scState.learned[key];
   const parts = [];
 
   parts.push('<article id="lesson-' + esc(p.id) + '" class="kcard' + (learned ? ' learned' : '') + '" style="--c:' + u.color + '">');
-  parts.push('<div class="khead"><h3 class="ktitle">' + esc(p.title) + '</h3>' +
+  const titleTag = sideCircuitSettings ? 'h2' : 'h3';
+  const titleId = sideCircuitSettings ? ' id="sci-circuit-diagram"' : '';
+  parts.push('<div class="khead"><' + titleTag + ' class="ktitle"' + titleId + '>' + esc(p.title) + '</' + titleTag + '>' +
     '<span class="khead-gap"></span>' + sayBtn(p.title + '。' + p.overview) +
     '<button class="learn-btn' + (learned ? ' on' : '') + '" data-act="learn" data-unit="' + u.id + '" data-id="' + esc(p.id) + '" title="标记已掌握" aria-pressed="' + learned + '" aria-label="已掌握 ' + esc(p.title) + '">' + (learned ? '✓' : '') + '</button></div>');
   parts.push('<p class="k-overview">' + esc(p.overview) + '</p>');
-  if (p.fig && window.SciFigures) parts.push(SciFigures.figHTML(p.fig));
+  if (sideCircuitSettings) parts.push('<a class="experiment-jump" href="#sci-circuit-settings" data-experiment-jump>选择电路接法 ↗</a>');
+  if (p.fig && window.SciFigures) parts.push(SciFigures.figHTML(p.fig, undefined, {sideCircuitSettings}));
 
   if (p.items && p.items.length) {
     parts.push(msec('纲', '<ul class="klist">' + p.items.map(m =>
@@ -121,6 +130,55 @@ function renderUnit(u) {
     '<div class="goal-tags">' + u.goals.map(g => '<span>🎯 ' + esc(g) + '</span>').join('') + '</div></div></div>' +
     banner +
     u.points.map(p => pointCard(u, p)).join('');
+}
+
+function renderCircuitUnit(u, circuit, settings) {
+  const otherPoints = u.points.filter(point => point !== circuit);
+  const topicLinks = document.querySelector('.study-topic-nav')?.innerHTML || '';
+  return `<div class="sci-circuit-topic geo-experiment">
+    <header class="experiment-heading">
+      <h1>电路实验</h1>
+      <p>分别断开两个开关，比较串联和并联电路中哪些灯会熄灭。</p>
+    </header>
+    <div class="experiment-workspace" data-sidebar-layout=".experiment-side" data-sidebar-width="clamp(260px, 24vw, 320px)"
+         data-sidebar-label="电路实验工具" data-sidebar-collapse-key="sci_circuit_sidebar_collapsed_v1">
+      <aside class="experiment-side" aria-label="电路实验参数与专题导航">
+        <details class="experiment-tools" id="sci-circuit-settings" open>
+          <summary>电路接法</summary>
+          <div class="experiment-controls">
+            ${settings}
+            <a class="experiment-return" href="#sci-circuit-diagram" data-experiment-return>返回电路图 ↓</a>
+          </div>
+        </details>
+        <details class="experiment-tools">
+          <summary>电与磁知识点</summary>
+          <nav class="experiment-links" aria-label="电与磁知识点">${[circuit, ...otherPoints].map(point =>
+            `<a href="#lesson-${esc(point.id)}">${esc(point.title)}</a>`).join('')}</nav>
+        </details>
+        <details class="experiment-tools">
+          <summary>科学实验室目录</summary>
+          <nav class="sci-circuit-courses experiment-controls" id="sci-circuit-chips" aria-label="科学实验室目录"></nav>
+          <p class="sci-circuit-progress" id="sci-circuit-stats" role="status"></p>
+        </details>
+        ${topicLinks ? `<details class="experiment-tools">
+          <summary>相关专题</summary>
+          <nav class="experiment-links" aria-label="科学相关专题">${topicLinks}</nav>
+        </details>` : ''}
+      </aside>
+      <div class="experiment-content">
+        ${pointCard(u, circuit, true)}
+        <section aria-labelledby="sci-circuit-reading">
+          <div class="unit-head" style="--c:${u.color}">
+            <div><h2 id="sci-circuit-reading">电与磁的其他知识点</h2>
+              <p>${esc(u.intro)}</p>
+              <div class="goal-tags">${u.goals.map(goal => `<span>🎯 ${esc(goal)}</span>`).join('')}</div>
+            </div>
+          </div>
+          ${otherPoints.map(point => pointCard(u, point)).join('')}
+        </section>
+      </div>
+    </div>
+  </div>`;
 }
 
 /* ---------- 科学速查 ---------- */
@@ -207,12 +265,14 @@ function renderMain() {
   if (curView === 'facts') { box.innerHTML = renderFacts(); return; }
   if (curView === 'clinic') { box.innerHTML = renderClinic(); return; }
   const u = sunitById(curView);
-  box.innerHTML = u ? renderUnit(u) : '';
+  const circuit = u?.points.find(point => point.fig === 'demo-sci-circuit');
+  const settings = circuit && window.SciFigures?.circuitSettingsHTML?.();
+  box.innerHTML = settings ? renderCircuitUnit(u, circuit, settings) : u ? renderUnit(u) : '';
 }
 
 function render() {
-  renderChips();
   renderMain();
+  renderChips();
   renderStats();
 }
 
@@ -224,16 +284,27 @@ function selectView(id) {
   query = '';
   const search = document.getElementById('search');
   if (search) search.value = '';
+  if (location.hash.startsWith('#lesson-')) history.replaceState(history.state, '', location.pathname + location.search);
   render();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function toggleLearn(unitId, pointId) {
   const key = unitId + '-' + pointId;
-  if (scState.learned[key]) delete scState.learned[key];
-  else scState.learned[key] = true;
+  const learned = !scState.learned[key];
+  if (learned) scState.learned[key] = true;
+  else delete scState.learned[key];
   scSave();
-  render();
+  const card = document.getElementById('lesson-' + pointId);
+  if (card) {
+    const button = card.querySelector('.learn-btn');
+    card.classList.toggle('learned', learned);
+    button.classList.toggle('on', learned);
+    button.setAttribute('aria-pressed', String(learned));
+    button.textContent = learned ? '✓' : '';
+  }
+  renderChips();
+  renderStats();
 }
 
 document.addEventListener('click', e => {
@@ -254,8 +325,7 @@ document.addEventListener('click', e => {
 document.addEventListener('input', e => {
   if (e.target && e.target.id === 'search') {
     query = e.target.value.trim();
-    renderChips();
-    renderMain();
+    render();
   }
 });
 
@@ -275,6 +345,11 @@ function openLessonFromHash() {
   const id = anchor.slice('lesson-'.length);
   const unit = SCI.units.find(item => item.points.some(point => point.id === id));
   if (!unit) return false;
+  const current = unit.id === curView && !query && document.getElementById(anchor);
+  if (current) {
+    current.scrollIntoView();
+    return true;
+  }
   curView = unit.id;
   query = '';
   document.getElementById('search').value = '';

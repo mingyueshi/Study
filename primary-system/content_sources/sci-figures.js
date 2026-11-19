@@ -1084,10 +1084,10 @@ const SciFigures = (() => {
   const unavailable = () => '<p class="sci-model-note">演示资料暂未加载，请先阅读下方知识要点。</p>';
   const sourcesHTML = key => '<details class="sci-demo-sources"><summary>看看资料出处（需联网）</summary>' +
     DEMOS.sources[key].map(source => `<a href="${escapeDemo(source.url)}" target="_blank" rel="noopener noreferrer">${escapeDemo(source.title)}</a>`).join('') + '</details>';
-  const motionControls = () => '<div class="sci-motion-controls" hidden>' +
+  const motionControls = (resetButton = '<button type="button" class="fig-btn" data-sci-motion="reset">回到起点</button>') => '<div class="sci-motion-controls" hidden>' +
     '<div class="fig-ctrl"><button type="button" class="fig-btn" data-sci-motion="play" aria-pressed="false">播放示意</button>' +
     '<button type="button" class="fig-btn" data-sci-motion="step">前进一步</button>' +
-    '<button type="button" class="fig-btn" data-sci-motion="reset">回到起点</button></div>' +
+    resetButton + '</div>' +
     '<p class="sci-motion-status" data-sci-motion-status role="status"></p></div>';
   const scrollHint = '<p class="sci-scroll-hint">↔ 图示可左右滑动查看，也可以聚焦图示后按左右键。</p>';
   const demoButton = (action, value, label) => `<button type="button" class="fig-btn" data-fig-act="${action}" data-v="${value}" aria-pressed="false">${escapeDemo(label)}</button>`;
@@ -1152,48 +1152,56 @@ const SciFigures = (() => {
   const bulb = (x, y, lit, number) =>
     `<g data-sci-lamp="${number}" data-lit="${lit}"><circle cx="${x}" cy="${y}" r="16" fill="${lit ? '#ffd94d' : '#c9cdd9'}" stroke="${INK}" stroke-width="2.5"/>` +
     `<path d="M${x - 8} ${y - 8}l16 16m0 -16l-16 16" stroke="${INK}" stroke-width="1.6"/>` +
-    txt(x, y + 34, `灯 ${number} · ${lit ? '亮' : '灭'}`, {fs: 13, fw: 800}) + '</g>';
+    txt(x, y + 36, `灯 ${number} · ${lit ? '亮' : '灭'}`, {fs: 17, fw: 800}) + '</g>';
   const battery = () =>
-    `<path d="M70 65V123M106 78V110" stroke="${INK}" stroke-width="4"/>` +
-    txt(88, 148, '电池', {fs: 13}) + txt(56, 56, '＋', {fs: 16, fill: RED}) + txt(120, 56, '－', {fs: 16, fill: BLUE});
+    `<path d="M48 70V126M78 83V113" stroke="${INK}" stroke-width="4"/>` +
+    txt(79, 149, '电池', {fs: 17}) + txt(48, 60, '＋', {fs: 19, fill: '#a13a44'}) + txt(78, 60, '－', {fs: 19, fill: '#2767a8'});
   const wire = points => `<polyline points="${points}" fill="none" stroke="${INK}" stroke-width="2.5"/>`;
   const junction = (x, y) => `<circle cx="${x}" cy="${y}" r="4.5" fill="${INK}"/>`;
   const switchAt = (x, y, closed, number) =>
     `<path d="M${x} ${y}L${x + (closed ? 56 : 50)} ${y - (closed ? 0 : 22)}" stroke="${INK}" stroke-width="3"/>` +
     `<circle cx="${x}" cy="${y}" r="4.5" fill="#fff" stroke="${INK}" stroke-width="2.5"/>` +
     `<circle cx="${x + 56}" cy="${y}" r="4.5" fill="#fff" stroke="${INK}" stroke-width="2.5"/>` +
-    txt(x + 28, y - 30, `开关 ${number}`, {fs: 13, fw: 800, fill: closed ? GREEN : RED});
+    txt(x + 28, y - 30, `开关 ${number}`, {fs: 17, fw: 800, fill: closed ? TEAL : '#a13a44'});
   const flow = (id, path, count) => `<g data-sci-flow="${id}" aria-hidden="true"><path d="${path}" fill="none" stroke="none"/>` +
     Array.from({length: count}, () => '<circle r="4" fill="#d86115" stroke="#fff" stroke-width="1" visibility="hidden"/>').join('') + '</g>';
 
   function circuitLayout(mode, one, two) {
     const {lamps} = circuitState(mode, one, two);
     if (mode !== 'parallel') return battery() +
-      wire('106,94 284,94') + bulb(300, 94, lamps[0], 1) + wire('316,94 440,94') + switchAt(440, 94, one, 1) +
-      wire('496,94 560,94 560,180 396,180') + bulb(380, 180, lamps[1], 2) + wire('364,180 266,180') +
-      switchAt(210, 180, two, 2) + wire('210,180 70,180 70,94') +
-      (lamps[0] ? flow('series', 'M70 94V180H560V94H106', 11) : '');
-    return battery() + wire('106,94 220,94') + junction(220, 94) +
-      wire('220,94 220,60 300,60') + bulb(316, 60, lamps[0], 1) + wire('332,60 370,60') + switchAt(370, 60, one, 1) + wire('426,60 460,60 460,94') +
-      wire('220,94 220,145 300,145') + bulb(316, 145, lamps[1], 2) + wire('332,145 370,145') + switchAt(370, 145, two, 2) + wire('426,145 460,145 460,94') +
-      junction(460, 94) + wire('460,94 560,94 560,200 70,200 70,94') +
-      (lamps.some(Boolean) ? flow('positive', 'M70 94V200H560V94H460', 8) + flow('negative', 'M220 94H106', 2) : '') +
-      (lamps[0] ? flow('branch-1', 'M460 94V60H220V94', 3) : '') +
-      (lamps[1] ? flow('branch-2', 'M460 94V145H220V94', 3) : '');
+      wire('78,98 104,98 104,64 158,64') + bulb(174, 64, lamps[0], 1) + wire('190,64 246,64') + switchAt(246, 64, one, 1) +
+      wire('302,64 360,64 360,164 302,164') + switchAt(246, 164, two, 2) + wire('246,164 190,164') +
+      bulb(174, 164, lamps[1], 2) + wire('158,164 48,164 48,98') +
+      (lamps[0] ? flow('series', 'M48 98V164H360V64H104V98H78', 11) : '');
+    return battery() + wire('78,98 118,98') + junction(118, 98) +
+      wire('118,98 118,54 158,54') + bulb(174, 54, lamps[0], 1) + wire('190,54 246,54') + switchAt(246, 54, one, 1) + wire('302,54 322,54 322,98') +
+      wire('118,98 118,148 158,148') + bulb(174, 148, lamps[1], 2) + wire('190,148 246,148') + switchAt(246, 148, two, 2) + wire('302,148 322,148 322,98') +
+      junction(322, 98) + wire('322,98 360,98 360,206 48,206 48,98') +
+      (lamps.some(Boolean) ? flow('positive', 'M48 98V206H360V98H322', 8) + flow('negative', 'M118 98H78', 2) : '') +
+      (lamps[0] ? flow('branch-1', 'M322 98V54H118V98', 3) : '') +
+      (lamps[1] ? flow('branch-2', 'M322 98V148H118V98', 3) : '');
   }
-  const demoCircuit = () => {
+  const circuitSettingsHTML = () => DEMOS
+    ? `<div class="fig-ctrl sci-circuit-choices" role="group" aria-label="电路接法">${DEMOS.circuits.map(item => demoButton('sci-circuit', item.id, item.name)).join('')}</div>`
+    : '';
+  const demoCircuit = ({sideCircuitSettings = false} = {}) => {
     if (!DEMOS) return unavailable();
-    return '<div class="fig-ctrl">' + DEMOS.circuits.map(item => demoButton('sci-circuit', item.id, item.name)).join('') +
-      '</div><p class="sci-circuit-hint sci-model-note"></p>' + scrollHint +
-      '<div class="sci-demo-stage" tabindex="0" role="region" aria-label="电路示意图，可横向滚动"><svg class="fig-svg" viewBox="0 0 640 230" role="img" aria-label="电池、两个灯泡和两个开关组成的电路"><g class="circuit-layout"></g></svg></div>' +
-      '<div class="fig-ctrl">' + demoButton('sci-switch', '1', '开关 1') + demoButton('sci-switch', '2', '开关 2') + '</div>' +
-      '<p class="sci-observation sci-circuit-status" role="status"></p>' + motionControls() +
-      `<p class="sci-model-note">${escapeDemo(DEMOS.circuitModelNote)}</p>` + sourcesHTML('circuit');
+    return `${sideCircuitSettings ? '' : circuitSettingsHTML()}
+      <p class="sci-circuit-hint sci-model-note"></p>
+      <div class="sci-circuit-demo">
+        <div class="sci-demo-stage sci-circuit-stage"><svg class="fig-svg" viewBox="28 0 352 220" role="img" aria-label="电池、两个灯泡和两个开关组成的电路"><g class="circuit-layout"></g></svg></div>
+        <div class="sci-circuit-operate">
+          <div class="fig-ctrl sci-circuit-switches" role="group" aria-label="操作开关">${demoButton('sci-switch', '1', '开关 1')}${demoButton('sci-switch', '2', '开关 2')}</div>
+          <p class="sci-observation sci-circuit-status" role="status"></p>
+          ${motionControls('<button type="button" class="fig-btn" data-fig-act="sci-circuit-reset">重置实验</button>')}
+        </div>
+      </div>
+      <p class="sci-model-note">${escapeDemo(DEMOS.circuitModelNote)}</p>${sourcesHTML('circuit')}`;
   };
-  function circuitApply(fig, key) {
-    if (!DEMOS || !DEMOS.circuits.some(item => item.id === key)) return;
-    window.SciDemoMotion?.pause(fig);
-    if (key !== fig.dataset.circuitMode) {
+  function circuitApply(fig, key, reset = false) {
+    const mode = DEMOS?.circuits.find(item => item.id === key);
+    if (!mode) return;
+    if (reset || key !== fig.dataset.circuitMode) {
       fig.dataset.circuitMode = key;
       fig.dataset.switchOne = String(key !== 'open');
       fig.dataset.switchTwo = 'true';
@@ -1201,16 +1209,18 @@ const SciFigures = (() => {
     const one = fig.dataset.switchOne === 'true', two = fig.dataset.switchTwo === 'true';
     const {status} = circuitState(key, one, two);
     fig.querySelector('.circuit-layout').innerHTML = circuitLayout(key, one, two);
-    fig.querySelector('.sci-circuit-hint').textContent = DEMOS.circuits.find(item => item.id === key).note;
+    fig.querySelector('.sci-circuit-hint').textContent = mode.note;
     fig.querySelector('.sci-circuit-status').textContent = DEMOS.circuitStatus[status];
-    fig.querySelectorAll('[data-fig-act="sci-circuit"]').forEach(button => {
+    const workspace = fig.closest('.sci-circuit-topic');
+    (workspace || fig).querySelectorAll('[data-fig-act="sci-circuit"]').forEach(button => {
       const on = button.dataset.v === key;
       button.classList.toggle('fig-on', on);
       button.setAttribute('aria-pressed', String(on));
     });
     fig.querySelectorAll('[data-fig-act="sci-switch"]').forEach(button => {
       const closed = button.dataset.v === '1' ? one : two;
-      button.textContent = `开关 ${button.dataset.v}：${closed ? '闭合 · 点此断开' : '断开 · 点此闭合'}`;
+      button.textContent = `开关 ${button.dataset.v} · ${closed ? '闭合' : '断开'}`;
+      button.setAttribute('aria-label', `开关 ${button.dataset.v}`);
       button.setAttribute('aria-pressed', String(closed));
       button.classList.toggle('fig-on', closed);
     });
@@ -1264,8 +1274,8 @@ const SciFigures = (() => {
   };
 
   const DEMO_INIT = {
-    'demo-sci-states': { key: 'water', apply: statesApply, act: 'sci-state' },
-    'demo-sci-circuit': { key: 'series', apply: circuitApply, act: 'sci-circuit' },
+    'demo-sci-states': { key: 'water', apply: statesApply },
+    'demo-sci-circuit': { key: 'series', apply: circuitApply },
   };
 
   const DEFAULT_CAPS = {
@@ -1304,11 +1314,11 @@ const SciFigures = (() => {
     'sci-triangle': '杆长不变时，三角框架保持形状；加斜杆可把四边形分成两个三角形',
   };
 
-  function figHTML(id, cap) {
+  function figHTML(id, cap, options) {
     const fn = REG[id];
     if (!fn) return '';
     const capText = cap || DEFAULT_CAPS[id] || '';
-    return `<figure class="fig" data-fig="${id}">${DEFS}${fn()}${capText ? `<figcaption class="fig-cap">${capText}</figcaption>` : ''}</figure>`;
+    return `<figure class="fig" data-fig="${id}">${DEFS}${fn(options)}${capText ? `<figcaption class="fig-cap">${capText}</figcaption>` : ''}</figure>`;
   }
 
   /* ---------- 互动演示的事件委托 ---------- */
@@ -1316,9 +1326,9 @@ const SciFigures = (() => {
     doc.addEventListener('click', e => {
       const b = e.target.closest('[data-fig-act]');
       if (!b || b.disabled) return;
-      const fig = b.closest('.fig');
-      if (!fig) return;
       const act = b.dataset.figAct;
+      const fig = b.closest('.fig') || (act === 'sci-circuit' ? b.closest('.sci-circuit-topic')?.querySelector('[data-fig="demo-sci-circuit"]') : null);
+      if (!fig) return;
       if (act === 'sci-state') statesApply(fig, b.dataset.v);
       else if (act === 'sci-state-heat' || act === 'sci-state-cool') {
         const curNum = Number(fig.dataset.stateIdx);
@@ -1329,8 +1339,9 @@ const SciFigures = (() => {
         statesApply(fig, STATE_ORDER[next]);
       } else if (act === 'sci-circuit') {
         // 重新选模式也恢复该模式的起始开关，便于重复比较。
-        delete fig.dataset.circuitMode;
-        circuitApply(fig, b.dataset.v);
+        circuitApply(fig, b.dataset.v, true);
+      } else if (act === 'sci-circuit-reset') {
+        circuitApply(fig, fig.dataset.circuitMode, true);
       } else if (act === 'sci-switch') {
         const key = b.dataset.v === '1' ? 'switchOne' : 'switchTwo';
         fig.dataset[key] = String(fig.dataset[key] !== 'true');
@@ -1349,8 +1360,7 @@ const SciFigures = (() => {
         const id = fig.dataset.fig;
         const demo = DEMO_INIT[id];
         if (demo && !fig.dataset.init) {
-          const btn = fig.querySelector('[data-fig-act="' + demo.act + '"][data-v="' + demo.key + '"]');
-          demo.apply(fig, demo.key, btn);
+          demo.apply(fig, demo.key);
           fig.dataset.init = '1';
           window.SciDemoMotion?.mount(fig);
         }
@@ -1372,7 +1382,7 @@ const SciFigures = (() => {
   }
 
   return {
-    figHTML, circuitState, circuitLayout,
+    figHTML, circuitSettingsHTML, circuitState, circuitLayout,
     get FIG_IDS() { return Object.keys(REG); },
     has(id) { return Object.prototype.hasOwnProperty.call(REG, id); },
   };

@@ -30,6 +30,21 @@ test('串联任一断开两灯都灭，并联各支路独立，断路入口沿�
   }
 });
 
+test('电路工作区从侧栏提供接法，知识点搜索中的独立图示仍可切换接法', () => {
+  const window = {};
+  const data = require(path.join(source, 'sci-demo-data.js'));
+  vm.runInNewContext(fs.readFileSync(path.join(source, 'sci-figures.js'), 'utf8'), {window, SCI_DEMOS: data});
+  const {figHTML, circuitSettingsHTML} = window.SciFigures;
+  const inline = figHTML('demo-sci-circuit');
+  const workspace = figHTML('demo-sci-circuit', undefined, {sideCircuitSettings: true});
+  assert.ok(inline.includes(circuitSettingsHTML()));
+  for (const {id} of data.circuits) assert.ok(circuitSettingsHTML().includes(`data-v="${id}"`));
+  assert.doesNotMatch(workspace, /data-fig-act="sci-circuit"/);
+  assert.match(workspace, /data-fig-act="sci-switch"/);
+  assert.match(workspace, /data-sci-motion="play"/);
+  assert.match(workspace, /data-fig-act="sci-circuit-reset"/);
+});
+
 test('微粒运动始终在各自容器内，固态围绕固定位置振动，时间可重复定位', () => {
   for (const kind of ['ice', 'water', 'vapor']) for (let i = 0; i < 9; i++) {
     for (let t = 0; t < 60; t += .25) {
