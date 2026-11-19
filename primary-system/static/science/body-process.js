@@ -196,15 +196,14 @@
       else particles('nerve-in', id === 'process' ? 1 : t, 1, '#c28a27', 9, false);
     } else if (kind === 'senses') {
       attr($('[data-ear-drum]'), 'transform', `translate(${id === 'vibrate' ? 3 * Math.sin(t * Math.PI * 16) : 0} 0)`);
+      attr($('[data-taste-highlight]'), 'opacity', id === 'taste-input' ? .35 + .55 * Math.sin(Math.PI * t) : 0);
       if (id === 'light') { particles('eye-light', t, 1, '#c79428', 7, false); particles('eye-light-lower', t, 1, '#c79428', 7, false); }
       if (id === 'vision') particles('eye-signal', t, 1, '#327e9d', 8, false);
-      if (id === 'sound') particles('ear-sound', t, 2, '#c79428', 6);
+      if (id === 'sound') particles('ear-sound', t, 1, '#c79428', 7, false);
       if (id === 'vibrate') particles('ear-vibrate', t, 1, '#c79428', 7, false);
       if (id === 'hearing') particles('ear-signal', t, 1, '#327e9d', 8, false);
-      if (id === 'smell') {
-        if (t < .45) particles('nose-air', t / .45, 1, '#c79428', 7, false);
-        else particles('nose-signal', (t - .45) / .55, 1, '#327e9d', 8, false);
-      }
+      if (id === 'smell') particles('nose-air', t, 1, '#c79428', 7, false);
+      if (id === 'smell-signal') particles('nose-signal', t, 1, '#327e9d', 8, false);
       if (id === 'taste') particles('taste-signal', t, 1, '#327e9d', 8, false);
     }
   }

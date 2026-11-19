@@ -56,6 +56,7 @@ class HumanBodyStationTests(SimpleTestCase):
             ('digestion', 'digestion-observation'),
             ('movement', 'movement-observation'),
             ('nerves', 'nerves-observation'),
+            ('senses', 'senses-observation'),
         ):
             with self.subTest(slug=slug):
                 response = self.client.get(reverse('science-body-lesson', args=[slug]))
@@ -74,13 +75,17 @@ class HumanBodyStationTests(SimpleTestCase):
                     self.assertContains(response, 'data-arm-angle', count=1)
                     self.assertContains(response, 'data-arm-value', count=1)
                     self.assertContains(response, 'class="body-triceps-tendon"')
-                else:
+                elif slug == 'nerves':
                     self.assertContains(response, 'id="reaction"', count=1)
                     self.assertContains(response, 'href="#reaction"', count=1)
                     self.assertContains(response, 'class="body-stage body-process-stage body-nerves-stage"')
                     self.assertContains(response, '<figcaption data-process-caption>', count=1)
-        senses = self.client.get(reverse('science-body-lesson', args=['senses']))
-        self.assertNotContains(senses, 'data-process-settings')
+                else:
+                    self.assertContains(response, 'id="blindspot"', count=1)
+                    self.assertContains(response, 'href="#blindspot"', count=1)
+                    self.assertContains(response, 'class="body-stage body-process-stage body-senses-stage"')
+                    for mode in ('eye', 'ear', 'smell', 'taste'):
+                        self.assertContains(response, f'data-process-mode="{mode}"', count=1)
 
     def test_unknown_lesson_and_unsupported_method(self):
         self.assertEqual(self.client.get(reverse('science-body-lesson', args=['missing'])).status_code, 404)

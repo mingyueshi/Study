@@ -1,0 +1,11 @@
+<section class="body-panel body-blindspot" id="blindspot" aria-labelledby="blindspot-title">
+  <p class="body-kicker">眼睛的小实验</p>
+  <h2 id="blindspot-title">{{ blindspot.title }}</h2>
+  <p>{{ blindspot.intro }}</p>
+  <div class="body-blindspot-target" role="img" aria-label="左边十字，右边圆点">
+    <span class="body-blindspot-cross" aria-hidden="true"></span>
+    <span class="body-blindspot-dot" aria-hidden="true"></span>
+  </div>
+  <ol>{% for step in blindspot.steps %}<li>{{ step }}</li>{% endfor %}</ol>
+  <details class="body-answer"><summary>圆点为什么会消失？</summary><p>{{ blindspot.explanation }}</p></details>
+</section>

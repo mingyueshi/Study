@@ -2,6 +2,7 @@
 <nav class="{% if sidebar %}experiment-links{% else %}body-section-jumps{% endif %}" aria-label="本课工具">
   <a href="{% if lesson.slug == 'circulation' %}#heart{% else %}#explore{% endif %}">动手图解</a>
   {% if lesson.slug == 'nerves' %}<a href="#reaction">反应小游戏</a>{% endif %}
+  {% if lesson.slug == 'senses' %}<a href="#blindspot">盲点实验</a>{% endif %}
   <a href="#gallery">看真实图像</a><a href="#experiment">做个小实验</a><a href="#checkup">三题小挑战</a>
   {% if lesson.slug == 'circulation' %}<a href="#pulse">测脉搏</a><a href="#notebook">观察手册</a>{% endif %}
 </nav>

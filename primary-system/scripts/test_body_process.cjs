@@ -12,7 +12,7 @@ function harness(duration = 2000) {
   return {player, frames, tick, last: () => last, allow: value => { allowed = value; }};
 }
 
-test('六课九种演示的时间边界与最后一帧都能准确定位', () => {
+test('六课十种演示的时间边界与最后一帧都能准确定位', () => {
   let modes = 0;
   for (const lesson of content.lessons) for (const mode of lesson.animation.modes) {
     modes++;
@@ -29,7 +29,7 @@ test('六课九种演示的时间边界与最后一帧都能准确定位', () =>
     assert.equal(frameAt(mode.phases, -100).fraction, 0);
     assert.equal(frameAt(mode.phases, NaN).index, 0);
   }
-  assert.equal(modes, 9);
+  assert.equal(modes, 10);
 });
 
 test('暂停保留画面与进度，过期帧不会继续移动，继续播放从原位开始', () => {

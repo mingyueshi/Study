@@ -58,9 +58,12 @@ for (const lesson of lessons) {
     digestion: [['mouth', 'esophagus', 'stomach', 'intestine', 'colon', 'exit']],
     circulation: [['return', 'fill', 'pump'], ['return-body', 'fill-right', 'to-lungs', 'oxygenate', 'return-lungs', 'fill-left', 'to-body', 'deliver']],
     movement: [['bend', 'extend']], nerves: [['sense', 'process', 'respond']],
-    senses: [['light', 'vision'], ['sound', 'vibrate', 'hearing'], ['smell', 'taste']],
+    senses: [['light', 'vision'], ['sound', 'vibrate', 'hearing'], ['smell', 'smell-signal'], ['taste-input', 'taste']],
   };
   assert.deepEqual(animation.modes.map(mode => mode.phases.map(phase => phase.id)), expectedPhases[lesson.slug]);
+  if (lesson.slug === 'senses') {
+    assert.deepEqual(animation.modes.map(mode => mode.id), ['eye', 'ear', 'smell', 'taste']);
+  }
   if (lesson.slug === 'circulation') {
     texts(animation.modes[1].labels, ['title', 'lungs', 'body', 'getOxygen', 'releaseCarbon', 'giveOxygen', 'carryCarbon', 'fillRight', 'sendLungs', 'fillLeft', 'sendBody', 'returnBody', 'returnLungs', 'follow']);
   }
@@ -153,4 +156,4 @@ assert.deepEqual(growth.stages.map(stage => stage.id), ['infancy', 'early-childh
 for (const stage of growth.stages) texts(stage, ['label', 'age', 'icon', 'title', 'body']);
 sources(growth.sources);
 
-console.log('人体奥秘站：六课、七个器官档案、五阶段成长时间线、十二幅图像、十八道自测、三种协作场景、七道定位挑战、九种过程演示与实验手册通过结构校验。');
+console.log('人体奥秘站：六课、七个器官档案、五阶段成长时间线、十二幅图像、十八道自测、三种协作场景、七道定位挑战、十种过程演示与实验手册通过结构校验。');

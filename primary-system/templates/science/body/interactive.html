@@ -10,6 +10,7 @@
     {% elif lesson.slug == 'digestion' %}{% include 'science/body/digestion.html' with diagram=lesson.diagram %}
     {% elif lesson.slug == 'movement' %}{% include 'science/body/movement.html' with diagram=lesson.diagram %}
     {% elif lesson.slug == 'nerves' %}{% include 'science/body/nerves.html' with diagram=lesson.diagram %}
+    {% elif lesson.slug == 'senses' %}{% include 'science/body/senses.html' with diagram=lesson.diagram %}
     {% elif lesson.slug == 'circulation' %}
     <div class="body-process-stage">
       <div data-process-view="pump">{% include 'science/body/heart-anatomy.html' %}</div>
@@ -38,13 +39,7 @@
     <label class="body-process-scrub">拖动进度，停下来细看 <output data-process-position>第 1 步</output><input type="range" min="0" max="1000" step="1" value="0" data-process-progress></label>
     <p class="body-process-status" data-process-status role="status"></p>
   </div>
-  {% if not process_observation_id %}
-    <figure class="body-stage">
-      {% include 'science/body/senses.html' with diagram=lesson.diagram %}
-      <figcaption>{{ lesson.diagram.caption }}</figcaption>
-    </figure>
-  {% endif %}
-  {% if lesson.slug != 'nerves' %}<p class="body-process-legend" data-process-caption>{{ lesson.animation.modes.0.caption }}</p>{% endif %}
+  {% if lesson.slug != 'nerves' and lesson.slug != 'senses' %}<p class="body-process-legend" data-process-caption>{{ lesson.animation.modes.0.caption }}</p>{% endif %}
   <div class="body-demo-caption" data-process-explanation aria-live="polite">
     <p class="body-process-cue" data-process-cue>{{ lesson.animation.modes.0.phases.0.cue }}</p>
     <h3 data-process-title>{{ lesson.animation.modes.0.phases.0.title }}</h3>

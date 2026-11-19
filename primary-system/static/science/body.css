@@ -447,13 +447,28 @@ body:has(.body-station) { --page-width: 100%; }
 [data-body-reaction][data-state="waiting"] .body-reaction-target { border-color: #bb8634; background: #fff0ce; color: #865716; }
 [data-body-reaction][data-state="ready"] .body-reaction-target { border-color: #25734e; background: #297750; color: #fff; }
 [data-reaction-result] { margin-top: 12px; font-size: 23px; font-weight: 750; }
-.body-blindspot-target { display: flex; align-items: center; justify-content: space-evenly; min-height: 140px; padding: 18px; border: 1px solid var(--atlas-edge); border-radius: 15px; background: #fff; color: #263e34; font-size: 54px; }
+.body-blindspot-target {
+  display: flex; align-items: center; justify-content: space-between; box-sizing: border-box;
+  width: min(100%, 24rem); min-height: 140px; margin-inline: auto; padding-inline: clamp(14px, 6%, 28px);
+  border: 1px solid var(--atlas-edge); border-radius: 15px;
+  /* 盲点实验在各个阅读主题下使用相同的白底与深色标记。 */
+  background: oklch(100% 0 0); color: oklch(33% .035 162);
+}
+.body-blindspot-cross { position: relative; width: 22px; height: 22px; }
+.body-blindspot-cross::before, .body-blindspot-cross::after {
+  content: ""; position: absolute; inset: 50% auto auto 50%; width: 22px; height: 3px;
+  transform: translate(-50%, -50%); background: currentColor;
+}
+.body-blindspot-cross::after { width: 3px; height: 22px; }
+.body-blindspot-dot { width: 9px; height: 9px; border-radius: 50%; background: currentColor; }
 .body-blindspot ol { padding-left: 26px; font-size: 18px; }
 .body-nerve-route { opacity: .18; }
 [data-state="sense"] .body-nerve-in, [data-state="respond"] .body-nerve-out { opacity: 1; }
 [data-state="process"] .body-brain { fill: #efcd83; stroke: #9b702e; stroke-width: 5; }
 [data-sense-art] { display: none; }
-[data-state="eye"] [data-sense-art="eye"], [data-state="ear"] [data-sense-art="ear"], [data-state="smell"] [data-sense-art="smell"] { display: block; }
+[data-state="eye"] [data-sense-art="eye"], [data-state="ear"] [data-sense-art="ear"],
+:is([data-state="smell"], [data-state="taste"]) [data-sense-art="mouth-nose"] { display: block; }
+[data-state="smell"] [data-sense-route="taste"], [data-state="taste"] [data-sense-route="smell"] { visibility: hidden; }
 
 @media (max-width: 1050px) {
   .body-lesson-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }

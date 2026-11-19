@@ -24,18 +24,6 @@
     <a class="body-inline-link" href="#pulse">打开计时器和记录表 ↓</a>
   {% endif %}
 </section>
-{% if lesson.slug == 'senses' %}
-<section class="body-panel body-blindspot" id="blindspot" aria-labelledby="blindspot-title">
-  <p class="body-kicker">眼睛的小实验</p>
-  <h2 id="blindspot-title">{{ blindspot.title }}</h2>
-  <p>{{ blindspot.intro }}</p>
-  <div class="body-blindspot-target" role="img" aria-label="左边十字，右边圆点">
-    <span aria-hidden="true">＋</span><span aria-hidden="true">●</span>
-  </div>
-  <ol>{% for step in blindspot.steps %}<li>{{ step }}</li>{% endfor %}</ol>
-  <details class="body-answer"><summary>圆点为什么会消失？</summary><p>{{ blindspot.explanation }}</p></details>
-</section>
-{% endif %}
 <section class="body-panel body-checkup" id="checkup" aria-labelledby="checkup-title">
   <p class="body-kicker">把发现用起来</p>
   <h2 id="checkup-title">三题小挑战</h2>

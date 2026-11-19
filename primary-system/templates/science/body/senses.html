@@ -1,10 +1,13 @@
-<svg viewBox="0 0 640 400" role="img" aria-labelledby="senses-title">
+<figure class="body-stage body-process-stage body-senses-stage">
+<svg viewBox="0 29 590 356" role="img" aria-labelledby="senses-title" aria-describedby="senses-desc">
   <title id="senses-title">{{ diagram.title }}</title>
+  <desc id="senses-desc">{{ diagram.caption }}</desc>
   <defs><marker id="sense-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="3" markerHeight="3" orient="auto"><path d="M0 0 10 5 0 10" fill="#a77522"/></marker></defs>
   <g fill="none" stroke="none" aria-hidden="true">
     <path data-motion-path="eye-light" d="M41 174H125L354 207"/><path data-motion-path="eye-light-lower" d="M41 241H125L354 207"/>
     <path data-motion-path="eye-signal" d="M354 207L463 238"/>
-    <path data-motion-path="ear-sound" d="M22 213H287"/><path data-motion-path="ear-vibrate" d="M287 213L322 173L343 193L384 190"/>
+    <path data-motion-path="ear-sound" d="M22 213H292"/>
+    <path data-motion-path="ear-vibrate" d="M292 213L322 173L343 193L384 190c64-52 137 21 85 68-47 42-96-16-59-42 24-16 50 13 28 28"/>
     <path data-motion-path="ear-signal" d="M438 244Q466 242 485 223H568"/>
     <path data-motion-path="nose-air" d="M71 145Q140 160 217 161"/>
     <path data-motion-path="nose-signal" d="M217 161L248 174Q308 173 313 117"/>
@@ -42,12 +45,21 @@
       <text x="419" y="159" font-size="20">{{ diagram.labels.nerve }} →</text>
     </g>
   </g>
-  <g data-sense-art="smell">
+  <g data-sense-art="mouth-nose">
     <path d="M251 53c-46 5-74 48-65 96l-22 45 40 9 5 65c5 26 34 40 65 37l24 44h131l-58-124c19-26 29-52 24-86-8-55-65-94-144-86Z" fill="#f6dbb3" stroke="#ba9363" stroke-width="4"/>
     <path d="m217 104-17 57 38 15" fill="none" stroke="#a67f56" stroke-width="5" stroke-linecap="round"/>
     <path d="M203 217q40-4 58 15-32 26-49 9" fill="#d98483" stroke="#aa6567" stroke-width="3"/>
-    <circle cx="134" cy="162" r="10" fill="#d4a835"/><circle cx="101" cy="155" r="7" fill="#d4a835"/><circle cx="71" cy="145" r="5" fill="#d4a835"/>
-    <path d="M248 174q60-1 65-57m-66 115q64-14 69-99" fill="none" stroke="#ad8536" stroke-width="4" stroke-dasharray="6 6"/>
-    <g class="body-svg-labels"><text x="29" y="109">{{ diagram.labels.nose }}</text><text x="25" y="290">{{ diagram.labels.tongue }}</text><text x="398" y="111" font-size="20">{{ diagram.labels.nerve }}</text></g>
+    <ellipse data-taste-highlight cx="225" cy="232" rx="26" ry="18" fill="none" stroke="#b77926" stroke-width="4" opacity="0"/>
+    <g fill="none" stroke="#327e9d" stroke-width="4" stroke-dasharray="6 6">
+      <path data-sense-route="smell" d="M217 161L248 174Q308 173 313 117"/>
+      <path data-sense-route="taste" d="M217 232H247Q311 218 316 133"/>
+    </g>
+    <g class="body-svg-labels">
+      <text data-sense-route="smell" x="29" y="109">{{ diagram.labels.nose }}</text>
+      <text data-sense-route="taste" x="25" y="290">{{ diagram.labels.tongue }}</text>
+      <text x="335" y="119" font-size="20">{{ diagram.labels.nerve }}</text>
+    </g>
   </g>
 </svg>
+<figcaption data-process-caption>{{ lesson.animation.modes.0.caption }}</figcaption>
+</figure>

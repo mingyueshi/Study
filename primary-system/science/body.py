@@ -14,6 +14,7 @@ PROCESS_OBSERVATION_IDS = {
     'circulation': 'circulation-observation',
     'movement': 'movement-observation',
     'nerves': 'nerves-observation',
+    'senses': 'senses-observation',
 }
 
 

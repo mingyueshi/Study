@@ -2,9 +2,9 @@
 {% load static %}
 {% block content %}
 <link rel="stylesheet" href="{% static 'study_topics/platform-bridge.css' %}">
-<link rel="stylesheet" href="{% static 'science/body.css' %}?v=20261116">
+<link rel="stylesheet" href="{% static 'science/body.css' %}?v=4467d53d39d6">
 <link rel="stylesheet" href="{% static 'science/body-lab.css' %}?v=20261117">
-{% if lesson %}<link rel="stylesheet" href="{% static 'science/body-process.css' %}?v=d7169006ffd7">{% endif %}
+{% if lesson %}<link rel="stylesheet" href="{% static 'science/body-process.css' %}?v=32060123b929">{% endif %}
 {% if process_observation_id %}<link rel="stylesheet" href="{% static 'study_topics/map-skills/experiment.css' %}?v=1d0d085a4e06">{% endif %}
 <div class="body-station color-science">
   {% if not process_observation_id %}
@@ -16,7 +16,7 @@
   {{ body_progress|json_script:"body-progress-data" }}
   <script src="{% static 'science/body-progress.js' %}?v=20261116" defer></script>
   <script src="{% static 'science/body.js' %}?v=8512878a18b7" defer></script>
-  {% if lesson %}<script src="{% static 'science/body-process.js' %}?v=8da510778b32" defer></script>{% endif %}
+  {% if lesson %}<script src="{% static 'science/body-process.js' %}?v=c8b72bba11ad" defer></script>{% endif %}
   {% if process_observation_id %}<script src="{% static 'study_topics/map-skills/experiment.js' %}?v=c2884b21d5bb" defer></script>{% endif %}
   {% block station_scripts %}{% endblock %}
 </div>
