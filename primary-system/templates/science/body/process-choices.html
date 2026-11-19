@@ -1,0 +1,8 @@
+{% if lesson.animation.modes|length > 1 %}
+  {% if sidebar %}<p class="experiment-label">观察方式</p>{% endif %}
+  <div class="body-controls body-process-modes" role="group" aria-label="选择观察内容">
+    {% for mode in lesson.animation.modes %}<button type="button" data-process-mode="{{ mode.id }}" aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}">{{ mode.label }}</button>{% endfor %}
+  </div>
+{% endif %}
+{% if sidebar %}<p class="experiment-label" id="process-phase-label">观察阶段</p>{% endif %}
+<div class="body-process-phases" data-process-phases role="group" {% if sidebar %}aria-labelledby="process-phase-label"{% else %}aria-label="选择过程中的一步"{% endif %}></div>

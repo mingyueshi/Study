@@ -13,7 +13,7 @@
   <p class="body-course-progress" data-current-progress hidden></p>
   {% if process_observation_id %}
   <div class="experiment-workspace" data-sidebar-layout=".experiment-side" data-sidebar-width="clamp(260px, 24vw, 320px)"
-       data-sidebar-label="{{ lesson.label }}实验工具" data-sidebar-collapse-key="primary_sidebar_collapsed_v1:.body-side">
+       data-sidebar-label="{% if lesson.slug == 'circulation' %}循环{% else %}{{ lesson.label }}{% endif %}实验工具" data-sidebar-collapse-key="primary_sidebar_collapsed_v1:.body-side">
   {% else %}
   <div class="body-workspace" data-sidebar-label="观察与思考">
   {% endif %}
@@ -44,16 +44,16 @@
         <p class="body-process-takeaway">{{ lesson.takeaway }}</p>
         {% endif %}
       </details>
+      {% if lesson.slug == 'circulation' %}{% include 'science/body/pulse.html' %}{% endif %}
     </div>
     {% if process_observation_id %}
     <aside class="experiment-side" aria-label="{{ lesson.label }}观察设置与专题导航">
       <details class="experiment-tools" id="{{ process_observation_id }}" data-process-settings data-process-controls open hidden>
         <summary>观察设置</summary>
         <div class="experiment-controls">
-          <p class="experiment-label" id="process-phase-label">观察阶段</p>
-          <div class="body-process-phases" data-process-phases role="group" aria-labelledby="process-phase-label"></div>
+          {% include 'science/body/process-choices.html' with sidebar=True %}
           {% include 'science/body/process-speed.html' %}
-          <a class="experiment-return" href="#explore" data-experiment-return>返回{{ lesson.label }}图 ↓</a>
+          <a class="experiment-return" href="{% if lesson.slug == 'circulation' %}#heart{% else %}#explore{% endif %}" data-experiment-return>返回{{ lesson.label }}图 ↓</a>
         </div>
       </details>
       <details class="experiment-tools">
@@ -91,9 +91,6 @@
     </aside>
     {% endif %}
   </div>
-  {% if lesson.slug == 'circulation' %}
-    {% include 'science/body/pulse.html' %}
-  {% endif %}
   <dialog class="body-media-dialog" id="body-media-dialog" aria-labelledby="body-media-title">
     <form method="dialog"><button type="submit" class="body-button" autofocus>关闭大图 ×</button></form>
     <h2 id="body-media-title"></h2>

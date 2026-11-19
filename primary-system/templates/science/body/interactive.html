@@ -6,14 +6,17 @@
     {% if process_observation_id %}<a class="experiment-jump" href="#{{ process_observation_id }}" data-experiment-jump>调整观察设置 ↗</a>{% endif %}
   </div>
   {% if process_observation_id %}
-  {% if lesson.slug == 'breathing' %}{% include 'science/body/breathing.html' with diagram=lesson.diagram %}
-  {% else %}{% include 'science/body/digestion.html' with diagram=lesson.diagram %}{% endif %}
+    {% if lesson.slug == 'breathing' %}{% include 'science/body/breathing.html' with diagram=lesson.diagram %}
+    {% elif lesson.slug == 'digestion' %}{% include 'science/body/digestion.html' with diagram=lesson.diagram %}
+    {% elif lesson.slug == 'circulation' %}
+    <div class="body-process-stage">
+      <div data-process-view="pump">{% include 'science/body/heart-anatomy.html' %}</div>
+      <div data-process-view="circuit" hidden>{% include 'science/body/circuit.html' %}</div>
+    </div>
+    {% endif %}
   {% else %}
   <div class="body-process-controls" data-process-controls hidden>
-    {% if lesson.animation.modes|length > 1 %}<div class="body-controls body-process-modes" role="group" aria-label="选择观察内容">
-    {% for mode in lesson.animation.modes %}<button type="button" data-process-mode="{{ mode.id }}" aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}">{{ mode.label }}</button>{% endfor %}
-    </div>{% endif %}
-    <div class="body-process-phases" data-process-phases role="group" aria-label="选择过程中的一步"></div>
+    {% include 'science/body/process-choices.html' %}
   </div>
   {% endif %}
   <div class="body-process-player" data-process-player hidden>
@@ -27,10 +30,7 @@
     <p class="body-process-status" data-process-status role="status"></p>
     {% if lesson.slug == 'movement' %}<label class="body-arm-slider">{{ lesson.diagram.labels.slider }}<input type="range" min="0" max="110" value="0" step="1" data-arm-angle><span><span>{{ lesson.diagram.labels.straight }}</span><span>{{ lesson.diagram.labels.bent }}</span></span></label>{% endif %}
   </div>
-  {% if lesson.slug == 'circulation' %}
-    <div data-process-view="pump">{% include 'science/body/heart-anatomy.html' %}</div>
-    <div data-process-view="circuit" hidden>{% include 'science/body/circuit.html' %}</div>
-  {% elif not process_observation_id %}
+  {% if not process_observation_id %}
     <figure class="body-stage">
       {% if lesson.slug == 'nerves' %}{% include 'science/body/nerves.html' with diagram=lesson.diagram %}
       {% elif lesson.slug == 'senses' %}{% include 'science/body/senses.html' with diagram=lesson.diagram %}

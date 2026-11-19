@@ -64,6 +64,8 @@
   const explanation = $('[data-process-explanation]');
   const speed = settings.querySelector('[data-process-speed]');
   const phaseList = settings.querySelector('[data-process-phases]');
+  const modeButtons = [...settings.querySelectorAll('[data-process-mode]')];
+  const oxygenReading = $('[data-circuit-oxygen]');
   const arm = $('[data-arm-angle]');
   const paths = new Map();
   const dots = new Map();
@@ -153,6 +155,8 @@
       const oxygen = id === 'oxygenate' ? t : id === 'deliver' ? 1 - t : index >= 4 ? 1 : 0;
       const blue = [54,125,162], red = [185,80,77];
       attr($('[data-circuit-token] circle'), 'fill', `rgb(${blue.map((v, i) => Math.round(v + (red[i] - v) * oxygen)).join(',')})`);
+      const reading = id === 'oxygenate' ? '在肺增加' : id === 'deliver' ? '在全身组织减少' : oxygen ? '较多' : '较少';
+      if (oxygenReading && oxygenReading.textContent !== reading) oxygenReading.textContent = reading;
       all('[data-circuit-track]').forEach(path => { path.style.opacity = path.dataset.circuitTrack === id ? '1' : '.28'; path.style.strokeWidth = path.dataset.circuitTrack === id ? '11' : '7'; });
     } else if (kind === 'movement') {
       armShape(110 * (id === 'bend' ? eased : 1 - eased));
@@ -207,7 +211,7 @@
     mode = content.modes.find(item => item.id === id);
     root.dataset.processMode = id;
     lastPhase = -1;
-    all('[data-process-mode]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.processMode === id)));
+    modeButtons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.processMode === id)));
     all('[data-process-view]').forEach(view => { view.hidden = view.dataset.processView !== id; });
     $('[data-process-caption]').textContent = mode.caption;
     phaseList.replaceChildren();
@@ -238,7 +242,7 @@
     for (let i = 0; i < 24; i++) { const mid = (low + high) / 2; if (smooth(mid) < volume) low = mid; else high = mid; }
     player.seek((low + high) / 2 * mode.phases[0].duration);
   });
-  all('[data-process-mode]').forEach(button => button.addEventListener('click', () => chooseMode(button.dataset.processMode)));
+  modeButtons.forEach(button => button.addEventListener('click', () => chooseMode(button.dataset.processMode)));
   const preferencesChanged = () => { if (!fullMotion()) player.pause(); sync(player.state()); };
   media.addEventListener('change', preferencesChanged);
   document.addEventListener('study:effects-change', preferencesChanged);

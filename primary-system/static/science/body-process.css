@@ -45,16 +45,21 @@
 .body-digestion.body-process-lab.geo-experiment .experiment-heading {
   background: linear-gradient(120deg, oklch(26% .052 50), oklch(40% .085 58));
 }
+.body-circulation.body-process-lab.geo-experiment .experiment-heading {
+  background: linear-gradient(120deg, oklch(25% .064 24), oklch(41% .085 27));
+}
 .body-process-lab .experiment-heading :is(.body-kicker, .body-lesson-lead) { color: inherit; }
 .body-process-lab .experiment-heading h1 { font-size: clamp(30px, 3.5vw, 52px); }
-.body-process-lab :is(#explore, #gallery, #experiment, #checkup, #body-notes-title, [data-process-settings]) { scroll-margin-top: 16px; }
+.body-process-lab :is(#explore, #heart, #gallery, #experiment, #checkup, #pulse, #notebook, #body-notes-title, [data-process-settings]) { scroll-margin-top: 16px; }
 .body-process-lab .sl-scroll > .experiment-tools + .experiment-tools { margin-block-start: 8px; }
 .body-process-lab .body-process-phases { display: grid; }
+.body-process-lab .experiment-controls .body-process-modes { display: grid; margin: 0; }
+.body-process-lab .experiment-controls .body-process-modes button { border-radius: 9px; padding: 8px 12px; text-align: start; font-size: 16px; }
 .body-digestion.body-process-lab .body-process-phases { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .body-process-lab .body-process-phases button { font-size: 16px; }
 .body-process-lab .experiment-controls .body-process-speed { margin: 0; font-size: 16px; font-weight: 750; white-space: normal; }
 .body-process-lab .experiment-controls .inline-choice-options button { min-height: 44px; }
-.body-process-lab.geo-experiment .experiment-return[href="#explore"] { display: inline-flex; }
+.body-process-lab.geo-experiment .experiment-return[data-experiment-return] { display: inline-flex; }
 .body-process-lab .body-process:not([data-process-mode]) .experiment-jump { display: none; }
 .body-process-lab .body-demo-heading .experiment-jump { margin-top: 4px; }
 .body-process-lab .body-process-scrub input { min-height: 44px; }
@@ -66,6 +71,13 @@
 .body-process-lab .body-process-stage { margin: 0; }
 .body-process-lab .body-process-stage figcaption { text-align: center; }
 .body-digestion-stage .body-svg-labels { font-size: 26px; }
+.body-circulation.body-process-lab .body-process-stage .body-stage { margin: 0; }
+.body-circulation.body-process-lab #notebook { margin-top: 0; }
+.body-circuit-oxygen {
+  width: fit-content; margin: 8px auto; padding: 4px 10px; border-radius: 8px; background: var(--atlas-white); color: var(--atlas-ink);
+  font-size: 16px; text-align: center;
+}
+.body-circuit-oxygen strong { margin-inline-start: 8px; color: var(--lesson-accent); }
 
 @media (min-width: 1280px) {
   .body-process-lab .body-process {
@@ -77,6 +89,9 @@
   .body-process-lab .body-demo-caption { grid-area: 3 / 2; }
   .body-process-lab .body-process-legend { grid-area: 4 / 1 / 5 / -1; }
   .body-process-lab :is(.body-process-note, noscript) { grid-column: 1 / -1; }
+}
+@media (max-width: 1100px) {
+  .body-circulation.body-process-lab :is(.body-pulse, .body-notebook-grid, .body-record-list) { grid-template-columns: minmax(0, 1fr); }
 }
 @media screen and (max-width: 640px) {
   .body-breathing.body-process-lab [data-process-mode] .body-breath-model { grid-template-columns: minmax(0, 1fr); max-width: 340px; margin-inline: auto; }

@@ -34,12 +34,17 @@ class HumanBodyStationTests(SimpleTestCase):
     def test_circulation_has_both_activities_and_local_assets(self):
         url = reverse('science-body-lesson', args=['circulation'])
         response = self.client.get(url)
-        self.assertContains(response, 'id="heart"')
-        self.assertContains(response, 'id="pulse"')
+        for anchor in ('heart', 'pulse', 'notebook', 'gallery', 'experiment', 'checkup'):
+            self.assertContains(response, f'id="{anchor}"', count=1)
         self.assertContains(response, 'data-process-status role="status"')
         self.assertContains(response, 'data-seconds="30"')
         self.assertContains(response, '心脏正面简化剖面')
-        self.assertContains(response, 'data-process-mode="circuit"')
+        self.assertContains(response, 'id="circulation-observation" data-process-settings')
+        self.assertContains(response, 'data-process-mode="pump"', count=1)
+        self.assertContains(response, 'data-process-mode="circuit"', count=1)
+        self.assertContains(response, 'data-process-speed', count=1)
+        self.assertContains(response, 'data-process-phases', count=1)
+        self.assertContains(response, 'data-circuit-oxygen')
         self.assertContains(response, 'data-circuit-track=', count=8)
         for asset in ('science/body.css', 'science/body.js'):
             self.assertContains(response, f'/static/{asset}')
@@ -60,8 +65,8 @@ class HumanBodyStationTests(SimpleTestCase):
                     self.assertContains(response, 'class="body-breath-alveoli"')
                 else:
                     self.assertContains(response, 'href="#digestion-intestine-path"', count=2)
-        circulation = self.client.get(reverse('science-body-lesson', args=['circulation']))
-        self.assertNotContains(circulation, 'data-process-settings')
+        movement = self.client.get(reverse('science-body-lesson', args=['movement']))
+        self.assertNotContains(movement, 'data-process-settings')
 
     def test_unknown_lesson_and_unsupported_method(self):
         self.assertEqual(self.client.get(reverse('science-body-lesson', args=['missing'])).status_code, 404)

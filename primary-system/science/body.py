@@ -8,7 +8,11 @@ from django.shortcuts import render
 from django.views.decorators.http import require_safe
 
 
-PROCESS_OBSERVATION_IDS = {'breathing': 'breath-observation', 'digestion': 'digestion-observation'}
+PROCESS_OBSERVATION_IDS = {
+    'breathing': 'breath-observation',
+    'digestion': 'digestion-observation',
+    'circulation': 'circulation-observation',
+}
 
 
 def load_content():

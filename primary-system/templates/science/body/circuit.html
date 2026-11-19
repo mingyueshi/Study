@@ -1,10 +1,18 @@
 <figure class="body-stage body-circuit-stage">
-  <svg viewBox="0 0 700 460" role="img" aria-labelledby="circuit-title circuit-desc">
+  <svg viewBox="36 13 628 416" role="img" aria-labelledby="circuit-title circuit-desc">
     <title id="circuit-title">{{ lesson.animation.modes.1.labels.title }}</title><desc id="circuit-desc">{{ heart.route }}。{{ heart.legend }}</desc>
     <defs>
       <marker id="circuit-arrow-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="2.5" markerHeight="2.5" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#367da2"/></marker>
       <marker id="circuit-arrow-red" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="2.5" markerHeight="2.5" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#b9504d"/></marker>
     </defs>
+    <g stroke-width="2">
+      <rect x="82" y="55" width="116" height="82" rx="18" fill="#d3e6f0" stroke="#77a5bc"/>
+      <rect x="292" y="55" width="116" height="82" rx="18" fill="#d3e6f0" stroke="#77a5bc"/>
+      <rect x="490" y="43" width="140" height="116" rx="24" fill="#e2efdb" stroke="#97b886"/>
+      <rect x="70" y="300" width="140" height="118" rx="24" fill="#fff0d1" stroke="#d5b880"/>
+      <rect x="292" y="309" width="116" height="82" rx="18" fill="#f5d9d0" stroke="#cd8e83"/>
+      <rect x="502" y="309" width="116" height="82" rx="18" fill="#f5d9d0" stroke="#cd8e83"/>
+    </g>
     <g fill="none" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" opacity=".65">
       <path data-circuit-track="return-body" d="M110 350H54V100H140" stroke="#367da2" marker-end="url(#circuit-arrow-blue)"/>
       <path data-circuit-track="fill-right" d="M140 100H350" stroke="#367da2" marker-end="url(#circuit-arrow-blue)"/>
@@ -19,23 +27,16 @@
       <path d="M47 242 54 229 61 242ZM239 93 252 100 239 107ZM440 93 453 100 440 107Z" fill="#367da2"/>
       <path d="M639 229 646 242 653 229ZM457 343 444 350 457 357ZM252 343 239 350 252 357Z" fill="#b9504d"/>
     </g>
-    <g stroke-width="2">
-      <rect x="82" y="55" width="116" height="82" rx="18" fill="#d3e6f0" stroke="#77a5bc"/>
-      <rect x="292" y="55" width="116" height="82" rx="18" fill="#d3e6f0" stroke="#77a5bc"/>
-      <rect x="490" y="43" width="140" height="116" rx="24" fill="#e2efdb" stroke="#97b886"/>
-      <rect x="70" y="300" width="140" height="118" rx="24" fill="#fff0d1" stroke="#d5b880"/>
-      <rect x="292" y="309" width="116" height="82" rx="18" fill="#f5d9d0" stroke="#cd8e83"/>
-      <rect x="502" y="309" width="116" height="82" rx="18" fill="#f5d9d0" stroke="#cd8e83"/>
-    </g>
-    <g text-anchor="middle" font-size="24" font-weight="750" fill="#234d43">
+    <g text-anchor="middle" font-size="32" font-weight="750" fill="#234d43">
       <text x="140" y="84">{{ lesson.diagram.labels.rightAtrium }}</text><text x="350" y="84">{{ lesson.diagram.labels.rightVentricle }}</text><text x="560" y="78">{{ lesson.animation.modes.1.labels.lungs }}</text>
       <text x="140" y="335">{{ lesson.animation.modes.1.labels.body }}</text><text x="350" y="337">{{ lesson.diagram.labels.leftVentricle }}</text><text x="560" y="337">{{ lesson.diagram.labels.leftAtrium }}</text>
-      <g font-size="16"><text x="560" y="131">{{ lesson.animation.modes.1.labels.getOxygen }}</text><text x="560" y="151">{{ lesson.animation.modes.1.labels.releaseCarbon }}</text><text x="140" y="386">{{ lesson.animation.modes.1.labels.giveOxygen }}</text><text x="140" y="407">{{ lesson.animation.modes.1.labels.carryCarbon }}</text></g>
+      <g font-size="19"><text x="560" y="131">{{ lesson.animation.modes.1.labels.getOxygen }}</text><text x="560" y="151">{{ lesson.animation.modes.1.labels.releaseCarbon }}</text><text x="140" y="386">{{ lesson.animation.modes.1.labels.giveOxygen }}</text><text x="140" y="407">{{ lesson.animation.modes.1.labels.carryCarbon }}</text></g>
     </g>
-    <g text-anchor="middle" font-size="17" fill="#416961"><text x="245" y="43">{{ lesson.animation.modes.1.labels.fillRight }}</text><text x="447" y="43">{{ lesson.animation.modes.1.labels.sendLungs }}</text><text x="449" y="414">{{ lesson.animation.modes.1.labels.fillLeft }}</text><text x="246" y="414">{{ lesson.animation.modes.1.labels.sendBody }}</text><text x="140" y="235">{{ lesson.animation.modes.1.labels.returnBody }}</text><text x="560" y="235">{{ lesson.animation.modes.1.labels.returnLungs }}</text></g>
+    <g text-anchor="middle" font-size="20" fill="#416961"><text x="245" y="43">{{ lesson.animation.modes.1.labels.fillRight }}</text><text x="447" y="43">{{ lesson.animation.modes.1.labels.sendLungs }}</text><text x="449" y="414">{{ lesson.animation.modes.1.labels.fillLeft }}</text><text x="246" y="414">{{ lesson.animation.modes.1.labels.sendBody }}</text><text x="140" y="235">{{ lesson.animation.modes.1.labels.returnBody }}</text><text x="560" y="235">{{ lesson.animation.modes.1.labels.returnLungs }}</text></g>
     <path d="M313 206h25l11-22 15 45 13-23h23" fill="none" stroke="#c4a58b" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
     <text x="350" y="269" text-anchor="middle" font-size="19" fill="#6f7058">{{ lesson.animation.modes.1.labels.follow }}</text>
     <g data-circuit-token transform="translate(110 350)"><circle r="12" fill="#367da2" stroke="#fff" stroke-width="4"/><circle r="4" fill="#fff" opacity=".6"/></g>
   </svg>
+  <p class="body-circuit-oxygen">血液含氧<strong data-circuit-oxygen>较少</strong></p>
   <figcaption>{{ heart.route }}</figcaption>
 </figure>
