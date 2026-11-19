@@ -354,13 +354,14 @@ BANDS.forEach(band => check(territoryDynasties.has(band.id), band.name + ' 应�
 /* ---------- 入口文件（多页面系统） ---------- */
 console.log('— 入口文件（多页面系统） —');
 check(fileExists('README.md'), '缺少历史时间轴维护说明');
-/* 页面引用均应在可独立拷走的目录内。 */
+/* 页面资源随目录发布。显式复用的相邻专题资源也必须存在于本地。 */
 const PAGE_REFS = {
   'index.html': ['content.js', 'timeline-data.js', 'dynasty-data.js', 'shared.js', 'home-app.js', 'styles.css', 'timeline.html', 'dynasties.html', 'era.html'],
   'timeline.html': ['content.js', 'timeline-data.js', 'media-data.js', 'dynasty-data.js', 'shared.js', 'navigation.js', 'timeline-app.js', 'styles.css', 'timeline.css',
     'dynasties.html', 'era.html'],
   'dynasties.html': ['content.js', 'dynasty-data.js', 'shared.js', 'territory-links.js', 'dynasty-app.js', 'styles.css', 'dynasty.css', 'territory.html', 'timeline.html'],
-  'territory.html': ['content.js', 'dynasty-data.js', 'territory-data.js', 'territory-geo.js', 'shared.js', 'territory-app.js', 'styles.css', 'territory.css', 'territory-page.css', 'dynasties.html', 'timeline.html'],
+  'territory.html': ['content.js', 'dynasty-data.js', 'territory-data.js', 'territory-geo.js', 'shared.js', 'territory-app.js', 'styles.css', 'territory.css', 'territory-page.css',
+    '../map-skills/experiment.css', '../map-skills/experiment.js', '../history/index.html', 'dynasties.html', 'timeline.html'],
   'era.html': ['content.js', 'timeline-data.js', 'media-data.js', 'dynasty-data.js', 'shared.js', 'era-app.js', 'styles.css', 'era.css', 'media.css',
     'timeline.html'],
   'event.html': ['content.js', 'timeline-data.js', 'media-data.js', 'reading-data.js', 'shared.js', 'navigation.js', 'event-app.js', 'styles.css', 'era.css', 'media.css',
@@ -384,10 +385,13 @@ Object.entries(PAGE_REFS).forEach(([page, refs]) => {
   refs.forEach(f => check(html.includes(f), page + ' 应引用 ' + f));
   for (const [, target] of html.matchAll(/(?:href|src)="([^"#?]+)(?:[#?][^"]*)?"/g)) {
     const sharedHistory = /^\.\.\/history\/(knowledge-dynasties|media)\.js$/.test(target);
-    check((!/[/:]/.test(target) || sharedHistory) && fileExists(target), page + ' 应引用系统内存在的文件：' + target);
+    const sharedTerritory = page === 'territory.html' &&
+      ['../map-skills/experiment.css', '../map-skills/experiment.js', '../history/index.html'].includes(target);
+    check((!/[/:]/.test(target) || sharedHistory || sharedTerritory) && fileExists(target), page + ' 应引用系统内存在的文件：' + target);
   }
   check(html.includes('lang="zh-CN"'), page + ' 应声明 zh-CN');
-  check(html.includes('tl-sysnav'), page + ' 应有系统导航条');
+  const hasNavigation = page === 'territory.html' ? html.includes('class="experiment-links" aria-label="历史时间轴系统页面导航"') : html.includes('tl-sysnav');
+  check(hasNavigation, page + ' 应有系统导航条');
   check(!/https?:\/\//.test(html.replace(/<!--[\s\S]*?-->/g, '').replace(/xmlns="http:\/\/www\.w3\.org\/2000\/svg"/g, '')), page + ' 不应引用外部网络资源（离线优先）');
 });
 

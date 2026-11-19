@@ -160,6 +160,9 @@ def template(source, topic, page, theme, index_route):
     if (topic, page) == ('history-timeline', 'dynasties'):
         anchor = '<div class="cal-quiz" id="cal-quiz" aria-label="练一练"></div>'
         content = replace_once(content, anchor, CALENDAR_AUDIO + '\n        ' + anchor)
+    if (topic, page) == ('history-timeline', 'territory'):
+        content = rewrite_page_links(content, {'territory.html': 'history-timeline-territory',
+                                               '../history/index.html': 'history-study'})
     if topic == 'geo-map' and page in ('china', 'world'):
         anchor = '<p class="gm-layer-hint" id="gm-layer-hint"></p>'
         link = """<a class="study-map-tool" href="{% url 'geography-study' %}#lesson-gu2-3">地图三要素与比例尺 →</a>"""
@@ -181,7 +184,8 @@ def template(source, topic, page, theme, index_route):
             asset_path = path.removeprefix('../')
         if topic == 'climate' and path == '../geo-map/china-geo.js':
             asset_path = 'geo-map/china-geo.js'
-        if topic in ('climate', 'earth', 'ocean') and path in ('../map-skills/experiment.css', '../map-skills/experiment.js'):
+        shared_experiment = path in ('../map-skills/experiment.css', '../map-skills/experiment.js')
+        if shared_experiment:
             asset_path = path.removeprefix('../')
         asset_url = "{% static 'study_topics/" + asset_path + "' %}"
         if topic in ('geo', 'history') and path == 'lab.js':
@@ -190,7 +194,7 @@ def template(source, topic, page, theme, index_route):
             asset_url += '?v=20261114b9'
         if topic == 'geo-map' and path.endswith(('.css', '.js')):
             asset_url += '?v=' + sha256(resource_content(SOURCE / topic / path, topic, theme)).hexdigest()[:12]
-        if topic in ('earth', 'ocean', 'climate', 'map-skills') and path.endswith(('.css', '.js')):
+        if shared_experiment or (topic in ('earth', 'ocean', 'climate', 'map-skills') and path.endswith(('.css', '.js'))):
             asset_url += '?v=' + sha256(resource_content(SOURCE / topic / path, topic, theme)).hexdigest()[:12]
         if topic == 'history-timeline' and (Path(path).name.startswith(('silk-road', 'silk-city', 'territory')) or path in ('dynasty-app.js', 'dynasty.css')) and path.endswith(('.css', '.js')):
             asset_url += '?v=' + sha256(resource_content(SOURCE / topic / path, topic, theme)).hexdigest()[:12]

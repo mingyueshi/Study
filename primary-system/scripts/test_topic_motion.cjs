@@ -257,6 +257,7 @@ test('territory changes always compare the preceding chronological stage and rem
   p.get('territory-compare-select').value = String(p.maps.length - 1); p.get('territory-compare-select').handlers.change();
   assert.equal(p.get('territory-change-defs').innerHTML, masks);
   p.click('territory-play'); p.tick(); p.click('territory-play');
+  assert.equal(Number(p.get('territory-compare-select').value), p.maps.length - 1);
   assert.equal(summary(), p.maps[initial + 1].change);
   assert.ok(p.get('territory-svg').classes.has('is-showing-changes'));
   p.click('territory-play'); const stale = [...p.timers.values()][0].fn;

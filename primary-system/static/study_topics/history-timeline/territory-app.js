@@ -14,6 +14,7 @@
   const compare = $('territory-compare');
   const compareSelect = $('territory-compare-select');
   const changes = $('territory-changes');
+  const stageChoices = $('territory-stages');
   const svg = $('territory-svg');
   const fullView = { x: 0, y: 0, w: 1000, h: 830 };
   const project = ([lng, lat]) => [(lng - 64) * 1000 / 81, (64 - lat) * 830 / 56];
@@ -22,7 +23,7 @@
   const regionPath = id => geo.regions[id].rings.map(ring => pathOf(ring)).join('');
   const yearText = year => year < 0 ? `约前 ${-year} 年` : `约 ${year} 年`;
   let index = 0;
-  let compareIndex = 0;
+  let chosenComparison = null;
   let selected = '';
   let view = { ...fullView };
   let drag = null;
@@ -164,6 +165,21 @@
       `<g class="territory-gain" mask="url(#territory-gain-mask)">${paths(maps[index], '#0b9e86')}</g>`;
   }
 
+  function renderComparison() {
+    const compareIndex = chosenComparison !== null && chosenComparison !== index
+      ? chosenComparison : index > 0 ? index - 1 : 1;
+    compareSelect.innerHTML = maps.map((other, i) =>
+      `<option value="${i}" ${i === index ? 'disabled' : ''}>${esc(other.title)} · ${esc(yearText(other.year))}</option>`).join('');
+    compareSelect.value = compareIndex;
+    $('territory-compare-label').hidden = !compare.checked;
+    $('territory-compare-note').hidden = !compare.checked;
+    $('territory-compare-note').textContent = compare.checked
+      ? `紫色虚线是${maps[compareIndex].title}（${yearText(maps[compareIndex].year)}），彩色填色是当前阶段。两者共用同一底图和视角。` : '';
+    $('territory-outlines').innerHTML = compare.checked ? maps[compareIndex].regions.map(id =>
+      `<path class="territory-old-range" d="${regionPath(id)}" fill-rule="evenodd"><title>对照 · ${esc(geo.regions[id].name)}</title></path>`).join('') : '';
+    $('territory-compare-key').hidden = !compare.checked;
+  }
+
   function render(animate = false) {
     const map = maps[index];
     const band = bands.find(band => band.id === map.dynasty);
@@ -176,15 +192,14 @@
     $('territory-next').disabled = index === maps.length - 1;
     root.querySelectorAll('[data-dynasty]').forEach(button =>
       button.setAttribute('aria-pressed', String(button.dataset.dynasty === map.dynasty)));
-    compareSelect.innerHTML = maps.map((other, i) =>
-      `<option value="${i}" ${i === index ? 'disabled' : ''}>${esc(other.title)} · ${esc(yearText(other.year))}</option>`).join('');
-    compareSelect.value = compareIndex;
-    $('territory-compare-label').hidden = !compare.checked;
-    $('territory-compare-note').hidden = !compare.checked;
-    $('territory-compare-note').textContent = compare.checked
-      ? `紫色虚线是${maps[compareIndex].title}（${yearText(maps[compareIndex].year)}），彩色填色是当前阶段。两者共用同一底图和视角。` : '';
-    $('territory-outlines').innerHTML = compare.checked ? maps[compareIndex].regions.map(id =>
-      `<path class="territory-old-range" d="${regionPath(id)}" fill-rule="evenodd"><title>对照 · ${esc(geo.regions[id].name)}</title></path>`).join('') : '';
+    if (stageChoices.dataset.stageDynasty !== map.dynasty) {
+      stageChoices.dataset.stageDynasty = map.dynasty;
+      stageChoices.innerHTML = maps.filter(stage => stage.dynasty === map.dynasty).map(stage =>
+        `<button type="button" data-stage="${esc(stage.id)}">${esc(stage.title)}<small>${esc(yearText(stage.year))}</small></button>`).join('');
+    }
+    for (const button of stageChoices.querySelectorAll('[data-stage]')) {
+      button.setAttribute('aria-pressed', String(button.dataset.stage === map.id));
+    }
     $('territory-regions').innerHTML = map.regions.map(id => {
       const region = geo.regions[id];
       return `<path class="territory-region${map.id === 'xia' ? ' is-approximate' : ''}" data-region="${esc(id)}" tabindex="0" role="button" aria-label="突出${esc(region.name)}的范围" d="${regionPath(id)}" fill="${region.color}" stroke="${region.color}" fill-rule="evenodd"><title>${esc(region.name)}</title></path>`;
@@ -202,7 +217,8 @@
     $('territory-legend').innerHTML = map.regions.map(id => {
       const region = geo.regions[id];
       return `<button type="button" data-region="${esc(id)}" aria-pressed="false"><span style="background:${region.color}"></span>${esc(region.name)}</button>`;
-    }).join('') + (compare.checked ? '<span class="territory-old-key">┄ 对照阶段范围</span>' : '');
+    }).join('') + '<span id="territory-compare-key" class="territory-old-key" hidden>┄ 对照阶段范围</span>';
+    renderComparison();
     selected = '';
     highlight('');
     $('territory-note').textContent = map.note;
@@ -225,13 +241,12 @@
 
   function select(next, save = true) {
     index = Math.max(0, Math.min(maps.length - 1, next));
-    compareIndex = index > 0 ? index - 1 : 1;
     render(save);
     if (save) {
       const url = new URL(location.href);
       url.searchParams.set('map', maps[index].id);
-      url.hash = 'territory-maps';
-      history.replaceState(null, '', url);
+      if (!url.hash) url.hash = 'territory-maps';
+      try { history.replaceState(history.state, '', url); } catch { /* 本地文件仍可切换阶段。 */ }
     }
   }
 
@@ -251,9 +266,13 @@
     const button = event.target.closest('[data-dynasty]');
     if (button) manualSelect(maps.findIndex(map => map.dynasty === button.dataset.dynasty));
   });
-  compare.addEventListener('change', () => { pause(); render(); });
+  stageChoices.addEventListener('click', event => {
+    const button = event.target.closest('[data-stage]');
+    if (button) manualSelect(maps.findIndex(map => map.id === button.dataset.stage));
+  });
+  compare.addEventListener('change', () => { pause(); renderComparison(); });
   changes.addEventListener('change', () => { pause(); renderChanges(); });
-  compareSelect.addEventListener('change', () => { pause(); compareIndex = Number(compareSelect.value); render(); });
+  compareSelect.addEventListener('change', () => { pause(); chosenComparison = Number(compareSelect.value); renderComparison(); });
   $('territory-legend').addEventListener('click', event => {
     const button = event.target.closest('[data-region]');
     if (button) { pause(); highlight(button.dataset.region); }

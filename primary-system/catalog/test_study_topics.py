@@ -535,6 +535,9 @@ class StudyTopicPageTests(SimpleTestCase):
         self.assertContains(response, '<h1>历史疆域地图</h1>')
         self.assertContains(response, 'id="territory-svg"', count=1)
         self.assertContains(response, 'id="territory-play"', count=1)
+        self.assertContains(response, 'data-sidebar-layout=".experiment-side"')
+        self.assertContains(response, 'study_topics/map-skills/experiment.js?v=')
+        self.assertContains(response, f'href="{reverse("history-study")}"', count=1)
         assets = [url.split('?')[0] for url in TopicMarkup(response.content.decode()).assets]
         for name in ('content.js', 'dynasty-data.js', 'territory-data.js', 'territory-geo.js', 'shared.js'):
             self.assertLess(assets.index(prefix + name), assets.index(prefix + 'territory-app.js'))

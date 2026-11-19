@@ -1,35 +1,52 @@
-/* 独立疆域专题：标题、播放与朝代目录放侧边，地图随工作区展开。 */
-.territory-topic { --tl-anchor-offset: 16px; }
-.territory-topic .territory-section { margin-top: 24px; }
-.territory-topic .territory-workspace { grid-template-columns: minmax(0,1fr) clamp(240px,23vw,300px); }
-.territory-topic .territory-stage { grid-column: 1; grid-row: 1; }
-.territory-topic .territory-aside { grid-column: 2; grid-row: 1; }
-.territory-topic .territory-aside-heading h1 { margin: 4px 0 8px; font-size: 30px; line-height: 1.5; color: var(--tl-pair-deep); }
-.territory-topic .territory-aside-heading p { font-size: 15px; line-height: 1.8; }
-.territory-topic .territory-page-links { display: flex; flex-wrap: wrap; gap: 7px 14px; margin-top: 12px; font-size: 15px; font-weight: 750; }
-.territory-page-links a { color: var(--tl-pair-deep); }
-.territory-topic .territory-stage-heading { padding: 16px 20px; border: 1px solid var(--tl-line); border-radius: 15px; background: var(--tl-card); }
-.territory-topic .territory-stage-heading h2 { margin: 0; font-size: clamp(26px,2.3vw,34px); line-height: 1.6; }
-.territory-topic .territory-stage-heading .tl-eyebrow { font-size: 16px; }
-.territory-topic .territory-counter { font-size: 16px; }
-.territory-topic .territory-playback { padding: 12px; gap: 10px; }
+/* 疆域专题：把选择与对照放在侧边，时间轴和图面共用主区。 */
+.study-topic-nav:has(+ .study-timeline .territory-topic) { border-bottom: 0; }
+.territory-topic {
+  --experiment-accent: var(--tl-pair-deep);
+  --experiment-line: var(--tl-line);
+  --experiment-tint: var(--tl-pair-soft);
+  --experiment-card: var(--tl-card);
+  --tl-anchor-offset: 16px;
+}
+.territory-topic .experiment-heading {
+  background: linear-gradient(125deg, oklch(23% .055 290), oklch(35% .079 294) 68%, oklch(42% .077 264));
+}
+.territory-topic .experiment-heading h1 { font-size: clamp(32px, 3.6vw, 50px); line-height: 1.3; }
+.territory-stage { scroll-margin-top: 16px; }
+.territory-stage-heading { padding: 14px 18px; border: 1px solid var(--tl-line); border-radius: 15px; background: var(--tl-card); }
+.territory-stage-heading h2 { margin: 0; font-size: clamp(24px, 2.3vw, 34px); line-height: 1.45; }
+.territory-stage-heading .tl-eyebrow { font-size: 16px; }
+.territory-settings { display: flex; flex-wrap: wrap; gap: 0 18px; flex-basis: 100%; }
+.territory-counter { font-size: 16px; }
+
+.territory-dynasties, .territory-stages { display: grid; gap: 6px; }
+.territory-dynasties { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.territory-stages { grid-template-columns: minmax(0, 1fr); }
+:is(.territory-dynasties, .territory-stages) button {
+  min-height: 44px; padding: 6px 9px; border: 1px solid var(--tl-line); border-radius: 9px;
+  color: var(--tl-ink); background: var(--tl-card); font: inherit; font-size: 16px; font-weight: 750; cursor: pointer;
+}
+:is(.territory-dynasties, .territory-stages) button:hover { border-color: var(--tl-pair-deep); }
+:is(.territory-dynasties, .territory-stages) button[aria-pressed="true"] {
+  color: var(--tl-pair-deep); background: var(--tl-pair-soft); border-color: var(--tl-pair-deep);
+}
+.territory-stages button { text-align: start; }
+.territory-stages small { display: block; font-size: .85em; font-weight: 500; }
+.territory-options label { min-height: 44px; }
+.territory-options select { width: 100%; min-height: 44px; }
+
+.territory-topic :is(.territory-transport, .territory-map-tools, .territory-legend, .territory-playback) button { min-height: 44px; }
+.territory-topic .territory-range input { min-height: 44px; }
 .territory-topic .territory-playback label { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 16px; }
-.territory-topic .territory-playback button { min-height: 44px; }
-.territory-topic .territory-playback progress { width: 100%; }
-.territory-topic .territory-playback small { font-size: 14px; }
-.territory-topic .territory-play-help { flex-basis: 100%; color: var(--tl-pair-deep); font-size: 15px; line-height: 1.8; }
+.territory-topic .territory-playback progress { flex: 1 1 110px; }
+.territory-play-help { flex-basis: 100%; color: var(--tl-pair-deep); font-size: 15px; line-height: 1.8; }
 .territory-play-help summary { cursor: pointer; font-weight: 750; }
 .territory-play-help p { margin: 10px 0 0; font-size: 16px; }
-.territory-topic .territory-directory-title { margin: 20px 0 0; font-size: 21px; }
-.territory-topic .territory-transport button,.territory-topic .territory-map-tools button,.territory-topic .territory-legend button { min-height: 44px; font-size: 16px; }
-.territory-topic .territory-range label { font-size: 15px; }
-.territory-topic #territory-svg { max-height: min(70vh,900px); }
-.territory-topic .territory-observation li,.territory-topic .territory-observation details p { font-size: 17px; line-height: 1.85; }
+.territory-topic #territory-svg { min-height: 0; max-height: min(70vh, 900px); }
 .territory-topic .territory-change-panel { margin-top: 16px; }
 .territory-topic .territory-map-help { font-size: 15px; line-height: 1.8; }
-@media (max-width: 759px) {
-  .territory-topic .territory-workspace { display: flex; flex-direction: column; }
-  .territory-topic .territory-stage,.territory-topic .territory-aside { width: 100%; }
-  .territory-topic .territory-stage-heading { padding: 14px; }
-  .territory-topic .territory-transport button { padding-inline: 8px; font-size: 14px; }
+@media (max-width: 520px) {
+  .territory-stage-heading { padding: 12px 14px; }
+  .territory-transport { gap: 6px; }
+  .territory-transport button { padding-inline: 8px; font-size: 14px; }
+  .territory-settings { gap: 0 12px; }
 }

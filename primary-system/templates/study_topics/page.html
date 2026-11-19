@@ -27,7 +27,7 @@
     {% for route, label in course_links %}
     <a href="{% url route %}">{{ label }} ↗</a>
     {% endfor %}
-    {% elif study_area == 'history' %}
+    {% elif study_area == 'history' and current != 'history-timeline-territory' %}
     <a href="{% url 'history-timeline-timeline' %}" {% if current == 'history-timeline-timeline' %}aria-current="page"{% elif current != 'history-study' and current != 'history-timeline-people' and current != 'history-timeline-person' and current != 'history-timeline-civilizations' and current != 'history-timeline-civilization' and current != 'history-timeline-ancient-science' and current != 'history-timeline-technology' and current != 'history-timeline-silk-road' and current != 'history-timeline-silk-city' and current != 'history-timeline-territory' %}aria-current="location"{% endif %}>历史双轨时间轴</a>
     <a href="{% url 'history-timeline-territory' %}" {% if current == 'history-timeline-territory' %}aria-current="page"{% endif %}>历史疆域地图</a>
     <a href="{% url 'history-timeline-people' %}" {% if current == 'history-timeline-people' %}aria-current="page"{% elif current == 'history-timeline-person' %}aria-current="location"{% endif %}>历史人物馆</a>
