@@ -9,6 +9,8 @@
   const panels = [...lab.querySelectorAll('[data-only]')];
   const axes = [...lab.querySelectorAll('[data-axis]')];
   const board = get('board');
+  const workspace = lab.querySelector('.geometry-workspace');
+  const bench = get('bench');
   const piece = get('piece');
   const origin = get('origin');
   const guide = get('guide');
@@ -16,7 +18,9 @@
   const from = get('from');
   const to = get('to');
   const handle = get('handle');
+  const foldHandle = to.querySelector('.geometry-fold-handle');
   const reading = get('reading');
+  const originKey = get('origin-key');
   const feedback = get('feedback');
   const angleSlider = get('angle');
   const foldSlider = get('fold');
@@ -38,6 +42,7 @@
   const tip = 60;
   const center = [300, 180];
   const start = [150, 150];
+  const foldOrigins = { vertical: [150, center[1]], horizontal: [center[0], 90] };
   const orbit = 120;
   const initial = { translation: [0, 0], rotation: 0, reflection: { axis: 'vertical', fold: 0 } };
   const state = { ...initial };
@@ -48,6 +53,9 @@
   const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
   const position = (x, y) => `translate(${x} ${y})`;
   const place = (node, x, y) => node.setAttribute('transform', position(x, y));
+  const foldScale = (fold) => Math.cos(Math.PI * fold / 100);
+  const foldDistance = (axis) => axis === 'vertical'
+    ? center[0] - foldOrigins.vertical[0] - tip : center[1] - foldOrigins.horizontal[1];
 
   function drawPoints(ax, ay, bx, by, changed) {
     place(from, ax, ay);
@@ -56,8 +64,10 @@
     label.textContent = changed ? 'A′' : 'A';
     const close = changed && Math.hypot(ax - bx, ay - by) < 28;
     label.setAttribute('y', close ? 24 : -11);
-    origin.toggleAttribute('hidden', !changed || !showOrigin.checked);
-    from.toggleAttribute('hidden', !changed || !showOrigin.checked);
+    const showComparison = changed && showOrigin.checked;
+    origin.toggleAttribute('hidden', !showComparison);
+    from.toggleAttribute('hidden', !showComparison);
+    originKey.hidden = !showComparison;
   }
 
   function drawTranslation() {
@@ -104,9 +114,9 @@
     const { axis, fold } = state.reflection;
     const vertical = axis === 'vertical';
     const [cx, cy] = center;
-    const [x, y] = vertical ? [150, cy] : [cx, 90];
+    const [x, y] = foldOrigins[axis];
     const ax = x + tip;
-    const scale = Math.cos(Math.PI * fold / 100);
+    const scale = foldScale(fold);
     const bx = vertical ? cx + (ax - cx) * scale : ax;
     const by = vertical ? y : cy + (y - cy) * scale;
     place(origin, x, y);
@@ -124,8 +134,7 @@
     foldSlider.value = fold;
     const label = fold === 100 ? '完全翻开' : `翻折 ${fold}%`;
     foldSlider.setAttribute('aria-valuetext', label);
-    const distance = vertical ? Math.abs(cx - ax) : Math.abs(cy - y);
-    return fold === 100 ? `${label} · 两点各离折痕 ${distance / grid} 格` : label;
+    return fold === 100 ? `${label} · 两点各离折痕 ${foldDistance(axis) / grid} 格` : label;
   }
 
   const draw = { translation: drawTranslation, rotation: drawRotation, reflection: drawReflection };
@@ -147,12 +156,16 @@
 
   function selectMode() {
     const requested = location.hash.slice(1);
-    if (requested === 'main' && mode) return;
+    const anchoredMode = requested && document.getElementById(requested)?.closest('[data-only]')?.dataset.only;
+    const nextMode = Object.hasOwn(lessons, requested) ? requested : anchoredMode || (requested && mode) || 'translation';
+    if (nextMode === mode) return;
     pauseDemo();
+    stopDrag();
     steps = [];
     stepIndex = 0;
-    mode = Object.hasOwn(lessons, requested) ? requested : 'translation';
+    mode = nextMode;
     lab.dataset.experiment = mode;
+    get('bench-title').textContent = `${lessons[mode].label}实验`;
     modes.forEach((link) => {
       if (link.dataset.mode === mode) link.setAttribute('aria-current', 'true');
       else link.removeAttribute('aria-current');
@@ -163,6 +176,18 @@
     renderMission();
     renderDemo();
   }
+
+  modes.forEach((link) => link.addEventListener('click', (event) => {
+    if (event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+    event.preventDefault();
+    if (location.hash !== link.hash) history.pushState(null, '', link.hash);
+    selectMode();
+    if (workspace.dataset.slMode === 'compact') {
+      if (workspace.dataset.slOpen === 'true') workspace.querySelector('.sl-toggle:not(.sl-collapse)').click();
+      bench.focus({preventScroll: true});
+      bench.scrollIntoView({block: 'start'});
+    }
+  }));
 
   function shift(dx, dy) {
     update([clamp(dx, -2, 12), clamp(dy, -2, 4)]);
@@ -192,9 +217,12 @@
   get('practice').addEventListener('click', reset);
   get('previous').addEventListener('click', () => changeChallenge(-1));
   get('next').addEventListener('click', () => changeChallenge(1));
-  shapeChoice.addEventListener('change', () => {
+  function drawShape() {
     const shape = data.shapes.find(item => item.id === shapeChoice.value);
     get('shape').setAttribute('points', shape.points.map(point => point.join(',')).join(' '));
+  }
+  shapeChoice.addEventListener('change', () => {
+    drawShape();
     reset();
   });
   showOrigin.addEventListener('change', render);
@@ -258,7 +286,7 @@
 
   function reset() {
     pauseDemo();
-    if (drag && board.hasPointerCapture(drag.id)) board.releasePointerCapture(drag.id);
+    stopDrag();
     steps = [];
     stepIndex = 0;
     assisted[mode] = false;
@@ -366,12 +394,14 @@
     if (drag || !event.isPrimary || event.button !== 0) return;
     const moving = mode === 'translation' && event.target === piece;
     const turning = mode === 'rotation' && handle.contains(event.target);
-    if (!moving && !turning) return;
+    const folding = mode === 'reflection' && event.target === foldHandle;
+    if (!moving && !turning && !folding) return;
     const { x, y } = boardPoint(event);
     pauseDemo();
     drag = {
       id: event.pointerId, mode, x, y, shift: state.translation,
       angle: state.rotation, bearing: Math.atan2(y - center[1], x - center[0]) * 180 / Math.PI,
+      reflection: state.reflection,
     };
     board.setPointerCapture(event.pointerId);
     lab.dataset.dragging = '';
@@ -383,7 +413,7 @@
     if (mode === 'translation') {
       const [dx, dy] = drag.shift;
       shift(dx + Math.round((x - drag.x) / grid), dy + Math.round((y - drag.y) / grid));
-    } else {
+    } else if (mode === 'rotation') {
       const [cx, cy] = center;
       const bearing = Math.atan2(y - cy, x - cx) * 180 / Math.PI;
       // 跨过正左方时也连续累计，保留顺逆方向和整圈读数。
@@ -391,15 +421,28 @@
       drag.angle = clamp(drag.angle + delta, -360, 360);
       drag.bearing = bearing;
       turn(Math.round(drag.angle));
+    } else {
+      const {axis, fold} = drag.reflection;
+      const delta = axis === 'vertical' ? x - drag.x : y - drag.y;
+      // 正视图沿折痕法线的位移与翻折角的余弦对应。
+      const scale = clamp(foldScale(fold) - delta / foldDistance(axis), -1, 1);
+      update({axis, fold: Math.round(Math.acos(scale) * 100 / Math.PI)});
     }
   });
 
-  board.addEventListener('lostpointercapture', (event) => {
-    if (drag?.id !== event.pointerId) return;
+  function stopDrag() {
+    if (!drag) return;
+    const {id} = drag;
     drag = null;
     delete lab.dataset.dragging;
+    if (board.hasPointerCapture(id)) board.releasePointerCapture(id);
+  }
+
+  board.addEventListener('lostpointercapture', (event) => {
+    if (drag?.id === event.pointerId) stopDrag();
   });
 
   window.addEventListener('hashchange', selectMode);
+  drawShape();
   selectMode();
 })();

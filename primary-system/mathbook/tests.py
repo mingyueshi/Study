@@ -131,8 +131,14 @@ class MathbookPageTests(TestCase):
         response = self.client.get(url)
         self.assertContains(response, f'href="{reader}#mu2-3"')
         self.assertContains(response, 'id="geometry-lessons"')
+        sidebar = response.content.decode().split('<aside class="geometry-notebook ', 1)[1].split('</aside>', 1)[0]
         for mode in ('translation', 'rotation', 'reflection'):
-            self.assertContains(response, f'href="#{mode}"')
+            self.assertIn(f'href="#{mode}"', sidebar)
+        for control in ('shape-choice', 'angle', 'fold', 'show-origin'):
+            self.assertIn(f'id="geometry-{control}"', sidebar)
+        for result in ('board', 'reading', 'feedback', 'progress'):
+            self.assertContains(response, f'id="geometry-{result}"', count=1)
+            self.assertNotIn(f'id="geometry-{result}"', sidebar)
         self.assertNotIn(settings.SESSION_COOKIE_NAME, response.cookies)
         self.assertEqual(self.client.post(url).status_code, 405)
 

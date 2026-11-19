@@ -1,0 +1,51 @@
+<aside class="geometry-notebook experiment-side" aria-label="运动方式、图形、参数和专题导航">
+  <details class="experiment-tools" open>
+    <summary>运动方式</summary>
+    <nav class="experiment-links geometry-modes" aria-label="选择实验">
+      {% for mode, lesson in modes.items %}
+      <a href="#{{ mode }}" data-mode="{{ mode }}"{% if forloop.first %} aria-current="true"{% endif %}>{{ lesson.label }}</a>
+      {% endfor %}
+    </nav>
+  </details>
+  <details class="experiment-tools" open>
+    <summary>图形选择</summary>
+    <div class="experiment-controls geometry-parameters">
+      <div class="inline-choice" data-inline-choice><label for="geometry-shape-choice" class="visually-hidden">选择图形</label>
+        <select id="geometry-shape-choice">
+          {% for shape in shapes %}<option value="{{ shape.id }}">{{ shape.label }}</option>{% endfor %}
+        </select>
+      </div>
+    </div>
+  </details>
+  <details class="experiment-tools" id="geometry-settings" open>
+    <summary>参数设置</summary>
+    <div class="experiment-controls geometry-parameters">
+      <label class="geometry-checkbox"><input id="geometry-show-origin" type="checkbox" checked> 对照原图</label>
+      <div class="geometry-setting" data-only="rotation" hidden>
+        <label for="geometry-angle">旋转角度</label>
+        <input id="geometry-angle" type="range" min="-360" max="360" step="1" value="0">
+        <div class="geometry-buttons">
+          <button type="button" class="geometry-button" data-turn="-90">逆时针 90°</button>
+          <button type="button" class="geometry-button" data-turn="90">顺时针 90°</button>
+        </div>
+      </div>
+      <div class="geometry-setting" data-only="reflection" hidden>
+        <div class="geometry-buttons" role="group" aria-label="选择折痕">
+          <button type="button" class="geometry-button" data-axis="vertical" aria-pressed="true">竖折痕</button>
+          <button type="button" class="geometry-button" data-axis="horizontal" aria-pressed="false">横折痕</button>
+        </div>
+        <label for="geometry-fold">翻折进度</label>
+        <input id="geometry-fold" type="range" min="0" max="100" value="0">
+      </div>
+      <a class="experiment-return" href="#geometry-bench" data-experiment-return>返回方格纸 ↓</a>
+    </div>
+  </details>
+  <details class="experiment-tools">
+    <summary>相关专题</summary>
+    <nav class="experiment-links" aria-label="数学专题导航">
+      <a href="{% url 'home' %}?area=math#modules-title">学习广场 · 数学 <span aria-hidden="true">↗</span></a>
+      <a href="{% url 'mathbook-book' '4a' %}#mu2-3">四上教材 · 角的度量 <span aria-hidden="true">↗</span></a>
+      <a href="{% url 'math-beauty' %}">数学之美 <span aria-hidden="true">↗</span></a>
+    </nav>
+  </details>
+</aside>
