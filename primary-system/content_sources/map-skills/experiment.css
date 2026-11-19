@@ -1,0 +1,88 @@
+/* 地理实验共用页头和工具栏，图面、读数与讲解留在主区。 */
+.geo-experiment:is(.earth-topic, .skills-topic) {
+  display: block;
+  --experiment-accent: var(--skill-accent, var(--earth-accent));
+  --experiment-line: var(--skill-line, var(--earth-border));
+  --experiment-tint: var(--skill-tint, var(--earth-soft));
+  --experiment-card: var(--skill-card, var(--card, #fff));
+}
+.study-topic-nav:has(+ :is(.study-earth, .study-map-skills) > .geo-experiment) { border-bottom: 0; }
+
+.geo-experiment .experiment-heading {
+  display: grid;
+  justify-items: start;
+  align-content: center;
+  gap: 8px;
+  min-height: clamp(136px, 12vw, 196px);
+  margin-bottom: clamp(12px, 1.7vw, 24px);
+  padding: clamp(16px, 2.6vw, 38px);
+  border: 0;
+  border-radius: 18px;
+  color: oklch(97% .018 88);
+  background: linear-gradient(95deg, oklch(20% .038 180 / .98), oklch(23% .039 182 / .88) 54%, oklch(29% .039 178 / .34)),
+    var(--experiment-cover, none) center / cover no-repeat oklch(30% .055 179);
+}
+.earth-topic .experiment-heading { background: linear-gradient(125deg, oklch(22% .04 47), oklch(33% .067 48) 65%, oklch(43% .09 49)); }
+.skills-topic .experiment-heading { --experiment-cover: url("assets/contour-relief.jpg"); }
+.skills-topic[data-skills-page="scale"] .experiment-heading { --experiment-cover: url("assets/map-layers.jpg"); }
+.geo-experiment .experiment-heading h1 { margin: 0; color: inherit; }
+.geo-experiment .experiment-heading p { margin: 0; max-width: 62ch; }
+.experiment-heading a {
+  padding: 2px 8px; border-radius: 6px; background: oklch(22% .04 179 / .94); color: inherit;
+  font-size: 13px; text-decoration: underline; text-underline-offset: .18em;
+}
+
+.experiment-workspace {
+  display: grid; grid-template-columns: minmax(0, 1fr) clamp(260px, 24vw, 320px); align-items: start; gap: clamp(12px, 1.7vw, 24px);
+}
+.experiment-workspace:not([data-sl-ready]) > .experiment-side { grid-column: 2; grid-row: 1; }
+.experiment-workspace:not([data-sl-ready]) > .experiment-content { grid-column: 1; grid-row: 1; }
+.experiment-side { display: grid; min-width: 0; gap: 12px; }
+.geo-experiment .experiment-content { margin: 0; min-width: 0; }
+html body .experiment-workspace[data-sl-mode] > .sl-sidebar { height: auto; }
+html body .experiment-workspace[data-sl-mode="compact"][data-sl-open] > .sl-sidebar { height: auto; max-height: none; }
+.experiment-workspace .sl-sidebar :is(.sl-panel, .sl-scroll) { flex-basis: auto; }
+.experiment-workspace .sl-scroll { scrollbar-gutter: auto; }
+.experiment-workspace[data-sl-mode="wide"][data-sl-side="right"]:not([data-sl-collapsed="true"]) > .sl-sidebar { margin-inline-end: 24px; }
+.experiment-workspace .sl-header .sl-toggle { min-height: 44px; font-size: 16px; }
+
+.experiment-tools { min-width: 0; border: 1px solid var(--experiment-line); border-radius: 12px; background: var(--experiment-card); }
+.experiment-tools > summary { min-height: 44px; padding: 8px 12px; border-radius: inherit; font-size: 17px; line-height: 1.5; font-weight: 750; cursor: pointer; }
+.experiment-tools[open] > summary { border-radius: 11px 11px 0 0; background: var(--experiment-tint); }
+.experiment-controls, .experiment-links { display: grid; gap: 8px; padding: 12px; border-top: 1px solid var(--experiment-line); }
+.experiment-links { gap: 0; }
+.experiment-controls .experiment-label { margin: 0; font-size: 16px; font-weight: 750; }
+.experiment-controls .experiment-label:not(:first-child) { margin-top: 5px; }
+.experiment-controls :is(.earth-controls, .skills-choices, .skills-number) { margin: 0; }
+.experiment-controls .earth-controls { display: grid; }
+.experiment-controls > button {
+  justify-self: start; min-width: 44px; min-height: 44px; padding: 6px 10px;
+  border: 1px solid var(--experiment-line); border-radius: 8px; background: var(--experiment-card); color: inherit;
+  font: inherit; font-size: 16px; font-weight: 650; cursor: pointer;
+}
+.experiment-controls > button:hover { border-color: var(--experiment-accent); }
+.experiment-controls .skills-number input { width: 100%; min-height: 44px; }
+.experiment-controls .skills-toggle { min-height: 44px; }
+.experiment-links a, .geo-experiment :is(.experiment-jump, .experiment-return) {
+  display: inline-flex; align-items: center; width: fit-content; min-height: 44px; gap: 6px;
+  color: var(--experiment-accent); font-size: 16px; font-weight: 650; text-decoration: underline; text-underline-offset: .18em;
+}
+.experiment-links a[aria-current] { color: inherit; font-weight: 800; }
+.geo-experiment .experiment-return:not([href="#paper-title"]) { display: none; }
+
+.experiment-panel-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; column-gap: 12px; margin-bottom: 10px; }
+.experiment-panel-head h2 { margin: 0; }
+.geo-experiment :is(#plate-lab, #skills-lab, #paper-title, #skills-references) { scroll-margin-top: 16px; }
+.geo-experiment #plate-lab .earth-inset { margin-top: 16px; }
+.geo-experiment #plate-lab .earth-player input { min-height: 44px; }
+
+@media (max-width: 899px) {
+  .experiment-workspace:not([data-sl-ready]) { grid-template-columns: minmax(0, 1fr); }
+  .experiment-workspace:not([data-sl-ready]) > :is(.experiment-side, .experiment-content) { grid-column: 1; grid-row: auto; }
+  .experiment-workspace[data-sl-open="true"] > .sl-sidebar { margin-inline-end: 36px; }
+  .geo-experiment .experiment-return:not([href="#paper-title"]) { display: inline-flex; }
+}
+@media (max-width: 520px) {
+  .study-topic-frame .geo-experiment :is(.experiment-heading, .experiment-panel-head) { padding-inline-end: 40px; }
+}
+@media print { .experiment-side, .experiment-jump, .experiment-return { display: none !important; } }

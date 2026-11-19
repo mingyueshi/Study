@@ -138,7 +138,7 @@ class StudyTopicPageTests(SimpleTestCase):
 
     def test_map_skills_connects_existing_lessons_and_terrain_tool(self):
         for suffix, target in (
-            ('scale', '../study/#lesson-gu2-3'),
+            ('scale', reverse('geography-study') + '#lesson-gu2-3'),
             ('direction', '../study/#lesson-gu2-2'),
             ('legend', '../study/#lesson-gu2-4'),
             ('contours', 'profile.html'),
@@ -149,6 +149,9 @@ class StudyTopicPageTests(SimpleTestCase):
                 self.assertContains(response, 'href="/geography/map-skills/"')
                 self.assertContains(response, f'href="{target}"')
                 self.assertContains(response, 'id="skills-map"')
+                if suffix in ('scale', 'contours', 'profile'):
+                    self.assertContains(response, 'data-sidebar-layout=".experiment-side"')
+                    self.assertContains(response, 'study_topics/map-skills/experiment.js?v=')
 
     def test_climate_map_and_station_charts_use_local_data(self):
         for route, data_files in (
@@ -182,14 +185,15 @@ class StudyTopicPageTests(SimpleTestCase):
         for suffix in ('', '-rocks', '-quakes', '-plates', '-age'):
             route = 'geography-earth' + suffix
             response = self.client.get(reverse(route))
-            self.assertContains(response, 'data-sidebar-layout=".earth-sidebar"')
+            sidebar = '.experiment-side' if suffix == '-plates' else '.earth-sidebar'
+            self.assertContains(response, f'data-sidebar-layout="{sidebar}"')
             self.assertContains(response, 'href="/geography/earth/"')
             self.assertContains(response, 'href="rocks.html"')
             topic = response.content.decode().split('data-earth-page=', 1)[1].split('</noscript>', 1)[0]
             self.assertNotIn('<select', topic)
             assets = [url for url in TopicMarkup(response.content.decode()).assets
-                      if url.startswith('/static/study_topics/earth/')]
-            self.assertEqual(len(assets), 5)
+                      if url.startswith(('/static/study_topics/earth/', '/static/study_topics/map-skills/experiment.'))]
+            self.assertEqual(len(assets), 7 if suffix == '-plates' else 5)
             for url in assets:
                 asset_path = url.removeprefix('/static/').split('?')[0]
                 digest = sha256(Path(finders.find(asset_path)).read_bytes()).hexdigest()[:12]

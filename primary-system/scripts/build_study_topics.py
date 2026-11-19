@@ -146,6 +146,8 @@ def template(source, topic, page, theme, index_route):
         attrs, content = atlas_topic_links(page, attrs, content)
     if topic in ('climate', 'earth', 'map-skills'):
         content = rewrite_page_links(content, {'../geo-map/' + href: route for href, route in ATLAS_3D_ROUTES.items()})
+    if (topic, page) == ('earth', 'plates') or (topic == 'map-skills' and page in ('scale', 'contours', 'profile')):
+        content = rewrite_page_links(content, {'../geo-map/china.html': 'geography-atlas-china', '../geo/index.html': 'geography-study'})
     if (topic, page) == ('ocean', 'life'):
         content = content.replace('../geo-map/world-animals.html', "{% url 'geography-life-maps-world-animals' %}")
     if topic == 'geo':
@@ -175,6 +177,8 @@ def template(source, topic, page, theme, index_route):
             asset_path = 'geo-map/world-geo.js'
         if topic == 'climate' and path == '../geo-map/china-geo.js':
             asset_path = 'geo-map/china-geo.js'
+        if topic == 'earth' and path in ('../map-skills/experiment.css', '../map-skills/experiment.js'):
+            asset_path = path.removeprefix('../')
         asset_url = "{% static 'study_topics/" + asset_path + "' %}"
         if topic in ('geo', 'history') and path == 'lab.js':
             asset_url += '?v=20261114b9' if topic == 'geo' else '?v=20261114b7'

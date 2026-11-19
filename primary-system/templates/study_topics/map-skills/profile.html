@@ -4,68 +4,89 @@
 {% block title %}地形剖面图 · 地图技能 · 乐学堂{% endblock %}
 {% block study_assets %}
 <link rel="stylesheet" href="{% static 'study_topics/map-skills/styles.css' %}?v=69c79527299c">
+<link rel="stylesheet" href="{% static 'study_topics/map-skills/experiment.css' %}?v=00aea800f4bf">
 <script src="{% static 'study_topics/map-skills/skills-data.js' %}?v=2b0c9fb9f4ad" defer></script>
 <script src="{% static 'study_topics/map-skills/skills-model.js' %}?v=e4201cc66bdb" defer></script>
 <script src="{% static 'study_topics/map-skills/skills-diagrams.js' %}?v=a5caedf5aaa6" defer></script>
-<script src="{% static 'study_topics/map-skills/skills-app.js' %}?v=a5c7689e3215" defer></script>
+<script src="{% static 'study_topics/map-skills/skills-app.js' %}?v=d1318e9e3d16" defer></script>
+<script src="{% static 'study_topics/map-skills/experiment.js' %}?v=48271f636dfb" defer></script>
 {% endblock %}
 {% block study_content %}
 <div class="study-map-skills">
-<div class="skills-topic" data-skills-page="profile"
-        data-sidebar-layout=".skills-sidebar" data-sidebar-width="clamp(230px, 22vw, 290px)"
-        data-sidebar-breakpoint="900" data-sidebar-label="专题目录" data-sidebar-fixed=".skills-nav">
-    <aside class="skills-sidebar" aria-label="地图技能专题目录">
-      <nav aria-label="地图技能各站" class="skills-nav">
-        <strong>地图技能</strong>
-          <a href="{% url 'geography-map-skills' %}">专题总览</a>
-          <a href="scale.html">比例尺</a>
-          <a href="direction.html">方向</a>
-          <a href="legend.html">图例</a>
-          <a href="contours.html">等高线</a>
-          <a href="profile.html" aria-current="page">地形剖面图</a>
-      </nav>
-      <a href="../atlas/china.html">打开地理图谱 ↗</a>
-    </aside>
-    <div class="skills-content">
-      <header class="skills-hero">
-        <h1>地形剖面图</h1>
-        <p id="skills-intro"></p>
-      </header>
-      <section class="skills-panel" aria-labelledby="profile-title">
-        <h2 id="profile-title">沿 A→B 画剖面</h2>
-        <div id="profile-presets" class="skills-choices" role="group" aria-label="选择示范剖面"></div>
-        <div class="skills-choices">
-          <button type="button" id="flip-profile">对调 A、B</button>
-          <button type="button" id="cancel-profile" disabled>取消正在选的线</button>
-          <label class="skills-toggle"><input id="show-crossings" type="checkbox" checked> 显示等高线交点</label>
-        </div>
-        <p id="profile-status" class="skills-caption" role="status">可依次点 A、B，也可用鼠标在图内拖一条线。</p>
-        <div class="skills-profile-pair">
-          <figure>
-            <canvas id="skills-map" class="skills-map" role="img" aria-label="等高线图与当前剖面线。用鼠标拖出 A 到 B，或在触屏上依次点 A 和 B。也可以直接选择预设。"></canvas>
-            <figcaption>等高距 40 米。交点在两张图上同时标出，橙色圆点表示当前读数位置。</figcaption>
-          </figure>
-          <figure>
-            <canvas id="profile-chart" class="skills-profile-chart" role="img" aria-label="A 到 B 地形剖面。横轴为距 A 水平距离（米），纵轴为海拔（米）。用滑块读数。"></canvas>
-            <figcaption>横纵轴按各自刻度显示。地形起伏在图面上可能被放大。</figcaption>
-          </figure>
-        </div>
-        <label for="profile-probe" class="skills-range">
-          <span>沿线移动读数点</span>
-          <input id="profile-probe" type="range" min="0" max="120" step="1" value="0">
-        </label>
-        <div id="profile-reading" class="skills-result" aria-live="polite"></div>
-      </section>
-      <a class="skills-link" href="{% url 'geography-china-terrain' %}#gm3-section-draw">打开 3D 中国地图，在真实地形上画剖面 →</a>
-      <div id="skills-knowledge" class="skills-grid" aria-label="知识要点"></div>
-      <section class="skills-panel" aria-labelledby="quiz-title">
-        <h2 id="quiz-title">读图小考</h2>
-        <p id="quiz-question"></p>
-        <div id="quiz-choices" class="skills-choices" role="group" aria-label="选择答案"></div>
-        <p id="quiz-feedback" class="skills-result" role="status" hidden></p>
-      </section>
-      <details class="skills-panel skills-details"><summary>资料与图例出处</summary><ul id="skills-references"></ul></details>
-      <noscript><p>请启用 JavaScript 查看练习地图、正文与题目。</p></noscript>
+<div class="skills-topic geo-experiment" data-skills-page="profile">
+    <header class="skills-hero experiment-heading">
+      <h1>地形剖面图</h1>
+      <p id="skills-intro"></p>
+      <a href="#skills-references">页头地形图 · USGS</a>
+    </header>
+
+    <div class="experiment-workspace" data-sidebar-layout=".experiment-side"
+         data-sidebar-width="clamp(260px, 24vw, 320px)" data-sidebar-label="实验工具"
+         data-sidebar-collapse-key="primary_sidebar_collapsed_v1:.skills-sidebar">
+      <aside class="experiment-side" aria-label="实验参数与地图技能目录">
+        <details class="experiment-tools" id="experiment-tools" open>
+          <summary>剖面设置</summary>
+          <div class="experiment-controls">
+            <p class="experiment-label">示范剖面</p>
+            <div id="profile-presets" class="skills-choices" role="group" aria-label="选择示范剖面"></div>
+            <button type="button" id="flip-profile">对调 A、B</button>
+            <label class="skills-toggle"><input id="show-crossings" type="checkbox" checked> 显示等高线交点</label>
+            <button type="button" id="reset-profile">重置剖面</button>
+            <a class="experiment-return" href="#skills-lab" data-experiment-return>返回实验 ↓</a>
+          </div>
+        </details>
+        <details class="experiment-tools">
+          <summary>地图技能与相关专题</summary>
+          <nav class="experiment-links" aria-label="地图技能各站">
+            <a href="{% url 'geography-map-skills' %}">专题总览</a>
+            <a href="scale.html">比例尺</a>
+            <a href="direction.html">方向</a>
+            <a href="legend.html">图例</a>
+            <a href="contours.html">等高线</a>
+            <a href="profile.html" aria-current="page">地形剖面图</a>
+            <a href="{% url 'geography-china-terrain' %}#gm3-section-draw">打开 3D 中国地图，在真实地形上画剖面 →</a>
+            <a href="{% url 'geography-atlas-china' %}#map">打开地理图谱</a>
+          </nav>
+        </details>
+      </aside>
+
+      <div class="skills-content experiment-content" id="experiment-content" tabindex="-1">
+        <section class="skills-panel" id="skills-lab" aria-labelledby="profile-title" tabindex="-1">
+          <div class="experiment-panel-head">
+            <h2 id="profile-title">沿 A→B 画剖面</h2>
+            <a class="experiment-jump" href="#experiment-tools" data-experiment-jump>实验参数 ↑</a>
+          </div>
+
+          <div class="skills-choices">
+            <button type="button" id="cancel-profile" disabled>取消正在选的线</button>
+          </div>
+          <p id="profile-status" class="skills-caption" role="status">可依次点 A、B，也可用鼠标在图内拖一条线。</p>
+          <div class="skills-profile-pair">
+            <figure>
+              <canvas id="skills-map" class="skills-map" role="img" aria-label="等高线图与当前剖面线。用鼠标拖出 A 到 B，或在触屏上依次点 A 和 B。也可以直接选择预设。"></canvas>
+              <figcaption>等高距 40 米。交点在两张图上同时标出，橙色圆点表示当前读数位置。</figcaption>
+            </figure>
+            <figure>
+              <canvas id="profile-chart" class="skills-profile-chart" role="img" aria-label="A 到 B 地形剖面。横轴为距 A 水平距离（米），纵轴为海拔（米）。用滑块读数。"></canvas>
+              <figcaption>横纵轴按各自刻度显示。地形起伏在图面上可能被放大。</figcaption>
+            </figure>
+          </div>
+          <label for="profile-probe" class="skills-range">
+            <span>沿线移动读数点</span>
+            <input id="profile-probe" type="range" min="0" max="120" step="1" value="0">
+          </label>
+          <div id="profile-reading" class="skills-result" aria-live="polite"></div>
+        </section>
+        <div id="skills-knowledge" class="skills-grid" aria-label="知识要点"></div>
+        <section class="skills-panel" aria-labelledby="quiz-title">
+          <h2 id="quiz-title">读图小考</h2>
+          <p id="quiz-question"></p>
+          <div id="quiz-choices" class="skills-choices" role="group" aria-label="选择答案"></div>
+          <p id="quiz-feedback" class="skills-result" role="status" hidden></p>
+        </section>
+        <details class="skills-panel skills-details"><summary>资料与图例出处</summary><ul id="skills-references"></ul></details>
+        <noscript><p>请启用 JavaScript 查看练习地图、正文与题目。</p></noscript>
+      </div>
     </div>
   </div>
 

@@ -25,9 +25,11 @@
   function pressed(container, attribute, selected) {
     container.querySelectorAll(`[${attribute}]`).forEach(button => button.setAttribute('aria-pressed', String(button.getAttribute(attribute) === String(selected))));
   }
-  $('#earth-eyebrow').textContent = page.eyebrow;
+  const eyebrow = $('p#earth-eyebrow');
+  if (eyebrow) eyebrow.textContent = page.eyebrow;
   $('#earth-intro').textContent = page.intro;
-  $('#earth-side-question').textContent = page.question;
+  const sideQuestion = $('p#earth-side-question');
+  if (sideQuestion) sideQuestion.textContent = page.question;
   $('#earth-question-title').textContent = '想一想 · ' + page.question;
   $('#earth-answer').textContent = page.answer;
   $('#earth-explain').innerHTML = page.cards.map(card => `<article class="earth-card"><h3>${esc(card.title)}</h3><p>${esc(card.body)}</p></article>`).join('');

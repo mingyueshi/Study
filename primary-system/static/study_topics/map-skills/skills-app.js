@@ -26,7 +26,7 @@
       if (value === undefined || value === null) url.searchParams.delete(key);
       else url.searchParams.set(key,value);
     }
-    try { history.replaceState(null,'',url); } catch { /* 文件预览仍可操作。 */ }
+    try { history.replaceState(history.state,'',url); } catch { /* 文件预览仍可操作。 */ }
   }
 
   function choices(selector,items,choose) {
@@ -97,8 +97,9 @@
   }
 
   function mapPair(onChange, direction = false) {
-    let a = fromParam('a',data.points,named('center'));
-    let b = fromParam('b',data.points,named('bridge'));
+    const defaultA = named('center'), defaultB = named('bridge');
+    let a = fromParam('a',data.points,defaultA);
+    let b = fromParam('b',data.points,defaultB);
     if (a === b) b = data.points.find(point => point !== a);
     let active = 'b';
     const turn = Number(param.get('turn'));
@@ -152,7 +153,17 @@
         update();
       });
     }
-    return update;
+    return {
+      update,
+      reset() {
+        a = defaultA;
+        b = defaultB;
+        active = 'b';
+        rotation = 0;
+        status.textContent = '已恢复默认端点。';
+        update(false);
+      }
+    };
   }
 
   function scale() {
@@ -165,7 +176,7 @@
       selected = item;
       remember({scale:selected.id});
       mark(item.id);
-      updatePair(false);
+      pair.update(false);
     });
     function convert() {
       const length = paper.valueAsNumber;
@@ -173,7 +184,7 @@
         ? '输入 0 至 999 厘米之间的图上长度。'
         : `在 ${selected.name} 图上，${decimal.format(length)} 厘米 × ${integer.format(selected.value)} ÷ 100 ＝ ${decimal.format(model.groundMeters(length,selected.value))} 米。`;
     }
-    const updatePair = mapPair((a,b) => {
+    const pair = mapPair((a,b) => {
       const direct = model.distance(a.at,b.at);
       const acrossTrail = data.route.ends.includes(a.id) && data.route.ends.includes(b.id);
       $('#scale-result').innerHTML = `<h3>${esc(a.name)} → ${esc(b.name)}</h3>
@@ -185,8 +196,15 @@
       convert();
     });
     mark(selected.id);
-    updatePair(false);
+    pair.update(false);
     paper.addEventListener('input',convert);
+    $('#reset-scale').addEventListener('click',() => {
+      selected = ratios[1];
+      paper.value = paper.defaultValue;
+      mark(selected.id);
+      remember({a:null,b:null,scale:null});
+      pair.reset();
+    });
   }
 
   function direction() {
@@ -195,7 +213,7 @@
       const bearing = model.azimuth(a.at,b.at);
       $('#direction-result').innerHTML = `<h3>${esc(b.name)}在${esc(a.name)}的${model.sector(bearing)}方</h3>
         <p>从北顺时针量约 <b>${Math.round(bearing)%360}°</b>。当前地图顺时针转了 ${rotation}°，屏幕向${compassPosition[rotation]}是北。</p>`;
-    },true)(false);
+    },true).update(false);
   }
 
   function legend() {
@@ -253,6 +271,13 @@
         show();
       }
     });
+    $('#reset-contours').addEventListener('click',() => {
+      selected = intervals[1];
+      form = data.forms[0];
+      probe = form.at;
+      remember({interval:null,form:null});
+      show();
+    });
     show();
     sample('relief');
   }
@@ -299,7 +324,7 @@
       map.render();
       chart.render();
     }
-    function finish(start,end) {
+    function finish(start,end,save = true) {
       if (model.distance(start,end) < 6) {
         status.textContent = '两点太近，试着把 B 点选得更远一些。';
         map.render();
@@ -308,12 +333,12 @@
       a = start;
       b = end;
       result = surface.profile(a,b,interval);
-      pending = draft = null;
+      pending = draft = drag = null;
       cancel.disabled = true;
       status.textContent = '剖面已画好。拖动读数点，观察两张图上的橙色圆点。';
       slider.value = '0';
       markPreset(preset?.id);
-      remember({line:preset?.id,reverse:preset && a === preset.b ? '1' : null});
+      if (save) remember({line:preset?.id,reverse:preset && a === preset.b ? '1' : null});
       read();
     }
     function cancelDraft() {
@@ -368,6 +393,12 @@
       if (event.key === 'Escape' && (pending || drag)) cancelDraft();
     });
     $('#flip-profile').addEventListener('click',() => finish(b,a));
+    $('#reset-profile').addEventListener('click',() => {
+      preset = data.presets[0];
+      crossings.checked = crossings.defaultChecked;
+      remember({line:null,reverse:null});
+      finish(preset.a,preset.b,false);
+    });
     slider.addEventListener('input',read);
     crossings.addEventListener('change',read);
     chartCanvas.addEventListener('click',event => {

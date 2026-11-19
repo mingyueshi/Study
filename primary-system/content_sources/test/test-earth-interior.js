@@ -59,4 +59,12 @@ for (const page of data.pages) {
   for (const card of page.cards) assert.ok(card.title && card.body);
   assert.ok(fs.existsSync(path.join(__dirname, '../earth', page.id + '.html')));
 }
-console.log('地球内部：5 个页面、4 层结构、4 类标本、4 种边界、时间线与本地图片校验通过');
+const [plateSidebar, plateContent] = fs.readFileSync(path.join(__dirname, '../earth/plates.html'), 'utf8').split('</aside>');
+assert.match(plateSidebar, /data-sidebar-layout="\.experiment-side"/);
+assert.match(plateSidebar, /id="boundary-picker"/);
+assert.match(plateSidebar, /<header[^>]*id="earth-eyebrow"/);
+for (const id of ['plate-lab', 'plate-diagram', 'boundary-detail', 'earth-explain', 'earth-side-question']) {
+  assert.ok(plateContent.includes(`id="${id}"`), id + ' 位于主区');
+}
+assert.match(plateContent, /data-play[\s\S]*data-step[\s\S]*data-reset[\s\S]*data-progress/);
+console.log('地球内部：5 个页面、4 层结构、4 类标本、4 种边界、时间线、本地图片及板块实验布局校验通过');

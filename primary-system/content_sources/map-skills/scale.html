@@ -5,63 +5,93 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>比例尺 · 地图技能</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="experiment.css">
   <script src="skills-data.js" defer></script>
   <script src="skills-model.js" defer></script>
   <script src="skills-diagrams.js" defer></script>
   <script src="skills-app.js" defer></script>
+  <script src="experiment.js" defer></script>
 </head>
 <body>
-  <main id="main" class="skills-topic" data-skills-page="scale"
-        data-sidebar-layout=".skills-sidebar" data-sidebar-width="clamp(230px, 22vw, 290px)"
-        data-sidebar-breakpoint="900" data-sidebar-label="专题目录" data-sidebar-fixed=".skills-nav">
-    <aside class="skills-sidebar" aria-label="地图技能专题目录">
-      <nav aria-label="地图技能各站" class="skills-nav">
-        <strong>地图技能</strong>
-          <a href="index.html">专题总览</a>
-          <a href="scale.html" aria-current="page">比例尺</a>
-          <a href="direction.html">方向</a>
-          <a href="legend.html">图例</a>
-          <a href="contours.html">等高线</a>
-          <a href="profile.html">地形剖面图</a>
-      </nav>
-      <a href="../atlas/china.html">打开地理图谱 ↗</a>
-    </aside>
-    <div class="skills-content">
-      <header class="skills-hero">
-        <h1>比例尺</h1>
-        <p id="skills-intro"></p>
-      </header>
-      <section class="skills-panel" aria-labelledby="measure-title">
-        <h2 id="measure-title">量一量 A 到 B 有多远</h2>
-        <div class="skills-point-controls">
-        <div id="endpoint-choices" class="skills-choices" role="group" aria-label="要设置的端点"></div>
-        <div id="point-choices" class="skills-choices" role="group" aria-label="选择地标"></div>
+  <main id="main" class="skills-topic geo-experiment" data-skills-page="scale">
+    <header class="skills-hero experiment-heading">
+      <h1>比例尺</h1>
+      <p id="skills-intro"></p>
+      <a href="#skills-references">页头地形图 · USGS</a>
+    </header>
+
+    <div class="experiment-workspace" data-sidebar-layout=".experiment-side"
+         data-sidebar-width="clamp(260px, 24vw, 320px)" data-sidebar-label="实验工具"
+         data-sidebar-collapse-key="primary_sidebar_collapsed_v1:.skills-sidebar">
+      <aside class="experiment-side" aria-label="实验参数与地图技能目录">
+        <details class="experiment-tools" id="experiment-tools" open>
+          <summary>测量设置</summary>
+          <div class="experiment-controls">
+            <p class="experiment-label">设置端点</p>
+            <div id="endpoint-choices" class="skills-choices" role="group" aria-label="要设置的端点"></div>
+            <p class="experiment-label">选择地标</p>
+            <div id="point-choices" class="skills-choices" role="group" aria-label="选择地标"></div>
+            <p class="experiment-label">换算比例尺</p>
+            <div id="scale-choices" class="skills-choices" role="group" aria-label="换算采用的印刷比例尺"></div>
+            <button type="button" id="reset-scale">重置测量</button>
+            <a class="experiment-return" href="#skills-lab" data-experiment-return>返回实验 ↓</a>
+          </div>
+        </details>
+        <details class="experiment-tools" id="paper-tools">
+          <summary>图上长度换算</summary>
+          <div class="experiment-controls">
+            <label class="skills-number" for="paper-cm">图上长度（厘米）
+              <input id="paper-cm" type="number" min="0" max="999" step="any" value="2.5" inputmode="decimal">
+            </label>
+            <a class="experiment-return" href="#paper-title" data-experiment-return>查看换算结果 ↓</a>
+          </div>
+        </details>
+        <details class="experiment-tools">
+          <summary>地图技能与相关专题</summary>
+          <nav class="experiment-links" aria-label="地图技能各站">
+            <a href="index.html">专题总览</a>
+            <a href="scale.html" aria-current="page">比例尺</a>
+            <a href="direction.html">方向</a>
+            <a href="legend.html">图例</a>
+            <a href="contours.html">等高线</a>
+            <a href="profile.html">地形剖面图</a>
+            <a href="../geo/index.html#lesson-gu2-3">回地理小课堂看比例尺公式和例题 →</a>
+            <a href="../geo-map/china.html#map">打开地理图谱</a>
+          </nav>
+        </details>
+      </aside>
+
+      <div class="skills-content experiment-content" id="experiment-content" tabindex="-1">
+        <section class="skills-panel" id="skills-lab" aria-labelledby="measure-title" tabindex="-1">
+          <div class="experiment-panel-head">
+            <h2 id="measure-title">量一量 A 到 B 有多远</h2>
+            <a class="experiment-jump" href="#experiment-tools" data-experiment-jump>实验参数 ↑</a>
+          </div>
+          <figure>
+            <canvas id="skills-map" class="skills-map" role="img" aria-label="选择地图上的地标设置 A 或 B。也可以用侧栏的地标按钮设置。"></canvas>
+            <figcaption>红线为两点间的水平直线。橙色虚线是绕行步道，距离从各段水平长度相加。</figcaption>
+          </figure>
+
+          <div id="scale-result" class="skills-result" aria-live="polite"></div>
+          <p id="point-feedback" class="skills-caption" role="status"></p>
+        </section>
+        <section class="skills-panel" aria-labelledby="paper-title">
+          <div class="experiment-panel-head">
+            <h2 id="paper-title">图上厘米换算成实地米数</h2>
+            <a class="experiment-jump" href="#paper-tools" data-experiment-jump>调整图上长度 ↑</a>
+          </div>
+          <p id="paper-result" class="skills-result" aria-live="polite"></p>
+        </section>
+        <div id="skills-knowledge" class="skills-grid" aria-label="知识要点"></div>
+        <section class="skills-panel" aria-labelledby="quiz-title">
+          <h2 id="quiz-title">读图小考</h2>
+          <p id="quiz-question"></p>
+          <div id="quiz-choices" class="skills-choices" role="group" aria-label="选择答案"></div>
+          <p id="quiz-feedback" class="skills-result" role="status" hidden></p>
+        </section>
+        <details class="skills-panel skills-details"><summary>资料与图例出处</summary><ul id="skills-references"></ul></details>
+        <noscript><p>请启用 JavaScript 查看练习地图、正文与题目。</p></noscript>
       </div>
-        <figure>
-          <canvas id="skills-map" class="skills-map" role="img" aria-label="选择地图上的地标设置 A 或 B。也可以用上方按钮设置。"></canvas>
-          <figcaption>红线为两点间的水平直线。橙色虚线是绕行步道，距离从各段水平长度相加。</figcaption>
-        </figure>
-        <div id="scale-choices" class="skills-choices" role="group" aria-label="换算采用的印刷比例尺"></div>
-        <div id="scale-result" class="skills-result" aria-live="polite"></div>
-        <p id="point-feedback" class="skills-caption" role="status"></p>
-      </section>
-      <section class="skills-panel" aria-labelledby="paper-title">
-        <h2 id="paper-title">图上厘米换算成实地米数</h2>
-        <label class="skills-number" for="paper-cm">图上长度（厘米）
-          <input id="paper-cm" type="number" min="0" max="999" step="any" value="2.5" inputmode="decimal">
-        </label>
-        <p id="paper-result" class="skills-result" aria-live="polite"></p>
-      </section>
-      <a class="skills-link" href="../study/#lesson-gu2-3">回地理小课堂看比例尺公式和例题 →</a>
-      <div id="skills-knowledge" class="skills-grid" aria-label="知识要点"></div>
-      <section class="skills-panel" aria-labelledby="quiz-title">
-        <h2 id="quiz-title">读图小考</h2>
-        <p id="quiz-question"></p>
-        <div id="quiz-choices" class="skills-choices" role="group" aria-label="选择答案"></div>
-        <p id="quiz-feedback" class="skills-result" role="status" hidden></p>
-      </section>
-      <details class="skills-panel skills-details"><summary>资料与图例出处</summary><ul id="skills-references"></ul></details>
-      <noscript><p>请启用 JavaScript 查看练习地图、正文与题目。</p></noscript>
     </div>
   </main>
 </body>

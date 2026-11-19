@@ -89,4 +89,14 @@ assert.ok(profile.crossings.length >= 6);
 assert.ok(profile.crossings.every(p => Math.abs(surface.elevation(p.at) - p.height) < 1e-6));
 assert.ok(profile.crossings.every((p,i) => i === 0 || p.t > profile.crossings[i - 1].t));
 assert.ok(profile.points.some((p,i) => i > 0 && i < profile.points.length - 1 && p.height > 200));
-console.log('地图技能：题目、坐标、素材、距离与方位、等高线及剖面交点通过校验');
+for (const [id, parameters, readings] of [
+  ['scale', ['scale-choices', 'paper-cm', 'reset-scale'], ['measure-title', 'scale-result', 'paper-result']],
+  ['contours', ['interval-choices', 'form-choices', 'reset-contours'], ['contour-title', 'contour-result']],
+  ['profile', ['profile-presets', 'show-crossings', 'reset-profile'], ['profile-title', 'profile-chart', 'profile-probe', 'profile-reading']],
+]) {
+  const [sidebar, content] = fs.readFileSync(path.join(root, id + '.html'), 'utf8').split('</aside>');
+  assert.match(sidebar, /data-sidebar-layout="\.experiment-side"/);
+  for (const parameter of parameters) assert.ok(sidebar.includes(`id="${parameter}"`), parameter + ' 位于侧栏');
+  for (const reading of ['skills-map', ...readings]) assert.ok(content.includes(`id="${reading}"`), reading + ' 位于主区');
+}
+console.log('地图技能：题目、坐标、素材、距离与方位、等高线、剖面交点及实验布局通过校验');

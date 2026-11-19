@@ -1,12 +1,78 @@
 <!doctype html>
-<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>板块构造 · 地球内部</title><meta name="description" content="看缓慢运动怎样改变地表"><link rel="stylesheet" href="styles.css"><script src="earth-data.js" defer></script><script src="earth-model.js" defer></script><script src="earth-motion.js" defer></script><script src="earth-app.js" defer></script></head><body>
-<main id="main" class="earth-topic" data-earth-page="plates" data-sidebar-layout=".earth-sidebar" data-sidebar-width="clamp(260px,23vw,310px)" data-sidebar-breakpoint="900" data-sidebar-label="专题目录" data-sidebar-fixed=".earth-heading, .earth-nav">
-<aside class="earth-sidebar" aria-label="地球内部专题目录"><header class="earth-heading"><a href="index.html" class="earth-brand">◉ 地球内部</a><p>从材料到运动，从证据到时间。</p></header><nav class="earth-nav" aria-label="地球内部各站"><a href="index.html"><span>00</span>地球内部</a>
-<a href="rocks.html"><span>01</span>岩石与矿物</a>
-<a href="quakes.html"><span>02</span>地震与火山</a>
-<a href="plates.html" aria-current="page"><span>03</span>板块构造</a>
-<a href="age.html"><span>04</span>地球年龄</a></nav><div class="earth-side-note"><b>带着问题观察</b><p id="earth-side-question"></p><a href="../atlas/china.html">返回中国地图 ↗</a></div></aside>
-<div class="earth-content" id="earth-content" tabindex="-1"><header class="earth-hero"><div><p class="earth-kicker" id="earth-eyebrow"></p><h1>板块构造</h1><p id="earth-intro">看缓慢运动怎样改变地表</p></div><span class="earth-hero-symbol" aria-hidden="true">◎</span></header>
-<section class="earth-panel" id="plate-lab" aria-labelledby="plate-title"><div class="earth-panel-head"><p class="earth-kicker">四种情境 · 比较方向与结果</p><h2 id="plate-title">板块边界观察台</h2></div><div id="boundary-picker" class="earth-controls" role="group" aria-label="选择板块边界"></div><figure class="earth-diagram"><svg id="plate-diagram" viewBox="0 0 760 340" role="img" aria-label="板块运动示意图"></svg><figcaption>形状、厚度与速度均为放大示意；播放把漫长的地质过程压缩为 8 秒。前三种为剖面图，灰褐色为板块，浅橙色为下方地幔；转换边界为俯视图，两种底色为两侧板块。</figcaption></figure><article id="boundary-detail" class="earth-inset" aria-live="polite"></article><div class="earth-player" data-player><div class="earth-actions"><button type="button" data-play aria-pressed="false">播放示意</button><button type="button" data-step>前进一格</button><button type="button" data-reset>重新开始</button></div><label>观察进度<input type="range" min="0" max="100" value="0" step="1" data-progress aria-label="板块运动进度"></label><p class="earth-muted" data-motion-status role="status">默认暂停，可播放或拖动进度。</p></div></section><a class="earth-link-card" href="../geo-map/world-3d.html?lab=plates"><b>回到世界地球仪，看板块在哪里 ↗</b><span>地球仪使用六组简化分区，适合定位比较；实际板块可按研究尺度进一步细分。</span></a>
-<section id="earth-explain" class="earth-card-grid" aria-label="概念与证据"></section><details class="earth-question"><summary id="earth-question-title">想一想</summary><p id="earth-answer"></p></details><details class="earth-sources"><summary>查看本页依据与素材来源（外部链接需联网）</summary><ul id="earth-source-list"></ul></details><noscript><p class="earth-model-note">请启用 JavaScript 使用交互图、查看分层说明与完整正文。可从专题目录打开另外四站。</p></noscript></div>
-</main></body></html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>板块构造 · 地球内部</title>
+  <meta name="description" content="看缓慢运动怎样改变地表">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="../map-skills/experiment.css">
+  <script src="earth-data.js" defer></script>
+  <script src="earth-model.js" defer></script>
+  <script src="earth-motion.js" defer></script>
+  <script src="earth-app.js" defer></script>
+  <script src="../map-skills/experiment.js" defer></script>
+</head>
+<body>
+  <main id="main" class="earth-topic geo-experiment" data-earth-page="plates">
+    <header class="earth-hero experiment-heading" id="earth-eyebrow">
+      <h1>板块构造</h1>
+      <p id="earth-intro">看缓慢运动怎样改变地表</p>
+    </header>
+
+    <div class="experiment-workspace" data-sidebar-layout=".experiment-side"
+         data-sidebar-width="clamp(260px, 24vw, 320px)" data-sidebar-label="实验工具"
+         data-sidebar-collapse-key="primary_sidebar_collapsed_v1:.earth-sidebar">
+      <aside class="experiment-side" aria-label="实验参数与地球内部目录">
+        <details class="experiment-tools" id="experiment-tools" open>
+          <summary>板块边界与视角</summary>
+          <div class="experiment-controls">
+            <div id="boundary-picker" class="earth-controls" role="group" aria-label="选择板块边界"></div>
+            <a class="experiment-return" href="#plate-lab" data-experiment-return>返回实验 ↓</a>
+          </div>
+        </details>
+        <details class="experiment-tools">
+          <summary>地球内部与相关专题</summary>
+          <nav class="experiment-links" aria-label="地球内部各站">
+            <a href="index.html">地球内部</a>
+            <a href="rocks.html">岩石与矿物</a>
+            <a href="quakes.html">地震与火山</a>
+            <a href="plates.html" aria-current="page">板块构造</a>
+            <a href="age.html">地球年龄</a>
+            <a href="../geo-map/world-3d.html?lab=plates">在地球仪上看板块</a>
+            <a href="../geo-map/china.html#map">打开地理图谱</a>
+          </nav>
+        </details>
+      </aside>
+
+      <div class="earth-content experiment-content" id="earth-content" tabindex="-1">
+        <section class="earth-panel" id="plate-lab" aria-labelledby="plate-title" tabindex="-1">
+          <div class="experiment-panel-head">
+            <h2 id="plate-title">板块边界观察台</h2>
+            <a class="experiment-jump" href="#experiment-tools" data-experiment-jump>实验参数 ↑</a>
+          </div>
+          <figure class="earth-diagram">
+            <svg id="plate-diagram" viewBox="0 0 760 340" role="img" aria-label="板块运动示意图"></svg>
+            <figcaption>形状、厚度与速度均为放大示意。前三种情境为剖面图，灰褐色为板块，浅橙色为地幔。转换边界为俯视图，两种底色为两侧板块。</figcaption>
+          </figure>
+          <div class="earth-player" data-player>
+            <div class="earth-actions">
+              <button type="button" data-play aria-pressed="false">播放示意</button>
+              <button type="button" data-step>前进一格</button>
+              <button type="button" data-reset>重新开始</button>
+            </div>
+            <label>观察进度<input type="range" min="0" max="100" value="0" step="1" data-progress aria-label="板块运动进度"></label>
+            <p class="earth-muted" data-motion-status role="status">默认暂停，可播放或拖动进度。</p>
+          </div>
+          <article id="boundary-detail" class="earth-inset" aria-live="polite"></article>
+        </section>
+        <p class="earth-model-note">地球仪使用六组简化分区，适合定位比较。实际板块可按研究尺度进一步细分。</p>
+        <section id="earth-explain" class="earth-card-grid" aria-label="概念与证据"></section>
+        <details class="earth-question" id="earth-side-question"><summary id="earth-question-title">想一想</summary><p id="earth-answer"></p></details>
+        <details class="earth-sources"><summary>查看本页依据与素材来源（外部链接需联网）</summary><ul id="earth-source-list"></ul></details>
+        <noscript><p class="earth-model-note">请启用 JavaScript 使用交互图、查看分层说明与完整正文。可从专题目录打开另外四站。</p></noscript>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
