@@ -363,9 +363,9 @@ const PAGE_REFS = {
   'territory.html': ['content.js', 'dynasty-data.js', 'territory-data.js', 'territory-geo.js', 'shared.js', 'territory-app.js', 'styles.css', 'territory.css', 'territory-page.css',
     '../map-skills/experiment.css', '../map-skills/experiment.js', '../history/index.html', 'dynasties.html', 'timeline.html'],
   'era.html': ['content.js', 'timeline-data.js', 'media-data.js', 'dynasty-data.js', 'shared.js', 'era-app.js', 'styles.css', 'era.css', 'media.css',
-    'timeline.html'],
+    'timeline.css', 'reading-layout.js', 'timeline.html'],
   'event.html': ['content.js', 'timeline-data.js', 'media-data.js', 'reading-data.js', 'shared.js', 'navigation.js', 'event-app.js', 'styles.css', 'era.css', 'media.css',
-    'timeline.html', 'era.html', 'people-data.js', 'people-shared.js'],
+    'timeline.css', 'reading-layout.js', 'timeline.html', 'era.html', 'people-data.js', 'people-shared.js'],
   'people.html': ['content.js', 'timeline-data.js', 'people-data.js', 'shared.js', 'people-shared.js', 'people-app.js', 'styles.css', 'people.css', 'timeline.html'],
   'person.html': ['content.js', 'timeline-data.js', 'people-data.js', 'shared.js', 'people-shared.js', 'person-app.js', 'styles.css', 'people.css', 'people.html'],
   'civilizations.html': ['content.js', 'timeline-data.js', 'media-data.js', 'civilizations-data.js', 'shared.js', 'civilizations-shared.js', 'civilizations-app.js', 'styles.css', 'people.css', 'civilizations.css', 'timeline.html'],
@@ -382,20 +382,19 @@ Object.entries(PAGE_REFS).forEach(([page, refs]) => {
   check(fileExists(page), '缺少页面 ' + page);
   if (!fileExists(page)) return;
   const html = fs.readFileSync(path.join(DIR, page), 'utf8');
+  const groupedNavigation = ['timeline.html', 'era.html', 'event.html'].includes(page);
   refs.forEach(f => check(html.includes(f), page + ' 应引用 ' + f));
   for (const [, target] of html.matchAll(/(?:href|src)="([^"#?]+)(?:[#?][^"]*)?"/g)) {
     const sharedHistory = /^\.\.\/history\/(knowledge-dynasties|media)\.js$/.test(target);
     const sharedTerritory = page === 'territory.html' &&
       ['../map-skills/experiment.css', '../map-skills/experiment.js'].includes(target);
-    const lesson = ['timeline.html', 'territory.html'].includes(page) && target === '../history/index.html';
+    const lesson = (groupedNavigation || page === 'territory.html') && target === '../history/index.html';
     check((!/[/:]/.test(target) || sharedHistory || sharedTerritory || lesson) && fileExists(target), page + ' 应引用系统内存在的文件：' + target);
   }
   check(html.includes('lang="zh-CN"'), page + ' 应声明 zh-CN');
-  const navigation = {
-    'timeline.html': 'class="timeline-tool-body timeline-topic-links" aria-label="历史专题"',
-    'territory.html': 'class="experiment-links" aria-label="历史时间轴系统页面导航"',
-  };
-  check(html.includes(navigation[page] || 'tl-sysnav'), page + ' 应有系统导航条');
+  const navigation = groupedNavigation ? 'class="timeline-tool-body timeline-topic-links" aria-label="历史专题"'
+    : page === 'territory.html' ? 'class="experiment-links" aria-label="历史时间轴系统页面导航"' : 'tl-sysnav';
+  check(html.includes(navigation), page + ' 应有系统导航条');
   check(!/https?:\/\//.test(html.replace(/<!--[\s\S]*?-->/g, '').replace(/xmlns="http:\/\/www\.w3\.org\/2000\/svg"/g, '')), page + ' 不应引用外部网络资源（离线优先）');
 });
 

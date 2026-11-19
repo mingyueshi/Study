@@ -73,10 +73,9 @@ SCRIPT_HOOKS = {
     ),),
     ('history-timeline', 'era-app.js'): (
         (
-            '    </header>\n    ${bands.length',
-            "    </header>\n    ${window.StudyTopicConnections.related('eras', era.id)}\n    ${bands.length",
+            '    </nav>\n    ${bands.length',
+            "    </nav>\n    ${window.StudyTopicConnections.related('eras', era.id)}\n    ${bands.length",
         ),
-        ('ctx.rowsHTML(era)', 'ctx.rowsHTML(era, { compact: true })'),
     ),
     ('geo-map', 'map-ui.js'): ((
         '      openCard(id);',
@@ -163,7 +162,7 @@ def template(source, topic, page, theme, index_route):
     if (topic, page) == ('history-timeline', 'territory'):
         content = rewrite_page_links(content, {'territory.html': 'history-timeline-territory',
                                                '../history/index.html': 'history-study'})
-    if (topic, page) == ('history-timeline', 'timeline'):
+    if topic == 'history-timeline' and page in ('timeline', 'era', 'event'):
         content = rewrite_page_links(content, {'../history/index.html': 'history-study'})
     if topic == 'geo-map' and page in ('china', 'world'):
         anchor = '<p class="gm-layer-hint" id="gm-layer-hint"></p>'
@@ -199,6 +198,8 @@ def template(source, topic, page, theme, index_route):
         if shared_experiment or (topic in ('earth', 'ocean', 'climate', 'map-skills') and path.endswith(('.css', '.js'))):
             asset_url += '?v=' + sha256(resource_content(SOURCE / topic / path, topic, theme)).hexdigest()[:12]
         if topic == 'history-timeline' and (Path(path).name.startswith(('silk-road', 'silk-city', 'territory')) or path in ('dynasty-app.js', 'dynasty.css', 'timeline-app.js', 'timeline.css')) and path.endswith(('.css', '.js')):
+            asset_url += '?v=' + sha256(resource_content(SOURCE / topic / path, topic, theme)).hexdigest()[:12]
+        if topic == 'history-timeline' and page in ('era', 'event') and path in ('era.css', 'reading-layout.js', 'era-app.js', 'event-app.js'):
             asset_url += '?v=' + sha256(resource_content(SOURCE / topic / path, topic, theme)).hexdigest()[:12]
         if path.endswith('.css'):
             assets.append(f'<link rel="stylesheet" href="{asset_url}">')

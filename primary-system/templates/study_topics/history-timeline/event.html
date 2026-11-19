@@ -4,7 +4,8 @@
 {% block title %}历史大事 · 历史时间轴 · 乐学堂{% endblock %}
 {% block study_assets %}
 <link rel="stylesheet" href="{% static 'study_topics/history-timeline/styles.css' %}">
-<link rel="stylesheet" href="{% static 'study_topics/history-timeline/era.css' %}">
+<link rel="stylesheet" href="{% static 'study_topics/history-timeline/timeline.css' %}?v=079ca000ddc2">
+<link rel="stylesheet" href="{% static 'study_topics/history-timeline/era.css' %}?v=6648d16c9237">
 <link rel="stylesheet" href="{% static 'study_topics/history-timeline/media.css' %}">
 <link rel="stylesheet" href="{% static 'study_topics/history-timeline/people.css' %}">
 <script src="{% static 'study_topics/history-timeline/content.js' %}" defer></script>
@@ -21,27 +22,49 @@
 <script src="{% static 'study_topics/history-timeline/navigation.js' %}" defer></script>
 <script src="{% static 'study_topics/history-timeline/silk-road-data.js' %}?v=6aea47cc2b60" defer></script>
 <script src="{% static 'study_topics/history-timeline/silk-road-shared.js' %}?v=66f72023475c" defer></script>
-<script src="{% static 'study_topics/history-timeline/event-app.js' %}" defer></script>
+<script src="{% static 'study_topics/history-timeline/reading-layout.js' %}?v=f0773363f8a8" defer></script>
+<script src="{% static 'study_topics/history-timeline/event-app.js' %}?v=789f6cabdea2" defer></script>
 {% endblock %}
 {% block study_content %}
 <div class="study-timeline">
-<div class="tl-shell">
-    <div class="event-topic" id="top">
-      <nav class="tl-sysnav" aria-label="历史时间轴系统页面导航">
-        <a class="tl-sysnav-brand" href="{% url 'history-timeline' %}">🕰️ 历史时间轴<small>中国史与世界史</small></a>
-        <a data-page href="timeline.html">双轨时间轴</a>
-        <a data-page href="era.html">时代站</a>
-        <a data-page href="dynasties.html">朝代更替</a><a data-page href="territory.html">疆域地图</a>
-        <a data-page href="people.html">历史人物馆</a>
-      <a href="civilizations.html">世界文明巡礼</a><a data-page href="ancient-science.html">中国古代科技</a><a data-page href="silk-road.html">丝绸之路</a></nav>
-      <nav class="tl-breadcrumb" aria-label="所在位置">
-        <a href="timeline.html">双轨时间轴</a><a id="event-era" href="era.html" hidden></a>
-        <b aria-current="page">历史大事</b>
-      </nav>
-      <div id="event-page"></div>
-      <noscript><p class="tl-notice">请启用 JavaScript 阅读历史大事。</p></noscript>
+<div class="tl-shell tl-workspace-shell">
+    <div class="event-topic" id="event-page">
+      <header class="timeline-heading timeline-reading-hero" id="top" hidden></header>
+      <div class="timeline-topic" data-sidebar-label="阅读目录">
+        <aside class="timeline-sidebar" aria-label="历史大事阅读目录">
+          <details class="timeline-local-tools" open>
+            <summary>阅读目录</summary>
+            <details class="timeline-tool-group" open>
+              <summary>时代切换</summary>
+              <nav class="timeline-tool-body tl-era-nav" id="event-stations" data-tl-anchor tabindex="-1" aria-label="切换时代"></nav>
+            </details>
+            <details class="timeline-tool-group" id="event-directory" data-tl-anchor tabindex="-1" hidden>
+              <summary>事件目录</summary>
+              <div class="timeline-tool-body" id="event-directory-content"></div>
+            </details>
+            <details class="timeline-tool-group">
+              <summary>相关专题</summary>
+              <nav class="timeline-tool-body timeline-topic-links" aria-label="历史专题">
+                <a href="timeline.html">双轨时间轴 ↗</a>
+                <a href="{% url 'history-timeline' %}">历史时间轴首页 ↗</a>
+                <a href="era.html">时代站总览 ↗</a>
+                <a href="dynasties.html">朝代更替 ↗</a>
+                <a href="territory.html">疆域地图 ↗</a>
+                <a href="people.html">历史人物馆 ↗</a>
+                <a href="civilizations.html">世界文明巡礼 ↗</a>
+                <a href="ancient-science.html">中国古代科技 ↗</a>
+                <a href="silk-road.html">丝绸之路 ↗</a>
+                <a href="{% url 'history-study' %}">历史精讲 ↗</a>
+              </nav>
+            </details>
+          </details>
+        </aside>
+        <div class="timeline-content">
+          <noscript><p class="tl-notice">请启用 JavaScript 阅读历史大事。</p></noscript>
+        </div>
+      </div>
     </div>
   </div>
-<div class="tl-footer">历史时间轴系统 · <a href="{% url 'history-timeline' %}">系统首页</a> · <a href="#top">回到顶部 ↑</a></div>
+<div class="tl-footer"><a href="#top">回到顶部 ↑</a></div>
 </div>
 {% endblock %}

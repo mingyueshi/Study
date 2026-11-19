@@ -5,7 +5,14 @@ from django.views.generic import TemplateView
 def page(name):
     return TemplateView.as_view(
         template_name=f'study_topics/{name}.html',
-        extra_context={'study_area': 'history', 'study_label': '历史'},
+        extra_context={
+            'study_area': 'history',
+            'study_label': '历史',
+            'local_navigation': name in (
+                'history-timeline/timeline', 'history-timeline/era',
+                'history-timeline/event', 'history-timeline/territory',
+            ),
+        },
     )
 
 

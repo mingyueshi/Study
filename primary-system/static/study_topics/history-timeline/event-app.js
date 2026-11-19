@@ -3,19 +3,23 @@
   'use strict';
   const mediaBase = new URL('.', document.currentScript.src);
   const root = document.querySelector('.event-topic');
-  const slot = document.getElementById('event-page');
-  const { esc, trackName, makeContext, eraHref, eventHref, mediaFor, bindAnchors } = window.TLShared;
-  const ctx = makeContext(window.TIMELINE_ERAS, window.TIMELINE_EVENTS, window.TIMELINE_PAIRS);
+  const slot = root.querySelector('.timeline-content');
+  const heading = root.querySelector('.timeline-heading');
+  const { esc, trackName, makeContext, eraHref, eventHref, mediaFor } = window.TLShared;
+  const layout = window.TLReadingLayout;
+  const eras = window.TIMELINE_ERAS;
+  const ctx = makeContext(eras, window.TIMELINE_EVENTS, window.TIMELINE_PAIRS);
   const ev = ctx.eventMap.get(new URLSearchParams(location.search).get('event'));
+  const era = ev && ctx.eraMap.get(ev.era);
+  document.getElementById('event-stations').innerHTML = layout.stationsHTML(eras, era, true);
+  heading.hidden = false;
   if (!ev) {
-    slot.innerHTML = `<section class="tl-hero"><h1>没有找到这件大事</h1>
-      <p>回到时间轴，可以按事件、朝代或年代查找。</p>
-      <a class="tl-primary-action" href="timeline.html#timeline-tools">去时间轴找大事 →</a>
-    </section>`;
+    heading.innerHTML = '<p class="tl-eyebrow">历史大事</p><h1>没有找到这件大事</h1>';
+    slot.innerHTML = '<p>回到时间轴，可以按事件、朝代或年代查找。</p><a class="tl-primary-action" href="timeline.html#timeline-tools">去时间轴找大事 →</a>';
+    layout.bind(root);
     return;
   }
 
-  const era = ctx.eraMap.get(ev.era);
   const materials = mediaFor(ev);
   const pair = ctx.pairOfEvent.get(ev.id);
   const neighbor = pair ? ctx.counterpart(pair, ev) : null;
@@ -28,10 +32,12 @@
   const technologies = window.AncientScience.forEvent(ev.id);
   const silkRoutes = window.SilkRoad.forEvent(ev.id);
   document.title = ev.title + ' · 历史大事';
-  const eraCrumb = document.getElementById('event-era');
-  eraCrumb.textContent = era.name;
-  eraCrumb.href = eraHref(era);
-  eraCrumb.hidden = false;
+  heading.dataset.track = ev.track;
+  heading.innerHTML = `<p class="tl-eyebrow">${esc(era.name)} · ${trackName[ev.track]} · ${esc(ev.tag)}</p>
+    <h1 id="event-title"><span aria-hidden="true">${esc(ev.icon || '•')}</span> ${esc(ev.title)}</h1>
+    <p class="timeline-totals">${esc(ev.year)}</p>`;
+  document.getElementById('event-directory-content').innerHTML = layout.eventsHTML(events, ev);
+  document.getElementById('event-directory').hidden = false;
 
   function nearby(item, label) {
     return item ? `<a class="era-pager-btn" href="${eventHref(item)}">
@@ -62,15 +68,14 @@
     </figure>`;
   }
 
-  slot.innerHTML = `<article class="tl-hero event-hero ${ev.track}">
-    <p class="tl-eyebrow">第 ${era.no} 站 · ${trackName[ev.track]} · ${esc(ev.tag)}</p>
-    <p class="event-year">${esc(ev.year)}</p>
-    <h1><span aria-hidden="true">${esc(ev.icon || '•')}</span> ${esc(ev.title)}</h1>
+  slot.innerHTML = `<article class="timeline-event-story ${ev.track}" aria-labelledby="event-title">
     <p class="event-text">${esc(ev.text)}</p>
-    <nav class="tl-related" aria-label="继续了解这件大事">
+    <nav class="timeline-reading-actions" aria-label="继续了解这件大事">
       <a href="timeline.html${cardHash}">在总轴上找到这件大事 ↗</a>
       <a href="${eraHref(era)}${cardHash}">在时代站继续读 →</a>
-      ${materials.length ? '<a href="#event-media">看这件大事的素材 ↓</a>' : ''}
+      <a href="#event-directory">打开事件目录 ↗</a>
+      ${materials.length ? '<a href="#event-media">看图听档案 ↓</a>' : ''}
+      ${pair ? '<a href="#comparison">看同期对照 ↓</a>' : ''}
     </nav>
     ${window.StudyTopicConnections.related('events', ev.id)}
   </article>
@@ -107,5 +112,5 @@
     <a class="era-pager-btn era-pager-home" href="${eraHref(era)}">回到时代站</a>
     ${nearby(events[index + 1], '下一件')}
   </nav>`;
-  bindAnchors(root);
+  layout.bind(root);
 })();

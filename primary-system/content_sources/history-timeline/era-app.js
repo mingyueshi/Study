@@ -2,50 +2,48 @@
 (() => {
   'use strict';
   const root = document.querySelector('.era-topic');
-  const slot = document.getElementById('era-page');
-  const { esc, makeContext, eraHref, dynastyHref, mediaFor, mediaHref, stationsHTML, bindAnchors } = window.TLShared;
+  const slot = root.querySelector('.timeline-content');
+  const heading = root.querySelector('.timeline-heading');
+  const { esc, makeContext, dynastyHref, mediaFor, mediaHref, stationsHTML } = window.TLShared;
+  const layout = window.TLReadingLayout;
   const eras = window.TIMELINE_ERAS;
   const ctx = makeContext(eras, window.TIMELINE_EVENTS, window.TIMELINE_PAIRS);
   const eraId = new URLSearchParams(location.search).get('era');
   const index = eras.findIndex(era => era.id === eraId);
-  const crumb = document.getElementById('crumb-here');
+  const era = eras[index];
+  document.getElementById('era-stations').innerHTML = layout.stationsHTML(eras, era);
+  heading.hidden = false;
   if (index < 0) {
     const title = eraId ? '没有找到这个时代站' : '九个时代站';
-    crumb.textContent = '时代站目录';
-    slot.innerHTML = `<section class="tl-era-head era-missing"><h1>${title}</h1>
-      <p>选一站，看看那时的中国和世界各发生了什么。</p>
-      <div class="tl-station-grid">${stationsHTML(eras, ctx)}</div>
-    </section>`;
+    heading.innerHTML = `<p class="tl-eyebrow">时代站</p><h1 id="crumb-here" data-tl-anchor tabindex="-1">${title}</h1>
+      <p class="timeline-lead">选一站，看看那时的中国和世界各发生了什么。</p>`;
+    slot.innerHTML = `<div class="tl-station-grid">${stationsHTML(eras, ctx)}</div>`;
+    layout.bind(root);
     return;
   }
 
-  const era = eras[index];
+  const events = ctx.byEra.get(era.id).flat();
   const pairs = window.TIMELINE_PAIRS.filter(pair => ctx.eventMap.get(pair.china).era === era.id);
   const bands = window.DYNASTY_BANDS.filter(band => band.era === era.id);
-  const previews = ctx.byEra.get(era.id).flat()
+  const previews = events
     .map(ev => ({ ev, image: mediaFor(ev).find(item => item.type === 'image') }))
     .filter(({ image }) => image);
   const timelineHref = 'timeline.html#era-' + encodeURIComponent(era.id);
   document.title = era.name + ' · 时代站 · 历史时间轴';
-  crumb.textContent = '第 ' + era.no + ' 站 · ' + era.name;
   slot.style.setProperty('--era-accent', era.accent);
-
-  function pageLink(neighbor, label) {
-    return neighbor ? `<a class="era-pager-btn" href="${eraHref(neighbor)}"><small>${label}</small><b>${esc(neighbor.name)}</b></a>` : '<span></span>';
-  }
-
-  slot.innerHTML = `<header class="tl-era-head era-page-head">
-      <div class="tl-era-title"><span class="tl-era-no" aria-hidden="true">${era.no}</span>
-        <div><h1>${esc(era.name)}</h1><p class="tl-era-span">${esc(era.span)}</p></div>
-        <a class="tl-era-link" href="${timelineHref}">回总轴这一站 ↗</a>
-      </div>
-      <p class="tl-era-compare">${esc(era.compare)}</p>
-      <nav class="era-section-links" aria-label="时代站内容">
-        ${previews.length ? '<a href="#era-media">看这站的素材 ↓</a>' : ''}
-        <a href="#era-events">沿时间读大事 ↓</a>
-        ${pairs.length ? '<a href="#era-pairs">看同期对照 ↓</a>' : ''}
-      </nav>
-    </header>
+  heading.innerHTML = `<p class="tl-eyebrow">第 ${era.no} 站 · ${esc(era.span)}</p>
+    <h1 id="crumb-here" data-tl-anchor tabindex="-1">${esc(era.name)}</h1>
+    <p class="timeline-lead">${esc(era.compare)}</p>`;
+  document.getElementById('era-directory-content').innerHTML = `<nav class="timeline-section-links" aria-label="时代站内容">
+    ${previews.length ? '<a class="timeline-side-link" href="#era-media">看素材 ↓</a>' : ''}
+    <a class="timeline-side-link" href="#era-events">沿时间读大事 ↓</a>
+    ${pairs.length ? '<a class="timeline-side-link" href="#era-pairs">看同期对照 ↓</a>' : ''}
+  </nav>${layout.eventsHTML(events)}`;
+  document.getElementById('era-directory').hidden = false;
+  slot.innerHTML = `<nav class="timeline-reading-actions" aria-label="时代站阅读工具">
+      <a class="timeline-side-link" href="${timelineHref}">回总轴这一站 ↗</a>
+      <a class="timeline-side-link" href="#era-directory">打开事件目录 ↗</a>
+    </nav>
     ${bands.length ? `<nav class="tl-related" aria-label="这一站的朝代"><b>这一站的朝代</b>
       ${bands.map(band => `<a href="${dynastyHref(band)}">${esc(band.name)} →</a>`).join('')}
     </nav>` : ''}
@@ -65,10 +63,9 @@
     ${pairs.length ? `<section class="era-pairs" id="era-pairs" data-tl-anchor tabindex="-1" aria-labelledby="era-pairs-title"><h2 id="era-pairs-title">这时，中国和世界</h2>
       <div class="era-pairs-grid">${pairs.map(ctx.spotlightHTML).join('')}</div>
     </section>` : ''}
-    <nav class="era-pager" aria-label="上一站下一站">
-      ${pageLink(eras[index - 1], '上一站')}
-      <a class="era-pager-btn era-pager-home" href="${timelineHref}">回总轴这一站</a>
-      ${pageLink(eras[index + 1], '下一站')}
+    <nav class="timeline-reading-actions" aria-label="继续浏览">
+      <a class="timeline-side-link" href="#era-stations">选择其他时代 ↑</a>
+      <a class="timeline-side-link" href="${timelineHref}">回总轴这一站 ↗</a>
     </nav>`;
-  bindAnchors(root);
+  layout.bind(root);
 })();

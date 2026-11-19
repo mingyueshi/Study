@@ -487,10 +487,25 @@ class StudyTopicPageTests(SimpleTestCase):
         ):
             with self.subTest(name=name):
                 response = self.client.get(reverse(name))
-                assets = TopicMarkup(response.content.decode()).assets
+                assets = [url.split("?")[0] for url in TopicMarkup(response.content.decode()).assets]
                 prefix = '/static/study_topics/history-timeline/'
                 for dependency in ('people-data.js', 'people-shared.js'):
                     self.assertLess(assets.index(prefix + dependency), assets.index(prefix + consumer))
+
+    def test_history_reading_pages_group_tools_and_keep_entry_points(self):
+        prefix = '/static/study_topics/history-timeline/'
+        for page, query in (('era', '?era=voyage'), ('event', '?event=tc27')):
+            with self.subTest(page=page):
+                response = self.client.get(reverse(f'history-timeline-{page}') + query)
+                for anchor in ('top', f'{page}-page', f'{page}-stations', f'{page}-directory'):
+                    self.assertContains(response, f'id="{anchor}"', count=1)
+                for label in ('时代切换', '事件目录', '相关专题'):
+                    self.assertContains(response, f'<summary>{label}</summary>', html=True)
+                self.assertContains(response, f'href="{reverse("history-study")}"', count=1)
+                assets = [url.split("?")[0] for url in TopicMarkup(response.content.decode()).assets]
+                helper = assets.index(prefix + 'reading-layout.js')
+                self.assertLess(assets.index(prefix + 'shared.js'), helper)
+                self.assertLess(helper, assets.index(prefix + f'{page}-app.js'))
 
     def test_civilization_data_and_images_are_loaded_before_page_apps(self):
         for name, consumer in (
@@ -499,7 +514,8 @@ class StudyTopicPageTests(SimpleTestCase):
             ('history-timeline-event', 'event-app.js'),
         ):
             with self.subTest(name=name):
-                assets = TopicMarkup(self.client.get(reverse(name)).content.decode()).assets
+                response = self.client.get(reverse(name))
+                assets = [url.split("?")[0] for url in TopicMarkup(response.content.decode()).assets]
                 prefix = '/static/study_topics/history-timeline/'
                 for dependency in ('media-data.js', 'civilizations-data.js', 'civilizations-shared.js'):
                     self.assertLess(assets.index(prefix + dependency), assets.index(prefix + consumer))
@@ -514,7 +530,7 @@ class StudyTopicPageTests(SimpleTestCase):
         ):
             with self.subTest(name=name):
                 response = self.client.get(reverse(name))
-                assets = TopicMarkup(response.content.decode()).assets
+                assets = [url.split("?")[0] for url in TopicMarkup(response.content.decode()).assets]
                 for dependency in ('media-data.js', 'people-data.js', 'ancient-science-data.js', 'ancient-science-shared.js'):
                     self.assertLess(assets.index(prefix + dependency), assets.index(prefix + consumer))
                 self.assertContains(response, '中国古代科技')
