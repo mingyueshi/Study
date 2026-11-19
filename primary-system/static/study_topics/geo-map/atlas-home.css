@@ -1,0 +1,40 @@
+/* 图谱首页保留地点搜索和完整目录，常用地图在同一排。 */
+.home-topic .gm-flat-heading { --flat-hero-photo: url("assets/himalayas-orbit.jpg"); }
+.gm-atlas-heading .gm-intro { margin-block: 6px 8px; }
+.gm-atlas-heading .gm-search { width: min(100%, 27rem); margin: 0; }
+.gm-atlas-heading .gm-search > div { grid-template-columns: minmax(0, 1fr) auto; }
+.gm-atlas-heading :is(input, button) { min-height: 44px; font-size: 16px; }
+.gm-atlas-heading .gm-search input { background: var(--card); }
+.gm-atlas-heading button { padding-inline: 12px; }
+.home-topic .gm-content { display: grid; gap: clamp(14px, 2vw, 24px); }
+.home-topic .gm-content > section { margin: 0; scroll-margin-top: 16px; }
+.gm-atlas-maps .gm-page-cards { grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); }
+.gm-atlas-maps .gm-page-card { gap: 5px; padding: 12px 14px; min-width: 0; }
+.gm-atlas-maps .gm-page-icon { font-size: 22px; line-height: 1.25; }
+.gm-atlas-maps h3, .gm-atlas-topics a { text-decoration: underline; text-underline-offset: .18em; }
+.gm-atlas-maps .gm-page-card:focus-visible { outline-offset: 3px; }
+#gm-home-svg { position: absolute; inset: 6px 12px auto auto; width: min(40%, 100px); height: 48px; border-radius: 6px; }
+.gm-atlas-topics ul {
+  list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 170px), 1fr)); gap: 6px 14px;
+}
+.gm-atlas-topics a {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 44px;
+  padding: 5px 10px; border: 1px solid var(--atlas-border); border-radius: 8px;
+  background: var(--card); color: var(--blue); font-weight: 700;
+}
+.gm-atlas-topics a::after { content: '→' / ''; }
+.gm-atlas-topics a:hover { background: var(--atlas-tint); }
+.home-topic .gm-station-go { color: var(--blue); }
+
+@media (min-width: 760px) {
+  .gm-atlas-heading { grid-template-columns: 1fr minmax(240px, 37%); align-items: center; gap: 18px; }
+  .gm-atlas-heading .gm-search { justify-self: end; }
+}
+@media (max-width: 520px) {
+  .gm-atlas-maps .gm-page-cards,
+  .gm-atlas-topics ul { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .gm-atlas-maps .gm-page-card { padding-inline: 10px; }
+  .gm-atlas-maps h3 { font-size: 18px; }
+  #gm-home-svg { display: none; }
+  .study-atlas .home-topic :is(.gm-atlas-maps, .gm-atlas-topics) { padding-inline-end: 40px; }
+}

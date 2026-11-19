@@ -4,96 +4,73 @@
 {% block title %}地理图谱 · 乐学堂{% endblock %}
 {% block study_assets %}
 <link rel="stylesheet" href="{% static 'study_topics/geo-map/styles.css' %}?v=5b8e2fb415da">
+<link rel="stylesheet" href="{% static 'study_topics/geo-map/flat-map.css' %}?v=51aaac8e6522">
+<link rel="stylesheet" href="{% static 'study_topics/geo-map/atlas-home.css' %}?v=3a55f585f107">
 <script src="{% static 'study_topics/geo-map/china-geo.js' %}?v=d8402343bd1d" defer></script>
 <script src="{% static 'study_topics/geo-map/content.js' %}?v=e86ddc18e05f" defer></script>
 <script src="{% static 'study_topics/geo-map/map-data.js' %}?v=27ebda785125" defer></script>
-<script src="{% static 'study_topics/geo-map/world-data.js' %}?v=9b7765ca7392" defer></script>
-<script src="{% static 'study_topics/geo-map/atlas-data.js' %}?v=041dec261237" defer></script>
-<script src="{% static 'study_topics/geo-map/atlas.js' %}?v=60e5f6a93f55" defer></script>
 <script src="{% static 'study_topics/geo-map/shared.js' %}?v=d2bebbfd2a0b" defer></script>
-<script src="{% static 'study_topics/geo-map/home-app.js' %}?v=9ea09bf67610" defer></script>
+<script src="{% static 'study_topics/geo-map/home-app.js' %}?v=749c7edea073" defer></script>
 {% endblock %}
 {% block study_content %}
 <div class="study-atlas">
-<div class="gm-topic home-topic">
-    <aside class="gm-sidebar" aria-label="导航和页面工具">
-      <nav class="gm-sysnav" aria-label="地理图谱页面导航">
-        <a class="gm-sysnav-brand" href="{% url 'geography-atlas' %}" aria-current="page">🧭 地理图谱</a>
-        <a data-page href="china.html">中国地图</a>
-        <a data-page href="world.html">世界地图</a>
-        <a data-page href="{% url 'geography-china-terrain' %}">3D 地形</a>
-        <a data-page href="{% url 'geography-globe' %}">地球仪</a>
-        <a data-page href="places.html">地点索引</a>
-        <details class="gm-atlas-more">
-          <summary>专题与资料</summary>
-          <div class="gm-side-links">
-            <a href="province.html">省域站</a>
-            <a href="routes.html">主题路线</a>
-            <a href="gallery.html">实景图册</a>
-            <a href="{% url 'geography-life-maps' %}">动植物地图</a>
-            <a href="{% url 'geography-province-culture' %}">中国省份文化</a>
-            <a href="{% url 'geography-china-landscapes' %}">中国山河</a>
-            <a href="{% url 'geography-voyages' %}">航海与世界探索</a>
-            <a href="{% url 'geography-study' %}">地理小课堂</a>
-          </div>
-        </details>
-      </nav>
-
-      <header class="gm-hero">
-        <p class="gm-eyebrow">乐学堂 · 离线地图探索</p>
+<div class="gm-topic gm-map-topic home-topic">
+    <header class="gm-flat-heading gm-atlas-heading">
+      <div>
         <h1 class="gm-title">地理图谱</h1>
         <p class="gm-intro">从家乡出发，顺着山河看中国，把地图拉远再看世界。</p>
-        <form class="gm-search gm-search--home" action="places.html" role="search">
-          <label for="home-search">想找哪里？</label>
-          <div><input id="home-search" name="q" type="search" placeholder="试试长江或北京"><button type="submit">查地点 →</button></div>
-        </form>
-        <div class="gm-stats" aria-label="内容规模">
-          <span><b id="stat-stations">34</b>个省域站</span>
-          <span><b id="stat-places">291</b>条地点档案</span>
-          <span><b id="stat-routes">3</b>条主题路线</span>
-        </div>
-      </header>
-    </aside>
+        <a href="gallery.html?place=f1">喜马拉雅影像 · NASA</a>
+      </div>
+      <form class="gm-search gm-search--home" action="places.html" role="search">
+        <label for="home-search">查地点</label>
+        <div><input id="home-search" name="q" type="search" placeholder="试试长江或北京"><button type="submit">搜索 →</button></div>
+      </form>
+    </header>
 
     <div id="content" class="gm-content" tabindex="-1">
-      <a class="gm-home-map" href="china.html#map">
-        <svg id="gm-home-svg" aria-hidden="true"></svg>
-        <span><b>打开中国地图</b><small>换图层，认省份和山河 →</small></span>
-      </a>
-
-      <section class="gm-pages" aria-labelledby="pages-title">
-        <h2 id="pages-title">地图与工具</h2>
+      <section class="gm-pages gm-atlas-maps" aria-labelledby="pages-title">
+        <h2 id="pages-title">地图</h2>
         <div class="gm-page-cards">
-          <a class="gm-page-card" href="{% url 'geography-china-terrain' %}" style="--page-accent:#216b76">
-            <span class="gm-page-icon" aria-hidden="true">🧩</span>
-            <div><h3>3D 地形</h3><p>沿着长江、黄河看真实地形，认山脉、高原和平原，点一点读出采样海拔。</p></div>
-            <span class="gm-page-go" aria-hidden="true">立体看中国 →</span>
-          </a>
-          <a class="gm-page-card" href="{% url 'geography-globe' %}" style="--page-accent:#17677c">
-            <span class="gm-page-icon" aria-hidden="true">🌐</span>
-            <div><h3>地球仪</h3><p>转动地球认识七大洲与四大洋，动手测距离、找坐标，再观察昼夜与四季。</p></div>
-            <span class="gm-page-go" aria-hidden="true">转动地球 →</span>
+          <a class="gm-page-card" href="china.html#map" style="--page-accent:#397654">
+            <span class="gm-page-icon" aria-hidden="true">🗺️</span>
+            <h3>中国地图</h3><p>换图层认省份、山河和邻国。</p>
+            <svg id="gm-home-svg" aria-hidden="true"></svg>
           </a>
           <a class="gm-page-card" href="world.html#map" style="--page-accent:#1f6f8b">
             <span class="gm-page-icon" aria-hidden="true">🌍</span>
-            <div><h3>世界地图</h3><p>给七大洲认颜色，点一点世界地标，再找找中国在哪儿。</p></div>
-            <span class="gm-page-go" aria-hidden="true">看世界 →</span>
+            <h3>世界地图</h3><p>认识七大洲，找一找世界地标。</p>
           </a>
-          <a class="gm-page-card" href="places.html" style="--page-accent:#7465aa">
-            <span class="gm-page-icon" aria-hidden="true">🔍</span>
-            <div><h3>地点索引</h3><p>用地名、简称或英文名找到地点，再跳到地图上看。</p></div>
-            <span class="gm-page-go" aria-hidden="true">查地点 →</span>
+          <a class="gm-page-card" href="{% url 'geography-china-terrain' %}" style="--page-accent:#936737">
+            <span class="gm-page-icon" aria-hidden="true">⛰️</span>
+            <h3>中国 3D 地形</h3><p>沿河岸和山脊看地形，点一下读海拔。</p>
+          </a>
+          <a class="gm-page-card" href="{% url 'geography-globe' %}" style="--page-accent:#5f5495">
+            <span class="gm-page-icon" aria-hidden="true">🌐</span>
+            <h3>3D 地球仪</h3><p>转动地球、找坐标，观察昼夜与四季。</p>
           </a>
         </div>
+      </section>
+
+      <section class="gm-pages gm-atlas-topics" aria-labelledby="topics-title">
+        <h2 id="topics-title">专题与资料</h2>
+        <ul>
+          <li><a href="province.html">省域站</a></li>
+          <li><a href="places.html">地点索引</a></li>
+          <li><a href="routes.html">主题路线</a></li>
+          <li><a href="gallery.html">实景图册</a></li>
+          <li><a href="{% url 'geography-life-maps' %}">动植物地图</a></li>
+          <li><a href="{% url 'geography-province-culture' %}">中国省份文化</a></li>
+          <li><a href="{% url 'geography-china-landscapes' %}">中国山河</a></li>
+          <li><a href="{% url 'geography-voyages' %}">航海与世界探索</a></li>
+          <li><a href="{% url 'geography-study' %}">地理小课堂</a></li>
+        </ul>
       </section>
 
       <section class="gm-stations" aria-labelledby="stations-title">
         <h2 id="stations-title">三十四个省域站</h2>
-        <p class="gm-stations-note">挑一个省域站，读五条小知识，再在迷你地图上看看它的位置。</p>
         <div class="gm-station-grid" id="station-grid"></div>
+        <noscript><p>请启用 JavaScript 查看各省域站。</p></noscript>
       </section>
-
-      <noscript><p class="gm-notice">请启用 JavaScript 查看系统首页；页面入口链接不依赖脚本，可直接双击 china.html、province.html 或 world.html 进入。</p></noscript>
     </div>
   </div>
 

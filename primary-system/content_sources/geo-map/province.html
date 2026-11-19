@@ -6,6 +6,7 @@
   <meta name="description" content="地理图谱·省域站：进入单个省级行政区，看档案、读记一记要点，在迷你地图上找到它的位置。">
   <title>省域站 · 地理图谱</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="flat-map.css">
   <link rel="stylesheet" href="province.css">
   <script src="china-geo.js" defer></script>
   <script src="content.js" defer></script>
@@ -20,43 +21,53 @@
 </head>
 <body>
   <a class="skip-link" href="#content">跳到主要内容</a>
-  <main id="main" class="gm-topic province-topic" tabindex="-1">
-    <aside class="gm-sidebar" aria-label="导航和页面工具">
-      <nav class="gm-sysnav" aria-label="地理图谱页面导航">
-        <a class="gm-sysnav-brand" href="index.html">🧭 地理图谱</a>
-        <a data-page href="china.html">中国地图</a>
-        <a data-page href="world.html">世界地图</a>
-        <a data-page href="china-3d.html">3D 地形</a>
-        <a data-page href="world-3d.html">地球仪</a>
-        <a data-page href="places.html">地点索引</a>
-        <details class="gm-atlas-more" open>
-          <summary>专题与资料</summary>
-          <div class="gm-side-links">
-            <a href="province.html" aria-current="page">省域站</a>
+  <main id="main" class="gm-topic gm-map-topic province-topic" tabindex="-1">
+    <header class="gm-flat-heading" id="province-heading">
+      <div class="gm-province-heading-text">
+        <h1 class="gm-title">省域站</h1>
+        <p class="gm-intro">挑一个省域站，看看它在地图上的位置。</p>
+      </div>
+      <a href="gallery.html?place=f1">喜马拉雅影像 · NASA</a>
+    </header>
+
+    <div class="gm-flat-workspace" data-sidebar-layout=".gm-sidebar" data-sidebar-width="clamp(280px, 24vw, 320px)" data-sidebar-label="省域工具">
+      <aside class="gm-sidebar" aria-label="省域工具与相关专题">
+        <details id="province-tools" class="gm-flat-tools" open tabindex="-1">
+          <summary>查找省域站</summary>
+          <div class="gm-flat-controls">
+            <label for="province-search">找省份<input id="province-search" type="search" placeholder="如广东或 440000" autocomplete="off"></label>
+            <div id="province-regions" class="gm-filters" role="group" aria-label="按地理区域筛选"></div>
+            <p id="province-filter-status" role="status"></p>
+            <button type="button" id="province-filter-reset" hidden>清除筛选</button>
+            <nav id="province-matches" aria-label="匹配的省域站" hidden></nav>
+            <a class="gm-flat-back" href="#province-page">查看目录 ↓</a>
+          </div>
+        </details>
+        <details id="province-related" class="gm-flat-tools">
+          <summary>导航与相关专题</summary>
+          <nav class="gm-flat-links" id="province-nav" aria-label="省域站导航" tabindex="-1">
+            <a href="index.html">图谱首页</a>
+            <a id="province-map-link" href="china.html#map">中国地图</a>
+            <a id="province-terrain-link" href="china-3d.html">中国 3D 地形</a>
+            <a id="province-culture-link" href="province-culture.html">中国省份文化</a>
+            <a href="world.html#map">世界地图</a>
+            <a href="world-3d.html">3D 地球仪</a>
+            <a href="places.html">地点索引</a>
             <a href="routes.html">主题路线</a>
             <a href="gallery.html">实景图册</a>
             <a href="life-maps.html">动植物地图</a>
-            <a href="province-culture.html">中国省份文化</a>
             <a href="china-landscapes.html">中国山河</a>
             <a href="voyages.html">航海与世界探索</a>
             <a href="../geo/index.html">地理小课堂</a>
-          </div>
+          </nav>
         </details>
-      </nav>
+      </aside>
 
-      <header class="gm-hero" id="province-heading">
-        <p class="gm-eyebrow">看家乡 · 四大地理区域</p>
-        <h1 class="gm-title">省域站</h1>
-        <p class="gm-intro">挑一个省域站，看看它在地图上的位置。</p>
-      </header>
-
-      <nav class="gm-side-panel gm-side-links" id="province-nav" aria-label="省域站导航"></nav>
-    </aside>
-
-    <div id="content" class="gm-content" tabindex="-1">
-      <div id="province-page"></div>
-
-      <noscript><p class="gm-notice">请启用 JavaScript 查看省域站和地图。</p></noscript>
+      <div id="content" class="gm-content" tabindex="-1">
+        <div class="gm-view-bar gm-province-view-bar"><a class="gm-tools-jump" href="#province-tools">查找省域站 ↑</a></div>
+        <div id="province-page" tabindex="-1"></div>
+        <noscript><p class="gm-notice">请启用 JavaScript 查看省域站和地图。</p></noscript>
+      </div>
     </div>
   </main>
 </body>

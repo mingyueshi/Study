@@ -83,8 +83,8 @@ SCRIPT_HOOKS = {
         "      openCard(id);\n      card.insertAdjacentHTML('beforeend', window.StudyTopicConnections.related('places', id));",
     ),),
     ('geo-map', 'province-app.js'): ((
-        '    window.GMMedia.preview(p.id) +',
-        "    window.StudyTopicConnections.related('places', p.id) +\n    window.GMMedia.preview(p.id) +",
+        '      window.GMMedia.preview(p.id) +',
+        "      window.StudyTopicConnections.related('places', p.id) +\n      window.GMMedia.preview(p.id) +",
     ),),
 }
 CALENDAR_AUDIO = """<div class="study-calendar-audio">

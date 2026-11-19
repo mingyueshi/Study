@@ -666,8 +666,8 @@ console.log('— 入口文件（多页面系统） —');
   .forEach(f => check(fileExists(f), '缺少文件: ' + f));
 const PAGE_REFS = {
   'china-3d.html': ['content.js', 'china-geo.js', 'map-data.js', 'shared.js', 'china-3d-data.js', 'china-terrain-index.js', 'china-terrain-stream.js', 'china-rivers-data.js', 'china-3d-geometry.js', 'china-river-flow.js', 'china-river-tour-data.js', 'china-river-tour.js', 'china-terrain-section.js', 'china-adventures-data.js', 'china-adventures.js', 'china-terrain-play.js', 'china-3d.js', 'china-3d.css', 'assets/vendor/three-map.js', 'china.html', 'province.html'],
-  'index.html': ['content.js', 'china-geo.js', 'map-data.js', 'shared.js', 'home-app.js', 'styles.css',
-    'china.html', 'province.html', 'world.html', 'life-maps.html', 'province-culture.html'],
+  'index.html': ['content.js', 'china-geo.js', 'map-data.js', 'shared.js', 'home-app.js', 'styles.css', 'flat-map.css', 'atlas-home.css',
+    'china.html', 'province.html', 'world.html', 'china-3d.html', 'world-3d.html', 'places.html', 'routes.html', 'gallery.html', 'life-maps.html', 'province-culture.html'],
   'china.html': ['content.js', 'china-geo.js', 'map-data.js', 'shared.js', 'media-data.js', 'media.js', 'map-ui.js', 'map-discovery.js', 'map-discovery-data.js', 'china-rivers-data.js', 'china-river-tour-data.js', 'china-app.js', 'styles.css',
     'flat-map.css', 'province.html', 'world.html', 'index.html', 'life-maps.html', 'province-culture.html'],
   'life-maps.html': ['styles.css', 'animals.css', 'animals.html', 'plants.html', 'world-animals.html', 'world-plants.html',
@@ -681,7 +681,7 @@ const PAGE_REFS = {
   'plants.html': ['plants-data.js', 'animals-app.js', 'animals-learning.js', 'animals.css', 'styles.css', 'flat-map.css', 'china-geo.js', 'map-data.js', 'shared.js', 'china.html', 'world-plants.html'],
   'world-plants.html': ['world-plants-data.js', 'animals-app.js', 'animals-learning.js', 'animals.css', 'styles.css', 'flat-map.css', 'world-geo.js', 'shared.js', 'world.html', 'plants.html'],
   'province.html': ['content.js', 'china-geo.js', 'map-data.js', 'shared.js', 'media-data.js', 'media.js', 'province-app.js',
-    'styles.css', 'province.css', 'china.html', 'index.html'],
+    'styles.css', 'flat-map.css', 'province.css', 'china.html', 'index.html', 'places.html', 'routes.html', 'gallery.html', 'province-culture.html'],
   'province-culture.html': ['content.js', 'china-geo.js', 'map-data.js', 'shared.js', 'province-culture-data.js', 'province-culture.js', 'province-culture.css', 'styles.css', 'province.html', 'china.html'],
   'world.html': ['map-data.js', 'world-geo.js', 'world-data.js', 'shared.js', 'media-data.js', 'media.js', 'map-ui.js', 'map-discovery.js', 'map-discovery-data.js', 'world-app.js', 'styles.css',
     'flat-map.css', 'china.html', 'index.html', 'life-maps.html'],
@@ -696,6 +696,18 @@ Object.entries(PAGE_REFS).forEach(([page, refs]) => {
   check(html.includes('lang="zh-CN"'), page + ' 应声明 zh-CN');
   if (['life-maps.html', 'china-landscapes.html', 'voyages.html', 'china-3d.html'].includes(page)) {
     for (const ref of refs) check(fileExists(ref), '专题入口应使用本地文件：' + ref);
+  } else if (page === 'index.html') {
+    const maps = html.match(/<section\b[^>]*aria-labelledby="pages-title"[^>]*>([\s\S]*?)<\/section>/)?.[1] || '';
+    for (const href of ['china.html#map', 'world.html#map', 'china-3d.html', 'world-3d.html']) {
+      check(maps.includes('href="' + href + '"'), '图谱首页应直接展示地图入口：' + href);
+    }
+    check(html.includes('action="places.html"') && html.includes('id="home-search"') && html.includes('id="station-grid"'),
+      '图谱首页应保留地点查询和省域目录入口');
+  } else if (page === 'province.html') {
+    const [tools, main = ''] = html.split('</aside>');
+    check(tools.includes('data-sidebar-layout=".gm-sidebar"') && tools.includes('id="province-nav"') && tools.includes('id="province-search"'),
+      '省域站应在共用侧栏保留筛选和导航');
+    check(main.includes('id="province-page"'), '省域站应在主区显示目录或档案');
   } else if (/^(?:world-)?(?:animals|plants)\.html$/.test(page)) {
     const [toolArea, mapArea = ''] = html.split('</aside>');
     check(toolArea.includes('data-sidebar-layout=".gm-sidebar"') && toolArea.includes('id="gm-wildlife-tools"'),

@@ -1,5 +1,30 @@
-/* 省域站详情页样式：面包屑、迷你地图与记一记。
-   基础令牌、省份路径与省域站格子样式复用 styles.css。 */
+/* 省域站目录、筛选与详情。 */
+.province-topic .gm-flat-heading { --flat-hero-photo: url("assets/himalayas-orbit.jpg"); }
+#province-heading .gm-eyebrow { color: inherit; }
+#province-heading .gm-intro { margin-top: 6px; }
+.gm-province-view-bar { margin-bottom: 8px; padding-block: 0; border: 0; background: transparent; }
+.province-topic .gm-station-go { color: var(--blue); }
+.province-topic #province-page, #province-page > .gm-stations { scroll-margin-top: 16px; }
+#province-tools label { display: grid; gap: 4px; font-weight: 700; }
+#province-search {
+  min-width: 0; width: 100%; min-height: 44px; padding: 6px 9px;
+  border: 1px solid var(--atlas-border); border-radius: 8px; background: var(--card); color: var(--ink); font: inherit;
+}
+#province-tools .gm-filters { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+#province-filter-status { font-size: 15px; color: var(--ink-soft); }
+#province-filter-reset { justify-self: start; }
+#province-matches { display: grid; border-top: 1px solid var(--atlas-border); padding-top: 4px; }
+#province-matches a {
+  display: flex; align-items: center; justify-content: space-between; gap: 6px; min-height: 44px; padding-inline: 8px;
+  border-radius: 7px; color: var(--blue); font-size: 16px; font-weight: 650; text-decoration: underline; text-underline-offset: .18em;
+}
+#province-matches a::after { content: '→' / ''; }
+#province-matches a:is(:hover, [aria-current="page"]) { background: var(--atlas-tint); }
+.gm-prov-overview { display: grid; gap: clamp(12px, 2vw, 22px); align-items: start; }
+.gm-prov-resources:empty { display: none; }
+@container (min-width: 880px) {
+  .gm-prov-overview { grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); }
+}
 
 #province-heading .gm-chips { margin: 10px 0 0; }
 #province-page > .gm-stations:first-child { margin-top: 0; }
@@ -9,9 +34,9 @@
 #gm-prov-svg { display: block; width: 100%; height: auto; border-radius: 22px; box-shadow: 0 10px 28px rgba(51, 65, 59, 0.12); }
 
 .gm-facts {
-  margin-top: 26px; background: var(--card); border-radius: 22px;
+  background: var(--card); border-radius: 22px;
   border: 1px solid var(--atlas-border); border-top: 5px solid #76a68e;
-  padding: 24px 30px 18px; box-shadow: 0 8px 20px rgba(51, 65, 59, 0.1);
+  padding: clamp(14px, 2vw, 24px); box-shadow: 0 8px 20px rgba(51, 65, 59, 0.1);
 }
 .gm-facts h2 { font-size: 24px; margin-bottom: 12px; }
 .gm-facts ol { padding-left: 0; list-style: none; display: grid; gap: 12px; counter-reset: fact; }
@@ -31,14 +56,6 @@
 }
 .gm-facts .gm-card-foot { margin-top: 14px; }
 
-.gm-all-stations {
-  margin-top: 26px; background: var(--card); border-radius: 18px;
-  border: 1px solid var(--atlas-border);
-  padding: 4px 22px 20px; box-shadow: 0 8px 20px rgba(51, 65, 59, 0.1);
+@media (max-width: 520px) {
+  .study-atlas .province-topic .gm-facts { padding-inline-end: 40px; }
 }
-.gm-all-stations summary {
-  cursor: pointer; font-weight: 800; font-size: 17px; color: var(--ink);
-  padding: 14px 0; list-style-position: inside;
-}
-.gm-all-stations summary:hover { color: var(--green); }
-.gm-all-stations .gm-station-grid { margin-top: 8px; }
