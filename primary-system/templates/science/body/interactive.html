@@ -3,10 +3,11 @@
     <p class="body-kicker">动起来 · 看清每一步</p>
     <h2 id="demo-title">{{ lesson.diagram.title }}</h2>
     <p>{{ lesson.animation.intro }}</p>
-    {% if lesson.slug == 'breathing' %}<a class="experiment-jump" href="#breath-observation" data-experiment-jump>调整观察设置 ↗</a>{% endif %}
+    {% if process_observation_id %}<a class="experiment-jump" href="#{{ process_observation_id }}" data-experiment-jump>调整观察设置 ↗</a>{% endif %}
   </div>
-  {% if lesson.slug == 'breathing' %}
-  {% include 'science/body/breathing.html' with diagram=lesson.diagram %}
+  {% if process_observation_id %}
+  {% if lesson.slug == 'breathing' %}{% include 'science/body/breathing.html' with diagram=lesson.diagram %}
+  {% else %}{% include 'science/body/digestion.html' with diagram=lesson.diagram %}{% endif %}
   {% else %}
   <div class="body-process-controls" data-process-controls hidden>
     {% if lesson.animation.modes|length > 1 %}<div class="body-controls body-process-modes" role="group" aria-label="选择观察内容">
@@ -20,7 +21,7 @@
       <button class="body-button-primary" type="button" data-process-play aria-pressed="false">播放过程</button>
       <button type="button" data-process-prev>上一步</button><button type="button" data-process-next>下一步</button>
       <button type="button" data-process-reset>从头再看</button>
-      {% if lesson.slug != 'breathing' %}{% include 'science/body/process-speed.html' %}{% endif %}
+      {% if not process_observation_id %}{% include 'science/body/process-speed.html' %}{% endif %}
     </div>
     <label class="body-process-scrub">拖动进度，停下来细看 <output data-process-position>第 1 步</output><input type="range" min="0" max="1000" step="1" value="0" data-process-progress></label>
     <p class="body-process-status" data-process-status role="status"></p>
@@ -29,10 +30,9 @@
   {% if lesson.slug == 'circulation' %}
     <div data-process-view="pump">{% include 'science/body/heart-anatomy.html' %}</div>
     <div data-process-view="circuit" hidden>{% include 'science/body/circuit.html' %}</div>
-  {% elif lesson.slug != 'breathing' %}
+  {% elif not process_observation_id %}
     <figure class="body-stage">
-      {% if lesson.slug == 'digestion' %}{% include 'science/body/digestion.html' with diagram=lesson.diagram %}
-      {% elif lesson.slug == 'nerves' %}{% include 'science/body/nerves.html' with diagram=lesson.diagram %}
+      {% if lesson.slug == 'nerves' %}{% include 'science/body/nerves.html' with diagram=lesson.diagram %}
       {% elif lesson.slug == 'senses' %}{% include 'science/body/senses.html' with diagram=lesson.diagram %}
       {% else %}{% include 'science/body/movement.html' with diagram=lesson.diagram %}{% endif %}
       <figcaption>{{ lesson.diagram.caption }}</figcaption>

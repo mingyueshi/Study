@@ -54,7 +54,7 @@
   if (!root) return;
   const content = JSON.parse(document.getElementById('body-animation-data').textContent);
   const kind = root.dataset.bodyProcess;
-  const settings = root.closest('.experiment-workspace')?.querySelector('[data-breath-observation]') || root;
+  const settings = root.closest('.experiment-workspace')?.querySelector('[data-process-settings]') || root;
   const $ = selector => root.querySelector(selector);
   const all = selector => [...root.querySelectorAll(selector)];
   const media = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -136,6 +136,7 @@
       attr($('[data-food-core]'), 'fill', index >= 4 ? '#967047' : '#e8b132');
       attr($('[data-food-pieces]'), 'opacity', id === 'mouth' ? t : 1);
       attr($('[data-food-pieces]'), 'fill', index >= 4 ? '#967047' : '#e8b132');
+      attr($('[data-food-pieces]'), 'transform', `scale(${id === 'mouth' ? 1 : shrink / .65})`);
       attr($('[data-food-push]'), 'visibility', id === 'esophagus' ? 'visible' : 'hidden');
       if (id === 'esophagus') { const push = point('food-esophagus', Math.max(0, t - .1)); attr($('[data-food-push]'), 'cx', push.x); attr($('[data-food-push]'), 'cy', push.y); }
       if (id === 'intestine') particles('nutrients', t * 2, 4, '#559a5b', 5);

@@ -4,10 +4,10 @@
 <link rel="stylesheet" href="{% static 'study_topics/platform-bridge.css' %}">
 <link rel="stylesheet" href="{% static 'science/body.css' %}?v=20261116">
 <link rel="stylesheet" href="{% static 'science/body-lab.css' %}?v=20261117">
-{% if lesson %}<link rel="stylesheet" href="{% static 'science/body-process.css' %}?v=4880c948dc7a">{% endif %}
-{% if lesson.slug == 'breathing' %}<link rel="stylesheet" href="{% static 'study_topics/map-skills/experiment.css' %}?v=1d0d085a4e06">{% endif %}
+{% if lesson %}<link rel="stylesheet" href="{% static 'science/body-process.css' %}?v=b339e2250242">{% endif %}
+{% if process_observation_id %}<link rel="stylesheet" href="{% static 'study_topics/map-skills/experiment.css' %}?v=1d0d085a4e06">{% endif %}
 <div class="body-station color-science">
-  {% if lesson.slug != 'breathing' %}
+  {% if not process_observation_id %}
   <nav class="study-topic-nav" aria-label="人体奥秘站导航">
     {% include 'science/body/station-links.html' %}
   </nav>
@@ -16,8 +16,8 @@
   {{ body_progress|json_script:"body-progress-data" }}
   <script src="{% static 'science/body-progress.js' %}?v=20261116" defer></script>
   <script src="{% static 'science/body.js' %}?v=20261116p2" defer></script>
-  {% if lesson %}<script src="{% static 'science/body-process.js' %}?v=0d43258498d1" defer></script>{% endif %}
-  {% if lesson.slug == 'breathing' %}<script src="{% static 'study_topics/map-skills/experiment.js' %}?v=c2884b21d5bb" defer></script>{% endif %}
+  {% if lesson %}<script src="{% static 'science/body-process.js' %}?v=94af16360aab" defer></script>{% endif %}
+  {% if process_observation_id %}<script src="{% static 'study_topics/map-skills/experiment.js' %}?v=c2884b21d5bb" defer></script>{% endif %}
   {% block station_scripts %}{% endblock %}
 </div>
 {% endblock %}

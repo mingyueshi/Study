@@ -8,6 +8,9 @@ from django.shortcuts import render
 from django.views.decorators.http import require_safe
 
 
+PROCESS_OBSERVATION_IDS = {'breathing': 'breath-observation', 'digestion': 'digestion-observation'}
+
+
 def load_content():
     source = settings.BASE_DIR / 'content_sources' / 'human-body.json'
     content = json.loads(source.read_text(encoding='utf-8'))
@@ -42,6 +45,7 @@ def detail(request, slug):
             return render(request, 'science/body/detail.html', {
                 **content,
                 'lesson': lesson,
+                'process_observation_id': PROCESS_OBSERVATION_IDS.get(slug),
                 'number': index + 1,
                 'next_lesson': lessons[index + 1] if index + 1 < len(lessons) else None,
             })
