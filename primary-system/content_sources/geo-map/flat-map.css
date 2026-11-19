@@ -24,6 +24,8 @@
 .world-topic .gm-flat-heading { --flat-hero-photo: url("assets/nile-day.jpg"); }
 .gm-wildlife .gm-flat-heading { --flat-hero-photo: url("assets/animals/giant-panda.jpg"); background-position: center, 50% 40%; }
 .gm-flora .gm-flat-heading { --flat-hero-photo: url("assets/plants/ginkgo.jpg"); }
+.gm-wildlife[data-map="world"] .gm-flat-heading { --flat-hero-photo: url("assets/animals/emperor-penguin.jpg"); }
+.gm-flora[data-map="world"] .gm-flat-heading { --flat-hero-photo: url("assets/plants/antarctic-hair-grass.jpg"); }
 .gm-flat-heading .gm-title { margin: 0; color: inherit; font-size: clamp(30px, 3.5vw, 50px); }
 .gm-flat-heading .gm-intro { max-width: 38em; line-height: 1.65; }
 .gm-flat-heading a { padding: 2px 8px; border-radius: 6px; background: oklch(23% .04 239 / .93); color: inherit; font-size: 13px; text-decoration: underline; text-underline-offset: .2em; }

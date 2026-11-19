@@ -5,6 +5,7 @@
 {% block study_assets %}
 <link rel="stylesheet" href="{% static 'study_topics/geo-map/styles.css' %}?v=5b8e2fb415da">
 <link rel="stylesheet" href="{% static 'study_topics/geo-map/animals.css' %}?v=3881112d0ecb">
+<link rel="stylesheet" href="{% static 'study_topics/geo-map/flat-map.css' %}?v=51aaac8e6522">
 <script src="{% static 'study_topics/geo-map/world-geo.js' %}?v=6d109d202301" defer></script>
 <script src="{% static 'study_topics/geo-map/shared.js' %}?v=d2bebbfd2a0b" defer></script>
 <script src="{% static 'study_topics/geo-map/world-animals-data.js' %}?v=73617a56adb1" defer></script>
@@ -13,56 +14,75 @@
 {% endblock %}
 {% block study_content %}
 <div class="study-atlas">
-<div class="gm-wildlife" data-map="world" data-atlas-base="{% url 'geography-atlas' %}">
-    <header class="gm-wildlife-header">
-      <div>
-        <p class="gm-wildlife-kicker">动植物地图</p>
-        <h1>世界动物地图</h1>
-        <p>从北极的冰海到非洲的草原，点一点地图，看看七大洲和大洋里的动物怎样生活。</p>
-      </div>
-      <nav class="gm-wildlife-links" aria-label="动植物地图导航">
-        <a href="{% url 'geography-life-maps' %}">专题首页</a>
-        <a href="{% url 'geography-life-maps-animals' %}">中国动物地图</a>
-        <a href="{% url 'geography-life-maps-plants' %}">中国植物地图</a>
-        <a href="{% url 'geography-life-maps-world-animals' %}" aria-current="page">世界动物地图</a>
-        <a href="{% url 'geography-life-maps-world-plants' %}">世界植物地图</a>
-        <a href="{% url 'geography-atlas-world' %}">返回世界地图 ↗</a>
-      </nav>
+<div class="gm-wildlife gm-map-topic" data-map="world" data-atlas-base="{% url 'geography-atlas' %}">
+    <header class="gm-flat-heading">
+      <h1 class="gm-title">世界动物地图</h1>
+      <p class="gm-intro">从北极的冰海到非洲的草原，点一点地图，看看七大洲和大洋里的动物怎样生活。</p>
+      <a href="?animal=emperor-penguin#gm-animal-card">帝企鹅照片与来源</a>
     </header>
 
-    <div class="gm-wildlife-workspace" data-sidebar-label="动物档案" hidden>
-      <div class="gm-animal-explore">
-        <div class="gm-wildlife-map-links"><a href="#gm-wildlife-tools">筛选与观察记录 ↓</a><a href="#gm-animal-quiz">小侦探练习 ↓</a></div>
+    <div class="gm-wildlife-workspace gm-flat-workspace" data-sidebar-layout=".gm-sidebar" data-sidebar-width="clamp(280px, 24vw, 320px)" data-sidebar-label="地图工具" data-sidebar-collapse-key="primary_sidebar_collapsed_v1:#gm-animal-card" hidden>
+      <aside class="gm-sidebar" aria-label="地图工具与相关专题">
+        <details id="gm-wildlife-tools" class="gm-flat-tools gm-wildlife-tools" open tabindex="-1" hidden>
+          <summary>筛选与定位</summary>
+          <div class="gm-flat-controls">
+            <div class="gm-animal-search-row">
+              <label for="gm-animal-search">找动物<input id="gm-animal-search" type="search" placeholder="搜名称、地点或生活环境" autocomplete="off"></label>
+              <div class="inline-choice" data-inline-choice><label for="gm-animal-record-filter">观察记录<select id="gm-animal-record-filter"><option value="all">全部动物</option><option value="unseen">还没观察</option><option value="seen">已观察</option></select></label></div>
+              <button type="button" data-animal-reset>清除筛选</button>
+              <span id="gm-animal-search-status" role="status"></span>
+            </div>
+            <div>
+              <h2 id="gm-habitat-title">按栖息地找</h2>
+              <div class="gm-habitat-filters" role="group" aria-labelledby="gm-habitat-title"></div>
+            </div>
+          </div>
+        </details>
+        <details id="gm-life-explore" class="gm-flat-tools" tabindex="-1">
+          <summary>观察与练习</summary>
+          <div class="gm-flat-controls">
+            <div class="gm-animal-progress-row" hidden>
+              <label id="gm-animal-progress-label" for="gm-animal-progress">已观察 0／30 种</label>
+              <progress id="gm-animal-progress" max="30" value="0"></progress>
+              <small id="gm-animal-storage-note"></small>
+              <button type="button" data-animal-random>认识新朋友</button>
+            </div>
+            <div class="gm-flat-choice gm-life-quiz-options">
+              <div class="inline-choice" data-inline-choice><label for="gm-animal-quiz-mode">练习方式</label><select id="gm-animal-quiz-mode"><option value="photo">看照片认动物</option><option value="clue">读线索找动物</option></select></div>
+              <button type="button" data-quiz-start>开始练习</button>
+              <a href="#gm-animal-quiz">查看练习 ↓</a>
+            </div>
+          </div>
+        </details>
+        <details class="gm-flat-tools">
+          <summary>相关专题</summary>
+          <nav class="gm-flat-links" aria-label="动植物地图导航">
+            <a href="{% url 'geography-life-maps' %}">专题首页</a>
+            <a href="{% url 'geography-life-maps-animals' %}">中国动物地图</a>
+            <a href="{% url 'geography-life-maps-plants' %}">中国植物地图</a>
+            <a href="{% url 'geography-life-maps-world-plants' %}">世界植物地图</a>
+            <a href="{% url 'geography-atlas-world' %}">世界地图</a>
+          </nav>
+        </details>
+      </aside>
+
+      <div id="content" class="gm-content gm-animal-explore" tabindex="-1">
         <figure class="gm-wildlife-map">
+          <div class="gm-view-bar">
+            <a href="#gm-animal-choices-title">物种图册 ↓</a>
+            <a class="gm-tools-jump" href="#gm-wildlife-tools">地图工具 ↑</a>
+          </div>
           <svg id="gm-animal-map" role="group" aria-label="世界野生动物代表栖息地示意地图"></svg>
           <figcaption><span id="gm-animal-count"></span>地图上的点表示代表地点，动物还可能在其他地方生活。</figcaption>
         </figure>
-        <div id="gm-wildlife-tools" class="gm-wildlife-tools" hidden>
-          <div class="gm-animal-search-row">
-            <label for="gm-animal-search">找动物<input id="gm-animal-search" type="search" placeholder="搜名称、地点或生活环境" autocomplete="off"></label>
-            <div class="inline-choice" data-inline-choice><label for="gm-animal-record-filter">观察记录<select id="gm-animal-record-filter"><option value="all">全部动物</option><option value="unseen">还没观察</option><option value="seen">已观察</option></select></label></div>
-            <button type="button" data-animal-reset>清除筛选</button>
-            <span id="gm-animal-search-status" role="status"></span>
-          </div>
-          <div>
-            <h2 id="gm-habitat-title">按栖息地找</h2>
-            <div class="gm-habitat-filters" role="group" aria-labelledby="gm-habitat-title"></div>
-          </div>
-        </div>
-
-        <div class="gm-animal-progress-row" hidden>
-          <div><label id="gm-animal-progress-label" for="gm-animal-progress">已观察 0／30 种</label><progress id="gm-animal-progress" max="30" value="0"></progress><small id="gm-animal-storage-note"></small></div>
-          <div><a href="#gm-animal-quiz">动物小侦探 ↓</a><button type="button" data-animal-random>认识新朋友 ↗</button></div>
-        </div>
-
-        <details id="gm-animal-quiz" class="gm-animal-quiz">
-          <summary>动物小侦探 <span>看照片 · 读线索 · 每轮最多 5 题</span></summary>
+        <article id="gm-animal-card" aria-labelledby="gm-animal-name" tabindex="-1" hidden></article>
+        <section id="gm-animal-quiz" class="gm-animal-quiz" aria-labelledby="gm-life-quiz-title" tabindex="-1" hidden>
           <div class="gm-quiz-inner">
-            <p>从当前筛选中抽题，不重复。答完可以看地图、重练错题；练习不会自动标记「已观察」。</p>
-            <div class="gm-quiz-toolbar"><div class="inline-choice" data-inline-choice><label for="gm-animal-quiz-mode">练习方式</label><select id="gm-animal-quiz-mode"><option value="photo">看照片认动物</option><option value="clue">读线索找动物</option></select></div><button type="button" data-quiz-start>开始练习</button><button type="button" data-quiz-stop hidden>结束本轮</button></div>
+            <div class="gm-life-quiz-head"><h2 id="gm-life-quiz-title">动物小侦探</h2><button type="button" data-quiz-stop>退出练习</button></div>
+            <p class="gm-life-quiz-ready">从当前筛选中抽题，每轮最多 5 题。<a href="#gm-life-explore">选择方式，开始练习 ↑</a></p>
             <div id="gm-animal-quiz-body"></div>
           </div>
-        </details>
+        </section>
         <section class="gm-animal-catalog" aria-labelledby="gm-animal-choices-title">
           <div class="gm-animal-catalog-head">
             <div><h2 id="gm-animal-choices-title">选择动物</h2><p>点一张照片，看看它在地图上的家。</p></div>
@@ -72,7 +92,6 @@
           <div id="gm-animal-picker" role="group" aria-labelledby="gm-animal-choices-title"></div>
         </section>
       </div>
-      <article id="gm-animal-card" aria-labelledby="gm-animal-name"></article>
     </div>
     <noscript><p class="gm-notice">请启用 JavaScript 查看动物地图和照片。</p></noscript>
   </div>

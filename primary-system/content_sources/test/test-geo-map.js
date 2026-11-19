@@ -677,9 +677,9 @@ const PAGE_REFS = {
   'voyages.html': ['styles.css', 'geo-guide.css', 'world-geo.js', 'world-expeditions-data.js', 'world-3d-geometry.js',
     'world-voyages.js', 'voyages-guide.js', 'world-3d.html', '../history-timeline/event.html'],
   'animals.html': ['animals-data.js', 'animals-app.js', 'animals-learning.js', 'animals.css', 'styles.css', 'flat-map.css', 'china-geo.js', 'map-data.js', 'shared.js', 'china.html', 'world-animals.html'],
-  'world-animals.html': ['world-animals-data.js', 'animals-app.js', 'animals-learning.js', 'animals.css', 'styles.css', 'world-geo.js', 'shared.js', 'world.html', 'animals.html'],
+  'world-animals.html': ['world-animals-data.js', 'animals-app.js', 'animals-learning.js', 'animals.css', 'styles.css', 'flat-map.css', 'world-geo.js', 'shared.js', 'world.html', 'animals.html'],
   'plants.html': ['plants-data.js', 'animals-app.js', 'animals-learning.js', 'animals.css', 'styles.css', 'flat-map.css', 'china-geo.js', 'map-data.js', 'shared.js', 'china.html', 'world-plants.html'],
-  'world-plants.html': ['world-plants-data.js', 'animals-app.js', 'animals-learning.js', 'animals.css', 'styles.css', 'world-geo.js', 'shared.js', 'world.html', 'plants.html'],
+  'world-plants.html': ['world-plants-data.js', 'animals-app.js', 'animals-learning.js', 'animals.css', 'styles.css', 'flat-map.css', 'world-geo.js', 'shared.js', 'world.html', 'plants.html'],
   'province.html': ['content.js', 'china-geo.js', 'map-data.js', 'shared.js', 'media-data.js', 'media.js', 'province-app.js',
     'styles.css', 'province.css', 'china.html', 'index.html'],
   'province-culture.html': ['content.js', 'china-geo.js', 'map-data.js', 'shared.js', 'province-culture-data.js', 'province-culture.js', 'province-culture.css', 'styles.css', 'province.html', 'china.html'],
@@ -696,7 +696,7 @@ Object.entries(PAGE_REFS).forEach(([page, refs]) => {
   check(html.includes('lang="zh-CN"'), page + ' 应声明 zh-CN');
   if (['life-maps.html', 'china-landscapes.html', 'voyages.html', 'china-3d.html'].includes(page)) {
     for (const ref of refs) check(fileExists(ref), '专题入口应使用本地文件：' + ref);
-  } else if (['animals.html', 'plants.html'].includes(page)) {
+  } else if (/^(?:world-)?(?:animals|plants)\.html$/.test(page)) {
     const [toolArea, mapArea = ''] = html.split('</aside>');
     check(toolArea.includes('data-sidebar-layout=".gm-sidebar"') && toolArea.includes('id="gm-wildlife-tools"'),
       page + ' 应在共用侧栏保留筛选入口和旧锚点');
@@ -704,7 +704,9 @@ Object.entries(PAGE_REFS).forEach(([page, refs]) => {
       page + ' 应从侧栏开始练习并在地图区保留旧练习锚点');
     check(/<article\b[^>]*id="gm-animal-card"[^>]*\bhidden\b/.test(mapArea),
       page + ' 应在地图区按需显示地点档案');
-  } else if (!/(?:animals|plants|province-culture)\.html$/.test(page)) {
+    check(/<main\b[^>]*data-map="world"/.test(toolArea) === page.startsWith('world-'),
+      page + ' 应保留世界与中国地图各自的观察记录范围');
+  } else if (page !== 'province-culture.html') {
     ['atlas.js', 'atlas-data.js', 'places.html', 'routes.html', 'gallery.html'].forEach(f =>
       check(html.includes(f), page + ' 应引用 ' + f));
     if (['china.html', 'world.html'].includes(page)) {
