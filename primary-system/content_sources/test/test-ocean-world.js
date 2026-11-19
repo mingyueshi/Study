@@ -86,4 +86,14 @@ assert.equal(depthAt([[0, 50], [200, 150]], 150), 125);
 const wrapped = trace([[358, 130], [362, 130]]);
 assert.equal(positionAt(wrapped, .5).x, 360);
 assert.deepEqual(nearestOnRoute(wrapped, 361, 131), {distance:1, fraction:.75});
-console.log('海洋世界：页面、来源、图像、洋流坐标、月相、水层与剖面数据通过校验');
+for (const [page, choice, drawings] of [
+  ['currents', 'current-choices', ['ocean-map', 'current-position', 'current-result']],
+  ['tides', 'phase-choices', ['tide-alignment', 'tide-chart', 'tide-time', 'tide-result']],
+]) {
+  const [sidebar, content] = fs.readFileSync(path.join(dir, page + '.html'), 'utf8').split('</aside>');
+  assert.match(sidebar, /data-sidebar-layout="\.experiment-side"/);
+  assert.ok(sidebar.includes(`id="${choice}"`), choice + ' 位于侧栏');
+  for (const drawing of drawings) assert.ok(content.includes(`id="${drawing}"`), drawing + ' 位于主区');
+  assert.match(content, /data-play[\s\S]*data-step[\s\S]*data-reset[\s\S]*data-progress/);
+}
+console.log('海洋世界：页面、来源、图像、洋流坐标、月相、水层、剖面及实验布局通过校验');

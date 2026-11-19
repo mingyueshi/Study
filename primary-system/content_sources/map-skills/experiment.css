@@ -1,12 +1,18 @@
 /* 地理实验共用页头和工具栏，图面、读数与讲解留在主区。 */
-.geo-experiment:is(.earth-topic, .skills-topic) {
+.geo-experiment:is(.earth-topic, .skills-topic, .ocean-topic) {
   display: block;
   --experiment-accent: var(--skill-accent, var(--earth-accent));
   --experiment-line: var(--skill-line, var(--earth-border));
   --experiment-tint: var(--skill-tint, var(--earth-soft));
   --experiment-card: var(--skill-card, var(--card, #fff));
 }
-.study-topic-nav:has(+ :is(.study-earth, .study-map-skills) > .geo-experiment) { border-bottom: 0; }
+.geo-experiment.ocean-topic {
+  --experiment-accent: var(--ocean-blue);
+  --experiment-line: var(--ocean-border);
+  --experiment-tint: var(--ocean-tint);
+  --experiment-card: var(--ocean-card);
+}
+.study-topic-nav:has(+ :is(.study-earth, .study-map-skills, .study-ocean) > .geo-experiment) { border-bottom: 0; }
 
 .geo-experiment .experiment-heading {
   display: grid;
@@ -23,6 +29,7 @@
     var(--experiment-cover, none) center / cover no-repeat oklch(30% .055 179);
 }
 .earth-topic .experiment-heading { background: linear-gradient(125deg, oklch(22% .04 47), oklch(33% .067 48) 65%, oklch(43% .09 49)); }
+.ocean-topic .experiment-heading { background: linear-gradient(125deg, oklch(23% .046 243), oklch(34% .069 232) 62%, oklch(43% .082 221)); }
 .skills-topic .experiment-heading { --experiment-cover: url("assets/contour-relief.jpg"); }
 .skills-topic[data-skills-page="scale"] .experiment-heading { --experiment-cover: url("assets/map-layers.jpg"); }
 .geo-experiment .experiment-heading h1 { margin: 0; color: inherit; }
@@ -53,8 +60,10 @@ html body .experiment-workspace[data-sl-mode="compact"][data-sl-open] > .sl-side
 .experiment-links { gap: 0; }
 .experiment-controls .experiment-label { margin: 0; font-size: 16px; font-weight: 750; }
 .experiment-controls .experiment-label:not(:first-child) { margin-top: 5px; }
-.experiment-controls :is(.earth-controls, .skills-choices, .skills-number) { margin: 0; }
+.experiment-controls :is(.earth-controls, .skills-choices, .skills-number, .ocean-choices) { margin: 0; }
 .experiment-controls .earth-controls { display: grid; }
+.experiment-controls .ocean-choices { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.experiment-controls #current-choices { grid-template-columns: minmax(0, 1fr); }
 .experiment-controls > button {
   justify-self: start; min-width: 44px; min-height: 44px; padding: 6px 10px;
   border: 1px solid var(--experiment-line); border-radius: 8px; background: var(--experiment-card); color: inherit;
@@ -72,9 +81,12 @@ html body .experiment-workspace[data-sl-mode="compact"][data-sl-open] > .sl-side
 
 .experiment-panel-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; column-gap: 12px; margin-bottom: 10px; }
 .experiment-panel-head h2 { margin: 0; }
-.geo-experiment :is(#plate-lab, #skills-lab, #paper-title, #skills-references) { scroll-margin-top: 16px; }
+.geo-experiment :is(#plate-lab, #skills-lab, #paper-title, #skills-references, #ocean-lab) { scroll-margin-top: 16px; }
 .geo-experiment #plate-lab .earth-inset { margin-top: 16px; }
 .geo-experiment #plate-lab .earth-player input { min-height: 44px; }
+.geo-experiment .ocean-range input { min-height: 44px; }
+.geo-experiment .ocean-panel :is(#ocean-map, #tide-chart) { cursor: crosshair; }
+.geo-experiment #tide-chart { touch-action: pan-y; }
 
 @media (max-width: 899px) {
   .experiment-workspace:not([data-sl-ready]) { grid-template-columns: minmax(0, 1fr); }

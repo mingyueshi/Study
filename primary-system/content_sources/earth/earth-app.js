@@ -108,7 +108,7 @@
       // 屏幕阅读器通过播放状态获知变化，不逐帧播报时间。
       $('#wave-readout').innerHTML = `<div><span>P 波约在</span><b>${times.p.toFixed(1)} 秒到达</b><span>${seconds >= times.p ? '● 已到达' : '尚未到达'}</span></div><div><span>S 波约在</span><b>${times.s.toFixed(1)} 秒到达</b><span>${seconds >= times.s ? '● 已到达' : '尚未到达'}</span></div><div><span>到时差</span><b>${(times.s-times.p).toFixed(1)} 秒</b><span>距离越远，本模型时差越大</span></div>`;
     }
-    const player = window.EarthMotion($('#wave-lab'), draw);
+    const player = window.StudyExperimentMotion($('#wave-lab'), draw);
     $('#station-distance').addEventListener('input', event => { distance = Number(event.target.value); player.set(0); });
     $('#volcano-gallery').innerHTML = data.volcanoes.map(item => `<article class="earth-card earth-volcano">${picture(item.media)}<h3>${esc(item.title)}</h3><p>${esc(item.detail)}</p>${credit(item.media)}</article>`).join('');
   }
@@ -135,7 +135,7 @@
       }
       $('#plate-diagram').innerHTML = `<title>${esc(caption)}</title>${svgDefs}<rect width="760" height="130" fill="#dfedf0"/><rect y="130" width="760" height="210" fill="#eac6a2"/>${shapes}`;
     }
-    const player = window.EarthMotion($('#plate-lab'), draw);
+    const player = window.StudyExperimentMotion($('#plate-lab'), draw);
     function choose(id) {
       selected = id; const item = data.boundaries.find(b => b.id === id);
       pressed(picker, 'data-boundary', id);

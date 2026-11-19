@@ -19,7 +19,7 @@
   function remember(key, id) {
     const url = new URL(location.href);
     url.searchParams.set(key, id);
-    try { history.replaceState(null, '', url); } catch { /* 本地文件仍可使用交互。 */ }
+    try { history.replaceState(history.state, '', url); } catch { /* 本地文件仍可使用交互。 */ }
   }
 
   function choices(selector, items, select) {
@@ -201,19 +201,18 @@
         }
       }
     });
-    const mark = choices('#current-choices', data.currents, item => select(item, 0));
-    function seek() {
+    const player = window.StudyExperimentMotion($('#ocean-lab'), () => {
       $('#current-position-value').textContent = slider.value + '%';
       paint();
-    }
+    });
+    const mark = choices('#current-choices', data.currents, item => select(item, 0));
     function select(item, fraction, update = true) {
       active = item;
-      slider.value = Math.round(fraction * 100);
       mark(item.id);
       if (update) remember('current', item.id);
       $('#current-result').innerHTML = `<h3>${safe(item.title)} <small>${kinds[item.kind]}</small></h3>
         <p><strong>${safe(item.direction)}</strong></p><p>${safe(item.text)}</p>`;
-      seek();
+      player.set(fraction);
     }
     canvas.addEventListener('click', event => {
       const box = canvas.getBoundingClientRect();
@@ -228,13 +227,14 @@
       }
       if (closest.distance * box.width / 360 < 17) select(closest.item, closest.fraction);
     });
-    slider.addEventListener('input', seek);
     select(active, 0, false);
   }
 
   function tides() {
     let active = findParam('phase', data.phases);
     const slider = $('#tide-time');
+    const canvas = $('#tide-chart');
+    const leftMargin = 39, rightMargin = 19;
     const moon = drawing($('#tide-alignment'), (ctx, width, height) => {
       const x = width * .39;
       const y = height * .5;
@@ -264,8 +264,8 @@
       label(ctx, '太阳', sun, y + 39, '#ffe0a9');
       label(ctx, '月球', mx, my + (my > y ? 23 : -23), '#dbeef7');
     });
-    const chart = drawing($('#tide-chart'), (ctx, width, height) => {
-      const left = 39, right = width - 19, top = 20, bottom = height - 34;
+    const chart = drawing(canvas, (ctx, width, height) => {
+      const left = leftMargin, right = width - rightMargin, top = 20, bottom = height - 34;
       const x = minute => left + (right - left) * minute / model.lunarDay;
       const y = level => top + (2 - level) / 4 * (bottom - top);
       ctx.fillStyle = '#eaf6f8';
@@ -302,11 +302,13 @@
         ? (height > 0 ? '高潮附近' : '低潮附近')
         : (rising ? '水位上升' : '水位下降');
       $('#tide-time-value').textContent = time;
-      slider.setAttribute('aria-valuetext', time);
+      slider.setAttribute('aria-valuetext', `${time}，相对潮位 ${height.toFixed(2)} 米`);
       $('#tide-result').textContent = `${state} · 相对潮位 ${height.toFixed(2)} 米 · 本图潮差 ${range.toFixed(2)} 米`;
       chart();
     }
+    const player = window.StudyExperimentMotion($('#tide-player'), read);
     function select(phase, update = true) {
+      player.pause();
       active = phase;
       mark(phase.id);
       if (update) remember('phase', phase.id);
@@ -314,9 +316,22 @@
       moon();
       read();
     }
-    slider.addEventListener('input', read);
     root.querySelectorAll('[data-minute]').forEach(button => {
-      button.addEventListener('click', () => { slider.value = button.dataset.minute; read(); });
+      button.addEventListener('click', () => player.set(Number(button.dataset.minute) / model.lunarDay));
+    });
+    function seekChart(event) {
+      const box = canvas.getBoundingClientRect();
+      const x = event.clientX - box.left - leftMargin;
+      player.set(x / (box.width - leftMargin - rightMargin));
+    }
+    canvas.addEventListener('click', seekChart);
+    canvas.addEventListener('pointerdown', event => {
+      if (event.pointerType === 'touch' || event.button !== 0) return;
+      canvas.setPointerCapture(event.pointerId);
+      seekChart(event);
+    });
+    canvas.addEventListener('pointermove', event => {
+      if (canvas.hasPointerCapture(event.pointerId)) seekChart(event);
     });
     select(active, false);
   }

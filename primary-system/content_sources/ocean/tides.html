@@ -5,60 +5,83 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>潮汐 · 海洋世界</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="../map-skills/experiment.css">
   <script src="ocean-data.js" defer></script>
   <script src="ocean-model.js" defer></script>
+  <script src="../earth/earth-motion.js" defer></script>
   <script src="ocean-app.js" defer></script>
+  <script src="../map-skills/experiment.js" defer></script>
 </head>
 <body>
-  <main id="main" class="ocean-topic" data-ocean-page="tides"
-        data-sidebar-layout=".ocean-sidebar" data-sidebar-width="clamp(240px, 22vw, 300px)"
-        data-sidebar-breakpoint="900" data-sidebar-label="专题目录" data-sidebar-fixed=".ocean-nav">
-    <aside class="ocean-sidebar" aria-label="海洋世界专题目录">
-      <nav class="ocean-nav" aria-label="海洋世界各站">
-        <strong>海洋世界</strong>
-          <a href="index.html">海洋总览</a>
-          <a href="currents.html">洋流</a>
-          <a href="tides.html" aria-current="page">潮汐</a>
-          <a href="life.html">海洋生物</a>
-          <a href="seafloor.html">海底地形</a>
-      </nav>
-      <a class="ocean-map-link" href="../atlas/world.html">返回世界地图 ↗</a>
-    </aside>
-    <div class="ocean-content">
-      <header class="ocean-hero">
-        <h1>潮汐</h1>
-        <p id="ocean-intro"></p>
-      </header>
-      <section class="ocean-panel" aria-labelledby="tide-heading">
-        <h2 id="tide-heading">月相与潮差</h2>
-        <div class="ocean-choices" id="phase-choices" role="group" aria-label="选择月相"></div>
-        <figure>
-          <canvas id="tide-alignment" role="img" aria-label="俯视比较日月方向和两条引潮轴，天体大小与距离不按比例。"></canvas>
-          <figcaption>从地球上方看日月相对方向。图中距离与天体大小不按比例。</figcaption>
-        </figure>
-        <article class="ocean-result" id="phase-result" aria-live="polite"></article>
-        <div class="ocean-subsection">
-          <h3>读一个太阴日的潮位</h3>
-          <figure>
-            <canvas id="tide-chart" role="img" aria-label="理想半日潮曲线。竖轴为相对潮位，横轴为 24 小时 50 分。"></canvas>
-            <figcaption>理想半日潮模型。大潮与小潮共用时间和竖轴尺度，高低水位以模型平均水面为零点。起点设为高潮。</figcaption>
-          </figure>
-          <label class="ocean-range" for="tide-time"><span>经过时间 <output id="tide-time-value"></output></span>
-            <input id="tide-time" type="range" min="0" max="1490" step="1" value="0">
-          </label>
-          <div class="ocean-choices" aria-label="主要潮位时刻" role="group">
-            <button type="button" data-minute="0">开始 · 高潮</button>
-            <button type="button" data-minute="373">约 6 小时 13 分 · 低潮</button>
-            <button type="button" data-minute="745">12 小时 25 分 · 高潮</button>
+  <main id="main" class="ocean-topic geo-experiment" data-ocean-page="tides">
+    <header class="ocean-hero experiment-heading">
+      <h1>潮汐</h1>
+      <p id="ocean-intro"></p>
+    </header>
+    <div class="experiment-workspace" data-sidebar-layout=".experiment-side"
+         data-sidebar-width="clamp(260px, 24vw, 320px)" data-sidebar-label="实验工具"
+         data-sidebar-collapse-key="primary_sidebar_collapsed_v1:.ocean-sidebar">
+      <aside class="experiment-side" aria-label="实验参数与海洋世界目录">
+        <details class="experiment-tools" id="experiment-tools" open>
+          <summary>切换月相</summary>
+          <div class="experiment-controls">
+            <div class="ocean-choices" id="phase-choices" role="group" aria-label="切换月相"></div>
+            <a class="experiment-return" href="#ocean-lab" data-experiment-return>返回实验 ↓</a>
           </div>
-          <p id="tide-result" class="ocean-result" aria-live="polite"></p>
-        </div>
-      </section>
-      <a class="ocean-link-card" href="../../astronomy/">去天文探索看看月相是怎样形成的 →</a>
-      <div class="ocean-grid" id="ocean-knowledge" aria-label="概念与证据"></div>
-      <details class="ocean-panel ocean-details"><summary id="ocean-question">想一想</summary><p id="ocean-answer"></p></details>
-      <details class="ocean-panel ocean-details"><summary>资料和图片出处</summary><ul id="ocean-references"></ul></details>
-      <noscript><p>请启用 JavaScript 查看专题正文和交互图。</p></noscript>
+        </details>
+        <details class="experiment-tools">
+          <summary>海洋世界与相关专题</summary>
+          <nav class="experiment-links" aria-label="海洋世界各站">
+            <a href="index.html">海洋总览</a>
+            <a href="currents.html">洋流</a>
+            <a href="tides.html" aria-current="page">潮汐</a>
+            <a href="life.html">海洋生物</a>
+            <a href="seafloor.html">海底地形</a>
+            <a href="../geo-map/world.html">打开世界地图</a>
+            <a href="../../astronomy/">天文探索 · 月相怎样形成 →</a>
+          </nav>
+        </details>
+      </aside>
+
+      <div class="ocean-content experiment-content">
+        <section class="ocean-panel" id="ocean-lab" tabindex="-1" aria-labelledby="tide-heading">
+          <div class="experiment-panel-head">
+            <h2 id="tide-heading">月相与潮差</h2>
+            <a class="experiment-jump" href="#experiment-tools" data-experiment-jump>实验参数 ↑</a>
+          </div>
+          <figure>
+            <canvas id="tide-alignment" role="img" aria-label="俯视比较日月方向和两条引潮轴，天体大小与距离不按比例。"></canvas>
+            <figcaption>从地球上方看日月相对方向。图中距离与天体大小不按比例。</figcaption>
+          </figure>
+          <article class="ocean-result" id="phase-result" aria-live="polite"></article>
+          <div class="ocean-subsection" id="tide-player">
+            <h3>读一个太阴日的潮位</h3>
+            <figure>
+              <canvas id="tide-chart" role="img" aria-label="理想半日潮曲线。竖轴为相对潮位，横轴为 24 小时 50 分。"></canvas>
+              <figcaption>理想半日潮模型。大潮与小潮共用时间和竖轴尺度，高低水位以模型平均水面为零点。起点设为高潮。可点图或拖动读数线。</figcaption>
+            </figure>
+            <div class="ocean-choices" role="group" aria-label="潮位播放控制">
+              <button type="button" data-play aria-pressed="false">播放示意</button>
+              <button type="button" data-step>前进一格</button>
+              <button type="button" data-reset>回到初始高潮</button>
+            </div>
+            <label class="ocean-range" for="tide-time"><span>经过时间 <output id="tide-time-value" aria-live="off"></output></span>
+              <input id="tide-time" type="range" min="0" max="1490" step="1" value="0" data-progress>
+            </label>
+            <div class="ocean-choices" aria-label="主要潮位时刻" role="group">
+              <button type="button" data-minute="0">开始 · 高潮</button>
+              <button type="button" data-minute="373">约 6 小时 13 分 · 低潮</button>
+              <button type="button" data-minute="745">12 小时 25 分 · 高潮</button>
+            </div>
+            <p class="ocean-note" data-motion-status role="status"></p>
+            <p id="tide-result" class="ocean-result" data-motion-readout aria-live="polite"></p>
+          </div>
+        </section>
+        <div class="ocean-grid" id="ocean-knowledge" aria-label="概念与证据"></div>
+        <details class="ocean-panel ocean-details"><summary id="ocean-question">想一想</summary><p id="ocean-answer"></p></details>
+        <details class="ocean-panel ocean-details"><summary>资料和图片出处</summary><ul id="ocean-references"></ul></details>
+        <noscript><p>请启用 JavaScript 查看专题正文和交互图。</p></noscript>
+      </div>
     </div>
   </main>
 </body>

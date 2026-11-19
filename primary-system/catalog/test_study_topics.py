@@ -180,6 +180,15 @@ class StudyTopicPageTests(SimpleTestCase):
             ('seafloor', '../earth/plates.html?boundary=subduction'),
         ):
             self.assertContains(self.client.get(reverse(f'geography-ocean-{slug}')), f'href="{link}"')
+        for slug in ('currents', 'tides'):
+            with self.subTest(slug=slug):
+                response = self.client.get(reverse(f'geography-ocean-{slug}'))
+                self.assertContains(response, 'data-sidebar-layout=".experiment-side"')
+                self.assertContains(response, f'href="{reverse("geography-atlas-world")}"')
+                assets = TopicMarkup(response.content.decode()).assets
+                player = next(url for url in assets if 'earth/earth-motion.js?v=' in url)
+                app = next(url for url in assets if 'ocean/ocean-app.js?v=' in url)
+                self.assertLess(assets.index(player), assets.index(app))
 
     def test_earth_interior_routes_share_local_versioned_assets(self):
         for suffix in ('', '-rocks', '-quakes', '-plates', '-age'):

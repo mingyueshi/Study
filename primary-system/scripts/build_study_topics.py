@@ -148,6 +148,8 @@ def template(source, topic, page, theme, index_route):
         content = rewrite_page_links(content, {'../geo-map/' + href: route for href, route in ATLAS_3D_ROUTES.items()})
     if (topic, page) == ('earth', 'plates') or (topic == 'map-skills' and page in ('scale', 'contours', 'profile')):
         content = rewrite_page_links(content, {'../geo-map/china.html': 'geography-atlas-china', '../geo/index.html': 'geography-study'})
+    if topic == 'ocean' and page in ('currents', 'tides'):
+        content = rewrite_page_links(content, {'../geo-map/world.html': 'geography-atlas-world'})
     if (topic, page) == ('ocean', 'life'):
         content = content.replace('../geo-map/world-animals.html', "{% url 'geography-life-maps-world-animals' %}")
     if topic == 'geo':
@@ -173,11 +175,11 @@ def template(source, topic, page, theme, index_route):
         asset_path = 'sci/' + Path(path).name if topic == 'geo' and path.startswith('../sci-process') else topic + '/' + path
         if topic == 'history-timeline' and path in ('../history/media.js', '../history/knowledge-dynasties.js'):
             asset_path = 'history/' + Path(path).name
-        if topic == 'ocean' and path == '../geo-map/world-geo.js':
-            asset_path = 'geo-map/world-geo.js'
+        if topic == 'ocean' and path in ('../geo-map/world-geo.js', '../earth/earth-motion.js'):
+            asset_path = path.removeprefix('../')
         if topic == 'climate' and path == '../geo-map/china-geo.js':
             asset_path = 'geo-map/china-geo.js'
-        if topic == 'earth' and path in ('../map-skills/experiment.css', '../map-skills/experiment.js'):
+        if topic in ('earth', 'ocean') and path in ('../map-skills/experiment.css', '../map-skills/experiment.js'):
             asset_path = path.removeprefix('../')
         asset_url = "{% static 'study_topics/" + asset_path + "' %}"
         if topic in ('geo', 'history') and path == 'lab.js':
