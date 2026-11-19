@@ -669,7 +669,7 @@ const PAGE_REFS = {
   'index.html': ['content.js', 'china-geo.js', 'map-data.js', 'shared.js', 'home-app.js', 'styles.css',
     'china.html', 'province.html', 'world.html', 'life-maps.html', 'province-culture.html'],
   'china.html': ['content.js', 'china-geo.js', 'map-data.js', 'shared.js', 'media-data.js', 'media.js', 'map-ui.js', 'map-discovery.js', 'map-discovery-data.js', 'china-rivers-data.js', 'china-river-tour-data.js', 'china-app.js', 'styles.css',
-    'province.html', 'world.html', 'index.html', 'life-maps.html', 'province-culture.html'],
+    'flat-map.css', 'province.html', 'world.html', 'index.html', 'life-maps.html', 'province-culture.html'],
   'life-maps.html': ['styles.css', 'animals.css', 'animals.html', 'plants.html', 'world-animals.html', 'world-plants.html',
     'assets/animals/giant-panda.jpg', 'assets/plants/ginkgo.jpg', 'assets/animals/emperor-penguin.jpg', 'assets/plants/antarctic-hair-grass.jpg'],
   'china-landscapes.html': ['styles.css', 'geo-guide.css', 'routes-app.js', 'china-landscapes.js', 'china-3d.html',
@@ -684,7 +684,7 @@ const PAGE_REFS = {
     'styles.css', 'province.css', 'china.html', 'index.html'],
   'province-culture.html': ['content.js', 'china-geo.js', 'map-data.js', 'shared.js', 'province-culture-data.js', 'province-culture.js', 'province-culture.css', 'styles.css', 'province.html', 'china.html'],
   'world.html': ['map-data.js', 'world-geo.js', 'world-data.js', 'shared.js', 'media-data.js', 'media.js', 'map-ui.js', 'map-discovery.js', 'map-discovery-data.js', 'world-app.js', 'styles.css',
-    'china.html', 'index.html', 'life-maps.html'],
+    'flat-map.css', 'china.html', 'index.html', 'life-maps.html'],
   'places.html': ['places-app.js', 'styles.css'],
   'routes.html': ['routes-app.js', 'styles.css'],
   'gallery.html': ['media-data.js', 'media.js', 'gallery-app.js', 'styles.css']
@@ -699,9 +699,22 @@ Object.entries(PAGE_REFS).forEach(([page, refs]) => {
   } else if (!/(?:animals|plants|province-culture)\.html$/.test(page)) {
     ['atlas.js', 'atlas-data.js', 'places.html', 'routes.html', 'gallery.html'].forEach(f =>
       check(html.includes(f), page + ' 应引用 ' + f));
-    check(html.includes('gm-sysnav'), page + ' 应有系统导航条');
-    check((html.match(/<a data-page /g) || []).length === 5 && html.includes('gm-atlas-more'),
-      page + ' 应保留五个主入口并折叠专题与资料');
+    if (['china.html', 'world.html'].includes(page)) {
+      check(html.indexOf('class="gm-flat-heading"') < html.indexOf('class="gm-flat-workspace"') &&
+        html.includes('class="gm-flat-heading"') && html.includes('data-sidebar-layout=".gm-sidebar"'),
+      page + ' 的页头应位于地图与共用侧栏上方');
+      const related = html.match(/<summary>相关专题<\/summary>\s*<nav\b[^>]*>([\s\S]*?)<\/nav>/)?.[1] || '';
+      const otherMap = page === 'china.html' ? 'world.html' : 'china.html';
+      for (const link of [otherMap, 'index.html', 'china-3d.html', 'world-3d.html', 'places.html']) {
+        check(related.includes(`href="${link}"`), page + ' 的相关专题应保留 ' + link);
+      }
+      check(html.includes('<summary>图层与定位</summary>') && html.includes('<summary>探索玩法</summary>'),
+        page + ' 应分组呈现定位和探索工具');
+    } else {
+      check(html.includes('gm-sysnav'), page + ' 应有系统导航条');
+      check((html.match(/<a data-page /g) || []).length === 5 && html.includes('gm-atlas-more'),
+        page + ' 应保留五个主入口并折叠专题与资料');
+    }
     check(html.includes('class="gm-sidebar"') && html.includes('id="content" class="gm-content"'),
       page + ' 应使用共用侧栏和内容区');
   }

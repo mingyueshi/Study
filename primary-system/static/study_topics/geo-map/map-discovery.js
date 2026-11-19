@@ -95,22 +95,127 @@ window.GMMapDiscovery = (() => {
     return {select(id){showProvince(id);if(D.rivers.includes(id)&&layer==='land'&&!quiz)loadRiver(id);else leaveRiver();},layerChanged(value,isQuiz){layer=value;quiz=isQuiz;showProvince('');leaveRiver();root.querySelectorAll('[data-replay-river]').forEach(b=>{b.disabled=quiz;});}};
   }
   function mountNeighbors({root,svg,getUI}){
-    const A=window.GMAtlas,S=window.GMShared,esc=S.esc,$=id=>root.querySelector('#'+id),initial=new URLSearchParams(location.search);
-    const all=window.GM_NEIGHBORS.map(n=>({...n,country:A.related(n.id).find(p=>p.category==='country').id})),byCountry=new Map(all.map(n=>[n.country,n]));
-    let active=false,scope='land',selected='China',quiz=false,layer=root.dataset.layer;
-    const choices=()=>all.filter(n=>n.rel===scope);
-    function address(){const url=new URL(location.href);if(active){url.searchParams.set('neighbors',scope);url.searchParams.set('place',selected);url.searchParams.set('layer','home');url.searchParams.delete('continent');}else{url.searchParams.delete('neighbors');if(url.searchParams.get('layer')==='home')url.searchParams.delete('layer');}try{history.replaceState(null,'',url);}catch{}}
-    function paint(){const list=choices();root.classList.toggle('gm-neighbor-exploring',active&&!quiz);for(const el of svg.querySelectorAll('.gm-country')){const n=byCountry.get(el.dataset.id),home=['China','Taiwan'].includes(el.dataset.id);el.classList.toggle('is-neighbor-land',Boolean(active&&n?.rel==='land'&&scope==='land'));el.classList.toggle('is-neighbor-sea',Boolean(active&&n?.rel==='sea'&&scope==='sea'));el.classList.toggle('is-neighbor-muted',Boolean(active&&!home&&(!n||n.rel!==scope)));}
-      $('gm-neighbor-list').innerHTML=list.map(n=>`<button type="button" data-neighbor-country="${n.country}" aria-pressed="${active&&selected===n.country}"${quiz?' disabled':''}>${esc(n.name)}</button>`).join('');
-      root.querySelectorAll('[data-neighbor-scope]').forEach(b=>{b.setAttribute('aria-pressed',String(b.dataset.neighborScope===scope));b.disabled=quiz;});$('gm-neighbor-start').disabled=quiz;$('gm-neighbor-readout').hidden=!active||quiz;
-      const n=byCountry.get(selected);$('gm-neighbor-name').textContent=n?n.name:'中国 · 探索的起点';$('gm-neighbor-feature').textContent=n?`${n.rel==='land'?'陆上接壤':'隔海相望'}：${n.note}`:window.GM_MAP_DISCOVERY.neighborIntro;
+    const A = window.GMAtlas;
+    const {esc} = window.GMShared;
+    const $ = id => root.querySelector('#' + id);
+    const initial = new URLSearchParams(location.search);
+    const all = window.GM_NEIGHBORS.map(n => ({...n, country: A.related(n.id).find(p => p.category === 'country').id}));
+    const byCountry = new Map(all.map(n => [n.country, n]));
+    const countries = svg.querySelectorAll('.gm-country');
+    const list = $('gm-neighbor-list');
+    const scopes = root.querySelectorAll('[data-neighbor-scope]');
+    const readout = $('gm-neighbor-readout');
+    let active = false, scope = 'land', selected = 'China', quiz = false, renderedScope;
+    const choices = () => all.filter(n => n.rel === scope);
+
+    function address() {
+      const url = new URL(location.href);
+      if (active) {
+        url.searchParams.set('neighbors', scope);
+        url.searchParams.set('place', selected);
+        url.searchParams.set('layer', 'home');
+        url.searchParams.delete('continent');
+      } else if (url.searchParams.has('neighbors')) {
+        for (const key of ['neighbors', 'place', 'layer']) url.searchParams.delete(key);
+      }
+      if (url.href !== location.href) {
+        try { history.replaceState(history.state, '', url); } catch (error) { /* 本地文件仍可继续探索 */ }
+      }
     }
-    function stop(){active=false;paint();address();}
-    function choose(id){if(quiz)return;active=true;selected=id;getUI()?.choose(id,{layer:'home'});paint();address();}
-    $('gm-neighbor-start').addEventListener('click',()=>choose('China'));
-    root.addEventListener('click',e=>{const b=e.target.closest('[data-neighbor-country]'),s=e.target.closest('[data-neighbor-scope]'),next=e.target.closest('[data-neighbor-step]');if(b)choose(b.dataset.neighborCountry);if(s){scope=s.dataset.neighborScope;choose('China');}if(next){const list=choices(),i=list.findIndex(n=>n.country===selected);const step=Number(next.dataset.neighborStep),base=i<0?(step>0?-1:0):i;choose(list[(base+step+list.length)%list.length].country);}});
-    $('gm-neighbor-intro').textContent=window.GM_MAP_DISCOVERY.neighborIntro;paint();
-    return {byCountry,select(id){if(!active)return;if(id==='China'||id==='Taiwan'){selected='China';}else if(byCountry.has(id)){selected=id;scope=byCountry.get(id).rel;}else{stop();return;}paint();address();},layerChanged(value,isQuiz){layer=value;quiz=isQuiz;if(active&&(layer!=='home'||quiz))stop();else paint();},restore(){if(initial.has('neighbors')){scope=initial.get('neighbors')==='sea'?'sea':'land';const id=initial.get('place');choose(byCountry.has(id)?id:'China');}}};
+
+    function paint() {
+      const showing = active && !quiz;
+      const available = choices();
+      root.classList.toggle('gm-neighbor-exploring', showing);
+      for (const el of countries) {
+        const relation = byCountry.get(el.dataset.id)?.rel;
+        const home = el.dataset.id === 'China' || el.dataset.id === 'Taiwan';
+        el.classList.toggle('is-neighbor-land', showing && scope === 'land' && relation === scope);
+        el.classList.toggle('is-neighbor-sea', showing && scope === 'sea' && relation === scope);
+        el.classList.toggle('is-neighbor-muted', showing && !home && relation !== scope);
+      }
+      if (renderedScope !== scope) {
+        list.innerHTML = available.map(n => `<button type="button" data-neighbor-country="${esc(n.country)}">${esc(n.name)}</button>`).join('');
+        renderedScope = scope;
+      }
+      for (const button of list.children) button.setAttribute('aria-pressed', String(showing && selected === button.dataset.neighborCountry));
+      for (const button of scopes) {
+        button.setAttribute('aria-pressed', String(showing && button.dataset.neighborScope === scope));
+        button.disabled = quiz;
+      }
+      readout.hidden = list.hidden = !showing;
+      const index = available.findIndex(n => n.country === selected);
+      $('gm-neighbor-intro').hidden = index !== -1;
+      const relation = scope === 'land' ? '陆上邻国' : '隔海相望';
+      $('gm-neighbor-name').textContent = index < 0 ? `${relation} · 从中国出发`
+        : `${relation} · ${available[index].name}（${index + 1}／${available.length}）`;
+    }
+
+    function stop() {
+      active = false;
+      paint();
+      address();
+    }
+
+    function choose(id, options = {}) {
+      if (quiz) return;
+      active = true;
+      getUI()?.choose(id, {layer: 'home', ...options});
+    }
+
+    root.addEventListener('click', event => {
+      const country = event.target.closest('[data-neighbor-country]');
+      const group = event.target.closest('[data-neighbor-scope]');
+      const step = event.target.closest('[data-neighbor-step]');
+      if (country) choose(country.dataset.neighborCountry);
+      if (group) {
+        scope = group.dataset.neighborScope;
+        choose('China');
+      }
+      if (step) {
+        const available = choices();
+        const direction = Number(step.dataset.neighborStep);
+        const index = available.findIndex(n => n.country === selected);
+        const from = index === -1 && direction < 0 ? 0 : index;
+        choose(available[(from + direction + available.length) % available.length].country);
+      }
+    });
+    $('gm-neighbor-end').addEventListener('click', () => {
+      stop();
+      getUI().setLayer('home');
+      root.querySelector('.gm-tools-jump').focus();
+    });
+    $('gm-neighbor-intro').textContent = window.GM_MAP_DISCOVERY.neighborIntro;
+    paint();
+
+    return {
+      byCountry,
+      select(id) {
+        if (!active) return;
+        if (id === 'China' || id === 'Taiwan') selected = 'China';
+        else if (byCountry.has(id)) {
+          selected = id;
+          scope = byCountry.get(id).rel;
+        } else {
+          stop();
+          return;
+        }
+        paint();
+        address();
+      },
+      layerChanged(layer, isQuiz) {
+        quiz = isQuiz;
+        if (active && !quiz && layer !== 'home') stop();
+        else paint();
+      },
+      restore() {
+        if (!initial.has('neighbors')) return;
+        scope = initial.get('neighbors') === 'sea' ? 'sea' : 'land';
+        const id = initial.get('place');
+        $('map-activities').open = true;
+        choose(byCountry.has(id) ? id : 'China', {reveal: false});
+      }
+    };
   }
   return {buildRiver,atDistance,createReplay,mountChina,mountNeighbors};
 })();

@@ -138,7 +138,6 @@
           `<p class="gm-card-foot">英文名「${esc(name)}」就是它在世界地图集里的通行写法。</p>`;
       }
     }
-    card.classList.remove('gm-card--blank');
   }
 
   const hintFor = (id) => {
@@ -149,6 +148,7 @@
   const continentInfo = $('gm-continent-info');
   const params = new URLSearchParams(location.search);
   let selectedContinent = CONTINENTS.some(c => c.id === params.get('continent')) ? params.get('continent') : '';
+  if (selectedContinent) $('map-activities').open = true;
   continentChoices.innerHTML = [{ id: '', name: '全部大洲', color: '#dcefe5' }, ...CONTINENTS].map(c =>
     `<button type="button" data-continent="${esc(c.id)}" style="--choice-color:${esc(c.color)}" aria-pressed="false">` +
     `<span aria-hidden="true"></span>${esc(c.name)}</button>`).join('');
@@ -165,7 +165,6 @@
       el.classList.toggle('is-continent', Boolean(visible && el.dataset.continent === continent.id));
       el.classList.toggle('is-outside-continent', Boolean(visible && el.dataset.continent !== continent.id));
     }
-    root.classList.toggle('gm-continent-selected', Boolean(visible));
     if (!visible) return;
     continentInfo.style.setProperty('--continent-accent', continent.color);
     continentInfo.innerHTML =
@@ -184,7 +183,10 @@
 
   mapUI = window.GMMapUI.mount({
     root, svg, map: 'world', layers: LAYERS, pool: POOL, openCard, hintFor,
-    onSelect: neighborExplorer.select,
+    onSelect: (id) => {
+      continentInfo.hidden = true;
+      neighborExplorer.select(id);
+    },
     onLayerChange: (layer,quiz) => { showContinent(layer,quiz); neighborExplorer.layerChanged(layer,quiz); },
     legends: {
       continent: CONTINENTS,

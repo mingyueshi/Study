@@ -93,13 +93,16 @@ window.GMMapUI = (() => {
     const picker = $('gm-map-place');
     const banner = $('gm-quiz');
     const start = $('gm-quiz-start');
+    const routeBanner = $('gm-route-stop');
+    const tools = $('map-tools');
+    const toolsJump = root.querySelector('.gm-tools-jump');
     const statusBar = $('gm-status');
     const resetView = zoomControls(svg, $('gm-view-tools'));
     const places = A.places.filter(p => p.map === map).sort((a, b) => a.name.localeCompare(b.name, 'zh-CN'));
     const targets = [...svg.querySelectorAll('[data-id][role="button"]')];
     const locateTarget = (id) => targets.find(el => el.dataset.id === id &&
       (!el.closest('[data-g]') || el.closest('[data-g]').dataset.g === root.dataset.layer));
-    const quiz = { queue: null, index: 0, timer: null, layer: '' };
+    const quiz = { queue: null, index: 0, timer: null, layer: '', place: '' };
     let statusTimer;
     let tour = null;
 
@@ -125,6 +128,7 @@ window.GMMapUI = (() => {
       resetView();
       for (const b of filters.querySelectorAll('button')) {
         b.setAttribute('aria-pressed', String(b.dataset.layer === layer.id));
+        b.disabled = Boolean(quiz.queue);
       }
       $('gm-layer-hint').textContent = layer.hint;
       $('gm-legend').innerHTML = (legends[layer.id] || []).map(({ name, color }) =>
@@ -133,10 +137,9 @@ window.GMMapUI = (() => {
         picker.innerHTML = '<option value="">选择地点</option>' + places.filter(p => locateTarget(p.id))
           .map(p => `<option value="${esc(p.id)}">${esc(p.name)}</option>`).join('');
       }
-      card.classList.add('gm-card--blank');
       card.style.setProperty('--accent', layer.accent);
-      card.innerHTML = `<p class="gm-card-blank-icon" aria-hidden="true">${esc(layer.icon)}</p>` +
-        `<p class="gm-card-blank">${esc(layer.blank)}</p>`;
+      card.hidden = true;
+      card.replaceChildren();
       onLayerChange?.(layer.id, Boolean(quiz.queue));
     }
 
@@ -147,6 +150,7 @@ window.GMMapUI = (() => {
       el?.classList.add('is-active');
       openCard(id);
       card.insertAdjacentHTML('beforeend', window.StudyTopicConnections.related('places', id));
+      card.hidden = false;
       picker.value = id;
       const media = window.GMMedia.preview(id);
       if (media) card.insertAdjacentHTML('beforeend', media);
@@ -181,7 +185,10 @@ window.GMMapUI = (() => {
       tour?.pause();
       clearTimeout(quiz.timer);
       quiz.timer = null;
-      if (!quiz.queue) quiz.layer = root.dataset.layer;
+      if (!quiz.queue) {
+        quiz.layer = root.dataset.layer;
+        quiz.place = root.dataset.selected;
+      }
       const candidates = pool.filter(id => A.get(id)?.map === map);
       for (let i = candidates.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -193,6 +200,7 @@ window.GMMapUI = (() => {
       root.dataset.quiz = 'on';
       start.disabled = true;
       banner.hidden = false;
+      if (tour) routeBanner.hidden = true;
       renderQuestion();
     }
 
@@ -205,7 +213,9 @@ window.GMMapUI = (() => {
       start.disabled = false;
       svg.querySelector('.is-found')?.classList.remove('is-found');
       setLayer(quiz.layer);
-      start.focus();
+      if (quiz.place) select(quiz.place, locateTarget(quiz.place));
+      if (tour) routeBanner.hidden = false;
+      (start.getClientRects().length ? start : toolsJump).focus({preventScroll: true});
       status('继续自由探索地图吧。');
     }
 
@@ -262,6 +272,23 @@ window.GMMapUI = (() => {
       revealMap();
     });
     start.addEventListener('click', startQuiz);
+    function openToolsForHash() {
+      if (location.hash === '#map-tools') tools.open = true;
+    }
+    window.addEventListener('hashchange', openToolsForHash);
+    openToolsForHash();
+    toolsJump.addEventListener('click', (event) => {
+      if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+      tools.open = true;
+      // 同一个锚点再次点击时不会触发 hashchange，也应展开侧栏。
+      const layout = tools.closest('.gm-flat-workspace');
+      if (layout.dataset.slMode === 'compact' && layout.dataset.slOpen === 'false') {
+        layout.querySelector('.sl-toggle:not(.sl-collapse)').click();
+      } else if (layout.dataset.slMode === 'wide' && layout.dataset.slCollapsed === 'true') {
+        layout.querySelector('.sl-collapse').click();
+      }
+      requestAnimationFrame(() => tools.querySelector('summary').focus());
+    });
     banner.addEventListener('click', (e) => {
       const action = e.target.closest('[data-quiz-act]')?.dataset.quizAct;
       if (action === 'exit') stopQuiz();
@@ -277,7 +304,7 @@ window.GMMapUI = (() => {
       if (!locateTarget(place.id)) setLayer(place.layer);
       select(place.id, locateTarget(place.id));
       const stop = A.routeStop(params);
-      if (stop) tour = mountRoute($('gm-route-stop'), stop, svg, map, (p) => {
+      if (stop) tour = mountRoute(routeBanner, stop, svg, map, (p) => {
         if (quiz.queue) stopQuiz();
         setLayer(p.layer);
         select(p.id, locateTarget(p.id));

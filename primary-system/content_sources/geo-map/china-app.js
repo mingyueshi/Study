@@ -191,7 +191,6 @@
         `<h2 class="gm-card-title"><span aria-hidden="true">⭐</span>首都${esc(CAPITAL.name)}</h2>` +
         `<p class="gm-card-text">${esc(CAPITAL.text)}</p>`;
     }
-    card.classList.remove('gm-card--blank');
   }
 
   const hintFor = (id) => {
