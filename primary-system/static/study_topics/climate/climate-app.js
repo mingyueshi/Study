@@ -24,7 +24,7 @@
       if (value) url.searchParams.set(key, value);
       else url.searchParams.delete(key);
     }
-    try { history.replaceState(null, '', url); } catch { /* 本地文件仍可使用控件。 */ }
+    try { history.replaceState(history.state, '', url); } catch { /* 本地文件仍可使用控件。 */ }
   }
 
   function buttons(selector, records, select) {
@@ -179,6 +179,12 @@
       display.render();
     }
     slider.addEventListener('input', read);
+    $('#reset-weather').addEventListener('click', () => {
+      remember({phenomenon:null});
+      show(data.weather[0], false);
+      slider.value = slider.defaultValue;
+      read();
+    });
     read();
   }
 
@@ -219,6 +225,16 @@
     ctx.stroke();
     circle(ctx, x(month), yTemp(station.temperature[month]), 4.5, '#a34227', '#fff');
     return {left, right};
+  }
+
+  function chartMonthAt(canvas, bounds, event) {
+    const point = event.clientX - canvas.getBoundingClientRect().left;
+    return 1 + Math.floor((point - bounds.left) / (bounds.right - bounds.left) * 12);
+  }
+
+  function stationReading(station, month) {
+    const index = month - 1;
+    return `${month} 月 · 月均温 ${fmt.format(station.temperature[index])} ℃ · 降水 ${fmt.format(station.precipitation[index])} 毫米`;
   }
 
   function types() {
@@ -275,10 +291,9 @@
         });
         canvas.addEventListener('click', event => {
           if (!bounds) return;
-          const point = event.clientX - canvas.getBoundingClientRect().left;
-          const index = Math.floor((point - bounds.left) / (bounds.right - bounds.left) * 12);
-          if (index >= 0 && index < 12) {
-            month.value = index + 1;
+          const selected = chartMonthAt(canvas, bounds, event);
+          if (selected >= 1 && selected <= 12) {
+            month.value = selected;
             read();
           }
         });
@@ -289,11 +304,10 @@
 
     function read() {
       const value = Number(month.value);
-      const i = value - 1;
       $('#month-value').textContent = value + ' 月';
       month.setAttribute('aria-valuetext', value + ' 月');
       for (const {record, reading, render} of charts) {
-        reading.textContent = `${value} 月 · 月均温 ${fmt.format(record.temperature[i])} ℃ · 降水 ${fmt.format(record.precipitation[i])} 毫米`;
+        reading.textContent = stationReading(record, value);
         render();
       }
     }
@@ -307,7 +321,8 @@
     const shapes = Object.values(geo.provinces);
     const areas = [{id:'all',name:'显示全部'}, ...data.classes];
     const canvas = $('#china-climate-map');
-    let active = get('zone', data.zones, data.zones[2]);
+    const defaultZone = data.zones[2];
+    let active = get('zone', data.zones, defaultZone);
     let filter = get('group', areas);
     let hit = null;
     const markers = data.zones.map(zone => ({zone, station:stationById(zone.station)}));
@@ -326,6 +341,8 @@
     surface.height = grid.rows.length;
     const surfaceCtx = surface.getContext('2d');
     const pal = new Map(data.classes.map(record => [record.id, record.color]));
+    $('#climate-map-legend').innerHTML = data.classes.map(item =>
+      `<li style="--chip-color:${esc(item.color)}">${esc(item.name)}</li>`).join('');
     const figures = data.codes.map(code => code.charAt(0).toLowerCase());
     let plot;
     function raster() {
@@ -395,7 +412,22 @@
       }
     });
     const markClass = buttons('#class-choices', areas, item => selectClass(item));
-    const markZone = buttons('#zone-choices', data.zones, zone => selectZone(zone));
+    const stationChoices = markers.map(({zone, station}) => ({id:zone.id, title:`${zone.title} · ${station.name}`, zone}));
+    const markZone = buttons('#zone-choices', stationChoices, item => selectZone(item.zone));
+    const month = $('#zone-month');
+    const monthlyCanvas = $('#zone-chart');
+    let chartBounds;
+    const monthly = drawing(monthlyCanvas, (ctx, width, height) => {
+      chartBounds = chartPlot(ctx, width, height, stationById(active.station), Number(month.value) - 1);
+    });
+
+    function readMonth() {
+      const selected = Number(month.value);
+      $('#zone-month-value').textContent = selected + ' 月';
+      month.setAttribute('aria-valuetext', selected + ' 月');
+      $('#zone-month-reading').textContent = stationReading(stationById(active.station), selected);
+      monthly.render();
+    }
     function describeFilter() {
       $('#class-result').textContent = filter.text
         ? filter.name + ' · ' + filter.text
@@ -408,8 +440,11 @@
       if (update) remember({zone:zone.id});
       describeFilter();
       const station = stationById(zone.station);
-      $('#zone-result').innerHTML = `<h3>${esc(zone.title)}</h3><p><b>代表地区</b> ${esc(zone.region)}</p>
-        <p>${esc(zone.text)}</p><p><a href="types.html?station=${station.id}">查看${esc(station.name)}的逐月气温与降水 →</a></p>`;
+      $('#station-chart-link').textContent = `读${station.name}逐月图 ↓`;
+      $('#zone-result').innerHTML = `<h3>${esc(zone.title)} · ${esc(station.name)}</h3><p><b>代表地区</b> ${esc(zone.region)}</p>
+        <p>${esc(zone.text)}</p><p><a href="types.html?station=${station.id}">在气候类型页与其他站点对比 →</a></p>`;
+      monthlyCanvas.setAttribute('aria-label', `${station.name}站逐月气温降水图。可点图或拖动月份滑块读数。`);
+      readMonth();
       map.render();
     }
     function selectClass(item, update = true) {
@@ -447,6 +482,27 @@
         $('#class-result').textContent = '这里没有可读的陆地格点。试试点图中的着色陆地。';
       }
       map.render();
+    });
+    function seekMonth(event) {
+      if (!chartBounds) return;
+      month.value = Math.min(12, Math.max(1, chartMonthAt(monthlyCanvas, chartBounds, event)));
+      readMonth();
+    }
+    month.addEventListener('input', readMonth);
+    monthlyCanvas.addEventListener('click', seekMonth);
+    monthlyCanvas.addEventListener('pointerdown', event => {
+      if (event.pointerType === 'touch' || event.button !== 0) return;
+      monthlyCanvas.setPointerCapture(event.pointerId);
+      seekMonth(event);
+    });
+    monthlyCanvas.addEventListener('pointermove', event => {
+      if (monthlyCanvas.hasPointerCapture(event.pointerId)) seekMonth(event);
+    });
+    $('#reset-climate-map').addEventListener('click', () => {
+      remember({group:null, zone:null});
+      month.value = month.defaultValue;
+      selectClass(areas[0], false);
+      selectZone(defaultZone, false);
     });
     selectClass(filter, false);
     selectZone(active, false);

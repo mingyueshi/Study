@@ -150,6 +150,8 @@ def template(source, topic, page, theme, index_route):
         content = rewrite_page_links(content, {'../geo-map/china.html': 'geography-atlas-china', '../geo/index.html': 'geography-study'})
     if topic == 'ocean' and page in ('currents', 'tides'):
         content = rewrite_page_links(content, {'../geo-map/world.html': 'geography-atlas-world'})
+    if topic == 'climate' and page in ('weather', 'china'):
+        content = rewrite_page_links(content, {'../geo-map/china.html': 'geography-atlas-china'})
     if (topic, page) == ('ocean', 'life'):
         content = content.replace('../geo-map/world-animals.html', "{% url 'geography-life-maps-world-animals' %}")
     if topic == 'geo':
@@ -179,7 +181,7 @@ def template(source, topic, page, theme, index_route):
             asset_path = path.removeprefix('../')
         if topic == 'climate' and path == '../geo-map/china-geo.js':
             asset_path = 'geo-map/china-geo.js'
-        if topic in ('earth', 'ocean') and path in ('../map-skills/experiment.css', '../map-skills/experiment.js'):
+        if topic in ('climate', 'earth', 'ocean') and path in ('../map-skills/experiment.css', '../map-skills/experiment.js'):
             asset_path = path.removeprefix('../')
         asset_url = "{% static 'study_topics/" + asset_path + "' %}"
         if topic in ('geo', 'history') and path == 'lab.js':

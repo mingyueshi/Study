@@ -5,51 +5,68 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>天气现象 · 气象与气候</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="../map-skills/experiment.css">
   <script src="climate-data.js" defer></script>
   <script src="climate-model.js" defer></script>
   <script src="climate-app.js" defer></script>
+  <script src="../map-skills/experiment.js" defer></script>
 </head>
 <body>
-  <main id="main" class="climate-topic" data-climate-page="weather"
-        data-sidebar-layout=".climate-sidebar" data-sidebar-width="clamp(240px, 22vw, 295px)"
-        data-sidebar-breakpoint="900" data-sidebar-label="专题目录" data-sidebar-fixed=".climate-nav">
-    <aside class="climate-sidebar" aria-label="气象与气候专题目录">
-      <nav class="climate-nav" aria-label="气象与气候各站">
-        <strong>气象与气候</strong>
-          <a href="index.html">专题总览</a>
-          <a href="weather.html" aria-current="page">天气现象</a>
-          <a href="types.html">气候类型</a>
-          <a href="china.html">中国气候分区</a>
-      </nav>
-      <a class="climate-back" href="../atlas/china.html">返回中国地图 ↗</a>
-    </aside>
-    <div class="climate-content">
-      <header class="climate-hero">
-        <h1>天气现象</h1>
-        <p id="climate-intro"></p>
-      </header>
-      <section class="climate-panel" aria-labelledby="weather-heading">
-        <h2 id="weather-heading">天空和地面出现了什么？</h2>
-        <div id="weather-choices" class="climate-choices" role="group" aria-label="选择天气现象"></div>
-        <article id="weather-case" class="climate-case" aria-live="polite"></article>
-      </section>
-      <section class="climate-panel" aria-labelledby="dew-heading">
-        <h2 id="dew-heading">露点实验</h2>
-        <p>一团湿空气的初始露点是 <b>12℃</b>。移动滑块，在水汽含量和气压近似不变的条件下，把空气冷却到露点。</p>
-        <label class="climate-range" for="dew-temperature">
-          <span>气温 <output id="dew-value" for="dew-temperature"></output></span>
-          <input id="dew-temperature" type="range" min="2" max="30" step="1" value="22">
-        </label>
-        <figure>
-          <canvas class="climate-dew" id="dew-diagram" role="img" aria-label="标出气温、12 摄氏度的露点和凝结的小水滴。"></canvas>
-          <figcaption>图中水滴仅表示降到初始露点后可能发生凝结，数量和大小均为示意。凝结发生后，气相水汽含量会改变。</figcaption>
-        </figure>
-        <p class="climate-result" id="dew-result" aria-live="polite"></p>
-      </section>
-      <div id="climate-knowledge" class="climate-grid" aria-label="概念与证据"></div>
-      <details class="climate-panel climate-details"><summary id="climate-question">想一想</summary><p id="climate-answer"></p></details>
-      <details class="climate-panel climate-details"><summary>资料与图片出处</summary><ul id="climate-sources"></ul></details>
-      <noscript><p>请启用 JavaScript 查看正文、图表和地图。</p></noscript>
+  <main id="main" class="climate-topic geo-experiment" data-climate-page="weather">
+    <header class="climate-hero experiment-heading">
+      <h1>天气现象</h1>
+      <p id="climate-intro"></p>
+    </header>
+    <div class="experiment-workspace" data-sidebar-layout=".experiment-side"
+         data-sidebar-width="clamp(260px, 24vw, 320px)" data-sidebar-label="实验工具"
+         data-sidebar-collapse-key="primary_sidebar_collapsed_v1:.climate-sidebar">
+      <aside class="experiment-side" aria-label="实验参数与气象气候目录">
+        <details class="experiment-tools" id="experiment-tools" open>
+          <summary>天气案例</summary>
+          <div class="experiment-controls">
+            <div id="weather-choices" class="climate-choices" role="group" aria-label="选择天气现象"></div>
+            <button type="button" id="reset-weather">重置天气观察</button>
+            <a class="experiment-return" href="#climate-lab" data-experiment-return>返回天气案例 ↓</a>
+          </div>
+        </details>
+        <details class="experiment-tools">
+          <summary>气象与气候专题</summary>
+          <nav class="experiment-links" aria-label="气象与气候各站">
+            <a href="index.html">专题总览</a>
+            <a href="weather.html" aria-current="page">天气现象</a>
+            <a href="types.html">气候类型</a>
+            <a href="china.html">中国气候分区</a>
+            <a href="../geo-map/china.html">打开中国地图</a>
+          </nav>
+        </details>
+      </aside>
+
+      <div class="climate-content experiment-content">
+        <section class="climate-panel" id="climate-lab" tabindex="-1" aria-labelledby="weather-heading">
+          <div class="experiment-panel-head">
+            <h2 id="weather-heading">天空和地面出现了什么？</h2>
+            <a class="experiment-jump" href="#experiment-tools" data-experiment-jump>选择天气案例 ↑</a>
+          </div>
+          <article id="weather-case" class="climate-case" aria-live="polite"></article>
+        </section>
+        <section class="climate-panel" aria-labelledby="dew-heading">
+          <h2 id="dew-heading">露点实验</h2>
+          <p>一团湿空气的初始露点是 <b>12℃</b>。移动滑块，在水汽含量和气压近似不变的条件下，把空气冷却到露点。</p>
+          <label class="climate-range" for="dew-temperature">
+            <span>气温 <output id="dew-value" for="dew-temperature"></output></span>
+            <input id="dew-temperature" type="range" min="2" max="30" step="1" value="22">
+          </label>
+          <figure>
+            <canvas class="climate-dew" id="dew-diagram" role="img" aria-label="标出气温、12 摄氏度的露点和凝结的小水滴。"></canvas>
+            <figcaption>图中水滴仅表示降到初始露点后可能发生凝结，数量和大小均为示意。凝结发生后，气相水汽含量会改变。</figcaption>
+          </figure>
+          <p class="climate-result" id="dew-result" aria-live="polite"></p>
+        </section>
+        <div id="climate-knowledge" class="climate-grid" aria-label="概念与证据"></div>
+        <details class="climate-panel climate-details"><summary id="climate-question">想一想</summary><p id="climate-answer"></p></details>
+        <details class="climate-panel climate-details"><summary>资料与图片出处</summary><ul id="climate-sources"></ul></details>
+        <noscript><p>请启用 JavaScript 查看正文、图表和地图。</p></noscript>
+      </div>
     </div>
   </main>
 </body>

@@ -76,4 +76,13 @@ const beijing = model.statistics(stations.find(s => s.id === 'beijing'));
 assert.equal(beijing.tempRange, 30);
 assert.equal(beijing.wettest, 6);
 assert.ok(beijing.warmHalfShare > .8);
-console.log('气象与气候：页面、图片、11 站常年值、裁切分类格网与模型通过校验');
+for (const [page, tools, content] of [
+  ['weather', ['weather-choices', 'reset-weather'], ['weather-case', 'dew-temperature', 'dew-diagram', 'dew-result']],
+  ['china', ['class-choices', 'zone-choices', 'reset-climate-map'], ['china-climate-map', 'climate-map-legend', 'class-result', 'zone-result', 'zone-chart', 'zone-month', 'zone-month-reading']],
+]) {
+  const [sidebar, main] = fs.readFileSync(path.join(root, page + '.html'), 'utf8').split('</aside>');
+  assert.match(sidebar, /data-sidebar-layout="\.experiment-side"/);
+  for (const id of tools) assert.ok(sidebar.includes(`id="${id}"`), id + ' 位于侧栏');
+  for (const id of content) assert.ok(main.includes(`id="${id}"`), id + ' 位于主区');
+}
+console.log('气象与气候：页面、图片、11 站常年值、裁切分类格网、模型与实验布局通过校验');

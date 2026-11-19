@@ -165,6 +165,12 @@ class StudyTopicPageTests(SimpleTestCase):
                 for filename in data_files:
                     self.assertLess(assets.index('/static/study_topics/' + filename),
                                     assets.index('/static/study_topics/climate/climate-app.js'))
+        for route in ('geography-climate-weather', 'geography-climate-china'):
+            with self.subTest(route=route):
+                response = self.client.get(reverse(route))
+                self.assertContains(response, 'data-sidebar-layout=".experiment-side"')
+                self.assertContains(response, f'href="{reverse("geography-atlas-china")}"')
+                self.assertContains(response, 'study_topics/map-skills/experiment.js?v=')
 
     def test_ocean_uses_local_outline_and_links_related_stations(self):
         for route in ('geography-ocean', 'geography-ocean-currents'):

@@ -5,50 +5,88 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>中国气候分区 · 气象与气候</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="../map-skills/experiment.css">
   <script src="../geo-map/china-geo.js" defer></script>
   <script src="china-climate-grid.js" defer></script>
   <script src="station-normals.js" defer></script>
   <script src="climate-data.js" defer></script>
   <script src="climate-model.js" defer></script>
   <script src="climate-app.js" defer></script>
+  <script src="../map-skills/experiment.js" defer></script>
 </head>
 <body>
-  <main id="main" class="climate-topic" data-climate-page="china"
-        data-sidebar-layout=".climate-sidebar" data-sidebar-width="clamp(240px, 22vw, 295px)"
-        data-sidebar-breakpoint="900" data-sidebar-label="专题目录" data-sidebar-fixed=".climate-nav">
-    <aside class="climate-sidebar" aria-label="气象与气候专题目录">
-      <nav class="climate-nav" aria-label="气象与气候各站">
-        <strong>气象与气候</strong>
-          <a href="index.html">专题总览</a>
-          <a href="weather.html">天气现象</a>
-          <a href="types.html">气候类型</a>
-          <a href="china.html" aria-current="page">中国气候分区</a>
-      </nav>
-      <a class="climate-back" href="../atlas/china.html">返回中国地图 ↗</a>
-    </aside>
-    <div class="climate-content">
-      <header class="climate-hero">
-        <h1>中国气候分区</h1>
-        <p id="climate-intro"></p>
-      </header>
-      <section class="climate-panel" aria-labelledby="map-heading">
-        <h2 id="map-heading">在中国地图上读气候</h2>
-        <p>颜色是柯本五个大类，圆点是课本常见气候类型的观测站实例。两套名称各有依据。</p>
-        <div id="class-choices" class="climate-choices climate-classes" role="group" aria-label="按柯本大类突出显示"></div>
-        <figure>
-          <canvas id="china-climate-map" class="climate-map" role="img" aria-label="中国陆地气候格网，以颜色区分五个柯本大类，标出五个代表站。按钮可突出类别或切换代表站。"></canvas>
-          <figcaption>Beck 等（2023）1991–2020 年分类，CC BY 4.0。按 0.25° 格心取样，细小边界已简化。点击陆地读格点，点击圆点读代表站。南海诸岛另见地理图谱。</figcaption>
-        </figure>
-        <p class="climate-result" id="class-result" aria-live="polite"></p>
-        <h3 class="climate-section-label">按中国常见气候类型找代表地区</h3>
-        <div id="zone-choices" class="climate-choices" role="group" aria-label="选择中国气候类型实例"></div>
-        <article id="zone-result" class="climate-result" aria-live="polite"></article>
-      </section>
-      <a class="climate-link" href="../geo-map/china-3d.html">去 3D 中国地图看地势差异 →</a>
-      <div id="climate-knowledge" class="climate-grid" aria-label="概念与证据"></div>
-      <details class="climate-panel climate-details"><summary id="climate-question">想一想</summary><p id="climate-answer"></p></details>
-      <details class="climate-panel climate-details"><summary>资料与图片出处</summary><ul id="climate-sources"></ul></details>
-      <noscript><p>请启用 JavaScript 查看正文、图表和地图。</p></noscript>
+  <main id="main" class="climate-topic geo-experiment" data-climate-page="china">
+    <header class="climate-hero experiment-heading">
+      <h1>中国气候分区</h1>
+      <p id="climate-intro"></p>
+    </header>
+    <div class="experiment-workspace" data-sidebar-layout=".experiment-side"
+         data-sidebar-width="clamp(260px, 24vw, 320px)" data-sidebar-label="实验工具"
+         data-sidebar-collapse-key="primary_sidebar_collapsed_v1:.climate-sidebar">
+      <aside class="experiment-side" aria-label="实验参数与气象气候目录">
+        <details class="experiment-tools" id="experiment-tools" open>
+          <summary>柯本气候筛选</summary>
+          <div class="experiment-controls">
+            <div id="class-choices" class="climate-choices climate-classes" data-reading-preserve role="group" aria-label="按柯本大类突出显示"></div>
+            <button type="button" id="reset-climate-map">重置地图观察</button>
+            <a class="experiment-return" href="#climate-lab" data-experiment-return>返回地图 ↓</a>
+          </div>
+        </details>
+        <details class="experiment-tools" id="station-tools" open>
+          <summary>气候类型与代表站</summary>
+          <div class="experiment-controls">
+            <div id="zone-choices" class="climate-choices" role="group" aria-label="选择中国气候类型及代表站"></div>
+            <a class="experiment-return" href="#station-lab" data-experiment-return>查看代表站图表 ↓</a>
+          </div>
+        </details>
+        <details class="experiment-tools">
+          <summary>气象与气候专题</summary>
+          <nav class="experiment-links" aria-label="气象与气候各站">
+            <a href="index.html">专题总览</a>
+            <a href="weather.html">天气现象</a>
+            <a href="types.html">气候类型</a>
+            <a href="china.html" aria-current="page">中国气候分区</a>
+            <a href="../geo-map/china.html">打开中国地图</a>
+            <a href="../geo-map/china-3d.html">去 3D 中国地图看地势差异 →</a>
+          </nav>
+        </details>
+      </aside>
+
+      <div class="climate-content experiment-content">
+        <section class="climate-panel" id="climate-lab" tabindex="-1" aria-labelledby="map-heading">
+          <div class="experiment-panel-head">
+            <h2 id="map-heading">在中国地图上读气候</h2>
+            <a class="experiment-jump" href="#experiment-tools" data-experiment-jump>筛选气候 ↑</a>
+          </div>
+          <p>颜色是柯本五个大类，圆点是课本常见气候类型的观测站实例。两套名称各有依据。</p>
+          <figure>
+            <canvas id="china-climate-map" class="climate-map" role="img" aria-label="中国陆地气候格网，以颜色区分五个柯本大类，标出五个代表站。按钮可突出类别或切换代表站。"></canvas>
+            <figcaption>Beck 等（2023）1991–2020 年分类，CC BY 4.0。按 0.25° 格心取样，细小边界已简化。点击陆地读格点，点击圆点读代表站。南海诸岛另见地理图谱。</figcaption>
+          </figure>
+          <ul id="climate-map-legend" class="climate-map-legend" data-reading-preserve aria-label="柯本大类图例"></ul>
+          <p class="climate-result" id="class-result" aria-live="polite"></p>
+          <a class="experiment-jump" id="station-chart-link" href="#station-lab" data-experiment-jump>读代表站逐月图 ↓</a>
+        </section>
+        <section class="climate-panel" id="station-lab" tabindex="-1" aria-labelledby="station-heading">
+          <div class="experiment-panel-head">
+            <h2 id="station-heading">代表站的气温和降水</h2>
+            <a class="experiment-jump" href="#station-tools" data-experiment-jump>选择代表站 ↑</a>
+          </div>
+          <article id="zone-result" class="climate-result" aria-live="polite"></article>
+          <figure>
+            <canvas id="zone-chart" class="climate-month-chart" role="img" aria-label="代表站逐月气温降水图。可点图或拖动月份滑块读数。"></canvas>
+            <figcaption>1991–2020 年月常年值。折线对应左侧气温轴，柱形对应右侧降水轴。</figcaption>
+          </figure>
+          <label class="climate-range" for="zone-month"><span>月份 <output id="zone-month-value"></output></span>
+            <input id="zone-month" type="range" min="1" max="12" step="1" value="1">
+          </label>
+          <p id="zone-month-reading" class="climate-month-reading" aria-live="polite"></p>
+        </section>
+        <div id="climate-knowledge" class="climate-grid" aria-label="概念与证据"></div>
+        <details class="climate-panel climate-details"><summary id="climate-question">想一想</summary><p id="climate-answer"></p></details>
+        <details class="climate-panel climate-details"><summary>资料与图片出处</summary><ul id="climate-sources"></ul></details>
+        <noscript><p>请启用 JavaScript 查看正文、图表和地图。</p></noscript>
+      </div>
     </div>
   </main>
 </body>
