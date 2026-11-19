@@ -41,24 +41,29 @@ function environment(withEffects = true) {
   vm.runInNewContext(fs.readFileSync(file, 'utf8'), {window, document, ASTRO_OBSERVATION:data});
   function element(dataset = {}) { return {dataset, attrs:{}, style:{}, textContent:'', disabled:false, hidden:false,
     classList:{toggle(){}}, setAttribute(key,value) { this.attrs[key] = String(value); }}; }
-  function figure(kind = 'moon') {
+  function figure(kind = 'moon', sidebar = false) {
     const nodes = new Map(), handlers = {}, get = key => { if (!nodes.has(key)) nodes.set(key, element()); return nodes.get(key); };
     const phases = data.phases.map((_,i)=>element({value:String(i)}));
     const steps = [0,1,2,3].map(i=>element({value:String(i)}));
     const modes = ['solar','lunar'].map(value=>element({value}));
     const shadows = [element(),element()];
-    const root = {dataset:{observation:kind}, querySelector:get,
+    const root = {dataset:{observation:kind, observationSidebar:sidebar ? 'true' : undefined}, querySelector:get,
       querySelectorAll(selector) { return selector.includes('"phase"')?phases:selector.includes('"step"')?steps:selector.includes('"mode"')?modes:shadows; },
       addEventListener(type, fn) { handlers[type] = fn; }, removeEventListener(type) { delete handlers[type]; }};
-    const fig = {isConnected:true, querySelector:()=>root};
+    const settingsHandlers = {};
+    const settings = {querySelectorAll:root.querySelectorAll,
+      addEventListener(type, fn) { settingsHandlers[type] = fn; },
+      removeEventListener(type) { delete settingsHandlers[type]; }};
+    const fig = {isConnected:true, querySelector:()=>root, closest:()=>({querySelector:()=>settings})};
     window.AstroObservation.mount(fig);
     const click = (action, value = '') => {
       const button = get(`[data-observe="${action}"]`);
       button.dataset = {observe:action,value:String(value)};
-      handlers.click({target:{closest:()=>button}});
+      const target = sidebar && (action === 'phase' || action === 'mode') ? settingsHandlers : handlers;
+      target.click({target:{closest:()=>button}});
     };
     const input = value => handlers.input({target:{value:String(value), matches:()=>true}});
-    return {fig,root,get,handlers,click,input,shadows};
+    return {fig,root,get,handlers,settingsHandlers,click,input,shadows};
   }
   return {api:window.AstroObservation,figure,frames,watches,
     tick(time) { const pending=[...frames.values()]; frames.clear(); pending.forEach(fn=>fn(time)); },
@@ -111,6 +116,27 @@ test('两演示互斥播放，卸载释放监听和观察器，过期帧不能�
   assert.equal(env.frames.size,0); assert.equal(env.watches.size,0); assert.deepEqual(a.handlers,{}); assert.deepEqual(b.handlers,{});
 });
 
+test('侧栏的月相与日月食模式更新各自的主图，内嵌图仍提供独立控件', () => {
+  const env = environment();
+  for (const [kind, action] of [['moon', 'phase'], ['eclipse', 'mode']]) {
+    const pattern = new RegExp(`data-observe="${action}"`);
+    assert.match(env.api.html(kind), pattern);
+    assert.doesNotMatch(env.api.html(kind, true), pattern);
+    assert.match(env.api.settingsHTML(kind), pattern);
+    assert.match(env.api.html(kind, true), /data-observe="play"/);
+  }
+  const moon = env.figure('moon', true);
+  const eclipse = env.figure('eclipse', true);
+  moon.click('phase', 4);
+  assert.equal(value(moon), 500);
+  eclipse.click('mode', 'lunar');
+  assert.match(eclipse.get('[data-eclipse-order]').textContent, /地球在中间/);
+  assert.equal(value(moon), 500);
+  env.api.dispose();
+  assert.deepEqual(moon.settingsHandlers, {});
+  assert.deepEqual(eclipse.settingsHandlers, {});
+});
+
 test('减少动态效果及统一偏好失效时保留手动观察，恢复偏好不自动播放', () => {
   const env=environment(), scene=env.figure();
   for(const mode of ['gentle','off']) {
@@ -135,10 +161,11 @@ test('离屏、后台、离页均暂停，返回可见后仍等待手动开始',
   scene.click('play'); env.pagehide(); assert.equal(env.frames.size,0);
 });
 
-test('天文知识点深链接打开所属课程，切换链接清理旧演示，未知链接不破坏当前课程', () => {
+test('天文深链接进入课程，同章跳转保留演示，跨章切换清理旧演示', () => {
   const nodes = new Map(), events = {}, scrolled = [];
   let disposed = 0;
   const document = {addEventListener() {}, getElementById(id) {
+    if (id.startsWith('lesson-') && !nodes.get('cards')?.innerHTML.includes('id="' + id + '"')) return null;
     if (!nodes.has(id)) nodes.set(id, {innerHTML:'', textContent:'', value:'', scrollIntoView() { scrolled.push(id); }});
     return nodes.get(id);
   }};
@@ -152,7 +179,10 @@ test('天文知识点深链接打开所属课程，切换链接清理旧演示�
   assert.match(nodes.get('cards').innerHTML,/id="lesson-au2-2"/);
   assert.deepEqual(scrolled,['lesson-au2-2']);
   location.hash='#lesson-au2-4'; events.hashchange();
-  assert.equal(disposed,2); assert.equal(scrolled.at(-1),'lesson-au2-4');
+  assert.equal(disposed,1); assert.equal(scrolled.at(-1),'lesson-au2-4');
   location.hash='#lesson-missing'; events.hashchange();
-  assert.equal(disposed,2); assert.equal(window.AstroExplore.view,'au2');
+  assert.equal(disposed,1); assert.equal(window.AstroExplore.view,'au2');
+  location.hash='#lesson-au1-1'; events.hashchange();
+  assert.equal(disposed,2); assert.equal(scrolled.at(-1),'lesson-au1-1');
+  assert.equal(window.AstroExplore.view,'au1');
 });

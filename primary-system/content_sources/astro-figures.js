@@ -141,8 +141,8 @@ const AstroFigures = (() => {
   };
 
   /* 日食与月食 */
-  const eclipse = () => {
-    const interactive = typeof window !== 'undefined' && window.AstroObservation?.html('eclipse');
+  const eclipse = ({observationSidebar} = {}) => {
+    const interactive = typeof window !== 'undefined' && window.AstroObservation?.html('eclipse', observationSidebar);
     if (interactive) return interactive;
     const sun = (cx, cy) =>
       `<circle cx="${cx}" cy="${cy}" r="26" fill="${SUN}"/>` + rays(cx, cy, 30, 38, SUN, 30);
@@ -415,8 +415,8 @@ const AstroFigures = (() => {
     /* bow: 0 → 明暗界线朝受亮侧弯（月牙）；1 → 背离受亮侧弯（凸月） */
     return `M ${cx} ${cy - R} A ${R} ${R} 0 0 1 ${cx} ${cy + R} A ${w.toFixed(1)} ${R} 0 0 ${ph.bow} ${cx} ${cy - R} Z`;
   }
-  const demoMoonphases = () => {
-    const interactive = typeof window !== 'undefined' && window.AstroObservation?.html('moon');
+  const demoMoonphases = ({observationSidebar} = {}) => {
+    const interactive = typeof window !== 'undefined' && window.AstroObservation?.html('moon', observationSidebar);
     if (interactive) return interactive;
     if (!MOON_PHASES.length) return '<p>月相资料暂未加载，请先阅读下方知识要点。</p>';
     const cx = 170, cy = 100, R = 70;
@@ -1314,11 +1314,11 @@ const AstroFigures = (() => {
     'astro-dark-pie': '宇宙成分估算：暗能量约 68%、暗物质约 27%，会发光的普通物质只占约 5%',
   };
 
-  function figHTML(id, cap) {
+  function figHTML(id, cap, options) {
     const fn = REG[id];
     if (!fn) return '';
     const capText = cap || DEFAULT_CAPS[id] || '';
-    return `<figure class="fig" data-fig="${id}">${DEFS}${fn()}${capText ? `<figcaption class="fig-cap">${capText}</figcaption>` : ''}</figure>`;
+    return `<figure class="fig" data-fig="${id}">${DEFS}${fn(options)}${capText ? `<figcaption class="fig-cap">${capText}</figcaption>` : ''}</figure>`;
   }
 
   /* ---------- 互动演示的事件委托 ---------- */

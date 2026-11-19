@@ -35,14 +35,24 @@
     button('previous', kind === 'moon' ? '上一月相' : '上一步') + button('next', kind === 'moon' ? '下一月相' : '下一步') +
     button('reset', kind === 'moon' ? '回到新月' : '回到开始') + '</div>' +
     '<p data-observe-status role="status"></p></div>';
-  function html(kind) {
+  function settingsHTML(kind) {
+    if (!data) return '';
+    if (kind === 'moon') {
+      return (window.AstroMoonCalendar?.html() || '') +
+        '<div class="fig-ctrl astro-observe-choices" role="group" aria-label="选择月相">' + data.phases.map((p, i) => button('phase', p.label, i)).join('') + '</div>';
+    }
+    return '<div class="fig-ctrl" role="group" aria-label="日食与月食切换">' + data.eclipses.map(e => button('mode', e.label, e.key)).join('') + '</div>';
+  }
+  function html(kind, observationSidebar = false) {
     if (!data) return null;
+    const settings = observationSidebar
+      ? `<a class="experiment-jump" href="#observe-${kind}-settings" data-experiment-jump>${kind === 'moon' ? '月相与日期' : '切换日食／月食'} ↑</a>`
+      : settingsHTML(kind);
     let body;
     if (kind === 'moon') {
-      body = (window.AstroMoonCalendar?.html() || '') + '<div class="astro-observe-stage" tabindex="0" role="region" aria-label="月球位置与月相联动示意，可横向滚动">' +
-        '<svg class="fig-svg astro-observe-moon" viewBox="0 0 640 270" role="img" aria-label="左侧是太阳方向、地球和月球位置，右侧是从地球看到的月面">' +
-        '<rect x="380" y="20" width="244" height="230" rx="18" fill="#f0edfa"/>' +
-        '<text x="240" y="26" text-anchor="middle">从北极上方看</text><text x="502" y="49" text-anchor="middle">从地球看月亮</text>' +
+      body = settings + '<div class="astro-observe-stage astro-observe-moon-stage" role="group" aria-label="月球位置与月相联动示意">' +
+        '<svg class="fig-svg" viewBox="0 0 380 270" role="img" data-reading-preserve aria-label="从北极上方看太阳方向、地球和月球位置">' +
+        '<text x="218" y="26" text-anchor="middle">从北极上方看</text>' +
         '<circle cx="47" cy="140" r="28" fill="#f6b93b"/><text x="47" y="190" text-anchor="middle">太阳</text>' +
         '<path d="M84 99h45m-8-5 8 5-8 5M84 140h45m-8-5 8 5-8 5M84 181h45m-8-5 8 5-8 5" fill="none" stroke="#c58a24" stroke-width="2"/>' +
         '<circle cx="240" cy="140" r="88" fill="none" stroke="#b7b0d4" stroke-width="1.5" stroke-dasharray="4 5"/>' +
@@ -50,22 +60,24 @@
         '<circle cx="240" cy="140" r="23" fill="#3d7fd9"/><path d="M240 117A23 23 0 0 1 240 163Z" fill="#243559"/>' +
         '<text x="240" y="181" text-anchor="middle">地球</text>' +
         '<g data-moon-orbit><circle r="13" fill="#424660"/><path d="M0 -13A13 13 0 0 0 0 13Z" fill="#f7e9b0"/><text y="29" text-anchor="middle" style="font-size:12px">月球</text></g>' +
+        '</svg><svg class="fig-svg" viewBox="380 0 260 270" role="img" data-reading-preserve aria-label="从地球看到的月面亮面">' +
+        '<rect x="380" y="20" width="244" height="230" rx="18" fill="#f0edfa"/><text x="502" y="49" text-anchor="middle">从地球看月亮</text>' +
         '<circle cx="502" cy="140" r="66" fill="#3b405e"/><g transform="translate(502 140)"><path data-moon-face fill="#f7e9b0"/></g>' +
         '<text x="502" y="233" text-anchor="middle" data-moon-name></text></svg></div>' +
         '<div class="astro-observe-readout"><span data-moon-time></span><span data-moon-percent></span></div>' +
         '<label class="astro-observe-range">拖动查看一轮月相<input type="range" min="0" max="1000" step="1" value="0" data-observe-range aria-label="一轮月相的进度"></label>' +
-        '<div class="fig-ctrl astro-observe-choices">' + data.phases.map((p, i) => button('phase', p.label, i)).join('') + '</div>' +
         '<p class="astro-observe-note" data-observe-note role="status"></p>' + controls(kind) +
         `<p class="astro-observe-cause">${esc(data.moonCause)}</p><p class="astro-observe-model">${esc(data.moonModel)}</p>` + source(0);
     } else {
-      body = '<div class="fig-ctrl">' + data.eclipses.map(e => button('mode', e.label, e.key)).join('') + '</div>' +
+      body = settings +
         '<p class="astro-observe-order" data-eclipse-order></p>' +
-        '<div class="astro-observe-stage" tabindex="0" role="region" aria-label="日月食排列与影子示意，可横向滚动"><svg class="fig-svg" viewBox="0 0 640 245" role="img" aria-label="太阳、地球和月球的位置示意"><g data-eclipse-scene></g></svg></div>' +
+        '<p class="astro-observe-scroll">图示可左右滑动查看，也可以聚焦图示后按左右键。</p>' +
+        '<div class="astro-observe-stage" tabindex="0" role="region" aria-label="日月食排列与影子示意，可横向滚动"><svg class="fig-svg" viewBox="0 0 640 245" role="img" data-reading-preserve aria-label="太阳、地球和月球的位置示意"><g data-eclipse-scene></g></svg></div>' +
         '<div class="fig-ctrl astro-observe-choices" data-eclipse-steps></div>' +
         '<p class="astro-observe-note" data-observe-note role="status"></p>' + controls(kind) +
         `<p class="astro-observe-cause">${esc(data.eclipseCondition)}</p><p class="astro-observe-model">${esc(data.eclipseModel)}</p><p class="astro-observe-model">${esc(data.solarSafety)}</p>` + source(1);
     }
-    return `<section class="astro-observation" data-observation="${kind}"><p class="astro-observe-scroll">↔ 图示可左右滑动查看，也可以聚焦图示后按左右键。</p>${body}</section>`;
+    return `<section class="astro-observation" data-observation="${kind}"${observationSidebar ? ' data-observation-sidebar="true"' : ''}>${body}</section>`;
   }
   function eclipseScene(record) {
     const solar = record.mode === 'solar', earthX = solar ? 520 : 330, moonX = solar ? 330 : 520;
@@ -105,7 +117,7 @@
       const range = root.querySelector('[data-observe-range]');
       range.value = String(Math.round(value * 1000));
       range.setAttribute('aria-valuetext', `${name}，${record.actual ? record.actual.label : `从新月起约 ${(value * data.cycleDays).toFixed(1)} 天`}，亮面约 ${Math.round(lit * 100)}%`);
-      root.querySelectorAll('[data-observe="phase"]').forEach(b => pressed(b, Number(b.dataset.value) === model.index));
+      record.settings.querySelectorAll('[data-observe="phase"]').forEach(b => pressed(b, Number(b.dataset.value) === model.index));
     } else {
       const stage = eclipseStage(value);
       if (stage !== record.lastStage) {
@@ -116,7 +128,7 @@
         write(root.querySelector('[data-observe-note]'), `${stage + 1} / 4 · ${step.label}：${step.note}`);
         root.querySelectorAll('[data-observe="step"]').forEach(b => pressed(b, Number(b.dataset.value) === stage));
       }
-      root.querySelectorAll('[data-observe="mode"]').forEach(b => pressed(b, b.dataset.value === record.mode));
+      record.settings.querySelectorAll('[data-observe="mode"]').forEach(b => pressed(b, b.dataset.value === record.mode));
     }
     root.querySelector('[data-observe="previous"]').disabled = value <= 0;
     root.querySelector('[data-observe="next"]').disabled = value >= 1;
@@ -160,7 +172,10 @@
   function mount(fig) {
     const root = fig.querySelector('.astro-observation');
     if (!root || records.has(fig)) return;
-    const record = {fig, root, kind: root.dataset.observation, mode: 'solar', progress: 0, unwatch: null};
+    const kind = root.dataset.observation;
+    const settings = root.dataset.observationSidebar
+      ? fig.closest('.experiment-workspace')?.querySelector(`[data-observe-settings="${kind}"]`) || root : root;
+    const record = {fig, root, settings, kind, mode: 'solar', progress: 0, unwatch: null};
     record.click = event => {
       const button = event.target.closest('[data-observe]');
       if (!button || button.disabled) return;
@@ -177,6 +192,7 @@
     };
     record.input = event => { if (event.target.matches('[data-observe-range]')) seek(record, Number(event.target.value) / 1000); };
     root.addEventListener('click', record.click); root.addEventListener('input', record.input);
+    if (settings !== root) settings.addEventListener('click', record.click);
     const offscreen = () => { if (active === record) pause(); };
     if (window.StudyEffects?.watch) record.unwatch = window.StudyEffects.watch(fig, offscreen);
     else if (typeof IntersectionObserver === 'function') {
@@ -188,13 +204,14 @@
     draw(record); sync(record);
     if (record.kind === 'moon') record.calendar = window.AstroMoonCalendar?.mount(root, (result, passive) => {
       if (!passive || active === record) pause(); record.actual = result; record.progress = result.phase; draw(record); sync(record);
-    });
+    }, settings);
   }
   function remove(record) {
     if (active === record) pause();
     record.unwatch?.();
     record.calendar?.dispose();
     record.root.removeEventListener('click', record.click); record.root.removeEventListener('input', record.input);
+    if (record.settings !== record.root) record.settings.removeEventListener('click', record.click);
     records.delete(record.fig);
   }
   function dispose() { [...records.values()].forEach(remove); }
@@ -203,5 +220,5 @@
   document.addEventListener('study:effects-change', preference); media.addEventListener('change', preference);
   document.addEventListener('visibilitychange', () => { if (document.hidden) pause(); });
   window.addEventListener('pagehide', pause);
-  window.AstroObservation = {html, mount, dispose, prune};
+  window.AstroObservation = {html, settingsHTML, mount, dispose, prune};
 })();

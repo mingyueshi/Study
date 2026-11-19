@@ -68,7 +68,7 @@ function renderChips() {
 }
 
 function renderStats() {
-  const el = document.getElementById('roam-study-progress') || document.getElementById('stats');
+  const el = document.getElementById('observation-study-progress') || document.getElementById('roam-study-progress') || document.getElementById('stats');
   if (el) el.textContent = '已掌握 ' + totalLearned() + ' / ' + ATOTAL_POINTS + ' 个知识点';
 }
 
@@ -82,7 +82,7 @@ function abanner(id) {
   return (window.ASTRO_PHOTOS && ASTRO_PHOTOS.banner(id)) || '';
 }
 
-function pointCard(u, p) {
+function pointCard(u, p, figureOptions) {
   const key = pointKey(u, p);
   const learned = !!akState.learned[key];
   const parts = [];
@@ -100,7 +100,7 @@ function pointCard(u, p) {
   } else {
     parts.push('<p class="k-overview">' + esc(p.overview) + '</p>');
   }
-  if (p.fig && window.AstroFigures) parts.push(AstroFigures.figHTML(p.fig));
+  if (p.fig && window.AstroFigures) parts.push(AstroFigures.figHTML(p.fig, undefined, figureOptions));
 
   if (p.items && p.items.length) {
     parts.push(msec('纲', '<ul class="klist">' + p.items.map(m =>
@@ -124,16 +124,65 @@ function pointCard(u, p) {
   return parts.join('');
 }
 
+function experimentTopics(current) {
+  return [...ASTRO.units, ...AEXTRA_VIEWS].filter(view => view.id !== current);
+}
+
+function renderObservationUnit(u, heading, content) {
+  const eclipseFirst = location.hash === '#lesson-au2-4';
+  return `<div class="astro-observation-topic geo-experiment">
+    ${heading}
+    <div class="experiment-workspace" data-sidebar-layout=".experiment-side" data-sidebar-width="clamp(260px, 24vw, 320px)"
+         data-sidebar-label="月球观察工具" data-sidebar-collapse-key="astro_observation_sidebar_collapsed_v1">
+      <aside class="experiment-side" aria-label="月球观察参数与专题导航">
+        <details class="experiment-tools" id="observe-moon-settings"${eclipseFirst ? '' : ' open'}>
+          <summary>月相与日期</summary>
+          <div class="experiment-controls" data-observe-settings="moon">
+            ${AstroObservation.settingsHTML('moon')}
+            <a class="experiment-return" href="#lesson-au2-2" data-experiment-return>返回月相图 ↓</a>
+          </div>
+        </details>
+        <details class="experiment-tools" id="observe-eclipse-settings"${eclipseFirst ? ' open' : ''}>
+          <summary>日食与月食</summary>
+          <div class="experiment-controls" data-observe-settings="eclipse">
+            ${AstroObservation.settingsHTML('eclipse')}
+            <a class="experiment-return" href="#lesson-au2-4" data-experiment-return>返回日月食图 ↓</a>
+          </div>
+        </details>
+        <details class="experiment-tools">
+          <summary>本章知识点</summary>
+          <nav class="experiment-links" aria-label="月球课程知识点">${u.points.map(p =>
+            `<a href="#lesson-${esc(p.id)}">${esc(p.title)}</a>`).join('')}</nav>
+        </details>
+        <details class="experiment-tools">
+          <summary>天文探索专题</summary>
+          <nav class="experiment-links" aria-label="天文探索专题">
+            <a href="./">天文探索总览</a>
+            <a href="?view=lab#sky-moon">天文实验室 · 选日期看月相</a>
+            ${experimentTopics(u.id).filter(view => view.id !== 'lab').map(view =>
+              `<a href="?view=${encodeURIComponent(view.id)}">${esc(view.name)}</a>`).join('')}
+          </nav>
+          <p class="observation-study-progress" id="observation-study-progress" role="status"></p>
+        </details>
+      </aside>
+      <div class="experiment-content">${content}</div>
+    </div>
+  </div>`;
+}
+
 function renderUnit(u) {
   const photo = abanner(u.id);
   const banner = !photo && window.AstroFigures ? AstroFigures.unitBanner(u.id) : '';
-  return '<div class="unit-head' + (photo ? ' has-photo' : '') + '" style="--c:' + u.color +
+  const heading = '<div class="unit-head' + (photo ? ' has-photo' : '') + '" style="--c:' + u.color +
     (photo ? ';background-image:url(' + photo + ')' : '') + '">' +
     '<span class="unit-emoji">' + u.emoji + '</span>' +
     '<div><h1>' + esc(u.no) + ' · ' + esc(u.name) + '</h1>' +
     '<p>' + esc(u.intro) + '</p>' +
-    '<div class="goal-tags">' + u.goals.map(g => '<span>🎯 ' + esc(g) + '</span>').join('') + '</div></div></div>' +
-    banner +
+    '<div class="goal-tags">' + u.goals.map(g => '<span>🎯 ' + esc(g) + '</span>').join('') + '</div></div></div>';
+  if (u.id === 'au2' && window.AstroObservation?.settingsHTML && window.AstroFigures) {
+    return renderObservationUnit(u, heading, banner + u.points.map(p => pointCard(u, p, {observationSidebar:true})).join(''));
+  }
+  return heading + banner +
     (u.id === 'au1' || u.id === 'au5' ? '<p class="roam-course-link">🌌 <a href="?view=universe#roam-' + (u.id === 'au1' ? 'solar' : 'galaxy') + '">打开宇宙漫游：看大图、动画与外部资料 →</a></p>' : '') +
     (window.AstroLab && ['au1','au2','au3','au6','au7'].includes(u.id) ? '<p class="sky-course-link">🔭 <a href="?view=lab#sky-' + ({au1:'planets',au2:'moon',au3:'polaris',au6:'missions',au7:'missions'}[u.id]) + '">打开天文实验室：' + ({au1:'比较行星与冥王星',au2:'选日期看月相',au3:'跟着北斗找北极星',au6:'追踪探月与探火星任务',au7:'追踪探月与探火星任务'}[u.id]) + ' →</a></p>' : '') +
     u.points.map(p => pointCard(u, p)).join('');
@@ -233,8 +282,7 @@ function renderMain() {
   if (curView === 'clinic') { box.innerHTML = renderClinic(); return; }
   if (curView === 'lab' && window.AstroLab) { box.innerHTML = AstroLab.render(); AstroLab.mount(); return; }
   if (curView === 'universe' && window.AstroMedia) {
-    const topics = [...ASTRO.units, ...AEXTRA_VIEWS.filter(view => view.id !== 'universe')];
-    box.innerHTML = AstroMedia.render(topics);
+    box.innerHTML = AstroMedia.render(experimentTopics('universe'));
     AstroMedia.mount();
     return;
   }
@@ -311,6 +359,11 @@ function openLessonFromHash() {
   const id = anchor.slice('lesson-'.length);
   const unit = ASTRO.units.find(item => item.points.some(point => point.id === id));
   if (!unit) return false;
+  const current = !query && curView === unit.id && document.getElementById(anchor);
+  if (current) {
+    current.scrollIntoView({behavior: 'instant'});
+    return true;
+  }
   curView = unit.id;
   query = '';
   document.getElementById('search').value = '';

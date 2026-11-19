@@ -7,7 +7,7 @@
 {% with topic='study_topics/'|add:course_slug|add:'/'|add:course_slug %}
 <link rel="stylesheet" href="{% static 'mathbook/mathbook-base.css' %}">
 <link rel="stylesheet" href="{% static 'figures/figures.css' %}">
-<link rel="stylesheet" href="{% static topic|add:'.css' %}{% if course_slug == 'astro' %}?v=bb786be6b18c{% elif course_slug == 'lit' %}?v=20261117{% elif course_slug == 'sci' %}?v=20261114b10{% endif %}">
+<link rel="stylesheet" href="{% static topic|add:'.css' %}{% if course_slug == 'astro' %}?v=d86753a8f453{% elif course_slug == 'lit' %}?v=20261117{% elif course_slug == 'sci' %}?v=20261114b10{% endif %}">
 <link rel="stylesheet" href="{% static 'study_topics/course.css' %}">
 {% if course_slug == 'astro' %}
 <link rel="stylesheet" href="{% static 'study_topics/map-skills/experiment.css' %}?v=1d0d085a4e06">
@@ -26,11 +26,11 @@
 {% if course_slug == 'astro' %}
 <script src="{% static 'study_topics/astro/vendor/astronomy-engine/astronomy.browser.min.js' %}?v=2.1.19" defer></script>
 <script src="{% static 'study_topics/astro/astro-lab-data.js' %}?v=20261117" defer></script>
-<script src="{% static 'study_topics/astro/astro-moon-calendar.js' %}?v=20261117" defer></script>
-<script src="{% static 'study_topics/astro/astro-observation-data.js' %}" defer></script>
-<script src="{% static 'study_topics/astro/astro-observation.js' %}?v=20261117" defer></script>
+<script src="{% static 'study_topics/astro/astro-moon-calendar.js' %}?v=7913be6e730a" defer></script>
+<script src="{% static 'study_topics/astro/astro-observation-data.js' %}?v=e2183c67efe1" defer></script>
+<script src="{% static 'study_topics/astro/astro-observation.js' %}?v=49973adc65f7" defer></script>
 {% endif %}
-<script src="{% static topic|add:'-figures.js' %}{% if course_slug == 'sci' %}?v=20261114b10{% elif course_slug == 'astro' %}?v=20261116{% endif %}" defer></script>
+<script src="{% static topic|add:'-figures.js' %}{% if course_slug == 'sci' %}?v=20261114b10{% elif course_slug == 'astro' %}?v=30b29a3d6258{% endif %}" defer></script>
 {% if course_slug == 'astro' %}
 <script src="{% static 'study_topics/astro/astro-photos.js' %}" defer></script>
 <script src="{% static 'study_topics/astro/astro-discovery-data.js' %}?v=20261116" defer></script>
@@ -40,7 +40,7 @@
 <script src="{% static 'study_topics/astro/astro-lab.js' %}?v=20261117" defer></script>
 {% endif %}
 {% if course_slug == 'hanzi-evo' %}<script src="{% static 'study_topics/hanzi-evo/hanzi-evo-player.js' %}" defer></script>{% endif %}
-<script src="{% static topic|add:'-app.js' %}{% if course_slug == 'sci' %}?v=20261114b10{% elif course_slug == 'lit' %}?v=20261117{% elif course_slug == 'astro' %}?v=b268b82f9d7d{% elif course_slug == 'hanzi-evo' %}?v=20261114{% endif %}" defer></script>
+<script src="{% static topic|add:'-app.js' %}{% if course_slug == 'sci' %}?v=20261114b10{% elif course_slug == 'lit' %}?v=20261117{% elif course_slug == 'astro' %}?v=3df1f89050ba{% elif course_slug == 'hanzi-evo' %}?v=20261114{% endif %}" defer></script>
 {% if course_slug == 'astro' %}
 <script src="{% static 'study_topics/map-skills/experiment.js' %}?v=c2884b21d5bb" defer></script>
 {% endif %}

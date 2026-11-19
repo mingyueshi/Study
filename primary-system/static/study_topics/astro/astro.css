@@ -5,20 +5,23 @@
    ============================================================ */
 
 /* ---------- 站点横幅 ---------- */
-.astro-observe-stage { overflow-x: auto; margin: 12px 0; border-radius: 14px; }
+.astro-observation { container-type: inline-size; }
+.astro-observe-stage { overflow-x: auto; margin: 12px 0; border-radius: 14px; background: oklch(97% .014 273); }
 .astro-observe-stage svg { min-width: 560px; }
+.astro-observe-moon-stage { display: grid; grid-template-columns: minmax(0, 380fr) minmax(0, 260fr); }
+.astro-observe-moon-stage svg { min-width: 0; }
 .astro-observe-stage text { fill: #34384d; font-size: 15px; font-weight: 750; }
 .astro-observe-stage:focus-visible { outline: 3px solid #7b67b4; outline-offset: 2px; }
 .astro-observe-scroll { display: none; }
 .astro-observe-readout { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px 24px; font-size: 17px; font-weight: 800; color: #554181; font-variant-numeric: tabular-nums; }
 .astro-observe-range { display: grid; gap: 8px; margin: 16px 0; font-size: 15px; font-weight: 700; color: #554181; }
-.astro-observe-range input { width: 100%; accent-color: #7b67b4; min-height: 28px; }
+.astro-observe-range input { width: 100%; accent-color: #7b67b4; min-height: 44px; margin: 0; }
 .astro-observe-note { padding: 12px 16px; margin: 12px 0; border-left: 4px solid #8b65c9; border-radius: 4px 12px 12px 4px; background: #f0edfa; color: #493569; font-size: 17px; font-weight: 700; line-height: 1.8; }
 .astro-observe-controls { padding: 12px; margin: 14px 0; background: #f4f5fc; border-radius: 12px; }
 .astro-observe-controls .fig-ctrl { margin: 0; }
 .astro-observe-controls p, .astro-observe-model { margin: 8px 0; font-size: 15px; line-height: 1.75; color: #536076; }
 .astro-observe-cause, .astro-observe-order { margin: 12px 0; font-size: 16px; line-height: 1.8; color: #4d4269; font-weight: 750; }
-.astro-observation .fig-btn { min-height: 40px; font-size: 15px; }
+.astro-observation .fig-btn, .astro-observation-topic .experiment-side .fig-btn { min-height: 44px; font-size: 15px; }
 .astro-observation .fig-btn:disabled { opacity: .5; transform: none; cursor: default; }
 .astro-observation [hidden] { display: none; }
 .astro-observe-source { font-size: 14px; line-height: 1.8; color: #536076; }
@@ -26,7 +29,11 @@
 .astro-observe-source a { display: block; padding: 4px 0; }
 .fig:has(.astro-observation):hover, .fig:has(.astro-observation):hover .fig-svg { transform: none; }
 [data-eclipse-moon] { transition: transform .3s ease; }
-@media (max-width: 700px) { .astro-observe-scroll { display: block; font-size: 14px; color: #536076; line-height: 1.6; } }
+@container (max-width: 559px) {
+  .astro-observe-scroll { display: block; font-size: 14px; color: #536076; line-height: 1.6; }
+  .astro-observe-moon-stage { grid-template-columns: minmax(0, 1fr); justify-items: center; }
+  .astro-observe-moon-stage svg + svg { width: min(100%, 248px); }
+}
 @media (prefers-reduced-motion: reduce) { [data-eclipse-moon] { transition: none; } }
 @media print { .astro-observe-controls, .astro-observe-source, .astro-observe-range, .astro-observation .fig-ctrl { display: none; } }
 
@@ -328,22 +335,31 @@
 .astro-roam a { text-underline-offset: 4px; }
 .astro-roam :is(a,button,summary):focus-visible, .roam-course-link a:focus-visible { outline: 3px solid var(--course-action); outline-offset: 4px; }
 /* 宇宙漫游已在工作区提供完整目录，回到课程或搜索时恢复课程侧栏。 */
-html body .study-page[data-subject="astro"] .study-shell:has(.astro-roam) {
+html body .study-page[data-subject="astro"] .study-shell:has(:is(.astro-roam, .astro-observation-topic)) {
   grid-template-columns: minmax(0, 1fr) !important;
 }
-.study-page[data-subject="astro"] .study-shell:has(.astro-roam) > :is(.sidebar, .sl-sidebar),
-.study-page[data-subject="astro"] .study-content:has(.astro-roam) > .textbook-banner { display: none; }
-html body .study-page[data-subject="astro"] .study-shell:has(.astro-roam) > .study-content {
+.study-page[data-subject="astro"] .study-shell:has(:is(.astro-roam, .astro-observation-topic)) > :is(.sidebar, .sl-sidebar),
+.study-page[data-subject="astro"] .study-content:has(:is(.astro-roam, .astro-observation-topic)) > .textbook-banner { display: none; }
+html body .study-page[data-subject="astro"] .study-shell:has(:is(.astro-roam, .astro-observation-topic)) > .study-content {
   grid-column: 1 !important;
   grid-row: 1 !important;
   padding: 0;
 }
-.astro-roam {
+:is(.astro-roam, .astro-observation-topic) {
   --experiment-card: var(--card);
   --experiment-line: var(--line);
   --experiment-tint: var(--soft);
   --experiment-accent: var(--course-action);
 }
+.astro-observation-topic .kcard { scroll-margin-top: 16px; }
+.astro-observation-topic .experiment-controls .fig-ctrl { margin: 0; }
+.astro-observation-topic .experiment-controls .astro-date-tools {
+  margin: 0; padding: 0; border: 0; background: none;
+}
+.astro-observation-topic .experiment-controls .astro-date-tools input { width: 100%; }
+.astro-observation-topic .astro-date-tools .fig-ctrl { margin-top: 8px; }
+.astro-observation-topic [data-moon-date-status]:empty { display: none; }
+.observation-study-progress { margin: 0; padding: 0 12px 12px; font-size: 15px; color: var(--muted); }
 .roam-hero {
   position: relative; isolation: isolate; display: grid; align-items: center;
   min-height: clamp(156px, 17vw, 246px); margin-bottom: clamp(16px, 2vw, 24px); padding: clamp(18px, 3vw, 44px);
