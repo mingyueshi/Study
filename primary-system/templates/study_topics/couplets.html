@@ -2,9 +2,9 @@
 {% load static %}
 {% block title %}对联工坊 · 乐学堂{% endblock %}
 {% block content %}
+{% include 'study_topics/tool_layout_css.html' %}
 <link rel="stylesheet" href="{% static 'study_topics/couplets.css' %}">
-<div class="couplets-workshop" data-storage-scope="{% if user.is_authenticated %}user-{{ user.pk }}{% else %}guest{% endif %}">
-  <a class="couplets-back" href="{% url 'home' %}?area=chinese#modules-title">← 学习广场 · 语文</a>
+<div class="couplets-workshop topic-tool-page" data-storage-scope="{% if user.is_authenticated %}user-{{ user.pk }}{% else %}guest{% endif %}">
   <header class="couplets-hero">
     <div>
       <p class="couplets-kicker">语文 · 楹联小课堂</p>
@@ -15,13 +15,37 @@
     {% include 'study_topics/_couplet_door.html' %}
   </header>
 
-  <nav class="couplets-nav" aria-label="工坊目录">
-    <a href="#rules"><span aria-hidden="true">01</span> 看门道</a>
-    <a href="#examples"><span aria-hidden="true">02</span> 读例联</a>
-    <a href="#practice"><span aria-hidden="true">03</span> 对一对</a>
-    <a href="#studio"><span aria-hidden="true">04</span> 写一副</a>
-  </nav>
+<div class="study-reading-layout" data-sidebar-layout=".couplets-side" data-sidebar-width="280px" data-sidebar-label="工坊侧栏">
+    <aside class="couplets-side study-reading-sidebar" aria-label="工坊侧栏">
+      <details class="study-reading-group" open>
+        <summary>工坊目录</summary>
+        <nav class="study-reading-links" aria-label="工坊目录">
+          <a href="#rules">看门道</a>
+          <a href="#examples">读例联</a>
+          <a href="#practice">对一对</a>
+          <a href="#studio">写一副</a>
+        </nav>
+      </details>
+      <details class="study-reading-group" open>
+        <summary>搜索例联</summary>
+        <div class="topic-tool-form" data-example-tools hidden>
+          <div class="inline-choice" data-inline-choice><label>选个主题 <select data-category><option value="">全部主题</option>{% for category in course.categories %}<option value="{{ category.id }}">{{ category.label }}</option>{% endfor %}</select></label></div>
+          <label>找一找 <input type="search" data-search placeholder="输入花、校园、春风……"></label>
+        </div>
 
+        <nav class="study-reading-links" aria-label="例联结果">
+          <a href="#examples">查看例联 ↓</a>
+        </nav>
+      </details>
+      <details class="study-reading-group">
+        <summary>相关专题</summary>
+        <nav class="study-reading-links" aria-label="专题导航">
+          <a href="{% url 'literature-study' %}">文学常识 ↗</a>
+          <a href="{% url 'home' %}?area=chinese#modules-title">学习广场 · 语文 ↗</a>
+        </nav>
+      </details>
+    </aside>
+<div class="study-reading-main">
   <section class="couplets-section" id="rules" aria-labelledby="couplets-rules-title">
     <p class="couplets-kicker">01 · 看门道</p>
     <h2 id="couplets-rules-title">一副对联，四个小线索</h2>
@@ -40,11 +64,7 @@
     <p class="couplets-kicker">02 · 读例联</p>
     <h2 id="couplets-examples-title">把两行字拆开看</h2>
     <p class="couplets-intro">{{ course.examples|length }} 副为入门练习编写的例联。同一列里的词是一对搭档，先上下对照，再把整副联连起来读。</p>
-    <div class="couplets-tools" data-example-tools hidden>
-      <div class="inline-choice" data-inline-choice><label>选个主题 <select data-category><option value="">全部主题</option>{% for category in course.categories %}<option value="{{ category.id }}">{{ category.label }}</option>{% endfor %}</select></label></div>
-      <label>找一找 <input type="search" data-search placeholder="输入花、校园、春风……"></label>
-      <span role="status" data-example-count></span>
-    </div>
+    <p role="status" data-example-count></p>
     <div class="couplets-examples">
       {% for example in course.examples %}
       <article class="couplet-example" id="example-{{ example.id }}" data-example="{{ example.id }}" aria-labelledby="example-title-{{ example.id }}">
@@ -159,12 +179,14 @@
 
   <footer class="couplets-sources">
     <h2>还想多读一点？</h2>
-    <a href="{% url 'literature-study' %}">文学常识 →</a>
     <details>
       <summary>资料出处（原文需联网）</summary>
       <ul>{% for source in course.sources %}<li><a href="{{ source.url }}">{{ source.label }}</a></li>{% endfor %}</ul>
     </details>
   </footer>
+  </div>
+  </div>
+
 </div>
 {{ course|json_script:'couplets-data' }}
 <script src="{% static 'speech.js' %}" defer></script>

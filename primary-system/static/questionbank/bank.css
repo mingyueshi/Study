@@ -1,27 +1,9 @@
 /* 挑战题库：主页、练习页与错题本。配色沿用 platform.css 的变量。 */
 
-/* ── 主页 hero：绿系渐变卡，与全站专题页同构 ─────────────────────────── */
-.qb-hero {
-  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
-  gap: 18px 28px; padding: 24px 28px; margin: 14px 0 0;
-  background:
-    radial-gradient(ellipse at 92% 8%, #fff3d6, transparent 60%),
-    linear-gradient(120deg, #f1f8ea, #eaf3e0);
-  border: 1px solid #cfe3c0; border-radius: 22px;
-}
-.qb-hero-copy { flex: 1 1 320px; min-width: 0; }
-.qb-hero-tag { margin: 10px 0 0; max-width: 34em; color: var(--muted); font-size: 20px; }
-.qb-hero-stats { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0; }
-.qb-hero-stats span { display: inline-flex; align-items: center; gap: 5px; padding: 5px 12px; border-radius: 999px; background: #fff; border: 1px solid #d6e5c6; font-size: 14px; color: #4a5550; }
-.qb-hero-stats b { color: var(--green); font-weight: 800; font-size: 16px; }
-.qb-hero-deco { display: grid; grid-template-columns: repeat(2, 74px); gap: 14px; }
-.qb-hero-deco span {
-  display: grid; place-items: center; height: 74px; border-radius: 22px;
-  background: var(--soft); color: var(--green); font-size: 34px; font-weight: 800;
-}
-.qb-hero-deco span:nth-child(2) { background: #e2f0dc; color: #2c7a4b; transform: rotate(6deg); }
-.qb-hero-deco span:nth-child(3) { background: #fde8e4; color: #b4483a; transform: rotate(-5deg); }
-.qb-hero-deco span:nth-child(4) { background: var(--card-tint); color: var(--card-accent); transform: rotate(4deg); }
+/* 首页和奥数入口共用练习页的题库页头。 */
+.study-reading-hero .qb-hero-stats { display: flex; flex-wrap: wrap; gap: 6px 16px; }
+.qb-hero-stats span { white-space: nowrap; }
+.qb-hero-stats b { color: inherit; }
 
 /* ── 错题提示条 ────────────────────────────────────────────────────────── */
 .qb-wrong-strip {
@@ -136,8 +118,10 @@ html[data-reading-theme="dark"] .qb-feedback.bad .qb-feedback-head { color: oklc
 .qb-result-actions .button[href=''] { visibility: hidden; }
 
 /* 题型入口与本机榜，不占用答题时的侧栏空间。 */
-.qb-challenge-picker, .qb-leaderboard-filters { display: flex; flex-wrap: wrap; align-items: end; gap: 16px; }
-.qb-challenge-picker { margin: 20px 0; }
+.qb-leaderboard-filters { display: flex; flex-wrap: wrap; align-items: end; gap: 16px; }
+.qb-challenge-picker { display: grid; gap: 12px; padding: 4px 8px 8px; }
+.qb-challenge-picker .button { min-height: 44px; padding: 6px 10px; font-size: calc(16px * var(--reading-scale, 1)); }
+.qb-challenge-picker .inline-choice-options > button { min-height: 44px; }
 .qb-challenge-picker label, .qb-leaderboard-filters label { display: grid; gap: 7px; font-size: 17px; font-weight: 700; min-width: 0; }
 .qb-challenge-picker select, .qb-leaderboard-filters select { max-width: 100%; min-height: 48px; padding: 10px 14px; border: 1.5px solid var(--line); border-radius: 12px; background: var(--paper); color: var(--ink); font: inherit; }
 .qb-topic-section { margin: 30px 0; }
@@ -196,13 +180,11 @@ html[data-reading-theme="dark"] .qb-feedback.bad .qb-feedback-head { color: oklc
 .qb-wrong-explain { margin: 6px 0 0; color: var(--muted); font-size: calc(17px * var(--reading-scale, 1)); line-height: 1.8; white-space: pre-line; }
 
 @media (max-width: 720px) {
-  .qb-hero { flex-direction: column; align-items: flex-start; }
-  .qb-hero-deco { display: none; }
   .qb-stem { font-size: 22px; }
   .qb-board, .qb-leaderboard { padding: 20px 18px; }
   .qb-areas { grid-template-columns: minmax(0, 1fr); }
   .qb-options { grid-template-columns: minmax(0, 1fr); }
-  .qb-challenge-picker > *, .qb-leaderboard-filters label { width: 100%; }
+  .qb-leaderboard-filters label { width: 100%; }
   .qb-area-actions, .qb-result-actions { flex-wrap: wrap; }
   .qb-rank-list li { flex-wrap: wrap; padding: 12px; }
   .qb-rank-list time { width: 100%; margin-left: 50px; }

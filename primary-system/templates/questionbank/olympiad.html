@@ -1,16 +1,35 @@
 {% extends 'base.html' %}{% load static %}{% block title %}奥数挑战 · 乐学堂{% endblock %}
-{% block content %}<link rel="stylesheet" href="{% static 'questionbank/bank.css' %}?v=6">
-<script src="{% static 'questionbank/olympiad.js' %}?v=2" defer></script>
-<header class="qb-hero">
-  <div class="qb-hero-copy">
-    <p class="eyebrow">数学 · 思维挑战</p>
+{% block content %}
+<link rel="stylesheet" href="{% static 'study_topics/reading.css' %}?v=37b1aaceb767">
+<link rel="stylesheet" href="{% static 'questionbank/bank.css' %}?v=f648a5af1278">
+<script src="{% static 'questionbank/olympiad.js' %}?v=51893bd66def" defer></script>
+<div class="qb-practice-page">
+  <header class="study-reading-hero">
     <h1>奥数挑战</h1>
-    <p class="qb-hero-tag">{{ hero_tag }}</p>
+    <p>{{ hero_tag }}</p>
     <p class="qb-hero-stats"><span><b>{{ total }}</b> 道题</span><span>已答 <b>{{ summary.answered }}</b> 题</span><span>答对 <b>{{ summary.correct }}</b> 题</span>{% if summary.selfchecked %}<span>已自评 <b>{{ summary.selfchecked }}</b> 题</span>{% endif %}</p>
-  </div>
-  <div class="qb-hero-deco" aria-hidden="true"><span>🧠</span><span>⚡</span><span>🎯</span><span>?</span></div>
-</header>
+  </header>
 
+<div class="study-reading-layout" data-sidebar-layout=".qb-side" data-sidebar-width="280px" data-sidebar-label="奥数侧栏" data-sidebar-collapse-key="primary_sidebar_collapsed_v1:olympiad-home">
+  <aside class="qb-side study-reading-sidebar" aria-label="挑战设置和专题导航">
+    <details class="study-reading-group" open>
+      <summary>挑战设置</summary>
+      <form class="qb-challenge-picker" action="{{ practice_url }}" method="get">
+      <label>专攻题型<select name="tag"><option value="">全部题型 · 混合挑战</option>{% for item in tags %}<option value="{{ item.tag }}">{{ item.tag }} · {{ item.count }} 题</option>{% endfor %}</select></label>
+      <div class="inline-choice" data-inline-choice><label>每组题数<select name="count"><option value="5">5 题</option><option value="10" selected>10 题</option><option value="20">20 题</option></select></label></div>
+      <button class="button" type="submit">开始挑战 →</button>
+      </form>
+    </details>
+    <details class="study-reading-group">
+      <summary>相关专题</summary>
+      <nav class="study-reading-links" aria-label="专题导航">
+        <a href="{{ wrong_url }}">奥数错题本 <span aria-hidden="true">↗</span></a>
+        <a href="#qb-leaderboard-title">本机挑战榜 <span aria-hidden="true">↓</span></a>
+        <a href="{% url 'questionbank' %}">挑战题库 <span aria-hidden="true">↗</span></a>
+      </nav>
+    </details>
+  </aside>
+  <div class="qb-practice-main study-reading-main">
 {% if wrong_count %}
 <a class="qb-wrong-strip" href="{{ wrong_url }}">
   <span class="qb-wrong-emoji" aria-hidden="true">📕</span>
@@ -18,25 +37,6 @@
   <span class="qb-wrong-go">去重练 →</span>
 </a>
 {% endif %}
-
-<section class="qb-areas">
-  <article class="qb-area color-math">
-    <header class="qb-area-head">
-      <img src="{% static 'icons/quiz.svg' %}" alt="" width="52" height="52">
-      <div><h2>开始挑战</h2><p class="qb-area-count">{{ total }} 道题</p></div>
-    </header>
-    <p class="qb-area-intro">选一个薄弱题型专门练，或者来一组混合挑战。先自己想，卡住再看一步提示，答完可对照完整解析。</p>
-    <form class="qb-challenge-picker" action="{{ practice_url }}" method="get">
-      <label>专攻题型<select name="tag"><option value="">全部题型 · 混合挑战</option>{% for item in tags %}<option value="{{ item.tag }}">{{ item.tag }} · {{ item.count }} 题</option>{% endfor %}</select></label>
-      <div class="inline-choice" data-inline-choice><label>每组题数<select name="count"><option value="5">5 题 · 热热身</option><option value="10" selected>10 题 · 小挑战</option><option value="20">20 题 · 大挑战</option></select></label></div>
-      <button class="button" type="submit">开始挑战 →</button>
-    </form>
-    <div class="qb-area-actions">
-      <a class="button small ghost" href="{{ wrong_url }}">奥数错题本</a>
-      <a class="button small ghost" href="#qb-leaderboard-title">看看挑战榜 ↓</a>
-    </div>
-  </article>
-</section>
 
 {% if tags %}
 <section class="qb-topic-section" aria-labelledby="qb-topics-title">
@@ -52,4 +52,7 @@
 
 {% include 'questionbank/_leaderboard.html' %}
 <p class="qb-note">一组题不重复抽取；题目不足所选数量时，按实际题数练习和入榜。答错的题会进错题本，重练答对后自动移出。</p>
+  </div>
+</div>
+</div>
 {% endblock %}

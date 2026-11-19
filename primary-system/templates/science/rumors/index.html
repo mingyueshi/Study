@@ -2,20 +2,57 @@
 {% load static %}
 {% block title %}科学流言粉碎机 · 乐学堂{% endblock %}
 {% block station %}
-<a class="rumor-back" href="{% url 'home' %}?area=science#modules-title">← 学习广场 · 科学</a>
+{% include 'study_topics/tool_layout_css.html' %}
+<div class="topic-tool-page">
 <header class="rumor-hero">
   <div class="rumor-hero-copy">
     <p class="rumor-kicker">科学查证站</p>
     <h1>科学流言<span>粉碎机</span></h1>
     <p class="rumor-lead">听到一句很肯定的话，先问一句「证据在哪儿？」选一条身边的说法，看看证据能帮你判断到哪一步。</p>
-    <div class="rumor-actions">
-      <a class="rumor-button" href="#rumor-cases">挑一项查证任务 <span aria-hidden="true">↓</span></a>
-      <a class="rumor-button rumor-button-light" href="{% url 'science-rumors-training' %}">五题判断训练 →</a>
-    </div>
   </div>
   <img class="rumor-machine" src="{% static 'science/rumor-machine.svg' %}" width="550" height="370" alt="">
 </header>
 
+<div class="study-reading-layout" data-sidebar-layout=".rumor-index-side" data-sidebar-width="290px" data-sidebar-label="查证侧栏">
+  <aside class="rumor-index-side study-reading-sidebar" aria-label="任务筛选与专题导航">
+    <details class="study-reading-group" open>
+      <summary>搜索和学习状态</summary>
+  <form class="rumor-search topic-tool-form" method="get" action="{% url 'science-rumors' %}#rumor-cases" role="search">
+    {% if category %}<input type="hidden" name="category" value="{{ category }}">{% endif %}
+    <input type="hidden" name="view" value="{{ progress_filter }}" data-progress-query>
+    <label for="rumor-query">找一句听过的说法</label>
+    <input id="rumor-query" name="q" type="search" value="{{ query }}" placeholder="试试「企鹅」「水」「月亮」" maxlength="100">
+    <button class="rumor-button" type="submit">找一找</button>
+    {% if query or category %}<a href="{% url 'science-rumors' %}#rumor-cases">显示全部任务</a>{% endif %}
+  </form>
+  <div class="rumor-progress-filters" data-progress-filters data-view="{{ progress_filter }}" role="group" aria-label="按本机学习记录筛选" hidden>
+    <button type="button" data-progress-filter="all" aria-pressed="true">全部</button>
+    <button type="button" data-progress-filter="unseen" aria-pressed="false">还没查证</button>
+    <button type="button" data-progress-filter="review" aria-pressed="false">待巩固</button>
+    <button type="button" data-progress-filter="saved" aria-pressed="false">我的收藏</button>
+  </div>
+
+    </details>
+    <details class="study-reading-group" open>
+      <summary>任务主题</summary>
+  <nav class="rumor-categories study-reading-links" aria-label="按主题找任务">
+    <a href="?q={{ query|urlencode }}&amp;view={{ progress_filter }}#rumor-cases" {% if not category %}aria-current="true"{% endif %}>全部任务</a>
+    {% for label in categories %}
+    <a href="?category={{ label|urlencode }}&amp;q={{ query|urlencode }}&amp;view={{ progress_filter }}#rumor-cases" {% if category == label %}aria-current="true"{% endif %}>{{ label }}</a>
+    {% endfor %}
+  </nav>
+
+    </details>
+    <details class="study-reading-group">
+      <summary>相关专题</summary>
+      <nav class="study-reading-links" aria-label="查证导航">
+        <a href="#rumor-cases">查看任务 ↓</a>
+        <a href="{% url 'science-rumors-training' %}">五题判断训练 ↗</a>
+        <a href="{% url 'home' %}?area=science#modules-title">学习广场 · 科学 ↗</a>
+      </nav>
+    </details>
+  </aside>
+  <div class="study-reading-main">
 <ol class="rumor-workflow" aria-label="查证三步">
   <li><span aria-hidden="true">01</span><div><strong>听说法</strong><small>圈出「所有」「一定」这样的词</small></div></li>
   <li><span aria-hidden="true">02</span><div><strong>翻证据</strong><small>看看观察和实验告诉了我们什么</small></div></li>
@@ -48,26 +85,6 @@
       <progress id="rumor-progress-bar" value="0" max="{{ total_count }}"></progress>
     </div>
   </header>
-  <nav class="rumor-categories" aria-label="按主题找任务">
-    <a href="?q={{ query|urlencode }}&amp;view={{ progress_filter }}#rumor-cases" {% if not category %}aria-current="page"{% endif %}>全部任务</a>
-    {% for label in categories %}
-    <a href="?category={{ label|urlencode }}&amp;q={{ query|urlencode }}&amp;view={{ progress_filter }}#rumor-cases" {% if category == label %}aria-current="page"{% endif %}>{{ label }}</a>
-    {% endfor %}
-  </nav>
-  <form class="rumor-search" method="get" action="{% url 'science-rumors' %}#rumor-cases" role="search">
-    {% if category %}<input type="hidden" name="category" value="{{ category }}">{% endif %}
-    <input type="hidden" name="view" value="{{ progress_filter }}" data-progress-query>
-    <label for="rumor-query">找一句听过的说法</label>
-    <input id="rumor-query" name="q" type="search" value="{{ query }}" placeholder="试试「企鹅」「水」「月亮」" maxlength="100">
-    <button class="rumor-button" type="submit">找一找</button>
-    {% if query or category %}<a href="{% url 'science-rumors' %}#rumor-cases">显示全部任务</a>{% endif %}
-  </form>
-  <div class="rumor-progress-filters" data-progress-filters data-view="{{ progress_filter }}" role="group" aria-label="按本机学习记录筛选" hidden>
-    <button type="button" data-progress-filter="all" aria-pressed="true">全部</button>
-    <button type="button" data-progress-filter="unseen" aria-pressed="false">还没查证</button>
-    <button type="button" data-progress-filter="review" aria-pressed="false">待巩固</button>
-    <button type="button" data-progress-filter="saved" aria-pressed="false">我的收藏</button>
-  </div>
   <p class="rumor-results" data-server-results>{% if category %}{{ category }} · {% endif %}主题与关键词匹配 {{ cases|length }} 项任务{% if query %} · 关键词「{{ query }}」{% endif %}</p>
   <p class="rumor-results" data-local-results role="status" hidden></p>
   <ul class="rumor-cards">
@@ -105,6 +122,9 @@
   </div>
   <details class="rumor-sources"><summary>查证方法的参考资料 · 需联网</summary><ul>{% for source in toolkit_sources %}<li><a href="{{ source.url }}" target="_blank" rel="noopener noreferrer">{{ source.label }} ↗</a></li>{% endfor %}</ul></details>
 </section>
+  </div>
+</div>
+</div>
 {{ all_slugs|json_script:'rumor-all-slugs' }}
 {{ directory_data|json_script:'rumor-directory-data' }}
 {% endblock %}

@@ -2,17 +2,13 @@
 {% load static %}
 {% block title %}修辞手法馆 · 乐学堂{% endblock %}
 {% block content %}
+{% include 'study_topics/tool_layout_css.html' %}
 <link rel="stylesheet" href="{% static 'study_topics/rhetoric.css' %}?v=1">
-<div class="rhetoric-gallery" data-rhetoric-gallery>
-  <a class="rhetoric-back" href="{% url 'home' %}?area=chinese#modules-title">← 学习广场 · 语文</a>
+<div class="rhetoric-gallery topic-tool-page" data-rhetoric-gallery>
   <header class="rhetoric-hero">
     <div>
       <h1>修辞手法馆</h1>
       <p>{{ course.intro }}</p>
-      <nav class="rhetoric-actions" aria-label="馆内导航">
-        <a class="rhetoric-primary" href="#techniques">认识 {{ course.techniques|length }} 种手法</a>
-        <a href="#cases">做例句辨析 ↓</a>
-      </nav>
     </div>
     <figure class="rhetoric-hero-example">
       <figcaption>同一片荷叶，两种写法</figcaption>
@@ -21,11 +17,33 @@
     </figure>
   </header>
 
+<div class="study-reading-layout" data-sidebar-layout=".rhetoric-side" data-sidebar-width="280px" data-sidebar-label="修辞侧栏">
+    <aside class="rhetoric-side study-reading-sidebar" aria-label="修辞侧栏">
+      <details class="study-reading-group" open>
+        <summary>手法速查</summary>
+        <nav class="study-reading-links" aria-label="手法速查">
+          {% for technique in course.techniques %}<a href="#technique-{{ technique.id }}">{{ technique.name }}</a>{% endfor %}
+        </nav>
+      </details>
+      <details class="study-reading-group" open>
+        <summary>例句辨析</summary>
+        <nav class="study-reading-links" aria-label="按手法筛选辨析">
+          <a href="{% url 'rhetoric-gallery' %}#cases"{% if not selected %} aria-current="location"{% endif %}>全部</a>
+          {% for technique in course.techniques %}<a href="?technique={{ technique.id }}#cases"{% if selected.id == technique.id %} aria-current="location"{% endif %} aria-label="只看{{ technique.name }}相关辨析">{{ technique.name }}</a>{% endfor %}
+        </nav>
+      </details>
+      <details class="study-reading-group">
+        <summary>相关专题</summary>
+        <nav class="study-reading-links" aria-label="关联专题">
+          <a href="{% url 'writing' %}">去作文坊试着用一用 →</a>
+          <a href="{% url 'literature-study' %}">文学常识 →</a>
+          <a href="{% url 'home' %}?area=chinese#modules-title">学习广场 · 语文 ↗</a>
+        </nav>
+      </details>
+    </aside>
+<div class="study-reading-main">
   <section id="techniques" class="rhetoric-section" aria-labelledby="rhetoric-techniques-title">
     <h2 id="rhetoric-techniques-title">认识常见手法</h2>
-    <nav class="rhetoric-chips" aria-label="手法速查">
-      {% for technique in course.techniques %}<a href="#technique-{{ technique.id }}">{{ technique.name }}</a>{% endfor %}
-    </nav>
     <div class="rhetoric-techniques">
       {% for technique in course.techniques %}
       <article class="rhetoric-card rhetoric-technique" id="technique-{{ technique.id }}">
@@ -49,10 +67,6 @@
   <section id="cases" class="rhetoric-section" aria-labelledby="rhetoric-cases-title">
     <h2 id="rhetoric-cases-title">例句辨析</h2>
     <p class="rhetoric-case-intro">先读完整句子和语境，再找依据。一句话也可能同时用几种手法。</p>
-    <nav class="rhetoric-chips" aria-label="按手法筛选辨析">
-      <a href="{% url 'rhetoric-gallery' %}#cases"{% if not selected %} aria-current="location"{% endif %}>全部</a>
-      {% for technique in course.techniques %}<a href="?technique={{ technique.id }}#cases"{% if selected.id == technique.id %} aria-current="location"{% endif %} aria-label="只看{{ technique.name }}相关辨析">{{ technique.name }}</a>{% endfor %}
-    </nav>
     <p class="rhetoric-count" data-case-count>{% if selected %}{{ selected.name }}相关辨析 · {% endif %}{{ cases|length }} 组</p>
     <div class="rhetoric-cases">
       {% for case in cases %}
@@ -82,16 +96,15 @@
   </section>
 
   <footer class="rhetoric-footer">
-    <nav class="rhetoric-actions" aria-label="关联专题">
-      <a href="{% url 'writing' %}">去作文坊试着用一用 →</a>
-      <a href="{% url 'literature-study' %}">文学常识 →</a>
-    </nav>
     <details>
       <summary>学习依据与资料出处（原文需联网）</summary>
       <p>手法范围参照义务教育语文课程标准，馆内例句和辨析题为教学自编。</p>
       <ul>{% for source in course.sources %}<li><a href="{{ source.url }}" target="_blank" rel="noopener noreferrer">{{ source.label }} ↗</a></li>{% endfor %}</ul>
     </details>
   </footer>
+</div>
+</div>
+
 </div>
 <script src="{% static 'study_topics/rhetoric.js' %}?v=1" defer></script>
 {% endblock %}

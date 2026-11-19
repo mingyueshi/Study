@@ -2,7 +2,8 @@
 {% load static %}
 {% block title %}二十四节气馆 · 乐学堂{% endblock %}
 {% block content %}
-<link rel="stylesheet" href="{% static 'study_topics/solar-terms.css' %}?v=20261117b1">
+{% include 'study_topics/tool_layout_css.html' %}
+<link rel="stylesheet" href="{% static 'study_topics/solar-terms.css' %}?v=2dc3ba572df8">
 <script src="{% static 'speech.js' %}" defer></script>
 <script src="{% static 'study_topics/astro/vendor/astronomy-engine/astronomy.browser.min.js' %}?v=2.1.19" defer></script>
 <script src="{% static 'study_topics/solar-calendar.js' %}?v=20261117b1" defer></script>
@@ -12,10 +13,7 @@
 {{ challenges|json_script:'solar-challenges' }}
 {{ experience|json_script:'solar-experience' }}
 {{ term_experience|json_script:'solar-term-experience' }}
-<div class="solar-hall" id="solar-top">
-  <nav class="solar-breadcrumbs" aria-label="专题路径">
-    <a href="{% url 'home' %}?area=geography#modules-title">← 学习广场 · 地理</a>
-  </nav>
+<div class="solar-hall topic-tool-page" id="solar-top">
 
   <header class="solar-hero">
     <div class="solar-intro">
@@ -26,6 +24,56 @@
     <img class="solar-landscape" src="{% static 'study_topics/solar-landscape.svg' %}" width="620" height="284" alt="">
   </header>
 
+<div class="study-reading-layout" data-sidebar-layout=".solar-side" data-sidebar-width="280px" data-sidebar-label="节气侧栏">
+    <aside class="solar-side study-reading-sidebar" aria-label="节气侧栏">
+      <details class="study-reading-group" open>
+        <summary>节气筛选与活动</summary>
+        <section class="solar-interactive topic-tool-form" aria-label="游馆工具" hidden>
+          <div class="solar-actions">
+            <button type="button" data-action="notebook">家乡四季日记 <span id="solar-note-count">0 条 · 0 / 24 节气</span></button>
+            <button type="button" data-action="challenge" class="solar-primary">节气小挑战 →</button>
+          </div>
+          <div class="solar-sidebar-filters">
+            <label class="solar-search">找节气、物候或诗句<input id="solar-search" type="search" maxlength="80" placeholder="试试燕子、麦子、雪……" autocomplete="off"></label>
+            <div class="solar-filters" role="group" aria-label="按季节筛选">
+              <button type="button" data-season="all" aria-pressed="true">全部</button>
+              {% for season in seasons %}<button type="button" data-season="{{ season.id }}" aria-pressed="false">{{ season.name }}季</button>{% endfor %}
+            </div>
+            <button type="button" data-action="reset">清除筛选</button>
+            <a href="#solar-filter-status">查看节气卡 ↓</a>
+          </div>
+        </section>
+
+      </details>
+      <details class="study-reading-group" open>
+        <summary>四季目录</summary>
+        <nav class="solar-index" aria-label="按四季查找节气">
+          {% for season in seasons %}
+          <details class="solar-season-nav">
+            <summary>{{ season.name }}季</summary>
+            <a class="solar-index-title" href="#{{ season.id }}" aria-label="跳到{{ season.name }}季">
+            查看{{ season.name }}季 ↓
+            </a>
+            <ul>
+            {% for term in season.terms %}<li><a href="#{{ term.id }}">{{ term.name }}</a></li>{% endfor %}
+          </ul>
+        </details>
+        {% endfor %}
+      </nav>
+
+    </details>
+    <details class="study-reading-group">
+      <summary>跨学科联读</summary>
+      <nav class="study-reading-links" aria-label="跨学科联读">
+        <a href="{% url 'geography-study' %}#lesson-gu4-3">四季怎样形成？ <span aria-hidden="true">↗</span></a>
+        <a href="{% url 'geography-study' %}#lesson-gu4-1">天气和气候怎么分？ <span aria-hidden="true">↗</span></a>
+        <a href="{% url 'literature-study' %}#lesson-lu6-5">认识二十四节气 <span aria-hidden="true">↗</span></a>
+        {% if poetry_ready %}<a href="{% url 'poetry-seasons' %}">诗词四季 <span aria-hidden="true">↗</span></a>{% endif %}
+        <a href="{% url 'home' %}?area=geography#modules-title">学习广场 · 地理 ↗</a>
+      </nav>
+    </details>
+    </aside>
+<div class="study-reading-main">
   <section class="solar-live solar-interactive" id="solar-current-panel" aria-labelledby="solar-current-title" hidden>
     <div><p class="solar-live-date" id="solar-current-date"></p><h2 id="solar-current-title">今天在 <strong id="solar-current-name">计算节气中……</strong></h2><p id="solar-current-range"></p></div>
     <div class="solar-countdown"><p>距离下个节气 <b id="solar-next-name">—</b></p><output id="solar-countdown">—</output></div>
@@ -33,46 +81,11 @@
     <p class="solar-note">{{ experience.calendar.note }} <a href="{{ experience.calendar.source }}" target="_blank" rel="noopener noreferrer">节气与黄经 · 需联网 ↗</a></p>
   </section>
 
-  <section class="solar-tools solar-interactive" aria-label="游馆工具" hidden>
-    <div class="solar-tool-heading">
-      <div><h2>带着好奇，逛一圈四季</h2><p>找一找节气，留下一页观察，再来试试小挑战。</p></div>
-      <div class="solar-actions">
-        <button type="button" data-action="notebook">家乡四季日记 <span id="solar-note-count">0 条 · 0 / 24 节气</span></button>
-        <button type="button" data-action="challenge" class="solar-primary">节气小挑战 →</button>
-      </div>
-    </div>
-    <div class="solar-filter-row">
-      <label class="solar-search">找节气、物候或诗句<input id="solar-search" type="search" maxlength="80" placeholder="试试燕子、麦子、雪……" autocomplete="off"></label>
-      <div class="solar-filters" role="group" aria-label="按季节筛选">
-        <button type="button" data-season="all" aria-pressed="true">全部</button>
-        {% for season in seasons %}<button type="button" data-season="{{ season.id }}" aria-pressed="false">{{ season.name }}季</button>{% endfor %}
-      </div>
-      <button type="button" data-action="reset">清除筛选</button>
-    </div>
-    <p id="solar-filter-status" role="status">共 24 张节气卡</p>
-    <p id="solar-status" role="status"></p>
-  </section>
-  <nav class="solar-index" aria-label="按四季查找节气">
-    {% for season in seasons %}
-    <div class="solar-index-season solar-{{ season.id }}">
-      <a class="solar-index-title" href="#{{ season.id }}" aria-label="跳到{{ season.name }}季">
-        <b>{{ season.name }}</b><span>{{ season.terms.0.name }}至{{ season.terms.5.name }} <span aria-hidden="true">↓</span></span>
-      </a>
-      <ul>
-        {% for term in season.terms %}<li><a href="#{{ term.id }}">{{ term.name }}</a></li>{% endfor %}
-      </ul>
-    </div>
-    {% endfor %}
-  </nav>
 
-  <nav class="solar-links" aria-label="跨学科联读">
-    <a href="{% url 'geography-study' %}#lesson-gu4-3"><span>地理小课堂</span> 四季怎样形成？ <span aria-hidden="true">↗</span></a>
-    <a href="{% url 'geography-study' %}#lesson-gu4-1"><span>地理小课堂</span> 天气和气候怎么分？ <span aria-hidden="true">↗</span></a>
-    <a href="{% url 'literature-study' %}#lesson-lu6-5"><span>文学常识</span> 认识二十四节气 <span aria-hidden="true">↗</span></a>
-    {% if poetry_ready %}<a href="{% url 'poetry-seasons' %}"><span>古诗词</span> 诗词四季 <span aria-hidden="true">↗</span></a>{% endif %}
-  </nav>
   <p class="solar-note">一候约五天，一个节气分三候。三候里有古人的观察，也有他们的想象。各地冷暖不同，家乡的花鸟和农事会有自己的时钟。</p>
   <p class="solar-learning-guide">每张卡都有「串起来学」：先带着问题看天气、读文学、寻诗景，再回到这张卡记下自己的发现。</p>
+    <p id="solar-filter-status" role="status" tabindex="-1">共 24 张节气卡</p>
+    <p id="solar-status" role="status"></p>
   <p class="solar-empty" id="solar-empty" hidden>暂时没有找到，试试换个词，或点「清除筛选」。</p>
 
   {% for season in seasons %}
@@ -213,5 +226,8 @@
       {% for source in sources %}<li><a href="{{ source.url }}" target="_blank" rel="noopener noreferrer">{{ source.label }} <span aria-hidden="true">↗</span></a></li>{% endfor %}
     </ul>
   </footer>
+</div>
+</div>
+
 </div>
 {% endblock %}

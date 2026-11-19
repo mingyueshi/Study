@@ -1,21 +1,30 @@
 {% extends 'idioms/layout.html' %}{% load static %}{% block title %}看释义猜成语 · 乐学堂{% endblock %}
-{% block idiom_crumb %}<span aria-current="page">看释义猜成语</span>{% endblock %}
-{% block idiom_content %}<link rel="stylesheet" href="{% static 'idioms/quiz.css' %}"><script src="{% static 'idioms/quiz.js' %}?v=2" defer></script>
-<header class="quiz-hero">
-  <div class="quiz-hero-copy">
-    <p class="eyebrow">语文 · 猜成语</p>
+{% block idiom_crumb %}{% endblock %}
+{% block idiom_content %}<link rel="stylesheet" href="{% static 'study_topics/reading.css' %}?v=37b1aaceb767"><link rel="stylesheet" href="{% static 'idioms/quiz.css' %}?v=2"><script src="{% static 'idioms/quiz.js' %}?v=2" defer></script>
+<div class="idiom-quiz-page">
+  <header class="study-reading-hero">
     <h1>看释义猜成语</h1>
-    <p class="quiz-hero-tag">读释义，把缺的字补出来。提示越多越简单，挑战模式一个字都不给。</p>
-    <p class="quiz-hero-stats"><span><b>{{ level_chips|length }}</b> 难度</span><span><b>{{ source_chips|length }}</b> 题库</span></p>
-  </div>
-  <div class="quiz-hero-demo" aria-hidden="true">
-    <span class="qhd qhd-fill">礼</span><span class="qhd qhd-fill">相</span><span class="qhd qhd-blank"></span><span class="qhd qhd-blank"></span>
-  </div>
-</header>
-<div class="quiz-toolbar">
-  <div class="quiz-chips"><span class="quiz-label">难度</span>{% for chip in level_chips %}<a class="chip{% if chip.0 == level %} on{% endif %}" href="?level={{ chip.0 }}&amp;source={{ source }}">{{ chip.1 }}</a>{% endfor %}</div>
-  <div class="quiz-chips"><span class="quiz-label">题库</span>{% for chip in source_chips %}<a class="chip{% if chip.on %} on{% endif %}" href="?level={{ level }}&amp;source={{ chip.value }}">{{ chip.label }}<i>{{ chip.size }}</i></a>{% endfor %}</div>
-</div>
+    <p>读释义，把缺的字补出来。</p>
+  </header>
+  <div class="study-reading-layout" data-sidebar-layout=".idiom-quiz-side" data-sidebar-width="280px" data-sidebar-label="成语练习侧栏">
+    <aside class="idiom-quiz-side study-reading-sidebar" aria-label="选题设置和专题导航">
+      <details class="study-reading-group" open>
+        <summary>难度</summary>
+        <nav class="study-reading-links" aria-label="难度">{% for chip in level_chips %}<a href="?level={{ chip.0 }}&amp;source={{ source }}"{% if chip.0 == level %} aria-current="true"{% endif %}>{{ chip.1 }}</a>{% endfor %}</nav>
+      </details>
+      <details class="study-reading-group" open>
+        <summary>题库</summary>
+        <nav class="study-reading-links" aria-label="题库">{% for chip in source_chips %}<a href="?level={{ level }}&amp;source={{ chip.value }}"{% if chip.on %} aria-current="true"{% endif %}><span>{{ chip.label }}</span><small>{{ chip.size }} 题</small></a>{% endfor %}</nav>
+      </details>
+      <details class="study-reading-group">
+        <summary>相关专题</summary>
+        <nav class="study-reading-links" aria-label="专题导航">
+          <a href="{% url 'idiom-stories' %}">成语典故馆 <span aria-hidden="true">↗</span></a>
+          <a href="{% url 'idiom-emoji' %}">成语表情猜猜看 <span aria-hidden="true">↗</span></a>
+        </nav>
+      </details>
+    </aside>
+    <div class="study-reading-main">
 {% if round %}<section class="quiz-board" data-quiz-round data-report-url="{% url 'idiom-quiz-report' %}" data-token="{{ token }}">
   <p class="quiz-definition">{{ round.definition }}</p>
   <div class="quiz-slots">
@@ -44,4 +53,7 @@
 </section>
 {% else %}<p class="empty">成语题库暂时没有可用的题目。</p>{% endif %}
 <p class="quiz-note">成语与释义来自当前生效的成语记录；难度就是亮出的字数——亮 3 个只剩一个空，一个都不亮就是挑战模式。</p>
+    </div>
+  </div>
+</div>
 {% endblock %}

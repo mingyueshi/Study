@@ -2,18 +2,18 @@
 {% load static %}
 {% block title %}{% if work %}{{ work.name }} · {% endif %}{{ course.title }} · 乐学堂{% endblock %}
 {% block content %}
+{% include 'study_topics/tool_layout_css.html' %}
 {% static 'study_topics/great-works.svg' as diagrams %}
 <link rel="stylesheet" href="{% static 'study_topics/great-works.css' %}">
-<article class="works-page">
-  <nav class="works-path" aria-label="专题路径">
-    <a href="{% url 'home' %}?area=interdisciplinary#modules-title">← 学习广场 · 跨学科</a>
-    {% if work %}<a href="{% url 'great-works' %}">六项工程总览</a>{% else %}<a href="#compare">比较两项工程 ↓</a>{% endif %}
-  </nav>
+<article class="works-page topic-tool-page">
   {% if not work %}
   <header class="works-hero">
     <p class="works-kicker">工程观察手册　/　历史 · 地理 · 科学</p>
     <h1>{{ course.title }}</h1><p>{{ course.intro }}</p>
   </header>
+<div class="study-reading-layout" data-sidebar-layout=".works-side" data-sidebar-width="280px" data-sidebar-label="工程侧栏">
+  {% include 'study_topics/_works_sidebar.html' %}
+<div class="study-reading-main">
   <h2 id="directory">选择一处工程</h2>
   <div class="works-grid">
     {% for item in course.works %}<a class="works-card" href="{% url 'great-work-detail' item.id %}">
@@ -40,10 +40,15 @@
     </tbody></table>
     {% endif %}
   </section>
+  </div>
+  </div>
   {% else %}
   <header class="works-hero">
     <p class="works-kicker">伟大工程　/　工程档案</p><h1>{{ work.name }}</h1><p>{{ work.place }}　·　{{ work.period }}</p>
   </header>
+<div class="study-reading-layout" data-sidebar-layout=".works-side" data-sidebar-width="280px" data-sidebar-label="工程侧栏">
+  {% include 'study_topics/_works_sidebar.html' %}
+<div class="study-reading-main">
   <section aria-labelledby="design-question">
     <h2 id="design-question">{{ work.question }}</h2><p class="works-lead">{{ work.setting }}</p>
     <figure class="works-figure">
@@ -70,7 +75,8 @@
     <a href="{% url work.related.route %}{{ work.related.suffix }}">{{ work.related.label }} →</a>
     <details><summary>图文依据（外部资料需联网）</summary><ul>{% for source in work.sources %}<li><a href="{{ source.url }}" target="_blank" rel="noopener noreferrer">{{ source.label }} ↗</a></li>{% endfor %}</ul></details>
   </section>
-  <nav class="works-path" aria-label="工程切换"><a href="{% url 'great-works' %}#compare">回到工程对照台</a>{% for item in course.works %}<a href="{% url 'great-work-detail' item.id %}"{% if item.id == work.id %} aria-current="page"{% endif %}>{{ item.name }}</a>{% endfor %}</nav>
+  </div>
+  </div>
   {% endif %}
 </article>
 {% endblock %}

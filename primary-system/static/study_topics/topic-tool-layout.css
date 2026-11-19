@@ -1,0 +1,23 @@
+body:has(.topic-tool-page) { --page-width: 100%; }
+.topic-tool-page .study-reading-sidebar { --card: var(--white); }
+.topic-tool-page .study-reading-main { min-width: 0; }
+.topic-tool-page .study-reading-main > :first-child { margin-block-start: 0; }
+.topic-tool-page .study-reading-links a[aria-current] { font-weight: 750; }
+.topic-tool-page .topic-tool-form { display: grid; min-width: 0; padding: 4px 8px 8px; gap: 10px; }
+.topic-tool-page .topic-tool-form :is(input, select) { width: 100%; min-width: 0; }
+.topic-tool-page .topic-tool-form .inline-choice-options > button { min-height: 44px; }
+.topic-tool-page .topic-tool-form > a { min-height: 44px; align-content: center; text-decoration: underline; }
+@media screen and (min-width: 541px) {
+  .topic-tool-page { margin-inline-end: max(0px, calc(68px - var(--gutter))); }
+}
+
+.topic-tool-page .study-reading-sidebar [hidden] { display: none; }
+.topic-tool-page .study-reading-sidebar .rumor-categories { display: grid; margin: 0; }
+.topic-tool-page .rumor-search input { max-width: none; }
+.topic-tool-page .rumor-progress-filters { padding: 0 8px 8px; }
+.topic-tool-page .rumor-progress-filters button { padding-inline: 10px; }
+.topic-tool-page .mystery-library-tools { margin: 0; padding: 0 2px; border: 0; box-shadow: none; }
+.topic-tool-page .mystery-filter-form { grid-template-columns: minmax(0, 1fr); margin: 0; }
+.topic-tool-page .mystery-library-actions { padding-inline: 8px; }
+.topic-tool-page .mystery-library-summary { margin-bottom: 14px; }
+.topic-tool-page .mystery-jumps { display: grid; }

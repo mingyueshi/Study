@@ -173,7 +173,7 @@ function questionPractice(questions, correct, effects = true, settings = {}, sto
     },
     window: {
       ...(effects ? {StudyEffects: {celebrate: event => celebrations.push(event)}} : {}),
-      OlympiadChallenge: {record(round) { ranks.push(round); return {saved: true, rank: 1}; }, duration: value => `${Math.ceil(value / 1000)} 秒`},
+      OlympiadChallenge: {record(round) { ranks.push(round); return {saved: true, rank: 1}; }, showRound() {}, duration: value => `${Math.ceil(value / 1000)} 秒`},
       sessionStorage: storage ? {
         getItem: key => storage.get(key) || null,
         setItem: (key, value) => storage.set(key, value),

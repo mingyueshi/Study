@@ -1,0 +1,14 @@
+<aside class="station-side study-reading-sidebar" aria-label="学习路线与专题导航">
+  <details class="study-reading-group" open>
+    <summary>学习路线</summary>
+    <nav class="study-reading-links" aria-label="学习路线">
+      {% for station in course.stations %}<a href="#{{ station.id }}">{{ station.label }}</a>{% endfor %}
+    </nav>
+  </details>
+  <details class="study-reading-group">
+    <summary>相关专题</summary>
+    <nav class="study-reading-links" aria-label="专题导航">
+      <a href="{% url 'home' %}?area=interdisciplinary#modules-title">学习广场 · 跨学科 ↗</a>
+    </nav>
+  </details>
+</aside>

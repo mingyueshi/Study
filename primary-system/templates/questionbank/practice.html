@@ -1,10 +1,10 @@
 {% extends 'base.html' %}{% load static %}{% block title %}{{ eyebrow }} · 乐学堂{% endblock %}
 {% block content %}
 <link rel="stylesheet" href="{% static 'study_topics/reading.css' %}?v=37b1aaceb767">
-<link rel="stylesheet" href="{% static 'questionbank/bank.css' %}?v=42d7dcde7ff3">
+<link rel="stylesheet" href="{% static 'questionbank/bank.css' %}?v=f648a5af1278">
 <script src="{% static 'speech.js' %}" defer></script><script src="{% static 'tts.js' %}" defer></script>
-{% if track == 'olympiad' %}<script src="{% static 'questionbank/olympiad.js' %}?v=2" defer></script>{% endif %}
-<script src="{% static 'questionbank/practice.js' %}?v=9d07d1306895" defer></script>
+{% if track == 'olympiad' %}<script src="{% static 'questionbank/olympiad.js' %}?v=51893bd66def" defer></script>{% endif %}
+<script src="{% static 'questionbank/practice.js' %}?v=b59e65ab8800" defer></script>
 <div class="qb-practice-page">
 <header class="study-reading-hero">
   <h1>{% if mathbook_title %}{{ mathbook_title }}{% elif grammar_chapter %}{{ grammar_chapter.title }} · {% if mode_wrong %}错题重练{% else %}章节练习{% endif %}{% elif mode_wrong %}错题，再闯一遍{% else %}{{ area_label }}{% endif %}</h1>

@@ -113,5 +113,6 @@
   window.addEventListener('storage', event => { if (store.acceptsEvent(event.key)) render(); });
   restoreURL(); render();
   root.querySelector('[data-library-tools]').hidden = false;
+  root.querySelector('[data-library-summary]').hidden = false;
   root.querySelectorAll('[data-card-tools]').forEach(element => { element.hidden = false; });
 })();

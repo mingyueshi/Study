@@ -44,40 +44,15 @@ body:has(.solar-hall) { --page-width: 100%; }
 .solar-qiu { --season-ink: #883e2b; --season-soft: #fae7dc; --season-line: #e8c6b2; }
 .solar-dong { --season-ink: #2f5364; --season-soft: #e5eff0; --season-line: #c5d9dc; }
 
-.solar-index {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 12px;
-  margin-block: 16px 20px;
+.solar-index { padding: 0 8px; }
+.solar-season-nav > summary { min-height: 44px; align-content: center; cursor: pointer; }
+.solar-season-nav a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: underline; }
+.solar-season-nav ul {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px;
+  margin: 0; padding: 0; list-style: none;
 }
-.solar-index-season {
-  padding: 12px clamp(10px, 1.4vw, 26px);
-  border: 1px solid var(--season-line);
-  border-radius: 16px;
-  background: var(--season-soft);
-  color: var(--season-ink);
-}
-.solar-index-title { display: flex; flex-wrap: wrap; align-items: baseline; gap: 3px 12px; font-weight: 700; }
-.solar-index-title b { font: 800 2rem/1.25 var(--solar-serif); }
-.solar-index-title > span { font-size: .82rem; }
-.solar-index ul {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 4px;
-  margin: 10px 0 0;
-  padding: 0;
-  list-style: none;
-}
-.solar-index li a {
-  display: grid;
-  place-items: center;
-  min-height: 42px;
-  border-radius: 7px;
-  background: #fff9;
-  font-size: .92rem;
-  font-weight: 700;
-}
-.solar-index li a:hover { background: #fff; }
+.solar-sidebar-filters { display: grid; justify-items: start; gap: 8px; }
+.solar-sidebar-filters a { min-height: 44px; align-content: center; text-decoration: underline; }
 .solar-links, .solar-season-links, .solar-references ul { display: flex; flex-wrap: wrap; gap: 8px 14px; }
 .solar-links a {
   display: inline-block;
@@ -196,7 +171,6 @@ body:has(.solar-hall) { --page-width: 100%; }
 }
 @media (max-width: 750px) {
   .solar-hero { grid-template-columns: minmax(0, 1fr); gap: 16px; }
-  .solar-index { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .solar-cards { grid-template-columns: minmax(0, 1fr); }
 }
 @media (prefers-reduced-motion: reduce) {

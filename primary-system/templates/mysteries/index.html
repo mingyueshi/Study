@@ -3,8 +3,8 @@
 {% block title %}未解之谜研究所 · 乐学堂{% endblock %}
 {% block content %}
 <link rel="stylesheet" href="{% static 'mysteries/mysteries.css' %}">
-<div class="mysteries" data-mystery-library>
-  <a class="mystery-back" href="{% url 'home' %}?area=science#modules-title">← 学习广场 · 科学</a>
+{% include 'study_topics/tool_layout_css.html' %}
+<div class="mysteries topic-tool-page" data-mystery-library>
   <header class="mystery-banner mystery-directory-hero">
     <div>
       <p class="mystery-kicker">好奇心调查站</p>
@@ -19,17 +19,12 @@
     <img class="mystery-emblem" src="{% static 'icons/mysteries.svg' %}" alt="" width="180" height="180">
   </header>
 
-  <section class="mystery-section" aria-labelledby="case-list-heading">
-    <header class="mystery-section-heading">
-      <h2 id="case-list-heading">选择一份案卷</h2>
-      <p>{{ case_count }} 份案卷 · 小学四到六年级 · 每篇约 5–8 分钟</p>
-    </header>
+  <div class="study-reading-layout" data-sidebar-layout=".mystery-index-side" data-sidebar-width="300px" data-sidebar-label="案卷侧栏">
+    <aside class="mystery-index-side study-reading-sidebar" aria-label="案卷筛选与专题导航">
+      <details class="study-reading-group" open>
+        <summary>查找案卷</summary>
     <div class="mystery-library-tools" hidden data-library-tools>
-      <div class="mystery-library-topline">
-        <div><p class="mystery-kicker">今天想调查什么？</p><p data-library-progress></p></div>
-        <a class="mystery-tool-button" data-continue hidden>接着上次的案卷 →</a>
-      </div>
-      <form class="mystery-filter-form" role="search" aria-label="查找案卷">
+      <form class="mystery-filter-form topic-tool-form" role="search" aria-label="查找案卷">
         <label class="mystery-search-field">搜索线索
           <input type="search" name="q" placeholder="试试：外星人、海洋、文字……" maxlength="120" autocomplete="off">
         </label>
@@ -38,17 +33,41 @@
         <div class="inline-choice" data-inline-choice><label>我的调查<select name="status"><option value="">全部案卷</option><option value="saved">稍后读</option><option value="unread">还没读完</option><option value="completed">已读完</option><option value="notes">有我的笔记</option></select></label></div>
       </form>
       <div class="mystery-library-actions">
-        <p role="status" data-filter-count></p>
         <button class="mystery-tool-button" type="button" data-clear-filters>清除筛选</button>
         <button class="mystery-tool-button mystery-tool-primary" type="button" data-random-case>帮我抽一份</button>
       </div>
       <p class="mystery-local-notice" data-storage-notice>稍后读、阅读标记和笔记仅保存在当前浏览器。</p>
     </div>
-    <nav class="mystery-jumps" aria-label="案卷分类">
+      </details>
+      <details class="study-reading-group">
+        <summary>案卷分类</summary>
+    <nav class="mystery-jumps study-reading-links" aria-label="案卷分类">
       {% for category, cases in groups.items %}
       <a href="#case-group-{{ forloop.counter }}">{{ category }} · {{ cases|length }} 份 ↓</a>
       {% endfor %}
     </nav>
+      </details>
+      <details class="study-reading-group">
+        <summary>相关专题</summary>
+        <nav class="study-reading-links" aria-label="专题导航">
+          <a href="{% url 'home' %}?area=science#modules-title">学习广场 · 科学 ↗</a>
+          <a href="{% url 'science-rumors' %}">科学流言粉碎机 ↗</a>
+        </nav>
+      </details>
+    </aside>
+    <div class="study-reading-main">
+  <section class="mystery-section" aria-labelledby="case-list-heading">
+    <header class="mystery-section-heading">
+      <h2 id="case-list-heading">选择一份案卷</h2>
+      <p>{{ case_count }} 份案卷 · 小学四到六年级 · 每篇约 5–8 分钟</p>
+    </header>
+    <div class="mystery-library-summary" hidden data-library-summary>
+      <div class="mystery-library-topline">
+        <div><p class="mystery-kicker">今天想调查什么？</p><p data-library-progress></p></div>
+        <a class="mystery-tool-button" data-continue hidden>接着上次的案卷 →</a>
+      </div>
+        <p role="status" data-filter-count></p>
+    </div>
     {% for category, cases in groups.items %}
     <section class="mystery-section mystery-group" id="case-group-{{ forloop.counter }}" aria-labelledby="case-group-heading-{{ forloop.counter }}" data-case-group>
       <h3 id="case-group-heading-{{ forloop.counter }}">{{ category }}</h3>
@@ -80,6 +99,8 @@
       <button class="mystery-tool-button" type="button" data-clear-filters>查看全部案卷</button>
     </div>
   </section>
+    </div>
+  </div>
   <aside class="mystery-compare-tray" aria-label="案卷对照台" hidden data-compare-tray>
     <div><strong>案卷对照台</strong><p data-compare-selection></p></div>
     <div class="mystery-library-actions"><button class="mystery-tool-button mystery-tool-primary" type="button" data-open-compare disabled>并排看两份案卷</button><button class="mystery-tool-button" type="button" data-clear-compare>清空对照</button></div>
@@ -100,6 +121,6 @@
   </template>
   {{ directory_data|json_script:'mystery-directory-data' }}
   <script src="{% static 'mysteries/notebook-store.js' %}" defer></script>
-  <script src="{% static 'mysteries/library.js' %}" defer></script>
+  <script src="{% static 'mysteries/library.js' %}?v=2" defer></script>
 </div>
 {% endblock %}

@@ -1,15 +1,12 @@
 {% extends 'idioms/layout.html' %}{% load static %}{% block title %}成语表情猜猜看 · 乐学堂{% endblock %}
 {% block idiom_crumb %}{% endblock %}
-{% block idiom_content %}<link rel="stylesheet" href="{% static 'idioms/emoji.css' %}?v=4"><script src="{% static 'idioms/emoji.js' %}" defer></script>
+{% block idiom_content %}<link rel="stylesheet" href="{% static 'idioms/emoji.css' %}?v=5"><script src="{% static 'idioms/emoji.js' %}" defer></script>
 {{ state|json_script:'emoji-state' }}
 <header class="eq-hero">
   <div class="eq-hero-copy">
     <p class="eyebrow">语文 · 看表情猜一猜</p>
     <h1>成语表情猜猜看</h1>
     <p class="eq-hero-stats"><span><b>{{ state.total }}</b> 成语</span><span><b>4</b> 选 1</span><span><b>8</b> 题一轮</span></p>
-  </div>
-  <div class="eq-hero-demo" aria-hidden="true">
-    <span class="ehd">🐸</span><span class="ehd">🕳️</span><span class="ehd eq-hd-mascot">❓</span><span class="ehd">🎉</span>
   </div>
 </header>
 <div class="eq-layout">

@@ -1,13 +1,12 @@
 {% extends 'base.html' %}{% load static %}{% block title %}挑战题库 · 乐学堂{% endblock %}
-{% block content %}<link rel="stylesheet" href="{% static 'questionbank/bank.css' %}?v=4">
-<header class="qb-hero">
-  <div class="qb-hero-copy">
-    <p class="eyebrow">全科 · 练一练</p>
+{% block content %}
+<link rel="stylesheet" href="{% static 'study_topics/reading.css' %}?v=37b1aaceb767">
+<link rel="stylesheet" href="{% static 'questionbank/bank.css' %}?v=f648a5af1278">
+<div class="qb-practice-page">
+  <header class="study-reading-hero">
     <h1>挑战题库</h1>
     <p class="qb-hero-stats"><span><b>{{ total }}</b> 道题</span><span>已答 <b>{{ summary.answered }}</b> 题</span><span>答对 <b>{{ summary.correct }}</b> 题</span>{% if summary.selfchecked %}<span>已自评 <b>{{ summary.selfchecked }}</b> 题</span>{% endif %}</p>
-  </div>
-  <div class="qb-hero-deco" aria-hidden="true"><span>对</span><span>✓</span><span>✗</span><span>答</span></div>
-</header>
+  </header>
 
 {% if wrong_count %}
 <a class="qb-wrong-strip" href="{% url 'questionbank-wrong' %}">
@@ -42,4 +41,5 @@
 </section>
 
 <p class="qb-note">题目来自课本与探索册；判分在服务端完成，答错的题自动进错题本。</p>
+</div>
 {% endblock %}

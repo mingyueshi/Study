@@ -16,7 +16,7 @@ function leaderboard({scope = 'guest', storage = new Map(), blocked = false} = {
     localStorage: {getItem(key) { if (blocked) throw Error('blocked'); return storage.get(key); },
       setItem(key, value) { if (blocked) throw Error('blocked'); storage.set(key, value); }},
   });
-  return {get, record: window.OlympiadChallenge.record, duration: window.OlympiadChallenge.duration, storage};
+  return {get, ...window.OlympiadChallenge, storage};
 }
 const round = (id, extra = {}) => ({id, tag: '', total: 10, correct: 8, elapsedMs: 60000,
   hintsUsed: 0, mode: 'challenge', completedAt: '2026-11-17T02:00:00Z', ...extra});
@@ -64,4 +64,17 @@ test('corrupt or disabled browser storage and invalid records preserve normal pr
   assert.equal(blocked.record(round('cannot-save')).saved, false);
   assert.match(blocked.get('[data-qb-rank-status]').textContent, /仍可正常练习/);
   assert.equal(blocked.duration(61001), '1 分 2 秒');
+});
+
+test('short retry rounds can be viewed on the index and restored without saving again', () => {
+  const page = leaderboard();
+  const retry = round('retry', {total: 1, correct: 1, mode: 'wrong'});
+  page.record(retry);
+  const restored = leaderboard({storage: page.storage});
+  const size = restored.get('[data-qb-rank-size]');
+  assert.match(size.innerHTML, /value="1">1 题/);
+  restored.showRound(retry);
+  assert.equal(size.value, '1');
+  assert.match(restored.get('[data-qb-rank-list]').innerHTML, /答对 1／1 题/);
+  assert.deepEqual(entries(restored), [retry]);
 });

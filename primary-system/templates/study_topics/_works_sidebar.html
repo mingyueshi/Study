@@ -1,0 +1,16 @@
+<aside class="works-side study-reading-sidebar" aria-label="工程侧栏">
+  <details class="study-reading-group" open>
+    <summary>工程目录</summary>
+    <nav class="study-reading-links" aria-label="工程目录">
+      {% for item in course.works %}<a href="{% url 'great-work-detail' item.id %}"{% if item.id == work.id %} aria-current="page"{% endif %}>{{ item.name }}</a>{% endfor %}
+    </nav>
+  </details>
+  <details class="study-reading-group">
+    <summary>相关专题</summary>
+    <nav class="study-reading-links" aria-label="专题导航">
+      <a href="{% url 'great-works' %}">六项工程总览</a>
+      <a href="{% url 'great-works' %}#compare">工程对照</a>
+      <a href="{% url 'home' %}?area=interdisciplinary#modules-title">学习广场 · 跨学科 ↗</a>
+    </nav>
+  </details>
+</aside>

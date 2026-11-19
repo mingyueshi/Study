@@ -2,16 +2,16 @@
 {% load static %}
 {% block title %}{{ course.title }} · 乐学堂{% endblock %}
 {% block content %}
+{% include 'study_topics/tool_layout_css.html' %}
 <link rel="stylesheet" href="{% static 'study_topics/energy-environment.css' %}">
-<article class="energy-course" id="energy-top">
-  <a class="energy-link" href="{% url 'home' %}?area=interdisciplinary#modules-title">← 学习广场 · 跨学科</a>
+<article class="energy-course topic-tool-page" id="energy-top">
   <header class="energy-hero">
     <h1>{{ course.title }}</h1>
     <p>{{ course.intro }}</p>
-    <nav class="energy-index" aria-label="专题目录">
-      {% for station in course.stations %}<a href="#{{ station.id }}">{{ station.label }}</a>{% endfor %}
-    </nav>
   </header>
+<div class="study-reading-layout" data-sidebar-layout=".station-side" data-sidebar-width="280px" data-sidebar-label="学习路线侧栏">
+  {% include 'study_topics/_station_sidebar.html' %}
+<div class="study-reading-main">
   {% for station in course.stations %}
   <section class="energy-station" id="{{ station.id }}" aria-labelledby="{{ station.id }}-heading">
     <p class="energy-label">{{ station.label }}</p>
@@ -76,6 +76,8 @@
   </section>
   {% endfor %}
   <a class="energy-link" href="#energy-top">↑ 回到专题目录</a>
+  </div>
+  </div>
 </article>
 <script src="{% static 'study_topics/energy-turbine.js' %}" defer></script>
 <script src="{% static 'study_topics/energy-environment.js' %}" defer></script>

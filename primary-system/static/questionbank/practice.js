@@ -286,14 +286,18 @@
   const finish = (restoring = false) => {
     if (round.answers.length !== questions.length || (round.completed && !restoring)) return;
     const {correctCount, selfcheckRight} = tally();
+    const rankGroup = {
+      id: questions[0].attempt_id, tag: tag || '', total: questions.length,
+      mode: modeWrong === '1' ? 'wrong' : 'challenge',
+    };
     if (!round.completed) {
       round.completed = olympiad ? window.OlympiadChallenge.record({
-        id: questions[0].attempt_id, tag: tag || '', total: questions.length,
+        ...rankGroup,
         correct: correctCount, elapsedMs: elapsed(), hintsUsed: round.hints.filter(Boolean).length,
-        mode: modeWrong === '1' ? 'wrong' : 'challenge', completedAt: new Date().toISOString(),
+        completedAt: new Date().toISOString(),
       }) : {};
       saveRound();
-    }
+    } else if (olympiad) window.OlympiadChallenge.showRound(rankGroup);
     questionBox.hidden = true;
     feedback.hidden = true;
     const scores = [];

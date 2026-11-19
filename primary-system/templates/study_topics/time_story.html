@@ -2,14 +2,16 @@
 {% load static %}
 {% block title %}{{ course.title }} · 乐学堂{% endblock %}
 {% block content %}
+{% include 'study_topics/tool_layout_css.html' %}
 <link rel="stylesheet" href="{% static 'study_topics/time-story.css' %}">
-<article class="time-story" id="time-top">
-  <a class="time-back" href="{% url 'home' %}?area=interdisciplinary#modules-title">← 学习广场 · 跨学科</a>
+<article class="time-story topic-tool-page" id="time-top">
   <header class="time-hero">
     <div><p class="time-kicker">跨学科手记　/　天文 × 地理 × 历史 × 数学</p><h1>{{ course.title }}</h1><p>{{ course.intro }}</p></div>
     <img src="{% static 'icons/time-story.svg' %}" width="136" height="136" alt="">
   </header>
-  <nav class="time-index" aria-label="五站学习路线">{% for station in course.stations %}<a href="#{{ station.id }}"><span>0{{ forloop.counter }}</span> {{ station.label }}</a>{% endfor %}</nav>
+<div class="study-reading-layout" data-sidebar-layout=".station-side" data-sidebar-width="280px" data-sidebar-label="学习路线侧栏">
+  {% include 'study_topics/_station_sidebar.html' %}
+<div class="study-reading-main">
   {% for station in course.stations %}
   <section class="time-station" id="{{ station.id }}" aria-labelledby="{{ station.id }}-title">
     <p class="time-kicker">第 {{ forloop.counter }} 站　/　{{ station.label }}</p>
@@ -41,6 +43,8 @@
   </section>
   {% endfor %}
   <a class="time-back" href="#time-top">↑ 回到五站路线</a>
+  </div>
+  </div>
 </article>
 <script src="{% static 'study_topics/time-story.js' %}" defer></script>
 {% endblock %}

@@ -23,11 +23,6 @@
 .eq-hero-stats { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; }
 .eq-hero-stats span { display: inline-flex; align-items: center; gap: 5px; padding: 5px 12px; border-radius: 999px; background: #fff; border: 1px solid #d6e5c6; font-size: 14px; color: #4a5550; }
 .eq-hero-stats b { color: var(--green, #22634c); font-weight: 800; }
-.eq-hero-demo { display: flex; gap: 10px; }
-.ehd { display: grid; place-items: center; width: 64px; height: 64px; border-radius: 16px; font-size: 34px; background: #fff; border: 1px solid #e3ecda; box-shadow: 0 4px 0 #e3ecda; }
-.ehd.eq-hd-mascot { background: var(--green, #22634c); border-color: var(--green, #22634c); animation: ehd-bounce 1.6s ease infinite; }
-@keyframes ehd-bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
-
 /* 左进度面板 sticky，窄屏时移到答题板之后（见 .eq-layout 的 order）。 */
 .eq-layout { display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 24px; align-items: start; }
 .eq-side { padding: 18px; border: 1px solid var(--line, #dce6d9); border-radius: 18px; background: var(--white, #fff); }

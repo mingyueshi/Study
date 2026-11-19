@@ -2,21 +2,36 @@
 {% load static %}
 {% block title %}近反义词迷宫 · 乐学堂{% endblock %}
 {% block content %}
+{% include 'study_topics/tool_layout_css.html' %}
 <link rel="stylesheet" href="{% static 'study_topics/word-maze.css' %}?v=1">
-<div class="word-maze" data-word-maze data-storage-scope="{% if user.is_authenticated %}user-{{ user.pk }}{% else %}guest{% endif %}">
-  <a class="maze-back" href="{% url 'home' %}?area=chinese#modules-title">← 学习广场 · 语文</a>
+<div class="word-maze topic-tool-page" data-word-maze data-storage-scope="{% if user.is_authenticated %}user-{{ user.pk }}{% else %}guest{% endif %}">
   <header class="maze-hero">
     <h1>近反义词迷宫</h1>
     <p>{{ intro }}</p>
-    <nav class="maze-route-choices" aria-label="选择词语路线">
-      {% for item in routes %}
-      <a href="?route={{ item.id }}#play"{% if route.id == item.id %} aria-current="location"{% endif %}>
-        <strong>{{ item.name }}</strong><span>{{ item.subtitle }}</span><small>{{ item.gates|length }} 关 <span aria-hidden="true">→</span></small>
-      </a>
-      {% endfor %}
-    </nav>
   </header>
 
+<div class="study-reading-layout" data-sidebar-layout=".maze-side" data-sidebar-width="280px" data-sidebar-label="路线侧栏">
+    <aside class="maze-side study-reading-sidebar" aria-label="路线侧栏">
+      <details class="study-reading-group" open>
+        <summary>词语路线</summary>
+        <nav class="study-reading-links" aria-label="选择词语路线">
+          {% for item in routes %}
+          <a href="?route={{ item.id }}#play"{% if route.id == item.id %} aria-current="location"{% endif %}>
+          {{ item.name }} <small>{{ item.gates|length }} 关</small>
+          </a>
+          {% endfor %}
+        </nav>
+      </details>
+      <details class="study-reading-group">
+        <summary>相关专题</summary>
+        <nav class="study-reading-links" aria-label="专题导航">
+          <a href="{% url 'dictionary' %}">查字查词 ↗</a>
+          <a href="{% url 'chinesebook' %}">语文教材 ↗</a>
+          <a href="{% url 'home' %}?area=chinese#modules-title">学习广场 · 语文 ↗</a>
+        </nav>
+      </details>
+    </aside>
+<div class="study-reading-main">
   <section id="play" class="maze-play" aria-labelledby="maze-play-title">
     <header class="maze-play-header">
       <div><h2 id="maze-play-title">{{ route.name }}路线</h2><p>{{ route.method }}</p></div>
@@ -70,14 +85,15 @@
   </section>
 
   <footer class="maze-footer">
-    <a href="{% url 'dictionary' %}">查字查词 →</a>
-    <a href="{% url 'chinesebook' %}">语文教材 →</a>
     <details>
       <summary>学习依据（资料链接需联网）</summary>
       <p>练习采用联系上下文理解词句的方法，题目和解释为教学自编。</p>
       <ul>{% for source in sources %}<li><a href="{{ source.url }}" target="_blank" rel="noopener noreferrer">{{ source.label }} ↗</a></li>{% endfor %}</ul>
     </details>
   </footer>
+  </div>
+  </div>
+
 </div>
 <script src="{% static 'study_topics/word-maze.js' %}?v=1" defer></script>
 {% endblock %}
