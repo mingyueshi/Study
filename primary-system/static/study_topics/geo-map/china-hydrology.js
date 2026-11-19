@@ -29,6 +29,7 @@ window.GMChinaHydrology = (() => {
     function render() {
       const basin = D.basins.find(b => b.feature === river);
       for (const button of $('gm3-basin').children) button.setAttribute('aria-pressed', String(button.value === river));
+      $('gm3-hydro-title').textContent = `${waterways.find(item => item.feature === river).name}水系`;
       $('gm3-basin-area').textContent = basin?.areaLabel || '人工水路 · 跨越流域';
       $('gm3-basin-scope').textContent = basin?.scope || D.canalNote;
       $('gm3-basin-text').textContent = basin?.text || D.canalNote;
@@ -37,10 +38,8 @@ window.GMChinaHydrology = (() => {
       if (basin) $('gm3-basin-source').href = basin.source;
       $('gm3-basins').disabled = !available() || !basin;
       $('gm3-basins').setAttribute('aria-pressed', String(Boolean(basin && basinVisible && available())));
-      $('gm3-basins').textContent = basin && basinVisible ? '隐藏流域范围' : '显示流域范围';
       $('gm3-tributaries').disabled = !available();
       $('gm3-tributaries').setAttribute('aria-pressed', String(tributariesVisible));
-      $('gm3-tributaries').textContent = tributariesVisible ? '隐藏支流' : '显示支流';
       const list = D.tributaries.filter(b => b.river === river);
       $('gm3-tributary-list').innerHTML = list.map(b => `<button type="button" data-tributary="${b.id}" aria-pressed="${b.id === activeBranch}">${esc(b.name)}</button>`).join('');
       $('gm3-tributary-empty').hidden = list.length > 0;
@@ -143,9 +142,10 @@ window.GMChinaHydrology = (() => {
       const path = [...source.tributaries[branch.id].paths].sort((a,b) => b.length - a.length)[0];
       focusPoint(path[Math.floor(path.length / 2)], 4, branch.name);
       $('gm3-hydro-detail').hidden = false; $('gm3-hydro-detail').innerHTML = `<h3>${esc(branch.name)} · ${esc(branch.relation)}</h3><p>${esc(branch.text)}</p>`;
+      reveal();
     });
     $('gm3-estuaries').addEventListener('click', event => { const button = event.target.closest('[data-estuary]'); if (button) focusEstuary(button.dataset.estuary); });
-    $('gm3-estuary-overview').addEventListener('click', () => focusRiver(river));
+    $('gm3-estuary-overview').addEventListener('click', () => { focusRiver(river); reveal(); });
     render();
     return {attach, tick, select, setVisible, showEstuary, refreshTerrain, refresh: render, setPuzzleMissing(ids) {puzzleMissing=new Set(ids);requestDraw();}, get basin() {return basinVisible ? river : '';}};
   }

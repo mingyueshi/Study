@@ -42,7 +42,7 @@ window.GMChinaLearningVisual = (() => {
     ]);
     return g;
   }
-  function mount({ root, available, requestDraw, prepare }) {
+  function mount({ root, available, requestDraw, prepare, emptied }) {
     const $ = (id) => root.querySelector('#gm3-' + id),
       esc = window.GMShared.esc;
     let last = null,
@@ -59,6 +59,7 @@ window.GMChinaLearningVisual = (() => {
       $('pin-last').textContent = last ? `刚才的位置：${caption(last)}` : '先在地形上点一个位置。';
       $('pin-add').disabled = !last || !available() || pins.length >= 6;
       $('pin-clear').hidden = $('pin-clear').disabled = pins.length === 0;
+      $('pin-view').hidden = pins.length === 0;
       $('pin-note').hidden = pins.length === 0;
       $('pin-count').textContent = pins.length ? `已钉 ${pins.length}／6 根` : '';
       $('pin-list').innerHTML = pins
@@ -105,6 +106,7 @@ window.GMChinaLearningVisual = (() => {
       }
       p.label?.remove();
       render();
+      if (!pins.length) emptied();
     }
     function add() {
       if (!last || !available() || pins.length >= 6) return;

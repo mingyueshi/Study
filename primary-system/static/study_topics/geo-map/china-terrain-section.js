@@ -66,13 +66,13 @@ window.GMTerrainSection = (() => {
     return svg;
   }
 
-  function create({ root, canvas, sample, pick, project, requestDraw, setDrawing, prepare, presetView, sampleReady }) {
+  function create({ root, canvas, sample, pick, project, requestDraw, setDrawing, prepare, presetView, sampleReady, revealPanel }) {
     const $ = id => root.querySelector('#gm3-section-' + id);
     const data = window.GM_CHINA_3D.section;
     const esc = window.GMShared.esc;
     let drawing = false, start = null, end = null, gesture = null, frame = 0, current = null, available = true, generation = 0, probeIndex = 0;
     const coords = point => `${point[0].toFixed(2)}°E，${point[1].toFixed(2)}°N`;
-    const say = text => { $('status').textContent = text; $('hint').textContent = text; };
+    const say = text => { $('status').textContent = text; };
     $('intro').textContent = data.intro;
     $('observe').textContent = data.observe;
     $('note').textContent = data.note;
@@ -95,13 +95,6 @@ window.GMTerrainSection = (() => {
       generation++;
       stopGesture(); start = end = null; mode(false); requestDraw();
       say(current ? '保留上次剖面，可重新拉线。' : '选择西向东示范，或在地图上拉一条线。');
-    }
-    function reveal() {
-      if (root.dataset.slCollapsed === 'true') root.querySelector(':scope > .sl-sidebar > .sl-header > .sl-collapse')?.click();
-      if (root.dataset.slMode === 'compact' && root.dataset.slOpen !== 'true') root.querySelector(':scope > .sl-sidebar > .sl-header > .sl-toggle:not(.sl-collapse)')?.click();
-      const panel = root.querySelector('#gm3-section');
-      panel.focus({ preventScroll: true });
-      requestAnimationFrame(() => $('chart').scrollIntoView({ block: 'center', behavior: 'instant' }));
     }
     function finish(a,b,demo=false) {
       if(!sampleReady){renderResult(a,b,demo);return;}
@@ -135,13 +128,13 @@ window.GMTerrainSection = (() => {
       $('chart').setAttribute('aria-label', `A 到 B 地形剖面，约 ${Math.round(result.km)} 千米，${result.min === null ? '无高程数据' : `海拔约 ${Math.round(result.min)} 至 ${Math.round(result.max)} 米`}`);
       $('summary').textContent = `全长约 ${Math.round(result.km)} 千米` + (result.min === null ? '，沿线没有地形数据。' : ` · 沿线海拔约 ${Math.round(result.min)}—${Math.round(result.max)} 米。`) + (result.missing ? ' 空白段缺少地形数据。' : '');
       $('route').textContent = `A：${coords(a)} → B：${coords(b)}。${demo ? data.presetNote : ''}`;
-      $('result').hidden = false; $('clear').disabled = false;
+      $('result').hidden = false; $('clear').hidden = $('clear').disabled = false;
       probeIndex=0;$('position').max=String(result.points.length-1);$('highest').disabled=$('lowest').disabled=result.min===null;updateProbe();
       root.dataset.sectionFrom = a.join(','); root.dataset.sectionTo = b.join(',');
       root.dataset.sectionKm = result.km.toFixed(2);
       start = end = null; stopGesture(); mode(false);
       say('剖面已画好。可以转动地图，或重新拉线比较。');
-      requestDraw(); reveal();
+      requestDraw(); revealPanel();
     }
     function redraw() {
       const layer = $('layer');
@@ -166,7 +159,10 @@ window.GMTerrainSection = (() => {
     });
     $('demo').addEventListener('click', () => { cancel(); prepare(); presetView(); finish(data.from, data.to, true); });
     $('clear').addEventListener('click', () => {
-      current = null; cancel(); $('result').hidden = true; $('clear').disabled = true;
+      const clear = $('clear');
+      const hadFocus = document.activeElement === clear;
+      current = null; cancel(); $('result').hidden = true; clear.hidden = clear.disabled = true;
+      if (hadFocus) $('draw').focus({ preventScroll: true });
       delete root.dataset.sectionProbe;delete root.dataset.sectionProbeKm;delete root.dataset.sectionProbeMeters;
       delete root.dataset.sectionFrom; delete root.dataset.sectionTo; delete root.dataset.sectionKm;
     });

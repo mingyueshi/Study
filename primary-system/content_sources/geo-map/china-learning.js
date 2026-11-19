@@ -227,8 +227,12 @@ window.GMChinaLearning = (() => {
       }
     }
     function progress() {
-      $('learn-progress').textContent =
-        `阶梯 ${saved.steps.size}／3 · 拼图 ${saved.puzzle ? '已拼好过' : '待挑战'} · 观察题 ${saved.questions.size}／${D.questions.length}`;
+      $('learn-progress').textContent = {
+        steps: `已点亮 ${saved.steps.size}／3 级阶梯`,
+        puzzle: saved.puzzle ? '已完成过拼图' : '',
+        questions: `已完成 ${saved.questions.size}／${D.questions.length} 道观察题`,
+      }[mode] || '';
+      $('learn-progress').hidden = !$('learn-progress').textContent;
     }
     function renderSteps() {
       const state = steps.state();
@@ -322,10 +326,11 @@ window.GMChinaLearning = (() => {
       $('step-panel').hidden = mode !== 'steps';
       $('puzzle-panel').hidden = mode !== 'puzzle';
       $('relation-panel').hidden = mode !== 'questions';
+      $('question-tools').hidden = mode !== 'questions';
       $('learn-hud').hidden = !['steps', 'questions'].includes(mode);
       $('step-inline').hidden = mode !== 'steps';
       $('learn-back').href = mode === 'questions' ? '#gm3-relation-options' : '#gm3-step-panel';
-      $('learn-back').textContent = mode === 'questions' ? '观察好了，去选解释 ↓' : '提示与说明 ↓';
+      $('learn-back').textContent = mode === 'questions' ? '观察好了，去选解释 →' : '提示与说明 →';
       if (mode === 'steps') renderSteps();
       if (mode === 'puzzle') renderPuzzle();
       if (mode === 'questions') renderQuestions();

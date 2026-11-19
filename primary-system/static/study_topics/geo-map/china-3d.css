@@ -1,5 +1,6 @@
 /* 地图优先呈现，视角、设置与学习任务各有入口。 */
-.china-3d-topic {
+.gm-topic.china-3d-topic {
+  display: block;
   --atlas-tint: #eef7f7;
   --atlas-border: #c6dedf;
   --gm3-accent: #236877;
@@ -12,54 +13,89 @@
 }
 .china-3d-topic :is(h1, h2, h3) { text-wrap: balance; }
 .china-3d-topic p { text-wrap: pretty; }
-.gm3-heading { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 8px 24px; padding-bottom: 18px; }
+.gm3-heading {
+  position: relative;
+  display: grid;
+  align-content: center;
+  gap: 14px;
+  min-height: clamp(205px, 17vw, 320px);
+  margin-bottom: clamp(14px, 2vw, 26px);
+  padding: clamp(20px, 3vw, 50px);
+  border-radius: 18px;
+  color: oklch(97% .018 88);
+  background: linear-gradient(90deg, oklch(20% .035 210 / .97), oklch(23% .044 207 / .81) 42%, oklch(23% .04 207 / .16) 83%),
+    url("assets/himalayas-orbit.jpg") center 58% / cover no-repeat oklch(30% .065 208);
+}
 .gm3-kicker { color: var(--ink-soft); font-weight: 750; font-size: 14px; }
-.gm3-heading h1 { font-size: clamp(30px, 3vw, 46px); line-height: 1.2; margin: 0 0 8px; color: var(--ink); }
-#gm3-intro { max-width: 46em; font-size: 16px; line-height: 1.65; margin: 0; }
-.gm3-related, .gm3-jump { display: flex; align-items: center; flex-wrap: wrap; gap: 4px 14px; }
-.gm3-related a, .gm3-jump a, .gm3-picker a, .gm3-section a {
+.gm3-heading h1 { font-size: clamp(32px, 4vw, 58px); line-height: 1.17; margin: 0 0 8px; color: inherit; }
+#gm3-intro { max-width: min(44em, 58%); font-size: 17px; line-height: 1.7; margin: 0; }
+.gm3-map-shortcuts { display: flex; align-items: center; flex-wrap: wrap; gap: 6px 14px; }
+.gm3-heading .gm3-hero-credit { color: inherit; text-underline-offset: .22em; }
+.gm3-hero-credit {
+  position: absolute;
+  inset: auto 14px 12px auto;
+  padding: 3px 9px;
+  border-radius: 6px;
+  font-size: 13px;
+  background: oklch(22% .035 212 / .9);
+}
+.gm3-workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) clamp(290px, 26vw, 390px);
+  align-items: start;
+  gap: clamp(12px, 1.7vw, 24px);
+}
+.gm3-workspace:not([data-sl-ready]) > .gm-sidebar { grid-column: 2; grid-row: 1; }
+.gm3-workspace:not([data-sl-ready]) > .gm-content { grid-column: 1; grid-row: 1; }
+/* 页头随页面滚动，工具栏只在内容超过视口可用高度时滚动。 */
+html body .gm3-workspace[data-sl-ready][data-sl-mode] > .sl-sidebar {
+  height: auto;
+  max-height: calc(100dvh - var(--sl-top, 24px) - 24px);
+}
+html body .gm3-workspace[data-sl-ready][data-sl-mode="compact"] > .sl-sidebar { max-height: 100dvh; }
+.gm3-workspace .sl-sidebar .sl-panel, .gm3-workspace .sl-sidebar .sl-scroll { flex-basis: auto; }
+.gm3-workspace .sl-scroll { scrollbar-gutter: auto; }
+.gm3-map-shortcuts a, .gm3-content-panels a, .gm3-current-content {
   color: var(--ink); font-weight: 700; text-underline-offset: .2em;
 }
-.gm3-related a { font-size: 15px; }
-.gm3-related a:hover, .gm3-jump a:hover { color: var(--gm3-accent); }
+.gm3-map-shortcuts { padding: 0 var(--gm3-pad) 10px; font-size: 15px; }
+.gm3-content-panels { margin-top: 18px; min-width: 0; scroll-margin-top: 16px; }
+.gm3-content-panels > [data-gm3-content] { margin-top: 0; }
+.gm3-content-tools {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px 16px; flex-wrap: wrap;
+  padding: 0 2px 8px; color: var(--ink-soft); font-size: 15px;
+}
+.gm3-content-tools button {
+  min-height: 36px; padding: 4px 10px; border: 1px solid var(--atlas-border); border-radius: 8px; color: var(--ink);
+  background: var(--card); font-size: 15px; font-weight: 700;
+}
+.gm3-content-tools button:hover { border-color: var(--gm3-accent); }
+.gm3-switch-task { display: inline-block; margin-inline-start: 12px; }
+.gm3-current-content:not([hidden]) {
+  display: block; padding: 6px var(--gm3-pad); border-bottom: 1px solid var(--atlas-border);
+  background: var(--atlas-tint); font-size: 15px;
+}
+.gm3-content-panels[hidden], .gm3-content-panels > [hidden], .gm3-tool-body [hidden] { display: none; }
+.gm3-map-shortcuts .gm3-tour-shortcut { display: none; }
+.china-3d-topic[data-tour-active="true"] .gm3-tour-shortcut { display: inline-flex; }
 .gm3-explorer, .gm3-activity {
   border: 1px solid var(--atlas-border); border-radius: 16px; background: var(--card);
 }
 .gm3-activity { padding: var(--gm3-pad); margin-top: 20px; }
 .gm3-activity h2 { font-size: clamp(22px, 3cqi, 28px); margin: 0; }
 .gm3-activity .gm3-play-tools { padding-inline: 0; }
-.gm3-explorer { scroll-margin-top: 16px; }
-.gm3-toolbar {
-  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 16px;
-  padding: 10px var(--gm3-pad); border-radius: 16px 16px 0 0;
-  border-bottom: 1px solid var(--atlas-border);
-}
-.gm3-jump { padding: 12px 0 0; }
-.gm3-jump a { display: inline-flex; align-items: center; min-height: 38px; padding: 4px 0; }
+.gm3-explorer { scroll-margin-top: 16px; overflow: hidden; }
+.gm3-toolbar { display: grid; gap: 10px; }
 .gm3-height-control { display: grid; gap: 4px; font-size: 16px; }
 .gm3-height-control > span { display: flex; justify-content: space-between; font-weight: 750; }
 .gm3-height-control output, .gm3-stamp { font-variant-numeric: tabular-nums; }
-.gm3-height-control input { width: 100%; margin: 0; accent-color: var(--gm3-accent); cursor: pointer; min-height: 32px; }
-.gm3-height-control small, .gm3-setting-note { color: var(--ink-soft); font-size: 14px; }
-.gm3-presets, .gm3-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; }
+.gm3-height-control input { width: 100%; margin: 0; accent-color: var(--gm3-accent); cursor: pointer; min-height: 36px; }
+.gm3-height-control small { color: var(--ink-soft); font-size: 14px; }
+.gm3-presets, .gm3-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 7px; }
 .china-3d-topic button { cursor: pointer; font: inherit; }
-.gm3-toolbar button, .gm3-terrain-tools button, .gm3-landmark-tools button {
-  min-height: 40px; padding: 6px 12px; color: var(--ink); background: var(--card);
-  border: 1px solid var(--atlas-border); border-radius: 8px; font-size: 15px; font-weight: 700;
-}
-:is(.gm3-toolbar, .gm3-terrain-tools, .gm3-landmark-tools) button[aria-pressed="true"] {
-  color: #fff; background: var(--gm3-accent); border-color: var(--gm3-accent);
-}
-:is(.gm3-toolbar, .gm3-terrain-tools, .gm3-landmark-tools) button:hover { border-color: var(--gm3-accent); }
-.gm3-toolbar button:disabled, .gm3-terrain-tools :disabled { opacity: .45; cursor: default; }
-.gm3-landmark-tools { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
-.gm3-feature-directory { margin-top: 24px; padding: 22px; background: var(--card); border: 1px solid var(--atlas-border); border-radius: 18px; }
-.gm3-feature-directory h2 { font-size: 23px; margin: 0 0 10px; }
+.gm3-landmark-tools { display: flex; flex-wrap: wrap; gap: 6px; padding-bottom: 8px; }
 .gm3-river-note { color: var(--ink-soft); font-size: 15px; line-height: 1.8; margin: 0 0 14px; }
 .gm3-river-note::before { content: ''; display: inline-block; width: 28px; height: 4px; margin: 0 8px 4px 0; background: #1477cf; border-radius: 3px; }
-.gm3-feature-group { display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 12px; padding: 12px 0; border-top: 1px solid var(--atlas-border); }
-.gm3-feature-group h3 { font-size: 16px; margin: 10px 0; color: var(--ink-soft); }
-.gm3-feature-group .gm3-landmark-tools { margin: 0; }
 .gm3-feature-profile { --province-color: #258cc3; }
 .gm3-feature-profile[hidden], .gm3-profile[hidden] { display: none; }
 .gm3-feature-profile .gm3-coverage { font-size: 14px; color: var(--ink-soft); border-top: 1px solid var(--atlas-border); padding-top: 12px; }
@@ -81,19 +117,15 @@
 }
 .gm3-option-line { gap: 6px 10px; }
 .gm3-option-line > span, .gm3-tour-tools label { font-size: 15px; font-weight: 700; }
-:is(.gm3-choices, .gm3-narration, .gm3-flow-tools, .gm3-tour-heading, .gm3-tour-tools) > button {
+.gm3-narration > button {
   min-height: 36px; padding: 4px 10px; border: 1px solid var(--atlas-border); border-radius: 8px;
   background: var(--card); color: var(--ink); font-size: 15px; font-weight: 700; line-height: 1.4;
 }
-:is(.gm3-choices, .gm3-narration, .gm3-flow-tools, .gm3-tour-heading, .gm3-tour-tools) > button:enabled:hover {
-  border-color: var(--gm3-accent);
-}
-:is(.gm3-choices, .gm3-narration, .gm3-flow-tools, .gm3-tour-tools) > button[aria-pressed="true"] {
+.gm3-narration > button:enabled:hover { border-color: var(--gm3-accent); }
+.gm3-narration > button[aria-pressed="true"] {
   color: #fff; background: var(--gm3-accent); border-color: var(--gm3-accent);
 }
-:is(.gm3-choices, .gm3-narration, .gm3-flow-tools, .gm3-tour-tools) > button:disabled {
-  opacity: .5; cursor: default;
-}
+.gm3-narration > button:disabled { opacity: .5; cursor: default; }
 .gm3-narration { margin-top: 10px; }
 .gm3-narration span, .gm3-pin-tools span { color: var(--ink-soft); font-size: 14px; }
 .gm3-narration span:empty, #gm3-pin-count:empty { display: none; }
@@ -103,16 +135,14 @@
 }
 .gm3-flow-panel { margin-top: 12px; }
 .gm3-flow-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 8px; }
-.gm3-flow-tools #gm3-tour-start { color: #fff; background: var(--gm3-accent); border-color: var(--gm3-accent); }
 .gm3-tour-panel { padding: var(--gm3-pad); background: var(--card); border-top: 1px solid var(--atlas-border); }
 .gm3-tour-panel[hidden] { display: none; }
 .gm3-tour-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .gm3-tour-heading h2 { margin: 5px 0 12px; font-size: 24px; color: var(--ink); }
-.gm3-tour-heading button { white-space: nowrap; flex-shrink: 0; }
 .gm3-tour-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
-.gm3-tour-tools label { display: flex; align-items: center; gap: 6px; max-width: 100%; white-space: nowrap; }
-#gm3-tour-stop { width: 13rem; }
-.gm3-tour-routes, .gm3-tour-stops { margin-top: 8px; }
+.gm3-tour-tools label { display: flex; flex: 1 1 100%; align-items: center; gap: 6px; min-width: 0; white-space: nowrap; }
+#gm3-tour-stop { flex: 1 1 10em; min-width: 0; }
+.gm3-tour-stops { margin-top: 8px; }
 #gm3-tour-stop-field[hidden], .gm3-tour-stops[hidden] { display: none; }
 .gm3-tour-progress { display: flex; align-items: center; gap: 12px; margin: 12px 0 5px; }
 .gm3-tour-progress progress { flex: 1; min-width: 60px; height: 10px; accent-color: #258568; }
@@ -123,7 +153,7 @@
 .gm3-tour-links { display: flex; flex-wrap: wrap; gap: 8px 16px; font-size: 14px; }
 .gm3-tour-marker { fill: #f9d56d; stroke: #733d0e; stroke-width: 2; }
 .gm3-tour-map-name { fill: #713f0f; stroke: #fff9ea; stroke-width: 4px; paint-order: stroke; font-size: 17px; font-weight: 800; }
-.china-3d-topic[data-tour-active="true"] .gm3-flow-panel { display: none; }
+.china-3d-topic[data-tour-active="true"] .gm3-river-flow-controls { display: none; }
 .china-3d-topic[data-tour-active="true"] .gm3-viewport { height: clamp(300px, 46dvh, 620px); }
 @media (max-width: 520px) {
   .gm3-tour-heading h2 { font-size: 21px; }
@@ -131,7 +161,6 @@
 .gm3-flow-panel p { margin: 8px 0 0; font-size: 15px; line-height: 1.7; color: var(--ink-soft); }
 #gm3-flow-summary { font-size: 17px; font-weight: 750; color: var(--ink); }
 #gm3-flow-status { font-size: 14px; color: var(--ink-soft); }
-#gm3-route-buttons { margin-top: 12px; padding-block: 12px 0; }
 .gm3-label-leaders { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; stroke-width: 1; }
 .gm3-map-label { position: absolute; transform: translate(-50%, -50%); white-space: nowrap; color: #233d3b; font-size: clamp(12px, 1vw, 16px); font-weight: 750; line-height: 1.2; text-shadow: 0 1px 3px #fff, 1px 0 3px #fff, -1px 0 3px #fff; }
 .gm3-map-label[data-kind="province"] { padding: 4px 8px; border: 1px solid #73634d; border-radius: 7px; background: #fffdf5f5; color: #30291f; font-family: inherit; font-size: clamp(14px, 1vw, 18px); line-height: 1.2; font-weight: 850; text-shadow: none; box-shadow: 0 2px 4px #3c312225; pointer-events: auto; cursor: pointer; z-index: 1; }
@@ -146,26 +175,89 @@
 .gm3-map-label[data-kind="plain"] { color: #285533; background: #f2ffe9e8; }
 .gm3-map-label.is-focused { box-shadow: 0 0 0 2px #d77826; z-index: 2; }
 .gm3-mountain-icon { display: inline-block; font-size: 1.05em; color: #816234; }
-.gm3-settings, .gm3-visual-controls, .gm3-section, .gm3-picker {
+/* 工具区统一字号、点击尺寸和状态，跳转保留原生链接样式。 */
+.gm3-workspace {
+  --gm3-tool-size: 16px;
+  --gm3-tool-label-size: 17px;
+  --gm3-tool-target: 44px;
+  --gm3-link-color: #155970;
+  --gm3-selected: #e1f3f0;
+  --gm3-tool-border: #9fbdb9;
+}
+.gm3-workspace .sl-header .sl-toggle { font-size: calc(var(--gm3-tool-size) * var(--reading-scale, 1)); min-height: var(--gm3-tool-target); }
+.gm3-workspace .gm-sidebar { --select-height: var(--gm3-tool-target); }
+.gm3-workspace .gm-sidebar button {
+  min-height: var(--gm3-tool-target); min-width: var(--gm3-tool-target); max-width: 100%;
+  padding: 6px 10px; border: 1px solid var(--gm3-tool-border); border-radius: 8px;
+  background: var(--card); color: var(--ink); font-size: calc(var(--gm3-tool-size) * var(--reading-scale, 1));
+  font-weight: 650; line-height: 1.35; overflow-wrap: anywhere;
+}
+.gm3-workspace .gm-sidebar button:enabled:hover { border-color: var(--gm3-accent); }
+.gm3-workspace .gm-sidebar button:enabled:not(.gm3-primary-action, [aria-pressed="true"]):hover { background: var(--atlas-tint); }
+.gm3-workspace .gm-sidebar button[aria-pressed="true"] {
+  color: var(--ink); border-color: var(--gm3-accent); background: var(--gm3-selected);
+  box-shadow: inset 0 -2px 0 var(--gm3-accent);
+}
+.gm3-workspace .gm-sidebar button.gm3-primary-action {
+  color: #fff; background: var(--gm3-accent); border-color: var(--gm3-accent);
+}
+.gm3-workspace .gm-sidebar button.gm3-primary-action:enabled:hover { box-shadow: inset 0 0 0 1px currentColor; }
+.gm3-workspace .gm-sidebar button.gm3-primary-action[aria-pressed="true"] { box-shadow: inset 0 0 0 2px currentColor; }
+.gm3-workspace .gm-sidebar button:disabled { opacity: .55; cursor: default; }
+.gm3-workspace .gm-sidebar button[hidden] { display: none; }
+.gm3-workspace .gm-sidebar button.gm3-layer-toggle { position: relative; display: inline-flex; align-items: center; gap: 7px; box-shadow: none; }
+.gm3-layer-toggle::before {
+  content: ''; flex: 0 0 16px; width: 16px; height: 16px; border: 1px solid currentColor; border-radius: 4px;
+}
+.gm3-layer-toggle[aria-pressed="true"]::after {
+  content: ''; position: absolute; inset-inline-start: 15px; top: 50%; width: 6px; height: 3px;
+  border: solid currentColor; border-width: 0 0 2px 2px; transform: translateY(-65%) rotate(-45deg);
+}
+.gm3-workspace .gm-sidebar a[href] {
+  min-height: var(--gm3-tool-target); display: inline-flex; align-items: center; gap: 6px;
+  color: var(--gm3-link-color); font-size: calc(var(--gm3-tool-size) * var(--reading-scale, 1));
+  font-weight: 700; text-decoration: none;
+}
+.gm3-workspace .gm-sidebar a[href] > span:first-child {
+  text-decoration: underline; text-decoration-thickness: .08em; text-underline-offset: .18em;
+}
+.gm3-workspace .gm-sidebar a[href]:hover > span:first-child { text-decoration-thickness: .14em; }
+.gm3-workspace .gm-sidebar a.gm3-back-to-map { display: none; }
+.gm3-tool-stack, .gm3-picker {
   border: 1px solid var(--atlas-border); border-radius: 12px; background: var(--card);
 }
-.gm3-section, .gm3-picker { padding: 12px; }
-:root .china-3d-topic details > summary { min-height: 36px; }
-.china-3d-topic :is(.gm3-settings, .gm3-visual-controls, .gm3-section-guide, .gm3-map-notes) > summary {
-  padding-block: 4px; color: var(--ink); font-size: 15px; font-weight: 750; cursor: pointer;
+.gm3-picker { padding: 4px 12px 12px; }
+.gm3-tool-stack > details + details { border-top: 1px solid var(--atlas-border); }
+.gm3-tool-stack > details[open] > summary { background: var(--atlas-tint); }
+.gm3-tool-stack > details:first-child > summary { border-radius: 11px 11px 0 0; }
+.gm3-tool-stack > details:last-child:not([open]) > summary { border-radius: 0 0 11px 11px; }
+:root .china-3d-topic .gm-sidebar details > summary { min-height: var(--gm3-tool-target); }
+.gm3-workspace .gm-sidebar details > summary {
+  padding-block: 7px; color: var(--ink); font-size: calc(var(--gm3-tool-size) * var(--reading-scale, 1));
+  font-weight: 700; line-height: 1.4; cursor: pointer;
 }
-.gm3-settings > summary, .gm3-visual-controls > summary { padding-inline: 12px; }
-.gm3-terrain-tools, .gm3-visual-grid { display: grid; gap: 12px; padding: 12px; border-top: 1px solid var(--atlas-border); }
-.gm3-visual-card + .gm3-visual-card { padding-top: 12px; border-top: 1px solid var(--atlas-border); }
-.gm3-visual-card h3 { margin: 0 0 12px; font-size: 20px; color: var(--ink); }
+.gm3-workspace .gm3-tool-stack > details > summary {
+  padding-inline: 12px; font-size: calc(var(--gm3-tool-label-size) * var(--reading-scale, 1)); font-weight: 750;
+}
+.gm3-workspace .gm-sidebar details > summary:hover { background: var(--atlas-tint); }
+.gm3-terrain-tools, .gm3-visual-grid, .gm3-tool-body { display: grid; gap: 12px; min-width: 0; padding: 12px; border-top: 1px solid var(--atlas-border); }
+.gm3-tool-body :is(.gm3-play-tools, .gm3-section-tools) { padding: 0; }
+.gm3-tool-body > [data-open-content] { justify-self: start; }
+.gm3-control-group { min-width: 0; padding: 0; border: 0; }
+.gm3-control-group legend { padding: 0 0 6px; color: var(--ink-soft); font-size: 15px; font-weight: 700; }
+.gm3-tool-subgroup + .gm3-tool-subgroup { border-top: 1px solid var(--atlas-border); }
+.gm3-tool-links, .gm3-related-links { display: flex; flex-wrap: wrap; gap: 7px 12px; }
+.gm3-related { border-top: 1px solid var(--atlas-border); padding: 10px 2px 0; }
+.gm3-related h2 { color: var(--ink-soft); font-size: 15px; font-weight: 750; line-height: 1.4; }
+.gm3-related-links { column-gap: 16px; row-gap: 0; }
+#gm3-tour-controls:not([hidden]) { display: grid; gap: 8px; border-top: 1px solid var(--atlas-border); padding-top: 12px; }
+.gm3-visual-grid { gap: 0; }
 .gm3-visual-card p { font-size: 15px; line-height: 1.8; margin: 10px 0 0; }
 .gm3-visual-card label { display: block; font-size: 17px; line-height: 1.8; color: var(--ink); }
 .gm3-visual-card output { color: #9b541c; font-weight: 850; font-variant-numeric: tabular-nums; }
-.gm3-visual-card input[type="range"] { display: block; width: 100%; accent-color: #317e69; margin: 13px 0; min-height: 26px; }
-.gm3-visual-card button { font: inherit; font-size: 16px; min-height: 42px; padding: 8px 11px; border: 1px solid #a2b99e; border-radius: 10px; color: var(--ink); background: var(--card); cursor: pointer; }
+.gm3-visual-card input[type="range"] { display: block; width: 100%; accent-color: var(--gm3-accent); margin: 8px 0; min-height: 36px; }
 #gm3-snow { margin-top: 10px; }
-.gm3-visual-card button[aria-pressed="true"] { background: #2c7663; border-color: #2c7663; color: #fff; }
-.gm3-visual-card :is(button,input):disabled { opacity: .45; cursor: default; }
+.gm3-visual-card input:disabled { opacity: .55; cursor: default; }
 .gm3-light-control { display: flex; align-items: center; gap: 12px; }
 #gm3-light-compass { width: 110px; min-width: 80px; flex: 0 0 95px; height: 110px; overflow: visible; }
 #gm3-light-compass text { fill: var(--ink); font-size: 15px; text-anchor: middle; }
@@ -180,13 +272,13 @@
 .gm3-compass { position: absolute; top: 12px; right: 18px; width: 70px; height: 75px; pointer-events: none; fill: #276775; font-size: 15px; font-weight: 800; }
 .gm3-map-footer { display: flex; justify-content: space-between; align-items: start; flex-wrap: wrap; gap: 10px 20px; padding: 12px var(--gm3-pad); border-top: 1px solid var(--atlas-border); font-size: 15px; }
 .gm3-map-footer p { margin: 0; line-height: 1.6; }
+.gm3-compare-note { margin: 0; padding: 10px var(--gm3-pad); background: var(--atlas-tint); color: var(--ink); font-size: 16px; }
 .gm3-map-footer small { color: var(--ink-soft); font-size: 13px; }
 #gm3-selection { font-weight: 750; color: var(--ink); }
 #gm3-elevation { color: var(--ink-soft); font-size: 14px; margin-top: 4px; }
-.gm3-picker-heading { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 4px 8px; margin-bottom: 6px; }
-.gm3-picker label { font-size: 16px; font-weight: 750; }
+.gm3-picker-heading { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0 8px; }
+.gm3-picker label { font-size: calc(var(--gm3-tool-label-size) * var(--reading-scale, 1)); font-weight: 750; }
 .gm3-picker select { width: 100%; }
-.gm3-picker a { font-size: 14px; }
 .gm3-profile { padding: 20px; border: 1px solid var(--atlas-border); border-top: 5px solid var(--province-color, #3c8590); background: var(--card); border-radius: 16px; }
 .gm3-profile h2 { margin: 8px 0 12px; font-size: 26px; line-height: 1.4; }
 .gm3-profile p { font-size: 17px; line-height: 1.85; margin: 14px 0; }
@@ -199,9 +291,7 @@
 .gm3-legend li { display: flex; align-items: center; gap: 6px; font-size: 14px; font-variant-numeric: tabular-nums; }
 .gm3-legend i { display: block; width: 14px; height: 14px; border-radius: 4px; background: var(--region); border: 1px solid #0002; }
 .gm3-region-note, .gm3-model-note { font-size: 14px; line-height: 1.8; color: var(--ink-soft); }
-.gm3-observe { margin-top: 30px; }
-.gm3-observe h2 { font-size: 23px; margin-bottom: 15px; }
-#gm3-observations { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+#gm3-observations { margin-top: 14px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); gap: 14px; }
 .gm3-observation { padding: 20px; background: var(--card); border: 1px solid var(--atlas-border); border-radius: 16px; }
 .gm3-observation > span { color: #43818a; font-size: 13px; font-weight: 750; }
 .gm3-observation h3 { font-size: 20px; margin: 8px 0; }
@@ -211,39 +301,30 @@
 .gm3-map-notes p { margin-top: 8px; }
 .gm3-fallback { position: absolute; inset: 25% 12% auto; background: var(--card); color: var(--ink); border-radius: 16px; padding: 24px; font-size: 18px; line-height: 1.9; }
 .gm3-fallback[hidden] { display: none; }
-@media (max-width: 1000px) {
-  #gm3-observations { grid-template-columns: 1fr; }
+@media (max-width: 899px) {
+  .gm3-workspace:not([data-sl-ready]) { grid-template-columns: minmax(0, 1fr); }
+  .gm3-workspace:not([data-sl-ready]) > :is(.gm-sidebar, .gm-content) { grid-column: 1; grid-row: auto; position: static; }
+  #gm3-intro { max-width: 36em; }
+  .gm3-workspace .gm-sidebar a.gm3-back-to-map { display: inline-flex; justify-self: start; }
 }
 @media (max-width: 520px) {
-  .gm3-heading h1 { font-size: 32px; }
-  .gm3-toolbar { gap: 8px; padding-inline: 10px; }
-  .gm3-toolbar :is(.gm3-presets, .gm3-actions) { gap: 4px; }
-  .gm3-toolbar button { min-width: 32px; padding-inline: 7px; font-size: 14px; }
-  .gm3-actions button span { display: none; }
+  .gm3-heading { gap: 9px; background-image: linear-gradient(90deg, oklch(20% .035 210 / .96), oklch(23% .044 207 / .7)), url("assets/himalayas-orbit.jpg"); }
+  .gm3-hero-credit { position: static; justify-self: start; }
   .gm3-viewport { height: clamp(320px, 49dvh, 440px); }
   .gm3-compass { right: 7px; width: 52px; height: 55px; }
   .gm3-inset { right: 10px; bottom: 10px; }
   .gm3-map-label { font-size: 12px; }
   .gm3-map-footer { padding: 12px; font-size: 14px; }
-  .gm3-feature-directory { padding: 16px; }
-  .gm3-feature-group { grid-template-columns: 1fr; gap: 2px; }
 }
 
 /* 剖面图和地图共用 A、B；曲线海拔不跟随视觉放大倍率。 */
-.china-3d-topic[data-sl-mode="wide"] { --sl-width: clamp(280px, 24vw, 360px) !important; }
 .gm3-section h2 { font-size: 19px; margin: 0; }
 .gm3-section-guide { margin-top: 10px; }
 .gm3-section p { margin: 9px 0; font-size: 16px; line-height: 1.7; }
-.gm3-section-tools { padding: 10px var(--gm3-pad); display: flex; flex-wrap: wrap; align-items: center; gap: 8px; background: var(--atlas-tint); border-top: 1px solid var(--atlas-border); }
-.gm3-section-tools button { min-height: 40px; padding: 7px 11px; font-weight: 750; color: var(--ink); border: 1px solid #a7c3b6; border-radius: 10px; background: var(--card); }
-.gm3-section-tools button[aria-pressed="true"] { background: #9b3f24; color: #fff; }
-.gm3-section-tools button:disabled { opacity: .5; cursor: default; }
-#gm3-section-hint { font-size: 14px; color: var(--ink-soft); }
+.gm3-section-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
 #gm3-section-draw { scroll-margin-top: 12px; }
 #gm3-section-status { color: #873f20; font-weight: 700; }
-#gm3-section-chart { width: 100%; max-width: 430px; display: block; margin-inline: auto; background: #fbfcf7; border: 1px solid var(--atlas-border); border-radius: 10px; }
-.china-3d-topic[data-section-from][data-sl-mode="wide"][data-sl-collapsed="false"] > .sl-sidebar,
-.china-3d-topic[data-section-from][data-sl-mode="compact"][data-sl-open="true"] > .sl-sidebar { height: var(--sl-height) !important; }
+#gm3-section-chart { width: 100%; max-width: 640px; display: block; margin-inline: auto; background: #fbfcf7; border: 1px solid var(--atlas-border); border-radius: 10px; }
 #gm3-section-chart text { fill: #34504b; font-size: 14px; font-variant-numeric: tabular-nums; }
 .gm3-section-grid { stroke: #cbd8d0; stroke-dasharray: 3 4; fill: none; }
 .gm3-section-area { fill: #b3d9b9; opacity: .65; }
@@ -267,7 +348,6 @@
 .gm3-play-tools button:hover { border-color: #33856b; background: var(--atlas-tint); }
 .gm3-play-tools button[aria-pressed="true"] { color: #fff; background: #256d58; border-color: #256d58; }
 .gm3-play-tools button:disabled { opacity: .5; cursor: default; }
-.gm3-game-heading { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; }
 .gm3-game p { font-size: 17px; line-height: 1.75; margin: 8px 0; }
 .gm3-game .gm3-game-clue { font-size: 20px; font-weight: 750; }
 #gm3-game-feedback { padding: 10px 14px; background: var(--card); border-left: 5px solid #d48b3c; border-radius: 8px; }
@@ -288,7 +368,6 @@
 .gm3-hydrology h3 { margin: 20px 0 8px; font-size: 22px; }
 .gm3-hydrology p { margin: 10px 0; font-size: 18px; line-height: 1.85; }
 .gm3-hydrology p.gm3-hydro-note { font-size: 16px; color: var(--ink-soft); }
-.gm3-basin-choices { margin-top: 12px; }
 .gm3-hydrology a { color: var(--ink); text-underline-offset: .2em; }
 .gm3-basin-card a, .gm3-hydro-detail a { color: inherit; }
 .gm3-water-legend { display: flex; flex-wrap: wrap; gap: 12px 22px; font-size: 16px; }
@@ -301,7 +380,7 @@
 .gm3-hydro-detail { border: 1px solid #dfbb77; border-radius: 14px; padding: 0 20px 15px; background: #fff7e8; color: #4e4a35; }
 .gm3-hydro-detail[hidden] { display: none; }
 @media (max-width: 520px) { .gm3-basin-card { padding: 14px; } }
-.gm3-pin-tools { padding: 8px var(--gm3-pad); border-top: 1px solid var(--atlas-border); }
+.gm3-pin-tools { padding-top: 8px; border-top: 1px solid var(--atlas-border); }
 .gm3-stream-tools { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; padding: 7px var(--gm3-pad); color: var(--ink-soft); font-size: 14px; }
 .gm3-stream-tools p { margin: 0; }
 .gm3-stream-tools button { padding: 6px 12px; min-height: 40px; font: inherit; color: var(--ink); background: var(--card); border: 1px solid var(--atlas-border); border-radius: 9px; }

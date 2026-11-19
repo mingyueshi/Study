@@ -7,9 +7,9 @@ svg { --reading-scale: 1; }
   html[data-reading-size="large"] { --reading-scale: 1.2; }
   html[data-reading-theme="dark"] { color-scheme: dark; }
   html[data-reading-theme="light"], html[data-reading-theme="warm"] { color-scheme: light; }
-  /* 教学图的深色标注原本画在浅纸上，单独保留画纸，避免落在深色底上。 */
-  html[data-reading-theme="dark"] #main svg:has(text),
-  html[data-reading-theme="warm"] #main svg:has(text) {
+  /* 独立教学图保留画纸。地图标注等叠加图层可声明保留自身外观。 */
+  html[data-reading-theme="dark"] #main svg:has(text):where(:not([data-reading-preserve])),
+  html[data-reading-theme="warm"] #main svg:has(text):where(:not([data-reading-preserve])) {
     --ink: #233e37;
     --lab-ink: #163e53;
     --atlas-ink: #183e36;

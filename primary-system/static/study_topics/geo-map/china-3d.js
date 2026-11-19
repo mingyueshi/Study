@@ -7,6 +7,10 @@
   const terrainIndex = window.GM_CHINA_TERRAIN_INDEX;
   const streamingReady = Boolean(terrainIndex?.waterBaked && window.GMChinaTerrainStream && root.querySelector('#gm3-terrain-status'));
   const $ = id => root.querySelector(`#${id}`);
+  const workspace = root.querySelector('.gm3-workspace');
+  const contentPanels = $('gm3-content-panels');
+  const panels = [...contentPanels.querySelectorAll('[data-gm3-content]')];
+  let activeContent = '';
   let mapSearch = location.search;
   const S = window.GMShared;
   const data = window.GM_CHINA_3D;
@@ -58,6 +62,7 @@
   const leaders = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
   leaders.classList.add('gm3-label-leaders');
   leaders.setAttribute('aria-hidden', 'true');
+  leaders.setAttribute('data-reading-preserve', '');
   $('gm3-label-layer').append(leaders);
 
   $('gm3-intro').textContent = data.intro;
@@ -75,7 +80,7 @@
     `<button type="button" value="${item.feature}" aria-pressed="false">${esc(features.get(item.feature).name)}</button>`).join('');
   $('gm3-landmarks').innerHTML = data.featureGroups.map(group => {
     const entries = group.kind === 'river' ? data.rivers : group.kind === 'lake' ? extraData.lakes : data.terrain.landmarks.filter(mark => features.get(mark.feature).kind === group.kind);
-    return `<div class="gm3-feature-group"><h3>${esc(group.label)}</h3><div class="gm3-landmark-tools" role="group" aria-label="${esc(group.label)}">` + entries.map(mark => `<button type="button" data-${group.kind === 'river' ? 'river' : group.kind === 'lake' ? 'lake' : 'landform'}="${mark.feature}" aria-pressed="false">${esc(features.get(mark.feature).name)}</button>`).join('') + '</div></div>';
+    return `<details class="gm3-tool-subgroup"><summary>${esc(group.label)}</summary><div class="gm3-landmark-tools" role="group" aria-label="${esc(group.label)}">` + entries.map(mark => `<button type="button" data-${group.kind === 'river' ? 'river' : group.kind === 'lake' ? 'lake' : 'landform'}="${mark.feature}" aria-pressed="false">${esc(features.get(mark.feature).name)}</button>`).join('') + '</div></details>';
   }).join('');
   picker.insertAdjacentHTML('beforeend', [...regions.values()].map(r => `<optgroup label="${esc(r.name)}">` +
     provinces.filter(p => p.region === r.id).map(p => `<option value="${p.id}">${esc(p.name)}</option>`).join('') + '</optgroup>').join(''));
@@ -87,11 +92,10 @@
     delete root.dataset.estuary;
     root.querySelectorAll('[data-estuary]').forEach(b => b.setAttribute('aria-pressed','false'));
     closeTour(false, false);
+    flowPlayback?.pause();
     selected = id;
     focusedLandform = '';
     focusedRiver = '';
-    profile.hidden = false;
-    featureProfile.hidden = true;
     delete root.dataset.feature;
     updateRivers();
     showElevation(meters);
@@ -107,9 +111,7 @@
     $('gm3-flat-link').href = flatMapHref(p.id);
     $('gm3-selection').textContent = `${p.name} · 简称${p.short}`;
     root.dataset.selected = id;
-    // 深链接可能先于公共侧栏初始化；等待接入后再展开档案。
-    if (root.dataset.slReady) revealProfile();
-    else document.addEventListener('DOMContentLoaded', revealProfile, { once: true });
+    showContent('gm3-profile');
     updateProvinces();
     if (updateURL) {
       const url = new URL(location.href);
@@ -122,14 +124,88 @@
     }
     requestDraw();
   }
-  function revealProfile() {
-    if (root.dataset.slMode === 'compact' && root.dataset.slOpen !== 'true') {
-      root.querySelector('.sl-toggle:not(.sl-collapse)')?.click();
-    } else if (root.dataset.slMode === 'wide' && root.dataset.slCollapsed === 'true') {
-      root.querySelector('.sl-collapse')?.click();
+  function showContent(id = '') {
+    const panel = id && $(id);
+    activeContent = id;
+    for (const entry of panels) entry.hidden = entry !== panel;
+    contentPanels.hidden = !panel;
+    const link = $('gm3-content-link');
+    link.hidden = !panel;
+    link.textContent = panel ? `查看${panel.dataset.gm3Content} ↓` : '';
+    $('gm3-content-close').textContent = id === 'gm3-tour-panel' ? '退出漫游' :
+      ['gm3-challenges', 'gm3-learning-lab'].includes(id) ? '退出玩法' : '收起内容';
+  }
+  function focusContent() {
+    contentPanels.focus({ preventScroll: true });
+    contentPanels.scrollIntoView({ block: 'start', behavior: 'instant' });
+  }
+  function closeContent(id) {
+    if (activeContent === id) showContent();
+  }
+  function stopActivities() {
+    if (adventure?.active) adventure.stop();
+    if (activities?.active) activities.stop();
+    closeTour();
+    flowPlayback?.pause();
+    sectionController?.cancel();
+    narrator?.stop();
+  }
+  $('gm3-content-close').addEventListener('click', () => {
+    stopActivities();
+    showContent();
+    $('map').focus({ preventScroll: true });
+    $('map').scrollIntoView({ block: 'start', behavior: 'instant' });
+  });
+  function revealSidebar(target) {
+    if (!target?.closest('.gm-sidebar') || !workspace.contains(target)) return false;
+    for (let group = target.closest('details'); group && workspace.contains(group); group = group.parentElement.closest('details')) {
+      group.open = true;
+    }
+    function expand() {
+      if (workspace.dataset.slMode === 'compact' && workspace.dataset.slOpen !== 'true') {
+        workspace.querySelector('.sl-toggle:not(.sl-collapse)')?.click();
+      } else if (workspace.dataset.slMode === 'wide' && workspace.dataset.slCollapsed === 'true') {
+        workspace.querySelector('.sl-collapse')?.click();
+      }
+    }
+    if (workspace.dataset.slReady) expand();
+    else if (document.readyState === 'loading' || document.readyState === 'interactive') {
+      document.addEventListener('DOMContentLoaded', expand, { once: true });
+    }
+    return true;
+  }
+  function revealToolLink(hash) {
+    let target;
+    try { target = document.getElementById(decodeURIComponent(hash.slice(1))); } catch { return; }
+    if (!target) return;
+    if ((hash === '#gm3-challenges' || hash === '#gm3-learning-lab') && target.hidden) target = $('gm3-challenge-tools');
+    if (revealSidebar(target)) requestAnimationFrame(() => target.scrollIntoView({ block: 'nearest', behavior: 'instant' }));
+    else {
+      const panel = target.closest(':is(#gm3-section, #gm3-observe, #gm3-map-notes)');
+      if (!panel?.hidden) return;
+      stopActivities();
+      showContent(panel.id);
+      requestAnimationFrame(focusContent);
     }
   }
-  picker.addEventListener('change', () => { if (picker.value) chooseProvince(picker.value); else picker.value = selected; });
+  root.addEventListener('click', event => {
+    const trigger = event.target.closest('button:is([data-open-content], [data-china-mode], [data-learning-mode], [data-mission], [data-relation])');
+    if (trigger?.dataset.openContent) {
+      stopActivities();
+      showContent(trigger.dataset.openContent);
+      focusContent();
+    } else if (trigger && !contentPanels.hidden) focusContent();
+    const link = event.target.closest('a[href^="#"]');
+    if (link) revealToolLink(link.hash);
+  });
+  window.addEventListener('hashchange', () => revealToolLink(location.hash));
+  document.addEventListener('DOMContentLoaded', () => revealToolLink(location.hash), { once: true });
+  picker.addEventListener('change', () => {
+    if (!picker.value) { picker.value = selected; return; }
+    stopActivities();
+    select(picker.value);
+    if (workspace.dataset.slMode === 'compact') $('map').scrollIntoView({ block: 'start', behavior: 'instant' });
+  });
   function showElevation(meters) {
     $('gm3-elevation').textContent = meters === null ? '在地形上点一下，读出该处网格海拔。' :
       `此处网格海拔约 ${Math.round(meters / 10) * 10} 米 · 高度放大不改变读数`;
@@ -208,15 +284,15 @@
   }
   function showFeature(id) {
     const feature = features.get(id);
-    featureProfile.hidden = false;
-    featureProfile.innerHTML = `<span class="gm3-kicker">${esc(data.featureGroups.find(group => group.kind === feature.kind).label)}</span><h2>${esc(feature.name)}</h2><p><strong>${esc(feature.where)}</strong><br>${esc(feature.note)}</p><a href="${esc(flatMapHref(id))}">在平面地图上细看 ↗</a>`;
+    const href = flatMapHref(id);
+    featureProfile.innerHTML = `<span class="gm3-kicker">${esc(data.featureGroups.find(group => group.kind === feature.kind).label)}</span><h2>${esc(feature.name)}</h2><p><strong>${esc(feature.where)}</strong><br>${esc(feature.note)}</p><a href="${esc(href)}">在平面地图上细看 ↗</a>`;
     const coverage = window.GM_CHINA_RIVERS?.rivers[id]?.coverage;
     if (coverage) featureProfile.insertAdjacentHTML('beforeend', `<p class="gm3-coverage">本图河道：${esc(coverage)}</p>`);
     const flow = data.rivers.find(item => item.feature === id)?.flow;
     if (flow) featureProfile.insertAdjacentHTML('beforeend', `<p class="gm3-coverage">${esc(flow.summary)}<br>${esc(flow.note)}</p>`);
     root.dataset.feature = id;
-    if (root.dataset.slReady) revealProfile();
-    else document.addEventListener('DOMContentLoaded', revealProfile, { once: true });
+    $('gm3-flat-link').href = href;
+    showContent('gm3-feature-profile');
   }
   function updateRivers() {
     for (const [id, river] of rivers) {
@@ -241,7 +317,6 @@
     focusedRiver = id; focusedLandform = ''; selected = '';
     root.dataset.selected = '';
     picker.value = '';
-    profile.hidden = true;
     showElevation(null);
     showFeature(id);
     showRivers = true;
@@ -250,7 +325,6 @@
     updateProvinces();
     const feature = features.get(id), river = rivers.get(id);
     $('gm3-selection').textContent = `${feature.name} · 真实河道`;
-    $('gm3-flat-link').href = flatMapHref(id);
     if (river && controls && !failed) {
       let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
       for (const sample of river.samples) {
@@ -297,6 +371,7 @@
     activities?.stop(); setComparison(false);
     adventure?.stop(); sectionController?.cancel();
     closeTour(false, false);
+    showContent();
     const id = params.get('place') || (params.has('adcode') ? `p${params.get('adcode')}` : '');
     const landform = params.get('landform');
     const river = params.get('river');
@@ -306,12 +381,22 @@
     else if (id) $('gm3-selection').textContent = '没有找到这个省份，请从列表重新选择。';
     const lake = params.get('lake'); if (extraData.lakes.some(l => l.feature === lake)) focusLake(lake, false);
     const basin = params.get('basin');
-    if (window.GM_CHINA_HYDROLOGY.basins.some(b => b.feature === basin)) { hydrology.select(basin); hydrology.setVisible(true, false); }
+    if (window.GM_CHINA_HYDROLOGY.basins.some(b => b.feature === basin)) {
+      hydrology.select(basin);
+      hydrology.setVisible(true, false);
+      // 流域图层可和省区、地形或湖泊一起保留，重新打开时先显示所选地点。
+      if (!activeContent || focusedRiver) showContent('gm3-hydrology');
+    }
     else hydrology.setVisible(false, false);
-    if (window.GM_CHINA_HYDROLOGY.estuaries.some(e => e.id === params.get('estuary'))) focusEstuary(params.get('estuary'), false);
+    if (window.GM_CHINA_HYDROLOGY.estuaries.some(e => e.id === params.get('estuary'))) {
+      focusEstuary(params.get('estuary'), false);
+    }
     const route = allTours.find(item => item.id === params.get('tour'));
     if (route) startTour(route.id, false, params.get('stop'));
-    if (activities && ['steps','puzzle','questions'].includes(params.get('learn'))) activities.open(params.get('learn'));
+    const learn = params.get('learn');
+    if (activities && ['steps','puzzle','questions'].includes(learn)) {
+      activities.open(learn);
+    }
   }
   window.addEventListener('popstate', () => {
     // 页内锚点只滚动页面，继续保留当前挑战、剖面和相机位置。
@@ -426,6 +511,7 @@
     $('gm3-compare').setAttribute('aria-pressed', String(comparison));
     $('gm3-compare').textContent = comparison ? '退出左右对照' : '1×／50× 左右对照';
     $('gm3-compare-captions').hidden = !comparison;
+    $('gm3-compare-note').hidden = !comparison;
     $('gm3-height').disabled = failed || comparison;
     for (const id of ['gm3-true-height', 'gm3-height-50']) $(id).disabled = failed || comparison;
     pins?.refresh();
@@ -508,6 +594,7 @@
     const estuary = window.GM_CHINA_HYDROLOGY.estuaries.find(e => e.id === id); if (!estuary) return;
     focusRiver(estuary.river, false); flowPlayback?.pause();
     focusWaterPoint(estuary.point, estuary.zoom, estuary.name); hydrology.showEstuary(id); root.dataset.estuary = id;
+    showContent('gm3-hydrology');
     if (updateURL) {
       const url = new URL(location.href); url.searchParams.set('river', estuary.river); url.searchParams.set('estuary', id);
       for (const key of ['place','landform','tour','stop','lake']) url.searchParams.delete(key);
@@ -520,7 +607,7 @@
     const lake = extraData.lakes.find(l => l.feature === id); if (!lake) return;
     activities?.stop(); setComparison(false);
     adventure?.stop(); closeTour(); sectionController?.cancel(); flowPlayback?.pause();
-    selected = ''; focusedRiver = ''; focusedLandform = ''; root.dataset.selected = ''; delete root.dataset.estuary; picker.value = ''; profile.hidden = true;
+    selected = ''; focusedRiver = ''; focusedLandform = ''; root.dataset.selected = ''; delete root.dataset.estuary; picker.value = '';
     root.querySelectorAll('[data-estuary]').forEach(b => b.setAttribute('aria-pressed','false'));
     updateProvinces(); showFeature(id);
     if ($('gm3-lakes').getAttribute('aria-pressed') !== 'true' && !$('gm3-lakes').disabled) $('gm3-lakes').click();
@@ -533,16 +620,24 @@
     }
     requestDraw();
   }
-  hydrology = window.GMChinaHydrology.mount({root, focusRiver, focusPoint: focusWaterPoint, focusEstuary, requestDraw, replaceMapLocation, available: () => Boolean(renderer) && !failed, reveal: () => viewport.scrollIntoView({block:'center',behavior:'instant'}),terrainParts:streamingReady?()=>terrainStreaming.parts():null});
+  hydrology = window.GMChinaHydrology.mount({root, focusRiver, focusPoint: focusWaterPoint, focusEstuary, requestDraw, replaceMapLocation, available: () => Boolean(renderer) && !failed,
+    reveal: () => {
+      stopActivities();
+      showContent('gm3-hydrology');
+      viewport.scrollIntoView({ block: 'center', behavior: 'instant' });
+    }, terrainParts: streamingReady ? () => terrainStreaming.parts() : null});
   if (learningReady) {
     pins = window.GMChinaLearningVisual.mount({
       root,
       available: () => Boolean(renderer) && !failed && !comparison,
       requestDraw,
       prepare: () => {
+        stopActivities();
+        showContent('gm3-pin-panel');
         terrainPlay?.settle(true);
         viewport.scrollIntoView({ block: 'center', behavior: 'instant' });
       },
+      emptied: () => closeContent('gm3-pin-panel'),
     });
     $('gm3-compare-note').textContent = window.GM_CHINA_LEARNING.compareNote;
     activities = window.GMChinaLearning.mount({
@@ -551,6 +646,8 @@
       available: () => Boolean(renderer) && !failed,
       sample: sampleForLearning,
       changed: () => {
+        if (root.dataset.learningMode === 'browse') closeContent('gm3-learning-lab');
+        else showContent('gm3-learning-lab');
         syncFlat();
         requestDraw();
       },
@@ -607,6 +704,7 @@
     $('gm3-flow-play').setAttribute('aria-pressed', String(playing));
     $('gm3-flow-step').disabled = !available;
     $('gm3-flow-ends').disabled = failed || !showRivers;
+    $('gm3-flow-title').textContent = `${features.get(flowRiver).name}的流向`;
     $('gm3-flow-summary').textContent = flow.summary;
     $('gm3-flow-note').innerHTML = esc(flow.note) + ' ' + flow.sources.map(source => `<a href="${esc(source.url)}" target="_blank" rel="noopener">${esc(source.label)}（需联网）↗</a>`).join(' · ');
     $('gm3-flow-status').textContent = failed ? '立体画面不可用，仍可阅读源头与去向。' : !showRivers ? '打开「主要河流」后可观察。' :
@@ -725,7 +823,9 @@
     tourController.dispose(); tourController = null;
     tourWritingURL = false;
     tourRoute = tourView = tourPoint = null; tourLastDistance = null; tourStory = '';
-    $('gm3-tour-panel').hidden = true;
+    closeContent('gm3-tour-panel');
+    $('gm3-tour-controls').hidden = true;
+    for (const button of $('gm3-route-buttons').children) button.setAttribute('aria-pressed', 'false');
     root.dataset.tourActive = 'false'; root.dataset.tourPlaying = 'false';
     tourMarker.style.display = 'none';
     if (controls && saved) {
@@ -764,9 +864,10 @@
     flowLayer.append(tourMarker);
     tourOffset = new T.Vector3(0, -28, 42); tourZoom = width < 700 ? 4 : 6;
     if (controls) controls.maxZoom = 8;
-    $('gm3-tour-panel').hidden = false;
+    $('gm3-tour-controls').hidden = false;
+    showContent('gm3-tour-panel');
     root.dataset.tourActive = 'true'; root.dataset.tourRoute = id;
-    for (const button of $('gm3-tour-route').children) button.setAttribute('aria-pressed', String(button.value === id));
+    for (const button of $('gm3-route-buttons').children) button.setAttribute('aria-pressed', String(button.dataset.route === id));
     const showStopButtons = tourRoute.stops.length <= 6;
     $('gm3-tour-stop-field').hidden = showStopButtons;
     $('gm3-tour-stops').hidden = !showStopButtons;
@@ -968,7 +1069,7 @@
     flowPlayback?.pause();
     tourController?.pause();
     sectionController?.suspend();
-    $('gm3-section-hint').textContent = '3D 画面不可用，恢复画面后可拉线。';
+    $('gm3-section-status').textContent = '3D 画面不可用，恢复画面后可拉线。';
     flowLayer.style.display = 'none';
     syncFlow();
     $('gm3-fallback').hidden = false;
@@ -981,6 +1082,10 @@
   $('gm3-section-clear').addEventListener('click', narrator.stop);
   adventure = window.GMChinaAdventures.mount({ root,
     prepare: () => { activities?.stop();setComparison(false);sectionController?.cancel(); narrator?.stop(); closeTour(); flowPlayback?.pause(); terrainPlay?.flatten(true); setView('perspective'); },
+    changed: mode => {
+      if (mode === 'browse') closeContent('gm3-challenges');
+      else showContent('gm3-challenges');
+    },
     highlight: id => { selected = id; updateProvinces(); },
     mark: point => { gamePoint = point; requestDraw(); },
     locate: point => {
@@ -989,10 +1094,11 @@
       camera.updateProjectionMatrix(); controls.update(); requestDraw();
     },
   });
-  $('gm3-route-buttons').innerHTML = allTours.map(route => `<button type="button" data-route="${route.id}">${route.kind === 'flight' ? '✈ ' : route.kind === 'canal' ? '⛵ ' : ''}${esc(route.name)}</button>`).join('');
-  $('gm3-route-buttons').addEventListener('click', e => { const b = e.target.closest('[data-route]'); if (b) startTour(b.dataset.route); });
-  $('gm3-tour-route').innerHTML = allTours.map(route =>
-    `<button type="button" value="${route.id}" aria-pressed="false">${esc(route.name)}</button>`).join('');
+  $('gm3-route-buttons').innerHTML = allTours.map(route => `<button type="button" data-route="${route.id}" aria-pressed="false">${route.kind === 'flight' ? '✈ ' : route.kind === 'canal' ? '⛵ ' : ''}${esc(route.name)}</button>`).join('');
+  $('gm3-route-buttons').addEventListener('click', e => {
+    const button = e.target.closest('[data-route][aria-pressed="false"]');
+    if (button) startTour(button.dataset.route);
+  });
   try {
     renderer = new T.WebGLRenderer({ canvas, antialias: true, alpha: true });
     renderer.setClearColor(0x000000, 0);
@@ -1170,6 +1276,7 @@
     };
     sectionController = window.GMTerrainSection.create({
       root, canvas, sample: sampleSurface, requestDraw, project: projectFlow,
+      revealPanel: () => { showContent('gm3-section'); focusContent(); },
       sampleReady: terrainStreaming ? (a,b,run)=>terrainStreaming.withLine(a,b,run) : null,
       pick: event => {
         if (failed) return null;
@@ -1177,7 +1284,12 @@
         return hit ? [hit.point.x + 104.5, hit.point.y / 1.22 + 35.8] : null;
       },
       setDrawing: on => { controls.enabled = !on; $('gm3-label-layer').inert = on; syncFlat(); },
-      prepare: () => { activities?.stop();setComparison(false);adventure?.stop(); narrator?.stop(); closeTour(); flowPlayback?.pause(); terrainPlay?.flatten(true); },
+      prepare: () => {
+        stopActivities();
+        setComparison(false);
+        showContent('gm3-section');
+        terrainPlay?.flatten(true);
+      },
       presetView: () => setView('top'),
     });
     let gesture = null;
@@ -1346,10 +1458,13 @@
   window.addEventListener('pageshow', refreshFlow);
   $('gm3-flow-river').addEventListener('click', event => {
     const button = event.target.closest('button');
-    if (button) focusRiver(button.value);
+    if (!button) return;
+    focusRiver(button.value);
+    showContent('gm3-flow-panel');
   });
   function revealFlow() {
-    tourController?.pause();
+    stopActivities();
+    showContent('gm3-flow-panel');
     const rect = viewport.getBoundingClientRect();
     if (rect.bottom < Math.min(180, rect.height / 2) || rect.top >= innerHeight) {
       viewport.scrollIntoView({ block: 'start', behavior: 'instant' });
@@ -1360,9 +1475,13 @@
     if (flowPlayback.playing) flowPlayback.pause();
     else { revealFlow(); flowPlayback.play(); }
   });
-  $('gm3-flow-step').addEventListener('click', () => { revealFlow(); flowPlayback.step(); });
+  $('gm3-flow-step').addEventListener('click', () => {
+    if (activeContent !== 'gm3-flow-panel') revealFlow();
+    flowPlayback.step();
+  });
   $('gm3-flow-ends').addEventListener('click', () => {
     showEnds = !showEnds;
+    if (activeContent !== 'gm3-flow-panel') revealFlow();
     $('gm3-flow-ends').setAttribute('aria-pressed', String(showEnds));
     requestDraw();
   });
@@ -1372,15 +1491,16 @@
     $('map').scrollIntoView({ block: 'start', behavior: 'instant' });
     $('map').focus({ preventScroll: true });
   });
-  $('gm3-tour-route').addEventListener('click', event => {
-    const button = event.target.closest('button[aria-pressed="false"]');
-    if (button) startTour(button.value, false);
-  });
   $('gm3-tour-play').addEventListener('click', () => {
     if (!tourController) return;
     if (tourController.snapshot().playing) { tourController.pause(); narrator?.stop(); }
     else {
       flowPlayback.pause();
+      const rect = viewport.getBoundingClientRect();
+      if (rect.bottom <= 0 || rect.top >= innerHeight) {
+        viewport.scrollIntoView({ block: 'start', behavior: 'instant' });
+        inView = true;
+      }
       if (controls && !failed) { tourOffset.copy(camera.position).sub(controls.target); tourZoom = camera.zoom; }
       tourLastDistance = null;
       tourController.play();

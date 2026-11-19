@@ -377,6 +377,16 @@ class StudyTopicPageTests(SimpleTestCase):
                 self.assertContains(page, f'data-atlas-base="{reverse("geography-atlas")}"')
                 self.assertNotContains(page, 'class="gm-atlas-more"')
 
+    def test_china_terrain_retains_tool_and_observation_anchors(self):
+        page = self.client.get(reverse('geography-china-terrain'))
+        for anchor in (
+            'gm3-section', 'gm3-section-draw', 'gm3-section-hint',
+            'gm3-river-title', 'gm3-tour-route-label',
+            'gm3-directory', 'gm3-directory-title', 'gm3-observe-title',
+        ):
+            with self.subTest(anchor=anchor):
+                self.assertContains(page, f'id="{anchor}"', count=1)
+
     def test_globe_links_layers_and_tools_to_existing_topic_sections(self):
         globe = self.client.get(reverse('geography-globe'))
         for modes, route, anchor in (

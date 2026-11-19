@@ -23,7 +23,7 @@ window.GMChinaAdventures = (() => {
       },
     };
   }
-  function mount({ root, prepare, locate, highlight, mark }) {
+  function mount({ root, prepare, locate, highlight, mark, changed }) {
     const D = window.GM_CHINA_ADVENTURES, esc = window.GMShared.esc, $ = id => root.querySelector('#gm3-game-' + id);
     let mode = 'browse', saved = new Set();
     try { saved = readProgress(localStorage.getItem(KEY), D.missions); } catch { $('storage').textContent = '记录暂存本页，浏览器无法保存到下次。'; }
@@ -36,6 +36,7 @@ window.GMChinaAdventures = (() => {
       layer.inert = mode === 'hunt' || root.dataset.sectionDrawing === 'true';
       root.querySelectorAll('[data-china-mode]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.chinaMode === mode)));
       $('body').hidden = mode === 'browse';
+      root.querySelector('#gm3-mission-tools').hidden = mode === 'browse';
       root.querySelector('#gm3-game-map-clue').hidden = mode === 'browse';
       $('progress').textContent = `已完成 ${s.found.size}／${D.missions.length}`;
       if (mode === 'browse') return;
@@ -57,6 +58,7 @@ window.GMChinaAdventures = (() => {
         const s = round.state(), entries = D.missions.filter(m => m.kind === mode);
         begin((entries.find(m => !s.found.has(m.id)) || entries[0]).id);
       } else render();
+      changed(mode);
     }
     function guess(province, point) {
       if (mode === 'browse') return false;
