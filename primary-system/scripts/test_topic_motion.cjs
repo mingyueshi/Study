@@ -46,10 +46,25 @@ test('solar stepping compares periods and switching views preserves elapsed time
   assert.match(page.get('[data-roam-laps]').textContent, /水星约转了 1.04 圈/);
   page.click('[data-roam-mode]', 1);
   assert.equal(page.get('[data-roam-time-controls]').hidden, true);
+  assert.equal(page.get('[data-roam-orbit-settings]').hidden, true);
   page.click('[data-roam-mode]', 0);
+  assert.equal(page.get('[data-roam-orbit-settings]').hidden, false);
   assert.equal(page.get('[data-roam-elapsed]').textContent, '已过 0.25 地球年');
   page.click('[data-roam-reset]');
   assert.equal(page.get('[data-roam-elapsed]').textContent, '已过 0.00 地球年');
+  assert.match(page.get('[data-roam-laps]').textContent, /水星约转了 0.00 圈/);
+});
+
+test('solar parameters and navigation sit in the sidebar while playback and readings stay by the model', () => {
+  const {media} = solarPage();
+  const [sidebar, content] = media.render([{id:'lab',name:'天文实验室'}]).split('</aside>');
+  assert.match(sidebar, /data-sidebar-layout="\.experiment-side"/);
+  for (const id of ['mode','planet','speed']) assert.match(sidebar, new RegExp('data-roam-' + id));
+  assert.match(sidebar, /href="\?view=lab"/);
+  for (const selector of ['data-roam-scene','data-roam-play','data-roam-elapsed','data-roam-reset']) {
+    assert.ok(content.includes(selector));
+  }
+  assert.match(content, /id="roam-lab"/);
 });
 
 test('solar playback uses selected speed, pauses offscreen, and cancels stale frames on dispose', () => {

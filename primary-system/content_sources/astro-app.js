@@ -68,7 +68,7 @@ function renderChips() {
 }
 
 function renderStats() {
-  const el = document.getElementById('stats');
+  const el = document.getElementById('roam-study-progress') || document.getElementById('stats');
   if (el) el.textContent = '已掌握 ' + totalLearned() + ' / ' + ATOTAL_POINTS + ' 个知识点';
 }
 
@@ -233,7 +233,8 @@ function renderMain() {
   if (curView === 'clinic') { box.innerHTML = renderClinic(); return; }
   if (curView === 'lab' && window.AstroLab) { box.innerHTML = AstroLab.render(); AstroLab.mount(); return; }
   if (curView === 'universe' && window.AstroMedia) {
-    box.innerHTML = AstroMedia.render();
+    const topics = [...ASTRO.units, ...AEXTRA_VIEWS.filter(view => view.id !== 'universe')];
+    box.innerHTML = AstroMedia.render(topics);
     AstroMedia.mount();
     return;
   }
@@ -290,8 +291,7 @@ document.addEventListener('click', e => {
 document.addEventListener('input', e => {
   if (e.target && e.target.id === 'search') {
     query = e.target.value.trim();
-    renderChips();
-    renderMain();
+    render();
   }
 });
 

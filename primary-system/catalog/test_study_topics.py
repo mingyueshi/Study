@@ -448,6 +448,8 @@ class StudyTopicPageTests(SimpleTestCase):
             response = self.client.get('/astronomy/', {'view': view})
             self.assertTemplateUsed(response, 'study_topics/course.html')
             self.assertContains(response, 'id="cards"')
+            self.assertContains(response, 'study_topics/map-skills/experiment.css?v=')
+            self.assertContains(response, 'study_topics/map-skills/experiment.js?v=')
 
     def test_main_views_link_to_related_topics(self):
         for main, lesson, label in (

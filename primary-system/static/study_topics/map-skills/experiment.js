@@ -1,9 +1,6 @@
 /* 到参数区或图面时保留当前实验地址与运行状态。 */
 (() => {
   'use strict';
-  const workspace = document.querySelector('.experiment-workspace');
-  const sidebar = workspace.querySelector('.experiment-side');
-
   function targetAt(hash) {
     try { return document.getElementById(decodeURIComponent(hash.slice(1))); }
     catch { return null; }
@@ -22,9 +19,11 @@
 
   window.addEventListener('hashchange', restoreAnchor);
   restoreAnchor();
-  workspace.addEventListener('click', event => {
+  document.addEventListener('click', event => {
     const link = event.target.closest('[data-experiment-jump], [data-experiment-return]');
-    if (!link || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+    const workspace = link?.closest('.experiment-workspace');
+    if (!workspace || event.defaultPrevented || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+    const sidebar = workspace.querySelector('.experiment-side');
     const target = targetAt(link.hash);
     if (!target) return;
     event.preventDefault();

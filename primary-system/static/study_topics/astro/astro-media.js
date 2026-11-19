@@ -15,27 +15,104 @@
   function chapter(c) {
     return `<section class="roam-chapter" id="roam-${c.id}" aria-labelledby="roam-title-${c.id}"><header><h2 id="roam-title-${c.id}">${esc(c.title)}</h2><p>${esc(c.intro)}</p><p class="roam-scale">${esc(c.scale)}</p></header><div class="roam-gallery">${c.images.map(image).join('')}</div><div class="roam-cinema"><div><video controls playsinline preload="none" poster="${asset(c.movie.poster)}" aria-label="${esc(c.movie.title)}" src="${asset(c.movie.src)}">当前浏览器无法播放，请通过下方原始资料查看动画。</video><p class="roam-video-error" hidden>这段动画暂时无法播放，可以先看封面和中文导览，或打开下方原始资料。</p></div><div class="roam-cinema-copy"><span class="roam-kind">${esc(c.movie.kind)}</span><h3>${esc(c.movie.title)}</h3><p>${esc(c.watch)}</p><p>${esc(c.movie.caption)}</p><small>来源：${esc(c.movie.credit)} · ${external(c.movie.source, '动画原始资料（需联网）')}</small></div></div><details class="roam-question"><summary>想一想：${esc(c.question)}</summary><p>${esc(c.answer)}</p></details><div class="roam-links"><h3>继续探索 <small>需联网 · 新窗口打开</small></h3><ul>${c.links.map(l => `<li>${external(l.url, l.title)}<p>${esc(l.note)}</p></li>`).join('')}</ul><button type="button" class="play-btn" data-act="unit" data-id="${c.unit}">回到课程：${c.unit === 'au1' ? '太阳系大家庭' : '银河系与宇宙'} →</button></div></section>`;
   }
-  function planetLab() {
-    return `<section class="roam-lab" id="roam-lab" aria-labelledby="planet-lab-title"><header><h2 id="planet-lab-title">把太阳系放上实验桌</h2><p>点选行星，比较它们的距离、大小和一年有多长。</p></header><div class="roam-controls" role="group" aria-label="太阳系显示方式"><button type="button" data-roam-mode="orbits" aria-pressed="true">看公转</button><button type="button" data-roam-mode="distance" aria-pressed="false">比距离</button><button type="button" data-roam-mode="size" aria-pressed="false">比大小</button><button type="button" data-roam-play aria-pressed="false">开始公转</button></div><p class="roam-model-note" id="roam-model-note"></p><div class="roam-solar-stage" tabindex="0" aria-label="太阳系模型，窄屏可左右滚动查看"><svg viewBox="0 0 1000 540" role="img" aria-label="太阳系示意图" aria-describedby="roam-model-note"><g data-roam-scene></g></svg></div><div class="roam-planet-picker" role="group" aria-label="选择行星">${data.planets.map((p, i) => `<button type="button" data-roam-planet="${i}" aria-pressed="${i === 2}" style="--planet:${p.color}">${esc(p.name)}</button>`).join('')}</div><div class="roam-planet-info" aria-live="polite"></div><p class="roam-data-source">平均日距以日地平均距离为 1；周期以地球年计，数值取近似值。${external(data.planetSource, 'NASA 行星数据表（需联网）')}</p></section>`;
+  function experimentTools(topics) {
+    return `<aside class="experiment-side" aria-label="太阳系参数与专题导航">
+      <details class="experiment-tools" id="roam-tools" open>
+        <summary>实验模式与行星</summary>
+        <div class="experiment-controls">
+          <div class="roam-controls" role="group" aria-label="太阳系显示方式">
+            <button type="button" data-roam-mode="orbits" aria-pressed="true">看公转</button>
+            <button type="button" data-roam-mode="distance" aria-pressed="false">比距离</button>
+            <button type="button" data-roam-mode="size" aria-pressed="false">比大小</button>
+          </div>
+          <p class="experiment-label">选择行星</p>
+          <div class="roam-planet-picker" data-reading-preserve role="group" aria-label="选择行星">${data.planets.map((p, i) => `<button type="button" data-roam-planet="${i}" aria-pressed="${i === 2}" style="--planet:${p.color}">${esc(p.name)}</button>`).join('')}</div>
+          <a class="experiment-return" href="#roam-lab" data-experiment-return>返回演示 ↓</a>
+        </div>
+      </details>
+      <details class="experiment-tools" id="roam-orbit-settings" data-roam-orbit-settings open>
+        <summary>公转参数</summary>
+        <div class="experiment-controls">
+          <div class="inline-choice" data-inline-choice><label>演示速度 <select data-roam-speed aria-label="公转演示速度"><option value="1">慢慢看</option><option value="3">快一些</option></select></label></div>
+          <a class="experiment-return" href="#roam-lab" data-experiment-return>返回演示 ↓</a>
+        </div>
+      </details>
+      <details class="experiment-tools">
+        <summary>宇宙漫游导航</summary>
+        <nav class="experiment-links" aria-label="宇宙漫游路线">
+          <a href="#roam-lab">太阳系实验桌</a>
+          <a href="#roam-address">宇宙地址</a>
+          <a href="#roam-light">光旅行</a>
+          <a href="#roam-challenges">观察挑战</a>
+          <a href="#roam-solar">太阳系影像</a>
+          <a href="#roam-galaxy">银河系</a>
+          <a href="#roam-deep">遥远宇宙</a>
+        </nav>
+      </details>
+      <details class="experiment-tools">
+        <summary>天文探索专题</summary>
+        <nav class="experiment-links" aria-label="天文探索专题">
+          <a href="./">天文探索总览</a>
+          ${topics.map(topic => `<a href="?view=${encodeURIComponent(topic.id)}">${esc(topic.name)}</a>`).join('')}
+        </nav>
+        <p class="roam-study-progress" id="roam-study-progress" role="status"></p>
+      </details>
+    </aside>`;
   }
-  function render() {
-    return `<div class="astro-roam"><header class="roam-hero"><img src="${asset('images/astro/roam-webb.jpg')}" alt="韦布近红外深空观测中的星系与星光" width="1200" height="800"><div><p class="roam-intro-tag">带着好奇心出发</p><h1>从我们的太阳，<br>走向无数个星系</h1><p>看真实影像，转动视角，找一找我们在宇宙中的位置。</p><nav aria-label="宇宙漫游路线"><a href="#roam-address">宇宙地址 ↓</a><a href="#roam-light">光旅行 ↓</a><a href="#roam-challenges">观察挑战 ↓</a><a href="#roam-solar">太阳系 ↓</a><a href="#roam-galaxy">银河系 ↓</a><a href="#roam-deep">遥远宇宙 ↓</a></nav></div></header><p class="roam-local-note">图片和 3 段动画已保存在本站，点播放再开始。每幅图都附有中文导览与来源；外部三维漫游和原始资料需联网。</p>${window.AstroDiscovery ? AstroDiscovery.render() : ''}${planetLab()}${data.chapters.map(chapter).join('')}${window.AstroDiscovery ? AstroDiscovery.renderChallenges() : ''}</div>`;
+
+  function planetLab() {
+    return `<section class="roam-lab" id="roam-lab" tabindex="-1" aria-labelledby="planet-lab-title">
+      <header class="experiment-panel-head"><h2 id="planet-lab-title">把太阳系放上实验桌</h2>
+        <a class="experiment-jump" href="#roam-tools" data-experiment-jump>实验参数 ↑</a>
+      </header>
+      <p class="roam-model-note" id="roam-model-note"></p>
+      <div class="roam-solar-stage" tabindex="0" aria-label="太阳系模型，比例图可左右滚动查看">
+        <svg viewBox="0 0 1000 540" role="img" data-reading-preserve aria-label="太阳系示意图" aria-describedby="roam-model-note"><g data-roam-scene></g></svg>
+      </div>
+      <p class="roam-scroll-hint">左右滑动可看完整比例图。</p>
+      <div class="roam-time-controls" data-roam-time-controls>
+        <button type="button" data-roam-play aria-pressed="false">开始公转</button>
+        <button type="button" data-roam-step>前进四分之一年</button>
+        <button type="button" data-roam-reset>回到起点</button>
+        <a class="experiment-jump" href="#roam-orbit-settings" data-experiment-jump>调速度 ↑</a>
+        <p><output data-roam-elapsed aria-live="off">已过 0.00 地球年</output><span data-roam-laps></span></p>
+        <p class="roam-motion-note" data-roam-motion-note role="status"></p>
+      </div>
+      <div class="roam-planet-info" aria-live="polite"></div>
+      <p class="roam-data-source">平均日距以日地平均距离为 1；周期以地球年计，数值取近似值。${external(data.planetSource, 'NASA 行星数据表（需联网）')}</p>
+    </section>`;
+  }
+
+  function render(topics = []) {
+    return `<div class="astro-roam geo-experiment">
+      <header class="roam-hero"><img src="${asset('images/astro/roam-webb.jpg')}" alt="韦布近红外深空观测中的星系与星光" width="1200" height="800">
+        <div><h1>宇宙漫游</h1><p>看真实影像，比较行星的距离和大小，再找一找我们在宇宙中的位置。</p></div>
+      </header>
+      <div class="experiment-workspace" data-sidebar-layout=".experiment-side" data-sidebar-width="clamp(260px, 24vw, 320px)"
+           data-sidebar-label="太阳系工具" data-sidebar-collapse-key="astro_solar_sidebar_collapsed_v1">
+        ${experimentTools(topics)}
+        <div class="experiment-content">
+          ${planetLab()}
+          ${window.AstroDiscovery ? AstroDiscovery.render() : ''}
+          <p class="roam-local-note">图片和 3 段动画已保存在本站，点播放再开始。每幅图都附有中文导览与来源；外部三维漫游和原始资料需联网。</p>
+          ${data.chapters.map(chapter).join('')}
+          ${window.AstroDiscovery ? AstroDiscovery.renderChallenges() : ''}
+        </div>
+      </div>
+    </div>`;
   }
   function mount() {
     dispose();
     const root = document.querySelector('.astro-roam');
     if (!root) return;
     const disposeDiscovery = window.AstroDiscovery?.mount(root);
+    const stage = root.querySelector('.roam-solar-stage');
     const scene = root.querySelector('[data-roam-scene]');
     let mode = 'orbits', selected = 2, running = false, years = 0, previous = 0;
     const control = root.querySelector('[data-roam-play]');
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
     const canPlay = () => window.StudyEffects ? window.StudyEffects.motion === 'full' : !reduced.matches;
-    control.insertAdjacentHTML('afterend', `<div class="roam-time-controls" data-roam-time-controls>
-      <div class="inline-choice" data-inline-choice><label>演示速度 <select data-roam-speed aria-label="公转演示速度"><option value="1">慢慢看</option><option value="3">快一些</option></select></label></div>
-      <button type="button" data-roam-step>前进四分之一年</button><button type="button" data-roam-reset>回到起点</button>
-      <p><output data-roam-elapsed>已过 0.00 地球年</output><span data-roam-laps></span></p>
-      <p class="roam-motion-note" data-roam-motion-note role="status"></p></div>`);
+    const orbitSettings = root.querySelector('[data-roam-orbit-settings]');
     const timeControls = root.querySelector('[data-roam-time-controls]');
     const speed = root.querySelector('[data-roam-speed]');
     const NS = 'http://www.w3.org/2000/svg';
@@ -86,8 +163,14 @@
         scene.append(group);
       });
       position();
-      control.hidden = mode !== 'orbits';
+      stage.dataset.roamView = mode;
       timeControls.hidden = mode !== 'orbits';
+      orbitSettings.hidden = mode !== 'orbits';
+      if (mode === 'orbits') stage.scrollLeft = 0;
+      else if (stage.scrollWidth > stage.clientWidth) {
+        const marker = scene.querySelector(`[data-planet-marker="${selected}"] circle`).getBoundingClientRect();
+        stage.scrollLeft += marker.left + marker.width / 2 - stage.getBoundingClientRect().left - stage.clientWidth / 2;
+      }
       showInfo();
     }
     function showInfo() {

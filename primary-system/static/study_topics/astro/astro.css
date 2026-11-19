@@ -327,15 +327,33 @@
 .astro-roam p { max-width: 72ch; }
 .astro-roam a { text-underline-offset: 4px; }
 .astro-roam :is(a,button,summary):focus-visible, .roam-course-link a:focus-visible { outline: 3px solid var(--course-action); outline-offset: 4px; }
-.roam-hero { position: relative; isolation: isolate; display: grid; align-items: center; min-height: 430px; padding: clamp(22px, 4vw, 64px); overflow: hidden; border-radius: 16px; background: #111c38; color: #fff; }
+/* 宇宙漫游已在工作区提供完整目录，回到课程或搜索时恢复课程侧栏。 */
+html body .study-page[data-subject="astro"] .study-shell:has(.astro-roam) {
+  grid-template-columns: minmax(0, 1fr) !important;
+}
+.study-page[data-subject="astro"] .study-shell:has(.astro-roam) > :is(.sidebar, .sl-sidebar),
+.study-page[data-subject="astro"] .study-content:has(.astro-roam) > .textbook-banner { display: none; }
+html body .study-page[data-subject="astro"] .study-shell:has(.astro-roam) > .study-content {
+  grid-column: 1 !important;
+  grid-row: 1 !important;
+  padding: 0;
+}
+.astro-roam {
+  --experiment-card: var(--card);
+  --experiment-line: var(--line);
+  --experiment-tint: var(--soft);
+  --experiment-accent: var(--course-action);
+}
+.roam-hero {
+  position: relative; isolation: isolate; display: grid; align-items: center;
+  min-height: clamp(156px, 17vw, 246px); margin-bottom: clamp(16px, 2vw, 24px); padding: clamp(18px, 3vw, 44px);
+  overflow: hidden; border-radius: 16px; background: oklch(22% .059 268); color: oklch(97% .015 260);
+}
 .roam-hero > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
-.roam-hero::before { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(6,16,40,.95), rgba(6,16,40,.77) 45%, rgba(6,16,40,.1)); z-index: -1; }
-.roam-hero h1 { font-size: clamp(30px, 3.5vw, 54px); line-height: 1.35; letter-spacing: -.02em; margin: 10px 0 18px; color: #fff; }
-.roam-hero p { color: #fff; max-width: 36ch; }
-.roam-hero .roam-intro-tag { color: #cce9ff; font-size: 18px; font-weight: 700; }
-.roam-hero nav { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
-.roam-hero nav a { min-height: 44px; padding: 6px 16px; color: #fff; border: 1px solid #b0c5e5; border-radius: 8px; text-decoration: none; font-weight: 700; background: #193353; }
-.roam-hero nav a:hover { background: #2b4c75; }
+.roam-hero::before { content: ''; position: absolute; inset: 0; background: linear-gradient(95deg, oklch(18% .047 260 / .97), oklch(18% .047 260 / .83) 50%, oklch(18% .047 260 / .36)); z-index: -1; }
+.roam-hero h1 { font-size: clamp(32px, 3.5vw, 52px); line-height: 1.35; margin-bottom: 8px; color: inherit; }
+.roam-hero p { max-width: 48ch; color: inherit; }
+.astro-roam .roam-study-progress { padding: 0 12px 12px; font-size: 15px; color: var(--muted); }
 .astro-roam .roam-local-note { margin: 16px 0 40px; color: var(--muted); font-size: 16px; }
 .roam-chapter { margin-block: 56px; scroll-margin-top: 30px; }
 .roam-chapter > header { padding-block: 22px; border-top: 2px solid var(--line); }
@@ -360,27 +378,40 @@
 .roam-links li { flex: 1 1 300px; max-width: 65ch; }
 .roam-links li > a { font-weight: 750; }
 .roam-links li > p { font-size: 16px; color: var(--muted); }
-.roam-lab { padding: clamp(16px, 2.5vw, 30px); border-radius: 12px; background: var(--card); border: 1px solid var(--line); }
-.roam-controls { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
-.roam-controls button, .roam-planet-picker button { min-height: 44px; border: 1px solid var(--line); border-radius: 8px; background: var(--card); color: var(--ink); padding: 6px 14px; font: inherit; cursor: pointer; }
-.roam-controls button[aria-pressed="true"] { color: #fff; border-color: #365394; background: #365394; }
-.roam-controls button:hover, .roam-planet-picker button:hover { background: var(--soft); color: var(--ink); }
-.roam-controls [data-roam-play] { margin-left: auto; color: var(--course-action); font-weight: 750; }
-.roam-time-controls { flex-basis: 100%; display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding: 14px; border-radius: 10px; background: var(--soft); }
-.roam-time-controls[hidden] { display: none; }
-.roam-time-controls select { padding: 8px; background: var(--card); color: var(--ink); border: 1px solid var(--line); border-radius: 8px; font: inherit; }
+.roam-lab { padding: clamp(14px, 2.5vw, 30px); border-radius: 12px; background: var(--card); border: 1px solid var(--line); container-type: inline-size; scroll-margin-top: 16px; }
+.astro-roam .experiment-panel-head h2 { margin: 0; }
+.roam-controls, .roam-planet-picker { display: flex; flex-wrap: wrap; gap: 8px; }
+.roam-controls button { flex: 1 1 4em; }
+.roam-planet-picker button { flex: 1 1 calc(50% - 8px); }
+:is(.roam-controls, .roam-planet-picker, .roam-time-controls) button {
+  min-height: 44px; border: 1px solid var(--line); border-radius: 8px; background: var(--card); color: var(--ink);
+  padding: 6px 10px; font: inherit; font-size: 16px; font-weight: 650; cursor: pointer;
+}
+:is(.roam-controls, .roam-planet-picker, .roam-time-controls) button:hover { border-color: var(--course-action); }
+:is(.roam-controls, .roam-planet-picker, .roam-time-controls) button[aria-pressed="true"] {
+  color: var(--course-action); background: var(--soft); border-color: var(--course-action); font-weight: 800;
+}
+[data-roam-orbit-settings][hidden], .roam-time-controls[hidden] { display: none; }
+[data-roam-speed] { width: 100%; min-height: 44px; padding: 6px 10px; background: var(--card); color: var(--ink); border: 1px solid var(--line); border-radius: 8px; font: inherit; }
+.roam-time-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 12px; margin-top: 12px; border-radius: 10px; background: var(--soft); }
 .roam-time-controls p { flex-basis: 100%; margin: 0; font-size: 17px; }
 .roam-time-controls output { font-weight: 750; font-variant-numeric: tabular-nums; }
 .roam-time-controls .roam-motion-note { font-size: 15px; color: var(--muted); }
-.roam-controls button:disabled { opacity: .55; cursor: default; }
-.astro-roam .roam-model-note { margin: 12px 0; font-size: 16px; min-height: 3.5em; }
-.roam-solar-stage { background: #101c32; border-radius: 12px; overflow: hidden; }
+.roam-time-controls button:disabled { opacity: .55; cursor: default; }
+.astro-roam .roam-model-note { margin-bottom: 12px; font-size: 16px; }
+.roam-solar-stage { background: oklch(23% .045 264); border-radius: 12px; overflow-x: auto; }
 .roam-solar-stage svg { display: block; width: 100%; max-height: 620px; }
+.roam-solar-stage:not([data-roam-view="orbits"]) svg { min-width: 600px; }
 .roam-solar-stage text { font-family: inherit; font-size: 21px; }
-.roam-planet-picker { display: flex; flex-wrap: wrap; gap: 8px; margin-block: 18px; }
+.astro-roam .roam-scroll-hint { display: none; margin-top: 8px; font-size: 15px; color: var(--muted); }
+@container (max-width: 599px) {
+  .roam-solar-stage:not([data-roam-view="orbits"]) + .roam-scroll-hint { display: block; }
+}
+@container (max-width: 440px) {
+  .roam-solar-stage[data-roam-view="orbits"] text { font-size: 42px; }
+}
 .roam-planet-picker button::before { content: ''; display: inline-block; width: 12px; height: 12px; border-radius: 50%; background: var(--planet); margin-right: 6px; }
-.roam-planet-picker button[aria-pressed="true"] { outline: 2px solid var(--course-action); outline-offset: 1px; font-weight: 800; }
-.roam-planet-info { background: var(--soft); padding: 18px; border-radius: 8px; }
+.roam-planet-info { background: var(--soft); padding: 16px; margin-top: 12px; border-radius: 8px; }
 .roam-planet-info dl { display: flex; flex-wrap: wrap; gap: 12px 36px; margin-block: 12px; }
 .roam-planet-info dt { color: var(--muted); font-size: 15px; }
 .roam-planet-info dd { margin: 0; font-size: 20px; font-weight: 750; }
@@ -395,11 +426,8 @@
   .astro-roam { font-size: 17px; }
   .astro-roam h2 { font-size: 25px; }
   .roam-gallery { grid-template-columns: 1fr; gap: 16px; }
-  .roam-hero { min-height: 380px; }
+  .roam-hero { padding-inline-end: 42px; }
   .roam-chapter { margin-block: 36px; }
-  .roam-controls [data-roam-play] { margin-left: 0; }
-  .roam-solar-stage svg { min-width: 600px; }
-  .roam-solar-stage { overflow-x: auto; }
 }
 @media (prefers-reduced-motion: reduce) {
   .study-page[data-subject="astro"] *, .study-page[data-subject="astro"] *::before, .study-page[data-subject="astro"] *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
@@ -407,7 +435,7 @@
 @media print {
   .roam-hero { min-height: auto; background: #fff; color: #111; padding: 0; }
   .roam-hero :is(h1,p) { color: #111; }
-  .roam-hero::before, .roam-hero > img, .roam-controls, .roam-planet-picker, .roam-cinema video, .roam-hero nav { display: none; }
+  .roam-hero::before, .roam-hero > img, .roam-time-controls, .roam-cinema video { display: none; }
   .roam-gallery, .roam-cinema { display: block; }
   .roam-photo { break-inside: avoid; }
   .roam-photo img { height: 230px; }
