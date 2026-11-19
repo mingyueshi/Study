@@ -20,6 +20,8 @@
   const records = [...root.querySelectorAll('[data-region-record]')];
   const groups = [...document.querySelectorAll('[data-population]')];
   const routeLayer = document.getElementById('atlas-routes');
+  const mapViewport = root.querySelector('.origins-world-scroll');
+  const mapCanvas = root.querySelector('.origins-world');
   let stepIndex = atlas.steps.length - 1;
   let regionId = atlas.regions[0].id;
   let markerId = null;
@@ -40,10 +42,35 @@
     const index = year === null ? -1 : atlas.steps.findIndex(step => String(step.years_ago) === year);
     stepIndex = index < 0 ? atlas.steps.length - 1 : index;
     const requested = url.searchParams.get('region');
-    const anchor = url.hash.startsWith('#region-') ? url.hash.slice(8) : null;
-    regionId = regions.has(anchor) ? anchor : regions.has(requested) ? requested : atlas.regions[0].id;
-    markerId = mapMarkers.has(url.searchParams.get('marker')) ? url.searchParams.get('marker') : null;
-    if (markerId) regionId = mapMarkers.get(markerId).region;
+    const anchor = regionAnchor();
+    const marker = mapMarkers.get(url.searchParams.get('marker'));
+    markerId = marker && (!anchor || marker.region === anchor) ? marker.id : null;
+    regionId = anchor || (markerId && marker.region) || (regions.has(requested) ? requested : atlas.regions[0].id);
+  }
+
+  function regionAnchor() {
+    const hash = window.location.hash;
+    const id = hash.startsWith('#region-') ? hash.slice(8) : null;
+    return regions.has(id) ? id : null;
+  }
+
+  function alignRegionAnchor() {
+    const id = regionAnchor();
+    if (!id) return;
+    requestAnimationFrame(() => {
+      if (id === regionAnchor() && id === regionId) {
+        document.getElementById(`region-${id}`).scrollIntoView({block: 'start', behavior: 'instant'});
+      }
+    });
+  }
+
+  function centerMap() {
+    const maxScroll = mapViewport.scrollWidth - mapViewport.clientWidth;
+    if (maxScroll <= 0) return;
+    const marker = markerId ? mapMarkers.get(markerId)
+      : atlas.map_markers.find(item => item.region === regionId && item.group === 'sapiens');
+    const position = marker?.label_x ?? regions.get(regionId).x;
+    mapViewport.scrollLeft = Math.max(0, Math.min(maxScroll, position / 100 * mapCanvas.clientWidth - mapViewport.clientWidth / 2));
   }
 
   function drawRoutes(year) {
@@ -258,14 +285,7 @@
     renderMapMarkers(step.years_ago);
     renderPlayback();
     drawRoutes(step.years_ago);
-    const mapViewport = root.querySelector('.origins-world-scroll');
-    const mapCanvas = root.querySelector('.origins-world');
-    if (mapCanvas.scrollWidth > mapViewport.clientWidth) {
-      const focus = markerId ? mapMarkers.get(markerId)
-        : atlas.map_markers.find(marker => marker.region === regionId && marker.group === 'sapiens');
-      mapViewport.scrollLeft = Math.max(0, Math.min(mapCanvas.scrollWidth - mapViewport.clientWidth,
-        focus.label_x / 100 * mapCanvas.clientWidth - mapViewport.clientWidth / 2));
-    }
+    centerMap();
     if (updateLocation) {
       const url = new URL(window.location.href);
       url.searchParams.set('year', String(step.years_ago));
@@ -273,7 +293,7 @@
       if (markerId) url.searchParams.set('marker', markerId);
       else url.searchParams.delete('marker');
       if (url.hash.startsWith('#region-')) url.hash = `region-${regionId}`;
-      try { window.history.replaceState(null, '', url); } catch (_) { /* 受限浏览器仍可读图 */ }
+      try { window.history.replaceState(window.history.state, '', url); } catch (_) { /* 受限浏览器仍可读图 */ }
     }
   }
 
@@ -351,13 +371,13 @@
   window.addEventListener('popstate', () => { pause(); readLocation(); render(false); });
   window.addEventListener('hashchange', () => {
     pause();
-    const target = window.location.hash.slice(8);
-    if (window.location.hash.startsWith('#region-') && regions.has(target)) {
-      regionId = target;
-      markerId = null;
-      render();
+    if (regionAnchor()) {
+      readLocation();
+      render(false);
+      alignRegionAnchor();
     }
   });
+  window.addEventListener('load', alignRegionAnchor, {once: true});
   document.addEventListener('visibilitychange', () => { if (document.hidden) pause(); });
   window.addEventListener('pagehide', pause);
   const preference = () => {
@@ -375,6 +395,7 @@
 
   readLocation();
   render(false);
+  if (typeof ResizeObserver === 'function') new ResizeObserver(centerMap).observe(mapViewport);
   root.querySelector('.origins-atlas-controls').hidden = false;
   root.querySelector('.origins-era-panel').hidden = false;
   root.querySelector('.origins-map-uncertain').hidden = false;

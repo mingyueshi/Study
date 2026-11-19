@@ -1,39 +1,15 @@
-{% extends 'base.html' %}
+{% extends 'humanorigins/base.html' %}
 {% load static %}
 {% block title %}{{ station.title }} · 人类起源 · 乐学堂{% endblock %}
-{% block content %}
-<link rel="stylesheet" href="{% static 'humanorigins/origins.css' %}?v=6">
-<div class="origins">
-  <a class="origins-back" href="{% url 'human-origins' %}">← 人类起源 · 全部学习站</a>
-  <div class="origins-reading" data-sidebar-layout=".origins-station-nav" data-sidebar-width="250px" data-sidebar-breakpoint="900" data-sidebar-collapsible="true" data-sidebar-collapse-key="humanorigins_navigation_collapsed_v1" data-sidebar-label="专题导航">
-    <nav class="origins-station-nav" aria-label="学习站导航">
-      <p class="origins-kicker">考察路线</p>
-      <ol>
-        {% for item in stations %}
-        <li><a href="{% url 'human-origins-station' item.slug %}" {% if item.slug == station.slug %}aria-current="page"{% endif %}>
-          <span aria-hidden="true">0{{ forloop.counter }}</span>{{ item.label }}
-        </a></li>
-        {% endfor %}
-      </ol>
-    </nav>
-
-    <article class="origins-article">
-      <header class="origins-station-head">
-        <p class="origins-kicker">第 {{ number }} 站 / {{ stations|length }} 站 · {{ station.label }}</p>
-        <h1>{{ station.title }}</h1>
-        <p class="origins-lead">{{ station.opening }}</p>
-        <nav class="origins-jumps" aria-label="本页小节">
-          {% if station.atlas %}<a href="#migration-atlas">年代地图 ↓</a><a href="#origins-populations">古人类何时消失 ↓</a>{% endif %}
-          {% if station.comparison %}<a href="#origins-comparison">七组人群对照 ↓</a>{% endif %}
-          {% if station.family_tree %}<a href="#origins-family-tree">互动家谱 ↓</a>{% endif %}
-          {% if station.map_pins %}<a href="#origins-sites-heading">遗址地图 ↓</a>{% endif %}
-          <a href="#origins-clues">看线索 ↓</a>
-          <a href="#origins-quiz">做判断 ↓</a>
-          {% if station.resources %}<a href="#origins-resources">博物馆选学 ↓</a>{% endif %}
-          <a href="#origins-sources">查出处 ↓</a>
-        </nav>
-      </header>
-
+{% block origins_heading %}
+<header class="origins-station-head">
+  <p class="origins-kicker">第 {{ number }} 站 / {{ stations|length }} 站 · {{ station.label }}</p>
+  <h1 id="origins-title">{{ station.title }}</h1>
+  <p class="origins-lead">{{ station.opening }}</p>
+</header>
+{% endblock %}
+{% block origins_content %}
+<a class="origins-directory-link" href="#origins-page-directory">查看本页目录 ↗</a>
       {% if station.atlas %}
         {% include 'humanorigins/_atlas.html' %}
         <details class="origins-panel origins-old-map">
@@ -202,9 +178,8 @@
         <details id="origins-inspector-question" class="origins-observation" hidden><summary></summary><p></p></details>
         <a id="origins-original-image" target="_blank" rel="noopener noreferrer">在新页面看原图 ↗</a>
       </dialog>
-    </article>
-  </div>
-</div>
+{% endblock %}
+{% block origins_scripts %}
 <script src="{% static 'humanorigins/figures.js' %}?v=3" defer></script>
 {% if station.family_tree %}<script src="{% static 'humanorigins/family-tree.js' %}" defer></script>{% endif %}
 {% if station.map_pins %}<script src="{% static 'humanorigins/sites.js' %}" defer></script>{% endif %}

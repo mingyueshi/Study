@@ -259,6 +259,8 @@ class OriginsPageTests(SimpleTestCase):
         stations = load_stations()
         index = self.client.get(reverse('human-origins'))
         self.assertContains(index, '人类起源')
+        self.assertContains(index, 'id="origins-route-heading"', count=1)
+        self.assertContains(index, 'data-sidebar-collapse-key="humanorigins_navigation_collapsed_v1"')
         self.assertFalse(index.cookies)
         for station in stations:
             with self.subTest(station=station['slug']):
@@ -267,6 +269,9 @@ class OriginsPageTests(SimpleTestCase):
                 response = self.client.get(url)
                 self.assertContains(response, station['opening'])
                 self.assertContains(response, station['takeaway'])
+                self.assertContains(response, 'id="origins-page-directory"', count=1)
+                self.assertContains(response, f'<a href="{url}" aria-current="page">')
+                self.assertContains(response, 'humanorigins/reading.js?v=')
                 for figure in station['figures']:
                     self.assertContains(response, figure['path'])
                 for choice in station['quiz']['choices']:
@@ -332,6 +337,7 @@ class OriginsPageTests(SimpleTestCase):
         text = atlas.content.decode()
         self.assertLess(text.index('id="atlas-map"'), text.index('id="atlas-marker-detail"'))
         self.assertLess(text.index('id="atlas-marker-detail"'), text.index('class="origins-era-panel"'))
+        self.assertLess(text.index('class="origins-era-panel"'), text.index('id="atlas-step-summary"'))
 
     def test_china_sites_and_family_cross_links_keep_legacy_anchors(self):
         china = self.client.get(reverse('human-origins-station', args=['china-sites']))

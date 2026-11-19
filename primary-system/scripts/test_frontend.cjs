@@ -1541,6 +1541,7 @@ function originsAtlasPage(query = '', motion = 'full') {
     createElementNS: make, createElement: make, addEventListener: (type, handler) => { events[type] = handler; }};
   run('humanorigins/migration.js', vm.createContext({URL, Date: {now: () => now},
     document: doc,
+    requestAnimationFrame: callback => callback(),
     setTimeout: (callback, delay) => { const id = ++timerId; timers.set(id, {callback, delay}); return id; },
     clearTimeout: id => timers.delete(id),
     localStorage: {getItem: () => null, setItem() {}},
@@ -1586,10 +1587,15 @@ test('origins atlas bounds era controls and splits the Pacific crossing at the m
 });
 
 test('origins atlas follows region anchors and browser navigation', () => {
-  const page = originsAtlasPage('?region=europe#region-east-asia');
+  const page = originsAtlasPage('?year=160000&region=europe&marker=denisovans-baishiya#region-east-asia');
   assert.equal(page.records.find(record => !record.hidden).dataset.regionRecord, 'east-asia');
+  assert.equal(page.get('atlas-marker-detail').hidden, false);
   page.location.hash = 'region-europe'; page.events.hashchange();
   assert.equal(page.records.find(record => !record.hidden).dataset.regionRecord, 'europe');
+  assert.equal(page.get('region-europe').scrolled.block, 'start');
+  assert.equal(page.get('atlas-marker-detail').hidden, true);
+  page.location.hash = 'region-east-asia'; page.events.popstate(); page.events.hashchange();
+  assert.equal(page.get('atlas-marker-detail').hidden, false);
   page.location.href = 'http://study.test/human-origins/migration/?year=300000&region=africa'; page.events.popstate();
   assert.equal(page.get('atlas-year').value, '0');
   assert.equal(page.records.find(record => !record.hidden).dataset.regionRecord, 'africa');

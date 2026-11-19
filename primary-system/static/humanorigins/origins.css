@@ -20,17 +20,7 @@ body:has(.origins) {
   font-weight: 800;
 }
 
-.origins-back {
-  display: inline-flex;
-  align-items: center;
-  min-height: 48px;
-  margin-block: 10px 8px;
-  color: var(--origins-brown);
-  font-size: 16px;
-  font-weight: 700;
-}
-
-.origins-back:hover, .origins-source-link:hover, .origins figcaption a:hover {
+.origins-source-link:hover, .origins figcaption a:hover {
   text-decoration: underline;
   text-underline-offset: .22em;
 }
@@ -114,50 +104,14 @@ body:has(.origins) {
 .origins-cover strong { color: var(--origins-ink); font-size: clamp(20px, 2.25vw, 28px); }
 .origins-cover span, .origins-cover small { font-size: 14px; }
 
-.origins-route { margin-top: clamp(36px, 5vw, 60px); }
-
-.origins-section-head {
-  display: flex;
-  align-items: end;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 8px 24px;
-  margin-bottom: 16px;
-}
-
-.origins-section-head h2, .origins-section-head > p { margin: 0; }
-.origins-section-head > p { color: var(--origins-muted); font-size: 16px; }
-
-.origins-station-list, .origins-station-nav ol, .origins-clue-list, .origins-time-list,
+.origins-station-list, .origins-clue-list, .origins-time-list,
 .origins-sites, .origins-map-key {
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.origins-station-list {
-  display: grid;
-  gap: 10px;
-}
-
-.origins-station-list a {
-  display: grid;
-  grid-template-columns: 62px minmax(250px, .9fr) minmax(0, 1fr) 36px;
-  align-items: center;
-  gap: 18px;
-  padding: 14px 22px;
-  border: 1px solid var(--origins-line);
-  border-radius: 16px;
-  background: var(--origins-white);
-  transition: background .15s ease, border-color .15s ease;
-}
-
-.origins-station-list a:hover {
-  border-color: #b98b47;
-  background: var(--origins-cream);
-}
-
-.origins-station-number, .origins-clue-number, .origins-choice-letter {
+.origins-clue-number, .origins-choice-letter {
   display: grid;
   place-items: center;
   width: 46px;
@@ -169,50 +123,56 @@ body:has(.origins) {
   font-variant-numeric: tabular-nums;
 }
 
-.origins-station-list li:nth-child(2n) .origins-station-number { background: var(--origins-blue); color: #245261; }
-.origins-station-title { display: grid; gap: 1px; }
-.origins-station-title small { color: var(--origins-brown); font-size: 14px; font-weight: 700; }
-.origins-station-title strong { font-size: clamp(19px, 1.8vw, 25px); }
-.origins-station-description { color: var(--origins-muted); font-size: 17px; }
-.origins-station-arrow { color: var(--origins-brown); font-size: 24px; text-align: end; }
-
-.origins-reading { min-width: 0; }
-.origins-reading[data-sl-ready] { column-gap: clamp(20px, 3vw, 44px); row-gap: 16px; }
+.origins-reading { min-width: 0; margin-top: clamp(14px, 2vw, 26px); }
+.origins-reading[data-sl-ready] { column-gap: clamp(18px, 2.5vw, 32px); row-gap: 10px; }
 .origins-reading[data-sl-collapsed="true"] { column-gap: 14px; }
-.origins-reading[data-sl-ready] .origins-station-nav ol { display: grid; gap: 4px; }
 
 .origins-station-nav {
-  margin-bottom: 20px;
-  padding: 16px;
+  margin-bottom: 14px;
+  padding: 8px;
   border: 1px solid var(--origins-line);
   border-radius: 16px;
   background: var(--origins-white);
 }
 
-.origins-station-nav .origins-kicker { margin: 0 0 8px 10px; }
-.origins-station-nav ol { display: flex; flex-wrap: wrap; gap: 6px 12px; }
-
-.origins-station-nav a {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  min-height: 44px;
-  padding: 8px 10px;
-  border-radius: 9px;
-  font-size: 16px;
+.origins-directory-group { border: 1px solid var(--origins-line); border-radius: 10px; }
+.origins-directory-group + .origins-directory-group { margin-top: 8px; }
+.origins-directory-group > summary {
+  min-height: 44px; padding: 8px 12px; cursor: pointer;
+  color: var(--origins-ink); font-size: 16px; font-weight: 800;
 }
-
-.origins-station-nav a span { color: var(--origins-brown); font: 700 16px Georgia, serif; }
-.origins-station-nav a:hover { background: var(--origins-cream); }
-.origins-station-nav a[aria-current] { background: #f4e2b5; font-weight: 800; }
+.origins-directory-group[open] > summary {
+  border-bottom: 1px solid var(--origins-line); border-radius: 9px 9px 0 0; background: var(--origins-cream);
+}
+.origins-directory-group nav { display: grid; padding: 6px; }
+.origins-station-list a, .origins-jumps a, .origins-topic-links a, .origins-directory-link {
+  display: flex; align-items: center; gap: 9px; min-height: 44px; padding: 6px 8px; border-radius: 8px;
+  color: var(--origins-brown); font-size: 16px; font-weight: 750;
+  text-decoration: underline; text-underline-offset: .2em;
+}
+.origins-station-list a { color: var(--origins-ink); text-decoration: none; }
+.origins-jumps [hidden] { display: none; }
+.origins-station-list a strong { display: block; text-decoration: underline; text-underline-offset: .2em; }
+.origins-station-list a small { display: block; color: var(--origins-muted); font-size: 14px; font-weight: 500; line-height: 1.55; }
+.origins-station-number {
+  display: grid; place-items: center; flex: 0 0 26px; height: 26px; border-radius: 7px;
+  background: var(--origins-cream); color: var(--origins-brown); font: 700 15px Georgia, serif;
+}
+.origins-station-nav a:hover, .origins-directory-link:hover { background: var(--origins-cream); }
+.origins-station-nav a[aria-current] {
+  background: var(--origins-cream); box-shadow: inset 3px 0 var(--origins-brown);
+}
+.origins-directory-link { width: fit-content; padding-inline: 2px; }
+.origins-directory-link + :is(.origins-panel, .origins-figure, .origins-atlas-entry) { margin-top: 6px; }
+.origins-article :is(#atlas-era-heading, #origins-sites-heading, [id^="origins-"]) { scroll-margin-top: 20px; }
 
 .origins-article { min-width: 0; }
 
 .origins-station-head {
-  padding: clamp(24px, 4vw, 42px);
-  border: 1px solid var(--origins-line);
+  padding: clamp(20px, 3.2vw, 42px);
   border-radius: 20px;
-  background: #fbefcd;
+  color: oklch(97% .024 84);
+  background: linear-gradient(115deg, oklch(28% .058 44), oklch(39% .072 65) 58%, oklch(31% .047 173));
 }
 
 .origins-station-head h1 {
@@ -221,19 +181,8 @@ body:has(.origins) {
   line-height: 1.3;
 }
 
-.origins-station-head .origins-lead { max-width: 39em; margin-bottom: 1rem; }
-
-.origins-jumps { display: flex; flex-wrap: wrap; gap: 8px; }
-.origins-jumps a {
-  padding: 7px 12px;
-  border: 1px solid #dbc58f;
-  border-radius: 8px;
-  background: var(--origins-white);
-  color: var(--origins-brown);
-  font-size: 15px;
-  font-weight: 700;
-}
-.origins-jumps a:hover { background: var(--origins-yellow); }
+.origins-station-head .origins-lead { max-width: 42em; margin: 0; color: inherit; }
+.origins-station-head .origins-kicker { color: oklch(88% .061 82); }
 
 .origins-figure {
   margin: 18px 0 0;
@@ -469,18 +418,11 @@ body:has(.origins) {
 
 @media (max-width: 880px) {
   .origins-hero { gap: 22px; }
-  .origins-station-nav { padding: 9px; }
-  .origins-station-nav ol { gap: 2px; }
-  .origins-station-list a { grid-template-columns: 46px minmax(0, 1fr) 24px; gap: 1px 14px; }
-  .origins-station-number { grid-row: span 2; }
-  .origins-station-description { grid-column: 2; }
-  .origins-station-arrow { grid-column: 3; grid-row: 1 / span 2; }
 }
 
 @media (max-width: 630px) {
   .origins-hero { grid-template-columns: minmax(0, 1fr); padding: 22px; }
   .origins-cover { transform: none; }
-  .origins-station-list a { padding: 12px; }
   .origins-clue-list li { grid-template-columns: minmax(0, 1fr); gap: 7px; }
   .origins-clue-number { width: 35px; height: 35px; font-size: 17px; }
   .origins-site-map { grid-template-columns: minmax(0, 1fr); }
@@ -503,18 +445,23 @@ body:has(.origins) {
 .origins-atlas h2 { font-size: clamp(28px, 2.6vw, 38px); }
 .origins-atlas p, .origins-population p { max-width: 80em; line-height: 1.85; }
 .origins-identity { padding: 14px 18px; border-left: 4px solid #368576; border-radius: 4px 12px 12px 4px; background: #e8f4ec; color: #244d42 !important; font-size: 18px; }
-.origins-atlas-controls { margin-top: 24px; }
+.origins-atlas-controls { margin-top: 16px; }
 .origins-atlas-current { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
 .origins-atlas-current label { font-size: 19px; }
 .origins-atlas-current strong { display: inline-block; margin-left: 8px; color: #87451c; font-size: clamp(24px, 2.4vw, 34px); }
 .origins-atlas button { min-height: 44px; padding: 7px 13px; border: 1px solid #cbb888; border-radius: 10px; background: #fff9e9; color: #5b4126; font: inherit; cursor: pointer; }
 .origins-atlas button:hover { background: #f5e6b9; }
 .origins-atlas button:disabled { opacity: .45; cursor: default; }
-#atlas-year { display: block; width: 100%; margin: 20px 0 12px; accent-color: #a15a24; cursor: pointer; }
+#atlas-year { display: block; width: 100%; min-height: 38px; margin: 4px 0; accent-color: #a15a24; cursor: pointer; }
+.origins-atlas-step-picker {
+  margin-top: 8px; padding-inline: 10px; border: 1px solid var(--origins-line); border-radius: 9px;
+}
+.origins-atlas-step-picker summary { min-height: 44px; font-weight: 750; cursor: pointer; }
 .origins-atlas-steps { display: flex; flex-wrap: wrap; gap: 8px; }
+.origins-atlas-step-picker .origins-atlas-steps { padding-bottom: 10px; }
 .origins-atlas-steps button { font-size: 16px; }
 .origins-atlas-steps button[aria-pressed="true"] { border-color: #80501c; background: #80501c; color: #fff; font-weight: 800; }
-.origins-atlas-summary { min-height: 3.7em; margin: 12px 0; font-size: 19px; font-weight: 650; }
+.origins-atlas-summary { margin: 8px 0 12px; font-weight: 650; }
 .origins-world-scroll { overflow-x: auto; border: 1px solid #b8d6d6; border-radius: 18px; background: #e0eef0; }
 .origins-world { position: relative; width: 100%; min-width: 1000px; max-width: 1800px; margin-inline: auto; }
 .origins-world > img { display: block; width: 100%; height: auto; }
@@ -524,7 +471,7 @@ body:has(.origins) {
 .origins-marker-line-unknown { stroke-dasharray: 4 3; }
 .origins-marker-location { stroke-width: 1.5; vector-effect: non-scaling-stroke; pointer-events: all; cursor: pointer; }
 .origins-hominin-pin {
-  position: absolute; top: var(--y); left: var(--x); z-index: 1; display: grid; gap: 2px;
+  position: absolute; top: clamp(64px, var(--y), calc(100% - 64px)); left: var(--x); z-index: 1; display: grid; gap: 2px;
   width: 128px; padding: 5px 7px; border: 2px solid var(--person-color); border-radius: 10px;
   background: #fffef5f5; color: #302d22; transform: translate(-50%, -50%); text-align: center;
   font-size: 14px; line-height: 1.35; box-shadow: 0 2px 5px #302d2214;
@@ -591,7 +538,7 @@ body:has(.origins) {
 .origins-old-map summary { cursor: pointer; font-size: 21px; font-weight: 750; }
 .origins-atlas a:focus-visible, .origins-atlas button:focus-visible, .origins-world-scroll:focus-visible { outline: 3px solid #246658; outline-offset: 4px; }
 .origins-atlas [hidden] { display: none !important; }
-.origins-playback { display: flex; align-items: center; flex-wrap: wrap; gap: 10px 16px; margin-top: 18px; }
+.origins-playback { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 12px; margin-top: 4px; }
 .origins-playback label { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; font-size: 17px; }
 .origins-playback label > span { white-space: nowrap; }
 .origins-playback select { min-height: 44px; max-width: 100%; padding: 6px 9px; border: 1px solid #cbb888; border-radius: 9px; background: #fffdf4; color: #5b4126; font: inherit; }
@@ -633,6 +580,15 @@ body:has(.origins) {
   .origins-atlas-entry small { font-size: 15px; }
   .origins-region-record h3 span { display: block; margin: 5px 0 0; font-size: 20px; }
   .origins-population { padding: 16px; }
+}
+@media screen and (max-width: 540px) {
+  html:has(.origins) { scroll-padding-bottom: 62px; }
+  body:has(.origins) .site-scroll-tools {
+    top: auto; bottom: max(8px, env(safe-area-inset-bottom)); grid-auto-flow: column; transform: none;
+  }
+  .origins-hominin-pin { top: clamp(48px, var(--y), calc(100% - 48px)); padding: 4px 5px; }
+  .origins-hominin-pin strong { gap: 4px; font-size: 15px; }
+  .origins-hominin-pin small { display: none; }
 }
 
 /* 观察、对照与选学均在正文中上下排列。 */

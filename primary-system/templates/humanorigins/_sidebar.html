@@ -1,0 +1,38 @@
+<aside class="origins-station-nav" aria-label="考察路线与专题导航">
+  <details class="origins-directory-group" open>
+    <summary id="origins-route-heading">考察路线 · {{ stations|length }} 站</summary>
+    <nav aria-label="学习站导航">
+      <ol class="origins-station-list">
+        {% for item in stations %}
+        <li><a href="{% url 'human-origins-station' item.slug %}"{% if item.slug == station.slug %} aria-current="page"{% endif %}>
+          <span class="origins-station-number" aria-hidden="true">{{ forloop.counter }}</span>
+          <span><strong>{{ item.label }}</strong>{% if not station %}<small>{{ item.summary }}</small>{% endif %}</span>
+        </a></li>
+        {% endfor %}
+      </ol>
+    </nav>
+  </details>
+  {% if station %}
+  <details class="origins-directory-group" id="origins-page-directory">
+    <summary>本页目录</summary>
+    <nav class="origins-jumps" aria-label="本页小节">
+      {% if station.atlas %}<a href="#migration-atlas">年代地图 ↓</a><a href="#atlas-era-heading" hidden>年代说明 ↓</a><a href="#origins-populations">古人类何时消失 ↓</a>{% endif %}
+      {% if station.comparison %}<a href="#origins-comparison">七组人群对照 ↓</a>{% endif %}
+      {% if station.family_tree %}<a href="#origins-family-tree">互动家谱 ↓</a>{% endif %}
+      {% if station.map_pins %}<a href="#origins-sites-heading">遗址地图 ↓</a>{% endif %}
+      <a href="#origins-clues">看线索 ↓</a>
+      <a href="#origins-quiz">做判断 ↓</a>
+      {% if station.resources %}<a href="#origins-resources">博物馆选学 ↓</a>{% endif %}
+      <a href="#origins-sources">查出处 ↓</a>
+    </nav>
+  </details>
+  {% endif %}
+  <details class="origins-directory-group">
+    <summary>相关专题</summary>
+    <nav class="origins-topic-links" aria-label="相关专题">
+      <a href="{% url 'human-origins' %}"{% if not station %} aria-current="page"{% endif %}>人类起源首页 ↗</a>
+      <a href="{% url 'home' %}?area=science#modules-title">学习广场 · 科学 ↗</a>
+      <a href="{% url 'science-body' %}">人体奥秘站 ↗</a>
+    </nav>
+  </details>
+</aside>

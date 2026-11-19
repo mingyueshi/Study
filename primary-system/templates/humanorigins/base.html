@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'humanorigins/origins.css' %}?v=073397e05a30">
+<div class="origins">
+  {% block origins_heading %}{% endblock %}
+  <div class="origins-reading" data-sidebar-layout=".origins-station-nav" data-sidebar-width="clamp(260px, 23vw, 310px)" data-sidebar-breakpoint="900" data-sidebar-collapse-key="humanorigins_navigation_collapsed_v1" data-sidebar-label="专题导航">
+    {% include 'humanorigins/_sidebar.html' %}
+    <article class="origins-article" aria-labelledby="origins-title">
+      {% block origins_content %}{% endblock %}
+    </article>
+  </div>
+</div>
+{% block origins_scripts %}{% endblock %}
+<script src="{% static 'humanorigins/reading.js' %}?v=1d3342b69d29" defer></script>
+{% endblock %}

@@ -11,6 +11,7 @@
       <label for="atlas-year">把时间拨到 <strong id="atlas-year-label">今天</strong></label>
       <div><button type="button" id="atlas-previous" aria-label="查看前一个年代">← 更早</button><button type="button" id="atlas-next" aria-label="查看后一个年代">更晚 →</button></div>
     </div>
+    <input id="atlas-year" type="range" min="0" max="{{ station.atlas.steps|length|add:'-1' }}" value="{{ station.atlas.steps|length|add:'-1' }}" step="1" aria-describedby="atlas-scale-note">
     <div class="origins-playback">
       <button type="button" id="atlas-play" aria-pressed="false">{{ station.atlas.playback.play }}</button>
       <button type="button" id="atlas-restart">↻ 从非洲重新开始</button>
@@ -21,16 +22,16 @@
     <div class="origins-reading-progress">
       <progress id="atlas-route-progress" max="{{ station.atlas.steps|length }}" value="{{ station.atlas.steps|length }}" aria-label="年代节点进度"></progress>
       <span id="atlas-next-preview"></span>
-      <small>细进度条走完，就到下一站；暂停可以慢慢读。</small>
       <span class="origins-reading-track" aria-hidden="true"><span id="atlas-reading-fill"></span></span>
     </div>
     <p id="atlas-motion-note" class="origins-note" hidden>已减少连续运动。用「更早／更晚」或年代按钮，一站一站看线索。</p>
-    <input id="atlas-year" type="range" min="0" max="{{ station.atlas.steps|length|add:'-1' }}" value="{{ station.atlas.steps|length|add:'-1' }}" step="1" aria-describedby="atlas-scale-note">
-    <div class="origins-atlas-steps" aria-label="选择年代">
-      {% for step in station.atlas.steps %}<button type="button" data-atlas-step="{{ forloop.counter0 }}" aria-pressed="false">{{ step.label }}</button>{% endfor %}
-    </div>
+    <details class="origins-atlas-step-picker">
+      <summary>选择年代节点</summary>
+      <div class="origins-atlas-steps" aria-label="选择年代">
+        {% for step in station.atlas.steps %}<button type="button" data-atlas-step="{{ forloop.counter0 }}" aria-pressed="false">{{ step.label }}</button>{% endfor %}
+      </div>
+    </details>
     <p id="atlas-scale-note" class="origins-note">每一格是一个线索节点，格子之间的时间长短不相等。</p>
-    <p id="atlas-step-summary" class="origins-atlas-summary" aria-live="polite"></p>
   </div>
 
   <ul class="origins-people-key" aria-label="地图人群颜色图例">
@@ -59,6 +60,7 @@
     <section class="origins-era-panel" aria-labelledby="atlas-era-heading" hidden>
       <p class="origins-kicker">跟着年代看线索</p>
       <h3 id="atlas-era-heading">本年代的发现</h3>
+      <p id="atlas-step-summary" class="origins-atlas-summary" aria-live="polite"></p>
       <div id="atlas-era-events" aria-live="polite" aria-atomic="true"></div>
       <h4 id="atlas-local-heading">当地出现过的古人类</h4>
       <ul id="atlas-local-people"></ul>
@@ -114,4 +116,4 @@
   </div>
 </section>
 {{ station.atlas|json_script:'origins-atlas-data' }}
-<script src="{% static 'humanorigins/migration.js' %}?v=6" defer></script>
+<script src="{% static 'humanorigins/migration.js' %}?v=a8e22d7c1fb1" defer></script>
