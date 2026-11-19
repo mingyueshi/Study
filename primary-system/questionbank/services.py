@@ -25,6 +25,14 @@ class AttemptConflict(Exception):
     """同一个作答标识已用于另一份提交。"""
 
 
+def practice_size(value):
+    try:
+        size = int(value)
+    except (TypeError, ValueError):
+        return DEFAULT_SIZE
+    return size if size in SIZES else DEFAULT_SIZE
+
+
 def pick_questions(*, area='', track='', count=DEFAULT_SIZE, ids=None, tag=''):
     """按轨别与学科抽题：active 且可选轨别、领域过滤；ids 用于错题重练等限定池。
 

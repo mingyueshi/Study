@@ -1,10 +1,10 @@
 {% extends 'base.html' %}{% load static %}{% block title %}{{ eyebrow }} · 乐学堂{% endblock %}
 {% block content %}
 <link rel="stylesheet" href="{% static 'study_topics/reading.css' %}?v=37b1aaceb767">
-<link rel="stylesheet" href="{% static 'questionbank/bank.css' %}?v=fd76c6f35253">
+<link rel="stylesheet" href="{% static 'questionbank/bank.css' %}?v=42d7dcde7ff3">
 <script src="{% static 'speech.js' %}" defer></script><script src="{% static 'tts.js' %}" defer></script>
 {% if track == 'olympiad' %}<script src="{% static 'questionbank/olympiad.js' %}?v=2" defer></script>{% endif %}
-<script src="{% static 'questionbank/practice.js' %}?v=abcaacbcd909" defer></script>
+<script src="{% static 'questionbank/practice.js' %}?v=9d07d1306895" defer></script>
 <div class="qb-practice-page">
 <header class="study-reading-hero">
   <h1>{% if mathbook_title %}{{ mathbook_title }}{% elif grammar_chapter %}{{ grammar_chapter.title }} · {% if mode_wrong %}错题重练{% else %}章节练习{% endif %}{% elif mode_wrong %}错题，再闯一遍{% else %}{{ area_label }}{% endif %}</h1>
@@ -46,7 +46,8 @@
           <p class="qb-feedback-steps" data-qb-feedback-steps></p>
         {% if track == 'olympiad' %}</details>{% endif %}
         <div class="qb-feedback-actions">
-          <button class="button small" type="button" data-qb-next>下一题 →</button>
+          <span data-qb-feedback-control><button class="button small" type="button" data-qb-next>下一题 →</button></span>
+          {% if mode_wrong %}<a class="button small ghost" data-qb-return-book href="{{ wrong_url }}" hidden>回错题本</a>{% endif %}
         </div>
       </section>
       <section class="qb-result" hidden data-qb-result>
@@ -58,7 +59,7 @@
         {% if track == 'olympiad' %}<p class="qb-result-praise" data-qb-round-result role="status"></p>{% endif %}
         <div class="qb-result-actions">
           <a class="button small" data-qb-again>{% if single_question %}再练一次{% else %}再练一组{% endif %} ↻</a>
-          <a class="button small ghost" href="{{ wrong_url }}">看看错题本</a>
+          <a class="button small ghost" href="{{ wrong_url }}">{% if mode_wrong %}回错题本{% else %}看看错题本{% endif %}</a>
           <a class="button small ghost" href="{{ home_url }}">回{{ home_label }}</a>
         </div>
       </section>

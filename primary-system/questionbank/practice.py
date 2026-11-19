@@ -20,7 +20,7 @@ from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.decorators.http import require_POST, require_safe
 
-from . import records, services
+from . import records, services, wrong
 from . import types as question_types
 from .models import Question
 
@@ -54,14 +54,6 @@ def _clean_area(value):
     return value if value in Question.Area.values else ''
 
 
-def _clean_size(value):
-    try:
-        size = int(value)
-    except (TypeError, ValueError):
-        return services.DEFAULT_SIZE
-    return size if size in services.SIZES else services.DEFAULT_SIZE
-
-
 def _clean_tag(value, track):
     """主题过滤只在奥数轨生效，且值须属于当前在库标签；其余忽略。"""
     if track != Question.Track.OLYMPIAD:
@@ -75,15 +67,22 @@ def _practice(request, *, track, pool=None, scoped_page=None):
     page = {**page, **_page_urls(track)}
     area = _clean_area(request.GET.get('area', ''))
     tag = _clean_tag(request.GET.get('tag', ''), track)
-    size = _clean_size(request.GET.get('count', ''))
+    size = services.practice_size(request.GET.get('count'))
     mode_wrong = request.GET.get('mode') == 'wrong'
     if scoped_page:
         page.update(scoped_page)
         area = scoped_page['area']
     if mode_wrong:
         pool = services.latest_wrong_ids(records.read_scope(request), track=track, ids=pool)
+    from_wrong = request.GET.get('from_wrong')
+    if mode_wrong and from_wrong in ('all', track) and not page.get('mathbook_title'):
+        page['wrong_url'] = wrong.book_url('' if from_wrong == 'all' else track, size,
+                                           page.get('grammar_chapter'), fragment='qb-wrong')
+    else:
+        from_wrong = ''
     questions = services.pick_questions(area=area, track=track, count=size, ids=pool, tag=tag)
-    params = {'area': area, 'tag': tag, 'count': size, 'mode': 'wrong' if mode_wrong else ''}
+    params = {'area': area, 'tag': tag, 'count': size,
+              'mode': 'wrong' if mode_wrong else '', 'from_wrong': from_wrong}
 
     def setting_url(**changes):
         query = urlencode({key: value for key, value in {**params, **changes}.items() if value})

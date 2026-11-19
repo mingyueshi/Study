@@ -1,8 +1,5 @@
 /* 挑战题库：主页、练习页与错题本。配色沿用 platform.css 的变量。 */
 
-.qb-crumb { margin-bottom: 18px; font-weight: 700; }
-.qb-crumb a:hover { color: var(--green); }
-
 /* ── 主页 hero：绿系渐变卡，与全站专题页同构 ─────────────────────────── */
 .qb-hero {
   display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
@@ -49,17 +46,7 @@
 
 .qb-note { margin-top: 28px; color: var(--muted); font-size: 15px; }
 
-/* ── 练习页：页头卡 + 可换边设置栏 ───────────────────────────────────── */
-.qb-practice-head {
-  padding: 18px 26px; margin: 14px 0 20px;
-  background: linear-gradient(120deg, #f1f8ea, #eaf3e0);
-  border: 1px solid #cfe3c0; border-radius: 20px;
-}
-.qb-practice-head h1 { margin: 6px 0 0; font-size: clamp(28px, 3vw, 38px); }
-.qb-practice-head .button { margin-top: 14px; }
-.qb-toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 26px; }
-.qb-label { color: var(--muted); font-size: 16px; }
-
+/* ── 练习页与错题本：共用页头与侧栏 ─────────────────────────────────────── */
 body:has(.qb-practice-page) { --page-width: 100%; }
 .qb-practice-page {
   --card: var(--white);
@@ -67,20 +54,14 @@ body:has(.qb-practice-page) { --page-width: 100%; }
 }
 .qb-practice-page .study-reading-hero h1 { margin: 0; }
 .qb-practice-page .study-reading-hero p { margin-bottom: 0; }
+@media screen and (min-width: 541px) {
+  .qb-practice-page { margin-inline-end: max(0px, calc(68px - var(--gutter))); }
+}
 .qb-side .qb-side-note { margin: 4px 8px 8px; color: var(--muted); font-size: 15px; }
 .qb-side .study-reading-links small { color: var(--muted); white-space: nowrap; }
 .qb-side .qb-round-sizes { grid-template-columns: repeat(3, minmax(0, 1fr)); margin-bottom: 6px; }
 .qb-side .qb-round-sizes a { justify-content: center; padding-inline: 4px; }
 .qb-practice-main { min-width: 0; scroll-margin-top: 20px; overflow-wrap: anywhere; }
-.qb-toolbar .chip {
-  display: inline-flex; align-items: center; justify-content: center;
-  min-height: 42px; padding: 8px 16px;
-  border: 1.5px solid var(--line); border-radius: 10px;
-  background: var(--white); color: var(--ink);
-  font-size: 16px; font-weight: 700;
-}
-.qb-toolbar .chip:hover { border-color: var(--green); background: var(--soft); }
-.qb-toolbar .chip.on { border-color: var(--green); background: var(--green); color: #fff; }
 .qb-board { padding: 26px 30px; border: 1px solid var(--line); border-radius: 24px; background: var(--white); box-shadow: 0 8px 20px #233e3708; }
 .qb-progress { margin: 0 0 12px; color: var(--muted); font-size: 17px; }
 .qb-progress b { color: var(--green); font-size: 22px; }
@@ -130,7 +111,8 @@ html[data-reading-theme="dark"] .qb-feedback.bad .qb-feedback-head { color: oklc
 .qb-feedback-explain, .qb-feedback-steps { margin: 0 0 6px; font-size: 18px; line-height: 1.8; }
 .qb-feedback-steps { color: var(--muted); }
 .qb-feedback-error { margin: 0 0 6px; color: #b4483a; font-weight: 700; }
-.qb-feedback-actions { margin-top: 12px; }
+.qb-feedback-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 12px; }
+.qb-feedback-actions [hidden] { display: none; }
 .qb-full-explanation summary { cursor: pointer; margin: 10px 0; color: var(--ink); font-size: 18px; font-weight: 700; }
 .qb-hints { margin-top: 24px; padding: 20px 24px; border: 2px dashed var(--line); border-radius: 18px; background: var(--soft); }
 .qb-hints h2 { margin: 0; font-size: 22px; }
@@ -186,16 +168,32 @@ html[data-reading-theme="dark"] .qb-feedback.bad .qb-feedback-head { color: oklc
 .qb-leaderboard .qb-note { font-size: 16px; line-height: 1.8; }
 
 /* ── 错题本 ────────────────────────────────────────────────────────────── */
-.qb-wrong-list { display: grid; gap: 20px; max-width: 900px; }
-.qb-wrong-card { padding: 22px 26px; border: 1px solid var(--line); border-left: 6px solid #e0b193; border-radius: 18px; background: var(--white); }
+.qb-retry-form { display: grid; gap: 8px; padding: 0 4px 4px; }
+.qb-retry-form fieldset { min-inline-size: 0; margin: 0; padding: 0; border: 0; }
+.qb-retry-form legend { margin: 0 0 5px; padding: 0 2px; color: var(--muted); font-size: calc(15px * var(--reading-scale, 1)); }
+.qb-retry-sizes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; }
+.qb-retry-sizes label {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 4px;
+  min-height: 44px; padding: 4px 2px; border: 1px solid var(--line); border-radius: 8px;
+  color: var(--ink); font-size: calc(15px * var(--reading-scale, 1)); line-height: 1.35; text-align: center; cursor: pointer;
+}
+.qb-retry-sizes input { width: 16px; height: 16px; min-height: 0; margin: 0; padding: 0; accent-color: var(--green-dark); }
+.qb-retry-sizes label:has(:checked) { border-color: var(--green); background: var(--soft); font-weight: 750; }
+.qb-retry-sizes label:focus-within { outline: 2px solid var(--green-dark); outline-offset: 2px; }
+.qb-retry-form .button { min-height: 44px; justify-content: center; padding: 6px; font-size: calc(15px * var(--reading-scale, 1)); }
+.qb-wrong-status { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 16px; margin-bottom: 16px; }
+.qb-wrong-status h2 { margin: 0; font-size: calc(23px * var(--reading-scale, 1)); }
+.qb-wrong-status p { margin: 0; color: var(--muted); font-size: calc(16px * var(--reading-scale, 1)); }
+.qb-wrong-status strong { color: var(--green-dark); }
+.qb-wrong-list { display: grid; gap: 16px; }
+.qb-wrong-card { padding: clamp(14px, 2.25vw, 26px); border: 1px solid var(--line); border-inline-start: 4px solid var(--card-accent); border-radius: 16px; background: var(--white); }
 .qb-wrong-head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 10px; }
-.qb-badge { padding: 3px 14px; border-radius: 999px; background: var(--soft); color: var(--green); font-size: 15px; font-weight: 700; }
-.qb-badge.ghost { background: var(--card-tint); color: var(--card-accent); }
-.qb-badge.olympiad { background: #fff3d6; color: #b7791f; }
-.qb-wrong-stem { margin: 0 0 8px; font-size: 22px; font-weight: 750; line-height: 1.6; }
-.qb-wrong-answer { margin: 0 0 6px; font-size: 19px; color: #2c7a4b; }
-.qb-wrong-answer b { font-size: 22px; }
-.qb-wrong-explain { margin: 0; color: var(--muted); font-size: 17px; line-height: 1.8; }
+.qb-badge { padding: 3px 12px; border-radius: 999px; background: var(--soft); color: var(--green-dark); font-size: calc(14px * var(--reading-scale, 1)); font-weight: 700; }
+.qb-badge.ghost, .qb-badge.olympiad { background: var(--card-tint); color: var(--ink); }
+.qb-badge.olympiad { border: 1px solid var(--card-accent); }
+.qb-wrong-stem { margin: 0 0 8px; font-size: calc(21px * var(--reading-scale, 1)); font-weight: 750; line-height: 1.6; white-space: pre-line; }
+.qb-wrong-answer { margin: 0; font-size: calc(17px * var(--reading-scale, 1)); color: var(--green-dark); white-space: pre-line; }
+.qb-wrong-explain { margin: 6px 0 0; color: var(--muted); font-size: calc(17px * var(--reading-scale, 1)); line-height: 1.8; white-space: pre-line; }
 
 @media (max-width: 720px) {
   .qb-hero { flex-direction: column; align-items: flex-start; }

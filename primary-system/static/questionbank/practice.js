@@ -234,7 +234,9 @@
     feedback.querySelector('[data-qb-feedback-steps]').textContent = steps;
     const explanationPanel = feedback.querySelector('[data-qb-full-explanation]');
     if (explanationPanel) explanationPanel.open = Boolean(currentAnswer() && round.explanationOpen);
-    const actions = feedback.querySelector('.qb-feedback-actions');
+    const actions = feedback.querySelector('[data-qb-feedback-control]');
+    const returnBook = feedback.querySelector('[data-qb-return-book]');
+    if (returnBook) returnBook.hidden = !currentAnswer();
     if (retry) {
       actions.innerHTML = '<button class="button small" type="button" data-qb-retry>重试 ↻</button>';
       actions.querySelector('[data-qb-retry]').addEventListener('click', () => submit(round.pending));

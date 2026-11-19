@@ -1,43 +1,87 @@
 {% extends 'base.html' %}{% load static %}{% block title %}错题本 · 乐学堂{% endblock %}
-{% block content %}<link rel="stylesheet" href="{% static 'questionbank/bank.css' %}?v=3">
-<nav class="qb-crumb">{% if grammar_chapter %}<a href="{{ chapter_practice_url }}">← 回本章练习</a>{% else %}<a href="{% url 'questionbank' %}">← 回题库</a>{% endif %}</nav>
-<header class="qb-practice-head">
-  <p class="eyebrow">错题本</p>
-  <h1>{% if grammar_chapter %}{{ grammar_chapter.title }} · 本章错题{% else %}答错的题，都在这里{% endif %}</h1>
-  <p class="qb-hero-tag">这里只看最近一次作答。重练答对，或在例题自评中选「我做对了」，这道题就会移出错题本。</p>
-  {% if not grammar_chapter %}<div class="qb-toolbar">
-    <span class="qb-label">轨别</span>
-    <a class="chip{% if not track %} on{% endif %}" href="{% url 'questionbank-wrong' %}">全部</a>
-    <a class="chip{% if track == 'regular' %} on{% endif %}" href="?track=regular">普通</a>
-    <a class="chip{% if track == 'olympiad' %} on{% endif %}" href="?track=olympiad">奥数</a>
-  </div>{% endif %}
-  <div class="qb-area-actions">
-    {% if track and count %}
-    <a class="button small" href="{{ practice_url }}">开始重练 · 共 {{ count }} 道错题 →</a>
-    {% elif not track %}
-    {% if regular_count %}<a class="button small" href="{% url 'questionbank-practice' %}?mode=wrong&amp;count=10&amp;new=1">重练普通错题 · 共 {{ regular_count }} 道 →</a>{% endif %}
-    {% if olympiad_count %}<a class="button small" href="{% url 'questionbank-olympiad-practice' %}?mode=wrong&amp;count=10&amp;new=1">重练奥数错题 · 共 {{ olympiad_count }} 道 →</a>{% endif %}
-    {% endif %}
-  </div>
-</header>
+{% block content %}
+<link rel="stylesheet" href="{% static 'study_topics/reading.css' %}?v=37b1aaceb767">
+<link rel="stylesheet" href="{% static 'questionbank/bank.css' %}?v=42d7dcde7ff3">
+<script src="{% static 'questionbank/wrong.js' %}?v=e8d8eb577473" defer></script>
+<div class="qb-practice-page">
+  <header class="study-reading-hero">
+    <h1>{% if grammar_chapter %}{{ grammar_chapter.title }} · 本章错题{% else %}错题本{% endif %}</h1>
+    <p>以最近一次作答为准。重练答对或自评做对后，题目会自动移出。</p>
+  </header>
 
-{% if count %}
-<section class="qb-wrong-list">
-  {% for row in rows %}
-  <article class="qb-wrong-card">
-    <header class="qb-wrong-head"><span class="qb-badge">{{ row.area }}</span>
-      {% if row.track %}<span class="qb-badge olympiad">{{ row.track }}</span>{% endif %}
-      <span class="qb-badge ghost">{{ row.type }}</span>
-      {% for tag in row.tags %}<span class="qb-tag">{{ tag }}</span>{% endfor %}</header>
-    <p class="qb-wrong-stem">{{ row.stem }}</p>
-    <p class="qb-wrong-answer">正确答案：<b>{{ row.reveal }}</b></p>
-    {% if row.explanation %}<p class="qb-wrong-explain">{{ row.explanation }}</p>{% endif %}
-  </article>
-  {% endfor %}
-</section>
-{% elif grammar_chapter %}
-<div class="notice">本章没有待重练的错题。<a class="button small" href="{{ chapter_practice_url }}">练本章 →</a></div>
-{% else %}
-<div class="notice">错题本是空的——去练一组，答错的题会自动收进来。<a class="button small" href="{% url 'questionbank' %}">回题库挑一组 →</a></div>
-{% endif %}
+  <div class="study-reading-layout" data-sidebar-layout=".qb-side" data-sidebar-width="280px" data-sidebar-label="错题侧栏" data-sidebar-collapse-key="primary_sidebar_collapsed_v1:questionbank-wrong">
+    <aside class="qb-side study-reading-sidebar" aria-label="错题筛选、重练设置和导航">
+      {% if filters %}
+      <details class="study-reading-group" open>
+        <summary>错题筛选</summary>
+        <nav class="study-reading-links" aria-label="错题筛选">
+          {% for item in filters %}<a href="{{ item.url }}"{% if item.selected %} aria-current="true"{% endif %}>{{ item.label }} <small>{{ item.count }} 题</small></a>{% endfor %}
+        </nav>
+      </details>
+      {% endif %}
+
+      <details class="study-reading-group" open>
+        <summary>重练设置</summary>
+        {% if retry_choices %}
+        <form class="qb-retry-form" action="{{ retry_choices.0.url }}#qb-practice" method="get">
+          <input type="hidden" name="mode" value="wrong">
+          <input type="hidden" name="new" value="1">
+          <input type="hidden" name="from_wrong" value="{{ track|default:'all' }}">
+          <fieldset>
+            <legend>每组题量</legend>
+            <div class="qb-retry-sizes">
+              {% for option in sizes %}<label><input type="radio" name="count" value="{{ option }}"{% if option == size %} checked{% endif %}><span>{{ option }} 题</span></label>{% endfor %}
+            </div>
+          </fieldset>
+          {% for option in retry_choices %}<button class="button" type="submit" formaction="{{ option.url }}#qb-practice">{{ option.label }} <span aria-hidden="true">→</span></button>{% endfor %}
+        </form>
+        {% else %}<p class="qb-side-note">当前没有可重练的题。</p>{% endif %}
+      </details>
+
+      <details class="study-reading-group">
+        <summary>相关专题</summary>
+        <nav class="study-reading-links" aria-label="专题导航">
+          {% if grammar_chapter %}
+          <a href="{{ chapter_practice_url }}">本章练习 <span aria-hidden="true">↗</span></a>
+          <a href="{{ chapter_url }}">本章讲解 <span aria-hidden="true">↗</span></a>
+          <a href="{{ all_url }}">全部错题 <span aria-hidden="true">↗</span></a>
+          {% endif %}
+          <a href="{% url 'questionbank' %}">挑战题库 <span aria-hidden="true">↗</span></a>
+          <a href="{% url 'questionbank-olympiad' %}">奥数挑战 <span aria-hidden="true">↗</span></a>
+        </nav>
+      </details>
+    </aside>
+
+    <section class="qb-practice-main study-reading-main" id="qb-wrong" tabindex="-1" aria-labelledby="qb-wrong-title">
+      <header class="qb-wrong-status">
+        <h2 id="qb-wrong-title">{% if grammar_chapter %}本章{% else %}{{ track_label }}{% endif %}错题</h2>
+        <p><strong>{{ count }}</strong> 道待重练</p>
+      </header>
+      {% if count %}
+      <div class="qb-wrong-list">
+        {% for row in rows %}
+        <article class="qb-wrong-card">
+          <header class="qb-wrong-head">
+            <span class="qb-badge">{{ row.area }}</span>
+            {% if row.track %}<span class="qb-badge olympiad">{{ row.track }}</span>{% endif %}
+            <span class="qb-badge ghost">{{ row.type }}</span>
+            {% for tag in row.tags %}<span class="qb-tag">{{ tag }}</span>{% endfor %}
+          </header>
+          <h3 class="qb-wrong-stem">{{ row.stem }}</h3>
+          <p class="qb-wrong-answer">{% if row.selfcheck %}参考答案{% else %}正确答案{% endif %}：<b>{{ row.reveal }}</b></p>
+          {% if row.explanation %}<p class="qb-wrong-explain">{{ row.explanation }}</p>{% endif %}
+          {% if row.steps %}<p class="qb-wrong-explain">{{ row.steps }}</p>{% endif %}
+        </article>
+        {% endfor %}
+      </div>
+      {% elif grammar_chapter %}
+      <div class="notice">本章没有待重练的错题。 <a class="button small" href="{{ chapter_practice_url }}">练本章 →</a></div>
+      {% elif track %}
+      <div class="notice">{{ track_label }}练习没有待重练的错题。 <a class="button small" href="{{ all_url }}">查看全部错题 →</a></div>
+      {% else %}
+      <div class="notice">当前没有待重练的错题。新答错的题会自动收进来。 <a class="button small" href="{% url 'questionbank' %}">回题库挑一组 →</a></div>
+      {% endif %}
+    </section>
+  </div>
+</div>
 {% endblock %}

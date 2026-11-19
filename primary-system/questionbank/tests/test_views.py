@@ -171,19 +171,22 @@ class GrammarPracticeTests(TestCase):
             'value': (self.unrelated.payload['answer'] + 1) % len(self.unrelated.payload['options']),
         }})
 
-        wrong = self.client.get(wrong_url, {'track': 'olympiad'})
+        wrong = self.client.get(wrong_url, {'track': 'olympiad', 'count': 5})
         self.assertEqual([record['stem'] for record in wrong.context['rows']], [question.stem])
-        retry_url = wrong.context['practice_url']
-        retry = self.client.get(retry_url)
+        self.assertEqual(wrong.context['filters'], [])
+        self.assertContains(wrong, f'formaction="{practice_url}#qb-practice"')
+        retry_query = {'mode': 'wrong', 'new': '1', 'count': 5, 'from_wrong': 'regular'}
+        retry = self.client.get(practice_url, retry_query)
         self.assertTrue(retry.context['mode_wrong'])
         self.assertContains(retry, f'data-practice-url="{practice_url}"')
+        self.assertEqual(retry.context['wrong_url'], f'{wrong_url}?count=5#qb-wrong')
         retry_items = retry.context['questions']
         self.assertEqual([item['uuid'] for item in retry_items], [row['uuid']])
         self.assertIs(post_answer(self.client, {
             'uuid': row['uuid'], 'attempt_id': retry_items[0]['attempt_id'], 'given': {'value': correct},
         }).json()['correct'], True)
         self.assertContains(self.client.get(wrong_url), '本章没有待重练的错题')
-        self.assertContains(self.client.get(retry_url), '本章没有待重练的错题')
+        self.assertContains(self.client.get(practice_url, retry_query), '本章没有待重练的错题')
         self.assertEqual(self.client.get(reverse('questionbank-wrong')).context['count'], 1)
 
     def test_unknown_chapter_does_not_open_a_broader_pool(self):
@@ -361,13 +364,25 @@ class WrongTrackTests(TestCase):
         post_answer(self.client, {'uuid': str(regular.uuid), 'given': {'value': 1}})
         post_answer(self.client, {'uuid': str(olympiad.uuid), 'given': {'value': 1}})
         page = self.client.get(reverse('questionbank-wrong'))
-        self.assertEqual(page.context['regular_count'], 1)
-        self.assertEqual(page.context['olympiad_count'], 1)
+        self.assertEqual([item['count'] for item in page.context['filters']], [2, 1, 1])
         badges = [row['track'] for row in page.context['rows']]
         self.assertEqual(badges.count('奥数'), 1)
-        filtered = self.client.get(reverse('questionbank-wrong'), {'track': 'olympiad'})
+        filtered = self.client.get(reverse('questionbank-wrong'), {'track': 'olympiad', 'count': 20})
         self.assertEqual(len(filtered.context['rows']), 1)
-        self.assertIn('/olympiad/practice/', filtered.context['practice_url'])
+        self.assertEqual([item['count'] for item in filtered.context['filters']], [2, 1, 1])
+        self.assertEqual(filtered.context['size'], 20)
+        self.assertContains(filtered, f'formaction="{reverse("questionbank-olympiad-practice")}#qb-practice"')
         regular_view = self.client.get(reverse('questionbank-wrong'), {'track': 'regular'})
         self.assertEqual(len(regular_view.context['rows']), 1)
-        self.assertIn(reverse('questionbank-practice'), regular_view.context['practice_url'])
+        self.assertContains(regular_view, f'formaction="{reverse("questionbank-practice")}#qb-practice"')
+
+    def test_wrong_retry_returns_to_the_book_filter_with_the_selected_round_size(self):
+        olympiad_url = reverse('questionbank-olympiad-practice')
+        book = reverse('questionbank-wrong')
+        for source, query in [('all', '?count=5'), ('olympiad', '?count=5&track=olympiad')]:
+            with self.subTest(source=source):
+                response = self.client.get(olympiad_url, {'mode': 'wrong', 'count': 5, 'from_wrong': source})
+                self.assertEqual(response.context['wrong_url'], f'{book}{query}#qb-wrong')
+                self.assertIn(f'from_wrong={source}', response.context['restart_url'])
+        invalid = self.client.get(olympiad_url, {'mode': 'wrong', 'from_wrong': 'https://invalid.example/'})
+        self.assertEqual(invalid.context['wrong_url'], f'{book}?track=olympiad')

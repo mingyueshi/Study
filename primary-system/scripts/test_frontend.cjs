@@ -153,7 +153,7 @@ function questionPractice(questions, correct, effects = true, settings = {}, sto
   const feedback = get('[data-qb-feedback]');
   const actions = element(), next = element();
   actions.querySelector = () => next;
-  feedback.querySelector = (selector) => selector === '.qb-feedback-actions' ? actions : get(selector);
+  feedback.querySelector = (selector) => selector === '[data-qb-feedback-control]' ? actions : get(selector);
   get('[data-qb-progress-fill]').style = {};
   get('[data-qb-stars]').hidden = true;
   board.dataset = {answerUrl: '/questionbank/api/answer/', practiceUrl: '/questionbank/practice/', size: 5, ...settings};
