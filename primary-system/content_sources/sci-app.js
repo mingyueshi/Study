@@ -23,6 +23,10 @@ const SExtra_VIEWS = [
   { id: 'facts', name: '科学速查', emoji: '🗂️', color: '#b5893a', count: SCI.facts.reduce((n, f) => n + f.items.length, 0) },
   { id: 'clinic', name: '科学小诊所', emoji: '🩺', color: '#c2557d', count: SCI.mistakes.length },
 ];
+const ELECTRIC_EXPERIMENTS = ['demo-sci-circuit', 'sci-magnet', 'sci-electromagnet'];
+const ELECTRIC_NAVIGATION = {id:'sci-electric-navigation', label:'切换实验'};
+const CIRCUIT_SETTINGS = {id:'sci-circuit-settings', label:'选择电路接法'};
+const COIL_SETTINGS = {id:'sci-coil-settings', label:'调整电流与线圈匝数'};
 
 let curView = SUNIT_BY_ID[scState.last] ? scState.last : 'su1';
 let query = '';
@@ -79,20 +83,24 @@ function msec(label, inner) {
   return '<div class="ksec"><span class="seclabel">' + label + '</span>' + inner + '</div>';
 }
 
-function pointCard(u, p, sideCircuitSettings = false) {
+function pointCard(u, p, {experiment = false, settings = null} = {}) {
   const key = pointKey(u, p);
   const learned = !!scState.learned[key];
   const parts = [];
 
   parts.push('<article id="lesson-' + esc(p.id) + '" class="kcard' + (learned ? ' learned' : '') + '" style="--c:' + u.color + '">');
-  const titleTag = sideCircuitSettings ? 'h2' : 'h3';
-  const titleId = sideCircuitSettings ? ' id="sci-circuit-diagram"' : '';
+  const titleTag = experiment ? 'h2' : 'h3';
+  const titleId = settings === CIRCUIT_SETTINGS ? ' id="sci-circuit-diagram"' : '';
   parts.push('<div class="khead"><' + titleTag + ' class="ktitle"' + titleId + '>' + esc(p.title) + '</' + titleTag + '>' +
     '<span class="khead-gap"></span>' + sayBtn(p.title + '。' + p.overview) +
     '<button class="learn-btn' + (learned ? ' on' : '') + '" data-act="learn" data-unit="' + u.id + '" data-id="' + esc(p.id) + '" title="标记已掌握" aria-pressed="' + learned + '" aria-label="已掌握 ' + esc(p.title) + '">' + (learned ? '✓' : '') + '</button></div>');
   parts.push('<p class="k-overview">' + esc(p.overview) + '</p>');
-  if (sideCircuitSettings) parts.push('<a class="experiment-jump" href="#sci-circuit-settings" data-experiment-jump>选择电路接法 ↗</a>');
-  if (p.fig && window.SciFigures) parts.push(SciFigures.figHTML(p.fig, undefined, {sideCircuitSettings}));
+  const jump = settings || (experiment && p.fig === 'sci-magnet' ? ELECTRIC_NAVIGATION : null);
+  if (jump) parts.push(`<a class="experiment-jump" href="#${jump.id}" data-experiment-jump>${jump.label} ↗</a>`);
+  if (p.fig && window.SciFigures) parts.push(SciFigures.figHTML(p.fig, undefined, {
+    sideCircuitSettings: settings === CIRCUIT_SETTINGS,
+    coilSettingsId: settings === COIL_SETTINGS ? COIL_SETTINGS.id : '',
+  }));
 
   if (p.items && p.items.length) {
     parts.push(msec('纲', '<ul class="klist">' + p.items.map(m =>
@@ -132,28 +140,44 @@ function renderUnit(u) {
     u.points.map(p => pointCard(u, p)).join('');
 }
 
-function renderCircuitUnit(u, circuit, settings) {
-  const otherPoints = u.points.filter(point => point !== circuit);
+function renderElectricUnit(u, circuitSettings) {
+  const experiments = u.points.filter(point => ELECTRIC_EXPERIMENTS.includes(point.fig));
+  const otherPoints = u.points.filter(point => !experiments.includes(point));
+  const electromagnet = experiments.find(point => point.fig === 'sci-electromagnet');
+  const coilSettings = electromagnet && window.SciExperiments?.coilSettingsHTML?.();
+  const firstExperiment = experiments.find(point => location.hash === `#lesson-${point.id}`);
+  const circuitFirst = !firstExperiment || firstExperiment.fig === 'demo-sci-circuit';
+  const pointLinks = points => points.map(point => `<a href="#lesson-${esc(point.id)}">${esc(point.title)}</a>`).join('');
   const topicLinks = document.querySelector('.study-topic-nav')?.innerHTML || '';
-  return `<div class="sci-circuit-topic geo-experiment">
+  return `<div class="sci-electric-topic geo-experiment">
     <header class="experiment-heading">
-      <h1>电路实验</h1>
-      <p>分别断开两个开关，比较串联和并联电路中哪些灯会熄灭。</p>
+      <h1>电与磁实验</h1>
+      <p>比较串联与并联，翻转磁极，再用线圈和电流观察电磁铁。</p>
     </header>
     <div class="experiment-workspace" data-sidebar-layout=".experiment-side" data-sidebar-width="clamp(260px, 24vw, 320px)"
-         data-sidebar-label="电路实验工具" data-sidebar-collapse-key="sci_circuit_sidebar_collapsed_v1">
-      <aside class="experiment-side" aria-label="电路实验参数与专题导航">
-        <details class="experiment-tools" id="sci-circuit-settings" open>
+         data-sidebar-label="电与磁实验工具" data-sidebar-collapse-key="sci_circuit_sidebar_collapsed_v1">
+      <aside class="experiment-side" aria-label="电与磁实验参数与专题导航">
+        <details class="experiment-tools" id="${ELECTRIC_NAVIGATION.id}" open>
+          <summary>切换实验</summary>
+          <nav class="experiment-links" aria-label="电与磁实验">${pointLinks(experiments)}</nav>
+        </details>
+        <details class="experiment-tools" id="${CIRCUIT_SETTINGS.id}"${circuitFirst ? ' open' : ''}>
           <summary>电路接法</summary>
           <div class="experiment-controls">
-            ${settings}
+            ${circuitSettings}
             <a class="experiment-return" href="#sci-circuit-diagram" data-experiment-return>返回电路图 ↓</a>
           </div>
         </details>
+        ${coilSettings ? `<details class="experiment-tools" id="${COIL_SETTINGS.id}"${firstExperiment === electromagnet ? ' open' : ''}>
+          <summary>电磁铁参数</summary>
+          <div class="experiment-controls">
+            ${coilSettings}
+            <a class="experiment-return" href="#lesson-${esc(electromagnet.id)}" data-experiment-return>返回电磁铁图 ↓</a>
+          </div>
+        </details>` : ''}
         <details class="experiment-tools">
-          <summary>电与磁知识点</summary>
-          <nav class="experiment-links" aria-label="电与磁知识点">${[circuit, ...otherPoints].map(point =>
-            `<a href="#lesson-${esc(point.id)}">${esc(point.title)}</a>`).join('')}</nav>
+          <summary>其他知识点</summary>
+          <nav class="experiment-links" aria-label="电与磁其他知识点">${pointLinks(otherPoints)}</nav>
         </details>
         <details class="experiment-tools">
           <summary>科学实验室目录</summary>
@@ -166,7 +190,9 @@ function renderCircuitUnit(u, circuit, settings) {
         </details>` : ''}
       </aside>
       <div class="experiment-content">
-        ${pointCard(u, circuit, true)}
+        ${experiments.map(point => pointCard(u, point, {experiment:true,
+          settings:point.fig === 'demo-sci-circuit' ? CIRCUIT_SETTINGS : point === electromagnet && coilSettings ? COIL_SETTINGS : null,
+        })).join('')}
         <section aria-labelledby="sci-circuit-reading">
           <div class="unit-head" style="--c:${u.color}">
             <div><h2 id="sci-circuit-reading">电与磁的其他知识点</h2>
@@ -265,9 +291,9 @@ function renderMain() {
   if (curView === 'facts') { box.innerHTML = renderFacts(); return; }
   if (curView === 'clinic') { box.innerHTML = renderClinic(); return; }
   const u = sunitById(curView);
-  const circuit = u?.points.find(point => point.fig === 'demo-sci-circuit');
-  const settings = circuit && window.SciFigures?.circuitSettingsHTML?.();
-  box.innerHTML = settings ? renderCircuitUnit(u, circuit, settings) : u ? renderUnit(u) : '';
+  const hasCircuit = u?.points.some(point => point.fig === 'demo-sci-circuit');
+  const settings = hasCircuit && window.SciFigures?.circuitSettingsHTML?.();
+  box.innerHTML = settings ? renderElectricUnit(u, settings) : u ? renderUnit(u) : '';
 }
 
 function render() {
@@ -347,6 +373,9 @@ function openLessonFromHash() {
   if (!unit) return false;
   const current = unit.id === curView && !query && document.getElementById(anchor);
   if (current) {
+    const jump = current.querySelector('[data-experiment-jump]');
+    const group = jump && document.getElementById(jump.hash.slice(1));
+    if (group) group.open = true;
     current.scrollIntoView();
     return true;
   }

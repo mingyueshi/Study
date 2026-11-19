@@ -62,27 +62,39 @@
   const text = (x, y, value) => `<text x="${x}" y="${y}" text-anchor="middle">${value}</text>`;
   const arrow = '<path d="M0 -24V-3M-6 -10 0 -3 6 -10" fill="none" stroke="#b6551b" stroke-width="3"/>';
 
-  function html(kind) {
+  function coilSettingsHTML() {
+    const entry = data?.electromagnet;
+    return entry ? slider('current', entry.current.label, entry.current) + slider('turns', entry.turns.label, entry.turns) : '';
+  }
+
+  function html(kind, {coilSettingsId = ''} = {}) {
     if (!data?.[kind]) return null;
     const entry = data[kind];
+    const magnetic = kind === 'magnet' || kind === 'electromagnet';
     let controls = '';
     if (kind === 'sound') controls = '<div class="fig-ctrl">' + entry.media.map(m => button('medium', m.label, m.id)).join('') + '</div>';
     if (kind === 'tone') controls = slider('frequency', entry.frequency.label, entry.frequency) + slider('amplitude', entry.amplitude.label, entry.amplitude);
     if (kind === 'magnet') controls = '<div class="fig-ctrl">' + entry.poles.map(m => button('poles', m.label, m.id)).join('') + '</div>';
     if (kind === 'buoyancy') controls = '<div class="fig-ctrl">' + entry.blocks.map(b => button('objectType', b.label, b.id)).join('') + '</div>';
     if (kind === 'structure') controls = '<div class="fig-ctrl">' + entry.directions.map(d => button('direction',d.label,d.id)).join('') + '</div><div class="fig-ctrl">' + entry.braces.map(b => button('brace',b.label,b.id)).join('') + '</div>';
-    if (kind === 'electromagnet') controls = slider('current', entry.current.label, entry.current) + slider('turns', entry.turns.label, entry.turns) +
-      '<div class="fig-ctrl">' + button('phase','看通电吸起','.5') + button('phase','看断电放下','1') + '</div>';
+    if (kind === 'electromagnet') controls = '<div class="fig-ctrl">' + button('phase','看通电吸起','.5') + button('phase','看断电放下','1') + '</div>';
     if (kind === 'machine') controls = '<div class="fig-ctrl">' + entry.modes.map(m => button('mode', m.label, m.id)).join('') + '</div>' +
       slider('fulcrum', '支点位置（从重物一端算起）', entry.fulcrum) +
       '<div class="fig-ctrl" data-pulley-options hidden>' + entry.pulleys.map(m => button('pulley', m.label, m.id)).join('') + '</div>' +
       slider('run', '坡脚到坡顶的水平距离', entry.run);
-    return `<section class="sci-process sci-experiment" data-experiment="${kind}" aria-label="${esc(entry.title)}"><p class="sci-process-prompt">${esc(entry.prompt)}</p>` + controls +
-      '<div class="fig-ctrl"><button type="button" class="fig-btn" data-experiment-action="play" aria-pressed="false" hidden>播放一次</button>' + button('previous', '退一步') + button('next', '进一步') + button('reset', '回到开始') + '</div>' +
-      `<div class="sci-demo-stage" tabindex="0" role="region" aria-label="${esc(entry.title)}图示，可横向滚动"><svg class="fig-svg sci-process-svg" viewBox="0 0 640 320" role="img" aria-label="${esc(entry.title)}，变化说明见图下文字"><g data-experiment-scene></g></svg></div>` +
-      '<p class="sci-scroll-hint">左右滑动图示，看完整个观察场景。</p>' +
-      '<p class="sci-process-readout" data-experiment-reading></p><p class="sci-observation" data-experiment-note role="status"></p>' +
-      slider('progress', '操作进度', {min:0,max:100,initial:0}) + '<p class="sci-process-status" data-experiment-status role="status"></p>' +
+    const player = '<div class="fig-ctrl"><button type="button" class="fig-btn" data-experiment-action="play" aria-pressed="false" hidden>播放一次</button>' +
+      button('previous', '退一步') + button('next', '进一步') + button('reset', magnetic ? '重置实验' : '回到开始') + '</div>';
+    const drawing = kind === 'magnet' ? '64 20 552 244' : kind === 'electromagnet' ? '36 16 484 310' : '0 0 640 320';
+    const stage = `<div class="sci-demo-stage${magnetic ? ' sci-lab-stage' : ''}"${magnetic ? '' : ` tabindex="0" role="region" aria-label="${esc(entry.title)}图示，可横向滚动"`}><svg class="fig-svg sci-process-svg" viewBox="${drawing}" role="img" aria-label="${esc(entry.title)}"><g data-experiment-scene></g></svg></div>`;
+    const feedback = '<p class="sci-process-readout" data-experiment-reading></p><p class="sci-observation" data-experiment-note role="status"></p>';
+    const progress = slider('progress', '操作进度', {min:0,max:100,initial:0}) + '<p class="sci-process-status" data-experiment-status role="status"></p>';
+    const prompt = `<p class="sci-process-prompt">${esc(entry.prompt)}</p>`;
+    const content = magnetic
+      ? `<div class="sci-lab-demo">${stage}<div class="sci-lab-operate">${prompt}${controls}${feedback}${player}${progress}</div></div>`
+      : prompt + controls + player + stage + '<p class="sci-scroll-hint">左右滑动图示，看完整个观察场景。</p>' + feedback + progress;
+    const external = kind === 'electromagnet' && coilSettingsId;
+    return `<section class="sci-process sci-experiment${magnetic ? ' sci-magnetic-experiment' : ''}" data-experiment="${kind}"${external ? ` data-experiment-settings="${esc(coilSettingsId)}"` : ''} aria-label="${esc(entry.title)}">` +
+      (kind === 'electromagnet' && !external ? coilSettingsHTML() : '') + content +
       `<p class="sci-model-note">${esc(entry.model)}</p><details class="sci-demo-sources"><summary>资料出处（需联网）</summary>` + entry.sources.map(s => `<a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">${esc(s.title)}</a>`).join(' · ') + '</details></section>';
   }
 
@@ -128,7 +140,7 @@
         bar('moving',record.poles === 'attract' ? 'N' : 'S',record.poles === 'attract' ? 'S' : 'N') +
         '<path d="M132 181v25m38-25v25m38-25v25" stroke="#7b857e" stroke-width="4"/>' +
         '<path data-exp="force" d="M-30 0H30m-8-6 8 6-8 6" fill="none" stroke="#b6551b" stroke-width="4"/>' +
-        text(170,245,'固定的磁铁') + '<text data-exp="moving-label" y="245" text-anchor="middle">可移动的磁铁</text>' + text(320,45,'箭头表示右侧磁铁受到的磁力方向');
+        text(170,245,'固定的磁铁') + '<text data-exp="moving-label" y="245" text-anchor="middle">可移动的磁铁</text>' + text(320,45,'右侧磁铁的受力方向');
     } else if (kind === 'electromagnet') {
       let coil = 'M215 130';
       for (let i=0;i<record.turns;i++) { const x=215+i*220/record.turns, end=215+(i+1)*220/record.turns; coil += `C${x-12} 130 ${x-12} 80 ${x} 80S${x+12} 130 ${end} 130`; }
@@ -253,10 +265,10 @@
     }
     write(root.querySelector('[data-experiment-reading]'), reading);
     write(root.querySelector('[data-experiment-note]'), note);
-    root.querySelectorAll('[data-experiment-input]').forEach(input => {
+    record.inputs.forEach(({input, output}) => {
       const key = input.dataset.experimentInput, value = key === 'progress' ? Math.round(p * 100) : record[key];
       input.value = value;
-      write(root.querySelector(`[data-experiment-output="${key}"]`), key === 'run' ? `${(value / 100).toFixed(1)} 米` : `${value}${key === 'progress' || key === 'fulcrum' ? '%' : key === 'turns' ? ' 匝' : ' 档'}`);
+      write(output, key === 'run' ? `${(value / 100).toFixed(1)} 米` : `${value}${key === 'progress' || key === 'fulcrum' ? '%' : key === 'turns' ? ' 匝' : ' 档'}`);
     });
     for (const action of ['mode','medium','pulley','poles','objectType','direction','brace']) root.querySelectorAll(`[data-experiment-action="${action}"]`).forEach(b => b.setAttribute('aria-pressed', String(b.dataset.value === record[action])));
     sync(record);
@@ -268,7 +280,7 @@
     play.disabled = !canPlay(); play.setAttribute('aria-pressed', String(playing));
     root.querySelector('[data-experiment-action="previous"]').disabled = record.progress <= 0;
     root.querySelector('[data-experiment-action="next"]').disabled = done;
-    write(root.querySelector('[data-experiment-status]'), !canPlay() ? '已减少动效，可拖动进度或逐步观察。' : playing ? '正在演示，可随时暂停。' : done ? '这次观察完成，可以改变条件再比较。' : '已暂停，改变条件后从头观察。');
+    write(root.querySelector('[data-experiment-status]'), !canPlay() ? '已减少动效，可拖动进度或逐步观察。' : playing ? '正在演示，可随时暂停。' : done ? '这次观察完成，可以改变条件再比较。' : '已暂停，可播放或逐步观察。');
   }
   function pause(fig) {
     if (!active || (fig && active.fig !== fig)) return;
@@ -294,7 +306,11 @@
   function mount(fig) {
     if (!data || records.has(fig)) return;
     const root = fig.querySelector('[data-experiment]'); if (!root) return;
-    const record = {fig,root,kind:root.dataset.experiment,progress:0,medium:'air',mode:'lever',pulley:'fixed',
+    const settings = root.dataset.experimentSettings ? document.getElementById(root.dataset.experimentSettings) : null;
+    const inputs = (settings ? [root, settings] : [root]).flatMap(container => Array.from(container.querySelectorAll('[data-experiment-input]'), input => ({
+      input, output:container.querySelector(`[data-experiment-output="${input.dataset.experimentInput}"]`),
+    })));
+    const record = {fig,root,settings,inputs,kind:root.dataset.experiment,progress:0,medium:'air',mode:'lever',pulley:'fixed',
       frequency:data.tone.frequency.initial,amplitude:data.tone.amplitude.initial,fulcrum:data.machine.fulcrum.initial,run:data.machine.run.initial,
       poles:'attract',current:data.electromagnet?.current.initial ?? 2,turns:data.electromagnet?.turns.initial ?? 8,
       objectType:'light',direction:'right',brace:'on'};
@@ -306,6 +322,12 @@
       pause(fig);
       if (['mode','medium','pulley','poles','objectType','direction','brace'].includes(action)) { record[action] = b.dataset.value; record.progress = 0; build(record); }
       else if (action === 'phase') { record.progress = clamp(b.dataset.value,0,1); draw(record); }
+      else if (action === 'reset' && (record.kind === 'magnet' || record.kind === 'electromagnet')) {
+        record.progress = 0;
+        if (record.kind === 'magnet') record.poles = 'attract';
+        else { record.current = data.electromagnet.current.initial; record.turns = data.electromagnet.turns.initial; }
+        build(record);
+      }
       else { record.progress = action === 'reset' ? 0 : clamp((action === 'next' ? Math.floor(record.progress * 4 + 1e-8) + 1 : Math.ceil(record.progress * 4 - 1e-8) - 1) / 4, 0, 1); draw(record); }
     };
     record.input = event => {
@@ -313,19 +335,30 @@
       pause(fig);
       if (key === 'progress') { record.progress = clamp(input.value, 0, 100) / 100; draw(record); }
       else { const limits = key === 'frequency' || key === 'amplitude' ? data.tone[key] : data[record.kind][key];
-        record[key] = clamp(input.value, limits.min, limits.max); record.progress = 0; build(record); }
+        record[key] = clamp(input.value, limits.min, limits.max);
+        if (record.kind !== 'electromagnet') record.progress = 0;
+        if (key === 'current') draw(record); else build(record);
+      }
     };
     root.addEventListener('click', record.click); root.addEventListener('input', record.input);
+    settings?.addEventListener('input', record.input);
     if (window.StudyEffects?.watch) record.unwatch = window.StudyEffects.watch(fig, () => pause(fig));
     else if (typeof IntersectionObserver === 'function') { const observer = new IntersectionObserver(entries => { if (entries.some(e => !e.isIntersecting)) pause(fig); }); observer.observe(fig); record.unwatch = () => observer.disconnect(); }
     root.querySelector('[data-experiment-action="play"]').hidden = false;
   }
-  function remove(fig, record) { pause(fig); record.unwatch?.(); record.root.removeEventListener('click', record.click); record.root.removeEventListener('input', record.input); records.delete(fig); }
+  function remove(fig, record) {
+    pause(fig);
+    record.unwatch?.();
+    record.root.removeEventListener('click', record.click);
+    record.root.removeEventListener('input', record.input);
+    record.settings?.removeEventListener('input', record.input);
+    records.delete(fig);
+  }
   const dispose = () => { for (const [fig, record] of records) remove(fig, record); };
   const prune = () => { for (const [fig, record] of records) if (!fig.isConnected) remove(fig, record); };
   const changed = () => { if (!canPlay()) pause(); records.forEach(sync); };
   document.addEventListener('study:effects-change', changed); media.addEventListener('change', changed);
   document.addEventListener('visibilitychange', () => { if (document.hidden) pause(); });
   window.addEventListener('pagehide', () => pause());
-  window.SciExperiments = {html,mount,pause,dispose,prune};
+  window.SciExperiments = {html,coilSettingsHTML,mount,pause,dispose,prune};
 })();

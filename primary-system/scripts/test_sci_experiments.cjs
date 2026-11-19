@@ -57,27 +57,31 @@ test('斜面等高，越长越省力，移动距离和用力保持理想功的�
 });
 
 function environment(withEffects=true,withData=true) {
-  const frames=new Map(),watches=new Map(),events={},winEvents={};let id=0,change,others=0;
+  const frames=new Map(),watches=new Map(),settingsById=new Map(),events={},winEvents={};let id=0,change,others=0;
   const media={matches:false,addEventListener(t,fn){change=fn;}};
   const effects={motion:'full',watch(fig,fn){watches.set(fig,fn);return()=>watches.delete(fig);}};
-  const document={hidden:false,addEventListener(t,fn){events[t]=fn;}};
+  const document={hidden:false,getElementById:id=>settingsById.get(id),addEventListener(t,fn){events[t]=fn;}};
   const window={StudyEffects:withEffects?effects:undefined,matchMedia:()=>media,SciProcess:{pause(){others++;}},SciDemoMotion:{pause(){others++;}},
     addEventListener(t,fn){winEvents[t]=fn;},requestAnimationFrame(fn){frames.set(++id,fn);return id;},cancelAnimationFrame(id){frames.delete(id);}};
   vm.runInNewContext(fs.readFileSync(file,'utf8'),{window,document,...(withData?{SCI_EXPERIMENTS:data}:{})});
   function element(dataset={}){return{dataset,attrs:{},style:{},hidden:false,disabled:false,textContent:'',setAttribute(k,v){this.attrs[k]=String(v);}};}
-  function figure(kind='machine') {
+  function figure(kind='machine', externalSettings=false) {
     const nodes=new Map(),handlers={},get=key=>{if(!nodes.has(key))nodes.set(key,element());return nodes.get(key);};
     const keys=kind==='tone'?['frequency','amplitude','progress']:kind==='machine'?['fulcrum','run','progress']:kind==='electromagnet'?['current','turns','progress']:['progress'];
     const inputs=keys.map(experimentInput=>element({experimentInput}));
     const choices={mode:['lever','pulley','ramp'],medium:['air','vacuum'],pulley:['fixed','moving'],poles:['attract','repel'],phase:['.5','1'],objectType:['light','balanced','heavy'],direction:['right','left'],brace:['on','off']};
     const groups=Object.fromEntries(Object.entries(choices).map(([key,values])=>[key,values.map(value=>element({value}))]));
     const dots=[140,300,560].map(airX=>element({airX}));
-    const root={dataset:{experiment:kind},querySelector:get,querySelectorAll(s){return s==='[data-air-x]'?dots:s==='[data-experiment-input]'?inputs:groups[s.match(/"(.*?)"/)?.[1]]||[];},
+    const settingsHandlers={};
+    const settings={querySelector:get,querySelectorAll:()=>inputs.filter(i=>i.dataset.experimentInput!=='progress'),
+      addEventListener(t,fn){settingsHandlers[t]=fn;},removeEventListener(t){delete settingsHandlers[t];}};
+    if(externalSettings) settingsById.set('coil-settings',settings);
+    const root={dataset:{experiment:kind,experimentSettings:externalSettings?'coil-settings':''},querySelector:get,querySelectorAll(s){return s==='[data-air-x]'?dots:s==='[data-experiment-input]'?(externalSettings?inputs.filter(i=>i.dataset.experimentInput==='progress'):inputs):groups[s.match(/"(.*?)"/)?.[1]]||[];},
       addEventListener(t,fn){handlers[t]=fn;},removeEventListener(t){delete handlers[t];}};
     const fig={isConnected:true,querySelector:()=>root};window.SciExperiments.mount(fig);
     const click=(action,value='')=>{const b=get(`[data-experiment-action="${action}"]`);b.dataset={experimentAction:action,value};handlers.click({target:{closest:()=>b}});};
-    const input=(key,value)=>handlers.input({target:{dataset:{experimentInput:key},value}});
-    return{fig,root,get,handlers,click,input,inputs,dots};
+    const input=(key,value)=>(externalSettings&&key!=='progress'?settingsHandlers:handlers).input({target:{dataset:{experimentInput:key},value}});
+    return{fig,root,get,handlers,settingsHandlers,click,input,inputs,dots};
   }
   return{api:window.SciExperiments,frames,watches,figure,others:()=>others,
     tick(time){const pending=[...frames.values()];frames.clear();pending.forEach(fn=>fn(time));},
@@ -124,7 +128,7 @@ test('异极靠近、同极远离且不穿过固定磁铁，吸起放下连续�
   near(electromagnetModel(.5,2,8).strength,2*electromagnetModel(.5,1,8).strength);
   near(electromagnetModel(.5,2,8).strength,2*electromagnetModel(.5,2,4).strength);
 });
-test('磁铁翻面、电磁铁参数改变暂停并重置，通断电直达与减少动态手动观察可用',()=>{
+test('磁铁翻面从起点观察，通断电直达与减少动态手动观察可用',()=>{
   const e=environment(),m=e.figure('magnet'),em=e.figure('electromagnet');
   m.click('play');const stale=[...e.frames.values()][0];m.click('poles','repel');stale(100);assert.equal(progress(m),0);assert.equal(e.frames.size,0);m.input('progress',100);assert.match(m.get('[data-experiment-reading]').textContent,/相互排斥/);
   em.click('phase','.5');assert.equal(progress(em),50);assert.equal(em.get('[data-exp="switch"]').attrs.d,'M390 235H435');assert.ok(Number(em.get('[data-exp="strength"]').attrs.width)>0);
@@ -133,6 +137,27 @@ test('磁铁翻面、电磁铁参数改变暂停并重置，通断电直达与�
   e.reduce(true);em.click('phase','.5');assert.equal(progress(em),50);assert.equal(em.get('[data-experiment-action="play"]').disabled,true);
   e.api.dispose();assert.equal(e.watches.size,0);
   for(const kind of ['magnet','electromagnet'])assert.equal(environment(true,false).api.html(kind),null);
+});
+
+test('电磁铁调参暂停在当前通断状态，复位会同步侧栏，独立图示保留内嵌参数',()=>{
+  const e=environment(), em=e.figure('electromagnet',true);
+  assert.match(e.api.coilSettingsHTML(),/data-experiment-input="turns"/);
+  assert.match(e.api.html('electromagnet'),/data-experiment-input="current"/);
+  assert.doesNotMatch(e.api.html('electromagnet',{coilSettingsId:'coil-settings'}),/data-experiment-input="current"/);
+  em.click('phase','.5');
+  em.input('current',3);em.input('turns',12);
+  assert.equal(progress(em),50);
+  assert.equal(em.get('[data-exp="strength"]').attrs.width,'260');
+  assert.equal(em.get('[data-experiment-output="turns"]').textContent,'12 匝');
+  em.click('play');const stale=[...e.frames.values()][0];em.input('turns',4);stale(100);
+  assert.equal(e.frames.size,0);assert.equal(progress(em),50);
+  em.click('phase','1');em.input('current',1);
+  assert.equal(progress(em),100);assert.equal(em.get('[data-exp="strength"]').attrs.width,'0');
+  em.click('reset');
+  assert.equal(progress(em),0);
+  assert.equal(em.get('[data-experiment-output="current"]').textContent,'2 档');
+  assert.equal(em.get('[data-experiment-output="turns"]').textContent,'8 匝');
+  e.api.dispose();assert.equal(em.settingsHandlers.input,undefined);
 });
 
 test('浮沉按排水体积计算浮力，轻物块漂浮时平衡，悬浮不移动，下沉未触底且仍有浮力',()=>{

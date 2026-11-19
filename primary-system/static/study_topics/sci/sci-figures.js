@@ -803,9 +803,9 @@ const SciFigures = (() => {
   };
 
   /* 电磁铁 */
-  const electromagnet = () => {
+  const electromagnet = (options) => {
     if (typeof window !== 'undefined') {
-      const interactive = window.SciExperiments?.html('electromagnet');
+      const interactive = window.SciExperiments?.html('electromagnet', options);
       if (interactive) return interactive;
     }
     let s = `<svg class="fig-svg" viewBox="0 0 640 200">`;
@@ -1211,7 +1211,7 @@ const SciFigures = (() => {
     fig.querySelector('.circuit-layout').innerHTML = circuitLayout(key, one, two);
     fig.querySelector('.sci-circuit-hint').textContent = mode.note;
     fig.querySelector('.sci-circuit-status').textContent = DEMOS.circuitStatus[status];
-    const workspace = fig.closest('.sci-circuit-topic');
+    const workspace = fig.closest('.sci-electric-topic');
     (workspace || fig).querySelectorAll('[data-fig-act="sci-circuit"]').forEach(button => {
       const on = button.dataset.v === key;
       button.classList.toggle('fig-on', on);
@@ -1327,7 +1327,7 @@ const SciFigures = (() => {
       const b = e.target.closest('[data-fig-act]');
       if (!b || b.disabled) return;
       const act = b.dataset.figAct;
-      const fig = b.closest('.fig') || (act === 'sci-circuit' ? b.closest('.sci-circuit-topic')?.querySelector('[data-fig="demo-sci-circuit"]') : null);
+      const fig = b.closest('.fig') || (act === 'sci-circuit' ? b.closest('.sci-electric-topic')?.querySelector('[data-fig="demo-sci-circuit"]') : null);
       if (!fig) return;
       if (act === 'sci-state') statesApply(fig, b.dataset.v);
       else if (act === 'sci-state-heat' || act === 'sci-state-cool') {
