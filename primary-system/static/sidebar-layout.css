@@ -12,7 +12,7 @@ html body [data-sl-ready] > .sl-sidebar {
 html body [data-sl-ready][data-sl-mode="wide"][data-sl-side="left"] > .sl-sidebar { grid-column: 1 !important; }
 .sl-header { flex: 0 0 auto; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
 html body .sl-toggle {
-  display: inline-flex; align-items: center; justify-content: center; min-height: 40px; padding: 7px 12px;
+  display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 7px 12px;
   border: 1px solid var(--line, #c9dccc); border-radius: 10px; background: var(--panel, var(--white, #f3f8ef));
   color: var(--accent, var(--green-dark, #205640)); font: inherit; font-size: 15px; font-weight: 700; line-height: 1.5; cursor: pointer;
 }

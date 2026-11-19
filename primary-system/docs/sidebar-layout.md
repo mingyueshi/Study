@@ -27,4 +27,8 @@
 
 注册的侧栏默认支持宽屏折叠，按侧栏选择器生成独立的浏览器存储键。可用 `data-sidebar-collapse-key` 指定稳定的折叠状态存储键，并用 `data-sidebar-label` 指定按钮中的名称；有特殊需要时可显式设置 `data-sidebar-collapsible="false"`。隐藏侧栏时会把其中的键盘焦点移回操作按钮，按钮使用 `aria-expanded` 和 `aria-controls` 说明状态。页面动态重绘时恢复同类侧栏的折叠状态。
 
+侧栏按钮的最小高度为 44 CSS px。屏幕宽度跨过布局断点时，若聚焦的侧栏按钮或内容随布局隐藏，焦点会移动到当前可见的侧栏按钮。侧栏内的书签会展开当前布局的侧栏，保留另一种布局的折叠状态。
+
+启动本地服务后，可运行 `node scripts/test_sidebar_layout_browser.cjs http://127.0.0.1:8012 chromium` 验证这些行为和跨专题的位置偏好。测试需要 Playwright 和对应的浏览器。可将浏览器参数改为 `webkit`，也可通过 `PLAYWRIGHT_MODULE` 指定本机已有的 Playwright 模块。
+
 个人学习系统维护自己目录内的独立实现与偏好，不引用小学系统。验证时检查首页、详情、带参数深链接，以及左右切换后的目录滚动与输入状态，覆盖约 390、820、1920 和 3440 像素宽度。

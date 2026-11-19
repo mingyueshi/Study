@@ -39,6 +39,8 @@
   function render(instance) {
     const {layout, toggle, breakpoint, collapseToggle} = instance;
     const compact = window.innerWidth < breakpoint;
+    const focused = document.activeElement;
+    const panelFocused = instance.panels.some(panel => panel.contains(focused));
     layout.dataset.slMode = compact ? 'compact' : 'wide';
     layout.dataset.slSide = side;
     layout.dataset.slCollapsed = String(Boolean(collapseToggle && instance.collapsed));
@@ -49,14 +51,17 @@
     toggle.setAttribute('aria-label', compact ? toggle.textContent : side === 'right' ? '将侧栏移到左侧' : '将侧栏移到右侧');
     if (compact) toggle.setAttribute('aria-expanded', String(layout.dataset.slOpen === 'true'));
     else toggle.removeAttribute('aria-expanded');
-    if (compact && layout.dataset.slOpen !== 'true' && instance.panels.some(panel => panel.contains(document.activeElement))) toggle.focus({preventScroll: true});
+    if (compact && (focused === collapseToggle || (layout.dataset.slOpen !== 'true' && panelFocused))) {
+      toggle.focus({preventScroll: true});
+    }
     if (collapseToggle) {
       const collapseLabel = `${instance.collapsed ? '展开' : '收起'}${sidebarLabel}`;
       if (collapseToggle.textContent !== collapseLabel) collapseToggle.textContent = collapseLabel;
       collapseToggle.setAttribute('aria-label', `${instance.collapsed ? '展开' : '收起'}${sidebarLabel}`);
       collapseToggle.setAttribute('aria-expanded', String(!instance.collapsed));
-      if (compact && document.activeElement === collapseToggle) toggle.focus({preventScroll: true});
-      if (!compact && instance.collapsed && instance.panels.some(panel => panel.contains(document.activeElement))) collapseToggle.focus({preventScroll: true});
+      if (!compact && instance.collapsed && (focused === toggle || panelFocused)) {
+        collapseToggle.focus({preventScroll: true});
+      }
     }
   }
 
@@ -116,8 +121,11 @@
     let target;
     try { target = document.getElementById(decodeURIComponent(location.hash.slice(1))); } catch (e) { return; }
     if (!target || !instance.panels.some(panel => panel.contains(target))) return;
-    instance.collapsed = false;
-    instance.layout.dataset.slOpen = 'true';
+    if (window.innerWidth < instance.breakpoint) instance.layout.dataset.slOpen = 'true';
+    else instance.collapsed = false;
+    render(instance);
+    // 先重新分配侧栏高度，再滚动到侧栏中的书签。
+    schedule();
     requestAnimationFrame(() => target.scrollIntoView({block: 'nearest'}));
   }
 
