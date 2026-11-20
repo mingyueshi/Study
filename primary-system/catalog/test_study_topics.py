@@ -5,6 +5,7 @@ from pathlib import Path
 from django.contrib.staticfiles import finders
 from django.test import SimpleTestCase, TestCase
 from django.urls import reverse
+from django.utils.html import escape
 
 
 HISTORY_PAGES = (
@@ -54,6 +55,32 @@ class TopicMarkup(HTMLParser):
 
 
 class StudyTopicPageTests(SimpleTestCase):
+    def test_mathematicians_directory_and_stable_person_pages(self):
+        directory = self.client.get(reverse('math-stories'))
+        self.assertContains(directory, '<h1>数学家的故事</h1>', html=True)
+        for group in directory.context['groups']:
+            self.assertContains(directory, group['title'])
+            for person in group['people']:
+                with self.subTest(person=person['id']):
+                    url = reverse('math-story-person', args=[person['id']])
+                    self.assertContains(directory, f'href="{url}"')
+                    page = self.client.get(url)
+                    self.assertContains(page, f'<h1>{person["name"]}</h1>', html=True)
+                    for anchor in ('life', 'solution', 'try', 'sources', 'keep-reading'):
+                        self.assertContains(page, f'id="{anchor}"', count=1)
+                    self.assertContains(page, escape(person['practice']['answer']))
+                    for source in person['sources']:
+                        self.assertContains(page, f'href="{escape(source["url"])}"')
+                    if extension := person.get('extension'):
+                        link = reverse(extension['route'], args=extension['args']) + extension['suffix']
+                        self.assertContains(page, f'href="{escape(link)}"')
+        self.assertEqual(self.client.get(reverse('math-story-person', args=['missing'])).status_code, 404)
+        euler = self.client.get(reverse('math-story-person', args=['euler']))
+        self.assertContains(euler, 'data-cross ', count=7)
+        self.assertContains(euler, 'mathematicians/bridges.js')
+        for asset in ('mathematicians/stories.css', 'mathematicians/bridges.js'):
+            self.assertTrue(finders.find(asset), asset)
+
     def test_energy_environment_has_five_stations_with_local_media_and_demos(self):
         response = self.client.get(reverse('energy-environment'))
         self.assertContains(response, '<h1>能源与环境</h1>', html=True)

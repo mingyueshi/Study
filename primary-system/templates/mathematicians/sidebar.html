@@ -1,0 +1,25 @@
+<aside class="stories-sidebar study-reading-sidebar" aria-label="人物目录">
+  <details class="study-reading-group" open>
+    <summary>本篇目录</summary>
+    <nav class="study-reading-links" aria-label="本篇目录">
+      <a href="#life">生平故事</a>
+      <a href="#solution">解题步骤</a>
+      <a href="#try">动手试试</a>
+      <a href="#sources">史料与出处</a>
+      <a href="#keep-reading">继续读</a>
+    </nav>
+  </details>
+  {% for group in groups %}
+    <details class="study-reading-group"{% if person.group == group.id %} open{% endif %}>
+      <summary>{{ group.title }}</summary>
+      <nav class="study-reading-links" aria-label="{{ group.title }}">
+        {% for item in group.people %}
+          <a href="{% url 'math-story-person' item.id %}"{% if item.id == person.id %} aria-current="page"{% endif %}>{{ item.name }}</a>
+        {% endfor %}
+      </nav>
+    </details>
+  {% endfor %}
+  <nav class="study-reading-links" aria-label="专题导航">
+    <a href="{% url 'math-stories' %}">数学家的故事 · 首页</a>
+  </nav>
+</aside>

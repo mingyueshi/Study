@@ -1,0 +1,82 @@
+{% extends 'mathematicians/base.html' %}
+{% load static %}
+{% block title %}{{ person.name }} · 数学家的故事 · 乐学堂{% endblock %}
+{% block stories %}
+<header class="stories-hero stories-person-hero">
+  <div>
+    <p class="stories-field">{{ person.field }}</p>
+    <h1>{{ person.name }}</h1>
+    <p class="stories-date">{{ person.place }} · {{ person.years }}</p>
+  </div>
+  <div class="stories-problem">
+    <h2>{{ person.question }}</h2>
+    <p>{{ person.problem }}</p>
+    <div class="stories-notation">{{ person.notation }}</div>
+  </div>
+</header>
+
+<div class="study-reading-layout" data-sidebar-layout=".stories-sidebar" data-sidebar-width="280px" data-sidebar-label="人物目录">
+  <div class="study-reading-main stories-reading">
+    <section class="stories-panel" aria-labelledby="life">
+      <h2 id="life" tabindex="-1">生平故事</h2>
+      <div class="stories-life{% if person.artifact %} stories-life-with-photo{% endif %}">
+        <div>
+          {% for event in person.biography %}
+            <h3>{{ event.title }}</h3>
+            <p>{{ event.text }}</p>
+          {% endfor %}
+        </div>
+        {% if person.artifact %}
+          <figure class="stories-photo">
+            <img src="{% static person.artifact.path %}" alt="{{ person.artifact.alt }}" width="330" height="496" loading="lazy">
+            <figcaption>{{ person.artifact.caption }}。<a href="{{ person.artifact.url }}" target="_blank" rel="noopener noreferrer">{{ person.artifact.label }}（图片出处需联网） ↗</a></figcaption>
+          </figure>
+        {% endif %}
+      </div>
+    </section>
+
+    <section class="stories-panel" aria-labelledby="solution">
+      <h2 id="solution" tabindex="-1">怎样解题</h2>
+      <ol class="stories-steps">
+        {% for step in person.steps %}
+          <li><div><h3>{{ step.title }}</h3><p>{{ step.text }}</p></div></li>
+        {% endfor %}
+      </ol>
+      <div class="stories-result">
+        <h3>得到的结论</h3>
+        <p>{{ person.result }}</p>
+      </div>
+    </section>
+
+    <section class="stories-panel" aria-labelledby="try">
+      <h2 id="try" tabindex="-1">动手试试</h2>
+      {% if bridges %}{% include 'mathematicians/bridges.html' %}{% endif %}
+      <p>{{ person.practice.prompt }}</p>
+      <details class="stories-disclosure"><summary>展开参考解法</summary><p>{{ person.practice.answer }}</p></details>
+    </section>
+
+    <section class="stories-panel" aria-labelledby="sources">
+      <h2 id="sources" tabindex="-1">史料与出处</h2>
+      <p>{{ person.evidence }}</p>
+      <details class="stories-disclosure">
+        <summary>查看资料（需联网）</summary>
+        <ul>{% for reference in person.sources %}<li><a href="{{ reference.url }}" target="_blank" rel="noopener noreferrer">{{ reference.label }} ↗</a></li>{% endfor %}</ul>
+      </details>
+    </section>
+
+    <section class="stories-panel" aria-labelledby="keep-reading">
+      <h2 id="keep-reading" tabindex="-1">继续读</h2>
+      {% for trail in trails %}
+        <h3>{{ trail.title }}</h3>
+        <ul class="stories-trail-links">
+          {% for item in trail.people %}<li><a href="{% url 'math-story-person' item.id %}">{{ item.name }} · {{ item.question }}</a></li>{% endfor %}
+        </ul>
+      {% endfor %}
+      {% if extension_url %}
+        <p><a href="{{ extension_url }}">{{ person.extension.label }} →</a></p>
+      {% endif %}
+    </section>
+  </div>
+  {% include 'mathematicians/sidebar.html' %}
+</div>
+{% endblock %}

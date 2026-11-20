@@ -113,6 +113,11 @@ class EnglishTextbookTests(PlatformFixture):
 
 
 class CatalogTests(PlatformFixture):
+    def test_math_filter_lists_mathematicians(self):
+        response = self.client.get(reverse('home'), {'area': 'math'})
+        self.assertContains(response, f'href="{reverse("math-stories")}"')
+        self.assertContains(response, '数学家的故事')
+
     def test_interdisciplinary_filter_opens_file_topics_without_a_textbook_module(self):
         response = self.client.get(reverse('home'), {'area': 'interdisciplinary'})
         cards = response.context['entry_cards']

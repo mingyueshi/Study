@@ -8,6 +8,7 @@
 | 跨学科 · 货币与贸易 | `money-trade.json`（五站正文、购物篮分值、供需模型、照片署名及出处）；实物照片在 `static/study_topics/money-trade/` | Django 直接读取，`node content_sources/test/test-money-trade.js` 校验 |
 | 跨学科 · 伟大工程 | `great-works.json`（六项工程的档案、图注、读图点位、推理任务与出处）；对应原理图在 `static/study_topics/great-works.svg`，编号按同一 360 × 160 坐标系叠加 | Django 直接读取；`node content_sources/test/test-great-works.js` 校验 |
 | 跨学科 · 时间的故事 | `time-story.json`（五站正文、自测、换算参数及出处）；四张节气卡引用 `solar-terms.json` | Django 直接读取；`node content_sources/test/test-time-story.js` 校验 |
+| 数学 · 数学家的故事 | `mathematicians.json`（中外人物生平、问题、解法、动手题、出处与联读路线）；七桥实验的地点与桥也在对应人物条目中 | Django 直接读取。保留人物 `id` 和分组 `id` 以维持详情与目录深链接。运行 `node content_sources/test/test-mathematicians.js` 和 `.venv/bin/python manage.py test catalog.test_study_topics.StudyTopicPageTests.test_mathematicians_directory_and_stable_person_pages` |
 | 数学、语文教材 | `math-data.js`、`knowledge-data.js`、图示与 `images/` | `make mathbook-data chinesebook-data` |
 | 图形运动实验室 | `geometry-lab.json`（图形顶点、实验手记和挑战目标，生成时校验） | `make study-topics-data` |
 | 英语教材、日常用语 | `english-data.js` | `make phrases-data`；教材导出见项目 README |

@@ -1,0 +1,59 @@
+{% extends 'mathematicians/base.html' %}
+{% load static %}
+{% block stories %}
+<header class="stories-hero">
+  <div>
+    <h1>数学家的故事</h1>
+    <p>从一个圆、几座桥和一堆棋子出发，读中外数学家的生平，试试他们用过的解题思路。</p>
+    <nav class="stories-actions" aria-label="浏览人物">
+      {% for group in groups %}<a href="#{{ group.id }}">{{ group.title }} <span aria-hidden="true">↓</span></a>{% endfor %}
+    </nav>
+  </div>
+  <div class="stories-featured">
+    {% if featured.artifact %}
+    <figure>
+      <img src="{% static featured.artifact.path %}" alt="{{ featured.artifact.alt }}" width="260" height="280">
+      <figcaption><a href="{{ featured.artifact.url }}" target="_blank" rel="noopener noreferrer" title="图片出处（需联网）">{{ featured.artifact.label }} ↗</a></figcaption>
+    </figure>
+    {% endif %}
+    <a class="stories-featured-link" href="{% url 'math-story-person' featured.id %}">
+      <span class="stories-field">{{ featured.field }}</span>
+      <span class="stories-notation">{{ featured.notation }}</span>
+      <strong>{{ featured.name }} · {{ featured.question }}</strong>
+    </a>
+  </div>
+</header>
+
+<section class="stories-trails" id="routes" aria-labelledby="routes-title">
+  <h2 id="routes-title">沿着问题读</h2>
+  <div class="stories-grid">
+    {% for trail in trails %}
+      <article class="stories-trail">
+        <h3>{{ trail.title }}</h3>
+        <p>{{ trail.intro }}</p>
+        <ul class="stories-trail-links">
+          {% for item in trail.people %}<li><a href="{% url 'math-story-person' item.id %}">{{ item.name }}</a></li>{% endfor %}
+        </ul>
+      </article>
+    {% endfor %}
+  </div>
+</section>
+
+{% for group in groups %}
+  <section class="stories-directory" aria-labelledby="{{ group.id }}">
+    <h2 id="{{ group.id }}" tabindex="-1">{{ group.title }}</h2>
+    <ul class="stories-grid">
+      {% for item in group.people %}
+        <li>
+          <a class="stories-card" href="{% url 'math-story-person' item.id %}">
+            <span class="stories-field">{{ item.field }}</span>
+            <h3>{{ item.name }}</h3>
+            <span class="stories-date">{{ item.place }} · {{ item.years }}</span>
+            <span class="stories-question">{{ item.question }}</span>
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </section>
+{% endfor %}
+{% endblock %}

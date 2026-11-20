@@ -1,0 +1,25 @@
+{% load static %}
+<div class="stories-bridges" data-bridge-game hidden>
+  <h3>试走柯尼斯堡七座桥</h3>
+  <p>选一处起点，再选身边没有走过的桥。每座桥只走一次。</p>
+  <label for="bridge-start">从哪里出发</label>
+  <select id="bridge-start" data-start>
+    {% for place in person.bridges.places %}<option value="{{ place.id }}">{{ place.label }}</option>{% endfor %}
+  </select>
+  <ol class="stories-bridge-list" aria-label="七座桥">
+    {% for start, end, start_name, end_name in bridges %}
+      <li>
+        <button type="button" data-cross data-from="{{ start }}" data-to="{{ end }}">
+          <span>桥 {{ forloop.counter }}</span><strong>{{ start_name }} ↔ {{ end_name }}</strong><span class="stories-crossed-label">已走</span>
+        </button>
+      </li>
+    {% endfor %}
+  </ol>
+  <p class="stories-bridge-status" role="status" data-bridge-status></p>
+  <p class="stories-walk" data-walk hidden></p>
+  <div class="stories-actions">
+    <button type="button" data-undo>退回一步</button>
+    <button type="button" data-reset>重新走</button>
+  </div>
+</div>
+<script src="{% static 'mathematicians/bridges.js' %}" defer></script>

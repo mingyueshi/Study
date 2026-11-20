@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}数学家的故事 · 乐学堂{% endblock %}
+{% block content %}
+  {% include 'study_topics/tool_layout_css.html' %}
+  <link rel="stylesheet" href="{% static 'mathematicians/stories.css' %}">
+  <article class="math-stories topic-tool-page">
+    <nav class="stories-crumbs" aria-label="当前位置">
+      <a href="{% url 'home' %}?area=math#modules-title">学习广场 · 数学</a>
+      {% if person %}<span aria-hidden="true">/</span><a href="{% url 'math-stories' %}">数学家的故事</a>{% endif %}
+    </nav>
+    {% block stories %}{% endblock %}
+  </article>
+{% endblock %}

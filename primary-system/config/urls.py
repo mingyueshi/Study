@@ -9,6 +9,7 @@ from accounts.forms import LearnerAuthenticationForm
 from catalog import views as catalog
 from catalog.energy_environment import energy_environment
 from catalog.great_works import great_works
+from catalog.mathematicians import mathematicians
 from catalog.money_trade import money_trade
 from catalog.time_story import time_story
 from catalog.upgrade_views import upgrade_history
@@ -71,6 +72,8 @@ urlpatterns = [
     path('chinesebook/', include('chinesebook.urls')),
     path('mathformulas/', include('mathformulas.urls')),
     path('mathbeauty/', include('mathbeauty.urls')),
+    path('math-stories/', mathematicians, name='math-stories'),
+    path('math-stories/<slug:person_id>/', mathematicians, name='math-story-person'),
     path('mathcamp/', include('mathcamp.urls')),
     path('measurement/', include('measurement.urls')),
     path('mysteries/', include('mysteries.urls')),
