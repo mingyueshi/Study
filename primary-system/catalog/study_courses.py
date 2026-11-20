@@ -1,6 +1,11 @@
+import json
+
+from django.conf import settings
 from django.views.generic import TemplateView
 from django.shortcuts import redirect
 from django.urls import reverse
+
+from astronomy.constellations import ATLAS
 
 
 ASTRONOMY_CONTEXT = {
@@ -14,15 +19,36 @@ ASTRONOMY_CONTEXT = {
 class AstronomyExploreView(TemplateView):
     extra_context = ASTRONOMY_CONTEXT
 
+    field_pages = {
+        'constellations': '星座识别',
+        'sky': '实时天象',
+        'telescope': '望远镜使用入门',
+    }
+
     def get(self, request, *args, **kwargs):
         # 保留原星表筛选书签；无筛选的根地址现在是天文总入口。
         if 'view' not in request.GET and any(key in request.GET for key in ('q', 'con', 'named', 'page')):
             return redirect(reverse('astronomy-index') + '?' + request.META['QUERY_STRING'], permanent=True)
         return super().get(request, *args, **kwargs)
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        view = self.request.GET.get('view')
+        if view in self.field_pages:
+            context.update(field_view=view, field_title=self.field_pages[view], field_pages=self.field_pages)
+        if view == 'constellations':
+            context['atlas'] = ATLAS
+        elif view == 'telescope':
+            source = settings.BASE_DIR / 'content_sources' / 'astro-telescope.json'
+            context['guide'] = json.loads(source.read_text(encoding='utf-8'))
+        return context
+
     def get_template_names(self):
+        view = self.request.GET.get('view')
+        if view in self.field_pages:
+            return [f'study_topics/astro_{view}.html']
         views = {f'au{i}' for i in range(1, 10)} | {'universe', 'lab', 'facts', 'clinic'}
-        if self.request.GET.get('view') in views:
+        if view in views:
             return ['study_topics/course.html']
         return ['study_topics/astronomy_portal.html']
 

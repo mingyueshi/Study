@@ -1,0 +1,43 @@
+{% extends 'study_topics/astro_field.html' %}
+{% load static %}
+{% block field_assets %}
+<script src="{% static 'study_topics/astro/vendor/astronomy-engine/astronomy.browser.min.js' %}" defer></script>
+<script src="{% static 'study_topics/astro/astro-media-data.js' %}" defer></script>
+<script src="{% static 'study_topics/astro/astro-observation-data.js' %}" defer></script>
+<script src="{% static 'study_topics/astro/astro-moon-calendar.js' %}?v=20261120" defer></script>
+<script src="{% static 'study_topics/astro/astro-sky.js' %}?v=1" defer></script>
+{% endblock %}
+{% block field_intro %}太阳几点落下？天黑时，哪颗行星已经升起？选一个地点，就能按当地的地平线判断。{% endblock %}
+{% block field_body %}
+<div class="field-panel">
+  <div class="field-controls">
+    <label>观测地<select id="sky-place"></select></label>
+    <span id="sky-coordinates"></span>
+  </div>
+  <div id="sky-custom" class="field-controls" hidden>
+    <label>纬度（北为正）<input id="sky-lat" type="number" step="any" min="-90" max="90" required></label>
+    <label>经度（东为正）<input id="sky-lon" type="number" step="any" min="-180" max="180" required></label>
+  </div>
+  <div class="field-controls">
+    <label>观测时刻（北京时间）<input id="sky-time" type="datetime-local" min="1900-01-01T00:00" max="2100-12-31T23:59" required></label>
+    <button type="button" id="sky-now">回到此刻</button>
+  </div>
+  <p id="sky-status" role="status"></p>
+</div>
+<div id="sky-results" hidden>
+  <div class="sky-cards">
+    <section><h2>当日日出</h2><strong id="sky-rise"></strong></section>
+    <section><h2>当日日落</h2><strong id="sky-set"></strong></section>
+    <section><h2>此时月相</h2><strong id="sky-phase"></strong><p id="sky-fraction"></p><a href="?view=lab#sky-moon">打开月相演示 →</a></section>
+  </div>
+  <section class="field-panel"><h2>行星在哪里？</h2>
+    <p id="sky-sun"></p><p>面朝正北是 0°，顺时针转到正东是 90°。高度从地平线量起，头顶是 90°。</p>
+    <div class="sky-planets" id="sky-planets"></div>
+  </section>
+</div>
+<details class="field-note"><summary>怎样判断能否看见？</summary>
+<p>太阳低于地平线 6°、行星高度至少 10° 时，这里才提示可以尝试观测。临近太阳、暮光、云层、山体和城市灯光都会影响结果。天王星通常需要双筒镜，海王星需要望远镜。白天请勿用望远镜寻找行星。</p>
+<p>本机使用 Astronomy Engine 2.1.19 按海拔 0 米、无遮挡地平线估算。日出日落按太阳上边缘计算，同一天从北京时间 00:00 算起。所有地点统一显示北京时间（UTC+8）。<a href="https://github.com/cosinekitty/astronomy">计算资料（需联网）</a></p>
+</details>
+<noscript>请启用 JavaScript，在本机计算当前天象。</noscript>
+{% endblock %}

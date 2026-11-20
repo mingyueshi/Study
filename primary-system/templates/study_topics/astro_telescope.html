@@ -1,0 +1,23 @@
+{% extends 'study_topics/astro_field.html' %}
+{% load static %}
+{% block field_assets %}<script src="{% static 'study_topics/astro/astro-telescope.js' %}?v=1" defer></script>{% endblock %}
+{% block field_intro %}第一次架望远镜，可以把目标定得很小：自己找到月亮，看清一座环形山的边缘。{% endblock %}
+{% block field_body %}
+<p class="field-safety"><strong>保护眼睛</strong>　{{ guide.safety }}</p>
+<figure class="scope-photo"><img src="{% static 'study_topics/astro/images/astro/p-au4-3.jpg' %}" alt="暮色中的观测者与望远镜，主镜筒上方另有小型寻星装置">
+  <figcaption><h2>先认出镜筒上的三个部件</h2><dl>
+    {% for part in guide.parts %}<dt>{{ part.name }}</dt><dd>{{ part.use }}</dd>{% endfor %}
+  </dl></figcaption>
+</figure>
+<ol class="scope-steps">{% for step in guide.steps %}<li><h2>{{ step.title }}</h2><p>{{ step.action }}</p><p class="scope-check">{{ step.check }}</p></li>{% endfor %}</ol>
+<section class="field-panel"><h2>同一支镜筒，换目镜会怎样？</h2>
+  <p>放大倍率 = 望远镜焦距 ÷ 目镜焦距。先算一次，再切换目镜验证。</p>
+  <div class="field-controls">
+    <label>望远镜焦距（毫米）<input type="number" min="1" max="20000" value="600" step="any" id="scope-tube" required></label>
+    <label>目镜焦距（毫米）<select id="scope-eye"><option>25</option><option>20</option><option>10</option><option>6</option></select></label>
+    <output id="scope-power" for="scope-tube scope-eye" aria-live="polite">24 倍</output>
+  </div><p>把 25 毫米目镜换成 10 毫米，找目标会更容易，还是更难？试着用两次算出的倍率解释。</p>
+</section>
+<section class="field-panel"><h2>遇到了什么情况？</h2>{% for item in guide.troubleshooting %}<details class="field-note"><summary>{{ item.symptom }}</summary><p>{{ item.answer }}</p></details>{% endfor %}</section>
+<p><a href="?view=sky">查看此刻的月相与行星 →</a> · <a href="https://www.celestron.com/blogs/knowledgebase/aligning-your-celestron-finderscope-a-step-by-step-guide">寻星镜校准图解（需联网）</a></p>
+{% endblock %}

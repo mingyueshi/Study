@@ -6,7 +6,7 @@
 {% include 'reference_library/breadcrumbs.html' with subject_title='天文星表' %}
 <div class="astro-page">
 <header class="ref-header astro-hero"><div><p class="ref-kicker">在星表中认识天体</p>
-<h1>天文星表</h1><p>按名称、HYG编号或星座查找。星表坐标参考J2000.0，不是实时星空。</p></div>
+<h1>天文星表</h1><p>按名称、HYG编号或星座查找。星表坐标参考J2000.0，不是实时星空。</p><a href="{% url 'astronomy-explore' %}?view=constellations{% if con %}#{{ con }}{% endif %}">看星座识别图 →</a></div>
 </header>
 <form method="get" class="ref-toolbar" role="search" aria-label="查找天体">
 <label class="ref-field ref-search">天体名或编号<input name="q" value="{{ q }}" maxlength="100" placeholder="太阳、Sirius、HYG编号">

@@ -471,6 +471,12 @@ class StudyTopicPageTests(SimpleTestCase):
         self.assertContains(portal, 'id="astro-topics"')
         self.assertNotContains(portal, 'class="sidebar"')
         self.assertNotContains(portal, 'astronomy.browser.min.js')
+        for view in ('constellations', 'sky', 'telescope'):
+            with self.subTest(view=view):
+                response = self.client.get('/astronomy/', {'view': view})
+                self.assertTemplateUsed(response, f'study_topics/astro_{view}.html')
+                self.assertContains(response, f'astro-{view}.js')
+                self.assertEqual(b'astronomy.browser.min.js' in response.content, view == 'sky')
         for view in ('au1', 'au9', 'lab', 'universe', 'facts', 'clinic'):
             response = self.client.get('/astronomy/', {'view': view})
             self.assertTemplateUsed(response, 'study_topics/course.html')

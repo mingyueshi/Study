@@ -1,0 +1,16 @@
+{% extends 'study_topics/page.html' %}
+{% load static %}
+{% block title %}{{ field_title }} · 天文探索 · 乐学堂{% endblock %}
+{% block study_assets %}
+<link rel="stylesheet" href="{% static 'study_topics/astro/astro-field.css' %}?v=1">
+{% block field_assets %}{% endblock %}
+{% endblock %}
+{% block study_content %}
+<article class="astro-field">
+  <nav class="field-tabs" aria-label="观测专题">
+    {% for code, title in field_pages.items %}<a href="?view={{ code }}" {% if field_view == code %}aria-current="page"{% endif %}>{{ title }}</a>{% endfor %}
+  </nav>
+  <header class="field-heading"><h1>{{ field_title }}</h1><p>{% block field_intro %}{% endblock %}</p></header>
+  {% block field_body %}{% endblock %}
+</article>
+{% endblock %}

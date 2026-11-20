@@ -21,9 +21,9 @@ check(Array.isArray(ASTRO.units) && ASTRO.units.length === 9, '应有 9 个太�
 check(isStr(ASTRO.textbook), '缺少 textbook');
 check(isStr(ASTRO.edition), '缺少 edition');
 check(ASTRO.portal && isStr(ASTRO.portal.intro), '总入口缺少导语');
-check(Array.isArray(ASTRO.portal?.tools) && ASTRO.portal.tools.length === 4, '总入口应有 4 个工具入口');
+check(Array.isArray(ASTRO.portal?.tools) && ASTRO.portal.tools.length === 7, '总入口应有 7 个工具入口');
 (ASTRO.portal?.tools || []).forEach((tool, i) => {
-  check(tool.id === ['universe', 'lab', 'facts', 'clinic'][i], '总入口工具 ID 与现有视图对应');
+  check(tool.id === ['constellations', 'sky', 'telescope', 'universe', 'lab', 'facts', 'clinic'][i], '总入口工具 ID 与现有视图对应');
   check([tool.title, tool.emoji, tool.intro].every(isStr), '总入口工具说明完整');
 });
 

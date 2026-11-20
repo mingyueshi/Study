@@ -10,7 +10,7 @@
   }
   function moonAt(value,engine){
     const date=typeof value==='string'?parseDate(value):value;
-    if(!(date instanceof Date)||!Number.isFinite(date.getTime())||date.getUTCFullYear()<1900||date.getUTCFullYear()>2100)return null;
+    if(!(date instanceof Date)||!Number.isFinite(date.getTime())||beijingKey(date)<'1900'||beijingKey(date)>='2101')return null;
     return {phase:engine.MoonPhase(date)/360,fraction:engine.Illumination('Moon',date).phase_fraction,date:beijingKey(date),instant:date.toISOString()};
   }
   if(typeof module!=='undefined')module.exports={parseDate,moonAt,beijingKey};
@@ -39,5 +39,5 @@
     const timer=window.setInterval(refresh,60000);update(new Date(),true);
     return {manual(){mode='manual';root.dataset.moonMode=mode;delete root.dataset.moonCalendarDate;status.textContent=data.moon.manualNote;},dispose(){window.clearInterval(timer);input.removeEventListener('change',change);settings.removeEventListener('click',click);document.removeEventListener('visibilitychange',refresh);}};
   }
-  window.AstroMoonCalendar={html,mount};
+  window.AstroMoonCalendar={html,mount,moonAt,beijingKey};
 })();

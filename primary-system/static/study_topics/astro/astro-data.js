@@ -17,6 +17,9 @@ const ASTRO = {
   portal: {
     intro: '选一个感兴趣的主题，或从一个问题开始探索。',
     tools: [
+      { id: 'constellations', title: '88 星座识别', emoji: '✨', intro: '从猎户的腰带开始，关掉连线试试自己认星。' },
+      { id: 'sky', title: '实时天象', emoji: '🌅', intro: '查观测地的日出日落、月相和七颗行星的方位。' },
+      { id: 'telescope', title: '望远镜使用入门', emoji: '🌙', intro: '架稳镜筒、校准寻星镜，第一次看清月面。' },
       { id: 'universe', title: '宇宙漫游', emoji: '🌌', intro: '看真实影像，比较宇宙尺度。' },
       { id: 'lab', title: '天文实验室', emoji: '🔭', intro: '看月相、比行星、找北极星、追踪探测器。' },
       { id: 'facts', title: '数据速查', emoji: '📊', intro: '查距离、大小与时间。' },

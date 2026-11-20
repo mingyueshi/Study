@@ -122,7 +122,11 @@
 
 ### 天文专题总入口
 
-`/astronomy/` 使用独立的轻量目录模板 `astronomy_portal.html`，只加载 `astro-data.js`、`astro-portal.js` 与 `astro-portal.css`。9 个主题和 46 个问题复用原 `units`，四个工具入口的文案维护在 `ASTRO.portal`，由 `test/test-astro.js` 校验；搜索按主题与问题内容筛选并展开对应问题。具体讲解及互动通过 `?view=au1`、`?view=lab` 等原视图打开。旧 `/astronomy/study/` 保留永久跳转，参数与锚点继续解析；无视图参数的 `#lesson-*`、`#roam-*`、`#sky-*`、`#mission-*` 在目录中补齐视图后定位。星表独立为 `/astronomy/stars/`，原 `/astronomy/<编号>/` 不变，旧根地址的星表筛选参数转到新星表入口。修改后运行源校验、`make study-topics-data`、`make test-frontend` 与 `.venv/bin/python manage.py test catalog.test_study_topics astronomy`。
+`/astronomy/` 使用独立的轻量目录模板 `astronomy_portal.html`，只加载 `astro-data.js`、`astro-portal.js` 与 `astro-portal.css`。9 个主题和 46 个问题复用原 `units`，七个工具入口的文案维护在 `ASTRO.portal`，由 `test/test-astro.js` 校验；搜索同时筛选工具、主题与问题，并展开对应问题。具体讲解及互动通过 `?view=au1`、`?view=lab` 等原视图打开。旧 `/astronomy/study/` 保留永久跳转，参数与锚点继续解析；无视图参数的 `#lesson-*`、`#roam-*`、`#sky-*`、`#mission-*` 在目录中补齐视图后定位。星表独立为 `/astronomy/stars/`，原 `/astronomy/<编号>/` 不变，旧根地址的星表筛选参数转到新星表入口。修改后运行源校验、`make study-topics-data`、`make test-frontend` 与 `.venv/bin/python manage.py test catalog.test_study_topics astronomy`。
+
+三个观测专题分别从 `?view=constellations`、`?view=sky` 和 `?view=telescope` 进入。星图书签使用 IAU 三字母缩写（如 `#Ori`）。`astro-constellations.json` 同时提供星表沿用的中文名，以及识图用的拉丁名、星点、路径索引和观察提示。数据整理自 [D3-Celestial 0.7.35](https://www.npmjs.com/package/d3-celestial/v/0.7.35) 的 `constellations.json`、`constellations.lines.json` 、`stars.8.json` 和 `starnames.json`：按 J2000 经纬对匹配 XHIP 视星等，保留连线使用的星点，标注图中最亮星的原名或编号，并合并巨蛇座两段。每个星点存放赤经（度，−180 至 180）、赤纬（度）、视星等。许可在 `vendor/d3-celestial/LICENSE.txt`。识别连线仅用于认形，区域定义参照 [IAU 星座表](https://www.iau.org/IAU/IAU/Astronomy-FAQs/Constellations.aspx)。
+
+`astro-sky.js` 在本机调用 Astronomy Engine 的 SearchRiseSet、Equator、Horizon、Elongation 及原月相计算。所有地点的日期边界和输入输出均为 UTC+8；按分钟更新，手动选时后暂停跟随。默认北京，支持城市和自定经纬度。`astro-telescope.json` 维护架镜、校准、观测与故障问答。`node content_sources/test/test-astro-field.js` 校验数据结构、跨日、极区和可见性判断，并对照[香港天文台 2024 年历](https://www.hko.gov.hk/en/gts/astron2024/files/HKO_almanac_2024.pdf)的夏至日出日落。
 
 ### 中国省份文化
 

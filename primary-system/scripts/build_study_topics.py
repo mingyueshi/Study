@@ -304,7 +304,7 @@ def course_outputs():
             for filename in ('sci-demo-data.js', 'sci-demo-motion.js', 'sci-process-data.js', 'sci-process.js', 'sci-process.css', 'sci-experiments-data.js', 'sci-experiments.js'):
                 yield dest / filename, (SOURCE / filename).read_bytes()
         if topic == 'astro':
-            for filename in ('astro-discovery-data.js', 'astro-discovery.js', 'astro-media-data.js', 'astro-media.js', 'astro-observation-data.js', 'astro-observation.js', 'astro-lab-data.js', 'astro-lab.js', 'astro-moon-calendar.js', 'astro-portal.js', 'astro-portal.css'):
+            for filename in ('astro-discovery-data.js', 'astro-discovery.js', 'astro-media-data.js', 'astro-media.js', 'astro-observation-data.js', 'astro-observation.js', 'astro-lab-data.js', 'astro-lab.js', 'astro-moon-calendar.js', 'astro-portal.js', 'astro-portal.css', 'astro-field.css', 'astro-constellations.js', 'astro-sky.js', 'astro-telescope.js', 'vendor/d3-celestial/LICENSE.txt'):
                 yield dest / filename, (SOURCE / filename).read_bytes()
             for filename in ('astronomy.browser.min.js', 'LICENSE.txt'):
                 yield dest / 'vendor' / 'astronomy-engine' / filename, (SOURCE / 'vendor' / 'astronomy-engine' / filename).read_bytes()

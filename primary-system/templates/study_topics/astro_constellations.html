@@ -1,0 +1,32 @@
+{% extends 'study_topics/astro_field.html' %}
+{% load static %}
+{% block field_assets %}
+<script src="{% static 'study_topics/astro/astro-constellations.js' %}?v=1" defer></script>
+{% endblock %}
+{% block field_intro %}先找亮星，再沿相邻星点辨认形状。把连线关掉，试试还能不能认出同一片星空。{% endblock %}
+{% block field_body %}
+{{ atlas|json_script:"field-atlas" }}
+<div class="field-panel">
+  <div class="field-controls">
+    <label id="pattern-picker">查看星座<select id="pattern-code">{% for code, row in atlas.items %}<option value="{{ code }}"{% if code == 'Ori' %} selected{% endif %}>{{ row.name }} · {{ row.latin }}（{{ code }}）</option>{% endfor %}</select></label>
+    <label class="field-check"><input type="checkbox" id="pattern-lines" checked>显示连线</label>
+    <button type="button" id="pattern-mode">开始识别练习</button>
+  </div>
+  <figure class="field-figure">
+    <svg id="pattern-chart" data-reading-preserve viewBox="0 0 640 360" role="img" aria-label="星座辨认图"></svg>
+    <figcaption>图心朝上为天北，向左为天东。星点越大表示越亮。各图独立缩放，实际仰望时图案会随地点和时间转动。</figcaption>
+  </figure>
+  <section id="pattern-lesson">
+    <h2 id="pattern-title"></h2><p id="pattern-anchor"></p><p id="pattern-tip"></p><a id="pattern-catalog" href="{% url 'astronomy-index' %}">到星表查这个星座的天体 →</a>
+  </section>
+  <section id="pattern-quiz" hidden>
+    <h2 id="pattern-question" tabindex="-1">这是哪个星座？</h2>
+    <div class="field-controls" id="pattern-options"></div><p id="pattern-feedback" role="status"></p>
+    <button type="button" hidden id="pattern-next">下一题</button>
+  </section>
+</div>
+<details class="field-note"><summary>怎样读这 88 张图？</summary>
+<p>国际天文学联合会用边界把全天分成 88 个区域。图中只取一种常见连线，帮助记住方向相近的星；两颗星在图上相邻，在太空中的距离可能很远。巨蛇座的蛇头和蛇尾分居蛇夫座两侧，合起来算一个星座。</p>
+<p>查阅资料（需联网） · <a href="https://www.iau.org/IAU/IAU/Astronomy-FAQs/Constellations.aspx">IAU 星座表</a> · <a href="https://github.com/ofrohn/d3-celestial">Olaf Frohn 的 D3-Celestial 星图与 XHIP 星等</a> · <a href="{% static 'study_topics/astro/vendor/d3-celestial/LICENSE.txt' %}">本地数据许可</a></p></details>
+<noscript>请启用 JavaScript，绘制星图并开始练习。</noscript>
+{% endblock %}
