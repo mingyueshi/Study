@@ -67,10 +67,11 @@ test('损坏数据、非法字段和过期案卷不会造成假完成或任意�
   assert.equal(store.read(ids[0]).notes.hypothesis, '<img onerror=alert(1)>');
 });
 
-test('多关键词、领域、素材与阅读状态组合筛选，空白笔记不算已记录', () => {
-  const item = {search:'土星 SATURN 六边形 气流',category:'太空与信号',kinds:['animation','diagram']};
+test('多关键词、领域、素材、进展与阅读状态组合筛选，空白笔记不算已记录', () => {
+  const item = {search:'土星 SATURN 六边形 气流',category:'太空与信号',kinds:['animation','diagram'],progress:'new-evidence'};
   const record = {saved:true,completed:false,notes:{observation:'  ',hypothesis:'',next:''}};
-  assert.equal(matchesCase(item, {q:'ｓａｔｕｒｎ 气流',category:'太空与信号',kind:'animation',status:'saved'}, record), true);
+  assert.equal(matchesCase(item, {q:'ｓａｔｕｒｎ 气流',category:'太空与信号',kind:'animation',progress:'new-evidence',status:'saved'}, record), true);
+  assert.equal(matchesCase(item, {kind:'animation',progress:'partial',status:'saved'}, record), false);
   assert.equal(matchesCase(item, {q:'六边形 火星'}, record), false);
   assert.equal(matchesCase(item, {kind:'video'}, record), false);
   assert.equal(matchesCase(item, {status:'completed'}, record), false);

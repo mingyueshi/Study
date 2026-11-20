@@ -5,7 +5,7 @@ from django.contrib.staticfiles import finders
 from django.test import SimpleTestCase, TestCase
 from django.urls import reverse
 
-from .content import load_cases
+from .content import PROGRESS_LABELS, load_cases
 
 
 def iter_strings(value):
@@ -137,10 +137,18 @@ class MysteryPageTests(SimpleTestCase):
         self.assertIn('video', items['ufo-evidence']['kinds'])
         self.assertIn('animation', items['saturn-hexagon']['kinds'])
         for slug, item in items.items():
-            self.assertEqual(item['unresolved'], cases[slug]['unresolved'])
+            case = cases[slug]
+            progress = case.get('progress')
+            self.assertEqual(item['unresolved'], case['unresolved'])
+            self.assertEqual(item['progress'], progress['status'] if progress else 'open')
             self.assertEqual(item['url'], reverse('mystery-case', args=[slug]))
             self.assertTrue(item['image'].startswith('/static/mysteries/'))
-            self.assertIn(cases[slug]['open_questions'][0]['gap'], item['search'])
+            self.assertIn(case['open_questions'][0]['gap'], item['search'])
+            if progress:
+                self.assertIn(progress['title'], item['search'])
+                self.assertContains(response, progress['title'])
+        self.assertEqual({item['progress'] for item in items.values()}, set(PROGRESS_LABELS))
+        self.assertContains(response, 'name="progress"')
         self.assertContains(response, 'data-case-slug=', count=len(cases))
         self.assertContains(response, 'data-library-tools')
         self.assertContains(response, 'mystery-directory-data')
@@ -223,9 +231,23 @@ class MysteryPageTests(SimpleTestCase):
                     self.assertLess(html.index('id="background"'), html.index('id="evidence"'))
                 else:
                     self.assertNotContains(response, 'id="background"')
+                self.assertContains(response, 'id="challenge"', count=1)
+                self.assertContains(response, 'data-reasoning-form hidden')
+                self.assertContains(response, 'name="judgment"', count=3)
+                for number in case['challenge']['clues']:
+                    self.assertContains(response, f'id="evidence-{number}"', count=1)
+                    self.assertContains(response, f'href="#evidence-{number}"', count=1)
+                    self.assertContains(response, case['evidence'][number - 1]['observation'], count=2)
                 self.assertContains(response, 'name="mystery-choice"', count=3)
                 for choice in case['challenge']['choices']:
                     self.assertContains(response, choice['feedback'])
+                if progress := case.get('progress'):
+                    self.assertContains(response, 'href="#research-progress"', count=1)
+                    self.assertContains(response, progress['summary'])
+                    self.assertContains(response, f'datetime="{progress["date"]}"')
+                else:
+                    self.assertNotContains(response, 'id="research-progress"')
+                    self.assertContains(response, '仍待解')
                 for number in range(1, len(case['sources']) + 1):
                     self.assertContains(response, f'id="source-{number}"', count=1)
                     self.assertContains(response, f'href="#source-{number}"')

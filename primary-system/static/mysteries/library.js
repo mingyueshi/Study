@@ -11,8 +11,9 @@
   const form = root.querySelector('.mystery-filter-form');
   const dialog = root.querySelector('[data-compare-dialog]');
   const message = root.querySelector('[data-library-message]');
+  const filterNames = ['q', 'category', 'kind', 'progress', 'status'];
   let selected = [], visible = [];
-  function filters() { return Object.fromEntries(['q', 'category', 'kind', 'status'].map(name => [name, form.elements[name].value])); }
+  function filters() { return Object.fromEntries(filterNames.map(name => [name, form.elements[name].value])); }
   function updateURL() {
     const url = new URL(location.href);
     Object.entries(filters()).forEach(([key, value]) => { if (value) url.searchParams.set(key, value); else url.searchParams.delete(key); });
@@ -21,7 +22,7 @@
   }
   function restoreURL() {
     const params = new URL(location.href).searchParams;
-    ['q', 'category', 'kind', 'status'].forEach(key => {
+    filterNames.forEach(key => {
       const field = form.elements[key], value = (params.get(key) || '').slice(0, 120);
       field.value = key === 'q' || [...field.options].some(option => option.value === value) ? value : '';
     });

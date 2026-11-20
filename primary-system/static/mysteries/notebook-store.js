@@ -58,6 +58,7 @@
     return words.every(word => normalize(item.search).includes(word))
       && (!filters.category || item.category === filters.category)
       && (!filters.kind || item.kinds.includes(filters.kind))
+      && (!filters.progress || item.progress === filters.progress)
       && (!filters.status || (filters.status === 'saved' && record.saved)
         || (filters.status === 'completed' && record.completed)
         || (filters.status === 'unread' && !record.completed)

@@ -2,7 +2,7 @@
 {% load static %}
 {% block title %}未解之谜研究所 · 乐学堂{% endblock %}
 {% block content %}
-<link rel="stylesheet" href="{% static 'mysteries/mysteries.css' %}">
+<link rel="stylesheet" href="{% static 'mysteries/mysteries.css' %}?v=2">
 {% include 'study_topics/tool_layout_css.html' %}
 <div class="mysteries topic-tool-page" data-mystery-library>
   <header class="mystery-banner mystery-directory-hero">
@@ -30,6 +30,7 @@
         </label>
         <div class="inline-choice" data-inline-choice><label>调查领域<select name="category"><option value="">全部领域</option>{% for category in groups %}<option>{{ category }}</option>{% endfor %}</select></label></div>
         <div class="inline-choice" data-inline-choice><label>素材类型<select name="kind"><option value="">全部素材</option>{% for value, label in media_filters.items %}<option value="{{ value }}">{{ label }}</option>{% endfor %}</select></label></div>
+        <div class="inline-choice" data-inline-choice><label>研究进展<select name="progress"><option value="">全部进展</option>{% for value, label in progress_filters.items %}<option value="{{ value }}">{{ label }}</option>{% endfor %}</select></label></div>
         <div class="inline-choice" data-inline-choice><label>我的调查<select name="status"><option value="">全部案卷</option><option value="saved">稍后读</option><option value="unread">还没读完</option><option value="completed">已读完</option><option value="notes">有我的笔记</option></select></label></div>
       </form>
       <div class="mystery-library-actions">
@@ -78,6 +79,11 @@
             <img class="mystery-card-image" src="{% static case.figure.path %}" alt="" loading="lazy">
             <span class="mystery-card-copy">
               <strong><span aria-hidden="true">{{ case.icon }}</span> {{ case.title }}</strong>
+              <span class="mystery-progress-line">
+                <span class="mystery-badge mystery-badge-{{ case.progress_status }}">{{ case.progress_label }}</span>
+                {% if case.progress %}<time datetime="{{ case.progress.date }}">{{ case.progress.date }}</time>{% endif %}
+              </span>
+              {% if case.progress %}<span class="mystery-progress-title">{{ case.progress.title }}</span>{% endif %}
               <span>{{ case.summary }}</span>
               {% if case.media_labels %}<span class="mystery-card-media">{% for label in case.media_labels %}<span>{{ label }}</span>{% endfor %}</span>{% endif %}
               <span class="mystery-card-question"><b>未解焦点</b>{{ case.open_questions.0.question }}</span>
@@ -95,7 +101,7 @@
     </section>
     {% endfor %}
     <div class="mystery-empty mystery-panel" hidden data-empty-results>
-      <h3>这组线索还没找到案卷</h3><p>换一个关键词，或者放宽领域、素材和阅读筛选再试试。</p>
+      <h3>这组线索还没找到案卷</h3><p>换一个关键词，或者减少筛选条件再试试。</p>
       <button class="mystery-tool-button" type="button" data-clear-filters>查看全部案卷</button>
     </div>
   </section>
@@ -120,7 +126,7 @@
     </article>
   </template>
   {{ directory_data|json_script:'mystery-directory-data' }}
-  <script src="{% static 'mysteries/notebook-store.js' %}" defer></script>
-  <script src="{% static 'mysteries/library.js' %}?v=2" defer></script>
+  <script src="{% static 'mysteries/notebook-store.js' %}?v=2" defer></script>
+  <script src="{% static 'mysteries/library.js' %}?v=3" defer></script>
 </div>
 {% endblock %}

@@ -2,13 +2,17 @@
 {% load static %}
 {% block title %}{{ case.title }} · 未解之谜研究所{% endblock %}
 {% block content %}
-<link rel="stylesheet" href="{% static 'mysteries/mysteries.css' %}">
+<link rel="stylesheet" href="{% static 'mysteries/mysteries.css' %}?v=2">
 <article class="mysteries" data-mystery-case="{{ case.slug }}">
   <a class="mystery-back" href="{% url 'mysteries' %}">← 未解之谜研究所</a>
   <header class="mystery-banner mystery-case-hero">
     <div>
       <p class="mystery-kicker"><span aria-hidden="true">{{ case.icon }}</span> {{ case.category }}</p>
       <h1>{{ case.title }}</h1>
+      <div class="mystery-progress-line mystery-hero-progress">
+        <span class="mystery-badge mystery-badge-{{ progress_status }}">{{ progress_label }}</span>
+        {% if case.progress %}<time datetime="{{ case.progress.date }}">{{ case.progress.date }}</time>{% endif %}
+      </div>
       <p class="mystery-lead">{{ case.opening }}</p>
       <nav class="mystery-jumps" aria-label="案卷小节">
         <a href="#open-questions">未解在哪里 ↓</a>
@@ -16,7 +20,8 @@
         {% if case.depth_explorer %}<a href="#ocean-depths">沿标尺下潜 ↓</a>{% endif %}
         <a href="#evidence">看线索 ↓</a>
         {% if case.media %}<a href="#field-notes">看动态线索 ↓</a>{% endif %}
-        <a href="#challenge">试着判断 ↓</a>
+        <a href="#challenge">线索推理 ↓</a>
+        {% if case.progress %}<a href="#research-progress">研究进展 ↓</a>{% endif %}
         <a href="#findings">查看调查结论 ↓</a>
       </nav>
     </div>
@@ -90,7 +95,7 @@
     </header>
     <ol class="mystery-evidence-list">
       {% for clue in case.evidence %}
-      <li class="mystery-panel mystery-evidence">
+      <li id="evidence-{{ forloop.counter }}" class="mystery-panel mystery-evidence">
         <span class="mystery-number" aria-hidden="true">0{{ forloop.counter }}</span>
         <h3>{{ clue.title }}</h3>
         {% if clue.image %}
@@ -123,23 +128,22 @@
   <script src="{% static 'mysteries/media.js' %}" defer></script>
   {% endif %}
 
-  <section id="challenge" class="mystery-section mystery-panel mystery-challenge" aria-labelledby="challenge-heading">
+  {% include 'mysteries/reasoning.html' with challenge=case.challenge clues=reasoning_clues only %}
+
+  {% if case.progress %}
+  <section id="research-progress" class="mystery-section mystery-panel mystery-research-progress" aria-labelledby="progress-heading">
     <header class="mystery-section-heading">
-      <p class="mystery-kicker">第二步</p>
-      <h2 id="challenge-heading">试着做判断</h2>
-      <p>{{ case.challenge.prompt }}</p>
+      <h2 id="progress-heading">研究进展</h2>
+      <p class="mystery-progress-line">
+        <span class="mystery-badge mystery-badge-{{ progress_status }}">{{ progress_label }}</span>
+        <time datetime="{{ case.progress.date }}">{{ case.progress.date }}</time>
+      </p>
     </header>
-    <p class="mystery-instruction">点选一条，看看理由。</p>
-    {% for choice in case.challenge.choices %}
-    <details class="mystery-choice" name="mystery-choice">
-      <summary><span class="mystery-choice-number" aria-hidden="true">{{ forloop.counter }}</span><span>{{ choice.label }}</span></summary>
-      <div class="mystery-feedback {% if choice.correct %}mystery-feedback-correct{% endif %}">
-        <strong>{% if choice.correct %}这个判断有依据{% else %}再看看线索{% endif %}</strong>
-        <p>{{ choice.feedback }}</p>
-      </div>
-    </details>
-    {% endfor %}
+    <h3>{{ case.progress.title }}</h3>
+    <p>{{ case.progress.summary }}</p>
+    <p><a class="mystery-source-link" href="#source-{{ case.progress.source }}">查看这条进展的出处 ↓</a></p>
   </section>
+  {% endif %}
 
   <section id="findings" class="mystery-section" aria-labelledby="findings-heading">
     <header class="mystery-section-heading">
