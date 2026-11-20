@@ -11,7 +11,7 @@
   --white: #fffefa;
   --orange: #b75e2c;
   --gutter: clamp(20px, 3vw, 80px);
-  --page-width: 2240px;
+  --page-width: 100%;
   --card-tint: #fff0e5;
   --card-line: #efddca;
   --card-accent: #b75e2c;

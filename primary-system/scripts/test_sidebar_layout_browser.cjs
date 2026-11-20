@@ -60,6 +60,31 @@ async function verifySharedPreference(context) {
   await atlas.locator(map + '[data-sl-side="right"]').waitFor();
 }
 
+async function verifyWidePageAlignment(page) {
+  await page.setViewportSize({width: 3440, height: 1000});
+  const aligned = async () => {
+    const [main, ...headerAndFooter] = await page.evaluate(() =>
+      ['#main', '.site-top-inner', '.site-header', '.site-footer'].map(selector => {
+        const {left, width} = document.querySelector(selector).getBoundingClientRect();
+        return {left, width};
+      }));
+    assert.equal(main.width, 3280, page.url());
+    assert.deepEqual(headerAndFooter, [main, main, main], page.url());
+  };
+  await page.goto(new URL('/', base).href);
+  await aligned();
+  const nav = page.getByRole('navigation', {name: '主导航'});
+  for (const [label, path] of [['资料探索', '/references/'], ['积分兑换', '/rewards/shop/'], ['学习广场', '/']]) {
+    await nav.getByRole('link', {name: label}).click();
+    await page.waitForURL(new URL(path, base).href, {waitUntil: 'load'});
+    await aligned();
+  }
+  for (const path of ['/geography/study/', '/geography/atlas/china.html', '/phrases/']) {
+    await page.goto(new URL(path, base).href);
+    await aligned();
+  }
+}
+
 (async () => {
   const browser = await playwright[engine].launch();
   try {
@@ -67,7 +92,8 @@ async function verifySharedPreference(context) {
     const page = await context.newPage();
     await verifySidebar(page);
     await verifySharedPreference(context);
-    console.log(`${engine}：侧栏焦点、触控尺寸、旧书签、宽窄屏折叠和跨专题位置偏好检查通过。`);
+    await verifyWidePageAlignment(page);
+    console.log(`${engine}：侧栏焦点、书签、折叠与位置偏好和宽屏页边距检查通过。`);
   } finally {
     await browser.close();
   }
