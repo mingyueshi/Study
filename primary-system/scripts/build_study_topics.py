@@ -46,6 +46,10 @@ MEDIA_RENDERERS = {
     ('history-timeline', 'event-app.js'): 'item',
     ('geo-map', 'media.js'): 'img',
 }
+HISTORY_VERSIONED_ASSETS = {
+    'content.js', 'shared.js', 'timeline-data.js', 'timeline-app.js', 'timeline.css',
+    'influence-data.js', 'people-data.js', 'people-shared.js', 'people.css', 'dynasty-app.js', 'dynasty.css',
+}
 LESSON_HOOKS = (
     ('].map(l => [l.id, l]));', '].map(l => [l.id, window.StudyTopicConnections.lesson(l)]));'),
     (
@@ -197,7 +201,9 @@ def template(source, topic, page, theme, index_route):
             asset_url += '?v=' + sha256(resource_content(SOURCE / topic / path, topic, theme)).hexdigest()[:12]
         if shared_experiment or (topic in ('earth', 'ocean', 'climate', 'map-skills') and path.endswith(('.css', '.js'))):
             asset_url += '?v=' + sha256(resource_content(SOURCE / topic / path, topic, theme)).hexdigest()[:12]
-        if topic == 'history-timeline' and (Path(path).name.startswith(('silk-road', 'silk-city', 'territory')) or path in ('dynasty-app.js', 'dynasty.css', 'timeline-app.js', 'timeline.css')) and path.endswith(('.css', '.js')):
+        if topic == 'history-timeline' and (path in HISTORY_VERSIONED_ASSETS or (
+            path.startswith(('silk-road', 'silk-city', 'territory')) and path.endswith(('.css', '.js'))
+        )):
             asset_url += '?v=' + sha256(resource_content(SOURCE / topic / path, topic, theme)).hexdigest()[:12]
         if topic == 'history-timeline' and page in ('era', 'event') and path in ('era.css', 'reading-layout.js', 'era-app.js', 'event-app.js'):
             asset_url += '?v=' + sha256(resource_content(SOURCE / topic / path, topic, theme)).hexdigest()[:12]

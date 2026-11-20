@@ -433,7 +433,9 @@ window.HISTORY_PEOPLE = {
         "政治",
         "权力"
       ],
-      "eventIds": [],
+      "eventIds": [
+        "tc65"
+      ],
       "facts": [
         {
           "label": "身份",
@@ -790,7 +792,8 @@ window.HISTORY_PEOPLE = {
         "农业"
       ],
       "eventIds": [
-        "tc49"
+        "tc49",
+        "tc71"
       ],
       "facts": [
         {
@@ -913,7 +916,9 @@ window.HISTORY_PEOPLE = {
         "引力",
         "数学"
       ],
-      "eventIds": [],
+      "eventIds": [
+        "tw141"
+      ],
       "facts": [
         {
           "label": "核心著作",
@@ -1166,7 +1171,9 @@ window.HISTORY_PEOPLE = {
         "赤壁赋",
         "书画"
       ],
-      "eventIds": [],
+      "eventIds": [
+        "tc67"
+      ],
       "facts": [
         {
           "label": "文学线索",
@@ -1530,7 +1537,9 @@ window.HISTORY_PEOPLE = {
         "城市",
         "长卷"
       ],
-      "eventIds": [],
+      "eventIds": [
+        "tc68"
+      ],
       "facts": [
         {
           "label": "代表作",
@@ -1651,7 +1660,9 @@ window.HISTORY_PEOPLE = {
         "大卫",
         "材料"
       ],
-      "eventIds": [],
+      "eventIds": [
+        "tw140"
+      ],
       "facts": [
         {
           "label": "代表作",

@@ -7,11 +7,19 @@
   <title>历史双轨时间轴 · 乐学堂</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="timeline.css">
+  <link rel="stylesheet" href="people.css">
   <script src="content.js" defer></script>
   <script src="timeline-data.js" defer></script>
+  <script src="influence-data.js" defer></script>
   <script src="media-data.js" defer></script>
   <script src="dynasty-data.js" defer></script>
+  <script src="people-data.js" defer></script>
+  <script src="territory-data.js" defer></script>
+  <script src="territory-geo.js" defer></script>
   <script src="shared.js" defer></script>
+  <script src="people-shared.js" defer></script>
+  <script src="territory-links.js" defer></script>
+  <script src="territory-render.js" defer></script>
   <script src="navigation.js" defer></script>
   <script src="timeline-app.js" defer></script>
 </head>
@@ -22,7 +30,7 @@
       <p class="tl-eyebrow">中国史 × 世界史</p>
       <h1>历史双轨时间轴</h1>
       <p class="timeline-lead">沿同一条年代顺序读中外大事，看看同一时期，两边各发生了什么。</p>
-      <p class="timeline-totals"><b id="stat-eras">9</b> 个时代 · <b id="stat-events">126</b> 件大事</p>
+      <p class="timeline-totals"><b id="stat-eras">9</b> 个时代 · <b id="stat-events">213</b> 件大事</p>
     </header>
     <div class="timeline-topic" data-sidebar-label="时间轴工具">
       <aside class="timeline-sidebar" id="timeline-tools" data-tl-anchor tabindex="-1" aria-label="时间轴导航与工具">
@@ -40,6 +48,10 @@
                 <button type="button" data-mode="china" aria-pressed="false">中国史</button>
                 <button type="button" data-mode="world" aria-pressed="false">世界史</button>
                 <button type="button" data-mode="pair" aria-pressed="false">同期对比</button>
+              </div>
+              <div class="timeline-region">
+                <label for="timeline-region">世界文明专题</label>
+                <select id="timeline-region"><option value="">全部事件</option></select>
               </div>
               <label class="tl-media-filter"><input id="media-only" type="checkbox"> 只看带素材的大事</label>
               <a class="timeline-side-link" href="#timeline-results">查看结果 ↓</a>
@@ -93,19 +105,32 @@
             <h2 id="timeline-results" data-tl-anchor tabindex="-1">沿时间读大事</h2>
             <p id="event-count" role="status"></p>
           </div>
-          <a class="timeline-side-link" href="#timeline-tools">筛选与定位 ↗</a>
+          <nav class="timeline-reading-actions" aria-label="时间轴快捷入口">
+            <a class="timeline-side-link" href="#timeline-causes">追踪因果线 ↓</a>
+            <a class="timeline-side-link" href="#timeline-tools">筛选与定位 ↗</a>
+          </nav>
         </header>
 
         <nav class="timeline-dynasty-ribbon" id="dynasty-ribbon" aria-label="朝代色带与年代定位">
           <div class="timeline-ribbon-head"><b id="dynasty-current">朝代刻度</b><a href="dynasties.html">更替故事与版图 →</a></div>
           <div class="tl-dynasty-strip" id="dynasty-strip"></div>
-          <small>按顺序排列，色块宽度不表示时长；交接或并立时可同时高亮。</small>
+          <small>点朝代看疆域图。交接或并立时可同时高亮。</small>
         </nav>
         <div class="timeline-range-status"><p id="time-window-status" role="status"></p><button type="button" id="reset-time" hidden>查看全部年代</button></div>
 
         <div class="timeline-extras">
+          <details class="timeline-extra" id="timeline-causes" data-tl-anchor tabindex="-1">
+            <summary>事件怎样互相影响 <span><b id="stat-influences"></b> 条线索</span></summary>
+            <div class="timeline-causes-body">
+              <label for="influence-select">选择线索</label>
+              <select id="influence-select"></select>
+              <p class="timeline-influence-key">实线表示传播或推动，虚线表示提供条件。</p>
+              <div id="influence-graph"></div>
+            </div>
+          </details>
+
           <details class="timeline-extra">
-            <summary>同期对照精选 <span><b id="stat-pairs">30</b> 组对照</span></summary>
+            <summary>同期对照精选 <span><b id="stat-pairs">38</b> 组对照</span></summary>
             <div class="tl-spotlights" id="spotlights"></div>
           </details>
 
@@ -129,6 +154,21 @@
         <noscript><p class="tl-notice">请启用 JavaScript 查看时间轴；内容数据保存在本目录的 content.js 与 timeline-data.js 中。</p></noscript>
       </section>
     </div>
+    <dialog class="timeline-map" id="timeline-map" aria-labelledby="timeline-map-title">
+      <header>
+        <h2 id="timeline-map-title"></h2>
+        <form method="dialog"><button type="submit" autofocus>关闭</button></form>
+      </header>
+      <div class="timeline-map-stages" id="timeline-map-stages" hidden>
+        <label for="timeline-map-stage">疆域阶段</label>
+        <select id="timeline-map-stage"></select>
+      </div>
+      <div id="timeline-map-body"></div>
+      <div class="timeline-map-actions">
+        <a id="timeline-map-link" href="territory.html">进入疆域地图专题 →</a>
+        <button type="button" id="timeline-map-events">查看这段时期的大事</button>
+      </div>
+    </dialog>
   </main>
   <footer class="tl-footer"><a href="#top">回到顶部 ↑</a></footer>
 </body>

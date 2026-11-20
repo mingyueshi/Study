@@ -505,7 +505,8 @@ class StudyTopicPageTests(SimpleTestCase):
 
     def test_history_people_entry_and_data_load_before_consumers(self):
         response = self.client.get(reverse('history-timeline-timeline'))
-        for anchor in ('timeline-tools', 'timeline-results', 'timeline-flow', 'timeline-pairs', 'era-nav'):
+        for anchor in ('timeline-tools', 'timeline-results', 'timeline-flow', 'timeline-pairs', 'era-nav',
+                       'timeline-causes', 'timeline-region', 'timeline-map'):
             self.assertContains(response, f'id="{anchor}"', count=1)
         for label in ('事件筛选', '时代与年代', '相关专题'):
             self.assertContains(response, f'<summary>{label}</summary>', html=True)
@@ -513,6 +514,10 @@ class StudyTopicPageTests(SimpleTestCase):
         self.assertContains(response, 'history-timeline/timeline-app.js?v=')
         self.assertContains(response, 'href="people.html"')
         self.assertContains(response, '历史人物馆')
+        prefix = '/static/study_topics/history-timeline/'
+        assets = [url.split('?')[0] for url in TopicMarkup(response.content.decode()).assets]
+        for dependency in ('timeline-data.js', 'influence-data.js', 'people-shared.js', 'territory-render.js'):
+            self.assertLess(assets.index(prefix + dependency), assets.index(prefix + 'timeline-app.js'))
         for name, consumer in (
             ('history-timeline-people', 'people-app.js'),
             ('history-timeline-person', 'person-app.js'),
@@ -596,7 +601,7 @@ class StudyTopicPageTests(SimpleTestCase):
         self.assertContains(response, 'study_topics/map-skills/experiment.js?v=')
         self.assertContains(response, f'href="{reverse("history-study")}"', count=1)
         assets = [url.split('?')[0] for url in TopicMarkup(response.content.decode()).assets]
-        for name in ('content.js', 'dynasty-data.js', 'territory-data.js', 'territory-geo.js', 'shared.js'):
+        for name in ('content.js', 'dynasty-data.js', 'territory-data.js', 'territory-geo.js', 'shared.js', 'territory-render.js'):
             self.assertLess(assets.index(prefix + name), assets.index(prefix + 'territory-app.js'))
         self.assertNotIn(prefix + 'dynasty-app.js', assets)
         self.assertContains(response, f'href="{reverse("history-timeline-territory")}" aria-current="page"')

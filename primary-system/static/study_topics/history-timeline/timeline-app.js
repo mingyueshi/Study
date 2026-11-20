@@ -3,10 +3,11 @@
   'use strict';
   const root = document.querySelector('.timeline-topic');
   const $ = id => document.getElementById(id);
-  const {esc, makeContext, eraHref, eventHref, mediaFor, bindAnchors} = window.TLShared;
+  const {esc, makeContext, eraHref, eventHref, mediaFor, sourceHTML, bindAnchors} = window.TLShared;
   const {ordinal, calendar, formatYear, normalize, parseTarget, yearRange, inRange, pairInRange, nearest, bandsAt} = window.TLNavigation;
   const eras = window.TIMELINE_ERAS, events = window.TIMELINE_EVENTS, pairs = window.TIMELINE_PAIRS;
   const bands = window.DYNASTY_BANDS;
+  const regions = window.TIMELINE_REGIONS, influences = window.TIMELINE_INFLUENCES;
   const flow = $('timeline-flow');
   if (!eras?.length || !events?.length) {
     flow.innerHTML = '<p class="tl-notice">数据文件尚未完整加载。请确认已保存整个目录，再重新打开页面。</p>';
@@ -14,6 +15,7 @@
   }
   const ctx = makeContext(eras, events, pairs);
   const search = $('event-search'), mediaOnly = $('media-only'), sidebar = $('timeline-tools');
+  const region = $('timeline-region'), influenceSelect = $('influence-select'), causes = $('timeline-causes');
   const localTools = sidebar.querySelector('.timeline-local-tools'), filterTools = $('timeline-filters');
   const results = $('timeline-results'), slider = $('year-slider'), ribbon = $('dynasty-ribbon');
   const pairView = $('timeline-pairs');
@@ -26,11 +28,16 @@
   $('stat-eras').textContent = eras.length;
   $('stat-events').textContent = events.length;
   $('stat-pairs').textContent = pairs.length;
+  $('stat-influences').textContent = influences.length;
+  region.insertAdjacentHTML('beforeend', Object.entries(regions).map(([id, label]) =>
+    `<option value="${esc(id)}">${esc(label)}</option>`).join(''));
+  influenceSelect.innerHTML = influences.map(chain =>
+    `<option value="${esc(chain.id)}">${esc(chain.title)}</option>`).join('');
   $('spotlights').innerHTML = window.TIMELINE_SPOTLIGHTS.map(id => ctx.spotlightHTML(ctx.pairMap.get(id))).join('');
   $('era-nav').innerHTML = eras.map(era =>
     `<a class="tl-era-chip" href="#era-${esc(era.id)}" style="--era-accent:${esc(era.accent)}"><span aria-hidden="true">${era.no}</span>${esc(era.name)}</a>`).join('');
   $('dynasty-strip').innerHTML = bands.map(item =>
-    `<button class="tl-dynasty-chip" type="button" data-band="${esc(item.id)}" style="--era-accent:${esc(ctx.eraMap.get(item.era).accent)}" title="${esc(item.span)}，查看这一时期的中外大事">
+    `<button class="tl-dynasty-chip" type="button" data-band="${esc(item.id)}" style="--era-accent:${esc(ctx.eraMap.get(item.era).accent)}" aria-haspopup="dialog" aria-controls="timeline-map" title="${esc(item.span)}，查看疆域图">
       <b>${esc(item.name)}</b><small>${esc(item.span)}</small>
     </button>`).join('');
   flow.innerHTML = eras.map(era => `<section class="tl-era" id="era-${esc(era.id)}" style="--era-accent:${esc(era.accent)}" data-tl-anchor tabindex="-1">
@@ -39,7 +46,7 @@
       <div><h2>${esc(era.name)}</h2><p class="tl-era-span">${esc(era.span)}</p></div>
       <a class="tl-era-link" href="${eraHref(era)}">进入时代站 →</a>
     </div><p class="tl-era-compare">${esc(era.compare)}</p></header>
-    ${ctx.rowsHTML(era, {compact: true})}
+    ${ctx.rowsHTML(era, {compact: true, eventExtras})}
   </section>`).join('');
 
   function pairHTML(pair) {
@@ -51,6 +58,7 @@
         <h4><a href="${eventHref(ev)}">${esc(ev.icon || '•')} ${esc(ev.title)} →</a></h4>
         <p>${esc(ev.text)}</p>
         <a class="timeline-pair-locate" href="#card-${esc(ev.id)}">在时间轴上找位置 ↗</a>
+        ${eventExtras(ev)}
       </section>`).join('')}</div>
     </article>`;
   }
@@ -68,22 +76,24 @@
   const pairCards = [...pairView.querySelectorAll('.timeline-pair')];
   const pairSections = [...pairView.querySelectorAll('.timeline-pair-era')];
   const bandButtons = [...$('dynasty-strip').querySelectorAll('[data-band]')];
-  const searchIndex = new Map(events.map(ev => [ev.id, normalize(ev.title + ev.tag + ev.year + ev.text)]));
+  const searchIndex = new Map(events.map(ev => [ev.id, normalize([ev.title, ev.tag, ev.year, ev.text, regions[ev.region]].join(' '))]));
   slider.min = ordinal(minYear); slider.max = ordinal(maxYear);
 
   function readURL() {
     const params = new URLSearchParams(location.search);
     mode = ['all', 'china', 'world', 'pair'].includes(params.get('view')) ? params.get('view') : 'all';
+    region.value = mode !== 'china' && Object.hasOwn(regions, params.get('region')) ? params.get('region') : '';
     radius = ['100', '500'].includes(params.get('zoom')) ? params.get('zoom') : 'all';
     const year = Number(params.get('year'));
     focusYear = inBounds(year) ? year : minYear;
     band = bands.find(item => item.id === params.get('dynasty')) || null;
     if (band) focusYear = band.startYear;
+    showInfluence(params.get('chain'));
   }
   function saveURL() {
     const url = new URL(location.href);
     for (const [key, value] of [['view', mode === 'all' ? null : mode], ['year', focusYear === minYear && !band ? null : focusYear],
-      ['zoom', radius === 'all' ? null : radius], ['dynasty', band?.id || null]]) {
+      ['zoom', radius === 'all' ? null : radius], ['dynasty', band?.id || null], ['region', region.value || null]]) {
       if (value === null) url.searchParams.delete(key); else url.searchParams.set(key, value);
     }
     const anchor = $(url.hash.slice(1));
@@ -91,6 +101,84 @@
     if (anchor?.matches('[data-tl-anchor]') && anchor.closest('[hidden]')) url.hash = '';
     history.replaceState(history.state, '', url);
   }
+  function eventExtras(ev) {
+    const people = window.HistoryPeople.peopleForEvent(ev.id);
+    const chains = influences.filter(chain => chain.steps.includes(ev.id));
+    return chains.map(chain => `<a class="timeline-influence-link" href="#timeline-causes" data-influence="${esc(chain.id)}">${esc(chain.title)} ↗</a>`).join('')
+      + (people.length ? `<details class="timeline-people"><summary>人物名片 · ${people.map(person => esc(person.name)).join('、')}</summary>
+        ${people.map(window.HistoryPeople.compactCardHTML).join('')}</details>` : '');
+  }
+  function showInfluence(id, save = false) {
+    const chain = influences.find(item => item.id === id) || influences[0];
+    influenceSelect.value = chain.id;
+    const steps = chain.steps.map(id => ctx.eventMap.get(id));
+    const labels = {response: '推动后续行动', transfer: '传播与承接', condition: '提供条件'};
+    const arrow = `<svg viewBox="0 0 32 20" aria-hidden="true"><path d="M2 10H28M21 3L28 10L21 17"/></svg>`;
+    $('influence-graph').innerHTML = `<ol class="timeline-influence-nodes" aria-label="按影响方向排列的事件">${steps.map((ev, i) =>
+      `<li class="${ev.track}">
+        ${i ? `<span class="timeline-influence-arrow ${chain.links[i - 1].kind}">${arrow}</span>` : ''}
+        <a href="#card-${esc(ev.id)}"><small>${esc(ev.year)} · ${window.TLShared.trackName[ev.track]}</small><b>${esc(ev.title)} ↗</b></a>
+      </li>`).join('')}</ol>
+      <ol class="timeline-influence-notes" aria-label="各段影响的解释与出处">${chain.links.map((link, i) =>
+        `<li><b>${esc(steps[i].title)} → ${esc(steps[i + 1].title)}</b>
+          <p><span>${labels[link.kind]}</span> ${esc(link.note)}</p>
+          <details><summary>查看出处</summary>${sourceHTML(link.source)}</details>
+        </li>`).join('')}</ol>`;
+    if (save) {
+      const url = new URL(location.href);
+      url.searchParams.set('chain', chain.id);
+      history.replaceState(history.state, '', url);
+    }
+  }
+  influenceSelect.addEventListener('change', () => showInfluence(influenceSelect.value, true));
+  root.addEventListener('click', event => {
+    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    const link = event.target.closest('[data-influence]');
+    if (link) showInfluence(link.dataset.influence, true);
+  });
+
+  const mapDialog = $('timeline-map'), stage = $('timeline-map-stage');
+  const {fullView, regionPath, project, yearText, landHTML, riversHTML} = window.TerritoryRender;
+  const maps = window.TERRITORY_MAPS, geo = window.TERRITORY_GEO;
+  let mapBand = null;
+  function renderMap(map) {
+    $('timeline-map-title').textContent = map.title;
+    $('timeline-map-link').href = window.TerritoryLinks.mapHref(map.id);
+    $('timeline-map-body').innerHTML = `<p class="timeline-map-period">${esc(map.period)} · 示意年份 ${yearText(map.year)}</p>
+      <svg class="timeline-map-preview" viewBox="0 0 ${fullView.w} ${fullView.h}" role="img" aria-label="${esc(map.title)}示意图">
+        ${landHTML()}${riversHTML()}
+        ${map.regions.map(id => {
+          const {name, color} = geo.regions[id];
+          return `<path class="timeline-map-region${id === 'xia' ? ' approximate' : ''}" d="${regionPath(id)}" fill="${esc(color)}" stroke="${esc(color)}" fill-rule="evenodd"><title>${esc(name)}</title></path>`;
+        }).join('')}
+        ${map.capitals.map(capital => {
+          const [x, y] = project(capital.point);
+          return `<text class="timeline-map-capital" x="${x}" y="${y}">★<title>${esc(capital.name)}</title></text>`;
+        }).join('')}
+      </svg>
+      <ul class="timeline-map-key" aria-label="疆域与都城图例">${map.regions.map(id => `<li>
+        <span style="--region-color:${esc(geo.regions[id].color)}" aria-hidden="true"></span>${esc(geo.regions[id].name)}</li>`).join('')}
+        <li>★ ${map.capitals.map(capital => esc(capital.name)).join('、')}</li>
+      </ul>
+      <p class="timeline-map-note">${esc(map.note)}</p>
+      <p class="timeline-map-credit">轮廓 <a href="${esc(geo.meta.source)}" target="_blank" rel="noopener noreferrer">Cliopatria（需联网）</a> ·
+        底图 <a href="${esc(geo.meta.baseSource)}" target="_blank" rel="noopener noreferrer">Natural Earth（需联网）</a></p>`;
+  }
+  function openMap(selected) {
+    mapBand = selected;
+    const stages = maps.filter(map => map.dynasty === selected.id);
+    stage.innerHTML = stages.map(map => `<option value="${esc(map.id)}">${esc(map.title)} · ${yearText(map.year)}</option>`).join('');
+    $('timeline-map-stages').hidden = stages.length < 2;
+    renderMap(stages[0]);
+    mapDialog.showModal();
+    mapDialog.scrollTop = 0;
+  }
+  stage.addEventListener('change', () => renderMap(maps.find(map => map.id === stage.value)));
+  $('timeline-map-events').addEventListener('click', () => {
+    mapDialog.close();
+    $('year-jump').value = mapBand.name;
+    chooseTarget({year: mapBand.startYear, band: mapBand});
+  });
   function openFilters() {
     localTools.open = true;
     filterTools.open = true;
@@ -149,7 +237,7 @@
     for (const card of cards) {
       const ev = ctx.eventMap.get(card.dataset.event);
       card.hidden = !inRange(ev, range) || !(mode === 'all' || mode === 'pair' || mode === ev.track)
-        || !searchIndex.get(ev.id).includes(query) || (mediaOnly.checked && !mediaFor(ev).length);
+        || !searchIndex.get(ev.id).includes(query) || (region.value && ev.region !== region.value) || (mediaOnly.checked && !mediaFor(ev).length);
       count += Number(!card.hidden);
     }
     for (const row of rows) row.hidden = !row.querySelector('.tl-card:not([hidden])');
@@ -158,6 +246,7 @@
       const pair = ctx.pairMap.get(card.dataset.pair), china = ctx.eventMap.get(pair.china), world = ctx.eventMap.get(pair.world);
       card.hidden = !pairInRange(china, world, range)
         || ![searchIndex.get(china.id), searchIndex.get(world.id), normalize(pair.label)].some(text => text.includes(query))
+        || (region.value && world.region !== region.value)
         || (mediaOnly.checked && !mediaFor(china).length && !mediaFor(world).length);
       pairCount += Number(!card.hidden);
     }
@@ -178,7 +267,8 @@
     if (save) saveURL();
     queuePosition();
   }
-  function resetFilters() { search.value = ''; mediaOnly.checked = false; mode = 'all'; radius = 'all'; band = null; filter(); }
+  function clearEventFilters() { search.value = ''; mediaOnly.checked = false; region.value = ''; }
+  function resetFilters() { clearEventFilters(); mode = 'all'; radius = 'all'; band = null; filter(); }
   function showFilteredResults() { filter(); if (!narrow.matches && root.dataset.slMode !== 'compact') results.scrollIntoView({block: 'start', behavior: 'instant'}); }
   function locate(year, focus = true) {
     const visible = mode === 'pair'
@@ -199,7 +289,7 @@
   }
   function chooseTarget(target) {
     $('year-jump').removeAttribute('aria-invalid');
-    focusYear = target.year; band = target.band; search.value = ''; mediaOnly.checked = false;
+    focusYear = target.year; band = target.band; clearEventFilters();
     filter(); locate(focusYear);
   }
   $('year-jump-form').addEventListener('submit', event => {
@@ -219,16 +309,24 @@
   $('dynasty-strip').addEventListener('click', event => {
     const button = event.target.closest('[data-band]');
     const selected = button && bands.find(item => item.id === button.dataset.band);
-    if (selected) { $('year-jump').value = selected.name; chooseTarget({year: selected.startYear, band: selected}); }
+    if (selected) openMap(selected);
   });
   $('reset-time').addEventListener('click', () => { band = null; radius = 'all'; filter(); });
   search.addEventListener('input', showFilteredResults);
+  region.addEventListener('change', () => {
+    if (region.value && mode === 'china') mode = 'world';
+    showFilteredResults();
+  });
   mediaOnly.addEventListener('change', showFilteredResults);
   $('reset-filters').addEventListener('click', () => {
     resetFilters(); openFilters();
     search.focus();
   });
-  buttons.forEach(button => button.addEventListener('click', () => { mode = button.dataset.mode; showFilteredResults(); }));
+  buttons.forEach(button => button.addEventListener('click', () => {
+    mode = button.dataset.mode;
+    if (mode === 'china') region.value = '';
+    showFilteredResults();
+  }));
   if (standalone) {
     const syncLocalTools = () => { localTools.open = !narrow.matches || location.hash === '#timeline-tools'; };
     syncLocalTools();
@@ -241,6 +339,7 @@
   readURL(); filter(false); measureRibbon();
   bindAnchors(root, target => {
     if (target === sidebar) { openFilters(); return; }
+    if (target === causes) causes.open = true;
     closeCompactTools();
     // 优先保留年代窗口和筛选，只有遮住书签目标时才放宽条件。
     const inPairView = pairView.contains(target);
@@ -250,7 +349,7 @@
     }
     if (target.closest('[hidden]')) {
       mode = inPairView ? 'pair' : 'all';
-      search.value = ''; mediaOnly.checked = false;
+      clearEventFilters();
       filter(false);
     }
     if (target.closest('[hidden]')) {

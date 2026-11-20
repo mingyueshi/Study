@@ -4,7 +4,7 @@
   const root = document.querySelector('.event-topic');
   const slot = root.querySelector('.timeline-content');
   const heading = root.querySelector('.timeline-heading');
-  const { esc, trackName, makeContext, eraHref, eventHref, mediaFor } = window.TLShared;
+  const { esc, trackName, makeContext, eraHref, eventHref, mediaFor, sourceHTML } = window.TLShared;
   const layout = window.TLReadingLayout;
   const eras = window.TIMELINE_ERAS;
   const ctx = makeContext(eras, window.TIMELINE_EVENTS, window.TIMELINE_PAIRS);
@@ -27,6 +27,7 @@
   const cardHash = '#card-' + encodeURIComponent(ev.id);
   const next = window.TLNavigation.nextReading(ev, window.TIMELINE_EVENTS, window.TIMELINE_READING_LINKS);
   const people = window.HistoryPeople.peopleForEvent(ev.id);
+  const influences = window.TIMELINE_INFLUENCES.filter(chain => chain.steps.includes(ev.id));
   const civilizations = window.HistoryCivilizations.forEvent(ev.id);
   const technologies = window.AncientScience.forEvent(ev.id);
   const silkRoutes = window.SilkRoad.forEvent(ev.id);
@@ -69,12 +70,14 @@
 
   slot.innerHTML = `<article class="timeline-event-story ${ev.track}" aria-labelledby="event-title">
     <p class="event-text">${esc(ev.text)}</p>
+    ${ev.source ? `<p class="timeline-source">事件出处 · ${sourceHTML(ev.source)}</p>` : ''}
     <nav class="timeline-reading-actions" aria-label="继续了解这件大事">
       <a href="timeline.html${cardHash}">在总轴上找到这件大事 ↗</a>
       <a href="${eraHref(era)}${cardHash}">在时代站继续读 →</a>
       <a href="#event-directory">打开事件目录 ↗</a>
       ${materials.length ? '<a href="#event-media">看图听档案 ↓</a>' : ''}
       ${pair ? '<a href="#comparison">看同期对照 ↓</a>' : ''}
+      ${influences.map(chain => `<a href="timeline.html?chain=${esc(chain.id)}#timeline-causes">追踪因果线 · ${esc(chain.title)} ↗</a>`).join('')}
     </nav>
   </article>
   ${materials.length ? `<section class="event-media" id="event-media" data-tl-anchor tabindex="-1" aria-labelledby="event-media-title">
@@ -92,7 +95,8 @@
       </a>
     </div>
   </section>` : ''}
-  ${people.length ? `<section class="hp-event-people" aria-labelledby="event-people-title"><h2 id="event-people-title">走进这件大事里的人物</h2><nav aria-label="相关人物名片">${people.map(person=>`<a href="${window.HistoryPeople.personHref(person)}">${esc(person.name)} · 关系与关键决策 →</a>`).join('')}</nav></section>` : ''}
+  ${people.length ? `<section class="hp-event-people" aria-labelledby="event-people-title"><h2 id="event-people-title">相关人物名片</h2>
+    ${people.map(window.HistoryPeople.compactCardHTML).join('')}</section>` : ''}
   ${civilizations.length ? `<section class="hp-event-people" aria-labelledby="event-civilizations-title"><h2 id="event-civilizations-title">走进相关文明</h2><nav aria-label="相关文明档案">${civilizations.map(c=>`<a href="${window.HistoryCivilizations.detailHref(c)}">${esc(c.name)} · 建筑、文字与制度 →</a>`).join('')}</nav></section>` : ''}
   ${technologies.length ? `<section class="hp-event-people" aria-labelledby="event-science-title"><h2 id="event-science-title">走进相关科技</h2><nav aria-label="相关科技档案">${technologies.map(t=>`<a href="${window.AncientScience.detailHref(t)}">${esc(t.title)} →</a>`).join('')}</nav></section>` : ''}
   ${silkRoutes.length?`<section class="hp-event-people" aria-labelledby="event-silk-title"><h2 id="event-silk-title">沿丝路继续探索</h2><nav aria-label="相关丝路路线">${silkRoutes.map(r=>`<a href="${window.SilkRoad.routeHref(r.id)}">${esc(r.title)} · 城市、贸易品与文化交流 →</a>`).join('')}</nav></section>`:''}

@@ -16,12 +16,7 @@
   const changes = $('territory-changes');
   const stageChoices = $('territory-stages');
   const svg = $('territory-svg');
-  const fullView = { x: 0, y: 0, w: 1000, h: 830 };
-  const project = ([lng, lat]) => [(lng - 64) * 1000 / 81, (64 - lat) * 830 / 56];
-  const pathOf = (points, close = true) => points.map((point, i) =>
-    `${i ? 'L' : 'M'}${project(point).map(n => n.toFixed(2)).join(' ')}`).join('') + (close ? 'Z' : '');
-  const regionPath = id => geo.regions[id].rings.map(ring => pathOf(ring)).join('');
-  const yearText = year => year < 0 ? `约前 ${-year} 年` : `约 ${year} 年`;
+  const {fullView, project, pathOf, regionPath, yearText, landHTML, riversHTML} = window.TerritoryRender;
   let index = 0;
   let chosenComparison = null;
   let selected = '';
@@ -102,10 +97,9 @@
   }
   svg.innerHTML = `<title>中国历代范围交互地图</title>
     <rect class="territory-water" x="-2000" y="-2000" width="5000" height="5000"/>
-    <g class="territory-land"><path d="${geo.land.map(ring => pathOf(ring)).join('')}" fill-rule="evenodd"/></g>
+    ${landHTML()}
     <g class="territory-graticule">${grid.join('')}</g>
-    <g class="territory-rivers">${geo.rivers.flatMap(river => river.lines.map(line =>
-      `<path d="${pathOf(line, false)}"><title>${esc(river.name)}</title></path>`)).join('')}</g>
+    ${riversHTML()}
     <defs id="territory-change-defs"></defs>
     <g id="territory-regions"></g><g id="territory-differences" pointer-events="none" aria-hidden="true"></g><g id="territory-outlines"></g>
     <g class="territory-water-labels">${[[[109,37], '黄河'], [[113,29.6], '长江'], [[128,29], '东海'], [[118,17], '南海'], [[134,52], '黑龙江']].map(([point,name]) =>

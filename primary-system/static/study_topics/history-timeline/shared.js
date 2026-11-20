@@ -9,6 +9,10 @@ window.TLShared = (() => {
   const mediaFor = ev => window.TIMELINE_MEDIA?.[ev.id] || [];
   const mediaHref = ev => eventHref(ev) + '#event-media';
   const dynastyHref = band => 'dynasties.html#dyn-' + encodeURIComponent(band.id);
+  function sourceHTML(id) {
+    const source = window.TIMELINE_SOURCES?.[id];
+    return source ? `<a href="${esc(source.url)}" target="_blank" rel="noopener noreferrer">${esc(source.label)}（需联网）↗</a>` : '';
+  }
 
   function makeContext(eras, events, pairs) {
     const eraMap = new Map(eras.map(era => [era.id, era]));
@@ -34,7 +38,7 @@ window.TLShared = (() => {
     const pairNo = pair => pairNumbers.get(pair.id);
     const counterpart = (pair, ev) => eventMap.get(pair.china === ev.id ? pair.world : pair.china);
 
-    function cardHTML(ev, compact) {
+    function cardHTML(ev, compact, eventExtras) {
       const pair = pairOfEvent.get(ev.id);
       const other = pair && counterpart(pair, ev);
       const pairLink = pair
@@ -48,14 +52,15 @@ window.TLShared = (() => {
         ${compact ? '' : `<p class="tl-card-text">${esc(ev.text)}</p>`}
         ${pair ? `<p class="tl-pair-caption">${esc(pair.label)}</p>` : ''}
         ${pairLink}
+        ${eventExtras(ev)}
       </article>`;
     }
 
-    function rowsHTML(era, { compact = false } = {}) {
+    function rowsHTML(era, { compact = false, eventExtras = () => '' } = {}) {
       return `<div class="tl-date-flow">
         <div class="tl-date-legend"><span class="tl-track-label china-label">中国史</span><span class="tl-track-label world-label">世界史</span></div>
         ${byEra.get(era.id).map(row => `<div class="tl-date-row" data-year="${row[0].sort}">
-          ${['china', 'world'].map(track => `<div class="tl-date-track ${track}">${row.filter(ev => ev.track === track).map(ev => cardHTML(ev, compact)).join('')}</div>`).join('')}
+          ${['china', 'world'].map(track => `<div class="tl-date-track ${track}">${row.filter(ev => ev.track === track).map(ev => cardHTML(ev, compact, eventExtras)).join('')}</div>`).join('')}
         </div>`).join('')}
       </div>`;
     }
@@ -100,5 +105,5 @@ window.TLShared = (() => {
     jump();
   }
 
-  return { esc, trackName, makeContext, eraHref, eventHref, mediaFor, mediaHref, dynastyHref, stationsHTML, bindAnchors };
+  return { esc, trackName, makeContext, eraHref, eventHref, mediaFor, mediaHref, dynastyHref, sourceHTML, stationsHTML, bindAnchors };
 })();

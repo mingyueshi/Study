@@ -191,7 +191,7 @@ function territoryPage(query = '', motion = 'full') {
     setTimeout: (fn, ms) => { timers.set(++nextId, {fn, ms}); return nextId; }, clearTimeout: id => timers.delete(id),
     performance: {now: () => now},
   });
-  for (const file of ['content', 'dynasty-data', 'territory-data', 'territory-geo', 'territory-app']) {
+  for (const file of ['content', 'dynasty-data', 'territory-data', 'territory-geo', 'territory-render', 'territory-app']) {
     vm.runInContext(fs.readFileSync(path.join(__dirname, `../content_sources/history-timeline/${file}.js`), 'utf8'), context);
   }
   const click = id => get(id).handlers.click();

@@ -33,6 +33,17 @@ window.HistoryPeople = (() => {
         <div class="hp-card-actions"><a href="${personHref(person)}#decisions">读关键决策 →</a><button type="button" data-network="${esc(person.id)}">看关系网</button></div>
       </div></article>`;
   }
+  function compactCardHTML(person) {
+    const { image } = person;
+    return `<article class="hp-mini-card" data-person="${esc(person.id)}">
+      <figure><img src="${esc(new URL(image.src, assetBase).href)}" width="${image.width}" height="${image.height}" alt="${esc(image.alt)}" loading="lazy" decoding="async">
+        <figcaption>${esc(image.caption)}</figcaption></figure>
+      <div><a class="hp-mini-name" href="${personHref(person)}">${esc(person.name)} →</a>
+        <p class="hp-mini-life">${esc(person.life)} · ${esc(person.role)}</p>
+        <p>${esc(person.summary)}</p>
+      </div>
+    </article>`;
+  }
   function graphHTML(id, kind = 'all', gallery = false) {
     const person = personMap.get(id), relations = relationsFor(id, kind);
     const neighbors = [...new Set(relations.map(relation => otherPerson(relation, id).id))].map(key => personMap.get(key));
@@ -75,5 +86,5 @@ window.HistoryPeople = (() => {
         <p>${esc(relation.note)}</p><details><summary>核查这条关系的出处</summary>${sourcesHTML(relation.sources)}</details></article>`;
     }).join('')}</div>` : '<p class="hp-empty">本馆暂未收录这一类型的关系。可以切换关系类型，或打开人物名片继续读。</p>';
   }
-  return {data, personMap, groupMap, kindMap, assetBase, normalize, personHref, relationsFor, otherPerson, peopleForEvent, filterPeople, sourcesHTML, cardHTML, graphHTML, relationListHTML};
+  return {data, personMap, groupMap, kindMap, assetBase, normalize, personHref, relationsFor, otherPerson, peopleForEvent, filterPeople, sourcesHTML, cardHTML, compactCardHTML, graphHTML, relationListHTML};
 })();

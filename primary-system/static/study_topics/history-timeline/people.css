@@ -1,4 +1,15 @@
 /* 人物馆：名片、关系与选择共用一套清晰的阅读外壳。 */
+.hp-mini-card {
+  display: grid; grid-template-columns: clamp(74px, 25%, 130px) minmax(0, 1fr); gap: 12px;
+  padding: 12px; border: 1px solid var(--tl-line); border-radius: 12px; background: var(--tl-card);
+}
+.hp-mini-card + .hp-mini-card { margin-top: 8px; }
+.hp-mini-card figure { margin: 0; }
+.hp-mini-card img { display: block; width: 100%; height: auto; max-height: 108px; object-fit: contain; object-position: top; border-radius: 5px; }
+.hp-mini-card figcaption, .hp-mini-life { color: var(--tl-ink-soft); }
+.hp-mini-card figcaption { margin-top: 5px; font-size: 12px; line-height: 1.45; }
+.hp-mini-card p { margin: 4px 0 0; font-size: 15px; line-height: 1.65; }
+.hp-mini-name { display: inline-block; color: var(--tl-pair-deep); font-size: 18px; font-weight: 800; }
 .hp-shell { max-width: none; }
 .hp-hero { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 22px 40px; margin: 20px 0 26px; padding: clamp(22px, 3vw, 38px); border: 1px solid var(--tl-line); border-radius: 24px; background: linear-gradient(120deg, var(--tl-pair-soft), var(--tl-card, #fff)); }
 .hp-hero h1 { margin: 4px 0 12px; color: var(--tl-pair-deep); font-size: clamp(36px, 4vw, 52px); }
@@ -119,7 +130,7 @@
 .hp-event-people { margin: 22px 0; padding: 22px; border: 1px solid var(--tl-line); border-radius: 16px; background: var(--tl-card,#fff); }
 .hp-event-people h2 { margin: 0 0 14px; font-size: 24px; }
 .hp-event-people nav { display: flex; flex-wrap: wrap; gap: 10px; }
-.hp-event-people a { padding: 10px 14px; border-radius: 10px; color: var(--tl-pair-deep); background: var(--tl-pair-soft); font-size: 18px; font-weight: 750; }
+.hp-event-people nav a { padding: 10px 14px; border-radius: 10px; color: var(--tl-pair-deep); background: var(--tl-pair-soft); font-size: 18px; font-weight: 750; }
 @container people-reading (max-width: 800px) {
   .hp-graph-wide { display: none; }
   .hp-graph-portrait { display: block; min-width: 0; max-height: none; aspect-ratio: auto; }

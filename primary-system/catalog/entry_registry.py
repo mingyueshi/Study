@@ -171,7 +171,7 @@ def entry_for(code):
 SPECIAL_ENTRIES = (
     {'route': 'history-timeline-timeline', 'subject': '历史', 'area': 'history', 'icon': 'history-timeline', 'color': 'history',
      'name': '历史双轨时间轴', 'tag': '对照中外大事 →',
-     'blurb': '沿时间对照 126 件中外大事。点开事件读故事，跟着相关精讲看制度、因果和史料。'},
+     'blurb': '沿时间对照 213 件中外大事，追踪因果连线、查看朝代疆域与人物名片。'},
     {'route': 'history-timeline-territory', 'subject': '历史', 'area': 'history', 'icon': 'history-territory', 'color': 'history',
      'name': '历史疆域地图', 'tag': '在同一底图上比较疆域 →',
      'blurb': '观察夏到清 16 个朝代、22 个阶段的范围变化，自动播放、暂停查看，用不同颜色比较新增、减少与并立政权。'},

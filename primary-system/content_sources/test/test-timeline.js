@@ -19,6 +19,7 @@ require('../history-timeline/dynasty-data.js');
 require('../history-timeline/territory-data.js');
 require('../history-timeline/territory-geo.js');
 require('../history-timeline/reading-data.js');
+require('../history-timeline/influence-data.js');
 require('../history-timeline/shared.js');
 const W = globalThis.window;
 
@@ -41,6 +42,9 @@ const ERAS = W.TIMELINE_ERAS;
 const EVENTS = W.TIMELINE_EVENTS;
 const PAIRS = W.TIMELINE_PAIRS;
 const SPOTLIGHTS = W.TIMELINE_SPOTLIGHTS;
+const REGIONS = W.TIMELINE_REGIONS;
+const SOURCES = W.TIMELINE_SOURCES;
+const INFLUENCES = W.TIMELINE_INFLUENCES;
 check(Array.isArray(ERAS) && ERAS.length > 0, 'TIMELINE_ERAS 应为非空数组');
 check(Array.isArray(EVENTS) && EVENTS.length > 0, 'TIMELINE_EVENTS 应为非空数组');
 check(Array.isArray(PAIRS) && PAIRS.length > 0, 'TIMELINE_PAIRS 应为非空数组');
@@ -81,11 +85,14 @@ EVENTS.forEach(ev => {
   check(eraIds.has(ev.era), tag + ' 引用了不存在的时代: ' + ev.era);
   check(isStr(ev.year), tag + ' 缺少 year（展示年代）');
   check(ev.year.includes('年') || ev.year.includes('世纪'), tag + ' year 里应出现「年」或「世纪」: ' + ev.year);
-  check(typeof ev.sort === 'number' && Number.isFinite(ev.sort), tag + ' sort 应为数字');
+  check(Number.isInteger(ev.sort) && ev.sort !== 0, tag + ' sort 应为非零整数');
   check(isStr(ev.title), tag + ' 缺少 title');
   check(isStr(ev.text), tag + ' 缺少 text');
   check(isStr(ev.tag), tag + ' 缺少 tag（朝代/文明标签）');
   check(ev.icon === undefined || (isStr(ev.icon) && [...ev.icon].length <= 2), tag + ' icon 应为单个图形字符');
+  check(ev.source === undefined || Object.hasOwn(SOURCES, ev.source), tag + ' 应引用已登记出处');
+  check(ev.region === undefined || (ev.track === 'world' && Object.hasOwn(REGIONS, ev.region) && ev.source),
+    tag + ' 区域专题应属于世界轨，且有出处');
   ['year', 'title', 'text', 'tag'].forEach(k => check(!hasBadPunct(ev[k]), tag + ` ${k} 含英文引号/分号/裸换行: ` + ev[k]));
   const key = ev.era + '·' + ev.track;
   if (!byEraTrack.has(key)) byEraTrack.set(key, []);
@@ -102,8 +109,35 @@ ERAS.forEach(e => {
   });
 });
 const chinaCount = EVENTS.filter(e => e.track === 'china').length;
-check(Math.abs(chinaCount - (EVENTS.length - chinaCount)) <= 6,
-  `两条轨的事件数应大致均衡（中国 ${chinaCount} / 世界 ${EVENTS.length - chinaCount}）`);
+check(EVENTS.length >= 200, '双轨时间轴应收录至少 200 件大事');
+check(chinaCount >= 61, '保留原有中国轨的规模');
+for (const [id, label] of Object.entries(REGIONS)) {
+  check(/^[a-z-]+$/.test(id) && isStr(label), '区域应有稳定标识和中文名称');
+  const regional = EVENTS.filter(ev => ev.region === id);
+  check(regional.length >= 15 && new Set(regional.map(ev => ev.era)).size >= 3, label + ' 应跨时代收录事件');
+}
+for (const [id, source] of Object.entries(SOURCES)) {
+  check(/^[a-z0-9-]+$/.test(id) && isStr(source.label) && /^https:\/\/[^\s]+$/.test(source.url), id + ' 应有出处名称和网址');
+  check(EVENTS.some(ev => ev.source === id) || INFLUENCES.some(chain => chain.links.some(link => link.source === id)),
+    id + ' 应被事件或因果线索引用');
+}
+
+/* ---------- 因果线索 ---------- */
+const influenceIds = new Set();
+check(INFLUENCES.length >= 6, '应收录多组因果线索');
+for (const chain of INFLUENCES) {
+  const tag = '[因果 ' + chain.id + ']';
+  check(/^[a-z-]+$/.test(chain.id) && !influenceIds.has(chain.id), tag + ' id 应唯一');
+  influenceIds.add(chain.id);
+  check(isStr(chain.title) && !hasBadPunct(chain.title), tag + ' 缺少线索标题');
+  check(chain.steps.length >= 2 && chain.links.length === chain.steps.length - 1, tag + ' 每两个节点应有一段说明');
+  const steps = chain.steps.map(id => EVENTS.find(ev => ev.id === id));
+  check(steps.every((ev, i) => ev && (!i || steps[i - 1]?.sort < ev.sort)), tag + ' 应引用有效事件并按年代向前');
+  for (const link of chain.links) {
+    check(['response', 'transfer', 'condition'].includes(link.kind), tag + ' 缺少影响类型');
+    check(isStr(link.note) && !hasBadPunct(link.note) && Object.hasOwn(SOURCES, link.source), tag + ' 每段关系应有说明和出处');
+  }
+}
 
 /* ---------- 同期对照 ---------- */
 console.log('— 同期对照 —');
@@ -357,14 +391,15 @@ check(fileExists('README.md'), '缺少历史时间轴维护说明');
 /* 页面资源随目录发布。显式复用的相邻专题资源也必须存在于本地。 */
 const PAGE_REFS = {
   'index.html': ['content.js', 'timeline-data.js', 'dynasty-data.js', 'shared.js', 'home-app.js', 'styles.css', 'timeline.html', 'dynasties.html', 'era.html'],
-  'timeline.html': ['content.js', 'timeline-data.js', 'media-data.js', 'dynasty-data.js', 'shared.js', 'navigation.js', 'timeline-app.js', 'styles.css', 'timeline.css',
+  'timeline.html': ['content.js', 'timeline-data.js', 'influence-data.js', 'media-data.js', 'dynasty-data.js', 'shared.js', 'navigation.js',
+    'people-data.js', 'people-shared.js', 'people.css', 'territory-data.js', 'territory-geo.js', 'territory-links.js', 'territory-render.js', 'timeline-app.js', 'styles.css', 'timeline.css',
     'dynasties.html', 'era.html'],
   'dynasties.html': ['content.js', 'dynasty-data.js', 'shared.js', 'territory-links.js', 'dynasty-app.js', 'styles.css', 'dynasty.css', 'territory.html', 'timeline.html'],
-  'territory.html': ['content.js', 'dynasty-data.js', 'territory-data.js', 'territory-geo.js', 'shared.js', 'territory-app.js', 'styles.css', 'territory.css', 'territory-page.css',
+  'territory.html': ['content.js', 'dynasty-data.js', 'territory-data.js', 'territory-geo.js', 'shared.js', 'territory-render.js', 'territory-app.js', 'styles.css', 'territory.css', 'territory-page.css',
     '../map-skills/experiment.css', '../map-skills/experiment.js', '../history/index.html', 'dynasties.html', 'timeline.html'],
   'era.html': ['content.js', 'timeline-data.js', 'media-data.js', 'dynasty-data.js', 'shared.js', 'era-app.js', 'styles.css', 'era.css', 'media.css',
     'timeline.css', 'reading-layout.js', 'timeline.html'],
-  'event.html': ['content.js', 'timeline-data.js', 'media-data.js', 'reading-data.js', 'shared.js', 'navigation.js', 'event-app.js', 'styles.css', 'era.css', 'media.css',
+  'event.html': ['content.js', 'timeline-data.js', 'influence-data.js', 'media-data.js', 'reading-data.js', 'shared.js', 'navigation.js', 'event-app.js', 'styles.css', 'era.css', 'media.css',
     'timeline.css', 'reading-layout.js', 'timeline.html', 'era.html', 'people-data.js', 'people-shared.js'],
   'people.html': ['content.js', 'timeline-data.js', 'people-data.js', 'shared.js', 'people-shared.js', 'people-app.js', 'styles.css', 'people.css', 'timeline.html'],
   'person.html': ['content.js', 'timeline-data.js', 'people-data.js', 'shared.js', 'people-shared.js', 'person-app.js', 'styles.css', 'people.css', 'people.html'],
