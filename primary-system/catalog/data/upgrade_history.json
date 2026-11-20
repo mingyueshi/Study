@@ -2,6 +2,11 @@
   "schema_version": 1,
   "records": [
     {
+      "revision": "8d1e9c6d66b0f39b9c5fead1c66829342acba90b",
+      "date": "2026-11-20",
+      "title": "升级未解之谜研究所的研究进展与线索推理"
+    },
+    {
       "revision": "178cf658bb53220a148f60638b47837af789a0f0",
       "date": "2026-11-20",
       "title": "新增数学家的故事专题"
