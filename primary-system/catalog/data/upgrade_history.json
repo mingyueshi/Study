@@ -2,6 +2,11 @@
   "schema_version": 1,
   "records": [
     {
+      "revision": "b2c519512f446b5241438c5517efc0e03e1dfc89",
+      "date": "2026-11-20",
+      "title": "扩充历史双轨时间轴并联动疆域与人物"
+    },
+    {
       "revision": "b05264b048980f7f08c9707aa741687fbc99629b",
       "date": "2026-11-20",
       "title": "新增八十八星座识别、实时天象与望远镜入门"
