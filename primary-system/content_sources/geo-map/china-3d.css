@@ -101,7 +101,11 @@ html body .gm3-workspace[data-sl-ready][data-sl-mode="compact"] > .sl-sidebar { 
 .gm3-feature-profile[hidden], .gm3-profile[hidden] { display: none; }
 .gm3-feature-profile .gm3-coverage { font-size: 14px; color: var(--ink-soft); border-top: 1px solid var(--atlas-border); padding-top: 12px; }
 .china-3d-topic :is(button, a, select, input, summary, canvas):focus-visible { outline: 3px solid #d77826; outline-offset: 3px; }
-.gm3-viewport { position: relative; height: clamp(440px, 60dvh, 820px); overflow: hidden; background: #e6f2f3; color: #244953; }
+.gm3-viewport {
+  --map-base-height: max(440px, 60dvh, 40cqi);
+  position: relative; height: calc(var(--map-base-height) * var(--map-zoom-scale, 1));
+  overflow: hidden; background: #e6f2f3; color: #244953;
+}
 .gm3-viewport canvas { display: block; width: 100%; height: 100%; touch-action: none; cursor: grab; }
 .gm3-viewport canvas:active { cursor: grabbing; }
 .gm3-viewport canvas[hidden] { display: none; }
@@ -155,7 +159,7 @@ html body .gm3-workspace[data-sl-ready][data-sl-mode="compact"] > .sl-sidebar { 
 .gm3-tour-marker { fill: #f9d56d; stroke: #733d0e; stroke-width: 2; }
 .gm3-tour-map-name { fill: #713f0f; stroke: #fff9ea; stroke-width: 4px; paint-order: stroke; font-size: 17px; font-weight: 800; }
 .china-3d-topic[data-tour-active="true"] .gm3-river-flow-controls { display: none; }
-.china-3d-topic[data-tour-active="true"] .gm3-viewport { height: clamp(300px, 46dvh, 620px); }
+.china-3d-topic[data-tour-active="true"] .gm3-viewport { --map-base-height: max(300px, 46dvh, 36cqi); }
 @media (max-width: 520px) {
   .gm3-tour-heading h2 { font-size: 21px; }
 }
@@ -311,7 +315,7 @@ html body .gm3-workspace[data-sl-ready][data-sl-mode="compact"] > .sl-sidebar { 
 @media (max-width: 520px) {
   .gm3-heading { gap: 9px; background-image: linear-gradient(90deg, oklch(20% .035 210 / .96), oklch(23% .044 207 / .7)), url("assets/himalayas-orbit.jpg"); }
   .gm3-hero-credit { position: static; justify-self: start; }
-  .gm3-viewport { height: clamp(320px, 49dvh, 440px); }
+  .gm3-viewport { --map-base-height: max(320px, 49dvh); }
   .gm3-compass { right: 7px; width: 52px; height: 55px; }
   .gm3-inset { right: 10px; bottom: 10px; }
   .gm3-map-label { font-size: 12px; }

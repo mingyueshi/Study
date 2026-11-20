@@ -71,7 +71,11 @@ html body .gw-workspace[data-sl-ready][data-sl-mode="compact"] > .sl-sidebar { m
 .gw-continents > button, .gw-tool-modes > button {
   min-height: 36px; padding: 4px 10px; border-radius: 8px; font-size: 15px; line-height: 1.45;
 }
-.gw-viewport { position: relative; height: clamp(440px, 60dvh, 820px); overflow: hidden; color: #205467; background: #e1f0f3; }
+.gw-viewport {
+  --map-base-height: max(440px, 60dvh, 40cqi);
+  position: relative; height: calc(var(--map-base-height) * var(--map-zoom-scale, 1));
+  overflow: hidden; color: #205467; background: #e1f0f3;
+}
 .gw-viewport canvas { display: block; width: 100%; height: 100%; touch-action: none; cursor: grab; }
 .gw-viewport canvas:active { cursor: grabbing; }
 .gw-labels { position: absolute; inset: 0; pointer-events: none; }
@@ -257,7 +261,7 @@ html body .gw-workspace[data-sl-ready][data-sl-mode="compact"] > .sl-sidebar { m
   .gw-side-map-link { display: inline-flex; justify-self: start; }
 }
 @media (max-width: 520px) {
-  .gw-viewport { height: clamp(320px, 49dvh, 440px); }
+  .gw-viewport { --map-base-height: max(320px, 49dvh); }
   .gw-heading { background-image: linear-gradient(90deg, oklch(18% .039 247 / .95), oklch(20% .048 243 / .56)), url("assets/nile-night.jpg"); }
   .gw-point-form { padding: 14px; }
 }

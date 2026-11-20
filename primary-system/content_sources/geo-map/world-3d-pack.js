@@ -4584,6 +4584,7 @@ window.GMWorldLab = (() => {
   const zh = id => meta[id]?.[0] || id;
   const featurePoint = f => f.point || f.line[Math.floor((f.line.length - 1) / 2)];
   let selected = '', selectedContinent = '', renderer, scene, camera, controls, globe, texture, marker, frame = 0, visible = true, lost = false, disposed = false;
+  let viewportZoom = 1;
   let layer = 'continent', activeLine = '';
   let addons, toolbox, toolOverlay, referencePoint = D.home;
   let sunLab, ambient, sunlight, sunRing, sunSpot, visuals, rotation, sunModel;
@@ -4930,7 +4931,17 @@ window.GMWorldLab = (() => {
   }
   function requestRender() {
     if (!renderer || lost || disposed || !visible || document.hidden || frame) return;
-    frame = requestAnimationFrame(() => { frame = 0; if (lost || disposed || !visible || document.hidden) return; visuals?.update(camera); renderer.render(scene, camera); placeLabels(); addons?.life.position(); lab?.position(); positionShip(); });
+    frame = requestAnimationFrame(() => {
+      frame = 0;
+      if (lost || disposed || !visible || document.hidden) return;
+      if (Math.max(1, camera.zoom) !== viewportZoom) resizeCanvas();
+      visuals?.update(camera);
+      renderer.render(scene, camera);
+      placeLabels();
+      addons?.life.position();
+      lab?.position();
+      positionShip();
+    });
   }
   function projectPoint(point,radius=null) {
     if(!camera||lost)return null;
@@ -5018,12 +5029,24 @@ window.GMWorldLab = (() => {
     $('gw-ship').hidden=true;lab?.position();
     root.dispatchEvent(new CustomEvent('gm-world-renderer-change'));
   }
+  function resizeCanvas() {
+    const zoom = Math.max(1, camera.zoom), scale = Math.sqrt(zoom);
+    if (zoom !== viewportZoom) {
+      viewportZoom = zoom;
+      viewport.style.setProperty('--map-zoom-scale', String(scale));
+    }
+    const width = Math.max(1, viewport.clientWidth), height = Math.max(1, viewport.clientHeight);
+    const aspect = width / height, halfY = Math.max(1.3 * scale, 1.3 / aspect);
+    camera.left = -halfY * aspect; camera.right = halfY * aspect; camera.top = halfY; camera.bottom = -halfY; camera.updateProjectionMatrix();
+    const ratio = Math.min(window.devicePixelRatio || 1, 2, renderer.capabilities.maxTextureSize / Math.max(width, height));
+    if (canvas.width !== Math.floor(width * ratio) || canvas.height !== Math.floor(height * ratio)) {
+      renderer.setDrawingBufferSize(width, height, ratio);
+    }
+  }
   function resize() {
     if (!renderer || lost || disposed) return;
-    const width = viewport.clientWidth, height = viewport.clientHeight;
-    const aspect = width / Math.max(1, height), halfY = aspect < 1 ? 1.3 / aspect : 1.3;
-    camera.left = -halfY * aspect; camera.right = halfY * aspect; camera.top = halfY; camera.bottom = -halfY; camera.updateProjectionMatrix();
-    renderer.setSize(width, height, false); requestRender();
+    resizeCanvas();
+    requestRender();
   }
   function zoom(gain) {
     rotation?.pause();
@@ -5036,7 +5059,6 @@ window.GMWorldLab = (() => {
   try {
     if (!T || !ctx || !paths.size) throw new Error('本地渲染能力不可用');
     renderer = new T.WebGLRenderer({canvas, alpha: true, antialias: true});
-    renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 2));
     scene = new T.Scene(); camera = new T.OrthographicCamera(-2, 2, 1.3, -1.3, .1, 30);
     camera.position.set(...G.xyz(D.home, 5)); camera.lookAt(0, 0, 0);
     ambient = new T.AmbientLight('#ffffff', 1.15); scene.add(ambient);

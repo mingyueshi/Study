@@ -34,7 +34,7 @@
   root.dataset.compare = 'false';
   const extraData = window.GM_CHINA_ADVENTURES;
   const visualGain = () => terrainPlay?.gain ?? (renderGain ?? exaggeration);
-  let width = 1, height = 1, showLabels = true, showLandforms = true, showRivers = true;
+  let width = 1, height = 1, viewportZoom = 1, showLabels = true, showLandforms = true, showRivers = true;
   let exaggeration = data.terrain.defaultExaggeration, colorMode = 'terrain', focusedLandform = '';
   const features = new Map(window.GM_FEATURES.map(f => [f.id, f]));
   const models = new Map(), labels = [];
@@ -937,6 +937,7 @@
   function draw() {
     frame = 0;
     if (!renderer || failed) return;
+    if (Math.max(1, camera.zoom) !== viewportZoom) resizeCanvas();
     applyDisplay();renderMap();pins?.layout(comparison);
     root.dataset.renderCalls=String(renderer.info.render.calls);root.dataset.renderTriangles=String(renderer.info.render.triangles);
     const occupied = [];
@@ -1006,20 +1007,30 @@
     drawFlow();
     sectionController?.redraw();
   }
-  function resize() {
-    if (!renderer) return;
+  function resizeCanvas() {
+    const zoom = Math.max(1, camera.zoom), scale = Math.sqrt(zoom);
+    if (zoom !== viewportZoom) {
+      viewportZoom = zoom;
+      viewport.style.setProperty('--map-zoom-scale', String(scale));
+    }
     width = Math.max(1, viewport.clientWidth);
     height = Math.max(1, viewport.clientHeight);
     const aspect = (comparison ? width/2 : width) / height;
-    // 窄画布按宽度完整容纳中国，宽屏按高度展示；横竖屏切换不会裁掉国土。
-    const span = Math.max(23, 34 / aspect);
+    // 画布变高时扩大纵向视野，让地图大小只按相机倍率变化。
+    const span = Math.max(23 * scale, 34 / aspect);
     camera.left = -span * aspect;
     camera.right = span * aspect;
     camera.top = span;
     camera.bottom = -span;
     camera.updateProjectionMatrix();
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
-    renderer.setSize(width, height, false);
+    const ratio = Math.min(window.devicePixelRatio || 1, 2, renderer.capabilities.maxTextureSize / Math.max(width, height));
+    if (canvas.width !== Math.floor(width * ratio) || canvas.height !== Math.floor(height * ratio)) {
+      renderer.setDrawingBufferSize(width, height, ratio);
+    }
+  }
+  function resize() {
+    if (!renderer || failed) return;
+    resizeCanvas();
     requestDraw();
     queueTerrainView();
   }
@@ -1057,6 +1068,8 @@
   }
   function fallback(message) {
     failed = true;
+    viewportZoom = 1;
+    viewport.style.removeProperty('--map-zoom-scale');
     setComparison(false);
     hydrology?.refresh();
     pins?.refresh();
