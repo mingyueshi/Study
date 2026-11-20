@@ -2,6 +2,11 @@
   "schema_version": 1,
   "records": [
     {
+      "revision": "b05264b048980f7f08c9707aa741687fbc99629b",
+      "date": "2026-11-20",
+      "title": "新增八十八星座识别、实时天象与望远镜入门"
+    },
+    {
       "revision": "8d1e9c6d66b0f39b9c5fead1c66829342acba90b",
       "date": "2026-11-20",
       "title": "升级未解之谜研究所的研究进展与线索推理"
