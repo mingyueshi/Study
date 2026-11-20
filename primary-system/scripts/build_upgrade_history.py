@@ -11,18 +11,34 @@ sys.path.insert(0, str(PROJECT))
 from catalog.upgrade_history import HISTORY_PATH, validate_history
 
 
+SHARED_GUIDES = ('AGENTS.md', 'PRODUCT.md', 'docs/content-guide.md')
+SNAPSHOT_TITLE = '同步升级记录快照'
+SNAPSHOT_PATH = HISTORY_PATH.relative_to(PROJECT)
+
+
 def build_history():
     project = PROJECT.resolve()
     root = Path(subprocess.check_output(
         ['git', '-C', str(project), 'rev-parse', '--show-toplevel'], text=True).strip()).resolve()
-    relative = project.relative_to(root).as_posix()
+    relative = project.relative_to(root)
+    paths = [relative.as_posix()]
+    if project != root:
+        paths.extend(SHARED_GUIDES)
+    snapshot = (relative / SNAPSHOT_PATH).as_posix()
     log = subprocess.check_output([
         'git', '-C', str(root), '-c', 'log.showSignature=false', 'log',
-        '--format=%H%x00%cs%x00%s', '--', relative,
+        '--format=%H%x00%cs%x00%s', '--', *paths,
     ], text=True, encoding='utf-8')
     records = []
     for line in log.splitlines():
         revision, day, title = line.split('\0', 2)
+        if title == SNAPSHOT_TITLE:
+            changed = subprocess.check_output([
+                'git', '-C', str(root), 'diff-tree', '--root', '-m', '-r',
+                '--no-commit-id', '--name-only', revision,
+            ], text=True).splitlines()
+            if changed == [snapshot]:
+                continue
         records.append({'revision': revision, 'date': day, 'title': title})
     # 同日保持 Git 原顺序；不同日期严格倒序，避免回填提交时间打乱时间线。
     records.sort(key=lambda row: row['date'], reverse=True)

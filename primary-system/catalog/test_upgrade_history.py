@@ -57,12 +57,25 @@ class UpgradeHistoryDataTests(SimpleTestCase):
             (root / 'personal-learning' / 'README.md').write_text('其他系统', encoding='utf-8')
             git('add', '.')
             git('commit', '--quiet', '-m', '其他系统的独立改进')
+            (root / 'docs').mkdir()
+            (root / 'docs/content-guide.md').write_text('内容编排指南', encoding='utf-8')
+            git('add', '.')
+            git('commit', '--quiet', '-m', '新增内容编排指南')
+            snapshot = project / 'catalog/data/upgrade_history.json'
+            snapshot.parent.mkdir(parents=True)
+            snapshot.write_text('{}', encoding='utf-8')
+            git('add', '.')
+            git('commit', '--quiet', '-m', '同步升级记录快照')
             with patch.object(exporter, 'PROJECT', project):
                 records = exporter.build_history()['records']
-            self.assertEqual([row['title'] for row in records], ['新增学习系统'])
+            self.assertEqual([row['title'] for row in records], ['新增内容编排指南', '新增学习系统'])
             # 单独拷走的系统可使用自己的 Git 根目录。
-            with patch.object(exporter, 'PROJECT', root):
-                self.assertEqual(len(exporter.build_history()['records']), 2)
+            snapshot.unlink()
+            git('init', '--quiet', str(project))
+            git('-C', str(project), 'add', '.')
+            git('-C', str(project), 'commit', '--quiet', '-m', '独立维护')
+            with patch.object(exporter, 'PROJECT', project):
+                self.assertEqual([row['title'] for row in exporter.build_history()['records']], ['独立维护'])
 
 
 class UpgradeHistoryPageTests(SimpleTestCase):

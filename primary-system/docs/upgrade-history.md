@@ -6,20 +6,21 @@
 
 ## 数据与范围
 
-`catalog/data/upgrade_history.json` 是随项目发布的记录快照。每项保存完整提交编号、提交日期与原始提交标题；同一天的记录保持 Git 历史顺序。只收录影响 `primary-system/` 的提交，不收录其他独立系统的提交或尚未提交的工作。跨系统的共同提交会保留原始标题。早期标题简略的记录保持原样，不补写无法核实的细节。
+`catalog/data/upgrade_history.json` 是随项目发布的记录快照。每项保存当前分支的完整提交编号、提交日期与原始标题，同一天的记录保持 Git 历史顺序。收录范围包括 `primary-system/` 和乐学堂使用的仓库共用规范（根目录的 `AGENTS.md`、`PRODUCT.md`、`docs/content-guide.md`）。跨系统的共同提交按原始标题收录一次，其他系统的独立提交留在各自的历史里。早期标题简略的记录保持原样。
 
 日期来自 Git 提交日期，不表示部署或上线日期。页面只读取快照，不调用 Git、不访问网络、不写数据库，单独拷走系统或在不含 `.git` 的 Docker 镜像中仍可访问。
 
 ## 补充后续改进
 
-在包含完整历史的 Git 工作区中，从 `primary-system/` 执行：
+修改任务在本批改动获得 Git 提交编号后，从 `primary-system/` 执行以下两条命令。若本次只编辑文件，等后续任务实际提交时一起完成同步。
 
 ```sh
 .venv/bin/python scripts/build_upgrade_history.py
 .venv/bin/python scripts/build_upgrade_history.py --check
-.venv/bin/python manage.py test catalog.test_upgrade_history
 ```
 
-同步命令读取当前已提交的历史，覆盖快照；重复执行且历史未变时输出一致。完成一批功能提交后执行同步，再把快照纳入下一次获准的提交。无需 Git 钩子，也无需在服务启动时生成。独立拷贝后若另建 Git 仓库，同步会以新仓库的历史为准，原快照应在需要保留时先行备份。
+同步后核对本批改动的提交编号和标题，再将快照作为本批提交的收尾单独提交，标题用「同步升级记录快照」。同步命令会跳过以此为标题且只改快照的提交，提交后再次运行 `--check` 仍应通过。若快照已是最新，直接完成任务。修改生成逻辑或展示行为时，另运行 `.venv/bin/python manage.py test catalog.test_upgrade_history`。
+
+同步命令读取当前分支的 Git 历史。若发布时把改动挑选到另一分支，按最终发布分支的提交编号重新生成快照。在单独拷走的系统中另建 Git 仓库时，同步会以新仓库的历史为准，需要保留原快照时先行备份。
 
 数据格式先由 `catalog/upgrade_history.py` 校验：版本、非空记录、40 位唯一提交编号、有效日期、日期倒序及非空单行标题。导出和读取使用同一校验，避免来源与展示规则不一致。`--check` 对比快照与当前 Git 历史，新增提交后应先同步。

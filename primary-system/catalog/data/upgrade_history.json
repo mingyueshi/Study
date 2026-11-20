@@ -2,6 +2,221 @@
   "schema_version": 1,
   "records": [
     {
+      "revision": "452b20ca1debe92140184bf890e5fceed8d4a910",
+      "date": "2026-11-20",
+      "title": "新增内容编排指南并精简协作规范"
+    },
+    {
+      "revision": "2b714d0fb9263333b99731b261bd1d56503fc426",
+      "date": "2026-11-20",
+      "title": "修复三维地图背景随缩放调整高度"
+    },
+    {
+      "revision": "81ba2e3a90f68d6c3583d876e4d21c7b2d4c5ed4",
+      "date": "2026-11-20",
+      "title": "修复首页和主导航的宽屏布局"
+    },
+    {
+      "revision": "2063b7d7ae877ebe25b106e3c68ea0c190474136",
+      "date": "2026-11-20",
+      "title": "回归六批专题并修复共用侧栏"
+    },
+    {
+      "revision": "093918b61e8ce435090b980b6bda5717abf23244",
+      "date": "2026-11-20",
+      "title": "完成第六批专题布局收尾与练习回归"
+    },
+    {
+      "revision": "4e8d6d9211f46ba4fabaf8813b3370e1a7932567",
+      "date": "2026-11-20",
+      "title": "优化图形运动实验室侧栏与拖动联动"
+    },
+    {
+      "revision": "e8f5cfcc219a85e7d4421a29020be3def3564eca",
+      "date": "2026-11-19",
+      "title": "优化词树侧栏与搜索定位"
+    },
+    {
+      "revision": "70727b7fd024bba21cc72a2e4a4a7c5043fce497",
+      "date": "2026-11-19",
+      "title": "优化错题本布局与重练往返"
+    },
+    {
+      "revision": "8db82e17ddb43ff172032d89d3f36adcd4d27082",
+      "date": "2026-11-19",
+      "title": "优化题库练习页布局与进度恢复"
+    },
+    {
+      "revision": "15637c3ceb7f8e946cb78aec660f565289f5b58a",
+      "date": "2026-11-19",
+      "title": "优化成语典故馆阅读布局"
+    },
+    {
+      "revision": "e5fbb19ebbbf5320596943ca0a266847a354e1ef",
+      "date": "2026-11-19",
+      "title": "精简仓库协作规范并整理本地运行说明"
+    },
+    {
+      "revision": "398dece2fa54e8d50498eaf6dc7554d0fd0a4cc4",
+      "date": "2026-11-19",
+      "title": "优化古文精读馆阅读布局"
+    },
+    {
+      "revision": "5b9e92debac5039ffd635b06c7b9a29e1aba3487",
+      "date": "2026-11-19",
+      "title": "优化汉字演变馆阅读布局"
+    },
+    {
+      "revision": "0af20219b8b91af04c31c695369749533d30e0e2",
+      "date": "2026-11-19",
+      "title": "优化文学常识专题阅读布局"
+    },
+    {
+      "revision": "34c5d512c087fa7971b4f8a039498fac555c85b2",
+      "date": "2026-11-19",
+      "title": "优化人类起源学习站布局"
+    },
+    {
+      "revision": "3ee4efa02566525f84af3c685080bc1df5abe2f6",
+      "date": "2026-11-19",
+      "title": "优化历史时代站与事件详情布局"
+    },
+    {
+      "revision": "f4113592f9f1633f308a65153e841c24879f3a28",
+      "date": "2026-11-19",
+      "title": "优化历史双轨时间轴布局"
+    },
+    {
+      "revision": "ebbdc7cd32d81d5a6017a1874ea1e405edf07a68",
+      "date": "2026-11-19",
+      "title": "优化眼耳与感官实验布局"
+    },
+    {
+      "revision": "8e737dbbb9c9f65f13ef7396631db978ebfff6b7",
+      "date": "2026-11-19",
+      "title": "优化大脑与神经实验布局"
+    },
+    {
+      "revision": "8a1785279101a10c309912ab546f122e48d266dc",
+      "date": "2026-11-19",
+      "title": "优化骨骼肌肉实验布局与屈伸联动"
+    },
+    {
+      "revision": "5c315845786c655d4cf472f22d0adfc41787b102",
+      "date": "2026-11-19",
+      "title": "优化人体血液循环实验布局"
+    },
+    {
+      "revision": "885490c60f8408b469bb8ee1e4f5a2becd654b2e",
+      "date": "2026-11-19",
+      "title": "优化人体消化实验布局"
+    },
+    {
+      "revision": "49ae1b79c44975c80d05316497c753a75b104800",
+      "date": "2026-11-19",
+      "title": "优化人体呼吸实验布局"
+    },
+    {
+      "revision": "9b106e154e0af028e073cf370b2600b6c4104df3",
+      "date": "2026-11-19",
+      "title": "优化磁铁与电磁铁实验布局"
+    },
+    {
+      "revision": "05922f3a120b23e07ba2196bdfbcc220c673aba7",
+      "date": "2026-11-19",
+      "title": "优化科学电路实验布局"
+    },
+    {
+      "revision": "971e24ac10393c0371d67c8a45bde3012d4f948f",
+      "date": "2026-11-19",
+      "title": "优化月相与日月食实验布局"
+    },
+    {
+      "revision": "158775e59987af31190c78dbe4521e9412c14666",
+      "date": "2026-11-19",
+      "title": "优化太阳系实验桌布局"
+    },
+    {
+      "revision": "c3c403fc199436b5b50933adbcfbe1feab38def8",
+      "date": "2026-11-19",
+      "title": "优化朝代与版图实验页"
+    },
+    {
+      "revision": "3db61dd56dbae87f82ddcdf591323c39c7d4337b",
+      "date": "2026-11-19",
+      "title": "优化天气与中国气候实验页"
+    },
+    {
+      "revision": "a7e97f244ec3d117dc028e3bcd7494fd5c9a826e",
+      "date": "2026-11-19",
+      "title": "优化洋流与潮汐实验页"
+    },
+    {
+      "revision": "186ab4935484556db3449331992bcbb120bcac6e",
+      "date": "2026-11-19",
+      "title": "优化板块与地图技能实验布局"
+    },
+    {
+      "revision": "68c00d261aa1f8e3a6e3c101c96ea9123cf25ee3",
+      "date": "2026-11-19",
+      "title": "优化地点索引、主题路线与实景图册"
+    },
+    {
+      "revision": "c721105197107127325574c57374ebd24df292a7",
+      "date": "2026-11-19",
+      "title": "优化地理图谱首页与省域站"
+    },
+    {
+      "revision": "1fca4fb4abe9e9a6a2dcce0f74f3f4f57425e7eb",
+      "date": "2026-11-19",
+      "title": "优化世界动植物地图布局与探索流程"
+    },
+    {
+      "revision": "dc92c26da04f7ff33dc861becde3f807adf91c8d",
+      "date": "2026-11-19",
+      "title": "优化中国动植物地图布局与探索流程"
+    },
+    {
+      "revision": "e463dbc498cf1ddb95870561bd643c05a0c00d67",
+      "date": "2026-11-19",
+      "title": "优化中国与世界平面地图体验"
+    },
+    {
+      "revision": "3416c8142e8430d5e71b7024dc6ac180d0479fa8",
+      "date": "2026-11-19",
+      "title": "优化三维地球仪侧栏与探索流程"
+    },
+    {
+      "revision": "dddff635ef02a17cd526baf8c9a21c3c5eb4c5e5",
+      "date": "2026-11-19",
+      "title": "去掉中国三维地形页的页头分割线"
+    },
+    {
+      "revision": "63a181322ab30fadaef859a61ce6fad4a77cd4e3",
+      "date": "2026-11-19",
+      "title": "优化中国三维地形页侧栏与内容联动"
+    },
+    {
+      "revision": "d873e35d220b416649a3d14f83e453cd7af24df7",
+      "date": "2026-11-19",
+      "title": "新增跨学科能源与环境专题"
+    },
+    {
+      "revision": "277edfe8363b14888facf13a4ee50d8943256121",
+      "date": "2026-11-19",
+      "title": "新增跨学科货币与贸易专题"
+    },
+    {
+      "revision": "cd7d3d0ca42fb0829bd5b038740ddfc353db627b",
+      "date": "2026-11-18",
+      "title": "优化地图专题布局和前台选择控件"
+    },
+    {
+      "revision": "ddb8cb1d72f16b689d40cfd948e4742ceb22bacf",
+      "date": "2026-11-18",
+      "title": "同步最新升级记录"
+    },
+    {
       "revision": "d3768b01c7bddabce3871e1825ca4654e005f2a5",
       "date": "2026-11-18",
       "title": "独立地形与地球仪专题并补齐关联入口"
@@ -125,6 +340,11 @@
       "revision": "9c599ee9385fba213d3948d08e3f3406cffdbecb",
       "date": "2026-11-17",
       "title": "完善人体探索图与身体成长时间线"
+    },
+    {
+      "revision": "ae6a15f1382fb3d7c91a147c4d5831b9add2cc04",
+      "date": "2026-11-17",
+      "title": "优化协作规范与知识编排原则"
     },
     {
       "revision": "588476da011aef50be876eef83d6a4841f23a0b9",
@@ -370,6 +590,11 @@
       "revision": "297536ad8c9b4193b140fabf28f2c9b239a20734",
       "date": "2026-11-09",
       "title": "激励系统：积分、勋章、连续打卡与兑换奖励"
+    },
+    {
+      "revision": "da8ab7ff0b786c96e697c13dd1b34b010c0cd2b4",
+      "date": "2026-11-09",
+      "title": "新增历史时间轴与中国地图两个多页面演示系统"
     },
     {
       "revision": "9088f433ac16ad8c0104157dc8b1ce06338625bc",
@@ -655,6 +880,11 @@
       "revision": "7973fb3e8062aba2f3a43e1ac9eee9d331fddd47",
       "date": "2026-11-06",
       "title": "新增古文经典专题：chinese-ancient-text 62 册简体古籍入库"
+    },
+    {
+      "revision": "f39f0ba702d72486f6154e6f2a26139a196c3be0",
+      "date": "2026-11-06",
+      "title": "新增英语音标册：48 音标全覆盖，8 章 33 课"
     },
     {
       "revision": "b14badbc1db989308b4eb5bd18e37e4f6c2cf9cf",
