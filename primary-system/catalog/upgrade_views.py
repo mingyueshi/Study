@@ -6,10 +6,12 @@ from django.http import QueryDict
 from django.shortcuts import render
 from django.views.decorators.http import require_GET
 
-from .upgrade_history import load_history
+from .file_content import content_page
+from .upgrade_history import HistoryError, load_history
 
 
 @require_GET
+@content_page('升级记录', error_type=HistoryError)
 def upgrade_history(request):
     records = load_history()
     months = sorted({row['date'][:7] for row in records}, reverse=True)

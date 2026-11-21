@@ -36,7 +36,7 @@ def clip(ring):
 
 def build():
     land = []
-    for feature in json.loads(INPUT.read_text())['features']:
+    for feature in json.loads(INPUT.read_text(encoding='utf-8'))['features']:
         geometry = feature['geometry']
         polygons = [geometry['coordinates']] if geometry['type'] == 'Polygon' else geometry['coordinates']
         for polygon in polygons:
@@ -67,8 +67,8 @@ if __name__ == '__main__':
     args = parser.parse_args()
     expected = build()
     if args.check:
-        if not OUTPUT.exists() or OUTPUT.read_text() != expected:
+        if not OUTPUT.exists() or OUTPUT.read_text(encoding='utf-8') != expected:
             raise SystemExit('丝路自然底图需重生成')
     else:
-        OUTPUT.write_text(expected)
+        OUTPUT.write_text(expected, encoding='utf-8')
     print('丝路自然底图已同步' if args.check else '丝路自然底图已生成')

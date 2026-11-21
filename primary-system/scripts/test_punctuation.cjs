@@ -1,5 +1,7 @@
 const { test } = require('node:test');
 const assert = require('node:assert/strict');
+const { readFileSync } = require('node:fs');
+const { runInNewContext } = require('node:vm');
 const { check, normalize, restore, recordAttempt } = require('../static/study_topics/punctuation.js');
 const course = require('../content_sources/punctuation.json');
 const questions = course.questions.map(item => ({ ...item, revision: 'current' }));
@@ -28,6 +30,63 @@ test('multiple valid vectors cannot be mixed to form an unpaired quotation', () 
   const result = check(question, ['“', '∅', '。']);
   assert.equal(result.correct, false);
   assert.equal(result.slots.filter(Boolean).length, 2);
+});
+test('malformed authored vectors cannot award a correct answer', () => {
+  const question = { chunks: ['前', '后'], answers: [['？']] };
+  for (const answers of [null, [], [[]], [['？', '。']], [null], [[42]], [['文字']], [['？\n']], [['？'], []]]) {
+    const result = check({ ...question, answers }, ['？']);
+    assert.deepEqual(result, { complete: false, correct: false, slots: [], invalid: true }, JSON.stringify(answers));
+  }
+  assert.equal(check({ ...question, chunks: ['前', null] }, ['？']).invalid, true);
+  assert.equal(check({ ...question, answers: [['']] }, ['∅']).correct, true);
+});
+
+function mountPractice(question) {
+  const element = () => ({
+    dataset: {}, listeners: {}, value: '', append() {}, replaceChildren() {}, setAttribute() {},
+    addEventListener(event, listener) { this.listeners[event] = listener; },
+  });
+  const elements = new Map();
+  const get = selector => {
+    if (!elements.has(selector)) elements.set(selector, element());
+    return elements.get(selector);
+  };
+  const root = {
+    dataset: { storageScope: 'test' },
+    querySelector: selector => selector === '[data-usage-tools]' ? null : get(selector),
+    querySelectorAll: () => [],
+  };
+  const writes = [];
+  const script = readFileSync(require.resolve('../static/study_topics/punctuation.js'), 'utf8');
+  runInNewContext(script, {
+    URL, URLSearchParams, document: {
+      querySelector: () => root, createElement: element, createTextNode: text => text,
+      getElementById: () => ({ textContent: JSON.stringify({ ...course, questions: [question] }) }),
+    },
+    location: { href: 'https://example.invalid/?view=practice', search: '?view=practice' },
+    history: { replaceState() {} },
+    localStorage: { getItem: () => null, setItem: (...args) => writes.push(args) },
+  });
+  return { get, writes };
+}
+
+test('a malformed question disables input and cannot write progress by submitting or revealing', () => {
+  const { get, writes } = mountPractice({ ...byId('direct-question'), answers: [[]] });
+  const form = get('[data-answer-form]');
+  assert.equal(form.hidden, true);
+  assert.match(get('[data-feedback]').textContent, /暂时无法作答/);
+  form.listeners.submit({ preventDefault() {} });
+  get('[data-reveal]').listeners.click();
+  assert.equal(get('[data-reference]').hidden, true);
+  assert.match(get('[data-progress]').textContent, /自己答对 0 题/);
+  assert.deepEqual(writes, []);
+});
+
+test('missing labels and related marks leave a valid practice question usable', () => {
+  const { get } = mountPractice({ ...byId('direct-question'), group: 'unknown', level: 'unknown', mark_ids: ['unknown'] });
+  assert.equal(get('[data-answer-form]').hidden, false);
+  assert.equal(get('[data-question-level]').textContent, '');
+  assert.equal(get('[data-related]').hidden, true);
 });
 test('revealed references never award independent completion; wrong answers enter review', () => {
   const question = byId('complete-quote');

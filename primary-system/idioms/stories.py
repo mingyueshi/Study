@@ -55,9 +55,10 @@ def validate(curriculum):
                 raise ImproperlyConfigured(f"{story['headword']} 缺词库钉词字段 {field}。")
 
 
-def story_cards():
+def story_cards(curriculum=None):
     """全部典故故事卡：词典 payload + 故事编辑内容 + 人物档案；钉词漂移即降级。"""
-    curriculum = load_stories()
+    if curriculum is None:
+        curriculum = load_stories()
     records = pinned_records(story["binding_id"] for story in curriculum["stories"])
     figures = {figure["id"]: figure for figure in curriculum["figures"]}
     cards = []
@@ -82,9 +83,10 @@ def books(cards):
     return seen
 
 
-def figure_clues(cards):
+def figure_clues(cards, figures=None):
     """人物线索：每个人物 + 参与的典故卡 + 同出处提示。"""
-    figures = load_stories()["figures"]
+    if figures is None:
+        figures = load_stories()["figures"]
     clues = []
     for figure in figures:
         stories = [card for card in cards if figure["id"] in card.get("figure_ids", [])]
@@ -109,11 +111,12 @@ def matches_query(card, query):
 @require_safe
 def page(request):
     """按典籍或人物筛选，检索当前范围中的典故。"""
-    cards = story_cards()
+    curriculum = load_stories()
+    cards = story_cards(curriculum)
     figure_id = request.GET.get("figure", "")
     book = request.GET.get("book", "")
     q = request.GET.get("q", "").strip()[:80]
-    clues = figure_clues(cards)
+    clues = figure_clues(cards, curriculum["figures"])
     clue = next((c for c in clues if c["id"] == figure_id), None)
     if clue is not None:
         shown = clue["stories"]

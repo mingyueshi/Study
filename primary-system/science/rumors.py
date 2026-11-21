@@ -1,23 +1,27 @@
 """文件编排的科学查证任务。"""
-import json
-
-from django.conf import settings
-from django.core.exceptions import ImproperlyConfigured
 from django.http import Http404
 from django.shortcuts import render
 from django.urls import reverse
 from django.views.decorators.http import require_safe
 
+from catalog.file_content import ContentError, content_page, read_course
+
 
 def load_content():
-    source = settings.BASE_DIR / 'content_sources' / 'science-rumors.json'
-    content = json.loads(source.read_text(encoding='utf-8'))
-    if content['schema_version'] != 1:
-        raise ImproperlyConfigured('科学流言粉碎机的数据版本不受支持。')
+    content = read_course('science-rumors.json')
+    verdicts = content.get('verdicts')
+    skill_ids = {skill['id'] for skill in content['skills']}
+    for case in content['cases']:
+        verdict, skill = case.get('verdict'), case.get('skill')
+        if not isinstance(verdicts, dict) or not isinstance(verdict, str) or verdict not in verdicts:
+            raise ContentError(f'{case["slug"]} 的结论引用无效。')
+        if not isinstance(skill, str) or skill not in skill_ids:
+            raise ContentError(f'{case["slug"]} 的查证方法引用无效。')
     return content
 
 
 @require_safe
+@content_page('科学流言粉碎机')
 def index(request):
     content = load_content()
     all_cases = content['cases']
@@ -55,17 +59,19 @@ def index(request):
 
 
 @require_safe
+@content_page('科学流言粉碎机')
 def detail(request, slug):
     content = load_content()
     cases = content['cases']
     for index, case in enumerate(cases):
         if case['slug'] == slug:
+            skills = {skill['id']: skill for skill in content['skills']}
             return render(request, 'science/rumors/detail.html', {
                 'case': case,
                 'number': index + 1,
                 'verdicts': content['verdicts'],
                 'verdict_label': content['verdicts'][case['verdict']],
-                'skill': next(skill for skill in content['skills'] if skill['id'] == case['skill']),
+                'skill': skills[case['skill']],
                 'next_case': cases[index + 1] if index + 1 < len(cases) else None,
                 'study_area': 'science',
             })
@@ -73,6 +79,7 @@ def detail(request, slug):
 
 
 @require_safe
+@content_page('科学流言粉碎机')
 def training(request):
     content = load_content()
     skills = {skill['id']: skill for skill in content['skills']}

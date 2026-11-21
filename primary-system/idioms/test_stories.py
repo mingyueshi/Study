@@ -1,5 +1,6 @@
 import json
 from pathlib import Path
+from unittest.mock import patch
 
 from django.core.exceptions import ImproperlyConfigured
 from django.test import SimpleTestCase, TestCase
@@ -103,6 +104,12 @@ class StoryPageTests(TestCase):
     @classmethod
     def setUpTestData(cls):
         StoryPinTests.setUpTestData()
+
+    def test_page_uses_one_validated_snapshot_for_cards_and_figures(self):
+        with patch('idioms.stories.validate', wraps=validate) as validate_stories:
+            response = self.client.get('/idioms/stories/?figure=lin-xiangru')
+        self.assertContains(response, '人物线索：蔺相如')
+        validate_stories.assert_called_once()
 
     def test_page_renders_hall_filters_and_clue_view(self):
         response = self.client.get("/idioms/stories/")

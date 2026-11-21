@@ -2,9 +2,14 @@
 import json
 import re
 from datetime import date
+from functools import lru_cache
 from pathlib import Path
 
 HISTORY_PATH = Path(__file__).resolve().parent / 'data' / 'upgrade_history.json'
+
+
+class HistoryError(ValueError):
+    pass
 
 
 def validate_history(data):
@@ -30,5 +35,16 @@ def validate_history(data):
     return data
 
 
+@lru_cache(maxsize=1)
+def _read_history(path, signature):
+    return validate_history(json.loads(path.read_text(encoding='utf-8')))['records']
+
+
 def load_history():
-    return validate_history(json.loads(HISTORY_PATH.read_text(encoding='utf-8')))['records']
+    try:
+        stat = HISTORY_PATH.stat()
+        signature = (stat.st_dev, stat.st_ino, stat.st_size, stat.st_mtime_ns, stat.st_ctime_ns)
+        records = _read_history(HISTORY_PATH, signature)
+    except (OSError, ValueError) as error:
+        raise HistoryError(f'{HISTORY_PATH.name} 读取失败：{error}') from error
+    return [record.copy() for record in records]

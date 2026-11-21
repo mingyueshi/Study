@@ -3,7 +3,7 @@
 {% block title %}标点符号实验室 · 乐学堂{% endblock %}
 {% block content %}
 {% include 'study_topics/tool_layout_css.html' %}
-<link rel="stylesheet" href="{% static assets.css.path %}?v={{ assets.css.version }}">
+{% if assets.css %}<link rel="stylesheet" href="{% static assets.css.path %}?v={{ assets.css.version }}">{% endif %}
 <div class="punctuation-lab topic-tool-page" data-storage-scope="{% if user.is_authenticated %}user-{{ user.pk }}{% else %}guest{% endif %}">
   <header class="punct-hero">
     <div>
@@ -111,10 +111,11 @@
       <p class="punct-note" data-empty hidden>当前没有符合条件的题目。可以切换为全部题目，或调整用法与层次。</p>
       <div class="punct-actions punct-page-actions"><button type="button" data-previous>← 上一题</button><button type="button" data-next>下一题 →</button><button type="button" data-retry>重练待巩固题</button></div>
     </div>
-    <noscript>
+    {% if assets.js %}<noscript>
       <p>开启 JavaScript 可逐题填写并即时检查；也可在纸上练习，再展开参考答案。</p>
-      {% for question in course.questions %}<article class="punct-card" id="question-{{ question.id }}"><h3>{{ forloop.counter }}. {{ question.title }}</h3><p>{{ question.context }}</p><p class="punct-sentence">{{ question.chunks|join:'［　］' }}</p><details><summary>看提示与参考答案</summary><p>{{ question.hint }}</p>{% for sentence in question.references %}<p><strong>{{ sentence }}</strong></p>{% endfor %}<p>{{ question.explanation }}</p></details></article>{% endfor %}
-    </noscript>
+    {% else %}<p>互动练习暂时不可用。可以在纸上练习，再展开参考答案。</p>{% endif %}
+    {% for question in course.questions %}<article class="punct-card" id="question-{{ question.id }}"><h3>{{ forloop.counter }}. {{ question.title }}</h3><p>{{ question.context }}</p><p class="punct-sentence">{{ question.chunks|join:'［　］' }}</p><details><summary>看提示与参考答案</summary><p>{{ question.hint }}</p>{% for sentence in question.references %}<p><strong>{{ sentence }}</strong></p>{% endfor %}<p>{{ question.explanation }}</p></details></article>{% endfor %}
+    {% if assets.js %}</noscript>{% endif %}
   {% endif %}
   </section>
   <footer class="punct-sources">
@@ -125,6 +126,8 @@
 </div>
 
 </div>
+{% if assets.js %}
 {{ course|json_script:'punctuation-data' }}
 <script src="{% static assets.js.path %}?v={{ assets.js.version }}" defer></script>
+{% endif %}
 {% endblock %}

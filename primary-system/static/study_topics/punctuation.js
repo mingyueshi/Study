@@ -5,7 +5,18 @@
   function normalize(value) {
     return String(value).replace(/\s/g, '').replace(/∅/g, '').replace(/[,?!:;()]/g, char => aliases[char]);
   }
+  function hasAnswerVectors(question) {
+    const { chunks, answers } = question;
+    if (!Array.isArray(chunks) || chunks.length < 2 || Array.from(chunks).some(chunk => typeof chunk !== 'string')
+      || !Array.isArray(answers) || !answers.length) return false;
+    for (const answer of answers) {
+      if (!Array.isArray(answer) || answer.length !== chunks.length - 1
+        || Array.from(answer).some(token => typeof token !== 'string' || /[^，。？！、；：“”‘’《》（）—…]/u.test(token))) return false;
+    }
+    return true;
+  }
   function check(question, values) {
+    if (!hasAnswerVectors(question)) return { complete: false, correct: false, slots: [], invalid: true };
     if (values.length !== question.chunks.length - 1 || values.some(value => !String(value).trim())) {
       return { complete: false, correct: false, slots: [] };
     }
@@ -102,6 +113,8 @@
   const group = $('[data-practice-group]');
   const level = $('[data-practice-level]');
   const mode = $('[data-practice-mode]');
+  const answerForm = $('[data-answer-form]');
+  const invalidQuestion = '这道题的数据有误，暂时无法作答。';
 
   function updateProgress() {
     const values = Object.values(records);
@@ -168,11 +181,23 @@
     $('[data-next]').disabled = !current || index >= pool.length - 1;
     if (!current) { updateUrl(); return; }
     select.value = current.id;
-    $('[data-question-level]').textContent = `${course.groups.find(item => item.id === current.group).label} / ${course.levels.find(item => item.id === current.level).label}`;
+    const labels = [
+      course.groups.find(item => item.id === current.group)?.label,
+      course.levels.find(item => item.id === current.level)?.label,
+    ].filter(Boolean);
+    $('[data-question-level]').textContent = labels.join(' / ');
     $('[data-question-title]').textContent = current.title;
     $('[data-context]').textContent = current.context;
     const sentence = $('[data-sentence]');
     sentence.replaceChildren();
+    const related = $('[data-related]');
+    answerForm.hidden = !hasAnswerVectors(current);
+    if (answerForm.hidden) {
+      related.hidden = true;
+      feedback.textContent = invalidQuestion;
+      updateUrl();
+      return;
+    }
     current.chunks.forEach((chunk, i) => {
       sentence.append(document.createTextNode(chunk));
       if (i === current.chunks.length - 1) return;
@@ -190,12 +215,13 @@
       sentence.append(input);
     });
     activeInput = $('[data-gap]');
-    const related = $('[data-related]');
     related.replaceChildren(document.createTextNode('回看用法：'));
-    current.mark_ids.forEach((id, i) => {
-      const mark = course.marks.find(item => item.id === id);
+    const markIds = Array.isArray(current.mark_ids) ? current.mark_ids : [];
+    const marks = markIds.map(id => course.marks.find(mark => mark.id === id)).filter(Boolean);
+    related.hidden = !marks.length;
+    marks.forEach((mark, i) => {
       const link = node('a', mark.name);
-      link.href = `?view=usage#mark-${id}`;
+      link.href = `?view=usage#mark-${mark.id}`;
       if (i) related.append(document.createTextNode(' · '));
       related.append(link);
     });
@@ -207,7 +233,7 @@
   function filterQuestions(preferredId) {
     pool = questions.filter(question => (!group.value || question.group === group.value)
       && (!level.value || question.level === level.value)
-      && (!markFilter || question.mark_ids.includes(markFilter))
+      && (!markFilter || (Array.isArray(question.mark_ids) && question.mark_ids.includes(markFilter)))
       && (mode.value !== 'wrong' || records[question.id]?.wrong));
     select.replaceChildren(...pool.map(question => {
       const option = node('option', questionLabel(question));
@@ -236,12 +262,16 @@
     });
     $('[data-palette]').append(button);
   });
-  $('[data-answer-form]').addEventListener('submit', event => {
+  answerForm.addEventListener('submit', event => {
     event.preventDefault();
     if (!current) return;
     const inputs = $$('[data-gap]');
     const result = check(current, inputs.map(input => input.value));
     clearFeedback();
+    if (result.invalid) {
+      feedback.textContent = invalidQuestion;
+      return;
+    }
     if (!result.complete) {
       feedback.textContent = '还有空格没填写。不需要标点的地方，请点「不加」。';
       inputs.find(input => !input.value.trim())?.focus({ preventScroll: true });
@@ -264,6 +294,11 @@
   });
   $('[data-reveal]').addEventListener('click', () => {
     if (!current) return;
+    if (!hasAnswerVectors(current)) {
+      clearFeedback();
+      feedback.textContent = invalidQuestion;
+      return;
+    }
     const previous = records[current.id] || {};
     records[current.id] = { ...previous, revision: current.revision, revealed: true };
     save();

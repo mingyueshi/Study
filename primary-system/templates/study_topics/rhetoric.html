@@ -10,11 +10,11 @@
       <h1>修辞手法馆</h1>
       <p>{{ course.intro }}</p>
     </div>
-    <figure class="rhetoric-hero-example">
+    {% if hero_examples %}<figure class="rhetoric-hero-example">
       <figcaption>同一片荷叶，两种写法</figcaption>
       {% for example in hero_examples %}<p class="rhetoric-line">{% for part in example.parts %}{% if part.focus %}<mark>{{ part.text }}</mark>{% else %}{{ part.text }}{% endif %}{% endfor %}</p>{% endfor %}
       <a href="{% url 'rhetoric-gallery' %}#case-lotus-pair">看看两句差在哪里 →</a>
-    </figure>
+    </figure>{% endif %}
   </header>
 
 <div class="study-reading-layout" data-sidebar-layout=".rhetoric-side" data-sidebar-width="280px" data-sidebar-label="修辞侧栏">

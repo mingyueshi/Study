@@ -10,7 +10,7 @@
     name: card.querySelector('h3').textContent,
     season: card.closest('.solar-season').id,
     search: card.textContent.toLocaleLowerCase(),
-    prompt: card.querySelector('.solar-observation p').textContent,
+    prompt: card.querySelector('.solar-observation p')?.textContent ?? '',
   }]));
   const search = get('solar-search');
   const seasonButtons = hall.querySelectorAll('[data-season]');

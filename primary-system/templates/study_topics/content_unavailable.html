@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block title %}{{ title }} · 乐学堂{% endblock %}
+{% block content %}
+<section>
+  <h1>{{ title }}</h1>
+  <p>内容暂时无法加载，请稍后再试。</p>
+  <p><a href="{% url 'home' %}">返回学习广场</a></p>
+</section>
+{% endblock %}

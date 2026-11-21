@@ -1,5 +1,6 @@
 import copy
 import importlib.util
+import json
 from pathlib import Path
 import subprocess
 import tempfile
@@ -8,6 +9,7 @@ from unittest.mock import patch
 from django.test import SimpleTestCase
 from django.urls import reverse
 
+from . import upgrade_history as history
 from .upgrade_history import load_history, validate_history
 
 
@@ -16,6 +18,29 @@ class UpgradeHistoryDataTests(SimpleTestCase):
         records = load_history()
         self.assertGreater(len(records), 1)
         self.assertEqual(records, sorted(records, key=lambda row: row['date'], reverse=True))
+
+    def test_unchanged_snapshot_is_parsed_once_and_changed_snapshot_is_reloaded(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / 'history.json'
+            data = {'schema_version': 1, 'records': [
+                {'revision': 'a' * 40, 'date': '2026-11-17', 'title': '完善阅读设置'},
+            ]}
+            path.write_text(json.dumps(data), encoding='utf-8')
+            url = reverse('upgrade-history')
+            with patch.object(history, 'HISTORY_PATH', path), patch.object(history, 'validate_history', wraps=validate_history) as validate:
+                self.assertContains(self.client.get(url), '完善阅读设置')
+                self.assertContains(self.client.get(url, {'page': '2'}), '完善阅读设置')
+                validate.assert_called_once()
+                path.write_text('{broken', encoding='utf-8')
+                with self.assertLogs('catalog.file_content', level='ERROR'):
+                    response = self.client.get(url)
+                self.assertContains(response, '内容暂时无法加载', status_code=503)
+                data['records'][0]['title'] = '已恢复的升级记录'
+                replacement = path.with_suffix('.new')
+                replacement.write_text(json.dumps(data), encoding='utf-8')
+                replacement.replace(path)
+                self.assertContains(self.client.get(url), '已恢复的升级记录')
+                self.assertEqual(validate.call_count, 2)
 
     def test_rejects_invalid_and_ambiguous_records(self):
         valid = {'schema_version': 1, 'records': [

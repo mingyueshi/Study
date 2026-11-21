@@ -1,9 +1,52 @@
 const {test}=require('node:test'),assert=require('node:assert/strict');
+const {readFileSync}=require('node:fs'),{runInNewContext}=require('node:vm');
 const data=require('../content_sources/solar-terms.json'),A=require('../static/study_topics/astro/vendor/astronomy-engine/astronomy.browser.min.js');
 const C=require('../static/study_topics/solar-calendar.js'),D=require('../static/study_topics/solar-diary.js'),S=require('../static/study_topics/solar-scenes.js');
 const terms=data.seasons.flatMap(s=>s.terms),ids=terms.map(t=>t.id);
 const storage=()=>{const map=new Map();return {get length(){return map.size;},key:i=>[...map.keys()][i],getItem:k=>map.get(k)??null,setItem:(k,v)=>map.set(k,v),removeItem:k=>map.delete(k),map};};
 const note=(id='note-a',extra={})=>({id,term:'lidong',date:'2026-11-17',hometown:'浙江杭州',place:'小花园',weather:'晴',temperature:18,plants:'银杏叶黄了',animals:'看见一只鸟',text:'今天风不大。',...extra});
+
+test('缺少观察提示段落时，节气卡仍可筛选，日记仍能初始化', () => {
+ const element = () => ({value: '', addEventListener() {}, querySelector: () => null});
+ const nodes = new Map();
+ const get = id => {
+  if (!id) return null;
+  if (!nodes.has(id)) nodes.set(id, element());
+  return nodes.get(id);
+ };
+ const season = {id: 'chun', querySelector: () => card.hidden ? null : card};
+ const card = {
+  id: 'lichun', textContent: '立春', closest: () => season,
+  querySelector: selector => selector === 'h3' ? {textContent: '立春'} : null,
+ };
+ const hall = {
+  querySelectorAll: selector => ({'.solar-card': [card], '.solar-season': [season]})[selector] || [],
+  querySelector: element,
+  dispatchEvent() {},
+ };
+ for (const [id, value] of [
+  ['solar-experience', data.experience], ['solar-term-experience', []], ['solar-challenges', []],
+ ]) get(id).textContent = JSON.stringify(value);
+ get('solar-challenge').querySelector = element;
+ let mounted = false;
+ runInNewContext(readFileSync(require.resolve('../static/study_topics/solar-terms.js'), 'utf8'), {
+  document: {querySelector: () => hall, getElementById: get},
+  location: {search: '?q=立春', hash: ''},
+  URLSearchParams, Event,
+  window: {
+   addEventListener() {},
+   SolarDiary: {mount({terms}) {
+    assert.equal(terms.get('lichun').prompt, '');
+    mounted = true;
+   }},
+   SolarScenes: {mount() {}},
+   SolarCalendar: {mount() {}},
+  },
+ });
+ assert.equal(mounted, true);
+ assert.equal(card.hidden, false);
+ assert.match(get('solar-filter-status').textContent, /找到 1 \//);
+});
 test('2026年交节时刻对照香港天文台年历；交节前后和一月跨年不混淆',()=>{
  const calendar=C.createCalendar(terms,A),events=calendar.events(2026);
  assert.equal(events.length,24);assert.equal(new Set(events.map(e=>e.term.solarLongitude)).size,24);
