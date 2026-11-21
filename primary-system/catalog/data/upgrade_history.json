@@ -2,6 +2,11 @@
   "schema_version": 1,
   "records": [
     {
+      "revision": "e38b0232e2dfc146ef62f986083f8dbffbb26b19",
+      "date": "2026-11-22",
+      "title": "修复专题数据异常与重复解析并补齐回归"
+    },
+    {
       "revision": "b2c519512f446b5241438c5517efc0e03e1dfc89",
       "date": "2026-11-20",
       "title": "扩充历史双轨时间轴并联动疆域与人物"
