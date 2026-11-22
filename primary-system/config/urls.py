@@ -13,7 +13,7 @@ from catalog.mathematicians import mathematicians
 from catalog.money_trade import money_trade
 from catalog.time_story import time_story
 from catalog.upgrade_views import upgrade_history
-from catalog.study_courses import computing_lab, hanzi_evolution, literature_study, probability_lab
+from catalog.study_courses import computing_lab, food_journey, hanzi_evolution, literature_study, probability_lab
 from chinesebook import couplets, punctuation, rhetoric, word_maze
 from learning import views as learning
 from lexicon import views as lexicon
@@ -35,6 +35,7 @@ urlpatterns = [
     path('interdisciplinary/great-works/<slug:work_id>/', great_works, name='great-work-detail'),
     path('interdisciplinary/money-trade/', money_trade, name='money-trade'),
     path('interdisciplinary/energy-environment/', energy_environment, name='energy-environment'),
+    path('interdisciplinary/food/', food_journey, name='food-journey'),
     path('updates/', upgrade_history, name='upgrade-history'),
     path('references/', include('reference_library.urls')),
     path('references/lexicon/', include('lexicon.reference_urls')),

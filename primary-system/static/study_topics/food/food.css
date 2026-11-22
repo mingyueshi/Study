@@ -1,0 +1,284 @@
+/* ============================================================
+   乐学堂 · 食物的旅行 —— 专属样式
+   与 computing.css 同构：知识卡 / 想一想 / 速查 / 打印，
+   另有三个实验台（溯源 / 传播地图 / 营养搭配）的组件样式。
+   ============================================================ */
+
+/* ---------- 课程页框架配色（跨学科暖色，随本页加载生效） ---------- */
+.study-topic-frame.color-interdisciplinary { --card-tint: #fdf3e6; --card-line: #eddbc1; --card-accent: #b0732c; }
+
+/* ---------- 站点导语 ---------- */
+.goal-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.goal-tags span {
+  background: color-mix(in srgb, var(--c) 12%, white);
+  border: 1px solid color-mix(in srgb, var(--c) 30%, white);
+  color: #4a4f63; border-radius: 999px; padding: 3px 10px;
+  font-size: 12.5px; font-weight: 700;
+}
+
+/* ---------- 知识点卡 ---------- */
+.kcard {
+  --c: #2fbf71;
+  position: relative;
+  background: var(--card); border-radius: 18px; padding: 18px 18px 16px;
+  border: 1px solid var(--line); border-top: 4px solid var(--c);
+  box-shadow: 0 4px 16px rgba(64, 52, 32, .04); overflow-wrap: anywhere;
+  margin-bottom: 20px;
+}
+.kcard.learned { background: #f4fcf7; }
+.khead { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding-right: 40px; }
+.ktitle { font-size: 21px; font-weight: 900; }
+.khead-gap { flex: 1; }
+.kcard .say { width: 32px; height: 32px; }
+.learn-btn {
+  position: absolute; top: 12px; right: 12px;
+  width: 36px; height: 36px; border-radius: 50%;
+  border: 3px solid #dfe5f0; background: #f5f8fc;
+  font-size: 17px; font-weight: 900; color: #fff; line-height: 1;
+}
+.learn-btn.on { background: #2fbf71; border-color: #2fbf71; }
+.kcard.learned::after {
+  content: '✓ 已掌握';
+  position: absolute; top: 12px; right: 56px;
+  font-size: 11.5px; font-weight: 800; color: #2fbf71;
+  background: #e9f9f0; border-radius: 999px; padding: 2px 9px;
+}
+.k-overview { margin-top: 12px; font-size: 15.5px; line-height: 1.75; color: #4a4f63; }
+
+/* ---------- 小节 ---------- */
+.ksec { display: flex; align-items: flex-start; gap: 10px; margin-top: 12px; }
+.ksec > :last-child { min-width: 0; flex: 1; }
+.seclabel {
+  flex: 0 0 26px; height: 26px; margin-top: 2px;
+  background: #e9f3e9; color: #2e6b40; border-radius: 8px;
+  font-size: 13px; font-weight: 900; display: grid; place-items: center;
+}
+.klist { list-style: none; display: grid; gap: 5px; }
+.kli {
+  display: block; width: 100%; text-align: left;
+  border: none; background: none; padding: 2px 0;
+  font-size: 14.5px; line-height: 1.7; color: #4a4f63; font-weight: 600;
+}
+.kli:hover { color: #2e6b40; }
+.klist.mis .kli { color: #7a5327; }
+
+/* ---------- 想一想 ---------- */
+.mex { display: grid; gap: 6px; }
+.mex-q, .mex-steps, .mex-a {
+  display: block; width: 100%; text-align: left; border: none;
+  padding: 8px 12px; border-radius: 12px;
+  font-size: 14.5px; line-height: 1.7; font-weight: 600;
+}
+.mex-q { background: #e8f4fb; color: #1d6f8f; }
+.mex-steps { background: #f8f9fc; color: #5a5570; }
+.mex-a { background: #e9f9f0; color: #187749; font-weight: 800; }
+.mex-q:hover { background: #d9ecf7; }
+.mex-a:hover { background: #d6f3e2; }
+.mex-steps:hover { background: #eef0f7; }
+
+.krecite {
+  margin-top: 12px; background: #eaf7ef; border-radius: 12px;
+  padding: 9px 12px; font-size: 14px; font-weight: 800; color: #1d6f8f;
+}
+
+/* ---------- 食物速查 ---------- */
+.formula-card {
+  --c: #2fbf71;
+  background: var(--card); border-radius: 18px; padding: 16px 18px;
+  border: 1px solid var(--line); border-left: 5px solid var(--c);
+  margin-bottom: 16px; box-shadow: 0 4px 16px rgba(64, 52, 32, .04); overflow-wrap: anywhere;
+}
+.phead { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.phead h3 { font-size: 17px; font-weight: 900; }
+.frows { display: grid; gap: 6px; margin-top: 10px; }
+.frow {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+  border: 1.5px solid var(--line); background: #fafbfe;
+  border-radius: 10px; padding: 7px 12px; text-align: left;
+}
+.frow:active { transform: scale(.98); }
+.frow b { font-size: 15px; font-weight: 900; color: #2e6b40; }
+.frow span { font-size: 15px; font-weight: 700; color: #4a4f63; font-variant-numeric: tabular-nums; }
+.pnote {
+  margin-top: 10px; background: #f0f7f1; border-radius: 12px;
+  padding: 9px 12px; font-size: 13.5px; line-height: 1.7; color: #4a5f52; font-weight: 600;
+}
+
+/* ---------- 站点横幅与入场动画 ---------- */
+.unit-banner { margin: 4px 0 14px; border-radius: 14px; overflow: hidden; }
+.unit-banner svg { width: 100%; height: auto; display: block; }
+.unit-banner:hover svg { transform: translateY(-1px); transition: transform .3s ease; }
+@keyframes fdFloat {
+  0%, 100% { transform: translateY(0); opacity: .7; }
+  50% { transform: translateY(-8px); opacity: .95; }
+}
+.fd-float { animation: fdFloat 3.4s ease-in-out infinite; }
+.fd-float.fd-d2 { animation-duration: 4.3s; animation-delay: .7s; }
+@keyframes fdOriginPulse {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+.food-origin-pulse { animation: fdOriginPulse 2.6s ease-in-out infinite; }
+@keyframes kFadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.kcard, .formula-card, .unit-head { animation: kFadeUp .42s ease both; }
+.kcard:nth-child(2) { animation-delay: .04s; }
+.kcard:nth-child(3) { animation-delay: .08s; }
+.kcard:nth-child(4) { animation-delay: .12s; }
+.kcard:nth-child(5) { animation-delay: .16s; }
+.kcard:nth-child(6) { animation-delay: .20s; }
+
+/* ---------- 图示通用 ---------- */
+.fig { transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease; }
+.fig:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(64, 52, 32, .07);
+  border-color: #d8cbb2;
+}
+.fig:hover .fig-svg { transform: scale(1.005); transition: transform .35s ease; }
+.fig:has(.food-lab):hover { transform: none; }
+.fig:has(.food-lab):hover .fig-svg { transform: none; }
+.fig .fig-btn:disabled { opacity: .5; cursor: default; transform: none; }
+
+/* ============================================================
+   实验台共用
+   ============================================================ */
+.food-lab-note {
+  margin: 4px 0 10px; padding: 8px 12px; border-radius: 12px;
+  background: #f3f7f2; color: #4a5f52; font-size: 13.5px; line-height: 1.7; font-weight: 700;
+}
+.food-lab .fig-ctrl { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; align-items: center; }
+.food-lab .fig-btn { min-height: 44px; padding: 8px 15px; font-size: 15px; border-radius: 10px; background: var(--card); color: var(--ink, #34384d); }
+.food-lab-stage { border: 1px solid var(--line); border-radius: 12px; background: #fff; padding: 10px; }
+.food-lab-stage .fig-svg { display: block; width: 100%; height: auto; }
+.food-lab-status { margin: 10px 0 4px; font-size: 14px; line-height: 1.7; color: #4a4f63; font-weight: 700; }
+.food-lab[hidden] { display: none; }
+.food-lab .fig-btn[aria-pressed="true"] { background: #e9f7ef; border-color: #2fbf71; color: #187749; }
+
+/* ---------- 溯源台 ---------- */
+.food-meal-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 6px 0 12px; }
+.food-meal-chip {
+  border: 1.5px solid var(--line); border-radius: 999px; background: #fafbfe;
+  padding: 8px 16px; font-size: 15px; font-weight: 800; color: #4a4f63; cursor: pointer;
+}
+.food-meal-chip.on { border-color: #2fbf71; background: #e9f7ef; color: #187749; }
+.food-ing-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 6px 0 10px; }
+.food-ing-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  border: 1.5px solid var(--line); border-radius: 999px; background: #fafbfe;
+  padding: 6px 13px; font-size: 14px; font-weight: 800; color: #4a4f63; cursor: pointer;
+}
+.food-ing-chip.on { border-color: #2f9bd6; background: #e8f4fb; color: #1d6f8f; }
+.food-ing-dist { font-size: 11px; font-weight: 800; color: #8a92a5; font-variant-numeric: tabular-nums; }
+.food-chain { border: 1px solid var(--line); border-radius: 12px; background: #fff; padding: 12px 14px; }
+.food-chain-title { font-size: 15px; font-weight: 900; color: #34384d; margin: 0 0 8px; }
+.food-chain-list { list-style: none; display: grid; gap: 7px; margin: 0; padding: 0; }
+.food-chain-step {
+  display: flex; align-items: baseline; gap: 9px; flex-wrap: wrap;
+  border-radius: 10px; padding: 6px 10px;
+  background: #f4f6fa; opacity: .55;
+}
+.food-chain-step.done { background: #e9f7ef; opacity: 1; }
+.food-chain-dot {
+  flex: 0 0 24px; height: 24px; display: grid; place-items: center; align-self: center;
+  border-radius: 50%; background: #dfe5f0; color: #73788b;
+  font-size: 12px; font-weight: 900; font-variant-numeric: tabular-nums;
+}
+.food-chain-step.done .food-chain-dot { background: #2fbf71; color: #fff; }
+.food-chain-place { font-size: 14px; font-weight: 900; color: #34384d; }
+.food-chain-step-text { font-size: 12.5px; color: #5d6577; font-weight: 600; }
+.food-quiz { margin-top: 12px; border: 1.5px dashed #c9d8bf; border-radius: 12px; background: #f7faf4; padding: 12px 14px; }
+.food-quiz-q { margin: 0 0 8px; font-size: 14px; font-weight: 800; color: #4a5f2e; }
+.food-quiz-opts { display: flex; flex-wrap: wrap; gap: 8px; }
+
+/* ---------- 传播时间线地图 ---------- */
+.food-crop-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 6px 0 10px; }
+.food-crop-chip {
+  border: 1.5px solid var(--line); border-radius: 999px; background: #fafbfe;
+  padding: 7px 15px; font-size: 14.5px; font-weight: 800; color: #4a4f63; cursor: pointer;
+}
+.food-crop-chip.on { border-color: var(--c, #d97745); background: color-mix(in srgb, var(--c, #d97745) 12%, white); color: color-mix(in srgb, var(--c, #d97745) 70%, black); }
+.food-spread-stage { border: 1px solid var(--line); border-radius: 12px; background: #fbfcfe; padding: 8px; }
+.food-spread-stage .fig-svg { display: block; width: 100%; height: auto; }
+.food-spread-route path { transition: opacity .5s ease, stroke-width .5s ease; }
+.food-spread-route circle { transition: r .4s ease, opacity .4s ease; }
+.food-spread-ctrl { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin: 12px 0 4px; }
+.food-year-label { font-size: 13.5px; font-weight: 800; color: #5d6577; }
+.food-year-output { font-size: 15px; font-weight: 900; color: #a4562e; font-variant-numeric: tabular-nums; min-width: 92px; }
+.food-lab .fig-range { flex: 1 1 220px; accent-color: #d97745; }
+.food-spread-events { margin: 6px 0 0; padding-left: 20px; display: grid; gap: 3px; }
+.food-spread-events li { font-size: 13px; line-height: 1.65; color: #4a4f63; font-weight: 600; }
+
+/* ---------- 营养搭配模拟器 ---------- */
+.food-cat { margin: 8px 0 12px; }
+.food-cat-title { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin: 0 0 7px; font-size: 14.5px; font-weight: 900; color: #34384d; }
+.food-cat-must, .food-cat-opt {
+  font-style: normal; font-size: 11px; font-weight: 800; border-radius: 999px; padding: 1px 8px;
+}
+.food-cat-must { background: #e9f7ef; color: #187749; }
+.food-cat-opt { background: #f0f2f7; color: #757c8f; }
+.food-cat-picked { font-size: 12px; font-weight: 700; color: #187749; }
+.food-dishes { display: flex; flex-wrap: wrap; gap: 8px; }
+.food-dish {
+  display: grid; grid-template-columns: auto auto; justify-items: center; align-items: center; column-gap: 7px;
+  border: 1.5px solid var(--line); border-radius: 12px; background: #fafbfe;
+  padding: 8px 12px; cursor: pointer; font: inherit; min-width: 96px;
+}
+.food-dish:hover { border-color: #9db9dd; }
+.food-dish.on { border-color: #2fbf71; background: #f0fbf5; }
+.food-dish-emoji { grid-row: span 2; font-size: 26px; }
+.food-dish-name { font-size: 14px; font-weight: 800; color: #34384d; white-space: nowrap; }
+.food-dish-energy { font-size: 10.5px; color: #8a92a5; font-weight: 700; font-variant-numeric: tabular-nums; }
+.food-energy-line { margin: 10px 0 0; font-size: 14px; font-weight: 800; color: #4a5f52; }
+.food-energy-line output { font-size: 19px; font-weight: 900; color: #187749; font-variant-numeric: tabular-nums; }
+.food-eval-btn { background: #2fbf71; border-color: #2fbf71; color: #fff; font-weight: 800; }
+.food-eval-btn:hover { background: #28a863; }
+.food-result { border: 1px solid var(--line); border-radius: 14px; background: #fff; padding: 14px 16px; margin-top: 12px; }
+.food-stars { display: flex; align-items: baseline; gap: 10px; margin: 0 0 10px; }
+.food-stars b { font-size: 24px; letter-spacing: 2px; color: #e6a23c; }
+.food-stars span { font-size: 15px; font-weight: 900; color: #a4741d; }
+.food-checks { list-style: none; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 6px; margin: 0 0 10px; padding: 0; }
+.food-check {
+  display: flex; align-items: center; gap: 7px;
+  border-radius: 9px; padding: 5px 10px; background: #f4f6fa;
+  font-size: 13px; font-weight: 700; color: #757c8f;
+}
+.food-check.ok { background: #e9f7ef; color: #187749; }
+.food-check-mark {
+  flex: 0 0 19px; height: 19px; display: grid; place-items: center; border-radius: 50%;
+  background: #dfe5f0; color: #fff; font-size: 11px; font-weight: 900;
+}
+.food-check.ok .food-check-mark { background: #2fbf71; }
+.food-energy-verdict { margin: 0 0 8px; font-size: 13.5px; font-weight: 800; color: #4a5f52; }
+.food-tips { list-style: none; display: grid; gap: 5px; margin: 0; padding: 0; }
+.food-tips li { font-size: 13.5px; line-height: 1.7; color: #4a4f63; font-weight: 600; }
+.food-tips-done { margin: 0; font-size: 14px; font-weight: 800; color: #187749; }
+@media (max-width: 560px) {
+  .food-dish { min-width: 84px; }
+}
+
+/* ---------- 打印 ---------- */
+@media print {
+  .study-course .study-page { background: #fff; font-size: 13px; }
+  #app > header, .sidebar, .toolbar, .textbook-banner, .skip-link,
+  .say, .learn-btn, .goal-tags { display: none !important; }
+  .study-shell { display: block; padding: 0; }
+  .study-content { padding: 0; }
+  .unit-head { border: 1px solid #ccc; box-shadow: none; }
+  .kcard, .formula-card { box-shadow: none; break-inside: avoid; page-break-inside: avoid; margin-bottom: 12px; }
+  .unit-banner, .fig { break-inside: avoid; page-break-inside: avoid; }
+  .food-lab .fig-ctrl, .food-lab .food-meal-chips, .food-lab .food-ing-chips,
+  .food-lab .food-quiz, .food-lab .food-crop-chips, .food-lab .food-spread-ctrl,
+  .food-lab .food-dishes, .food-lab .food-cat-title { display: none !important; }
+}
+
+/* ---------- 减少动画偏好 ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .kcard, .formula-card, .unit-head, .fd-float, .food-origin-pulse, .fig,
+  .food-spread-route path, .food-spread-route circle {
+    animation: none !important;
+    transition: none !important;
+  }
+}

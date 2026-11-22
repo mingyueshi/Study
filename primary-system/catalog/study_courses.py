@@ -97,6 +97,13 @@ computing_lab = TemplateView.as_view(template_name='study_topics/course.html', e
     'course_links': (('math-beauty', '数学之美'), ('science-rumors', '科学流言粉碎机')),
 })
 
+food_journey = TemplateView.as_view(template_name='study_topics/course.html', extra_context={
+    'study_area': 'interdisciplinary', 'study_label': '跨学科',
+    'course_slug': 'food', 'course_title': '食物的旅行', 'course_section': '食物站点',
+    'course_intro': '我们吃的东西从哪里来，又怎样变成身体的一部分？从农场到餐桌、作物的环球传播、营养与消化，一路吃到餐桌文化和食物化学。',
+    'course_links': (('history-timeline-silk-road', '丝绸之路'), ('science-body', '人体奥秘站'), ('money-trade', '货币与贸易')),
+})
+
 hanzi_evolution = TemplateView.as_view(template_name='study_topics/course.html', extra_context={
     'study_area': 'chinese', 'study_label': '语文',
     'course_slug': 'hanzi-evo', 'course_title': '汉字演变馆', 'course_section': '字族',

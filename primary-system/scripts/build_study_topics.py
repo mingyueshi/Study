@@ -20,7 +20,7 @@ TOPICS = {
     'climate': ('study-climate', 'geography-climate', ('index', 'weather', 'types', 'china')),
     'map-skills': ('study-map-skills', 'geography-map-skills', ('index', 'scale', 'direction', 'legend', 'contours', 'profile')),
 }
-COURSES = ('astro', 'lit', 'sci', 'matter', 'microbes', 'probability', 'computing', 'hanzi-evo')
+COURSES = ('astro', 'lit', 'sci', 'matter', 'microbes', 'probability', 'computing', 'food', 'hanzi-evo')
 # 数据全局名：slug 含连字符时 .upper() 不是合法 JS 标识符，需要单独映射。
 COURSE_GLOBALS = {'hanzi-evo': 'HANZI_EVO'}
 EVOLUTION_CHARS = PROJECT / 'hanzi' / 'evolution_chars.py'
@@ -317,6 +317,9 @@ def course_outputs():
                 yield dest / filename, (SOURCE / filename).read_bytes()
         if topic == 'computing':
             for filename in ('computing-labs-data.js', 'computing-labs.js'):
+                yield dest / filename, (SOURCE / filename).read_bytes()
+        if topic == 'food':
+            for filename in ('food-labs-data.js', 'food-labs.js'):
                 yield dest / filename, (SOURCE / filename).read_bytes()
         if topic == 'microbes':
             for filename in ('microbe-scale-data.js', 'microbe-scale.js'):
