@@ -2,6 +2,11 @@
   "schema_version": 1,
   "records": [
     {
+      "revision": "8c912ca0d364a736ad406b1b03b4d10c5e708a95",
+      "date": "2026-11-22",
+      "title": "新增微生物看不见的世界专题"
+    },
+    {
       "revision": "313c8281e7b8441c59f89e5a82a608dd623dba94",
       "date": "2026-11-22",
       "title": "新增物质实验室化学启蒙专题"
