@@ -7,7 +7,7 @@
 {% with topic='study_topics/'|add:course_slug|add:'/'|add:course_slug %}
 <link rel="stylesheet" href="{% static 'mathbook/mathbook-base.css' %}">
 <link rel="stylesheet" href="{% static 'figures/figures.css' %}">
-<link rel="stylesheet" href="{% static topic|add:'.css' %}{% if course_slug == 'astro' %}?v=d86753a8f453{% elif course_slug == 'lit' %}?v=1d31278b50f3{% elif course_slug == 'sci' %}?v=d64a7b5ae142{% elif course_slug == 'matter' %}?v=20261122b{% elif course_slug == 'microbes' %}?v=20261122{% elif course_slug == 'hanzi-evo' %}?v=21b2d18756eb{% endif %}">
+<link rel="stylesheet" href="{% static topic|add:'.css' %}{% if course_slug == 'astro' %}?v=d86753a8f453{% elif course_slug == 'lit' %}?v=1d31278b50f3{% elif course_slug == 'sci' %}?v=d64a7b5ae142{% elif course_slug == 'matter' %}?v=20261122b{% elif course_slug == 'microbes' %}?v=20261122{% elif course_slug == 'probability' %}?v=20261123{% elif course_slug == 'hanzi-evo' %}?v=21b2d18756eb{% endif %}">
 {% if course_slug == 'lit' or course_slug == 'hanzi-evo' %}
 <link rel="stylesheet" href="{% static 'study_topics/reading.css' %}?v=37b1aaceb767">
 {% endif %}
@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="{% static 'study_topics/map-skills/experiment.css' %}?v=1d0d085a4e06">
 {% endif %}
 <script src="{% static 'speech.js' %}" defer></script>
-<script src="{% static topic|add:'-data.js' %}{% if course_slug == 'sci' %}?v=20261114b10{% elif course_slug == 'lit' %}?v=20261117{% elif course_slug == 'matter' %}?v=20261122b{% elif course_slug == 'microbes' %}?v=20261122{% endif %}" defer></script>
+<script src="{% static topic|add:'-data.js' %}{% if course_slug == 'sci' %}?v=20261114b10{% elif course_slug == 'lit' %}?v=20261117{% elif course_slug == 'matter' %}?v=20261122b{% elif course_slug == 'microbes' %}?v=20261122{% elif course_slug == 'probability' %}?v=20261123{% endif %}" defer></script>
 {% if course_slug == 'sci' %}
 <link rel="stylesheet" href="{% static 'study_topics/sci/sci-process.css' %}?v=20261122b">
 <script src="{% static 'study_topics/sci/sci-demo-data.js' %}" defer></script>
@@ -37,6 +37,10 @@
 <script src="{% static 'study_topics/microbes/microbe-scale-data.js' %}?v=20261122" defer></script>
 <script src="{% static 'study_topics/microbes/microbe-scale.js' %}?v=20261122" defer></script>
 {% endif %}
+{% if course_slug == 'probability' %}
+<script src="{% static 'study_topics/probability/probability-labs-data.js' %}?v=20261123" defer></script>
+<script src="{% static 'study_topics/probability/probability-labs.js' %}?v=20261123" defer></script>
+{% endif %}
 {% if course_slug == 'astro' %}
 <script src="{% static 'study_topics/astro/vendor/astronomy-engine/astronomy.browser.min.js' %}?v=2.1.19" defer></script>
 <script src="{% static 'study_topics/astro/astro-lab-data.js' %}?v=20261117" defer></script>
@@ -44,7 +48,7 @@
 <script src="{% static 'study_topics/astro/astro-observation-data.js' %}?v=e2183c67efe1" defer></script>
 <script src="{% static 'study_topics/astro/astro-observation.js' %}?v=49973adc65f7" defer></script>
 {% endif %}
-<script src="{% static topic|add:'-figures.js' %}{% if course_slug == 'sci' %}?v=3691cdb576af{% elif course_slug == 'astro' %}?v=30b29a3d6258{% elif course_slug == 'matter' %}?v=20261122b{% elif course_slug == 'microbes' %}?v=20261122{% endif %}" defer></script>
+<script src="{% static topic|add:'-figures.js' %}{% if course_slug == 'sci' %}?v=3691cdb576af{% elif course_slug == 'astro' %}?v=30b29a3d6258{% elif course_slug == 'matter' %}?v=20261122b{% elif course_slug == 'microbes' %}?v=20261122{% elif course_slug == 'probability' %}?v=20261123{% endif %}" defer></script>
 {% if course_slug == 'astro' %}
 <script src="{% static 'study_topics/astro/astro-photos.js' %}" defer></script>
 <script src="{% static 'study_topics/astro/astro-discovery-data.js' %}?v=20261116" defer></script>
@@ -54,7 +58,7 @@
 <script src="{% static 'study_topics/astro/astro-lab.js' %}?v=20261117" defer></script>
 {% endif %}
 {% if course_slug == 'hanzi-evo' %}<script src="{% static 'study_topics/hanzi-evo/hanzi-evo-player.js' %}?v=00a28db71462" defer></script>{% endif %}
-<script src="{% static topic|add:'-app.js' %}{% if course_slug == 'sci' %}?v=8e69fed01da4{% elif course_slug == 'lit' %}?v=179b579cb29d{% elif course_slug == 'astro' %}?v=3df1f89050ba{% elif course_slug == 'matter' %}?v=20261122b{% elif course_slug == 'microbes' %}?v=20261122{% elif course_slug == 'hanzi-evo' %}?v=0e615cbade53{% endif %}" defer></script>
+<script src="{% static topic|add:'-app.js' %}{% if course_slug == 'sci' %}?v=8e69fed01da4{% elif course_slug == 'lit' %}?v=179b579cb29d{% elif course_slug == 'astro' %}?v=3df1f89050ba{% elif course_slug == 'matter' %}?v=20261122b{% elif course_slug == 'microbes' %}?v=20261122{% elif course_slug == 'probability' %}?v=20261123{% elif course_slug == 'hanzi-evo' %}?v=0e615cbade53{% endif %}" defer></script>
 {% if course_slug == 'astro' or course_slug == 'sci' %}
 <script src="{% static 'study_topics/map-skills/experiment.js' %}?v=c2884b21d5bb" defer></script>
 {% endif %}

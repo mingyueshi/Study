@@ -13,7 +13,7 @@ from catalog.mathematicians import mathematicians
 from catalog.money_trade import money_trade
 from catalog.time_story import time_story
 from catalog.upgrade_views import upgrade_history
-from catalog.study_courses import hanzi_evolution, literature_study
+from catalog.study_courses import hanzi_evolution, literature_study, probability_lab
 from chinesebook import couplets, punctuation, rhetoric, word_maze
 from learning import views as learning
 from lexicon import views as lexicon
@@ -51,6 +51,7 @@ urlpatterns = [
     path('rhetoric/', rhetoric.gallery, name='rhetoric-gallery'),
     path('word-maze/', word_maze.maze, name='word-maze'),
     path('hanzi-evolution/', hanzi_evolution, name='hanzi-evolution'),
+    path('probability/', probability_lab, name='probability-lab'),
     path('science/', include('science.urls')),
     path('dictionary/', dictionary.lookup, name='dictionary'),
     path('dictionary/sources/', dictionary.sources, name='dictionary-sources'),

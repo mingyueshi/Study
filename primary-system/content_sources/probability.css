@@ -1,0 +1,207 @@
+/* ============================================================
+   乐学堂 · 概率与统计乐园 —— 专属样式
+   与 microbes.css 同构：知识卡 / 想一想 / 速查 / 打印，
+   另有四个实验台（掷骰 / 调查 / 估 π / 查证）的组件样式。
+   ============================================================ */
+
+/* ---------- 乐园导语 ---------- */
+.goal-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.goal-tags span {
+  background: color-mix(in srgb, var(--c) 12%, white);
+  border: 1px solid color-mix(in srgb, var(--c) 30%, white);
+  color: #4a4f63; border-radius: 999px; padding: 3px 10px;
+  font-size: 12.5px; font-weight: 700;
+}
+
+/* ---------- 知识点卡 ---------- */
+.kcard {
+  --c: #4d96ff;
+  position: relative;
+  background: var(--card); border-radius: 18px; padding: 18px 18px 16px;
+  border: 1px solid var(--line); border-top: 4px solid var(--c);
+  box-shadow: 0 4px 16px rgba(40, 54, 85, .035); overflow-wrap: anywhere;
+  margin-bottom: 20px;
+}
+.kcard.learned { background: #f4fcf7; }
+.khead { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding-right: 40px; }
+.ktitle { font-size: 21px; font-weight: 900; }
+.khead-gap { flex: 1; }
+.kcard .say { width: 32px; height: 32px; }
+.learn-btn {
+  position: absolute; top: 12px; right: 12px;
+  width: 36px; height: 36px; border-radius: 50%;
+  border: 3px solid #dfe5f0; background: #f5f8fc;
+  font-size: 17px; font-weight: 900; color: #fff; line-height: 1;
+}
+.learn-btn.on { background: #2fbf71; border-color: #2fbf71; }
+.kcard.learned::after {
+  content: '✓ 已掌握';
+  position: absolute; top: 12px; right: 56px;
+  font-size: 11.5px; font-weight: 800; color: #2fbf71;
+  background: #e9f9f0; border-radius: 999px; padding: 2px 9px;
+}
+.k-overview { margin-top: 12px; font-size: 15.5px; line-height: 1.75; color: #4a4f63; }
+
+/* ---------- 小节 ---------- */
+.ksec { display: flex; align-items: flex-start; gap: 10px; margin-top: 12px; }
+.ksec > :last-child { min-width: 0; flex: 1; }
+.seclabel {
+  flex: 0 0 26px; height: 26px; margin-top: 2px;
+  background: #e8eefc; color: #2b5f8f; border-radius: 8px;
+  font-size: 13px; font-weight: 900; display: grid; place-items: center;
+}
+.klist { list-style: none; display: grid; gap: 5px; }
+.kli {
+  display: block; width: 100%; text-align: left;
+  border: none; background: none; padding: 2px 0;
+  font-size: 14.5px; line-height: 1.7; color: #4a4f63; font-weight: 600;
+}
+.kli:hover { color: #2b5f8f; }
+.klist.mis .kli { color: #7a5327; }
+
+/* ---------- 想一想 ---------- */
+.mex { display: grid; gap: 6px; }
+.mex-q, .mex-steps, .mex-a {
+  display: block; width: 100%; text-align: left; border: none;
+  padding: 8px 12px; border-radius: 12px;
+  font-size: 14.5px; line-height: 1.7; font-weight: 600;
+}
+.mex-q { background: #e8f4fb; color: #1d6f8f; }
+.mex-steps { background: #f8f9fc; color: #5a5570; }
+.mex-a { background: #e9f9f0; color: #187749; font-weight: 800; }
+.mex-q:hover { background: #d9ecf7; }
+.mex-a:hover { background: #d6f3e2; }
+.mex-steps:hover { background: #eef0f7; }
+
+.krecite {
+  margin-top: 12px; background: #eaf2fd; border-radius: 12px;
+  padding: 9px 12px; font-size: 14px; font-weight: 800; color: #1d6f8f;
+}
+
+/* ---------- 概率速查 ---------- */
+.formula-card {
+  --c: #4d96ff;
+  background: var(--card); border-radius: 18px; padding: 16px 18px;
+  border: 1px solid var(--line); border-left: 5px solid var(--c);
+  margin-bottom: 16px; box-shadow: 0 4px 16px rgba(40, 54, 85, .035); overflow-wrap: anywhere;
+}
+.phead { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.phead h3 { font-size: 17px; font-weight: 900; }
+.frows { display: grid; gap: 6px; margin-top: 10px; }
+.frow {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+  border: 1.5px solid var(--line); background: #fafbfe;
+  border-radius: 10px; padding: 7px 12px; text-align: left;
+}
+.frow:active { transform: scale(.98); }
+.frow b { font-size: 15px; font-weight: 900; color: #2b5f8f; }
+.frow span { font-size: 15px; font-weight: 700; color: #4a4f63; font-variant-numeric: tabular-nums; }
+.pnote {
+  margin-top: 10px; background: #f0f7fb; border-radius: 12px;
+  padding: 9px 12px; font-size: 13.5px; line-height: 1.7; color: #4a5f6d; font-weight: 600;
+}
+
+/* ---------- 单元横幅与入场动画 ---------- */
+.unit-banner { margin: 4px 0 14px; border-radius: 14px; overflow: hidden; }
+.unit-banner svg { width: 100%; height: auto; display: block; }
+.unit-banner:hover svg { transform: translateY(-1px); transition: transform .3s ease; }
+@keyframes pbFloat {
+  0%, 100% { transform: translateY(0); opacity: .7; }
+  50% { transform: translateY(-8px); opacity: .95; }
+}
+.pb-float { animation: pbFloat 3.4s ease-in-out infinite; }
+.pb-float.pb-d2 { animation-duration: 4.3s; animation-delay: .7s; }
+@keyframes kFadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.kcard, .formula-card, .unit-head { animation: kFadeUp .42s ease both; }
+.kcard:nth-child(2) { animation-delay: .04s; }
+.kcard:nth-child(3) { animation-delay: .08s; }
+.kcard:nth-child(4) { animation-delay: .12s; }
+.kcard:nth-child(5) { animation-delay: .16s; }
+.kcard:nth-child(6) { animation-delay: .20s; }
+
+/* ---------- 图示通用 ---------- */
+.fig { transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease; }
+.fig:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(40, 54, 85, .08);
+  border-color: #c7d4ec;
+}
+.fig:hover .fig-svg { transform: scale(1.005); transition: transform .35s ease; }
+.fig:has(.prob-lab):hover { transform: none; }
+.fig:has(.prob-lab):hover .fig-svg { transform: none; }
+.fig .fig-btn:disabled { opacity: .5; cursor: default; transform: none; }
+
+/* ============================================================
+   实验台共用
+   ============================================================ */
+.prob-lab-note {
+  margin: 4px 0 10px; padding: 8px 12px; border-radius: 12px;
+  background: #f0f7fb; color: #4a5f6d; font-size: 13.5px; line-height: 1.7; font-weight: 700;
+}
+.prob-lab .fig-ctrl { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; }
+.prob-lab .fig-btn { min-height: 44px; padding: 8px 15px; font-size: 15px; border-radius: 10px; background: var(--card); color: var(--ink, #34384d); }
+.prob-lab .fig-btn[aria-pressed="true"] { background: #e8f4fb; border-color: #4d96ff; color: #1d6f8f; }
+.prob-lab-stage { border: 1px solid var(--line); border-radius: 12px; background: #fff; padding: 10px; }
+.prob-lab-stage .fig-svg { display: block; width: 100%; height: auto; }
+.prob-lab-status { margin: 10px 0 4px; font-size: 14.5px; line-height: 1.7; color: #4a4f63; font-weight: 700; }
+.prob-lab[hidden] { display: none; }
+
+/* ---------- 调查生成器 ---------- */
+.prob-survey-buttons .prob-vote { min-width: 128px; }
+.prob-survey-shares { margin: 6px 0 0; font-size: 13px; line-height: 1.7; color: #55506d; font-weight: 700; }
+
+/* ---------- 蒙特卡洛估 π ---------- */
+.prob-pi-stage { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; }
+.prob-pi-stage canvas { border: 1.5px solid var(--line); border-radius: 12px; background: #eef7fd; max-width: 340px; width: 100%; height: auto; }
+.prob-pi-figures { flex: 1 1 220px; min-width: 0; display: grid; gap: 8px; }
+.prob-pi-line { margin: 0; font-size: 14px; font-weight: 700; color: #4a4f63; }
+.prob-pi-line b { color: #157d73; }
+.prob-pi-estimate { margin: 0; font-size: 17px; font-weight: 800; color: #34384d; }
+.prob-pi-estimate output { font-size: 24px; font-weight: 900; color: #157d73; font-variant-numeric: tabular-nums; }
+.prob-pi-truth { margin: 0; font-size: 12.5px; color: #7a86a0; font-weight: 700; }
+
+/* ---------- 反直觉查证台 ---------- */
+.prob-quiz-progress { font-weight: 800; color: #55506d; font-size: 14px; }
+.prob-quiz-questions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin-top: 12px; }
+.prob-quiz-questions fieldset { border: 1.5px solid var(--line); padding: 16px; border-radius: 12px; }
+.prob-quiz-questions legend { padding: 0 6px; font-weight: 800; max-width: 100%; font-size: 14.5px; }
+.prob-quiz-options { display: flex; flex-wrap: wrap; gap: 8px; margin-block: 10px; }
+.prob-quiz-options button {
+  min-height: 42px; padding: 7px 13px; border: 1.5px solid var(--line);
+  border-radius: 10px; background: var(--card); color: #34384d;
+  font: inherit; font-size: 13.5px; font-weight: 700; cursor: pointer;
+}
+.prob-quiz-options button:hover { background: #f2f5fb; }
+.prob-quiz-options button[aria-pressed="true"] { color: #fff; background: #e0526d; border-color: #e0526d; }
+.prob-quiz-feedback { font-size: 13.5px; line-height: 1.7; color: #4a4f63; min-height: 1em; margin: 8px 0 2px; }
+.prob-quiz-questions a { color: #e0526d; text-decoration: underline; font-size: 13px; font-weight: 700; }
+.prob-quiz-questions [data-result="correct"] { border-color: #2fbf71; }
+.prob-quiz-questions [data-result="retry"] { border-color: #e6b23c; }
+@media (max-width: 900px) {
+  .prob-quiz-questions { grid-template-columns: 1fr; }
+}
+
+/* ---------- 打印 ---------- */
+@media print {
+  body { background: #fff; font-size: 13px; }
+  #app > header, .sidebar, .toolbar, .textbook-banner, .skip-link,
+  .say, .learn-btn, .goal-tags { display: none !important; }
+  .study-shell { display: block; padding: 0; }
+  .study-content { padding: 0; }
+  .unit-head { border: 1px solid #ccc; box-shadow: none; }
+  .kcard, .formula-card { box-shadow: none; break-inside: avoid; page-break-inside: avoid; margin-bottom: 12px; }
+  .unit-banner, .fig { break-inside: avoid; page-break-inside: avoid; }
+  .prob-lab .fig-ctrl, .prob-survey-buttons, .prob-pi-stage canvas { display: none !important; }
+  .prob-quiz-questions { display: block; }
+}
+
+/* ---------- 减少动画偏好 ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .kcard, .formula-card, .unit-head, .pb-float, .fig {
+    animation: none !important;
+    transition: none !important;
+  }
+}

@@ -83,6 +83,13 @@ microbes_lab = TemplateView.as_view(template_name='study_topics/course.html', ex
     'course_links': (('science-body', '人体奥秘站'), ('science-rumors', '科学流言粉碎机')),
 })
 
+probability_lab = TemplateView.as_view(template_name='study_topics/course.html', extra_context={
+    'study_area': 'math', 'study_label': '数学',
+    'course_slug': 'probability', 'course_title': '概率与统计乐园', 'course_section': '概率统计',
+    'course_intro': '掷两个骰子，哪个点数最容易出现？别猜——掷它一千次。频率柱、小调查和蒙特卡洛估 π 都在这里。',
+    'course_links': (('math-camp', '数学训练营'), ('math-beauty', '数学之美')),
+})
+
 hanzi_evolution = TemplateView.as_view(template_name='study_topics/course.html', extra_context={
     'study_area': 'chinese', 'study_label': '语文',
     'course_slug': 'hanzi-evo', 'course_title': '汉字演变馆', 'course_section': '字族',
