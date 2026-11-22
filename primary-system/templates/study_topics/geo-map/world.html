@@ -5,10 +5,12 @@
 {% block study_assets %}
 <link rel="stylesheet" href="{% static 'study_topics/geo-map/styles.css' %}?v=5b8e2fb415da">
 <link rel="stylesheet" href="{% static 'study_topics/geo-map/flat-map.css' %}?v=51aaac8e6522">
+<link rel="stylesheet" href="{% static 'study_topics/geo-map/world-country.css' %}?v=8e7b3326f0dd">
 <script src="{% static 'study_topics/geo-map/world-geo.js' %}?v=6d109d202301" defer></script>
 <script src="{% static 'study_topics/geo-map/content.js' %}?v=e86ddc18e05f" defer></script>
 <script src="{% static 'study_topics/geo-map/map-data.js' %}?v=27ebda785125" defer></script>
 <script src="{% static 'study_topics/geo-map/world-data.js' %}?v=9b7765ca7392" defer></script>
+<script src="{% static 'study_topics/geo-map/world-country-data.js' %}?v=b01fbaae16f3" defer></script>
 <script src="{% static 'study_topics/geo-map/atlas-data.js' %}?v=041dec261237" defer></script>
 <script src="{% static 'study_topics/geo-map/atlas.js' %}?v=60e5f6a93f55" defer></script>
 <script src="{% static 'study_topics/geo-map/shared.js' %}?v=d2bebbfd2a0b" defer></script>
@@ -17,7 +19,7 @@
 <script src="{% static 'study_topics/geo-map/map-discovery-data.js' %}?v=43339db0e7e3" defer></script>
 <script src="{% static 'study_topics/geo-map/map-discovery.js' %}?v=7b9d6b075014" defer></script>
 <script src="{% static 'study_topics/geo-map/map-ui.js' %}?v=c4c757bcca09" defer></script>
-<script src="{% static 'study_topics/geo-map/world-app.js' %}?v=1b385d3f2734" defer></script>
+<script src="{% static 'study_topics/geo-map/world-app.js' %}?v=e7ffdbfa5e28" defer></script>
 {% endblock %}
 {% block study_content %}
 <div class="study-atlas">
@@ -64,6 +66,7 @@
             <a href="china.html">中国地图</a>
             <a href="{% url 'geography-china-terrain' %}">中国 3D 地形</a>
             <a href="{% url 'geography-globe' %}">3D 地球仪</a>
+            <a href="{% url 'geography-globe' %}#gw-time-practice">时差挑战</a>
             <a href="places.html">地点索引</a>
             <a href="province.html">省域站</a>
             <a href="routes.html">主题路线</a>

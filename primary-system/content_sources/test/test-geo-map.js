@@ -18,6 +18,7 @@ require('../geo-map/china-geo.js');
 require('../geo-map/map-data.js');
 require('../geo-map/world-geo.js');
 require('../geo-map/world-data.js');
+require('../geo-map/world-country-data.js');
 require('../geo-map/atlas-data.js');
 require('../geo-map/atlas.js');
 require('../geo-map/media-data.js');
@@ -361,6 +362,20 @@ metaNames.forEach((n) => {
 });
 check(COUNTRY_META['Taiwan'] && COUNTRY_META['Taiwan'][0] === '中国台湾省', '台湾在映射里应写作「中国台湾省」');
 check(COUNTRY_META['China'] && COUNTRY_META['China'][1] === 'asia', '中国应属于亚洲');
+const countryDetails = W.GM_WORLD_COUNTRY_DETAILS;
+check(countryDetails.populationYear === 2025 && /^https:\/\//.test(countryDetails.populationSource) &&
+  /^[a-f0-9]{64}$/.test(countryDetails.populationSourceSHA256), '世界人口须记录年份与来源');
+check(Object.keys(countryDetails.places).sort().join('|') === geoNames.slice().sort().join('|'), '世界详情与底图的地点 ID 一一对应');
+for (const [id, item] of Object.entries(countryDetails.places)) {
+  const tag = '[世界详情] ' + id;
+  check(isStr(item.landmark) && !hasBadPunct(item.landmark), tag + ' 须给出代表地标');
+  check(item.population === null ? item.region : Number.isInteger(item.population) && item.population > 0,
+    tag + ' 人口须为正整数，地区资料可保留空值');
+  check(item.region || (isStr(item.capital) && isStr(item.specialty) && isStr(item.flag)),
+    tag + ' 国家档案须有首都、特产与国旗');
+  if (item.flag) check(/^[a-z]{2}$/.test(item.flag) && fileExists(`assets/flags/${item.flag}.svg`), tag + ' 须引用本地旗帜');
+}
+check(countryDetails.places.Taiwan.region && countryDetails.places.Taiwan.flag === countryDetails.places.China.flag, '台湾档案沿用中国国旗');
 check(Array.isArray(MAJOR_LABELS) && MAJOR_LABELS.length >= 10, '重点国家标注应不少于 10 个');
 MAJOR_LABELS.forEach((m) => {
   check(geoNames.includes(m.name), '[重点标注] 引用了几何里不存在的国家: ' + m.name);

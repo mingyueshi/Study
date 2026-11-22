@@ -16,6 +16,8 @@
   const OCEANS = window.GM_OCEANS || [];
   const FEATURES = window.GM_WORLD_FEATURES || [];
   const META = window.GM_COUNTRY_META || {};
+  const details = window.GM_WORLD_COUNTRY_DETAILS;
+  const flagBase = new URL('assets/flags/', document.currentScript.src);
   const MAJOR = window.GM_MAJOR_LABELS || [];
   const CHINA_CARD = window.GM_CHINA_CARD || { facts: [] };
   const POOL = window.GM_WORLD_POOL || [];
@@ -93,6 +95,27 @@
   const row = (label, value) => `<div class="gm-row"><span class="gm-row-label">${esc(label)}</span><span class="gm-row-value">${esc(value)}</span></div>`;
   const list = (items) => items.map((f) => `<p class="gm-card-text">${esc(f)}</p>`).join('');
 
+  function countryDetails(id) {
+    const item = details.places[id];
+    const capital = item.capital || item.capitalNote;
+    const population = item.population === null
+      ? item.populationNote || '联合国人口资料未单列'
+      : `约 ${item.population.toLocaleString('zh-CN')} 人（${details.populationYear} 年中推计）`;
+    return (capital ? row(item.region ? '行政中心' : '首都', capital) : '') +
+      row('人口', population) +
+      (item.specialty ? row('代表特产', item.specialty) : '') +
+      row('代表地标', item.landmark) +
+      (item.flagNote ? `<p class="gm-card-foot">${esc(item.flagNote)}</p>` : '') +
+      `<p class="gm-card-foot"><a href="${esc(details.populationSource)}" target="_blank" rel="noopener noreferrer">查人口口径（需联网）↗</a></p>`;
+  }
+  function countryTitle(id) {
+    const flag = details.places[id].flag;
+    const name = zhOf(id);
+    const label = id === 'Taiwan' ? '中华人民共和国国旗' : name + (details.places[id].region ? '地区旗帜' : '国旗');
+    const image = flag ? `<img class="gm-country-flag" src="${esc(new URL(flag + '.svg', flagBase).href)}" alt="${esc(label)}">` : '';
+    return `<h2 class="gm-card-title gm-country-title">${image}${esc(name)}</h2>`;
+  }
+
   let mapUI;
   const neighborExplorer = window.GMMapDiscovery.mountNeighbors({root,svg,getUI:()=>mapUI});
   function openCard(id) {
@@ -117,23 +140,24 @@
         `<p class="gm-card-text">${esc(f.note)}</p>`;
     } else if (place.category === 'country') {
       const name = id;
-      const zh = zhOf(name);
       const cont = continentOf(name);
       const neighbor = neighborExplorer.byCountry.get(id);
-      const isChinaHome = root.dataset.layer === 'home' && (name === 'China' || name === 'Taiwan');
+      const isChinaHome = root.dataset.layer === 'home' && name === 'China';
       if (isChinaHome) {
         card.innerHTML =
           `<p class="gm-card-eyebrow">中国与世界</p>` +
-          `<h2 class="gm-card-title"><span aria-hidden="true">🇨🇳</span>中国</h2>` +
+          countryTitle(name) +
           `<div class="gm-chips">${badge('亚洲东部', '#f0c75e')}${badge('面积世界第三', '#b04a3a')}</div>` +
+          countryDetails(name) +
           list(CHINA_CARD.facts) +
           `<a class="gm-card-link" href="china.html#map">去中国地图细看 →</a>`;
       } else {
         card.innerHTML =
           `<p class="gm-card-eyebrow">国家与地区</p>` +
-          `<h2 class="gm-card-title">${esc(zh)}</h2>` +
+          countryTitle(name) +
           `<div class="gm-chips">${badge(name, '#8a7a55')}${badge(continentName[cont] || '', continentColor[cont])}</div>` +
           row('属于', continentName[cont] || '') +
+          countryDetails(name) +
           (neighbor ? `<p class="gm-neighbor-country-feature"><b>一句特色：</b>${esc(neighbor.note)}</p><p class="gm-card-text">与中国${neighbor.rel === 'land' ? '陆上接壤' : '隔海相望'}。</p>` : continentHint[cont] ? `<p class="gm-card-text">${esc(continentHint[cont])}</p>` : '') +
           `<p class="gm-card-foot">英文名「${esc(name)}」就是它在世界地图集里的通行写法。</p>`;
       }

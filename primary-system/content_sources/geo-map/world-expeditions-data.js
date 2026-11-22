@@ -695,9 +695,34 @@ window.GM_WORLD_EXPEDITIONS = {
         -1.29
       ],
       "zone": "Africa/Nairobi"
+    },
+    {
+      "id": "kathmandu",
+      "name": "加德满都",
+      "point": [85.32, 27.71],
+      "zone": "Asia/Kathmandu"
     }
   ],
   "timeNote": "这里比较所选日期的法定区时，自动计入各地夏令时；同一国家也可能有多个时区。法定时间与经度估算的太阳时不同，昼夜光照仍是简化示意。",
+  "timePractice": {
+    "offsets": {
+      "beijing": 480,
+      "new-york": -300,
+      "london": 0,
+      "tokyo": 540,
+      "delhi": 330,
+      "kathmandu": 345,
+      "honolulu": -600
+    },
+    "questions": [
+      {"from": "beijing", "to": "new-york", "clock": "08:00"},
+      {"from": "beijing", "to": "delhi", "clock": "06:00"},
+      {"from": "london", "to": "tokyo", "clock": "21:30"},
+      {"from": "delhi", "to": "kathmandu", "clock": "23:50"},
+      {"from": "honolulu", "to": "beijing", "clock": "21:40"},
+      {"from": "kathmandu", "to": "london", "clock": "05:20"}
+    ]
+  },
   "routeNote": "连点城市或球面，把每一段较短的大圆弧距离加起来。结果不含道路绕行、飞行管制或海陆障碍，不是实际交通里程；最多放入 20 个站点。",
   "lifeNote": "点位只表示一个代表分布、栖息或栽培地点，不表示该物种的全部分布范围。照片、正文和观察记录与原动植物地图共用。"
 };

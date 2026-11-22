@@ -54,6 +54,15 @@ assert.ok(
   D.weather.typhoon.points.length >= 5 && D.weather.typhoon.points.every(point),
 );
 assert.ok(text(D.weather.note));
+const {pressure, winds, note, source} = D.circulation;
+assert.deepEqual(pressure.flatMap(band => band.latitudes).sort((a, b) => a - b), [-90, -60, -30, 0, 30, 60, 90]);
+assert.deepEqual(winds.map(band => band.shift.map(Math.sign)), [[-1, -1], [1, 1], [-1, -1]]);
+for (const band of [...pressure, ...winds]) {
+  assert.ok(text(band.name) && text(band.text));
+  assert.match(band.color, /^#[a-f0-9]{6}$/i);
+}
+assert.ok(winds.every(({latitudes: [north, south]}) => north > 0 && north === -south));
+assert.ok(text(note) && /^https:\/\//.test(source.url));
 assert.equal(D.rain.width, 72);
 assert.equal(D.rain.height, 36);
 assert.equal(D.rain.mm.length, 72 * 36);

@@ -50,6 +50,7 @@
     if (id) contentLink.textContent = `查看${$(id).dataset.gwPanel} ↓`;
     const [target, title] = {
       'gw-tools': ['gw-activity-tools', '探索控制'],
+      'gw-time-practice': ['gw-activity-tools', '探索控制'],
       'gw-tour-panel': ['gw-tour-tools', '导览控制'],
       'gw-lab': ['gw-layer-tools', '图层控制'],
     }[id] || ['gw-view-tools', '地球仪工具'];
@@ -179,7 +180,7 @@
     const panel = target.closest('[data-gw-panel]');
     if (panel?.hidden) {
       if (toolEntries[panel.id]) target = $(toolEntries[panel.id]);
-      else if (['gw-quiz', 'gw-records', 'gw-observe', 'gw-map-sources', 'gw-tour-directory'].includes(panel.id)) {
+      else if (['gw-quiz', 'gw-records', 'gw-observe', 'gw-map-sources', 'gw-tour-directory', 'gw-time-practice'].includes(panel.id)) {
         root.dispatchEvent(new CustomEvent('gm-world-free-view'));
         showContent(panel.id);
         target = content;
@@ -617,6 +618,10 @@
     voyages.setActive(mode==='voyage'); life.setActive(mode==='life'); outlines.setActive(mode==='outline');
   }, handlePoint: (mode,point) => mode==='life' ? life.pick(point) : mode==='outline'};
   window.GMWorldExplorers.mountTime({root,setUTC:sunLab.setUTC});
+  window.GMWorldTimePractice.mount(root, city => {
+    focus(city.point, city.name);
+    jumpTo(viewport);
+  });
   root.addEventListener('gm-world-tool-change', ({detail: {mode}}) => {
     for (const group of workspace.querySelectorAll('[data-gw-mode]')) group.hidden = group.dataset.gwMode !== mode;
     if (mode === 'browse') closeContent('gw-tools');

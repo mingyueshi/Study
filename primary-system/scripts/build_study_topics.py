@@ -125,7 +125,7 @@ def atlas_topic_links(page, attrs, content):
     if page == 'voyages':
         attrs += ''' data-globe-url="{% url 'geography-globe' %}"'''
     if page == 'world-3d':
-        attrs += ''' data-life-base="{% url 'geography-life-maps' %}"'''
+        attrs += ''' data-life-base="{% url 'geography-life-maps' %}" data-time-story-url="{% url 'time-story' %}#time-zones"'''
         routes.update({
             '../climate/types.html': 'geography-climate-types',
             '../climate/china.html': 'geography-climate-china',

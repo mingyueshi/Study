@@ -1,6 +1,7 @@
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
+const {convert} = require('../geo-map/time-offsets.js');
 global.window = {};
 for (const f of ['world-data', 'world-expeditions-data', 'world-outlines-data']) require('../geo-map/' + f + '.js');
 require('../history-timeline/timeline-data.js');
@@ -22,6 +23,17 @@ for (const v of D.voyages) {
 }
 assert.ok(D.cities.length >= 10 && new Set(D.cities.map(c => c.id)).size === D.cities.length);
 for (const c of D.cities) { assert.ok(point(c.point) && prose(c.name)); new Intl.DateTimeFormat('zh-CN', {timeZone:c.zone}).format(new Date()); }
+const {questions, offsets} = D.timePractice;
+for (const [id, offset] of Object.entries(offsets)) {
+  assert.ok(D.cities.some(city => city.id === id) && Number.isInteger(offset) && offset >= -720 && offset <= 840);
+}
+const results = questions.map(({from, to, clock}) => {
+  assert.notEqual(from, to);
+  return convert(clock, offsets[from], offsets[to]);
+});
+assert.deepEqual(results.map(result => [result.clock, result.day]), [
+  ['19:00', -1], ['03:30', 0], ['06:30', 1], ['00:05', 1], ['15:40', 1], ['23:35', -1],
+]);
 assert.deepEqual(O.continents.map(c => c.id).sort(), window.GM_CONTINENTS.map(c => c.id).sort());
 for (const c of O.continents) {
   assert.ok(c.rings.length && c.rings.every(r => r.length >= 4 && r.every(point)));

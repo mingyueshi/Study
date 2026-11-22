@@ -147,6 +147,7 @@
   /* ---------- 详情卡 ---------- */
   const badge = (text, color) => `<span class="gm-badge" style="--badge:${esc(color)}">${esc(text)}</span>`;
   const row = (label, value) => `<div class="gm-row"><span class="gm-row-label">${esc(label)}</span><span class="gm-row-value">${esc(value)}</span></div>`;
+  const cultureByCode = new Map(window.GM_PROVINCE_CULTURE.provinces.map(item => [item.adcode, item]));
 
   function openCard(id) {
     const kind = id === 'capital' ? id : id[0];
@@ -155,13 +156,18 @@
       const p = A.get(id);
       if (!p) return;
       const r = REGIONS.find((x) => x.id === p.region) || {};
-      const capLabel = p.type === '自治区' ? '首府' : '省会';
+      const capLabel = p.type === '自治区' ? '首府' : p.type === '省' ? '省会' : '行政区中心';
+      const culture = cultureByCode.get(p.adcode);
+      const [custom] = culture.customs;
       card.innerHTML =
         `<p class="gm-card-eyebrow">省级行政区</p>` +
         `<h2 class="gm-card-title">${esc(p.name)}</h2>` +
-        `<div class="gm-chips">${badge(`简称 ${p.short}`, r.color)}${badge(p.type, '#8a7a55')}${badge(r.name || '', r.color)}</div>` +
+        `<div class="gm-chips">${badge(p.type, '#8a7a55')}${badge(r.name || '', r.color)}</div>` +
+        row('简称', culture.shortNames.join('、')) +
+        row(capLabel, p.capital || p.name) +
+        row('代表特产', culture.specialties.map(item => item.name).join('、')) +
+        `<p class="gm-card-text"><b>一句民俗</b> · ${esc(custom.name)}（${esc(custom.location)}），${esc(custom.detail)}</p>` +
         row('在哪里', p.where) +
-        (p.capital ? row(capLabel, p.capital) : '') +
         `<p class="gm-card-text">${esc(p.note)}</p>` +
         (r.hint ? `<p class="gm-card-foot">${esc(r.name)}：${esc(r.hint)}</p>` : '') +
         `<a class="gm-card-link" href="province.html?adcode=${esc(p.adcode)}">进省域站细看 →</a>` +

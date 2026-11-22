@@ -40,6 +40,7 @@ window.GMWorldLab = (() => {
       "summer",
       "winter",
       "typhoon",
+      "circulation",
       "rain",
       "sky",
     ];
@@ -112,12 +113,17 @@ window.GMWorldLab = (() => {
       );
       if (city) cityInfo(city);
     });
-    $("sources").innerHTML = D.sources
+    $("sources").innerHTML = [...D.sources, D.circulation.source]
       .map(
         (s) =>
           `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.name)}（需联网）↗</a>`,
       )
       .join(" · ");
+    for (const kind of ["pressure", "winds"]) {
+      $("circulation-" + kind).innerHTML = D.circulation[kind].map(({name, color, text}) =>
+        `<li style="--circulation-color:${esc(color)}"><b>${esc(name)}</b><span>${esc(text)}</span></li>`,
+      ).join("");
+    }
     $("rain-legend").innerHTML = [
       ["少于 250", "#ddbd7d"],
       ["250—500", "#e6da78"],
@@ -169,20 +175,14 @@ window.GMWorldLab = (() => {
       $("plates").hidden = mode !== "plates";
       $("rain-legend").hidden = mode !== "rain";
       $("rain-unit").hidden = mode !== "rain";
+      $("circulation").hidden = mode !== "circulation";
       $("note").textContent =
-        mode === "population"
-          ? D.population.note
-          : mode === "plates"
-            ? D.plateNote
-            : mode === "pangaea"
-              ? D.ancientNote
-              : mode === "rain"
-                ? D.rain.note
-                : mode === "sky"
-                  ? D.sky.note
-                  : ["summer", "winter", "typhoon"].includes(mode)
-                    ? D.weather.note
-                    : "选一个图层，带着新问题看地球。";
+        ({
+          population: D.population.note, plates: D.plateNote,
+          pangaea: D.ancientNote, rain: D.rain.note, sky: D.sky.note,
+          summer: D.weather.note, winter: D.weather.note, typhoon: D.weather.note,
+          circulation: D.circulation.note,
+        })[mode] || "选一个图层，带着新问题看地球。";
       $("detail").textContent =
         mode === "rain"
           ? `多年平均时段：${D.rain.period}。`
@@ -293,6 +293,25 @@ window.GMWorldLab = (() => {
             );
           }
         ctx.restore();
+      } else if (mode === "circulation") {
+        ctx.save();
+        for (const {latitudes, color} of D.circulation.pressure) {
+          ctx.fillStyle = color;
+          ctx.globalAlpha = 0.7;
+          for (const latitude of latitudes) {
+            const north = px([0, Math.min(90, latitude + 4)])[1];
+            const south = px([0, Math.max(-90, latitude - 4)])[1];
+            ctx.fillRect(0, north, width, south - north);
+          }
+        }
+        ctx.restore();
+        for (const {latitudes, shift: [east, north], color} of D.circulation.winds) {
+          for (const latitude of latitudes) {
+            for (let longitude = -157.5; longitude < 180; longitude += 45) {
+              arrow(ctx, [[longitude, latitude], [longitude + east, latitude + north * Math.sign(latitude)]], px, color, false);
+            }
+          }
+        }
       } else if (mode === "summer" || mode === "winter")
         for (const a of D.weather.monsoons.filter((a) => a.season === mode))
           arrow(

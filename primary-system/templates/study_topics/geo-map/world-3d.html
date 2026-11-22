@@ -4,14 +4,14 @@
 {% block title %}世界地球仪 · 乐学堂{% endblock %}
 {% block study_assets %}
 <link rel="stylesheet" href="{% static 'study_topics/geo-map/styles.css' %}?v=5b8e2fb415da">
-<link rel="stylesheet" href="{% static 'study_topics/geo-map/world-3d.css' %}?v=52760201ea92">
+<link rel="stylesheet" href="{% static 'study_topics/geo-map/world-3d.css' %}?v=3256640a0347">
 <script src="{% static 'study_topics/geo-map/world-geo.js' %}?v=6d109d202301" defer></script>
 <script src="{% static 'study_topics/geo-map/assets/vendor/three-map.js' %}?v=9aacf1bea884" defer></script>
-<script src="{% static 'study_topics/geo-map/world-3d-pack.js' %}?v=f1fac4cee83a" defer></script>
+<script src="{% static 'study_topics/geo-map/world-3d-pack.js' %}?v=c608d0b03d8e" defer></script>
 {% endblock %}
 {% block study_content %}
 <div class="study-atlas">
-<div class="gm-topic world-3d-topic" data-history-event="{% url 'history-timeline-event' %}" data-atlas-base="{% url 'geography-atlas' %}" data-life-base="{% url 'geography-life-maps' %}">
+<div class="gm-topic world-3d-topic" data-history-event="{% url 'history-timeline-event' %}" data-atlas-base="{% url 'geography-atlas' %}" data-life-base="{% url 'geography-life-maps' %}" data-time-story-url="{% url 'time-story' %}#time-zones">
     <header class="gw-heading">
       <div><h1>世界地球仪</h1><p>转动地球，探索七大洲与四大洋。</p></div>
       <a class="gw-hero-credit" href="{% url 'geography-atlas-gallery' %}?place=wf2">尼罗河三角洲夜景 · NASA ↗</a>
@@ -65,7 +65,7 @@
           <details name="gw-map-tools" class="gw-settings" id="gw-layer-tools">
             <summary>主题图层</summary>
             <div class="gw-settings-body">
-              <div class="gw-lab-controls"><label for="gw-lab-layer">主题图层 <select id="gw-lab-layer"><option value="none">普通地球</option><option value="population">看看哪里人多</option><option value="plates">六大板块分区</option><option value="pangaea">约 2 亿年前的古陆拼图</option><option value="summer">亚洲夏季风</option><option value="winter">亚洲冬季风</option><option value="typhoon">台风转向示意</option><option value="rain">多年平均年降水</option><option value="sky">天球与星座</option></select></label><div class="gw-buttons"><button type="button" id="gw-lab-ancient">对照现在／约 2 亿年前</button></div><button type="button" data-globe-jump="gw-lab" id="gw-lab-info" hidden>查看图层说明</button></div>
+              <div class="gw-lab-controls"><label for="gw-lab-layer">主题图层 <select id="gw-lab-layer"><option value="none">普通地球</option><option value="population">看看哪里人多</option><option value="plates">六大板块分区</option><option value="pangaea">约 2 亿年前的古陆拼图</option><option value="summer">亚洲夏季风</option><option value="winter">亚洲冬季风</option><option value="typhoon">台风转向示意</option><option value="rain">多年平均年降水</option><option value="circulation">气压带与风带（示意）</option><option value="sky">天球与星座</option></select></label><div class="gw-buttons"><button type="button" id="gw-lab-ancient">对照现在／约 2 亿年前</button></div><button type="button" data-globe-jump="gw-lab" id="gw-lab-info" hidden>查看图层说明</button></div>
               <div id="gw-lab-cities" class="gw-buttons" role="group" aria-label="定位人口样本城市" hidden></div>
               <div id="gw-lab-plates" class="gw-buttons" role="group" aria-label="认识板块" hidden></div>
             </div>
@@ -76,6 +76,7 @@
               <div id="gw-tool-modes" class="gw-tool-modes gw-buttons" role="group" aria-label="探索玩法">
                 <button type="button" data-tool="browse" aria-pressed="true">自由看世界</button><button type="button" data-tool="measure" aria-pressed="false">📏 测距与行程</button><button type="button" data-tool="hunt" aria-pressed="false">🧭 经纬度寻宝</button><button type="button" data-tool="daylight" aria-pressed="false">☀️ 昼夜与四季</button><button type="button" data-tool="detective" aria-pressed="false">🔎 地理侦探</button><button type="button" data-tool="voyage" aria-pressed="false">⛵ 航线漫游</button><button type="button" data-tool="life" aria-pressed="false">🌿 动植物</button><button type="button" data-tool="outline" aria-pressed="false">🧩 轮廓侦探</button>
               </div>
+              <button type="button" data-globe-jump="gw-time-practice">时差挑战</button>
               <div class="gw-mode-options" hidden data-gw-mode="measure">
                 <div class="gw-buttons" id="gw-measure-kinds" role="group" aria-label="测距方式"><button type="button" data-measure-kind="pair" aria-pressed="true">两点测距</button><button type="button" data-measure-kind="route" aria-pressed="false">多点行程</button></div>
               </div>
@@ -205,6 +206,7 @@
                 <div class="gw-buttons"><button type="button" id="gw-sun-current">使用当前地点参考点</button><button type="button" id="gw-sun-locate">看观察点</button><button type="button" id="gw-sun-noon">调到当地太阳正午</button></div>
                 <p id="gw-sun-study-text"></p>
                 <section class="gw-zones-time" aria-label="城市时区对比"><h3>北京早上 8 点，其他城市几点？</h3><label>比较日期 <input type="date" id="gw-zone-date" min="2000-01-01" max="2100-12-31"></label><div class="gw-buttons"><button type="button" id="gw-zone-beijing">设为北京早上 8 点</button><button type="button" id="gw-zone-winter">看看冬季</button><button type="button" id="gw-zone-summer">看看夏季</button></div><div id="gw-zone-result" class="gw-zone-times" role="status"></div><p id="gw-zone-note" class="gw-note"></p></section>
+                <a class="gm-card-link" href="#gw-time-practice">挑战自己算时差 →</a>
                 <h3>同一纬度，四个时节的白昼</h3><div id="gw-sun-comparison" class="gw-sun-comparison"></div>
                 <p id="gw-sun-note" class="gw-note"></p>
               </div>
@@ -241,6 +243,28 @@
               </form>
             </section>
           </section>
+          <section id="gw-time-practice" data-gw-panel="时差挑战" class="gw-lab" tabindex="-1" aria-labelledby="gw-time-title" hidden>
+            <h2 id="gw-time-title">时差挑战</h2>
+            <p class="gw-note">按题中给定的固定 UTC 偏移计算。实际出行时，还要按日期查询当地采用的法定时间。</p>
+            <p id="gw-time-count" class="gw-note"></p>
+            <h3 id="gw-time-question" tabindex="-1"></h3>
+            <div class="gw-buttons" role="group" aria-label="在地球仪上定位这两座城市"><button type="button" id="gw-time-origin"></button><button type="button" id="gw-time-destination"></button></div>
+            <form id="gw-time-form" aria-labelledby="gw-time-question">
+              <div class="gw-time-fields">
+                <label>目的地的钟面（24 小时制） <input name="clock" type="time" required></label>
+                <label>相对出发地日期 <select name="day" required><option value="">请选择</option><option value="-1">前一天</option><option value="0">同一天</option><option value="1">后一天</option></select></label>
+              </div>
+              <div class="gw-buttons">
+                <button type="submit" id="gw-time-check">检查答案</button>
+                <button type="button" id="gw-time-hint-toggle" aria-controls="gw-time-hint" aria-expanded="false">提示</button>
+                <button type="button" id="gw-time-solution">看答案</button>
+                <button type="button" id="gw-time-next">下一题</button>
+              </div>
+            </form>
+            <p id="gw-time-hint" class="gw-note" hidden>先减去出发地的 UTC 偏移，再加上目的地的 UTC 偏移。越过午夜时，钟面要拨回 0—23 点，日期也要加减一天。</p>
+            <p id="gw-time-feedback" role="status"></p>
+            <a class="gm-card-link" id="gw-time-story" hidden>时间的故事 · 练习 UTC 换算 →</a>
+          </section>
           <section id="gw-lab" data-gw-panel="图层说明" hidden class="gw-lab gw-learning-section" tabindex="-1" aria-labelledby="gw-lab-heading">
             <h2 id="gw-lab-heading">主题图层</h2>
             <p id="gw-lab-note" class="gw-note"></p><p id="gw-lab-detail" role="status"></p>
@@ -251,6 +275,11 @@
             <a class="gm-card-link" data-lab-modes="pangaea" href="{% url 'geography-earth-plates' %}#earth-explain" hidden>地球内部 · 找大陆移动的证据 →</a>
             <a class="gm-card-link" data-lab-modes="sky" href="{% url 'astronomy-explore' %}?view=au1" hidden>天文探索 · 认识天球与星座 →</a>
             <p id="gw-lab-rain-unit" hidden>颜色表示毫米／年：</p><div id="gw-lab-rain-legend" class="gw-rain-legend" hidden></div>
+            <div id="gw-lab-circulation" class="gw-circulation" hidden>
+              <div><h3>色带表示气压</h3><ul id="gw-lab-circulation-pressure"></ul></div>
+              <div><h3>箭头指向风吹去的方向</h3><ul id="gw-lab-circulation-winds"></ul></div>
+            </div>
+            <a class="gm-card-link" data-lab-modes="circulation" href="{% url 'geography-climate-types' %}#charts-heading" hidden>气象与气候 · 对照不同纬度的气候 →</a>
             <details><summary>图层资料出处</summary><p id="gw-lab-sources" class="gw-note"></p></details>
           </section>
           <section id="gw-records" data-gw-panel="探索记录" hidden tabindex="-1" class="gw-learning-section gw-records" aria-labelledby="gw-records-heading">

@@ -159,7 +159,9 @@ class StudyTopicPageTests(SimpleTestCase):
             self.assertContains(response, f'href="{reverse("solar-terms")}#{slug}"')
         for tool in ('leap', 'zone', 'era'):
             self.assertContains(response, f'id="{tool}-tool"')
-        for asset in ('icons/time-story.svg', 'study_topics/time-story.js', 'study_topics/time-story.css'):
+        self.assertContains(response, f'href="{reverse("geography-globe")}#gw-time-practice"')
+        for asset in ('icons/time-story.svg', 'study_topics/time-story.js', 'study_topics/time-story.css',
+                      'study_topics/geo-map/time-offsets.js'):
             self.assertTrue(finders.find(asset), asset)
             self.assertContains(response, asset)
 
@@ -435,8 +437,11 @@ class StudyTopicPageTests(SimpleTestCase):
 
     def test_globe_links_layers_and_tools_to_existing_topic_sections(self):
         globe = self.client.get(reverse('geography-globe'))
+        self.assertContains(globe, f'data-time-story-url="{reverse("time-story")}#time-zones"')
+        self.assertContains(globe, 'id="gw-time-practice"', count=1)
         for modes, route, anchor in (
             ('rain', 'geography-climate-types', 'charts-heading'),
+            ('circulation', 'geography-climate-types', 'charts-heading'),
             ('summer winter', 'geography-climate-china', 'zone-choices'),
             ('typhoon', 'geography-climate-weather', 'climate-knowledge'),
             ('plates', 'geography-earth-plates', 'plate-lab'),

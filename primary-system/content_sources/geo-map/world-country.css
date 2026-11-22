@@ -1,0 +1,2 @@
+.gm-country-title { display: flex; align-items: center; gap: 12px; }
+.gm-country-flag { flex: none; width: 52px; height: 36px; object-fit: contain; }

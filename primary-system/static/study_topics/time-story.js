@@ -1,5 +1,6 @@
 (() => {
   'use strict';
+  const offsets = typeof window === 'undefined' ? require('./geo-map/time-offsets.js') : window.GMTimeOffsets;
 
   function leapResult(year) {
     if (!Number.isInteger(year) || year < 1 || year > 9999) return '请输入 1 至 9999 之间的整数年份。';
@@ -9,13 +10,9 @@
   }
 
   function zoneResult(clock, origin, destination) {
-    if (!/^([01]\d|2[0-3]):[0-5]\d$/.test(clock)) return '请输入有效的小时和分钟。';
-    const [hours, minutes] = clock.split(':').map(Number);
-    const difference = destination - origin;
-    const total = hours * 60 + minutes + difference;
-    const day = Math.floor(total / 1440);
-    const within = total - day * 1440;
-    const display = [Math.floor(within / 60), within % 60].map(part => String(part).padStart(2, '0')).join(':');
+    const result = offsets.convert(clock, origin, destination);
+    if (!result) return '请输入有效的小时和分钟。';
+    const {difference, day, clock: display} = result;
     const relation = day === 0 ? '同一天' : `${day < 0 ? '提前' : '推后'} ${Math.abs(day)} 天`;
     const shift = difference === 0 ? '两地偏移相同，不用拨钟' : `从出发地钟面${difference < 0 ? '减去' : '加上'} ${Math.floor(Math.abs(difference) / 60)} 小时 ${Math.abs(difference) % 60} 分钟`;
     return `目的地 ${display}（${relation}）。${shift}。`;
