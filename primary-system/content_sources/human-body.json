@@ -2,9 +2,140 @@
   "schema_version": 1,
   "station": {
     "title": "人体奥秘站",
-    "intro": "身体里面，藏着怎样的世界？看血细胞的显微照片，沿食物路线走一圈，再让大脑传个消息。六张身体地图，带你从器官一直看到细胞。",
+    "intro": "身体里面，藏着怎样的世界？换一层看骨骼、肌肉、血管和神经，再从一餐饭、一次跑跳和一晚睡眠，追踪它们怎样一起工作。",
     "prompt": "走快一点，为什么呼吸和心跳常常会一起变快？",
     "answer": "活动时，肌肉更忙，需要更多氧气和养料。肺帮助氧气进入血液，心脏推动血液把氧气和养料送到肌肉。你可以在测脉搏实验里，比较自己活动前后的变化。"
+  },
+  "health": {
+    "title": "健康生活实验台",
+    "intro": "展开一个日常情境，比较两种情况下身体会发生什么，再打开相关课程找证据。",
+    "scenarios": [
+      {
+        "id": "food",
+        "label": "饮食",
+        "question": "午饭只有米饭，和加上豆腐、青菜有什么不同？",
+        "comparisons": [
+          {
+            "title": "米饭",
+            "effect": "米饭里的淀粉经消化后可变成葡萄糖，进入血液后为细胞供能。胰腺会随饭后血糖变化释放胰岛素。"
+          },
+          {
+            "title": "米饭配豆腐和青菜",
+            "effect": "豆腐还提供较多蛋白质，青菜补充纤维和多种微量营养素。小肠吸收了不少可用成分，血液把它们运往身体各处。"
+          }
+        ],
+        "observe": "看一顿熟悉的家常饭，试着找出主食、蛋白质来源和蔬菜各来自哪一样。",
+        "links": [
+          {
+            "lesson": "nutrition",
+            "label": "追踪食物里的营养"
+          },
+          {
+            "lesson": "digestion",
+            "label": "看小肠怎样吸收"
+          },
+          {
+            "lesson": "endocrine",
+            "label": "看饭后胰腺的信号"
+          }
+        ],
+        "sources": [
+          {
+            "label": "NIDDK · 消化和营养吸收",
+            "url": "https://www.niddk.nih.gov/health-information/digestive-diseases/digestive-system-how-it-works"
+          },
+          {
+            "label": "OpenStax · 胰腺和血糖调节",
+            "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/17-9-the-endocrine-pancreas"
+          }
+        ]
+      },
+      {
+        "id": "activity",
+        "label": "运动",
+        "question": "从安静坐着到跑跳，哪些部位会加快工作？",
+        "comparisons": [
+          {
+            "title": "安静坐着",
+            "effect": "心脏继续泵血，肺继续换气。姿势也需要部分肌肉工作，但一般比跑跳时用的能量少。"
+          },
+          {
+            "title": "跑跳和恢复",
+            "effect": "腿部肌肉工作更强，心跳和呼吸通常加快。停下来休息后，它们会逐渐回落。经常做适合自己的跑跳、攀爬等活动，也可以帮助增强骨骼和肌肉。"
+          }
+        ],
+        "observe": "可以记下静坐、轻松活动和休息后这三个时点的手腕脉搏，再比较变化。",
+        "links": [
+          {
+            "lesson": "circulation",
+            "label": "动手记录脉搏",
+            "anchor": "pulse"
+          },
+          {
+            "lesson": "breathing",
+            "label": "看肺怎样换气"
+          },
+          {
+            "lesson": "movement",
+            "label": "看骨骼和肌肉怎样合作"
+          },
+          {
+            "lesson": "skin",
+            "label": "看汗怎样带走热"
+          }
+        ],
+        "sources": [
+          {
+            "label": "CDC · 学生身体活动",
+            "url": "https://www.cdc.gov/physical-activity-education/guidelines/"
+          },
+          {
+            "label": "NHLBI · 心脏怎样工作",
+            "url": "https://www.nhlbi.nih.gov/health/heart"
+          }
+        ]
+      },
+      {
+        "id": "sleep",
+        "label": "睡眠",
+        "question": "作息规律和经常晚睡，第二天可能有什么差别？",
+        "comparisons": [
+          {
+            "title": "规律而充足的睡眠",
+            "effect": "大脑在睡眠中巩固记忆，身体也继续调节生长和免疫等活动。第二天通常比较容易保持清醒。"
+          },
+          {
+            "title": "晚睡后仍要早起",
+            "effect": "留给睡眠的时间缩短，第二天可能更困，集中注意力也更费力。临睡时的强光还可能让困意来得晚一些。"
+          }
+        ],
+        "observe": "记下平常的睡觉、起床时间和次日的清醒感。沿用平常作息来观察。",
+        "links": [
+          {
+            "lesson": "sleep",
+            "label": "读懂睡眠阶段"
+          },
+          {
+            "lesson": "nerves",
+            "label": "跟着神经信号走"
+          },
+          {
+            "lesson": "immunity",
+            "label": "认识身体的防御"
+          }
+        ],
+        "sources": [
+          {
+            "label": "NHLBI · 睡眠为什么重要",
+            "url": "https://www.nhlbi.nih.gov/health/sleep/why-sleep-important"
+          },
+          {
+            "label": "NHLBI · 睡眠和生物钟",
+            "url": "https://www.nhlbi.nih.gov/health/sleep/sleep-wake-cycle"
+          }
+        ]
+      }
+    ]
   },
   "lessons": [
     {
@@ -1241,6 +1372,700 @@
           }
         ]
       }
+    },
+    {
+      "slug": "endocrine",
+      "label": "内分泌",
+      "title": "饭后，胰腺发出了什么消息？",
+      "teaser": "跟着胰岛素走一趟，看身体怎样把饭后的血糖拉回合适范围。",
+      "intro": "内分泌细胞把激素释放到血液里。激素随着血液流动，只有能识别这种信号的细胞才会作出相应反应。",
+      "route_title": "追踪饭后的胰岛素信号",
+      "observe": "先找谁发出消息，再找谁接到消息。饭前和饭后，发出的消息一样多吗？",
+      "stops": [
+        {
+          "title": "血液里的葡萄糖增加",
+          "body": "米饭等食物中的淀粉被消化，其中的葡萄糖经小肠吸收进入血液。饭后，血液中的葡萄糖通常会上升。"
+        },
+        {
+          "title": "胰腺释放胰岛素",
+          "body": "胰腺里的胰岛细胞察觉葡萄糖上升，就把更多胰岛素释放到血液里。胰岛素相当于一条「现在有葡萄糖可以使用或储存」的消息。"
+        },
+        {
+          "title": "细胞接收消息",
+          "body": "肌肉等组织的细胞接收信号后，可以摄取更多葡萄糖。肝脏会把部分葡萄糖储存起来。随着血糖回落，胰腺释放的胰岛素也会减少。"
+        }
+      ],
+      "gallery": [
+        {
+          "src": "science/body-media/endocrine-glands.jpg",
+          "title": "内分泌腺的位置",
+          "kind": "解剖示意",
+          "alt": "人体正面图标出脑部的垂体、颈部的甲状腺和腹部的胰腺等",
+          "caption": "能分泌激素的器官和细胞分布在全身。图中的 Pancreas 指胰腺。",
+          "credit": "OpenStax College, Anatomy & Physiology",
+          "source_url": "https://commons.wikimedia.org/wiki/File:1801_The_Endocrine_System.jpg",
+          "clues": [
+            "在颈部找甲状腺，再往下找腹部的胰腺。",
+            "看右上角的放大图，找到位于脑底部的垂体。"
+          ],
+          "license": {
+            "label": "CC BY 3.0",
+            "url": "https://creativecommons.org/licenses/by/3.0/"
+          }
+        }
+      ],
+      "discoveries": [
+        {
+          "title": "谁让血糖升回来？",
+          "body": "两餐之间，胰腺分泌的另一种激素叫胰高血糖素。它可以向肝脏发信号，让肝脏把葡萄糖释放到血液里。"
+        },
+        {
+          "title": "每个细胞都听见吗？",
+          "body": "细胞要有适合的受体才能识别某种激素。好比门锁和钥匙要配得上，消息才能在细胞里引起变化。"
+        },
+        {
+          "title": "胰腺只有一份工作吗？",
+          "body": "胰腺还会经管道把消化液送到小肠。消化液帮助分解食物，血液里的胰岛素则传递调节信号。"
+        }
+      ],
+      "experiment": {
+        "title": "用纸条传一条消息",
+        "materials": "四张纸条，分别写上胰腺、血液、肌肉、肝脏。再准备一张写着「胰岛素」的纸条。",
+        "steps": [
+          "把「胰岛素」纸条放在「胰腺」旁。",
+          "让纸条经过「血液」，依次经过「肌肉」和「肝脏」。",
+          "用自己的话说说这两个地方接到消息后各会做什么。"
+        ],
+        "question": "拿走「血液」这张纸条，路线会断在哪里？",
+        "explanation": "激素随血液从产生它的地方到达别处。这是传信路线的模型，只模拟信息怎样到达。"
+      },
+      "checkup": [
+        {
+          "id": "endocrine-release",
+          "prompt": "饭后，哪一个器官会释放更多胰岛素？",
+          "options": [
+            "肺",
+            "胰腺",
+            "膀胱"
+          ],
+          "answer": 1,
+          "explanation": "胰腺中的胰岛细胞会根据血糖变化释放胰岛素。"
+        },
+        {
+          "id": "endocrine-route",
+          "prompt": "胰岛素经什么到达肌肉？",
+          "options": [
+            "血液",
+            "食管",
+            "气管"
+          ],
+          "answer": 0,
+          "explanation": "内分泌信号随血液运送。"
+        },
+        {
+          "id": "endocrine-target",
+          "prompt": "哪一种细胞能识别一种特定激素？",
+          "options": [
+            "离胃最近的细胞",
+            "体积最大的细胞",
+            "具有相应受体的细胞"
+          ],
+          "answer": 2,
+          "explanation": "受体可以识别与它匹配的激素。"
+        }
+      ],
+      "quiz": {
+        "question": "为什么大部分葡萄糖被吸收后，血糖还能慢慢回落？",
+        "answer": "胰岛素帮助肌肉等组织摄取葡萄糖，并帮助肝脏储存一部分葡萄糖。"
+      },
+      "takeaway": "内分泌系统把激素送进血液，让不同地方的细胞协调工作。",
+      "sources": [
+        {
+          "label": "OpenStax · 内分泌系统",
+          "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/17-1-an-overview-of-the-endocrine-system"
+        },
+        {
+          "label": "OpenStax · 胰腺和血糖调节",
+          "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/17-9-the-endocrine-pancreas"
+        }
+      ]
+    },
+    {
+      "slug": "urinary",
+      "label": "泌尿",
+      "title": "尿液从哪里来？",
+      "teaser": "跟一小滴液体走过肾脏，看看身体怎样滤出废物、留住有用的水。",
+      "intro": "两颗肾脏在背部靠近下方肋骨的位置，分布在脊柱两旁。血液不断流经肾脏，肾脏借此调节体内的水分和盐分。",
+      "route_title": "从血液滤出液体，再送到膀胱",
+      "observe": "一边看图一边追踪两条路。哪些东西回了血液？剩下的液体往哪里走？",
+      "stops": [
+        {
+          "title": "肾小球先过滤",
+          "body": "血液流过肾脏中叫作肾小球的微小血管团。部分水和小分子能透过过滤屏障，血细胞和大部分蛋白质留在血液里。"
+        },
+        {
+          "title": "肾小管收回有用物质",
+          "body": "滤出的液体流过肾小管。大部分水和身体需要的物质回到血液里，肾小管也会把一些废物送进管内。"
+        },
+        {
+          "title": "尿液流到膀胱",
+          "body": "剩余的水和废物组成尿液，从肾脏沿输尿管流到膀胱。膀胱暂时储存尿液，排尿时尿液经尿道离开身体。"
+        }
+      ],
+      "gallery": [
+        {
+          "src": "science/body-media/kidney-filter.jpg",
+          "title": "放大看的肾脏过滤过程",
+          "kind": "解剖示意",
+          "alt": "放大的肾单位，标出血液进入和离开过滤区域的方向",
+          "caption": "图放大了肾脏里一个小小的过滤单位。上方的两个青色箭头分别标出血液进入和离开的方向。",
+          "credit": "National Institute of Diabetes and Digestive and Kidney Diseases, National Institutes of Health",
+          "source_url": "https://www.niddk.nih.gov/news/media-library/18287",
+          "clues": [
+            "从右边的箭头出发，找到血液流进去的小血管团，再找左上方血液离开的箭头。",
+            "找出图中 U 形的肾小管。被滤出的液体会沿小管流动。"
+          ]
+        }
+      ],
+      "discoveries": [
+        {
+          "title": "肾脏靠一个大筛子工作吗？",
+          "body": "每颗肾脏有许多微小的工作单位，叫肾单位。肾小球和肾小管是其中的两部分。"
+        },
+        {
+          "title": "两条「尿管」一样吗？",
+          "body": "输尿管把尿液从肾脏送到膀胱，尿道把尿液从膀胱送到体外。"
+        },
+        {
+          "title": "喝下的水直接去膀胱吗？",
+          "body": "水被消化道吸收进入血液，在身体各处流动。肾脏会根据身体情况调节尿液排出的水分。"
+        }
+      ],
+      "experiment": {
+        "title": "画两条去向不同的路线",
+        "materials": "纸和两支不同颜色的笔。",
+        "steps": [
+          "在纸上画「血液」「肾小球」「肾小管」「膀胱」四站。",
+          "用一种颜色描出被收回的水返回血液的路线。",
+          "换一种颜色描出剩余液体经输尿管到膀胱的路线。"
+        ],
+        "question": "膀胱在模型里负责哪一站？",
+        "explanation": "膀胱负责储存，尿液在肾脏形成，再由输尿管送到膀胱。"
+      },
+      "checkup": [
+        {
+          "id": "urinary-filter",
+          "prompt": "尿液在哪里形成？",
+          "options": [
+            "胃",
+            "膀胱",
+            "肾脏"
+          ],
+          "answer": 2,
+          "explanation": "肾脏经过过滤、收回有用物质等步骤形成尿液。"
+        },
+        {
+          "id": "urinary-recover",
+          "prompt": "滤出的水大部分去了哪里？",
+          "options": [
+            "回到血液",
+            "立刻排出体外",
+            "流到胃里"
+          ],
+          "answer": 0,
+          "explanation": "肾小管让大部分滤出的水回到血液。"
+        },
+        {
+          "id": "urinary-store",
+          "prompt": "哪条路线正确？",
+          "options": [
+            "膀胱→胃→肾脏",
+            "肾脏→输尿管→膀胱",
+            "肾脏→气管→膀胱"
+          ],
+          "answer": 1,
+          "explanation": "输尿管把肾脏产生的尿液送到膀胱。"
+        }
+      ],
+      "quiz": {
+        "question": "如果肾脏只过滤，身体会少了哪一步？",
+        "answer": "肾小管还要让许多水分和有用物质回到血液里。"
+      },
+      "takeaway": "肾脏会过滤，也会收回，借此维持体内的水盐平衡。",
+      "sources": [
+        {
+          "label": "NIDDK · 肾脏怎样工作",
+          "url": "https://www.niddk.nih.gov/health-information/kidney-disease/kidneys-how-they-work"
+        }
+      ]
+    },
+    {
+      "slug": "immunity",
+      "label": "免疫",
+      "title": "小擦伤旁，谁先赶来？",
+      "teaser": "从皮肤的屏障看到吞噬细胞，再看身体怎样记住遇到过的病原体。",
+      "intro": "皮肤、黏膜、免疫细胞和一些器官一起保护身体。用擦伤作例子，可以按位置和时间追踪其中几种防御。",
+      "route_title": "从皮肤屏障到免疫记忆",
+      "observe": "依次看屏障、白细胞和后来的免疫记忆。三者各在做什么？",
+      "stops": [
+        {
+          "title": "皮肤是第一道屏障",
+          "body": "完整皮肤能挡住许多微生物。皮肤擦破后，这道物理屏障有了缺口，微生物有可能进入下面的组织。"
+        },
+        {
+          "title": "先天免疫快速应对",
+          "body": "受伤处的细胞发出信号，一些白细胞会赶来。有些白细胞能包裹并消化微生物，这叫吞噬。"
+        },
+        {
+          "title": "适应性免疫可以留下记忆",
+          "body": "某些免疫细胞识别到病原体的特征后，可以发起有针对性的反应，例如产生抗体。有些细胞会留下来，帮助下次遇到相同特征时更快反应。"
+        }
+      ],
+      "gallery": [
+        {
+          "src": "science/body-media/immune-phagocytosis.png",
+          "title": "细胞怎样吞下一颗粒",
+          "kind": "细胞示意",
+          "alt": "细胞边缘伸出两侧，把外部颗粒包裹起来，最终形成位于细胞内的小泡",
+          "caption": "图中红色结构是被包裹的颗粒，黄色部分是细胞膜。吞噬细胞可以用类似方式摄入并分解某些微生物。",
+          "credit": "OpenStax, Anatomy & Physiology（缩放）",
+          "source_url": "https://commons.wikimedia.org/wiki/File:0309_Phagocytosis.png",
+          "clues": [
+            "观察细胞边缘先从哪里向外伸。",
+            "从上往下看，找出红色颗粒被黄色细胞膜完整包住的那一步。"
+          ],
+          "license": {
+            "label": "CC BY 3.0",
+            "url": "https://creativecommons.org/licenses/by/3.0/"
+          }
+        }
+      ],
+      "discoveries": [
+        {
+          "title": "为什么有时会红、热、肿？",
+          "body": "受伤后，局部血管和周围组织会发生变化，血流增加，一些液体进入组织。这些是炎症反应的一部分。"
+        },
+        {
+          "title": "淋巴结在做什么？",
+          "body": "淋巴结遍布身体各处。组织里的液体汇入淋巴管后，会经过淋巴结，为免疫细胞遇到并识别外来线索提供机会。"
+        },
+        {
+          "title": "抗体是什么？",
+          "body": "抗体是能与特定目标结合的蛋白质。它们有时能挡住目标的作用，或者帮助其他免疫成分找到目标。"
+        }
+      ],
+      "experiment": {
+        "title": "给防御任务配卡片",
+        "materials": "六张小纸片和一支笔。",
+        "steps": [
+          "在三张纸片上写皮肤、吞噬细胞、记忆细胞。",
+          "在另三张写阻挡进入、包住颗粒、下次更快识别，把角色与工作配对。",
+          "打乱后请同伴配对，并解释为什么先画皮肤。"
+        ],
+        "question": "三个角色可以互相代替吗？",
+        "explanation": "它们处理的问题不同。屏障在体表，吞噬能清理一部分进入组织的微生物，记忆细胞帮助下次更快识别。"
+      },
+      "checkup": [
+        {
+          "id": "immunity-barrier",
+          "prompt": "哪一项能在身体表面挡住许多微生物？",
+          "options": [
+            "完整皮肤",
+            "膀胱",
+            "肋骨"
+          ],
+          "answer": 0,
+          "explanation": "完整皮肤构成重要的物理屏障。"
+        },
+        {
+          "id": "immunity-engulf",
+          "prompt": "图里的吞噬细胞正在做什么？",
+          "options": [
+            "储存尿液",
+            "推动血液",
+            "把颗粒包进细胞"
+          ],
+          "answer": 2,
+          "explanation": "吞噬细胞可以把目标包进细胞内并进行分解。"
+        },
+        {
+          "id": "immunity-memory",
+          "prompt": "免疫记忆对下一次遇到相同目标有什么帮助？",
+          "options": [
+            "让皮肤立刻变厚",
+            "能够更快作出针对性反应",
+            "把所有细菌都挡在空气里"
+          ],
+          "answer": 1,
+          "explanation": "免疫记忆能支持更快的针对性反应。"
+        }
+      ],
+      "quiz": {
+        "question": "为什么说身体防御有好几道？",
+        "answer": "皮肤先阻挡。进入组织后，先天免疫和适应性免疫还有不同工作。"
+      },
+      "takeaway": "屏障、快速应对和免疫记忆可以在不同阶段帮助身体。",
+      "sources": [
+        {
+          "label": "OpenStax · 屏障和先天免疫",
+          "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/21-2-barrier-defenses-and-the-innate-immune-response"
+        },
+        {
+          "label": "OpenStax · B 细胞与抗体",
+          "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/21-4-the-adaptive-immune-response-b-lymphocytes-and-antibodies"
+        }
+      ]
+    },
+    {
+      "slug": "skin",
+      "label": "皮肤",
+      "title": "跑完步，汗怎样带走热？",
+      "teaser": "放大看皮肤里的汗腺和血管，追踪汗从产生到蒸发的过程。",
+      "intro": "皮肤由表皮和真皮组成，下面还有皮下组织。它能保护身体、感受冷热，也能参加体温调节。",
+      "route_title": "跟着汗滴走到皮肤表面",
+      "observe": "先找汗腺藏在哪一层，再找连到皮肤表面的细管。汗水到了表面之后还发生了什么？",
+      "stops": [
+        {
+          "title": "运动让身体变热",
+          "body": "跑步时，肌肉工作会产生更多热。神经系统根据收到的温度信号，协调身体散热。"
+        },
+        {
+          "title": "汗腺把汗送到表面",
+          "body": "许多汗腺的盘绕部分位于真皮深处，汗沿细管到达皮肤表面。皮肤里的血管也能扩张，让更多热量随血液来到表面附近。"
+        },
+        {
+          "title": "汗液蒸发带走热",
+          "body": "汗水中的水由液体变为水蒸气，需要吸收热量。它从皮肤带走一部分热，让身体更容易降温。"
+        }
+      ],
+      "gallery": [
+        {
+          "src": "science/body-media/skin-structure.jpg",
+          "title": "皮肤的横切面",
+          "kind": "解剖示意",
+          "alt": "表皮在上方，真皮中有毛囊、盘绕的汗腺和红蓝血管",
+          "caption": "像切蛋糕一样从侧面看皮肤。图中 Eccrine sweat gland 指小汗腺。",
+          "credit": "OpenStax College, Anatomy & Physiology（缩放）",
+          "source_url": "https://commons.wikimedia.org/wiki/File:501_Structure_of_the_skin.jpg",
+          "clues": [
+            "找表皮下盘起来的汗腺，沿细管找到皮肤表面的开口。",
+            "找真皮中的红蓝血管，再看最外面的表皮有没有画血管。"
+          ],
+          "license": {
+            "label": "CC BY 3.0",
+            "url": "https://creativecommons.org/licenses/by/3.0/"
+          }
+        }
+      ],
+      "discoveries": [
+        {
+          "title": "汗滴下去时也带走同样多的热吗？",
+          "body": "汗的主要冷却作用来自蒸发。有些汗直接滴下去，没有在皮肤上蒸发。"
+        },
+        {
+          "title": "闷热天气为什么更难散热？",
+          "body": "空气已经很潮湿时，汗水比较难蒸发，散热也会变慢。"
+        },
+        {
+          "title": "皮肤怎么知道风吹过来了？",
+          "body": "皮肤的感觉神经末梢可以感到触碰和温度变化，并把消息传给神经系统。"
+        }
+      ],
+      "experiment": {
+        "title": "比较湿纸巾晾干的快慢",
+        "materials": "两张相同的纸巾、两只盘子、少量清水。",
+        "steps": [
+          "滴同样多的水在两张纸巾上，各放一只盘子。",
+          "放在同一房间，一张平铺，另一张叠起来。",
+          "等几分钟，观察哪张剩下的湿痕更明显。"
+        ],
+        "question": "哪张让更多湿的纸面接触空气？",
+        "explanation": "平铺通常让更多湿表面与空气接触，水更容易蒸发。纸巾用来比较蒸发条件。"
+      },
+      "checkup": [
+        {
+          "id": "skin-gland",
+          "prompt": "许多汗腺盘绕的部分主要藏在哪里？",
+          "options": [
+            "最外面的表皮",
+            "真皮深处",
+            "指甲表面"
+          ],
+          "answer": 1,
+          "explanation": "许多汗腺的盘绕部分位于较深的真皮。"
+        },
+        {
+          "id": "skin-cool",
+          "prompt": "什么变化能从皮肤带走热量？",
+          "options": [
+            "汗水蒸发",
+            "汗水进入头发",
+            "汗水的颜色变化"
+          ],
+          "answer": 0,
+          "explanation": "水变成水蒸气时需要吸收热量。"
+        },
+        {
+          "id": "skin-humidity",
+          "prompt": "其他条件相近时，哪种空气通常会让汗更难蒸发？",
+          "options": [
+            "较干燥的空气",
+            "较潮湿的空气",
+            "两种一定一样"
+          ],
+          "answer": 1,
+          "explanation": "较潮湿的空气中已含较多水汽，汗水比较难蒸发。"
+        }
+      ],
+      "quiz": {
+        "question": "汗到了皮肤表面，怎样继续帮助身体散热？",
+        "answer": "汗水蒸发时会从皮肤吸收热量。"
+      },
+      "takeaway": "汗腺、皮肤血管和神经系统一起帮身体散热。",
+      "sources": [
+        {
+          "label": "OpenStax · 皮肤的层次",
+          "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/5-1-layers-of-the-skin"
+        },
+        {
+          "label": "OpenStax · 皮肤的功能",
+          "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/5-3-functions-of-the-integumentary-system"
+        }
+      ]
+    },
+    {
+      "slug": "nutrition",
+      "label": "食物与营养",
+      "title": "午饭里的营养去了哪儿？",
+      "teaser": "从米饭、豆腐和青菜出发，追踪能量和身体材料怎样送到细胞。",
+      "intro": "不同食物通常含有多种营养素，一餐搭配多样食物有助于获得不同的营养。我们用米饭、豆腐和青菜举例。",
+      "route_title": "追踪一餐饭里的三种线索",
+      "observe": "看每种食物中一种有代表性的成分，想一想它经过消化后，会怎样被身体利用。",
+      "stops": [
+        {
+          "title": "米饭里的淀粉给细胞供能",
+          "body": "消化系统把淀粉分解为小分子，最后生成的葡萄糖可被小肠吸收到血液里。许多细胞利用葡萄糖获得能量。"
+        },
+        {
+          "title": "豆腐里的蛋白质提供材料",
+          "body": "蛋白质被分解成氨基酸等小分子。小肠吸收后，它们可用来制造身体自己的蛋白质，支持生长和组织修复。"
+        },
+        {
+          "title": "青菜带来纤维和多种营养",
+          "body": "蔬菜提供多种维生素、矿物质和膳食纤维。我们自己的消化酶难以分解大部分膳食纤维，一些纤维可以被大肠里的微生物利用。"
+        }
+      ],
+      "gallery": [
+        {
+          "src": "science/body-media/food-protein.jpg",
+          "title": "蛋白质来自哪些食物？",
+          "kind": "食物图鉴",
+          "alt": "图中有一碗杂豆、鱼、牛奶、奶酪、鸡腿等食物",
+          "caption": "不同种类的食物都能提供蛋白质，图里既有植物来源，也有动物来源。",
+          "credit": "National Institute of Diabetes and Digestive and Kidney Diseases, National Institutes of Health",
+          "source_url": "https://www.niddk.nih.gov/news/media-library/12581",
+          "clues": [
+            "在图里找一种植物来源和两种动物来源。",
+            "想想你家常吃的豆腐和图中的哪一种食物有关系。"
+          ]
+        }
+      ],
+      "discoveries": [
+        {
+          "title": "脂肪能做什么？",
+          "body": "脂肪能提供能量，也是细胞结构的一部分。食物中的脂肪还帮助我们吸收某些维生素。"
+        },
+        {
+          "title": "水也重要吗？",
+          "body": "身体许多反应都在含水的环境里进行。血液运输养分、汗液散热等过程也需要水。"
+        },
+        {
+          "title": "血液把什么送到全身？",
+          "body": "从小肠进入血液的葡萄糖、氨基酸等会经过肝脏处理，再随血液送到需要它们的地方。"
+        }
+      ],
+      "experiment": {
+        "title": "给一顿饭画食物路线",
+        "materials": "纸、笔和一份自己熟悉的午餐菜单。",
+        "steps": [
+          "从菜单中挑三种食物，画在纸上。",
+          "给每种食物写下一项它能提供的营养，允许不同食物写到同一项。",
+          "试着替换其中一种食物，说明替换后还能从哪儿获得原来的营养。"
+        ],
+        "question": "为什么不能把一种食物只配一种营养？",
+        "explanation": "一种食物通常含多种成分。食物类别只是帮助我们发现主要营养来源。"
+      },
+      "checkup": [
+        {
+          "id": "nutrition-starch",
+          "prompt": "淀粉消化后，哪一种小分子能进入血液供细胞使用？",
+          "options": [
+            "氧气",
+            "葡萄糖",
+            "食物纤维"
+          ],
+          "answer": 1,
+          "explanation": "淀粉被分解后可形成葡萄糖，经小肠吸收到血液中。"
+        },
+        {
+          "id": "nutrition-build",
+          "prompt": "身体可以用什么来制造自己的蛋白质？",
+          "options": [
+            "氨基酸",
+            "二氧化碳",
+            "汗液"
+          ],
+          "answer": 0,
+          "explanation": "食物蛋白质分解后的氨基酸是合成蛋白质的材料。"
+        },
+        {
+          "id": "nutrition-variety",
+          "prompt": "一顿饭搭配多种食物有什么好处？",
+          "options": [
+            "让消化道停止工作",
+            "让每种食物只含一种成分",
+            "有助于获得不同营养"
+          ],
+          "answer": 2,
+          "explanation": "各类食物提供的营养有差异，搭配有助于获得更多种类的营养。"
+        }
+      ],
+      "quiz": {
+        "question": "小肠吸收营养后，哪里负责把其中很多营养送远？",
+        "answer": "循环系统用血液把可吸收的营养运输到不同器官。"
+      },
+      "takeaway": "食物经过消化和吸收，为细胞提供能量与生长材料。",
+      "sources": [
+        {
+          "label": "NIDDK · 消化和营养吸收",
+          "url": "https://www.niddk.nih.gov/health-information/digestive-diseases/digestive-system-how-it-works"
+        },
+        {
+          "label": "CDC · 儿童与青少年的健康日常",
+          "url": "https://www.cdc.gov/healthy-weight-growth/tips-parents-caregivers/"
+        }
+      ]
+    },
+    {
+      "slug": "sleep",
+      "label": "睡眠与生物钟",
+      "title": "睡着后，大脑还在忙什么？",
+      "teaser": "跟着一晚睡眠循环，看看光线、深睡和第二天的注意力有什么关系。",
+      "intro": "生物钟受白天和夜晚的光线等线索影响。入睡后，大脑和其他器官依然工作，并在不同睡眠阶段之间切换。",
+      "route_title": "沿着一晚的睡眠看三站",
+      "observe": "先看入睡以前，再找深睡和快速眼动睡眠。到后半夜还会出现快速眼动睡眠吗？",
+      "stops": [
+        {
+          "title": "天暗了，身体准备睡觉",
+          "body": "大脑里的生物钟跟着日夜光线校准。通常在夜晚，褪黑素的分泌会增加，帮助身体准备入睡。"
+        },
+        {
+          "title": "入睡后先经历非快速眼动睡眠",
+          "body": "睡眠开始时通常先进入较浅的阶段，有时再进入较深的阶段。深睡往往在前半夜出现得更多。"
+        },
+        {
+          "title": "整夜多次切换睡眠阶段",
+          "body": "快速眼动睡眠时，大脑仍然活跃，眼球会快速转动。非快速眼动睡眠和快速眼动睡眠在一晚会交替多次。"
+        }
+      ],
+      "gallery": [
+        {
+          "src": "science/body-media/sleep-stages.png",
+          "title": "一晚的睡眠阶段图",
+          "kind": "阶段图表",
+          "alt": "横轴是夜间时间，曲线随时间在清醒、快速眼动睡眠和非快速眼动睡眠各阶段切换",
+          "caption": "从图上可以看出睡眠阶段会回到较浅的阶段，再继续切换。图中的 REM 指快速眼动睡眠，N3 指非快速眼动深睡阶段。",
+          "credit": "RazerM、The RedBurn 等（原图渲染为 PNG）",
+          "source_url": "https://commons.wikimedia.org/wiki/File:Sleep_Hypnogram.svg",
+          "clues": [
+            "顺着横轴找一找，哪段时间更早到达 N3？",
+            "看看 REM 在同一晚出现了几次。这里只示范一种可能的夜间变化。"
+          ],
+          "license": {
+            "label": "CC BY-SA 3.0",
+            "url": "https://creativecommons.org/licenses/by-sa/3.0/"
+          }
+        }
+      ],
+      "discoveries": [
+        {
+          "title": "为什么睡够后更容易专心？",
+          "body": "睡眠支持大脑学习和形成长期记忆。睡眠不足时，有时会更难集中注意力或清楚地思考。"
+        },
+        {
+          "title": "生物钟能感觉到灯光吗？",
+          "body": "眼睛接收到的光会影响大脑里的生物钟。临近睡觉时的强光可能推迟困意。"
+        },
+        {
+          "title": "睡眠和免疫有关吗？",
+          "body": "一些免疫过程随日夜和睡眠状态变化。充足的睡眠支持免疫系统的正常工作。"
+        }
+      ],
+      "experiment": {
+        "title": "记三天平常的作息",
+        "materials": "纸和笔，沿用平常的作息。",
+        "steps": [
+          "连续三天写下大致睡觉和起床时间。",
+          "起床后给自己的清醒感画一颗星、两颗星或三颗星。",
+          "把清醒感和作息放在一起比较，想想当天的活动、心情等还有没有影响。"
+        ],
+        "question": "三天的记录能证明睡眠是唯一原因吗？",
+        "explanation": "这份记录能帮助你发现线索。当天的活动、心情等也可能影响清醒感，需要更多观察才能判断原因。"
+      },
+      "checkup": [
+        {
+          "id": "sleep-light",
+          "prompt": "什么是大脑生物钟判断日夜的一条线索？",
+          "options": [
+            "衣服颜色",
+            "书包重量",
+            "光线明暗"
+          ],
+          "answer": 2,
+          "explanation": "光线是让生物钟与日夜对齐的一种线索。"
+        },
+        {
+          "id": "sleep-cycle",
+          "prompt": "一晚的睡眠阶段一般怎样变化？",
+          "options": [
+            "不同阶段会多次切换",
+            "从头到尾都完全一样",
+            "只在起床后才切换"
+          ],
+          "answer": 0,
+          "explanation": "一晚通常会多次在非快速眼动和快速眼动等阶段之间切换。"
+        },
+        {
+          "id": "sleep-memory",
+          "prompt": "充足睡眠可以支持大脑做什么？",
+          "options": [
+            "在睡着时看书",
+            "巩固学习和记忆",
+            "让脑细胞整夜停止工作"
+          ],
+          "answer": 1,
+          "explanation": "睡眠支持学习和长期记忆，大脑在睡着时仍会工作。"
+        }
+      ],
+      "quiz": {
+        "question": "为什么第二天能记住昨天学过的东西，也和睡觉有关？",
+        "answer": "睡眠能帮助大脑整理和巩固记忆。"
+      },
+      "takeaway": "睡着时，身体按自己的节律工作，支持注意力、记忆和免疫。",
+      "sources": [
+        {
+          "label": "NHLBI · 睡眠和生物钟",
+          "url": "https://www.nhlbi.nih.gov/health/sleep/sleep-wake-cycle"
+        },
+        {
+          "label": "NHLBI · 睡眠阶段",
+          "url": "https://www.nhlbi.nih.gov/health/sleep/stages-of-sleep"
+        },
+        {
+          "label": "NHLBI · 睡眠为什么重要",
+          "url": "https://www.nhlbi.nih.gov/health/sleep/why-sleep-important"
+        }
+      ]
     }
   ],
   "heart": {
@@ -1306,7 +2131,108 @@
   },
   "expedition": {
     "title": "点开身体里的小伙伴",
-    "intro": "先点人体图上的器官，看看它在哪里、有什么本领。再选一个生活场景，看身体怎样合作，最后挑战找器官！",
+    "layers": [
+      {
+        "id": "organs",
+        "label": "器官总览",
+        "description": "点彩色器官或数字标签，查看器官的位置和工作。"
+      },
+      {
+        "id": "skeleton",
+        "label": "骨骼",
+        "description": "骨骼从内部支撑身体，也保护大脑、心脏和肺。",
+        "prompt": "比较胸部一圈圈的肋骨和腿上的长骨，它们的形状各适合怎样的工作？",
+        "lesson": "movement",
+        "features": [
+          {
+            "name": "颅骨",
+            "description": "包围大脑。"
+          },
+          {
+            "name": "肋骨和胸骨",
+            "description": "形成胸廓，保护心脏和肺。"
+          },
+          {
+            "name": "脊柱与四肢骨",
+            "description": "脊柱支撑躯干，四肢的骨在关节处相接。"
+          }
+        ]
+      },
+      {
+        "id": "muscles",
+        "label": "肌肉",
+        "description": "图中标出一些从正面容易看到的骨骼肌。骨骼肌收缩时拉动骨骼。",
+        "prompt": "从骨骼切到肌肉，比较大腿上骨头和肌肉的位置。",
+        "lesson": "movement",
+        "features": [
+          {
+            "name": "肩和胸",
+            "description": "肩部和胸前的肌肉帮助移动手臂。"
+          },
+          {
+            "name": "腹肌",
+            "description": "帮助稳定躯干，也参与弯腰等动作。"
+          },
+          {
+            "name": "大腿前侧",
+            "description": "股四头肌收缩，帮助把膝盖伸直。"
+          }
+        ]
+      },
+      {
+        "id": "vessels",
+        "label": "血管",
+        "description": "心脏把血液送出去，血液也循着另一条路回到心脏。",
+        "prompt": "沿红线找到一只手，再沿蓝线找回心脏的方向。图上省略了许多小分支。",
+        "lesson": "circulation",
+        "features": [
+          {
+            "name": "红色线：动脉",
+            "description": "图中红线表示把血液从心脏送往全身的体循环动脉。"
+          },
+          {
+            "name": "蓝色线：静脉",
+            "description": "图中蓝线表示把血液从全身送回心脏的体循环静脉。实际血液不会呈蓝色。"
+          },
+          {
+            "name": "细网：毛细血管",
+            "description": "在组织中，毛细血管连接小动脉与小静脉，帮助交换氧气和养分。"
+          }
+        ]
+      },
+      {
+        "id": "nerves",
+        "label": "神经",
+        "description": "大脑、脊髓和分布在全身的神经一起传递消息。图把较深的脊髓投影到正面。",
+        "prompt": "从手指沿着神经找向脊髓的路线，想想手摸到物体时消息怎样传回来。",
+        "lesson": "nerves",
+        "features": [
+          {
+            "name": "大脑",
+            "description": "接收和处理许多感觉消息，也参与发出运动指令。"
+          },
+          {
+            "name": "脊髓",
+            "description": "位于脊柱内，传递消息并参与一些反射。"
+          },
+          {
+            "name": "周围神经",
+            "description": "连到手、脚及其他部位，传送感觉和运动等消息。"
+          }
+        ]
+      }
+    ],
+    "layer_sources": [
+      {
+        "label": "OpenStax · 人体系统总览",
+        "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-2-structural-organization-of-the-human-body"
+      },
+      {
+        "label": "OpenStax · 骨骼的功能",
+        "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/6-1-the-functions-of-the-skeletal-system"
+      }
+    ],
+    "intro": "切换图层，比较骨骼、肌肉、血管和神经的位置。也可以点器官看档案、看身体合作，再试试定位挑战。",
     "caption": "这是简化的位置示意，大小不按真实比例。步骤把合作过程拆开看，身体里的许多工作其实在同时进行。",
     "organs": [
       {

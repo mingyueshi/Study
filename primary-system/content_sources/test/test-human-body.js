@@ -2,7 +2,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 
-const { schema_version, station, lessons, heart, pulse, reaction, blindspot, expedition, growth, notebook } = require('../human-body.json');
+const { schema_version, station, lessons, heart, pulse, reaction, blindspot, expedition, growth, notebook, health } = require('../human-body.json');
 const art = fs.readFileSync(path.join(__dirname, '../../static/science/body-atlas.svg'), 'utf8');
 
 function text(value) {
@@ -23,18 +23,7 @@ function sources(items) {
   }
 }
 
-assert.equal(schema_version, 1);
-texts(station, ['title', 'intro', 'prompt', 'answer']);
-assert.deepEqual(lessons.map(lesson => lesson.slug), ['breathing', 'digestion', 'circulation', 'movement', 'nerves', 'senses']);
-for (const id of ['atlas', ...lessons.map(lesson => lesson.slug)]) {
-  assert.ok(art.includes(`<symbol id="${id}"`), `缺少本地图示 ${id}`);
-}
-for (const lesson of lessons) {
-  texts(lesson, ['label', 'title', 'teaser', 'intro', 'observe', 'takeaway']);
-  assert.ok(lesson.stops.length >= 3);
-  for (const stop of lesson.stops) texts(stop, ['title', 'body']);
-  assert.equal(new Set(lesson.stops.map(stop => stop.title)).size, lesson.stops.length);
-  texts(lesson.quiz, ['question', 'answer']);
+function validateAnimation(lesson) {
   const diagram = lesson.diagram;
   texts(diagram, ['title', 'caption']);
   Object.values(diagram.labels).forEach(text);
@@ -76,12 +65,37 @@ for (const lesson of lessons) {
     senses: ['cornea', 'lens', 'retina', 'optic', 'canal', 'drum', 'cochlea', 'nerve', 'nose', 'tongue'],
   };
   requiredLabels[lesson.slug].forEach(label => text(diagram.labels[label]));
-  assert.equal(lesson.gallery.length, 2);
+}
+
+assert.equal(schema_version, 1);
+texts(station, ['title', 'intro', 'prompt', 'answer']);
+const originalSlugs = ['breathing', 'digestion', 'circulation', 'movement', 'nerves', 'senses'];
+const lessonSlugs = lessons.map(lesson => lesson.slug);
+assert.deepEqual(lessonSlugs, [...originalSlugs, 'endocrine', 'urinary', 'immunity', 'skin', 'nutrition', 'sleep']);
+for (const id of ['atlas', ...originalSlugs]) {
+  assert.ok(art.includes(`<symbol id="${id}"`), `缺少本地图示 ${id}`);
+}
+for (const lesson of lessons) {
+  texts(lesson, ['label', 'title', 'teaser', 'intro', 'observe', 'takeaway']);
+  assert.ok(lesson.stops.length >= 3);
+  for (const stop of lesson.stops) texts(stop, ['title', 'body']);
+  assert.equal(new Set(lesson.stops.map(stop => stop.title)).size, lesson.stops.length);
+  texts(lesson.quiz, ['question', 'answer']);
+  if (originalSlugs.includes(lesson.slug)) {
+    validateAnimation(lesson);
+    assert.equal(lesson.gallery.length, 2);
+  } else {
+    text(lesson.route_title);
+    assert.equal(lesson.stops.length, 3);
+    assert.equal(lesson.animation, undefined);
+    assert.equal(lesson.gallery.length, 1);
+  }
   for (const media of lesson.gallery) {
     texts(media, ['title', 'kind', 'alt', 'caption', 'credit']);
     assert.match(media.src, /^science\/body-media\/[a-z-]+\.(?:jpg|png|webp)$/);
     assert.ok(fs.statSync(path.join(__dirname, '../../static', media.src)).size > 1000);
     assert.equal(new URL(media.source_url).protocol, 'https:');
+    if (media.license) sources([media.license]);
     assert.equal(media.clues.length, 2);
     media.clues.forEach(text);
   }
@@ -129,6 +143,19 @@ for (const organ of expedition.organs) {
   texts(organ, ['name', 'description', 'location']);
   assert.ok(lessons.some(lesson => lesson.slug === organ.lesson));
 }
+const layerIds = expedition.layers.map(layer => layer.id);
+assert.deepEqual(layerIds, ['organs', 'skeleton', 'muscles', 'vessels', 'nerves']);
+const atlasLayers = fs.readFileSync(path.join(__dirname, '../../templates/science/body/system-layers.html'), 'utf8');
+assert.deepEqual([...atlasLayers.matchAll(/data-atlas-art="([a-z-]+)"/g)].map(match => match[1]), layerIds.slice(1));
+for (const layer of expedition.layers) {
+  texts(layer, ['label', 'description']);
+  if (layer.id === 'organs') continue;
+  text(layer.prompt);
+  assert.ok(lessonSlugs.includes(layer.lesson));
+  assert.ok(layer.features.length >= 2);
+  layer.features.forEach(feature => texts(feature, ['name', 'description']));
+}
+sources(expedition.layer_sources);
 assert.equal(expedition.scenarios.length, 3);
 assert.equal(new Set(expedition.scenarios.map(scene => scene.id)).size, 3);
 for (const scene of expedition.scenarios) {
@@ -156,4 +183,23 @@ assert.deepEqual(growth.stages.map(stage => stage.id), ['infancy', 'early-childh
 for (const stage of growth.stages) texts(stage, ['label', 'age', 'icon', 'title', 'body']);
 sources(growth.sources);
 
-console.log('人体奥秘站：六课、七个器官档案、五阶段成长时间线、十二幅图像、十八道自测、三种协作场景、七道定位挑战、十种过程演示与实验手册通过结构校验。');
+texts(health, ['title', 'intro']);
+assert.deepEqual(health.scenarios.map(scene => scene.id), ['food', 'activity', 'sleep']);
+for (const scene of health.scenarios) {
+  texts(scene, ['label', 'question', 'observe']);
+  assert.equal(scene.comparisons.length, 2);
+  scene.comparisons.forEach(choice => texts(choice, ['title', 'effect']));
+  assert.equal(new Set(scene.links.map(link => link.lesson)).size, scene.links.length);
+  assert.ok(scene.links.length >= 2);
+  for (const link of scene.links) {
+    text(link.label);
+    assert.ok(lessonSlugs.includes(link.lesson));
+    assert.ok(!link.anchor || (link.lesson === 'circulation' && link.anchor === 'pulse'));
+  }
+  sources(scene.sources);
+}
+
+const mediaPaths = lessons.flatMap(lesson => lesson.gallery.map(media => media.src));
+assert.equal(new Set(mediaPaths).size, mediaPaths.length);
+
+console.log('人体奥秘站：12 课、18 幅本地图像、36 道自测、四种系统图层、三个健康场景及原有探索活动通过结构校验。');

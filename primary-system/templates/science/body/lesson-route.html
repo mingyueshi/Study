@@ -1,0 +1,14 @@
+<section class="body-panel body-lesson-route" id="explore" aria-labelledby="demo-title">
+  <h2 id="demo-title">{{ lesson.route_title }}</h2>
+  <p>{{ lesson.intro }}</p>
+  <ol class="body-route-steps">
+    {% for stop in lesson.stops %}
+    <li>
+      <details name="body-route" {% if forloop.first %}open{% endif %}>
+        <summary><span>{{ forloop.counter }}</span><strong>{{ stop.title }}</strong></summary>
+        <p>{{ stop.body }}</p>
+      </details>
+    </li>
+    {% endfor %}
+  </ol>
+</section>

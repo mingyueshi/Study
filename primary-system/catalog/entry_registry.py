@@ -249,7 +249,7 @@ SPECIAL_ENTRIES = (
      'blurb': '8 个实验主题。动手试试光、声音和磁铁，也学会怎样记录观察结果。'},
     {'route': 'science-body', 'subject': '科学', 'area': 'science', 'icon': 'body', 'color': 'science',
      'name': '人体奥秘站', 'tag': '打开身体地图 →',
-     'blurb': '6 课探索器官与感官。看 12 幅解剖图和显微影像，玩身体互动，做小实验与 18 道挑战。'},
+     'blurb': '12 课探索人体。切换骨骼、肌肉、血管和神经图层，用饮食、运动和睡眠情境认识身体。'},
     {'route': 'human-origins', 'subject': '科学', 'area': 'science', 'icon': 'footprints', 'color': 'science',
      'name': '人类起源', 'tag': '追踪远古脚印 →',
      'blurb': '从火山灰里的脚印出发，读懂人类家谱、远古生活和中国遗址里的线索。'},

@@ -1,5 +1,5 @@
 <section class="body-passport body-panel" id="passport" data-passport hidden aria-labelledby="passport-title">
-  <div><p class="body-kicker">我的探索足迹</p><h2 id="passport-title">把发现收进手册</h2><p data-progress-summary role="status"></p><progress data-progress-meter max="18" value="0" aria-label="课程题目答对进度"></progress></div>
-  <div class="body-passport-stamps">{% for item in lessons %}<a href="{% url 'science-body-lesson' item.slug %}#checkup" data-stamp="{{ item.slug }}"><span aria-hidden="true">0{{ forloop.counter }}</span><strong>{{ item.label }}</strong><small data-stamp-count>0／3</small></a>{% endfor %}</div>
+  <div><p class="body-kicker">我的探索足迹</p><h2 id="passport-title">把发现收进手册</h2><p data-progress-summary role="status"></p><progress data-progress-meter max="{{ question_count }}" value="0" aria-label="课程题目答对进度"></progress></div>
+  <div class="body-passport-stamps">{% for item in lessons %}<a href="{% url 'science-body-lesson' item.slug %}#checkup" data-stamp="{{ item.slug }}"><span aria-hidden="true">{{ forloop.counter|stringformat:"02d" }}</span><strong>{{ item.label }}</strong><small data-stamp-count>0／{{ item.checkup|length }}</small></a>{% endfor %}</div>
   <div class="body-passport-bottom"><p class="body-small" data-progress-storage>答对的题目保存在当前浏览器，同一浏览器的使用者共用这本手册。</p><button type="button" class="body-text-button" data-progress-clear>重置学习足迹</button></div>
 </section>

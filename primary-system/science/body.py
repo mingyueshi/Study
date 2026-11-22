@@ -53,6 +53,10 @@ def detail(request, slug):
                 **content,
                 'lesson': lesson,
                 'process_observation_id': PROCESS_OBSERVATION_IDS.get(slug),
+                'health_connections': [
+                    scene for scene in content['health']['scenarios']
+                    if any(link['lesson'] == slug for link in scene['links'])
+                ],
                 'number': index + 1,
                 'next_lesson': lessons[index + 1] if index + 1 < len(lessons) else None,
             })

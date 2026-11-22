@@ -1,6 +1,5 @@
 /* 身体协作任务站：一本可以点亮的观察手册。 */
 .body-anatomy-panel { padding: clamp(18px, 2.4vw, 40px); border: 1px solid #c6d7b9; border-radius: 24px; background: var(--atlas-white); }
-.body-anatomy-badge { display: grid; place-items: center; width: 78px; height: 78px; margin-bottom: 24px; border-radius: 24px; background: #e3eed3; font-size: 42px; }
 .body-anatomy-prompt { padding: 18px 22px; border-radius: 16px; background: #fff0cb; }
 [data-organ-shape] { pointer-events: all; }
 [data-organ-shape][role="button"] { cursor: pointer; }
@@ -57,6 +56,13 @@
 .body-mission-intro { font-size: 20px; max-width: 48em; }
 .body-mission-modes { margin-bottom: 16px; }
 .body-mission-modes button { padding: 12px 20px; font-size: 19px; border-radius: 40px; }
+.body-atlas-switch { gap: 8px; margin-bottom: 12px; }
+.body-atlas-switch button { padding-inline: 16px; }
+.body-atlas-switch button[aria-pressed="true"] { border-color: #276b57; background: #276b57; color: #fff; }
+.body-anatomy-panel h3:first-child { margin-top: 0; }
+.body-layer-features { margin: 20px 0; }
+.body-layer-features dt { margin-top: 14px; font-size: 18px; font-weight: 750; }
+.body-layer-features dd { margin: 4px 0 0; font-size: 17px; }
 .body-mission-workbench { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(20px, 3vw, 60px); padding: clamp(16px, 2.4vw, 44px); border: 1px solid var(--atlas-edge); border-radius: 25px; background: #f4f8eb; align-items: start; }
 .body-mission-map { margin: 0; min-width: 0; width: 100%; max-width: 690px; justify-self: center; }
 .body-map-canvas { position: relative; width: 100%; }
@@ -131,6 +137,49 @@
 .body-record-values { display: flex; flex-wrap: wrap; gap: 8px 20px; font-size: 17px; font-weight: 750; }
 .body-record p { font-size: 16px; margin: 8px 0 0; overflow-wrap: anywhere; white-space: pre-wrap; }
 .body-missions button:focus-visible, .body-passport a:focus-visible { outline: 3px solid #9c6829; outline-offset: 4px; }
+.body-endocrine { --lesson-tint: #ece9f6; --lesson-accent: #58497d; }
+.body-urinary { --lesson-tint: #e1eef5; --lesson-accent: #315f75; }
+.body-immunity { --lesson-tint: #ebf0d9; --lesson-accent: #49642e; }
+.body-skin { --lesson-tint: #fbe9dc; --lesson-accent: #8b513c; }
+.body-nutrition { --lesson-tint: #f6eed8; --lesson-accent: #745a21; }
+.body-sleep { --lesson-tint: #eceaf6; --lesson-accent: #4f537c; }
+
+.body-health { background: #f4f8eb; }
+.body-health > p, .body-lesson-route > p { max-width: 54em; font-size: 19px; }
+.body-health-scenarios { display: grid; gap: 10px; margin-top: 20px; }
+.body-health-scenario { border: 1px solid var(--atlas-edge); border-radius: 16px; background: var(--atlas-white); }
+.body-health-scenario > summary { display: flex; align-items: baseline; gap: 14px; padding: 13px 18px; cursor: pointer; font-size: 18px; }
+.body-health-scenario > summary strong { color: var(--lesson-accent); white-space: nowrap; }
+.body-health-content { padding: 0 18px 18px; scroll-margin-top: 70px; }
+.body-health-compare { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.body-health-compare > div { padding: clamp(14px, 1.8vw, 24px); border-radius: 12px; background: #f4f0e5; }
+.body-health-compare > div + div { background: #e7f0e2; }
+.body-health-compare h3 { margin: 0 0 8px; font-size: 21px; }
+.body-health-compare p { margin: 0; font-size: 18px; }
+.body-health-observe { margin: 16px 0 6px; font-size: 17px; }
+.body-health-observe strong { color: var(--lesson-accent); }
+.body-health .body-sources { margin-bottom: 0; }
+
+.body-route-steps { display: grid; gap: 10px; max-width: 58em; margin: 24px 0 0; padding: 0; list-style: none; }
+.body-route-steps details { border: 1px solid var(--atlas-edge); border-radius: 12px; }
+.body-route-steps details[open] { border-color: var(--lesson-accent); background: var(--lesson-tint); }
+.body-route-steps summary { display: flex; align-items: center; gap: 12px; padding: 10px 14px; cursor: pointer; font-size: 19px; }
+.body-route-steps summary span { display: grid; flex: 0 0 32px; height: 32px; place-items: center; border-radius: 50%; background: var(--lesson-tint); color: var(--lesson-accent); font-variant-numeric: tabular-nums; }
+.body-route-steps details[open] summary span { background: var(--lesson-accent); color: #fff; }
+.body-route-steps details > p { margin: 0; padding: 0 14px 14px 58px; font-size: 18px; }
+.body-route-workbench { display: grid; gap: 16px; align-items: start; }
+.body-route-workbench > * { min-width: 0; }
+.body-route-workbench .body-gallery-grid { grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 1260px) {
+  .body-route-workbench { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); }
+}
+@media (max-width: 600px) {
+  .body-atlas-switch button { padding-inline: 10px; font-size: 16px; }
+  .body-health-compare { grid-template-columns: minmax(0, 1fr); }
+  .body-health-scenario > summary { gap: 8px; padding-inline: 12px; }
+  .body-health-content { padding-inline: 12px; }
+  .body-route-steps details > p { padding-inline-start: 14px; }
+}
 @media (min-width: 1800px) { .body-mission-workbench { grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); }.body-mission-task { align-self: center; }.body-mission-map { max-width: 680px; } }
 @media (max-width: 1100px) { .body-passport { grid-template-columns: 1fr; }.body-passport-stamps { grid-template-columns: repeat(3, minmax(0, 1fr)); }.body-scene-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }.body-mission-workbench { gap: 20px; } }
 @media (max-width: 850px) { .body-mission-workbench, .body-notebook-grid { grid-template-columns: minmax(0, 1fr); }.body-mission-map { max-width: 500px; }.body-record-list { grid-template-columns: 1fr; }.body-mission-note { min-height: auto; } }

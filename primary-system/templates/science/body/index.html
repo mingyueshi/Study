@@ -9,9 +9,10 @@
     <p class="body-intro">{{ station.intro }}</p>
     <p class="body-station-stats"><span><strong>{{ lesson_count }}</strong> 张身体地图</span><span><strong>{{ media_count }}</strong> 幅观察图像</span><span><strong>{{ question_count }}</strong> 道课程自测</span><span><strong>{{ expedition.challenges|length }}</strong> 道定位挑战</span></p>
     <div class="body-hero-actions">
-      <a class="body-button body-button-primary" href="#missions">点器官，探索身体 ↓</a>
+      <a class="body-button body-button-primary" href="#missions">打开人体图层 ↓</a>
+      <a class="body-button body-button-light" href="#healthy-life">健康生活实验台</a>
       <a class="body-button body-button-light" href="#growth">看看身体怎么长大</a>
-      <a class="body-button body-button-light" href="#lessons">六课目录</a>
+      <a class="body-button body-button-light" href="#lessons">课程目录</a>
       <a class="body-button body-button-light" href="{% url 'science-body-lesson' 'circulation' %}#heart">看心脏泵血 ↗</a>
     </div>
   </div>
@@ -34,12 +35,13 @@
   </figure>
 </header>
 {% include 'science/body/expedition.html' %}
+{% include 'science/body/healthy-life.html' %}
 {% include 'science/body/growth.html' %}
 {% include 'science/body/passport.html' %}
 <section class="body-section" id="lessons" aria-labelledby="body-lessons-title">
   <div class="body-section-heading">
     <p class="body-kicker">观察路线</p>
-    <h2 id="body-lessons-title">六张身体地图</h2>
+    <h2 id="body-lessons-title">{{ lesson_count }} 张身体地图</h2>
   </div>
   <ol class="body-lesson-grid">
     {% for item in lessons %}
@@ -74,5 +76,5 @@
 </div>
 {% endblock %}
 {% block station_scripts %}
-<script src="{% static 'science/body-lab.js' %}?v=20261117" defer></script>
+<script src="{% static 'science/body-lab.js' %}?v=20261122" defer></script>
 {% endblock %}

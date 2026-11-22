@@ -1,0 +1,28 @@
+<section class="body-section body-panel body-health" id="healthy-life" aria-labelledby="body-health-title">
+  <h2 id="body-health-title">{{ health.title }}</h2>
+  <p>{{ health.intro }}</p>
+  <div class="body-health-scenarios">
+    {% for scene in health.scenarios %}
+    <details class="body-health-scenario" name="body-health" {% if forloop.first %}open{% endif %}>
+      <summary><strong>{{ scene.label }}</strong><span>{{ scene.question }}</span></summary>
+      <div class="body-health-content" id="health-{{ scene.id }}">
+        <div class="body-health-compare">
+          {% for choice in scene.comparisons %}
+            <div><h3>{{ choice.title }}</h3><p>{{ choice.effect }}</p></div>
+          {% endfor %}
+        </div>
+        <p class="body-health-observe"><strong>观察任务</strong> {{ scene.observe }}</p>
+        <nav class="body-section-jumps" aria-label="{{ scene.label }}相关课程">
+          {% for link in scene.links %}
+            <a href="{% url 'science-body-lesson' link.lesson %}{% if link.anchor %}#{{ link.anchor }}{% endif %}">{{ link.label }} ↗</a>
+          {% endfor %}
+        </nav>
+        <details class="body-sources">
+          <summary>资料出处 · 需联网</summary>
+          <ul>{% for source in scene.sources %}<li><a href="{{ source.url }}">{{ source.label }} ↗</a></li>{% endfor %}</ul>
+        </details>
+      </div>
+    </details>
+    {% endfor %}
+  </div>
+</section>

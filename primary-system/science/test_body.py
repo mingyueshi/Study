@@ -4,7 +4,7 @@ from django.urls import reverse
 
 
 class HumanBodyStationTests(SimpleTestCase):
-    def test_index_and_six_lessons_are_public(self):
+    def test_index_and_twelve_lessons_are_public(self):
         index = self.client.get(reverse('science-body'))
         self.assertContains(index, '人体奥秘站')
         lab = reverse('science-lab')
@@ -14,6 +14,9 @@ class HumanBodyStationTests(SimpleTestCase):
             ('breathing', '呼吸'), ('digestion', '消化'),
             ('circulation', '血液循环'), ('movement', '骨骼肌肉'),
             ('nerves', '大脑与神经'), ('senses', '眼耳与感官'),
+            ('endocrine', '内分泌'), ('urinary', '泌尿'),
+            ('immunity', '免疫'), ('skin', '皮肤'),
+            ('nutrition', '食物与营养'), ('sleep', '睡眠与生物钟'),
         ):
             with self.subTest(slug=slug):
                 lesson_url = reverse('science-body-lesson', args=[slug])
@@ -21,11 +24,17 @@ class HumanBodyStationTests(SimpleTestCase):
                 lesson = self.client.get(lesson_url)
                 self.assertContains(lesson, f'{label} · 人体奥秘站')
                 self.assertContains(lesson, '/static/science/body.js?v=8512878a18b7')
-                self.assertContains(lesson, 'role="img"')
-                self.assertContains(lesson, f'data-body-process="{slug}"')
-                self.assertContains(lesson, 'data-process-progress')
-                self.assertContains(lesson, 'data-process-speed')
-                self.assertContains(lesson, 'science/body-process.js')
+                if lesson.context['process_observation_id']:
+                    self.assertContains(lesson, 'role="img"')
+                    self.assertContains(lesson, f'data-body-process="{slug}"')
+                    self.assertContains(lesson, 'data-process-progress')
+                    self.assertContains(lesson, 'data-process-speed')
+                    self.assertContains(lesson, 'science/body-process.js')
+                else:
+                    self.assertContains(lesson, 'id="explore"', count=1)
+                    self.assertContains(lesson, 'name="body-route"', count=3)
+                    self.assertContains(lesson, 'data-body-photo', count=1)
+                    self.assertNotContains(lesson, 'science/body-process.js')
                 self.assertContains(lesson, 'id="gallery"')
                 self.assertContains(lesson, 'id="checkup"')
                 self.assertContains(lesson, '翻开答案')
@@ -99,10 +108,10 @@ class HumanBodyStationTests(SimpleTestCase):
         self.assertContains(index, 'data-organ-dialog>')
         self.assertContains(index, 'data-mission-mode="anatomy" aria-pressed="true"')
         self.assertContains(index, 'data-scene=', count=3)
-        self.assertContains(index, 'data-stamp=', count=6)
+        self.assertContains(index, 'data-stamp=', count=12)
         progress = index.context['body_progress']
         self.assertEqual(len(progress['challenges']), 7)
-        self.assertEqual(sum(len(item['questions']) for item in progress['lessons']), 18)
+        self.assertEqual(sum(len(item['questions']) for item in progress['lessons']), 36)
         self.assertContains(index, '<noscript>')
         for lesson in index.context['lessons']:
             response = self.client.get(reverse('science-body-lesson', args=[lesson['slug']]))
@@ -116,6 +125,23 @@ class HumanBodyStationTests(SimpleTestCase):
         for asset in ('science/body-lab.js', 'science/body-lab.css',
                       'science/body-progress.js', 'science/body-notebook.js'):
             self.assertTrue(finders.find(asset))
+
+    def test_system_layers_and_health_scenarios_are_linked(self):
+        station_url = reverse('science-body')
+        response = self.client.get(station_url)
+        self.assertContains(response, 'id="healthy-life"', count=1)
+        for layer in ('organs', 'skeleton', 'muscles', 'vessels', 'nerves'):
+            self.assertContains(response, f'data-atlas-select="{layer}"', count=1)
+            if layer != 'organs':
+                self.assertContains(response, f'data-atlas-art="{layer}" hidden', count=1)
+        for scene in response.context['health']['scenarios']:
+            anchor = f'health-{scene["id"]}'
+            self.assertContains(response, f'id="{anchor}"', count=1)
+            for link in scene['links']:
+                url = reverse('science-body-lesson', args=[link['lesson']])
+                fragment = f'#{link["anchor"]}' if link.get('anchor') else ''
+                self.assertContains(response, f'href="{url}{fragment}">{link["label"]}')
+                self.assertContains(self.client.get(url), f'href="{station_url}#{anchor}"')
 
     def test_growth_and_organ_reading_are_available_without_javascript(self):
         response = self.client.get(reverse('science-body'))

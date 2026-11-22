@@ -3,9 +3,14 @@
   <p class="body-mission-intro">{{ expedition.intro }}</p>
   <div data-expedition hidden>
     <div class="body-controls body-mission-modes" role="group" aria-label="选择探索方式">
-      <button type="button" data-mission-mode="anatomy" aria-pressed="true">① 点器官探索</button>
-      <button type="button" data-mission-mode="explore" aria-pressed="false">② 看身体合作</button>
-      <button type="button" data-mission-mode="challenge" aria-pressed="false">③ 找器官挑战</button>
+      <button type="button" data-mission-mode="anatomy" aria-pressed="true">看人体图层</button>
+      <button type="button" data-mission-mode="explore" aria-pressed="false">看身体合作</button>
+      <button type="button" data-mission-mode="challenge" aria-pressed="false">找器官挑战</button>
+    </div>
+    <div class="body-controls body-atlas-switch" role="group" aria-label="人体系统图层" data-atlas-controls>
+      {% for layer in expedition.layers %}
+      <button type="button" data-atlas-select="{{ layer.id }}" aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}">{{ layer.label }}</button>
+      {% endfor %}
     </div>
     <div class="body-mission-workbench">
       <figure class="body-mission-map">
@@ -14,11 +19,24 @@
       </figure>
       <div class="body-mission-task">
         <div class="body-anatomy-panel" data-anatomy-panel>
-          <span class="body-anatomy-badge" aria-hidden="true">🔎</span>
-          <p class="body-kicker">七位伙伴 · 点一点就认识</p>
-          <h3>{{ expedition.explorer.title }}</h3>
-          <p>{{ expedition.explorer.intro }}</p>
-          <p class="body-anatomy-prompt">{{ expedition.explorer.prompt }}</p>
+          <div aria-live="polite">
+            <div data-atlas-note="organs">
+              <h3>{{ expedition.explorer.title }}</h3>
+              <p>{{ expedition.explorer.intro }}</p>
+              <p class="body-anatomy-prompt">{{ expedition.explorer.prompt }}</p>
+            </div>
+            {% for layer in expedition.layers %}{% if layer.features %}
+              <div data-atlas-note="{{ layer.id }}" hidden>
+                <h3>{{ layer.label }}</h3>
+                <p>{{ layer.description }}</p>
+                <dl class="body-layer-features">
+                  {% for feature in layer.features %}<dt>{{ feature.name }}</dt><dd>{{ feature.description }}</dd>{% endfor %}
+                </dl>
+                <p class="body-anatomy-prompt">{{ layer.prompt }}</p>
+                <a class="body-inline-link" href="{% url 'science-body-lesson' layer.lesson %}">到相关课程仔细看 ↗</a>
+              </div>
+            {% endif %}{% endfor %}
+          </div>
         </div>
         <div data-scene-panel hidden>
           <div class="body-controls body-scene-choices" role="group" aria-label="选择生活场景">
@@ -54,5 +72,9 @@
     <a class="body-button body-button-primary" data-dialog-link>到这一课仔细看 ↗</a>
   </dialog>
   <noscript><p>启用 JavaScript 后可以点击器官打开档案、逐步点亮器官、参加定位挑战。也可以先读下面的器官档案和合作线索。</p>{% for organ in expedition.organs %}<details class="body-panel"><summary>{{ organ.name }}</summary><p>{{ organ.location }}</p><p>{{ organ.description }}</p><a href="{% url 'science-body-lesson' organ.lesson %}">到这一课仔细看 ↗</a></details>{% endfor %}{% for scene in expedition.scenarios %}<details class="body-panel"><summary>{{ scene.question }}</summary><p>{{ scene.summary }}</p><ol>{% for step in scene.steps %}<li>{{ step.title }}：{{ step.body }}</li>{% endfor %}</ol></details>{% endfor %}</noscript>
+  <details class="body-sources">
+    <summary>人体图层资料 · 需联网</summary>
+    <ul>{% for source in expedition.layer_sources %}<li><a href="{{ source.url }}">{{ source.label }} ↗</a></li>{% endfor %}</ul>
+  </details>
   {{ expedition|json_script:"body-expedition-data" }}
 </section>

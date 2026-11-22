@@ -8,6 +8,9 @@
   const shapes = [...root.querySelectorAll('[data-organ-shape]')];
   const dialog = document.querySelector('[data-organ-dialog]');
   const anatomyPanel = get('[data-anatomy-panel]');
+  const layerButtons = [...root.querySelectorAll('[data-atlas-select]')];
+  const layerArt = [...root.querySelectorAll('[data-atlas-art]')];
+  const layerNotes = [...root.querySelectorAll('[data-atlas-note]')];
   let dialogTrigger = null;
   const modes = [...root.querySelectorAll('[data-mission-mode]')];
   const sceneButtons = [...root.querySelectorAll('[data-scene]')];
@@ -17,6 +20,7 @@
   let scene = content.scenarios[0];
   let step = 0;
   let mode = anatomyPanel ? 'anatomy' : 'explore';
+  let selectedLayer = 'organs';
   let playing = null;
   let generation = 0;
   let question = 0;
@@ -113,11 +117,23 @@
     get('[data-challenge-next]').disabled = true;
     get('[data-challenge-next]').textContent = question === content.challenges.length - 1 ? '查看挑战成果' : '下一题 →';
   }
+  function showLayer(id) {
+    const layer = content.layers.find(item => item.id === id);
+    const showOrgans = id === 'organs';
+    get('[data-atlas-organs]').toggleAttribute('hidden', !showOrgans);
+    pins.forEach(pin => { pin.hidden = !showOrgans; });
+    layerArt.forEach(art => art.toggleAttribute('hidden', art.dataset.atlasArt !== id));
+    layerButtons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.atlasSelect === id)));
+    layerNotes.forEach(note => { note.hidden = note.dataset.atlasNote !== id; });
+    get('[data-atlas-description]').textContent = layer.description;
+  }
   function switchMode(next) {
     stop();
     mode = next;
     root.dataset.mode = mode;
     modes.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.missionMode === mode)));
+    get('[data-atlas-controls]').hidden = mode !== 'anatomy';
+    showLayer(mode === 'anatomy' ? selectedLayer : 'organs');
     if (anatomyPanel) anatomyPanel.hidden = mode !== 'anatomy';
     get('[data-scene-panel]').hidden = mode !== 'explore';
     get('[data-challenge-panel]').hidden = mode !== 'challenge';
@@ -151,6 +167,11 @@
     else light('', false);
   }
   modes.forEach(button => button.addEventListener('click', () => switchMode(button.dataset.missionMode)));
+  layerButtons.forEach(button => button.addEventListener('click', () => {
+    selectedLayer = button.dataset.atlasSelect;
+    light('', false);
+    showLayer(selectedLayer);
+  }));
   sceneButtons.forEach(button => button.addEventListener('click', () => showScene(button.dataset.scene)));
   pins.forEach(pin => pin.addEventListener('click', () => {
     const organ = pin.dataset.mapOrgan;
@@ -220,4 +241,16 @@
   showScene(scene.id);
   switchMode(anatomyPanel ? 'anatomy' : 'explore');
   root.hidden = false;
+})();
+
+(() => {
+  function revealHealthScene() {
+    const target = document.getElementById(location.hash.slice(1));
+    const scene = target?.closest('.body-health-scenario');
+    if (!scene || scene.open) return;
+    scene.open = true;
+    target.scrollIntoView();
+  }
+  window.addEventListener('hashchange', revealHealthScene);
+  revealHealthScene();
 })();

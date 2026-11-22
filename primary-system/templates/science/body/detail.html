@@ -20,13 +20,27 @@
     <div class="body-main{% if process_observation_id %} experiment-content{% endif %}">
       {% if lesson.slug == 'circulation' %}
         {% include 'science/body/heart.html' %}
+      {% elif lesson.route_title %}
+        <div class="body-route-workbench">
+          {% include 'science/body/lesson-route.html' %}
+          {% include 'science/body/gallery.html' %}
+        </div>
       {% else %}
         {% include 'science/body/interactive.html' %}
       {% endif %}
       {% if lesson.slug == 'nerves' %}{% include 'science/body/reaction.html' %}{% endif %}
       {% if lesson.slug == 'senses' %}{% include 'science/body/blindspot.html' %}{% endif %}
-      {% include 'science/body/gallery.html' %}
+      {% if not lesson.route_title %}{% include 'science/body/gallery.html' %}{% endif %}
       {% include 'science/body/extras.html' %}
+      {% if health_connections %}
+      <section class="body-panel body-health-links" aria-labelledby="lesson-health-title">
+        <h2 id="lesson-health-title">放回日常生活看看</h2>
+        <nav class="body-section-jumps" aria-labelledby="lesson-health-title">
+          {% for scene in health_connections %}<a href="{% url 'science-body' %}#health-{{ scene.id }}">{{ scene.label }} · {{ scene.question }} ↗</a>{% endfor %}
+        </nav>
+      </section>
+      {% endif %}
+      {% if not lesson.route_title %}
       <details class="body-panel body-notes">
         <summary>看完图，再翻开学习笔记</summary>
         <p class="body-kicker">顺着线索找</p>
@@ -46,6 +60,7 @@
         <p class="body-process-takeaway">{{ lesson.takeaway }}</p>
         {% endif %}
       </details>
+      {% endif %}
       {% if lesson.slug == 'circulation' %}{% include 'science/body/pulse.html' %}{% endif %}
     </div>
     {% if process_observation_id %}
