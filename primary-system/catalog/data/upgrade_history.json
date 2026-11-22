@@ -2,6 +2,11 @@
   "schema_version": 1,
   "records": [
     {
+      "revision": "b3e2bcf437a09f581af85d3cc343f1bacc31373b",
+      "date": "2026-11-22",
+      "title": "新增概率与统计乐园专题"
+    },
+    {
       "revision": "8c912ca0d364a736ad406b1b03b4d10c5e708a95",
       "date": "2026-11-22",
       "title": "新增微生物看不见的世界专题"
