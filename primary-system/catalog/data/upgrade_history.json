@@ -2,6 +2,11 @@
   "schema_version": 1,
   "records": [
     {
+      "revision": "431c720adc71679ed24082fbadb75f53e42a629a",
+      "date": "2026-11-22",
+      "title": "同步 Nova 后台与滑块验证码修复"
+    },
+    {
       "revision": "3fb546b1708b7d8505c2c0135c2b7e051eaf200e",
       "date": "2026-11-22",
       "title": "扩充地理图谱档案与时差探索"
