@@ -33,6 +33,7 @@ COURSES = (
     ('geography', 'astronomy-explore', 'astro', '天文探索', ('astronomy-index', 'mysteries')),
     ('chinese', 'literature-study', 'lit', '文学常识', ('poetry-index', 'idiom-stories')),
     ('science', 'science-lab', 'sci', '科学实验室', ('science-elements',)),
+    ('science', 'science-matter', 'matter', '物质实验室', ('science-elements', 'science-rumors')),
     ('chinese', 'hanzi-evolution', 'hanzi-evo', '汉字演变馆', ('dictionary', 'hanzi-polyphones')),
 )
 
@@ -244,6 +245,28 @@ class StudyTopicPageTests(SimpleTestCase):
                 self.assertEqual(url.split('?', 1)[1:], [f'v={digest}'])
         self.assertContains(self.client.get(reverse('geography-earth-plates')),
                             f'href="{reverse("geography-globe")}?lab=plates"')
+
+    def test_matter_lab_reuses_process_player_and_orders_mix_assets(self):
+        page = TopicMarkup(self.client.get(reverse('science-matter')).content.decode())
+        assets = [url.split('?')[0] for url in page.assets]
+        for filename in ('sci-process.css', 'sci-process-data.js', 'sci-process.js'):
+            self.assertIn(f'/static/study_topics/sci/{filename}', assets)
+        self.assertLess(assets.index('/static/study_topics/sci/sci-process-data.js'),
+                        assets.index('/static/study_topics/sci/sci-process.js'))
+        self.assertLess(assets.index('/static/study_topics/sci/sci-process.js'),
+                        assets.index('/static/study_topics/matter/matter-figures.js'))
+        data = '/static/study_topics/matter/matter-mix-data.js'
+        player = '/static/study_topics/matter/matter-mix.js'
+        self.assertIn(data, assets)
+        self.assertIn(player, assets)
+        self.assertLess(assets.index(data), assets.index(player))
+        self.assertLess(assets.index(player), assets.index('/static/study_topics/matter/matter-figures.js'))
+        self.assertLess(assets.index('/static/study_topics/matter/matter-figures.js'),
+                        assets.index('/static/study_topics/matter/matter-app.js'))
+        response = self.client.get(reverse('science-matter'))
+        self.assertContains(response, f'href="{reverse("science-elements")}"')
+        self.assertContains(response, f'href="{reverse("science-rumors")}"')
+        self.assertNotContains(response, 'study_topics/sci/sci-experiments')
 
     def test_shared_controls_and_learning_settings_across_topics(self):
         routes = HISTORY_PAGES + GEOGRAPHY_PAGES + tuple(course[1] for course in COURSES) + (
@@ -664,13 +687,14 @@ class StudyTopicPageTests(SimpleTestCase):
 
 class StudyTopicEntryTests(TestCase):
     def test_science_includes_the_evidence_topics_and_accepts_the_old_filter(self):
-        urls = [reverse(name) for name in ('science-lab', 'science-body', 'human-origins', 'mysteries', 'science-rumors')]
+        urls = [reverse(name) for name in ('science-lab', 'science-matter', 'science-body', 'human-origins', 'mysteries', 'science-rumors')]
         for area in ('science', 'exploration'):
             with self.subTest(area=area):
                 response = self.client.get(reverse('home'), {'area': area})
                 self.assertEqual([card['url'] for card in response.context['entry_cards']], urls)
                 self.assertNotContains(response, 'href="?area=exploration"')
                 self.assertContains(response, 'href="?area=science" class="on"')
+        self.assertContains(self.client.get(reverse('home')), 'icons/matter-lab.svg')
         for name in ('science-body', 'human-origins', 'mysteries', 'science-rumors'):
             response = self.client.get(reverse(name))
             self.assertContains(response, f'href="{reverse("home")}?area=science#modules-title"')

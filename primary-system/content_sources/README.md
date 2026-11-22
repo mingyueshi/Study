@@ -27,6 +27,7 @@
 | 教材练习 | 与教材共用语数英数据 | `make questionbank-data` |
 | 历史、地理 | `history/`、`history-timeline/`、`geo/`、`geo-map/` | `make study-topics-data` |
 | 天文、文学、科学 | `astro-*`、`lit-*`、`sci-*` 及 `images/` | `make study-topics-data` |
+| 物质实验室 | `matter-data.js`（5 室 21 知识点与物质速查）、`matter-figures.js`（图示库与 pH 调色卡、反应观察表）、`matter.css`、`matter-app.js`；`matter-mix-data.js` + `matter-mix.js`（桌面混合实验台） | `make study-topics-data`。试剂 `id`、配对键（两 id 按字典序 `a+b`）与现象 `kind` 须稳定：45 组配对必须全覆盖，缺组走 `fallback` 无现象。混合记录存本浏览器 `matter_mix_records_v1`，反应观察表存 `matter_reactions_v1`，不写题库或数据库；知识点 `id`（mu1-1…）与配对键保留维持深链接和记录。溶解、过滤、燃烧分段观察复用 `sci-process-data.js` 的 `dissolve`、`filter`、`burn` 场景。修改后运行 `node content_sources/test/test-matter.js`、`test/test-sci-process.js`、`make study-topics-data`、`make test-frontend` 与 `.venv/bin/python manage.py test catalog.test_study_topics` |
 | 科学流言粉碎机 | `science-rumors.json`（24 项任务的说法、证据卡、判断、迁移题与出处，另含可选 `icon`、`media` 和 `activity`） | Django 直接读取。`skills` 为四种查证方法，任务 `skill` 引用其 ID；`challenge` 为迁移题，含题干、三个稳定选项 ID、逐项反馈和正确选项，详情与五题训练共用；`toolkit_sources` 保存方法出处。`media` 记录本地素材路径、图注、署名与原始资料页，`activity` 记录材料、步骤和注意事项。新增媒体放在 `static/science/rumor-media/`，也可复用本系统已有素材。保留任务 `slug` 以维持深链接和旧版进度；本机收藏、手记、待巩固和训练轮次由 `static/science/rumors-learning.js` 管理，不写入题库或数据库。修改后运行 `node content_sources/test/test-science-rumors.js`、`node --test scripts/test_rumors_learning.cjs` 与 `.venv/bin/python manage.py test science.test_rumors` |
 | 二十四节气馆 | `solar-terms.json`（节气、三候、习俗、农谚、24 个观察任务、12 道挑战、72 个联读任务、课程关联、出处与诗篇定位） | Django 直接读取。诗篇按题名、作者及从零开始的段落序号在当前简体语料中取句。保留季节与节气 `id` 以维持深链接和本机观察笔记，挑战的 `term` 指向节气卡。`learning_lessons` 登记课程 ID 与标题，`learning` 维护每卡地理、文学与读诗问题，校验时核对课程源中的真实 ID 和标题；跨页 `solar_term` 只按已知节气 ID 恢复。修改后运行 `node content_sources/test/test-solar-terms.js` |
 | 人体奥秘站 | `human-body.json`（12 课、18 幅本地图像及出处、36 道自测、人体图层、健康生活情境、成长路线和脉搏手册） | Django 直接读取。原六课的过程演示由 `animation.modes[].phases[]` 和 `static/science/body-process.js` 驱动，新课的分步图解使用 `route_title` 与 `stops[]`。`expedition.organs[]` 维护器官档案，`expedition.layers[]` 维护图层说明，其图形在 `templates/science/body/system-layers.html`；`health.scenarios[]` 的 `links[]` 同时生成情境到课程及课程回情境的入口。`growth.stages[]` 维护成长时间线。保留课程 `slug`、题目 `id` 和科学实验室的 `su6-5` 以维持深链接及本地学习足迹，修改后运行 `node content_sources/test/test-human-body.js`。 |
@@ -67,6 +68,10 @@
 继续复用 `sci-process-data.js`、`sci-process.js` 与 `sci-process.css`，新增 `photo`、`foodchain` 两组观察说明。节点名称、关系方向、分段说明、模型限制和出处维护在数据文件，SVG 布局和播放逻辑留在渲染器。`test/test-sci-process.js` 校验节点／阶段 ID 唯一性、关系引用与方向，避免把原料进出、取食方向画反。原知识点 `su6-2`、`su6-4` 和五种生物保持不变，动效模块或数据缺失时由 `sci-figures.js` 保留原静态图。
 
 修改后运行 `node content_sources/test/test-sci-process.js`、`node content_sources/test/test-sci.js`、`node content_sources/test/test-geo.js`、`make study-topics-data`、`make test-frontend` 与 `.venv/bin/python manage.py test catalog.test_study_topics science`；共用控制器改动也应回归地理水循环。分段顺序只用于讲解，不代表自然过程必须排队进行；食物链亮点只表示传递方向，不表示不变的能量数量。
+
+### 物质实验室的分段观察
+
+`sci-process-data.js` 另维护物质实验室共用的 `dissolve`（溶解）、`filter`（过滤）与 `burn`（燃烧条件与灭火）三组场景：溶解、过滤是带路径的静态实验场景，燃烧沿用节点高亮（步骤含 `from`/`to`）。物质实验室在 `matter-figures.js` 注册 `process-*` 包装图调用 `SciProcess.html(kind)`，播放器、样式与动效偏好和科学课程共用；播放器或数据缺失时退回静态示意。修改场景说明后运行 `node content_sources/test/test-sci-process.js` 与 `node --test scripts/test_sci_process.cjs`，并按上表回归物质实验室页面。
 
 ### 声音与简单机械观察
 

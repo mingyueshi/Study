@@ -69,6 +69,13 @@ science_lab = TemplateView.as_view(template_name='study_topics/course.html', ext
     'course_links': (('science-elements', '查元素周期表'),),
 })
 
+matter_lab = TemplateView.as_view(template_name='study_topics/course.html', extra_context={
+    'study_area': 'science', 'study_label': '科学',
+    'course_slug': 'matter', 'course_title': '物质实验室', 'course_section': '化学启蒙',
+    'course_intro': '东西是由什么组成的？混在一起会怎样？五个化学启蒙室，从三态变化一路做到元素周期表。',
+    'course_links': (('science-elements', '查元素周期表'), ('science-rumors', '科学流言粉碎机')),
+})
+
 hanzi_evolution = TemplateView.as_view(template_name='study_topics/course.html', extra_context={
     'study_area': 'chinese', 'study_label': '语文',
     'course_slug': 'hanzi-evo', 'course_title': '汉字演变馆', 'course_section': '字族',

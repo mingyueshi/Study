@@ -84,5 +84,61 @@ const SCI_PROCESS = {
     model:'亮点用来认方向，不表示同一份能量原封不动传到底。各环节都要使用能量，一部分能量以热的形式散开，能量在这条链中不循环。线长、粗细和播放时间不表示能量数值；分解者和其他取食关系未展开，也不据此预测生物数量。',
     sources:[{title:'OpenStax：食物链与生态系统的能量流动', url:'https://openstax.org/books/biology-2e/pages/46-2-energy-flow-through-ecosystems'}],
   },
+  dissolve: {
+    title: '溶解分段观察',
+    diagramLabel: '食盐从入水沉底，到微粒扩散、搅拌加速，再到整杯水均匀分布的路径',
+    prompt: '先看食盐去了哪里，再分段跟着它的小微粒走。可以逐步暂停，也可以播放一轮后回看。',
+    steps: [
+      {id: 'sink', label: '食盐入水', note: '把食盐倒进清水，颗粒沉到杯底。颗粒看起来还在，但它已经被水包围，溶解从表面开始了。'},
+      {id: 'shrink', label: '颗粒变小', note: '水把颗粒表面的食盐微粒一个个拆下来带进水里，颗粒慢慢变小。这些微粒太小，肉眼看不见。'},
+      {id: 'stir', label: '搅拌扩散', note: '搅拌让水流动起来，帮微粒更快散开。不搅拌也能溶解，只是要等更久；水温更高、颗粒更细，溶解也会更快。'},
+      {id: 'even', label: '均匀分布', note: '微粒散到整杯水里，尝哪里都是咸的——这就是溶液。食盐没有消失，把水蒸发掉还能把它请回来。'},
+    ],
+    model: '这是溶解过程的放大示意：图中的微粒只表示被水拆散并带走，不是能看到的真实颗粒；颗粒形状、微粒数量、路径和播放时间都不按真实比例。溶解有快慢也有限度——水装不下更多食盐时，杯底会留下不再变小的颗粒。',
+    sources: [
+      {title: 'OpenStax：溶解过程', url: 'https://openstax.org/books/chemistry-2e/pages/11-1-the-dissolution-process'},
+      {title: 'OpenStax：溶解度与饱和溶液', url: 'https://openstax.org/books/chemistry-2e/pages/11-3-solubility'},
+    ],
+  },
+  filter: {
+    title: '过滤分段观察',
+    diagramLabel: '浑水沿玻璃棒倒入漏斗，滤纸截留泥沙，滤液滴进下方烧杯',
+    prompt: '跟着浑水走一遍：哪里能过、哪里被拦。想一想，溶解在水里的食盐会不会也被拦住？',
+    steps: [
+      {id: 'pour', label: '倒入浊液', note: '把浑水沿玻璃棒缓缓倒入漏斗，液面始终低于滤纸边缘，不让浑水从滤纸和漏斗壁的缝隙溜下去。'},
+      {id: 'trap', label: '滤纸拦杂质', note: '滤纸上有许多肉眼看不见的小孔：水能通过，泥沙这样较大的不溶颗粒被拦在纸上。'},
+      {id: 'collect', label: '收集滤液', note: '透过滤纸的水变澄清，滴进下面的烧杯。滤液清了也不等于能喝；溶解在水里的食盐、糖这样的微粒很小，过滤拦不住它们。'},
+    ],
+    model: '这是过滤操作的简化示意：滤纸上的小孔被画得很夸张，实际孔径小得多，图中也不表示过滤的快慢。滤液仍含溶解的杂质和微生物，不是可饮用水；滤纸破损、液面过高导致漏沙的情况没有展开。',
+    sources: [
+      {title: 'OpenStax：悬浮液与胶体', url: 'https://openstax.org/books/chemistry-2e/pages/11-5-colloids'},
+      {title: 'OpenStax：物理性质与物理变化', url: 'https://openstax.org/books/chemistry-2e/pages/1-3-physical-and-chemical-properties'},
+    ],
+  },
+  burn: {
+    title: '燃烧条件与灭火',
+    diagramLabel: '可燃物、氧气和达到着火点三个条件汇聚成燃烧，移走任一条件火焰熄灭',
+    heading: '三个条件同时满足，火焰才出现',
+    footer: '灭火就是去掉其中一个条件',
+    prompt: '先逐个点亮三个条件，看火焰什么时候出现；再看移走一个条件时，火为什么熄灭。',
+    nodes: [
+      {id: 'fuel', label: '可燃物', detail: '纸、木柴、蜡烛'},
+      {id: 'oxygen', label: '氧气', detail: '空气里的助燃气体'},
+      {id: 'heat', label: '着火点', detail: '温度达到才能点燃'},
+      {id: 'fire', label: '燃烧', detail: '缺一个都不行'},
+      {id: 'out', label: '灭火', detail: '移走任一条件'},
+    ],
+    steps: [
+      {id: 'fuel-step', from: 'fuel', to: 'fire', label: '可燃物到位', note: '石头、玻璃烧不起来，纸和木柴可以——能燃烧的物质叫可燃物。没有可燃物，其他条件都满足也烧不起来。'},
+      {id: 'oxygen-step', from: 'oxygen', to: 'fire', label: '氧气来助燃', note: '燃烧需要氧气帮忙。蜡烛罩上玻璃杯很快熄灭，就是杯里的氧气快用完了；盖严锅盖、熄灭酒精灯时盖上灯帽，都是在隔绝氧气。'},
+      {id: 'heat-step', from: 'heat', to: 'fire', label: '温度达到着火点', note: '可燃物要被加热到着火点才能烧起来。纸锅烧水时纸不会烧着，就是因为水的温度最高 100℃，把纸的温度压在了着火点以下。'},
+      {id: 'out-step', from: 'fire', to: 'out', label: '缺一个就熄灭', note: '水降温、湿布隔绝氧气、把柴火移开——灭火就是想办法去掉三个条件中的任何一个。'},
+    ],
+    model: '这是燃烧条件与灭火的示意：三个条件同时满足，燃烧才能开始并持续；箭头表示条件参与燃烧，不代表物质移动或分子行为。着火点随物质种类不同，图与说明不给出精确温度；播放时间也不代表真实燃烧快慢。生态和火灾场景中的特殊燃烧（如金属火）不能用水扑灭，这里没有展开。',
+    sources: [
+      {title: '西北太平洋火灾科学联盟：燃烧三角（PDF）', url: 'https://www.nwfirescience.org/sites/default/files/publications/FIREFACTS_Triangles.pdf'},
+      {title: 'OpenStax：物质的性质与变化', url: 'https://openstax.org/books/chemistry-2e/pages/1-3-physical-and-chemical-properties'},
+    ],
+  },
 };
 if (typeof module !== 'undefined') module.exports = SCI_PROCESS;

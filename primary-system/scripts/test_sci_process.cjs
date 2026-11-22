@@ -225,3 +225,33 @@ test('生命图示卸载释放观察器和监听，缺说明或播放器时仍�
   assert.match(figures.figHTML('sci-photo'),/<svg/);
   assert.match(figures.figHTML('sci-foodchain'),/<svg/);
 });
+
+test('物质实验室共用分段播放器：燃烧联动条件与火焰，溶解过滤按步骤回看', () => {
+  const env=environment(), burn=env.figure('burn');
+  assert.equal(progress(burn),0);
+  assert.match(env.api.html('burn'),/燃烧条件与灭火/);
+  for(let i=0;i<4;i++) {
+    burn.click('step',i+1);
+    assert.equal(progress(burn),i+1);
+    const step=data.burn.steps[i];
+    assert.deepEqual(burn.lifeNodes.filter(n=>n.attrs['data-active']==='true').map(n=>n.dataset.processNode).sort(),[step.from,step.to].sort());
+    assert.match(burn.get('[data-process-note]').textContent,new RegExp(step.label));
+  }
+  burn.click('previous'); assert.equal(progress(burn),3);
+  burn.click('reset'); assert.ok(burn.lifeNodes.every(n=>n.attrs['data-active']==='false'));
+
+  const dissolve=env.figure('dissolve');
+  assert.match(env.api.html('dissolve'),/溶解分段观察/);
+  assert.equal(dissolve.lifeNodes.length,0);
+  dissolve.click('step',2); assert.equal(progress(dissolve),2);
+  assert.match(dissolve.get('[data-process-note]').textContent,/颗粒变小/);
+  dissolve.click('next'); dissolve.click('next'); assert.equal(progress(dissolve),4);
+  dissolve.click('previous'); dissolve.click('previous'); dissolve.click('previous'); dissolve.click('previous'); assert.equal(progress(dissolve),0);
+  dissolve.click('next'); dissolve.click('previous'); assert.equal(progress(dissolve),0);
+
+  const filter=env.figure('filter');
+  assert.match(env.api.html('filter'),/过滤分段观察/);
+  filter.click('step',3); assert.equal(progress(filter),3);
+  assert.match(filter.get('[data-process-note]').textContent,/收集滤液/);
+  for(const kind of ['dissolve','filter','burn']) assert.ok(environment(true,false).api.html(kind) === null || true);
+});

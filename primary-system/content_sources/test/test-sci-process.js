@@ -2,7 +2,7 @@
 const assert = require('node:assert/strict');
 const data = require('../sci-process-data.js');
 const text = value => assert.ok(typeof value === 'string' && value.trim() && !/["\n]|<[a-z/]/i.test(value), value);
-assert.deepEqual(Object.keys(data), ['light', 'water', 'photo', 'foodchain']);
+assert.deepEqual(Object.keys(data), ['light', 'water', 'photo', 'foodchain', 'dissolve', 'filter', 'burn']);
 assert.deepEqual(data.light.modes.map(mode => mode.id), ['mirror', 'water']);
 assert.deepEqual(data.light.angle, {min: 0, max: 75, initial: 40});
 assert.equal(data.light.indices.air, 1);
@@ -46,4 +46,24 @@ data.foodchain.steps.forEach((step, i) => {
 assert.match(data.photo.model, /同时/);
 assert.match(data.photo.model, /呼吸/);
 assert.match(data.foodchain.model, /不循环/);
-console.log('✅ 光路、水循环、光合作用与食物链：参数、关系方向、分步说明和出处通过结构校验');
+/* 物质实验室共用场景：溶解、过滤与燃烧的分步、简化说明和出处。 */
+assert.deepEqual(data.dissolve.steps.map(step => step.id), ['sink', 'shrink', 'stir', 'even']);
+assert.deepEqual(data.filter.steps.map(step => step.id), ['pour', 'trap', 'collect']);
+data.dissolve.steps.concat(data.filter.steps).forEach(step => { text(step.label); text(step.note); });
+assert.match(data.dissolve.model, /比例/);
+assert.match(data.dissolve.steps[1].note, /看不见/);
+assert.match(data.filter.steps[2].note, /能喝/);
+assert.match(data.filter.model, /不是可饮用水/);
+assert.deepEqual(data.burn.nodes.map(node => node.id), ['fuel', 'oxygen', 'heat', 'fire', 'out']);
+for (const field of ['title', 'diagramLabel', 'heading', 'footer']) text(data.burn[field]);
+assert.equal(new Set(data.burn.steps.map(step => step.id)).size, data.burn.steps.length);
+data.burn.steps.forEach(step => {
+  text(step.id); text(step.label); text(step.note);
+  for (const end of ['from', 'to']) assert.ok(data.burn.nodes.some(node => node.id === step[end]));
+  assert.notEqual(step.from, step.to);
+});
+assert.deepEqual(data.burn.steps.map(step => [step.from, step.to]),
+  [['fuel', 'fire'], ['oxygen', 'fire'], ['heat', 'fire'], ['fire', 'out']]);
+assert.match(data.burn.model, /不代表/);
+assert.match(data.burn.steps[2].note, /着火点/);
+console.log('✅ 光路、水循环、光合作用、食物链与物质实验：参数、关系方向、分步说明和出处通过结构校验');

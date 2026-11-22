@@ -1,0 +1,321 @@
+/* ============================================================
+   乐学堂 · 物质实验室（化学启蒙）—— 专属样式
+   与 sci.css 同构：知识卡 / 想一想 / 速查 / 打印，
+   另有混合实验台、pH 调色卡、反应观察表三类互动组件。
+   ============================================================ */
+
+/* ---------- 实验室导语 ---------- */
+.goal-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.goal-tags span {
+  background: color-mix(in srgb, var(--c) 12%, white);
+  border: 1px solid color-mix(in srgb, var(--c) 30%, white);
+  color: #4a4f63; border-radius: 999px; padding: 3px 10px;
+  font-size: 12.5px; font-weight: 700;
+}
+
+/* ---------- 知识点卡 ---------- */
+.kcard {
+  --c: #4d96ff;
+  position: relative;
+  background: var(--card); border-radius: 18px; padding: 18px 18px 16px;
+  border: 1px solid var(--line); border-top: 4px solid var(--c);
+  box-shadow: 0 4px 16px rgba(40, 54, 85, .035); overflow-wrap: anywhere;
+  margin-bottom: 20px;
+}
+.kcard.learned { background: #f4fcf7; }
+.khead { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding-right: 40px; }
+.ktitle { font-size: 21px; font-weight: 900; }
+.khead-gap { flex: 1; }
+.kcard .say { width: 32px; height: 32px; }
+.learn-btn {
+  position: absolute; top: 12px; right: 12px;
+  width: 36px; height: 36px; border-radius: 50%;
+  border: 3px solid #dfe5f0; background: #f5f8fc;
+  font-size: 17px; font-weight: 900; color: #fff; line-height: 1;
+}
+.learn-btn.on { background: #2fbf71; border-color: #2fbf71; }
+.kcard.learned::after {
+  content: '✓ 已掌握';
+  position: absolute; top: 12px; right: 56px;
+  font-size: 11.5px; font-weight: 800; color: #2fbf71;
+  background: #e9f9f0; border-radius: 999px; padding: 2px 9px;
+}
+.k-overview { margin-top: 12px; font-size: 15.5px; line-height: 1.75; color: #4a4f63; }
+
+/* ---------- 小节 ---------- */
+.ksec { display: flex; align-items: flex-start; gap: 10px; margin-top: 12px; }
+.ksec > :last-child { min-width: 0; flex: 1; }
+.seclabel {
+  flex: 0 0 26px; height: 26px; margin-top: 2px;
+  background: #ece4f7; color: #5d3f96; border-radius: 8px;
+  font-size: 13px; font-weight: 900; display: grid; place-items: center;
+}
+.klist { list-style: none; display: grid; gap: 5px; }
+.kli {
+  display: block; width: 100%; text-align: left;
+  border: none; background: none; padding: 2px 0;
+  font-size: 14.5px; line-height: 1.7; color: #4a4f63; font-weight: 600;
+}
+.kli:hover { color: #5d3f96; }
+.klist.mis .kli { color: #7a5327; }
+
+/* ---------- 想一想 ---------- */
+.mex { display: grid; gap: 6px; }
+.mex-q, .mex-steps, .mex-a {
+  display: block; width: 100%; text-align: left; border: none;
+  padding: 8px 12px; border-radius: 12px;
+  font-size: 14.5px; line-height: 1.7; font-weight: 600;
+}
+.mex-q { background: #f1e8fb; color: #5d3f96; }
+.mex-steps { background: #f8f9fc; color: #5a5570; }
+.mex-a { background: #e9f9f0; color: #187749; font-weight: 800; }
+.mex-q:hover { background: #e8dbf7; }
+.mex-a:hover { background: #d6f3e2; }
+.mex-steps:hover { background: #eef0f7; }
+
+.krecite {
+  margin-top: 12px; background: #f3edfb; border-radius: 12px;
+  padding: 9px 12px; font-size: 14px; font-weight: 800; color: #5d3f96;
+}
+
+/* ---------- 物质速查 ---------- */
+.formula-card {
+  --c: #8b65c9;
+  background: var(--card); border-radius: 18px; padding: 16px 18px;
+  border: 1px solid var(--line); border-left: 5px solid var(--c);
+  margin-bottom: 16px; box-shadow: 0 4px 16px rgba(40, 54, 85, .035); overflow-wrap: anywhere;
+}
+.phead { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.phead h3 { font-size: 17px; font-weight: 900; }
+.frows { display: grid; gap: 6px; margin-top: 10px; }
+.frow {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+  border: 1.5px solid var(--line); background: #fafbfe;
+  border-radius: 10px; padding: 7px 12px; text-align: left;
+}
+.frow:active { transform: scale(.98); }
+.frow b { font-size: 15px; font-weight: 900; color: #5d3f96; }
+.frow span { font-size: 15px; font-weight: 700; color: #4a4f63; font-variant-numeric: tabular-nums; }
+.pnote {
+  margin-top: 10px; background: #f6f2fc; border-radius: 12px;
+  padding: 9px 12px; font-size: 13.5px; line-height: 1.7; color: #55506d; font-weight: 600;
+}
+
+/* ---------- 单元横幅与入场动画 ---------- */
+.unit-banner { margin: 4px 0 14px; border-radius: 14px; overflow: hidden; }
+.unit-banner svg { width: 100%; height: auto; display: block; }
+.unit-banner:hover svg { transform: translateY(-1px); transition: transform .3s ease; }
+@keyframes mtFloat {
+  0%, 100% { transform: translateY(0); opacity: .7; }
+  50% { transform: translateY(-8px); opacity: .95; }
+}
+.mt-float { animation: mtFloat 3.4s ease-in-out infinite; }
+.mt-float.mt-d2 { animation-duration: 4.3s; animation-delay: .7s; }
+@keyframes kFadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.kcard, .formula-card, .unit-head { animation: kFadeUp .42s ease both; }
+.kcard:nth-child(2) { animation-delay: .04s; }
+.kcard:nth-child(3) { animation-delay: .08s; }
+.kcard:nth-child(4) { animation-delay: .12s; }
+.kcard:nth-child(5) { animation-delay: .16s; }
+.kcard:nth-child(6) { animation-delay: .20s; }
+
+/* ---------- 图示通用 ---------- */
+.fig { transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease; }
+.fig:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(40, 54, 85, .08);
+  border-color: #c7d4ec;
+}
+.fig:hover .fig-svg { transform: scale(1.005); transition: transform .35s ease; }
+.fig:has(.sci-demo-stage):hover, .fig:has(.mt-mix):hover, .fig:has(.mt-ph):hover { transform: none; }
+.fig:has(.sci-demo-stage):hover .fig-svg,
+.fig:has(.mt-mix):hover .fig-svg, .fig:has(.mt-ph):hover .fig-svg { transform: none; }
+
+.sci-demo-stage { overflow-x: auto; margin: 12px 0; border-radius: 12px; background: #fff; }
+.sci-demo-stage .fig-svg { min-width: 560px; }
+.sci-demo-stage:focus-visible { outline: 3px solid #4d96ff; outline-offset: 3px; }
+.sci-scroll-hint { display: none; }
+@media (max-width: 700px) {
+  .sci-scroll-hint { display: block; color: #4a5f6d; font-size: 14px; line-height: 1.6; }
+}
+.fig .sci-observation {
+  margin: 12px 0; padding: 12px 16px; border-left: 4px solid #8b65c9;
+  border-radius: 4px 12px 12px 4px; background: #f3edfb; color: #463a68;
+  font-size: 17px; line-height: 1.8; font-weight: 700;
+}
+.fig .sci-model-note { margin: 8px 0; color: #4a5f6d; font-size: 15px; line-height: 1.75; }
+.fig .fig-btn:disabled { opacity: .5; cursor: default; transform: none; }
+.sci-demo-sources { color: #4a5f6d; font-size: 14px; line-height: 1.8; }
+.sci-demo-sources summary { cursor: pointer; }
+.sci-demo-sources a { display: block; padding: 4px 0; }
+@media print { .sci-demo-sources { display: none; } }
+
+/* ============================================================
+   桌面混合实验模拟器
+   ============================================================ */
+.mt-mix-safety {
+  margin: 4px 0 10px; padding: 8px 12px; border-radius: 12px;
+  background: #fdf3e4; color: #7a5327; font-size: 13.5px; line-height: 1.7; font-weight: 700;
+}
+.mt-mix-palette {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(148px, 1fr)); gap: 8px; margin: 12px 0;
+}
+.mt-reagent {
+  display: grid; grid-template-columns: auto 1fr; grid-template-rows: auto auto; align-items: center;
+  column-gap: 8px; text-align: left; padding: 9px 11px;
+  border: 1.5px solid var(--line); border-radius: 12px; background: var(--card);
+  cursor: pointer; font-family: inherit;
+}
+.mt-reagent-emoji { grid-row: 1 / span 2; font-size: 24px; }
+.mt-reagent-name { font-size: 15px; font-weight: 800; color: var(--ink, #34384d); }
+.mt-reagent-note { grid-column: 2; font-size: 11.5px; color: #4a5f6d; line-height: 1.45; }
+.mt-reagent[aria-pressed="true"] { border-color: #8b65c9; background: #f3edfb; box-shadow: inset 0 0 0 1.5px #8b65c9; }
+.mt-reagent:disabled { opacity: .55; cursor: default; }
+
+.mt-mix-slots { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 4px 0 2px; }
+.mt-slot {
+  min-width: 132px; padding: 6px 12px; border-radius: 999px;
+  background: #f2f5fb; border: 1.5px dashed #b9c7de;
+  font-size: 14px; font-weight: 800; color: #4a4f63;
+}
+.mt-mix-slots .fig-btn { min-height: 38px; padding: 6px 13px; }
+.mt-mix-stage { border: 1px solid #dbe9ee; background: #fbfdfe; }
+.mt-mix-stage .fig-svg { max-height: 330px; }
+.mt-mix-status { margin: 8px 0; font-size: 14.5px; color: #4a5f6d; font-weight: 700; }
+.mt-stage-hint { font-size: 14px; font-weight: 700; fill: #7a86a0; }
+
+.mt-mix-observe {
+  display: grid; gap: 6px; margin: 10px 0; padding: 12px 14px;
+  border-radius: 12px; background: #f6f2fc; border: 1px solid #ddd0ef;
+}
+.mt-mix-observe[hidden] { display: none; }
+.mt-mix-text { font-size: 16px; line-height: 1.75; font-weight: 800; color: #34384d; }
+.mt-mix-why { font-size: 14px; line-height: 1.75; color: #55506d; font-weight: 600; }
+
+.mt-rec-kind {
+  justify-self: start; padding: 2px 10px; border-radius: 999px;
+  font-size: 12px; font-weight: 800; background: #e4eefb; color: #2b5f8f;
+}
+.mt-rec-kind[data-kind="gas"], .mt-rec-kind[data-kind="color-red"] { background: #fdeaea; color: #a4453f; }
+.mt-rec-kind[data-kind="layer"], .mt-rec-kind[data-kind="emulsify"] { background: #fdf3e4; color: #7a5327; }
+.mt-rec-kind[data-kind="dissolve"], .mt-rec-kind[data-kind="neutral"] { background: #e4f3ee; color: #187749; }
+.mt-rec-kind[data-kind="color-blue"], .mt-rec-kind[data-kind="color-none"] { background: #ece4f7; color: #5d3f96; }
+.mt-rec-kind[data-kind="dry"], .mt-rec-kind[data-kind="none"] { background: #eef0f7; color: #5a5570; }
+
+.mt-mix-records { margin-top: 14px; }
+.mt-mix-records h4 { font-size: 16px; font-weight: 900; }
+.mt-rec-table, .mt-reaction-table {
+  width: 100%; border-collapse: collapse; margin-top: 8px;
+  font-size: 13.5px; background: var(--card);
+}
+.mt-rec-table th, .mt-rec-table td, .mt-reaction-table th, .mt-reaction-table td {
+  border: 1px solid var(--line); padding: 7px 10px; text-align: left; vertical-align: top; line-height: 1.6;
+}
+.mt-rec-table thead th, .mt-reaction-table thead th {
+  background: #f3edfb; color: #463a68; font-size: 12.5px; white-space: nowrap;
+}
+.mt-rec-empty { color: #7a86a0; text-align: center; }
+.mt-rec-count { margin-top: 6px; font-size: 13px; color: #7a86a0; font-weight: 700; }
+
+/* 烧杯动效 */
+@keyframes mtBubble {
+  0% { transform: translateY(0) scale(.7); opacity: 0; }
+  25% { opacity: .9; }
+  100% { transform: translateY(-76px) scale(1.15); opacity: 0; }
+}
+.mt-bubble { fill: #fff; stroke: #c9c39a; stroke-width: 2; animation: mtBubble 2.2s ease-in infinite; }
+@keyframes mtRise {
+  from { transform: scaleY(.25); }
+  to { transform: scaleY(1); }
+}
+.mt-liquid { transform-box: fill-box; transform-origin: bottom center; }
+.mt-liquid.mt-rising { animation: mtRise 1.1s ease-out both; }
+@keyframes mtPour {
+  0% { transform: scaleY(0); opacity: 0; }
+  18% { transform: scaleY(1); opacity: 1; }
+  88% { transform: scaleY(1); opacity: 1; }
+  100% { transform: scaleY(.4); opacity: 0; }
+}
+.mt-pour { transform-box: fill-box; transform-origin: top center; animation: mtPour 1.15s ease-in both; }
+@keyframes mtDissolve {
+  from { opacity: 1; }
+  60% { opacity: .5; }
+  to { opacity: .08; }
+}
+.mt-dissolving circle { fill: #f3f6f9; stroke: #9fb0c0; stroke-width: 1.5; animation: mtDissolve 2.6s ease-in infinite; }
+
+/* ============================================================
+   pH 调色卡
+   ============================================================ */
+.mt-ph .fig-svg { max-width: 560px; margin: 0 auto; }
+.mt-ph-samples { justify-content: flex-start; }
+.mt-ph-samples .fig-btn { min-height: 42px; padding: 8px 14px; font-size: 15px; }
+.mt-ph-samples .fig-btn[aria-pressed="true"] { background: #f3edfb; border-color: #8b65c9; color: #463a68; }
+.mt-ph-readout {
+  display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: baseline;
+  margin: 10px 0 4px; font-size: 15.5px; color: #34384d;
+}
+.mt-ph-readout b { font-size: 16.5px; }
+.mt-ph-readout span { color: #55506d; font-weight: 700; }
+.mt-ph-note { margin: 4px 0 0; font-size: 12.5px; color: #7a86a0; font-weight: 600; }
+
+/* ============================================================
+   反应观察表
+   ============================================================ */
+.mt-reaction-table { min-width: 520px; }
+.mt-reaction-table th[scope="row"] b { font-size: 14.5px; display: block; }
+.mt-row-safety { display: block; margin-top: 3px; font-size: 12px; color: #7a5327; font-weight: 700; }
+.mt-guess { display: flex; flex-wrap: wrap; gap: 6px; }
+.mt-guess-btn { min-height: 40px; padding: 7px 12px; font-size: 14px; }
+.mt-guess-btn[aria-pressed="true"] { background: #e4f3ee; border-color: #2fbf71; color: #187749; }
+.mt-reveal { margin: 8px 0 4px; padding: 8px 12px; border-radius: 10px; font-size: 13.5px; line-height: 1.7; font-weight: 700; }
+.mt-reveal-hit { background: #e9f9f0; color: #187749; }
+.mt-reveal-miss { background: #fdf3e4; color: #7a5327; }
+.mt-observe-label { display: grid; gap: 4px; margin-top: 8px; font-size: 12.5px; font-weight: 800; color: #55506d; }
+.mt-observe-label textarea {
+  width: 100%; min-height: 52px; padding: 8px 10px; resize: vertical;
+  border: 1.5px solid var(--line); border-radius: 10px;
+  font-family: inherit; font-size: 13.5px; line-height: 1.6; color: #34384d;
+}
+.mt-observe-label textarea:focus-visible { outline: 3px solid #4d96ff; outline-offset: 2px; }
+
+/* ---------- 元素资料入口 ---------- */
+.mt-element-link { display: grid; gap: 10px; padding: 4px 0; }
+.mt-element-lead { margin: 0; font-size: 15px; line-height: 1.75; color: #4a4f63; font-weight: 600; }
+.mt-element-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 8px; }
+.mt-element-card {
+  display: grid; gap: 2px; padding: 10px 12px; border-radius: 12px;
+  background: #fdf1ea; border: 1px solid #f0d9c8;
+}
+.mt-element-card b { font-size: 22px; font-weight: 900; color: #a4502b; }
+.mt-element-card em { font-style: normal; font-size: 14px; font-weight: 800; color: #34384d; }
+.mt-element-card i { font-style: normal; font-size: 11.5px; color: #7a86a0; font-weight: 700; }
+.mt-element-card u { text-decoration: none; font-size: 12.5px; color: #55506d; font-weight: 600; }
+.mt-element-note { margin: 0; font-size: 12.5px; color: #7a86a0; font-weight: 600; }
+
+/* ---------- 打印 ---------- */
+@media print {
+  .study-course .study-page { background: #fff; font-size: 13px; }
+  #app > header, .sidebar, .toolbar, .textbook-banner, .skip-link,
+  .say, .learn-btn, .goal-tags { display: none !important; }
+  .study-shell { display: block; padding: 0; }
+  .study-content { padding: 0; }
+  .unit-head { border: 1px solid #ccc; box-shadow: none; }
+  .kcard, .formula-card { box-shadow: none; break-inside: avoid; page-break-inside: avoid; margin-bottom: 12px; }
+  .unit-banner, .fig { break-inside: avoid; page-break-inside: avoid; }
+  .mt-mix-palette, .mt-mix-slots, .mt-ph-samples, .mt-guess,
+  .mt-mix-stage, .mt-observe-label { display: none !important; }
+}
+
+/* ---------- 减少动画偏好 ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .kcard, .formula-card, .unit-head, .mt-float, .fig,
+  .mt-bubble, .mt-liquid.mt-rising, .mt-pour, .mt-dissolving circle {
+    animation: none !important;
+    transition: none !important;
+  }
+  .mt-bubble, .mt-pour, .mt-dissolving circle { opacity: 0; }
+}

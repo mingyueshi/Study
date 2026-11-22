@@ -14,7 +14,8 @@ function harness(duration = 2000) {
 
 test('六课十种演示的时间边界与最后一帧都能准确定位', () => {
   let modes = 0;
-  for (const lesson of content.lessons) for (const mode of lesson.animation.modes) {
+  /* 新课用 route_title 与 stops[] 做分步图解，只有旧六课带 animation.modes。 */
+  for (const lesson of content.lessons) for (const mode of lesson.animation?.modes || []) {
     modes++;
     let start = 0;
     mode.phases.forEach((phase, i) => {

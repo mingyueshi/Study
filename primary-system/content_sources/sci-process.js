@@ -32,8 +32,71 @@
   const paths = definitions => definitions.map((d, index) => `<path d="${d}" class="sci-process-guide"/><path d="${d}" data-process-path="${index}" pathLength="1" stroke-dasharray="0 1"/><path data-process-arrow="${index}" d="M-6 -5 2 0-6 5" fill="none" stroke-width="3" visibility="hidden"/>`).join('');
   const marker = '<g data-process-marker aria-hidden="true"><circle r="8" fill="#fff" stroke="#b65013" stroke-width="3"/><path d="M-4 -4 3 0-4 4" fill="none" stroke="#b65013" stroke-width="2"/></g>';
 
+  /* 物质实验室：溶解与过滤的静态实验场景，路径供分段播放器跟踪。 */
+  function labScene(kind) {
+    const label = (x, y, value, css = '') => `<text x="${x}" y="${y}" text-anchor="middle" class="${css}">${esc(value)}</text>`;
+    if (kind === 'dissolve') {
+      const pile = Array.from({length: 12}, (_, i) => {
+        const row = Math.floor(i / 5), col = i % 5;
+        return `<circle cx="${304 + col * 9 - row * 4}" cy="${300 + row * 6}" r="${row ? 3 : 4}" fill="#eef2f6" stroke="#9fb0c0" stroke-width="1.5"/>`;
+      }).join('');
+      return '<rect x="8" y="8" width="624" height="334" rx="16" fill="#eef7fd"/>' +
+        '<path d="M214 92V316H426V92" fill="none" stroke="#7d93a8" stroke-width="5"/>' +
+        '<path d="M214 92q-8 -9 4 -13" fill="none" stroke="#7d93a8" stroke-width="4"/>' +
+        '<rect x="218" y="150" width="204" height="162" fill="#bfe3f7"/>' +
+        '<line x1="218" y1="150" x2="422" y2="150" stroke="#7fb6d8" stroke-width="3"/>' +
+        '<ellipse cx="322" cy="42" rx="26" ry="10" fill="#fff" stroke="#7d93a8" stroke-width="3"/>' +
+        '<path d="M348 40h52" stroke="#7d93a8" stroke-width="6" stroke-linecap="round"/>' +
+        pile +
+        '<path d="M456 130 470 240" stroke="#7d93a8" stroke-width="6" stroke-linecap="round"/>' +
+        '<circle cx="463" cy="122" r="13" fill="#fff" stroke="#7d93a8" stroke-width="3"/>' +
+        label(322, 74, '倒入食盐') + label(258, 132, '清水') + label(356, 292, '食盐颗粒') +
+        label(500, 196, '搅拌棒') + label(322, 340, '溶进的食盐看不见了，但整杯水都变咸') +
+        paths(['M322 52Q334 108 326 168T318 288', 'M310 290Q290 262 300 230',
+          'M300 230Q258 202 294 174Q342 146 392 186', 'M392 186Q416 230 368 256Q328 274 294 250']) + marker;
+    }
+    return '<rect x="8" y="8" width="624" height="334" rx="16" fill="#f6f9f2"/>' +
+      '<path d="M64 76V196H188V76" fill="none" stroke="#7d93a8" stroke-width="5"/>' +
+      '<rect x="68" y="106" width="116" height="86" fill="#d9c69a"/>' +
+      '<line x1="68" y1="106" x2="184" y2="106" stroke="#b9a274" stroke-width="3"/>' +
+      label(126, 92, '浑水') + label(126, 152, '泥沙悬浮') +
+      '<path d="M188 112 332 92" stroke="#8a97a5" stroke-width="4" stroke-linecap="round"/>' +
+      '<path d="M300 82 464 82 382 178Z" fill="#eef4f7" fill-opacity=".6" stroke="#7d93a8" stroke-width="5" stroke-linejoin="round"/>' +
+      '<path d="M314 92 450 92 382 166Z" fill="#fff" stroke="#91a6b8" stroke-width="2"/>' +
+      '<circle cx="368" cy="148" r="5" fill="#c2ad82"/><circle cx="390" cy="152" r="4" fill="#c2ad82"/><circle cx="380" cy="144" r="3.5" fill="#c2ad82"/>' +
+      '<path d="M382 178V210" stroke="#7d93a8" stroke-width="5"/>' +
+      '<path d="M336 216H464V326H336Z" fill="none" stroke="#7d93a8" stroke-width="5"/>' +
+      '<rect x="340" y="262" width="120" height="60" fill="#bfe3f7"/>' +
+      label(400, 200, '漏斗与滤纸') + label(382, 140, '泥沙') + label(400, 254, '滤液') +
+      label(400, 340, '滤纸拦住大颗粒，滤液清了也不等于能喝') +
+      paths(['M188 112Q276 88 372 90', 'M378 94Q368 118 376 140', 'M382 212Q382 246 382 292']) + marker;
+  }
+
+  /* 燃烧条件示意：条件卡片位置与汇入火焰、移走熄灭的路径。 */
+  const BURN_NODES = {
+    fuel: {cx: 96, y: 130, iconY: 156},
+    oxygen: {cx: 320, y: 36, iconY: 62},
+    heat: {cx: 320, y: 216, iconY: 242},
+    fire: {cx: 505, y: 90, iconY: 116},
+    out: {cx: 505, y: 226, iconY: 252},
+  };
+  const BURN_PATHS = ['M160 180Q290 208 444 154', 'M376 110Q420 96 450 112',
+    'M376 244Q420 232 450 196', 'M505 200Q505 218 505 232'];
+
   function lifeScene(kind) {
     const entry = data[kind], label = (x, y, value, css = '') => `<text x="${x}" y="${y}" text-anchor="middle" class="${css}">${esc(value)}</text>`;
+    if (kind === 'burn') {
+      const icons = {fuel: '📄', oxygen: '🌬️', heat: '🌡️', fire: '🔥', out: '💧'};
+      return '<rect x="8" y="8" width="624" height="334" rx="16" fill="#fdf6ec"/>' +
+        entry.nodes.map(n => {
+          const box = BURN_NODES[n.id];
+          const icon = `<circle cx="${box.cx}" cy="${box.iconY}" r="27" fill="#fff" stroke="#c98a3d" stroke-width="2"/>` +
+            label(box.cx, box.iconY + 11, icons[n.id], 'sci-life-icon');
+          return `<g data-process-node="${n.id}"><rect class="sci-life-halo" x="${box.cx - 62}" y="${box.y}" width="124" height="106" rx="12"/>` +
+            icon + label(box.cx, box.y + 74, n.label) + label(box.cx, box.y + 95, n.detail, 'sci-life-detail') + '</g>';
+        }).join('') +
+        paths(BURN_PATHS) + label(320, 31, entry.heading) + label(320, 341, entry.footer, 'sci-life-detail') + marker;
+    }
     const node = (id, x, y, w, h, decoration = '') => {
       const item = entry.nodes.find(n => n.id === id);
       return `<g data-process-node="${id}"><rect class="sci-life-halo" x="${x - w / 2}" y="${y}" width="${w}" height="${h}" rx="12"/>${decoration}` +
@@ -60,10 +123,11 @@
   function html(kind) {
     if (!data || !data[kind]) return null;
     const section = data[kind];
-    const life = kind === 'photo' || kind === 'foodchain';
+    const life = kind === 'photo' || kind === 'foodchain' || kind === 'burn';
     const title = section.title || (kind === 'light' ? '光路分段观察' : '水循环分步观察');
     const diagramLabel = section.diagramLabel || (kind === 'light' ? '入射光与出射光相对法线的方向，数值见图下说明' : '从海洋蒸发、在空中凝结、降水到陆地、沿地表流回海洋');
     const scene = kind === 'light' ? '<g data-light-scene></g>' : life ? lifeScene(kind) :
+      kind === 'dissolve' || kind === 'filter' ? labScene(kind) :
       '<rect x="8" y="8" width="624" height="326" rx="18" fill="#eef8fc"/>' +
       '<circle cx="67" cy="65" r="26" fill="#ffd36b"/><text x="67" y="111" text-anchor="middle">太阳供能</text>' +
       '<path d="M257 253 452 139 625 246V334H257Z" fill="#d9eac7"/>' +
@@ -144,7 +208,7 @@
     root.querySelector('[data-process-marker]').setAttribute('transform', `translate(${point.x} ${point.y}) rotate(${Math.atan2(after.y - before.y, after.x - before.x) * 180 / Math.PI})`);
     root.querySelectorAll('[data-process="step"]').forEach(button => button.setAttribute('aria-pressed', String(Number(button.dataset.value) === index + 1)));
     root.querySelectorAll('[data-process="mode"]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.value === record.mode)));
-    if (record.kind === 'photo' || record.kind === 'foodchain') {
+    if (record.kind === 'photo' || record.kind === 'foodchain' || record.kind === 'burn') {
       const step = record.steps[index];
       root.querySelectorAll('[data-process-node]').forEach(node => node.setAttribute('data-active',
         String(record.progress > 0 && [step.from, step.to].includes(node.dataset.processNode))));
