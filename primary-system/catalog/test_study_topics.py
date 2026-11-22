@@ -36,6 +36,7 @@ COURSES = (
     ('science', 'science-matter', 'matter', '物质实验室', ('science-elements', 'science-rumors')),
     ('science', 'science-microbes', 'microbes', '微生物·看不见的世界', ('science-body', 'science-rumors')),
     ('math', 'probability-lab', 'probability', '概率与统计乐园', ('math-camp', 'math-beauty')),
+    ('computing', 'computing-lab', 'computing', '电脑与 AI 怎样工作', ('math-beauty', 'science-rumors')),
     ('chinese', 'hanzi-evolution', 'hanzi-evo', '汉字演变馆', ('dictionary', 'hanzi-polyphones')),
 )
 
@@ -299,6 +300,21 @@ class StudyTopicPageTests(SimpleTestCase):
         response = self.client.get(reverse('probability-lab'))
         self.assertContains(response, f'href="{reverse("math-camp")}"')
         self.assertContains(response, f'href="{reverse("math-beauty")}"')
+
+    def test_computing_lab_orders_labs_assets_before_consumers(self):
+        page = TopicMarkup(self.client.get(reverse('computing-lab')).content.decode())
+        assets = [url.split('?')[0] for url in page.assets]
+        data = '/static/study_topics/computing/computing-labs-data.js'
+        player = '/static/study_topics/computing/computing-labs.js'
+        self.assertIn(data, assets)
+        self.assertIn(player, assets)
+        self.assertLess(assets.index(data), assets.index(player))
+        self.assertLess(assets.index(player), assets.index('/static/study_topics/computing/computing-figures.js'))
+        self.assertLess(assets.index('/static/study_topics/computing/computing-figures.js'),
+                        assets.index('/static/study_topics/computing/computing-app.js'))
+        response = self.client.get(reverse('computing-lab'))
+        self.assertContains(response, f'href="{reverse("math-beauty")}"')
+        self.assertContains(response, f'href="{reverse("science-rumors")}"')
 
     def test_shared_controls_and_learning_settings_across_topics(self):
         routes = HISTORY_PAGES + GEOGRAPHY_PAGES + tuple(course[1] for course in COURSES) + (

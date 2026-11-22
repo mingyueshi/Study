@@ -90,6 +90,13 @@ probability_lab = TemplateView.as_view(template_name='study_topics/course.html',
     'course_links': (('math-camp', '数学训练营'), ('math-beauty', '数学之美')),
 })
 
+computing_lab = TemplateView.as_view(template_name='study_topics/course.html', extra_context={
+    'study_area': 'computing', 'study_label': '信息科技',
+    'course_slug': 'computing', 'course_title': '电脑与 AI 怎样工作', 'course_section': '计算启蒙',
+    'course_intro': '电脑为什么会算？AI 是怎样学会的？从拨比特开关、排指令程序，到亲手训练分类器，再到网上查证消息。',
+    'course_links': (('math-beauty', '数学之美'), ('science-rumors', '科学流言粉碎机')),
+})
+
 hanzi_evolution = TemplateView.as_view(template_name='study_topics/course.html', extra_context={
     'study_area': 'chinese', 'study_label': '语文',
     'course_slug': 'hanzi-evo', 'course_title': '汉字演变馆', 'course_section': '字族',
