@@ -1,10 +1,11 @@
 from django.urls import path
-from catalog.study_courses import matter_lab, science_lab
+from catalog.study_courses import matter_lab, microbes_lab, science_lab
 from . import body, rumors, views
 
 urlpatterns = [
     path("lab/", science_lab, name="science-lab"),
     path("matter/", matter_lab, name="science-matter"),
+    path("microbes/", microbes_lab, name="science-microbes"),
     path("body/", body.index, name="science-body"),
     path("body/<slug:slug>/", body.detail, name="science-body-lesson"),
     path("rumors/", rumors.index, name="science-rumors"),

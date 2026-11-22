@@ -1,0 +1,234 @@
+/* ============================================================
+   乐学堂 · 微生物（看不见的世界）—— 专属样式
+   与 matter.css 同构：知识卡 / 想一想 / 速查 / 打印，
+   另有尺度缩放台、洗手公平比较台两类互动组件。
+   ============================================================ */
+
+/* ---------- 实验室导语 ---------- */
+.goal-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.goal-tags span {
+  background: color-mix(in srgb, var(--c) 12%, white);
+  border: 1px solid color-mix(in srgb, var(--c) 30%, white);
+  color: #4a4f63; border-radius: 999px; padding: 3px 10px;
+  font-size: 12.5px; font-weight: 700;
+}
+
+/* ---------- 知识点卡 ---------- */
+.kcard {
+  --c: #4d96ff;
+  position: relative;
+  background: var(--card); border-radius: 18px; padding: 18px 18px 16px;
+  border: 1px solid var(--line); border-top: 4px solid var(--c);
+  box-shadow: 0 4px 16px rgba(40, 54, 85, .035); overflow-wrap: anywhere;
+  margin-bottom: 20px;
+}
+.kcard.learned { background: #f4fcf7; }
+.khead { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding-right: 40px; }
+.ktitle { font-size: 21px; font-weight: 900; }
+.khead-gap { flex: 1; }
+.kcard .say { width: 32px; height: 32px; }
+.learn-btn {
+  position: absolute; top: 12px; right: 12px;
+  width: 36px; height: 36px; border-radius: 50%;
+  border: 3px solid #dfe5f0; background: #f5f8fc;
+  font-size: 17px; font-weight: 900; color: #fff; line-height: 1;
+}
+.learn-btn.on { background: #2fbf71; border-color: #2fbf71; }
+.kcard.learned::after {
+  content: '✓ 已掌握';
+  position: absolute; top: 12px; right: 56px;
+  font-size: 11.5px; font-weight: 800; color: #2fbf71;
+  background: #e9f9f0; border-radius: 999px; padding: 2px 9px;
+}
+.k-overview { margin-top: 12px; font-size: 15.5px; line-height: 1.75; color: #4a4f63; }
+
+/* ---------- 小节 ---------- */
+.ksec { display: flex; align-items: flex-start; gap: 10px; margin-top: 12px; }
+.ksec > :last-child { min-width: 0; flex: 1; }
+.seclabel {
+  flex: 0 0 26px; height: 26px; margin-top: 2px;
+  background: #def0ec; color: #155f4d; border-radius: 8px;
+  font-size: 13px; font-weight: 900; display: grid; place-items: center;
+}
+.klist { list-style: none; display: grid; gap: 5px; }
+.kli {
+  display: block; width: 100%; text-align: left;
+  border: none; background: none; padding: 2px 0;
+  font-size: 14.5px; line-height: 1.7; color: #4a4f63; font-weight: 600;
+}
+.kli:hover { color: #155f4d; }
+.klist.mis .kli { color: #7a5327; }
+
+/* ---------- 想一想 ---------- */
+.mex { display: grid; gap: 6px; }
+.mex-q, .mex-steps, .mex-a {
+  display: block; width: 100%; text-align: left; border: none;
+  padding: 8px 12px; border-radius: 12px;
+  font-size: 14.5px; line-height: 1.7; font-weight: 600;
+}
+.mex-q { background: #def0ec; color: #155f4d; }
+.mex-steps { background: #f8f9fc; color: #5a5570; }
+.mex-a { background: #e9f9f0; color: #187749; font-weight: 800; }
+.mex-q:hover { background: #cfe9e2; }
+.mex-a:hover { background: #d6f3e2; }
+.mex-steps:hover { background: #eef0f7; }
+
+.krecite {
+  margin-top: 12px; background: #ecf7f4; border-radius: 12px;
+  padding: 9px 12px; font-size: 14px; font-weight: 800; color: #155f4d;
+}
+
+/* ---------- 微生物速查 ---------- */
+.formula-card {
+  --c: #157d73;
+  background: var(--card); border-radius: 18px; padding: 16px 18px;
+  border: 1px solid var(--line); border-left: 5px solid var(--c);
+  margin-bottom: 16px; box-shadow: 0 4px 16px rgba(40, 54, 85, .035); overflow-wrap: anywhere;
+}
+.phead { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.phead h3 { font-size: 17px; font-weight: 900; }
+.frows { display: grid; gap: 6px; margin-top: 10px; }
+.frow {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+  border: 1.5px solid var(--line); background: #fafbfe;
+  border-radius: 10px; padding: 7px 12px; text-align: left;
+}
+.frow:active { transform: scale(.98); }
+.frow b { font-size: 15px; font-weight: 900; color: #155f4d; }
+.frow span { font-size: 15px; font-weight: 700; color: #4a4f63; font-variant-numeric: tabular-nums; }
+.pnote {
+  margin-top: 10px; background: #ecf7f4; border-radius: 12px;
+  padding: 9px 12px; font-size: 13.5px; line-height: 1.7; color: #3d5c56; font-weight: 600;
+}
+
+/* ---------- 单元横幅与入场动画 ---------- */
+.unit-banner { margin: 4px 0 14px; border-radius: 14px; overflow: hidden; }
+.unit-banner svg { width: 100%; height: auto; display: block; }
+.unit-banner:hover svg { transform: translateY(-1px); transition: transform .3s ease; }
+@keyframes mbFloat {
+  0%, 100% { transform: translateY(0); opacity: .7; }
+  50% { transform: translateY(-8px); opacity: .95; }
+}
+.mb-float { animation: mbFloat 3.4s ease-in-out infinite; }
+.mb-float.mb-d2 { animation-duration: 4.3s; animation-delay: .7s; }
+@keyframes kFadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.kcard, .formula-card, .unit-head { animation: kFadeUp .42s ease both; }
+.kcard:nth-child(2) { animation-delay: .04s; }
+.kcard:nth-child(3) { animation-delay: .08s; }
+.kcard:nth-child(4) { animation-delay: .12s; }
+.kcard:nth-child(5) { animation-delay: .16s; }
+.kcard:nth-child(6) { animation-delay: .20s; }
+
+/* ---------- 图示通用 ---------- */
+.fig { transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease; }
+.fig:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(40, 54, 85, .08);
+  border-color: #c7d4ec;
+}
+.fig:hover .fig-svg { transform: scale(1.005); transition: transform .35s ease; }
+.fig:has(.mscale-section):hover, .fig:has(.mb-handwash):hover { transform: none; }
+.fig:has(.mscale-section):hover .fig-svg, .fig:has(.mb-handwash):hover .fig-svg { transform: none; }
+.fig .fig-btn:disabled { opacity: .5; cursor: default; transform: none; }
+
+/* ============================================================
+   尺度缩放台（astro-discovery 的向下镜像）
+   ============================================================ */
+.mscale-section {
+  margin-block: 22px; padding: clamp(16px, 2.2vw, 28px);
+  border: 1px solid var(--line); border-radius: 14px; background: var(--card);
+  scroll-margin-top: 30px;
+}
+.mscale-section h2 { margin-block: 4px 8px; font-size: 21px; }
+.mscale-section p { margin: 8px 0; font-size: 14.5px; line-height: 1.75; color: #4a4f63; }
+.mscale-stops { display: flex; flex-wrap: wrap; gap: 10px; margin-block: 14px 4px; }
+.mscale-stops button, .mscale-options button {
+  min-height: 44px; padding: 8px 16px; border: 1.5px solid var(--line);
+  border-radius: 999px; background: var(--card); color: #34384d;
+  font: inherit; font-weight: 800; cursor: pointer;
+}
+.mscale-stops button:hover, .mscale-options button:hover { background: #f2f5fb; }
+.mscale-stops button[aria-pressed="true"], .mscale-options button[aria-pressed="true"] {
+  color: #fff; background: #157d73; border-color: #157d73;
+}
+.mscale-address { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 26px; align-items: center; }
+.mscale-stage { border-radius: 12px; overflow: hidden; }
+.mscale-stage .fig-svg { display: block; width: 100%; height: auto; border-radius: 12px; }
+.mscale-address h3 { margin-block: 10px 4px; font-size: 22px; }
+.mscale-address-path { font-weight: 800; color: #157d73; }
+.mscale-size { font-weight: 800; color: #34384d; }
+.mscale-compare {
+  margin: 10px 0; padding: 9px 12px; border-radius: 12px;
+  background: #ecf7f4; color: #155f4d; font-size: 13.5px; font-weight: 700; line-height: 1.7;
+}
+.mscale-section a { color: var(--course-action, #157d73); text-decoration: underline; display: inline-block; padding-block: 8px; }
+.mscale-slider { display: flex; align-items: center; gap: 16px; margin-top: 18px; font-weight: 800; }
+.mscale-slider input { flex: 1; min-width: 0; accent-color: #157d73; min-height: 44px; }
+.mscale-progress { font-weight: 800; color: #55506d; }
+.mscale-questions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; margin-top: 12px; }
+.mscale-questions fieldset { border: 1.5px solid var(--line); padding: 16px; border-radius: 12px; }
+.mscale-questions legend { padding: 0 6px; font-weight: 800; max-width: 100%; font-size: 14.5px; }
+.mscale-options { display: flex; flex-wrap: wrap; gap: 8px; margin-block: 10px; }
+.mscale-feedback { font-size: 13.5px; line-height: 1.7; color: #4a4f63; min-height: 1em; }
+.mscale-questions [data-result="correct"] { border-color: #2fbf71; }
+.mscale-questions [data-result="retry"] { border-color: #e6b23c; }
+@media (max-width: 900px) {
+  .mscale-address, .mscale-questions { grid-template-columns: 1fr; }
+}
+
+/* ============================================================
+   洗手公平比较台
+   ============================================================ */
+.mb-handwash-safety {
+  margin: 4px 0 10px; padding: 8px 12px; border-radius: 12px;
+  background: #fdf3e4; color: #7a5327; font-size: 13.5px; line-height: 1.7; font-weight: 700;
+}
+.mb-handwash-table, .mb-handwash-table table {
+  width: 100%; border-collapse: collapse; margin-top: 8px;
+  font-size: 13.5px; background: var(--card); min-width: 520px;
+}
+.mb-handwash-table { overflow-x: auto; }
+.mb-handwash-table :is(th, td) {
+  border: 1px solid var(--line); padding: 7px 10px; text-align: left; vertical-align: top; line-height: 1.6;
+}
+.mb-handwash-table thead th { background: #ecf7f4; color: #155f4d; font-size: 12.5px; white-space: nowrap; }
+.mb-handwash-table th[scope="row"] b { font-size: 14.5px; display: block; }
+.mb-row-safety { display: block; margin-top: 3px; font-size: 12px; color: #7a86a0; font-weight: 700; }
+.mb-guess { display: flex; flex-wrap: wrap; gap: 6px; }
+.mb-guess-btn { min-height: 40px; padding: 7px 12px; font-size: 14px; }
+.mb-guess-btn[aria-pressed="true"] { background: #e4f3ee; border-color: #2fbf71; color: #187749; }
+.mb-reveal { margin: 8px 0 4px; padding: 8px 12px; border-radius: 10px; font-size: 13.5px; line-height: 1.7; font-weight: 700; background: #ecf7f4; color: #155f4d; }
+.mb-observe-label { display: grid; gap: 4px; margin-top: 8px; font-size: 12.5px; font-weight: 800; color: #55506d; }
+.mb-observe-label textarea {
+  width: 100%; min-height: 52px; padding: 8px 10px; resize: vertical;
+  border: 1.5px solid var(--line); border-radius: 10px;
+  font-family: inherit; font-size: 13.5px; line-height: 1.6; color: #34384d;
+}
+.mb-observe-label textarea:focus-visible { outline: 3px solid #4d96ff; outline-offset: 2px; }
+.mb-rec-count { margin-top: 6px; font-size: 13px; color: #7a86a0; font-weight: 700; }
+.mb-handwash-note { margin: 10px 0 0; font-size: 13px; line-height: 1.7; color: #4a5f6d; font-weight: 600; }
+
+/* ---------- 打印 ---------- */
+@media print {
+  .study-course .study-page { background: #fff; font-size: 13px; }
+  #app > header, .sidebar, .toolbar, .textbook-banner, .skip-link,
+  .say, .learn-btn, .goal-tags { display: none !important; }
+  .study-shell { display: block; padding: 0; }
+  .study-content { padding: 0; }
+  .unit-head { border: 1px solid #ccc; box-shadow: none; }
+  .kcard, .formula-card { box-shadow: none; break-inside: avoid; page-break-inside: avoid; margin-bottom: 12px; }
+  .unit-banner, .fig { break-inside: avoid; page-break-inside: avoid; }
+  .mscale-stops, .mscale-slider, .mb-guess { display: none !important; }
+  .mscale-questions { display: block; }
+}
+
+/* ---------- 减少动画偏好 ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .kcard, .formula-card, .unit-head, .mb-float, .fig {
+    animation: none !important;
+    transition: none !important;
+  }
+}

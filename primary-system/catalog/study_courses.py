@@ -76,6 +76,13 @@ matter_lab = TemplateView.as_view(template_name='study_topics/course.html', extr
     'course_links': (('science-elements', '查元素周期表'), ('science-rumors', '科学流言粉碎机')),
 })
 
+microbes_lab = TemplateView.as_view(template_name='study_topics/course.html', extra_context={
+    'study_area': 'science', 'study_label': '科学',
+    'course_slug': 'microbes', 'course_title': '微生物·看不见的世界', 'course_section': '微生物',
+    'course_intro': '一滴水里有什么？细菌是好还是坏？从四大家族到尺度缩放台，再到发酵厨房和免疫防线。',
+    'course_links': (('science-body', '人体奥秘站'), ('science-rumors', '科学流言粉碎机')),
+})
+
 hanzi_evolution = TemplateView.as_view(template_name='study_topics/course.html', extra_context={
     'study_area': 'chinese', 'study_label': '语文',
     'course_slug': 'hanzi-evo', 'course_title': '汉字演变馆', 'course_section': '字族',

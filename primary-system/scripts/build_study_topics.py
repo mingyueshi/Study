@@ -20,7 +20,7 @@ TOPICS = {
     'climate': ('study-climate', 'geography-climate', ('index', 'weather', 'types', 'china')),
     'map-skills': ('study-map-skills', 'geography-map-skills', ('index', 'scale', 'direction', 'legend', 'contours', 'profile')),
 }
-COURSES = ('astro', 'lit', 'sci', 'matter', 'hanzi-evo')
+COURSES = ('astro', 'lit', 'sci', 'matter', 'microbes', 'hanzi-evo')
 # 数据全局名：slug 含连字符时 .upper() 不是合法 JS 标识符，需要单独映射。
 COURSE_GLOBALS = {'hanzi-evo': 'HANZI_EVO'}
 EVOLUTION_CHARS = PROJECT / 'hanzi' / 'evolution_chars.py'
@@ -311,6 +311,9 @@ def course_outputs():
                 yield dest / filename, (SOURCE / filename).read_bytes()
         if topic == 'matter':
             for filename in ('matter-mix-data.js', 'matter-mix.js'):
+                yield dest / filename, (SOURCE / filename).read_bytes()
+        if topic == 'microbes':
+            for filename in ('microbe-scale-data.js', 'microbe-scale.js'):
                 yield dest / filename, (SOURCE / filename).read_bytes()
         if topic == 'astro':
             for filename in ('astro-discovery-data.js', 'astro-discovery.js', 'astro-media-data.js', 'astro-media.js', 'astro-observation-data.js', 'astro-observation.js', 'astro-lab-data.js', 'astro-lab.js', 'astro-moon-calendar.js', 'astro-portal.js', 'astro-portal.css', 'astro-field.css', 'astro-constellations.js', 'astro-sky.js', 'astro-telescope.js', 'vendor/d3-celestial/LICENSE.txt'):

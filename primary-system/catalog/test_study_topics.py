@@ -34,6 +34,7 @@ COURSES = (
     ('chinese', 'literature-study', 'lit', '文学常识', ('poetry-index', 'idiom-stories')),
     ('science', 'science-lab', 'sci', '科学实验室', ('science-elements',)),
     ('science', 'science-matter', 'matter', '物质实验室', ('science-elements', 'science-rumors')),
+    ('science', 'science-microbes', 'microbes', '微生物·看不见的世界', ('science-body', 'science-rumors')),
     ('chinese', 'hanzi-evolution', 'hanzi-evo', '汉字演变馆', ('dictionary', 'hanzi-polyphones')),
 )
 
@@ -267,6 +268,21 @@ class StudyTopicPageTests(SimpleTestCase):
         self.assertContains(response, f'href="{reverse("science-elements")}"')
         self.assertContains(response, f'href="{reverse("science-rumors")}"')
         self.assertNotContains(response, 'study_topics/sci/sci-experiments')
+
+    def test_microbes_lab_orders_scale_assets_before_consumers(self):
+        page = TopicMarkup(self.client.get(reverse('science-microbes')).content.decode())
+        assets = [url.split('?')[0] for url in page.assets]
+        data = '/static/study_topics/microbes/microbe-scale-data.js'
+        player = '/static/study_topics/microbes/microbe-scale.js'
+        self.assertIn(data, assets)
+        self.assertIn(player, assets)
+        self.assertLess(assets.index(data), assets.index(player))
+        self.assertLess(assets.index(player), assets.index('/static/study_topics/microbes/microbes-figures.js'))
+        self.assertLess(assets.index('/static/study_topics/microbes/microbes-figures.js'),
+                        assets.index('/static/study_topics/microbes/microbes-app.js'))
+        response = self.client.get(reverse('science-microbes'))
+        self.assertContains(response, f'href="{reverse("science-body")}"')
+        self.assertContains(response, f'href="{reverse("science-rumors")}"')
 
     def test_shared_controls_and_learning_settings_across_topics(self):
         routes = HISTORY_PAGES + GEOGRAPHY_PAGES + tuple(course[1] for course in COURSES) + (
@@ -687,7 +703,7 @@ class StudyTopicPageTests(SimpleTestCase):
 
 class StudyTopicEntryTests(TestCase):
     def test_science_includes_the_evidence_topics_and_accepts_the_old_filter(self):
-        urls = [reverse(name) for name in ('science-lab', 'science-matter', 'science-body', 'human-origins', 'mysteries', 'science-rumors')]
+        urls = [reverse(name) for name in ('science-lab', 'science-matter', 'science-microbes', 'science-body', 'human-origins', 'mysteries', 'science-rumors')]
         for area in ('science', 'exploration'):
             with self.subTest(area=area):
                 response = self.client.get(reverse('home'), {'area': area})
@@ -695,6 +711,7 @@ class StudyTopicEntryTests(TestCase):
                 self.assertNotContains(response, 'href="?area=exploration"')
                 self.assertContains(response, 'href="?area=science" class="on"')
         self.assertContains(self.client.get(reverse('home')), 'icons/matter-lab.svg')
+        self.assertContains(self.client.get(reverse('home')), 'icons/microbe.svg')
         for name in ('science-body', 'human-origins', 'mysteries', 'science-rumors'):
             response = self.client.get(reverse(name))
             self.assertContains(response, f'href="{reverse("home")}?area=science#modules-title"')
