@@ -2,6 +2,11 @@
   "schema_version": 1,
   "records": [
     {
+      "revision": "f6855094c8c78a044674a41c569157928b6a8300",
+      "date": "2026-11-22",
+      "title": "新增电脑与AI怎样工作专题"
+    },
+    {
       "revision": "b3e2bcf437a09f581af85d3cc343f1bacc31373b",
       "date": "2026-11-22",
       "title": "新增概率与统计乐园专题"
