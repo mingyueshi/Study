@@ -2,6 +2,11 @@
   "schema_version": 1,
   "records": [
     {
+      "revision": "61ffd7c086d44cdb860fffe4dd355689c4ac978c",
+      "date": "2026-11-23",
+      "title": "新增食物的旅行专题"
+    },
+    {
       "revision": "f6855094c8c78a044674a41c569157928b6a8300",
       "date": "2026-11-22",
       "title": "新增电脑与AI怎样工作专题"
