@@ -2,6 +2,11 @@
   "schema_version": 1,
   "records": [
     {
+      "revision": "65692c0c6e36dc810d0999301c895fdc51457a43",
+      "date": "2026-11-23",
+      "title": "优化乐学堂 Git 忽略规则"
+    },
+    {
       "revision": "754886eac65b02ace9886fff0d585d59ef6514eb",
       "date": "2026-11-23",
       "title": "完善 Git 提交和推送规范"
