@@ -2,6 +2,11 @@
   "schema_version": 1,
   "records": [
     {
+      "revision": "9aab3421fa1da449c41aff254ec55c0ce5fb9d55",
+      "date": "2026-11-23",
+      "title": "修复 PostgreSQL 基础包摘要兼容升级"
+    },
+    {
       "revision": "3fa994fcc81bb5a0129afe77cead84eece158e45",
       "date": "2026-11-23",
       "title": "同步正式基础包迁移清单"
