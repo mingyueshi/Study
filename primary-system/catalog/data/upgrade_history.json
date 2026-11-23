@@ -2,6 +2,11 @@
   "schema_version": 1,
   "records": [
     {
+      "revision": "9b5ebee33e9c5fa6c5605decd5c57b8b43e2fa53",
+      "date": "2026-11-23",
+      "title": "完善英语四上第五单元关联词"
+    },
+    {
       "revision": "9aab3421fa1da449c41aff254ec55c0ce5fb9d55",
       "date": "2026-11-23",
       "title": "修复 PostgreSQL 基础包摘要兼容升级"
