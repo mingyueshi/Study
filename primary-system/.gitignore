@@ -1,22 +1,29 @@
+# Python 环境与构建产物
 .venv/
 __pycache__/
 *.pyc
+staticfiles/
+.coverage
+
+# 本地配置、数据库与备份
 *.sqlite3*
 .env
 .env.*
 !.env.production.example
-.deploy-lock*/
-*.tar.gz
 .local-secret
-staticfiles/
-.coverage
+.deploy-lock*/
+.backups/
+*.tar.gz
+
+# 本地导出与运行缓存
+# 候选包供本地校验，正式基础包在 data/baseline/ 下跟踪。
+/data/baseline-candidate/
 data/*.json
+.reference-assets/
+.feihualing-cache/
+
+# 词库只收录固定输入
 data/lexicon/*
 !data/lexicon/unihan-18.0.0.zip
 !data/lexicon/CJKRadicals-18.0.0.txt
 !data/lexicon/english-wordnet-2025.xml.gz
-.backups/
-
-.reference-assets/
-
-.feihualing-cache/
