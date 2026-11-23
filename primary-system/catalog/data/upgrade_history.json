@@ -2,6 +2,11 @@
   "schema_version": 1,
   "records": [
     {
+      "revision": "3fa994fcc81bb5a0129afe77cead84eece158e45",
+      "date": "2026-11-23",
+      "title": "同步正式基础包迁移清单"
+    },
+    {
       "revision": "65692c0c6e36dc810d0999301c895fdc51457a43",
       "date": "2026-11-23",
       "title": "优化乐学堂 Git 忽略规则"
