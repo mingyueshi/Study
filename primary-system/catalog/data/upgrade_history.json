@@ -2,6 +2,11 @@
   "schema_version": 1,
   "records": [
     {
+      "revision": "754886eac65b02ace9886fff0d585d59ef6514eb",
+      "date": "2026-11-23",
+      "title": "完善 Git 提交和推送规范"
+    },
+    {
       "revision": "61ffd7c086d44cdb860fffe4dd355689c4ac978c",
       "date": "2026-11-23",
       "title": "新增食物的旅行专题"
