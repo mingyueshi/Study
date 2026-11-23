@@ -20,6 +20,11 @@ ROOT = Path(__file__).resolve().parent.parent
 DATA = Path('/data')
 BACKUPS = Path('/backups')
 CURRENT = DATA / 'current'
+# 同一批基础内容，清单只补记两条奖励分类迁移。仅承认这个升级方向。
+REWARD_CATEGORY_BASELINE_UPGRADE = (
+    'c5d6403fd728a87d3a1fb6b935f46550870e2320fb91ebf800f9608532c42233',
+    'cfeea1c9702fe60da4f7355c4079251e38a4dc119edee460c1bdd2e9e5846573',
+)
 sys.path.insert(0, str(ROOT))
 
 
@@ -36,7 +41,7 @@ def digest():
     return json.loads((ROOT / 'data/baseline/manifest.json').read_text())['digest']
 
 
-def read_state(directory=None, *, compatible=True):
+def read_state(directory=None, *, compatible=True, allow_baseline_upgrade=False):
     directory = directory or CURRENT
     if (directory / 'db.sqlite3').exists():
         raise RuntimeError('检测到旧 SQLite 数据卷，拒绝覆盖；请使用新项目名部署 PostgreSQL，个人数据需单独迁移。')
@@ -45,8 +50,13 @@ def read_state(directory=None, *, compatible=True):
     state = json.loads((directory / 'deployment.json').read_text())
     if state.get('format') != 2 or state.get('database') != 'postgresql' or not state.get('identity'):
         raise RuntimeError('部署记录不是 PostgreSQL 格式，拒绝覆盖。')
-    if compatible and state.get('baseline_digest') != digest():
-        raise RuntimeError('基础包身份已改变，停止自动更新；请先验证专用数据升级流程。')
+    if compatible:
+        stored_digest, image_digest = state.get('baseline_digest'), digest()
+        if stored_digest != image_digest:
+            if (stored_digest, image_digest) != REWARD_CATEGORY_BASELINE_UPGRADE:
+                raise RuntimeError('基础包身份已改变，停止自动更新；请先验证专用数据升级流程。')
+            if not allow_baseline_upgrade:
+                raise RuntimeError('基础包身份需要兼容升级，请运行 make update 或 make deploy 完成备份和迁移。')
     return state
 
 
@@ -82,13 +92,18 @@ def operation_lock():
             yield
 
 
-def preflight():
+def preflight(*, allow_baseline_upgrade=False):
     pg.validate_config()
+    state = None
     if CURRENT.exists():
-        check_identity(read_state())
+        state = read_state(allow_baseline_upgrade=allow_baseline_upgrade)
+        check_identity(state)
+        if state['baseline_digest'] != digest():
+            manage('check_deployment_database', '--allow-pending')
     elif not pg.is_empty():
         raise RuntimeError('数据库非空但没有部署记录，拒绝接管或覆盖。')
     manage('check', '--deploy', '--fail-level', 'ERROR')
+    return state
 
 
 def verify_assets(directory=None, database=None):
@@ -140,9 +155,9 @@ def maintenance(action):
 def promote(stage, database):
     previous_db = pg.STAGE_PREFIX + uuid4().hex
     previous_files = DATA / ('.previous-' + uuid4().hex)
-    old_state = read_state() if CURRENT.exists() else None
+    old_state = read_state(allow_baseline_upgrade=True) if CURRENT.exists() else None
     if old_state:
-        write_state(CURRENT, ready=False)
+        save_state(CURRENT, {**old_state, 'ready': False})
     try:
         pg.swap_database(database, previous_db)
     except BaseException:
@@ -167,8 +182,8 @@ def promote(stage, database):
 
 
 def prepare():
-    preflight()
-    if not CURRENT.exists():
+    state = preflight(allow_baseline_upgrade=True)
+    if state is None:
         staged_db = pg.create_stage()
         try:
             with tempfile.TemporaryDirectory(prefix='.initialize-', dir=DATA) as scratch:
@@ -187,15 +202,17 @@ def prepare():
         finally:
             pg.drop_stage(staged_db)
     else:
-        write_state(CURRENT, ready=False)
+        identity = state['identity']
+        save_state(CURRENT, {**state, 'ready': False})
         manage('migrate', '--noinput')
         manage('seed_platform')
         manage('seed_lexicon_roles')
         load_questions()
         verify_assets()
     manage('build_feihualing_index', '--if-needed')
+    manage('check_deployment_database')
     manage('check')
-    write_state(CURRENT, ready=True)
+    write_state(CURRENT, ready=True, identity=identity)
     print('PostgreSQL 部署数据已就绪。', flush=True)
 
 
@@ -260,7 +277,7 @@ def extract_backup(path, destination):
             raise RuntimeError('备份缺少必要文件，或属于旧 SQLite 格式。')
         archive.extractall(destination, filter='data')
     stage = destination / 'current'
-    state = read_state(stage)
+    state = read_state(stage, allow_baseline_upgrade=True)
     if not state.get('ready'):
         raise RuntimeError('该备份来自未完成的部署，不能自动恢复。')
     checksums = json.loads((stage / 'backup.json').read_text())
@@ -268,20 +285,20 @@ def extract_backup(path, destination):
             or checksums.get('state_sha256') != sha256(stage / 'deployment.json')):
         raise RuntimeError('备份摘要校验失败。')
     pg.client('pg_restore', '--list', stage / 'database.dump', stdout=subprocess.DEVNULL)
-    return stage
+    return stage, state
 
 
 @contextmanager
 def validated_backup(path):
     with tempfile.TemporaryDirectory(prefix='.restore-', dir=DATA) as scratch:
-        stage = extract_backup(path, Path(scratch))
+        stage, state = extract_backup(path, Path(scratch))
         database = pg.create_stage()
         try:
             pg.restore_dump(stage / 'database.dump', database)
-            check_identity(read_state(stage), database)
+            check_identity(state, database)
             manage('check_deployment_database', database=database)
             verify_assets(stage, database)
-            yield stage, database
+            yield stage, database, state
         finally:
             pg.drop_stage(database)
 
@@ -303,11 +320,11 @@ def import_backup(name):
 
 
 def restore(name, validate_only=False):
-    with validated_backup(backup_path(name)) as (stage, database):
+    with validated_backup(backup_path(name)) as (stage, database, state):
         if validate_only:
             print('备份已在临时 PostgreSQL 库中完整恢复并通过校验。', flush=True)
             return
-        write_state(stage, ready=False)
+        write_state(stage, ready=False, identity=state['identity'])
         (stage / 'database.dump').unlink()
         (stage / 'backup.json').unlink()
         promote(stage, database)
@@ -339,7 +356,7 @@ def main():
             shutil.copyfileobj(source, sys.stdout.buffer)
     else:
         with operation_lock():
-            if args.action == 'preflight': preflight()
+            if args.action == 'preflight': preflight(allow_baseline_upgrade=True)
             elif args.action == 'prepare': prepare()
             elif args.action == 'backup': backup()
             elif args.action == 'import': import_backup(args.name)

@@ -12,6 +12,8 @@ import urllib.request
 import urllib.parse
 from uuid import uuid4
 
+from runtime import REWARD_CATEGORY_BASELINE_UPGRADE, digest
+
 ROOT = Path(__file__).resolve().parent.parent
 
 
@@ -193,6 +195,20 @@ Progress.objects.create(user=user, item=ContentItem.objects.first(), status='mas
             assert container_id('db') == db_id
             shell("from learning.models import Progress; assert Progress.objects.get(user__username='deploy_learner').revision == 7")
             print('快捷场景通过：更新应用、启用镜像、配置生效、待迁移拦截及迁移、兑换/题库/权限/索引单项维护；数据库容器保持不变。', flush=True)
+
+            previous_digest, updated_digest = REWARD_CATEGORY_BASELINE_UPGRADE
+            backup_digest = digest()
+            if backup_digest == updated_digest:
+                # 本次独立项目的 PostgreSQL 已迁移，模拟仍记录旧基础包摘要的站点。
+                shell(f"""
+import json
+from pathlib import Path
+path = Path('/data/current/deployment.json')
+state = json.loads(path.read_text())
+state['baseline_digest'] = {previous_digest!r}
+path.write_text(json.dumps(state))
+""")
+                backup_digest = previous_digest
             make('backup')
             backup_output = make('backups', capture_output=True).stdout
             backup = [line.split()[0] for line in backup_output.splitlines() if line.startswith('primary-')][-1]
@@ -201,6 +217,7 @@ Progress.objects.create(user=user, item=ContentItem.objects.first(), status='mas
             with tarfile.open(Path(scratch) / backup, 'r:gz') as archive:
                 state = json.load(archive.extractfile('current/deployment.json'))
                 assert state['database'] == 'postgresql'
+                assert state['baseline_digest'] == backup_digest
                 assert archive.getmember('current/database.dump').size > 0
             imported = Path(scratch) / ('primary-import-' + uuid4().hex[:8] + '.tar.gz')
             (Path(scratch) / backup).rename(imported)
@@ -216,6 +233,12 @@ p = Progress.objects.get(user__username='deploy_learner')
 assert (p.status, p.note, p.revision) == ('mastered', '部署更新保留学习记录', 7)
 """
             shell(check)
+            shell(f"""
+import json
+from pathlib import Path
+state = json.loads(Path('/data/current/deployment.json').read_text())
+assert state['ready'] and state['baseline_digest'] == {digest()!r}
+""")
             shell("from learning.models import Progress; Progress.objects.filter(user__username='deploy_learner').update(note='恢复前的修改')")
             make('restore', f'BACKUP={backup}')
             shell(check)

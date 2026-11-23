@@ -60,6 +60,13 @@ class RuntimeTests(unittest.TestCase):
         runtime.backup()
         return next(self.backups.glob('*.tar.gz'))
 
+    def use_legacy_baseline(self):
+        previous_digest, image_digest = runtime.REWARD_CATEGORY_BASELINE_UPGRADE
+        state = {**runtime.read_state(), 'baseline_digest': previous_digest}
+        runtime.save_state(self.current, state)
+        self.mock(runtime, 'digest', return_value=image_digest)
+        return state, image_digest
+
     def test_shortcuts_refuse_fresh_or_unfinished_installations(self):
         runtime.write_state(self.current, ready=False)
         with self.assertRaisesRegex(RuntimeError, '未完成'):
@@ -142,6 +149,77 @@ class RuntimeTests(unittest.TestCase):
                 runtime.prepare()
         self.manage.assert_not_called()
         self.assertTrue(runtime.read_state()['ready'])
+
+    def test_known_baseline_upgrade_requires_full_update_and_preserves_data(self):
+        old_state, image_digest = self.use_legacy_baseline()
+        with self.assertRaisesRegex(RuntimeError, 'make update'):
+            runtime.check_existing(allow_pending=True)
+        self.manage.assert_not_called()
+        runtime.preflight(allow_baseline_upgrade=True)
+        self.manage.assert_any_call('check_deployment_database', '--allow-pending')
+        self.assertEqual(runtime.read_state(compatible=False), old_state)
+
+        archive = self.backup()
+        runtime.prepare()
+
+        with tarfile.open(archive) as backup:
+            self.assertEqual(json.load(backup.extractfile('current/deployment.json')), old_state)
+        state = runtime.read_state()
+        self.assertTrue(state['ready'])
+        self.assertEqual(state['identity'], old_state['identity'])
+        self.assertEqual(state['baseline_digest'], image_digest)
+        self.manage.assert_any_call('migrate', '--noinput')
+        self.manage.assert_any_call('check_deployment_database')
+        self.assertNotIn('restore_postgres_baseline', [call.args[0] for call in self.manage.call_args_list])
+        self.assertEqual(self.databases['live']['note'], '学习记录')
+        self.assertEqual((self.current / 'reference-assets/source.txt').read_text(), '固定来源')
+
+    def test_known_baseline_upgrade_preflight_rejects_unknown_migrations(self):
+        old_state, _ = self.use_legacy_baseline()
+        self.manage.side_effect = RuntimeError('未知的迁移')
+
+        with self.assertRaisesRegex(RuntimeError, '未知的迁移'):
+            runtime.preflight(allow_baseline_upgrade=True)
+
+        self.manage.assert_called_once_with('check_deployment_database', '--allow-pending')
+        self.assertEqual(runtime.read_state(compatible=False), old_state)
+
+    def test_failed_baseline_upgrade_keeps_old_digest_for_retry(self):
+        old_state, image_digest = self.use_legacy_baseline()
+
+        def fail(*args, **kwargs):
+            if args[0] == 'verify_deployment_assets':
+                raise RuntimeError('资料校验失败')
+
+        self.manage.side_effect = fail
+        with self.assertRaisesRegex(RuntimeError, '资料校验失败'):
+            runtime.prepare()
+        self.assertEqual(runtime.read_state(compatible=False), {**old_state, 'ready': False})
+
+        self.manage.side_effect = None
+        runtime.prepare()
+        self.assertTrue(runtime.read_state()['ready'])
+        self.assertEqual(runtime.read_state()['baseline_digest'], image_digest)
+        with patch.object(runtime, 'digest', return_value=old_state['baseline_digest']):
+            with self.assertRaisesRegex(RuntimeError, '基础包身份'):
+                runtime.preflight(allow_baseline_upgrade=True)
+
+    def test_pre_upgrade_backup_can_be_restored_with_the_new_image(self):
+        old_state, image_digest = self.use_legacy_baseline()
+        archive = self.backup()
+        runtime.prepare()
+        self.databases['live']['note'] = '更新后的修改'
+
+        runtime.restore(archive.name, validate_only=True)
+        self.assertEqual(self.databases['live']['note'], '更新后的修改')
+        runtime.restore(archive.name)
+
+        state = runtime.read_state()
+        self.assertTrue(state['ready'])
+        self.assertEqual(state['identity'], old_state['identity'])
+        self.assertEqual(state['baseline_digest'], image_digest)
+        self.assertEqual(self.databases['live']['note'], '学习记录')
+        self.assertEqual(set(self.databases), {'live'})
 
     def test_failed_update_is_not_ready(self):
         def fail(*args, **kwargs):

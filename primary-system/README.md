@@ -127,6 +127,8 @@
 
 后续 `make update` 快进拉取 Git 并在备份后升级；已同步代码用 `make update PULL=0`。生产使用独立的 **PostgreSQL 16 Docker 容器**，仅在容器内网连接；数据库、私有资料和备份分别保存在持久卷。`make status`、`make logs`、`make db-shell`、`make db-logs`、`make restart`、`make backup`、`make restore BACKUP=文件名` 提供日常维护，数据库小版本升级使用 `make db-update`。更新不重置账号或学习记录，新站点初始化使用发布基础包；本机仍默认 SQLite，个人数据不会自动上云。
 
+已有 PostgreSQL 站点若仍使用 `3fa994f` 之前的基础包摘要，使用 `make update` 完成这次[清单兼容升级](docs/docker-deployment.md#一键更新)。
+
 本地可用 `make test-deploy` 测试部署保护逻辑，`make test-docker` 在独立容器和临时卷中验证实际部署、更新、备份恢复和数据持久性。全部运维说明、反向代理规则与故障恢复步骤见 [部署文档](docs/docker-deployment.md)。
 
 日常只改页面、样式、文件型专题或无迁移的代码，使用 `make update-app`（已拉取代码加 `PULL=0`），省略全量备份、迁移、资料扫描与索引重建。已构建镜像用 `make apply`；应用配置改动用 `make reload-config`，普通 `make restart` 保留原环境。快捷更新遇到待执行迁移会在替换应用前拒绝；改用完整更新，或构建后 `make db-migrate`。积分兑换用 `make rewards-preview`、`make rewards-import`；另有 `questions-import`、`permissions-sync` 和 `index-rebuild` 单项维护，具体执行范围见部署文档的场景表。
