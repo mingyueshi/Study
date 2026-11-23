@@ -144,11 +144,24 @@ class DictionaryWordCardTests(PlatformFixture):
             source_file='primary/english-data.js', status='published')
         Placement.objects.create(unit=cls.unit, item=cls.item)
         Placement.objects.create(unit=cls.unit, item=cls.sibling)
+        travel = Unit.objects.create(textbook_book=cls.collection, code='4a-u5', title="Unit 5 Let's go!")
+        cls.bus = ContentItem.objects.create(module=english, kind='word', title='bus', summary='n. 公交车',
+            source_key='primary:english:4a-u5:4a-u5:bus', source_payload={'en': 'bus', 'ipa': '/bʌs/'},
+            source_hash='a' * 64, source_file='primary/english-data.js', status='published')
+        Placement.objects.create(unit=travel, item=cls.bus)
         release, _ = stage_manifest(primary_manifest('english'), exact_reuse=True)
         cls.release = release
         activate_release(release.pk, expected_current='', reason='测试启用教材词源')
         link_primary_records(release)
         call_command('review_primary_readings', stdout=io.StringIO())
+
+    def test_travel_word_card_shares_curated_links_with_unit(self):
+        response = self.client.get(f'/items/{self.bus.pk}/')
+        self.assertContains(response, 'bus stop')
+        self.assertContains(response, '公交车站')
+        links = {link['word']: link['tag'] for link in response.context['related_links']}
+        self.assertEqual(links['bus stop'], '组')
+        self.assertEqual(links['tram'], '类')
 
     def test_word_card_renders_dictionary_driven_content(self):
         response = self.client.get(f'/items/{self.item.pk}/')

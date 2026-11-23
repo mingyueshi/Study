@@ -8,7 +8,9 @@ const target = path.resolve(process.argv[2] || path.join(__dirname, '../data/pri
 const names = ['knowledge', 'math', 'english'];
 const modules = names.map(code => {
   const file = path.join(root, `${code}-data.js`);
-  return {code, source_file: `content_sources/${code}-data.js`, sha256: crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex'), data: require(file)};
+  const hash = crypto.createHash('sha256').update(fs.readFileSync(file));
+  if (code === 'english') hash.update(fs.readFileSync(path.join(root, 'english-word-links.json')));
+  return {code, source_file: `content_sources/${code}-data.js`, sha256: hash.digest('hex'), data: require(file)};
 });
 fs.mkdirSync(path.dirname(target), {recursive: true});
 fs.writeFileSync(target, JSON.stringify({schema_version: 1, modules}, null, 2) + '\n');

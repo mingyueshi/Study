@@ -7,6 +7,7 @@ from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.cache import never_cache
 from django.views.decorators.http import require_GET, require_http_methods
+from catalog.english_word_links import english_word_links
 from catalog.learning_digest import learning_digest
 from catalog.models import ENGLISH_RELATION_TAGS, Placement, published_items
 from lexicon.models import ContentEntryLink, SourceRecord
@@ -64,12 +65,13 @@ def word_card_context(item, resolver=None):
     # 场景单词的关联词是英文字符串列表；教材英语词的 links 是带类型的对象列表，
     # 归一化成 {word, item, zh, tag} 后共用一套关联词模板。
     related = [w for w in payload.get('related', []) if isinstance(w, str) and w.strip()]
-    related += [link['en'] for link in payload.get('links', []) if isinstance(link, dict) and str(link.get('en') or '').strip()]
+    word_links = [link for link in english_word_links(item)
+                  if isinstance(link, dict) and str(link.get('en') or '').strip()]
+    related += [link['en'] for link in word_links]
     if related:
         cards = {card.title: card for card in published_items().filter(
             module__code=item.module.code, title__in=related).select_related('module')}
-        links_by_word = {link['en']: link for link in payload.get('links', [])
-                         if isinstance(link, dict) and link.get('en') in related}
+        links_by_word = {link['en']: link for link in word_links}
         context['related_links'] = [{
             'word': word, 'item': cards.get(word),
             'zh': links_by_word.get(word, {}).get('zh', ''),

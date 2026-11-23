@@ -4,6 +4,7 @@
    ============================================================ */
 'use strict';
 const { ENGLISH_UNITS, ENGLISH_BOOKS, ENGLISH_WORDS, ENGLISH_DIALOGUES, RELATION_ORDER } = require('../english-data.js');
+const CURATED_WORD_LINKS = require('../english-word-links.json');
 
 let fails = 0;
 let checked = 0;
@@ -68,6 +69,35 @@ for (const unit of ENGLISH_UNITS) {
 }
 ok(total === 310, '总词数应为 310，实际 ' + total);
 ok(ENGLISH_WORDS.length === total, '练习索引导出数应与词卡数一致');
+
+console.log('— 单元关联词 —');
+for (const [unitId, words] of Object.entries(CURATED_WORD_LINKS)) {
+  const unit = ENGLISH_UNITS.find(item => item.id === unitId);
+  ok(unit, '关联词单元必须存在：' + unitId);
+  if (!unit) continue;
+  ok(Object.keys(words).length === unit.words.length, unitId + ' 应覆盖全部词卡');
+  for (const word of unit.words) {
+    const groups = words[word.en];
+    const label = unitId + ': ' + word.en;
+    ok(groups && Object.keys(groups).length >= 2, label + ' 缺少多种有效关系');
+    if (!groups) continue;
+    const seen = new Set([word.en.toLowerCase()]);
+    for (const [type, entries] of Object.entries(groups)) {
+      ok(RELATION_ORDER.includes(type), label + ' 关系类型无效：' + type);
+      ok(Array.isArray(entries) && entries.length > 0, label + ' 关系组为空：' + type);
+      for (const entry of entries) {
+        ok(Array.isArray(entry) && entry.length === 2, label + ' 应为英文和中文各一项');
+        const [en, zh] = entry;
+        ok(typeof en === 'string' && en === en.trim(), label + ' 英文需要去除首尾空白');
+        ok(typeof zh === 'string' && zh.trim().length > 0, label + ' 缺少中文释义');
+        const lower = en.toLowerCase();
+        ok(!seen.has(lower), label + ' 重复关联：' + en);
+        seen.add(lower);
+      }
+    }
+    ok(word.links.length === seen.size - 1, label + ' 导出应保留所有编排，未通过通用上限截断');
+  }
+}
 
 console.log('— 课文对话 —');
 const unitIdSet = new Set(ENGLISH_UNITS.map(unit => unit.id));

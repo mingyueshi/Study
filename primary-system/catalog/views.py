@@ -6,6 +6,7 @@ from django.http import Http404, JsonResponse
 from django.shortcuts import render, get_object_or_404, reverse
 from django.views.decorators.cache import never_cache
 from django.views.decorators.http import require_GET
+from .english_word_links import english_word_links
 from .forms import CatalogFilter
 from .entry_registry import entry_for, special_entries
 from lexicon.chinese import safe_word_item, safe_search, request_resolver, LessonResolver
@@ -160,8 +161,7 @@ def english_link_pronunciations(placements):
     """
     headwords = set()
     for placement in placements:
-        raw = placement.item.source_payload if isinstance(placement.item.source_payload, dict) else {}
-        for link in raw.get('links') or []:
+        for link in english_word_links(placement.item):
             if isinstance(link, dict) and str(link.get('en') or '').strip():
                 headwords.add(link['en'].strip())
     index = {}
@@ -186,10 +186,8 @@ def attach_english_link_chips(placements):
     """解析教材英语词的关联词（相反/相近/同根/组词/同类），点击即发音。"""
     pronunciations = english_link_pronunciations(placements)
     for placement in placements:
-        raw = placement.item.source_payload if isinstance(placement.item.source_payload, dict) else {}
-        links = raw.get('links') if isinstance(raw.get('links'), list) else []
         chips = []
-        for link in links:
+        for link in english_word_links(placement.item):
             if not isinstance(link, dict) or not str(link.get('en') or '').strip():
                 continue
             chips.append({

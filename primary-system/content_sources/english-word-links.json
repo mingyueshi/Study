@@ -1,0 +1,129 @@
+{
+  "4a-u5": {
+    "bus": {
+      "phrase": [["bus stop", "公交车站"], ["bus driver", "公交车司机"], ["get on the bus", "上公交车"]],
+      "group": [["car", "汽车"], ["train", "火车"], ["bike", "自行车"], ["subway", "地铁"], ["tram", "有轨电车"], ["taxi", "出租车"]]
+    },
+    "car": {
+      "phrase": [["drive a car", "开车"], ["car park", "停车场"]],
+      "group": [["bus", "公交车"], ["truck", "货车"], ["taxi", "出租车"], ["bike", "自行车"], ["train", "火车"]]
+    },
+    "train": {
+      "phrase": [["train station", "火车站"], ["train ticket", "火车票"], ["get off the train", "下火车"]],
+      "group": [["subway", "地铁"], ["tram", "有轨电车"], ["bus", "公交车"], ["plane", "飞机"]]
+    },
+    "city": {
+      "phrase": [["city centre", "市中心"], ["city bus", "市区公交车"]],
+      "group": [["town", "城镇"], ["village", "村庄"], ["hometown", "家乡"], ["place", "地方"]]
+    },
+    "town": {
+      "family": [["hometown", "家乡"]],
+      "phrase": [["town centre", "镇中心"], ["from city to town", "从城市到城镇"]],
+      "group": [["city", "城市"], ["village", "村庄"], ["place", "地方"]]
+    },
+    "plane": {
+      "near": [["aeroplane", "飞机（英式用语）"]],
+      "phrase": [["plane ticket", "飞机票"], ["on a plane", "在飞机上"]],
+      "group": [["airport", "机场"], ["flight", "航班"], ["sky", "天空"], ["fly", "飞；乘飞机"]]
+    },
+    "sky": {
+      "phrase": [["up in the sky", "在高高的天空中"], ["night sky", "夜空"]],
+      "group": [["plane", "飞机"], ["cloud", "云"], ["sun", "太阳"], ["star", "星星"], ["rainbow", "彩虹"]]
+    },
+    "ship": {
+      "phrase": [["on a ship", "在船上"], ["a cargo ship", "货船"]],
+      "group": [["boat", "小船"], ["sea", "海"], ["port", "港口"], ["plane", "飞机"], ["train", "火车"]]
+    },
+    "place": {
+      "phrase": [["different places", "不同的地方"], ["a place to visit", "可以去参观的地方"]],
+      "group": [["city", "城市"], ["town", "城镇"], ["park", "公园"], ["airport", "机场"], ["library", "图书馆"]]
+    },
+    "near": {
+      "opp": [["far", "远的；远地"]],
+      "near": [["close to", "靠近"]],
+      "family": [["nearby", "附近的；在附近"]],
+      "phrase": [["near and far", "远近各处"], ["near the park", "在公园附近"]],
+      "group": [["way", "路；路线"], ["place", "地方"]]
+    },
+    "travel": {
+      "near": [["trip", "旅行；出行"], ["journey", "旅程"]],
+      "family": [["traveller", "旅行者"]],
+      "phrase": [["travel by plane", "乘飞机旅行"], ["travel around", "到各处旅行"]],
+      "group": [["airport", "机场"], ["ticket", "车票；机票"], ["way", "出行方式；路线"]]
+    },
+    "way": {
+      "near": [["route", "路线"]],
+      "phrase": [["a green way", "环保的方式"], ["a long way", "很远的路"], ["the way home", "回家的路"]],
+      "group": [["street", "街道"], ["travel", "旅行"], ["place", "地方"]]
+    },
+    "picnic": {
+      "phrase": [["picnic basket", "野餐篮"], ["picnic blanket", "野餐垫"], ["go for a picnic", "去野餐"]],
+      "group": [["park", "公园"], ["sandwich", "三明治"], ["trip", "出游"], ["sunny", "晴朗的"]]
+    },
+    "minute": {
+      "phrase": [["in five minutes", "五分钟后"], ["one minute left", "还剩一分钟"], ["for a minute", "持续一分钟"]],
+      "group": [["second", "秒"], ["hour", "小时"], ["time", "时间"], ["later", "后来；过一会儿"]]
+    },
+    "wear": {
+      "near": [["put on", "穿上；戴上（动作）"]],
+      "phrase": [["wear green", "穿绿色衣服"], ["wear glasses", "戴眼镜"]],
+      "group": [["coat", "外套"], ["hat", "帽子"], ["uniform", "制服"], ["take off", "脱下；摘下"]]
+    },
+    "live": {
+      "family": [["life", "生活"]],
+      "phrase": [["live near", "住在……附近"], ["live far away", "住得很远"], ["live in a city", "住在城市里"]],
+      "group": [["home", "家"], ["town", "城镇"], ["hometown", "家乡"]]
+    },
+    "away": {
+      "phrase": [["far away", "在远处"], ["away from home", "离开家；离家在外"], ["move away", "搬走；移开"], ["a long way away", "在很远的地方"]],
+      "group": [["near", "在附近"], ["way", "路；距离"]]
+    },
+    "truck": {
+      "near": [["lorry", "货车；卡车（英式用语）"]],
+      "phrase": [["truck driver", "货车司机"], ["delivery truck", "送货车"]],
+      "group": [["van", "厢式货车"], ["car", "汽车"], ["bus", "公交车"], ["wheel", "车轮"]]
+    },
+    "bamboo": {
+      "phrase": [["bamboo shoots", "竹笋"], ["bamboo forest", "竹林"], ["eat bamboo", "吃竹子"]],
+      "group": [["panda", "大熊猫"], ["plant", "植物"], ["leaf", "叶子"]]
+    },
+    "airport": {
+      "family": [["air", "空气；天空"]],
+      "phrase": [["airport bus", "机场巴士"], ["arrive at the airport", "到达机场"]],
+      "group": [["plane", "飞机"], ["flight", "航班"], ["plane ticket", "飞机票"], ["station", "车站"]]
+    },
+    "bike": {
+      "near": [["bicycle", "自行车"]],
+      "phrase": [["bike lane", "自行车道"], ["get on a bike", "骑上自行车"]],
+      "group": [["helmet", "头盔"], ["wheel", "车轮"], ["tram", "有轨电车"], ["walk", "步行"]]
+    },
+    "ring": {
+      "phrase": [["the phone rings", "电话响了"], ["ring out", "响亮地响起"]],
+      "group": [["bell", "铃"], ["doorbell", "门铃"], ["bicycle bell", "自行车车铃"], ["beep", "哔哔作响"], ["chug", "突突地前进"]]
+    },
+    "beep": {
+      "near": [["honk", "按喇叭；发出喇叭声"]],
+      "phrase": [["beep twice", "哔哔响两声"], ["a short beep", "短促的哔声"]],
+      "group": [["horn", "喇叭"], ["car", "汽车"], ["ring", "铃响"], ["whoosh", "呼的一声"]]
+    },
+    "subway": {
+      "near": [["underground", "地铁（英式用语）"], ["metro", "地铁"]],
+      "phrase": [["subway station", "地铁站"], ["subway line", "地铁线路"]],
+      "group": [["train", "火车；列车"], ["tram", "有轨电车"], ["bus", "公交车"]]
+    },
+    "whoosh": {
+      "near": [["rush", "冲；飞快移动"]],
+      "phrase": [["whoosh past", "呼啸而过"], ["with a whoosh", "呼的一声"]],
+      "group": [["wind", "风"], ["train", "火车"], ["plane", "飞机"], ["chug", "突突地前进"]]
+    },
+    "tram": {
+      "near": [["streetcar", "有轨电车（美式用语）"]],
+      "phrase": [["tram stop", "有轨电车站"], ["tram line", "有轨电车线路"]],
+      "group": [["subway", "地铁"], ["train", "火车"], ["bus", "公交车"], ["bike", "自行车"]]
+    },
+    "chug": {
+      "phrase": [["chug along", "突突地缓慢前进"], ["chug up a hill", "突突地爬上坡"]],
+      "group": [["engine", "发动机"], ["train", "火车"], ["truck", "货车"], ["whoosh", "呼啸声"], ["beep", "哔哔声"]]
+    }
+  }
+}

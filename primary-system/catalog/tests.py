@@ -76,6 +76,31 @@ def knowledge_snapshot():
 
 
 class EnglishTextbookTests(PlatformFixture):
+    def test_travel_unit_uses_curated_links_for_existing_word_cards(self):
+        snapshot = english_snapshot()
+        snapshot['modules'][0]['data']['ENGLISH_UNITS'].append({
+            'id': '4a-u5', 'book': '四年级上册', 'name': "Unit 5 Let's go!",
+            'words': [{
+                'key': '4a-u5:bus', 'en': 'bus', 'zh': '公交车',
+                'links': [{'type': 'group', 'en': 'train', 'zh': '火车'}],
+            }],
+        })
+        import_snapshot(snapshot, publish=True)
+        bus = ContentItem.objects.get(source_key='primary:english:4a-u5:4a-u5:bus')
+        url = '/books/primary-english-first/?unit=4a-u5&tab=words'
+        response = self.client.get(url)
+        self.assertContains(response, f'id="w-{bus.pk}"')
+        for word in ('bus stop', 'bus driver', 'train', 'subway', 'tram'):
+            self.assertContains(response, f'data-say="{word}"')
+        bus.refresh_from_db()
+        self.assertEqual(bus.source_payload['links'], [{'type': 'group', 'en': 'train', 'zh': '火车'}])
+
+        bus.import_locked = True
+        bus.save(update_fields=['import_locked'])
+        response = self.client.get(url)
+        self.assertContains(response, 'data-say="train"')
+        self.assertNotContains(response, 'data-say="bus stop"')
+
     def test_dialogue_import_and_texts_tab(self):
         report = import_snapshot(english_snapshot(), publish=True)
         self.assertGreaterEqual(report['created'], 1)

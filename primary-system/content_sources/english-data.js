@@ -4,9 +4,11 @@
    四年级上册（2025 秋）+ 四年级下册（2026 春）
 
    w(英文, 音标, 中文, 示意图, 分段, 可选记忆提示)
-   分段用 | 隔开；留空则整词认读。词卡相关词自动取同单元相邻词。
+   分段用 | 隔开；留空则整词认读。逐词核对的关联词维护在 english-word-links.json。
    ============================================================ */
 'use strict';
+
+const CURATED_WORD_LINKS = require('./english-word-links.json');
 
 function w(en, ipa, zh, emoji, segments, memo) {
   return { en, ipa, zh, emoji: emoji || '', segments: segments || '', memo: memo || '' };
@@ -2579,9 +2581,17 @@ function resolveLink(source, en) {
   return { en: en, zh: OUT_ZH[en] || '拓展词', inBook: false, key: '' };
 }
 
-/* 第二步：给每个词挂上关联词，不够 3 条时用同单元的词补齐。 */
+/* 第二步：优先采用单元编排；其余词使用通用规则。 */
 ENGLISH_UNITS.forEach(unit => {
   unit.words.forEach((word, index) => {
+    word.phrases = ENGLISH_PHRASES[word.en] || [];
+    const curated = CURATED_WORD_LINKS[unit.id]?.[word.en];
+    if (curated) {
+      word.links = RELATION_ORDER.flatMap(type => (curated[type] || []).map(([en, zh]) => ({
+        ...resolveLink(word, en), type, zh,
+      })));
+      return;
+    }
     const bucket = EN_LINKS.get(word.en) || new Map();
     const buckets = {};
     bucket.forEach((type, en) => {
@@ -2614,7 +2624,6 @@ ENGLISH_UNITS.forEach(unit => {
       }
     }
     word.links = links;
-    word.phrases = ENGLISH_PHRASES[word.en] || [];
   });
 });
 
