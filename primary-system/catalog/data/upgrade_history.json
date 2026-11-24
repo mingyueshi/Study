@@ -2,6 +2,11 @@
   "schema_version": 1,
   "records": [
     {
+      "revision": "65b1e813577e37a59c3cae4a6c3ff51b552dcc36",
+      "date": "2026-11-24",
+      "title": "同步 Nova 后台侧栏修复"
+    },
+    {
       "revision": "9b5ebee33e9c5fa6c5605decd5c57b8b43e2fa53",
       "date": "2026-11-23",
       "title": "完善英语四上第五单元关联词"
