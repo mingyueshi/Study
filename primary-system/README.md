@@ -117,7 +117,7 @@
 
 后台首页使用 Nova 的原生模板扩展和导航计数 provider，业务聚合维护在 `config/admin_dashboard.py`，保留现有模型注册、权限、滑块验证与管理表单。六类图表为每日学习打卡、题库作答趋势、内容发布状态、启用题目学科分布、教材掌握状态和奖励兑换进展；指标与明细入口按对应 `ModelAdmin` 的查看权限和查询集生成，教材进度仍仅超级管理员可见。打卡人数按账号去重；题库含游客作答，正确率只计算选择题与判断题；时段按北京时间自然日计算。发布内容、题目储备和教材掌握为当前快照，待核销兑换为全部积压，不受时段限制。
 
-图表复用 Nova 随附的本地 Chart.js，保留可展开的数据表，无脚本时可用 GET 切换时段并阅读数据表。异步接口 `/admin/_dashboard/data/` 仅限后台账号、按模型权限重新聚合且不缓存，刷新失败保留上次结果。后台通过 `/admin/_nova/` 接入外观偏好。原生外观或关闭 Nova 时恢复标准后台首页。`requirements.txt` 固定 Nova 0.6.1 源码修订 `9ed95e48b9bd90f61373f7ad186f32690691bad4`，以及该修订集成验证使用的滑块验证码 0.3.0 源码修订 `730d8cc6134e8cefda539bd0b825677b6040d9a2`。本次升级无需数据库迁移。可运行 `.venv/bin/python manage.py test config.test_admin_dashboard accounts.tests.AccountTests lexicon.tests.test_admin` 验证后台统计、账号及词库管理。
+图表复用 Nova 随附的本地 Chart.js，保留可展开的数据表，无脚本时可用 GET 切换时段并阅读数据表。异步接口 `/admin/_dashboard/data/` 仅限后台账号、按模型权限重新聚合且不缓存，刷新失败保留上次结果。后台通过 `/admin/_nova/` 接入外观偏好。原生外观或关闭 Nova 时恢复标准后台首页。`requirements.txt` 固定 Nova 0.6.1 源码修订 `5ffcb648013089e77643640fd8b28fc52e7b3b25`，该修订修复侧栏模型名称与收藏、新增按钮的对齐；滑块验证码 0.3.0 固定在源码修订 `730d8cc6134e8cefda539bd0b825677b6040d9a2`。本次升级无需数据库迁移。可运行 `.venv/bin/python manage.py test config.test_admin_dashboard accounts.tests.AccountTests lexicon.tests.test_admin` 验证后台统计、账号及词库管理。
 
 以上内容规模是当前资料范围，不表示所有内容均已完成教学审校。场景词已支持多场景／多义项引用；新的学科教学玩法尚待实现，见设计基线的后续顺序。
 
