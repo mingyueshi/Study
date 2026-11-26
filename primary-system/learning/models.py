@@ -6,6 +6,7 @@ class Progress(models.Model):
         NEW = 'new', '未开始'
         LEARNING = 'learning', '学习中'
         MASTERED = 'mastered', '已掌握'
+        TRICKY = 'tricky', '易错'
 
     user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='学习账号', on_delete=models.CASCADE)
     item = models.ForeignKey('catalog.ContentItem', verbose_name='学习内容', on_delete=models.PROTECT)
@@ -22,7 +23,7 @@ class Progress(models.Model):
         ordering = ('-updated_at',)
         constraints = [
             models.UniqueConstraint(fields=('user', 'item'), name='progress_user_item_unique'),
-            models.CheckConstraint(condition=models.Q(status__in=['new', 'learning', 'mastered']), name='progress_valid_status'),
+            models.CheckConstraint(condition=models.Q(status__in=['new', 'learning', 'mastered', 'tricky']), name='progress_valid_status'),
         ]
         indexes = [models.Index(fields=('user', 'status'), name='progress_user_status')]
 

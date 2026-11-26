@@ -77,7 +77,8 @@ class AdminDashboardTests(PlatformFixture):
         self.assertEqual(charts['answers']['series'][1]['data'], [0, 0, 0, 0, 0, 0, 1])
         self.assertEqual(charts['answers']['series'][2]['data'], [0, 0, 0, 0, 0, 0, 1])
         self.assertEqual(charts['rewards']['series'][0]['data'], [0, 1, 0])
-        self.assertEqual(charts['progress']['series'][0]['data'], [0, 0, 1])
+        self.assertEqual(charts['progress']['labels'], ['未开始', '学习中', '已掌握', '易错'])
+        self.assertEqual(charts['progress']['series'][0]['data'], [0, 0, 1, 0])
         for chart in data['charts']:
             self.assertTrue(all(len(series['data']) == len(chart['labels']) for series in chart['series']))
 

@@ -4,10 +4,15 @@ from django.contrib.auth import get_user_model
 from django.db import transaction
 from django.urls import reverse
 from django.utils import timezone
+from catalog.models import ContentItem
 from .models import Progress
 
 class ProgressConflict(Exception):
     pass
+
+
+def supports_word_marks(item):
+    return item.kind == ContentItem.Kind.WORD and item.module.code == 'english'
 
 
 def effective_status(progress, resolver=None):
@@ -83,7 +88,7 @@ def textbook_recent(user, limit=8):
 
 
 @transaction.atomic
-def save_progress(user, item, data):
+def save_progress(user, item, data, *, word_mark=False):
     from lexicon.chinese import content_presentation, selected_payload
     from lexicon.models import ContentEntryLink
     from django.core.exceptions import ValidationError
@@ -92,7 +97,7 @@ def save_progress(user, item, data):
     except ValidationError as exc:
         raise ProgressConflict('; '.join(exc.messages)) from exc
     import json
-    if links and json.dumps(data.get('presentation'), sort_keys=True) != json.dumps(tokens, sort_keys=True):
+    if (links or word_mark) and json.dumps(data.get('presentation'), sort_keys=True) != json.dumps(tokens, sort_keys=True):
         raise ProgressConflict('所见教材词义或中文呈现已更新，请刷新后重新确认。')
     get_user_model().objects.select_for_update().get(pk=user.pk)
     progress = Progress.objects.filter(user=user, item=item).first()
@@ -102,13 +107,15 @@ def save_progress(user, item, data):
         progress = Progress(user=user, item=item)
     update_learning = data.get('update_learning') is True if links else True
     if update_learning:
-        if links and not all(selected_payload(l)[0] for l in links):
+        confirms_content = not word_mark or data['status'] == Progress.Status.MASTERED
+        if links and confirms_content and not all(selected_payload(l)[0] for l in links):
             raise ProgressConflict('词义或中文待复核，暂不能确认新的学习状态；收藏和笔记可单独保存。')
         progress.status = data['status']
         if links:
             progress.seen_lexicon = tokens
-    for field in ('bookmarked', 'note'):
-        setattr(progress, field, data[field])
+    if not word_mark:
+        progress.bookmarked = data['bookmarked']
+        progress.note = data['note']
     if links:
         ContentEntryLink.objects.filter(pk__in=[l.pk for l in links]).update(semantic_established=True)
     progress.revision += 1

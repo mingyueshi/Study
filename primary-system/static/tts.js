@@ -210,7 +210,7 @@
     if (!container) return;
     const selectedScope = scopeControl?.selectedOptions?.[0];
     const textKey = selectedScope?.dataset.ttsTextKey || 'saySeq';
-    const items = Array.from(container.querySelectorAll('[data-say-seq]'))
+    const items = Array.from(container.querySelectorAll('[data-say-seq]:not([hidden])'))
       .map((el) => ({ el, text: el.dataset[textKey] }))
       .filter((item) => item.text?.trim());
     if (!items.length) return;

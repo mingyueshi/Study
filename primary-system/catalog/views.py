@@ -9,7 +9,9 @@ from django.views.decorators.http import require_GET
 from .english_word_links import english_word_links
 from .forms import CatalogFilter
 from .entry_registry import entry_for, special_entries
-from lexicon.chinese import safe_word_item, safe_search, request_resolver, LessonResolver
+from learning.models import Progress
+from learning.services import effective_status
+from lexicon.chinese import safe_word_item, safe_search, request_resolver, LessonResolver, presentation_tokens
 from .models import ENGLISH_RELATION_TAGS, Grade, Module, Placement, Subject, TextbookEdition, TextbookBook, \
     ContentItem, published_items, published_textbook_books, published_units
 
@@ -200,6 +202,25 @@ def attach_english_link_chips(placements):
     return placements
 
 
+def english_word_marks(request, placements, resolver):
+    records = {}
+    if request.user.is_authenticated:
+        progress = Progress.objects.filter(user=request.user, item_id__in=resolver.items).only(
+            'item', 'status', 'revision', 'seen_lexicon')
+        records = {row.item_id: row for row in progress}
+    marks = {}
+    for placement in placements:
+        record = records.get(placement.item_id)
+        links = resolver.by_content.get(placement.item_id, [])
+        placement.mark_status = effective_status(record, resolver) if record else Progress.Status.NEW
+        marks[str(placement.item_id)] = {
+            'revision': record.revision if record else 0,
+            'presentation': presentation_tokens(links),
+            'available': all(resolver.payloads[link.pk]['available'] for link in links),
+        }
+    return marks
+
+
 @never_cache
 @require_GET
 def collection_detail(request, code):
@@ -232,16 +253,20 @@ def collection_detail(request, code):
         if selected_unit:
             dialogue_items = [p.item for p in placements.filter(item__kind=ContentItem.Kind.DIALOGUE)]
             placements = placements.filter(item__kind=ContentItem.Kind.WORD)
-    # 英语单元整页呈现词卡（最大单元 40 词），一屏可连读；其余模块保持 30 条分页。
-    page = Paginator(placements, 60 if is_english else 30).get_page(request.GET.get('page'))
+    # 英语词卡一次呈现整个单元，筛选计数与连读取同一批词。
+    if is_english:
+        placements = list(placements)
+    page = Paginator(placements, max(len(placements), 1) if is_english else 30).get_page(request.GET.get('page'))
     resolver = LessonResolver([p.item for p in page])
     for placement in page:
         safe_word_item(placement.item, resolver)
-    if is_english:
+    marks = {}
+    if is_english and tab == 'words':
         attach_english_link_chips(list(page))
+        marks = english_word_marks(request, page, resolver)
     return render(request, 'catalog/collection.html', {
         'book': book, 'units': units, 'selected_unit': selected_unit, 'page': page,
-        'is_english': is_english, 'tab': tab, 'dialogue_items': dialogue_items,
+        'is_english': is_english, 'tab': tab, 'dialogue_items': dialogue_items, 'word_marks': marks,
     })
 
 

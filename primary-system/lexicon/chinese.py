@@ -138,6 +138,13 @@ def selected_payload(selection, current=None):
     return record, status, version.text if record and version else None
 
 
+def presentation_tokens(links):
+    return [{'link_id': link.pk, 'selection_revision': link.selection_revision,
+             'presentation_revision': link.presentation_revision,
+             'chinese_version_id': str(link.chinese_version_id) if link.chinese_version_id else None}
+            for link in sorted(links, key=lambda link: link.pk)]
+
+
 def content_presentation(item, *, lock=False):
     links = list(ContentEntryLink.objects.filter(content=item).order_by('pk'))
     if lock:
@@ -161,9 +168,7 @@ def content_presentation(item, *, lock=False):
         if {l.pk for l in locked} != {l.pk for l in links}:
             raise ValidationError('教材关联集合已更新，请刷新后确认。')
         links = locked
-    tokens = [{'link_id': l.pk, 'selection_revision': l.selection_revision, 'presentation_revision': l.presentation_revision,
-               'chinese_version_id': str(l.chinese_version_id) if l.chinese_version_id else None} for l in links]
-    return links, tokens
+    return links, presentation_tokens(links)
 
 
 @transaction.atomic

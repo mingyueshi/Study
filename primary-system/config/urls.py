@@ -94,7 +94,7 @@ urlpatterns = [
     path('api/v1/items/<uuid:pk>/lexicon/', lexicon.content_links),
     path('api/v1/lexicon/', lexicon.entries),
     path('api/v1/lexicon/<uuid:pk>/', lexicon.entry_detail, name='lexicon-detail'),
-    path('api/v1/me/progress/<uuid:pk>/', learning.progress_api),
+    path('api/v1/me/progress/<uuid:pk>/', learning.progress_api, name='progress-api'),
     path('admin/_slider/', include('nova_slider_captcha.urls')),
     path('admin/_nova/', include(for_admin(admin.site))),
     path('admin/', admin.site.urls),

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}{% load static %}
 {% block title %}我的学习 · 乐学堂{% endblock %}
 {% block content %}
-<link rel="stylesheet" href="{% static 'learning/mine.css' %}?v=1">
+<link rel="stylesheet" href="{% static 'learning/mine.css' %}?v=2">
 <div class="my-learning">
   <header class="learning-welcome">
     <div class="learning-welcome-copy">
@@ -73,6 +73,7 @@
         <a href="{% url 'my-learning' %}#textbook-records" {% if not selected and not request.GET.bookmarked %}aria-current="page"{% endif %}>全部记录</a>
         <a href="?status=learning#textbook-records" {% if selected == 'learning' and not request.GET.bookmarked %}aria-current="page"{% endif %}>学习中</a>
         <a href="?status=mastered#textbook-records" {% if selected == 'mastered' and not request.GET.bookmarked %}aria-current="page"{% endif %}>已掌握</a>
+        <a href="?status=tricky#textbook-records" {% if selected == 'tricky' and not request.GET.bookmarked %}aria-current="page"{% endif %}>易错单词</a>
         <a href="?bookmarked=1#textbook-records" {% if request.GET.bookmarked == '1' %}aria-current="page"{% endif %}>我的收藏</a>
       </nav>
       <p class="learning-record-count">当前共 <strong>{{ page.paginator.count }}</strong> 条</p>
@@ -95,6 +96,7 @@
         {% if request.GET.bookmarked == '1' %}<h3>还没有收藏的知识点</h3><p>遇到想再读一遍的内容，在内容页把它收藏起来吧。</p>
         {% elif selected == 'learning' %}<h3>暂时没有学习中的知识点</h3><p>挑一个感兴趣的知识点，保存为「学习中」，下次就能在这里找到。</p>
         {% elif selected == 'mastered' %}<h3>还没有已掌握的知识点</h3><p>学懂以后，在内容页确认「已掌握」，一点点积累自己的收获。</p>
+        {% elif selected == 'tricky' %}<h3>还没有标记易错的单词</h3><p>遇到容易读错、写错或记混的词，可以在英语教材词卡上标记。</p>
         {% else %}<h3>还没有学习记录</h3><p>从一个感兴趣的知识点开始，在内容页保存你的学习状态。</p>{% endif %}
         {% if selected or request.GET.bookmarked == '1' %}<a class="learning-text-link" href="{% url 'my-learning' %}#textbook-records">查看全部记录 <span aria-hidden="true">→</span></a>{% else %}<a class="button" href="{% url 'home' %}">去学习广场 <span aria-hidden="true">→</span></a>{% endif %}
       </div>

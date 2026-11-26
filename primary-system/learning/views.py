@@ -15,7 +15,7 @@ from lexicon.services import link_state
 from lexicon.views import record_payload
 from .forms import ProgressForm
 from .models import Progress
-from .services import ProgressConflict, progress_data, save_progress, effective_status
+from .services import ProgressConflict, progress_data, save_progress, effective_status, supports_word_marks
 from lexicon.chinese import safe_word_item, content_presentation, LessonResolver
 from incentives.services import record_event, summarize_awards, take_awards
 
@@ -105,7 +105,7 @@ def item_detail(request, pk):
     item = get_object_or_404(published_items().select_related('module'), pk=pk)
     progress = Progress.objects.filter(user=request.user, item=item).first() if request.user.is_authenticated else None
     links, presentation = content_presentation(item)
-    form = ProgressForm(initial={**progress_data(progress), 'presentation': presentation if links else None})
+    form = ProgressForm(item=item, initial={**progress_data(progress), 'presentation': presentation if links else None})
     if not links:
         form.fields.pop('update_learning', None)
     status = 200
@@ -113,7 +113,7 @@ def item_detail(request, pk):
         if not request.user.is_authenticated:
             from django.contrib.auth.views import redirect_to_login
             return redirect_to_login(request.path)
-        form = ProgressForm(request.POST)
+        form = ProgressForm(request.POST, item=item)
         if not links:
             form.fields.pop('update_learning', None)
         if form.is_valid():
@@ -169,11 +169,11 @@ def my_learning(request):
 
 
 @never_cache
-@require_http_methods(['GET', 'POST'])
+@require_http_methods(['GET', 'POST', 'PATCH'])
 def progress_api(request, pk):
     if not request.user.is_authenticated:
         return JsonResponse({'error': '请先登录。'}, status=401)
-    item = get_object_or_404(published_items(), pk=pk)
+    item = get_object_or_404(published_items().select_related('module'), pk=pk)
     if request.method == 'GET':
         links, tokens = content_presentation(item)
         return JsonResponse({**progress_data(Progress.objects.filter(user=request.user, item=item).first()), 'presentation': tokens if links else None})
@@ -185,11 +185,13 @@ def progress_api(request, pk):
         data = json.loads(request.body)
     except (ValueError, UnicodeDecodeError):
         return JsonResponse({'error': 'JSON 格式不正确。'}, status=400)
+    if request.method == 'PATCH':
+        return _mark_word(request, item, data)
     if not isinstance(data, dict) or not {'revision', 'status', 'bookmarked', 'note'} <= set(data) or set(data) - {'revision', 'status', 'bookmarked', 'note', 'presentation', 'update_learning'} or type(data['revision']) is not int or type(data['bookmarked']) is not bool or not isinstance(data['note'], str) or not isinstance(data['status'], str):
         return JsonResponse({'error': '需要 revision 整数、status 字符串、bookmarked 布尔值与 note 字符串。'}, status=400)
     if ContentEntryLink.objects.filter(content=item).exists() and ('presentation' not in data or type(data.get('update_learning')) is not bool):
         return JsonResponse({'error': '教材呈现接口已升级，请刷新页面。'}, status=409)
-    form = ProgressForm(data)
+    form = ProgressForm(data, item=item)
     if not form.is_valid():
         return JsonResponse({'errors': form.errors.get_json_data()}, status=400)
     try:
@@ -205,3 +207,23 @@ def progress_api(request, pk):
     if awards:
         payload['rewards'] = awards
     return JsonResponse(payload)
+
+
+def _mark_word(request, item, data):
+    if not supports_word_marks(item):
+        return JsonResponse({'error': '这项内容没有单词标记。'}, status=400)
+    if (not isinstance(data, dict) or set(data) != {'revision', 'status', 'presentation'}
+            or type(data['revision']) is not int or not 0 <= data['revision'] < 2147483647
+            or data['status'] not in (Progress.Status.NEW, Progress.Status.MASTERED, Progress.Status.TRICKY)
+            or not isinstance(data['presentation'], list)):
+        return JsonResponse({'error': '单词标记格式不正确。'}, status=400)
+    try:
+        pre_status = Progress.objects.filter(user=request.user, item=item).values_list('status', flat=True).first() or 'new'
+        cleaned_data = {**data, 'update_learning': True}
+        progress = save_progress(request.user, item, cleaned_data, word_mark=True)
+        awards = _textbook_rewards(request, pre_status, progress.status, bool(data['presentation']), cleaned_data)
+    except ProgressConflict as exc:
+        return JsonResponse({'error': str(exc)}, status=409)
+    except OperationalError:
+        return JsonResponse({'error': '数据库暂忙，请重新读取状态后再操作。'}, status=503)
+    return JsonResponse({'revision': progress.revision, 'effective_status': effective_status(progress), 'rewards': awards})

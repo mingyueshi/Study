@@ -4,8 +4,9 @@ from copy import deepcopy
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 from django.core.management import call_command
-from catalog.tests import PlatformFixture
-from catalog.models import ContentItem, Placement
+from catalog.importing import import_snapshot
+from catalog.tests import PlatformFixture, english_snapshot
+from catalog.models import ContentItem, Placement, TextbookBook
 from lexicon.models import ChineseSenseVersion, ContentEntryLink, ContentLinkSelection, EntryMatch, LexicalEntry, editorial_values
 from lexicon.chinese import create_chinese, review_chinese, adopt_chinese, content_presentation, reconfirm_link
 from lexicon.services import revise, merge_match
@@ -201,6 +202,40 @@ class ChineseTests(PlatformFixture):
         self.assertEqual(effective_status(row), 'mastered')
         with self.assertRaises(LessonConflict):
             save_progress(self.user, self.lesson, self.lesson_data(revision=3, presentation=seen))
+
+    def test_textbook_word_marks_use_seen_presentation_without_overwriting_notes(self):
+        import_snapshot(english_snapshot(), publish=True)
+        book = TextbookBook.objects.get(code='primary-english-first')
+        self.lesson.placements.all().delete()
+        self.lesson.module = book.module
+        self.lesson.save(update_fields=['module'])
+        Placement.objects.create(item=self.lesson, unit=book.units.get(code='4a-u1'))
+        self.adopt_link(self.version())
+        self.client.force_login(self.user)
+        record = Progress.objects.create(user=self.user, item=self.lesson, status='learning',
+                                         bookmarked=True, note='复习笔记')
+        book_url = f'/books/{book.code}/'
+        progress_url = f'/api/v1/me/progress/{self.lesson.pk}/'
+        page = self.client.get(book_url)
+        mark = page.context['word_marks'][str(self.lesson.pk)]
+        data = {'revision': mark['revision'], 'presentation': mark['presentation'], 'status': 'tricky'}
+        self.assertEqual(self.client.patch(progress_url, {**data, 'presentation': []}, content_type='application/json').status_code, 409)
+
+        for revision, status in enumerate(('tricky', 'mastered', 'new')):
+            response = self.client.patch(progress_url, {**data, 'revision': revision, 'status': status},
+                                         content_type='application/json')
+            self.assertEqual(response.status_code, 200)
+            self.assertEqual(response.json()['effective_status'], status)
+            self.assertContains(self.client.get(book_url), f'data-word-status="{status}"')
+            record.refresh_from_db()
+            self.assertEqual((record.status, record.revision, record.note, record.bookmarked),
+                             (status, revision + 1, '复习笔记', True))
+            if status == 'tricky':
+                self.assertContains(self.client.get('/me/?status=tricky'), self.lesson.title)
+                self.assertEqual(self.client.patch(progress_url, data, content_type='application/json').status_code, 409)
+
+        self.client.logout()
+        self.assertEqual(self.client.patch(progress_url, data, content_type='application/json').status_code, 401)
 
     def test_reconfirm_requires_explicit_same_meaning_and_exact_seen_snapshot(self):
         before = deepcopy(self.link.editorial_snapshot)

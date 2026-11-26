@@ -91,6 +91,7 @@
 .learning-record-labels { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; color: var(--muted); font-size: 14px; }
 .learning-status { padding: 2px 10px; border-radius: 7px; background: #eef0eb; color: #52614c; }
 .learning-status-mastered { background: #e5f2dd; color: #376530; }
+.learning-status-tricky { background: #fff1dc; color: #794415; }
 .learning-status-learning { background: #eaf1fb; color: #3b6197; }
 .learning-status-needs_confirmation { background: #fff0d2; color: #865518; }
 .learning-bookmarked { color: #8a601e; }

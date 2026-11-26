@@ -61,6 +61,22 @@
 #english-cards .card-link { color: var(--muted, #586b62); font-size: 16px; transition: color .12s ease; }
 #english-cards .card-link:hover { color: var(--green, #22634c); }
 
+.word-filters { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px 16px; margin-bottom: 14px; }
+.word-filters p { margin: 0; color: var(--muted); font-size: 14px; }
+.word-filter-buttons, .word-mark-actions { display: flex; flex-wrap: wrap; gap: 6px; }
+.word-mark-actions { margin-top: 12px; }
+.word-filter-buttons button, .word-mark-actions button { min-height: 44px; padding: 6px 10px; border: 1px solid var(--subject-line); border-radius: 10px; background: var(--white, #fff); color: var(--ink); font: inherit; font-size: 15px; cursor: pointer; }
+.word-filter-buttons button:hover, .word-mark-actions button:hover { border-color: var(--subject-ink); }
+.word-filter-buttons button[aria-pressed="true"] { background: var(--subject-ink); border-color: var(--subject-ink); color: #fff; }
+.word-filter-buttons span { margin-inline-start: 2px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.word-mark-actions button[aria-pressed="true"] { background: #e7f5e9; border-color: #9bc4a2; color: #1f5738; }
+.word-mark-actions button[data-word-mark="tricky"][aria-pressed="true"] { background: #fff1dc; border-color: #dcb77f; color: #794415; }
+.word-mark-actions button[aria-disabled="true"] { cursor: wait; }
+.word-mark-feedback { position: absolute; width: 1px; height: 1px; margin: 0; overflow: hidden; clip-path: inset(50%); }
+.word-mark-error { margin: 6px 0 0; color: #9a3628; font-size: 14px; }
+.word-mark-error:empty { margin: 0; }
+#english-cards .wcard[hidden], .word-filters[hidden], .word-mark-actions[hidden], #english-word-empty[hidden] { display: none; }
+
 /* 关联词芯片：类型着色，点击即发音 */
 #english-cards .rel { display: inline-flex; flex-direction: column; align-items: flex-start; gap: 2px; max-width: 100%; min-height: 46px; padding: 8px 12px; border: 1px solid #dfe5ee; border-radius: 12px; background: #fafbfd; color: var(--ink, #233e37); overflow-wrap: anywhere; text-align: left; cursor: pointer; transition: transform .12s ease, border-color .12s ease, background .12s ease; }
 #english-cards .rel:hover { border-color: #b9c8dd; background: #f0f5fb; transform: translateY(-2px); }
@@ -106,6 +122,7 @@
 }
 @media print {
   .unit-nav, .tts-bar, .tts-settings, #english-cards .say, #english-cards .card-link { display: none !important; }
+  .word-filters, .word-mark-actions, .word-mark-feedback, .word-mark-error { display: none !important; }
   #english-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   #english-cards .wcard { break-inside: avoid; box-shadow: none; }
 }
