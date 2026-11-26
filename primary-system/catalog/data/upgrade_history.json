@@ -2,6 +2,11 @@
   "schema_version": 1,
   "records": [
     {
+      "revision": "510d61ddf00f91c61cee43a7b440408a7550d0f6",
+      "date": "2026-11-26",
+      "title": "为英语教材单词添加掌握和易错标记"
+    },
+    {
       "revision": "65b1e813577e37a59c3cae4a6c3ff51b552dcc36",
       "date": "2026-11-24",
       "title": "同步 Nova 后台侧栏修复"
