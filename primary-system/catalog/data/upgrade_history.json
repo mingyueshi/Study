@@ -2,6 +2,11 @@
   "schema_version": 1,
   "records": [
     {
+      "revision": "3bd1efddb03273299b592f615957004e8497b675",
+      "date": "2026-11-26",
+      "title": "将英语词卡标记按钮移至右上角"
+    },
+    {
       "revision": "5a0e7bd558b4e004a9aafdb440dc98a953fe2204",
       "date": "2026-11-26",
       "title": "修复英语词卡迁移的生产部署兼容性"
