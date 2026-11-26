@@ -25,7 +25,8 @@
 #english-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 430px), 1fr)); align-items: stretch; gap: 18px; }
 #english-cards .wcard { display: flex; flex-direction: column; min-width: 0; padding: 20px 22px; border: 1px solid #e3e7ee; border-top: 5px solid color-mix(in srgb, var(--c, #609cbd) 60%, #fffefa); border-radius: 22px; background: var(--white, #fff); box-shadow: 0 3px 0 #233e3706; scroll-margin-top: 24px; transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease; }
 #english-cards .wcard:hover { transform: translateY(-4px); box-shadow: 0 12px 26px #233e3710; border-color: color-mix(in srgb, var(--c, #609cbd) 35%, #e3e7ee); }
-#english-cards .wtop { display: flex; gap: 14px; align-items: center; }
+#english-cards .wcard-heading { display: flex; flex-wrap: wrap-reverse; align-items: start; gap: 10px 16px; }
+#english-cards .wtop { display: flex; flex: 1 1 260px; min-width: 0; gap: 14px; align-items: center; }
 #english-cards .pic { display: grid; place-items: center; flex: 0 0 66px; width: 66px; height: 66px; padding: 0; border: 1px solid color-mix(in srgb, var(--c, #609cbd) 25%, #fffefa); border-radius: 18px; background: color-mix(in srgb, var(--c, #609cbd) 10%, #fffefa); font-size: 36px; cursor: pointer; transition: transform .15s ease, box-shadow .15s ease; }
 #english-cards .pic:hover { transform: scale(1.08) rotate(-3deg); box-shadow: 0 6px 16px color-mix(in srgb, var(--c, #609cbd) 22%, transparent); }
 #english-cards .pic:active { transform: scale(.95); }
@@ -64,8 +65,9 @@
 .word-filters { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px 16px; margin-bottom: 14px; }
 .word-filters p { margin: 0; color: var(--muted); font-size: 14px; }
 .word-filter-buttons, .word-mark-actions { display: flex; flex-wrap: wrap; gap: 6px; }
-.word-mark-actions { margin-top: 12px; }
+.word-mark-actions { justify-content: flex-end; margin-inline-start: auto; }
 .word-filter-buttons button, .word-mark-actions button { min-height: 44px; padding: 6px 10px; border: 1px solid var(--subject-line); border-radius: 10px; background: var(--white, #fff); color: var(--ink); font: inherit; font-size: 15px; cursor: pointer; }
+.word-mark-actions button { min-inline-size: 5.5em; }
 .word-filter-buttons button:hover, .word-mark-actions button:hover { border-color: var(--subject-ink); }
 .word-filter-buttons button[aria-pressed="true"] { background: var(--subject-ink); border-color: var(--subject-ink); color: #fff; }
 .word-filter-buttons span { margin-inline-start: 2px; font-weight: 700; font-variant-numeric: tabular-nums; }
@@ -98,6 +100,10 @@
 
 .textbook-source { margin: 22px 2px 0; color: var(--muted, #586b62); font-size: 13px; line-height: 1.7; }
 
+@media (max-width: 1024px) {
+  /* 给右侧浮动滚动控件留出点按空间。 */
+  #english-cards .word-mark-actions { margin-inline-end: calc(18px + env(safe-area-inset-right, 0px)); }
+}
 @media (max-width: 640px) {
   #english-cards { grid-template-columns: minmax(0, 1fr); }
   #english-cards .wcard { padding: 16px 18px; }
