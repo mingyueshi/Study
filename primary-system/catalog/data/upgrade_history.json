@@ -2,6 +2,11 @@
   "schema_version": 1,
   "records": [
     {
+      "revision": "5a0e7bd558b4e004a9aafdb440dc98a953fe2204",
+      "date": "2026-11-26",
+      "title": "修复英语词卡迁移的生产部署兼容性"
+    },
+    {
       "revision": "510d61ddf00f91c61cee43a7b440408a7550d0f6",
       "date": "2026-11-26",
       "title": "为英语教材单词添加掌握和易错标记"
