@@ -20,11 +20,14 @@ ROOT = Path(__file__).resolve().parent.parent
 DATA = Path('/data')
 BACKUPS = Path('/backups')
 CURRENT = DATA / 'current'
-# 同一批基础内容，清单只补记两条奖励分类迁移。仅承认这个升级方向。
-REWARD_CATEGORY_BASELINE_UPGRADE = (
-    'c5d6403fd728a87d3a1fb6b935f46550870e2320fb91ebf800f9608532c42233',
-    'cfeea1c9702fe60da4f7355c4079251e38a4dc119edee460c1bdd2e9e5846573',
-)
+INITIAL_BASELINE = 'c5d6403fd728a87d3a1fb6b935f46550870e2320fb91ebf800f9608532c42233'
+REWARD_CATEGORY_BASELINE = 'cfeea1c9702fe60da4f7355c4079251e38a4dc119edee460c1bdd2e9e5846573'
+ENGLISH_WORD_MARKS_BASELINE = '10221986903bc3a0416910ff849062efd440de40502a9e1302c6d727826a350e'
+# 这些清单只增加迁移登记，基础表定义和数据分片一致。仅允许已核对的升级方向。
+BASELINE_UPGRADE_SOURCES = {
+    REWARD_CATEGORY_BASELINE: (INITIAL_BASELINE,),
+    ENGLISH_WORD_MARKS_BASELINE: (REWARD_CATEGORY_BASELINE, INITIAL_BASELINE),
+}
 sys.path.insert(0, str(ROOT))
 
 
@@ -53,8 +56,9 @@ def read_state(directory=None, *, compatible=True, allow_baseline_upgrade=False)
     if compatible:
         stored_digest, image_digest = state.get('baseline_digest'), digest()
         if stored_digest != image_digest:
-            if (stored_digest, image_digest) != REWARD_CATEGORY_BASELINE_UPGRADE:
-                raise RuntimeError('基础包身份已改变，停止自动更新；请先验证专用数据升级流程。')
+            if stored_digest not in BASELINE_UPGRADE_SOURCES.get(image_digest, ()):
+                raise RuntimeError(f'基础包身份已改变（部署 {str(stored_digest)[:12]}，镜像 {image_digest[:12]}），'
+                                   '停止自动更新；请先验证专用数据升级流程。')
             if not allow_baseline_upgrade:
                 raise RuntimeError('基础包身份需要兼容升级，请运行 make update 或 make deploy 完成备份和迁移。')
     return state
@@ -296,6 +300,10 @@ def validated_backup(path):
         try:
             pg.restore_dump(stage / 'database.dump', database)
             check_identity(state, database)
+            if state['baseline_digest'] != digest():
+                # 兼容旧备份也可能缺少新迁移，先在临时库完成升级，再校验和发布。
+                manage('check_deployment_database', '--allow-pending', database=database)
+                manage('migrate', '--noinput', directory=stage, database=database)
             manage('check_deployment_database', database=database)
             verify_assets(stage, database)
             yield stage, database, state

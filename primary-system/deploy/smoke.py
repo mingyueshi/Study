@@ -12,7 +12,7 @@ import urllib.request
 import urllib.parse
 from uuid import uuid4
 
-from runtime import REWARD_CATEGORY_BASELINE_UPGRADE, digest
+from runtime import BASELINE_UPGRADE_SOURCES, ENGLISH_WORD_MARKS_BASELINE, digest
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -196,19 +196,22 @@ Progress.objects.create(user=user, item=ContentItem.objects.first(), status='mas
             shell("from learning.models import Progress; assert Progress.objects.get(user__username='deploy_learner').revision == 7")
             print('快捷场景通过：更新应用、启用镜像、配置生效、待迁移拦截及迁移、兑换/题库/权限/索引单项维护；数据库容器保持不变。', flush=True)
 
-            previous_digest, updated_digest = REWARD_CATEGORY_BASELINE_UPGRADE
             backup_digest = digest()
-            if backup_digest == updated_digest:
-                # 本次独立项目的 PostgreSQL 已迁移，模拟仍记录旧基础包摘要的站点。
+            previous_digests = BASELINE_UPGRADE_SOURCES.get(backup_digest, ())
+            if previous_digests:
+                if backup_digest == ENGLISH_WORD_MARKS_BASELINE:
+                    # 只在独立演练库退回旧约束，备份含待执行迁移和真实学习记录。
+                    compose('exec', '-T', 'app', 'python', 'manage.py', 'migrate',
+                            'learning', '0002', '--noinput')
+                backup_digest = previous_digests[0]
                 shell(f"""
 import json
 from pathlib import Path
 path = Path('/data/current/deployment.json')
 state = json.loads(path.read_text())
-state['baseline_digest'] = {previous_digest!r}
+state['baseline_digest'] = {backup_digest!r}
 path.write_text(json.dumps(state))
 """)
-                backup_digest = previous_digest
             make('backup')
             backup_output = make('backups', capture_output=True).stdout
             backup = [line.split()[0] for line in backup_output.splitlines() if line.startswith('primary-')][-1]

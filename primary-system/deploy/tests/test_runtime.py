@@ -60,8 +60,8 @@ class RuntimeTests(unittest.TestCase):
         runtime.backup()
         return next(self.backups.glob('*.tar.gz'))
 
-    def use_legacy_baseline(self):
-        previous_digest, image_digest = runtime.REWARD_CATEGORY_BASELINE_UPGRADE
+    def use_legacy_baseline(self, previous_digest=runtime.REWARD_CATEGORY_BASELINE,
+                            image_digest=runtime.ENGLISH_WORD_MARKS_BASELINE):
         state = {**runtime.read_state(), 'baseline_digest': previous_digest}
         runtime.save_state(self.current, state)
         self.mock(runtime, 'digest', return_value=image_digest)
@@ -150,6 +150,12 @@ class RuntimeTests(unittest.TestCase):
         self.manage.assert_not_called()
         self.assertTrue(runtime.read_state()['ready'])
 
+    def test_initial_baseline_can_upgrade_to_either_supported_image(self):
+        old_state, _ = self.use_legacy_baseline(runtime.INITIAL_BASELINE, runtime.REWARD_CATEGORY_BASELINE)
+        for image_digest in (runtime.REWARD_CATEGORY_BASELINE, runtime.ENGLISH_WORD_MARKS_BASELINE):
+            with self.subTest(image_digest=image_digest), patch.object(runtime, 'digest', return_value=image_digest):
+                self.assertEqual(runtime.preflight(allow_baseline_upgrade=True), old_state)
+
     def test_known_baseline_upgrade_requires_full_update_and_preserves_data(self):
         old_state, image_digest = self.use_legacy_baseline()
         with self.assertRaisesRegex(RuntimeError, 'make update'):
@@ -210,6 +216,14 @@ class RuntimeTests(unittest.TestCase):
         runtime.prepare()
         self.databases['live']['note'] = '更新后的修改'
 
+        def command(*args, database=None, **kwargs):
+            if args[0] == 'migrate':
+                self.assertTrue(database.startswith(runtime.pg.STAGE_PREFIX))
+                self.databases[database]['word_marks_migration'] = True
+            if args == ('check_deployment_database',) and not self.databases[database].get('word_marks_migration'):
+                raise RuntimeError('数据库有待执行迁移')
+
+        self.manage.side_effect = command
         runtime.restore(archive.name, validate_only=True)
         self.assertEqual(self.databases['live']['note'], '更新后的修改')
         runtime.restore(archive.name)
@@ -219,6 +233,25 @@ class RuntimeTests(unittest.TestCase):
         self.assertEqual(state['identity'], old_state['identity'])
         self.assertEqual(state['baseline_digest'], image_digest)
         self.assertEqual(self.databases['live']['note'], '学习记录')
+        self.assertTrue(self.databases['live']['word_marks_migration'])
+        self.assertEqual(set(self.databases), {'live'})
+
+    def test_failed_migration_of_compatible_backup_never_switches_current(self):
+        self.use_legacy_baseline()
+        archive = self.backup()
+        runtime.prepare()
+        state = runtime.read_state()
+        self.databases['live']['note'] = '更新后的修改'
+
+        def command(*args, **kwargs):
+            if args[0] == 'migrate':
+                raise RuntimeError('备份迁移失败')
+
+        self.manage.side_effect = command
+        with self.assertRaisesRegex(RuntimeError, '备份迁移失败'):
+            runtime.restore(archive.name)
+        self.assertEqual(runtime.read_state(), state)
+        self.assertEqual(self.databases['live']['note'], '更新后的修改')
         self.assertEqual(set(self.databases), {'live'})
 
     def test_failed_update_is_not_ready(self):

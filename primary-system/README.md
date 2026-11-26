@@ -128,7 +128,7 @@
 
 后续 `make update` 快进拉取 Git 并在备份后升级；已同步代码用 `make update PULL=0`。生产使用独立的 **PostgreSQL 16 Docker 容器**，仅在容器内网连接；数据库、私有资料和备份分别保存在持久卷。`make status`、`make logs`、`make db-shell`、`make db-logs`、`make restart`、`make backup`、`make restore BACKUP=文件名` 提供日常维护，数据库小版本升级使用 `make db-update`。更新不重置账号或学习记录，新站点初始化使用发布基础包；本机仍默认 SQLite，个人数据不会自动上云。
 
-已有 PostgreSQL 站点若仍使用 `3fa994f` 之前的基础包摘要，使用 `make update` 完成这次[清单兼容升级](docs/docker-deployment.md#一键更新)。
+已有 PostgreSQL 站点使用 `make update` 或 `make deploy` 完成[基础包清单兼容升级](docs/docker-deployment.md#一键更新)，包括英语教材词卡迁移。
 
 本地可用 `make test-deploy` 测试部署保护逻辑，`make test-docker` 在独立容器和临时卷中验证实际部署、更新、备份恢复和数据持久性。全部运维说明、反向代理规则与故障恢复步骤见 [部署文档](docs/docker-deployment.md)。
 
