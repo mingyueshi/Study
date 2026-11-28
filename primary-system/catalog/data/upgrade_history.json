@@ -2,6 +2,11 @@
   "schema_version": 1,
   "records": [
     {
+      "revision": "e1dba81a1f2d362ac19ee88e095419618c6f9732",
+      "date": "2026-11-28",
+      "title": "升级 Django 至 6.1.3 安全补丁"
+    },
+    {
       "revision": "3bd1efddb03273299b592f615957004e8497b675",
       "date": "2026-11-26",
       "title": "将英语词卡标记按钮移至右上角"
