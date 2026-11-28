@@ -2,6 +2,11 @@
   "schema_version": 1,
   "records": [
     {
+      "revision": "f3883ce8279a78bd21ddc6671f09538b3d263db5",
+      "date": "2026-11-29",
+      "title": "重整英语语法专题并完善不规则复数"
+    },
+    {
       "revision": "e1dba81a1f2d362ac19ee88e095419618c6f9732",
       "date": "2026-11-28",
       "title": "升级 Django 至 6.1.3 安全补丁"
