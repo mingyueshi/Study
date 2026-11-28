@@ -25,7 +25,7 @@ class PluralDataTests(SimpleTestCase):
         singulars = [item['singular'] for item in data['items']]
         self.assertEqual(len(singulars), len(set(singulars)))
         core = [item for item in data['items'] if item['tier'] == 'core']
-        self.assertGreaterEqual(len(core), 20)
+        self.assertEqual(len(core), 27)
         for item in data['items']:
             self.assertTrue(item['plural'], item['singular'])
             self.assertTrue(item['zh'], item['singular'])
@@ -66,6 +66,20 @@ class PluralDataTests(SimpleTestCase):
         broken = {**data['items'][0], 'tier': 'premium'}
         with self.assertRaises(ImproperlyConfigured):
             plurals.validate({**data, 'items': [broken] + data['items'][1:]})
+        for key in ('singular_ipa', 'plural_ipa'):
+            with self.subTest(key=key):
+                missing = {**data['items'][0], key: ''}
+                with self.assertRaisesMessage(ImproperlyConfigured, key):
+                    plurals.validate({**data, 'items': [missing] + data['items'][1:]})
+
+    def test_validate_rejects_a_missing_translation_or_wrong_form(self):
+        data = plurals.load_data()
+        item = data['items'][0]
+        for wrong in ({'cn': ''}, {'en': 'Two women are waiting for the bus.'}):
+            with self.subTest(wrong=wrong):
+                examples = {**item['examples'], 'plural': {**item['examples']['plural'], **wrong}}
+                with self.assertRaisesMessage(ImproperlyConfigured, 'plural 例句'):
+                    plurals.validate({**data, 'items': [{**item, 'examples': examples}, *data['items'][1:]]})
 
 
 class PluralRoundTests(SimpleTestCase):
@@ -89,7 +103,24 @@ class PluralPageTests(TestCase):
         self.assertContains(response, 'data-plural-option')
         self.assertContains(response, 'data-plural-card')
         self.assertEqual(response.context['total'], 70)
-        self.assertEqual(response.context['core_count'], 27)
+        self.assertContains(response, '返回英语语法', count=1)
+        self.assertContains(response, '<details class="plural-tool plural-practice-tool" id="practice" open>', count=1)
+        self.assertContains(response, '<details class="plural-tool plural-transform-tool" id="transform" hidden>', count=1)
+        self.assertContains(response, 'data-singular-ipa="/', count=70)
+        self.assertContains(response, 'data-plural-ipa="/', count=70)
+        self.assertContains(response, '看单复数例句', count=70)
+        self.assertContains(response, 'data-plural-example="singular"', count=71)
+        self.assertContains(response, 'data-plural-example="plural"', count=71)
+        for singular, plural_ipa in (('life', '/laɪvz/'), ('basis', '/ˈbeɪsiːz/'), ('axis', '/ˈæksiːz/')):
+            self.assertEqual(plurals.item_index()[singular]['plural_ipa'], plural_ipa)
+        round_item = response.context['round']
+        self.assertContains(response, f'<i class="plural-ipa">{round_item["singular_ipa"]}</i>', html=True)
+        self.assertContains(response, f'data-answer-ipa="{round_item["plural_ipa"]}"', count=1)
+        self.assertContains(response, 'data-plural-practice-examples hidden', count=1)
+        self.assertEqual(round_item['examples'], plurals.item_index()[round_item['singular']]['examples'])
+        for example in round_item['examples'].values():
+            self.assertContains(response, f'data-say="{example["en"]}"', count=2)
+            self.assertContains(response, example['cn'], count=2)
 
     def test_seeded_page_is_reproducible(self):
         first = self.client.get(reverse('plurals'), {'q_seed': 'abc'}).context['round']

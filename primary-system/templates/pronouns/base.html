@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}{% if chapter %}{{ chapter.title }} · {% endif %}英语代词 · 乐学堂{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'pronouns/pronouns.css' %}?v=3">
+<script src="{% static 'speech.js' %}" defer></script>
+<script src="{% static 'pronouns/pronouns.js' %}" defer></script>
+<div class="pronouns" data-pronouns>
+  {% block pronoun_content %}{% endblock %}
+</div>
+{% endblock %}

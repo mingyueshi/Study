@@ -125,6 +125,26 @@ h3 { font-size: 23px; line-height: 1.5; }
 .button.small { padding: 10px 20px; min-height: 52px; }
 .button > span[aria-hidden] { font-size: 23px; line-height: 1; }
 
+.english-topic-hero {
+  padding: .6rem clamp(.75rem, 2vw, 1.35rem);
+  border: 1px solid var(--line);
+  border-radius: .8rem;
+  background: var(--english-topic-hero-bg, var(--soft));
+}
+.english-topic-hero h1 { font-size: clamp(28px, 3vw, 40px); }
+.english-topic-hero-compact {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0 clamp(6px, 1vw, 12px);
+  margin-block-end: 14px;
+  padding: 8px clamp(8px, 1.3vw, 18px);
+  border-radius: 14px;
+}
+.english-topic-hero-compact h1 { margin: 0; font-size: clamp(27px, 3vw, 40px); text-wrap: balance; }
+.english-topic-hero-compact .site-top-link { padding-inline: 0; }
+.english-topic-hero-compact p { grid-column: 1 / -1; margin: 0; color: var(--ink); font-size: .9em; line-height: 1.55; text-wrap: pretty; }
+
 .hero {
   display: grid;
   grid-template-columns: 1.15fr 1fr;

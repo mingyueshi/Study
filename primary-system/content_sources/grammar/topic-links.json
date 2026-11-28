@@ -1,0 +1,132 @@
+{
+  "topics": [
+    {
+      "route": "english-shop",
+      "focus": "名词与冠词",
+      "sample": "an apple · some milk"
+    },
+    {
+      "route": "pronouns",
+      "focus": "代词",
+      "sample": "I · me · mine"
+    },
+    {
+      "route": "english-timeline",
+      "focus": "时态",
+      "sample": "draw · drew"
+    },
+    {
+      "route": "english-sentence-lab",
+      "focus": "句型变换",
+      "sample": "likes → does … like?"
+    },
+    {
+      "route": "english-comparison",
+      "focus": "比较级与最高级",
+      "sample": "long · longer · the longest"
+    },
+    {
+      "route": "plurals",
+      "focus": "名词复数",
+      "sample": "foot · feet"
+    }
+  ],
+  "chapters": {
+    "basics": {
+      "topics": [],
+      "reference": "词性、主谓结构和四种句子用途"
+    },
+    "nouns": {
+      "topics": [
+        "english-shop",
+        "plurals"
+      ],
+      "reference": "名词所有格、复数拼写与数量提问"
+    },
+    "articles": {
+      "topics": [
+        "english-shop"
+      ],
+      "reference": "零冠词和 a / an / the 的特殊用法"
+    },
+    "pronouns": {
+      "topics": [
+        "pronouns"
+      ],
+      "reference": "怎样回答 What is this?"
+    },
+    "be-verb": {
+      "topics": [
+        "english-sentence-lab"
+      ],
+      "reference": "am / is / are、was / were、there be 与缩写"
+    },
+    "tenses": {
+      "topics": [
+        "english-timeline"
+      ],
+      "reference": "三单、-ing 和过去式的拼写，will 的其他用法"
+    },
+    "adjectives": {
+      "topics": [
+        "english-comparison"
+      ],
+      "reference": "形容词的位置和不规则词形补充"
+    },
+    "sentences": {
+      "topics": [
+        "english-sentence-lab"
+      ],
+      "reference": "特殊疑问句、祈使句、感叹句与简短回答"
+    }
+  },
+  "transferred_lessons": {
+    "gr2-1": [
+      "问有几个，用 How many apples?（几个苹果？）；问有多少牛奶，用 How much milk?（多少牛奶？）",
+      "有些词要看意思。hair 说的是头发整体时不可数，a hair 指一根头发。"
+    ],
+    "gr2-2": [
+      "多数名词直接加 -s。以 s、x、ch、sh 结尾，常加 -es，如 box → boxes、watch → watches。",
+      "辅音字母后面的 y 要改成 i，再加 -es，如 baby → babies。元音字母后面的 y 保留，如 boy → boys。"
+    ],
+    "gr2-3": [],
+    "gr3-1": [
+      "字母和读音有时不同。hour 的 h 不发音，所以说 an hour；useful 的开头是辅音 /j/，所以说 a useful book。"
+    ],
+    "gr3-2": [
+      "谈到大家都知道的太阳和月亮，常说 the sun、the moon。也留意常见搭配 play the piano（弹钢琴）。"
+    ],
+    "gr4-1": [],
+    "gr4-2": [],
+    "gr4-3": [
+      "回答 What is this? 或 What is that? 时，常用 It is… 或 It’s…，例如 It’s a pencil.（是一支铅笔。）"
+    ],
+    "gr4-4": [],
+    "gr5-4": [
+      "肯定句也能缩写。I am → I’m，you are → you’re，he is → he’s，she is → she’s，it is → it’s，we are → we’re，they are → they’re。",
+      "在常见的标准英语口语里，I am not 可以缩成 I’m not。"
+    ],
+    "gr6-1": [
+      "多认三种三单拼写。watch → watches 加 -es，study → studies 把 y 换成 i 再加 -es，have → has 单独记。",
+      "说习惯时，还常用 always（总是）、usually（通常）、often（经常）。"
+    ],
+    "gr6-2": [
+      "拼写时对照 make → making（去掉不发音的 e）与 sit → sitting（双写 t）。run → running、swim → swimming 也要双写末尾字母。"
+    ],
+    "gr6-3": [
+      "动词已经以不发音的 e 结尾时，常只加 -d，如 live → lived。不规则过去式还可以认 see → saw、do → did、have → had。"
+    ],
+    "gr6-4": [
+      "will 还常用来预测或表示承诺。It will rain tomorrow.（明天会下雨。）I’ll help you.（我会帮你。）"
+    ],
+    "gr7-2": [],
+    "gr7-3": [],
+    "gr7-4": [
+      "还可以对照 many/much → more → most（多），little → less → least（少），far → farther → farthest（远）。"
+    ],
+    "gr8-1": [],
+    "gr8-2": [
+      "简短回答用和问句呼应的助动词。Are they at home? 可以答 Yes, they are.；Did you go? 可以答 Yes, I did."
+    ]
+  }
+}

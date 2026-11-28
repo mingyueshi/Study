@@ -1,0 +1,166 @@
+{% extends "base.html" %}
+{% load static l10n %}
+{% block title %}比一比 · 乐学堂{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'english_comparison/compare.css' %}?v=3">
+<script src="{% static 'speech.js' %}" defer></script>
+<script src="{% static 'tts.js' %}" defer></script>
+<script src="{% static 'english_comparison/compare.js' %}" defer></script>
+{{ scenes|json_script:"english-comparison-scenes" }}
+
+<article class="english-comparison" data-english-comparison>
+  {% include 'grammar/_topic_hero.html' with title='比一比' intro='摆两三样东西，比一比长短和大小。' only %}
+
+  <div class="ec-layout" data-sidebar-layout=".ec-sidebar" data-sidebar-width="250px" data-sidebar-breakpoint="900" data-sidebar-label="学习目录">
+    <div class="ec-main">
+      <section class="ec-lab" id="compare" aria-label="物品比较台">
+        <form method="get" action="{% url 'english-comparison' %}" class="ec-controls" data-picked="{{ selected|join:',' }}">
+          <div class="ec-control-row">
+            <fieldset>
+              <legend>比什么？</legend>
+              <div class="ec-choices">
+                {% for option in scenes.values %}
+                  <label><input type="radio" name="scene" value="{{ option.id }}"{% if option.id == scene.id %} checked{% endif %}><span>{{ option.title }}</span></label>
+                {% endfor %}
+              </div>
+            </fieldset>
+            <fieldset>
+              <legend>摆几样？</legend>
+              <div class="ec-choices">
+                <label><input type="radio" name="count" value="2"{% if count == 2 %} checked{% endif %}><span>两样</span></label>
+                <label><input type="radio" name="count" value="3"{% if count == 3 %} checked{% endif %}><span>三样</span></label>
+              </div>
+            </fieldset>
+            <fieldset>
+              <legend>找哪一样？</legend>
+              <div class="ec-choices">
+                {% for key, option in scene.directions.items %}
+                  <label><input type="radio" name="direction" value="{{ key }}"{% if key == direction %} checked{% endif %}><span data-choice-direction="{{ key }}">{% if count == 3 %}{{ option.super_label }}{% else %}{{ option.label }}{% endif %}</span></label>
+                {% endfor %}
+              </div>
+            </fieldset>
+          </div>
+          <fieldset class="ec-pick">
+            <legend>挑物品</legend>
+            <input type="hidden" name="item" value="">
+            <div class="ec-choices">
+              {% for item in scene.items %}
+                <label data-item-id="{{ item.id }}">
+                  <input type="checkbox" name="item" value="{{ item.id }}"{% if item.id in selected %} checked{% endif %}>
+                  <span><i class="ec-swatch" aria-hidden="true"></i><span data-item-name>{{ item.name }}</span></span>
+                </label>
+              {% endfor %}
+            </div>
+          </fieldset>
+          <button type="submit" class="button small" data-ec-apply>看比较结果</button>
+        </form>
+        <p class="ec-selection" data-ec-selection role="status">
+          {% if selected|length == count %}已选 {{ count }} 样。点一下已选物品，就能拿下它。{% else %}已选 {{ selected|length }}／{{ count }} 样，选满就会显示例句。{% endif %}
+        </p>
+
+        {% for model in scenes.values %}
+          <div class="ec-board" data-ec-board="{{ model.id }}" data-shape="{{ model.shape }}" data-count="{{ count }}"{% if model.id != scene.id %} hidden{% endif %}>
+            <header class="ec-board-caption">
+              <strong data-ec-measure>{{ model.measure }}（cm）</strong>
+              <span>{{ model.hint }}</span>
+            </header>
+            <ul class="ec-objects">
+              {% for item in model.items %}
+                <li class="ec-object" data-item-id="{{ item.id }}"{% if item.id not in selected %} hidden{% endif %}{% if model.id == scene.id and item.id == result.winner %} data-highlight{% endif %}>
+                  <span class="ec-object-name">{{ item.name }}</span>
+                  <div class="ec-object-track" aria-hidden="true"><span class="ec-object-drawing" style="width: {{ item.percent|unlocalize }}%"></span></div>
+                  <strong class="ec-object-value">{{ item.value }} cm</strong>
+                </li>
+              {% endfor %}
+            </ul>
+            <p class="ec-empty" data-ec-empty{% if selected %} hidden{% endif %}>从上面选物品，把它们摆到这里。</p>
+          </div>
+        {% endfor %}
+
+        <div class="ec-result" data-ec-result data-ec-audio-group{% if not result %} hidden{% endif %}>
+          <div aria-live="polite" aria-atomic="true">
+            <h2 data-ec-field="degree">{{ result.degree }}</h2>
+            <p class="ec-result-en" lang="en"><span data-ec-field="before">{{ result.before }}</span><strong data-ec-field="focus">{{ result.focus }}</strong><span data-ec-field="after">{{ result.after }}</span></p>
+            <p class="ec-result-cn" data-ec-field="cn">{{ result.cn }}</p>
+          </div>
+          <button class="ec-say ec-say-primary" type="button" data-ec-say="{{ result.en }}" aria-label="听整句 {{ result.en }}"><span aria-hidden="true">🔊</span> 听整句</button>
+          <p class="ec-status" data-ec-status role="status"></p>
+        </div>
+      </section>
+
+      <section class="ec-section" id="forms" aria-labelledby="ec-forms-heading">
+        <h2 id="ec-forms-heading">三个词形怎么用</h2>
+        <p class="ec-description">原级用来描述样子。两样对比可以用比较级加 <b lang="en">than</b>。从这一组里找「最……」，试试 <b lang="en">the</b> 加最高级。</p>
+        {% for family in active_families %}
+          <div data-ec-family="{{ family.id }}"{% if family.id != current_family %} hidden{% endif %}>
+            {% include "english_comparison/_family.html" with family=family only %}
+          </div>
+        {% endfor %}
+        <p class="ec-audio-note">词卡标出常见的美式音标。点读使用设备的英语语音。</p>
+      </section>
+
+      <section class="ec-section ec-family-practice" id="together" aria-labelledby="ec-family-heading">
+        <h2 id="ec-family-heading">亲子开口练</h2>
+        <ol>
+          <li>在桌上放两支铅笔，把一端对齐。家长指一支，孩子先猜哪支更长，用 <b lang="en">longer than</b> 说一句。</li>
+          <li>再加一支，看看刚才那支还是不是最长。用 <b lang="en">the longest</b> 说说现在的结果。</li>
+          <li>交换角色，找三个大小不同的球，用 <b lang="en">bigger than</b> 和 <b lang="en">the biggest</b> 各说一句。</li>
+        </ol>
+      </section>
+
+      <section class="ec-section" id="practice" aria-labelledby="ec-practice-heading">
+        <h2 id="ec-practice-heading">该选哪个词形？</h2>
+        <div class="ec-quiz">
+          {% for question in quiz %}
+            <fieldset class="ec-question" data-ec-question data-answer="{{ question.word }}">
+              <legend lang="en">{{ question.before }}___{{ question.after }}</legend>
+              <p>{{ question.cn }}</p>
+              <div class="ec-options">
+                {% for option in question.options %}<button type="button" data-ec-option lang="en" aria-pressed="false">{{ option }}</button>{% endfor %}
+              </div>
+              <p class="ec-status" data-ec-feedback role="status"></p>
+              <div class="ec-answer" data-ec-answer data-ec-audio-group hidden>
+                <p>{{ question.why }}</p>
+                <button class="ec-say" type="button" data-ec-say="{{ question.en }}" aria-label="听整句 {{ question.en }}"><span aria-hidden="true">🔊</span> 听整句</button>
+                <p class="ec-status" data-ec-status role="status"></p>
+              </div>
+            </fieldset>
+          {% endfor %}
+        </div>
+      </section>
+
+      <section class="ec-section" id="more" aria-labelledby="ec-more-heading">
+        <h2 id="ec-more-heading">再认几组词形</h2>
+        <details class="ec-more">
+          <summary>看词尾、<span lang="en">more / most</span> 和不规则变化</summary>
+          {% for family in extra_families %}
+            {% include "english_comparison/_family.html" with family=family only %}
+          {% endfor %}
+        </details>
+      </section>
+
+      <details class="ec-references">
+        <summary>参考资料（需联网）</summary>
+        <ul>{% for source in sources %}<li><a href="{{ source.url }}" target="_blank" rel="noopener noreferrer">{{ source.label }}</a></li>{% endfor %}</ul>
+      </details>
+    </div>
+
+    <aside class="ec-sidebar">
+      <nav aria-label="本页目录">
+        <h2>本页目录</h2>
+        <a href="#compare">物品比较台</a>
+        <a href="#forms">三个词形</a>
+        <a href="#together">亲子开口练</a>
+        <a href="#practice">选词形</a>
+        <a href="#more">词形拓展</a>
+      </nav>
+      <nav aria-label="相关学习">
+        <h2>相关学习</h2>
+        <a href="{% url 'grammar' %}?chapter=adjectives#lesson-gr7-2">英语语法 · 比较级</a>
+        <a href="{% url 'english-sentence-lab' %}">英语造句实验室</a>
+        <a href="{% url 'phonetics' %}">英语音标</a>
+      </nav>
+    </aside>
+  </div>
+</article>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "pronouns/base.html" %}
+{% block pronoun_content %}
+{% include 'grammar/_topic_hero.html' with title='英语代词' intro='同一个「我」，换个位置怎么说？' only %}
+<section class="pronoun-preview" aria-label="听一听 I 和 me">
+  {% for card in preview %}{% include "pronouns/_word.html" %}{% endfor %}
+</section>
+
+<section class="pronoun-route" aria-labelledby="pronoun-essentials">
+  <header>
+    <h2 id="pronoun-essentials">先学这四课</h2>
+    <p>每次选一课。先听单词和例句，再做一个亲子活动，最后答两道题。</p>
+  </header>
+  {% include "pronouns/_route.html" with lessons=essentials only %}
+</section>
+<section class="pronoun-route" aria-labelledby="pronoun-more">
+  <header><h2 id="pronoun-more">学会后再探索</h2></header>
+  {% include "pronouns/_route.html" with lessons=more only %}
+</section>
+<p class="pronoun-related"><a href="{% url 'grammar' %}?chapter=pronouns">看英语语法里的代词章</a></p>
+{% endblock %}

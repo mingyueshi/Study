@@ -1,0 +1,107 @@
+{
+  "scenes": [
+    {
+      "id":"pencils", "title":"铅笔 · 比长短", "shape":"pencil", "noun":"pencil", "noun_zh":"铅笔", "counter":"支",
+      "measure":"长度", "hint":"把铅笔左端对齐，看每支笔的笔尖伸到哪里。",
+      "directions":{"high":{"family":"long","label":"找更长的","super_label":"找最长的"},"low":{"family":"short","label":"找更短的","super_label":"找最短的"}},
+      "items":[
+        {"id":"blue","zh":"蓝色","value":12},{"id":"red","zh":"红色","value":16},
+        {"id":"green","zh":"绿色","value":19},{"id":"yellow","zh":"黄色","value":8}
+      ]
+    },
+    {
+      "id":"balls", "title":"球 · 比大小", "shape":"ball", "noun":"ball", "noun_zh":"球", "counter":"个",
+      "measure":"直径", "hint":"把球放在同一条底线上。这里用球的直径来比大小。",
+      "directions":{"high":{"family":"big","label":"找更大的","super_label":"找最大的"},"low":{"family":"small","label":"找更小的","super_label":"找最小的"}},
+      "items":[
+        {"id":"blue","zh":"蓝色","value":10},{"id":"red","zh":"红色","value":6},
+        {"id":"green","zh":"绿色","value":16},{"id":"yellow","zh":"黄色","value":22}
+      ]
+    }
+  ],
+  "families": [
+    {
+      "id":"long", "note":"long 后面加 -er、-est。点读时留意 longer 和 longest 里的 /ɡ/。",
+      "forms":[
+        {"word":"long","ipa":"lɑːŋ","zh":"长的","en":"This pencil is long.","cn":"这支铅笔很长。"},
+        {"word":"longer","ipa":"ˈlɑːŋ.ɡɚ","zh":"更长的","en":"The red pencil is longer than the blue pencil.","cn":"红色铅笔比蓝色铅笔长。"},
+        {"word":"the longest","ipa":"ðə ˈlɑːŋ.ɡɪst","zh":"最长的","en":"The green pencil is the longest of the three.","cn":"在这三支铅笔中，绿色铅笔最长。"}
+      ]
+    },
+    {
+      "id":"short", "note":"short 后面加 -er、-est。留意词尾的拼写变化。",
+      "forms":[
+        {"word":"short","ipa":"ʃɔːrt","zh":"短的","en":"This pencil is short.","cn":"这支铅笔很短。"},
+        {"word":"shorter","ipa":"ˈʃɔːr.tɚ","zh":"更短的","en":"The blue pencil is shorter than the red pencil.","cn":"蓝色铅笔比红色铅笔短。"},
+        {"word":"the shortest","ipa":"ðə ˈʃɔːr.tɪst","zh":"最短的","en":"The yellow pencil is the shortest of the three.","cn":"在这三支铅笔中，黄色铅笔最短。"}
+      ]
+    },
+    {
+      "id":"big", "note":"big 的末尾要再写一个 g，得到 bigger 和 biggest。",
+      "forms":[
+        {"word":"big","ipa":"bɪɡ","zh":"大的","en":"This ball is big.","cn":"这个球很大。"},
+        {"word":"bigger","ipa":"ˈbɪɡ.ɚ","zh":"更大的","en":"The green ball is bigger than the blue ball.","cn":"绿色的球比蓝色的球大。"},
+        {"word":"the biggest","ipa":"ðə ˈbɪɡ.ɪst","zh":"最大的","en":"The yellow ball is the biggest of the three.","cn":"在这三个球中，黄色的球最大。"}
+      ]
+    },
+    {
+      "id":"small", "note":"small 直接加 -er、-est。比较两样时，than 后面接来比较的另一样。",
+      "forms":[
+        {"word":"small","ipa":"smɑːl","zh":"小的","en":"This ball is small.","cn":"这个球很小。"},
+        {"word":"smaller","ipa":"ˈsmɑː.lɚ","zh":"更小的","en":"The red ball is smaller than the blue ball.","cn":"红色的球比蓝色的球小。"},
+        {"word":"the smallest","ipa":"ðə ˈsmɑː.lɪst","zh":"最小的","en":"The red ball is the smallest of the three.","cn":"在这三个球中，红色的球最小。"}
+      ]
+    },
+    {
+      "id":"large", "note":"large 已经有 e，词尾只加 -r、-st。",
+      "forms":[
+        {"word":"large","ipa":"lɑːrdʒ","zh":"大的","en":"This box is large.","cn":"这个盒子很大。"},
+        {"word":"larger","ipa":"ˈlɑːr.dʒɚ","zh":"更大的","en":"This box is larger than that one.","cn":"这个盒子比那个盒子大。"},
+        {"word":"the largest","ipa":"ðə ˈlɑːr.dʒɪst","zh":"最大的","en":"The blue box is the largest of the three.","cn":"在这三个盒子中，蓝色的盒子最大。"}
+      ]
+    },
+    {
+      "id":"heavy", "note":"heavy 先把 y 改成 i，再加 -er、-est。",
+      "forms":[
+        {"word":"heavy","ipa":"ˈhev.i","zh":"重的","en":"My school bag is heavy.","cn":"我的书包很重。"},
+        {"word":"heavier","ipa":"ˈhev.i.ɚ","zh":"更重的","en":"The blue bag is heavier than the green bag.","cn":"蓝色书包比绿色书包重。"},
+        {"word":"the heaviest","ipa":"ðə ˈhev.i.ɪst","zh":"最重的","en":"This bag is the heaviest of the three.","cn":"这个书包是三个里面最重的。"}
+      ]
+    },
+    {
+      "id":"expensive", "note":"expensive 的拼写保持原样，在前面加 more 或 the most。",
+      "forms":[
+        {"word":"expensive","ipa":"ɪkˈspen.sɪv","zh":"贵的","en":"This toy is expensive.","cn":"这个玩具很贵。"},
+        {"word":"more expensive","ipa":"mɔːr ɪkˈspen.sɪv","zh":"更贵的","en":"The big toy is more expensive than the small toy.","cn":"大玩具比小玩具贵。"},
+        {"word":"the most expensive","ipa":"ðə moʊst ɪkˈspen.sɪv","zh":"最贵的","en":"This toy is the most expensive in the shop.","cn":"这个玩具是店里最贵的。"}
+      ]
+    },
+    {
+      "id":"good", "note":"good 的两种变化要单独记。比较时用 better；挑最好的用 the best。",
+      "forms":[
+        {"word":"good","ipa":"ɡʊd","zh":"好的","en":"This plan is good.","cn":"这个计划不错。"},
+        {"word":"better","ipa":"ˈbet̬.ɚ","zh":"更好的","en":"Your plan is better than mine.","cn":"你的计划比我的更好。"},
+        {"word":"the best","ipa":"ðə best","zh":"最好的","en":"This plan is the best of the three.","cn":"这是三个计划中最好的。"}
+      ]
+    },
+    {
+      "id":"bad", "note":"bad 也有不规则变化。比较时用 worse；挑最差的用 the worst。",
+      "forms":[
+        {"word":"bad","ipa":"bæd","zh":"差的","en":"The weather was bad yesterday.","cn":"昨天的天气很糟。"},
+        {"word":"worse","ipa":"wɝːs","zh":"更差的","en":"The weather is worse today than yesterday.","cn":"今天的天气比昨天更糟。"},
+        {"word":"the worst","ipa":"ðə wɝːst","zh":"最差的","en":"Monday had the worst weather of the week.","cn":"星期一的天气是这周最糟的。"}
+      ]
+    }
+  ],
+  "quiz": [
+    {"family":"long","degree":1,"answer_position":1,"why":"红色和蓝色是两支铅笔。用 longer 表示「更长」，再用 than 引出蓝色铅笔。"},
+    {"family":"big","degree":2,"answer_position":2,"why":"在三个球里找最大的，用 the biggest。of the three 说明比较的范围。"},
+    {"family":"heavy","degree":1,"answer_position":0,"why":"比较两个书包用 heavier。把 heavy 的 y 换成 i，再加 -er。"},
+    {"family":"expensive","degree":2,"answer_position":1,"why":"在店里的玩具中找最贵的，用 the most expensive。"}
+  ],
+  "sources":[
+    {"label":"British Council · 比较级与最高级","url":"https://learnenglish.britishcouncil.org/free-resources/grammar/english-grammar-reference/comparative-superlative-adjectives"},
+    {"label":"Cambridge · 比较级、than 和最高级","url":"https://dictionary.cambridge.org/us/grammar/british-grammar/comparison-adjectives-bigger-biggest-more-interesting"},
+    {"label":"Cambridge · 音标说明","url":"https://dictionary.cambridge.org/us/help/phonetics"}
+  ]
+}

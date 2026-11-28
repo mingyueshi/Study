@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}英语时间线 · 乐学堂{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'english_timeline/timeline.css' %}?v=3">
+<script src="{% static 'speech.js' %}" defer></script>
+<script src="{% static 'tts.js' %}" defer></script>
+<script src="{% static 'english_timeline/timeline.js' %}" defer></script>
+{{ examples|json_script:"english-timeline-examples" }}
+<article class="english-timeline" data-english-timeline>
+  {% include 'grammar/_topic_hero.html' with title='英语时间线' intro='选动作，换时间，听同一句话怎么变。' only %}
+  <div class="timeline-layout" data-sidebar-layout=".timeline-sidebar" data-sidebar-width="255px" data-sidebar-breakpoint="900" data-sidebar-label="学习目录">
+    <div class="timeline-main">
+      <section class="timeline-lab" id="timeline" aria-label="切换时间和动作">
+        <form method="get" action="{% url 'english-timeline' %}" class="timeline-controls">
+          <fieldset class="timeline-actions">
+            <legend>选一个动作</legend>
+            <div class="timeline-action-list">
+              {% for action in actions %}
+                <label>
+                  <input type="radio" name="action" value="{{ action.id }}"{% if action.id == selected_action %} checked{% endif %}>
+                  <span><b>{{ action.label }}</b> <small lang="en">{{ action.word }}</small></span>
+                </label>
+              {% endfor %}
+            </div>
+          </fieldset>
+
+          <fieldset class="timeline-moments">
+            <legend>把动作放到不同时间</legend>
+            <div class="timeline-moment-list">
+              {% for moment in compare %}
+                <label>
+                  <input type="radio" name="moment" value="{{ moment.id }}"{% if moment.id == selected_moment %} checked{% endif %}>
+                  <span><b>{{ moment.label }}</b> <small lang="en" data-time-cue="{{ moment.id }}">{{ moment.cue }}</small></span>
+                </label>
+              {% endfor %}
+            </div>
+          </fieldset>
+
+          <fieldset class="timeline-people">
+            <legend>谁在做？</legend>
+            <div class="timeline-person-list">
+              {% for person in people %}
+                <label>
+                  <input type="radio" name="person" value="{{ person.id }}"{% if person.id == selected_person %} checked{% endif %}>
+                  <span>{{ person.zh }} <b lang="en">{{ person.en }}</b></span>
+                </label>
+              {% endfor %}
+            </div>
+          </fieldset>
+          <button type="submit" class="button small" data-timeline-apply>切换例句</button>
+        </form>
+
+        <div class="timeline-current" data-timeline-current data-timeline-audio-group>
+          <div class="timeline-example" aria-live="polite" aria-atomic="true">
+            <h2 data-timeline-text="tense">{{ current.tense }}</h2>
+            <p class="timeline-sentence" lang="en">{% include "english_timeline/_sentence.html" with sentence=current only %}</p>
+            <p class="timeline-translation" data-timeline-text="cn">{{ current.cn }}</p>
+          </div>
+          <div class="timeline-speech">
+            <button type="button" class="timeline-play timeline-play-main" data-timeline-speak="{{ current.speech }}" data-timeline-audio="speech" aria-label="听整句 {{ current.en }}"><span aria-hidden="true">🔊</span> 听整句</button>
+            <div class="timeline-word">
+              <span>动词词形</span>
+              <button type="button" class="timeline-play timeline-play-word" data-timeline-speak="{{ current.word_speech }}" data-timeline-audio="word_speech" aria-label="朗读动词 {{ current.word }}"><b lang="en" data-timeline-text="word">{{ current.word }}</b> <span aria-hidden="true">🔊</span></button>
+              <span class="timeline-ipa" data-timeline-text="ipa">{{ current.ipa }}</span>
+            </div>
+          </div>
+          <p class="timeline-status" data-timeline-status role="status"></p>
+          <div class="timeline-rule">
+            <p data-timeline-text="rule">{{ current.rule }}</p>
+            <p data-timeline-text="past_note"{% if not current.past_note %} hidden{% endif %}>{{ current.past_note }}</p>
+          </div>
+        </div>
+
+        <div class="timeline-will" data-timeline-will data-timeline-audio-group{% if selected_moment != 'plan' %} hidden{% endif %}>
+          <h3>换个说法 · <span lang="en">will</span></h3>
+          <p>{{ will.rule }}</p>
+          <p class="timeline-alternative" lang="en">{% include "english_timeline/_sentence.html" with sentence=will only %}</p>
+          <p data-timeline-text="cn">{{ will.cn }}</p>
+          <button type="button" class="timeline-play" data-timeline-speak="{{ will.speech }}" data-timeline-audio="speech" aria-label="听整句 {{ will.en }}"><span aria-hidden="true">🔊</span> 听整句</button>
+          <p class="timeline-status" data-timeline-status role="status"></p>
+        </div>
+        <p class="timeline-pronunciation">音标标出常见的美式读法，点读使用设备的英语语音。</p>
+      </section>
+
+      <section class="timeline-section" id="compare" aria-labelledby="timeline-compare-heading">
+        <h2 id="timeline-compare-heading">四种说法放在一起</h2>
+        <div class="timeline-comparison">
+          {% for moment in compare %}
+            <div class="timeline-row" data-compare-time="{{ moment.id }}" data-timeline-audio-group{% if moment.id == selected_moment %} aria-current="true"{% endif %}>
+              <div class="timeline-row-label"><strong>{{ moment.label }}</strong><small lang="en" data-timeline-text="cue">{{ moment.cue }}</small></div>
+              <div>
+                <p class="timeline-alternative" lang="en">{% include "english_timeline/_sentence.html" with sentence=moment only %}</p>
+                <p class="timeline-row-translation" data-timeline-text="cn">{{ moment.cn }}</p>
+              </div>
+              <button type="button" class="timeline-play" data-timeline-speak="{{ moment.speech }}" data-timeline-audio="speech" aria-label="听整句 {{ moment.en }}"><span aria-hidden="true">🔊</span> 听整句</button>
+              <p class="timeline-status" data-timeline-status role="status"></p>
+            </div>
+          {% endfor %}
+        </div>
+      </section>
+
+      <section class="timeline-section timeline-family" id="together" aria-labelledby="timeline-family-heading">
+        <h2 id="timeline-family-heading">亲子开口练</h2>
+        <p>孩子选一个动作并做给你看。家长报「平时」「正在」「昨天」或「明天」，孩子先说一句，再切到那个时间点读核对。交换角色后，试试把「我」换成「她」，听听动词有没有变。</p>
+      </section>
+
+      <section class="timeline-section" id="practice" aria-labelledby="timeline-quiz-heading">
+        <h2 id="timeline-quiz-heading">选一选，哪种说法对？</h2>
+        <div class="timeline-quiz">
+          {% for question in quiz %}
+            <fieldset class="timeline-question" data-timeline-question data-answer="{{ question.phrase }}">
+              <legend lang="en">{{ question.prefix }}___{{ question.tail }}</legend>
+              <p>{{ question.cn }}</p>
+              <div class="timeline-options">
+                {% for option in question.options %}<button type="button" data-timeline-option lang="en" aria-pressed="false">{{ option }}</button>{% endfor %}
+              </div>
+              <p class="timeline-status" data-timeline-feedback role="status"></p>
+              <div class="timeline-solution" data-timeline-solution data-timeline-audio-group hidden>
+                <p lang="en">{{ question.en }}</p>
+                <p>{{ question.why }}</p>
+                <button type="button" class="timeline-play" data-timeline-speak="{{ question.speech }}" aria-label="听整句 {{ question.en }}"><span aria-hidden="true">🔊</span> 听整句</button>
+                <p class="timeline-status" data-timeline-status role="status"></p>
+              </div>
+            </fieldset>
+          {% endfor %}
+        </div>
+      </section>
+
+      <details class="timeline-references">
+        <summary>参考资料（需联网）</summary>
+        <ul>{% for source in sources %}<li><a href="{{ source.url }}" target="_blank" rel="noopener noreferrer">{{ source.label }}</a></li>{% endfor %}</ul>
+      </details>
+    </div>
+
+    <aside class="timeline-sidebar">
+      <nav aria-label="本页目录">
+        <h2>本页目录</h2>
+        <a href="#timeline">切换时间和动作</a>
+        <a href="#compare">四种说法对照</a>
+        <a href="#together">亲子开口练</a>
+        <a href="#practice">选一选</a>
+      </nav>
+      <nav aria-label="相关学习">
+        <h2>相关学习</h2>
+        <a href="{% url 'grammar' %}?chapter=tenses">英语语法 · 时态初步</a>
+        <a href="{% url 'pronouns' %}">英语代词</a>
+        <a href="{% url 'phonetics' %}">英语音标</a>
+      </nav>
+    </aside>
+  </div>
+</article>
+{% endblock %}

@@ -1,0 +1,1 @@
+{% for part in sentence.parts %}{% if not forloop.first %} {% endif %}<span data-role="{{ part.role }}">{{ part.text }}</span>{% endfor %}{{ sentence.end }}

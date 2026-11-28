@@ -1,10 +1,12 @@
 """语法专题测试：数据契约（镜像静态版 test-grammar.js）+ 页面只读。"""
+import json
+
 from django.core.exceptions import ImproperlyConfigured
 from django.conf import settings
 from django.test import SimpleTestCase, TestCase
 from django.urls import reverse
 
-from . import catalog
+from . import catalog, pronouns
 
 
 class CurriculumDataTests(SimpleTestCase):
@@ -86,12 +88,16 @@ class CurriculumDataTests(SimpleTestCase):
 
 
 class GrammarPageTests(TestCase):
-    def test_index_shows_first_chapter(self):
+    def test_index_shows_topic_hub_and_first_reference(self):
         response = self.client.get(reverse('grammar'))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, '语法初认识')
-        self.assertContains(response, '什么是语法')
-        self.assertEqual(response.context['current']['id'], 'basics')
+        self.assertContains(response, '专题学习')
+        self.assertNotContains(response, 'data-grammar-quiz')
+        self.assertEqual(response.context['first_chapter']['id'], 'basics')
+        basics = self.client.get(reverse('grammar'), {'chapter': 'basics'})
+        self.assertContains(basics, '什么是语法')
+        self.assertContains(basics, 'id="lesson-gr1-1"')
 
     def test_chapter_filter(self):
         response = self.client.get(reverse('grammar'), {'chapter': 'tenses'})
@@ -107,3 +113,47 @@ class GrammarPageTests(TestCase):
         # 只读浏览：GET 不得创建会话或写任何记录（无模型应用，会话即泄漏渠道）。
         response = self.client.get(reverse('grammar'))
         self.assertNotIn(settings.SESSION_COOKIE_NAME, response.cookies)
+
+    def test_pronoun_chapter_keeps_old_anchors_and_links_to_topic(self):
+        response = self.client.get(reverse('grammar'), {'chapter': 'pronouns'})
+        for number in range(1, 5):
+            self.assertContains(response, f'id="lesson-gr4-{number}"')
+        self.assertContains(response, reverse('pronouns'))
+        self.assertContains(response, reverse('questionbank-grammar-practice', args=['pronouns']))
+
+
+class PronounTopicTests(SimpleTestCase):
+    def test_topic_directory_and_all_lessons(self):
+        directory = self.client.get(reverse('pronouns'))
+        self.assertContains(directory, '英语代词')
+        self.assertContains(directory, 'data-pronoun-say="I help Dad."')
+        for chapter in pronouns.load_curriculum()['chapters']:
+            with self.subTest(chapter=chapter['id']):
+                url = reverse('pronoun-lesson', args=[chapter['id']])
+                self.assertContains(directory, url)
+                response = self.client.get(url)
+                self.assertContains(response, chapter['title'])
+                self.assertContains(response, '返回英语语法', count=1)
+                self.assertTemplateUsed(response, 'grammar/_topic_hero.html', count=1)
+                self.assertContains(response, '亲子开口练')
+                self.assertContains(response, 'data-pronoun-question', count=2)
+                for group in chapter['groups']:
+                    cards = [card for pair in group['rows'] for card in pair] if 'rows' in group else group['items']
+                    for card in cards:
+                        if 'word' in card:
+                            self.assertContains(response, f"/{card['ipa']}/")
+                            self.assertContains(response, card['cn'])
+        self.assertEqual(self.client.get(reverse('pronoun-lesson', args=['unknown'])).status_code, 404)
+
+    def test_incomplete_example_or_invalid_answer_is_rejected(self):
+        data = json.loads(pronouns.DATA_PATH.read_text(encoding='utf-8'))
+        chapter = data['chapters'][0]
+        card = chapter['groups'][0]['rows'][0][1]
+        sentence = card['en']
+        card['en'] = 'Dad helps us.'
+        with self.assertRaisesMessage(ImproperlyConfigured, '例句应恰好含一个目标词'):
+            pronouns.prepare_curriculum(data)
+        card['en'] = sentence
+        chapter['quiz'][0]['answer'] = 'mine'
+        with self.assertRaisesMessage(ImproperlyConfigured, '填空或选项无效'):
+            pronouns.prepare_curriculum(data)

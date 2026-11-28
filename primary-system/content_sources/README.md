@@ -12,7 +12,12 @@
 | 数学、语文教材 | `math-data.js`、`knowledge-data.js`、图示与 `images/` | `make mathbook-data chinesebook-data` |
 | 图形运动实验室 | `geometry-lab.json`（图形顶点、实验手记和挑战目标，生成时校验） | `make study-topics-data` |
 | 英语教材、日常用语 | `english-data.js`、`english-word-links.json` | 关联词由 Django 直接读取，教材快照导出也使用同一编排。运行 `node content_sources/test/test-english.js` 校验。日常用语用 `make phrases-data` |
-| 英语语法 | `grammar/` | `make grammar-data` |
+| 英语语法 | `grammar/`（原始知识点和巩固题），`grammar/topic-links.json`（专题总览、整章专题入口和速查笔记） | 原始知识点改后运行 `make grammar-data`。导航由 Django 读取，修改后运行 `.venv/bin/python manage.py test grammar`，保留知识点 ID 和题库关联 |
+| 英语代词 | `english-pronouns.json`（8 课词形、音标、双语例句、亲子活动与填空） | Django 直接读取并校验。保留各课 `id`，每个例句写一次目标词，音标字段不含斜线。改后运行 `.venv/bin/python manage.py test grammar.tests.PronounTopicTests` |
+| 英语时间线 | `english-timeline.json`（时间提示、动作搭配、动词词形、美式音标、中文与题目） | Django 直接读取并校验。时间切换、对照和练习共用例句。保留动作及时间 ID，对应 `action`、`moment` 深链接。音标字段不含斜线，可用 `speech` 指定同音拼写（read 原形用 reed，过去式用 red）。修改后运行 `.venv/bin/python manage.py test grammar.test_timeline` |
+| 英语造句实验室 | `english-sentence-lab.json`（句子成分、中文、音标、题目） | Django 直接读取并校验。三种句型、对照和练习共用例句，题目选项里的 `null` 由同源例句填入正确答案。保留例句 ID 和句型 ID，两者分别用于 `example`、`mode` 深链接。修改后运行 `.venv/bin/python manage.py test grammar.test_sentence_lab` |
+| 比一比 | `english-comparison.json`（物品尺寸、方向、词形、美式音标、双语例句和练习） | Django 直接读取并校验。同场景的四种颜色尺寸须各不相同，按场景最大尺寸计算模型比例。保留场景 ID 和物品 ID，用于 `scene` 和 `item` 深链接。修改后运行 `.venv/bin/python manage.py test grammar.test_comparison` |
+| 英语小商店 | `english-shop.json`（商品、单复数、计量单位、美式音标和练习） | Django 直接读取并校验。顾客与店员的两句对话和练习共用词形；`photo` 对应 `static/english_shop/products.jpg` 中从零起算的列、行，商品图由 ImageGen 生成。保留商品 ID，对应 `product` 深链接。修改后运行 `.venv/bin/python manage.py test grammar.test_shop` |
 | 作文坊 | `writing-data.js` | `make writing-data` |
 | 积分兑换奖励 | `rewards.json`（版本 2，22 项，五类分类，50～5000 积分）；`rewards-activities.json`、`rewards-device-time.json` 保留旧活动和设备时长目录 | 先迁移，再用 `.venv/bin/python manage.py import_rewards --dry-run` 预览，去掉 `--dry-run` 导入并补齐空白分类；可用 `--retire-source` 下架未修改的旧项目，已有同名配置保留，见 [奖励目录维护](../incentives/data/README.md) |
 | 对联工坊 | `couplets.json`（入门线索、主题分类、例联词组与句尾拼音、选择题、拼联引用、词语素材、自查与出处） | Django 直接读取。保留规则、例联和练习的 `id` 以维持深链接，修改后运行 `node content_sources/test/test-couplets.js`。选择题的内容指纹变化后重新计进度；作品在当前浏览器按账号保存，草稿在当前标签页刷新后恢复 |

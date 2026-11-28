@@ -1,0 +1,184 @@
+.pronouns { --english-topic-hero-bg: #eee7f8; }
+
+.pronouns :is(h1, h2, h3) { text-wrap: balance; }
+.pronouns p { text-wrap: pretty; }
+.pronouns a:not(.button):hover { color: var(--green); }
+.pronouns [hidden] { display: none; }
+
+.pronoun-related a, .pronoun-references a {
+  text-decoration: underline;
+  text-underline-offset: .22em;
+}
+
+.pronoun-preview {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .65rem;
+}
+
+.pronoun-route { margin-top: 1.5rem; }
+.pronoun-route h2, .pronoun-section-heading h2 { margin-bottom: .15rem; }
+.pronoun-route header p, .pronoun-section-heading p { margin-bottom: 0; color: var(--muted); }
+.pronoun-paths {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: .8rem;
+  margin: 1rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+.pronoun-paths a {
+  display: grid;
+  align-content: start;
+  gap: .28rem;
+  height: 100%;
+  padding: 1rem;
+  border: 1px solid var(--line);
+  border-radius: .85rem;
+  background: var(--white);
+}
+.pronoun-paths a:hover { border-color: var(--green); }
+.pronoun-paths strong { font-size: 1.18em; }
+.pronoun-paths a > span { color: var(--muted); }
+.pronoun-paths .pronoun-route-arrow { color: var(--green); }
+.pronoun-related { margin: 1.5rem 0 0; }
+
+.pronoun-workspace { display: grid; grid-template-columns: minmax(0, 1fr) 270px; align-items: start; gap: clamp(1rem, 2.2vw, 2.2rem); }
+.pronoun-lesson { min-width: 0; }
+.pronoun-rule {
+  max-width: 50em;
+  margin-bottom: 0;
+  padding: .75rem 1rem;
+  border-inline-start: 4px solid var(--green);
+  border-radius: 0 .65rem .65rem 0;
+  background: var(--soft);
+}
+.pronoun-section { margin-top: 2rem; }
+.pronoun-section-heading { margin-bottom: 1.25rem; }
+.pronoun-group + .pronoun-group { margin-top: 1.35rem; }
+.pronoun-group h3 { margin-bottom: .55rem; font-size: 1.12em; }
+
+.pronoun-pairs, .pronoun-words, .pronoun-questions {
+  display: grid;
+  gap: .75rem;
+}
+.pronoun-pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border: 1px solid var(--line);
+  border-radius: .85rem;
+  background: var(--white);
+}
+.pronoun-pair > .pronoun-word + .pronoun-word { border-inline-start: 1px solid var(--line); }
+.pronoun-words { grid-template-columns: repeat(auto-fit, minmax(min(100%, 15.5rem), 1fr)); }
+.pronoun-questions { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.pronoun-word {
+  min-width: 0;
+  padding: .9rem clamp(.85rem, 1.6vw, 1.4rem);
+}
+:is(.pronoun-preview, .pronoun-words) > .pronoun-word {
+  border: 1px solid var(--line);
+  border-radius: .85rem;
+  background: var(--white);
+}
+.pronoun-role { margin-bottom: .2rem; color: var(--green-dark); font-size: .9em; font-weight: 650; }
+.pronoun-word-head { display: flex; flex-wrap: wrap; align-items: center; gap: .22rem .6rem; }
+.pronoun-say, .pronoun-options button {
+  min-height: 44px;
+  padding: .3rem .7rem;
+  border: 1px solid var(--line);
+  border-radius: .55rem;
+  background: var(--paper);
+  color: var(--ink);
+  font: inherit;
+}
+.pronoun-say:hover, .pronoun-say[data-playing], .pronoun-options button:hover { border-color: var(--green); background: var(--soft); }
+.pronoun-say-word {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .45rem;
+  overflow-wrap: anywhere;
+  text-align: start;
+  font-size: 1.42em;
+  font-weight: 750;
+}
+.pronoun-say-word [aria-hidden] { font-size: .62em; }
+.pronoun-ipa { color: var(--muted); font-size: .96em; }
+.pronoun-meaning { margin: .4rem 0 0; font-weight: 650; }
+.pronoun-example { margin: .65rem 0 0; padding-top: .6rem; border-top: 1px solid var(--line); }
+.pronoun-example p, .pronoun-answer p { margin-bottom: .25rem; }
+.pronoun-example p[lang="en"], .pronoun-answer p[lang="en"] { font-size: 1.14em; line-height: 1.55; }
+.pronoun-example strong { color: var(--green-dark); text-decoration: underline; text-decoration-thickness: .08em; text-underline-offset: .17em; }
+.pronoun-example p:not([lang]) { color: var(--muted); }
+.pronoun-say-sentence { margin-top: .2rem; font-size: .86em; font-weight: 650; }
+.pronoun-audio-feedback { margin: 0; color: var(--muted); font-size: .86em; }
+.pronoun-audio-feedback:not(:empty) { margin-top: .45rem; }
+.pronoun-extra {
+  margin-top: 1rem;
+  padding: .4rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: .85rem;
+}
+.pronoun-extra summary, .pronoun-references summary { min-height: 44px; padding-block: .48rem; cursor: pointer; }
+.pronoun-extra[open] { padding-bottom: 1rem; }
+.pronoun-extra[open] summary { margin-bottom: .65rem; }
+
+.pronoun-together { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem; }
+.pronoun-family, .pronoun-tips {
+  padding: 1rem clamp(.9rem, 2vw, 1.6rem);
+  border: 1px solid var(--line);
+  border-radius: .85rem;
+}
+.pronoun-family { background: var(--soft); }
+.pronoun-tips { background: var(--white); }
+.pronoun-family h2, .pronoun-tips h3 { margin-bottom: .4rem; font-size: 1.22em; }
+.pronoun-family p, .pronoun-tips ul { margin: 0; }
+.pronoun-tips ul { padding-inline-start: 1.2rem; }
+.pronoun-tips li + li { margin-top: .45rem; }
+
+.pronoun-question {
+  min-width: 0;
+  margin: 0;
+  padding: .6rem 1rem .85rem;
+  border: 1px solid var(--line);
+  border-radius: .85rem;
+  background: var(--white);
+}
+.pronoun-question legend { padding-inline: .4rem; font-size: 1.14em; font-weight: 750; }
+.pronoun-question > p { margin-bottom: .55rem; }
+.pronoun-options, .pronoun-next { display: flex; flex-wrap: wrap; gap: .5rem; }
+.pronoun-options button { min-width: 3.2em; overflow-wrap: anywhere; }
+.pronoun-options button[aria-pressed="true"] { border-color: currentColor; color: var(--orange); }
+.pronoun-question[data-result="correct"] button[aria-pressed="true"] { background: var(--soft); color: var(--green-dark); }
+.pronoun-question .pronoun-quiz-feedback { margin: 0; font-weight: 650; }
+.pronoun-question .pronoun-quiz-feedback:not(:empty) { margin-top: .55rem; }
+.pronoun-answer { margin-top: .45rem; padding-top: .45rem; border-top: 1px solid var(--line); }
+.pronoun-next { margin-top: 1.8rem; }
+.pronoun-references { margin-top: 1.2rem; color: var(--muted); font-size: .9em; }
+.pronoun-references ul { margin-top: 0; }
+
+.pronoun-sidebar {
+  padding: .6rem;
+  border: 1px solid var(--line);
+  border-radius: .85rem;
+  background: var(--white);
+}
+.pronoun-sidebar nav + nav { padding-top: .55rem; border-top: 1px solid var(--line); }
+.pronoun-sidebar h2 { margin: .25rem .55rem; font-size: 1em; }
+.pronoun-sidebar nav a { display: flex; align-items: center; min-height: 44px; padding: .35rem .55rem; border-radius: .55rem; font-size: .94em; }
+.pronoun-sidebar a:hover, .pronoun-sidebar a[aria-current="page"] { background: var(--soft); color: var(--green-dark); }
+.pronoun-sidebar a[aria-current="page"] { font-weight: 750; }
+
+@media (max-width: 1080px) {
+  .pronoun-paths { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 900px) {
+  .pronoun-workspace { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 640px) {
+  body:has(.pronouns) .site-scroll-tools { display: none; }
+  .pronoun-questions, .pronoun-together, .pronoun-paths { grid-template-columns: minmax(0, 1fr); }
+  .pronoun-preview, .pronoun-pair { font-size: .9em; }
+  :is(.pronoun-preview, .pronoun-pair) .pronoun-word { padding-inline: .6rem; }
+}

@@ -1,0 +1,21 @@
+<div class="pronoun-word">
+  {% if card.role %}<p class="pronoun-role">{{ card.role }}</p>{% endif %}
+  {% if card.word %}
+    <div class="pronoun-word-head">
+      <button class="pronoun-say pronoun-say-word" type="button" data-pronoun-say="{{ card.word }}" aria-label="朗读单词 {{ card.word }}">
+        <span lang="en">{{ card.word }}</span> <span aria-hidden="true">🔊</span>
+      </button>
+      <span class="pronoun-ipa">/{{ card.ipa }}/</span>
+    </div>
+    <p class="pronoun-meaning">{{ card.zh }}</p>
+    <div class="pronoun-example">
+      <p lang="en">{{ card.before }}<strong>{{ card.target }}</strong>{{ card.after }}</p>
+      <p>{{ card.cn }}</p>
+      <button class="pronoun-say pronoun-say-sentence" type="button" data-pronoun-say="{{ card.en }}" aria-label="朗读例句 {{ card.en }}"><span aria-hidden="true">🔊</span> 听例句</button>
+    </div>
+    <p class="pronoun-audio-feedback" data-pronoun-audio role="status"></p>
+  {% else %}
+    <p class="pronoun-meaning">日常英语里，its 通常和名词一起出现。</p>
+    <p class="pronoun-example">说 <b lang="en">its tail</b> 表示「它的尾巴」。</p>
+  {% endif %}
+</div>

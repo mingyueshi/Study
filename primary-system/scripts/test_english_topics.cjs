@@ -9,7 +9,7 @@ const root = path.join(__dirname, '..');
 const items = JSON.parse(fs.readFileSync(path.join(root, 'plurals/plural_data/plurals.json'))).items;
 const core = items.filter(item => item.tier === 'core');
 
-function gamePage() {
+function gamePage(hash = '') {
   const nodes = new Map();
   const get = name => {
     if (!nodes.has(name)) nodes.set(name, {
@@ -21,31 +21,50 @@ function gamePage() {
     });
     return nodes.get(name);
   };
-  const game = {hidden: true, querySelector: selector => get(selector.match(/data-transform-([\w-]+)/)[1])};
+  const panel = {hidden: true, open: false, classList: {contains: name => name === 'plural-tool'}};
+  const game = {parentElement: panel, querySelector: selector => get(selector.match(/data-transform-([\w-]+)/)[1])};
   const cards = core.map(item => ({
-    dataset: {...item, singularIpa: '', pluralIpa: ''},
+    dataset: {...item, singularIpa: item.singular_ipa, pluralIpa: item.plural_ipa},
     querySelector: () => item.note ? {textContent: item.note} : null,
+    querySelectorAll: () => Object.entries(item.examples).map(([form, example]) => ({
+      dataset: {pluralExample: form},
+      querySelector: selector => selector === '[data-say]'
+        ? {dataset: {say: example.en}}
+        : {textContent: example.cn},
+    })),
   }));
   vm.runInNewContext(fs.readFileSync(path.join(root, 'static/plurals/plurals.js'), 'utf8'), {
+    window: {location: {hash}, addEventListener() {}},
     document: {
+      getElementById: id => id === 'transform' ? panel : null,
       querySelector: selector => selector === '[data-plural-transform]' ? game : null,
       querySelectorAll: () => cards,
     },
     fetch() { assert.fail('揭晓词形不应请求练习上报端点'); },
   });
-  return {get, game, click: name => get(name).handlers.click()};
+  return {get, panel, click: name => get(name).handlers.click()};
 }
 
 test('a round covers every core word once and can restart without repeating the last word', () => {
   const page = gamePage(), words = new Set();
-  assert.equal(page.game.hidden, false);
+  assert.equal(page.panel.hidden, false);
+  assert.equal(page.panel.open, false);
   for (let i = 0; i < core.length; i++) {
     const singular = page.get('word').textContent;
     assert.equal(words.has(singular), false);
     words.add(singular);
+    const item = core.find(item => item.singular === singular);
+    assert.equal(page.get('ipa').textContent, item.singular_ipa);
+    assert.equal(page.get('example-en').textContent, item.examples.singular.en);
+    assert.equal(page.get('example-cn').textContent, item.examples.singular.cn);
+    assert.equal(page.get('example-say').dataset.say, item.examples.singular.en);
     page.click('flip');
-    assert.equal(page.get('word').textContent, core.find(item => item.singular === singular).plural);
+    assert.equal(page.get('word').textContent, item.plural);
+    assert.equal(page.get('ipa').textContent, item.plural_ipa);
     assert.equal(page.get('say').dataset.say, page.get('word').textContent);
+    assert.equal(page.get('example-en').textContent, item.examples.plural.en);
+    assert.equal(page.get('example-cn').textContent, item.examples.plural.cn);
+    assert.equal(page.get('example-say').dataset.say, item.examples.plural.en);
     if (i < core.length - 1) page.click('next');
   }
   assert.equal(words.size, core.length);
@@ -57,6 +76,12 @@ test('a round covers every core word once and can restart without repeating the 
   assert.equal(last.startsWith(page.get('word').textContent + ' '), false);
   assert.equal(page.get('flip').focused, true);
   assert.match(page.get('progress').textContent, /第 1／27 个 · 已变身 0／27/);
+});
+
+test('the transform deep link opens the activity', () => {
+  const page = gamePage('#transform');
+  assert.equal(page.panel.hidden, false);
+  assert.equal(page.panel.open, true);
 });
 
 test('repeated flips count once and skipped words do not count', () => {

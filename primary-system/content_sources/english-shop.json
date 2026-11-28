@@ -1,0 +1,29 @@
+{
+  "products": [
+    {"id":"apple","name":"苹果","word":"apple","ipa":"ˈæp.əl","plural":"apples","plural_ipa":"ˈæp.əlz","vowel":true,"counter":"个","photo":[0,0]},
+    {"id":"banana","name":"香蕉","word":"banana","ipa":"bəˈnæn.ə","plural":"bananas","plural_ipa":"bəˈnæn.əz","vowel":false,"counter":"根","photo":[1,0]},
+    {"id":"egg","name":"鸡蛋","word":"egg","ipa":"eɡ","plural":"eggs","plural_ipa":"eɡz","vowel":true,"counter":"个","photo":[2,0]},
+    {"id":"notebook","name":"笔记本","word":"notebook","ipa":"ˈnoʊt.bʊk","plural":"notebooks","plural_ipa":"ˈnoʊt.bʊks","vowel":false,"counter":"本","photo":[3,0]},
+    {"id":"water","name":"水","word":"water","ipa":"ˈwɑː.t̬ɚ","photo":[0,1],
+      "unit":{"word":"bottle","ipa":"ˈbɑː.t̬əl","plural":"bottles","plural_ipa":"ˈbɑː.t̬əlz","vowel":false,"counter":"瓶"}},
+    {"id":"milk","name":"牛奶","word":"milk","ipa":"mɪlk","photo":[1,1],
+      "unit":{"word":"carton","ipa":"ˈkɑːr.tən","plural":"cartons","plural_ipa":"ˈkɑːr.tənz","vowel":false,"counter":"盒"}},
+    {"id":"bread","name":"面包","word":"bread","ipa":"bred","photo":[2,1],
+      "unit":{"word":"slice","ipa":"slaɪs","plural":"slices","plural_ipa":"ˈslaɪ.sɪz","vowel":false,"counter":"片"}},
+    {"id":"rice","name":"米饭","word":"rice","ipa":"raɪs","photo":[3,1],
+      "unit":{"word":"bowl","ipa":"boʊl","plural":"bowls","plural_ipa":"boʊlz","vowel":false,"counter":"碗"}}
+  ],
+  "quiz": [
+    {"product":"banana","quantity":"1","line":"customer","options":["an banana",null,"a bananas"],"cue":"你想请店员拿一根香蕉。","why":"banana 的第一个音是辅音 /b/。买一根时，说 a banana。"},
+    {"product":"egg","quantity":"1","line":"customer","options":[null,"a egg","an eggs"],"cue":"你想请店员拿一个鸡蛋。","why":"egg 的第一个音是元音 /e/。买一个时，说 an egg。"},
+    {"product":"apple","quantity":"1","line":"clerk","options":["an apples","some apple",null],"cue":"顾客刚点了一个苹果。店员指的就是刚才那个。","why":"两人都知道说的是哪一个苹果，所以用 the apple。"},
+    {"product":"milk","quantity":"some","line":"customer","options":["a milk",null,"some milks"],"cue":"你想要一些牛奶，没说要几盒。","why":"这里是在说牛奶本身。用 some milk 表示一些牛奶。"},
+    {"product":"bread","quantity":"2","line":"customer","options":[null,"two slice of bread","two breads"],"cue":"你想请店员拿两片面包。","why":"数的是两片，所以用 slices。后面的 bread 保持原样。"},
+    {"product":"apple","quantity":"some","line":"customer","options":["some apple","an apples",null],"cue":"你想要一些苹果，没说具体几个。","why":"苹果可以一个一个数。「一些苹果」是 some apples。"}
+  ],
+  "sources": [
+    {"label":"British Council · 可数和不可数名词","url":"https://learnenglish.britishcouncil.org/free-resources/grammar/a1-a2/nouns-countable-uncountable"},
+    {"label":"British Council · 冠词 a、an 和 the","url":"https://learnenglish.britishcouncil.org/free-resources/grammar/a1-a2-grammar/articles-a-an-the"},
+    {"label":"Cambridge · 冠词用法和读音","url":"https://dictionary.cambridge.org/us/grammar/british-grammar/a-an-the"}
+  ]
+}

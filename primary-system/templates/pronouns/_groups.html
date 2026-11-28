@@ -1,0 +1,18 @@
+{% for group in groups %}
+  <section class="pronoun-group">
+    <h3>{{ group.title }}</h3>
+    {% if group.rows %}
+      <div class="pronoun-pairs">
+        {% for row in group.rows %}
+          <div class="pronoun-pair">
+            {% for card in row %}{% include "pronouns/_word.html" %}{% endfor %}
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="pronoun-words">
+        {% for card in group.items %}{% include "pronouns/_word.html" %}{% endfor %}
+      </div>
+    {% endif %}
+  </section>
+{% endfor %}

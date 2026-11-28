@@ -1,61 +1,45 @@
-{% extends 'base.html' %}{% load static %}{% block title %}英语语法 · 乐学堂{% endblock %}
-{% block content %}<link rel="stylesheet" href="{% static 'grammar/grammar.css' %}?v=2"><script src="{% static 'speech.js' %}" defer></script><script src="{% static 'tts.js' %}" defer></script><script src="{% static 'grammar/grammar.js' %}" defer></script>
-<header class="page-heading page-heading-compact"><p class="eyebrow">英语 · 精讲</p><h1>英语语法</h1>
-  <p>看讲解、记口诀，先用页内巩固题试一试。点「练本章」进入挑战题库，答错的题会收进本章错题本。</p></header>
-<div class="library-layout">
-  <aside class="unit-nav" aria-label="语法章节导航">
-    <h2>语法章节</h2>
-    {% for chapter in chapters %}<a href="?chapter={{ chapter.id }}" {% if chapter.id == current.id %}aria-current="page"{% endif %}><span class="unit-dot grammar-dot">{{ chapter.no }}</span>{{ chapter.title }}<span class="unit-count">{{ chapter.lesson_count }}</span></a>{% endfor %}
-    <p class="grammar-progress-row">巩固题已练 <b data-grammar-progress>0</b>／{{ lesson_total }}</p>
-  </aside>
-  <section class="grammar-board">
-    <div class="section-heading"><div><p class="eyebrow">第 {{ current.no }} 章</p><h2>{{ current.title }}</h2><p>{{ current.description }}</p></div></div>
-    {% for lesson in current.lessons %}
-    <article class="grammar-lesson" id="lesson-{{ lesson.id }}" data-grammar-lesson>
-      <header class="grammar-lesson-head">
-        <h3>{{ lesson.title }}</h3>
-        <button class="say-chip" type="button" data-say="{{ lesson.title }}。{{ lesson.definition }}" aria-label="朗读 {{ lesson.title }}">🔊</button>
-      </header>
-      <p class="grammar-definition">{{ lesson.definition }}</p>
-      <div class="grammar-essentials">
-        <p class="grammar-block-title">必须掌握</p>
-        <ul>{% for essential in lesson.essentials %}<li>{{ essential }}</li>{% endfor %}</ul>
-      </div>
-      {% if lesson.formula %}<p class="grammar-formula"><span>句型公式</span>{{ lesson.formula }}</p>{% endif %}
-      {% if lesson.comparison %}
-      <div class="grammar-table-wrap"><table class="grammar-table">
-        <thead><tr>{% for header in lesson.comparison.headers %}<th>{{ header }}</th>{% endfor %}</tr></thead>
-        <tbody>{% for row in lesson.comparison.rows %}<tr>{% for cell in row %}<td>{{ cell }}</td>{% endfor %}</tr>{% endfor %}</tbody>
-      </table></div>
-      {% endif %}
-      {% if lesson.facts %}<div class="grammar-facts">{% for fact in lesson.facts %}<p><b>{{ fact.label }}</b>{{ fact.value }}</p>{% endfor %}</div>{% endif %}
-      <details class="grammar-example">
-        <summary>例题 · {{ lesson.example.question }}</summary>
-        <div class="grammar-example-body">
-          <ol>{% for step in lesson.example.steps %}<li>{{ step }}</li>{% endfor %}</ol>
-          <p class="grammar-answer"><b>答案</b>{{ lesson.example.answer }}</p>
+{% extends 'grammar/base.html' %}
+{% load static %}
+{% block grammar_content %}
+<nav class="grammar-crumb" aria-label="当前位置">
+  <a href="{% url 'home' %}?area=english">英语</a><span aria-hidden="true">/</span><span aria-current="page">英语语法</span>
+</nav>
+<header class="grammar-hub-heading english-topic-hero" data-grammar-first-chapter="{{ first_chapter.url }}" data-grammar-first-anchors="{% for lesson in first_chapter.lessons %}lesson-{{ lesson.id }}{% if not forloop.last %} {% endif %}{% endfor %}">
+  <div>
+    <h1>英语语法</h1>
+    <p>选一个主题，进专题和孩子一起听、说、动手练。</p>
+  </div>
+  <a class="button small ghost" href="#grammar-reference-index">查规则或复习 <span aria-hidden="true">↓</span></a>
+</header>
+
+<section class="grammar-topic-section" aria-labelledby="grammar-topic-heading">
+  <h2 id="grammar-topic-heading">专题学习</h2>
+  <div class="grammar-topic-grid">
+    {% for topic in topic_directory %}
+      <a class="grammar-topic-card" href="{{ topic.url }}">
+        <div class="grammar-topic-preview">
+          <span lang="en">{{ topic.sample }}</span>
+          <img src="{% static 'icons/'|add:topic.icon|add:'.svg' %}" width="48" height="48" alt="">
         </div>
-      </details>
-      <div class="grammar-misconception">
-        <p class="grammar-wrong"><i>✗ 易错</i>{{ lesson.misconception.wrong }}</p>
-        <p class="grammar-right"><i>✓ 正确</i>{{ lesson.misconception.right }}</p>
-      </div>
-      {% if lesson.id == 'gr2-3' %}<p class="grammar-see-also"><a class="button small ghost" href="{% url 'plurals' %}">去「不规则复数」专题看全表 →</a></p>{% endif %}
-      <div class="grammar-quiz" data-grammar-quiz data-answer="{{ lesson.quiz.answer }}" data-lesson="{{ lesson.id }}">
-        <p class="grammar-quiz-q">练一练 · {{ lesson.quiz.question }}</p>
-        <div class="grammar-quiz-options">
-          {% for option in lesson.quiz.options %}<button class="grammar-quiz-option" type="button" data-grammar-option data-index="{{ forloop.counter0 }}">{{ option }}</button>{% endfor %}
+        <div class="grammar-topic-copy">
+          <p class="grammar-topic-focus">{{ topic.focus }}</p>
+          <h3>{{ topic.name }} <span aria-hidden="true">↗</span></h3>
+          <p>{{ topic.blurb }}</p>
         </div>
-        <p class="grammar-quiz-explain" hidden data-grammar-explain>{{ lesson.quiz.explanation }}</p>
-      </div>
-      <p class="grammar-sources">来源：{% for source in lesson.sources %}<a href="{{ source.url }}" target="_blank" rel="noopener">🔗 {{ source.label }}</a>{% endfor %}<span class="grammar-source-note">（外链需联网）</span></p>
-    </article>
+      </a>
     {% endfor %}
-    <nav class="grammar-chapter-nav" aria-label="章节切换">
-      {% if prev_chapter %}<a class="button small ghost" href="?chapter={{ prev_chapter.id }}">← 上一章</a>{% endif %}
-      <a class="button small" href="{% url 'questionbank-grammar-practice' current.id %}">练本章 →</a>
-      {% if next_chapter %}<a class="button small ghost" href="?chapter={{ next_chapter.id }}">下一章 →</a>{% endif %}
-    </nav>
-  </section>
-</div>
+  </div>
+</section>
+
+<section class="grammar-reference-index" id="grammar-reference-index" aria-labelledby="grammar-reference-heading">
+  <div class="grammar-section-heading">
+    <div><h2 id="grammar-reference-heading">语法速查</h2><p>按章找规则、补充提示和巩固题。</p></div>
+    <p class="grammar-progress-row">累计答对 <b data-grammar-progress>0</b>／{{ lesson_total }}</p>
+  </div>
+  <ul class="grammar-reference-grid">
+    {% for chapter in chapters %}
+      <li><a href="{{ chapter.url }}"><strong>{{ chapter.title }}</strong><span>{{ chapter.reference }}</span></a></li>
+    {% endfor %}
+  </ul>
+</section>
 {% endblock %}

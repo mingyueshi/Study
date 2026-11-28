@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}英语造句实验室 · 乐学堂{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'sentence_lab/lab.css' %}?v=3">
+<script src="{% static 'speech.js' %}" defer></script>
+<script src="{% static 'tts.js' %}" defer></script>
+<script src="{% static 'sentence_lab/lab.js' %}" defer></script>
+
+<article class="sentence-lab" data-sentence-lab>
+  {% include 'grammar/_topic_hero.html' with title='英语造句实验室' intro='在肯定句、否定句和问句之间切换。' only %}
+
+  <div class="lab-layout" data-sidebar-layout=".lab-sidebar" data-sidebar-width="252px" data-sidebar-breakpoint="900" data-sidebar-label="学习目录">
+    <div class="lab-main">
+      <section class="lab-workbench" id="transform" aria-label="切换例句和句型">
+        <form method="get" action="{% url 'english-sentence-lab' %}" class="lab-controls">
+          <fieldset>
+            <legend>选一句话</legend>
+            <div class="lab-examples">
+              {% for example in examples.values %}
+                <label>
+                  <input type="radio" name="example" value="{{ example.id }}"{% if example.id == selected_example %} checked{% endif %}>
+                  <span>{{ example.label }}</span>
+                </label>
+              {% endfor %}
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>换种说法</legend>
+            <div class="lab-modes">
+              {% for mode in modes %}
+                <label>
+                  <input type="radio" name="mode" value="{{ mode.id }}"{% if mode.id == selected_mode %} checked{% endif %}>
+                  <span><b>{{ mode.label }}</b><small>{{ mode.caption }}</small></span>
+                </label>
+              {% endfor %}
+            </div>
+          </fieldset>
+          <button type="submit" class="button small" data-lab-apply>切换例句</button>
+        </form>
+        <p class="lab-live" data-lab-live role="status"></p>
+
+        {% for example in examples.values %}
+          <div data-lab-example="{{ example.id }}"{% if example.id != selected_example %} hidden{% endif %}>
+            {% for form in example.forms %}
+              <div class="lab-stage" data-lab-mode="{{ form.id }}" data-lab-audio-group{% if form.id != selected_mode %} hidden{% endif %}>
+                <p class="lab-context">{{ example.context }} <span aria-hidden="true">·</span> {{ form.label }}</p>
+                {% if form.id != 'affirmative' %}
+                  <p class="lab-original">原句 <span lang="en">{{ example.forms.0.en }}</span></p>
+                {% endif %}
+                <p class="lab-sentence" data-lab-announcement lang="en">{% include "sentence_lab/_parts.html" with sentence=form only %}</p>
+                <p class="lab-translation">{{ form.cn }}</p>
+                <button class="lab-say lab-say-main" type="button" data-lab-say="{{ form.en }}" aria-label="听整句 {{ form.en }}"><span aria-hidden="true">🔊</span> 听整句</button>
+                <div class="lab-words" role="group" aria-label="关键单词和读音">
+                  {% for word in form.focus %}
+                    <div class="lab-word" data-role="{{ word.role }}">
+                      <span class="lab-role">{{ word.label }}</span>
+                      <div>
+                        <button type="button" class="lab-word-say" data-lab-say="{{ word.text|lower }}" aria-label="朗读{{ word.label }} {{ word.text }}"><b lang="en">{{ word.text }}</b> <span aria-hidden="true">🔊</span></button>
+                        <span class="lab-ipa">/{{ word.ipa }}/</span>
+                      </div>
+                    </div>
+                  {% endfor %}
+                </div>
+                <p class="lab-explanation">{{ form.explanation }}</p>
+                {% if form.spoken %}
+                  <p class="lab-spoken">口语缩写 <button class="lab-say" type="button" data-lab-say="{{ form.spoken }}" aria-label="朗读口语缩写 {{ form.spoken }}"><span lang="en">{{ form.spoken }}</span> <span aria-hidden="true">🔊</span></button></p>
+                {% endif %}
+                {% if example.note %}<p class="lab-note">{{ example.note }}</p>{% endif %}
+                <p class="lab-status" data-lab-status role="status"></p>
+              </div>
+            {% endfor %}
+          </div>
+        {% endfor %}
+        <p class="lab-audio-note">词卡标出单独读时的常见美式音标。点读使用设备的英语语音。</p>
+      </section>
+
+      <section class="lab-section" id="compare" aria-labelledby="lab-compare-heading">
+        <h2 id="lab-compare-heading">三种说法放在一起</h2>
+        {% for example in examples.values %}
+          <div class="lab-compare" data-lab-comparison="{{ example.id }}"{% if example.id != selected_example %} hidden{% endif %}>
+            {% for form in example.forms %}
+              <div class="lab-compare-row" data-lab-row="{{ form.id }}" data-lab-audio-group{% if form.id == selected_mode %} aria-current="true"{% endif %}>
+                <strong>{{ form.label }}</strong>
+                <div>
+                  <p class="lab-compare-en" lang="en">{% include "sentence_lab/_parts.html" with sentence=form only %}</p>
+                  <p class="lab-compare-cn">{{ form.cn }}</p>
+                </div>
+                <button class="lab-say" type="button" data-lab-say="{{ form.en }}" aria-label="听整句 {{ form.en }}"><span aria-hidden="true">🔊</span> 听整句</button>
+                <p class="lab-status" data-lab-status role="status"></p>
+              </div>
+            {% endfor %}
+          </div>
+        {% endfor %}
+      </section>
+
+      <section class="lab-section lab-family" id="together" aria-labelledby="lab-family-heading">
+        <h2 id="lab-family-heading">亲子开口练</h2>
+        <ol>
+          <li>家长先点读一句肯定句，让孩子找出主要动词。</li>
+          <li>家长报「否定」或「提问」。孩子先改一句，再切换核对。听听助动词去了哪儿，主要动词有没有变。</li>
+          <li>交换角色，用「喜欢苹果」做一问一答。可以答 <b lang="en">Yes, she does.</b>（是的，她喜欢。）或 <b lang="en">No, she doesn’t.</b>（不，她不喜欢。）</li>
+        </ol>
+      </section>
+
+      <section class="lab-section" id="practice" aria-labelledby="lab-quiz-heading">
+        <h2 id="lab-quiz-heading">试试自己换句型</h2>
+        <div class="lab-quiz">
+          {% for question in quiz %}
+            <fieldset class="lab-question" data-lab-question data-answer="{{ question.answer.en }}">
+              <legend>改成{{ question.answer.label }}</legend>
+              <p lang="en"><b>{{ question.initial.en }}</b></p>
+              <p>{{ question.answer.cn }}</p>
+              <div class="lab-options">
+                {% for option in question.options %}
+                  <button type="button" data-lab-option lang="en" aria-pressed="false">{{ option }}</button>
+                {% endfor %}
+              </div>
+              <p class="lab-status" data-lab-feedback role="status"></p>
+              <div class="lab-answer" data-lab-answer data-lab-audio-group hidden>
+                <p>{{ question.why }}</p>
+                <button class="lab-say" type="button" data-lab-say="{{ question.answer.en }}" aria-label="听整句 {{ question.answer.en }}"><span aria-hidden="true">🔊</span> 听整句</button>
+                <p class="lab-status" data-lab-status role="status"></p>
+              </div>
+            </fieldset>
+          {% endfor %}
+        </div>
+      </section>
+
+      <details class="lab-references">
+        <summary>参考资料（需联网）</summary>
+        <ul>{% for source in sources %}<li><a href="{{ source.url }}" target="_blank" rel="noopener noreferrer">{{ source.label }}</a></li>{% endfor %}</ul>
+      </details>
+    </div>
+
+    <aside class="lab-sidebar">
+      <nav aria-label="本页目录">
+        <h2>本页目录</h2>
+        <a href="#transform">切换例句和句型</a>
+        <a href="#compare">三种说法对照</a>
+        <a href="#together">亲子开口练</a>
+        <a href="#practice">自己换句型</a>
+      </nav>
+      <nav aria-label="相关学习">
+        <h2>相关学习</h2>
+        <a href="{% url 'grammar' %}?chapter=sentences#lesson-gr8-3">英语语法 · 特殊疑问句</a>
+        <a href="{% url 'english-timeline' %}">英语时间线</a>
+        <a href="{% url 'pronouns' %}">英语代词</a>
+      </nav>
+    </aside>
+  </div>
+</article>
+{% endblock %}

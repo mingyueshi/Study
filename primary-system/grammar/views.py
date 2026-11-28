@@ -1,27 +1,53 @@
-"""英语语法精讲页：只读浏览，不写学习记录；页面 GET 保持零写入。
-
-巩固题在页内前端判分、进度只存浏览器 localStorage；同题已作为
-``primary-grammar`` 批次进入挑战题库，练习记录与错题本统一沉淀在题库侧。
-"""
+"""英语语法总览与速查。原巩固题的进度保存在当前浏览器。"""
 from django.shortcuts import render
+from django.urls import reverse
 from django.views.decorators.cache import never_cache
 from django.views.decorators.http import require_safe
 
-from . import catalog
+from . import catalog, navigation
 
 
 @never_cache
 @require_safe
 def index(request):
     chapters = catalog.chapters_with_lessons()
-    chapter_id = request.GET.get('chapter', '')
-    position = next((order for order, chapter in enumerate(chapters) if chapter['id'] == chapter_id), 0)
-    current = chapters[position]
-    return render(request, 'grammar/index.html', {
-        'chapters': [{'id': chapter['id'], 'no': chapter['no'], 'title': chapter['title'],
-                      'lesson_count': len(chapter['lessons'])} for chapter in chapters],
-        'current': current,
-        'prev_chapter': chapters[position - 1] if position > 0 else None,
-        'next_chapter': chapters[position + 1] if position + 1 < len(chapters) else None,
+    nav = navigation.load_navigation()
+    reference = [
+        {
+            **chapter,
+            **nav['by_chapter'][chapter['id']],
+            'url': reverse('grammar', query={'chapter': chapter['id']}),
+        }
+        for chapter in chapters
+    ]
+    context = {
+        'chapters': reference,
         'lesson_total': sum(len(chapter['lessons']) for chapter in chapters),
+        'study_area': 'english',
+    }
+
+    chapter_id = request.GET.get('chapter')
+    if not chapter_id:
+        return render(request, 'grammar/index.html', {
+            **context,
+            'topic_directory': nav['directory'],
+            'first_chapter': reference[0],
+        })
+
+    current = next((chapter for chapter in reference if chapter['id'] == chapter_id), reference[0])
+    notes = nav['notes']
+    reading = []
+    reviews = []
+    for lesson in current['lessons']:
+        lesson_id = lesson['id']
+        transferred = lesson_id in notes
+        has_reading = not transferred or bool(notes[lesson_id])
+        if has_reading:
+            reading.append({**lesson, 'notes': notes.get(lesson_id, [])})
+        reviews.append({**lesson, 'anchor': f'review-{lesson_id}' if has_reading else f'lesson-{lesson_id}'})
+    return render(request, 'grammar/reference.html', {
+        **context,
+        'current': current,
+        'reading': reading,
+        'reviews': reviews,
     })

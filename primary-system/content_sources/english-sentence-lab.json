@@ -1,0 +1,62 @@
+{
+  "ipa": {
+    "do":"duː", "does":"dʌz", "did":"dɪd", "not":"nɑːt",
+    "is":"ɪz", "are":"ɑːr", "can":"kæn", "cannot":"ˈkæn.ɑːt", "will":"wɪl",
+    "like":"laɪk", "likes":"laɪks", "play":"pleɪ", "go":"ɡoʊ", "went":"went",
+    "reading":"ˈriː.dɪŋ", "swim":"swɪm", "visit":"ˈvɪz.ɪt"
+  },
+  "examples": [
+    {
+      "id":"apples", "label":"她喜欢苹果", "context":"一般现在时 · she",
+      "subject":"She", "helper":"does", "positive":"likes", "verb":"like", "rest":"apples",
+      "zh":{"affirmative":"她喜欢苹果。","negative":"她不喜欢苹果。","question":"她喜欢苹果吗？"}
+    },
+    {
+      "id":"soccer", "label":"他们踢足球", "context":"一般现在时 · they",
+      "subject":"They", "helper":"do", "positive":"play", "verb":"play", "rest":"soccer after school",
+      "zh":{"affirmative":"他们放学后踢足球。","negative":"他们放学后不踢足球。","question":"他们放学后踢足球吗？"}
+    },
+    {
+      "id":"library", "label":"他昨天去了图书馆", "context":"一般过去时",
+      "subject":"He", "helper":"did", "positive":"went", "verb":"go", "rest":"to the library yesterday",
+      "zh":{"affirmative":"他昨天去了图书馆。","negative":"他昨天没去图书馆。","question":"他昨天去图书馆了吗？"}
+    },
+    {
+      "id":"homework", "label":"他做家庭作业", "context":"一般现在时 · 两种 do",
+      "subject":"He", "helper":"does", "positive":"does", "verb":"do", "rest":"his homework every evening",
+      "zh":{"affirmative":"他每天晚上都做家庭作业。","negative":"他每天晚上都不做家庭作业。","question":"他每天晚上都做家庭作业吗？"},
+      "note":"肯定句里的 does 表示「做」。问句 Does he do …? 句首的 Does 帮忙提问，主语后面的 do 才表示「做」。"
+    },
+    {
+      "id":"happy", "label":"她现在很开心", "context":"be 动词 · 描述状态",
+      "subject":"She", "helper":"is", "rest":"happy now",
+      "zh":{"affirmative":"她现在很开心。","negative":"她现在不开心。","question":"她现在开心吗？"}
+    },
+    {
+      "id":"reading", "label":"他们正在看书", "context":"现在进行时",
+      "subject":"They", "helper":"are", "verb":"reading", "rest":"a book",
+      "zh":{"affirmative":"他们正在看书。","negative":"他们没有在看书。","question":"他们正在看书吗？"}
+    },
+    {
+      "id":"swim", "label":"她会游泳", "context":"情态动词 · can",
+      "subject":"She", "helper":"can", "verb":"swim",
+      "zh":{"affirmative":"她会游泳。","negative":"她不会游泳。","question":"她会游泳吗？"}
+    },
+    {
+      "id":"grandma", "label":"他们明天会去看望奶奶", "context":"说将来 · will",
+      "subject":"They", "helper":"will", "verb":"visit", "rest":"Grandma tomorrow",
+      "zh":{"affirmative":"他们明天会去看望奶奶。","negative":"他们明天不会去看望奶奶。","question":"他们明天会去看望奶奶吗？"}
+    }
+  ],
+  "quiz": [
+    {"example":"apples", "mode":"question", "options":["Does she likes apples?",null,"Do she like apples?"], "why":"She 用 Does 来提问。Does 已经承担三单变化，like 用原形。"},
+    {"example":"library", "mode":"negative", "options":["He does not go to the library yesterday.","He did not went to the library yesterday.",null], "why":"yesterday 指过去，所以用 did not。went 要还原成 go。"},
+    {"example":"happy", "mode":"question", "options":[null,"Does she is happy now?","Do she happy now?"], "why":"句子里已有 is。把 Is 移到 She 的前面就能提问。"},
+    {"example":"reading", "mode":"negative", "options":["They do not reading a book.",null,"They are not read a book."], "why":"这里在 are 后面加 not，正在做的动作仍然用 reading。"}
+  ],
+  "sources": [
+    {"label":"British Council · 疑问句和否定句", "url":"https://learnenglish.britishcouncil.org/free-resources/grammar/english-grammar-reference/questions-negatives"},
+    {"label":"Cambridge · 一般疑问句", "url":"https://dictionary.cambridge.org/grammar/british-grammar/yes-no-questions/"},
+    {"label":"Cambridge · 音标说明", "url":"https://dictionary.cambridge.org/us/help/phonetics"}
+  ]
+}

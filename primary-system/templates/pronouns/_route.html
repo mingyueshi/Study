@@ -1,0 +1,9 @@
+<ul class="pronoun-paths">
+  {% for lesson in lessons %}
+    <li><a href="{% url 'pronoun-lesson' lesson.id %}">
+      <strong>{{ lesson.title }}</strong>
+      <span>{{ lesson.prompt }}</span>
+      <span class="pronoun-route-arrow" aria-hidden="true">→</span>
+    </a></li>
+  {% endfor %}
+</ul>

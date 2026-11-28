@@ -1,0 +1,79 @@
+{% extends 'grammar/base.html' %}
+{% load static %}
+{% block grammar_assets %}
+<script src="{% static 'speech.js' %}" defer></script>
+<script src="{% static 'tts.js' %}" defer></script>
+{% endblock %}
+{% block grammar_content %}
+<nav class="grammar-crumb" aria-label="当前位置">
+  <a href="{% url 'grammar' %}">英语语法</a><span aria-hidden="true">/</span><a href="{% url 'grammar' %}#grammar-reference-index">语法速查</a>
+</nav>
+<header class="grammar-reference-heading english-topic-hero">
+  <div>
+    <h1>{{ current.title }}</h1>
+    <p>{{ current.reference }}</p>
+  </div>
+  <nav aria-label="本章练习">
+    <a class="grammar-review-jump" href="#chapter-review">本章巩固题</a>
+    <a class="button small ghost" href="{% url 'questionbank-grammar-practice' current.id %}">练本章 <span aria-hidden="true">→</span></a>
+  </nav>
+</header>
+
+<div class="grammar-reference-layout" data-sidebar-layout=".grammar-reference-nav" data-sidebar-label="语法目录" data-sidebar-width="268px" data-sidebar-breakpoint="900" data-sidebar-fixed="h2, .grammar-progress-row" data-sidebar-collapse-key="primary_sidebar_collapsed_v1:.unit-nav">
+  <div class="grammar-reference-main">
+    {% if current.topics %}
+      <section class="grammar-handoff" aria-labelledby="grammar-handoff-heading" data-grammar-chapter-topics>
+        <h2 id="grammar-handoff-heading">去专题学习</h2>
+        <div class="grammar-handoff-links">
+          {% for topic in current.topics %}
+            <a href="{{ topic.url }}">
+              <img src="{% static 'icons/'|add:topic.icon|add:'.svg' %}" width="43" height="43" alt="">
+              <span><strong>{{ topic.name }}</strong><small>{{ topic.blurb }}</small></span>
+              <span aria-hidden="true">→</span>
+            </a>
+          {% endfor %}
+        </div>
+      </section>
+    {% endif %}
+
+    {% if reading %}
+      <section class="grammar-reference-section" aria-labelledby="grammar-rules-heading">
+        <h2 id="grammar-rules-heading">规则速查</h2>
+        <div class="grammar-rule-list">
+          {% for lesson in reading %}
+            <details class="grammar-rule" id="lesson-{{ lesson.id }}">
+              <summary>{{ lesson.title }}</summary>
+              <div class="grammar-rule-body">
+                {% if lesson.notes %}
+                  <ul class="grammar-notes">{% for note in lesson.notes %}<li>{{ note }}</li>{% endfor %}</ul>
+                {% else %}
+                  <p class="grammar-definition">{{ lesson.definition }}</p>
+                  <button class="say-chip" type="button" data-say="{{ lesson.title }}。{{ lesson.definition }}" aria-label="朗读 {{ lesson.title }}"><span aria-hidden="true">🔊</span> 听讲解</button>
+                  {% include 'grammar/_reading.html' with lesson=lesson only %}
+                {% endif %}
+              </div>
+            </details>
+          {% endfor %}
+        </div>
+      </section>
+    {% endif %}
+
+    <details class="grammar-chapter-review" id="chapter-review">
+      <summary>本章巩固题 <span class="grammar-review-count">已答对 <b data-grammar-chapter-progress>0</b>／{{ reviews|length }}</span></summary>
+      <div class="grammar-review-grid">
+        {% for lesson in reviews %}{% include 'grammar/_review.html' with lesson=lesson only %}{% endfor %}
+      </div>
+    </details>
+  </div>
+
+  <aside class="grammar-reference-nav">
+    <h2>语法章节</h2>
+    <p class="grammar-progress-row">累计答对 <b data-grammar-progress>0</b>／{{ lesson_total }}</p>
+    <nav aria-label="语法章节">
+      {% for chapter in chapters %}
+        <a href="{{ chapter.url }}"{% if chapter.id == current.id %} aria-current="page"{% endif %}>{{ chapter.title }}</a>
+      {% endfor %}
+    </nav>
+  </aside>
+</div>
+{% endblock %}

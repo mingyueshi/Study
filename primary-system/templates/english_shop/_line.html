@@ -1,0 +1,11 @@
+<section class="shop-line" data-shop-line="{{ key }}" data-shop-audio-group>
+  <h3>{{ role }}</h3>
+  <p class="shop-dialogue-en" lang="en"><span data-shop-text="before">{{ line.before }}</span> <strong data-shop-text="lead">{{ line.lead }}</strong> <span data-shop-text="phrase">{{ line.phrase }}</span><span data-shop-text="after">{{ line.after }}</span></p>
+  <p class="shop-dialogue-cn" data-shop-text="cn">{{ line.cn }}</p>
+  <div class="shop-line-audio">
+    <button class="shop-say shop-say-primary" type="button" data-shop-utterance="line" data-shop-say="{{ line.en }}" aria-label="听整句 {{ line.en }}"><span aria-hidden="true">🔊</span> 听整句</button>
+    <button class="shop-say" type="button" data-shop-utterance="phrase" data-shop-say="{{ line.lead }} {{ line.phrase }}" aria-label="听短语 {{ line.lead }} {{ line.phrase }}">听短语</button>
+    <span class="shop-ipa" data-shop-text="ipa">{{ line.ipa }}</span>
+  </div>
+  <p class="shop-status" data-shop-status role="status"></p>
+</section>

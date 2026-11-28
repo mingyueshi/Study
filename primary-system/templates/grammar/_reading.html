@@ -1,0 +1,29 @@
+<div class="grammar-essentials">
+  <p class="grammar-block-title">要点</p>
+  <ul>{% for essential in lesson.essentials %}<li>{{ essential }}</li>{% endfor %}</ul>
+</div>
+{% if lesson.formula %}<p class="grammar-formula"><b>句型公式</b>{{ lesson.formula }}</p>{% endif %}
+{% if lesson.comparison %}
+  <div class="grammar-table-wrap"><table class="grammar-table">
+    <thead><tr>{% for header in lesson.comparison.headers %}<th scope="col">{{ header }}</th>{% endfor %}</tr></thead>
+    <tbody>{% for row in lesson.comparison.rows %}<tr>{% for cell in row %}<td>{{ cell }}</td>{% endfor %}</tr>{% endfor %}</tbody>
+  </table></div>
+{% endif %}
+{% if lesson.facts %}
+  <div class="grammar-facts">{% for fact in lesson.facts %}<p><b>{{ fact.label }}</b>{{ fact.value }}</p>{% endfor %}</div>
+{% endif %}
+<details class="grammar-example">
+  <summary>例题 · {{ lesson.example.question }}</summary>
+  <div class="grammar-example-body">
+    <ol>{% for step in lesson.example.steps %}<li>{{ step }}</li>{% endfor %}</ol>
+    <p class="grammar-answer"><b>答案</b>{{ lesson.example.answer }}</p>
+  </div>
+</details>
+<div class="grammar-misconception">
+  <p class="grammar-wrong"><b>✗ 易错</b>{{ lesson.misconception.wrong }}</p>
+  <p class="grammar-right"><b>✓ 正确</b>{{ lesson.misconception.right }}</p>
+</div>
+<p class="grammar-sources">
+  {% for source in lesson.sources %}<a href="{{ source.url }}" target="_blank" rel="noopener noreferrer">{{ source.label }}</a>{% endfor %}
+  <span>参考资料需联网</span>
+</p>

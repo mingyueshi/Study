@@ -60,6 +60,24 @@ def validate(data):
         seen.add(singular)
         if item.get("group") not in group_codes or item.get("tier") not in TIERS:
             raise ImproperlyConfigured(f"{singular} 的分组或层级不合法。")
+        for key in ("singular_ipa", "plural_ipa"):
+            ipa = item.get(key)
+            if not isinstance(ipa, str) or not re.fullmatch(r"/[^/\s<>]+/", ipa):
+                raise ImproperlyConfigured(f"{singular} 的 {key} 须填写 /音标/。")
+        if singular == plural and item["singular_ipa"] != item["plural_ipa"]:
+            raise ImproperlyConfigured(f"{singular} 的单复数读音须一致。")
+        examples = item.get("examples")
+        if not isinstance(examples, dict) or examples.keys() != {"singular", "plural"}:
+            raise ImproperlyConfigured(f"{singular} 须有单复数例句。")
+        for form, word in (("singular", singular), ("plural", plural)):
+            example = examples[form]
+            if (not isinstance(example, dict) or example.keys() != {"en", "cn"}
+                or not all(isinstance(text, str) and text.strip() for text in example.values())
+                or not re.search(rf"\b{re.escape(word)}\b", example["en"], re.IGNORECASE)
+                or not re.search(r"[\u4e00-\u9fff]", example["cn"])):
+                raise ImproperlyConfigured(f"{singular} 的 {form} 例句须包含对应词形及中文。")
+        if examples["singular"]["en"] == examples["plural"]["en"]:
+            raise ImproperlyConfigured(f"{singular} 的两条例句须体现数量差别。")
         if item["tier"] == "core":
             core += 1
         for text in _walk_strings(item):
@@ -92,9 +110,18 @@ def option_forms(item, items):
 def practice_items():
     """练习题池：core 层每词一条，选项集加载期确定，换一题只换展示顺序。"""
     items = load_data()["items"]
-    return tuple({"singular": item["singular"], "plural": item["plural"], "zh": item.get("zh", ""),
-                  "options": option_forms(item, items)}
-                 for item in items if item["tier"] == "core")
+    return tuple(
+        {
+            "singular": item["singular"],
+            "plural": item["plural"],
+            "singular_ipa": item["singular_ipa"],
+            "plural_ipa": item["plural_ipa"],
+            "zh": item.get("zh", ""),
+            "examples": item["examples"],
+            "options": option_forms(item, items),
+        }
+        for item in items if item["tier"] == "core"
+    )
 
 
 @lru_cache(maxsize=1)
@@ -109,40 +136,6 @@ def practice_round(rng):
     return {**item, "options": options}
 
 
-def _ipa_index(items):
-    """词头 -> 已核对 IPA（primary-english/primary-words 生效记录）。
-
-    与 catalog.english_link_pronunciations 同源同口径：运行时批量查词库，
-    缺失的如实留空，不用数据里缓存的历史音标冒充。
-    """
-    headwords = {word for item in items for word in (item["singular"], item["plural"])}
-    if not headwords:
-        return {}
-    from lexicon.models import active_records
-    rows = active_records().filter(
-        release__source__code__in=('primary-english', 'primary-words'),
-        headword__in=headwords,
-    ).select_related('binding__pronunciation')
-    index = {}
-    for record in rows:
-        pron = record.binding.pronunciation
-        if pron is None or not pron.is_reviewed:
-            continue
-        reading = (pron.editorial_value or record.pronunciation_value or '').strip()
-        if reading:
-            index.setdefault(record.headword, reading)
-    return index
-
-
-def card_rows(items, ipa=None):
-    ipa = ipa or {}
-    return [{"singular": item["singular"], "plural": item["plural"], "zh": item.get("zh", ""),
-             "emoji": item.get("emoji", ""), "tier": item["tier"], "note": item.get("note", ""),
-             "group": item["group"],
-             "singular_ipa": ipa.get(item["singular"], ""), "plural_ipa": ipa.get(item["plural"], "")}
-            for item in items]
-
-
 @ensure_csrf_cookie
 @never_cache
 @require_safe
@@ -152,17 +145,14 @@ def page(request):
     groups = data["groups"]
     seed = request.GET.get("q_seed", "")[:40]
     rng = random.Random(seed) if seed else random.SystemRandom()
-    ipa = _ipa_index(items)
     group_rows = []
     for group in groups:
-        rows = card_rows([item for item in items if item["group"] == group["code"]], ipa)
+        rows = [item for item in items if item["group"] == group["code"]]
         group_rows.append({**group, "rows": rows, "count": len(rows)})
-    round_item = practice_round(rng)
     return render(request, "plurals/index.html", {
         "groups": group_rows,
         "total": len(items),
-        "core_count": sum(1 for item in items if item["tier"] == "core"),
-        "round": {**round_item, "singular_ipa": ipa.get(round_item["singular"], "")},
+        "round": practice_round(rng),
         "next_href": "?q_seed=" + secrets.token_hex(4) + "#practice",
     })
 

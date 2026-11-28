@@ -1,0 +1,83 @@
+{% extends "pronouns/base.html" %}
+{% block pronoun_content %}
+{% include 'grammar/_topic_hero.html' with title=chapter.title intro=chapter.prompt only %}
+<div class="pronoun-workspace" data-sidebar-layout=".pronoun-sidebar" data-sidebar-label="专题目录" data-sidebar-width="270px" data-sidebar-breakpoint="900">
+  <div class="pronoun-lesson">
+    <p class="pronoun-rule">{{ chapter.rule }}</p>
+
+    <section id="words" class="pronoun-section" aria-labelledby="pronoun-words-title">
+      <div class="pronoun-section-heading">
+        <h2 id="pronoun-words-title">词形与例句</h2>
+        <p>点单词听发音，点「听例句」跟读整句。音标标出常见的美式读法，点读使用设备的英语语音。</p>
+      </div>
+      {% include "pronouns/_groups.html" with groups=groups only %}
+      {% if extra_groups %}
+        <details class="pronoun-extra">
+          <summary>拓展 · 数量、两者选择和替代名词</summary>
+          {% include "pronouns/_groups.html" with groups=extra_groups only %}
+        </details>
+      {% endif %}
+    </section>
+
+    <section id="together" class="pronoun-section pronoun-together" aria-labelledby="pronoun-together-title">
+      <div class="pronoun-family">
+        <h2 id="pronoun-together-title">亲子开口练</h2>
+        <p>{{ chapter.activity }}</p>
+      </div>
+      <div class="pronoun-tips">
+        <h3>读完再想一想</h3>
+        <ul>{% for tip in chapter.tips %}<li>{{ tip }}</li>{% endfor %}</ul>
+      </div>
+    </section>
+
+    <section id="practice" class="pronoun-section" aria-labelledby="pronoun-practice-title">
+      <div class="pronoun-section-heading"><h2 id="pronoun-practice-title">练一练</h2><p>看中文选一个词，答完可以跟读整句。</p></div>
+      <noscript><p>打开浏览器的 JavaScript 后可点读并作答。</p></noscript>
+      <div class="pronoun-questions">
+        {% for question in chapter.quiz %}
+          <fieldset class="pronoun-question" data-pronoun-question data-answer="{{ question.answer }}">
+            <legend><span lang="en">{{ question.en }}</span></legend>
+            <p id="pronoun-cue-{{ forloop.counter }}">{{ question.cn }}</p>
+            <div class="pronoun-options" role="group" aria-labelledby="pronoun-cue-{{ forloop.counter }}">
+              {% for option in question.options %}
+                <button type="button" data-pronoun-option aria-pressed="false" lang="en">{{ option }}</button>
+              {% endfor %}
+            </div>
+            <p class="pronoun-quiz-feedback" data-pronoun-feedback role="status"></p>
+            <div class="pronoun-answer" data-pronoun-answer hidden>
+              <p lang="en">{{ question.sentence }}</p>
+              <p>{{ question.why }}</p>
+              <button class="pronoun-say pronoun-say-sentence" type="button" data-pronoun-say="{{ question.sentence }}"><span aria-hidden="true">🔊</span> 听完整句</button>
+              <p class="pronoun-audio-feedback" data-pronoun-audio role="status"></p>
+            </div>
+          </fieldset>
+        {% endfor %}
+      </div>
+    </section>
+
+    <nav class="pronoun-next" aria-label="继续学习">
+      <a class="button ghost" href="{% url 'pronouns' %}">返回代词专题</a>
+      {% if next_chapter %}<a class="button" href="{% url 'pronoun-lesson' next_chapter.id %}">下一课 · {{ next_chapter.title }} <span aria-hidden="true">→</span></a>{% endif %}
+    </nav>
+    <details class="pronoun-references">
+      <summary>参考资料（需联网）</summary>
+      <ul>{% for source in sources %}<li><a href="{{ source.url }}" target="_blank" rel="noopener noreferrer">{{ source.label }}</a></li>{% endfor %}</ul>
+    </details>
+  </div>
+
+  <aside class="pronoun-sidebar">
+    <nav aria-label="英语代词课程目录">
+      <h2>专题目录</h2>
+      {% for entry in chapters %}
+        <a href="{% url 'pronoun-lesson' entry.id %}"{% if chapter.id == entry.id %} aria-current="page"{% endif %}>{{ entry.title }}</a>
+      {% endfor %}
+    </nav>
+    <nav aria-label="本课目录">
+      <h2>本课跳转</h2>
+      <a href="#words">词形与例句</a>
+      <a href="#together">亲子开口练</a>
+      <a href="#practice">练一练</a>
+    </nav>
+  </aside>
+</div>
+{% endblock %}

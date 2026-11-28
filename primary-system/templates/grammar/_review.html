@@ -1,0 +1,15 @@
+<article class="grammar-review-item" id="{{ lesson.anchor }}">
+  <header>
+    <h3>{{ lesson.title }}</h3>
+    <span class="grammar-review-state" data-grammar-review-state hidden>已答对</span>
+  </header>
+  <div class="grammar-quiz" data-grammar-quiz data-answer="{{ lesson.quiz.answer }}" data-lesson="{{ lesson.id }}">
+    <p class="grammar-quiz-q">{{ lesson.quiz.question }}</p>
+    <div class="grammar-quiz-options">
+      {% for option in lesson.quiz.options %}
+        <button class="grammar-quiz-option" type="button" data-grammar-option data-index="{{ forloop.counter0 }}">{{ option }}</button>
+      {% endfor %}
+    </div>
+    <p class="grammar-quiz-explain" hidden data-grammar-explain role="status">{{ lesson.quiz.explanation }}</p>
+  </div>
+</article>

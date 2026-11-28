@@ -1,0 +1,99 @@
+{
+  "moments": [
+    {"id":"habit", "label":"平时", "cue":"every day", "tense":"一般现在时", "rule":"说经常做的事。主语是 I，动词用原形；主语是 she，动词用第三人称单数形式。"},
+    {"id":"now", "label":"正在", "cue":"now", "tense":"现在进行时", "rule":"说此刻正在做的事。用 be + 动词-ing，I 搭配 am，she 搭配 is。"},
+    {"id":"past", "label":"昨天", "cue":"yesterday", "tense":"一般过去时", "rule":"说过去发生的事。I 和 she 在这些例句里用同一个过去式。"},
+    {"id":"plan", "label":"明天的计划", "cue":"tomorrow", "tense":"用 be going to 说将来", "rule":"说已经有的打算。用 be going to + 动词原形，I 搭配 am，she 搭配 is。"}
+  ],
+  "actions": [
+    {
+      "id":"draw", "label":"画画", "object":"a picture",
+      "forms":{
+        "base":{"word":"draw", "ipa":"drɑː"},
+        "third":{"word":"draws", "ipa":"drɑːz"},
+        "ing":{"word":"drawing", "ipa":"ˈdrɑː.ɪŋ"},
+        "past":{"word":"drew", "ipa":"druː"}
+      },
+      "zh":{"habit":"每天都画画。", "now":"正在画画。", "past":"昨天画了画。", "plan":"打算明天画画。", "will":"明天会画画。"},
+      "past_note":"draw 的过去式是 drew，元音也变了。"
+    },
+    {
+      "id":"play", "label":"踢足球", "object":"soccer",
+      "forms":{
+        "base":{"word":"play", "ipa":"pleɪ"},
+        "third":{"word":"plays", "ipa":"pleɪz"},
+        "ing":{"word":"playing", "ipa":"ˈpleɪ.ɪŋ"},
+        "past":{"word":"played", "ipa":"pleɪd"}
+      },
+      "zh":{"habit":"每天都踢足球。", "now":"正在踢足球。", "past":"昨天踢了足球。", "plan":"打算明天踢足球。", "will":"明天会踢足球。"},
+      "past_note":"played 结尾的 -ed 读 /d/。点读时留意它只有一个音节。"
+    },
+    {
+      "id":"read", "label":"看书", "object":"a book",
+      "forms":{
+        "base":{"word":"read", "ipa":"riːd", "speech":"reed"},
+        "third":{"word":"reads", "ipa":"riːdz"},
+        "ing":{"word":"reading", "ipa":"ˈriː.dɪŋ"},
+        "past":{"word":"read", "ipa":"red", "speech":"red"}
+      },
+      "zh":{"habit":"每天都看书。", "now":"正在看书。", "past":"昨天看了书。", "plan":"打算明天看书。", "will":"明天会看书。"},
+      "past_note":"两个 read 的拼写一样。原形读 /riːd/，过去式读 /red/，和颜色 red 同音。"
+    },
+    {
+      "id":"eat", "label":"吃早餐", "object":"breakfast",
+      "forms":{
+        "base":{"word":"eat", "ipa":"iːt"},
+        "third":{"word":"eats", "ipa":"iːts"},
+        "ing":{"word":"eating", "ipa":"ˈiː.t̬ɪŋ"},
+        "past":{"word":"ate", "ipa":"eɪt"}
+      },
+      "zh":{"habit":"每天都吃早餐。", "now":"正在吃早餐。", "past":"昨天吃了早餐。", "plan":"打算明天吃早餐。", "will":"明天会吃早餐。"},
+      "past_note":"eat 的过去式是 ate。听听 /iː/ 到 /eɪ/ 的变化。"
+    },
+    {
+      "id":"make", "label":"做纸飞机", "object":"a paper plane",
+      "forms":{
+        "base":{"word":"make", "ipa":"meɪk"},
+        "third":{"word":"makes", "ipa":"meɪks"},
+        "ing":{"word":"making", "ipa":"ˈmeɪ.kɪŋ"},
+        "past":{"word":"made", "ipa":"meɪd"}
+      },
+      "zh":{"habit":"每天都做纸飞机。", "now":"正在做纸飞机。", "past":"昨天做了纸飞机。", "plan":"打算明天做纸飞机。", "will":"明天会做纸飞机。"},
+      "past_note":"make 的过去式是 made，结尾从 /k/ 变成了 /d/。"
+    },
+    {
+      "id":"walk", "label":"走路上学", "object":"to school",
+      "forms":{
+        "base":{"word":"walk", "ipa":"wɑːk"},
+        "third":{"word":"walks", "ipa":"wɑːks"},
+        "ing":{"word":"walking", "ipa":"ˈwɑː.kɪŋ"},
+        "past":{"word":"walked", "ipa":"wɑːkt"}
+      },
+      "zh":{"habit":"每天都走路上学。", "now":"正在走路去学校。", "past":"昨天走路去上学了。", "plan":"打算明天走路上学。", "will":"明天会走路上学。"},
+      "past_note":"walked 结尾的 -ed 读 /t/。把 /k/ 和 /t/ 连着读。"
+    },
+    {
+      "id":"visit", "label":"看望奶奶", "object":"Grandma", "cue":{"habit":"every week"},
+      "forms":{
+        "base":{"word":"visit", "ipa":"ˈvɪz.ɪt"},
+        "third":{"word":"visits", "ipa":"ˈvɪz.ɪts"},
+        "ing":{"word":"visiting", "ipa":"ˈvɪz.ɪ.t̬ɪŋ"},
+        "past":{"word":"visited", "ipa":"ˈvɪz.ɪ.t̬ɪd"}
+      },
+      "zh":{"habit":"每周都去看望奶奶。", "now":"正在看望奶奶。", "past":"昨天去看望了奶奶。", "plan":"打算明天去看望奶奶。", "will":"明天会去看望奶奶。"},
+      "past_note":"visit 以 /t/ 结尾。加上 -ed 后多了一个音节 /ɪd/。"
+    }
+  ],
+  "quiz": [
+    {"action":"play", "person":"she", "moment":"habit", "options":["play", "played", "plays"], "why":"every day 表示每天都有这个习惯。She 后面用 plays。"},
+    {"action":"make", "person":"i", "moment":"now", "options":["am making", "make", "made"], "why":"now 说明纸飞机正在做。I 搭配 am，再接 making。"},
+    {"action":"eat", "person":"i", "moment":"past", "options":["eats", "ate", "eat"], "why":"yesterday 指已经过去的昨天。eat 的过去式是 ate。"},
+    {"action":"draw", "person":"she", "moment":"plan", "options":["is going to drew", "is going to draw", "is draw"], "why":"已经有了明天的计划。She 搭配 is going to，后面接原形 draw。"}
+  ],
+  "sources": [
+    {"label":"British Council · 表达将来", "url":"https://learnenglish.britishcouncil.org/free-resources/grammar/english-grammar-reference/talking-about-future"},
+    {"label":"Cambridge · 过去式与 -ed 读音", "url":"https://dictionary.cambridge.org/us/grammar/british-grammar/past-simple-i-worked"},
+    {"label":"Cambridge · read 的两种读音", "url":"https://dictionary.cambridge.org/us/dictionary/english/read"},
+    {"label":"Cambridge · 音标说明", "url":"https://dictionary.cambridge.org/us/help/phonetics"}
+  ]
+}

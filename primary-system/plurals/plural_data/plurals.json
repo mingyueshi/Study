@@ -3,7 +3,7 @@
  "source": {
   "name": "乐学堂教学词表",
   "references": "Cambridge Dictionary、British Council LearnEnglish Kids 的常见不规则复数口径",
-  "method": "手工整理；tier=core 为小学必会词（进练习池），tier=extended 仅浏览并标「拓展」"
+  "method": "手工整理；tier=core 为小学必会词（进练习池），tier=extended 仅浏览并标「拓展」；单复数各标一种常见美式读法，参照 CMUdict、Cambridge Dictionary 和 Merriam-Webster，按词表中的名词义项核对"
  },
  "groups": [
   {"code": "vowel", "name": "元音变化", "hint": "中间的字母换了：man 变 men，foot 变 feet"},
@@ -14,75 +14,425 @@
   {"code": "foreign", "name": "外来词", "hint": "从拉丁语、希腊语来的词，复数按老家的规矩变（拓展）"}
  ],
  "items": [
-  {"singular": "man", "plural": "men", "zh": "男人", "emoji": "👨", "group": "vowel", "tier": "core"},
-  {"singular": "woman", "plural": "women", "zh": "女人", "emoji": "👩", "group": "vowel", "tier": "core", "note": "重音也跟着变了：WO-man 变 WO-men。"},
-  {"singular": "policeman", "plural": "policemen", "zh": "男警察", "emoji": "👮", "group": "vowel", "tier": "core"},
-  {"singular": "fireman", "plural": "firemen", "zh": "消防员", "emoji": "🚒", "group": "vowel", "tier": "core"},
-  {"singular": "snowman", "plural": "snowmen", "zh": "雪人", "emoji": "⛄", "group": "vowel", "tier": "core"},
-  {"singular": "foot", "plural": "feet", "zh": "脚", "emoji": "🦶", "group": "vowel", "tier": "core"},
-  {"singular": "tooth", "plural": "teeth", "zh": "牙齿", "emoji": "🦷", "group": "vowel", "tier": "core"},
-  {"singular": "goose", "plural": "geese", "zh": "鹅", "emoji": "🪿", "group": "vowel", "tier": "core"},
-  {"singular": "mouse", "plural": "mice", "zh": "老鼠", "emoji": "🐭", "group": "vowel", "tier": "core"},
-  {"singular": "louse", "plural": "lice", "zh": "虱子", "group": "vowel", "tier": "extended", "note": "mouse 和 louse 是一家人，变法也一样：mice、lice。"},
-  {"singular": "child", "plural": "children", "zh": "孩子", "emoji": "🧒", "group": "en", "tier": "core"},
-  {"singular": "ox", "plural": "oxen", "zh": "公牛", "emoji": "🐂", "group": "en", "tier": "extended", "note": "加 -en 的复数只有寥寥几个，children 是最常见的一个。"},
-  {"singular": "knife", "plural": "knives", "zh": "刀", "emoji": "🔪", "group": "ves", "tier": "core"},
-  {"singular": "wife", "plural": "wives", "zh": "妻子", "emoji": "👰", "group": "ves", "tier": "core"},
-  {"singular": "life", "plural": "lives", "zh": "生命", "emoji": "❤️", "group": "ves", "tier": "core"},
-  {"singular": "leaf", "plural": "leaves", "zh": "叶子", "emoji": "🍃", "group": "ves", "tier": "core"},
-  {"singular": "wolf", "plural": "wolves", "zh": "狼", "emoji": "🐺", "group": "ves", "tier": "core"},
-  {"singular": "shelf", "plural": "shelves", "zh": "架子", "emoji": "📚", "group": "ves", "tier": "core"},
-  {"singular": "half", "plural": "halves", "zh": "一半", "emoji": "½", "group": "ves", "tier": "core"},
-  {"singular": "loaf", "plural": "loaves", "zh": "一条面包", "emoji": "🍞", "group": "ves", "tier": "core"},
-  {"singular": "thief", "plural": "thieves", "zh": "小偷", "emoji": "🥷", "group": "ves", "tier": "core"},
-  {"singular": "calf", "plural": "calves", "zh": "小牛", "emoji": "🐄", "group": "ves", "tier": "core"},
-  {"singular": "scarf", "plural": "scarves", "zh": "围巾", "emoji": "🧣", "group": "ves", "tier": "extended"},
-  {"singular": "elf", "plural": "elves", "zh": "精灵", "emoji": "🧝", "group": "ves", "tier": "extended"},
-  {"singular": "hoof", "plural": "hooves", "zh": "蹄子", "emoji": "🐎", "group": "ves", "tier": "extended", "note": "也有人写 hoofs，两种都见过。"},
-  {"singular": "self", "plural": "selves", "zh": "自己", "group": "ves", "tier": "extended"},
-  {"singular": "sheep", "plural": "sheep", "zh": "绵羊", "emoji": "🐑", "group": "same", "tier": "core", "note": "一只羊 a sheep，一群羊 two sheep——词形不变。"},
-  {"singular": "deer", "plural": "deer", "zh": "鹿", "emoji": "🦌", "group": "same", "tier": "core"},
-  {"singular": "fish", "plural": "fish", "zh": "鱼", "emoji": "🐟", "group": "same", "tier": "core", "note": "指不同种类的鱼时可以说 fishes。"},
-  {"singular": "series", "plural": "series", "zh": "系列", "group": "same", "tier": "extended"},
-  {"singular": "species", "plural": "species", "zh": "物种", "group": "same", "tier": "extended"},
-  {"singular": "aircraft", "plural": "aircraft", "zh": "飞机", "group": "same", "tier": "extended"},
-  {"singular": "person", "plural": "people", "zh": "人", "emoji": "🧑", "group": "special", "tier": "core", "note": "person 的复数整个换了个词，是最高频的不规则变化。"},
-  {"singular": "potato", "plural": "potatoes", "zh": "土豆", "emoji": "🥔", "group": "special", "tier": "core", "note": "别漏了 es：不是 potatos。"},
-  {"singular": "tomato", "plural": "tomatoes", "zh": "西红柿", "emoji": "🍅", "group": "special", "tier": "core", "note": "和 potato 一对难兄难弟，都要加 es。"},
-  {"singular": "hero", "plural": "heroes", "zh": "英雄", "emoji": "🦸", "group": "special", "tier": "core", "note": "以 o 结尾的词有的加 s 有的加 es，hero 要背下来。"},
-  {"singular": "echo", "plural": "echoes", "zh": "回声", "group": "special", "tier": "extended"},
-  {"singular": "volcano", "plural": "volcanoes", "zh": "火山", "emoji": "🌋", "group": "special", "tier": "extended", "note": "volcanos 也见得到，但 volcanoes 更常见。"},
-  {"singular": "cactus", "plural": "cacti", "zh": "仙人掌", "emoji": "🌵", "group": "foreign", "tier": "extended", "note": "来自拉丁语，复数按拉丁规矩把 -us 换成 -i。"},
-  {"singular": "focus", "plural": "foci", "zh": "焦点", "group": "foreign", "tier": "extended"},
-  {"singular": "nucleus", "plural": "nuclei", "zh": "细胞核", "group": "foreign", "tier": "extended"},
-  {"singular": "fungus", "plural": "fungi", "zh": "真菌", "emoji": "🍄", "group": "foreign", "tier": "extended"},
-  {"singular": "syllabus", "plural": "syllabi", "zh": "教学大纲", "group": "foreign", "tier": "extended"},
-  {"singular": "datum", "plural": "data", "zh": "数据", "group": "foreign", "tier": "extended", "note": "日常语言里 data 常被当成一个整体词用。"},
-  {"singular": "medium", "plural": "media", "zh": "媒体", "group": "foreign", "tier": "extended"},
-  {"singular": "criterion", "plural": "criteria", "zh": "标准", "group": "foreign", "tier": "extended"},
-  {"singular": "phenomenon", "plural": "phenomena", "zh": "现象", "group": "foreign", "tier": "extended"},
-  {"singular": "crisis", "plural": "crises", "zh": "危机", "group": "foreign", "tier": "extended", "note": "来自希腊语，-is 变 -es，读法也变了。"},
-  {"singular": "analysis", "plural": "analyses", "zh": "分析", "group": "foreign", "tier": "extended"},
-  {"singular": "thesis", "plural": "theses", "zh": "论文", "group": "foreign", "tier": "extended"},
-  {"singular": "basis", "plural": "bases", "zh": "基础", "group": "foreign", "tier": "extended"},
-  {"singular": "hypothesis", "plural": "hypotheses", "zh": "假设", "group": "foreign", "tier": "extended"},
-  {"singular": "diagnosis", "plural": "diagnoses", "zh": "诊断", "group": "foreign", "tier": "extended"},
-  {"singular": "appendix", "plural": "appendices", "zh": "附录", "group": "foreign", "tier": "extended"},
-  {"singular": "index", "plural": "indices", "zh": "索引", "group": "foreign", "tier": "extended", "note": "数学里也写 indexes，两种都对。"},
-  {"singular": "matrix", "plural": "matrices", "zh": "矩阵", "group": "foreign", "tier": "extended"},
-  {"singular": "vertex", "plural": "vertices", "zh": "顶点", "group": "foreign", "tier": "extended"},
-  {"singular": "axis", "plural": "axes", "zh": "轴", "group": "foreign", "tier": "extended"},
-  {"singular": "formula", "plural": "formulae", "zh": "公式", "group": "foreign", "tier": "extended", "note": "formulas 也很常用。"},
-  {"singular": "antenna", "plural": "antennae", "zh": "天线", "emoji": "📡", "group": "foreign", "tier": "extended"},
-  {"singular": "vertebra", "plural": "vertebrae", "zh": "椎骨", "group": "foreign", "tier": "extended"},
-  {"singular": "larva", "plural": "larvae", "zh": "幼虫", "emoji": "🐛", "group": "foreign", "tier": "extended"},
-  {"singular": "alga", "plural": "algae", "zh": "藻类", "group": "foreign", "tier": "extended"},
-  {"singular": "curriculum", "plural": "curricula", "zh": "课程", "group": "foreign", "tier": "extended"},
-  {"singular": "memorandum", "plural": "memoranda", "zh": "备忘录", "group": "foreign", "tier": "extended"},
-  {"singular": "millennium", "plural": "millennia", "zh": "千年", "group": "foreign", "tier": "extended"},
-  {"singular": "addendum", "plural": "addenda", "zh": "补充", "group": "foreign", "tier": "extended"},
-  {"singular": "bacterium", "plural": "bacteria", "zh": "细菌", "emoji": "🦠", "group": "foreign", "tier": "extended"},
-  {"singular": "genus", "plural": "genera", "zh": "属（生物分类）", "group": "foreign", "tier": "extended"},
-  {"singular": "die", "plural": "dice", "zh": "骰子", "emoji": "🎲", "group": "foreign", "tier": "extended", "note": "方向反着记更顺：a die 是一颗骰子，two dice 是两颗。"}
+  {"singular": "man", "plural": "men", "singular_ipa": "/mæn/", "plural_ipa": "/mɛn/", "zh": "男人", "emoji": "👨", "group": "vowel", "tier": "core",
+   "examples": {
+    "singular": {"en": "One man is waiting for the bus.", "cn": "一个男人在等公交车。"},
+    "plural": {"en": "Two men are waiting for the bus.", "cn": "两个男人在等公交车。"}
+   }
+  },
+  {"singular": "woman", "plural": "women", "singular_ipa": "/ˈwʊmən/", "plural_ipa": "/ˈwɪmən/", "zh": "女人", "emoji": "👩", "group": "vowel", "tier": "core", "note": "重音都在第一音节。单数的 /ʊ/ 变成复数的 /ɪ/。",
+   "examples": {
+    "singular": {"en": "One woman is reading by the window.", "cn": "一位女士在窗边读书。"},
+    "plural": {"en": "Two women are reading by the window.", "cn": "两位女士在窗边读书。"}
+   }
+  },
+  {"singular": "policeman", "plural": "policemen", "singular_ipa": "/pəˈliːsmən/", "plural_ipa": "/pəˈliːsmɪn/", "zh": "男警察", "emoji": "👮", "group": "vowel", "tier": "core",
+   "examples": {
+    "singular": {"en": "A policeman is helping us cross the street.", "cn": "一位警察在帮我们过马路。"},
+    "plural": {"en": "Two policemen are helping us cross the street.", "cn": "两位警察在帮我们过马路。"}
+   }
+  },
+  {"singular": "fireman", "plural": "firemen", "singular_ipa": "/ˈfaɪrmən/", "plural_ipa": "/ˈfaɪrmən/", "zh": "消防员", "emoji": "🚒", "group": "vowel", "tier": "core",
+   "examples": {
+    "singular": {"en": "One fireman is checking the fire truck.", "cn": "一位消防员在检查消防车。"},
+    "plural": {"en": "Two firemen are checking the fire truck.", "cn": "两位消防员在检查消防车。"}
+   }
+  },
+  {"singular": "snowman", "plural": "snowmen", "singular_ipa": "/ˈsnoʊmæn/", "plural_ipa": "/ˈsnoʊmɛn/", "zh": "雪人", "emoji": "⛄", "group": "vowel", "tier": "core",
+   "examples": {
+    "singular": {"en": "We made a snowman in the yard.", "cn": "我们在院子里堆了一个雪人。"},
+    "plural": {"en": "We made two snowmen in the yard.", "cn": "我们在院子里堆了两个雪人。"}
+   }
+  },
+  {"singular": "foot", "plural": "feet", "singular_ipa": "/fʊt/", "plural_ipa": "/fiːt/", "zh": "脚", "emoji": "🦶", "group": "vowel", "tier": "core",
+   "examples": {
+    "singular": {"en": "Put one foot on the mat.", "cn": "把一只脚放到垫子上。"},
+    "plural": {"en": "Put both feet on the mat.", "cn": "把两只脚都放到垫子上。"}
+   }
+  },
+  {"singular": "tooth", "plural": "teeth", "singular_ipa": "/tuːθ/", "plural_ipa": "/tiːθ/", "zh": "牙齿", "emoji": "🦷", "group": "vowel", "tier": "core",
+   "examples": {
+    "singular": {"en": "I lost one tooth this week.", "cn": "这周我掉了一颗牙。"},
+    "plural": {"en": "I lost two teeth this week.", "cn": "这周我掉了两颗牙。"}
+   }
+  },
+  {"singular": "goose", "plural": "geese", "singular_ipa": "/ɡuːs/", "plural_ipa": "/ɡiːs/", "zh": "鹅", "emoji": "🪿", "group": "vowel", "tier": "core",
+   "examples": {
+    "singular": {"en": "One goose is swimming in the pond.", "cn": "一只鹅在池塘里游泳。"},
+    "plural": {"en": "Two geese are swimming in the pond.", "cn": "两只鹅在池塘里游泳。"}
+   }
+  },
+  {"singular": "mouse", "plural": "mice", "singular_ipa": "/maʊs/", "plural_ipa": "/maɪs/", "zh": "老鼠", "emoji": "🐭", "group": "vowel", "tier": "core",
+   "examples": {
+    "singular": {"en": "I saw one mouse under the shed.", "cn": "我在小棚子下面看见一只老鼠。"},
+    "plural": {"en": "I saw two mice under the shed.", "cn": "我在小棚子下面看见两只老鼠。"}
+   }
+  },
+  {"singular": "louse", "plural": "lice", "singular_ipa": "/laʊs/", "plural_ipa": "/laɪs/", "zh": "虱子", "group": "vowel", "tier": "extended", "note": "mouse 和 louse 是一家人，变法也一样：mice、lice。",
+   "examples": {
+    "singular": {"en": "The nurse found a louse in my hair.", "cn": "护士在我头发里发现了一只虱子。"},
+    "plural": {"en": "The nurse found two lice in my hair.", "cn": "护士在我头发里发现了两只虱子。"}
+   }
+  },
+  {"singular": "child", "plural": "children", "singular_ipa": "/tʃaɪld/", "plural_ipa": "/ˈtʃɪldrən/", "zh": "孩子", "emoji": "🧒", "group": "en", "tier": "core",
+   "examples": {
+    "singular": {"en": "One child is painting at the table.", "cn": "一个孩子在桌边画画。"},
+    "plural": {"en": "Two children are painting at the table.", "cn": "两个孩子在桌边画画。"}
+   }
+  },
+  {"singular": "ox", "plural": "oxen", "singular_ipa": "/ɑːks/", "plural_ipa": "/ˈɑːksən/", "zh": "公牛", "emoji": "🐂", "group": "en", "tier": "extended", "note": "加 -en 的复数只有寥寥几个，children 是最常见的一个。",
+   "examples": {
+    "singular": {"en": "One ox is pulling the cart.", "cn": "一头公牛在拉车。"},
+    "plural": {"en": "Two oxen are pulling the cart.", "cn": "两头公牛在拉车。"}
+   }
+  },
+  {"singular": "knife", "plural": "knives", "singular_ipa": "/naɪf/", "plural_ipa": "/naɪvz/", "zh": "刀", "emoji": "🔪", "group": "ves", "tier": "core",
+   "examples": {
+    "singular": {"en": "There is one knife beside the plate.", "cn": "盘子旁边有一把刀。"},
+    "plural": {"en": "There are two knives beside the plate.", "cn": "盘子旁边有两把刀。"}
+   }
+  },
+  {"singular": "wife", "plural": "wives", "singular_ipa": "/waɪf/", "plural_ipa": "/waɪvz/", "zh": "妻子", "emoji": "👰", "group": "ves", "tier": "core",
+   "examples": {
+    "singular": {"en": "At the reunion, one of the men brought his wife.", "cn": "聚会时，有一个男人带了妻子来。"},
+    "plural": {"en": "At the reunion, two of the men brought their wives.", "cn": "聚会时，有两个男人各自带了妻子来。"}
+   }
+  },
+  {"singular": "life", "plural": "lives", "singular_ipa": "/laɪf/", "plural_ipa": "/laɪvz/", "zh": "生命", "emoji": "❤️", "group": "ves", "tier": "core",
+   "examples": {
+    "singular": {"en": "The rescue team saved one life.", "cn": "救援队救了一条生命。"},
+    "plural": {"en": "The rescue team saved two lives.", "cn": "救援队救了两条生命。"}
+   }
+  },
+  {"singular": "leaf", "plural": "leaves", "singular_ipa": "/liːf/", "plural_ipa": "/liːvz/", "zh": "叶子", "emoji": "🍃", "group": "ves", "tier": "core",
+   "examples": {
+    "singular": {"en": "One leaf fell into the pond.", "cn": "一片叶子落进了池塘。"},
+    "plural": {"en": "Two leaves fell into the pond.", "cn": "两片叶子落进了池塘。"}
+   }
+  },
+  {"singular": "wolf", "plural": "wolves", "singular_ipa": "/wʊlf/", "plural_ipa": "/wʊlvz/", "zh": "狼", "emoji": "🐺", "group": "ves", "tier": "core",
+   "examples": {
+    "singular": {"en": "We saw a wolf at the edge of the forest.", "cn": "我们在森林边看见一只狼。"},
+    "plural": {"en": "We saw two wolves at the edge of the forest.", "cn": "我们在森林边看见两只狼。"}
+   }
+  },
+  {"singular": "shelf", "plural": "shelves", "singular_ipa": "/ʃɛlf/", "plural_ipa": "/ʃɛlvz/", "zh": "架子", "emoji": "📚", "group": "ves", "tier": "core",
+   "examples": {
+    "singular": {"en": "There is one shelf above my desk.", "cn": "我的书桌上方有一层架子。"},
+    "plural": {"en": "There are two shelves above my desk.", "cn": "我的书桌上方有两层架子。"}
+   }
+  },
+  {"singular": "half", "plural": "halves", "singular_ipa": "/hæf/", "plural_ipa": "/hævz/", "zh": "一半", "emoji": "½", "group": "ves", "tier": "core",
+   "examples": {
+    "singular": {"en": "I ate one half of the apple.", "cn": "我吃了半个苹果。"},
+    "plural": {"en": "I ate both halves of the apple.", "cn": "我把苹果的两半都吃了。"}
+   }
+  },
+  {"singular": "loaf", "plural": "loaves", "singular_ipa": "/loʊf/", "plural_ipa": "/loʊvz/", "zh": "一条面包", "emoji": "🍞", "group": "ves", "tier": "core",
+   "examples": {
+    "singular": {"en": "We bought a loaf of bread at the bakery.", "cn": "我们在面包店买了一整条面包。"},
+    "plural": {"en": "We bought two loaves of bread at the bakery.", "cn": "我们在面包店买了两整条面包。"}
+   }
+  },
+  {"singular": "thief", "plural": "thieves", "singular_ipa": "/θiːf/", "plural_ipa": "/θiːvz/", "zh": "小偷", "emoji": "🥷", "group": "ves", "tier": "core",
+   "examples": {
+    "singular": {"en": "The camera caught one thief last night.", "cn": "昨晚监控拍到了一个小偷。"},
+    "plural": {"en": "The camera caught two thieves last night.", "cn": "昨晚监控拍到了两个小偷。"}
+   }
+  },
+  {"singular": "calf", "plural": "calves", "singular_ipa": "/kæf/", "plural_ipa": "/kævz/", "zh": "小牛", "emoji": "🐄", "group": "ves", "tier": "core",
+   "examples": {
+    "singular": {"en": "One calf is drinking milk in the barn.", "cn": "一头小牛在牛棚里喝奶。"},
+    "plural": {"en": "Two calves are drinking milk in the barn.", "cn": "两头小牛在牛棚里喝奶。"}
+   }
+  },
+  {"singular": "scarf", "plural": "scarves", "singular_ipa": "/skɑːrf/", "plural_ipa": "/skɑːrvz/", "zh": "围巾", "emoji": "🧣", "group": "ves", "tier": "extended",
+   "examples": {
+    "singular": {"en": "I packed one scarf for the trip.", "cn": "我为这趟旅行带了一条围巾。"},
+    "plural": {"en": "I packed two scarves for the trip.", "cn": "我为这趟旅行带了两条围巾。"}
+   }
+  },
+  {"singular": "elf", "plural": "elves", "singular_ipa": "/ɛlf/", "plural_ipa": "/ɛlvz/", "zh": "精灵", "emoji": "🧝", "group": "ves", "tier": "extended",
+   "examples": {
+    "singular": {"en": "One elf is wrapping a gift in the story.", "cn": "故事里，一个精灵正在包礼物。"},
+    "plural": {"en": "Two elves are wrapping a gift in the story.", "cn": "故事里，两个精灵正在包一份礼物。"}
+   }
+  },
+  {"singular": "hoof", "plural": "hooves", "singular_ipa": "/huːf/", "plural_ipa": "/huːvz/", "zh": "蹄子", "emoji": "🐎", "group": "ves", "tier": "extended", "note": "也有人写 hoofs，两种都见过。",
+   "examples": {
+    "singular": {"en": "The vet checked one hoof.", "cn": "兽医检查了一只蹄子。"},
+    "plural": {"en": "The vet checked two hooves.", "cn": "兽医检查了两只蹄子。"}
+   }
+  },
+  {"singular": "self", "plural": "selves", "singular_ipa": "/sɛlf/", "plural_ipa": "/sɛlvz/", "zh": "自己", "group": "ves", "tier": "extended",
+   "examples": {
+    "singular": {"en": "Mia meets her future self in the story.", "cn": "故事里，米娅遇见了未来的自己。"},
+    "plural": {"en": "Mia meets two future selves in the story.", "cn": "故事里，米娅遇见了两个不同未来里的自己。"}
+   }
+  },
+  {"singular": "sheep", "plural": "sheep", "singular_ipa": "/ʃiːp/", "plural_ipa": "/ʃiːp/", "zh": "绵羊", "emoji": "🐑", "group": "same", "tier": "core", "note": "一只羊 a sheep，一群羊 two sheep——词形不变。",
+   "examples": {
+    "singular": {"en": "One sheep is by the fence.", "cn": "一只绵羊在篱笆边。"},
+    "plural": {"en": "Two sheep are by the fence.", "cn": "两只绵羊在篱笆边。"}
+   }
+  },
+  {"singular": "deer", "plural": "deer", "singular_ipa": "/dɪr/", "plural_ipa": "/dɪr/", "zh": "鹿", "emoji": "🦌", "group": "same", "tier": "core",
+   "examples": {
+    "singular": {"en": "One deer is standing by the road.", "cn": "一只鹿站在路边。"},
+    "plural": {"en": "Two deer are standing by the road.", "cn": "两只鹿站在路边。"}
+   }
+  },
+  {"singular": "fish", "plural": "fish", "singular_ipa": "/fɪʃ/", "plural_ipa": "/fɪʃ/", "zh": "鱼", "emoji": "🐟", "group": "same", "tier": "core", "note": "指不同种类的鱼时可以说 fishes。",
+   "examples": {
+    "singular": {"en": "I can see one fish in the tank.", "cn": "我能看见鱼缸里有一条鱼。"},
+    "plural": {"en": "I can see two fish in the tank.", "cn": "我能看见鱼缸里有两条鱼。"}
+   }
+  },
+  {"singular": "series", "plural": "series", "singular_ipa": "/ˈsɪriːz/", "plural_ipa": "/ˈsɪriːz/", "zh": "系列", "group": "same", "tier": "extended",
+   "examples": {
+    "singular": {"en": "I watched one series during the holiday.", "cn": "假期里我看了一部连续剧。"},
+    "plural": {"en": "I watched two series during the holiday.", "cn": "假期里我看了两部连续剧。"}
+   }
+  },
+  {"singular": "species", "plural": "species", "singular_ipa": "/ˈspiːʃiːz/", "plural_ipa": "/ˈspiːʃiːz/", "zh": "物种", "group": "same", "tier": "extended",
+   "examples": {
+    "singular": {"en": "Our class found one species of butterfly in the garden.", "cn": "我们班在花园里发现了一种蝴蝶。"},
+    "plural": {"en": "Our class found two species of butterfly in the garden.", "cn": "我们班在花园里发现了两种蝴蝶。"}
+   }
+  },
+  {"singular": "aircraft", "plural": "aircraft", "singular_ipa": "/ˈɛrkræft/", "plural_ipa": "/ˈɛrkræft/", "zh": "飞机", "group": "same", "tier": "extended",
+   "examples": {
+    "singular": {"en": "One aircraft is waiting to take off.", "cn": "一架飞机在等候起飞。"},
+    "plural": {"en": "Two aircraft are waiting to take off.", "cn": "两架飞机在等候起飞。"}
+   }
+  },
+  {"singular": "person", "plural": "people", "singular_ipa": "/ˈpɝsən/", "plural_ipa": "/ˈpiːpəl/", "zh": "人", "emoji": "🧑", "group": "special", "tier": "core", "note": "person 的复数整个换了个词，是最高频的不规则变化。",
+   "examples": {
+    "singular": {"en": "One person is standing in line.", "cn": "一个人在排队。"},
+    "plural": {"en": "Two people are standing in line.", "cn": "两个人在排队。"}
+   }
+  },
+  {"singular": "potato", "plural": "potatoes", "singular_ipa": "/pəˈteɪtoʊ/", "plural_ipa": "/pəˈteɪtoʊz/", "zh": "土豆", "emoji": "🥔", "group": "special", "tier": "core", "note": "别漏了 es：不是 potatos。",
+   "examples": {
+    "singular": {"en": "I put one potato in the pot.", "cn": "我往锅里放了一个土豆。"},
+    "plural": {"en": "I put two potatoes in the pot.", "cn": "我往锅里放了两个土豆。"}
+   }
+  },
+  {"singular": "tomato", "plural": "tomatoes", "singular_ipa": "/təˈmeɪtoʊ/", "plural_ipa": "/təˈmeɪtoʊz/", "zh": "西红柿", "emoji": "🍅", "group": "special", "tier": "core", "note": "和 potato 一对难兄难弟，都要加 es。",
+   "examples": {
+    "singular": {"en": "I sliced one tomato for the salad.", "cn": "为了做沙拉，我切了一个西红柿。"},
+    "plural": {"en": "I sliced two tomatoes for the salad.", "cn": "为了做沙拉，我切了两个西红柿。"}
+   }
+  },
+  {"singular": "hero", "plural": "heroes", "singular_ipa": "/ˈhɪroʊ/", "plural_ipa": "/ˈhɪroʊz/", "zh": "英雄", "emoji": "🦸", "group": "special", "tier": "core", "note": "以 o 结尾的词有的加 s 有的加 es，hero 要背下来。",
+   "examples": {
+    "singular": {"en": "One hero helps the village in the story.", "cn": "故事里，一位英雄帮助了这个村子。"},
+    "plural": {"en": "Two heroes help the village in the story.", "cn": "故事里，两位英雄帮助了这个村子。"}
+   }
+  },
+  {"singular": "echo", "plural": "echoes", "singular_ipa": "/ˈɛkoʊ/", "plural_ipa": "/ˈɛkoʊz/", "zh": "回声", "group": "special", "tier": "extended",
+   "examples": {
+    "singular": {"en": "We heard one echo in the cave.", "cn": "我们在洞里听到一次回声。"},
+    "plural": {"en": "We heard two echoes in the cave.", "cn": "我们在洞里听到两次回声。"}
+   }
+  },
+  {"singular": "volcano", "plural": "volcanoes", "singular_ipa": "/vɑːlˈkeɪnoʊ/", "plural_ipa": "/vɑːlˈkeɪnoʊz/", "zh": "火山", "emoji": "🌋", "group": "special", "tier": "extended", "note": "volcanos 也见得到，但 volcanoes 更常见。",
+   "examples": {
+    "singular": {"en": "I drew one volcano on the map.", "cn": "我在地图上画了一座火山。"},
+    "plural": {"en": "I drew two volcanoes on the map.", "cn": "我在地图上画了两座火山。"}
+   }
+  },
+  {"singular": "cactus", "plural": "cacti", "singular_ipa": "/ˈkæktəs/", "plural_ipa": "/ˈkæktaɪ/", "zh": "仙人掌", "emoji": "🌵", "group": "foreign", "tier": "extended", "note": "来自拉丁语，复数按拉丁规矩把 -us 换成 -i。",
+   "examples": {
+    "singular": {"en": "I put one cactus by the window.", "cn": "我在窗边放了一盆仙人掌。"},
+    "plural": {"en": "I put two cacti by the window.", "cn": "我在窗边放了两盆仙人掌。"}
+   }
+  },
+  {"singular": "focus", "plural": "foci", "singular_ipa": "/ˈfoʊkəs/", "plural_ipa": "/ˈfoʊsaɪ/", "zh": "焦点", "group": "foreign", "tier": "extended",
+   "examples": {
+    "singular": {"en": "We marked one focus of the ellipse.", "cn": "我们标出了椭圆的一个焦点。"},
+    "plural": {"en": "We marked both foci of the ellipse.", "cn": "我们标出了椭圆的两个焦点。"}
+   }
+  },
+  {"singular": "nucleus", "plural": "nuclei", "singular_ipa": "/ˈnuːkliːəs/", "plural_ipa": "/ˈnuːkliːaɪ/", "zh": "细胞核", "group": "foreign", "tier": "extended",
+   "examples": {
+    "singular": {"en": "The picture shows one cell nucleus.", "cn": "图上显示了一个细胞核。"},
+    "plural": {"en": "The picture shows two cell nuclei.", "cn": "图上显示了两个细胞核。"}
+   }
+  },
+  {"singular": "fungus", "plural": "fungi", "singular_ipa": "/ˈfʌŋɡəs/", "plural_ipa": "/ˈfʌndʒaɪ/", "zh": "真菌", "emoji": "🍄", "group": "foreign", "tier": "extended",
+   "examples": {
+    "singular": {"en": "We found one kind of fungus on the log.", "cn": "我们在倒下的树干上发现了一种真菌。"},
+    "plural": {"en": "We found two kinds of fungi on the log.", "cn": "我们在倒下的树干上发现了两种真菌。"}
+   }
+  },
+  {"singular": "syllabus", "plural": "syllabi", "singular_ipa": "/ˈsɪləbəs/", "plural_ipa": "/ˈsɪləbaɪ/", "zh": "教学大纲", "group": "foreign", "tier": "extended",
+   "examples": {
+    "singular": {"en": "The teacher shared one syllabus at the meeting.", "cn": "老师在会上分享了一份课程大纲。"},
+    "plural": {"en": "The teacher shared two syllabi at the meeting.", "cn": "老师在会上分享了两份课程大纲。"}
+   }
+  },
+  {"singular": "datum", "plural": "data", "singular_ipa": "/ˈdeɪtəm/", "plural_ipa": "/ˈdeɪtə/", "zh": "数据", "group": "foreign", "tier": "extended", "note": "日常语言里 data 常被当成一个整体词用。",
+   "examples": {
+    "singular": {"en": "One datum in the table was missing.", "cn": "表格里缺了一项数据。"},
+    "plural": {"en": "Some data in the table were missing.", "cn": "表格里缺了一些数据。"}
+   }
+  },
+  {"singular": "medium", "plural": "media", "singular_ipa": "/ˈmiːdiːəm/", "plural_ipa": "/ˈmiːdiːə/", "zh": "媒体；媒材", "group": "foreign", "tier": "extended",
+   "examples": {
+    "singular": {"en": "We used one medium to make the picture.", "cn": "我们用了一种媒材来制作这幅画。"},
+    "plural": {"en": "We used two media to make the picture.", "cn": "我们用了两种媒材来制作这幅画。"}
+   }
+  },
+  {"singular": "criterion", "plural": "criteria", "singular_ipa": "/kraɪˈtɪriːən/", "plural_ipa": "/kraɪˈtɪriːə/", "zh": "标准", "group": "foreign", "tier": "extended",
+   "examples": {
+    "singular": {"en": "We used one criterion to choose the best poster.", "cn": "我们用一条标准选出最好的海报。"},
+    "plural": {"en": "We used two criteria to choose the best poster.", "cn": "我们用两条标准选出最好的海报。"}
+   }
+  },
+  {"singular": "phenomenon", "plural": "phenomena", "singular_ipa": "/fəˈnɑːmənɑːn/", "plural_ipa": "/fəˈnɑːmənə/", "zh": "现象", "group": "foreign", "tier": "extended",
+   "examples": {
+    "singular": {"en": "We observed one unusual phenomenon in the lab.", "cn": "我们在实验室里观察到一种不寻常的现象。"},
+    "plural": {"en": "We observed two unusual phenomena in the lab.", "cn": "我们在实验室里观察到两种不寻常的现象。"}
+   }
+  },
+  {"singular": "crisis", "plural": "crises", "singular_ipa": "/ˈkraɪsɪs/", "plural_ipa": "/ˈkraɪsiːz/", "zh": "危机", "group": "foreign", "tier": "extended", "note": "来自希腊语，-is 变 -es，读法也变了。",
+   "examples": {
+    "singular": {"en": "The town faced one crisis that winter.", "cn": "那年冬天，小镇面临了一场危机。"},
+    "plural": {"en": "The town faced two crises that winter.", "cn": "那年冬天，小镇面临了两场危机。"}
+   }
+  },
+  {"singular": "analysis", "plural": "analyses", "singular_ipa": "/əˈnæləsɪs/", "plural_ipa": "/əˈnæləsiːz/", "zh": "分析", "group": "foreign", "tier": "extended",
+   "examples": {
+    "singular": {"en": "The report includes one analysis of the survey results.", "cn": "报告里有一份对调查结果的分析。"},
+    "plural": {"en": "The report includes two analyses of the survey results.", "cn": "报告里有两份对调查结果的分析。"}
+   }
+  },
+  {"singular": "thesis", "plural": "theses", "singular_ipa": "/ˈθiːsɪs/", "plural_ipa": "/ˈθiːsiːz/", "zh": "论文", "group": "foreign", "tier": "extended",
+   "examples": {
+    "singular": {"en": "The library has one thesis on bees.", "cn": "图书馆收藏了一篇关于蜜蜂的论文。"},
+    "plural": {"en": "The library has two theses on bees.", "cn": "图书馆收藏了两篇关于蜜蜂的论文。"}
+   }
+  },
+  {"singular": "basis", "plural": "bases", "singular_ipa": "/ˈbeɪsɪs/", "plural_ipa": "/ˈbeɪsiːz/", "zh": "基础", "group": "foreign", "tier": "extended",
+   "examples": {
+    "singular": {"en": "We discussed one basis for the new rule.", "cn": "我们讨论了这条新规定的一项依据。"},
+    "plural": {"en": "We discussed two bases for the new rule.", "cn": "我们讨论了这条新规定的两项依据。"}
+   }
+  },
+  {"singular": "hypothesis", "plural": "hypotheses", "singular_ipa": "/haɪˈpɑːθəsɪs/", "plural_ipa": "/haɪˈpɑːθəsiːz/", "zh": "假设", "group": "foreign", "tier": "extended",
+   "examples": {
+    "singular": {"en": "Our group tested one hypothesis in class.", "cn": "我们小组在课堂上检验了一个假设。"},
+    "plural": {"en": "Our group tested two hypotheses in class.", "cn": "我们小组在课堂上检验了两个假设。"}
+   }
+  },
+  {"singular": "diagnosis", "plural": "diagnoses", "singular_ipa": "/ˌdaɪəɡˈnoʊsɪs/", "plural_ipa": "/ˌdaɪəɡˈnoʊsiːz/", "zh": "诊断", "group": "foreign", "tier": "extended",
+   "examples": {
+    "singular": {"en": "The doctor considered one possible diagnosis.", "cn": "医生考虑了一种可能的诊断。"},
+    "plural": {"en": "The doctor considered two possible diagnoses.", "cn": "医生考虑了两种可能的诊断。"}
+   }
+  },
+  {"singular": "appendix", "plural": "appendices", "singular_ipa": "/əˈpɛndɪks/", "plural_ipa": "/əˈpɛndɪsiːz/", "zh": "附录", "group": "foreign", "tier": "extended",
+   "examples": {
+    "singular": {"en": "The book has one appendix.", "cn": "这本书有一份附录。"},
+    "plural": {"en": "The book has two appendices.", "cn": "这本书有两份附录。"}
+   }
+  },
+  {"singular": "index", "plural": "indices", "singular_ipa": "/ˈɪndɛks/", "plural_ipa": "/ˈɪndɪsiːz/", "zh": "索引", "group": "foreign", "tier": "extended", "note": "数学里也写 indexes，两种都对。",
+   "examples": {
+    "singular": {"en": "The handbook has one index at the back.", "cn": "这本手册的末尾有一份索引。"},
+    "plural": {"en": "The handbook has two indices at the back.", "cn": "这本手册的末尾有两份索引。"}
+   }
+  },
+  {"singular": "matrix", "plural": "matrices", "singular_ipa": "/ˈmeɪtrɪks/", "plural_ipa": "/ˈmeɪtrəˌsiːz/", "zh": "矩阵", "group": "foreign", "tier": "extended",
+   "examples": {
+    "singular": {"en": "The worksheet shows one matrix.", "cn": "练习纸上有一个矩阵。"},
+    "plural": {"en": "The worksheet shows two matrices.", "cn": "练习纸上有两个矩阵。"}
+   }
+  },
+  {"singular": "vertex", "plural": "vertices", "singular_ipa": "/ˈvɝtɛks/", "plural_ipa": "/ˈvɝtɪsiːz/", "zh": "顶点", "group": "foreign", "tier": "extended",
+   "examples": {
+    "singular": {"en": "I marked one vertex of the triangle.", "cn": "我标出了三角形的一个顶点。"},
+    "plural": {"en": "I marked two vertices of the triangle.", "cn": "我标出了三角形的两个顶点。"}
+   }
+  },
+  {"singular": "axis", "plural": "axes", "singular_ipa": "/ˈæksɪs/", "plural_ipa": "/ˈæksiːz/", "zh": "轴", "group": "foreign", "tier": "extended",
+   "examples": {
+    "singular": {"en": "I labeled one axis on the graph.", "cn": "我给图上的一条坐标轴加了标注。"},
+    "plural": {"en": "I labeled both axes on the graph.", "cn": "我给图上的两条坐标轴都加了标注。"}
+   }
+  },
+  {"singular": "formula", "plural": "formulae", "singular_ipa": "/ˈfɔrmjələ/", "plural_ipa": "/ˈfɔrmjəliː/", "zh": "公式", "group": "foreign", "tier": "extended", "note": "formulas 也很常用。",
+   "examples": {
+    "singular": {"en": "The page shows one formula for area.", "cn": "这页上有一个计算面积的公式。"},
+    "plural": {"en": "The page shows two formulae for area.", "cn": "这页上有两个计算面积的公式。"}
+   }
+  },
+  {"singular": "antenna", "plural": "antennae", "singular_ipa": "/ænˈtɛnə/", "plural_ipa": "/ænˈtɛniː/", "zh": "触角；天线", "emoji": "📡", "group": "foreign", "tier": "extended",
+   "examples": {
+    "singular": {"en": "The insect has one bent antenna.", "cn": "这只昆虫有一根弯曲的触角。"},
+    "plural": {"en": "The insect has two bent antennae.", "cn": "这只昆虫有两根弯曲的触角。"}
+   }
+  },
+  {"singular": "vertebra", "plural": "vertebrae", "singular_ipa": "/ˈvɝtəbrə/", "plural_ipa": "/ˈvɝtəbreɪ/", "zh": "椎骨", "group": "foreign", "tier": "extended",
+   "examples": {
+    "singular": {"en": "The model shows one vertebra.", "cn": "模型上展示了一块椎骨。"},
+    "plural": {"en": "The model shows two vertebrae.", "cn": "模型上展示了两块椎骨。"}
+   }
+  },
+  {"singular": "larva", "plural": "larvae", "singular_ipa": "/ˈlɑːrvə/", "plural_ipa": "/ˈlɑːrviː/", "zh": "幼虫", "emoji": "🐛", "group": "foreign", "tier": "extended",
+   "examples": {
+    "singular": {"en": "We found one larva under a leaf.", "cn": "我们在一片叶子下面发现了一只幼虫。"},
+    "plural": {"en": "We found two larvae under a leaf.", "cn": "我们在一片叶子下面发现了两只幼虫。"}
+   }
+  },
+  {"singular": "alga", "plural": "algae", "singular_ipa": "/ˈælɡə/", "plural_ipa": "/ˈældʒiː/", "zh": "藻类", "group": "foreign", "tier": "extended",
+   "examples": {
+    "singular": {"en": "We saw one alga under the microscope.", "cn": "我们在显微镜下看到了一个藻类个体。"},
+    "plural": {"en": "We saw several algae under the microscope.", "cn": "我们在显微镜下看到了几个藻类个体。"}
+   }
+  },
+  {"singular": "curriculum", "plural": "curricula", "singular_ipa": "/kəˈrɪkjələm/", "plural_ipa": "/kəˈrɪkjələ/", "zh": "课程", "group": "foreign", "tier": "extended",
+   "examples": {
+    "singular": {"en": "The school offers one science curriculum.", "cn": "这所学校提供一套科学课程。"},
+    "plural": {"en": "The school offers two science curricula.", "cn": "这所学校提供两套科学课程。"}
+   }
+  },
+  {"singular": "memorandum", "plural": "memoranda", "singular_ipa": "/ˌmɛməˈrændəm/", "plural_ipa": "/ˌmɛməˈrændə/", "zh": "备忘录", "group": "foreign", "tier": "extended",
+   "examples": {
+    "singular": {"en": "I found one memorandum in the folder.", "cn": "我在文件夹里找到一份备忘录。"},
+    "plural": {"en": "I found two memoranda in the folder.", "cn": "我在文件夹里找到两份备忘录。"}
+   }
+  },
+  {"singular": "millennium", "plural": "millennia", "singular_ipa": "/məˈlɛniːəm/", "plural_ipa": "/məˈlɛniːə/", "zh": "千年", "group": "foreign", "tier": "extended",
+   "examples": {
+    "singular": {"en": "The timeline covers one millennium.", "cn": "这条时间线跨越了一千年。"},
+    "plural": {"en": "The timeline covers two millennia.", "cn": "这条时间线跨越了两千年。"}
+   }
+  },
+  {"singular": "addendum", "plural": "addenda", "singular_ipa": "/əˈdɛndəm/", "plural_ipa": "/əˈdɛndə/", "zh": "补充", "group": "foreign", "tier": "extended",
+   "examples": {
+    "singular": {"en": "The report has one addendum at the end.", "cn": "报告末尾有一份补充说明。"},
+    "plural": {"en": "The report has two addenda at the end.", "cn": "报告末尾有两份补充说明。"}
+   }
+  },
+  {"singular": "bacterium", "plural": "bacteria", "singular_ipa": "/bækˈtɪriːəm/", "plural_ipa": "/bækˈtɪriːə/", "zh": "细菌", "emoji": "🦠", "group": "foreign", "tier": "extended",
+   "examples": {
+    "singular": {"en": "We watched one bacterium move under the microscope.", "cn": "我们在显微镜下观察到一个细菌在移动。"},
+    "plural": {"en": "We watched two bacteria move under the microscope.", "cn": "我们在显微镜下观察到两个细菌在移动。"}
+   }
+  },
+  {"singular": "genus", "plural": "genera", "singular_ipa": "/ˈdʒiːnəs/", "plural_ipa": "/ˈdʒɛnərə/", "zh": "属（生物分类）", "group": "foreign", "tier": "extended",
+   "examples": {
+    "singular": {"en": "The guide describes one genus of beetles.", "cn": "这本图鉴介绍了甲虫中的一个属。"},
+    "plural": {"en": "The guide describes two genera of beetles.", "cn": "这本图鉴介绍了甲虫中的两个属。"}
+   }
+  },
+  {"singular": "die", "plural": "dice", "singular_ipa": "/daɪ/", "plural_ipa": "/daɪs/", "zh": "骰子", "emoji": "🎲", "group": "foreign", "tier": "extended", "note": "方向反着记更顺：a die 是一颗骰子，two dice 是两颗。",
+   "examples": {
+    "singular": {"en": "I rolled one die on the table.", "cn": "我在桌上掷了一颗骰子。"},
+    "plural": {"en": "I rolled two dice on the table.", "cn": "我在桌上掷了两颗骰子。"}
+   }
+  }
  ]
 }

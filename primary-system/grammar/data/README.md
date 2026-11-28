@@ -32,6 +32,10 @@ manage.py test grammar               # 契约测试
 「练本章」按章节的 `lesson_ids` 和题目来源选题，由题库服务端判分并记录作答。
 本章错题与重练沿用这个题池，取每道题最近一次的作答结果。批次内容随本文件重跑后一起再生成。
 
+## 阅读页的专题链接
+
+`content_sources/grammar/topic-links.json` 维护语法首页的专题入口、每章的关联专题和速查说明。每个专题使用它的完整首页。已转到专题学习的知识点在 `transferred_lessons` 登记，可附上补充笔记，空数组表示只在本章巩固题中保留原锚点。其他知识点从课程生成物读取速查讲解。更新导航直接运行 `.venv/bin/python manage.py test grammar` 核对专题入口、章节和保留的练习。
+
 ## 修订流程
 
 1. 改 `content_sources/grammar/knowledge-*.js`（或补新章节数据文件并在脚本里接入）

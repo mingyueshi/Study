@@ -1,0 +1,17 @@
+<div class="ec-forms">
+  {% for form in family.forms %}
+    <div class="ec-form-card" data-ec-audio-group>
+      <h3>{{ form.degree }}</h3>
+      <div class="ec-word">
+        <button class="ec-say ec-say-word" type="button" data-ec-say="{{ form.word }}" aria-label="朗读词形 {{ form.word }}"><b lang="en">{{ form.word }}</b> <span aria-hidden="true">🔊</span></button>
+        <span class="ec-ipa">/{{ form.ipa }}/</span>
+      </div>
+      <p class="ec-meaning">{{ form.zh }}</p>
+      <p class="ec-example-en" lang="en">{{ form.before }}<strong>{{ form.focus }}</strong>{{ form.after }}</p>
+      <p class="ec-example-cn">{{ form.cn }}</p>
+      <button class="ec-say" type="button" data-ec-say="{{ form.en }}" aria-label="听例句 {{ form.en }}"><span aria-hidden="true">🔊</span> 听例句</button>
+      <p class="ec-status" data-ec-status role="status"></p>
+    </div>
+  {% endfor %}
+</div>
+<p class="ec-form-note">{{ family.note }}</p>

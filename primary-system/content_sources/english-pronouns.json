@@ -1,0 +1,332 @@
+{
+  "sources": [
+    {"label": "Cambridge 英语语法 · 代词分类", "url": "https://dictionary.cambridge.org/us/grammar/british-grammar/pronouns-"},
+    {"label": "British Council · 人称代词", "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/english-grammar-reference/personal-pronouns"},
+    {"label": "British Council · 物主代词", "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/english-grammar-reference/possessives-pronouns"},
+    {"label": "Cambridge 字典 · 音标说明", "url": "https://dictionary.cambridge.org/us/help/phonetics"}
+  ],
+  "chapters": [
+    {
+      "id": "personal",
+      "title": "人称代词",
+      "prompt": "同一个「我」，什么时候说 I，什么时候说 me？",
+      "rule": "先找句子的主语，也就是这句话在说谁做了什么，或谁怎么样。作主语用主格。作动词或介词的宾语时，用宾格。",
+      "groups": [
+        {
+          "title": "主格和宾格放在一起读",
+          "roles": ["主格 · 作主语", "宾格 · 作宾语"],
+          "rows": [
+            [
+              {"word":"I", "ipa":"aɪ", "zh":"我", "en":"I help Dad.", "cn":"我帮助爸爸。"},
+              {"word":"me", "ipa":"miː", "zh":"我", "en":"Dad helps me.", "cn":"爸爸帮助我。"}
+            ],
+            [
+              {"word":"you", "ipa":"juː", "zh":"你 / 你们", "en":"You found the ball.", "cn":"你找到了那个球。"},
+              {"word":"you", "ipa":"juː", "zh":"你 / 你们", "en":"Mum called you.", "cn":"妈妈叫了你们。"}
+            ],
+            [
+              {"word":"he", "ipa":"hiː", "zh":"他", "en":"He feeds the dog.", "cn":"他喂狗。"},
+              {"word":"him", "ipa":"hɪm", "zh":"他", "en":"The dog follows him.", "cn":"狗跟着他。"}
+            ],
+            [
+              {"word":"she", "ipa":"ʃiː", "zh":"她", "en":"She waves to Ben.", "cn":"她向本挥手。"},
+              {"word":"her", "ipa":"hɝː", "zh":"她", "en":"Ben waves to her.", "cn":"本向她挥手。"}
+            ],
+            [
+              {"word":"it", "ipa":"ɪt", "zh":"它", "en":"It is under the chair.", "cn":"它在椅子下面。"},
+              {"word":"it", "ipa":"ɪt", "zh":"它", "en":"I can see it.", "cn":"我能看见它。"}
+            ],
+            [
+              {"word":"we", "ipa":"wiː", "zh":"我们", "en":"We play after school.", "cn":"我们放学后一起玩。"},
+              {"word":"us", "ipa":"ʌs", "zh":"我们", "en":"Come and play with us.", "cn":"来和我们一起玩吧。"}
+            ],
+            [
+              {"word":"they", "ipa":"ðeɪ", "zh":"他们 / 她们 / 它们", "en":"They are waiting at the gate.", "cn":"他们在门口等着。"},
+              {"word":"them", "ipa":"ðem", "zh":"他们 / 她们 / 它们", "en":"I can wait with them.", "cn":"我可以和他们一起等。"}
+            ]
+          ]
+        }
+      ],
+      "tips": [
+        "介词后也用宾格。读一读 with us（和我们一起）和 to her（向她）。",
+        "说天气、时间也常用 it 作主语。It’s cold today. 的 it 帮句子补齐主语，中文直接说「今天很冷」。",
+        "不知道某个人的性别，或对方使用 they 时，也可以用 they 指一个人。Someone left a hat. They might come back for it. 有人落下了一顶帽子。对方可能会回来拿。"
+      ],
+      "activity": "把铅笔放在够不到的地方。孩子先问 Can you help me?（你能帮我吗？）家长递笔时说 I can help you.（我可以帮你。）然后交换角色，听听 I 和 me 各出现在哪儿。",
+      "quiz": [
+        {"en":"Mum waved at ___.", "cn":"妈妈朝我挥手。", "options":["I", "me", "my"], "answer":"me", "why":"at 是介词，后面用宾格 me。"},
+        {"en":"___ are waiting for Dad.", "cn":"我们正在等爸爸。", "options":["Us", "Our", "We"], "answer":"We", "why":"「我们」是等爸爸的人，在句子里作主语，用 We。"}
+      ]
+    },
+    {
+      "id": "possessive",
+      "title": "物主代词",
+      "prompt": "「我的书」用 my book，只说「我的」用什么？",
+      "rule": "后面还要说出东西的名字，用 my bag 这一组。东西已经说过，直接用 mine 这一组，把「谁的」和那个东西一起代替。",
+      "groups": [
+        {
+          "title": "带名词和独立使用放在一起读",
+          "roles": ["形容词性 · 后接名词", "名词性 · 可以独立用"],
+          "rows": [
+            [
+              {"word":"my", "ipa":"maɪ", "zh":"我的", "en":"This is my kite.", "cn":"这是我的风筝。"},
+              {"word":"mine", "ipa":"maɪn", "zh":"我的（风筝）", "en":"The red kite is mine.", "cn":"红色的风筝是我的。"}
+            ],
+            [
+              {"word":"your", "ipa":"jʊr", "zh":"你的 / 你们的", "en":"Where is your hat?", "cn":"你的帽子在哪儿？"},
+              {"word":"yours", "ipa":"jʊrz", "zh":"你的 / 你们的（东西）", "en":"Is this hat yours?", "cn":"这顶帽子是你的吗？"}
+            ],
+            [
+              {"word":"his", "ipa":"hɪz", "zh":"他的", "en":"I found his lunch box.", "cn":"我找到了他的饭盒。"},
+              {"word":"his", "ipa":"hɪz", "zh":"他的（饭盒）", "en":"The blue lunch box is his.", "cn":"蓝色饭盒是他的。"}
+            ],
+            [
+              {"word":"her", "ipa":"hɝː", "zh":"她的", "en":"Amy put on her coat.", "cn":"艾米穿上了她的外套。"},
+              {"word":"hers", "ipa":"hɝːz", "zh":"她的（外套）", "en":"The yellow coat is hers.", "cn":"黄色外套是她的。"}
+            ],
+            [
+              {"word":"its", "ipa":"ɪts", "zh":"它的", "en":"The puppy wags its tail.", "cn":"小狗摇着它的尾巴。"},
+              null
+            ],
+            [
+              {"word":"our", "ipa":"aʊr", "zh":"我们的", "en":"This is our classroom.", "cn":"这是我们的教室。"},
+              {"word":"ours", "ipa":"aʊrz", "zh":"我们的（教室）", "en":"That classroom is ours.", "cn":"那间教室是我们的。"}
+            ],
+            [
+              {"word":"their", "ipa":"ðer", "zh":"他们的 / 她们的 / 它们的", "en":"The children took their bikes.", "cn":"孩子们带上了自己的自行车。"},
+              {"word":"theirs", "ipa":"ðerz", "zh":"他们的 / 她们的 / 它们的（东西）", "en":"The two bikes are theirs.", "cn":"这两辆自行车是他们的。"}
+            ]
+          ]
+        }
+      ],
+      "tips": [
+        "同样是 his，看它身后有没有名词。his lunch box 后面说出了饭盒。The lunch box is his. 里的 his 已经包含「他的饭盒」。",
+        "its 表示「它的」。it’s 是 it is 或 it has 的缩写。读到撇号时，试试把缩写展开。",
+        "her coat 里的 her 表示「她的」。I see her. 里的 her 是宾格，表示「她」。"
+      ],
+      "activity": "各拿一件文具放在桌上。孩子先指着自己的文具说 This is my pen. 家长问 Is this yours? 孩子再答 Yes, it’s mine. 换一件东西继续。",
+      "quiz": [
+        {"en":"This is ___ notebook.", "cn":"这是我的笔记本。", "options":["I", "mine", "my"], "answer":"my", "why":"空格后面有 notebook，要用 my 修饰它。"},
+        {"en":"The green pencil is ___.", "cn":"绿色铅笔是她的。", "options":["hers", "she", "her"], "answer":"hers", "why":"hers 直接代替 her pencil，后面可以不再说 pencil。"}
+      ]
+    },
+    {
+      "id": "demonstrative",
+      "title": "指示代词",
+      "prompt": "指一指，是近处还是远处？是一个还是多个？",
+      "rule": "先看距离，再数数量。近处是一件 this、几件 these。远处是一件 that、几件 those。",
+      "groups": [
+        {
+          "title": "从桌边指到远处",
+          "roles": ["近处", "远处"],
+          "rows": [
+            [
+              {"word":"this", "ipa":"ðɪs", "zh":"这个 · 近处单数", "en":"This is a shell.", "cn":"这是一枚贝壳。"},
+              {"word":"that", "ipa":"ðæt", "zh":"那个 · 远处单数", "en":"That is a tall tree.", "cn":"那是一棵高树。"}
+            ],
+            [
+              {"word":"these", "ipa":"ðiːz", "zh":"这些 · 近处复数", "en":"These are my crayons.", "cn":"这些是我的蜡笔。"},
+              {"word":"those", "ipa":"ðoʊz", "zh":"那些 · 远处复数", "en":"Those are ducks.", "cn":"那些是鸭子。"}
+            ]
+          ]
+        }
+      ],
+      "tips": [
+        "这组词可以单独指东西，也可以带着名词一起用。对照 This is red.（这个是红色的。）和 This cup is red.（这个杯子是红色的。）",
+        "对比读 this /ðɪs/ 和 these /ðiːz/。注意两个词的元音不同，结尾也分别是 /s/ 和 /z/。"
+      ],
+      "activity": "把一支笔和三本书放在手边，把一个玩偶和两张纸放远一点。家长随机指一样或几样，孩子用 This is、That is、These are 或 Those are 开头说一句。",
+      "quiz": [
+        {"en":"___ are my shoes.", "cn":"手边的这些鞋是我的。", "options":["This", "Those", "These"], "answer":"These", "why":"近处有多只鞋，用 These，再接 are。"},
+        {"en":"___ is a kite.", "cn":"远处那是一个风筝。", "options":["That", "This", "Those"], "answer":"That", "why":"远处只有一个风筝，用 That，再接 is。"}
+      ]
+    },
+    {
+      "id": "reflexive",
+      "title": "反身代词",
+      "prompt": "动作回到自己身上，怎么说「自己」？",
+      "rule": "做动作和接收动作的是同一个人时，可以用反身代词。也可以把它放在句中或句尾，强调是某人亲自做的。",
+      "groups": [
+        {
+          "title": "跟着不同的人换词尾",
+          "items": [
+            {"word":"myself", "ipa":"maɪˈself", "zh":"我自己", "en":"I drew myself in the picture.", "cn":"我把自己画进了画里。"},
+            {"word":"yourself", "ipa":"jɚˈself", "zh":"你自己 · 对一个人说", "en":"You can try it yourself.", "cn":"你可以自己试一试。"},
+            {"word":"himself", "ipa":"hɪmˈself", "zh":"他自己", "en":"Sam saw himself in the mirror.", "cn":"萨姆在镜子里看见了自己。"},
+            {"word":"herself", "ipa":"hɝːˈself", "zh":"她自己", "en":"Lily made the card herself.", "cn":"莉莉亲手做了那张卡片。"},
+            {"word":"itself", "ipa":"ɪtˈself", "zh":"它自己", "en":"The cat cleaned itself.", "cn":"猫清理了自己的身体。"},
+            {"word":"ourselves", "ipa":"aʊrˈselvz", "zh":"我们自己", "en":"We made lunch ourselves.", "cn":"我们自己做了午餐。"},
+            {"word":"yourselves", "ipa":"jɚˈselvz", "zh":"你们自己 · 对多个人说", "en":"You can make the puppets yourselves.", "cn":"你们可以自己做木偶。"},
+            {"word":"themselves", "ipa":"ðəmˈselvz", "zh":"他们 / 她们 / 它们自己", "en":"The children dressed themselves.", "cn":"孩子们自己穿好了衣服。"}
+          ]
+        }
+      ],
+      "tips": [
+        "对一个人说 yourself，对几个人说 yourselves。ourselves、yourselves、themselves 都以 -selves 结尾。",
+        "by myself 常表示「独自」或「不用别人帮忙」。I read the book by myself. 我自己读完了那本书。"
+      ],
+      "activity": "站在镜子前。孩子说 I can see myself. 家长说 You can see yourself. 两个人一起站过去，再一起说 We can see ourselves.",
+      "quiz": [
+        {"en":"Lily can see ___ in the mirror.", "cn":"莉莉能在镜子里看到她自己。", "options":["her", "herself", "himself"], "answer":"herself", "why":"看和被看的是同一个人，Lily 对应 herself。"},
+        {"en":"Ben and Lily, you made this model ___.", "cn":"本和莉莉，这是你们亲手做的模型。", "options":["themselves", "yourself", "yourselves"], "answer":"yourselves", "why":"说话人正在对两个人说话，要用 yourselves。"}
+      ]
+    },
+    {
+      "id": "interrogative",
+      "title": "疑问代词",
+      "prompt": "要问谁、什么、哪一个，还是谁的？",
+      "rule": "先想答案要填哪一类信息。问人用 who，问事物用 what，从给出的范围中选择用 which，问归属用 whose。",
+      "groups": [
+        {
+          "title": "听五个提问",
+          "items": [
+            {"word":"who", "ipa":"huː", "zh":"谁 · 问人", "en":"Who drew this picture?", "cn":"谁画了这幅画？"},
+            {"word":"what", "ipa":"wɑːt", "zh":"什么 · 问事物", "en":"What is in the box?", "cn":"盒子里有什么？"},
+            {"word":"which", "ipa":"wɪtʃ", "zh":"哪一个 / 哪些 · 有选择范围", "en":"Which do you want, the red one or the blue one?", "cn":"你想要哪一个，红色的还是蓝色的？"},
+            {"word":"whose", "ipa":"huːz", "zh":"谁的 · 问归属", "en":"Whose is this umbrella?", "cn":"这把伞是谁的？"},
+            {"word":"whom", "ipa":"huːm", "zh":"谁 · 正式用法，问宾语", "en":"Whom did the teacher invite?", "cn":"老师邀请了谁？"}
+          ]
+        }
+      ],
+      "tips": [
+        "口语问宾语也常用 who。Who did the teacher invite? 和上面用 whom 的问句意思相同。",
+        "whose 问「谁的」。who’s 可以展开成 who is 或 who has。两个词同音，写的时候看句意。",
+        "where、when、why 和 how 分别问地点、时间、原因和方式。它们也是疑问词，通常作疑问副词。"
+      ],
+      "activity": "找两个不同颜色的物品和一样有主人的东西。家长轮流用 Which do you want? 和 Whose is this? 提问。孩子回答后，交换角色。",
+      "quiz": [
+        {"en":"___ is this ruler?", "cn":"这把尺子是谁的？", "options":["Who", "What", "Whose"], "answer":"Whose", "why":"问尺子的归属，要用 Whose。"},
+        {"en":"___ do you want, the small one or the big one?", "cn":"你想要哪一个，小的还是大的？", "options":["Which", "Who", "Whose"], "answer":"Which", "why":"答案在给出的两样东西里，用 Which 问「哪一个」。"}
+      ]
+    },
+    {
+      "id": "indefinite",
+      "title": "不定代词",
+      "prompt": "没说清具体是谁、哪一件，英语怎么指？",
+      "rule": "先分清在说人还是东西。-one 和 -body 指人，-thing 指事物。再看是「有一个」「任何一个」「全都」，还是「一个也没有」。",
+      "groups": [
+        {
+          "title": "有人、有东西 · some-",
+          "items": [
+            {"word":"someone", "ipa":"ˈsʌmwʌn", "zh":"有人 / 某个人", "en":"Someone left a glove here.", "cn":"有人把一只手套落在了这里。"},
+            {"word":"somebody", "ipa":"ˈsʌmbɑːdi", "zh":"有人 / 某个人", "en":"Somebody is at the door.", "cn":"有人在门口。"},
+            {"word":"something", "ipa":"ˈsʌmθɪŋ", "zh":"某件东西 / 某件事", "en":"I found something under the bed.", "cn":"我在床底下发现了一样东西。"}
+          ]
+        },
+        {
+          "title": "有人吗、任意一个 · any-",
+          "items": [
+            {"word":"anyone", "ipa":"ˈeniwʌn", "zh":"有人 / 任何人", "en":"Is anyone in the room?", "cn":"房间里有人吗？"},
+            {"word":"anybody", "ipa":"ˈenibɑːdi", "zh":"有人 / 任何人", "en":"Anybody can join our game.", "cn":"任何人都可以加入我们的游戏。"},
+            {"word":"anything", "ipa":"ˈeniθɪŋ", "zh":"什么东西 / 任何东西", "en":"I can’t hear anything.", "cn":"我什么也听不见。"}
+          ]
+        },
+        {
+          "title": "人人、每件东西 · every-",
+          "items": [
+            {"word":"everyone", "ipa":"ˈevriwʌn", "zh":"每个人 / 大家", "en":"Everyone is ready.", "cn":"大家都准备好了。"},
+            {"word":"everybody", "ipa":"ˈevribɑːdi", "zh":"每个人 / 大家", "en":"Everybody knows the song.", "cn":"大家都会这首歌。"},
+            {"word":"everything", "ipa":"ˈevriθɪŋ", "zh":"每件东西 / 一切", "en":"Everything is in the bag.", "cn":"东西全在包里。"}
+          ]
+        },
+        {
+          "title": "没人、什么也没有 · no-",
+          "items": [
+            {"word":"no one", "ipa":"ˈnoʊ wʌn", "zh":"没有人", "en":"No one answered the phone.", "cn":"没有人接电话。"},
+            {"word":"nobody", "ipa":"ˈnoʊbɑːdi", "zh":"没有人", "en":"Nobody knew the answer.", "cn":"没有人知道答案。"},
+            {"word":"nothing", "ipa":"ˈnʌθɪŋ", "zh":"没有东西 / 没有事情", "en":"Nothing is in the box.", "cn":"盒子里什么也没有。"}
+          ]
+        },
+        {
+          "title": "从一组东西里拿多少",
+          "items": [
+            {"word":"some", "ipa":"sʌm", "zh":"一些", "en":"There are cookies on the plate. Would you like some?", "cn":"盘子里有饼干。你想来一点儿吗？"},
+            {"word":"any", "ipa":"ˈeni", "zh":"一些 / 任何一个", "en":"We need more paper. Do you have any?", "cn":"我们还需要一些纸。你有吗？"},
+            {"word":"none", "ipa":"nʌn", "zh":"一个也没有 / 一点也没有", "en":"I brought three markers, but none of them work.", "cn":"我带了三支记号笔，可一支也写不出字。"},
+            {"word":"all", "ipa":"ɑːl", "zh":"全都", "en":"All of the apples are red.", "cn":"这些苹果全是红的。"},
+            {"word":"each", "ipa":"iːtʃ", "zh":"每一个 · 逐个看", "en":"Each of us got a sticker.", "cn":"我们每人得到了一张贴纸。"}
+          ]
+        },
+        {
+          "title": "只有两样 · 都要、任选、都不要",
+          "items": [
+            {"word":"both", "ipa":"boʊθ", "zh":"两者都", "en":"I tried two games. Both were fun.", "cn":"我玩了两个游戏。两个都很好玩。"},
+            {"word":"either", "ipa":"ˈiːðɚ", "zh":"两者中的任意一个", "en":"These two seats are free. Either is fine.", "cn":"这两个座位都空着，坐哪个都行。"},
+            {"word":"neither", "ipa":"ˈniːðɚ", "zh":"两者都不", "en":"Neither of the two pens works.", "cn":"两支笔都写不出字。"}
+          ]
+        },
+        {
+          "title": "不重复名词 · 一个、另一个、别的",
+          "items": [
+            {"word":"one", "ipa":"wʌn", "zh":"同一类里的一个", "en":"I lost my pencil. May I borrow one?", "cn":"我的铅笔丢了。可以借一支吗？"},
+            {"word":"ones", "ipa":"wʌnz", "zh":"同一类里的几个", "en":"I like the striped socks, but the plain ones are cheaper.", "cn":"我喜欢条纹袜子，不过纯色的那些更便宜。"},
+            {"word":"another", "ipa":"əˈnʌðɚ", "zh":"再一个 / 另一个", "en":"I ate a grape. Can I have another?", "cn":"我吃了一颗葡萄。能再吃一颗吗？"},
+            {"word":"the other", "ipa":"ði ˈʌðɚ", "zh":"两者中剩下的那一个", "en":"I have two gloves. One is red, and the other is blue.", "cn":"我有两只手套。一只红色，另一只蓝色。"},
+            {"word":"others", "ipa":"ˈʌðɚz", "zh":"另外一些人或物", "en":"Some children read. Others draw.", "cn":"一些孩子在读书，另一些在画画。"}
+          ]
+        }
+      ],
+      "tips": [
+        "everyone、someone、nothing 等作主语时，动词按单数来配。说 Everyone is ready. 和 Nothing is missing.",
+        "nothing 本身就带否定。I heard nothing. 和 I didn’t hear anything. 都表示「我什么也没听见」。",
+        "说起丢失的那支铅笔，用 it 指原来那支。想借同类的任意一支，用 one。"
+      ],
+      "activity": "用空盒子玩猜物。家长悄悄放进一件东西或保持空盒，孩子问 Is there anything in the box? 打开后用 There is something inside. 或 There is nothing inside. 回答。",
+      "quiz": [
+        {"en":"___ is ready to go.", "cn":"每个人都准备好出发了。", "options":["Nothing", "Everyone", "Neither"], "answer":"Everyone", "why":"everyone 指每个人。它作主语时按单数配动词 is。"},
+        {"en":"I have two blue pens. You can take ___.", "cn":"我有两支蓝笔，你可以任选一支。", "options":["both", "none", "either"], "answer":"either", "why":"只从两个里任选其中一个，用 either。"}
+      ]
+    },
+    {
+      "id": "reciprocal",
+      "title": "相互代词",
+      "prompt": "两个人互相帮忙，英语怎么说？",
+      "rule": "安帮助本，本也帮助安。两个人都对对方做了同一件事，可以说 They help each other.each other 和 one another 都表示「彼此」。",
+      "groups": [
+        {
+          "title": "说「彼此」的两种方式",
+          "items": [
+            {"word":"each other", "ipa":"iːtʃ ˈʌðɚ", "zh":"互相 / 彼此", "en":"We help each other with homework.", "cn":"我们在写作业时互相帮助。"},
+            {"word":"one another", "ipa":"wʌn əˈnʌðɚ", "zh":"互相 / 彼此", "en":"The players smiled at one another.", "cn":"队员们相视而笑。"}
+          ]
+        }
+      ],
+      "tips": [
+        "They drew each other. 是「他们互相给对方画像」。They drew themselves. 是「他们各自画自己」。想一想画里出现的是谁。",
+        "要说「彼此的」，在整个词组末尾加 ’s。We read each other’s stories. 我们互相读了对方写的故事。"
+      ],
+      "activity": "先两人各画一张自画像，再给对方画一张。翻到自画像时说 We drew ourselves. 翻到给对方画的那张时说 We drew each other.",
+      "quiz": [
+        {"en":"Ben helped Lily, and Lily helped Ben. They helped ___.", "cn":"本和莉莉互相帮助。", "options":["himself", "each other", "themselves"], "answer":"each other", "why":"本帮助莉莉，莉莉也帮助本，动作是双向的。"},
+        {"en":"In the mirror, we could see ___.", "cn":"在镜子里，我们看到了我们自己。", "options":["each other", "myself", "ourselves"], "answer":"ourselves", "why":"镜子里看到的是自己的影像。「我们自己」用 ourselves。"}
+      ]
+    },
+    {
+      "id": "relative",
+      "title": "关系代词",
+      "prompt": "怎样用一句话说清是哪个人、哪一个东西？",
+      "rule": "在名词后接一小段说明。the boy who found the key 是「找到钥匙的男孩」，who 把后面的线索接到了 the boy 身上。",
+      "groups": [
+        {
+          "title": "听句子，找词指向的名词",
+          "items": [
+            {"word":"who", "ipa":"huː", "zh":"接出关于人的说明", "en":"The girl who found the key is my sister.", "cn":"找到钥匙的那个女孩是我姐姐。"},
+            {"word":"whom", "ipa":"huːm", "zh":"接出关于人的说明 · 正式用法，作宾语", "en":"The man whom we met is my uncle.", "cn":"我们遇到的那位男士是我叔叔。"},
+            {"word":"whose", "ipa":"huːz", "zh":"表示所属 · ……的", "en":"I know a boy whose dog can catch a ball.", "cn":"我认识一个男孩，他的狗会接球。"},
+            {"word":"which", "ipa":"wɪtʃ", "zh":"接出关于事物的说明", "en":"My watch, which was a gift, still works.", "cn":"我的手表是别人送的，现在还能用。"},
+            {"word":"that", "ipa":"ðæt", "zh":"指出具体是哪个人或哪件事物", "en":"The book that fell is on my desk.", "cn":"掉下来的那本书在我的桌上。"}
+          ]
+        }
+      ],
+      "tips": [
+        "找线索时，先找它描述的名词。The book that fell 说的是掉下来的那一本。My watch, which was a gift, 里的逗号隔开补充信息，这种补充用 which。",
+        "在用来指出具体人或物的从句里，关系代词作宾语时常可以省略。The book (that) I read was funny. 里读书的人是 I，书是 read 的宾语。"
+      ],
+      "activity": "找两件同类物品。家长给线索 Pick the pen that has a blue cap.（选有蓝色笔帽的那支笔。）请孩子指出来，再换孩子用 that 或 who 给一个线索。",
+      "quiz": [
+        {"en":"The girl ___ cat is missing is my friend.", "cn":"那个猫走丢了的女孩是我的朋友。", "options":["who", "whose", "which"], "answer":"whose", "why":"猫是那个女孩的。whose cat 把归属和后面的线索接到 girl 上。"},
+        {"en":"My watch, ___ was a gift, still works.", "cn":"我的手表是别人送的，现在还能用。", "options":["who", "that", "which"], "answer":"which", "why":"逗号里的说明是关于手表的补充信息，用 which。"}
+      ]
+    }
+  ]
+}

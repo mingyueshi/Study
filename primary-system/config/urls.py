@@ -19,6 +19,7 @@ from learning import views as learning
 from lexicon import views as lexicon
 from lexicon import pages as dictionary
 from config.health import health
+from grammar import comparison, pronouns, sentence_lab, shop, timeline
 
 admin.site.site_header = '乐学堂 · 学习管理'
 admin.site.site_title = '乐学堂后台'
@@ -69,6 +70,12 @@ urlpatterns = [
     path('writing/', include('writing.urls')),
     path('questionbank/', include('questionbank.urls')),
     path('grammar/', include('grammar.urls')),
+    path('pronouns/', pronouns.index, name='pronouns'),
+    path('pronouns/<slug:chapter_id>/', pronouns.lesson, name='pronoun-lesson'),
+    path('english-timeline/', timeline.index, name='english-timeline'),
+    path('english-sentence-lab/', sentence_lab.index, name='english-sentence-lab'),
+    path('english-comparison/', comparison.index, name='english-comparison'),
+    path('english-shop/', shop.index, name='english-shop'),
     path('plurals/', include('plurals.urls')),
     path('phrases/', include('phrases.urls')),
     path('mathbook/', include('mathbook.urls')),

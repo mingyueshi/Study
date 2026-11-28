@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{% if current %}{{ current.title }} · {% endif %}英语语法 · 乐学堂{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'grammar/grammar.css' %}?v=5">
+<script src="{% static 'grammar/grammar.js' %}?v=3" defer></script>
+{% block grammar_assets %}{% endblock %}
+<div class="grammar-page">
+  {% block grammar_content %}{% endblock %}
+</div>
+{% endblock %}

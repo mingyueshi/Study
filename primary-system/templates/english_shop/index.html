@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}英语小商店 · 乐学堂{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'english_shop/shop.css' %}?v=3">
+<script src="{% static 'speech.js' %}" defer></script>
+<script src="{% static 'tts.js' %}" defer></script>
+<script src="{% static 'english_shop/shop.js' %}" defer></script>
+{{ products|json_script:"english-shop-products" }}
+
+<article class="english-shop" data-english-shop>
+  {% include 'grammar/_topic_hero.html' with title='英语小商店' intro='挑商品、换数量，听听用英语怎么点单。' only %}
+
+  <div class="shop-layout" data-sidebar-layout=".shop-sidebar" data-sidebar-width="248px" data-sidebar-breakpoint="900" data-sidebar-label="学习目录">
+    <div class="shop-main">
+      <section class="shop-workbench" id="counter" aria-label="选商品和购物对话">
+        <form method="get" action="{% url 'english-shop' %}" class="shop-controls">
+          <fieldset class="shop-shelves">
+            <legend>挑一样商品</legend>
+            {% for heading, items in shelves %}
+              <div class="shop-shelf">
+                <h3>{{ heading }}</h3>
+                <div class="shop-products">
+                  {% for item in items %}
+                    <label>
+                      <input type="radio" name="product" value="{{ item.id }}"{% if item.id == product.id %} checked{% endif %}>
+                      <span class="shop-product">
+                        <span class="shop-photo" data-column="{{ item.photo.0 }}" data-row="{{ item.photo.1 }}" aria-hidden="true"></span>
+                        <b>{{ item.name }}</b>
+                        <small lang="en">{{ item.word }}</small>
+                      </span>
+                    </label>
+                  {% endfor %}
+                </div>
+              </div>
+            {% endfor %}
+          </fieldset>
+          <fieldset class="shop-quantities">
+            <legend>要多少？</legend>
+            <div class="shop-quantity-list">
+              {% for key, choice in product.dialogues.items %}
+                <label>
+                  <input type="radio" name="quantity" value="{{ key }}"{% if key == quantity %} checked{% endif %}>
+                  <span data-shop-quantity="{{ key }}">{{ choice.label }}</span>
+                </label>
+              {% endfor %}
+            </div>
+          </fieldset>
+          <button type="submit" class="button small" data-shop-apply>更新对话</button>
+        </form>
+
+        <div class="shop-conversation">
+          <header class="shop-conversation-heading">
+            <h2>购物对话</h2>
+            <p><strong data-shop-product="name">{{ product.name }}</strong><span data-shop-product="type_label">{{ product.type_label }}</span></p>
+          </header>
+          <div class="shop-vocabulary" data-shop-audio-group>
+            <button type="button" class="shop-say" data-shop-word data-shop-say="{{ product.word }}" aria-label="朗读商品 {{ product.word }}"><b lang="en" data-shop-product="word">{{ product.word }}</b> <span aria-hidden="true">🔊</span></button>
+            <span class="shop-ipa">/<span data-shop-product="ipa">{{ product.ipa }}</span>/</span>
+            <p class="shop-status" data-shop-status role="status"></p>
+          </div>
+          <div class="shop-lines" aria-live="polite">
+            {% include "english_shop/_line.html" with role="顾客点单" key="customer" line=round.customer only %}
+            {% include "english_shop/_line.html" with role="店员确认" key="clerk" line=round.clerk only %}
+          </div>
+          <div class="shop-explain">
+            <p data-shop-note>{{ round.note }}</p>
+            <p><b lang="en">the</b> 指的是刚才说好的商品，顾客和店员都知道是哪一份。</p>
+          </div>
+          <p class="shop-audio-note">音标标出常见的美式读法。短语中的冠词按连读时的常见读法标注。</p>
+        </div>
+      </section>
+
+      <section class="shop-section" id="choices" aria-labelledby="shop-choices-heading">
+        <h2 id="shop-choices-heading">选哪个词，先想这三件事</h2>
+        <div class="shop-rules">
+          <div><h3>要一件，听开头</h3><p>辅音音素开头用 <b lang="en">a</b>，像 <span lang="en">a banana</span>。元音音素开头用 <b lang="en">an</b>，像 <span lang="en">an apple</span>。</p></div>
+          <div><h3>有几个？还是只说一些？</h3><p>可以说 <span lang="en">two eggs</span>、<span lang="en">some eggs</span>。牛奶本身不可数，可以说 <span lang="en">some milk</span>；要数时，说 <span lang="en">two cartons of milk</span>。</p></div>
+          <div><h3>确认是哪一份</h3><p>双方都知道指哪一样，就可以用 <b lang="en">the</b>。说刚才那个苹果用 <span lang="en">the apple</span>，说刚才点的牛奶也能用 <span lang="en">the milk</span>。</p></div>
+        </div>
+      </section>
+
+      <section class="shop-section shop-family" id="together" aria-labelledby="shop-family-heading">
+        <h2 id="shop-family-heading">亲子开口练</h2>
+        <ol>
+          <li>桌上摆两种能数的东西，再找一瓶水或一盒牛奶。孩子先当顾客，家长当店员。</li>
+          <li>顾客先说「一些面包」，再改成「两片面包」。先试着说，选数量点读核对，听听哪一个词变成了复数。</li>
+          <li>店员用 <b lang="en">the</b> 确认顾客刚才点的商品。交换角色，换一样东西再练。</li>
+        </ol>
+      </section>
+
+      <section class="shop-section" id="practice" aria-labelledby="shop-practice-heading">
+        <h2 id="shop-practice-heading">这一单，你会怎么说？</h2>
+        <div class="shop-quiz">
+          {% for question in quiz %}
+            <fieldset class="shop-question" data-shop-question data-answer="{{ question.answer }}">
+              <legend lang="en">{{ question.before }} ___{{ question.after }}</legend>
+              <p>{{ question.cue }}</p>
+              <div class="shop-options">
+                {% for option in question.options %}<button type="button" data-shop-option lang="en" aria-pressed="false">{{ option }}</button>{% endfor %}
+              </div>
+              <p class="shop-status" data-shop-feedback role="status"></p>
+              <div class="shop-answer" data-shop-answer data-shop-audio-group hidden>
+                <p>{{ question.why }}</p>
+                <button class="shop-say" type="button" data-shop-say="{{ question.en }}" aria-label="听整句 {{ question.en }}"><span aria-hidden="true">🔊</span> 听整句</button>
+                <p class="shop-status" data-shop-status role="status"></p>
+              </div>
+            </fieldset>
+          {% endfor %}
+        </div>
+      </section>
+
+      <details class="shop-references">
+        <summary>参考资料（需联网）</summary>
+        <ul>{% for source in sources %}<li><a href="{{ source.url }}" target="_blank" rel="noopener noreferrer">{{ source.label }}</a></li>{% endfor %}</ul>
+      </details>
+    </div>
+
+    <aside class="shop-sidebar">
+      <nav aria-label="本页目录">
+        <h2>本页目录</h2>
+        <a href="#counter">货架与购物对话</a>
+        <a href="#choices">选词的方法</a>
+        <a href="#together">亲子开口练</a>
+        <a href="#practice">做一单试试</a>
+      </nav>
+      <nav aria-label="相关学习">
+        <h2>相关学习</h2>
+        <a href="{% url 'grammar' %}?chapter=nouns">英语语法 · 名词</a>
+        <a href="{% url 'grammar' %}?chapter=articles">英语语法 · 冠词</a>
+        <a href="{% url 'plurals' %}">不规则复数</a>
+      </nav>
+    </aside>
+  </div>
+</article>
+{% endblock %}
